@@ -90,6 +90,7 @@ if(fs.existsSync(DEV_BUILD_INFO)){
   fs.writeFileSync(BETA_BUILD_INFO, JSON.stringify(betaInfo, null, 2) + '\n');
   rewriteBetaText(path.join(BETA_DIR, 'index.html'), sourceInfo, betaInfo);
   rewriteBetaText(path.join(BETA_DIR, 'project-guide.html'), sourceInfo, betaInfo);
+  rewriteBetaText(path.join(BETA_DIR, 'release-notes.html'), sourceInfo, betaInfo);
   rewriteBetaText(path.join(BETA_DIR, 'application-guide.html'), sourceInfo, betaInfo);
   rewriteBetaText(path.join(BETA_DIR, 'platinum-guide.html'), sourceInfo, betaInfo);
   rewriteBetaText(path.join(BETA_DIR, 'player-guide.html'), sourceInfo, betaInfo);

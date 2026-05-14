@@ -109,6 +109,47 @@
       ]
     },
     {
+      "id": "release-notes-page",
+      "title": "Hosted Release Notes",
+      "visiblePath": "release-notes.html",
+      "template": "src/project-guide.template.html",
+      "builder": "tools/build/build-index.js#buildReleaseNotesPage",
+      "summary": "Hosted readable release-note archive generated from structured release notes plus committed detailed release-note source documents when available.",
+      "sections": [
+        {
+          "id": "release-note-index",
+          "label": "Release-note index and latest release framing",
+          "sourceArtifacts": [
+            "release-notes.json",
+            "release-dashboard.json",
+            "release-manifest.json"
+          ],
+          "currentness": "The note index and current release metadata are generated from the active lane build plus release-notes.json.",
+          "riskIfStale": "The dashboard can point to a notes page that no longer matches the current lane or note ordering."
+        },
+        {
+          "id": "detailed-release-docs",
+          "label": "Detailed release-note documents",
+          "sourceArtifacts": [
+            "RELEASE_NOTE_1.0.0_LAUNCH.md",
+            "RELEASE_NOTE_1.0.0_BUILD_284.md",
+            "RELEASE_NOTE_1.0.1_HOTFIX.md",
+            "RELEASE_NOTE_1.0.2_MOVEMENT_HOTFIX.md",
+            "RELEASE_NOTE_1.2.0_PLATINUM_RELEASE_1.md",
+            "RELEASE_NOTE_1.2.1_TRUST_FIX.md",
+            "RELEASE_NOTE_1.2.2_RUNTIME_HARDENING.md",
+            "RELEASE_NOTE_1.2.3_SCORE_SURFACE_POLISH.md",
+            "RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md",
+            "RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md",
+            "RELEASE_NOTE_1.3.0_PRODUCTION.md",
+            "RELEASE_NOTE_1.2.3_BUILD_532.md"
+          ],
+          "currentness": "When a note declares sourceDoc, the hosted page renders that Markdown directly during build.",
+          "riskIfStale": "Readers may only see thin summary notes even when a fuller committed release narrative exists."
+        }
+      ]
+    },
+    {
       "id": "application-guide",
       "title": "Aurora Application Guide",
       "visiblePath": "application-guide.html",

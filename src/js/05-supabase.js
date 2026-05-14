@@ -107,9 +107,15 @@ function replayMatchesActivePilot(run){
  if(activePilotEmail&&runEmail&&runEmail===activePilotEmail)return true;
  return !!(activePilotInitials&&runInitials&&runInitials===activePilotInitials);
 }
+function replayMatchesActiveGame(run,gameKey=currentScoreStorageGameKey()){
+ return typeof scoreRowMatchesGame==='function'
+  ? scoreRowMatchesGame(run,gameKey)
+  : String(run?.gameKey||'aurora-galactica').trim()===(String(gameKey||'').trim()||'aurora-galactica');
+}
 function pilotLocalReplayRows(){
  if(!LEADERBOARD.user)return [];
  return replayCatalogRows()
+  .filter(run=>replayMatchesActiveGame(run))
   .filter(replayMatchesActivePilot)
   .map(run=>({
    id:`local-replay:${run.id}`,
@@ -119,7 +125,9 @@ function pilotLocalReplayRows(){
    at:String(run.createdAt||''),
    verified:0,
    replayId:String(run.id||''),
-   localReplay:1
+   localReplay:1,
+   gameKey:typeof scoreRowGameKey==='function'?scoreRowGameKey(run):String(run?.gameKey||'aurora-galactica').trim()||'aurora-galactica',
+   gameTitle:typeof scoreRowGameTitle==='function'?scoreRowGameTitle(run):String(run?.gameTitle||'').trim()
   }));
 }
 function pilotLocalScoreRows(){
@@ -139,6 +147,7 @@ function mergePilotProfileRows(remoteRows,localRows){
  for(const localRow of localRows){
   const localStamp=Date.parse(localRow.at||'');
   const existing=merged.find(row=>{
+   if(typeof scoreRowMatchesGame==='function'&&!scoreRowMatchesGame(row,localRow.gameKey||currentScoreStorageGameKey()))return false;
    if((+row.score||0)!== (+localRow.score||0))return false;
    if((+row.stage||0)!== (+localRow.stage||0))return false;
    const rowStamp=Date.parse(resolveRowTimestamp(row)||row.at||'');
@@ -156,7 +165,9 @@ function mergePilotProfileRows(remoteRows,localRows){
 }
 function rowsForPilotProfile(){
  if(LEADERBOARD.user){
-  const remoteRows=remoteAuthEnabled()&&(LEADERBOARD.remote.mine?.length||LEADERBOARD.cacheStamp.mine)?LEADERBOARD.remote.mine.slice():[];
+  const remoteRows=remoteAuthEnabled()&&(LEADERBOARD.remote.mine?.length||LEADERBOARD.cacheStamp.mine)
+   ? LEADERBOARD.remote.mine.filter(row=>typeof scoreRowMatchesGame==='function'?scoreRowMatchesGame(row):true).slice()
+   : [];
   const localRows=mergePilotProfileRows(pilotLocalScoreRows(),pilotLocalReplayRows());
   if(remoteRows.length||localRows.length)return mergePilotProfileRows(remoteRows,localRows);
  }
@@ -184,7 +195,9 @@ function resolveRowTimestamp(row){
  if(direct&&Number.isFinite(Date.parse(direct)))return direct;
  const score=+row?.score||0;
  const stage=+row?.stage||0;
+ const gameKey=typeof scoreRowGameKey==='function'?scoreRowGameKey(row):String(row?.gameKey||'aurora-galactica').trim()||'aurora-galactica';
  const localMatch=localLeaderboardRows().find(localRow=>{
+  if(typeof scoreRowMatchesGame==='function'&&!scoreRowMatchesGame(localRow,gameKey))return false;
   if((+localRow.score||0)!==score)return false;
   if((+localRow.stage||0)!==stage)return false;
   const stamp=String(localRow.at||'').trim();
@@ -192,6 +205,7 @@ function resolveRowTimestamp(row){
  });
  if(localMatch)return localMatch.at;
  const replayMatch=replayCatalogRows().find(run=>{
+  if(typeof scoreRowMatchesGame==='function'&&!scoreRowMatchesGame(run,gameKey))return false;
   if((+run.score||0)!==score)return false;
   if((+run.stage||0)!==stage)return false;
   const stamp=String(run.createdAt||'').trim();

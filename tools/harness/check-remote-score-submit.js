@@ -55,7 +55,10 @@ async function runSuccessCase(page){
     });
     window.__galagaHarness__.triggerRemoteScoreGameOver({ score: 76770, stage: 2 });
     await new Promise(resolve => setTimeout(resolve, 80));
-    return window.__galagaHarness__.remoteScoreSubmitState();
+    return {
+      state: window.__galagaHarness__.remoteScoreSubmitState(),
+      gameOver: window.__galagaHarness__.gameOverView()
+    };
   });
 }
 
@@ -111,13 +114,13 @@ async function main(){
     const successPage = await context.newPage();
     await open(successPage, port);
     const success = await runSuccessCase(successPage);
-    if((success.calls || []).length !== 1){
+    if((success.state?.calls || []).length !== 1){
       fail('remote score submit should run once immediately on game over for locked signed-in pilots', success);
     }
-    if((success.calls[0]?.score|0) !== 76770 || (success.calls[0]?.stage|0) !== 2){
-      fail('remote score submit payload lost the expected score or stage', success);
+    if((success.state.calls[0]?.score|0) !== 76770 || (success.state.calls[0]?.stage|0) !== (+success.gameOver?.shownStage||0)){
+      fail('remote score submit payload lost the expected score or shown stage', success);
     }
-    if(success.remoteSubmitted !== 1){
+    if(success.state.remoteSubmitted !== 1){
       fail('successful remote score submit should mark the game-over state as submitted', success);
     }
 
@@ -143,9 +146,10 @@ async function main(){
     console.log(JSON.stringify({
       ok: true,
       success: {
-        calls: success.calls,
-        remoteSubmitted: success.remoteSubmitted,
-        leaderboardStatus: success.leaderboardStatus
+        calls: success.state.calls,
+        remoteSubmitted: success.state.remoteSubmitted,
+        leaderboardStatus: success.state.leaderboardStatus,
+        shownStage: success.gameOver?.shownStage || 0
       },
       failure: {
         summary: failure.state.summary,

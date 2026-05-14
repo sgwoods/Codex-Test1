@@ -12,6 +12,7 @@ const {
   DEV_CONFORMANCE_DASHBOARD,
   DEV_CONFORMANCE_DASHBOARD_DATA,
   DEV_PUBLIC_PROJECT_PAGE,
+  DEV_RELEASE_NOTES_PAGE,
   DEV_PROJECT_GUIDE,
   DEV_APPLICATION_GUIDE,
   DEV_PLATINUM_GUIDE,
@@ -24,6 +25,7 @@ const {
   PRODUCTION_CONFORMANCE_DASHBOARD,
   PRODUCTION_CONFORMANCE_DASHBOARD_DATA,
   PRODUCTION_PUBLIC_PROJECT_PAGE,
+  PRODUCTION_RELEASE_NOTES_PAGE,
   PRODUCTION_PROJECT_GUIDE,
   PRODUCTION_APPLICATION_GUIDE,
   PRODUCTION_PLATINUM_GUIDE,
@@ -70,6 +72,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/conformance-dashboard.html',
   'dist/dev/conformance-dashboard-data.json',
   'dist/dev/public-project-page.html',
+  'dist/dev/release-notes.html',
   'dist/dev/project-guide.html',
   'dist/dev/application-guide.html',
   'dist/dev/platinum-guide.html',
@@ -85,6 +88,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/production/conformance-dashboard.html',
   'dist/production/conformance-dashboard-data.json',
   'dist/production/public-project-page.html',
+  'dist/production/release-notes.html',
   'dist/production/project-guide.html',
   'dist/production/application-guide.html',
   'dist/production/platinum-guide.html',
@@ -99,6 +103,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/beta/conformance-dashboard.html',
   'dist/beta/conformance-dashboard-data.json',
   'dist/beta/public-project-page.html',
+  'dist/beta/release-notes.html',
   'dist/beta/project-guide.html',
   'dist/beta/application-guide.html',
   'dist/beta/platinum-guide.html',
@@ -115,6 +120,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'conformance-dashboard.html',
   'conformance-dashboard-data.json',
   'public-project-page.html',
+  'release-notes.html',
   'project-guide.html',
   'application-guide.html',
   'platinum-guide.html',
@@ -125,6 +131,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dev/conformance-dashboard.html',
   'dev/conformance-dashboard-data.json',
   'dev/public-project-page.html',
+  'dev/release-notes.html',
   'dev/project-guide.html',
   'dev/application-guide.html',
   'dev/platinum-guide.html',
@@ -136,6 +143,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'beta/conformance-dashboard.html',
   'beta/conformance-dashboard-data.json',
   'beta/public-project-page.html',
+  'beta/release-notes.html',
   'beta/project-guide.html',
   'beta/application-guide.html',
   'beta/platinum-guide.html',
@@ -858,6 +866,14 @@ function dashboardStyles(){
       font-size:22px;
       line-height:1.1;
     }
+    .stepTitle a{
+      color:inherit;
+      text-decoration:none;
+      border-bottom:1px solid transparent;
+    }
+    .stepTitle a:hover{
+      border-bottom-color:currentColor;
+    }
     .badge{
       flex:0 0 auto;
       padding:7px 11px;
@@ -872,6 +888,28 @@ function dashboardStyles(){
       margin:0;
       color:var(--muted);
       line-height:1.55;
+    }
+    .stepActions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+    .stepLink{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.05);
+      color:#edf7ff;
+      text-decoration:none;
+      font-size:13px;
+      line-height:1.2;
+    }
+    .stepLink:hover{
+      background:rgba(255,255,255,0.09);
     }
     .legend{
       margin-top:42px;
@@ -1387,6 +1425,49 @@ function projectGuideStyles(){
   `.trim();
 }
 
+function releaseNotesStyles(){
+  return `
+${projectGuideStyles()}
+    .releaseNoteMeta{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:12px;
+      margin:0 0 18px;
+    }
+    .releaseNoteCard{
+      padding:14px 16px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .releaseNoteCard strong{
+      display:block;
+      margin-bottom:6px;
+      color:#eef8ff;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .releaseNoteCard span{
+      display:block;
+      color:var(--muted);
+      line-height:1.5;
+    }
+    .releaseNoteSummary{
+      margin:0 0 16px;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:15px;
+    }
+    .releaseNoteActions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:0 0 18px;
+    }
+  `.trim();
+}
+
 function applicationGuideStyles(){
   return `
     .previewNote{
@@ -1633,18 +1714,77 @@ function statusLabel(status){
   return 'Up Next';
 }
 
-function buildReleaseDashboard(buildInfo, latestNote, dashboard){
+function slugify(value=''){
+  return String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 96) || 'release-note';
+}
+
+function releaseNoteAnchor(note, index = 0){
+  const stem = [note?.date, note?.version, note?.title].filter(Boolean).join('-');
+  return `release-note-${slugify(stem || `item-${index + 1}`)}`;
+}
+
+function releaseNoteDateLong(value){
+  if(!value) return '--';
+  const date = new Date(`${value}T12:00:00Z`);
+  if(Number.isNaN(date.getTime())) return String(value);
+  return new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }).format(date);
+}
+
+function resolveReleaseNoteSource(note){
+  const file = String(note?.sourceDoc || '').trim();
+  if(!file) return '';
+  const full = path.join(ROOT, file);
+  return fs.existsSync(full) ? file : '';
+}
+
+function releaseNoteGitHubHref(commit, sourceDoc){
+  if(!sourceDoc) return '';
+  return `https://github.com/sgwoods/Codex-Test1/blob/${commit}/${sourceDoc}`;
+}
+
+function findReleaseNote(notes, ref = {}){
+  if(!Array.isArray(notes) || !notes.length) return null;
+  const version = String(ref.releaseNoteVersion || ref.version || '').trim();
+  const date = String(ref.releaseNoteDate || ref.date || '').trim();
+  const title = String(ref.releaseNoteTitle || '').trim().toLowerCase();
+  return notes.find(note => {
+    if(version && String(note.version || '').trim() !== version) return false;
+    if(date && String(note.date || '').trim() !== date) return false;
+    if(title && String(note.title || '').trim().toLowerCase() !== title) return false;
+    return version || date || title;
+  }) || null;
+}
+
+function buildReleaseDashboard(buildInfo, latestNote, dashboard, releaseNotes){
   const template = read(DASHBOARD_TEMPLATE);
   const conformanceSummary = loadConformanceDashboardSummary();
-  const timeline = (dashboard.timeline || []).map(step => `
+  const latestNoteLink = latestNote ? `release-notes.html#${releaseNoteAnchor(latestNote)}` : 'release-notes.html';
+  const timeline = (dashboard.timeline || []).map((step, index) => {
+    const note = findReleaseNote(releaseNotes, step);
+    const noteHref = note ? `release-notes.html#${releaseNoteAnchor(note, index)}` : '';
+    const titleHtml = noteHref
+      ? `<a href="${esc(noteHref)}">${esc(step.title)}</a>`
+      : esc(step.title);
+    return `
     <article class="step ${esc(step.status)}">
       <div class="stepHeader">
-        <h2 class="stepTitle">${esc(step.title)}</h2>
+        <h2 class="stepTitle">${titleHtml}</h2>
         <span class="badge">${esc(statusLabel(step.status))}</span>
       </div>
       <p>${esc(step.summary)}</p>
+      ${noteHref ? `<div class="stepActions"><a class="stepLink" href="${esc(noteHref)}">Read detailed release note</a></div>` : ''}
     </article>
-  `).join('\n');
+  `;
+  }).join('\n');
   const legend = (dashboard.legend || []).map(item => `
     <div class="legendItem">
       <strong>${esc(item.label)}</strong>
@@ -1703,6 +1843,7 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard){
         <div class="heroLinks">
           <a class="button" href="assets/conformance-dashboard.html">Open conformance dashboard</a>
           <a class="button" href="public-project-page.html">Open lane project page</a>
+          <a class="button" href="release-notes.html">Open release notes</a>
         </div>
       </section>
       <section class="timeline">
@@ -1714,7 +1855,7 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard){
           ${legend}
         </div>
         <p class="footer">
-          Latest release note: <strong>${esc(latestNote.title)}</strong>. Live game:
+          Latest release note: <a href="${esc(latestNoteLink)}"><strong>${esc(latestNote.title)}</strong></a>. Live game:
           <a href="https://sgwoods.github.io/Aurora-Galactica/">sgwoods.github.io/Aurora-Galactica/</a>
         </p>
       </section>
@@ -1723,6 +1864,109 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard){
   return template
     .replace('{{RELEASE_DASHBOARD_STYLES}}', dashboardStyles())
     .replace('{{RELEASE_DASHBOARD_BODY}}', body)
+    .trimEnd() + '\n';
+}
+
+function buildReleaseNotesPage(buildInfo, latestNote, releaseNotes){
+  const template = read(PROJECT_GUIDE_TEMPLATE);
+  const notes = Array.isArray(releaseNotes) ? releaseNotes : [];
+  const toc = notes.map((note, index) => `
+    <li><a href="#${esc(releaseNoteAnchor(note, index))}">${esc(`${note.version || 'Unversioned'} · ${note.title || 'Release note'}`)}</a></li>
+  `).join('\n');
+  const sections = notes.map((note, index) => {
+    const anchor = releaseNoteAnchor(note, index);
+    const sourceDoc = resolveReleaseNoteSource(note);
+    const sourceHref = releaseNoteGitHubHref(buildInfo.commit, sourceDoc);
+    const sourceBody = sourceDoc
+      ? `<div class="markdown">${renderMarkdown(read(path.join(ROOT, sourceDoc)))}</div>`
+      : `<div class="markdown"><p>${esc(note.summary || 'Detailed release-note source document not yet attached for this milestone. The summary in release-notes.json is the current visible note.')}</p></div>`;
+    return `
+      <section class="section" id="${esc(anchor)}">
+        <div class="sectionHeader">
+          <h2>${esc(note.title || 'Release note')}</h2>
+          <p>${esc(note.summary || '')}</p>
+        </div>
+        <div class="docWrap">
+          <div class="releaseNoteMeta">
+            <div class="releaseNoteCard">
+              <strong>Version</strong>
+              <span>${esc(note.version || '--')}</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Date</strong>
+              <span>${esc(releaseNoteDateLong(note.date))}</span>
+            </div>
+            <div class="releaseNoteCard">
+              <strong>Source</strong>
+              <span>${esc(sourceDoc || 'release-notes.json summary')}</span>
+            </div>
+          </div>
+          <p class="releaseNoteSummary">${esc(note.summary || '')}</p>
+          <div class="releaseNoteActions">
+            ${sourceHref ? `<a class="button" href="${esc(sourceHref)}">Open source markdown</a>` : ''}
+            <a class="button" href="release-dashboard.html">Back to release dashboard</a>
+          </div>
+          ${sourceBody}
+        </div>
+      </section>
+    `.trim();
+  }).join('\n');
+  const body = `
+    <main class="shell">
+      <div class="main">
+        <section class="hero">
+          <div class="heroTop">
+            <span class="eyebrow">Release Notes</span>
+            <a class="homeLink" href="https://sgwoods.github.io/Aurora-Galactica/">Game Home</a>
+            <a class="homeLink" href="release-dashboard.html">Release Dashboard</a>
+          </div>
+          <h1>Aurora / Platinum Release Notes</h1>
+          <p>Readable hosted release notes for the public Aurora / Platinum milestones. Use this page from the release dashboard timeline when you want the fuller release story instead of the short milestone summary.</p>
+          <div class="goal"><strong>Latest note:</strong> ${esc(latestNote?.title || 'No release note yet')}</div>
+          <div class="meta">
+            <div class="metaCard">
+              <span class="metaLabel">Current Release</span>
+              <span class="metaValue">${esc(displayBuildVersion(buildInfo))}</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Lane</span>
+              <span class="metaValue">${esc(buildInfo.releaseChannel)}</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Entries</span>
+              <span class="metaValue">${esc(String(notes.length))}</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Updated</span>
+              <span class="metaValue">${esc(publicDateLong(buildInfo))}</span>
+            </div>
+          </div>
+          <div class="heroLinks">
+            <a class="button" href="index.html">Open current lane build</a>
+            <a class="button" href="release-dashboard.html">Open release dashboard</a>
+            <a class="button" href="public-project-page.html">Open lane project page</a>
+            <a class="button" href="project-guide.html">Open project guide</a>
+          </div>
+        </section>
+        ${sections}
+      </div>
+      <aside class="toc">
+        <h2>Release Index</h2>
+        <p>This page is generated from <code>release-notes.json</code> plus any linked detailed release-note Markdown documents committed in the repo.</p>
+        <ul>
+          ${toc}
+        </ul>
+        <p class="footer">
+          Latest release note: <strong>${esc(latestNote?.title || 'No release note yet')}</strong><br>
+          Release ${esc(displayBuildVersion(buildInfo))} · Updated ${esc(publicDateLong(buildInfo))}
+        </p>
+      </aside>
+    </main>
+  `.trim();
+  return template
+    .replace('{{PROJECT_GUIDE_TITLE}}', 'Aurora Release Notes')
+    .replace('{{PROJECT_GUIDE_STYLES}}', releaseNotesStyles())
+    .replace('{{PROJECT_GUIDE_BODY}}', body)
     .trimEnd() + '\n';
 }
 
@@ -1984,6 +2228,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
             <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="platinum-guide.html">Open Platinum guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
+            <a class="button" href="release-notes.html">Open release notes</a>
             <a class="button" href="release-dashboard.html">Open release dashboard</a>
             <a class="button" href="conformance-dashboard.html">Open conformance dashboard</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
@@ -2043,6 +2288,7 @@ function buildPublicProjectPage(buildInfo, latestNote, dashboard){
     LANE_RELEASE_DASHBOARD_HREF: 'release-dashboard.html',
     LANE_CONFORMANCE_DASHBOARD_HREF: 'conformance-dashboard.html',
     LANE_CONFORMANCE_DATA_HREF: 'conformance-dashboard-data.json',
+    LANE_RELEASE_NOTES_HREF: 'release-notes.html',
     LANE_PROJECT_GUIDE_HREF: 'project-guide.html',
     LANE_APPLICATION_GUIDE_HREF: 'application-guide.html',
     LANE_PLATINUM_GUIDE_HREF: 'platinum-guide.html',
@@ -3453,6 +3699,7 @@ function lanePaths(lane){
       conformanceDashboard: PRODUCTION_CONFORMANCE_DASHBOARD,
       conformanceDashboardData: PRODUCTION_CONFORMANCE_DASHBOARD_DATA,
       publicProjectPage: PRODUCTION_PUBLIC_PROJECT_PAGE,
+      releaseNotesPage: PRODUCTION_RELEASE_NOTES_PAGE,
       projectGuide: PRODUCTION_PROJECT_GUIDE,
       applicationGuide: PRODUCTION_APPLICATION_GUIDE,
       platinumGuide: PRODUCTION_PLATINUM_GUIDE,
@@ -3469,6 +3716,7 @@ function lanePaths(lane){
     conformanceDashboard: DEV_CONFORMANCE_DASHBOARD,
     conformanceDashboardData: DEV_CONFORMANCE_DASHBOARD_DATA,
     publicProjectPage: DEV_PUBLIC_PROJECT_PAGE,
+    releaseNotesPage: DEV_RELEASE_NOTES_PAGE,
     projectGuide: DEV_PROJECT_GUIDE,
     applicationGuide: DEV_APPLICATION_GUIDE,
     platinumGuide: DEV_PLATINUM_GUIDE,
@@ -3618,7 +3866,7 @@ function build(options = {}){
   };
 
   fs.writeFileSync(out.index, html.endsWith('\n') ? html : `${html}\n`);
-  fs.writeFileSync(out.dashboard, buildReleaseDashboard(buildInfo, latestNote, releaseDashboard));
+  fs.writeFileSync(out.dashboard, buildReleaseDashboard(buildInfo, latestNote, releaseDashboard, releaseNotes));
   fs.writeFileSync(out.conformanceDashboard, buildConformanceDashboardHtml(conformanceDashboardData, {
     title: 'Aurora Conformance Dashboard',
     subtitle: 'Read-only release view of the current conformance plan, release gates, ingestion evidence, measurement debt, and highest-value next investments.',
@@ -3633,6 +3881,7 @@ function build(options = {}){
   fs.writeFileSync(out.conformanceDashboardData, JSON.stringify(conformanceDashboardData, null, 2) + '\n');
   const publicProjectPageHtml = buildPublicProjectPage(buildInfo, latestNote, releaseDashboard);
   fs.writeFileSync(out.publicProjectPage, publicProjectPageHtml);
+  fs.writeFileSync(out.releaseNotesPage, buildReleaseNotesPage(buildInfo, latestNote, releaseNotes));
   if(buildLane === 'dev'){
     fs.mkdirSync(path.dirname(LOCAL_DEV_PUBLIC_PROJECT_PREVIEW), { recursive: true });
     fs.writeFileSync(LOCAL_DEV_PUBLIC_PROJECT_PREVIEW, publicProjectPageHtml);
@@ -3674,6 +3923,7 @@ function build(options = {}){
     out.conformanceDashboard,
     out.conformanceDashboardData,
     out.publicProjectPage,
+    out.releaseNotesPage,
     ...(buildLane === 'dev' ? [LOCAL_DEV_PUBLIC_PROJECT_PREVIEW] : []),
     out.projectGuide,
     out.applicationGuide,

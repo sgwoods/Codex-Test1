@@ -105,6 +105,9 @@ function pilotDisplayId(){
  return 'GUEST';
 }
 function normalizeRemoteScoreRow(row){
+ const gameKey=typeof normalizeScoreRecordGameKey==='function'
+  ? normalizeScoreRecordGameKey(row?.gameKey||row?.game_key||'aurora-galactica')
+  : String(row?.gameKey||row?.game_key||'aurora-galactica').trim()||'aurora-galactica';
  return{
   id:String(row?.id||''),
   initials:sanitizeInitials(row?.initials||'---').padEnd(3,'-').slice(0,3),
@@ -112,7 +115,11 @@ function normalizeRemoteScoreRow(row){
   stage:+row?.stage|0,
   at:String(row?.achieved_at||''),
   build:String(row?.build||''),
-  verified:!!row?.is_verified
+  verified:!!row?.is_verified,
+  gameKey,
+  gameTitle:typeof scoreGameTitleForKey==='function'
+   ? scoreGameTitleForKey(gameKey,String(row?.gameTitle||row?.game_title||'').trim())
+   : String(row?.gameTitle||row?.game_title||'').trim()
  };
 }
 function preferredInitialsFromUser(user=LEADERBOARD.user){

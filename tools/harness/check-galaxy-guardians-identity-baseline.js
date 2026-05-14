@@ -17,6 +17,9 @@ function fail(message, payload){
 function loadGuardiansPack(){
   const source = fs.readFileSync(PACK_SOURCE, 'utf8');
   const sandbox = {};
+  sandbox.window = sandbox;
+  sandbox.buildPlatformInfo = () => ({ compatibility: '' });
+  sandbox.applicationReleaseRecord = (_gameKey, fallback = {}) => Object.assign({}, fallback || {});
   vm.createContext(sandbox);
   vm.runInContext(`${source}\nthis.GALAXY_GUARDIANS_PACK=GALAXY_GUARDIANS_PACK;`, sandbox, { filename: PACK_SOURCE });
   return sandbox.GALAXY_GUARDIANS_PACK;
@@ -94,4 +97,3 @@ function main(){
 }
 
 main();
-

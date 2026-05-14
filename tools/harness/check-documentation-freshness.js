@@ -12,6 +12,7 @@ const DOCUMENTATION_PROVENANCE = path.join(ROOT, 'documentation-provenance.json'
 const PUBLIC_TEMPLATE = path.join(ROOT, 'src', 'public', 'aurora-galactica.template.html');
 const PROJECT_GUIDE_DIST = path.join(ROOT, 'dist', 'dev', 'project-guide.html');
 const APPLICATION_GUIDE_DIST = path.join(ROOT, 'dist', 'dev', 'application-guide.html');
+const RELEASE_NOTES_DIST = path.join(ROOT, 'dist', 'dev', 'release-notes.html');
 const DIST_PUBLIC_PAGE = path.join(ROOT, 'dist', 'dev', 'public-project-page.html');
 const LOCAL_PUBLIC_PREVIEW = path.join(ROOT, 'local-dev', 'public-aurora-galactica-preview.html');
 
@@ -251,6 +252,23 @@ if(fs.existsSync(APPLICATION_GUIDE_DIST)){
     fail('Application guide is missing generated persona performance distribution content.', {
       missingApplicationText,
       expectedAction: 'Run npm run build after refreshing reference-artifacts/analyses/persona-performance-distribution/latest.json.'
+    });
+  }
+}
+
+if(fs.existsSync(RELEASE_NOTES_DIST)){
+  const releaseNotesHtml = read(RELEASE_NOTES_DIST);
+  const requiredReleaseNotesText = [
+    'Aurora / Platinum Release Notes',
+    'release-notes.json',
+    'RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md',
+    'Back to release dashboard'
+  ];
+  const missingReleaseNotesText = requiredReleaseNotesText.filter(text => !releaseNotesHtml.includes(text));
+  if(missingReleaseNotesText.length){
+    fail('Release notes page is missing generated release-note content.', {
+      missingReleaseNotesText,
+      expectedAction: 'Run npm run build after restoring the release-notes page generation and source note links.'
     });
   }
 }

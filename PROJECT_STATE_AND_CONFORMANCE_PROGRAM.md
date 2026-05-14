@@ -111,7 +111,7 @@ Important interpretation:
 | Game | Role | Current conformance posture | Next conformance need |
 | --- | --- | --- | --- |
 | Aurora Galactica | First shipped Platinum application and current active investment target | Strong release-quality baseline with focused gaps in audio identity, level arc precision, boss/formation stage variation, visual reference grounding, and pressure replay precision | Move toward the `1.4.0` arcade-depth gate with better measured audio feedback, stage-by-stage shape, visual/reference comparison, and long-play pressure/reward evidence |
-| Galaxy Guardians | Second-game preview and Galaxian-style ingestion proof | Preview metrics exist, but public readiness is intentionally low; it is still a proving ground for ingestion, pack boundaries, and game-owned evidence | Promote source-derived rack timing, dive paths, sprite/cue evidence, and playtest-weighted scoring before treating it as a serious public playable candidate |
+| Galaxy Guardians | Second-game preview, branch-level playable-game push, and Galaxian-style ingestion proof | Preview metrics exist, public readiness is intentionally low, and the branch now treats it as a first-class conformance target with its own plan, longer-surface/persona review layer, and aggregate process gate | Promote source-derived rack timing, dive paths, sprite/cue evidence, score/result identity, later-band fairness, and playtest-weighted scoring through [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md) and [GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md](GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md) before treating it as a serious public playable candidate |
 | Future games | Long-term repeatable ingestion target | Not yet active as playable work | Arrive through source manifests, reference windows, event logs, semantic profiles, score targets, and game-owned harnesses before design claims are made |
 
 ## How The Platform Helps The Conformance Effort
@@ -161,6 +161,11 @@ For Galaxy Guardians, ingestion is even more central because the game should
 not become "Aurora with different labels." Its first credible playable phases
 should come from Galaxian-style source windows, event logs, sprite/cue targets,
 and runtime correspondence checks.
+
+The maintained Galaxy-specific bridge between ingestion and release review is:
+
+- [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md)
+- `npm run harness:check:galaxy-guardians-first-class-conformance`
 
 For future games, ingestion should become the repeatable starting point rather
 than a manual design phase.
@@ -223,6 +228,8 @@ level, the important areas are:
 7. pressure curve precision and exact replay of known source windows
 8. Guardians ingestion promotion from preview metrics into stronger
    frame/audio/playtest evidence
+9. Guardians score/progression/result identity so Platinum changes are
+   validated against two real games instead of one game plus one preview shell
 
 The next major release gate should be judged not only by a higher overall score,
 but by whether the improved categories are the ones players actually feel.

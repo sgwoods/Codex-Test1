@@ -1,7 +1,11 @@
 // Galaxy Guardians preview pack-owned metadata, placeholder rules, timings, visuals, and audio identity.
 
 const GUARDIANS_STAGE_BAND_PROFILES=Object.freeze([
- {name:'signal-scouts',beeFamily:'signal-scout',butFamily:'signal-escort',bossFamily:'signal-flagship',challengeFamily:'none',scoutFamily:'signal-scout',flagshipFamily:'signal-flagship',escortFamily:'signal-escort',pulseX:.72,pulseY:.62,entryX:.78,entryY:.7,weave:1.34,steer:.82,jitter:.72,diveVy:1.18,diveAccel:1.08}
+ {name:'signal-scouts',beeFamily:'signal-scout',butFamily:'signal-escort',bossFamily:'signal-flagship',challengeFamily:'none',scoutFamily:'signal-scout',flagshipFamily:'signal-flagship',escortFamily:'signal-escort',pulseX:.72,pulseY:.62,entryX:.78,entryY:.7,weave:1.34,steer:.82,jitter:.72,diveVy:1.18,diveAccel:1.08},
+ {name:'escort-pursuit',beeFamily:'signal-scout',butFamily:'signal-escort',bossFamily:'signal-flagship',challengeFamily:'none',scoutFamily:'signal-scout',flagshipFamily:'signal-flagship',escortFamily:'signal-escort',pulseX:.78,pulseY:.66,entryX:.8,entryY:.72,weave:1.46,steer:.88,jitter:.78,diveVy:1.22,diveAccel:1.1},
+ {name:'flagship-pressure',beeFamily:'signal-scout',butFamily:'signal-escort',bossFamily:'signal-flagship',challengeFamily:'none',scoutFamily:'signal-scout',flagshipFamily:'signal-flagship',escortFamily:'signal-escort',pulseX:.84,pulseY:.7,entryX:.82,entryY:.74,weave:1.58,steer:.96,jitter:.84,diveVy:1.28,diveAccel:1.13},
+ {name:'deep-signal-loop',beeFamily:'signal-scout',butFamily:'signal-escort',bossFamily:'signal-flagship',challengeFamily:'none',scoutFamily:'signal-scout',flagshipFamily:'signal-flagship',escortFamily:'signal-escort',pulseX:.9,pulseY:.74,entryX:.84,entryY:.78,weave:1.7,steer:1.02,jitter:.9,diveVy:1.34,diveAccel:1.16},
+ {name:'signal-overload',beeFamily:'signal-scout',butFamily:'signal-escort',bossFamily:'signal-flagship',challengeFamily:'none',scoutFamily:'signal-scout',flagshipFamily:'signal-flagship',escortFamily:'signal-escort',pulseX:.94,pulseY:.78,entryX:.86,entryY:.8,weave:1.8,steer:1.08,jitter:.94,diveVy:1.38,diveAccel:1.18}
 ]);
 
 const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
@@ -21,6 +25,84 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
    speedMin:9,
    speedMax:24,
    palette:Object.freeze(['#fffdf0','#ffe26a','#ff5b5b','#7bd6ff','#4af26d','#f6f0ff'])
+  }),
+  backgrounds:Object.freeze({
+   frontDoor:'classic-stars',
+   wait:'classic-stars',
+   demo:'classic-stars',
+   stage:'classic-stars',
+   challenge:'classic-stars'
+  }),
+  audioTheme:'guardians-signal'
+ }),
+ 'escort-pursuit':Object.freeze({
+  id:'escort-pursuit',
+  label:'Escort Pursuit',
+  group:'guardians-preview',
+  starfield:Object.freeze({
+   id:'guardians-escort-pursuit',
+   count:108,
+   sizeMin:.8,
+   sizeMax:1.5,
+   alphaMin:.34,
+   alphaMax:.9,
+   twinkleMin:.78,
+   twinkleAmp:.2,
+   speedMin:12,
+   speedMax:30,
+   palette:Object.freeze(['#fff4dc','#ffd86d','#ff8c5a','#7bd6ff','#59f6c2','#d8f0ff'])
+  }),
+  backgrounds:Object.freeze({
+   frontDoor:'classic-stars',
+   wait:'classic-stars',
+   demo:'classic-stars',
+   stage:'classic-stars',
+   challenge:'classic-stars'
+  }),
+  audioTheme:'guardians-signal'
+ }),
+ 'deep-radar':Object.freeze({
+  id:'deep-radar',
+  label:'Deep Radar',
+  group:'guardians-preview',
+  starfield:Object.freeze({
+   id:'guardians-deep-radar',
+   count:118,
+   sizeMin:.74,
+   sizeMax:1.54,
+   alphaMin:.3,
+   alphaMax:.88,
+   twinkleMin:.76,
+   twinkleAmp:.22,
+   speedMin:15,
+   speedMax:34,
+   palette:Object.freeze(['#f8fbff','#7bd6ff','#4b7dff','#58f2a3','#ffd86d','#ff7b76'])
+  }),
+  backgrounds:Object.freeze({
+   frontDoor:'classic-stars',
+   wait:'classic-stars',
+   demo:'classic-stars',
+   stage:'classic-stars',
+   challenge:'classic-stars'
+  }),
+  audioTheme:'guardians-signal'
+ }),
+ 'signal-overload':Object.freeze({
+  id:'signal-overload',
+  label:'Signal Overload',
+  group:'guardians-preview',
+  starfield:Object.freeze({
+   id:'guardians-signal-overload',
+   count:128,
+   sizeMin:.72,
+   sizeMax:1.6,
+   alphaMin:.28,
+   alphaMax:.96,
+   twinkleMin:.72,
+   twinkleAmp:.24,
+   speedMin:18,
+   speedMax:38,
+   palette:Object.freeze(['#fff8d9','#ffd86d','#ff5b5b','#ff9b54','#7bd6ff','#4af26d'])
   }),
   backgrounds:Object.freeze({
    frontDoor:'classic-stars',
@@ -119,6 +201,7 @@ const GUARDIANS_AUDIO_CUE_CATALOG=Object.freeze({
  scoutDive:Object.freeze({id:'guardians-scout-dive',event:'alien_dive_start',profile:'two-step-siren-dip',referenceIntent:'solo scout dive pressure'}),
  flagshipDive:Object.freeze({id:'guardians-flagship-dive',event:'flagship_dive_start',profile:'longer-command-siren',referenceIntent:'flagship dive with escort warning'}),
  escortJoin:Object.freeze({id:'guardians-escort-join',event:'escort_join',profile:'paired-red-escort-clicks',referenceIntent:'escort attachment cue'}),
+ stageAdvance:Object.freeze({id:'guardians-stage-advance-sweep',event:'stage_advance',profile:'brief-command-advance',referenceIntent:'rack-clear handoff into the next pressure band'}),
  scoutHit:Object.freeze({id:'guardians-scout-hit',event:'player_shot_resolved',profile:'tight-green-pop',referenceIntent:'small alien hit'}),
  escortHit:Object.freeze({id:'guardians-escort-hit',event:'player_shot_resolved',profile:'red-blue-snap',referenceIntent:'escort hit'}),
  flagshipHit:Object.freeze({id:'guardians-flagship-hit',event:'player_shot_resolved',profile:'gold-command-break',referenceIntent:'flagship hit / score moment'}),
@@ -135,13 +218,14 @@ const GUARDIANS_AUDIO_THEMES=Object.freeze({
    gameStart:Object.freeze({seq:[520,420,320,240],step:.035,wave:'square',volume:.011,slide:-42,lpHz:2500}),
    formationPulse:Object.freeze({tones:Object.freeze([{freq:122,duration:.08,wave:'square',volume:.006,slide:18,lpHz:1400},{freq:244,duration:.05,wave:'square',volume:.007,slide:-28,lpHz:2200,delay:.018},{freq:366,duration:.032,wave:'square',volume:.0045,slide:-44,lpHz:2800,delay:.05}])}),
    playerShot:Object.freeze({tones:Object.freeze([{freq:2660,duration:.032,wave:'square',volume:.014,slide:-780,detune:.004,lpHz:7600},{freq:2050,duration:.058,wave:'square',volume:.0135,slide:-620,detune:-.004,lpHz:6400,delay:.006}]),noise:Object.freeze([{duration:.028,volume:.0048,hp:4600,delay:0}])}),
-   enemyShot:Object.freeze({tones:Object.freeze([{freq:1080,duration:.036,wave:'square',volume:.0125,slide:-360,detune:.004,lpHz:3900},{freq:720,duration:.055,wave:'square',volume:.0085,slide:-250,detune:-.004,lpHz:2800,delay:.007}]),noise:Object.freeze([{duration:.032,volume:.0044,hp:1500,delay:.003}])}),
+   enemyShot:Object.freeze({tones:Object.freeze([{freq:960,duration:.04,wave:'square',volume:.012,slide:-280,detune:.004,lpHz:3600},{freq:620,duration:.08,wave:'square',volume:.0092,slide:-180,detune:-.004,lpHz:2500,delay:.008}]),noise:Object.freeze([{duration:.024,volume:.0024,hp:1500,delay:.01}])}),
    scoutDive:Object.freeze({tones:Object.freeze([{freq:1520,duration:.07,wave:'square',volume:.0105,slide:-520,detune:.006,lpHz:4300},{freq:1180,duration:.12,wave:'square',volume:.0082,slide:-420,detune:-.005,lpHz:3400,delay:.035},{freq:860,duration:.1,wave:'square',volume:.0055,slide:-300,detune:.003,lpHz:2600,delay:.12}]),noise:Object.freeze([{duration:.06,volume:.004,hp:1250,delay:.02}])}),
    flagshipDive:Object.freeze({tones:Object.freeze([{freq:2060,duration:.095,wave:'square',volume:.0115,slide:-720,detune:.006,lpHz:5000},{freq:1500,duration:.17,wave:'square',volume:.009,slide:-560,detune:-.005,lpHz:3800,delay:.04},{freq:1120,duration:.17,wave:'square',volume:.0065,slide:-380,detune:.003,lpHz:3000,delay:.15}]),noise:Object.freeze([{duration:.1,volume:.005,hp:1200,delay:.014}])}),
    escortJoin:Object.freeze({seq:[880,660,880,520],step:.024,wave:'square',volume:.0072,slide:-58,lpHz:4200}),
+   stageAdvance:Object.freeze({seq:[494,659,784],step:.044,wave:'square',volume:.0105,slide:18,lpHz:3600}),
    wrapReturn:Object.freeze({tones:Object.freeze([{freq:150,duration:.18,wave:'triangle',volume:.0065,slide:210,lpHz:2100},{freq:360,duration:.10,wave:'square',volume:.0045,slide:120,lpHz:3000,delay:.08}])}),
    playerLoss:Object.freeze({tones:Object.freeze([{freq:2370,duration:.066,wave:'square',volume:.017,slide:-760,lpHz:5200},{freq:1680,duration:.11,wave:'square',volume:.014,slide:-540,detune:-.004,lpHz:3900,delay:.03},{freq:1100,duration:.095,wave:'square',volume:.009,slide:-320,lpHz:2800,delay:.13}]),noise:Object.freeze([{duration:.13,volume:.011,hp:1150,delay:.008}])}),
-   scoutHit:Object.freeze({tones:Object.freeze([{freq:1310,duration:.024,wave:'square',volume:.014,slide:-520,detune:.004,lpHz:5400}]),noise:Object.freeze([{duration:.02,volume:.0034,hp:2200,delay:.002}])}),
+   scoutHit:Object.freeze({tones:Object.freeze([{freq:1520,duration:.022,wave:'square',volume:.0142,slide:-620,detune:.004,lpHz:5600},{freq:1080,duration:.032,wave:'square',volume:.0078,slide:-430,detune:-.003,lpHz:4200,delay:.01}]),noise:Object.freeze([{duration:.024,volume:.0042,hp:2400,delay:.001}])}),
    escortHit:Object.freeze({tones:Object.freeze([{freq:2080,duration:.042,wave:'square',volume:.015,slide:-660,detune:.004,lpHz:5400},{freq:1520,duration:.052,wave:'square',volume:.0075,slide:-420,detune:-.004,lpHz:3800,delay:.014}]),noise:Object.freeze([{duration:.032,volume:.0038,hp:1900,delay:.004}])}),
    flagshipHit:Object.freeze({tones:Object.freeze([{freq:2560,duration:.05,wave:'square',volume:.016,slide:-780,detune:.004,lpHz:6200},{freq:1900,duration:.072,wave:'square',volume:.009,slide:-520,detune:-.003,lpHz:4600,delay:.016},{freq:1450,duration:.062,wave:'square',volume:.0064,slide:-340,detune:.003,lpHz:3400,delay:.054}]),noise:Object.freeze([{duration:.05,volume:.0048,hp:1700,delay:.006}])}),
    enemyHit:Object.freeze({tones:Object.freeze([{freq:246,duration:.055,wave:'square',volume:.012,slide:-210,lpHz:3300}])}),
@@ -161,7 +245,10 @@ const GUARDIANS_AUDIO_THEMES=Object.freeze({
 });
 
 const GUARDIANS_STAGE_THEME_PROGRESSION=Object.freeze([
- {fromStage:1,id:'signal-rack',frameAccent:'signal-crimson',atmosphereTheme:'signal-rack',challengeBrand:'none',bossArchetype:'flagship'}
+ {fromStage:1,id:'signal-rack',frameAccent:'signal-crimson',atmosphereTheme:'signal-rack',challengeBrand:'none',bossArchetype:'flagship'},
+ {fromStage:3,id:'escort-pursuit',frameAccent:'escort-amber',atmosphereTheme:'escort-pursuit',challengeBrand:'none',bossArchetype:'flagship'},
+ {fromStage:6,id:'deep-radar',frameAccent:'deep-radar',atmosphereTheme:'deep-radar',challengeBrand:'none',bossArchetype:'flagship'},
+ {fromStage:10,id:'signal-overload',frameAccent:'signal-overload',atmosphereTheme:'signal-overload',challengeBrand:'none',bossArchetype:'flagship'}
 ]);
 
 const GUARDIANS_FORMATION_LAYOUTS=Object.freeze([
@@ -175,6 +262,30 @@ const GUARDIANS_FRAME_ACCENTS=Object.freeze({
   shellLine:'rgba(255,112,94,.34)',
   shellGlow:'rgba(255,232,150,.12)',
   marqueeBorder:'#ff5b5b',
+  marqueeGlow:'#ffd86d'
+ }),
+ 'escort-amber':Object.freeze({
+  frameLine:'rgba(255,196,104,.34)',
+  frameGlow:'rgba(123,214,255,.12)',
+  shellLine:'rgba(255,138,92,.32)',
+  shellGlow:'rgba(255,226,132,.12)',
+  marqueeBorder:'#ffd86d',
+  marqueeGlow:'#7bd6ff'
+ }),
+ 'deep-radar':Object.freeze({
+  frameLine:'rgba(123,214,255,.3)',
+  frameGlow:'rgba(74,242,109,.1)',
+  shellLine:'rgba(75,125,255,.34)',
+  shellGlow:'rgba(123,214,255,.12)',
+  marqueeBorder:'#7bd6ff',
+  marqueeGlow:'#4af26d'
+ }),
+ 'signal-overload':Object.freeze({
+  frameLine:'rgba(255,110,110,.38)',
+  frameGlow:'rgba(255,216,109,.16)',
+  shellLine:'rgba(255,90,90,.34)',
+  shellGlow:'rgba(255,226,132,.16)',
+  marqueeBorder:'#ff9b54',
   marqueeGlow:'#ffd86d'
  }),
  'classic-blue':Object.freeze({
@@ -331,14 +442,14 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   Object.freeze({id:'classic-blue',label:'Classic Blue',shellFrameTheme:'classic-blue',frameAccent:'classic-blue'})
  ]),
  capabilities:Object.freeze({
-  usesFormationRack:1,
-  usesIndependentDiveAttacks:1,
-  usesEscortPatterns:1,
-  usesChallengeStages:0,
-  usesCaptureRescue:0,
-  usesDualFighterMode:0,
-  usesStaticShields:0,
-  usesStageThemeProgression:0,
+ usesFormationRack:1,
+ usesIndependentDiveAttacks:1,
+ usesEscortPatterns:1,
+ usesChallengeStages:0,
+ usesCaptureRescue:0,
+ usesDualFighterMode:0,
+ usesStaticShields:0,
+  usesStageThemeProgression:1,
   usesBossArchetypeVariants:0
  }),
  atmosphereThemes:GUARDIANS_ATMOSPHERE_THEMES,

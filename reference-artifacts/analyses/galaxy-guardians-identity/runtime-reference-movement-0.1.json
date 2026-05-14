@@ -18,45 +18,45 @@
   "runtimeRules": {
     "firstScoutDiveDelay": 2.55,
     "flagshipEscortDelay": 6.65,
-    "scoutDiveIntervalBase": 1.6,
+    "scoutDiveIntervalBase": 1.52,
     "flagshipDiveIntervalBase": 6.35,
-    "diveSwayAmplitude": 32,
+    "diveSwayAmplitude": 34,
     "diveSwayHz": 2.25,
-    "diveSideDrift": 16,
-    "diveBaseVy": 36,
-    "diveAccel": 6.2,
+    "diveSideDrift": 17,
+    "diveBaseVy": 32,
+    "diveAccel": 5.4,
     "bottomExitPadding": 12
   },
   "runtimeStats": {
     "trackletCount": 9,
     "descendingTrackletCount": 9,
-    "medianCandidateDurationSeconds": 2.417,
-    "medianCandidateXSpan": 0.31,
-    "medianCandidateYSpan": 0.456,
+    "medianCandidateDurationSeconds": 2.65,
+    "medianCandidateXSpan": 0.334,
+    "medianCandidateYSpan": 0.458,
     "firstScoutDiveT": 2.567,
     "firstFlagshipDiveT": 6.667,
-    "firstWrapT": 6.517,
+    "firstWrapT": 6.883,
     "wrapCountByFourteenSeconds": 7
   },
   "comparison": {
     "referenceMedianDurationSeconds": 5.5,
     "referenceMedianXSpan": 0.372,
     "referenceMedianYSpan": 0.416,
-    "runtimeMedianDurationSeconds": 2.417,
-    "runtimeMedianXSpan": 0.31,
-    "runtimeMedianYSpan": 0.456,
-    "durationRatio": 0.439,
-    "xSpanRatio": 0.833,
-    "ySpanRatio": 1.096
+    "runtimeMedianDurationSeconds": 2.65,
+    "runtimeMedianXSpan": 0.334,
+    "runtimeMedianYSpan": 0.458,
+    "durationRatio": 0.482,
+    "xSpanRatio": 0.898,
+    "ySpanRatio": 1.101
   },
   "scoreParts": {
-    "durationFit": 4.2,
-    "xSpanFit": 9.6,
-    "ySpanFit": 6.3,
+    "durationFit": 5.2,
+    "xSpanFit": 8.9,
+    "ySpanFit": 6.2,
     "pressureAvailability": 10,
     "eventCoverage": 10
   },
-  "runtimeReferenceMovementScore10": 8,
+  "runtimeReferenceMovementScore10": 8.1,
   "tuningRead": {
     "constantsTunedFromReferenceProxy": true,
     "remainingGap": "Comparison uses connected-component target bands and runtime entity tracks. The next improvement should use final sprite recognition from extracted Galaxian assets."
@@ -66,85 +66,85 @@
       "id": "gg-scout-4-3",
       "role": "scout",
       "linkedTo": "",
-      "sampleCount": 167,
-      "startSeconds": 3.05,
-      "endSeconds": 5.817,
-      "durationSeconds": 2.767,
-      "xSpan": 0.284,
-      "ySpan": 0.456,
-      "descent": 0.456,
+      "sampleCount": 183,
+      "startSeconds": 3.1,
+      "endSeconds": 6.133,
+      "durationSeconds": 3.033,
+      "xSpan": 0.334,
+      "ySpan": 0.458,
+      "descent": 0.458,
       "first": {
-        "x": 0.28,
-        "y": 0.421
+        "x": 0.264,
+        "y": 0.42
       },
       "last": {
-        "x": 0.125,
-        "y": 0.877
+        "x": 0.075,
+        "y": 0.878
       },
       "sampledPoints": [
         {
           "id": "gg-scout-4-3",
           "role": "scout",
           "linkedTo": "",
-          "t": 3.05,
-          "x": 0.28,
-          "y": 0.421
+          "t": 3.1,
+          "x": 0.264,
+          "y": 0.42
         },
         {
           "id": "gg-scout-4-3",
           "role": "scout",
           "linkedTo": "",
-          "t": 3.383,
-          "x": 0.255,
-          "y": 0.462
+          "t": 3.467,
+          "x": 0.249,
+          "y": 0.461
         },
         {
           "id": "gg-scout-4-3",
           "role": "scout",
           "linkedTo": "",
-          "t": 3.717,
-          "x": 0.289,
-          "y": 0.507
+          "t": 3.833,
+          "x": 0.303,
+          "y": 0.505
         },
         {
           "id": "gg-scout-4-3",
           "role": "scout",
           "linkedTo": "",
-          "t": 4.05,
-          "x": 0.352,
-          "y": 0.555
+          "t": 4.2,
+          "x": 0.377,
+          "y": 0.554
         },
         {
           "id": "gg-scout-4-3",
           "role": "scout",
           "linkedTo": "",
-          "t": 4.383,
-          "x": 0.402,
-          "y": 0.608
+          "t": 4.567,
+          "x": 0.409,
+          "y": 0.607
         },
         {
           "id": "gg-scout-4-3",
           "role": "scout",
           "linkedTo": "",
-          "t": 4.717,
-          "x": 0.401,
+          "t": 4.933,
+          "x": 0.364,
           "y": 0.664
         },
         {
           "id": "gg-scout-4-3",
           "role": "scout",
           "linkedTo": "",
-          "t": 5.05,
-          "x": 0.339,
-          "y": 0.724
+          "t": 5.3,
+          "x": 0.256,
+          "y": 0.725
         },
         {
           "id": "gg-scout-4-3",
           "role": "scout",
           "linkedTo": "",
-          "t": 5.383,
-          "x": 0.239,
-          "y": 0.788
+          "t": 5.667,
+          "x": 0.142,
+          "y": 0.789
         }
       ]
     },
@@ -152,85 +152,85 @@
       "id": "gg-scout-2-4",
       "role": "scout",
       "linkedTo": "",
-      "sampleCount": 146,
-      "startSeconds": 5.55,
-      "endSeconds": 7.967,
-      "durationSeconds": 2.417,
-      "xSpan": 0.314,
-      "ySpan": 0.455,
-      "descent": 0.455,
+      "sampleCount": 160,
+      "startSeconds": 5.6,
+      "endSeconds": 8.25,
+      "durationSeconds": 2.65,
+      "xSpan": 0.334,
+      "ySpan": 0.459,
+      "descent": 0.459,
       "first": {
-        "x": 0.382,
-        "y": 0.422
+        "x": 0.404,
+        "y": 0.42
       },
       "last": {
-        "x": 0.163,
-        "y": 0.877
+        "x": 0.205,
+        "y": 0.879
       },
       "sampledPoints": [
         {
           "id": "gg-scout-2-4",
           "role": "scout",
           "linkedTo": "",
-          "t": 5.55,
-          "x": 0.382,
-          "y": 0.422
+          "t": 5.6,
+          "x": 0.404,
+          "y": 0.42
         },
         {
           "id": "gg-scout-2-4",
           "role": "scout",
           "linkedTo": "",
-          "t": 5.85,
-          "x": 0.439,
+          "t": 5.933,
+          "x": 0.459,
           "y": 0.467
         },
         {
           "id": "gg-scout-2-4",
           "role": "scout",
           "linkedTo": "",
-          "t": 6.15,
-          "x": 0.468,
+          "t": 6.267,
+          "x": 0.461,
           "y": 0.516
         },
         {
           "id": "gg-scout-2-4",
           "role": "scout",
           "linkedTo": "",
-          "t": 6.45,
-          "x": 0.45,
-          "y": 0.568
+          "t": 6.6,
+          "x": 0.398,
+          "y": 0.569
         },
         {
           "id": "gg-scout-2-4",
           "role": "scout",
           "linkedTo": "",
-          "t": 6.75,
-          "x": 0.385,
-          "y": 0.623
+          "t": 6.933,
+          "x": 0.293,
+          "y": 0.625
         },
         {
           "id": "gg-scout-2-4",
           "role": "scout",
           "linkedTo": "",
-          "t": 7.05,
-          "x": 0.294,
-          "y": 0.68
+          "t": 7.267,
+          "x": 0.192,
+          "y": 0.684
         },
         {
           "id": "gg-scout-2-4",
           "role": "scout",
           "linkedTo": "",
-          "t": 7.35,
-          "x": 0.209,
-          "y": 0.741
+          "t": 7.6,
+          "x": 0.138,
+          "y": 0.747
         },
         {
           "id": "gg-scout-2-4",
           "role": "scout",
           "linkedTo": "",
-          "t": 7.65,
-          "x": 0.16,
-          "y": 0.806
+          "t": 7.933,
+          "x": 0.149,
+          "y": 0.813
         }
       ]
     },
@@ -238,257 +238,85 @@
       "id": "gg-scout-4-4",
       "role": "scout",
       "linkedTo": "",
-      "sampleCount": 167,
-      "startSeconds": 6.367,
-      "endSeconds": 9.133,
-      "durationSeconds": 2.766,
-      "xSpan": 0.284,
-      "ySpan": 0.456,
-      "descent": 0.456,
+      "sampleCount": 183,
+      "startSeconds": 6.25,
+      "endSeconds": 9.283,
+      "durationSeconds": 3.033,
+      "xSpan": 0.334,
+      "ySpan": 0.458,
+      "descent": 0.458,
       "first": {
-        "x": 0.339,
-        "y": 0.421
+        "x": 0.324,
+        "y": 0.42
       },
       "last": {
-        "x": 0.184,
-        "y": 0.877
+        "x": 0.135,
+        "y": 0.878
       },
       "sampledPoints": [
         {
           "id": "gg-scout-4-4",
           "role": "scout",
           "linkedTo": "",
-          "t": 6.367,
-          "x": 0.339,
-          "y": 0.421
+          "t": 6.25,
+          "x": 0.324,
+          "y": 0.42
         },
         {
           "id": "gg-scout-4-4",
           "role": "scout",
           "linkedTo": "",
-          "t": 6.7,
-          "x": 0.314,
-          "y": 0.462
+          "t": 6.617,
+          "x": 0.309,
+          "y": 0.461
         },
         {
           "id": "gg-scout-4-4",
           "role": "scout",
           "linkedTo": "",
-          "t": 7.033,
-          "x": 0.348,
-          "y": 0.507
+          "t": 6.983,
+          "x": 0.363,
+          "y": 0.505
         },
         {
           "id": "gg-scout-4-4",
           "role": "scout",
           "linkedTo": "",
-          "t": 7.367,
-          "x": 0.412,
-          "y": 0.555
+          "t": 7.35,
+          "x": 0.437,
+          "y": 0.554
         },
         {
           "id": "gg-scout-4-4",
           "role": "scout",
           "linkedTo": "",
-          "t": 7.7,
-          "x": 0.461,
-          "y": 0.608
+          "t": 7.717,
+          "x": 0.469,
+          "y": 0.607
         },
         {
           "id": "gg-scout-4-4",
           "role": "scout",
           "linkedTo": "",
-          "t": 8.033,
-          "x": 0.46,
+          "t": 8.083,
+          "x": 0.424,
           "y": 0.664
         },
         {
           "id": "gg-scout-4-4",
           "role": "scout",
           "linkedTo": "",
-          "t": 8.367,
-          "x": 0.398,
-          "y": 0.724
+          "t": 8.45,
+          "x": 0.316,
+          "y": 0.725
         },
         {
           "id": "gg-scout-4-4",
           "role": "scout",
           "linkedTo": "",
-          "t": 8.7,
-          "x": 0.298,
-          "y": 0.788
-        }
-      ]
-    },
-    {
-      "id": "gg-escort-1-5",
-      "role": "escort",
-      "linkedTo": "gg-flagship-0-5",
-      "sampleCount": 130,
-      "startSeconds": 8.533,
-      "endSeconds": 10.683,
-      "durationSeconds": 2.15,
-      "xSpan": 0.314,
-      "ySpan": 0.458,
-      "descent": 0.458,
-      "first": {
-        "x": 0.5,
-        "y": 0.422
-      },
-      "last": {
-        "x": 0.764,
-        "y": 0.88
-      },
-      "sampledPoints": [
-        {
-          "id": "gg-escort-1-5",
-          "role": "escort",
-          "linkedTo": "gg-flagship-0-5",
-          "t": 8.533,
-          "x": 0.5,
-          "y": 0.422
-        },
-        {
-          "id": "gg-escort-1-5",
-          "role": "escort",
-          "linkedTo": "gg-flagship-0-5",
-          "t": 8.8,
-          "x": 0.503,
-          "y": 0.47
-        },
-        {
-          "id": "gg-escort-1-5",
-          "role": "escort",
-          "linkedTo": "gg-flagship-0-5",
-          "t": 9.067,
-          "x": 0.547,
-          "y": 0.52
-        },
-        {
-          "id": "gg-escort-1-5",
-          "role": "escort",
-          "linkedTo": "gg-flagship-0-5",
-          "t": 9.333,
-          "x": 0.62,
-          "y": 0.573
-        },
-        {
-          "id": "gg-escort-1-5",
-          "role": "escort",
-          "linkedTo": "gg-flagship-0-5",
-          "t": 9.6,
-          "x": 0.702,
-          "y": 0.629
-        },
-        {
-          "id": "gg-escort-1-5",
-          "role": "escort",
-          "linkedTo": "gg-flagship-0-5",
-          "t": 9.867,
-          "x": 0.771,
-          "y": 0.687
-        },
-        {
-          "id": "gg-escort-1-5",
-          "role": "escort",
-          "linkedTo": "gg-flagship-0-5",
-          "t": 10.133,
-          "x": 0.807,
-          "y": 0.747
-        },
-        {
-          "id": "gg-escort-1-5",
-          "role": "escort",
-          "linkedTo": "gg-flagship-0-5",
-          "t": 10.4,
-          "x": 0.804,
-          "y": 0.81
-        }
-      ]
-    },
-    {
-      "id": "gg-escort-1-6",
-      "role": "escort",
-      "linkedTo": "gg-flagship-0-5",
-      "sampleCount": 130,
-      "startSeconds": 8.533,
-      "endSeconds": 10.683,
-      "durationSeconds": 2.15,
-      "xSpan": 0.314,
-      "ySpan": 0.458,
-      "descent": 0.458,
-      "first": {
-        "x": 0.579,
-        "y": 0.42
-      },
-      "last": {
-        "x": 0.842,
-        "y": 0.878
-      },
-      "sampledPoints": [
-        {
-          "id": "gg-escort-1-6",
-          "role": "escort",
-          "linkedTo": "gg-flagship-0-5",
-          "t": 8.533,
-          "x": 0.579,
-          "y": 0.42
-        },
-        {
-          "id": "gg-escort-1-6",
-          "role": "escort",
-          "linkedTo": "gg-flagship-0-5",
-          "t": 8.8,
-          "x": 0.582,
-          "y": 0.468
-        },
-        {
-          "id": "gg-escort-1-6",
-          "role": "escort",
-          "linkedTo": "gg-flagship-0-5",
-          "t": 9.067,
-          "x": 0.625,
-          "y": 0.519
-        },
-        {
-          "id": "gg-escort-1-6",
-          "role": "escort",
-          "linkedTo": "gg-flagship-0-5",
-          "t": 9.333,
-          "x": 0.698,
-          "y": 0.572
-        },
-        {
-          "id": "gg-escort-1-6",
-          "role": "escort",
-          "linkedTo": "gg-flagship-0-5",
-          "t": 9.6,
-          "x": 0.781,
-          "y": 0.627
-        },
-        {
-          "id": "gg-escort-1-6",
-          "role": "escort",
-          "linkedTo": "gg-flagship-0-5",
-          "t": 9.867,
-          "x": 0.85,
-          "y": 0.685
-        },
-        {
-          "id": "gg-escort-1-6",
-          "role": "escort",
-          "linkedTo": "gg-flagship-0-5",
-          "t": 10.133,
-          "x": 0.886,
-          "y": 0.746
-        },
-        {
-          "id": "gg-escort-1-6",
-          "role": "escort",
-          "linkedTo": "gg-flagship-0-5",
-          "t": 10.4,
-          "x": 0.882,
-          "y": 0.809
+          "t": 8.817,
+          "x": 0.202,
+          "y": 0.789
         }
       ]
     },
@@ -496,85 +324,257 @@
       "id": "gg-scout-4-6",
       "role": "scout",
       "linkedTo": "",
-      "sampleCount": 167,
-      "startSeconds": 8.6,
-      "endSeconds": 11.367,
-      "durationSeconds": 2.767,
-      "xSpan": 0.284,
-      "ySpan": 0.456,
-      "descent": 0.456,
+      "sampleCount": 183,
+      "startSeconds": 8.35,
+      "endSeconds": 11.383,
+      "durationSeconds": 3.033,
+      "xSpan": 0.334,
+      "ySpan": 0.458,
+      "descent": 0.458,
       "first": {
-        "x": 0.715,
-        "y": 0.421
+        "x": 0.73,
+        "y": 0.42
       },
       "last": {
-        "x": 0.87,
-        "y": 0.877
+        "x": 0.919,
+        "y": 0.878
       },
       "sampledPoints": [
         {
           "id": "gg-scout-4-6",
           "role": "scout",
           "linkedTo": "",
-          "t": 8.6,
-          "x": 0.715,
-          "y": 0.421
+          "t": 8.35,
+          "x": 0.73,
+          "y": 0.42
         },
         {
           "id": "gg-scout-4-6",
           "role": "scout",
           "linkedTo": "",
-          "t": 8.933,
-          "x": 0.74,
-          "y": 0.462
+          "t": 8.717,
+          "x": 0.745,
+          "y": 0.461
         },
         {
           "id": "gg-scout-4-6",
           "role": "scout",
           "linkedTo": "",
-          "t": 9.267,
-          "x": 0.707,
-          "y": 0.507
+          "t": 9.083,
+          "x": 0.691,
+          "y": 0.505
         },
         {
           "id": "gg-scout-4-6",
           "role": "scout",
           "linkedTo": "",
-          "t": 9.6,
-          "x": 0.643,
-          "y": 0.555
+          "t": 9.45,
+          "x": 0.617,
+          "y": 0.554
         },
         {
           "id": "gg-scout-4-6",
           "role": "scout",
           "linkedTo": "",
-          "t": 9.933,
-          "x": 0.593,
-          "y": 0.608
+          "t": 9.817,
+          "x": 0.585,
+          "y": 0.607
         },
         {
           "id": "gg-scout-4-6",
           "role": "scout",
           "linkedTo": "",
-          "t": 10.267,
-          "x": 0.595,
+          "t": 10.183,
+          "x": 0.63,
           "y": 0.664
         },
         {
           "id": "gg-scout-4-6",
           "role": "scout",
           "linkedTo": "",
-          "t": 10.6,
-          "x": 0.657,
-          "y": 0.724
+          "t": 10.55,
+          "x": 0.738,
+          "y": 0.725
         },
         {
           "id": "gg-scout-4-6",
           "role": "scout",
           "linkedTo": "",
-          "t": 10.933,
-          "x": 0.756,
-          "y": 0.788
+          "t": 10.917,
+          "x": 0.852,
+          "y": 0.789
+        }
+      ]
+    },
+    {
+      "id": "gg-escort-1-5",
+      "role": "escort",
+      "linkedTo": "gg-flagship-0-5",
+      "sampleCount": 140,
+      "startSeconds": 8.717,
+      "endSeconds": 11.033,
+      "durationSeconds": 2.316,
+      "xSpan": 0.332,
+      "ySpan": 0.456,
+      "descent": 0.456,
+      "first": {
+        "x": 0.498,
+        "y": 0.422
+      },
+      "last": {
+        "x": 0.709,
+        "y": 0.878
+      },
+      "sampledPoints": [
+        {
+          "id": "gg-escort-1-5",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 8.717,
+          "x": 0.498,
+          "y": 0.422
+        },
+        {
+          "id": "gg-escort-1-5",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 9,
+          "x": 0.535,
+          "y": 0.469
+        },
+        {
+          "id": "gg-escort-1-5",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 9.283,
+          "x": 0.611,
+          "y": 0.519
+        },
+        {
+          "id": "gg-escort-1-5",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 9.567,
+          "x": 0.705,
+          "y": 0.571
+        },
+        {
+          "id": "gg-escort-1-5",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 9.85,
+          "x": 0.785,
+          "y": 0.625
+        },
+        {
+          "id": "gg-escort-1-5",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 10.133,
+          "x": 0.827,
+          "y": 0.682
+        },
+        {
+          "id": "gg-escort-1-5",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 10.417,
+          "x": 0.821,
+          "y": 0.741
+        },
+        {
+          "id": "gg-escort-1-5",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 10.7,
+          "x": 0.777,
+          "y": 0.802
+        }
+      ]
+    },
+    {
+      "id": "gg-escort-1-6",
+      "role": "escort",
+      "linkedTo": "gg-flagship-0-5",
+      "sampleCount": 140,
+      "startSeconds": 8.717,
+      "endSeconds": 11.033,
+      "durationSeconds": 2.316,
+      "xSpan": 0.332,
+      "ySpan": 0.456,
+      "descent": 0.456,
+      "first": {
+        "x": 0.577,
+        "y": 0.42
+      },
+      "last": {
+        "x": 0.787,
+        "y": 0.876
+      },
+      "sampledPoints": [
+        {
+          "id": "gg-escort-1-6",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 8.717,
+          "x": 0.577,
+          "y": 0.42
+        },
+        {
+          "id": "gg-escort-1-6",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 9,
+          "x": 0.613,
+          "y": 0.468
+        },
+        {
+          "id": "gg-escort-1-6",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 9.283,
+          "x": 0.69,
+          "y": 0.517
+        },
+        {
+          "id": "gg-escort-1-6",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 9.567,
+          "x": 0.783,
+          "y": 0.569
+        },
+        {
+          "id": "gg-escort-1-6",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 9.85,
+          "x": 0.863,
+          "y": 0.623
+        },
+        {
+          "id": "gg-escort-1-6",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 10.133,
+          "x": 0.905,
+          "y": 0.68
+        },
+        {
+          "id": "gg-escort-1-6",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 10.417,
+          "x": 0.9,
+          "y": 0.739
+        },
+        {
+          "id": "gg-escort-1-6",
+          "role": "escort",
+          "linkedTo": "gg-flagship-0-5",
+          "t": 10.7,
+          "x": 0.856,
+          "y": 0.801
         }
       ]
     },
@@ -582,85 +582,85 @@
       "id": "gg-flagship-0-5",
       "role": "flagship",
       "linkedTo": "",
-      "sampleCount": 131,
-      "startSeconds": 8.767,
-      "endSeconds": 10.933,
-      "durationSeconds": 2.166,
-      "xSpan": 0.31,
-      "ySpan": 0.456,
-      "descent": 0.456,
+      "sampleCount": 142,
+      "startSeconds": 8.983,
+      "endSeconds": 11.333,
+      "durationSeconds": 2.35,
+      "xSpan": 0.299,
+      "ySpan": 0.457,
+      "descent": 0.457,
       "first": {
-        "x": 0.54,
+        "x": 0.571,
         "y": 0.422
       },
       "last": {
-        "x": 0.754,
-        "y": 0.878
+        "x": 0.709,
+        "y": 0.879
       },
       "sampledPoints": [
         {
           "id": "gg-flagship-0-5",
           "role": "flagship",
           "linkedTo": "",
-          "t": 8.767,
-          "x": 0.54,
+          "t": 8.983,
+          "x": 0.571,
           "y": 0.422
         },
         {
           "id": "gg-flagship-0-5",
           "role": "flagship",
           "linkedTo": "",
-          "t": 9.033,
-          "x": 0.579,
-          "y": 0.47
+          "t": 9.267,
+          "x": 0.645,
+          "y": 0.469
         },
         {
           "id": "gg-flagship-0-5",
           "role": "flagship",
           "linkedTo": "",
-          "t": 9.3,
-          "x": 0.649,
-          "y": 0.519
-        },
-        {
-          "id": "gg-flagship-0-5",
-          "role": "flagship",
-          "linkedTo": "",
-          "t": 9.567,
-          "x": 0.731,
-          "y": 0.572
+          "t": 9.55,
+          "x": 0.738,
+          "y": 0.517
         },
         {
           "id": "gg-flagship-0-5",
           "role": "flagship",
           "linkedTo": "",
           "t": 9.833,
-          "x": 0.803,
-          "y": 0.626
+          "x": 0.82,
+          "y": 0.568
         },
         {
           "id": "gg-flagship-0-5",
           "role": "flagship",
           "linkedTo": "",
-          "t": 10.1,
-          "x": 0.844,
-          "y": 0.683
+          "t": 10.117,
+          "x": 0.865,
+          "y": 0.622
         },
         {
           "id": "gg-flagship-0-5",
           "role": "flagship",
           "linkedTo": "",
-          "t": 10.367,
-          "x": 0.846,
-          "y": 0.743
+          "t": 10.4,
+          "x": 0.862,
+          "y": 0.678
         },
         {
           "id": "gg-flagship-0-5",
           "role": "flagship",
           "linkedTo": "",
-          "t": 10.633,
-          "x": 0.812,
-          "y": 0.805
+          "t": 10.683,
+          "x": 0.82,
+          "y": 0.736
+        },
+        {
+          "id": "gg-flagship-0-5",
+          "role": "flagship",
+          "linkedTo": "",
+          "t": 10.967,
+          "x": 0.761,
+          "y": 0.797
         }
       ]
     },
@@ -668,19 +668,19 @@
       "id": "gg-scout-3-8",
       "role": "scout",
       "linkedTo": "",
-      "sampleCount": 156,
-      "startSeconds": 11.167,
-      "endSeconds": 13.75,
-      "durationSeconds": 2.583,
-      "xSpan": 0.313,
-      "ySpan": 0.457,
-      "descent": 0.457,
+      "sampleCount": 170,
+      "startSeconds": 10.85,
+      "endSeconds": 13.667,
+      "durationSeconds": 2.817,
+      "xSpan": 0.334,
+      "ySpan": 0.458,
+      "descent": 0.458,
       "first": {
-        "x": 0.855,
-        "y": 0.422
+        "x": 0.853,
+        "y": 0.421
       },
       "last": {
-        "x": 1.02,
+        "x": 1.019,
         "y": 0.879
       },
       "sampledPoints": [
@@ -688,65 +688,65 @@
           "id": "gg-scout-3-8",
           "role": "scout",
           "linkedTo": "",
-          "t": 11.167,
-          "x": 0.855,
-          "y": 0.422
+          "t": 10.85,
+          "x": 0.853,
+          "y": 0.421
         },
         {
           "id": "gg-scout-3-8",
           "role": "scout",
           "linkedTo": "",
-          "t": 11.483,
-          "x": 0.81,
+          "t": 11.2,
+          "x": 0.787,
           "y": 0.465
         },
         {
           "id": "gg-scout-3-8",
           "role": "scout",
           "linkedTo": "",
-          "t": 11.8,
-          "x": 0.748,
+          "t": 11.55,
+          "x": 0.723,
           "y": 0.513
         },
         {
           "id": "gg-scout-3-8",
           "role": "scout",
           "linkedTo": "",
-          "t": 12.117,
+          "t": 11.9,
           "x": 0.71,
-          "y": 0.563
+          "y": 0.564
         },
         {
           "id": "gg-scout-3-8",
           "role": "scout",
           "linkedTo": "",
-          "t": 12.433,
-          "x": 0.721,
-          "y": 0.617
+          "t": 12.25,
+          "x": 0.768,
+          "y": 0.619
         },
         {
           "id": "gg-scout-3-8",
           "role": "scout",
           "linkedTo": "",
-          "t": 12.75,
-          "x": 0.786,
-          "y": 0.675
+          "t": 12.6,
+          "x": 0.876,
+          "y": 0.678
         },
         {
           "id": "gg-scout-3-8",
           "role": "scout",
           "linkedTo": "",
-          "t": 13.067,
-          "x": 0.882,
-          "y": 0.736
+          "t": 12.95,
+          "x": 0.982,
+          "y": 0.74
         },
         {
           "id": "gg-scout-3-8",
           "role": "scout",
           "linkedTo": "",
-          "t": 13.383,
-          "x": 0.971,
-          "y": 0.8
+          "t": 13.3,
+          "x": 1.037,
+          "y": 0.806
         }
       ]
     },
@@ -754,85 +754,85 @@
       "id": "gg-scout-2-2",
       "role": "scout",
       "linkedTo": "",
-      "sampleCount": 49,
-      "startSeconds": 13.2,
+      "sampleCount": 71,
+      "startSeconds": 12.833,
       "endSeconds": 14,
-      "durationSeconds": 0.8,
-      "xSpan": 0.087,
-      "ySpan": 0.128,
-      "descent": 0.128,
+      "durationSeconds": 1.167,
+      "xSpan": 0.12,
+      "ySpan": 0.176,
+      "descent": 0.176,
       "first": {
-        "x": 0.271,
-        "y": 0.422
+        "x": 0.295,
+        "y": 0.42
       },
       "last": {
-        "x": 0.351,
-        "y": 0.55
+        "x": 0.239,
+        "y": 0.596
       },
       "sampledPoints": [
         {
           "id": "gg-scout-2-2",
           "role": "scout",
           "linkedTo": "",
-          "t": 13.2,
-          "x": 0.271,
-          "y": 0.422
+          "t": 12.833,
+          "x": 0.295,
+          "y": 0.42
         },
         {
           "id": "gg-scout-2-2",
           "role": "scout",
           "linkedTo": "",
-          "t": 13.3,
-          "x": 0.291,
-          "y": 0.437
+          "t": 12.967,
+          "x": 0.321,
+          "y": 0.438
         },
         {
           "id": "gg-scout-2-2",
           "role": "scout",
           "linkedTo": "",
-          "t": 13.4,
-          "x": 0.31,
-          "y": 0.452
+          "t": 13.1,
+          "x": 0.342,
+          "y": 0.457
+        },
+        {
+          "id": "gg-scout-2-2",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 13.233,
+          "x": 0.355,
+          "y": 0.476
+        },
+        {
+          "id": "gg-scout-2-2",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 13.367,
+          "x": 0.359,
+          "y": 0.496
         },
         {
           "id": "gg-scout-2-2",
           "role": "scout",
           "linkedTo": "",
           "t": 13.5,
-          "x": 0.328,
-          "y": 0.467
-        },
-        {
-          "id": "gg-scout-2-2",
-          "role": "scout",
-          "linkedTo": "",
-          "t": 13.6,
-          "x": 0.342,
-          "y": 0.483
-        },
-        {
-          "id": "gg-scout-2-2",
-          "role": "scout",
-          "linkedTo": "",
-          "t": 13.7,
           "x": 0.352,
-          "y": 0.5
-        },
-        {
-          "id": "gg-scout-2-2",
-          "role": "scout",
-          "linkedTo": "",
-          "t": 13.8,
-          "x": 0.357,
           "y": 0.516
         },
         {
           "id": "gg-scout-2-2",
           "role": "scout",
           "linkedTo": "",
-          "t": 13.9,
-          "x": 0.357,
-          "y": 0.533
+          "t": 13.633,
+          "x": 0.334,
+          "y": 0.537
+        },
+        {
+          "id": "gg-scout-2-2",
+          "role": "scout",
+          "linkedTo": "",
+          "t": 13.767,
+          "x": 0.306,
+          "y": 0.558
         }
       ]
     }

@@ -29,6 +29,16 @@ authority machine, promote it through hosted `/beta`, and then refresh hosted
 `/production` without pretending this was the same kind of public jump as the
 original `1.3.0` fidelity-and-second-cabinet release.
 
+Retrospective versioning note:
+
+- this same-family production refresh is now treated as an exception rather
+  than the preferred production model
+- a future production bundle with this much game-quality, conformance,
+  ingestion, and release-surface movement should normally publish as at least a
+  new `PATCH` release
+- if the public release story itself changes materially, it should instead cut
+  the next `MINOR` family
+
 What is now live in the refreshed public line:
 
 - provenance-backed public docs and guides

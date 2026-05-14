@@ -51,6 +51,7 @@ const REQUIRED_SOURCE_DOCS = [
 
 const USER_VISIBLE_DOC_FILES = [
   'public-project-page.html',
+  'release-notes.html',
   'project-guide.html',
   'application-guide.html',
   'platinum-guide.html',
@@ -78,6 +79,15 @@ const USER_VISIBLE_SECTIONS = [
       'documentation-provenance.json',
       'Persistent Inputs',
       'release-conformance-dashboard/latest.json'
+    ]
+  },
+  {
+    id: 'release-notes-archive',
+    file: 'release-notes.html',
+    requiredText: [
+      'Aurora / Platinum Release Notes',
+      'release-notes.json',
+      'Back to release dashboard'
     ]
   },
   {
@@ -233,6 +243,7 @@ function checkPublicProjectTemplate(){
     '{{LANE_GAME_HREF}}',
     '{{BETA_BUILD_HREF}}',
     '{{LANE_RELEASE_DASHBOARD_HREF}}',
+    '{{LANE_RELEASE_NOTES_HREF}}',
     '{{LANE_CONFORMANCE_DASHBOARD_HREF}}',
     '{{LANE_CONFORMANCE_DATA_HREF}}',
     '{{LANE_PROJECT_GUIDE_HREF}}',

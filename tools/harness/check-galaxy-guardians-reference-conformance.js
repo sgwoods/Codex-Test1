@@ -8,6 +8,10 @@ const CANDIDATE = 'reference-artifacts/analyses/galaxy-guardians-identity/candid
 const REFERENCE_PROFILE = 'reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json';
 const PROMOTED_LOG = 'reference-artifacts/analyses/galaxian-reference/promoted-event-log.json';
 const PACKAGE_JSON = 'package.json';
+const VALID_STATUSES = new Set([
+  'preview-reference-conformance-model-not-production-release-score',
+  'dev-preview-reference-conformance-model-not-public-release-score'
+]);
 
 function fail(message, payload){
   console.error(message);
@@ -76,7 +80,7 @@ function main(){
   if(artifact.gameKey !== 'galaxy-guardians-preview' || candidate.gameKey !== artifact.gameKey){
     fail('Guardians reference conformance artifact is not linked to the preview candidate', payload);
   }
-  if(artifact.status !== 'dev-preview-reference-conformance-model-not-public-release-score'){
+  if(!VALID_STATUSES.has(artifact.status)){
     fail('Guardians reference conformance artifact has the wrong status', payload);
   }
   if(referenceProfile.application_target !== artifact.gameKey || promotedLog.application_target !== artifact.gameKey){

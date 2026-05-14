@@ -72,10 +72,13 @@ function updateMovieControls(){
  syncMovieBuildStamp();
 }
 function syncMovieBuildStamp(){
+ const replayGameTitle=typeof scoreRowGameTitle==='function'
+  ? scoreRowGameTitle(MOVIE.current||{})
+  : String(MOVIE.current?.gameTitle||'').trim()||'Replay';
  window.__platinumBuildStampOverride=MOVIE.panelOpen&&MOVIE.current?{
-  channel:`Replay Stage ${String(MOVIE.current.stage||0).padStart(2,'0')}`,
+  channel:`${replayGameTitle} Replay`,
   version:`Score ${formatScore(MOVIE.current.score||0)}   Length ${movieDurationLabel(MOVIE.current.duration||0)}`,
-  release:`${movieDurationLabel(movieVideo.currentTime||0)} / ${movieDurationLabel(Number.isFinite(movieVideo.duration)?movieVideo.duration:(MOVIE.current.duration||0))}   •   ${movieAgeLabel(MOVIE.current.createdAt)}`
+  release:`STG ${String(MOVIE.current.stage||0).padStart(2,'0')}   ${movieDurationLabel(movieVideo.currentTime||0)} / ${movieDurationLabel(Number.isFinite(movieVideo.duration)?movieVideo.duration:(MOVIE.current.duration||0))}   •   ${movieAgeLabel(MOVIE.current.createdAt)}`
  }:null;
  window.__auroraBuildStampOverride=window.__platinumBuildStampOverride;
  if(typeof syncBuildStampUi==='function')syncBuildStampUi();
@@ -84,8 +87,11 @@ function updateMovieTimeline(){
  const duration=Number.isFinite(movieVideo.duration)?movieVideo.duration:(MOVIE.current?.duration||0);
  movieTimeline.max=duration||0;
  movieTimeline.value=movieVideo.currentTime||0;
+ const replayGameTitle=typeof scoreRowGameTitle==='function'
+  ? scoreRowGameTitle(MOVIE.current||{})
+  : String(MOVIE.current?.gameTitle||'').trim()||'Replay';
   const meta=MOVIE.current
-  ? `STG ${String(MOVIE.current.stage||0).padStart(2,'0')}   ${movieDurationLabel(movieVideo.currentTime||0)} / ${movieDurationLabel(duration)}`
+  ? `${replayGameTitle}   STG ${String(MOVIE.current.stage||0).padStart(2,'0')}   ${movieDurationLabel(movieVideo.currentTime||0)} / ${movieDurationLabel(duration)}`
   : '';
  moviePlaybackMeta.textContent=meta;
  syncMovieBuildStamp();
@@ -98,7 +104,10 @@ function renderMovieRuns(){
   movieRunSelect.value='';
   return;
  }
- movieRunSelect.innerHTML=MOVIE.runs.map(run=>`<option value="${run.id}">STG ${String(run.stage||0).padStart(2,'0')} · ${formatScore(run.score||0)} · ${movieDurationLabel(run.duration||0)} · ${movieAgeLabel(run.createdAt)}</option>`).join('');
+ movieRunSelect.innerHTML=MOVIE.runs.map(run=>{
+  const label=typeof scoreRowGameTitle==='function'?scoreRowGameTitle(run):String(run?.gameTitle||'').trim()||'Replay';
+  return `<option value="${run.id}">${label} · STG ${String(run.stage||0).padStart(2,'0')} · ${formatScore(run.score||0)} · ${movieDurationLabel(run.duration||0)} · ${movieAgeLabel(run.createdAt)}</option>`;
+ }).join('');
  movieRunSelect.value=MOVIE.pendingId||MOVIE.selectedId||MOVIE.runs[0].id;
 }
 function publishReplayCatalog(){

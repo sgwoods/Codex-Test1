@@ -85,7 +85,9 @@ Current proof points:
   - hosted `/beta`
   - hosted `/production`
 - the shell supports pack selection and pack-owned framing accents
-- `Galaxy Guardians` exists as a preview-only second-game sneak peek on top of the same platform
+- `Galaxy Guardians` exists as a preview-first second-game slice on top of the
+  same platform, with the next post-production branch now targeting a minimally
+  complete one-level playable game
 - the second-game preview content is now pack-owned instead of hardcoded into
   the shell surface
 - platform-only harnesses exist alongside Aurora gameplay harnesses
@@ -185,9 +187,9 @@ Current application set:
   - first shipped playable application
   - owns game rules, scoring, challenge cadence, capture and rescue, stage flow, and Aurora-branded content
 - `Galaxy Guardians`
-  - current preview-first application shell
-  - useful for proving the pack-selection path, preview-modal contract, alternate
-    shell identity, and safe launch fallback without pretending gameplay exists yet
+  - current preview-first application shell on the shipped line
+  - next branch target: a minimally complete one-level playable game with its
+    own score identity, ending flow, and platform-validation value
 
 The application-side separation is documented in:
 

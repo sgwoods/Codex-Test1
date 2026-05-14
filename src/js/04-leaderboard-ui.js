@@ -3,7 +3,7 @@
 function renderPilotFlightStats(rows,signedIn){
  if(!accountFlightStats)return;
  if(!rows.length){
-  accountFlightStats.innerHTML='<div class="accountRecordEmpty">No flights logged yet. Finish a run to start this pilot record.</div>';
+  accountFlightStats.innerHTML=`<div class="accountRecordEmpty">No ${currentScoreStorageGameTitle()} flights logged yet. Finish a run to start this pilot record.</div>`;
   return;
  }
  const latest=[...rows]
@@ -25,7 +25,7 @@ function renderPilotFlightStats(rows,signedIn){
 function renderPilotRecords(rows){
  if(!accountRecordsTop5)return;
  if(!rows.length){
-  accountRecordsTop5.innerHTML='<div class="accountRecordEmpty">Top runs appear here after this pilot logs a game.</div>';
+  accountRecordsTop5.innerHTML=`<div class="accountRecordEmpty">Top ${currentScoreStorageGameTitle()} runs appear here after this pilot logs a game.</div>`;
   return;
  }
  const topRows=[...rows]
@@ -34,11 +34,12 @@ function renderPilotRecords(rows){
   .slice(0,5);
  const replayForRow=(row)=>{
   const runs=replayCatalogRows();
+  const rowGameKey=typeof scoreRowGameKey==='function'?scoreRowGameKey(row):currentScoreStorageGameKey();
   if(row?.replayId){
    const directRun=runs.find(run=>String(run.id||'')===String(row.replayId||''));
-   if(directRun)return directRun;
+   if(directRun&&(typeof scoreRowMatchesGame!=='function'||scoreRowMatchesGame(directRun,rowGameKey)))return directRun;
   }
-  const pilotMatchedRuns=runs.filter(run=>replayMatchesActivePilot(run));
+  const pilotMatchedRuns=runs.filter(run=>replayMatchesActivePilot(run)&&(typeof scoreRowMatchesGame!=='function'||scoreRowMatchesGame(run,rowGameKey)));
   const runPool=pilotMatchedRuns.length?pilotMatchedRuns:runs;
   const rowScore=+row.score||0;
   const rowStage=+row.stage||0;
@@ -91,11 +92,12 @@ function renderPilotRecords(rows){
  accountRecordsTop5.querySelectorAll('.accountRecordRow.hasReplay').forEach(node=>bindReplayAction(node,{row:true}));
 }
 function currentLeaderboardTitle(view=LEADERBOARD.view){
+ const gameTitle=String(currentScoreStorageGameTitle()||'Current Cabinet').toUpperCase();
  switch(view){
-  case 'validated': return 'VALIDATED PILOTS';
-  case 'mine': return LEADERBOARD.user?'MY SCORES':'MY SCORES · LOCAL';
-  case 'local': return 'LOCAL TOP 10 DEVICE SCORES';
-  default: return 'TOP 10 PILOTS';
+  case 'validated': return `${gameTitle} VALIDATED PILOTS`;
+  case 'mine': return LEADERBOARD.user?`${gameTitle} MY SCORES`:`${gameTitle} MY SCORES · LOCAL`;
+  case 'local': return `${gameTitle} LOCAL TOP 10 DEVICE SCORES`;
+  default: return `${gameTitle} TOP 10 PILOTS`;
  }
 }
 function latestCompletedLocalScoreRow(){
@@ -106,8 +108,9 @@ function leaderboardRowsForView(view=LEADERBOARD.view){
  if(view==='local')return localLeaderboardRows();
  if(view==='mine'&&!remoteAuthEnabled())return localLeaderboardRows();
  if(view==='mine'&&!LEADERBOARD.user)return localLeaderboardRows();
- const rows=LEADERBOARD.remote[view]||[];
+ const rows=(LEADERBOARD.remote[view]||[]).filter(row=>typeof scoreRowMatchesGame==='function'?scoreRowMatchesGame(row):true);
  if(rows.length)return rows;
+ if((LEADERBOARD.remote[view]||[]).length)return localLeaderboardRows();
  if((view==='validated'||view==='mine')&&(LEADERBOARD.lastRemoteOk||LEADERBOARD.cacheStamp[view]))return [];
  return localLeaderboardRows();
 }
@@ -117,6 +120,7 @@ function leaderboardStatusLabel(view,mode='ready'){
  if(mode==='cached')return view==='validated'?'Validated scores cached · refreshing':view==='mine'?'My scores cached · refreshing':'Shared scores cached · refreshing';
  if(mode==='signed_out')return remoteAuthEnabled()?'Sign in required · showing local':'Pilot account disabled in this lane · showing local';
  if(mode==='local')return 'Local top 10 on this device · completed runs only';
+ if(typeof scoreGameSupportsSharedRemote==='function'&&!scoreGameSupportsSharedRemote())return `${currentScoreStorageGameTitle()} scores stay local while game-owned online tables are pending.`;
  if(!remoteWriteEnabled())return view==='validated'?'Validated scores mirrored read-only':view==='mine'?'Pilot account disabled in this lane':'Production scores mirrored read-only';
  return view==='validated'?'Validated leaderboard live':view==='mine'?'My scores live':'Shared leaderboard live';
 }

@@ -31,6 +31,9 @@ Current artifacts:
 - `candidate-0.1.json` - aggregate 0.1 candidate gate tying the identity,
   movement, threat, visual, audio, runtime-event, and public-boundary
   requirements together.
+- `tools/harness/check-galaxy-guardians-first-class-conformance.js` -
+  aggregate first-class-conformance process gate that verifies the core Galaxy
+  artifacts, docs, and harness-family parity stay in sync.
 - `formation-entry-0.1.json` - first runtime entry/settle contract for the
   promoted Galaxian `formation_entry_start`, `formation_entry_settle`, and
   `formation_rack_complete` events.
@@ -46,6 +49,9 @@ Current artifacts:
 - `playtest-conformance-review-0.1.json` - playtest-weighted score layer that
   records the current audio, motion, and graphics gaps separately from
   evidence-coverage scoring so beta-facing preview decisions stay honest.
+- `long-surface-conformance-0.1.json` - longer-surface and persona review layer
+  that scores stage-band pressure, stage-presentation progression, deterministic
+  review personas, and the current midrun survivability gap.
 - `quick-peek-source-fidelity-0.2.json` - playtest-driven quick-peek
   recalibration that moves timing, pacing, rack footprint, backdrop, and sprites
   closer to the Galaxian reference sheets while preserving the need for future
@@ -58,10 +64,11 @@ Current artifacts:
   comparison that tuned the dev-preview dive speed, lateral span, and wrap
   pressure from the object-track proxy.
 - `score-progression-0.1.json` - first score-advance table, mission-language,
-  wave-clear, and stage-advance contract for the dev-only playable preview.
+  wave-clear, and one-level mission-complete contract for the playable preview.
 - `stage-rank-pressure-0.1.json` - bounded multi-stage pressure contract that
-  preserves the measured stage-one timing while making stages three and five
-  measurably faster and denser for dives, shots, drift, and wrap pressure.
+  preserves the measured stage-one timing while making stages three, five,
+  seven, nine, and eleven measurably faster and denser for dives, shots, drift,
+  and wrap pressure.
 - `sprite-grid-targets-0.1.json` - broad downsampled crop-grid target scaffold
   for flagship, escort, scout, and player silhouettes. These grids are not final
   exact sprites; they guide the next tighter component-crop pass.

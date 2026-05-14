@@ -330,6 +330,27 @@ function html(data, options = {}){
     .statusLine{margin-top:10px;color:var(--muted);font-size:13px}
     .dirty{color:var(--red)}
     .clean{color:var(--green)}
+    .compareGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin:0 0 14px}
+    .compareCard{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:8px;
+      padding:12px;
+      box-shadow:var(--shadow);
+      display:grid;
+      gap:8px;
+    }
+    .compareMeta{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:8px;
+    }
+    .compareActions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:2px;
+    }
     @media (max-width:980px){
       header{grid-template-columns:1fr}
       .controls{justify-content:flex-start}
@@ -379,9 +400,11 @@ function html(data, options = {}){
     const statusLine = document.getElementById('statusLine');
     let dashboard = JSON.parse(document.getElementById('initial-data').textContent);
     let lastRefresh = Date.now();
+    const locationUrl = new URL(location.href);
+    const requestedGameKey = String(locationUrl.searchParams.get('game') || '').trim();
     let activeTab = ['conformance', 'cost', 'ingestion'].includes(location.hash.replace('#', '')) ? location.hash.replace('#', '') : 'conformance';
     let activeDetail = null;
-    let activeGameKey = localStorage.getItem('platinumConformanceDashboardGame') || dashboard.activeGameKey || 'aurora-galactica';
+    let activeGameKey = requestedGameKey || localStorage.getItem('platinumConformanceDashboardGame') || dashboard.activeGameKey || 'aurora-galactica';
     const refreshMs = 30000;
     const dataHref = ${JSON.stringify(dataHref)};
     const artifactBase = ${JSON.stringify(artifactBase)};
@@ -482,6 +505,22 @@ function html(data, options = {}){
       }
     }
 
+    function syncLocationState(){
+      const nextUrl = new URL(location.href);
+      if(activeGameKey) nextUrl.searchParams.set('game', activeGameKey);
+      else nextUrl.searchParams.delete('game');
+      nextUrl.hash = activeTab ? '#' + activeTab : '';
+      history.replaceState(null, '', nextUrl.pathname + nextUrl.search + nextUrl.hash);
+    }
+
+    function gameShareHref(gameKey){
+      const nextUrl = new URL(location.href);
+      if(gameKey) nextUrl.searchParams.set('game', gameKey);
+      else nextUrl.searchParams.delete('game');
+      nextUrl.hash = '#conformance';
+      return nextUrl.pathname + nextUrl.search + nextUrl.hash;
+    }
+
     function explanationBlock(label, value){
       return '<div class="explainBlock"><span class="explainLabel">' + esc(label) + '</span>' + esc(value || 'Not yet documented for this metric.') + '</div>';
     }
@@ -520,6 +559,32 @@ function html(data, options = {}){
         + '<button class="tab ' + (activeTab === 'cost' ? 'active' : '') + '" type="button" data-tab="cost" role="tab" aria-selected="' + (activeTab === 'cost') + '">Cost / Value</button>'
         + '<button class="tab ' + (activeTab === 'ingestion' ? 'active' : '') + '" type="button" data-tab="ingestion" role="tab" aria-selected="' + (activeTab === 'ingestion') + '">Ingestion</button>'
         + '</div>';
+    }
+
+    function compareCards(){
+      const games = gameProfiles();
+      if(!games.length) return '';
+      return '<section id="compare-games"><h2>Aurora And Guardians At A Glance</h2><div class="compareGrid">' + games.map(game => {
+        const rows = Array.isArray(game.priorityRows) ? game.priorityRows : [];
+        const gates = Array.isArray(game.releaseGate) ? game.releaseGate : [];
+        const overall = gates.find(gate => gate.Gate === 'Overall quality');
+        const previewOverall = gates.find(gate => /reference conformance|playtest-weighted/i.test(gate.Gate || ''));
+        const weakest = rows
+          .filter(row => Number.isFinite(Number(row.score10)))
+          .sort((a, b) => Number(a.score10) - Number(b.score10))[0] || null;
+        const isActive = game.gameKey === activeGameKey;
+        return '<article class="compareCard">'
+          + '<div><span class="label">Game</span><span class="value">' + esc(game.gameName || game.gameKey || 'Unknown game') + '</span><div class="small">' + esc(game.gameStatus || 'Conformance profile') + '</div></div>'
+          + '<div class="compareMeta">'
+          + '<div><span class="label">Overall</span><div class="score ' + scoreClass(overall?.Current || previewOverall?.Current) + '">' + esc(overall?.Current || previewOverall?.Current || '--') + '</div></div>'
+          + '<div><span class="label">Weakest Gap</span><div class="small">' + esc(weakest?.metric || 'No scored gap yet') + '</div><div class="score ' + scoreClass(weakest?.score10) + '">' + esc(weakest?.current || '--') + '</div></div>'
+          + '</div>'
+          + '<div class="small">' + esc(game.currentInvestment || game.releaseRead || 'No current investment summary yet.') + '</div>'
+          + '<div class="compareActions">'
+          + '<a class="button" href="' + esc(gameShareHref(game.gameKey || '')) + '">' + (isActive ? 'Current view' : 'Open this game') + '</a>'
+          + '</div>'
+          + '</article>';
+      }).join('') + '</div></section>';
     }
 
     function rowDetailKey(type, index){
@@ -780,6 +845,7 @@ function html(data, options = {}){
       const primaryGap = audio || weakest;
       const semantics = data.scoreSemantics || {};
       const economics = data.economicsSummary || {};
+      syncLocationState();
       app.innerHTML = \`
         <div class="grid">
           <div class="card"><span class="label">Selected Game</span><span class="value">\${esc(data.gameName || 'Current game')}</span><div class="small">\${esc(data.gameStatus || 'Conformance profile')}</div></div>
@@ -788,6 +854,7 @@ function html(data, options = {}){
           <div class="card"><span class="label">Level / Primary Arc</span><span class="value \${scoreClass(level?.score10 || weakest?.score10)}">\${esc(level?.current || weakest?.current || '--')}</span><div class="small">\${esc(level ? 'Encounter shape and escalation' : (weakest?.metric || 'Awaiting scored metric'))}</div></div>
           <div class="card"><span class="label">Tracked Compute</span><span class="value">\${esc(economics.measuredRuns || 0)} runs</span><div class="small">\${esc(Math.round((economics.wallSeconds || 0) / 60))} min wall / \${esc(Math.round((economics.cpuSeconds || 0) / 60))} min CPU</div></div>
         </div>
+        \${compareCards()}
         \${dashboardTabs()}
         \${activeTab === 'ingestion' ? ingestionView(data) : activeTab === 'cost' ? costView(data, rows) : conformanceView(data, rows, gates, semantics)}
       \`;

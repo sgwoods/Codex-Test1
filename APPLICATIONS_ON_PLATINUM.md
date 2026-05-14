@@ -34,7 +34,9 @@ Aurora should remain the reference application when we ask:
 ### Galaxy Guardians
 
 `Galaxy Guardians` is currently a preview-first second-game application and
-sneak peek.
+sneak peek on the shipped line, while the active post-production iMac branch
+now targets it as both a minimally complete one-level playable game and a
+first-class conformance target.
 
 Right now it proves:
 
@@ -69,6 +71,17 @@ It does not yet prove:
 
 That is intentional.
 
+Current branch-level next step:
+
+- [GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md](GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md)
+- [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md)
+- [GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md](GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md)
+- own scores and pilot/replay identity
+- proper one-level completion and game-over endings
+- enough completeness to validate Platinum changes against two real games
+- keep the aggregate first-class conformance gate green:
+  `npm run harness:check:galaxy-guardians-first-class-conformance`
+
 ## Application Responsibilities
 
 A Platinum application should own:
@@ -82,6 +95,8 @@ A Platinum application should own:
 - its own version line and changelog
 - its own conformance artifacts and readiness gates
 - its own harnesses for game behavior
+- its own longer-surface review logic when the game grows beyond a single
+  playable slice
 - optional shell preferences that remain within the platform shell contract
 
 A Platinum application should not own:
@@ -250,9 +265,10 @@ Near-term Aurora application work should now focus on:
 
 ### Galaxy Guardians next proof
 
-The current sneak peek is intentionally still production-non-playable. It
-should be used to keep the Platinum pack contract honest while the second game
-is still being specified.
+The current shipped sneak peek is intentionally still production-framed as a
+preview. On the new iMac post-production branch, the next proof is no longer
+"keep it preview-only." The next proof is to make it honestly playable as a
+minimal one-level game while still keeping the public maturity claim modest.
 
 The first non-production runtime slice is now underway as an application-owned
 model, not a public adapter. It creates a Galaxian-inspired scout-wave rack,
@@ -278,12 +294,27 @@ signal palette. The renderer is now registered through a Platinum game-board
 renderer registry, so the top-level render loop no longer branches on a
 specific game by name.
 
-The next application proof is maturing the first non-production playable slice.
-It now has the initial lifecycle path, but the behavior is still intentionally
-kept out of production until the measured 0.1 scout-wave evidence is stronger.
-The first aggregate 0.1 candidate gate is now source-controlled so future
-preview readiness claims can cite one durable artifact instead of reassembling
-the visual, audio, movement, threat, and boundary evidence from memory.
+The next application proof is maturing the first playable slice into a
+minimally complete game loop. That means the existing lifecycle path should now
+grow beyond preview-only framing and earn:
+
+- own score identity
+- proper completion ending
+- proper loss ending
+- clean restart and result behavior
+- platform validation value as a second real game
+- a readable first-class conformance target and review story rather than only a
+  scattered preview harness set
+
+The first aggregate 0.1 candidate gate is already source-controlled, so future
+playable claims can cite one durable artifact instead of reassembling the
+visual, audio, movement, threat, and boundary evidence from memory.
+
+That candidate gate is now paired with a first-class conformance target and
+aggregate parity check:
+
+- [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md)
+- `npm run harness:check:galaxy-guardians-first-class-conformance`
 
 - formation rack
 - dives

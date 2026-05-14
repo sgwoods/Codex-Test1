@@ -15,6 +15,7 @@
       "role": "flagship",
       "sourceCropFamily": "rack-upper-aliens",
       "sourceCrop": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/sprite-crops/rack-upper-aliens.jpg",
+      "sourceMode": "component-crop-target",
       "componentCrop": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-component-targets-0.1/signal-flagship.png",
       "sourceId": "matt-hawkins-arcade-intro",
       "windowId": "opening-rack-entry",
@@ -78,6 +79,7 @@
         ]
       },
       "silhouetteSimilarity": 1,
+      "reviewNote": "",
       "reviewStatus": "component-crop-target-needs-human-sprite-review"
     },
     {
@@ -85,6 +87,7 @@
       "role": "escort",
       "sourceCropFamily": "lower-field-divers",
       "sourceCrop": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/sprite-crops/lower-field-divers.jpg",
+      "sourceMode": "component-crop-target",
       "componentCrop": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-component-targets-0.1/signal-escort.png",
       "sourceId": "arcades-lounge-level-5",
       "windowId": "lower-field-dive-curves",
@@ -142,6 +145,7 @@
         ]
       },
       "silhouetteSimilarity": 1,
+      "reviewNote": "",
       "reviewStatus": "component-crop-target-needs-human-sprite-review"
     },
     {
@@ -149,29 +153,30 @@
       "role": "scout",
       "sourceCropFamily": "rack-upper-aliens",
       "sourceCrop": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/complete-rack-reference/sprite-crops/rack-upper-aliens.jpg",
+      "sourceMode": "component-crop-target",
       "componentCrop": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-component-targets-0.1/signal-scout.png",
       "sourceId": "nenriki-15-wave-session",
       "windowId": "complete-rack-reference",
       "cols": 7,
       "rows": 6,
       "componentBox": {
-        "x": 277,
+        "x": 276,
         "y": 0,
-        "w": 40,
+        "w": 41,
         "h": 46,
-        "pixels": 829,
-        "aspect": 0.87,
-        "fill": 0.451,
+        "pixels": 830,
+        "aspect": 0.891,
+        "fill": 0.44,
         "tokens": {
           "C": 288,
           "A": 503,
-          "W": 30,
+          "W": 31,
           "E": 8
         }
       },
       "extractedRows": [
-        ".CCCCC.",
-        "ACCCACA",
+        "..CCCC.",
+        "AACCACA",
         "AAAAAAA",
         ".WAAAA.",
         "...A...",
@@ -188,8 +193,8 @@
       "extractedMetrics": {
         "width": 7,
         "height": 6,
-        "filledPixels": 26,
-        "fillRatio": 0.619,
+        "filledPixels": 25,
+        "fillRatio": 0.595,
         "tokenChannels": [
           "A",
           "C",
@@ -207,7 +212,8 @@
           "W"
         ]
       },
-      "silhouetteSimilarity": 1,
+      "silhouetteSimilarity": 0.976,
+      "reviewNote": "",
       "reviewStatus": "component-crop-target-needs-human-sprite-review"
     },
     {
@@ -215,72 +221,78 @@
       "role": "player",
       "sourceCropFamily": "player-and-shot",
       "sourceCrop": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/player-single-shot-pressure/sprite-crops/player-and-shot.jpg",
+      "sourceMode": "manual-reviewed-component-override",
       "componentCrop": "reference-artifacts/analyses/galaxy-guardians-identity/sprite-component-targets-0.1/player-interceptor.png",
       "sourceId": "arcades-lounge-level-5",
       "windowId": "player-single-shot-pressure",
       "cols": 7,
       "rows": 7,
       "componentBox": {
-        "x": 176,
-        "y": 226,
-        "w": 72,
-        "h": 69,
-        "pixels": 3363,
-        "aspect": 1.043,
-        "fill": 0.677,
+        "x": 224,
+        "y": 79,
+        "w": 78,
+        "h": 67,
+        "pixels": 3257,
+        "aspect": 1.164,
+        "fill": 0.623,
         "tokens": {
-          "C": 787,
-          "E": 72,
-          "W": 2500,
-          "A": 4
+          "C": 3025,
+          "A": 139,
+          "W": 92,
+          "E": 1
         }
       },
       "extractedRows": [
-        "CWWCCCC",
-        "WWWCCWW",
-        "WWWCWWW",
-        "WWWCWWW",
-        "WWWCWWW",
-        "WWCCWWW",
-        "WW...WW"
+        "...A...",
+        "..ACA..",
+        ".WCCCW.",
+        "WCC.CCW",
+        ".WCFCW.",
+        "..FFF..",
+        ".A...A."
       ],
       "runtimeRows": [
-        "CWWCWWC",
-        "WWWCCWW",
-        "WWWCWWW",
-        "WWWCWWW",
-        "WWWCWWW",
-        "WWCCWWW",
-        "WW...WW"
+        "...A...",
+        "..ACA..",
+        ".WCCCW.",
+        "WCC.CCW",
+        ".WCFCW.",
+        "..FFF..",
+        ".A...A."
       ],
       "extractedMetrics": {
         "width": 7,
         "height": 7,
-        "filledPixels": 46,
-        "fillRatio": 0.939,
+        "filledPixels": 25,
+        "fillRatio": 0.51,
         "tokenChannels": [
+          "A",
           "C",
+          "F",
           "W"
         ]
       },
       "runtimeMetrics": {
         "width": 7,
         "height": 7,
-        "filledPixels": 46,
-        "fillRatio": 0.939,
+        "filledPixels": 25,
+        "fillRatio": 0.51,
         "tokenChannels": [
+          "A",
           "C",
+          "F",
           "W"
         ]
       },
       "silhouetteSimilarity": 1,
-      "reviewStatus": "component-crop-target-needs-human-sprite-review"
+      "reviewNote": "The player-and-shot crop still overfills the interceptor into a block, so the maintained component target keeps a reviewed ship silhouette until player-only source windows are isolated.",
+      "reviewStatus": "manual-reviewed-component-target"
     }
   ],
   "summary": {
     "targetCount": 4,
-    "averageSilhouetteSimilarity": 1,
-    "weakestTarget": "signal-flagship"
+    "averageSilhouetteSimilarity": 0.994,
+    "weakestTarget": "signal-scout"
   },
   "nextAuthoringStep": "Human-review the component crop PNGs, then tune pack-owned sprite rows against the accepted silhouette targets."
 }

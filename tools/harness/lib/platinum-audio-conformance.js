@@ -64,6 +64,8 @@ function loadPack(root, config){
   const source = path.join(root, config.packSource);
   const sandbox = {};
   sandbox.window = sandbox;
+  sandbox.buildPlatformInfo = () => ({ compatibility: '' });
+  sandbox.applicationReleaseRecord = (_gameKey, fallback = {}) => Object.assign({}, fallback || {});
   vm.createContext(sandbox);
   vm.runInContext(`${fs.readFileSync(source, 'utf8')}\nthis.__PACK__=${config.packGlobal};`, sandbox, { filename: source });
   return sandbox.__PACK__;

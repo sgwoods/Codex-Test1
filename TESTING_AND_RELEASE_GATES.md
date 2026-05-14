@@ -207,6 +207,40 @@ Harness work should also follow the project reference program:
 - fidelity changes should use measured reference artifacts where possible
 - platform/application seam changes should prove that the boundary still holds
 
+## Galaxy first-class parity
+
+`Galaxy Guardians` now has enough harness surface that we should treat it as a
+first-class parity program, not only as a preview experiment.
+
+That means every serious Galaxy review should preserve all three layers:
+
+1. ingestion and scored evidence
+- `npm run harness:check:galaxian-reference-profile`
+- `npm run harness:check:galaxy-guardians-reference-conformance`
+- `npm run harness:check:galaxy-guardians-playtest-conformance-review`
+
+2. gameplay/runtime completeness
+- `npm run harness:check:galaxy-guardians-runtime-slice`
+- `npm run harness:check:galaxy-guardians-score-progression`
+- `npm run harness:check:galaxy-guardians-threat-scoring`
+- `npm run harness:check:galaxy-guardians-playable-preview`
+- `npm run harness:check:galaxy-guardians-long-surface-conformance`
+
+3. audiovisual and boundary review
+- `npm run harness:check:galaxy-guardians-visual-readability`
+- `npm run harness:check:galaxy-guardians-audio-character`
+- `npm run harness:check:gameplay-adapter-boundaries`
+- `npm run harness:check:platinum-pack-boot`
+
+The standing aggregate process gate is:
+
+- `npm run harness:check:galaxy-guardians-first-class-conformance`
+
+That gate is intentionally broader than one gameplay check. It verifies that
+the Galaxy evidence stack, core docs, and harness family remain in sync with
+the maintained plan in
+[GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md).
+
 ## Ingestion And Conformance Rule
 
 For new-game work, the first serious gate should be game-owned reference
@@ -241,6 +275,12 @@ For a new game, the first playable slice should cite:
 If a release candidate includes a new or materially changed game behavior, its
 release notes and dashboard should identify which ingestion package or
 correspondence artifact grounds the claim.
+
+For Galaxy specifically, first-class application review should also preserve:
+
+- a playtest-weighted review that can remain stricter than the evidence score
+- game-owned score/progression/result contracts
+- browser/manual review notes for sound, motion feel, and sprite readability
 
 ## Dashboard And Ingestion Release Boundary
 

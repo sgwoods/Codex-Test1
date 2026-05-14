@@ -4,73 +4,85 @@
       "version": "1.3.0",
       "date": "2026-05-12",
       "title": "Production conformance refresh",
-      "summary": "Refreshed the live 1.3.0 public family from the accepted 1.3.0.1 hosted-dev bundle, carrying current conformance dashboards, provenance-backed public documentation, resource-economics reporting, application artifact scoring, runtime sprite-capture scoring, and a measured calibrated ship-loss audio cue improvement into hosted `/beta` and hosted `/production`."
+      "summary": "Refreshed the live 1.3.0 public family from the accepted 1.3.0.1 hosted-dev bundle, carrying current conformance dashboards, provenance-backed public documentation, resource-economics reporting, application artifact scoring, runtime sprite-capture scoring, and a measured calibrated ship-loss audio cue improvement into hosted `/beta` and hosted `/production`.",
+      "sourceDoc": "RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md"
     },
     {
       "version": "1.3.0.1",
       "date": "2026-05-11",
       "title": "Hosted dev conformance review handoff",
-      "summary": "Prepared the post-production hosted-dev review increment with refreshed conformance dashboards, provenance-backed public documentation, resource-economics reporting, application artifact scoring, runtime sprite-capture scoring, persona distribution evidence, and a measured calibrated ship-loss audio cue improvement. This was the review bundle later accepted and promoted into the public 1.3.0 family."
+      "summary": "Prepared the post-production hosted-dev review increment with refreshed conformance dashboards, provenance-backed public documentation, resource-economics reporting, application artifact scoring, runtime sprite-capture scoring, persona distribution evidence, and a measured calibrated ship-loss audio cue improvement. This was the review bundle later accepted and promoted into the public 1.3.0 family.",
+      "sourceDoc": "RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md"
     },
     {
       "version": "1.3.0",
       "date": "2026-05-05",
       "title": "Fidelity and second-cabinet release",
-      "summary": "Shipped the 1.3.0 Aurora quality-and-trust release on Platinum, including the first public Galaxy Guardians sneak peek, layered platform/application version tracking, stronger pilot and release-lane discipline, and a clearer post-release path into 1.4.0 arcade depth."
+      "summary": "Shipped the 1.3.0 Aurora quality-and-trust release on Platinum, including the first public Galaxy Guardians sneak peek, layered platform/application version tracking, stronger pilot and release-lane discipline, and a clearer post-release path into 1.4.0 arcade depth.",
+      "sourceDoc": "RELEASE_NOTE_1.3.0_PRODUCTION.md"
     },
     {
       "version": "1.2.3",
       "date": "2026-04-26",
       "title": "Trust and pilot-surface refresh",
-      "summary": "Refreshed the live 1.2.3 family with signed-in end-of-run pilot locking, pilot and local-score visibility fixes, a last-life game-over runtime-freeze repair, cleaner build and dock framing, password visibility toggles, and broader shell and panel polish aimed at making the current line easier to trust while the next fidelity cycle takes shape."
+      "summary": "Refreshed the live 1.2.3 family with signed-in end-of-run pilot locking, pilot and local-score visibility fixes, a last-life game-over runtime-freeze repair, cleaner build and dock framing, password visibility toggles, and broader shell and panel polish aimed at making the current line easier to trust while the next fidelity cycle takes shape.",
+      "sourceDoc": "RELEASE_NOTE_1.2.3_BUILD_532.md"
     },
     {
       "version": "1.2.3",
       "date": "2026-04-09",
       "title": "Aurora score-surface polish patch",
-      "summary": "Polished Aurora's score and attract surfaces by rotating wait-mode high-score boards in a clearer validated-local-all sequence, adding build/date context to leaderboard rows, and adding a lightweight after-date filter so leaderboard results are easier to trust across recent builds."
+      "summary": "Polished Aurora's score and attract surfaces by rotating wait-mode high-score boards in a clearer validated-local-all sequence, adding build/date context to leaderboard rows, and adding a lightweight after-date filter so leaderboard results are easier to trust across recent builds.",
+      "sourceDoc": "RELEASE_NOTE_1.2.3_SCORE_SURFACE_POLISH.md"
     },
     {
       "version": "1.2.2",
       "date": "2026-04-09",
       "title": "Runtime freeze hardening and bonus-ship patch",
-      "summary": "Hardened Aurora against silent late-run frame-loop crashes by trapping runtime loop exceptions, surfacing export guidance when a frame fault occurs, fixing a restart-time async score-submit crash, adding a targeted late-run ship-loss soak gate to the release process, and shipping Aurora-scoped score-based bonus-ship awards with configurable first and recurring thresholds."
+      "summary": "Hardened Aurora against silent late-run frame-loop crashes by trapping runtime loop exceptions, surfacing export guidance when a frame fault occurs, fixing a restart-time async score-submit crash, adding a targeted late-run ship-loss soak gate to the release process, and shipping Aurora-scoped score-based bonus-ship awards with configurable first and recurring thresholds.",
+      "sourceDoc": "RELEASE_NOTE_1.2.2_RUNTIME_HARDENING.md"
     },
     {
       "version": "1.2.1",
       "date": "2026-04-07",
       "title": "Aurora trust-fix and copy-boundary patch",
-      "summary": "Bundled the first Platinum fast-follow Aurora fixes: dual-fighter runs now continue correctly after a single-ship loss, challenge stages present as bonus stages without consuming normal stage numbering, end-of-run carry/capture visuals no longer leak under results, and startup/wait-mode shell copy now follows a clearer platform-versus-application ownership model."
+      "summary": "Bundled the first Platinum fast-follow Aurora fixes: dual-fighter runs now continue correctly after a single-ship loss, challenge stages present as bonus stages without consuming normal stage numbering, end-of-run carry/capture visuals no longer leak under results, and startup/wait-mode shell copy now follows a clearer platform-versus-application ownership model.",
+      "sourceDoc": "RELEASE_NOTE_1.2.1_TRUST_FIX.md"
     },
     {
       "version": "1.2.0",
       "date": "2026-04-07",
       "title": "Platinum Release 1",
-      "summary": "Reframed Aurora Galactica as the first playable application on the Platinum platform, added platform-owned shell framing and picker flow, introduced hosted `/dev` alongside hosted `/beta` and hosted `/production`, and established the current hosted docs and release ladder around the Platinum launch."
+      "summary": "Reframed Aurora Galactica as the first playable application on the Platinum platform, added platform-owned shell framing and picker flow, introduced hosted `/dev` alongside hosted `/beta` and hosted `/production`, and established the current hosted docs and release ladder around the Platinum launch.",
+      "sourceDoc": "RELEASE_NOTE_1.2.0_PLATINUM_RELEASE_1.md"
     },
     {
       "version": "1.0.2",
       "date": "2026-04-02",
       "title": "Movement regression hotfix",
-      "summary": "Fixed the 1.0.1 production regression that repeatedly reset active lateral input during play, restored normal ship movement in live production, and added a stronger hotfix smoke suite plus hosted-lane input probes so obvious control failures are caught before promotion."
+      "summary": "Fixed the 1.0.1 production regression that repeatedly reset active lateral input during play, restored normal ship movement in live production, and added a stronger hotfix smoke suite plus hosted-lane input probes so obvious control failures are caught before promotion.",
+      "sourceDoc": "RELEASE_NOTE_1.0.2_MOVEMENT_HOTFIX.md"
     },
     {
       "version": "1.0.1",
       "date": "2026-03-31",
       "title": "Input and feedback hotfix",
-      "summary": "Replaced the fragile modifier-key left-handed control path with always-active A/Z left and D/C right movement, added focus-loss input reset so ships cannot latch sideways, switched in-game feedback delivery from FormSubmit to Web3Forms, and slowed the success confirmation long enough to read before the panel closes."
+      "summary": "Replaced the fragile modifier-key left-handed control path with always-active A/Z left and D/C right movement, added focus-loss input reset so ships cannot latch sideways, switched in-game feedback delivery from FormSubmit to Web3Forms, and slowed the success confirmation long enough to read before the panel closes.",
+      "sourceDoc": "RELEASE_NOTE_1.0.1_HOTFIX.md"
     },
     {
       "version": "1.0.0+build.284",
       "date": "2026-03-31",
       "title": "Post-launch score-submit and refresh-reminder hotfix",
-      "summary": "Fixed a production issue where signed-in runs could save locally without inserting into the shared leaderboard, moved remote score submission into the main game-over path with diagnostics-backed failure reporting, and added a hosted refresh reminder with a one-click action so players on stale tabs can pick up live fixes cleanly."
+      "summary": "Fixed a production issue where signed-in runs could save locally without inserting into the shared leaderboard, moved remote score submission into the main game-over path with diagnostics-backed failure reporting, and added a hosted refresh reminder with a one-click action so players on stale tabs can pick up live fixes cleanly.",
+      "sourceDoc": "RELEASE_NOTE_1.0.0_BUILD_284.md"
     },
     {
       "version": "1.0.0",
       "date": "2026-03-30",
       "title": "Aurora Galactica 1.0 launch",
-      "summary": "Launched the polished four-stage arcade slice with capture and rescue play, dual-fighter runs, a signed-in pilot profile, an in-game replay viewer, in-frame help and score surfaces, reviewed beta-to-production promotion, and a fresh production leaderboard baseline for official post-launch scoring."
+      "summary": "Launched the polished four-stage arcade slice with capture and rescue play, dual-fighter runs, a signed-in pilot profile, an in-game replay viewer, in-frame help and score surfaces, reviewed beta-to-production promotion, and a fresh production leaderboard baseline for official post-launch scoring.",
+      "sourceDoc": "RELEASE_NOTE_1.0.0_LAUNCH.md"
     }
   ]
 }

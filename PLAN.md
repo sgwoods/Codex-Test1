@@ -22,6 +22,8 @@ This means:
   bundle
 - hosted `/dev` remains the forward review lane, while `/beta` and
   `/production` now carry the refreshed public `1.3.0` story
+- that same-family production refresh should be treated as an exception, not
+  the normal public versioning pattern
 - the active source-planning question has moved from "what must land for `1.3.0`?"
   to "what is the cleanest deliberate `1.4.0` pickup?"
 - the post-release work should now be treated as intentional carry-forward, not
@@ -111,7 +113,16 @@ resource economics fit together.
 
 ### 7. Second-Application Proof
 
-- keep `Galaxy Guardians` preview-only until a minimal playable slice is real
+- promote `Galaxy Guardians` from preview-only framing into a minimally
+  complete one-level playable game on the dedicated post-production branch
+  [GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md](GALAXY_GUARDIANS_PLAYABLE_0_1_BRANCH_PLAN.md)
+- keep the broader Galaxy first-class conformance target readable through
+  [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md),
+  so ingestion, gameplay completeness, and release review do not drift apart
+- keep the new longer-surface and persona review model readable through
+  [GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md](GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md),
+  so Guardians is judged by real repeated-rack stage bands instead of only a
+  one-level preview slice
 - actively advance the longer-range `Galaxian`-style ingestion path through
   durable reference analysis, platform extension planning, and the other
   machine's parallel work
@@ -120,6 +131,9 @@ resource economics fit together.
 - treat the long-term target as a game-owned ingestible package built from
   gameplay-video and reference-artifact analysis, not a Platinum-only special
   case
+- keep a standing aggregate Galaxy process gate so the evidence stack, docs,
+  and harness family stay in sync:
+  `npm run harness:check:galaxy-guardians-first-class-conformance`
 
 ### 8. Personas And Simulated Opponents
 
@@ -139,10 +153,16 @@ resource economics fit together.
    needs a measurable lift
 5. incorporate the other machine's Galaxians-style second-game, harness, and
    analysis progress into the main roadmap
-6. prioritize level-by-level arcade depth as the next major product pillar
-7. make shared gameplay-video publishing an early evidence/product capability
-8. continue narrow trust fixes from the open issue stream
-9. execute the measured Galaga long-cycle quality plan in
+6. use the new Guardians playable branch to force score, replay, result, and
+   platform validation across two games rather than one
+7. keep
+   [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md)
+   and `harness:check:galaxy-guardians-first-class-conformance` healthy so
+   Galaxy review discipline approaches Aurora's
+8. prioritize level-by-level arcade depth as the next major product pillar
+9. make shared gameplay-video publishing an early evidence/product capability
+10. continue narrow trust fixes from the open issue stream
+11. execute the measured Galaga long-cycle quality plan in
    [AURORA_GALAGA_LONG_CYCLE_REVIEW.md](AURORA_GALAGA_LONG_CYCLE_REVIEW.md)
    before broad gameplay, complexity, or graphical tuning
 
@@ -181,8 +201,13 @@ Current conformance read:
   `reference-artifacts/analyses/aurora-galaga-long-cycle/baseline-2026-05-05.json`
 - the Track 1 movement/shot-feel finding is captured in
   `reference-artifacts/analyses/aurora-galaga-long-cycle/movement-shot-feel-2026-05-06.json`
-- Galaxy Guardians 0.1 preview gates are green but pass/fail only, not part of
-  the Aurora numeric roll-up yet
+- Galaxy Guardians 0.1 is now maintained through both scored artifacts and a
+  first-class process plan: reference conformance `7.6/10`, playtest-weighted
+  conformance `6.9/10`, longer-surface/persona review `7.0/10`, public
+  readiness `4.2/10`, and a standing aggregate process gate in
+  `npm run harness:check:galaxy-guardians-first-class-conformance`
+- Galaxy still is not part of the Aurora numeric roll-up, and that is correct;
+  the goal is first-class game-specific parity, not to blur the applications
 
 ## Release Direction
 

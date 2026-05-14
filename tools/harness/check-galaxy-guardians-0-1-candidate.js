@@ -54,6 +54,8 @@ function exists(relPath){
 function loadGuardiansContext(){
   const sandbox = { console };
   sandbox.window = sandbox;
+  sandbox.buildPlatformInfo = () => ({ compatibility: '' });
+  sandbox.applicationReleaseRecord = (_gameKey, fallback = {}) => Object.assign({}, fallback || {});
   vm.createContext(sandbox);
   for(const relPath of SOURCES){
     const source = fs.readFileSync(path.join(ROOT, relPath), 'utf8');

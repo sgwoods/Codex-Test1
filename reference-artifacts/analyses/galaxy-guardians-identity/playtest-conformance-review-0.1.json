@@ -2,7 +2,7 @@
   "gameKey": "galaxy-guardians-preview",
   "artifactType": "playtest-weighted-conformance-review",
   "version": "0.1-dev-preview",
-  "createdOn": "2026-05-03",
+  "createdOn": "2026-05-13",
   "status": "playtest-weighted-preview-gap-review",
   "purpose": "Score Galaxy Guardians against local playtest perception of Galaxian-like sound, pace, and visual identity, separate from evidence coverage. This artifact intentionally lowers the apparent preview score where the current build is measurable but not yet compelling.",
   "sourceEvidence": {
@@ -19,7 +19,8 @@
       "reference-artifacts/analyses/galaxy-guardians-identity/sprite-grid-targets-0.1.json",
       "reference-artifacts/analyses/galaxy-guardians-identity/sprite-reference-extraction-0.1.json",
       "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
-      "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json"
+      "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
+      "reference-artifacts/analyses/galaxy-guardians-identity/long-surface-conformance-0.1.json"
     ],
     "playtestFindings": [
       "Sound is nothing like the original Galaxians.",
@@ -34,20 +35,20 @@
     "10": "Reference-faithful enough for public conformance claims."
   },
   "summary": {
-    "evidenceWeightedReferenceScore10": 7.7,
+    "evidenceWeightedReferenceScore10": 7.6,
     "playtestWeightedConformanceScore10": 6.9,
-    "compellingPreviewTargetScore10": 7.0,
-    "releaseRead": "Closer, but still just below the compelling-preview bar. The runtime now has measured stage-rank pressure, component-derived sprites, labeled cue-window influenced audio, and a reusable Platinum audio conformance lab that compares runtime cue synthesis to promoted reference windows. Audio and motion feel still need live browser/playback review before a beta-facing claim."
+    "compellingPreviewTargetScore10": 7,
+    "releaseRead": "Closer, and now reviewable across a longer surface rather than only a one-level peek. The runtime has measured later-band pressure, stage-theme progression, rack-preserving life loss, deterministic review personas, component-derived sprites, labeled cue-window influenced audio, and a reusable Platinum audio conformance lab. The preview still needs stronger stage-five-and-beyond survivability and another human-reviewed sound/browser pass before it feels compelling."
   },
   "categories": [
     {
       "id": "audio-character",
       "label": "Audio character and Galaxian acoustic feel",
-      "weight": 28,
+      "weight": 24,
       "previousOfficialScore10": 5.3,
       "playtestAdjustedBeforePass10": 2.5,
       "playtestWeightedScore10": 6.4,
-      "compellingPreviewTarget10": 7.0,
+      "compellingPreviewTarget10": 7,
       "metricSet": [
         "hardware-like square/noise timbre",
         "short dry shot envelopes",
@@ -58,16 +59,16 @@
         "labeled cue-window waveform/spectrogram previews",
         "runtime cue versus promoted reference-window lab score"
       ],
-      "currentRead": "Cue ownership and shape are harnessed, CPU analysis finds 64 mixed-source cue candidates, 8 cue windows are promoted with waveform/spectrogram previews, and the reusable Platinum audio conformance lab now compares runtime cue synthesis against those windows. Runtime cues were retuned toward sharper, higher-register square/noise transients, lifting the measured cue-lab score while remaining short of a human-listened beta claim.",
+      "currentRead": "Cue ownership and shape are harnessed, CPU analysis finds mixed-source cue candidates, promoted windows are labeled with waveform/spectrogram previews, and the reusable Platinum audio conformance lab compares runtime synthesis against those windows. The latest pass also tightened the weakest cue family and added a dedicated stage-advance handoff so the longer surface sounds less abruptly stitched together.",
       "nextEvidenceNeeded": "Human-listen the generated runtime/reference cue preview pairs, replace dirty mixed-gameplay windows, and score live playback against the target set."
     },
     {
       "id": "motion-pressure",
       "label": "Motion pace and lower-field pressure",
-      "weight": 32,
+      "weight": 24,
       "previousOfficialScore10": 6.7,
       "playtestAdjustedBeforePass10": 4.8,
-      "playtestWeightedScore10": 6.2,
+      "playtestWeightedScore10": 6.3,
       "compellingPreviewTarget10": 7.2,
       "metricSet": [
         "formation entry duration",
@@ -78,17 +79,17 @@
         "enemy shot density",
         "bottom wrap/return cadence"
       ],
-      "currentRead": "The latest pass shortened formation entry, first dive, flagship pressure, scout intervals, shot cadence, and bottom wrap timing, then added measured stage-rank pressure so stages three and five carry earlier dives, faster dives, faster shots, and more event density while stage one remains anchored.",
-      "nextEvidenceNeeded": "Use browser-reviewed runtime traces beside reference tracklets, then promote sprite-recognized dive paths and rack timing into target bands."
+      "currentRead": "The latest pass extended stage-rank pressure through stages seven, nine, and eleven, preserved rack state across life loss, and turned stage-five stress into an explicit review band. That makes the current weakness much clearer: lower-field collision fairness and later-band clean-clear consistency.",
+      "nextEvidenceNeeded": "Use browser-reviewed runtime traces beside reference tracklets, then tune stage-five-and-beyond dive fairness and shot cadence until later-band review personas can convert stress into clears more consistently."
     },
     {
       "id": "visual-identity",
       "label": "Graphic alignment and alien/player likeness",
-      "weight": 28,
-      "previousOfficialScore10": 7.0,
+      "weight": 24,
+      "previousOfficialScore10": 7,
       "playtestAdjustedBeforePass10": 4.5,
-      "playtestWeightedScore10": 6.7,
-      "compellingPreviewTarget10": 7.0,
+      "playtestWeightedScore10": 6.8,
+      "compellingPreviewTarget10": 7,
       "metricSet": [
         "alien silhouette family likeness",
         "flagship/escort/scout separation",
@@ -99,31 +100,50 @@
         "broad crop-grid silhouette similarity",
         "component crop target similarity"
       ],
-      "currentRead": "Sprites are now tuned from component crop targets for flagship, escort, scout, and player ship while remaining pack-owned and separate from Aurora. They should read much more like the Galaxian family, but still need visual browser review at actual gameplay scale.",
-      "nextEvidenceNeeded": "Human-review the component crop PNGs and runtime playfield scale, then adjust any sprite that feels too dense or too literal."
+      "currentRead": "Sprites are component-derived and now live inside a longer-surface shell story: later stages can change accent and atmosphere instead of staying visually flat. That makes the preview read more like a second game than a static shell card.",
+      "nextEvidenceNeeded": "Human-review the component crop PNGs and runtime playfield scale, then adjust any sprite or stage-surface detail that still feels too dense or too generic."
     },
     {
       "id": "platform-boundary-readiness",
       "label": "Platform boundary and preview safety",
-      "weight": 12,
-      "previousOfficialScore10": 10.0,
-      "playtestAdjustedBeforePass10": 10.0,
-      "playtestWeightedScore10": 10.0,
-      "compellingPreviewTarget10": 10.0,
+      "weight": 10,
+      "previousOfficialScore10": 10,
+      "playtestAdjustedBeforePass10": 10,
+      "playtestWeightedScore10": 10,
+      "compellingPreviewTarget10": 10,
       "metricSet": [
         "no Aurora capture/dual/challenge leakage",
         "game-owned runtime and scoring",
         "Platinum APIs only for shared shell behavior",
         "dev-only public release boundary"
       ],
-      "currentRead": "The preview remains cleanly application-owned and dev-only while using Platinum as the shell/platform layer.",
+      "currentRead": "The preview remains cleanly application-owned while using Platinum as the shell/platform layer, even as longer-surface review and personas become more serious.",
       "nextEvidenceNeeded": "Keep boundary gates mandatory as the gameplay slice becomes more complete."
+    },
+    {
+      "id": "long-surface-readiness",
+      "label": "Long-surface readiness and persona utility",
+      "weight": 18,
+      "previousOfficialScore10": 6.2,
+      "playtestAdjustedBeforePass10": 5.6,
+      "playtestWeightedScore10": 6.5,
+      "compellingPreviewTarget10": 7,
+      "metricSet": [
+        "stage-band escalation readability",
+        "life-loss rack preservation",
+        "stage-theme progression",
+        "deterministic persona differentiation",
+        "five-ship review survivability",
+        "stage-five stress visibility"
+      ],
+      "currentRead": "The preview now has a real longer-surface review story: a professional-strength review harness can hold the game long enough to expose later-band problems, and stage five is explicitly measurable as a stress band rather than hidden behind one-level-only framing.",
+      "nextEvidenceNeeded": "Raise later-band clear consistency and persona reliability enough that the longer surface feels convincingly learnable instead of merely stress-testable."
     }
   ],
   "recommendedNext": [
-    "Human-listen the promoted Galaxian shot, dive, enemy-shot, life-loss, and hit cue windows and replace dirty labels.",
-    "Browser-review the component-derived sprites at real gameplay scale and adjust density/readability where needed.",
-    "Run a browser-reviewed pacing pass after the current faster runtime is built, with perceived urgency scored beside runtime trace metrics.",
-    "Keep Guardians beta-facing preview blocked until playtest-weighted score reaches at least 7.0/10."
+    "Tune stage-five-and-beyond dive collision fairness and shot cadence using the new longer-surface artifact and persona runs.",
+    "Human-listen the promoted Galaxian shot, dive, enemy-shot, life-loss, and hit cue windows after the latest scoutHit/stage-advance pass.",
+    "Browser-review the stage-theme progression and component-derived sprites at actual gameplay scale during longer review runs.",
+    "Keep Guardians beta-facing preview claims blocked until the playtest-weighted score reaches at least 7.0/10 with a stronger long-surface read."
   ]
 }

@@ -147,19 +147,45 @@ catalog, but a much less mature playable/runtime conformance posture.
 | Wave 2 | Slightly higher pressure through stage-rank scaling. | Dive interval, enemy shot cadence, player safety. | `stage-rank-pressure-0.1`; still preview-grade. |
 | Wave 3 | More frequent scout/flagship pressure. | Lower-field pressure and wrap/return cadence. | Movement pace score remains below release target. |
 | Wave 4 | Sustained pressure and scoring differentiation. | Role-specific hit values and survival balance. | `threat-scoring-0.1`; scoring is local-preview only. |
-| Wave 5+ | Current long-run preview extrapolation. | Progressive difficulty without Aurora mechanics leaking in. | Boundary harnesses pass; reference precision still incomplete. |
+| Wave 5+ | Current long-surface preview review band. | Progressive difficulty, later-band survivability, and bounded late-session pressure without Aurora mechanics leaking in. | `long-surface-conformance-0.1`; later-band precision is still incomplete. |
 
 ### Persona Index
 
-Galaxy Guardians currently reuses the platform persona idea but needs
-game-owned persona calibration before public playability:
+Galaxy Guardians now has game-owned deterministic personas, but they are still
+review tools rather than late-session authorities:
 
 | Human label | Current intended role | Game-specific need |
 | --- | --- | --- |
-| Beginner | Finds whether single-shot play, scout dives, and first loss are understandable. | Add wave-1/wave-2 survival and hit-rate baselines. |
-| Intermediate | Tests whether the preview loop is fun and learnable. | Add role-hit and score-progression expectations. |
-| Expert | Tests whether flagship/escort opportunities are deliberate rather than accidental. | Add escort-route and pressure-recovery probes. |
-| Professional | Tests whether the game can support mastery without unfair collapse. | Add long-run stage-rank pressure and exact path correspondence. |
+| Beginner | Finds whether single-shot play, scout dives, and first loss are understandable. | Keep wave-1/wave-2 survival and hit-rate baselines readable. |
+| Intermediate | Tests whether the preview loop is fun and learnable. | Improve rack-finishing consistency. |
+| Expert | Tests whether longer stage bands stay survivable enough to teach the next problems. | Improve stage-five-and-beyond clear consistency. |
+| Professional | Tests whether the game can support mastery without unfair collapse. | Improve late-band fairness until the review harness becomes a real authoritative critic. |
+
+### Galaxy Guardians First-Class Promotion Targets
+
+The maintained Galaxy-specific promotion plan is:
+
+- [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md)
+- [GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md](GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md)
+
+Near-term first-class promotion targets:
+
+- keep reference conformance at or above `7.7/10` while raising the
+  playtest-weighted score from `6.9/10` to at least the `7.0/10` compelling
+  preview floor
+- move formation/rack timing and motion pressure from proxy-tuned
+  `6.2/10` reads toward `7.2/10` by promoting sprite-recognized timing and
+  browser-reviewed motion feel
+- move visual identity from `6.8/10` reference and `6.7/10` playtest toward
+  `7.2/10` through human-reviewed sprite targets and gameplay-scale review
+- move audio character from `6.4/10` toward `7.0/10` through human-listened
+  cue cleanup and cleaner isolated reference windows
+- complete game-owned score/progression/result identity so the game validates
+  Platinum changes as a second real application, not only as a preview shell
+
+Standing aggregate parity gate:
+
+- `npm run harness:check:galaxy-guardians-first-class-conformance`
 
 ## Platform Persona Contract
 

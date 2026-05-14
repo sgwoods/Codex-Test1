@@ -13,6 +13,26 @@ async function loadOwnProfile(){
  syncAccountUi();
  return LEADERBOARD.profile;
 }
+function buildLeaderboardScoresQuery(view='all',{includeGameColumns=1}={}){
+ let select='id,initials,score,stage,achieved_at,is_verified,build';
+ if(includeGameColumns)select+=',game_key,game_title';
+ let query=LEADERBOARD.client.from('scores').select(select).order('score',{ascending:false}).order('stage',{ascending:false}).limit(10);
+ if(view==='validated')query=query.eq('is_verified',true);
+ if(shouldHideTestAccountScores()&&view!=='mine'){
+  const hiddenIds=configuredTestAccountUserIds();
+  if(hiddenIds.length===1)query=query.neq('user_id',hiddenIds[0]);
+  else query=query.not('user_id','in',`(${hiddenIds.join(',')})`);
+ }
+ if(view==='mine')query=query.eq('user_id',LEADERBOARD.user.id);
+ return query;
+}
+async function fetchLeaderboardScores(view='all'){
+ let result=await buildLeaderboardScoresQuery(view,{includeGameColumns:1});
+ if(!result.error)return result;
+ const message=String(result.error?.message||'').toLowerCase();
+ if(!message.includes('game_key')&&!message.includes('game_title'))return result;
+ return buildLeaderboardScoresQuery(view,{includeGameColumns:0});
+}
 async function refreshLeaderboard(view=LEADERBOARD.view,{silent=0,force=0}={}){
  view=normalizeLeaderboardViewForLane(view);
  if(view==='local'){
@@ -41,15 +61,7 @@ async function refreshLeaderboard(view=LEADERBOARD.view,{silent=0,force=0}={}){
  LEADERBOARD.loading[view]=1;
  if(!silent)setLeaderboardStatus(leaderboardStatusLabel(view,'loading'));
  syncLeaderboardUi();
- let query=LEADERBOARD.client.from('scores').select('id,initials,score,stage,achieved_at,is_verified,build').order('score',{ascending:false}).order('stage',{ascending:false}).limit(10);
- if(view==='validated')query=query.eq('is_verified',true);
- if(shouldHideTestAccountScores()&&view!=='mine'){
-  const hiddenIds=configuredTestAccountUserIds();
-  if(hiddenIds.length===1)query=query.neq('user_id',hiddenIds[0]);
-  else query=query.not('user_id','in',`(${hiddenIds.join(',')})`);
- }
- if(view==='mine')query=query.eq('user_id',LEADERBOARD.user.id);
- const {data,error}=await query;
+ const {data,error}=await fetchLeaderboardScores(view);
  LEADERBOARD.loading[view]=0;
  if(error){
   if(!silent)setLeaderboardStatus(leaderboardStatusLabel(view,'fallback'));
@@ -91,7 +103,7 @@ function primeLeaderboard(){
 }
 function resolveGameOverScoreEntry(){
  if(!gameOverState)return null;
- const board=loadScoreboard();
+ const board=loadScoreboard(gameOverState.gameKey||currentScoreStorageGameKey());
  const localRow=board.find(row=>row.id===gameOverState.entryId);
  if(localRow)return Object.assign({},localRow);
  return{
@@ -99,11 +111,23 @@ function resolveGameOverScoreEntry(){
   initials:sanitizeInitials(gameOverState.initials?.join('')||'YOU').padEnd(3,'-').slice(0,3),
   score:+gameOverState.score|0,
   stage:+gameOverState.stage|0,
-  at:new Date().toISOString()
+  at:new Date().toISOString(),
+  gameKey:typeof normalizeScoreRecordGameKey==='function'
+   ? normalizeScoreRecordGameKey(gameOverState.gameKey||currentScoreStorageGameKey())
+   : String(gameOverState.gameKey||'aurora-galactica').trim()||'aurora-galactica',
+  gameTitle:typeof scoreGameTitleForKey==='function'
+   ? scoreGameTitleForKey(gameOverState.gameKey||currentScoreStorageGameKey(),gameOverState.gameTitle||'')
+   : String(gameOverState.gameTitle||'').trim()
  };
 }
 async function submitScoreRemote(entry){
  if(!entry||!LEADERBOARD.configured||!LEADERBOARD.client)return 0;
+ const gameKey=typeof normalizeScoreRecordGameKey==='function'
+  ? normalizeScoreRecordGameKey(entry.gameKey||currentScoreStorageGameKey())
+  : String(entry.gameKey||'aurora-galactica').trim()||'aurora-galactica';
+ const gameTitle=typeof scoreGameTitleForKey==='function'
+  ? scoreGameTitleForKey(gameKey,entry.gameTitle||'')
+  : String(entry.gameTitle||'').trim();
  if(!remoteWriteEnabled()){
   setLeaderboardStatus('Saved locally · production submit disabled in this lane');
   syncLeaderboardUi();
@@ -112,7 +136,24 @@ async function submitScoreRemote(entry){
     score:+entry.score|0,
     stage:+entry.stage|0,
     initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3),
-    releaseChannel:RELEASE_CHANNEL
+    releaseChannel:RELEASE_CHANNEL,
+    gameKey,
+    gameTitle
+   },{level:'info'});
+  }
+  return 0;
+ }
+ if(typeof scoreGameSupportsSharedRemote==='function'&&!scoreGameSupportsSharedRemote(gameKey)){
+  setLeaderboardStatus(`Saved locally · ${gameTitle} online scores stay local until the shared schema is game-owned`);
+  syncLeaderboardUi();
+  if(typeof recordSystemIssue==='function'){
+   recordSystemIssue('score_submit_blocked','Remote score submit blocked until game-owned leaderboard schema exists',{
+    score:+entry.score|0,
+    stage:+entry.stage|0,
+    initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3),
+    releaseChannel:RELEASE_CHANNEL,
+    gameKey,
+    gameTitle
    },{level:'info'});
   }
   return 0;
@@ -133,7 +174,9 @@ async function submitScoreRemote(entry){
    stage:payload.stage,
    initials:payload.initials,
    verified:!!payload.is_verified,
-   userId:payload.user_id||''
+   userId:payload.user_id||'',
+   gameKey,
+   gameTitle
   },{level:'info'});
  }
  try{
@@ -145,7 +188,9 @@ async function submitScoreRemote(entry){
      stage:payload.stage,
      initials:payload.initials,
      verified:!!payload.is_verified,
-     userId:payload.user_id||''
+     userId:payload.user_id||'',
+     gameKey,
+     gameTitle
     },{
      level:'error',
      suggestBugReport:1,
@@ -164,18 +209,22 @@ async function submitScoreRemote(entry){
     stage:payload.stage,
     initials:payload.initials,
     verified:!!payload.is_verified,
-    userId:payload.user_id||''
+    userId:payload.user_id||'',
+    gameKey,
+    gameTitle
    },{level:'info'});
   }
  }catch(err){
   if(typeof recordSystemIssue==='function'){
-   recordSystemIssue('score_submit_failed',String(err?.message||err||'Remote score submit threw unexpectedly'),{
-    score:payload.score,
-    stage:payload.stage,
-    initials:payload.initials,
-    verified:!!payload.is_verified,
-    userId:payload.user_id||''
-   },{
+    recordSystemIssue('score_submit_failed',String(err?.message||err||'Remote score submit threw unexpectedly'),{
+     score:payload.score,
+     stage:payload.stage,
+     initials:payload.initials,
+     verified:!!payload.is_verified,
+     userId:payload.user_id||'',
+     gameKey,
+     gameTitle
+    },{
     level:'error',
     suggestBugReport:1,
     summary:'Online score save failed',
@@ -202,10 +251,15 @@ function submitGameOverScore(){
  targetState.remoteSubmitted='pending';
  LEADERBOARD.submitBusy=1;
  if(typeof recordSystemIssue==='function'){
+  const gameKey=typeof normalizeScoreRecordGameKey==='function'
+   ? normalizeScoreRecordGameKey(entry.gameKey||currentScoreStorageGameKey())
+   : String(entry.gameKey||'aurora-galactica').trim()||'aurora-galactica';
   recordSystemIssue('score_submit_queued','Queued game-over score for remote submit',{
    score:+entry.score|0,
    stage:+entry.stage|0,
-   initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3)
+   initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3),
+   gameKey,
+   gameTitle:typeof scoreGameTitleForKey==='function'?scoreGameTitleForKey(gameKey,entry.gameTitle||''):String(entry.gameTitle||'').trim()
   },{level:'info'});
  }
  submitScoreRemote(entry)
@@ -216,7 +270,10 @@ function submitGameOverScore(){
     recordSystemIssue('score_submit_failed',String(err?.message||err||'Remote score submit promise rejected'),{
      score:+entry.score|0,
      stage:+entry.stage|0,
-     initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3)
+     initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3),
+     gameKey:typeof normalizeScoreRecordGameKey==='function'
+      ? normalizeScoreRecordGameKey(entry.gameKey||currentScoreStorageGameKey())
+      : String(entry.gameKey||'aurora-galactica').trim()||'aurora-galactica'
     },{
      level:'error',
      suggestBugReport:1,

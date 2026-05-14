@@ -52,6 +52,15 @@ async function withHarnessPage(cfg, fn){
       viewport: cfg.viewport || { width: 1440, height: 1800 }
     });
     const page = await context.newPage();
+    const pageErrors = [];
+    const consoleErrors = [];
+    page.on('pageerror', err => {
+      pageErrors.push(String(err?.stack || err?.message || err || 'Unknown page error'));
+    });
+    page.on('console', msg => {
+      if(msg.type() !== 'error') return;
+      consoleErrors.push(String(msg.text() || 'Unknown console error'));
+    });
     const seed = (+cfg.seed >>> 0) || 1;
     const testCfg = {
       stage: Math.max(1, cfg.stage || 1),
@@ -70,7 +79,15 @@ async function withHarnessPage(cfg, fn){
       localStorage.setItem('platinumHarnessSeed', String(local.seed >>> 0));
     }, { testCfg, seed });
     await page.goto(`http://127.0.0.1:${port}/index.html`, { waitUntil: 'networkidle' });
-    await page.waitForFunction(() => !!window.__galagaHarness__);
+    try{
+      await page.waitForFunction(() => !!window.__galagaHarness__);
+    }catch(err){
+      const details = [];
+      if(pageErrors.length)details.push(`Page errors:\n${pageErrors.join('\n\n')}`);
+      if(consoleErrors.length)details.push(`Console errors:\n${consoleErrors.join('\n\n')}`);
+      const suffix = details.length ? `\n\n${details.join('\n\n')}` : '';
+      throw new Error(`${String(err?.message || err || 'Harness boot wait failed')}${suffix}`);
+    }
     if(!cfg.skipStart){
       await page.evaluate(startCfg => window.__galagaHarness__.start(Object.assign({ autoVideo: false }, startCfg)), Object.assign({
         stage: testCfg.stage,

@@ -21,6 +21,8 @@ function readJson(relPath){
 function loadRuntime(){
   const sandbox = {
     window: null,
+    buildPlatformInfo: () => ({ compatibility: '' }),
+    applicationReleaseRecord: (_gameKey, fallback = {}) => Object.assign({}, fallback || {}),
     GALAXY_GUARDIANS_ADAPTER_FORBIDDEN_AURORA_CAPABILITIES: Object.freeze({
       usesCaptureRescue: 0,
       usesDualFighterMode: 0,
@@ -89,12 +91,16 @@ function main(){
     stage1: ruleSubset(ctx.guardiansRuntimeRules(1)),
     stage3: ruleSubset(ctx.guardiansRuntimeRules(3)),
     stage5: ruleSubset(ctx.guardiansRuntimeRules(5)),
-    stage7: ruleSubset(ctx.guardiansRuntimeRules(7))
+    stage7: ruleSubset(ctx.guardiansRuntimeRules(7)),
+    stage9: ruleSubset(ctx.guardiansRuntimeRules(9)),
+    stage11: ruleSubset(ctx.guardiansRuntimeRules(11))
   };
   const sims = {
     stage1: simulate(ctx, 1, artifact.eventDensityTargets.simulationWindowSeconds),
     stage3: simulate(ctx, 3, artifact.eventDensityTargets.simulationWindowSeconds),
-    stage5: simulate(ctx, 5, artifact.eventDensityTargets.simulationWindowSeconds)
+    stage5: simulate(ctx, 5, artifact.eventDensityTargets.simulationWindowSeconds),
+    stage7: simulate(ctx, 7, artifact.eventDensityTargets.simulationWindowSeconds),
+    stage9: simulate(ctx, 9, artifact.eventDensityTargets.simulationWindowSeconds)
   };
   const payload = {
     artifact: ARTIFACT,
@@ -103,7 +109,9 @@ function main(){
       stage1: ctx.guardiansStageRank(1),
       stage3: ctx.guardiansStageRank(3),
       stage5: ctx.guardiansStageRank(5),
-      stage7: ctx.guardiansStageRank(7)
+      stage7: ctx.guardiansStageRank(7),
+      stage9: ctx.guardiansStageRank(9),
+      stage11: ctx.guardiansStageRank(11)
     },
     rules,
     sims
@@ -123,6 +131,9 @@ function main(){
 
   const stage3 = artifact.stageThreeTargets || {};
   const stage5 = artifact.stageFiveTargets || {};
+  const stage7 = artifact.stageSevenTargets || {};
+  const stage9 = artifact.stageNineTargets || {};
+  const stage11 = artifact.stageElevenTargets || {};
   const checks = [
     ['stage3', 'firstScoutDiveDelay', 'firstScoutDiveDelayBandSeconds'],
     ['stage3', 'scoutDiveIntervalBase', 'scoutDiveIntervalBaseBandSeconds'],
@@ -141,20 +152,55 @@ function main(){
     ['stage5', 'enemyShotVy', 'enemyShotVyBandPxPerSecond'],
     ['stage5', 'diveBaseVy', 'diveBaseVyBandPxPerSecond'],
     ['stage5', 'diveAccel', 'diveAccelBandPxPerSecondSquared'],
-    ['stage5', 'formationDriftHz', 'formationDriftHzBand']
+    ['stage5', 'formationDriftHz', 'formationDriftHzBand'],
+    ['stage7', 'firstScoutDiveDelay', 'firstScoutDiveDelayBandSeconds'],
+    ['stage7', 'scoutDiveIntervalBase', 'scoutDiveIntervalBaseBandSeconds'],
+    ['stage7', 'firstEnemyShotDelay', 'firstEnemyShotDelayBandSeconds'],
+    ['stage7', 'enemyShotIntervalBase', 'enemyShotIntervalBaseBandSeconds'],
+    ['stage7', 'enemyShotMaxLive', 'enemyShotMaxLive'],
+    ['stage7', 'enemyShotVy', 'enemyShotVyBandPxPerSecond'],
+    ['stage7', 'diveBaseVy', 'diveBaseVyBandPxPerSecond'],
+    ['stage7', 'diveAccel', 'diveAccelBandPxPerSecondSquared'],
+    ['stage7', 'formationDriftHz', 'formationDriftHzBand'],
+    ['stage9', 'firstScoutDiveDelay', 'firstScoutDiveDelayBandSeconds'],
+    ['stage9', 'scoutDiveIntervalBase', 'scoutDiveIntervalBaseBandSeconds'],
+    ['stage9', 'firstEnemyShotDelay', 'firstEnemyShotDelayBandSeconds'],
+    ['stage9', 'enemyShotIntervalBase', 'enemyShotIntervalBaseBandSeconds'],
+    ['stage9', 'enemyShotMaxLive', 'enemyShotMaxLive'],
+    ['stage9', 'enemyShotVy', 'enemyShotVyBandPxPerSecond'],
+    ['stage9', 'diveBaseVy', 'diveBaseVyBandPxPerSecond'],
+    ['stage9', 'diveAccel', 'diveAccelBandPxPerSecondSquared'],
+    ['stage9', 'formationDriftHz', 'formationDriftHzBand'],
+    ['stage11', 'firstScoutDiveDelay', 'firstScoutDiveDelayBandSeconds'],
+    ['stage11', 'scoutDiveIntervalBase', 'scoutDiveIntervalBaseBandSeconds'],
+    ['stage11', 'firstEnemyShotDelay', 'firstEnemyShotDelayBandSeconds'],
+    ['stage11', 'enemyShotIntervalBase', 'enemyShotIntervalBaseBandSeconds'],
+    ['stage11', 'enemyShotMaxLive', 'enemyShotMaxLive'],
+    ['stage11', 'enemyShotVy', 'enemyShotVyBandPxPerSecond'],
+    ['stage11', 'diveBaseVy', 'diveBaseVyBandPxPerSecond'],
+    ['stage11', 'diveAccel', 'diveAccelBandPxPerSecondSquared'],
+    ['stage11', 'formationDriftHz', 'formationDriftHzBand']
   ];
   for(const [stageName, ruleName, bandName] of checks){
-    const target = stageName === 'stage3' ? stage3 : stage5;
+    const target = stageName === 'stage3'
+      ? stage3
+      : stageName === 'stage5'
+        ? stage5
+        : stageName === 'stage7'
+          ? stage7
+          : stageName === 'stage9'
+            ? stage9
+            : stage11;
     const targetBand = Array.isArray(target[bandName]) ? target[bandName] : [target[bandName], target[bandName]];
     if(!inBand(rules[stageName][ruleName], targetBand)){
       fail(`${stageName} ${ruleName} is outside the stage-rank pressure target`, payload);
     }
   }
-  if(JSON.stringify(rules.stage5) !== JSON.stringify(rules.stage7)){
-    fail('Stage-rank pressure did not cap after the preview maximum rank', payload);
+  if(rules.stage9.enemyShotMaxLive !== rules.stage11.enemyShotMaxLive){
+    fail('Stage-rank pressure did not preserve the late-band max-live shot cap.', payload);
   }
   const density = artifact.eventDensityTargets || {};
-  if(sims.stage3.firstScoutDiveT >= sims.stage1.firstScoutDiveT || sims.stage5.firstScoutDiveT >= sims.stage3.firstScoutDiveT){
+  if(sims.stage3.firstScoutDiveT >= sims.stage1.firstScoutDiveT || sims.stage5.firstScoutDiveT >= sims.stage3.firstScoutDiveT || sims.stage7.firstScoutDiveT >= sims.stage5.firstScoutDiveT || sims.stage9.firstScoutDiveT >= sims.stage7.firstScoutDiveT){
     fail('Stage-rank pressure did not make first scout dives arrive earlier by stage', payload);
   }
   if(sims.stage3.diveEvents - sims.stage1.diveEvents < density.stageThreeMinimumExtraDiveEventsOverStageOne){
@@ -169,6 +215,18 @@ function main(){
   if(sims.stage5.enemyShots - sims.stage1.enemyShots < density.stageFiveMinimumExtraEnemyShotsOverStageOne){
     fail('Stage five did not add enough shot pressure over stage one', payload);
   }
+  if(sims.stage7.diveEvents - sims.stage1.diveEvents < density.stageSevenMinimumExtraDiveEventsOverStageOne){
+    fail('Stage seven did not add enough dive pressure over stage one', payload);
+  }
+  if(sims.stage7.enemyShots - sims.stage1.enemyShots < density.stageSevenMinimumExtraEnemyShotsOverStageOne){
+    fail('Stage seven did not add enough shot pressure over stage one', payload);
+  }
+  if(sims.stage9.diveEvents - sims.stage1.diveEvents < density.stageNineMinimumExtraDiveEventsOverStageOne){
+    fail('Stage nine did not add enough dive pressure over stage one', payload);
+  }
+  if(sims.stage9.enemyShots - sims.stage1.enemyShots < density.stageNineMinimumExtraEnemyShotsOverStageOne){
+    fail('Stage nine did not add enough shot pressure over stage one', payload);
+  }
 
   console.log(JSON.stringify({
     ok: true,
@@ -177,10 +235,15 @@ function main(){
     stage1: rules.stage1,
     stage3: rules.stage3,
     stage5: rules.stage5,
+    stage7: rules.stage7,
+    stage9: rules.stage9,
+    stage11: rules.stage11,
     eventDensity: {
       stage1: sims.stage1,
       stage3: sims.stage3,
-      stage5: sims.stage5
+      stage5: sims.stage5,
+      stage7: sims.stage7,
+      stage9: sims.stage9
     }
   }, null, 2));
 }

@@ -182,6 +182,8 @@ window.__galagaHarness__={
    stage: +cfg.stage || 2,
    challenge: !!cfg.challenge,
    build: (window.BUILD && window.BUILD.version) || '',
+   gameKey: cfg.gameKey || (typeof currentGamePackKey === 'function' ? currentGamePackKey() : 'aurora-galactica'),
+   gameTitle: cfg.gameTitle || (typeof currentGamePack === 'function' ? currentGamePack()?.metadata?.title || '' : ''),
    stats: cfg.stats || { shots: 6, hits: 4 },
    source: cfg.source || 'local',
    pilotUserId: cfg.pilotUserId || '',
@@ -208,6 +210,8 @@ window.__galagaHarness__={
     stage: +cfg.stage || 7,
     challenge: !!cfg.challenge,
     build: (window.BUILD && window.BUILD.version) || '',
+    gameKey: cfg.gameKey || (typeof currentGamePackKey === 'function' ? currentGamePackKey() : 'aurora-galactica'),
+    gameTitle: cfg.gameTitle || (typeof currentGamePack === 'function' ? currentGamePack()?.metadata?.title || '' : ''),
     stats: cfg.stats || { shots: 12, hits: 8 },
     source: 'local',
     pilotUserId: cfg.userId || 'pilot-swd',
@@ -222,6 +226,8 @@ window.__galagaHarness__={
    stage: +cfg.stage || 7,
    createdAt: replayCreatedAt,
    duration: +cfg.duration || 113,
+   gameKey: cfg.gameKey || (typeof currentGamePackKey === 'function' ? currentGamePackKey() : 'aurora-galactica'),
+   gameTitle: cfg.gameTitle || (typeof currentGamePack === 'function' ? currentGamePack()?.metadata?.title || '' : ''),
    pilotUserId: cfg.userId || 'pilot-swd',
    pilotEmail: cfg.email || 'sgwoods@gmail.com',
    pilotInitials: cfg.initials || 'SWD'
@@ -242,7 +248,9 @@ window.__galagaHarness__={
     score:+cfg.score || 654321,
     stage:+cfg.stage || 7,
     at:'',
-    verified:true
+    verified:true,
+    gameKey: cfg.gameKey || (typeof currentGamePackKey === 'function' ? currentGamePackKey() : 'aurora-galactica'),
+    gameTitle: cfg.gameTitle || (typeof currentGamePack === 'function' ? currentGamePack()?.metadata?.title || '' : '')
    },
    {
     id:'remote-backup-run',
@@ -250,7 +258,9 @@ window.__galagaHarness__={
     score:100020,
     stage:4,
     at:'',
-    verified:true
+    verified:true,
+    gameKey: cfg.gameKey || (typeof currentGamePackKey === 'function' ? currentGamePackKey() : 'aurora-galactica'),
+    gameTitle: cfg.gameTitle || (typeof currentGamePack === 'function' ? currentGamePack()?.metadata?.title || '' : '')
    }
   ];
   LEADERBOARD.cacheStamp.mine=Date.now();
@@ -286,9 +296,23 @@ window.__galagaHarness__={
    score:+row?.score|0,
    stage:+row?.stage|0,
    at:String(row?.at||new Date().toISOString()),
-   build:String(row?.build||BUILD||'')
+   build:String(row?.build||BUILD||''),
+   gameKey:typeof normalizeScoreRecordGameKey==='function'
+    ? normalizeScoreRecordGameKey(row?.gameKey||currentScoreStorageGameKey())
+    : String(row?.gameKey||'aurora-galactica').trim()||'aurora-galactica',
+   gameTitle:typeof scoreGameTitleForKey==='function'
+    ? scoreGameTitleForKey(row?.gameKey||currentScoreStorageGameKey(),row?.gameTitle||'')
+    : String(row?.gameTitle||'').trim()
   }));
-  if(typeof saveScoreboard==='function')saveScoreboard(seeded);
+  const grouped=new Map();
+  for(const row of seeded){
+   const key=row.gameKey||'aurora-galactica';
+   if(!grouped.has(key))grouped.set(key,[]);
+   grouped.get(key).push(row);
+  }
+  if(typeof saveScoreboard==='function'){
+   for(const [gameKey,gameRows] of grouped.entries())saveScoreboard(gameRows,gameKey);
+  }
   return seeded.length;
  },
  setLeaderboardDateFilter(value=''){
@@ -383,6 +407,7 @@ window.__galagaHarness__={
   return this.inputState();
  },
  setupRemoteScoreSubmitTest(cfg={}){
+  if(cfg.forceAurora!==false&&typeof installGamePack==='function')installGamePack('aurora-galactica',{persist:false});
   window.__platinumHarnessForceRemoteWrite=1;
   window.__auroraHarnessForceRemoteWrite=1;
   localStorage.removeItem(SCOREBOARD_KEY);
@@ -420,6 +445,54 @@ window.__galagaHarness__={
   };
   syncAccountUi();
   return true;
+ },
+ currentPackKey(){
+  return typeof currentGamePackKey==='function'?currentGamePackKey():'';
+ },
+ localScoreRows(){
+  return typeof localLeaderboardRows==='function'
+   ? localLeaderboardRows().map(row=>({
+      id:String(row?.id||''),
+      score:+row?.score|0,
+      stage:+row?.stage|0,
+      gameKey:String(row?.gameKey||''),
+      gameTitle:String(row?.gameTitle||'')
+     }))
+   : [];
+ },
+ localScoreHistory(){
+  return typeof loadScoreHistory==='function'
+   ? loadScoreHistory().map(row=>({
+      id:String(row?.id||''),
+      score:+row?.score|0,
+      stage:+row?.stage|0,
+      gameKey:String(row?.gameKey||''),
+      gameTitle:String(row?.gameTitle||'')
+     }))
+   : [];
+ },
+ pilotProfileRows(){
+  return typeof rowsForPilotProfile==='function'
+   ? rowsForPilotProfile().map(row=>({
+      id:String(row?.id||''),
+      score:+row?.score|0,
+      stage:+row?.stage|0,
+      gameKey:String(row?.gameKey||''),
+      gameTitle:String(row?.gameTitle||''),
+      replayId:String(row?.replayId||'')
+     }))
+   : [];
+ },
+ replayOptionLabels(){
+  return Array.from(document.querySelectorAll('#movieRunSelect option')).map(node=>node.textContent?.trim()||'');
+ },
+ setRemoteMineRows(rows=[]){
+  LEADERBOARD.remote.mine=(Array.isArray(rows)?rows:[]).map(row=>normalizeRemoteScoreRow(Object.assign({},row)));
+  LEADERBOARD.cacheStamp.mine=Date.now();
+  LEADERBOARD.lastRemoteOk=LEADERBOARD.remote.mine.length?1:LEADERBOARD.lastRemoteOk;
+  if(typeof syncLeaderboardUi==='function')syncLeaderboardUi();
+  if(typeof syncAccountUi==='function')syncAccountUi();
+  return LEADERBOARD.remote.mine.length;
  },
  setupUnsignedTopScoreTest(){
   delete window.__platinumHarnessForceRemoteWrite;

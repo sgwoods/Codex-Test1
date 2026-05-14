@@ -19,6 +19,8 @@ function loadGuardiansRuntime(){
   const runtimeSource = fs.readFileSync(RUNTIME_SOURCE, 'utf8');
   const sandbox = {
     window: null,
+    buildPlatformInfo: () => ({ compatibility: '' }),
+    applicationReleaseRecord: (_gameKey, fallback = {}) => Object.assign({}, fallback || {}),
     GALAXY_GUARDIANS_ADAPTER_FORBIDDEN_AURORA_CAPABILITIES: Object.freeze({
       usesCaptureRescue: 0,
       usesDualFighterMode: 0,
@@ -33,6 +35,9 @@ function loadGuardiansRuntime(){
   vm.runInContext(`
     this.GALAXY_GUARDIANS_PACK = GALAXY_GUARDIANS_PACK;
     this.GALAXY_GUARDIANS_RUNTIME_PROFILE = GALAXY_GUARDIANS_RUNTIME_PROFILE;
+    this.createGalaxyGuardiansRuntimeState = createGalaxyGuardiansRuntimeState;
+    this.stepGalaxyGuardiansRuntime = stepGalaxyGuardiansRuntime;
+    this.summarizeGalaxyGuardiansRuntime = summarizeGalaxyGuardiansRuntime;
   `, sandbox);
   return sandbox;
 }
@@ -57,7 +62,7 @@ function hitScore(runtime, type, mode, escorts=0){
   return { score: state.score, event };
 }
 
-function simulateWaveAdvance(runtime){
+function simulateMissionCompletion(runtime){
   const state = runtime.createGalaxyGuardiansRuntimeState({ stage: 1, ships: 3, seed: 1979 });
   state.player.inv = 999;
   state.score = 1230;
@@ -67,8 +72,8 @@ function simulateWaveAdvance(runtime){
   for(let i = 0; i < Math.ceil((runtime.GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.waveClearDelay + .1) * 60); i++){
     runtime.stepGalaxyGuardiansRuntime(state, 1 / 60, {});
   }
-  const afterAdvance = runtime.summarizeGalaxyGuardiansRuntime(state);
-  return { afterClear, afterAdvance };
+  const afterComplete = runtime.summarizeGalaxyGuardiansRuntime(state);
+  return { afterClear, afterComplete };
 }
 
 function main(){
@@ -88,7 +93,7 @@ function main(){
     flagshipOneEscortDivePoints: hitScore(runtime, 'flagship', 'diving', 1).score,
     flagshipTwoEscortDivePoints: hitScore(runtime, 'flagship', 'diving', 2).score
   };
-  const progression = simulateWaveAdvance(runtime);
+  const progression = simulateMissionCompletion(runtime);
   const payload = {
     artifactStatus: artifact.status,
     mission: pack.attractMission,
@@ -102,7 +107,7 @@ function main(){
   if(artifact.gameKey !== pack.metadata?.gameKey || artifact.gameKey !== 'galaxy-guardians-preview'){
     fail('Guardians score/progression artifact is not linked to the preview pack', payload);
   }
-  if(artifact.status !== 'dev-preview-score-table-and-wave-progression-contract-not-public-release-tuning'){
+  if(artifact.status !== 'dev-preview-score-table-and-one-level-mission-contract-not-public-release-tuning'){
     fail('Guardians score/progression artifact has the wrong status', payload);
   }
   if(pack.metadata?.playable !== 0 || runtime.GALAXY_GUARDIANS_RUNTIME_PROFILE.publicPlayable !== 0){
@@ -144,17 +149,20 @@ function main(){
   if(!progression.afterClear.waveClearPending || !progression.afterClear.eventTypes.includes(waveRules.waveClearEvent)){
     fail('Guardians did not emit wave_clear when the rack was cleared', payload);
   }
-  if(progression.afterAdvance.stage !== 2 || progression.afterAdvance.alienCount !== waveRules.nextStageAlienCount){
-    fail('Guardians did not advance to a fresh next-stage rack after wave clear', payload);
+  if(waveRules.completionEndsRun && !progression.afterComplete.gameOver){
+    fail('Guardians did not end the one-level run after wave clear', payload);
   }
-  if(!progression.afterAdvance.eventTypes.includes(waveRules.stageAdvanceEvent) || !progression.afterAdvance.eventTypes.includes('wave_reset')){
-    fail('Guardians did not emit stage_advance and wave_reset during progression', payload);
+  if(!progression.afterComplete.completed || !progression.afterComplete.eventTypes.includes(waveRules.missionCompleteEvent)){
+    fail('Guardians did not emit mission_complete after the one-level rack was cleared', payload);
   }
-  if(waveRules.scoreMustPersist && progression.afterAdvance.score !== 1230){
-    fail('Guardians score did not persist across stage advance', payload);
+  if((waveRules.stageAfterCompletion|0) > 0 && progression.afterComplete.stage !== (waveRules.stageAfterCompletion|0)){
+    fail('Guardians stage drifted after one-level completion', payload);
   }
-  if(waveRules.livesMustPersist && progression.afterAdvance.lives !== 3){
-    fail('Guardians lives did not persist across stage advance', payload);
+  if(waveRules.scoreMustPersist && progression.afterComplete.score !== 1230){
+    fail('Guardians score did not persist through one-level completion', payload);
+  }
+  if(waveRules.livesMustPersist && progression.afterComplete.lives !== 3){
+    fail('Guardians lives did not persist through one-level completion', payload);
   }
   for(const [key, expected] of Object.entries(artifact.forbiddenAuroraCarryover || {})){
     if((runtime.GALAXY_GUARDIANS_RUNTIME_PROFILE.forbiddenAuroraCapabilities || {})[key] !== expected){
@@ -173,12 +181,14 @@ function main(){
       waveClearPending: progression.afterClear.waveClearPending,
       eventTypes: progression.afterClear.eventTypes
     },
-    afterAdvance: {
-      stage: progression.afterAdvance.stage,
-      alienCount: progression.afterAdvance.alienCount,
-      score: progression.afterAdvance.score,
-      lives: progression.afterAdvance.lives,
-      eventTypes: progression.afterAdvance.eventTypes
+    afterComplete: {
+      stage: progression.afterComplete.stage,
+      alienCount: progression.afterComplete.alienCount,
+      score: progression.afterComplete.score,
+      lives: progression.afterComplete.lives,
+      completed: progression.afterComplete.completed,
+      gameOver: progression.afterComplete.gameOver,
+      eventTypes: progression.afterComplete.eventTypes
     }
   }, null, 2));
 }
