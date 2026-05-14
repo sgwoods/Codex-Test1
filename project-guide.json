@@ -180,6 +180,16 @@
           "detail": "Automation-first release gate policy and lane expectations."
         },
         {
+          "label": "Review Learning Ledger",
+          "href": "project-guide.html#review-learning-ledger-doc",
+          "detail": "Architecture and code-review issue notes, proposed changes, accepted changes, and learning patterns rendered from the maintained ledger."
+        },
+        {
+          "label": "Code Review Model",
+          "href": "project-guide.html#code-review-model-doc",
+          "detail": "Local-to-hosted-dev review standard, severity model, packet/gate process, and ledger expectations."
+        },
+        {
           "label": "Architecture",
           "href": "https://github.com/sgwoods/Codex-Test1/blob/main/ARCHITECTURE.md",
           "detail": "Repo-level technical layout and implementation map."
@@ -316,6 +326,24 @@
       "title": "Testing And Release Gates Source",
       "summary": "Automation-first release discipline and documentation pass expectations.",
       "file": "TESTING_AND_RELEASE_GATES.md"
+    },
+    {
+      "id": "review-learning-ledger-doc",
+      "title": "Review Learning Ledger",
+      "summary": "Durable review-learning table for architecture and code review findings, proposed changes, accepted changes, and repeated issue patterns.",
+      "file": "REVIEW_LEARNING_LEDGER.md"
+    },
+    {
+      "id": "code-review-model-doc",
+      "title": "Code Review Model",
+      "summary": "Standing local-to-hosted-dev code-review standard, review severity model, automatic packet/gate process, and ledger workflow.",
+      "file": "CODE_REVIEW_MODEL.md"
+    },
+    {
+      "id": "architect-review-response-doc",
+      "title": "Architecture Baseline Review Response",
+      "summary": "Baseline architecture-review response that tracks platform separation, magic constants, harness fragility, enemy specs, and parameterization follow-through.",
+      "file": "ARCHITECT_REVIEW_RESPONSE.md"
     },
     {
       "id": "external-services-doc",

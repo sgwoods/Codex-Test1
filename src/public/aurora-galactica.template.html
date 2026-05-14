@@ -534,6 +534,25 @@
             </div>
         </section>
 
+        <section class="panel" id="review-learning">
+            <h2>Architecture and code review learning</h2>
+            <p class="narrative">The project treats review as a learning loop, not just a gate. Architecture review notes, code-review findings, proposed changes, accepted changes, and repeated patterns are captured in a durable ledger so future releases can avoid the same classes of mistakes and decide when a review note deserves a harness, release preflight, platform rule, or documentation rule.</p>
+            <div class="metricStrip">
+{{PUBLIC_REVIEW_LEARNING_SUMMARY}}
+            </div>
+            <div class="scoreChart">
+{{PUBLIC_REVIEW_LEARNING_ISSUES}}
+            </div>
+            <div class="grid">
+{{PUBLIC_REVIEW_LEARNING_PATTERNS}}
+            </div>
+            <div class="links">
+                <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}#review-learning-ledger-doc">Open review learning ledger</a>
+                <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}#code-review-model-doc">Open code review model</a>
+                <a class="button" href="{{LANE_PROJECT_GUIDE_HREF}}#architect-review-response-doc">Open architecture baseline review</a>
+            </div>
+        </section>
+
         <section class="panel" id="documentation-provenance">
             <h2>Documentation provenance</h2>
             <p class="narrative">The main pages are generated from persistent repository artifacts and analysis outputs. This section is itself generated from <code>documentation-provenance.json</code>, so release review can see which artifacts own the visible claims instead of treating page text as the source of truth.</p>
