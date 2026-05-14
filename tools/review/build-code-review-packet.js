@@ -6,7 +6,8 @@ const { execFileSync } = require('child_process');
 const ROOT = path.resolve(__dirname, '..', '..');
 const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'code-review');
 const EXCLUDED_PREFIXES = Object.freeze([
-  'reference-artifacts/analyses/code-review/'
+  'reference-artifacts/analyses/code-review/',
+  'reference-artifacts/analyses/review-learning/'
 ]);
 
 function git(args, fallback = ''){

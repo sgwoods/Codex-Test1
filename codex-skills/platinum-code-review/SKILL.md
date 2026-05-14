@@ -25,7 +25,7 @@ Start with:
 
 ```bash
 git status -sb
-npm run review:code
+npm run review:cycle
 ```
 
 For platform/game boundaries, prefer these nearby checks:
@@ -71,3 +71,5 @@ Report:
 4. checks run and checks still recommended
 5. release posture: local only, hosted-dev safe, beta-candidate after fixes, or
    not release-ready
+6. ledger impact: issues noted, proposed changes, accepted changes, and
+   recurring patterns captured in `REVIEW_LEARNING_LEDGER.md`

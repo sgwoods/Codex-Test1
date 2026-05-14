@@ -101,6 +101,43 @@ That check is intentionally narrow. It fails if the packet is missing, stale for
 the current changed source set, or contains automatic P0/P1 findings. P2/P3
 findings remain visible but do not block hosted `/dev`.
 
+## Review Learning Ledger
+
+Use:
+
+```bash
+npm run review:ledger
+```
+
+This writes:
+
+- `REVIEW_LEARNING_LEDGER.md`
+- `reference-artifacts/analyses/review-learning/latest.json`
+- `reference-artifacts/analyses/review-learning/<date>-<commit>/report.json`
+- `reference-artifacts/analyses/review-learning/<date>-<commit>/README.md`
+
+The ledger is the separate durable location for architecture-review and
+code-review notes over time. It tracks issue categories, proposed changes,
+accepted changes, and repeated learning patterns so we can see what kinds of
+problems recur and decide whether they should become a harness, release
+preflight, platform/game boundary rule, documentation rule, or explicit
+non-goal.
+
+Generated review-learning artifact directories are excluded from code-review
+packet freshness checks. The human-facing `REVIEW_LEARNING_LEDGER.md` remains in
+normal review scope.
+
+When a review cycle needs both a fresh code-review packet and an updated
+ledger, use:
+
+```bash
+npm run review:cycle
+```
+
+That command refreshes the packet, generates the ledger from that packet, then
+refreshes the packet again so the human-facing ledger document is included in
+the final reviewed source set.
+
 ## Required Output Shape For Codex Reviews
 
 When Codex performs the review, it should report:
@@ -112,6 +149,8 @@ When Codex performs the review, it should report:
 4. release impact: safe for local only, safe for hosted `/dev`, beta candidate
    after fixes, or not release-ready
 5. effort/value note: whether the fix is worth doing before the next publish
+6. ledger impact: whether a finding, accepted change, or repeated pattern should
+   update `REVIEW_LEARNING_LEDGER.md` through `npm run review:ledger`
 
 If there are no findings, say that clearly and name any residual risk or checks
 that were not run.
