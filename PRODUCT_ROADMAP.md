@@ -2,21 +2,20 @@
 
 ## Current Shipped State
 
-Verified May 12, 2026:
+Verified May 14, 2026:
 
 - hosted `/dev`
-  - active `1.3.0.1` forward-review line
+  - active `1.4.0.1` forward-review line
 - hosted `/beta`
-  - refreshed `1.3.0` reviewed lane sourced from the accepted `1.3.0.1`
-    bundle
+  - active `1.4.0-beta.1` reviewed candidate lane
 - hosted `/production`
-  - refreshed `1.3.0` public line
+  - stable `1.3.0` public line
 
 Aurora is in a post-`1.3.0` ship posture:
 
 - production now carries the current `1.3.0` public family
-- beta remains the proving lane for the next release step
-- dev carries the current forward review bundle
+- beta now carries the first deliberate `1.4.0-beta.1` candidate
+- dev carries the aligned `1.4.0.1` forward-review line
 - `main` is the forward line for the deliberate `1.4.0` pickup
 - future production promotions of similar scope should move a real public
   SemVer version rather than repeat the May 12 same-family exception
@@ -52,24 +51,26 @@ Goals:
 - keep release docs, scorecards, and committed evidence current
 - make new-machine and two-machine development simple and safe
 
-### `1.3.0.1` Review Bundle Is Now Publicly Carried
+### `1.4.0` Candidate Is Now Under Review
 
-The current practical artifact is a fourth-segment hosted-dev increment:
+The current practical artifacts are:
 
-- `1.3.0.1`
+- hosted `/dev`: `1.4.0.1`
+- hosted `/beta`: `1.4.0-beta.1`
 
-That bundle collected the documentation/dashboard/conformance process work,
-application artifact conformance scoring, resource economics, and the measured
-audio/event-feedback lift that have now been refreshed into the public `1.3.0`
-family through hosted `/beta` and hosted `/production`.
+This family collects the merged Guardians playable/conformance tranche,
+side-by-side game conformance entry points, documentation/release-note
+backfill, and the next round of platform/application boundary cleanup while
+keeping hosted `/production` stable on `1.3.0`.
 
 Recommended gate:
 
-- keep source and hosted `/dev` aligned for the next coherent review bundle
+- keep source, hosted `/dev`, and hosted `/beta` aligned around the current
+  candidate
 - require at least one measurable user-facing improvement or a clearly
   documented negative result that changes the next investment decision
-- keep hosted `/beta` and hosted `/production` stable until a real `1.4.0`
-  candidate exists
+- keep hosted `/production` stable until the `1.4.0` candidate earns
+  production promotion
 
 ### Pick Up `1.4.0`
 
@@ -142,7 +143,8 @@ Current decision:
 Once `1.3.0` is out, the roadmap pickup should be:
 
 - Short term: keep the refreshed `1.3.0` public family stable while using
-  hosted `/dev` for the next real review bundle.
+  hosted `/dev` and hosted `/beta` to review the live `1.4.0` candidate
+  family.
 - Medium term: `1.4.0` for level-by-level arcade depth plus
   platform-contract cleanup.
 - Longer term: `1.5.0` for shared-video evidence and flight-recorder

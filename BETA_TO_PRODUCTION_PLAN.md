@@ -2,18 +2,18 @@
 
 ## Current Release State
 
-As of May 12, 2026:
+As of May 14, 2026:
 
 - hosted `/beta`
-  - refreshed `1.3.0` beta lane sourced from the accepted `1.3.0.1`
-    hosted-dev review bundle
+  - deliberate `1.4.0-beta.1` candidate lane
 - hosted `/production`
-  - refreshed `1.3.0` public line aligned with the accepted beta candidate
+  - stable refreshed `1.3.0` public line
 
 This means the current public family is no longer the original May 5 `1.3.0`
 ship snapshot. It is the refreshed `1.3.0` line that carries the accepted
 conformance/documentation bundle first assembled on the `1.3.0.1` hosted-dev
-review line.
+review line, while hosted `/beta` has now moved on to the first deliberate
+`1.4.0` candidate family.
 
 Retrospective versioning note:
 
@@ -130,9 +130,9 @@ These are visible next-cycle targets, not hidden ship blockers.
 
 ### Immediate After Production
 
-- keep hosted `/production` and hosted `/beta` trustworthy on the refreshed
-  public `1.3.0` family
-- keep hosted `/dev` available for the next coherent forward-review bundle
+- keep hosted `/production` trustworthy on the refreshed public `1.3.0` family
+- keep hosted `/dev` and hosted `/beta` aligned around the `1.4.0` candidate
+  family
 - refresh scorecards, dashboards, and source docs whenever the next real review
   candidate is assembled
 

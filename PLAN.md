@@ -2,30 +2,29 @@
 
 ## Current State
 
-Verified May 12, 2026:
+Verified May 14, 2026:
 
 - hosted `/dev`
-  - active `1.3.0.1` forward-review line
+  - active `1.4.0.1` forward-review line
 - hosted `/beta`
-  - refreshed `1.3.0` reviewed lane sourced from the accepted `1.3.0.1`
-    bundle
+  - active `1.4.0-beta.1` reviewed candidate lane
 - hosted `/production`
-  - refreshed `1.3.0` public line
+  - stable `1.3.0` public line
 - `main`
-  - authoritative integration branch for the `1.4.0` pickup after the `1.3.0`
-    production conformance refresh
+  - authoritative integration branch for the live `1.4.0` candidate family
 
 This means:
 
-- the `1.3.0` fidelity-and-second-cabinet release remains the public family,
-  now refreshed through the accepted `1.3.0.1` conformance/docs/dashboard
-  bundle
-- hosted `/dev` remains the forward review lane, while `/beta` and
-  `/production` now carry the refreshed public `1.3.0` story
+- the `1.3.0` fidelity-and-second-cabinet release remains the public
+  production family
+- hosted `/dev` and hosted `/beta` now carry the deliberate `1.4.0`
+  candidate family, while `/production` remains on the stable public `1.3.0`
+  story
 - that same-family production refresh should be treated as an exception, not
   the normal public versioning pattern
-- the active source-planning question has moved from "what must land for `1.3.0`?"
-  to "what is the cleanest deliberate `1.4.0` pickup?"
+- the active source-planning question has moved from "what is the cleanest
+  deliberate `1.4.0` pickup?" to "what must be improved, verified, or cut
+  before `1.4.0` is strong enough for production?"
 - the post-release work should now be treated as intentional carry-forward, not
   as rediscovery after the ship is already done
 
@@ -54,7 +53,7 @@ resource economics fit together.
 - keep public project-page and rendered-homepage verification inside the
   release workflow
 
-### 3. `1.4.0` Fidelity And Feel Improvement
+### 3. `1.4.0` Beta Candidate Improvement
 
 - improve ship movement feel against real Galaga footage
 - continue audio identity polish beyond cue timing
@@ -213,13 +212,14 @@ Current conformance read:
 
 - hosted `/dev`, hosted `/beta`, and hosted `/production` now reflect the same
   release discipline, but hosted `/dev` is intentionally ahead as the
-  `1.3.0.1` review increment
-- the active source line should now present itself as the deliberate `1.4.0`
-  pickup family
-- the latest practical release artifact was the accepted `1.3.0.1`
-  hosted-dev review increment, now refreshed into the public `1.3.0` family
-- the next hosted `/beta` decision should now wait for a coherent `1.4.0`
-  improvement bundle rather than immediately reusing the just-shipped refresh
+  `1.4.0.1` review increment
+- the active source line now presents itself as the deliberate `1.4.0`
+  candidate family
+- the latest practical beta artifact is now `1.4.0-beta.1`, while the accepted
+  `1.3.0.1` hosted-dev review increment remains the source of the refreshed
+  public `1.3.0` family
+- the next hosted `/beta` decision is now about whether to keep strengthening
+  the `1.4.0` candidate family or cut scope before production
 - `1.3.0` was the intentional bundle for fidelity, trust, and the first
   significant second-game Platinum story
 - the shipped `1.3.0` family is now the stable public baseline while `main`
@@ -237,7 +237,7 @@ Current conformance read:
 After `1.3.0` ships, the plan should pick up in this order:
 
 1. Short term: keep the refreshed `1.3.0` public line trustworthy while
-   assembling the next coherent hosted `/dev` review bundle.
+   reviewing the live `1.4.0.1` and `1.4.0-beta.1` candidate lanes.
 2. Medium term: `1.4.0` arcade depth and platform-contract follow-through,
    including alien entry/challenge novelty, stage shape, audio/event feedback,
    and visual reference grounding.

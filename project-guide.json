@@ -1,7 +1,7 @@
 {
   "title": "Aurora Galactica And Platinum Project Guide",
   "strapline": "A current, hosted map of the project: what Platinum is, what each game owns, how ingestion and conformance work, how release lanes move, and which maintained docs are the source of truth.",
-  "currentGoal": "Carry the refreshed 1.3.0 public family cleanly while advancing the post-1.3.0 conformance program: improve Aurora's Galaga-like gameplay/audio/visual quality, keep Platinum clean as the reusable host, and turn ingestion plus local harnessing into a repeatable path for future games.",
+  "currentGoal": "Keep production trustworthy on the refreshed 1.3.0 public family while reviewing the deliberate 1.4.0 candidate family: improve Aurora's Galaga-like gameplay/audio/visual quality, keep Platinum clean as the reusable host, and turn ingestion plus local harnessing into a repeatable path for future games.",
   "sections": [
     {
       "id": "snapshot",
@@ -10,7 +10,7 @@
       "cards": [
         {
           "title": "What Shipped",
-          "body": "`1.3.0` is the current public Aurora / Platinum release family. The accepted `1.3.0.1` hosted-dev review increment has now refreshed hosted `/beta` and hosted `/production`, while hosted `/dev` remains the visible forward-review line. The release path keeps the shell, picker, release dashboards, and hosted docs part of the product."
+          "body": "`1.3.0` remains the current public Aurora / Platinum production family. Hosted `/dev` and hosted `/beta` now carry the first deliberate `1.4.0` candidate family as `1.4.0.1` and `1.4.0-beta.1`, while the release path keeps the shell, picker, release dashboards, and hosted docs part of the product."
         },
         {
           "title": "What The Platform Owns",
@@ -22,7 +22,7 @@
         },
         {
           "title": "Current Focus",
-          "body": "The main work is now conformance advancement: audio/event feedback, level arc, boss and formation grammar, visual reference grounding, resource economics, and ingestion-backed preparation for Galaxy Guardians and future games."
+          "body": "The main work is now candidate advancement: audio/event feedback, level arc, boss and formation grammar, visual reference grounding, resource economics, and first-class playable/conformance follow-through for Galaxy Guardians and future games."
         }
       ]
     },
@@ -77,8 +77,8 @@
       "summary": "How work is expected to move through the system.",
       "bullets": [
         "local `localhost` is the active engineering lane and the source of the current candidate.",
-        "hosted `/dev` is the shared integration preview and currently carries the visible `1.3.0.1` forward-review increment.",
-        "hosted `/beta` is the reviewed release-candidate lane.",
+        "hosted `/dev` is the shared integration preview and currently carries the visible `1.4.0.1` forward-review increment.",
+        "hosted `/beta` is the reviewed `1.4.0-beta.1` candidate lane.",
         "hosted `/production` is the public promise and should move only from an approved hosted `/beta` candidate.",
         "A meaningful `x.y` release should now include a complete documentation pass before hosted `/production` promotion."
       ]
@@ -98,7 +98,7 @@
         },
         {
           "title": "Galaxy Guardians",
-          "body": "Galaxy Guardians is currently a preview-only sibling application shell. Its job right now is to prove the pack-selection and identity path without pretending the gameplay is already there."
+          "body": "Galaxy Guardians is currently a playable-preview sibling application on Platinum. Its current job is to prove second-game hosting, game-owned identity, and first-class conformance growth without pretending the experience is already fully mature."
         }
       ]
     },
@@ -197,6 +197,11 @@
           "label": "1.3.0 Production Refresh Note",
           "href": "https://github.com/sgwoods/Codex-Test1/blob/main/RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md",
           "detail": "Detailed note for the refreshed public 1.3.0 family, including the accepted 1.3.0.1 review bundle, public documentation, conformance story, and measured audio lift."
+        },
+        {
+          "label": "1.4.0 Beta 1 Note",
+          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/RELEASE_NOTE_1.4.0_BETA_1.md",
+          "detail": "Detailed note for the first deliberate 1.4.0 beta candidate, including the merged Guardians playable/conformance tranche and the new multi-game release posture."
         }
       ]
     },
@@ -230,6 +235,12 @@
       "title": "Strategic Beta Review",
       "summary": "Maintained expert review that is refreshed after major hosted beta pushes to check near-term release value, long-term conformance direction, documentation freshness, and value-versus-compute discipline.",
       "file": "STRATEGIC_BETA_REVIEW.md"
+    },
+    {
+      "id": "release-note-140-beta-1-doc",
+      "title": "1.4.0 Beta 1 Note",
+      "summary": "Detailed beta-candidate note covering the first deliberate 1.4.0 family, the merged Guardians playable/conformance tranche, and the current lane split between production and candidate review.",
+      "file": "RELEASE_NOTE_1.4.0_BETA_1.md"
     },
     {
       "id": "release-note-130-production-refresh-doc",

@@ -178,9 +178,10 @@ That means:
 Current versioning read for the next cycle:
 
 - the shipped `1.3.0` family is now the stable public baseline
-- hosted `/dev` may use fourth-segment increments such as `1.3.0.1`,
-  `1.3.0.2`, and so on to make accumulated development value visible before a
-  formal beta/production candidate is cut
+- hosted `/dev` now carries the first `1.4.0.1` forward-review line for the
+  next minor-family candidate
+- hosted `/beta` now carries the first `1.4.0-beta.1` reviewed candidate for
+  that family
 - the May 12 same-family `1.3.0` production refresh should be treated as an
   exception, not the default model for future promotions
 - the next coherent public candidate should not collapse back into a `1.3.1`
@@ -281,16 +282,16 @@ Rule:
 
 ## Current Promotion Reality
 
-As of May 11, 2026:
+As of May 14, 2026:
 
-- hosted `/dev` is on the active `1.3.0.1` hosted-dev review line
-- hosted `/beta` is on the approved `1.3.0` beta lane
+- hosted `/dev` is on the active `1.4.0.1` hosted-dev review line
+- hosted `/beta` is on the active `1.4.0-beta.1` beta candidate lane
 - hosted `/production` is on the shipped `1.3.0` public line
 
 That means:
 
-- hosted `/dev` is intentionally ahead for review while hosted `/beta` and
-  hosted `/production` preserve one coherent shipped release family
+- hosted `/dev` and hosted `/beta` are intentionally ahead while hosted
+  `/production` preserves the coherent shipped `1.3.0` family
 - platform, application, and bundle tracking should stay explicit even when the
   lanes are close
 - the next beta action should be an authority-gated promotion from an accepted

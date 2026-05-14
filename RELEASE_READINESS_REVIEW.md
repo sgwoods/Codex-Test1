@@ -2,21 +2,22 @@
 
 ## Current Read
 
-Aurora `1.3.0` is the release currently live on hosted `/production`.
+Aurora `1.3.0` remains the release currently live on hosted `/production`.
 
-Verified May 12, 2026:
+Verified May 14, 2026:
 
 - hosted `/production`
   - current live family: `1.3.0`
 - hosted `/beta`
-  - current reviewed family: `1.3.0 beta`
+  - current reviewed family: `1.4.0 beta`
 - hosted `/dev`
-  - current forward review line: `1.3.0.1`
+  - current forward review line: `1.4.0.1`
 
 For exact active labels, use each lane's `build-info.json`. The important
-release truth is that hosted `/beta` and hosted `/production` now carry the
-same refreshed public `1.3.0` family sourced from the accepted `1.3.0.1`
-hosted-dev review bundle.
+release truth is that hosted `/production` continues to carry the refreshed
+public `1.3.0` family sourced from the accepted `1.3.0.1` hosted-dev review
+bundle, while hosted `/dev` and hosted `/beta` now carry the first deliberate
+`1.4.0` candidate family.
 
 ## What This Production Refresh Means
 
@@ -82,12 +83,12 @@ Important interpretation:
 - `Aurora Galactica` remains the primary shipped playable application on
   Platinum
 - `Galaxy Guardians` remains a preview application and ingestion-backed
-  second-cabinet proof, now with production-capable preview metadata aligned to
-  the runtime intent
-- hosted `/beta` and hosted `/production` are aligned around the refreshed
-  public `1.3.0` family
+  second-cabinet proof, now with a playable beta-candidate lane and
+  production-capable preview metadata aligned to the runtime intent
+- hosted `/beta` now carries the first deliberate `1.4.0-beta.1` candidate
+  while hosted `/production` remains on the refreshed public `1.3.0` family
 - hosted `/dev` remains the forward review lane and still uses the
-  fourth-segment `1.3.0.1` display line
+  fourth-segment `1.4.0.1` display line
 - layered release identity is now explicit across the integrated bundle, the
   Platinum platform, and each application
 - the shipped public line is backed by committed docs, harnesses, dashboards,
@@ -168,8 +169,8 @@ committed:
 The refreshed `1.3.0` production push is complete. The follow-up work now is:
 
 1. keep the refreshed public `1.3.0` line trustworthy
-2. use hosted `/dev` for the next coherent review bundle rather than treating
-   every source change as a lane move
+2. use hosted `/dev` and hosted `/beta` to review the live `1.4.0` candidate
+   family rather than treating every source change as a lane move
 3. shift the active execution frame to `1.4.0` arcade depth and
    platform-contract cleanup
 4. continue `Galaxy Guardians` through measured ingestion and game-owned
