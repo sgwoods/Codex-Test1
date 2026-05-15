@@ -1014,6 +1014,77 @@ const CUE_CONFIGS = {
         }
       },
       {
+        id: 'perfect-measured-onset-soft-ceremony-tail',
+        label: 'Perfect measured onset with soft ceremony tail',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.2,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.05, clipStart: 0, clipDuration: .32 },
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: .18, clipStart: .32, clipDuration: .88, delay: .32 }
+          ]
+        }
+      },
+      {
+        id: 'perfect-measured-onset-quiet-ceremony-tail',
+        label: 'Perfect measured onset with quiet ceremony tail',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.2,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.05, clipStart: 0, clipDuration: .32 },
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: .12, clipStart: .32, clipDuration: .88, delay: .32 }
+          ]
+        }
+      },
+      {
+        id: 'perfect-measured-onset-air-tail',
+        label: 'Perfect measured onset with air tail',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.2,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.05, clipStart: 0, clipDuration: .32 },
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: .08, clipStart: .32, clipDuration: .88, delay: .32 }
+          ]
+        }
+      },
+      {
+        id: 'perfect-clean-onset-scheduled-pad',
+        label: 'Perfect clean onset scheduled pad',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.2,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.05, clipStart: .02, clipDuration: .17 }
+          ]
+        }
+      },
+      {
+        id: 'perfect-clean-onset-whisper-tail',
+        label: 'Perfect clean onset with whisper tail',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.2,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.05, clipStart: .02, clipDuration: .17 },
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: .05, clipStart: .2, clipDuration: 1, delay: .2 }
+          ]
+        }
+      },
+      {
+        id: 'perfect-clean-onset-soft-tail',
+        label: 'Perfect clean onset with soft tail',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.2,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.05, clipStart: .02, clipDuration: .17 },
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: .1, clipStart: .2, clipDuration: 1, delay: .2 }
+          ]
+        }
+      },
+      {
         id: 'perfect-onset-body-ceremony-tail',
         label: 'Perfect onset/body with ceremony tail',
         spec: {
@@ -1968,25 +2039,7 @@ function rejectionFor(row, baseline, config){
 }
 
 function cueSpecScheduledDurationSeconds(spec){
-  if(!spec || typeof spec !== 'object') return null;
-  const clipDuration = Number(spec.clipDuration);
-  if(Number.isFinite(clipDuration) && clipDuration > 0) return round(clipDuration, 3);
-  const ends = [];
-  const step = Number(spec.step);
-  if(Array.isArray(spec.seq) && Number.isFinite(step) && step > 0){
-    ends.push(spec.seq.length * step);
-  }
-  for(const tone of Array.isArray(spec.tones) ? spec.tones : []){
-    const delay = Number(tone.delay || 0);
-    const duration = Number(tone.duration || 0);
-    if(Number.isFinite(delay) && Number.isFinite(duration)) ends.push(delay + duration);
-  }
-  for(const noise of Array.isArray(spec.noise) ? spec.noise : []){
-    const delay = Number(noise.delay || 0);
-    const duration = Number(noise.duration || 0);
-    if(Number.isFinite(delay) && Number.isFinite(duration)) ends.push(delay + duration);
-  }
-  return ends.length ? round(Math.max(...ends), 3) : null;
+  return specScheduledDurationSeconds(spec);
 }
 
 function decisionFor(rows, config){

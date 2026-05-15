@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "aurora-audio-conformance-lab-v2",
-  "generatedAt": "2026-05-15T20:25:08.845Z",
+  "generatedAt": "2026-05-15T21:38:06.049Z",
   "branch": "codex/macbook-audio-entry-grounding-cycle",
-  "commit": "c8c7246f",
+  "commit": "eb6d951f",
   "dirty": true,
   "problem": "Aurora audio is the current weakest quality category; stagePulse onset and acoustic event matching are the highest measured risks.",
   "strategy": "Group cue families by player meaning, attach current event-gap risk, attach focused candidate-loop history, and allow runtime promotion only after measured keeper gates plus full audio/semantic/quality checks.",

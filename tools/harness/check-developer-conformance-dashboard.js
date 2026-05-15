@@ -184,8 +184,17 @@ async function checkDashboardViewportFit(){
     const popup = await popupPromise;
     const popupUrl = popup.url();
     await popup.close();
-    if(popupUrl !== 'http://127.0.0.1:4312/local-dev/conformance-dashboard.html'){
+    const popupParsed = new URL(popupUrl);
+    const expectedPath = '/local-dev/conformance-dashboard.html';
+    if(popupParsed.origin !== 'http://127.0.0.1:4312' || popupParsed.pathname !== expectedPath){
       fail('conformance dashboard launcher opened unexpected URL', { popupUrl });
+    }
+    const selectedGame = popupParsed.searchParams.get('game');
+    if(selectedGame && selectedGame !== 'aurora-galactica'){
+      fail('conformance dashboard launcher opened unexpected game profile', { popupUrl, selectedGame });
+    }
+    if(popupParsed.hash && popupParsed.hash !== '#conformance'){
+      fail('conformance dashboard launcher opened unexpected anchor', { popupUrl, hash: popupParsed.hash });
     }
 
     await page.evaluate(() => {
