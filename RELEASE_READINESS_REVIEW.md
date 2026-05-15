@@ -2,33 +2,32 @@
 
 ## Current Read
 
-Aurora `1.3.0` remains the release currently live on hosted `/production`.
+Aurora `1.4.0` is now the release currently live on hosted `/production`.
 
 Verified May 14, 2026:
 
 - hosted `/production`
-  - current live family: `1.3.0`
+  - current live family: `1.4.0`
 - hosted `/beta`
   - current reviewed family: `1.4.0 beta`
 - hosted `/dev`
   - current forward review line: `1.4.0.1`
 
 For exact active labels, use each lane's `build-info.json`. The important
-release truth is that hosted `/production` continues to carry the refreshed
-public `1.3.0` family sourced from the accepted `1.3.0.1` hosted-dev review
-bundle, while hosted `/dev` and hosted `/beta` now carry the first deliberate
-`1.4.0` candidate family.
+release truth is that hosted `/production` now carries the deliberate public
+`1.4.0` family, while hosted `/dev` remains on the visible `1.4.0.1`
+forward-review line and hosted `/beta` remains the approved `1.4.0-beta.1`
+production-source lane.
 
-## What This Production Refresh Means
+## What This Production Release Means
 
-This is not a brand-new public SemVer family. It is a production refresh inside
-the `1.3.0` family.
+This is a real public SemVer family move. `1.4.0` is now the shipped public
+line on Platinum.
 
-The fourth-segment `1.3.0.1` line remains the hosted-dev review signal. It was
-used to gather the current conformance/docs/dashboard bundle, review it on the
-authority machine, promote it through hosted `/beta`, and then refresh hosted
-`/production` without pretending this was the same kind of public jump as the
-original `1.3.0` fidelity-and-second-cabinet release.
+The fourth-segment `1.4.0.1` line remains the hosted-dev review signal. It
+helped review the current family on the authority machine, while hosted `/beta`
+carried the approved `1.4.0-beta.1` source candidate that was promoted into
+hosted `/production`.
 
 Retrospective versioning note:
 

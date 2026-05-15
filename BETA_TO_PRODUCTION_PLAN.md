@@ -5,15 +5,13 @@
 As of May 14, 2026:
 
 - hosted `/beta`
-  - deliberate `1.4.0-beta.1` candidate lane
+  - approved `1.4.0-beta.1` production-source lane
 - hosted `/production`
-  - stable refreshed `1.3.0` public line
+  - live `1.4.0` public line
 
-This means the current public family is no longer the original May 5 `1.3.0`
-ship snapshot. It is the refreshed `1.3.0` line that carries the accepted
-conformance/documentation bundle first assembled on the `1.3.0.1` hosted-dev
-review line, while hosted `/beta` has now moved on to the first deliberate
-`1.4.0` candidate family.
+This means the deliberate `1.4.0` candidate family has now been promoted into
+the public line. Hosted `/beta` remains the approved source lane for that move,
+while hosted `/production` now carries the shipped `1.4.0` public family.
 
 Retrospective versioning note:
 

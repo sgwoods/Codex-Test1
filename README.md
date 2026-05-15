@@ -118,6 +118,7 @@ Release planning and readiness docs:
 - [PRODUCT_ROADMAP.md](PRODUCT_ROADMAP.md)
 - [RELEASE_POLICY.md](RELEASE_POLICY.md)
 - [RELEASE_READINESS_REVIEW.md](RELEASE_READINESS_REVIEW.md)
+- [RELEASE_NOTE_1.4.0_PRODUCTION.md](RELEASE_NOTE_1.4.0_PRODUCTION.md)
 - [RELEASE_NOTE_1.4.0_BETA_1.md](RELEASE_NOTE_1.4.0_BETA_1.md)
 - [RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md](RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md)
 - [RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md](RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md)
@@ -135,16 +136,16 @@ Current live release family:
 - hosted `/dev`:
   - active `1.4.0.1` forward-review line
 - hosted `/beta`:
-  - active `1.4.0-beta.1` reviewed candidate lane
+  - active `1.4.0-beta.1` approved production-source lane
 - hosted `/production`:
-  - stable `1.3.0` public line
+  - live `1.4.0` public line
 
 What that means:
 
 - Aurora now ships as the first playable application on Platinum
-- the public production family remains `1.3.0`, while the next deliberate
-  release family is now being reviewed as `1.4.0.1` on hosted `/dev` and
-  `1.4.0-beta.1` on hosted `/beta`
+- the public production family is now `1.4.0`, while hosted `/dev` remains the
+  visible `1.4.0.1` forward-review line and hosted `/beta` remains the approved
+  `1.4.0-beta.1` production-source lane
 - hosted `/dev` remains the visible forward-review lane for the current beta
   family
 - Galaxy Guardians is now part of the beta review story as a playable preview
@@ -154,9 +155,10 @@ What that means:
 
 Current go-forward focus:
 
-- keep the shipped `1.3.0` public line stable
-- use the hosted `1.4.0.1` `/dev` line and hosted `1.4.0-beta.1` `/beta`
-  lane to review the next coherent minor-family candidate
+- keep the shipped `1.4.0` public line stable
+- use the hosted `1.4.0.1` `/dev` line and hosted `/beta` lane to shape the
+  next coherent follow-through candidate rather than blurring production and
+  review work together
 - use [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md)
   as the maintained overview of how Platinum, applications, ingestion,
   harnessing, conformance metrics, and resource economics fit together
