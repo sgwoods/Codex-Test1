@@ -2077,6 +2077,7 @@ function syncGamePreviewUi(){
   const rows=Array.isArray(preview.scoreAdvanceTable)?preview.scoreAdvanceTable.filter(row=>row&&row.role!=='player'):[];
   gamePreviewScoreTable.innerHTML=rows.length
    ? [
+    '<span class="gamePreviewScoreTitle">SCORE ADVANCE TABLE</span>',
     '<span class="gamePreviewScoreHead">Alien</span>',
     '<span class="gamePreviewScoreHead gamePreviewScoreCell">Rack</span>',
     '<span class="gamePreviewScoreHead gamePreviewScoreCell">Dive</span>',

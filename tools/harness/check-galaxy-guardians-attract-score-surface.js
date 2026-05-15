@@ -73,6 +73,7 @@ async function main(){
     'MISSION: BREAK THE SIGNAL RACK',
     'WATCH FOR FLAGSHIP ESCORT DIVES',
     'SINGLE SHOT ONLY - MAKE IT COUNT',
+    'SCORE ADVANCE TABLE',
     'Signal Scout',
     'Signal Escort',
     'Signal Flagship',

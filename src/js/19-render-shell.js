@@ -102,7 +102,7 @@ function buildStartScoreAdvanceHtml(rows=[]){
   const number=+valueIn;
   return Number.isFinite(number)?String(number):'-';
  };
- return `<span class="startScoreAdvance"><span class="scoreHead scoreLabel">Alien</span><span class="scoreHead">Rack</span><span class="scoreHead">Dive</span><span class="scoreHead">+1</span><span class="scoreHead">+2</span>${scoreRows.map(row=>[
+ return `<span class="startScoreAdvance"><span class="scoreTitle">SCORE ADVANCE TABLE</span><span class="scoreHead scoreLabel">Alien</span><span class="scoreHead">Rack</span><span class="scoreHead">Dive</span><span class="scoreHead">+1</span><span class="scoreHead">+2</span>${scoreRows.map(row=>[
   `<span class="scoreLabel">${escapeMessageHtml(row.label||row.role||'Signal')}</span>`,
   `<span>${escapeMessageHtml(value(row.formationPoints))}</span>`,
   `<span>${escapeMessageHtml(value(row.divePoints))}</span>`,

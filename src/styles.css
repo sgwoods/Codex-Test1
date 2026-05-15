@@ -132,10 +132,11 @@ mask:
 #msg .scoreStage{color:#a9d8ff}
 #msg .scoreHot{color:#ffd86d}
 #msg .startMissionWrap{display:grid;gap:.16em;justify-items:center;margin:.22em auto 0;max-width:min(100%,28em)}
-#msg .startMissionTitle{color:#7ef2ff;font-size:.52em;line-height:1.15;letter-spacing:.08em}
-#msg .startMissionLine{color:#f4fbff;font-size:.42em;line-height:1.2;letter-spacing:.04em}
+#msg .startMissionTitle{color:#ff605b;font-size:.52em;line-height:1.15;letter-spacing:.08em}
+#msg .startMissionLine{color:#ffb2a7;font-size:.42em;line-height:1.2;letter-spacing:.04em}
 #msg .startScoreAdvance{display:grid;grid-template-columns:minmax(6em,auto) repeat(4,minmax(3.2em,auto));gap:.08em .48em;justify-content:center;align-items:baseline;width:min(100%,30em);margin:.22em auto 0;font-size:.36em;line-height:1.18}
 #msg .startScoreAdvance span{text-align:right;white-space:nowrap}
+#msg .startScoreAdvance .scoreTitle{grid-column:1/-1;text-align:center;color:#f4fbff;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.06em}
 #msg .startScoreAdvance .scoreLabel{text-align:left;color:#f4fbff;font-weight:700}
 #msg .startScoreAdvance .scoreHead{color:#ffe39a;font-weight:700;text-transform:uppercase}
 #msg .startScoreAdvance .scoreMuted{color:rgba(223,247,255,.68)}
@@ -295,9 +296,10 @@ mask:
 #gamePreviewHighlights span{display:block;border-left:2px solid rgba(255,216,109,.72);padding:5px 8px;background:rgba(255,216,109,.08);color:#f9fbff}
 #gamePreviewMission{display:grid;gap:5px;border:1px solid rgba(255,216,109,.18);background:rgba(255,216,109,.06);padding:8px 10px;font:700 11px/1.25 "Courier New",Consolas,monospace;color:#ffe39a}
 #gamePreviewMission[hidden],#gamePreviewScoreTable[hidden]{display:none}
-.gamePreviewMissionTitle{color:#7ef2ff;letter-spacing:.08em}
-.gamePreviewMissionLine{color:#f4fbff;letter-spacing:.04em}
+.gamePreviewMissionTitle{color:#ff605b;letter-spacing:.08em}
+.gamePreviewMissionLine{color:#ffb2a7;letter-spacing:.04em}
 #gamePreviewScoreTable{display:grid;grid-template-columns:minmax(88px,1fr) repeat(4,minmax(42px,auto));gap:4px 8px;align-items:center;border:1px solid rgba(136,245,255,.18);background:rgba(8,18,35,.62);padding:8px 10px;font:400 10px/1.2 "Courier New",Consolas,monospace;color:#dff7ff}
+.gamePreviewScoreTitle{grid-column:1/-1;text-align:center;color:#f4fbff;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:2px}
 .gamePreviewScoreHead{color:#ffe39a;font-weight:700;text-transform:uppercase}
 .gamePreviewScoreLabel{color:#f4fbff;font-weight:700}
 .gamePreviewScoreCell{text-align:right;white-space:nowrap}
