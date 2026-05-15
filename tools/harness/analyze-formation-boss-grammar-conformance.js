@@ -215,6 +215,7 @@ function buildReport(){
     : null;
   const pathFamilyCapReason = pathFamily.summary?.referenceComparisonCapReason || null;
   const pathFamilyLabelSupport = pathFamily.summary?.referenceLabelSupport || {};
+  const pathFamilyTrajectoryComparison = pathFamily.summary?.referenceTrajectoryComparison || {};
   const labelBackedPathFamilyReady = !!pathFamilyLabelSupport.labelBackedComparisonReady;
   const runtimeSlotTrackCount = (pathSlot.summary?.regularSlotTracks || 0) + (pathSlot.summary?.challengeSlotTracks || 0);
   const runtimePathTrackCount = pathSlot.summary?.movingTracks || 0;
@@ -280,7 +281,7 @@ function buildReport(){
         : 'Runtime path/slot extraction score, capped at the current no-reference-comparison ceiling so extraction coverage does not masquerade as arcade-perfect path fidelity.',
       currentRead: pathFamilyScore != null
         ? (labelBackedPathFamilyReady
-          ? `${classifiedPathFamilyCount} tracks classified into path families; expected family coverage ${round(expectedPathFamilyCoverage)}; accepted Galaga labels ${pathFamilyLabelSupport.acceptedRegularEntryCount || 0} regular / ${pathFamilyLabelSupport.acceptedChallengeEntryCount || 0} challenge; cap ${pathFamilyScore}/10 (${pathFamilyCapReason}).`
+          ? `${classifiedPathFamilyCount} tracks classified into path families; expected family coverage ${round(expectedPathFamilyCoverage)}; accepted Galaga labels ${pathFamilyLabelSupport.acceptedRegularEntryCount || 0} regular / ${pathFamilyLabelSupport.acceptedChallengeEntryCount || 0} challenge; trajectory-vector/rack score ${round(pathFamilyTrajectoryComparison.score10, 1)}/10 (${pathFamilyTrajectoryComparison.status || 'not-run'}); cap ${pathFamilyScore}/10 (${pathFamilyCapReason}).`
           : `${classifiedPathFamilyCount} tracks classified into path families; expected family coverage ${round(expectedPathFamilyCoverage)}; capped score ${pathFamilyScore}/10 until direct reference labels land.`)
         : pathSlotScore == null
         ? `${pathHintCount} motion hints and ${formationSlotHintCount} formation slot hints across ${windows.length} windows.`
@@ -320,6 +321,7 @@ function buildReport(){
       pathFamilyComparisonConfidence: pathFamily.summary?.comparisonConfidence ?? null,
       pathFamilyReferenceCapReason: pathFamilyCapReason,
       pathFamilyReferenceLabelSupport: pathFamilyLabelSupport,
+      pathFamilyReferenceTrajectoryComparison: pathFamilyTrajectoryComparison,
       classifiedPathFamilyCount,
       expectedPathFamilyCoverage,
       weakestMetric,

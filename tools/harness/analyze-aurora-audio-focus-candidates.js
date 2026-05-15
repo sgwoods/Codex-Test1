@@ -1014,6 +1014,42 @@ const CUE_CONFIGS = {
         }
       },
       {
+        id: 'perfect-onset-body-ceremony-tail',
+        label: 'Perfect onset/body with ceremony tail',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.2,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.05, clipStart: 0, clipDuration: .24 },
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: .62, clipStart: .24, clipDuration: .96, delay: .24 }
+          ]
+        }
+      },
+      {
+        id: 'perfect-onset-body-soft-tail',
+        label: 'Perfect onset/body with soft tail',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.2,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.05, clipStart: 0, clipDuration: .24 },
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: .48, clipStart: .24, clipDuration: .96, delay: .24 }
+          ]
+        }
+      },
+      {
+        id: 'perfect-bright-onset-quiet-ceremony-tail',
+        label: 'Perfect bright onset with quiet ceremony tail',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.2,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.16, clipStart: 0, clipDuration: .24 },
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: .38, clipStart: .24, clipDuration: .96, delay: .24 }
+          ]
+        }
+      },
+      {
         id: 'perfect-full-handoff-safe',
         label: 'Perfect full handoff-safe phrase',
         spec: {

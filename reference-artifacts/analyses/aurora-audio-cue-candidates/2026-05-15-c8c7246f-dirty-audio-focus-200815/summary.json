@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-focus-candidate-loop-summary",
+  "generatedAt": "2026-05-15T20:08:15.525Z",
+  "branch": "codex/macbook-audio-entry-grounding-cycle",
+  "commit": "c8c7246f",
+  "dirty": true,
+  "gridLimit": 0,
+  "repetitions": 3,
+  "results": [
+    {
+      "key": "challenge-perfect",
+      "report": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-15-c8c7246f-dirty-audio-focus-200815/challenge-perfect/report.json",
+      "decision": {
+        "status": "no-keeper",
+        "keep": false,
+        "baseline": "baseline-current",
+        "best": null,
+        "measuredBest": "perfect-bright-onset-quiet-ceremony-tail",
+        "reason": "No Challenge Perfect candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
+      },
+      "topCandidates": [
+        {
+          "id": "perfect-bright-onset-quiet-ceremony-tail",
+          "risk10": 3.16,
+          "worstSegmentRisk10": 4.39,
+          "worstSegmentRole": "onset",
+          "durationGapSeconds": 0.14,
+          "centroidGapHz": 44.3,
+          "bandShapeGap": 0.2551,
+          "lossCompositeScore10": null,
+          "lossCompositeDurationGapSeconds": null,
+          "lossCompositeClears": null,
+          "cadencePressureScore10": null,
+          "cadenceWeakestAxis": "",
+          "maskingSeparationScore10": null,
+          "maskingWeakestAxis": "",
+          "keeperRead": "whole-cue risk improved only 0.05; segment risk improved only -0.17; duration gap improved only 0.013s"
+        },
+        {
+          "id": "perfect-onset-body-soft-tail",
+          "risk10": 3.19,
+          "worstSegmentRisk10": 4.49,
+          "worstSegmentRole": "onset",
+          "durationGapSeconds": 0.14,
+          "centroidGapHz": 44.333,
+          "bandShapeGap": 0.2479,
+          "lossCompositeScore10": null,
+          "lossCompositeDurationGapSeconds": null,
+          "lossCompositeClears": null,
+          "cadencePressureScore10": null,
+          "cadenceWeakestAxis": "",
+          "maskingSeparationScore10": null,
+          "maskingWeakestAxis": "",
+          "keeperRead": "whole-cue risk improved only 0.02; segment risk improved only -0.27; duration gap improved only 0.013s"
+        },
+        {
+          "id": "perfect-onset-body-ceremony-tail",
+          "risk10": 3.2,
+          "worstSegmentRisk10": 4.28,
+          "worstSegmentRole": "onset",
+          "durationGapSeconds": 0.14,
+          "centroidGapHz": 50.567,
+          "bandShapeGap": 0.2403,
+          "lossCompositeScore10": null,
+          "lossCompositeDurationGapSeconds": null,
+          "lossCompositeClears": null,
+          "cadencePressureScore10": null,
+          "cadenceWeakestAxis": "",
+          "maskingSeparationScore10": null,
+          "maskingWeakestAxis": "",
+          "keeperRead": "whole-cue risk improved only 0.01; segment risk improved only -0.06; duration gap improved only 0.013s"
+        }
+      ]
+    }
+  ]
+}
