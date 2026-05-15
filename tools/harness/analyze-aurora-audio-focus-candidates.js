@@ -985,7 +985,15 @@ const CUE_CONFIGS = {
         }
       }
     ],
-    keeper: { risk: .25, segment: .45, duration: .05, acceptableDuration: .08, centroidWorsenHz: 120, bandWorsen: .055 }
+    keeper: {
+      risk: .25,
+      segment: .45,
+      duration: .05,
+      acceptableDuration: .08,
+      centroidWorsenHz: 120,
+      bandWorsen: .055,
+      minimumScheduledDurationSeconds: 1.1
+    }
   },
   'capture-beam': {
     cue: 'captureBeam',
@@ -1818,6 +1826,11 @@ function rejectionFor(row, baseline, config){
   const durationImprovedEnough = rowDurationGap <= baselineDurationGap - (gate.duration ?? .08);
   const durationCloseEnough = rowDurationGap <= acceptableDuration;
   if(!durationImprovedEnough && !durationCloseEnough) reasons.push(`duration gap improved only ${round(baselineDurationGap - rowDurationGap, 3)}s`);
+  const minimumScheduledDurationSeconds = Number(gate.minimumScheduledDurationSeconds);
+  const scheduledDurationSeconds = cueSpecScheduledDurationSeconds(row.spec);
+  if(Number.isFinite(minimumScheduledDurationSeconds) && Number.isFinite(scheduledDurationSeconds) && scheduledDurationSeconds < minimumScheduledDurationSeconds){
+    reasons.push(`scheduled cue duration ${scheduledDurationSeconds}s < ${minimumScheduledDurationSeconds}s ceremony minimum`);
+  }
   if(row.lossComposite){
     if(!row.lossComposite.clearsDuration) reasons.push(`loss composite duration gate failed (${row.lossComposite.durationGapSeconds}s scheduled gap)`);
     if(!row.lossComposite.clearsRoleGates) reasons.push('loss composite role gate failed');
@@ -1850,6 +1863,28 @@ function rejectionFor(row, baseline, config){
   return reasons.length ? reasons.join('; ') : 'clears keeper gates';
 }
 
+function cueSpecScheduledDurationSeconds(spec){
+  if(!spec || typeof spec !== 'object') return null;
+  const clipDuration = Number(spec.clipDuration);
+  if(Number.isFinite(clipDuration) && clipDuration > 0) return round(clipDuration, 3);
+  const ends = [];
+  const step = Number(spec.step);
+  if(Array.isArray(spec.seq) && Number.isFinite(step) && step > 0){
+    ends.push(spec.seq.length * step);
+  }
+  for(const tone of Array.isArray(spec.tones) ? spec.tones : []){
+    const delay = Number(tone.delay || 0);
+    const duration = Number(tone.duration || 0);
+    if(Number.isFinite(delay) && Number.isFinite(duration)) ends.push(delay + duration);
+  }
+  for(const noise of Array.isArray(spec.noise) ? spec.noise : []){
+    const delay = Number(noise.delay || 0);
+    const duration = Number(noise.duration || 0);
+    if(Number.isFinite(delay) && Number.isFinite(duration)) ends.push(delay + duration);
+  }
+  return ends.length ? round(Math.max(...ends), 3) : null;
+}
+
 function decisionFor(rows, config){
   const baseline = rows.find(row => row.id === 'baseline-current');
   const candidates = rows.filter(row => row.id !== 'baseline-current');
@@ -1878,6 +1913,18 @@ function decisionFor(rows, config){
     bandDelta: round(baseline.bandShapeGap - best.bandShapeGap, 4),
     reason: `${config.title} candidate clears measured ${config.lossComposite?.calibration ? 'calibrated ' : ''}keeper gates.`
   };
+}
+
+function successMeasureFor(config){
+  const base = config.cue === 'stagePulse'
+    ? 'A keeper must improve whole-cue risk, onset segment risk, cadence pressure, and masking separation while preserving duration pocket, band shape, and segment-role guards.'
+    : config.lossComposite
+      ? 'A keeper must improve whole-cue risk and onset/body/tail segment risk while preserving scheduled loss-phrase duration, semantic role coverage, and band/centroid guardrails.'
+      : 'A keeper must improve whole-cue risk, segment risk, and duration gap while avoiding material centroid, band-shape, or segment-role regressions.';
+  const minimumScheduledDurationSeconds = Number(config.keeper?.minimumScheduledDurationSeconds);
+  return Number.isFinite(minimumScheduledDurationSeconds)
+    ? `${base} Runtime promotion also requires a scheduled cue duration of at least ${minimumScheduledDurationSeconds}s so ceremony/reward cues do not collapse into an onset-only subwindow.`
+    : base;
 }
 
 function aggregateRows(sampleRows, config){
@@ -2230,11 +2277,7 @@ async function analyzeCue(key, generatedAt, rootDir){
       fallback: 'offline-spec-render',
       rationale: 'Short cue captures include a small recorder preroll so onset analysis reflects the cue rather than MediaRecorder startup timing. Offline spec rendering keeps candidate loops useful on machines where headless browser audio taps expose live tracks but return zero MediaRecorder bytes.'
     },
-    successMeasure: config.cue === 'stagePulse'
-      ? 'A keeper must improve whole-cue risk, onset segment risk, cadence pressure, and masking separation while preserving duration pocket, band shape, and segment-role guards.'
-      : config.lossComposite
-        ? 'A keeper must improve whole-cue risk and onset/body/tail segment risk while preserving scheduled loss-phrase duration, semantic role coverage, and band/centroid guardrails.'
-      : 'A keeper must improve whole-cue risk, segment risk, and duration gap while avoiding material centroid, band-shape, or segment-role regressions.',
+    successMeasure: successMeasureFor(config),
     source: {
       comparisonSet: set.id,
       referenceClip: set.referenceClip,

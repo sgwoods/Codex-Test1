@@ -1,0 +1,132 @@
+# MacBook Post-Beta 10-Hour Conformance Plan
+
+Created: May 15, 2026
+
+Branch: `codex/macbook-post-beta-conformance-10h`
+
+Base: `af3f2b85` (`Record c9d9bb47 beta review cycle`)
+
+Beta context:
+
+- hosted `/dev` was reviewed from `c9d9bb47`
+- the iMacM1 authority machine preserved review artifacts in `af3f2b85`
+- hosted `/beta` was published from `af3f2b85`
+- beta label: `1.4.0-beta.1+build.747.sha.af3f2b85.beta`
+
+Release authority remains on `imacm1 / iMacM1`. This MacBook may develop,
+test, branch, commit, push, merge normal development work, and publish hosted
+`/dev` when appropriate. It must not approve or publish beta or production
+unless release authority is explicitly transferred.
+
+## Top-Level Goal
+
+Use a 10-hour MacBook work block to make measurable progress toward the next
+post-beta `1.4.0` quality bundle while keeping every improvement tied to
+persistent evidence. The work should improve Aurora player experience, improve
+the reusable ingestion/conformance harness, and keep the public project docs
+and dashboard aligned with what we learn.
+
+The strongest near-term value is expected from audio UX conformance, challenge
+stage arrival/variation, boss and formation choreography, persona distribution
+evidence, and conformance economics reporting.
+
+## Work Plan
+
+| Time | Focus | Goal | Expected output |
+| ---: | --- | --- | --- |
+| 0:00-0:30 | Sync and branch | Pull `main` through `af3f2b85`, verify machine state, and create a short-lived development branch | Clean branch from the beta-published source head |
+| 0:30-1:30 | Beta/dev review pass | Compare local/dev/beta behavior for the new bundle | Notes or issues for Player Two, Watch Mode, music/SFX, scoreboard, dashboards, docs, and Galaxy Guardians preview containment |
+| 1:30-3:30 | Audio UX conformance | Attack high-value audio gaps: inter-level audio length, stage transition cue clarity, runtime recovery, impact/loss/reward readability | Harness updates, candidate artifacts, and runtime fixes where measurement supports them |
+| 3:30-5:30 | Challenge-stage conformance | Improve metrics and behavior around alien arrival, novelty, trajectories, and stage variation | Updated challenge-stage scoring plus at least one gameplay or harness improvement |
+| 5:30-7:00 | Boss/formation choreography | Improve boss entry, first-hit feedback, missile/pass-through feel, and formation-settle timing | Better measured formation/boss behavior and regression coverage |
+| 7:00-8:00 | Persona gameplay evaluation | Refresh persona distributions and inspect player-impact signals | Updated score/stage/time distributions, tables, charts, and conclusions |
+| 8:00-9:00 | Dashboard/docs/economics | Keep user-visible docs and dashboard aligned with new findings | Public project/dev docs updated from persistent artifacts |
+| 9:00-10:00 | Integration and review | Build, run focused checks, generate review artifacts, commit, and push | Clean pushed branch ready for dev publish or later merge |
+
+## Prioritization Rule
+
+Favor work that moves both the game and the measurement system:
+
+- measurable player-experience improvement first
+- reusable harness or ingestion logic second
+- dashboard/documentation visibility third
+- cosmetic-only changes only when they unblock review or remove confusion
+
+If an attempted runtime change does not produce a measured improvement, preserve
+the harness evidence and use it to improve the next candidate loop instead of
+forcing a subjective tuning change.
+
+## Success Criteria
+
+By the end of the block, the branch should have:
+
+- at least one meaningful user-facing conformance improvement
+- updated harnesses, artifacts, or scorer logic that future games can reuse
+- dashboard/docs reflecting the new state and cost/value interpretation
+- targeted checks passing for the touched surfaces
+- a clean pushed branch with a recommendation to either publish hosted `/dev`
+  or keep iterating before lane movement
+
+## First Work Block
+
+Start with the audio UX path because it has the clearest current player impact:
+
+- confirm baseline audio score and cue-alignment status
+- inspect latest audio event-gap and candidate artifacts
+- focus on inter-level/stage transition cue length and audio recovery safety
+- keep semantic score and cue alignment from regressing
+- only promote a runtime cue if measured evidence and harness checks support it
+
+## Work Log
+
+### 0:00-0:30 Sync, Branch, And Startup Baseline
+
+Status: complete.
+
+- Synced `main` from `c9d9bb47` to `af3f2b85`, preserving the iMacM1
+  beta-review artifact commit.
+- Created `codex/macbook-post-beta-conformance-10h` from `af3f2b85`.
+- `machine:status` and `machine:doctor` are development-ready on this
+  MacBook.
+- Release remains correctly blocked here because authority is still on
+  `imacm1 / iMacM1`.
+- Local game and viewer services are reachable at `http://127.0.0.1:8000/`
+  and `http://127.0.0.1:4311/api/runs`.
+
+### 0:30-1:45 Audio Baseline And First Harness Improvement
+
+Status: started, with one reusable harness improvement kept.
+
+Measured baseline:
+
+| Run | Result | Wall | CPU |
+| --- | --- | ---: | ---: |
+| `harness:analyze-audio-theme-comparison` | fresh theme comparison artifact | `85.289s` | `165.66s` |
+| `harness:analyze:aurora-audio-event-gap` | highest risk `challengePerfect` onset, `7.13/10` | `0.239s` | `0.28s` |
+| `harness:check:audio-cue-alignment` | `9/9` checks passed | `9.227s` | `15.86s` |
+| `harness:score:quality-conformance` | overall `9.1/10`, weakest category audio `6.9/10` | `66.408s` | `76.78s` |
+
+Candidate-loop result:
+
+- The segment-synthesis Challenge Perfect loop found no safe keeper.
+- The broader reference-window focus loop initially found short, low-risk
+  candidates, but they would have shortened the reward cue to `0.24s-0.32s`.
+- That acoustic result conflicts with the player-experience goal of preserving
+  reward/inter-level ceremony and with the project rule to preserve canonical
+  phrases unless a short excerpt is proven necessary.
+- Harness improvement: `challengePerfect` now has a `1.1s` minimum scheduled
+  duration keeper gate, and the report success measure explains why ceremony
+  cues must not collapse into onset-only subwindows.
+- Rerunning the focus loop now correctly reports `no-keeper`; the measured-best
+  short subclip is rejected with `scheduled cue duration 0.32s < 1.1s ceremony
+  minimum`.
+
+Position in plan:
+
+- We advanced the audio conformance process without a runtime audio promotion.
+- The work increased conformance safety by preventing a misleading local
+  acoustic win from becoming a worse player-facing cue.
+- Next audio step: either widen the Challenge Perfect candidate generator around
+  full-phrase/envelope-preserving candidates, or pivot to the higher
+  user-impact impact/explosion cue family now that the reward-subclip path is
+  guarded.

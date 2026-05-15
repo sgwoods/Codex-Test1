@@ -62,6 +62,28 @@ The project is therefore not in a "ship fast from wherever we are" mode.
 
 It is in a "continue deliberately without losing agility" mode.
 
+## Active Post-Beta MacBook Work Block
+
+After the first `1.4.0` beta was published from the iMacM1 release-authority
+machine, this MacBook resumed normal development from the clean review head:
+
+- base commit: `af3f2b85`
+- beta label: `1.4.0-beta.1+build.747.sha.af3f2b85.beta`
+- working branch: `codex/macbook-post-beta-conformance-10h`
+- plan: [MACBOOK_POST_BETA_10_HOUR_CONFORMANCE_PLAN.md](MACBOOK_POST_BETA_10_HOUR_CONFORMANCE_PLAN.md)
+
+The work block should prioritize measured user-experience conformance:
+
+- audio UX conformance and runtime recovery first
+- challenge-stage arrival, novelty, and trajectory variation second
+- boss/formation choreography third
+- persona distribution evidence, docs, dashboard, and economics updates as the
+  evidence layer
+
+The branch may be pushed and merged through normal development flow. It must
+not publish beta or production unless release authority is explicitly
+transferred to this machine.
+
 ## Multi-Machine Operating Rule
 
 Aurora now has a standard multi-machine workflow.

@@ -110,11 +110,11 @@ Current result:
 | Quality score audio category | `6.9/10` |
 | Overall quality score | `9.1/10` |
 | Semantic event score | `9.78/10` |
-| Acoustic event score | `6.30/10` |
-| Average worst segment risk | `3.70/10` |
+| Acoustic event score | `6.10/10` |
+| Average worst segment risk | `3.90/10` |
 | Cue-contract readiness | `9.09/10` |
 | Contracted priority cue families | `8` cues |
-| Highest current audio gap | `captureBeam` tail |
+| Highest current audio gap | `challengePerfect` onset |
 | Focused candidate-loop coverage | `enemyShot`, `challengePerfect`, and the contracted cue set |
 
 This means the process and runtime audio both moved forward, while audio still
@@ -123,10 +123,12 @@ remains Aurora's weakest quality category. The latest runtime win is an
 fresh full-theme validation reduced average worst segment risk from `4.32/10`
 to `3.70/10`, kept cue alignment at `9/9`, and moved the highest residual
 segment gap away from enemy fire to `captureBeam` tail. The prior
-`challengePerfect` pass produced focused keepers, but both runtime candidates
-lowered the broader audio score, so no perfect-clear runtime cue was promoted.
-This is the intended guardrail: focused similarity is evidence, not release
-authority by itself.
+`challengePerfect` pass produced focused low-risk subwindow candidates, but the
+post-beta harness now rejects onset-only reward cues below a `1.1s` scheduled
+duration ceremony floor. No perfect-clear runtime cue was promoted. This is the
+intended guardrail: focused similarity is evidence, not release authority by
+itself, and a cue that wins the onset comparison can still be wrong for the
+player if it abbreviates the reward/inter-level moment.
 
 May 11 capture-stability and ship-loss trial pass:
 
@@ -353,8 +355,9 @@ The next high-value audio pass should split into two measured tracks:
   residual tail gap and explicitly measure whether the beam stays threatening
   without masking shot/hit cues
 - `challengePerfect` runtime strategy: the focused loop found good acoustic
-  candidates, but full-theme promotion failed, so the next attempt should model
-  mix position, tail budget, and ceremony duration before changing runtime
+  onset candidates, but the new ceremony-duration gate rejects short subwindows
+  for runtime promotion, so the next attempt should model full-phrase mix
+  position, tail budget, and reward/inter-level ceremony before changing runtime
 - `stagePulse` pressure-bed modeling: a stronger low-brightness, low-variance
   generator that explicitly targets repeat stability, zero-crossing calm,
   cadence pressure, and action-cue masking before promotion precheck
