@@ -57,8 +57,8 @@ rather than letting internal conformance terminology imply that it already has.
 Before we expand the public depth, the current one-level public slice should
 also get its obvious baseline Galaxian-family cues into better shape:
 `WAIT` presentation, score advance table, swarm march cadence, explosion
-states, opening palettes, missile-ready ship state, reserve ships, and level
-flags.
+states, opening palettes, missile-ready ship state, reserve ships, level
+flags, and bottom-pass-through re-entry from the top instead of pop-in return.
 
 ## Level Model
 
@@ -141,6 +141,8 @@ Focus:
 
 - opening-slice visible fidelity so the one public level looks more credibly
   Galaxian-family before more depth is surfaced
+- measured wrap/return behavior where bottom-exit ships continue through and
+  re-enter from the top rather than simply reappearing
 - captured later-band runtime/reference traces
 - promoted cue-window, waveform, and spectrogram comparisons after the latest
   cue pass

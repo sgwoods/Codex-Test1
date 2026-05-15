@@ -128,7 +128,8 @@ resource economics fit together.
 - treat the obvious current one-level baseline misses as first-class work:
   `WAIT`/headline treatment, score-advance table, rack march cadence,
   explosion states, swarm palettes, missile-ready ship state, reserve ships,
-  and stage-flag graphics
+  stage-flag graphics, and bottom-pass-through re-entry from the top instead
+  of simple pop-in return
 - actively advance the longer-range `Galaxian`-style ingestion path through
   durable reference analysis, platform extension planning, and the other
   machine's parallel work
