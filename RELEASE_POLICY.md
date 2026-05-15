@@ -181,6 +181,25 @@ See also:
 
 - [RELEASE_LANE_MODEL.md](RELEASE_LANE_MODEL.md)
 
+## Security/Auth/Replay Storage Rule
+
+Account, score, replay, and high-score video features are release-sensitive
+surfaces. The maintained lock-down source is:
+
+- [SECURITY_AUTH_REPLAY_STORAGE_LOCKDOWN.md](SECURITY_AUTH_REPLAY_STORAGE_LOCKDOWN.md)
+
+Publish preflight runs:
+
+```bash
+npm run harness:check:security-auth-replay-storage
+```
+
+That gate keeps browser code free of service-role material, OAuth client
+secrets, and YouTube upload endpoints; confirms top-10 video posting eligibility
+is authenticated and confirmed-account only; preserves non-production test-pilot
+limits; and keeps replay video browser-local until a server-owned upload/storage
+policy exists.
+
 ## Release Authority Rule
 
 Aurora now uses a one-authority release model.

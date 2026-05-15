@@ -1,18 +1,47 @@
 {
   "schemaVersion": 1,
   "artifactType": "platinum-code-review-packet",
-  "generatedAt": "2026-05-15T00:11:25.192Z",
-  "branch": "main",
+  "generatedAt": "2026-05-15T12:55:15.335Z",
+  "branch": "codex/macbook-post-beta-conformance-10h",
   "baseRef": "origin/main",
-  "baseCommit": "c9d9bb478b2d0b18f54b42448e6ab650f4a8cf34",
-  "headCommit": "c9d9bb47",
+  "baseCommit": "09a4c633cf92d35660f1a5986a156ea9cab112f4",
+  "headCommit": "60326a33",
   "dirty": true,
   "statusShort": [
-    "M REVIEW_LEARNING_LEDGER.md",
+    "M ARTIFACT_POLICY.md",
+    " M CODE_REVIEW_MODEL.md",
+    " M CONFORMANCE_METRICS_OVERVIEW.md",
+    " M CONFORMANCE_METRIC_OVERVIEW.md",
+    " M EXTERNAL_SERVICES.md",
+    " M RELEASE_CONFORMANCE_DASHBOARD.md",
+    " M RELEASE_POLICY.md",
+    " M REVIEW_LEARNING_LEDGER.md",
+    " M documentation-provenance.json",
+    " M package.json",
+    " M project-guide.json",
+    " M reference-artifacts/analyses/alien-entry-challenge-variation/latest.json",
+    " M reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
     " M reference-artifacts/analyses/code-review/latest.json",
+    " M reference-artifacts/analyses/release-conformance-dashboard/latest.json",
     " M reference-artifacts/analyses/review-learning/latest.json",
-    "?? reference-artifacts/analyses/code-review/2026-05-15-c9d9bb47/",
-    "?? reference-artifacts/analyses/review-learning/2026-05-15-c9d9bb47/"
+    " M src/js/03-platform-services.js",
+    " M src/js/06-enemy-behavior.js",
+    " M src/js/09-stage-flow.js",
+    " M tools/build/check-publish-ready.js",
+    " M tools/harness/analyze-alien-entry-challenge-variation.js",
+    " M tools/review/build-code-review-packet.js",
+    "?? SECURITY_AUTH_REPLAY_STORAGE_LOCKDOWN.md",
+    "?? reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-15-60326a33/",
+    "?? reference-artifacts/analyses/code-review/2026-05-15-60326a33/",
+    "?? reference-artifacts/analyses/formation-boss-path-family-comparison/2026-05-15-60326a33/",
+    "?? reference-artifacts/analyses/formation-boss-path-slot-extraction/2026-05-15-60326a33/",
+    "?? reference-artifacts/analyses/galaga-path-reference-labels/",
+    "?? reference-artifacts/analyses/release-conformance-dashboard/2026-05-15-60326a33-dirty/",
+    "?? reference-artifacts/analyses/review-learning/2026-05-15-60326a33/",
+    "?? reference-artifacts/analyses/stage-signature-distance/2026-05-15-60326a33/",
+    "?? reference-artifacts/ingestion/",
+    "?? tools/harness/analyze-galaga-path-reference-labels.js",
+    "?? tools/harness/check-security-auth-replay-storage-rules.js"
   ],
   "reviewSkill": {
     "path": "codex-skills/platinum-code-review/SKILL.md",
@@ -34,25 +63,397 @@
     ]
   },
   "summary": {
-    "changedFileCount": 1,
+    "changedFileCount": 45,
     "p0": 0,
     "p1": 0,
-    "p2": 0,
+    "p2": 1,
     "p3": 0,
-    "riskTaggedFileCount": 0
+    "riskTaggedFileCount": 16
   },
   "changedFiles": [
+    {
+      "status": "M",
+      "file": "ARTIFACT_POLICY.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "AUDIO_CONFORMANCE_LAB.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "CODE_REVIEW_MODEL.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "CONFORMANCE_METRIC_OVERVIEW.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "CONFORMANCE_METRICS_OVERVIEW.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "documentation-provenance.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "EXTERNAL_SERVICES.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "GAME_CONFORMANCE_CATALOG.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "GO_FORWARD_EXECUTION_PLAN.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "MACBOOK_POST_BETA_10_HOUR_CONFORMANCE_PLAN.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "package.json",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "project-guide.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-15-60326a33/",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/alien-entry-challenge-variation/latest.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-boss-hit.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-challenge-perfect.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-focus.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-player-shot.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/conformance-economics/latest-run.json",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/conformance-economics/run-ledger.jsonl",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/formation-boss-path-family-comparison/2026-05-15-60326a33/",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/formation-boss-path-slot-extraction/2026-05-15-60326a33/",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/galaga-path-reference-labels/",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/release-conformance-dashboard/2026-05-15-02ae3190-dirty/report.json",
+      "source": "committed-range",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane"
+      ]
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/release-conformance-dashboard/2026-05-15-60326a33-dirty/",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/release-conformance-dashboard/2026-05-15-f32c4a0d-dirty/report.json",
+      "source": "committed-range",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/release-conformance-dashboard/latest.json",
+      "source": "committed-range",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane"
+      ]
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/stage-signature-distance/2026-05-15-60326a33/",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/ingestion/",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "RELEASE_CONFORMANCE_DASHBOARD.md",
+      "source": "committed-range",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "RELEASE_POLICY.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
     {
       "status": "M",
       "file": "REVIEW_LEARNING_LEDGER.md",
       "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "SECURITY_AUTH_REPLAY_STORAGE_LOCKDOWN.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "auth-privacy",
+        "media-external"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "src/js/03-platform-services.js",
+      "source": "working-tree",
+      "area": "runtime",
+      "riskTags": [
+        "browser-runtime",
+        "browser-safety",
+        "platform-owned"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "src/js/06-enemy-behavior.js",
+      "source": "working-tree",
+      "area": "runtime",
+      "riskTags": [
+        "browser-runtime",
+        "browser-safety",
+        "game-owned"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "src/js/09-stage-flow.js",
+      "source": "working-tree",
+      "area": "runtime",
+      "riskTags": [
+        "browser-runtime",
+        "browser-safety",
+        "game-owned"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "src/js/13-aurora-game-pack.js",
+      "source": "committed-range",
+      "area": "runtime",
+      "riskTags": [
+        "browser-runtime",
+        "browser-safety",
+        "game-owned"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "tools/build/check-publish-ready.js",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "browser-safety",
+        "release-lane"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "tools/harness/analyze-alien-entry-challenge-variation.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "tools/harness/analyze-aurora-audio-focus-candidates.js",
+      "source": "committed-range",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "??",
+      "file": "tools/harness/analyze-galaga-path-reference-labels.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "??",
+      "file": "tools/harness/check-security-auth-replay-storage-rules.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "auth-privacy",
+        "browser-safety",
+        "harness",
+        "media-external",
+        "platform-owned"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "tools/review/build-code-review-packet.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
     }
   ],
-  "automaticFindings": [],
+  "automaticFindings": [
+    {
+      "severity": "P2",
+      "id": "release-tooling-review",
+      "message": "Release or npm script surface changed; verify lane authority and publish behavior.",
+      "file": "package.json",
+      "evidence": ""
+    }
+  ],
   "recommendedChecks": [
     "npm run build",
+    "npm run harness:check:supabase-data-api-contract",
+    "npm run harness:check:remote-score-submit",
+    "npm run harness:check:signed-in-game-over-lock",
+    "npm run harness:check:audio-runtime-recovery",
+    "npm run harness:check:trophy-replay-surface",
+    "npm run publish:check:dev",
     "npm run review:code:check"
   ]
 }

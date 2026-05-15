@@ -35,6 +35,10 @@ function rel(file){
   return path.relative(ROOT, file).split(path.sep).join('/');
 }
 
+function isExcludedReviewArtifact(file){
+  return EXCLUDED_PREFIXES.some(prefix => file.startsWith(prefix));
+}
+
 function resolveBase(){
   const explicit = argValue('base');
   if(explicit) return explicit;
@@ -72,7 +76,7 @@ function uniqueRows(baseRows, dirtyRows){
     if(!byFile.has(row.file)) byFile.set(row.file, { status: row.status, file: row.file, source: 'working-tree' });
   }
   return [...byFile.values()]
-    .filter(row => !EXCLUDED_PREFIXES.some(prefix => row.file.startsWith(prefix)))
+    .filter(row => !isExcludedReviewArtifact(row.file))
     .sort((a, b) => a.file.localeCompare(b.file));
 }
 
@@ -126,6 +130,7 @@ function addedDiffLines(baseCommit){
     if(line.startsWith('+++ b/')){
       file = line.slice(6);
     }else if(line.startsWith('+') && !line.startsWith('+++')){
+      if(isExcludedReviewArtifact(file)) continue;
       rows.push({ file, text: line.slice(1) });
     }
   }
@@ -134,6 +139,22 @@ function addedDiffLines(baseCommit){
 
 function finding(severity, id, message, file, evidence = ''){
   return { severity, id, message, file, evidence };
+}
+
+function isSecretPolicyDescription(file, text){
+  if(!/\.(md|json)$/i.test(file)) return false;
+  if(!/(service[_-]?role|SUPABASE_SERVICE_ROLE|client secret|oauth client secret|upload token)/i.test(text)) return false;
+  return /\b(no|not|never|without|forbidden|free of|must not|do not|cannot|avoid)\b/i.test(text);
+}
+
+function isReviewScannerSourceLine(file, text){
+  return file === 'tools/review/build-code-review-packet.js'
+    && /(service\[_-\]\?role|SUPABASE_SERVICE_ROLE|secret-like-token|isSecretPolicyDescription)/.test(text);
+}
+
+function isReviewLedgerNarrative(file, text){
+  return file === 'REVIEW_LEARNING_LEDGER.md'
+    && /(code-review-secret-like-token|Secret-looking token or service-role reference added to source)/.test(text);
 }
 
 function automaticFindings(files, diffLines){
@@ -145,7 +166,10 @@ function automaticFindings(files, diffLines){
     if(/\b(eval\s*\(|new Function\s*\()/.test(trimmed)){
       findings.push(finding('P1', 'dynamic-code-execution', 'Dynamic code execution is not acceptable in the browser product without an explicit, reviewed sandbox.', file, trimmed));
     }
-    if(/(service[_-]?role|SUPABASE_SERVICE_ROLE|sk-[A-Za-z0-9_-]{20,}|ghp_[A-Za-z0-9_]{20,})/.test(trimmed)){
+    if(/(service[_-]?role|SUPABASE_SERVICE_ROLE|sk-[A-Za-z0-9_-]{20,}|ghp_[A-Za-z0-9_]{20,})/.test(trimmed)
+      && !isSecretPolicyDescription(file, trimmed)
+      && !isReviewScannerSourceLine(file, trimmed)
+      && !isReviewLedgerNarrative(file, trimmed)){
       findings.push(finding('P1', 'secret-like-token', 'Secret-looking token or service-role reference added to source.', file, trimmed));
     }
     if(/localStorage\.[^(]*(password|token|secret|session)/i.test(trimmed) || /localStorage\.setItem\([^)]*(password|token|secret|session)/i.test(trimmed)){

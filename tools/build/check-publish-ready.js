@@ -44,6 +44,7 @@ const REQUIRED_SOURCE_DOCS = [
   'PLATINUM_LAUNCH_ART_DIRECTION.md',
   'PLATINUM_LUECK_REVIEW.md',
   'SUPABASE_DATA_API_ACCESS.md',
+  'SECURITY_AUTH_REPLAY_STORAGE_LOCKDOWN.md',
   'supabase/data-api-access-contract.sql',
   'project-guide.json',
   'application-guide.json',
@@ -378,6 +379,19 @@ function checkSupabaseDataApiContract(){
   }
 }
 
+function checkSecurityAuthReplayStorageRules(){
+  try{
+    execFileSync(process.execPath, [path.join(ROOT, 'tools', 'harness', 'check-security-auth-replay-storage-rules.js')], {
+      cwd: ROOT,
+      stdio: 'pipe'
+    });
+  }catch(err){
+    const stderr = err.stderr ? String(err.stderr).trim() : '';
+    const stdout = err.stdout ? String(err.stdout).trim() : '';
+    throw new Error(`Publish preflight failed: security/auth/replay storage check failed.\n${stderr || stdout || err.message}`);
+  }
+}
+
 function checkReleaseConformanceDocs(){
   const dashboardPath = path.join(ROOT, 'RELEASE_CONFORMANCE_DASHBOARD.md');
   const economicsPath = path.join(ROOT, 'CONFORMANCE_ECONOMICS.md');
@@ -663,6 +677,7 @@ function main(){
   checkGitClean();
   checkSourceDocs();
   checkSupabaseDataApiContract();
+  checkSecurityAuthReplayStorageRules();
   checkReleaseConformanceDocs();
   checkStrategicBetaReviewDoc();
   checkDocumentationFreshness();
@@ -702,6 +717,7 @@ module.exports = {
   checkSourceDocs,
   checkReleaseConformanceDocs,
   checkSupabaseDataApiContract,
+  checkSecurityAuthReplayStorageRules,
   checkArtifacts,
   checkBuildInfo,
   checkProductionReleaseDocs,

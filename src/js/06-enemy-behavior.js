@@ -207,6 +207,14 @@ function updateEnemy(e,dt,t,T,p){
 	  }else if(!stage1&&entryFamily==='late-boss-column-weave'){
 	   sx=tx+Math.sin(e.en*6.8+e.c*.65)*(96+e.r*12)*fm.entryX*k;
 	   sy=ty+Math.cos(e.en*3.2+e.ph)*(48+e.r*5)*fm.entryY*k+Math.sin(e.en*7.1+e.r)*7*k;
+	  }else if(!stage1&&entryFamily==='late-boss-column-drop-weave'){
+	   const side=e.c<5?-1:1;
+	   const column=e.t==='boss'?1.6:(e.t==='but'?1.34:1.12);
+	   const drop=Math.sin(Math.min(1,e.en/2.05)*Math.PI);
+	   const funnel=Math.cos(e.en*2.05+e.r*.45);
+	   const weave=Math.sin(e.en*5.85+e.c*.72);
+	   sx=tx+side*funnel*(78+e.r*14)*fm.entryX*k+weave*(72+e.r*10)*fm.entryX*k;
+	   sy=ty+Math.cos(e.en*2.75+e.ph)*(64+e.r*8)*fm.entryY*k+drop*(116+e.r*14)*column*k+Math.sin(e.en*8.15+e.c)*10*k;
 	  }else if(!stage1&&entryFamily==='crown-split-weave-entry'){
 	   const side=e.c<5?-1:1;
 	   const crown=Math.sin(Math.min(1,e.en/2.35)*Math.PI);

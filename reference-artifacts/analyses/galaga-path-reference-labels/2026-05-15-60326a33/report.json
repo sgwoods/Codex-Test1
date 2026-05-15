@@ -1,0 +1,191 @@
+{
+  "generatedAt": "2026-05-15T12:39:51.287Z",
+  "commit": "60326a33",
+  "artifactType": "galaga-path-reference-labels",
+  "score10": 0,
+  "summary": {
+    "status": "awaiting-reference-labels",
+    "sourceFileCount": 0,
+    "acceptedLabelCount": 0,
+    "acceptedRegularEntryCount": 0,
+    "acceptedChallengeEntryCount": 0,
+    "invalidLabelCount": 0,
+    "regularCoverage": 0,
+    "challengeCoverage": 0,
+    "coverageScore10": 0,
+    "confidenceScore": 0,
+    "directReferenceReady": false,
+    "playerMeaning": "These labels let the harness compare Aurora alien arrivals, rack settling, challenge paths, and bonus windows against actual Galaga reference windows instead of broad heuristic path families.",
+    "nextAction": "Add accepted regularEntry and challengeEntry label JSON files under reference-artifacts/ingestion/galaga-path-reference-labels, then rerun this analyzer."
+  },
+  "requiredGates": {
+    "regularEntryLabels": 6,
+    "challengeEntryLabels": 4,
+    "minimumMeanConfidence": 0.72
+  },
+  "sourceDirectory": "reference-artifacts/ingestion/galaga-path-reference-labels",
+  "sourceFiles": [],
+  "acceptedLabels": [],
+  "rejectedLabels": [],
+  "workQueue": [
+    {
+      "priority": 1,
+      "id": "regular-entry-reference-labels",
+      "metric": "reference-grounded-path-precision",
+      "problem": "Runtime path families are available, but the scorer is capped until Galaga reference paths have frame labels.",
+      "currentEvidence": "Closest runtime regular pair is mid-run-entry-variant / late-run-escort-variant at distance 0.065.",
+      "labelFamilies": [
+        "regularEntry",
+        "comparisonVector"
+      ],
+      "targetWindows": [
+        "stage-1-baseline",
+        "mid-run-entry-variant",
+        "mid-run-pincer-variant",
+        "late-run-cleanup-or-failure",
+        "late-run-escort-variant",
+        "late-run-crown-entry"
+      ],
+      "acceptanceGate": "At least six regular reference windows have first-visible, entry-side, rack-target, settle-frame, and trajectory-vector labels."
+    },
+    {
+      "priority": 2,
+      "id": "challenge-arrival-reference-labels",
+      "metric": "challenge-arrival-vs-appearance",
+      "problem": "Challenge arrivals are still reference-capped: broad runtime arrival evidence exists, but reference path labels are not yet attached.",
+      "currentEvidence": "Closest runtime challenge pair is challenge-stage-scorpion-cross / challenge-stage-stingray-hook at distance 0.03.",
+      "labelFamilies": [
+        "challengeEntry",
+        "comparisonVector"
+      ],
+      "targetWindows": [
+        "challenge-stage-candidate",
+        "challenge-stage-scorpion-cross",
+        "challenge-stage-stingray-hook",
+        "challenge-stage-boss-led-loop"
+      ],
+      "acceptanceGate": "At least four challenge reference windows have first-visible, path-commit, upper-band scoreability, exit, and bonus-opportunity labels."
+    },
+    {
+      "priority": 3,
+      "id": "dashboard-and-quality-scorer-link",
+      "metric": "release-dashboard-conformance-economics",
+      "problem": "The economics dashboard can show CPU/browser cost for runtime extraction, but the reference-labeling cost and eventual quality lift need an explicit artifact link.",
+      "currentEvidence": "Current alien/challenge variation score is 7.8/10.",
+      "labelFamilies": [
+        "regularEntry",
+        "challengeEntry"
+      ],
+      "targetWindows": [
+        "release-dashboard",
+        "quality-conformance-rollup"
+      ],
+      "acceptanceGate": "Quality conformance and release dashboard rows link to this label plan, latest direct-reference label artifact, and measured run-ledger cost."
+    }
+  ],
+  "sourceAnchors": [
+    {
+      "id": "galaga-stage-reference-video",
+      "role": "regular-stage-entry-and-formation-reference",
+      "anchor": "reference-artifacts/analyses/galaga-stage-reference-video/README.md",
+      "fileRoot": "reference-artifacts/analyses/galaga-stage-reference-video",
+      "present": true,
+      "artifactCount": 5,
+      "exampleFiles": [
+        "reference-artifacts/analyses/galaga-stage-reference-video/README.md",
+        "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png",
+        "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-05m00s.png",
+        "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png",
+        "reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-20m00s.png"
+      ]
+    },
+    {
+      "id": "challenge-stage-reference-pack",
+      "role": "challenge-stage-arrival-and-results-reference",
+      "anchor": "reference-artifacts/analyses/challenge-stage-reference/README.md",
+      "fileRoot": "reference-artifacts/analyses/challenge-stage-reference",
+      "present": true,
+      "artifactCount": 1,
+      "exampleFiles": [
+        "reference-artifacts/analyses/challenge-stage-reference/README.md"
+      ]
+    },
+    {
+      "id": "first-challenge-stage-baseline",
+      "role": "first-challenge-motion-and-scoreability-reference",
+      "anchor": "reference-artifacts/analyses/first-challenge-stage/README.md",
+      "fileRoot": "reference-artifacts/analyses/first-challenge-stage",
+      "present": true,
+      "artifactCount": 1,
+      "exampleFiles": [
+        "reference-artifacts/analyses/first-challenge-stage/README.md"
+      ]
+    },
+    {
+      "id": "release-reference-pack",
+      "role": "release-window-capture-transition-and-pressure-reference",
+      "anchor": "reference-artifacts/analyses/release-reference-pack/README.md",
+      "fileRoot": "reference-artifacts/analyses/release-reference-pack",
+      "present": true,
+      "artifactCount": 1,
+      "exampleFiles": [
+        "reference-artifacts/analyses/release-reference-pack/README.md"
+      ]
+    }
+  ],
+  "schemas": {
+    "regularEntry": [
+      "sourceAnchor",
+      "sourceTimestampS",
+      "stageNumber",
+      "entityType",
+      "entityFamily",
+      "firstVisibleFrame",
+      "entrySide",
+      "entryCurveFamily",
+      "rackTargetRow",
+      "rackTargetColumn",
+      "settleFrame",
+      "firstAttackOrExitFrame",
+      "notes",
+      "confidence"
+    ],
+    "challengeEntry": [
+      "sourceAnchor",
+      "sourceTimestampS",
+      "challengeNumber",
+      "groupIndex",
+      "entityType",
+      "entityFamily",
+      "firstVisibleFrame",
+      "entrySide",
+      "pathCommitFrame",
+      "scoreableUpperBandStartFrame",
+      "scoreableUpperBandEndFrame",
+      "exitSide",
+      "bonusOpportunity",
+      "notes",
+      "confidence"
+    ],
+    "comparisonVector": [
+      "xRange",
+      "yRange",
+      "pathLength",
+      "turnCount",
+      "reversalCount",
+      "lowerFieldShare",
+      "rackSlotError",
+      "timingOffsetS"
+    ]
+  },
+  "integrationPolicy": {
+    "replaceHeuristicCapOnlyWhen": [
+      "acceptedRegularEntryCount >= 6",
+      "acceptedChallengeEntryCount >= 4",
+      "confidenceScore >= 0.72",
+      "directReferenceReady is true"
+    ],
+    "planningRowsDoNotScoreAsZero": true,
+    "noKeeperEvidenceIsPreserved": true
+  }
+}

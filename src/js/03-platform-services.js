@@ -75,7 +75,7 @@ function topScoreVideoPostingEligibility(rank=0,user=(typeof LEADERBOARD!=='unde
   signedIn,
   emailConfirmed:confirmed,
   remoteAuthEnabled:authLane,
-  canPostVideo:top10&&signedIn&&authLane,
+  canPostVideo:top10&&signedIn&&confirmed&&authLane,
   verifiedScore:top10&&signedIn&&confirmed&&authLane,
   reason
  };

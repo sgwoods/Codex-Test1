@@ -159,12 +159,14 @@ function buildReport(){
   const pathFamilyPath = latestReport('formation-boss-path-family-comparison');
   const stageSignaturePath = latestReport('stage-signature-distance');
   const pathSlotPath = latestReport('formation-boss-path-slot-extraction');
+  const referenceLabelPath = latestReport('galaga-path-reference-labels');
   if(!formationPath) throw new Error('Missing formation-boss-grammar-conformance report. Run npm run harness:analyze:formation-boss-grammar first.');
 
   const formation = readJson(formationPath);
   const pathFamily = pathFamilyPath ? readJson(pathFamilyPath) : { summary: {}, windows: [] };
   const stageSignature = stageSignaturePath ? readJson(stageSignaturePath) : { summary: {} };
   const pathSlot = pathSlotPath ? readJson(pathSlotPath) : { summary: {}, windows: [] };
+  const referenceLabels = referenceLabelPath ? readJson(referenceLabelPath) : { summary: {} };
   const formationWindows = formation.windows || [];
   const pathWindows = pathFamily.windows || [];
   const regularFormation = formationWindows.filter(window => !window.challenge);
@@ -195,7 +197,11 @@ function buildReport(){
   const referenceConfidence = +(pathFamily.summary?.comparisonConfidence || 0);
   const referenceCap = +(pathFamily.summary?.referenceComparisonCap10 || 0);
   const pathFamilyScore = +(pathFamily.summary?.score10 || 0);
-  const directReferenceReady = referenceCap > 7.5 ? 1 : 0;
+  const acceptedRegularLabels = +(referenceLabels.summary?.acceptedRegularEntryCount || 0);
+  const acceptedChallengeLabels = +(referenceLabels.summary?.acceptedChallengeEntryCount || 0);
+  const labelCoverageScore = +(referenceLabels.summary?.coverageScore10 || 0);
+  const labelDirectReady = referenceLabels.summary?.directReferenceReady ? 1 : 0;
+  const directReferenceReady = referenceCap > 7.5 && labelDirectReady ? 1 : 0;
   const challengeArrivalRuntimeScore = 10 * (
     (0.28 * challengePathCoverage)
     + (0.26 * clamp(average(challengePath.map(window => meanFeature(window, 'xRange'))) / 165))
@@ -272,10 +278,12 @@ function buildReport(){
     scoreMetric(
       'reference-grounded-path-precision',
       'Reference-grounded path precision readiness',
-      10 * ((0.45 * referenceConfidence) + (0.35 * clamp(referenceCap / 10)) + (0.2 * directReferenceReady)),
-      `Path comparison confidence ${round(referenceConfidence)}; current heuristic cap ${round(referenceCap, 1)}/10; path-slot extraction score ${round(pathSlot.summary?.extractionScore10, 1)}/10.`,
+      labelCoverageScore > 0
+        ? 10 * ((0.36 * referenceConfidence) + (0.28 * clamp(referenceCap / 10)) + (0.24 * clamp(labelCoverageScore / 10)) + (0.12 * directReferenceReady))
+        : 10 * ((0.45 * referenceConfidence) + (0.35 * clamp(referenceCap / 10)) + (0.2 * (referenceCap > 7.5 ? 1 : 0))),
+      `Path comparison confidence ${round(referenceConfidence)}; accepted reference labels ${acceptedRegularLabels} regular / ${acceptedChallengeLabels} challenge; label coverage ${round(labelCoverageScore, 1)}/10; current heuristic cap ${round(referenceCap, 1)}/10; path-slot extraction score ${round(pathSlot.summary?.extractionScore10, 1)}/10.`,
       'Measures whether the harness is ready to compare Aurora trajectories to frame-labeled Galaga reference paths instead of heuristic runtime families.',
-      'Create Galaga reference contact sheets/path labels, then lift the heuristic cap only when direct visual path comparison exists.'
+      'Create and validate Galaga reference contact sheets/path labels, then lift the heuristic cap only when accepted regular and challenge labels pass the direct-reference gate.'
     )
   ];
 
@@ -327,13 +335,20 @@ function buildReport(){
       regularSignatureCount,
       challengeSignatureCount,
       regularEntitySignatures: [...new Set(regularEntitySets)].filter(Boolean),
-      challengeEntitySignatures: [...new Set(challengeEntitySets)].filter(Boolean)
+      challengeEntitySignatures: [...new Set(challengeEntitySets)].filter(Boolean),
+      acceptedReferenceLabelCounts: {
+        regularEntry: acceptedRegularLabels,
+        challengeEntry: acceptedChallengeLabels,
+        coverageScore10: round(labelCoverageScore, 1),
+        directReferenceReady: !!labelDirectReady
+      }
     },
     sourceReports: {
       formationBossGrammar: rel(formationPath),
       pathFamilyComparison: pathFamilyPath ? rel(pathFamilyPath) : null,
       stageSignatureDistance: stageSignaturePath ? rel(stageSignaturePath) : null,
-      pathSlotExtraction: pathSlotPath ? rel(pathSlotPath) : null
+      pathSlotExtraction: pathSlotPath ? rel(pathSlotPath) : null,
+      galagaPathReferenceLabels: referenceLabelPath ? rel(referenceLabelPath) : null
     },
     longCyclePlan: [
       'Refresh runtime extraction across stage 1, 2, 4, 6, 8, 10, 12, 14 and challenge stages 3, 7, 11, 15.',

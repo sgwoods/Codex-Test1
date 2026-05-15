@@ -137,6 +137,29 @@
       ]
     },
     {
+      "id": "security-auth-replay-storage-lockdown",
+      "title": "Security, Auth, And Replay Storage Lock-Down",
+      "summary": "The release-facing rule set for account, score, replay, and future high-score video posting work.",
+      "cards": [
+        {
+          "title": "Posting Boundary",
+          "body": "Top-10 video posting is authenticated and authorized only. The browser may prompt a top-10 player to sign in, but uploads require a future server-owned path."
+        },
+        {
+          "title": "No Browser Secrets",
+          "body": "No Supabase service-role material, OAuth client secret, YouTube upload token, or upload endpoint may ship in browser code. Arcade Music remains a playlist embed, not upload authority."
+        },
+        {
+          "title": "Replay Storage",
+          "body": "Replay video remains browser-local IndexedDB by default. A score can link to a local replay on the same device, but hosted replay/video posting needs explicit storage, auth, and RLS rules."
+        },
+        {
+          "title": "Release Gate",
+          "body": "`npm run harness:check:security-auth-replay-storage` is now part of publish preflight alongside the Supabase Data API contract gate."
+        }
+      ]
+    },
+    {
       "id": "docs-index",
       "title": "Documentation Index",
       "summary": "The best entry points depending on the question you are trying to answer.",
@@ -394,6 +417,12 @@
       "title": "Supabase Data API Access Source",
       "summary": "Explicit Data API grants, RLS posture, runtime table usage, and release gate for Supabase-backed profiles and leaderboards.",
       "file": "SUPABASE_DATA_API_ACCESS.md"
+    },
+    {
+      "id": "security-auth-replay-storage-doc",
+      "title": "Security/Auth/Replay Storage Lock-Down",
+      "summary": "Release-facing rules for authenticated top-10 video posting, browser-local replay storage, no browser upload credentials, and the publish preflight gate.",
+      "file": "SECURITY_AUTH_REPLAY_STORAGE_LOCKDOWN.md"
     },
     {
       "id": "release-policy-doc",

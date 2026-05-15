@@ -19,6 +19,20 @@ This is the browser-native replay feature used by a player who launches the game
 
 This is the right default for `dev`, `beta`, and `production` player use because it requires no filesystem access and works inside normal browser constraints.
 
+### Replay Storage Security Rule
+
+Replay video remains browser-local `IndexedDB` by default. A local score row may
+link to a local replay only when that replay exists in the current browser
+profile. It is not a public cloud artifact, and it must not be treated as a
+trusted hosted replay/video record.
+
+Future high-score video or replay publishing requires a server-owned upload
+policy before any runtime upload path is enabled. That policy must document
+authorization, Supabase grants/RLS or storage rules, moderation/status fields,
+and the score/user/build linkage before release.
+
+Short rule: no hosted replay/video posting ships without a server-owned upload policy.
+
 ### 2. Exported Player Capture Files
 
 This is the explicit user-facing export path for logs and downloaded recordings.

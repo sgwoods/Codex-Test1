@@ -108,9 +108,10 @@
             "RELEASE_READINESS_REVIEW.md",
             "EXTERNAL_SERVICES.md",
             "SUPABASE_DATA_API_ACCESS.md",
+            "SECURITY_AUTH_REPLAY_STORAGE_LOCKDOWN.md",
             "supabase/data-api-access-contract.sql"
           ],
-          "currentness": "Guide cards and source-doc sections are generated from project-guide.json and listed source Markdown files, including the Supabase Data API access contract.",
+          "currentness": "Guide cards and source-doc sections are generated from project-guide.json and listed source Markdown files, including the Supabase Data API access contract and the security/auth/replay storage lock-down.",
           "riskIfStale": "The hosted guide can stop matching the maintained repo documentation."
         },
         {

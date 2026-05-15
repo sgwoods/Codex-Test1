@@ -58,6 +58,26 @@ Aurora Galactica, what they are used for, and what is local-only instead.
 - Build token source:
   - `tools/build/build-index.js`
 
+### High-Score Video Posting
+
+- Status:
+  - planned only; no production upload path is currently enabled
+- Intended use:
+  - signed-in, authorized top-10 players may eventually request high-score video
+    posting to a shared channel
+  - score pages may eventually link to approved hosted video/replay records
+- Boundary:
+  - upload must be server-owned
+  - no client-side YouTube upload credential, OAuth client secret, refresh token,
+    or service account material may ship in browser code
+  - a browser top-10 prompt can encourage sign-in, but cannot itself authorize or
+    upload
+- Required gate before implementation:
+  - `SECURITY_AUTH_REPLAY_STORAGE_LOCKDOWN.md`
+  - `SUPABASE_DATA_API_ACCESS.md`
+  - `npm run harness:check:security-auth-replay-storage`
+  - `npm run harness:check:supabase-data-api-contract`
+
 ## Hosting And Delivery
 
 ### GitHub Pages
@@ -113,6 +133,9 @@ These are not external services.
 - Backed by:
   - `localStorage`
   - `IndexedDB`
+- Security boundary:
+  - replay video remains browser-local until a server-owned upload policy,
+    storage model, and release gate exist
 
 ### Browser Recording
 

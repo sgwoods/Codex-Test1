@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-05-11T01:06:25.145Z",
-  "commit": "46e1b45c",
+  "generatedAt": "2026-05-15T12:43:41.383Z",
+  "commit": "60326a33",
   "artifactType": "alien-entry-challenge-variation",
-  "score10": 7.8,
+  "score10": 8,
   "summary": {
-    "score10": 7.8,
+    "score10": 8,
     "confidence": "medium",
     "resolution": "Dedicated planning scorer using stage-signature distance, runtime path-family signatures, challenge-window coverage, alien-family novelty, and reference-comparison readiness.",
     "problem": "Aurora still reads too repetitive for alien entry and challenge-stage invention: regular stages are not distinct enough, challenge stages need stronger arrival-versus-appearance evidence, and alien novelty is not yet scored against multiple reference-like challenge set pieces.",
@@ -14,9 +14,9 @@
       "id": "reference-grounded-path-precision",
       "label": "Reference-grounded path precision readiness",
       "score10": 5.3,
-      "currentRead": "Path comparison confidence 0.64; current heuristic cap 6.8/10; path-slot extraction score 9.8/10.",
+      "currentRead": "Path comparison confidence 0.64; accepted reference labels 0 regular / 0 challenge; label coverage 0/10; current heuristic cap 6.8/10; path-slot extraction score 9.8/10.",
       "calculation": "Measures whether the harness is ready to compare Aurora trajectories to frame-labeled Galaga reference paths instead of heuristic runtime families.",
-      "strategy": "Create Galaga reference contact sheets/path labels, then lift the heuristic cap only when direct visual path comparison exists."
+      "strategy": "Create and validate Galaga reference contact sheets/path labels, then lift the heuristic cap only when accepted regular and challenge labels pass the direct-reference gate."
     }
   },
   "metrics": [
@@ -39,8 +39,8 @@
     {
       "id": "regular-entry-geometry-separation",
       "label": "Regular-entry geometry separation",
-      "score10": 5.4,
-      "currentRead": "Minimum regular geometry distance 0.065; mean regular geometry distance 0.141; closest pair mid-run-entry-variant / late-run-escort-variant.",
+      "score10": 6.5,
+      "currentRead": "Minimum regular geometry distance 0.093; mean regular geometry distance 0.14; closest pair mid-run-entry-variant / late-run-cleanup-or-failure.",
       "calculation": "Measures whether regular stages differ in actual trajectory geometry, using mean x/y range, path length, turns, reversals, and lower-field share instead of accepting a path-family label alone.",
       "strategy": "Tune the weakest close pair with a visibly different entry route, then rerun path-slot extraction and this scorer."
     },
@@ -56,7 +56,7 @@
       "id": "challenge-arrival-vs-appearance",
       "label": "Challenging-stage arrival versus appearance",
       "score10": 6.8,
-      "currentRead": "Runtime arrival evidence score 7.3/10; reference cap 6.8/10; challenge geometry mean distance 0.081.",
+      "currentRead": "Runtime arrival evidence score 7.2/10; reference cap 6.8/10; challenge geometry mean distance 0.07.",
       "calculation": "Measures whether challenge-stage aliens visibly arrive through readable paths rather than feeling like they simply appear in place. This is capped until contact-sheet or frame-labeled Galaga challenge references prove the arrival grammar.",
       "strategy": "Add challenge-stage contact sheets with first-visible, entry-side, path-commit, target-group, and exit labels; then tune challenge spawns and paths against the weakest arrival/readability delta."
     },
@@ -72,7 +72,7 @@
       "id": "challenge-pattern-novelty-depth",
       "label": "Challenging-stage pattern novelty depth",
       "score10": 7.2,
-      "currentRead": "Pattern-depth raw score 7.3/10; 4 challenge path signatures; challenge entity novelty ratio 0.5.",
+      "currentRead": "Pattern-depth raw score 7.2/10; 4 challenge path signatures; challenge entity novelty ratio 0.5.",
       "calculation": "Measures whether later challenge stages create genuinely new learnable set pieces by combining path family, alien composition, group timing, and bonus opportunity instead of reskinning the same wave.",
       "strategy": "Split challenge stages into named pattern contracts, then run long-cycle persona and path extraction to verify each challenge stage teaches a distinct bonus-stage skill."
     },
@@ -80,9 +80,9 @@
       "id": "reference-grounded-path-precision",
       "label": "Reference-grounded path precision readiness",
       "score10": 5.3,
-      "currentRead": "Path comparison confidence 0.64; current heuristic cap 6.8/10; path-slot extraction score 9.8/10.",
+      "currentRead": "Path comparison confidence 0.64; accepted reference labels 0 regular / 0 challenge; label coverage 0/10; current heuristic cap 6.8/10; path-slot extraction score 9.8/10.",
       "calculation": "Measures whether the harness is ready to compare Aurora trajectories to frame-labeled Galaga reference paths instead of heuristic runtime families.",
-      "strategy": "Create Galaga reference contact sheets/path labels, then lift the heuristic cap only when direct visual path comparison exists."
+      "strategy": "Create and validate Galaga reference contact sheets/path labels, then lift the heuristic cap only when accepted regular and challenge labels pass the direct-reference gate."
     }
   ],
   "observed": {
@@ -92,66 +92,66 @@
     "challengePathWindowCount": 4,
     "minRegularDistance": 0.261,
     "meanRegularDistance": 0.315,
-    "minRegularGeometryDistance": 0.065,
-    "meanRegularGeometryDistance": 0.141,
+    "minRegularGeometryDistance": 0.093,
+    "meanRegularGeometryDistance": 0.14,
     "closestRegularGeometryPair": {
       "a": "mid-run-entry-variant",
-      "b": "late-run-escort-variant",
-      "distance": 0.065,
+      "b": "late-run-cleanup-or-failure",
+      "distance": 0.093,
       "aVector": {
-        "xRange": 160.464,
-        "yRange": 252.585,
-        "pathLength": 638.071,
-        "turnCount": 13.25,
-        "reversalCount": 4.775,
-        "lowerFieldShare": 0.02
+        "xRange": 165.93,
+        "yRange": 245.988,
+        "pathLength": 615.564,
+        "turnCount": 12.85,
+        "reversalCount": 4.725,
+        "lowerFieldShare": 0.019
       },
       "bVector": {
-        "xRange": 134.596,
-        "yRange": 242.182,
-        "pathLength": 533.601,
-        "turnCount": 12.975,
-        "reversalCount": 5.7,
-        "lowerFieldShare": 0.024
+        "xRange": 151.05,
+        "yRange": 312.719,
+        "pathLength": 677.351,
+        "turnCount": 17.125,
+        "reversalCount": 3.475,
+        "lowerFieldShare": 0.022
       },
       "delta": {
-        "xRange": -25.868,
-        "yRange": -10.403,
-        "pathLength": -104.47,
-        "turnCount": -0.275,
-        "reversalCount": 0.925,
-        "lowerFieldShare": 0.004
+        "xRange": -14.88,
+        "yRange": 66.731,
+        "pathLength": 61.787,
+        "turnCount": 4.275,
+        "reversalCount": -1.25,
+        "lowerFieldShare": 0.003
       }
     },
-    "minChallengeGeometryDistance": 0.03,
-    "meanChallengeGeometryDistance": 0.081,
+    "minChallengeGeometryDistance": 0.028,
+    "meanChallengeGeometryDistance": 0.07,
     "closestChallengeGeometryPair": {
       "a": "challenge-stage-scorpion-cross",
       "b": "challenge-stage-stingray-hook",
-      "distance": 0.03,
+      "distance": 0.028,
       "aVector": {
-        "xRange": 153.967,
-        "yRange": 143.93,
-        "pathLength": 359.333,
-        "turnCount": 3.875,
-        "reversalCount": 2.625,
-        "lowerFieldShare": 0.039
+        "xRange": 150.276,
+        "yRange": 132.178,
+        "pathLength": 333.345,
+        "turnCount": 4.725,
+        "reversalCount": 2.5,
+        "lowerFieldShare": 0.036
       },
       "bVector": {
-        "xRange": 136.723,
-        "yRange": 151.198,
-        "pathLength": 340.321,
-        "turnCount": 4.063,
+        "xRange": 136.674,
+        "yRange": 151.201,
+        "pathLength": 340.237,
+        "turnCount": 4.612,
         "reversalCount": 2.325,
         "lowerFieldShare": 0.034
       },
       "delta": {
-        "xRange": -17.244,
-        "yRange": 7.268,
-        "pathLength": -19.012,
-        "turnCount": 0.188,
-        "reversalCount": -0.3,
-        "lowerFieldShare": -0.005
+        "xRange": -13.602,
+        "yRange": 19.023,
+        "pathLength": 6.892,
+        "turnCount": -0.113,
+        "reversalCount": -0.175,
+        "lowerFieldShare": -0.002
       }
     },
     "distinctPairRatio": 1,
@@ -165,13 +165,20 @@
     "challengeEntitySignatures": [
       "bee|boss|but|rogue",
       "bee|boss|but"
-    ]
+    ],
+    "acceptedReferenceLabelCounts": {
+      "regularEntry": 0,
+      "challengeEntry": 0,
+      "coverageScore10": 0,
+      "directReferenceReady": false
+    }
   },
   "sourceReports": {
-    "formationBossGrammar": "reference-artifacts/analyses/formation-boss-grammar-conformance/2026-05-11-46e1b45c/report.json",
-    "pathFamilyComparison": "reference-artifacts/analyses/formation-boss-path-family-comparison/2026-05-11-46e1b45c/report.json",
-    "stageSignatureDistance": "reference-artifacts/analyses/stage-signature-distance/2026-05-11-46e1b45c/report.json",
-    "pathSlotExtraction": "reference-artifacts/analyses/formation-boss-path-slot-extraction/2026-05-11-46e1b45c/report.json"
+    "formationBossGrammar": "reference-artifacts/analyses/formation-boss-grammar-conformance/2026-05-15-60326a33/report.json",
+    "pathFamilyComparison": "reference-artifacts/analyses/formation-boss-path-family-comparison/2026-05-15-60326a33/report.json",
+    "stageSignatureDistance": "reference-artifacts/analyses/stage-signature-distance/2026-05-15-60326a33/report.json",
+    "pathSlotExtraction": "reference-artifacts/analyses/formation-boss-path-slot-extraction/2026-05-15-60326a33/report.json",
+    "galagaPathReferenceLabels": "reference-artifacts/analyses/galaga-path-reference-labels/2026-05-15-60326a33/report.json"
   },
   "longCyclePlan": [
     "Refresh runtime extraction across stage 1, 2, 4, 6, 8, 10, 12, 14 and challenge stages 3, 7, 11, 15.",

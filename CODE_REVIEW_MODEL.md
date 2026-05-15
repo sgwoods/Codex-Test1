@@ -58,7 +58,9 @@ reviewer at those sources when platform/game separation matters.
    harness behavior, score/life rules, and release-lane assumptions?
 2. **Security and privacy:** Does it touch auth, Supabase, score submission,
    YouTube/external posting, browser storage, tokens, user IDs, or embedded
-   third-party content?
+   third-party content? For security/auth/replay storage lock-down, also verify
+   `npm run harness:check:security-auth-replay-storage` and confirm no browser
+   code ships upload credentials or server-owned secrets.
 3. **Browser safety:** Does it introduce unsafe HTML injection, autoplay/media
    regressions, window/popup behavior, cross-origin fetches, or permission
    assumptions?

@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "artifactType": "platinum-review-learning-ledger",
-  "generatedAt": "2026-05-15T00:11:23.210Z",
-  "branch": "main",
-  "commit": "c9d9bb478b2d0b18f54b42448e6ab650f4a8cf34",
-  "shortCommit": "c9d9bb47",
+  "generatedAt": "2026-05-15T12:55:15.117Z",
+  "branch": "codex/macbook-post-beta-conformance-10h",
+  "commit": "60326a338efc2d317d9fdbde50eba6ef4586b9c2",
+  "shortCommit": "60326a33",
   "sources": [
     "CODE_REVIEW_MODEL.md",
     "ARCHITECT_REVIEW_RESPONSE.md",
@@ -13,15 +13,15 @@
   ],
   "summary": {
     "reviewCycleCount": 3,
-    "issueNoteCount": 4,
+    "issueNoteCount": 5,
     "acceptedChangeCount": 3,
-    "automaticFindingCount": 0,
+    "automaticFindingCount": 1,
     "p0": 0,
     "p1": 0,
-    "p2": 4,
+    "p2": 5,
     "p3": 0,
     "productionDisposition": {
-      "addressed": 1,
+      "addressed": 2,
       "dismissed": 3,
       "missing": 0
     }
@@ -94,14 +94,14 @@
       "outcome": "Accepted as a lightweight release-safety gate for development lane movement."
     },
     {
-      "id": "code-review-packet-c9d9bb47",
+      "id": "code-review-packet-60326a33",
       "date": "2026-05-15",
       "focus": "Current branch code review packet",
       "source": "reference-artifacts/analyses/code-review/latest.json",
-      "changedFileCount": 0,
+      "changedFileCount": 45,
       "p0": 0,
       "p1": 0,
-      "p2": 0,
+      "p2": 1,
       "p3": 0,
       "outcome": "Use automatic findings as review notes and blocking P0/P1 gates; P2/P3 remain explicit human-review items."
     }
@@ -184,6 +184,27 @@
           "PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md"
         ]
       }
+    },
+    {
+      "id": "code-review-release-tooling-review",
+      "category": "release-tooling",
+      "severity": "P2",
+      "status": "review_note",
+      "source": "reference-artifacts/analyses/code-review/latest.json",
+      "note": "package.json: Release or npm script surface changed; verify lane authority and publish behavior.",
+      "proposedChange": "Verify the flagged surface with the targeted review questions and recommended checks before lane movement.",
+      "acceptedChange": "Accepted as a visible review note that does not block hosted-dev by itself.",
+      "evidence": "",
+      "productionDisposition": {
+        "decision": "addressed",
+        "reason": "The release-tooling changes are intentional: they add the review packet, review-learning ledger, public review documentation, and a production disposition gate. The review packet is current and publish preflight remains green for the dev lane.",
+        "evidence": [
+          "CODE_REVIEW_MODEL.md",
+          "REVIEW_LEARNING_LEDGER.md",
+          "reference-artifacts/analyses/code-review/latest.json",
+          "reference-artifacts/analyses/review-learning/latest.json"
+        ]
+      }
     }
   ],
   "proposedChanges": [
@@ -218,6 +239,14 @@
       "source": "ARCHITECT_REVIEW_RESPONSE.md",
       "proposedChange": "Continue extracting enemy family, attack pattern, and stage grammar data into game-owned specs.",
       "decision": "Use ingestion-backed specs before considering heavier persistence infrastructure."
+    },
+    {
+      "id": "code-review-release-tooling-review-proposal",
+      "category": "release-tooling",
+      "status": "review_note",
+      "source": "reference-artifacts/analyses/code-review/latest.json",
+      "proposedChange": "Verify the flagged surface with the targeted review questions and recommended checks before lane movement.",
+      "decision": "Accepted as a visible review note that does not block hosted-dev by itself."
     }
   ],
   "acceptedChanges": [
@@ -254,7 +283,7 @@
       "id": "release-tooling-churn",
       "pattern": "Changes to scripts or release tooling often look small but affect lane authority and publish behavior.",
       "response": "Require `npm run publish:check:dev` plus the review packet before hosted-dev movement.",
-      "evidence": "Standing release gate rule."
+      "evidence": "Latest packet recommends publish preflight."
     },
     {
       "id": "generated-artifact-self-noise",
