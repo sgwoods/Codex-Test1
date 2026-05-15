@@ -25,8 +25,8 @@ Use these in order:
 
 ### Manual
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/manuals/galaga-1981-namco/README.md`
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/manuals/galaga-1981-namco/Galaga_-_1981_-_Namco.pdf`
+- `reference-artifacts/manuals/galaga-1981-namco/README.md`
+- `reference-artifacts/manuals/galaga-1981-namco/Galaga_-_1981_-_Namco.pdf`
 
 Important manual-backed rules already reflected here:
 
@@ -35,22 +35,21 @@ Important manual-backed rules already reflected here:
 - captured fighter stays tied to the command ship that captured it
 - shooting the carried fighter itself destroys it for points
 
-### Original gameplay capture already in the repo
+### Original gameplay capture available on this MacBook clone
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-video/original-galaga-7min.mp4`
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-video/original-galaga-30min.mp4`
+- `/Users/sgwoods/Downloads/🎮🕹️👉Galaga (1981) - Gameplay Arcade - Snake Latino (360p, h264).mp4`
 
-Existing useful derived analysis:
+Existing useful derived analysis in this repo:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-analysis/30min-overview/contact-sheet.png`
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-analysis/30min-overview/first-four-minutes.png`
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-analysis/challenge-check/original-challenge-sheet.png`
+- `reference-artifacts/analyses/galaga-path-reference-media/latest.json`
+- `reference-artifacts/analyses/challenge-stage-reference/contact-sheet.png`
+- `reference-artifacts/analyses/first-challenge-stage/contact-sheet.png`
 
 ## New local comparison windows
 
 ### Capture / challenge-result / pre-Stage-4 window
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/release-reference-pack/capture-window/contact-sheet.png`
+- `reference-artifacts/analyses/release-reference-pack/transition-window/contact-sheet.png`
 
 What it is useful for:
 
@@ -64,7 +63,7 @@ What it does not settle alone:
 
 ### Challenge -> Stage 4 transition window
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/release-reference-pack/transition-window/contact-sheet.png`
+- `reference-artifacts/analyses/release-reference-pack/transition-window/contact-sheet.png`
 
 What this sheet shows clearly:
 
@@ -81,7 +80,7 @@ Why this matters:
 
 ### Early Stage 4 / special-attack window
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/release-reference-pack/stage4-window/contact-sheet.png`
+- `reference-artifacts/analyses/release-reference-pack/stage4-window/contact-sheet.png`
 
 What this sheet shows clearly:
 
@@ -98,7 +97,7 @@ Why this matters:
 
 ### Later-pressure comparison window
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/release-reference-pack/later-pressure-window/contact-sheet.png`
+- `reference-artifacts/analyses/release-reference-pack/later-pressure-window/contact-sheet.png`
 
 What this sheet shows clearly:
 
@@ -189,8 +188,8 @@ Focus on:
 
 Use:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/release-reference-pack/transition-window/contact-sheet.png`
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-analysis/30min-overview/first-four-minutes.png`
+- `reference-artifacts/analyses/release-reference-pack/transition-window/contact-sheet.png`
+- `reference-artifacts/analyses/galaga-path-reference-media/stage-4-post-challenge-entry/contact-sheet.jpg`
 
 Focus on:
 
@@ -202,7 +201,7 @@ Focus on:
 
 Use:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/release-reference-pack/stage4-window/contact-sheet.png`
+- `reference-artifacts/analyses/release-reference-pack/stage4-window/contact-sheet.png`
 - StrategyWiki gameplay scoring page
 
 Focus on:
@@ -227,8 +226,8 @@ Focus on:
 
 Use:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/release-reference-pack/later-pressure-window/contact-sheet.png`
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/stage4-fairness/README.md`
+- `reference-artifacts/analyses/release-reference-pack/later-pressure-window/contact-sheet.png`
+- `reference-artifacts/analyses/galaga-path-reference-media/stage-4-post-challenge-entry/contact-sheet.jpg`
 
 Focus on:
 

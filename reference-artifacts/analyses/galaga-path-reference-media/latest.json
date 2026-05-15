@@ -1,0 +1,276 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "galaga-path-reference-media",
+  "generatedBy": "tools/harness/build-galaga-path-reference-media.js",
+  "generatedAt": "2026-05-15T17:32:23.561Z",
+  "status": "media-backed-path-label-source-ready",
+  "source": {
+    "id": "snake-latino-arcade-gameplay",
+    "title": "Galaga (1981) - Gameplay Arcade - Snake Latino",
+    "localPath": "/Users/sgwoods/Downloads/🎮🕹️👉Galaga (1981) - Gameplay Arcade - Snake Latino (360p, h264).mp4",
+    "measuredMedia": {
+      "durationSeconds": 448.945,
+      "width": 346,
+      "height": 480,
+      "frameRate": "30/1"
+    }
+  },
+  "windowCount": 10,
+  "extractedFrameCount": 1104,
+  "regularWindowCount": 6,
+  "challengeWindowCount": 4,
+  "windows": [
+    {
+      "id": "stage-1-opening-entry",
+      "label": "Stage 1 opening rack entry",
+      "family": "regular-entry",
+      "sourceId": "snake-latino-arcade-gameplay",
+      "startSeconds": 8,
+      "durationSeconds": 20,
+      "sampledFps": 4,
+      "extractedFrameCount": 80,
+      "contactSheetShape": {
+        "tileCols": 9,
+        "tileRows": 9,
+        "frameEstimate": 80
+      },
+      "frameIndex": "reference-artifacts/analyses/galaga-path-reference-media/stage-1-opening-entry/frame-index.json",
+      "contactSheet": "reference-artifacts/analyses/galaga-path-reference-media/stage-1-opening-entry/contact-sheet.jpg",
+      "motionDifferenceSheet": "reference-artifacts/analyses/galaga-path-reference-media/stage-1-opening-entry/motion-difference-sheet.jpg"
+    },
+    {
+      "id": "stage-2-early-entry",
+      "label": "Stage 2 early formation entry",
+      "family": "regular-entry",
+      "sourceId": "snake-latino-arcade-gameplay",
+      "startSeconds": 52,
+      "durationSeconds": 20,
+      "sampledFps": 4,
+      "extractedFrameCount": 80,
+      "contactSheetShape": {
+        "tileCols": 9,
+        "tileRows": 9,
+        "frameEstimate": 80
+      },
+      "frameIndex": "reference-artifacts/analyses/galaga-path-reference-media/stage-2-early-entry/frame-index.json",
+      "contactSheet": "reference-artifacts/analyses/galaga-path-reference-media/stage-2-early-entry/contact-sheet.jpg",
+      "motionDifferenceSheet": "reference-artifacts/analyses/galaga-path-reference-media/stage-2-early-entry/motion-difference-sheet.jpg"
+    },
+    {
+      "id": "stage-4-post-challenge-entry",
+      "label": "Stage 4 post-challenge rack entry",
+      "family": "regular-entry",
+      "sourceId": "snake-latino-arcade-gameplay",
+      "startSeconds": 120,
+      "durationSeconds": 24,
+      "sampledFps": 4,
+      "extractedFrameCount": 96,
+      "contactSheetShape": {
+        "tileCols": 10,
+        "tileRows": 10,
+        "frameEstimate": 96
+      },
+      "frameIndex": "reference-artifacts/analyses/galaga-path-reference-media/stage-4-post-challenge-entry/frame-index.json",
+      "contactSheet": "reference-artifacts/analyses/galaga-path-reference-media/stage-4-post-challenge-entry/contact-sheet.jpg",
+      "motionDifferenceSheet": "reference-artifacts/analyses/galaga-path-reference-media/stage-4-post-challenge-entry/motion-difference-sheet.jpg"
+    },
+    {
+      "id": "stage-5-opening-entry",
+      "label": "Stage 5 opening rack entry",
+      "family": "regular-entry",
+      "sourceId": "snake-latino-arcade-gameplay",
+      "startSeconds": 164,
+      "durationSeconds": 24,
+      "sampledFps": 4,
+      "extractedFrameCount": 96,
+      "contactSheetShape": {
+        "tileCols": 10,
+        "tileRows": 10,
+        "frameEstimate": 96
+      },
+      "frameIndex": "reference-artifacts/analyses/galaga-path-reference-media/stage-5-opening-entry/frame-index.json",
+      "contactSheet": "reference-artifacts/analyses/galaga-path-reference-media/stage-5-opening-entry/contact-sheet.jpg",
+      "motionDifferenceSheet": "reference-artifacts/analyses/galaga-path-reference-media/stage-5-opening-entry/motion-difference-sheet.jpg"
+    },
+    {
+      "id": "stage-6-capture-pressure",
+      "label": "Stage 6 capture and boss pressure",
+      "family": "regular-entry",
+      "sourceId": "snake-latino-arcade-gameplay",
+      "startSeconds": 194,
+      "durationSeconds": 24,
+      "sampledFps": 4,
+      "extractedFrameCount": 96,
+      "contactSheetShape": {
+        "tileCols": 10,
+        "tileRows": 10,
+        "frameEstimate": 96
+      },
+      "frameIndex": "reference-artifacts/analyses/galaga-path-reference-media/stage-6-capture-pressure/frame-index.json",
+      "contactSheet": "reference-artifacts/analyses/galaga-path-reference-media/stage-6-capture-pressure/contact-sheet.jpg",
+      "motionDifferenceSheet": "reference-artifacts/analyses/galaga-path-reference-media/stage-6-capture-pressure/motion-difference-sheet.jpg"
+    },
+    {
+      "id": "stage-10-opening-entry",
+      "label": "Stage 10 opening rack entry",
+      "family": "regular-entry",
+      "sourceId": "snake-latino-arcade-gameplay",
+      "startSeconds": 386,
+      "durationSeconds": 22,
+      "sampledFps": 4,
+      "extractedFrameCount": 88,
+      "contactSheetShape": {
+        "tileCols": 10,
+        "tileRows": 9,
+        "frameEstimate": 88
+      },
+      "frameIndex": "reference-artifacts/analyses/galaga-path-reference-media/stage-10-opening-entry/frame-index.json",
+      "contactSheet": "reference-artifacts/analyses/galaga-path-reference-media/stage-10-opening-entry/contact-sheet.jpg",
+      "motionDifferenceSheet": "reference-artifacts/analyses/galaga-path-reference-media/stage-10-opening-entry/motion-difference-sheet.jpg"
+    },
+    {
+      "id": "challenge-1-arrival",
+      "label": "First challenge arrival and score window",
+      "family": "challenge-entry",
+      "sourceId": "snake-latino-arcade-gameplay",
+      "startSeconds": 82,
+      "durationSeconds": 36,
+      "sampledFps": 4,
+      "extractedFrameCount": 144,
+      "contactSheetShape": {
+        "tileCols": 10,
+        "tileRows": 15,
+        "frameEstimate": 144
+      },
+      "frameIndex": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/frame-index.json",
+      "contactSheet": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg",
+      "motionDifferenceSheet": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/motion-difference-sheet.jpg"
+    },
+    {
+      "id": "challenge-1-late-wave",
+      "label": "First challenge late wave and results",
+      "family": "challenge-entry",
+      "sourceId": "snake-latino-arcade-gameplay",
+      "startSeconds": 90,
+      "durationSeconds": 34,
+      "sampledFps": 4,
+      "extractedFrameCount": 136,
+      "contactSheetShape": {
+        "tileCols": 10,
+        "tileRows": 14,
+        "frameEstimate": 136
+      },
+      "frameIndex": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/frame-index.json",
+      "contactSheet": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/contact-sheet.jpg",
+      "motionDifferenceSheet": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/motion-difference-sheet.jpg"
+    },
+    {
+      "id": "challenge-2-arrival",
+      "label": "Second challenge arrival and score window",
+      "family": "challenge-entry",
+      "sourceId": "snake-latino-arcade-gameplay",
+      "startSeconds": 231,
+      "durationSeconds": 36,
+      "sampledFps": 4,
+      "extractedFrameCount": 144,
+      "contactSheetShape": {
+        "tileCols": 10,
+        "tileRows": 15,
+        "frameEstimate": 144
+      },
+      "frameIndex": "reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/frame-index.json",
+      "contactSheet": "reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg",
+      "motionDifferenceSheet": "reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/motion-difference-sheet.jpg"
+    },
+    {
+      "id": "challenge-3-arrival",
+      "label": "Third challenge arrival and score window",
+      "family": "challenge-entry",
+      "sourceId": "snake-latino-arcade-gameplay",
+      "startSeconds": 340,
+      "durationSeconds": 36,
+      "sampledFps": 4,
+      "extractedFrameCount": 144,
+      "contactSheetShape": {
+        "tileCols": 10,
+        "tileRows": 15,
+        "frameEstimate": 144
+      },
+      "frameIndex": "reference-artifacts/analyses/galaga-path-reference-media/challenge-3-arrival/frame-index.json",
+      "contactSheet": "reference-artifacts/analyses/galaga-path-reference-media/challenge-3-arrival/contact-sheet.jpg",
+      "motionDifferenceSheet": "reference-artifacts/analyses/galaga-path-reference-media/challenge-3-arrival/motion-difference-sheet.jpg"
+    }
+  ],
+  "compatibilitySheets": [
+    {
+      "out": "reference-artifacts/analyses/challenge-stage-reference/contact-sheet.png",
+      "start": 82,
+      "duration": 62,
+      "fps": 1,
+      "label": "Challenge-stage reference contact sheet generated from the local Snake Latino Galaga source.",
+      "sourceId": "snake-latino-arcade-gameplay",
+      "shape": {
+        "tileCols": 8,
+        "tileRows": 8,
+        "frameEstimate": 62
+      }
+    },
+    {
+      "out": "reference-artifacts/analyses/first-challenge-stage/contact-sheet.png",
+      "start": 82,
+      "duration": 54,
+      "fps": 2,
+      "label": "First challenge-stage baseline contact sheet generated from the local Snake Latino Galaga source.",
+      "sourceId": "snake-latino-arcade-gameplay",
+      "shape": {
+        "tileCols": 10,
+        "tileRows": 11,
+        "frameEstimate": 108
+      }
+    },
+    {
+      "out": "reference-artifacts/analyses/release-reference-pack/transition-window/contact-sheet.png",
+      "start": 108,
+      "duration": 32,
+      "fps": 2,
+      "label": "Challenge result to post-challenge transition window generated from the local Snake Latino Galaga source.",
+      "sourceId": "snake-latino-arcade-gameplay",
+      "shape": {
+        "tileCols": 8,
+        "tileRows": 8,
+        "frameEstimate": 64
+      }
+    },
+    {
+      "out": "reference-artifacts/analyses/release-reference-pack/stage4-window/contact-sheet.png",
+      "start": 120,
+      "duration": 44,
+      "fps": 2,
+      "label": "Post-challenge regular-stage pressure window generated from the local Snake Latino Galaga source.",
+      "sourceId": "snake-latino-arcade-gameplay",
+      "shape": {
+        "tileCols": 10,
+        "tileRows": 9,
+        "frameEstimate": 88
+      }
+    },
+    {
+      "out": "reference-artifacts/analyses/release-reference-pack/later-pressure-window/contact-sheet.png",
+      "start": 231,
+      "duration": 56,
+      "fps": 2,
+      "label": "Later pressure and challenge-adjacent window generated from the local Snake Latino Galaga source.",
+      "sourceId": "snake-latino-arcade-gameplay",
+      "shape": {
+        "tileCols": 10,
+        "tileRows": 12,
+        "frameEstimate": 112
+      }
+    }
+  ],
+  "playerMeaning": "These contact sheets and frame indexes let Aurora compare alien entry, challenge arrival, and rack/choreography timing against visible Galaga reference motion instead of README-only descriptions.",
+  "outputs": {
+    "summary": "reference-artifacts/analyses/galaga-path-reference-media/latest.json",
+    "readme": "reference-artifacts/analyses/galaga-path-reference-media/README.md"
+  }
+}

@@ -3,11 +3,13 @@
 Primary sources:
 
 - original gameplay footage:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-video/original-galaga-7min.mp4`
+  - `/Users/sgwoods/Downloads/🎮🕹️👉Galaga (1981) - Gameplay Arcade - Snake Latino (360p, h264).mp4`
 - generated local contact sheet:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-analysis/challenge-check/original-challenge-sheet.png`
+  - `reference-artifacts/analyses/first-challenge-stage/contact-sheet.png`
+- frame-indexed source window:
+  - `reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg`
 - manual-backed structure:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/manuals/galaga-1981-namco/README.md`
+  - `reference-artifacts/manuals/galaga-1981-namco/README.md`
 
 Role in the project:
 
@@ -57,8 +59,8 @@ But it still differs from the original in ways that matter to feel:
 
 Using:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-analysis/challenge-check/original-challenge-sheet.png`
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-analysis/challenge-check/our-challenge-sheet.png`
+- `reference-artifacts/analyses/first-challenge-stage/contact-sheet.png`
+- `reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg`
 
 Current read:
 

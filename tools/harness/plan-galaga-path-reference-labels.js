@@ -62,6 +62,12 @@ function evidenceMediaFiles(files){
 function sourceAnchors(){
   const anchors = [
     {
+      id: 'galaga-path-reference-media',
+      role: 'media-backed-regular-and-challenge-path-label-source',
+      anchor: 'reference-artifacts/analyses/galaga-path-reference-media/latest.json',
+      fileRoot: 'reference-artifacts/analyses/galaga-path-reference-media'
+    },
+    {
       id: 'galaga-stage-reference-video',
       role: 'regular-stage-entry-and-formation-reference',
       anchor: 'reference-artifacts/analyses/galaga-stage-reference-video/README.md',

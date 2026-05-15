@@ -116,6 +116,10 @@ function normalizeConfidence(value){
   return Number.isFinite(+key) ? clamp(+key) : 0;
 }
 
+function isMediaEvidence(relativePath){
+  return /\.(png|jpe?g|webp|gif|mp4|mov|webm|m4v)$/i.test(String(relativePath || ''));
+}
+
 function extractLabels(payload){
   if(Array.isArray(payload)) return payload;
   if(Array.isArray(payload?.labels)) return payload.labels;
@@ -138,6 +142,9 @@ function validateLabel(label, file, index){
   }
   if(label.sourceAnchor && !fs.existsSync(path.join(ROOT, label.sourceAnchor))){
     errors.push(`sourceAnchor does not exist: ${label.sourceAnchor}`);
+  }
+  if(label.sourceAnchor && !isMediaEvidence(label.sourceAnchor)){
+    errors.push(`sourceAnchor must point to committed frame/contact-sheet media, not README-only provenance: ${label.sourceAnchor}`);
   }
   for(const field of ['sourceTimestampS', 'firstVisibleFrame']){
     if(label[field] !== undefined && !Number.isFinite(+label[field])) errors.push(`${field} must be numeric`);
@@ -167,6 +174,7 @@ function validateLabel(label, file, index){
     accepted: errors.length === 0,
     confidenceScore: normalizeConfidence(label.confidence),
     sourceAnchor: label.sourceAnchor || null,
+    sourceAnchorMediaEvidence: isMediaEvidence(label.sourceAnchor),
     sourceTimestampS: Number.isFinite(+label.sourceTimestampS) ? +label.sourceTimestampS : null,
     entityType: label.entityType || null,
     entityFamily: label.entityFamily || null,
@@ -248,6 +256,7 @@ function buildReport(){
       labelId: result.labelId,
       kind: result.kind,
       sourceAnchor: result.sourceAnchor,
+      sourceAnchorMediaEvidence: result.sourceAnchorMediaEvidence,
       sourceTimestampS: result.sourceTimestampS,
       entityType: result.entityType,
       entityFamily: result.entityFamily,
