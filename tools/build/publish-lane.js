@@ -115,7 +115,7 @@ function laneConfig(lane){
       buildInfo: DEV_BUILD_INFO,
       targetDir: 'dev',
       files: devFiles(DIST_DEV),
-      rootFiles: ['.github/workflows/pages.yml'],
+      rootFiles: [],
       prunePaths: legacyRootPrune,
       commitPrefix: 'Update dev lane from local build'
     };
@@ -127,7 +127,7 @@ function laneConfig(lane){
       buildInfo: BETA_BUILD_INFO,
       targetDir: 'beta',
       files: betaFiles(DIST_BETA),
-      rootFiles: ['.github/workflows/pages.yml'],
+      rootFiles: [],
       prunePaths: legacyRootPrune,
       commitPrefix: 'Update beta lane from dev build'
     };

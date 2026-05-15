@@ -1,18 +1,20 @@
 {
   "schemaVersion": 1,
   "artifactType": "platinum-code-review-packet",
-  "generatedAt": "2026-05-15T13:04:58.362Z",
+  "generatedAt": "2026-05-15T13:03:30.532Z",
   "branch": "codex/macbook-post-beta-conformance-10h",
   "baseRef": "origin/main",
   "baseCommit": "09a4c633cf92d35660f1a5986a156ea9cab112f4",
-  "headCommit": "211f9dd2",
+  "headCommit": "664aa0f0",
   "dirty": true,
   "statusShort": [
-    "M REVIEW_LEARNING_LEDGER.md",
+    "M .github/workflows/pages.yml",
+    " M REVIEW_LEARNING_LEDGER.md",
     " M reference-artifacts/analyses/code-review/latest.json",
     " M reference-artifacts/analyses/review-learning/latest.json",
-    "?? reference-artifacts/analyses/code-review/2026-05-15-211f9dd2/",
-    "?? reference-artifacts/analyses/review-learning/2026-05-15-211f9dd2/"
+    " M tools/build/publish-lane.js",
+    "?? reference-artifacts/analyses/code-review/2026-05-15-664aa0f0/",
+    "?? reference-artifacts/analyses/review-learning/2026-05-15-664aa0f0/"
   ],
   "reviewSkill": {
     "path": "codex-skills/platinum-code-review/SKILL.md",
@@ -45,7 +47,7 @@
     {
       "status": "M",
       "file": ".github/workflows/pages.yml",
-      "source": "committed-range",
+      "source": "working-tree",
       "area": "docs-artifact",
       "riskTags": []
     },
@@ -483,7 +485,7 @@
     {
       "status": "M",
       "file": "tools/build/publish-lane.js",
-      "source": "committed-range",
+      "source": "working-tree",
       "area": "release-tooling",
       "riskTags": [
         "browser-safety",
