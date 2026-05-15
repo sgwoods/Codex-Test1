@@ -46,6 +46,7 @@ ones a player feels immediately:
 - rack march cadence and left-right swarm motion
 - explosion and hit/destruction visual feedback
 - opening swarm palette families and stage-color progression
+- moving starfield / scrolling background motion
 - player readiness / missile-ready ship state
 - reserve-ship and remaining-life icon fidelity
 - level/stage flag graphics and progression markers
@@ -108,7 +109,7 @@ following are true:
 | --- | --- | --- | --- |
 | Source coverage and provenance | `9.6/10` | keep `>=9.6/10` while promoting stronger artifact-backed evidence | Preserve the three-source Galaxian profile, then convert proxy sprite/cue work into promoted targets rather than replacing provenance with tuning; use human spot-checks only when the artifacts stay ambiguous. |
 | Promoted semantic event coverage | `7.8/10` | `>=8.5/10` | Keep the event log central, then add score-table, attract-surface, result-state, and completion-state evidence that can be reviewed against source windows. |
-| Opening-stage presentation and HUD fidelity | partial | first visible slice should read as unmistakably Galaxian-family before deeper-run claims expand | Build baseline artifacts for `WAIT`/headline typography, score advance table, reserve ships, missile-ready player state, level flags, and score/HUD presentation from gameplay-video crops, contact sheets, palette extraction, and other primary sources. |
+| Opening-stage presentation and HUD fidelity | partial | first visible slice should read as unmistakably Galaxian-family before deeper-run claims expand | Build baseline artifacts for `WAIT`/headline typography, score advance table, reserve ships, missile-ready player state, level flags, moving starfield/background motion, and score/HUD presentation from gameplay-video crops, contact sheets, palette extraction, and other primary sources. |
 | Formation and rack timing | `6.2/10` | `>=7.2/10` | Move from connected-component/object proxy timing toward sprite-recognized rack timing plus browser-captured side-by-side traces. |
 | Motion and lower-field pressure | `6.2/10` reference and playtest | `>=7.2/10` playtest | Use runtime/reference track comparison first, then promote faster march-like rack cadence, bottom-pass-through top re-entry, dive-path targets, wrap cadence, and later-wave pressure with captured trace review. |
 | Single-shot threat, scoring, and progression | `7.5/10` | `>=8.2/10` | Keep the score table game-owned, then add score isolation, proper completion/loss endings, replay identity, and clearer one-level mission closure. |
@@ -187,15 +188,19 @@ baseline program should explicitly include:
 3. faster, more march-like left-right swarm cadence
 4. explosion and alien-hit visual states
 5. opening swarm color families and early stage palette progression
-6. missile-ready player-ship graphic/state
-7. reserve-ship / ships-remaining icons
-8. level/stage flag markers
-9. bottom-exit ships visibly continuing through and re-entering from the top
+6. moving starfield / scrolling background motion
+7. missile-ready player-ship graphic/state
+8. reserve-ship / ships-remaining icons
+9. level/stage flag markers
+10. bottom-exit ships visibly continuing through and re-entering from the top
    rather than simply popping back in
 
 Each of these should be grounded in committed baseline artifacts from gameplay
 video, frame crops, contact sheets, palette extraction, timing traces, and
-other primary sources before runtime tuning broadens.
+other primary sources before runtime tuning broadens. The existing
+`nenriki-15-wave-session` long-session source should remain one of the main
+baseline references for background motion, wrap/return behavior, and sustained
+swarm feel.
 
 ## Immediate Work To Start Now
 
@@ -221,8 +226,9 @@ other primary sources before runtime tuning broadens.
 ### 4. Highest-value conformance lifts
 
 - build the opening-slice baseline artifact package for `WAIT`, score table,
-  rack march cadence, explosion states, palettes, reserve ships, missile-ready
-  state, stage flags, and bottom-pass-through top re-entry behavior
+  rack march cadence, explosion states, palettes, moving starfield motion,
+  reserve ships, missile-ready state, stage flags, and bottom-pass-through top
+  re-entry behavior
 - promote artifact-backed sprite targets and attract/score surfaces
 - promote artifact-backed cue targets and runtime/reference audio pairs
 - compare motion pressure after each measured timing change using captured

@@ -57,8 +57,9 @@ rather than letting internal conformance terminology imply that it already has.
 Before we expand the public depth, the current one-level public slice should
 also get its obvious baseline Galaxian-family cues into better shape:
 `WAIT` presentation, score advance table, swarm march cadence, explosion
-states, opening palettes, missile-ready ship state, reserve ships, level
-flags, and bottom-pass-through re-entry from the top instead of pop-in return.
+states, opening palettes, moving starfield motion, missile-ready ship state,
+reserve ships, level flags, and bottom-pass-through re-entry from the top
+instead of pop-in return.
 
 ## Level Model
 
@@ -141,6 +142,8 @@ Focus:
 
 - opening-slice visible fidelity so the one public level looks more credibly
   Galaxian-family before more depth is surfaced
+- moving starfield/background motion grounded against the existing
+  `nenriki-15-wave-session` long-session source
 - measured wrap/return behavior where bottom-exit ships continue through and
   re-enter from the top rather than simply reappearing
 - captured later-band runtime/reference traces

@@ -28,3 +28,7 @@ The current profile includes source manifests, contact sheets, waveforms, and
 the first promoted semantic event log. The next promotion step is frame-level
 timing extraction for the event windows that directly drive the playable
 Galaxy Guardians 0.1 scout-wave preview.
+
+The `nenriki-15-wave-session` source is also an important long-session visual
+baseline for moving starfield motion, sustained swarm cadence, and bottom-exit
+top-reentry pressure during deeper Guardians conformance work.
