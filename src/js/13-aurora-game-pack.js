@@ -199,7 +199,12 @@ playerShot:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagshi
 enemyShot:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:220,referenceVolume:.88}),
 attackCharge:referenceAudioCue('assets/reference-audio/galaga3-attack-charger.m4a',{cooldownMs:520,referenceVolume:.94}),
 enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220}),
- bossHit:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:240,referenceVolume:1.04}),
+ bossHit:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{
+  cooldownMs:240,
+  referenceVolume:1.04,
+  clipStart:1.149,
+  clipDuration:.29
+ }),
  enemyBoom:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220}),
  bossBoom:referenceAudioCue('assets/reference-audio/galaga3-boss-death-sasori.m4a',{cooldownMs:360,referenceVolume:1.18}),
  captureBeam:referenceAudioCue('assets/reference-audio/galaga3-tractor-beam.m4a',{cooldownMs:1800}),

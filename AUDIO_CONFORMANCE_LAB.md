@@ -107,14 +107,14 @@ Current result:
 
 | Metric | Value |
 |---|---:|
-| Quality score audio category | `6.9/10` |
+| Quality score audio category | `7.0/10` |
 | Overall quality score | `9.1/10` |
 | Semantic event score | `9.78/10` |
-| Acoustic event score | `6.10/10` |
-| Average worst segment risk | `3.90/10` |
+| Acoustic event score | `6.45/10` |
+| Average worst segment risk | `3.55/10` |
 | Cue-contract readiness | `9.09/10` |
 | Contracted priority cue families | `8` cues |
-| Highest current audio gap | `challengePerfect` onset |
+| Highest current audio gap | `playerShot` onset |
 | Focused candidate-loop coverage | `enemyShot`, `challengePerfect`, and the contracted cue set |
 
 This means the process and runtime audio both moved forward, while audio still
@@ -129,6 +129,21 @@ duration ceremony floor. No perfect-clear runtime cue was promoted. This is the
 intended guardrail: focused similarity is evidence, not release authority by
 itself, and a cue that wins the onset comparison can still be wrong for the
 player if it abbreviates the reward/inter-level moment.
+
+Post-beta boss-hit pass:
+
+- `bossHit` now uses the curated boss-damage subwindow from
+  `galaga3-boss-damage-flagship-fighter-shot.m4a`
+  (`clipStart: 1.149`, `clipDuration: 0.29`) in the Galaga reference audio
+  theme.
+- This moved `bossHit` event-gap risk from `4.62/10` to `0.96/10` and worst
+  segment risk from `5.71/10` to `0.36/10`.
+- The broader audio read improved from `6.9/10` to `7.0/10`, acoustic event
+  score improved from `6.10/10` to `6.45/10`, cue alignment stayed `9/9`, and
+  overall quality stayed `9.1/10`.
+- The next exposed measured gap is `playerShot` onset, but that should be
+  reviewed as a scorer/reference-window issue before runtime promotion because
+  shot identity is a high-frequency, high-repetition player-control cue.
 
 May 11 capture-stability and ship-loss trial pass:
 
@@ -364,6 +379,10 @@ The next high-value audio pass should split into two measured tracks:
 - `challengeTransition` follow-up listening pass: the measured `1.6s` phrase is
   now runtime-safe, so the next check should be human/gameplay review rather
   than further widening
+- `playerShot` onset review: the latest post-boss-hit rollup exposes
+  `playerShot` as the highest measured risk, but this should start with
+  reference-window/scorer validation because player fire is a repeated control
+  feedback cue where a technically closer clip can make play feel worse
 - `playerHit` tail/body composite monitoring: keep the calibrated layered cue as
   a guardrail, and refine only if manual listening or future capture baselines
   show a player-facing weakness

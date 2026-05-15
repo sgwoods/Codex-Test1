@@ -95,7 +95,7 @@ Status: complete.
 
 ### 0:30-1:45 Audio Baseline And First Harness Improvement
 
-Status: started, with one reusable harness improvement kept.
+Status: complete, with one reusable harness improvement kept.
 
 Measured baseline:
 
@@ -130,3 +130,60 @@ Position in plan:
   full-phrase/envelope-preserving candidates, or pivot to the higher
   user-impact impact/explosion cue family now that the reward-subclip path is
   guarded.
+
+### 1:45-2:45 Impact Feedback Runtime Lift
+
+Status: complete, with one measured runtime cue promotion.
+
+Problem:
+
+- `bossHit` was the highest impact/explosion feedback gap in the fresh event-gap
+  read: gap `4.62/10`, onset segment risk `5.71/10`, centroid gap `646.1 Hz`.
+- This maps directly to a player-facing concern: first-hit boss damage should
+  audibly confirm that damage registered without sounding like a generic shot or
+  final boss death.
+
+Strategy:
+
+- Run the `boss-hit` focus loop to inspect candidate subwindows and confirm the
+  guide mapping.
+- Compare the focus-loop result against the event-gap rollup.
+- Promote only the already-curated Galaga reference subwindow into the
+  `galaga-reference-assets` runtime cue map.
+
+Change:
+
+- `bossHit` now plays the curated boss-damage window from
+  `galaga3-boss-damage-flagship-fighter-shot.m4a`:
+  `clipStart: 1.149`, `clipDuration: 0.29`.
+
+Measured result:
+
+| Metric | Before | After |
+| --- | ---: | ---: |
+| `bossHit` event-gap risk | `4.62/10` | `0.96/10` |
+| `bossHit` worst segment risk | `5.71/10` | `0.36/10` |
+| Average worst segment risk | `3.90/10` | `3.55/10` |
+| Acoustic event score | `6.10/10` | `6.45/10` |
+| Audio category score | `6.9/10` | `7.0/10` |
+| Overall quality score | `9.1/10` | `9.1/10` |
+| Audio cue alignment | `9/9` | `9/9` |
+
+Verification:
+
+- `npm run build`
+- `npm run harness:check:audio-cue-slots`
+- `npm run harness:check:audio-theme-phases`
+- `npm run harness:analyze-audio-theme-comparison` through `harness:measure`
+- `npm run harness:analyze:aurora-audio-event-gap` through `harness:measure`
+- `npm run harness:check:audio-cue-alignment` through `harness:measure`
+- `npm run harness:score:quality-conformance` through `harness:measure`
+- `npm run harness:check:audio-runtime-recovery`
+
+Position in plan:
+
+- We have one real user-facing conformance improvement: boss first-hit damage
+  should be more readable and more distinct in Galaga reference audio mode.
+- The next exposed audio gap is `playerShot` onset, now highest risk at
+  `9.37/10`; however, before chasing that number we should confirm it is not a
+  scorer/reference-window artifact and that changing it would improve live play.
