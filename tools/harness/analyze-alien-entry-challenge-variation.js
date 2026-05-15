@@ -196,6 +196,8 @@ function buildReport(){
   const challengePathCoverage = clamp(challengePath.length / 4);
   const referenceConfidence = +(pathFamily.summary?.comparisonConfidence || 0);
   const referenceCap = +(pathFamily.summary?.referenceComparisonCap10 || 0);
+  const referenceCapReason = pathFamily.summary?.referenceComparisonCapReason || null;
+  const labelBackedComparisonReady = !!pathFamily.summary?.referenceLabelSupport?.labelBackedComparisonReady;
   const pathFamilyScore = +(pathFamily.summary?.score10 || 0);
   const acceptedRegularLabels = +(referenceLabels.summary?.acceptedRegularEntryCount || 0);
   const acceptedChallengeLabels = +(referenceLabels.summary?.acceptedChallengeEntryCount || 0);
@@ -281,9 +283,11 @@ function buildReport(){
       labelCoverageScore > 0
         ? 10 * ((0.36 * referenceConfidence) + (0.28 * clamp(referenceCap / 10)) + (0.24 * clamp(labelCoverageScore / 10)) + (0.12 * directReferenceReady))
         : 10 * ((0.45 * referenceConfidence) + (0.35 * clamp(referenceCap / 10)) + (0.2 * (referenceCap > 7.5 ? 1 : 0))),
-      `Path comparison confidence ${round(referenceConfidence)}; accepted reference labels ${acceptedRegularLabels} regular / ${acceptedChallengeLabels} challenge; label coverage ${round(labelCoverageScore, 1)}/10; current heuristic cap ${round(referenceCap, 1)}/10; path-slot extraction score ${round(pathSlot.summary?.extractionScore10, 1)}/10.`,
+      `Path comparison confidence ${round(referenceConfidence)}; accepted reference labels ${acceptedRegularLabels} regular / ${acceptedChallengeLabels} challenge; label coverage ${round(labelCoverageScore, 1)}/10; current cap ${round(referenceCap, 1)}/10 (${referenceCapReason || 'unknown'}); path-slot extraction score ${round(pathSlot.summary?.extractionScore10, 1)}/10.`,
       'Measures whether the harness is ready to compare Aurora trajectories to frame-labeled Galaga reference paths instead of heuristic runtime families.',
-      'Create and validate Galaga reference contact sheets/path labels, then lift the heuristic cap only when accepted regular and challenge labels pass the direct-reference gate.'
+      labelBackedComparisonReady
+        ? 'Move from media-backed path-family labels to tracked reference trajectories and rack-slot coordinate comparison before making gameplay changes against this metric.'
+        : 'Create and validate Galaga reference contact sheets/path labels, then lift the heuristic cap only when accepted regular and challenge labels pass the direct-reference gate.'
     )
   ];
 
@@ -340,7 +344,9 @@ function buildReport(){
         regularEntry: acceptedRegularLabels,
         challengeEntry: acceptedChallengeLabels,
         coverageScore10: round(labelCoverageScore, 1),
-        directReferenceReady: !!labelDirectReady
+        directReferenceReady: !!labelDirectReady,
+        labelBackedComparisonReady,
+        referenceCapReason
       }
     },
     sourceReports: {

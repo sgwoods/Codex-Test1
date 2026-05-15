@@ -1,0 +1,97 @@
+{
+  "generatedAt": "2026-05-15T17:48:26.493Z",
+  "commit": "d43b188a",
+  "score10": 8.8,
+  "summary": {
+    "score10": 8.8,
+    "stageFamilyBlueprintCount": 6,
+    "challengeLayerBlueprintCount": 3,
+    "evidenceWindowCount": 11,
+    "pressureReplayCoverage": 0,
+    "pressureCollisionReplayCoverage": 0,
+    "formationBossGrammarScore10": 9.4,
+    "formationBossGrammarWindowCount": 11,
+    "priority": "high",
+    "strongestSubmetric": {
+      "id": "stage-distinctiveness",
+      "label": "Stage distinctiveness",
+      "score10": 10,
+      "read": "6/6 stage families are blueprinted and 11/6 target evidence windows are present; stage-signature distinct pair ratio is 1."
+    },
+    "weakestSubmetric": {
+      "id": "long-run-non-repetition",
+      "label": "Long-run non-repetition",
+      "score10": 6,
+      "read": "Stage-signature repetition risk is 0; closest pair is late-run-crown-entry / late-run-escort-variant."
+    },
+    "nextRecommendedWork": [
+      "improve Stage 4 pressure replay precision so source loss windows reproduce as exact deterministic windows",
+      "preserve stage-8 flank and stage-14 escort grammar while adding the next measured challenge/reward slice",
+      "advance boss/formation grammar by targeting Path shape and set-formation precision: 600 tracks classified into path families; expected family coverage 1; accepted Galaga labels 6 regular / 4 challenge; cap 8.2/10 (media-backed-reference-label-cap).",
+      "mid-run-entry-variant and mid-run-pressure are too similar by computed gameplay signature distance (0.106). Strategy: Use the feature trace to add one distinct movement/reward grammar to the weaker window, then rerun stage-signature distance.",
+      "implement one challenge-stage movement and reward slice with clear perfect/near-perfect feedback"
+    ]
+  },
+  "evidence": {
+    "levelExpansionPlan": "LEVEL_BY_LEVEL_EXPANSION_PLAN.md",
+    "challengeReport": "reference-artifacts/analyses/correspondence/challenge-stage-timing/2026-05-10-eedc85ba/report.json",
+    "progressionReport": "reference-artifacts/analyses/correspondence/persona-progression/2026-05-11-855f8ec7/report.json",
+    "captureReport": "reference-artifacts/analyses/correspondence/capture-rescue/2026-04-19-7081c7a/report.json",
+    "pressureGeometryReport": "reference-artifacts/analyses/aurora-stage4-pressure-geometry/2026-05-07-bfcc311/report.json",
+    "pressureLossReport": "reference-artifacts/analyses/aurora-stage4-loss-windows/2026-05-07-fb2f674/report.json",
+    "stageSignatureReport": "reference-artifacts/analyses/stage-signature-distance/2026-05-15-60326a33/report.json",
+    "opportunityReport": "reference-artifacts/analyses/level-arc-opportunity-windows/2026-05-09-5da7d96/report.json",
+    "formationBossGrammarReport": "reference-artifacts/analyses/formation-boss-grammar-conformance/2026-05-15-d43b188a/report.json",
+    "levelExpansionCycle": "reference-artifacts/analyses/aurora-level-expansion-cycle"
+  },
+  "submetrics": [
+    {
+      "id": "stage-distinctiveness",
+      "label": "Stage distinctiveness",
+      "score10": 10,
+      "read": "6/6 stage families are blueprinted and 11/6 target evidence windows are present; stage-signature distinct pair ratio is 1."
+    },
+    {
+      "id": "challenge-stage-identity",
+      "label": "Challenge-stage identity",
+      "score10": 9.3,
+      "read": "5/5 challenge timing checks pass and 3/3 content layers are blueprinted; opportunity-window readiness is 7.8/10."
+    },
+    {
+      "id": "movement-grammar-expansion",
+      "label": "Movement grammar expansion",
+      "score10": 10,
+      "read": "Later-level entry, escort, regrouping, and challenge-path grammar is planned; the stage-signature distance score is 10/10."
+    },
+    {
+      "id": "pressure-curve-over-time",
+      "label": "Pressure curve over time",
+      "score10": 7.5,
+      "read": "3/3 source pressure/loss windows are found, but 0 reproduce as exact losses under replay. Pressure-collision replay diagnostics classify 0 as same-window or exact collision pressure."
+    },
+    {
+      "id": "boss-reward-opportunity",
+      "label": "Boss and reward opportunity design",
+      "score10": 8.1,
+      "read": "3/3 capture/rescue scenarios match; level-arc opportunity windows show mean reward/opportunity signal 3.8/10."
+    },
+    {
+      "id": "boss-entry-formation-grammar",
+      "label": "Boss entry and formation grammar",
+      "score10": 9.3,
+      "read": "Boss/formation grammar scores 9.4/10; weakest metric is Path shape and set-formation precision (8.2/10)."
+    },
+    {
+      "id": "learning-mastery-windows",
+      "label": "Learning and mastery windows",
+      "score10": 8.8,
+      "read": "19/20 persona checks pass; progression ordering is not fully preserved."
+    },
+    {
+      "id": "long-run-non-repetition",
+      "label": "Long-run non-repetition",
+      "score10": 6,
+      "read": "Stage-signature repetition risk is 0; closest pair is late-run-crown-entry / late-run-escort-variant."
+    }
+  ]
+}

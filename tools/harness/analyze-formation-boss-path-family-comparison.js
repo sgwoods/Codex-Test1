@@ -6,6 +6,7 @@ const { execFileSync } = require('child_process');
 const ROOT = path.resolve(__dirname, '..', '..');
 const SOURCE_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'formation-boss-path-slot-extraction');
 const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'formation-boss-path-family-comparison');
+const REFERENCE_LABEL_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-path-reference-labels');
 const PROFILE_PATH = path.join(ROOT, 'tools', 'harness', 'reference-profiles', 'formation-boss-grammar-conformance.json');
 
 function ensureDir(dir){
@@ -180,6 +181,71 @@ function familySummary(expected, classifications){
   });
 }
 
+function referenceLabelSupport(profile){
+  const reportPath = latestReport(REFERENCE_LABEL_ROOT);
+  const minimumMeanConfidence = profile.thresholds?.minimumReferenceLabelConfidence || 0.72;
+  const requiredRegularEntryCount = profile.thresholds?.targetRegularWindows || 6;
+  const requiredChallengeEntryCount = profile.thresholds?.targetChallengeWindows || 4;
+  const heuristicCap10 = profile.thresholds?.heuristicPathFamilyCap10 || 6.8;
+  const labelBackedCap10 = profile.thresholds?.labelBackedPathFamilyCap10 || 8.2;
+  const directTrackedCap10 = profile.thresholds?.directTrackedPathFamilyCap10 || 9.2;
+  if(!reportPath){
+    return {
+      status: 'missing-reference-label-report',
+      report: null,
+      acceptedRegularEntryCount: 0,
+      acceptedChallengeEntryCount: 0,
+      acceptedLabelCount: 0,
+      coverageScore10: 0,
+      confidenceScore: 0,
+      mediaEvidenceReady: false,
+      labelBackedComparisonReady: false,
+      cap10: heuristicCap10,
+      capReason: 'heuristic-runtime-family-cap'
+    };
+  }
+  const report = readJson(reportPath);
+  const summary = report.summary || {};
+  const acceptedLabels = report.acceptedLabels || [];
+  const acceptedRegularEntryCount = +(summary.acceptedRegularEntryCount || 0);
+  const acceptedChallengeEntryCount = +(summary.acceptedChallengeEntryCount || 0);
+  const acceptedLabelCount = +(summary.acceptedLabelCount || acceptedLabels.length || 0);
+  const confidenceScore = +(summary.confidenceScore || 0);
+  const coverageScore10 = +(summary.coverageScore10 || 0);
+  const mediaEvidenceCount = acceptedLabels.filter(label => {
+    if(!label.sourceAnchorMediaEvidence || !label.sourceAnchor) return false;
+    return fs.existsSync(path.join(ROOT, label.sourceAnchor));
+  }).length;
+  const mediaEvidenceReady = acceptedLabelCount > 0 && mediaEvidenceCount === acceptedLabelCount;
+  const labelGateReady = !!summary.directReferenceReady
+    && acceptedRegularEntryCount >= requiredRegularEntryCount
+    && acceptedChallengeEntryCount >= requiredChallengeEntryCount
+    && confidenceScore >= minimumMeanConfidence;
+  const labelBackedComparisonReady = labelGateReady && mediaEvidenceReady;
+  return {
+    status: labelBackedComparisonReady ? 'media-backed-reference-label-gate-passed' : 'reference-label-gate-incomplete',
+    report: rel(reportPath),
+    acceptedRegularEntryCount,
+    acceptedChallengeEntryCount,
+    acceptedLabelCount,
+    requiredRegularEntryCount,
+    requiredChallengeEntryCount,
+    confidenceScore: round(confidenceScore),
+    minimumMeanConfidence,
+    coverageScore10: round(coverageScore10, 1),
+    mediaEvidenceCount,
+    mediaEvidenceReady,
+    labelGateReady,
+    labelBackedComparisonReady,
+    cap10: labelBackedComparisonReady ? labelBackedCap10 : heuristicCap10,
+    capReason: labelBackedComparisonReady ? 'media-backed-reference-label-cap' : 'heuristic-runtime-family-cap',
+    futureCap10: directTrackedCap10,
+    playerMeaning: labelBackedComparisonReady
+      ? 'Aurora path families can now be judged against committed Galaga contact-sheet labels, but not yet against tracked reference trajectories or rack-slot coordinates.'
+      : 'Aurora path families are still scored as heuristic runtime coverage until committed Galaga media labels pass the reference gate.'
+  };
+}
+
 function windowSummary(window){
   const classifications = (window.tracks || []).map(classifyTrack);
   const families = new Set(classifications.flatMap(item => item.families));
@@ -195,7 +261,7 @@ function windowSummary(window){
   };
 }
 
-function scoreSummary(profile, sourceReport, windows){
+function scoreSummary(profile, sourceReport, windows, referenceSupport){
   const expected = expectedFamilies(profile);
   const classifications = windows.flatMap(window => window.classifications);
   const families = familySummary(expected, classifications);
@@ -215,7 +281,10 @@ function scoreSummary(profile, sourceReport, windows){
     + (0.09 * slotCoverage)
     + (0.05 * meanTurnScore)
   ), 1);
-  const referenceComparisonCap10 = profile.thresholds?.heuristicPathFamilyCap10 || 6.8;
+  const referenceComparisonCap10 = referenceSupport.cap10 || profile.thresholds?.heuristicPathFamilyCap10 || 6.8;
+  const comparisonConfidence = referenceSupport.labelBackedComparisonReady
+    ? round(average([0.64, referenceSupport.confidenceScore, clamp(referenceSupport.coverageScore10 / 10)]), 2)
+    : 0.64;
   return {
     sourceReport: rel(sourceReport),
     windowCount: windows.length,
@@ -230,13 +299,21 @@ function scoreSummary(profile, sourceReport, windows){
     meanTurnScore: round(meanTurnScore),
     scoreBeforeCap10,
     referenceComparisonCap10,
+    referenceComparisonCapReason: referenceSupport.capReason,
     score10: round(Math.min(scoreBeforeCap10, referenceComparisonCap10), 1),
-    comparisonConfidence: 0.64,
+    comparisonConfidence,
+    referenceLabelSupport: referenceSupport,
     topProblem: scoreBeforeCap10 >= referenceComparisonCap10
-      ? 'Heuristic path-family coverage is available; the remaining gap is frame-labeled Galaga reference path comparison.'
+      ? (referenceSupport.labelBackedComparisonReady
+        ? 'Media-backed Galaga path labels now lift the heuristic cap; the remaining gap is direct tracked trajectory comparison and regular-stage geometry separation.'
+        : 'Heuristic path-family coverage is available; the remaining gap is frame-labeled Galaga reference path comparison.')
       : 'At least one expected boss, escort, rack, or challenge path family is missing from the current Aurora extraction.',
-    strategy: 'Use classified runtime path families to rank gameplay gaps now, then add labeled Galaga path families to replace heuristic coverage with direct visual conformance.',
-    successMeasure: 'Raise path-family score above the heuristic cap only after reference contact sheets or video-derived path labels can compare boss, escort, rack, and challenge trajectories directly.'
+    strategy: referenceSupport.labelBackedComparisonReady
+      ? 'Use media-backed Galaga path labels to score broad reference readiness now, then add tracked reference trajectories and rack-slot coordinates before claiming near-perfect path conformance.'
+      : 'Use classified runtime path families to rank gameplay gaps now, then add labeled Galaga path families to replace heuristic coverage with direct visual conformance.',
+    successMeasure: referenceSupport.labelBackedComparisonReady
+      ? `Raise path-family score beyond the label-backed cap (${referenceSupport.cap10}/10) only after reference trajectories are tracked against Aurora paths, not just labeled by contact-sheet family.`
+      : 'Raise path-family score above the heuristic cap only after reference contact sheets or video-derived path labels can compare boss, escort, rack, and challenge trajectories directly.'
   };
 }
 
@@ -246,7 +323,8 @@ function buildReport(){
   if(!sourceReport) throw new Error('No formation-boss path-slot extraction report found. Run npm run harness:extract:formation-boss-path-slots first.');
   const source = readJson(sourceReport);
   const windows = (source.windows || []).map(windowSummary);
-  const summary = scoreSummary(profile, sourceReport, windows);
+  const referenceSupport = referenceLabelSupport(profile);
+  const summary = scoreSummary(profile, sourceReport, windows, referenceSupport);
   const stamp = new Date().toISOString().slice(0, 10);
   const commit = gitShortCommit();
   const outDir = path.join(OUT_ROOT, `${stamp}-${commit}`);
@@ -263,6 +341,7 @@ function buildReport(){
     successMeasure: summary.successMeasure
   };
   writeJson(path.join(outDir, 'report.json'), report);
+  writeJson(path.join(OUT_ROOT, 'latest.json'), report);
   const lines = [
     '# Formation Boss Path Family Comparison',
     '',
@@ -271,9 +350,11 @@ function buildReport(){
     `- Score: ${summary.score10}/10`,
     `- Score before cap: ${summary.scoreBeforeCap10}/10`,
     `- Reference comparison cap: ${summary.referenceComparisonCap10}/10`,
+    `- Reference cap reason: ${summary.referenceComparisonCapReason}`,
     `- Confidence: ${summary.comparisonConfidence}`,
     `- Classified tracks: ${summary.classifiedTrackCount}/${summary.totalTrackCount}`,
     `- Expected family coverage: ${summary.expectedFamilyCoverage}`,
+    `- Reference labels: ${summary.referenceLabelSupport.acceptedRegularEntryCount} regular / ${summary.referenceLabelSupport.acceptedChallengeEntryCount} challenge`,
     '',
     `Problem: ${report.problem}`,
     '',

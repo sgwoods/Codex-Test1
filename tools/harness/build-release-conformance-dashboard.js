@@ -408,14 +408,14 @@ function metricExplanation(metric){
   if(text.includes('boss entry') || text.includes('formation grammar')){
     return {
       calculation: 'Boss/formation grammar is read from the dedicated formation-boss-grammar report, blending boss entry timing, boss/escort composition, formation settle evidence, challenge pattern identity, stage variation, and path-shape precision.',
-      grounding: 'Current grounding comes from Aurora level-expansion event logs, trace summaries, stage-signature distance, runtime path/slot extraction, heuristic path-family comparison, and the formation/boss grammar reference profile. Best-case grounding adds frame-labeled Galaga boss/escort/challenge paths and rack slot coordinates.',
+      grounding: 'Current grounding comes from Aurora level-expansion event logs, trace summaries, stage-signature distance, runtime path/slot extraction, media-backed Galaga path-family labels when available, and the formation/boss grammar reference profile. Best-case grounding adds tracked Galaga boss/escort/challenge trajectories and rack slot coordinates.',
       meaning: 'Players feel whether each stage has recognizable arcade choreography: bosses enter with readable intent, escorts matter, formations settle convincingly, and challenge stages teach memorable set pieces.'
     };
   }
   if(text.includes('alien entry and challenge')){
     return {
       calculation: 'Dedicated scorer blends regular-stage signature distance, entry path-family specificity, challenging-stage trajectory variation, challenge alien novelty, and readiness for reference-grounded path comparison.',
-      grounding: 'Current grounding comes from stage-signature distance, formation/boss grammar reports, runtime path/slot extraction, and heuristic path-family comparison. Best-case grounding adds Galaga-family contact sheets and frame-labeled challenge/entry path families across several stages.',
+      grounding: 'Current grounding comes from stage-signature distance, formation/boss grammar reports, runtime path/slot extraction, and media-backed Galaga path-family labels when available. Best-case grounding adds tracked Galaga challenge/entry trajectories across several stages.',
       meaning: 'Players feel this as whether levels and challenge stages are authored, surprising, and learnable. Designers use it to prevent repetitive entry waves and to make challenge stages introduce new alien motion, scoring, and mastery opportunities.'
     };
   }
