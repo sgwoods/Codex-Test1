@@ -78,9 +78,22 @@ function loadJson(file){
   return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
-function fetchJson(url){
+function logProgress(message){
+  console.error(`[verify-live-lane] ${message}`);
+}
+
+function armRequestTimeout(req, res, url, timeoutMs){
+  const fail = () => req.destroy(new Error(`Request timeout after ${timeoutMs}ms for ${url}`));
+  req.setTimeout(timeoutMs, fail);
+  if(res && typeof res.setTimeout === 'function'){
+    res.setTimeout(timeoutMs, fail);
+  }
+}
+
+function fetchJson(url, requestTimeoutMs){
   return new Promise((resolve, reject) => {
-    https.get(url, res => {
+    const req = https.get(url, res => {
+      armRequestTimeout(req, res, url, requestTimeoutMs);
       if(res.statusCode !== 200){
         reject(new Error(`HTTP ${res.statusCode} from ${url}`));
         res.resume();
@@ -96,13 +109,16 @@ function fetchJson(url){
           reject(new Error(`Could not parse JSON from ${url}: ${err.message}`));
         }
       });
-    }).on('error', reject);
+    });
+    armRequestTimeout(req, null, url, requestTimeoutMs);
+    req.on('error', reject);
   });
 }
 
-function fetchOk(url){
+function fetchOk(url, requestTimeoutMs){
   return new Promise((resolve, reject) => {
-    https.get(url, res => {
+    const req = https.get(url, res => {
+      armRequestTimeout(req, res, url, requestTimeoutMs);
       const status = res.statusCode || 0;
       res.resume();
       if(status === 200){
@@ -110,7 +126,9 @@ function fetchOk(url){
         return;
       }
       reject(new Error(`HTTP ${status} from ${url}`));
-    }).on('error', reject);
+    });
+    armRequestTimeout(req, null, url, requestTimeoutMs);
+    req.on('error', reject);
   });
 }
 
@@ -119,6 +137,7 @@ async function main(){
   const lane = String(args.lane || '').toLowerCase();
   const cfg = laneConfig(lane);
   const timeoutMs = Math.max(10_000, +args.timeoutMs || 180_000);
+  const requestTimeoutMs = Math.min(timeoutMs, Math.max(5_000, +args.requestTimeoutMs || 15_000));
   const intervalMs = Math.max(2_000, +args.intervalMs || 8_000);
   const expected = loadJson(cfg.buildInfo);
   const deadline = Date.now() + timeoutMs;
@@ -127,15 +146,22 @@ async function main(){
 
   while(Date.now() < deadline){
     try{
-      const live = await fetchJson(cfg.url);
+      logProgress(`checking ${lane} build-info: ${cfg.url}`);
+      const live = await fetchJson(cfg.url, requestTimeoutMs);
       lastSeen = live;
       if(
         live.label === expected.label &&
         live.commit === expected.commit &&
         live.releaseChannel === expected.releaseChannel
       ){
-        for(const assetUrl of (cfg.assetUrls || [])){
-          await fetchOk(assetUrl);
+        const assetUrls = cfg.assetUrls || [];
+        for(const [index, assetUrl] of assetUrls.entries()){
+          logProgress(`checking ${lane} asset ${index + 1}/${assetUrls.length}: ${assetUrl}`);
+          try{
+            await fetchOk(assetUrl, requestTimeoutMs);
+          }catch(err){
+            throw new Error(`Asset verification failed for ${assetUrl}: ${err.message || String(err)}`);
+          }
         }
         console.log(JSON.stringify({
           ok: true,
@@ -164,6 +190,7 @@ async function main(){
       commit: expected.shortCommit || String(expected.commit || '').slice(0, 7),
       releaseChannel: expected.releaseChannel
     },
+    requestTimeoutMs,
     lastSeen: lastSeen ? {
       label: lastSeen.label,
       commit: lastSeen.shortCommit || String(lastSeen.commit || '').slice(0, 7),
