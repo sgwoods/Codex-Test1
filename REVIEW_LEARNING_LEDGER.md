@@ -10,9 +10,9 @@ or simpler platform/game boundaries.
 
 ## Current Snapshot
 
-- generated: `2026-05-15T16:34:47.534Z`
+- generated: `2026-05-15T16:35:59.856Z`
 - branch: `codex/macbook-audio-entry-grounding-cycle`
-- commit: `93dbdad8`
+- commit: `cd58c4a5`
 - review cycles tracked: `3`
 - issue notes tracked: `4`
 - accepted changes tracked: `3`
@@ -51,7 +51,7 @@ or simpler platform/game boundaries.
 | --- | --- | --- | --- | --- | --- |
 | historical | Platform architecture baseline | ARCHITECT_REVIEW_RESPONSE.md | standing | P0 0 / P1 0 / P2 4 / P3 0 | Baseline concerns are partly covered and partly continuing maturity work. |
 | 2026-05-14 | Local-to-hosted-dev code review gate | CODE_REVIEW_MODEL.md | standing | P0 0 / P1 0 / P2 0 / P3 0 | Accepted as a lightweight release-safety gate for development lane movement. |
-| 2026-05-15 | Current branch code review packet | reference-artifacts/analyses/code-review/latest.json | 26 | P0 0 / P1 0 / P2 0 / P3 0 | Use automatic findings as review notes and blocking P0/P1 gates; P2/P3 remain explicit human-review items. |
+| 2026-05-15 | Current branch code review packet | reference-artifacts/analyses/code-review/latest.json | 39 | P0 0 / P1 0 / P2 0 / P3 0 | Use automatic findings as review notes and blocking P0/P1 gates; P2/P3 remain explicit human-review items. |
 
 ## Issues And Notes
 
