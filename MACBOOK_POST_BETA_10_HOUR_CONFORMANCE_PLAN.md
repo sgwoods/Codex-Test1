@@ -187,3 +187,78 @@ Position in plan:
 - The next exposed audio gap is `playerShot` onset, now highest risk at
   `9.37/10`; however, before chasing that number we should confirm it is not a
   scorer/reference-window artifact and that changing it would improve live play.
+
+### 2:45-4:30 Player Shot Control-Cue Lift
+
+Status: complete, with one reusable candidate loop and one measured runtime cue
+promotion.
+
+Problem:
+
+- After the boss-hit fix, `playerShot` became the highest measured audio gap:
+  event-gap risk `9.37/10`, onset segment risk `8.39/10`.
+- Because `playerShot` is a high-repetition control-feedback cue, blindly
+  maximizing waveform similarity could make every player shot too loud or too
+  intrusive.
+
+Strategy:
+
+- Add a focused `player-shot` candidate family to
+  `tools/harness/analyze-aurora-audio-focus-candidates.js`.
+- Sweep reference subwindows, volumes, and synthetic control-snap alternatives
+  through `harness:measure` so wall/CPU cost is tracked.
+- Promote only if the candidate clears whole-cue risk, onset segment risk,
+  duration, band, centroid, and minimum scheduled-duration gates.
+
+Change:
+
+- `playerShot` now uses the measured flagship/fighter-shot subwindow for the
+  early classic gameplay cue and Galaga reference audio theme:
+  `clipStart: 0.08`, `clipDuration: 0.24`, `referenceVolume: 0.92`.
+- Later Aurora-themed shot variants remain synthetic so the platform can still
+  support future theme variation.
+
+Measured result:
+
+| Metric | Before | After |
+| --- | ---: | ---: |
+| `playerShot` event-gap risk | `9.37/10` | `1.0/10` |
+| `playerShot` worst segment risk | `8.39/10` | `2.56/10` |
+| Average worst segment risk | `3.55/10` | `3.27/10` |
+| Acoustic event score | `6.45/10` | `6.73/10` |
+| Audio category score | `7.0/10` | `7.0/10` |
+| Overall quality score | `9.1/10` | `9.1/10` |
+| Audio cue alignment | `9/9` | `9/9` |
+
+Compute and cost:
+
+| Run | Wall | CPU | Result |
+| --- | ---: | ---: | --- |
+| `audio-player-shot-focus` | `567.294s` | `1397.57s` | keeper `refclip-s80-d240-v92` |
+| `audio-theme-comparison-after-player-shot` | `292.899s` | `782.44s` | fresh full-theme comparison |
+| `audio-event-gap-after-player-shot` | `0.231s` | `0.28s` | `challengePerfect` becomes top remaining gap |
+| `audio-cue-alignment-after-player-shot` | `11.189s` | `21.79s` | `9/9` |
+| `quality-conformance-after-player-shot` | `65.973s` | `76.19s` | overall `9.1/10`, weakest audio |
+
+Verification:
+
+- `npm run build`
+- `npm run harness:check:audio-cue-slots`
+- `npm run harness:check:audio-theme-phases`
+- `npm run harness:analyze:aurora-audio-focus-candidates -- --cue player-shot --reference-grid-limit=64` through `harness:measure`
+- `npm run harness:analyze-audio-theme-comparison` through `harness:measure`
+- `npm run harness:analyze:aurora-audio-event-gap` through `harness:measure`
+- `npm run harness:check:audio-cue-alignment` through `harness:measure`
+- `npm run harness:score:quality-conformance` through `harness:measure`
+- `npm run harness:check:audio-runtime-recovery`
+
+Position in plan:
+
+- The audio conformance bundle now has two player-visible post-beta wins:
+  boss damage feedback and player shot identity.
+- The next audio target is `challengePerfect`, but only via
+  full-phrase/envelope-preserving candidates because the harness now blocks
+  short ceremony-collapsing clips.
+- With audio improved to a more stable `7.0/10` internal state, the next high
+  value block can shift back toward challenge-stage arrival, alien novelty, and
+  formation/path precision unless manual listening finds a cue regression.

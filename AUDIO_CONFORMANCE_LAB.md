@@ -110,25 +110,26 @@ Current result:
 | Quality score audio category | `7.0/10` |
 | Overall quality score | `9.1/10` |
 | Semantic event score | `9.78/10` |
-| Acoustic event score | `6.45/10` |
-| Average worst segment risk | `3.55/10` |
+| Acoustic event score | `6.73/10` |
+| Average worst segment risk | `3.27/10` |
 | Cue-contract readiness | `9.09/10` |
 | Contracted priority cue families | `8` cues |
-| Highest current audio gap | `playerShot` onset |
-| Focused candidate-loop coverage | `enemyShot`, `challengePerfect`, and the contracted cue set |
+| Highest current audio gap | `challengePerfect` onset |
+| Focused candidate-loop coverage | `enemyShot`, `challengePerfect`, `bossHit`, `playerShot`, and the contracted cue set |
 
 This means the process and runtime audio both moved forward, while audio still
-remains Aurora's weakest quality category. The latest runtime win is an
-`enemyShot` threat-fire cue promoted from a measured reference subwindow:
-fresh full-theme validation reduced average worst segment risk from `4.32/10`
-to `3.70/10`, kept cue alignment at `9/9`, and moved the highest residual
-segment gap away from enemy fire to `captureBeam` tail. The prior
-`challengePerfect` pass produced focused low-risk subwindow candidates, but the
-post-beta harness now rejects onset-only reward cues below a `1.1s` scheduled
-duration ceremony floor. No perfect-clear runtime cue was promoted. This is the
-intended guardrail: focused similarity is evidence, not release authority by
-itself, and a cue that wins the onset comparison can still be wrong for the
-player if it abbreviates the reward/inter-level moment.
+remains Aurora's weakest quality category. The latest post-beta runtime wins
+promoted measured reference subwindows for `bossHit` and `playerShot`.
+`playerShot` moved from the highest measured gap to a `1.0/10` event risk, and
+fresh full-theme validation reduced average worst segment risk from `3.55/10`
+to `3.27/10` while cue alignment stayed `9/9`. The earlier `enemyShot`
+threat-fire cue promotion remains in place. The prior `challengePerfect` pass
+produced focused low-risk subwindow candidates, but the post-beta harness now
+rejects onset-only reward cues below a `1.1s` scheduled duration ceremony
+floor. No perfect-clear runtime cue was promoted. This is the intended
+guardrail: focused similarity is evidence, not release authority by itself, and
+a cue that wins the onset comparison can still be wrong for the player if it
+abbreviates the reward/inter-level moment.
 
 Post-beta boss-hit pass:
 
@@ -144,6 +145,24 @@ Post-beta boss-hit pass:
 - The next exposed measured gap is `playerShot` onset, but that should be
   reviewed as a scorer/reference-window issue before runtime promotion because
   shot identity is a high-frequency, high-repetition player-control cue.
+
+Post-beta player-shot pass:
+
+- The focused `playerShot` loop now exists in
+  `tools/harness/analyze-aurora-audio-focus-candidates.js` and records durable
+  candidate evidence under
+  `reference-artifacts/analyses/aurora-audio-cue-candidates/latest-player-shot.json`.
+- The measured keeper is the flagship/fighter-shot subwindow
+  `clipStart: 0.08`, `clipDuration: 0.24`, `referenceVolume: 0.92`.
+- This moved `playerShot` event-gap risk from `9.37/10` to `1.0/10` and worst
+  segment risk from `8.39/10` to `2.56/10`.
+- The broader audio read stayed `7.0/10`, acoustic event score improved from
+  `6.45/10` to `6.73/10`, cue alignment stayed `9/9`, runtime recovery passed,
+  and overall quality stayed `9.1/10`.
+- The next exposed measured gap is again `challengePerfect` onset, but the
+  retained ceremony-duration guard means the next work should pursue a
+  full-phrase/envelope-preserving reward strategy rather than a short onset
+  clip.
 
 May 11 capture-stability and ship-loss trial pass:
 
@@ -379,10 +398,9 @@ The next high-value audio pass should split into two measured tracks:
 - `challengeTransition` follow-up listening pass: the measured `1.6s` phrase is
   now runtime-safe, so the next check should be human/gameplay review rather
   than further widening
-- `playerShot` onset review: the latest post-boss-hit rollup exposes
-  `playerShot` as the highest measured risk, but this should start with
-  reference-window/scorer validation because player fire is a repeated control
-  feedback cue where a technically closer clip can make play feel worse
+- `challengePerfect` full-phrase review: the latest post-player-shot rollup
+  again exposes `challengePerfect` as the highest measured risk, but the keeper
+  gate must preserve at least `1.1s` of reward ceremony
 - `playerHit` tail/body composite monitoring: keep the calibrated layered cue as
   a guardrail, and refine only if manual listening or future capture baselines
   show a player-facing weakness

@@ -49,6 +49,74 @@ const CUE_CONFIGS = {
     ],
     keeper: { risk: .3, segment: .3, duration: .08, acceptableDuration: .08, centroidWorsenHz: 100, bandWorsen: .05 }
   },
+  'player-shot': {
+    cue: 'playerShot',
+    entryId: 'player-shot-classic',
+    comparisonId: 'player-shot-compare',
+    latest: 'latest-player-shot.json',
+    title: 'Player Shot',
+    problem: 'Player Shot is the exposed highest acoustic event gap after the boss-hit fix, but it is a high-repetition control-feedback cue, so the loop must validate reference-window fit before recommending a runtime promotion.',
+    target: 'Make player fire read as a quick, crisp Galaga-like shot that remains lighter than hit/destruction feedback and distinct from enemyShot and bossHit during rapid play.',
+    cooldownMs: 160,
+    referenceStarts: [0, 0.02, 0.04, 0.05, 0.06, 0.08, 0.1, 0.12],
+    referenceDurations: [0.08, 0.1, 0.12, 0.16, 0.2, 0.24],
+    referenceVolumes: [0.42, 0.52, 0.62, 0.72, 0.82, 0.92],
+    handSpecs: [
+      {
+        id: 'player-fire-guide-window',
+        label: 'Player fire guide window',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',
+          cooldownMs: 160,
+          referenceVolume: .72,
+          clipStart: .05,
+          clipDuration: .24
+        }
+      },
+      {
+        id: 'player-fire-transient-only',
+        label: 'Player fire transient only',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',
+          cooldownMs: 160,
+          referenceVolume: .66,
+          clipStart: .08,
+          clipDuration: .12
+        }
+      },
+      {
+        id: 'synthetic-control-snap-brighter',
+        label: 'Synthetic control snap brighter',
+        spec: {
+          tones: [
+            { freq: 1280, duration: .032, wave: 'square', volume: .0088, slide: -760, detune: .004, lpHz: 7000 },
+            { freq: 1820, duration: .02, wave: 'square', volume: .0042, slide: -520, detune: -.003, lpHz: 7600, delay: .006 }
+          ],
+          noise: [{ duration: .018, volume: .0014, hp: 4200, delay: .004 }]
+        }
+      },
+      {
+        id: 'synthetic-control-snap-warmer',
+        label: 'Synthetic control snap warmer',
+        spec: {
+          tones: [
+            { freq: 980, duration: .034, wave: 'square', volume: .009, slide: -560, detune: .003, lpHz: 5400 },
+            { freq: 1450, duration: .024, wave: 'triangle', volume: .0046, slide: -360, lpHz: 6200, delay: .007 }
+          ],
+          noise: [{ duration: .014, volume: .001, hp: 3600, delay: .006 }]
+        }
+      }
+    ],
+    keeper: {
+      risk: .35,
+      segment: .35,
+      duration: .035,
+      acceptableDuration: .045,
+      centroidWorsenHz: 140,
+      bandWorsen: .045,
+      minimumScheduledDurationSeconds: .06
+    }
+  },
   'enemy-shot': {
     cue: 'enemyShot',
     entryId: 'enemy-shot-classic',

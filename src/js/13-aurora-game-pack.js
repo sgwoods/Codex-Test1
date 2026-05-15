@@ -195,7 +195,12 @@ const GALAGA_REFERENCE_AUDIO_CUES=Object.freeze({
    challenge:Object.freeze({referenceClip:'',cooldownMs:0})
  })
 }),
-playerShot:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:160}),
+playerShot:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{
+ cooldownMs:160,
+ referenceVolume:.92,
+ clipStart:.08,
+ clipDuration:.24
+}),
 enemyShot:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:220,referenceVolume:.88}),
 attackCharge:referenceAudioCue('assets/reference-audio/galaga3-attack-charger.m4a',{cooldownMs:520,referenceVolume:.94}),
 enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220}),
@@ -254,6 +259,7 @@ enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs
 });
 
 const AURORA_MEASURED_EFFECT_CUES=Object.freeze({
+ playerShot:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:160,referenceVolume:.92,clipStart:.08,clipDuration:.24}),
  playerHit:Object.freeze({
   cooldownMs:1800,
   scheduledDuration:.968,
@@ -285,7 +291,7 @@ const AURORA_AUDIO_THEMES=Object.freeze({
   cues:Object.freeze({
    gameStart:Object.freeze({seq:[392,494,523,659,784,988],step:.044,wave:'square',volume:.0205,slide:28,lpHz:3600,tones:Object.freeze([{freq:196,duration:.18,wave:'square',volume:.0046,slide:10,detune:.003,lpHz:1800,delay:0},{freq:392,duration:.082,wave:'triangle',volume:.0094,slide:24,detune:.004,lpHz:2500,delay:0},{freq:523,duration:.082,wave:'triangle',volume:.0096,slide:30,detune:.004,lpHz:2600,delay:.044},{freq:784,duration:.11,wave:'square',volume:.0056,slide:16,detune:.002,lpHz:3600,delay:.132},{freq:988,duration:.2,wave:'triangle',volume:.0168,slide:92,detune:.005,lpHz:2850,delay:.176},{freq:1318,duration:.11,wave:'triangle',volume:.0058,slide:44,detune:.003,lpHz:4400,delay:.22}])}),
    formationArrival:Object.freeze({seq:[330,440,587],step:.052,wave:'triangle',volume:.0112,slide:20,lpHz:3600,tones:Object.freeze([{freq:784,duration:.1,wave:'square',volume:.0048,slide:-22,lpHz:4200,delay:.104}])}),
-   playerShot:Object.freeze({tones:Object.freeze([{freq:1140,duration:.028,wave:'square',volume:.006,slide:-620,detune:.006,lpHz:6200},{freq:1520,duration:.018,wave:'square',volume:.003,slide:-480,detune:-.004,lpHz:6800,delay:.006}])}),
+   playerShot:AURORA_MEASURED_EFFECT_CUES.playerShot,
    enemyShot:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:220,referenceVolume:.95,clipStart:.97,clipDuration:.15}),
    playerHit:AURORA_MEASURED_EFFECT_CUES.playerHit,
    enemyHit:AURORA_MEASURED_EFFECT_CUES.enemyHit,

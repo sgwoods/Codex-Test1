@@ -1,6 +1,6 @@
 # Conformance Metrics Overview
 
-Generated: `2026-05-15T01:45:02.419Z`
+Generated: `2026-05-15T02:12:20.809Z`
 
 This document summarizes the current conformance scoring model for both the shipped Aurora application and the Galaxy Guardians 0.1 development preview. Aurora uses the release-quality scorecard; Guardians uses both a reference-conformance preview metric set and a stricter playtest-weighted score because its Galaxian evidence is still being promoted from source footage into frame-level/audio-level measurements.
 
@@ -8,7 +8,7 @@ This document summarizes the current conformance scoring model for both the ship
 
 | Game / scope | Primary score | Secondary scores | Status | Weakest current area | Evidence |
 | --- | --- | --- | --- | --- | --- |
-| Aurora Galactica current dev line | 9.1/10 | strongest Player movement conformance 10/10; weakest Audio identity and cue alignment 7/10; alien entry/challenge variation 7.8/10; audio contract readiness 9.09/10 | release-quality conformance score plus audio cue-contract read | Audio identity and cue alignment (7/10) | reference-artifacts/analyses/quality-conformance/2026-05-15-f32c4a0d/report.json; reference-artifacts/analyses/aurora-audio-cue-contracts/latest.json |
+| Aurora Galactica current dev line | 9.1/10 | strongest Player movement conformance 10/10; weakest Audio identity and cue alignment 7/10; alien entry/challenge variation 7.8/10; audio contract readiness 9.09/10 | release-quality conformance score plus audio cue-contract read | Audio identity and cue alignment (7/10) | reference-artifacts/analyses/quality-conformance/2026-05-15-02ae3190/report.json; reference-artifacts/analyses/aurora-audio-cue-contracts/latest.json |
 | Galaxy Guardians 0.1 playable preview | 7.6/10 | playtest weighted 6.9/10; maturity 7.2/10; gate coverage 9.6/10; public readiness 4.2/10 | preview-reference-conformance-model-not-production-release-score | Formation and rack timing | reference-artifacts/analyses/galaxy-guardians-identity/reference-conformance-0.1.json |
 
 ## Galaxy Guardians First-Class Promotion Read
@@ -84,7 +84,7 @@ xychart-beta
 | Metric | Score | Evidence | Current read |
 | --- | --- | --- | --- |
 | Player movement conformance | 10/10 | player-movement report | Current movement scored 10/10 against the control-principles profile, versus 10/10 for the shipped local baseline. |
-| Shot and hit responsiveness | 10/10 | close-shot-hit, movement fire window | Close-shot responsiveness passed, and movement-fire post-shot travel was 50.78, with shot delay 0ms. |
+| Shot and hit responsiveness | 10/10 | close-shot-hit, movement fire window | Close-shot responsiveness passed, and movement-fire post-shot travel was 51.62, with shot delay -23ms. |
 | Stage-1 opening timing fidelity | 8.5/10 | stage1-opening-first-dive report | 4/4 metrics were within tolerance; worst current delta was 0.18. |
 | Stage-1 opening geometry fidelity | 10/10 | stage1-opening-spacing report | Geometry held steady with 0 changed targets and max drift 0. |
 | Dive fairness and safety | 9.1/10 | persona-stage2-safety | Shared stage-2 safety seeds passed, which keeps the early dive/collision windows within the intended persona guardrail. |
@@ -93,7 +93,7 @@ xychart-beta
 | Progression and persona depth | 8.4/10 | persona-progression correspondence | 19/20 persona checks passed; progression ordering is still missing one ordering edge case. |
 | Boss entry and formation grammar | 9.2/10 | formation-boss-grammar-conformance report, stage-signature-distance report, level-expansion cycle evidence | Boss/formation grammar scores 9.2/10 across 11 evidence windows; weakest metric is Path shape and set-formation precision (6.8/10). |
 | Level arc and encounter shape | 8.7/10 | level-arc-conformance report, stage-signature-distance report, level-expansion cycle evidence | Level arc score is 8.7/10 with 6/6 stage families blueprinted and 11/6 evidence windows present; weakest submetric is Long-run non-repetition (6/10). |
-| Audio identity and cue alignment | 7/10 | audio-cue-alignment correspondence, aurora-audio-theme-comparison, galaga-audio-overlap, aurora-audio-event-gap semantic read, audio-cue-contracts, audio-promotion-precheck | Audio score blends cue identity, active reference similarity, reference-window precision, overlap timing, cue alignment, semantic event mapping, and acoustic event-gap severity. 0/21 reference windows still need tighter segmentation; 21 candidate subwindows were found; semantic event score is 9.78/10, acoustic event score is 6.45/10, and highest segment risk is playerShot onset. Cue-contract readiness is 9.09/10; latest contract next step: Keep the calibrated layered playerHit runtime cue; next either refine the residual playerHit tail/body gap with the same calibrated scorer or move effort to stagePulse pressure-bed strategy if user impact per compute looks higher. |
+| Audio identity and cue alignment | 7/10 | audio-cue-alignment correspondence, aurora-audio-theme-comparison, galaga-audio-overlap, aurora-audio-event-gap semantic read, audio-cue-contracts, audio-promotion-precheck | Audio score blends cue identity, active reference similarity, reference-window precision, overlap timing, cue alignment, semantic event mapping, and acoustic event-gap severity. 0/21 reference windows still need tighter segmentation; 21 candidate subwindows were found; semantic event score is 9.78/10, acoustic event score is 6.73/10, and highest segment risk is challengePerfect onset. Cue-contract readiness is 9.09/10; latest contract next step: Keep the calibrated layered playerHit runtime cue; next either refine the residual playerHit tail/body gap with the same calibrated scorer or move effort to stagePulse pressure-bed strategy if user impact per compute looks higher. |
 | UI, shell, and graphics integrity | 9.2/10 | dev candidate surface suite | The bundled front-door, panel, dock, graphics, attract, leaderboard, and audio shell surface suite passed. |
 | Alien entry and challenge-stage variation | 7.8/10 | reference-artifacts/analyses/alien-entry-challenge-variation/latest.json, stage-signature-distance report, formation-boss path-family comparison | Aurora still reads too repetitive for alien entry and challenge-stage invention: regular stages are not distinct enough, challenge stages need stronger arrival-versus-appearance evidence, and alien novelty is not yet scored against multiple reference-like challenge set pieces. Weakest metric: Reference-grounded path precision readiness (5.3/10). |
 
