@@ -16,9 +16,14 @@ surfaces:
 - game-owned catalog rows for visuals, audio, stages, and personas
 - game-owned runtime, scoring, and progression contracts
 - game-owned conformance metrics and playtest review
-- game-owned review gates plus explicit manual-review checkpoints
+- game-owned review gates plus explicit artifact-review checkpoints
 - platform-boundary and two-game validation harnesses
 - game-owned release framing, version tracking, and future candidate path
+
+As a standing rule, artifact-grounded evidence should lead the process. Human
+play/listen/look review is still allowed when the evidence package cannot yet
+settle a question cleanly, but it should be fallback confirmation rather than
+the primary baseline.
 
 ## Current Baseline
 
@@ -45,6 +50,22 @@ ones a player feels immediately:
 - score/progression/end-state clarity
 - game-owned review flow and release framing
 
+## Public Slice vs. Deeper-Run Review
+
+The hosted `dev` and `beta` lanes still expose a one-level visible public slice
+for Guardians.
+
+This plan also tracks a deeper internal conformance layer built from repeated
+rack behavior, bounded stage-band escalation, and deterministic persona runs.
+
+So when this document talks about stage five, later bands, or bounded late-loop
+pressure, it is describing the deeper runtime that the harnesses can already
+measure, not claiming that the current public preview already exposes multiple
+visible levels.
+
+Do not treat later-band metrics as public-release marketing until the playable
+lane actually surfaces that depth.
+
 ## First-Class Definition
 
 `Galaxy Guardians` counts as a first-class conformance target when all of the
@@ -66,7 +87,7 @@ following are true:
 | Milestone | Score intent | Meaning |
 | --- | --- | --- |
 | Playable `0.1` branch floor | keep `7.7/10` reference, raise playtest to at least `7.0/10`, keep boundary score `10/10` | Honest one-level playable game with game-owned score/progression/result flow and no Aurora leakage. |
-| First-class preview `0.2` | `>=8.0/10` reference, `>=7.4/10` playtest, `>=4.5/10` public-readiness planning score | Strong second game for two-game platform validation, with human-reviewed sprite/audio evidence and browser-reviewed feel. |
+| First-class preview `0.2` | `>=8.0/10` reference, `>=7.4/10` playtest, `>=4.5/10` public-readiness planning score | Strong second game for two-game platform validation, with artifact-backed sprite/audio evidence and runtime-measured feel. |
 | Beta-worthy application candidate | `>=8.4/10` reference, `>=7.8/10` playtest, `>=7.0/10` public readiness | A game-specific candidate can be reviewed on its own merits without pretending it already matches Aurora maturity. |
 | Multi-game Platinum candidate | `>=9.0/10` reference, `>=8.8/10` playtest, `>=8.5/10` public readiness | Platinum can honestly claim two serious games with separate evidence, release identity, and validation value. |
 
@@ -74,13 +95,13 @@ following are true:
 
 | Area | Current read | Near-term target | Strategy |
 | --- | --- | --- | --- |
-| Source coverage and provenance | `9.6/10` | keep `>=9.6/10` while promoting stronger human-approved evidence | Preserve the three-source Galaxian profile, then convert proxy sprite/cue work into approved targets rather than replacing provenance with tuning. |
+| Source coverage and provenance | `9.6/10` | keep `>=9.6/10` while promoting stronger artifact-backed evidence | Preserve the three-source Galaxian profile, then convert proxy sprite/cue work into promoted targets rather than replacing provenance with tuning; use human spot-checks only when the artifacts stay ambiguous. |
 | Promoted semantic event coverage | `7.8/10` | `>=8.5/10` | Keep the event log central, then add score-table, attract-surface, result-state, and completion-state evidence that can be reviewed against source windows. |
-| Formation and rack timing | `6.2/10` | `>=7.2/10` | Move from connected-component/object proxy timing toward sprite-recognized rack timing plus browser-reviewed side-by-side traces. |
-| Motion and lower-field pressure | `6.2/10` reference and playtest | `>=7.2/10` playtest | Use runtime/reference track comparison first, then promote dive-path targets, wrap cadence, and later-wave pressure with browser review. |
+| Formation and rack timing | `6.2/10` | `>=7.2/10` | Move from connected-component/object proxy timing toward sprite-recognized rack timing plus browser-captured side-by-side traces. |
+| Motion and lower-field pressure | `6.2/10` reference and playtest | `>=7.2/10` playtest | Use runtime/reference track comparison first, then promote dive-path targets, wrap cadence, and later-wave pressure with captured trace review. |
 | Single-shot threat, scoring, and progression | `7.5/10` | `>=8.2/10` | Keep the score table game-owned, then add score isolation, proper completion/loss endings, replay identity, and clearer one-level mission closure. |
-| Visual alien and player identity | `6.8/10` reference, `6.7/10` playtest | `>=7.2/10` | Promote component-crop work into human-reviewed sprite recognition, attract/score-surface comparison, and gameplay-scale browser review. |
-| Audio character and acoustic fit | `6.4/10` | `>=7.0/10` | Keep the cue-target and audio-lab pipeline, but require human listening and cleaner isolated windows before broader claims. |
+| Visual alien and player identity | `6.8/10` reference, `6.7/10` playtest | `>=7.2/10` | Promote component-crop work into artifact-backed sprite recognition, attract/score-surface comparison, and gameplay-scale captured-surface review. |
+| Audio character and acoustic fit | `6.4/10` | `>=7.0/10` | Keep the cue-target and audio-lab pipeline, prefer waveform/spectrogram/cue-window baselines, and fall back to human listening only for unresolved edge cases. |
 | Persona and review maturity | partial | explicit game-owned beginner/intermediate/expert/professional expectations | Stop treating persona review as Aurora-only; define Guardians-specific survival, score, and route expectations by wave band. |
 | Platform boundary and multi-game validation | `10/10` | keep `10/10` | Preserve no-Aurora-leakage rules while expanding score, replay, pilot, and settings surfaces to work cleanly for two games. |
 | Public release readiness | `3.9/10` | `4.5/10` on the branch, `7.0/10` before beta-quality game claims | Keep the score honest until the game has better sound, better feel, clearer completion, and a game-owned review story. |
@@ -124,22 +145,24 @@ The first-class Galaxy process should always be reviewable through this spine:
   - `npm run harness:check:platinum-pack-boot`
   - `npm run harness:check:compact-cabinet-rails`
 
-## Manual Review Loop
+## Artifact Review Loop
 
-Automation is not enough yet for the last Guardians gaps. Each serious Galaxy
-review pass should also include:
+Automation is not enough yet for the last Guardians gaps, but the default
+should still be committed artifact comparison before human judgement. Each
+serious Galaxy review pass should first include:
 
-1. browser review of rack settle, first dive, flagship/escort pressure, and
-   wrap/return feel
-2. browser review of sprite density, rack readability, and score/mission
-   surfaces at real gameplay scale
-3. human listening against promoted cue previews for shot, enemy-shot, dive,
-   hit, player-loss, and game-over moments
-4. result-state review so loss and completion are understandable without
-   preview-only placeholder messaging
+1. rendered or captured side-by-side traces of rack settle, first dive,
+   flagship/escort pressure, and wrap/return timing against promoted windows
+2. sprite/contact-sheet and attract/score-surface comparisons at gameplay
+   scale
+3. cue-window, waveform, and spectrogram comparisons for shot, enemy-shot,
+   dive, hit, player-loss, and game-over moments
+4. result-state and mission-complete artifacts so loss and completion language
+   are reviewable without preview-only placeholder messaging
 
-These manual reads should update committed artifacts or docs, not live only in
-chat.
+Targeted human play/listen checks are still allowed when the artifact package
+does not yet settle the question, but they should be fallback confirmation
+rather than the primary baseline.
 
 ## Immediate Work To Start Now
 
@@ -164,9 +187,10 @@ chat.
 
 ### 4. Highest-value conformance lifts
 
-- human-review sprite targets and attract/score surfaces
-- human-review cue targets and runtime/reference audio pairs
-- browser-review motion pressure after each measured timing change
+- promote artifact-backed sprite targets and attract/score surfaces
+- promote artifact-backed cue targets and runtime/reference audio pairs
+- compare motion pressure after each measured timing change using captured
+  runtime/reference traces
 
 ### 5. Two-game validation value
 

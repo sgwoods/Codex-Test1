@@ -205,6 +205,8 @@ Harness work should also follow the project reference program:
 
 - bug fixes should gain coverage in the right harness family
 - fidelity changes should use measured reference artifacts where possible
+- when committed reference artifacts can settle a question, prefer that over
+  human-only evaluation
 - platform/application seam changes should prove that the boundary still holds
 
 ## Galaxy first-class parity
@@ -262,6 +264,8 @@ Default direction:
   not buried only in Platinum-specific release logic
 - use Platinum as the host contract and tooling surface for launch, not as a
   substitute for game-owned reference truth
+- treat human observation as fallback confirmation when the evidence package
+  still cannot encode the question, not as the default baseline
 
 For a new game, the first playable slice should cite:
 

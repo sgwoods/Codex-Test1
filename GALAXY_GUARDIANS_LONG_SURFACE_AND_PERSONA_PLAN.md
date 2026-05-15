@@ -5,7 +5,8 @@ Updated: May 13, 2026
 ## Purpose
 
 `Galaxy Guardians` can no longer be reviewed only as a one-level scout-wave
-peek.
+peek in source, even though the hosted `dev` and `beta` lanes still present a
+one-level visible public slice.
 
 The game still is not a full Aurora-depth release, but it now has enough
 runtime, scoring, presentation, and harness surface that we should judge it by
@@ -41,10 +42,25 @@ clear:
 - later-band clear consistency
 - stronger persona authority for late-session tuning
 
+## Public Slice Boundary
+
+Hosted `dev` and `beta` currently present one visible mission-complete level.
+
+This document governs the deeper internal repeated-rack and persona review
+layer we are using to shape the next depth step. It is not a claim that the
+current public preview already exposes multiple visible level cards or a
+finished later-game arc.
+
+The next product step is to decide when to surface more of that depth publicly,
+rather than letting internal conformance terminology imply that it already has.
+
 ## Level Model
 
 The current Guardians level surface should be judged by stage bands, not by
 expecting Aurora-style handcrafted stage identities already to exist.
+
+These stage bands are runtime and harness bands, not separately surfaced public
+level labels in the current dev/beta slice.
 
 | Band | Stages | What should feel true |
 | --- | --- | --- |
@@ -114,9 +130,11 @@ playtest-weighted `6.9/10` score past the compelling `7.0/10` bar.
 
 Focus:
 
-- browser-reviewed later-band feel
-- human-reviewed live audio after the latest cue pass
-- visible later-stage presentation that feels earned, not decorative
+- captured later-band runtime/reference traces
+- promoted cue-window, waveform, and spectrogram comparisons after the latest
+  cue pass
+- visible later-stage presentation evidenced through committed stage-band
+  artifacts rather than decorative claims
 
 ## Required Companion Docs
 
@@ -127,5 +145,6 @@ Focus:
 - [reference-artifacts/analyses/galaxy-guardians-identity/README.md](reference-artifacts/analyses/galaxy-guardians-identity/README.md)
 
 This plan is the maintained bridge between the current one-level public
-playable preview and the longer-surface game-quality work needed for Guardians
-to become a genuinely valuable second first-class game on Platinum.
+playable preview and the deeper internal repeated-rack game-quality work needed
+for Guardians to become a genuinely valuable second first-class game on
+Platinum.

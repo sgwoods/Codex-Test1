@@ -122,8 +122,9 @@ resource economics fit together.
   so ingestion, gameplay completeness, and release review do not drift apart
 - keep the new longer-surface and persona review model readable through
   [GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md](GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md),
-  so Guardians is judged by real repeated-rack stage bands instead of only a
-  one-level preview slice
+  so Guardians can be judged internally by real repeated-rack stage bands
+  while live dev/beta stay honestly framed as a one-level public slice until
+  that deeper surface is actually productized
 - actively advance the longer-range `Galaxian`-style ingestion path through
   durable reference analysis, platform extension planning, and the other
   machine's parallel work
@@ -131,7 +132,7 @@ resource economics fit together.
   multi-game release so the platform layer is tested by real product pressure
 - treat the long-term target as a game-owned ingestible package built from
   gameplay-video and reference-artifact analysis, not a Platinum-only special
-  case
+  case or a human-first tuning exercise
 - keep a standing aggregate Galaxy process gate so the evidence stack, docs,
   and harness family stay in sync:
   `npm run harness:check:galaxy-guardians-first-class-conformance`
