@@ -99,6 +99,10 @@ const REQUIRED_SCRIPT_GROUPS = {
     'harness:check:galaxy-guardians-score-progression',
     'harness:check:galaxy-guardians-threat-scoring'
   ],
+  openingSlice: [
+    'harness:check:galaxy-guardians-opening-slice-baseline',
+    'harness:check:galaxy-guardians-attract-score-surface'
+  ],
   visual: [
     'harness:check:galaxy-guardians-visual-readability',
     'harness:check:galaxy-guardians-sprite-grid-targets',
@@ -127,10 +131,11 @@ const REQUIRED_SCRIPT_GROUPS = {
 };
 
 const REQUIRED_PROMOTIONS = [
-  'human-reviewed sprite recognition from promoted Galaxian component crops',
-  'Guardians attract and score-table pixel-layout comparison',
-  'human-listened cleanup of labeled cue candidates into clean measured cue targets',
-  'browser-reviewed beta-candidate pass for the tuned movement slice'
+  'Opening-slice baseline artifact package and scored gate for WAIT, score table, rack march cadence, explosions, palettes, starfield, reserve ships, missile-ready state, flags, and top re-entry.',
+  'Measured opening-slice motion pass for rack march cadence, starfield motion, and bottom-pass-through top re-entry against Matt Hawkins and Nenriki sources.',
+  'Platform-frame parity pass for sign-in, high scores, pilot card, replay/video capture, bug reports, and music/sound controls.',
+  'Measured later-band fairness pass for stage-five-and-beyond collision stability and clear consistency.',
+  'Selective audio cue cleanup only after the opening-slice and motion passes expose the next highest-value audible miss.'
 ];
 
 function fail(message, payload){

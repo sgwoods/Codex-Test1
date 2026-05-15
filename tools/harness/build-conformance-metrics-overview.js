@@ -238,6 +238,14 @@ function main(){
     '',
     `Current read: reference ${score(guardians.summary.referenceConformanceScore10)}, playtest ${score(guardiansPlaytest.summary.playtestWeightedConformanceScore10)}, maturity ${score(guardians.summary.referenceMaturityScore10)}, gate coverage ${score(guardians.summary.implementationGateCoverageScore10)}, public readiness ${score(guardians.summary.publicReleaseReadinessScore10)}.`,
     '',
+    '## Metric Model Recommendation',
+    '',
+    'No wholesale metric rewrite is needed right now. Keep Aurora on the release-quality scorecard, keep Guardians on the paired reference/playtest preview model, and keep platform-boundary metrics separate. The next metric work should be targeted:',
+    '',
+    '- promote the opening-slice baseline into an explicit scored gate',
+    '- add a platform-frame parity axis for sign-in, scores, replay/video capture, bug reports, and music controls',
+    '- keep deeper-run fairness and public-readiness as separate later concerns instead of collapsing them into the opening-slice score',
+    '',
     ...releaseTargetSections(aurora, guardians, guardiansPlaytest, alienEntryChallenge),
     '',
     '## Galaxy Guardians 0.1 Preview Metrics',
@@ -256,7 +264,7 @@ function main(){
     '',
     'Guardians preview scoring should exist locally now, and it does: the dev runtime awards points by alien role, formation/dive state, and flagship escort count, with a harnessed contract in `npm run harness:check:galaxy-guardians-threat-scoring`. Persisted leaderboard submission should wait until the Galaxian score-advance table, wave progression, and public-release scoring policy are closer to reference conformance.',
     '',
-    '## Current Guardians Promotion Priorities',
+    '## Current Guardians Highest-Return Next Steps',
     '',
     ...(guardians.nextMetricPromotions || []).map(item => `- ${item}`)
   ];
