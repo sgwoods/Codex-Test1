@@ -1,29 +1,30 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-15T02-09-09-476Z-49173",
-  "startedAt": "2026-05-15T02:09:09.476Z",
-  "endedAt": "2026-05-15T02:10:15.449Z",
-  "branch": "codex/macbook-post-beta-conformance-10h",
-  "commit": "02ae3190",
+  "id": "2026-05-15T16-32-52-752Z-28531",
+  "startedAt": "2026-05-15T16:32:52.752Z",
+  "endedAt": "2026-05-15T16:32:53.009Z",
+  "branch": "codex/macbook-audio-entry-grounding-cycle",
+  "commit": "93dbdad8",
   "command": [
     "npm",
     "run",
-    "harness:score:quality-conformance"
+    "harness:analyze:aurora-audio-event-gap"
   ],
   "axes": [
-    "unspecified"
+    "audio-event-gap",
+    "audio"
   ],
   "resources": [
     "cpu"
   ],
-  "notes": "",
+  "notes": "refresh audio event gap after post-beta focus no-keeper sweep",
   "measurement": {
-    "wallSeconds": 65.973,
-    "timeRealSeconds": 65.96,
-    "timeUserSeconds": 58.05,
-    "timeSystemSeconds": 18.14,
-    "cpuSeconds": 76.19,
+    "wallSeconds": 0.257,
+    "timeRealSeconds": 0.25,
+    "timeUserSeconds": 0.18,
+    "timeSystemSeconds": 0.12,
+    "cpuSeconds": 0.3,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -45,8 +46,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 634536001,
-    "artifactBytesAfter": 635128432,
-    "artifactBytesDelta": 592431
+    "artifactBytesBefore": 687234322,
+    "artifactBytesAfter": 687305116,
+    "artifactBytesDelta": 70794
   }
 }

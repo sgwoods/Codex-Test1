@@ -55,6 +55,10 @@ function collectFiles(relativeDir){
   return out.sort();
 }
 
+function evidenceMediaFiles(files){
+  return files.filter(file => /\.(png|jpe?g|webp|gif|mp4|mov|webm|m4v)$/i.test(file));
+}
+
 function sourceAnchors(){
   const anchors = [
     {
@@ -84,10 +88,14 @@ function sourceAnchors(){
   ];
   return anchors.map(anchor => {
     const files = collectFiles(anchor.fileRoot);
+    const mediaFiles = evidenceMediaFiles(files);
     return Object.assign({}, anchor, {
       present: existsRel(anchor.anchor),
       artifactCount: files.length,
-      exampleFiles: files.slice(0, 8)
+      mediaEvidenceCount: mediaFiles.length,
+      frameEvidenceReady: mediaFiles.length > 0,
+      exampleFiles: files.slice(0, 8),
+      exampleMediaFiles: mediaFiles.slice(0, 8)
     });
   });
 }
@@ -205,7 +213,13 @@ function buildReport(){
   const anchors = sourceAnchors();
   const queue = workQueue(alienReport);
   const sourceAnchorCount = anchors.filter(anchor => anchor.present).length;
-  const readinessScore10 = Math.min(10, +((sourceAnchorCount * 1.5) + 1.5).toFixed(1));
+  const frameEvidenceAnchorCount = anchors.filter(anchor => anchor.present && anchor.frameEvidenceReady).length;
+  const readinessScore10 = Math.min(10, +((sourceAnchorCount * 1.1) + (frameEvidenceAnchorCount * 1.4) + 1.1).toFixed(1));
+  const status = sourceAnchorCount >= 2 && frameEvidenceAnchorCount >= 2
+    ? 'source-anchored-frame-evidence-ready'
+    : sourceAnchorCount >= 2
+      ? 'source-anchor-readme-ready-frame-media-needed'
+      : 'blocked-on-reference-source-anchors';
   const report = {
     generatedAt,
     commit,
@@ -215,8 +229,12 @@ function buildReport(){
       problem: 'Alien-entry and challenge-stage runtime variety now exposes a deeper conformance bottleneck: direct Galaga path precision requires frame-labeled reference windows.',
       strategy: 'Use existing preserved reference media as source anchors, label regular and challenge path windows with a reusable schema, then feed those labels back into path-family comparison and quality conformance scoring.',
       successMeasure: 'Lift reference-grounded path precision above 7/10 only after the label artifacts contain enough regular and challenge windows to replace heuristic runtime caps with direct reference comparison.',
-      status: sourceAnchorCount >= 2 ? 'source-anchored-label-plan-ready' : 'blocked-on-reference-source-anchors',
+      status,
       sourceAnchorCount,
+      frameEvidenceAnchorCount,
+      sourceEvidenceGap: frameEvidenceAnchorCount >= 2
+        ? 'Frame/contact-sheet evidence is ready for the first reference-labeling pass.'
+        : 'Source provenance exists, but most anchors are README-only in this checkout; add or recover contact sheets / clips before accepting frame-precise labels.',
       requiredLabelArtifactFamilies: ['regularEntry', 'challengeEntry', 'comparisonVector'],
       currentAlienEntryScore10: alienReport.score10 ?? null,
       weakestMetric: alienReport.summary?.weakestMetric || null
@@ -251,11 +269,11 @@ function buildReport(){
     '',
     '## Source Anchors',
     '',
-    '| Source | Role | Present | Artifact Count |',
-    '| --- | --- | ---: | ---: |'
+    '| Source | Role | Present | Artifacts | Media Evidence | Frame Ready |',
+    '| --- | --- | ---: | ---: | ---: | ---: |'
   ];
   for(const anchor of anchors){
-    lines.push(`| ${anchor.anchor} | ${anchor.role} | ${anchor.present ? 'yes' : 'no'} | ${anchor.artifactCount} |`);
+    lines.push(`| ${anchor.anchor} | ${anchor.role} | ${anchor.present ? 'yes' : 'no'} | ${anchor.artifactCount} | ${anchor.mediaEvidenceCount} | ${anchor.frameEvidenceReady ? 'yes' : 'no'} |`);
   }
   lines.push('', '## Work Queue', '', '| Priority | Work | Acceptance Gate |', '| ---: | --- | --- |');
   for(const item of queue){
