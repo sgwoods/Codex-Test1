@@ -54,6 +54,12 @@ finished later-game arc.
 The next product step is to decide when to surface more of that depth publicly,
 rather than letting internal conformance terminology imply that it already has.
 
+Before we expand the public depth, the current one-level public slice should
+also get its obvious baseline Galaxian-family cues into better shape:
+`WAIT` presentation, score advance table, swarm march cadence, explosion
+states, opening palettes, missile-ready ship state, reserve ships, and level
+flags.
+
 ## Level Model
 
 The current Guardians level surface should be judged by stage bands, not by
@@ -61,6 +67,9 @@ expecting Aurora-style handcrafted stage identities already to exist.
 
 These stage bands are runtime and harness bands, not separately surfaced public
 level labels in the current dev/beta slice.
+
+That means opening-slice fidelity should improve in parallel with deeper-band
+work, not be skipped because the long-surface plan talks about later stages.
 
 | Band | Stages | What should feel true |
 | --- | --- | --- |
@@ -130,6 +139,8 @@ playtest-weighted `6.9/10` score past the compelling `7.0/10` bar.
 
 Focus:
 
+- opening-slice visible fidelity so the one public level looks more credibly
+  Galaxian-family before more depth is surfaced
 - captured later-band runtime/reference traces
 - promoted cue-window, waveform, and spectrogram comparisons after the latest
   cue pass

@@ -125,6 +125,10 @@ resource economics fit together.
   so Guardians can be judged internally by real repeated-rack stage bands
   while live dev/beta stay honestly framed as a one-level public slice until
   that deeper surface is actually productized
+- treat the obvious current one-level baseline misses as first-class work:
+  `WAIT`/headline treatment, score-advance table, rack march cadence,
+  explosion states, swarm palettes, missile-ready ship state, reserve ships,
+  and stage-flag graphics
 - actively advance the longer-range `Galaxian`-style ingestion path through
   durable reference analysis, platform extension planning, and the other
   machine's parallel work

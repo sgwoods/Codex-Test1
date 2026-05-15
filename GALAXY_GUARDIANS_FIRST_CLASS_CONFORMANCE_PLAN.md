@@ -42,6 +42,13 @@ It already has a serious ingestion-backed evidence stack, but it is still short
 of first-class product parity because the highest-value remaining gaps are the
 ones a player feels immediately:
 
+- opening `WAIT`/start-stage presentation and score-advance surfaces
+- rack march cadence and left-right swarm motion
+- explosion and hit/destruction visual feedback
+- opening swarm palette families and stage-color progression
+- player readiness / missile-ready ship state
+- reserve-ship and remaining-life icon fidelity
+- level/stage flag graphics and progression markers
 - formation/rack timing
 - lower-field motion pressure
 - stage-five-and-beyond survivability and clear consistency
@@ -65,6 +72,9 @@ visible levels.
 
 Do not treat later-band metrics as public-release marketing until the playable
 lane actually surfaces that depth.
+
+The immediate visual baseline for the current public slice should therefore be
+treated as a first-order plan item, not a cosmetic afterthought.
 
 ## First-Class Definition
 
@@ -97,10 +107,11 @@ following are true:
 | --- | --- | --- | --- |
 | Source coverage and provenance | `9.6/10` | keep `>=9.6/10` while promoting stronger artifact-backed evidence | Preserve the three-source Galaxian profile, then convert proxy sprite/cue work into promoted targets rather than replacing provenance with tuning; use human spot-checks only when the artifacts stay ambiguous. |
 | Promoted semantic event coverage | `7.8/10` | `>=8.5/10` | Keep the event log central, then add score-table, attract-surface, result-state, and completion-state evidence that can be reviewed against source windows. |
+| Opening-stage presentation and HUD fidelity | partial | first visible slice should read as unmistakably Galaxian-family before deeper-run claims expand | Build baseline artifacts for `WAIT`/headline typography, score advance table, reserve ships, missile-ready player state, level flags, and score/HUD presentation from gameplay-video crops, contact sheets, palette extraction, and other primary sources. |
 | Formation and rack timing | `6.2/10` | `>=7.2/10` | Move from connected-component/object proxy timing toward sprite-recognized rack timing plus browser-captured side-by-side traces. |
-| Motion and lower-field pressure | `6.2/10` reference and playtest | `>=7.2/10` playtest | Use runtime/reference track comparison first, then promote dive-path targets, wrap cadence, and later-wave pressure with captured trace review. |
+| Motion and lower-field pressure | `6.2/10` reference and playtest | `>=7.2/10` playtest | Use runtime/reference track comparison first, then promote faster march-like rack cadence, dive-path targets, wrap cadence, and later-wave pressure with captured trace review. |
 | Single-shot threat, scoring, and progression | `7.5/10` | `>=8.2/10` | Keep the score table game-owned, then add score isolation, proper completion/loss endings, replay identity, and clearer one-level mission closure. |
-| Visual alien and player identity | `6.8/10` reference, `6.7/10` playtest | `>=7.2/10` | Promote component-crop work into artifact-backed sprite recognition, attract/score-surface comparison, and gameplay-scale captured-surface review. |
+| Visual alien and player identity | `6.8/10` reference, `6.7/10` playtest | `>=7.2/10` | Promote component-crop work into artifact-backed sprite recognition, attract/score-surface comparison, explosion-state fidelity, and gameplay-scale captured-surface review. |
 | Audio character and acoustic fit | `6.4/10` | `>=7.0/10` | Keep the cue-target and audio-lab pipeline, prefer waveform/spectrogram/cue-window baselines, and fall back to human listening only for unresolved edge cases. |
 | Persona and review maturity | partial | explicit game-owned beginner/intermediate/expert/professional expectations | Stop treating persona review as Aurora-only; define Guardians-specific survival, score, and route expectations by wave band. |
 | Platform boundary and multi-game validation | `10/10` | keep `10/10` | Preserve no-Aurora-leakage rules while expanding score, replay, pilot, and settings surfaces to work cleanly for two games. |
@@ -164,6 +175,25 @@ Targeted human play/listen checks are still allowed when the artifact package
 does not yet settle the question, but they should be fallback confirmation
 rather than the primary baseline.
 
+## Opening-Slice Baseline Program
+
+Because the current live public slice is only one visible level, the most
+important immediate misses are the first ones a player sees. The next Guardians
+baseline program should explicitly include:
+
+1. `WAIT` / start-stage headline treatment
+2. score-advance table and attract/readiness surfaces
+3. faster, more march-like left-right swarm cadence
+4. explosion and alien-hit visual states
+5. opening swarm color families and early stage palette progression
+6. missile-ready player-ship graphic/state
+7. reserve-ship / ships-remaining icons
+8. level/stage flag markers
+
+Each of these should be grounded in committed baseline artifacts from gameplay
+video, frame crops, contact sheets, palette extraction, timing traces, and
+other primary sources before runtime tuning broadens.
+
 ## Immediate Work To Start Now
 
 ### 1. Conformance-process parity
@@ -187,6 +217,9 @@ rather than the primary baseline.
 
 ### 4. Highest-value conformance lifts
 
+- build the opening-slice baseline artifact package for `WAIT`, score table,
+  rack march cadence, explosion states, palettes, reserve ships, missile-ready
+  state, and stage flags
 - promote artifact-backed sprite targets and attract/score surfaces
 - promote artifact-backed cue targets and runtime/reference audio pairs
 - compare motion pressure after each measured timing change using captured
