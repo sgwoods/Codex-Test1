@@ -1,3 +1,9 @@
+const fs = require('fs');
+const path = require('path');
+
+const ROOT = path.resolve(__dirname, '..', '..');
+const REVIEW_LEARNING_LATEST = path.join(ROOT, 'reference-artifacts', 'analyses', 'review-learning', 'latest.json');
+
 function esc(value = ''){
   return String(value)
     .replace(/&/g, '&amp;')
@@ -5,6 +11,14 @@ function esc(value = ''){
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+}
+
+function readJson(file, fallback = null){
+  try{
+    return JSON.parse(fs.readFileSync(file, 'utf8'));
+  }catch{
+    return fallback;
+  }
 }
 
 function scoreNumber(row){
@@ -192,7 +206,84 @@ function provenanceRows(provenance = {}){
   }).join('\n');
 }
 
+function loadReviewLearning(){
+  return readJson(REVIEW_LEARNING_LATEST, null);
+}
+
+function reviewLearningSummaryCards(ledger){
+  if(!ledger){
+    return `
+                <article class="miniMetric">
+                    <span>Review ledger</span>
+                    <strong>Missing</strong>
+                    <small>Run npm run review:cycle before release review.</small>
+                </article>`;
+  }
+  const summary = ledger.summary || {};
+  const disposition = summary.productionDisposition || {};
+  return `
+                <article class="miniMetric">
+                    <span>Review cycles</span>
+                    <strong>${esc(summary.reviewCycleCount ?? '--')}</strong>
+                    <small>Architecture and code-review cycles represented in the learning ledger.</small>
+                </article>
+                <article class="miniMetric">
+                    <span>Issue notes</span>
+                    <strong>${esc(summary.issueNoteCount ?? '--')}</strong>
+                    <small>Tracked findings, observations, and in-progress review concerns.</small>
+                </article>
+                <article class="miniMetric">
+                    <span>Accepted changes</span>
+                    <strong>${esc(summary.acceptedChangeCount ?? '--')}</strong>
+                    <small>Review-driven process or implementation changes accepted into the project.</small>
+                </article>
+                <article class="miniMetric">
+                    <span>Blocking findings</span>
+                    <strong>P0 ${esc(summary.p0 ?? 0)} / P1 ${esc(summary.p1 ?? 0)}</strong>
+                    <small>P0/P1 findings block hosted-dev movement. Production dispositions: ${esc(disposition.addressed ?? '--')} addressed, ${esc(disposition.dismissed ?? '--')} dismissed, ${esc(disposition.missing ?? '--')} missing.</small>
+                </article>`;
+}
+
+function reviewLearningIssueRows(ledger){
+  const rows = Array.isArray(ledger?.issueNotes) ? ledger.issueNotes : [];
+  if(!rows.length){
+    return '<p class="emptyState">Review issue notes are not available in this build.</p>';
+  }
+  return rows.slice(0, 6).map(item => `
+                <article class="investmentRow">
+                    <div>
+                        <strong>${esc(item.severity || 'P?')} - ${esc(item.category || 'uncategorized')} - ${esc(item.id || 'review-note')}</strong>
+                        <p>${esc(item.note || '')}</p>
+                        <p class="smallText"><strong>Proposed:</strong> ${esc(item.proposedChange || 'No proposed change recorded.')}</p>
+                        <p class="smallText"><strong>Production disposition:</strong> ${esc(item.productionDisposition?.decision || 'missing')} - ${esc(item.productionDisposition?.reason || 'Requires explicit addressed/dismissed decision before production.')}</p>
+                    </div>
+                    <div class="investmentMeta">
+                        <span>Status: ${esc(item.status || 'unknown')}</span>
+                        <span>Source: ${esc(item.source || 'review ledger')}</span>
+                        <span>Review decision: ${esc(item.acceptedChange || 'pending')}</span>
+                    </div>
+                </article>`).join('\n');
+}
+
+function reviewLearningPatternCards(ledger){
+  const rows = Array.isArray(ledger?.learningPatterns) ? ledger.learningPatterns : [];
+  if(!rows.length){
+    return `
+                <article class="card">
+                    <h3>Patterns pending</h3>
+                    <p>Run the review cycle to refresh recurring review-learning patterns.</p>
+                </article>`;
+  }
+  return rows.slice(0, 4).map(item => `
+                <article class="card">
+                    <h3>${esc(item.id || 'Learning pattern')}</h3>
+                    <p>${esc(item.pattern || '')}</p>
+                    <p class="smallText"><strong>Response:</strong> ${esc(item.response || '')}</p>
+                </article>`).join('\n');
+}
+
 function buildPublicProjectSections(data = {}, provenance = {}){
+  const reviewLearning = loadReviewLearning();
   return {
     PUBLIC_RELEASE_GATE_CARDS: releaseGateCards(data),
     PUBLIC_CONFORMANCE_SCORE_CHART: scoreRows(data),
@@ -200,6 +291,9 @@ function buildPublicProjectSections(data = {}, provenance = {}){
     PUBLIC_INVESTMENT_QUEUE: investmentRows(data),
     PUBLIC_INGESTION_OVERVIEW_CARDS: ingestionCards(data),
     PUBLIC_GAME_CATALOG_CARDS: gameCatalogCards(data),
+    PUBLIC_REVIEW_LEARNING_SUMMARY: reviewLearningSummaryCards(reviewLearning),
+    PUBLIC_REVIEW_LEARNING_ISSUES: reviewLearningIssueRows(reviewLearning),
+    PUBLIC_REVIEW_LEARNING_PATTERNS: reviewLearningPatternCards(reviewLearning),
     PUBLIC_DOCUMENTATION_PROVENANCE: provenanceRows(provenance)
   };
 }

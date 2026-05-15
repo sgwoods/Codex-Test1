@@ -171,15 +171,16 @@ Practical standard:
   release authority is explicitly transferred
 - the next larger beta family remains `1.4.0` arcade depth
 - after refreshing the audio process with cue contracts, promotion prechecks,
-  layered cue support, composite analysis windows, and calibrated
-  browser-reference gates, audio identity remains the weakest runtime category
-  at `7.3/10`, while the process is now better instrumented: semantic event
-  score is `9.78/10`, acoustic event score is `6.31/10`, cue-contract readiness
-  is `9.09/10`, and the highest measured gap is the smaller residual
-  `playerHit` tail. The latest accepted runtime lift is a layered `playerHit`
-  ship-loss phrase that improved full-theme cue gap by `2.65/10`. The next
-  audio pass should refine the remaining tail gap and then return to
-  `stagePulse` pressure-bed strategy.
+  layered cue support, composite analysis windows, calibrated browser-reference
+  gates, and focused candidate loops for `challengePerfect` and `enemyShot`,
+  audio identity remains the weakest runtime category at `6.9/10`, while the
+  process is now better instrumented: semantic event score is `9.78/10`,
+  acoustic event score is `6.30/10`, cue-contract readiness is `9.09/10`, and
+  the highest measured segment gap is `captureBeam` tail. The latest accepted
+  runtime lift is a measured early-stage `enemyShot` threat-fire cue; the
+  `challengePerfect` candidates were rejected at full-theme quality gates. The
+  next audio pass should target `captureBeam` tail or build a stronger
+  challenge-perfect mix model before promotion.
 - level arc and encounter shape is now a first-class quality category at
   `8.8/10`; this should be treated as a high-priority `1.4` workstream because
   it measures whether the run develops Galaga-like stage shape instead of

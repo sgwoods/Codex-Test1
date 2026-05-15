@@ -1,0 +1,999 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "platinum-code-review-packet",
+  "generatedAt": "2026-05-15T00:01:16.429Z",
+  "branch": "main",
+  "baseRef": "origin/main",
+  "baseCommit": "7741afb2e50cb4d9f84cefa2294012b90aa78352",
+  "headCommit": "7741afb2",
+  "dirty": true,
+  "statusShort": [
+    "M  AUDIO_CONFORMANCE_LAB.md",
+    "A  CODE_REVIEW_MODEL.md",
+    "M  CONFORMANCE_ECONOMICS.md",
+    "M  CONFORMANCE_METRICS_OVERVIEW.md",
+    "M  EXTERNAL_SERVICES.md",
+    "M  GAME_CONFORMANCE_CATALOG.md",
+    "M  GO_FORWARD_EXECUTION_PLAN.md",
+    "M  PLAN.md",
+    "M  PRODUCT_ROADMAP.md",
+    "M  PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md",
+    "M  README.md",
+    "M  RELEASE_CONFORMANCE_DASHBOARD.md",
+    "M  RELEASE_POLICY.md",
+    "M  RELEASE_READINESS_REVIEW.md",
+    "M  RESTART_FROM_HERE.md",
+    "AM REVIEW_LEARNING_LEDGER.md",
+    "A  SUPABASE_DATA_API_ACCESS.md",
+    "M  TESTING_AND_RELEASE_GATES.md",
+    "M  application-guide.json",
+    "A  codex-skills/platinum-code-review/SKILL.md",
+    "M  documentation-provenance.json",
+    "M  package.json",
+    "M  platinum-guide.json",
+    "M  project-guide.json",
+    "A  reference-artifacts/analyses/aurora-audio-cue-candidates/latest-capture-success.json",
+    "A  reference-artifacts/analyses/aurora-audio-cue-candidates/latest-challenge-perfect.json",
+    "A  reference-artifacts/analyses/aurora-audio-cue-candidates/latest-challenge-results.json",
+    "A  reference-artifacts/analyses/aurora-audio-cue-candidates/latest-enemy-shot.json",
+    "M  reference-artifacts/analyses/aurora-audio-cue-candidates/latest-focus.json",
+    "M  reference-artifacts/analyses/aurora-audio-cue-candidates/latest-player-hit-focus.json",
+    "M  reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
+    "A  reference-artifacts/analyses/code-review/2026-05-14-0ab95241/README.md",
+    "A  reference-artifacts/analyses/code-review/2026-05-14-0ab95241/report.json",
+    "A  reference-artifacts/analyses/code-review/2026-05-14-1509c389/README.md",
+    "A  reference-artifacts/analyses/code-review/2026-05-14-1509c389/report.json",
+    "A  reference-artifacts/analyses/code-review/2026-05-14-52618bea/README.md",
+    "A  reference-artifacts/analyses/code-review/2026-05-14-52618bea/report.json",
+    "A  reference-artifacts/analyses/code-review/2026-05-14-6ac71b72/README.md",
+    "A  reference-artifacts/analyses/code-review/2026-05-14-6ac71b72/report.json",
+    "A  reference-artifacts/analyses/code-review/2026-05-14-8c211f03/README.md",
+    "A  reference-artifacts/analyses/code-review/2026-05-14-8c211f03/report.json",
+    "A  reference-artifacts/analyses/code-review/2026-05-14-ef7ae8c8/README.md",
+    "A  reference-artifacts/analyses/code-review/2026-05-14-ef7ae8c8/report.json",
+    "AM reference-artifacts/analyses/code-review/latest.json",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/README.md",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/compute-minutes-by-resource.svg",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/cost-per-positive-score-point.svg",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/cpu-use-by-purpose.svg",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/gameplay-improvement-by-project-part.svg",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/gpu-equivalent-use-by-purpose.svg",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/largest-score-deltas.svg",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/report.json",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/score-trends.svg",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-35b1b292/README.md",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-35b1b292/compute-minutes-by-resource.svg",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-35b1b292/cost-per-positive-score-point.svg",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-35b1b292/cpu-use-by-purpose.svg",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-35b1b292/gameplay-improvement-by-project-part.svg",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-35b1b292/gpu-equivalent-use-by-purpose.svg",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-35b1b292/largest-score-deltas.svg",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-35b1b292/report.json",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-35b1b292/score-trends.svg",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/README.md",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/compute-minutes-by-resource.svg",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/cost-per-positive-score-point.svg",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/cpu-use-by-purpose.svg",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/gameplay-improvement-by-project-part.svg",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/gpu-equivalent-use-by-purpose.svg",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/largest-score-deltas.svg",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/report.json",
+    "A  reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/score-trends.svg",
+    "M  reference-artifacts/analyses/conformance-economics/latest-run.json",
+    "M  reference-artifacts/analyses/conformance-economics/run-ledger.jsonl",
+    "A  reference-artifacts/analyses/player-two-mode-ui/latest.json",
+    "A  reference-artifacts/analyses/release-conformance-dashboard/2026-05-14-1c788342-dirty/report.json",
+    "A  reference-artifacts/analyses/release-conformance-dashboard/2026-05-14-35b1b292-dirty/report.json",
+    "A  reference-artifacts/analyses/release-conformance-dashboard/2026-05-14-df15e918-dirty/report.json",
+    "M  reference-artifacts/analyses/release-conformance-dashboard/latest.json",
+    "A  reference-artifacts/analyses/review-learning/2026-05-14-0ab95241/README.md",
+    "A  reference-artifacts/analyses/review-learning/2026-05-14-0ab95241/report.json",
+    "A  reference-artifacts/analyses/review-learning/2026-05-14-52618bea/README.md",
+    "A  reference-artifacts/analyses/review-learning/2026-05-14-52618bea/report.json",
+    "A  reference-artifacts/analyses/review-learning/2026-05-14-6ac71b72/README.md",
+    "A  reference-artifacts/analyses/review-learning/2026-05-14-6ac71b72/report.json",
+    "A  reference-artifacts/analyses/review-learning/2026-05-14-ef7ae8c8/README.md",
+    "A  reference-artifacts/analyses/review-learning/2026-05-14-ef7ae8c8/report.json",
+    "AM reference-artifacts/analyses/review-learning/latest.json",
+    "A  review-dispositions.json",
+    "M  src/index.template.html",
+    "M  src/js/00-boot.js",
+    "M  src/js/02-replay-telemetry.js",
+    "A  src/js/04-commentator.js",
+    "M  src/js/04-leaderboard-ui.js",
+    "M  src/js/05-player-combat.js",
+    "M  src/js/05-player-flow.js",
+    "M  src/js/05-supabase.js",
+    "M  src/js/07-capture-rescue.js",
+    "M  src/js/08-score-awards.js",
+    "M  src/js/10-gameplay.js",
+    "M  src/js/13-aurora-game-pack.js",
+    "M  src/js/19-render-shell.js",
+    "M  src/js/90-harness.js",
+    "M  src/public/aurora-galactica.template.html",
+    "M  src/styles.css",
+    "A  supabase/data-api-access-contract.sql",
+    "M  tools/build/check-publish-ready.js",
+    "M  tools/build/public-project-page-sections.js",
+    "M  tools/harness/analyze-audio-theme-comparison.js",
+    "M  tools/harness/analyze-aurora-audio-event-gap.js",
+    "M  tools/harness/analyze-aurora-audio-focus-candidates.js",
+    "A  tools/harness/audio-spec-renderer.js",
+    "A  tools/harness/check-commentator-callouts.js",
+    "A  tools/harness/check-player-two-mode.js",
+    "A  tools/harness/check-supabase-data-api-contract.js",
+    "A  tools/harness/check-trophy-replay-surface.js",
+    "A  tools/review/build-code-review-packet.js",
+    "A  tools/review/build-review-learning-ledger.js",
+    "A  tools/review/check-code-review-gate.js",
+    "A  tools/review/check-review-dispositions.js",
+    "?? reference-artifacts/analyses/code-review/2026-05-15-7741afb2/",
+    "?? reference-artifacts/analyses/review-learning/2026-05-15-7741afb2/"
+  ],
+  "reviewSkill": {
+    "path": "codex-skills/platinum-code-review/SKILL.md",
+    "modelDoc": "CODE_REVIEW_MODEL.md"
+  },
+  "architecture": {
+    "installedArchitectSkillFound": false,
+    "repoArchitectureDocs": [
+      "ARCHITECTURE.md",
+      "PLATINUM_ARCHITECTURE_OVERVIEW.md",
+      "APPLICATIONS_ON_PLATINUM.md",
+      "PLATINUM_GAME_BOUNDARY_AUDIT.md"
+    ],
+    "boundaryHarnesses": [
+      "npm run harness:check:gameplay-adapter-boundaries",
+      "npm run harness:check:pack-registry-boundaries",
+      "npm run harness:check:platinum-renderer-boundaries",
+      "npm run harness:check:platinum-pack-boot"
+    ]
+  },
+  "summary": {
+    "changedFileCount": 97,
+    "p0": 0,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "riskTaggedFileCount": 46
+  },
+  "changedFiles": [
+    {
+      "status": "M",
+      "file": "application-guide.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "AUDIO_CONFORMANCE_LAB.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "CODE_REVIEW_MODEL.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "codex-skills/platinum-code-review/SKILL.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "CONFORMANCE_ECONOMICS.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "CONFORMANCE_METRICS_OVERVIEW.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "documentation-provenance.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "EXTERNAL_SERVICES.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "GAME_CONFORMANCE_CATALOG.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "GO_FORWARD_EXECUTION_PLAN.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "package.json",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "PLAN.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "platinum-guide.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "PRODUCT_ROADMAP.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "project-guide.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "README.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-capture-success.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-challenge-perfect.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-challenge-results.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-enemy-shot.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-focus.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-player-hit-focus.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/compute-minutes-by-resource.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/cost-per-positive-score-point.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/cpu-use-by-purpose.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/gameplay-improvement-by-project-part.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/gpu-equivalent-use-by-purpose.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/largest-score-deltas.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/README.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/report.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/score-trends.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-35b1b292/compute-minutes-by-resource.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-35b1b292/cost-per-positive-score-point.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-35b1b292/cpu-use-by-purpose.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-35b1b292/gameplay-improvement-by-project-part.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-35b1b292/gpu-equivalent-use-by-purpose.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-35b1b292/largest-score-deltas.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-35b1b292/README.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-35b1b292/report.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-35b1b292/score-trends.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/compute-minutes-by-resource.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/cost-per-positive-score-point.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/cpu-use-by-purpose.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/gameplay-improvement-by-project-part.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/gpu-equivalent-use-by-purpose.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/largest-score-deltas.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/README.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/report.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-14-df15e918/score-trends.svg",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "score-trust"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/conformance-economics/latest-run.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/conformance-economics/run-ledger.jsonl",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/player-two-mode-ui/latest.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/release-conformance-dashboard/2026-05-14-1c788342-dirty/report.json",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/release-conformance-dashboard/2026-05-14-35b1b292-dirty/report.json",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "reference-artifacts/analyses/release-conformance-dashboard/2026-05-14-df15e918-dirty/report.json",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/release-conformance-dashboard/latest.json",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "RELEASE_CONFORMANCE_DASHBOARD.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "RELEASE_POLICY.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "RELEASE_READINESS_REVIEW.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "RESTART_FROM_HERE.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "AM",
+      "file": "REVIEW_LEARNING_LEDGER.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "A",
+      "file": "review-dispositions.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "src/index.template.html",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "src/js/00-boot.js",
+      "source": "working-tree",
+      "area": "runtime",
+      "riskTags": [
+        "browser-runtime",
+        "browser-safety",
+        "platform-owned"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "src/js/02-replay-telemetry.js",
+      "source": "working-tree",
+      "area": "runtime",
+      "riskTags": [
+        "browser-runtime",
+        "browser-safety",
+        "media-external",
+        "platform-owned"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "src/js/04-commentator.js",
+      "source": "working-tree",
+      "area": "runtime",
+      "riskTags": [
+        "browser-runtime",
+        "browser-safety",
+        "platform-owned"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "src/js/04-leaderboard-ui.js",
+      "source": "working-tree",
+      "area": "runtime",
+      "riskTags": [
+        "browser-runtime",
+        "browser-safety",
+        "platform-owned",
+        "score-trust"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "src/js/05-player-combat.js",
+      "source": "working-tree",
+      "area": "runtime",
+      "riskTags": [
+        "browser-runtime",
+        "browser-safety",
+        "game-owned"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "src/js/05-player-flow.js",
+      "source": "working-tree",
+      "area": "runtime",
+      "riskTags": [
+        "browser-runtime",
+        "browser-safety",
+        "game-owned"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "src/js/05-supabase.js",
+      "source": "working-tree",
+      "area": "runtime",
+      "riskTags": [
+        "auth-privacy",
+        "browser-runtime",
+        "browser-safety",
+        "game-owned"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "src/js/07-capture-rescue.js",
+      "source": "working-tree",
+      "area": "runtime",
+      "riskTags": [
+        "browser-runtime",
+        "browser-safety",
+        "game-owned"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "src/js/08-score-awards.js",
+      "source": "working-tree",
+      "area": "runtime",
+      "riskTags": [
+        "browser-runtime",
+        "browser-safety",
+        "game-owned",
+        "score-trust"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "src/js/10-gameplay.js",
+      "source": "working-tree",
+      "area": "runtime",
+      "riskTags": [
+        "browser-runtime",
+        "browser-safety",
+        "game-owned"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "src/js/13-aurora-game-pack.js",
+      "source": "working-tree",
+      "area": "runtime",
+      "riskTags": [
+        "browser-runtime",
+        "browser-safety",
+        "game-owned"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "src/js/19-render-shell.js",
+      "source": "working-tree",
+      "area": "runtime",
+      "riskTags": [
+        "browser-runtime",
+        "browser-safety",
+        "platform-boundary"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "src/js/90-harness.js",
+      "source": "working-tree",
+      "area": "runtime",
+      "riskTags": [
+        "browser-runtime",
+        "browser-safety",
+        "platform-boundary"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "src/public/aurora-galactica.template.html",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "src/styles.css",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "browser-safety"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "SUPABASE_DATA_API_ACCESS.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "auth-privacy"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "supabase/data-api-access-contract.sql",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "auth-privacy"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "TESTING_AND_RELEASE_GATES.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "tools/build/check-publish-ready.js",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "browser-safety",
+        "release-lane"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "tools/build/public-project-page-sections.js",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "browser-safety",
+        "release-lane"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "tools/harness/analyze-audio-theme-comparison.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "tools/harness/analyze-aurora-audio-event-gap.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "tools/harness/analyze-aurora-audio-focus-candidates.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "tools/harness/audio-spec-renderer.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "tools/harness/check-commentator-callouts.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "tools/harness/check-player-two-mode.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "tools/harness/check-supabase-data-api-contract.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "auth-privacy",
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "tools/harness/check-trophy-replay-surface.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness",
+        "media-external",
+        "score-trust"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "tools/review/build-code-review-packet.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "tools/review/build-review-learning-ledger.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "tools/review/check-code-review-gate.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "A",
+      "file": "tools/review/check-review-dispositions.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    }
+  ],
+  "automaticFindings": [
+    {
+      "severity": "P2",
+      "id": "release-tooling-review",
+      "message": "Release or npm script surface changed; verify lane authority and publish behavior.",
+      "file": "package.json",
+      "evidence": ""
+    }
+  ],
+  "recommendedChecks": [
+    "npm run build",
+    "npm run harness:check:supabase-data-api-contract",
+    "npm run harness:check:remote-score-submit",
+    "npm run harness:check:signed-in-game-over-lock",
+    "npm run harness:check:audio-runtime-recovery",
+    "npm run harness:check:trophy-replay-surface",
+    "npm run publish:check:dev",
+    "npm run review:code:check"
+  ]
+}

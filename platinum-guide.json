@@ -37,7 +37,7 @@
         },
         {
           "title": "Shared Services",
-          "body": "Auth, leaderboard policy, feedback transport, and replay/session plumbing are shared platform services so applications do not each build their own service stack."
+          "body": "Auth, leaderboard policy, feedback transport, replay/session plumbing, and external-service access contracts are shared platform services so applications do not each build their own service stack."
         },
         {
           "title": "Shared Contracts",
@@ -66,6 +66,25 @@
         "The pack contract is practical in code but still needs stronger versioning and clearer required-versus-optional capability rules.",
         "Some shell copy and application copy still live too close together, which can blur ownership.",
         "The second application is still preview-only, so the platform contract has one full gameplay implementation and one partial proof rather than two complete applications."
+      ]
+    },
+    {
+      "id": "service-access-contracts",
+      "title": "Service Access Contracts",
+      "summary": "Shared services are part of Platinum's release contract, not just runtime convenience.",
+      "cards": [
+        {
+          "title": "Supabase Data API",
+          "body": "Platinum uses Supabase Data API access for pilot auth-adjacent profiles and leaderboards. The access contract now lives in `SUPABASE_DATA_API_ACCESS.md` and `supabase/data-api-access-contract.sql`."
+        },
+        {
+          "title": "Preflight Coverage",
+          "body": "`npm run harness:check:supabase-data-api-contract` fails if runtime code references a Supabase table that is not represented in the SQL access contract. Publish preflight runs that gate."
+        },
+        {
+          "title": "Future Tables",
+          "body": "Replay-video metadata, YouTube posting records, and expanded pilot records belong behind explicit grants, RLS policies, and documented product ownership before they become hosted features."
+        }
       ]
     },
     {
@@ -136,6 +155,11 @@
           "label": "Testing And Release Gates",
           "href": "https://github.com/sgwoods/Codex-Test1/blob/main/TESTING_AND_RELEASE_GATES.md",
           "detail": "Automation-first release discipline and documentation gate expectations."
+        },
+        {
+          "label": "Supabase Data API Access",
+          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/SUPABASE_DATA_API_ACCESS.md",
+          "detail": "Explicit grants, RLS posture, and release gate for Supabase-backed platform services."
         }
       ]
     }
@@ -170,6 +194,12 @@
       "title": "Testing And Release Gates Source",
       "summary": "Automation-first lane gating and documentation pass expectations.",
       "file": "TESTING_AND_RELEASE_GATES.md"
+    },
+    {
+      "id": "supabase-access-doc",
+      "title": "Supabase Data API Access Source",
+      "summary": "Explicit grants, RLS posture, and publish-preflight gate for Supabase-backed platform services.",
+      "file": "SUPABASE_DATA_API_ACCESS.md"
     },
     {
       "id": "launch-art-doc",

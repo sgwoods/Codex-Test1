@@ -21,19 +21,24 @@ Authority and lane constraints:
 
 Current conformance focus:
 
-- Aurora audio just received a measured runtime lift and remains the active
-  high-value conformance investment.
+- Aurora audio just received another measured runtime lift and remains the
+  active high-value conformance investment.
 - Current measured local state:
-  - Overall quality: `9.2/10`
-  - Audio conformance: `7.3/10`
+  - Overall quality: `9.1/10`
+  - Audio conformance: `6.9/10`
   - Semantic audio score: `9.78/10`
-  - Acoustic event score: `6.31/10`
-  - Average worst segment risk: `3.69/10`
+  - Acoustic event score: `6.30/10`
+  - Average worst segment risk: `3.70/10`
   - Cue-contract readiness: `9.09/10`
-  - Highest cue gap: `playerHit`
-  - Highest residual segment gap: `playerHit` tail, `3.61/10` risk
+  - Highest cue gap: `playerShot`
+  - Highest residual segment gap: `captureBeam` tail
 - Accepted runtime lift: `playerHit` now uses a calibrated layered
-  onset/body/tail death phrase from `galaga3-death.m4a`.
+  onset/body/tail death phrase from `galaga3-death.m4a`, and early-stage
+  `enemyShot` now uses a measured threat-fire subwindow from
+  `galaga3-boss-damage-flagship-fighter-shot.m4a`.
+- Rejected runtime path: `challengePerfect` produced focused keepers, but the
+  tested runtime promotions reduced broader audio quality, so the evidence was
+  kept and no perfect-clear cue was promoted.
 - Useful process headway: reusable cue contracts, calibrated browser-reference
   role scoring, promotion precheck warnings, layered cue analysis, composite
   analysis windows, persistent candidate histories, application artifact
@@ -53,9 +58,8 @@ Current audio plan:
 
 1. Keep the calibrated layered `playerHit` ship-loss cue in runtime unless
    manual listening finds a player-facing problem.
-2. If continuing audio, refine the residual `playerHit` tail/body gap using the
-   same calibrated scorer, or move to `stagePulse` pressure-bed strategy if
-   user impact per compute looks higher.
+2. If continuing audio, target `captureBeam` tail first or build a stronger
+   `challengePerfect` mix/tail-budget model before another promotion attempt.
 3. Keep `stagePulse` pressure-bed strategy as the next ambience lane: optimize
    pressure cadence, onset band shape, low-band body, zero-crossing calm, gain
    control, and masking against important shot/hit/explosion cues.

@@ -20,15 +20,18 @@ function startAuroraGameplay(){
  const extendRecurring=Math.max(0,Number.isFinite(+cfg.extendRecurring)?(+cfg.extendRecurring|0):(+extendRules.recurring||0));
  const nextExtendScore=extendFirst>0?extendFirst:(extendRecurring>0?extendRecurring:0);
  setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
+ const pendingPlayerTwoTurn=resolvePendingPlayerTwoTurn();
+ const watchPersona=pendingPlayerTwoTurn?'':resolveWatchModeStartPersona();
+ const playerTwoRun=pendingPlayerTwoTurn||resolvePlayerTwoStartState();
  aud=1;AC().resume?.();
  gameOverHtml='';gameOverState=null;
-started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:startStage.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,forceChallenge:startStage.forceChallenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:0,simT:0,extendFirst,extendRecurring,nextExtendScore,extendAwards:0,extendFlashT:0,extendFlashShips:0});
+started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:startStage.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,forceChallenge:startStage.forceChallenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:0,simT:0,extendFirst,extendRecurring,nextExtendScore,extendAwards:0,extendFlashT:0,extendFlashShips:0,playerTwo:playerTwoRun,watchMode:watchPersona?1:0,watchPersona:watchPersona||'',commentaryT:0,commentaryCooldown:0,commentaryTitle:'',commentaryLines:[]});
  if(typeof resetHarnessFrameClock==='function')resetHarnessFrameClock();
  if(typeof syncPauseUi==='function')syncPauseUi();
- S.harnessPersona=(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
+ S.harnessPersona=(watchPersona||(playerTwoRun?.activeTurn==='p2'?playerTwoRun.personaKey:'')||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inputResetHoldT:0,vx:0});
- logEvent('game_start',{persona:S.harnessPersona||null,requestedStage:startStage.requestedStage,stage:startStage.stage,startStageMode:startStage.stageMode,forceChallenge:startStage.forceChallenge});
+ logEvent('game_start',{persona:S.harnessPersona||null,watchMode:!!S.watchMode,requestedStage:startStage.requestedStage,stage:startStage.stage,startStageMode:startStage.stageMode,forceChallenge:startStage.forceChallenge,playerTwo:playerTwoRun?.enabled?playerTwoSnapshot(playerTwoRun):null});
  startRunRecording();
  spawnStage();msg.textContent='';
  const openingTiming=(!startStage.forceChallenge&&startStage.stage===1&&usesReferenceTimingModel())
@@ -38,6 +41,17 @@ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:
   sfx.stopCueNames(['attractEnter','attractPulse','stagePulse','stageTransition','challengeTransition','challengeResults','challengePerfect','gameOver']);
  }
  sfx.start();
+ if(S.watchMode){
+  S.alertTxt=`WATCH MODE\n${watchModePersonaLabel(S.watchPersona)} PILOT`;
+  S.alertT=Math.max(S.alertT,1.8);
+  if(typeof commentatorEvent==='function')commentatorEvent('watch_mode',{persona:S.watchPersona,label:watchModePersonaLabel(S.watchPersona)});
+ }else if(playerTwoRun?.enabled&&playerTwoRun.activeTurn==='p2'){
+  S.alertTxt=`2UP TURN\n${playerTwoRun.label||watchModePersonaLabel(playerTwoRun.personaKey)} PILOT`;
+  S.alertT=Math.max(S.alertT,1.8);
+  if(typeof commentatorEvent==='function')commentatorEvent('player_two_turn_start',playerTwoSnapshot(playerTwoRun));
+ }else if(playerTwoRun?.enabled&&typeof commentatorEvent==='function'){
+  commentatorEvent('player_two_queued',playerTwoSnapshot(playerTwoRun));
+ }
  S.startCueT=0;
  if(openingTiming){
   S.formationCueT=openingTiming.formationArrivalDelay;
@@ -101,12 +115,13 @@ function gameOver(){
  }
  logEvent('game_over',{score:S.score,stage:S.stage});
  logSnapshot('game_over');
+ if(typeof updatePlayerTwoGameOverState==='function')updatePlayerTwoGameOverState();
  started=0;
  paused=0;
  if(typeof syncPauseUi==='function')syncPauseUi();
  gameOverState=buildGameOverState(S.score,S.stage,!!S.challenge);
  gameOverHtml=buildGameOverHtmlFromState();
- if(gameOverState&&!gameOverState.editing&&typeof submitGameOverScore==='function')submitGameOverScore();
+ if(gameOverState&&!gameOverState.editing&&!gameOverState.watchMode&&!gameOverState.playerTwoMode&&typeof submitGameOverScore==='function')submitGameOverScore();
  if(usesRuntimeGalagaReferenceAudio()&&typeof sfx.stopCueNames==='function'){
   sfx.stopCueNames(['stagePulse','stageTransition','challengeTransition','challengeResults','challengePerfect']);
  }
@@ -145,9 +160,504 @@ const HARNESS_PERSONAS={
  professional:{name:'professional',moveMul:.88,urgentDx:42,urgentLook:198,deadZone:5,aimBoss:22,aimOther:16,fireChance:.99,challengeFireChance:.995,openShotY:58,diveBias:600,carryBias:350,bossBias:175,activeBias:128,heightBias:1.12,distanceBias:.86}
 };
 
+const PLAYER_TWO_PERSONA_ORDER=Object.freeze(['novice','advanced','expert','professional']);
+const PLAYER_TWO_PERSONA_PROFILES=Object.freeze({
+ novice:Object.freeze({id:'novice',label:'BEGINNER',initials:'BEG',scorePerSecond:34,stageSeconds:126,variance:.14}),
+ advanced:Object.freeze({id:'advanced',label:'INTERMEDIATE',initials:'INT',scorePerSecond:55,stageSeconds:98,variance:.12}),
+ expert:Object.freeze({id:'expert',label:'EXPERT',initials:'EXP',scorePerSecond:78,stageSeconds:78,variance:.1}),
+ professional:Object.freeze({id:'professional',label:'PROFESSIONAL',initials:'PRO',scorePerSecond:96,stageSeconds:66,variance:.08})
+});
+const PLAYER_TWO_PERSONA_DESCRIPTIONS=Object.freeze({
+ novice:'Careful learner: slower movement, conservative shots, safer reactions.',
+ advanced:'Balanced pilot: steady movement, moderate firing, practical survival.',
+ expert:'Aggressive pilot: faster tracking, tighter aim, stronger dive response.',
+ professional:'Arcade-grade pilot: high tempo, sharper aim, pressure-ready movement.'
+});
+
+function normalizePlayerTwoPersona(value=''){
+ const key=String(value||'').trim().toLowerCase();
+ return PLAYER_TWO_PERSONA_PROFILES[key]?key:'advanced';
+}
+function currentGameSupportsPlayerTwo(){
+ const pack=typeof currentGamePack==='function'?currentGamePack():null;
+ const gameKey=pack?.metadata?.gameKey||'aurora-galactica';
+ return gameKey==='aurora-galactica';
+}
+function playerTwoAuthReady(){
+ if(window.__platinumHarnessPlayerTwoAuth||window.__auroraHarnessPlayerTwoAuth)return true;
+ return typeof LEADERBOARD!=='undefined'&&!!LEADERBOARD?.user&&(typeof remoteAuthEnabled!=='function'||remoteAuthEnabled());
+}
+function selectedPlayerTwoMode(){
+ return readPref(PLAYER_TWO_MODE_PREF_KEY)==='2';
+}
+function selectedPlayerTwoPersona(){
+ return normalizePlayerTwoPersona(readPref(PLAYER_TWO_PERSONA_PREF_KEY)||'advanced');
+}
+function playerTwoSelectionState(){
+ const personaKey=selectedPlayerTwoPersona();
+ const profile=PLAYER_TWO_PERSONA_PROFILES[personaKey]||PLAYER_TWO_PERSONA_PROFILES.advanced;
+ return{
+  supported:currentGameSupportsPlayerTwo(),
+  signedIn:playerTwoAuthReady(),
+  selected:selectedPlayerTwoMode(),
+  personaKey,
+  personaLabel:profile.label,
+  personaInitials:profile.initials
+ };
+}
+function selectedWatchPersona(){
+ return normalizePlayerTwoPersona(readPref(WATCH_MODE_PERSONA_PREF_KEY)||'advanced');
+}
+function setWatchPersona(key,opts={}){
+ const personaKey=normalizePlayerTwoPersona(key);
+ writePref(WATCH_MODE_PERSONA_PREF_KEY,personaKey);
+ if(!opts.silent&&typeof logEvent==='function')logEvent('watch_mode_persona_selected',{persona:personaKey,source:opts.source||'ui'});
+ return personaKey;
+}
+function cycleWatchPersona(dir=1,opts={}){
+ const current=selectedWatchPersona();
+ const idx=Math.max(0,PLAYER_TWO_PERSONA_ORDER.indexOf(current));
+ const next=PLAYER_TWO_PERSONA_ORDER[(idx+(dir<0?-1:1)+PLAYER_TWO_PERSONA_ORDER.length)%PLAYER_TWO_PERSONA_ORDER.length];
+ return setWatchPersona(next,opts);
+}
+function watchModePersonaLabel(key=selectedWatchPersona()){
+ return (PLAYER_TWO_PERSONA_PROFILES[normalizePlayerTwoPersona(key)]||PLAYER_TWO_PERSONA_PROFILES.advanced).label;
+}
+function playerPersonaCardSummary(key='advanced'){
+ const personaKey=normalizePlayerTwoPersona(key);
+ const profile=PLAYER_TWO_PERSONA_PROFILES[personaKey]||PLAYER_TWO_PERSONA_PROFILES.advanced;
+ return{
+  key:personaKey,
+  label:profile.label,
+  initials:profile.initials,
+  description:PLAYER_TWO_PERSONA_DESCRIPTIONS[personaKey]||PLAYER_TWO_PERSONA_DESCRIPTIONS.advanced
+ };
+}
+function armWatchMode(personaKey=selectedWatchPersona(),opts={}){
+ const key=setWatchPersona(personaKey,{silent:1,source:opts.source||'ui'});
+ setPlayerTwoSelection(false,{silent:1,source:opts.source||'ui'});
+ window.__platinumWatchModePersona=key;
+ window.__auroraWatchModePersona=key;
+ if(typeof logEvent==='function')logEvent('watch_mode_armed',{persona:key,source:opts.source||'ui'});
+ if(typeof launchCurrentGameFromWaitMode==='function')launchCurrentGameFromWaitMode();
+ return key;
+}
+function resolveWatchModeStartPersona(){
+ const key=normalizePlayerTwoPersona(window.__platinumWatchModePersona||window.__auroraWatchModePersona||'');
+ if(!(window.__platinumWatchModePersona||window.__auroraWatchModePersona))return '';
+ delete window.__platinumWatchModePersona;
+ delete window.__auroraWatchModePersona;
+ return key;
+}
+function resolvePendingPlayerTwoTurn(){
+ const pending=window.__platinumPendingPlayerTwoTurn||window.__auroraPendingPlayerTwoTurn||null;
+ delete window.__platinumPendingPlayerTwoTurn;
+ delete window.__auroraPendingPlayerTwoTurn;
+ if(!pending||!pending.enabled)return null;
+ const personaKey=normalizePlayerTwoPersona(pending.personaKey||pending.persona||'advanced');
+ const profile=PLAYER_TWO_PERSONA_PROFILES[personaKey]||PLAYER_TWO_PERSONA_PROFILES.advanced;
+ return Object.assign({},pending,{
+  enabled:true,
+  eligibleForLeaderboard:false,
+  mode:'persona-rival',
+  turnModel:'galaga-inspired-alternating-turns',
+  activeTurn:'p2',
+  personaKey,
+  label:profile.label,
+  initials:profile.initials,
+  score:0,
+  scoreFloat:0,
+  stage:1,
+  lives:Math.max(1,+pending.lives||3),
+  elapsed:0,
+  nextLogT:8,
+  lastStage:1
+ });
+}
+function setPlayerTwoPersona(key,opts={}){
+ const personaKey=normalizePlayerTwoPersona(key);
+ writePref(PLAYER_TWO_PERSONA_PREF_KEY,personaKey);
+ if(!opts.silent&&typeof logEvent==='function')logEvent('player_two_persona_selected',{persona:personaKey,source:opts.source||'ui'});
+ return personaKey;
+}
+function cyclePlayerTwoPersona(dir=1,opts={}){
+ const current=selectedPlayerTwoPersona();
+ const idx=Math.max(0,PLAYER_TWO_PERSONA_ORDER.indexOf(current));
+ const next=PLAYER_TWO_PERSONA_ORDER[(idx+(dir<0?-1:1)+PLAYER_TWO_PERSONA_ORDER.length)%PLAYER_TWO_PERSONA_ORDER.length];
+ return setPlayerTwoPersona(next,opts);
+}
+function blockPlayerTwoSelection(source='ui'){
+ setAccountNotice('Sign in to choose 2 PLAYERS with a persona rival.');
+ if(typeof openAccountPanel==='function')openAccountPanel();
+ if(typeof showToast==='function')showToast('Sign in to choose 2 PLAYERS.');
+ if(typeof logEvent==='function')logEvent('player_two_mode_blocked',{source,reason:currentGameSupportsPlayerTwo()?'sign_in_required':'unsupported_game'});
+}
+function setPlayerTwoSelection(enabled,opts={}){
+ const want=!!enabled;
+ if(want&&(!currentGameSupportsPlayerTwo()||!playerTwoAuthReady())){
+  writePref(PLAYER_TWO_MODE_PREF_KEY,'1');
+  if(!opts.silent)blockPlayerTwoSelection(opts.source||'ui');
+  return false;
+ }
+ writePref(PLAYER_TWO_MODE_PREF_KEY,want?'2':'1');
+ if(!opts.silent&&typeof logEvent==='function')logEvent('player_two_mode_selected',{mode:want?'2p':'1p',persona:selectedPlayerTwoPersona(),source:opts.source||'ui'});
+ return true;
+}
+function playerTwoHashUnit(seed){
+ let h=2166136261>>>0;
+ const txt=String(seed||'');
+ for(let i=0;i<txt.length;i++){
+  h^=txt.charCodeAt(i);
+  h=Math.imul(h,16777619)>>>0;
+ }
+ h=(h+0x6D2B79F5)|0;
+ let t=Math.imul(h^h>>>15,1|h);
+ t^=t+Math.imul(t^t>>>7,61|t);
+ return ((t^t>>>14)>>>0)/4294967296;
+}
+function resolvePlayerTwoStartState(){
+ if(!selectedPlayerTwoMode())return {enabled:false};
+ if(!currentGameSupportsPlayerTwo()||!playerTwoAuthReady()){
+  writePref(PLAYER_TWO_MODE_PREF_KEY,'1');
+  if(typeof logEvent==='function')logEvent('player_two_start_downgraded',{reason:currentGameSupportsPlayerTwo()?'sign_in_required':'unsupported_game'});
+  return {enabled:false};
+ }
+ const personaKey=selectedPlayerTwoPersona();
+ const profile=PLAYER_TWO_PERSONA_PROFILES[personaKey]||PLAYER_TWO_PERSONA_PROFILES.advanced;
+ const seed=`${RNG_SEED||0}:${Date.now()}:${personaKey}:${Math.random()}`;
+ const skillUnit=playerTwoHashUnit(`${seed}:skill`);
+ const paceUnit=playerTwoHashUnit(`${seed}:pace`);
+ const variance=1+((skillUnit*2)-1)*profile.variance;
+ const pace=1+((paceUnit*2)-1)*profile.variance*.7;
+ return{
+  enabled:true,
+  eligibleForLeaderboard:false,
+  mode:'persona-rival',
+  turnModel:'galaga-inspired-alternating-turns',
+  activeTurn:'queued',
+  personaKey,
+  label:profile.label,
+  initials:profile.initials,
+  score:0,
+  scoreFloat:0,
+  stage:1,
+  lives:3,
+  elapsed:0,
+  nextLogT:8,
+  seed,
+  variance:+variance.toFixed(4),
+  scorePerSecond:+(profile.scorePerSecond*variance).toFixed(3),
+  stageSeconds:+Math.max(48,profile.stageSeconds/pace).toFixed(3)
+ };
+}
+function updatePlayerTwoGameOverState(){
+ const p2=S.playerTwo;
+ if(!p2?.enabled)return;
+ if(p2.activeTurn==='p2'){
+  p2.score=S.score|0;
+  p2.scoreFloat=Math.max(+p2.scoreFloat||0,p2.score);
+  p2.stage=displayStageNumber(S.stage,!!S.challenge);
+  p2.elapsed=+(+S.stageClock||0).toFixed(3);
+  p2.finished=1;
+  p2.activeTurn='done';
+  if(typeof logEvent==='function')logEvent('player_two_turn_complete',playerTwoSnapshot(p2));
+  return;
+ }
+ if(p2.activeTurn==='queued'){
+  p2.activeTurn='ready';
+  p2.humanScore=S.score|0;
+  p2.humanStage=displayStageNumber(S.stage,!!S.challenge);
+  p2.humanStats={shots:S.stats.shots|0,hits:S.stats.hits|0};
+  if(typeof logEvent==='function')logEvent('player_two_turn_ready',playerTwoSnapshot(p2));
+ }
+}
+function playerTwoTurnAvailable(){
+ return !!(!started&&gameOverState&&!gameOverState.editing&&S.playerTwo?.enabled&&S.playerTwo.activeTurn==='ready');
+}
+function startPlayerTwoTurnFromGameOver(source='keyboard'){
+ if(!playerTwoTurnAvailable())return false;
+ if(gameOverState&&!gameOverState.editing&&!gameOverState.watchMode&&!gameOverState.playerTwoMode&&typeof submitGameOverScore==='function')submitGameOverScore();
+ const p2=Object.assign({},S.playerTwo,{
+  activeTurn:'p2',
+  score:0,
+  scoreFloat:0,
+  stage:1,
+  lives:3,
+  elapsed:0,
+  nextLogT:8,
+  lastStage:1,
+  source
+ });
+ window.__platinumPendingPlayerTwoTurn=p2;
+ window.__auroraPendingPlayerTwoTurn=p2;
+ if(typeof logEvent==='function')logEvent('player_two_turn_start_requested',playerTwoSnapshot(p2));
+ stopAttractLoop();
+ start();
+ return true;
+}
+function updatePlayerTwoRival(dt){
+ const p2=S.playerTwo;
+ if(!p2?.enabled||S.attract||!started)return;
+ if(p2.activeTurn==='p2'){
+  p2.elapsed+=dt;
+  p2.score=S.score|0;
+  p2.scoreFloat=Math.max(+p2.scoreFloat||0,p2.score);
+  const shownStage=displayStageNumber(S.stage,!!S.challenge);
+  if(shownStage!==p2.stage){
+   p2.stage=shownStage;
+   if(typeof logEvent==='function')logEvent('player_two_stage_advance',playerTwoSnapshot(p2));
+   if(typeof commentatorEvent==='function')commentatorEvent('player_two_stage',playerTwoSnapshot(p2));
+  }
+  p2.nextLogT=Math.max(0,(+p2.nextLogT||0)-dt);
+  if(!p2.nextLogT){
+   p2.nextLogT=8;
+   if(typeof logEvent==='function')logEvent('player_two_progress',playerTwoSnapshot(p2));
+   if(typeof commentatorEvent==='function')commentatorEvent('player_two_progress',playerTwoSnapshot(p2));
+  }
+  return;
+ }
+ if(p2.activeTurn!=='simulated')return;
+ p2.elapsed+=dt;
+ const stageLift=1+Math.min(.34,Math.max(0,(S.stage-1)*.018));
+ const challengeDrag=S.challenge ? .82 : 1;
+ p2.scoreFloat+=dt*p2.scorePerSecond*stageLift*challengeDrag;
+ p2.score=Math.max(p2.score|0,Math.floor(p2.scoreFloat/10)*10);
+ const nextStage=Math.max(1,Math.floor(p2.elapsed/Math.max(1,p2.stageSeconds))+1);
+ if(nextStage!==p2.stage){
+  p2.stage=nextStage;
+  if(typeof logEvent==='function')logEvent('player_two_stage_advance',playerTwoSnapshot(p2));
+  if(typeof commentatorEvent==='function')commentatorEvent('player_two_stage',playerTwoSnapshot(p2));
+ }
+ p2.nextLogT=Math.max(0,(+p2.nextLogT||0)-dt);
+ if(!p2.nextLogT){
+  p2.nextLogT=8;
+  if(typeof logEvent==='function')logEvent('player_two_progress',playerTwoSnapshot(p2));
+  if(typeof commentatorEvent==='function')commentatorEvent('player_two_progress',playerTwoSnapshot(p2));
+ }
+}
+function playerTwoSnapshot(state=S.playerTwo){
+ const p2=state||{};
+ if(!p2.enabled)return {enabled:false};
+ return{
+  enabled:true,
+  mode:p2.mode||'persona-rival',
+  turnModel:p2.turnModel||'galaga-inspired-alternating-turns',
+  activeTurn:p2.activeTurn||'queued',
+  personaKey:p2.personaKey||'',
+  label:p2.label||'',
+  initials:p2.initials||'',
+  score:+(p2.score||0)|0,
+  stage:+(p2.stage||1)|0,
+  humanScore:+(p2.humanScore||0)|0,
+  humanStage:+(p2.humanStage||0)|0,
+  elapsed:+(+p2.elapsed||0).toFixed(3),
+  variance:+(+p2.variance||1).toFixed(4),
+  eligibleForLeaderboard:false
+ };
+}
+function currentPilotCardState(){
+ const signedIn=typeof LEADERBOARD!=='undefined'&&!!LEADERBOARD?.user;
+ const verified=!!(typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user?.email_confirmed_at);
+ const humanId=typeof pilotDisplayId==='function'?pilotDisplayId():(signedIn?'PILOT':'GUEST');
+ const p2=S.playerTwo;
+ if(S.watchMode){
+  const persona=playerPersonaCardSummary(S.watchPersona||selectedWatchPersona());
+  return{
+   mode:'watch',
+   icon:'🛰',
+   dockLabel:'WATCH',
+   dockStatus:persona.label,
+   dockTitle:`Watch Mode: ${persona.label} pilot onboard`,
+   panelTitle:'PILOT ONBOARD',
+   panelSub:'WATCH MODE PERSONA',
+   callsign:`${persona.label} IS FLYING`,
+   status:`${persona.description} Score not recorded.`,
+   summary:'Watch Mode is a persona-controlled demonstration run. Scores and videos are not eligible for posting.',
+   email:'Controller: Persona pilot',
+   userId:`Role: ${persona.initials} watch pilot`,
+   hudHtml:`<span class="hudLabel">WATCH</span> <span class="hudValue">${persona.initials}</span>`,
+   signedIn
+  };
+ }
+ if(p2?.enabled&&(p2.activeTurn==='p2'||p2.activeTurn==='done'||p2.activeTurn==='ready')){
+  const persona=playerPersonaCardSummary(p2.personaKey||'advanced');
+  const active=p2.activeTurn==='p2';
+  const ready=p2.activeTurn==='ready';
+  return{
+   mode:active?'player-two-active':ready?'player-two-ready':'player-two-done',
+   icon:'🧑‍🚀',
+   dockLabel:active?'2UP PLAY':ready?'2UP READY':'2UP DONE',
+   dockStatus:persona.label,
+   dockTitle:`2UP ${persona.label} rival pilot ${active?'flying':ready?'ready':'complete'}`,
+   panelTitle:active?'2UP RIVAL ONBOARD':ready?'2UP RIVAL READY':'2UP RIVAL RESULTS',
+   panelSub:'PERSONA RIVAL PILOT',
+   callsign:`2UP ${persona.label}`,
+   status:`${persona.description} Human 1UP score is the only scoreboard entry.`,
+   summary:active?'Persona rival is flying now. This turn is comparison-only and will not post a score.':ready?'Persona rival is queued for the next turn. Press 2 from results to start it.':'Persona rival turn is complete. Only the human 1UP score remains eligible.',
+   email:'Controller: Persona rival',
+   userId:`Role: ${persona.initials} 2UP rival`,
+   hudHtml:`<span class="playerTwoHud${active?' playerTwoHudActive':' playerTwoHudReady'}"><span class="hudLabel">${active?'2UP PLAY':ready?'2UP READY':'2UP DONE'}</span> <span class="hudValue">${formatScore(p2.score||0)}</span></span>`,
+   signedIn
+  };
+ }
+ if(p2?.enabled&&p2.activeTurn==='queued'){
+  const persona=playerPersonaCardSummary(p2.personaKey||'advanced');
+  return{
+   mode:'human-with-rival',
+   icon:'🧑‍🚀',
+   dockLabel:signedIn?'1UP PILOT':'1UP',
+   dockStatus:signedIn?humanId:'LOCAL',
+   dockTitle:signedIn?`${humanId} onboard; ${persona.label} 2UP queued`:`Local 1UP pilot; ${persona.label} 2UP queued`,
+   panelTitle:'1UP PILOT',
+   panelSub:'HUMAN TURN ACTIVE',
+   callsign:signedIn?`${humanId} IS ONBOARD`:'LOCAL PILOT',
+   status:`2UP ${persona.label} rival is queued after the human turn. Human score only.`,
+   summary:signedIn?`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':''}. 2UP rival scores do not post.`:'Local score path active. Sign in to post verified human scores.',
+   email:`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):'--'}`,
+   userId:`Queued rival: ${persona.label}`,
+   hudHtml:`<span class="hudLabel">PILOT</span> <span class="hudValue">${signedIn?humanId:'---'}</span>`,
+   signedIn
+  };
+ }
+ return{
+  mode:signedIn?'human-signed-in':'human-local',
+  icon:'🧑‍🚀',
+  dockLabel:signedIn?'ONBOARD':'SIGN IN',
+  dockStatus:signedIn?humanId:'Pilot offline',
+  dockTitle:signedIn?`${humanId} onboard`:'Pilot Sign In',
+  panelTitle:'PILOT INFORMATION',
+  panelSub:'QUICK PILOT REFERENCE',
+  callsign:signedIn?`${humanId} IS ONBOARD`:'PILOT OFFLINE',
+  status:signedIn?'Pilot identity active. Scores and records are summarized below.':'Sign in for synced records, or keep flying locally.',
+  summary:'',
+  email:`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):'--'}`,
+  userId:`User ID: ${signedIn?(LEADERBOARD.user?.id||'--'):'--'}`,
+  hudHtml:`<span class="hudLabel">PILOT</span> <span class="hudValue">${signedIn?humanId:'---'}</span>`,
+  signedIn
+ };
+}
+function buildPlayerTwoStartHtml(){
+ if(!currentGameSupportsPlayerTwo())return '';
+ const state=playerTwoSelectionState();
+ const watchPersona=selectedWatchPersona();
+ const watchLabel=watchModePersonaLabel(watchPersona);
+ const p2Locked=!state.signedIn;
+ const mode1Class=`playerModeOption playerModeSolo${state.selected?'':' isSelected'}`;
+ const mode2Class=`playerModeOption playerModeTwo${state.selected?' isSelected':''}${p2Locked?' isLocked':''}`;
+ const personaClass=`playerModePersona${state.selected?' isActive':''}${p2Locked?' isLocked':''}`;
+ const p2Status=p2Locked?'SIGN IN REQUIRED':`${state.personaInitials} RIVAL`;
+ const personaMeta=p2Locked?'LOCKED UNTIL SIGN-IN':'HUMAN SCORE ONLY';
+ const personaHint='<span class="k">1</span>/<span class="k">2</span> START   <span class="k">W</span> WATCH';
+ const rivalPicker=`<span class="${personaClass}" role="button" tabindex="0" data-player-two-persona="next"><span class="playerModeKey"><b>RIVAL</b><small>PILOT</small></span><span class="playerModeText playerModeStepper"><span class="playerModeArrow" data-player-two-persona="prev">&lt;</span><strong>${state.personaLabel}</strong><span class="playerModeArrow" data-player-two-persona="next">&gt;</span><em>${personaMeta}</em></span></span>`;
+ const watchPicker=`<span class="playerModeWatch" role="button" tabindex="0" data-watch-mode="1"><span class="playerModeKey"><span class="k">W</span><b>WATCH</b><small>PILOT</small></span><span class="playerModeText playerModeStepper"><span class="playerModeArrow" data-watch-persona="prev">&lt;</span><strong>${watchLabel}</strong><span class="playerModeArrow" data-watch-persona="next">&gt;</span><em>SCORE NOT RECORDED</em></span></span>`;
+ return `<span class="playerModeSelect${state.selected?' isTwoSelected':' isOneSelected'}${p2Locked?' isPlayerTwoLocked':''}" aria-label="Player mode selection"><span class="${mode1Class}" role="button" tabindex="0" data-player-mode="1"><span class="playerModeKey"><span class="k">1</span><b>1UP</b></span><span class="playerModeText"><strong>1 PLAYER</strong><em>SOLO SCORE</em></span></span><span class="${mode2Class}" role="button" tabindex="0" data-player-mode="2"><span class="playerModeKey"><span class="k">2</span><b>2UP</b></span><span class="playerModeText"><strong>2 PLAYERS</strong><em>${p2Status}</em></span></span>${rivalPicker}${watchPicker}<span class="playerModeHint">${personaHint}</span></span>`;
+}
+function buildPlayerTwoResultsHtml(){
+ const p2=S.playerTwo;
+ if(!p2?.enabled)return '';
+ const human=(p2.humanScore!=null?p2.humanScore:S.score)|0;
+ const p2Score=p2.score|0;
+ const initials=p2.initials||'---';
+ if(p2.activeTurn==='ready')return `<span class="playerTwoResult playerTwoResultReady"><span class="playerTwoKicker">1UP COMPLETE</span><span class="playerTwoVersus"><span class="playerTwoLane is1up"><b>1UP</b><strong>${formatScore(human)}</strong></span><span class="playerTwoLane is2up"><b>2UP ${initials}</b><strong>READY</strong></span></span><span class="playerTwoPrompt"><span class="k">2</span> START 2UP TURN</span><span class="playerTwoRule">HUMAN SCORE ONLY</span></span>`;
+ if(p2.activeTurn!=='p2'&&p2.activeTurn!=='done')return `<span class="playerTwoResult playerTwoResultQueued"><span class="playerTwoKicker">2UP ${initials} ${formatScore(p2Score)} READY</span><span class="playerTwoRule">2UP HAS NOT PLAYED THIS TURN   1UP SCORE IS THE ONLY SCOREBOARD ENTRY</span></span>`;
+ const outcome=human>=p2Score?'1UP LEADS':'2UP LEADS';
+ const humanClass=human>=p2Score?' isLeader':'';
+ const p2Class=p2Score>human?' isLeader':'';
+ return `<span class="playerTwoResult playerTwoResultFinal"><span class="playerTwoKicker">${outcome}</span><span class="playerTwoVersus"><span class="playerTwoLane is1up${humanClass}"><b>1UP</b><strong>${formatScore(human)}</strong></span><span class="playerTwoLane is2up${p2Class}"><b>2UP ${initials}</b><strong>${formatScore(p2Score)}</strong><em>STG ${String(p2.stage||1).padStart(2,'0')}</em></span></span><span class="playerTwoRule">1UP SCORE IS THE ONLY SCOREBOARD ENTRY</span></span>`;
+}
+function playerTwoHudHtml(){
+ const p2=S.playerTwo;
+ if(!p2?.enabled)return '';
+ const state=p2.activeTurn==='p2'?' PLAY':p2.activeTurn==='ready'?' READY':'';
+ const cls=p2.activeTurn==='p2'?' playerTwoHudActive':p2.activeTurn==='ready'?' playerTwoHudReady':'';
+ return `<span class="playerTwoHud${cls}"><span class="hudLabel">2UP${state}</span> <span class="hudValue">${formatScore(p2.score||0)}</span></span>`;
+}
+function handlePlayerTwoWaitKey(e){
+ if(started||gameOverState?.editing)return false;
+ if(gameOverState)return false;
+ if(e.code==='BracketLeft'||e.code==='BracketRight'){
+  e.preventDefault();
+  const next=cycleWatchPersona(e.code==='BracketLeft'?-1:1,{source:'keyboard'});
+  setPlayerTwoPersona(next,{silent:1,source:'keyboard'});
+  if(typeof sfx!=='undefined')sfx.uiTick();
+  return true;
+ }
+ if(e.code==='KeyW'){
+  e.preventDefault();
+  armWatchMode(selectedWatchPersona(),{source:'keyboard'});
+  return true;
+ }
+ if(e.code==='Digit1'||e.code==='Numpad1'){
+  e.preventDefault();
+  setPlayerTwoSelection(false,{source:'keyboard'});
+  if(typeof launchCurrentGameFromWaitMode==='function')launchCurrentGameFromWaitMode();
+  return true;
+ }
+ if(e.code==='Digit2'||e.code==='Numpad2'){
+  e.preventDefault();
+  if(setPlayerTwoSelection(true,{source:'keyboard'})){
+   if(typeof launchCurrentGameFromWaitMode==='function')launchCurrentGameFromWaitMode();
+  }
+  return true;
+ }
+ return false;
+}
+function handlePlayerTwoGameOverKey(e){
+ if(e.code==='Digit2'||e.code==='Numpad2'){
+  if(startPlayerTwoTurnFromGameOver('keyboard')){
+   e.preventDefault();
+   return true;
+  }
+ }
+ return false;
+}
+function handlePlayerTwoWaitClick(target){
+ if(started||gameOverState)return false;
+ const mode=target?.closest?.('[data-player-mode]')?.getAttribute('data-player-mode');
+ if(mode==='1'||mode==='2'){
+  setPlayerTwoSelection(mode==='2',{source:'click'});
+  if(typeof sfx!=='undefined')sfx.uiTick();
+  return true;
+ }
+ const playerPersonaTarget=target?.closest?.('[data-player-two-persona]');
+ if(playerPersonaTarget){
+  const dir=playerPersonaTarget.getAttribute('data-player-two-persona')==='prev'?-1:1;
+  cyclePlayerTwoPersona(dir,{source:'click'});
+  if(typeof sfx!=='undefined')sfx.uiTick();
+  return true;
+ }
+ const watchPersonaTarget=target?.closest?.('[data-watch-persona]');
+ if(watchPersonaTarget){
+  const dir=watchPersonaTarget.getAttribute('data-watch-persona')==='prev'?-1:1;
+  cycleWatchPersona(dir,{source:'click'});
+  if(typeof sfx!=='undefined')sfx.uiTick();
+  return true;
+ }
+ if(target?.closest?.('[data-watch-mode]')){
+  armWatchMode(selectedWatchPersona(),{source:'click'});
+  return true;
+ }
+ return false;
+}
+
 function harnessPersonaCfg(){
- const key=(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
- return HARNESS_PERSONAS[key]||null;
+ const key=(S.harnessPersona||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
+ const base=HARNESS_PERSONAS[key]||null;
+ const p2=S.playerTwo?.activeTurn==='p2'?S.playerTwo:null;
+ if(!base||!p2)return base;
+ const skill=cl(Number.isFinite(+p2.variance)?+p2.variance:1,.82,1.18);
+ const agility=.92+skill*.08;
+ const precision=.94+skill*.06;
+ return Object.assign({},base,{
+  moveMul:cl(base.moveMul*agility,.32,.98),
+  urgentLook:base.urgentLook*precision,
+  deadZone:Math.max(3,base.deadZone/precision),
+  aimBoss:base.aimBoss*precision,
+  aimOther:base.aimOther*precision,
+  fireChance:cl(base.fireChance*precision,.1,.999),
+  challengeFireChance:cl(base.challengeFireChance*precision,.1,.999),
+  distanceBias:base.distanceBias/precision
+ });
 }
 
 function harnessTargetScore(e,p,cfg){
@@ -346,7 +856,7 @@ function updatePlayerControl(dt,p){
  }
  if(p.spawn<=0&&!p.captured&&!p.returning){
   if(S.attract)runAttractPlayer(dt,p);
-  else if(harnessPersona&&!manualAxis&&!manualFire)runHarnessPlayer(dt,p,harnessPersona);
+  else if(harnessPersona&&(S.watchMode||(!manualAxis&&!manualFire)))runHarnessPlayer(dt,p,harnessPersona);
   else{
    const hp=playerHitbox();
    const leftHeld=keyHeldMs(...leftCodes);
@@ -366,5 +876,5 @@ function updatePlayerControl(dt,p){
   }
  }
  if(!S.attract&&!harnessPersona&&keys.Space)shoot();
- else if(!S.attract&&harnessPersona&&manualFire)shoot();
+ else if(!S.attract&&harnessPersona&&manualFire&&!S.watchMode)shoot();
 }

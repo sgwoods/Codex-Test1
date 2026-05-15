@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "review-dispositions",
+  "purpose": "Production release review issue dispositions. Before production, every architecture/code review issue must be explicitly addressed or dismissed with rationale and evidence.",
+  "updatedAt": "2026-05-14",
+  "decisions": [
+    {
+      "id": "architect-key-abstractions",
+      "productionDisposition": "addressed",
+      "reason": "The platform/application architecture documents and boundary harnesses now define the core runtime, shell, service adapter, game-pack, entity, scoring, stage, render, and auth concerns.",
+      "evidence": [
+        "ARCHITECTURE.md",
+        "PLATINUM_ARCHITECTURE_OVERVIEW.md",
+        "APPLICATIONS_ON_PLATINUM.md",
+        "tools/harness/check-gameplay-adapter-boundaries.js",
+        "tools/harness/check-pack-registry-boundaries.js"
+      ]
+    },
+    {
+      "id": "architect-magic-constants",
+      "productionDisposition": "dismissed",
+      "reason": "Remaining movement, render-spacing, animation-timing, and gameplay tuning constants are a next-cycle maintainability concern, not a blocker for the current production candidate when targeted gameplay and boundary checks pass.",
+      "evidence": [
+        "ARCHITECT_REVIEW_RESPONSE.md",
+        "CODE_REVIEW_MODEL.md",
+        "TESTING_AND_RELEASE_GATES.md"
+      ]
+    },
+    {
+      "id": "architect-harness-fragility",
+      "productionDisposition": "dismissed",
+      "reason": "Recorded-path fragility is acknowledged and retained as a harness-maturity concern. It does not block the current production candidate if the relevant release harnesses, documentation freshness check, and publish preflight pass.",
+      "evidence": [
+        "ARCHITECT_REVIEW_RESPONSE.md",
+        "reference-artifacts/analyses/code-review/latest.json",
+        "TESTING_AND_RELEASE_GATES.md"
+      ]
+    },
+    {
+      "id": "architect-enemy-spec",
+      "productionDisposition": "dismissed",
+      "reason": "Declarative enemy-family and attack-pattern specs remain important for 1.4.0 and later conformance work. This is not a production blocker for a reviewed candidate unless the release claims those specs as complete.",
+      "evidence": [
+        "ARCHITECT_REVIEW_RESPONSE.md",
+        "GAME_CONFORMANCE_CATALOG.md",
+        "PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md"
+      ]
+    },
+    {
+      "id": "code-review-release-tooling-review",
+      "productionDisposition": "addressed",
+      "reason": "The release-tooling changes are intentional: they add the review packet, review-learning ledger, public review documentation, and a production disposition gate. The review packet is current and publish preflight remains green for the dev lane.",
+      "evidence": [
+        "CODE_REVIEW_MODEL.md",
+        "REVIEW_LEARNING_LEDGER.md",
+        "reference-artifacts/analyses/code-review/latest.json",
+        "reference-artifacts/analyses/review-learning/latest.json"
+      ]
+    }
+  ]
+}

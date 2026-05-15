@@ -74,6 +74,7 @@ function resolvePlayerBulletHit(i,seg){
      S.shake=Math.max(S.shake,.22);
      bossDamageFx(e.x,e.y);
      sfx.bossHit();
+     if(typeof commentatorEvent==='function')commentatorEvent('boss_damaged',{enemyId:e.id,hpBefore,hpAfter:e.hp});
     }else sfx.hit();
    }
    return true;

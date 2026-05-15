@@ -26,6 +26,9 @@ window.__galagaHarness__={
  }
  window.__platinumHarnessPersona=(cfg.persona||'').toLowerCase();
  window.__auroraHarnessPersona=window.__platinumHarnessPersona;
+ if(cfg.playerTwoPersona!==undefined&&typeof setPlayerTwoPersona==='function')setPlayerTwoPersona(cfg.playerTwoPersona,{silent:1,source:'harness'});
+ if(cfg.playerTwo!==undefined&&typeof setPlayerTwoSelection==='function')setPlayerTwoSelection(!!cfg.playerTwo,{silent:1,source:'harness'});
+ if(cfg.watchPersona!==undefined&&typeof setWatchPersona==='function')setWatchPersona(cfg.watchPersona,{silent:1,source:'harness'});
  if(typeof setHarnessClockControlled==='function')setHarnessClockControlled(!!cfg.controlledClock);
  if(cfg.controlledClock&&Number.isFinite(+cfg.initialSimT)){
   S.simT=+cfg.initialSimT;
@@ -350,6 +353,20 @@ window.__galagaHarness__={
   }
   return false;
  },
+ commentatorState(){
+  return window.__platinumCommentator?.state?.()||null;
+ },
+ setCommentatorEnabled(enabled=true){
+  return window.__platinumCommentator?.setEnabled?.(!!enabled,{log:1,source:'harness'})||null;
+ },
+ queueCommentator(cfg={}){
+  return !!window.__platinumCommentator?.queueForHarness?.(
+   cfg.key||'harness',
+   cfg.title||'TACTICAL UPDATE',
+   cfg.lines||['Harness callout'],
+   Object.assign({force:1,minGap:0,duration:+cfg.duration||1.5},cfg.opts||{})
+  );
+ },
  triggerShipLoss(cfg={}){
   const reserveLives = Math.max(0, Number.isFinite(+cfg.reserveLives) ? (+cfg.reserveLives|0) : 1);
   S.lives = reserveLives;
@@ -405,6 +422,45 @@ window.__galagaHarness__={
  resetInputState(reason='harness'){
   if(typeof resetActiveInputState==='function')resetActiveInputState(reason);
   return this.inputState();
+ },
+ setupPlayerTwoModeTest(cfg={}){
+  window.__platinumHarnessPlayerTwoAuth=!!cfg.signedIn;
+  window.__auroraHarnessPlayerTwoAuth=window.__platinumHarnessPlayerTwoAuth;
+  const initials=sanitizeInitials(cfg.initials||'SGW').padEnd(3,'-').slice(0,3);
+  LEADERBOARD.configured=1;
+  LEADERBOARD.user=cfg.signedIn===false?null:{
+   id:String(cfg.userId||'pilot-player-two'),
+   email:String(cfg.email||'pilot@example.com'),
+   email_confirmed_at:new Date().toISOString(),
+   user_metadata:{display_initials:initials}
+  };
+  LEADERBOARD.profile=LEADERBOARD.user?{user_id:LEADERBOARD.user.id,display_initials:initials}:null;
+  LEADERBOARD.accountNotice='';
+  if(typeof syncAccountUi==='function')syncAccountUi();
+  return this.playerTwoState();
+ },
+ setPlayerTwoMode(cfg={}){
+  if(cfg.persona!==undefined&&typeof setPlayerTwoPersona==='function')setPlayerTwoPersona(cfg.persona,{silent:1,source:'harness'});
+  if(cfg.enabled!==undefined&&typeof setPlayerTwoSelection==='function')setPlayerTwoSelection(!!cfg.enabled,{silent:!!cfg.silent,source:'harness'});
+  return this.playerTwoState();
+ },
+ playerTwoState(){
+  return{
+   selection:typeof playerTwoSelectionState==='function'?playerTwoSelectionState():null,
+   run:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,
+   hudRight:right?.textContent||'',
+   accountNotice:LEADERBOARD.accountNotice||''
+  };
+ },
+ startWatchMode(cfg={}){
+  if(typeof setSeed==='function'&&cfg.seed!==undefined)setSeed(cfg.seed);
+  if(typeof setWatchPersona==='function')setWatchPersona(cfg.persona||selectedWatchPersona?.()||'advanced',{silent:1,source:'harness'});
+  if(typeof armWatchMode==='function')armWatchMode(cfg.persona||selectedWatchPersona?.()||'advanced',{source:'harness'});
+  return this.state();
+ },
+ startPlayerTwoTurn(){
+  if(typeof startPlayerTwoTurnFromGameOver==='function')startPlayerTwoTurnFromGameOver('harness');
+  return this.state();
  },
  setupRemoteScoreSubmitTest(cfg={}){
   if(cfg.forceAurora!==false&&typeof installGamePack==='function')installGamePack('aurora-galactica',{persist:false});
@@ -557,6 +613,9 @@ window.__galagaHarness__={
    stage:+(gameOverState?.stage||0),
    shownStage:+(gameOverState?.shownStage||0),
    challenge:!!gameOverState?.challenge,
+   watchMode:!!gameOverState?.watchMode,
+   playerTwoMode:!!gameOverState?.playerTwoMode,
+   playerTwo:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,
    rank:+(gameOverState?.rank||0),
    editing:!!gameOverState?.editing,
    topScoreSigninPrompt:!!gameOverState?.topScoreSigninPrompt,
@@ -596,6 +655,10 @@ window.__galagaHarness__={
    simT:+(+S.simT||0).toFixed(3),
    stageClock:+(+S.stageClock||0).toFixed(3),
    persona:(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase()||null,
+   harnessPersona:S.harnessPersona||null,
+   watchMode:!!S.watchMode,
+   watchPersona:S.watchPersona||'',
+   playerTwo:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,
    atmosphere:atmosphere?{
     id:atmosphere.id||'',
     group:atmosphere.group||'',
@@ -758,9 +821,35 @@ window.__galagaHarness__={
   const capturePrerollMs=Math.max(0,Math.min(500,Number.isFinite(+captureOpts.capturePrerollMs)?Math.round(+captureOpts.capturePrerollMs):80));
   const minCaptureBytes=Math.max(512,Number.isFinite(+captureOpts.minCaptureBytes)?+captureOpts.minCaptureBytes:0);
   const audioDebug=window.__platinumAudioDebug||window.__auroraAudioDebug||null;
+  const cloneAudioSpec=spec=>{
+   if(!spec)return null;
+   try{return JSON.parse(JSON.stringify(spec));}catch{return null;}
+  };
+  let captureSpec=null;
+  const captureDiagnostics=()=>{
+   let tracks=[];
+   try{
+    tracks=Array.from(sfx.tap?.stream?.getAudioTracks?.()||[]).map(track=>({
+     kind:String(track.kind||''),
+     enabled:!!track.enabled,
+     muted:!!track.muted,
+     readyState:String(track.readyState||'')
+    }));
+   }catch{}
+   return {
+    audioContextState:String(sfx.a?.state||''),
+    audioMuted:!!audioMuted,
+    gameSoundVolume:Number.isFinite(+gameSoundVolume)?+gameSoundVolume:null,
+    busGain:Number.isFinite(+sfx.bus?.gain?.value)?+sfx.bus.gain.value:null,
+    tapTrackCount:tracks.length,
+    tapTracks:tracks,
+    referenceDebug:audioDebug?.reference||null
+   };
+  };
   try{
    if(typeof sfx.cueDef==='function'&&typeof sfx.loadReferenceBuffer==='function'){
     const warmCue=sfx.cueDef(String(name),captureOpts);
+    captureSpec=cloneAudioSpec(warmCue);
     const clips=[];
     if(warmCue&&warmCue.referenceClip)clips.push(warmCue.referenceClip);
     if(Array.isArray(warmCue?.layers))for(const layer of warmCue.layers)if(layer?.referenceClip)clips.push(layer.referenceClip);
@@ -787,7 +876,9 @@ window.__galagaHarness__={
        captureMs,
        capturePrerollMs,
        requestedCue:String(name),
-       audioCue:playedCue||audioDebug?.lastCue||null
+       audioCue:playedCue||audioDebug?.lastCue||null,
+       audioSpec:captureSpec,
+       captureDiagnostics:captureDiagnostics()
       });
       return;
      }
@@ -803,10 +894,12 @@ window.__galagaHarness__={
       capturePrerollMs,
       base64:btoa(binary),
       requestedCue:String(name),
-      audioCue:playedCue||audioDebug?.lastCue||null
+      audioCue:playedCue||audioDebug?.lastCue||null,
+      audioSpec:captureSpec,
+      captureDiagnostics:captureDiagnostics()
      });
     }catch(err){
-     resolve({ ok:false, error:err?.message||String(err) });
+     resolve({ ok:false, error:err?.message||String(err), audioSpec:captureSpec, captureDiagnostics:captureDiagnostics() });
     }
    };
   });
@@ -818,7 +911,9 @@ window.__galagaHarness__={
     error:err?.message||String(err),
     requestedCue:String(name),
     capturePrerollMs,
-    audioCue:playedCue||audioDebug?.lastCue||null
+    audioCue:playedCue||audioDebug?.lastCue||null,
+    audioSpec:captureSpec,
+    captureDiagnostics:captureDiagnostics()
    };
   }
   if(capturePrerollMs>0)await new Promise(resolve=>setTimeout(resolve,capturePrerollMs));
@@ -826,6 +921,7 @@ window.__galagaHarness__={
   playedCue=audioDebug?.lastCue||null;
   await new Promise(resolve=>setTimeout(resolve,captureMs));
   try{ if(recorder.state==='recording'&&typeof recorder.requestData==='function')recorder.requestData(); }catch{}
+  await new Promise(resolve=>setTimeout(resolve,80));
   if(recorder.state!=='inactive')recorder.stop();
   return done;
  },

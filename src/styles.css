@@ -71,6 +71,9 @@ mask:
 #center{grid-column:2}
 #hud .hudLabel{color:#ff3a36}
 #hud .hudValue{color:#f4f7ff}
+#hud .playerTwoHudReady .hudLabel{color:#ffd86d}
+#hud .playerTwoHudActive .hudLabel{color:#7ef2ff}
+#hud .playerTwoHudActive .hudValue{color:#ffd86d}
 #msg{position:fixed;left:50%;top:84%;transform:translate(-50%,-50%);pointer-events:none;text-align:center;white-space:pre-line;text-shadow:0 0 8px #000;font-size:clamp(20px,1.8vw,30px)}
 #msg.boardMessage{top:50%;width:min(82vw,620px);font-size:clamp(22px,2vw,34px);line-height:1.06}
 #msg .boardTitle{display:block;color:#ff3a36;font-size:1.18em;letter-spacing:.12em;text-transform:uppercase}
@@ -88,6 +91,28 @@ mask:
 #msg .startMeta{display:block;color:rgba(231,240,255,.82);font-size:.62em;letter-spacing:.08em;line-height:1.42}
 #msg .startPickerHint{color:#ffe39a}
 #msg .startNotice{display:block;margin:.42em auto 0;max-width:34em;color:rgba(223,247,255,.76);font-size:.56em;letter-spacing:.08em;line-height:1.42}
+#msg .playerModeSelect{pointer-events:auto;display:grid;grid-template-columns:repeat(2,minmax(9.8em,1fr));gap:.18em .42em;justify-content:center;align-items:stretch;width:min(100%,27em);margin:.08em auto .42em;color:#f4f7ff;font-size:.56em;letter-spacing:.08em;line-height:1.12;text-transform:uppercase}
+#msg .playerModeOption,#msg .playerModePersona,#msg .playerModeWatch{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.26em;align-items:center;border:1px solid rgba(126,242,255,.34);background:rgba(3,12,24,.72);box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),0 0 10px rgba(0,0,0,.24);padding:.34em .44em;text-align:left;cursor:pointer}
+#msg .playerModeKey{display:grid;gap:.02em;min-width:3.2em;color:#7ef2ff;text-align:center}
+#msg .playerModeKey b{color:inherit;font-size:.82em;letter-spacing:.1em}
+#msg .playerModeKey small{color:rgba(231,240,255,.7);font-size:.52em;letter-spacing:.1em}
+#msg .playerModeText{display:grid;gap:.08em;min-width:0}
+#msg .playerModeText strong{color:#f4f7ff;font-size:.9em;letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#msg .playerModeText em{color:rgba(231,240,255,.78);font-style:normal;font-size:.64em;letter-spacing:.08em;line-height:1.16;white-space:normal;overflow:visible;text-overflow:clip}
+#msg .playerModeStepper{grid-template-columns:1.15em minmax(0,1fr) 1.15em;align-items:center}
+#msg .playerModeStepper strong{font-size:.74em;letter-spacing:.04em;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;line-height:1.05}
+#msg .playerModeStepper em{grid-column:1/4}
+#msg .playerModeArrow{display:inline-grid;place-items:center;min-width:1.05em;min-height:1.05em;border:1px solid rgba(126,242,255,.32);color:#ffd86d;background:rgba(255,216,109,.08);font-size:.88em;line-height:1}
+#msg .playerModePersona .playerModeText strong,#msg .playerModeWatch .playerModeText strong{text-align:center}
+#msg .playerModeOption.isSelected{border-color:#ffd86d;color:#ffd86d;text-shadow:0 0 8px rgba(255,216,109,.32)}
+#msg .playerModeOption.isSelected .playerModeKey,#msg .playerModeOption.isSelected .playerModeText strong{color:#ffd86d}
+#msg .playerModeOption.isLocked,#msg .playerModePersona.isLocked{color:rgba(231,240,255,.42);border-color:rgba(231,240,255,.16);cursor:not-allowed}
+#msg .playerModeOption.isLocked .playerModeKey,#msg .playerModeOption.isLocked .playerModeText strong,#msg .playerModePersona.isLocked .playerModeKey,#msg .playerModePersona.isLocked .playerModeText strong{color:rgba(231,240,255,.46)}
+#msg .playerModePersona.isLocked .playerModeArrow{border-color:rgba(231,240,255,.22);color:rgba(255,216,109,.5);background:rgba(255,255,255,.03)}
+#msg .playerModePersona{color:#7ef2ff}
+#msg .playerModePersona.isActive{border-color:rgba(255,216,109,.62);box-shadow:inset 0 0 0 1px rgba(255,216,109,.16),0 0 12px rgba(255,216,109,.12)}
+#msg .playerModeWatch{color:#ffd86d}
+#msg .playerModeHint{grid-column:1/3;color:rgba(231,240,255,.72);font-size:.72em;text-align:center;line-height:1.28}
 #msg .startQuoteWrap{display:grid;gap:.12em;justify-items:center;margin:.08em auto .46em;max-width:28em}
 #msg .startQuoteKicker{display:block;color:#7ef2ff;font-size:.5em;letter-spacing:.24em;text-transform:uppercase}
 #msg .startQuoteText{display:block;color:#f4f7ff;font-size:.58em;line-height:1.38;letter-spacing:.04em}
@@ -97,6 +122,8 @@ mask:
 #msg .gameOverSub{display:block;color:#f4f7ff;font-size:.82em;letter-spacing:.05em;margin-bottom:.5em}
 #msg .gameOverMeta{display:block;color:#ffd86d;font-size:.66em;letter-spacing:.08em;margin:-.08em 0 .42em}
 #msg .gameOverAuthPrompt{display:block;color:#7ef2ff;font-size:.54em;letter-spacing:.06em;line-height:1.28;margin:-.12em auto .42em;max-width:28em}
+#msg .gameOverAuthBtn{display:inline-flex;align-items:center;justify-content:center;margin:0 .2em;padding:.1em .42em;border:1px solid rgba(255,216,109,.62);background:rgba(61,46,9,.72);color:#ffe39a;font:700 .92em/1 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+#msg .gameOverAuthBtn:hover,#msg .gameOverAuthBtn:focus-visible{outline:none;border-color:#ffe39a;background:rgba(92,70,16,.88);box-shadow:0 0 10px rgba(255,216,109,.18)}
 #msg .scoreTable{display:grid;grid-template-columns:2.4em 4em minmax(6.6em,auto) 2.4em;gap:.08em .8em;justify-content:center;align-items:baseline;font-size:.75em;line-height:1.25;text-align:right;width:min(100%,24em);margin:0 auto}
 #msg .scoreHead{color:#ff6f66}
 #msg .scoreRank{color:#f4f7ff;text-align:left}
@@ -131,6 +158,19 @@ mask:
 #msg.gameOverScreen .gameOverAuthPrompt{font-size:.48em;margin-bottom:.32em}
 #msg.gameOverScreen .scoreTable{gap:.16em 1.05em;font-size:.84em;line-height:1.14}
 #msg.gameOverScreen .resultsTable{gap:.2em 1.7em;font-size:.96em;line-height:1.16}
+#msg.gameOverScreen .playerTwoResult{display:grid;gap:.16em;margin:.28em auto .04em;color:#7ef2ff;font-size:.58em;letter-spacing:.08em;line-height:1.18;width:min(100%,25em)}
+#msg.gameOverScreen .playerTwoKicker{display:block;color:#ffd86d;font-size:.9em;letter-spacing:.12em;text-transform:uppercase}
+#msg.gameOverScreen .playerTwoVersus{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.34em;align-items:stretch}
+#msg.gameOverScreen .playerTwoLane{display:grid;gap:.08em;align-content:center;min-height:3.4em;padding:.34em .46em;border:1px solid rgba(126,242,255,.32);background:rgba(4,12,25,.7);box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
+#msg.gameOverScreen .playerTwoLane b{color:#ff6f66;font-size:.82em;font-weight:700;letter-spacing:.1em}
+#msg.gameOverScreen .playerTwoLane strong{color:#f4f7ff;font-size:1.06em;letter-spacing:.1em}
+#msg.gameOverScreen .playerTwoLane em{color:#a9d8ff;font-style:normal;font-size:.74em;letter-spacing:.1em}
+#msg.gameOverScreen .playerTwoLane.is2up b{color:#7ef2ff}
+#msg.gameOverScreen .playerTwoLane.isLeader{border-color:#ffd86d;box-shadow:inset 0 0 0 1px rgba(255,216,109,.22),0 0 12px rgba(255,216,109,.16)}
+#msg.gameOverScreen .playerTwoLane.isLeader strong{color:#ffd86d}
+#msg.gameOverScreen .playerTwoPrompt{display:block;color:#ffd86d;font-size:1em;letter-spacing:.12em;animation:blinkPrompt .8s steps(1,end) infinite}
+#msg.gameOverScreen .playerTwoRule{display:block;color:rgba(244,247,255,.88);font-size:.78em;letter-spacing:.08em}
+#msg.gameOverScreen .playerTwoResultQueued{gap:.08em}
 #msg.gameOverScreen .gameOverEntry{font-size:.78em;margin:.3em auto .26em}
 #msg.gameOverScreen .entrySlot{min-width:1.14em}
 #msg.gameOverScreen .gameOverFoot{font-size:.72em;margin-top:.4em;max-width:24em}
@@ -173,6 +213,7 @@ mask:
 #conformanceToolsPanel.disabled #conformanceRollupScore,#conformanceToolsPanel.disabled #conformanceRollupBody{color:rgba(220,236,255,.52)}
 #graphicsPanel h4{color:#ffe39a}
 #audioMixPanel h4{color:#9eefff}
+#commentatorPanel h4{color:#ffd86d}
 #testPanel h4{color:#d8ffe4}
 .settingsFieldGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}
 .settingsField{display:flex;flex-direction:column;gap:4px;min-width:0}
@@ -180,6 +221,7 @@ mask:
 #graphicsPanel label,#testPanel label,#audioMixPanel label{display:block;font-size:12px}
 #graphicsPanel label{color:#ffe6ae}
 #audioMixPanel label{color:#bff6ff}
+#commentatorPanel label{color:#ffe39a}
 #testPanel label{color:#b7efd0}
 #graphicsPanel select,#testPanel input{width:100%;box-sizing:border-box;padding:8px 9px;font:13px/1.2 "Courier New",Consolas,monospace}
 #graphicsPanel select{border:1px solid rgba(255,216,109,.3);background:#111220;color:#fff5d8}
@@ -189,6 +231,10 @@ mask:
 .settingsRangeHeader{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .settingsRangeValue{font:700 12px/1 "Courier New",Consolas,monospace;color:#ffe39a}
 .settingsRangeRow input[type="range"]{width:100%;accent-color:#7ef2ff;cursor:pointer}
+.settingsToggleRow{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 8px;align-items:center;padding:8px 10px;border:1px solid rgba(255,216,109,.18);background:rgba(28,21,5,.42);cursor:pointer}
+.settingsToggleRow input{grid-row:1/3;accent-color:#ffd86d;cursor:pointer}
+.settingsToggleLabel{font-size:12px;line-height:1.2;color:#fff0b5}
+.settingsToggleHint{font-size:11px;line-height:1.25;color:#d7c38b}
 #testStage,#testShips{max-width:240px}
 #rootModeRow{padding:8px 10px;border:1px solid rgba(145,255,179,.16);background:rgba(7,18,10,.48)}
 #rootModeHint,#rootModeStatus{font-size:11px;line-height:1.25}
@@ -341,9 +387,23 @@ mask:
 #accountDockBtn .dockPilotIcon{font-size:30px;filter:grayscale(1);opacity:.55;transform:none}
 #accountDockBtn[data-signed-in="true"]{border-color:rgba(255,216,109,.72);background:linear-gradient(180deg,rgba(19,43,84,.94),rgba(11,28,55,.92));color:#ffe39a}
 #accountDockBtn[data-signed-in="true"] .dockPilotIcon{filter:none;opacity:1}
+#accountDockBtn[data-pilot-mode="watch"],
+#accountDockBtn[data-pilot-mode="player-two-active"],
+#accountDockBtn[data-pilot-mode="player-two-ready"],
+#accountDockBtn[data-pilot-mode="player-two-done"]{border-color:rgba(126,242,255,.72);background:linear-gradient(180deg,rgba(12,48,74,.96),rgba(8,24,43,.94));color:#7ef2ff}
+#accountDockBtn[data-pilot-mode="player-two-active"],
+#accountDockBtn[data-pilot-mode="player-two-ready"]{border-color:rgba(255,216,109,.78);color:#ffe39a}
+#accountDockBtn[data-pilot-mode="watch"] .dockPilotIcon,
+#accountDockBtn[data-pilot-mode="player-two-active"] .dockPilotIcon,
+#accountDockBtn[data-pilot-mode="player-two-ready"] .dockPilotIcon,
+#accountDockBtn[data-pilot-mode="player-two-done"] .dockPilotIcon{filter:none;opacity:1}
 #accountDockLabel{display:block;font:700 10px/1 "Courier New",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase}
 #accountDockStatus{display:block;font:700 12px/1.05 "Courier New",Consolas,monospace;color:rgba(223,247,255,.9);text-align:center;letter-spacing:.08em;text-transform:uppercase}
 #accountDockBtn[data-signed-in="true"] #accountDockStatus{color:#fff2bf}
+#accountDockBtn[data-pilot-mode="watch"] #accountDockStatus,
+#accountDockBtn[data-pilot-mode="player-two-active"] #accountDockStatus,
+#accountDockBtn[data-pilot-mode="player-two-ready"] #accountDockStatus,
+#accountDockBtn[data-pilot-mode="player-two-done"] #accountDockStatus{color:#fff2bf}
 #muteToggleBtn[data-muted="true"]{color:#ffe39a}
 #accountPanel{display:none;flex-direction:column;gap:10px;width:min(100%,620px);padding:14px 16px;border:1px solid rgba(136,245,255,.24);background:linear-gradient(180deg,rgba(7,12,24,.97),rgba(4,10,20,.95));backdrop-filter:blur(4px);box-shadow:0 16px 36px rgba(0,0,0,.34);color:#eaf6ff;font:400 12px/1.32 "Courier New",Consolas,monospace}
 #accountPanel.visible{display:flex}
@@ -352,6 +412,14 @@ mask:
 #accountPanelPortraitWrap{display:flex;align-items:center;justify-content:center;width:84px;height:84px;border:1px solid rgba(255,216,109,.32);background:linear-gradient(180deg,rgba(16,26,49,.96),rgba(8,16,30,.94));box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
 #accountPanelPortrait{font-size:54px;line-height:1;filter:grayscale(1);opacity:.68}
 #accountPanel[data-signed-in="true"] #accountPanelPortrait{filter:none;opacity:1}
+#accountPanel[data-pilot-mode="watch"] #accountPanelPortrait,
+#accountPanel[data-pilot-mode="player-two-active"] #accountPanelPortrait,
+#accountPanel[data-pilot-mode="player-two-ready"] #accountPanelPortrait,
+#accountPanel[data-pilot-mode="player-two-done"] #accountPanelPortrait{filter:none;opacity:1}
+#accountPanel[data-pilot-mode="watch"] #accountPanelTitle,
+#accountPanel[data-pilot-mode="player-two-active"] #accountPanelTitle,
+#accountPanel[data-pilot-mode="player-two-ready"] #accountPanelTitle,
+#accountPanel[data-pilot-mode="player-two-done"] #accountPanelTitle{color:#ffe39a}
 #accountPanelHeroText{display:flex;flex-direction:column;gap:3px;min-width:0}
 #accountPanelTitle,#accountPanelSub{display:block}
 #accountPanelTitle{font:700 18px/1 "Courier New",Consolas,monospace;letter-spacing:.14em;color:#7ef2ff}
@@ -498,8 +566,12 @@ mask:
 #leaderboardPanelTable .scoreCell.meta{display:flex;flex-direction:column;gap:2px;color:#dff7ff}
 #statusPanels.framedOverlay #leaderboardPanelTable .scoreCell.meta{gap:1px}
 #leaderboardPanelTable .scoreCell.meta .scoreBuild{color:#8defff}
+#leaderboardPanelTable .scoreCell.meta .scoreMetaFooter{display:flex;align-items:center;gap:6px;min-width:0}
 #leaderboardPanelTable .scoreCell.meta .scoreDate{color:rgba(223,247,255,.78);font-size:.88em}
 #statusPanels.framedOverlay #leaderboardPanelTable .scoreCell.meta .scoreDate{font-size:.82em}
+#leaderboardPanelTable .leaderboardReplayBtn{border:1px solid rgba(255,217,128,.36);background:rgba(61,46,9,.72);color:#ffe39a;font:700 9px/1 "Courier New",Consolas,monospace;padding:3px 5px;cursor:pointer;text-transform:uppercase;letter-spacing:.04em}
+#leaderboardPanelTable .leaderboardReplayBtn:hover,#leaderboardPanelTable .leaderboardReplayBtn:focus-visible{outline:none;border-color:#ffe39a;background:rgba(92,70,16,.82)}
+#statusPanels.framedOverlay #leaderboardPanelTable .leaderboardReplayBtn{font-size:8px;padding:2px 4px}
 #leaderboardPanelTable .scoreCell.score{text-align:right}
 #leaderboardPanelTable .scoreCell.stage{text-align:right;color:#8defff}
 #leaderboardPanelTable .verifiedMark{color:#ffd86d;margin-left:5px}
@@ -614,6 +686,10 @@ box-shadow:inset 0 0 0 1px rgba(255,229,122,.05),inset 0 12px 24px rgba(255,255,
  #hud{grid-template-columns:1fr;gap:2px;padding:6px 8px 0}
  #left,#center,#right{text-align:left}
  #right{display:none}
+ #msg .playerModeSelect{grid-template-columns:1fr;width:min(100%,19em);font-size:.52em}
+ #msg .playerModePersona,#msg .playerModeWatch,#msg .playerModeHint{grid-column:1}
+ #msg.gameOverScreen .playerTwoVersus{grid-template-columns:1fr}
+ #msg.gameOverScreen .playerTwoLane{min-height:2.8em}
  #helpPanel{height:min(84vh,760px)}
  #platformSplashPanel,#gamePreviewPanel{width:min(calc(100% - 24px),760px)!important}
  #platformSplashBody,#gamePreviewBody{grid-template-columns:1fr}

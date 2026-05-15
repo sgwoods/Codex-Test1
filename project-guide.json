@@ -114,6 +114,29 @@
       ]
     },
     {
+      "id": "supabase-data-api-contract",
+      "title": "Supabase Data API Contract",
+      "summary": "How Platinum keeps auth, profile, and leaderboard database access reproducible after the Supabase public-schema grant change.",
+      "cards": [
+        {
+          "title": "Current Runtime Surface",
+          "body": "The browser Data API currently uses `public.scores` for shared and validated leaderboards plus score submission, and `public.profiles` for signed-in pilot initials."
+        },
+        {
+          "title": "Owned Access Artifact",
+          "body": "`supabase/data-api-access-contract.sql` records explicit grants, RLS posture, and policy names for the current tables. `SUPABASE_DATA_API_ACCESS.md` explains the product meaning and release risk."
+        },
+        {
+          "title": "Release Gate",
+          "body": "`npm run harness:check:supabase-data-api-contract` compares runtime `supabase.from(...)` table usage against the SQL contract. Publish preflight runs the same check."
+        },
+        {
+          "title": "Future Feature Rule",
+          "body": "Any new Supabase table for YouTube high-score posting, replay-video metadata, richer pilot records, or later games must land with explicit grants and policies before runtime feature work can publish."
+        }
+      ]
+    },
+    {
       "id": "docs-index",
       "title": "Documentation Index",
       "summary": "The best entry points depending on the question you are trying to answer.",
@@ -182,6 +205,16 @@
           "label": "Testing And Release Gates",
           "href": "https://github.com/sgwoods/Codex-Test1/blob/main/TESTING_AND_RELEASE_GATES.md",
           "detail": "Automation-first release gate policy and lane expectations."
+        },
+        {
+          "label": "Review Learning Ledger",
+          "href": "project-guide.html#review-learning-ledger-doc",
+          "detail": "Architecture and code-review issue notes, proposed changes, accepted changes, and learning patterns rendered from the maintained ledger."
+        },
+        {
+          "label": "Code Review Model",
+          "href": "project-guide.html#code-review-model-doc",
+          "detail": "Local-to-hosted-dev review standard, severity model, packet/gate process, and ledger expectations."
         },
         {
           "label": "Architecture",
@@ -333,10 +366,34 @@
       "file": "TESTING_AND_RELEASE_GATES.md"
     },
     {
+      "id": "review-learning-ledger-doc",
+      "title": "Review Learning Ledger",
+      "summary": "Durable review-learning table for architecture and code review findings, proposed changes, accepted changes, and repeated issue patterns.",
+      "file": "REVIEW_LEARNING_LEDGER.md"
+    },
+    {
+      "id": "code-review-model-doc",
+      "title": "Code Review Model",
+      "summary": "Standing local-to-hosted-dev code-review standard, review severity model, automatic packet/gate process, and ledger workflow.",
+      "file": "CODE_REVIEW_MODEL.md"
+    },
+    {
+      "id": "architect-review-response-doc",
+      "title": "Architecture Baseline Review Response",
+      "summary": "Baseline architecture-review response that tracks platform separation, magic constants, harness fragility, enemy specs, and parameterization follow-through.",
+      "file": "ARCHITECT_REVIEW_RESPONSE.md"
+    },
+    {
       "id": "external-services-doc",
       "title": "External Services Source",
       "summary": "Runtime dependencies, hosting, feedback transport, and local-only systems.",
       "file": "EXTERNAL_SERVICES.md"
+    },
+    {
+      "id": "supabase-access-doc",
+      "title": "Supabase Data API Access Source",
+      "summary": "Explicit Data API grants, RLS posture, runtime table usage, and release gate for Supabase-backed profiles and leaderboards.",
+      "file": "SUPABASE_DATA_API_ACCESS.md"
     },
     {
       "id": "release-policy-doc",

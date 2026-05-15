@@ -107,22 +107,26 @@ Current result:
 
 | Metric | Value |
 |---|---:|
-| Quality score audio category | `7.3/10` |
-| Overall quality score | `9.2/10` |
+| Quality score audio category | `6.9/10` |
+| Overall quality score | `9.1/10` |
 | Semantic event score | `9.78/10` |
-| Acoustic event score | `6.31/10` |
-| Average worst segment risk | `3.69/10` |
+| Acoustic event score | `6.30/10` |
+| Average worst segment risk | `3.70/10` |
 | Cue-contract readiness | `9.09/10` |
 | Contracted priority cue families | `8` cues |
-| Highest current audio gap | `playerHit` tail |
-| Candidate loop coverage | `8/8` contracted cues |
+| Highest current audio gap | `captureBeam` tail |
+| Focused candidate-loop coverage | `enemyShot`, `challengePerfect`, and the contracted cue set |
 
 This means the process and runtime audio both moved forward, while audio still
-remains Aurora's weakest quality category. The latest win is a calibrated,
-layered `playerHit` loss phrase: the full-theme cue gap improved materially,
-semantic scoring stayed high, and overall quality returned to `9.2/10`.
-Remaining work is now narrower: `playerHit` tail/body refinement under the new
-calibration policy, followed by a sharper `stagePulse` pressure-bed strategy.
+remains Aurora's weakest quality category. The latest runtime win is an
+`enemyShot` threat-fire cue promoted from a measured reference subwindow:
+fresh full-theme validation reduced average worst segment risk from `4.32/10`
+to `3.70/10`, kept cue alignment at `9/9`, and moved the highest residual
+segment gap away from enemy fire to `captureBeam` tail. The prior
+`challengePerfect` pass produced focused keepers, but both runtime candidates
+lowered the broader audio score, so no perfect-clear runtime cue was promoted.
+This is the intended guardrail: focused similarity is evidence, not release
+authority by itself.
 
 May 11 capture-stability and ship-loss trial pass:
 
@@ -345,19 +349,21 @@ declared cue obligations. A theme can be different without becoming ambiguous.
 
 The next high-value audio pass should split into two measured tracks:
 
-- `playerHit` tail/body composite modeling: create a tail-specific candidate
-  family and a browser-capture calibration baseline so reference-backed cues
-  are not penalized for capture/encoding differences rather than real game
-  sound differences
+- `captureBeam` tail modeling: build a focused candidate family for the
+  residual tail gap and explicitly measure whether the beam stays threatening
+  without masking shot/hit cues
+- `challengePerfect` runtime strategy: the focused loop found good acoustic
+  candidates, but full-theme promotion failed, so the next attempt should model
+  mix position, tail budget, and ceremony duration before changing runtime
 - `stagePulse` pressure-bed modeling: a stronger low-brightness, low-variance
   generator that explicitly targets repeat stability, zero-crossing calm,
   cadence pressure, and action-cue masking before promotion precheck
 - `challengeTransition` follow-up listening pass: the measured `1.6s` phrase is
   now runtime-safe, so the next check should be human/gameplay review rather
   than further widening
-- `captureBeam` event clarity: candidates that add mid-band identity, clearer
-  rise/hold/tail segmentation, and better player meaning during capture/rescue
-  moments
+- `playerHit` tail/body composite monitoring: keep the calibrated layered cue as
+  a guardrail, and refine only if manual listening or future capture baselines
+  show a player-facing weakness
 - Both tracks must preserve masking guards against `playerShot`, `enemyHit`,
   `enemyBoom`, `bossHit`, and `bossBoom`
 - Full-theme promotion precheck remains a hard gate before runtime changes

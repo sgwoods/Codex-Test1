@@ -73,6 +73,19 @@
           ],
           "currentness": "Game cards come from dashboard game profiles; fuller alien/audio/stage/persona tables come from the application and catalog artifacts.",
           "riskIfStale": "Game-specific conformance can collapse into a generic platform summary."
+        },
+        {
+          "id": "review-learning",
+          "label": "Architecture and code review learning",
+          "sourceArtifacts": [
+            "reference-artifacts/analyses/review-learning/latest.json",
+            "reference-artifacts/analyses/code-review/latest.json",
+            "REVIEW_LEARNING_LEDGER.md",
+            "CODE_REVIEW_MODEL.md",
+            "ARCHITECT_REVIEW_RESPONSE.md"
+          ],
+          "currentness": "Summary cards, issue-note rows, and learning patterns are generated from the review-learning ledger artifact.",
+          "riskIfStale": "Architecture and code-review lessons can become hidden repo artifacts instead of visible release-learning evidence."
         }
       ]
     },
@@ -92,9 +105,12 @@
             "PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md",
             "PLAN.md",
             "PRODUCT_ROADMAP.md",
-            "RELEASE_READINESS_REVIEW.md"
+            "RELEASE_READINESS_REVIEW.md",
+            "EXTERNAL_SERVICES.md",
+            "SUPABASE_DATA_API_ACCESS.md",
+            "supabase/data-api-access-contract.sql"
           ],
-          "currentness": "Guide cards and source-doc sections are generated from project-guide.json and listed source Markdown files.",
+          "currentness": "Guide cards and source-doc sections are generated from project-guide.json and listed source Markdown files, including the Supabase Data API access contract.",
           "riskIfStale": "The hosted guide can stop matching the maintained repo documentation."
         },
         {

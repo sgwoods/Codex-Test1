@@ -1,5 +1,43 @@
 // Shared leaderboard and pilot account UI/state helpers.
 
+function findReplayForScoreRow(row,opts={}){
+ const runs=typeof replayCatalogRows==='function'?replayCatalogRows():[];
+ if(!row||!runs.length)return null;
+ const rowGameKey=typeof scoreRowGameKey==='function'?scoreRowGameKey(row):currentScoreStorageGameKey();
+ const matchesGame=run=>typeof scoreRowMatchesGame!=='function'||scoreRowMatchesGame(run,rowGameKey);
+ if(row?.replayId){
+  const directRun=runs.find(run=>String(run.id||'')===String(row.replayId||''));
+  if(directRun&&matchesGame(directRun))return directRun;
+ }
+ const scopedRuns=opts.activePilotOnly&&typeof replayMatchesActivePilot==='function'
+  ? runs.filter(run=>replayMatchesActivePilot(run)&&matchesGame(run))
+  : runs.filter(matchesGame);
+ const runPool=scopedRuns.length?scopedRuns:runs.filter(matchesGame);
+ const rowScore=+row.score||0;
+ const rowStage=+row.stage||0;
+ const rowStamp=Date.parse((typeof resolveRowTimestamp==='function'?resolveRowTimestamp(row):row?.at)||'');
+ const byScoreStage=runPool.filter(run=>(+run.score||0)===rowScore&&(+run.stage||0)===rowStage);
+ if(Number.isFinite(rowStamp)){
+  const exactTimed=byScoreStage.find(run=>{
+   const replayStamp=Date.parse(run.createdAt||'');
+   return Number.isFinite(replayStamp)&&Math.abs(replayStamp-rowStamp)<=120000;
+  });
+  if(exactTimed)return exactTimed;
+ }
+ if(byScoreStage.length)return byScoreStage[0];
+ if(Number.isFinite(rowStamp)){
+  const sameStageTimed=runPool.find(run=>{
+   if((+run.stage||0)!==rowStage)return false;
+   const replayStamp=Date.parse(run.createdAt||'');
+   return Number.isFinite(replayStamp)&&Math.abs(replayStamp-rowStamp)<=120000;
+  });
+  if(sameStageTimed)return sameStageTimed;
+ }
+ const sameStageRuns=runPool.filter(run=>(+run.stage||0)===rowStage);
+ if(sameStageRuns.length===1)return sameStageRuns[0];
+ if(scopedRuns.length===1)return scopedRuns[0];
+ return null;
+}
 function renderPilotFlightStats(rows,signedIn){
  if(!accountFlightStats)return;
  if(!rows.length){
@@ -32,44 +70,10 @@ function renderPilotRecords(rows){
   .map(row=>Object.assign({},row,{resolvedAt:resolveRowTimestamp(row)||row.at||''}))
   .sort((a,b)=>(Date.parse(b.resolvedAt||0)-Date.parse(a.resolvedAt||0))||(+b.score||0)-(+a.score||0)||(+b.stage||0)-(+a.stage||0))
   .slice(0,5);
- const replayForRow=(row)=>{
-  const runs=replayCatalogRows();
-  const rowGameKey=typeof scoreRowGameKey==='function'?scoreRowGameKey(row):currentScoreStorageGameKey();
-  if(row?.replayId){
-   const directRun=runs.find(run=>String(run.id||'')===String(row.replayId||''));
-   if(directRun&&(typeof scoreRowMatchesGame!=='function'||scoreRowMatchesGame(directRun,rowGameKey)))return directRun;
-  }
-  const pilotMatchedRuns=runs.filter(run=>replayMatchesActivePilot(run)&&(typeof scoreRowMatchesGame!=='function'||scoreRowMatchesGame(run,rowGameKey)));
-  const runPool=pilotMatchedRuns.length?pilotMatchedRuns:runs;
-  const rowScore=+row.score||0;
-  const rowStage=+row.stage||0;
-  const rowStamp=Date.parse(resolveRowTimestamp(row)||'');
-  const byScoreStage=runPool.filter(run=>(+run.score||0)===rowScore&&(+run.stage||0)===rowStage);
-  if(Number.isFinite(rowStamp)){
-   const exactTimed=byScoreStage.find(run=>{
-    const replayStamp=Date.parse(run.createdAt||'');
-    return Number.isFinite(replayStamp)&&Math.abs(replayStamp-rowStamp)<=120000;
-   });
-   if(exactTimed)return exactTimed;
-  }
-  if(byScoreStage.length)return byScoreStage[0];
-  if(Number.isFinite(rowStamp)){
-   const sameStageTimed=runPool.find(run=>{
-    if((+run.stage||0)!==rowStage)return false;
-    const replayStamp=Date.parse(run.createdAt||'');
-    return Number.isFinite(replayStamp)&&Math.abs(replayStamp-rowStamp)<=120000;
-   });
-   if(sameStageTimed)return sameStageTimed;
-  }
-  const sameStageRuns=runPool.filter(run=>(+run.stage||0)===rowStage);
-  if(sameStageRuns.length===1)return sameStageRuns[0];
-  if(pilotMatchedRuns.length===1)return pilotMatchedRuns[0];
-  return null;
- };
  accountRecordsTop5.innerHTML=topRows.map((row,index)=>{
   const stage=`STG ${String(+row.stage||0).padStart(2,'0')}`;
   const stamp=formatWhenShort(row.resolvedAt||resolveRowTimestamp(row)||row.at);
-  const replay=replayForRow(row);
+  const replay=findReplayForScoreRow(row,{activePilotOnly:true});
   return `<div class="accountRecordRow${replay?' hasReplay':''}"${replay?` data-replay-id="${replay.id}" tabindex="0" role="button" aria-label="Replay this flight"`:''}><span class="accountRecordRank">#${index+1}</span><div class="accountRecordMain"><span class="accountRecordScore">${formatScore(+row.score||0)}</span><span class="accountRecordMeta">${stage}${row.verified?' · verified':''}</span></div><div class="accountRecordActions">${replay?`<button type="button" class="accountRecordReplayBtn" data-replay-id="${replay.id}" title="Replay this flight">Replay</button>`:''}<span class="accountRecordStamp">${stamp}</span></div></div>`;
  }).join('');
  const bindReplayAction=(node,opts={})=>{
@@ -246,10 +250,12 @@ function renderLeaderboardPanel(){
  for(let i=0;i<10;i++){
   const row=limited[i]||{initials:'---',score:0,stage:0,idx:i+1,verified:0};
   const meta=formatLeaderboardRowMeta(row);
+  const replay=findReplayForScoreRow(row,{activePilotOnly:LEADERBOARD.view==='mine'});
+  const replayHtml=replay?`<button type="button" class="leaderboardReplayBtn" data-replay-id="${escapeLeaderboardHtml(replay.id)}" title="Watch this local replay">Replay</button>`:'';
   body.push(`<span class="scoreCell rank">${String((row.idx||i+1)).padStart(2,'0')}</span>`);
   body.push(`<span class="scoreCell initials">${row.initials}${row.verified?'<span class="verifiedMark">🔒</span>':''}</span>`);
   const fullMeta=`${meta.buildRaw} ${meta.dateLabel}`.trim();
-  body.push(`<span class="scoreCell meta" data-build="${escapeLeaderboardHtml(meta.buildRaw)}" data-date="${escapeLeaderboardHtml(meta.dateLabel)}" title="${escapeLeaderboardHtml(fullMeta)}" aria-label="${escapeLeaderboardHtml(fullMeta)}"><span class="scoreBuild">${meta.build}</span><span class="scoreDate">${meta.dateLabel}</span></span>`);
+  body.push(`<span class="scoreCell meta${replay?' hasReplay':''}" data-build="${escapeLeaderboardHtml(meta.buildRaw)}" data-date="${escapeLeaderboardHtml(meta.dateLabel)}" title="${escapeLeaderboardHtml(fullMeta)}" aria-label="${escapeLeaderboardHtml(fullMeta)}"><span class="scoreBuild">${meta.build}</span><span class="scoreMetaFooter"><span class="scoreDate">${meta.dateLabel}</span>${replayHtml}</span></span>`);
   body.push(`<span class="scoreCell score">${formatScore(row.score||0)}</span>`);
   body.push(`<span class="scoreCell stage">${String(row.stage||0).padStart(2,' ')}</span>`);
  }
@@ -385,8 +391,10 @@ function syncAccountUi(){
  const initials=preferredInitialsFromUser();
  const dockId=pilotDisplayId();
  const hasLockedInitials=!!signedIn;
- if(accountPanelTitle)accountPanelTitle.textContent=recovering?'RESET PASSWORD':'PILOT INFORMATION';
- if(accountPanelSub)accountPanelSub.textContent=recovering?'SAVE A NEW PASSWORD FOR THIS PILOT':'QUICK PILOT REFERENCE';
+ const pilotCard=typeof currentPilotCardState==='function'?currentPilotCardState():null;
+ const pilotMode=pilotCard?.mode||'human-local';
+ if(accountPanelTitle)accountPanelTitle.textContent=recovering?'RESET PASSWORD':(pilotCard?.panelTitle||'PILOT INFORMATION');
+ if(accountPanelSub)accountPanelSub.textContent=recovering?'SAVE A NEW PASSWORD FOR THIS PILOT':(pilotCard?.panelSub||'QUICK PILOT REFERENCE');
  if(accountRecoveryFields)accountRecoveryFields.hidden=!recovering;
  if(accountCredentials)accountCredentials.hidden=signedIn&&!recovering;
  if(accountEmailLabel)accountEmailLabel.hidden=signedIn&&!recovering;
@@ -435,8 +443,9 @@ function syncAccountUi(){
  }
  if(accountSummary){
   if(pending)accountSummary.textContent='Connecting leaderboard...';
-  else if(!configured)accountSummary.textContent='Online leaderboard unavailable. Scores stay local.';
   else if(LEADERBOARD.accountNotice)accountSummary.textContent=LEADERBOARD.accountNotice;
+  else if(!recovering&&pilotCard?.summary)accountSummary.textContent=pilotCard.summary;
+  else if(!configured)accountSummary.textContent='Online leaderboard unavailable. Scores stay local.';
   else if(!remoteAuthEnabled())accountSummary.textContent=nonProductionAccountSummary();
   else if(NON_PRODUCTION_LANE&&!signedIn)accountSummary.textContent=nonProductionAccountSummary();
   else if(recovering)accountSummary.textContent='Recovery accepted. Save a new password to finish signing back in.';
@@ -446,22 +455,25 @@ function syncAccountUi(){
  const rows=rowsForPilotProfile();
  if(accountDockBtn){
   accountDockBtn.dataset.signedIn=signedIn?'true':'false';
+  accountDockBtn.dataset.pilotMode=pilotMode;
   accountDockBtn.classList.toggle('open',!!LEADERBOARD.accountPanelOpen);
-  accountDockBtn.title=signedIn?`${dockId} onboard`:'Pilot Sign In';
+  accountDockBtn.title=pilotCard?.dockTitle||(signedIn?`${dockId} onboard`:'Pilot Sign In');
  }
- if(accountDockLabel)accountDockLabel.textContent=signedIn?'ONBOARD':'SIGN IN';
- if(accountDockStatus)accountDockStatus.textContent=signedIn?dockId:'Pilot offline';
- if(accountPilotCallsign)accountPilotCallsign.textContent=signedIn?`${dockId} IS ONBOARD`:(recovering?'RESET IN PROGRESS':'PILOT OFFLINE');
- if(accountPilotStatus)accountPilotStatus.textContent=recovering?'Recovery link accepted. Save a new password below.':(signedIn?'Pilot identity active. Scores and records are summarized below.':'Sign in for synced records, or keep flying locally.');
- if(accountIdentityEmail)accountIdentityEmail.textContent=`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):(testAccountEnabled()?primaryTestAccountEmail():'--')}`;
- if(accountIdentityUserId)accountIdentityUserId.textContent=`User ID: ${signedIn?(LEADERBOARD.user?.id||'--'):'--'}`;
+ if(accountDockIcon&&pilotCard?.icon)accountDockIcon.textContent=pilotCard.icon;
+ if(accountPanelPortrait&&pilotCard?.icon)accountPanelPortrait.textContent=pilotCard.icon;
+ if(accountDockLabel)accountDockLabel.textContent=pilotCard?.dockLabel||(signedIn?'ONBOARD':'SIGN IN');
+ if(accountDockStatus)accountDockStatus.textContent=pilotCard?.dockStatus||(signedIn?dockId:'Pilot offline');
+ if(accountPilotCallsign)accountPilotCallsign.textContent=recovering?'RESET IN PROGRESS':(pilotCard?.callsign||(signedIn?`${dockId} IS ONBOARD`:'PILOT OFFLINE'));
+ if(accountPilotStatus)accountPilotStatus.textContent=recovering?'Recovery link accepted. Save a new password below.':(pilotCard?.status||(signedIn?'Pilot identity active. Scores and records are summarized below.':'Sign in for synced records, or keep flying locally.'));
+ if(accountIdentityEmail)accountIdentityEmail.textContent=pilotCard?.email||`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):(testAccountEnabled()?primaryTestAccountEmail():'--')}`;
+ if(accountIdentityUserId)accountIdentityUserId.textContent=pilotCard?.userId||`User ID: ${signedIn?(LEADERBOARD.user?.id||'--'):'--'}`;
  if(accountPanel){
   accountPanel.dataset.signedIn=signedIn?'true':'false';
+  accountPanel.dataset.pilotMode=pilotMode;
  }
  renderPilotFlightStats(rows,signedIn);
  renderPilotRecords(rows);
- const hudInitials=signedIn?dockId:'---';
- window.__platinumPilotHudHtml=`<span class="hudLabel">PILOT</span> <span class="hudValue">${hudInitials}</span>`;
+ window.__platinumPilotHudHtml=pilotCard?.hudHtml||`<span class="hudLabel">PILOT</span> <span class="hudValue">${signedIn?dockId:'---'}</span>`;
  window.__auroraPilotHudHtml=window.__platinumPilotHudHtml;
  if(resetTestPilotScoresBtn){
   const show=testAccountEnabled();

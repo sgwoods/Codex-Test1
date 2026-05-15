@@ -131,6 +131,8 @@ Platinum helps by providing:
   before serious candidates
 - platform-owned services for score transport, replay surfaces, feedback,
   docs, and future evidence viewing
+- explicit external-service access contracts, starting with the Supabase Data
+  API grants/RLS contract for profile and leaderboard tables
 - common boundaries so each game can own its own mechanics and conformance
   truth
 

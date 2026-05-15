@@ -15,10 +15,23 @@ Aurora Galactica, what they are used for, and what is local-only instead.
   - shared leaderboard data
   - validated score views
   - player-specific score views such as `mine`
+- Data API tables:
+  - `public.scores`
+  - `public.profiles`
+- Data API access contract:
+  - `SUPABASE_DATA_API_ACCESS.md`
+  - `supabase/data-api-access-contract.sql`
+- Release gate:
+  - `npm run harness:check:supabase-data-api-contract`
 - Main runtime code:
-  - `/Users/steven/Documents/Codex-Test1/src/js/05-supabase.js`
+  - `src/js/05-supabase.js`
+  - `src/js/11-leaderboard-service.js`
+  - `src/js/12-auth-session.js`
 - Build token source:
-  - `/Users/steven/Documents/Codex-Test1/tools/build/build-index.js`
+  - `tools/build/build-index.js`
+- Important date:
+  - Supabase public-schema Data API grants must be explicit for new projects
+    beginning May 30, 2026 and for existing projects by October 30, 2026.
 
 ### Web3Forms
 
@@ -28,7 +41,7 @@ Aurora Galactica, what they are used for, and what is local-only instead.
   - in-game bug reports
   - in-game feature requests
 - Main runtime code:
-  - `/Users/steven/Documents/Codex-Test1/src/js/00-boot.js`
+  - `src/js/00-boot.js`
 
 ### YouTube Playlist Embed
 
@@ -41,9 +54,9 @@ Aurora Galactica, what they are used for, and what is local-only instead.
   - the game mute control remains scoped to game audio
   - high-score video upload credentials are not part of this client-side feature
 - Main runtime code:
-  - `/Users/steven/Documents/Codex-Test1/src/js/01-runtime-shell.js`
+  - `src/js/01-runtime-shell.js`
 - Build token source:
-  - `/Users/steven/Documents/Codex-Test1/tools/build/build-index.js`
+  - `tools/build/build-index.js`
 
 ## Hosting And Delivery
 
@@ -60,8 +73,8 @@ Aurora Galactica, what they are used for, and what is local-only instead.
 - Used for:
   - public delivery of the playable game and public documentation surfaces
 - Main policy docs:
-  - `/Users/steven/Documents/Codex-Test1/README.md`
-  - `/Users/steven/Documents/Codex-Test1/RELEASE_POLICY.md`
+  - `README.md`
+  - `RELEASE_POLICY.md`
 
 ## Development And Release Tooling
 
@@ -84,8 +97,8 @@ Aurora Galactica, what they are used for, and what is local-only instead.
   - public sync verification
   - public project-page sync tooling
 - Main scripts:
-  - `/Users/steven/Documents/Codex-Test1/tools/build/sync-public-pages.js`
-  - `/Users/steven/Documents/Codex-Test1/tools/build/verify-public-sync.js`
+  - `tools/build/sync-public-pages.js`
+  - `tools/build/verify-public-sync.js`
 
 ## Local-Only Or Browser-Native Systems
 

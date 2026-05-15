@@ -165,11 +165,11 @@ Current conformance read:
 
 - see the generated score/target roll-up in
   [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md)
-- overall Aurora quality is `9.2/10` across the current scored categories
-- audio identity and cue alignment is the weakest category at `7.3/10`; the
-  process is stronger than the runtime score, with cue-contract readiness at
-  `9.09/10`, semantic event score at `9.78/10`, and acoustic event score at
-  `6.31/10`
+- overall Aurora quality is `9.1/10` across the current scored categories
+- audio identity and cue alignment is the weakest category at `6.9/10`; the
+  process is stronger than the rounded runtime score, with cue-contract
+  readiness at `9.09/10`, semantic event score at `9.78/10`, and acoustic event
+  score at `6.30/10`
 - level arc and encounter shape is now a high-priority scored category at
   `8.8/10`, backed by level-arc and stage-signature evidence. Remaining
   opportunity is in long-run non-repetition, exact pressure replay, and
@@ -177,14 +177,15 @@ Current conformance read:
 - player movement conformance now reads `10/10`; the prior `8.0/10` gap was
   traced to harness recenter input suppression, not to gameplay movement
   constants
-- latest audio investment produced both runtime reliability and a measured
-  cue-quality lift: normal inter-level/result phrases are less clipped,
-  final loss clears active transition beds before game-over ambience, the
-  runtime-recovery harness verifies that critical reference cues actually
-  start, and the calibrated layered `playerHit` ship-loss cue was promoted
-  after focused gates, precheck, recapture, alignment, and quality guardrails.
-  `stagePulse` still needs a better pressure-bed strategy, and the residual
-  `playerHit` tail remains the highest current segment gap.
+- latest audio investment produced both runtime reliability and measured
+  candidate-loop value: normal inter-level/result phrases are guarded against
+  clipping, final loss clears active transition beds before game-over ambience,
+  the runtime-recovery harness verifies that critical reference cues actually
+  start, the calibrated layered `playerHit` ship-loss cue remains in runtime,
+  and a measured `enemyShot` threat-fire subwindow was promoted after focused
+  gates, recapture, alignment, and quality guardrails. `challengePerfect`
+  produced focused keepers but failed full-theme quality promotion, and
+  `captureBeam` tail is now the highest current segment gap.
 - the next major Aurora quality cycle is tracked in
   [AURORA_GALAGA_LONG_CYCLE_REVIEW.md](AURORA_GALAGA_LONG_CYCLE_REVIEW.md),
   with a baseline artifact at

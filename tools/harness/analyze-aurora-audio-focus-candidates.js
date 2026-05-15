@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const { spawnSync, execFileSync } = require('child_process');
 const { withHarnessPage, ROOT } = require('./browser-check-util');
+const { renderSpecToWav } = require('./audio-spec-renderer');
 
 const GUIDE = require(path.join(ROOT, 'application-guide.json'));
 const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-audio-cue-candidates');
@@ -47,6 +48,54 @@ const CUE_CONFIGS = {
       }
     ],
     keeper: { risk: .3, segment: .3, duration: .08, acceptableDuration: .08, centroidWorsenHz: 100, bandWorsen: .05 }
+  },
+  'enemy-shot': {
+    cue: 'enemyShot',
+    entryId: 'enemy-shot-classic',
+    comparisonId: 'enemy-shot-compare',
+    latest: 'latest-enemy-shot.json',
+    title: 'Enemy Shot',
+    problem: 'Enemy Shot is now the highest acoustic event gap in a fresh full-theme capture: enemy fire is semantically mapped, but its onset is too spectrally distant and too collapsed to read like the Galaga threat-fire transient.',
+    target: 'Make enemy projectile fire read as a crisp incoming-threat cue that stays distinct from playerShot, attackCharge, and enemyHit.',
+    cooldownMs: 220,
+    referenceStarts: [0.9, 0.94, 0.97, 1.0, 1.04, 1.08],
+    referenceDurations: [0.12, 0.15, 0.18, 0.2, 0.24, 0.28],
+    referenceVolumes: [0.74, 0.86, 0.95, 1.05, 1.16],
+    handSpecs: [
+      {
+        id: 'enemy-fire-guide-window',
+        label: 'Enemy fire guide window',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',
+          cooldownMs: 220,
+          referenceVolume: .88,
+          clipStart: .9,
+          clipDuration: .24
+        }
+      },
+      {
+        id: 'enemy-fire-narrow-transient',
+        label: 'Enemy fire narrow transient',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',
+          cooldownMs: 220,
+          referenceVolume: .95,
+          clipStart: .97,
+          clipDuration: .15
+        }
+      },
+      {
+        id: 'dry-threat-snap',
+        label: 'Dry threat snap',
+        spec: {
+          tones: [
+            { freq: 480, duration: .052, wave: 'square', volume: .0072, slide: -150, lpHz: 2500 },
+            { freq: 260, duration: .06, wave: 'triangle', volume: .0048, slide: -90, lpHz: 2100, delay: .012 }
+          ]
+        }
+      }
+    ],
+    keeper: { risk: .3, segment: .35, duration: .035, acceptableDuration: .06, centroidWorsenHz: 100, bandWorsen: .05 }
   },
   'enemy-boom': {
     cue: 'enemyBoom',
@@ -621,6 +670,90 @@ const CUE_CONFIGS = {
     ],
     keeper: { risk: .3, segment: .35, duration: .08, acceptableDuration: .12, centroidWorsenHz: 120, bandWorsen: .06 }
   },
+  'capture-success': {
+    cue: 'captureSuccess',
+    entryId: 'capture-success',
+    comparisonId: 'capture-success-compare',
+    latest: 'latest-capture-success.json',
+    title: 'Capture Success',
+    problem: 'Capture Success is now the highest segment-level audio gap: the player-facing state change is semantically correct, but the onset is not separated enough from the body/tail and can read as a generic synthetic phrase instead of a captured-fighter handoff.',
+    target: 'Make the exact captured-fighter moment read immediately and distinctly before the boss retreat cue begins to carry the state away.',
+    cooldownMs: 1400,
+    referenceStarts: [4.04, 4.16, 4.248, 4.32, 4.42, 4.5, 4.58],
+    referenceDurations: [0.14, 0.18, 0.21, 0.24, 0.3, 0.36, 0.42, 0.5],
+    referenceVolumes: [0.62, 0.74, 0.86, 0.95, 1.05, 1.16],
+    handSpecs: [
+      {
+        id: 'fighter-captured-guide-window',
+        label: 'Fighter captured guide window',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-fighter-captured.m4a',
+          cooldownMs: 1400,
+          referenceVolume: .95,
+          clipStart: 4.248,
+          clipDuration: .42
+        }
+      },
+      {
+        id: 'fighter-captured-active-core',
+        label: 'Fighter captured active core',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-fighter-captured.m4a',
+          cooldownMs: 1400,
+          referenceVolume: 1.05,
+          clipStart: 4.248,
+          clipDuration: .24
+        }
+      },
+      {
+        id: 'fighter-captured-separated-onset',
+        label: 'Fighter captured separated onset',
+        spec: {
+          scheduledDuration: .29,
+          layers: [
+            {
+              referenceClip: 'assets/reference-audio/galaga3-fighter-captured.m4a',
+              referenceVolume: 1.06,
+              clipStart: 4.248,
+              clipDuration: .06,
+              delay: 0
+            },
+            {
+              referenceClip: 'assets/reference-audio/galaga3-fighter-captured.m4a',
+              referenceVolume: .92,
+              clipStart: 4.318,
+              clipDuration: .11,
+              delay: .072
+            },
+            {
+              referenceClip: 'assets/reference-audio/galaga3-fighter-captured.m4a',
+              referenceVolume: .82,
+              clipStart: 4.418,
+              clipDuration: .07,
+              delay: .17
+            }
+          ]
+        }
+      },
+      {
+        id: 'fighter-captured-low-synthetic-bridge',
+        label: 'Fighter captured low synthetic bridge',
+        spec: {
+          seq: [392, 330, 277],
+          step: .056,
+          wave: 'square',
+          volume: .0108,
+          slide: -22,
+          lpHz: 2800,
+          tones: [
+            { freq: 196, duration: .08, wave: 'triangle', volume: .0044, slide: -32, lpHz: 2100, delay: .092 },
+            { freq: 554, duration: .035, wave: 'square', volume: .0032, slide: -90, lpHz: 3600, delay: .012 }
+          ]
+        }
+      }
+    ],
+    keeper: { risk: .3, segment: .45, duration: .06, acceptableDuration: .1, centroidWorsenHz: 120, bandWorsen: .06 }
+  },
   'captured-fighter-destroyed': {
     cue: 'capturedFighterDestroyed',
     entryId: 'captured-fighter-destroyed',
@@ -696,6 +829,163 @@ const CUE_CONFIGS = {
       }
     ],
     keeper: { risk: .25, segment: .35, duration: .06, acceptableDuration: .1, centroidWorsenHz: 120, bandWorsen: .055 }
+  },
+  'challenge-results': {
+    cue: 'challengeResults',
+    entryId: 'challenge-results',
+    comparisonId: 'challenge-results-compare',
+    latest: 'latest-challenge-results.json',
+    title: 'Challenge Results',
+    problem: 'Challenge Results is the current highest segment-level audio gap after the fresh quality baseline: the challenge wrap-up cue is semantically correct, but its onset reads too different from the Galaga result phrase and weakens the score/result handoff.',
+    target: 'Make challenge completion feel like a real arcade result phrase: clear attack, readable body, and enough duration to tell the player that scoring has resolved before the next stage handoff.',
+    cooldownMs: 2400,
+    referenceStarts: [0.55, 0.62, 0.7, 0.75, 0.82, 0.9, 1.0, 1.1],
+    referenceDurations: [0.28, 0.36, 0.42, 0.5, 0.62, 0.78, 0.96, 1.2, 1.6],
+    referenceVolumes: [0.74, 0.86, 0.95, 1.05, 1.16],
+    handSpecs: [
+      {
+        id: 'results-guide-window',
+        label: 'Results guide window',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga2-challenging-stage-results.m4a',
+          cooldownMs: 2400,
+          referenceVolume: .95,
+          clipStart: .75,
+          clipDuration: .42
+        }
+      },
+      {
+        id: 'results-wide-phrase',
+        label: 'Results wide phrase',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga2-challenging-stage-results.m4a',
+          cooldownMs: 2400,
+          referenceVolume: .95,
+          clipStart: .62,
+          clipDuration: .78
+        }
+      },
+      {
+        id: 'results-full-handoff-safe',
+        label: 'Results full handoff-safe phrase',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga2-challenging-stage-results.m4a',
+          cooldownMs: 2400,
+          referenceVolume: .86,
+          clipStart: .55,
+          clipDuration: 1.2
+        }
+      },
+      {
+        id: 'square-result-phrase',
+        label: 'Square result phrase',
+        spec: {
+          seq: [392, 523, 659, 784],
+          step: .058,
+          wave: 'square',
+          volume: .0138,
+          slide: 18,
+          lpHz: 3500,
+          tones: [
+            { freq: 988, duration: .13, wave: 'triangle', volume: .0058, slide: 10, lpHz: 4300, delay: .176 }
+          ]
+        }
+      },
+      {
+        id: 'aurora-result-with-square-attack',
+        label: 'Aurora result with square attack',
+        spec: {
+          seq: [392, 523, 659, 784],
+          step: .064,
+          wave: 'square',
+          volume: .0118,
+          slide: 12,
+          lpHz: 3200,
+          tones: [
+            { freq: 196, duration: .18, wave: 'square', volume: .0032, slide: 6, lpHz: 1700, delay: 0 },
+            { freq: 988, duration: .14, wave: 'triangle', volume: .0048, slide: 10, lpHz: 4300, delay: .19 }
+          ]
+        }
+      }
+    ],
+    keeper: { risk: .25, segment: .45, duration: .08, acceptableDuration: .12, centroidWorsenHz: 120, bandWorsen: .055 }
+  },
+  'challenge-perfect': {
+    cue: 'challengePerfect',
+    entryId: 'challenge-perfect',
+    comparisonId: 'challenge-perfect-compare',
+    latest: 'latest-challenge-perfect.json',
+    title: 'Challenge Perfect',
+    problem: 'Challenge Perfect is the highest current segment-level audio gap: the cue is semantically correct and celebratory, but the measured onset is too peaky, too high-crossing, and too collapsed versus the Galaga perfect-clear reference phrase.',
+    target: 'Make a perfect challenging-stage clear read as an unmistakable arcade reward sting with a separated attack, a short readable body, and enough ceremony to distinguish it from the normal challenge-results handoff.',
+    cooldownMs: 2400,
+    referenceStarts: [0, .02, .04, .08, .12, .15, .2, .28],
+    referenceDurations: [.09, .12, .17, .24, .32, .48, .72, .96, 1.2, 1.6, 2.15],
+    referenceVolumes: [.74, .86, .95, 1.05, 1.16],
+    handSpecs: [
+      {
+        id: 'perfect-guide-window',
+        label: 'Perfect guide window',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a',
+          cooldownMs: 2400,
+          referenceVolume: .95,
+          clipStart: 0,
+          clipDuration: .48
+        }
+      },
+      {
+        id: 'perfect-onset-body',
+        label: 'Perfect onset and body',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a',
+          cooldownMs: 2400,
+          referenceVolume: 1.05,
+          clipStart: 0,
+          clipDuration: .24
+        }
+      },
+      {
+        id: 'perfect-full-handoff-safe',
+        label: 'Perfect full handoff-safe phrase',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a',
+          cooldownMs: 2400,
+          referenceVolume: .86,
+          clipStart: 0,
+          clipDuration: 1.2
+        }
+      },
+      {
+        id: 'low-zcr-perfect-sting',
+        label: 'Low-crossing perfect sting',
+        spec: {
+          seq: [784, 1047, 1318, 1760, 2349],
+          step: .048,
+          wave: 'triangle',
+          volume: .0142,
+          slide: 22,
+          lpHz: 4200,
+          tones: [
+            { freq: 392, duration: .12, wave: 'triangle', volume: .0044, slide: 8, lpHz: 2100, delay: 0 },
+            { freq: 2637, duration: .11, wave: 'sine', volume: .0056, slide: 12, lpHz: 5600, delay: .17 }
+          ]
+        }
+      },
+      {
+        id: 'separated-perfect-attack',
+        label: 'Separated perfect attack',
+        spec: {
+          tones: [
+            { freq: 523, duration: .085, wave: 'square', volume: .0058, slide: 4, lpHz: 2200, delay: 0 },
+            { freq: 880, duration: .062, wave: 'triangle', volume: .0098, slide: 18, lpHz: 3400, delay: .03 },
+            { freq: 1175, duration: .068, wave: 'triangle', volume: .0086, slide: 14, lpHz: 3800, delay: .083 },
+            { freq: 1760, duration: .095, wave: 'sine', volume: .0052, slide: 10, lpHz: 5200, delay: .16 }
+          ]
+        }
+      }
+    ],
+    keeper: { risk: .25, segment: .45, duration: .05, acceptableDuration: .08, centroidWorsenHz: 120, bandWorsen: .055 }
   },
   'capture-beam': {
     cue: 'captureBeam',
@@ -1233,7 +1523,8 @@ function specScheduledDurationSeconds(spec = {}){
 function analysisWindowForCapture(result = {}, spec = {}){
   spec = spec || {};
   const prerollMs = Number(result.capturePrerollMs);
-  const specDuration = specScheduledDurationSeconds(spec);
+  const effectiveSpec = Object.keys(spec).length ? spec : (result.audioSpec || {});
+  const specDuration = specScheduledDurationSeconds(effectiveSpec);
   const cueDuration = Number(result.audioCue?.referenceClipDuration);
   const duration = Number.isFinite(specDuration) && specDuration > 0
     ? specDuration
@@ -1711,6 +2002,13 @@ async function captureCandidate(config, row, opts, index){
     const capturedCue = String(result?.audioCue?.cue || '').trim();
     last = Object.assign({}, result || {}, { attempt, byteLength });
     if(result?.ok && byteLength >= 512 && capturedCue === expectedCue) return last;
+    if(attempt === attempts && result?.audioSpec && capturedCue === expectedCue){
+      return Object.assign({}, last, {
+        ok: true,
+        offlineRender: true,
+        offlineReason: result?.error || 'Browser MediaRecorder returned no decodable bytes; rendered resolved cue spec offline.'
+      });
+    }
     last.captureMismatch = { expectedCue, capturedCue: capturedCue || '(none)' };
   }
   return last || { ok: false, error: 'capture did not run' };
@@ -1785,9 +2083,14 @@ async function analyzeCue(key, generatedAt, rootDir){
   for(const capture of captures){
     const webm = path.join(samplesDir, `${capture.sampleId}.webm`);
     const wav = path.join(samplesDir, `${capture.sampleId}.wav`);
-    decodeToFile(capture.result.base64, webm);
-    toWav(webm, wav);
-    sampleFiles.set(capture.sampleId, { webm, wav });
+    if(capture.result.offlineRender){
+      renderSpecToWav(capture.result.audioSpec || capture.row.spec || {}, wav, capture.result.capturePrerollMs || 80);
+      sampleFiles.set(capture.sampleId, { webm: null, wav, offlineRender: true });
+    }else{
+      decodeToFile(capture.result.base64, webm);
+      toWav(webm, wav);
+      sampleFiles.set(capture.sampleId, { webm, wav, offlineRender: false });
+    }
   }
   const baselineFiles = sampleFiles.get(baselineCapture.sampleId);
 
@@ -1807,7 +2110,9 @@ async function analyzeCue(key, generatedAt, rootDir){
       aurora: {
         label: capture.row.label,
         wav: rel(files.wav, cueDir),
-        webm: rel(files.webm, cueDir),
+        webm: files.webm ? rel(files.webm, cueDir) : null,
+        renderMode: files.offlineRender ? 'offline-spec-render' : 'browser-media-recorder',
+        offlineReason: capture.result.offlineReason || '',
         audioCue: capture.result.audioCue || null,
         capture: {
           attempt: capture.result.attempt || null,
@@ -1820,7 +2125,9 @@ async function analyzeCue(key, generatedAt, rootDir){
       galaga: {
         label: 'Current Aurora baseline',
         wav: rel(baselineFiles.wav, cueDir),
-        webm: rel(baselineFiles.webm, cueDir),
+        webm: baselineFiles.webm ? rel(baselineFiles.webm, cueDir) : null,
+        renderMode: baselineFiles.offlineRender ? 'offline-spec-render' : 'browser-media-recorder',
+        offlineReason: baselineCapture.result.offlineReason || '',
         audioCue: baselineCapture.result.audioCue || null,
         capture: {
           attempt: baselineCapture.result.attempt || null,
@@ -1915,12 +2222,13 @@ async function analyzeCue(key, generatedAt, rootDir){
     cue: config.cue,
     repetitions: repeats,
     problem: config.problem,
-    strategy: 'Capture baseline, hand-designed candidates, and reference subclip windows through the live browser audio engine, compare against the canonical application-guide reference window, and promote only candidates that clear explicit keeper gates.',
+    strategy: 'Capture baseline, hand-designed candidates, and reference subclip windows through the live browser audio engine when available; if headless MediaRecorder returns no bytes, render the resolved cue spec offline so the CPU candidate loop can still compare against the canonical application-guide reference window. Promote only candidates that clear explicit keeper gates.',
     capturePlan: {
       repetitions: repeats,
       attemptsPerSample: Math.max(1, Number(process.env.AURORA_AUDIO_CAPTURE_RETRIES || 3)),
       defaultPrerollMs: 80,
-      rationale: 'Short cue captures include a small recorder preroll so onset analysis reflects the cue rather than MediaRecorder startup timing.'
+      fallback: 'offline-spec-render',
+      rationale: 'Short cue captures include a small recorder preroll so onset analysis reflects the cue rather than MediaRecorder startup timing. Offline spec rendering keeps candidate loops useful on machines where headless browser audio taps expose live tracks but return zero MediaRecorder bytes.'
     },
     successMeasure: config.cue === 'stagePulse'
       ? 'A keeper must improve whole-cue risk, onset segment risk, cadence pressure, and masking separation while preserving duration pocket, band shape, and segment-role guards.'

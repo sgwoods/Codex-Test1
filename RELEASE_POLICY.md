@@ -141,6 +141,24 @@ See also:
 
 - [REPOSITORY_ROLE_MAP.md](REPOSITORY_ROLE_MAP.md)
 
+## External Service Access Rule
+
+External-service permissions are release artifacts when they affect runtime
+behavior.
+
+For Supabase, the current source of truth is:
+
+- [SUPABASE_DATA_API_ACCESS.md](SUPABASE_DATA_API_ACCESS.md)
+- [supabase/data-api-access-contract.sql](supabase/data-api-access-contract.sql)
+
+The publish preflight runs `npm run harness:check:supabase-data-api-contract`.
+That gate exists because Platinum uses Supabase Data API access for auth-backed
+profiles and leaderboards, and Supabase public-schema table access now requires
+explicit grants. Any new browser-visible table, including future replay video or
+YouTube posting metadata, must land with grants, RLS posture, and policy
+documentation before it can move through hosted `/dev`, `/beta`, or
+`/production`.
+
 The intended lane model is:
 
 1. local `localhost`
@@ -376,9 +394,11 @@ This is the rule that keeps release knowledge out of chat-only or machine-only
 7. promote hosted `/beta`
 8. verify hosted `/beta`
 9. complete any required docs pass for the release line
-10. confirm or hand off release authority intentionally
-11. approve hosted `/beta`
-12. promote and publish hosted `/production`
+10. complete the architecture/code review cycle and ensure every review issue
+    is addressed or explicitly dismissed in `review-dispositions.json`
+11. confirm or hand off release authority intentionally
+12. approve hosted `/beta`
+13. promote and publish hosted `/production`
 
 ## Conformance Dashboard Release Boundary
 

@@ -1,30 +1,29 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-11T20-18-16-887Z-76038",
-  "startedAt": "2026-05-11T20:18:16.887Z",
-  "endedAt": "2026-05-11T20:18:21.529Z",
-  "branch": "codex/macbook-pro-stage12-level-arc-conformance",
-  "commit": "b83393cd",
+  "id": "2026-05-14T18-00-46-748Z-51825",
+  "startedAt": "2026-05-14T18:00:46.748Z",
+  "endedAt": "2026-05-14T18:00:47.264Z",
+  "branch": "codex/player-two-persona-mode",
+  "commit": "1c788342",
   "command": [
     "npm",
     "run",
-    "harness:check:developer-conformance-dashboard"
+    "harness:analyze:aurora-audio-event-gap"
   ],
   "axes": [
-    "dashboard"
+    "audio"
   ],
   "resources": [
-    "cpu",
-    "browser"
+    "cpu"
   ],
-  "notes": "developer dashboard guard after playerHit audio promotion",
+  "notes": "enemyShot promoted cue event-gap rollup",
   "measurement": {
-    "wallSeconds": 4.642,
-    "timeRealSeconds": 4.63,
-    "timeUserSeconds": 2.7,
-    "timeSystemSeconds": 1.27,
-    "cpuSeconds": 3.97,
+    "wallSeconds": 0.516,
+    "timeRealSeconds": 0.5,
+    "timeUserSeconds": 0.26,
+    "timeSystemSeconds": 0.17,
+    "cpuSeconds": 0.43,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -46,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 946879565,
-    "artifactBytesAfter": 946879565,
-    "artifactBytesDelta": 0
+    "artifactBytesBefore": 599279944,
+    "artifactBytesAfter": 599353358,
+    "artifactBytesDelta": 73414
   }
 }
