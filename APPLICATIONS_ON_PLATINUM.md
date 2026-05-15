@@ -78,6 +78,8 @@ Current branch-level next step:
 - [GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md](GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md)
 - own scores and pilot/replay identity
 - proper one-level completion and game-over endings
+- platform-frame parity for sign-in, high scores, pilot card, replay/video
+  capture, bug reports, and Arcade Music/SFX controls
 - enough completeness to validate Platinum changes against two real games
 - keep the aggregate first-class conformance gate green:
   `npm run harness:check:galaxy-guardians-first-class-conformance`
@@ -97,6 +99,8 @@ A Platinum application should own:
 - its own harnesses for game behavior
 - its own longer-surface review logic when the game grows beyond a single
   playable slice
+- its own clean mapping into shared platform surfaces such as high scores,
+  pilot records, replay/video capture, bug reports, and music controls
 - optional shell preferences that remain within the platform shell contract
 
 A Platinum application should not own:
@@ -201,6 +205,23 @@ The direction is:
 - platform copy explains the host, hosted lanes, docs, and cross-application surfaces
 - application copy explains gameplay, identity, and game-specific flavor
 - preview-only applications may override platform copy only when the override is still about preview status rather than gameplay rules
+
+### Shared frame parity
+
+The shell should not make Aurora feel first-class while other games feel like
+guests.
+
+For Guardians to count as a serious second application, the shared frame should
+support it across the same families of platform capability Aurora already uses:
+
+- pilot sign-in and pilot-card framing
+- high-score, leaderboard, trophy, and pilot-record surfaces
+- replay and future video-capture/export surfaces
+- bug-report and feedback transport surfaces
+- Arcade Music, SFX, and mute/volume controls
+
+Those surfaces remain platform-owned, but they must become application-aware
+and game-key-clean instead of implicitly assuming Aurora.
 
 ### Shared naming residue
 

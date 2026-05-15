@@ -130,6 +130,10 @@ resource economics fit together.
   explosion states, swarm palettes, moving starfield motion, missile-ready
   ship state, reserve ships, stage-flag graphics, and bottom-pass-through
   re-entry from the top instead of simple pop-in return
+- make Guardians sit in the full Platinum frame with parity to Aurora for
+  sign-in, high scores, pilot card, replay/video capture, bug reports, and
+  music/sound-control surfaces so platform capability work is validated against
+  two games, not one
 - actively advance the longer-range `Galaxian`-style ingestion path through
   durable reference analysis, platform extension planning, and the other
   machine's parallel work

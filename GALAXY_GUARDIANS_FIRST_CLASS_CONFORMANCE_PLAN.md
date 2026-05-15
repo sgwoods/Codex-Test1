@@ -20,6 +20,17 @@ surfaces:
 - platform-boundary and two-game validation harnesses
 - game-owned release framing, version tracking, and future candidate path
 
+It also means Guardians should sit in the Platinum frame with the same class of
+platform-owned support Aurora already benefits from:
+
+- pilot sign-in and signed-in game framing
+- game-owned high scores, pilot records, and leaderboard views
+- replay and video-capture/export surfaces
+- bug-report and feedback transport surfaces
+- Arcade Music, SFX, and mute/volume controls through the shared shell
+- message, trophy, and other shared overlay surfaces that stay game-aware
+  instead of Aurora-shaped
+
 As a standing rule, artifact-grounded evidence should lead the process. Human
 play/listen/look review is still allowed when the evidence package cannot yet
 settle a question cleanly, but it should be fallback confirmation rather than
@@ -58,6 +69,8 @@ ones a player feels immediately:
 - audio character under live playback
 - score/progression/end-state clarity
 - game-owned review flow and release framing
+- platform-frame parity across sign-in, scores, replay/video capture, bug
+  reports, music, and shared overlays
 
 ## Public Slice vs. Deeper-Run Review
 
@@ -117,6 +130,7 @@ following are true:
 | Audio character and acoustic fit | `6.4/10` | `>=7.0/10` | Keep the cue-target and audio-lab pipeline, prefer waveform/spectrogram/cue-window baselines, and fall back to human listening only for unresolved edge cases. |
 | Persona and review maturity | partial | explicit game-owned beginner/intermediate/expert/professional expectations | Stop treating persona review as Aurora-only; define Guardians-specific survival, score, and route expectations by wave band. |
 | Platform boundary and multi-game validation | `10/10` | keep `10/10` | Preserve no-Aurora-leakage rules while expanding score, replay, pilot, and settings surfaces to work cleanly for two games. |
+| Platform-frame capability parity | partial | Guardians should feel first-class inside the shell rather than like a special-case preview | Align sign-in, high scores, pilot records, replay/video capture, bug-report transport, Arcade Music/SFX controls, and other shared frame surfaces so they work for Guardians as naturally as they do for Aurora. |
 | Public release readiness | `3.9/10` | `4.5/10` on the branch, `7.0/10` before beta-quality game claims | Keep the score honest until the game has better sound, better feel, clearer completion, and a game-owned review story. |
 
 ## Required Harness Spine
@@ -239,6 +253,18 @@ swarm feel.
 - use Guardians as a standing second-game smoke for platform changes
 - require multi-game validation whenever shell, score, replay, pilot, or pack
   boundaries move
+
+### 6. Platform-frame parity
+
+- make Guardians a first-class consumer of pilot sign-in, pilot card, high
+  scores, leaderboard, and trophy surfaces
+- make replay and video-capture/export flows game-aware for Guardians, not just
+  Aurora-shaped
+- make bug-report and feedback transport preserve Guardians identity cleanly
+- make Arcade Music, SFX, mute, and volume surfaces behave consistently for
+  Guardians through the shared shell
+- use these parity surfaces as part of the standing two-game validation story,
+  not as optional polish after gameplay work
 
 ## Relationship To Other Plans
 

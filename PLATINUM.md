@@ -144,6 +144,7 @@ pack:
 - feedback transport policy
 - replay/session plumbing
 - opt-in Arcade Music playback policy
+- shared replay/video-capture/export path as it matures
 
 This is implemented primarily through:
 
@@ -168,6 +169,8 @@ The main contract areas are:
 - stage and scoring hooks
 - application-owned front-door identity surfaces shown by the shell
 - platform-owned startup, wait-mode, and release-cycle shell copy
+- application-aware use of pilot sign-in, scores, replay/video capture,
+  bug-report transport, and music controls inside the shared frame
 
 See also:
 
@@ -194,6 +197,19 @@ Current application set:
 The application-side separation is documented in:
 
 - `/Users/steven/Documents/Codex-Test1/APPLICATIONS_ON_PLATINUM.md`
+
+As the second game firms up, Platinum should prove not only that it can host a
+different ruleset, but that it can host that game through the same class of
+platform-owned frame capabilities Aurora already uses:
+
+- pilot sign-in and pilot-card surfaces
+- high scores, leaderboard, trophy, and pilot-record surfaces
+- replay and future video-capture/export surfaces
+- bug-report and feedback transport surfaces
+- Arcade Music, SFX, and volume/mute controls
+
+These should feel like platform capabilities with game-aware rendering, not
+Aurora-only conveniences.
 
 ## Platform Is Host, Not Prison
 
