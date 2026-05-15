@@ -1,0 +1,50 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "opening-slice-render-surface",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-15",
+  "status": "opening-slice-render-contract-not-frame-extracted",
+  "sourceEvidence": {
+    "introManifest": "reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/source-manifest.json",
+    "longSessionManifest": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/source-manifest.json",
+    "contactSheets": [
+      "reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/frames/contact-sheet-reference-window.jpg",
+      "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/frames/contact-sheet-reference-window.jpg"
+    ],
+    "notes": "This opening-slice surface contract exists to keep the current public one-level Guardians slice grounded in committed Galaxian intro and long-session evidence before deeper multi-stage tuning."
+  },
+  "runtimeSurfaceTargets": {
+    "movingStarfieldVisible": true,
+    "reserveShipsVisible": true,
+    "stageFlagsVisible": true,
+    "readyMissileVisible": true,
+    "topReentryVisible": true,
+    "marchCadenceVisible": true
+  },
+  "renderExpectations": {
+    "stage": 1,
+    "ships": 3,
+    "seed": 1979,
+    "minimumStarfieldCount": 96,
+    "reserveShipCount": 2,
+    "minimumStageFlagCount": 1,
+    "requiredHudLabels": [
+      "1UP",
+      "HIGH SCORE"
+    ],
+    "requiredDebugFields": [
+      "renderMode",
+      "readyMissileVisible",
+      "reserveShipCount",
+      "stageFlagCount",
+      "starfieldCount",
+      "starfieldLeadSample",
+      "marchOffset",
+      "wrappingCount"
+    ]
+  },
+  "harness": {
+    "script": "tools/harness/check-galaxy-guardians-opening-slice-render-surface.js",
+    "npmScript": "npm run harness:check:galaxy-guardians-opening-slice-render-surface"
+  }
+}

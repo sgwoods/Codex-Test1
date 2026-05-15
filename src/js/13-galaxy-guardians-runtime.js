@@ -80,8 +80,8 @@ const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
   formationEntrySideSpread:6,
   formationEntryRowLag:.035,
   playerSpeed:108,
-  formationDriftAmplitude:1.35,
-  formationDriftHz:1.15,
+  formationDriftAmplitude:5.4,
+  formationDriftHz:1.85,
   scoutDiveIntervalBase:1.52,
   scoutDiveIntervalJitter:.74,
   flagshipDiveIntervalBase:6.35,
@@ -103,6 +103,10 @@ const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
   enemyShotStartYOffset:8,
   enemyShotPlayerHitbox:7,
   enemyShotBottomPadding:10,
+  topReentryVy:82,
+  topReentryAccel:10.5,
+  topReentrySwayAmplitude:9,
+  topReentrySwayHz:2.8,
   playerRespawnDelay:1.35,
   playerInvulnerability:.95,
   waveClearDelay:1.2,
@@ -164,7 +168,41 @@ function guardiansRuntimeRules(stateOrStage=1){
   enemyShotIntervalJitter:+(base.enemyShotIntervalJitter*Math.max(.66,1-rank*.055)).toFixed(3),
   enemyShotVy:+(base.enemyShotVy*shotScale).toFixed(3),
   enemyShotMaxLive:Math.min(6,base.enemyShotMaxLive+Math.ceil(rank/2)),
-  formationDriftHz:+(base.formationDriftHz*(1+rank*.038)).toFixed(3)
+  formationDriftHz:+(base.formationDriftHz*(1+rank*.038)).toFixed(3),
+  topReentryVy:+(base.topReentryVy*(1+rank*.042)).toFixed(3),
+  topReentryAccel:+(base.topReentryAccel*(1+rank*.05)).toFixed(3)
+ });
+}
+
+function guardiansMarchOffset(state,alien){
+ const rules=guardiansRuntimeRules(state);
+ const hz=Math.max(.25,+rules.formationDriftHz||1);
+ const amp=Math.max(.5,+rules.formationDriftAmplitude||1);
+ const phase=((+state.t||0)*hz+alien.row*.055+alien.col*.018)%1;
+ const tri=phase<.5?(phase*4)-1:3-(phase*4);
+ const stepped=Math.round(tri*3)/3;
+ return stepped*amp;
+}
+
+function guardiansBeginTopReentry(state,alien){
+ const rules=guardiansRuntimeRules(state);
+ alien.mode='wrapping';
+ alien.diveT=0;
+ alien.wrapStartX=Math.max(16,Math.min(rules.playfieldWidth-16,alien.x));
+ alien.wrapStartY=-Math.max(12,rules.bottomExitPadding+alien.row*2.5);
+ alien.wrapTargetX=alien.rackX+alien.diveSide*4;
+ alien.wrapTargetY=alien.rackY;
+ alien.x=alien.wrapStartX;
+ alien.y=alien.wrapStartY;
+ alien.linkedTo='';
+ alien.escortSlot=0;
+ alien.escorts=0;
+ guardiansRuntimeEvent(state,'enemy_wrap_or_return',{
+  id:alien.id,
+  role:alien.role,
+  visualId:alien.visualId,
+  audioCue:GALAXY_GUARDIANS_PACK.audioCueCatalog.wrapReturn.id,
+  reentry:'top'
  });
 }
 
@@ -565,9 +603,28 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
    continue;
   }
   if(alien.mode==='formation'){
-   const drift=Math.sin(state.t*rules.formationDriftHz+alien.row*.7)*rules.formationDriftAmplitude;
+   const drift=guardiansMarchOffset(state,alien);
+   const bob=Math.sin((state.t*rules.formationDriftHz*2.35)+alien.row*.85+alien.col*.1)*.38;
    alien.x=alien.rackX+drift;
-   alien.y=alien.rackY;
+   alien.y=alien.rackY+bob;
+   continue;
+  }
+  if(alien.mode==='wrapping'){
+   alien.diveT+=dt;
+   const q=Math.max(0,alien.diveT);
+   const blend=Math.min(1,q/1.18);
+   const sway=Math.sin(q*rules.topReentrySwayHz)*rules.topReentrySwayAmplitude*alien.diveSide*(1-blend*.35);
+   alien.x=alien.wrapStartX+(alien.wrapTargetX-alien.wrapStartX)*blend+sway;
+   alien.y=alien.wrapStartY+q*rules.topReentryVy+q*q*rules.topReentryAccel;
+   if(alien.y>=alien.rackY){
+    alien.mode='formation';
+    alien.diveT=0;
+    alien.linkedTo='';
+    alien.escortSlot=0;
+    alien.escorts=0;
+    alien.x=alien.rackX;
+    alien.y=alien.rackY;
+   }
    continue;
   }
   alien.diveT+=dt;
@@ -582,15 +639,9 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
    alien.y=alien.diveStartY+q*rules.diveBaseVy+q*q*rules.diveAccel;
   }
   if(alien.y>rules.playfieldHeight+rules.bottomExitPadding){
-   alien.mode='formation';
-   alien.diveT=0;
-   alien.x=alien.rackX;
-   alien.y=alien.rackY;
-   alien.linkedTo='';
-   alien.escortSlot=0;
-   guardiansRuntimeEvent(state,'enemy_wrap_or_return',{id:alien.id,role:alien.role,visualId:alien.visualId,audioCue:GALAXY_GUARDIANS_PACK.audioCueCatalog.wrapReturn.id});
+   guardiansBeginTopReentry(state,alien);
   }
-  if(alien.mode==='diving'&&p.visible&&p.inv<=0&&Math.abs(alien.x-p.x)<=10&&Math.abs(alien.y-p.y)<=10){
+  if((alien.mode==='diving'||alien.mode==='wrapping')&&p.visible&&p.inv<=0&&Math.abs(alien.x-p.x)<=10&&Math.abs(alien.y-p.y)<=10){
    loseGalaxyGuardiansPlayer(state,`alien_${alien.role}_collision`);
   }
  }
@@ -671,6 +722,7 @@ function summarizeGalaxyGuardiansRuntime(state){
   enemyShotCount:state.enemyShots.filter(shot=>shot&&shot.active!==0).length,
   waveClearPending:state.waveClearT>0,
   waveClearT:+(+state.waveClearT||0).toFixed(3),
+  wrappingCount:state.aliens.filter(alien=>alien.hp>0&&alien.mode==='wrapping').length,
   stats:{
    shots:+(state.stats?.shots||0),
    hits:+(state.stats?.hits||0)
@@ -684,7 +736,7 @@ function summarizeGalaxyGuardiansRuntime(state){
   gameOver:!!state.gameOver,
   completed:!!state.completed,
   gameOverReason:String(state.gameOverReason||''),
-  activeDives:state.aliens.filter(alien=>alien.hp>0&&alien.mode==='diving').map(alien=>({id:alien.id,role:alien.role,linkedTo:alien.linkedTo||'',escortSlot:alien.escortSlot||0,x:+alien.x.toFixed(2),y:+alien.y.toFixed(2)})),
+  activeDives:state.aliens.filter(alien=>alien.hp>0&&(alien.mode==='diving'||alien.mode==='wrapping')).map(alien=>({id:alien.id,role:alien.role,mode:alien.mode,linkedTo:alien.linkedTo||'',escortSlot:alien.escortSlot||0,x:+alien.x.toFixed(2),y:+alien.y.toFixed(2)})),
   eventTypes:Array.from(new Set(state.events.map(event=>event.type))),
   visualIds:Array.from(new Set(state.aliens.filter(alien=>alien.hp>0).map(alien=>alien.visualId))),
   audioCueIds:Array.from(new Set(state.events.map(event=>event.audioCue).filter(Boolean))),
@@ -698,6 +750,7 @@ window.stepGalaxyGuardiansRuntime=stepGalaxyGuardiansRuntime;
 window.summarizeGalaxyGuardiansRuntime=summarizeGalaxyGuardiansRuntime;
 window.guardiansRuntimeRules=guardiansRuntimeRules;
 window.guardiansStageRank=guardiansStageRank;
+window.guardiansMarchOffset=guardiansMarchOffset;
 window.loseGalaxyGuardiansPlayer=loseGalaxyGuardiansPlayer;
 window.resetGalaxyGuardiansWave=resetGalaxyGuardiansWave;
 window.clearGalaxyGuardiansWave=clearGalaxyGuardiansWave;

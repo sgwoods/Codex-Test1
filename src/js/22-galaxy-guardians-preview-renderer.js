@@ -27,7 +27,7 @@ function resetGalaxyGuardiansPreviewRenderState(seed=1979){
   ? createGalaxyGuardiansRuntimeState({stage:1,ships:3,seed})
   : null;
  galaxyGuardiansPreviewLastT=0;
- galaxyGuardiansPreviewFireT=0;
+ galaxyGuardiansPreviewFireT=.32;
  return galaxyGuardiansPreviewState;
 }
 
@@ -75,6 +75,55 @@ function drawGalaxyGuardiansPixelRows(visual,x,y,cell=2,opts={}){
  ctx.restore();
 }
 
+function syncGalaxyGuardiansPreviewStarfield(){
+ const themeId=GALAXY_GUARDIANS_PACK?.frontDoor?.atmosphereTheme||'signal-rack';
+ const profile=Object.assign({
+  id:'guardians-signal-stars',
+  count:96,
+  sizeMin:.82,
+  sizeMax:1.42,
+  alphaMin:.38,
+  alphaMax:.92,
+  twinkleMin:.82,
+  twinkleAmp:.18,
+  speedMin:9,
+  speedMax:24,
+  palette:['#fffdf0','#ffe26a','#ff5b5b','#7bd6ff','#4af26d','#f6f0ff']
+ }, GALAXY_GUARDIANS_PACK?.atmosphereThemes?.[themeId]?.starfield||{});
+ const sig=JSON.stringify(profile);
+ if(S.guardiansPreviewStarfieldSig===sig&&S.st.length===profile.count)return profile;
+ S.guardiansPreviewStarfieldSig=sig;
+ S.st.length=0;
+ const rand=(max,min=0)=>typeof auxRnd==='function'?auxRnd(max,min):(Math.random()*((+max||0)-(+min||0)))+(+min||0);
+ const randUnit=()=>typeof auxRandUnit==='function'?auxRandUnit():Math.random();
+ for(let i=0;i<Math.max(24,+profile.count||96);i++){
+  S.st.push({
+   x:rand(PLAY_W),
+   y:rand(PLAY_H),
+   s:rand(profile.sizeMax,profile.sizeMin),
+   c:profile.palette[(randUnit()*profile.palette.length)|0],
+   tw:rand(6.28),
+   alpha:rand(profile.alphaMax,profile.alphaMin),
+   twMin:rand(Math.min(1,profile.twinkleMin+.04),Math.max(.18,profile.twinkleMin-.04)),
+   twAmp:rand(Math.min(.4,profile.twinkleAmp+.04),Math.max(.04,profile.twinkleAmp-.04)),
+   vy:rand(profile.speedMax,profile.speedMin)
+  });
+ }
+ return profile;
+}
+
+function advanceGalaxyGuardiansPreviewStarfield(dt){
+ for(const s of S.st){
+  if(!s)continue;
+  s.tw=(+s.tw||0)+dt*1.9;
+  s.y+=(+s.vy||12)*dt*.62;
+  if(s.y>PLAY_H+(+s.s||1)){
+   s.y=-((+s.s||1)+((s.vy||12)%9));
+   s.x=(s.x+37+((s.vy||12)*.45))%PLAY_W;
+  }
+ }
+}
+
 function drawGalaxyGuardiansPreviewBackdrop(t){
  ctx.fillStyle='#000';
  ctx.fillRect(0,0,PLAY_W,PLAY_H);
@@ -85,17 +134,9 @@ function drawGalaxyGuardiansPreviewBackdrop(t){
   ctx.fillRect(s.x,s.y,s.s,s.s);
  }
  ctx.globalAlpha=1;
- ctx.strokeStyle='rgba(255,91,91,.08)';
- ctx.lineWidth=1;
- for(let i=0;i<5;i++){
-  const y=46+i*28+Math.sin(t*.8+i)*2;
-  ctx.beginPath();
-  ctx.moveTo(24,y);
-  ctx.lineTo(PLAY_W-24,y+Math.sin(t*.6+i)*4);
-  ctx.stroke();
- }
- ctx.fillStyle='rgba(255,216,109,.05)';
- ctx.fillRect(0,PLAY_H-34,PLAY_W,1);
+ ctx.fillStyle='rgba(255,255,255,.04)';
+ ctx.fillRect(0,18,PLAY_W,1);
+ ctx.fillRect(0,PLAY_H-38,PLAY_W,1);
 }
 
 function drawGalaxyGuardiansPlayer(player){
@@ -105,31 +146,49 @@ function drawGalaxyGuardiansPlayer(player){
  ctx.shadowBlur=3;
  drawGalaxyGuardiansPixelRows(visual,player.x,player.y,1.8);
  ctx.restore();
+ const readyMissileVisible=!player.shot;
+ if(readyMissileVisible){
+  ctx.fillStyle='#ffdf6f';
+  ctx.fillRect(Math.round(player.x)-1,Math.round(player.y)-12,2,5);
+  ctx.fillStyle='#dff7ff';
+  ctx.fillRect(Math.round(player.x),Math.round(player.y)-15,1,3);
+ }
  if(player.shot){
   ctx.fillStyle='#ffe06d';
   ctx.fillRect(Math.round(player.shot.x)-1,Math.round(player.shot.y)-10,2,11);
   ctx.fillStyle='#dff7ff';
   ctx.fillRect(Math.round(player.shot.x),Math.round(player.shot.y)-14,1,5);
  }
+ return readyMissileVisible;
 }
 
 function drawGalaxyGuardiansHitFlashes(state){
  ctx.save();
  for(const flash of state.hitFlashes||[]){
-  const life=Math.max(0,Math.min(1,(+flash.t||0)/Math.max(.001,+flash.duration||.2)));
+   const life=Math.max(0,Math.min(1,(+flash.t||0)/Math.max(.001,+flash.duration||.2)));
   const r=flash.role==='flagship'?15:flash.role==='escort'?11:9;
-  ctx.globalAlpha=.18+.58*life;
+  const burst=flash.role==='flagship'?8:6;
+  ctx.globalAlpha=.22+.5*life;
   ctx.strokeStyle=flash.color||'#dff7ff';
-  ctx.lineWidth=1.4;
+  ctx.lineWidth=1.3;
   ctx.shadowColor=flash.color||'#dff7ff';
   ctx.shadowBlur=10*life;
+  for(let i=0;i<burst;i++){
+   const ang=(Math.PI*2*i)/burst+(1-life)*.18;
+   const inner=r*.28;
+   const outer=r*(1.2-life*.18);
+   ctx.beginPath();
+   ctx.moveTo(flash.x+Math.cos(ang)*inner,flash.y+Math.sin(ang)*inner);
+   ctx.lineTo(flash.x+Math.cos(ang)*outer,flash.y+Math.sin(ang)*outer);
+   ctx.stroke();
+  }
+  ctx.globalAlpha=.25+.35*life;
   ctx.beginPath();
-  ctx.arc(flash.x,flash.y,r*(1.15-life*.25),0,Math.PI*2);
+  ctx.arc(flash.x,flash.y,Math.max(2,r*(.55-life*.18)),0,Math.PI*2);
   ctx.stroke();
-  ctx.globalAlpha=.32+.45*life;
+  ctx.globalAlpha=.38+.4*life;
   ctx.fillStyle=flash.role==='flagship'?'#fff7c2':flash.role==='escort'?'#ffdf6f':'#dff7ff';
-  ctx.fillRect(Math.round(flash.x)-1,Math.round(flash.y)-r,2,r*2);
-  ctx.fillRect(Math.round(flash.x)-r,Math.round(flash.y)-1,r*2,2);
+  ctx.fillRect(Math.round(flash.x)-1,Math.round(flash.y)-1,3,3);
  }
  ctx.restore();
 }
@@ -179,7 +238,42 @@ function drawGalaxyGuardiansAlien(alien,t){
  }
 }
 
-function drawGalaxyGuardiansPreviewHud(summary){
+function drawGalaxyGuardiansPreviewReserveShips(lives){
+ const reserve=Math.max(0,(lives|0)-1);
+ const visual=galaxyGuardiansPreviewVisual(GALAXY_GUARDIANS_RUNTIME_PROFILE.playerVisualId);
+ let x=16;
+ const y=PLAY_H-9;
+ for(let i=0;i<reserve;i++){
+  drawGalaxyGuardiansPixelRows(visual,x,y,1.1,{ flare:'#ff5b5b' });
+  x+=14;
+ }
+ return reserve;
+}
+
+function drawGalaxyGuardiansPreviewStageFlags(stage){
+ const total=Math.max(0,stage|0);
+ let x=PLAY_W-14;
+ let y=PLAY_H-8;
+ for(let i=0;i<total;i++){
+  const big=(i%5)===4;
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.fillStyle='rgba(228,242,255,.88)';
+  ctx.fillRect(-.5,big?-9:-6,1,big?9:6);
+  ctx.fillStyle=big?'#7bd6ff':'#ff5b5b';
+  ctx.beginPath();
+  ctx.moveTo(0,big?-9:-6);
+  ctx.lineTo(big?6:4,big?-7:-4.5);
+  ctx.lineTo(0,big?-4:-2.5);
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+  x-=big?11:8;
+ }
+ return total;
+}
+
+function drawGalaxyGuardiansPreviewHud(summary,state){
  ctx.save();
  ctx.font='7px "Courier New", Consolas, monospace';
  ctx.textBaseline='top';
@@ -187,11 +281,23 @@ function drawGalaxyGuardiansPreviewHud(summary){
  ctx.fillText('1UP',18,16);
  ctx.fillStyle='#dff7ff';
  ctx.fillText(String(summary.score||0).padStart(6,'0'),48,16);
+ ctx.fillStyle='#dff7ff';
+ ctx.fillText('HIGH SCORE',104,16);
  ctx.fillStyle='#ffdf6f';
- ctx.fillText(summary.gameOver?'GUARDIANS GAME OVER':'GUARDIANS DEV PREVIEW',76,PLAY_H-26);
+ ctx.fillText(String(Math.max(summary.score||0,+S.best||0)).padStart(6,'0'),170,16);
  ctx.fillStyle='#7bd6ff';
- ctx.fillText(summary.gameOver?'PRESS CHOOSE GAME FOR CABINET SELECT':'SINGLE SHOT  FLAGSHIP ESCORTS  WRAP THREAT',32,PLAY_H-15);
+ ctx.fillText(`STAGE ${(summary.stage||1).toString().padStart(2,'0')}`,232,16);
+ ctx.fillStyle='rgba(216,236,255,.82)';
+ ctx.fillText('CREDIT 0',12,PLAY_H-20);
+ ctx.fillStyle='#ffdf6f';
+ ctx.fillText(summary.gameOver?'GUARDIANS GAME OVER':'WE ARE THE GALAXY GUARDIANS',48,PLAY_H-28);
+ ctx.fillStyle='#7bd6ff';
+ ctx.fillText(summary.gameOver?'PRESS CHOOSE GAME FOR CABINET SELECT':'SINGLE SHOT  FLAGSHIP ESCORTS  TOP REENTRY',26,PLAY_H-17);
  ctx.restore();
+ return {
+  reserveShipCount:drawGalaxyGuardiansPreviewReserveShips(state.lives||0),
+  stageFlagCount:drawGalaxyGuardiansPreviewStageFlags(summary.stage||1)
+ };
 }
 
 function stepGalaxyGuardiansPreviewState(now){
@@ -200,6 +306,7 @@ function stepGalaxyGuardiansPreviewState(now){
  const dt=Math.max(1/60,Math.min(.05,(now-last)/1000||1/60));
  galaxyGuardiansPreviewLastT=now;
  galaxyGuardiansPreviewFireT=Math.max(0,galaxyGuardiansPreviewFireT-dt);
+ advanceGalaxyGuardiansPreviewStarfield(dt);
  const state=galaxyGuardiansPreviewState;
  const target=state.aliens.filter(alien=>alien.hp>0).sort((a,b)=>b.y-a.y)[0];
  const input={
@@ -229,13 +336,13 @@ function drawGalaxyGuardiansPreviewBoard({ox,oy,scale,dx,dy}){
  ctx.rect(0,0,PLAY_W,PLAY_H);
  ctx.clip();
  const t=state.t;
- const starfield=typeof syncStarfieldProfile==='function'?syncStarfieldProfile({frontDoor:1,attractPhase:'guardians-preview'}):null;
+ const starfield=syncGalaxyGuardiansPreviewStarfield();
  drawGalaxyGuardiansPreviewBackdrop(t);
  for(const alien of state.aliens)if(alien.hp>0)drawGalaxyGuardiansAlien(alien,t);
- drawGalaxyGuardiansHitFlashes(state);
+  drawGalaxyGuardiansHitFlashes(state);
  drawGalaxyGuardiansEnemyShots(state);
- if(state.player.visible!==false)drawGalaxyGuardiansPlayer(state.player);
- drawGalaxyGuardiansPreviewHud(summary);
+ const readyMissileVisible=state.player.visible!==false?drawGalaxyGuardiansPlayer(state.player):false;
+ const hud=drawGalaxyGuardiansPreviewHud(summary,state);
  ctx.restore();
  ctx.setTransform(1,0,0,1,0,0);
  window.__platinumRenderDebug.renderTick=(window.__platinumRenderDebug.renderTick||0)+1;
@@ -249,7 +356,19 @@ function drawGalaxyGuardiansPreviewBoard({ox,oy,scale,dx,dy}){
   alienCount:summary.alienCount,
   enemyShotCount:summary.enemyShotCount,
   hitFlashCount:summary.hitFlashCount,
-  score:summary.score
+  score:summary.score,
+  reserveShipCount:hud.reserveShipCount,
+  stageFlagCount:hud.stageFlagCount,
+  hudLabels:['1UP','HIGH SCORE'],
+  readyMissileVisible:!!readyMissileVisible,
+  wrappingCount:+(summary.wrappingCount||0),
+  marchOffset:+guardiansMarchOffset(state,state.aliens.find(alien=>alien.hp>0&&alien.mode==='formation')||{ row:0,col:0 }).toFixed(3),
+  starfieldCount:S.st.length,
+  starfieldLeadSample:(S.st||[]).slice(0,4).map(star=>({
+   x:+(+star.x||0).toFixed(2),
+   y:+(+star.y||0).toFixed(2),
+   vy:+(+star.vy||0).toFixed(2)
+  }))
  });
 }
 

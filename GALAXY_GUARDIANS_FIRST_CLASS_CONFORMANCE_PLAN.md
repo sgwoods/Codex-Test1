@@ -153,6 +153,7 @@ The first-class Galaxy process should always be reviewable through this spine:
 - `npm run harness:check:galaxy-guardians-threat-scoring`
 - opening-slice baseline
   - `npm run harness:check:galaxy-guardians-opening-slice-baseline`
+  - `npm run harness:check:galaxy-guardians-opening-slice-render-surface`
   - `npm run harness:check:galaxy-guardians-attract-score-surface`
 - longer-surface and persona review
   - `npm run harness:analyze:galaxy-guardians-long-surface-conformance`

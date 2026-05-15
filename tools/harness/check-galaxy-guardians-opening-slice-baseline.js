@@ -8,6 +8,7 @@ const PLAN = path.join(ROOT, 'GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md')
 const TOP_PLAN = path.join(ROOT, 'PLAN.md');
 const REFERENCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'reference-conformance-0.1.json');
 const CANDIDATE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'candidate-0.1.json');
+const OPENING_SLICE_RENDER = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'opening-slice-render-surface-0.1.json');
 const QUICK_PEEK = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'quick-peek-source-fidelity-0.2.json');
 const SOURCES = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxian-reference', 'source-manifest.json');
 
@@ -36,11 +37,13 @@ function main(){
   const topPlan = read(TOP_PLAN);
   const reference = readJson(REFERENCE);
   const candidate = readJson(CANDIDATE);
+  const openingSliceRender = readJson(OPENING_SLICE_RENDER);
   const quickPeek = readJson(QUICK_PEEK);
   const sources = readJson(SOURCES);
 
   const requiredScripts = [
     'harness:check:galaxy-guardians-opening-slice-baseline',
+    'harness:check:galaxy-guardians-opening-slice-render-surface',
     'harness:check:galaxy-guardians-attract-score-surface',
     'harness:check:galaxy-guardians-formation-entry',
     'harness:check:galaxy-guardians-movement-pacing',
@@ -93,6 +96,15 @@ function main(){
     }
   }
 
+  const renderTargets = openingSliceRender.runtimeSurfaceTargets || {};
+  for(const key of ['movingStarfieldVisible', 'reserveShipsVisible', 'stageFlagsVisible', 'readyMissileVisible', 'topReentryVisible', 'marchCadenceVisible']){
+    if(renderTargets[key] !== true){
+      fail(`Opening-slice render artifact is missing required surface target ${key}.`, {
+        renderTargets
+      });
+    }
+  }
+
   const referencePromotions = reference.nextMetricPromotions || [];
   const requiredPromotions = [
     'Opening-slice baseline artifact package and scored gate for WAIT, score table, rack march cadence, explosions, palettes, starfield, reserve ships, missile-ready state, flags, and top re-entry.',
@@ -108,7 +120,7 @@ function main(){
   }
 
   const gaps = quickPeek.remainingGaps || [];
-  const expectsGap = 'Attract mission text and score advance table are still not implemented as runtime systems.';
+  const expectsGap = 'Attract mission text and score advance table now exist as runtime surfaces, but they still need frame-extracted layout and copy tightening against the committed intro reference.';
   if(!gaps.includes(expectsGap)){
     fail('Quick-peek source fidelity artifact no longer preserves the attract/score-table remaining gap.', {
       remainingGaps: gaps
@@ -120,6 +132,7 @@ function main(){
     scriptsChecked: requiredScripts.length,
     candidateSurfaces: Array.from(candidateSurfaces),
     sourceIds: Array.from(sourceIds),
+    renderTargets,
     nextMetricPromotions: referencePromotions.slice(0, 5),
     quickPeekGapConfirmed: true
   }, null, 2));

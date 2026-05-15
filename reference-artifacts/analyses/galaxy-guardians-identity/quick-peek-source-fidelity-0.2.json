@@ -31,7 +31,7 @@
   "remainingGaps": [
     "Sprites are still hand-authored approximations rather than extracted reference sprites.",
     "Dive paths are still runtime-shaped approximations rather than frame-tracked motion paths.",
-    "Attract mission text and score advance table are still not implemented as runtime systems.",
+    "Attract mission text and score advance table now exist as runtime surfaces, but they still need frame-extracted layout and copy tightening against the committed intro reference.",
     "Audio remains internally shaped rather than matched against Galaxian waveform features."
   ],
   "requiredHarnesses": [
