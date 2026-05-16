@@ -139,6 +139,43 @@ function typeSequence(firstWave){
   return (firstWave || []).map(item => item.type).filter(Boolean).join(', ');
 }
 
+function distinctCount(values){
+  return new Set(values.filter(Boolean)).size;
+}
+
+function groupIdentity(runtime){
+  const groups = Array.isArray(runtime?.groupSignatures) ? runtime.groupSignatures : [];
+  if(!groups.length){
+    return {
+      score10: 0,
+      component: 0,
+      distinctTypeSequences: 0,
+      distinctPathSignatures: 0,
+      groupCount: 0,
+      read: 'Group identity pending; no wave signatures were captured.'
+    };
+  }
+  const typeKeys = groups.map(group => (group.types || []).join('|'));
+  const pathKeys = groups.map(group => (group.pathFamilies || []).join('|'));
+  const spawnSpans = groups.map(group => +group.spawnSpan || 0).filter(Number.isFinite);
+  const avgSpawnSpan = average(spawnSpans);
+  const distinctTypeSequences = distinctCount(typeKeys);
+  const distinctPathSignatures = distinctCount(pathKeys);
+  const typeRatio = groups.length ? distinctTypeSequences / groups.length : 0;
+  const pathRatio = groups.length ? distinctPathSignatures / groups.length : 0;
+  const timingSpread = clamp(avgSpawnSpan / 0.5);
+  const score10 = round(10 * ((0.42 * typeRatio) + (0.34 * pathRatio) + (0.24 * timingSpread)), 1);
+  return {
+    score10,
+    component: round(clamp(score10 / 10) * 0.9, 2),
+    distinctTypeSequences,
+    distinctPathSignatures,
+    groupCount: groups.length,
+    avgSpawnSpan: round(avgSpawnSpan, 3),
+    read: `${distinctTypeSequences}/${groups.length} wave type signatures and ${distinctPathSignatures}/${groups.length} path signatures; average within-wave spawn span ${round(avgSpawnSpan, 2)}s.`
+  };
+}
+
 function summarizeMotion(samples){
   const populated = samples.filter(sample => sample.activeCount > 0);
   return {
@@ -173,6 +210,24 @@ async function runtimeProbeForStage(stage){
           tm: +(+e.tm || 0).toFixed(3),
           spawnPlan: +(+e.spawnPlan || 0).toFixed(2)
         }));
+      const initialGroupSignatures = Object.values((initialFormation.enemies || []).reduce((acc, e) => {
+        const key = String(e.wave || 0);
+        if(!acc[key]) acc[key] = { group: e.wave || 0, types: [], families: [], pathFamilies: [], spawnPlans: [] };
+        acc[key].types[e.lane || 0] = e.type || '';
+        acc[key].families[e.lane || 0] = e.family || '';
+        acc[key].pathFamilies[e.lane || 0] = e.pathFamily || '';
+        acc[key].spawnPlans.push(+e.spawnPlan || 0);
+        return acc;
+      }, {})).sort((a, b) => a.group - b.group).map(group => {
+        const spawnPlans = group.spawnPlans.filter(Number.isFinite);
+        return {
+          group: group.group,
+          types: group.types.filter(Boolean),
+          families: Array.from(new Set(group.families.filter(Boolean))).sort(),
+          pathFamilies: Array.from(new Set(group.pathFamilies.filter(Boolean))).sort(),
+          spawnSpan: spawnPlans.length ? +(Math.max(...spawnPlans) - Math.min(...spawnPlans)).toFixed(3) : 0
+        };
+      });
       const samples = [];
       let previous = 0;
       for(const t of sampleTimes){
@@ -213,6 +268,7 @@ async function runtimeProbeForStage(stage){
         initialEnemyCount: initialFormation.enemies.length,
         activeEnemyCount: formation.enemies.length,
         firstWave: initialFirstWave,
+        groupSignatures: initialGroupSignatures,
         samples,
         motionSummary: samples.length ? null : {},
         eventCounts,
@@ -254,6 +310,7 @@ function stageScore(stage, runtime, match){
   const familyNovelty = families.some(family => family !== 'classic') ? 0.55 : 0;
   const referenceEvidence = hasReference ? 0.35 : 0;
   const latePenalty = lateReferenceGap ? -0.45 : 0;
+  const group = groupIdentity(runtime);
   const expectedTypes = intent.expectedFirstWaveTypes || null;
   const forbiddenTypes = intent.forbiddenFirstWaveTypes || [];
   const lineContractHit = expectedTypes
@@ -264,7 +321,7 @@ function stageScore(stage, runtime, match){
   const adjustedTypeNovelty = expectedTypes
     ? (lineContractHit ? 1.05 : typeNovelty * 0.62)
     : typeNovelty;
-  const score = clamp(base + safety + trajectory + expectedMatch + adjustedTypeNovelty + familyNovelty + referenceEvidence + latePenalty, 0, 10);
+  const score = clamp(base + safety + trajectory + expectedMatch + adjustedTypeNovelty + familyNovelty + referenceEvidence + group.component + latePenalty, 0, 10);
   const interest = clamp(score - (expectedHit ? 0 : 0.35), 1, 10);
   return {
     conformanceScore10: round(score, 1),
@@ -277,9 +334,11 @@ function stageScore(stage, runtime, match){
       alienTypeNovelty: round(adjustedTypeNovelty, 2),
       firstChallengeLineContract: lineContractHit ? 0.35 : 0,
       visualFamilyNovelty: familyNovelty,
+      groupWaveIdentity: group.component,
       referenceEvidence,
       lateReferencePenalty: latePenalty
     },
+    groupIdentity: group,
     expectedReferenceHit: expectedHit
   };
 }
@@ -370,6 +429,7 @@ function makeStageRow(stage, runtime, match, referenceLabels){
     pathFamily: runtime?.layout?.pathFamily || null,
     laneTypes: runtime?.layout?.laneTypes || [],
     runtimeFirstWaveTypes: typeSequence(firstWave),
+    runtimeGroupSignatures: runtime?.groupSignatures || [],
     runtimeVisualFamilies: familySet(firstWave),
     galagaTarget: intent.target,
     criticalExpectation: intent.criticalExpectation,
@@ -387,7 +447,7 @@ function makeStageRow(stage, runtime, match, referenceLabels){
     } : null,
     motionProbe: runtime ? runtime.motionSummary : null,
     currentRead: runtime
-      ? `${layoutSignature(runtime.layout)}; first-wave types ${typeSequence(firstWave) || 'pending'}; visual families ${familySet(firstWave).join(', ') || 'pending'}.`
+      ? `${layoutSignature(runtime.layout)}; first-wave types ${typeSequence(firstWave) || 'pending'}; visual families ${familySet(firstWave).join(', ') || 'pending'}; group identity ${score.groupIdentity.score10}/10.`
       : 'Runtime probe pending.',
     graphicsRead: runtime
       ? `Current graphics show ${familySet(firstWave).join(', ') || 'no'} family styling with ${typeSet(firstWave).join(', ') || 'no'} alien types. This is still a proxy for visual identity; no active sprite-motion phase score is attached to the challenge window yet.`
@@ -396,8 +456,10 @@ function makeStageRow(stage, runtime, match, referenceLabels){
       ? `Trajectory vector best-match score ${round(match.bestMatch?.score10, 1)}/10 against ${bestLabel || 'no label'}; xRange ${match.runtimeVector?.xRange}, yRange ${match.runtimeVector?.yRange}, pathLength ${match.runtimeVector?.pathLength}.`
       : 'No reference trajectory comparison row was found for this stage.',
     alienVariationRead: runtime
-      ? `Opening wave exposes ${typeSet(firstWave).length} type(s) and ${familySet(firstWave).join(', ') || 'no'} visual family labels; later-stage novelty is not yet backed by sprite-motion scoring.`
+      ? `Opening wave exposes ${typeSet(firstWave).length} type(s) and ${familySet(firstWave).join(', ') || 'no'} visual family labels. Group identity: ${score.groupIdentity.read} Active sprite-motion novelty remains a separate unscored gap.`
       : 'Alien variation probe pending.',
+    groupIdentityRead: score.groupIdentity.read,
+    groupIdentityScore10: score.groupIdentity.score10,
     criticalGaps: criticalGaps(stage, runtime, match, score),
     nextActions: nextActionsForStage(stage),
     interestingFactor10: score.interestingFactor10,
@@ -419,7 +481,7 @@ function buildMarkdown(report){
     const gapCell = row.criticalGaps.length
       ? row.criticalGaps.join('<br>')
       : 'Reference target hit; remaining work is trajectory precision and active motion scoring.';
-    return `| ${row.stage} | ${row.challengeNumber} | ${row.interestingFactor10}/10 | ${row.conformanceScore10}/10 | ${row.bestReferenceMatch?.labelId || 'pending'} (${row.referenceMatchScore10 ?? 'n/a'}/10) | ${row.pathFamily || 'pending'} | ${row.safetyProbe?.noEnemyShots && row.safetyProbe?.noAttackStarts && row.safetyProbe?.noShipLosses ? 'pass' : 'pending/fail'} | ${gapCell} |`;
+    return `| ${row.stage} | ${row.challengeNumber} | ${row.interestingFactor10}/10 | ${row.conformanceScore10}/10 | ${row.groupIdentityScore10 ?? 'n/a'}/10 | ${row.bestReferenceMatch?.labelId || 'pending'} (${row.referenceMatchScore10 ?? 'n/a'}/10) | ${row.pathFamily || 'pending'} | ${row.safetyProbe?.noEnemyShots && row.safetyProbe?.noAttackStarts && row.safetyProbe?.noShipLosses ? 'pass' : 'pending/fail'} | ${gapCell} |`;
   }).join('\n');
   const stageSections = rows.map(row => `
 ## Stage ${row.stage} / Challenge ${row.challengeNumber}
@@ -435,6 +497,8 @@ function buildMarkdown(report){
 **Movement read:** ${row.movementRead}
 
 **Alien variation read:** ${row.alienVariationRead}
+
+**Group identity read:** ${row.groupIdentityRead || 'Group identity pending.'}
 
 **Safety rule:** ${row.safetyProbe ? `enemy shots ${row.safetyProbe.eventCounts.enemyShots}, attack starts ${row.safetyProbe.eventCounts.enemyAttackStarts}, ship losses ${row.safetyProbe.eventCounts.shipLosses}` : 'runtime probe pending'}.
 
@@ -467,8 +531,8 @@ Current result: **${report.summary.interestingFactorScore10}/10 interesting fact
 
 ## Stage Summary
 
-| Stage | Challenge | Interest | Score | Best Reference Match | Aurora Path Family | No-Shot/No-Kill | Critical Gap |
-| --- | --- | ---: | ---: | --- | --- | --- | --- |
+| Stage | Challenge | Interest | Score | Group Identity | Best Reference Match | Aurora Path Family | No-Shot/No-Kill | Critical Gap |
+| --- | --- | ---: | ---: | ---: | --- | --- | --- | --- |
 ${tableRows}
 
 ${stageSections}

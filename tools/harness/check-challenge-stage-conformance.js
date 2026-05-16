@@ -44,6 +44,9 @@ for(const stage of REQUIRED_STAGES){
   if(!row.currentRead || !row.graphicsRead || !row.movementRead || !row.alienVariationRead){
     fail(`stage ${stage} is missing critical narrative fields`, row);
   }
+  if(!Number.isFinite(+row.groupIdentityScore10) || !row.groupIdentityRead){
+    fail(`stage ${stage} is missing measured challenge group identity`, row);
+  }
   if(!Array.isArray(row.criticalGaps)){
     fail(`stage ${stage} is missing critical gaps`, row);
   }

@@ -258,6 +258,7 @@ function challengeStagePublicCards(artifact){
                             <strong>Aliens / Graphics</strong>
                             <p>${esc(row.graphicsRead || '')}</p>
                             <p class="smallText">${esc(row.alienVariationRead || '')}</p>
+                            <p class="smallText"><strong>Group identity:</strong> ${esc(row.groupIdentityScore10 ?? 'n/a')}/10. ${esc(row.groupIdentityRead || 'Wave/group identity read pending.')}</p>
                         </div>
                         <div>
                             <strong>Gap / Next</strong>

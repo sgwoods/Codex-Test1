@@ -1,0 +1,300 @@
+{
+  "generatedAt": "2026-05-16T14:38:30.301Z",
+  "build": {
+    "product": "Aurora Galactica",
+    "version": "1.4.0",
+    "versionLine": "1.4.0",
+    "label": "1.4.0+build.766.sha.57cee9ef.dirty",
+    "commit": "57cee9ef89aee9d474331f943dbdcb08ca16affb",
+    "branch": "codex/macbook-audio-entry-grounding-cycle",
+    "dirty": true,
+    "released": "May 16 2026, 10:27 AM EDT",
+    "state": "codex/macbook-audio-entry-grounding-cycle@57cee9ef dirty",
+    "releaseChannel": "production",
+    "platform": {
+      "key": "platinum",
+      "name": "Platinum",
+      "version": "1.4.0",
+      "releaseTrack": "production-family",
+      "compatibility": "platinum-1.4",
+      "notes": "Platform-owned shell, release lanes, docs, replay, services, and host contract.",
+      "media": {
+        "arcadeMusicPlaylistId": "PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"
+      },
+      "auth": {
+        "nonProductionTestPilotEmails": [
+          "sgwoods@gmail.com",
+          "waskesiuhobiecat@gmail.com"
+        ],
+        "nonProductionTestPilotUserIds": []
+      }
+    },
+    "applications": [
+      {
+        "gameKey": "aurora-galactica",
+        "title": "Aurora Galactica",
+        "version": "1.4.0",
+        "versionLine": "1.4.0",
+        "releaseTrack": "production-family",
+        "runtimeStatus": "playable",
+        "platformCompatibility": "platinum-1.4",
+        "launchPolicy": "production-capable"
+      },
+      {
+        "gameKey": "galaxy-guardians-preview",
+        "title": "Galaxy Guardians",
+        "version": "0.1.0-preview",
+        "versionLine": "0.1.0 preview",
+        "releaseTrack": "playable-preview",
+        "runtimeStatus": "production-playable-preview",
+        "platformCompatibility": "platinum-1.4",
+        "launchPolicy": "production-preview-playable"
+      }
+    ]
+  },
+  "location": "http://127.0.0.1:63380/index.html",
+  "game": {
+    "stage": 3,
+    "score": 0,
+    "lives": 3,
+    "started": false,
+    "paused": false,
+    "challenge": true,
+    "attract": false
+  },
+  "audioDebug": {
+    "theme": "galaga-reference-assets",
+    "lastCue": {
+      "cue": "formationArrival",
+      "atmosphereId": "classic-arcade",
+      "audioTheme": "galaga-reference-assets",
+      "phase": "challenge",
+      "variant": 0,
+      "referenceClip": "assets/reference-audio/galaga3-level-underscore.m4a",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0.82,
+      "stage": 3,
+      "challenge": true,
+      "at": 1.05
+    },
+    "reference": {
+      "lastRequested": "assets/reference-audio/galaga3-level-underscore.m4a",
+      "lastLoaded": "assets/reference-audio/galaga2-challenging-stage.m4a",
+      "lastStarted": "assets/reference-audio/galaga2-challenging-stage.m4a",
+      "lastError": "",
+      "activeCount": 3
+    },
+    "statusLine": "Theme: galaga-reference-assets · last cue formationArrival (galaga-reference-assets) · requested galaga3-level-underscore.m4a · loaded galaga-last-ship-destroyed-ambience.m4a · started galaga2-game-start.m4a · active 1"
+  },
+  "systemLog": [],
+  "sessionEvents": [
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "game_start",
+      "message": "game_start",
+      "data": {
+        "t": 0,
+        "type": "game_start",
+        "persona": null,
+        "watchMode": false,
+        "requestedStage": 1,
+        "stage": 1,
+        "startStageMode": "internal",
+        "startKind": "level",
+        "challengeStage": 1,
+        "displayLabel": "",
+        "forceChallenge": false,
+        "playerTwo": null
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "stage_spawn",
+      "message": "stage_spawn",
+      "data": {
+        "t": 0,
+        "type": "stage_spawn",
+        "stage": 1,
+        "challenge": false,
+        "persona": null
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "stage_profile",
+      "message": "stage_profile",
+      "data": {
+        "t": 0,
+        "type": "stage_profile",
+        "stage": 1,
+        "challenge": false,
+        "band": "classic",
+        "challengeFamily": "classic",
+        "beeFamily": "classic",
+        "butFamily": "classic",
+        "bossFamily": "classic",
+        "themeId": "quiet-skies",
+        "backgroundMode": "classic-stars",
+        "frameAccent": "classic-blue",
+        "bossArchetype": "command-core"
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0,
+        "type": "audio_cue",
+        "cue": "gameStart",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga2-game-start.m4a",
+        "referenceClipStart": 0.08,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.100s",
+      "level": "info",
+      "action": "challenge_transition_started",
+      "message": "challenge_transition_started",
+      "data": {
+        "t": 0.1,
+        "type": "challenge_transition_started",
+        "stage": 2,
+        "pendingStage": 3,
+        "targetStage": 3,
+        "mode": "normal",
+        "nextIsChallenge": true,
+        "nextStageT": 3.35,
+        "postChallengeT": 0,
+        "challenge": false,
+        "enemies": 0
+      }
+    },
+    {
+      "at": "+0.100s",
+      "level": "info",
+      "action": "harness_stage_transition_probe_setup",
+      "message": "harness_stage_transition_probe_setup",
+      "data": {
+        "t": 0.1,
+        "type": "harness_stage_transition_probe_setup",
+        "stage": 2,
+        "nextStage": 3,
+        "nextStageIsChallenge": true,
+        "nextStageT": 3.35,
+        "transitionCueT": 2.22,
+        "mode": "normal"
+      }
+    },
+    {
+      "at": "+2.317s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 2.317,
+        "type": "audio_cue",
+        "cue": "challengeTransition",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga2-challenging-stage.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 1.6,
+        "challenge": false,
+        "stage": 2
+      }
+    },
+    {
+      "at": "+3.467s",
+      "level": "info",
+      "action": "challenge_transition_spawn_commit",
+      "message": "challenge_transition_spawn_commit",
+      "data": {
+        "t": 3.467,
+        "type": "challenge_transition_spawn_commit",
+        "stage": 2,
+        "pendingStage": 3,
+        "nextStageT": 0,
+        "challenge": false
+      }
+    },
+    {
+      "at": "+3.450s",
+      "level": "info",
+      "action": "stage_spawn",
+      "message": "stage_spawn",
+      "data": {
+        "t": 3.45,
+        "type": "stage_spawn",
+        "stage": 3,
+        "challenge": true,
+        "persona": null
+      }
+    },
+    {
+      "at": "+3.450s",
+      "level": "info",
+      "action": "stage_profile",
+      "message": "stage_profile",
+      "data": {
+        "t": 3.45,
+        "type": "stage_profile",
+        "stage": 3,
+        "challenge": true,
+        "band": "classic",
+        "challengeFamily": "classic",
+        "beeFamily": "classic",
+        "butFamily": "classic",
+        "bossFamily": "classic",
+        "themeId": "quiet-skies",
+        "backgroundMode": "classic-stars",
+        "frameAccent": "classic-blue",
+        "bossArchetype": "command-core"
+      }
+    },
+    {
+      "at": "+4.150s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 4.15,
+        "type": "audio_cue",
+        "cue": "formationArrival",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-level-underscore.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0.82,
+        "challenge": true,
+        "stage": 3
+      }
+    },
+    {
+      "at": "+4.983s",
+      "level": "info",
+      "action": "harness_stop",
+      "message": "harness_stop",
+      "data": {
+        "t": 4.983,
+        "type": "harness_stop",
+        "label": "challenge-entry-probe"
+      }
+    }
+  ]
+}

@@ -2826,6 +2826,7 @@ function renderChallengeStageDetail(row = {}){
           <article class="challengeEvidenceCard">
             <h3>Aliens</h3>
             <p>${esc(row.alienVariationRead || 'Alien variation read pending.')}</p>
+            <p class="docMeta">Group identity: ${esc(row.groupIdentityScore10 ?? 'n/a')}/10. ${esc(row.groupIdentityRead || 'Wave/group identity read pending.')}</p>
             <p class="docMeta">Lane types: ${esc((row.laneTypes || []).join(', ') || 'pending')}</p>
           </article>
           <article class="challengeEvidenceCard">

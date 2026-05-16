@@ -698,7 +698,15 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   slotDelay:.16,
   arcAmp:.78,
   dropAmp:.68,
-  laneTypes:Object.freeze(['bee','bee','bee','bee','but','but','but','but'])
+  laneTypes:Object.freeze(['bee','bee','bee','bee','but','but','but','but']),
+  groupLaneTypes:Object.freeze([
+   Object.freeze(['bee','bee','bee','bee','but','but','but','but']),
+   Object.freeze(['but','but','but','but','bee','bee','bee','bee']),
+   Object.freeze(['bee','bee','but','but','but','but','bee','bee']),
+   Object.freeze(['but','bee','bee','but','but','bee','bee','but']),
+   Object.freeze(['bee','but','bee','but','but','bee','but','bee'])
+  ]),
+  groupPathFamilies:Object.freeze(['first-challenge-peel','first-challenge-peel','first-challenge-peel','first-challenge-peel','first-challenge-peel'])
  }),
  Object.freeze({
   fromStage:7,
@@ -714,7 +722,15 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   slotDelay:.14,
   arcAmp:1.22,
   dropAmp:1.02,
-  laneTypes:Object.freeze(['but','boss','rogue','bee','bee','rogue','boss','but'])
+  laneTypes:Object.freeze(['but','boss','rogue','bee','bee','rogue','boss','but']),
+  groupLaneTypes:Object.freeze([
+   Object.freeze(['but','boss','rogue','bee','bee','rogue','boss','but']),
+   Object.freeze(['bee','rogue','but','boss','boss','but','rogue','bee']),
+   Object.freeze(['boss','but','bee','rogue','rogue','bee','but','boss']),
+   Object.freeze(['rogue','bee','boss','but','but','boss','bee','rogue']),
+   Object.freeze(['but','rogue','boss','bee','bee','boss','rogue','but'])
+  ]),
+  groupPathFamilies:Object.freeze(['cross-sweep','cross-sweep','hook-arc','cross-sweep','boss-led-loop'])
  }),
  Object.freeze({
   fromStage:11,
@@ -730,7 +746,15 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   slotDelay:.12,
   arcAmp:1.48,
   dropAmp:1.08,
-  laneTypes:Object.freeze(['boss','rogue','but','bee','boss','bee','but','rogue'])
+  laneTypes:Object.freeze(['boss','rogue','but','bee','boss','bee','but','rogue']),
+  groupLaneTypes:Object.freeze([
+   Object.freeze(['boss','rogue','but','bee','boss','bee','but','rogue']),
+   Object.freeze(['boss','boss','but','rogue','bee','but','rogue','boss']),
+   Object.freeze(['rogue','boss','bee','but','boss','but','bee','rogue']),
+   Object.freeze(['but','rogue','boss','boss','boss','boss','rogue','but']),
+   Object.freeze(['boss','bee','rogue','but','but','rogue','bee','boss'])
+  ]),
+  groupPathFamilies:Object.freeze(['hook-arc','hook-arc','cross-sweep','boss-led-loop','hook-arc'])
  }),
  Object.freeze({
   fromStage:15,
@@ -746,7 +770,15 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   slotDelay:.1,
   arcAmp:1.62,
   dropAmp:1.12,
-  laneTypes:Object.freeze(['boss','rogue','boss','but','rogue','but','boss','bee'])
+  laneTypes:Object.freeze(['boss','rogue','boss','but','rogue','but','boss','bee']),
+  groupLaneTypes:Object.freeze([
+   Object.freeze(['boss','rogue','boss','but','rogue','but','boss','bee']),
+   Object.freeze(['boss','boss','rogue','but','but','rogue','boss','boss']),
+   Object.freeze(['rogue','boss','but','boss','boss','but','boss','rogue']),
+   Object.freeze(['boss','but','rogue','boss','boss','rogue','but','boss']),
+   Object.freeze(['boss','rogue','but','bee','bee','but','rogue','boss'])
+  ]),
+  groupPathFamilies:Object.freeze(['boss-led-loop','boss-led-loop','hook-arc','boss-led-loop','crown-split-cascade'])
  }),
  Object.freeze({
   fromStage:19,
@@ -762,7 +794,15 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   slotDelay:.085,
   arcAmp:1.78,
   dropAmp:1.18,
-  laneTypes:Object.freeze(['boss','rogue','but','boss','bee','but','rogue','boss'])
+  laneTypes:Object.freeze(['boss','rogue','but','boss','bee','but','rogue','boss']),
+  groupLaneTypes:Object.freeze([
+   Object.freeze(['boss','rogue','but','boss','bee','but','rogue','boss']),
+   Object.freeze(['rogue','boss','boss','but','but','boss','boss','rogue']),
+   Object.freeze(['but','boss','rogue','boss','boss','rogue','boss','but']),
+   Object.freeze(['boss','but','boss','rogue','rogue','boss','but','boss']),
+   Object.freeze(['boss','rogue','boss','bee','bee','boss','rogue','boss'])
+  ]),
+  groupPathFamilies:Object.freeze(['crown-split-cascade','boss-led-loop','crown-split-cascade','hook-arc','crown-split-cascade'])
  })
 ]);
 
