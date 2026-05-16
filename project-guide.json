@@ -103,6 +103,41 @@
       ]
     },
     {
+      "id": "guardians-stage-arc",
+      "title": "Galaxy Guardians Stage Assessment",
+      "summary": "A human-readable read of what Guardians currently is, what the stage arc should feel like, and what work best advances it toward a deeper first-class game.",
+      "cards": [
+        {
+          "title": "Current visible truth",
+          "body": "Hosted `dev` and `beta` still present a one-level visible public slice that ends with `mission_complete`. That slice still needs stronger `WAIT` presentation, score-table fidelity, moving starfield motion, march cadence, explosion clarity, reserve ships, flags, missile-ready cues, and visible top reentry before we should treat it as a convincingly mature second cabinet."
+        },
+        {
+          "title": "Deeper internal game shape",
+          "body": "Under the public slice, the repo already has a repeated-rack and stage-band model: stages `1-2` establish the rack and fair early dives, stages `3-5` escalate into scout-to-flagship pressure, stages `6-9` become a sustained session, and stages `10+` act as a bounded late-loop review band instead of pretending to be a finished infinite campaign."
+        },
+        {
+          "title": "Best next work",
+          "body": "The highest-return sequence is: finish the opening-slice baseline from the committed Galaxian sources, promote stage `3-5` and `6-9` motion and pressure artifacts, add real Aurora-versus-Guardians platform-frame parity scoring, and only then open the door to homage variants."
+        },
+        {
+          "title": "Variant guardrail",
+          "body": "Future homage variants should preserve single-shot discipline, a marching rack, scout-to-flagship command pressure, visible bottom-exit/top-reentry threat, score-table literacy, and sparse arcade audiovisual identity. If a variant loses those, it may still be good, but it is no longer truly Guardians/Galaxian-family."
+        }
+      ],
+      "links": [
+        {
+          "label": "Read Full Guardians Stage-Arc Plan",
+          "href": "project-guide.html#guardians-stage-arc-doc",
+          "detail": "Full rendered stage-by-stage narrative, work progression, metric strategy, and homage-variant guardrails."
+        },
+        {
+          "label": "Open Guardians Conformance View",
+          "href": "conformance-dashboard.html?game=galaxy-guardians#conformance",
+          "detail": "Current score, gaps, and next investment areas for Guardians on the hosted dashboard."
+        }
+      ]
+    },
+    {
       "id": "automation",
       "title": "Automation-First Gating",
       "summary": "The release process should prefer automation over memory or manual estimation whenever practical.",
@@ -200,6 +235,11 @@
           "detail": "Game-selectable conformance score, priority, ingestion, and resource-economics dashboard."
         },
         {
+          "label": "Hosted Guardians Stage Assessment",
+          "href": "project-guide.html#guardians-stage-arc",
+          "detail": "Human-readable hosted summary of the current Guardians stage arc, visible slice, deeper internal stage bands, and next work."
+        },
+        {
           "label": "Project State And Conformance Program",
           "href": "https://github.com/sgwoods/Codex-Test1/blob/main/PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md",
           "detail": "Maintained top-level explanation of the platform, game, ingestion, harnessing, model-assisted workflow, and conformance program."
@@ -285,6 +325,12 @@
       "title": "Game Conformance Catalog",
       "summary": "Maintained per-game alien/enemy, audio cue, stage, and persona index rendered into the hosted project guide so the catalog is user-visible rather than only a repository artifact.",
       "file": "GAME_CONFORMANCE_CATALOG.md"
+    },
+    {
+      "id": "guardians-stage-arc-doc",
+      "title": "Galaxy Guardians Stage Arc And Homage Plan",
+      "summary": "Maintained readable game-arc assessment covering the visible one-level slice, deeper internal stage bands, refinement order, metric strategy, and source-faithful homage-variant guardrails.",
+      "file": "GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md"
     },
     {
       "id": "strategic-beta-review-doc",
