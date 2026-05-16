@@ -1,30 +1,29 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-16T11-59-58-058Z-65355",
-  "startedAt": "2026-05-16T11:59:58.058Z",
-  "endedAt": "2026-05-16T12:00:03.735Z",
+  "id": "2026-05-16T12-52-56-743Z-94815",
+  "startedAt": "2026-05-16T12:52:56.743Z",
+  "endedAt": "2026-05-16T12:53:02.701Z",
   "branch": "codex/macbook-audio-entry-grounding-cycle",
-  "commit": "45b6f144",
+  "commit": "82fd62cb",
   "command": [
     "npm",
     "run",
     "harness:analyze:challenge-stage-conformance"
   ],
   "axes": [
-    "challenge-stage",
-    "conformance-analysis"
+    "challenge-stage"
   ],
   "resources": [
-    "browser"
+    "cpu"
   ],
-  "notes": "critical challenge-stage analysis after initial-wave capture fix",
+  "notes": "",
   "measurement": {
-    "wallSeconds": 5.677,
-    "timeRealSeconds": 5.67,
-    "timeUserSeconds": 8.21,
-    "timeSystemSeconds": 2.85,
-    "cpuSeconds": 11.06,
+    "wallSeconds": 5.958,
+    "timeRealSeconds": 5.95,
+    "timeUserSeconds": 8.56,
+    "timeSystemSeconds": 2.84,
+    "cpuSeconds": 11.4,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -46,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 799020299,
-    "artifactBytesAfter": 799020394,
-    "artifactBytesDelta": 95
+    "artifactBytesBefore": 810143972,
+    "artifactBytesAfter": 810143968,
+    "artifactBytesDelta": -4
   }
 }

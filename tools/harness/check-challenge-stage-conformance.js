@@ -38,8 +38,11 @@ for(const stage of REQUIRED_STAGES){
   if(!row.currentRead || !row.graphicsRead || !row.movementRead || !row.alienVariationRead){
     fail(`stage ${stage} is missing critical narrative fields`, row);
   }
-  if(!Array.isArray(row.criticalGaps) || !row.criticalGaps.length){
+  if(!Array.isArray(row.criticalGaps)){
     fail(`stage ${stage} is missing critical gaps`, row);
+  }
+  if(!row.criticalGaps.length && !row.expectedReferenceHit){
+    fail(`stage ${stage} has no critical gaps without an expected reference hit`, row);
   }
   if(!Array.isArray(row.nextActions) || !row.nextActions.length){
     fail(`stage ${stage} is missing next actions`, row);

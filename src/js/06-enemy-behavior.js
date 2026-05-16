@@ -84,11 +84,12 @@ function updateChallengeEnemy(e,dt){
  // Challenge-stage fidelity is intentionally isolated here so we can tune the
  // first challenge pattern against reference footage without disturbing the
  // normal stage attack logic.
+	 const pathFamily=e.pathFamily||'classic-lane-wave';
 	 const fm=familyMotion(e);
 	 const classicStage3=S.stage===3&&e.fam==='classic';
-	 e.tm+=dt*((classicStage3?.345:.355)+(e.wave||0)*.007+Math.min(.012,S.stage*.0015));
+	 const baseChallengeSpeed=pathFamily==='first-challenge-peel'?.345:(classicStage3?.345:.355);
+	 e.tm+=dt*(baseChallengeSpeed+(e.wave||0)*.007+Math.min(.012,S.stage*.0015));
 	 const u=e.tm,p=e.ph,wave=e.wave||0,side=e.side||1,slot=e.slot||0,row=e.row||0,sweep=e.sweep||1;
-	 const pathFamily=e.pathFamily||'classic-lane-wave';
 	 const arcAmp=e.arcAmp||1,dropAmp=e.dropAmp||1;
 	 const laneX=PLAY_W/2+side*(48+slot*16);
 	 const topY=38+wave*14+row*8;
@@ -97,6 +98,9 @@ function updateChallengeEnemy(e,dt){
 	  if(pathFamily==='hook-arc'){
 	   e.x=startX+(laneX-startX)*(q<.58?Math.sin(q/.58*Math.PI/2):.82+(q-.58)*.43);
 	   e.y=topY+Math.sin(q*Math.PI*1.65+p)*7*arcAmp;
+	  }else if(pathFamily==='first-challenge-peel'){
+	   e.x=startX+(laneX-startX)*Math.sin(q*Math.PI/2);
+	   e.y=topY+q*2.8*dropAmp;
 	  }else if(pathFamily==='crown-split-cascade'){
 	   e.x=startX+(laneX-startX)*curve+sweep*Math.sin(q*Math.PI*2.6+p+slot*.35)*22*arcAmp;
 	   e.y=topY+Math.sin(q*Math.PI*1.8+p)*9*arcAmp+q*5*dropAmp;
@@ -115,6 +119,10 @@ function updateChallengeEnemy(e,dt){
 	  if(pathFamily==='hook-arc'){
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*1.2)*42+Math.sin(q*Math.PI*3+p)*6)*fm.challengeSweep*arcAmp;
 	   e.y=topY+q*12*dropAmp+Math.sin(q*7.2+p)*2.2;
+	  }else if(pathFamily==='first-challenge-peel'){
+	   const glide=18+slot*4;
+	   e.x=laneX-side*(q*glide);
+	   e.y=topY+q*4.2*dropAmp;
 	  }else if(pathFamily==='crown-split-cascade'){
 	   const cascade=slot%2?-1:1;
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.4+p*.4)*44+Math.sin(q*Math.PI)*28)*fm.challengeSweep*arcAmp*.82;
@@ -135,6 +143,10 @@ function updateChallengeEnemy(e,dt){
 	  if(pathFamily==='hook-arc'){
 	   e.x=laneX+sweep*(36-q*78)*fm.challengeSweep*arcAmp+Math.sin(q*7.4+p)*2.4;
 	   e.y=topY+10+q*205*fm.challengeDrop*dropAmp;
+	  }else if(pathFamily==='first-challenge-peel'){
+	   const glide=18+slot*4;
+	   e.x=laneX-side*(glide+q*(44+slot*4));
+	   e.y=topY+6+q*132*fm.challengeDrop*dropAmp;
 	  }else if(pathFamily==='crown-split-cascade'){
 	   const exit=sweep*(slot%2?-1:1);
 	   e.x=laneX+exit*(22+q*92)*fm.challengeSweep*arcAmp+Math.sin(q*11+p)*4.2;

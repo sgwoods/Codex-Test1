@@ -686,17 +686,19 @@ const AURORA_STAGE_CADENCE=Object.freeze({
 const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
  Object.freeze({
   fromStage:3,
-  id:'classic-lane-wave',
-  pathFamily:'classic-lane-wave',
+  id:'first-challenge-peel',
+  pathFamily:'first-challenge-peel',
   groups:5,
   enemiesPerGroup:8,
-  upperBandRatio:.5,
-  spawnOffsetX:44,
-  waveSpacingY:13,
+  upperBandRatio:.47,
+  spawnOffsetX:56,
+  waveSpacingY:12,
   rowSpacingY:8,
-  waveDelay:1.52,
-  slotDelay:.18,
-  laneTypes:Object.freeze(['boss','boss','but','bee','but','but','bee','but'])
+  waveDelay:1.46,
+  slotDelay:.16,
+  arcAmp:.78,
+  dropAmp:.68,
+  laneTypes:Object.freeze(['bee','bee','bee','bee','but','but','but','but'])
  }),
  Object.freeze({
   fromStage:7,

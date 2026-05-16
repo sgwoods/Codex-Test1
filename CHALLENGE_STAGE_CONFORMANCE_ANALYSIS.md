@@ -1,14 +1,14 @@
 # Challenge Stage Conformance Analysis
 
-Generated: 2026-05-16T11:59:58.206Z  
-Commit: 45b6f144  
+Generated: 2026-05-16T12:52:56.919Z
+Commit: 82fd62cb
 Branch: codex/macbook-audio-entry-grounding-cycle
 
 ## Executive Summary
 
 This is a deliberately critical challenge-stage readout. The prior alien-entry score can look healthy because it rewards coverage and broad stage signatures. This report applies a harsher "interesting factor" lens that starts every challenge stage at 1.0/10 and only adds credit for measured no-combat rule conformance, Galaga-reference trajectory match, stage-specific visual/alien novelty, and durable reference evidence.
 
-Current result: **4.1/10 interesting factor** and **4.4/10 challenge-stage conformance**. The strongest rule finding is that current probes show no enemy shots, no attack starts, and no ship losses during sampled challenge windows. The weakest player-facing finding is that challenge stages are still not authored enough as memorable Galaga-like set pieces: most measured runtime vectors best-match the same Galaga challenge-2 reference, stage 3 does not clearly read as the original first challenge, and stage 19 has no durable reference target yet.
+Current result: **4.3/10 interesting factor** and **4.5/10 challenge-stage conformance**. The strongest rule finding is that current probes show no enemy shots, no attack starts, and no ship losses during sampled challenge windows. The weakest player-facing finding is that challenge stages are still not authored enough as memorable Galaga-like set pieces: 3 sampled stage(s) still best-match the same Galaga challenge-2 reference, stage 3 now lands on the first-challenge bee-line reference but needs stronger trajectory precision, active sprite-motion novelty is unscored, and stage 19 lacks reference grounding.
 
 ## Method
 
@@ -22,36 +22,35 @@ Current result: **4.1/10 interesting factor** and **4.4/10 challenge-stage confo
 
 | Stage | Challenge | Interest | Score | Best Reference Match | Aurora Path Family | No-Shot/No-Kill | Critical Gap |
 | --- | --- | ---: | ---: | --- | --- | --- | --- |
-| 3 | 1 | 3.7/10 | 4/10 | challenge-2-arrival-group-1 (4.5/10) | classic-lane-wave | pass | Best reference match is challenge-2-arrival-group-1, not expected challenge-1-arrival-group-1 or challenge-1-late-wave-group-4.<br>First challenge still mixes boss entries into the opening lane sequence; the original first challenge reads more like a clean bonus pattern language than combat grammar. |
-| 7 | 2 | 4.9/10 | 4.9/10 | challenge-2-arrival-group-1 (5/10) | cross-sweep | pass | Cross-sweep identity is visible in labels, but the measured vector still lands closest to the same challenge-2 reference as most other challenge stages. |
-| 11 | 3 | 4.5/10 | 4.9/10 | challenge-2-arrival-group-1 (4.7/10) | hook-arc | pass | Best reference match is challenge-2-arrival-group-1, not expected challenge-3-arrival-group-1.<br>Dragonfly family appears, but sprite-motion novelty and tracked Galaga challenge-3 path phases are not yet scored. |
-| 15 | 4 | 4.6/10 | 4.9/10 | challenge-2-arrival-group-1 (5/10) | boss-led-loop | pass | Best reference match is challenge-2-arrival-group-1, not expected challenge-3-arrival-group-1.<br>Boss-led-loop has the strongest runtime spread, yet it still best-matches challenge 2 and lacks a late-stage Galaga contact-sheet target. |
+| 3 | 1 | 4.8/10 | 4.8/10 | challenge-1-arrival-group-1 (4.2/10) | first-challenge-peel | pass | Reference target hit; remaining work is trajectory precision and active motion scoring. |
+| 7 | 2 | 4.9/10 | 4.9/10 | challenge-2-arrival-group-1 (4.8/10) | cross-sweep | pass | Cross-sweep identity is visible in labels, but the measured vector still lands closest to the same challenge-2 reference as most other challenge stages. |
+| 11 | 3 | 4.5/10 | 4.8/10 | challenge-2-arrival-group-1 (4.3/10) | hook-arc | pass | Best reference match is challenge-2-arrival-group-1, not expected challenge-3-arrival-group-1.<br>Dragonfly family appears, but sprite-motion novelty and tracked Galaga challenge-3 path phases are not yet scored. |
+| 15 | 4 | 4.6/10 | 4.9/10 | challenge-2-arrival-group-1 (4.9/10) | boss-led-loop | pass | Best reference match is challenge-2-arrival-group-1, not expected challenge-3-arrival-group-1.<br>Boss-led-loop has the strongest runtime spread, yet it still best-matches challenge 2 and lacks a late-stage Galaga contact-sheet target. |
 | 19 | 5 | 2.8/10 | 3.1/10 | pending (n/a/10) | crown-split-cascade | pass | Stage 19 has a configured crown-split-cascade, but durable path extraction and Galaga late-challenge reference labels are missing. |
 
 
 ## Stage 3 / Challenge 1
 
-**Current score:** interesting factor 3.7/10; challenge conformance 4/10.
+**Current score:** interesting factor 4.8/10; challenge conformance 4.8/10.
 
 **Original target:** First Galaga-style challenging stage: readable bonus set piece, no fire, no ship loss, upper-band mirrored entries, bee/butterfly line waves, visible arrival/peel-off.
 
-**Aurora current:** classic-lane-wave / classic-lane-wave; lanes boss, boss, but, bee, but, but, bee, but; first-wave types boss, boss, but, bee, but, but, bee, but; visual families classic.
+**Aurora current:** first-challenge-peel / first-challenge-peel; lanes bee, bee, bee, bee, but, but, but, but; first-wave types bee, bee, bee, bee, but, but, but, but; visual families classic.
 
-**Graphics read:** Current graphics show classic family styling with bee, boss, but alien types. This is still a proxy for visual identity; no active sprite-motion phase score is attached to the challenge window yet.
+**Graphics read:** Current graphics show classic family styling with bee, but alien types. This is still a proxy for visual identity; no active sprite-motion phase score is attached to the challenge window yet.
 
-**Movement read:** Trajectory vector best-match score 4.5/10 against challenge-2-arrival-group-1; xRange 0.4208, yRange 0.3338, pathLength 0.3313.
+**Movement read:** Trajectory vector best-match score 4.2/10 against challenge-1-arrival-group-1; xRange 0.4685, yRange 0.2039, pathLength 0.2711.
 
-**Alien variation read:** Opening wave exposes 3 type(s) and classic visual family labels; later-stage novelty is not yet backed by sprite-motion scoring.
+**Alien variation read:** Opening wave exposes 2 type(s) and classic visual family labels; later-stage novelty is not yet backed by sprite-motion scoring.
 
 **Safety rule:** enemy shots 0, attack starts 0, ship losses 0.
 
 **Critical gaps:**
-- Best reference match is challenge-2-arrival-group-1, not expected challenge-1-arrival-group-1 or challenge-1-late-wave-group-4.
-- First challenge still mixes boss entries into the opening lane sequence; the original first challenge reads more like a clean bonus pattern language than combat grammar.
+- Reference target hit; remaining work is trajectory precision, lane timing, and active sprite-motion scoring.
 
 **Next actions:**
-- Replace the first challenge with reference-labeled challenge-1 group contracts: top-right bee-line entry, late top-left butterfly wave, peel-off exits, and clearer no-combat bonus staging.
-- Add contact-sheet comparison for first-visible frame, entry side, exit side, lane occupancy, and group timing before tuning visuals.
+- Protect the first-challenge bee/butterfly line contract, then tune path length, turn count, and rack-slot precision against challenge-1 arrival and late-wave labels.
+- Add contact-sheet comparison for first-visible frame, entry side, exit side, lane occupancy, and group timing so the next tuning pass can improve trajectory precision without subjective guessing.
 
 
 ## Stage 7 / Challenge 2
@@ -64,7 +63,7 @@ Current result: **4.1/10 interesting factor** and **4.4/10 challenge-stage confo
 
 **Graphics read:** Current graphics show classic family styling with bee, boss, but, rogue alien types. This is still a proxy for visual identity; no active sprite-motion phase score is attached to the challenge window yet.
 
-**Movement read:** Trajectory vector best-match score 5/10 against challenge-2-arrival-group-1; xRange 0.5366, yRange 0.3074, pathLength 0.389.
+**Movement read:** Trajectory vector best-match score 4.8/10 against challenge-2-arrival-group-1; xRange 0.5333, yRange 0.2388, pathLength 0.3567.
 
 **Alien variation read:** Opening wave exposes 4 type(s) and classic visual family labels; later-stage novelty is not yet backed by sprite-motion scoring.
 
@@ -80,7 +79,7 @@ Current result: **4.1/10 interesting factor** and **4.4/10 challenge-stage confo
 
 ## Stage 11 / Challenge 3
 
-**Current score:** interesting factor 4.5/10; challenge conformance 4.9/10.
+**Current score:** interesting factor 4.5/10; challenge conformance 4.8/10.
 
 **Original target:** Third challenge should make the new visual family and boss-led novelty obvious, with larger sweep vocabulary and no attacks.
 
@@ -88,7 +87,7 @@ Current result: **4.1/10 interesting factor** and **4.4/10 challenge-stage confo
 
 **Graphics read:** Current graphics show dragonfly family styling with bee, boss, but, rogue alien types. This is still a proxy for visual identity; no active sprite-motion phase score is attached to the challenge window yet.
 
-**Movement read:** Trajectory vector best-match score 4.7/10 against challenge-2-arrival-group-1; xRange 0.518, yRange 0.4048, pathLength 0.4579.
+**Movement read:** Trajectory vector best-match score 4.3/10 against challenge-2-arrival-group-1; xRange 0.4777, yRange 0.2792, pathLength 0.3448.
 
 **Alien variation read:** Opening wave exposes 4 type(s) and dragonfly visual family labels; later-stage novelty is not yet backed by sprite-motion scoring.
 
@@ -113,7 +112,7 @@ Current result: **4.1/10 interesting factor** and **4.4/10 challenge-stage confo
 
 **Graphics read:** Current graphics show dragonfly family styling with bee, boss, but, rogue alien types. This is still a proxy for visual identity; no active sprite-motion phase score is attached to the challenge window yet.
 
-**Movement read:** Trajectory vector best-match score 5/10 against challenge-2-arrival-group-1; xRange 0.6774, yRange 0.3797, pathLength 0.524.
+**Movement read:** Trajectory vector best-match score 4.9/10 against challenge-2-arrival-group-1; xRange 0.6365, yRange 0.3097, pathLength 0.4838.
 
 **Alien variation read:** Opening wave exposes 4 type(s) and dragonfly visual family labels; later-stage novelty is not yet backed by sprite-motion scoring.
 
@@ -155,7 +154,7 @@ Current result: **4.1/10 interesting factor** and **4.4/10 challenge-stage confo
 ## Plan To Improve
 
 1. Tighten the scorer first: separate first-visible arrival side, entry side, exit side, group index, no-fire/no-kill rule, path similarity, alien family novelty, and sprite-motion novelty.
-2. Implement stage 3 against the first Galaga challenge target: top-right bee-line entry, late top-left butterfly wave, clean peel-off exits, bonus-stage readable grouping, no combat grammar.
+2. Protect the stage 3 first-challenge reference hit, then improve its path-length and rack-slot precision against challenge-1 arrival/late-wave labels.
 3. Implement stage 7 as the second challenge: denser mixed-novelty-line behavior with a measured increase in crossing path depth and learnable timing.
 4. Implement stage 11 as the third challenge: boss-led/dragonfly novelty with explicit animation-phase scoring for flapping, pulsing, and silhouette changes.
 5. Capture or label later Galaga challenge references before claiming stage 15/19 maturity; then tune boss-led-loop and crown-split-cascade against those references.
@@ -163,8 +162,8 @@ Current result: **4.1/10 interesting factor** and **4.4/10 challenge-stage confo
 
 ## Success Criteria
 
-- Raise challenge-stage interesting factor from 4.1/10 toward 6.0/10 without regressing no-shot/no-kill guardrails.
-- Make stage 3 best-match challenge-1 references instead of challenge 2.
+- Raise challenge-stage interesting factor from 4.3/10 toward 6.0/10 without regressing no-shot/no-kill guardrails.
+- Keep stage 3 best-matching challenge-1 references while improving its raw trajectory score.
 - Preserve 0 enemy shots, 0 enemy attack starts, and 0 ship losses during challenge windows.
 - Add durable stage 19 evidence and reference labels before treating the late challenge as conformant.
 - Add sprite-motion scoring for challenge enemies so visual novelty is active-motion evidence, not only a family label.

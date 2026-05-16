@@ -23,7 +23,7 @@ async function main(){
   }
 
   const firstWave = result.enemies.filter(e => e.wave === 0).sort((a, b) => a.lane - b.lane);
-  const expectedTypes = ['boss', 'boss', 'but', 'bee', 'but', 'but', 'bee', 'but'];
+  const expectedTypes = ['bee', 'bee', 'bee', 'bee', 'but', 'but', 'but', 'but'];
   const actualTypes = firstWave.map(e => e.type);
   const baseSpawn = +Math.min(...firstWave.map(e => e.spawnPlan)).toFixed(2);
   const slotDelay = +(result.layout.slotDelay || 0.18).toFixed(2);
@@ -39,7 +39,7 @@ async function main(){
   }
 
   if(JSON.stringify(actualTypes) !== JSON.stringify(expectedTypes)){
-    fail('first challenge wave enemy family sequence drifted away from the production baseline', {
+    fail('first challenge wave enemy family sequence drifted away from the reference-backed first challenge contract', {
       expectedTypes,
       actualTypes,
       result

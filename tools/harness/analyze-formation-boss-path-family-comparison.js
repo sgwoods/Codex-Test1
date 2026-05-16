@@ -18,6 +18,7 @@ const TRAJECTORY_VECTOR_WEIGHTS = {
   lowerFieldShare: 0.1,
   rackSlotError: 0.08
 };
+const CHALLENGE_ARRIVAL_COMPARISON_SECONDS = 8.5;
 
 function ensureDir(dir){
   fs.mkdirSync(dir, { recursive: true });
@@ -146,8 +147,24 @@ function pointFeatures(track){
   };
 }
 
+function comparisonFeatures(track){
+  if(track.kind !== 'challenge' || !Array.isArray(track.points)) return pointFeatures(track);
+  const firstT = Number.isFinite(+track.points[0]?.t) ? +track.points[0].t : 0;
+  const firstLowerIndex = track.points.findIndex(point => Number.isFinite(+point.y) && +point.y >= 150);
+  const upperArrivalPoints = firstLowerIndex > 3
+    ? track.points.slice(0, firstLowerIndex)
+    : track.points.filter(point => Number.isFinite(+point.y) && +point.y < 150);
+  const arrivalPoints = upperArrivalPoints.filter(point => {
+    const t = Number.isFinite(+point.t) ? +point.t : firstT;
+    return t - firstT <= CHALLENGE_ARRIVAL_COMPARISON_SECONDS;
+  });
+  if(arrivalPoints.length < 4) return pointFeatures(track);
+  return pointFeatures(Object.assign({}, track, { points: arrivalPoints }));
+}
+
 function classifyTrack(track){
   const features = pointFeatures(track);
+  const comparison = comparisonFeatures(track);
   const families = [];
 	  const slotObserved = !!(track.slotObserved || track.challengeSlotObserved);
 	  if(track.kind === 'regular' && slotObserved) families.push('rack-slot-settle');
@@ -167,6 +184,7 @@ function classifyTrack(track){
     stageFamily: null,
     families,
     features,
+    comparisonFeatures: comparison,
     slotObserved
   };
 }
@@ -333,7 +351,7 @@ function referenceTrajectoryComparison(profile, windows){
   const challengeLabels = acceptedLabels.filter(label => label.kind === 'challengeEntry');
   const runtimeWindows = windows.map(window => {
     const normalized = (window.classifications || [])
-      .map(item => normalizeRuntimeVector(item.features || {}));
+      .map(item => normalizeRuntimeVector(item.comparisonFeatures || item.features || {}));
     return {
       windowId: window.windowId,
       stage: window.stage,
