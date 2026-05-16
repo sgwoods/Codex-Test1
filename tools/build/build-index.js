@@ -1781,19 +1781,77 @@ function applicationGuideStyles(){
       display:none;
     }
     .catalogMediaExpand summary::after{
-      content:"Expand inline";
-      display:inline-flex;
-      float:right;
-      color:var(--accent);
-      font-weight:900;
+      content:"";
+      display:none;
+    }
+    .catalogMediaExpand .mediaSummaryOpen{
+      display:none;
     }
     .catalogMediaExpand[open] summary::after{
-      content:"Close";
+      content:"";
+    }
+    .catalogMediaExpand[open] .mediaSummaryClosed{
+      display:none;
+    }
+    .catalogMediaExpand[open] .mediaSummaryOpen{
+      display:inline;
+    }
+    .catalogMediaExpand[open] summary{
+      position:fixed;
+      z-index:1002;
+      top:18px;
+      right:22px;
+      min-width:168px;
+      border-radius:12px;
+      border:1px solid rgba(126,242,255,0.34);
+      background:#061320;
+      box-shadow:0 12px 34px rgba(0,0,0,0.44);
     }
     .catalogMediaExpanded{
       padding:10px;
       border-top:1px solid rgba(126,242,255,0.10);
       background:rgba(1,6,12,0.82);
+    }
+    .catalogMediaExpand[open] .catalogMediaExpanded{
+      position:fixed;
+      inset:0;
+      z-index:1001;
+      display:grid;
+      grid-template-rows:auto minmax(0,1fr);
+      gap:14px;
+      padding:74px 24px 24px;
+      overflow:hidden;
+      background:rgba(1,6,12,0.96);
+      border:0;
+    }
+    .catalogMediaExpandedHeader{
+      max-width:1440px;
+      margin:0 auto;
+      color:#dff7ff;
+    }
+    .catalogMediaExpandedHeader strong{
+      display:block;
+      color:#f2fbff;
+      font-size:18px;
+      line-height:1.25;
+    }
+    .catalogMediaExpandedHeader p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+    .catalogMediaExpandedScroll{
+      min-width:0;
+      min-height:0;
+      max-width:1440px;
+      width:100%;
+      margin:0 auto;
+      overflow:auto;
+      border-radius:16px;
+      border:1px solid rgba(126,242,255,0.16);
+      background:#02070d;
+      box-shadow:0 18px 60px rgba(0,0,0,0.42);
     }
     .catalogMediaExpanded img{
       display:block;
@@ -1805,6 +1863,17 @@ function applicationGuideStyles(){
       border-radius:8px;
       background:#02070d;
       border:1px solid rgba(255,255,255,0.10);
+    }
+    .catalogMediaExpand[open] .catalogMediaExpandedScroll img{
+      max-width:100%;
+      max-height:none;
+      border:0;
+      border-radius:0;
+    }
+    .catalogMediaExpand[open].isContactSheet .catalogMediaExpandedScroll img{
+      max-width:none;
+      max-height:none;
+      margin:0 auto;
     }
     .catalogMediaExpanded img.isPixelated{
       image-rendering:pixelated;
@@ -2983,6 +3052,7 @@ function renderPixelSprite(sprite){
 function renderMediaImage(item){
   if(!item || !item.src) return '';
   const href = catalogMediaHref(item.src);
+  const label = item.label || 'Evidence image';
   const crop = item.crop || {};
   const cropWidth = Number(crop.width || crop.w);
   const cropHeight = Number(crop.height || crop.h);
@@ -2994,6 +3064,10 @@ function renderMediaImage(item){
   const hasCrop = [cropWidth, cropHeight, sourceWidth, sourceHeight, cropX, cropY, scale]
     .every(Number.isFinite) && cropWidth > 0 && cropHeight > 0 && sourceWidth > 0 && sourceHeight > 0 && scale > 0;
   const alt = item.alt || item.label || 'Evidence image';
+  const isContactSheet = /contact[- ]sheet/i.test(`${item.src || ''} ${label}`);
+  const panelNote = isContactSheet
+    ? 'Contact sheets are supporting visual evidence for scanning motion shape, frame progression, and density. They are not the primary score explanation; use the surrounding target/current/conformance text for the human-readable judgment, and scroll this panel at native scale when the pixels matter.'
+    : (item.note || 'Expanded evidence view.');
   const expandedScale = hasCrop ? Math.min(12, Math.max(scale, 6, scale * 2)) : scale;
   const media = hasCrop
     ? `<div class="mediaCrop" style="width:${Math.round(cropWidth * scale)}px;height:${Math.round(cropHeight * scale)}px">
@@ -3007,11 +3081,17 @@ function renderMediaImage(item){
     : `<img class="${item.pixelated ? 'isPixelated' : ''}" src="${esc(href)}" alt="${esc(`${alt} expanded`)}" loading="lazy">`;
   return `
     <div class="catalogMediaItem">
-      <span class="catalogMediaLabel">${esc(item.label || 'Evidence image')}</span>
+      <span class="catalogMediaLabel">${esc(label)}</span>
       ${media}
-      <details class="catalogMediaExpand">
-        <summary>View larger</summary>
-        <div class="catalogMediaExpanded">${expandedMedia}</div>
+      <details class="catalogMediaExpand${isContactSheet ? ' isContactSheet' : ''}">
+        <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
+        <div class="catalogMediaExpanded">
+          <div class="catalogMediaExpandedHeader">
+            <strong>${esc(label)}</strong>
+            <p>${esc(panelNote)}</p>
+          </div>
+          <div class="catalogMediaExpandedScroll">${expandedMedia}</div>
+        </div>
       </details>
       ${item.note ? `<span class="catalogMediaNote">${esc(item.note)}</span>` : ''}
     </div>
@@ -3646,6 +3726,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <p>${esc(challengeSummary.weakestFinding || 'Run the challenge-stage conformance analyzer to refresh this readout.')}</p>
             <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/challenge-stage-conformance/latest.json</code>. <strong>Report:</strong> <code>CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md</code>.</p>
             <p class="docMeta"><strong>Naming rule:</strong> normal Levels and Challenging Stages are separate. The challenge rows below use labels like <strong>Challenging Stage 1 (Levels 3-4)</strong> instead of calling that set piece Level 4.</p>
+            <p class="docMeta"><strong>Evidence-image rule:</strong> contact sheets are supporting artifacts for visual inspection, not the main human-readable conformance explanation. Use each row's target/current/conformance text for the judgment; open the evidence panel only when you need to inspect the underlying frames at native scale.</p>
             <div class="inlineDocShelf">
               <details class="inlineDocPreview">
                 <summary>Peek at the living effort summary</summary>
