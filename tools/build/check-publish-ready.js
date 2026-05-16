@@ -45,6 +45,10 @@ const REQUIRED_SOURCE_DOCS = [
   'PLATINUM_LUECK_REVIEW.md',
   'SUPABASE_DATA_API_ACCESS.md',
   'SECURITY_AUTH_REPLAY_STORAGE_LOCKDOWN.md',
+  'WHITE_PAPER.md',
+  'white-paper.json',
+  'white-paper/README.md',
+  'white-paper/CITATION_LEDGER.md',
   'supabase/data-api-access-contract.sql',
   'project-guide.json',
   'application-guide.json',
@@ -59,6 +63,7 @@ const REQUIRED_SOURCE_DOCS = [
 const USER_VISIBLE_DOC_FILES = [
   'public-project-page.html',
   'release-notes.html',
+  'white-paper.html',
   'project-guide.html',
   'application-guide.html',
   'platinum-guide.html',
@@ -95,6 +100,16 @@ const USER_VISIBLE_SECTIONS = [
       'Aurora / Platinum Release Notes',
       'release-notes.json',
       'Back to release dashboard'
+    ]
+  },
+  {
+    id: 'white-paper-page',
+    file: 'white-paper.html',
+    requiredText: [
+      'Aurora / Platinum White Paper',
+      'Current White Paper Draft',
+      'Citation Ledger',
+      'V1 Release Path'
     ]
   },
   {
@@ -254,6 +269,7 @@ function checkPublicProjectTemplate(){
     '{{LANE_CONFORMANCE_DASHBOARD_HREF}}',
     '{{LANE_CONFORMANCE_DATA_HREF}}',
     '{{LANE_PROJECT_GUIDE_HREF}}',
+    '{{LANE_WHITE_PAPER_HREF}}',
     '{{LANE_APPLICATION_GUIDE_HREF}}',
     '{{LANE_PLATINUM_GUIDE_HREF}}',
     '{{PUBLIC_FOOTER_NOTE}}',

@@ -126,6 +126,39 @@
       ]
     },
     {
+      "id": "white-paper",
+      "title": "Hosted White Paper",
+      "visiblePath": "white-paper.html",
+      "template": "src/project-guide.template.html",
+      "builder": "tools/build/build-index.js#buildWhitePaperGuide",
+      "summary": "Hosted narrative surface for the living white paper, its citation ledger, and the supporting white-paper project area.",
+      "sections": [
+        {
+          "id": "white-paper-guide-structure",
+          "label": "White-paper overview and project-area framing",
+          "sourceArtifacts": [
+            "white-paper.json",
+            "WHITE_PAPER.md",
+            "white-paper/README.md",
+            "white-paper/ILLUSTRATION_PLAN.md",
+            "white-paper/CITATION_LEDGER.md"
+          ],
+          "currentness": "The hosted page renders its guide framing from white-paper.json and the current narrative/citation sources from committed Markdown files.",
+          "riskIfStale": "The public narrative can drift away from the actual maintained white-paper project area or its current draft."
+        },
+        {
+          "id": "white-paper-release-memory",
+          "label": "White-paper release memory",
+          "sourceArtifacts": [
+            "white-paper/releases/2026-05-16-v0.1.0/WHITE_PAPER.md",
+            "white-paper/releases/2026-05-16-v0.1.0/RELEASE_NOTES.md"
+          ],
+          "currentness": "The hosted page links directly to the versioned white-paper release record so the narrative can be compared over time instead of being overwritten without memory.",
+          "riskIfStale": "The current paper can imply historical continuity without showing how earlier drafts were preserved."
+        }
+      ]
+    },
+    {
       "id": "release-notes-page",
       "title": "Hosted Release Notes",
       "visiblePath": "release-notes.html",

@@ -140,6 +140,7 @@ async function main(){
   ensureIncludes(projectHtml, expectedFocus, `public/${CANONICAL_PROJECT_SLUG}.html current focus`);
   ensureIncludes(projectHtml, 'release-dashboard.html', `public/${CANONICAL_PROJECT_SLUG}.html dashboard link`);
   ensureIncludes(projectHtml, 'project-guide.html', `public/${CANONICAL_PROJECT_SLUG}.html project guide link`);
+  ensureIncludes(projectHtml, 'white-paper.html', `public/${CANONICAL_PROJECT_SLUG}.html white paper link`);
   ensureIncludes(projectHtml, expectedMarker, `public/${CANONICAL_PROJECT_SLUG}.html provenance marker`);
   ensureIncludes(legacyProjectHtml, `<span class="metaValue">${buildInfo.version}</span>`, `public/${LEGACY_PROJECT_SLUG}.html release version`);
   ensureIncludes(legacyProjectHtml, expectedFocus, `public/${LEGACY_PROJECT_SLUG}.html current focus`);

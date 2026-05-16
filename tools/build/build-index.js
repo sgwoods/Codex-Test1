@@ -13,6 +13,7 @@ const {
   DEV_CONFORMANCE_DASHBOARD_DATA,
   DEV_PUBLIC_PROJECT_PAGE,
   DEV_RELEASE_NOTES_PAGE,
+  DEV_WHITE_PAPER,
   DEV_PROJECT_GUIDE,
   DEV_APPLICATION_GUIDE,
   DEV_PLATINUM_GUIDE,
@@ -26,6 +27,7 @@ const {
   PRODUCTION_CONFORMANCE_DASHBOARD_DATA,
   PRODUCTION_PUBLIC_PROJECT_PAGE,
   PRODUCTION_RELEASE_NOTES_PAGE,
+  PRODUCTION_WHITE_PAPER,
   PRODUCTION_PROJECT_GUIDE,
   PRODUCTION_APPLICATION_GUIDE,
   PRODUCTION_PLATINUM_GUIDE,
@@ -56,6 +58,7 @@ const RELEASE_DASHBOARD = path.join(ROOT, 'release-dashboard.json');
 const CONFORMANCE_DASHBOARD_LATEST = path.join(ROOT, 'reference-artifacts', 'analyses', 'release-conformance-dashboard', 'latest.json');
 const RELEASE_MANIFEST = path.join(ROOT, 'release-manifest.json');
 const PROJECT_GUIDE = path.join(ROOT, 'project-guide.json');
+const WHITE_PAPER_GUIDE = path.join(ROOT, 'white-paper.json');
 const APPLICATION_GUIDE = path.join(ROOT, 'application-guide.json');
 const PLATINUM_GUIDE = path.join(ROOT, 'platinum-guide.json');
 const PLAYER_GUIDE = path.join(ROOT, 'player-guide.json');
@@ -66,6 +69,7 @@ const GALAGA_REFERENCE_SPRITE_MODEL = path.join(ROOT, 'reference-artifacts', 'an
 const APPLICATION_ARTIFACT_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'application-artifact-conformance', 'latest.json');
 const PERSONA_PERFORMANCE_DISTRIBUTION = path.join(ROOT, 'reference-artifacts', 'analyses', 'persona-performance-distribution', 'latest.json');
 const CATALOG_MEDIA_SOURCE_PATHS = new Set();
+let ACTIVE_SOURCE_BLOB_BASE = 'https://github.com/sgwoods/Codex-Test1/blob/main/';
 const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/index.html',
   'dist/dev/release-dashboard.html',
@@ -73,6 +77,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/conformance-dashboard-data.json',
   'dist/dev/public-project-page.html',
   'dist/dev/release-notes.html',
+  'dist/dev/white-paper.html',
   'dist/dev/project-guide.html',
   'dist/dev/application-guide.html',
   'dist/dev/platinum-guide.html',
@@ -89,6 +94,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/production/conformance-dashboard-data.json',
   'dist/production/public-project-page.html',
   'dist/production/release-notes.html',
+  'dist/production/white-paper.html',
   'dist/production/project-guide.html',
   'dist/production/application-guide.html',
   'dist/production/platinum-guide.html',
@@ -104,6 +110,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/beta/conformance-dashboard-data.json',
   'dist/beta/public-project-page.html',
   'dist/beta/release-notes.html',
+  'dist/beta/white-paper.html',
   'dist/beta/project-guide.html',
   'dist/beta/application-guide.html',
   'dist/beta/platinum-guide.html',
@@ -121,6 +128,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'conformance-dashboard-data.json',
   'public-project-page.html',
   'release-notes.html',
+  'white-paper.html',
   'project-guide.html',
   'application-guide.html',
   'platinum-guide.html',
@@ -132,6 +140,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dev/conformance-dashboard-data.json',
   'dev/public-project-page.html',
   'dev/release-notes.html',
+  'dev/white-paper.html',
   'dev/project-guide.html',
   'dev/application-guide.html',
   'dev/platinum-guide.html',
@@ -144,6 +153,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'beta/conformance-dashboard-data.json',
   'beta/public-project-page.html',
   'beta/release-notes.html',
+  'beta/white-paper.html',
   'beta/project-guide.html',
   'beta/application-guide.html',
   'beta/platinum-guide.html',
@@ -472,6 +482,14 @@ function loadProjectGuide(){
     PROJECT_GUIDE,
     'Project Guide',
     'Add project-guide.json to restore the generated documentation guide.'
+  );
+}
+
+function loadWhitePaperGuide(){
+  return loadGuide(
+    WHITE_PAPER_GUIDE,
+    'Aurora / Platinum White Paper',
+    'Add white-paper.json to restore the generated hosted white paper.'
   );
 }
 
@@ -1425,6 +1443,30 @@ function projectGuideStyles(){
   `.trim();
 }
 
+function whitePaperGuideStyles(){
+  return `
+    .markdown .mermaid{
+      display:block;
+      margin:0 0 18px;
+      padding:12px 0;
+      overflow:auto;
+    }
+  `.trim();
+}
+
+function whitePaperMermaidScript(){
+  return `
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        securityLevel: 'loose',
+        theme: 'dark'
+      });
+    </script>
+  `.trim();
+}
+
 function releaseNotesStyles(){
   return `
 ${projectGuideStyles()}
@@ -2019,15 +2061,33 @@ function renderGuideSection(section){
 }
 
 function renderInlineMarkdown(text=''){
+  function rewriteInlineHref(rawHref=''){
+    const href = String(rawHref || '').trim();
+    if(!href) return href;
+    if(/^(?:https?:|mailto:|data:|#|\/)/i.test(href)) return href;
+    if(/\.(?:md|json|sql|toml|txt)$/i.test(href)){
+      return `${ACTIVE_SOURCE_BLOB_BASE}${href.replace(/^\.\//, '')}`;
+    }
+    return href;
+  }
+
+  function rewriteInlineImageSrc(rawSrc=''){
+    const src = String(rawSrc || '').trim();
+    if(!src) return src;
+    if(/^(?:https?:|data:|assets\/)/i.test(src)) return src;
+    return catalogMediaHref(src);
+  }
+
   let out = esc(text);
-  out = out.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img alt="$1" src="$2">');
-  out = out.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+  out = out.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_, alt, src) => `<img alt="${alt}" src="${esc(rewriteInlineImageSrc(src))}">`);
+  out = out.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label, href) => `<a href="${esc(rewriteInlineHref(href))}">${label}</a>`);
   out = out.replace(/`([^`]+)`/g, '<code>$1</code>');
   out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   return out;
 }
 
-function renderMarkdown(md=''){
+function renderMarkdown(md='', options = {}){
+  const allowMermaid = !!options.mermaid;
   const lines = md.replace(/\r\n/g, '\n').split('\n');
   if(lines[0] && /^#\s+/.test(lines[0])) lines.shift();
   const out = [];
@@ -2101,14 +2161,18 @@ function renderMarkdown(md=''){
       const lang = line.replace(/^\s*```/, '').trim();
       const block = [];
       i++;
-      while(i < lines.length && !/^\s*```/.test(lines[i])){
-        block.push(lines[i]);
-        i++;
-      }
+    while(i < lines.length && !/^\s*```/.test(lines[i])){
+      block.push(lines[i]);
       i++;
-      out.push(`<pre><code${lang ? ` data-lang="${esc(lang)}"` : ''}>${esc(block.join('\n'))}</code></pre>`);
-      continue;
     }
+    i++;
+    if(allowMermaid && String(lang || '').toLowerCase() === 'mermaid'){
+      out.push(`<div class="mermaid">${esc(block.join('\n'))}</div>`);
+    }else{
+      out.push(`<pre><code${lang ? ` data-lang="${esc(lang)}"` : ''}>${esc(block.join('\n'))}</code></pre>`);
+    }
+    continue;
+  }
     const heading = line.match(/^\s*(#{2,5})\s+(.*)$/);
     if(heading){
       const level = Math.min(6, heading[1].length + 1);
@@ -2142,7 +2206,9 @@ function renderMarkdown(md=''){
 function renderSourceDocSection(section){
   const file = path.join(ROOT, section.file);
   const source = read(file);
-  const body = renderMarkdown(source);
+  const body = renderMarkdown(source, {
+    mermaid: section.renderMode === 'mermaid-markdown'
+  });
   return `
     <section class="section" id="${esc(section.id)}">
       <div class="sectionHeader">
@@ -2225,6 +2291,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
           <div class="heroLinks">
             <a class="button" href="index.html">Open current lane build</a>
             <a class="button" href="public-project-page.html">Open lane project page</a>
+            <a class="button" href="white-paper.html">Open white paper</a>
             <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="platinum-guide.html">Open Platinum guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
@@ -2253,6 +2320,78 @@ function buildProjectGuide(buildInfo, latestNote, guide){
   return template
     .replace('{{PROJECT_GUIDE_TITLE}}', esc(guide.title || 'Project Guide'))
     .replace('{{PROJECT_GUIDE_STYLES}}', projectGuideStyles())
+    .replace('{{PROJECT_GUIDE_BODY}}', body)
+    .trimEnd() + '\n';
+}
+
+function buildWhitePaperGuide(buildInfo, latestNote, guide){
+  const template = read(PROJECT_GUIDE_TEMPLATE);
+  const orderedSections = [...(guide.sections || []), ...(guide.sourceDocs || [])];
+  const toc = orderedSections.map(section => `
+    <li><a href="#${esc(section.id)}">${esc(section.title)}</a></li>
+  `).join('\n');
+  const sections = (guide.sections || []).map(renderGuideSection).join('\n');
+  const sourceDocs = (guide.sourceDocs || []).map(renderSourceDocSection).join('\n');
+  const hasMermaid = (guide.sourceDocs || []).some(section => section.renderMode === 'mermaid-markdown');
+  const body = `
+    <main class="shell">
+      <div class="main">
+        <section class="hero">
+          <div class="heroTop">
+            <span class="eyebrow">White Paper</span>
+            <a class="homeLink" href="project-guide.html">Project Guide</a>
+            <a class="homeLink" href="https://sgwoods.github.io/Aurora-Galactica/">Game Home</a>
+          </div>
+          <h1>${esc(guide.title || 'Aurora / Platinum White Paper')}</h1>
+          <p>${esc(guide.strapline || '')}</p>
+          <div class="goal"><strong>Current goal:</strong> ${esc(guide.currentGoal || '')}</div>
+          <div class="meta">
+            <div class="metaCard">
+              <span class="metaLabel">Current Release</span>
+              <span class="metaValue">${esc(displayBuildVersion(buildInfo))}</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Lane</span>
+              <span class="metaValue">${esc(buildInfo.releaseChannel)}</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Updated</span>
+              <span class="metaValue">${esc(publicDateLong(buildInfo))}</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Latest Note</span>
+              <span class="metaValue">${esc(latestNote.title)}</span>
+            </div>
+          </div>
+          <div class="heroLinks">
+            <a class="button" href="index.html">Open current lane build</a>
+            <a class="button" href="public-project-page.html">Open lane project page</a>
+            <a class="button" href="project-guide.html">Open project guide</a>
+            <a class="button" href="conformance-dashboard.html">Open conformance dashboard</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/tree/main/white-paper">Open white-paper project area</a>
+            <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/WHITE_PAPER.md">Open Markdown source</a>
+          </div>
+        </section>
+        ${sections}
+        ${sourceDocs}
+      </div>
+      <aside class="toc">
+        <h2>White Paper Index</h2>
+        <p>This page is generated during the normal build so the hosted white paper stays aligned with the repo-owned project area, release posture, and current narrative draft.</p>
+        <ul>
+          ${toc}
+        </ul>
+        <p class="footer">
+          Latest release note: <strong>${esc(latestNote.title)}</strong><br>
+          Release ${esc(displayBuildVersion(buildInfo))} · Updated ${esc(publicDateLong(buildInfo))}
+        </p>
+      </aside>
+    </main>
+    ${hasMermaid ? whitePaperMermaidScript() : ''}
+  `.trim();
+  return template
+    .replace('{{PROJECT_GUIDE_TITLE}}', esc(guide.title || 'Aurora / Platinum White Paper'))
+    .replace('{{PROJECT_GUIDE_STYLES}}', `${projectGuideStyles()}\n${whitePaperGuideStyles()}`)
     .replace('{{PROJECT_GUIDE_BODY}}', body)
     .trimEnd() + '\n';
 }
@@ -2289,6 +2428,7 @@ function buildPublicProjectPage(buildInfo, latestNote, dashboard){
     LANE_CONFORMANCE_DASHBOARD_HREF: 'conformance-dashboard.html',
     LANE_CONFORMANCE_DATA_HREF: 'conformance-dashboard-data.json',
     LANE_RELEASE_NOTES_HREF: 'release-notes.html',
+    LANE_WHITE_PAPER_HREF: 'white-paper.html',
     LANE_PROJECT_GUIDE_HREF: 'project-guide.html',
     LANE_APPLICATION_GUIDE_HREF: 'application-guide.html',
     LANE_PLATINUM_GUIDE_HREF: 'platinum-guide.html',
@@ -2949,6 +3089,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           <div class="heroLinks">
             <a class="button" href="index.html">Open current lane build</a>
             <a class="button" href="project-guide.html">Open project guide</a>
+            <a class="button" href="white-paper.html">Open white paper</a>
             <a class="button" href="platinum-guide.html">Open Platinum guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
           </div>
@@ -3565,6 +3706,7 @@ function buildPlatinumGuide(buildInfo, latestNote, guide){
           <div class="heroLinks">
             <a class="button" href="index.html">Open current lane build</a>
             <a class="button" href="project-guide.html">Open project guide</a>
+            <a class="button" href="white-paper.html">Open white paper</a>
             <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
             <a class="button" href="release-dashboard.html">Open release dashboard</a>
@@ -3633,6 +3775,7 @@ function buildPlayerGuide(buildInfo, latestNote, guide){
             <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/">Play production build</a>
             <a class="button" href="https://sgwoods.github.io/Aurora-Galactica/beta/">Play beta build</a>
             <a class="button" href="project-guide.html">Open project guide</a>
+            <a class="button" href="white-paper.html">Open white paper</a>
             <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="platinum-guide.html">Open Platinum guide</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1/issues">Report or track issues</a>
@@ -3700,6 +3843,7 @@ function lanePaths(lane){
       conformanceDashboardData: PRODUCTION_CONFORMANCE_DASHBOARD_DATA,
       publicProjectPage: PRODUCTION_PUBLIC_PROJECT_PAGE,
       releaseNotesPage: PRODUCTION_RELEASE_NOTES_PAGE,
+      whitePaper: PRODUCTION_WHITE_PAPER,
       projectGuide: PRODUCTION_PROJECT_GUIDE,
       applicationGuide: PRODUCTION_APPLICATION_GUIDE,
       platinumGuide: PRODUCTION_PLATINUM_GUIDE,
@@ -3717,6 +3861,7 @@ function lanePaths(lane){
     conformanceDashboardData: DEV_CONFORMANCE_DASHBOARD_DATA,
     publicProjectPage: DEV_PUBLIC_PROJECT_PAGE,
     releaseNotesPage: DEV_RELEASE_NOTES_PAGE,
+    whitePaper: DEV_WHITE_PAPER,
     projectGuide: DEV_PROJECT_GUIDE,
     applicationGuide: DEV_APPLICATION_GUIDE,
     platinumGuide: DEV_PLATINUM_GUIDE,
@@ -3734,6 +3879,7 @@ function build(options = {}){
   const template = read(TEMPLATE);
   const styles = read(STYLES).trimEnd();
   const buildCommit = git('rev-parse HEAD', 'unknown');
+  ACTIVE_SOURCE_BLOB_BASE = `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/`;
   const buildShortCommit = git('rev-parse --short HEAD', 'unknown');
   const buildBranch = git('branch --show-current', 'detached');
   const buildRepoRef = detectRepoRef();
@@ -3766,6 +3912,7 @@ function build(options = {}){
   const conformanceDashboardSummary = loadConformanceDashboardSummary();
   const conformanceDashboardData = loadConformanceDashboardData();
   const projectGuide = loadProjectGuide();
+  const whitePaperGuide = loadWhitePaperGuide();
   const applicationGuide = loadApplicationGuide();
   const platinumGuide = loadPlatinumGuide();
   const playerGuide = loadPlayerGuide();
@@ -3882,6 +4029,7 @@ function build(options = {}){
   const publicProjectPageHtml = buildPublicProjectPage(buildInfo, latestNote, releaseDashboard);
   fs.writeFileSync(out.publicProjectPage, publicProjectPageHtml);
   fs.writeFileSync(out.releaseNotesPage, buildReleaseNotesPage(buildInfo, latestNote, releaseNotes));
+  fs.writeFileSync(out.whitePaper, buildWhitePaperGuide(buildInfo, latestNote, whitePaperGuide));
   if(buildLane === 'dev'){
     fs.mkdirSync(path.dirname(LOCAL_DEV_PUBLIC_PROJECT_PREVIEW), { recursive: true });
     fs.writeFileSync(LOCAL_DEV_PUBLIC_PROJECT_PREVIEW, publicProjectPageHtml);
@@ -3924,6 +4072,7 @@ function build(options = {}){
     out.conformanceDashboardData,
     out.publicProjectPage,
     out.releaseNotesPage,
+    out.whitePaper,
     ...(buildLane === 'dev' ? [LOCAL_DEV_PUBLIC_PROJECT_PREVIEW] : []),
     out.projectGuide,
     out.applicationGuide,

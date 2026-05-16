@@ -1,0 +1,157 @@
+{
+  "title": "Aurora / Platinum White Paper",
+  "strapline": "A hosted, human-readable home for the living white paper: what this project is trying to prove, how Platinum and the games fit together, why the conformance program exists, and how the narrative is versioned over time.",
+  "currentGoal": "Turn the current draft into a durable v1 release asset for a broad technical and builder audience: keep the main paper readable, connect it directly to shipped evidence and release discipline, recover key citations, and use the surrounding hosted docs for deeper detail rather than overloading the paper itself.",
+  "sections": [
+    {
+      "id": "white-paper-project-area",
+      "title": "White Paper Project Area",
+      "summary": "Where this work lives in the repo and how it should be maintained.",
+      "cards": [
+        {
+          "title": "Living Draft",
+          "body": "The current narrative source of truth is `WHITE_PAPER.md`. It should keep moving with the project instead of becoming a one-off summary."
+        },
+        {
+          "title": "Project Area",
+          "body": "The `white-paper/` directory is the durable project area for supporting material: the working-area README, citation ledger, and versioned white-paper releases."
+        },
+        {
+          "title": "Release Memory",
+          "body": "Meaningful white-paper revisions should be snapshotted under `white-paper/releases/` so the narrative can be compared over time just like the software."
+        },
+        {
+          "title": "Hosted Surface",
+          "body": "This generated page is the ongoing hosted, human-readable form. It should stay wired into the same documentation family as the project guide, platform guide, player guide, and release dashboard."
+        }
+      ]
+    },
+    {
+      "id": "reader-shape",
+      "title": "Reader Shape",
+      "summary": "Who this page is for and how it should balance readability with depth.",
+      "cards": [
+        {
+          "title": "Broad Technical Reader",
+          "body": "Assume curiosity, technical interest, and some builder intuition, but do not assume deep platform, browser, arcade, or conformance-program expertise."
+        },
+        {
+          "title": "Readable Main Narrative",
+          "body": "The white paper should explain the thesis, architecture, release discipline, evidence program, and AI method clearly without becoming a complete internal manual."
+        },
+        {
+          "title": "Deeper Surfaces Nearby",
+          "body": "Hosted guides, dashboards, release notes, and source docs should provide the extra detail so the main paper can stay focused and persuasive."
+        }
+      ]
+    },
+    {
+      "id": "hosted-entry-points",
+      "title": "Hosted Entry Points",
+      "summary": "The main ways a reader should enter the white-paper story and related project surfaces.",
+      "links": [
+        {
+          "label": "Current White Paper Draft",
+          "href": "#white-paper-current-doc",
+          "detail": "Jump directly to the current rendered white paper inside this hosted page."
+        },
+        {
+          "label": "Citation Ledger",
+          "href": "#white-paper-citation-ledger-doc",
+          "detail": "See the maintained list of outside ideas, reference families, and methodological influences."
+        },
+        {
+          "label": "Project Guide",
+          "href": "project-guide.html",
+          "detail": "Return to the broader hosted project map for Platinum, Aurora, Galaxy Guardians, ingestion, conformance, and release state."
+        },
+        {
+          "label": "Lane Project Page",
+          "href": "public-project-page.html",
+          "detail": "Read the shorter public-facing project summary for the current lane."
+        },
+        {
+          "label": "Conformance Dashboard",
+          "href": "conformance-dashboard.html",
+          "detail": "Open the live score, confidence, cost, and investment dashboard when the narrative needs the measured readout."
+        },
+        {
+          "label": "White Paper Project Source",
+          "href": "https://github.com/sgwoods/Codex-Test1/tree/main/white-paper",
+          "detail": "Open the repo-owned white-paper project area in GitHub."
+        },
+        {
+          "label": "White Paper Markdown Source",
+          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/WHITE_PAPER.md",
+          "detail": "Open the current Markdown source directly."
+        }
+      ]
+    },
+    {
+      "id": "white-paper-release-history",
+      "title": "White Paper Release History",
+      "summary": "The first durable release pattern for preserving the narrative over time.",
+      "links": [
+        {
+          "label": "v0.1.0 Snapshot",
+          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/white-paper/releases/2026-05-16-v0.1.0/WHITE_PAPER.md",
+          "detail": "The first seeded snapshot of the white paper in browsable release form."
+        },
+        {
+          "label": "v0.1.0 Release Notes",
+          "href": "https://github.com/sgwoods/Codex-Test1/blob/main/white-paper/releases/2026-05-16-v0.1.0/RELEASE_NOTES.md",
+          "detail": "Short note describing what the first white-paper release established and what should happen next."
+        }
+      ]
+    },
+    {
+      "id": "v1-release-path",
+      "title": "V1 Release Path",
+      "summary": "The next best steps for turning the current seed into a true v1 white-paper release.",
+      "bullets": [
+        "Tighten the audience voice so the v1 paper reads clearly as a public-facing promotional and methodological document, not only as an internal orientation memo.",
+        "Recover and cite the earlier Karpathy-style assessment directly so the methodology section can point to a precise prior observation instead of only a conceptual placeholder.",
+        "Add selected screenshots or rendered excerpts from the hosted dashboard, project page, and game surfaces so the paper shows the artifacts it talks about.",
+        "Add a compact internal bibliography that points readers to the canonical source docs: project state, ingestion framework, conformance economics, release policy, and application/platform guides.",
+        "Sharpen the historical arc from 1.0.0 launch to 1.2.0 platform framing to 1.4.0 multi-game and conformance maturity so the story reads as a clear progression.",
+        "Decide which claims should be explicitly public and promotional versus which should remain engineering-facing detail, then trim or regroup sections accordingly.",
+        "Connect the v1 paper to one stable release-quality evidence pack so the narrative and the measurable artifacts can be reviewed side by side.",
+        "Add a concise section on what this project teaches about generative-AI-assisted software practice beyond games, with examples tied to actual repo artifacts.",
+        "Cut the first intentional white-paper v1 snapshot under `white-paper/releases/` once the citations, visuals, and public voice are all coherent enough to stand alone."
+      ]
+    }
+  ],
+  "sourceDocs": [
+    {
+      "id": "white-paper-current-doc",
+      "title": "Current White Paper Draft",
+      "summary": "The living white paper as it exists in the repo today, rendered into the same hosted-document family as the other project guides.",
+      "file": "WHITE_PAPER.md",
+      "renderMode": "mermaid-markdown"
+    },
+    {
+      "id": "white-paper-citation-ledger-doc",
+      "title": "Citation Ledger",
+      "summary": "Maintained list of outside ideas, source families, how they were used, and what still needs to be recovered or tightened.",
+      "file": "white-paper/CITATION_LEDGER.md"
+    },
+    {
+      "id": "white-paper-illustration-plan-doc",
+      "title": "Illustration Plan",
+      "summary": "Working list of selected visuals, candidate deeper assets, and the open illustration choices that still need deliberate discussion.",
+      "file": "white-paper/ILLUSTRATION_PLAN.md"
+    },
+    {
+      "id": "white-paper-working-area-doc",
+      "title": "White Paper Working Area",
+      "summary": "How the project area is organized and when new narrative snapshots should be cut.",
+      "file": "white-paper/README.md"
+    },
+    {
+      "id": "white-paper-v010-release-notes-doc",
+      "title": "White Paper v0.1.0 Release Notes",
+      "summary": "Release note for the first seeded white-paper snapshot.",
+      "file": "white-paper/releases/2026-05-16-v0.1.0/RELEASE_NOTES.md"
+    }
+  ]
+}

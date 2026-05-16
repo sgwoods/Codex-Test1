@@ -33,6 +33,7 @@ function laneConfig(lane){
         'https://sgwoods.github.io/Aurora-Galactica/dev/conformance-dashboard.html',
         'https://sgwoods.github.io/Aurora-Galactica/dev/conformance-dashboard-data.json',
         'https://sgwoods.github.io/Aurora-Galactica/dev/application-guide.html',
+        'https://sgwoods.github.io/Aurora-Galactica/dev/white-paper.html',
         'https://sgwoods.github.io/Aurora-Galactica/dev/public-project-page.html',
         'https://sgwoods.github.io/Aurora-Galactica/dev/assets/platinum-platform-mark.png',
         'https://sgwoods.github.io/Aurora-Galactica/dev/assets/reference-audio/galaga3-start.m4a'
@@ -47,6 +48,7 @@ function laneConfig(lane){
         'https://sgwoods.github.io/Aurora-Galactica/beta/conformance-dashboard.html',
         'https://sgwoods.github.io/Aurora-Galactica/beta/conformance-dashboard-data.json',
         'https://sgwoods.github.io/Aurora-Galactica/beta/application-guide.html',
+        'https://sgwoods.github.io/Aurora-Galactica/beta/white-paper.html',
         'https://sgwoods.github.io/Aurora-Galactica/beta/public-project-page.html',
         'https://sgwoods.github.io/Aurora-Galactica/beta/assets/platinum-platform-mark.png',
         'https://sgwoods.github.io/Aurora-Galactica/beta/assets/reference-audio/galaga3-start.m4a'
@@ -61,6 +63,7 @@ function laneConfig(lane){
         'https://sgwoods.github.io/Aurora-Galactica/conformance-dashboard.html',
         'https://sgwoods.github.io/Aurora-Galactica/conformance-dashboard-data.json',
         'https://sgwoods.github.io/Aurora-Galactica/application-guide.html',
+        'https://sgwoods.github.io/Aurora-Galactica/white-paper.html',
         'https://sgwoods.github.io/Aurora-Galactica/public-project-page.html',
         'https://sgwoods.github.io/Aurora-Galactica/assets/platinum-platform-mark.png',
         'https://sgwoods.github.io/Aurora-Galactica/assets/reference-audio/galaga3-start.m4a'

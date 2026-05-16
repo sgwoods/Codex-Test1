@@ -69,6 +69,8 @@ Primary hosted docs on hosted `/production`:
 
 - project guide:
   - `https://sgwoods.github.io/Aurora-Galactica/project-guide.html`
+- white paper:
+  - `https://sgwoods.github.io/Aurora-Galactica/white-paper.html`
 - Platinum guide:
   - `https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html`
 - player guide:
@@ -83,6 +85,12 @@ Equivalent docs should also exist on hosted `/dev` and hosted `/beta`.
 Best top-level state and conformance-program overview:
 
 - [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md)
+
+Best living white paper and project-area narrative:
+
+- [WHITE_PAPER.md](WHITE_PAPER.md)
+- [white-paper/README.md](white-paper/README.md)
+- [white-paper/CITATION_LEDGER.md](white-paper/CITATION_LEDGER.md)
 
 Best platform overview:
 
