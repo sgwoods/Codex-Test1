@@ -257,6 +257,9 @@ function addCostContext(item, economics, investmentById){
         ? 'Guardrail spend: value is preventing regression rather than raising the score.'
         : 'Estimated cost/value; dedicated investment candidate not yet generated.')
   };
+  if(candidate?.nextAction){
+    item.next = candidate.nextAction;
+  }
   return updateRowCells(item);
 }
 

@@ -94,21 +94,24 @@ function latestLevelArcCategory(quality, levelArcReport){
 }
 
 function nextAudioAction(audioEventGap, audioCueCandidate, audioContract){
-  if(audioContract?.nextStep) return audioContract.nextStep;
-  const segmentCue = audioEventGap?.summary?.highestSegmentRiskCue || '';
-  const segmentRole = audioEventGap?.summary?.highestSegmentRiskRole || '';
-  if(segmentCue && segmentRole){
-    return `Tune the highest segment-level audio gap next: ${segmentCue} ${segmentRole}. Rerun audio comparison, event-gap analysis, and quality scoring after the change.`;
-  }
   if(audioCueCandidate?.cue === 'challengePerfect'){
     const decision = audioCueCandidate.decision || {};
     if(decision.keep && decision.best){
       return `Promote the measured Challenge Perfect candidate ${decision.best}, then rerun full audio comparison, event-gap analysis, and quality scoring.`;
     }
+    if(decision.keep === false && audioCueCandidate.nextStep){
+      return `Challenge Perfect: ${audioCueCandidate.nextStep}`;
+    }
     if(decision.measuredBest){
       return `Continue Challenge Perfect candidate generation around ${decision.measuredBest}; the latest sweep found no safe keeper, so do not promote a runtime cue yet.`;
     }
   }
+  const segmentCue = audioEventGap?.summary?.highestSegmentRiskCue || '';
+  const segmentRole = audioEventGap?.summary?.highestSegmentRiskRole || '';
+  if(segmentCue && segmentRole){
+    return `Tune the highest segment-level audio gap next: ${segmentCue} ${segmentRole}. Rerun audio comparison, event-gap analysis, and quality scoring after the change.`;
+  }
+  if(audioContract?.nextStep) return audioContract.nextStep;
   const nextStep = audioEventGap?.nextStep;
   if(nextStep) return nextStep;
   const highest = audioEventGap?.summary?.highestRiskLabel || audioEventGap?.summary?.highestRiskCue || '';
@@ -211,7 +214,6 @@ function buildReadme(report){
   lines.push('## Interpretation');
   lines.push('');
   lines.push(report.interpretation);
-  lines.push('');
   return `${lines.join('\n')}\n`;
 }
 

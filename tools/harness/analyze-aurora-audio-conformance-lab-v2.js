@@ -50,7 +50,7 @@ const CUE_FAMILIES = [
     candidateFiles: {
       playerHit: 'latest-player-hit-focus.json',
       rescueJoin: 'latest-rescue-join.json',
-      challengePerfect: 'latest.json'
+      challengePerfect: 'latest-challenge-perfect.json'
     }
   }
 ];
@@ -307,12 +307,14 @@ function cueArtifact({ cue, family, comparisonByCue, risks }){
       candidateCount: (candidate.report.candidates || []).length,
       repetitions: candidate.report.repetitions || 1,
       topCandidates: topCandidateRows(candidate.report),
+      nextStep: candidate.report.nextStep || '',
       decision
     } : {
       artifact: null,
       candidateCount: 0,
       repetitions: 0,
       topCandidates: [],
+      nextStep: '',
       decision: {
         status: 'not-yet-swept',
         keep: false,
@@ -357,10 +359,14 @@ function familyDecision(family, cues){
     highestRiskCue: highestRiskCue?.cue || '',
     highestRisk10: round(highestRiskCue?.currentRisk?.gapRisk10, 2),
     runtimePromotionReady,
-    recommendation: runtimePromotionReady
-      ? `Review accepted ${family.label} cue(s) against final theme comparison, semantic score, and overall quality before editing runtime audio.`
+    recommendation: runtimePromotionReady && highestRiskCue && !highestRiskCue.decision.keep && highestRiskCue.candidateHistory?.nextStep
+      ? `${highestRiskCue.cue}: ${highestRiskCue.candidateHistory.nextStep}`
+      : runtimePromotionReady
+        ? `Review accepted ${family.label} cue(s) against final theme comparison, semantic score, and overall quality before editing runtime audio.`
       : (highestRiskCue
-        ? `Continue candidate generation for ${highestRiskCue.cue}; current risk ${round(highestRiskCue.currentRisk.gapRisk10, 2)}/10.`
+        ? (highestRiskCue.candidateHistory?.nextStep
+          ? `${highestRiskCue.cue}: ${highestRiskCue.candidateHistory.nextStep}`
+          : `Continue candidate generation for ${highestRiskCue.cue}; current risk ${round(highestRiskCue.currentRisk.gapRisk10, 2)}/10.`)
         : `Add focused candidate loops for ${family.label}.`)
   };
 }
@@ -410,7 +416,7 @@ function markdown(report){
   for(const family of report.families){
     lines.push(`| ${family.label} | ${family.cues.map(cue => cue.cue).join(', ')} | ${family.decision.sweptCueCount}/${family.cues.length} | ${family.decision.acceptedCueCount} | ${family.scoreContext.averageRisk10 ?? 'n/a'} | ${family.decision.status} | ${family.decision.recommendation} |`);
   }
-  lines.push('', '## Promotion Rule', '', report.promotionRule, '');
+  lines.push('', '## Promotion Rule', '', report.promotionRule);
   return `${lines.join('\n')}\n`;
 }
 
@@ -436,6 +442,10 @@ function main(){
   const keeperCueCount = families.reduce((sum, family) => sum + family.cues.filter(cue => cue.decision.keep).length, 0);
   const sweptCueCount = families.reduce((sum, family) => sum + family.cues.filter(cue => cue.candidateHistory.candidateCount > 0).length, 0);
   const cueCount = families.reduce((sum, family) => sum + family.cues.length, 0);
+  const highestRiskFamily = families
+    .slice()
+    .sort((a, b) => (+b.decision.highestRisk10 || 0) - (+a.decision.highestRisk10 || 0))[0] || null;
+  const labNextStep = highestRiskFamily?.decision?.recommendation || contractAnalysis?.nextStep || eventGap.nextStep || 'Run the next focused audio candidate loop, then rebuild this lab artifact.';
   const report = {
     schemaVersion: 1,
     artifactType: 'aurora-audio-conformance-lab-v2',
@@ -443,7 +453,7 @@ function main(){
     branch,
     commit,
     dirty,
-    problem: 'Aurora audio is the current weakest quality category; stagePulse onset and acoustic event matching are the highest measured risks.',
+    problem: 'Aurora audio is the current weakest quality category; the lab keeps cue-family candidate history tied to the latest measured event-gap risks.',
     strategy: 'Group cue families by player meaning, attach current event-gap risk, attach focused candidate-loop history, and allow runtime promotion only after measured keeper gates plus full audio/semantic/quality checks.',
     successMeasure: 'Move audio toward 7.5+/10 while preserving 9/9 cue alignment, semantic audio near 9.78/10, and overall quality >= 9.2/10.',
     promotionRule: 'This analyzer records keeper candidates but does not edit runtime cue definitions. Runtime promotion requires a keeper, a refreshed full theme comparison, no cue-alignment regression, no semantic regression, and overall quality >= 9.2.',
@@ -475,7 +485,7 @@ function main(){
       nextGap: eventGap.nextStep || ''
     },
     families,
-    nextStep: contractAnalysis?.nextStep || eventGap.nextStep || 'Run the next focused audio candidate loop, then rebuild this lab artifact.'
+    nextStep: labNextStep
   };
   const outDir = path.join(OUT_ROOT, `${generatedAt.slice(0, 10)}-${commit}${dirty ? '-dirty' : ''}`);
   writeJson(path.join(outDir, 'report.json'), report);
