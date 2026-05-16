@@ -2183,10 +2183,62 @@ function buildDocumentationProvenanceGuideSection(provenance){
   };
 }
 
+function buildChallengeStageEffortGuideSection(){
+  const artifact = loadChallengeStageConformance();
+  const summary = artifact.summary || {};
+  const rows = (artifact.stageRows || []).map(row => [
+    `Stage ${row.stage || ''} / Challenge ${row.challengeNumber || ''}`,
+    `Interest: **${row.interestingFactor10 ?? 'n/a'}/10**\n\nConformance: **${row.conformanceScore10 ?? 'n/a'}/10**\n\nBest ref: \`${row.bestReferenceMatch?.labelId || 'pending'}\` (${row.referenceMatchScore10 ?? 'n/a'}/10)`,
+    row.currentRead || 'Current read pending.',
+    (row.criticalGaps || [])[0] || 'Critical gap pending.',
+    (row.nextActions || [])[0] || 'Next action pending.'
+  ]);
+  return {
+    id: 'challenge-stage-conformance-effort',
+    title: 'Challenge Stage Conformance Effort',
+    summary: `Living sub-effort for Galaga-like challenge stages. Current critical read: ${summary.interestingFactorScore10 ?? 'n/a'}/10 interesting factor and ${summary.score10 ?? 'n/a'}/10 challenge-stage conformance. ${summary.weakestFinding || 'Run the challenge-stage analyzer to refresh the report.'}`,
+    cards: [
+      {
+        title: 'Problem',
+        body: summary.playerMeaning || 'Challenge stages must be safe bonus-stage exhibitions and also memorable authored visual set pieces with readable alien movement and novelty.'
+      },
+      {
+        title: 'Measurement',
+        body: 'Generated from `reference-artifacts/analyses/challenge-stage-conformance/latest.json`, Galaga path-reference labels, Aurora browser runtime probes, and challenge timing/collision guardrails.'
+      },
+      {
+        title: 'Next Best Step',
+        body: 'Attack Stage 3 first: make it best-match the Galaga challenge-1 arrival and late-wave references while preserving 0 enemy shots, 0 attack starts, and 0 ship losses.'
+      }
+    ],
+    links: [
+      {
+        label: 'Open Challenge Deep Dive',
+        href: 'application-guide.html#challenge-stage-conformance',
+        detail: 'Generated Application Guide table with per-stage graphics, movement, critical gaps, and next actions.'
+      },
+      {
+        label: 'Open Rendered Effort Report',
+        href: 'project-guide.html#challenge-stage-conformance-analysis-doc',
+        detail: 'Human-readable generated report with executive summary, stage-by-stage critique, plan, measurements, and success criteria.'
+      },
+      {
+        label: 'Open Conformance Dashboard',
+        href: 'conformance-dashboard.html?game=aurora-galactica#conformance',
+        detail: 'Dashboard context for comparing this sub-effort against other conformance priorities and costs.'
+      }
+    ],
+    table: {
+      columns: ['Stage', 'Measurement', 'Aurora Current', 'Current Gap', 'Recommended Next Step'],
+      rows
+    }
+  };
+}
+
 function buildProjectGuide(buildInfo, latestNote, guide){
   const template = read(PROJECT_GUIDE_TEMPLATE);
   const provenanceSection = buildDocumentationProvenanceGuideSection(loadDocumentationProvenance());
-  const guideSections = [...(guide.sections || []), provenanceSection];
+  const guideSections = [...(guide.sections || []), buildChallengeStageEffortGuideSection(), provenanceSection];
   const orderedSections = [...guideSections, ...(guide.sourceDocs || [])];
   const toc = orderedSections.map(section => `
     <li><a href="#${esc(section.id)}">${esc(section.title)}</a></li>
@@ -3244,6 +3296,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <p><strong>Current critical read:</strong> ${esc(challengeSummary.interestingFactorScore10 || 'n/a')}/10 interesting factor; ${esc(challengeSummary.score10 || 'n/a')}/10 challenge-stage conformance.</p>
             <p>${esc(challengeSummary.weakestFinding || 'Run the challenge-stage conformance analyzer to refresh this readout.')}</p>
             <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/challenge-stage-conformance/latest.json</code>. <strong>Report:</strong> <code>CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md</code>.</p>
+            <p><a class="button" href="project-guide.html#challenge-stage-conformance-analysis-doc">Open rendered effort report</a> <a class="button" href="project-guide.html#challenge-stage-conformance-effort">Open living effort summary</a></p>
           </div>
           <div class="tableWrap">
             <table class="dataTable">
