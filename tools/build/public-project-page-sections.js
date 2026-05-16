@@ -3,6 +3,7 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const REVIEW_LEARNING_LATEST = path.join(ROOT, 'reference-artifacts', 'analyses', 'review-learning', 'latest.json');
+const CHALLENGE_STAGE_CONFORMANCE_LATEST = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
 
 function esc(value = ''){
   return String(value)
@@ -210,6 +211,45 @@ function loadReviewLearning(){
   return readJson(REVIEW_LEARNING_LATEST, null);
 }
 
+function loadChallengeStageConformance(){
+  const artifact = readJson(CHALLENGE_STAGE_CONFORMANCE_LATEST, null);
+  if(!artifact) return null;
+  return Object.assign({}, artifact, {
+    stageRows: Array.isArray(artifact.stageRows) ? artifact.stageRows : []
+  });
+}
+
+function challengeStagePublicCards(artifact){
+  if(!artifact){
+    return `
+                <article class="card">
+                    <h3>Challenge-stage analysis pending</h3>
+                    <p>Run npm run harness:analyze:challenge-stage-conformance to publish the critical stage-by-stage readout.</p>
+                </article>`;
+  }
+  const summary = artifact.summary || {};
+  const rows = (artifact.stageRows || []).slice(0, 5).map(row => `
+                <article class="investmentRow">
+                    <div>
+                        <strong>Stage ${esc(row.stage)} / Challenge ${esc(row.challengeNumber)}: ${esc(row.interestingFactor10)}/10 interest</strong>
+                        <p>${esc(row.currentRead || '')}</p>
+                        <p class="smallText"><strong>Target:</strong> ${esc(row.galagaTarget || '')}</p>
+                    </div>
+                    <div class="investmentMeta">
+                        <span>Path: ${esc(row.pathFamily || 'pending')}</span>
+                        <span>Best ref: ${esc(row.bestReferenceMatch?.labelId || 'pending')} (${esc(row.referenceMatchScore10 ?? 'n/a')}/10)</span>
+                        <span>Gap: ${esc((row.criticalGaps || [])[0] || 'pending')}</span>
+                    </div>
+                </article>`).join('\n');
+  return `
+                <article class="card emphasis">
+                    <h3>Challenge-stage critical read</h3>
+                    <p><strong>${esc(summary.interestingFactorScore10 ?? 'n/a')}/10 interesting factor</strong> and <strong>${esc(summary.score10 ?? 'n/a')}/10 conformance</strong>. ${esc(summary.weakestFinding || '')}</p>
+                    <p class="smallText">${esc(summary.playerMeaning || '')}</p>
+                </article>
+${rows}`;
+}
+
 function reviewLearningSummaryCards(ledger){
   if(!ledger){
     return `
@@ -284,6 +324,7 @@ function reviewLearningPatternCards(ledger){
 
 function buildPublicProjectSections(data = {}, provenance = {}){
   const reviewLearning = loadReviewLearning();
+  const challengeStageConformance = loadChallengeStageConformance();
   return {
     PUBLIC_RELEASE_GATE_CARDS: releaseGateCards(data),
     PUBLIC_CONFORMANCE_SCORE_CHART: scoreRows(data),
@@ -291,6 +332,7 @@ function buildPublicProjectSections(data = {}, provenance = {}){
     PUBLIC_INVESTMENT_QUEUE: investmentRows(data),
     PUBLIC_INGESTION_OVERVIEW_CARDS: ingestionCards(data),
     PUBLIC_GAME_CATALOG_CARDS: gameCatalogCards(data),
+    PUBLIC_CHALLENGE_STAGE_ANALYSIS: challengeStagePublicCards(challengeStageConformance),
     PUBLIC_REVIEW_LEARNING_SUMMARY: reviewLearningSummaryCards(reviewLearning),
     PUBLIC_REVIEW_LEARNING_ISSUES: reviewLearningIssueRows(reviewLearning),
     PUBLIC_REVIEW_LEARNING_PATTERNS: reviewLearningPatternCards(reviewLearning),

@@ -64,6 +64,7 @@ const LOCAL_DEV_PUBLIC_PROJECT_PREVIEW = path.join(ROOT, 'local-dev', 'public-au
 const GALAGA_REFERENCE_SPRITE_TARGETS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-reference-sprites', 'pixel-targets-0.1.json');
 const GALAGA_REFERENCE_SPRITE_MODEL = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-reference-sprites', 'model-0.1.json');
 const APPLICATION_ARTIFACT_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'application-artifact-conformance', 'latest.json');
+const CHALLENGE_STAGE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
 const PERSONA_PERFORMANCE_DISTRIBUTION = path.join(ROOT, 'reference-artifacts', 'analyses', 'persona-performance-distribution', 'latest.json');
 const CATALOG_MEDIA_SOURCE_PATHS = new Set();
 const GENERATED_BUILD_PATHS = new Set([
@@ -2380,6 +2381,7 @@ const ALIEN_REFERENCE_CONTEXT = {
 let galagaReferenceSpriteTargetsCache = null;
 let galagaReferenceSpriteModelCache = null;
 let applicationArtifactConformanceCache = null;
+let challengeStageConformanceCache = null;
 
 function loadGalagaReferenceSpriteTargets(){
   if(galagaReferenceSpriteTargetsCache) return galagaReferenceSpriteTargetsCache;
@@ -2426,6 +2428,24 @@ function loadApplicationArtifactConformance(){
     applicationArtifactConformanceCache = { rows: [] };
   }
   return applicationArtifactConformanceCache;
+}
+
+function loadChallengeStageConformance(){
+  if(challengeStageConformanceCache) return challengeStageConformanceCache;
+  if(!fs.existsSync(CHALLENGE_STAGE_CONFORMANCE)){
+    challengeStageConformanceCache = { stageRows: [], summary: {} };
+    return challengeStageConformanceCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_STAGE_CONFORMANCE);
+    challengeStageConformanceCache = Object.assign({}, artifact, {
+      stageRows: Array.isArray(artifact.stageRows) ? artifact.stageRows : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    challengeStageConformanceCache = { stageRows: [], summary: {} };
+  }
+  return challengeStageConformanceCache;
 }
 
 function loadPersonaPerformanceDistribution(){
@@ -2714,6 +2734,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'conformance-alien-index', title: 'Alien Conformance Index' },
     { id: 'conformance-audio-index', title: 'Audio Conformance Index' },
     { id: 'stage-conformance-summary', title: 'Stage Conformance Summary' },
+    { id: 'challenge-stage-conformance', title: 'Challenge Stage Deep Dive' },
     { id: 'persona-catalog', title: 'Testing Personas' },
     { id: 'persona-performance-distribution', title: 'Persona Performance Distribution' },
     { id: 'graphics-controls', title: 'Presentation Controls' },
@@ -2871,6 +2892,23 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
       <td>${esc(entry.gap || '')}</td>
     </tr>
   `).join('\n');
+  const challengeStageConformance = loadChallengeStageConformance();
+  const challengeSummary = challengeStageConformance.summary || {};
+  const challengeStageRows = (challengeStageConformance.stageRows || []).map((entry) => `
+    <tr>
+      <td><strong>Stage ${esc(entry.stage || '')}</strong><br><span class="docMeta">Challenge ${esc(entry.challengeNumber || '')}</span></td>
+      <td><strong>${esc(entry.interestingFactor10 || 'n/a')}/10 interest</strong><br><span class="docMeta">${esc(entry.conformanceScore10 || 'n/a')}/10 conformance</span></td>
+      <td>${esc(entry.galagaTarget || '')}<br><span class="docMeta">${esc(entry.galagaReferenceMeaning || 'Reference meaning pending for this stage.')}</span></td>
+      <td>${esc(entry.currentRead || '')}<br><span class="docMeta">${esc(entry.movementRead || '')}</span></td>
+      <td>${esc(entry.graphicsRead || '')}<br><span class="docMeta">${esc(entry.alienVariationRead || '')}</span></td>
+      <td>${(entry.criticalGaps || []).map(gap => `<div>${esc(gap)}</div>`).join('') || '<span class="docMeta">No critical gaps recorded.</span>'}</td>
+      <td>${(entry.nextActions || []).map(action => `<div>${esc(action)}</div>`).join('') || '<span class="docMeta">No next action recorded.</span>'}</td>
+    </tr>
+  `).join('\n') || `
+    <tr>
+      <td colspan="7"><span class="docMeta">Challenge-stage conformance analysis pending. Run <code>npm run harness:analyze:challenge-stage-conformance</code>.</span></td>
+    </tr>
+  `;
   const personaRows = (guide.personaRows || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.label || '')}</strong><br><span class="docMeta">${esc(entry.harnessId || '')}</span></td>
@@ -3192,6 +3230,36 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               </thead>
               <tbody>
                 ${stageConformanceRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="challenge-stage-conformance">
+          <div class="sectionHeader">
+            <h2>Challenge Stage Deep Dive</h2>
+            <p>A deliberately critical stage-by-stage comparison of Aurora challenging stages against Galaga-style bonus-stage behavior. This separates rule conformance from interesting visual conformance: no enemy shooting and no ship loss are necessary, but the higher-value gap is authored alien movement, alien-family variation, and learnable set-piece novelty.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Current critical read:</strong> ${esc(challengeSummary.interestingFactorScore10 || 'n/a')}/10 interesting factor; ${esc(challengeSummary.score10 || 'n/a')}/10 challenge-stage conformance.</p>
+            <p>${esc(challengeSummary.weakestFinding || 'Run the challenge-stage conformance analyzer to refresh this readout.')}</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/challenge-stage-conformance/latest.json</code>. <strong>Report:</strong> <code>CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md</code>.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Stage</th>
+                  <th>Score</th>
+                  <th>Original Target</th>
+                  <th>Aurora Current / Movement</th>
+                  <th>Graphics / Alien Variation</th>
+                  <th>Critical Gap</th>
+                  <th>Next Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${challengeStageRows}
               </tbody>
             </table>
           </div>

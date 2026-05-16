@@ -1,30 +1,30 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-15T21-38-12-655Z-39680",
-  "startedAt": "2026-05-15T21:38:12.655Z",
-  "endedAt": "2026-05-15T21:39:17.430Z",
+  "id": "2026-05-16T11-59-58-058Z-65355",
+  "startedAt": "2026-05-16T11:59:58.058Z",
+  "endedAt": "2026-05-16T12:00:03.735Z",
   "branch": "codex/macbook-audio-entry-grounding-cycle",
-  "commit": "eb6d951f",
+  "commit": "45b6f144",
   "command": [
     "npm",
     "run",
-    "harness:score:quality-conformance"
+    "harness:analyze:challenge-stage-conformance"
   ],
   "axes": [
-    "quality",
-    "scorecard"
+    "challenge-stage",
+    "conformance-analysis"
   ],
   "resources": [
-    "cpu"
+    "browser"
   ],
-  "notes": "quality score after challengePerfect no-keeper evidence and restored entry baseline",
+  "notes": "critical challenge-stage analysis after initial-wave capture fix",
   "measurement": {
-    "wallSeconds": 64.775,
-    "timeRealSeconds": 64.77,
-    "timeUserSeconds": 55.2,
-    "timeSystemSeconds": 17.64,
-    "cpuSeconds": 72.84,
+    "wallSeconds": 5.677,
+    "timeRealSeconds": 5.67,
+    "timeUserSeconds": 8.21,
+    "timeSystemSeconds": 2.85,
+    "cpuSeconds": 11.06,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -46,8 +46,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 796585627,
-    "artifactBytesAfter": 797246207,
-    "artifactBytesDelta": 660580
+    "artifactBytesBefore": 799020299,
+    "artifactBytesAfter": 799020394,
+    "artifactBytesDelta": 95
   }
 }

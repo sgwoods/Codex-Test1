@@ -66,7 +66,9 @@
           "label": "Game conformance catalog",
           "sourceArtifacts": [
             "reference-artifacts/analyses/release-conformance-dashboard/latest.json",
+            "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
             "GAME_CONFORMANCE_CATALOG.md",
+            "CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md",
             "application-guide.json",
             "reference-artifacts/analyses/application-artifact-conformance/latest.json",
             "reference-artifacts/analyses/persona-performance-distribution/latest.json"
@@ -193,6 +195,8 @@
             "reference-artifacts/analyses/application-artifact-conformance/latest.json",
             "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json",
             "reference-artifacts/analyses/aurora-visual-look-conformance/latest.json",
+            "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+            "CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md",
             "reference-artifacts/analyses/persona-performance-distribution/latest.json"
           ],
           "currentness": "The artifact scorecard and persona performance distribution are generated from analysis outputs rather than single static claims.",
