@@ -300,7 +300,7 @@ function metricScoreContext(metric, score10){
   if(text.includes('challenge-stage variation')){
     return {
       confidence: 'medium',
-      resolution: 'composite proxy from challenge timing, challenge identity, and non-repetition',
+      resolution: 'dedicated stage-by-stage challenge conformance report when available; fallback proxy uses challenge timing, challenge identity, and non-repetition',
       scoreMeaning: scoreMeaning(score10)
     };
   }
@@ -442,8 +442,8 @@ function metricExplanation(metric){
   }
   if(text.includes('challenge-stage variation')){
     return {
-      calculation: 'Composite proxy: 45% challenge timing fidelity, 35% challenge-stage identity, and 20% long-run non-repetition until a dedicated challenge-variation scorer exists.',
-      grounding: 'Best-case grounding is reference challenge-stage footage, alien/path family labels, bonus opportunity windows, result feedback timing, and Aurora stage-to-stage variation traces.',
+      calculation: 'Dedicated scorer reads each sampled challenging stage as its own set piece: no-shot/no-kill safety, best Galaga reference match, arrival geometry, alien-role semantics, visual family novelty, and durable evidence. If that report is unavailable, the dashboard falls back to a challenge timing/identity/non-repetition proxy.',
+      grounding: 'Current grounding is browser-backed Aurora challenge probes plus media-backed Galaga challenge labels/contact sheets. Best-case grounding adds more late-stage reference labels, tracked trajectories, active sprite-motion windows, bonus opportunity windows, and result feedback timing.',
       meaning: 'Players should experience challenge stages as learnable bonus set pieces that introduce new motion and scoring opportunities. Designers use it to prevent bonus rounds from becoming repetitive pauses.'
     };
   }
@@ -949,6 +949,7 @@ function main(){
   const economicsPath = latestReport('conformance-economics');
   const visualLookPath = latestReport('aurora-visual-look-conformance');
   const alienEntryChallengePath = latestReport('alien-entry-challenge-variation');
+  const challengeStagePath = latestReport('challenge-stage-conformance');
   const audioLabV2Path = latestReport('aurora-audio-conformance-lab-v2');
   const audioContractPath = latestReport('aurora-audio-cue-contracts');
   const quality = readJson(qualityPath);
@@ -957,6 +958,7 @@ function main(){
   const economics = economicsPath ? readJson(economicsPath) : { summary: {} };
   const visualLook = visualLookPath ? readJson(visualLookPath) : null;
   const alienEntryChallenge = alienEntryChallengePath ? readJson(alienEntryChallengePath) : null;
+  const challengeStage = challengeStagePath ? readJson(challengeStagePath) : null;
   const audioContract = audioContractPath ? readJson(audioContractPath) : null;
 
   const audio = category(quality, 'audio');
@@ -982,6 +984,9 @@ function main(){
   const currentLevelArcScore = levelArcScore(level, levelArc);
   const alienEntryScore = Math.min(10, ((stage1Timing?.score10 || 0) * 0.45) + ((stage1Geometry?.score10 || 0) * 0.35) + (levelArcSubmetric(levelArc, 'movement-grammar-expansion')?.score10 || 8.4) * 0.2);
   const challengeVariationScore = Math.min(10, ((challengeTiming?.score10 || 0) * 0.45) + (levelArcSubmetric(levelArc, 'challenge-stage-identity')?.score10 || 8.4) * 0.35 + (levelArcSubmetric(levelArc, 'long-run-non-repetition')?.score10 || 8.2) * 0.2);
+  const dedicatedChallengeStageScore = Number.isFinite(+challengeStage?.summary?.score10)
+    ? +challengeStage.summary.score10
+    : null;
   const alienEntryChallengeScore = Number.isFinite(+alienEntryChallenge?.summary?.score10)
     ? +alienEntryChallenge.summary.score10
     : Math.min(alienEntryScore, challengeVariationScore);
@@ -1080,14 +1085,17 @@ function main(){
     row({
       rank: 8,
       metric: 'Challenge-stage variation and new alien/formations introduction',
-      score10: alienEntryChallenge?.metrics?.find(metric => metric.id === 'challenge-trajectory-variation')?.score10
-        || challengeVariationScore,
+      score10: dedicatedChallengeStageScore
+        ?? alienEntryChallenge?.metrics?.find(metric => metric.id === 'challenge-trajectory-variation')?.score10
+        ?? challengeVariationScore,
       target: '9.0-9.4 with dedicated scorer',
-      status: alienEntryChallenge ? 'Dedicated challenge trajectory/novelty submetric' : 'Composite proxy: challenge timing + challenge identity + non-repetition',
+      status: challengeStage ? 'Dedicated stage-by-stage challenge conformance report' : (alienEntryChallenge ? 'Dedicated challenge trajectory/novelty submetric' : 'Composite proxy: challenge timing + challenge identity + non-repetition'),
       why: 'Challenge stages should teach new motion/reward patterns, not only pause normal combat.',
       effort: 'Medium-high; 2-4 hrs',
-      next: alienEntryChallenge ? 'Expand challenge evidence to at least four windows, then add distinct sweep/arc/lane/boss-led trajectory families.' : 'Add a challenge-variation metric for alien type introduction, path families, result feedback, and bonus opportunity clarity.',
-      evidence: alienEntryChallengePath ? rel(alienEntryChallengePath) : `${rel(qualityPath)}; ${levelArcPath ? rel(levelArcPath) : 'level-arc not found'}`
+      next: challengeStage?.summary?.weakestFinding
+        ? `Close dedicated challenge-stage gaps: ${challengeStage.summary.weakestFinding}`
+        : (alienEntryChallenge ? 'Expand challenge evidence to at least four windows, then add distinct sweep/arc/lane/boss-led trajectory families.' : 'Add a challenge-variation metric for alien type introduction, path families, result feedback, and bonus opportunity clarity.'),
+      evidence: challengeStagePath ? rel(challengeStagePath) : (alienEntryChallengePath ? rel(alienEntryChallengePath) : `${rel(qualityPath)}; ${levelArcPath ? rel(levelArcPath) : 'level-arc not found'}`)
     }),
     row({
       rank: 9,
@@ -1210,7 +1218,7 @@ function main(){
     ['Alien entry and challenge-stage novelty', score(alienEntryChallengeScore), '>=7.5 first gate; >=9.0 mature', 'New high-priority long-cycle gameplay-authenticity gate'],
     ['Boss entry and formation grammar', score(formationBoss?.score10), '>=8.0 first gate; >=9.0 mature', 'New measured gate for stage choreography'],
     ['Alien entry / formations', `${score(alienEntryChallenge?.metrics?.find(metric => metric.id === 'regular-stage-entry-variation')?.score10 || alienEntryScore)} measured`, '>=9.2 with path/rack scorer', 'Now backed by dedicated alien-entry/challenge variation scorer'],
-    ['Challenge variation', `${score(alienEntryChallenge?.metrics?.find(metric => metric.id === 'challenge-trajectory-variation')?.score10 || challengeVariationScore)} measured`, '>=9.2 with dedicated scorer', 'New explicit gate'],
+    ['Challenge variation', `${score(dedicatedChallengeStageScore ?? alienEntryChallenge?.metrics?.find(metric => metric.id === 'challenge-trajectory-variation')?.score10 ?? challengeVariationScore)} measured`, '>=9.2 with dedicated scorer', challengeStage ? 'Dedicated stage-by-stage challenge conformance gate' : 'New explicit gate'],
     ['Visual look and feel', score(visualLookScore), '>=8.4', visualLook ? 'New explicit gate; first-pass scorer measured' : 'New explicit gate; currently estimated'],
     ['Arcade frame and popup surfaces', score(Math.min(arcadeFrameScore, popupScore)), '>=9.4', 'Split from generic UI shell before final gate'],
     ['No-regression guardrails', 'movement/combat/capture >=10; challenge timing >=9.8', 'Maintain', 'Hard blockers']

@@ -304,10 +304,18 @@ function criticalGaps(stage, runtime, match, score){
     gaps.push('Dragonfly family appears, but sprite-motion novelty and tracked Galaga challenge-3 path phases are not yet scored.');
   }
   if(stage === 15){
-    gaps.push('Boss-led-loop has the strongest runtime spread, yet it still best-matches challenge 2 and lacks a late-stage Galaga contact-sheet target.');
+    if(score.expectedReferenceHit){
+      gaps.push('Boss-led-loop now lands on the challenge-3 reference, but late-stage reference labels and high-bonus readability probes are still thin.');
+    }else{
+      gaps.push('Boss-led-loop has the strongest runtime spread, yet it still best-matches challenge 2 and lacks a late-stage Galaga contact-sheet target.');
+    }
   }
   if(stage === 19){
-    gaps.push('Stage 19 has a configured crown-split-cascade, but durable path extraction and Galaga late-challenge reference labels are missing.');
+    if(match?.bestMatch?.labelId){
+      gaps.push('Stage 19 now has crown-split-cascade runtime path extraction, but Galaga late-challenge reference labels and high-bonus readability probes are still missing.');
+    }else{
+      gaps.push('Stage 19 has a configured crown-split-cascade, but durable path extraction and Galaga late-challenge reference labels are missing.');
+    }
   }
   if(!runtime?.ruleConformance?.noEnemyShots || !runtime?.ruleConformance?.noAttackStarts || !runtime?.ruleConformance?.noShipLosses){
     gaps.push('Challenge safety rule failed or was not measured in this probe.');
@@ -341,7 +349,7 @@ function nextActionsForStage(stage){
     ];
   }
   return [
-    'Create a stage-19 evidence window and late-challenge reference target before treating crown-split-cascade as conformant.',
+    'Promote the stage-19 evidence window into a late-challenge reference-label target before treating crown-split-cascade as conformant.',
     'Promote mosquito/crown visual novelty into runtime sprite-motion scoring.'
   ];
 }
@@ -453,7 +461,7 @@ Current result: **${report.summary.interestingFactorScore10}/10 interesting fact
 
 - Runtime challenge states were sampled through the browser-backed Aurora harness using \`challengeFormationState()\`.
 - Reference targets came from media-backed Galaga path labels and contact sheets.
-- Existing path-family comparison supplied best-match vector scores against labeled Galaga challenge entries.
+- Existing path-family comparison supplied best-match vector scores against labeled Galaga challenge entries, with challenge windows scored on arrival-phase geometry plus alien-role semantics.
 - Safety is measured separately from interest: no shots/no kills is necessary, but it does not make a challenge visually conformant.
 - Prior 24-second evidence windows can include post-challenge normal play, so enemy bullets/attackers in those older windows are not treated as challenge-rule failures here.
 
@@ -479,7 +487,7 @@ ${stageSections}
 - Raise challenge-stage interesting factor from ${report.summary.interestingFactorScore10}/10 toward 6.0/10 without regressing no-shot/no-kill guardrails.
 - ${report.summary.stage3ExpectedReferenceHit ? 'Keep stage 3 best-matching challenge-1 references while improving its raw trajectory score.' : 'Make stage 3 best-match challenge-1 references instead of challenge 2.'}
 - Preserve 0 enemy shots, 0 enemy attack starts, and 0 ship losses during challenge windows.
-- Add durable stage 19 evidence and reference labels before treating the late challenge as conformant.
+- Add stage 19 late-reference labels and high-bonus readability probes before treating the late challenge as conformant.
 - Add sprite-motion scoring for challenge enemies so visual novelty is active-motion evidence, not only a family label.
 `;
 }

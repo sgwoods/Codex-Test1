@@ -19,6 +19,7 @@ const TRAJECTORY_VECTOR_WEIGHTS = {
   rackSlotError: 0.08
 };
 const CHALLENGE_ARRIVAL_COMPARISON_SECONDS = 8.5;
+const CHALLENGE_SEMANTIC_SCORE_WEIGHT = 0.22;
 
 function ensureDir(dir){
   fs.mkdirSync(dir, { recursive: true });
@@ -181,6 +182,10 @@ function classifyTrack(track){
     id: track.id,
     kind: track.kind,
     type: track.type,
+    lane: Number.isFinite(+track.lane) ? +track.lane : null,
+    wave: Number.isFinite(+track.wave) ? +track.wave : null,
+    visualFamily: track.family || null,
+    pathFamily: track.pathFamily || null,
     stageFamily: null,
     families,
     features,
@@ -334,6 +339,76 @@ function trajectoryScore(distance){
   return round(10 * (1 - clamp(distance / 0.6)), 1);
 }
 
+function share(count, total){
+  return total ? count / total : 0;
+}
+
+function typeSummary(classifications){
+  const challengeTracks = (classifications || []).filter(item => item.kind === 'challenge');
+  const total = challengeTracks.length || 0;
+  const counts = {};
+  let leadBossCount = 0;
+  const pathFamilies = new Set();
+  const visualFamilies = new Set();
+  for(const item of challengeTracks){
+    counts[item.type] = (counts[item.type] || 0) + 1;
+    if(item.type === 'boss' && (item.lane === 0 || item.lane === 4)) leadBossCount += 1;
+    if(item.pathFamily) pathFamilies.add(item.pathFamily);
+    if(item.visualFamily) visualFamilies.add(item.visualFamily);
+  }
+  return {
+    total,
+    typeCount: Object.keys(counts).length,
+    beeShare: share(counts.bee || 0, total),
+    butterflyShare: share(counts.but || 0, total),
+    bossShare: share(counts.boss || 0, total),
+    leadBossShare: share(leadBossCount, total),
+    rogueShare: share(counts.rogue || 0, total),
+    onlyBeeButterfly: total > 0 && Object.keys(counts).every(type => type === 'bee' || type === 'but'),
+    hasNonClassicVisual: [...visualFamilies].some(family => family && family !== 'classic'),
+    pathFamilies: [...pathFamilies],
+    visualFamilies: [...visualFamilies],
+    counts
+  };
+}
+
+function challengeSemanticScore10(label, semantic){
+  if(label.kind !== 'challengeEntry') return null;
+  const family = label.entityFamily || '';
+  if(family === 'bee-line'){
+    const linePurity = semantic.onlyBeeButterfly ? 1 : 0.35;
+    const beePresence = clamp(semantic.beeShare / 0.45);
+    const noBoss = semantic.bossShare === 0 ? 1 : 0.25;
+    return round((0.45 * linePurity + 0.35 * beePresence + 0.2 * noBoss) * 10, 1);
+  }
+  if(family === 'butterfly-line'){
+    const linePurity = semantic.onlyBeeButterfly ? 1 : 0.35;
+    const butterflyPresence = clamp(semantic.butterflyShare / 0.45);
+    const noBoss = semantic.bossShare === 0 ? 1 : 0.25;
+    return round((0.45 * linePurity + 0.35 * butterflyPresence + 0.2 * noBoss) * 10, 1);
+  }
+  if(family === 'mixed-novelty-line'){
+    const mix = clamp(semantic.typeCount / 4);
+    const moderateBoss = semantic.bossShare > 0 && semantic.bossShare <= 0.28 ? 1 : 0.45;
+    const crossOrClassic = semantic.pathFamilies.includes('cross-sweep') || !semantic.hasNonClassicVisual ? 1 : 0.2;
+    const nonLeadBoss = semantic.leadBossShare === 0 ? 1 : 0.35;
+    return round((0.45 * mix + 0.2 * moderateBoss + 0.25 * crossOrClassic + 0.1 * nonLeadBoss) * 10, 1);
+  }
+  if(family === 'boss-led-novelty-line'){
+    const bossShare = clamp(semantic.bossShare / 0.25);
+    const leadBoss = clamp(semantic.leadBossShare / 0.25);
+    const novelty = semantic.hasNonClassicVisual || semantic.pathFamilies.some(path => path === 'hook-arc' || path === 'boss-led-loop') ? 1 : 0.35;
+    const mix = clamp(semantic.typeCount / 4);
+    return round((0.32 * bossShare + 0.3 * leadBoss + 0.28 * novelty + 0.1 * mix) * 10, 1);
+  }
+  return 5;
+}
+
+function combinedTrajectorySemanticScore(trajectoryScore10, semanticScore10){
+  if(!Number.isFinite(+semanticScore10)) return trajectoryScore10;
+  return round((1 - CHALLENGE_SEMANTIC_SCORE_WEIGHT) * trajectoryScore10 + CHALLENGE_SEMANTIC_SCORE_WEIGHT * semanticScore10, 1);
+}
+
 function referenceTrajectoryComparison(profile, windows){
   const reportPath = latestReport(REFERENCE_LABEL_ROOT);
   if(!reportPath){
@@ -357,6 +432,7 @@ function referenceTrajectoryComparison(profile, windows){
       stage: window.stage,
       challenge: !!window.challenge,
       vector: averageVector(normalized),
+      semantic: typeSummary(window.classifications || []),
       slotCoverage: window.classifications?.length
         ? round(window.classifications.filter(item => item.slotObserved).length / window.classifications.length)
         : 0
@@ -366,6 +442,8 @@ function referenceTrajectoryComparison(profile, windows){
     const candidates = (window.challenge ? challengeLabels : regularLabels)
       .map(label => {
         const distance = trajectoryDistance(window.vector, normalizeReferenceVector(label.comparisonVector));
+        const trajectoryScore10 = trajectoryScore(distance);
+        const semanticScore10 = window.challenge ? challengeSemanticScore10(label, window.semantic) : null;
         return {
           labelId: label.labelId,
           kind: label.kind,
@@ -373,7 +451,9 @@ function referenceTrajectoryComparison(profile, windows){
           entryCurveFamily: label.entryCurveFamily || null,
           sourceAnchor: label.sourceAnchor,
           distance: round(distance),
-          score10: trajectoryScore(distance)
+          trajectoryScore10,
+          semanticScore10,
+          score10: combinedTrajectorySemanticScore(trajectoryScore10, semanticScore10)
         };
       })
       .sort((a, b) => b.score10 - a.score10 || a.distance - b.distance || a.labelId.localeCompare(b.labelId));
@@ -382,6 +462,7 @@ function referenceTrajectoryComparison(profile, windows){
       stage: window.stage,
       challenge: window.challenge,
       runtimeVector: window.vector,
+      runtimeSemantic: window.semantic,
       slotCoverage: window.slotCoverage,
       bestMatch: candidates[0] || null,
       alternatives: candidates.slice(1, 4)

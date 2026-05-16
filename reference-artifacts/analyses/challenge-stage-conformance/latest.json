@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "challenge-stage-conformance",
-  "generatedAt": "2026-05-16T12:52:56.919Z",
-  "commit": "82fd62cb",
+  "generatedAt": "2026-05-16T13:17:31.960Z",
+  "commit": "285b1a13",
   "branch": "codex/macbook-audio-entry-grounding-cycle",
   "challengeStages": [
     3,
@@ -12,21 +12,21 @@
     19
   ],
   "summary": {
-    "score10": 4.5,
-    "interestingFactorScore10": 4.3,
+    "score10": 5.1,
+    "interestingFactorScore10": 5,
     "confidence": "medium",
     "resolution": "stage-by-stage browser runtime probe plus media-backed Galaga challenge labels and current path-vector comparison",
     "startingAssumption": "Each challenge stage starts at 1.0/10 interesting factor and must earn credit through measured safety, path reference match, visual novelty, alien variety, and durable evidence.",
     "strongestFinding": "Sampled challenge windows preserve the Galaga-like no-shot/no-ship-loss rule.",
     "stage3ExpectedReferenceHit": true,
-    "challenge2BestMatchCount": 3,
-    "weakestFinding": "challenge stages are still not authored enough as memorable Galaga-like set pieces: 3 sampled stage(s) still best-match the same Galaga challenge-2 reference, stage 3 now lands on the first-challenge bee-line reference but needs stronger trajectory precision, active sprite-motion novelty is unscored, and stage 19 lacks reference grounding.",
+    "challenge2BestMatchCount": 1,
+    "weakestFinding": "challenge stages are still not authored enough as memorable Galaga-like set pieces: 1 sampled stage(s) still best-match the same Galaga challenge-2 reference, stage 3 now lands on the first-challenge bee-line reference but needs stronger trajectory precision, active sprite-motion novelty is unscored, and stage 19 lacks reference grounding.",
     "playerMeaning": "A player should experience challenging stages as safe but tense score exhibitions with memorable entry routes and alien novelty. Aurora currently has the safety rule, but the visual choreography is not yet distinctive enough.",
     "designerMeaning": "Design work should move from broad path-family labels to explicit per-challenge contracts: group order, entry side, exit side, alien family, motion phases, bonus opportunity, and result feedback.",
     "sourceScores": {
-      "alienEntryChallengeVariation": 8.2,
-      "challengeArrivalVsAppearance": 7.4,
-      "challengePatternNoveltyDepth": 7.2
+      "alienEntryChallengeVariation": 8.3,
+      "challengeArrivalVsAppearance": 7.5,
+      "challengePatternNoveltyDepth": 7.8
     }
   },
   "stageRows": [
@@ -63,17 +63,19 @@
         "entryCurveFamily": null,
         "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg",
         "distance": 0.35,
-        "score10": 4.2
+        "trajectoryScore10": 4.2,
+        "semanticScore10": 10,
+        "score10": 5.5
       },
-      "referenceMatchScore10": 4.2,
+      "referenceMatchScore10": 5.5,
       "runtimeVector": {
-        "xRange": 0.4685,
+        "xRange": 0.4686,
         "yRange": 0.2039,
         "pathLength": 0.2711,
         "turnCount": 0.655,
         "reversalCount": 0.4875,
         "lowerFieldShare": 0,
-        "rackSlotError": 0.7561
+        "rackSlotError": 0.7564
       },
       "galagaReferenceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg",
       "galagaReferenceMeaning": "upper-band mirrored group with no enemy fire",
@@ -100,20 +102,20 @@
       },
       "currentRead": "first-challenge-peel / first-challenge-peel; lanes bee, bee, bee, bee, but, but, but, but; first-wave types bee, bee, bee, bee, but, but, but, but; visual families classic.",
       "graphicsRead": "Current graphics show classic family styling with bee, but alien types. This is still a proxy for visual identity; no active sprite-motion phase score is attached to the challenge window yet.",
-      "movementRead": "Trajectory vector best-match score 4.2/10 against challenge-1-arrival-group-1; xRange 0.4685, yRange 0.2039, pathLength 0.2711.",
+      "movementRead": "Trajectory vector best-match score 5.5/10 against challenge-1-arrival-group-1; xRange 0.4686, yRange 0.2039, pathLength 0.2711.",
       "alienVariationRead": "Opening wave exposes 2 type(s) and classic visual family labels; later-stage novelty is not yet backed by sprite-motion scoring.",
       "criticalGaps": [],
       "nextActions": [
         "Protect the first-challenge bee/butterfly line contract, then tune path length, turn count, and rack-slot precision against challenge-1 arrival and late-wave labels.",
         "Add contact-sheet comparison for first-visible frame, entry side, exit side, lane occupancy, and group timing so the next tuning pass can improve trajectory precision without subjective guessing."
       ],
-      "interestingFactor10": 4.8,
-      "conformanceScore10": 4.8,
+      "interestingFactor10": 5,
+      "conformanceScore10": 5,
       "expectedReferenceHit": true,
       "scoreComponents": {
         "baseline": 1,
         "safety": 1,
-        "trajectory": 0.84,
+        "trajectory": 1.1,
         "expectedReferenceMatch": 0.55,
         "alienTypeNovelty": 1.05,
         "firstChallengeLineContract": 0.35,
@@ -160,17 +162,19 @@
         "entryCurveFamily": null,
         "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg",
         "distance": 0.313,
-        "score10": 4.8
+        "trajectoryScore10": 4.8,
+        "semanticScore10": 10,
+        "score10": 5.9
       },
-      "referenceMatchScore10": 4.8,
+      "referenceMatchScore10": 5.9,
       "runtimeVector": {
-        "xRange": 0.5333,
+        "xRange": 0.5332,
         "yRange": 0.2388,
         "pathLength": 0.3567,
         "turnCount": 0.63,
         "reversalCount": 0.5625,
         "lowerFieldShare": 0.0063,
-        "rackSlotError": 0.75
+        "rackSlotError": 0.7486
       },
       "galagaReferenceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg",
       "galagaReferenceMeaning": "denser second challenge pattern with visible upper-field score window",
@@ -197,7 +201,7 @@
       },
       "currentRead": "scorpion-cross-sweep / cross-sweep; lanes but, boss, rogue, bee, bee, rogue, boss, but; first-wave types but, boss, rogue, bee, bee, rogue, boss, but; visual families classic.",
       "graphicsRead": "Current graphics show classic family styling with bee, boss, but, rogue alien types. This is still a proxy for visual identity; no active sprite-motion phase score is attached to the challenge window yet.",
-      "movementRead": "Trajectory vector best-match score 4.8/10 against challenge-2-arrival-group-1; xRange 0.5333, yRange 0.2388, pathLength 0.3567.",
+      "movementRead": "Trajectory vector best-match score 5.9/10 against challenge-2-arrival-group-1; xRange 0.5332, yRange 0.2388, pathLength 0.3567.",
       "alienVariationRead": "Opening wave exposes 4 type(s) and classic visual family labels; later-stage novelty is not yet backed by sprite-motion scoring.",
       "criticalGaps": [
         "Cross-sweep identity is visible in labels, but the measured vector still lands closest to the same challenge-2 reference as most other challenge stages."
@@ -206,13 +210,13 @@
         "Tune challenge 2 toward the denser mixed-novelty-line reference instead of relying on a generic cross-sweep.",
         "Score separate group identities so stage 7 is not just a slightly wider stage 3."
       ],
-      "interestingFactor10": 4.9,
-      "conformanceScore10": 4.9,
+      "interestingFactor10": 5.1,
+      "conformanceScore10": 5.1,
       "expectedReferenceHit": true,
       "scoreComponents": {
         "baseline": 1,
         "safety": 1,
-        "trajectory": 0.96,
+        "trajectory": 1.18,
         "expectedReferenceMatch": 0.55,
         "alienTypeNovelty": 1.05,
         "firstChallengeLineContract": 0,
@@ -234,16 +238,16 @@
       "auroraLayoutId": "stingray-hook-arc",
       "pathFamily": "hook-arc",
       "laneTypes": [
+        "boss",
         "rogue",
         "but",
-        "boss",
         "bee",
         "boss",
         "bee",
         "but",
         "rogue"
       ],
-      "runtimeFirstWaveTypes": "rogue, but, boss, bee, boss, bee, but, rogue",
+      "runtimeFirstWaveTypes": "boss, rogue, but, bee, boss, bee, but, rogue",
       "runtimeVisualFamilies": [
         "dragonfly"
       ],
@@ -253,26 +257,28 @@
         "challenge-3-arrival-group-1"
       ],
       "bestReferenceMatch": {
-        "labelId": "challenge-2-arrival-group-1",
+        "labelId": "challenge-3-arrival-group-1",
         "kind": "challengeEntry",
-        "entityFamily": "mixed-novelty-line",
+        "entityFamily": "boss-led-novelty-line",
         "entryCurveFamily": null,
-        "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg",
-        "distance": 0.345,
-        "score10": 4.3
+        "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-3-arrival/contact-sheet.jpg",
+        "distance": 0.364,
+        "trajectoryScore10": 3.9,
+        "semanticScore10": 10,
+        "score10": 5.2
       },
-      "referenceMatchScore10": 4.3,
+      "referenceMatchScore10": 5.2,
       "runtimeVector": {
-        "xRange": 0.4777,
-        "yRange": 0.2792,
-        "pathLength": 0.3448,
-        "turnCount": 0.64,
-        "reversalCount": 0.525,
-        "lowerFieldShare": 0.0065,
+        "xRange": 0.4706,
+        "yRange": 0.2758,
+        "pathLength": 0.3365,
+        "turnCount": 0.63,
+        "reversalCount": 0.5219,
+        "lowerFieldShare": 0.0061,
         "rackSlotError": 0.8812
       },
-      "galagaReferenceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg",
-      "galagaReferenceMeaning": "denser second challenge pattern with visible upper-field score window",
+      "galagaReferenceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-3-arrival/contact-sheet.jpg",
+      "galagaReferenceMeaning": "later challenge pattern with larger visual novelty while remaining non-attacking",
       "safetyProbe": {
         "noEnemyShots": true,
         "noAttackStarts": true,
@@ -294,26 +300,25 @@
         "yRange": 54.4,
         "lowerFieldShare": 0
       },
-      "currentRead": "stingray-hook-arc / hook-arc; lanes rogue, but, boss, bee, boss, bee, but, rogue; first-wave types rogue, but, boss, bee, boss, bee, but, rogue; visual families dragonfly.",
+      "currentRead": "stingray-hook-arc / hook-arc; lanes boss, rogue, but, bee, boss, bee, but, rogue; first-wave types boss, rogue, but, bee, boss, bee, but, rogue; visual families dragonfly.",
       "graphicsRead": "Current graphics show dragonfly family styling with bee, boss, but, rogue alien types. This is still a proxy for visual identity; no active sprite-motion phase score is attached to the challenge window yet.",
-      "movementRead": "Trajectory vector best-match score 4.3/10 against challenge-2-arrival-group-1; xRange 0.4777, yRange 0.2792, pathLength 0.3448.",
+      "movementRead": "Trajectory vector best-match score 5.2/10 against challenge-3-arrival-group-1; xRange 0.4706, yRange 0.2758, pathLength 0.3365.",
       "alienVariationRead": "Opening wave exposes 4 type(s) and dragonfly visual family labels; later-stage novelty is not yet backed by sprite-motion scoring.",
       "criticalGaps": [
-        "Best reference match is challenge-2-arrival-group-1, not expected challenge-3-arrival-group-1.",
         "Dragonfly family appears, but sprite-motion novelty and tracked Galaga challenge-3 path phases are not yet scored."
       ],
       "nextActions": [
         "Promote challenge-3 boss-led reference phases and score dragonfly visual novelty as animation, not only family label.",
         "Add motion windows for wing flaps, pulsing, dive/rotation silhouette, and challenge-only nonlethal arrival."
       ],
-      "interestingFactor10": 4.5,
-      "conformanceScore10": 4.8,
-      "expectedReferenceHit": false,
+      "interestingFactor10": 5.5,
+      "conformanceScore10": 5.5,
+      "expectedReferenceHit": true,
       "scoreComponents": {
         "baseline": 1,
         "safety": 1,
-        "trajectory": 0.86,
-        "expectedReferenceMatch": 0,
+        "trajectory": 1.04,
+        "expectedReferenceMatch": 0.55,
         "alienTypeNovelty": 1.05,
         "firstChallengeLineContract": 0,
         "visualFamilyNovelty": 0.55,
@@ -353,26 +358,28 @@
         "challenge-3-arrival-group-1"
       ],
       "bestReferenceMatch": {
-        "labelId": "challenge-2-arrival-group-1",
+        "labelId": "challenge-3-arrival-group-1",
         "kind": "challengeEntry",
-        "entityFamily": "mixed-novelty-line",
+        "entityFamily": "boss-led-novelty-line",
         "entryCurveFamily": null,
-        "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg",
-        "distance": 0.304,
-        "score10": 4.9
+        "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-3-arrival/contact-sheet.jpg",
+        "distance": 0.315,
+        "trajectoryScore10": 4.7,
+        "semanticScore10": 8.5,
+        "score10": 5.5
       },
-      "referenceMatchScore10": 4.9,
+      "referenceMatchScore10": 5.5,
       "runtimeVector": {
-        "xRange": 0.6365,
+        "xRange": 0.6364,
         "yRange": 0.3097,
-        "pathLength": 0.4838,
-        "turnCount": 0.7375,
+        "pathLength": 0.4837,
+        "turnCount": 0.74,
         "reversalCount": 0.6469,
         "lowerFieldShare": 0.0112,
-        "rackSlotError": 0.896
+        "rackSlotError": 0.8958
       },
-      "galagaReferenceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg",
-      "galagaReferenceMeaning": "denser second challenge pattern with visible upper-field score window",
+      "galagaReferenceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-3-arrival/contact-sheet.jpg",
+      "galagaReferenceMeaning": "later challenge pattern with larger visual novelty while remaining non-attacking",
       "safetyProbe": {
         "noEnemyShots": true,
         "noAttackStarts": true,
@@ -396,24 +403,23 @@
       },
       "currentRead": "boss-led-late-loop / boss-led-loop; lanes boss, rogue, boss, but, rogue, but, boss, bee; first-wave types boss, rogue, boss, but, rogue, but, boss, bee; visual families dragonfly.",
       "graphicsRead": "Current graphics show dragonfly family styling with bee, boss, but, rogue alien types. This is still a proxy for visual identity; no active sprite-motion phase score is attached to the challenge window yet.",
-      "movementRead": "Trajectory vector best-match score 4.9/10 against challenge-2-arrival-group-1; xRange 0.6365, yRange 0.3097, pathLength 0.4838.",
+      "movementRead": "Trajectory vector best-match score 5.5/10 against challenge-3-arrival-group-1; xRange 0.6364, yRange 0.3097, pathLength 0.4837.",
       "alienVariationRead": "Opening wave exposes 4 type(s) and dragonfly visual family labels; later-stage novelty is not yet backed by sprite-motion scoring.",
       "criticalGaps": [
-        "Best reference match is challenge-2-arrival-group-1, not expected challenge-3-arrival-group-1.",
-        "Boss-led-loop has the strongest runtime spread, yet it still best-matches challenge 2 and lacks a late-stage Galaga contact-sheet target."
+        "Boss-led-loop now lands on the challenge-3 reference, but late-stage reference labels and high-bonus readability probes are still thin."
       ],
       "nextActions": [
         "Capture or label later Galaga challenge references, then make boss-led-loop a late-stage contract with stronger exits and bonus route clarity.",
         "Add high-bonus readability probes so later challenge complexity stays learnable."
       ],
-      "interestingFactor10": 4.6,
-      "conformanceScore10": 4.9,
-      "expectedReferenceHit": false,
+      "interestingFactor10": 5.6,
+      "conformanceScore10": 5.6,
+      "expectedReferenceHit": true,
       "scoreComponents": {
         "baseline": 1,
         "safety": 1,
-        "trajectory": 0.98,
-        "expectedReferenceMatch": 0,
+        "trajectory": 1.1,
+        "expectedReferenceMatch": 0.55,
         "alienTypeNovelty": 1.05,
         "firstChallengeLineContract": 0,
         "visualFamilyNovelty": 0.55,
@@ -450,11 +456,29 @@
       "galagaTarget": "Very-late challenge should have a specialty cascade identity and a supported reference window before it is trusted.",
       "criticalExpectation": "Should become an explicit late-game challenge contract with its own reference contact sheet and trajectory labels.",
       "expectedReferenceLabels": [],
-      "bestReferenceMatch": null,
-      "referenceMatchScore10": null,
-      "runtimeVector": null,
-      "galagaReferenceAnchor": null,
-      "galagaReferenceMeaning": null,
+      "bestReferenceMatch": {
+        "labelId": "challenge-3-arrival-group-1",
+        "kind": "challengeEntry",
+        "entityFamily": "boss-led-novelty-line",
+        "entryCurveFamily": null,
+        "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-3-arrival/contact-sheet.jpg",
+        "distance": 0.304,
+        "trajectoryScore10": 4.9,
+        "semanticScore10": 8.5,
+        "score10": 5.7
+      },
+      "referenceMatchScore10": 5.7,
+      "runtimeVector": {
+        "xRange": 0.6837,
+        "yRange": 0.2607,
+        "pathLength": 0.5362,
+        "turnCount": 0.7175,
+        "reversalCount": 0.6656,
+        "lowerFieldShare": 0.0039,
+        "rackSlotError": 0.8918
+      },
+      "galagaReferenceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-3-arrival/contact-sheet.jpg",
+      "galagaReferenceMeaning": "later challenge pattern with larger visual novelty while remaining non-attacking",
       "safetyProbe": {
         "noEnemyShots": true,
         "noAttackStarts": true,
@@ -478,22 +502,22 @@
       },
       "currentRead": "crown-split-cascade / crown-split-cascade; lanes boss, rogue, but, boss, bee, but, rogue, boss; first-wave types boss, rogue, but, boss, bee, but, rogue, boss; visual families mosquito.",
       "graphicsRead": "Current graphics show mosquito family styling with bee, boss, but, rogue alien types. This is still a proxy for visual identity; no active sprite-motion phase score is attached to the challenge window yet.",
-      "movementRead": "No reference trajectory comparison row was found for this stage.",
+      "movementRead": "Trajectory vector best-match score 5.7/10 against challenge-3-arrival-group-1; xRange 0.6837, yRange 0.2607, pathLength 0.5362.",
       "alienVariationRead": "Opening wave exposes 4 type(s) and mosquito visual family labels; later-stage novelty is not yet backed by sprite-motion scoring.",
       "criticalGaps": [
-        "Stage 19 has a configured crown-split-cascade, but durable path extraction and Galaga late-challenge reference labels are missing."
+        "Stage 19 now has crown-split-cascade runtime path extraction, but Galaga late-challenge reference labels and high-bonus readability probes are still missing."
       ],
       "nextActions": [
-        "Create a stage-19 evidence window and late-challenge reference target before treating crown-split-cascade as conformant.",
+        "Promote the stage-19 evidence window into a late-challenge reference-label target before treating crown-split-cascade as conformant.",
         "Promote mosquito/crown visual novelty into runtime sprite-motion scoring."
       ],
-      "interestingFactor10": 2.8,
-      "conformanceScore10": 3.1,
+      "interestingFactor10": 3.9,
+      "conformanceScore10": 4.3,
       "expectedReferenceHit": false,
       "scoreComponents": {
         "baseline": 1,
         "safety": 1,
-        "trajectory": 0,
+        "trajectory": 1.14,
         "expectedReferenceMatch": 0,
         "alienTypeNovelty": 1.05,
         "firstChallengeLineContract": 0,

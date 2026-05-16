@@ -5,6 +5,12 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..', '..');
 const REPORT = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
 const REQUIRED_STAGES = [3, 7, 11, 15, 19];
+const EXPECTED_REFERENCE_HITS = new Map([
+  [3, 'challenge-1-arrival-group-1'],
+  [7, 'challenge-2-arrival-group-1'],
+  [11, 'challenge-3-arrival-group-1'],
+  [15, 'challenge-3-arrival-group-1']
+]);
 
 function fail(message, payload){
   console.error(message);
@@ -49,6 +55,15 @@ for(const stage of REQUIRED_STAGES){
   }
   if(!row.safetyProbe){
     fail(`stage ${stage} is missing the challenge safety probe`, row);
+  }
+  const expectedReference = EXPECTED_REFERENCE_HITS.get(stage);
+  if(expectedReference){
+    if(!row.expectedReferenceHit){
+      fail(`stage ${stage} no longer hits its expected challenge reference`, { expectedReference, row });
+    }
+    if(row.bestReferenceMatch?.labelId !== expectedReference){
+      fail(`stage ${stage} best challenge reference drifted`, { expectedReference, bestReferenceMatch: row.bestReferenceMatch, row });
+    }
   }
 }
 

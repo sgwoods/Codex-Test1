@@ -17,6 +17,7 @@ const WINDOW_SCENARIOS = {
 	  'challenge-stage-scorpion-cross': 'stage7-challenge-cross-sweep',
 	  'challenge-stage-stingray-hook': 'stage11-challenge-hook-arc',
 	  'challenge-stage-boss-led-loop': 'stage15-challenge-boss-led-loop',
+	  'challenge-stage-crown-split-cascade': 'stage19-challenge-crown-split-cascade',
 	  'mid-run-pressure': 'stage6-regular',
   'mid-run-entry-variant': 'stage8-entry-variant',
   'mid-run-pincer-variant': 'stage10-pincer-entry',

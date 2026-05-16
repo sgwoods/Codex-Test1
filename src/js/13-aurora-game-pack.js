@@ -730,7 +730,7 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   slotDelay:.12,
   arcAmp:1.48,
   dropAmp:1.08,
-  laneTypes:Object.freeze(['rogue','but','boss','bee','boss','bee','but','rogue'])
+  laneTypes:Object.freeze(['boss','rogue','but','bee','boss','bee','but','rogue'])
  }),
  Object.freeze({
   fromStage:15,
