@@ -526,6 +526,7 @@ Current result: **${report.summary.interestingFactorScore10}/10 interesting fact
 - Runtime challenge states were sampled through the browser-backed Aurora harness using \`challengeFormationState()\`.
 - Reference targets came from media-backed Galaga path labels and contact sheets.
 - Existing path-family comparison supplied best-match vector scores against labeled Galaga challenge entries, with challenge windows scored on arrival-phase geometry plus alien-role semantics.
+- Challenge path-slot extraction suppresses player fire for challenge windows, so trajectory comparison measures authored alien motion instead of bullet-truncated player-score fragments.
 - Safety is measured separately from interest: no shots/no kills is necessary, but it does not make a challenge visually conformant.
 - Prior 24-second evidence windows can include post-challenge normal play, so enemy bullets/attackers in those older windows are not treated as challenge-rule failures here.
 

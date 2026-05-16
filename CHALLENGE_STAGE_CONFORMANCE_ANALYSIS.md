@@ -1,20 +1,21 @@
 # Challenge Stage Conformance Analysis
 
-Generated: 2026-05-16T14:55:30.675Z
-Commit: 708f7909
+Generated: 2026-05-16T15:57:02.183Z
+Commit: 08c327dd
 Branch: codex/macbook-audio-entry-grounding-cycle
 
 ## Executive Summary
 
 This is a deliberately critical challenge-stage readout. The prior alien-entry score can look healthy because it rewards coverage and broad stage signatures. This report applies a harsher "interesting factor" lens that starts every challenge stage at 1.0/10 and only adds credit for measured no-combat rule conformance, Galaga-reference trajectory match, stage-specific visual/alien novelty, and durable reference evidence.
 
-Current result: **5.8/10 interesting factor** and **5.8/10 challenge-stage conformance**. The strongest rule finding is that current probes show no enemy shots, no attack starts, and no ship losses during sampled challenge windows. The weakest player-facing finding is that challenge stages are still not authored enough as memorable Galaga-like set pieces: 1 sampled stage(s) still best-match the same Galaga challenge-2 reference, stage 3 now lands on the first-challenge bee-line reference but needs stronger trajectory precision, active sprite-motion novelty is unscored, and stage 19 lacks reference grounding.
+Current result: **5.6/10 interesting factor** and **5.7/10 challenge-stage conformance**. The strongest rule finding is that current probes show no enemy shots, no attack starts, and no ship losses during sampled challenge windows. The weakest player-facing finding is that challenge stages are still not authored enough as memorable Galaga-like set pieces: 2 sampled stage(s) still best-match the same Galaga challenge-2 reference, stage 3 now lands on the first-challenge bee-line reference but needs stronger trajectory precision, active sprite-motion novelty is unscored, and stage 19 lacks reference grounding.
 
 ## Method
 
 - Runtime challenge states were sampled through the browser-backed Aurora harness using `challengeFormationState()`.
 - Reference targets came from media-backed Galaga path labels and contact sheets.
 - Existing path-family comparison supplied best-match vector scores against labeled Galaga challenge entries, with challenge windows scored on arrival-phase geometry plus alien-role semantics.
+- Challenge path-slot extraction suppresses player fire for challenge windows, so trajectory comparison measures authored alien motion instead of bullet-truncated player-score fragments.
 - Safety is measured separately from interest: no shots/no kills is necessary, but it does not make a challenge visually conformant.
 - Prior 24-second evidence windows can include post-challenge normal play, so enemy bullets/attackers in those older windows are not treated as challenge-rule failures here.
 
@@ -23,10 +24,10 @@ Current result: **5.8/10 interesting factor** and **5.8/10 challenge-stage confo
 | Stage | Challenge | Interest | Score | Group Identity | Best Reference Match | Aurora Path Family | No-Shot/No-Kill | Critical Gap |
 | --- | --- | ---: | ---: | ---: | --- | --- | --- | --- |
 | 3 | 1 | 5.7/10 | 5.7/10 | 7.2/10 | challenge-1-arrival-group-1 (5.5/10) | first-challenge-peel | pass | Reference target hit; remaining work is trajectory precision and active motion scoring. |
-| 7 | 2 | 5.9/10 | 5.9/10 | 8.3/10 | challenge-2-arrival-group-1 (5.9/10) | cross-sweep | pass | Cross-sweep identity is visible in labels, but the measured vector still lands closest to the same challenge-2 reference as most other challenge stages. |
-| 11 | 3 | 6.3/10 | 6.3/10 | 8/10 | challenge-3-arrival-group-1 (5.2/10) | hook-arc | pass | Dragonfly family appears, but sprite-motion novelty and tracked Galaga challenge-3 path phases are not yet scored. |
-| 15 | 4 | 6.3/10 | 6.3/10 | 7.7/10 | challenge-3-arrival-group-1 (5.5/10) | boss-led-loop | pass | Boss-led-loop now lands on the challenge-3 reference, but late-stage reference labels and high-bonus readability probes are still thin. |
-| 19 | 5 | 4.6/10 | 5/10 | 7.5/10 | challenge-3-arrival-group-1 (5.7/10) | crown-split-cascade | pass | Stage 19 now has crown-split-cascade runtime path extraction, but Galaga late-challenge reference labels and high-bonus readability probes are still missing. |
+| 7 | 2 | 5.9/10 | 5.9/10 | 8.3/10 | challenge-2-arrival-group-1 (6/10) | cross-sweep | pass | Cross-sweep identity is visible in labels, but the measured vector still lands closest to the same challenge-2 reference as most other challenge stages. |
+| 11 | 3 | 5.4/10 | 5.8/10 | 8/10 | challenge-2-arrival-group-1 (5.5/10) | hook-arc | pass | Best reference match is challenge-2-arrival-group-1, not expected challenge-3-arrival-group-1.<br>Dragonfly family appears, but sprite-motion novelty and tracked Galaga challenge-3 path phases are not yet scored. |
+| 15 | 4 | 6.3/10 | 6.3/10 | 7.7/10 | challenge-3-arrival-group-1 (5.7/10) | boss-led-loop | pass | Boss-led-loop now lands on the challenge-3 reference, but late-stage reference labels and high-bonus readability probes are still thin. |
+| 19 | 5 | 4.6/10 | 4.9/10 | 7.5/10 | challenge-3-arrival-group-1 (5.6/10) | crown-split-cascade | pass | Stage 19 now has crown-split-cascade runtime path extraction, but Galaga late-challenge reference labels and high-bonus readability probes are still missing. |
 
 
 ## Stage 3 / Challenge 1
@@ -39,7 +40,7 @@ Current result: **5.8/10 interesting factor** and **5.8/10 challenge-stage confo
 
 **Graphics read:** Current graphics show classic family styling with bee, but alien types. This is still a proxy for visual identity; no active sprite-motion phase score is attached to the challenge window yet.
 
-**Movement read:** Trajectory vector best-match score 5.5/10 against challenge-1-arrival-group-1; xRange 0.4686, yRange 0.2039, pathLength 0.2711.
+**Movement read:** Trajectory vector best-match score 5.5/10 against challenge-1-arrival-group-1; xRange 0.4943, yRange 0.2077, pathLength 0.2805.
 
 **Alien variation read:** Opening wave exposes 2 type(s) and classic visual family labels. Group identity: 5/5 wave type signatures and 1/5 path signatures; average within-wave spawn span 0.48s. Active sprite-motion novelty remains a separate unscored gap.
 
@@ -65,7 +66,7 @@ Current result: **5.8/10 interesting factor** and **5.8/10 challenge-stage confo
 
 **Graphics read:** Current graphics show classic family styling with bee, boss, but, rogue alien types. This is still a proxy for visual identity; no active sprite-motion phase score is attached to the challenge window yet.
 
-**Movement read:** Trajectory vector best-match score 5.9/10 against challenge-2-arrival-group-1; xRange 0.5332, yRange 0.2388, pathLength 0.3567.
+**Movement read:** Trajectory vector best-match score 6/10 against challenge-2-arrival-group-1; xRange 0.5891, yRange 0.2643, pathLength 0.42.
 
 **Alien variation read:** Opening wave exposes 4 type(s) and classic visual family labels. Group identity: 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.42s. Active sprite-motion novelty remains a separate unscored gap.
 
@@ -83,7 +84,7 @@ Current result: **5.8/10 interesting factor** and **5.8/10 challenge-stage confo
 
 ## Stage 11 / Challenge 3
 
-**Current score:** interesting factor 6.3/10; challenge conformance 6.3/10.
+**Current score:** interesting factor 5.4/10; challenge conformance 5.8/10.
 
 **Original target:** Third challenge should make the new visual family and boss-led novelty obvious, with larger sweep vocabulary and no attacks.
 
@@ -91,7 +92,7 @@ Current result: **5.8/10 interesting factor** and **5.8/10 challenge-stage confo
 
 **Graphics read:** Current graphics show dragonfly family styling with bee, boss, but, rogue alien types. This is still a proxy for visual identity; no active sprite-motion phase score is attached to the challenge window yet.
 
-**Movement read:** Trajectory vector best-match score 5.2/10 against challenge-3-arrival-group-1; xRange 0.4706, yRange 0.2758, pathLength 0.3365.
+**Movement read:** Trajectory vector best-match score 5.5/10 against challenge-2-arrival-group-1; xRange 0.5273, yRange 0.3372, pathLength 0.4472.
 
 **Alien variation read:** Opening wave exposes 4 type(s) and dragonfly visual family labels. Group identity: 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.36s. Active sprite-motion novelty remains a separate unscored gap.
 
@@ -100,6 +101,7 @@ Current result: **5.8/10 interesting factor** and **5.8/10 challenge-stage confo
 **Safety rule:** enemy shots 0, attack starts 0, ship losses 0.
 
 **Critical gaps:**
+- Best reference match is challenge-2-arrival-group-1, not expected challenge-3-arrival-group-1.
 - Dragonfly family appears, but sprite-motion novelty and tracked Galaga challenge-3 path phases are not yet scored.
 
 **Next actions:**
@@ -117,7 +119,7 @@ Current result: **5.8/10 interesting factor** and **5.8/10 challenge-stage confo
 
 **Graphics read:** Current graphics show dragonfly family styling with bee, boss, but, rogue alien types. This is still a proxy for visual identity; no active sprite-motion phase score is attached to the challenge window yet.
 
-**Movement read:** Trajectory vector best-match score 5.5/10 against challenge-3-arrival-group-1; xRange 0.6364, yRange 0.3097, pathLength 0.4837.
+**Movement read:** Trajectory vector best-match score 5.7/10 against challenge-3-arrival-group-1; xRange 0.6834, yRange 0.3556, pathLength 0.5909.
 
 **Alien variation read:** Opening wave exposes 4 type(s) and dragonfly visual family labels. Group identity: 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.3s. Active sprite-motion novelty remains a separate unscored gap.
 
@@ -135,7 +137,7 @@ Current result: **5.8/10 interesting factor** and **5.8/10 challenge-stage confo
 
 ## Stage 19 / Challenge 5
 
-**Current score:** interesting factor 4.6/10; challenge conformance 5/10.
+**Current score:** interesting factor 4.6/10; challenge conformance 4.9/10.
 
 **Original target:** Very-late challenge should have a specialty cascade identity and a supported reference window before it is trusted.
 
@@ -143,7 +145,7 @@ Current result: **5.8/10 interesting factor** and **5.8/10 challenge-stage confo
 
 **Graphics read:** Current graphics show mosquito family styling with bee, boss, but, rogue alien types. This is still a proxy for visual identity; no active sprite-motion phase score is attached to the challenge window yet.
 
-**Movement read:** Trajectory vector best-match score 5.7/10 against challenge-3-arrival-group-1; xRange 0.6837, yRange 0.2607, pathLength 0.5362.
+**Movement read:** Trajectory vector best-match score 5.6/10 against challenge-3-arrival-group-1; xRange 0.7421, yRange 0.3288, pathLength 0.6517.
 
 **Alien variation read:** Opening wave exposes 4 type(s) and mosquito visual family labels. Group identity: 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.25s. Active sprite-motion novelty remains a separate unscored gap.
 
@@ -170,7 +172,7 @@ Current result: **5.8/10 interesting factor** and **5.8/10 challenge-stage confo
 
 ## Success Criteria
 
-- Raise challenge-stage interesting factor from 5.8/10 toward 6.0/10 without regressing no-shot/no-kill guardrails.
+- Raise challenge-stage interesting factor from 5.6/10 toward 6.0/10 without regressing no-shot/no-kill guardrails.
 - Keep stage 3 best-matching challenge-1 references while improving its raw trajectory score.
 - Preserve 0 enemy shots, 0 enemy attack starts, and 0 ship losses during challenge windows.
 - Add stage 19 late-reference labels and high-bonus readability probes before treating the late challenge as conformant.

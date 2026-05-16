@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-16T14:38:27.446Z",
-  "commit": "708f7909",
+  "generatedAt": "2026-05-16T15:50:58.974Z",
+  "commit": "08c327dd",
   "artifactType": "alien-entry-challenge-variation",
   "score10": 8.3,
   "summary": {
@@ -13,8 +13,8 @@
     "weakestMetric": {
       "id": "regular-entry-geometry-separation",
       "label": "Regular-entry geometry separation",
-      "score10": 5.6,
-      "currentRead": "Minimum regular geometry distance 0.077; mean regular geometry distance 0.126; closest pair mid-run-pincer-variant / late-run-crown-entry.",
+      "score10": 5.1,
+      "currentRead": "Minimum regular geometry distance 0.063; mean regular geometry distance 0.128; closest pair mid-run-pincer-variant / late-run-crown-entry.",
       "calculation": "Measures whether regular stages differ in actual trajectory geometry, using mean x/y range, path length, turns, reversals, and lower-field share instead of accepting a path-family label alone.",
       "strategy": "Tune the weakest close pair with a visibly different entry route, then rerun path-slot extraction and this scorer."
     }
@@ -39,8 +39,8 @@
     {
       "id": "regular-entry-geometry-separation",
       "label": "Regular-entry geometry separation",
-      "score10": 5.6,
-      "currentRead": "Minimum regular geometry distance 0.077; mean regular geometry distance 0.126; closest pair mid-run-pincer-variant / late-run-crown-entry.",
+      "score10": 5.1,
+      "currentRead": "Minimum regular geometry distance 0.063; mean regular geometry distance 0.128; closest pair mid-run-pincer-variant / late-run-crown-entry.",
       "calculation": "Measures whether regular stages differ in actual trajectory geometry, using mean x/y range, path length, turns, reversals, and lower-field share instead of accepting a path-family label alone.",
       "strategy": "Tune the weakest close pair with a visibly different entry route, then rerun path-slot extraction and this scorer."
     },
@@ -55,8 +55,8 @@
     {
       "id": "challenge-arrival-vs-appearance",
       "label": "Challenging-stage arrival versus appearance",
-      "score10": 7.5,
-      "currentRead": "Runtime arrival evidence score 7.5/10; reference cap 10/10; challenge geometry mean distance 0.082.",
+      "score10": 8.1,
+      "currentRead": "Runtime arrival evidence score 8.1/10; reference cap 10/10; challenge geometry mean distance 0.097.",
       "calculation": "Measures whether challenge-stage aliens visibly arrive through readable paths rather than feeling like they simply appear in place. This is capped until contact-sheet or frame-labeled Galaga challenge references prove the arrival grammar.",
       "strategy": "Add challenge-stage contact sheets with first-visible, entry-side, path-commit, target-group, and exit labels; then tune challenge spawns and paths against the weakest arrival/readability delta."
     },
@@ -71,8 +71,8 @@
     {
       "id": "challenge-pattern-novelty-depth",
       "label": "Challenging-stage pattern novelty depth",
-      "score10": 7.8,
-      "currentRead": "Pattern-depth raw score 7.8/10; 5 challenge path signatures; challenge entity novelty ratio 0.5.",
+      "score10": 7.9,
+      "currentRead": "Pattern-depth raw score 7.9/10; 5 challenge path signatures; challenge entity novelty ratio 0.5.",
       "calculation": "Measures whether later challenge stages create genuinely new learnable set pieces by combining path family, alien composition, group timing, and bonus opportunity instead of reskinning the same wave.",
       "strategy": "Split challenge stages into named pattern contracts, then run long-cycle persona and path extraction to verify each challenge stage teaches a distinct bonus-stage skill."
     },
@@ -92,66 +92,66 @@
     "challengePathWindowCount": 5,
     "minRegularDistance": 0.261,
     "meanRegularDistance": 0.315,
-    "minRegularGeometryDistance": 0.077,
-    "meanRegularGeometryDistance": 0.126,
+    "minRegularGeometryDistance": 0.063,
+    "meanRegularGeometryDistance": 0.128,
     "closestRegularGeometryPair": {
       "a": "mid-run-pincer-variant",
       "b": "late-run-crown-entry",
-      "distance": 0.077,
+      "distance": 0.063,
       "aVector": {
-        "xRange": 212.715,
+        "xRange": 212.709,
         "yRange": 246.512,
-        "pathLength": 631.224,
-        "turnCount": 8.725,
+        "pathLength": 631.185,
+        "turnCount": 8.325,
         "reversalCount": 2.8,
         "lowerFieldShare": 0.015
       },
       "bVector": {
-        "xRange": 214.662,
-        "yRange": 241.19,
-        "pathLength": 689.329,
-        "turnCount": 10.5,
+        "xRange": 219.224,
+        "yRange": 243.061,
+        "pathLength": 677.455,
+        "turnCount": 7.35,
         "reversalCount": 4.1,
-        "lowerFieldShare": 0.016
+        "lowerFieldShare": 0.015
       },
       "delta": {
-        "xRange": 1.947,
-        "yRange": -5.322,
-        "pathLength": 58.105,
-        "turnCount": 1.775,
+        "xRange": 6.515,
+        "yRange": -3.451,
+        "pathLength": 46.27,
+        "turnCount": -0.975,
         "reversalCount": 1.3,
-        "lowerFieldShare": 0.001
+        "lowerFieldShare": 0
       }
     },
-    "minChallengeGeometryDistance": 0.034,
-    "meanChallengeGeometryDistance": 0.082,
+    "minChallengeGeometryDistance": 0.028,
+    "meanChallengeGeometryDistance": 0.097,
     "closestChallengeGeometryPair": {
       "a": "challenge-stage-scorpion-cross",
       "b": "challenge-stage-stingray-hook",
-      "distance": 0.034,
+      "distance": 0.028,
       "aVector": {
-        "xRange": 153.956,
-        "yRange": 143.932,
-        "pathLength": 359.425,
-        "turnCount": 3.825,
-        "reversalCount": 2.625,
-        "lowerFieldShare": 0.039
+        "xRange": 179.416,
+        "yRange": 248.825,
+        "pathLength": 518.286,
+        "turnCount": 4.525,
+        "reversalCount": 3.313,
+        "lowerFieldShare": 0.126
       },
       "bVector": {
-        "xRange": 134.586,
-        "yRange": 148.032,
-        "pathLength": 331.333,
-        "turnCount": 3.487,
-        "reversalCount": 2.313,
-        "lowerFieldShare": 0.032
+        "xRange": 168.297,
+        "yRange": 259.631,
+        "pathLength": 514.799,
+        "turnCount": 4.862,
+        "reversalCount": 2.913,
+        "lowerFieldShare": 0.108
       },
       "delta": {
-        "xRange": -19.37,
-        "yRange": 4.1,
-        "pathLength": -28.092,
-        "turnCount": -0.338,
-        "reversalCount": -0.312,
-        "lowerFieldShare": -0.007
+        "xRange": -11.119,
+        "yRange": 10.806,
+        "pathLength": -3.487,
+        "turnCount": 0.337,
+        "reversalCount": -0.4,
+        "lowerFieldShare": -0.018
       }
     },
     "distinctPairRatio": 1,
@@ -179,10 +179,10 @@
     }
   },
   "sourceReports": {
-    "formationBossGrammar": "reference-artifacts/analyses/formation-boss-grammar-conformance/2026-05-16-285b1a13/report.json",
-    "pathFamilyComparison": "reference-artifacts/analyses/formation-boss-path-family-comparison/2026-05-16-285b1a13/report.json",
+    "formationBossGrammar": "reference-artifacts/analyses/formation-boss-grammar-conformance/2026-05-16-708f7909/report.json",
+    "pathFamilyComparison": "reference-artifacts/analyses/formation-boss-path-family-comparison/2026-05-16-08c327dd/report.json",
     "stageSignatureDistance": "reference-artifacts/analyses/stage-signature-distance/2026-05-15-60326a33/report.json",
-    "pathSlotExtraction": "reference-artifacts/analyses/formation-boss-path-slot-extraction/2026-05-16-285b1a13/report.json",
+    "pathSlotExtraction": "reference-artifacts/analyses/formation-boss-path-slot-extraction/2026-05-16-08c327dd/report.json",
     "galagaPathReferenceLabels": "reference-artifacts/analyses/galaga-path-reference-labels/2026-05-15-c8c7246f/report.json"
   },
   "longCyclePlan": [

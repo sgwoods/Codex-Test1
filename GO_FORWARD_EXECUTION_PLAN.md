@@ -13,20 +13,19 @@ Use it when deciding:
 
 As of May 16, 2026:
 
-- hosted `/production` remains the refreshed public `1.3.0` family
-- hosted `/beta` carries the first `1.4.0` beta candidate:
-  `1.4.0-beta.1+build.747.sha.af3f2b85.beta`
+- hosted `/production` is the refreshed public `1.4.0` family
+- hosted `/beta` remains the authority-gated review lane for the next deliberate
+  candidate cycle
 - hosted `/dev` is the forward-review lane for the next coherent improvement
-  bundle
+  bundle and currently tracks the `1.4.0.1` line
 - local MacBook development is currently on
   `codex/macbook-audio-entry-grounding-cycle`
 
 This means:
 
-- the `1.3.0` quality-and-second-cabinet release remains the public production
-  baseline
-- the first `1.4.0` beta exists and should be treated as a review candidate,
-  not as a completed release family
+- the `1.4.0` multi-game public release is the production baseline
+- the next beta should be requested only after the forward-review line has a
+  coherent, measured improvement bundle
 - hosted `/dev` remains the visible forward-review lane for post-beta
   improvements
 - the immediate execution question is now which measured conformance gains
@@ -43,19 +42,47 @@ The forward line and the current shipped family now include:
   harness session, which gives us branch-local audio identity evidence again on
   this machine
 - the dedicated challenge-stage scorer now shows the real set-piece gap:
-  `5.1/10` conformance and `5.0/10` interesting factor after the latest
-  Stage 11/Stage 19 pass
+  `5.7/10` conformance and `5.6/10` interesting factor after the measured
+  wave/group identity pass and the no-fire reference-motion extractor
+  correction
+
+## Current Path.Plan
+
+The next beta path is intentionally ordered so visible pre-production features
+do not outrun conformance or public safety:
+
+1. Measured conformance-critical gameplay: challenge-stage motion, alien entry,
+   stage-specific formations, bonus-stage readability, and audio event clarity.
+2. Safety and release gates: auth lanes, score integrity, replay/storage rules,
+   Supabase RLS posture, logging/privacy limits, and public/private dashboard
+   boundaries.
+3. Generated docs and dashboards: keep score, confidence, resolution, evidence,
+   CPU/GPU-equivalent spend, and next-step recommendations visible from
+   persisted artifacts.
+4. Lower-risk delight: Arcade Music, Watch Mode, Player Two UX clarity, and
+   Commentator callouts may continue when they remain scoped and do not pollute
+   production scores.
+5. Higher-risk delight: YouTube top-10 posting and externally hosted replay
+   publishing wait behind explicit auth, consent, storage, moderation, token,
+   and revoke/failure-mode review.
+
+The immediate next work is Aurora challenge-stage conformance: improve
+trajectory/reference matching and player-readable bonus-stage variety while
+keeping no-shoot/no-ship-loss challenge guardrails green. The current tracked
+gap is stage 11 still best-matching the challenge-2 reference instead of the
+intended challenge-3 reference; this is now a documented conformance gap rather
+than a hidden harness failure.
 
 ## Current Working Reality
 
-We are operating in a post-`1.3.0` stewardship phase.
+We are operating in a post-`1.4.0` production stewardship phase.
 
 That means:
 
-- the live `1.3.0` line should remain trustworthy
+- the live `1.4.0` production line should remain trustworthy
 - stable `beta` / `production` artifacts are preserved and should not be
   rewritten casually
-- current `main` should now contain deliberate `1.4.0` pickup work, not
+- current `main` should now contain deliberate `1.4.0.1` pickup work, not
   accidental spillover from the shipped family
 - recovered local work exists and should be integrated intentionally
 - release gates are important, but individual harnesses may need repair before
@@ -122,8 +149,8 @@ For the next cycle, the active working line should be:
 
 Use `main` as the current integration branch because:
 
-- it now contains the shipped `1.3.0` production line and the first
-  post-release layered-versioning contract
+- it now contains the shipped `1.4.0` production line and the current
+  layered-versioning contract
 - it includes the current release policy, scorecard, correspondence framework,
   committed analysis artifacts, and production-ready defaults
 - it is now the cleanest base for the next narrow gameplay/fidelity branches

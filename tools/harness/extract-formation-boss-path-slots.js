@@ -161,8 +161,23 @@ async function captureSample(page, t){
   }, t);
 }
 
-async function runScenarioActions(page, scenario, sampleInterval){
+function pathExtractionActions(scenario){
   const actions = [...(scenario.actions || [])].sort((a, b) => a.t - b.t);
+  if(!scenario.config?.challenge) return actions;
+  return actions.filter(action => {
+    const code = action.code || action.key || '';
+    return code !== 'Space' && code !== ' ';
+  });
+}
+
+function measurementMode(scenario){
+  return scenario.config?.challenge
+    ? 'challenge-reference-motion-no-player-fire'
+    : 'scripted-gameplay-window';
+}
+
+async function runScenarioActions(page, scenario, sampleInterval){
+  const actions = pathExtractionActions(scenario);
   const samples = [];
   const sampleTimes = [];
   for(let t = 0; t <= scenario.duration + 0.001; t += sampleInterval) sampleTimes.push(+t.toFixed(3));
@@ -306,6 +321,7 @@ function summarizeWindow(windowId, scenario, samples){
   return {
     windowId,
     scenario: scenario.name,
+    measurementMode: measurementMode(scenario),
     seed: scenario.seed,
     stage,
     band: stageBand(stage || 1, challenge),
@@ -486,6 +502,11 @@ async function main(){
       commit,
       artifactType: 'formation-boss-path-slot-extraction',
       sampleIntervalS: interval,
+      measurementPolicy: {
+        regularWindows: 'Use scripted gameplay inputs so rack-settle, boss, escort, and pressure paths are sampled in plausible play.',
+        challengeWindows: 'Suppress player fire during trajectory extraction so challenge-stage path comparison measures authored alien motion instead of bullet-truncated tracks.',
+        gameplayMeaning: 'This is a measurement-only policy; it does not alter runtime challenge gameplay or separate challenge-perfect/player-score probes.'
+      },
       summary,
       windows,
       problem: 'Boss entry and formation grammar needs frame-level path and rack-slot evidence before gameplay changes can be ranked precisely.',
@@ -497,6 +518,8 @@ async function main(){
       '# Formation Boss Path Slot Extraction',
       '',
       'This artifact samples Aurora runtime formation, boss, escort, and challenge-stage trajectories without changing gameplay.',
+      '',
+      'Challenge windows are captured as no-fire reference-motion passes so killed enemies do not shorten the measured alien trajectories. Gameplay scoring and challenge-perfect probes remain separate.',
       '',
       `- Score before reference cap: ${summary.extractionScore10}/10`,
       `- Capped path/slot score: ${summary.cappedPathSlotScore10}/10`,
@@ -514,11 +537,11 @@ async function main(){
       '',
       '## Windows',
       '',
-      '| Window | Stage | Tracks | Moving | Boss moving | Escorts | Slot tracks | SVG |',
-      '| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |'
+      '| Window | Stage | Measurement | Tracks | Moving | Boss moving | Escorts | Slot tracks | SVG |',
+      '| --- | ---: | --- | ---: | ---: | ---: | ---: | ---: | --- |'
     ];
     for(const win of windows){
-      lines.push(`| ${win.windowId} | ${win.stage} | ${win.trackCount} | ${win.movingTrackCount} | ${win.bossMovingTrackCount} | ${win.escortTrackCount} | ${win.regularSlotTrackCount + win.challengeSlotTrackCount} | ${win.windowId}.svg |`);
+      lines.push(`| ${win.windowId} | ${win.stage} | ${win.measurementMode} | ${win.trackCount} | ${win.movingTrackCount} | ${win.bossMovingTrackCount} | ${win.escortTrackCount} | ${win.regularSlotTrackCount + win.challengeSlotTrackCount} | ${win.windowId}.svg |`);
     }
     fs.writeFileSync(path.join(outDir, 'README.md'), `${lines.join('\n')}\n`);
     console.log(JSON.stringify({ ok: true, outDir, summary }, null, 2));
