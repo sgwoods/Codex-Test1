@@ -276,6 +276,8 @@ swarm feel.
   [GALAXY_GUARDIANS_8_HOUR_VISUAL_AUDIO_MOTION_PASS_PLAN.md](GALAXY_GUARDIANS_8_HOUR_VISUAL_AUDIO_MOTION_PASS_PLAN.md)
 - the maintained longer-surface and persona review model is in
   [GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md](GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md)
+- the maintained game-arc, stage-band, and homage-variant grammar is in
+  [GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md](GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md)
 - the earlier six-hour pass remains recorded in
   [GALAXY_GUARDIANS_6_HOUR_CONFORMANCE_PASS_PLAN.md](GALAXY_GUARDIANS_6_HOUR_CONFORMANCE_PASS_PLAN.md)
 - branch-local gameplay-completeness work remains in

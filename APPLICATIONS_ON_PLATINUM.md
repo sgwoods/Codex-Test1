@@ -326,6 +326,10 @@ grow beyond preview-only framing and earn:
 - platform validation value as a second real game
 - a readable first-class conformance target and review story rather than only a
   scattered preview harness set
+- a readable game arc and stage-band progression that can later support
+  source-grounded homage variants without losing the original flavor, as now
+  described in
+  [GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md](GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md)
 
 The first aggregate 0.1 candidate gate is already source-controlled, so future
 playable claims can cite one durable artifact instead of reassembling the

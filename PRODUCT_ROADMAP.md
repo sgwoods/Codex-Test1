@@ -205,6 +205,8 @@ Current conformance read:
   [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md),
   with the current longer-surface/persona execution layer in
   [GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md](GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md),
+  and the maintained stage-arc and homage-variant grammar in
+  [GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md](GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md),
   with a standing aggregate process gate in
   `npm run harness:check:galaxy-guardians-first-class-conformance`
 - current cluster targets are `9.2/10` for Aurora and `7.7/10` reference /

@@ -296,6 +296,7 @@ The documentation should remain layered so readers can choose the right depth.
 | Platform ownership and architecture | [PLATINUM.md](PLATINUM.md) and [PLATINUM_ARCHITECTURE_OVERVIEW.md](PLATINUM_ARCHITECTURE_OVERVIEW.md) |
 | Game/platform boundary | [APPLICATIONS_ON_PLATINUM.md](APPLICATIONS_ON_PLATINUM.md) |
 | Per-game alien, audio, stage, and persona catalog | [GAME_CONFORMANCE_CATALOG.md](GAME_CONFORMANCE_CATALOG.md) |
+| Guardians stage arc, stage-band plan, and homage-variant guardrails | [GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md](GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md) |
 | Persona gameplay distribution evidence | [Aurora Application Guide](application-guide.html#persona-performance-distribution) and `reference-artifacts/analyses/persona-performance-distribution/latest.json` |
 | Expert beta strategy review | [STRATEGIC_BETA_REVIEW.md](STRATEGIC_BETA_REVIEW.md) |
 | Ingestion process | [CLASSIC_ARCADE_INGESTION_FRAMEWORK.md](CLASSIC_ARCADE_INGESTION_FRAMEWORK.md) |

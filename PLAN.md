@@ -125,6 +125,10 @@ resource economics fit together.
   so Guardians can be judged internally by real repeated-rack stage bands
   while live dev/beta stay honestly framed as a one-level public slice until
   that deeper surface is actually productized
+- keep the maintained game-arc and homage-variant grammar readable through
+  [GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md](GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md),
+  so stage-by-stage conformance work and later homage variants grow from one
+  preserved source-grounded shape instead of ad hoc tuning
 - treat the obvious current one-level baseline misses as first-class work:
   `WAIT`/headline treatment, score-advance table, rack march cadence,
   explosion states, swarm palettes, moving starfield motion, missile-ready
@@ -170,7 +174,11 @@ resource economics fit together.
    [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md)
    and `harness:check:galaxy-guardians-first-class-conformance` healthy so
    Galaxy review discipline approaches Aurora's
-8. prioritize level-by-level arcade depth as the next major product pillar
+8. prioritize level-by-level arcade depth as the next major product pillar,
+   using
+   [GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md](GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md)
+   as the maintained map from opening slice to deeper repeated-rack play and
+   future homage variants
 9. make shared gameplay-video publishing an early evidence/product capability
 10. continue narrow trust fixes from the open issue stream
 11. execute the measured Galaga long-cycle quality plan in
