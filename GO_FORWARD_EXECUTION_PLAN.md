@@ -11,26 +11,26 @@ Use it when deciding:
 
 ## Current Release Posture
 
-As of May 12, 2026:
+As of May 16, 2026:
 
-- hosted `/dev` points at:
-  - the active `1.3.0.1` forward-review line
-- hosted `/beta` now points at:
-  - the refreshed `1.3.0` reviewed lane sourced from the accepted `1.3.0.1`
-    bundle
-- hosted `/production` now points at:
-  - the refreshed `1.3.0` public line
+- hosted `/production` remains the refreshed public `1.3.0` family
+- hosted `/beta` carries the first `1.4.0` beta candidate:
+  `1.4.0-beta.1+build.747.sha.af3f2b85.beta`
+- hosted `/dev` is the forward-review lane for the next coherent improvement
+  bundle
+- local MacBook development is currently on
+  `codex/macbook-audio-entry-grounding-cycle`
 
 This means:
 
-- the `1.3.0` quality-and-second-cabinet release remains the public baseline
-  on hosted `/production`, now refreshed through the accepted `1.3.0.1` bundle
-- hosted `/dev` remains the forward review lane while hosted `/beta` and
-  hosted `/production` now preserve the refreshed public family
-- the active source release family has moved on to the deliberate `1.4.0`
-  pickup
-- the immediate execution question is now what the first coherent `1.4.0`
-  review bundle should be and what should remain queued behind it
+- the `1.3.0` quality-and-second-cabinet release remains the public production
+  baseline
+- the first `1.4.0` beta exists and should be treated as a review candidate,
+  not as a completed release family
+- hosted `/dev` remains the visible forward-review lane for post-beta
+  improvements
+- the immediate execution question is now which measured conformance gains
+  justify the next `/dev` and then the next beta-candidate request
 
 The forward line and the current shipped family now include:
 
@@ -39,9 +39,12 @@ The forward line and the current shipped family now include:
 - the reference-audio session reset fix is part of the current `/dev` line
 - the follow-on stage-1 convoy-pulse refinement has now brought the broader
   stage-1 opening correspondence report to `4/4`
-- the refreshed audio theme comparison harness now captures each cue in a fresh
-  harness session, which gives us current branch-local audio identity evidence
-  again on this machine
+- the refreshed audio theme comparison harness captures each cue in a fresh
+  harness session, which gives us branch-local audio identity evidence again on
+  this machine
+- the dedicated challenge-stage scorer now shows the real set-piece gap:
+  `5.1/10` conformance and `5.0/10` interesting factor after the latest
+  Stage 11/Stage 19 pass
 
 ## Current Working Reality
 
@@ -69,14 +72,16 @@ machine, this MacBook resumed normal development from the clean review head:
 
 - base commit: `af3f2b85`
 - beta label: `1.4.0-beta.1+build.747.sha.af3f2b85.beta`
-- working branch: `codex/macbook-post-beta-conformance-10h`
+- current working branch: `codex/macbook-audio-entry-grounding-cycle`
+- latest pushed local conformance commit: `ac18d0e9`
 - plan: [MACBOOK_POST_BETA_10_HOUR_CONFORMANCE_PLAN.md](MACBOOK_POST_BETA_10_HOUR_CONFORMANCE_PLAN.md)
 
 The work block should prioritize measured user-experience conformance:
 
 - audio UX conformance and runtime recovery first
-- challenge-stage arrival, novelty, and trajectory variation second
-- boss/formation choreography third
+- challenge-stage arrival, novelty, trajectory variation, and high-bonus
+  readability second
+- regular alien entry geometry separation and boss/formation choreography third
 - persona distribution evidence, docs, dashboard, and economics updates as the
   evidence layer
 
@@ -160,23 +165,23 @@ For the immediate next cycle, that means:
 - do not republish `/dev` for every single small change
 - group the next meaningful fidelity work into a small bundle
 - refresh the scorecard and lane metadata when that bundle is ready
-- use the `1.3.0.1` hosted-dev increment as the visible forward-review posture
-  until the next coherent review bundle supersedes it
+- treat `1.4.0-beta.1` as the current beta comparison point and refresh
+  hosted `/dev` only when the next bundle is measurably better
 
 ### When To Shape The Next Hosted `/beta`
 
 Do not move current hosted `/dev` to hosted `/beta` as an automatic mirror
-operation. The accepted `1.3.0.1` lane has already refreshed the public
-family; the next hosted `/beta` should wait for a real `1.4.0`-shaped
-candidate.
+operation. The first `1.4.0` beta has already been published from the
+release-authority machine, so the next hosted `/beta` should wait for a real
+post-beta conformance improvement bundle.
 
-The next hosted `/beta` should wait until we have:
+The next hosted `/beta` after `1.4.0-beta.1` should wait until we have:
 
 - at least one real improvement bundle beyond simple `/dev` parity
 - clearer progress on the weakest scorecard categories
   - audio identity and cue alignment
-  - player movement conformance
-  - challenge-stage timing/content depth
+  - dedicated challenge-stage set-piece conformance
+  - regular alien-entry geometry separation
 - a refreshed scorecard that shows a more defensible quality step over the
   current stable beta/prod line
 - release notes and docs that can honestly explain why this is the next serious
@@ -185,24 +190,25 @@ The next hosted `/beta` should wait until we have:
 
 Practical standard:
 
-- current hosted `/dev` is the visible `1.3.0.1` forward-review line
-- the next hosted `/beta` should only be cut once the docs, dashboards,
-  release note, and current conformance read describe a real `1.4.0`-scale
+- current hosted `/beta` is the first `1.4.0` review candidate
+- the next hosted `/dev` should only be refreshed when the docs, dashboards,
+  release note, and current conformance read describe a real post-beta
   improvement bundle
+- the next hosted `/beta` should only be requested once hosted `/dev` proves
+  that bundle is materially better than `1.4.0-beta.1`
 - beta and production publish still must happen from `imacm1 / iMacM1` unless
   release authority is explicitly transferred
 - the next larger beta family remains `1.4.0` arcade depth
 - after refreshing the audio process with cue contracts, promotion prechecks,
   layered cue support, composite analysis windows, calibrated browser-reference
-  gates, and focused candidate loops for `challengePerfect` and `enemyShot`,
-  audio identity remains the weakest runtime category at `6.9/10`, while the
-  process is now better instrumented: semantic event score is `9.78/10`,
-  acoustic event score is `6.30/10`, cue-contract readiness is `9.09/10`, and
-  the highest measured segment gap is `captureBeam` tail. The latest accepted
-  runtime lift is a measured early-stage `enemyShot` threat-fire cue; the
-  `challengePerfect` candidates were rejected at full-theme quality gates. The
-  next audio pass should target `captureBeam` tail or build a stronger
-  challenge-perfect mix model before promotion.
+  gates, and focused candidate loops, audio identity remains the weakest
+  quality category at `7.3/10`; semantic event score is `9.78/10`, acoustic
+  event fit is roughly `6.3-6.5/10`, and the next audio pass should target the
+  highest-risk cue family while preserving `9/9` cue alignment
+- the dedicated challenge-stage conformance score is now `5.1/10`, with
+  interesting factor at `5.0/10`; the next pass should add late Galaga
+  reference labels, high-bonus readability probes, and temporal motion windows
+  before major gameplay retuning
 - level arc and encounter shape is now a first-class quality category at
   `8.8/10`; this should be treated as a high-priority `1.4` workstream because
   it measures whether the run develops Galaga-like stage shape instead of
@@ -218,9 +224,10 @@ Practical standard:
   gameplay-control regression
 - next movement work should be manual/browser review plus richer reference
   trace extraction, not blind constant tuning
-- next implementation value is now highest in level-arc shape: pressure replay
-  precision, challenge-stage reward texture, gameplay-scale graphics, and audio
-  identity
+- next implementation value is now highest in audio identity and challenge-stage
+  set-piece authorship: pressure replay precision, challenge-stage reward
+  texture, gameplay-scale graphics, and audio feedback should all feed those
+  two player-visible outcomes
 - next-cycle work should be grouped deliberately into:
   - movement and control fidelity
   - gameplay complexity and challenge-stage depth
@@ -231,10 +238,11 @@ Practical standard:
   - pilot, leaderboard, replay, and admin operations
   - non-production versus production environment separation
   - Platinum multi-game and pack-contract maturation
-- after `1.3.0`, the pickup order should stay explicit:
+- after the first `1.4.0` beta, the pickup order should stay explicit:
   - short term: keep the refreshed public line stable while assembling the next
-    hosted `/dev` review bundle
-  - medium term: `1.4.0` arcade depth and platform-contract follow-through
+    hosted `/dev` review bundle beyond `1.4.0-beta.1`
+  - medium term: continue `1.4.0` arcade depth and platform-contract
+    follow-through
   - longer term: `1.5.0` shared-video evidence and `1.6.0` pilot-facing
     cabinet polish, leading toward `2.0` multi-game Platinum
 

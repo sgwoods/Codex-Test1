@@ -8,6 +8,7 @@ const LEGACY_OUT = path.join(ROOT, 'CONFORMANCE_METRIC_OVERVIEW.md');
 const AURORA_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'quality-conformance');
 const AURORA_AUDIO_CONTRACT = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-audio-cue-contracts', 'latest.json');
 const AURORA_ALIEN_ENTRY_CHALLENGE = path.join(ROOT, 'reference-artifacts', 'analyses', 'alien-entry-challenge-variation', 'latest.json');
+const AURORA_CHALLENGE_STAGE = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
 const GUARDIANS_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'reference-conformance-0.1.json');
 const GUARDIANS_PLAYTEST = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaxy-guardians-identity', 'playtest-conformance-review-0.1.json');
 
@@ -78,7 +79,7 @@ function audioContractSummary(){
   return readOptionalJson(AURORA_AUDIO_CONTRACT);
 }
 
-function releaseTargetSections(aurora, guardians, guardiansPlaytest, alienEntryChallenge){
+function releaseTargetSections(aurora, guardians, guardiansPlaytest, alienEntryChallenge, challengeStage){
   const auroraOverallScore = aurora.summary.overallScore10;
   const auroraAudio = categoryScore(aurora, 'audio', 6.1);
   const auroraMovement = categoryScore(aurora, 'movement', 8);
@@ -87,6 +88,8 @@ function releaseTargetSections(aurora, guardians, guardiansPlaytest, alienEntryC
   const auroraFormationBoss = categoryScore(aurora, 'formation-boss-grammar', 0);
   const auroraShell = categoryScore(aurora, 'ui-shell', 9.2);
   const auroraAlienChallenge = alienEntryChallenge?.summary?.score10 ?? null;
+  const auroraDedicatedChallenge = challengeStage?.summary?.score10 ?? null;
+  const auroraChallengeInterest = challengeStage?.summary?.interestingFactorScore10 ?? null;
   const guardiansReferenceScore = guardians.summary.referenceConformanceScore10;
   const guardiansPlaytestScore = guardiansPlaytest.summary.playtestWeightedConformanceScore10;
   const guardiansAudio = (guardiansPlaytest.categories || []).find(category => category.id === 'audio-character')?.playtestWeightedScore10 || 0;
@@ -96,7 +99,7 @@ function releaseTargetSections(aurora, guardians, guardiansPlaytest, alienEntryC
   const releaseTargets = buildTable(
     ['Release cluster / focus', 'Aurora target', 'Aurora focus metrics', 'Guardians target', 'Guardians focus metrics', 'Release decision meaning'],
     [
-      ['Current dev baseline', score(auroraOverallScore), `audio ${auroraAudio}; movement ${auroraMovement}; boss/formation ${auroraFormationBoss || 'pending'}; alien/challenge ${auroraAlienChallenge == null ? 'pending' : auroraAlienChallenge}; stage opening ${auroraStage1Timing}; challenge timing ${auroraChallengeTiming}; shell integrity ${auroraShell}`, `${guardiansReferenceScore}/10 reference; ${guardiansPlaytestScore}/10 playtest`, `maturity ${guardians.summary.referenceMaturityScore10}; gate coverage ${guardians.summary.implementationGateCoverageScore10}; public readiness ${guardians.summary.publicReleaseReadinessScore10}; audio feel ${guardiansAudio}`, 'Baseline for the next beta-candidate discussion, now weighted by local playtest feel.'],
+      ['Current dev baseline', score(auroraOverallScore), `audio ${auroraAudio}; movement ${auroraMovement}; boss/formation ${auroraFormationBoss || 'pending'}; broad alien/challenge ${auroraAlienChallenge == null ? 'pending' : auroraAlienChallenge}; dedicated challenge-stage ${auroraDedicatedChallenge == null ? 'pending' : auroraDedicatedChallenge}; stage opening ${auroraStage1Timing}; challenge timing ${auroraChallengeTiming}; shell integrity ${auroraShell}`, `${guardiansReferenceScore}/10 reference; ${guardiansPlaytestScore}/10 playtest`, `maturity ${guardians.summary.referenceMaturityScore10}; gate coverage ${guardians.summary.implementationGateCoverageScore10}; public readiness ${guardians.summary.publicReleaseReadinessScore10}; audio feel ${guardiansAudio}`, 'Baseline for the next beta-candidate discussion, now weighted by local playtest feel.'],
       ['`1.3` Fidelity and Trust', '9.0/10', 'audio >= 7.2; movement >= 8.6; trust/fairness >= 9.3; shell integrity >= 9.4', `${guardiansReferenceScore}/10 reference; ${guardiansPlaytestScore}/10 playtest`, `rack timing >= 6.2; movement pressure ${guardiansMotion}; visual identity ${guardiansVisual}; audio feel ${guardiansAudio}`, 'Aurora can move beta if the weakest feel gaps improve and Guardians stays out of production but credible as a beta preview.'],
       ['`1.4` Arcade Depth / Guardians 0.1 Preview', '9.2/10', 'level-depth >= 8.4; boss/formation grammar >= 8.0; challenge-stage identity >= 8.6; later-level variation >= 8.2; audio >= 7.6', '7.8/10 reference; 7.0/10 playtest', 'frame-derived rack timing >= 7.2; dive paths >= 7.2; alien visuals >= 7.0; audio feel >= 7.0', 'Aurora gains real stage-by-stage depth; Guardians becomes a strong first preview, not a reskinned Aurora.'],
       ['`1.5` Flight Recorder and Shared Evidence', '9.3/10', 'replay/video evidence >= 8.8; published-run traceability >= 8.5; reference-event mapping >= 8.6', '8.2/10', 'source-video extraction >= 8.4; waveform/audio comparison >= 6.8; event-log durability >= 9.0', 'Shared video and evidence become release infrastructure for both applications.'],
@@ -112,7 +115,8 @@ function releaseTargetSections(aurora, guardians, guardiansPlaytest, alienEntryC
       ['Audio identity / acoustic fit', score(auroraAudio), '7.2/10 in `1.3`; 7.6/10 in `1.4`', `${guardiansAudio}/10 playtest; ${guardiansAudioReference}/10 reference category`, 'human-listened cue cleanup in `1.3`; 7.0/10 playtest in `1.4`', 'Audio is the weakest shared conformance area today.'],
       ['Visual identity', `${score(auroraShell)} shell integrity; game sprites not separately scored in the roll-up`, 'add a visible arcade-depth visual score in `1.4`', '6.7/10 playtest; 6.8/10 reference category', 'browser-reviewed component-sprite polish in `1.3`; 7.0/10 playtest in `1.4`', 'Guardians especially needs recognizably distinct alien silhouettes before beta-facing preview.'],
       ['Boss entry and formation grammar', auroraFormationBoss ? score(auroraFormationBoss) : 'new scorer pending', '>=8.0 first gate in `1.4`; >=9.0 with path/rack extraction', 'rack timing 6.2/10 reference category', 'frame-derived rack timing >=7.2; dive paths >=7.2', 'Boss entry, escort composition, formation settling, and challenge set pieces are the arcade choreography players recognize by stage.'],
-      ['Alien entry and challenge-stage variation', auroraAlienChallenge == null ? 'new scorer pending' : score(auroraAlienChallenge), '>=8.6/10 in `1.4`; arrival-versus-appearance and pattern novelty both above 7.5/10', 'not yet a separate Guardians roll-up', 'add first-visible arrival, entry side, target group, exit, and bonus-opportunity labels', 'This catches the gap players notice when challenge aliens feel like they appear rather than arrive through learnable arcade set pieces.'],
+      ['Alien entry and broad challenge planning variation', auroraAlienChallenge == null ? 'new scorer pending' : score(auroraAlienChallenge), '>=8.6/10 in `1.4`; arrival-versus-appearance and pattern novelty both above 7.5/10', 'not yet a separate Guardians roll-up', 'add first-visible arrival, entry side, target group, exit, and bonus-opportunity labels', 'This catches the gap players notice when challenge aliens feel like they appear rather than arrive through learnable arcade set pieces.'],
+      ['Dedicated challenge-stage set-piece conformance', auroraDedicatedChallenge == null ? 'new scorer pending' : `${score(auroraDedicatedChallenge)}; interesting factor ${score(auroraChallengeInterest)}`, '>=6.0/10 in the next local/dev pass; >=9.2/10 when stage-by-stage reference labels and temporal windows cover late challenge stages', 'not yet a separate Guardians roll-up', 'create the same challenge-stage harness once Guardians has its Galaxian rack/challenge equivalents promoted', 'This is the stricter score for actual challenge-stage arrival, alien novelty, choreography, and bonus-opportunity readability. It is intentionally lower than the broad planning score.'],
       ['Stage / rack / wave timing', `stage opening ${auroraStage1Timing}; challenge timing ${auroraChallengeTiming}`, 'challenge and later-stage targets >= 8.6 in `1.4`', 'rack timing 6.2/10', 'browser-reviewed rack timing in `1.3`; 7.2/10 in `1.4`', 'Timing separates authentic arcade pressure from approximate motion.'],
       ['Scoring and progression', 'progression/persona 8.8; shot/hit 10.0', 'level-depth and scoring stability >= 9.0 by `2.0`', 'single-shot threat/scoring 7.5', '7.6 in `1.4`; 8.8 by `2.0`', 'Guardians should not publish persistent scoreboards until scoring is reference-aligned.'],
       ['Evidence and replay durability', 'scorecard artifacts exist; video publishing is not yet a full product surface', 'replay/video evidence >= 8.8 in `1.5`', 'evidence durability 9.7', 'human-approved sprite/cue extraction durability >= 9.7 in `1.5`', 'Shared videos and source-controlled artifacts should become normal release evidence.'],
@@ -150,6 +154,7 @@ function main(){
   const guardiansPlaytest = readJson(GUARDIANS_PLAYTEST);
   const audioContract = audioContractSummary();
   const alienEntryChallenge = readOptionalJson(AURORA_ALIEN_ENTRY_CHALLENGE);
+  const challengeStage = readOptionalJson(AURORA_CHALLENGE_STAGE);
   const generatedAt = new Date().toISOString();
 
   const overallTable = buildTable(
@@ -158,10 +163,14 @@ function main(){
       [
         'Aurora Galactica current dev line',
         score(aurora.summary.overallScore10),
-        `strongest ${aurora.summary.strongestCategory.label} ${score(aurora.summary.strongestCategory.score10)}; weakest ${aurora.summary.weakestCategory.label} ${score(aurora.summary.weakestCategory.score10)}${alienEntryChallenge ? `; alien entry/challenge variation ${score(alienEntryChallenge.summary.score10)}` : ''}${audioContract ? `; audio contract readiness ${score(audioContract.summary.averageReadinessScore10)}` : ''}`,
+        `strongest ${aurora.summary.strongestCategory.label} ${score(aurora.summary.strongestCategory.score10)}; weakest ${aurora.summary.weakestCategory.label} ${score(aurora.summary.weakestCategory.score10)}${alienEntryChallenge ? `; broad alien/challenge variation ${score(alienEntryChallenge.summary.score10)}` : ''}${challengeStage ? `; dedicated challenge-stage conformance ${score(challengeStage.summary.score10)}` : ''}${audioContract ? `; audio contract readiness ${score(audioContract.summary.averageReadinessScore10)}` : ''}`,
         audioContract ? 'release-quality conformance score plus audio cue-contract read' : 'release-quality conformance score',
         `${aurora.summary.weakestCategory.label} (${score(aurora.summary.weakestCategory.score10)})`,
-        audioContract ? `${rel(auroraReportPath)}; ${rel(AURORA_AUDIO_CONTRACT)}` : rel(auroraReportPath)
+        [
+          rel(auroraReportPath),
+          audioContract ? rel(AURORA_AUDIO_CONTRACT) : null,
+          challengeStage ? rel(AURORA_CHALLENGE_STAGE) : null
+        ].filter(Boolean).join('; ')
       ],
       [
         'Galaxy Guardians 0.1 playable preview',
@@ -213,10 +222,16 @@ function main(){
         : category.read
       ]),
       ...(alienEntryChallenge ? [[
-        'Alien entry and challenge-stage variation',
+        'Alien entry and broad challenge planning variation',
         score(alienEntryChallenge.summary.score10),
         `${rel(AURORA_ALIEN_ENTRY_CHALLENGE)}, stage-signature-distance report, formation-boss path-family comparison`,
         `${alienEntryChallenge.summary.problem} Weakest metric: ${alienEntryChallenge.summary.weakestMetric?.label || 'unknown'} (${score(alienEntryChallenge.summary.weakestMetric?.score10)}).`
+      ]] : []),
+      ...(challengeStage ? [[
+        'Dedicated challenge-stage set-piece conformance',
+        `${score(challengeStage.summary.score10)}; interesting factor ${score(challengeStage.summary.interestingFactorScore10)}`,
+        `${rel(AURORA_CHALLENGE_STAGE)}, ${rel(path.join(ROOT, 'CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md'))}, challenge-stage correspondence and motion-profile harnesses`,
+        `${challengeStage.summary.weakestFinding} Player meaning: ${challengeStage.summary.playerMeaning} Next recommended step: ${challengeStage.improvementPlan?.[0] || 'continue reference-labeled trajectory and novelty extraction.'}`
       ]] : [])
     ]
   );
@@ -238,7 +253,7 @@ function main(){
     '',
     `Current read: reference ${score(guardians.summary.referenceConformanceScore10)}, playtest ${score(guardiansPlaytest.summary.playtestWeightedConformanceScore10)}, maturity ${score(guardians.summary.referenceMaturityScore10)}, gate coverage ${score(guardians.summary.implementationGateCoverageScore10)}, public readiness ${score(guardians.summary.publicReleaseReadinessScore10)}.`,
     '',
-    ...releaseTargetSections(aurora, guardians, guardiansPlaytest, alienEntryChallenge),
+    ...releaseTargetSections(aurora, guardians, guardiansPlaytest, alienEntryChallenge, challengeStage),
     '',
     '## Galaxy Guardians 0.1 Preview Metrics',
     '',
@@ -272,6 +287,7 @@ function main(){
     guardiansConformance: rel(GUARDIANS_CONFORMANCE),
     guardiansPlaytest: rel(GUARDIANS_PLAYTEST),
     alienEntryChallenge: alienEntryChallenge ? rel(AURORA_ALIEN_ENTRY_CHALLENGE) : null,
+    challengeStage: challengeStage ? rel(AURORA_CHALLENGE_STAGE) : null,
     auroraOverallScore10: aurora.summary.overallScore10,
     guardiansReferenceScore10: guardians.summary.referenceConformanceScore10
   }, null, 2));
