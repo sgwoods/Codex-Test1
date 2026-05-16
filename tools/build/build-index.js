@@ -1326,6 +1326,146 @@ function projectGuideStyles(){
       font-size:13px;
       line-height:1.55;
     }
+    .inlineDocShelf{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+    .inlineDocPreview,
+    .challengeStageDetail{
+      border:1px solid rgba(255,255,255,0.10);
+      background:rgba(7,19,31,0.72);
+      border-radius:18px;
+      overflow:hidden;
+    }
+    .inlineDocPreview summary,
+    .challengeStageDetail summary{
+      cursor:pointer;
+      list-style:none;
+    }
+    .inlineDocPreview summary::-webkit-details-marker,
+    .challengeStageDetail summary::-webkit-details-marker{
+      display:none;
+    }
+    .inlineDocPreview summary{
+      padding:12px 14px;
+      color:#f2fbff;
+      font-weight:800;
+    }
+    .inlineDocPreview summary::after,
+    .challengeStageDetail summary::after{
+      content:"+";
+      float:right;
+      color:var(--accent);
+      font-weight:900;
+    }
+    .inlineDocPreview[open] summary::after,
+    .challengeStageDetail[open] summary::after{
+      content:"-";
+    }
+    .inlineDocPreviewBody{
+      padding:0 14px 14px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+    .challengeStageList{
+      display:grid;
+      gap:12px;
+    }
+    .challengeStageSummary{
+      display:grid;
+      grid-template-columns:minmax(220px,1fr) auto auto;
+      gap:12px;
+      align-items:center;
+      padding:14px 16px;
+      color:#f2fbff;
+    }
+    .challengeStageTitle{
+      display:flex;
+      flex-direction:column;
+      gap:3px;
+      font-weight:900;
+    }
+    .challengeStageTitle small{
+      color:var(--soft);
+      font-weight:600;
+      line-height:1.35;
+    }
+    .scorePill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:92px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(126,242,255,0.22);
+      background:rgba(126,242,255,0.08);
+      color:#e8fbff;
+      font-size:12px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+    .challengeStageDetailBody{
+      display:grid;
+      gap:14px;
+      padding:0 16px 16px;
+    }
+    .challengeCompareGrid,
+    .challengeAxisGrid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+    }
+    .challengeAxisGrid{
+      grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+    .challengeEvidenceCard{
+      min-width:0;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+    }
+    .challengeEvidenceCard h3{
+      margin:0 0 8px;
+      color:#f2fbff;
+      font-size:15px;
+      letter-spacing:.02em;
+    }
+    .challengeEvidenceCard p,
+    .challengeEvidenceCard li{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .challengeEvidenceCard ul{
+      margin:8px 0 0;
+      padding-left:18px;
+    }
+    .challengeComponentGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:6px;
+      margin-top:8px;
+      font-size:12px;
+      color:var(--soft);
+    }
+    .challengeComponentGrid span{
+      padding:6px 8px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.04);
+    }
+    @media (max-width: 980px){
+      .challengeStageSummary,
+      .challengeCompareGrid,
+      .challengeAxisGrid{
+        grid-template-columns:1fr;
+      }
+      .scorePill{
+        justify-content:flex-start;
+      }
+    }
     .markdown h3,.markdown h4,.markdown h5{
       margin:24px 0 10px;
       letter-spacing:-0.02em;
@@ -2500,6 +2640,162 @@ function loadChallengeStageConformance(){
   return challengeStageConformanceCache;
 }
 
+function challengeStageDisplayLabel(row = {}){
+  const number = Number.isFinite(+row.challengeNumber) ? +row.challengeNumber : '';
+  const marker = Number.isFinite(+row.stage) ? +row.stage : '';
+  const between = marker ? `Levels ${marker}-${marker + 1}` : 'level bracket pending';
+  return `Challenging Stage ${number || ''} (${between})`.trim();
+}
+
+function challengeStageInternalLabel(row = {}){
+  const marker = Number.isFinite(+row.stage) ? `Internal challenge marker ${row.stage}` : 'Internal marker pending';
+  const layout = row.auroraLayoutId || row.pathFamily || 'layout pending';
+  return `${marker}; runtime layout ${layout}`;
+}
+
+function challengeRuntimeArtifactDir(row = {}){
+  const candidates = [
+    row.auroraWindowId,
+    row.auroraLayoutId,
+    row.pathFamily
+  ].map(value => String(value || '').toLowerCase());
+  if(candidates.some(value => value.includes('candidate') || value.includes('first-challenge') || value.includes('peel'))) return 'challenge-stage-candidate';
+  if(candidates.some(value => value.includes('scorpion') || value.includes('cross'))) return 'challenge-stage-scorpion-cross';
+  if(candidates.some(value => value.includes('stingray') || value.includes('hook'))) return 'challenge-stage-stingray-hook';
+  if(candidates.some(value => value.includes('boss-led') || value.includes('loop'))) return 'challenge-stage-boss-led-loop';
+  if(candidates.some(value => value.includes('crown') || value.includes('cascade'))) return 'challenge-stage-crown-split-cascade';
+  return '';
+}
+
+function challengeRuntimeMedia(row = {}){
+  const dir = challengeRuntimeArtifactDir(row);
+  if(!dir) return '<div class="mediaPlaceholder">Aurora runtime contact sheet pending for this challenge stage.</div>';
+  const src = `reference-artifacts/analyses/aurora-level-expansion-cycle/${dir}/frames/contact-sheet-1s.png`;
+  if(!fs.existsSync(path.join(ROOT, src))){
+    return '<div class="mediaPlaceholder">Aurora runtime contact sheet pending for this challenge stage.</div>';
+  }
+  return renderMediaImage({
+    src,
+    label: 'Aurora current contact sheet',
+    alt: `${challengeStageDisplayLabel(row)} Aurora current state contact sheet`,
+    note: row.pathFamily ? `Runtime path family: ${row.pathFamily}` : ''
+  });
+}
+
+function challengeReferenceMedia(row = {}){
+  const src = row.galagaReferenceAnchor || row.bestReferenceMatch?.sourceAnchor || '';
+  if(!src || !fs.existsSync(path.join(ROOT, normalizeAssetSourcePath(src)))){
+    return '<div class="mediaPlaceholder">Reference contact sheet pending for this challenge stage.</div>';
+  }
+  return renderMediaImage({
+    src,
+    label: 'Galaga target contact sheet',
+    alt: `${challengeStageDisplayLabel(row)} Galaga target contact sheet`,
+    note: row.bestReferenceMatch?.labelId ? `Best current reference label: ${row.bestReferenceMatch.labelId}` : ''
+  });
+}
+
+function challengeList(items = []){
+  const rows = Array.isArray(items) ? items.filter(Boolean) : [];
+  if(!rows.length) return '<span class="docMeta">No items recorded.</span>';
+  return `<ul>${rows.map(item => `<li>${esc(item)}</li>`).join('')}</ul>`;
+}
+
+function challengeScoreComponents(row = {}){
+  const entries = Object.entries(row.scoreComponents || {});
+  if(!entries.length) return '<span class="docMeta">Score component detail pending.</span>';
+  return `<div class="challengeComponentGrid">${entries.map(([key, value]) => `<span>${esc(key)}: ${esc(value)}</span>`).join('')}</div>`;
+}
+
+function challengeSafetySummary(row = {}){
+  const safety = row.safetyProbe || {};
+  const counts = safety.eventCounts || {};
+  return [
+    `Enemy shots: ${counts.enemyShots ?? 'n/a'}`,
+    `Attack starts: ${counts.enemyAttackStarts ?? 'n/a'}`,
+    `Ship losses: ${counts.shipLosses ?? 'n/a'}`,
+    `Challenge contacts: ${counts.challengeContacts ?? 'n/a'}`
+  ];
+}
+
+function challengeMotionSummary(row = {}){
+  const motion = row.motionProbe || {};
+  return [
+    `Samples: ${motion.activeSamples ?? motion.sampleCount ?? 'n/a'}/${motion.sampleCount ?? 'n/a'}`,
+    `Active enemies: ${motion.minActive ?? 'n/a'}-${motion.maxActive ?? 'n/a'}`,
+    `X range: ${motion.xRange ?? 'n/a'}`,
+    `Y range: ${motion.yRange ?? 'n/a'}`,
+    `Lower-field share: ${motion.lowerFieldShare ?? 'n/a'}`
+  ];
+}
+
+function renderChallengeStageDetail(row = {}){
+  const label = challengeStageDisplayLabel(row);
+  const score = row.conformanceScore10 ?? 'n/a';
+  const interest = row.interestingFactor10 ?? 'n/a';
+  const bestRef = row.bestReferenceMatch?.labelId || 'pending';
+  const targetText = row.galagaTarget || 'Target pending.';
+  const currentText = row.currentRead || 'Current read pending.';
+  const gaps = row.criticalGaps || [];
+  const actions = row.nextActions || [];
+  return `
+    <details class="challengeStageDetail" id="challenge-stage-${esc(row.challengeNumber || row.stage || '')}">
+      <summary class="challengeStageSummary">
+        <span class="challengeStageTitle">
+          <span>${esc(label)}</span>
+          <small>${esc(challengeStageInternalLabel(row))}</small>
+        </span>
+        <span class="scorePill">${esc(interest)}/10 interest</span>
+        <span class="scorePill">${esc(score)}/10 conform</span>
+      </summary>
+      <div class="challengeStageDetailBody">
+        <div class="challengeCompareGrid">
+          <article class="challengeEvidenceCard">
+            <h3>Reference Target</h3>
+            ${challengeReferenceMedia(row)}
+            <p>${esc(targetText)}</p>
+            <p class="docMeta">${esc(row.galagaReferenceMeaning || 'Reference meaning pending.')}</p>
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>Aurora Current</h3>
+            ${challengeRuntimeMedia(row)}
+            <p>${esc(currentText)}</p>
+            <p class="docMeta">${esc(row.movementRead || '')}</p>
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>Conformance Read</h3>
+            <p><strong>Best reference:</strong> <code>${esc(bestRef)}</code> (${esc(row.referenceMatchScore10 ?? 'n/a')}/10).</p>
+            <p>${esc(row.criticalExpectation || 'Critical expectation pending.')}</p>
+            ${challengeScoreComponents(row)}
+          </article>
+        </div>
+        <div class="challengeAxisGrid">
+          <article class="challengeEvidenceCard">
+            <h3>Aliens</h3>
+            <p>${esc(row.alienVariationRead || 'Alien variation read pending.')}</p>
+            <p class="docMeta">Lane types: ${esc((row.laneTypes || []).join(', ') || 'pending')}</p>
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>Movement</h3>
+            <p>${esc(row.movementRead || 'Movement read pending.')}</p>
+            ${challengeList(challengeMotionSummary(row))}
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>Safety / Rules</h3>
+            <p>Challenging stages are evaluated separately from normal levels: they should preserve the no-shooting, no-ship-loss bonus-stage rule before they earn interest/conformance credit.</p>
+            ${challengeList(challengeSafetySummary(row))}
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>Gaps / Next</h3>
+            ${challengeList(gaps.length ? gaps : ['No critical gap recorded for this row yet; continue improving scorer resolution.'])}
+            ${challengeList(actions)}
+          </article>
+        </div>
+      </div>
+    </details>
+  `;
+}
+
 function loadPersonaPerformanceDistribution(){
   if(!fs.existsSync(PERSONA_PERFORMANCE_DISTRIBUTION)){
     return { summaryRows: [], findings: [], runs: [] };
@@ -2946,20 +3242,8 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   `).join('\n');
   const challengeStageConformance = loadChallengeStageConformance();
   const challengeSummary = challengeStageConformance.summary || {};
-  const challengeStageRows = (challengeStageConformance.stageRows || []).map((entry) => `
-    <tr>
-      <td><strong>Stage ${esc(entry.stage || '')}</strong><br><span class="docMeta">Challenge ${esc(entry.challengeNumber || '')}</span></td>
-      <td><strong>${esc(entry.interestingFactor10 || 'n/a')}/10 interest</strong><br><span class="docMeta">${esc(entry.conformanceScore10 || 'n/a')}/10 conformance</span></td>
-      <td>${esc(entry.galagaTarget || '')}<br><span class="docMeta">${esc(entry.galagaReferenceMeaning || 'Reference meaning pending for this stage.')}</span></td>
-      <td>${esc(entry.currentRead || '')}<br><span class="docMeta">${esc(entry.movementRead || '')}</span></td>
-      <td>${esc(entry.graphicsRead || '')}<br><span class="docMeta">${esc(entry.alienVariationRead || '')}</span></td>
-      <td>${(entry.criticalGaps || []).map(gap => `<div>${esc(gap)}</div>`).join('') || '<span class="docMeta">No critical gaps recorded.</span>'}</td>
-      <td>${(entry.nextActions || []).map(action => `<div>${esc(action)}</div>`).join('') || '<span class="docMeta">No next action recorded.</span>'}</td>
-    </tr>
-  `).join('\n') || `
-    <tr>
-      <td colspan="7"><span class="docMeta">Challenge-stage conformance analysis pending. Run <code>npm run harness:analyze:challenge-stage-conformance</code>.</span></td>
-    </tr>
+  const challengeStageRows = (challengeStageConformance.stageRows || []).map(renderChallengeStageDetail).join('\n') || `
+    <div class="docWrap"><span class="docMeta">Challenge-stage conformance analysis pending. Run <code>npm run harness:analyze:challenge-stage-conformance</code>.</span></div>
   `;
   const personaRows = (guide.personaRows || []).map((entry) => `
     <tr>
@@ -3296,25 +3580,28 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <p><strong>Current critical read:</strong> ${esc(challengeSummary.interestingFactorScore10 || 'n/a')}/10 interesting factor; ${esc(challengeSummary.score10 || 'n/a')}/10 challenge-stage conformance.</p>
             <p>${esc(challengeSummary.weakestFinding || 'Run the challenge-stage conformance analyzer to refresh this readout.')}</p>
             <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/challenge-stage-conformance/latest.json</code>. <strong>Report:</strong> <code>CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md</code>.</p>
-            <p><a class="button" href="project-guide.html#challenge-stage-conformance-analysis-doc">Open rendered effort report</a> <a class="button" href="project-guide.html#challenge-stage-conformance-effort">Open living effort summary</a></p>
+            <p class="docMeta"><strong>Naming rule:</strong> normal Levels and Challenging Stages are separate. The challenge rows below use labels like <strong>Challenging Stage 1 (Levels 3-4)</strong> instead of calling that set piece Level 4.</p>
+            <div class="inlineDocShelf">
+              <details class="inlineDocPreview">
+                <summary>Peek at the living effort summary</summary>
+                <div class="inlineDocPreviewBody">
+                  <p>${esc(challengeSummary.playerMeaning || 'Challenge stages should be safe but tense score exhibitions with memorable entry routes and alien novelty.')}</p>
+                  <p><a class="button" href="project-guide.html#challenge-stage-conformance-effort">Open full effort summary</a></p>
+                </div>
+              </details>
+              <details class="inlineDocPreview">
+                <summary>Peek at related report and measurements</summary>
+                <div class="inlineDocPreviewBody">
+                  <p>${esc(challengeSummary.designerMeaning || 'Design work should move from broad path-family labels to explicit per-challenge contracts.')}</p>
+                  <p><strong>Improvement plan:</strong></p>
+                  ${challengeList(challengeStageConformance.improvementPlan || [])}
+                  <p><a class="button" href="project-guide.html#challenge-stage-conformance-analysis-doc">Open rendered effort report</a></p>
+                </div>
+              </details>
+            </div>
           </div>
-          <div class="tableWrap">
-            <table class="dataTable">
-              <thead>
-                <tr>
-                  <th>Stage</th>
-                  <th>Score</th>
-                  <th>Original Target</th>
-                  <th>Aurora Current / Movement</th>
-                  <th>Graphics / Alien Variation</th>
-                  <th>Critical Gap</th>
-                  <th>Next Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${challengeStageRows}
-              </tbody>
-            </table>
+          <div class="challengeStageList">
+            ${challengeStageRows}
           </div>
         </section>
 

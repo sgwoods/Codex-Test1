@@ -219,6 +219,13 @@ function loadChallengeStageConformance(){
   });
 }
 
+function challengeStageDisplayLabel(row = {}){
+  const number = Number.isFinite(+row.challengeNumber) ? +row.challengeNumber : '';
+  const marker = Number.isFinite(+row.stage) ? +row.stage : '';
+  const between = marker ? `Levels ${marker}-${marker + 1}` : 'level bracket pending';
+  return `Challenging Stage ${number || ''} (${between})`.trim();
+}
+
 function challengeStagePublicCards(artifact){
   if(!artifact){
     return `
@@ -229,18 +236,36 @@ function challengeStagePublicCards(artifact){
   }
   const summary = artifact.summary || {};
   const rows = (artifact.stageRows || []).slice(0, 5).map(row => `
-                <article class="investmentRow">
+                <details class="investmentRow challengeDisclosure">
+                    <summary>
                     <div>
-                        <strong>Stage ${esc(row.stage)} / Challenge ${esc(row.challengeNumber)}: ${esc(row.interestingFactor10)}/10 interest</strong>
+                        <strong>${esc(challengeStageDisplayLabel(row))}: ${esc(row.interestingFactor10)}/10 interest</strong>
                         <p>${esc(row.currentRead || '')}</p>
                         <p class="smallText"><strong>Target:</strong> ${esc(row.galagaTarget || '')}</p>
                     </div>
                     <div class="investmentMeta">
+                        <span>Internal marker: ${esc(row.stage || 'pending')}</span>
                         <span>Path: ${esc(row.pathFamily || 'pending')}</span>
                         <span>Best ref: ${esc(row.bestReferenceMatch?.labelId || 'pending')} (${esc(row.referenceMatchScore10 ?? 'n/a')}/10)</span>
-                        <span>Gap: ${esc((row.criticalGaps || [])[0] || 'pending')}</span>
                     </div>
-                </article>`).join('\n');
+                    </summary>
+                    <div class="challengeInlineDetail">
+                        <div>
+                            <strong>Movement</strong>
+                            <p>${esc(row.movementRead || 'Movement read pending.')}</p>
+                        </div>
+                        <div>
+                            <strong>Aliens / Graphics</strong>
+                            <p>${esc(row.graphicsRead || '')}</p>
+                            <p class="smallText">${esc(row.alienVariationRead || '')}</p>
+                        </div>
+                        <div>
+                            <strong>Gap / Next</strong>
+                            <p>${esc((row.criticalGaps || [])[0] || 'No critical gap recorded yet; improve scorer resolution.')}</p>
+                            <p class="smallText">${esc((row.nextActions || [])[0] || 'Next action pending.')}</p>
+                        </div>
+                    </div>
+                </details>`).join('\n');
   return `
                 <article class="card emphasis">
                     <h3>Challenge-stage critical read</h3>

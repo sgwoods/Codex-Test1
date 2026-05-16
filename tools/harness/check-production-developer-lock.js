@@ -29,14 +29,18 @@ async function main(){
         rootValue: rootInput?.value || '',
         rootStatus: rootStatus?.textContent?.trim() || '',
         controls: {
+          startKindDisabled: !!document.getElementById('testStartKind')?.disabled,
           stageDisabled: !!document.getElementById('testStage')?.disabled,
+          challengeStageDisabled: !!document.getElementById('testChallengeStage')?.disabled,
           shipsDisabled: !!document.getElementById('testShips')?.disabled,
           extendFirstDisabled: !!document.getElementById('testExtendFirst')?.disabled,
           extendRecurringDisabled: !!document.getElementById('testExtendRecurring')?.disabled,
           challengeDisabled: !!document.getElementById('testChallenge')?.disabled
         },
         values: {
+          startKind: document.getElementById('testStartKind')?.value || '',
           stage: +document.getElementById('testStage')?.value || 0,
+          challengeStage: +document.getElementById('testChallengeStage')?.value || 0,
           ships: +document.getElementById('testShips')?.value || 0,
           extendFirst: +document.getElementById('testExtendFirst')?.value || 0,
           extendRecurring: +document.getElementById('testExtendRecurring')?.value || 0,
@@ -54,11 +58,12 @@ async function main(){
 
     await page.fill('#rootMode', 'n00b');
     await page.waitForTimeout(150);
+    await page.selectOption('#testStartKind', 'challenge');
     await page.fill('#testStage', '7');
+    await page.fill('#testChallengeStage', '2');
     await page.fill('#testShips', '5');
     await page.fill('#testExtendFirst', '33000');
     await page.fill('#testExtendRecurring', '88000');
-    await page.locator('#testChallenge').setChecked(true);
     await page.waitForTimeout(150);
 
     await page.fill('#rootMode', '');
@@ -68,7 +73,9 @@ async function main(){
       panelLocked: !!document.getElementById('testPanel')?.classList.contains('locked'),
       rootStatus: document.getElementById('rootModeStatus')?.textContent?.trim() || '',
       values: {
+        startKind: document.getElementById('testStartKind')?.value || '',
         stage: +document.getElementById('testStage')?.value || 0,
+        challengeStage: +document.getElementById('testChallengeStage')?.value || 0,
         ships: +document.getElementById('testShips')?.value || 0,
         extendFirst: +document.getElementById('testExtendFirst')?.value || 0,
         extendRecurring: +document.getElementById('testExtendRecurring')?.value || 0,
@@ -84,14 +91,18 @@ async function main(){
       panelLocked: !!document.getElementById('testPanel')?.classList.contains('locked'),
       rootStatus: document.getElementById('rootModeStatus')?.textContent?.trim() || '',
       controls: {
+        startKindDisabled: !!document.getElementById('testStartKind')?.disabled,
         stageDisabled: !!document.getElementById('testStage')?.disabled,
+        challengeStageDisabled: !!document.getElementById('testChallengeStage')?.disabled,
         shipsDisabled: !!document.getElementById('testShips')?.disabled,
         extendFirstDisabled: !!document.getElementById('testExtendFirst')?.disabled,
         extendRecurringDisabled: !!document.getElementById('testExtendRecurring')?.disabled,
         challengeDisabled: !!document.getElementById('testChallenge')?.disabled
       },
       values: {
+        startKind: document.getElementById('testStartKind')?.value || '',
         stage: +document.getElementById('testStage')?.value || 0,
+        challengeStage: +document.getElementById('testChallengeStage')?.value || 0,
         ships: +document.getElementById('testShips')?.value || 0,
         extendFirst: +document.getElementById('testExtendFirst')?.value || 0,
         extendRecurring: +document.getElementById('testExtendRecurring')?.value || 0,
@@ -115,16 +126,16 @@ async function main(){
   }
 
   const values = result.locked.values || {};
-  if(values.stage !== 1 || values.ships !== 3 || values.extendFirst !== 20000 || values.extendRecurring !== 70000 || values.challenge !== false){
+  if(values.startKind !== 'level' || values.stage !== 1 || values.challengeStage !== 1 || values.ships !== 3 || values.extendFirst !== 20000 || values.extendRecurring !== 70000 || values.challenge !== false){
     fail('production developer panel no longer shows the shipped start-state defaults while locked', result);
   }
   if(!result.relocked.panelLocked) fail('production developer panel did not relock after leaving Root mode', result);
   const relockedValues = result.relocked.values || {};
-  if(relockedValues.stage !== 1 || relockedValues.ships !== 3 || relockedValues.extendFirst !== 20000 || relockedValues.extendRecurring !== 70000 || relockedValues.challenge !== false){
+  if(relockedValues.startKind !== 'level' || relockedValues.stage !== 1 || relockedValues.challengeStage !== 1 || relockedValues.ships !== 3 || relockedValues.extendFirst !== 20000 || relockedValues.extendRecurring !== 70000 || relockedValues.challenge !== false){
     fail('production developer panel did not return to shipped defaults after leaving Root mode', result);
   }
   const relockedPersisted = result.relocked.persistedCfg || {};
-  if(relockedPersisted.stage !== 7 || relockedPersisted.ships !== 5 || relockedPersisted.extendFirst !== 33000 || relockedPersisted.extendRecurring !== 88000 || relockedPersisted.challenge !== true){
+  if(relockedPersisted.startKind !== 'challenge' || relockedPersisted.stage !== 7 || relockedPersisted.challengeStage !== 2 || relockedPersisted.ships !== 5 || relockedPersisted.extendFirst !== 33000 || relockedPersisted.extendRecurring !== 88000 || relockedPersisted.challenge !== true){
     fail('production developer relock wiped the hidden Root-mode ship-adjustment values', result);
   }
 
@@ -134,7 +145,7 @@ async function main(){
     if(value) fail(`production developer control ${key} stayed disabled after Root unlock`, result);
   }
   const unlockedValues = result.unlocked.values || {};
-  if(unlockedValues.stage !== 7 || unlockedValues.ships !== 5 || unlockedValues.extendFirst !== 33000 || unlockedValues.extendRecurring !== 88000 || unlockedValues.challenge !== true){
+  if(unlockedValues.startKind !== 'challenge' || unlockedValues.stage !== 7 || unlockedValues.challengeStage !== 2 || unlockedValues.ships !== 5 || unlockedValues.extendFirst !== 33000 || unlockedValues.extendRecurring !== 88000 || unlockedValues.challenge !== true){
     fail('Root mode did not restore the persisted production ship-adjustment values after unlock', result);
   }
 

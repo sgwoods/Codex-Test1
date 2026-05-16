@@ -298,6 +298,50 @@
             display: block;
         }
 
+        .challengeDisclosure {
+            display: block;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .challengeDisclosure summary {
+            display: grid;
+            grid-template-columns: minmax(0, 1.6fr) minmax(220px, .9fr) auto;
+            gap: 18px;
+            padding: 16px;
+            cursor: pointer;
+            list-style: none;
+        }
+
+        .challengeDisclosure summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .challengeDisclosure summary::after {
+            content: "+";
+            color: var(--accent);
+            font-weight: 900;
+            justify-self: end;
+        }
+
+        .challengeDisclosure[open] summary::after {
+            content: "-";
+        }
+
+        .challengeInlineDetail {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            padding: 0 16px 16px;
+        }
+
+        .challengeInlineDetail div {
+            padding: 12px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.075);
+        }
+
         .investmentMeta {
             justify-content: flex-end;
         }
@@ -352,6 +396,11 @@
             }
 
             .investmentRow {
+                grid-template-columns: 1fr;
+            }
+
+            .challengeDisclosure summary,
+            .challengeInlineDetail {
                 grid-template-columns: 1fr;
             }
 
