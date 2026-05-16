@@ -1760,6 +1760,59 @@ function applicationGuideStyles(){
     .catalogMediaImg.isPixelated{
       image-rendering:pixelated;
     }
+    .catalogMediaExpand{
+      margin-top:8px;
+      border-radius:10px;
+      background:rgba(126,242,255,0.045);
+      border:1px solid rgba(126,242,255,0.12);
+      overflow:hidden;
+    }
+    .catalogMediaExpand summary{
+      cursor:pointer;
+      list-style:none;
+      padding:7px 9px;
+      color:#dff7ff;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+    .catalogMediaExpand summary::-webkit-details-marker{
+      display:none;
+    }
+    .catalogMediaExpand summary::after{
+      content:"Expand inline";
+      display:inline-flex;
+      float:right;
+      color:var(--accent);
+      font-weight:900;
+    }
+    .catalogMediaExpand[open] summary::after{
+      content:"Close";
+    }
+    .catalogMediaExpanded{
+      padding:10px;
+      border-top:1px solid rgba(126,242,255,0.10);
+      background:rgba(1,6,12,0.82);
+    }
+    .catalogMediaExpanded img{
+      display:block;
+      width:auto;
+      max-width:100%;
+      max-height:min(70vh,760px);
+      margin:0 auto;
+      object-fit:contain;
+      border-radius:8px;
+      background:#02070d;
+      border:1px solid rgba(255,255,255,0.10);
+    }
+    .catalogMediaExpanded img.isPixelated{
+      image-rendering:pixelated;
+    }
+    .mediaCropExpanded{
+      max-width:100%;
+      margin:0 auto;
+    }
     .mediaCrop{
       position:relative;
       overflow:hidden;
@@ -2939,15 +2992,26 @@ function renderMediaImage(item){
   const scale = Number(crop.scale || 4);
   const hasCrop = [cropWidth, cropHeight, sourceWidth, sourceHeight, cropX, cropY, scale]
     .every(Number.isFinite) && cropWidth > 0 && cropHeight > 0 && sourceWidth > 0 && sourceHeight > 0 && scale > 0;
+  const alt = item.alt || item.label || 'Evidence image';
+  const expandedScale = hasCrop ? Math.min(12, Math.max(scale, 6, scale * 2)) : scale;
   const media = hasCrop
     ? `<div class="mediaCrop" style="width:${Math.round(cropWidth * scale)}px;height:${Math.round(cropHeight * scale)}px">
-        <img src="${esc(href)}" alt="${esc(item.alt || item.label || 'Evidence image')}" loading="lazy" style="width:${Math.round(sourceWidth * scale)}px;height:${Math.round(sourceHeight * scale)}px;transform:translate(-${Math.round(cropX * scale)}px,-${Math.round(cropY * scale)}px)">
+        <img src="${esc(href)}" alt="${esc(alt)}" loading="lazy" style="width:${Math.round(sourceWidth * scale)}px;height:${Math.round(sourceHeight * scale)}px;transform:translate(-${Math.round(cropX * scale)}px,-${Math.round(cropY * scale)}px)">
       </div>`
-    : `<img class="catalogMediaImg${item.pixelated ? ' isPixelated' : ''}" src="${esc(href)}" alt="${esc(item.alt || item.label || 'Evidence image')}" loading="lazy">`;
+    : `<img class="catalogMediaImg${item.pixelated ? ' isPixelated' : ''}" src="${esc(href)}" alt="${esc(alt)}" loading="lazy">`;
+  const expandedMedia = hasCrop
+    ? `<div class="mediaCrop mediaCropExpanded" style="width:${Math.round(cropWidth * expandedScale)}px;height:${Math.round(cropHeight * expandedScale)}px">
+        <img src="${esc(href)}" alt="${esc(`${alt} expanded crop`)}" loading="lazy" style="width:${Math.round(sourceWidth * expandedScale)}px;height:${Math.round(sourceHeight * expandedScale)}px;transform:translate(-${Math.round(cropX * expandedScale)}px,-${Math.round(cropY * expandedScale)}px)">
+      </div>`
+    : `<img class="${item.pixelated ? 'isPixelated' : ''}" src="${esc(href)}" alt="${esc(`${alt} expanded`)}" loading="lazy">`;
   return `
     <div class="catalogMediaItem">
       <span class="catalogMediaLabel">${esc(item.label || 'Evidence image')}</span>
       ${media}
+      <details class="catalogMediaExpand">
+        <summary>View larger</summary>
+        <div class="catalogMediaExpanded">${expandedMedia}</div>
+      </details>
       ${item.note ? `<span class="catalogMediaNote">${esc(item.note)}</span>` : ''}
     </div>
   `;
