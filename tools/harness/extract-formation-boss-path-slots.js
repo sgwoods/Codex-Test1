@@ -110,6 +110,7 @@ async function advance(page, seconds){
 }
 
 function normalizeTarget(target, kind){
+  const challenge = kind === 'challenge';
   const id = `${kind}:${target.id}`;
   return {
     id,
@@ -122,8 +123,8 @@ function normalizeTarget(target, kind){
     column: Number.isFinite(+target.column) ? +target.column : null,
     lane: Number.isFinite(+target.lane) ? +target.lane : null,
     wave: Number.isFinite(+target.wave) ? +target.wave : null,
-    targetX: Number.isFinite(+target.tx) ? +target.tx : (Number.isFinite(+target.targetX) ? +target.targetX : null),
-    targetY: Number.isFinite(+target.ty) ? +target.ty : (Number.isFinite(+target.targetY) ? +target.targetY : null),
+    targetX: challenge ? null : (Number.isFinite(+target.tx) ? +target.tx : (Number.isFinite(+target.targetX) ? +target.targetX : null)),
+    targetY: challenge ? null : (Number.isFinite(+target.ty) ? +target.ty : (Number.isFinite(+target.targetY) ? +target.targetY : null)),
     x: Number.isFinite(+target.x) ? +target.x : null,
     y: Number.isFinite(+target.y) ? +target.y : null,
     spawn: Number.isFinite(+target.spawn) ? +target.spawn : null,

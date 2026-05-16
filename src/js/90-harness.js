@@ -1051,7 +1051,7 @@ window.__galagaHarness__={
   return {
    stage:S.stage,
    challenge:!!S.challenge,
-	   layout:typeof currentGamePackChallengeLayout==='function'?currentGamePackChallengeLayout(S.stage):null,
+	   layout:S.harnessChallengeLayoutSnapshot||(typeof currentGamePackChallengeLayout==='function'?currentGamePackChallengeLayout(S.stage):null),
 	  enemies:active.map(e=>({
 	   id:e.id,
 	   type:e.t,
@@ -1461,7 +1461,15 @@ window.__galagaHarness__={
   p.returning=0;
   p.capBoss=null;
 	  p.capT=0;
+	  S.harnessChallengeLayoutSnapshot=null;
+	  S.harnessChallengeLayoutOverride=cfg.layoutOverride&&typeof cfg.layoutOverride==='object'
+	   ? {stage:S.stage,layout:cfg.layoutOverride}
+	   : null;
 	  spawnStage();
+	  S.harnessChallengeLayoutSnapshot=typeof currentGamePackChallengeLayout==='function'
+	   ? currentGamePackChallengeLayout(S.stage)
+	   : null;
+	  S.harnessChallengeLayoutOverride=null;
 	  const challengeSpawnBase=Math.min(...S.e.filter(e=>e?.ch&&e.hp>0).map(e=>+e.spawnPlan||0));
 	  for(const e of S.e){
 	   if(!e?.ch||e.hp<=0)continue;

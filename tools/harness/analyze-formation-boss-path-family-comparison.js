@@ -124,8 +124,8 @@ function pointFeatures(track){
     lastHeading = heading;
   }
   const last = points.at(-1);
-  const targetX = Number.isFinite(+track.targetX) ? +track.targetX : null;
-  const targetY = Number.isFinite(+track.targetY) ? +track.targetY : null;
+  const targetX = track.targetX == null ? null : (Number.isFinite(+track.targetX) ? +track.targetX : null);
+  const targetY = track.targetY == null ? null : (Number.isFinite(+track.targetY) ? +track.targetY : null);
   if(targetX != null && targetY != null){
     for(const point of points){
       minSlotError = Math.min(minSlotError, Math.hypot(point.x - targetX, point.y - targetY));
@@ -425,16 +425,22 @@ function referenceTrajectoryComparison(profile, windows){
   const regularLabels = acceptedLabels.filter(label => label.kind === 'regularEntry');
   const challengeLabels = acceptedLabels.filter(label => label.kind === 'challengeEntry');
   const runtimeWindows = windows.map(window => {
-    const normalized = (window.classifications || [])
+    const comparisonClassifications = (window.classifications || []).filter(item => (
+      window.challenge ? item.kind === 'challenge' : item.kind !== 'challenge'
+    ));
+    const normalized = comparisonClassifications
       .map(item => normalizeRuntimeVector(item.comparisonFeatures || item.features || {}));
     return {
       windowId: window.windowId,
       stage: window.stage,
       challenge: !!window.challenge,
       vector: averageVector(normalized),
-      semantic: typeSummary(window.classifications || []),
-      slotCoverage: window.classifications?.length
-        ? round(window.classifications.filter(item => item.slotObserved).length / window.classifications.length)
+      semantic: typeSummary(comparisonClassifications),
+      comparisonTrackCount: comparisonClassifications.length,
+      totalTrackCount: (window.classifications || []).length,
+      ignoredTrackCount: Math.max(0, (window.classifications || []).length - comparisonClassifications.length),
+      slotCoverage: comparisonClassifications.length
+        ? round(comparisonClassifications.filter(item => item.slotObserved).length / comparisonClassifications.length)
         : 0
     };
   });
@@ -464,6 +470,8 @@ function referenceTrajectoryComparison(profile, windows){
       runtimeVector: window.vector,
       runtimeSemantic: window.semantic,
       slotCoverage: window.slotCoverage,
+      comparisonTrackCount: window.comparisonTrackCount,
+      ignoredTrackCount: window.ignoredTrackCount,
       bestMatch: candidates[0] || null,
       alternatives: candidates.slice(1, 4)
     };

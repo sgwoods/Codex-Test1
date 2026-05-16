@@ -734,18 +734,18 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
  }),
  Object.freeze({
   fromStage:11,
-  id:'stingray-hook-arc',
+  id:'stingray-crown-hook-hybrid',
   pathFamily:'hook-arc',
   groups:5,
   enemiesPerGroup:8,
   upperBandRatio:.46,
-  spawnOffsetX:58,
+  spawnOffsetX:72,
   waveSpacingY:11,
   rowSpacingY:8,
   waveDelay:1.28,
   slotDelay:.12,
-  arcAmp:1.48,
-  dropAmp:1.08,
+  arcAmp:2.08,
+  dropAmp:1.02,
   laneTypes:Object.freeze(['boss','rogue','but','bee','boss','bee','but','rogue']),
   groupLaneTypes:Object.freeze([
    Object.freeze(['boss','rogue','but','bee','boss','bee','but','rogue']),
@@ -754,7 +754,7 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
    Object.freeze(['but','rogue','boss','boss','boss','boss','rogue','but']),
    Object.freeze(['boss','bee','rogue','but','but','rogue','bee','boss'])
   ]),
-  groupPathFamilies:Object.freeze(['hook-arc','hook-arc','cross-sweep','boss-led-loop','hook-arc'])
+  groupPathFamilies:Object.freeze(['crown-split-cascade','boss-led-loop','hook-arc','boss-led-loop','hook-arc'])
  }),
  Object.freeze({
   fromStage:15,
