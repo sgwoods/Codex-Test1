@@ -14,7 +14,7 @@ const DEFAULT_REPORTS = Object.freeze({
   stagePulse: 'latest-formation-pulse.json',
   rescueJoin: 'latest-rescue-join.json',
   playerHit: 'latest-player-hit-focus.json',
-  challengePerfect: 'latest.json',
+  challengePerfect: 'latest-challenge-perfect.json',
   enemyBoom: 'latest-enemy-boom.json',
   bossHit: 'latest-boss-hit.json',
   bossBoom: 'latest-boss-boom.json'

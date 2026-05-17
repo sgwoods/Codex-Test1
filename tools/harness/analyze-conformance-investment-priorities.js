@@ -97,7 +97,11 @@ function nextAudioAction(audioEventGap, audioCueCandidate, audioContract){
   if(audioCueCandidate?.cue === 'challengePerfect'){
     const decision = audioCueCandidate.decision || {};
     if(decision.keep && decision.best){
-      return `Promote the measured Challenge Perfect candidate ${decision.best}, then rerun full audio comparison, event-gap analysis, and quality scoring.`;
+      const currentHighest = audioEventGap?.summary?.highestRiskCue || '';
+      if(currentHighest === 'challengePerfect'){
+        return `Challenge Perfect has a measured keeper candidate (${decision.best}), but the current runtime still shows Challenge Perfect as the top audio risk. Do not directly promote it; use the trial evidence to design a safer ceremony-tail candidate or run a guarded runtime trial that must preserve or improve the audio score, event-gap rollup, cue alignment, and overall quality.`;
+      }
+      return `Run a guarded runtime trial for the measured Challenge Perfect candidate ${decision.best}, then accept it only if full audio comparison, event-gap analysis, cue alignment, and quality scoring hold or improve.`;
     }
     if(decision.keep === false && audioCueCandidate.nextStep){
       return `Challenge Perfect: ${audioCueCandidate.nextStep}`;

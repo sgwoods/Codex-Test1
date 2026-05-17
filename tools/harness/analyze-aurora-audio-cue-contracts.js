@@ -21,7 +21,7 @@ const CANDIDATE_FILES = Object.freeze({
   bossBoom: 'latest-boss-boom.json',
   rescueJoin: 'latest-rescue-join.json',
   playerHit: 'latest-player-hit-focus.json',
-  challengePerfect: 'latest.json'
+  challengePerfect: 'latest-challenge-perfect.json'
 });
 
 function readJson(file){

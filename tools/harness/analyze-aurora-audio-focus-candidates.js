@@ -2084,6 +2084,22 @@ function successMeasureFor(config){
     : base;
 }
 
+function nextStepForDecision(config, decision, rows){
+  if(decision.keep){
+    return `Promote ${decision.best} for ${config.title}, then rerun the full audio comparison and event-gap rollup.`;
+  }
+  const measuredBest = rows.find(row => row.id === decision.measuredBest);
+  const keeperRead = String(measuredBest?.keeperRead || '');
+  const ceremonyMinimumSeconds = Number(config.keeper?.minimumScheduledDurationSeconds);
+  if(Number.isFinite(ceremonyMinimumSeconds) && /scheduled cue duration/i.test(keeperRead)){
+    return `Do not promote ${config.title}: measured best ${decision.measuredBest} solves the short acoustic window but collapses below the ${ceremonyMinimumSeconds}s ceremony minimum. Next pass should keep this onset/body subclip and search or synthesize a low-risk tail/body layer that preserves reward duration without worsening onset, band shape, or stability.`;
+  }
+  if(/stability/i.test(keeperRead)){
+    return `Do not promote ${config.title}: measured best ${decision.measuredBest} is not stable enough across repeated captures. Next pass should tighten the capture window and prefer candidates whose risk, duration, centroid, and band-shape variance stay inside keeper gates.`;
+  }
+  return `Do not promote ${config.title} yet; use the measured best candidate to refine the generator or scoring gates.`;
+}
+
 function aggregateRows(sampleRows, config){
   const grouped = new Map();
   for(const row of sampleRows){
@@ -2445,9 +2461,7 @@ async function analyzeCue(key, generatedAt, rootDir){
     },
     candidates: rows,
     decision,
-    nextStep: decision.keep
-      ? `Promote ${decision.best} for ${config.title}, then rerun the full audio comparison and event-gap rollup.`
-      : `Do not promote ${config.title} yet; use the measured best candidate to refine the generator or scoring gates.`
+    nextStep: nextStepForDecision(config, decision, rows)
   };
   fs.writeFileSync(path.join(cueDir, 'report.json'), `${JSON.stringify(report, null, 2)}\n`);
   fs.writeFileSync(path.join(cueDir, 'README.md'), markdown(report));
