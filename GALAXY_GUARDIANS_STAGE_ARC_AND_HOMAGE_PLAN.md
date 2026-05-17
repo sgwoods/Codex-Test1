@@ -20,6 +20,7 @@ This is a companion to:
 
 - [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md)
 - [GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md](GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md)
+- [GALAXY_GUARDIANS_OPENING_SLICE_BASELINE.md](GALAXY_GUARDIANS_OPENING_SLICE_BASELINE.md)
 - [CLASSIC_ARCADE_INGESTION_FRAMEWORK.md](CLASSIC_ARCADE_INGESTION_FRAMEWORK.md)
 
 ## Current Truth Boundary
@@ -198,6 +199,7 @@ Primary artifacts:
 - attract/readiness crops
 - contact sheets from `matt-hawkins-arcade-intro`
 - long-session motion windows from `nenriki-15-wave-session`
+- `reference-artifacts/analyses/galaxy-guardians-identity/opening-slice-source-baseline-0.1.json`
 - opening-slice render surface and attract-score surface artifacts already in
   `reference-artifacts/analyses/galaxy-guardians-identity/`
 

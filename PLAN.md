@@ -129,6 +129,10 @@ resource economics fit together.
   [GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md](GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md),
   so stage-by-stage conformance work and later homage variants grow from one
   preserved source-grounded shape instead of ad hoc tuning
+- keep the opening-slice baseline readable through
+  [GALAXY_GUARDIANS_OPENING_SLICE_BASELINE.md](GALAXY_GUARDIANS_OPENING_SLICE_BASELINE.md),
+  so the visible `WAIT` / score-table / ready-state work is readable in hosted
+  docs and not only as raw manifests, contact sheets, or runtime notes
 - treat the obvious current one-level baseline misses as first-class work:
   `WAIT`/headline treatment, score-advance table, rack march cadence,
   explosion states, swarm palettes, moving starfield motion, missile-ready

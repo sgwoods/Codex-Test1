@@ -101,6 +101,7 @@ const REQUIRED_SCRIPT_GROUPS = {
   ],
   openingSlice: [
     'harness:check:galaxy-guardians-opening-slice-baseline',
+    'harness:check:galaxy-guardians-opening-slice-source-baseline',
     'harness:check:galaxy-guardians-opening-slice-render-surface',
     'harness:check:galaxy-guardians-attract-score-surface'
   ],

@@ -1,0 +1,100 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "opening-slice-source-baseline",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-17",
+  "status": "contact-sheet-promoted-opening-baseline-awaiting-frame-extracted-crops",
+  "purpose": "Describe the current source-backed baseline for the first visible Guardians slice so opening-surface tuning stays grounded in committed Galaxian evidence before broader runtime changes.",
+  "sourceEvidence": {
+    "introSource": {
+      "sourceId": "matt-hawkins-arcade-intro",
+      "manifest": "reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/source-manifest.json",
+      "contactSheet": "reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/frames/contact-sheet-reference-window.jpg",
+      "promotedWindows": {
+        "attractMissionText": [0, 10],
+        "scoreAdvanceTable": [10, 35],
+        "formationEntryStart": [40, 45],
+        "formationEntrySettle": [45, 55]
+      }
+    },
+    "longSessionSource": {
+      "sourceId": "nenriki-15-wave-session",
+      "manifest": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/source-manifest.json",
+      "contactSheet": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/frames/contact-sheet-reference-window.jpg",
+      "promotedWindows": {
+        "formationRackComplete": [60, 75],
+        "flagshipEscortPressure": [90, 135],
+        "enemyWrapOrReturn": [105, 150]
+      }
+    },
+    "promotedEventLog": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
+    "notes": "This baseline uses the already committed intro and long-session sources plus the promoted event log. It is still contact-sheet promoted, not frame-extracted crop authority."
+  },
+  "canonicalOpeningSurface": {
+    "titleLine": "WE ARE THE GALAXIANS",
+    "missionLines": [
+      "MISSION: DESTROY ALIENS"
+    ],
+    "scoreAdvanceTitle": "SCORE ADVANCE TABLE",
+    "scoreAdvanceHeaders": [
+      "CONVOY",
+      "CHARGER"
+    ],
+    "scoreAdvanceRows": [
+      {
+        "rank": 1,
+        "convoyPoints": 60,
+        "chargerPoints": 150,
+        "sourceRead": "top yellow command row"
+      },
+      {
+        "rank": 2,
+        "convoyPoints": 50,
+        "chargerPoints": 100,
+        "sourceRead": "upper red escort row"
+      },
+      {
+        "rank": 3,
+        "convoyPoints": 40,
+        "chargerPoints": 80,
+        "sourceRead": "middle violet row"
+      },
+      {
+        "rank": 4,
+        "convoyPoints": 30,
+        "chargerPoints": 60,
+        "sourceRead": "lower blue convoy row"
+      }
+    ],
+    "openingRequirements": {
+      "reserveShipsVisible": true,
+      "stageFlagsVisible": true,
+      "playerReadyCueVisible": true,
+      "movingStarfieldVisible": true,
+      "marchCadenceVisible": true,
+      "topReentryVisible": true
+    }
+  },
+  "currentRuntimeAlignment": {
+    "titleAndMissionCopy": "adapted-guardians-owned-copy-still-needs-source-tightening",
+    "scoreAdvanceTableStructure": "application-owned-score-table-still-not-a-four-row-convoy-charger-match",
+    "reserveShips": "visible",
+    "stageFlags": "visible",
+    "playerReadyCue": "visible",
+    "movingStarfield": "visible",
+    "marchCadence": "visible-but-still-runtime-tuned",
+    "topReentry": "visible-but-still-needs-finer-measured-timing",
+    "explosionReadability": "partial",
+    "paletteProgression": "partial"
+  },
+  "nextPromotionWork": [
+    "Extract frame-level crops for the title line, mission line, and score-advance layout when the intro source video is locally available.",
+    "Promote measured starfield and rack-motion windows from the Nenriki session into opening-slice motion targets.",
+    "Tighten runtime copy and score-table presentation only after the source baseline is explicit and reviewable.",
+    "Use this opening baseline as the top slice of the broader stage-arc and homage plan rather than as an isolated UI polish note."
+  ],
+  "harness": {
+    "script": "tools/harness/check-galaxy-guardians-opening-slice-source-baseline.js",
+    "npmScript": "npm run harness:check:galaxy-guardians-opening-slice-source-baseline"
+  }
+}

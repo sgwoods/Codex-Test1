@@ -122,7 +122,7 @@ following are true:
 | --- | --- | --- | --- |
 | Source coverage and provenance | `9.6/10` | keep `>=9.6/10` while promoting stronger artifact-backed evidence | Preserve the three-source Galaxian profile, then convert proxy sprite/cue work into promoted targets rather than replacing provenance with tuning; use human spot-checks only when the artifacts stay ambiguous. |
 | Promoted semantic event coverage | `7.8/10` | `>=8.5/10` | Keep the event log central, then add score-table, attract-surface, result-state, and completion-state evidence that can be reviewed against source windows. |
-| Opening-stage presentation and HUD fidelity | partial | first visible slice should read as unmistakably Galaxian-family before deeper-run claims expand | Build baseline artifacts for `WAIT`/headline typography, score advance table, reserve ships, missile-ready player state, level flags, moving starfield/background motion, and score/HUD presentation from gameplay-video crops, contact sheets, palette extraction, and other primary sources. |
+| Opening-stage presentation and HUD fidelity | partial | first visible slice should read as unmistakably Galaxian-family before deeper-run claims expand | Build baseline artifacts for `WAIT`/headline typography, score advance table, reserve ships, missile-ready player state, level flags, moving starfield/background motion, and score/HUD presentation from gameplay-video crops, contact sheets, palette extraction, and other primary sources. Keep the human-readable baseline surfaced through [GALAXY_GUARDIANS_OPENING_SLICE_BASELINE.md](GALAXY_GUARDIANS_OPENING_SLICE_BASELINE.md), not only raw artifacts. |
 | Formation and rack timing | `6.2/10` | `>=7.2/10` | Move from connected-component/object proxy timing toward sprite-recognized rack timing plus browser-captured side-by-side traces. |
 | Motion and lower-field pressure | `6.2/10` reference and playtest | `>=7.2/10` playtest | Use runtime/reference track comparison first, then promote faster march-like rack cadence, bottom-pass-through top re-entry, dive-path targets, wrap cadence, and later-wave pressure with captured trace review. |
 | Single-shot threat, scoring, and progression | `7.5/10` | `>=8.2/10` | Keep the score table game-owned, then add score isolation, proper completion/loss endings, replay identity, and clearer one-level mission closure. |
@@ -153,6 +153,7 @@ The first-class Galaxy process should always be reviewable through this spine:
 - `npm run harness:check:galaxy-guardians-threat-scoring`
 - opening-slice baseline
   - `npm run harness:check:galaxy-guardians-opening-slice-baseline`
+  - `npm run harness:check:galaxy-guardians-opening-slice-source-baseline`
   - `npm run harness:check:galaxy-guardians-opening-slice-render-surface`
   - `npm run harness:check:galaxy-guardians-attract-score-surface`
 - longer-surface and persona review
@@ -219,6 +220,11 @@ other primary sources before runtime tuning broadens. The existing
 `nenriki-15-wave-session` long-session source should remain one of the main
 baseline references for background motion, wrap/return behavior, and sustained
 swarm feel.
+
+The current human-readable opening-baseline summary lives in
+[GALAXY_GUARDIANS_OPENING_SLICE_BASELINE.md](GALAXY_GUARDIANS_OPENING_SLICE_BASELINE.md),
+and the current machine-readable source baseline lives in
+`reference-artifacts/analyses/galaxy-guardians-identity/opening-slice-source-baseline-0.1.json`.
 
 ## Immediate Work To Start Now
 

@@ -43,6 +43,7 @@ function main(){
 
   const requiredScripts = [
     'harness:check:galaxy-guardians-opening-slice-baseline',
+    'harness:check:galaxy-guardians-opening-slice-source-baseline',
     'harness:check:galaxy-guardians-opening-slice-render-surface',
     'harness:check:galaxy-guardians-attract-score-surface',
     'harness:check:galaxy-guardians-formation-entry',
