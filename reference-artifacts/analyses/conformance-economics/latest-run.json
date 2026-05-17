@@ -1,30 +1,30 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-16T23-59-05-437Z-70028",
-  "startedAt": "2026-05-16T23:59:05.437Z",
-  "endedAt": "2026-05-16T23:59:05.701Z",
+  "id": "2026-05-17T01-25-10-041Z-81989",
+  "startedAt": "2026-05-17T01:25:10.041Z",
+  "endedAt": "2026-05-17T01:25:10.041Z",
   "branch": "codex/macbook-audio-entry-grounding-cycle",
-  "commit": "8a54cf6f",
+  "commit": "4510c200",
   "command": [
-    "npm",
-    "run",
-    "harness:analyze:aurora-audio-conformance-lab-v2"
+    "manual:model-usage"
   ],
   "axes": [
-    "audio-lab-rollup",
-    "challenge-perfect"
+    "audio-runtime-trial",
+    "challenge-perfect",
+    "conformance-analysis"
   ],
   "resources": [
-    "cpu"
+    "codex",
+    "gpu-equivalent"
   ],
-  "notes": "Final Audio Lab v2 after contract refresh",
+  "notes": "Estimated Codex model-assisted design, implementation, and review for audio runtime-trial accounting and dashboard integration.",
   "measurement": {
-    "wallSeconds": 0.264,
-    "timeRealSeconds": 0.25,
-    "timeUserSeconds": 0.18,
-    "timeSystemSeconds": 0.14,
-    "cpuSeconds": 0.32,
+    "wallSeconds": 1500,
+    "timeRealSeconds": null,
+    "timeUserSeconds": null,
+    "timeSystemSeconds": null,
+    "cpuSeconds": 0,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -32,12 +32,12 @@
   "resourcesDeclared": {
     "gpuMode": null,
     "gpuSeconds": null,
-    "modelProvider": null,
-    "modelName": null,
+    "modelProvider": "openai",
+    "modelName": "codex",
     "modelCalls": 0,
     "inputTokens": 0,
     "outputTokens": 0,
-    "modelMinutes": 0,
+    "modelMinutes": 25,
     "codexUsage5hLeftPercent": null,
     "codexUsageWeekLeftPercent": null,
     "codexModel5hLeftPercent": null,
@@ -46,8 +46,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 961092619,
-    "artifactBytesAfter": 961092619,
+    "artifactBytesBefore": 963035702,
+    "artifactBytesAfter": 963035702,
     "artifactBytesDelta": 0
   }
 }

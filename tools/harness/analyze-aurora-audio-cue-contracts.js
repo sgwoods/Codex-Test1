@@ -10,6 +10,7 @@ const GUIDE_PATH = path.join(ROOT, 'application-guide.json');
 const EVENT_GAP_LATEST = path.join(ANALYSES, 'aurora-audio-event-gap', 'latest.json');
 const PRECHECK_ROOT = path.join(ANALYSES, 'aurora-audio-promotion-precheck');
 const CANDIDATE_ROOT = path.join(ANALYSES, 'aurora-audio-cue-candidates');
+const RUNTIME_TRIAL_ROOT = path.join(ANALYSES, 'aurora-audio-runtime-trials');
 const QUALITY_ROOT = path.join(ANALYSES, 'quality-conformance');
 const OUT_ROOT = path.join(ANALYSES, 'aurora-audio-cue-contracts');
 
@@ -132,6 +133,21 @@ function latestPrecheck(cue){
   return reports.length ? reports[reports.length - 1] : null;
 }
 
+function latestRuntimeTrial(cue){
+  const reports = walkFiles(RUNTIME_TRIAL_ROOT, 'report.json')
+    .map(file => {
+      try{
+        const report = readJson(file);
+        return report.cue === cue ? { file, report } : null;
+      }catch{
+        return null;
+      }
+    })
+    .filter(Boolean);
+  reports.sort((a, b) => fs.statSync(a.file).mtimeMs - fs.statSync(b.file).mtimeMs || a.file.localeCompare(b.file));
+  return reports.length ? reports[reports.length - 1] : null;
+}
+
 function assetPathExists(file){
   const direct = path.join(ROOT, file);
   if(fs.existsSync(direct)) return true;
@@ -191,9 +207,10 @@ function scoreReference({ contract, comparisons, riskRow }){
   };
 }
 
-function scoreRuntime({ candidate, precheck, riskRow }){
+function scoreRuntime({ candidate, precheck, runtimeTrial, riskRow }){
   const candidateDecision = candidate?.report?.decision || null;
   const precheckDecision = precheck?.report?.decision || null;
+  const runtimeTrialDecision = runtimeTrial?.report?.decision || null;
   const checks = [
     !!riskRow,
     !!candidate,
@@ -210,7 +227,9 @@ function scoreRuntime({ candidate, precheck, riskRow }){
     candidateKeep: candidateDecision?.keep === true,
     precheckStatus: precheckDecision?.status || 'missing',
     allowRuntimeTrial: precheckDecision?.allowRuntimeTrial === true,
-    promoteRuntime: precheckDecision?.promoteRuntime === true
+    promoteRuntime: precheckDecision?.promoteRuntime === true,
+    runtimeTrialStatus: runtimeTrialDecision?.status || 'missing',
+    runtimeTrialPromoteRuntime: runtimeTrialDecision?.promoteRuntime === true
   };
 }
 
@@ -226,9 +245,12 @@ function scoreTheme(contract, themeLanes){
   return round(10 * checks.filter(Boolean).length / checks.length, 2);
 }
 
-function statusFor({ contract, riskRow, candidate, precheck, readinessScore10 }){
+function statusFor({ contract, riskRow, candidate, precheck, runtimeTrial, readinessScore10 }){
   const candidateDecision = candidate?.report?.decision || null;
   const precheckDecision = precheck?.report?.decision || null;
+  const runtimeTrialDecision = runtimeTrial?.report?.decision || null;
+  if(runtimeTrialDecision?.status === 'runtime-trial-rejected') return 'runtime-trial-rejected';
+  if(runtimeTrialDecision?.status === 'runtime-trial-accepted') return 'runtime-trial-accepted';
   if(precheckDecision?.status === 'precheck-reject') return 'blocked-by-promotion-precheck';
   if(candidateDecision?.keep === false) return 'candidate-loop-needs-new-strategy';
   if(candidateDecision?.keep === true && precheckDecision?.allowRuntimeTrial === true && contract.cue === 'playerHit' && (+riskRow?.gapRisk10 || 0) < 4){
@@ -254,7 +276,13 @@ function measuredCandidateRead(candidate){
   };
 }
 
-function recommendation({ contract, riskRow, candidate, precheck, runtime, status }){
+function recommendation({ contract, riskRow, candidate, precheck, runtimeTrial, runtime, status }){
+  if(status === 'runtime-trial-rejected'){
+    return runtimeTrial?.report?.nextStep || `Do not promote ${contract.cue}; preserve the rejected runtime-trial evidence and generate a safer candidate before another live trial.`;
+  }
+  if(status === 'runtime-trial-accepted'){
+    return runtimeTrial?.report?.nextStep || `Keep ${contract.cue} under full audio/event-gap/quality guardrails while adjacent cues change.`;
+  }
   if(contract.cue === 'stagePulse'){
     const measured = measuredCandidateRead(candidate);
     if(precheck?.report?.decision?.status === 'precheck-reject' && measured.candidateId){
@@ -296,9 +324,10 @@ function evaluateContract({ contract, maps, risks, themeLanes }){
   const riskRow = risks.get(contract.cue) || null;
   const candidate = latestCandidate(contract.cue);
   const precheck = latestPrecheck(contract.cue);
+  const runtimeTrial = latestRuntimeTrial(contract.cue);
   const completenessScore10 = scoreCompleteness(contract);
   const reference = scoreReference({ contract, comparisons, riskRow });
-  const runtime = scoreRuntime({ candidate, precheck, riskRow });
+  const runtime = scoreRuntime({ candidate, precheck, runtimeTrial, riskRow });
   const themeLatitudeScore10 = scoreTheme(contract, themeLanes);
   const readinessScore10 = round(
     .22 * completenessScore10
@@ -307,7 +336,7 @@ function evaluateContract({ contract, maps, risks, themeLanes }){
     + .2 * themeLatitudeScore10,
     2
   );
-  const status = statusFor({ contract, riskRow, candidate, precheck, readinessScore10 });
+  const status = statusFor({ contract, riskRow, candidate, precheck, runtimeTrial, readinessScore10 });
   return {
     cue: contract.cue,
     family: contract.family,
@@ -350,15 +379,29 @@ function evaluateContract({ contract, maps, risks, themeLanes }){
         promoteRuntime: precheck.report?.decision?.promoteRuntime === true,
         blockers: precheck.report?.decision?.blockers || [],
         wins: precheck.report?.decision?.wins || []
+      } : null,
+      runtimeTrial: runtimeTrial ? {
+        artifact: rel(runtimeTrial.file),
+        status: runtimeTrial.report?.decision?.status || 'unknown',
+        promoteRuntime: runtimeTrial.report?.decision?.promoteRuntime === true,
+        candidate: runtimeTrial.report?.candidate || null,
+        reason: runtimeTrial.report?.decision?.reason || '',
+        currentAudioScore10: runtimeTrial.report?.postTrialEvidence?.currentAudioScore10 ?? null,
+        currentHighestRiskCue: runtimeTrial.report?.postTrialEvidence?.currentHighestRiskCue || null,
+        currentHighestRisk10: runtimeTrial.report?.postTrialEvidence?.currentHighestRisk10 ?? null,
+        nextStep: runtimeTrial.report?.nextStep || ''
       } : null
     },
     status,
-    recommendation: recommendation({ contract, riskRow, candidate, precheck, runtime, status }),
+    recommendation: recommendation({ contract, riskRow, candidate, precheck, runtimeTrial, runtime, status }),
     nextLearningQuestions: contract.nextLearningQuestions || []
   };
 }
 
 function nextStepFor(highest, cues){
+  if(highest?.status === 'runtime-trial-rejected'){
+    return highest.evidence?.runtimeTrial?.nextStep || `Use the rejected ${highest.cue} runtime trial as generator evidence before attempting another promotion.`;
+  }
   if(highest?.cue === 'playerHit'){
     const playerHit = cues.find(row => row.cue === 'playerHit');
     if(playerHit?.status === 'runtime-validated-watch-tail'){
@@ -403,6 +446,7 @@ function markdown(report){
     `- Average readiness: ${report.summary.averageReadinessScore10}/10`,
     `- Highest risk cue: ${report.summary.highestRiskCue} (${report.summary.highestRisk10}/10)`,
     `- Runtime-trial allowed cues: ${report.summary.runtimeTrialAllowedCueCount}`,
+    `- Runtime-trial rejected cues: ${report.summary.runtimeTrialRejectedCueCount}`,
     `- Blocked cues: ${report.summary.blockedCueCount}`,
     '',
     '## Cue Contracts',
@@ -454,6 +498,8 @@ function main(){
     .sort((a, b) => (+b.currentRisk.gapRisk10 || 0) - (+a.currentRisk.gapRisk10 || 0))[0] || null;
   const blocked = cues.filter(row => /blocked|needs-new-strategy/.test(row.status));
   const runtimeTrialAllowed = cues.filter(row => row.evidence.promotionPrecheck?.allowRuntimeTrial);
+  const runtimeTrialRejected = cues.filter(row => row.evidence.runtimeTrial?.status === 'runtime-trial-rejected');
+  const runtimeTrialAccepted = cues.filter(row => row.evidence.runtimeTrial?.status === 'runtime-trial-accepted');
   const averageReadinessScore10 = round(cues.reduce((sum, row) => sum + (+row.scores.readinessScore10 || 0), 0) / Math.max(cues.length, 1), 2);
   const report = {
     schemaVersion: 1,
@@ -481,6 +527,8 @@ function main(){
       highestRisk10: round(highest?.currentRisk?.gapRisk10, 2),
       highestWorstSegmentCue: cues.slice().sort((a, b) => (+b.currentRisk?.worstSegmentRisk10 || 0) - (+a.currentRisk?.worstSegmentRisk10 || 0))[0]?.cue || '',
       runtimeTrialAllowedCueCount: runtimeTrialAllowed.length,
+      runtimeTrialRejectedCueCount: runtimeTrialRejected.length,
+      runtimeTrialAcceptedCueCount: runtimeTrialAccepted.length,
       blockedCueCount: blocked.length,
       compositeCueCount: cues.filter(row => /composite|phrase/.test(row.eventShape?.structure || '')).length
     },

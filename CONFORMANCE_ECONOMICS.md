@@ -2,8 +2,8 @@
 
 This is the project section for tracking how Aurora / Platinum conformance improves relative to the resources spent to get there. It is intentionally local-first: we want the MacBook CPU/browser harnesses to carry as much measurement and iteration as possible, while Codex/OpenAI model work is used for strategy, harness design, code generation, interpretation, and selected higher-value analysis.
 
-Generated: `2026-05-16T23:59:23.937Z`
-Latest artifact: `reference-artifacts/analyses/conformance-economics/2026-05-16-8a54cf6f/report.json`
+Generated: `2026-05-17T01:25:17.053Z`
+Latest artifact: `reference-artifacts/analyses/conformance-economics/2026-05-17-4510c200/report.json`
 
 ## Current Local-Vs-Cloud Read
 
@@ -11,11 +11,11 @@ Latest artifact: `reference-artifacts/analyses/conformance-economics/2026-05-16-
 | --- | --- | --- |
 | Overall quality | 9.2/10 | Current release-quality conformance roll-up. |
 | Level arc | 8.8/10 | Current long-play/gameplay-shape roll-up. |
-| Measured runs | 720 | Commands or manual entries logged in the economics ledger. |
+| Measured runs | 721 | Commands or manual entries logged in the economics ledger. |
 | Local CPU tracked wall | 476.1 min | Main measured engine for harness execution, report generation, waveform/spectral work, and scoring. |
 | Browser-backed local wall | 362.1 min | Subset of local work that exercised Chromium/gameplay runtime. |
-| GPU-equivalent tracked wall | 25.8 min | Declared Codex/model/API/GPU usage. This is currently small and under-instrumented. |
-| GPU-equivalent share | 4.9% | Approximate declared cloud/model share of tracked wall time. |
+| GPU-equivalent tracked wall | 75.8 min | Declared Codex/model/API/GPU usage. This is currently small and under-instrumented. |
+| GPU-equivalent share | 13.7% | Approximate declared cloud/model share of tracked wall time. |
 | Artifact growth | 1168.3 MB | Evidence volume and review/storage-cost proxy. |
 
 The important read today: measured conformance advancement is overwhelmingly local CPU/browser driven. Codex and OpenAI model work are essential for reasoning, implementation, and synthesis, but the repository ledger currently records only a small fraction of that cloud-side work. We should keep pushing computation into reusable local harnesses whenever possible and explicitly log Codex/model/API assistance as `gpu-equivalent` when it materially drives a work cycle.
@@ -24,11 +24,11 @@ The important read today: measured conformance advancement is overwhelmingly loc
 
 | Resource class | Measured runs | Wall time | CPU time | Share of tracked wall |
 | --- | --- | --- | --- | --- |
-| cpu | 701 | 476.1 min | 740.7 min | 90.4% |
-| browser | 253 | 362.1 min | 541.3 min | 68.8% |
-| gpu-equivalent | 8 | 25.8 min | 1.2 min | 4.9% |
-| codex | 7 | 25.7 min | 1.2 min | 4.9% |
-| model-api | 2 | 25 min | 0 min | 4.7% |
+| cpu | 701 | 476.1 min | 740.7 min | 86.3% |
+| browser | 253 | 362.1 min | 541.3 min | 65.7% |
+| gpu-equivalent | 10 | 75.8 min | 1.2 min | 13.7% |
+| codex | 8 | 50.7 min | 1.2 min | 9.2% |
+| model-api | 2 | 25 min | 0 min | 4.5% |
 | gpu | 1 | 0.1 min | 0.1 min | 0% |
 
 ## Compute Application And Impact
@@ -39,9 +39,9 @@ These tables answer the practical question behind the economics work: when we sp
 
 | GPU-equivalent purpose | Runs | Wall time | Share | Meaning |
 | --- | --- | --- | --- | --- |
-| Dashboard, docs, and release planning | 1 | 25 min | 97% | Moves decision quality: what to invest in next, how to explain releases, and how to keep dev/beta/prod evidence aligned. |
-| Audio conformance and cue feedback | 5 | 0.7 min | 2.8% | Moves the moment-to-moment arcade feel: impact clarity, ambience identity, reward/loss feedback, and player understanding. |
-| Visual and video reference analysis | 1 | 0.1 min | 0.2% | Moves graphical identity, reference inspection, contact-sheet review, sprite/surface comparison, and readability. |
+| Audio conformance and cue feedback | 6 | 25.7 min | 50.7% | Moves the moment-to-moment arcade feel: impact clarity, ambience identity, reward/loss feedback, and player understanding. |
+| Dashboard, docs, and release planning | 1 | 25 min | 49.2% | Moves decision quality: what to invest in next, how to explain releases, and how to keep dev/beta/prod evidence aligned. |
+| Visual and video reference analysis | 1 | 0.1 min | 0.1% | Moves graphical identity, reference inspection, contact-sheet review, sprite/surface comparison, and readability. |
 
 ### Local CPU/Browser Use By Purpose
 
@@ -67,17 +67,17 @@ These tables answer the practical question behind the economics work: when we sp
 | Axis | Measured runs | Wall time | CPU time |
 | --- | --- | --- | --- |
 | audio | 309 | 253.7 min | 459.4 min |
-| challenge-perfect | 33 | 119 min | 111.5 min |
+| challenge-perfect | 34 | 144 min | 111.5 min |
 | audio-theme-comparison | 31 | 72.8 min | 77.8 min |
 | audio-focus-candidate | 27 | 66 min | 121.8 min |
 | audio-reference-segmentation | 26 | 46.6 min | 66 min |
 | conformance-economics | 99 | 46.4 min | 30.7 min |
 | reference-subclip-candidate | 4 | 30.2 min | 36 min |
 | player-hit | 20 | 29.5 min | 53.8 min |
+| conformance-analysis | 3 | 25.2 min | 0.4 min |
 | dashboard | 14 | 25.1 min | 0.1 min |
+| audio-runtime-trial | 1 | 25 min | 0 min |
 | rescue-join | 17 | 24.7 min | 44.8 min |
-| candidate-loop | 8 | 23.8 min | 43.5 min |
-| quality-conformance | 7 | 23.6 min | 9.1 min |
 
 ## Cost Per Score Movement
 
@@ -98,19 +98,19 @@ These tables answer the practical question behind the economics work: when we sp
 
 ## Charts
 
-![Conformance score trends](reference-artifacts/analyses/conformance-economics/2026-05-16-8a54cf6f/score-trends.svg)
+![Conformance score trends](reference-artifacts/analyses/conformance-economics/2026-05-17-4510c200/score-trends.svg)
 
-![Largest score deltas](reference-artifacts/analyses/conformance-economics/2026-05-16-8a54cf6f/largest-score-deltas.svg)
+![Largest score deltas](reference-artifacts/analyses/conformance-economics/2026-05-17-4510c200/largest-score-deltas.svg)
 
-![Compute minutes by resource](reference-artifacts/analyses/conformance-economics/2026-05-16-8a54cf6f/compute-minutes-by-resource.svg)
+![Compute minutes by resource](reference-artifacts/analyses/conformance-economics/2026-05-17-4510c200/compute-minutes-by-resource.svg)
 
-![Cost per positive score point](reference-artifacts/analyses/conformance-economics/2026-05-16-8a54cf6f/cost-per-positive-score-point.svg)
+![Cost per positive score point](reference-artifacts/analyses/conformance-economics/2026-05-17-4510c200/cost-per-positive-score-point.svg)
 
-![GPU-equivalent use by purpose](reference-artifacts/analyses/conformance-economics/2026-05-16-8a54cf6f/gpu-equivalent-use-by-purpose.svg)
+![GPU-equivalent use by purpose](reference-artifacts/analyses/conformance-economics/2026-05-17-4510c200/gpu-equivalent-use-by-purpose.svg)
 
-![Local CPU use by purpose](reference-artifacts/analyses/conformance-economics/2026-05-16-8a54cf6f/cpu-use-by-purpose.svg)
+![Local CPU use by purpose](reference-artifacts/analyses/conformance-economics/2026-05-17-4510c200/cpu-use-by-purpose.svg)
 
-![Gameplay improvement by project part](reference-artifacts/analyses/conformance-economics/2026-05-16-8a54cf6f/gameplay-improvement-by-project-part.svg)
+![Gameplay improvement by project part](reference-artifacts/analyses/conformance-economics/2026-05-17-4510c200/gameplay-improvement-by-project-part.svg)
 
 ## Codex / OpenAI Accounting
 
@@ -122,13 +122,13 @@ These tables answer the practical question behind the economics work: when we sp
 
 | Cloud/model measure | Current logged value |
 | --- | --- |
-| Codex resource runs | 7 |
+| Codex resource runs | 8 |
 | Model/API resource runs | 2 |
-| GPU-equivalent resource runs | 8 |
+| GPU-equivalent resource runs | 10 |
 | Declared model calls | 0 |
 | Declared input tokens | 0 |
 | Declared output tokens | 0 |
-| Declared model minutes | 25 |
+| Declared model minutes | 50 |
 
 Current limitation: Codex conversation usage is not automatically visible to the repo. The project can track manual snapshots and declared model/API usage, but it cannot infer all cloud GPU use from a chat session unless we log it. Treat missing Codex/model entries as accounting debt, not proof that no model compute was used.
 

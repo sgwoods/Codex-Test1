@@ -62,6 +62,21 @@ function latestReport(artifact){
   return reports.length ? reports[reports.length - 1] : null;
 }
 
+function latestCueRuntimeTrial(cue){
+  const reports = walkReports(path.join(ANALYSES, 'aurora-audio-runtime-trials'))
+    .map(file => {
+      try{
+        const report = readJson(file);
+        return report.cue === cue ? { file, report } : null;
+      }catch{
+        return null;
+      }
+    })
+    .filter(Boolean);
+  reports.sort((a, b) => fs.statSync(a.file).mtimeMs - fs.statSync(b.file).mtimeMs || a.file.localeCompare(b.file));
+  return reports.length ? reports[reports.length - 1] : null;
+}
+
 function loadLedger(){
   if(!fs.existsSync(LEDGER)) return [];
   return fs.readFileSync(LEDGER, 'utf8')
@@ -93,7 +108,11 @@ function latestLevelArcCategory(quality, levelArcReport){
   });
 }
 
-function nextAudioAction(audioEventGap, audioCueCandidate, audioContract){
+function nextAudioAction(audioEventGap, audioCueCandidate, audioContract, audioRuntimeTrial){
+  if(audioRuntimeTrial?.report?.decision?.status === 'runtime-trial-rejected'){
+    const candidate = audioRuntimeTrial.report.candidate || audioCueCandidate?.decision?.best || 'candidate';
+    return `Challenge Perfect runtime trial rejected ${candidate}; do not directly promote the focused keeper. ${audioRuntimeTrial.report.nextStep || 'Generate a safer candidate that addresses the failed live/full-theme gates before another runtime trial.'}`;
+  }
   if(audioCueCandidate?.cue === 'challengePerfect'){
     const decision = audioCueCandidate.decision || {};
     if(decision.keep && decision.best){
@@ -123,9 +142,12 @@ function nextAudioAction(audioEventGap, audioCueCandidate, audioContract){
   return 'Rerun audio comparison and semantic event-gap analysis, then tune the highest-risk runtime cue.';
 }
 
-function audioRationale(audioEventGap, audioCueCandidate, audioContract){
+function audioRationale(audioEventGap, audioCueCandidate, audioContract, audioRuntimeTrial){
   const summary = audioEventGap?.summary || {};
   const decision = audioCueCandidate?.decision || null;
+  if(audioRuntimeTrial?.report?.decision?.status === 'runtime-trial-rejected'){
+    return `Audio is still the weakest runtime quality category, and the latest Challenge Perfect trial is now preserved as a rejected runtime decision: focused candidate ${audioRuntimeTrial.report.candidate || decision?.best || 'candidate'} was useful generator evidence, but live/full-theme gates did not make it release-safe. Cue-contract readiness is ${audioContract?.summary?.averageReadinessScore10 ?? 'unknown'}/10; the next audio value is a safer candidate family, not direct promotion.`;
+  }
   if(audioContract?.summary?.averageReadinessScore10){
     return `Audio is still the weakest runtime quality category, but the process is now more repeatable: cue-contract readiness is ${audioContract.summary.averageReadinessScore10}/10, semantic event score is ${summary.semanticAverageScore10 ?? 'unknown'}/10, acoustic event score remains the key gap, and the highest actionable cue is ${summary.highestSegmentRiskCue || summary.highestRiskCue} ${summary.highestSegmentRiskRole || ''}.`;
   }
@@ -232,6 +254,7 @@ function main(){
   const audioEventGapPath = latestReport('aurora-audio-event-gap');
   const audioCueCandidatePath = latestReport('aurora-audio-cue-candidates');
   const audioContractPath = latestReport('aurora-audio-cue-contracts');
+  const audioRuntimeTrial = latestCueRuntimeTrial('challengePerfect');
   const stage14SweepPath = latestReport('stage14-escort-reward-input-sweep');
   const economicsPath = latestReport('conformance-economics');
   const quality = readJson(qualityPath);
@@ -274,8 +297,8 @@ function main(){
       risk: 0.28,
       costClass: 'high',
       computeAxis: 'quality-score',
-      rationale: audioRationale(audioEventGap, audioCueCandidate, audioContract),
-      nextAction: nextAudioAction(audioEventGap, audioCueCandidate, audioContract)
+      rationale: audioRationale(audioEventGap, audioCueCandidate, audioContract, audioRuntimeTrial),
+      nextAction: nextAudioAction(audioEventGap, audioCueCandidate, audioContract, audioRuntimeTrial)
     }),
     buildCandidate({
       id: 'level-arc-opportunity-coverage',
@@ -381,6 +404,7 @@ function main(){
       qualityReport: rel(qualityPath),
       audioEventGapReport: audioEventGapPath ? rel(audioEventGapPath) : null,
       audioCueCandidateReport: audioCueCandidatePath ? rel(audioCueCandidatePath) : null,
+      audioRuntimeTrialReport: audioRuntimeTrial ? rel(audioRuntimeTrial.file) : null,
       opportunityReport: opportunityPath ? rel(opportunityPath) : null,
       levelArcReport: levelArcPath ? rel(levelArcPath) : null,
       formationPathSlotReport: formationPathSlotPath ? rel(formationPathSlotPath) : null,
@@ -397,7 +421,7 @@ function main(){
       topCandidate: candidates[0] || null
     },
     candidates,
-    interpretation: `Audio remains the largest raw gap and top overall investment. Semantic audio measurement debt is now ${audioEventGap.summary?.semanticAttentionCueCount ?? 'unknown'} attention rows, segment-role comparisons are ${audioEventGap.summary?.segmentRoleComparisonCount ?? 'unknown'}, and the latest Challenge Perfect candidate decision is ${audioCueCandidate?.decision?.status || 'not yet run'}. If the next cycle stays in level-arc instead, the immediate level-arc task is ${nextOpportunityId}.`
+    interpretation: `Audio remains the largest raw gap and top overall investment. Semantic audio measurement debt is now ${audioEventGap.summary?.semanticAttentionCueCount ?? 'unknown'} attention rows, segment-role comparisons are ${audioEventGap.summary?.segmentRoleComparisonCount ?? 'unknown'}, the latest Challenge Perfect candidate decision is ${audioCueCandidate?.decision?.status || 'not yet run'}, and the runtime-trial status is ${audioRuntimeTrial?.report?.decision?.status || 'not yet recorded'}. If the next cycle stays in level-arc instead, the immediate level-arc task is ${nextOpportunityId}.`
   };
   writeJson(path.join(outDir, 'report.json'), report);
   fs.writeFileSync(path.join(outDir, 'README.md'), buildReadme(report));
