@@ -111,16 +111,16 @@ Current result:
 
 | Metric | Value |
 |---|---:|
-| Quality score audio category | `7.2/10` |
+| Quality score audio category | `7.0/10` |
 | Overall quality score | `9.2/10` |
 | Semantic event score | `9.78/10` |
 | Acoustic event score | `6.56/10` |
-| Average worst segment risk | `3.44/10` |
+| Average worst segment risk | `3.27/10` |
 | Cue-contract readiness | `9.24/10` |
 | Contracted priority cue families | `8` cues |
 | Highest current audio gap | `challengePerfect` onset |
-| Audio risk stability | `challengePerfect` is most volatile; `4.56/10` recent risk range |
-| Focused candidate-loop coverage | `enemyShot`, `challengePerfect`, `bossHit`, `playerShot`, `rescueJoin`, and the contracted cue set |
+| Audio risk stability | global promotion block active; `19/21` recent cues volatile |
+| Focused candidate-loop coverage | `enemyShot`, `challengePerfect`, `challengeTransition`, `gameOver`, `bossHit`, `playerShot`, `rescueJoin`, and the contracted cue set |
 
 This means the process and runtime audio both moved forward, while audio still
 remains Aurora's weakest quality category. The latest post-beta runtime wins
@@ -158,6 +158,33 @@ full-theme capture and use median/repeated confirmation before any
 `challengePerfect`, `gameOver`, or `challengeTransition` runtime promotion.
 This is a harness/process win more than a player-facing audio win, but it
 reduces the chance of shipping a cue that only passed one noisy measurement.
+
+May 17 Challenge Perfect / transition / game-over stability pass:
+
+- Focused candidate loops now cover `challengePerfect`, `challengeTransition`,
+  and `gameOver` with repeated samples and bounded reference-grid sweeps.
+- Full-theme promotion prechecks found plausible candidates for all three:
+  `challengePerfect` `perfect-clean-onset-soft-tail`, `gameOver`
+  `refclip-s3798-d1100-v86`, and `challengeTransition`
+  `refclip-s480-d480-v116`.
+- The guarded `challengePerfect` runtime trial was rejected. The candidate
+  improved the average worst-segment rollup, but the live/full-theme read still
+  left `challengePerfect` as the highest-risk cue at `7.7/10`.
+- After reverting the runtime cue, another full-theme capture produced the same
+  high `challengePerfect` risk. The learning is important: current audio
+  measurement variance can dominate a candidate change.
+- New harness capability kept:
+  `tools/harness/analyze-aurora-audio-promotion-stability-gate.js`,
+  `tools/harness/check-aurora-audio-promotion-stability-gate.js`,
+  `tools/harness/analyze-aurora-audio-strategy-review.js`, and
+  `tools/harness/check-aurora-audio-strategy-review.js`.
+- Current promotion gate: `0` runtime trials allowed because global audio
+  scoring is unstable (`19/21` volatile cues). No runtime audio was promoted.
+
+Strategy read: accurate reference clips are necessary but not sufficient. The
+next audio work should build reference-vs-reference and current-vs-current
+calibration controls, then move runtime promotion to repeated median /
+confidence-bound scoring. See `AUDIO_CONFORMANCE_STRATEGY_REVIEW.md`.
 
 Post-beta boss-hit pass:
 

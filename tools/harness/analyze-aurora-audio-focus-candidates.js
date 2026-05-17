@@ -979,6 +979,96 @@ const CUE_CONFIGS = {
     ],
     keeper: { risk: .25, segment: .45, duration: .08, acceptableDuration: .12, centroidWorsenHz: 120, bandWorsen: .055 }
   },
+  'challenge-transition': {
+    cue: 'challengeTransition',
+    entryId: 'challenge-transition',
+    comparisonId: 'challenge-transition-compare',
+    latest: 'latest-challenge-transition.json',
+    title: 'Challenge Transition',
+    problem: 'Challenge Transition is the ceremony cue that tells the player a no-combat bonus set piece is starting. Current full-theme reads are moderately volatile, so a candidate must improve the announcement without becoming indistinct from normal stage transition or challenge-results cues.',
+    target: 'Make challenge entry feel like the Galaga bonus-stage announcement: short, unmistakable, ceremonial, and separated from normal stage handoff audio.',
+    cooldownMs: 2600,
+    referenceStarts: [.08, .16, .24, .32, .4, .48, .56, .64],
+    referenceDurations: [.24, .32, .4, .48, .56, .72, .96, 1.2, 1.6],
+    referenceVolumes: [.74, .86, .95, 1.05, 1.16],
+    handSpecs: [
+      {
+        id: 'challenge-entry-guide-window',
+        label: 'Challenge entry guide window',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-challenging-stage.m4a',
+          cooldownMs: 2600,
+          referenceVolume: .95,
+          clipStart: .4,
+          clipDuration: .48
+        }
+      },
+      {
+        id: 'challenge-entry-wide-phrase',
+        label: 'Challenge entry wide phrase',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga3-challenging-stage.m4a',
+          cooldownMs: 2600,
+          referenceVolume: .9,
+          clipStart: .24,
+          clipDuration: .96
+        }
+      },
+      {
+        id: 'challenge-entry-current-family',
+        label: 'Challenge entry current source family',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga2-challenging-stage.m4a',
+          cooldownMs: 2600,
+          referenceVolume: .9,
+          clipStart: 0,
+          clipDuration: 1.6
+        }
+      },
+      {
+        id: 'challenge-entry-square-announcer',
+        label: 'Challenge entry square announcer',
+        spec: {
+          seq: [523, 659, 784, 988, 1318],
+          step: .052,
+          wave: 'square',
+          volume: .014,
+          slide: 30,
+          lpHz: 3900,
+          tones: [
+            { freq: 262, duration: .17, wave: 'square', volume: .0038, slide: 8, lpHz: 1800, delay: 0 },
+            { freq: 1568, duration: .13, wave: 'triangle', volume: .0062, slide: -26, lpHz: 4700, delay: .21 }
+          ]
+        }
+      },
+      {
+        id: 'challenge-entry-soft-ceremony',
+        label: 'Challenge entry soft ceremony',
+        spec: {
+          seq: [587, 784, 1047, 1397, 1760],
+          step: .048,
+          wave: 'triangle',
+          volume: .0128,
+          slide: 42,
+          lpHz: 4300,
+          tones: [
+            { freq: 294, duration: .16, wave: 'triangle', volume: .0032, slide: 10, lpHz: 1900, delay: 0 },
+            { freq: 2093, duration: .12, wave: 'sine', volume: .0062, slide: 18, lpHz: 5200, delay: .19 }
+          ]
+        }
+      }
+    ],
+    keeper: {
+      risk: .25,
+      segment: .35,
+      duration: .08,
+      acceptableDuration: .12,
+      centroidWorsenHz: 120,
+      bandWorsen: .055,
+      minimumScheduledDurationSeconds: .45,
+      minimumActiveCoverageOfScheduled: .32
+    }
+  },
   'challenge-perfect': {
     cue: 'challengePerfect',
     entryId: 'challenge-perfect',
@@ -1317,6 +1407,82 @@ const CUE_CONFIGS = {
       calibratedSegmentRoleRisk: true,
       calibratedSegmentMaxRisk10: .35,
       rawSegmentWorsenMax10: .35
+    }
+  },
+  'game-over': {
+    cue: 'gameOver',
+    entryId: 'game-over',
+    comparisonId: 'game-over-compare',
+    latest: 'latest-game-over.json',
+    title: 'Game Over',
+    problem: 'Game Over is currently a lower-risk cue than Challenge Perfect, but it is emotionally important: the run ending needs to feel final without replaying an overlong ambience bed or collapsing into a simple ship-loss sound.',
+    target: 'Make the run-ending cue read as a complete Galaga-like ending phrase, with enough body to feel final and enough restraint to avoid masking score/name-entry flow.',
+    cooldownMs: 3600,
+    referenceStarts: [2.3, 2.7, 3.0, 3.3, 3.5, 3.798, 4.0],
+    referenceDurations: [.42, .64, .84, 1.1, 1.4, 1.8, 2.4, 4.2],
+    referenceVolumes: [.62, .74, .86, .95, 1.05],
+    handSpecs: [
+      {
+        id: 'game-over-guide-window',
+        label: 'Game over guide window',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a',
+          cooldownMs: 3600,
+          referenceVolume: .95,
+          clipStart: 3.798,
+          clipDuration: .84
+        }
+      },
+      {
+        id: 'game-over-current-wide',
+        label: 'Game over current wide phrase',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a',
+          cooldownMs: 3600,
+          referenceVolume: .86,
+          clipStart: 2.3,
+          clipDuration: 4.2
+        }
+      },
+      {
+        id: 'game-over-ending-body',
+        label: 'Game over ending body',
+        spec: {
+          referenceClip: 'assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a',
+          cooldownMs: 3600,
+          referenceVolume: .9,
+          clipStart: 3.5,
+          clipDuration: 1.4
+        }
+      },
+      {
+        id: 'game-over-arcade-fall',
+        label: 'Game over arcade fall',
+        spec: {
+          seq: [392, 330, 262, 220, 175, 147],
+          step: .092,
+          wave: 'triangle',
+          volume: .0158,
+          slide: -58,
+          lpHz: 2200,
+          tones: [
+            { freq: 196, duration: .12, wave: 'triangle', volume: .0056, slide: -20, lpHz: 2450, delay: .01 },
+            { freq: 147, duration: .2, wave: 'triangle', volume: .0062, slide: -30, lpHz: 1900, delay: .18 },
+            { freq: 110, duration: .42, wave: 'sawtooth', volume: .0146, slide: -100, lpHz: 1700, delay: .27 }
+          ],
+          noise: [{ duration: .1, volume: .004, hp: 1000, delay: .12 }]
+        }
+      }
+    ],
+    keeper: {
+      risk: .2,
+      segment: .25,
+      duration: .18,
+      acceptableDuration: .22,
+      centroidWorsenHz: 120,
+      bandWorsen: .055,
+      minimumScheduledDurationSeconds: .8,
+      minimumActiveCoverageOfScheduled: .3
     }
   },
   'capture-beam': {
@@ -2657,6 +2823,8 @@ async function analyzeCue(key, generatedAt, rootDir){
 
   const metricsPath = path.join(cueDir, 'metrics.json');
   const metrics = JSON.parse(fs.readFileSync(metricsPath, 'utf8'));
+  const latestMetricsPath = path.join(OUT_ROOT, config.latest.replace(/\.json$/, '-metrics.json'));
+  fs.writeFileSync(latestMetricsPath, `${JSON.stringify(metrics, null, 2)}\n`);
   const sampleRows = metrics.items.map(item => {
     const capture = captures.find(entry => entry.sampleId === item.id);
     const spec = capture?.row || candidates.find(candidate => slug(candidate.id) === item.id);
@@ -2730,7 +2898,8 @@ async function analyzeCue(key, generatedAt, rootDir){
       referenceClip: set.referenceClip,
       referenceWindow: set.referenceWindow || null,
       manifest: rel(manifestPath),
-      metrics: rel(metricsPath),
+      metrics: rel(latestMetricsPath),
+      runMetrics: rel(metricsPath),
       referenceSegmentation: metrics.items[0]?.referenceSegmentation || null,
       runtimeTrialDecision: decision.runtimeTrial?.artifact || null
     },

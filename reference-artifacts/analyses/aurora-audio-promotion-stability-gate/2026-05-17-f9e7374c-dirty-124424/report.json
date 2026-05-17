@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-promotion-stability-gate",
+  "generatedAt": "2026-05-17T12:44:24.593Z",
+  "branch": "codex/macbook-audio-entry-grounding-cycle",
+  "commit": "f9e7374c",
+  "dirty": true,
+  "problem": "Focused audio candidate loops are not trustworthy enough by themselves because full-theme audio event-gap reads have measurable capture and segmentation variance. This gate requires a candidate precheck to beat the cue-specific measured noise floor before runtime audio can be tried.",
+  "strategy": "Join focused candidate decisions, full-theme promotion prechecks, latest event-gap risk, and repeated event-gap stability. For volatile cues, require the full-theme improvement to exceed the measured repeated-read range/stddev threshold; never promote runtime audio from this gate alone.",
+  "successMeasure": "A cue clears this gate only if it has a keeper candidate, a passing promotion precheck, no aggregate regression, and a full-theme cue/worst-segment win large enough to exceed repeated-read variance.",
+  "summary": {
+    "cueCount": 3,
+    "runtimeTrialAllowedCount": 3,
+    "rejectedCount": 0,
+    "mostImportantCue": "challengePerfect",
+    "highestMedianGapCue": "challengePerfect",
+    "highestMedianGapRisk10": 7.07
+  },
+  "source": {
+    "riskStability": "reference-artifacts/analyses/aurora-audio-risk-stability/latest.json",
+    "eventGap": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
+    "candidateRoot": "reference-artifacts/analyses/aurora-audio-cue-candidates",
+    "precheckRoot": "reference-artifacts/analyses/aurora-audio-promotion-precheck"
+  },
+  "cues": [
+    {
+      "cue": "challengePerfect",
+      "status": "stability-gate-runtime-trial-allowed",
+      "allowRuntimeTrial": true,
+      "promoteRuntime": false,
+      "candidate": {
+        "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-challenge-perfect.json",
+        "id": "perfect-clean-onset-soft-tail",
+        "decisionStatus": "candidate-recommended",
+        "keep": true,
+        "reason": "Challenge Perfect candidate clears measured calibrated role/segment keeper gates."
+      },
+      "precheck": {
+        "artifact": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-17-f9e7374c-dirty-121214-challengePerfect/report.json",
+        "status": "precheck-trial-allowed",
+        "allowRuntimeTrial": true,
+        "blockers": [],
+        "wins": [
+          "Full-theme cue gap improves by 6.04/10.",
+          "Worst segment risk improves by 2.92/10.",
+          "Theme average worst-segment risk improves by 0.14/10."
+        ]
+      },
+      "currentRisk": {
+        "gapRisk10": 7.7,
+        "worstSegmentRisk10": 7.96,
+        "worstSegmentRole": "onset"
+      },
+      "stability": {
+        "medianGapRisk10": 7.07,
+        "gapRiskRange10": 2.25,
+        "worstSegmentRange10": 2.49,
+        "stabilityScore10": 4.64,
+        "volatile": true
+      },
+      "noiseFloor": {
+        "measuredRange10": 2.49,
+        "measuredStddev10": 0.94,
+        "requiredCueGapWin10": 1.88,
+        "requiredSegmentWin10": 1.41
+      },
+      "deltas": {
+        "cueGapImprovement10": 6.04,
+        "worstSegmentImprovement10": 2.92,
+        "averageWorstSegmentDelta10": -0.14
+      },
+      "blockers": [],
+      "warnings": [
+        "Cue is volatile across repeated full-theme reads (2.49/10 range); single-run wins must clear the noise floor."
+      ],
+      "wins": [
+        "Cue gap win 6.04/10 clears 1.88/10 stability threshold.",
+        "Worst-segment win 2.92/10 clears 1.41/10 stability threshold."
+      ],
+      "nextStep": "Run a guarded live runtime trial for challengePerfect; promote only if live audio comparison, event-gap rollup, cue alignment, and quality scoring still hold or improve."
+    },
+    {
+      "cue": "gameOver",
+      "status": "stability-gate-runtime-trial-allowed",
+      "allowRuntimeTrial": true,
+      "promoteRuntime": false,
+      "candidate": {
+        "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-game-over.json",
+        "id": "refclip-s3798-d1100-v86",
+        "decisionStatus": "candidate-recommended",
+        "keep": true,
+        "reason": "Game Over candidate clears measured segment keeper gates."
+      },
+      "precheck": {
+        "artifact": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-17-f9e7374c-dirty-121223-gameOver/report.json",
+        "status": "precheck-trial-allowed",
+        "allowRuntimeTrial": true,
+        "blockers": [],
+        "wins": [
+          "Full-theme cue gap improves by 1.41/10.",
+          "Worst segment risk improves by 1.9/10.",
+          "Theme average worst-segment risk improves by 0.09/10."
+        ]
+      },
+      "currentRisk": {
+        "gapRisk10": 3.79,
+        "worstSegmentRisk10": 5.51,
+        "worstSegmentRole": "onset"
+      },
+      "stability": {
+        "medianGapRisk10": 2.45,
+        "gapRiskRange10": 1.34,
+        "worstSegmentRange10": 0.74,
+        "stabilityScore10": 7.03,
+        "volatile": true
+      },
+      "noiseFloor": {
+        "measuredRange10": 1.34,
+        "measuredStddev10": 0.58,
+        "requiredCueGapWin10": 1.16,
+        "requiredSegmentWin10": 0.45
+      },
+      "deltas": {
+        "cueGapImprovement10": 1.41,
+        "worstSegmentImprovement10": 1.9,
+        "averageWorstSegmentDelta10": -0.09
+      },
+      "blockers": [],
+      "warnings": [
+        "Cue is volatile across repeated full-theme reads (1.34/10 range); single-run wins must clear the noise floor."
+      ],
+      "wins": [
+        "Cue gap win 1.41/10 clears 1.16/10 stability threshold.",
+        "Worst-segment win 1.9/10 clears 0.45/10 stability threshold."
+      ],
+      "nextStep": "Run a guarded live runtime trial for gameOver; promote only if live audio comparison, event-gap rollup, cue alignment, and quality scoring still hold or improve."
+    },
+    {
+      "cue": "challengeTransition",
+      "status": "stability-gate-runtime-trial-allowed",
+      "allowRuntimeTrial": true,
+      "promoteRuntime": false,
+      "candidate": {
+        "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-challenge-transition.json",
+        "id": "refclip-s480-d480-v116",
+        "decisionStatus": "candidate-recommended",
+        "keep": true,
+        "reason": "Challenge Transition candidate clears measured segment keeper gates."
+      },
+      "precheck": {
+        "artifact": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-17-f9e7374c-dirty-121229-challengeTransition/report.json",
+        "status": "precheck-trial-allowed",
+        "allowRuntimeTrial": true,
+        "blockers": [],
+        "wins": [
+          "Full-theme cue gap improves by 2.01/10.",
+          "Worst segment risk improves by 1.67/10.",
+          "Theme average worst-segment risk improves by 0.08/10."
+        ]
+      },
+      "currentRisk": {
+        "gapRisk10": 4.11,
+        "worstSegmentRisk10": 4.79,
+        "worstSegmentRole": "onset"
+      },
+      "stability": {
+        "medianGapRisk10": 4.16,
+        "gapRiskRange10": 0.97,
+        "worstSegmentRange10": 1.12,
+        "stabilityScore10": 7.58,
+        "volatile": true
+      },
+      "noiseFloor": {
+        "measuredRange10": 1.12,
+        "measuredStddev10": 0.43,
+        "requiredCueGapWin10": 0.86,
+        "requiredSegmentWin10": 0.65
+      },
+      "deltas": {
+        "cueGapImprovement10": 2.01,
+        "worstSegmentImprovement10": 1.67,
+        "averageWorstSegmentDelta10": -0.08
+      },
+      "blockers": [],
+      "warnings": [
+        "Cue is volatile across repeated full-theme reads (1.12/10 range); single-run wins must clear the noise floor."
+      ],
+      "wins": [
+        "Cue gap win 2.01/10 clears 0.86/10 stability threshold.",
+        "Worst-segment win 1.67/10 clears 0.65/10 stability threshold."
+      ],
+      "nextStep": "Run a guarded live runtime trial for challengeTransition; promote only if live audio comparison, event-gap rollup, cue alignment, and quality scoring still hold or improve."
+    }
+  ],
+  "nextStep": "Run a guarded live runtime trial for challengePerfect; promote only if live audio comparison, event-gap rollup, cue alignment, and quality scoring still hold or improve."
+}

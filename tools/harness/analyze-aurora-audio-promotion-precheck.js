@@ -17,7 +17,9 @@ const DEFAULT_REPORTS = Object.freeze({
   challengePerfect: 'latest-challenge-perfect.json',
   enemyBoom: 'latest-enemy-boom.json',
   bossHit: 'latest-boss-hit.json',
-  bossBoom: 'latest-boss-boom.json'
+  bossBoom: 'latest-boss-boom.json',
+  challengeTransition: 'latest-challenge-transition.json',
+  gameOver: 'latest-game-over.json'
 });
 
 function argValue(name, fallback = ''){

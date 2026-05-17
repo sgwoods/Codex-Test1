@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "aurora-audio-cue-contract-analysis",
-  "generatedAt": "2026-05-17T10:55:51.437Z",
+  "generatedAt": "2026-05-17T12:57:33.124Z",
   "branch": "codex/macbook-audio-entry-grounding-cycle",
-  "commit": "ab80e4c7",
+  "commit": "f9e7374c",
   "dirty": true,
   "problem": "Aurora audio needs a formal contract layer so ingestion, candidate generation, runtime logging, comparison, promotion, and theme variation all optimize the same player-facing meaning rather than isolated waveform similarity.",
   "strategy": "Load the audio cue contracts, join them to application guide mappings, event-gap risks, focused candidate reports, promotion prechecks, and current quality scoring, then identify which cue families need stronger evidence or a different generation strategy.",
@@ -12,18 +12,19 @@
     "contracts": "reference-artifacts/contracts/audio/aurora-audio-cue-contracts.json",
     "applicationGuide": "application-guide.json",
     "eventGap": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
-    "quality": "reference-artifacts/analyses/quality-conformance/2026-05-17-ab80e4c7/report.json"
+    "promotionStabilityGate": "reference-artifacts/analyses/aurora-audio-promotion-stability-gate/latest.json",
+    "quality": "reference-artifacts/analyses/quality-conformance/2026-05-17-f9e7374c/report.json"
   },
   "summary": {
     "contractCount": 8,
-    "averageReadinessScore10": 9.24,
-    "audioScore10": 7.2,
-    "acousticEventScore10": 6.56,
+    "averageReadinessScore10": 9.3,
+    "audioScore10": 7,
+    "acousticEventScore10": 6.73,
     "semanticEventScore10": 9.78,
     "highestRiskCue": "challengePerfect",
-    "highestRisk10": 7.07,
+    "highestRisk10": 7.7,
     "highestWorstSegmentCue": "challengePerfect",
-    "runtimeTrialAllowedCueCount": 3,
+    "runtimeTrialAllowedCueCount": 0,
     "runtimeTrialRejectedCueCount": 3,
     "runtimeTrialAcceptedCueCount": 0,
     "blockedCueCount": 5,
@@ -72,9 +73,9 @@
         "readinessScore10": 9.68
       },
       "currentRisk": {
-        "gapRisk10": 0.38,
+        "gapRisk10": 0.68,
         "worstSegmentRole": "onset",
-        "worstSegmentRisk10": 1.98,
+        "worstSegmentRisk10": 2.55,
         "semanticScore10": 9.6,
         "recommendation": "Keep as secondary pass after higher-risk audio gaps are narrowed."
       },
@@ -111,6 +112,16 @@
             "Full-theme cue gap improves by 0.72/10.",
             "Worst segment risk improves by 0.12/10."
           ]
+        },
+        "promotionStabilityGate": {
+          "artifact": "reference-artifacts/analyses/aurora-audio-promotion-stability-gate/latest.json",
+          "status": "global-promotion-blocked",
+          "allowRuntimeTrial": false,
+          "promoteRuntime": false,
+          "globalPromotionBlocked": true,
+          "blockers": [],
+          "warnings": [],
+          "wins": []
         },
         "runtimeTrial": null
       },
@@ -154,14 +165,14 @@
       "scores": {
         "completenessScore10": 10,
         "referenceGroundingScore10": 10,
-        "runtimeEvidenceScore10": 6.25,
+        "runtimeEvidenceScore10": 6.67,
         "themeLatitudeScore10": 10,
-        "readinessScore10": 8.8
+        "readinessScore10": 8.93
       },
       "currentRisk": {
-        "gapRisk10": 1.54,
+        "gapRisk10": 0.77,
         "worstSegmentRole": "onset",
-        "worstSegmentRisk10": 1.74,
+        "worstSegmentRisk10": 1.54,
         "semanticScore10": 9.8,
         "recommendation": "Prioritize impact/explosion event clarity so the player understands damage, kill, and boss multi-hit state."
       },
@@ -187,6 +198,16 @@
           "reason": "No Enemy Hit candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
         },
         "promotionPrecheck": null,
+        "promotionStabilityGate": {
+          "artifact": "reference-artifacts/analyses/aurora-audio-promotion-stability-gate/latest.json",
+          "status": "global-promotion-blocked",
+          "allowRuntimeTrial": false,
+          "promoteRuntime": false,
+          "globalPromotionBlocked": true,
+          "blockers": [],
+          "warnings": [],
+          "wins": []
+        },
         "runtimeTrial": null
       },
       "status": "candidate-loop-needs-new-strategy",
@@ -229,14 +250,14 @@
       "scores": {
         "completenessScore10": 10,
         "referenceGroundingScore10": 10,
-        "runtimeEvidenceScore10": 6.25,
+        "runtimeEvidenceScore10": 6.67,
         "themeLatitudeScore10": 10,
-        "readinessScore10": 8.8
+        "readinessScore10": 8.93
       },
       "currentRisk": {
-        "gapRisk10": 2.22,
+        "gapRisk10": 0.79,
         "worstSegmentRole": "onset",
-        "worstSegmentRisk10": 1.01,
+        "worstSegmentRisk10": 0.53,
         "semanticScore10": 10,
         "recommendation": "Prioritize impact/explosion event clarity so the player understands damage, kill, and boss multi-hit state."
       },
@@ -262,6 +283,16 @@
           "reason": "No Enemy Boom candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
         },
         "promotionPrecheck": null,
+        "promotionStabilityGate": {
+          "artifact": "reference-artifacts/analyses/aurora-audio-promotion-stability-gate/latest.json",
+          "status": "global-promotion-blocked",
+          "allowRuntimeTrial": false,
+          "promoteRuntime": false,
+          "globalPromotionBlocked": true,
+          "blockers": [],
+          "warnings": [],
+          "wins": []
+        },
         "runtimeTrial": null
       },
       "status": "candidate-loop-needs-new-strategy",
@@ -305,14 +336,14 @@
       "scores": {
         "completenessScore10": 10,
         "referenceGroundingScore10": 10,
-        "runtimeEvidenceScore10": 6.25,
+        "runtimeEvidenceScore10": 6.67,
         "themeLatitudeScore10": 10,
-        "readinessScore10": 8.8
+        "readinessScore10": 8.93
       },
       "currentRisk": {
-        "gapRisk10": 1.48,
+        "gapRisk10": 0.96,
         "worstSegmentRole": "onset",
-        "worstSegmentRisk10": 1.08,
+        "worstSegmentRisk10": 0.36,
         "semanticScore10": 9.8,
         "recommendation": "Prioritize impact/explosion event clarity so the player understands damage, kill, and boss multi-hit state."
       },
@@ -338,6 +369,16 @@
           "reason": "No Boss Hit candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
         },
         "promotionPrecheck": null,
+        "promotionStabilityGate": {
+          "artifact": "reference-artifacts/analyses/aurora-audio-promotion-stability-gate/latest.json",
+          "status": "global-promotion-blocked",
+          "allowRuntimeTrial": false,
+          "promoteRuntime": false,
+          "globalPromotionBlocked": true,
+          "blockers": [],
+          "warnings": [],
+          "wins": []
+        },
         "runtimeTrial": null
       },
       "status": "candidate-loop-needs-new-strategy",
@@ -382,14 +423,14 @@
       "scores": {
         "completenessScore10": 10,
         "referenceGroundingScore10": 10,
-        "runtimeEvidenceScore10": 6.25,
+        "runtimeEvidenceScore10": 6.67,
         "themeLatitudeScore10": 10,
-        "readinessScore10": 8.8
+        "readinessScore10": 8.93
       },
       "currentRisk": {
-        "gapRisk10": 2.18,
+        "gapRisk10": 0.95,
         "worstSegmentRole": "onset",
-        "worstSegmentRisk10": 3.48,
+        "worstSegmentRisk10": 2.86,
         "semanticScore10": 10,
         "recommendation": "Prioritize impact/explosion event clarity so the player understands damage, kill, and boss multi-hit state."
       },
@@ -415,6 +456,16 @@
           "reason": "No Boss Boom candidate cleared whole-cue, segment, duration, band, centroid, and role-match gates."
         },
         "promotionPrecheck": null,
+        "promotionStabilityGate": {
+          "artifact": "reference-artifacts/analyses/aurora-audio-promotion-stability-gate/latest.json",
+          "status": "global-promotion-blocked",
+          "allowRuntimeTrial": false,
+          "promoteRuntime": false,
+          "globalPromotionBlocked": true,
+          "blockers": [],
+          "warnings": [],
+          "wins": []
+        },
         "runtimeTrial": null
       },
       "status": "candidate-loop-needs-new-strategy",
@@ -464,11 +515,11 @@
         "readinessScore10": 9.68
       },
       "currentRisk": {
-        "gapRisk10": 3.57,
+        "gapRisk10": 2.57,
         "worstSegmentRole": "onset",
-        "worstSegmentRisk10": 5.96,
+        "worstSegmentRisk10": 4.43,
         "semanticScore10": 10,
-        "recommendation": "Tune the onset segment first: onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+        "recommendation": "Keep as secondary pass after higher-risk audio gaps are narrowed."
       },
       "evidence": {
         "applicationContextPresent": true,
@@ -502,6 +553,16 @@
             "Worst segment risk improves by 3.69/10.",
             "Theme average worst-segment risk improves by 0.18/10."
           ]
+        },
+        "promotionStabilityGate": {
+          "artifact": "reference-artifacts/analyses/aurora-audio-promotion-stability-gate/latest.json",
+          "status": "global-promotion-blocked",
+          "allowRuntimeTrial": false,
+          "promoteRuntime": false,
+          "globalPromotionBlocked": true,
+          "blockers": [],
+          "warnings": [],
+          "wins": []
         },
         "runtimeTrial": {
           "artifact": "reference-artifacts/analyses/aurora-audio-runtime-trials/2026-05-17-ab80e4c7-dirty-105144-rescue-join-rejected/report.json",
@@ -562,7 +623,7 @@
         "readinessScore10": 9.68
       },
       "currentRisk": {
-        "gapRisk10": 2.9,
+        "gapRisk10": 0.29,
         "worstSegmentRole": "body",
         "worstSegmentRisk10": 0,
         "semanticScore10": 9.4,
@@ -598,6 +659,16 @@
           "wins": [
             "Full-theme cue gap improves by 2.65/10."
           ]
+        },
+        "promotionStabilityGate": {
+          "artifact": "reference-artifacts/analyses/aurora-audio-promotion-stability-gate/latest.json",
+          "status": "global-promotion-blocked",
+          "allowRuntimeTrial": false,
+          "promoteRuntime": false,
+          "globalPromotionBlocked": true,
+          "blockers": [],
+          "warnings": [],
+          "wins": []
         },
         "runtimeTrial": {
           "artifact": "reference-artifacts/analyses/aurora-audio-runtime-trials/2026-05-11-44ac29aa-playerHit-rejected/report.json",
@@ -657,9 +728,9 @@
         "readinessScore10": 9.68
       },
       "currentRisk": {
-        "gapRisk10": 7.07,
+        "gapRisk10": 7.7,
         "worstSegmentRole": "onset",
-        "worstSegmentRisk10": 7.38,
+        "worstSegmentRisk10": 7.96,
         "semanticScore10": 10,
         "recommendation": "Tune the onset segment first: onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment."
       },
@@ -680,40 +751,58 @@
           "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-challenge-perfect.json",
           "status": "candidate-recommended",
           "keep": true,
-          "best": "perfect-onset-body-ceremony-tail",
+          "best": "perfect-clean-onset-soft-tail",
           "measuredBest": "perfect-onset-body",
           "reason": "Challenge Perfect candidate clears measured calibrated role/segment keeper gates."
         },
         "promotionPrecheck": {
-          "artifact": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-17-612f086f-dirty-020503-challengePerfect/report.json",
+          "artifact": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-17-f9e7374c-dirty-125722-challengePerfect/report.json",
           "status": "precheck-trial-allowed",
           "allowRuntimeTrial": true,
           "promoteRuntime": false,
           "blockers": [],
           "wins": [
-            "Full-theme cue gap improves by 1.5/10.",
-            "Worst segment risk improves by 0.57/10."
+            "Full-theme cue gap improves by 6.71/10.",
+            "Worst segment risk improves by 3.48/10.",
+            "Theme average worst-segment risk improves by 0.17/10."
+          ]
+        },
+        "promotionStabilityGate": {
+          "artifact": "reference-artifacts/analyses/aurora-audio-promotion-stability-gate/latest.json",
+          "status": "global-promotion-blocked",
+          "allowRuntimeTrial": false,
+          "promoteRuntime": false,
+          "globalPromotionBlocked": true,
+          "blockers": [
+            "Global audio scoring is unstable (19/21 cues volatile; most volatile captureBeam 3.89/10), so runtime promotion is blocked until scorer/capture stability improves."
+          ],
+          "warnings": [
+            "Cue is volatile across repeated full-theme reads (2.49/10 range); single-run wins must clear the noise floor."
+          ],
+          "wins": [
+            "Cue gap win 6.71/10 clears 1.88/10 stability threshold.",
+            "Worst-segment win 3.48/10 clears 1.41/10 stability threshold."
           ]
         },
         "runtimeTrial": {
-          "artifact": "reference-artifacts/analyses/aurora-audio-runtime-trials/2026-05-17-612f086f-dirty-021812-challenge-perfect-rejected/report.json",
+          "artifact": "reference-artifacts/analyses/aurora-audio-runtime-trials/2026-05-17-f9e7374c-dirty-123945-challenge-perfect-rejected/report.json",
           "status": "runtime-trial-rejected",
           "promoteRuntime": false,
-          "candidate": "perfect-onset-body-separated-soft-tail",
-          "reason": "Runtime Challenge Perfect candidates remain rejected after confirmation: focused keepers and prechecks can look promising, but repeated live full-theme captures are volatile; runtime was reverted to the stable reference phrase while activity-span and calibrated segment gates remain in the harness.",
+          "candidate": "perfect-clean-onset-soft-tail",
+          "reason": "Challenge Perfect runtime trial rejected: the focused/stability-gated candidate improved the average worst-segment rollup, but live full-theme recapture worsened Challenge Perfect itself to 7.7/10 as the highest audio risk, so this is preserved as generator evidence and not promoted.",
           "currentAudioScore10": 7.2,
-          "currentHighestRiskCue": "challengeTransition",
-          "currentHighestRisk10": 4.28,
-          "nextStep": "Do not promote Challenge Perfect runtime audio yet. Keep the new harness evidence, stabilize repeated full-theme capture, then compare bossHit, challengeTransition, and gameOver for the next best audio return."
+          "currentHighestRiskCue": "challengePerfect",
+          "currentHighestRisk10": 7.7,
+          "nextStep": "Do not promote Challenge Perfect from isolated onset/body candidates. Replace the next audio strategy with full-phrase/segment-boundary work: stabilize the scorer on canonical reference-vs-reference capture, then generate candidates that optimize onset, body, tail, and live capture segmentation together."
         }
       },
       "status": "runtime-trial-rejected",
-      "recommendation": "Do not promote Challenge Perfect runtime audio yet. Keep the new harness evidence, stabilize repeated full-theme capture, then compare bossHit, challengeTransition, and gameOver for the next best audio return.",
+      "recommendation": "Do not promote Challenge Perfect from isolated onset/body candidates. Replace the next audio strategy with full-phrase/segment-boundary work: stabilize the scorer on canonical reference-vs-reference capture, then generate candidates that optimize onset, body, tail, and live capture segmentation together.",
       "nextLearningQuestions": [
         "Do we need separate perfect-result scoring for audio and score-surface animation?"
       ]
     }
   ],
   "processPosition": "The audio process now separates contract readiness from runtime promotion. Current evidence says contracts can guide the next candidate cycle, but no cue should ship from synthetic or focused evidence alone.",
-  "nextStep": "Do not promote Challenge Perfect runtime audio yet. Keep the new harness evidence, stabilize repeated full-theme capture, then compare bossHit, challengeTransition, and gameOver for the next best audio return."
+  "nextStep": "Do not promote Challenge Perfect from isolated onset/body candidates. Replace the next audio strategy with full-phrase/segment-boundary work: stabilize the scorer on canonical reference-vs-reference capture, then generate candidates that optimize onset, body, tail, and live capture segmentation together."
 }

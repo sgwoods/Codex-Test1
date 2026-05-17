@@ -565,6 +565,10 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
   const audioRuntimeTrial = audioRuntimeTrialPath ? readJson(audioRuntimeTrialPath) : null;
   const audioRiskStabilityPath = latestReport('aurora-audio-risk-stability');
   const audioRiskStability = audioRiskStabilityPath ? readJson(audioRiskStabilityPath) : null;
+  const audioPromotionStabilityGatePath = latestReport('aurora-audio-promotion-stability-gate');
+  const audioPromotionStabilityGate = audioPromotionStabilityGatePath ? readJson(audioPromotionStabilityGatePath) : null;
+  const audioStrategyReviewPath = latestReport('aurora-audio-strategy-review');
+  const audioStrategyReview = audioStrategyReviewPath ? readJson(audioStrategyReviewPath) : null;
   const stagePulsePath = latestReport('aurora-stage-pulse-cadence');
   const stagePulse = stagePulsePath ? readJson(stagePulsePath) : null;
   const rows = [
@@ -650,6 +654,34 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
     }),
     ingestionRow({
       rank: 7,
+      source: 'Aurora audio promotion stability gate',
+      axis: 'audio promotion safety / variance-aware gating',
+      artifactType: 'candidate, precheck, event-gap, and stability join',
+      coverage: audioPromotionStabilityGate
+        ? `${audioPromotionStabilityGate.summary?.cueCount || 0} cues; ${audioPromotionStabilityGate.summary?.runtimeTrialAllowedCount || 0} runtime trials allowed; ${audioPromotionStabilityGate.summary?.rejectedCount || 0} stability rejections`
+        : 'pending',
+      annotationStatus: audioPromotionStabilityGate ? 'variance-gated' : 'pending',
+      confidence: audioPromotionStabilityGate ? 'medium-high' : 'low',
+      linkedMetric: 'Audio identity, event feedback, and cue alignment',
+      anchor: audioPromotionStabilityGatePath ? rel(audioPromotionStabilityGatePath) : 'reference-artifacts/analyses/aurora-audio-promotion-stability-gate',
+      next: audioPromotionStabilityGate?.nextStep || 'Join focused candidates to repeated-read stability before trying another runtime cue promotion.'
+    }),
+    ingestionRow({
+      rank: 8,
+      source: 'Aurora audio strategy review',
+      axis: 'audio conformance strategy / failure analysis',
+      artifactType: 'diagnosis, revised strategy, and next calibration experiment',
+      coverage: audioStrategyReview
+        ? `${audioStrategyReview.diagnosis?.length || 0} diagnoses; ${audioStrategyReview.revisedStrategy?.length || 0} strategy changes; next ${audioStrategyReview.currentEvidence?.highestRiskCue || 'n/a'}`
+        : 'pending',
+      annotationStatus: audioStrategyReview ? 'strategy-reviewed' : 'pending',
+      confidence: audioStrategyReview ? 'medium-high' : 'low',
+      linkedMetric: 'Audio identity, event feedback, and cue alignment',
+      anchor: audioStrategyReviewPath ? rel(audioStrategyReviewPath) : 'reference-artifacts/analyses/aurora-audio-strategy-review',
+      next: audioStrategyReview?.nextExperiment || 'Run the audio strategy review after candidate/precheck/runtime-trial evidence changes.'
+    }),
+    ingestionRow({
+      rank: 9,
       source: 'Aurora stagePulse cadence pressure analysis',
       axis: 'formation pressure / cadence audio',
       artifactType: 'tracked cadence pressure axes from full audio comparison',
@@ -663,7 +695,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: stagePulse?.nextStep || 'Generate cadence-specific candidates and require both repeated focus gates and full audio-theme comparison before runtime promotion.'
     }),
     ingestionRow({
-      rank: 8,
+      rank: 10,
       source: 'Boss entry and formation grammar scorer',
       axis: 'formation grammar / boss entry / challenge identity',
       artifactType: 'event grammar, timing, stage-signature, and measurement-debt report',
@@ -677,7 +709,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Promote frame-level boss/escort path traces and formation rack slot coordinates so visual choreography can be scored directly.'
     }),
     ingestionRow({
-      rank: 9,
+      rank: 11,
       source: 'Level arc and encounter-shape evidence',
       axis: 'level arc / challenge / reward',
       artifactType: 'stage signatures, pressure windows, persona reports',
@@ -689,7 +721,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Add more long-play reference windows and expert-route scoring for challenge/reward opportunities.'
     }),
     ingestionRow({
-      rank: 10,
+      rank: 12,
       source: 'Stage 4 pressure and loss-window diagnostics',
       axis: 'pressure / fairness',
       artifactType: 'loss windows, replay geometry, collision traces',
@@ -701,7 +733,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Improve exact replay matching and preserve per-frame attacker/player/shot geometry for candidate tuning.'
     }),
     ingestionRow({
-      rank: 11,
+      rank: 13,
       source: 'Aurora visual look screenshots',
       axis: 'visual look / UI readability',
       artifactType: 'browser screenshots plus DOM/canvas metrics',
@@ -713,7 +745,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Add Galaga-family visual contact-sheet comparison, sprite readability labels, and model-assisted visual critique.'
     }),
     ingestionRow({
-      rank: 12,
+      rank: 14,
       source: 'Aurora evidence-cycle windows',
       axis: 'general ingestion framework',
       artifactType: 'manifests, contact sheets, traces, event logs, audio timelines',
@@ -725,7 +757,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Refresh evidence-cycle dashboard and promote window status into a canonical reference-corpus manifest.'
     }),
     ingestionRow({
-      rank: 13,
+      rank: 15,
       source: 'Reference manifests and event logs inventory',
       axis: 'source provenance / annotation coverage',
       artifactType: 'source-manifest.json and reference-events.json',
@@ -737,7 +769,7 @@ function buildIngestionRows({ quality, audio, levelArc, visualLook, qualityPath,
       next: 'Normalize provenance, duration, source confidence, and linked metric fields into a generated corpus manifest.'
     }),
     ingestionRow({
-      rank: 14,
+      rank: 16,
       source: 'Reference contact sheets and frame evidence',
       axis: 'visual / motion / entry formation',
       artifactType: 'contact sheets and still frames',

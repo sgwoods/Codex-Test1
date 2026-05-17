@@ -21,7 +21,9 @@ const CANDIDATE_FILES = Object.freeze({
   bossBoom: 'latest-boss-boom.json',
   rescueJoin: 'latest-rescue-join.json',
   playerHit: 'latest-player-hit-focus.json',
-  challengePerfect: 'latest-challenge-perfect.json'
+  challengePerfect: 'latest-challenge-perfect.json',
+  challengeTransition: 'latest-challenge-transition.json',
+  gameOver: 'latest-game-over.json'
 });
 
 function ensureDir(dir){

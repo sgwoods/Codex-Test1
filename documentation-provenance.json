@@ -185,7 +185,10 @@
             "application-guide.json",
             "src/js/13-aurora-game-pack.js",
             "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json",
-            "reference-artifacts/analyses/aurora-audio-event-gap/latest.json"
+            "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
+            "reference-artifacts/analyses/aurora-audio-promotion-stability-gate/latest.json",
+            "reference-artifacts/analyses/aurora-audio-strategy-review/latest.json",
+            "AUDIO_CONFORMANCE_STRATEGY_REVIEW.md"
           ],
           "currentness": "Guide rows are generated from application-guide.json and freshness-checked against runtime audio cue durations.",
           "riskIfStale": "Audio review buttons and event descriptions can drift away from runtime cues."
