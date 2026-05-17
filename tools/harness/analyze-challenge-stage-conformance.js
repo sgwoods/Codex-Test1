@@ -39,7 +39,13 @@ const STAGE_INTENT = {
   15: {
     challengeNumber: 4,
     windowId: 'challenge-stage-pink-serpentine',
-    expectedReferenceLabels: ['challenge-4-pink-serpentine-group-1'],
+    expectedReferenceLabels: [
+      'challenge-4-pink-serpentine-group-1',
+      'challenge-4-pink-serpentine-group-2',
+      'challenge-4-pink-serpentine-group-3',
+      'challenge-4-pink-serpentine-group-4',
+      'challenge-4-pink-serpentine-group-5'
+    ],
     expectedReferenceSemantics: ['pink', 'serpentine'],
     target: 'Fourth challenge should shift into long specialty serpentine arcs with obvious new color/family identity while staying nonlethal.',
     criticalExpectation: 'Should feel like the first truly late-stage set piece, not a boss-led remix of earlier challenge stages.'
@@ -47,7 +53,13 @@ const STAGE_INTENT = {
   19: {
     challengeNumber: 5,
     windowId: 'challenge-stage-pink-green-cascade',
-    expectedReferenceLabels: ['challenge-5-pink-green-cascade-group-1'],
+    expectedReferenceLabels: [
+      'challenge-5-pink-green-cascade-group-1',
+      'challenge-5-pink-green-cascade-group-2',
+      'challenge-5-pink-green-cascade-group-3',
+      'challenge-5-pink-green-cascade-group-4',
+      'challenge-5-pink-green-cascade-group-5'
+    ],
     expectedReferenceSemantics: ['pink', 'green', 'cascade'],
     target: 'Fifth challenge should distinguish itself with pink/green cascade motion, alternating group identity, and stronger lower-field pass readability.',
     criticalExpectation: 'Should prove that late challenge progression is authored stage by stage, not repeated from Challenge 4.'
@@ -83,7 +95,13 @@ const STAGE_INTENT = {
   31: {
     challengeNumber: 8,
     windowId: 'challenge-stage-blue-purple-finale',
-    expectedReferenceLabels: ['challenge-8-blue-purple-finale-group-1'],
+    expectedReferenceLabels: [
+      'challenge-8-blue-purple-finale-group-1',
+      'challenge-8-blue-purple-finale-group-2',
+      'challenge-8-blue-purple-finale-group-3',
+      'challenge-8-blue-purple-finale-group-4',
+      'challenge-8-blue-purple-finale-group-5'
+    ],
     expectedReferenceSemantics: ['blue', 'purple', 'finale'],
     target: 'Eighth visible challenge should act as a compact blue/purple late-loop capstone.',
     criticalExpectation: 'Should avoid returning to early-stage column/cross vocabulary and make the late-loop identity obvious.'
@@ -225,6 +243,16 @@ function referenceLabelForStage(stage, intent, match, referenceLabels){
   const expected = (intent.expectedReferenceLabels || [])
     .map(labelId => referenceLabels.find(label => label.labelId === labelId))
     .filter(Boolean);
+  if(expected.length && match?.runtimeVector){
+    const closestExpected = expected
+      .filter(label => label.comparisonVector)
+      .map(label => ({
+        label,
+        fit: trajectoryFit(match.runtimeVector, label.comparisonVector)
+      }))
+      .sort((a, b) => b.fit.rawFit - a.fit.rawFit || a.label.labelId.localeCompare(b.label.labelId))[0];
+    if(closestExpected) return closestExpected.label;
+  }
   if(bestLabel && intent.expectedReferenceLabels.includes(bestLabel)){
     return referenceLabels.find(label => label.labelId === bestLabel) || expected[0] || null;
   }
@@ -488,6 +516,7 @@ function summarizeSpriteMotion(samples, runtime){
   const phaseCoverage = clamp(phaseBuckets.size / 6);
   const poseDiversity = clamp(pathFamilies.length / 4);
   const visualFamilyDiversity = clamp(families.length / 4);
+  const objectTrackedPixelSilhouette = summarizeObjectTrackedSilhouettes(samples);
   const activeMotionCoverage = clamp(
     (0.32 * flapCycle)
     + (0.28 * phaseCoverage)
@@ -495,9 +524,12 @@ function summarizeSpriteMotion(samples, runtime){
     + (0.12 * poseDiversity)
     + (0.08 * visualFamilyDiversity)
   );
+  const combinedMotionCoverage = clamp((activeMotionCoverage * 0.72) + ((objectTrackedPixelSilhouette.coverage || 0) * 0.28));
   return {
-    score10: round(1 + activeMotionCoverage * 4.2, 1),
+    score10: round(1 + combinedMotionCoverage * 4.6, 1),
     activeMotionCoverage: round(activeMotionCoverage, 3),
+    combinedMotionCoverage: round(combinedMotionCoverage, 3),
+    objectTrackedPixelSilhouette,
     flapCycleObserved: !!flapCycle,
     flapStates: Array.from(flapStates).sort(),
     phaseBucketCount: phaseBuckets.size,
@@ -507,13 +539,175 @@ function summarizeSpriteMotion(samples, runtime){
     poseDiversity: round(poseDiversity, 3),
     visualFamilyDiversity: round(visualFamilyDiversity, 3),
     measurementLimits: [
-      'This is an active runtime animation-phase hook, not object-tracked sprite-pixel conformance.',
-      'It observes flap phase, family diversity, and path-pose diversity inside challenge windows, but it does not yet compare per-frame silhouettes to Galaga target crops.'
+      'This now includes object-tracked runtime pixel/silhouette observations, but it is not yet full Galaga reference-frame silhouette matching.',
+      'It observes flap phase, family diversity, path-pose diversity, and per-object lit-pixel/bounding-box variation inside challenge windows; target crop comparison in motion remains the next precision step.'
     ],
     read: active.length
-      ? `Runtime sprite-motion hook observed ${families.length} visual family/families, ${pathFamilies.length} path pose family/families, ${phaseBuckets.size}/6 animation phase buckets, and ${flapCycle ? 'both' : 'one'} flap state(s).`
+      ? `Runtime sprite-motion hook observed ${families.length} visual family/families, ${pathFamilies.length} path pose family/families, ${phaseBuckets.size}/6 animation phase buckets, ${flapCycle ? 'both' : 'one'} flap state(s), and ${objectTrackedPixelSilhouette.trackedObjectCount || 0} object-tracked silhouette track(s).`
       : 'Runtime sprite-motion hook found no active challenge enemies in sampled windows.',
     runtimeLayoutId: runtime?.layout?.id || null
+  };
+}
+
+function summarizeObjectTrackedSilhouettes(samples){
+  const observations = (samples || []).flatMap(sample => (sample.positions || [])
+    .filter(pos => pos.silhouette?.ok)
+    .map(pos => ({
+      id: pos.id,
+      t: +sample.t || 0,
+      wave: pos.wave,
+      lane: pos.lane,
+      family: pos.family,
+      pathFamily: pos.pathFamily,
+      x: +pos.x,
+      y: +pos.y,
+      litPixels: +pos.silhouette.litPixels || 0,
+      fillRatio: +pos.silhouette.fillRatio || 0,
+      bboxFillRatio: +pos.silhouette.bboxFillRatio || 0,
+      bboxAspect: +pos.silhouette.bboxAspect || 0,
+      occupancyHash: pos.silhouette.occupancyHash || ''
+    })));
+  if(!observations.length){
+    return {
+      score10: 1,
+      coverage: 0,
+      trackedObjectCount: 0,
+      trackedFrameCount: 0,
+      read: 'Object-tracked pixel/silhouette probe found no measurable lit challenge sprites.'
+    };
+  }
+  const byId = new Map();
+  for(const item of observations){
+    if(!byId.has(item.id)) byId.set(item.id, []);
+    byId.get(item.id).push(item);
+  }
+  const tracks = Array.from(byId.values())
+    .map(track => track.sort((a, b) => a.t - b.t))
+    .filter(track => track.length);
+  const repeatedTracks = tracks.filter(track => track.length >= 2);
+  const trackDiversity = clamp(repeatedTracks.length / 12);
+  const readableFill = clamp(average(observations.map(item => item.bboxFillRatio)) / 0.35);
+  const litStability = clamp(1 - ((average(observations.map(item => Math.abs(item.fillRatio - 0.1))) || 0) / 0.16));
+  const hashChangeShare = repeatedTracks.length
+    ? average(repeatedTracks.map(track => {
+      const hashes = new Set(track.map(item => item.occupancyHash).filter(Boolean));
+      return clamp(hashes.size / Math.max(2, track.length));
+    }))
+    : 0;
+  const bboxVariation = repeatedTracks.length
+    ? average(repeatedTracks.map(track => {
+      const aspects = track.map(item => item.bboxAspect).filter(Number.isFinite);
+      const fills = track.map(item => item.bboxFillRatio).filter(Number.isFinite);
+      const aspectRange = aspects.length ? Math.max(...aspects) - Math.min(...aspects) : 0;
+      const fillRange = fills.length ? Math.max(...fills) - Math.min(...fills) : 0;
+      return clamp((aspectRange / 0.9) + (fillRange / 0.45));
+    }))
+    : 0;
+  const coverage = clamp(
+    (0.34 * trackDiversity)
+    + (0.22 * readableFill)
+    + (0.18 * litStability)
+    + (0.16 * hashChangeShare)
+    + (0.1 * bboxVariation)
+  );
+  const topTracks = tracks
+    .sort((a, b) => b.length - a.length || String(a[0]?.id).localeCompare(String(b[0]?.id)))
+    .slice(0, 6)
+    .map(track => ({
+      id: track[0].id,
+      family: track[0].family,
+      pathFamily: track[0].pathFamily,
+      wave: track[0].wave,
+      lane: track[0].lane,
+      frameCount: track.length,
+      litPixelsMean: round(average(track.map(item => item.litPixels)), 1),
+      fillRatioRange: round(Math.max(...track.map(item => item.fillRatio)) - Math.min(...track.map(item => item.fillRatio)), 4),
+      bboxAspectRange: round(Math.max(...track.map(item => item.bboxAspect)) - Math.min(...track.map(item => item.bboxAspect)), 4),
+      hashStates: new Set(track.map(item => item.occupancyHash).filter(Boolean)).size,
+      points: track.map(item => ({
+        t: round(item.t, 2),
+        x: round(item.x, 1),
+        y: round(item.y, 1),
+        fill: round(item.bboxFillRatio, 3),
+        aspect: round(item.bboxAspect, 3)
+      }))
+    }));
+  return {
+    score10: round(1 + coverage * 4.8, 1),
+    coverage: round(coverage, 3),
+    trackedObjectCount: tracks.length,
+    repeatedTrackCount: repeatedTracks.length,
+    trackedFrameCount: observations.length,
+    trackDiversity: round(trackDiversity, 3),
+    readableFill: round(readableFill, 3),
+    litStability: round(litStability, 3),
+    hashChangeShare: round(hashChangeShare, 3),
+    bboxVariation: round(bboxVariation, 3),
+    topTracks,
+    read: `Object-tracked silhouette probe measured ${observations.length} sprite crops across ${tracks.length} object track(s); ${repeatedTracks.length} track(s) persisted across multiple samples, with ${round(hashChangeShare, 2)} hash-change share and ${round(bboxVariation, 2)} bounding-box variation.`
+  };
+}
+
+function summarizeShotOpportunity(samples){
+  const lanes = [32, 68, 104, 140, 176, 212, 248];
+  const laneRows = lanes.map(x => ({ x, hits: 0, windows: 0, maxTargets: 0, lowerTargets: 0 }));
+  const windowReads = [];
+  for(const sample of samples || []){
+    const active = (sample.positions || []).filter(pos => Number.isFinite(+pos.x) && Number.isFinite(+pos.y) && +pos.y >= 46 && +pos.y <= 302);
+    if(!active.length) continue;
+    const laneCounts = lanes.map((x, index) => {
+      const targets = active.filter(pos => Math.abs(+pos.x - x) <= 13 + Math.max(0, (+pos.y - 90) / 32));
+      laneRows[index].hits += targets.length;
+      laneRows[index].maxTargets = Math.max(laneRows[index].maxTargets, targets.length);
+      laneRows[index].lowerTargets += targets.filter(pos => +pos.y > 170).length;
+      if(targets.length) laneRows[index].windows += 1;
+      return { x, targets: targets.length };
+    });
+    const best = laneCounts.slice().sort((a, b) => b.targets - a.targets)[0];
+    windowReads.push({
+      t: +sample.t || 0,
+      activeCount: active.length,
+      bestLaneX: best?.x || null,
+      bestLaneTargets: best?.targets || 0,
+      laneCounts
+    });
+  }
+  if(!windowReads.length){
+    return {
+      score10: 1,
+      coverage: 0,
+      read: 'Shot-opportunity probe found no active scoreable challenge targets.'
+    };
+  }
+  const activeWindows = windowReads.length;
+  const multiTargetWindowShare = windowReads.filter(row => row.bestLaneTargets >= 2).length / activeWindows;
+  const laneDiversity = laneRows.filter(row => row.windows > 0).length / lanes.length;
+  const maxCluster = clamp(Math.max(...laneRows.map(row => row.maxTargets)) / 6);
+  const lowerFieldRead = clamp(laneRows.reduce((sum, row) => sum + row.lowerTargets, 0) / Math.max(1, laneRows.reduce((sum, row) => sum + row.hits, 0)));
+  const centerBias = laneRows[3].hits / Math.max(1, laneRows.reduce((sum, row) => sum + row.hits, 0));
+  const laneSpreadCredit = clamp(1 - Math.max(0, centerBias - 0.42) / 0.58);
+  const coverage = clamp(
+    (0.3 * multiTargetWindowShare)
+    + (0.24 * laneDiversity)
+    + (0.2 * maxCluster)
+    + (0.14 * lowerFieldRead)
+    + (0.12 * laneSpreadCredit)
+  );
+  return {
+    score10: round(1 + coverage * 5.4, 1),
+    coverage: round(coverage, 3),
+    activeWindows,
+    multiTargetWindowShare: round(multiTargetWindowShare, 3),
+    laneDiversity: round(laneDiversity, 3),
+    maxCluster: round(maxCluster, 3),
+    lowerFieldRead: round(lowerFieldRead, 3),
+    centerBias: round(centerBias, 3),
+    laneSpreadCredit: round(laneSpreadCredit, 3),
+    laneRows: laneRows.map(row => Object.assign({}, row, {
+      laneShare: round(row.hits / Math.max(1, laneRows.reduce((sum, item) => sum + item.hits, 0)), 3)
+    })),
+    windowReads,
+    read: `Shot-opportunity probe found scoreable targets in ${activeWindows} sampled windows; ${round(multiTargetWindowShare * 100, 0)}% had a lane with 2+ targets, lane diversity was ${round(laneDiversity, 2)}, and center-lane bias was ${round(centerBias, 2)}.`
   };
 }
 
@@ -528,22 +722,25 @@ function strictGraphicsRead(stage, runtime, expectedHit){
   const contractCredit = classicLineContract && expectedHit ? 0.18 : 0;
   const spriteMotion = runtime?.spriteMotion || summarizeSpriteMotion(runtime?.samples || [], runtime);
   const measuredRuntimeSpriteMotionCoverage = spriteMotion.activeMotionCoverage || 0;
-  const activeMotionCap = measuredRuntimeSpriteMotionCoverage ? 3.6 : 2.2;
-  const spriteMotionCredit = measuredRuntimeSpriteMotionCoverage * 0.36;
+  const objectSilhouetteCoverage = spriteMotion.objectTrackedPixelSilhouette?.coverage || 0;
+  const activeMotionCap = objectSilhouetteCoverage ? 4.2 : (measuredRuntimeSpriteMotionCoverage ? 3.6 : 2.2);
+  const spriteMotionCredit = (measuredRuntimeSpriteMotionCoverage * 0.28) + (objectSilhouetteCoverage * 0.36);
   const score10 = round(Math.min(activeMotionCap, 1 + (4.0 * (typeMixCredit + familyCredit + contractCredit + spriteMotionCredit))), 1);
   return {
     score10,
     activeMotionCap,
     measuredRuntimeSpriteMotionCoverage,
+    objectSilhouetteCoverage,
     spriteMotion,
     components: {
       alienTypeMix: round(typeMixCredit, 3),
       visualFamilyNovelty: round(familyCredit, 3),
       firstChallengeLineContract: round(contractCredit, 3),
       activeSpriteMotionCoverage: measuredRuntimeSpriteMotionCoverage,
+      objectTrackedPixelSilhouetteCoverage: objectSilhouetteCoverage,
       spriteMotionCredit: round(spriteMotionCredit, 3)
     },
-    read: `Strict graphics score ${score10}/10. Current visible family/type labels are present and ${spriteMotion.read} Graphics remain capped at ${activeMotionCap}/10 until live silhouettes, rotations, dive poses, capture/rescue transitions, and Galaga target sprite crops are scored in motion.`
+    read: `Strict graphics score ${score10}/10. Current visible family/type labels are present and ${spriteMotion.read} Graphics remain capped at ${activeMotionCap}/10 until object tracks are compared frame-by-frame to Galaga target sprite crops, rotations, dive poses, and capture/rescue transitions.`
   };
 }
 
@@ -647,6 +844,83 @@ async function runtimeProbeForStage(stage){
       });
       const samples = [];
       let previous = 0;
+      const captureSilhouette = (enemy) => {
+        const canvas = document.getElementById('c');
+        const frame = document.getElementById('playfieldFrame');
+        if(!canvas || !frame) return { ok: false, reason: 'canvas-or-frame-missing' };
+        const ctx = canvas.getContext('2d');
+        const canvasRect = canvas.getBoundingClientRect();
+        const frameRect = frame.getBoundingClientRect();
+        const scaleX = (frameRect.width - 4) / 280;
+        const scaleY = (frameRect.height - 4) / 360;
+        const playW = enemy.type === 'boss' ? 62 : enemy.type === 'but' ? 54 : 50;
+        const playH = enemy.type === 'boss' ? 52 : enemy.type === 'but' ? 46 : 44;
+        const left = frameRect.left + 2 + ((+enemy.x || 0) - playW / 2) * scaleX;
+        const top = frameRect.top + 2 + ((+enemy.y || 0) - playH / 2) * scaleY;
+        const width = playW * scaleX;
+        const height = playH * scaleY;
+        const sx = Math.max(0, Math.floor((left - canvasRect.left) * (canvas.width / canvasRect.width)));
+        const sy = Math.max(0, Math.floor((top - canvasRect.top) * (canvas.height / canvasRect.height)));
+        const sw = Math.max(1, Math.min(canvas.width - sx, Math.floor(width * (canvas.width / canvasRect.width))));
+        const sh = Math.max(1, Math.min(canvas.height - sy, Math.floor(height * (canvas.height / canvasRect.height))));
+        if(sw <= 0 || sh <= 0) return { ok: false, reason: 'empty-clip' };
+        const image = ctx.getImageData(sx, sy, sw, sh);
+        const data = image.data;
+        const isLit = (px, py) => {
+          const i = (py * sw + px) * 4;
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+          const a = data[i + 3];
+          return a > 0 && r + g + b > 105 && Math.max(r, g, b) > 42;
+        };
+        let litPixels = 0;
+        let minX = sw;
+        let minY = sh;
+        let maxX = -1;
+        let maxY = -1;
+        for(let py = 0; py < sh; py += 1){
+          for(let px = 0; px < sw; px += 1){
+            if(!isLit(px, py)) continue;
+            litPixels += 1;
+            minX = Math.min(minX, px);
+            minY = Math.min(minY, py);
+            maxX = Math.max(maxX, px);
+            maxY = Math.max(maxY, py);
+          }
+        }
+        if(maxX < 0) return { ok: false, reason: 'no-lit-pixels', sx, sy, sw, sh, litPixels };
+        const bw = Math.max(1, maxX - minX + 1);
+        const bh = Math.max(1, maxY - minY + 1);
+        const gridCols = 8;
+        const gridRows = 6;
+        const bits = [];
+        for(let gy = 0; gy < gridRows; gy += 1){
+          for(let gx = 0; gx < gridCols; gx += 1){
+            const x0 = Math.floor(gx * sw / gridCols);
+            const x1 = Math.max(x0 + 1, Math.floor((gx + 1) * sw / gridCols));
+            const y0 = Math.floor(gy * sh / gridRows);
+            const y1 = Math.max(y0 + 1, Math.floor((gy + 1) * sh / gridRows));
+            let lit = 0;
+            for(let py = y0; py < y1; py += 1){
+              for(let px = x0; px < x1; px += 1){
+                if(isLit(px, py)) lit += 1;
+              }
+            }
+            bits.push(lit / Math.max(1, (x1 - x0) * (y1 - y0)) > 0.045 ? '1' : '0');
+          }
+        }
+        return {
+          ok: true,
+          litPixels,
+          fillRatio: +(litPixels / Math.max(1, sw * sh)).toFixed(4),
+          bboxFillRatio: +(litPixels / Math.max(1, bw * bh)).toFixed(4),
+          bboxAspect: +(bw / bh).toFixed(3),
+          bbox: { x: minX, y: minY, width: bw, height: bh },
+          clip: { x: sx, y: sy, width: sw, height: sh },
+          occupancyHash: bits.join('')
+        };
+      };
       for(const t of sampleTimes){
         const delta = Math.max(0, t - previous);
         if(delta) h.advanceFor(delta, { step: 1 / 60, stopOnGameOver: false });
@@ -668,13 +942,15 @@ async function runtimeProbeForStage(stage){
             id: e.id,
             wave: e.wave,
             lane: e.lane,
+            type: e.type,
             family: e.family,
             pathFamily: e.pathFamily,
             tm: +(+e.tm || 0).toFixed(3),
             flapOpen: e.flapOpen === true,
             animationPhase: +(+e.animationPhase || 0).toFixed(3),
             x: +(+e.x || 0).toFixed(2),
-            y: +(+e.y || 0).toFixed(2)
+            y: +(+e.y || 0).toFixed(2),
+            silhouette: captureSilhouette(e)
           }))
         });
       }
@@ -721,6 +997,7 @@ async function collectRuntimeProbes(){
     probe.motionSummary = summarizeMotion(probe.samples || []);
     probe.motionVector = normalizeRuntimeMotion(probe.samples || []);
     probe.spriteMotion = summarizeSpriteMotion(probe.samples || [], probe);
+    probe.shotOpportunity = summarizeShotOpportunity(probe.samples || []);
     rows.push(probe);
   }
   return rows;
@@ -761,15 +1038,18 @@ function stageScore(stage, runtime, match, referenceLabels){
   const graphics = strictGraphicsRead(stage, runtime, expectedHit);
   const alienNovelty = strictAlienNoveltyRead(stage, runtime, { groupIdentity: group }, expectedHit, lateReferenceGap);
   const progression = stageProgressionRead(stage, runtime, expectedHit, lateReferenceGap);
+  const shotOpportunity = runtime?.shotOpportunity || summarizeShotOpportunity(runtime?.samples || []);
   const safetyRuleScore10 = safetyPass ? 10 : 1;
-  const conformanceRaw = (0.38 * movement.score10)
-    + (0.27 * graphics.score10)
-    + (0.2 * alienNovelty.score10)
-    + (0.15 * progression.score10);
-  const interestRaw = (0.35 * movement.score10)
-    + (0.28 * graphics.score10)
-    + (0.22 * alienNovelty.score10)
-    + (0.15 * progression.score10);
+  const conformanceRaw = (0.34 * movement.score10)
+    + (0.25 * graphics.score10)
+    + (0.18 * alienNovelty.score10)
+    + (0.13 * progression.score10)
+    + (0.1 * shotOpportunity.score10);
+  const interestRaw = (0.31 * movement.score10)
+    + (0.25 * graphics.score10)
+    + (0.19 * alienNovelty.score10)
+    + (0.13 * progression.score10)
+    + (0.12 * shotOpportunity.score10);
   const strictScore = safetyPass ? conformanceRaw : Math.min(1.5, conformanceRaw);
   const strictInterest = safetyPass ? interestRaw : Math.min(1.5, interestRaw);
   return {
@@ -780,12 +1060,14 @@ function stageScore(stage, runtime, match, referenceLabels){
     graphicalConformanceScore10: graphics.score10,
     alienNoveltyScore10: alienNovelty.score10,
     progressionConformanceScore10: progression.score10,
+    playerShotOpportunityScore10: shotOpportunity.score10,
     safetyRuleScore10,
     strictAxisReads: {
       movement,
       graphics,
       alienNovelty,
-      progression
+      progression,
+      shotOpportunity
     },
     scoreComponents: {
       baseline: base,
@@ -793,6 +1075,7 @@ function stageScore(stage, runtime, match, referenceLabels){
       graphicalConformance: graphics.score10,
       alienNovelty: alienNovelty.score10,
       stageProgression: progression.score10,
+      playerShotOpportunity: shotOpportunity.score10,
       safetyRule: safetyRuleScore10,
       legacyCoverageScore: round(oldCoverageScore, 1)
     },
@@ -812,10 +1095,13 @@ function criticalGaps(stage, runtime, match, score){
     gaps.push(`Movement conformance is only ${score.movementConformanceScore10}/10 under the strict scorer: current paths are too short/shallow and do not yet show the sweeping, turning, learnable Galaga challenge-stage trajectories.`);
   }
   if((score.graphicalConformanceScore10 || 1) < 4){
-    gaps.push(`Graphical conformance is only ${score.graphicalConformanceScore10}/10 because challenge sprites are still scored as static/type labels; active flapping, pulsing, dive/rotation silhouettes, and reference sprite crops are not yet measured in the challenge window.`);
+    gaps.push(`Graphical conformance is only ${score.graphicalConformanceScore10}/10: runtime object-track silhouettes are now measured, but they are not yet matched frame-by-frame against Galaga target sprite crops, rotations, dive poses, and pulsing/flapping cadence.`);
   }
   if((score.alienNoveltyScore10 || 1) < 4){
     gaps.push(`Alien/stage novelty is only ${score.alienNoveltyScore10}/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.`);
+  }
+  if((score.playerShotOpportunityScore10 || 1) < 4){
+    gaps.push(`Player shot-opportunity read is only ${score.playerShotOpportunityScore10}/10: current sampled lanes do not yet prove the challenge has a clear learnable high-bonus firing route rather than incidental hits.`);
   }
   if(stage === 3){
     const types = typeSet(runtime?.firstWave || []);
@@ -908,10 +1194,11 @@ function nextActionsForStage(stage){
 function makeStageRow(stage, runtime, match, referenceLabels){
   const intent = STAGE_INTENT[stage];
   const bestLabel = match?.bestMatch?.labelId || '';
-  const referenceTarget = referenceLabels.find(label => label.labelId === bestLabel)
+  const score = stageScore(stage, runtime, match, referenceLabels);
+  const referenceTarget = referenceLabelForStage(stage, intent, match, referenceLabels)
+    || referenceLabels.find(label => label.labelId === bestLabel)
     || referenceLabels.find(label => intent.expectedReferenceLabels.includes(label.labelId))
     || null;
-  const score = stageScore(stage, runtime, match, referenceLabels);
   const firstWave = runtime?.firstWave || [];
   return {
     stage,
@@ -940,7 +1227,7 @@ function makeStageRow(stage, runtime, match, referenceLabels){
     } : null,
     motionProbe: runtime ? runtime.motionSummary : null,
     currentRead: runtime
-      ? `${layoutSignature(runtime.layout)}; first-wave types ${typeSequence(firstWave) || 'pending'}; visual families ${familySet(firstWave).join(', ') || 'pending'}; strict movement ${score.movementConformanceScore10}/10, graphics ${score.graphicalConformanceScore10}/10, alien novelty ${score.alienNoveltyScore10}/10.`
+      ? `${layoutSignature(runtime.layout)}; first-wave types ${typeSequence(firstWave) || 'pending'}; visual families ${familySet(firstWave).join(', ') || 'pending'}; strict movement ${score.movementConformanceScore10}/10, graphics ${score.graphicalConformanceScore10}/10, alien novelty ${score.alienNoveltyScore10}/10, shot opportunity ${score.playerShotOpportunityScore10}/10.`
       : 'Runtime probe pending.',
     graphicsRead: runtime
       ? score.strictAxisReads.graphics.read
@@ -950,6 +1237,15 @@ function makeStageRow(stage, runtime, match, referenceLabels){
       : 'Sprite-motion hook pending.',
     spriteMotionProbe: runtime
       ? score.strictAxisReads.graphics.spriteMotion || null
+      : null,
+    objectTrackProbe: runtime
+      ? score.strictAxisReads.graphics.spriteMotion?.objectTrackedPixelSilhouette || null
+      : null,
+    shotOpportunityRead: runtime
+      ? score.strictAxisReads.shotOpportunity?.read || 'Shot-opportunity probe pending.'
+      : 'Shot-opportunity probe pending.',
+    shotOpportunityProbe: runtime
+      ? score.strictAxisReads.shotOpportunity || null
       : null,
     movementRead: match
       ? `${score.strictAxisReads.movement.read} Legacy broad vector best-match was ${round(match.bestMatch?.score10, 1)}/10 against ${bestLabel || 'no label'}; xRange ${match.runtimeVector?.xRange}, yRange ${match.runtimeVector?.yRange}, pathLength ${match.runtimeVector?.pathLength}.`
@@ -968,6 +1264,7 @@ function makeStageRow(stage, runtime, match, referenceLabels){
     graphicalConformanceScore10: score.graphicalConformanceScore10,
     alienNoveltyScore10: score.alienNoveltyScore10,
     progressionConformanceScore10: score.progressionConformanceScore10,
+    playerShotOpportunityScore10: score.playerShotOpportunityScore10,
     safetyRuleScore10: score.safetyRuleScore10,
     strictAxisReads: score.strictAxisReads,
     expectedReferenceHit: score.expectedReferenceHit,
@@ -1008,12 +1305,12 @@ Target-artifact coverage has not been generated yet. Run \`npm run harness:analy
     const gapCell = row.criticalGaps.length
       ? row.criticalGaps.join('<br>')
       : 'Reference target hit; remaining work is trajectory precision and active motion scoring.';
-    return `| ${row.stage} | ${row.challengeNumber} | ${row.interestingFactor10}/10 | ${row.movementConformanceScore10}/10 | ${row.graphicalConformanceScore10}/10 | ${row.alienNoveltyScore10}/10 | ${row.conformanceScore10}/10 | ${row.bestReferenceMatch?.labelId || 'pending'} (${row.referenceMatchScore10 ?? 'n/a'}/10 legacy) | ${row.safetyProbe?.noEnemyShots && row.safetyProbe?.noAttackStarts && row.safetyProbe?.noShipLosses ? 'pass' : 'pending/fail'} | ${gapCell} |`;
+    return `| ${row.stage} | ${row.challengeNumber} | ${row.interestingFactor10}/10 | ${row.movementConformanceScore10}/10 | ${row.graphicalConformanceScore10}/10 | ${row.alienNoveltyScore10}/10 | ${row.playerShotOpportunityScore10}/10 | ${row.conformanceScore10}/10 | ${row.bestReferenceMatch?.labelId || 'pending'} (${row.referenceMatchScore10 ?? 'n/a'}/10 legacy) | ${row.safetyProbe?.noEnemyShots && row.safetyProbe?.noAttackStarts && row.safetyProbe?.noShipLosses ? 'pass' : 'pending/fail'} | ${gapCell} |`;
   }).join('\n');
   const stageSections = rows.map(row => `
 ## Stage ${row.stage} / Challenge ${row.challengeNumber}
 
-**Current score:** interesting factor ${row.interestingFactor10}/10; challenge conformance ${row.conformanceScore10}/10. Movement ${row.movementConformanceScore10}/10, graphics ${row.graphicalConformanceScore10}/10, alien novelty ${row.alienNoveltyScore10}/10, progression ${row.progressionConformanceScore10}/10.
+**Current score:** interesting factor ${row.interestingFactor10}/10; challenge conformance ${row.conformanceScore10}/10. Movement ${row.movementConformanceScore10}/10, graphics ${row.graphicalConformanceScore10}/10, alien novelty ${row.alienNoveltyScore10}/10, progression ${row.progressionConformanceScore10}/10, player shot opportunity ${row.playerShotOpportunityScore10}/10.
 
 **Legacy broad coverage score:** ${row.legacyCoverageScore10}/10. This is retained as diagnostic evidence only; it no longer counts as the player-facing conformance score.
 
@@ -1028,6 +1325,8 @@ Target-artifact coverage has not been generated yet. Run \`npm run harness:analy
 **Alien variation read:** ${row.alienVariationRead}
 
 **Group identity read:** ${row.groupIdentityRead || 'Group identity pending.'}
+
+**Shot-opportunity read:** ${row.shotOpportunityRead || 'Shot-opportunity probe pending.'}
 
 **Safety rule:** ${row.safetyProbe ? `enemy shots ${row.safetyProbe.eventCounts.enemyShots}, attack starts ${row.safetyProbe.eventCounts.enemyAttackStarts}, ship losses ${row.safetyProbe.eventCounts.shipLosses}` : 'runtime probe pending'}.
 
@@ -1048,7 +1347,7 @@ Branch: ${report.branch}
 
 This is now a strict challenge-stage readout. The prior alien-entry score looked too healthy because it rewarded coverage, type labels, and broad stage signatures. That was useful harness progress, but it overstated the player-facing experience. This report follows the current project decision that challenging stages start at **1/10 interesting**, **1/10 movement**, and **1/10 graphical conformance** until they earn credit through reference-grounded movement, active visual evidence, alien/stage novelty, and durable bonus-stage contracts.
 
-Current result: **${report.summary.interestingFactorScore10}/10 interesting factor** and **${report.summary.score10}/10 challenge-stage conformance**. Movement is **${report.summary.movementConformanceScore10}/10**, graphical conformance is **${report.summary.graphicalConformanceScore10}/10**, and alien/stage novelty is **${report.summary.alienNoveltyScore10}/10**. The strongest rule finding is that current probes show no enemy shots, no attack starts, and no ship losses during sampled challenge windows. The weakest player-facing finding is that ${report.summary.weakestFinding}
+Current result: **${report.summary.interestingFactorScore10}/10 interesting factor** and **${report.summary.score10}/10 challenge-stage conformance**. Movement is **${report.summary.movementConformanceScore10}/10**, graphical conformance is **${report.summary.graphicalConformanceScore10}/10**, alien/stage novelty is **${report.summary.alienNoveltyScore10}/10**, and player shot opportunity is **${report.summary.playerShotOpportunityScore10}/10**. The strongest rule finding is that current probes show no enemy shots, no attack starts, and no ship losses during sampled challenge windows. The weakest player-facing finding is that ${report.summary.weakestFinding}
 
 ## Method
 
@@ -1056,7 +1355,8 @@ Current result: **${report.summary.interestingFactorScore10}/10 interesting fact
 - Reference targets came from media-backed Galaga path labels and contact sheets.
 - Existing path-family comparison supplied best-match vector scores against labeled Galaga challenge entries, but those broad scores are now retained as diagnostic coverage instead of the conformance score.
 - Strict movement scoring compares runtime y-range, path length, turn count, reversals, lower-field share, and trajectory best-match against the selected Galaga challenge reference vector. It is capped by current temporal-measurement limits because the harness still samples summaries rather than full tracked choreography.
-- Strict graphical scoring now includes a first active sprite-motion hook for flap state, phase coverage, visual family diversity, and path-pose diversity. It remains capped until object-tracked silhouettes, rotations, dive poses, capture/rescue transitions, and direct target crop comparison are measured.
+- Strict graphical scoring now includes active sprite-motion plus object-tracked runtime pixel/silhouette crops for flap state, phase coverage, visual family diversity, path-pose diversity, lit-pixel stability, and bounding-box variation. It remains capped until those object tracks are compared frame-by-frame to Galaga target crops, rotations, dive poses, capture/rescue transitions, and direct target crop sequences.
+- Player shot-opportunity scoring samples plausible firing lanes through each challenge window so movement work can be judged by whether it creates learnable high-bonus routes, not only by broad movement shape.
 - Challenge path-slot extraction suppresses player fire for challenge windows, so trajectory comparison measures authored alien motion instead of bullet-truncated player-score fragments.
 - Safety is measured separately from interest: no shots/no kills is necessary, but it does not make a challenge visually conformant and contributes only as a guardrail.
 - Prior 24-second evidence windows can include post-challenge normal play, so enemy bullets/attackers in those older windows are not treated as challenge-rule failures here.
@@ -1065,8 +1365,8 @@ ${targetCoverageSection}
 
 ## Stage Summary
 
-| Stage | Challenge | Interest | Movement | Graphics | Alien Novelty | Strict Score | Diagnostic Best Reference | No-Shot/No-Kill | Critical Gap |
-| --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
+| Stage | Challenge | Interest | Movement | Graphics | Alien Novelty | Shot Opportunity | Strict Score | Diagnostic Best Reference | No-Shot/No-Kill | Critical Gap |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
 ${tableRows}
 
 ${stageSections}
@@ -1086,7 +1386,8 @@ ${stageSections}
 
 - Raise challenge-stage interesting factor from ${report.summary.interestingFactorScore10}/10 to 3.5/10 as the first honest gate by implementing one visibly reference-like challenge, then toward 6.0/10 after Stage 3, 7, and 11 each have distinct authored contracts.
 - Raise movement conformance from ${report.summary.movementConformanceScore10}/10 by increasing y-range, path length, turn count, and exit-side match against the Galaga challenge references.
-- Raise graphical conformance from ${report.summary.graphicalConformanceScore10}/10 by extending the active sprite-motion hook into object-tracked silhouette, rotation, dive-pose, and reference-crop comparisons; do not inflate it from type labels alone.
+- Raise graphical conformance from ${report.summary.graphicalConformanceScore10}/10 by extending the object-tracked silhouette hook into Galaga target-crop sequence comparisons; do not inflate it from type labels alone.
+- Raise player shot opportunity from ${report.summary.playerShotOpportunityScore10}/10 by creating lane-readable scoring windows for each challenge rather than incidental central-lane hits.
 - Preserve 0 enemy shots, 0 enemy attack starts, and 0 ship losses during challenge windows.
 - Convert the first-pass late-reference labels into five-group frame/object labels before treating the late challenge sequence as conformant.
 - Extend sprite-motion scoring for challenge enemies so visual novelty becomes object-tracked pixel evidence, not only a phase/family hook.
@@ -1171,22 +1472,84 @@ function trajectoryDiagramSvg(row){
   return `${svg.replace(/[ \t]+$/gm, '')}\n`;
 }
 
-function attachTrajectoryDiagrams(report, outDir){
+function objectTrackPath(points = [], x0, y0, width, height){
+  return points
+    .filter(point => Number.isFinite(+point.x) && Number.isFinite(+point.y))
+    .map(point => `${round(x0 + (+point.x / 280) * width, 1)},${round(y0 + (+point.y / 360) * height, 1)}`)
+    .join(' ');
+}
+
+function objectTrackDiagramSvg(row){
+  const label = `Challenging Stage ${row.challengeNumber} (${row.stage}-${row.stage + 1})`;
+  const objectProbe = row.objectTrackProbe || {};
+  const shotProbe = row.shotOpportunityProbe || {};
+  const tracks = Array.isArray(objectProbe.topTracks) ? objectProbe.topTracks.slice(0, 5) : [];
+  const lanes = Array.isArray(shotProbe.laneRows) ? shotProbe.laneRows : [];
+  const colors = ['#78f7ff', '#ffd36a', '#ff7bd5', '#8cffb4', '#b08cff'];
+  const trackLines = tracks.length
+    ? tracks.map((track, index) => {
+      const d = objectTrackPath(track.points || [], 50, 76, 430, 168);
+      const color = colors[index % colors.length];
+      if(!d) return '';
+      const start = d.split(' ')[0].split(',');
+      return `<polyline points="${d}" fill="none" stroke="${color}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="${start[0]}" cy="${start[1]}" r="5" fill="${color}"/><text class="tiny" x="500" y="${96 + index * 24}" fill="${color}">${svgEsc(track.family || 'family')} ${svgEsc(track.pathFamily || '')} ${svgEsc(track.frameCount || 0)}f</text>`;
+    }).filter(Boolean).join('\n  ')
+    : '<text class="small" x="68" y="154">object tracks pending</text>';
+  const maxHits = Math.max(1, ...lanes.map(lane => +lane.hits || 0));
+  const laneBars = lanes.length
+    ? lanes.map((lane, index) => {
+      const h = round(((+lane.hits || 0) / maxHits) * 84, 1);
+      const x = 586 + index * 20;
+      return `<rect x="${x}" y="${222 - h}" width="12" height="${h}" rx="3" fill="#ffd36a"/><text class="tiny" x="${x - 4}" y="242">${svgEsc(lane.x)}</text>`;
+    }).join('\n  ')
+    : '<text class="tiny" x="586" y="222">shot lanes pending</text>';
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300" role="img" aria-labelledby="title desc">
+  <title id="title">${svgEsc(label)} object-track and shot-opportunity sketch</title>
+  <desc id="desc">Readable object tracks from runtime challenge sprite silhouettes plus sampled player shot opportunity lanes.</desc>
+  <style>
+    .bg{fill:#06111d}.panel{fill:#0d1b2a;stroke:#2e5d78;stroke-width:2}.grid{stroke:#1b3344;stroke-width:1}.text{fill:#f2fbff;font:700 20px ui-monospace,Menlo,monospace}.small{fill:#b8d7ec;font:700 13px ui-monospace,Menlo,monospace}.tiny{fill:#9ec9e6;font:11px ui-monospace,Menlo,monospace}.pill{fill:#102a3b;stroke:#2e5d78}
+  </style>
+  <rect class="bg" x="0" y="0" width="760" height="300"/>
+  <text class="text" x="24" y="34">${svgEsc(label)}</text>
+  <rect class="pill" x="482" y="14" width="254" height="32" rx="16"/>
+  <text class="small" x="498" y="35">${svgEsc(row.playerShotOpportunityScore10 ?? 'n/a')}/10 shot opportunity</text>
+  <rect class="panel" x="36" y="56" width="456" height="210" rx="10"/>
+  <rect class="panel" x="548" y="56" width="176" height="210" rx="10"/>
+  <text class="small" x="56" y="82">Object-tracked silhouette paths</text>
+  <text class="small" x="568" y="82">Shot-lane hits</text>
+  ${[0, 1, 2, 3, 4].map(i => `<line class="grid" x1="${50 + i * 86}" y1="92" x2="${50 + i * 86}" y2="244"/>`).join('')}
+  ${[0, 1, 2, 3].map(i => `<line class="grid" x1="50" y1="${100 + i * 42}" x2="480" y2="${100 + i * 42}"/>`).join('')}
+  ${trackLines}
+  ${laneBars}
+  <text class="tiny" x="56" y="260">Silhouette: ${svgEsc(objectProbe.score10 ?? 'n/a')}/10; ${svgEsc(objectProbe.trackedObjectCount ?? 0)} tracks, ${svgEsc(objectProbe.trackedFrameCount ?? 0)} crops.</text>
+  <text class="tiny" x="568" y="260">Lane diversity ${svgEsc(shotProbe.laneDiversity ?? 'n/a')}; center bias ${svgEsc(shotProbe.centerBias ?? 'n/a')}.</text>
+</svg>`;
+  return `${svg.replace(/[ \t]+$/gm, '')}\n`;
+}
+
+function attachChallengeDiagrams(report, outDir){
   const latestDir = path.join(OUT_ROOT, 'latest-diagrams');
   ensureDir(latestDir);
   for(const row of report.stageRows || []){
     const fileName = `challenge-stage-${String(row.challengeNumber || row.stage).padStart(2, '0')}-trajectory.svg`;
+    const objectTrackFileName = `challenge-stage-${String(row.challengeNumber || row.stage).padStart(2, '0')}-object-track.svg`;
     const datedPath = path.join(outDir, fileName);
     const latestPath = path.join(latestDir, fileName);
     const svg = trajectoryDiagramSvg(row);
     writeText(datedPath, svg);
     writeText(latestPath, svg);
     row.trajectoryDiagram = rel(latestPath);
-    row.evidence = Array.from(new Set([...(row.evidence || []), row.trajectoryDiagram]));
+    const objectTrackDatedPath = path.join(outDir, objectTrackFileName);
+    const objectTrackLatestPath = path.join(latestDir, objectTrackFileName);
+    const objectTrackSvg = objectTrackDiagramSvg(row);
+    writeText(objectTrackDatedPath, objectTrackSvg);
+    writeText(objectTrackLatestPath, objectTrackSvg);
+    row.objectTrackDiagram = rel(objectTrackLatestPath);
+    row.evidence = Array.from(new Set([...(row.evidence || []), row.trajectoryDiagram, row.objectTrackDiagram]));
   }
   report.diagramArtifacts = {
     trajectoryDiagramDirectory: rel(latestDir),
-    description: 'Large readable vector sketches comparing Galaga target motion metrics to Aurora runtime metrics. These diagrams are human-review aids derived from the measurement artifact, not raw optical tracking.'
+    description: 'Large readable vector sketches comparing Galaga target motion metrics to Aurora runtime metrics plus object-track/shot-opportunity sketches from runtime silhouette probes. These diagrams are human-review aids derived from the measurement artifact, not raw optical tracking.'
   };
 }
 
@@ -1221,6 +1584,7 @@ async function buildReport(){
     graphicalConformanceScore10: round(average(rows.map(row => row.graphicalConformanceScore10)), 1),
     alienNoveltyScore10: round(average(rows.map(row => row.alienNoveltyScore10)), 1),
     progressionConformanceScore10: round(average(rows.map(row => row.progressionConformanceScore10)), 1),
+    playerShotOpportunityScore10: round(average(rows.map(row => row.playerShotOpportunityScore10)), 1),
     safetyRuleScore10: round(average(rows.map(row => row.safetyRuleScore10)), 1),
     legacyCoverageScore10: round(average(rows.map(row => row.legacyCoverageScore10)), 1),
     confidence: 'medium-high for the gap; medium-low for exact remediation size',
@@ -1230,7 +1594,7 @@ async function buildReport(){
     strongestFinding: 'Sampled challenge windows preserve the Galaga-like no-shot/no-ship-loss rule.',
     stage3ExpectedReferenceHit,
     challenge2BestMatchCount,
-    weakestFinding: `current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is ${round(average(rows.map(row => row.movementConformanceScore10)), 1)}/10, strict graphics is ${round(average(rows.map(row => row.graphicalConformanceScore10)), 1)}/10, alien/stage novelty is ${round(average(rows.map(row => row.alienNoveltyScore10)), 1)}/10, active sprite-motion is now measured as phase/family coverage but not yet as object-tracked pixel-silhouette conformance, and late challenge references are first-pass window labels rather than full object tracks. Diagnostic legacy coverage was ${round(average(rows.map(row => row.legacyCoverageScore10)), 1)}/10, which is why the old read was too generous.`,
+    weakestFinding: `current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is ${round(average(rows.map(row => row.movementConformanceScore10)), 1)}/10, strict graphics is ${round(average(rows.map(row => row.graphicalConformanceScore10)), 1)}/10, alien/stage novelty is ${round(average(rows.map(row => row.alienNoveltyScore10)), 1)}/10, player shot opportunity is ${round(average(rows.map(row => row.playerShotOpportunityScore10)), 1)}/10, active sprite-motion now includes object-tracked runtime pixel/silhouette evidence but not yet Galaga target-crop sequence comparison, and late challenge references are still first-pass group labels rather than full object tracks. Diagnostic legacy coverage was ${round(average(rows.map(row => row.legacyCoverageScore10)), 1)}/10, which is why the old read was too generous.`,
     playerMeaning: 'A player should experience challenging stages as safe but tense score exhibitions with memorable entry routes, fresh alien types, readable trajectories, and a learnable perfect-bonus opportunity. Aurora currently preserves the safety rule, but the actual spectacle, motion, and visual novelty are still early.',
     designerMeaning: 'Design work should move from broad path-family labels to explicit per-challenge contracts: group order, first-visible frame, entry side, exit side, path length, turn count, alien family, animation phases, bonus opportunity, and result feedback.',
     sourceScores: {
@@ -1295,7 +1659,7 @@ async function main(){
   const readmePath = path.join(outDir, 'README.md');
   const latestPath = path.join(OUT_ROOT, 'latest.json');
   const topLevelReportPath = path.join(ROOT, 'CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md');
-  attachTrajectoryDiagrams(report, outDir);
+  attachChallengeDiagrams(report, outDir);
   const markdown = buildMarkdown(report);
   writeJson(reportPath, report);
   writeText(readmePath, markdown);

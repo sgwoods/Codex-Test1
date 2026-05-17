@@ -87,7 +87,7 @@ function updateChallengeEnemy(e,dt){
 	 const pathFamily=e.pathFamily||'classic-lane-wave';
 	 const fm=familyMotion(e);
 	 const classicStage3=S.stage===3&&e.fam==='classic';
-	 const baseChallengeSpeed=pathFamily==='yellow-diagonal-fan'?.36:pathFamily==='green-ladder-split'?.392:pathFamily==='first-challenge-peel'?.345:(classicStage3?.345:.355);
+	 const baseChallengeSpeed=pathFamily==='yellow-diagonal-fan'?.388:pathFamily==='green-ladder-split'?.386:pathFamily==='first-challenge-peel'?.345:(classicStage3?.345:.355);
 	 e.tm+=dt*(baseChallengeSpeed+(e.wave||0)*.007+Math.min(.012,S.stage*.0015));
 	 const u=e.tm,p=e.ph,wave=e.wave||0,side=e.side||1,slot=e.slot||0,row=e.row||0,sweep=e.sweep||1;
 	 const arcAmp=e.arcAmp||1,dropAmp=e.dropAmp||1;
@@ -112,12 +112,12 @@ function updateChallengeEnemy(e,dt){
 	   e.y=topY+q*(10+wave*1.2)*dropAmp+Math.sin(q*Math.PI*2.4+p)*7*arcAmp;
 	  }else if(pathFamily==='green-ladder-split'){
 	   const rung=slot%2?-1:1;
-	   e.x=startX+(laneX-startX)*q+sweep*((q-.5)*18+rung*(8+q*6))*arcAmp;
-	   e.y=topY+q*(34+slot*6)*dropAmp+row*5;
+	   e.x=startX+(laneX-startX)*q+sweep*((q-.5)*12+rung*(9+q*5))*arcAmp;
+	   e.y=topY+q*(38+slot*5)*dropAmp+row*5;
 	  }else if(pathFamily==='yellow-diagonal-fan'){
 	   const fanDir=wave%2?-1:1;
-	   e.x=startX+(laneX-startX)*q+fanDir*(q*58+(slot-1.5)*12)*arcAmp;
-	   e.y=topY+q*(42+slot*8)*dropAmp;
+	   e.x=startX+(laneX-startX)*q+fanDir*(q*68+(slot-1.5)*14)*arcAmp;
+	   e.y=topY+q*(48+slot*8)*dropAmp;
 	  }else if(pathFamily==='blue-purple-finale'){
 	   e.x=startX+(laneX-startX)*curve+sweep*Math.sin(q*Math.PI*3.4+p+slot*.4)*24*arcAmp;
 	   e.y=topY+q*6*dropAmp+Math.cos(q*Math.PI*2+p)*10*arcAmp;
@@ -153,12 +153,12 @@ function updateChallengeEnemy(e,dt){
 	   e.y=topY+q*(64+slot*10)*dropAmp+Math.sin(q*8.8+p)*4+Math.max(0,q-.45)*cascade*12;
 	  }else if(pathFamily==='green-ladder-split'){
 	   const rung=slot%2?-1:1;
-	   e.x=laneX+sweep*((q-.5)*58+rung*(20+q*20))*fm.challengeSweep*arcAmp;
-	   e.y=topY+q*(132+slot*18)*dropAmp+(wave%2?Math.sin(q*Math.PI)*10:0);
+	   e.x=laneX+sweep*((q-.5)*44+rung*(18+q*13))*fm.challengeSweep*arcAmp;
+	   e.y=topY+q*(146+slot*14)*dropAmp+(wave%2?Math.sin(q*Math.PI)*7:0);
 	  }else if(pathFamily==='yellow-diagonal-fan'){
 	   const fanDir=wave%2?-1:1;
-	   e.x=laneX+fanDir*(((q-.2)*188)+(slot-1.5)*34)*fm.challengeSweep*arcAmp;
-	   e.y=topY+q*(164+slot*24)*dropAmp;
+	   e.x=laneX+fanDir*(((q-.22)*202)+(slot-1.5)*32)*fm.challengeSweep*arcAmp;
+	   e.y=topY+q*(188+slot*27)*dropAmp;
 	  }else if(pathFamily==='blue-purple-finale'){
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*4+p)*42+Math.sin(q*Math.PI*1.5)*28)*fm.challengeSweep*arcAmp;
 	   e.y=topY+q*(78+slot*12)*dropAmp+Math.cos(q*Math.PI*3+p)*10*arcAmp;
@@ -195,12 +195,12 @@ function updateChallengeEnemy(e,dt){
 	   e.y=topY+16+q*228*fm.challengeDrop*dropAmp;
 	  }else if(pathFamily==='green-ladder-split'){
 	   const exit=sweep*(slot%2?-1:1);
-	   e.x=laneX+sweep*(34+q*92)*fm.challengeSweep*arcAmp+exit*(18+q*52)*arcAmp;
-	   e.y=topY+28+q*270*fm.challengeDrop*dropAmp;
+	   e.x=laneX+sweep*(28+q*72)*fm.challengeSweep*arcAmp+exit*(12+q*38)*arcAmp;
+	   e.y=topY+24+q*258*fm.challengeDrop*dropAmp;
 	  }else if(pathFamily==='yellow-diagonal-fan'){
 	   const fanDir=wave%2?-1:1;
-	   e.x=laneX+fanDir*(110+q*170+(slot-1.5)*22)*fm.challengeSweep*arcAmp;
-	   e.y=topY+42+q*320*fm.challengeDrop*dropAmp;
+	   e.x=laneX+fanDir*(118+q*186+(slot-1.5)*20)*fm.challengeSweep*arcAmp;
+	   e.y=topY+44+q*344*fm.challengeDrop*dropAmp;
 	  }else if(pathFamily==='blue-purple-finale'){
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.8+p)*34-q*76)*fm.challengeSweep*arcAmp;
 	   e.y=topY+18+q*216*fm.challengeDrop*dropAmp+Math.cos(q*8+p)*4;

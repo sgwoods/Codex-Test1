@@ -2459,7 +2459,7 @@ function buildChallengeStageEffortGuideSection(){
   return {
     id: 'challenge-stage-conformance-effort',
     title: 'Challenge Stage Conformance Effort',
-    summary: `Living sub-effort for Galaga-like challenge stages. Current strict read: ${summary.interestingFactorScore10 ?? 'n/a'}/10 interesting factor, ${summary.movementConformanceScore10 ?? 'n/a'}/10 movement, ${summary.graphicalConformanceScore10 ?? 'n/a'}/10 graphics, ${summary.alienNoveltyScore10 ?? 'n/a'}/10 alien novelty, and ${summary.score10 ?? 'n/a'}/10 challenge-stage conformance. ${summary.weakestFinding || 'Run the challenge-stage analyzer to refresh the report.'}`,
+    summary: `Living sub-effort for Galaga-like challenge stages. Current strict read: ${summary.interestingFactorScore10 ?? 'n/a'}/10 interesting factor, ${summary.movementConformanceScore10 ?? 'n/a'}/10 movement, ${summary.graphicalConformanceScore10 ?? 'n/a'}/10 graphics, ${summary.alienNoveltyScore10 ?? 'n/a'}/10 alien novelty, ${summary.playerShotOpportunityScore10 ?? 'n/a'}/10 shot opportunity, and ${summary.score10 ?? 'n/a'}/10 challenge-stage conformance. ${summary.weakestFinding || 'Run the challenge-stage analyzer to refresh the report.'}`,
     cards: [
       {
         title: 'Problem',
@@ -2885,6 +2885,19 @@ function challengeTrajectoryDiagramMedia(row = {}){
   });
 }
 
+function challengeObjectTrackDiagramMedia(row = {}){
+  const src = row.objectTrackDiagram || '';
+  if(!src || !fs.existsSync(path.join(ROOT, normalizeAssetSourcePath(src)))){
+    return '<div class="mediaPlaceholder">Object-track and shot-opportunity diagram pending for this challenge stage.</div>';
+  }
+  return renderMediaImage({
+    src,
+    label: 'Object-track / shot-opportunity diagram',
+    alt: `${challengeStageDisplayLabel(row)} object-track and shot-opportunity sketch`,
+    note: 'Generated from runtime challenge sprite silhouettes and sampled player shot lanes. This is a readable probe of visible motion and scoreability, not yet Galaga target-crop optical matching.'
+  });
+}
+
 function renderChallengeStageDetail(row = {}){
   const label = challengeStageDisplayLabel(row);
   const score = row.conformanceScore10 ?? 'n/a';
@@ -2945,6 +2958,13 @@ function renderChallengeStageDetail(row = {}){
             <p>${esc(row.movementRead || 'Movement read pending.')}</p>
             <p class="docMeta">${esc(row.strictAxisReads?.movement?.read || '')}</p>
             ${challengeList(challengeMotionSummary(row))}
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>Sprite Motion / Shot Route</h3>
+            ${challengeObjectTrackDiagramMedia(row)}
+            <p>${esc(row.spriteMotionRead || 'Sprite-motion read pending.')}</p>
+            <p>${esc(row.shotOpportunityRead || 'Shot-opportunity read pending.')}</p>
+            <p class="docMeta">Object silhouettes: ${esc(row.objectTrackProbe?.score10 ?? 'n/a')}/10; player shot opportunity: ${esc(row.playerShotOpportunityScore10 ?? 'n/a')}/10.</p>
           </article>
           <article class="challengeEvidenceCard">
             <h3>Safety / Rules</h3>
@@ -3864,7 +3884,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <p>A deliberately critical stage-by-stage comparison of Aurora challenging stages against Galaga-style bonus-stage behavior. This separates rule conformance from interesting visual conformance: no enemy shooting and no ship loss are necessary, but the higher-value gap is authored alien movement, alien-family variation, and learnable set-piece novelty.</p>
           </div>
           <div class="docWrap">
-            <p><strong>Current strict read:</strong> ${esc(challengeSummary.interestingFactorScore10 || 'n/a')}/10 interesting factor; ${esc(challengeSummary.movementConformanceScore10 || 'n/a')}/10 movement; ${esc(challengeSummary.graphicalConformanceScore10 || 'n/a')}/10 graphics; ${esc(challengeSummary.alienNoveltyScore10 || 'n/a')}/10 alien novelty; ${esc(challengeSummary.score10 || 'n/a')}/10 challenge-stage conformance.</p>
+            <p><strong>Current strict read:</strong> ${esc(challengeSummary.interestingFactorScore10 || 'n/a')}/10 interesting factor; ${esc(challengeSummary.movementConformanceScore10 || 'n/a')}/10 movement; ${esc(challengeSummary.graphicalConformanceScore10 || 'n/a')}/10 graphics; ${esc(challengeSummary.alienNoveltyScore10 || 'n/a')}/10 alien novelty; ${esc(challengeSummary.playerShotOpportunityScore10 || 'n/a')}/10 shot opportunity; ${esc(challengeSummary.score10 || 'n/a')}/10 challenge-stage conformance.</p>
             <p>${esc(challengeSummary.weakestFinding || 'Run the challenge-stage conformance analyzer to refresh this readout.')}</p>
             <p class="docMeta"><strong>Scoring model:</strong> ${esc(challengeSummary.scoringModel || 'strict-v2')}. Each challenge starts at 1/10 for interest, movement, and graphics; no-shot/no-kill safety is a required guardrail, not a score booster. Legacy broad coverage is diagnostic only.</p>
             <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/challenge-stage-conformance/latest.json</code>. <strong>Report:</strong> <code>CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md</code>.</p>

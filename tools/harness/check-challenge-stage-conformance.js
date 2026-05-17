@@ -11,8 +11,20 @@ const REQUIRED_REFERENCE_HITS = new Map([
 const TRACKED_REFERENCE_TARGETS = new Map([
   [7, 'challenge-2-arrival-group-1'],
   [11, 'challenge-3-arrival-group-1'],
-  [15, 'challenge-4-pink-serpentine-group-1'],
-  [19, 'challenge-5-pink-green-cascade-group-1'],
+  [15, [
+    'challenge-4-pink-serpentine-group-1',
+    'challenge-4-pink-serpentine-group-2',
+    'challenge-4-pink-serpentine-group-3',
+    'challenge-4-pink-serpentine-group-4',
+    'challenge-4-pink-serpentine-group-5'
+  ]],
+  [19, [
+    'challenge-5-pink-green-cascade-group-1',
+    'challenge-5-pink-green-cascade-group-2',
+    'challenge-5-pink-green-cascade-group-3',
+    'challenge-5-pink-green-cascade-group-4',
+    'challenge-5-pink-green-cascade-group-5'
+  ]],
   [23, [
     'challenge-6-green-ladder-split-group-1',
     'challenge-6-green-ladder-split-group-2',
@@ -27,7 +39,13 @@ const TRACKED_REFERENCE_TARGETS = new Map([
     'challenge-7-yellow-diagonal-fan-group-4',
     'challenge-7-yellow-diagonal-fan-group-5'
   ]],
-  [31, 'challenge-8-blue-purple-finale-group-1']
+  [31, [
+    'challenge-8-blue-purple-finale-group-1',
+    'challenge-8-blue-purple-finale-group-2',
+    'challenge-8-blue-purple-finale-group-3',
+    'challenge-8-blue-purple-finale-group-4',
+    'challenge-8-blue-purple-finale-group-5'
+  ]]
 ]);
 const STRICT_SCORE_FIELDS = [
   'interestingFactor10',
@@ -36,6 +54,7 @@ const STRICT_SCORE_FIELDS = [
   'graphicalConformanceScore10',
   'alienNoveltyScore10',
   'progressionConformanceScore10',
+  'playerShotOpportunityScore10',
   'safetyRuleScore10'
 ];
 
@@ -71,8 +90,11 @@ for(const stage of REQUIRED_STAGES){
   if(!row.currentRead || !row.graphicsRead || !row.movementRead || !row.alienVariationRead){
     fail(`stage ${stage} is missing critical narrative fields`, row);
   }
-  if(!row.strictAxisReads?.movement?.read || !row.strictAxisReads?.graphics?.read || !row.strictAxisReads?.alienNovelty?.read){
+  if(!row.strictAxisReads?.movement?.read || !row.strictAxisReads?.graphics?.read || !row.strictAxisReads?.alienNovelty?.read || !row.strictAxisReads?.shotOpportunity?.read){
     fail(`stage ${stage} is missing strict axis reads`, row);
+  }
+  if(!row.objectTrackProbe?.read || !row.shotOpportunityProbe?.read){
+    fail(`stage ${stage} is missing object-track or shot-opportunity probes`, row);
   }
   if(!Number.isFinite(+row.groupIdentityScore10) || !row.groupIdentityRead){
     fail(`stage ${stage} is missing measured challenge group identity`, row);
@@ -130,6 +152,7 @@ for(const field of [
   'graphicalConformanceScore10',
   'alienNoveltyScore10',
   'progressionConformanceScore10',
+  'playerShotOpportunityScore10',
   'safetyRuleScore10'
 ]){
   if(!Number.isFinite(+report.summary?.[field]) || +report.summary[field] < 1 || +report.summary[field] > 10){
