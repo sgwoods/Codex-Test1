@@ -2458,7 +2458,7 @@ function buildChallengeStageEffortGuideSection(){
   return {
     id: 'challenge-stage-conformance-effort',
     title: 'Challenge Stage Conformance Effort',
-    summary: `Living sub-effort for Galaga-like challenge stages. Current critical read: ${summary.interestingFactorScore10 ?? 'n/a'}/10 interesting factor and ${summary.score10 ?? 'n/a'}/10 challenge-stage conformance. ${summary.weakestFinding || 'Run the challenge-stage analyzer to refresh the report.'}`,
+    summary: `Living sub-effort for Galaga-like challenge stages. Current strict read: ${summary.interestingFactorScore10 ?? 'n/a'}/10 interesting factor, ${summary.movementConformanceScore10 ?? 'n/a'}/10 movement, ${summary.graphicalConformanceScore10 ?? 'n/a'}/10 graphics, ${summary.alienNoveltyScore10 ?? 'n/a'}/10 alien novelty, and ${summary.score10 ?? 'n/a'}/10 challenge-stage conformance. ${summary.weakestFinding || 'Run the challenge-stage analyzer to refresh the report.'}`,
     cards: [
       {
         title: 'Problem',
@@ -2466,11 +2466,11 @@ function buildChallengeStageEffortGuideSection(){
       },
       {
         title: 'Measurement',
-        body: 'Generated from `reference-artifacts/analyses/challenge-stage-conformance/latest.json`, Galaga path-reference labels, Aurora browser runtime probes, and challenge timing/collision guardrails.'
+        body: 'Generated from `reference-artifacts/analyses/challenge-stage-conformance/latest.json`, Galaga path-reference labels, Aurora browser runtime probes, and challenge timing/collision guardrails. Safety is a guardrail; broad legacy coverage is diagnostic only.'
       },
       {
         title: 'Next Best Step',
-        body: 'Attack Stage 3 first: make it best-match the Galaga challenge-1 arrival and late-wave references while preserving 0 enemy shots, 0 attack starts, and 0 ship losses.'
+        body: (artifact.improvementPlan || [])[2] || 'Attack Stage 3 first: rebuild it against the Galaga challenge-1 arrival and late-wave references while preserving 0 enemy shots, 0 attack starts, and 0 ship losses.'
       }
     ],
     links: [
@@ -2855,6 +2855,9 @@ function renderChallengeStageDetail(row = {}){
   const label = challengeStageDisplayLabel(row);
   const score = row.conformanceScore10 ?? 'n/a';
   const interest = row.interestingFactor10 ?? 'n/a';
+  const movement = row.movementConformanceScore10 ?? 'n/a';
+  const graphics = row.graphicalConformanceScore10 ?? 'n/a';
+  const novelty = row.alienNoveltyScore10 ?? 'n/a';
   const bestRef = row.bestReferenceMatch?.labelId || 'pending';
   const targetText = row.galagaTarget || 'Target pending.';
   const currentText = row.currentRead || 'Current read pending.';
@@ -2868,6 +2871,9 @@ function renderChallengeStageDetail(row = {}){
           <small>${esc(challengeStageInternalLabel(row))}</small>
         </span>
         <span class="scorePill">${esc(interest)}/10 interest</span>
+        <span class="scorePill">${esc(movement)}/10 movement</span>
+        <span class="scorePill">${esc(graphics)}/10 graphics</span>
+        <span class="scorePill">${esc(novelty)}/10 alien novelty</span>
         <span class="scorePill">${esc(score)}/10 conform</span>
       </summary>
       <div class="challengeStageDetailBody">
@@ -2886,7 +2892,8 @@ function renderChallengeStageDetail(row = {}){
           </article>
           <article class="challengeEvidenceCard">
             <h3>Conformance Read</h3>
-            <p><strong>Best reference:</strong> <code>${esc(bestRef)}</code> (${esc(row.referenceMatchScore10 ?? 'n/a')}/10).</p>
+            <p><strong>Strict read:</strong> movement ${esc(movement)}/10, graphics ${esc(graphics)}/10, alien novelty ${esc(novelty)}/10, progression ${esc(row.progressionConformanceScore10 ?? 'n/a')}/10.</p>
+            <p><strong>Diagnostic best reference:</strong> <code>${esc(bestRef)}</code> (${esc(row.referenceMatchScore10 ?? 'n/a')}/10 legacy broad coverage).</p>
             <p>${esc(row.criticalExpectation || 'Critical expectation pending.')}</p>
             ${challengeScoreComponents(row)}
           </article>
@@ -2901,6 +2908,7 @@ function renderChallengeStageDetail(row = {}){
           <article class="challengeEvidenceCard">
             <h3>Movement</h3>
             <p>${esc(row.movementRead || 'Movement read pending.')}</p>
+            <p class="docMeta">${esc(row.strictAxisReads?.movement?.read || '')}</p>
             ${challengeList(challengeMotionSummary(row))}
           </article>
           <article class="challengeEvidenceCard">
@@ -3722,8 +3730,9 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <p>A deliberately critical stage-by-stage comparison of Aurora challenging stages against Galaga-style bonus-stage behavior. This separates rule conformance from interesting visual conformance: no enemy shooting and no ship loss are necessary, but the higher-value gap is authored alien movement, alien-family variation, and learnable set-piece novelty.</p>
           </div>
           <div class="docWrap">
-            <p><strong>Current critical read:</strong> ${esc(challengeSummary.interestingFactorScore10 || 'n/a')}/10 interesting factor; ${esc(challengeSummary.score10 || 'n/a')}/10 challenge-stage conformance.</p>
+            <p><strong>Current strict read:</strong> ${esc(challengeSummary.interestingFactorScore10 || 'n/a')}/10 interesting factor; ${esc(challengeSummary.movementConformanceScore10 || 'n/a')}/10 movement; ${esc(challengeSummary.graphicalConformanceScore10 || 'n/a')}/10 graphics; ${esc(challengeSummary.alienNoveltyScore10 || 'n/a')}/10 alien novelty; ${esc(challengeSummary.score10 || 'n/a')}/10 challenge-stage conformance.</p>
             <p>${esc(challengeSummary.weakestFinding || 'Run the challenge-stage conformance analyzer to refresh this readout.')}</p>
+            <p class="docMeta"><strong>Scoring model:</strong> ${esc(challengeSummary.scoringModel || 'strict-v2')}. Each challenge starts at 1/10 for interest, movement, and graphics; no-shot/no-kill safety is a required guardrail, not a score booster. Legacy broad coverage is diagnostic only.</p>
             <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/challenge-stage-conformance/latest.json</code>. <strong>Report:</strong> <code>CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md</code>.</p>
             <p class="docMeta"><strong>Naming rule:</strong> normal Levels and Challenging Stages are separate. The challenge rows below use labels like <strong>Challenging Stage 1 (Levels 3-4)</strong> instead of calling that set piece Level 4.</p>
             <p class="docMeta"><strong>Evidence-image rule:</strong> contact sheets are supporting artifacts for visual inspection, not the main human-readable conformance explanation. Use each row's target/current/conformance text for the judgment; open the evidence panel only when you need to inspect the underlying frames at native scale.</p>

@@ -183,6 +183,12 @@ Right now challenge stages still have important design gaps:
 - they do not yet have named/special featured boss identities
 - their movement and presentation are still closer to a tuned pattern than a
   curated authored showcase
+- their strict conformance scorer now starts interest, movement, and graphical
+  conformance at `1/10` until each stage proves reference-like movement, active
+  sprite/visual evidence, alien novelty, and bonus-stage teaching value
+- no-shot/no-kill behavior is a required safety guardrail, but it no longer
+  counts as evidence that the challenge stage is interesting or visually
+  conformant
 
 That means a major designer-phase goal is:
 

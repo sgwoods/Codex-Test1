@@ -5,6 +5,7 @@ const { spawnSync, execFileSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'quality-conformance');
+const CHALLENGE_STAGE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
 
 function fail(message, payload){
   console.error(message);
@@ -18,6 +19,15 @@ function ensureDir(dir){
 
 function readJson(file){
   return JSON.parse(fs.readFileSync(file, 'utf8'));
+}
+
+function readOptionalJson(file){
+  if(!fs.existsSync(file)) return null;
+  try{
+    return readJson(file);
+  }catch{
+    return null;
+  }
 }
 
 function writeJson(file, data){
@@ -230,7 +240,7 @@ function buildReadme(report){
   const lines = [
     '# Quality Conformance Score',
     '',
-    'This artifact rolls Aurora quality into twelve evidence-backed categories. It is intended to expose where the biggest gaps still are, not to hide them behind a single average.',
+    'This artifact rolls Aurora quality into evidence-backed categories. It is intended to expose where the biggest gaps still are, not to hide them behind a single average.',
     '',
     '## Overall',
     '',
@@ -282,6 +292,7 @@ function main(){
   const audioThemeMetrics = readJson(latestMetrics('reference-artifacts/analyses/aurora-audio-theme-comparison'));
   const audioOverlapMetrics = readJson(latestMetrics('reference-artifacts/analyses/galaga-audio-overlap'));
   const audioScore = scoreAudioDetails(audioThemeMetrics, audioOverlapMetrics, audioAlignmentReport, audioEventGapReport);
+  const challengeSetPieceReport = readOptionalJson(CHALLENGE_STAGE_CONFORMANCE);
 
   const categories = [
     {
@@ -334,6 +345,16 @@ function main(){
       score10: scoreTimingReport(challengeReport),
       evidence: ['challenge-stage correspondence'],
       read: `${challengeReport.summary.passed}/${challengeReport.summary.total} challenge timing metrics were within tolerance; worst current delta was ${challengeReport.summary.worstCurrentDelta}.`
+    },
+    {
+      id: 'challenge-set-piece',
+      label: 'Challenge-stage set-piece conformance',
+      score10: round(clamp(challengeSetPieceReport?.summary?.score10 || 1, 1, 10), 1),
+      evidence: ['challenge-stage-conformance strict scorer'],
+      details: challengeSetPieceReport?.summary || {},
+      read: challengeSetPieceReport
+        ? `Strict challenge-stage score is ${challengeSetPieceReport.summary.score10}/10 with movement ${challengeSetPieceReport.summary.movementConformanceScore10}/10, graphics ${challengeSetPieceReport.summary.graphicalConformanceScore10}/10, alien novelty ${challengeSetPieceReport.summary.alienNoveltyScore10}/10, and safety ${challengeSetPieceReport.summary.safetyRuleScore10}/10. ${challengeSetPieceReport.summary.weakestFinding}`
+        : 'Strict challenge-stage conformance has not been generated; score defaults to the 1/10 planning baseline until the analyzer runs.'
     },
     {
       id: 'progression',

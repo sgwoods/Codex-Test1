@@ -176,6 +176,151 @@ function groupIdentity(runtime){
   };
 }
 
+function referenceLabelForStage(stage, intent, match, referenceLabels){
+  const bestLabel = match?.bestMatch?.labelId || '';
+  const expected = (intent.expectedReferenceLabels || [])
+    .map(labelId => referenceLabels.find(label => label.labelId === labelId))
+    .filter(Boolean);
+  if(bestLabel && intent.expectedReferenceLabels.includes(bestLabel)){
+    return referenceLabels.find(label => label.labelId === bestLabel) || expected[0] || null;
+  }
+  if(expected.length) return expected[0];
+  if(bestLabel) return referenceLabels.find(label => label.labelId === bestLabel) || null;
+  return null;
+}
+
+function ratioToTarget(actual, target){
+  const a = Number.isFinite(+actual) ? +actual : 0;
+  const t = Number.isFinite(+target) ? +target : 0;
+  if(t <= 0) return a <= 0.03 ? 1 : 0;
+  return clamp(a / t);
+}
+
+function closenessToTarget(actual, target, tolerance){
+  const a = Number.isFinite(+actual) ? +actual : 0;
+  const t = Number.isFinite(+target) ? +target : 0;
+  const tol = Math.max(Number.isFinite(+tolerance) ? +tolerance : 0.001, 0.001);
+  return clamp(1 - (Math.abs(a - t) / tol));
+}
+
+function strictTrajectoryRead(runtimeVector, referenceLabel, match, expectedHit, lateReferenceGap){
+  const target = referenceLabel?.comparisonVector || {};
+  if(!runtimeVector || !referenceLabel || !target){
+    return {
+      score10: 1,
+      rawFit: 0,
+      referenceLabelId: referenceLabel?.labelId || null,
+      components: {},
+      read: 'Movement conformance starts at 1/10 because no durable Galaga challenge trajectory target was available for this stage.'
+    };
+  }
+  const yRange = ratioToTarget(runtimeVector.yRange, target.yRange);
+  const pathLength = ratioToTarget(runtimeVector.pathLength, target.pathLength);
+  const turnCount = ratioToTarget(runtimeVector.turnCount, target.turnCount || 1);
+  const reversalCount = closenessToTarget(runtimeVector.reversalCount, target.reversalCount || 0, 1);
+  const lowerFieldShare = closenessToTarget(runtimeVector.lowerFieldShare, target.lowerFieldShare || 0, 0.12);
+  const trajectoryScore = clamp((+match?.bestMatch?.trajectoryScore10 || 0) / 10);
+  const rawFit = clamp(
+    (0.24 * yRange)
+    + (0.28 * pathLength)
+    + (0.18 * turnCount)
+    + (0.1 * reversalCount)
+    + (0.08 * lowerFieldShare)
+    + (0.12 * trajectoryScore)
+  );
+  const referenceReliability = lateReferenceGap ? 0.52 : (expectedHit ? 0.92 : 0.62);
+  const temporalCoverage = 0.58; // Current probes are sampled path summaries, not full tracked temporal trajectories.
+  const score10 = round(1 + (5.4 * rawFit * referenceReliability * temporalCoverage), 1);
+  return {
+    score10,
+    rawFit: round(rawFit, 3),
+    referenceLabelId: referenceLabel.labelId,
+    referenceReliability,
+    temporalCoverage,
+    components: {
+      yRange: round(yRange, 3),
+      pathLength: round(pathLength, 3),
+      turnCount: round(turnCount, 3),
+      reversalCount: round(reversalCount, 3),
+      lowerFieldShare: round(lowerFieldShare, 3),
+      trajectoryBestMatch: round(trajectoryScore, 3)
+    },
+    read: `Strict movement score ${score10}/10 against ${referenceLabel.labelId}: y-range fit ${round(yRange, 2)}, path-length fit ${round(pathLength, 2)}, turn fit ${round(turnCount, 2)}. Current probes are still sampled summaries, so full temporal choreography is not yet proven.`
+  };
+}
+
+function strictGraphicsRead(stage, runtime, expectedHit){
+  const firstWave = runtime?.firstWave || [];
+  const types = typeSet(firstWave);
+  const families = familySet(firstWave);
+  const classicLineContract = stage === 3 && types.length === 2 && types.every(type => ['bee', 'but'].includes(type));
+  const hasNonClassicVisual = families.some(family => family !== 'classic');
+  const typeMixCredit = clamp(types.length / 4) * 0.18;
+  const familyCredit = hasNonClassicVisual ? 0.14 : 0;
+  const contractCredit = classicLineContract && expectedHit ? 0.18 : 0;
+  const measuredRuntimeSpriteMotionCoverage = 0;
+  const activeMotionCap = measuredRuntimeSpriteMotionCoverage ? 5.5 : 2.2;
+  const score10 = round(Math.min(activeMotionCap, 1 + (4.0 * (typeMixCredit + familyCredit + contractCredit))), 1);
+  return {
+    score10,
+    activeMotionCap,
+    measuredRuntimeSpriteMotionCoverage,
+    components: {
+      alienTypeMix: round(typeMixCredit, 3),
+      visualFamilyNovelty: round(familyCredit, 3),
+      firstChallengeLineContract: round(contractCredit, 3),
+      activeSpriteMotionCoverage: measuredRuntimeSpriteMotionCoverage
+    },
+    read: `Strict graphics score ${score10}/10. Current visible family/type labels are present, but challenge-window graphics are capped at ${activeMotionCap}/10 until live sprite flaps, pulsing, rotation/dive silhouettes, capture/rescue transitions, and Galaga target sprite crops are scored in motion.`
+  };
+}
+
+function strictAlienNoveltyRead(stage, runtime, score, expectedHit, lateReferenceGap){
+  const types = typeSet(runtime?.firstWave || []);
+  const families = familySet(runtime?.firstWave || []);
+  const group = score.groupIdentity || groupIdentity(runtime);
+  const expectedTypes = STAGE_INTENT[stage].expectedFirstWaveTypes || null;
+  const firstChallengeSemantic = expectedTypes
+    ? (types.length > 0 && types.every(type => expectedTypes.includes(type)) ? 0.35 : 0)
+    : 0;
+  const typeMix = clamp(types.length / 4) * 0.28;
+  const familyNovelty = families.some(family => family !== 'classic') ? 0.22 : 0;
+  const groupDiversity = clamp((+group.distinctTypeSequences || 0) / Math.max(+group.groupCount || 1, 1)) * 0.2;
+  const referenceStageCredit = expectedHit ? 0.16 : (lateReferenceGap ? 0 : 0.08);
+  const score10 = round(Math.min(3.4, 1 + (4.8 * (firstChallengeSemantic + typeMix + familyNovelty + groupDiversity + referenceStageCredit))), 1);
+  return {
+    score10,
+    components: {
+      firstChallengeSemantic,
+      typeMix: round(typeMix, 3),
+      familyNovelty,
+      groupDiversity: round(groupDiversity, 3),
+      referenceStageCredit
+    },
+    read: `Strict alien/progression novelty score ${score10}/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments.`
+  };
+}
+
+function stageProgressionRead(stage, runtime, expectedHit, lateReferenceGap){
+  const pathFamilies = Array.from(new Set((runtime?.groupSignatures || []).flatMap(group => group.pathFamilies || []))).filter(Boolean);
+  const pathFamilyCredit = clamp(pathFamilies.length / 4) * 0.2;
+  const referenceCredit = expectedHit ? 0.24 : 0;
+  const latePenalty = lateReferenceGap ? -0.12 : 0;
+  const stageRoleCredit = stage === 3 ? 0.12 : (stage === 7 || stage === 11 ? 0.16 : 0.08);
+  const score10 = round(Math.max(1, Math.min(3.2, 1 + (4.5 * (pathFamilyCredit + referenceCredit + stageRoleCredit + latePenalty)))), 1);
+  return {
+    score10,
+    pathFamilies,
+    components: {
+      pathFamilyCredit: round(pathFamilyCredit, 3),
+      referenceCredit,
+      stageRoleCredit,
+      lateReferencePenalty: latePenalty
+    },
+    read: `Strict progression score ${score10}/10. The current stage has ${pathFamilies.length || 0} path-family label(s), but later challenge stages are not yet backed by enough reference-specific set-piece contracts to claim real Galaga progression.`
+  };
+}
+
 function summarizeMotion(samples){
   const populated = samples.filter(sample => sample.activeCount > 0);
   return {
@@ -292,7 +437,7 @@ async function collectRuntimeProbes(){
   return rows;
 }
 
-function stageScore(stage, runtime, match){
+function stageScore(stage, runtime, match, referenceLabels){
   const intent = STAGE_INTENT[stage];
   const bestScore = Number(match?.bestMatch?.score10 || 0);
   const bestLabel = match?.bestMatch?.labelId || '';
@@ -321,22 +466,46 @@ function stageScore(stage, runtime, match){
   const adjustedTypeNovelty = expectedTypes
     ? (lineContractHit ? 1.05 : typeNovelty * 0.62)
     : typeNovelty;
-  const score = clamp(base + safety + trajectory + expectedMatch + adjustedTypeNovelty + familyNovelty + referenceEvidence + group.component + latePenalty, 0, 10);
-  const interest = clamp(score - (expectedHit ? 0 : 0.35), 1, 10);
+  const oldCoverageScore = clamp(base + safety + trajectory + expectedMatch + adjustedTypeNovelty + familyNovelty + referenceEvidence + group.component + latePenalty, 0, 10);
+  const referenceLabel = referenceLabelForStage(stage, intent, match, referenceLabels);
+  const movement = strictTrajectoryRead(match?.runtimeVector, referenceLabel, match, expectedHit, lateReferenceGap);
+  const graphics = strictGraphicsRead(stage, runtime, expectedHit);
+  const alienNovelty = strictAlienNoveltyRead(stage, runtime, { groupIdentity: group }, expectedHit, lateReferenceGap);
+  const progression = stageProgressionRead(stage, runtime, expectedHit, lateReferenceGap);
+  const safetyRuleScore10 = safetyPass ? 10 : 1;
+  const conformanceRaw = (0.38 * movement.score10)
+    + (0.27 * graphics.score10)
+    + (0.2 * alienNovelty.score10)
+    + (0.15 * progression.score10);
+  const interestRaw = (0.35 * movement.score10)
+    + (0.28 * graphics.score10)
+    + (0.22 * alienNovelty.score10)
+    + (0.15 * progression.score10);
+  const strictScore = safetyPass ? conformanceRaw : Math.min(1.5, conformanceRaw);
+  const strictInterest = safetyPass ? interestRaw : Math.min(1.5, interestRaw);
   return {
-    conformanceScore10: round(score, 1),
-    interestingFactor10: round(interest, 1),
+    conformanceScore10: round(strictScore, 1),
+    interestingFactor10: round(strictInterest, 1),
+    legacyCoverageScore10: round(oldCoverageScore, 1),
+    movementConformanceScore10: movement.score10,
+    graphicalConformanceScore10: graphics.score10,
+    alienNoveltyScore10: alienNovelty.score10,
+    progressionConformanceScore10: progression.score10,
+    safetyRuleScore10,
+    strictAxisReads: {
+      movement,
+      graphics,
+      alienNovelty,
+      progression
+    },
     scoreComponents: {
       baseline: base,
-      safety,
-      trajectory: round(trajectory, 2),
-      expectedReferenceMatch: expectedMatch,
-      alienTypeNovelty: round(adjustedTypeNovelty, 2),
-      firstChallengeLineContract: lineContractHit ? 0.35 : 0,
-      visualFamilyNovelty: familyNovelty,
-      groupWaveIdentity: group.component,
-      referenceEvidence,
-      lateReferencePenalty: latePenalty
+      movementConformance: movement.score10,
+      graphicalConformance: graphics.score10,
+      alienNovelty: alienNovelty.score10,
+      stageProgression: progression.score10,
+      safetyRule: safetyRuleScore10,
+      legacyCoverageScore: round(oldCoverageScore, 1)
     },
     groupIdentity: group,
     expectedReferenceHit: expectedHit
@@ -349,6 +518,15 @@ function criticalGaps(stage, runtime, match, score){
   const bestLabel = match?.bestMatch?.labelId || '';
   if(!score.expectedReferenceHit && intent.expectedReferenceLabels.length){
     gaps.push(`Best reference match is ${bestLabel || 'missing'}, not expected ${intent.expectedReferenceLabels.join(' or ')}.`);
+  }
+  if((score.movementConformanceScore10 || 1) < 4){
+    gaps.push(`Movement conformance is only ${score.movementConformanceScore10}/10 under the strict scorer: current paths are too short/shallow and do not yet show the sweeping, turning, learnable Galaga challenge-stage trajectories.`);
+  }
+  if((score.graphicalConformanceScore10 || 1) < 4){
+    gaps.push(`Graphical conformance is only ${score.graphicalConformanceScore10}/10 because challenge sprites are still scored as static/type labels; active flapping, pulsing, dive/rotation silhouettes, and reference sprite crops are not yet measured in the challenge window.`);
+  }
+  if((score.alienNoveltyScore10 || 1) < 4){
+    gaps.push(`Alien/stage novelty is only ${score.alienNoveltyScore10}/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.`);
   }
   if(stage === 3){
     const types = typeSet(runtime?.firstWave || []);
@@ -419,7 +597,7 @@ function makeStageRow(stage, runtime, match, referenceLabels){
   const referenceTarget = referenceLabels.find(label => label.labelId === bestLabel)
     || referenceLabels.find(label => intent.expectedReferenceLabels.includes(label.labelId))
     || null;
-  const score = stageScore(stage, runtime, match);
+  const score = stageScore(stage, runtime, match, referenceLabels);
   const firstWave = runtime?.firstWave || [];
   return {
     stage,
@@ -447,16 +625,16 @@ function makeStageRow(stage, runtime, match, referenceLabels){
     } : null,
     motionProbe: runtime ? runtime.motionSummary : null,
     currentRead: runtime
-      ? `${layoutSignature(runtime.layout)}; first-wave types ${typeSequence(firstWave) || 'pending'}; visual families ${familySet(firstWave).join(', ') || 'pending'}; group identity ${score.groupIdentity.score10}/10.`
+      ? `${layoutSignature(runtime.layout)}; first-wave types ${typeSequence(firstWave) || 'pending'}; visual families ${familySet(firstWave).join(', ') || 'pending'}; strict movement ${score.movementConformanceScore10}/10, graphics ${score.graphicalConformanceScore10}/10, alien novelty ${score.alienNoveltyScore10}/10.`
       : 'Runtime probe pending.',
     graphicsRead: runtime
-      ? `Current graphics show ${familySet(firstWave).join(', ') || 'no'} family styling with ${typeSet(firstWave).join(', ') || 'no'} alien types. This is still a proxy for visual identity; no active sprite-motion phase score is attached to the challenge window yet.`
+      ? score.strictAxisReads.graphics.read
       : 'Graphics runtime probe pending.',
     movementRead: match
-      ? `Trajectory vector best-match score ${round(match.bestMatch?.score10, 1)}/10 against ${bestLabel || 'no label'}; xRange ${match.runtimeVector?.xRange}, yRange ${match.runtimeVector?.yRange}, pathLength ${match.runtimeVector?.pathLength}.`
+      ? `${score.strictAxisReads.movement.read} Legacy broad vector best-match was ${round(match.bestMatch?.score10, 1)}/10 against ${bestLabel || 'no label'}; xRange ${match.runtimeVector?.xRange}, yRange ${match.runtimeVector?.yRange}, pathLength ${match.runtimeVector?.pathLength}.`
       : 'No reference trajectory comparison row was found for this stage.',
     alienVariationRead: runtime
-      ? `Opening wave exposes ${typeSet(firstWave).length} type(s) and ${familySet(firstWave).join(', ') || 'no'} visual family labels. Group identity: ${score.groupIdentity.read} Active sprite-motion novelty remains a separate unscored gap.`
+      ? `${score.strictAxisReads.alienNovelty.read} Opening wave exposes ${typeSet(firstWave).length} type(s) and ${familySet(firstWave).join(', ') || 'no'} visual family labels. Group identity diagnostic: ${score.groupIdentity.read}`
       : 'Alien variation probe pending.',
     groupIdentityRead: score.groupIdentity.read,
     groupIdentityScore10: score.groupIdentity.score10,
@@ -464,6 +642,13 @@ function makeStageRow(stage, runtime, match, referenceLabels){
     nextActions: nextActionsForStage(stage),
     interestingFactor10: score.interestingFactor10,
     conformanceScore10: score.conformanceScore10,
+    legacyCoverageScore10: score.legacyCoverageScore10,
+    movementConformanceScore10: score.movementConformanceScore10,
+    graphicalConformanceScore10: score.graphicalConformanceScore10,
+    alienNoveltyScore10: score.alienNoveltyScore10,
+    progressionConformanceScore10: score.progressionConformanceScore10,
+    safetyRuleScore10: score.safetyRuleScore10,
+    strictAxisReads: score.strictAxisReads,
     expectedReferenceHit: score.expectedReferenceHit,
     scoreComponents: score.scoreComponents,
     evidence: [
@@ -481,12 +666,14 @@ function buildMarkdown(report){
     const gapCell = row.criticalGaps.length
       ? row.criticalGaps.join('<br>')
       : 'Reference target hit; remaining work is trajectory precision and active motion scoring.';
-    return `| ${row.stage} | ${row.challengeNumber} | ${row.interestingFactor10}/10 | ${row.conformanceScore10}/10 | ${row.groupIdentityScore10 ?? 'n/a'}/10 | ${row.bestReferenceMatch?.labelId || 'pending'} (${row.referenceMatchScore10 ?? 'n/a'}/10) | ${row.pathFamily || 'pending'} | ${row.safetyProbe?.noEnemyShots && row.safetyProbe?.noAttackStarts && row.safetyProbe?.noShipLosses ? 'pass' : 'pending/fail'} | ${gapCell} |`;
+    return `| ${row.stage} | ${row.challengeNumber} | ${row.interestingFactor10}/10 | ${row.movementConformanceScore10}/10 | ${row.graphicalConformanceScore10}/10 | ${row.alienNoveltyScore10}/10 | ${row.conformanceScore10}/10 | ${row.bestReferenceMatch?.labelId || 'pending'} (${row.referenceMatchScore10 ?? 'n/a'}/10 legacy) | ${row.safetyProbe?.noEnemyShots && row.safetyProbe?.noAttackStarts && row.safetyProbe?.noShipLosses ? 'pass' : 'pending/fail'} | ${gapCell} |`;
   }).join('\n');
   const stageSections = rows.map(row => `
 ## Stage ${row.stage} / Challenge ${row.challengeNumber}
 
-**Current score:** interesting factor ${row.interestingFactor10}/10; challenge conformance ${row.conformanceScore10}/10.
+**Current score:** interesting factor ${row.interestingFactor10}/10; challenge conformance ${row.conformanceScore10}/10. Movement ${row.movementConformanceScore10}/10, graphics ${row.graphicalConformanceScore10}/10, alien novelty ${row.alienNoveltyScore10}/10, progression ${row.progressionConformanceScore10}/10.
+
+**Legacy broad coverage score:** ${row.legacyCoverageScore10}/10. This is retained as diagnostic evidence only; it no longer counts as the player-facing conformance score.
 
 **Original target:** ${row.galagaTarget}
 
@@ -517,40 +704,44 @@ Branch: ${report.branch}
 
 ## Executive Summary
 
-This is a deliberately critical challenge-stage readout. The prior alien-entry score can look healthy because it rewards coverage and broad stage signatures. This report applies a harsher "interesting factor" lens that starts every challenge stage at 1.0/10 and only adds credit for measured no-combat rule conformance, Galaga-reference trajectory match, stage-specific visual/alien novelty, and durable reference evidence.
+This is now a strict challenge-stage readout. The prior alien-entry score looked too healthy because it rewarded coverage, type labels, and broad stage signatures. That was useful harness progress, but it overstated the player-facing experience. This report follows the current project decision that challenging stages start at **1/10 interesting**, **1/10 movement**, and **1/10 graphical conformance** until they earn credit through reference-grounded movement, active visual evidence, alien/stage novelty, and durable bonus-stage contracts.
 
-Current result: **${report.summary.interestingFactorScore10}/10 interesting factor** and **${report.summary.score10}/10 challenge-stage conformance**. The strongest rule finding is that current probes show no enemy shots, no attack starts, and no ship losses during sampled challenge windows. The weakest player-facing finding is that ${report.summary.weakestFinding}
+Current result: **${report.summary.interestingFactorScore10}/10 interesting factor** and **${report.summary.score10}/10 challenge-stage conformance**. Movement is **${report.summary.movementConformanceScore10}/10**, graphical conformance is **${report.summary.graphicalConformanceScore10}/10**, and alien/stage novelty is **${report.summary.alienNoveltyScore10}/10**. The strongest rule finding is that current probes show no enemy shots, no attack starts, and no ship losses during sampled challenge windows. The weakest player-facing finding is that ${report.summary.weakestFinding}
 
 ## Method
 
 - Runtime challenge states were sampled through the browser-backed Aurora harness using \`challengeFormationState()\`.
 - Reference targets came from media-backed Galaga path labels and contact sheets.
-- Existing path-family comparison supplied best-match vector scores against labeled Galaga challenge entries, with challenge windows scored on arrival-phase geometry plus alien-role semantics.
+- Existing path-family comparison supplied best-match vector scores against labeled Galaga challenge entries, but those broad scores are now retained as diagnostic coverage instead of the conformance score.
+- Strict movement scoring compares runtime y-range, path length, turn count, reversals, lower-field share, and trajectory best-match against the selected Galaga challenge reference vector. It is capped by current temporal-measurement limits because the harness still samples summaries rather than full tracked choreography.
+- Strict graphical scoring is intentionally low until challenge-window sprite animation is measured: flaps, pulsing, dive/rotation silhouettes, capture/rescue transitions, and direct target crop comparison.
 - Challenge path-slot extraction suppresses player fire for challenge windows, so trajectory comparison measures authored alien motion instead of bullet-truncated player-score fragments.
-- Safety is measured separately from interest: no shots/no kills is necessary, but it does not make a challenge visually conformant.
+- Safety is measured separately from interest: no shots/no kills is necessary, but it does not make a challenge visually conformant and contributes only as a guardrail.
 - Prior 24-second evidence windows can include post-challenge normal play, so enemy bullets/attackers in those older windows are not treated as challenge-rule failures here.
 
 ## Stage Summary
 
-| Stage | Challenge | Interest | Score | Group Identity | Best Reference Match | Aurora Path Family | No-Shot/No-Kill | Critical Gap |
-| --- | --- | ---: | ---: | ---: | --- | --- | --- | --- |
+| Stage | Challenge | Interest | Movement | Graphics | Alien Novelty | Strict Score | Diagnostic Best Reference | No-Shot/No-Kill | Critical Gap |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
 ${tableRows}
 
 ${stageSections}
 
 ## Plan To Improve
 
-1. Tighten the scorer first: separate first-visible arrival side, entry side, exit side, group index, no-fire/no-kill rule, path similarity, alien family novelty, and sprite-motion novelty.
-2. ${report.summary.stage3ExpectedReferenceHit ? 'Protect the stage 3 first-challenge reference hit, then improve its path-length and rack-slot precision against challenge-1 arrival/late-wave labels.' : 'Implement stage 3 against the first Galaga challenge target: top-right bee-line entry, late top-left butterfly wave, clean peel-off exits, bonus-stage readable grouping, no combat grammar.'}
-3. Implement stage 7 as the second challenge: denser mixed-novelty-line behavior with a measured increase in crossing path depth and learnable timing.
-4. Implement stage 11 as the third challenge: boss-led/dragonfly novelty with explicit animation-phase scoring for flapping, pulsing, and silhouette changes.
-5. Capture or label later Galaga challenge references before claiming stage 15/19 maturity; then tune boss-led-loop and crown-split-cascade against those references.
-6. Promote challenge-stage contact sheets and motion SVGs into the Application Guide so a reviewer can see the actual visual delta, not only score text.
+1. Treat the current strict scores as the release-facing truth: the broad coverage score is diagnostic only.
+2. Build the challenge-stage target grammar: per-challenge group order, first-visible frame, entry side, exit side, path length, turn count, featured alien family, scoring window, perfect-bonus expectation, and result feedback.
+3. Implement Stage 3 / Challenging Stage 1 first: top-right bee line, late top-left butterfly line, visibly longer upper-band sweep, clear peel-off exits, no combat grammar, and reference-matched duration/turn count.
+4. Implement Stage 7 / Challenging Stage 2 as a different authored set piece, not just wider Stage 3: denser mixed novelty, crossing pattern, different entry side and exit side, readable scoring route.
+5. Implement Stage 11 / Challenging Stage 3 with boss-led novelty and active animation evidence: featured alien role, flapping/pulsing/rotation windows, and a distinct reward read.
+6. Do not claim late challenge conformance for Stage 15/19 until later Galaga challenge references are labeled or an explicit inspired-but-non-Galaga contract is documented.
+7. Promote challenge-stage contact sheets, trajectory SVGs, and per-stage motion timelines into the Application Guide so the human review can see the actual delta, not only score text.
 
 ## Success Criteria
 
-- Raise challenge-stage interesting factor from ${report.summary.interestingFactorScore10}/10 toward 6.0/10 without regressing no-shot/no-kill guardrails.
-- ${report.summary.stage3ExpectedReferenceHit ? 'Keep stage 3 best-matching challenge-1 references while improving its raw trajectory score.' : 'Make stage 3 best-match challenge-1 references instead of challenge 2.'}
+- Raise challenge-stage interesting factor from ${report.summary.interestingFactorScore10}/10 to 3.5/10 as the first honest gate by implementing one visibly reference-like challenge, then toward 6.0/10 after Stage 3, 7, and 11 each have distinct authored contracts.
+- Raise movement conformance from ${report.summary.movementConformanceScore10}/10 by increasing y-range, path length, turn count, and exit-side match against the Galaga challenge references.
+- Raise graphical conformance from ${report.summary.graphicalConformanceScore10}/10 only when active sprite-motion windows and reference target crops are attached; do not inflate it from type labels alone.
 - Preserve 0 enemy shots, 0 enemy attack starts, and 0 ship losses during challenge windows.
 - Add stage 19 late-reference labels and high-bonus readability probes before treating the late challenge as conformant.
 - Add sprite-motion scoring for challenge enemies so visual novelty is active-motion evidence, not only a family label.
@@ -580,15 +771,22 @@ async function buildReport(){
   const summary = {
     score10: round(average(rows.map(row => row.conformanceScore10)), 1),
     interestingFactorScore10: round(average(rows.map(row => row.interestingFactor10)), 1),
-    confidence: 'medium',
-    resolution: 'stage-by-stage browser runtime probe plus media-backed Galaga challenge labels and current path-vector comparison',
-    startingAssumption: 'Each challenge stage starts at 1.0/10 interesting factor and must earn credit through measured safety, path reference match, visual novelty, alien variety, and durable evidence.',
+    movementConformanceScore10: round(average(rows.map(row => row.movementConformanceScore10)), 1),
+    graphicalConformanceScore10: round(average(rows.map(row => row.graphicalConformanceScore10)), 1),
+    alienNoveltyScore10: round(average(rows.map(row => row.alienNoveltyScore10)), 1),
+    progressionConformanceScore10: round(average(rows.map(row => row.progressionConformanceScore10)), 1),
+    safetyRuleScore10: round(average(rows.map(row => row.safetyRuleScore10)), 1),
+    legacyCoverageScore10: round(average(rows.map(row => row.legacyCoverageScore10)), 1),
+    confidence: 'medium-high for the gap; medium-low for exact remediation size',
+    resolution: 'strict stage-by-stage browser runtime probe plus media-backed Galaga challenge labels; broad legacy path/type coverage is retained as diagnostic evidence only',
+    scoringModel: 'strict-v2-user-baseline',
+    startingAssumption: 'Each challenge stage starts at 1.0/10 for interesting factor, movement conformance, and graphical conformance. Safety is a pass/fail guardrail and no longer inflates player-facing conformance.',
     strongestFinding: 'Sampled challenge windows preserve the Galaga-like no-shot/no-ship-loss rule.',
     stage3ExpectedReferenceHit,
     challenge2BestMatchCount,
-    weakestFinding,
-    playerMeaning: 'A player should experience challenging stages as safe but tense score exhibitions with memorable entry routes and alien novelty. Aurora currently has the safety rule, but the visual choreography is not yet distinctive enough.',
-    designerMeaning: 'Design work should move from broad path-family labels to explicit per-challenge contracts: group order, entry side, exit side, alien family, motion phases, bonus opportunity, and result feedback.',
+    weakestFinding: `current challenge stages are functionally safe but not yet credible Galaga-like bonus exhibitions: strict movement is ${round(average(rows.map(row => row.movementConformanceScore10)), 1)}/10, strict graphics is ${round(average(rows.map(row => row.graphicalConformanceScore10)), 1)}/10, alien/stage novelty is ${round(average(rows.map(row => row.alienNoveltyScore10)), 1)}/10, active sprite-motion evidence is missing, and late challenge references remain thin. Diagnostic legacy coverage was ${round(average(rows.map(row => row.legacyCoverageScore10)), 1)}/10, which is why the old read was too generous.`,
+    playerMeaning: 'A player should experience challenging stages as safe but tense score exhibitions with memorable entry routes, fresh alien types, readable trajectories, and a learnable perfect-bonus opportunity. Aurora currently preserves the safety rule, but the actual spectacle, motion, and visual novelty are still early.',
+    designerMeaning: 'Design work should move from broad path-family labels to explicit per-challenge contracts: group order, first-visible frame, entry side, exit side, path length, turn count, alien family, animation phases, bonus opportunity, and result feedback.',
     sourceScores: {
       alienEntryChallengeVariation: alienVariation?.score10 ?? null,
       challengeArrivalVsAppearance: (alienVariation?.metrics || []).find(item => item.id === 'challenge-arrival-vs-appearance')?.score10 ?? null,
@@ -624,12 +822,13 @@ async function buildReport(){
       challengeMotionProfileGuardrail: 'tools/harness/check-challenge-motion-profile.js'
     },
     improvementPlan: [
-      'Separate rule conformance from interest conformance in challenge metrics.',
-      'Stage 3: implement reference-labeled first-challenge entry and peel-off groups.',
-      'Stage 7: deepen challenge-2 mixed-novelty pattern and group scoring.',
-      'Stage 11: add active sprite-motion scoring around dragonfly/boss-led novelty.',
-      'Stage 15/19: acquire or label late challenge reference targets before late-stage tuning.',
-      'Publish contact sheets, trajectory SVGs, and per-stage critical gaps in generated docs.'
+      'Use strict challenge-stage scores as the release-facing truth; keep broad coverage scores only as diagnostics.',
+      'Define a challenge-stage target grammar for group order, entry/exit side, path length, turn count, featured alien, scoring window, perfect bonus, animation phases, and result feedback.',
+      'Stage 3: rebuild Challenging Stage 1 against the Galaga challenge-1 arrival and late-wave references with visibly longer movement and readable exits.',
+      'Stage 7: rebuild Challenging Stage 2 as a separate mixed-novelty crossing set piece with different entry/exit and timing grammar.',
+      'Stage 11: rebuild Challenging Stage 3 around boss-led novelty plus active sprite-motion scoring.',
+      'Stage 15/19: label late challenge references or document an explicitly inspired alternate contract before claiming maturity.',
+      'Publish contact sheets, trajectory SVGs, per-stage critical gaps, and strict axis scores in generated docs.'
     ]
   };
 }

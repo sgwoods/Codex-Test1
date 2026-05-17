@@ -13,8 +13,15 @@ const TRACKED_REFERENCE_TARGETS = new Map([
   [11, 'challenge-3-arrival-group-1'],
   [15, 'challenge-3-arrival-group-1']
 ]);
-const MIN_SUMMARY_SCORE10 = 5.5;
-const MIN_INTEREST_SCORE10 = 5.5;
+const STRICT_SCORE_FIELDS = [
+  'interestingFactor10',
+  'conformanceScore10',
+  'movementConformanceScore10',
+  'graphicalConformanceScore10',
+  'alienNoveltyScore10',
+  'progressionConformanceScore10',
+  'safetyRuleScore10'
+];
 
 function fail(message, payload){
   console.error(message);
@@ -40,14 +47,16 @@ const warnings = [];
 for(const stage of REQUIRED_STAGES){
   const row = rows.find(item => +item.stage === stage);
   if(!row) fail(`missing challenge-stage conformance row for stage ${stage}`, { rows: rows.map(item => item.stage) });
-  if(!Number.isFinite(+row.interestingFactor10) || +row.interestingFactor10 < 1 || +row.interestingFactor10 > 10){
-    fail(`stage ${stage} interesting factor is invalid`, row);
-  }
-  if(!Number.isFinite(+row.conformanceScore10) || +row.conformanceScore10 < 0 || +row.conformanceScore10 > 10){
-    fail(`stage ${stage} conformance score is invalid`, row);
+  for(const field of STRICT_SCORE_FIELDS){
+    if(!Number.isFinite(+row[field]) || +row[field] < 1 || +row[field] > 10){
+      fail(`stage ${stage} strict score field ${field} is invalid`, row);
+    }
   }
   if(!row.currentRead || !row.graphicsRead || !row.movementRead || !row.alienVariationRead){
     fail(`stage ${stage} is missing critical narrative fields`, row);
+  }
+  if(!row.strictAxisReads?.movement?.read || !row.strictAxisReads?.graphics?.read || !row.strictAxisReads?.alienNovelty?.read){
+    fail(`stage ${stage} is missing strict axis reads`, row);
   }
   if(!Number.isFinite(+row.groupIdentityScore10) || !row.groupIdentityRead){
     fail(`stage ${stage} is missing measured challenge group identity`, row);
@@ -55,8 +64,8 @@ for(const stage of REQUIRED_STAGES){
   if(!Array.isArray(row.criticalGaps)){
     fail(`stage ${stage} is missing critical gaps`, row);
   }
-  if(!row.criticalGaps.length && !row.expectedReferenceHit){
-    fail(`stage ${stage} has no critical gaps without an expected reference hit`, row);
+  if(!row.criticalGaps.length){
+    fail(`stage ${stage} has no critical gaps; strict scoring should keep the remaining movement/graphics/novelty gap explicit`, row);
   }
   if(!Array.isArray(row.nextActions) || !row.nextActions.length){
     fail(`stage ${stage} is missing next actions`, row);
@@ -87,21 +96,33 @@ for(const stage of REQUIRED_STAGES){
   }
 }
 
+if(report.summary?.scoringModel !== 'strict-v2-user-baseline'){
+  fail('challenge-stage conformance is not using the strict scorer baseline', report.summary);
+}
+for(const field of [
+  'score10',
+  'interestingFactorScore10',
+  'movementConformanceScore10',
+  'graphicalConformanceScore10',
+  'alienNoveltyScore10',
+  'progressionConformanceScore10',
+  'safetyRuleScore10'
+]){
+  if(!Number.isFinite(+report.summary?.[field]) || +report.summary[field] < 1 || +report.summary[field] > 10){
+    fail(`summary strict score field ${field} is invalid`, report.summary);
+  }
+}
 if(!Number.isFinite(+report.summary?.interestingFactorScore10) || +report.summary.interestingFactorScore10 < 1){
   fail('summary interesting factor is invalid', report.summary);
-}
-if(+report.summary.score10 < MIN_SUMMARY_SCORE10 || +report.summary.interestingFactorScore10 < MIN_INTEREST_SCORE10){
-  fail('challenge-stage conformance fell below the current minimum tracked floor', {
-    minimumScore10: MIN_SUMMARY_SCORE10,
-    minimumInterestScore10: MIN_INTEREST_SCORE10,
-    summary: report.summary
-  });
 }
 
 console.log(JSON.stringify({
   ok: true,
   score10: report.summary.score10,
   interestingFactorScore10: report.summary.interestingFactorScore10,
+  movementConformanceScore10: report.summary.movementConformanceScore10,
+  graphicalConformanceScore10: report.summary.graphicalConformanceScore10,
+  alienNoveltyScore10: report.summary.alienNoveltyScore10,
   rows: rows.length,
   warnings
 }, null, 2));

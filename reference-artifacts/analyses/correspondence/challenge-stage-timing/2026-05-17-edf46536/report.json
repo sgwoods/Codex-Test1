@@ -1,0 +1,217 @@
+{
+  "generatedAt": "2026-05-17T13:12:56.413Z",
+  "profile": {
+    "id": "challenge-stage-timing",
+    "title": "Challenge Stage Timing Correspondence",
+    "purpose": "Compare challenge entry and perfect-transition timing between the shipped local baseline, the current candidate, and the preserved historical Aurora timing target derived from Galaga-aligned analysis.",
+    "candidateRoots": {
+      "baseline": "dist/production",
+      "current": "dist/dev"
+    },
+    "referenceSource": {
+      "timingLibrary": "reference-artifacts/analyses/galaga-reference-timing-library/event-families.json"
+    },
+    "historicalAuroraBaseline": {
+      "eventFamilyId": "challenge-entry-results-perfect"
+    },
+    "scenarios": {
+      "challengeEntry": "tools/harness/scenarios/challenge-entry-probe.json",
+      "challengePerfect": "tools/harness/scenarios/stage3-perfect-transition.json"
+    },
+    "metrics": [
+      {
+        "id": "challengeCueAfterProbe",
+        "label": "Challenge Cue After Probe",
+        "source": "challengeEntry",
+        "path": [
+          "challengeEntry",
+          "cueAfterProbe"
+        ],
+        "tolerance": 0.5,
+        "severity": "high"
+      },
+      {
+        "id": "challengeSpawnAfterCue",
+        "label": "Challenge Spawn After Cue",
+        "source": "challengeEntry",
+        "path": [
+          "challengeEntry",
+          "spawnAfterCue"
+        ],
+        "tolerance": 0.4,
+        "severity": "high"
+      },
+      {
+        "id": "resultCueAfterClear",
+        "label": "Challenge Result Cue After Clear",
+        "source": "challengePerfect",
+        "runtimePath": [
+          "challengePerfect",
+          "challengePerfectCueAfterClear"
+        ],
+        "path": [
+          "challengePerfect",
+          "resultCueAfterClear"
+        ],
+        "tolerance": 0.4,
+        "severity": "high"
+      },
+      {
+        "id": "nextCueAfterClear",
+        "label": "Next-Stage Cue After Clear",
+        "source": "challengePerfect",
+        "runtimePath": [
+          "challengePerfect",
+          "nextStageCueAfterClear"
+        ],
+        "path": [
+          "challengePerfect",
+          "nextCueAfterClear"
+        ],
+        "tolerance": 0.6,
+        "severity": "medium"
+      },
+      {
+        "id": "spawnAfterClear",
+        "label": "Next-Stage Spawn After Clear",
+        "source": "challengePerfect",
+        "runtimePath": [
+          "challengePerfect",
+          "nextStageSpawnAfterClear"
+        ],
+        "path": [
+          "challengePerfect",
+          "spawnAfterClear"
+        ],
+        "tolerance": 0.8,
+        "severity": "medium"
+      }
+    ]
+  },
+  "baselineRoot": "dist/production",
+  "currentRoot": "dist/dev",
+  "historicalBaseline": {
+    "id": "challenge-entry-results-perfect",
+    "label": "Challenge Entry, Results, And Perfect"
+  },
+  "runs": {
+    "baseline": {
+      "challengeEntry": "reference-artifacts/analyses/correspondence/challenge-stage-timing/challenge-entry-probe-seed9203-2026-05-17T13-12-50-153Z-43754-6z1nbt/neo-galaga-session-ngt-1779023571578-3.json",
+      "challengePerfect": "reference-artifacts/analyses/correspondence/challenge-stage-timing/stage3-perfect-transition-seed3011-2026-05-17T13-12-53-244Z-43984-j6zpor/neo-galaga-session-ngt-1779023574713-3.json",
+      "challengeEntryError": null,
+      "challengePerfectError": null
+    },
+    "current": {
+      "challengeEntry": "reference-artifacts/analyses/correspondence/challenge-stage-timing/challenge-entry-probe-seed9203-2026-05-17T13-12-51-732Z-43875-6wqgr9/neo-galaga-session-ngt-1779023573095-3.json",
+      "challengePerfect": "reference-artifacts/analyses/correspondence/challenge-stage-timing/stage3-perfect-transition-seed3011-2026-05-17T13-12-54-908Z-44106-qawnq9/neo-galaga-session-ngt-1779023576313-3.json",
+      "challengeEntryError": null,
+      "challengePerfectError": null
+    }
+  },
+  "runErrors": [],
+  "baselineMetrics": {
+    "challengeEntry": {
+      "probeAt": 0.1,
+      "challengeCueAfterProbe": 2.217,
+      "challengeSpawnAfterProbe": 3.35,
+      "challengeSpawnAfterCue": 1.133,
+      "firstChallengePulseAfterSpawn": null
+    },
+    "challengePerfect": {
+      "challengeClearAt": null,
+      "challengePerfectCueAfterClear": null,
+      "nextStageCueAfterClear": null,
+      "nextStageSpawnAfterClear": null,
+      "nextStageSpawnAfterCue": null
+    }
+  },
+  "currentMetrics": {
+    "challengeEntry": {
+      "probeAt": 0.1,
+      "challengeCueAfterProbe": 2.217,
+      "challengeSpawnAfterProbe": 3.35,
+      "challengeSpawnAfterCue": 1.133,
+      "firstChallengePulseAfterSpawn": null
+    },
+    "challengePerfect": {
+      "challengeClearAt": 1.217,
+      "challengePerfectCueAfterClear": 0.333,
+      "nextStageCueAfterClear": 2.866,
+      "nextStageSpawnAfterClear": 4.433,
+      "nextStageSpawnAfterCue": 1.567
+    }
+  },
+  "metrics": [
+    {
+      "id": "challengeCueAfterProbe",
+      "label": "Challenge Cue After Probe",
+      "severity": "high",
+      "target": 2.224,
+      "tolerance": 0.5,
+      "baseline": 2.217,
+      "current": 2.217,
+      "baselineDelta": -0.007,
+      "currentDelta": -0.007,
+      "driftFromBaseline": 0,
+      "withinTolerance": true
+    },
+    {
+      "id": "challengeSpawnAfterCue",
+      "label": "Challenge Spawn After Cue",
+      "severity": "high",
+      "target": 1.133,
+      "tolerance": 0.4,
+      "baseline": 1.133,
+      "current": 1.133,
+      "baselineDelta": 0,
+      "currentDelta": 0,
+      "driftFromBaseline": 0,
+      "withinTolerance": true
+    },
+    {
+      "id": "resultCueAfterClear",
+      "label": "Challenge Result Cue After Clear",
+      "severity": "high",
+      "target": 0.342,
+      "tolerance": 0.4,
+      "baseline": null,
+      "current": 0.333,
+      "baselineDelta": null,
+      "currentDelta": -0.009,
+      "driftFromBaseline": null,
+      "withinTolerance": true
+    },
+    {
+      "id": "nextCueAfterClear",
+      "label": "Next-Stage Cue After Clear",
+      "severity": "medium",
+      "target": 2.851,
+      "tolerance": 0.6,
+      "baseline": null,
+      "current": 2.866,
+      "baselineDelta": null,
+      "currentDelta": 0.015,
+      "driftFromBaseline": null,
+      "withinTolerance": true
+    },
+    {
+      "id": "spawnAfterClear",
+      "label": "Next-Stage Spawn After Clear",
+      "severity": "medium",
+      "target": 4.401,
+      "tolerance": 0.8,
+      "baseline": null,
+      "current": 4.433,
+      "baselineDelta": null,
+      "currentDelta": 0.032,
+      "driftFromBaseline": null,
+      "withinTolerance": true
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "total": 5,
+    "worstCurrentDelta": 0.032,
+    "worstDriftFromBaseline": 0
+  }
+}
