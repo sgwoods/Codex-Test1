@@ -8,6 +8,7 @@ const { renderSpecToWav } = require('./audio-spec-renderer');
 const GUIDE = require(path.join(ROOT, 'application-guide.json'));
 const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-audio-cue-candidates');
 const THEME_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-audio-theme-comparison');
+const RUNTIME_TRIAL_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-audio-runtime-trials');
 const MASKING_CRITICAL_CUES = Object.freeze(['playerShot', 'enemyHit', 'enemyBoom', 'bossHit', 'bossBoom', 'playerHit', 'rescueJoin']);
 let criticalMaskingProfiles = null;
 
@@ -1050,6 +1051,114 @@ const CUE_CONFIGS = {
         }
       },
       {
+        id: 'perfect-measured-onset-spaced-whisper-tail',
+        label: 'Perfect measured onset with spaced whisper tail',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.24,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.04, clipStart: 0, clipDuration: .32 },
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: .045, clipStart: .48, clipDuration: .72, delay: .52 }
+          ]
+        }
+      },
+      {
+        id: 'perfect-measured-onset-spaced-air-tail',
+        label: 'Perfect measured onset with spaced air tail',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.24,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.04, clipStart: 0, clipDuration: .32 },
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: .07, clipStart: .48, clipDuration: .72, delay: .52 }
+          ]
+        }
+      },
+      {
+        id: 'perfect-short-onset-spaced-whisper-tail',
+        label: 'Perfect short onset with spaced whisper tail',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.18,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.04, clipStart: 0, clipDuration: .24 },
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: .05, clipStart: .42, clipDuration: .72, delay: .46 }
+          ]
+        }
+      },
+      {
+        id: 'perfect-onset-body-separated-air-tail',
+        label: 'Perfect onset/body with separated air tail',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.24,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.05, clipStart: 0, clipDuration: .24 },
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: .07, clipStart: .48, clipDuration: .72, delay: .52 }
+          ]
+        }
+      },
+      {
+        id: 'perfect-onset-body-separated-soft-tail',
+        label: 'Perfect onset/body with separated soft tail',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.24,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.05, clipStart: 0, clipDuration: .24 },
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: .12, clipStart: .48, clipDuration: .72, delay: .52 }
+          ]
+        }
+      },
+      {
+        id: 'perfect-onset-body-separated-medium-tail',
+        label: 'Perfect onset/body with separated medium tail',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.24,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.05, clipStart: 0, clipDuration: .24 },
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: .2, clipStart: .48, clipDuration: .72, delay: .52 }
+          ]
+        }
+      },
+      {
+        id: 'perfect-onset-body-separated-brief-soft-tail',
+        label: 'Perfect onset/body with separated brief soft tail',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.18,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.05, clipStart: 0, clipDuration: .24 },
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: .14, clipStart: .52, clipDuration: .52, delay: .62 }
+          ]
+        }
+      },
+      {
+        id: 'perfect-onset-body-separated-brief-medium-tail',
+        label: 'Perfect onset/body with separated brief medium tail',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.18,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.05, clipStart: 0, clipDuration: .24 },
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: .2, clipStart: .52, clipDuration: .52, delay: .62 }
+          ]
+        }
+      },
+      {
+        id: 'perfect-onset-body-separated-late-soft-tail',
+        label: 'Perfect onset/body with separated late soft tail',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.18,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.05, clipStart: 0, clipDuration: .24 },
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: .16, clipStart: .58, clipDuration: .44, delay: .7 }
+          ]
+        }
+      },
+      {
         id: 'perfect-clean-onset-scheduled-pad',
         label: 'Perfect clean onset scheduled pad',
         spec: {
@@ -1109,6 +1218,42 @@ const CUE_CONFIGS = {
         }
       },
       {
+        id: 'perfect-onset-body-bridged-tail-light',
+        label: 'Perfect onset/body with bridged light tail',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.2,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.05, clipStart: 0, clipDuration: .24 },
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: .24, clipStart: .18, clipDuration: .92, delay: .18 }
+          ]
+        }
+      },
+      {
+        id: 'perfect-onset-body-bridged-tail-medium',
+        label: 'Perfect onset/body with bridged medium tail',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.2,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.04, clipStart: 0, clipDuration: .24 },
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: .34, clipStart: .18, clipDuration: .92, delay: .18 }
+          ]
+        }
+      },
+      {
+        id: 'perfect-onset-body-bridged-tail-strong',
+        label: 'Perfect onset/body with bridged strong tail',
+        spec: {
+          cooldownMs: 2400,
+          scheduledDuration: 1.2,
+          layers: [
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: 1.02, clipStart: 0, clipDuration: .24 },
+            { referenceClip: 'assets/reference-audio/galaga2-challenging-stage-perfect.m4a', referenceVolume: .46, clipStart: .18, clipDuration: .92, delay: .18 }
+          ]
+        }
+      },
+      {
         id: 'perfect-bright-onset-quiet-ceremony-tail',
         label: 'Perfect bright onset with quiet ceremony tail',
         spec: {
@@ -1164,10 +1309,14 @@ const CUE_CONFIGS = {
       risk: .25,
       segment: .45,
       duration: .05,
-      acceptableDuration: .08,
+      acceptableDuration: .12,
       centroidWorsenHz: 120,
       bandWorsen: .055,
-      minimumScheduledDurationSeconds: 1.1
+      minimumScheduledDurationSeconds: 1.1,
+      minimumActiveCoverageOfScheduled: .38,
+      calibratedSegmentRoleRisk: true,
+      calibratedSegmentMaxRisk10: .35,
+      rawSegmentWorsenMax10: .35
     }
   },
   'capture-beam': {
@@ -1277,6 +1426,49 @@ function walkFiles(root, fileName){
   }
   walk(root);
   return found;
+}
+
+function readJsonIfExists(file){
+  if(!file || !fs.existsSync(file)) return null;
+  try{
+    return JSON.parse(fs.readFileSync(file, 'utf8'));
+  }catch{
+    return null;
+  }
+}
+
+function latestRuntimeTrial(cue){
+  const trials = walkFiles(RUNTIME_TRIAL_ROOT, 'report.json')
+    .map(file => {
+      const report = readJsonIfExists(file);
+      return report?.cue === cue ? { file, report } : null;
+    })
+    .filter(Boolean)
+    .sort((a, b) => fs.statSync(b.file).mtimeMs - fs.statSync(a.file).mtimeMs || a.file.localeCompare(b.file));
+  return trials[0] || null;
+}
+
+function runtimeTrialForDecision(config, decision){
+  if(!decision?.best && !decision?.measuredBest) return null;
+  const trial = latestRuntimeTrial(config.cue);
+  if(!trial) return null;
+  const status = trial.report?.decision?.status || '';
+  const candidate = trial.report?.candidate || '';
+  const appliesToBest = candidate === decision.best;
+  const appliesToMeasuredBest = candidate === decision.measuredBest;
+  return {
+    artifact: rel(trial.file),
+    status,
+    candidate,
+    appliesToBest,
+    appliesToMeasuredBest,
+    promoteRuntime: trial.report?.decision?.promoteRuntime === true,
+    reason: trial.report?.decision?.reason || '',
+    currentAudioScore10: trial.report?.postTrialEvidence?.currentAudioScore10 ?? null,
+    currentHighestRiskCue: trial.report?.postTrialEvidence?.currentHighestRiskCue || null,
+    currentHighestRisk10: trial.report?.postTrialEvidence?.currentHighestRisk10 ?? null,
+    nextStep: trial.report?.nextStep || ''
+  };
 }
 
 function latestThemeMetricsPath(){
@@ -1874,6 +2066,42 @@ function weightedScore(rows){
   return total > 0 ? round(rows.reduce((sum, row) => sum + (+row.score10 || 0) * (+row.weight || 0), 0) / total, 2) : 0;
 }
 
+function ceremonyTailAnalysis(row, config){
+  const gate = config.keeper || {};
+  const minimumScheduledDurationSeconds = Number(gate.minimumScheduledDurationSeconds);
+  if(!Number.isFinite(minimumScheduledDurationSeconds)) return null;
+  const scheduledDurationSeconds = scheduledCueDurationSeconds(row);
+  const activityProfile = row.activityProfile || {};
+  const activeDurationSeconds = Number(activityProfile.active_span_duration_s ?? row.activeMetrics?.duration_s);
+  if(!Number.isFinite(scheduledDurationSeconds) || !Number.isFinite(activeDurationSeconds) || scheduledDurationSeconds <= 0) return null;
+  const minimumActiveCoverageOfScheduled = Number.isFinite(+gate.minimumActiveCoverageOfScheduled)
+    ? +gate.minimumActiveCoverageOfScheduled
+    : .35;
+  const activeCoverageOfScheduled = Number.isFinite(+activityProfile.active_span_coverage)
+    ? +activityProfile.active_span_coverage
+    : activeDurationSeconds / scheduledDurationSeconds;
+  const activeCoverageScore10 = scoreDeficit(activeCoverageOfScheduled, minimumActiveCoverageOfScheduled, .24);
+  const minimumActiveSeconds = round(scheduledDurationSeconds * minimumActiveCoverageOfScheduled, 3);
+  const clearsActiveCoverage = activeCoverageOfScheduled >= minimumActiveCoverageOfScheduled;
+  return {
+    family: 'ceremony-tail-audibility',
+    scheduledDurationSeconds: round(scheduledDurationSeconds, 3),
+    activeDurationSeconds: round(activeDurationSeconds, 3),
+    minimumActiveSeconds,
+    activeCoverageOfScheduled: round(activeCoverageOfScheduled, 3),
+    minimumActiveCoverageOfScheduled: round(minimumActiveCoverageOfScheduled, 3),
+    activeCoverageScore10,
+    activeFrameShare: Number.isFinite(+activityProfile.active_frame_share) ? round(+activityProfile.active_frame_share, 3) : null,
+    activeEnergyShare: Number.isFinite(+activityProfile.active_energy_share) ? round(+activityProfile.active_energy_share, 3) : null,
+    islandCount: Number.isFinite(+activityProfile.island_count) ? Math.round(+activityProfile.island_count) : null,
+    longestSilentGapSeconds: Number.isFinite(+activityProfile.longest_silent_gap_s) ? round(+activityProfile.longest_silent_gap_s, 3) : null,
+    clearsActiveCoverage,
+    interpretation: clearsActiveCoverage
+      ? 'The cue keeps enough measurable active energy across the scheduled ceremony window to avoid collapsing into an onset-only reward blip.'
+      : 'The cue may preserve scheduled duration on paper, but active energy still collapses into the onset/body window; a stronger or better-shaped tail is needed before runtime promotion.'
+  };
+}
+
 function cadencePressureAnalysis(activeMetrics, referenceMetrics){
   const aurBand = activeMetrics?.band_energy || {};
   const refBand = referenceMetrics?.band_energy || {};
@@ -1983,13 +2211,19 @@ function rejectionFor(row, baseline, config){
   const gate = config.keeper || {};
   const reasons = [];
   if(row.risk10 > baseline.risk10 - (gate.risk ?? .3)) reasons.push(`whole-cue risk improved only ${round(baseline.risk10 - row.risk10, 2)}`);
-  const usesCalibratedRoleGates = row.lossComposite?.calibration?.roleRiskMode === 'calibrated';
+  const usesCalibratedRoleGates = row.lossComposite?.calibration?.roleRiskMode === 'calibrated' || gate.calibratedSegmentRoleRisk === true;
   if(Number.isFinite(+baseline.worstSegmentRisk10) && Number.isFinite(+row.worstSegmentRisk10)){
     if(usesCalibratedRoleGates){
       const rawSegmentWorsen = round(row.worstSegmentRisk10 - baseline.worstSegmentRisk10, 2);
       const rawSegmentWorsenMax10 = Number(row.lossComposite?.calibration?.rawSegmentWorsenMax10 ?? gate.rawSegmentWorsenMax10 ?? .35);
       if(rawSegmentWorsen > rawSegmentWorsenMax10){
         reasons.push(`raw segment risk worsened by ${rawSegmentWorsen}/10 > ${rawSegmentWorsenMax10}/10 calibration guard`);
+      }
+      const calibratedRisks = Object.values(row.segmentRoleAverages || {}).map(role => finiteMetric(role.calibratedRisk10)).filter(Number.isFinite);
+      const worstCalibratedRisk10 = maxFinite(calibratedRisks);
+      const calibratedSegmentMaxRisk10 = Number(gate.calibratedSegmentMaxRisk10 ?? .35);
+      if(Number.isFinite(worstCalibratedRisk10) && worstCalibratedRisk10 > calibratedSegmentMaxRisk10){
+        reasons.push(`calibrated segment risk ${round(worstCalibratedRisk10, 2)} > ${calibratedSegmentMaxRisk10}`);
       }
     }else if(row.worstSegmentRisk10 > baseline.worstSegmentRisk10 - (gate.segment ?? .3)){
       reasons.push(`segment risk improved only ${round(baseline.worstSegmentRisk10 - row.worstSegmentRisk10, 2)}`);
@@ -2005,6 +2239,9 @@ function rejectionFor(row, baseline, config){
   const scheduledDurationSeconds = cueSpecScheduledDurationSeconds(row.spec);
   if(Number.isFinite(minimumScheduledDurationSeconds) && Number.isFinite(scheduledDurationSeconds) && scheduledDurationSeconds < minimumScheduledDurationSeconds){
     reasons.push(`scheduled cue duration ${scheduledDurationSeconds}s < ${minimumScheduledDurationSeconds}s ceremony minimum`);
+  }
+  if(row.ceremonyTail && !row.ceremonyTail.clearsActiveCoverage){
+    reasons.push(`ceremony tail active coverage ${row.ceremonyTail.activeCoverageOfScheduled} < ${row.ceremonyTail.minimumActiveCoverageOfScheduled}`);
   }
   if(row.lossComposite){
     if(!row.lossComposite.clearsDuration) reasons.push(`loss composite duration gate failed (${row.lossComposite.durationGapSeconds}s scheduled gap)`);
@@ -2048,6 +2285,7 @@ function decisionFor(rows, config){
   const keepers = candidates.filter(row => rejectionFor(row, baseline, config) === 'clears keeper gates');
   const measuredBest = candidates.slice().sort((a, b) => a.risk10 - b.risk10 || (a.worstSegmentRisk10 || 99) - (b.worstSegmentRisk10 || 99))[0] || null;
   const best = keepers.slice().sort((a, b) => a.risk10 - b.risk10 || (a.worstSegmentRisk10 || 99) - (b.worstSegmentRisk10 || 99))[0] || null;
+  const calibratedGateRead = config.lossComposite?.calibration || config.keeper?.calibratedSegmentRoleRisk ? 'calibrated role/segment' : 'segment';
   if(!best){
     return {
       status: 'no-keeper',
@@ -2055,7 +2293,7 @@ function decisionFor(rows, config){
       baseline: baseline?.id || null,
       best: null,
       measuredBest: measuredBest?.id || null,
-      reason: `No ${config.title} candidate cleared whole-cue, ${config.lossComposite?.calibration ? 'calibrated role/segment' : 'segment'}, duration, band, centroid, and role-match gates.`
+      reason: `No ${config.title} candidate cleared whole-cue, ${calibratedGateRead}, duration, band, centroid, and role-match gates.`
     };
   }
   return {
@@ -2068,7 +2306,7 @@ function decisionFor(rows, config){
     segmentRiskDelta: round((baseline.worstSegmentRisk10 || 0) - (best.worstSegmentRisk10 || 0), 2),
     durationDeltaSeconds: round((baseline.lossComposite?.durationGapSeconds ?? baseline.durationGapSeconds) - (best.lossComposite?.durationGapSeconds ?? best.durationGapSeconds), 3),
     bandDelta: round(baseline.bandShapeGap - best.bandShapeGap, 4),
-    reason: `${config.title} candidate clears measured ${config.lossComposite?.calibration ? 'calibrated ' : ''}keeper gates.`
+    reason: `${config.title} candidate clears measured ${calibratedGateRead} keeper gates.`
   };
 }
 
@@ -2085,14 +2323,34 @@ function successMeasureFor(config){
 }
 
 function nextStepForDecision(config, decision, rows){
+  if(decision.keep && decision.runtimeTrial?.status === 'runtime-trial-rejected' && decision.runtimeTrial.appliesToBest){
+    return decision.runtimeTrial.nextStep
+      || `Do not directly promote ${decision.best} for ${config.title}: the measured keeper was rejected by a full runtime trial. Next pass should preserve the keeper's useful onset/body evidence while searching for a safer tail, lower overlap risk, or a runtime window that maintains full audio gates.`;
+  }
+  if(decision.keep && decision.runtimeTrial?.status === 'runtime-trial-accepted' && decision.runtimeTrial.appliesToBest){
+    return `Promote ${decision.best} for ${config.title}: the measured keeper also passed runtime trial evidence. Rerun the full audio comparison, event-gap rollup, cue alignment, and quality gates after promotion.`;
+  }
+  if(decision.keep && decision.runtimeTrial?.status === 'runtime-trial-rejected'){
+    return `Run promotion precheck for new ${config.title} keeper ${decision.best}; prior runtime rejection for ${decision.runtimeTrial.candidate} remains a guardrail, so do not promote directly until full-theme audio comparison, event-gap rollup, cue alignment, and quality gates hold or improve.`;
+  }
   if(decision.keep){
-    return `Promote ${decision.best} for ${config.title}, then rerun the full audio comparison and event-gap rollup.`;
+    return `Run promotion precheck for ${decision.best} for ${config.title}, then promote only if full-theme audio comparison, event-gap rollup, cue alignment, and quality gates hold or improve.`;
   }
   const measuredBest = rows.find(row => row.id === decision.measuredBest);
+  if(decision.runtimeTrial?.status === 'runtime-trial-rejected' && decision.runtimeTrial.appliesToMeasuredBest){
+    return decision.runtimeTrial.nextStep
+      || `Do not promote ${config.title}: measured best ${decision.measuredBest} has already failed a full runtime trial. Next pass should add explicit tail audibility and overlap guards before another runtime promotion attempt.`;
+  }
+  if(decision.runtimeTrial?.status === 'runtime-trial-rejected'){
+    return `${decision.runtimeTrial.nextStep || `A prior ${config.title} runtime trial was rejected and should remain a promotion blocker until its failed gate is addressed.`} Latest measured best is ${decision.measuredBest || 'none'}, which still did not clear keeper gates; refine scoring/generation around the rejected trial evidence before another promotion attempt.`;
+  }
   const keeperRead = String(measuredBest?.keeperRead || '');
   const ceremonyMinimumSeconds = Number(config.keeper?.minimumScheduledDurationSeconds);
   if(Number.isFinite(ceremonyMinimumSeconds) && /scheduled cue duration/i.test(keeperRead)){
     return `Do not promote ${config.title}: measured best ${decision.measuredBest} solves the short acoustic window but collapses below the ${ceremonyMinimumSeconds}s ceremony minimum. Next pass should keep this onset/body subclip and search or synthesize a low-risk tail/body layer that preserves reward duration without worsening onset, band shape, or stability.`;
+  }
+  if(/ceremony tail active coverage/i.test(keeperRead)){
+    return `Do not promote ${config.title}: measured best ${decision.measuredBest} keeps the scheduled ceremony window but does not keep enough active tail energy to read as a reward phrase. Next pass should use active-tail coverage as a generator target, then rerun runtime-trial gates before any promotion.`;
   }
   if(/stability/i.test(keeperRead)){
     return `Do not promote ${config.title}: measured best ${decision.measuredBest} is not stable enough across repeated captures. Next pass should tighten the capture window and prefer candidates whose risk, duration, centroid, and band-shape variance stay inside keeper gates.`;
@@ -2142,6 +2400,16 @@ function aggregateRows(sampleRows, config){
       decay_ratio: round(mean(group.map(row => row.referenceMetrics?.decay_ratio)), 3),
       burst_share: round(mean(group.map(row => row.referenceMetrics?.burst_share)), 3)
     };
+    const activityProfile = {
+      duration_s: round(mean(group.map(row => row.activityProfile?.duration_s)), 3),
+      active_span_duration_s: round(mean(group.map(row => row.activityProfile?.active_span_duration_s)), 3),
+      active_span_coverage: round(mean(group.map(row => row.activityProfile?.active_span_coverage)), 3),
+      active_frame_share: round(mean(group.map(row => row.activityProfile?.active_frame_share)), 3),
+      active_energy_share: round(mean(group.map(row => row.activityProfile?.active_energy_share)), 3),
+      threshold_rms: round(mean(group.map(row => row.activityProfile?.threshold_rms)), 4),
+      island_count: Math.round(mean(group.map(row => row.activityProfile?.island_count)) || 0),
+      longest_silent_gap_s: round(mean(group.map(row => row.activityProfile?.longest_silent_gap_s)), 3)
+    };
     const segmentRoleAverages = aggregateSegmentRoles(group);
     const row = {
       id: candidateId,
@@ -2158,6 +2426,7 @@ function aggregateRows(sampleRows, config){
       envelopeShapeGap: round(mean(group.map(row => row.envelopeShapeGap)), 3),
       activeMetrics,
       referenceMetrics,
+      activityProfile,
       bandEnergyDelta: bandEnergyDelta(activeBandEnergy, referenceBandEnergy),
       cadencePressure: first.configCue === 'stagePulse' ? cadencePressureAnalysis(activeMetrics, referenceMetrics) : null,
       maskingSeparation: first.configCue === 'stagePulse' ? maskingSeparationAnalysis(activeMetrics, referenceMetrics) : null,
@@ -2196,6 +2465,7 @@ function aggregateRows(sampleRows, config){
     row.risk10 = breakdown.risk10;
     row.riskBreakdown = breakdown.components;
     row.dominantPenalty = breakdown.dominant;
+    row.ceremonyTail = ceremonyTailAnalysis(row, config);
     row.lossComposite = lossCompositeAnalysis(row, config);
     rows.push(row);
   }
@@ -2254,14 +2524,15 @@ function markdown(report){
     `- Measured best: \`${report.decision.measuredBest || 'none'}\``,
     `- Reason: ${report.decision.reason}`,
     '',
-    '| Candidate | Risk | Worst Segment | Composite | Cadence | Masking | Duration Gap | Band Gap | Stability | Keeper Read |',
-    '| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |'
+    '| Candidate | Risk | Worst Segment | Composite | Tail Cov. | Cadence | Masking | Duration Gap | Band Gap | Stability | Keeper Read |',
+    '| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |'
   ];
   for(const row of report.candidates.slice(0, 24)){
     const stability = row.stability ? `${row.stability.repetitions}x, risk sd ${row.stability.riskStd}` : '1x';
     const composite = row.lossComposite ? `${row.lossComposite.score10} (${row.lossComposite.durationGapSeconds}s)` : 'n/a';
+    const tailCoverage = row.ceremonyTail ? `${row.ceremonyTail.activeCoverageOfScheduled}` : 'n/a';
     const durationGap = row.lossComposite?.durationGapSeconds ?? row.durationGapSeconds;
-    lines.push(`| ${row.label} | ${row.risk10} | ${row.worstSegmentRole || 'n/a'} ${row.worstSegmentRisk10 ?? 'n/a'} | ${composite} | ${row.cadencePressure?.score10 ?? 'n/a'} | ${row.maskingSeparation?.score10 ?? 'n/a'} | ${durationGap}s | ${row.bandShapeGap} | ${stability} | ${row.keeperRead} |`);
+    lines.push(`| ${row.label} | ${row.risk10} | ${row.worstSegmentRole || 'n/a'} ${row.worstSegmentRisk10 ?? 'n/a'} | ${composite} | ${tailCoverage} | ${row.cadencePressure?.score10 ?? 'n/a'} | ${row.maskingSeparation?.score10 ?? 'n/a'} | ${durationGap}s | ${row.bandShapeGap} | ${stability} | ${row.keeperRead} |`);
   }
   lines.push('', '## Next Step', '', report.nextStep, '');
   return `${lines.join('\n')}\n`;
@@ -2420,6 +2691,8 @@ async function analyzeCue(key, generatedAt, rootDir){
       segmentRoles,
       activeMetrics: item.variants.aurora.activeMetrics,
       referenceMetrics: item.variants.reference.activeMetrics,
+      activityProfile: item.variants.aurora.activityProfile || null,
+      referenceActivityProfile: item.variants.reference.activityProfile || null,
       bandEnergyDelta: bandEnergyDelta(item.variants.aurora.activeMetrics?.band_energy, item.variants.reference.activeMetrics?.band_energy),
       comparison
     };
@@ -2429,6 +2702,7 @@ async function analyzeCue(key, generatedAt, rootDir){
   rows.forEach(row => { row.keeperRead = row.id === 'baseline-current' ? 'baseline' : rejectionFor(row, baseline, config); });
   rows.sort((a, b) => a.risk10 - b.risk10 || (a.worstSegmentRisk10 || 99) - (b.worstSegmentRisk10 || 99));
   const decision = decisionFor(rows, config);
+  decision.runtimeTrial = runtimeTrialForDecision(config, decision);
 
   const report = {
     schemaVersion: 1,
@@ -2457,10 +2731,12 @@ async function analyzeCue(key, generatedAt, rootDir){
       referenceWindow: set.referenceWindow || null,
       manifest: rel(manifestPath),
       metrics: rel(metricsPath),
-      referenceSegmentation: metrics.items[0]?.referenceSegmentation || null
+      referenceSegmentation: metrics.items[0]?.referenceSegmentation || null,
+      runtimeTrialDecision: decision.runtimeTrial?.artifact || null
     },
     candidates: rows,
     decision,
+    runtimeTrial: decision.runtimeTrial || null,
     nextStep: nextStepForDecision(config, decision, rows)
   };
   fs.writeFileSync(path.join(cueDir, 'report.json'), `${JSON.stringify(report, null, 2)}\n`);
@@ -2471,6 +2747,9 @@ async function analyzeCue(key, generatedAt, rootDir){
     key,
     report: rel(path.join(cueDir, 'report.json')),
     decision,
+    runtimeTrialStatus: decision.runtimeTrial?.status || null,
+    runtimeTrialAppliesToBest: decision.runtimeTrial?.appliesToBest ?? null,
+    runtimeTrialAppliesToMeasuredBest: decision.runtimeTrial?.appliesToMeasuredBest ?? null,
     topCandidates: rows.filter(row => row.id !== 'baseline-current').slice(0, 5).map(row => ({
       id: row.id,
       risk10: row.risk10,
@@ -2482,6 +2761,8 @@ async function analyzeCue(key, generatedAt, rootDir){
       lossCompositeScore10: row.lossComposite?.score10 ?? null,
       lossCompositeDurationGapSeconds: row.lossComposite?.durationGapSeconds ?? null,
       lossCompositeClears: row.lossComposite?.clears ?? null,
+      ceremonyTailActiveCoverage: row.ceremonyTail?.activeCoverageOfScheduled ?? null,
+      ceremonyTailClears: row.ceremonyTail?.clearsActiveCoverage ?? null,
       cadencePressureScore10: row.cadencePressure?.score10 ?? null,
       cadenceWeakestAxis: row.cadencePressure?.weakestAxis || '',
       maskingSeparationScore10: row.maskingSeparation?.score10 ?? null,

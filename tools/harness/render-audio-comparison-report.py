@@ -193,6 +193,114 @@ def active_window(sample_rate, data):
     }, data[start:end]
 
 
+def activity_profile(sample_rate, data):
+    if data.size == 0:
+        return {
+            "start_s": 0.0,
+            "end_s": 0.0,
+            "duration_s": 0.0,
+            "active_span_duration_s": 0.0,
+            "active_span_coverage": 0.0,
+            "active_frame_share": 0.0,
+            "active_energy_share": 0.0,
+            "threshold_rms": 0.0,
+            "island_count": 0,
+            "longest_silent_gap_s": 0.0,
+        }
+
+    frame_size = max(1, int(sample_rate * 0.05))
+    hop = max(1, int(sample_rate * 0.01))
+    duration = float(data.size) / float(sample_rate)
+    if data.size <= frame_size:
+        rms = float(np.sqrt(np.mean(np.square(data)))) if data.size else 0.0
+        return {
+            "start_s": 0.0,
+            "end_s": round(duration, 3),
+            "duration_s": round(duration, 3),
+            "active_span_duration_s": round(duration, 3),
+            "active_span_coverage": 1.0 if rms > 0 else 0.0,
+            "active_frame_share": 1.0 if rms > 0 else 0.0,
+            "active_energy_share": 1.0 if rms > 0 else 0.0,
+            "threshold_rms": round(rms, 4),
+            "island_count": 1 if rms > 0 else 0,
+            "longest_silent_gap_s": 0.0,
+        }
+
+    frame_starts = np.arange(0, data.size - frame_size + 1, hop)
+    frame_rms = np.array([
+        float(np.sqrt(np.mean(np.square(data[start:start + frame_size]))))
+        for start in frame_starts
+    ])
+    if frame_rms.size == 0:
+        return {
+            "start_s": 0.0,
+            "end_s": round(duration, 3),
+            "duration_s": round(duration, 3),
+            "active_span_duration_s": 0.0,
+            "active_span_coverage": 0.0,
+            "active_frame_share": 0.0,
+            "active_energy_share": 0.0,
+            "threshold_rms": 0.0,
+            "island_count": 0,
+            "longest_silent_gap_s": round(duration, 3),
+        }
+
+    floor = float(np.percentile(frame_rms, 20))
+    high = float(np.percentile(frame_rms, 90))
+    threshold = max(0.015, floor + ((high - floor) * 0.35))
+    active = np.where(frame_rms >= threshold)[0]
+    if active.size == 0:
+        return {
+            "start_s": 0.0,
+            "end_s": round(duration, 3),
+            "duration_s": round(duration, 3),
+            "active_span_duration_s": 0.0,
+            "active_span_coverage": 0.0,
+            "active_frame_share": 0.0,
+            "active_energy_share": 0.0,
+            "threshold_rms": round(threshold, 4),
+            "island_count": 0,
+            "longest_silent_gap_s": round(duration, 3),
+        }
+
+    active_set = set(int(index) for index in active)
+    max_gap_frames = max(1, int(0.035 / (hop / sample_rate)))
+    islands = []
+    open_start = int(active[0])
+    last_active = int(active[0])
+    for frame_index in [int(index) for index in active[1:]]:
+        if frame_index - last_active <= max_gap_frames:
+            last_active = frame_index
+            continue
+        islands.append((open_start, last_active))
+        open_start = frame_index
+        last_active = frame_index
+    islands.append((open_start, last_active))
+
+    first_start = int(frame_starts[int(active[0])])
+    last_end = min(data.size, int(frame_starts[int(active[-1])] + frame_size))
+    active_span_duration = float(last_end - first_start) / float(sample_rate)
+    active_energy = float(np.sum(frame_rms[active]))
+    total_energy = float(np.sum(frame_rms))
+    longest_gap_frames = 0
+    for index in range(1, len(islands)):
+        gap = int(islands[index][0]) - int(islands[index - 1][1])
+        longest_gap_frames = max(longest_gap_frames, gap)
+
+    return {
+        "start_s": round(float(first_start) / float(sample_rate), 3),
+        "end_s": round(float(last_end) / float(sample_rate), 3),
+        "duration_s": round(duration, 3),
+        "active_span_duration_s": round(active_span_duration, 3),
+        "active_span_coverage": round(active_span_duration / max(duration, 1e-9), 3),
+        "active_frame_share": round(float(active.size) / max(1, frame_rms.size), 3),
+        "active_energy_share": round(active_energy / max(total_energy, 1e-9), 3),
+        "threshold_rms": round(threshold, 4),
+        "island_count": len(islands),
+        "longest_silent_gap_s": round(max(0, longest_gap_frames - max_gap_frames) * hop / sample_rate, 3),
+    }
+
+
 def float_or_none(value):
     try:
         parsed = float(value)
@@ -758,6 +866,7 @@ def main():
             m = metrics(sample_rate, data)
             analysis_data, applied_analysis_window = analysis_window_data(sample_rate, data, variant.get("analysisWindow"))
             active, active_data = active_window(sample_rate, analysis_data)
+            activity = activity_profile(sample_rate, analysis_data)
             active_metrics_source = analysis_policy.get("activeMetricsSource")
             active_metrics = metrics(sample_rate, analysis_data if active_metrics_source == "analysisWindow" else active_data)
             wave_path = os.path.join(plots_dir, f"{item['id']}-{key}-waveform.png")
@@ -773,6 +882,7 @@ def main():
                 "wav": variant["wav"],
                 "metrics": m,
                 "activeWindow": active,
+                "activityProfile": activity,
                 "analysisWindow": applied_analysis_window,
                 "activeMetricsSource": active_metrics_source or "activeWindow",
                 "activeMetrics": active_metrics,

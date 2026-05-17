@@ -1,46 +1,46 @@
 {
   "schemaVersion": 1,
   "artifactType": "aurora-audio-promotion-precheck",
-  "generatedAt": "2026-05-16T23:40:33.299Z",
+  "generatedAt": "2026-05-17T02:05:03.705Z",
   "branch": "codex/macbook-audio-entry-grounding-cycle",
-  "commit": "8a54cf6f",
+  "commit": "612f086f",
   "dirty": true,
   "cue": "challengePerfect",
   "problem": "Focused audio cue sweeps can find local candidates that look promising in isolation, then fail once placed in the full Aurora theme and event-gap scoring context.",
   "strategy": "Replace one cue in the latest full-theme metrics with a representative candidate capture, run the normal event-gap scorer against that synthetic theme, and block runtime promotion unless the cue and aggregate guardrails improve.",
   "successMeasure": "A candidate may be promoted only when focused keeper gates, full-theme cue gap, worst-segment risk, theme average risk, and semantic score all hold or improve.",
   "candidate": {
-    "id": "perfect-measured-onset-soft-ceremony-tail",
-    "risk10": 1.06,
-    "worstSegmentRisk10": 2.97,
+    "id": "perfect-onset-body-separated-brief-medium-tail",
+    "risk10": 2.74,
+    "worstSegmentRisk10": 3.89,
     "lossComposite": null,
     "keeperRead": "clears keeper gates",
     "stability": {
       "repetitions": 2,
-      "riskStd": 0,
+      "riskStd": 0.175,
       "durationGapStdSeconds": 0,
-      "centroidGapStdHz": 0,
-      "zeroCrossingGapStdPerSecond": 0,
-      "bandShapeGapStd": 0,
-      "decayRatioGapStd": 0,
-      "rmsGapStd": 0
+      "centroidGapStdHz": 9.2,
+      "zeroCrossingGapStdPerSecond": 72.4,
+      "bandShapeGapStd": 0.0145,
+      "decayRatioGapStd": 0.094,
+      "rmsGapStd": 0.003
     },
     "spec": {
       "cooldownMs": 2400,
-      "scheduledDuration": 1.2,
+      "scheduledDuration": 1.18,
       "layers": [
         {
           "referenceClip": "assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
           "referenceVolume": 1.05,
           "clipStart": 0,
-          "clipDuration": 0.32
+          "clipDuration": 0.24
         },
         {
           "referenceClip": "assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
-          "referenceVolume": 0.18,
-          "clipStart": 0.32,
-          "clipDuration": 0.88,
-          "delay": 0.32
+          "referenceVolume": 0.2,
+          "clipStart": 0.52,
+          "clipDuration": 0.52,
+          "delay": 0.62
         }
       ]
     }
@@ -53,9 +53,8 @@
     "blockers": [],
     "warnings": [],
     "wins": [
-      "Full-theme cue gap improves by 6.79/10.",
-      "Worst segment risk improves by 4.99/10.",
-      "Theme average worst-segment risk improves by 0.24/10."
+      "Full-theme cue gap improves by 1.5/10.",
+      "Worst segment risk improves by 0.57/10."
     ],
     "currentCueRow": {
       "id": "challenge-perfect",
@@ -64,38 +63,38 @@
       "focus": "Compare whether a perfect challenge result feels more celebratory than the standard results cue.",
       "status": "active-segment-detected",
       "eventCritical": true,
-      "gapRisk10": 7.7,
-      "durationGapSeconds": 0.16,
-      "centroidGapHz": 1236.6,
-      "zeroCrossingGapPerSecond": 1811.4,
-      "rmsGap": 0.1508,
-      "bestReferenceSegmentScore": 0.354,
+      "gapRisk10": 2.61,
+      "durationGapSeconds": 0.1,
+      "centroidGapHz": 164.3,
+      "zeroCrossingGapPerSecond": 1573.2,
+      "rmsGap": 0.0132,
+      "bestReferenceSegmentScore": 0.72,
       "bestReferenceSegment": {
         "startSeconds": 0,
-        "endSeconds": 0.33,
-        "score": 0.354
+        "endSeconds": 0.27,
+        "score": 0.72
       },
       "segmentRoleComparisonCount": 1,
       "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "onset",
-      "worstSegmentRisk10": 7.96,
+      "worstSegmentRisk10": 4.72,
       "rawWorstSegmentRole": "onset",
-      "rawWorstSegmentRisk10": 7.96,
+      "rawWorstSegmentRisk10": 4.72,
       "calibratedLossComposite": null,
-      "worstSegmentInterpretation": "onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment.",
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
       "worstSegmentDelta": {
-        "duration_s": 0.24,
-        "spectral_centroid_hz": 1120.3,
-        "zero_crossings_per_s": 2374.8,
-        "rms": 0.1635,
-        "spectral_spread_hz": 196,
-        "spectral_rolloff_85_hz": 619.2,
-        "spectral_flatness": 0.0338,
-        "band_shape_distance": 0.3833,
-        "attack_peak_position": 0.61,
-        "decay_ratio": 0.416,
-        "envelope_contrast": 0.461,
-        "burst_share": 0.131
+        "duration_s": 0.08,
+        "spectral_centroid_hz": 48.1,
+        "zero_crossings_per_s": 2073.8,
+        "rms": 0.0108,
+        "spectral_spread_hz": 700.4,
+        "spectral_rolloff_85_hz": 1564,
+        "spectral_flatness": 0.0465,
+        "band_shape_distance": 0.2709,
+        "attack_peak_position": 0.81,
+        "decay_ratio": 0.041,
+        "envelope_contrast": 0.021,
+        "burst_share": 0.159
       },
       "referenceSegmentationStatus": "single-reference-body",
       "referenceSegmentationConfidence": "high",
@@ -115,7 +114,7 @@
       "sourceReferenceClipCount": 1,
       "sourceReferenceWindowCount": 1,
       "hasDistinctReferenceWindow": true,
-      "recommendation": "Tune the onset segment first: onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment."
+      "recommendation": "Tune the onset segment first: onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
     },
     "simulatedCueRow": {
       "id": "challenge-perfect",
@@ -124,38 +123,38 @@
       "focus": "Compare whether a perfect challenge result feels more celebratory than the standard results cue.",
       "status": "active-segment-detected",
       "eventCritical": true,
-      "gapRisk10": 0.91,
-      "durationGapSeconds": 0.229,
-      "centroidGapHz": 26,
-      "zeroCrossingGapPerSecond": 232.9,
-      "rmsGap": 0.0319,
-      "bestReferenceSegmentScore": 0.944,
+      "gapRisk10": 1.11,
+      "durationGapSeconds": 0.1,
+      "centroidGapHz": 103.9,
+      "zeroCrossingGapPerSecond": 345.3,
+      "rmsGap": 0.0145,
+      "bestReferenceSegmentScore": 0.882,
       "bestReferenceSegment": {
         "startSeconds": 0,
-        "endSeconds": 0.399,
-        "score": 0.944
+        "endSeconds": 0.27,
+        "score": 0.882
       },
       "segmentRoleComparisonCount": 1,
       "segmentRiskMode": "raw-segment-risk",
       "worstSegmentRole": "onset",
-      "worstSegmentRisk10": 2.97,
+      "worstSegmentRisk10": 4.15,
       "rawWorstSegmentRole": "onset",
-      "rawWorstSegmentRisk10": 2.97,
+      "rawWorstSegmentRisk10": 4.15,
       "calibratedLossComposite": null,
-      "worstSegmentInterpretation": "onset timing/duration differs enough to tune event pacing before timbre.",
+      "worstSegmentInterpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment.",
       "worstSegmentDelta": {
-        "duration_s": 0.189,
-        "spectral_centroid_hz": 147.6,
-        "zero_crossings_per_s": 860.2,
-        "rms": 0.025,
-        "spectral_spread_hz": 79,
-        "spectral_rolloff_85_hz": 636.8,
-        "spectral_flatness": 0.0565,
-        "band_shape_distance": 0.049,
-        "attack_peak_position": 0.171,
-        "decay_ratio": 0.018,
-        "envelope_contrast": 0.037,
-        "burst_share": 0.056
+        "duration_s": 0.08,
+        "spectral_centroid_hz": 26,
+        "zero_crossings_per_s": 1490.2,
+        "rms": 0.0368,
+        "spectral_spread_hz": 567.1,
+        "spectral_rolloff_85_hz": 1522.7,
+        "spectral_flatness": 0.0153,
+        "band_shape_distance": 0.2263,
+        "attack_peak_position": 0.238,
+        "decay_ratio": 0.039,
+        "envelope_contrast": 0.019,
+        "burst_share": 0.114
       },
       "referenceSegmentationStatus": "single-reference-body",
       "referenceSegmentationConfidence": "high",
@@ -178,18 +177,18 @@
       "recommendation": "Keep as secondary pass after higher-risk audio gaps are narrowed."
     },
     "summaryDelta": {
-      "averageWorstSegmentRisk10": -0.24,
-      "highestRiskCue": "challengePerfect -> captureBeam",
-      "highestRisk10": -0.55,
+      "averageWorstSegmentRisk10": -0.03,
+      "highestRiskCue": "bossHit -> bossHit",
+      "highestRisk10": 0,
       "semanticAverageScore10": 0
     }
   },
   "source": {
     "candidateReport": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-challenge-perfect.json",
-    "candidateFocusMetrics": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-16-8a54cf6f-dirty-audio-focus-232144/challenge-perfect/metrics.json",
-    "themeMetrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-16-main-8a54cf6f-222638/metrics.json",
-    "syntheticThemeMetrics": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-16-8a54cf6f-dirty-234033-challengePerfect/candidate-theme-metrics.json",
-    "simulatedEventGap": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-16-8a54cf6f-dirty-234033-challengePerfect/event-gap/latest.json",
+    "candidateFocusMetrics": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-17-612f086f-dirty-audio-focus-020212/challenge-perfect/metrics.json",
+    "themeMetrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-015722/metrics.json",
+    "syntheticThemeMetrics": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-17-612f086f-dirty-020503-challengePerfect/candidate-theme-metrics.json",
+    "simulatedEventGap": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-17-612f086f-dirty-020503-challengePerfect/event-gap/latest.json",
     "currentEventGap": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json"
   },
   "nextStep": "Try challengePerfect in the Aurora audio theme only as a measured runtime trial, then accept it only if full audio comparison, event gap, cue alignment, and quality scoring all hold or improve."

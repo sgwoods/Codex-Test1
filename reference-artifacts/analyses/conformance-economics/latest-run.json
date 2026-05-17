@@ -1,26 +1,26 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-17T01-25-10-041Z-81989",
-  "startedAt": "2026-05-17T01:25:10.041Z",
-  "endedAt": "2026-05-17T01:25:10.041Z",
+  "id": "2026-05-17T02-18-52-195Z-45597",
+  "startedAt": "2026-05-17T02:18:52.195Z",
+  "endedAt": "2026-05-17T02:18:52.196Z",
   "branch": "codex/macbook-audio-entry-grounding-cycle",
-  "commit": "4510c200",
+  "commit": "612f086f",
   "command": [
     "manual:model-usage"
   ],
   "axes": [
     "audio-runtime-trial",
-    "challenge-perfect",
+    "audio-activity-profile",
     "conformance-analysis"
   ],
   "resources": [
     "codex",
     "gpu-equivalent"
   ],
-  "notes": "Estimated Codex model-assisted design, implementation, and review for audio runtime-trial accounting and dashboard integration.",
+  "notes": "Codex model-assisted audio conformance cycle: evaluated focus, designed activity-span profiling/calibrated gates, interpreted runtime trial volatility, and selected no-promote path",
   "measurement": {
-    "wallSeconds": 1500,
+    "wallSeconds": 7200,
     "timeRealSeconds": null,
     "timeUserSeconds": null,
     "timeSystemSeconds": null,
@@ -33,11 +33,11 @@
     "gpuMode": null,
     "gpuSeconds": null,
     "modelProvider": "openai",
-    "modelName": "codex",
+    "modelName": "gpt-5",
     "modelCalls": 0,
     "inputTokens": 0,
     "outputTokens": 0,
-    "modelMinutes": 25,
+    "modelMinutes": 120,
     "codexUsage5hLeftPercent": null,
     "codexUsageWeekLeftPercent": null,
     "codexModel5hLeftPercent": null,
@@ -46,8 +46,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 963035702,
-    "artifactBytesAfter": 963035702,
+    "artifactBytesBefore": 1015744302,
+    "artifactBytesAfter": 1015744302,
     "artifactBytesDelta": 0
   }
 }

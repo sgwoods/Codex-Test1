@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "aurora-audio-cue-contract-analysis",
-  "generatedAt": "2026-05-17T01:20:52.455Z",
+  "generatedAt": "2026-05-17T02:18:22.421Z",
   "branch": "codex/macbook-audio-entry-grounding-cycle",
-  "commit": "4510c200",
+  "commit": "612f086f",
   "dirty": true,
   "problem": "Aurora audio needs a formal contract layer so ingestion, candidate generation, runtime logging, comparison, promotion, and theme variation all optimize the same player-facing meaning rather than isolated waveform similarity.",
   "strategy": "Load the audio cue contracts, join them to application guide mappings, event-gap risks, focused candidate reports, promotion prechecks, and current quality scoring, then identify which cue families need stronger evidence or a different generation strategy.",
@@ -12,17 +12,17 @@
     "contracts": "reference-artifacts/contracts/audio/aurora-audio-cue-contracts.json",
     "applicationGuide": "application-guide.json",
     "eventGap": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
-    "quality": "reference-artifacts/analyses/quality-conformance/2026-05-16-8a54cf6f/report.json"
+    "quality": "reference-artifacts/analyses/quality-conformance/2026-05-17-612f086f/report.json"
   },
   "summary": {
     "contractCount": 8,
     "averageReadinessScore10": 9.24,
-    "audioScore10": 7.1,
-    "acousticEventScore10": 6.46,
+    "audioScore10": 7.2,
+    "acousticEventScore10": 6.32,
     "semanticEventScore10": 9.78,
-    "highestRiskCue": "challengePerfect",
-    "highestRisk10": 6.97,
-    "highestWorstSegmentCue": "challengePerfect",
+    "highestRiskCue": "rescueJoin",
+    "highestRisk10": 3.57,
+    "highestWorstSegmentCue": "rescueJoin",
     "runtimeTrialAllowedCueCount": 3,
     "runtimeTrialRejectedCueCount": 2,
     "runtimeTrialAcceptedCueCount": 0,
@@ -72,9 +72,9 @@
         "readinessScore10": 9.68
       },
       "currentRisk": {
-        "gapRisk10": 0.71,
+        "gapRisk10": 0.84,
         "worstSegmentRole": "onset",
-        "worstSegmentRisk10": 1.32,
+        "worstSegmentRisk10": 2.56,
         "semanticScore10": 9.6,
         "recommendation": "Keep as secondary pass after higher-risk audio gaps are narrowed."
       },
@@ -159,9 +159,9 @@
         "readinessScore10": 8.8
       },
       "currentRisk": {
-        "gapRisk10": 1.3,
+        "gapRisk10": 1.46,
         "worstSegmentRole": "onset",
-        "worstSegmentRisk10": 1.95,
+        "worstSegmentRisk10": 1.66,
         "semanticScore10": 9.8,
         "recommendation": "Prioritize impact/explosion event clarity so the player understands damage, kill, and boss multi-hit state."
       },
@@ -234,9 +234,9 @@
         "readinessScore10": 8.8
       },
       "currentRisk": {
-        "gapRisk10": 1.62,
+        "gapRisk10": 2.63,
         "worstSegmentRole": "onset",
-        "worstSegmentRisk10": 0.93,
+        "worstSegmentRisk10": 3.55,
         "semanticScore10": 10,
         "recommendation": "Prioritize impact/explosion event clarity so the player understands damage, kill, and boss multi-hit state."
       },
@@ -310,9 +310,9 @@
         "readinessScore10": 8.8
       },
       "currentRisk": {
-        "gapRisk10": 1.54,
+        "gapRisk10": 1.58,
         "worstSegmentRole": "onset",
-        "worstSegmentRisk10": 1.04,
+        "worstSegmentRisk10": 0.93,
         "semanticScore10": 9.8,
         "recommendation": "Prioritize impact/explosion event clarity so the player understands damage, kill, and boss multi-hit state."
       },
@@ -387,9 +387,9 @@
         "readinessScore10": 8.8
       },
       "currentRisk": {
-        "gapRisk10": 2.16,
-        "worstSegmentRole": "onset",
-        "worstSegmentRisk10": 3.25,
+        "gapRisk10": 2.13,
+        "worstSegmentRole": "body",
+        "worstSegmentRisk10": 3.9,
         "semanticScore10": 10,
         "recommendation": "Prioritize impact/explosion event clarity so the player understands damage, kill, and boss multi-hit state."
       },
@@ -464,9 +464,9 @@
         "readinessScore10": 9.68
       },
       "currentRisk": {
-        "gapRisk10": 3.16,
+        "gapRisk10": 3.57,
         "worstSegmentRole": "onset",
-        "worstSegmentRisk10": 4.75,
+        "worstSegmentRisk10": 5.61,
         "semanticScore10": 10,
         "recommendation": "Tune the onset segment first: onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
       },
@@ -552,7 +552,7 @@
         "readinessScore10": 9.68
       },
       "currentRisk": {
-        "gapRisk10": 1.96,
+        "gapRisk10": 2.87,
         "worstSegmentRole": "body",
         "worstSegmentRisk10": 0,
         "semanticScore10": 9.4,
@@ -647,11 +647,11 @@
         "readinessScore10": 9.68
       },
       "currentRisk": {
-        "gapRisk10": 6.97,
+        "gapRisk10": 2.51,
         "worstSegmentRole": "onset",
-        "worstSegmentRisk10": 7.38,
+        "worstSegmentRisk10": 4.56,
         "semanticScore10": 10,
-        "recommendation": "Tune the onset segment first: onset reference sub-event is not separated in runtime; the cue is collapsing multiple reference moments into one continuous segment."
+        "recommendation": "Tune the onset segment first: onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
       },
       "evidence": {
         "applicationContextPresent": true,
@@ -670,41 +670,40 @@
           "artifact": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-challenge-perfect.json",
           "status": "candidate-recommended",
           "keep": true,
-          "best": "perfect-measured-onset-soft-ceremony-tail",
-          "measuredBest": "perfect-guide-window",
-          "reason": "Challenge Perfect candidate clears measured keeper gates."
+          "best": "perfect-onset-body-ceremony-tail",
+          "measuredBest": "perfect-onset-body",
+          "reason": "Challenge Perfect candidate clears measured calibrated role/segment keeper gates."
         },
         "promotionPrecheck": {
-          "artifact": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-16-8a54cf6f-dirty-234033-challengePerfect/report.json",
+          "artifact": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-17-612f086f-dirty-020503-challengePerfect/report.json",
           "status": "precheck-trial-allowed",
           "allowRuntimeTrial": true,
           "promoteRuntime": false,
           "blockers": [],
           "wins": [
-            "Full-theme cue gap improves by 6.79/10.",
-            "Worst segment risk improves by 4.99/10.",
-            "Theme average worst-segment risk improves by 0.24/10."
+            "Full-theme cue gap improves by 1.5/10.",
+            "Worst segment risk improves by 0.57/10."
           ]
         },
         "runtimeTrial": {
-          "artifact": "reference-artifacts/analyses/aurora-audio-runtime-trials/2026-05-17-4510c200-dirty-012032-challenge-perfect-rejected/report.json",
+          "artifact": "reference-artifacts/analyses/aurora-audio-runtime-trials/2026-05-17-612f086f-dirty-021812-challenge-perfect-rejected/report.json",
           "status": "runtime-trial-rejected",
           "promoteRuntime": false,
-          "candidate": "perfect-measured-onset-soft-ceremony-tail",
-          "reason": "Guarded runtime trial evidence showed the focused Challenge Perfect keeper was not release-safe: the live/full-theme recapture still left Challenge Perfect as the highest audio risk, so the runtime cue was reverted and the candidate remains generator evidence only.",
-          "currentAudioScore10": 7.1,
-          "currentHighestRiskCue": "challengePerfect",
-          "currentHighestRisk10": 6.97,
-          "nextStep": "Preserve perfect-measured-onset-soft-ceremony-tail as a focused keeper, but do not promote it directly. Next generate a safer Challenge Perfect ceremony-tail family that keeps the measured onset/body subclip, reduces tail/overlap collapse under live capture, and must hold or improve audio score, event-gap rollup, cue alignment, and overall quality."
+          "candidate": "perfect-onset-body-separated-soft-tail",
+          "reason": "Runtime Challenge Perfect candidates remain rejected after confirmation: focused keepers and prechecks can look promising, but repeated live full-theme captures are volatile; runtime was reverted to the stable reference phrase while activity-span and calibrated segment gates remain in the harness.",
+          "currentAudioScore10": 7.2,
+          "currentHighestRiskCue": "challengeTransition",
+          "currentHighestRisk10": 4.28,
+          "nextStep": "Do not promote Challenge Perfect runtime audio yet. Keep the new harness evidence, stabilize repeated full-theme capture, then compare bossHit, challengeTransition, and gameOver for the next best audio return."
         }
       },
       "status": "runtime-trial-rejected",
-      "recommendation": "Preserve perfect-measured-onset-soft-ceremony-tail as a focused keeper, but do not promote it directly. Next generate a safer Challenge Perfect ceremony-tail family that keeps the measured onset/body subclip, reduces tail/overlap collapse under live capture, and must hold or improve audio score, event-gap rollup, cue alignment, and overall quality.",
+      "recommendation": "Do not promote Challenge Perfect runtime audio yet. Keep the new harness evidence, stabilize repeated full-theme capture, then compare bossHit, challengeTransition, and gameOver for the next best audio return.",
       "nextLearningQuestions": [
         "Do we need separate perfect-result scoring for audio and score-surface animation?"
       ]
     }
   ],
   "processPosition": "The audio process now separates contract readiness from runtime promotion. Current evidence says contracts can guide the next candidate cycle, but no cue should ship from synthetic or focused evidence alone.",
-  "nextStep": "Preserve perfect-measured-onset-soft-ceremony-tail as a focused keeper, but do not promote it directly. Next generate a safer Challenge Perfect ceremony-tail family that keeps the measured onset/body subclip, reduces tail/overlap collapse under live capture, and must hold or improve audio score, event-gap rollup, cue alignment, and overall quality."
+  "nextStep": "Run a contract-aware candidate pass for rescueJoin, then rerun promotion precheck and live validation."
 }
