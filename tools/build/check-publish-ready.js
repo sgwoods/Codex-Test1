@@ -49,6 +49,9 @@ const REQUIRED_SOURCE_DOCS = [
   'white-paper.json',
   'white-paper/README.md',
   'white-paper/CITATION_LEDGER.md',
+  'white-paper/ILLUSTRATION_PLAN.md',
+  'white-paper/RELATED_WORK.md',
+  'white-paper/REVIEWER_CHECKLIST.md',
   'supabase/data-api-access-contract.sql',
   'project-guide.json',
   'application-guide.json',
@@ -64,6 +67,7 @@ const USER_VISIBLE_DOC_FILES = [
   'public-project-page.html',
   'release-notes.html',
   'white-paper.html',
+  'white-paper-pdf.json',
   'project-guide.html',
   'application-guide.html',
   'platinum-guide.html',
@@ -109,7 +113,20 @@ const USER_VISIBLE_SECTIONS = [
       'Aurora / Platinum White Paper',
       'Current White Paper Draft',
       'Citation Ledger',
-      'V1 Release Path'
+      'V1 Release Path',
+      'Open current lane PDF',
+      'Related Work',
+      'Reviewer Checklist'
+    ]
+  },
+  {
+    id: 'white-paper-pdf-meta',
+    file: 'white-paper-pdf.json',
+    requiredText: [
+      '"artifactType": "white-paper-pdf"',
+      '"whitePaperVersion":',
+      '"updatedDate":',
+      '"pdfFile": "white-paper.pdf"'
     ]
   },
   {
@@ -301,7 +318,7 @@ function laneConfig(lane){
       dir: DIST_DEV,
       buildInfo: DEV_BUILD_INFO,
       required: devFiles(DIST_DEV),
-      nextStep: 'Run "npm run build" first.'
+      nextStep: 'Run "npm run build && npm run white-paper:review:dev", commit the refreshed review packet, then publish.'
     };
   }
   if(lane === 'beta'){
@@ -310,7 +327,7 @@ function laneConfig(lane){
       dir: DIST_BETA,
       buildInfo: BETA_BUILD_INFO,
       required: betaFiles(DIST_BETA),
-      nextStep: 'Run "npm run build && npm run promote:beta" first.'
+      nextStep: 'Run "npm run build && npm run promote:beta && npm run white-paper:review:beta", commit the refreshed review packet, then publish.'
     };
   }
   if(lane === 'production'){
@@ -319,7 +336,7 @@ function laneConfig(lane){
       dir: DIST_PRODUCTION,
       buildInfo: PRODUCTION_BUILD_INFO,
       required: productionFiles(DIST_PRODUCTION),
-      nextStep: 'Run "npm run build && npm run promote:production" first.'
+      nextStep: 'Run "npm run build && npm run promote:production && npm run white-paper:review:production", commit the refreshed review packet, then publish.'
     };
   }
   throw new Error('Use --lane dev, --lane beta, or --lane production.');
@@ -542,6 +559,19 @@ function checkDocumentationVisibility(cfg){
   }
 }
 
+function checkWhitePaperPresentation(cfg){
+  try{
+    execFileSync(process.execPath, [path.join(ROOT, 'tools', 'build', 'check-white-paper-presentation.js'), '--lane', cfg.lane], {
+      cwd: ROOT,
+      stdio: ['ignore', 'pipe', 'pipe']
+    });
+  }catch(err){
+    const stderr = err.stderr ? String(err.stderr).trim() : '';
+    const stdout = err.stdout ? String(err.stdout).trim() : '';
+    throw new Error(`Publish preflight failed: white-paper presentation check failed.\n${stderr || stdout || err.message}`);
+  }
+}
+
 function checkPublicProjectPageArtifact(cfg){
   const htmlPath = path.join(cfg.dir, 'public-project-page.html');
   const buildInfo = loadJson(cfg.buildInfo);
@@ -700,6 +730,7 @@ function main(){
   checkArtifacts(cfg);
   checkConformanceDashboardArtifacts(cfg);
   checkDocumentationVisibility(cfg);
+  checkWhitePaperPresentation(cfg);
   checkPublicProjectPageArtifact(cfg);
   const info = checkBuildInfo(cfg);
   checkBetaTestPilotConfig(cfg);

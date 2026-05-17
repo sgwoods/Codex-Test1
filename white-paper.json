@@ -1,7 +1,7 @@
 {
   "title": "Aurora / Platinum White Paper",
   "strapline": "A hosted, human-readable home for the living white paper: what this project is trying to prove, how Platinum and the games fit together, why the conformance program exists, and how the narrative is versioned over time.",
-  "currentGoal": "Turn the current draft into a durable v1 release asset for a broad technical and builder audience: keep the main paper readable, connect it directly to shipped evidence and release discipline, recover key citations, and use the surrounding hosted docs for deeper detail rather than overloading the paper itself.",
+  "currentGoal": "Turn the current draft into a durable v1 release asset for a broad technical and builder audience: keep the main paper readable, connect it directly to shipped evidence and release discipline, maintain a printable PDF with explicit version/date metadata, and keep related-work and reviewer-minded checks part of the same release surface.",
   "sections": [
     {
       "id": "white-paper-project-area",
@@ -18,7 +18,7 @@
         },
         {
           "title": "Release Memory",
-          "body": "Meaningful white-paper revisions should be snapshotted under `white-paper/releases/` so the narrative can be compared over time just like the software."
+          "body": "Meaningful white-paper revisions should be snapshotted under `white-paper/releases/` with the Markdown, PDF, and PDF metadata preserved together so the narrative can be compared over time just like the software."
         },
         {
           "title": "Hosted Surface",
@@ -61,6 +61,16 @@
           "detail": "See the maintained list of outside ideas, reference families, and methodological influences."
         },
         {
+          "label": "Current White Paper PDF",
+          "href": "white-paper.pdf",
+          "detail": "Open the current lane PDF version of the white paper with explicit version/date metadata."
+        },
+        {
+          "label": "PDF Metadata",
+          "href": "white-paper-pdf.json",
+          "detail": "Inspect the generated metadata for the current lane PDF artifact."
+        },
+        {
           "label": "Project Guide",
           "href": "project-guide.html",
           "detail": "Return to the broader hosted project map for Platinum, Aurora, Galaxy Guardians, ingestion, conformance, and release state."
@@ -84,6 +94,25 @@
           "label": "White Paper Markdown Source",
           "href": "https://github.com/sgwoods/Codex-Test1/blob/main/WHITE_PAPER.md",
           "detail": "Open the current Markdown source directly."
+        }
+      ]
+    },
+    {
+      "id": "review-posture",
+      "title": "Review Posture",
+      "summary": "How the white paper should be reviewed as a release surface instead of treated like an unreviewed note.",
+      "cards": [
+        {
+          "title": "HTML Matters",
+          "body": "The hosted page should read well on desktop and mobile, keep diagrams and screenshots legible, and avoid accidental raw Markdown leakage or repetitive section structure."
+        },
+        {
+          "title": "PDF Matters",
+          "body": "The printable/exportable PDF should carry explicit version/date information and avoid bad page breaks, oversized dark backgrounds, or weak diagram reproduction."
+        },
+        {
+          "title": "Reviewer Mentality",
+          "body": "Reviewers should tighten repetition, question weak claims, verify references, and treat the white paper as part of the release promise rather than as detached commentary."
         }
       ]
     },
@@ -116,6 +145,8 @@
         "Sharpen the historical arc from 1.0.0 launch to 1.2.0 platform framing to 1.4.0 multi-game and conformance maturity so the story reads as a clear progression.",
         "Decide which claims should be explicitly public and promotional versus which should remain engineering-facing detail, then trim or regroup sections accordingly.",
         "Connect the v1 paper to one stable release-quality evidence pack so the narrative and the measurable artifacts can be reviewed side by side.",
+        "Keep the hosted HTML page and lane PDF under the same reviewer checklist so presentation quality, page breaks, and visual clarity improve intentionally over time.",
+        "Refresh the related-work log periodically with focused external searches and short relevance notes instead of letting public references accumulate haphazardly.",
         "Add a concise section on what this project teaches about generative-AI-assisted software practice beyond games, with examples tied to actual repo artifacts.",
         "Cut the first intentional white-paper v1 snapshot under `white-paper/releases/` once the citations, visuals, and public voice are all coherent enough to stand alone."
       ]
@@ -140,6 +171,18 @@
       "title": "Illustration Plan",
       "summary": "Working list of selected visuals, candidate deeper assets, and the open illustration choices that still need deliberate discussion.",
       "file": "white-paper/ILLUSTRATION_PLAN.md"
+    },
+    {
+      "id": "white-paper-related-work-doc",
+      "title": "Related Work Log",
+      "summary": "Dated log of external references, why they matter here, and when they should be refreshed.",
+      "file": "white-paper/RELATED_WORK.md"
+    },
+    {
+      "id": "white-paper-reviewer-checklist-doc",
+      "title": "Reviewer Checklist",
+      "summary": "Release-minded checklist for reading the white paper critically across narrative, HTML, PDF, and related-work quality.",
+      "file": "white-paper/REVIEWER_CHECKLIST.md"
     },
     {
       "id": "white-paper-working-area-doc",

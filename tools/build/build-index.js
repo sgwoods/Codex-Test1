@@ -493,6 +493,14 @@ function loadWhitePaperGuide(){
   );
 }
 
+function extractWhitePaperMeta(source=''){
+  return {
+    version: (String(source || '').match(/^Current draft:\s*`?([^`\n]+)`?/m) || [])[1] || 'unknown',
+    updatedDate: (String(source || '').match(/^Date:\s*`?([^`\n]+)`?/m) || [])[1] || 'unknown',
+    status: (String(source || '').match(/^Status:\s*(.+)$/m) || [])[1] || 'unknown'
+  };
+}
+
 function loadPlatinumGuide(){
   return loadGuide(
     PLATINUM_GUIDE,
@@ -1431,9 +1439,19 @@ function projectGuideStyles(){
       color:#edf7ff;
       font-size:.95em;
     }
+    .markdown blockquote{
+      margin:0 0 16px;
+      padding:14px 16px 14px 18px;
+      border-left:4px solid rgba(122,195,255,0.55);
+      border-radius:18px;
+      background:rgba(122,195,255,0.08);
+    }
+    .markdown blockquote p:last-child{
+      margin-bottom:0;
+    }
     @media (max-width: 980px){
       .shell{grid-template-columns:1fr}
-      .toc{position:static; order:-1}
+      .toc{position:static; order:0}
     }
     @media (max-width: 720px){
       .shell{padding:20px 14px 54px}
@@ -1445,11 +1463,146 @@ function projectGuideStyles(){
 
 function whitePaperGuideStyles(){
   return `
+    @page{
+      size:Letter;
+      margin:0.55in;
+    }
+    .whitePaperMetaCard{
+      border-color:rgba(105,226,167,0.22);
+      background:rgba(105,226,167,0.08);
+    }
+    .whitePaperMetaCard .metaLabel{
+      color:#bcefd4;
+    }
+    .whitePaperDocAction{
+      border-color:rgba(105,226,167,0.34);
+      background:rgba(105,226,167,0.14);
+    }
     .markdown .mermaid{
       display:block;
       margin:0 0 18px;
       padding:12px 0;
       overflow:auto;
+    }
+    .markdown .mermaid svg{
+      max-width:100%;
+      height:auto;
+    }
+    @media print{
+      html,body{
+        background:#fff !important;
+        color:#161616 !important;
+        overflow:visible;
+      }
+      body{
+        font-family:Georgia,"Times New Roman",serif;
+      }
+      .shell{
+        display:block;
+        max-width:none;
+        padding:0;
+      }
+      .hero,
+      .section,
+      .docWrap,
+      .card,
+      .linkCard,
+      .bulletList li,
+      .tableWrap{
+        background:#fff !important;
+        box-shadow:none !important;
+        border-color:#d7d7d7 !important;
+      }
+      .hero,
+      .section{
+        margin:0 0 0.24in;
+        padding:0 0 0.12in;
+        break-inside:auto;
+      }
+      .heroTop .homeLink,
+      .heroLinks,
+      .toc{
+        display:none !important;
+      }
+      .hero h1,
+      .sectionHeader h2,
+      .markdown h3,
+      .markdown h4,
+      .markdown h5,
+      .card h3,
+      .linkCard h3{
+        color:#111 !important;
+      }
+      .hero p,
+      .goal,
+      .metaCard,
+      .sectionHeader p,
+      .card p,
+      .linkCard p,
+      .bulletList li,
+      .markdown p,
+      .markdown li,
+      .markdown blockquote,
+      .docMeta,
+      .footer{
+        color:#2b2b2b !important;
+      }
+      .metaCard,
+      .whitePaperMetaCard{
+        background:#f5f7f9 !important;
+        border-color:#d7d7d7 !important;
+      }
+      .goal{
+        background:#f5f7f9 !important;
+        border-color:#d7d7d7 !important;
+      }
+      .markdown img,
+      .markdown .mermaid,
+      .markdown blockquote,
+      .markdown pre,
+      .tableWrap{
+        break-inside:avoid-page;
+        page-break-inside:avoid;
+      }
+      .markdown img{
+        max-height:8.4in;
+        border-color:#d7d7d7;
+        box-shadow:none;
+      }
+      .markdown pre{
+        background:#f5f7f9;
+        color:#111;
+        border-color:#d7d7d7;
+      }
+      .markdown blockquote{
+        background:#f5f7f9;
+        border-left-color:#4f88b4;
+      }
+      .tableWrap{
+        overflow:visible;
+        background:#fff;
+      }
+      .dataTable{
+        min-width:0;
+      }
+      .dataTable th{
+        position:static;
+        background:#eef3f7;
+        color:#111;
+      }
+      .dataTable td{
+        color:#222;
+        background:#fff;
+      }
+      code,
+      .dataTable code{
+        color:#111 !important;
+        background:#f0f0f0 !important;
+      }
+      a{
+        color:#0c5b91 !important;
+        text-decoration:underline;
+      }
     }
   `.trim();
 }
@@ -2192,9 +2345,18 @@ function renderMarkdown(md='', options = {}){
       i = list.next;
       continue;
     }
+    if(/^\s*>\s?/.test(line)){
+      const quote = [];
+      while(i < lines.length && /^\s*>\s?/.test(lines[i])){
+        quote.push(lines[i].replace(/^\s*>\s?/, ''));
+        i++;
+      }
+      out.push(`<blockquote>${renderMarkdown(quote.join('\n'), options)}</blockquote>`);
+      continue;
+    }
     const para = [line.trim()];
     i++;
-    while(i < lines.length && lines[i].trim() && !/^\s*```/.test(lines[i]) && !/^\s*(#{2,5})\s+/.test(lines[i]) && !/^(\s*)[-*]\s+/.test(lines[i]) && !/^(\s*)\d+\.\s+/.test(lines[i])){
+    while(i < lines.length && lines[i].trim() && !/^\s*```/.test(lines[i]) && !/^\s*(#{2,5})\s+/.test(lines[i]) && !/^(\s*)[-*]\s+/.test(lines[i]) && !/^(\s*)\d+\.\s+/.test(lines[i]) && !/^\s*>\s?/.test(lines[i])){
       para.push(lines[i].trim());
       i++;
     }
@@ -2326,6 +2488,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
 
 function buildWhitePaperGuide(buildInfo, latestNote, guide){
   const template = read(PROJECT_GUIDE_TEMPLATE);
+  const whitePaperMeta = extractWhitePaperMeta(read(path.join(ROOT, 'WHITE_PAPER.md')));
   const orderedSections = [...(guide.sections || []), ...(guide.sourceDocs || [])];
   const toc = orderedSections.map(section => `
     <li><a href="#${esc(section.id)}">${esc(section.title)}</a></li>
@@ -2347,6 +2510,14 @@ function buildWhitePaperGuide(buildInfo, latestNote, guide){
           <div class="goal"><strong>Current goal:</strong> ${esc(guide.currentGoal || '')}</div>
           <div class="meta">
             <div class="metaCard">
+              <span class="metaLabel">White Paper Version</span>
+              <span class="metaValue">${esc(whitePaperMeta.version)}</span>
+            </div>
+            <div class="metaCard whitePaperMetaCard">
+              <span class="metaLabel">Updated</span>
+              <span class="metaValue">${esc(whitePaperMeta.updatedDate)}</span>
+            </div>
+            <div class="metaCard">
               <span class="metaLabel">Current Release</span>
               <span class="metaValue">${esc(displayBuildVersion(buildInfo))}</span>
             </div>
@@ -2355,7 +2526,11 @@ function buildWhitePaperGuide(buildInfo, latestNote, guide){
               <span class="metaValue">${esc(buildInfo.releaseChannel)}</span>
             </div>
             <div class="metaCard">
-              <span class="metaLabel">Updated</span>
+              <span class="metaLabel">White Paper Status</span>
+              <span class="metaValue">${esc(whitePaperMeta.status)}</span>
+            </div>
+            <div class="metaCard">
+              <span class="metaLabel">Built</span>
               <span class="metaValue">${esc(publicDateLong(buildInfo))}</span>
             </div>
             <div class="metaCard">
@@ -2365,9 +2540,13 @@ function buildWhitePaperGuide(buildInfo, latestNote, guide){
           </div>
           <div class="heroLinks">
             <a class="button" href="index.html">Open current lane build</a>
+            <a class="button whitePaperDocAction" href="white-paper.pdf">Open current lane PDF</a>
+            <a class="button whitePaperDocAction" href="white-paper-pdf.json">Open PDF metadata</a>
             <a class="button" href="public-project-page.html">Open lane project page</a>
             <a class="button" href="project-guide.html">Open project guide</a>
             <a class="button" href="conformance-dashboard.html">Open conformance dashboard</a>
+            <a class="button" href="#white-paper-related-work-doc">Open related work log</a>
+            <a class="button" href="#white-paper-reviewer-checklist-doc">Open reviewer checklist</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1/tree/main/white-paper">Open white-paper project area</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1/blob/main/WHITE_PAPER.md">Open Markdown source</a>
           </div>

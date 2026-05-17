@@ -1,7 +1,7 @@
 # Platinum, Aurora, and the Conformance Project
 
 Status: living white paper
-Current draft: `v0.2.0-draft`
+Current draft: `v0.3.0-draft`
 Date: `2026-05-16`
 Audience: broad technical readers, interested builders, collaborators, future
 reviewers, and public-facing project storytelling
@@ -90,6 +90,7 @@ Useful deeper surfaces:
 - [conformance-dashboard.html](conformance-dashboard.html)
 - [release-dashboard.html](release-dashboard.html)
 - [release-notes.html](release-notes.html)
+- [white-paper.pdf](white-paper.pdf)
 
 ## First Draft
 
@@ -336,11 +337,23 @@ program with real public accountability:
 - release notes are first-class
 - docs are part of the release surface
 - review packets and review-learning ledgers are durable evidence
+- the white paper must read well both as hosted HTML and as printable PDF
 - production claims should come from an approved beta lineage
 - major releases should refresh dashboards, scorecards, and strategic docs
 
 This matters because AI-assisted speed is only impressive if the public result
 still feels trustworthy.
+
+The "reviewer" mentality should therefore be explicit. The paper is not done
+just because the words are present. The release surface should also be reviewed
+for:
+
+- repeated ideas that can be tightened
+- diagrams or images that create awkward whitespace or weak page breaks
+- TODOs that are unclear or more revealing of indecision than of real planning
+- HTML reading flow on desktop and mobile
+- PDF export quality, especially around image scale, table breaks, and diagram
+  legibility
 
 Further detail:
 
@@ -348,6 +361,7 @@ Further detail:
 - [release-notes.html](release-notes.html)
 - [project-guide.html#testing-doc](project-guide.html#testing-doc)
 - [project-guide.html#code-review-model-doc](project-guide.html#code-review-model-doc)
+- [white-paper/REVIEWER_CHECKLIST.md](white-paper/REVIEWER_CHECKLIST.md)
 
 ### 7. How Generative AI Fits
 
@@ -483,7 +497,26 @@ Further detail:
 
 - [white-paper/CITATION_LEDGER.md](white-paper/CITATION_LEDGER.md)
 
-### 11. Why This Project Matters
+### 11. Related Work
+
+This project should periodically stop and look outward.
+
+The right pattern is not to stuff the paper with literature. The right pattern
+is to do focused searches, add high-signal sources, explain their relevance in
+plain language, and keep the public references linked to a maintained log.
+
+Current seeded related-work set:
+
+- [Anthropic, "Building effective agents" (2024-12-19)](https://www.anthropic.com/engineering/building-effective-agents): relevant because it argues for simple, composable agent patterns and evaluator-optimizer loops rather than ornamental workflow complexity.
+- [Anthropic, "Writing effective tools for agents - with agents" (2025-09-11)](https://www.anthropic.com/engineering/writing-tools-for-agents): relevant because our harnesses, scripts, and release tools are all explicit contracts between model assistance and deterministic system behavior.
+- [Anthropic, "Demystifying evals for AI agents" (2026-01-09)](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents): relevant because it reinforces our investment in transcripts, graders, repeated trials, and measurable evaluator quality instead of anecdotal confidence.
+- [Anthropic, "Trustworthy agents in practice" (2026-04-09)](https://www.anthropic.com/engineering/building-trustworthy-agents): relevant because it frames guardrails, reviews, and operator-visible controls as part of the product surface, not only as implementation details.
+
+Maintained deeper log:
+
+- [white-paper/RELATED_WORK.md](white-paper/RELATED_WORK.md)
+
+### 12. Why This Project Matters
 
 The project matters because it is trying to demonstrate a concrete alternative
 to two weak extremes.
@@ -511,7 +544,7 @@ This is also why the paper should remain readable. A broad technical reader
 does not need every source artifact inline. They need a coherent narrative,
 selected visual proof, and obvious places to go next if they want more depth.
 
-### 12. Living White Paper Policy
+### 13. Living White Paper Policy
 
 This document should evolve the same way the project evolves: intentionally,
 versioned, and with historical memory preserved.
@@ -519,10 +552,18 @@ versioned, and with historical memory preserved.
 Working policy:
 
 - `WHITE_PAPER.md` is the current living draft
+- the hosted HTML and printable PDF should be kept aligned as two views of the
+  same maintained release surface
 - meaningful revisions should be snapshotted under `white-paper/releases/`
 - each snapshot should preserve the exact white paper text for that release
+- when a release PDF exists, the snapshot should preserve the Markdown, PDF,
+  and generated PDF metadata together
 - the citation ledger should be updated when outside work materially changes the
   project story
+- the related-work log should be refreshed periodically with focused online
+  searches and brief relevance commentary
+- reviewer-checklist expectations should be treated as part of release quality,
+  not optional cleanup
 - every meaningful software release does not need a new white paper release, but
   every strategic narrative shift probably does
 
@@ -543,5 +584,7 @@ Good triggers for a new white paper release:
 - Add one deliberate progression gallery for milestone history and one deliberate
   “evidence in action” case-study image once we decide which examples explain
   the project most clearly.
+- Keep the HTML and PDF release surfaces under reviewer scrutiny so that spacing,
+  diagrams, repeated ideas, and print behavior all improve with the narrative.
 - Keep the audience tuned for a broad technical and builder readership: assume
   interest, assume intelligence, but do not assume deep prior expertise.

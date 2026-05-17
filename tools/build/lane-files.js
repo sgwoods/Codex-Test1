@@ -9,6 +9,8 @@ const DEV_BASE_FILES = Object.freeze([
   'public-project-page.html',
   'release-notes.html',
   'white-paper.html',
+  'white-paper.pdf',
+  'white-paper-pdf.json',
   'project-guide.html',
   'application-guide.html',
   'platinum-guide.html',

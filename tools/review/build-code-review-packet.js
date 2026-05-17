@@ -215,6 +215,9 @@ function recommendedChecks(files){
   if(/tools\/build|package\.json|release|publish/i.test(names)){
     checks.add('npm run publish:check:dev');
   }
+  if(/WHITE_PAPER\.md|white-paper\/|white-paper\.json|tools\/build\/(render-white-paper-pdf|check-white-paper-presentation)\.js/i.test(names)){
+    checks.add('npm run white-paper:review');
+  }
   checks.add('npm run review:code:check');
   return [...checks];
 }

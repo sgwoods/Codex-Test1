@@ -80,7 +80,9 @@ function ensurePublicPagesWorkflowCopiesReleaseDocs(repoDir){
     '          cp conformance-dashboard-data.json _site/',
     '          cp public-project-page.html _site/',
     '          cp application-guide.html _site/',
-    '          cp white-paper.html _site/'
+    '          cp white-paper.html _site/',
+    '          cp white-paper.pdf _site/',
+    '          cp white-paper-pdf.json _site/'
   ];
   let text = fs.readFileSync(workflowPath, 'utf8');
   const missing = requiredCopies.filter(line => !text.includes(line));
