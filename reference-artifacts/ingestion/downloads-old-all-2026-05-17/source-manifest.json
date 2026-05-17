@@ -2,7 +2,7 @@
   "schema_version": 1,
   "reviewed_at": "2026-05-17",
   "source_root": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all",
-  "status": "triaged_not_imported",
+  "status": "triaged_with_curated_plan_not_imported",
   "policy": [
     "Do not bulk-copy the full download drop into live repo paths.",
     "Accession and deduplicate source families before promotion.",
@@ -12,11 +12,11 @@
     {
       "id": "historical-neo-galaga-run-exports",
       "role": "historical_runtime_and_review_evidence",
-      "session_file_count": 184,
-      "unique_session_filename_count": 180,
+      "session_file_count": 171,
+      "system_status_file_count": 13,
       "unique_session_id_count": 167,
-      "duplicate_filename_count": 4,
-      "session_bytes": 45152328,
+      "duplicate_session_id_group_count": 4,
+      "session_bytes": 44625382,
       "video_file_count": 1364,
       "video_bytes": 9930453641,
       "paired_session_id_count": 147,
@@ -24,30 +24,40 @@
       "video_ids_without_session_count": 1217,
       "first_created_at": "2026-03-15T15:27:10.496Z",
       "last_created_at": "2026-04-12T14:19:59.808Z",
+      "build_cluster_count": 80,
       "repo_overlap": {
         "session_ids": 0,
         "video_ids": 0
       },
+      "supporting_lane_files": [
+        "reference-artifacts/ingestion/downloads-old-all-2026-05-17/historical-neo-galaga-accession-plan.md",
+        "reference-artifacts/ingestion/downloads-old-all-2026-05-17/historical-neo-galaga-curated-manifest.json"
+      ],
       "notable_build_clusters": [
         {
           "build": "1.0.0-modem",
-          "session_count": 26
+          "session_count": 25,
+          "paired_session_count": 20
         },
         {
           "build": "1.0.2+build.334.sha.a2dcfee.dirty",
-          "session_count": 7
-        },
-        {
-          "build": "0.5.0+build.32.sha.6717232",
-          "session_count": 5
+          "session_count": 7,
+          "paired_session_count": 7
         },
         {
           "build": "1.0.1+build.288.sha.14398e9",
-          "session_count": 5
+          "session_count": 5,
+          "paired_session_count": 5
         },
         {
           "build": "1.0.2+build.332.sha.6be6f30.dirty",
-          "session_count": 5
+          "session_count": 5,
+          "paired_session_count": 5
+        },
+        {
+          "build": "0.5.0-alpha.1+build.264.sha.3d9dc54.dirty",
+          "session_count": 4,
+          "paired_session_count": 4
         }
       ]
     },
@@ -144,5 +154,10 @@
     "personal_admin_and_membership_documents",
     "pinokio_or_facefusion_runtime_logs",
     "general_utility_source_downloads"
+  ],
+  "next_actions": [
+    "Use the curated Neo-Galaga accession plan to preserve a representative paired subset first.",
+    "Decide whether the larger video slice stays external under manifest control or moves to a separate non-git archive lane.",
+    "Preserve the already-cited Galaga/Galaxian source media in a canonical reference location before updating stale path references."
   ]
 }

@@ -16,8 +16,9 @@ This directory stores durable reference material used to tune the game toward or
 - `analyses/galaxian-mechanics/`: early sibling-pack mechanics archive for
   future Platinum Galaxian-family work
 - `ingestion/downloads-old-all-2026-05-17/`: first intake ledger for the copied
-  old-machine download drop, separating Aurora-relevant source families from
-  unrelated personal/admin material and separate archive candidates
+  old-machine download drop, including the curated Neo-Galaga accession plan
+  and source-manifest lane for Aurora-relevant source families, unrelated
+  personal/admin material, and separate archive candidates
 
 ## Storage Policy
 

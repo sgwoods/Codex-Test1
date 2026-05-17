@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-05-17",
+  "source_root": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all",
+  "status": "planned_not_imported",
+  "archive_family": "historical-neo-galaga-run-exports",
+  "review_notes": [
+    "The first intake pass overstated session counts because 13 -system-status.json sidecars matched the session filename family.",
+    "This curated manifest uses the corrected archive counts and a representative-first promotion model."
+  ],
+  "raw_archive_summary": {
+    "session_json_file_count": 171,
+    "system_status_file_count": 13,
+    "unique_session_id_count": 167,
+    "duplicate_session_id_group_count": 4,
+    "session_bytes": 44625382,
+    "video_file_count": 1364,
+    "video_bytes": 9930453641,
+    "paired_session_id_count": 147,
+    "session_ids_without_video_count": 20,
+    "video_ids_without_session_count": 1217,
+    "first_created_at": "2026-03-15T15:27:10.496Z",
+    "last_created_at": "2026-04-12T14:19:59.808Z",
+    "build_cluster_count": 80
+  },
+  "promotion_tiers": {
+    "tier_a_representative_pairs": {
+      "planned_count": 22,
+      "role": "first promotion set covering the major release families and dense milestone clusters"
+    },
+    "tier_b_paired_remainder": {
+      "planned_count": 125,
+      "role": "paired archive remainder kept external until a larger promotion decision"
+    },
+    "tier_c_session_only_backlog": {
+      "planned_count": 20,
+      "role": "useful chronology evidence without currently matching videos"
+    },
+    "tier_d_orphan_video_backlog": {
+      "planned_count": 1217,
+      "role": "large unmatched video backlog kept external under manifest control"
+    }
+  },
+  "representative_candidates": [
+    {
+      "lane": "alpha_early",
+      "build": "0.5.0-alpha.1+build.54.sha.2f12123",
+      "created_at": "2026-03-18T23:13:40.910Z",
+      "session_id": "ngt-1773875620910-2",
+      "session_file": "neo-galaga-session-ngt-1773875620910-2.json",
+      "why_keep_first": "Earliest paired alpha-era example in the recovered archive."
+    },
+    {
+      "lane": "alpha_mature_a",
+      "build": "0.5.0-alpha.1+build.264.sha.3d9dc54.dirty",
+      "created_at": "2026-03-29T17:34:04.334Z",
+      "session_id": "ngt-1774805644334-8",
+      "session_file": "neo-galaga-session-ngt-1774805644334-8.json",
+      "why_keep_first": "Later alpha-era run from a denser pre-beta cluster."
+    },
+    {
+      "lane": "alpha_mature_b",
+      "build": "0.5.0-alpha.1+build.264.sha.3d9dc54.dirty",
+      "created_at": "2026-03-29T17:42:36.605Z",
+      "session_id": "ngt-1774806156605-3",
+      "session_file": "neo-galaga-session-ngt-1774806156605-3.json",
+      "why_keep_first": "Second mature-alpha sample from the same cluster for repeatability."
+    },
+    {
+      "lane": "beta_early_a",
+      "build": "0.5.0-beta.1+build.167.sha.9cae671.beta",
+      "created_at": "2026-03-24T12:22:03.333Z",
+      "session_id": "ngt-1774354923333-3",
+      "session_file": "neo-galaga-session-ngt-1774354923333-3.json",
+      "why_keep_first": "Early beta-era anchor before later tuning passes."
+    },
+    {
+      "lane": "beta_early_b",
+      "build": "0.5.0-beta.1+build.167.sha.9cae671.beta",
+      "created_at": "2026-03-24T12:22:43.833Z",
+      "session_id": "ngt-1774354963833-4",
+      "session_file": "neo-galaga-session-ngt-1774354963833-4.json",
+      "why_keep_first": "Adjacent beta sample that helps show early-run variability."
+    },
+    {
+      "lane": "beta_late_a",
+      "build": "0.5.0-beta.1+build.238.sha.e0e1160.beta",
+      "created_at": "2026-03-28T11:35:23.435Z",
+      "session_id": "ngt-1774697723435-3",
+      "session_file": "neo-galaga-session-ngt-1774697723435-3.json",
+      "why_keep_first": "Late beta milestone close to stable 0.5.0."
+    },
+    {
+      "lane": "beta_late_b",
+      "build": "0.5.0-beta.1+build.238.sha.e0e1160.beta",
+      "created_at": "2026-03-28T11:50:15.905Z",
+      "session_id": "ngt-1774698615905-4",
+      "session_file": "neo-galaga-session-ngt-1774698615905-4.json",
+      "why_keep_first": "Second late-beta sample for immediate comparison against the first."
+    },
+    {
+      "lane": "stable_050",
+      "build": "0.5.0+build.20.sha.86a5da9",
+      "created_at": "2026-03-24T11:50:57.804Z",
+      "session_id": "ngt-1774353057804-3",
+      "session_file": "neo-galaga-session-ngt-1774353057804-3.json",
+      "why_keep_first": "First stable 0.5.0 representative in the recovered set."
+    },
+    {
+      "lane": "modem_a",
+      "build": "1.0.0-modem",
+      "created_at": "2026-03-15T17:19:10.703Z",
+      "session_id": "ngt-1773595150703-2",
+      "session_file": "neo-galaga-session-ngt-1773595150703-2.json",
+      "why_keep_first": "Earliest paired modem-era sample after the unpaired opening runs."
+    },
+    {
+      "lane": "modem_b",
+      "build": "1.0.0-modem",
+      "created_at": "2026-03-15T17:37:02.064Z",
+      "session_id": "ngt-1773596222064-2",
+      "session_file": "neo-galaga-session-ngt-1773596222064-2.json",
+      "why_keep_first": "Second modem-era anchor from the densest historical cluster."
+    },
+    {
+      "lane": "beta_100",
+      "build": "1.0.0-beta.1+build.276.sha.a59c5ad.beta",
+      "created_at": "2026-03-31T14:48:22.512Z",
+      "session_id": "ngt-1774968502512-3",
+      "session_file": "neo-galaga-session-ngt-1774968502512-3.json",
+      "why_keep_first": "First paired pre-launch 1.0.0 beta sample."
+    },
+    {
+      "lane": "launch_100",
+      "build": "1.0.0+build.276.sha.a59c5ad",
+      "created_at": "2026-03-31T14:52:34.191Z",
+      "session_id": "ngt-1774968754191-3",
+      "session_file": "neo-galaga-session-ngt-1774968754191-3.json",
+      "why_keep_first": "First paired stable 1.0.0 launch-era sample."
+    },
+    {
+      "lane": "stable_101",
+      "build": "1.0.1+build.288.sha.14398e9",
+      "created_at": "2026-04-02T01:31:56.321Z",
+      "session_id": "ngt-1775093516321-3",
+      "session_file": "neo-galaga-session-ngt-1775093516321-3.json",
+      "why_keep_first": "First 1.0.1 post-launch checkpoint."
+    },
+    {
+      "lane": "beta_102",
+      "build": "1.0.2-beta.1+build.289.sha.2d6ceb2.beta",
+      "created_at": "2026-04-02T14:07:53.552Z",
+      "session_id": "ngt-1775138873552-3",
+      "session_file": "neo-galaga-session-ngt-1775138873552-3.json",
+      "why_keep_first": "Pre-stable 1.0.2 comparison point."
+    },
+    {
+      "lane": "stable_102",
+      "build": "1.0.2+build.290.sha.831a2c6",
+      "created_at": "2026-04-02T15:13:29.542Z",
+      "session_id": "ngt-1775142809542-3",
+      "session_file": "neo-galaga-session-ngt-1775142809542-3.json",
+      "why_keep_first": "First stable 1.0.2 sample."
+    },
+    {
+      "lane": "dirty_102_peak",
+      "build": "1.0.2+build.334.sha.a2dcfee.dirty",
+      "created_at": "2026-04-04T20:12:37.968Z",
+      "session_id": "ngt-1775333557968-3",
+      "session_file": "neo-galaga-session-ngt-1775333557968-3.json",
+      "why_keep_first": "Representative of the densest paired dirty-build cluster."
+    },
+    {
+      "lane": "beta_120",
+      "build": "1.2.0-beta.1+build.364.sha.106adfd.beta",
+      "created_at": "2026-04-07T12:35:36.963Z",
+      "session_id": "ngt-1775565336963-3",
+      "session_file": "neo-galaga-session-ngt-1775565336963-3.json",
+      "why_keep_first": "First 1.2.x beta-era step in the recovered archive."
+    },
+    {
+      "lane": "stable_120",
+      "build": "1.2.0+build.364.sha.106adfd",
+      "created_at": "2026-04-07T12:26:28.715Z",
+      "session_id": "ngt-1775564788715-3",
+      "session_file": "neo-galaga-session-ngt-1775564788715-3.json",
+      "why_keep_first": "First stable 1.2.0 checkpoint."
+    },
+    {
+      "lane": "stable_121",
+      "build": "1.2.1+build.376.sha.25a3e0f",
+      "created_at": "2026-04-08T17:58:50.148Z",
+      "session_id": "ngt-1775671130148-3",
+      "session_file": "neo-galaga-session-ngt-1775671130148-3.json",
+      "why_keep_first": "First 1.2.1 checkpoint."
+    },
+    {
+      "lane": "stable_122",
+      "build": "1.2.2+build.380.sha.87f6b6f",
+      "created_at": "2026-04-09T23:28:39.479Z",
+      "session_id": "ngt-1775777319479-3",
+      "session_file": "neo-galaga-session-ngt-1775777319479-3.json",
+      "why_keep_first": "First 1.2.2 checkpoint."
+    },
+    {
+      "lane": "stable_123_early",
+      "build": "1.2.3+build.395.sha.1d6be65",
+      "created_at": "2026-04-10T20:08:45.645Z",
+      "session_id": "ngt-1775851725645-5",
+      "session_file": "neo-galaga-session-ngt-1775851725645-5.json",
+      "why_keep_first": "Early 1.2.3 milestone before the later paired cluster."
+    },
+    {
+      "lane": "stable_123_mature",
+      "build": "1.2.3+build.426.sha.512a6ed",
+      "created_at": "2026-04-12T12:57:51.562Z",
+      "session_id": "ngt-1775998671562-3",
+      "session_file": "neo-galaga-session-ngt-1775998671562-3.json",
+      "why_keep_first": "Mature 1.2.3 checkpoint near the end of the recovered range."
+    }
+  ],
+  "session_only_backlog_examples": [
+    {
+      "created_at": "2026-03-15T15:27:10.496Z",
+      "session_id": "ngt-1773588430496-2",
+      "build": "1.0.0-modem",
+      "session_file": "neo-galaga-session-ngt-1773588430496-2.json"
+    },
+    {
+      "created_at": "2026-03-15T15:31:42.851Z",
+      "session_id": "ngt-1773588702851-3",
+      "build": "1.0.0-modem",
+      "session_file": "neo-galaga-session-ngt-1773588702851-3 (1).json"
+    },
+    {
+      "created_at": "2026-03-15T15:46:18.399Z",
+      "session_id": "ngt-1773589578399-4",
+      "build": "1.0.0-modem",
+      "session_file": "neo-galaga-session-ngt-1773589578399-4.json"
+    },
+    {
+      "created_at": "2026-03-15T16:02:01.647Z",
+      "session_id": "ngt-1773590521647-2",
+      "build": "1.0.0-modem",
+      "session_file": "neo-galaga-session-ngt-1773590521647-2.json"
+    },
+    {
+      "created_at": "2026-03-15T16:12:34.383Z",
+      "session_id": "ngt-1773591154383-2",
+      "build": "1.0.0-modem",
+      "session_file": "neo-galaga-session-ngt-1773591154383-2.json"
+    }
+  ]
+}

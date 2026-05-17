@@ -35,7 +35,7 @@ deduplicated, and promoted.
 
 | Family | Current read | Why it matters | Suggested next step |
 | --- | --- | --- | --- |
-| Historical Neo-Galaga run exports | High value, not yet accessioned | Adds an earlier March-April run lineage that is not already in the repo | Build a curated intake manifest and dedupe/pairing plan before any promotion |
+| Historical Neo-Galaga run exports | High value, not yet accessioned | Adds an earlier March-April run lineage that is not already in the repo | Preserve a representative paired subset first, then decide how much of the larger archive to promote |
 | Galaga / Galaxian reference media already cited by repo docs | High value, immediately useful | Several committed docs still point at old download-path sources that now exist in this drop | Preserve these sources in a durable canonical reference location and update stale path references |
 | `Galaga-master.zip` | Low-to-medium value | Useful as a comparison archive, but not primary fidelity evidence | Keep as optional comparison material only |
 | `Abtweak/` and `Abtweak.zip` | Separate archive candidate | Looks like a real historical software archive, but unrelated to Aurora | Give it its own accession-first lane later |
@@ -50,11 +50,11 @@ historical export set:
 
 | Metric | Value |
 | --- | --- |
-| Session JSON files | `184` |
-| Unique session filenames after duplicate-name cleanup | `180` |
+| Session JSON files excluding `-system-status.json` sidecars | `171` |
+| `-system-status.json` sidecars | `13` |
 | Unique session ids | `167` |
-| Duplicate filename pairs | `4` |
-| Session JSON total size | `45,152,328` bytes |
+| Duplicate session-id groups | `4` |
+| Session JSON total size | `44,625,382` bytes |
 | Video files | `1364` |
 | Video total size | `9,930,453,641` bytes |
 | Session ids with at least one matching video | `147` |
@@ -62,6 +62,12 @@ historical export set:
 | Video ids without a matching session JSON | `1217` |
 | Earliest session timestamp | `2026-03-15T15:27:10.496Z` |
 | Latest session timestamp | `2026-04-12T14:19:59.808Z` |
+
+Reviewer note:
+
+- the first intake pass overstated the session-file count because `13`
+  `-system-status.json` sidecars matched the same filename family
+- the counts above are the corrected, accession-ready numbers
 
 Why this matters:
 
@@ -73,11 +79,13 @@ Why this matters:
 
 Representative build clusters observed:
 
-- `1.0.0-modem` (`26` sessions)
-- `1.0.2+build.334.sha.a2dcfee.dirty` (`7`)
-- `0.5.0+build.32.sha.6717232` (`5`)
-- `1.0.1+build.288.sha.14398e9` (`5`)
-- `1.0.2+build.332.sha.6be6f30.dirty` (`5`)
+- `1.0.0-modem` (`25` unique session ids, `20` paired)
+- `1.0.2+build.334.sha.a2dcfee.dirty` (`7`, all paired)
+- `1.0.1+build.288.sha.14398e9` (`5`, all paired)
+- `1.0.2+build.332.sha.6be6f30.dirty` (`5`, all paired)
+- `0.5.0-alpha.1+build.264.sha.3d9dc54.dirty` (`4`, all paired)
+- `1.0.0-beta.1+build.278.sha.431ee08.beta` (`4`, all paired)
+- `1.2.3+build.426.sha.512a6ed` (`4`, `3` paired)
 - plus many smaller clusters across `0.5.0-alpha`, `0.5.0-beta`, `1.0.0`,
   `1.2.0`, `1.2.1`, `1.2.2`, and `1.2.3`
 
@@ -87,6 +95,11 @@ Interpretation:
 - it is a historical evidence archive that should be accessioned deliberately
 - because the video slice is large, promotion should probably be curated rather
   than bulk committed
+
+Supporting intake-lane artifacts:
+
+- `historical-neo-galaga-accession-plan.md`
+- `historical-neo-galaga-curated-manifest.json`
 
 ### 2. Recoverable Source Media Already Cited In Repo Docs
 
@@ -146,10 +159,10 @@ out of this repo:
 
 ## Recommended Next Actions
 
-1. Create a curated accession manifest for the historical Neo-Galaga export
-   archive.
-2. Decide whether the video slice should be preserved fully outside git with a
-   manifest, or selectively promoted as a curated subset.
+1. Use the curated Neo-Galaga accession plan to preserve a representative paired
+   subset first.
+2. Decide whether the larger video slice should be preserved fully outside git
+   with a manifest, or selectively promoted as a curated subset.
 3. Preserve the already-cited Galaga/Galaxian source media in a stable canonical
    reference location under the project's evidence program.
 4. Update committed docs that still point to stale old download paths once the

@@ -60,7 +60,7 @@ persona testing expectations.
 | Stage 4 fairness findings | `reference-artifacts/analyses/stage4-fairness/README.md` | durable record of what did and did not help Stage 4 fairness |
 | External `Galaga5` reference | `reference-artifacts/analyses/external-galaga5/README.md` | implementation-pattern comparison, not canonical fidelity evidence |
 | Galaxian mechanics archive | `reference-artifacts/analyses/galaxian-mechanics/README.md` | early sibling-project archive for future `Galaxian`-derived work |
-| Old-machine downloads intake ledger | `reference-artifacts/ingestion/downloads-old-all-2026-05-17/README.md` | triaged intake record for historical Neo-Galaga exports and recoverable cited source media from the copied old-machine download drop |
+| Old-machine downloads intake lane | `reference-artifacts/ingestion/downloads-old-all-2026-05-17/README.md` | triaged intake record plus curated Neo-Galaga accession plan for historical exports and recoverable cited source media from the copied old-machine download drop |
 
 ## Current Gaps
 
