@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-05-17",
+  "source_root": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all",
+  "status": "triaged_not_imported",
+  "policy": [
+    "Do not bulk-copy the full download drop into live repo paths.",
+    "Accession and deduplicate source families before promotion.",
+    "Keep unrelated historical archives separate from Aurora evidence."
+  ],
+  "project_relevant_families": [
+    {
+      "id": "historical-neo-galaga-run-exports",
+      "role": "historical_runtime_and_review_evidence",
+      "session_file_count": 184,
+      "unique_session_filename_count": 180,
+      "unique_session_id_count": 167,
+      "duplicate_filename_count": 4,
+      "session_bytes": 45152328,
+      "video_file_count": 1364,
+      "video_bytes": 9930453641,
+      "paired_session_id_count": 147,
+      "session_ids_without_video_count": 20,
+      "video_ids_without_session_count": 1217,
+      "first_created_at": "2026-03-15T15:27:10.496Z",
+      "last_created_at": "2026-04-12T14:19:59.808Z",
+      "repo_overlap": {
+        "session_ids": 0,
+        "video_ids": 0
+      },
+      "notable_build_clusters": [
+        {
+          "build": "1.0.0-modem",
+          "session_count": 26
+        },
+        {
+          "build": "1.0.2+build.334.sha.a2dcfee.dirty",
+          "session_count": 7
+        },
+        {
+          "build": "0.5.0+build.32.sha.6717232",
+          "session_count": 5
+        },
+        {
+          "build": "1.0.1+build.288.sha.14398e9",
+          "session_count": 5
+        },
+        {
+          "build": "1.0.2+build.332.sha.6be6f30.dirty",
+          "session_count": 5
+        }
+      ]
+    },
+    {
+      "id": "recoverable-cited-reference-media",
+      "role": "source_media_already_referenced_by_repo_docs",
+      "sources": [
+        {
+          "path": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all/90 stage 1 player galaga example.mp4",
+          "bytes": 160128315,
+          "referenced_by": [
+            "reference-artifacts/analyses/galaga-stage-reference-video/README.md",
+            "reference-artifacts/analyses/galaga-stage-opening-timing/*/README.md",
+            "reference-artifacts/analyses/galaga-timing-alignment/*/README.md"
+          ]
+        },
+        {
+          "path": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all/Galaga Sounds with labelling in video.mp4",
+          "bytes": 7133245,
+          "referenced_by": [
+            "reference-artifacts/analyses/galaga-audio-reference-video/README.md"
+          ]
+        },
+        {
+          "path": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all/Galaga sounds effects - all 2.mp4",
+          "bytes": 918407,
+          "referenced_by": [
+            "reference-artifacts/analyses/galaga-audio-reference-video-2/README.md"
+          ]
+        },
+        {
+          "path": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all/Galaga Sounds effects all 3.mp4",
+          "bytes": 3554921,
+          "referenced_by": [
+            "reference-artifacts/analyses/galaga-audio-reference-video-3/README.md"
+          ]
+        },
+        {
+          "path": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all/challenging stage perfect scores.mp4",
+          "bytes": 8527459,
+          "referenced_by": [
+            "reference-artifacts/analyses/challenge-stage-reference/README.md"
+          ]
+        },
+        {
+          "path": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all/19330__sgtpepperarc360__galaga-remake-music-and-sound-effects",
+          "bytes": 53080654,
+          "referenced_by": [
+            "AUDIO_PLAN.md"
+          ]
+        },
+        {
+          "path": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all/261173__portwain__galaxian-arcade-game.wav",
+          "bytes": 8999018,
+          "referenced_by": [
+            "AUDIO_PLAN.md"
+          ]
+        },
+        {
+          "path": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all/Galaga_-_1981_-_Namco.pdf",
+          "bytes": 2579679,
+          "referenced_by": [
+            "reference-artifacts/manuals/galaga-1981-namco/README.md"
+          ],
+          "status_note": "Already preserved in-repo; useful as a verified source-path match, not a new promotion target."
+        }
+      ]
+    },
+    {
+      "id": "secondary-comparison-material",
+      "role": "optional_noncanonical_comparison",
+      "sources": [
+        {
+          "path": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all/Galaga-master.zip",
+          "bytes": 1018735,
+          "status": "optional_comparison_only"
+        }
+      ]
+    }
+  ],
+  "separate_archive_candidates": [
+    {
+      "id": "abtweak-history",
+      "path": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all/Abtweak",
+      "bytes": 6238289,
+      "status": "separate_historical_archive",
+      "note": "Looks like a real multi-version Lisp software archive and should not be mixed into Aurora evidence intake."
+    }
+  ],
+  "explicitly_out_of_scope": [
+    "tax_and_investment_documents",
+    "travel_and_boarding_pass_files",
+    "costa_rica_trip_media",
+    "personal_admin_and_membership_documents",
+    "pinokio_or_facefusion_runtime_logs",
+    "general_utility_source_downloads"
+  ]
+}

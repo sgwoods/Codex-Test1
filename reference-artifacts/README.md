@@ -15,9 +15,14 @@ This directory stores durable reference material used to tune the game toward or
   and perfect-result presentation
 - `analyses/galaxian-mechanics/`: early sibling-pack mechanics archive for
   future Platinum Galaxian-family work
+- `ingestion/downloads-old-all-2026-05-17/`: first intake ledger for the copied
+  old-machine download drop, separating Aurora-relevant source families from
+  unrelated personal/admin material and separate archive candidates
 
 ## Storage Policy
 
 - Source documents that are reasonably sized and useful long-term can be committed here.
 - Large generated derivatives such as page renders, contact sheets, and temporary analysis output should stay local unless they become broadly useful.
+- Large recovered source drops should be inventoried and triaged before any
+  promotion into canonical repo-owned evidence paths.
 - When adding a new artifact, include a short README nearby explaining why it matters.
