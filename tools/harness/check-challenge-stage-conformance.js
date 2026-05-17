@@ -99,6 +99,12 @@ for(const stage of REQUIRED_STAGES){
 if(report.summary?.scoringModel !== 'strict-v2-user-baseline'){
   fail('challenge-stage conformance is not using the strict scorer baseline', report.summary);
 }
+if(!report.targetArtifactCoverage?.summary || !Number.isFinite(+report.targetArtifactCoverage.summary.challengeStageReadiness10)){
+  fail('challenge-stage conformance is missing Galaga target-artifact coverage context; run npm run harness:analyze:galaga-target-artifact-coverage first', report.targetArtifactCoverage);
+}
+if(!Array.isArray(report.targetArtifactCoverage.challengeStageCoverage) || report.targetArtifactCoverage.challengeStageCoverage.length < 8){
+  fail('challenge-stage conformance is missing complete challenge target coverage rows', report.targetArtifactCoverage);
+}
 for(const field of [
   'score10',
   'interestingFactorScore10',

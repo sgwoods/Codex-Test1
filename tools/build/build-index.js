@@ -65,6 +65,7 @@ const GALAGA_REFERENCE_SPRITE_TARGETS = path.join(ROOT, 'reference-artifacts', '
 const GALAGA_REFERENCE_SPRITE_MODEL = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-reference-sprites', 'model-0.1.json');
 const APPLICATION_ARTIFACT_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'application-artifact-conformance', 'latest.json');
 const CHALLENGE_STAGE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
+const GALAGA_TARGET_ARTIFACT_COVERAGE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-artifact-coverage', 'latest.json');
 const PERSONA_PERFORMANCE_DISTRIBUTION = path.join(ROOT, 'reference-artifacts', 'analyses', 'persona-performance-distribution', 'latest.json');
 const CATALOG_MEDIA_SOURCE_PATHS = new Set();
 const GENERATED_BUILD_PATHS = new Set([
@@ -2696,6 +2697,7 @@ let galagaReferenceSpriteTargetsCache = null;
 let galagaReferenceSpriteModelCache = null;
 let applicationArtifactConformanceCache = null;
 let challengeStageConformanceCache = null;
+let galagaTargetArtifactCoverageCache = null;
 
 function loadGalagaReferenceSpriteTargets(){
   if(galagaReferenceSpriteTargetsCache) return galagaReferenceSpriteTargetsCache;
@@ -2760,6 +2762,25 @@ function loadChallengeStageConformance(){
     challengeStageConformanceCache = { stageRows: [], summary: {} };
   }
   return challengeStageConformanceCache;
+}
+
+function loadGalagaTargetArtifactCoverage(){
+  if(galagaTargetArtifactCoverageCache) return galagaTargetArtifactCoverageCache;
+  if(!fs.existsSync(GALAGA_TARGET_ARTIFACT_COVERAGE)){
+    galagaTargetArtifactCoverageCache = { rows: [], challengeStageCoverage: [], summary: {} };
+    return galagaTargetArtifactCoverageCache;
+  }
+  try {
+    const artifact = readJson(GALAGA_TARGET_ARTIFACT_COVERAGE);
+    galagaTargetArtifactCoverageCache = Object.assign({}, artifact, {
+      rows: Array.isArray(artifact.rows) ? artifact.rows : [],
+      challengeStageCoverage: Array.isArray(artifact.challengeStageCoverage) ? artifact.challengeStageCoverage : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    galagaTargetArtifactCoverageCache = { rows: [], challengeStageCoverage: [], summary: {} };
+  }
+  return galagaTargetArtifactCoverageCache;
 }
 
 function challengeStageDisplayLabel(row = {}){
@@ -3221,6 +3242,54 @@ function renderArtifactEvidenceList(evidence){
   return items.map(item => `<code>${esc(item)}</code>`).join('<br>');
 }
 
+function renderSourceLinks(links){
+  const items = (Array.isArray(links) ? links : [])
+    .filter(Boolean)
+    .slice(0, 3)
+    .map((href, index) => `<a href="${esc(href)}">source ${index + 1}</a>`);
+  return items.length ? items.join('<br>') : '<span class="docMeta">Local or derived source</span>';
+}
+
+function renderTargetArtifactCoverageRows(report){
+  const rows = Array.isArray(report?.rows) ? report.rows : [];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="7"><span class="docMeta">Galaga target artifact coverage pending. Run <code>npm run harness:analyze:galaga-target-artifact-coverage</code>.</span></td>
+    </tr>`;
+  }
+  return rows.map((entry) => `
+    <tr>
+      <td><strong>${esc(entry.title || entry.id || '')}</strong><br><span class="docMeta"><code>${esc(entry.id || '')}</code><br>${renderSourceLinks(entry.sourceUrls)}</span></td>
+      <td><strong>${esc(entry.ingestionStatus || 'pending')}</strong><br><span class="docMeta">${esc(entry.priority || 'priority pending')} priority; confidence ${esc(entry.confidence || 'unknown')}</span></td>
+      <td><strong>${esc(entry.coverage10 ?? 'n/a')}/10</strong><br><span class="docMeta">axes: ${esc((entry.coverageAxes || []).slice(0, 4).join(', ') || 'pending')}</span></td>
+      <td>${esc(entry.targetUse || '')}</td>
+      <td>${esc(entry.currentUse || '')}</td>
+      <td>${esc(entry.missingWork || '')}</td>
+      <td>${esc(entry.evidenceExistingCount ?? 0)}/${esc((entry.localEvidence || []).length)} local anchors</td>
+    </tr>
+  `).join('\n');
+}
+
+function renderChallengeTargetCoverageRows(report){
+  const rows = Array.isArray(report?.challengeStageCoverage) ? report.challengeStageCoverage : [];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="6"><span class="docMeta">Challenge-stage target window coverage pending.</span></td>
+    </tr>`;
+  }
+  return rows.map((entry) => `
+    <tr>
+      <td><strong>Challenging Stage ${esc(entry.challengeNumber || '')}</strong><br><span class="docMeta">marker ${esc(entry.stageMarker || '')}</span></td>
+      <td>${esc(entry.status || '')}</td>
+      <td><strong>${esc(entry.coverage10 ?? 'n/a')}/10</strong></td>
+      <td>${esc((entry.currentEvidence || []).join(', ') || 'No committed media-backed challenge window yet.')}</td>
+      <td>${esc(entry.nextNeed || '')}</td>
+    </tr>
+  `).join('\n');
+}
+
 function buildApplicationGuide(buildInfo, latestNote, guide){
   const template = read(APPLICATION_GUIDE_TEMPLATE);
   const tocItems = [
@@ -3232,6 +3301,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'ship-catalog', title: 'Ship And Enemy Catalog' },
     { id: 'stage-families', title: 'Stage Family Progression' },
     { id: 'artifact-conformance-status', title: 'Artifact Conformance Status' },
+    { id: 'target-artifact-coverage', title: 'Target Artifact Coverage' },
     { id: 'conformance-alien-index', title: 'Alien Conformance Index' },
     { id: 'conformance-audio-index', title: 'Audio Conformance Index' },
     { id: 'stage-conformance-summary', title: 'Stage Conformance Summary' },
@@ -3363,6 +3433,10 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
       <td colspan="5"><span class="docMeta">Artifact conformance status pending. Run <code>npm run harness:analyze:application-artifact-conformance</code> to generate this table.</span></td>
     </tr>
   `;
+  const galagaTargetArtifactCoverage = loadGalagaTargetArtifactCoverage();
+  const targetArtifactSummary = galagaTargetArtifactCoverage.summary || {};
+  const targetArtifactRows = renderTargetArtifactCoverageRows(galagaTargetArtifactCoverage);
+  const challengeTargetRows = renderChallengeTargetCoverageRows(galagaTargetArtifactCoverage);
   const conformanceAlienRows = (guide.conformanceAlienRows || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.name || '')}</strong><br><span class="docMeta">${esc(entry.runtime || '')}</span></td>
@@ -3647,6 +3721,52 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               </thead>
               <tbody>
                 ${artifactConformanceRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="target-artifact-coverage">
+          <div class="sectionHeader">
+            <h2>Target Artifact Coverage</h2>
+            <p>The online and local Galaga artifacts that best illustrate Aurora's target, with explicit status for what has actually been ingested. This keeps challenge-stage, sprite, audio, rules, and screen-surface work tied to visible evidence instead of loose memory.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Coverage read:</strong> ${esc(targetArtifactSummary.coverageScore10 ?? 'n/a')}/10 overall target-artifact ingestion; ${esc(targetArtifactSummary.challengeStageReadiness10 ?? 'n/a')}/10 challenge-stage target readiness; ${esc(targetArtifactSummary.lateChallengeGapCount ?? 'n/a')} late challenge windows still missing.</p>
+            <p>${esc(targetArtifactSummary.interpretation || 'Run the Galaga target artifact coverage analyzer to refresh this readout.')}</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-target-artifact-coverage/latest.json</code>. <strong>Report:</strong> <code>GALAGA_TARGET_ARTIFACT_COVERAGE.md</code>.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Target Artifact</th>
+                  <th>Status</th>
+                  <th>Coverage</th>
+                  <th>Why It Matters</th>
+                  <th>Current Use</th>
+                  <th>Missing Work</th>
+                  <th>Evidence</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${targetArtifactRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Challenge Target</th>
+                  <th>Status</th>
+                  <th>Coverage</th>
+                  <th>Current Evidence</th>
+                  <th>Next Need</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${challengeTargetRows}
               </tbody>
             </table>
           </div>

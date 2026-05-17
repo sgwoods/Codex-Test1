@@ -1,0 +1,979 @@
+{
+  "generatedAt": "2026-05-17T14:17:30.026Z",
+  "commit": "0d73c585",
+  "artifactType": "galaga-target-artifact-coverage",
+  "source": "reference-artifacts/ingestion/galaga-target-artifact-corpus/target-artifacts-0.1.json",
+  "schema": "galaga-target-artifact-corpus-0.1",
+  "referenceTarget": "Galaga 1981 arcade",
+  "copyrightPolicy": "Use online and local sources for measured analysis, source manifests, contact sheets, labels, and derived metrics. Avoid committing full third-party gameplay videos or raw copyrighted audio unless explicitly approved.",
+  "summary": {
+    "coverageScore10": 3.6,
+    "challengeStageReadiness10": 1.7,
+    "sourceCount": 11,
+    "criticalSourceCount": 3,
+    "criticalOpenCount": 3,
+    "ingestedSourceCount": 3,
+    "partialSourceCount": 1,
+    "candidateOrPlannedSourceCount": 2,
+    "notIngestedSourceCount": 5,
+    "existingEvidenceCount": 21,
+    "missingEvidenceCount": 0,
+    "lateChallengeGapCount": 5,
+    "interpretation": "Aurora has enough Galaga source material to prove the current challenge-stage gap, but not enough late-stage media-backed material to rebuild the later challenge stages with high confidence. The most valuable next ingestion work is controlled or sourced capture for Challenge Stages 4-8, followed by per-group movement and alien-novelty labels."
+  },
+  "rows": [
+    {
+      "id": "arcade-game-series-late-perfect-guides",
+      "title": "Arcade Game Series Galaga perfect challenge-stage guides",
+      "sourceType": "modern-release-player-guide",
+      "priority": "critical",
+      "priorityRank": 4,
+      "ingestionStatus": "not-ingested",
+      "confidence": "medium",
+      "coverageAxes": [
+        "late challenge-stage progression",
+        "perfect-bonus learning",
+        "special enemy appearance",
+        "late challenge-stage target list"
+      ],
+      "sourceUrls": [
+        "https://knoef.info/trophy-guides/ps4-guides/arcade-game-series-galaga-trophy-guide/",
+        "https://www.playstationtrophies.org/game/galaga/guide/",
+        "https://www.truetrophies.com/game/ARCADE-GAME-SERIES-GALAGA/walkthrough"
+      ],
+      "targetUse": "Late challenge-stage progression, perfect-bonus examples, and novelty enemy appearances around stages 11, 15, 19, 23, 27, and 31.",
+      "currentUse": "Identifies the late challenge stages that matter most for the next media capture pass.",
+      "missingWork": "Acquire lawful gameplay windows for the late challenge stages and promote per-group labels. Use the guides only to prioritize stage windows and expected novelty, not as pixel/motion ground truth.",
+      "localEvidence": [],
+      "evidenceExistingCount": 0,
+      "evidenceMissingCount": 0,
+      "coverage10": 0,
+      "weightedCoverage": 0,
+      "axisWeight": 0.215
+    },
+    {
+      "id": "controlled-emulation-capture",
+      "title": "Controlled local arcade/MAME-style capture",
+      "sourceType": "controlled-capture-plan",
+      "priority": "critical",
+      "priorityRank": 4,
+      "ingestionStatus": "planned",
+      "confidence": "high-if-source-approved",
+      "coverageAxes": [
+        "controlled reference capture",
+        "native timing",
+        "late challenge-stage windows",
+        "trajectory extraction",
+        "sprite motion"
+      ],
+      "sourceUrls": [
+        "https://docs.mamedev.org/"
+      ],
+      "targetUse": "Repeatable clean capture of exact challenge-stage windows with consistent frame rate, native aspect, known input, and reproducible timestamps.",
+      "currentUse": "Not currently used. This is the best future route for high-precision stage-by-stage measurement if lawful source setup is available.",
+      "missingWork": "Set up an approved capture source, record source manifest, capture challenges 1-8, and extract trajectories/contact sheets with the same harness shape used for existing media.",
+      "localEvidence": [],
+      "evidenceExistingCount": 0,
+      "evidenceMissingCount": 0,
+      "coverage10": 1.8,
+      "weightedCoverage": 0.0225,
+      "axisWeight": 0.125
+    },
+    {
+      "id": "snake-latino-galaga-gameplay-video",
+      "title": "Galaga (1981) - Gameplay Arcade - Snake Latino",
+      "sourceType": "gameplay-video",
+      "priority": "critical",
+      "priorityRank": 4,
+      "ingestionStatus": "partial",
+      "confidence": "medium-high",
+      "coverageAxes": [
+        "normal-stage entry",
+        "challenge-stage entry",
+        "trajectory",
+        "contact sheets",
+        "frame indexes",
+        "path labels"
+      ],
+      "sourceUrls": [
+        "https://rawg.io/games/galaga/youtube",
+        "https://gamefaqs.gamespot.com/atari2600/584760-galaga/videos/1323989"
+      ],
+      "targetUse": "Concrete visual timing reference for early normal-stage entry, first challenge arrival, early challenge result flow, and early capture pressure.",
+      "currentUse": "This is the current strongest media-backed path reference. It has 10 extracted windows and validated path labels, including 4 accepted challenge-entry labels.",
+      "missingWork": "It is only a 360p early-window corpus. Add complete challenge-stage windows and later challenge stages beyond Challenge 3 before using it as the sole movement target.",
+      "localEvidence": [
+        {
+          "path": "reference-artifacts/analyses/galaga-path-reference-media/README.md",
+          "exists": true,
+          "kind": "file"
+        },
+        {
+          "path": "reference-artifacts/analyses/galaga-path-reference-media/latest.json",
+          "exists": true,
+          "kind": "file"
+        },
+        {
+          "path": "reference-artifacts/analyses/galaga-path-reference-media/stage-1-opening-entry/contact-sheet.jpg",
+          "exists": true,
+          "kind": "file"
+        },
+        {
+          "path": "reference-artifacts/analyses/galaga-path-reference-media/stage-2-early-entry/contact-sheet.jpg",
+          "exists": true,
+          "kind": "file"
+        },
+        {
+          "path": "reference-artifacts/analyses/galaga-path-reference-media/stage-4-post-challenge-entry/contact-sheet.jpg",
+          "exists": true,
+          "kind": "file"
+        },
+        {
+          "path": "reference-artifacts/analyses/galaga-path-reference-media/stage-5-opening-entry/contact-sheet.jpg",
+          "exists": true,
+          "kind": "file"
+        },
+        {
+          "path": "reference-artifacts/analyses/galaga-path-reference-media/stage-6-capture-pressure/contact-sheet.jpg",
+          "exists": true,
+          "kind": "file"
+        },
+        {
+          "path": "reference-artifacts/analyses/galaga-path-reference-media/stage-10-opening-entry/contact-sheet.jpg",
+          "exists": true,
+          "kind": "file"
+        },
+        {
+          "path": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg",
+          "exists": true,
+          "kind": "file"
+        },
+        {
+          "path": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/contact-sheet.jpg",
+          "exists": true,
+          "kind": "file"
+        },
+        {
+          "path": "reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg",
+          "exists": true,
+          "kind": "file"
+        },
+        {
+          "path": "reference-artifacts/analyses/galaga-path-reference-media/challenge-3-arrival/contact-sheet.jpg",
+          "exists": true,
+          "kind": "file"
+        },
+        {
+          "path": "reference-artifacts/analyses/galaga-path-reference-labels/latest.json",
+          "exists": true,
+          "kind": "file"
+        }
+      ],
+      "evidenceExistingCount": 13,
+      "evidenceMissingCount": 0,
+      "coverage10": 5.1,
+      "weightedCoverage": 0.20336,
+      "axisWeight": 0.4
+    },
+    {
+      "id": "bandai-namco-official-galaga-history",
+      "title": "Bandai Namco Galaga Web history/game page",
+      "sourceType": "official-web",
+      "priority": "high",
+      "priorityRank": 3,
+      "ingestionStatus": "not-ingested",
+      "confidence": "high",
+      "coverageAxes": [
+        "rules",
+        "enemy taxonomy",
+        "formation entry",
+        "challenge-stage purpose",
+        "player-facing explanation"
+      ],
+      "sourceUrls": [
+        "https://galaga.com/en/history/galaga.php"
+      ],
+      "targetUse": "Official grounding for the game identity: formation entry, three enemy roles, tractor beam, dual fighter, challenging stages, and depth over repeat play.",
+      "currentUse": "Known to the team but not yet represented as a formal source artifact.",
+      "missingWork": "Capture a cited official-source summary into the project docs and use it as high-level design grounding rather than a numeric movement target.",
+      "localEvidence": [],
+      "evidenceExistingCount": 0,
+      "evidenceMissingCount": 0,
+      "coverage10": 0,
+      "weightedCoverage": 0,
+      "axisWeight": 0.235
+    },
+    {
+      "id": "galaga-1981-namco-manual",
+      "title": "Galaga 1981 Namco/Midway manual",
+      "sourceType": "manual",
+      "priority": "high",
+      "priorityRank": 3,
+      "ingestionStatus": "ingested",
+      "confidence": "high",
+      "coverageAxes": [
+        "rules",
+        "scoring",
+        "challenge-stage structure",
+        "capture-rescue",
+        "presentation"
+      ],
+      "sourceUrls": [
+        "https://manuals.plus/m/e1eb9faf55f80332dfb648bd6274d509f9ab437398396c2c1e492d16cc41ea34",
+        "https://archives.museumofplay.org/repositories/3/archival_objects/30294"
+      ],
+      "targetUse": "Rules, scoring, challenge-stage structure, capture behavior, bonus logic, presentation flow, and official cabinet/operator framing.",
+      "currentUse": "Manual observations already support challenge-stage and scoring rules.",
+      "missingWork": "Promote richer manual-derived assertions into structured per-rule artifacts so checks can cite rule IDs instead of prose notes.",
+      "localEvidence": [
+        {
+          "path": "reference-artifacts/manuals/galaga-1981-namco/README.md",
+          "exists": true,
+          "kind": "file"
+        },
+        {
+          "path": "reference-artifacts/manuals/galaga-1981-namco/Galaga_-_1981_-_Namco.pdf",
+          "exists": true,
+          "kind": "file"
+        }
+      ],
+      "evidenceExistingCount": 2,
+      "evidenceMissingCount": 0,
+      "coverage10": 10,
+      "weightedCoverage": 0.235,
+      "axisWeight": 0.235
+    },
+    {
+      "id": "galaga-reference-audio-cues",
+      "title": "Galaga reference audio cue library",
+      "sourceType": "derived-audio-cue-library",
+      "priority": "high",
+      "priorityRank": 3,
+      "ingestionStatus": "ingested",
+      "confidence": "medium-high",
+      "coverageAxes": [
+        "audio",
+        "cue comparison",
+        "event feedback",
+        "challenge result feedback"
+      ],
+      "sourceUrls": [],
+      "targetUse": "Reference cue comparison for shots, impacts, explosions, capture/rescue, challenge transition/results/perfect, stage start, and game over.",
+      "currentUse": "Audio reference comparison is active and has extensive candidate history.",
+      "missingWork": "Improve scoring stability and segment-boundary strategy before promoting more runtime audio changes.",
+      "localEvidence": [
+        {
+          "path": "reference-artifacts/analyses/aurora-audio-theme-comparison",
+          "exists": true,
+          "kind": "directory"
+        },
+        {
+          "path": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json",
+          "exists": true,
+          "kind": "file"
+        },
+        {
+          "path": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
+          "exists": true,
+          "kind": "file"
+        }
+      ],
+      "evidenceExistingCount": 3,
+      "evidenceMissingCount": 0,
+      "coverage10": 8.2,
+      "weightedCoverage": 0.1271,
+      "axisWeight": 0.155
+    },
+    {
+      "id": "galaga-reference-sprite-models",
+      "title": "Galaga inferred sprite target models",
+      "sourceType": "derived-sprite-model",
+      "priority": "high",
+      "priorityRank": 3,
+      "ingestionStatus": "ingested",
+      "confidence": "medium-high-static-only",
+      "coverageAxes": [
+        "sprites",
+        "pixel targets",
+        "static runtime crop comparison",
+        "visual identity"
+      ],
+      "sourceUrls": [],
+      "targetUse": "Static sprite target comparison for player fighter, dual fighter, boss, butterfly, bee, and specialty challenge families.",
+      "currentUse": "Static sprite comparisons are active and measured, but motion is intentionally unscored.",
+      "missingWork": "Add active sprite motion windows for flapping, pulsing, dive/rotation, capture/rescue, and carried-fighter transitions.",
+      "localEvidence": [
+        {
+          "path": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1.json",
+          "exists": true,
+          "kind": "file"
+        },
+        {
+          "path": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1.json",
+          "exists": true,
+          "kind": "file"
+        },
+        {
+          "path": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json",
+          "exists": true,
+          "kind": "file"
+        }
+      ],
+      "evidenceExistingCount": 3,
+      "evidenceMissingCount": 0,
+      "coverage10": 8.2,
+      "weightedCoverage": 0.1271,
+      "axisWeight": 0.155
+    },
+    {
+      "id": "world-of-longplays-galaga-longplay",
+      "title": "Arcade Longplay Galaga by World of Longplays",
+      "sourceType": "gameplay-video",
+      "priority": "high",
+      "priorityRank": 3,
+      "ingestionStatus": "candidate",
+      "confidence": "medium",
+      "coverageAxes": [
+        "late-stage progression",
+        "later challenge stages",
+        "long-run pacing",
+        "enemy novelty"
+      ],
+      "sourceUrls": [
+        "https://www.destructoid.com/iconic-namco-shmup-galaga-blasts-onto-the-arcade-archives/"
+      ],
+      "targetUse": "Long-run gameplay reference for later stages, challenge-stage variation, and progression beyond early windows.",
+      "currentUse": "Discovered as a likely useful longplay source through third-party references, but not yet ingested.",
+      "missingWork": "Find the exact source URL, record provenance, extract later challenge-stage windows, and label at least Challenges 4-8.",
+      "localEvidence": [],
+      "evidenceExistingCount": 0,
+      "evidenceMissingCount": 0,
+      "coverage10": 1.9,
+      "weightedCoverage": 0.037128,
+      "axisWeight": 0.195
+    },
+    {
+      "id": "gamesdatabase-galaga-screens-and-rules",
+      "title": "GamesDatabase Galaga page",
+      "sourceType": "reference-page",
+      "priority": "medium-high",
+      "priorityRank": 2.5,
+      "ingestionStatus": "not-ingested",
+      "confidence": "medium",
+      "coverageAxes": [
+        "screen surfaces",
+        "high-score UI",
+        "title UI",
+        "game-over UI",
+        "challenge-stage rule summary",
+        "transform enemy notes"
+      ],
+      "sourceUrls": [
+        "https://www.gamesdatabase.org/game/arcade/galaga.aspx"
+      ],
+      "targetUse": "Readable screen-surface examples and rule summaries: title, game-over, high-score, cabinet/artwork, challenge-stage non-combat rule, transforms, and alien roles.",
+      "currentUse": "Referenced informally for rule and screen-surface comparison.",
+      "missingWork": "Create a screen-surface target pack for title, high-score, game-over, and challenge-result surfaces with screenshot provenance and visual conformance notes.",
+      "localEvidence": [],
+      "evidenceExistingCount": 0,
+      "evidenceMissingCount": 0,
+      "coverage10": 0,
+      "weightedCoverage": 0,
+      "axisWeight": 0.185
+    },
+    {
+      "id": "strategywiki-galaga-walkthrough",
+      "title": "StrategyWiki Galaga walkthrough",
+      "sourceType": "expert-player-guide",
+      "priority": "medium",
+      "priorityRank": 2,
+      "ingestionStatus": "not-ingested",
+      "confidence": "medium",
+      "coverageAxes": [
+        "player tactics",
+        "challenge-stage learnability",
+        "entrance-pattern explanation",
+        "capture-rescue explanation",
+        "transform progression"
+      ],
+      "sourceUrls": [
+        "https://strategywiki.org/wiki/Galaga/Walkthrough"
+      ],
+      "targetUse": "Player-experience interpretation of entrance patterns, challenge-stage positioning, perfect-bonus learning, capture/rescue tactics, and transform progression.",
+      "currentUse": "Useful for qualitative player-meaning language, not yet a scored target.",
+      "missingWork": "Extract non-numeric expectations into designer/player meaning rows, then use measured media windows for actual path scoring.",
+      "localEvidence": [],
+      "evidenceExistingCount": 0,
+      "evidenceMissingCount": 0,
+      "coverage10": 0,
+      "weightedCoverage": 0,
+      "axisWeight": 0.125
+    },
+    {
+      "id": "galaga-fandom-challenging-stage",
+      "title": "Galaga Collection Fandom challenging-stage page",
+      "sourceType": "community-reference",
+      "priority": "low-medium",
+      "priorityRank": 1,
+      "ingestionStatus": "not-ingested",
+      "confidence": "medium-low",
+      "coverageAxes": [
+        "challenge-stage cadence",
+        "challenge scoring totals",
+        "community summary"
+      ],
+      "sourceUrls": [
+        "https://galaga.fandom.com/wiki/Challenging_Stage"
+      ],
+      "targetUse": "Supplemental challenge-stage cadence and set-point totals.",
+      "currentUse": "Useful cross-check only; lower authority than manual or measured video.",
+      "missingWork": "Use only as a secondary consistency check against manual and captured gameplay.",
+      "localEvidence": [],
+      "evidenceExistingCount": 0,
+      "evidenceMissingCount": 0,
+      "coverage10": 0,
+      "weightedCoverage": 0,
+      "axisWeight": 0.075
+    }
+  ],
+  "axisRows": [
+    {
+      "axis": "challenge-stage entry",
+      "bestSource": "snake-latino-galaga-gameplay-video",
+      "bestStatus": "partial",
+      "bestCoverage10": 5.1,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 1,
+      "needsWork": true
+    },
+    {
+      "axis": "late challenge-stage progression",
+      "bestSource": "arcade-game-series-late-perfect-guides",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": true
+    },
+    {
+      "axis": "trajectory",
+      "bestSource": "snake-latino-galaga-gameplay-video",
+      "bestStatus": "partial",
+      "bestCoverage10": 5.1,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 1,
+      "needsWork": true
+    },
+    {
+      "axis": "later challenge stages",
+      "bestSource": "world-of-longplays-galaga-longplay",
+      "bestStatus": "candidate",
+      "bestCoverage10": 1.9,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": true
+    },
+    {
+      "axis": "rules",
+      "bestSource": "galaga-1981-namco-manual",
+      "bestStatus": "ingested",
+      "bestCoverage10": 10,
+      "sourceCount": 2,
+      "meaningfulSourceCount": 1,
+      "needsWork": true
+    },
+    {
+      "axis": "audio",
+      "bestSource": "galaga-reference-audio-cues",
+      "bestStatus": "ingested",
+      "bestCoverage10": 8.2,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 1,
+      "needsWork": false
+    },
+    {
+      "axis": "sprites",
+      "bestSource": "galaga-reference-sprite-models",
+      "bestStatus": "ingested",
+      "bestCoverage10": 8.2,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 1,
+      "needsWork": false
+    },
+    {
+      "axis": "enemy taxonomy",
+      "bestSource": "bandai-namco-official-galaga-history",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": true
+    },
+    {
+      "axis": "scoring",
+      "bestSource": "galaga-1981-namco-manual",
+      "bestStatus": "ingested",
+      "bestCoverage10": 10,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 1,
+      "needsWork": false
+    },
+    {
+      "axis": "screen surfaces",
+      "bestSource": "gamesdatabase-galaga-screens-and-rules",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": false
+    },
+    {
+      "axis": "capture-rescue",
+      "bestSource": "galaga-1981-namco-manual",
+      "bestStatus": "ingested",
+      "bestCoverage10": 10,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 1,
+      "needsWork": false
+    },
+    {
+      "axis": "capture-rescue explanation",
+      "bestSource": "strategywiki-galaga-walkthrough",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": false
+    },
+    {
+      "axis": "challenge result feedback",
+      "bestSource": "galaga-reference-audio-cues",
+      "bestStatus": "ingested",
+      "bestCoverage10": 8.2,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 1,
+      "needsWork": false
+    },
+    {
+      "axis": "challenge scoring totals",
+      "bestSource": "galaga-fandom-challenging-stage",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": false
+    },
+    {
+      "axis": "challenge-stage cadence",
+      "bestSource": "galaga-fandom-challenging-stage",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": false
+    },
+    {
+      "axis": "challenge-stage learnability",
+      "bestSource": "strategywiki-galaga-walkthrough",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": false
+    },
+    {
+      "axis": "challenge-stage purpose",
+      "bestSource": "bandai-namco-official-galaga-history",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": true
+    },
+    {
+      "axis": "challenge-stage rule summary",
+      "bestSource": "gamesdatabase-galaga-screens-and-rules",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": false
+    },
+    {
+      "axis": "challenge-stage structure",
+      "bestSource": "galaga-1981-namco-manual",
+      "bestStatus": "ingested",
+      "bestCoverage10": 10,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 1,
+      "needsWork": false
+    },
+    {
+      "axis": "community summary",
+      "bestSource": "galaga-fandom-challenging-stage",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": false
+    },
+    {
+      "axis": "contact sheets",
+      "bestSource": "snake-latino-galaga-gameplay-video",
+      "bestStatus": "partial",
+      "bestCoverage10": 5.1,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 1,
+      "needsWork": true
+    },
+    {
+      "axis": "controlled reference capture",
+      "bestSource": "controlled-emulation-capture",
+      "bestStatus": "planned",
+      "bestCoverage10": 1.8,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": true
+    },
+    {
+      "axis": "cue comparison",
+      "bestSource": "galaga-reference-audio-cues",
+      "bestStatus": "ingested",
+      "bestCoverage10": 8.2,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 1,
+      "needsWork": false
+    },
+    {
+      "axis": "enemy novelty",
+      "bestSource": "world-of-longplays-galaga-longplay",
+      "bestStatus": "candidate",
+      "bestCoverage10": 1.9,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": true
+    },
+    {
+      "axis": "entrance-pattern explanation",
+      "bestSource": "strategywiki-galaga-walkthrough",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": false
+    },
+    {
+      "axis": "event feedback",
+      "bestSource": "galaga-reference-audio-cues",
+      "bestStatus": "ingested",
+      "bestCoverage10": 8.2,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 1,
+      "needsWork": false
+    },
+    {
+      "axis": "formation entry",
+      "bestSource": "bandai-namco-official-galaga-history",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": true
+    },
+    {
+      "axis": "frame indexes",
+      "bestSource": "snake-latino-galaga-gameplay-video",
+      "bestStatus": "partial",
+      "bestCoverage10": 5.1,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 1,
+      "needsWork": true
+    },
+    {
+      "axis": "game-over UI",
+      "bestSource": "gamesdatabase-galaga-screens-and-rules",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": false
+    },
+    {
+      "axis": "high-score UI",
+      "bestSource": "gamesdatabase-galaga-screens-and-rules",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": false
+    },
+    {
+      "axis": "late challenge-stage target list",
+      "bestSource": "arcade-game-series-late-perfect-guides",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": true
+    },
+    {
+      "axis": "late challenge-stage windows",
+      "bestSource": "controlled-emulation-capture",
+      "bestStatus": "planned",
+      "bestCoverage10": 1.8,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": true
+    },
+    {
+      "axis": "late-stage progression",
+      "bestSource": "world-of-longplays-galaga-longplay",
+      "bestStatus": "candidate",
+      "bestCoverage10": 1.9,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": true
+    },
+    {
+      "axis": "long-run pacing",
+      "bestSource": "world-of-longplays-galaga-longplay",
+      "bestStatus": "candidate",
+      "bestCoverage10": 1.9,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": true
+    },
+    {
+      "axis": "native timing",
+      "bestSource": "controlled-emulation-capture",
+      "bestStatus": "planned",
+      "bestCoverage10": 1.8,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": true
+    },
+    {
+      "axis": "normal-stage entry",
+      "bestSource": "snake-latino-galaga-gameplay-video",
+      "bestStatus": "partial",
+      "bestCoverage10": 5.1,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 1,
+      "needsWork": true
+    },
+    {
+      "axis": "path labels",
+      "bestSource": "snake-latino-galaga-gameplay-video",
+      "bestStatus": "partial",
+      "bestCoverage10": 5.1,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 1,
+      "needsWork": true
+    },
+    {
+      "axis": "perfect-bonus learning",
+      "bestSource": "arcade-game-series-late-perfect-guides",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": true
+    },
+    {
+      "axis": "pixel targets",
+      "bestSource": "galaga-reference-sprite-models",
+      "bestStatus": "ingested",
+      "bestCoverage10": 8.2,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 1,
+      "needsWork": false
+    },
+    {
+      "axis": "player tactics",
+      "bestSource": "strategywiki-galaga-walkthrough",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": false
+    },
+    {
+      "axis": "player-facing explanation",
+      "bestSource": "bandai-namco-official-galaga-history",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": true
+    },
+    {
+      "axis": "presentation",
+      "bestSource": "galaga-1981-namco-manual",
+      "bestStatus": "ingested",
+      "bestCoverage10": 10,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 1,
+      "needsWork": false
+    },
+    {
+      "axis": "special enemy appearance",
+      "bestSource": "arcade-game-series-late-perfect-guides",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": true
+    },
+    {
+      "axis": "sprite motion",
+      "bestSource": "controlled-emulation-capture",
+      "bestStatus": "planned",
+      "bestCoverage10": 1.8,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": true
+    },
+    {
+      "axis": "static runtime crop comparison",
+      "bestSource": "galaga-reference-sprite-models",
+      "bestStatus": "ingested",
+      "bestCoverage10": 8.2,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 1,
+      "needsWork": false
+    },
+    {
+      "axis": "title UI",
+      "bestSource": "gamesdatabase-galaga-screens-and-rules",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": false
+    },
+    {
+      "axis": "trajectory extraction",
+      "bestSource": "controlled-emulation-capture",
+      "bestStatus": "planned",
+      "bestCoverage10": 1.8,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": true
+    },
+    {
+      "axis": "transform enemy notes",
+      "bestSource": "gamesdatabase-galaga-screens-and-rules",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": false
+    },
+    {
+      "axis": "transform progression",
+      "bestSource": "strategywiki-galaga-walkthrough",
+      "bestStatus": "not-ingested",
+      "bestCoverage10": 0,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 0,
+      "needsWork": false
+    },
+    {
+      "axis": "visual identity",
+      "bestSource": "galaga-reference-sprite-models",
+      "bestStatus": "ingested",
+      "bestCoverage10": 8.2,
+      "sourceCount": 1,
+      "meaningfulSourceCount": 1,
+      "needsWork": false
+    }
+  ],
+  "challengeStageCoverage": [
+    {
+      "challengeNumber": 1,
+      "stageMarker": 3,
+      "status": "partially-ingested",
+      "currentEvidence": [
+        "challenge-1-arrival",
+        "challenge-1-late-wave"
+      ],
+      "nextNeed": "Convert existing windows into fuller five-group trajectory labels and build Aurora Stage 3 against those exact group contracts.",
+      "coverage10": 4.5,
+      "evidenceCount": 2
+    },
+    {
+      "challengeNumber": 2,
+      "stageMarker": 7,
+      "status": "partially-ingested",
+      "currentEvidence": [
+        "challenge-2-arrival"
+      ],
+      "nextNeed": "Add late-wave/results windows and group 2-5 labels.",
+      "coverage10": 4.5,
+      "evidenceCount": 1
+    },
+    {
+      "challengeNumber": 3,
+      "stageMarker": 11,
+      "status": "partially-ingested",
+      "currentEvidence": [
+        "challenge-3-arrival"
+      ],
+      "nextNeed": "Add late-wave/results windows and map specialty alien novelty explicitly.",
+      "coverage10": 4.5,
+      "evidenceCount": 1
+    },
+    {
+      "challengeNumber": 4,
+      "stageMarker": 15,
+      "status": "not-ingested",
+      "currentEvidence": [],
+      "nextNeed": "Acquire and label a full reference challenge window; do not reuse Challenge 3 as the best target except as a temporary diagnostic.",
+      "coverage10": 0,
+      "evidenceCount": 0
+    },
+    {
+      "challengeNumber": 5,
+      "stageMarker": 19,
+      "status": "not-ingested",
+      "currentEvidence": [],
+      "nextNeed": "Acquire and label a full reference challenge window with mosquito/specialty-family novelty.",
+      "coverage10": 0,
+      "evidenceCount": 0
+    },
+    {
+      "challengeNumber": 6,
+      "stageMarker": 23,
+      "status": "not-ingested",
+      "currentEvidence": [],
+      "nextNeed": "Acquire and label full reference challenge window for late-stage progression.",
+      "coverage10": 0,
+      "evidenceCount": 0
+    },
+    {
+      "challengeNumber": 7,
+      "stageMarker": 27,
+      "status": "not-ingested",
+      "currentEvidence": [],
+      "nextNeed": "Acquire and label full reference challenge window for late-stage progression.",
+      "coverage10": 0,
+      "evidenceCount": 0
+    },
+    {
+      "challengeNumber": 8,
+      "stageMarker": 31,
+      "status": "not-ingested",
+      "currentEvidence": [],
+      "nextNeed": "Acquire and label full reference challenge window and special blue-spaceship novelty.",
+      "coverage10": 0,
+      "evidenceCount": 0
+    }
+  ],
+  "nextBestSteps": [
+    "Acquire or create a lawful controlled reference capture for Challenge Stages 4-8, prioritizing stages 15, 19, 23, 27, and 31.",
+    "Promote five-group labels for each challenge: first visible frame, entry side, path family, scoreable band, exit side, alien family, and perfect-bonus opportunity.",
+    "Split the existing early challenge reference windows into complete group-by-group target contracts before further Aurora runtime tuning.",
+    "Add active sprite-motion evidence for challenge aliens so graphics conformance is not static-pose-only.",
+    "Use official/manual sources for rule and scoring grounding, and measured video/contact-sheet sources for path and visual timing scoring."
+  ]
+}

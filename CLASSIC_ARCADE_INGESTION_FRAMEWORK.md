@@ -64,6 +64,18 @@ Every game that enters primary ingestion must receive a maintained catalog entry
 in [GAME_CONFORMANCE_CATALOG.md](GAME_CONFORMANCE_CATALOG.md). This is now a
 high-priority ingestion output, not a later release-writing task.
 
+Every game must also maintain a target-artifact coverage artifact before major
+implementation claims are made. For Aurora's Galaga target, the current example
+is:
+
+- source: `reference-artifacts/ingestion/galaga-target-artifact-corpus/target-artifacts-0.1.json`
+- analysis: `reference-artifacts/analyses/galaga-target-artifact-coverage/latest.json`
+- readable report: `GALAGA_TARGET_ARTIFACT_COVERAGE.md`
+
+This artifact answers: which online/manual/gameplay/sprite/audio sources are
+illustrative, which are actually ingested, which are only planning references,
+and which missing sources most limit conformance scoring.
+
 The catalog must include:
 
 - an alien/enemy index with displayed names, roles, activity, stage presence,

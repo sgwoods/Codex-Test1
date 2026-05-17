@@ -176,7 +176,7 @@
       "visiblePath": "application-guide.html",
       "template": "src/application-guide.template.html",
       "builder": "tools/build/build-index.js#buildApplicationGuide",
-      "summary": "Aurora-owned audio, visual, alien, stage, artifact-conformance, and persona catalog.",
+      "summary": "Aurora-owned audio, visual, alien, stage, target-artifact, artifact-conformance, and persona catalog.",
       "sections": [
         {
           "id": "audio-visual-catalog",
@@ -201,11 +201,13 @@
             "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json",
             "reference-artifacts/analyses/aurora-visual-look-conformance/latest.json",
             "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+            "reference-artifacts/analyses/galaga-target-artifact-coverage/latest.json",
+            "GALAGA_TARGET_ARTIFACT_COVERAGE.md",
             "CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md",
             "reference-artifacts/analyses/persona-performance-distribution/latest.json"
           ],
-          "currentness": "The artifact scorecard and persona performance distribution are generated from analysis outputs rather than single static claims.",
-          "riskIfStale": "Sprite/audio/visual/persona claims can look precise while no longer matching the latest harness artifacts."
+          "currentness": "The artifact scorecard, target artifact coverage, and persona performance distribution are generated from analysis outputs rather than single static claims.",
+          "riskIfStale": "Sprite/audio/visual/target-artifact/persona claims can look precise while no longer matching the latest harness artifacts."
         }
       ]
     },

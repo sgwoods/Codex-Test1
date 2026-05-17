@@ -29,6 +29,7 @@ persona testing expectations.
 | First challenge-stage baseline | `reference-artifacts/analyses/first-challenge-stage/README.md` | focused challenge-stage baseline from original capture | early challenge motion, group readability, scoreable windows |
 | Release reference pack | `reference-artifacts/analyses/release-reference-pack/README.md` | curated windows for capture, transition, Stage 4, later pressure | release-shaping comparisons beyond stage 1 |
 | Galaga manual / cabinet-era material | `reference-artifacts/manuals/galaga-1981-namco/README.md` | manual-backed rules and presentation anchors | source-of-truth rule checking before tuning or release claims |
+| Galaga target artifact corpus | `reference-artifacts/analyses/galaga-target-artifact-coverage/latest.json` and `GALAGA_TARGET_ARTIFACT_COVERAGE.md` | online/local target inventory, ingestion status, challenge-window readiness, and next acquisition needs | deciding which reference artifacts are strong enough to guide implementation versus only useful as planning or supplemental context |
 | Reference audio clips | `src/assets/reference-audio/` | clipped reference cues mirrored into app assets | cue alignment, phrase comparison, reference-theme playback |
 
 ## Derived Analysis Packs Already In The Repo
@@ -47,6 +48,7 @@ persona testing expectations.
 | Stage 1 opening correspondence | `reference-artifacts/analyses/correspondence/stage1-opening-first-dive` | how closely Aurora opening timing matches the reference timing library |
 | Stage 1 opening spacing | `reference-artifacts/analyses/correspondence/stage1-opening-spacing` | whether formation geometry and spacing remain on target |
 | Challenge-stage correspondence | `reference-artifacts/analyses/correspondence/challenge-stage-timing` | whether challenge entry and result timing matches the target model |
+| Galaga target artifact coverage | `reference-artifacts/analyses/galaga-target-artifact-coverage/latest.json` | which official/manual/video/player-guide/sprite/audio sources are ingested, partial, candidate, or missing |
 | Capture-rescue correspondence | `reference-artifacts/analyses/correspondence/capture-rescue` | whether capture/rescue state flow still matches the intended baseline |
 | Persona progression correspondence | `reference-artifacts/analyses/correspondence/persona-progression` | whether progression depth and persona ordering remain healthy |
 | Player movement correspondence | `reference-artifacts/analyses/correspondence/player-movement` | whether movement still matches current joystick-translation principles |
@@ -78,6 +80,9 @@ These are the most important missing reference structures, not missing media fil
    and harness targets.
 9. A formal promoted-evidence index that ties gameplay captures to quality
    conformance, player-profile training, and future Player 2 simulation needs.
+10. Later Galaga challenging-stage windows. The current target-artifact coverage
+    read marks Challenge Stages 4-8 as not ingested, which is why challenge-stage
+    target readiness is currently low even though early challenge evidence exists.
 
 ## Working Rule
 

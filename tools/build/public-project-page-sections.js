@@ -4,6 +4,7 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..', '..');
 const REVIEW_LEARNING_LATEST = path.join(ROOT, 'reference-artifacts', 'analyses', 'review-learning', 'latest.json');
 const CHALLENGE_STAGE_CONFORMANCE_LATEST = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
+const GALAGA_TARGET_ARTIFACT_COVERAGE_LATEST = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-artifact-coverage', 'latest.json');
 
 function esc(value = ''){
   return String(value)
@@ -134,6 +135,16 @@ function investmentRows(data){
 function ingestionCards(data){
   const summary = data?.ingestionSummary || {};
   const rows = Array.isArray(data?.ingestionRows) ? data.ingestionRows : [];
+  const targetCoverage = loadGalagaTargetArtifactCoverage();
+  const targetSummary = targetCoverage?.summary || {};
+  const targetCard = targetCoverage
+    ? `
+                <article class="card emphasis">
+                    <h3>Galaga target artifact coverage</h3>
+                    <p><strong>${esc(targetSummary.coverageScore10 ?? 'n/a')}/10 overall</strong>; <strong>${esc(targetSummary.challengeStageReadiness10 ?? 'n/a')}/10 challenge-stage readiness</strong>. ${esc(targetSummary.interpretation || '')}</p>
+                    <p class="smallText">Critical open sources: ${esc(targetSummary.criticalOpenCount ?? '--')}; missing late challenge windows: ${esc(targetSummary.lateChallengeGapCount ?? '--')}.</p>
+                </article>`
+    : '';
   const cards = rows.slice(0, 4).map(row => `
                 <article class="card">
                     <h3>${esc(row.source || 'Reference source')}</h3>
@@ -146,6 +157,7 @@ function ingestionCards(data){
                     <p>${esc(summary.framing || 'Ingestion data is not available for this build.')}</p>
                     <p class="smallText">Sources: ${esc(summary.sourceFamilyCount ?? '--')} families; high confidence: ${esc(summary.highConfidenceCount ?? '--')}; scored or promoted: ${esc(summary.scoredOrPromotedCount ?? '--')}.</p>
                 </article>
+${targetCard}
 ${cards}`;
 }
 
@@ -216,6 +228,16 @@ function loadChallengeStageConformance(){
   if(!artifact) return null;
   return Object.assign({}, artifact, {
     stageRows: Array.isArray(artifact.stageRows) ? artifact.stageRows : []
+  });
+}
+
+function loadGalagaTargetArtifactCoverage(){
+  const artifact = readJson(GALAGA_TARGET_ARTIFACT_COVERAGE_LATEST, null);
+  if(!artifact) return null;
+  return Object.assign({}, artifact, {
+    rows: Array.isArray(artifact.rows) ? artifact.rows : [],
+    challengeStageCoverage: Array.isArray(artifact.challengeStageCoverage) ? artifact.challengeStageCoverage : [],
+    summary: artifact.summary || {}
   });
 }
 

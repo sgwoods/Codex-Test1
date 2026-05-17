@@ -121,6 +121,10 @@ function alienVariationRead(){
   return readJson(path.join(ANALYSES, 'alien-entry-challenge-variation', 'latest.json'), {});
 }
 
+function galagaTargetArtifactCoverageRead(){
+  return readJson(path.join(ANALYSES, 'galaga-target-artifact-coverage', 'latest.json'), {});
+}
+
 function layoutSignature(layout){
   if(!layout) return 'layout pending';
   const lanes = Array.isArray(layout.laneTypes) ? layout.laneTypes.join(', ') : 'lane types pending';
@@ -662,6 +666,26 @@ function makeStageRow(stage, runtime, match, referenceLabels){
 
 function buildMarkdown(report){
   const rows = report.stageRows || [];
+  const targetCoverage = report.targetArtifactCoverage || {};
+  const targetSummary = targetCoverage.summary || {};
+  const challengeTargetRows = Array.isArray(targetCoverage.challengeStageCoverage)
+    ? targetCoverage.challengeStageCoverage
+    : [];
+  const targetCoverageSection = targetSummary.coverageScore10 ? `
+## Target Artifact Coverage
+
+The broader Galaga target-artifact coverage read is **${targetSummary.coverageScore10}/10** overall and **${targetSummary.challengeStageReadiness10}/10** for challenge-stage target readiness. The important implication is not that Aurora lacks all grounding; it is that the currently ingested challenge-stage corpus is still early-stage heavy. ${targetSummary.interpretation || ''}
+
+| Challenge | Stage Marker | Target Status | Coverage | Next Need |
+| ---: | ---: | --- | ---: | --- |
+${challengeTargetRows.map(row => `| ${row.challengeNumber} | ${row.stageMarker} | ${row.status} | ${row.coverage10}/10 | ${row.nextNeed} |`).join('\n')}
+
+Full target-artifact report: \`GALAGA_TARGET_ARTIFACT_COVERAGE.md\` and \`reference-artifacts/analyses/galaga-target-artifact-coverage/latest.json\`.
+` : `
+## Target Artifact Coverage
+
+Target-artifact coverage has not been generated yet. Run \`npm run harness:analyze:galaga-target-artifact-coverage\` before relying on this report for reference acquisition planning.
+`;
   const tableRows = rows.map(row => {
     const gapCell = row.criticalGaps.length
       ? row.criticalGaps.join('<br>')
@@ -719,6 +743,8 @@ Current result: **${report.summary.interestingFactorScore10}/10 interesting fact
 - Safety is measured separately from interest: no shots/no kills is necessary, but it does not make a challenge visually conformant and contributes only as a guardrail.
 - Prior 24-second evidence windows can include post-challenge normal play, so enemy bullets/attackers in those older windows are not treated as challenge-rule failures here.
 
+${targetCoverageSection}
+
 ## Stage Summary
 
 | Stage | Challenge | Interest | Movement | Graphics | Alien Novelty | Strict Score | Diagnostic Best Reference | No-Shot/No-Kill | Critical Gap |
@@ -756,6 +782,7 @@ async function buildReport(){
   const matches = challengeMatches();
   const referenceLabels = challengeReferenceLabels();
   const alienVariation = alienVariationRead();
+  const targetArtifactCoverage = galagaTargetArtifactCoverageRead();
   const rows = CHALLENGE_STAGES.map(stage => {
     const runtime = runtimeProbes.find(probe => probe.stage === stage);
     const intent = STAGE_INTENT[stage];
@@ -816,10 +843,17 @@ async function buildReport(){
     })),
     sourceArtifacts: {
       galagaPathReferenceLabels: 'reference-artifacts/analyses/galaga-path-reference-labels/latest.json',
+      galagaTargetArtifactCoverage: 'reference-artifacts/analyses/galaga-target-artifact-coverage/latest.json',
       pathFamilyComparison: 'reference-artifacts/analyses/formation-boss-path-family-comparison/latest.json',
       alienEntryChallengeVariation: 'reference-artifacts/analyses/alien-entry-challenge-variation/latest.json',
       challengeCollisionGuardrail: 'tools/harness/check-challenge-collision.js',
       challengeMotionProfileGuardrail: 'tools/harness/check-challenge-motion-profile.js'
+    },
+    targetArtifactCoverage: {
+      summary: targetArtifactCoverage.summary || {},
+      challengeStageCoverage: Array.isArray(targetArtifactCoverage.challengeStageCoverage)
+        ? targetArtifactCoverage.challengeStageCoverage
+        : []
     },
     improvementPlan: [
       'Use strict challenge-stage scores as the release-facing truth; keep broad coverage scores only as diagnostics.',
