@@ -1,0 +1,76 @@
+{
+  "schema": "galaga-screen-surface-targets-0.1",
+  "source": {
+    "id": "gamesdatabase-galaga-screens-and-rules",
+    "title": "GamesDatabase Galaga page",
+    "url": "https://www.gamesdatabase.org/game/arcade/galaga.aspx",
+    "sourceType": "reference-page",
+    "capturedAt": "2026-05-17"
+  },
+  "targetSurfaces": [
+    {
+      "id": "title-screen",
+      "surface": "title UI",
+      "currentUse": "Reference category only; exact screenshot comparison is not yet ingested.",
+      "nextMeasurement": "Add approved screenshot/contact-sheet target and compare Aurora wait/start page layout, density, title treatment, and readability."
+    },
+    {
+      "id": "in-game-screen",
+      "surface": "in-game UI",
+      "currentUse": "Reference category only; exact screenshot comparison is not yet ingested.",
+      "nextMeasurement": "Compare playfield frame, score lines, ship reserve display, level flags, starfield density, and enemy/player proportions."
+    },
+    {
+      "id": "high-score-screen",
+      "surface": "high-score UI",
+      "currentUse": "Reference category only; exact screenshot comparison is not yet ingested.",
+      "nextMeasurement": "Compare top-ten table density, column containment, initials handling, lock/verified state, and arcade typography."
+    },
+    {
+      "id": "game-over-screen",
+      "surface": "game-over UI",
+      "currentUse": "Reference category only; exact screenshot comparison is not yet ingested.",
+      "nextMeasurement": "Compare message placement, color, duration, sound tail, and transition back to wait mode."
+    },
+    {
+      "id": "cabinet-control-panel",
+      "surface": "cabinet shell",
+      "currentUse": "Reference category only; exact screenshot comparison is not yet ingested.",
+      "nextMeasurement": "Compare Platinum shell, control placement, icon semantics, frame proportions, and popup visual tone against arcade cabinet expectations."
+    },
+    {
+      "id": "challenge-result-surface",
+      "surface": "challenge results",
+      "currentUse": "Rule summary is represented, but result-screen visual target still needs media-backed capture.",
+      "nextMeasurement": "Pair score/bonus text with measured challenge-result timing and audio tail."
+    }
+  ],
+  "ruleNotes": [
+    {
+      "id": "challenge-noncombat-rule",
+      "paraphrase": "Challenge stages are score exhibitions where enemies fly in formations and do not drop bombs.",
+      "conformanceUse": "Maintain no-shot/no-ship-loss safety as a guardrail, but do not allow it to inflate visual/movement conformance."
+    },
+    {
+      "id": "boss-two-hit-role",
+      "paraphrase": "Boss aliens require multiple hits before destruction and are tied to capture/rescue behavior.",
+      "conformanceUse": "Boss first-hit damage feedback should remain visually and aurally distinct from full destruction."
+    },
+    {
+      "id": "formation-complexity-progression",
+      "paraphrase": "As the game progresses, alien attacks and formations become more complex.",
+      "conformanceUse": "Stage-arc metrics should penalize repetitive patterns even when they are technically safe."
+    },
+    {
+      "id": "transform-progression",
+      "paraphrase": "Special transform enemies appear after early stages and cycle through different visual families.",
+      "conformanceUse": "Aurora's novelty axis should track special alien introduction and not only lane count or speed."
+    }
+  ],
+  "measurementLimits": [
+    "This is a partial derived surface map, not a pixel-level screenshot pack.",
+    "Do not score visual shell conformance as high from this artifact alone.",
+    "Promote approved screenshots or controlled frames before using it for fine visual comparisons."
+  ]
+}
+

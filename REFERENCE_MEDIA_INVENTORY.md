@@ -30,6 +30,8 @@ persona testing expectations.
 | Release reference pack | `reference-artifacts/analyses/release-reference-pack/README.md` | curated windows for capture, transition, Stage 4, later pressure | release-shaping comparisons beyond stage 1 |
 | Galaga manual / cabinet-era material | `reference-artifacts/manuals/galaga-1981-namco/README.md` | manual-backed rules and presentation anchors | source-of-truth rule checking before tuning or release claims |
 | Galaga target artifact corpus | `reference-artifacts/analyses/galaga-target-artifact-coverage/latest.json` and `GALAGA_TARGET_ARTIFACT_COVERAGE.md` | online/local target inventory, ingestion status, challenge-window readiness, and next acquisition needs | deciding which reference artifacts are strong enough to guide implementation versus only useful as planning or supplemental context |
+| Galaga design grounding notes | `reference-artifacts/ingestion/galaga-design-grounding/README.md` | derived official-source and player-guide assertions for identity, entry, challenge-stage learnability, capture/rescue, and transform progression | grounding player/designer meaning while keeping numeric movement scores tied to measured media |
+| Galaga screen-surface targets | `reference-artifacts/ingestion/galaga-screen-surface-targets/README.md` | derived target map for title, in-game, high-score, game-over, cabinet, and challenge-result surfaces | planning visual/UI conformance work before approved screenshot/contact-sheet targets exist |
 | Reference audio clips | `src/assets/reference-audio/` | clipped reference cues mirrored into app assets | cue alignment, phrase comparison, reference-theme playback |
 
 ## Derived Analysis Packs Already In The Repo
@@ -83,6 +85,8 @@ These are the most important missing reference structures, not missing media fil
 10. Later Galaga challenging-stage windows. The current target-artifact coverage
     read marks Challenge Stages 4-8 as not ingested, which is why challenge-stage
     target readiness is currently low even though early challenge evidence exists.
+11. Approved screen-surface screenshots or controlled frames for Galaga title,
+    high-score, game-over, challenge-result, and cabinet/control-panel surfaces.
 
 ## Working Rule
 

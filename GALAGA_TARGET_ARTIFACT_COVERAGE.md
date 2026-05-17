@@ -1,6 +1,6 @@
 # Galaga Target Artifact Coverage
 
-Generated: `2026-05-17T14:17:30.026Z`
+Generated: `2026-05-17T14:21:47.632Z`
 
 This is the project-facing inventory of online and local artifacts that best
 illustrate Aurora's Galaga-like target. It records what is already ingested,
@@ -9,11 +9,11 @@ conformance work.
 
 ## Summary
 
-- Overall target-artifact ingestion coverage: `3.6/10`
+- Overall target-artifact ingestion coverage: `5.3/10`
 - Challenge-stage target readiness: `1.7/10`
 - Critical sources: `3`
 - Critical sources not fully ingested: `3`
-- Existing local evidence anchors: `21`
+- Existing local evidence anchors: `27`
 - Missing local evidence anchors: `0`
 
 ## Interpretation
@@ -27,13 +27,13 @@ Aurora has enough Galaga source material to prove the current challenge-stage ga
 | arcade-game-series-late-perfect-guides | not-ingested | 0/10 | critical | 0/0 | Acquire lawful gameplay windows for the late challenge stages and promote per-group labels. Use the guides only to prioritize stage windows and expected novelty, not as pixel/motion ground truth. |
 | controlled-emulation-capture | planned | 1.8/10 | critical | 0/0 | Set up an approved capture source, record source manifest, capture challenges 1-8, and extract trajectories/contact sheets with the same harness shape used for existing media. |
 | snake-latino-galaga-gameplay-video | partial | 5.1/10 | critical | 13/13 | It is only a 360p early-window corpus. Add complete challenge-stage windows and later challenge stages beyond Challenge 3 before using it as the sole movement target. |
-| bandai-namco-official-galaga-history | not-ingested | 0/10 | high | 0/0 | Capture a cited official-source summary into the project docs and use it as high-level design grounding rather than a numeric movement target. |
+| bandai-namco-official-galaga-history | ingested | 10/10 | high | 2/2 | Promote selected assertions into rule-specific checks where they can reduce prose-only documentation debt. |
 | galaga-1981-namco-manual | ingested | 10/10 | high | 2/2 | Promote richer manual-derived assertions into structured per-rule artifacts so checks can cite rule IDs instead of prose notes. |
 | galaga-reference-audio-cues | ingested | 8.2/10 | high | 3/3 | Improve scoring stability and segment-boundary strategy before promoting more runtime audio changes. |
 | galaga-reference-sprite-models | ingested | 8.2/10 | high | 3/3 | Add active sprite motion windows for flapping, pulsing, dive/rotation, capture/rescue, and carried-fighter transitions. |
 | world-of-longplays-galaga-longplay | candidate | 1.9/10 | high | 0/0 | Find the exact source URL, record provenance, extract later challenge-stage windows, and label at least Challenges 4-8. |
-| gamesdatabase-galaga-screens-and-rules | not-ingested | 0/10 | medium-high | 0/0 | Create a screen-surface target pack for title, high-score, game-over, and challenge-result surfaces with screenshot provenance and visual conformance notes. |
-| strategywiki-galaga-walkthrough | not-ingested | 0/10 | medium | 0/0 | Extract non-numeric expectations into designer/player meaning rows, then use measured media windows for actual path scoring. |
+| gamesdatabase-galaga-screens-and-rules | partial | 4.2/10 | medium-high | 2/2 | Add approved screenshot/contact-sheet provenance before using this source for fine pixel/layout scoring. |
+| strategywiki-galaga-walkthrough | partial | 4.2/10 | medium | 2/2 | Use the notes to define player/designer meaning rows, then use measured media windows for actual path scoring. |
 | galaga-fandom-challenging-stage | not-ingested | 0/10 | low-medium | 0/0 | Use only as a secondary consistency check against manual and captured gameplay. |
 
 ## Challenge-Stage Priority Windows

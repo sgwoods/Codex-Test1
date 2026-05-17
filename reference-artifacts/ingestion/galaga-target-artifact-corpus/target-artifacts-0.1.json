@@ -20,10 +20,13 @@
         "challenge-stage purpose",
         "player-facing explanation"
       ],
-      "ingestionStatus": "not-ingested",
-      "localEvidence": [],
-      "currentUse": "Known to the team but not yet represented as a formal source artifact.",
-      "missingWork": "Capture a cited official-source summary into the project docs and use it as high-level design grounding rather than a numeric movement target.",
+      "ingestionStatus": "ingested",
+      "localEvidence": [
+        "reference-artifacts/ingestion/galaga-design-grounding/README.md",
+        "reference-artifacts/ingestion/galaga-design-grounding/official-history-notes-0.1.json"
+      ],
+      "currentUse": "Formal official-source notes now ground Galaga identity, formation entry, enemy-role taxonomy, capture/rescue, and challenge-stage depth.",
+      "missingWork": "Promote selected assertions into rule-specific checks where they can reduce prose-only documentation debt.",
       "priority": "high",
       "confidence": "high"
     },
@@ -107,10 +110,13 @@
         "challenge-stage rule summary",
         "transform enemy notes"
       ],
-      "ingestionStatus": "not-ingested",
-      "localEvidence": [],
-      "currentUse": "Referenced informally for rule and screen-surface comparison.",
-      "missingWork": "Create a screen-surface target pack for title, high-score, game-over, and challenge-result surfaces with screenshot provenance and visual conformance notes.",
+      "ingestionStatus": "partial",
+      "localEvidence": [
+        "reference-artifacts/ingestion/galaga-screen-surface-targets/README.md",
+        "reference-artifacts/ingestion/galaga-screen-surface-targets/screen-surface-targets-0.1.json"
+      ],
+      "currentUse": "A derived screen-surface target map now identifies title, in-game, high-score, game-over, cabinet, and challenge-result surfaces.",
+      "missingWork": "Add approved screenshot/contact-sheet provenance before using this source for fine pixel/layout scoring.",
       "priority": "medium-high",
       "confidence": "medium"
     },
@@ -129,10 +135,13 @@
         "capture-rescue explanation",
         "transform progression"
       ],
-      "ingestionStatus": "not-ingested",
-      "localEvidence": [],
-      "currentUse": "Useful for qualitative player-meaning language, not yet a scored target.",
-      "missingWork": "Extract non-numeric expectations into designer/player meaning rows, then use measured media windows for actual path scoring.",
+      "ingestionStatus": "partial",
+      "localEvidence": [
+        "reference-artifacts/ingestion/galaga-design-grounding/README.md",
+        "reference-artifacts/ingestion/galaga-design-grounding/player-guide-notes-0.1.json"
+      ],
+      "currentUse": "Derived player-guide notes now ground challenge-stage learnability, five-group challenge structure, entrance anticipation, capture/rescue risk, and transform progression.",
+      "missingWork": "Use the notes to define player/designer meaning rows, then use measured media windows for actual path scoring.",
       "priority": "medium",
       "confidence": "medium"
     },
