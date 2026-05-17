@@ -361,6 +361,33 @@ That means:
 4. only after those steps, start designing homage variants from the preserved
    invariant grammar instead of improvising novel mechanics too early
 
+## Current Top 10 Improvement Queue
+
+This is the current ordered queue for `Galaxy Guardians`, balancing visible
+player value, conformance lift, and cost/compute discipline.
+
+1. promote the opening-slice artifact pack for `WAIT`, score table, reserve
+   ships, flags, and player-ready/readiness cues from the committed intro
+   sources
+2. tighten rack march cadence and opening left-right swarm motion against the
+   measured opening windows
+3. tune moving starfield motion and opening palette progression against the
+   long-session reference instead of decorative instinct
+4. make bottom-exit / top-reentry behavior visibly continuous and timing-faithful
+   across the current public slice
+5. improve explosion, hit, and destruction-state readability so combat feedback
+   feels more arcade-authentic at live scale
+6. promote stage `3-5` pressure traces and tune the scout-to-flagship/escort
+   handoff into a clearer command-pressure arc
+7. promote stage `6-9` traces and raise sustained-pressure fairness plus clear
+   potential for expert/professional personas
+8. make Guardians first-class in the Platinum frame for sign-in, scores, pilot
+   card, replay/video capture, bug reports, and Arcade Music/SFX surfaces
+9. strengthen game-over, mission-complete, high-score, and run-summary
+   credibility so the game reads as a real run and not only a preview slice
+10. only after the above, define homage variants from preserved invariant
+   grammar rather than using novelty as a substitute for base-game authority
+
 ## Relationship To The Current Runtime
 
 This plan matches the current runtime and pack truth:

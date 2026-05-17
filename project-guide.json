@@ -131,9 +131,138 @@
           "detail": "Full rendered stage-by-stage narrative, work progression, metric strategy, and homage-variant guardrails."
         },
         {
+          "label": "Read Guardians First-Class Plan",
+          "href": "project-guide.html#guardians-first-class-doc",
+          "detail": "Game-specific conformance strategy, evidence ladder, runtime contract, and platform-frame parity goals."
+        },
+        {
+          "label": "Read Guardians Long-Surface Review",
+          "href": "project-guide.html#guardians-long-surface-doc",
+          "detail": "Deeper repeated-rack and persona review model for the stages beyond the one-level public slice."
+        },
+        {
           "label": "Open Guardians Conformance View",
           "href": "conformance-dashboard.html?game=galaxy-guardians#conformance",
           "detail": "Current score, gaps, and next investment areas for Guardians on the hosted dashboard."
+        }
+      ]
+    },
+    {
+      "id": "guardians-top-ten",
+      "title": "Galaxy Guardians Top 10 Improvement Queue",
+      "summary": "The current ordered work queue, optimized for visible player value, conformance lift, and cost/compute discipline.",
+      "table": {
+        "columns": [
+          "Rank",
+          "Improvement",
+          "Why it matters now",
+          "Best evidence / doc entry"
+        ],
+        "rows": [
+          [
+            "1",
+            "Opening `WAIT`, score table, reserve ships, flags, and player-ready cues",
+            "The one-level public slice still wins or loses trust in its first seconds. These are the most obvious visible misses.",
+            "[Stage assessment](project-guide.html#guardians-stage-arc) and [full stage-arc plan](project-guide.html#guardians-stage-arc-doc)"
+          ],
+          [
+            "2",
+            "Rack march cadence and opening left-right swarm motion",
+            "If the rack does not move with the right march-like pressure, the whole game feels off before the first dive.",
+            "[Guardians conformance](conformance-dashboard.html?game=galaxy-guardians#conformance)"
+          ],
+          [
+            "3",
+            "Moving starfield motion and opening palette progression",
+            "The cabinet should feel alive before the game becomes hard; this is a visible part of Galaxian-family identity.",
+            "[Reference media inventory](project-guide.html#reference-media-inventory-doc)"
+          ],
+          [
+            "4",
+            "Bottom-exit / top-reentry threat continuity",
+            "Visible continuation through the bottom and re-entry from the top is a major authenticity cue and a real gameplay-pressure signal.",
+            "[Full stage-arc plan](project-guide.html#guardians-stage-arc-doc)"
+          ],
+          [
+            "5",
+            "Explosion, hit, and destruction-state readability",
+            "Combat feel is still weaker than it should be at live scale even when timing is otherwise acceptable.",
+            "[Guardians first-class plan](project-guide.html#guardians-first-class-doc)"
+          ],
+          [
+            "6",
+            "Stage `3-5` pressure traces and scout-to-flagship handoff",
+            "This is the first place the game starts to become distinctly Galaxian-family rather than only a decent opening rack.",
+            "[Guardians long-surface review](project-guide.html#guardians-long-surface-doc)"
+          ],
+          [
+            "7",
+            "Stage `6-9` sustained-pressure fairness and clear potential",
+            "A deeper game needs a believable midrun, not only a good opening level.",
+            "[Guardians long-surface review](project-guide.html#guardians-long-surface-doc)"
+          ],
+          [
+            "8",
+            "Platform-frame parity: sign-in, scores, pilot card, replay/video capture, bug reports, music",
+            "Guardians has to sit in Platinum as naturally as Aurora, or multi-game validation stays incomplete.",
+            "[Applications on Platinum](project-guide.html#applications-doc)"
+          ],
+          [
+            "9",
+            "Game-over, mission-complete, high-score, and run-summary credibility",
+            "The game should read like a real run with its own identity and outcomes, not only a preview slice with a stop point.",
+            "[Guardians first-class plan](project-guide.html#guardians-first-class-doc)"
+          ],
+          [
+            "10",
+            "Homage variants from preserved invariant grammar",
+            "Variants should come only after the base game is authoritative, so novelty does not replace conformance.",
+            "[Full stage-arc plan](project-guide.html#guardians-stage-arc-doc)"
+          ]
+        ]
+      },
+      "links": [
+        {
+          "label": "Open Guardians Conformance View",
+          "href": "conformance-dashboard.html?game=galaxy-guardians#conformance",
+          "detail": "Current score, gaps, and investment rows for Guardians."
+        },
+        {
+          "label": "Read Full Stage-Arc Plan",
+          "href": "project-guide.html#guardians-stage-arc-doc",
+          "detail": "Full stage-by-stage narrative and longer explanation behind the queue."
+        }
+      ]
+    },
+    {
+      "id": "reading-paths",
+      "title": "Reading Paths",
+      "summary": "If you are browsing the hosted docs rather than the repo source tree, start with one of these paths.",
+      "links": [
+        {
+          "label": "Understand The Current Release Story",
+          "href": "project-guide.html#snapshot",
+          "detail": "Start with the current release snapshot, then jump to release notes and the release-readiness source."
+        },
+        {
+          "label": "Understand Aurora As The Shipped Game",
+          "href": "application-guide.html#conformance-alien-index",
+          "detail": "Use the Aurora application guide plus the Aurora-focused conformance view for the shipped first cabinet."
+        },
+        {
+          "label": "Understand Guardians As It Exists Today",
+          "href": "project-guide.html#guardians-stage-arc",
+          "detail": "Start with the short hosted stage assessment, then read the full stage-arc, first-class, and long-surface plans."
+        },
+        {
+          "label": "Understand The Platform And Shared Frame",
+          "href": "platinum-guide.html",
+          "detail": "Use the hosted Platinum guide and Applications on Platinum to understand what the shell owns versus what each game owns."
+        },
+        {
+          "label": "Understand The Next Improvement Queue",
+          "href": "project-guide.html#guardians-top-ten",
+          "detail": "Read the current ordered Guardians top-10 queue, then drill into the linked plan sections and dashboard views."
         }
       ]
     },
@@ -240,6 +369,31 @@
           "detail": "Human-readable hosted summary of the current Guardians stage arc, visible slice, deeper internal stage bands, and next work."
         },
         {
+          "label": "Hosted Full Guardians Stage-Arc Plan",
+          "href": "project-guide.html#guardians-stage-arc-doc",
+          "detail": "Full rendered stage-by-stage narrative, metric strategy, and homage-variant guardrails for Guardians."
+        },
+        {
+          "label": "Hosted Guardians First-Class Plan",
+          "href": "project-guide.html#guardians-first-class-doc",
+          "detail": "Rendered game-specific conformance strategy for Guardians, including evidence, release posture, and platform-frame parity."
+        },
+        {
+          "label": "Hosted Guardians Long-Surface Review",
+          "href": "project-guide.html#guardians-long-surface-doc",
+          "detail": "Rendered deeper repeated-rack and persona review model for the stages beyond the one-level public slice."
+        },
+        {
+          "label": "Hosted Guardians Top 10 Queue",
+          "href": "project-guide.html#guardians-top-ten",
+          "detail": "Current ordered improvement queue for Guardians, optimized for visible player value and conformance return."
+        },
+        {
+          "label": "Hosted Documentation Reading Paths",
+          "href": "project-guide.html#reading-paths",
+          "detail": "Human-oriented navigation map for browsing the hosted documentation set."
+        },
+        {
           "label": "Hosted White Paper",
           "href": "white-paper.html",
           "detail": "Dedicated hosted narrative surface for the living white paper, citation ledger, and versioned white-paper release history."
@@ -323,6 +477,7 @@
       "bullets": [
         "Use the conformance dashboard to choose the highest-value Aurora investment by score gap, user impact, confidence, and resource cost.",
         "Prioritize audio/event feedback, level arc, boss/formation grammar, and visual reference grounding for the next major user-experience lift.",
+        "Use the hosted Guardians stage assessment and top-10 queue as the current documentation-first map for second-game follow-through, not only the raw source docs.",
         "Keep Platinum shell and docs discipline boring and reliable while the games become more ambitious.",
         "Advance Galaxy Guardians through ingestion-backed reference evidence before treating it as a serious public playable candidate."
       ]
@@ -340,6 +495,18 @@
       "title": "Game Conformance Catalog",
       "summary": "Maintained per-game alien/enemy, audio cue, stage, and persona index rendered into the hosted project guide so the catalog is user-visible rather than only a repository artifact.",
       "file": "GAME_CONFORMANCE_CATALOG.md"
+    },
+    {
+      "id": "guardians-first-class-doc",
+      "title": "Galaxy Guardians First-Class Conformance Plan",
+      "summary": "Maintained game-specific conformance strategy covering evidence, runtime contracts, platform-frame parity, release posture, and the core harness spine.",
+      "file": "GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md"
+    },
+    {
+      "id": "guardians-long-surface-doc",
+      "title": "Galaxy Guardians Long-Surface And Persona Plan",
+      "summary": "Maintained stage-band and persona review layer that explains how Guardians grows beyond the one-level public slice and what still blocks deeper-session authority.",
+      "file": "GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md"
     },
     {
       "id": "guardians-stage-arc-doc",
