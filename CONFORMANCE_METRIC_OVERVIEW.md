@@ -1,6 +1,6 @@
 # Conformance Metrics Overview
 
-Generated: `2026-05-17T18:50:01.937Z`
+Generated: `2026-05-17T18:53:35.447Z`
 
 This document summarizes the current conformance scoring model for both the shipped Aurora application and the Galaxy Guardians 0.1 development preview. Aurora uses the release-quality scorecard; Guardians uses both a reference-conformance preview metric set and a stricter playtest-weighted score because its Galaxian evidence is still being promoted from source footage into frame-level/audio-level measurements.
 
@@ -8,7 +8,7 @@ This document summarizes the current conformance scoring model for both the ship
 
 | Game / scope | Primary score | Secondary scores | Status | Weakest current area | Evidence |
 | --- | --- | --- | --- | --- | --- |
-| Aurora Galactica current dev line | 8.8/10 | strongest Player movement conformance 10/10; weakest Challenge-stage set-piece conformance 3.7/10; broad alien/challenge variation 8.3/10; dedicated challenge-stage conformance 3.7/10; audio contract readiness 9.3/10 | release-quality conformance score plus audio cue-contract read | Challenge-stage set-piece conformance (3.7/10) | reference-artifacts/analyses/quality-conformance/2026-05-17-4037bf5b/report.json; reference-artifacts/analyses/aurora-audio-cue-contracts/latest.json; reference-artifacts/analyses/challenge-stage-conformance/latest.json |
+| Aurora Galactica current dev line | 8.8/10 | strongest Player movement conformance 10/10; weakest Challenge-stage set-piece conformance 3.7/10; broad alien/challenge variation 8.3/10; dedicated challenge-stage conformance 3.7/10; audio contract readiness 9.3/10 | release-quality conformance score plus audio cue-contract read | Challenge-stage set-piece conformance (3.7/10) | reference-artifacts/analyses/quality-conformance/2026-05-17-48e84ff4/report.json; reference-artifacts/analyses/aurora-audio-cue-contracts/latest.json; reference-artifacts/analyses/challenge-stage-conformance/latest.json |
 | Galaxy Guardians 0.1 playable preview | 7.6/10 | playtest weighted 6.9/10; maturity 7.2/10; gate coverage 9.6/10; public readiness 4.2/10 | preview-reference-conformance-model-not-production-release-score | Formation and rack timing | reference-artifacts/analyses/galaxy-guardians-identity/reference-conformance-0.1.json |
 
 ## Galaxy Guardians First-Class Promotion Read
@@ -85,7 +85,7 @@ xychart-beta
 | Metric | Score | Evidence | Current read |
 | --- | --- | --- | --- |
 | Player movement conformance | 10/10 | player-movement report | Current movement scored 10/10 against the control-principles profile, versus 10/10 for the shipped local baseline. |
-| Shot and hit responsiveness | 10/10 | close-shot-hit, movement fire window | Close-shot responsiveness passed, and movement-fire post-shot travel was 41.02, with shot delay 3ms. |
+| Shot and hit responsiveness | 10/10 | close-shot-hit, movement fire window | Close-shot responsiveness passed, and movement-fire post-shot travel was 45.78, with shot delay 5ms. |
 | Stage-1 opening timing fidelity | 8.5/10 | stage1-opening-first-dive report | 4/4 metrics were within tolerance; worst current delta was 0.18. |
 | Stage-1 opening geometry fidelity | 10/10 | stage1-opening-spacing report | Geometry held steady with 0 changed targets and max drift 0. |
 | Dive fairness and safety | 9.1/10 | persona-stage2-safety | Shared stage-2 safety seeds passed, which keeps the early dive/collision windows within the intended persona guardrail. |

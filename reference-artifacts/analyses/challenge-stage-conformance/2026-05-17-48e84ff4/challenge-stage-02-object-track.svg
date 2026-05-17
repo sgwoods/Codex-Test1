@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300" role="img" aria-labelledby="title desc">
+  <title id="title">Challenging Stage 2 (7-8) object-track and shot-opportunity sketch</title>
+  <desc id="desc">Readable object tracks from runtime challenge sprite silhouettes plus sampled player shot opportunity lanes.</desc>
+  <style>
+    .bg{fill:#06111d}.panel{fill:#0d1b2a;stroke:#2e5d78;stroke-width:2}.grid{stroke:#1b3344;stroke-width:1}.text{fill:#f2fbff;font:700 20px ui-monospace,Menlo,monospace}.small{fill:#b8d7ec;font:700 13px ui-monospace,Menlo,monospace}.tiny{fill:#9ec9e6;font:11px ui-monospace,Menlo,monospace}.pill{fill:#102a3b;stroke:#2e5d78}
+  </style>
+  <rect class="bg" x="0" y="0" width="760" height="300"/>
+  <text class="text" x="24" y="34">Challenging Stage 2 (7-8)</text>
+  <rect class="pill" x="482" y="14" width="254" height="32" rx="16"/>
+  <text class="small" x="498" y="35">4.9/10 shot opportunity</text>
+  <rect class="panel" x="36" y="56" width="456" height="210" rx="10"/>
+  <rect class="panel" x="548" y="56" width="176" height="210" rx="10"/>
+  <text class="small" x="56" y="82">Object-tracked silhouette paths</text>
+  <text class="small" x="568" y="82">Shot-lane hits</text>
+  <line class="grid" x1="50" y1="92" x2="50" y2="244"/><line class="grid" x1="136" y1="92" x2="136" y2="244"/><line class="grid" x1="222" y1="92" x2="222" y2="244"/><line class="grid" x1="308" y1="92" x2="308" y2="244"/><line class="grid" x1="394" y1="92" x2="394" y2="244"/>
+  <line class="grid" x1="50" y1="100" x2="480" y2="100"/><line class="grid" x1="50" y1="142" x2="480" y2="142"/><line class="grid" x1="50" y1="184" x2="480" y2="184"/><line class="grid" x1="50" y1="226" x2="480" y2="226"/>
+  <polyline points="-26.8,112.9 -26.8,112.9 -26.8,112.9 -26.8,112.9 -26.8,112.9 242.9,118.7 119,131 239.2,222.5" fill="none" stroke="#78f7ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="-26.8" cy="112.9" r="5" fill="#78f7ff"/><text class="tiny" x="500" y="96" fill="#78f7ff">scorpion cross-sweep 8f</text>
+  <polyline points="-26.8,114.3 -26.8,114.3 -26.8,114.3 -26.8,114.3 -26.8,114.3 142.1,121.7 215.4,125.7 55.5,214.8" fill="none" stroke="#ffd36a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="-26.8" cy="114.3" r="5" fill="#ffd36a"/><text class="tiny" x="500" y="120" fill="#ffd36a">stingray boss-led-loop 8f</text>
+  <polyline points="-26.8,97.5 -26.8,97.5 -26.8,97.5 149.5,101.5 250.7,100.9 250.6,103.4 186.5,143.6 311.8,234.2" fill="none" stroke="#ff7bd5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="-26.8" cy="97.5" r="5" fill="#ff7bd5"/><text class="tiny" x="500" y="144" fill="#ff7bd5">classic cross-sweep 8f</text>
+  <polyline points="-26.8,118.5 -26.8,118.5 -26.8,118.5 -26.8,118.5 -26.8,118.5 156.6,124.3 125.4,129.3 6.2,215.3" fill="none" stroke="#8cffb4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="-26.8" cy="118.5" r="5" fill="#8cffb4"/><text class="tiny" x="500" y="168" fill="#8cffb4">stingray boss-led-loop 8f</text>
+  <polyline points="-26.8,103.1 -26.8,103.1 -26.8,103.1 -26.8,103.1 220.2,107.9 235.1,110.1 192.2,138.2 52.1,230.7" fill="none" stroke="#b08cff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="-26.8" cy="103.1" r="5" fill="#b08cff"/><text class="tiny" x="500" y="192" fill="#b08cff">scorpion hook-arc 8f</text>
+  <rect x="586" y="187.4" width="12" height="34.6" rx="3" fill="#ffd36a"/><text class="tiny" x="582" y="242">32</text>
+  <rect x="606" y="162.7" width="12" height="59.3" rx="3" fill="#ffd36a"/><text class="tiny" x="602" y="242">68</text>
+  <rect x="626" y="157.8" width="12" height="64.2" rx="3" fill="#ffd36a"/><text class="tiny" x="622" y="242">104</text>
+  <rect x="646" y="187.4" width="12" height="34.6" rx="3" fill="#ffd36a"/><text class="tiny" x="642" y="242">140</text>
+  <rect x="666" y="187.4" width="12" height="34.6" rx="3" fill="#ffd36a"/><text class="tiny" x="662" y="242">176</text>
+  <rect x="686" y="157.8" width="12" height="64.2" rx="3" fill="#ffd36a"/><text class="tiny" x="682" y="242">212</text>
+  <rect x="706" y="138" width="12" height="84" rx="3" fill="#ffd36a"/><text class="tiny" x="702" y="242">248</text>
+  <text class="tiny" x="56" y="260">Silhouette: 5/10; 39 tracks, 239 crops.</text>
+  <text class="tiny" x="568" y="260">Lane diversity 1; center bias 0.092.</text>
+</svg>
