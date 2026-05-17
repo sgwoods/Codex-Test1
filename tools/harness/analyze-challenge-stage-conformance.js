@@ -24,6 +24,7 @@ const STAGE_INTENT = {
     challengeNumber: 2,
     windowId: 'challenge-stage-scorpion-cross',
     expectedReferenceLabels: ['challenge-2-arrival-group-1'],
+    expectedReferenceSemantics: ['mixed', 'novelty', 'cross'],
     target: 'Second challenge should feel denser and more novel than challenge 1 while staying nonlethal and non-shooting.',
     criticalExpectation: 'Should introduce a stronger mixed-family visual grammar and a learnable crossing pattern.'
   },
@@ -31,6 +32,7 @@ const STAGE_INTENT = {
     challengeNumber: 3,
     windowId: 'challenge-stage-stingray-hook',
     expectedReferenceLabels: ['challenge-3-arrival-group-1'],
+    expectedReferenceSemantics: ['boss-led', 'novelty', 'dragonfly', 'hook'],
     target: 'Third challenge should make the new visual family and boss-led novelty obvious, with larger sweep vocabulary and no attacks.',
     criticalExpectation: 'Should read as a later Galaga challenge with alien novelty and a distinct high-bonus route.'
   },
@@ -38,6 +40,7 @@ const STAGE_INTENT = {
     challengeNumber: 4,
     windowId: 'challenge-stage-pink-serpentine',
     expectedReferenceLabels: ['challenge-4-pink-serpentine-group-1'],
+    expectedReferenceSemantics: ['pink', 'serpentine'],
     target: 'Fourth challenge should shift into long specialty serpentine arcs with obvious new color/family identity while staying nonlethal.',
     criticalExpectation: 'Should feel like the first truly late-stage set piece, not a boss-led remix of earlier challenge stages.'
   },
@@ -45,20 +48,35 @@ const STAGE_INTENT = {
     challengeNumber: 5,
     windowId: 'challenge-stage-pink-green-cascade',
     expectedReferenceLabels: ['challenge-5-pink-green-cascade-group-1'],
+    expectedReferenceSemantics: ['pink', 'green', 'cascade'],
     target: 'Fifth challenge should distinguish itself with pink/green cascade motion, alternating group identity, and stronger lower-field pass readability.',
     criticalExpectation: 'Should prove that late challenge progression is authored stage by stage, not repeated from Challenge 4.'
   },
   23: {
     challengeNumber: 6,
     windowId: 'challenge-stage-green-ladder-split',
-    expectedReferenceLabels: ['challenge-6-green-ladder-split-group-1'],
+    expectedReferenceLabels: [
+      'challenge-6-green-ladder-split-group-1',
+      'challenge-6-green-ladder-split-group-2',
+      'challenge-6-green-ladder-split-group-3',
+      'challenge-6-green-ladder-split-group-4',
+      'challenge-6-green-ladder-split-group-5'
+    ],
+    expectedReferenceSemantics: ['green', 'ladder', 'split'],
     target: 'Sixth challenge should emphasize green ladder rhythm and split exits.',
     criticalExpectation: 'Should make staggered group timing and split route separation visible enough for a player to learn.'
   },
   27: {
     challengeNumber: 7,
     windowId: 'challenge-stage-yellow-diagonal-fan',
-    expectedReferenceLabels: ['challenge-7-yellow-diagonal-fan-group-1'],
+    expectedReferenceLabels: [
+      'challenge-7-yellow-diagonal-fan-group-1',
+      'challenge-7-yellow-diagonal-fan-group-2',
+      'challenge-7-yellow-diagonal-fan-group-3',
+      'challenge-7-yellow-diagonal-fan-group-4',
+      'challenge-7-yellow-diagonal-fan-group-5'
+    ],
+    expectedReferenceSemantics: ['yellow', 'diagonal', 'fan'],
     target: 'Seventh challenge should introduce a yellow diagonal fan with a memorable scoring lane.',
     criticalExpectation: 'Should be visually and tactically unlike the prior ladder/cascade stages.'
   },
@@ -66,6 +84,7 @@ const STAGE_INTENT = {
     challengeNumber: 8,
     windowId: 'challenge-stage-blue-purple-finale',
     expectedReferenceLabels: ['challenge-8-blue-purple-finale-group-1'],
+    expectedReferenceSemantics: ['blue', 'purple', 'finale'],
     target: 'Eighth visible challenge should act as a compact blue/purple late-loop capstone.',
     criticalExpectation: 'Should avoid returning to early-stage column/cross vocabulary and make the late-loop identity obvious.'
   }
@@ -340,11 +359,43 @@ function referenceMatchForRuntime(stage, runtime, referenceLabels){
   const runtimeVector = runtime?.motionVector || null;
   if(!runtimeVector) return null;
   const intent = STAGE_INTENT[stage] || {};
+  const expectedSemantics = (intent.expectedReferenceSemantics || []).map(item => String(item).toLowerCase());
+  const runtimeSemanticText = [
+    runtime?.layout?.id,
+    runtime?.layout?.pathFamily,
+    ...(runtime?.groupSignatures || []).flatMap(group => [
+      ...(group.families || []),
+      ...(group.pathFamilies || [])
+    ])
+  ].join(' ').toLowerCase();
+  const semanticFitForLabel = (label) => {
+    const labelText = [
+      label.labelId,
+      label.entityFamily,
+      label.bonusOpportunity
+    ].join(' ').toLowerCase();
+    const expectedHits = expectedSemantics.length
+      ? expectedSemantics.filter(token => labelText.includes(token) || runtimeSemanticText.includes(token)).length / expectedSemantics.length
+      : 0;
+    const challengeNumberHit = Number.isFinite(+label.challengeNumber)
+      && Number.isFinite(+intent.challengeNumber)
+      && +label.challengeNumber === +intent.challengeNumber;
+    const expectedLabelHit = (intent.expectedReferenceLabels || []).includes(label.labelId);
+    return clamp((expectedHits * 0.55) + (challengeNumberHit ? 0.25 : 0) + (expectedLabelHit ? 0.2 : 0));
+  };
   const candidates = referenceLabels
     .filter(label => label.comparisonVector)
     .map(label => {
       const fit = trajectoryFit(runtimeVector, label.comparisonVector);
-      const expectedBonus = (intent.expectedReferenceLabels || []).includes(label.labelId) ? 0.35 : 0;
+      const expectedBonus = (intent.expectedReferenceLabels || []).includes(label.labelId) ? 0.55 : 0;
+      const semanticFit = semanticFitForLabel(label);
+      const challengeDistance = Number.isFinite(+label.challengeNumber) && Number.isFinite(+intent.challengeNumber)
+        ? Math.abs(+label.challengeNumber - +intent.challengeNumber)
+        : 0;
+      const stageProgressionPenalty = (intent.expectedReferenceLabels || []).includes(label.labelId)
+        ? 0
+        : Math.min(0.9, challengeDistance * 0.16);
+      const semanticScore10 = round(semanticFit * 10, 1);
       return {
         labelId: label.labelId,
         kind: label.kind,
@@ -352,12 +403,16 @@ function referenceMatchForRuntime(stage, runtime, referenceLabels){
         sourceAnchor: label.sourceAnchor,
         distance: fit.distance,
         trajectoryScore10: fit.trajectoryScore10,
-        semanticScore10: null,
-        score10: round(Math.min(10, fit.trajectoryScore10 + expectedBonus), 1),
-        components: fit.components
+        semanticScore10,
+        score10: round(Math.max(0, Math.min(10, fit.trajectoryScore10 + expectedBonus + (semanticFit * 0.75) - stageProgressionPenalty)), 1),
+        components: Object.assign({}, fit.components, {
+          semanticFit: round(semanticFit, 3),
+          expectedBonus: round(expectedBonus, 3),
+          stageProgressionPenalty: round(stageProgressionPenalty, 3)
+        })
       };
     })
-    .sort((a, b) => b.score10 - a.score10 || a.distance - b.distance || a.labelId.localeCompare(b.labelId));
+    .sort((a, b) => b.score10 - a.score10 || b.semanticScore10 - a.semanticScore10 || a.distance - b.distance || a.labelId.localeCompare(b.labelId));
   return {
     stage,
     challenge: true,
@@ -418,6 +473,50 @@ function strictTrajectoryRead(runtimeVector, referenceLabel, match, expectedHit,
   };
 }
 
+function summarizeSpriteMotion(samples, runtime){
+  const positions = (samples || []).flatMap(sample => (sample.positions || []).map(pos => Object.assign({ t: sample.t }, pos)));
+  const active = positions.filter(pos => Number.isFinite(+pos.tm));
+  const families = Array.from(new Set(active.map(pos => pos.family).filter(Boolean))).sort();
+  const pathFamilies = Array.from(new Set(active.map(pos => pos.pathFamily).filter(Boolean))).sort();
+  const flapStates = new Set(active.map(pos => pos.flapOpen === true ? 'open' : pos.flapOpen === false ? 'closed' : '').filter(Boolean));
+  const phaseBuckets = new Set(active.map(pos => Number.isFinite(+pos.animationPhase) ? Math.floor(((+pos.animationPhase + Math.PI * 2) % (Math.PI * 2)) / (Math.PI / 3)) : null).filter(value => value !== null));
+  const familyMotionCoverage = families.length ? families.filter(family => {
+    const states = new Set(active.filter(pos => pos.family === family).map(pos => pos.flapOpen === true ? 'open' : pos.flapOpen === false ? 'closed' : '').filter(Boolean));
+    return states.size >= 2;
+  }).length / families.length : 0;
+  const flapCycle = flapStates.size >= 2 ? 1 : 0;
+  const phaseCoverage = clamp(phaseBuckets.size / 6);
+  const poseDiversity = clamp(pathFamilies.length / 4);
+  const visualFamilyDiversity = clamp(families.length / 4);
+  const activeMotionCoverage = clamp(
+    (0.32 * flapCycle)
+    + (0.28 * phaseCoverage)
+    + (0.2 * familyMotionCoverage)
+    + (0.12 * poseDiversity)
+    + (0.08 * visualFamilyDiversity)
+  );
+  return {
+    score10: round(1 + activeMotionCoverage * 4.2, 1),
+    activeMotionCoverage: round(activeMotionCoverage, 3),
+    flapCycleObserved: !!flapCycle,
+    flapStates: Array.from(flapStates).sort(),
+    phaseBucketCount: phaseBuckets.size,
+    families,
+    pathFamilies,
+    familyMotionCoverage: round(familyMotionCoverage, 3),
+    poseDiversity: round(poseDiversity, 3),
+    visualFamilyDiversity: round(visualFamilyDiversity, 3),
+    measurementLimits: [
+      'This is an active runtime animation-phase hook, not object-tracked sprite-pixel conformance.',
+      'It observes flap phase, family diversity, and path-pose diversity inside challenge windows, but it does not yet compare per-frame silhouettes to Galaga target crops.'
+    ],
+    read: active.length
+      ? `Runtime sprite-motion hook observed ${families.length} visual family/families, ${pathFamilies.length} path pose family/families, ${phaseBuckets.size}/6 animation phase buckets, and ${flapCycle ? 'both' : 'one'} flap state(s).`
+      : 'Runtime sprite-motion hook found no active challenge enemies in sampled windows.',
+    runtimeLayoutId: runtime?.layout?.id || null
+  };
+}
+
 function strictGraphicsRead(stage, runtime, expectedHit){
   const firstWave = runtime?.firstWave || [];
   const types = typeSet(firstWave);
@@ -427,20 +526,24 @@ function strictGraphicsRead(stage, runtime, expectedHit){
   const typeMixCredit = clamp(types.length / 4) * 0.18;
   const familyCredit = hasNonClassicVisual ? 0.14 : 0;
   const contractCredit = classicLineContract && expectedHit ? 0.18 : 0;
-  const measuredRuntimeSpriteMotionCoverage = 0;
-  const activeMotionCap = measuredRuntimeSpriteMotionCoverage ? 5.5 : 2.2;
-  const score10 = round(Math.min(activeMotionCap, 1 + (4.0 * (typeMixCredit + familyCredit + contractCredit))), 1);
+  const spriteMotion = runtime?.spriteMotion || summarizeSpriteMotion(runtime?.samples || [], runtime);
+  const measuredRuntimeSpriteMotionCoverage = spriteMotion.activeMotionCoverage || 0;
+  const activeMotionCap = measuredRuntimeSpriteMotionCoverage ? 3.6 : 2.2;
+  const spriteMotionCredit = measuredRuntimeSpriteMotionCoverage * 0.36;
+  const score10 = round(Math.min(activeMotionCap, 1 + (4.0 * (typeMixCredit + familyCredit + contractCredit + spriteMotionCredit))), 1);
   return {
     score10,
     activeMotionCap,
     measuredRuntimeSpriteMotionCoverage,
+    spriteMotion,
     components: {
       alienTypeMix: round(typeMixCredit, 3),
       visualFamilyNovelty: round(familyCredit, 3),
       firstChallengeLineContract: round(contractCredit, 3),
-      activeSpriteMotionCoverage: measuredRuntimeSpriteMotionCoverage
+      activeSpriteMotionCoverage: measuredRuntimeSpriteMotionCoverage,
+      spriteMotionCredit: round(spriteMotionCredit, 3)
     },
-    read: `Strict graphics score ${score10}/10. Current visible family/type labels are present, but challenge-window graphics are capped at ${activeMotionCap}/10 until live sprite flaps, pulsing, rotation/dive silhouettes, capture/rescue transitions, and Galaga target sprite crops are scored in motion.`
+    read: `Strict graphics score ${score10}/10. Current visible family/type labels are present and ${spriteMotion.read} Graphics remain capped at ${activeMotionCap}/10 until live silhouettes, rotations, dive poses, capture/rescue transitions, and Galaga target sprite crops are scored in motion.`
   };
 }
 
@@ -565,6 +668,11 @@ async function runtimeProbeForStage(stage){
             id: e.id,
             wave: e.wave,
             lane: e.lane,
+            family: e.family,
+            pathFamily: e.pathFamily,
+            tm: +(+e.tm || 0).toFixed(3),
+            flapOpen: e.flapOpen === true,
+            animationPhase: +(+e.animationPhase || 0).toFixed(3),
             x: +(+e.x || 0).toFixed(2),
             y: +(+e.y || 0).toFixed(2)
           }))
@@ -612,6 +720,7 @@ async function collectRuntimeProbes(){
     const probe = await runtimeProbeForStage(stage);
     probe.motionSummary = summarizeMotion(probe.samples || []);
     probe.motionVector = normalizeRuntimeMotion(probe.samples || []);
+    probe.spriteMotion = summarizeSpriteMotion(probe.samples || [], probe);
     rows.push(probe);
   }
   return rows;
@@ -715,10 +824,12 @@ function criticalGaps(stage, runtime, match, score){
     }
   }
   if(stage === 7){
-    gaps.push('Cross-sweep identity is visible in labels, but the measured vector still lands closest to the same challenge-2 reference as most other challenge stages.');
+    if(score.expectedReferenceHit) gaps.push('Cross-sweep identity now lands on the expected Challenge 2 reference family; next work is trajectory precision and active visual novelty, not basic identity.');
+    else gaps.push('Cross-sweep identity is visible in labels, but the measured vector still misses the expected Challenge 2 reference family.');
   }
   if(stage === 11){
-    gaps.push('Dragonfly family appears, but sprite-motion novelty and tracked Galaga challenge-3 path phases are not yet scored.');
+    if(score.expectedReferenceHit) gaps.push('Dragonfly/boss-led identity now lands on the expected Challenge 3 reference family, but sprite-motion novelty and tracked Galaga challenge-3 path phases are not yet scored.');
+    else gaps.push('Dragonfly family appears, but the measured vector still misses the expected Challenge 3 reference family and sprite-motion novelty is not yet scored.');
   }
   if(stage === 15){
     if(score.expectedReferenceHit) gaps.push('Pink-serpentine identity now lands on its first-pass late reference, but it still needs five-group frame labels, target sprite-motion evidence, and stronger player-visible novelty before it can claim maturity.');
@@ -729,10 +840,12 @@ function criticalGaps(stage, runtime, match, score){
     else gaps.push('Stage 19 has a pink/green cascade runtime contract, but its measured vector still misses the first-pass Galaga cascade label.');
   }
   if(stage === 23){
-    gaps.push('Green-ladder split is now represented as its own runtime contract, but the measured vector still reads closer to an early challenge than the expected ladder/split reference.');
+    if(score.expectedReferenceHit) gaps.push('Green-ladder split now lands on a Challenge 6 ladder/split reference; remaining work is fuller path length, lower reversal noise, and object-tracked group timing.');
+    else gaps.push('Green-ladder split is now represented as its own runtime contract, but the measured vector still reads closer to an early challenge than the expected ladder/split reference.');
   }
   if(stage === 27){
-    gaps.push('Yellow diagonal fan is now represented as its own runtime contract, but it still needs stronger diagonal lane identity and must not collapse into the blue/purple finale signature.');
+    if(score.expectedReferenceHit) gaps.push('Yellow diagonal fan now lands on a Challenge 7 diagonal-fan reference; remaining work is stronger lower-field travel and object-tracked diagonal lane timing.');
+    else gaps.push('Yellow diagonal fan is now represented as its own runtime contract, but it still needs stronger diagonal lane identity and must not collapse into another reference signature.');
   }
   if(stage === 31){
     gaps.push('Blue/purple finale is now represented as its own runtime contract, but it still needs fuller path length and active sprite-motion evidence before it feels like a late-loop capstone.');
@@ -816,6 +929,7 @@ function makeStageRow(stage, runtime, match, referenceLabels){
     bestReferenceMatch: match?.bestMatch || null,
     referenceMatchScore10: round(match?.bestMatch?.score10, 1),
     runtimeVector: match?.runtimeVector || null,
+    galagaReferenceVector: referenceTarget?.comparisonVector || null,
     galagaReferenceAnchor: referenceTarget?.sourceAnchor || match?.bestMatch?.sourceAnchor || null,
     galagaReferenceMeaning: referenceTarget?.bonusOpportunity || null,
     safetyProbe: runtime ? {
@@ -831,6 +945,12 @@ function makeStageRow(stage, runtime, match, referenceLabels){
     graphicsRead: runtime
       ? score.strictAxisReads.graphics.read
       : 'Graphics runtime probe pending.',
+    spriteMotionRead: runtime
+      ? score.strictAxisReads.graphics.spriteMotion?.read || 'Sprite-motion hook pending.'
+      : 'Sprite-motion hook pending.',
+    spriteMotionProbe: runtime
+      ? score.strictAxisReads.graphics.spriteMotion || null
+      : null,
     movementRead: match
       ? `${score.strictAxisReads.movement.read} Legacy broad vector best-match was ${round(match.bestMatch?.score10, 1)}/10 against ${bestLabel || 'no label'}; xRange ${match.runtimeVector?.xRange}, yRange ${match.runtimeVector?.yRange}, pathLength ${match.runtimeVector?.pathLength}.`
       : 'No reference trajectory comparison row was found for this stage.',
@@ -936,7 +1056,7 @@ Current result: **${report.summary.interestingFactorScore10}/10 interesting fact
 - Reference targets came from media-backed Galaga path labels and contact sheets.
 - Existing path-family comparison supplied best-match vector scores against labeled Galaga challenge entries, but those broad scores are now retained as diagnostic coverage instead of the conformance score.
 - Strict movement scoring compares runtime y-range, path length, turn count, reversals, lower-field share, and trajectory best-match against the selected Galaga challenge reference vector. It is capped by current temporal-measurement limits because the harness still samples summaries rather than full tracked choreography.
-- Strict graphical scoring is intentionally low until challenge-window sprite animation is measured: flaps, pulsing, dive/rotation silhouettes, capture/rescue transitions, and direct target crop comparison.
+- Strict graphical scoring now includes a first active sprite-motion hook for flap state, phase coverage, visual family diversity, and path-pose diversity. It remains capped until object-tracked silhouettes, rotations, dive poses, capture/rescue transitions, and direct target crop comparison are measured.
 - Challenge path-slot extraction suppresses player fire for challenge windows, so trajectory comparison measures authored alien motion instead of bullet-truncated player-score fragments.
 - Safety is measured separately from interest: no shots/no kills is necessary, but it does not make a challenge visually conformant and contributes only as a guardrail.
 - Prior 24-second evidence windows can include post-challenge normal play, so enemy bullets/attackers in those older windows are not treated as challenge-rule failures here.
@@ -959,18 +1079,115 @@ ${stageSections}
 4. Implement Stage 7 / Challenging Stage 2 as a different authored set piece, not just wider Stage 3: denser mixed novelty, crossing pattern, different entry side and exit side, readable scoring route.
 5. Implement Stage 11 / Challenging Stage 3 with boss-led novelty and active animation evidence: featured alien role, flapping/pulsing/rotation windows, and a distinct reward read.
 6. Continue the late-stage rebuild now that Challenges 4-8 have media-backed windows: preserve the new Stage 15, 19, 23, 27, and 31 contracts, then promote five group labels for each.
-7. Prioritize Challenge 6 green-ladder and Challenge 7 yellow-fan misses, because those still best-match the wrong reference family under the strict scorer.
-8. Promote challenge-stage contact sheets, trajectory SVGs, and per-stage motion timelines into the Application Guide so the human review can see the actual delta, not only score text.
+7. Prioritize Challenge 6 green-ladder and Challenge 7 yellow-fan precision work, because they now hit the expected reference families but still need longer path length, cleaner lower-field travel, and lower reversal noise.
+8. Promote challenge-stage contact sheets, trajectory SVGs, active sprite-motion probes, and per-stage motion timelines into the Application Guide so the human review can see the actual delta, not only score text.
 
 ## Success Criteria
 
 - Raise challenge-stage interesting factor from ${report.summary.interestingFactorScore10}/10 to 3.5/10 as the first honest gate by implementing one visibly reference-like challenge, then toward 6.0/10 after Stage 3, 7, and 11 each have distinct authored contracts.
 - Raise movement conformance from ${report.summary.movementConformanceScore10}/10 by increasing y-range, path length, turn count, and exit-side match against the Galaga challenge references.
-- Raise graphical conformance from ${report.summary.graphicalConformanceScore10}/10 only when active sprite-motion windows and reference target crops are attached; do not inflate it from type labels alone.
+- Raise graphical conformance from ${report.summary.graphicalConformanceScore10}/10 by extending the active sprite-motion hook into object-tracked silhouette, rotation, dive-pose, and reference-crop comparisons; do not inflate it from type labels alone.
 - Preserve 0 enemy shots, 0 enemy attack starts, and 0 ship losses during challenge windows.
 - Convert the first-pass late-reference labels into five-group frame/object labels before treating the late challenge sequence as conformant.
-- Add sprite-motion scoring for challenge enemies so visual novelty is active-motion evidence, not only a family label.
+- Extend sprite-motion scoring for challenge enemies so visual novelty becomes object-tracked pixel evidence, not only a phase/family hook.
 `;
+}
+
+function svgEsc(value){
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function vectorPath(vector, x0, y0, width, height, direction = 1){
+  const xRange = clamp(+vector?.xRange || 0, 0.2, 1.6);
+  const yRange = clamp(+vector?.yRange || 0, 0.1, 1);
+  const turns = Math.max(1, Math.min(5, Math.round(+vector?.turnCount || 1)));
+  const points = [];
+  const horizontal = Math.min(width * 0.82, width * 0.38 * xRange);
+  const vertical = Math.min(height * 0.86, height * yRange);
+  for(let i = 0; i <= turns + 2; i += 1){
+    const q = i / (turns + 2);
+    const wave = Math.sin(q * Math.PI * (turns + 1));
+    const x = x0 + width / 2 + direction * ((q - 0.5) * horizontal + wave * horizontal * 0.22);
+    const y = y0 + 18 + q * vertical;
+    points.push(`${round(x, 1)},${round(y, 1)}`);
+  }
+  return points.join(' ');
+}
+
+function metricBar(label, current, target, x, y, width){
+  const c = clamp(+current || 0, 0, 1.6);
+  const t = clamp(+target || 0, 0, 1.6);
+  const scale = width / 1.6;
+  return [
+    '<g>',
+    `<text x="${x}" y="${y - 6}" class="tiny">${svgEsc(label)}</text>`,
+    `<rect x="${x}" y="${y}" width="${width}" height="8" rx="4" class="barBg"/>`,
+    `<rect x="${x}" y="${y}" width="${round(t * scale, 1)}" height="8" rx="4" class="targetBar"/>`,
+    `<rect x="${x}" y="${y + 11}" width="${width}" height="8" rx="4" class="barBg"/>`,
+    `<rect x="${x}" y="${y + 11}" width="${round(c * scale, 1)}" height="8" rx="4" class="currentBar"/>`,
+    '</g>'
+  ].join('\n  ');
+}
+
+function trajectoryDiagramSvg(row){
+  const label = `Challenging Stage ${row.challengeNumber} (${row.stage}-${row.stage + 1})`;
+  const target = row.galagaReferenceVector || {};
+  const current = row.runtimeVector || {};
+  const targetPath = vectorPath(target, 56, 62, 236, 170, -1);
+  const currentPath = vectorPath(current, 344, 62, 236, 170, 1);
+  const targetStart = targetPath.split(' ')[0].split(',');
+  const currentStart = currentPath.split(' ')[0].split(',');
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300" role="img" aria-labelledby="title desc">
+  <title id="title">${svgEsc(label)} trajectory comparison</title>
+  <desc id="desc">Large readable reference-versus-current vector sketch generated from challenge-stage conformance metrics. It is a human-review aid, not raw optical tracking.</desc>
+  <style>
+    .bg{fill:#06111d}.panel{fill:#0d1b2a;stroke:#2e5d78;stroke-width:2}.grid{stroke:#1b3344;stroke-width:1}.target{fill:none;stroke:#78f7ff;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.current{fill:none;stroke:#ffd36a;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.dotT{fill:#78f7ff}.dotC{fill:#ffd36a}.text{fill:#f2fbff;font:700 20px ui-monospace,Menlo,monospace}.small{fill:#b8d7ec;font:700 13px ui-monospace,Menlo,monospace}.tiny{fill:#9ec9e6;font:11px ui-monospace,Menlo,monospace}.barBg{fill:#14283a}.targetBar{fill:#78f7ff}.currentBar{fill:#ffd36a}.pill{fill:#102a3b;stroke:#2e5d78}
+  </style>
+  <rect class="bg" x="0" y="0" width="760" height="300"/>
+  <text class="text" x="24" y="34">${svgEsc(label)}</text>
+  <rect class="pill" x="560" y="14" width="176" height="32" rx="16"/>
+  <text class="small" x="576" y="35">${svgEsc(row.conformanceScore10)}/10 strict score</text>
+  <rect class="panel" x="40" y="56" width="268" height="190" rx="10"/>
+  <rect class="panel" x="328" y="56" width="268" height="190" rx="10"/>
+  <text class="small" x="58" y="82">Galaga target vector</text>
+  <text class="small" x="346" y="82">Aurora current vector</text>
+  ${[0, 1, 2, 3].map(i => `<line class="grid" x1="${64 + i * 56}" y1="96" x2="${64 + i * 56}" y2="228"/><line class="grid" x1="${352 + i * 56}" y1="96" x2="${352 + i * 56}" y2="228"/>`).join('')}
+  ${[0, 1, 2].map(i => `<line class="grid" x1="64" y1="${108 + i * 42}" x2="284" y2="${108 + i * 42}"/><line class="grid" x1="352" y1="${108 + i * 42}" x2="572" y2="${108 + i * 42}"/>`).join('')}
+  <polyline class="target" points="${targetPath}"/>
+  <polyline class="current" points="${currentPath}"/>
+  <circle class="dotT" cx="${targetStart[0]}" cy="${targetStart[1]}" r="5"/>
+  <circle class="dotC" cx="${currentStart[0]}" cy="${currentStart[1]}" r="5"/>
+  <text class="tiny" x="58" y="264">target: y ${svgEsc(target.yRange ?? 'n/a')} path ${svgEsc(target.pathLength ?? 'n/a')} turns ${svgEsc(target.turnCount ?? 'n/a')}</text>
+  <text class="tiny" x="346" y="264">current: y ${svgEsc(current.yRange ?? 'n/a')} path ${svgEsc(current.pathLength ?? 'n/a')} turns ${svgEsc(current.turnCount ?? 'n/a')}</text>
+  ${metricBar('y range target/current', current.yRange, target.yRange, 620, 88, 108)}
+  ${metricBar('path length target/current', current.pathLength, target.pathLength, 620, 134, 108)}
+  ${metricBar('lower field target/current', current.lowerFieldShare, target.lowerFieldShare, 620, 180, 108)}
+  <text class="tiny" x="620" y="242">Reference: ${svgEsc(row.bestReferenceMatch?.labelId || 'pending')}</text>
+</svg>`;
+  return `${svg.replace(/[ \t]+$/gm, '')}\n`;
+}
+
+function attachTrajectoryDiagrams(report, outDir){
+  const latestDir = path.join(OUT_ROOT, 'latest-diagrams');
+  ensureDir(latestDir);
+  for(const row of report.stageRows || []){
+    const fileName = `challenge-stage-${String(row.challengeNumber || row.stage).padStart(2, '0')}-trajectory.svg`;
+    const datedPath = path.join(outDir, fileName);
+    const latestPath = path.join(latestDir, fileName);
+    const svg = trajectoryDiagramSvg(row);
+    writeText(datedPath, svg);
+    writeText(latestPath, svg);
+    row.trajectoryDiagram = rel(latestPath);
+    row.evidence = Array.from(new Set([...(row.evidence || []), row.trajectoryDiagram]));
+  }
+  report.diagramArtifacts = {
+    trajectoryDiagramDirectory: rel(latestDir),
+    description: 'Large readable vector sketches comparing Galaga target motion metrics to Aurora runtime metrics. These diagrams are human-review aids derived from the measurement artifact, not raw optical tracking.'
+  };
 }
 
 async function buildReport(){
@@ -995,8 +1212,8 @@ async function buildReport(){
   const stage3ExpectedReferenceHit = !!stage3Row?.expectedReferenceHit;
   const challenge2BestMatchCount = rows.filter(row => row.bestReferenceMatch?.labelId === 'challenge-2-arrival-group-1').length;
   const weakestFinding = stage3ExpectedReferenceHit
-    ? `challenge stages are still not authored enough as memorable Galaga-like set pieces: ${challenge2BestMatchCount} sampled stage(s) still best-match the same Galaga challenge-2 reference, stage 3 now lands on the first-challenge bee-line reference but needs stronger trajectory precision, active sprite-motion novelty is unscored, and late stages now have first-pass labels that need per-group refinement.`
-    : `challenge stages are still not authored enough as memorable Galaga-like set pieces: most measured runtime vectors best-match the same Galaga challenge-2 reference, stage 3 does not read as the original first challenge, active sprite-motion novelty is unscored, and late-stage labels need per-group refinement.`;
+    ? `challenge stages are still not authored enough as memorable Galaga-like set pieces: ${challenge2BestMatchCount} sampled stage(s) still best-match the same Galaga challenge-2 reference, stage 3 now lands on the first-challenge bee-line reference but needs stronger trajectory precision, active sprite-motion is now detected only as phase/family coverage, and late stages need object-tracked group refinement.`
+    : `challenge stages are still not authored enough as memorable Galaga-like set pieces: most measured runtime vectors best-match the same Galaga challenge-2 reference, stage 3 does not read as the original first challenge, active sprite-motion is now detected only as phase/family coverage, and late-stage labels need per-group refinement.`;
   const summary = {
     score10: round(average(rows.map(row => row.conformanceScore10)), 1),
     interestingFactorScore10: round(average(rows.map(row => row.interestingFactor10)), 1),
@@ -1013,7 +1230,7 @@ async function buildReport(){
     strongestFinding: 'Sampled challenge windows preserve the Galaga-like no-shot/no-ship-loss rule.',
     stage3ExpectedReferenceHit,
     challenge2BestMatchCount,
-    weakestFinding: `current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is ${round(average(rows.map(row => row.movementConformanceScore10)), 1)}/10, strict graphics is ${round(average(rows.map(row => row.graphicalConformanceScore10)), 1)}/10, alien/stage novelty is ${round(average(rows.map(row => row.alienNoveltyScore10)), 1)}/10, active sprite-motion evidence is missing, and late challenge references are first-pass window labels rather than full five-group object tracks. Diagnostic legacy coverage was ${round(average(rows.map(row => row.legacyCoverageScore10)), 1)}/10, which is why the old read was too generous.`,
+    weakestFinding: `current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is ${round(average(rows.map(row => row.movementConformanceScore10)), 1)}/10, strict graphics is ${round(average(rows.map(row => row.graphicalConformanceScore10)), 1)}/10, alien/stage novelty is ${round(average(rows.map(row => row.alienNoveltyScore10)), 1)}/10, active sprite-motion is now measured as phase/family coverage but not yet as object-tracked pixel-silhouette conformance, and late challenge references are first-pass window labels rather than full object tracks. Diagnostic legacy coverage was ${round(average(rows.map(row => row.legacyCoverageScore10)), 1)}/10, which is why the old read was too generous.`,
     playerMeaning: 'A player should experience challenging stages as safe but tense score exhibitions with memorable entry routes, fresh alien types, readable trajectories, and a learnable perfect-bonus opportunity. Aurora currently preserves the safety rule, but the actual spectacle, motion, and visual novelty are still early.',
     designerMeaning: 'Design work should move from broad path-family labels to explicit per-challenge contracts: group order, first-visible frame, entry side, exit side, path length, turn count, alien family, animation phases, bonus opportunity, and result feedback.',
     sourceScores: {
@@ -1078,6 +1295,7 @@ async function main(){
   const readmePath = path.join(outDir, 'README.md');
   const latestPath = path.join(OUT_ROOT, 'latest.json');
   const topLevelReportPath = path.join(ROOT, 'CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md');
+  attachTrajectoryDiagrams(report, outDir);
   const markdown = buildMarkdown(report);
   writeJson(reportPath, report);
   writeText(readmePath, markdown);

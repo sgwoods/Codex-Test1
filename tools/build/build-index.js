@@ -2872,6 +2872,19 @@ function challengeMotionSummary(row = {}){
   ];
 }
 
+function challengeTrajectoryDiagramMedia(row = {}){
+  const src = row.trajectoryDiagram || '';
+  if(!src || !fs.existsSync(path.join(ROOT, normalizeAssetSourcePath(src)))){
+    return '<div class="mediaPlaceholder">Readable trajectory diagram pending for this challenge stage.</div>';
+  }
+  return renderMediaImage({
+    src,
+    label: 'Readable trajectory diagram',
+    alt: `${challengeStageDisplayLabel(row)} reference-versus-current trajectory sketch`,
+    note: 'Generated from the challenge-stage metric artifact. This is a human-review sketch of target/current motion vectors, not raw optical tracking.'
+  });
+}
+
 function renderChallengeStageDetail(row = {}){
   const label = challengeStageDisplayLabel(row);
   const score = row.conformanceScore10 ?? 'n/a';
@@ -2913,6 +2926,7 @@ function renderChallengeStageDetail(row = {}){
           </article>
           <article class="challengeEvidenceCard">
             <h3>Conformance Read</h3>
+            ${challengeTrajectoryDiagramMedia(row)}
             <p><strong>Strict read:</strong> movement ${esc(movement)}/10, graphics ${esc(graphics)}/10, alien novelty ${esc(novelty)}/10, progression ${esc(row.progressionConformanceScore10 ?? 'n/a')}/10.</p>
             <p><strong>Diagnostic best reference:</strong> <code>${esc(bestRef)}</code> (${esc(row.referenceMatchScore10 ?? 'n/a')}/10 legacy broad coverage).</p>
             <p>${esc(row.criticalExpectation || 'Critical expectation pending.')}</p>

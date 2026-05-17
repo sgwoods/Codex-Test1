@@ -87,7 +87,7 @@ function updateChallengeEnemy(e,dt){
 	 const pathFamily=e.pathFamily||'classic-lane-wave';
 	 const fm=familyMotion(e);
 	 const classicStage3=S.stage===3&&e.fam==='classic';
-	 const baseChallengeSpeed=pathFamily==='first-challenge-peel'?.345:(classicStage3?.345:.355);
+	 const baseChallengeSpeed=pathFamily==='yellow-diagonal-fan'?.36:pathFamily==='green-ladder-split'?.392:pathFamily==='first-challenge-peel'?.345:(classicStage3?.345:.355);
 	 e.tm+=dt*(baseChallengeSpeed+(e.wave||0)*.007+Math.min(.012,S.stage*.0015));
 	 const u=e.tm,p=e.ph,wave=e.wave||0,side=e.side||1,slot=e.slot||0,row=e.row||0,sweep=e.sweep||1;
 	 const arcAmp=e.arcAmp||1,dropAmp=e.dropAmp||1;
@@ -111,12 +111,13 @@ function updateChallengeEnemy(e,dt){
 	   e.x=startX+(laneX-startX)*curve+sweep*Math.sin(q*Math.PI*(1.6+wave*.22)+p+slot*.3)*28*arcAmp;
 	   e.y=topY+q*(10+wave*1.2)*dropAmp+Math.sin(q*Math.PI*2.4+p)*7*arcAmp;
 	  }else if(pathFamily==='green-ladder-split'){
-	   e.x=startX+(laneX-startX)*q+sweep*(slot%2?-1:1)*Math.sin(q*Math.PI)*12*arcAmp;
-	   e.y=topY+q*(16+slot*3)*dropAmp+row*4;
+	   const rung=slot%2?-1:1;
+	   e.x=startX+(laneX-startX)*q+sweep*((q-.5)*18+rung*(8+q*6))*arcAmp;
+	   e.y=topY+q*(34+slot*6)*dropAmp+row*5;
 	  }else if(pathFamily==='yellow-diagonal-fan'){
 	   const fanDir=wave%2?-1:1;
-	   e.x=startX+(laneX-startX)*q+fanDir*(q*38+slot*5)*arcAmp;
-	   e.y=topY+q*(20+slot*4)*dropAmp+Math.sin(q*Math.PI+p)*3;
+	   e.x=startX+(laneX-startX)*q+fanDir*(q*58+(slot-1.5)*12)*arcAmp;
+	   e.y=topY+q*(42+slot*8)*dropAmp;
 	  }else if(pathFamily==='blue-purple-finale'){
 	   e.x=startX+(laneX-startX)*curve+sweep*Math.sin(q*Math.PI*3.4+p+slot*.4)*24*arcAmp;
 	   e.y=topY+q*6*dropAmp+Math.cos(q*Math.PI*2+p)*10*arcAmp;
@@ -152,11 +153,12 @@ function updateChallengeEnemy(e,dt){
 	   e.y=topY+q*(64+slot*10)*dropAmp+Math.sin(q*8.8+p)*4+Math.max(0,q-.45)*cascade*12;
 	  }else if(pathFamily==='green-ladder-split'){
 	   const rung=slot%2?-1:1;
-	   e.x=laneX+sweep*(rung*(22+q*28)+Math.sin(q*Math.PI*2+p)*12)*fm.challengeSweep*arcAmp;
-	   e.y=topY+q*(86+slot*15)*dropAmp+(wave%2?Math.sin(q*Math.PI)*16:0);
+	   e.x=laneX+sweep*((q-.5)*58+rung*(20+q*20))*fm.challengeSweep*arcAmp;
+	   e.y=topY+q*(132+slot*18)*dropAmp+(wave%2?Math.sin(q*Math.PI)*10:0);
 	  }else if(pathFamily==='yellow-diagonal-fan'){
-	   e.x=laneX+sweep*(((q-.5)*96)+(slot-1.5)*20)*fm.challengeSweep*arcAmp;
-	   e.y=topY+q*(96+slot*18)*dropAmp+Math.sin(q*Math.PI*1.4+p)*4;
+	   const fanDir=wave%2?-1:1;
+	   e.x=laneX+fanDir*(((q-.2)*188)+(slot-1.5)*34)*fm.challengeSweep*arcAmp;
+	   e.y=topY+q*(164+slot*24)*dropAmp;
 	  }else if(pathFamily==='blue-purple-finale'){
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*4+p)*42+Math.sin(q*Math.PI*1.5)*28)*fm.challengeSweep*arcAmp;
 	   e.y=topY+q*(78+slot*12)*dropAmp+Math.cos(q*Math.PI*3+p)*10*arcAmp;
@@ -193,12 +195,12 @@ function updateChallengeEnemy(e,dt){
 	   e.y=topY+16+q*228*fm.challengeDrop*dropAmp;
 	  }else if(pathFamily==='green-ladder-split'){
 	   const exit=sweep*(slot%2?-1:1);
-	   e.x=laneX+exit*(34+q*118)*fm.challengeSweep*arcAmp+Math.sin(q*7.5+p)*3.6;
-	   e.y=topY+20+q*236*fm.challengeDrop*dropAmp;
+	   e.x=laneX+sweep*(34+q*92)*fm.challengeSweep*arcAmp+exit*(18+q*52)*arcAmp;
+	   e.y=topY+28+q*270*fm.challengeDrop*dropAmp;
 	  }else if(pathFamily==='yellow-diagonal-fan'){
 	   const fanDir=wave%2?-1:1;
-	   e.x=laneX+sweep*((q-.2)*122+(slot-1.5)*18)*fm.challengeSweep*arcAmp+fanDir*18;
-	   e.y=topY+22+q*238*fm.challengeDrop*dropAmp;
+	   e.x=laneX+fanDir*(110+q*170+(slot-1.5)*22)*fm.challengeSweep*arcAmp;
+	   e.y=topY+42+q*320*fm.challengeDrop*dropAmp;
 	  }else if(pathFamily==='blue-purple-finale'){
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.8+p)*34-q*76)*fm.challengeSweep*arcAmp;
 	   e.y=topY+18+q*216*fm.challengeDrop*dropAmp+Math.cos(q*8+p)*4;

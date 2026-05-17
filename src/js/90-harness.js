@@ -1064,6 +1064,8 @@ window.__galagaHarness__={
    spawn:+(+e.spawn||0).toFixed(2),
    spawnPlan:+(+e.spawnPlan||0).toFixed(2),
    tm:+(+e.tm||0).toFixed(3),
+   flapOpen:Math.sin((+e.tm||0)*11+(+e.ph||0))>.12,
+   animationPhase:+(((+e.tm||0)*11+(+e.ph||0))%(Math.PI*2)).toFixed(3),
    x:+(+e.x||0).toFixed(2),
    y:+(+e.y||0).toFixed(2)
   }))

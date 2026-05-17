@@ -13,8 +13,20 @@ const TRACKED_REFERENCE_TARGETS = new Map([
   [11, 'challenge-3-arrival-group-1'],
   [15, 'challenge-4-pink-serpentine-group-1'],
   [19, 'challenge-5-pink-green-cascade-group-1'],
-  [23, 'challenge-6-green-ladder-split-group-1'],
-  [27, 'challenge-7-yellow-diagonal-fan-group-1'],
+  [23, [
+    'challenge-6-green-ladder-split-group-1',
+    'challenge-6-green-ladder-split-group-2',
+    'challenge-6-green-ladder-split-group-3',
+    'challenge-6-green-ladder-split-group-4',
+    'challenge-6-green-ladder-split-group-5'
+  ]],
+  [27, [
+    'challenge-7-yellow-diagonal-fan-group-1',
+    'challenge-7-yellow-diagonal-fan-group-2',
+    'challenge-7-yellow-diagonal-fan-group-3',
+    'challenge-7-yellow-diagonal-fan-group-4',
+    'challenge-7-yellow-diagonal-fan-group-5'
+  ]],
   [31, 'challenge-8-blue-purple-finale-group-1']
 ]);
 const STRICT_SCORE_FIELDS = [
@@ -88,13 +100,14 @@ for(const stage of REQUIRED_STAGES){
     }
   }
   const trackedReference = TRACKED_REFERENCE_TARGETS.get(stage);
-  if(trackedReference && row.bestReferenceMatch?.labelId !== trackedReference){
-    if(!row.criticalGaps.some(gap => String(gap).includes(trackedReference) || String(gap).includes('Best reference match'))){
-      fail(`stage ${stage} reference miss is not represented as a critical gap`, { trackedReference, row });
+  const trackedReferences = Array.isArray(trackedReference) ? trackedReference : (trackedReference ? [trackedReference] : []);
+  if(trackedReferences.length && !trackedReferences.includes(row.bestReferenceMatch?.labelId)){
+    if(!row.criticalGaps.some(gap => trackedReferences.some(ref => String(gap).includes(ref)) || String(gap).includes('Best reference match'))){
+      fail(`stage ${stage} reference miss is not represented as a critical gap`, { trackedReference: trackedReferences, row });
     }
     warnings.push({
       stage,
-      trackedReference,
+      trackedReference: trackedReferences,
       bestReferenceMatch: row.bestReferenceMatch?.labelId || null,
       message: 'tracked conformance gap; not a release-blocking harness failure at current scorer resolution'
     });

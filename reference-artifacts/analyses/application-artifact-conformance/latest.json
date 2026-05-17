@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "application-artifact-conformance-status",
-  "generatedAt": "2026-05-16T20:58:21.856Z",
-  "commit": "498e13b9",
-  "branch": "codex/macbook-audio-entry-grounding-cycle",
+  "generatedAt": "2026-05-17T18:24:53.021Z",
+  "commit": "29755f98",
+  "branch": "codex/macbook-challenge-reference-ingestion",
   "dirty": true,
   "sources": {
     "spriteModel": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1.json",
@@ -13,17 +13,17 @@
     "audioGap": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
     "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/latest.json",
     "releaseDashboard": "reference-artifacts/analyses/release-conformance-dashboard/latest.json",
-    "qualityReport": "reference-artifacts/analyses/quality-conformance/2026-05-16-498e13b9/report.json"
+    "qualityReport": "reference-artifacts/analyses/quality-conformance/2026-05-17-29755f98/report.json"
   },
   "summary": {
     "rowCount": 11,
     "numericRowCount": 10,
-    "averageScore10": 8.28,
+    "averageScore10": 8.25,
     "weakestRow": "sprite-runtime-canvas-vs-target",
     "spriteCatalogProxyScore10": 6.22,
     "spriteRuntimeCanvasScore10": 6.19,
     "spriteModelAverageConfidence": 0.9439,
-    "audioScore10": 7.3,
+    "audioScore10": 7,
     "visualScore10": 8.62,
     "framePopupScore10": 9.2,
     "fontTextWeakestSurfaceScore10": 7.05
@@ -520,13 +520,13 @@
     {
       "id": "audio-cue-assets",
       "surface": "Audio cues: runtime cue assets vs Galaga-family references",
-      "current": "7.3/10",
+      "current": "7/10",
       "target": ">=7.5",
-      "score10": 7.3,
+      "score10": 7,
       "confidence": "medium-high",
       "status": "Primary user-experience gap",
-      "measurement": "21 cue/event comparisons, 31 segment-role comparisons, semantic score 9.8/10, highest risk challengePerfect 7/10.",
-      "evidence": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json; reference-artifacts/analyses/aurora-audio-event-gap/latest.json; reference-artifacts/analyses/quality-conformance/2026-05-16-498e13b9/report.json",
+      "measurement": "21 cue/event comparisons, 31 segment-role comparisons, semantic score 9.8/10, highest risk challengePerfect 7.7/10.",
+      "evidence": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json; reference-artifacts/analyses/aurora-audio-event-gap/latest.json; reference-artifacts/analyses/quality-conformance/2026-05-17-29755f98/report.json",
       "next": "Tune the highest segment-level gap next: challengePerfect onset. Rerun audio comparison and event-gap analysis after the change."
     },
     {
@@ -538,7 +538,7 @@
       "confidence": "medium",
       "status": "Guardrail measured in quality conformance",
       "measurement": "Worst current delta 6.31 ms; worst drift from baseline 0 ms.",
-      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-16-498e13b9/report.json",
+      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-17-29755f98/report.json",
       "next": "Keep event alignment coupled to the cue-contract promotion pass so timing does not regress while changing source clips."
     },
     {
@@ -562,7 +562,7 @@
       "confidence": "medium",
       "status": "Split from generic UI shell before final gate",
       "measurement": "12 surface guardrails in latest quality report; visual scorer weakest shell surface Developer/settings popup surface 7.1/10.",
-      "evidence": "reference-artifacts/analyses/release-conformance-dashboard/latest.json; reference-artifacts/analyses/quality-conformance/2026-05-16-498e13b9/report.json; reference-artifacts/analyses/aurora-visual-look-conformance/latest.json",
+      "evidence": "reference-artifacts/analyses/release-conformance-dashboard/latest.json; reference-artifacts/analyses/quality-conformance/2026-05-17-29755f98/report.json; reference-artifacts/analyses/aurora-visual-look-conformance/latest.json",
       "next": "Split iconography, dock-button affordance, and popup typography into separate target rows once we have icon/font-specific captures."
     },
     {

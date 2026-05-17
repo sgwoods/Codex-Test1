@@ -831,8 +831,8 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
    Object.freeze(['boss','rogue','but','bee','bee','but','rogue','boss']),
    Object.freeze(['bee','rogue','boss','but','but','boss','rogue','bee'])
   ]),
-  groupVisualFamilies:Object.freeze(['dragonfly','dragonfly','mosquito','dragonfly','mosquito']),
-  groupPathFamilies:Object.freeze(['green-ladder-split','green-ladder-split','pink-green-cascade','green-ladder-split','blue-purple-finale'])
+  groupVisualFamilies:Object.freeze(['dragonfly','dragonfly','dragonfly','mosquito','dragonfly']),
+  groupPathFamilies:Object.freeze(['green-ladder-split','green-ladder-split','green-ladder-split','green-ladder-split','green-ladder-split'])
  }),
  Object.freeze({
   fromStage:27,
@@ -846,8 +846,8 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   rowSpacingY:8,
   waveDelay:1,
   slotDelay:.075,
-  arcAmp:1.72,
-  dropAmp:1.38,
+  arcAmp:1.88,
+  dropAmp:1.6,
   laneTypes:Object.freeze(['boss','bee','but','rogue','rogue','but','bee','boss']),
   groupLaneTypes:Object.freeze([
    Object.freeze(['boss','bee','but','rogue','rogue','but','bee','boss']),
@@ -856,8 +856,8 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
    Object.freeze(['rogue','but','bee','boss','boss','bee','but','rogue']),
    Object.freeze(['boss','rogue','but','bee','bee','but','rogue','boss'])
   ]),
-  groupVisualFamilies:Object.freeze(['crown','crown','dragonfly','crown','crown']),
-  groupPathFamilies:Object.freeze(['yellow-diagonal-fan','yellow-diagonal-fan','green-ladder-split','yellow-diagonal-fan','pink-green-cascade'])
+  groupVisualFamilies:Object.freeze(['crown','crown','crown','crown','crown']),
+  groupPathFamilies:Object.freeze(['yellow-diagonal-fan','yellow-diagonal-fan','yellow-diagonal-fan','yellow-diagonal-fan','yellow-diagonal-fan'])
  }),
  Object.freeze({
   fromStage:31,
