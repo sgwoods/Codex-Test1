@@ -1,0 +1,70 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "opening-rack-motion-contract",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-17",
+  "status": "opening-rack-motion-contract-object-track-derived",
+  "sourceEvidence": {
+    "objectTrackConformance": "reference-artifacts/analyses/galaxy-guardians-identity/object-track-conformance-0.1.json",
+    "windowKey": "matt-hawkins-arcade-intro/opening-rack-entry",
+    "selectedTrackIds": [
+      "track-8",
+      "track-5",
+      "track-7",
+      "track-3",
+      "track-2",
+      "track-6",
+      "track-1"
+    ],
+    "notes": "This contract uses the long-lived opening-rack lateral tracks from the Matt Hawkins intro window to keep Guardians rack motion broad, cohesive, and visibly march-like rather than a small per-alien shimmer."
+  },
+  "referenceMetrics": {
+    "sampledWindowDurationSeconds": 17.833,
+    "medianRackTrackXSpanNormalized": 0.298,
+    "maximumRackTrackXSpanNormalized": 0.369,
+    "rackTrackYSpanCeilingNormalized": 0.015,
+    "representativeDirectionChangesBand": [
+      3,
+      5
+    ]
+  },
+  "runtimeExpectations": {
+    "sampledDurationSeconds": 17.833,
+    "representativeAlien": {
+      "row": 0,
+      "col": 5
+    },
+    "cohesionAliens": [
+      {
+        "row": 0,
+        "col": 4
+      },
+      {
+        "row": 0,
+        "col": 5
+      },
+      {
+        "row": 1,
+        "col": 2
+      },
+      {
+        "row": 4,
+        "col": 9
+      }
+    ],
+    "normalizedXSpanBand": [
+      0.29,
+      0.37
+    ],
+    "directionChangeBand": [
+      3,
+      5
+    ],
+    "maximumCohesionSpreadPx": 0.35,
+    "minimumDistinctOffsetLevels": 7
+  },
+  "harness": {
+    "script": "tools/harness/check-galaxy-guardians-opening-rack-motion.js",
+    "npmScript": "npm run harness:check:galaxy-guardians-opening-rack-motion"
+  }
+}

@@ -15,6 +15,7 @@ This is the human-readable companion to:
 
 - `reference-artifacts/analyses/galaxy-guardians-identity/opening-slice-source-baseline-0.1.json`
 - `reference-artifacts/analyses/galaxy-guardians-identity/opening-slice-render-surface-0.1.json`
+- `reference-artifacts/analyses/galaxy-guardians-identity/opening-rack-motion-0.1.json`
 - `reference-artifacts/analyses/galaxy-guardians-identity/score-progression-0.1.json`
 - [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md)
 - [GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md](GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md)
@@ -120,14 +121,16 @@ threat model:
 - `WAIT` / attract copy is still more adapted than source-faithful
 - score-table structure is still an application-owned approximation rather than
   a true four-row `CONVOY` / `CHARGER` cabinet match
-- rack march cadence is closer, but still runtime-tuned rather than tightly
-  measured against the source windows
+- rack march cadence now has its own object-track-derived opening contract, but
+  the runtime still needs the next starfield and re-entry pass to make the
+  whole opening board feel equally source-faithful
 - explosions and hit states still need stronger baseline authority
 
 ### Still next
 
 - frame-extracted intro crops for title, mission, and score-table layout
-- stronger measured opening-rack motion windows
+- stronger measured starfield-motion and top-reentry windows to pair with the
+  new opening-rack motion contract
 - tighter palette progression and readiness-surface comparison
 
 ## Why This Matters Before Deeper Stages

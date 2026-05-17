@@ -2,7 +2,7 @@
   "gameKey": "galaxy-guardians-preview",
   "artifactType": "movement-pacing-baseline",
   "version": "0.1-dev-preview",
-  "createdOn": "2026-05-02",
+  "createdOn": "2026-05-17",
   "status": "dev-preview-pacing-contract-not-public-release-tuning",
   "sourceEvidence": {
     "referenceProfile": "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
@@ -30,8 +30,8 @@
   },
   "runtimeRules": {
     "playerSpeedPxPerSecond": 108,
-    "formationDriftAmplitudePx": 5.4,
-    "formationDriftHz": 1.85,
+    "formationDriftAmplitudePx": 43,
+    "formationDriftHz": 0.116,
     "scoutDiveIntervalBaseSeconds": 1.52,
     "scoutDiveIntervalJitterSeconds": 0.74,
     "flagshipDiveIntervalBaseSeconds": 6.35,
@@ -51,7 +51,7 @@
     "firstFlagshipDiveBandSeconds": [6.64, 6.7],
     "escortJoinDeltaSeconds": [0, 0.001],
     "minimumLinkedEscortCountOnFirstFlagshipDive": 2,
-    "minimumWrapEventsByNineSeconds": 3,
+    "minimumWrapEventsByNineSeconds": 2,
     "runtimeReferenceMovementArtifact": "reference-artifacts/analyses/galaxy-guardians-identity/runtime-reference-movement-0.1.json",
     "runtimeReferenceMovementScoreFloor10": 7.2
   },

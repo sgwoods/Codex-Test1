@@ -45,6 +45,7 @@ function main(){
     'harness:check:galaxy-guardians-opening-slice-baseline',
     'harness:check:galaxy-guardians-opening-slice-source-baseline',
     'harness:check:galaxy-guardians-opening-slice-render-surface',
+    'harness:check:galaxy-guardians-opening-rack-motion',
     'harness:check:galaxy-guardians-attract-score-surface',
     'harness:check:galaxy-guardians-formation-entry',
     'harness:check:galaxy-guardians-movement-pacing',
@@ -104,6 +105,22 @@ function main(){
         renderTargets
       });
     }
+  }
+
+  const openingRackMotion = readJson(path.join(
+    ROOT,
+    'reference-artifacts',
+    'analyses',
+    'galaxy-guardians-identity',
+    'opening-rack-motion-0.1.json'
+  ));
+  if(openingRackMotion.status !== 'opening-rack-motion-contract-object-track-derived'){
+    fail('Opening-rack motion artifact has the wrong status.', {
+      status: openingRackMotion.status
+    });
+  }
+  if(!openingRackMotion.sourceEvidence?.windowKey?.includes('opening-rack-entry')){
+    fail('Opening-rack motion artifact is not anchored to the measured intro rack window.', openingRackMotion);
   }
 
   const referencePromotions = reference.nextMetricPromotions || [];

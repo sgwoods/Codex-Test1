@@ -48,8 +48,10 @@ async function main(){
     }, 3200, 40);
 
     await page.waitForTimeout(650);
-
     const second = await page.evaluate(() => JSON.parse(JSON.stringify(window.__galaxyGuardiansPreviewRenderDebug || {})));
+
+    await page.waitForTimeout(1400);
+    const third = await page.evaluate(() => JSON.parse(JSON.stringify(window.__galaxyGuardiansPreviewRenderDebug || {})));
     const runtimeWrap = await page.evaluate(() => {
       const state = window.createGalaxyGuardiansRuntimeState({ stage: 1, ships: 3, seed: 1979 });
       state.player.inv = 999;
@@ -74,7 +76,7 @@ async function main(){
       };
     });
 
-    return { first, second, runtimeWrap };
+    return { first, second, third, runtimeWrap };
   });
 
   if(artifact.status !== 'opening-slice-render-contract-not-frame-extracted'){
@@ -119,8 +121,14 @@ async function main(){
   if(!starfieldMoved){
     fail('Opening-slice board starfield did not visibly move between samples', result);
   }
-  if(Math.abs((+result.second.marchOffset || 0) - (+result.first.marchOffset || 0)) < 0.25){
-    fail('Opening-slice rack march offset did not change enough between samples', result);
+  const marchOffsets = [result.first, result.second, result.third]
+    .map(sample => +sample?.marchOffset || 0);
+  const marchSpan = Math.max(...marchOffsets) - Math.min(...marchOffsets);
+  if(marchSpan < 8){
+    fail('Opening-slice rack march offset did not progress enough across the stepped sample window', Object.assign({
+      marchOffsets,
+      marchSpan
+    }, result));
   }
 
   if(!result.runtimeWrap.firstWrappingSample || !result.runtimeWrap.firstWrappingSample.wrapping.length){
@@ -143,6 +151,7 @@ async function main(){
     starfieldCount: result.first.starfieldCount,
     firstMarchOffset: result.first.marchOffset,
     secondMarchOffset: result.second.marchOffset,
+    thirdMarchOffset: result.third.marchOffset,
     wrapEvents: result.runtimeWrap.wrapEvents.length,
     firstWrappingSample: result.runtimeWrap.firstWrappingSample
   }, null, 2));

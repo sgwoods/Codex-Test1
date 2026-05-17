@@ -80,8 +80,8 @@ const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
   formationEntrySideSpread:6,
   formationEntryRowLag:.035,
   playerSpeed:108,
-  formationDriftAmplitude:5.4,
-  formationDriftHz:1.85,
+  formationDriftAmplitude:43,
+  formationDriftHz:.116,
   scoutDiveIntervalBase:1.52,
   scoutDiveIntervalJitter:.74,
   flagshipDiveIntervalBase:6.35,
@@ -176,12 +176,16 @@ function guardiansRuntimeRules(stateOrStage=1){
 
 function guardiansMarchOffset(state,alien){
  const rules=guardiansRuntimeRules(state);
- const hz=Math.max(.25,+rules.formationDriftHz||1);
+ const hz=Math.max(.02,+rules.formationDriftHz||1);
  const amp=Math.max(.5,+rules.formationDriftAmplitude||1);
- const phase=((+state.t||0)*hz+alien.row*.055+alien.col*.018)%1;
- const tri=phase<.5?(phase*4)-1:3-(phase*4);
- const stepped=Math.round(tri*3)/3;
- return stepped*amp;
+ const sequence=[-1,-1,-.75,-.5,-.25,0,.25,.5,.75,1,1,.75,.5,.25,0,-.25,-.5,-.75];
+ const phase=((((+state.t||0)*hz)%1)+1)%1*sequence.length;
+ const index=Math.floor(phase)%sequence.length;
+ const frac=phase-index;
+ const current=sequence[index];
+ const next=sequence[(index+1)%sequence.length];
+ const blend=frac<.76?0:Math.min(1,(frac-.76)/.24);
+ return (current+(next-current)*blend)*amp;
 }
 
 function guardiansBeginTopReentry(state,alien){
