@@ -1,0 +1,2728 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-risk-stability",
+  "generatedAt": "2026-05-17T10:51:32.349Z",
+  "branch": "codex/macbook-audio-entry-grounding-cycle",
+  "commit": "ab80e4c7",
+  "dirty": true,
+  "source": {
+    "eventGapRoot": "reference-artifacts/analyses/aurora-audio-event-gap",
+    "limit": 8
+  },
+  "summary": {
+    "reportCount": 8,
+    "cueCount": 21,
+    "volatileCueCount": 11,
+    "mostVolatileCue": "challengePerfect",
+    "mostVolatileRange10": 4.56,
+    "highestMedianGapCue": "challengePerfect",
+    "highestMedianGapRisk10": 5.11
+  },
+  "recommendation": "Use median/repeated confirmation before promoting audio changes. Start by stabilizing challengePerfect scoring, then retest challengePerfect.",
+  "sources": [
+    {
+      "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+      "generatedAt": "2026-05-17T02:13:57.445Z",
+      "commit": "612f086f",
+      "dirty": true,
+      "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+    },
+    {
+      "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+      "generatedAt": "2026-05-17T02:15:25.741Z",
+      "commit": "612f086f",
+      "dirty": true,
+      "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+    },
+    {
+      "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+      "generatedAt": "2026-05-17T02:23:08.705Z",
+      "commit": "612f086f",
+      "dirty": true,
+      "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+    },
+    {
+      "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+      "generatedAt": "2026-05-17T10:38:17.204Z",
+      "commit": "ab80e4c7",
+      "dirty": true,
+      "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+    },
+    {
+      "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+      "generatedAt": "2026-05-17T10:39:31.151Z",
+      "commit": "ab80e4c7",
+      "dirty": true,
+      "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+    },
+    {
+      "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+      "generatedAt": "2026-05-17T10:45:29.049Z",
+      "commit": "ab80e4c7",
+      "dirty": true,
+      "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+    },
+    {
+      "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+      "generatedAt": "2026-05-17T10:46:37.123Z",
+      "commit": "ab80e4c7",
+      "dirty": true,
+      "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+    },
+    {
+      "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+      "generatedAt": "2026-05-17T10:48:48.324Z",
+      "commit": "ab80e4c7",
+      "dirty": true,
+      "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+    }
+  ],
+  "cues": [
+    {
+      "cue": "challengePerfect",
+      "sampleCount": 8,
+      "medianGapRisk10": 5.11,
+      "gapRiskMin10": 2.51,
+      "gapRiskMax10": 7.07,
+      "gapRiskRange10": 4.56,
+      "gapRiskStddev10": 1.62,
+      "medianWorstSegmentRisk10": 5.47,
+      "worstSegmentMin10": 4.56,
+      "worstSegmentMax10": 7.38,
+      "worstSegmentRange10": 2.82,
+      "worstSegmentStddev10": 0.9,
+      "medianSemanticScore10": 10,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "onset",
+      "stabilityScore10": 0.3,
+      "volatile": true,
+      "read": "Volatile across repeated event-gap reads; require median/repeated confirmation before promoting runtime cue changes.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.51,
+          "worstSegmentRisk10": 4.56,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.51,
+          "worstSegmentRisk10": 4.56,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.51,
+          "worstSegmentRisk10": 4.56,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 5.11,
+          "worstSegmentRisk10": 5.85,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 5.11,
+          "worstSegmentRisk10": 5.85,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 5.45,
+          "worstSegmentRisk10": 5.47,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 5.45,
+          "worstSegmentRisk10": 5.47,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 7.07,
+          "worstSegmentRisk10": 7.38,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        }
+      ]
+    },
+    {
+      "cue": "capturedFighterDestroyed",
+      "sampleCount": 8,
+      "medianGapRisk10": 1.69,
+      "gapRiskMin10": 1.32,
+      "gapRiskMax10": 3.87,
+      "gapRiskRange10": 2.55,
+      "gapRiskStddev10": 1.16,
+      "medianWorstSegmentRisk10": 3.14,
+      "worstSegmentMin10": 1.92,
+      "worstSegmentMax10": 5.38,
+      "worstSegmentRange10": 3.46,
+      "worstSegmentStddev10": 1.49,
+      "medianSemanticScore10": 10,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "onset",
+      "stabilityScore10": 2.33,
+      "volatile": true,
+      "read": "Volatile across repeated event-gap reads; require median/repeated confirmation before promoting runtime cue changes.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 3.87,
+          "worstSegmentRisk10": 5.38,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 3.87,
+          "worstSegmentRisk10": 5.38,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 3.87,
+          "worstSegmentRisk10": 5.38,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 1.32,
+          "worstSegmentRisk10": 1.92,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 1.32,
+          "worstSegmentRisk10": 1.92,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 1.69,
+          "worstSegmentRisk10": 3.14,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 1.69,
+          "worstSegmentRisk10": 3.14,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 1.46,
+          "worstSegmentRisk10": 2.1,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        }
+      ]
+    },
+    {
+      "cue": "enemyBoom",
+      "sampleCount": 8,
+      "medianGapRisk10": 2.3,
+      "gapRiskMin10": 2.19,
+      "gapRiskMax10": 2.63,
+      "gapRiskRange10": 0.44,
+      "gapRiskStddev10": 0.19,
+      "medianWorstSegmentRisk10": 0.98,
+      "worstSegmentMin10": 0.92,
+      "worstSegmentMax10": 3.55,
+      "worstSegmentRange10": 2.63,
+      "worstSegmentStddev10": 1.26,
+      "medianSemanticScore10": 10,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "onset",
+      "stabilityScore10": 4.02,
+      "volatile": true,
+      "read": "Volatile across repeated event-gap reads; require median/repeated confirmation before promoting runtime cue changes.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.63,
+          "worstSegmentRisk10": 3.55,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.63,
+          "worstSegmentRisk10": 3.55,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.63,
+          "worstSegmentRisk10": 3.55,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 2.3,
+          "worstSegmentRisk10": 0.95,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 2.3,
+          "worstSegmentRisk10": 0.95,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 2.19,
+          "worstSegmentRisk10": 0.92,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 2.19,
+          "worstSegmentRisk10": 0.92,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 2.22,
+          "worstSegmentRisk10": 1.01,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        }
+      ]
+    },
+    {
+      "cue": "highScoreFirst",
+      "sampleCount": 8,
+      "medianGapRisk10": 4.19,
+      "gapRiskMin10": 1.99,
+      "gapRiskMax10": 4.61,
+      "gapRiskRange10": 2.62,
+      "gapRiskStddev10": 1.12,
+      "medianWorstSegmentRisk10": 5.22,
+      "worstSegmentMin10": 3.89,
+      "worstSegmentMax10": 5.29,
+      "worstSegmentRange10": 1.4,
+      "worstSegmentStddev10": 0.66,
+      "medianSemanticScore10": 9.6,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "onset",
+      "stabilityScore10": 4.21,
+      "volatile": true,
+      "read": "Volatile across repeated event-gap reads; require median/repeated confirmation before promoting runtime cue changes.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.99,
+          "worstSegmentRisk10": 3.89,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.99,
+          "worstSegmentRisk10": 3.89,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.99,
+          "worstSegmentRisk10": 3.89,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 4.19,
+          "worstSegmentRisk10": 5.29,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 4.19,
+          "worstSegmentRisk10": 5.29,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 4.21,
+          "worstSegmentRisk10": 5.26,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 4.21,
+          "worstSegmentRisk10": 5.26,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 4.61,
+          "worstSegmentRisk10": 5.18,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        }
+      ]
+    },
+    {
+      "cue": "captureSuccess",
+      "sampleCount": 8,
+      "medianGapRisk10": 1.23,
+      "gapRiskMin10": 1.08,
+      "gapRiskMax10": 1.85,
+      "gapRiskRange10": 0.77,
+      "gapRiskStddev10": 0.32,
+      "medianWorstSegmentRisk10": 2.51,
+      "worstSegmentMin10": 1.91,
+      "worstSegmentMax10": 4.01,
+      "worstSegmentRange10": 2.1,
+      "worstSegmentStddev10": 0.84,
+      "medianSemanticScore10": 10,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "onset",
+      "stabilityScore10": 5.42,
+      "volatile": true,
+      "read": "Volatile across repeated event-gap reads; require median/repeated confirmation before promoting runtime cue changes.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.85,
+          "worstSegmentRisk10": 4.01,
+          "worstSegmentRole": "tail",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.85,
+          "worstSegmentRisk10": 4.01,
+          "worstSegmentRole": "tail",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.85,
+          "worstSegmentRisk10": 4.01,
+          "worstSegmentRole": "tail",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 1.23,
+          "worstSegmentRisk10": 2.51,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 1.23,
+          "worstSegmentRisk10": 2.51,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 1.21,
+          "worstSegmentRisk10": 2.31,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 1.21,
+          "worstSegmentRisk10": 2.31,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 1.08,
+          "worstSegmentRisk10": 1.91,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        }
+      ]
+    },
+    {
+      "cue": "rescueJoin",
+      "sampleCount": 8,
+      "medianGapRisk10": 3.34,
+      "gapRiskMin10": 3.09,
+      "gapRiskMax10": 3.57,
+      "gapRiskRange10": 0.48,
+      "gapRiskStddev10": 0.24,
+      "medianWorstSegmentRisk10": 5.15,
+      "worstSegmentMin10": 4.49,
+      "worstSegmentMax10": 5.96,
+      "worstSegmentRange10": 1.47,
+      "worstSegmentStddev10": 0.57,
+      "medianSemanticScore10": 10,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "onset",
+      "stabilityScore10": 6.82,
+      "volatile": true,
+      "read": "Volatile across repeated event-gap reads; require median/repeated confirmation before promoting runtime cue changes.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 3.57,
+          "worstSegmentRisk10": 5.61,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 3.57,
+          "worstSegmentRisk10": 5.61,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 3.57,
+          "worstSegmentRisk10": 5.61,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 3.09,
+          "worstSegmentRisk10": 4.49,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 3.09,
+          "worstSegmentRisk10": 4.49,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 3.11,
+          "worstSegmentRisk10": 4.69,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 3.11,
+          "worstSegmentRisk10": 4.69,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 3.57,
+          "worstSegmentRisk10": 5.96,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        }
+      ]
+    },
+    {
+      "cue": "challengeTransition",
+      "sampleCount": 8,
+      "medianGapRisk10": 4.28,
+      "gapRiskMin10": 3.65,
+      "gapRiskMax10": 4.72,
+      "gapRiskRange10": 1.07,
+      "gapRiskStddev10": 0.38,
+      "medianWorstSegmentRisk10": 5.91,
+      "worstSegmentMin10": 5.69,
+      "worstSegmentMax10": 5.95,
+      "worstSegmentRange10": 0.26,
+      "worstSegmentStddev10": 0.11,
+      "medianSemanticScore10": 10,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "onset",
+      "stabilityScore10": 7.72,
+      "volatile": true,
+      "read": "Volatile across repeated event-gap reads; require median/repeated confirmation before promoting runtime cue changes.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 4.28,
+          "worstSegmentRisk10": 5.95,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 4.28,
+          "worstSegmentRisk10": 5.95,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 4.28,
+          "worstSegmentRisk10": 5.95,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 3.65,
+          "worstSegmentRisk10": 5.73,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 3.65,
+          "worstSegmentRisk10": 5.73,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 4.72,
+          "worstSegmentRisk10": 5.91,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 4.72,
+          "worstSegmentRisk10": 5.91,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 4.16,
+          "worstSegmentRisk10": 5.69,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        }
+      ]
+    },
+    {
+      "cue": "captureRetreat",
+      "sampleCount": 8,
+      "medianGapRisk10": 1.86,
+      "gapRiskMin10": 1.82,
+      "gapRiskMax10": 2.2,
+      "gapRiskRange10": 0.38,
+      "gapRiskStddev10": 0.18,
+      "medianWorstSegmentRisk10": 1.95,
+      "worstSegmentMin10": 1.51,
+      "worstSegmentMax10": 2.55,
+      "worstSegmentRange10": 1.04,
+      "worstSegmentStddev10": 0.45,
+      "medianSemanticScore10": 9.3,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "onset",
+      "stabilityScore10": 7.69,
+      "volatile": true,
+      "read": "Volatile across repeated event-gap reads; require median/repeated confirmation before promoting runtime cue changes.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.2,
+          "worstSegmentRisk10": 1.51,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.3
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.2,
+          "worstSegmentRisk10": 1.51,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.3
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.2,
+          "worstSegmentRisk10": 1.51,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.3
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 1.86,
+          "worstSegmentRisk10": 1.95,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.3
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 1.86,
+          "worstSegmentRisk10": 1.95,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.3
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 1.82,
+          "worstSegmentRisk10": 2.55,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.3
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 1.82,
+          "worstSegmentRisk10": 2.55,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.3
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 1.83,
+          "worstSegmentRisk10": 2.55,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.3
+        }
+      ]
+    },
+    {
+      "cue": "playerHit",
+      "sampleCount": 8,
+      "medianGapRisk10": 2.49,
+      "gapRiskMin10": 2.05,
+      "gapRiskMax10": 2.9,
+      "gapRiskRange10": 0.85,
+      "gapRiskStddev10": 0.4,
+      "medianWorstSegmentRisk10": 0,
+      "worstSegmentMin10": 0,
+      "worstSegmentMax10": 0,
+      "worstSegmentRange10": 0,
+      "worstSegmentStddev10": 0,
+      "medianSemanticScore10": 9.4,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "body",
+      "stabilityScore10": 8.08,
+      "volatile": true,
+      "read": "Volatile across repeated event-gap reads; require median/repeated confirmation before promoting runtime cue changes.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.87,
+          "worstSegmentRisk10": 0,
+          "worstSegmentRole": "body",
+          "semanticScore10": 9.4
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.87,
+          "worstSegmentRisk10": 0,
+          "worstSegmentRole": "body",
+          "semanticScore10": 9.4
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.87,
+          "worstSegmentRisk10": 0,
+          "worstSegmentRole": "body",
+          "semanticScore10": 9.4
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 2.05,
+          "worstSegmentRisk10": 0,
+          "worstSegmentRole": "body",
+          "semanticScore10": 9.4
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 2.05,
+          "worstSegmentRisk10": 0,
+          "worstSegmentRole": "body",
+          "semanticScore10": 9.4
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 2.11,
+          "worstSegmentRisk10": 0,
+          "worstSegmentRole": "body",
+          "semanticScore10": 9.4
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 2.11,
+          "worstSegmentRisk10": 0,
+          "worstSegmentRole": "body",
+          "semanticScore10": 9.4
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 2.9,
+          "worstSegmentRisk10": 0,
+          "worstSegmentRole": "body",
+          "semanticScore10": 9.4
+        }
+      ]
+    },
+    {
+      "cue": "highScoreOther",
+      "sampleCount": 8,
+      "medianGapRisk10": 2.58,
+      "gapRiskMin10": 2.13,
+      "gapRiskMax10": 2.7,
+      "gapRiskRange10": 0.57,
+      "gapRiskStddev10": 0.23,
+      "medianWorstSegmentRisk10": 4.39,
+      "worstSegmentMin10": 3.7,
+      "worstSegmentMax10": 4.52,
+      "worstSegmentRange10": 0.82,
+      "worstSegmentStddev10": 0.36,
+      "medianSemanticScore10": 9.6,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "onset",
+      "stabilityScore10": 8.17,
+      "volatile": true,
+      "read": "Volatile across repeated event-gap reads; require median/repeated confirmation before promoting runtime cue changes.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.7,
+          "worstSegmentRisk10": 4.52,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.7,
+          "worstSegmentRisk10": 4.52,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.7,
+          "worstSegmentRisk10": 4.52,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 2.58,
+          "worstSegmentRisk10": 4.39,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 2.58,
+          "worstSegmentRisk10": 4.39,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 2.13,
+          "worstSegmentRisk10": 3.7,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 2.13,
+          "worstSegmentRisk10": 3.7,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 2.54,
+          "worstSegmentRisk10": 3.79,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        }
+      ]
+    },
+    {
+      "cue": "enemyShot",
+      "sampleCount": 8,
+      "medianGapRisk10": 1.63,
+      "gapRiskMin10": 1.55,
+      "gapRiskMax10": 1.73,
+      "gapRiskRange10": 0.18,
+      "gapRiskStddev10": 0.09,
+      "medianWorstSegmentRisk10": 1.48,
+      "worstSegmentMin10": 1.32,
+      "worstSegmentMax10": 2.09,
+      "worstSegmentRange10": 0.77,
+      "worstSegmentStddev10": 0.36,
+      "medianSemanticScore10": 9.9,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "onset",
+      "stabilityScore10": 8.26,
+      "volatile": true,
+      "read": "Volatile across repeated event-gap reads; require median/repeated confirmation before promoting runtime cue changes.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.73,
+          "worstSegmentRisk10": 2.09,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.9
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.73,
+          "worstSegmentRisk10": 2.09,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.9
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.73,
+          "worstSegmentRisk10": 2.09,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.9
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 1.55,
+          "worstSegmentRisk10": 1.32,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.9
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 1.55,
+          "worstSegmentRisk10": 1.32,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.9
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 1.55,
+          "worstSegmentRisk10": 1.32,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.9
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 1.55,
+          "worstSegmentRisk10": 1.32,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.9
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 1.71,
+          "worstSegmentRisk10": 1.63,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.9
+        }
+      ]
+    },
+    {
+      "cue": "playerShot",
+      "sampleCount": 8,
+      "medianGapRisk10": 1.91,
+      "gapRiskMin10": 1.81,
+      "gapRiskMax10": 2.45,
+      "gapRiskRange10": 0.64,
+      "gapRiskStddev10": 0.3,
+      "medianWorstSegmentRisk10": 1.92,
+      "worstSegmentMin10": 1.75,
+      "worstSegmentMax10": 2.23,
+      "worstSegmentRange10": 0.48,
+      "worstSegmentStddev10": 0.23,
+      "medianSemanticScore10": 9.9,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "onset",
+      "stabilityScore10": 8.55,
+      "volatile": false,
+      "read": "Stable enough for the current event-gap scorer; single-run movement is more likely to represent a real cue change.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.45,
+          "worstSegmentRisk10": 2.23,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.9
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.45,
+          "worstSegmentRisk10": 2.23,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.9
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.45,
+          "worstSegmentRisk10": 2.23,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.9
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 1.81,
+          "worstSegmentRisk10": 1.75,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.9
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 1.81,
+          "worstSegmentRisk10": 1.75,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.9
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 1.81,
+          "worstSegmentRisk10": 1.75,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.9
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 1.81,
+          "worstSegmentRisk10": 1.75,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.9
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 2,
+          "worstSegmentRisk10": 2.08,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.9
+        }
+      ]
+    },
+    {
+      "cue": "gameStart",
+      "sampleCount": 8,
+      "medianGapRisk10": 2.38,
+      "gapRiskMin10": 2.35,
+      "gapRiskMax10": 2.47,
+      "gapRiskRange10": 0.12,
+      "gapRiskStddev10": 0.04,
+      "medianWorstSegmentRisk10": 5.9,
+      "worstSegmentMin10": 5.41,
+      "worstSegmentMax10": 6.04,
+      "worstSegmentRange10": 0.63,
+      "worstSegmentStddev10": 0.25,
+      "medianSemanticScore10": 9.1,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "onset",
+      "stabilityScore10": 8.63,
+      "volatile": false,
+      "read": "Stable enough for the current event-gap scorer; single-run movement is more likely to represent a real cue change.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.35,
+          "worstSegmentRisk10": 5.9,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.1
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.35,
+          "worstSegmentRisk10": 5.9,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.1
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.35,
+          "worstSegmentRisk10": 5.9,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.1
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 2.38,
+          "worstSegmentRisk10": 6.04,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.1
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 2.38,
+          "worstSegmentRisk10": 6.04,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.1
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 2.38,
+          "worstSegmentRisk10": 5.41,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.1
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 2.38,
+          "worstSegmentRisk10": 5.41,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.1
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 2.47,
+          "worstSegmentRisk10": 6,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.1
+        }
+      ]
+    },
+    {
+      "cue": "captureBeam",
+      "sampleCount": 8,
+      "medianGapRisk10": 3.29,
+      "gapRiskMin10": 3.26,
+      "gapRiskMax10": 3.31,
+      "gapRiskRange10": 0.05,
+      "gapRiskStddev10": 0.02,
+      "medianWorstSegmentRisk10": 5.76,
+      "worstSegmentMin10": 5.18,
+      "worstSegmentMax10": 5.78,
+      "worstSegmentRange10": 0.6,
+      "worstSegmentStddev10": 0.25,
+      "medianSemanticScore10": 10,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "tail",
+      "stabilityScore10": 8.68,
+      "volatile": false,
+      "read": "Stable enough for the current event-gap scorer; single-run movement is more likely to represent a real cue change.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 3.31,
+          "worstSegmentRisk10": 5.76,
+          "worstSegmentRole": "tail",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 3.31,
+          "worstSegmentRisk10": 5.76,
+          "worstSegmentRole": "tail",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 3.31,
+          "worstSegmentRisk10": 5.76,
+          "worstSegmentRole": "tail",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 3.27,
+          "worstSegmentRisk10": 5.18,
+          "worstSegmentRole": "body",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 3.27,
+          "worstSegmentRisk10": 5.18,
+          "worstSegmentRole": "body",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 3.26,
+          "worstSegmentRisk10": 5.78,
+          "worstSegmentRole": "tail",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 3.26,
+          "worstSegmentRisk10": 5.78,
+          "worstSegmentRole": "tail",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 3.3,
+          "worstSegmentRisk10": 5.64,
+          "worstSegmentRole": "tail",
+          "semanticScore10": 10
+        }
+      ]
+    },
+    {
+      "cue": "stagePulse",
+      "sampleCount": 8,
+      "medianGapRisk10": 0.84,
+      "gapRiskMin10": 0.38,
+      "gapRiskMax10": 0.84,
+      "gapRiskRange10": 0.46,
+      "gapRiskStddev10": 0.22,
+      "medianWorstSegmentRisk10": 2.56,
+      "worstSegmentMin10": 1.98,
+      "worstSegmentMax10": 2.56,
+      "worstSegmentRange10": 0.58,
+      "worstSegmentStddev10": 0.24,
+      "medianSemanticScore10": 9.6,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "onset",
+      "stabilityScore10": 8.72,
+      "volatile": false,
+      "read": "Stable enough for the current event-gap scorer; single-run movement is more likely to represent a real cue change.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 0.84,
+          "worstSegmentRisk10": 2.56,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 0.84,
+          "worstSegmentRisk10": 2.56,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 0.84,
+          "worstSegmentRisk10": 2.56,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 0.39,
+          "worstSegmentRisk10": 2.11,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 0.39,
+          "worstSegmentRisk10": 2.11,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 0.84,
+          "worstSegmentRisk10": 2.56,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 0.84,
+          "worstSegmentRisk10": 2.56,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 0.38,
+          "worstSegmentRisk10": 1.98,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        }
+      ]
+    },
+    {
+      "cue": "challengeResults",
+      "sampleCount": 8,
+      "medianGapRisk10": 1.67,
+      "gapRiskMin10": 1.41,
+      "gapRiskMax10": 1.72,
+      "gapRiskRange10": 0.31,
+      "gapRiskStddev10": 0.1,
+      "medianWorstSegmentRisk10": 4.62,
+      "worstSegmentMin10": 4.37,
+      "worstSegmentMax10": 4.8,
+      "worstSegmentRange10": 0.43,
+      "worstSegmentStddev10": 0.13,
+      "medianSemanticScore10": 10,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "onset",
+      "stabilityScore10": 9.11,
+      "volatile": false,
+      "read": "Stable enough for the current event-gap scorer; single-run movement is more likely to represent a real cue change.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.67,
+          "worstSegmentRisk10": 4.57,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.67,
+          "worstSegmentRisk10": 4.57,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.67,
+          "worstSegmentRisk10": 4.57,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 1.72,
+          "worstSegmentRisk10": 4.67,
+          "worstSegmentRole": "tail",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 1.72,
+          "worstSegmentRisk10": 4.67,
+          "worstSegmentRole": "tail",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 1.58,
+          "worstSegmentRisk10": 4.8,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 1.58,
+          "worstSegmentRisk10": 4.8,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 1.41,
+          "worstSegmentRisk10": 4.37,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        }
+      ]
+    },
+    {
+      "cue": "bossBoom",
+      "sampleCount": 8,
+      "medianGapRisk10": 2.13,
+      "gapRiskMin10": 2.13,
+      "gapRiskMax10": 2.19,
+      "gapRiskRange10": 0.06,
+      "gapRiskStddev10": 0.03,
+      "medianWorstSegmentRisk10": 3.84,
+      "worstSegmentMin10": 3.48,
+      "worstSegmentMax10": 3.9,
+      "worstSegmentRange10": 0.42,
+      "worstSegmentStddev10": 0.16,
+      "medianSemanticScore10": 10,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "body",
+      "stabilityScore10": 9.1,
+      "volatile": false,
+      "read": "Stable enough for the current event-gap scorer; single-run movement is more likely to represent a real cue change.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.13,
+          "worstSegmentRisk10": 3.9,
+          "worstSegmentRole": "body",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.13,
+          "worstSegmentRisk10": 3.9,
+          "worstSegmentRole": "body",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.13,
+          "worstSegmentRisk10": 3.9,
+          "worstSegmentRole": "body",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 2.13,
+          "worstSegmentRisk10": 3.6,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 2.13,
+          "worstSegmentRisk10": 3.6,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 2.19,
+          "worstSegmentRisk10": 3.84,
+          "worstSegmentRole": "body",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 2.19,
+          "worstSegmentRisk10": 3.84,
+          "worstSegmentRole": "body",
+          "semanticScore10": 10
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 2.18,
+          "worstSegmentRisk10": 3.48,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 10
+        }
+      ]
+    },
+    {
+      "cue": "gameOver",
+      "sampleCount": 8,
+      "medianGapRisk10": 2.47,
+      "gapRiskMin10": 2.45,
+      "gapRiskMax10": 2.49,
+      "gapRiskRange10": 0.04,
+      "gapRiskStddev10": 0.02,
+      "medianWorstSegmentRisk10": 6.2,
+      "worstSegmentMin10": 6.07,
+      "worstSegmentMax10": 6.42,
+      "worstSegmentRange10": 0.35,
+      "worstSegmentStddev10": 0.14,
+      "medianSemanticScore10": 9.1,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "onset",
+      "stabilityScore10": 9.24,
+      "volatile": false,
+      "read": "Stable enough for the current event-gap scorer; single-run movement is more likely to represent a real cue change.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.47,
+          "worstSegmentRisk10": 6.07,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.1
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.47,
+          "worstSegmentRisk10": 6.07,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.1
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 2.47,
+          "worstSegmentRisk10": 6.07,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.1
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 2.49,
+          "worstSegmentRisk10": 6.42,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.1
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 2.49,
+          "worstSegmentRisk10": 6.42,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.1
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 2.45,
+          "worstSegmentRisk10": 6.2,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.1
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 2.45,
+          "worstSegmentRisk10": 6.2,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.1
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 2.45,
+          "worstSegmentRisk10": 6.19,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.1
+        }
+      ]
+    },
+    {
+      "cue": "attractPulse",
+      "sampleCount": 8,
+      "medianGapRisk10": 1.63,
+      "gapRiskMin10": 1.57,
+      "gapRiskMax10": 1.67,
+      "gapRiskRange10": 0.1,
+      "gapRiskStddev10": 0.05,
+      "medianWorstSegmentRisk10": 2.63,
+      "worstSegmentMin10": 2.52,
+      "worstSegmentMax10": 2.76,
+      "worstSegmentRange10": 0.24,
+      "worstSegmentStddev10": 0.08,
+      "medianSemanticScore10": 9.6,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "onset",
+      "stabilityScore10": 9.5,
+      "volatile": false,
+      "read": "Stable enough for the current event-gap scorer; single-run movement is more likely to represent a real cue change.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.57,
+          "worstSegmentRisk10": 2.63,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.57,
+          "worstSegmentRisk10": 2.63,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.57,
+          "worstSegmentRisk10": 2.63,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 1.67,
+          "worstSegmentRisk10": 2.76,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 1.67,
+          "worstSegmentRisk10": 2.76,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 1.67,
+          "worstSegmentRisk10": 2.6,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 1.67,
+          "worstSegmentRisk10": 2.6,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 1.58,
+          "worstSegmentRisk10": 2.52,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.6
+        }
+      ]
+    },
+    {
+      "cue": "bossHit",
+      "sampleCount": 8,
+      "medianGapRisk10": 1.56,
+      "gapRiskMin10": 1.48,
+      "gapRiskMax10": 1.58,
+      "gapRiskRange10": 0.1,
+      "gapRiskStddev10": 0.03,
+      "medianWorstSegmentRisk10": 1.07,
+      "worstSegmentMin10": 0.93,
+      "worstSegmentMax10": 1.08,
+      "worstSegmentRange10": 0.15,
+      "worstSegmentStddev10": 0.07,
+      "medianSemanticScore10": 9.8,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "onset",
+      "stabilityScore10": 9.66,
+      "volatile": false,
+      "read": "Stable enough for the current event-gap scorer; single-run movement is more likely to represent a real cue change.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.58,
+          "worstSegmentRisk10": 0.93,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.8
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.58,
+          "worstSegmentRisk10": 0.93,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.8
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.58,
+          "worstSegmentRisk10": 0.93,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.8
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 1.56,
+          "worstSegmentRisk10": 1.07,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.8
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 1.56,
+          "worstSegmentRisk10": 1.07,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.8
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 1.56,
+          "worstSegmentRisk10": 1.07,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.8
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 1.56,
+          "worstSegmentRisk10": 1.07,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.8
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 1.48,
+          "worstSegmentRisk10": 1.08,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.8
+        }
+      ]
+    },
+    {
+      "cue": "enemyHit",
+      "sampleCount": 8,
+      "medianGapRisk10": 1.46,
+      "gapRiskMin10": 1.46,
+      "gapRiskMax10": 1.54,
+      "gapRiskRange10": 0.08,
+      "gapRiskStddev10": 0.03,
+      "medianWorstSegmentRisk10": 1.66,
+      "worstSegmentMin10": 1.66,
+      "worstSegmentMax10": 1.74,
+      "worstSegmentRange10": 0.08,
+      "worstSegmentStddev10": 0.03,
+      "medianSemanticScore10": 9.8,
+      "semanticRange10": 0,
+      "dominantWorstSegmentRole": "onset",
+      "stabilityScore10": 9.83,
+      "volatile": false,
+      "read": "Stable enough for the current event-gap scorer; single-run movement is more likely to represent a real cue change.",
+      "rows": [
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021357/report.json",
+            "generatedAt": "2026-05-17T02:13:57.445Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.46,
+          "worstSegmentRisk10": 1.66,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.8
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-021525/report.json",
+            "generatedAt": "2026-05-17T02:15:25.741Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.46,
+          "worstSegmentRisk10": 1.66,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.8
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-612f086f-dirty-022308/report.json",
+            "generatedAt": "2026-05-17T02:23:08.705Z",
+            "commit": "612f086f",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-021222/metrics.json"
+          },
+          "gapRisk10": 1.46,
+          "worstSegmentRisk10": 1.66,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.8
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103817/report.json",
+            "generatedAt": "2026-05-17T10:38:17.204Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 1.46,
+          "worstSegmentRisk10": 1.66,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.8
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-103931/report.json",
+            "generatedAt": "2026-05-17T10:39:31.151Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-103648/metrics.json"
+          },
+          "gapRisk10": 1.46,
+          "worstSegmentRisk10": 1.66,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.8
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104529/report.json",
+            "generatedAt": "2026-05-17T10:45:29.049Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 1.46,
+          "worstSegmentRisk10": 1.66,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.8
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104637/report.json",
+            "generatedAt": "2026-05-17T10:46:37.123Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104358/metrics.json"
+          },
+          "gapRisk10": 1.46,
+          "worstSegmentRisk10": 1.66,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.8
+        },
+        {
+          "source": {
+            "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-17-ab80e4c7-dirty-104848/report.json",
+            "generatedAt": "2026-05-17T10:48:48.324Z",
+            "commit": "ab80e4c7",
+            "dirty": true,
+            "metrics": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json"
+          },
+          "gapRisk10": 1.54,
+          "worstSegmentRisk10": 1.74,
+          "worstSegmentRole": "onset",
+          "semanticScore10": 9.8
+        }
+      ]
+    }
+  ]
+}

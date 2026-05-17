@@ -1,26 +1,26 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-17T02-18-52-195Z-45597",
-  "startedAt": "2026-05-17T02:18:52.195Z",
-  "endedAt": "2026-05-17T02:18:52.196Z",
+  "id": "2026-05-17T10-58-11-951Z-91223",
+  "startedAt": "2026-05-17T10:58:11.951Z",
+  "endedAt": "2026-05-17T10:58:11.952Z",
   "branch": "codex/macbook-audio-entry-grounding-cycle",
-  "commit": "612f086f",
+  "commit": "ab80e4c7",
   "command": [
     "manual:model-usage"
   ],
   "axes": [
-    "audio-runtime-trial",
-    "audio-activity-profile",
-    "conformance-analysis"
+    "audio-risk-stability",
+    "conformance-analysis",
+    "release-hardening"
   ],
   "resources": [
     "codex",
     "gpu-equivalent"
   ],
-  "notes": "Codex model-assisted audio conformance cycle: evaluated focus, designed activity-span profiling/calibrated gates, interpreted runtime trial volatility, and selected no-promote path",
+  "notes": "Codex model-assisted uninterrupted conformance cycle: evaluated rescueJoin candidate evidence, rejected unstable runtime promotion, designed audio risk stability analyzer, refreshed challenge-stage and beta-hardening status",
   "measurement": {
-    "wallSeconds": 7200,
+    "wallSeconds": 5400,
     "timeRealSeconds": null,
     "timeUserSeconds": null,
     "timeSystemSeconds": null,
@@ -37,7 +37,7 @@
     "modelCalls": 0,
     "inputTokens": 0,
     "outputTokens": 0,
-    "modelMinutes": 120,
+    "modelMinutes": 90,
     "codexUsage5hLeftPercent": null,
     "codexUsageWeekLeftPercent": null,
     "codexModel5hLeftPercent": null,
@@ -46,8 +46,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 1015744302,
-    "artifactBytesAfter": 1015744302,
+    "artifactBytesBefore": 1040096565,
+    "artifactBytesAfter": 1040096565,
     "artifactBytesDelta": 0
   }
 }

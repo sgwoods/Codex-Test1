@@ -103,19 +103,24 @@ Current lab artifact:
 
 `reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json`
 
+Current stability artifact:
+
+`reference-artifacts/analyses/aurora-audio-risk-stability/latest.json`
+
 Current result:
 
 | Metric | Value |
 |---|---:|
-| Quality score audio category | `7.0/10` |
-| Overall quality score | `9.1/10` |
+| Quality score audio category | `7.2/10` |
+| Overall quality score | `9.2/10` |
 | Semantic event score | `9.78/10` |
-| Acoustic event score | `6.73/10` |
-| Average worst segment risk | `3.27/10` |
-| Cue-contract readiness | `9.09/10` |
+| Acoustic event score | `6.56/10` |
+| Average worst segment risk | `3.44/10` |
+| Cue-contract readiness | `9.24/10` |
 | Contracted priority cue families | `8` cues |
 | Highest current audio gap | `challengePerfect` onset |
-| Focused candidate-loop coverage | `enemyShot`, `challengePerfect`, `bossHit`, `playerShot`, and the contracted cue set |
+| Audio risk stability | `challengePerfect` is most volatile; `4.56/10` recent risk range |
+| Focused candidate-loop coverage | `enemyShot`, `challengePerfect`, `bossHit`, `playerShot`, `rescueJoin`, and the contracted cue set |
 
 This means the process and runtime audio both moved forward, while audio still
 remains Aurora's weakest quality category. The latest post-beta runtime wins
@@ -130,6 +135,29 @@ floor. No perfect-clear runtime cue was promoted. This is the intended
 guardrail: focused similarity is evidence, not release authority by itself, and
 a cue that wins the onset comparison can still be wrong for the player if it
 abbreviates the reward/inter-level moment.
+
+May 17 rescueJoin and risk-stability pass:
+
+- Focused `rescueJoin` candidate loop found a strong local keeper:
+  `refclip-s2399-d300-v116`, with focused risk improvement `2.39/10` and
+  segment-risk improvement `4.04/10`.
+- Full-theme promotion precheck allowed a runtime trial with no blockers, but
+  the live full-theme capture did not improve `rescueJoin` and worsened the
+  aggregate/highest audio risk read. The runtime cue was reverted.
+- Persisted rejected trial:
+  `reference-artifacts/analyses/aurora-audio-runtime-trials/latest.json`.
+- New harness capability kept:
+  `tools/harness/analyze-aurora-audio-risk-stability.js` and
+  `tools/harness/check-aurora-audio-risk-stability.js`.
+- Current stability read: 8 recent event-gap reports show 11 volatile cues.
+  `challengePerfect` is both the highest median-risk cue and the most volatile
+  cue, with a recent `4.56/10` gap-risk range.
+
+Read: the next high-value audio pass should first stabilize repeated
+full-theme capture and use median/repeated confirmation before any
+`challengePerfect`, `gameOver`, or `challengeTransition` runtime promotion.
+This is a harness/process win more than a player-facing audio win, but it
+reduces the chance of shipping a cue that only passed one noisy measurement.
 
 Post-beta boss-hit pass:
 
