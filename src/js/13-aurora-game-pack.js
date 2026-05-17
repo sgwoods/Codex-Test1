@@ -706,6 +706,7 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
    Object.freeze(['but','bee','bee','but','but','bee','bee','but']),
    Object.freeze(['bee','but','bee','but','but','bee','but','bee'])
   ]),
+  groupVisualFamilies:Object.freeze(['classic','classic','classic','classic','classic']),
   groupPathFamilies:Object.freeze(['first-challenge-peel','first-challenge-peel','first-challenge-peel','first-challenge-peel','first-challenge-peel'])
  }),
  Object.freeze({
@@ -730,6 +731,7 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
    Object.freeze(['rogue','bee','boss','but','but','boss','bee','rogue']),
    Object.freeze(['but','rogue','boss','bee','bee','boss','rogue','but'])
   ]),
+  groupVisualFamilies:Object.freeze(['classic','classic','scorpion','scorpion','stingray']),
   groupPathFamilies:Object.freeze(['cross-sweep','cross-sweep','hook-arc','cross-sweep','boss-led-loop'])
  }),
  Object.freeze({
@@ -754,55 +756,133 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
    Object.freeze(['but','rogue','boss','boss','boss','boss','rogue','but']),
    Object.freeze(['boss','bee','rogue','but','but','rogue','bee','boss'])
   ]),
+  groupVisualFamilies:Object.freeze(['dragonfly','dragonfly','stingray','galboss','dragonfly']),
   groupPathFamilies:Object.freeze(['crown-split-cascade','boss-led-loop','hook-arc','boss-led-loop','hook-arc'])
  }),
  Object.freeze({
   fromStage:15,
-  id:'boss-led-late-loop',
-  pathFamily:'boss-led-loop',
+  id:'pink-serpentine-late',
+  pathFamily:'pink-serpentine',
   groups:5,
   enemiesPerGroup:8,
-  upperBandRatio:.44,
-  spawnOffsetX:62,
+  upperBandRatio:.43,
+  spawnOffsetX:74,
   waveSpacingY:10,
   rowSpacingY:9,
-  waveDelay:1.18,
+  waveDelay:1.22,
   slotDelay:.1,
-  arcAmp:1.62,
-  dropAmp:1.12,
-  laneTypes:Object.freeze(['boss','rogue','boss','but','rogue','but','boss','bee']),
+  arcAmp:1.68,
+  dropAmp:1.08,
+  laneTypes:Object.freeze(['boss','rogue','but','bee','bee','but','rogue','boss']),
   groupLaneTypes:Object.freeze([
-   Object.freeze(['boss','rogue','boss','but','rogue','but','boss','bee']),
-   Object.freeze(['boss','boss','rogue','but','but','rogue','boss','boss']),
-   Object.freeze(['rogue','boss','but','boss','boss','but','boss','rogue']),
-   Object.freeze(['boss','but','rogue','boss','boss','rogue','but','boss']),
-   Object.freeze(['boss','rogue','but','bee','bee','but','rogue','boss'])
+   Object.freeze(['boss','rogue','but','bee','bee','but','rogue','boss']),
+   Object.freeze(['but','boss','rogue','bee','bee','rogue','boss','but']),
+   Object.freeze(['bee','but','boss','rogue','rogue','boss','but','bee']),
+   Object.freeze(['rogue','bee','but','boss','boss','but','bee','rogue']),
+   Object.freeze(['boss','but','bee','rogue','rogue','bee','but','boss'])
   ]),
-  groupPathFamilies:Object.freeze(['boss-led-loop','boss-led-loop','hook-arc','boss-led-loop','crown-split-cascade'])
+  groupVisualFamilies:Object.freeze(['galboss','galboss','dragonfly','galboss','dragonfly']),
+  groupPathFamilies:Object.freeze(['pink-serpentine','pink-serpentine','green-ladder-split','pink-serpentine','pink-green-cascade'])
  }),
  Object.freeze({
   fromStage:19,
-  id:'crown-split-cascade',
-  pathFamily:'crown-split-cascade',
+  id:'pink-green-cascade',
+  pathFamily:'pink-green-cascade',
   groups:5,
   enemiesPerGroup:8,
   upperBandRatio:.42,
-  spawnOffsetX:68,
+  spawnOffsetX:76,
   waveSpacingY:9,
   rowSpacingY:8,
   waveDelay:1.1,
   slotDelay:.085,
-  arcAmp:1.78,
-  dropAmp:1.18,
-  laneTypes:Object.freeze(['boss','rogue','but','boss','bee','but','rogue','boss']),
+  arcAmp:1.86,
+  dropAmp:1.22,
+  laneTypes:Object.freeze(['rogue','boss','but','bee','boss','but','bee','rogue']),
   groupLaneTypes:Object.freeze([
-   Object.freeze(['boss','rogue','but','boss','bee','but','rogue','boss']),
-   Object.freeze(['rogue','boss','boss','but','but','boss','boss','rogue']),
-   Object.freeze(['but','boss','rogue','boss','boss','rogue','boss','but']),
-   Object.freeze(['boss','but','boss','rogue','rogue','boss','but','boss']),
-   Object.freeze(['boss','rogue','boss','bee','bee','boss','rogue','boss'])
+   Object.freeze(['rogue','boss','but','bee','boss','but','bee','rogue']),
+   Object.freeze(['boss','but','bee','rogue','rogue','bee','but','boss']),
+   Object.freeze(['bee','rogue','boss','but','but','boss','rogue','bee']),
+   Object.freeze(['but','bee','rogue','boss','boss','rogue','bee','but']),
+   Object.freeze(['boss','rogue','bee','but','but','bee','rogue','boss'])
   ]),
-  groupPathFamilies:Object.freeze(['crown-split-cascade','boss-led-loop','crown-split-cascade','hook-arc','crown-split-cascade'])
+  groupVisualFamilies:Object.freeze(['galboss','dragonfly','crown','dragonfly','galboss']),
+  groupPathFamilies:Object.freeze(['pink-green-cascade','green-ladder-split','pink-green-cascade','pink-serpentine','pink-green-cascade'])
+ }),
+ Object.freeze({
+  fromStage:23,
+  id:'green-ladder-split',
+  pathFamily:'green-ladder-split',
+  groups:5,
+  enemiesPerGroup:8,
+  upperBandRatio:.41,
+  spawnOffsetX:80,
+  waveSpacingY:9,
+  rowSpacingY:8,
+  waveDelay:1.04,
+  slotDelay:.08,
+  arcAmp:1.58,
+  dropAmp:1.34,
+  laneTypes:Object.freeze(['bee','but','rogue','boss','boss','rogue','but','bee']),
+  groupLaneTypes:Object.freeze([
+   Object.freeze(['bee','but','rogue','boss','boss','rogue','but','bee']),
+   Object.freeze(['but','bee','boss','rogue','rogue','boss','bee','but']),
+   Object.freeze(['rogue','boss','bee','but','but','bee','boss','rogue']),
+   Object.freeze(['boss','rogue','but','bee','bee','but','rogue','boss']),
+   Object.freeze(['bee','rogue','boss','but','but','boss','rogue','bee'])
+  ]),
+  groupVisualFamilies:Object.freeze(['dragonfly','dragonfly','mosquito','dragonfly','mosquito']),
+  groupPathFamilies:Object.freeze(['green-ladder-split','green-ladder-split','pink-green-cascade','green-ladder-split','blue-purple-finale'])
+ }),
+ Object.freeze({
+  fromStage:27,
+  id:'yellow-diagonal-fan',
+  pathFamily:'yellow-diagonal-fan',
+  groups:5,
+  enemiesPerGroup:8,
+  upperBandRatio:.4,
+  spawnOffsetX:84,
+  waveSpacingY:8,
+  rowSpacingY:8,
+  waveDelay:1,
+  slotDelay:.075,
+  arcAmp:1.72,
+  dropAmp:1.38,
+  laneTypes:Object.freeze(['boss','bee','but','rogue','rogue','but','bee','boss']),
+  groupLaneTypes:Object.freeze([
+   Object.freeze(['boss','bee','but','rogue','rogue','but','bee','boss']),
+   Object.freeze(['bee','boss','rogue','but','but','rogue','boss','bee']),
+   Object.freeze(['but','rogue','boss','bee','bee','boss','rogue','but']),
+   Object.freeze(['rogue','but','bee','boss','boss','bee','but','rogue']),
+   Object.freeze(['boss','rogue','but','bee','bee','but','rogue','boss'])
+  ]),
+  groupVisualFamilies:Object.freeze(['crown','crown','dragonfly','crown','crown']),
+  groupPathFamilies:Object.freeze(['yellow-diagonal-fan','yellow-diagonal-fan','green-ladder-split','yellow-diagonal-fan','pink-green-cascade'])
+ }),
+ Object.freeze({
+  fromStage:31,
+  id:'blue-purple-finale',
+  pathFamily:'blue-purple-finale',
+  groups:5,
+  enemiesPerGroup:8,
+  upperBandRatio:.4,
+  spawnOffsetX:86,
+  waveSpacingY:8,
+  rowSpacingY:7,
+  waveDelay:.96,
+  slotDelay:.07,
+  arcAmp:1.8,
+  dropAmp:1.26,
+  laneTypes:Object.freeze(['rogue','boss','bee','but','but','bee','boss','rogue']),
+  groupLaneTypes:Object.freeze([
+   Object.freeze(['rogue','boss','bee','but','but','bee','boss','rogue']),
+   Object.freeze(['boss','rogue','but','bee','bee','but','rogue','boss']),
+   Object.freeze(['bee','but','boss','rogue','rogue','boss','but','bee']),
+   Object.freeze(['but','bee','rogue','boss','boss','rogue','bee','but']),
+   Object.freeze(['boss','but','rogue','bee','bee','rogue','but','boss'])
+  ]),
+  groupVisualFamilies:Object.freeze(['stingray','mosquito','stingray','mosquito','galboss']),
+  groupPathFamilies:Object.freeze(['blue-purple-finale','green-ladder-split','blue-purple-finale','yellow-diagonal-fan','blue-purple-finale'])
  })
 ]);
 

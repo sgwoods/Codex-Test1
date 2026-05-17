@@ -1,0 +1,170 @@
+{
+  "schema": "galaga-challenge-video-window-0.1",
+  "sourceId": "challenge-all2-single-ship-all-perfects",
+  "windowId": "challenge-04-pink-serpentine",
+  "challengeNumber": 4,
+  "stageMarker": 15,
+  "startSeconds": 113,
+  "durationSeconds": 35,
+  "sampledFps": 1,
+  "derivedSheets": {
+    "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-1fps.jpg",
+    "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-2fps.jpg",
+    "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/motion-review-4fps.jpg"
+  },
+  "frameTimes": [
+    {
+      "frameIndex": 0,
+      "tSourceSeconds": 113
+    },
+    {
+      "frameIndex": 1,
+      "tSourceSeconds": 114
+    },
+    {
+      "frameIndex": 2,
+      "tSourceSeconds": 115
+    },
+    {
+      "frameIndex": 3,
+      "tSourceSeconds": 116
+    },
+    {
+      "frameIndex": 4,
+      "tSourceSeconds": 117
+    },
+    {
+      "frameIndex": 5,
+      "tSourceSeconds": 118
+    },
+    {
+      "frameIndex": 6,
+      "tSourceSeconds": 119
+    },
+    {
+      "frameIndex": 7,
+      "tSourceSeconds": 120
+    },
+    {
+      "frameIndex": 8,
+      "tSourceSeconds": 121
+    },
+    {
+      "frameIndex": 9,
+      "tSourceSeconds": 122
+    },
+    {
+      "frameIndex": 10,
+      "tSourceSeconds": 123
+    },
+    {
+      "frameIndex": 11,
+      "tSourceSeconds": 124
+    },
+    {
+      "frameIndex": 12,
+      "tSourceSeconds": 125
+    },
+    {
+      "frameIndex": 13,
+      "tSourceSeconds": 126
+    },
+    {
+      "frameIndex": 14,
+      "tSourceSeconds": 127
+    },
+    {
+      "frameIndex": 15,
+      "tSourceSeconds": 128
+    },
+    {
+      "frameIndex": 16,
+      "tSourceSeconds": 129
+    },
+    {
+      "frameIndex": 17,
+      "tSourceSeconds": 130
+    },
+    {
+      "frameIndex": 18,
+      "tSourceSeconds": 131
+    },
+    {
+      "frameIndex": 19,
+      "tSourceSeconds": 132
+    },
+    {
+      "frameIndex": 20,
+      "tSourceSeconds": 133
+    },
+    {
+      "frameIndex": 21,
+      "tSourceSeconds": 134
+    },
+    {
+      "frameIndex": 22,
+      "tSourceSeconds": 135
+    },
+    {
+      "frameIndex": 23,
+      "tSourceSeconds": 136
+    },
+    {
+      "frameIndex": 24,
+      "tSourceSeconds": 137
+    },
+    {
+      "frameIndex": 25,
+      "tSourceSeconds": 138
+    },
+    {
+      "frameIndex": 26,
+      "tSourceSeconds": 139
+    },
+    {
+      "frameIndex": 27,
+      "tSourceSeconds": 140
+    },
+    {
+      "frameIndex": 28,
+      "tSourceSeconds": 141
+    },
+    {
+      "frameIndex": 29,
+      "tSourceSeconds": 142
+    },
+    {
+      "frameIndex": 30,
+      "tSourceSeconds": 143
+    },
+    {
+      "frameIndex": 31,
+      "tSourceSeconds": 144
+    },
+    {
+      "frameIndex": 32,
+      "tSourceSeconds": 145
+    },
+    {
+      "frameIndex": 33,
+      "tSourceSeconds": 146
+    },
+    {
+      "frameIndex": 34,
+      "tSourceSeconds": 147
+    }
+  ],
+  "manualRead": {
+    "family": "pink-serpentine-and-green-entry",
+    "targetFamilies": [
+      "pink specialty family",
+      "green specialty family"
+    ],
+    "motionRead": "Late challenge starts showing long pink serpentine arcs and separate green specialty entries.",
+    "auroraContract": "Replace repeated boss-led loops with a long serpentine specialty arc; this is the first high-priority late-stage rebuild target."
+  },
+  "measurementLimits": [
+    "Window start/duration is a first-pass human-reviewed segmentation from contact sheets, not an OCR-validated exact title/result boundary.",
+    "This artifact gives media-backed challenge-stage choreography and novelty evidence; it still needs group-by-group frame labels before lifting direct trajectory scoring gates."
+  ]
+}

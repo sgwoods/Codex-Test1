@@ -104,14 +104,17 @@ function spawnChallenge(){
    ? layout.groupLaneTypes[wave]
    : layout.laneTypes;
   const wavePathFamilies=Array.isArray(layout.groupPathFamilies)?layout.groupPathFamilies:null;
+  const waveVisualFamilies=Array.isArray(layout.groupVisualFamilies)?layout.groupVisualFamilies:null;
   const t=waveLaneTypes[lane]||layout.laneTypes[lane]||'bee';
   const side=lane<layout.enemiesPerGroup/2?-1:1,slot=lane%(layout.enemiesPerGroup/2),row=slot<2?0:1;
   const pathFamily=wavePathFamilies?.[wave]||layout.pathFamily||'classic-lane-wave';
+  const challengeFamily=waveVisualFamilies?.[wave]||layout.visualFamily||profile.challengeFamily;
+  const waveProfile=challengeFamily===profile.challengeFamily?profile:Object.assign({},profile,{challengeFamily});
   S.e.push(makePackChallengeEnemyState({
    gamePack:currentGamePack(),
    type:t,
    lane,
-   profile,
+   profile:waveProfile,
    x:side>0?PLAY_W+layout.spawnOffsetX:-layout.spawnOffsetX,
    y:34+wave*layout.waveSpacingY+row*layout.rowSpacingY,
    wave,

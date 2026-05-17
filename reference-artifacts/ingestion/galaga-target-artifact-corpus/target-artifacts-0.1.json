@@ -95,6 +95,38 @@
       "confidence": "medium-high"
     },
     {
+      "id": "user-supplied-galaga-challenge-compilations",
+      "title": "User-supplied Galaga challenge-stage compilation videos",
+      "sourceType": "local-user-supplied-gameplay-video",
+      "sourceUrls": [],
+      "targetUse": "Concrete challenge-stage choreography reference for all eight visible Galaga challenge stages, including late-stage alien-family novelty, five-group score exhibitions, perfect-result cadence, and non-combat safety.",
+      "coverageAxes": [
+        "challenge-stage entry",
+        "late challenge-stage progression",
+        "later challenge stages",
+        "trajectory",
+        "special enemy appearance",
+        "perfect-bonus learning",
+        "contact sheets",
+        "frame indexes"
+      ],
+      "ingestionStatus": "partial",
+      "localEvidence": [
+        "GALAGA_CHALLENGE_VIDEO_REFERENCE_ANALYSIS.md",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/overview-5s-contact-sheet.jpg",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-1fps.jpg",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/contact-sheet-1fps.jpg",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/contact-sheet-1fps.jpg",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/contact-sheet-1fps.jpg",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-1fps.jpg"
+      ],
+      "currentUse": "All eight challenge stages now have first-pass media-backed windows and Aurora implementation contracts. Late challenges 4-8 are no longer empty evidence gaps, but they still need five-group frame labels before direct trajectory scoring can be trusted.",
+      "missingWork": "Promote five-group labels for each challenge window: first visible time, entry side, path family, scoreable upper-band interval, exit side, alien family, and perfect-bonus opportunity.",
+      "priority": "critical",
+      "confidence": "medium"
+    },
+    {
       "id": "gamesdatabase-galaga-screens-and-rules",
       "title": "GamesDatabase Galaga page",
       "sourceType": "reference-page",
@@ -285,7 +317,8 @@
       "status": "partially-ingested",
       "currentEvidence": [
         "challenge-1-arrival",
-        "challenge-1-late-wave"
+        "challenge-1-late-wave",
+        "challenge-01-classic-column-lesson"
       ],
       "nextNeed": "Convert existing windows into fuller five-group trajectory labels and build Aurora Stage 3 against those exact group contracts."
     },
@@ -294,7 +327,8 @@
       "stageMarker": 7,
       "status": "partially-ingested",
       "currentEvidence": [
-        "challenge-2-arrival"
+        "challenge-2-arrival",
+        "challenge-02-cross-and-column"
       ],
       "nextNeed": "Add late-wave/results windows and group 2-5 labels."
     },
@@ -303,44 +337,55 @@
       "stageMarker": 11,
       "status": "partially-ingested",
       "currentEvidence": [
-        "challenge-3-arrival"
+        "challenge-3-arrival",
+        "challenge-03-blue-hook-and-green-novelty"
       ],
       "nextNeed": "Add late-wave/results windows and map specialty alien novelty explicitly."
     },
     {
       "challengeNumber": 4,
       "stageMarker": 15,
-      "status": "not-ingested",
-      "currentEvidence": [],
-      "nextNeed": "Acquire and label a full reference challenge window; do not reuse Challenge 3 as the best target except as a temporary diagnostic."
+      "status": "partially-ingested",
+      "currentEvidence": [
+        "challenge-04-pink-serpentine"
+      ],
+      "nextNeed": "Promote five-group labels for the pink serpentine reference and rebuild Aurora Stage 15 around a distinct late-stage specialty arc."
     },
     {
       "challengeNumber": 5,
       "stageMarker": 19,
-      "status": "not-ingested",
-      "currentEvidence": [],
-      "nextNeed": "Acquire and label a full reference challenge window with mosquito/specialty-family novelty."
+      "status": "partially-ingested",
+      "currentEvidence": [
+        "challenge-05-pink-and-green-cascade"
+      ],
+      "nextNeed": "Promote five-group labels for the pink/green cascade reference and align Aurora's mosquito/specialty-family novelty to the visible target."
     },
     {
       "challengeNumber": 6,
       "stageMarker": 23,
-      "status": "not-ingested",
-      "currentEvidence": [],
-      "nextNeed": "Acquire and label full reference challenge window for late-stage progression."
+      "status": "partially-ingested",
+      "currentEvidence": [
+        "challenge-06-green-ladder-split"
+      ],
+      "nextNeed": "Promote five-group labels for the green ladder/split reference and add runtime probes for staggered group spacing."
     },
     {
       "challengeNumber": 7,
       "stageMarker": 27,
-      "status": "not-ingested",
-      "currentEvidence": [],
-      "nextNeed": "Acquire and label full reference challenge window for late-stage progression."
+      "status": "partially-ingested",
+      "currentEvidence": [
+        "challenge-07-yellow-diagonal-fan"
+      ],
+      "nextNeed": "Promote five-group labels for the yellow diagonal fan reference and use it as the strongest late-stage visual novelty target."
     },
     {
       "challengeNumber": 8,
       "stageMarker": 31,
-      "status": "not-ingested",
-      "currentEvidence": [],
-      "nextNeed": "Acquire and label full reference challenge window and special blue-spaceship novelty."
+      "status": "partially-ingested",
+      "currentEvidence": [
+        "challenge-08-blue-purple-finale"
+      ],
+      "nextNeed": "Promote five-group labels for the blue/purple finale reference and use it as the late-loop capstone contract."
     }
   ]
 }

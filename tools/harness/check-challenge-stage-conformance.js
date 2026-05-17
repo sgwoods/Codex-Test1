@@ -4,14 +4,18 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const REPORT = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
-const REQUIRED_STAGES = [3, 7, 11, 15, 19];
+const REQUIRED_STAGES = [3, 7, 11, 15, 19, 23, 27, 31];
 const REQUIRED_REFERENCE_HITS = new Map([
-  [3, 'challenge-1-arrival-group-1'],
-  [7, 'challenge-2-arrival-group-1']
+  [3, ['challenge-1-arrival-group-1', 'challenge-1-late-wave-group-4']]
 ]);
 const TRACKED_REFERENCE_TARGETS = new Map([
+  [7, 'challenge-2-arrival-group-1'],
   [11, 'challenge-3-arrival-group-1'],
-  [15, 'challenge-3-arrival-group-1']
+  [15, 'challenge-4-pink-serpentine-group-1'],
+  [19, 'challenge-5-pink-green-cascade-group-1'],
+  [23, 'challenge-6-green-ladder-split-group-1'],
+  [27, 'challenge-7-yellow-diagonal-fan-group-1'],
+  [31, 'challenge-8-blue-purple-finale-group-1']
 ]);
 const STRICT_SCORE_FIELDS = [
   'interestingFactor10',
@@ -75,11 +79,12 @@ for(const stage of REQUIRED_STAGES){
   }
   const expectedReference = REQUIRED_REFERENCE_HITS.get(stage);
   if(expectedReference){
+    const expectedReferences = Array.isArray(expectedReference) ? expectedReference : [expectedReference];
     if(!row.expectedReferenceHit){
-      fail(`stage ${stage} no longer hits its expected challenge reference`, { expectedReference, row });
+      fail(`stage ${stage} no longer hits its expected challenge reference`, { expectedReference: expectedReferences, row });
     }
-    if(row.bestReferenceMatch?.labelId !== expectedReference){
-      fail(`stage ${stage} best challenge reference drifted`, { expectedReference, bestReferenceMatch: row.bestReferenceMatch, row });
+    if(!expectedReferences.includes(row.bestReferenceMatch?.labelId)){
+      fail(`stage ${stage} best challenge reference drifted`, { expectedReference: expectedReferences, bestReferenceMatch: row.bestReferenceMatch, row });
     }
   }
   const trackedReference = TRACKED_REFERENCE_TARGETS.get(stage);

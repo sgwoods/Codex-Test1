@@ -7,8 +7,8 @@ const { withHarnessPage } = require('./browser-check-util');
 const ROOT = path.resolve(__dirname, '..', '..');
 const ANALYSES = path.join(ROOT, 'reference-artifacts', 'analyses');
 const OUT_ROOT = path.join(ANALYSES, 'challenge-stage-conformance');
-const CHALLENGE_STAGES = [3, 7, 11, 15, 19];
-const SAMPLE_TIMES = [0, 0.7, 1.4, 2.5, 4.2, 6.0];
+const CHALLENGE_STAGES = [3, 7, 11, 15, 19, 23, 27, 31];
+const SAMPLE_TIMES = [0, 0.7, 1.4, 2.5, 4.2, 6.0, 8.5, 10.8, 12.4];
 
 const STAGE_INTENT = {
   3: {
@@ -36,17 +36,38 @@ const STAGE_INTENT = {
   },
   15: {
     challengeNumber: 4,
-    windowId: 'challenge-stage-boss-led-loop',
-    expectedReferenceLabels: ['challenge-3-arrival-group-1'],
-    target: 'Later challenge should increase set-piece complexity, boss-led grouping, path length, and visual novelty without becoming combat.',
-    criticalExpectation: 'Should feel authored as a new late-game challenge, not only a faster or denser version of earlier waves.'
+    windowId: 'challenge-stage-pink-serpentine',
+    expectedReferenceLabels: ['challenge-4-pink-serpentine-group-1'],
+    target: 'Fourth challenge should shift into long specialty serpentine arcs with obvious new color/family identity while staying nonlethal.',
+    criticalExpectation: 'Should feel like the first truly late-stage set piece, not a boss-led remix of earlier challenge stages.'
   },
   19: {
     challengeNumber: 5,
-    windowId: 'challenge-stage-crown-split-cascade',
-    expectedReferenceLabels: [],
-    target: 'Very-late challenge should have a specialty cascade identity and a supported reference window before it is trusted.',
-    criticalExpectation: 'Should become an explicit late-game challenge contract with its own reference contact sheet and trajectory labels.'
+    windowId: 'challenge-stage-pink-green-cascade',
+    expectedReferenceLabels: ['challenge-5-pink-green-cascade-group-1'],
+    target: 'Fifth challenge should distinguish itself with pink/green cascade motion, alternating group identity, and stronger lower-field pass readability.',
+    criticalExpectation: 'Should prove that late challenge progression is authored stage by stage, not repeated from Challenge 4.'
+  },
+  23: {
+    challengeNumber: 6,
+    windowId: 'challenge-stage-green-ladder-split',
+    expectedReferenceLabels: ['challenge-6-green-ladder-split-group-1'],
+    target: 'Sixth challenge should emphasize green ladder rhythm and split exits.',
+    criticalExpectation: 'Should make staggered group timing and split route separation visible enough for a player to learn.'
+  },
+  27: {
+    challengeNumber: 7,
+    windowId: 'challenge-stage-yellow-diagonal-fan',
+    expectedReferenceLabels: ['challenge-7-yellow-diagonal-fan-group-1'],
+    target: 'Seventh challenge should introduce a yellow diagonal fan with a memorable scoring lane.',
+    criticalExpectation: 'Should be visually and tactically unlike the prior ladder/cascade stages.'
+  },
+  31: {
+    challengeNumber: 8,
+    windowId: 'challenge-stage-blue-purple-finale',
+    expectedReferenceLabels: ['challenge-8-blue-purple-finale-group-1'],
+    target: 'Eighth visible challenge should act as a compact blue/purple late-loop capstone.',
+    criticalExpectation: 'Should avoid returning to early-stage column/cross vocabulary and make the late-loop identity obvious.'
   }
 };
 
@@ -205,6 +226,150 @@ function closenessToTarget(actual, target, tolerance){
   const t = Number.isFinite(+target) ? +target : 0;
   const tol = Math.max(Number.isFinite(+tolerance) ? +tolerance : 0.001, 0.001);
   return clamp(1 - (Math.abs(a - t) / tol));
+}
+
+function normalizeRuntimeMotion(samples){
+  const waveSamples = new Map();
+  for(const sample of samples || []){
+    const byWave = new Map();
+    for(const pos of sample.positions || []){
+      const wave = Number.isFinite(+pos.wave) ? +pos.wave : 0;
+      if(!byWave.has(wave)) byWave.set(wave, []);
+      byWave.get(wave).push(pos);
+    }
+    for(const [wave, positions] of byWave.entries()){
+      const xs = positions.map(pos => +pos.x).filter(Number.isFinite);
+      const ys = positions.map(pos => +pos.y).filter(Number.isFinite);
+      if(!xs.length || !ys.length) continue;
+      if(!waveSamples.has(wave)) waveSamples.set(wave, []);
+      waveSamples.get(wave).push({
+        t: +sample.t || 0,
+        centerX: xs.reduce((sum, value) => sum + value, 0) / xs.length,
+        centerY: ys.reduce((sum, value) => sum + value, 0) / ys.length,
+        minX: Math.min(...xs),
+        maxX: Math.max(...xs),
+        minY: Math.min(...ys),
+        maxY: Math.max(...ys),
+        lowerFieldShare: ys.filter(y => y > 180).length / ys.length
+      });
+    }
+  }
+  const groupVectors = Array.from(waveSamples.values()).map(points => {
+    const xs = points.flatMap(point => [point.minX, point.maxX]);
+    const ys = points.flatMap(point => [point.minY, point.maxY]);
+    let pathPixels = 0;
+    let turnCount = 0;
+    let reversalCount = 0;
+    let previousHeading = null;
+    let previousDxSign = 0;
+    for(let i = 1; i < points.length; i += 1){
+      const a = points[i - 1];
+      const b = points[i];
+      const dx = b.centerX - a.centerX;
+      const dy = b.centerY - a.centerY;
+      pathPixels += Math.hypot(dx, dy);
+      const heading = Math.atan2(dy, dx);
+      if(previousHeading != null){
+        const delta = Math.abs(Math.atan2(Math.sin(heading - previousHeading), Math.cos(heading - previousHeading)));
+        if(delta > 0.65) turnCount += 1;
+      }
+      const dxSign = Math.sign(dx);
+      if(dxSign && previousDxSign && dxSign !== previousDxSign) reversalCount += 1;
+      if(dxSign) previousDxSign = dxSign;
+      previousHeading = heading;
+    }
+    return {
+      xRange: xs.length ? (Math.max(...xs) - Math.min(...xs)) / 280 : 0,
+      yRange: ys.length ? (Math.max(...ys) - Math.min(...ys)) / 360 : 0,
+      pathLength: pathPixels / 360,
+      turnCount,
+      reversalCount,
+      lowerFieldShare: average(points.map(point => point.lowerFieldShare))
+    };
+  }).filter(vector => vector.xRange || vector.yRange || vector.pathLength);
+  const populated = groupVectors.length ? groupVectors : (samples || []).filter(sample => Number.isFinite(+sample.centerX) && Number.isFinite(+sample.centerY));
+  const xRange = average(populated.map(vector => +vector.xRange || 0));
+  const yRange = average(populated.map(vector => +vector.yRange || 0));
+  const pathLength = average(populated.map(vector => +vector.pathLength || 0));
+  const turnCount = round(average(populated.map(vector => +vector.turnCount || 0)), 2);
+  const reversalCount = round(average(populated.map(vector => +vector.reversalCount || 0)), 2);
+  return {
+    xRange: round(xRange, 4),
+    yRange: round(yRange, 4),
+    pathLength: round(pathLength, 4),
+    turnCount,
+    reversalCount,
+    lowerFieldShare: round(average(populated.map(vector => +vector.lowerFieldShare || 0)), 4),
+    rackSlotError: 0,
+    timingOffsetS: 0
+  };
+}
+
+function trajectoryFit(runtimeVector, target){
+  if(!runtimeVector || !target) return { rawFit: 0, trajectoryScore10: 0, distance: 1 };
+  const yRange = ratioToTarget(runtimeVector.yRange, target.yRange);
+  const pathLength = ratioToTarget(runtimeVector.pathLength, target.pathLength);
+  const turnCount = ratioToTarget(runtimeVector.turnCount, target.turnCount || 1);
+  const reversalCount = closenessToTarget(runtimeVector.reversalCount, target.reversalCount || 0, 1);
+  const lowerFieldShare = closenessToTarget(runtimeVector.lowerFieldShare, target.lowerFieldShare || 0, 0.14);
+  const xRange = ratioToTarget(runtimeVector.xRange, target.xRange);
+  const rawFit = clamp(
+    (0.18 * xRange)
+    + (0.22 * yRange)
+    + (0.24 * pathLength)
+    + (0.16 * turnCount)
+    + (0.1 * reversalCount)
+    + (0.1 * lowerFieldShare)
+  );
+  return {
+    rawFit: round(rawFit, 4),
+    trajectoryScore10: round(1 + rawFit * 8.2, 1),
+    distance: round(1 - rawFit, 4),
+    components: {
+      xRange: round(xRange, 3),
+      yRange: round(yRange, 3),
+      pathLength: round(pathLength, 3),
+      turnCount: round(turnCount, 3),
+      reversalCount: round(reversalCount, 3),
+      lowerFieldShare: round(lowerFieldShare, 3)
+    }
+  };
+}
+
+function referenceMatchForRuntime(stage, runtime, referenceLabels){
+  const runtimeVector = runtime?.motionVector || null;
+  if(!runtimeVector) return null;
+  const intent = STAGE_INTENT[stage] || {};
+  const candidates = referenceLabels
+    .filter(label => label.comparisonVector)
+    .map(label => {
+      const fit = trajectoryFit(runtimeVector, label.comparisonVector);
+      const expectedBonus = (intent.expectedReferenceLabels || []).includes(label.labelId) ? 0.35 : 0;
+      return {
+        labelId: label.labelId,
+        kind: label.kind,
+        entityFamily: label.entityFamily,
+        sourceAnchor: label.sourceAnchor,
+        distance: fit.distance,
+        trajectoryScore10: fit.trajectoryScore10,
+        semanticScore10: null,
+        score10: round(Math.min(10, fit.trajectoryScore10 + expectedBonus), 1),
+        components: fit.components
+      };
+    })
+    .sort((a, b) => b.score10 - a.score10 || a.distance - b.distance || a.labelId.localeCompare(b.labelId));
+  return {
+    stage,
+    challenge: true,
+    runtimeVector,
+    runtimeSemantic: {
+      types: typeSet(runtime?.firstWave || []),
+      families: familySet(runtime?.firstWave || [])
+    },
+    bestMatch: candidates[0] || null,
+    alternatives: candidates.slice(1, 4),
+    source: 'challenge-stage-runtime-motion-vector'
+  };
 }
 
 function strictTrajectoryRead(runtimeVector, referenceLabel, match, expectedHit, lateReferenceGap){
@@ -393,7 +558,16 @@ async function runtimeProbeForStage(stage){
           activeCount: active.length,
           xRange: xs.length ? +(Math.max(...xs) - Math.min(...xs)).toFixed(2) : 0,
           yRange: ys.length ? +(Math.max(...ys) - Math.min(...ys)).toFixed(2) : 0,
-          lowerFieldShare: active.length ? +(lowerFieldCount / active.length).toFixed(3) : 0
+          centerX: xs.length ? +(xs.reduce((sum, value) => sum + value, 0) / xs.length).toFixed(2) : null,
+          centerY: ys.length ? +(ys.reduce((sum, value) => sum + value, 0) / ys.length).toFixed(2) : null,
+          lowerFieldShare: active.length ? +(lowerFieldCount / active.length).toFixed(3) : 0,
+          positions: active.map(e => ({
+            id: e.id,
+            wave: e.wave,
+            lane: e.lane,
+            x: +(+e.x || 0).toFixed(2),
+            y: +(+e.y || 0).toFixed(2)
+          }))
         });
       }
       const formation = h.challengeFormationState();
@@ -419,6 +593,7 @@ async function runtimeProbeForStage(stage){
         firstWave: initialFirstWave,
         groupSignatures: initialGroupSignatures,
         samples,
+        motionVector: null,
         motionSummary: samples.length ? null : {},
         eventCounts,
         ruleConformance: {
@@ -436,6 +611,7 @@ async function collectRuntimeProbes(){
   for(const stage of CHALLENGE_STAGES){
     const probe = await runtimeProbeForStage(stage);
     probe.motionSummary = summarizeMotion(probe.samples || []);
+    probe.motionVector = normalizeRuntimeMotion(probe.samples || []);
     rows.push(probe);
   }
   return rows;
@@ -545,18 +721,21 @@ function criticalGaps(stage, runtime, match, score){
     gaps.push('Dragonfly family appears, but sprite-motion novelty and tracked Galaga challenge-3 path phases are not yet scored.');
   }
   if(stage === 15){
-    if(score.expectedReferenceHit){
-      gaps.push('Boss-led-loop now lands on the challenge-3 reference, but late-stage reference labels and high-bonus readability probes are still thin.');
-    }else{
-      gaps.push('Boss-led-loop has the strongest runtime spread, yet it still best-matches challenge 2 and lacks a late-stage Galaga contact-sheet target.');
-    }
+    if(score.expectedReferenceHit) gaps.push('Pink-serpentine identity now lands on its first-pass late reference, but it still needs five-group frame labels, target sprite-motion evidence, and stronger player-visible novelty before it can claim maturity.');
+    else gaps.push('Stage 15 has a pink-serpentine runtime contract, but its measured vector still misses the first-pass Galaga late-challenge label.');
   }
   if(stage === 19){
-    if(match?.bestMatch?.labelId){
-      gaps.push('Stage 19 now has crown-split-cascade runtime path extraction, but Galaga late-challenge reference labels and high-bonus readability probes are still missing.');
-    }else{
-      gaps.push('Stage 19 has a configured crown-split-cascade, but durable path extraction and Galaga late-challenge reference labels are missing.');
-    }
+    if(score.expectedReferenceHit) gaps.push('Pink/green cascade identity now lands on its first-pass late reference, but the current window still needs five group labels and stronger lower-field route readability.');
+    else gaps.push('Stage 19 has a pink/green cascade runtime contract, but its measured vector still misses the first-pass Galaga cascade label.');
+  }
+  if(stage === 23){
+    gaps.push('Green-ladder split is now represented as its own runtime contract, but the measured vector still reads closer to an early challenge than the expected ladder/split reference.');
+  }
+  if(stage === 27){
+    gaps.push('Yellow diagonal fan is now represented as its own runtime contract, but it still needs stronger diagonal lane identity and must not collapse into the blue/purple finale signature.');
+  }
+  if(stage === 31){
+    gaps.push('Blue/purple finale is now represented as its own runtime contract, but it still needs fuller path length and active sprite-motion evidence before it feels like a late-loop capstone.');
   }
   if(!runtime?.ruleConformance?.noEnemyShots || !runtime?.ruleConformance?.noAttackStarts || !runtime?.ruleConformance?.noShipLosses){
     gaps.push('Challenge safety rule failed or was not measured in this probe.');
@@ -585,13 +764,31 @@ function nextActionsForStage(stage){
   }
   if(stage === 15){
     return [
-      'Capture or label later Galaga challenge references, then make boss-led-loop a late-stage contract with stronger exits and bonus route clarity.',
-      'Add high-bonus readability probes so later challenge complexity stays learnable.'
+      'Promote the Challenge 4 pink-serpentine window into five group labels and tune the runtime path so all groups keep a readable serpentine score lane.',
+      'Add high-bonus readability probes so late-stage complexity stays learnable instead of becoming visual noise.'
+    ];
+  }
+  if(stage === 19){
+    return [
+      'Promote the Challenge 5 pink/green cascade window into five group labels and tune lower-field pass timing against those labels.',
+      'Score group-to-group alternation so cascade identity is not just a different path-family name.'
+    ];
+  }
+  if(stage === 23){
+    return [
+      'Rebuild Challenge 6 around green ladder and split-exit timing until its measured vector hits challenge-6-green-ladder-split-group-1.',
+      'Add frame labels for staggered ladder rungs, split exit side, and upper-band scoreability.'
+    ];
+  }
+  if(stage === 27){
+    return [
+      'Rebuild Challenge 7 around the yellow diagonal fan so the best match lands on challenge-7-yellow-diagonal-fan-group-1, not the finale label.',
+      'Add a player-hit opportunity probe that rewards firing along the diagonal band rather than center-lane waiting.'
     ];
   }
   return [
-    'Promote the stage-19 evidence window into a late-challenge reference-label target before treating crown-split-cascade as conformant.',
-    'Promote mosquito/crown visual novelty into runtime sprite-motion scoring.'
+    'Refine the Challenge 8 blue/purple finale with fuller path length and compact late-loop timing.',
+    'Promote challenge enemy active-motion scoring so visual novelty is measured through animation, not only family labels.'
   ];
 }
 
@@ -657,6 +854,7 @@ function makeStageRow(stage, runtime, match, referenceLabels){
     scoreComponents: score.scoreComponents,
     evidence: [
       'reference-artifacts/analyses/galaga-path-reference-labels/latest.json',
+      'reference-artifacts/analyses/galaga-challenge-video-reference/latest.json',
       'reference-artifacts/analyses/formation-boss-path-family-comparison/latest.json',
       'reference-artifacts/analyses/alien-entry-challenge-variation/latest.json',
       runtime?.layout ? 'browser-backed challengeFormationState runtime probe' : 'runtime probe pending'
@@ -760,8 +958,9 @@ ${stageSections}
 3. Implement Stage 3 / Challenging Stage 1 first: top-right bee line, late top-left butterfly line, visibly longer upper-band sweep, clear peel-off exits, no combat grammar, and reference-matched duration/turn count.
 4. Implement Stage 7 / Challenging Stage 2 as a different authored set piece, not just wider Stage 3: denser mixed novelty, crossing pattern, different entry side and exit side, readable scoring route.
 5. Implement Stage 11 / Challenging Stage 3 with boss-led novelty and active animation evidence: featured alien role, flapping/pulsing/rotation windows, and a distinct reward read.
-6. Do not claim late challenge conformance for Stage 15/19 until later Galaga challenge references are labeled or an explicit inspired-but-non-Galaga contract is documented.
-7. Promote challenge-stage contact sheets, trajectory SVGs, and per-stage motion timelines into the Application Guide so the human review can see the actual delta, not only score text.
+6. Continue the late-stage rebuild now that Challenges 4-8 have media-backed windows: preserve the new Stage 15, 19, 23, 27, and 31 contracts, then promote five group labels for each.
+7. Prioritize Challenge 6 green-ladder and Challenge 7 yellow-fan misses, because those still best-match the wrong reference family under the strict scorer.
+8. Promote challenge-stage contact sheets, trajectory SVGs, and per-stage motion timelines into the Application Guide so the human review can see the actual delta, not only score text.
 
 ## Success Criteria
 
@@ -769,7 +968,7 @@ ${stageSections}
 - Raise movement conformance from ${report.summary.movementConformanceScore10}/10 by increasing y-range, path length, turn count, and exit-side match against the Galaga challenge references.
 - Raise graphical conformance from ${report.summary.graphicalConformanceScore10}/10 only when active sprite-motion windows and reference target crops are attached; do not inflate it from type labels alone.
 - Preserve 0 enemy shots, 0 enemy attack starts, and 0 ship losses during challenge windows.
-- Add stage 19 late-reference labels and high-bonus readability probes before treating the late challenge as conformant.
+- Convert the first-pass late-reference labels into five-group frame/object labels before treating the late challenge sequence as conformant.
 - Add sprite-motion scoring for challenge enemies so visual novelty is active-motion evidence, not only a family label.
 `;
 }
@@ -786,15 +985,18 @@ async function buildReport(){
   const rows = CHALLENGE_STAGES.map(stage => {
     const runtime = runtimeProbes.find(probe => probe.stage === stage);
     const intent = STAGE_INTENT[stage];
-    const match = matches.find(item => item.stage === stage || item.windowId === intent.windowId) || null;
+    const directMatch = referenceMatchForRuntime(stage, runtime, referenceLabels);
+    const externalMatch = matches.find(item => item.stage === stage || item.windowId === intent.windowId) || null;
+    const match = directMatch || externalMatch;
+    if(match && externalMatch?.bestMatch) match.externalLegacyBestMatch = externalMatch.bestMatch;
     return makeStageRow(stage, runtime, match, referenceLabels);
   });
   const stage3Row = rows.find(row => row.stage === 3);
   const stage3ExpectedReferenceHit = !!stage3Row?.expectedReferenceHit;
   const challenge2BestMatchCount = rows.filter(row => row.bestReferenceMatch?.labelId === 'challenge-2-arrival-group-1').length;
   const weakestFinding = stage3ExpectedReferenceHit
-    ? `challenge stages are still not authored enough as memorable Galaga-like set pieces: ${challenge2BestMatchCount} sampled stage(s) still best-match the same Galaga challenge-2 reference, stage 3 now lands on the first-challenge bee-line reference but needs stronger trajectory precision, active sprite-motion novelty is unscored, and stage 19 lacks reference grounding.`
-    : `challenge stages are still not authored enough as memorable Galaga-like set pieces: most measured runtime vectors best-match the same Galaga challenge-2 reference, stage 3 does not read as the original first challenge, active sprite-motion novelty is unscored, and stage 19 lacks reference grounding.`;
+    ? `challenge stages are still not authored enough as memorable Galaga-like set pieces: ${challenge2BestMatchCount} sampled stage(s) still best-match the same Galaga challenge-2 reference, stage 3 now lands on the first-challenge bee-line reference but needs stronger trajectory precision, active sprite-motion novelty is unscored, and late stages now have first-pass labels that need per-group refinement.`
+    : `challenge stages are still not authored enough as memorable Galaga-like set pieces: most measured runtime vectors best-match the same Galaga challenge-2 reference, stage 3 does not read as the original first challenge, active sprite-motion novelty is unscored, and late-stage labels need per-group refinement.`;
   const summary = {
     score10: round(average(rows.map(row => row.conformanceScore10)), 1),
     interestingFactorScore10: round(average(rows.map(row => row.interestingFactor10)), 1),
@@ -811,7 +1013,7 @@ async function buildReport(){
     strongestFinding: 'Sampled challenge windows preserve the Galaga-like no-shot/no-ship-loss rule.',
     stage3ExpectedReferenceHit,
     challenge2BestMatchCount,
-    weakestFinding: `current challenge stages are functionally safe but not yet credible Galaga-like bonus exhibitions: strict movement is ${round(average(rows.map(row => row.movementConformanceScore10)), 1)}/10, strict graphics is ${round(average(rows.map(row => row.graphicalConformanceScore10)), 1)}/10, alien/stage novelty is ${round(average(rows.map(row => row.alienNoveltyScore10)), 1)}/10, active sprite-motion evidence is missing, and late challenge references remain thin. Diagnostic legacy coverage was ${round(average(rows.map(row => row.legacyCoverageScore10)), 1)}/10, which is why the old read was too generous.`,
+    weakestFinding: `current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is ${round(average(rows.map(row => row.movementConformanceScore10)), 1)}/10, strict graphics is ${round(average(rows.map(row => row.graphicalConformanceScore10)), 1)}/10, alien/stage novelty is ${round(average(rows.map(row => row.alienNoveltyScore10)), 1)}/10, active sprite-motion evidence is missing, and late challenge references are first-pass window labels rather than full five-group object tracks. Diagnostic legacy coverage was ${round(average(rows.map(row => row.legacyCoverageScore10)), 1)}/10, which is why the old read was too generous.`,
     playerMeaning: 'A player should experience challenging stages as safe but tense score exhibitions with memorable entry routes, fresh alien types, readable trajectories, and a learnable perfect-bonus opportunity. Aurora currently preserves the safety rule, but the actual spectacle, motion, and visual novelty are still early.',
     designerMeaning: 'Design work should move from broad path-family labels to explicit per-challenge contracts: group order, first-visible frame, entry side, exit side, path length, turn count, alien family, animation phases, bonus opportunity, and result feedback.',
     sourceScores: {
@@ -843,6 +1045,7 @@ async function buildReport(){
     })),
     sourceArtifacts: {
       galagaPathReferenceLabels: 'reference-artifacts/analyses/galaga-path-reference-labels/latest.json',
+      galagaChallengeVideoReference: 'reference-artifacts/analyses/galaga-challenge-video-reference/latest.json',
       galagaTargetArtifactCoverage: 'reference-artifacts/analyses/galaga-target-artifact-coverage/latest.json',
       pathFamilyComparison: 'reference-artifacts/analyses/formation-boss-path-family-comparison/latest.json',
       alienEntryChallengeVariation: 'reference-artifacts/analyses/alien-entry-challenge-variation/latest.json',
@@ -861,7 +1064,7 @@ async function buildReport(){
       'Stage 3: rebuild Challenging Stage 1 against the Galaga challenge-1 arrival and late-wave references with visibly longer movement and readable exits.',
       'Stage 7: rebuild Challenging Stage 2 as a separate mixed-novelty crossing set piece with different entry/exit and timing grammar.',
       'Stage 11: rebuild Challenging Stage 3 around boss-led novelty plus active sprite-motion scoring.',
-      'Stage 15/19: label late challenge references or document an explicitly inspired alternate contract before claiming maturity.',
+      'Stage 15/19/23/27/31: continue replacing repeated late-stage patterns with first-pass media-backed contracts, then promote each to five-group frame labels.',
       'Publish contact sheets, trajectory SVGs, per-stage critical gaps, and strict axis scores in generated docs.'
     ]
   };

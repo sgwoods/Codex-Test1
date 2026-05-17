@@ -1,0 +1,365 @@
+{
+  "generatedAt": "2026-05-17T16:31:36.471Z",
+  "commit": "e56c602d",
+  "artifactType": "galaga-challenge-video-reference-analysis",
+  "schema": "galaga-challenge-video-reference-analysis-0.1",
+  "summary": {
+    "status": "late-challenge-media-windows-ready-for-labeling",
+    "primarySourceId": "challenge-all2-single-ship-all-perfects",
+    "secondarySourceId": "challenging-stage-compilation",
+    "sourceCount": 2,
+    "challengeWindowCount": 8,
+    "mediaBackedLateChallengeCount": 5,
+    "challengeStageReadiness10": 4.5,
+    "whatTheVideosShow": [
+      "The challenge stages are non-combat score exhibitions: no enemy bullets, no ship-loss pressure, and repeated 40-hit perfect result screens.",
+      "Each stage is built from visible group arrivals, not static appearances; the player reads routes and learns where the scoring lane will be.",
+      "Progression adds new visual families and motion grammar: vertical columns, side hooks, crossing groups, serpentine arcs, green ladders, yellow diagonal fans, and blue/purple late clusters.",
+      "The user-facing conformance gap in Aurora is mostly spectacle, route memory, and alien novelty, not the no-shot/no-kill safety rule."
+    ],
+    "measurementLimits": [
+      "Window segmentation is first-pass and contact-sheet reviewed; it should be refined by OCR or manual per-group labels before direct frame scoring.",
+      "The primary source is a compilation of challenge stages, not a full normal-stage playthrough; it is excellent for challenge choreography but not normal-stage pacing.",
+      "Raw source videos are not committed. The repo stores derived contact sheets, hashes, window metadata, and manual reads."
+    ]
+  },
+  "sources": [
+    {
+      "id": "challenge-all2-single-ship-all-perfects",
+      "role": "primary-all-challenge-window-source",
+      "title": "Galaga challenge stages all perfects single ship",
+      "localPath": "/Users/sgwoods/Downloads/challenge-all2.mp4",
+      "note": "User-supplied local video; raw video remains outside the repo. Derived contact sheets and timing windows are committed for conformance work.",
+      "overviewFps": "1/5",
+      "overviewScale": "160:120",
+      "overviewTile": "9x6",
+      "exists": true,
+      "sha256": "8d29ea711d09d243a2904bf9538981d97fe1fa323e4f920177688fa2b4c4c840",
+      "measuredMedia": {
+        "durationSeconds": 270.512,
+        "sizeBytes": 11899288,
+        "bitRate": 351903,
+        "width": 480,
+        "height": 360,
+        "frameRate": "30/1",
+        "videoDurationSeconds": 270.5,
+        "audioCodecPresent": true
+      },
+      "derivedOverviewContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/overview-5s-contact-sheet.jpg"
+    },
+    {
+      "id": "challenging-stage-compilation",
+      "role": "secondary-cross-check-source",
+      "title": "Galaga challenging-stage compilation",
+      "localPath": "/Users/sgwoods/Downloads/challenging.mp4",
+      "note": "User-supplied local video used as a secondary visual cross-check for stage variety and repeated perfect/result surfaces.",
+      "overviewFps": "1/5",
+      "overviewScale": "140:180",
+      "overviewTile": "9x6",
+      "exists": true,
+      "sha256": "102678b6283a640a2fe9ff998f1b07ef4f222eabe49e1ff2afe6d4f3c41f1eca",
+      "measuredMedia": {
+        "durationSeconds": 258.763,
+        "sizeBytes": 8527459,
+        "bitRate": 263637,
+        "width": 280,
+        "height": 360,
+        "frameRate": "25/1",
+        "videoDurationSeconds": 258.76,
+        "audioCodecPresent": true
+      },
+      "derivedOverviewContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenging-stage-compilation/overview-5s-contact-sheet.jpg"
+    }
+  ],
+  "primaryWindows": [
+    {
+      "challengeNumber": 1,
+      "stageMarker": 3,
+      "id": "challenge-01-classic-column-lesson",
+      "start": 5,
+      "duration": 31,
+      "family": "classic-column-and-side-arc",
+      "targetFamilies": [
+        "classic bee",
+        "classic butterfly",
+        "boss marker"
+      ],
+      "motionRead": "Introductory challenge teaches vertical columns, simple side hooks, upper-band score windows, and the perfect-result loop.",
+      "auroraContract": "Use as the teaching stage: five readable groups, no combat, clear upper-band score lanes, and a result cadence that lets the player understand 40/40.",
+      "sourceId": "challenge-all2-single-ship-all-perfects",
+      "evidenceStatus": "media-backed-window-unlabeled-groups",
+      "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-1fps.jpg",
+      "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-2fps.jpg",
+      "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/motion-review-4fps.jpg",
+      "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/frame-index.json"
+    },
+    {
+      "challengeNumber": 2,
+      "stageMarker": 7,
+      "id": "challenge-02-cross-and-column",
+      "start": 36,
+      "duration": 39,
+      "family": "red-column-blue-side-cross",
+      "targetFamilies": [
+        "red column family",
+        "blue side family",
+        "green side family"
+      ],
+      "motionRead": "Adds side-crossing and vertical red-column trains; groups arrive through visible route commitments rather than appearing in place.",
+      "auroraContract": "Add distinct side-entry crossing groups and a red-column vertical train; preserve no-shot/no-collision behavior while increasing route memory.",
+      "sourceId": "challenge-all2-single-ship-all-perfects",
+      "evidenceStatus": "media-backed-window-unlabeled-groups",
+      "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/contact-sheet-1fps.jpg",
+      "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/contact-sheet-2fps.jpg",
+      "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/motion-review-4fps.jpg",
+      "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/frame-index.json"
+    },
+    {
+      "challengeNumber": 3,
+      "stageMarker": 11,
+      "id": "challenge-03-blue-hook-and-green-novelty",
+      "start": 75,
+      "duration": 38,
+      "family": "blue-hook-green-novelty",
+      "targetFamilies": [
+        "blue hook family",
+        "green novelty family",
+        "boss marker"
+      ],
+      "motionRead": "Blue side hooks and green novelty shapes make the third challenge visually distinct and less column-like.",
+      "auroraContract": "Introduce a clearly new visual family and hooked side trajectories; score should reward anticipation of the hook, not pure center firing.",
+      "sourceId": "challenge-all2-single-ship-all-perfects",
+      "evidenceStatus": "media-backed-window-unlabeled-groups",
+      "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/contact-sheet-1fps.jpg",
+      "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/contact-sheet-2fps.jpg",
+      "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/motion-review-4fps.jpg",
+      "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/frame-index.json"
+    },
+    {
+      "challengeNumber": 4,
+      "stageMarker": 15,
+      "id": "challenge-04-pink-serpentine",
+      "start": 113,
+      "duration": 35,
+      "family": "pink-serpentine-and-green-entry",
+      "targetFamilies": [
+        "pink specialty family",
+        "green specialty family"
+      ],
+      "motionRead": "Late challenge starts showing long pink serpentine arcs and separate green specialty entries.",
+      "auroraContract": "Replace repeated boss-led loops with a long serpentine specialty arc; this is the first high-priority late-stage rebuild target.",
+      "sourceId": "challenge-all2-single-ship-all-perfects",
+      "evidenceStatus": "media-backed-window-unlabeled-groups",
+      "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-1fps.jpg",
+      "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-2fps.jpg",
+      "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/motion-review-4fps.jpg",
+      "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/frame-index.json"
+    },
+    {
+      "challengeNumber": 5,
+      "stageMarker": 19,
+      "id": "challenge-05-pink-and-green-cascade",
+      "start": 142,
+      "duration": 35,
+      "family": "pink-green-cascade",
+      "targetFamilies": [
+        "pink specialty family",
+        "green ladder family",
+        "boss marker"
+      ],
+      "motionRead": "Continues specialty novelty with pink arcs, green lower-field entries, and a clearer split between group identities.",
+      "auroraContract": "Build as a cascade stage: alternating specialty groups, lower-field pass risk, and stronger color/family novelty than Challenge 4.",
+      "sourceId": "challenge-all2-single-ship-all-perfects",
+      "evidenceStatus": "media-backed-window-unlabeled-groups",
+      "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/contact-sheet-1fps.jpg",
+      "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/contact-sheet-2fps.jpg",
+      "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/motion-review-4fps.jpg",
+      "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/frame-index.json"
+    },
+    {
+      "challengeNumber": 6,
+      "stageMarker": 23,
+      "id": "challenge-06-green-ladder-split",
+      "start": 175,
+      "duration": 38,
+      "family": "green-ladder-and-split",
+      "targetFamilies": [
+        "green ladder family",
+        "blue/purple support family"
+      ],
+      "motionRead": "Green ladder and split entries emphasize staggered group timing and route separation.",
+      "auroraContract": "Use staggered ladders and split exits; measure group spacing and route separation so the stage feels authored, not dense noise.",
+      "sourceId": "challenge-all2-single-ship-all-perfects",
+      "evidenceStatus": "media-backed-window-unlabeled-groups",
+      "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/contact-sheet-1fps.jpg",
+      "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/contact-sheet-2fps.jpg",
+      "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/motion-review-4fps.jpg",
+      "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/frame-index.json"
+    },
+    {
+      "challengeNumber": 7,
+      "stageMarker": 27,
+      "id": "challenge-07-yellow-diagonal-fan",
+      "start": 215,
+      "duration": 34,
+      "family": "yellow-diagonal-fan",
+      "targetFamilies": [
+        "yellow specialty family",
+        "green support family"
+      ],
+      "motionRead": "Yellow diagonal trains create a memorable late-stage fan/diagonal score lane.",
+      "auroraContract": "Add a yellow diagonal/fan stage with long path length, readable aim bands, and a visually obvious new family.",
+      "sourceId": "challenge-all2-single-ship-all-perfects",
+      "evidenceStatus": "media-backed-window-unlabeled-groups",
+      "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/contact-sheet-1fps.jpg",
+      "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/contact-sheet-2fps.jpg",
+      "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/motion-review-4fps.jpg",
+      "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/frame-index.json"
+    },
+    {
+      "challengeNumber": 8,
+      "stageMarker": 31,
+      "id": "challenge-08-blue-purple-finale",
+      "start": 241,
+      "duration": 30,
+      "family": "blue-purple-finale",
+      "targetFamilies": [
+        "blue/purple specialty family",
+        "boss marker"
+      ],
+      "motionRead": "Final visible challenge window emphasizes blue/purple clustered arcs and a compact all-perfect finish.",
+      "auroraContract": "Use as the late-loop capstone: blue/purple clustered arcs, compact timing, and no repeated early-stage motion vocabulary.",
+      "sourceId": "challenge-all2-single-ship-all-perfects",
+      "evidenceStatus": "media-backed-window-unlabeled-groups",
+      "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-1fps.jpg",
+      "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-2fps.jpg",
+      "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/motion-review-4fps.jpg",
+      "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/frame-index.json"
+    }
+  ],
+  "stageImprovementPlan": [
+    {
+      "challengeNumber": 1,
+      "stageMarker": 3,
+      "priority": "high",
+      "targetFamily": "classic-column-and-side-arc",
+      "currentAuroraProblem": "Aurora early challenge stages have useful structure but need stronger five-group labels and clearer route contracts.",
+      "implementationStrategy": "Use as the teaching stage: five readable groups, no combat, clear upper-band score lanes, and a result cadence that lets the player understand 40/40.",
+      "measurementStrategy": [
+        "Promote five group labels from this window: first visible time, entry side, path family, scoreable upper-band interval, exit side, alien family.",
+        "Compare Aurora runtime challenge probes against target path family, group count, family novelty, result cadence, and no-combat guardrails.",
+        "Only lift the strict movement/graphics score after group labels and runtime probes agree."
+      ],
+      "expectedUserImpact": "Early challenge stages should become clearer learning experiences with stronger perfect-bonus readability."
+    },
+    {
+      "challengeNumber": 2,
+      "stageMarker": 7,
+      "priority": "high",
+      "targetFamily": "red-column-blue-side-cross",
+      "currentAuroraProblem": "Aurora early challenge stages have useful structure but need stronger five-group labels and clearer route contracts.",
+      "implementationStrategy": "Add distinct side-entry crossing groups and a red-column vertical train; preserve no-shot/no-collision behavior while increasing route memory.",
+      "measurementStrategy": [
+        "Promote five group labels from this window: first visible time, entry side, path family, scoreable upper-band interval, exit side, alien family.",
+        "Compare Aurora runtime challenge probes against target path family, group count, family novelty, result cadence, and no-combat guardrails.",
+        "Only lift the strict movement/graphics score after group labels and runtime probes agree."
+      ],
+      "expectedUserImpact": "Early challenge stages should become clearer learning experiences with stronger perfect-bonus readability."
+    },
+    {
+      "challengeNumber": 3,
+      "stageMarker": 11,
+      "priority": "high",
+      "targetFamily": "blue-hook-green-novelty",
+      "currentAuroraProblem": "Aurora early challenge stages have useful structure but need stronger five-group labels and clearer route contracts.",
+      "implementationStrategy": "Introduce a clearly new visual family and hooked side trajectories; score should reward anticipation of the hook, not pure center firing.",
+      "measurementStrategy": [
+        "Promote five group labels from this window: first visible time, entry side, path family, scoreable upper-band interval, exit side, alien family.",
+        "Compare Aurora runtime challenge probes against target path family, group count, family novelty, result cadence, and no-combat guardrails.",
+        "Only lift the strict movement/graphics score after group labels and runtime probes agree."
+      ],
+      "expectedUserImpact": "Early challenge stages should become clearer learning experiences with stronger perfect-bonus readability."
+    },
+    {
+      "challengeNumber": 4,
+      "stageMarker": 15,
+      "priority": "highest",
+      "targetFamily": "pink-serpentine-and-green-entry",
+      "currentAuroraProblem": "Aurora late challenge stages are currently too repetitive and are not media-backed by distinct late-stage Galaga choreography.",
+      "implementationStrategy": "Replace repeated boss-led loops with a long serpentine specialty arc; this is the first high-priority late-stage rebuild target.",
+      "measurementStrategy": [
+        "Promote five group labels from this window: first visible time, entry side, path family, scoreable upper-band interval, exit side, alien family.",
+        "Compare Aurora runtime challenge probes against target path family, group count, family novelty, result cadence, and no-combat guardrails.",
+        "Only lift the strict movement/graphics score after group labels and runtime probes agree."
+      ],
+      "expectedUserImpact": "Late challenge stages should start feeling like memorable Galaga score exhibitions instead of repeated waves."
+    },
+    {
+      "challengeNumber": 5,
+      "stageMarker": 19,
+      "priority": "highest",
+      "targetFamily": "pink-green-cascade",
+      "currentAuroraProblem": "Aurora late challenge stages are currently too repetitive and are not media-backed by distinct late-stage Galaga choreography.",
+      "implementationStrategy": "Build as a cascade stage: alternating specialty groups, lower-field pass risk, and stronger color/family novelty than Challenge 4.",
+      "measurementStrategy": [
+        "Promote five group labels from this window: first visible time, entry side, path family, scoreable upper-band interval, exit side, alien family.",
+        "Compare Aurora runtime challenge probes against target path family, group count, family novelty, result cadence, and no-combat guardrails.",
+        "Only lift the strict movement/graphics score after group labels and runtime probes agree."
+      ],
+      "expectedUserImpact": "Late challenge stages should start feeling like memorable Galaga score exhibitions instead of repeated waves."
+    },
+    {
+      "challengeNumber": 6,
+      "stageMarker": 23,
+      "priority": "highest",
+      "targetFamily": "green-ladder-and-split",
+      "currentAuroraProblem": "Aurora late challenge stages are currently too repetitive and are not media-backed by distinct late-stage Galaga choreography.",
+      "implementationStrategy": "Use staggered ladders and split exits; measure group spacing and route separation so the stage feels authored, not dense noise.",
+      "measurementStrategy": [
+        "Promote five group labels from this window: first visible time, entry side, path family, scoreable upper-band interval, exit side, alien family.",
+        "Compare Aurora runtime challenge probes against target path family, group count, family novelty, result cadence, and no-combat guardrails.",
+        "Only lift the strict movement/graphics score after group labels and runtime probes agree."
+      ],
+      "expectedUserImpact": "Late challenge stages should start feeling like memorable Galaga score exhibitions instead of repeated waves."
+    },
+    {
+      "challengeNumber": 7,
+      "stageMarker": 27,
+      "priority": "highest",
+      "targetFamily": "yellow-diagonal-fan",
+      "currentAuroraProblem": "Aurora late challenge stages are currently too repetitive and are not media-backed by distinct late-stage Galaga choreography.",
+      "implementationStrategy": "Add a yellow diagonal/fan stage with long path length, readable aim bands, and a visually obvious new family.",
+      "measurementStrategy": [
+        "Promote five group labels from this window: first visible time, entry side, path family, scoreable upper-band interval, exit side, alien family.",
+        "Compare Aurora runtime challenge probes against target path family, group count, family novelty, result cadence, and no-combat guardrails.",
+        "Only lift the strict movement/graphics score after group labels and runtime probes agree."
+      ],
+      "expectedUserImpact": "Late challenge stages should start feeling like memorable Galaga score exhibitions instead of repeated waves."
+    },
+    {
+      "challengeNumber": 8,
+      "stageMarker": 31,
+      "priority": "highest",
+      "targetFamily": "blue-purple-finale",
+      "currentAuroraProblem": "Aurora late challenge stages are currently too repetitive and are not media-backed by distinct late-stage Galaga choreography.",
+      "implementationStrategy": "Use as the late-loop capstone: blue/purple clustered arcs, compact timing, and no repeated early-stage motion vocabulary.",
+      "measurementStrategy": [
+        "Promote five group labels from this window: first visible time, entry side, path family, scoreable upper-band interval, exit side, alien family.",
+        "Compare Aurora runtime challenge probes against target path family, group count, family novelty, result cadence, and no-combat guardrails.",
+        "Only lift the strict movement/graphics score after group labels and runtime probes agree."
+      ],
+      "expectedUserImpact": "Late challenge stages should start feeling like memorable Galaga score exhibitions instead of repeated waves."
+    }
+  ],
+  "nextBestSteps": [
+    "Promote challenge-all2 windows into accepted five-group reference labels for Challenges 1-8.",
+    "Rebuild Aurora Challenge 4 first with the pink-serpentine contract because it is the most visible current late-stage embarrassment.",
+    "Then rebuild Challenge 7 with the yellow-diagonal-fan contract because it creates a strong player-visible novelty jump.",
+    "Add runtime probes that verify each Aurora challenge has five groups, no shots, no ship losses, distinct path families, and expected visual-family novelty.",
+    "Only after labels exist, lift challenge-stage target readiness from partial media evidence to direct trajectory scoring."
+  ],
+  "outputs": {
+    "latest": "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
+    "markdown": "GALAGA_CHALLENGE_VIDEO_REFERENCE_ANALYSIS.md"
+  }
+}

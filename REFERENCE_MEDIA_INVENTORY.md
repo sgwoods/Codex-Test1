@@ -82,9 +82,13 @@ These are the most important missing reference structures, not missing media fil
    and harness targets.
 9. A formal promoted-evidence index that ties gameplay captures to quality
    conformance, player-profile training, and future Player 2 simulation needs.
-10. Later Galaga challenging-stage windows. The current target-artifact coverage
-    read marks Challenge Stages 4-8 as not ingested, which is why challenge-stage
-    target readiness is currently low even though early challenge evidence exists.
+10. Late Galaga challenging-stage precision labels. The user-supplied
+    `challenge-all2.mp4` and `challenging.mp4` sources are now preserved through
+    derived contact sheets and hashes in
+    `reference-artifacts/analyses/galaga-challenge-video-reference/latest.json`,
+    so Challenge Stages 4-8 are no longer empty media gaps. The remaining gap is
+    five-group frame/object labels for each challenge window, especially the
+    green-ladder, yellow-fan, and blue/purple finale stages.
 11. Approved screen-surface screenshots or controlled frames for Galaga title,
     high-score, game-over, challenge-result, and cabinet/control-panel surfaces.
 

@@ -57,8 +57,15 @@ for(const challengeNumber of [1, 2, 3, 4, 5, 6, 7, 8]){
 }
 
 const lateMissing = challengeRows.filter(row => +row.challengeNumber >= 4 && row.status === 'not-ingested');
-if(lateMissing.length < 3){
-  fail('late challenge-stage gap is unexpectedly small; coverage report should keep missing late-stage target windows explicit', { lateMissing });
+const latePartial = challengeRows.filter(row => +row.challengeNumber >= 4 && row.status === 'partially-ingested');
+if(lateMissing.length > 0 && lateMissing.length < 3){
+  fail('late challenge-stage gap is inconsistent: either keep missing late windows explicit or promote enough media-backed evidence to partial', { lateMissing });
+}
+if(lateMissing.length === 0 && latePartial.length < 5){
+  fail('late challenge-stage windows are marked non-missing but are not all represented as partially ingested media-backed targets', { latePartial });
+}
+if(lateMissing.length === 0 && !String(report.summary?.interpretation || '').includes('five-group frame labels')){
+  fail('late challenge acquisition is no longer the bottleneck, but the report does not name five-group frame labels as the next gap', report.summary);
 }
 
 if(!Number.isFinite(+report.summary?.coverageScore10) || +report.summary.coverageScore10 <= 0 || +report.summary.coverageScore10 > 10){

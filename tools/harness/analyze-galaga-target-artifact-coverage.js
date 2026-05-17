@@ -246,6 +246,13 @@ function buildReport(){
   const existingEvidenceCount = rows.reduce((sum, row) => sum + row.evidenceExistingCount, 0);
   const missingEvidenceCount = rows.reduce((sum, row) => sum + row.evidenceMissingCount, 0);
   const missingLateChallenges = challengeStageCoverage.filter(row => row.status === 'not-ingested');
+  const partialLateChallenges = challengeStageCoverage.filter(row => +row.challengeNumber >= 4 && row.status === 'partially-ingested');
+  const interpretation = missingLateChallenges.length
+    ? 'Aurora has enough Galaga source material to prove the current challenge-stage gap, but not enough late-stage media-backed material to rebuild the later challenge stages with high confidence. The most valuable next ingestion work is controlled or sourced capture for Challenge Stages 4-8, followed by per-group movement and alien-novelty labels.'
+    : 'Aurora now has media-backed windows for all tracked Galaga challenge stages, including Challenges 4-8. The bottleneck has moved from source acquisition to precision: each window needs five-group frame labels for entry side, path family, scoreable band, exit side, alien family, and perfect-bonus opportunity before direct trajectory scoring should rise.';
+  const firstNextStep = missingLateChallenges.length
+    ? 'Acquire or create a lawful controlled reference capture for Challenge Stages 4-8, prioritizing stages 15, 19, 23, 27, and 31.'
+    : 'Promote the user-supplied all-perfect challenge video windows into five-group labels for Challenges 1-8, prioritizing Challenges 4, 7, and 8 for late-stage visual novelty.';
   const report = {
     generatedAt,
     commit,
@@ -267,13 +274,14 @@ function buildReport(){
       existingEvidenceCount,
       missingEvidenceCount,
       lateChallengeGapCount: missingLateChallenges.length,
-      interpretation: 'Aurora has enough Galaga source material to prove the current challenge-stage gap, but not enough late-stage media-backed material to rebuild the later challenge stages with high confidence. The most valuable next ingestion work is controlled or sourced capture for Challenge Stages 4-8, followed by per-group movement and alien-novelty labels.'
+      lateChallengePartialCount: partialLateChallenges.length,
+      interpretation
     },
     rows,
     axisRows: axisRows(rows),
     challengeStageCoverage,
     nextBestSteps: [
-      'Acquire or create a lawful controlled reference capture for Challenge Stages 4-8, prioritizing stages 15, 19, 23, 27, and 31.',
+      firstNextStep,
       'Promote five-group labels for each challenge: first visible frame, entry side, path family, scoreable band, exit side, alien family, and perfect-bonus opportunity.',
       'Split the existing early challenge reference windows into complete group-by-group target contracts before further Aurora runtime tuning.',
       'Add active sprite-motion evidence for challenge aliens so graphics conformance is not static-pose-only.',
