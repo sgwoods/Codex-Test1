@@ -10,13 +10,13 @@ or simpler platform/game boundaries.
 
 ## Current Snapshot
 
-- generated: `2026-05-15T16:35:59.856Z`
-- branch: `codex/macbook-audio-entry-grounding-cycle`
-- commit: `cd58c4a5`
+- generated: `2026-05-18T11:43:01.187Z`
+- branch: `main`
+- commit: `ca08dbb5`
 - review cycles tracked: `3`
-- issue notes tracked: `4`
+- issue notes tracked: `6`
 - accepted changes tracked: `3`
-- automatic packet findings tracked: `0`
+- automatic packet findings tracked: `2`
 
 ## How To Use This Ledger
 
@@ -51,7 +51,7 @@ or simpler platform/game boundaries.
 | --- | --- | --- | --- | --- | --- |
 | historical | Platform architecture baseline | ARCHITECT_REVIEW_RESPONSE.md | standing | P0 0 / P1 0 / P2 4 / P3 0 | Baseline concerns are partly covered and partly continuing maturity work. |
 | 2026-05-14 | Local-to-hosted-dev code review gate | CODE_REVIEW_MODEL.md | standing | P0 0 / P1 0 / P2 0 / P3 0 | Accepted as a lightweight release-safety gate for development lane movement. |
-| 2026-05-15 | Current branch code review packet | reference-artifacts/analyses/code-review/latest.json | 39 | P0 0 / P1 0 / P2 0 / P3 0 | Use automatic findings as review notes and blocking P0/P1 gates; P2/P3 remain explicit human-review items. |
+| 2026-05-18 | Current branch code review packet | reference-artifacts/analyses/code-review/latest.json | 1897 | P0 0 / P1 0 / P2 2 / P3 0 | Use automatic findings as review notes and blocking P0/P1 gates; P2/P3 remain explicit human-review items. |
 
 ## Issues And Notes
 
@@ -61,6 +61,8 @@ or simpler platform/game boundaries.
 | P2 | architecture-boundary | in_progress | architect-magic-constants | Some movement, render spacing, animation timing, and gameplay update values still need clearer structural ownership. | Move stable game-design values into pack/spec structures; keep local math values near implementation with intent comments. | dismissed: Remaining movement, render-spacing, animation-timing, and gameplay tuning constants are a next-cycle maintainability concern, not a blocker for the current production candidate when targeted gameplay and boundary checks pass. |
 | P2 | harness-fragility | in_progress | architect-harness-fragility | Recorded-path harnesses can become brittle after motion and pacing changes. | Prefer state-based assertions, coarse behavioral envelopes, and repeated-run averages where exact replay geometry is not the contract. | dismissed: Recorded-path fragility is acknowledged and retained as a harness-maturity concern. It does not block the current production candidate if the relevant release harnesses, documentation freshness check, and publish preflight pass. |
 | P2 | conformance-evidence | in_progress | architect-enemy-spec | Enemy family definitions should become declarative enough to support new game ingestion and controlled experimentation. | Continue extracting enemy family, attack pattern, and stage grammar data into game-owned specs. | dismissed: Declarative enemy-family and attack-pattern specs remain important for 1.4.0 and later conformance work. This is not a production blocker for a reviewed candidate unless the release claims those specs as complete. |
+| P2 | architecture-boundary | review_note | code-review-platform-game-boundary-review | src/js/13-gameplay-adapter-registry.js: Gameplay or pack registry changed; run platform/game boundary harnesses and review pack ownership. | Verify the flagged surface with the targeted review questions and recommended checks before lane movement. | missing |
+| P2 | release-tooling | review_note | code-review-release-tooling-review | package.json: Release or npm script surface changed; verify lane authority and publish behavior. | Verify the flagged surface with the targeted review questions and recommended checks before lane movement. | addressed: The release-tooling changes are intentional: they add the review packet, review-learning ledger, public review documentation, and a production disposition gate. The review packet is current and publish preflight remains green for the dev lane. |
 
 ## Change Decisions
 
@@ -72,6 +74,8 @@ or simpler platform/game boundaries.
 | architecture-boundary | in_progress | architect-magic-constants-proposal | Move stable game-design values into pack/spec structures; keep local math values near implementation with intent comments. | Track this as continuing 1.4.0 platform maturity work. |
 | harness-fragility | in_progress | architect-harness-fragility-proposal | Prefer state-based assertions, coarse behavioral envelopes, and repeated-run averages where exact replay geometry is not the contract. | Measured conformance work should leave more reusable harness logic behind than one-off replay checks. |
 | conformance-evidence | in_progress | architect-enemy-spec-proposal | Continue extracting enemy family, attack pattern, and stage grammar data into game-owned specs. | Use ingestion-backed specs before considering heavier persistence infrastructure. |
+| architecture-boundary | review_note | code-review-platform-game-boundary-review-proposal | Verify the flagged surface with the targeted review questions and recommended checks before lane movement. | Accepted as a visible review note that does not block hosted-dev by itself. |
+| release-tooling | review_note | code-review-release-tooling-review-proposal | Verify the flagged surface with the targeted review questions and recommended checks before lane movement. | Accepted as a visible review note that does not block hosted-dev by itself. |
 
 ## Accepted Changes
 
