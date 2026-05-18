@@ -5234,6 +5234,14 @@ function build(options = {}){
     markdownHref: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/RELEASE_CONFORMANCE_DASHBOARD.md`,
     markdownLabel: 'Markdown',
     dataHref: 'conformance-dashboard-data.json',
+    releasePathLabel: buildLane === 'production' ? 'Production lane dashboard' : 'Development lane dashboard',
+    releasePath: buildLane === 'production' ? '/Aurora-Galactica/conformance-dashboard.html' : '/Aurora-Galactica/dev/conformance-dashboard.html',
+    releaseLane: buildReleaseChannel,
+    buildLabel,
+    pageBuiltAt: buildUtc,
+    buildCommit,
+    buildBranch,
+    sourceArtifact: 'reference-artifacts/analyses/release-conformance-dashboard/latest.json',
     artifactBase: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/`,
     rawArtifactBase: `https://raw.githubusercontent.com/sgwoods/Codex-Test1/${buildCommit}/`
   }));
@@ -5273,6 +5281,14 @@ function build(options = {}){
     markdownHref: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/RELEASE_CONFORMANCE_DASHBOARD.md`,
     markdownLabel: 'Markdown',
     dataHref: 'conformance-dashboard-data.json',
+    releasePathLabel: buildLane === 'production' ? 'Production bundled asset dashboard' : 'Development bundled asset dashboard',
+    releasePath: buildLane === 'production' ? '/Aurora-Galactica/assets/conformance-dashboard.html' : '/Aurora-Galactica/dev/assets/conformance-dashboard.html',
+    releaseLane: buildReleaseChannel,
+    buildLabel,
+    pageBuiltAt: buildUtc,
+    buildCommit,
+    buildBranch,
+    sourceArtifact: 'reference-artifacts/analyses/release-conformance-dashboard/latest.json',
     artifactBase: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/`,
     rawArtifactBase: `https://raw.githubusercontent.com/sgwoods/Codex-Test1/${buildCommit}/`
   }));

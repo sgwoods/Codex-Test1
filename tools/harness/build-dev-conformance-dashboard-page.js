@@ -52,6 +52,10 @@ function normalizeArtifactBase(value){
   return text.endsWith('/') ? text : `${text}/`;
 }
 
+function isoNow(){
+  return new Date().toISOString();
+}
+
 function html(data, options = {}){
   const title = options.title || 'Aurora Conformance Dashboard';
   const subtitle = options.subtitle || 'Internal localhost view of the current conformance plan, release gates, measurement debt, and highest-value next investments. This page reads generated artifacts and refreshes without exposing anything publicly.';
@@ -62,6 +66,18 @@ function html(data, options = {}){
   const dataHref = options.dataHref || 'conformance-dashboard-data.json';
   const artifactBase = normalizeArtifactBase(options.artifactBase || '../');
   const rawArtifactBase = normalizeArtifactBase(options.rawArtifactBase || artifactBase);
+  const pageMeta = {
+    artifactName: title,
+    releasePathLabel: options.releasePathLabel || 'Local development dashboard',
+    releasePath: options.releasePath || 'local-dev/conformance-dashboard.html via http://127.0.0.1:4312',
+    releaseLane: options.releaseLane || 'local-dev',
+    buildLabel: options.buildLabel || 'local generated dashboard',
+    pageBuiltAt: options.pageBuiltAt || isoNow(),
+    pageCommit: options.buildCommit || data.commit || '',
+    pageBranch: options.buildBranch || data.branch || '',
+    sourceArtifact: options.sourceArtifact || 'reference-artifacts/analyses/release-conformance-dashboard/latest.json',
+    dataHref
+  };
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -330,6 +346,31 @@ function html(data, options = {}){
     .statusLine{margin-top:10px;color:var(--muted);font-size:13px}
     .dirty{color:var(--red)}
     .clean{color:var(--green)}
+    .provenanceStrip{
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:10px;
+      margin:14px 0;
+    }
+    .provenanceCard{
+      min-width:0;
+      padding:10px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#fbfaf7;
+      box-shadow:0 8px 20px rgba(27,24,19,.06);
+    }
+    .provenanceCard strong{
+      display:block;
+      font-size:13px;
+      overflow-wrap:anywhere;
+    }
+    .provenanceCard small{
+      display:block;
+      margin-top:3px;
+      color:var(--muted);
+      overflow-wrap:anywhere;
+    }
     .compareGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin:0 0 14px}
     .compareCard{
       background:var(--panel);
@@ -356,6 +397,7 @@ function html(data, options = {}){
       .controls{justify-content:flex-start}
       .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
       .ingestionGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .provenanceStrip{grid-template-columns:repeat(2,minmax(0,1fr))}
       .split{grid-template-columns:1fr}
       .metricRow{grid-template-columns:38px minmax(0,1fr) minmax(82px,.35fr);align-items:start}
       .metricNext,.metricRow .costCell,.metricRow .detailButton{grid-column:2/-1}
@@ -365,6 +407,7 @@ function html(data, options = {}){
       .shell{padding:16px}
       .grid{grid-template-columns:1fr}
       .ingestionGrid{grid-template-columns:1fr}
+      .provenanceStrip{grid-template-columns:1fr}
       .metricRow{grid-template-columns:34px minmax(0,1fr)}
       .metricRow .score{grid-column:2}
       .metricExplanation{grid-template-columns:1fr}
@@ -409,6 +452,7 @@ function html(data, options = {}){
     const dataHref = ${JSON.stringify(dataHref)};
     const artifactBase = ${JSON.stringify(artifactBase)};
     const rawArtifactBase = ${JSON.stringify(rawArtifactBase)};
+    const pageMeta = ${escScriptJson(pageMeta)};
 
     function esc(value){
       return String(value ?? '').replace(/[&<>"']/g, char => ({
@@ -435,6 +479,34 @@ function html(data, options = {}){
       const minutes = Math.round(seconds / 60);
       if(minutes < 90) return minutes + 'm old';
       return Math.round(minutes / 60) + 'h old';
+    }
+
+    function formatStamp(iso){
+      const then = new Date(iso);
+      if(!Number.isFinite(then.getTime())) return '--';
+      return then.toLocaleString(undefined, {
+        year:'numeric',
+        month:'short',
+        day:'2-digit',
+        hour:'numeric',
+        minute:'2-digit',
+        timeZoneName:'short'
+      });
+    }
+
+    function provenanceStrip(rootData, data){
+      const sourceGeneratedAt = rootData.generatedAt || data.generatedAt || '';
+      const sourceCommit = rootData.commit || data.commit || pageMeta.pageCommit || '';
+      const sourceBranch = rootData.branch || data.branch || pageMeta.pageBranch || '';
+      const dirty = rootData.dirty ?? data.dirty;
+      const dirtyText = dirty ? 'dirty source state' : 'clean source state';
+      return '<section class="provenanceStrip" aria-label="Artifact release path and freshness">'
+        + '<article class="provenanceCard"><span class="label">Release Path</span><strong>' + esc(pageMeta.releasePathLabel) + '</strong><small>' + esc(pageMeta.releasePath) + '</small></article>'
+        + '<article class="provenanceCard"><span class="label">Release Lane</span><strong>' + esc(pageMeta.releaseLane) + '</strong><small>' + esc(pageMeta.buildLabel) + '</small></article>'
+        + '<article class="provenanceCard"><span class="label">Page Updated</span><strong>' + esc(formatStamp(pageMeta.pageBuiltAt)) + '</strong><small>HTML generated from build path</small></article>'
+        + '<article class="provenanceCard"><span class="label">Source Data Updated</span><strong>' + esc(formatStamp(sourceGeneratedAt)) + '</strong><small>' + esc(ageText(sourceGeneratedAt)) + ' · ' + esc(pageMeta.sourceArtifact) + '</small></article>'
+        + '<article class="provenanceCard"><span class="label">Source Commit</span><strong>' + esc(sourceCommit || '--') + '</strong><small>' + esc(sourceBranch || '--') + ' · ' + dirtyText + '</small></article>'
+        + '</section>';
     }
 
     function evidenceLinks(reports){
@@ -880,6 +952,7 @@ function html(data, options = {}){
       const economics = data.economicsSummary || {};
       syncLocationState();
       app.innerHTML = \`
+        \${provenanceStrip(rootData, data)}
         <div class="grid">
           <div class="card"><span class="label">Selected Game</span><span class="value">\${esc(data.gameName || 'Current game')}</span><div class="small">\${esc(data.gameStatus || 'Conformance profile')}</div></div>
           <div class="card"><span class="label">Overall / Status</span><span class="value">\${esc(overall?.Current || previewOverall?.Current || '--')}</span><div class="small">\${esc(data.currentInvestment || data.releaseRead || 'No game status summary yet.')}</div></div>
@@ -891,7 +964,7 @@ function html(data, options = {}){
         \${dashboardTabs()}
         \${activeTab === 'ingestion' ? ingestionView(data) : activeTab === 'cost' ? costView(data, rows) : conformanceView(data, rows, gates, semantics)}
       \`;
-      statusLine.textContent = 'Dashboard data: ' + (rootData.generatedAt || data.generatedAt || 'unknown') + '. Selected game: ' + (data.gameName || activeGameKey) + '. Page refreshes conformance-dashboard-data.json every 30 seconds.';
+      statusLine.textContent = 'Release path: ' + pageMeta.releasePathLabel + ' (' + pageMeta.releasePath + '). Page updated: ' + formatStamp(pageMeta.pageBuiltAt) + '. Dashboard data: ' + (rootData.generatedAt || data.generatedAt || 'unknown') + '. Selected game: ' + (data.gameName || activeGameKey) + '. Page refreshes conformance-dashboard-data.json every 30 seconds.';
     }
 
     app.addEventListener('click', event => {
