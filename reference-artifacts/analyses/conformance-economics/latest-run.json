@@ -1,30 +1,29 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-18T21-03-53-928Z-77173",
-  "startedAt": "2026-05-18T21:03:53.928Z",
-  "endedAt": "2026-05-18T21:04:03.920Z",
+  "id": "2026-05-18T23-01-46-593Z-98332",
+  "startedAt": "2026-05-18T23:01:46.593Z",
+  "endedAt": "2026-05-18T23:08:21.393Z",
   "branch": "codex/macbook-conformance-investment-review",
-  "commit": "026ccefc",
+  "commit": "65842f55",
   "command": [
     "npm",
     "run",
-    "harness:analyze:challenge-stage-conformance"
+    "harness:analyze:level-visual-conformance-index"
   ],
   "axes": [
-    "challenge-stage"
+    "level-visual"
   ],
   "resources": [
-    "cpu",
-    "browser"
+    "cpu"
   ],
   "notes": "",
   "measurement": {
-    "wallSeconds": 9.992,
-    "timeRealSeconds": 9.98,
-    "timeUserSeconds": 14.29,
-    "timeSystemSeconds": 4.23,
-    "cpuSeconds": 18.52,
+    "wallSeconds": 394.8,
+    "timeRealSeconds": 394.79,
+    "timeUserSeconds": 785.18,
+    "timeSystemSeconds": 53.33,
+    "cpuSeconds": 838.51,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -46,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 1140922724,
-    "artifactBytesAfter": 1140923624,
-    "artifactBytesDelta": 900
+    "artifactBytesBefore": 1142559690,
+    "artifactBytesAfter": 1142642935,
+    "artifactBytesDelta": 83245
   }
 }

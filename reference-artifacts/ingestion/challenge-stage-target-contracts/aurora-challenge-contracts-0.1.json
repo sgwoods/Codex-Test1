@@ -82,6 +82,146 @@
       ],
       "successRead": "The first challenge should look authored as a safe score exhibition before it looks difficult.",
       "nextPromotion": "Use target video object tracking to replace these group-level labels with frame-level position and silhouette tracks."
+    },
+    {
+      "stage": 7,
+      "challengeNumber": 2,
+      "displayLabel": "Challenging Stage 2 (Levels 7-8)",
+      "sourceWindowId": "challenge-02-scorpion-cross-sweep",
+      "referenceLabels": [
+        "challenge-2-arrival-group-1",
+        "challenge-2-crossing-group-3"
+      ],
+      "targetRead": "Second no-combat bonus lesson: keep the safe score exhibition, but introduce more memorable cross-field sweeps, specialty alien color families, and hook/return motion that feels visually new rather than a faster repeat of Challenge 1.",
+      "groups": [
+        {
+          "groupIndex": 1,
+          "role": "classic cross-field opener",
+          "expectedTypes": ["bee", "but", "boss", "rogue"],
+          "expectedFamilies": ["classic"],
+          "pathFamily": "cross-sweep",
+          "entrySide": "both-sides",
+          "exitSide": "opposite-lower-sides",
+          "scoreWindow": "wide crossing lanes",
+          "targetVisibleS": [0.8, 6.0]
+        },
+        {
+          "groupIndex": 2,
+          "role": "scorpion introduction",
+          "expectedTypes": ["bee", "but", "boss", "rogue"],
+          "expectedFamilies": ["scorpion"],
+          "pathFamily": "cross-sweep",
+          "entrySide": "both-sides",
+          "exitSide": "opposite-lower-sides",
+          "scoreWindow": "new-family crossing lanes",
+          "targetVisibleS": [2.0, 7.4]
+        },
+        {
+          "groupIndex": 3,
+          "role": "scorpion hook return",
+          "expectedTypes": ["bee", "but", "boss", "rogue"],
+          "expectedFamilies": ["scorpion"],
+          "pathFamily": "hook-arc",
+          "entrySide": "side",
+          "exitSide": "lower-hook",
+          "scoreWindow": "turning hook lanes",
+          "targetVisibleS": [3.5, 9.3]
+        },
+        {
+          "groupIndex": 4,
+          "role": "stingray hook return",
+          "expectedTypes": ["bee", "but", "boss", "rogue"],
+          "expectedFamilies": ["stingray"],
+          "pathFamily": "hook-arc",
+          "entrySide": "side",
+          "exitSide": "lower-hook",
+          "scoreWindow": "late specialty hook lanes",
+          "targetVisibleS": [5.1, 11.0]
+        },
+        {
+          "groupIndex": 5,
+          "role": "boss-led closing loop",
+          "expectedTypes": ["bee", "but", "boss", "rogue"],
+          "expectedFamilies": ["stingray"],
+          "pathFamily": "boss-led-loop",
+          "entrySide": "upper-side",
+          "exitSide": "lower-sides",
+          "scoreWindow": "boss-led loop cleanup",
+          "targetVisibleS": [6.8, 13.0]
+        }
+      ],
+      "successRead": "The second challenge should feel like the first real escalation: still safe, but much more authored, colorful, and learnable as a new pattern.",
+      "nextPromotion": "Track Challenge Stage 2 target video objects so cross-sweep width, hook return timing, and specialty-family silhouettes become frame-level measurements."
+    },
+    {
+      "stage": 11,
+      "challengeNumber": 3,
+      "displayLabel": "Challenging Stage 3 (Levels 11-12)",
+      "sourceWindowId": "challenge-03-stingray-crown-hook",
+      "referenceLabels": [
+        "challenge-3-arrival-group-1",
+        "challenge-3-boss-led-group-4"
+      ],
+      "targetRead": "Third no-combat bonus lesson: larger boss-led and crown/split shapes, late-specialty aliens, and longer hook routes that make the stage feel like a distinct set piece rather than a palette swap.",
+      "groups": [
+        {
+          "groupIndex": 1,
+          "role": "dragonfly crown split",
+          "expectedTypes": ["bee", "but", "boss", "rogue"],
+          "expectedFamilies": ["dragonfly"],
+          "pathFamily": "crown-split-cascade",
+          "entrySide": "top-and-sides",
+          "exitSide": "lower-sides",
+          "scoreWindow": "split crown lanes",
+          "targetVisibleS": [0.8, 6.6]
+        },
+        {
+          "groupIndex": 2,
+          "role": "dragonfly boss-led loop",
+          "expectedTypes": ["bee", "but", "boss", "rogue"],
+          "expectedFamilies": ["dragonfly"],
+          "pathFamily": "boss-led-loop",
+          "entrySide": "upper-side",
+          "exitSide": "lower-sides",
+          "scoreWindow": "early boss-led loop",
+          "targetVisibleS": [2.2, 8.2]
+        },
+        {
+          "groupIndex": 3,
+          "role": "stingray hook arc",
+          "expectedTypes": ["bee", "but", "boss", "rogue"],
+          "expectedFamilies": ["stingray"],
+          "pathFamily": "hook-arc",
+          "entrySide": "side",
+          "exitSide": "lower-hook",
+          "scoreWindow": "turning specialty lanes",
+          "targetVisibleS": [3.8, 9.9]
+        },
+        {
+          "groupIndex": 4,
+          "role": "galboss boss-led loop",
+          "expectedTypes": ["but", "boss", "rogue"],
+          "expectedFamilies": ["galboss"],
+          "pathFamily": "boss-led-loop",
+          "entrySide": "upper-side",
+          "exitSide": "lower-sides",
+          "scoreWindow": "dense boss-led bonus lane",
+          "targetVisibleS": [5.3, 11.6]
+        },
+        {
+          "groupIndex": 5,
+          "role": "dragonfly hook finale",
+          "expectedTypes": ["bee", "but", "boss", "rogue"],
+          "expectedFamilies": ["dragonfly"],
+          "pathFamily": "hook-arc",
+          "entrySide": "side",
+          "exitSide": "lower-hook",
+          "scoreWindow": "late hook cleanup",
+          "targetVisibleS": [7.0, 13.7]
+        }
+      ],
+      "successRead": "The third challenge should read as a new choreographed set piece: more boss-led structure, more visual novelty, and more satisfying learned firing windows.",
+      "nextPromotion": "Replace this group contract with target object tracks for boss-led timing, split/crown trajectory shape, and specialty-alien motion cadence."
     }
   ]
 }

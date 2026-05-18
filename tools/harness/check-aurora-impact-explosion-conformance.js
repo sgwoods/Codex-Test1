@@ -46,17 +46,41 @@ function main(){
         fail(`Impact/explosion sample ${sample.key} is missing ${field}`, { sample, payload });
       }
     }
+    if(sample.lifecycle){
+      if(!Number.isFinite(+sample.lifecycle.lifecycleScore10) || sample.lifecycle.lifecycleScore10 <= 0 || sample.lifecycle.lifecycleScore10 > 10){
+        fail(`Impact/explosion sample ${sample.key} has an invalid lifecycle score`, { sample, payload });
+      }
+      const frames = Array.isArray(sample.lifecycleFrames) ? sample.lifecycleFrames : [];
+      if(frames.length < 3){
+        fail(`Impact/explosion sample ${sample.key} should expose lifecycle frame evidence`, { sample, payload });
+      }
+      for(const frame of frames){
+        if(!exists(frame.runtimeCrop) || !exists(frame.bestTargetCrop)){
+          fail(`Impact/explosion lifecycle frame ${sample.key}/${frame.frameKey} is missing image evidence`, { frame, sample, payload });
+        }
+      }
+    }
+    if(sample.expectedCue && !Number.isFinite(+sample.audioCouplingScore10)){
+      fail(`Impact/explosion sample ${sample.key} has an invalid audio coupling score`, { sample, payload });
+    }
   }
   if(!Number.isFinite(+artifact.summary?.averageScore10)){
     fail('Impact/explosion conformance artifact is missing an average score', payload);
+  }
+  if(artifact.summary?.averageLifecycleScore10 !== null && artifact.summary?.averageLifecycleScore10 !== undefined && !Number.isFinite(+artifact.summary.averageLifecycleScore10)){
+    fail('Impact/explosion conformance artifact has an invalid lifecycle average', payload);
   }
   console.log(JSON.stringify({
     ok: true,
     artifact: ARTIFACT,
     sampleCount: samples.length,
     averageScore10: artifact.summary.averageScore10,
+    averageLifecycleScore10: artifact.summary.averageLifecycleScore10,
+    averageAudioCouplingScore10: artifact.summary.averageAudioCouplingScore10,
     weakestKey: artifact.summary.weakestKey,
-    weakestScore10: artifact.summary.weakestScore10
+    weakestScore10: artifact.summary.weakestScore10,
+    weakestLifecycleKey: artifact.summary.weakestLifecycleKey,
+    weakestLifecycleScore10: artifact.summary.weakestLifecycleScore10
   }, null, 2));
 }
 

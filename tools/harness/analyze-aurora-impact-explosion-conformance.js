@@ -6,6 +6,7 @@ const { withHarnessPage } = require('./browser-check-util');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const TARGET_ARTIFACT = 'reference-artifacts/analyses/galaga-alien-target-crops/latest.json';
+const AUDIO_EVENT_GAP_ARTIFACT = 'reference-artifacts/analyses/aurora-audio-event-gap/latest.json';
 const OUT_DIR = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-impact-explosion-conformance');
 const CROP_DIR = path.join(OUT_DIR, 'latest-crops');
 const OUT = path.join(OUT_DIR, 'latest.json');
@@ -17,6 +18,8 @@ const EFFECT_SPECS = [
     playfieldWidth: 54,
     playfieldHeight: 54,
     advanceS: .02,
+    lifecycleTimesS: [.02, .08, .14, .2],
+    expectedCue: 'enemyHit',
     targetIds: ['impact-explosion-small'],
     playerMeaning: 'A missile contact should visibly tell the player that a small enemy was hit.'
   },
@@ -26,6 +29,8 @@ const EFFECT_SPECS = [
     playfieldWidth: 62,
     playfieldHeight: 62,
     advanceS: .02,
+    lifecycleTimesS: [.02, .08, .14, .2],
+    expectedCue: 'enemyBoom',
     targetIds: ['impact-explosion-small'],
     playerMeaning: 'A destroyed enemy should have a short, readable arcade burst that pairs with the boom cue.'
   },
@@ -35,6 +40,8 @@ const EFFECT_SPECS = [
     playfieldWidth: 74,
     playfieldHeight: 74,
     advanceS: .02,
+    lifecycleTimesS: [.02, .08, .14, .2],
+    expectedCue: 'bossHit',
     targetIds: ['impact-explosion-small', 'impact-explosion-large'],
     playerMeaning: 'The first boss hit should read as damage, not as a confusing full death explosion.'
   },
@@ -44,6 +51,8 @@ const EFFECT_SPECS = [
     playfieldWidth: 82,
     playfieldHeight: 82,
     advanceS: .02,
+    lifecycleTimesS: [.02, .08, .14, .2],
+    expectedCue: 'bossBoom',
     targetIds: ['impact-explosion-large', 'impact-explosion-small'],
     playerMeaning: 'A boss death should have a larger visual reward and should not be mistaken for the first-hit damage flash.'
   }
@@ -225,6 +234,10 @@ function gridForImage(file, cols = 32, rows = 32, preferredBounds = null){
   };
 }
 
+function readOptionalJson(relPath){
+  return exists(relPath) ? readJson(relPath) : null;
+}
+
 function compareGrids(runtime, target){
   const rows = runtime.grid.length;
   const cols = runtime.grid[0]?.length || 0;
@@ -263,7 +276,8 @@ function compareGrids(runtime, target){
   };
 }
 
-async function captureImpact(page, spec){
+async function captureImpact(page, spec, frameSpec = null){
+  const captureSpec = Object.assign({}, spec, frameSpec ? { advanceS: frameSpec.advanceS } : {});
   const setup = await page.evaluate(captureSpec => {
     window.__galagaHarness__.setTest({
       stage: captureSpec.stage || 1,
@@ -274,7 +288,7 @@ async function captureImpact(page, spec){
       starfieldSpeed: 0
     });
     return window.__galagaHarness__.setupImpactRuntimeCapture(captureSpec);
-  }, spec);
+  }, captureSpec);
   if(!setup?.ok) throw new Error(`Impact setup failed for ${spec.key}: ${setup?.error || 'unknown error'}`);
   const impact = setup.impact;
   if(!impact) throw new Error(`Impact setup did not expose coordinates for ${spec.key}`);
@@ -300,7 +314,8 @@ async function captureImpact(page, spec){
     out.getContext('2d').putImageData(ctx.getImageData(sx, sy, sw, sh), 0, 0);
     return { sx, sy, sw, sh, dataUrl: out.toDataURL('image/png') };
   }, { impact, spec });
-  const outFile = path.join(CROP_DIR, `${spec.key}.png`);
+  const suffix = frameSpec ? `-${frameSpec.key}` : '';
+  const outFile = path.join(CROP_DIR, `${spec.key}${suffix}.png`);
   fs.mkdirSync(path.dirname(outFile), { recursive: true });
   fs.writeFileSync(outFile, Buffer.from(String(capture.dataUrl).split(',')[1] || '', 'base64'));
   await page.evaluate(() => {
@@ -311,6 +326,8 @@ async function captureImpact(page, spec){
   return {
     key: spec.key,
     kind: spec.kind,
+    frameKey: frameSpec?.key || 'primary',
+    advanceS: captureSpec.advanceS,
     runtimeCrop: rel(outFile),
     impact,
     canvasClip: { x: capture.sx, y: capture.sy, width: capture.sw, height: capture.sh },
@@ -318,8 +335,8 @@ async function captureImpact(page, spec){
   };
 }
 
-function scoreImpact(sample, spec, targetCrops, targetGrids){
-  const runtimeGrid = gridForImage(abs(sample.runtimeCrop));
+function scoreRuntimeCrop(runtimeCrop, spec, targetCrops, targetGrids){
+  const runtimeGrid = gridForImage(abs(runtimeCrop));
   const candidates = targetCrops
     .filter(crop => spec.targetIds.includes(crop.id))
     .map(target => {
@@ -333,8 +350,19 @@ function scoreImpact(sample, spec, targetCrops, targetGrids){
       }, compareGrids(runtimeGrid, targetGrid));
     })
     .sort((a, b) => b.score10 - a.score10);
+  return { runtimeGrid, candidates };
+}
+
+function scoreImpactFrame(frame, spec, targetCrops, targetGrids){
+  const { runtimeGrid, candidates } = scoreRuntimeCrop(frame.runtimeCrop, spec, targetCrops, targetGrids);
   const best = candidates[0] || null;
-  return Object.assign({}, sample, {
+  return Object.assign({}, frame, {
+    runtimeCrop: frame.runtimeCrop,
+    frameKey: frame.frameKey,
+    advanceS: frame.advanceS,
+    filledCells: runtimeGrid.filled,
+    fillRatio: rounded(runtimeGrid.fillRatio, 4),
+    trimBounds: runtimeGrid.trimBounds,
     candidateTargetIds: spec.targetIds,
     bestTargetCropId: best?.targetCropId || null,
     bestTargetCrop: best?.targetCrop || null,
@@ -353,9 +381,72 @@ function scoreImpact(sample, spec, targetCrops, targetGrids){
   });
 }
 
+function scoreImpact(sample, spec, targetCrops, targetGrids, audioCueIndex){
+  const scoredPrimary = scoreImpactFrame(sample, spec, targetCrops, targetGrids);
+  const lifecycleFrames = (Array.isArray(sample.lifecycleFrames) ? sample.lifecycleFrames : [])
+    .map(frame => scoreImpactFrame(frame, spec, targetCrops, targetGrids));
+  const frameScores = lifecycleFrames.filter(frame => Number.isFinite(+frame.score10));
+  const fillRatios = lifecycleFrames.map(frame => +frame.fillRatio || 0);
+  const maxFill = fillRatios.length ? Math.max(...fillRatios) : 0;
+  const minFill = fillRatios.length ? Math.min(...fillRatios) : 0;
+  const peakIndex = fillRatios.indexOf(maxFill);
+  const firstFill = fillRatios[0] || 0;
+  const lastFill = fillRatios[fillRatios.length - 1] || 0;
+  const expansionScore = maxFill > 0 ? Math.min(1, Math.max(0, (maxFill - firstFill) / maxFill) * 2.8) : 0;
+  const decayScore = maxFill > 0 ? Math.min(1, Math.max(0, (maxFill - lastFill) / maxFill) * 2.4) : 0;
+  const peakTimingScore = peakIndex > 0 && peakIndex < fillRatios.length - 1 ? 1 : .45;
+  const averageFrameScore10 = frameScores.length
+    ? rounded(frameScores.reduce((sum, frame) => sum + frame.score10, 0) / frameScores.length, 2)
+    : null;
+  const lifecycleScore10 = Number.isFinite(+averageFrameScore10)
+    ? rounded(Math.max(1, Math.min(10, averageFrameScore10 * .58 + expansionScore * 2.1 + decayScore * 1.4 + peakTimingScore * .9)), 2)
+    : null;
+  const audioCue = audioCueIndex.get(spec.expectedCue) || null;
+  const audioCouplingScore10 = audioCue
+    ? rounded(Math.max(1, Math.min(10, 8.6 - Math.min(4, (+audioCue.worstSegmentRisk10 || +audioCue.gapRisk10 || 0) * .28))), 2)
+    : 3.5;
+  return Object.assign({}, scoredPrimary, {
+    expectedCue: spec.expectedCue,
+    audioCuePresent: !!audioCue,
+    audioCouplingScore10,
+    audioCouplingRead: audioCue
+      ? `${spec.expectedCue} audio mapping exists; worst audio segment risk ${audioCue.worstSegmentRisk10 ?? audioCue.gapRisk10 ?? 'n/a'}/10, semantic score ${audioCue.semanticScore10 ?? 'n/a'}/10.`
+      : `${spec.expectedCue} audio mapping was not found in the current audio event-gap artifact.`,
+    lifecycle: {
+      frameCount: lifecycleFrames.length,
+      averageFrameScore10,
+      lifecycleScore10,
+      fillRatioRange: rounded(maxFill - minFill, 4),
+      peakFrameKey: lifecycleFrames[peakIndex]?.frameKey || null,
+      expansionScore: rounded(expansionScore, 3),
+      decayScore: rounded(decayScore, 3),
+      peakTimingScore: rounded(peakTimingScore, 3),
+      read: Number.isFinite(+lifecycleScore10)
+        ? `${spec.key} lifecycle score ${lifecycleScore10}/10 from onset/expansion/decay frames; this starts measuring whether the event unfolds clearly instead of being one generic flash.`
+        : `${spec.key} lifecycle frames are missing or unscored.`
+    },
+    lifecycleFrames
+  });
+}
+
+function audioCueIndex(audioEventGap){
+  const rows = [
+    ...(Array.isArray(audioEventGap?.comparedCueRisks) ? audioEventGap.comparedCueRisks : []),
+    ...(Array.isArray(audioEventGap?.semanticAttentionRows) ? audioEventGap.semanticAttentionRows : []),
+    ...(Array.isArray(audioEventGap?.lowSemanticCueRows) ? audioEventGap.lowSemanticCueRows : [])
+  ];
+  const index = new Map();
+  for(const row of rows){
+    if(row?.cue && !index.has(row.cue)) index.set(row.cue, row);
+  }
+  return index;
+}
+
 async function main(){
   if(!exists(TARGET_ARTIFACT)) fail(`Missing Galaga target crop artifact: ${TARGET_ARTIFACT}`);
   const target = readJson(TARGET_ARTIFACT);
+  const audioEventGap = readOptionalJson(AUDIO_EVENT_GAP_ARTIFACT);
+  const cueIndex = audioCueIndex(audioEventGap);
   const targetCrops = Array.isArray(target.targetCrops) ? target.targetCrops : [];
   for(const spec of EFFECT_SPECS){
     for(const targetId of spec.targetIds){
@@ -367,19 +458,39 @@ async function main(){
   const samples = [];
   await withHarnessPage({ stage: 1, ships: 3, challenge: false, seed: 91711 }, async ({ page }) => {
     for(const spec of EFFECT_SPECS){
-      samples.push(await captureImpact(page, spec));
+      const sample = await captureImpact(page, spec);
+      sample.lifecycleFrames = [];
+      const times = Array.isArray(spec.lifecycleTimesS) && spec.lifecycleTimesS.length
+        ? spec.lifecycleTimesS
+        : [spec.advanceS || .02];
+      for(let index = 0; index < times.length; index += 1){
+        sample.lifecycleFrames.push(await captureImpact(page, spec, {
+          key: `life-${String(index + 1).padStart(2, '0')}`,
+          advanceS: times[index]
+        }));
+      }
+      samples.push(sample);
     }
   });
   const targetGrids = new Map();
   const scoredSamples = samples.map(sample => {
     const spec = EFFECT_SPECS.find(item => item.key === sample.key);
-    return scoreImpact(sample, spec, targetCrops, targetGrids);
+    return scoreImpact(sample, spec, targetCrops, targetGrids, cueIndex);
   });
   const scored = scoredSamples.filter(item => Number.isFinite(+item.score10));
+  const lifecycleScored = scoredSamples.filter(item => Number.isFinite(+item.lifecycle?.lifecycleScore10));
+  const audioScored = scoredSamples.filter(item => Number.isFinite(+item.audioCouplingScore10));
   const averageScore10 = scored.length
     ? rounded(scored.reduce((sum, item) => sum + item.score10, 0) / scored.length, 2)
     : null;
+  const averageLifecycleScore10 = lifecycleScored.length
+    ? rounded(lifecycleScored.reduce((sum, item) => sum + item.lifecycle.lifecycleScore10, 0) / lifecycleScored.length, 2)
+    : null;
+  const averageAudioCouplingScore10 = audioScored.length
+    ? rounded(audioScored.reduce((sum, item) => sum + item.audioCouplingScore10, 0) / audioScored.length, 2)
+    : null;
   const weakest = scored.slice().sort((a, b) => a.score10 - b.score10)[0] || null;
+  const weakestLifecycle = lifecycleScored.slice().sort((a, b) => a.lifecycle.lifecycleScore10 - b.lifecycle.lifecycleScore10)[0] || null;
   const artifact = {
     schemaVersion: 1,
     artifactType: 'aurora-impact-explosion-conformance',
@@ -390,22 +501,28 @@ async function main(){
     gameKey: 'aurora-galactica',
     sources: {
       targetCrops: TARGET_ARTIFACT,
+      audioEventGap: AUDIO_EVENT_GAP_ARTIFACT,
       runtimeHarness: 'src/js/90-harness.js setupImpactRuntimeCapture'
     },
     summary: {
       sampleCount: scoredSamples.length,
       targetCropCount: targetCrops.length,
       averageScore10,
+      averageLifecycleScore10,
+      averageAudioCouplingScore10,
       weakestKey: weakest?.key || null,
       weakestScore10: weakest?.score10 || null,
-      scoringMode: 'first-pass-static-runtime-effect-crop-vs-promoted-target-crop',
+      weakestLifecycleKey: weakestLifecycle?.key || null,
+      weakestLifecycleScore10: weakestLifecycle?.lifecycle?.lifecycleScore10 || null,
+      scoringMode: 'static-runtime-effect-crop-plus-lifecycle-and-audio-coupling',
       userFacingRead: weakest
-        ? `Impact/explosion visual feedback is measurable but still immature. Weakest static event is ${weakest.key} at ${weakest.score10}/10; the next scorer must add lifecycle timing so first-hit, kill, and boss-death events do not collapse into one generic burst.`
+        ? `Impact/explosion visual feedback is measurable but still immature. Weakest static event is ${weakest.key} at ${weakest.score10}/10; weakest lifecycle event is ${weakestLifecycle?.key || 'n/a'} at ${weakestLifecycle?.lifecycle?.lifecycleScore10 ?? 'n/a'}/10. The scorer now checks onset/expansion/decay and expected audio cue presence.`
         : 'Impact/explosion visual feedback comparison did not produce a scored sample.'
     },
     measurementLimits: [
-      'This is a static-frame comparator for runtime effect crops against promoted Galaga target explosion crops.',
-      'It does not yet score the temporal lifecycle: onset, expansion, flash decay, particle count over time, sound coupling, or whether boss first-hit damage differs clearly from boss death.',
+      'This compares runtime effect crops against promoted Galaga target explosion crops and now captures a short lifecycle window for each event.',
+      'Lifecycle scoring uses onset/expansion/decay pixel-shape evidence; it is not yet frame-labeled against exact Galaga gameplay video explosion timing.',
+      'Audio coupling currently confirms the expected cue mapping and current event-gap risk; it does not yet sample exact runtime sound onset against the visual frame.',
       'Target crop authority is first-pass because explosion source-sheet crops are small and should be cross-checked against frame-labeled gameplay video.'
     ],
     samples: scoredSamples
@@ -416,8 +533,12 @@ async function main(){
     artifact: rel(OUT),
     sampleCount: scoredSamples.length,
     averageScore10,
+    averageLifecycleScore10,
+    averageAudioCouplingScore10,
     weakestKey: artifact.summary.weakestKey,
-    weakestScore10: artifact.summary.weakestScore10
+    weakestScore10: artifact.summary.weakestScore10,
+    weakestLifecycleKey: artifact.summary.weakestLifecycleKey,
+    weakestLifecycleScore10: artifact.summary.weakestLifecycleScore10
   }, null, 2));
 }
 

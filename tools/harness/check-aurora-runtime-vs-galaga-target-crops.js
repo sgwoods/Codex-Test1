@@ -33,6 +33,7 @@ function main(){
   if(!exists(ARTIFACT)) fail(`Missing Aurora runtime vs Galaga target crop artifact: ${ARTIFACT}`);
   const artifact = readJson(ARTIFACT);
   const comparisons = Array.isArray(artifact.comparisons) ? artifact.comparisons : [];
+  const temporalSequences = Array.isArray(artifact.temporalSequenceComparisons) ? artifact.temporalSequenceComparisons : [];
   const payload = {
     artifact: ARTIFACT,
     summary: artifact.summary,
@@ -63,12 +64,28 @@ function main(){
   if(!Number.isFinite(+artifact.summary?.averageScore10) || artifact.summary.averageScore10 <= 0 || artifact.summary.averageScore10 > 10){
     fail('Runtime-vs-target crop summary has an invalid average score.', payload);
   }
+  if(temporalSequences.length){
+    for(const sequence of temporalSequences){
+      if(!Number.isFinite(+sequence.sequenceScore10) || sequence.sequenceScore10 <= 0 || sequence.sequenceScore10 > 10){
+        fail('Runtime-vs-target temporal sequence has an invalid score.', { sequence, payload });
+      }
+      if(!Array.isArray(sequence.frames) || sequence.frames.length < 2){
+        fail('Runtime-vs-target temporal sequence should expose frame-level evidence.', { sequence, payload });
+      }
+      for(const frame of sequence.frames){
+        if(!exists(frame.runtimeCrop) || !exists(frame.bestTargetCrop)){
+          fail('Runtime-vs-target temporal sequence frame is missing image evidence.', { frame, sequence, payload });
+        }
+      }
+    }
+  }
   console.log(JSON.stringify({
     ok: true,
     artifact: ARTIFACT,
     sampleCount: comparisons.length,
     targetCropCount: artifact.summary?.targetCropCount,
     averageScore10: artifact.summary?.averageScore10,
+    averageTemporalSequenceScore10: artifact.summary?.averageTemporalSequenceScore10,
     weakestSpriteKey: artifact.summary?.weakestSpriteKey,
     weakestScore10: artifact.summary?.weakestScore10
   }, null, 2));

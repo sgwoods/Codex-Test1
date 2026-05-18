@@ -31,6 +31,12 @@ const POSE_CANDIDATES = {
   'challenge-mosquito': ['green-family-front', 'yellow-family-front', 'magenta-family-front', 'blue-yellow-family-front']
 };
 
+const TEMPORAL_POSE_SEQUENCES = {
+  'bee-line': ['formation-front', 'flap-a', 'flap-b', 'flap-b', 'flap-a', 'formation-front'],
+  'but-line': ['formation-front', 'flap-a', 'flap-b', 'flap-b', 'flap-a', 'formation-front'],
+  'boss-line': ['formation-front', 'flap-a', 'flap-b', 'flap-b', 'flap-a', 'formation-front']
+};
+
 function fail(message, payload){
   console.error(message);
   if(payload) console.error(JSON.stringify(payload, null, 2));
@@ -276,6 +282,14 @@ function targetCandidatesForSample(sample, targetCrops){
   return roleCandidates.length ? roleCandidates : targetCrops;
 }
 
+function targetCandidatesForRolePose(spriteKey, poseKey, targetCrops){
+  const roles = ROLE_CANDIDATES[spriteKey] || [];
+  const roleCandidates = targetCrops.filter(crop => roles.includes(crop.roleKey));
+  const poseCandidates = roleCandidates.filter(crop => crop.poseKey === poseKey);
+  if(poseCandidates.length) return poseCandidates;
+  return roleCandidates.length ? roleCandidates : targetCrops;
+}
+
 function compareSample(sample, targetCrops, targetGrids){
   if(!exists(sample.cropImage)) fail(`Runtime crop image is missing for ${sample.spriteKey}`, sample);
   const runtimeFile = abs(sample.cropImage);
@@ -317,6 +331,92 @@ function compareSample(sample, targetCrops, targetGrids){
   };
 }
 
+function bestFrameTargetComparison(frame, spriteKey, poseKey, targetCrops, targetGrids){
+  if(!exists(frame.cropImage)) fail(`Runtime cadence crop image is missing for ${spriteKey} frame ${frame.frameIndex}`, frame);
+  const runtimeGrid = gridForImage(abs(frame.cropImage));
+  const candidates = targetCandidatesForRolePose(spriteKey, poseKey, targetCrops)
+    .map(target => {
+      const targetGrid = targetGrids.get(target.id) || gridForImage(abs(target.targetCrop), 32, 32, target.metrics?.litBox || null);
+      targetGrids.set(target.id, targetGrid);
+      return Object.assign({
+        targetCropId: target.id,
+        targetRoleKey: target.roleKey,
+        targetPoseKey: target.poseKey,
+        targetCrop: target.targetCrop
+      }, compareGrids(runtimeGrid, targetGrid));
+    })
+    .sort((a, b) => b.score10 - a.score10);
+  const best = candidates[0] || null;
+  return {
+    frameIndex: frame.frameIndex,
+    enemyTm: frame.enemyTm,
+    runtimeCrop: frame.cropImage,
+    expectedPoseKey: poseKey,
+    bestTargetCropId: best?.targetCropId || null,
+    bestTargetPoseKey: best?.targetPoseKey || null,
+    bestTargetCrop: best?.targetCrop || null,
+    bestScore10: best?.score10 || null,
+    bestComponents: best ? {
+      jaccard: best.jaccard,
+      silhouetteAgreement: best.silhouetteAgreement,
+      colorSimilarity: best.colorSimilarity,
+      fillRatioDelta: best.fillRatioDelta,
+      aspectDelta: best.aspectDelta
+    } : null
+  };
+}
+
+function poseTransitionCount(frames){
+  let transitions = 0;
+  let last = null;
+  for(const frame of frames){
+    const pose = frame.bestTargetPoseKey || frame.expectedPoseKey || '';
+    if(last !== null && pose && pose !== last) transitions += 1;
+    if(pose) last = pose;
+  }
+  return transitions;
+}
+
+function compareTemporalSequence(sample, targetCrops, targetGrids){
+  const frames = Array.isArray(sample.frames) ? sample.frames : [];
+  const expected = TEMPORAL_POSE_SEQUENCES[sample.spriteKey] || [];
+  if(!frames.length || !expected.length) return null;
+  const frameComparisons = frames.map((frame, index) => {
+    const poseKey = expected[Math.min(expected.length - 1, Math.floor(index * expected.length / Math.max(1, frames.length)))] || expected[0];
+    return bestFrameTargetComparison(frame, sample.spriteKey, poseKey, targetCrops, targetGrids);
+  });
+  const scored = frameComparisons.filter(frame => Number.isFinite(+frame.bestScore10));
+  const averageFrameScore10 = scored.length
+    ? rounded(scored.reduce((sum, frame) => sum + frame.bestScore10, 0) / scored.length, 2)
+    : null;
+  const expectedPoseSet = new Set(expected);
+  const matchedPoseSet = new Set(frameComparisons.map(frame => frame.bestTargetPoseKey).filter(Boolean));
+  const expectedPoseCoverage = expectedPoseSet.size
+    ? [...expectedPoseSet].filter(pose => matchedPoseSet.has(pose)).length / expectedPoseSet.size
+    : 0;
+  const transitions = poseTransitionCount(frameComparisons);
+  const transitionScore = Math.min(1, transitions / Math.max(1, expectedPoseSet.size - 1));
+  const sequenceScore10 = Number.isFinite(+averageFrameScore10)
+    ? rounded(averageFrameScore10 * .78 + expectedPoseCoverage * 1.4 + transitionScore * .8, 2)
+    : null;
+  return {
+    spriteKey: sample.spriteKey,
+    motionAxis: sample.motionAxis || 'full-flap-cadence-window',
+    frameCount: frames.length,
+    expectedPoseSequence: expected,
+    expectedPoseCoverage: rounded(expectedPoseCoverage, 3),
+    observedTargetPoseTransitions: transitions,
+    averageFrameScore10,
+    sequenceScore10,
+    weakestFrameScore10: scored.length ? Math.min(...scored.map(frame => frame.bestScore10)) : null,
+    strongestFrameScore10: scored.length ? Math.max(...scored.map(frame => frame.bestScore10)) : null,
+    read: Number.isFinite(+sequenceScore10)
+      ? `${sample.spriteKey} cadence now scores each runtime frame against an expected Galaga pose sequence; this is a target-relative animation read, not merely local motion delta.`
+      : `${sample.spriteKey} cadence could not be target-scored from the current crop set.`,
+    frames: frameComparisons
+  };
+}
+
 function main(){
   if(!exists(RUNTIME_ARTIFACT)) fail(`Missing runtime sprite conformance artifact: ${RUNTIME_ARTIFACT}`);
   if(!exists(TARGET_ARTIFACT)) fail(`Missing Galaga target crop artifact: ${TARGET_ARTIFACT}`);
@@ -331,12 +431,20 @@ function main(){
   }
   const targetGrids = new Map();
   const comparisons = samples.map(sample => compareSample(sample, targetCrops, targetGrids));
+  const temporalSequenceComparisons = (Array.isArray(runtime.cadenceSamples) ? runtime.cadenceSamples : [])
+    .map(sample => compareTemporalSequence(sample, targetCrops, targetGrids))
+    .filter(Boolean);
   const scored = comparisons.filter(item => Number.isFinite(+item.bestScore10));
+  const temporalScored = temporalSequenceComparisons.filter(item => Number.isFinite(+item.sequenceScore10));
   const averageScore10 = scored.length
     ? rounded(scored.reduce((sum, item) => sum + item.bestScore10, 0) / scored.length, 2)
     : null;
+  const averageTemporalSequenceScore10 = temporalScored.length
+    ? rounded(temporalScored.reduce((sum, item) => sum + item.sequenceScore10, 0) / temporalScored.length, 2)
+    : null;
   const weakest = scored.slice().sort((a, b) => a.bestScore10 - b.bestScore10)[0] || null;
   const strongest = scored.slice().sort((a, b) => b.bestScore10 - a.bestScore10)[0] || null;
+  const weakestTemporal = temporalScored.slice().sort((a, b) => a.sequenceScore10 - b.sequenceScore10)[0] || null;
   const artifact = {
     schemaVersion: 1,
     artifactType: 'aurora-runtime-vs-galaga-target-crops',
@@ -359,18 +467,24 @@ function main(){
       weakestBestTarget: weakest?.bestTargetCropId || null,
       strongestSpriteKey: strongest?.spriteKey || null,
       strongestScore10: strongest?.bestScore10 || null,
+      temporalSequenceSampleCount: temporalSequenceComparisons.length,
+      averageTemporalSequenceScore10,
+      weakestTemporalSpriteKey: weakestTemporal?.spriteKey || null,
+      weakestTemporalSequenceScore10: weakestTemporal?.sequenceScore10 || null,
       scoringMode: 'first-pass-normalized-image-grid-comparison'
     },
     measurementLimits: [
       'This is a first-pass static-image comparator using already-captured Aurora runtime crop PNGs and promoted source-sheet target crop PNGs.',
       'Images are normalized to a shared grid, so this is useful for role/pose target triage but not yet a final pixel-perfect conformance score.',
-      'The comparator does not score animation timing, flap cadence, dive rotation, formation context, capture/rescue transitions, or target-crop authority disputes.',
+      'Static sprite comparisons do not by themselves score gameplay timing, dive rotation, formation context, capture/rescue transitions, or target-crop authority disputes.',
+      'Temporal sequence comparisons now score full flap-cadence runtime frames against expected Galaga target pose sequences, but do not yet assert exact frame timing against target video.',
       'Images are trimmed to their lit sprite bounds before scoring so large runtime crop padding does not dominate the comparison.',
       'Promoted target crops now prefer their accepted artifact litBox and ignore low-saturation source-sheet guide pixels, so gray sheet borders do not masquerade as sprite mass.',
       'The static grid comparator allows a bounded plus/minus two-cell alignment search so browser scaling and crop phase do not overwhelm otherwise target-like pixel art.',
       'Dual fighter now uses a derived two-fighter composite target, but carried/captured fighter targets still need promotion before those states should be treated as mature.'
     ],
-    comparisons
+    comparisons,
+    temporalSequenceComparisons
   };
   writeJson(OUT, artifact);
   console.log(JSON.stringify({
@@ -381,7 +495,9 @@ function main(){
     averageScore10,
     weakestSpriteKey: artifact.summary.weakestSpriteKey,
     weakestScore10: artifact.summary.weakestScore10,
-    weakestBestTarget: artifact.summary.weakestBestTarget
+    weakestBestTarget: artifact.summary.weakestBestTarget,
+    averageTemporalSequenceScore10,
+    weakestTemporalSpriteKey: artifact.summary.weakestTemporalSpriteKey
   }, null, 2));
 }
 

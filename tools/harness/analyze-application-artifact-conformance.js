@@ -324,10 +324,10 @@ function main(){
         ? (runtimeVsTargetSummary.scoringMode || 'first-pass normalized image-grid comparison')
         : 'Direct runtime-vs-promoted-target-crop artifact pending',
       measurement: runtimeVsTargetCrops
-        ? `${runtimeVsTargetSummary.sampleCount || 0} live runtime crop PNGs compared against ${runtimeVsTargetSummary.targetCropCount || 0} promoted target crops; weakest ${runtimeVsTargetSummary.weakestSpriteKey || 'n/a'} ${scoreText(runtimeVsTargetSummary.weakestScore10)}; best matched target ${runtimeVsTargetSummary.weakestBestTarget || 'n/a'}.`
+        ? `${runtimeVsTargetSummary.sampleCount || 0} live runtime crop PNGs compared against ${runtimeVsTargetSummary.targetCropCount || 0} promoted target crops; weakest ${runtimeVsTargetSummary.weakestSpriteKey || 'n/a'} ${scoreText(runtimeVsTargetSummary.weakestScore10)}; best matched target ${runtimeVsTargetSummary.weakestBestTarget || 'n/a'}. Target-relative cadence sequence score ${scoreText(runtimeVsTargetSummary.averageTemporalSequenceScore10)} across ${runtimeVsTargetSummary.temporalSequenceSampleCount || 0} sequence window(s).`
         : 'Run npm run harness:analyze:aurora-runtime-vs-galaga-target-crops after runtime sprite crops and target crops exist.',
       evidence: runtimeVsTargetCrops ? SOURCES.runtimeVsTargetCrops : `${SOURCES.runtimeSprite}; ${SOURCES.spriteSheetTargetCrops}`,
-      next: 'Use the top candidate mismatch data to update sprite geometry, target mappings, and composite targets; then add temporal windows for flap, dive, capture/rescue, projectile, explosion, tractor beam, and challenge-stage specialty motion.'
+      next: 'Use the top candidate mismatch and target-sequence data to update sprite geometry, flap cadence, target mappings, and composite targets; then expand to dive, capture/rescue, projectile, explosion, tractor beam, and challenge-stage specialty motion.'
     }),
     row({
       id: 'sprite-motion-animation-coverage',
@@ -358,10 +358,10 @@ function main(){
         ? (impactExplosionSummary.scoringMode || 'first-pass static runtime effect crop comparison')
         : 'Impact/explosion runtime artifact pending',
       measurement: impactExplosion
-        ? `${impactExplosionSummary.sampleCount || 0} runtime impact/explosion crops compared against promoted target explosion crops; weakest ${impactExplosionSummary.weakestKey || 'n/a'} ${scoreText(impactExplosionSummary.weakestScore10)}. ${impactExplosionSummary.userFacingRead || ''}`
+        ? `${impactExplosionSummary.sampleCount || 0} runtime impact/explosion crops compared against promoted target explosion crops; weakest ${impactExplosionSummary.weakestKey || 'n/a'} ${scoreText(impactExplosionSummary.weakestScore10)}; lifecycle ${scoreText(impactExplosionSummary.averageLifecycleScore10)}; audio coupling ${scoreText(impactExplosionSummary.averageAudioCouplingScore10)}. ${impactExplosionSummary.userFacingRead || ''}`
         : 'Run npm run harness:analyze:aurora-impact-explosion-conformance to capture enemy-hit, enemy-boom, boss-first-hit, and boss-boom event visuals.',
       evidence: impactExplosion ? SOURCES.impactExplosion : SOURCES.spriteSheetTargetCrops,
-      next: 'Extend from static crops into onset/expansion/decay windows and pair each impact visual with its runtime audio event so player feedback clarity becomes measurable.'
+      next: 'Replace first-pass lifecycle heuristics with exact frame-labeled Galaga gameplay timing, then use visual/audio coupling to decide whether boss first-hit, normal kill, and boss death read distinctly enough to players.'
     }),
     row({
       id: 'source-frame-pixel-targets',

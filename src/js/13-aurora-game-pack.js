@@ -715,14 +715,14 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   pathFamily:'cross-sweep',
   groups:5,
   enemiesPerGroup:8,
-  upperBandRatio:.48,
-  spawnOffsetX:50,
+  upperBandRatio:.5,
+  spawnOffsetX:68,
   waveSpacingY:12,
   rowSpacingY:9,
-  waveDelay:1.38,
-  slotDelay:.14,
-  arcAmp:1.22,
-  dropAmp:1.02,
+  waveDelay:1.46,
+  slotDelay:.12,
+  arcAmp:1.46,
+  dropAmp:1.08,
   laneTypes:Object.freeze(['but','boss','rogue','bee','bee','rogue','boss','but']),
   groupLaneTypes:Object.freeze([
    Object.freeze(['but','boss','rogue','bee','bee','rogue','boss','but']),
@@ -731,8 +731,8 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
    Object.freeze(['rogue','bee','boss','but','but','boss','bee','rogue']),
    Object.freeze(['but','rogue','boss','bee','bee','boss','rogue','but'])
   ]),
-  groupVisualFamilies:Object.freeze(['classic','classic','scorpion','scorpion','stingray']),
-  groupPathFamilies:Object.freeze(['cross-sweep','cross-sweep','hook-arc','cross-sweep','boss-led-loop'])
+  groupVisualFamilies:Object.freeze(['classic','scorpion','scorpion','stingray','stingray']),
+  groupPathFamilies:Object.freeze(['cross-sweep','cross-sweep','hook-arc','hook-arc','boss-led-loop'])
  }),
  Object.freeze({
   fromStage:11,

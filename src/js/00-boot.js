@@ -41,7 +41,7 @@ const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=docume
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),platformTrackToast=document.getElementById('platformTrackToast'),platformTrackTitle=document.getElementById('platformTrackTitle'),platformTrackArtist=document.getElementById('platformTrackArtist'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn'),resetTestPilotScoresControl=document.getElementById('resetTestPilotScoresBtn');
-const testPanel=document.getElementById('testPanel'),testStartKind=document.getElementById('testStartKind'),testExpertPlays=document.getElementById('testExpertPlays'),testExpertPlaysHint=document.getElementById('testExpertPlaysHint'),testStage=document.getElementById('testStage'),testChallengeStage=document.getElementById('testChallengeStage'),testChallengeStageField=document.getElementById('testChallengeStageField'),testChallengeStageHint=document.getElementById('testChallengeStageHint'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),commentatorToggle=document.getElementById('commentatorToggle'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
+const testPanel=document.getElementById('testPanel'),testStartKind=document.getElementById('testStartKind'),testExpertPlays=document.getElementById('testExpertPlays'),testExpertPlaysHint=document.getElementById('testExpertPlaysHint'),testStage=document.getElementById('testStage'),testChallengeStage=document.getElementById('testChallengeStage'),testChallengeStageField=document.getElementById('testChallengeStageField'),testChallengeStageHint=document.getElementById('testChallengeStageHint'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),commentatorToggle=document.getElementById('commentatorToggle'),graphicsTheme=document.getElementById('graphicsTheme'),spriteRenderMode=document.getElementById('spriteRenderMode'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
 const arcadeMusicToggleBtn=document.getElementById('arcadeMusicToggleBtn');
 const arcadeMusicFrameHost=document.getElementById('arcadeMusicFrameHost');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
@@ -1660,11 +1660,12 @@ const DEFAULT_TEST_CFG=Object.freeze({
  ships:3,
  extendFirst:20000,
  extendRecurring:70000,
- challenge:false,
- audioTheme:'galaga-reference-assets',
- graphicsTheme:'aurora-borealis',
- starfieldIntensity:1.25,
- starfieldSpeed:1
+  challenge:false,
+  audioTheme:'galaga-reference-assets',
+  graphicsTheme:'aurora-borealis',
+  spriteRenderMode:'auto',
+  starfieldIntensity:1.25,
+  starfieldSpeed:1
 });
 let testCfgCache=null;
 function productionRootModeEnabled(){
@@ -1705,8 +1706,12 @@ function sanitizeGraphicsThemeValue(value=''){
  const next=String(value||'').trim()||'auto';
  if(next==='auto')return 'auto';
  if(typeof currentGamePackAtmosphereTheme!=='function')return 'auto';
- const resolved=currentGamePackAtmosphereTheme(next);
- return resolved?.id===next?next:DEFAULT_TEST_CFG.graphicsTheme;
+  const resolved=currentGamePackAtmosphereTheme(next);
+  return resolved?.id===next?next:DEFAULT_TEST_CFG.graphicsTheme;
+}
+function sanitizeSpriteRenderModeValue(value=''){
+ const next=String(value||'').trim()||'auto';
+ return ['auto','reference-pixel','aurora-themed'].includes(next)?next:DEFAULT_TEST_CFG.spriteRenderMode;
 }
 function sanitizeStarfieldMultiplier(value,fallback=1){
  const next=+value;
@@ -1726,6 +1731,7 @@ function applyTestCfgToControls(cfg){
  if(testChallenge)testChallenge.checked=startKind==='challenge'||!!startCfg.challenge;
  if(audioTheme)audioTheme.value=cfg.audioTheme;
  if(graphicsTheme)graphicsTheme.value=cfg.graphicsTheme;
+ if(spriteRenderMode)spriteRenderMode.value=sanitizeSpriteRenderModeValue(cfg.spriteRenderMode);
  if(graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=String(cfg.starfieldIntensity);
  if(graphicsStarfieldSpeed)graphicsStarfieldSpeed.value=String(cfg.starfieldSpeed);
  syncChallengeStartControls();
@@ -1884,6 +1890,7 @@ function currentGraphicsOverrides(){
  const cfg=testCfgCache||loadTestCfg();
  return{
   graphicsTheme:sanitizeGraphicsThemeValue(cfg.graphicsTheme),
+  spriteRenderMode:sanitizeSpriteRenderModeValue(cfg.spriteRenderMode),
   starfieldIntensity:sanitizeStarfieldMultiplier(cfg.starfieldIntensity,1),
   starfieldSpeed:sanitizeStarfieldMultiplier(cfg.starfieldSpeed,1)
  };
@@ -1937,6 +1944,7 @@ function loadTestCfg(){
    challenge:startKind==='challenge'||!!raw.challenge,
    audioTheme:sanitizeAudioThemeValue(raw.audioTheme||DEFAULT_TEST_CFG.audioTheme),
    graphicsTheme:sanitizeGraphicsThemeValue(raw.graphicsTheme||DEFAULT_TEST_CFG.graphicsTheme),
+   spriteRenderMode:sanitizeSpriteRenderModeValue(raw.spriteRenderMode||DEFAULT_TEST_CFG.spriteRenderMode),
    starfieldIntensity:sanitizeStarfieldMultiplier(raw.starfieldIntensity,DEFAULT_TEST_CFG.starfieldIntensity),
    starfieldSpeed:sanitizeStarfieldMultiplier(raw.starfieldSpeed,DEFAULT_TEST_CFG.starfieldSpeed)
   };
@@ -1979,14 +1987,17 @@ function saveTestCfg(){
   challenge:startCfg.challenge,
   audioTheme:sanitizeAudioThemeValue(audioTheme?.value||DEFAULT_TEST_CFG.audioTheme),
   graphicsTheme:sanitizeGraphicsThemeValue(graphicsTheme?.value||DEFAULT_TEST_CFG.graphicsTheme),
+  spriteRenderMode:sanitizeSpriteRenderModeValue(spriteRenderMode?.value||DEFAULT_TEST_CFG.spriteRenderMode),
   starfieldIntensity:sanitizeStarfieldMultiplier(graphicsStarfieldIntensity?.value,DEFAULT_TEST_CFG.starfieldIntensity),
   starfieldSpeed:sanitizeStarfieldMultiplier(graphicsStarfieldSpeed?.value,DEFAULT_TEST_CFG.starfieldSpeed)
  };
+ const spriteModeChanged=sanitizeSpriteRenderModeValue(currentCfg.spriteRenderMode)!==cfg.spriteRenderMode;
  testCfgCache=cfg;
  applyTestCfgToControls(cfg);
  syncDeveloperToolsUi();
  writePref(TEST_PREF_KEY,JSON.stringify(cfg));
  if(typeof sfx!=='undefined'&&typeof sfx.primeReferenceTheme==='function')sfx.primeReferenceTheme(cfg.audioTheme);
+ if(spriteModeChanged)logEvent('sprite_render_mode_changed',{mode:cfg.spriteRenderMode,graphicsTheme:cfg.graphicsTheme});
  return Object.assign({},cfg);
 }
 function syncSettingsUi(){
@@ -2546,7 +2557,7 @@ if(gameSoundVolumeControl){
  gameSoundVolumeControl.addEventListener('input',()=>setGameSoundVolume((+gameSoundVolumeControl.value||0)/100,{log:0,source:'developer_panel'}));
  gameSoundVolumeControl.addEventListener('change',()=>setGameSoundVolume((+gameSoundVolumeControl.value||0)/100,{log:1,source:'developer_panel'}));
 }
-for(const el of [testStartKind,testExpertPlays,testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,audioTheme,graphicsTheme,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
+for(const el of [testStartKind,testExpertPlays,testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,audioTheme,graphicsTheme,spriteRenderMode,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
 for(const el of [testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring])if(el)el.addEventListener('input',saveTestCfg);
 if(rootMode)rootMode.addEventListener('input',()=>{
  developerRootMode=String(rootMode.value||'').trim()===ROOT_UNLOCK_CODE;

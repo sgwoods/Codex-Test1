@@ -317,7 +317,17 @@ function drawTargetSpriteRows(rows,palette,scale=1,offsetX=0,offsetY=0,opts={}){
  return true;
 }
 
+function currentSpriteRenderMode(){
+ const graphics=typeof currentGraphicsOverrides==='function'?currentGraphicsOverrides():null;
+ return graphics?.spriteRenderMode||'auto';
+}
+
+function referencePixelSpritesEnabled(){
+ return currentSpriteRenderMode()!=='aurora-themed';
+}
+
 function drawTargetEnemySprite(e,flap){
+ if(!referencePixelSpritesEnabled())return false;
  if(e?.fam==='dragonfly')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeGreen,TARGET_SPRITE_PALETTES.challengeGreen,1);
  if(e?.fam==='mosquito')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeYellow,TARGET_SPRITE_PALETTES.challengeYellow,1);
  if(e?.fam==='scorpion')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeMagenta,TARGET_SPRITE_PALETTES.challengeMagenta,1);
@@ -379,7 +389,28 @@ function playerHitbox(){return{w:7,h:6};}
 
 function drawMiniShip(s=1,colA='#9adfff',colB='#72c8ff'){
  const palette=Object.assign({},TARGET_SPRITE_PALETTES.ship,{W:colA,B:colB});
- drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,palette,Math.max(1,Math.round(s)));
+ if(referencePixelSpritesEnabled()){
+  drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,palette,Math.max(1,Math.round(s)));
+  return;
+ }
+ drawAuroraShipGlyph(0,0,Math.max(1,s),colA,colB);
+}
+
+function drawAuroraShipGlyph(x=0,y=0,s=1,colA='#eaf7ff',colB='#78d8ff'){
+ const ps=2*s;
+ ctx.fillStyle=colA;
+ ctx.fillRect(x-ps*1.5,y-ps*8,ps*3,ps*5);
+ ctx.fillRect(x-ps*4.5,y-ps*3,ps*9,ps*4);
+ ctx.fillRect(x-ps*6.5,y-ps,ps*2,ps);
+ ctx.fillRect(x+ps*4.5,y-ps,ps*2,ps);
+ ctx.fillRect(x-ps*5.5,y,ps*11,ps*2);
+ ctx.fillStyle=colB;
+ ctx.fillRect(x-ps*5.5,y-ps*2,ps*2,ps*4);
+ ctx.fillRect(x+ps*3.5,y-ps*2,ps*2,ps*4);
+ ctx.fillStyle='#ff3448';
+ ctx.fillRect(x-ps*4.5,y-ps*6,ps*1.5,ps*2.8);
+ ctx.fillRect(x+ps*3,y-ps*6,ps*1.5,ps*2.8);
+ ctx.fillRect(x-ps*1.1,y-ps*1.4,ps*2.2,ps*2);
 }
 
 function endOfRunOverlayActive(){
@@ -493,7 +524,14 @@ function drawPlayerBody(x,y,dual=0,ghost=0){
  ctx.save();
  ctx.translate(Math.round(x),Math.round(y));
  if(ghost)ctx.globalAlpha=.52;
- if(dual){
+ if(!referencePixelSpritesEnabled()){
+  if(dual){
+   drawAuroraShipGlyph(-10.5,0,1,'#eaf7ff','#ff4a5c');
+   drawAuroraShipGlyph(10.5,0,1,'#eaf7ff','#78d8ff');
+  }else{
+   drawAuroraShipGlyph(0,0,1);
+  }
+ }else if(dual){
   drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1,-10.5,0);
   drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1,10.5,0);
  }else{
@@ -746,6 +784,8 @@ function drawAuroraBoard({ox,oy,scale,dx,dy}){
  ctx.globalAlpha=1;
  if(!isolatedSpriteCapture)drawStageBackdrop();
  window.__platinumRenderDebug.backgroundMode=resolvedBoardAtmosphere().backgroundMode||'classic-stars';
+ window.__platinumRenderDebug.spriteRenderMode=currentSpriteRenderMode();
+ window.__platinumRenderDebug.referencePixelSprites=referencePixelSpritesEnabled();
  window.__platinumRenderDebug.starfieldProfile=starfield?.id||'classic-arcade-stars';
  window.__platinumRenderDebug.starfieldCount=S.st.length;
  window.__platinumRenderDebug.starfieldIntensityScale=+(starfield?.intensityScale||1);
