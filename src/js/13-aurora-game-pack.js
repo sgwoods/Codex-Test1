@@ -695,19 +695,19 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   waveSpacingY:12,
   rowSpacingY:8,
   waveDelay:1.46,
-  slotDelay:.16,
-  arcAmp:.78,
-  dropAmp:.68,
+  slotDelay:.12,
+  arcAmp:1.04,
+  dropAmp:.9,
   laneTypes:Object.freeze(['bee','bee','bee','bee','but','but','but','but']),
   groupLaneTypes:Object.freeze([
    Object.freeze(['bee','bee','bee','bee','but','but','but','but']),
-   Object.freeze(['but','but','but','but','bee','bee','bee','bee']),
-   Object.freeze(['bee','bee','but','but','but','but','bee','bee']),
-   Object.freeze(['but','bee','bee','but','but','bee','bee','but']),
-   Object.freeze(['bee','but','bee','but','but','bee','but','bee'])
+   Object.freeze(['bee','bee','bee','bee','bee','bee','bee','bee']),
+   Object.freeze(['but','but','but','but','but','but','but','but']),
+   Object.freeze(['bee','but','bee','but','but','bee','but','bee']),
+   Object.freeze(['but','bee','bee','but','but','bee','bee','but'])
   ]),
   groupVisualFamilies:Object.freeze(['classic','classic','classic','classic','classic']),
-  groupPathFamilies:Object.freeze(['first-challenge-peel','first-challenge-peel','first-challenge-peel','first-challenge-peel','first-challenge-peel'])
+  groupPathFamilies:Object.freeze(['first-challenge-peel','classic-column-drop','side-hook-return','classic-column-drop','first-challenge-peel'])
  }),
  Object.freeze({
   fromStage:7,

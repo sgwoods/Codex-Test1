@@ -101,6 +101,13 @@ function updateChallengeEnemy(e,dt){
 	  }else if(pathFamily==='first-challenge-peel'){
 	   e.x=startX+(laneX-startX)*Math.sin(q*Math.PI/2);
 	   e.y=topY+q*2.8*dropAmp;
+	  }else if(pathFamily==='classic-column-drop'){
+	   const columnX=PLAY_W/2+(slot-1.5)*24*side;
+	   e.x=columnX+Math.sin(q*Math.PI+p+wave*.35)*5*arcAmp;
+	   e.y=-26+q*(topY+34);
+	  }else if(pathFamily==='side-hook-return'){
+	   e.x=startX+(laneX-startX)*Math.sin(q*Math.PI/2)+side*Math.sin(q*Math.PI*1.4+p)*12*arcAmp;
+	   e.y=topY+Math.sin(q*Math.PI*.9+p)*12*dropAmp;
 	  }else if(pathFamily==='crown-split-cascade'){
 	   e.x=startX+(laneX-startX)*curve+sweep*Math.sin(q*Math.PI*2.6+p+slot*.35)*22*arcAmp;
 	   e.y=topY+Math.sin(q*Math.PI*1.8+p)*9*arcAmp+q*5*dropAmp;
@@ -140,6 +147,14 @@ function updateChallengeEnemy(e,dt){
 	   const glide=18+slot*4;
 	   e.x=laneX-side*(q*glide);
 	   e.y=topY+q*4.2*dropAmp;
+	  }else if(pathFamily==='classic-column-drop'){
+	   const columnX=PLAY_W/2+(slot-1.5)*24*side;
+	   e.x=columnX+Math.sin(q*Math.PI*2.2+p+wave*.4)*7*arcAmp;
+	   e.y=topY+q*(174+slot*7)*dropAmp;
+	  }else if(pathFamily==='side-hook-return'){
+	   const hook=Math.sin(q*Math.PI);
+	   e.x=laneX-side*(hook*72+Math.sin(q*Math.PI*2.2+p)*9)*fm.challengeSweep*arcAmp;
+	   e.y=topY+q*(72+slot*9)*dropAmp+Math.cos(q*Math.PI*1.4+p)*5;
 	  }else if(pathFamily==='crown-split-cascade'){
 	   const cascade=slot%2?-1:1;
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.4+p*.4)*44+Math.sin(q*Math.PI)*28)*fm.challengeSweep*arcAmp*.82;
@@ -182,6 +197,13 @@ function updateChallengeEnemy(e,dt){
 	   const glide=18+slot*4;
 	   e.x=laneX-side*(glide+q*(44+slot*4));
 	   e.y=topY+6+q*132*fm.challengeDrop*dropAmp;
+	  }else if(pathFamily==='classic-column-drop'){
+	   const columnX=PLAY_W/2+(slot-1.5)*24*side;
+	   e.x=columnX+side*(12+q*(54+slot*8))*arcAmp;
+	   e.y=topY+160+q*188*fm.challengeDrop*dropAmp;
+	  }else if(pathFamily==='side-hook-return'){
+	   e.x=laneX-side*(46+q*(92+slot*9))*fm.challengeSweep*arcAmp+Math.sin(q*8+p)*4;
+	   e.y=topY+70+q*216*fm.challengeDrop*dropAmp;
 	  }else if(pathFamily==='crown-split-cascade'){
 	   const exit=sweep*(slot%2?-1:1);
 	   e.x=laneX+exit*(22+q*92)*fm.challengeSweep*arcAmp+Math.sin(q*11+p)*4.2;

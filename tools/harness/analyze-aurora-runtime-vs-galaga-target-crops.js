@@ -106,10 +106,23 @@ function colorSimilarity(a, b){
 
 function isLitPixel(rr, gg, bb){
   const luma = .299 * rr + .587 * gg + .114 * bb;
-  return rr + gg + bb > 90 && Math.max(rr, gg, bb) > 38 && luma > 18;
+  const saturation = Math.max(rr, gg, bb) - Math.min(rr, gg, bb);
+  return rr + gg + bb > 90 && Math.max(rr, gg, bb) > 38 && luma > 18 && (saturation > 26 || luma > 170);
 }
 
-function litBounds(image, pad = 1){
+function litBounds(image, pad = 1, preferred = null){
+  if(preferred && Number.isFinite(+preferred.width) && Number.isFinite(+preferred.height) && +preferred.width > 0 && +preferred.height > 0){
+    const x = Math.max(0, Math.min(image.width - 1, +preferred.x || 0));
+    const y = Math.max(0, Math.min(image.height - 1, +preferred.y || 0));
+    return {
+      x,
+      y,
+      width: Math.max(1, Math.min(image.width - x, +preferred.width || image.width)),
+      height: Math.max(1, Math.min(image.height - y, +preferred.height || image.height)),
+      empty: false,
+      source: 'artifact-lit-box'
+    };
+  }
   let minX = image.width;
   let minY = image.height;
   let maxX = -1;
@@ -168,9 +181,9 @@ function sampleCell(image, bounds, gx, gy, cols, rows){
   } : { lit: false, rgb: [0, 0, 0] };
 }
 
-function gridForImage(file, cols = 32, rows = 32){
+function gridForImage(file, cols = 32, rows = 32, preferredBounds = null){
   const image = decodeImage(file);
-  const bounds = litBounds(image, 1);
+  const bounds = litBounds(image, 1, preferredBounds);
   const grid = [];
   let filled = 0;
   for(let y = 0; y < rows; y++){
@@ -247,7 +260,7 @@ function compareSample(sample, targetCrops, targetGrids){
   const runtimeGrid = gridForImage(runtimeFile);
   const candidateResults = targetCandidatesForSample(sample, targetCrops)
     .map(target => {
-      const targetGrid = targetGrids.get(target.id) || gridForImage(abs(target.targetCrop));
+      const targetGrid = targetGrids.get(target.id) || gridForImage(abs(target.targetCrop), 32, 32, target.metrics?.litBox || null);
       targetGrids.set(target.id, targetGrid);
       const comparison = compareGrids(runtimeGrid, targetGrid);
       return Object.assign({
@@ -331,6 +344,7 @@ function main(){
       'Images are normalized to a shared grid, so this is useful for role/pose target triage but not yet a final pixel-perfect conformance score.',
       'The comparator does not score animation timing, flap cadence, dive rotation, formation context, capture/rescue transitions, or target-crop authority disputes.',
       'Images are trimmed to their lit sprite bounds before scoring so large runtime crop padding does not dominate the comparison.',
+      'Promoted target crops now prefer their accepted artifact litBox and ignore low-saturation source-sheet guide pixels, so gray sheet borders do not masquerade as sprite mass.',
       'Dual fighter now uses a derived two-fighter composite target, but carried/captured fighter targets still need promotion before those states should be treated as mature.'
     ],
     comparisons

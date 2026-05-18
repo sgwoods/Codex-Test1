@@ -27,6 +27,18 @@ const TEMPORAL_PHASE_SPECS = [
   { spriteKey: 'boss-line', kind: 'boss-line', subject: 'enemy', playfieldWidth: 66, playfieldHeight: 54 }
 ];
 
+const DIVE_POSE_SPECS = [
+  { spriteKey: 'bee-line-dive-left', modelKey: 'bee-line', kind: 'bee-line', subject: 'enemy', playfieldWidth: 58, playfieldHeight: 58, enemyDive: 1, enemyVx: -88, enemyVy: 134 },
+  { spriteKey: 'but-line-dive-right', modelKey: 'but-line', kind: 'but-line', subject: 'enemy', playfieldWidth: 62, playfieldHeight: 60, enemyDive: 1, enemyVx: 88, enemyVy: 134 },
+  { spriteKey: 'boss-line-dive-left', modelKey: 'boss-line', kind: 'boss-line', subject: 'enemy', playfieldWidth: 70, playfieldHeight: 66, enemyDive: 1, enemyVx: -70, enemyVy: 118 }
+];
+
+const TRANSITION_POSE_SPECS = [
+  { spriteKey: 'boss-capture-beam', modelKey: 'boss-line', kind: 'boss-line', subject: 'enemy', playfieldWidth: 86, playfieldHeight: 132, enemyDive: 2, enemyBeam: 1, enemyBeamT: 1.2 },
+  { spriteKey: 'boss-carrying-fighter', modelKey: 'boss-line', kind: 'boss-line', subject: 'enemy', playfieldWidth: 82, playfieldHeight: 92, enemyCarry: 1 },
+  { spriteKey: 'dual-fighter-transition', modelKey: 'dual-fighter', kind: 'dual-fighter', subject: 'player', playfieldWidth: 78, playfieldHeight: 42 }
+];
+
 function fail(message, payload){
   console.error(message);
   if(payload) console.error(JSON.stringify(payload, null, 2));
@@ -207,7 +219,7 @@ async function captureRuntimeSprite(page, spec, model){
       }
     }
     const largest = components.reduce((max, item) => Math.max(max, item.count), 0);
-    const minKeep = Math.max(8, largest * (spec.spriteKey === 'dual-fighter' ? .3 : .22));
+    const minKeep = Math.max(3, largest * (spec.spriteKey === 'dual-fighter' ? .18 : .06));
     const keepLit = new Uint8Array(sw * sh);
     for(const component of components){
       if(component.count < minKeep) continue;
@@ -328,6 +340,8 @@ async function main(){
   const modelArtifact = readJson(MODEL_ARTIFACT);
   const samples = [];
   const temporalSamples = [];
+  const divePoseSamples = [];
+  const transitionPoseSamples = [];
   await withHarnessPage({ stage: 1, ships: 3, challenge: false, seed: 91577 }, async ({ page }) => {
     for(const spec of CAPTURE_SPECS){
       const model = modelForKey(modelArtifact, spec.spriteKey);
@@ -358,6 +372,24 @@ async function main(){
         read: `Captured closed/open flap phases for ${spec.spriteKey}; lit-pixel delta ${Math.abs((open.litPixels || 0) - (closed.litPixels || 0))}, filled-cell delta ${Math.abs((open.filledCells || 0) - (closed.filledCells || 0))}.`
       });
     }
+    for(const spec of DIVE_POSE_SPECS){
+      const model = modelForKey(modelArtifact, spec.modelKey || spec.spriteKey);
+      if(!model) throw new Error(`Missing model for dive sprite key ${spec.modelKey || spec.spriteKey}`);
+      const sample = await captureRuntimeSprite(page, spec, model);
+      divePoseSamples.push(Object.assign({}, sample, {
+        motionAxis: 'dive-rotation-pose',
+        read: `Captured ${spec.spriteKey} with forced dive vector (${spec.enemyVx}, ${spec.enemyVy}) so rotation silhouette can be tracked over time.`
+      }));
+    }
+    for(const spec of TRANSITION_POSE_SPECS){
+      const model = modelForKey(modelArtifact, spec.modelKey || spec.spriteKey);
+      if(!model) throw new Error(`Missing model for transition sprite key ${spec.modelKey || spec.spriteKey}`);
+      const sample = await captureRuntimeSprite(page, spec, model);
+      transitionPoseSamples.push(Object.assign({}, sample, {
+        motionAxis: 'capture-rescue-dual-transition',
+        read: `Captured ${spec.spriteKey} as a first transition-state measurement seed.`
+      }));
+    }
   });
   const averageScore10 = samples.length
     ? rounded(samples.reduce((sum, item) => sum + item.score10, 0) / samples.length, 2)
@@ -383,11 +415,17 @@ async function main(){
       captureMode: 'isolated-live-canvas-sprite-crops',
       measuredKeys: samples.map(item => item.spriteKey),
       staticPoseOnly: false,
-      motionCoverageAxesCovered: temporalSamples.length ? 1 : 0,
+      motionCoverageAxesCovered: [
+        temporalSamples.length ? 'two-phase flap/pulse static sprite delta for bee, butterfly, and boss families' : '',
+        divePoseSamples.length ? 'forced dive/rotation pose silhouettes for bee, butterfly, and boss families' : '',
+        transitionPoseSamples.length ? 'capture-beam, carried-fighter, and dual-fighter transition seed poses' : ''
+      ].filter(Boolean).length,
       motionCoverageAxesPlanned: 4,
-      coveredMotionAxes: temporalSamples.length ? [
-        'two-phase flap/pulse static sprite delta for bee, butterfly, and boss families'
-      ] : [],
+      coveredMotionAxes: [
+        temporalSamples.length ? 'two-phase flap/pulse static sprite delta for bee, butterfly, and boss families' : '',
+        divePoseSamples.length ? 'forced dive/rotation pose silhouettes for bee, butterfly, and boss families' : '',
+        transitionPoseSamples.length ? 'capture-beam, carried-fighter, and dual-fighter transition seed poses' : ''
+      ].filter(Boolean),
       plannedMotionAxes: [
         'flap-cycle cadence and alternating wing/body pixels over full temporal windows',
         'pulse and damage-state brightness/color phases',
@@ -397,11 +435,13 @@ async function main(){
     },
     measurementLimits: [
       'Runtime captures isolate static sprite poses through the harness with starfield, reserve ships, stage badges, bullets, and effects suppressed.',
-      'The first temporal windows capture closed/open flap phases for bee, butterfly, and boss families; they do not yet score full animation cadence, rotations, dive poses, pulsing, capture/rescue transitions, or formation context.',
+      'The first temporal windows capture closed/open flap phases, forced dive/rotation poses, and capture/dual-fighter transition seed poses; they do not yet score full animation cadence, damage pulsing, complete capture/rescue timelines, or formation context.',
       'The current score compares visible rendered Aurora pixels to inferred source-frame Galaga models, not to a direct Galaga ROM sprite sheet.'
     ],
     samples,
-    temporalSamples
+    temporalSamples,
+    divePoseSamples,
+    transitionPoseSamples
   };
   writeJson(OUT, artifact);
   console.log(JSON.stringify({
@@ -409,6 +449,8 @@ async function main(){
     artifact: rel(OUT),
     sampleCount: samples.length,
     temporalSampleCount: temporalSamples.length,
+    divePoseSampleCount: divePoseSamples.length,
+    transitionPoseSampleCount: transitionPoseSamples.length,
     averageScore10,
     weakestSpriteKey: weakest?.spriteKey || null,
     weakestScore10: weakest?.score10 || null,

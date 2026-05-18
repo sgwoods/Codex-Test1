@@ -128,18 +128,25 @@ score should only rise when it reflects visible, measurable runtime evidence.
 - A promoted first-pass target crop library now exists:
   `GALAGA_ALIEN_TARGET_CROPS.md` and
   `reference-artifacts/analyses/galaga-alien-target-crops/latest.json`. It
-  contains `32` exact source-sheet crops across `7` role sets: player fighter,
+  contains `33` exact source-sheet crops across `7` role sets: player fighter,
   bee/Zako, butterfly/escort, boss Galaga, challenge specialty aliens,
   projectiles/impacts, and tractor beam.
-- Runtime static sprite conformance exists and is around `6.2/10`.
+- Runtime static sprite conformance now has two deliberately separate reads:
+  the inferred-model proxy is `5.76/10`, while the stricter runtime-vs-promoted
+  target-crop score is `4.21/10`. The proxy score dropped after target-row
+  rendering because the old inferred model is no longer the highest-authority
+  comparison; the target-crop score is the more useful player-visible gap.
 - A stricter first-pass runtime-vs-promoted-target-crop comparator now exists:
   `reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json`.
-  Its current average is about `3.4/10`, with the weakest visible crop at about
-  `2.1/10`. This is intentionally sobering: it compares already-captured Aurora
-  runtime PNGs directly against exact source-sheet target crops and shows that
-  the previous inferred-model `6.2/10` score was a useful proxy, not a claim of
-  high sprite conformance.
-- Active sprite motion is still the major precision gap.
+  Its current average is `4.21/10`, with the weakest visible crop,
+  `player-fighter`, at `3.67/10`. This is intentionally sobering: it compares
+  harness-captured Aurora runtime PNGs directly against exact source-sheet
+  target crops and shows that the previous inferred-model score was a useful
+  proxy, not a claim of high sprite conformance.
+- Active sprite motion has first measurement seeds for `3/4` planned axes:
+  flap/pulse phase pairs, forced dive/rotation poses, and capture/carry/dual
+  transition poses. The missing axis is full temporal cadence and target-crop
+  sequence matching, so animation conformance remains an open gap.
 - Production Aurora sprites remain original/theme-oriented, but they do not yet
   flow from a formal target-pose manifest.
 

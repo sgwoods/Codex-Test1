@@ -23,7 +23,7 @@ function bossDamageFx(x,y){
    sq:1
   });
  }
- S.fx.push({x,y,vx:0,vy:0,t:.22,r:13,c:'#fff0a8',ring:1});
+ S.fx.push({x,y,vx:0,vy:0,t:.2,r:14,c:'#fff0a8',burst:1});
  S.fx.push({x,y,vx:0,vy:0,t:.13,r:7,c:'#eaf9ff',flash:1});
 }
 

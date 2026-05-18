@@ -8,7 +8,7 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const ANALYSES = path.join(ROOT, 'reference-artifacts', 'analyses');
 const OUT_ROOT = path.join(ANALYSES, 'challenge-stage-conformance');
 const CHALLENGE_STAGES = [3, 7, 11, 15, 19, 23, 27, 31];
-const SAMPLE_TIMES = [0, 0.7, 1.4, 2.5, 4.2, 6.0, 8.5, 10.8, 12.4];
+const SAMPLE_TIMES = [0, 0.45, 0.9, 1.35, 1.9, 2.55, 3.25, 4.05, 4.95, 5.95, 7.05, 8.25, 9.55, 10.95, 12.35];
 
 const STAGE_INTENT = {
   3: {
@@ -373,6 +373,8 @@ function normalizeRuntimeMotion(samples){
     turnCount,
     reversalCount,
     lowerFieldShare: round(average(populated.map(vector => +vector.lowerFieldShare || 0)), 4),
+    sampleCount: (samples || []).length,
+    groupVectorCount: groupVectors.length,
     rackSlotError: 0,
     timingOffsetS: 0
   };
@@ -507,7 +509,7 @@ function strictTrajectoryRead(runtimeVector, referenceLabel, match, expectedHit,
     + (0.12 * trajectoryScore)
   );
   const referenceReliability = lateReferenceGap ? 0.52 : (expectedHit ? 0.92 : 0.62);
-  const temporalCoverage = 0.58; // Current probes are sampled path summaries, not full tracked temporal trajectories.
+  const temporalCoverage = round(Math.min(0.72, 0.48 + Math.min(0.24, (+runtimeVector.sampleCount || 0) * 0.016)), 2);
   const score10 = round(1 + (5.4 * rawFit * referenceReliability * temporalCoverage), 1);
   return {
     score10,

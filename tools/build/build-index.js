@@ -3207,7 +3207,7 @@ function loadGalagaAlienTargetCrops(){
 function loadAuroraRuntimeSpriteConformance(){
   if(auroraRuntimeSpriteConformanceCache) return auroraRuntimeSpriteConformanceCache;
   if(!fs.existsSync(AURORA_RUNTIME_SPRITE_CONFORMANCE)){
-    auroraRuntimeSpriteConformanceCache = { samples: [], temporalSamples: [], summary: {} };
+    auroraRuntimeSpriteConformanceCache = { samples: [], temporalSamples: [], divePoseSamples: [], transitionPoseSamples: [], summary: {} };
     return auroraRuntimeSpriteConformanceCache;
   }
   try {
@@ -3215,10 +3215,12 @@ function loadAuroraRuntimeSpriteConformance(){
     auroraRuntimeSpriteConformanceCache = Object.assign({}, artifact, {
       samples: Array.isArray(artifact.samples) ? artifact.samples : [],
       temporalSamples: Array.isArray(artifact.temporalSamples) ? artifact.temporalSamples : [],
+      divePoseSamples: Array.isArray(artifact.divePoseSamples) ? artifact.divePoseSamples : [],
+      transitionPoseSamples: Array.isArray(artifact.transitionPoseSamples) ? artifact.transitionPoseSamples : [],
       summary: artifact.summary || {}
     });
   } catch (err) {
-    auroraRuntimeSpriteConformanceCache = { samples: [], temporalSamples: [], summary: {} };
+    auroraRuntimeSpriteConformanceCache = { samples: [], temporalSamples: [], divePoseSamples: [], transitionPoseSamples: [], summary: {} };
   }
   return auroraRuntimeSpriteConformanceCache;
 }
@@ -4315,6 +4317,32 @@ function renderAuroraSpriteTemporalRows(report){
   `).join('\n');
 }
 
+function renderAuroraSpritePoseRows(report){
+  const rows = [
+    ...(Array.isArray(report?.divePoseSamples) ? report.divePoseSamples : []),
+    ...(Array.isArray(report?.transitionPoseSamples) ? report.transitionPoseSamples : [])
+  ];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="4"><span class="docMeta">Dive and transition pose windows pending.</span></td>
+    </tr>`;
+  }
+  return rows.map((row) => `
+    <tr>
+      <td><strong>${esc(row.spriteKey || '')}</strong><br><span class="docMeta">${esc(row.motionAxis || '')}</span></td>
+      <td>${renderMediaImage({
+        label: row.spriteKey || 'Runtime pose',
+        src: row.cropImage,
+        pixelated: true,
+        note: 'Harness-captured runtime pose seed for active sprite-motion conformance.'
+      })}</td>
+      <td><strong>${Number.isFinite(+row.score10) ? `${Number(row.score10).toFixed(1)}/10` : 'unscored'}</strong><br><span class="docMeta">filled ${esc(row.filledCells ?? 'n/a')}; lit ${esc(row.litPixels ?? 'n/a')}</span></td>
+      <td>${esc(row.read || '')}</td>
+    </tr>
+  `).join('\n');
+}
+
 function renderChallengeTargetCoverageRows(report){
   const rows = Array.isArray(report?.challengeStageCoverage) ? report.challengeStageCoverage : [];
   if(!rows.length){
@@ -4505,6 +4533,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const auroraRuntimeVsGalagaTargetSummary = auroraRuntimeVsGalagaTargetCrops.summary || {};
   const auroraRuntimeVsTargetRows = renderAuroraRuntimeVsTargetRows(auroraRuntimeVsGalagaTargetCrops);
   const auroraSpriteTemporalRows = renderAuroraSpriteTemporalRows(auroraRuntimeSpriteConformance);
+  const auroraSpritePoseRows = renderAuroraSpritePoseRows(auroraRuntimeSpriteConformance);
   const conformanceAlienRows = (guide.conformanceAlienRows || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.name || '')}</strong><br><span class="docMeta">${esc(entry.runtime || '')}</span></td>
@@ -5010,6 +5039,21 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               </thead>
               <tbody>
                 ${auroraSpriteTemporalRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Active Pose</th>
+                  <th>Runtime Crop</th>
+                  <th>Model Score</th>
+                  <th>Read</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${auroraSpritePoseRows}
               </tbody>
             </table>
           </div>

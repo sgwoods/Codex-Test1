@@ -1,6 +1,6 @@
 # Galaga Challenge Video Reference Analysis
 
-Generated: `2026-05-17T16:31:36.471Z`
+Generated: `2026-05-18T20:10:36.556Z`
 
 This analysis turns the two user-supplied Galaga challenge videos into durable
 derived evidence for Aurora challenging-stage conformance. The raw videos remain
