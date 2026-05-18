@@ -335,9 +335,11 @@ function main(){
       target: 'Temporal sprite score across flap cadence, pulse/damage phases, dive rotation, and capture/rescue transitions',
       score10: null,
       confidence: 'planning',
-      status: 'Not yet scored; current sprite metrics are static-pose measurements',
+      status: runtimeSpriteSummary.motionCoverageAxesCovered
+        ? 'First temporal phase windows captured; full motion score still pending'
+        : 'Not yet scored; current sprite metrics are static-pose measurements',
       measurement: runtimeSprite
-        ? `Static live-canvas pose score exists at ${scoreText(runtimeSpriteSummary.averageScore10)}; motion axes still pending: ${(runtimeSpriteSummary.plannedMotionAxes || []).join('; ')}.`
+        ? `Static live-canvas pose score exists at ${scoreText(runtimeSpriteSummary.averageScore10)}; ${runtimeSpriteSummary.motionCoverageAxesCovered || 0}/${runtimeSpriteSummary.motionCoverageAxesPlanned || 4} planned motion axes are covered. Covered: ${(runtimeSpriteSummary.coveredMotionAxes || []).join('; ') || 'none yet'}. Remaining: ${(runtimeSpriteSummary.plannedMotionAxes || []).join('; ')}.`
         : 'Runtime sprite artifact has not been generated, so motion coverage cannot be planned from the current capture set yet.',
       evidence: runtimeSprite ? SOURCES.runtimeSprite : SOURCES.spriteModel,
       next: 'Add harness windows for flap cycle A/B frames, pulse and damage-state timing, dive-rotation silhouettes, and carried/rescue/dual-fighter transition frames before treating sprite conformance as visually complete.'

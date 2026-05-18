@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "galaga-alien-target-crops",
-  "generatedAt": "2026-05-18T17:48:30.514Z",
-  "commit": "530fad79",
+  "generatedAt": "2026-05-18T18:33:26.280Z",
+  "commit": "48be9ac4",
   "branch": "codex/macbook-conformance-investment-review",
   "dirty": true,
   "status": "accepted-first-pass-target-crops",
@@ -14,7 +14,7 @@
   },
   "sourceAuthority": "user-supplied sprite-sheet reference; strongest current target candidate, but still needs exact crop review before promotion as canonical sprite target truth",
   "summary": {
-    "targetCropCount": 32,
+    "targetCropCount": 33,
     "roleSetCount": 7,
     "promotedRoles": [
       "bee-zako",
@@ -26,6 +26,7 @@
       "tractor-beam"
     ],
     "sourcePixelExact": true,
+    "compositeTargetCount": 1,
     "scoringStatus": "target-library-ready-runtime-comparison-pending"
   },
   "measurementLimits": [
@@ -154,19 +155,21 @@
         "captured-or-carried-fighter",
         "ship-loss-fragment-or-explosion-context"
       ],
-      "promotedPoseCount": 3,
+      "promotedPoseCount": 4,
       "promotedPoses": [
         "single-ship-front",
         "turn-left",
-        "turn-right"
+        "turn-right",
+        "dual-fighter-front"
       ],
       "targetCrops": [
         "player-fighter-single-front",
         "player-fighter-turn-left",
-        "player-fighter-turn-right"
+        "player-fighter-turn-right",
+        "player-fighter-dual-front"
       ],
       "status": "accepted-first-pass",
-      "coverageRead": "3 promoted crop(s); required pose contract: single-ship-front, dual-fighter, captured-or-carried-fighter, ship-loss-fragment-or-explosion-context"
+      "coverageRead": "4 promoted crop(s); required pose contract: single-ship-front, dual-fighter, captured-or-carried-fighter, ship-loss-fragment-or-explosion-context"
     },
     {
       "roleKey": "projectiles-and-impacts",
@@ -1537,6 +1540,59 @@
           "y": 2,
           "width": 40,
           "height": 80
+        }
+      }
+    },
+    {
+      "id": "player-fighter-dual-front",
+      "roleKey": "player-fighter",
+      "poseKey": "dual-fighter-front",
+      "label": "Player Fighter dual-fighter-front",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "sourceRegion": "derived-composite",
+      "sourceCell": null,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 38,
+        "height": 16
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-dual-front.png",
+      "sourcePixelExact": false,
+      "exactComposite": true,
+      "pixelScale": 1,
+      "compositeTarget": true,
+      "componentCrops": [
+        {
+          "id": "player-fighter-single-front",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "player-fighter-single-front",
+          "x": 22,
+          "y": 0
+        }
+      ],
+      "reviewStatus": "accepted-first-pass-composite",
+      "note": "Derived dual-fighter target composed from two exact source-sheet player-fighter crops. This prevents the dual runtime state from being scored against a single fighter while preserving the source crop pixels.",
+      "metrics": {
+        "width": 38,
+        "height": 16,
+        "litPixels": 192,
+        "litRatio": 0.31579,
+        "tokenChannels": [
+          "B",
+          "C",
+          "G",
+          "R",
+          "W"
+        ],
+        "litBox": {
+          "x": 0,
+          "y": 1,
+          "width": 34,
+          "height": 15
         }
       }
     }

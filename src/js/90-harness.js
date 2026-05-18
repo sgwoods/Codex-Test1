@@ -1171,6 +1171,7 @@ window.__galagaHarness__={
   S.att=0;
   S.recoverT=8;
   S.attackGapT=8;
+  S.harnessSpriteRuntimeCapture=1;
   if(cfg.clearBackdrop!==false)S.st.length=0;
   Object.assign(S.p,{
    x:cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18),
@@ -1211,13 +1212,18 @@ window.__galagaHarness__={
     ty:+cfg.enemyY||132,
     vx:0,
     vy:0,
-    tm:0,
-    ph:0,
+    tm:Number.isFinite(+cfg.enemyTm)?+cfg.enemyTm:0,
+    ph:Number.isFinite(+cfg.enemyPh)?+cfg.enemyPh:0,
     cool:99
    });
   }
   if(typeof draw==='function')draw();
   return Object.assign({ok:true,kind},this.spriteRuntimeState());
+ },
+ clearSpriteRuntimeCapture(){
+  S.harnessSpriteRuntimeCapture=0;
+  if(typeof draw==='function')draw();
+  return this.spriteRuntimeState();
  },
  squadronState(){
   const boss=S.e.find(e=>e.hp>0&&e.squadId&&e.t==='boss');

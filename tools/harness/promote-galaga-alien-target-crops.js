@@ -237,6 +237,47 @@ function promoteCrop(spec, source, sourceDimensions, regions){
   });
 }
 
+function promoteDualFighterComposite(targetCrops){
+  const component = targetCrops.find(crop => crop.id === 'player-fighter-single-front');
+  if(!component) fail('Cannot build dual-fighter composite without player-fighter-single-front.');
+  const componentFile = path.join(ROOT, component.targetCrop);
+  const outFile = path.join(CROP_DIR, 'player-fighter-dual-front.png');
+  run('ffmpeg', [
+    '-v', 'error',
+    '-f', 'lavfi',
+    '-i', 'color=c=black:s=38x16',
+    '-i', componentFile,
+    '-i', componentFile,
+    '-filter_complex', '[0:v][1:v]overlay=0:0[tmp];[tmp][2:v]overlay=22:0',
+    '-frames:v', '1',
+    '-y',
+    outFile
+  ]);
+  const metrics = imageMetrics(outFile);
+  return {
+    id: 'player-fighter-dual-front',
+    roleKey: 'player-fighter',
+    poseKey: 'dual-fighter-front',
+    label: 'Player Fighter dual-fighter-front',
+    sourceImage: component.sourceImage,
+    sourceRegion: 'derived-composite',
+    sourceCell: null,
+    crop: { x: 0, y: 0, width: 38, height: 16 },
+    targetCrop: rel(outFile),
+    sourcePixelExact: false,
+    exactComposite: true,
+    pixelScale: 1,
+    compositeTarget: true,
+    componentCrops: [
+      { id: component.id, x: 0, y: 0 },
+      { id: component.id, x: 22, y: 0 }
+    ],
+    reviewStatus: 'accepted-first-pass-composite',
+    note: 'Derived dual-fighter target composed from two exact source-sheet player-fighter crops. This prevents the dual runtime state from being scored against a single fighter while preserving the source crop pixels.',
+    metrics
+  };
+}
+
 function roleLabel(roleKey){
   return String(roleKey || '')
     .split('-')
@@ -311,6 +352,7 @@ function main(){
   }
   const regions = regionMap(manifest);
   const targetCrops = CROP_SPECS.map(spec => promoteCrop(spec, source, sourceDimensions, regions));
+  targetCrops.push(promoteDualFighterComposite(targetCrops));
   const roleSetRows = roleSets(targetCrops, manifest);
   const artifact = {
     schemaVersion: 1,
@@ -329,6 +371,7 @@ function main(){
       roleSetCount: roleSetRows.length,
       promotedRoles: roleSetRows.map(role => role.roleKey),
       sourcePixelExact: true,
+      compositeTargetCount: targetCrops.filter(crop => crop.compositeTarget).length,
       scoringStatus: 'target-library-ready-runtime-comparison-pending'
     },
     measurementLimits: [

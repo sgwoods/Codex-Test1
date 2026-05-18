@@ -1,13 +1,13 @@
 # Galaga Alien Target Crops
 
-Generated: 2026-05-18T17:48:30.514Z
+Generated: 2026-05-18T18:33:26.280Z
 
 This report promotes exact first-pass crops from the supplied Galaga general sprite sheet. These crops are source-sheet targets for richer static, pose, projectile, explosion, and tractor-beam scoring. They are not a ROM-perfect final atlas and they do not yet score temporal motion by themselves.
 
 ## Summary
 
 - Source image: `reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png`
-- Promoted target crops: 32
+- Promoted target crops: 33
 - Role sets: 7
 - Review status: accepted-first-pass-target-crops
 
@@ -19,7 +19,7 @@ This report promotes exact first-pass crops from the supplied Galaga general spr
 | `boss-galaga` | `formation-front`, `flap-a`, `flap-b`, `dive-left`, `dive-right` | 5 promoted crop(s); required pose contract: formation-front, flap-a, flap-b, damage-state, capture-beam-host |
 | `butterfly-escort` | `formation-front`, `flap-a`, `flap-b`, `dive-left`, `dive-right` | 5 promoted crop(s); required pose contract: formation-front, flap-a, flap-b, escort-dive |
 | `challenge-specialty-aliens` | `green-family-front`, `green-family-dive`, `yellow-family-front`, `yellow-family-dive`, `magenta-family-front`, `blue-yellow-family-front` | 6 promoted crop(s); required pose contract: dragonfly-or-scorpion-family, mosquito-or-serpentine-family, late-blue-purple-family, flap-cycle |
-| `player-fighter` | `single-ship-front`, `turn-left`, `turn-right` | 3 promoted crop(s); required pose contract: single-ship-front, dual-fighter, captured-or-carried-fighter, ship-loss-fragment-or-explosion-context |
+| `player-fighter` | `single-ship-front`, `turn-left`, `turn-right`, `dual-fighter-front` | 4 promoted crop(s); required pose contract: single-ship-front, dual-fighter, captured-or-carried-fighter, ship-loss-fragment-or-explosion-context |
 | `projectiles-and-impacts` | `enemy-explosion-small`, `boss-explosion-large`, `player-shot`, `enemy-shot`, `diagonal-shot` | 5 promoted crop(s); required pose contract: player-shot, enemy-shot, first-hit-impact, enemy-explosion, boss-explosion |
 | `tractor-beam` | `beam-wide`, `beam-mid`, `beam-narrow` | 3 promoted crop(s); required pose contract: beam-start, beam-mid, beam-wide, beam-collapse |
 
@@ -59,5 +59,6 @@ This report promotes exact first-pass crops from the supplied Galaga general spr
 | `tractor-beam` | `beam-wide` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/tractor-beam-wide.png) | right-tractor-beam-and-scoring<br>`288,34 50x84` | 898 lit px; channels B, G | Wide tractor-beam band candidate for capture-state width and color rhythm. |
 | `tractor-beam` | `beam-mid` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/tractor-beam-mid.png) | right-tractor-beam-and-scoring<br>`342,34 50x84` | 898 lit px; channels B, G | Mid-width tractor-beam band candidate. |
 | `tractor-beam` | `beam-narrow` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/tractor-beam-narrow.png) | right-tractor-beam-and-scoring<br>`396,34 50x84` | 863 lit px; channels B, G | Narrow tractor-beam band candidate. |
+| `player-fighter` | `dual-fighter-front` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-dual-front.png) | derived-composite<br>`0,0 38x16` | 192 lit px; channels B, C, G, R, W | Derived dual-fighter target composed from two exact source-sheet player-fighter crops. This prevents the dual runtime state from being scored against a single fighter while preserving the source crop pixels. |
 
 Next best step: Compare Aurora live runtime crops against these promoted multi-pose targets and add temporal windows for flap, dive, damage, capture, rescue, and challenge-stage specialty motion.

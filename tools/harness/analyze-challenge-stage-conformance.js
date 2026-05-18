@@ -183,6 +183,32 @@ function galagaTargetArtifactCoverageRead(){
   return readJson(path.join(ANALYSES, 'galaga-target-artifact-coverage', 'latest.json'), {});
 }
 
+function runtimeVsTargetCropRead(){
+  const artifact = readJson(path.join(ANALYSES, 'aurora-runtime-vs-galaga-target-crops', 'latest.json'), {});
+  const comparisons = Array.isArray(artifact.comparisons) ? artifact.comparisons : [];
+  const scored = comparisons.filter(item => Number.isFinite(+item.bestScore10));
+  const challenge = scored.filter(item => String(item.spriteKey || '').startsWith('challenge-'));
+  const weakest = scored.slice().sort((a, b) => (+a.bestScore10 || 0) - (+b.bestScore10 || 0))[0] || null;
+  const challengeWeakest = challenge.slice().sort((a, b) => (+a.bestScore10 || 0) - (+b.bestScore10 || 0))[0] || null;
+  return {
+    artifact: 'reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json',
+    sampleCount: comparisons.length,
+    targetCropCount: artifact.summary?.targetCropCount || 0,
+    averageScore10: Number.isFinite(+artifact.summary?.averageScore10)
+      ? +artifact.summary.averageScore10
+      : round(average(scored.map(item => item.bestScore10)), 2),
+    challengeAverageScore10: round(average(challenge.map(item => item.bestScore10)), 2),
+    weakestSpriteKey: weakest?.spriteKey || null,
+    weakestScore10: weakest?.bestScore10 || null,
+    challengeWeakestSpriteKey: challengeWeakest?.spriteKey || null,
+    challengeWeakestScore10: challengeWeakest?.bestScore10 || null,
+    scoringMode: artifact.summary?.scoringMode || 'runtime-target-crop-comparison-pending',
+    read: comparisons.length
+      ? `Direct runtime-vs-Galaga target-crop comparator reads ${artifact.summary?.averageScore10 ?? 'n/a'}/10 overall and ${round(average(challenge.map(item => item.bestScore10)), 2) ?? 'n/a'}/10 for challenge specialty sprites; weakest challenge crop is ${challengeWeakest?.spriteKey || 'n/a'} at ${challengeWeakest?.bestScore10 ?? 'n/a'}/10.`
+      : 'Direct runtime-vs-Galaga target-crop comparator has not been generated yet.'
+  };
+}
+
 function layoutSignature(layout){
   if(!layout) return 'layout pending';
   const lanes = Array.isArray(layout.laneTypes) ? layout.laneTypes.join(', ') : 'lane types pending';
@@ -846,8 +872,10 @@ function strictGraphicsRead(stage, runtime, expectedHit){
   const measuredRuntimeSpriteMotionCoverage = spriteMotion.activeMotionCoverage || 0;
   const objectSilhouetteCoverage = spriteMotion.objectTrackedPixelSilhouette?.coverage || 0;
   const objectTargetFitCoverage = spriteMotion.objectTrackedPixelSilhouette?.targetFitCoverage || 0;
-  const activeMotionCap = objectTargetFitCoverage ? 4.6 : (objectSilhouetteCoverage ? 4.2 : (measuredRuntimeSpriteMotionCoverage ? 3.6 : 2.2));
-  const spriteMotionCredit = (measuredRuntimeSpriteMotionCoverage * 0.24) + (objectSilhouetteCoverage * 0.3) + (objectTargetFitCoverage * 0.18);
+  const targetCropRead = runtimeVsTargetCropRead();
+  const targetCropCoverage = clamp((targetCropRead.challengeAverageScore10 || targetCropRead.averageScore10 || 0) / 10);
+  const activeMotionCap = objectTargetFitCoverage ? 4.8 : (targetCropCoverage ? 4.4 : (objectSilhouetteCoverage ? 4.2 : (measuredRuntimeSpriteMotionCoverage ? 3.6 : 2.2)));
+  const spriteMotionCredit = (measuredRuntimeSpriteMotionCoverage * 0.22) + (objectSilhouetteCoverage * 0.28) + (objectTargetFitCoverage * 0.18) + (targetCropCoverage * 0.16);
   const score10 = round(Math.min(activeMotionCap, 1 + (4.0 * (typeMixCredit + familyCredit + contractCredit + spriteMotionCredit))), 1);
   return {
     score10,
@@ -862,9 +890,12 @@ function strictGraphicsRead(stage, runtime, expectedHit){
       activeSpriteMotionCoverage: measuredRuntimeSpriteMotionCoverage,
       objectTrackedPixelSilhouetteCoverage: objectSilhouetteCoverage,
       objectTrackedTargetFitCoverage: round(objectTargetFitCoverage, 3),
+      runtimeTargetCropCoverage: round(targetCropCoverage, 3),
+      runtimeTargetCropScore10: targetCropRead.challengeAverageScore10 || targetCropRead.averageScore10 || null,
       spriteMotionCredit: round(spriteMotionCredit, 3)
     },
-    read: `Strict graphics score ${score10}/10. Current visible family/type labels are present and ${spriteMotion.read} Graphics remain capped at ${activeMotionCap}/10 until object tracks are compared as full temporal Galaga target-crop sequences, rotations, dive poses, and capture/rescue transitions.`
+    runtimeTargetCropRead: targetCropRead,
+    read: `Strict graphics score ${score10}/10. Current visible family/type labels are present, ${targetCropRead.read} ${spriteMotion.read} Graphics remain capped at ${activeMotionCap}/10 until object tracks are compared as full temporal Galaga target-crop sequences, rotations, dive poses, and capture/rescue transitions.`
   };
 }
 
@@ -878,19 +909,25 @@ function strictAlienNoveltyRead(stage, runtime, score, expectedHit, lateReferenc
     : 0;
   const typeMix = clamp(types.length / 4) * 0.28;
   const familyNovelty = families.some(family => family !== 'classic') ? 0.22 : 0;
+  const visualFamilyDiversity = clamp(families.length / 4) * 0.16;
   const groupDiversity = clamp((+group.distinctTypeSequences || 0) / Math.max(+group.groupCount || 1, 1)) * 0.2;
   const referenceStageCredit = expectedHit ? 0.16 : (lateReferenceGap ? 0 : 0.08);
-  const score10 = round(Math.min(3.4, 1 + (4.8 * (firstChallengeSemantic + typeMix + familyNovelty + groupDiversity + referenceStageCredit))), 1);
+  const targetCropRead = runtimeVsTargetCropRead();
+  const targetCropCoverage = clamp((targetCropRead.challengeAverageScore10 || 0) / 10) * 0.12;
+  const score10 = round(Math.min(3.9, 1 + (4.6 * (firstChallengeSemantic + typeMix + familyNovelty + visualFamilyDiversity + groupDiversity + referenceStageCredit + targetCropCoverage))), 1);
   return {
     score10,
     components: {
       firstChallengeSemantic,
       typeMix: round(typeMix, 3),
       familyNovelty,
+      visualFamilyDiversity: round(visualFamilyDiversity, 3),
       groupDiversity: round(groupDiversity, 3),
-      referenceStageCredit
+      referenceStageCredit,
+      runtimeTargetCropNoveltyCoverage: round(targetCropCoverage, 3)
     },
-    read: `Strict alien/progression novelty score ${score10}/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments.`
+    runtimeTargetCropRead: targetCropRead,
+    read: `Strict alien/progression novelty score ${score10}/10. Current stages expose labels, type mixes, direct specialty-sprite target-crop evidence, and ${families.length} visual family/families, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments.`
   };
 }
 
@@ -1752,6 +1789,7 @@ async function buildReport(){
       galagaPathReferenceLabels: 'reference-artifacts/analyses/galaga-path-reference-labels/latest.json',
       galagaChallengeVideoReference: 'reference-artifacts/analyses/galaga-challenge-video-reference/latest.json',
       galagaTargetArtifactCoverage: 'reference-artifacts/analyses/galaga-target-artifact-coverage/latest.json',
+      auroraRuntimeVsGalagaTargetCrops: 'reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json',
       pathFamilyComparison: 'reference-artifacts/analyses/formation-boss-path-family-comparison/latest.json',
       alienEntryChallengeVariation: 'reference-artifacts/analyses/alien-entry-challenge-variation/latest.json',
       challengeCollisionGuardrail: 'tools/harness/check-challenge-collision.js',

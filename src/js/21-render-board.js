@@ -27,10 +27,10 @@ function enemyPalette(e,flap,hot){
   case 'mosquito':
    return{a:flap?'#ff8c70':'#ffab85',b:hot?'#ffd24c':'#ffe179',c:'#74f4ff',pat:FAMILY_PIXELS.mosquito};
   default:
-   if(e.t==='bee')return{a:flap?'#2a75ff':'#4e95ff',b:hot?'#ffe470':'#ffd24a',c:'#f08f2e',pat:null};
-   if(e.t==='but')return{a:flap?'#3c86ff':'#62a5ff',b:hot?'#ff6776':'#ff3d51',c:'#ffd25a',pat:null};
-   if(e.t==='rogue')return{a:flap?'#78b6ff':'#a3cfff',b:hot?'#ff7bb2':'#ff5ea0',c:'#ffe36a',pat:null};
-   return damaged?{a:flap?'#7ab5ff':'#add7ff',b:hot?'#ffe177':'#ffe89c',c:'#ff58b4',pat:null}:{a:e.hp>1?(flap?'#33d7b0':'#60f0cf'):(flap?'#5bc2ff':'#8fd7ff'),b:hot?'#7ef173':'#5fe85c',c:'#cc5fff',pat:null};
+   if(e.t==='bee')return{a:flap?'#ff4c4c':'#f02f34',b:hot?'#ffffff':'#e8f4ff',c:'#2f8cff',pat:null};
+   if(e.t==='but')return{a:flap?'#2f73ff':'#1f62de',b:hot?'#fff27d':'#ffd94e',c:'#ff3f4f',pat:null};
+   if(e.t==='rogue')return{a:flap?'#ffffff':'#f4f8ff',b:hot?'#ff6a75':'#ff3347',c:'#5ca8ff',pat:null};
+   return damaged?{a:flap?'#7ab5ff':'#add7ff',b:hot?'#ffe177':'#ffe89c',c:'#ff58b4',pat:null}:{a:e.hp>1?(flap?'#31c99d':'#12a987'):(flap?'#64ddc5':'#46c7b0'),b:hot?'#fff27a':'#ffd84c',c:'#f04c30',pat:null};
  }
 }
 
@@ -55,11 +55,32 @@ function playerHitbox(){return{w:7,h:6};}
 
 function drawMiniShip(s=1,colA='#9adfff',colB='#72c8ff'){
  const ps=2*s;
- drawPix(-ps*2.5,-ps*2.2,ps,P.ship.a,colA,colB,P.ship.b,'#ff4658',P.ship.c);
+ drawPix(-ps*4,-ps*3.5,ps,P.ship.a,colA,colB,P.ship.b,'#ff4658',P.ship.c);
 }
 
 function endOfRunOverlayActive(){
  return !started&&!!gameOverState;
+}
+
+function drawEnemyFlapAccent(e,ps,pal,flap){
+ if(!flap||!pal?.a)return;
+ ctx.fillStyle=pal.a;
+ if(e.t==='bee'){
+  ctx.fillRect(-ps*5,-ps*2.4,ps,ps);
+  ctx.fillRect(ps*4,-ps*2.4,ps,ps);
+ }else if(e.t==='but'){
+  ctx.fillRect(-ps*5,-ps*3.7,ps,ps);
+  ctx.fillRect(ps*4,-ps*3.7,ps,ps);
+  ctx.fillRect(-ps*4.5,ps*2.2,ps,ps);
+  ctx.fillRect(ps*3.5,ps*2.2,ps,ps);
+ }else if(e.t==='boss'){
+  ctx.fillRect(-ps*5.5,-ps*.4,ps,ps*2);
+  ctx.fillRect(ps*4.5,-ps*.4,ps,ps*2);
+ }else if(e.t==='rogue'){
+  ctx.fillStyle=pal.c||pal.a;
+  ctx.fillRect(-ps*4.8,ps*.5,ps,ps);
+  ctx.fillRect(ps*3.8,ps*.5,ps,ps);
+ }
 }
 
 function drawEnemy(e){
@@ -73,10 +94,13 @@ function drawEnemy(e){
  ctx.save();
  ctx.translate(Math.round(e.x),Math.round(e.y));
  if(e.dive===1||e.dive===4)ctx.rotate(Math.atan2(e.vy,e.vx||1)+1.57);
- if(e.t==='bee')drawPix(-ps*3,-ps*2.2,ps,P.bee.a,pal.a,pal.b,P.bee.b,pal.c,pal.pat||P.bee.c);
- else if(e.t==='but')drawPix(-ps*3,-ps*2.2,ps,P.but.a,pal.a,pal.b,P.but.b,pal.c,pal.pat||P.but.c);
- else if(e.t==='rogue')drawPix(-ps*3.2,-ps*2.2,ps,P.rogue.a,pal.a,pal.b,P.rogue.b,pal.c,pal.pat||P.rogue.c);
- else drawPix(-ps*3.5,-ps*2.2,ps,P.boss.a,pal.a,pal.b,P.boss.b,pal.c,pal.pat||P.boss.c);
+ if(e.fam==='dragonfly')drawPix(-ps*4.5,-ps*3.5,ps,P.dragonfly.a,pal.a,pal.b,P.dragonfly.b,pal.c,P.dragonfly.c);
+ else if(e.fam==='mosquito')drawPix(-ps*4.5,-ps*3.5,ps,P.mosquito.a,pal.a,pal.b,P.mosquito.b,pal.c,P.mosquito.c);
+ else if(e.t==='bee')drawPix(-ps*4,-ps*3.5,ps,P.bee.a,pal.a,pal.b,P.bee.b,pal.c,pal.pat||P.bee.c);
+ else if(e.t==='but')drawPix(-ps*4,-ps*3.5,ps,P.but.a,pal.a,pal.b,P.but.b,pal.c,pal.pat||P.but.c);
+ else if(e.t==='rogue')drawPix(-ps*4,-ps*3.5,ps,P.rogue.a,pal.a,pal.b,P.rogue.b,pal.c,pal.pat||P.rogue.c);
+ else drawPix(-ps*4.5,-ps*3.5,ps,P.boss.a,pal.a,pal.b,P.boss.b,pal.c,pal.pat||P.boss.c);
+ drawEnemyFlapAccent(e,ps,pal,flap);
  if(e.hitT>0){
   const hitAlpha=Math.min(.96,e.hitT/(e.t==='boss'?.46:.34));
   ctx.globalAlpha=e.t==='boss'?Math.max(.82,hitAlpha):hitAlpha;
@@ -143,10 +167,11 @@ function drawPlayerBody(x,y,dual=0,ghost=0){
  ctx.save();
  ctx.translate(Math.round(x),Math.round(y));
  if(ghost)ctx.globalAlpha=.52;
- drawPix(-ps*2.5,-ps*2.2,ps,P.ship.a,'#f4f8ff','#ff3347',P.ship.b,'#5ca8ff',P.ship.c);
  if(dual){
-  drawPix(-ps*5.2,-ps*2,ps*0.82,P.ship.a,'#f4f8ff','#ff3347',P.ship.b,'#5ca8ff',P.ship.c);
-  drawPix(ps*1.45,-ps*2,ps*0.82,P.ship.a,'#f4f8ff','#ff3347',P.ship.b,'#5ca8ff',P.ship.c);
+  drawPix(-ps*9.5,-ps*3.5,ps,P.ship.a,'#f4f8ff','#ff3347',P.ship.b,'#5ca8ff',P.ship.c);
+  drawPix(ps*1.5,-ps*3.5,ps,P.ship.a,'#f4f8ff','#ff3347',P.ship.b,'#5ca8ff',P.ship.c);
+ }else{
+  drawPix(-ps*4,-ps*3.5,ps,P.ship.a,'#f4f8ff','#ff3347',P.ship.b,'#5ca8ff',P.ship.c);
  }
  ctx.restore();
 }
@@ -377,20 +402,23 @@ function drawAuroraBoard({ox,oy,scale,dx,dy}){
  ctx.beginPath();
  ctx.rect(0,0,PLAY_W,PLAY_H);
  ctx.clip();
- const starfield=typeof syncStarfieldProfile==='function'?syncStarfieldProfile({
+ const isolatedSpriteCapture=!!S.harnessSpriteRuntimeCapture;
+ const starfield=!isolatedSpriteCapture&&typeof syncStarfieldProfile==='function'?syncStarfieldProfile({
   stagePresentation:S.stagePresentation,
   challenge:!!S.challenge,
   attractPhase:(typeof ATTRACT!=='undefined'&&ATTRACT.phase)||'',
   frontDoor:!started&&!S.attract
  }):null;
- for(const s of S.st){
-  const pulse=(s.twMin||.88)+Math.sin(s.tw)*(s.twAmp||.16);
-  ctx.globalAlpha=Math.max(.08,Math.min(1,(s.alpha||.62)*pulse));
-  ctx.fillStyle=s.c;
-  ctx.fillRect(s.x,s.y,s.s,s.s);
+ if(!isolatedSpriteCapture){
+  for(const s of S.st){
+   const pulse=(s.twMin||.88)+Math.sin(s.tw)*(s.twAmp||.16);
+   ctx.globalAlpha=Math.max(.08,Math.min(1,(s.alpha||.62)*pulse));
+   ctx.fillStyle=s.c;
+   ctx.fillRect(s.x,s.y,s.s,s.s);
+  }
  }
  ctx.globalAlpha=1;
- drawStageBackdrop();
+ if(!isolatedSpriteCapture)drawStageBackdrop();
  window.__platinumRenderDebug.backgroundMode=resolvedBoardAtmosphere().backgroundMode||'classic-stars';
  window.__platinumRenderDebug.starfieldProfile=starfield?.id||'classic-arcade-stars';
  window.__platinumRenderDebug.starfieldCount=S.st.length;
@@ -442,8 +470,10 @@ function drawAuroraBoard({ox,oy,scale,dx,dy}){
   window.__platinumRenderDebug.capturedGhostVisible=true;
   drawPlayerBody(p.x,p.y,0,1);
  }
- drawReserveShips(S.lives);
- drawBadges(S.stage);
+ if(!isolatedSpriteCapture){
+  drawReserveShips(S.lives);
+  drawBadges(S.stage);
+ }
  drawPostFx();
  ctx.restore();
  ctx.setTransform(1,0,0,1,0,0);

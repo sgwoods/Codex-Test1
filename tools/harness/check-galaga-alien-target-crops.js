@@ -54,8 +54,8 @@ function main(){
       fail(`Target crop role set ${role} does not expose promoted crops`, { row, payload });
     }
   }
-  if(targetCrops.length < 28){
-    fail('Expected at least 28 promoted target crops for this first-pass sprite sheet library.', payload);
+  if(targetCrops.length < 29){
+    fail('Expected at least 29 promoted target crops for this first-pass sprite sheet library, including the dual-fighter composite.', payload);
   }
   for(const crop of targetCrops){
     if(!crop.id || !crop.roleKey || !crop.poseKey || !crop.sourceRegion){
@@ -64,8 +64,11 @@ function main(){
     if(!exists(crop.targetCrop)){
       fail(`Promoted target crop ${crop.id} points at a missing image`, { crop, payload });
     }
-    if(crop.sourcePixelExact !== true || crop.pixelScale !== 1){
-      fail(`Promoted target crop ${crop.id} should be exact 1x source pixels`, { crop, payload });
+    if(crop.pixelScale !== 1 || (crop.sourcePixelExact !== true && crop.exactComposite !== true)){
+      fail(`Promoted target crop ${crop.id} should be exact 1x source pixels or an exact 1x composite`, { crop, payload });
+    }
+    if(crop.compositeTarget && (!Array.isArray(crop.componentCrops) || crop.componentCrops.length < 2)){
+      fail(`Promoted target crop ${crop.id} is marked composite but does not list component crops`, { crop, payload });
     }
     if(!crop.crop || !Number.isFinite(+crop.crop.x) || !Number.isFinite(+crop.crop.y) || +crop.crop.width <= 0 || +crop.crop.height <= 0){
       fail(`Promoted target crop ${crop.id} has invalid crop metadata`, { crop, payload });

@@ -21,6 +21,12 @@ const CAPTURE_SPECS = [
   { spriteKey: 'challenge-mosquito', kind: 'challenge-mosquito', subject: 'enemy', playfieldWidth: 50, playfieldHeight: 44 }
 ];
 
+const TEMPORAL_PHASE_SPECS = [
+  { spriteKey: 'bee-line', kind: 'bee-line', subject: 'enemy', playfieldWidth: 54, playfieldHeight: 48 },
+  { spriteKey: 'but-line', kind: 'but-line', subject: 'enemy', playfieldWidth: 58, playfieldHeight: 50 },
+  { spriteKey: 'boss-line', kind: 'boss-line', subject: 'enemy', playfieldWidth: 66, playfieldHeight: 54 }
+];
+
 function fail(message, payload){
   console.error(message);
   if(payload) console.error(JSON.stringify(payload, null, 2));
@@ -157,7 +163,7 @@ async function captureRuntimeSprite(page, spec, model){
     const sh = Math.max(1, Math.floor(height * (canvas.height / canvasRect.height)));
     const image = ctx.getImageData(sx, sy, sw, sh);
     const data = image.data;
-    const isLit = (px, py) => {
+    const pixelLit = (px, py) => {
       const i = (py * sw + px) * 4;
       const r = data[i];
       const g = data[i + 1];
@@ -165,6 +171,49 @@ async function captureRuntimeSprite(page, spec, model){
       const a = data[i + 3];
       return a > 0 && r + g + b > 90 && Math.max(r, g, b) > 38;
     };
+    const rawLit = new Uint8Array(sw * sh);
+    for(let py = 0; py < sh; py++){
+      for(let px = 0; px < sw; px++){
+        if(pixelLit(px, py)) rawLit[py * sw + px] = 1;
+      }
+    }
+    const seen = new Uint8Array(sw * sh);
+    const components = [];
+    for(let py = 0; py < sh; py++){
+      for(let px = 0; px < sw; px++){
+        const start = py * sw + px;
+        if(!rawLit[start] || seen[start]) continue;
+        const queue = [start];
+        const pixels = [];
+        seen[start] = 1;
+        for(let qi = 0; qi < queue.length; qi++){
+          const idx = queue[qi];
+          pixels.push(idx);
+          const x = idx % sw;
+          const y = Math.floor(idx / sw);
+          const next = [
+            x > 0 ? idx - 1 : -1,
+            x < sw - 1 ? idx + 1 : -1,
+            y > 0 ? idx - sw : -1,
+            y < sh - 1 ? idx + sw : -1
+          ];
+          for(const ni of next){
+            if(ni < 0 || !rawLit[ni] || seen[ni]) continue;
+            seen[ni] = 1;
+            queue.push(ni);
+          }
+        }
+        components.push({ pixels, count: pixels.length });
+      }
+    }
+    const largest = components.reduce((max, item) => Math.max(max, item.count), 0);
+    const minKeep = Math.max(8, largest * (spec.spriteKey === 'dual-fighter' ? .3 : .22));
+    const keepLit = new Uint8Array(sw * sh);
+    for(const component of components){
+      if(component.count < minKeep) continue;
+      for(const idx of component.pixels) keepLit[idx] = 1;
+    }
+    const isLit = (px, py) => keepLit[py * sw + px] === 1;
     let minX = sw;
     let minY = sh;
     let maxX = -1;
@@ -180,7 +229,7 @@ async function captureRuntimeSprite(page, spec, model){
         maxY = Math.max(maxY, py);
       }
     }
-    if(maxX < 0) return { error: 'empty-crop', sx, sy, sw, sh, litPixels };
+    if(maxX < 0) return { error: 'empty-crop', sx, sy, sw, sh, litPixels, rawComponents: components.length };
     const pad = 2;
     const bx = Math.max(0, minX - pad);
     const by = Math.max(0, minY - pad);
@@ -237,6 +286,11 @@ async function captureRuntimeSprite(page, spec, model){
     };
   }, { subject, spec, grid });
   if(capture.error) throw new Error(`Runtime capture failed for ${spec.spriteKey}: ${capture.error}`);
+  await page.evaluate(() => {
+    if(window.__galagaHarness__?.clearSpriteRuntimeCapture){
+      window.__galagaHarness__.clearSpriteRuntimeCapture();
+    }
+  });
   const outFile = path.join(CROP_DIR, `${spec.spriteKey}.png`);
   fs.mkdirSync(path.dirname(outFile), { recursive: true });
   fs.writeFileSync(outFile, Buffer.from(String(capture.dataUrl).split(',')[1] || '', 'base64'));
@@ -273,11 +327,36 @@ async function captureRuntimeSprite(page, spec, model){
 async function main(){
   const modelArtifact = readJson(MODEL_ARTIFACT);
   const samples = [];
+  const temporalSamples = [];
   await withHarnessPage({ stage: 1, ships: 3, challenge: false, seed: 91577 }, async ({ page }) => {
     for(const spec of CAPTURE_SPECS){
       const model = modelForKey(modelArtifact, spec.spriteKey);
       if(!model) throw new Error(`Missing model for runtime sprite key ${spec.spriteKey}`);
       samples.push(await captureRuntimeSprite(page, spec, model));
+    }
+    for(const spec of TEMPORAL_PHASE_SPECS){
+      const model = modelForKey(modelArtifact, spec.spriteKey);
+      if(!model) throw new Error(`Missing model for temporal sprite key ${spec.spriteKey}`);
+      const closed = await captureRuntimeSprite(page, Object.assign({}, spec, {
+        spriteKey: `${spec.spriteKey}-flap-closed`,
+        enemyTm: 0
+      }), model);
+      const open = await captureRuntimeSprite(page, Object.assign({}, spec, {
+        spriteKey: `${spec.spriteKey}-flap-open`,
+        enemyTm: .18
+      }), model);
+      temporalSamples.push({
+        spriteKey: spec.spriteKey,
+        motionAxis: 'two-phase-flap-pulse',
+        phaseClosedCrop: closed.cropImage,
+        phaseOpenCrop: open.cropImage,
+        closedScore10: closed.score10,
+        openScore10: open.score10,
+        scoreDelta: rounded(Math.abs(open.score10 - closed.score10), 2),
+        litPixelDelta: Math.abs((open.litPixels || 0) - (closed.litPixels || 0)),
+        filledCellDelta: Math.abs((open.filledCells || 0) - (closed.filledCells || 0)),
+        read: `Captured closed/open flap phases for ${spec.spriteKey}; lit-pixel delta ${Math.abs((open.litPixels || 0) - (closed.litPixels || 0))}, filled-cell delta ${Math.abs((open.filledCells || 0) - (closed.filledCells || 0))}.`
+      });
     }
   });
   const averageScore10 = samples.length
@@ -297,32 +376,39 @@ async function main(){
     },
     summary: {
       sampleCount: samples.length,
+      temporalSampleCount: temporalSamples.length,
       averageScore10,
       weakestSpriteKey: weakest?.spriteKey || null,
       weakestScore10: weakest?.score10 || null,
       captureMode: 'isolated-live-canvas-sprite-crops',
       measuredKeys: samples.map(item => item.spriteKey),
-      staticPoseOnly: true,
-      motionCoverageAxesCovered: 0,
+      staticPoseOnly: false,
+      motionCoverageAxesCovered: temporalSamples.length ? 1 : 0,
       motionCoverageAxesPlanned: 4,
+      coveredMotionAxes: temporalSamples.length ? [
+        'two-phase flap/pulse static sprite delta for bee, butterfly, and boss families'
+      ] : [],
       plannedMotionAxes: [
-        'flap-cycle cadence and alternating wing/body pixels',
+        'flap-cycle cadence and alternating wing/body pixels over full temporal windows',
         'pulse and damage-state brightness/color phases',
         'dive/rotation pose silhouettes',
         'capture, carried-fighter, rescue, and dual-fighter transition poses'
       ]
     },
     measurementLimits: [
-      'Runtime captures isolate static sprite poses through the harness; they do not yet score animation phases, rotations, dive poses, pulsing, flapping cadence, capture/rescue transitions, or formation context.',
+      'Runtime captures isolate static sprite poses through the harness with starfield, reserve ships, stage badges, bullets, and effects suppressed.',
+      'The first temporal windows capture closed/open flap phases for bee, butterfly, and boss families; they do not yet score full animation cadence, rotations, dive poses, pulsing, capture/rescue transitions, or formation context.',
       'The current score compares visible rendered Aurora pixels to inferred source-frame Galaga models, not to a direct Galaga ROM sprite sheet.'
     ],
-    samples
+    samples,
+    temporalSamples
   };
   writeJson(OUT, artifact);
   console.log(JSON.stringify({
     ok: true,
     artifact: rel(OUT),
     sampleCount: samples.length,
+    temporalSampleCount: temporalSamples.length,
     averageScore10,
     weakestSpriteKey: weakest?.spriteKey || null,
     weakestScore10: weakest?.score10 || null,

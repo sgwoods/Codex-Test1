@@ -20,6 +20,17 @@ const ROLE_CANDIDATES = {
   'challenge-mosquito': ['challenge-specialty-aliens']
 };
 
+const POSE_CANDIDATES = {
+  'player-fighter': ['single-ship-front'],
+  'dual-fighter': ['dual-fighter-front'],
+  'bee-line': ['formation-front', 'flap-a', 'flap-b'],
+  'but-line': ['formation-front', 'flap-a', 'flap-b'],
+  'boss-line': ['formation-front', 'flap-a', 'flap-b'],
+  'rogue-fighter': ['single-ship-front', 'turn-left', 'turn-right'],
+  'challenge-dragonfly': ['green-family-front', 'yellow-family-front', 'magenta-family-front', 'blue-yellow-family-front'],
+  'challenge-mosquito': ['green-family-front', 'yellow-family-front', 'magenta-family-front', 'blue-yellow-family-front']
+};
+
 function fail(message, payload){
   console.error(message);
   if(payload) console.error(JSON.stringify(payload, null, 2));
@@ -93,23 +104,58 @@ function colorSimilarity(a, b){
   return Math.max(0, 1 - Math.sqrt(dr * dr + dg * dg + db * db) / Math.sqrt(255 * 255 * 3));
 }
 
-function sampleCell(image, gx, gy, cols, rows){
-  const x0 = Math.floor(gx * image.width / cols);
-  const x1 = Math.max(x0 + 1, Math.floor((gx + 1) * image.width / cols));
-  const y0 = Math.floor(gy * image.height / rows);
-  const y1 = Math.max(y0 + 1, Math.floor((gy + 1) * image.height / rows));
+function isLitPixel(rr, gg, bb){
+  const luma = .299 * rr + .587 * gg + .114 * bb;
+  return rr + gg + bb > 90 && Math.max(rr, gg, bb) > 38 && luma > 18;
+}
+
+function litBounds(image, pad = 1){
+  let minX = image.width;
+  let minY = image.height;
+  let maxX = -1;
+  let maxY = -1;
+  for(let y = 0; y < image.height; y++){
+    for(let x = 0; x < image.width; x++){
+      const i = (y * image.width + x) * 3;
+      if(!isLitPixel(image.raw[i], image.raw[i + 1], image.raw[i + 2])) continue;
+      minX = Math.min(minX, x);
+      minY = Math.min(minY, y);
+      maxX = Math.max(maxX, x);
+      maxY = Math.max(maxY, y);
+    }
+  }
+  if(maxX < minX || maxY < minY){
+    return { x: 0, y: 0, width: image.width, height: image.height, empty: true };
+  }
+  minX = Math.max(0, minX - pad);
+  minY = Math.max(0, minY - pad);
+  maxX = Math.min(image.width - 1, maxX + pad);
+  maxY = Math.min(image.height - 1, maxY + pad);
+  return {
+    x: minX,
+    y: minY,
+    width: Math.max(1, maxX - minX + 1),
+    height: Math.max(1, maxY - minY + 1),
+    empty: false
+  };
+}
+
+function sampleCell(image, bounds, gx, gy, cols, rows){
+  const x0 = bounds.x + Math.floor(gx * bounds.width / cols);
+  const x1 = bounds.x + Math.max(1, Math.floor((gx + 1) * bounds.width / cols));
+  const y0 = bounds.y + Math.floor(gy * bounds.height / rows);
+  const y1 = bounds.y + Math.max(1, Math.floor((gy + 1) * bounds.height / rows));
   let lit = 0;
   let r = 0;
   let g = 0;
   let b = 0;
-  for(let y = y0; y < y1; y++){
-    for(let x = x0; x < x1; x++){
+  for(let y = y0; y < Math.min(image.height, y1); y++){
+    for(let x = x0; x < Math.min(image.width, x1); x++){
       const i = (y * image.width + x) * 3;
       const rr = image.raw[i];
       const gg = image.raw[i + 1];
       const bb = image.raw[i + 2];
-      const luma = .299 * rr + .587 * gg + .114 * bb;
-      if(!(rr + gg + bb > 90 && Math.max(rr, gg, bb) > 38 && luma > 18)) continue;
+      if(!isLitPixel(rr, gg, bb)) continue;
       lit++;
       r += rr;
       g += gg;
@@ -124,20 +170,24 @@ function sampleCell(image, gx, gy, cols, rows){
 
 function gridForImage(file, cols = 32, rows = 32){
   const image = decodeImage(file);
+  const bounds = litBounds(image, 1);
   const grid = [];
   let filled = 0;
   for(let y = 0; y < rows; y++){
     const row = [];
     for(let x = 0; x < cols; x++){
-      const cell = sampleCell(image, x, y, cols, rows);
+      const cell = sampleCell(image, bounds, x, y, cols, rows);
       if(cell.lit) filled++;
       row.push(cell);
     }
     grid.push(row);
   }
   return {
-    width: image.width,
-    height: image.height,
+    width: bounds.width,
+    height: bounds.height,
+    originalWidth: image.width,
+    originalHeight: image.height,
+    trimBounds: bounds,
     grid,
     filled,
     fillRatio: filled / Math.max(1, cols * rows)
@@ -184,8 +234,11 @@ function compareGrids(runtime, target){
 
 function targetCandidatesForSample(sample, targetCrops){
   const roles = ROLE_CANDIDATES[sample.spriteKey] || [];
-  const candidates = targetCrops.filter(crop => roles.includes(crop.roleKey));
-  return candidates.length ? candidates : targetCrops;
+  const poses = POSE_CANDIDATES[sample.spriteKey] || [];
+  const roleCandidates = targetCrops.filter(crop => roles.includes(crop.roleKey));
+  const poseCandidates = roleCandidates.filter(crop => poses.includes(crop.poseKey));
+  if(poseCandidates.length) return poseCandidates;
+  return roleCandidates.length ? roleCandidates : targetCrops;
 }
 
 function compareSample(sample, targetCrops, targetGrids){
@@ -211,6 +264,7 @@ function compareSample(sample, targetCrops, targetGrids){
     runtimeCrop: sample.cropImage,
     runtimeModelScore10: sample.score10,
     candidateRoleKeys: ROLE_CANDIDATES[sample.spriteKey] || [],
+    candidatePoseKeys: POSE_CANDIDATES[sample.spriteKey] || [],
     candidateCount: candidateResults.length,
     bestTargetCropId: best?.targetCropId || null,
     bestTargetRoleKey: best?.targetRoleKey || null,
@@ -276,7 +330,8 @@ function main(){
       'This is a first-pass static-image comparator using already-captured Aurora runtime crop PNGs and promoted source-sheet target crop PNGs.',
       'Images are normalized to a shared grid, so this is useful for role/pose target triage but not yet a final pixel-perfect conformance score.',
       'The comparator does not score animation timing, flap cadence, dive rotation, formation context, capture/rescue transitions, or target-crop authority disputes.',
-      'Dual fighter and carried/captured fighter matching still need composite target promotion before their scores should be treated as mature.'
+      'Images are trimmed to their lit sprite bounds before scoring so large runtime crop padding does not dominate the comparison.',
+      'Dual fighter now uses a derived two-fighter composite target, but carried/captured fighter targets still need promotion before those states should be treated as mature.'
     ],
     comparisons
   };
