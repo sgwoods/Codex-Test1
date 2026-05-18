@@ -7,6 +7,7 @@ const { withHarnessPage } = require('./browser-check-util');
 const ROOT = path.resolve(__dirname, '..', '..');
 const ANALYSES = path.join(ROOT, 'reference-artifacts', 'analyses');
 const OUT_ROOT = path.join(ANALYSES, 'challenge-stage-conformance');
+const CHALLENGE_CONTRACTS = path.join(ROOT, 'reference-artifacts', 'ingestion', 'challenge-stage-target-contracts', 'aurora-challenge-contracts-0.1.json');
 const CHALLENGE_STAGES = [3, 7, 11, 15, 19, 23, 27, 31];
 const SAMPLE_TIMES = [0, 0.45, 0.9, 1.35, 1.9, 2.55, 3.25, 4.05, 4.95, 5.95, 7.05, 8.25, 9.55, 10.95, 12.35];
 
@@ -143,7 +144,9 @@ function clamp(value, min = 0, max = 1){
 }
 
 function average(values){
-  const finite = values.filter(value => Number.isFinite(+value)).map(Number);
+  const finite = values
+    .filter(value => value !== null && value !== undefined && value !== '' && Number.isFinite(+value))
+    .map(Number);
   return finite.length ? finite.reduce((sum, value) => sum + value, 0) / finite.length : null;
 }
 
@@ -173,6 +176,15 @@ function challengeReferenceLabels(){
   const labels = readJson(path.join(ANALYSES, 'galaga-path-reference-labels', 'latest.json'), {});
   const accepted = Array.isArray(labels.acceptedLabels) ? labels.acceptedLabels : [];
   return accepted.filter(label => label.kind === 'challengeEntry');
+}
+
+function challengeContracts(){
+  const artifact = readJson(CHALLENGE_CONTRACTS, {});
+  return Array.isArray(artifact.contracts) ? artifact.contracts : [];
+}
+
+function challengeContractForStage(stage){
+  return challengeContracts().find(contract => +contract.stage === +stage) || null;
 }
 
 function alienVariationRead(){
@@ -1202,6 +1214,8 @@ function stageScore(stage, runtime, match, referenceLabels){
   const alienNovelty = strictAlienNoveltyRead(stage, runtime, { groupIdentity: group }, expectedHit, lateReferenceGap);
   const progression = stageProgressionRead(stage, runtime, expectedHit, lateReferenceGap);
   const shotOpportunity = runtime?.shotOpportunity || summarizeShotOpportunity(runtime?.samples || []);
+  const targetContract = challengeContractForStage(stage);
+  const targetContractFit = challengeContractFit(runtime, targetContract);
   const safetyRuleScore10 = safetyPass ? 10 : 1;
   const conformanceRaw = (0.34 * movement.score10)
     + (0.25 * graphics.score10)
@@ -1230,7 +1244,8 @@ function stageScore(stage, runtime, match, referenceLabels){
       graphics,
       alienNovelty,
       progression,
-      shotOpportunity
+      shotOpportunity,
+      targetContractFit
     },
     scoreComponents: {
       baseline: base,
@@ -1239,11 +1254,78 @@ function stageScore(stage, runtime, match, referenceLabels){
       alienNovelty: alienNovelty.score10,
       stageProgression: progression.score10,
       playerShotOpportunity: shotOpportunity.score10,
+      targetContractFit: targetContractFit.score10,
       safetyRule: safetyRuleScore10,
       legacyCoverageScore: round(oldCoverageScore, 1)
     },
     groupIdentity: group,
     expectedReferenceHit: expectedHit
+  };
+}
+
+function challengeContractFit(runtime, contract){
+  if(!contract){
+    return {
+      score10: null,
+      confidence: 'pending',
+      read: 'No explicit challenge-stage target contract is available for this stage yet.'
+    };
+  }
+  const runtimeGroups = Array.isArray(runtime?.groupSignatures) ? runtime.groupSignatures : [];
+  const targetGroups = Array.isArray(contract.groups) ? contract.groups : [];
+  if(!runtimeGroups.length || !targetGroups.length){
+    return {
+      score10: 1,
+      confidence: 'medium-low',
+      contractId: contract.sourceWindowId || null,
+      groupCountFit: 0,
+      pathFamilyFit: 0,
+      typeFit: 0,
+      familyFit: 0,
+      read: `Contract ${contract.displayLabel || contract.stage || ''} exists, but runtime group signatures are missing.`
+    };
+  }
+  const groupCountFit = clamp(1 - Math.abs(runtimeGroups.length - targetGroups.length) / Math.max(1, targetGroups.length));
+  const pathMatches = targetGroups.map((target, index) => {
+    const runtimeGroup = runtimeGroups[index] || {};
+    const runtimePathFamily = runtimeGroup.pathFamily || (Array.isArray(runtimeGroup.pathFamilies) ? runtimeGroup.pathFamilies[0] : '');
+    return String(runtimePathFamily || '') === String(target.pathFamily || '') ? 1 : 0;
+  });
+  const typeMatches = targetGroups.map((target, index) => {
+    const runtimeTypes = new Set(runtimeGroups[index]?.types || []);
+    const expected = target.expectedTypes || [];
+    if(!expected.length) return 0;
+    const hits = expected.filter(type => runtimeTypes.has(type)).length;
+    const extraPenalty = Array.from(runtimeTypes).filter(type => !expected.includes(type)).length * .18;
+    return clamp((hits / expected.length) - extraPenalty);
+  });
+  const familyMatches = targetGroups.map((target, index) => {
+    const runtimeFamilies = new Set(runtimeGroups[index]?.families || []);
+    const expected = target.expectedFamilies || [];
+    if(!expected.length) return 0;
+    const hits = expected.filter(family => runtimeFamilies.has(family)).length;
+    return clamp(hits / expected.length);
+  });
+  const pathFamilyFit = average(pathMatches) || 0;
+  const typeFit = average(typeMatches) || 0;
+  const familyFit = average(familyMatches) || 0;
+  const coverage = clamp(
+    (0.22 * groupCountFit)
+    + (0.34 * pathFamilyFit)
+    + (0.28 * typeFit)
+    + (0.16 * familyFit)
+  );
+  return {
+    score10: round(1 + coverage * 6.2, 1),
+    confidence: 'medium-low-first-pass-contract',
+    contractId: contract.sourceWindowId || null,
+    groupCountFit: round(groupCountFit, 3),
+    pathFamilyFit: round(pathFamilyFit, 3),
+    typeFit: round(typeFit, 3),
+    familyFit: round(familyFit, 3),
+    targetGroupCount: targetGroups.length,
+    runtimeGroupCount: runtimeGroups.length,
+    read: `First-pass target contract fit is ${round(1 + coverage * 6.2, 1)}/10 for ${contract.displayLabel || `stage ${contract.stage}`}: group count ${round(groupCountFit, 2)}, path-family order ${round(pathFamilyFit, 2)}, type order ${round(typeFit, 2)}, family order ${round(familyFit, 2)}. This is a group-contract read, not frame-perfect optical tracking.`
   };
 }
 
@@ -1265,6 +1347,9 @@ function criticalGaps(stage, runtime, match, score){
   }
   if((score.playerShotOpportunityScore10 || 1) < 4){
     gaps.push(`Player shot-opportunity read is only ${score.playerShotOpportunityScore10}/10: current sampled lanes do not yet prove the challenge has a clear learnable high-bonus firing route rather than incidental hits.`);
+  }
+  if(Number.isFinite(+score.strictAxisReads?.targetContractFit?.score10) && score.strictAxisReads.targetContractFit.score10 < 5){
+    gaps.push(`Target-contract fit is only ${score.strictAxisReads.targetContractFit.score10}/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.`);
   }
   if(stage === 3){
     const types = typeSet(runtime?.firstWave || []);
@@ -1358,6 +1443,7 @@ function makeStageRow(stage, runtime, match, referenceLabels){
   const intent = STAGE_INTENT[stage];
   const bestLabel = match?.bestMatch?.labelId || '';
   const score = stageScore(stage, runtime, match, referenceLabels);
+  const targetContract = challengeContractForStage(stage);
   const referenceTarget = referenceLabelForStage(stage, intent, match, referenceLabels)
     || referenceLabels.find(label => label.labelId === bestLabel)
     || referenceLabels.find(label => intent.expectedReferenceLabels.includes(label.labelId))
@@ -1390,7 +1476,7 @@ function makeStageRow(stage, runtime, match, referenceLabels){
     } : null,
     motionProbe: runtime ? runtime.motionSummary : null,
     currentRead: runtime
-      ? `${layoutSignature(runtime.layout)}; first-wave types ${typeSequence(firstWave) || 'pending'}; visual families ${familySet(firstWave).join(', ') || 'pending'}; strict movement ${score.movementConformanceScore10}/10, graphics ${score.graphicalConformanceScore10}/10, alien novelty ${score.alienNoveltyScore10}/10, shot opportunity ${score.playerShotOpportunityScore10}/10.`
+      ? `${layoutSignature(runtime.layout)}; first-wave types ${typeSequence(firstWave) || 'pending'}; visual families ${familySet(firstWave).join(', ') || 'pending'}; strict movement ${score.movementConformanceScore10}/10, graphics ${score.graphicalConformanceScore10}/10, alien novelty ${score.alienNoveltyScore10}/10, shot opportunity ${score.playerShotOpportunityScore10}/10, target-contract fit ${score.strictAxisReads.targetContractFit?.score10 ?? 'pending'}/10.`
       : 'Runtime probe pending.',
     graphicsRead: runtime
       ? score.strictAxisReads.graphics.read
@@ -1418,6 +1504,16 @@ function makeStageRow(stage, runtime, match, referenceLabels){
       : 'Alien variation probe pending.',
     groupIdentityRead: score.groupIdentity.read,
     groupIdentityScore10: score.groupIdentity.score10,
+    targetContract: targetContract ? {
+      sourceWindowId: targetContract.sourceWindowId,
+      displayLabel: targetContract.displayLabel,
+      targetRead: targetContract.targetRead,
+      groupCount: Array.isArray(targetContract.groups) ? targetContract.groups.length : 0,
+      successRead: targetContract.successRead,
+      nextPromotion: targetContract.nextPromotion
+    } : null,
+    targetContractFitScore10: score.strictAxisReads.targetContractFit?.score10 ?? null,
+    targetContractRead: score.strictAxisReads.targetContractFit?.read || 'Target contract pending.',
     criticalGaps: criticalGaps(stage, runtime, match, score),
     nextActions: nextActionsForStage(stage),
     interestingFactor10: score.interestingFactor10,
@@ -1435,10 +1531,11 @@ function makeStageRow(stage, runtime, match, referenceLabels){
     evidence: [
       'reference-artifacts/analyses/galaga-path-reference-labels/latest.json',
       'reference-artifacts/analyses/galaga-challenge-video-reference/latest.json',
+      targetContract ? 'reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json' : '',
       'reference-artifacts/analyses/formation-boss-path-family-comparison/latest.json',
       'reference-artifacts/analyses/alien-entry-challenge-variation/latest.json',
       runtime?.layout ? 'browser-backed challengeFormationState runtime probe' : 'runtime probe pending'
-    ]
+    ].filter(Boolean)
   };
 }
 
@@ -1489,6 +1586,8 @@ Target-artifact coverage has not been generated yet. Run \`npm run harness:analy
 
 **Group identity read:** ${row.groupIdentityRead || 'Group identity pending.'}
 
+**Target contract read:** ${row.targetContractRead || 'Target contract pending.'}
+
 **Shot-opportunity read:** ${row.shotOpportunityRead || 'Shot-opportunity probe pending.'}
 
 **Safety rule:** ${row.safetyProbe ? `enemy shots ${row.safetyProbe.eventCounts.enemyShots}, attack starts ${row.safetyProbe.eventCounts.enemyAttackStarts}, ship losses ${row.safetyProbe.eventCounts.shipLosses}` : 'runtime probe pending'}.
@@ -1519,6 +1618,7 @@ Current result: **${report.summary.interestingFactorScore10}/10 interesting fact
 - Existing path-family comparison supplied best-match vector scores against labeled Galaga challenge entries, but those broad scores are now retained as diagnostic coverage instead of the conformance score.
 - Strict movement scoring compares runtime y-range, path length, turn count, reversals, lower-field share, and trajectory best-match against the selected Galaga challenge reference vector. It is capped by current temporal-measurement limits because the harness still samples summaries rather than full tracked choreography.
 - Strict graphical scoring now includes active sprite-motion plus object-tracked runtime pixel/silhouette crops for flap state, phase coverage, visual family diversity, path-pose diversity, lit-pixel stability, and bounding-box variation. It remains capped until those object tracks are compared frame-by-frame to Galaga target crops, rotations, dive poses, capture/rescue transitions, and direct target crop sequences.
+- First-pass target contracts now score group count, group path-family order, expected type order, and expected family order for any challenge that has a persisted media-backed contract. This is deliberately reported as a separate contract-fit read until target-video object tracking exists.
 - Player shot-opportunity scoring samples plausible firing lanes through each challenge window so movement work can be judged by whether it creates learnable high-bonus routes, not only by broad movement shape.
 - Challenge path-slot extraction suppresses player fire for challenge windows, so trajectory comparison measures authored alien motion instead of bullet-truncated player-score fragments.
 - Safety is measured separately from interest: no shots/no kills is necessary, but it does not make a challenge visually conformant and contributes only as a guardrail.
@@ -1547,7 +1647,8 @@ ${stageSections}
 
 ## Success Criteria
 
-- Raise challenge-stage interesting factor from ${report.summary.interestingFactorScore10}/10 to 3.5/10 as the first honest gate by implementing one visibly reference-like challenge, then toward 6.0/10 after Stage 3, 7, and 11 each have distinct authored contracts.
+- Raise challenge-stage interesting factor from ${report.summary.interestingFactorScore10}/10 to 5.0/10 as the first honest beta-facing gate by implementing one visibly reference-like challenge, then toward 6.0/10 after Stage 3, 7, and 11 each have distinct authored contracts.
+- Keep the separate target-contract read above 7.0/10 for Challenge Stage 1 while promoting contracts for Stages 7 and 11; group-contract success is useful but does not replace frame-level motion/graphics scoring.
 - Raise movement conformance from ${report.summary.movementConformanceScore10}/10 by increasing y-range, path length, turn count, and exit-side match against the Galaga challenge references.
 - Raise graphical conformance from ${report.summary.graphicalConformanceScore10}/10 by extending the object-tracked silhouette hook into Galaga target-crop sequence comparisons; do not inflate it from type labels alone.
 - Raise player shot opportunity from ${report.summary.playerShotOpportunityScore10}/10 by creating lane-readable scoring windows for each challenge rather than incidental central-lane hits.
@@ -1748,6 +1849,7 @@ async function buildReport(){
     alienNoveltyScore10: round(average(rows.map(row => row.alienNoveltyScore10)), 1),
     progressionConformanceScore10: round(average(rows.map(row => row.progressionConformanceScore10)), 1),
     playerShotOpportunityScore10: round(average(rows.map(row => row.playerShotOpportunityScore10)), 1),
+    targetContractFitScore10: round(average(rows.map(row => row.targetContractFitScore10)), 1),
     safetyRuleScore10: round(average(rows.map(row => row.safetyRuleScore10)), 1),
     legacyCoverageScore10: round(average(rows.map(row => row.legacyCoverageScore10)), 1),
     confidence: 'medium-high for the gap; medium-low for exact remediation size',
@@ -1792,6 +1894,7 @@ async function buildReport(){
       galagaChallengeVideoReference: 'reference-artifacts/analyses/galaga-challenge-video-reference/latest.json',
       galagaTargetArtifactCoverage: 'reference-artifacts/analyses/galaga-target-artifact-coverage/latest.json',
       auroraRuntimeVsGalagaTargetCrops: 'reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json',
+      challengeStageTargetContracts: 'reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json',
       pathFamilyComparison: 'reference-artifacts/analyses/formation-boss-path-family-comparison/latest.json',
       alienEntryChallengeVariation: 'reference-artifacts/analyses/alien-entry-challenge-variation/latest.json',
       challengeCollisionGuardrail: 'tools/harness/check-challenge-collision.js',

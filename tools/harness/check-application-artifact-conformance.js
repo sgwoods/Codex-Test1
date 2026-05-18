@@ -9,6 +9,7 @@ const REQUIRED_ROWS = [
   'sprite-runtime-canvas-vs-target',
   'sprite-runtime-vs-promoted-target-crops',
   'sprite-motion-animation-coverage',
+  'impact-explosion-visual-feedback',
   'source-frame-pixel-targets',
   'sprite-sheet-target-pose-crops',
   'audio-cue-assets',
@@ -112,10 +113,22 @@ function main(){
       fail('Application artifact conformance runtime-vs-target crop comparison is missing image evidence', { comparison, payload });
     }
   }
+  const impactExplosionComparisons = Array.isArray(artifact.impactExplosionComparisons) ? artifact.impactExplosionComparisons : [];
+  if(impactExplosionComparisons.length){
+    for(const comparison of impactExplosionComparisons){
+      if(!Number.isFinite(+comparison.score10) || comparison.score10 <= 0 || comparison.score10 > 10){
+        fail('Application artifact conformance impact/explosion comparison has an invalid score', { comparison, payload });
+      }
+      if(!exists(comparison.runtimeCrop) || !exists(comparison.bestTargetCrop)){
+        fail('Application artifact conformance impact/explosion comparison is missing image evidence', { comparison, payload });
+      }
+    }
+  }
   const requiredNumeric = [
     'sprite-model-current-vs-target',
     'sprite-runtime-canvas-vs-target',
     'sprite-runtime-vs-promoted-target-crops',
+    'impact-explosion-visual-feedback',
     'source-frame-pixel-targets',
     'audio-cue-assets',
     'backgrounds-starfield-atmosphere',

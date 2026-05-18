@@ -690,14 +690,14 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   pathFamily:'first-challenge-peel',
   groups:5,
   enemiesPerGroup:8,
-  upperBandRatio:.47,
-  spawnOffsetX:56,
-  waveSpacingY:12,
+  upperBandRatio:.5,
+  spawnOffsetX:64,
+  waveSpacingY:13,
   rowSpacingY:8,
-  waveDelay:1.46,
-  slotDelay:.12,
-  arcAmp:1.04,
-  dropAmp:.9,
+  waveDelay:1.55,
+  slotDelay:.13,
+  arcAmp:1.12,
+  dropAmp:1.02,
   laneTypes:Object.freeze(['bee','bee','bee','bee','but','but','but','but']),
   groupLaneTypes:Object.freeze([
    Object.freeze(['bee','bee','bee','bee','but','but','but','but']),
@@ -707,7 +707,7 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
    Object.freeze(['but','bee','bee','but','but','bee','bee','but'])
   ]),
   groupVisualFamilies:Object.freeze(['classic','classic','classic','classic','classic']),
-  groupPathFamilies:Object.freeze(['first-challenge-peel','classic-column-drop','side-hook-return','classic-column-drop','first-challenge-peel'])
+  groupPathFamilies:Object.freeze(['first-challenge-peel','classic-column-drop','classic-column-drop','side-hook-return','first-challenge-peel'])
  }),
  Object.freeze({
   fromStage:7,

@@ -100,7 +100,7 @@ function updateChallengeEnemy(e,dt){
 	   e.y=topY+Math.sin(q*Math.PI*1.65+p)*7*arcAmp;
 	  }else if(pathFamily==='first-challenge-peel'){
 	   e.x=startX+(laneX-startX)*Math.sin(q*Math.PI/2);
-	   e.y=topY+q*2.8*dropAmp;
+	   e.y=topY+q*5.2*dropAmp;
 	  }else if(pathFamily==='classic-column-drop'){
 	   const columnX=PLAY_W/2+(slot-1.5)*24*side;
 	   e.x=columnX+Math.sin(q*Math.PI+p+wave*.35)*5*arcAmp;
@@ -144,9 +144,9 @@ function updateChallengeEnemy(e,dt){
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*1.2)*42+Math.sin(q*Math.PI*3+p)*6)*fm.challengeSweep*arcAmp;
 	   e.y=topY+q*12*dropAmp+Math.sin(q*7.2+p)*2.2;
 	  }else if(pathFamily==='first-challenge-peel'){
-	   const glide=18+slot*4;
+	   const glide=22+slot*5;
 	   e.x=laneX-side*(q*glide);
-	   e.y=topY+q*4.2*dropAmp;
+	   e.y=topY+q*9.5*dropAmp;
 	  }else if(pathFamily==='classic-column-drop'){
 	   const columnX=PLAY_W/2+(slot-1.5)*24*side;
 	   e.x=columnX+Math.sin(q*Math.PI*2.2+p+wave*.4)*7*arcAmp;
@@ -194,9 +194,9 @@ function updateChallengeEnemy(e,dt){
 	   e.x=laneX+sweep*(36-q*78)*fm.challengeSweep*arcAmp+Math.sin(q*7.4+p)*2.4;
 	   e.y=topY+10+q*205*fm.challengeDrop*dropAmp;
 	  }else if(pathFamily==='first-challenge-peel'){
-	   const glide=18+slot*4;
-	   e.x=laneX-side*(glide+q*(44+slot*4));
-	   e.y=topY+6+q*132*fm.challengeDrop*dropAmp;
+	   const glide=22+slot*5;
+	   e.x=laneX-side*(glide+q*(56+slot*5));
+	   e.y=topY+8+q*164*fm.challengeDrop*dropAmp;
 	  }else if(pathFamily==='classic-column-drop'){
 	   const columnX=PLAY_W/2+(slot-1.5)*24*side;
 	   e.x=columnX+side*(12+q*(54+slot*8))*arcAmp;

@@ -65,6 +65,20 @@ function main(){
   if(!Number.isFinite(+artifact.summary?.averageScore10)){
     fail('Aurora runtime sprite conformance artifact is missing an average score', payload);
   }
+  const cadenceSamples = Array.isArray(artifact.cadenceSamples) ? artifact.cadenceSamples : [];
+  if(cadenceSamples.length < 3){
+    fail('Aurora runtime sprite conformance artifact is missing full cadence samples for bee, butterfly, and boss families', payload);
+  }
+  for(const cadence of cadenceSamples){
+    if(!Array.isArray(cadence.frames) || cadence.frames.length < 6){
+      fail(`Aurora runtime sprite cadence sample ${cadence.spriteKey || '(missing key)'} does not include enough frames`, { cadence, payload });
+    }
+    for(const frame of cadence.frames){
+      if(!exists(frame.cropImage)){
+        fail(`Aurora runtime sprite cadence sample ${cadence.spriteKey || '(missing key)'} is missing frame crop ${frame.cropImage}`, { cadence, frame, payload });
+      }
+    }
+  }
   console.log(JSON.stringify({
     ok: true,
     artifact: ARTIFACT,

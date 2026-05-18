@@ -137,12 +137,12 @@ const TARGET_SPRITE_ROWS=Object.freeze({
   '..R.R.BBB....BB.'
  ]),
  challengeGreen:Object.freeze([
-  'R.R.B.B.........',
-  'R.R.BBB........B',
-  '.Y...BB........B',
-  '.YYY.BB.........',
-  '.YYYBB..........',
-  'BYYYY...........',
+  'R.R.G.G.........',
+  'R.R.GGG........G',
+  '.Y...GG........G',
+  '.YYY.GG.........',
+  '.YYYGG..........',
+  'GYYYY...........',
   '..YYY...........',
   '..YY............',
   '...Y............',
@@ -162,6 +162,42 @@ const TARGET_SPRITE_ROWS=Object.freeze({
   '...G...........G',
   '...G...........G',
   '...G............'
+ ]),
+ challengeMagenta:Object.freeze([
+  'RRR..GGG..',
+  'RRR...G...',
+  '..........',
+  '..........',
+  '..........',
+  '..........',
+  '..........',
+  '..........',
+  '..........',
+  '..........',
+  '..M..R.R..',
+  'MMM..R.R..',
+  'MMM.GMGMG.',
+  'MMM.GGGGG.',
+  '.MMMMGGGMM',
+  '..MMMRRRMM'
+ ]),
+ challengeBlueYellow:Object.freeze([
+  'RR..BBB.......BB',
+  'R...BBB.......BB',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+  '.B..Y.........Y.',
+  '.B..YYY.......Y.',
+  'RYR.YYY.......Y.',
+  'RRR.YYY.......Y.',
+  'RRYYYY........YY',
+  'BBYYY...........'
  ])
 });
 
@@ -170,16 +206,103 @@ const TARGET_SPRITE_PALETTES=Object.freeze({
  bee:Object.freeze({R:'#ff3038',W:'#f4f8ff',B:'#247cff',Y:'#ffe94d'}),
  but:Object.freeze({M:'#ff43e6',B:'#247cff',R:'#ff3038',W:'#f4f8ff'}),
  boss:Object.freeze({G:'#22c284',R:'#ff3038',B:'#247cff',Y:'#ffe94d'}),
- challengeGreen:Object.freeze({R:'#ff3038',B:'#247cff',Y:'#ffe94d'}),
- challengeYellow:Object.freeze({M:'#ff43e6',G:'#42e46e',R:'#ff3038'})
+ challengeGreen:Object.freeze({R:'#ff3038',G:'#42e46e',Y:'#ffe94d'}),
+ challengeYellow:Object.freeze({M:'#ff43e6',G:'#42e46e',R:'#ff3038'}),
+ challengeMagenta:Object.freeze({R:'#ff3038',G:'#42e46e',M:'#ff43e6'}),
+ challengeBlueYellow:Object.freeze({R:'#ff3038',B:'#247cff',Y:'#ffe94d'})
 });
 
-function drawTargetSpriteRows(rows,palette,scale=1,offsetX=0,offsetY=0){
+const TARGET_EXPLOSION_ROWS=Object.freeze({
+ small:Object.freeze([
+  '................................',
+  '................................',
+  '................................',
+  '...CC.........................CC',
+  '.....C.......CC.CCC...C......CC.',
+  '......CC....CCCCCCCC...R...CCC..',
+  '.......C.R..CCCC.R.CC...CC.C....',
+  '........C..CC.R.C.CCC.....W.....',
+  '......CC...CCW.CCCCCCCCC..WWW...',
+  '..........C.CCCCC.CC.CCCC.......',
+  '.....R...CCC.CCCWCCCCCCCCCC.....',
+  '...CC..CCCCCWWWWWW.WWWRC.CC..CCC',
+  '......CCC.C.WW..WWWW.WCRC.CC..C.',
+  '.....CCC.CCW.W.W.W..WWCCC.CC..CC',
+  '.....CC.CCCWWWW.W.W.WWWC.CCC.W..',
+  '.....CC.CCC.WWC..RW...WCCCC.....',
+  '......CC.CCC....WWWWWW..CCC.....',
+  '.....CC.CCRWWWW.WRW....WCCCC....',
+  '.....CCC.CRWWW...WWR.WWWC.CCC...',
+  '.....CCCCCWW.WW.W.W.WWWWCC.CC...',
+  '......CCCC.CWW.W.....WWRW.CCC...',
+  '......CCCC.CW...WW.WW.WWWC.CC.R.',
+  '....C..CC.CCW.WWWW.WWWWC.CC.....',
+  '.....C...CCCCCWRWCCCWRWC.CCC.C..',
+  '..........CCCCCCCCCCCCC.CC......',
+  '......CC..CC.CC.CCCC.CCC..WW....',
+  '.....C..W..CC..CC.CCC.CC..W.....',
+  '.......R.C..CCCCCC.CCCCC...C....',
+  '......R..C...CC.CC...CC.....W...',
+  '.....C..................C....C..',
+  '....C........CCCC......C......CC',
+  '.............C.C................'
+ ]),
+ large:Object.freeze([
+  '................................',
+  '...............CC..CCCCC.CCCC...',
+  '.....C......CCCCCC.CCCCCCCCCCC..',
+  '......C....CCCCCCC.CCCCC.C.WWCC.',
+  '......CCC.CCWW..CCCCCWW.W.W.WWC.',
+  '.......R..CCW.WW.CWWWW.WWWWW.WCC',
+  '...........WRWWWW.WWCWWWWCWWW.CC',
+  '........CCWWWWWCWWWRRWWWWWCWWW.C',
+  '.......CWW.WCWWWCCCCW.WWWWWRWW.C',
+  '......CCW.WWCWWWWWWWW.WCWWRCW.WW',
+  '.....CCW.WWCWWWWW.WWW.WWWWWCWWWW',
+  '.....CC.WWWCWW.WWW.WW.WWW.WWWWCW',
+  '.....CC.WWWWWWW.WRWW.WWW.WW.WWCW',
+  '.....CCW.WRWW..W.W...W...WCW.WCW',
+  '......CWWCWWCW..W..W..W.WWWW.WWW',
+  '......CCWCWWCWW..W.W.W..WWW.WWWW',
+  '.......C.WCWCWC...WWWW...WWWWWW.',
+  '......C.CWWWWW.WRWWWWRWW.WWWRW.C',
+  '......CCWRWWW...W..WW.....WWWWCC',
+  '......CCWWCWWWWW.W..WW..WWWWWWCC',
+  '......CC.WWCWWW..W...W.WWWCWWRCC',
+  '.......CCWWWWWW.W.......WWWWWWCC',
+  '........C.WWCW...WW.WWW..WWWWC..',
+  '.......CCWWW.WWWWWW.W.WW.WW..CC.',
+  '.......CCWWWW.WWRWWWWW.WWWWW.CCC',
+  '........CCCCC.WWWWRWWWWWWRWW.WCC',
+  '......R..CCCCC.W.WW.WWWWWWW.WWWC',
+  '.....C.....CCC.WW..WWWW.WCCCCCCC',
+  '........R..CC.CCCWWWWWWWCC.CCCC.',
+  '.......CCC....CCCCCCW.WWC.......',
+  '......RR.......CC...CWWWCC.....R',
+  '.....CC............CCCCCCC......'
+ ])
+});
+
+const TARGET_EXPLOSION_PALETTE=Object.freeze({
+ C:'#36f4ff',
+ W:'#f4fbff',
+ R:'#ff3448',
+ Y:'#ffe35a',
+ G:'#42e46e',
+ B:'#247cff',
+ M:'#ff43e6'
+});
+
+const TARGET_PIXEL_ASPECT_X=1.14;
+
+function drawTargetSpriteRows(rows,palette,scale=1,offsetX=0,offsetY=0,opts={}){
  if(!Array.isArray(rows)||!rows.length)return false;
  const cols=rows.reduce((max,row)=>Math.max(max,String(row||'').length),0);
  const height=rows.length;
- const left=offsetX-cols*scale/2;
- const top=offsetY-height*scale/2;
+ const sx=scale*(opts.xScale||TARGET_PIXEL_ASPECT_X);
+ const sy=scale*(opts.yScale||1);
+ const left=offsetX-cols*sx/2;
+ const top=offsetY-height*sy/2;
  for(let y=0;y<rows.length;y++){
   const row=String(rows[y]||'');
   for(let x=0;x<row.length;x++){
@@ -188,7 +311,7 @@ function drawTargetSpriteRows(rows,palette,scale=1,offsetX=0,offsetY=0){
    const color=palette[token];
    if(!color)continue;
    ctx.fillStyle=color;
-   ctx.fillRect(Math.round(left+x*scale),Math.round(top+y*scale),Math.max(1,Math.round(scale)),Math.max(1,Math.round(scale)));
+   ctx.fillRect(Math.round(left+x*sx),Math.round(top+y*sy),Math.max(1,Math.round(sx)),Math.max(1,Math.round(sy)));
   }
  }
  return true;
@@ -197,11 +320,18 @@ function drawTargetSpriteRows(rows,palette,scale=1,offsetX=0,offsetY=0){
 function drawTargetEnemySprite(e,flap){
  if(e?.fam==='dragonfly')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeGreen,TARGET_SPRITE_PALETTES.challengeGreen,1);
  if(e?.fam==='mosquito')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeYellow,TARGET_SPRITE_PALETTES.challengeYellow,1);
+ if(e?.fam==='scorpion')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeMagenta,TARGET_SPRITE_PALETTES.challengeMagenta,1);
+ if(e?.fam==='stingray'||e?.fam==='crown')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeBlueYellow,TARGET_SPRITE_PALETTES.challengeBlueYellow,1);
  if(e?.t==='bee')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.beeOpen:TARGET_SPRITE_ROWS.bee,TARGET_SPRITE_PALETTES.bee,1);
  if(e?.t==='but')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.butOpen:TARGET_SPRITE_ROWS.but,TARGET_SPRITE_PALETTES.but,1);
  if(e?.t==='boss')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.bossOpen:TARGET_SPRITE_ROWS.boss,TARGET_SPRITE_PALETTES.boss,1);
  if(e?.t==='rogue')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1);
  return false;
+}
+
+function drawTargetExplosionSprite(kind,scale=1){
+ const rows=kind==='explosionLarge'?TARGET_EXPLOSION_ROWS.large:TARGET_EXPLOSION_ROWS.small;
+ return drawTargetSpriteRows(rows,TARGET_EXPLOSION_PALETTE,scale,0,0,{xScale:1,yScale:1});
 }
 
 function enemyPalette(e,flap,hot){
@@ -364,8 +494,8 @@ function drawPlayerBody(x,y,dual=0,ghost=0){
  ctx.translate(Math.round(x),Math.round(y));
  if(ghost)ctx.globalAlpha=.52;
  if(dual){
-  drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1,-8,0);
-  drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1,8,0);
+  drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1,-10.5,0);
+  drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1,10.5,0);
  }else{
   drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1);
  }
@@ -622,7 +752,15 @@ function drawAuroraBoard({ox,oy,scale,dx,dy}){
  window.__platinumRenderDebug.starfieldSpeedScale=+(starfield?.speedScale||1);
  for(const f of S.fx){
   ctx.globalAlpha=Math.max(0,f.t*2.9);
-  if(f.ring){
+  if(f.sprite==='explosionSmall'||f.sprite==='explosionLarge'){
+   const life=Math.max(.001,+f.life||+f.t||.12);
+   const age=1-Math.max(0,Math.min(1,f.t/life));
+   const scale=(+f.scale||.6)*(1+(+f.grow||0)*age);
+   ctx.save();
+   ctx.translate(Math.round(f.x),Math.round(f.y));
+   drawTargetExplosionSprite(f.sprite,scale);
+   ctx.restore();
+  }else if(f.ring){
    ctx.strokeStyle=f.c;
    ctx.lineWidth=Math.max(1,.8+f.t*2.5);
    ctx.beginPath();

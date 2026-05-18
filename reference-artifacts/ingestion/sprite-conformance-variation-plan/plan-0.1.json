@@ -94,8 +94,8 @@
       "id": "pose-and-motion-targets",
       "label": "Pose And Motion Targets",
       "goal": "Group static crops into temporal identities: flap cycles, dive turns, boss damage, capture/rescue, dual fighter, projectiles, and explosions.",
-      "currentStatus": "Static model and runtime crop scoring exist, and a 32-crop/7-role promoted source-sheet library now supplies multi-pose static targets. Motion remains the major gap.",
-      "nextAction": "Compare Aurora runtime crops against the promoted multi-pose target library, then add temporal windows and minimum phase coverage requirements before raising sprite conformance claims."
+      "currentStatus": "Static model and runtime crop scoring exist, and a 33-crop/7-role promoted source-sheet library now supplies multi-pose static targets. Seed runtime windows now cover all four planned motion axes: flap phase pairs, full flap cadence, dive/rotation poses, capture/carry/dual transitions, and first-pass impact/explosion event crops.",
+      "nextAction": "Promote target-frame temporal sequences for flap cadence, projectile/impact/explosion lifecycle, damage pulse, and challenge specialty motion before raising mature sprite conformance claims."
     },
     {
       "id": "runtime-renderer-path",
@@ -108,8 +108,8 @@
       "id": "scoring-and-gates",
       "label": "Scoring And Gates",
       "goal": "Score static crops, active motion, stage context, player meaning, and shipped-theme originality separately.",
-      "currentStatus": "Runtime static sprite score is about 6.2/10 against inferred models. A stricter first-pass runtime-vs-promoted-target-crop comparator now scores about 3.4/10, making the visible sprite geometry gap explicit. Active sprite motion is still captured as a planning gap rather than a scored mature metric.",
-      "nextAction": "Use the runtime-vs-target-crop mismatch data to choose sprite geometry and target-mapping improvements, then add confidence/resolution and temporal motion scoring."
+      "currentStatus": "Runtime static sprite score is 5.75/10 against inferred models while the stricter runtime-vs-promoted-target-crop comparator reads 4.48/10 and exposes the direct visible geometry gap. Impact/explosion feedback now has a first-pass static crop comparator at 5.86/10 after adding a target-derived pixel explosion layer. Active sprite motion has seed windows but is not yet target-frame temporal scoring.",
+      "nextAction": "Move direct target sprite score toward 5.5+ before the next beta claim, keep challenge-stage set-piece conformance above 5.0 before claiming a beta conformance lift, and add confidence/resolution plus temporal target scoring."
     },
     {
       "id": "variation-generation",
@@ -140,7 +140,7 @@
     {
       "id": "release-gate",
       "label": "Release Gate",
-      "target": "Before broad public promotion, production theme sprites are original, readable, era-faithful, and backed by conformance-lane evidence plus variation-distance notes."
+      "target": "Before the next beta conformance claim, strict direct target sprite conformance should be at least 5.5/10 and challenge-stage set-piece conformance should be at least 5.0/10. Before broad public promotion, production theme sprites are original, readable, era-faithful, and backed by conformance-lane evidence plus variation-distance notes."
     },
     {
       "id": "long-term",
@@ -186,9 +186,13 @@
       "path": "reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json"
     },
     {
+      "label": "Runtime impact/explosion conformance",
+      "path": "reference-artifacts/analyses/aurora-impact-explosion-conformance/latest.json"
+    },
+    {
       "label": "Target artifact coverage",
       "path": "GALAGA_TARGET_ARTIFACT_COVERAGE.md"
     }
   ],
-  "nextBestStep": "Use the first-pass runtime-vs-promoted-target-crop mismatch data to improve Aurora sprite geometry and target mappings, then add temporal motion windows for flap, dive, damage, capture, rescue, projectile, explosion, and challenge-stage specialty behavior."
+  "nextBestStep": "Use the first-pass runtime-vs-promoted-target-crop and impact/explosion mismatch data to improve Aurora sprite geometry, event feedback, and target mappings; then add target-frame temporal scoring for flap, dive, damage, capture, rescue, projectile, explosion, and challenge-stage specialty behavior."
 }

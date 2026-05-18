@@ -207,7 +207,18 @@ function gridForImage(file, cols = 32, rows = 32, preferredBounds = null){
   };
 }
 
-function compareGrids(runtime, target){
+function emptyCell(){
+  return { lit: false, rgb: [0, 0, 0] };
+}
+
+function shiftedCell(grid, x, y){
+  if(y < 0 || y >= grid.length) return emptyCell();
+  const row = grid[y] || [];
+  if(x < 0 || x >= row.length) return emptyCell();
+  return row[x] || emptyCell();
+}
+
+function compareGridsAtShift(runtime, target, shiftX = 0, shiftY = 0){
   const rows = runtime.grid.length;
   const cols = runtime.grid[0]?.length || 0;
   let intersection = 0;
@@ -218,7 +229,7 @@ function compareGrids(runtime, target){
   for(let y = 0; y < rows; y++){
     for(let x = 0; x < cols; x++){
       const a = runtime.grid[y][x];
-      const b = target.grid[y][x];
+      const b = shiftedCell(target.grid, x - shiftX, y - shiftY);
       if(a.lit || b.lit) union++;
       if(a.lit && b.lit){
         intersection++;
@@ -241,8 +252,19 @@ function compareGrids(runtime, target){
     silhouetteAgreement: rounded(silhouetteAgreement, 4),
     colorSimilarity: rounded(colorMatch, 4),
     fillRatioDelta: rounded(Math.abs(runtime.fillRatio - target.fillRatio), 4),
-    aspectDelta: rounded(aspectDelta, 4)
+    aspectDelta: rounded(aspectDelta, 4),
+    alignmentShift: { x: shiftX, y: shiftY }
   };
+}
+
+function compareGrids(runtime, target){
+  const candidates = [];
+  for(let shiftY = -2; shiftY <= 2; shiftY++){
+    for(let shiftX = -2; shiftX <= 2; shiftX++){
+      candidates.push(compareGridsAtShift(runtime, target, shiftX, shiftY));
+    }
+  }
+  return candidates.sort((a, b) => b.score10 - a.score10)[0] || compareGridsAtShift(runtime, target, 0, 0);
 }
 
 function targetCandidatesForSample(sample, targetCrops){
@@ -345,6 +367,7 @@ function main(){
       'The comparator does not score animation timing, flap cadence, dive rotation, formation context, capture/rescue transitions, or target-crop authority disputes.',
       'Images are trimmed to their lit sprite bounds before scoring so large runtime crop padding does not dominate the comparison.',
       'Promoted target crops now prefer their accepted artifact litBox and ignore low-saturation source-sheet guide pixels, so gray sheet borders do not masquerade as sprite mass.',
+      'The static grid comparator allows a bounded plus/minus two-cell alignment search so browser scaling and crop phase do not overwhelm otherwise target-like pixel art.',
       'Dual fighter now uses a derived two-fighter composite target, but carried/captured fighter targets still need promotion before those states should be treated as mature.'
     ],
     comparisons

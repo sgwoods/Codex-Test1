@@ -27,6 +27,12 @@ const TEMPORAL_PHASE_SPECS = [
   { spriteKey: 'boss-line', kind: 'boss-line', subject: 'enemy', playfieldWidth: 66, playfieldHeight: 54 }
 ];
 
+const CADENCE_WINDOW_SPECS = [
+  { spriteKey: 'bee-line', kind: 'bee-line', subject: 'enemy', playfieldWidth: 54, playfieldHeight: 48, frameCount: 8, stepTm: .055 },
+  { spriteKey: 'but-line', kind: 'but-line', subject: 'enemy', playfieldWidth: 58, playfieldHeight: 50, frameCount: 8, stepTm: .055 },
+  { spriteKey: 'boss-line', kind: 'boss-line', subject: 'enemy', playfieldWidth: 66, playfieldHeight: 54, frameCount: 8, stepTm: .055 }
+];
+
 const DIVE_POSE_SPECS = [
   { spriteKey: 'bee-line-dive-left', modelKey: 'bee-line', kind: 'bee-line', subject: 'enemy', playfieldWidth: 58, playfieldHeight: 58, enemyDive: 1, enemyVx: -88, enemyVy: 134 },
   { spriteKey: 'but-line-dive-right', modelKey: 'but-line', kind: 'but-line', subject: 'enemy', playfieldWidth: 62, playfieldHeight: 60, enemyDive: 1, enemyVx: 88, enemyVy: 134 },
@@ -340,6 +346,7 @@ async function main(){
   const modelArtifact = readJson(MODEL_ARTIFACT);
   const samples = [];
   const temporalSamples = [];
+  const cadenceSamples = [];
   const divePoseSamples = [];
   const transitionPoseSamples = [];
   await withHarnessPage({ stage: 1, ships: 3, challenge: false, seed: 91577 }, async ({ page }) => {
@@ -370,6 +377,41 @@ async function main(){
         litPixelDelta: Math.abs((open.litPixels || 0) - (closed.litPixels || 0)),
         filledCellDelta: Math.abs((open.filledCells || 0) - (closed.filledCells || 0)),
         read: `Captured closed/open flap phases for ${spec.spriteKey}; lit-pixel delta ${Math.abs((open.litPixels || 0) - (closed.litPixels || 0))}, filled-cell delta ${Math.abs((open.filledCells || 0) - (closed.filledCells || 0))}.`
+      });
+    }
+    for(const spec of CADENCE_WINDOW_SPECS){
+      const model = modelForKey(modelArtifact, spec.spriteKey);
+      if(!model) throw new Error(`Missing model for cadence sprite key ${spec.spriteKey}`);
+      const frames = [];
+      for(let frameIndex = 0; frameIndex < spec.frameCount; frameIndex += 1){
+        const enemyTm = rounded((spec.startTm || 0) + frameIndex * spec.stepTm, 3);
+        const frame = await captureRuntimeSprite(page, Object.assign({}, spec, {
+          spriteKey: `${spec.spriteKey}-cadence-${String(frameIndex).padStart(2, '0')}`,
+          enemyTm
+        }), model);
+        frames.push({
+          frameIndex,
+          enemyTm,
+          cropImage: frame.cropImage,
+          score10: frame.score10,
+          litPixels: frame.litPixels,
+          filledCells: frame.filledCells,
+          fillRatio: frame.fillRatio
+        });
+      }
+      const scoreValues = frames.map(frame => frame.score10).filter(Number.isFinite);
+      const litDeltas = frames.slice(1).map((frame, index) => Math.abs((frame.litPixels || 0) - (frames[index].litPixels || 0)));
+      const fillDeltas = frames.slice(1).map((frame, index) => Math.abs((frame.filledCells || 0) - (frames[index].filledCells || 0)));
+      cadenceSamples.push({
+        spriteKey: spec.spriteKey,
+        motionAxis: 'full-flap-cadence-window',
+        frameCount: frames.length,
+        windowSecondsApprox: rounded((frames.length - 1) * spec.stepTm, 3),
+        scoreRange10: scoreValues.length ? rounded(Math.max(...scoreValues) - Math.min(...scoreValues), 2) : null,
+        averageAdjacentLitPixelDelta: rounded(litDeltas.length ? litDeltas.reduce((sum, item) => sum + item, 0) / litDeltas.length : 0, 2),
+        averageAdjacentFilledCellDelta: rounded(fillDeltas.length ? fillDeltas.reduce((sum, item) => sum + item, 0) / fillDeltas.length : 0, 2),
+        frames,
+        read: `Captured ${frames.length} cadence frames for ${spec.spriteKey}; average adjacent lit-pixel delta ${rounded(litDeltas.length ? litDeltas.reduce((sum, item) => sum + item, 0) / litDeltas.length : 0, 1)}, filled-cell delta ${rounded(fillDeltas.length ? fillDeltas.reduce((sum, item) => sum + item, 0) / fillDeltas.length : 0, 1)}. This measures visible runtime motion, but not yet Galaga target-frame cadence.`
       });
     }
     for(const spec of DIVE_POSE_SPECS){
@@ -409,6 +451,7 @@ async function main(){
     summary: {
       sampleCount: samples.length,
       temporalSampleCount: temporalSamples.length,
+      cadenceSampleCount: cadenceSamples.length,
       averageScore10,
       weakestSpriteKey: weakest?.spriteKey || null,
       weakestScore10: weakest?.score10 || null,
@@ -417,12 +460,14 @@ async function main(){
       staticPoseOnly: false,
       motionCoverageAxesCovered: [
         temporalSamples.length ? 'two-phase flap/pulse static sprite delta for bee, butterfly, and boss families' : '',
+        cadenceSamples.length ? 'full flap-cycle cadence windows for bee, butterfly, and boss families' : '',
         divePoseSamples.length ? 'forced dive/rotation pose silhouettes for bee, butterfly, and boss families' : '',
         transitionPoseSamples.length ? 'capture-beam, carried-fighter, and dual-fighter transition seed poses' : ''
       ].filter(Boolean).length,
       motionCoverageAxesPlanned: 4,
       coveredMotionAxes: [
         temporalSamples.length ? 'two-phase flap/pulse static sprite delta for bee, butterfly, and boss families' : '',
+        cadenceSamples.length ? 'full flap-cycle cadence windows for bee, butterfly, and boss families' : '',
         divePoseSamples.length ? 'forced dive/rotation pose silhouettes for bee, butterfly, and boss families' : '',
         transitionPoseSamples.length ? 'capture-beam, carried-fighter, and dual-fighter transition seed poses' : ''
       ].filter(Boolean),
@@ -435,11 +480,13 @@ async function main(){
     },
     measurementLimits: [
       'Runtime captures isolate static sprite poses through the harness with starfield, reserve ships, stage badges, bullets, and effects suppressed.',
-      'The first temporal windows capture closed/open flap phases, forced dive/rotation poses, and capture/dual-fighter transition seed poses; they do not yet score full animation cadence, damage pulsing, complete capture/rescue timelines, or formation context.',
+      'The first temporal windows capture closed/open flap phases, full cadence windows, forced dive/rotation poses, and capture/dual-fighter transition seed poses; they do not yet score damage pulsing, complete capture/rescue timelines, or formation context.',
+      'Cadence windows are runtime-visible motion probes; they are not yet matched against frame-labeled Galaga target cadence windows.',
       'The current score compares visible rendered Aurora pixels to inferred source-frame Galaga models, not to a direct Galaga ROM sprite sheet.'
     ],
     samples,
     temporalSamples,
+    cadenceSamples,
     divePoseSamples,
     transitionPoseSamples
   };
@@ -449,6 +496,7 @@ async function main(){
     artifact: rel(OUT),
     sampleCount: samples.length,
     temporalSampleCount: temporalSamples.length,
+    cadenceSampleCount: cadenceSamples.length,
     divePoseSampleCount: divePoseSamples.length,
     transitionPoseSampleCount: transitionPoseSamples.length,
     averageScore10,

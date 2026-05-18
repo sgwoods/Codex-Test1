@@ -1227,6 +1227,57 @@ window.__galagaHarness__={
   if(typeof draw==='function')draw();
   return this.spriteRuntimeState();
  },
+ setupImpactRuntimeCapture(cfg={}){
+  const kind=String(cfg.kind||'enemy-boom');
+  S.stage=Math.max(1,+cfg.stage||1);
+  S.challenge=0;
+  S.simT=0;
+  S.stageClock=0;
+  S.pb.length=0;
+  S.eb.length=0;
+  S.fx.length=0;
+  S.st.length=0;
+  S.att=0;
+  S.recoverT=8;
+  S.attackGapT=8;
+  S.harnessSpriteRuntimeCapture=1;
+  for(const e of S.e)e.hp=0;
+  Object.assign(S.p,{
+   x:cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18),
+   y:+cfg.playerY||PLAY_H-VIS.playerBottom,
+   vx:0,
+   cd:0,
+   inv:0,
+   dual:0,
+   captured:0,
+   returning:0,
+   pending:0,
+   spawn:0,
+   capBoss:null,
+   capT:0
+  });
+  const x=cl(+cfg.x||PLAY_W/2,28,PLAY_W-28);
+  const y=cl(+cfg.y||132,38,PLAY_H-40);
+  if(kind==='boss-first-hit'||kind==='boss-hit'){
+   if(typeof bossDamageFx==='function')bossDamageFx(x,y);
+   else if(typeof ex==='function')ex(x,y,12,'#fff4a8');
+  }else if(kind==='boss-boom'){
+   if(typeof ex==='function'){
+    ex(x,y,28,'#fff5a6');
+    ex(x,y,18,'#ff8cd7');
+    ex(x,y,12,'#d8f2ff');
+   }
+  }else if(kind==='enemy-hit'){
+   if(typeof ex==='function')ex(x,y,8,'#fff7d8');
+  }else if(typeof ex==='function'){
+   ex(x,y,14,'#ffe563');
+  }
+  if(Number.isFinite(+cfg.advanceS)&&+cfg.advanceS>0&&typeof this.advanceFor==='function'){
+   this.advanceFor(+cfg.advanceS,{step:1/60,stopOnGameOver:false});
+  }
+  if(typeof draw==='function')draw();
+  return Object.assign({ok:true,kind,impact:{x:+x.toFixed(2),y:+y.toFixed(2),effectCount:S.fx.length}},this.spriteRuntimeState());
+ },
  squadronState(){
   const boss=S.e.find(e=>e.hp>0&&e.squadId&&e.t==='boss');
   if(!boss)return null;

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "aurora-runtime-sprite-conformance",
-  "generatedAt": "2026-05-18T20:08:26.011Z",
-  "commit": "360ee8de",
+  "generatedAt": "2026-05-18T20:57:55.387Z",
+  "commit": "026ccefc",
   "branch": "codex/macbook-conformance-investment-review",
   "dirty": true,
   "gameKey": "aurora-galactica",
@@ -12,9 +12,10 @@
   "summary": {
     "sampleCount": 8,
     "temporalSampleCount": 3,
-    "averageScore10": 5.76,
+    "cadenceSampleCount": 3,
+    "averageScore10": 5.75,
     "weakestSpriteKey": "but-line",
-    "weakestScore10": 4.93,
+    "weakestScore10": 4.83,
     "captureMode": "isolated-live-canvas-sprite-crops",
     "measuredKeys": [
       "player-fighter",
@@ -27,10 +28,11 @@
       "challenge-mosquito"
     ],
     "staticPoseOnly": false,
-    "motionCoverageAxesCovered": 3,
+    "motionCoverageAxesCovered": 4,
     "motionCoverageAxesPlanned": 4,
     "coveredMotionAxes": [
       "two-phase flap/pulse static sprite delta for bee, butterfly, and boss families",
+      "full flap-cycle cadence windows for bee, butterfly, and boss families",
       "forced dive/rotation pose silhouettes for bee, butterfly, and boss families",
       "capture-beam, carried-fighter, and dual-fighter transition seed poses"
     ],
@@ -43,7 +45,8 @@
   },
   "measurementLimits": [
     "Runtime captures isolate static sprite poses through the harness with starfield, reserve ships, stage badges, bullets, and effects suppressed.",
-    "The first temporal windows capture closed/open flap phases, forced dive/rotation poses, and capture/dual-fighter transition seed poses; they do not yet score full animation cadence, damage pulsing, complete capture/rescue timelines, or formation context.",
+    "The first temporal windows capture closed/open flap phases, full cadence windows, forced dive/rotation poses, and capture/dual-fighter transition seed poses; they do not yet score damage pulsing, complete capture/rescue timelines, or formation context.",
+    "Cadence windows are runtime-visible motion probes; they are not yet matched against frame-labeled Galaga target cadence windows.",
     "The current score compares visible rendered Aurora pixels to inferred source-frame Galaga models, not to a direct Galaga ROM sprite sheet."
   ],
   "samples": [
@@ -54,12 +57,12 @@
       "currentLabel": "Live runtime canvas player-fighter",
       "targetId": "galaga-player-fighter-model",
       "targetLabel": "Inferred Galaga player fighter model",
-      "score10": 7.67,
-      "silhouetteSimilarity": 0.789,
-      "colorSimilarity": 0.724,
-      "fillRatio": 0.4992,
+      "score10": 7.68,
+      "silhouetteSimilarity": 0.78,
+      "colorSimilarity": 0.744,
+      "fillRatio": 0.4514,
       "targetFillRatio": 0.4429,
-      "filledCells": 647,
+      "filledCells": 585,
       "targetFilledCells": 574,
       "litPixels": 1360,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/player-fighter.png",
@@ -71,9 +74,9 @@
         "width": 168,
         "height": 152,
         "bbox": {
-          "x": 58,
+          "x": 54,
           "y": 45,
-          "width": 44,
+          "width": 48,
           "height": 64
         }
       },
@@ -91,12 +94,12 @@
       "currentLabel": "Live runtime canvas dual-fighter",
       "targetId": "galaga-dual-fighter-model",
       "targetLabel": "Inferred Galaga dual-fighter model",
-      "score10": 6.59,
-      "silhouetteSimilarity": 0.666,
-      "colorSimilarity": 0.648,
-      "fillRatio": 0.4021,
+      "score10": 6.62,
+      "silhouetteSimilarity": 0.657,
+      "colorSimilarity": 0.671,
+      "fillRatio": 0.3541,
       "targetFillRatio": 0.366,
-      "filledCells": 912,
+      "filledCells": 803,
       "targetFilledCells": 830,
       "litPixels": 2720,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/dual-fighter.png",
@@ -108,9 +111,9 @@
         "width": 296,
         "height": 152,
         "bbox": {
-          "x": 90,
+          "x": 78,
           "y": 45,
-          "width": 108,
+          "width": 132,
           "height": 64
         }
       },
@@ -128,14 +131,14 @@
       "currentLabel": "Live runtime canvas bee-line",
       "targetId": "galaga-zako-dive-model",
       "targetLabel": "Inferred Galaga Zako scout model",
-      "score10": 5.03,
-      "silhouetteSimilarity": 0.512,
-      "colorSimilarity": 0.487,
-      "fillRatio": 0.3218,
+      "score10": 5.02,
+      "silhouetteSimilarity": 0.522,
+      "colorSimilarity": 0.465,
+      "fillRatio": 0.2832,
       "targetFillRatio": 0.3295,
-      "filledCells": 417,
+      "filledCells": 367,
       "targetFilledCells": 427,
-      "litPixels": 944,
+      "litPixels": 928,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line.png",
       "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-zako-dive-model.png",
       "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-zako-dive.png",
@@ -145,9 +148,9 @@
         "width": 200,
         "height": 176,
         "bbox": {
-          "x": 74,
+          "x": 70,
           "y": 54,
-          "width": 48,
+          "width": 56,
           "height": 68
         }
       },
@@ -170,12 +173,12 @@
       "currentLabel": "Live runtime canvas but-line",
       "targetId": "galaga-butterfly-escort-model",
       "targetLabel": "Inferred Galaga butterfly escort model",
-      "score10": 4.93,
+      "score10": 4.83,
       "silhouetteSimilarity": 0.423,
-      "colorSimilarity": 0.622,
-      "fillRatio": 0.3322,
+      "colorSimilarity": 0.596,
+      "fillRatio": 0.3097,
       "targetFillRatio": 0.5095,
-      "filledCells": 384,
+      "filledCells": 358,
       "targetFilledCells": 589,
       "litPixels": 1072,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line.png",
@@ -187,9 +190,9 @@
         "width": 216,
         "height": 184,
         "bbox": {
-          "x": 82,
+          "x": 78,
           "y": 58,
-          "width": 52,
+          "width": 56,
           "height": 68
         }
       },
@@ -212,14 +215,14 @@
       "currentLabel": "Live runtime canvas boss-line",
       "targetId": "galaga-command-boss-model",
       "targetLabel": "Inferred Galaga command boss model",
-      "score10": 4.93,
-      "silhouetteSimilarity": 0.435,
-      "colorSimilarity": 0.602,
-      "fillRatio": 0.5179,
+      "score10": 4.96,
+      "silhouetteSimilarity": 0.43,
+      "colorSimilarity": 0.618,
+      "fillRatio": 0.4566,
       "targetFillRatio": 0.4145,
-      "filledCells": 406,
+      "filledCells": 358,
       "targetFilledCells": 325,
-      "litPixels": 1584,
+      "litPixels": 1552,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line.png",
       "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-command-boss-model.png",
       "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
@@ -229,9 +232,9 @@
         "width": 248,
         "height": 208,
         "bbox": {
-          "x": 98,
+          "x": 94,
           "y": 70,
-          "width": 52,
+          "width": 56,
           "height": 68
         }
       },
@@ -254,12 +257,12 @@
       "currentLabel": "Live runtime canvas rogue-fighter",
       "targetId": "galaga-dual-fighter-model",
       "targetLabel": "Inferred Galaga dual-fighter model",
-      "score10": 6.54,
-      "silhouetteSimilarity": 0.672,
-      "colorSimilarity": 0.62,
-      "fillRatio": 0.485,
+      "score10": 6.27,
+      "silhouetteSimilarity": 0.626,
+      "colorSimilarity": 0.631,
+      "fillRatio": 0.4466,
       "targetFillRatio": 0.366,
-      "filledCells": 1100,
+      "filledCells": 1013,
       "targetFilledCells": 830,
       "litPixels": 1360,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/rogue-fighter.png",
@@ -271,9 +274,9 @@
         "width": 224,
         "height": 192,
         "bbox": {
-          "x": 86,
+          "x": 82,
           "y": 66,
-          "width": 44,
+          "width": 48,
           "height": 64
         }
       },
@@ -296,14 +299,14 @@
       "currentLabel": "Live runtime canvas challenge-dragonfly",
       "targetId": "galaga-specialty-dive-model",
       "targetLabel": "Inferred Galaga specialty dive model",
-      "score10": 5.14,
-      "silhouetteSimilarity": 0.519,
-      "colorSimilarity": 0.505,
-      "fillRatio": 0.199,
+      "score10": 5.41,
+      "silhouetteSimilarity": 0.517,
+      "colorSimilarity": 0.584,
+      "fillRatio": 0.2215,
       "targetFillRatio": 0.4239,
-      "filledCells": 230,
+      "filledCells": 256,
       "targetFilledCells": 490,
-      "litPixels": 608,
+      "litPixels": 576,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly.png",
       "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-specialty-dive-model.png",
       "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png",
@@ -313,10 +316,10 @@
         "width": 200,
         "height": 176,
         "bbox": {
-          "x": 66,
+          "x": 62,
           "y": 66,
-          "width": 68,
-          "height": 48
+          "width": 76,
+          "height": 44
         }
       },
       "runtimeSubject": {
@@ -338,12 +341,12 @@
       "currentLabel": "Live runtime canvas challenge-mosquito",
       "targetId": "galaga-specialty-dive-model",
       "targetLabel": "Inferred Galaga specialty dive model",
-      "score10": 5.26,
-      "silhouetteSimilarity": 0.495,
-      "colorSimilarity": 0.585,
-      "fillRatio": 0.2561,
+      "score10": 5.22,
+      "silhouetteSimilarity": 0.483,
+      "colorSimilarity": 0.596,
+      "fillRatio": 0.2543,
       "targetFillRatio": 0.4239,
-      "filledCells": 296,
+      "filledCells": 294,
       "targetFilledCells": 490,
       "litPixels": 896,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-mosquito.png",
@@ -355,9 +358,9 @@
         "width": 200,
         "height": 176,
         "bbox": {
-          "x": 66,
+          "x": 62,
           "y": 62,
-          "width": 68,
+          "width": 76,
           "height": 52
         }
       },
@@ -380,36 +383,290 @@
       "motionAxis": "two-phase-flap-pulse",
       "phaseClosedCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-flap-closed.png",
       "phaseOpenCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-flap-open.png",
-      "closedScore10": 5.03,
+      "closedScore10": 5.02,
       "openScore10": 5.13,
-      "scoreDelta": 0.1,
-      "litPixelDelta": 256,
-      "filledCellDelta": 25,
-      "read": "Captured closed/open flap phases for bee-line; lit-pixel delta 256, filled-cell delta 25."
+      "scoreDelta": 0.11,
+      "litPixelDelta": 224,
+      "filledCellDelta": 10,
+      "read": "Captured closed/open flap phases for bee-line; lit-pixel delta 224, filled-cell delta 10."
     },
     {
       "spriteKey": "but-line",
       "motionAxis": "two-phase-flap-pulse",
       "phaseClosedCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-flap-closed.png",
       "phaseOpenCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-flap-open.png",
-      "closedScore10": 4.93,
-      "openScore10": 4.52,
-      "scoreDelta": 0.41,
+      "closedScore10": 4.83,
+      "openScore10": 4.38,
+      "scoreDelta": 0.45,
       "litPixelDelta": 176,
-      "filledCellDelta": 160,
-      "read": "Captured closed/open flap phases for but-line; lit-pixel delta 176, filled-cell delta 160."
+      "filledCellDelta": 106,
+      "read": "Captured closed/open flap phases for but-line; lit-pixel delta 176, filled-cell delta 106."
     },
     {
       "spriteKey": "boss-line",
       "motionAxis": "two-phase-flap-pulse",
       "phaseClosedCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-flap-closed.png",
       "phaseOpenCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-flap-open.png",
-      "closedScore10": 4.93,
-      "openScore10": 4.87,
-      "scoreDelta": 0.06,
-      "litPixelDelta": 448,
-      "filledCellDelta": 149,
-      "read": "Captured closed/open flap phases for boss-line; lit-pixel delta 448, filled-cell delta 149."
+      "closedScore10": 4.96,
+      "openScore10": 4.95,
+      "scoreDelta": 0.01,
+      "litPixelDelta": 416,
+      "filledCellDelta": 111,
+      "read": "Captured closed/open flap phases for boss-line; lit-pixel delta 416, filled-cell delta 111."
+    }
+  ],
+  "cadenceSamples": [
+    {
+      "spriteKey": "bee-line",
+      "motionAxis": "full-flap-cadence-window",
+      "frameCount": 8,
+      "windowSecondsApprox": 0.385,
+      "scoreRange10": 0.11,
+      "averageAdjacentLitPixelDelta": 64,
+      "averageAdjacentFilledCellDelta": 2.86,
+      "frames": [
+        {
+          "frameIndex": 0,
+          "enemyTm": 0,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-cadence-00.png",
+          "score10": 5.02,
+          "litPixels": 928,
+          "filledCells": 367,
+          "fillRatio": 0.2832
+        },
+        {
+          "frameIndex": 1,
+          "enemyTm": 0.055,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-cadence-01.png",
+          "score10": 5.13,
+          "litPixels": 704,
+          "filledCells": 357,
+          "fillRatio": 0.2755
+        },
+        {
+          "frameIndex": 2,
+          "enemyTm": 0.11,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-cadence-02.png",
+          "score10": 5.13,
+          "litPixels": 704,
+          "filledCells": 357,
+          "fillRatio": 0.2755
+        },
+        {
+          "frameIndex": 3,
+          "enemyTm": 0.165,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-cadence-03.png",
+          "score10": 5.13,
+          "litPixels": 704,
+          "filledCells": 357,
+          "fillRatio": 0.2755
+        },
+        {
+          "frameIndex": 4,
+          "enemyTm": 0.22,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-cadence-04.png",
+          "score10": 5.13,
+          "litPixels": 704,
+          "filledCells": 357,
+          "fillRatio": 0.2755
+        },
+        {
+          "frameIndex": 5,
+          "enemyTm": 0.275,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-cadence-05.png",
+          "score10": 5.02,
+          "litPixels": 928,
+          "filledCells": 367,
+          "fillRatio": 0.2832
+        },
+        {
+          "frameIndex": 6,
+          "enemyTm": 0.33,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-cadence-06.png",
+          "score10": 5.02,
+          "litPixels": 928,
+          "filledCells": 367,
+          "fillRatio": 0.2832
+        },
+        {
+          "frameIndex": 7,
+          "enemyTm": 0.385,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-cadence-07.png",
+          "score10": 5.02,
+          "litPixels": 928,
+          "filledCells": 367,
+          "fillRatio": 0.2832
+        }
+      ],
+      "read": "Captured 8 cadence frames for bee-line; average adjacent lit-pixel delta 64, filled-cell delta 2.9. This measures visible runtime motion, but not yet Galaga target-frame cadence."
+    },
+    {
+      "spriteKey": "but-line",
+      "motionAxis": "full-flap-cadence-window",
+      "frameCount": 8,
+      "windowSecondsApprox": 0.385,
+      "scoreRange10": 0.45,
+      "averageAdjacentLitPixelDelta": 50.29,
+      "averageAdjacentFilledCellDelta": 30.29,
+      "frames": [
+        {
+          "frameIndex": 0,
+          "enemyTm": 0,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-00.png",
+          "score10": 4.83,
+          "litPixels": 1072,
+          "filledCells": 358,
+          "fillRatio": 0.3097
+        },
+        {
+          "frameIndex": 1,
+          "enemyTm": 0.055,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-01.png",
+          "score10": 4.38,
+          "litPixels": 896,
+          "filledCells": 252,
+          "fillRatio": 0.218
+        },
+        {
+          "frameIndex": 2,
+          "enemyTm": 0.11,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-02.png",
+          "score10": 4.38,
+          "litPixels": 896,
+          "filledCells": 252,
+          "fillRatio": 0.218
+        },
+        {
+          "frameIndex": 3,
+          "enemyTm": 0.165,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-03.png",
+          "score10": 4.38,
+          "litPixels": 896,
+          "filledCells": 252,
+          "fillRatio": 0.218
+        },
+        {
+          "frameIndex": 4,
+          "enemyTm": 0.22,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-04.png",
+          "score10": 4.38,
+          "litPixels": 896,
+          "filledCells": 252,
+          "fillRatio": 0.218
+        },
+        {
+          "frameIndex": 5,
+          "enemyTm": 0.275,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-05.png",
+          "score10": 4.83,
+          "litPixels": 1072,
+          "filledCells": 358,
+          "fillRatio": 0.3097
+        },
+        {
+          "frameIndex": 6,
+          "enemyTm": 0.33,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-06.png",
+          "score10": 4.83,
+          "litPixels": 1072,
+          "filledCells": 358,
+          "fillRatio": 0.3097
+        },
+        {
+          "frameIndex": 7,
+          "enemyTm": 0.385,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-07.png",
+          "score10": 4.83,
+          "litPixels": 1072,
+          "filledCells": 358,
+          "fillRatio": 0.3097
+        }
+      ],
+      "read": "Captured 8 cadence frames for but-line; average adjacent lit-pixel delta 50.3, filled-cell delta 30.3. This measures visible runtime motion, but not yet Galaga target-frame cadence."
+    },
+    {
+      "spriteKey": "boss-line",
+      "motionAxis": "full-flap-cadence-window",
+      "frameCount": 8,
+      "windowSecondsApprox": 0.385,
+      "scoreRange10": 0.01,
+      "averageAdjacentLitPixelDelta": 118.86,
+      "averageAdjacentFilledCellDelta": 31.71,
+      "frames": [
+        {
+          "frameIndex": 0,
+          "enemyTm": 0,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-00.png",
+          "score10": 4.96,
+          "litPixels": 1552,
+          "filledCells": 358,
+          "fillRatio": 0.4566
+        },
+        {
+          "frameIndex": 1,
+          "enemyTm": 0.055,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-01.png",
+          "score10": 4.95,
+          "litPixels": 1136,
+          "filledCells": 247,
+          "fillRatio": 0.3151
+        },
+        {
+          "frameIndex": 2,
+          "enemyTm": 0.11,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-02.png",
+          "score10": 4.95,
+          "litPixels": 1136,
+          "filledCells": 247,
+          "fillRatio": 0.3151
+        },
+        {
+          "frameIndex": 3,
+          "enemyTm": 0.165,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-03.png",
+          "score10": 4.95,
+          "litPixels": 1136,
+          "filledCells": 247,
+          "fillRatio": 0.3151
+        },
+        {
+          "frameIndex": 4,
+          "enemyTm": 0.22,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-04.png",
+          "score10": 4.95,
+          "litPixels": 1136,
+          "filledCells": 247,
+          "fillRatio": 0.3151
+        },
+        {
+          "frameIndex": 5,
+          "enemyTm": 0.275,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-05.png",
+          "score10": 4.96,
+          "litPixels": 1552,
+          "filledCells": 358,
+          "fillRatio": 0.4566
+        },
+        {
+          "frameIndex": 6,
+          "enemyTm": 0.33,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-06.png",
+          "score10": 4.96,
+          "litPixels": 1552,
+          "filledCells": 358,
+          "fillRatio": 0.4566
+        },
+        {
+          "frameIndex": 7,
+          "enemyTm": 0.385,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-07.png",
+          "score10": 4.96,
+          "litPixels": 1552,
+          "filledCells": 358,
+          "fillRatio": 0.4566
+        }
+      ],
+      "read": "Captured 8 cadence frames for boss-line; average adjacent lit-pixel delta 118.9, filled-cell delta 31.7. This measures visible runtime motion, but not yet Galaga target-frame cadence."
     }
   ],
   "divePoseSamples": [
@@ -420,14 +677,14 @@
       "currentLabel": "Live runtime canvas bee-line-dive-left",
       "targetId": "galaga-zako-dive-model",
       "targetLabel": "Inferred Galaga Zako scout model",
-      "score10": 6.28,
-      "silhouetteSimilarity": 0.668,
-      "colorSimilarity": 0.552,
-      "fillRatio": 0.2415,
+      "score10": 6.05,
+      "silhouetteSimilarity": 0.654,
+      "colorSimilarity": 0.515,
+      "fillRatio": 0.2299,
       "targetFillRatio": 0.3295,
-      "filledCells": 313,
+      "filledCells": 298,
       "targetFilledCells": 427,
-      "litPixels": 1001,
+      "litPixels": 1033,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-dive-left.png",
       "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-zako-dive-model.png",
       "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-zako-dive.png",
@@ -437,10 +694,10 @@
         "width": 232,
         "height": 232,
         "bbox": {
-          "x": 80,
+          "x": 81,
           "y": 83,
-          "width": 66,
-          "height": 75
+          "width": 76,
+          "height": 77
         }
       },
       "runtimeSubject": {
@@ -465,13 +722,13 @@
       "targetId": "galaga-butterfly-escort-model",
       "targetLabel": "Inferred Galaga butterfly escort model",
       "score10": 5.5,
-      "silhouetteSimilarity": 0.532,
-      "colorSimilarity": 0.583,
-      "fillRatio": 0.2405,
+      "silhouetteSimilarity": 0.531,
+      "colorSimilarity": 0.585,
+      "fillRatio": 0.2465,
       "targetFillRatio": 0.5095,
-      "filledCells": 278,
+      "filledCells": 285,
       "targetFilledCells": 589,
-      "litPixels": 1169,
+      "litPixels": 1173,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-dive-right.png",
       "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-butterfly-escort-model.png",
       "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-butterfly-escort.png",
@@ -482,9 +739,9 @@
         "height": 240,
         "bbox": {
           "x": 88,
-          "y": 78,
-          "width": 76,
-          "height": 84
+          "y": 76,
+          "width": 79,
+          "height": 86
         }
       },
       "runtimeSubject": {
@@ -508,14 +765,14 @@
       "currentLabel": "Live runtime canvas boss-line-dive-left",
       "targetId": "galaga-command-boss-model",
       "targetLabel": "Inferred Galaga command boss model",
-      "score10": 6.59,
-      "silhouetteSimilarity": 0.653,
-      "colorSimilarity": 0.671,
-      "fillRatio": 0.3431,
+      "score10": 6.52,
+      "silhouetteSimilarity": 0.647,
+      "colorSimilarity": 0.662,
+      "fillRatio": 0.3418,
       "targetFillRatio": 0.4145,
-      "filledCells": 269,
+      "filledCells": 268,
       "targetFilledCells": 325,
-      "litPixels": 1673,
+      "litPixels": 1651,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-dive-left.png",
       "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-command-boss-model.png",
       "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
@@ -527,8 +784,8 @@
         "bbox": {
           "x": 101,
           "y": 92,
-          "width": 78,
-          "height": 80
+          "width": 81,
+          "height": 82
         }
       },
       "runtimeSubject": {
@@ -554,14 +811,14 @@
       "currentLabel": "Live runtime canvas boss-capture-beam",
       "targetId": "galaga-command-boss-model",
       "targetLabel": "Inferred Galaga command boss model",
-      "score10": 5.43,
-      "silhouetteSimilarity": 0.489,
-      "colorSimilarity": 0.645,
-      "fillRatio": 0.7423,
+      "score10": 5.3,
+      "silhouetteSimilarity": 0.466,
+      "colorSimilarity": 0.649,
+      "fillRatio": 0.8776,
       "targetFillRatio": 0.4145,
-      "filledCells": 582,
+      "filledCells": 688,
       "targetFilledCells": 325,
-      "litPixels": 21762,
+      "litPixels": 20482,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-capture-beam.png",
       "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-command-boss-model.png",
       "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
@@ -572,9 +829,9 @@
         "height": 528,
         "bbox": {
           "x": 116,
-          "y": 250,
+          "y": 310,
           "width": 112,
-          "height": 278
+          "height": 218
         }
       },
       "runtimeSubject": {
@@ -598,14 +855,14 @@
       "currentLabel": "Live runtime canvas boss-carrying-fighter",
       "targetId": "galaga-command-boss-model",
       "targetLabel": "Inferred Galaga command boss model",
-      "score10": 5.26,
-      "silhouetteSimilarity": 0.511,
-      "colorSimilarity": 0.552,
-      "fillRatio": 0.5179,
+      "score10": 5.34,
+      "silhouetteSimilarity": 0.524,
+      "colorSimilarity": 0.551,
+      "fillRatio": 0.4566,
       "targetFillRatio": 0.4145,
-      "filledCells": 406,
+      "filledCells": 358,
       "targetFilledCells": 325,
-      "litPixels": 2944,
+      "litPixels": 2912,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-carrying-fighter.png",
       "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-command-boss-model.png",
       "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
@@ -615,9 +872,9 @@
         "width": 328,
         "height": 368,
         "bbox": {
-          "x": 138,
+          "x": 134,
           "y": 82,
-          "width": 52,
+          "width": 56,
           "height": 136
         }
       },
@@ -642,12 +899,12 @@
       "currentLabel": "Live runtime canvas dual-fighter-transition",
       "targetId": "galaga-dual-fighter-model",
       "targetLabel": "Inferred Galaga dual-fighter model",
-      "score10": 6.59,
-      "silhouetteSimilarity": 0.666,
-      "colorSimilarity": 0.648,
-      "fillRatio": 0.4021,
+      "score10": 6.62,
+      "silhouetteSimilarity": 0.657,
+      "colorSimilarity": 0.671,
+      "fillRatio": 0.3541,
       "targetFillRatio": 0.366,
-      "filledCells": 912,
+      "filledCells": 803,
       "targetFilledCells": 830,
       "litPixels": 2720,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/dual-fighter-transition.png",
@@ -659,9 +916,9 @@
         "width": 312,
         "height": 168,
         "bbox": {
-          "x": 98,
+          "x": 86,
           "y": 53,
-          "width": 108,
+          "width": 132,
           "height": 64
         }
       },

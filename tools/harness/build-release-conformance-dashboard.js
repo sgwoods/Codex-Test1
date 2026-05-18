@@ -1040,6 +1040,7 @@ function main(){
   const challengeStagePath = latestReport('challenge-stage-conformance');
   const audioLabV2Path = latestReport('aurora-audio-conformance-lab-v2');
   const audioContractPath = latestReport('aurora-audio-cue-contracts');
+  const applicationArtifactPath = path.join(ANALYSES, 'application-artifact-conformance', 'latest.json');
   const quality = readJson(qualityPath);
   const priority = priorityPath ? readJson(priorityPath) : { candidates: [] };
   const levelArc = levelArcPath ? readJson(levelArcPath) : { summary: {} };
@@ -1049,6 +1050,7 @@ function main(){
   const alienEntryChallenge = alienEntryChallengePath ? readJson(alienEntryChallengePath) : null;
   const challengeStage = challengeStagePath ? readJson(challengeStagePath) : null;
   const audioContract = audioContractPath ? readJson(audioContractPath) : null;
+  const applicationArtifact = fs.existsSync(applicationArtifactPath) ? readJson(applicationArtifactPath) : null;
 
   const audio = category(quality, 'audio');
   const formationBoss = category(quality, 'formation-boss-grammar');
@@ -1081,6 +1083,12 @@ function main(){
     ? +alienEntryChallenge.summary.score10
     : Math.min(alienEntryScore, challengeVariationScore);
   const visualLookScore = Number.isFinite(+visualLook?.summary?.score10) ? +visualLook.summary.score10 : 7.4;
+  const directTargetSpriteScore = Number.isFinite(+applicationArtifact?.summary?.spriteRuntimeVsTargetCropScore10)
+    ? +applicationArtifact.summary.spriteRuntimeVsTargetCropScore10
+    : null;
+  const impactExplosionScore = Number.isFinite(+applicationArtifact?.summary?.impactExplosionScore10)
+    ? +applicationArtifact.summary.impactExplosionScore10
+    : null;
   const visualLookStatus = visualLook
     ? `Measured visual scorer; ${visualLook.summary?.confidence || 'medium-low'} confidence`
     : 'Estimated; needs dedicated visual conformance scorer';
@@ -1105,7 +1113,7 @@ function main(){
       rank: 1,
       metric: 'Challenge-stage set-piece conformance: movement, graphics, alien novelty',
       score10: challengeSetPiece?.score10 ?? dedicatedChallengeStageScore ?? 1,
-      target: '3.5 first honest gate; 6.0 after three authored challenges; 9.0+ mature',
+      target: '>=5.0 before next beta claim; 6.0 after three authored challenges; 9.0+ mature',
       status: challengeStage ? 'Strict dedicated stage-by-stage scorer; current high-priority gameplay-authenticity gap' : 'Strict scorer missing',
       why: 'The challenging stages should be spectacular safe Galaga-like bonus exhibitions. Current safety is good, but movement variation, alien novelty, and graphical conformance are not yet close.',
       effort: 'High; long-cycle CPU/browser extraction plus gameplay authoring and sprite-motion/reference labeling',
@@ -1136,6 +1144,19 @@ function main(){
       effort: 'Medium-high; 2-5 hrs',
       next: levelArcCandidate?.nextAction || levelArc.summary?.nextRecommendedWork?.[0] || 'Run level-arc candidate loop.',
       evidence: levelArcPath ? rel(levelArcPath) : rel(qualityPath)
+    }),
+    row({
+      rank: 4.5,
+      metric: 'Direct target sprite and impact feedback conformance',
+      score10: directTargetSpriteScore,
+      target: '>=5.5 before next beta claim; >=7.5 mature preview',
+      status: applicationArtifact ? 'Application artifact scorecard measured; strict direct target-crop row is intentionally sobering' : 'Application artifact scorecard pending',
+      why: 'The player-visible ship, enemy, hit, and explosion shapes are a first-glance arcade quality signal. Static sprite proxy scores must not hide the stricter target-crop gap.',
+      effort: 'Medium-high; 2-5 hrs renderer/crop/harness work plus visual review',
+      next: impactExplosionScore
+        ? `Raise direct sprite target score and impact/explosion feedback together; current impact/explosion static read is ${score(impactExplosionScore)}.`
+        : 'Run application artifact and impact/explosion conformance analyzers, then prioritize the weakest runtime crop.',
+      evidence: applicationArtifact ? rel(applicationArtifactPath) : rel(qualityPath)
     }),
     row({
       rank: 5,
@@ -1317,7 +1338,8 @@ function main(){
   const releaseGate = [
     ['Overall quality', score(quality.summary?.overallScore10), '>=9.3', 'Full score refresh after all major cycles'],
     ['Audio identity', score(audio?.score10), '>=7.5', 'Primary user-experience gap'],
-    ['Challenge-stage set-piece conformance', score(challengeSetPiece?.score10 ?? dedicatedChallengeStageScore ?? 1), '>=3.5 first honest gate; >=6.0 next major gate; >=9.0 mature', 'Strict movement/graphics/alien-novelty gate; safety does not inflate this score'],
+    ['Challenge-stage set-piece conformance', score(challengeSetPiece?.score10 ?? dedicatedChallengeStageScore ?? 1), '>=5.0 before next beta claim; >=6.0 next major gate; >=9.0 mature', 'Strict movement/graphics/alien-novelty gate; safety does not inflate this score'],
+    ['Direct target sprite conformance', score(directTargetSpriteScore), '>=5.5 before next beta claim; >=7.5 mature preview', 'Strict runtime-vs-promoted-target-crop row; static proxy scores do not satisfy this gate'],
     ['Level arc', score(currentLevelArcScore), '>=8.8', 'Long-play gameplay-quality gate'],
     ['Alien entry and challenge-stage novelty', score(alienEntryChallengeScore), '>=7.5 first gate; >=9.0 mature', 'New high-priority long-cycle gameplay-authenticity gate'],
     ['Boss entry and formation grammar', score(formationBoss?.score10), '>=8.0 first gate; >=9.0 mature', 'New measured gate for stage choreography'],

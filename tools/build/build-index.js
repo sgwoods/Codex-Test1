@@ -75,6 +75,7 @@ const GALAGA_ALIEN_CROP_PREVIEWS = path.join(ROOT, 'reference-artifacts', 'analy
 const GALAGA_ALIEN_TARGET_CROPS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-target-crops', 'latest.json');
 const AURORA_RUNTIME_SPRITE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-runtime-sprite-conformance', 'latest.json');
 const AURORA_RUNTIME_VS_GALAGA_TARGET_CROPS = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-runtime-vs-galaga-target-crops', 'latest.json');
+const AURORA_IMPACT_EXPLOSION_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-impact-explosion-conformance', 'latest.json');
 const SPRITE_CONFORMANCE_VARIATION_PLAN = path.join(ROOT, 'reference-artifacts', 'ingestion', 'sprite-conformance-variation-plan', 'plan-0.1.json');
 const PERSONA_PERFORMANCE_DISTRIBUTION = path.join(ROOT, 'reference-artifacts', 'analyses', 'persona-performance-distribution', 'latest.json');
 const CATALOG_MEDIA_SOURCE_PATHS = new Set();
@@ -3115,6 +3116,7 @@ let galagaAlienCropPreviewsCache = null;
 let galagaAlienTargetCropsCache = null;
 let auroraRuntimeSpriteConformanceCache = null;
 let auroraRuntimeVsGalagaTargetCropsCache = null;
+let auroraImpactExplosionConformanceCache = null;
 let spriteConformanceVariationPlanCache = null;
 
 function loadGalagaReferenceSpriteTargets(){
@@ -3207,7 +3209,7 @@ function loadGalagaAlienTargetCrops(){
 function loadAuroraRuntimeSpriteConformance(){
   if(auroraRuntimeSpriteConformanceCache) return auroraRuntimeSpriteConformanceCache;
   if(!fs.existsSync(AURORA_RUNTIME_SPRITE_CONFORMANCE)){
-    auroraRuntimeSpriteConformanceCache = { samples: [], temporalSamples: [], divePoseSamples: [], transitionPoseSamples: [], summary: {} };
+    auroraRuntimeSpriteConformanceCache = { samples: [], temporalSamples: [], cadenceSamples: [], divePoseSamples: [], transitionPoseSamples: [], summary: {} };
     return auroraRuntimeSpriteConformanceCache;
   }
   try {
@@ -3215,12 +3217,13 @@ function loadAuroraRuntimeSpriteConformance(){
     auroraRuntimeSpriteConformanceCache = Object.assign({}, artifact, {
       samples: Array.isArray(artifact.samples) ? artifact.samples : [],
       temporalSamples: Array.isArray(artifact.temporalSamples) ? artifact.temporalSamples : [],
+      cadenceSamples: Array.isArray(artifact.cadenceSamples) ? artifact.cadenceSamples : [],
       divePoseSamples: Array.isArray(artifact.divePoseSamples) ? artifact.divePoseSamples : [],
       transitionPoseSamples: Array.isArray(artifact.transitionPoseSamples) ? artifact.transitionPoseSamples : [],
       summary: artifact.summary || {}
     });
   } catch (err) {
-    auroraRuntimeSpriteConformanceCache = { samples: [], temporalSamples: [], divePoseSamples: [], transitionPoseSamples: [], summary: {} };
+    auroraRuntimeSpriteConformanceCache = { samples: [], temporalSamples: [], cadenceSamples: [], divePoseSamples: [], transitionPoseSamples: [], summary: {} };
   }
   return auroraRuntimeSpriteConformanceCache;
 }
@@ -3241,6 +3244,24 @@ function loadAuroraRuntimeVsGalagaTargetCrops(){
     auroraRuntimeVsGalagaTargetCropsCache = { comparisons: [], summary: {} };
   }
   return auroraRuntimeVsGalagaTargetCropsCache;
+}
+
+function loadAuroraImpactExplosionConformance(){
+  if(auroraImpactExplosionConformanceCache) return auroraImpactExplosionConformanceCache;
+  if(!fs.existsSync(AURORA_IMPACT_EXPLOSION_CONFORMANCE)){
+    auroraImpactExplosionConformanceCache = { samples: [], summary: {} };
+    return auroraImpactExplosionConformanceCache;
+  }
+  try {
+    const artifact = readJson(AURORA_IMPACT_EXPLOSION_CONFORMANCE);
+    auroraImpactExplosionConformanceCache = Object.assign({}, artifact, {
+      samples: Array.isArray(artifact.samples) ? artifact.samples : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    auroraImpactExplosionConformanceCache = { samples: [], summary: {} };
+  }
+  return auroraImpactExplosionConformanceCache;
 }
 
 function loadSpriteConformanceVariationPlan(){
@@ -3665,6 +3686,7 @@ function renderChallengeStageDetail(row = {}){
             ${challengeTrajectoryDiagramMedia(row)}
             <p><strong>Strict read:</strong> movement ${esc(movement)}/10, graphics ${esc(graphics)}/10, alien novelty ${esc(novelty)}/10, progression ${esc(row.progressionConformanceScore10 ?? 'n/a')}/10.</p>
             <p><strong>Diagnostic best reference:</strong> <code>${esc(bestRef)}</code> (${esc(row.referenceMatchScore10 ?? 'n/a')}/10 legacy broad coverage).</p>
+            <p><strong>Target contract:</strong> ${esc(row.targetContractFitScore10 ?? 'pending')}/10. ${esc(row.targetContractRead || 'No explicit contract yet.')}</p>
             <p>${esc(row.criticalExpectation || 'Critical expectation pending.')}</p>
             ${challengeScoreComponents(row)}
           </article>
@@ -4317,6 +4339,34 @@ function renderAuroraSpriteTemporalRows(report){
   `).join('\n');
 }
 
+function renderAuroraSpriteCadenceRows(report){
+  const rows = Array.isArray(report?.cadenceSamples) ? report.cadenceSamples : [];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="5"><span class="docMeta">Full flap-cadence windows pending.</span></td>
+    </tr>`;
+  }
+  return rows.map((row) => {
+    const frames = Array.isArray(row.frames) ? row.frames : [];
+    const previewFrames = frames.filter((_, index) => index === 0 || index === Math.floor(frames.length / 2) || index === frames.length - 1);
+    return `
+    <tr>
+      <td><strong>${esc(row.spriteKey || '')}</strong><br><span class="docMeta">${esc(row.motionAxis || '')}; ${esc(row.frameCount || 0)} frame(s)</span></td>
+      <td><div class="catalogMedia"><div class="catalogMediaGrid">${previewFrames.map(frame => renderMediaImage({
+        label: `Frame ${frame.frameIndex}`,
+        src: frame.cropImage,
+        pixelated: true,
+        note: `tm ${frame.enemyTm}; score ${Number.isFinite(+frame.score10) ? `${Number(frame.score10).toFixed(1)}/10` : 'n/a'}`
+      })).join('')}</div></div></td>
+      <td><strong>${esc(row.scoreRange10 ?? 'n/a')}</strong> score range<br><span class="docMeta">${esc(row.averageAdjacentLitPixelDelta ?? 'n/a')} avg adjacent lit-pixel delta</span></td>
+      <td>${esc(row.averageAdjacentFilledCellDelta ?? 'n/a')} avg adjacent filled-cell delta</td>
+      <td>${esc(row.read || '')}</td>
+    </tr>
+  `;
+  }).join('\n');
+}
+
 function renderAuroraSpritePoseRows(report){
   const rows = [
     ...(Array.isArray(report?.divePoseSamples) ? report.divePoseSamples : []),
@@ -4339,6 +4389,35 @@ function renderAuroraSpritePoseRows(report){
       })}</td>
       <td><strong>${Number.isFinite(+row.score10) ? `${Number(row.score10).toFixed(1)}/10` : 'unscored'}</strong><br><span class="docMeta">filled ${esc(row.filledCells ?? 'n/a')}; lit ${esc(row.litPixels ?? 'n/a')}</span></td>
       <td>${esc(row.read || '')}</td>
+    </tr>
+  `).join('\n');
+}
+
+function renderAuroraImpactExplosionRows(report){
+  const rows = Array.isArray(report?.samples) ? report.samples : [];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="5"><span class="docMeta">Impact/explosion comparison pending. Run <code>npm run harness:analyze:aurora-impact-explosion-conformance</code>.</span></td>
+    </tr>`;
+  }
+  return rows.map(row => `
+    <tr>
+      <td><strong>${esc(row.key || '')}</strong><br><span class="docMeta">${esc(row.decision || '')}</span></td>
+      <td>${renderMediaImage({
+        label: 'Aurora runtime event',
+        src: row.runtimeCrop,
+        pixelated: true,
+        note: row.playerMeaning || 'Runtime impact/explosion crop from the current Aurora renderer.'
+      })}</td>
+      <td>${renderMediaImage({
+        label: row.bestTargetCropId || 'Best Galaga target',
+        src: row.bestTargetCrop,
+        pixelated: true,
+        note: 'Promoted Galaga target-crop candidate for this event family.'
+      })}</td>
+      <td><strong>${Number.isFinite(+row.score10) ? `${Number(row.score10).toFixed(1)}/10` : 'pending'}</strong><br><span class="docMeta">${row.bestComponents ? `Jaccard ${esc(row.bestComponents.jaccard ?? 'n/a')}; silhouette ${esc(row.bestComponents.silhouetteAgreement ?? 'n/a')}; color ${esc(row.bestComponents.colorSimilarity ?? 'n/a')}` : 'component scoring pending'}</span></td>
+      <td>${esc(row.playerMeaning || '')}</td>
     </tr>
   `).join('\n');
 }
@@ -4533,7 +4612,11 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const auroraRuntimeVsGalagaTargetSummary = auroraRuntimeVsGalagaTargetCrops.summary || {};
   const auroraRuntimeVsTargetRows = renderAuroraRuntimeVsTargetRows(auroraRuntimeVsGalagaTargetCrops);
   const auroraSpriteTemporalRows = renderAuroraSpriteTemporalRows(auroraRuntimeSpriteConformance);
+  const auroraSpriteCadenceRows = renderAuroraSpriteCadenceRows(auroraRuntimeSpriteConformance);
   const auroraSpritePoseRows = renderAuroraSpritePoseRows(auroraRuntimeSpriteConformance);
+  const auroraImpactExplosionConformance = loadAuroraImpactExplosionConformance();
+  const auroraImpactExplosionSummary = auroraImpactExplosionConformance.summary || {};
+  const auroraImpactExplosionRows = renderAuroraImpactExplosionRows(auroraImpactExplosionConformance);
   const conformanceAlienRows = (guide.conformanceAlienRows || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.name || '')}</strong><br><span class="docMeta">${esc(entry.runtime || '')}</span></td>
@@ -5007,7 +5090,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               <div class="metricCard"><span class="metricLabel">Runtime Static Score</span><strong>${Number.isFinite(+auroraRuntimeSpriteSummary.averageScore10) ? Number(auroraRuntimeSpriteSummary.averageScore10).toFixed(1) : 'n/a'}/10</strong><span>${esc(auroraRuntimeSpriteSummary.sampleCount ?? 0)} live canvas crop(s)</span></div>
               <div class="metricCard"><span class="metricLabel">Direct Target Score</span><strong>${Number.isFinite(+auroraRuntimeVsGalagaTargetSummary.averageScore10) ? Number(auroraRuntimeVsGalagaTargetSummary.averageScore10).toFixed(1) : 'n/a'}/10</strong><span>${esc(auroraRuntimeVsGalagaTargetSummary.targetCropCount ?? 0)} target crop(s)</span></div>
               <div class="metricCard"><span class="metricLabel">Weakest Direct Match</span><strong>${esc(auroraRuntimeVsGalagaTargetSummary.weakestSpriteKey || 'pending')}</strong><span>${Number.isFinite(+auroraRuntimeVsGalagaTargetSummary.weakestScore10) ? `${Number(auroraRuntimeVsGalagaTargetSummary.weakestScore10).toFixed(1)}/10` : 'pending'}</span></div>
-              <div class="metricCard"><span class="metricLabel">Motion Axes Covered</span><strong>${esc(auroraRuntimeSpriteSummary.motionCoverageAxesCovered ?? 0)}/${esc(auroraRuntimeSpriteSummary.motionCoverageAxesPlanned ?? 4)}</strong><span>${esc(auroraRuntimeSpriteSummary.temporalSampleCount ?? 0)} temporal phase pair(s)</span></div>
+              <div class="metricCard"><span class="metricLabel">Motion Axes Covered</span><strong>${esc(auroraRuntimeSpriteSummary.motionCoverageAxesCovered ?? 0)}/${esc(auroraRuntimeSpriteSummary.motionCoverageAxesPlanned ?? 4)}</strong><span>${esc(auroraRuntimeSpriteSummary.temporalSampleCount ?? 0)} phase pair(s); ${esc(auroraRuntimeSpriteSummary.cadenceSampleCount ?? 0)} cadence window(s)</span></div>
             </div>
           </div>
           <div class="tableWrap" style="margin-top:16px;">
@@ -5046,6 +5129,22 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <table class="dataTable">
               <thead>
                 <tr>
+                  <th>Cadence Subject</th>
+                  <th>Runtime Window Frames</th>
+                  <th>Score Motion</th>
+                  <th>Pixel Motion</th>
+                  <th>Read</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${auroraSpriteCadenceRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
                   <th>Active Pose</th>
                   <th>Runtime Crop</th>
                   <th>Model Score</th>
@@ -5054,6 +5153,28 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               </thead>
               <tbody>
                 ${auroraSpritePoseRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="docWrap" style="margin-top:16px;">
+            <h3>Impact And Explosion Feedback</h3>
+            <p>The first impact/explosion comparator captures event visuals from the current runtime and compares them against promoted Galaga target explosion crops. This is the start of making missile impacts, boss damage, kills, and death rewards measurable instead of relying on subjective review.</p>
+            <p><strong>Current read:</strong> ${Number.isFinite(+auroraImpactExplosionSummary.averageScore10) ? `${Number(auroraImpactExplosionSummary.averageScore10).toFixed(1)}/10` : 'pending'} average static event score; weakest ${esc(auroraImpactExplosionSummary.weakestKey || 'pending')} ${Number.isFinite(+auroraImpactExplosionSummary.weakestScore10) ? `${Number(auroraImpactExplosionSummary.weakestScore10).toFixed(1)}/10` : ''}.</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/aurora-impact-explosion-conformance/latest.json</code>. Static crop scoring is not the final answer; the next pass needs temporal onset/expansion/decay plus audio coupling.</p>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Event</th>
+                  <th>Aurora Current</th>
+                  <th>Galaga Target</th>
+                  <th>Score</th>
+                  <th>Player Meaning</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${auroraImpactExplosionRows}
               </tbody>
             </table>
           </div>

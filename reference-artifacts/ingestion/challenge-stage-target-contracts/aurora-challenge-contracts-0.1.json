@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "challenge-stage-target-contracts",
+  "gameKey": "aurora-galactica",
+  "generatedAt": "2026-05-18T00:00:00.000Z",
+  "status": "first-pass-media-backed-contracts",
+  "sourceEvidence": [
+    "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
+    "reference-artifacts/analyses/galaga-path-reference-labels/latest.json"
+  ],
+  "measurementLimits": [
+    "These contracts are first-pass human-readable target manifests derived from ingested challenge-stage video contact sheets and path labels.",
+    "They are not yet frame-perfect optical tracks. The next promotion step is per-group object tracking from the target video windows."
+  ],
+  "contracts": [
+    {
+      "stage": 3,
+      "challengeNumber": 1,
+      "displayLabel": "Challenging Stage 1 (Levels 3-4)",
+      "sourceWindowId": "challenge-01-classic-column-lesson",
+      "referenceLabels": [
+        "challenge-1-arrival-group-1",
+        "challenge-1-late-wave-group-4"
+      ],
+      "targetRead": "Introductory no-combat bonus lesson: clean bee and butterfly groups, top/side entries, learnable upper-band firing lanes, and visible peel/drop exits.",
+      "groups": [
+        {
+          "groupIndex": 1,
+          "role": "mixed opener",
+          "expectedTypes": ["bee", "but"],
+          "expectedFamilies": ["classic"],
+          "pathFamily": "first-challenge-peel",
+          "entrySide": "both-sides",
+          "exitSide": "lower-sides",
+          "scoreWindow": "upper-band mirrored targets",
+          "targetVisibleS": [0.9, 6.4]
+        },
+        {
+          "groupIndex": 2,
+          "role": "bee column lesson",
+          "expectedTypes": ["bee"],
+          "expectedFamilies": ["classic"],
+          "pathFamily": "classic-column-drop",
+          "entrySide": "top",
+          "exitSide": "lower",
+          "scoreWindow": "center columns",
+          "targetVisibleS": [2.2, 8.2]
+        },
+        {
+          "groupIndex": 3,
+          "role": "butterfly column lesson",
+          "expectedTypes": ["but"],
+          "expectedFamilies": ["classic"],
+          "pathFamily": "classic-column-drop",
+          "entrySide": "top",
+          "exitSide": "lower",
+          "scoreWindow": "center columns",
+          "targetVisibleS": [3.7, 9.6]
+        },
+        {
+          "groupIndex": 4,
+          "role": "side hook return",
+          "expectedTypes": ["bee", "but"],
+          "expectedFamilies": ["classic"],
+          "pathFamily": "side-hook-return",
+          "entrySide": "sides",
+          "exitSide": "lower-sides",
+          "scoreWindow": "hook crossing lanes",
+          "targetVisibleS": [5.1, 11.1]
+        },
+        {
+          "groupIndex": 5,
+          "role": "closing peel",
+          "expectedTypes": ["bee", "but"],
+          "expectedFamilies": ["classic"],
+          "pathFamily": "first-challenge-peel",
+          "entrySide": "both-sides",
+          "exitSide": "lower-sides",
+          "scoreWindow": "late upper-band cleanup",
+          "targetVisibleS": [6.8, 13.2]
+        }
+      ],
+      "successRead": "The first challenge should look authored as a safe score exhibition before it looks difficult.",
+      "nextPromotion": "Use target video object tracking to replace these group-level labels with frame-level position and silhouette tracks."
+    }
+  ]
+}

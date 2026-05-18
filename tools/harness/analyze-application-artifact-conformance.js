@@ -14,6 +14,7 @@ const SOURCES = {
   spriteSheetTargetCrops: 'reference-artifacts/analyses/galaga-alien-target-crops/latest.json',
   runtimeSprite: 'reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json',
   runtimeVsTargetCrops: 'reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json',
+  impactExplosion: 'reference-artifacts/analyses/aurora-impact-explosion-conformance/latest.json',
   audioLab: 'reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json',
   audioGap: 'reference-artifacts/analyses/aurora-audio-event-gap/latest.json',
   visualLook: 'reference-artifacts/analyses/aurora-visual-look-conformance/latest.json',
@@ -252,6 +253,7 @@ function main(){
   const spriteSheetTargetCrops = readOptionalJson(SOURCES.spriteSheetTargetCrops);
   const runtimeSprite = readOptionalJson(SOURCES.runtimeSprite);
   const runtimeVsTargetCrops = readOptionalJson(SOURCES.runtimeVsTargetCrops);
+  const impactExplosion = readOptionalJson(SOURCES.impactExplosion);
   const audioLab = readOptionalJson(SOURCES.audioLab);
   const audioGap = readOptionalJson(SOURCES.audioGap);
   const visualLook = readOptionalJson(SOURCES.visualLook);
@@ -264,6 +266,7 @@ function main(){
   const runtimeSpriteSamples = Array.isArray(runtimeSprite?.samples) ? runtimeSprite.samples : [];
   const runtimeWeakest = runtimeSpriteSamples.slice().sort((a, b) => (a.score10 || 0) - (b.score10 || 0))[0] || null;
   const runtimeVsTargetSummary = runtimeVsTargetCrops?.summary || {};
+  const impactExplosionSummary = impactExplosion?.summary || {};
   const audioGate = findGate(releaseDashboard, 'audio identity');
   const visualGate = findGate(releaseDashboard, 'visual look');
   const frameGate = findGate(releaseDashboard, 'arcade frame');
@@ -339,10 +342,26 @@ function main(){
         ? 'First temporal phase windows captured; full motion score still pending'
         : 'Not yet scored; current sprite metrics are static-pose measurements',
       measurement: runtimeSprite
-        ? `Static live-canvas pose score exists at ${scoreText(runtimeSpriteSummary.averageScore10)}; ${runtimeSpriteSummary.motionCoverageAxesCovered || 0}/${runtimeSpriteSummary.motionCoverageAxesPlanned || 4} planned motion axes are covered. Covered: ${(runtimeSpriteSummary.coveredMotionAxes || []).join('; ') || 'none yet'}. Remaining: ${(runtimeSpriteSummary.plannedMotionAxes || []).join('; ')}.`
+        ? `Static live-canvas pose score exists at ${scoreText(runtimeSpriteSummary.averageScore10)}; ${runtimeSpriteSummary.motionCoverageAxesCovered || 0}/${runtimeSpriteSummary.motionCoverageAxesPlanned || 4} planned motion axes have at least seed coverage. Covered: ${(runtimeSpriteSummary.coveredMotionAxes || []).join('; ') || 'none yet'}. Full roadmap: ${(runtimeSpriteSummary.plannedMotionAxes || []).join('; ')}.`
         : 'Runtime sprite artifact has not been generated, so motion coverage cannot be planned from the current capture set yet.',
       evidence: runtimeSprite ? SOURCES.runtimeSprite : SOURCES.spriteModel,
       next: 'Add harness windows for flap cycle A/B frames, pulse and damage-state timing, dive-rotation silhouettes, and carried/rescue/dual-fighter transition frames before treating sprite conformance as visually complete.'
+    }),
+    row({
+      id: 'impact-explosion-visual-feedback',
+      surface: 'Impact and explosion visual feedback',
+      current: impactExplosion ? scoreText(impactExplosionSummary.averageScore10) : 'impact/explosion comparison pending',
+      target: '>=7.5/10 static event crop score plus temporal lifecycle scoring',
+      score10: impactExplosionSummary.averageScore10,
+      confidence: impactExplosion ? 'medium-low' : 'pending',
+      status: impactExplosion
+        ? (impactExplosionSummary.scoringMode || 'first-pass static runtime effect crop comparison')
+        : 'Impact/explosion runtime artifact pending',
+      measurement: impactExplosion
+        ? `${impactExplosionSummary.sampleCount || 0} runtime impact/explosion crops compared against promoted target explosion crops; weakest ${impactExplosionSummary.weakestKey || 'n/a'} ${scoreText(impactExplosionSummary.weakestScore10)}. ${impactExplosionSummary.userFacingRead || ''}`
+        : 'Run npm run harness:analyze:aurora-impact-explosion-conformance to capture enemy-hit, enemy-boom, boss-first-hit, and boss-boom event visuals.',
+      evidence: impactExplosion ? SOURCES.impactExplosion : SOURCES.spriteSheetTargetCrops,
+      next: 'Extend from static crops into onset/expansion/decay windows and pair each impact visual with its runtime audio event so player feedback clarity becomes measurable.'
     }),
     row({
       id: 'source-frame-pixel-targets',
@@ -479,6 +498,7 @@ function main(){
       spriteCatalogProxyScore10: spriteComparison.averageScore10,
       spriteRuntimeCanvasScore10: runtimeSpriteSummary.averageScore10 || null,
       spriteRuntimeVsTargetCropScore10: runtimeVsTargetSummary.averageScore10 || null,
+      impactExplosionScore10: impactExplosionSummary.averageScore10 || null,
       spriteModelAverageConfidence: rounded(spriteModel?.summary?.averageConfidence || 0, 4),
       audioScore10: audioLabSummary.audioScore10 || parseScore(audioGate?.Current),
       visualScore10: visualSummary.score10 || parseScore(visualGate?.Current),
@@ -495,6 +515,7 @@ function main(){
     spriteComparisons: spriteComparison.comparisons,
     runtimeSpriteComparisons: runtimeSpriteSamples,
     runtimeVsTargetCropComparisons: Array.isArray(runtimeVsTargetCrops?.comparisons) ? runtimeVsTargetCrops.comparisons : [],
+    impactExplosionComparisons: Array.isArray(impactExplosion?.samples) ? impactExplosion.samples : [],
     spriteSheetTargetCrops: spriteSheetTargetCrops ? {
       summary: sheetTargetCropSummary,
       roleSets: sheetTargetRoleSets,

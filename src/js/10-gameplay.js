@@ -5,6 +5,10 @@ function drawPix(px,py,s,pat,col,col2,pat2=null,col3='',pat3=null){fillPat(px,py
 function ex(x,y,n=10,col='#fff'){
  // Keep cosmetic explosion particles off the primary gameplay RNG so seeded
  // combat and attack ordering stay aligned with the shipped production build.
+ const large=n>24,medium=n>14;
+ const spriteLife=large?0.2:(medium?0.16:0.12);
+ const spriteScale=large?0.82:(medium?0.66:0.5);
+ S.fx.push({x,y,vx:0,vy:0,t:spriteLife,life:spriteLife,r:1,c:col,sprite:large?'explosionLarge':'explosionSmall',scale:spriteScale,grow:large?0.18:0.1});
  for(let i=0;i<n;i++)S.fx.push({x,y,vx:auxRnd(178,-178),vy:auxRnd(178,-178),t:auxRnd(.22,.08),r:auxRnd(n>14?2.1:1.5,.55),c:col,sq:auxRandUnit()>.25});
  S.fx.push({x,y,vx:0,vy:0,t:n>14?.11:.08,r:n>14?10:7,c:'#fff',flash:1});
 }
@@ -23,6 +27,7 @@ function bossDamageFx(x,y){
    sq:1
   });
  }
+ S.fx.push({x,y,vx:0,vy:0,t:.18,life:.18,r:1,c:'#fff0a8',sprite:'explosionSmall',scale:.58,grow:.12});
  S.fx.push({x,y,vx:0,vy:0,t:.2,r:14,c:'#fff0a8',burst:1});
  S.fx.push({x,y,vx:0,vy:0,t:.13,r:7,c:'#eaf9ff',flash:1});
 }

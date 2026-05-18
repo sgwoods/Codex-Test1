@@ -22,9 +22,11 @@ This means sprite work has two related but separate outcomes:
 ## Why This Matters
 
 Current Aurora sprite scoring is useful but incomplete. The runtime static
-sprite score is about `6.2/10`, and the current measurement explicitly says it
-is static-pose-only. The biggest visible gaps are not only color or size. They
-are:
+sprite score and the stricter runtime-vs-promoted-target-crop score now answer
+different questions: one says whether the current renderer resembles the
+inferred model, while the stricter one says whether player-visible runtime PNGs
+match exact promoted target crops. The biggest visible gaps are not only color
+or size. They are:
 
 - exact role silhouettes for player, bee, butterfly, boss, captured fighter,
   projectiles, tractor beam, explosions, and challenge aliens
@@ -132,23 +134,48 @@ score should only rise when it reflects visible, measurable runtime evidence.
   bee/Zako, butterfly/escort, boss Galaga, challenge specialty aliens,
   projectiles/impacts, and tractor beam.
 - Runtime static sprite conformance now has two deliberately separate reads:
-  the inferred-model proxy is `5.76/10`, while the stricter runtime-vs-promoted
-  target-crop score is `4.21/10`. The proxy score dropped after target-row
-  rendering because the old inferred model is no longer the highest-authority
-  comparison; the target-crop score is the more useful player-visible gap.
+  the inferred-model proxy is `5.75/10`, while the stricter runtime-vs-promoted
+  target-crop score is `4.48/10`. The proxy score is useful for quick static
+  definition drift, but the target-crop score is the more sobering
+  player-visible gap.
 - A stricter first-pass runtime-vs-promoted-target-crop comparator now exists:
   `reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json`.
-  Its current average is `4.21/10`, with the weakest visible crop,
-  `player-fighter`, at `3.67/10`. This is intentionally sobering: it compares
+  Its current average is `4.48/10`, with the weakest visible crop,
+  `player-fighter`, at `4.01/10`. This is intentionally sobering: it compares
   harness-captured Aurora runtime PNGs directly against exact source-sheet
   target crops and shows that the previous inferred-model score was a useful
-  proxy, not a claim of high sprite conformance.
-- Active sprite motion has first measurement seeds for `3/4` planned axes:
-  flap/pulse phase pairs, forced dive/rotation poses, and capture/carry/dual
-  transition poses. The missing axis is full temporal cadence and target-crop
-  sequence matching, so animation conformance remains an open gap.
+  proxy, not a claim of high sprite conformance. The comparator now allows a
+  bounded two-cell alignment search so browser crop phase does not overwhelm
+  otherwise target-like pixel art.
+- Active sprite motion has first measurement seeds for `4/4` planned axes:
+- Active sprite motion now has seed measurement windows for flap/pulse phase
+  pairs, full flap-cadence windows, forced dive/rotation poses, and
+  capture/carry/dual transition poses. These are runtime-visible seeds, not
+  mature target-frame sequence scoring, so animation conformance remains an open
+  gap.
+- Impact/explosion feedback now has a first-pass comparator at
+  `reference-artifacts/analyses/aurora-impact-explosion-conformance/latest.json`.
+  It captures enemy hit, enemy boom, boss first-hit, and boss boom visuals from
+  the runtime and compares them to promoted target explosion crops. The current
+  static crop score is `5.86/10`, up from `3.88/10` after adding a target-derived
+  pixel explosion layer. This is deliberately only a static-frame start; the
+  next score needs onset, expansion, decay, and audio-event coupling.
 - Production Aurora sprites remain original/theme-oriented, but they do not yet
   flow from a formal target-pose manifest.
+
+## Beta Claim Guardrails
+
+For the next beta-facing conformance claim, do not let proxy metrics carry the
+story by themselves:
+
+- challenge-stage set-piece conformance should be at least `5.0/10`
+- strict direct target sprite conformance should be at least `5.5/10`
+- impact/explosion feedback should have static crop evidence and an explicit
+  lifecycle plan, even if the temporal effect scorer is not mature yet
+
+These gates are intentionally modest and honest. They do not mean the game is
+fully conformant; they mean the next public review has visibly better motion,
+sprite, and feedback evidence than the current baseline.
 
 ## Next Best Steps
 
@@ -158,8 +185,9 @@ score should only rise when it reflects visible, measurable runtime evidence.
 2. Use the runtime-vs-promoted-target-crop mismatch artifact to prioritize
    Aurora sprite geometry work, starting with dual fighter, challenge-specialty
    aliens, and roles whose best target match is semantically wrong.
-3. Add temporal windows for flap, dive, damage, capture/rescue, projectile,
-   explosion, tractor beam, and challenge-specialty motion.
+3. Promote target-frame temporal windows for flap, dive, damage,
+   capture/rescue, projectile, explosion, tractor beam, and
+   challenge-specialty motion.
 4. Add a development-only sprite-rendering mode that can draw from a target
    sprite atlas or target-derived pixel-row manifest.
 5. Add Application Guide and dashboard rows that separately show strict
