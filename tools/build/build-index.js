@@ -71,6 +71,7 @@ const CHALLENGE_STAGE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'anal
 const LEVEL_VISUAL_CONFORMANCE_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'level-visual-conformance-index', 'latest.json');
 const GALAGA_TARGET_ARTIFACT_COVERAGE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-artifact-coverage', 'latest.json');
 const GALAGA_ALIEN_VISUAL_REFERENCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-visual-reference', 'latest.json');
+const SPRITE_CONFORMANCE_VARIATION_PLAN = path.join(ROOT, 'reference-artifacts', 'ingestion', 'sprite-conformance-variation-plan', 'plan-0.1.json');
 const PERSONA_PERFORMANCE_DISTRIBUTION = path.join(ROOT, 'reference-artifacts', 'analyses', 'persona-performance-distribution', 'latest.json');
 const CATALOG_MEDIA_SOURCE_PATHS = new Set();
 let ACTIVE_SOURCE_BLOB_BASE = 'https://github.com/sgwoods/Codex-Test1/blob/main/';
@@ -3106,6 +3107,7 @@ let challengeStageConformanceCache = null;
 let levelVisualConformanceIndexCache = null;
 let galagaTargetArtifactCoverageCache = null;
 let galagaAlienVisualReferenceCache = null;
+let spriteConformanceVariationPlanCache = null;
 
 function loadGalagaReferenceSpriteTargets(){
   if(galagaReferenceSpriteTargetsCache) return galagaReferenceSpriteTargetsCache;
@@ -3154,6 +3156,27 @@ function loadGalagaAlienVisualReference(){
     galagaAlienVisualReferenceCache = { entries: [], roleCoverage: [], summary: {} };
   }
   return galagaAlienVisualReferenceCache;
+}
+
+function loadSpriteConformanceVariationPlan(){
+  if(spriteConformanceVariationPlanCache) return spriteConformanceVariationPlanCache;
+  if(!fs.existsSync(SPRITE_CONFORMANCE_VARIATION_PLAN)){
+    spriteConformanceVariationPlanCache = { lanes: [], pipelineSteps: [], successCriteria: [], artifacts: [], principles: [] };
+    return spriteConformanceVariationPlanCache;
+  }
+  try {
+    const artifact = readJson(SPRITE_CONFORMANCE_VARIATION_PLAN);
+    spriteConformanceVariationPlanCache = Object.assign({}, artifact, {
+      lanes: Array.isArray(artifact.lanes) ? artifact.lanes : [],
+      pipelineSteps: Array.isArray(artifact.pipelineSteps) ? artifact.pipelineSteps : [],
+      successCriteria: Array.isArray(artifact.successCriteria) ? artifact.successCriteria : [],
+      artifacts: Array.isArray(artifact.artifacts) ? artifact.artifacts : [],
+      principles: Array.isArray(artifact.principles) ? artifact.principles : []
+    });
+  } catch (err) {
+    spriteConformanceVariationPlanCache = { lanes: [], pipelineSteps: [], successCriteria: [], artifacts: [], principles: [] };
+  }
+  return spriteConformanceVariationPlanCache;
 }
 
 function loadApplicationArtifactConformance(){
@@ -3985,6 +4008,68 @@ function renderAlienVisualReferenceRows(artifact){
   `).join('\n');
 }
 
+function renderSpriteConformanceLaneRows(plan){
+  const lanes = Array.isArray(plan?.lanes) ? plan.lanes : [];
+  if(!lanes.length){
+    return `
+    <tr>
+      <td colspan="5"><span class="docMeta">Sprite conformance and variation plan pending.</span></td>
+    </tr>`;
+  }
+  return lanes.map((lane) => `
+    <tr>
+      <td><strong>${esc(lane.label || lane.id || '')}</strong><br><span class="docMeta"><code>${esc(lane.id || '')}</code><br>${esc(lane.releaseUse || '')}</span></td>
+      <td>${esc(lane.purpose || '')}</td>
+      <td>${esc(lane.rendererExpectation || '')}</td>
+      <td>${(lane.metrics || []).map(metric => `<code>${esc(metric)}</code>`).join('<br>')}</td>
+      <td>${lane.id === 'reference-conformance-lane'
+        ? 'Use for internal target comparison and measurement.'
+        : lane.id === 'aurora-production-theme-lane'
+          ? 'Use for public Aurora originality and era-faithful presentation.'
+          : 'Use to onboard future games through the same artifact loop.'}</td>
+    </tr>
+  `).join('\n');
+}
+
+function renderSpriteConformancePipelineRows(plan){
+  const steps = Array.isArray(plan?.pipelineSteps) ? plan.pipelineSteps : [];
+  if(!steps.length){
+    return `
+    <tr>
+      <td colspan="4"><span class="docMeta">Sprite pipeline steps pending.</span></td>
+    </tr>`;
+  }
+  return steps.map((step, index) => `
+    <tr>
+      <td><strong>${esc(index + 1)}. ${esc(step.label || step.id || '')}</strong><br><span class="docMeta"><code>${esc(step.id || '')}</code></span></td>
+      <td>${esc(step.goal || '')}</td>
+      <td>${esc(step.currentStatus || '')}</td>
+      <td>${esc(step.nextAction || '')}</td>
+    </tr>
+  `).join('\n');
+}
+
+function renderSpriteConformanceSuccessRows(plan){
+  const rows = Array.isArray(plan?.successCriteria) ? plan.successCriteria : [];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="3"><span class="docMeta">Sprite success criteria pending.</span></td>
+    </tr>`;
+  }
+  return rows.map((row) => `
+    <tr>
+      <td><strong>${esc(row.label || row.id || '')}</strong><br><span class="docMeta"><code>${esc(row.id || '')}</code></span></td>
+      <td>${esc(row.target || '')}</td>
+      <td>${row.id === 'short-term'
+        ? 'Next practical implementation target.'
+        : row.id === 'release-gate'
+          ? 'Required before broad public claims.'
+          : 'Tracked as the sprite pipeline matures.'}</td>
+    </tr>
+  `).join('\n');
+}
+
 function renderChallengeTargetCoverageRows(report){
   const rows = Array.isArray(report?.challengeStageCoverage) ? report.challengeStageCoverage : [];
   if(!rows.length){
@@ -4017,6 +4102,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'artifact-conformance-status', title: 'Artifact Conformance Status' },
     { id: 'target-artifact-coverage', title: 'Target Artifact Coverage' },
     { id: 'alien-visual-reference-pack', title: 'Alien Visual References' },
+    { id: 'sprite-conformance-variation-plan', title: 'Sprite Conformance Plan' },
     { id: 'conformance-alien-index', title: 'Alien Conformance Index' },
     { id: 'conformance-audio-index', title: 'Audio Conformance Index' },
     { id: 'stage-conformance-summary', title: 'Stage Conformance Summary' },
@@ -4156,6 +4242,10 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const galagaAlienVisualReference = loadGalagaAlienVisualReference();
   const alienVisualReferenceSummary = galagaAlienVisualReference.summary || {};
   const alienVisualReferenceRows = renderAlienVisualReferenceRows(galagaAlienVisualReference);
+  const spriteConformanceVariationPlan = loadSpriteConformanceVariationPlan();
+  const spriteConformanceLaneRows = renderSpriteConformanceLaneRows(spriteConformanceVariationPlan);
+  const spriteConformancePipelineRows = renderSpriteConformancePipelineRows(spriteConformanceVariationPlan);
+  const spriteConformanceSuccessRows = renderSpriteConformanceSuccessRows(spriteConformanceVariationPlan);
   const conformanceAlienRows = (guide.conformanceAlienRows || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.name || '')}</strong><br><span class="docMeta">${esc(entry.runtime || '')}</span></td>
@@ -4519,6 +4609,63 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               </thead>
               <tbody>
                 ${alienVisualReferenceRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="sprite-conformance-variation-plan">
+          <div class="sectionHeader">
+            <h2>Sprite Conformance Plan</h2>
+            <p>${esc(spriteConformanceVariationPlan.summary || 'Plan the sprite path from source-grounded conformance to production-safe themed variation.')}</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Plan status:</strong> ${esc(spriteConformanceVariationPlan.status || 'pending')}. <strong>Next best step:</strong> ${esc(spriteConformanceVariationPlan.nextBestStep || 'Create target crop manifests before raising sprite conformance claims.')}</p>
+            <p>This plan separates the internal reference-conformance lane from the Aurora production theme lane. The goal is to ingest and measure toward a conforming experience, then let Aurora and later Platinum games ship distinctive original visual styles that preserve era, motion, role readability, and gameplay meaning.</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/ingestion/sprite-conformance-variation-plan/plan-0.1.json</code>. <strong>Readable plan:</strong> <code>SPRITE_CONFORMANCE_VARIATION_STRATEGY.md</code>.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Lane</th>
+                  <th>Purpose</th>
+                  <th>Renderer Expectation</th>
+                  <th>Metrics</th>
+                  <th>Use</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${spriteConformanceLaneRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Pipeline Step</th>
+                  <th>Goal</th>
+                  <th>Current Status</th>
+                  <th>Next Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${spriteConformancePipelineRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Gate</th>
+                  <th>Target</th>
+                  <th>Meaning</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${spriteConformanceSuccessRows}
               </tbody>
             </table>
           </div>

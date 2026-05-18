@@ -1,6 +1,6 @@
 # Galaga Target Artifact Coverage
 
-Generated: `2026-05-18T13:56:42.233Z`
+Generated: `2026-05-18T16:14:46.751Z`
 
 This is the project-facing inventory of online and local artifacts that best
 illustrate Aurora's Galaga-like target. It records what is already ingested,
@@ -13,7 +13,7 @@ conformance work.
 - Challenge-stage target readiness: `4.5/10`
 - Critical sources: `5`
 - Critical sources not fully ingested: `5`
-- Existing local evidence anchors: `39`
+- Existing local evidence anchors: `40`
 - Missing local evidence anchors: `0`
 
 ## Interpretation
@@ -27,7 +27,7 @@ Aurora now has media-backed windows for all tracked Galaga challenge stages, inc
 | arcade-game-series-late-perfect-guides | not-ingested | 0/10 | critical | 0/0 | Acquire lawful gameplay windows for the late challenge stages and promote per-group labels. Use the guides only to prioritize stage windows and expected novelty, not as pixel/motion ground truth. |
 | controlled-emulation-capture | planned | 1.8/10 | critical | 0/0 | Set up an approved capture source, record source manifest, capture challenges 1-8, and extract trajectories/contact sheets with the same harness shape used for existing media. |
 | snake-latino-galaga-gameplay-video | partial | 5.1/10 | critical | 13/13 | It is only a 360p early-window corpus. Add complete challenge-stage windows and later challenge stages beyond Challenge 3 before using it as the sole movement target. |
-| user-supplied-galaga-alien-closeups | partial | 5.1/10 | critical | 4/4 | Add a crop-box manifest for the general sprite sheet, promote per-role and per-pose target crops, and update runtime sprite scoring so challenge aliens, projectiles, tractor beam, and explosion visuals can be scored against richer Galaga visual vocabulary. |
+| user-supplied-galaga-alien-closeups | partial | 5.1/10 | critical | 5/5 | Generate preview crops from the crop-box manifest, review exact boxes, promote per-role and per-pose target crops, and update runtime sprite scoring so challenge aliens, projectiles, tractor beam, and explosion visuals can be scored against richer Galaga visual vocabulary. |
 | user-supplied-galaga-challenge-compilations | partial | 4.2/10 | critical | 8/8 | Promote five-group labels for each challenge window: first visible time, entry side, path family, scoreable upper-band interval, exit side, alien family, and perfect-bonus opportunity. |
 | bandai-namco-official-galaga-history | ingested | 10/10 | high | 2/2 | Promote selected assertions into rule-specific checks where they can reduce prose-only documentation debt. |
 | galaga-1981-namco-manual | ingested | 10/10 | high | 2/2 | Promote richer manual-derived assertions into structured per-rule artifacts so checks can cite rule IDs instead of prose notes. |
