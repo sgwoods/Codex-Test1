@@ -236,6 +236,14 @@ it, study failures, and fold the learning back into the system.
 The standing resource documentation is
 [CONFORMANCE_ECONOMICS.md](CONFORMANCE_ECONOMICS.md).
 
+The standing self-critical work-block review is
+[CONFORMANCE_INVESTMENT_RETROSPECTIVE.md](CONFORMANCE_INVESTMENT_RETROSPECTIVE.md).
+It is generated from challenge-stage history, quality score history, dashboard
+cost context, candidate sweeps, audio artifacts, and application artifact
+scores. Its job is to say plainly where score movement is real, where it is
+mostly measurement progress, and where Aurora is still not moving toward
+human-level conformance quickly enough.
+
 The project currently reads as heavily local-first:
 
 - local CPU/browser harnesses are doing the overwhelming majority of measured
@@ -244,6 +252,9 @@ The project currently reads as heavily local-first:
   and analysis, but is under-instrumented unless we log it manually
 - any serious long-cycle work should be wrapped with `npm run harness:measure`
   so we can compare resource cost against score movement
+- after each large work block, run
+  `npm run harness:analyze:conformance-investment-retrospective` so the public
+  docs and dashboard show the latest self-critical read
 
 The desired pattern is:
 

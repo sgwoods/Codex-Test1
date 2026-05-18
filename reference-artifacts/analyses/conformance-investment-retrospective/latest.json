@@ -1,0 +1,263 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "conformance-investment-retrospective",
+  "generatedAt": "2026-05-18T12:43:17.737Z",
+  "commit": "e583b558",
+  "branch": "codex/macbook-conformance-investment-review",
+  "workWindow": {
+    "label": "Estimated focused conformance work block",
+    "estimatedHours": 10,
+    "basis": "Committed artifacts, challenge-stage history, quality score history, dashboard cost context, candidate sweep reports, and current audio/application artifacts. Some Codex/model/human orchestration time is estimated because it was not automatically logged."
+  },
+  "executiveRead": "The past focused block substantially improved our honesty and repeatability, but only modestly improved player-facing conformance. Challenge stages are now scored with a strict 1/10 baseline and have risen to 3.8/10; that is a real improvement from the strict 2.5/10 baseline, but still far from human-level Galaga conformance. The biggest remaining failures are movement grammar, alien novelty, stage-to-stage challenge progression, and stable audio runtime promotion.",
+  "metricMovements": [
+    {
+      "id": "challenge-set-piece",
+      "label": "Challenge-stage strict conformance",
+      "startScore10": 2.5,
+      "currentScore10": 3.8,
+      "delta10": 1.3,
+      "progressClass": "advanced",
+      "playerMeaning": "Highest-priority gameplay authenticity gap.",
+      "startReport": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-17-edf46536/report.json",
+      "currentReport": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-18-6d76050d/report.json"
+    },
+    {
+      "id": "challenge-interest",
+      "label": "Challenge-stage interesting factor",
+      "startScore10": 2.6,
+      "currentScore10": 3.8,
+      "delta10": 1.2,
+      "progressClass": "advanced",
+      "playerMeaning": "Bonus stages should feel authored and exciting, not merely safe.",
+      "startReport": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-17-edf46536/report.json",
+      "currentReport": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-18-6d76050d/report.json"
+    },
+    {
+      "id": "challenge-movement",
+      "label": "Challenge movement / trajectory conformance",
+      "startScore10": 2.3,
+      "currentScore10": 3.4,
+      "delta10": 1.1,
+      "progressClass": "advanced",
+      "playerMeaning": "True alien path grammar and motion shape.",
+      "startReport": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-17-edf46536/report.json",
+      "currentReport": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-18-6d76050d/report.json"
+    },
+    {
+      "id": "challenge-graphics",
+      "label": "Challenge graphical conformance",
+      "startScore10": 2.1,
+      "currentScore10": 4.3,
+      "delta10": 2.2,
+      "progressClass": "advanced",
+      "playerMeaning": "Visible alien/sprite/readability fit against target challenge artifacts.",
+      "startReport": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-17-edf46536/report.json",
+      "currentReport": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-18-6d76050d/report.json"
+    },
+    {
+      "id": "challenge-alien-novelty",
+      "label": "Challenge alien novelty",
+      "startScore10": 3.4,
+      "currentScore10": 3.4,
+      "delta10": 0,
+      "progressClass": "stalled",
+      "playerMeaning": "Whether later challenges introduce memorable alien families and roles.",
+      "startReport": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-17-edf46536/report.json",
+      "currentReport": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-18-6d76050d/report.json"
+    },
+    {
+      "id": "challenge-progression",
+      "label": "Challenge stage-to-stage progression",
+      "startScore10": 2.8,
+      "currentScore10": 3,
+      "delta10": 0.2,
+      "progressClass": "nudged",
+      "playerMeaning": "Whether the eight challenge stages escalate as distinct lessons.",
+      "startReport": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-17-edf46536/report.json",
+      "currentReport": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-18-6d76050d/report.json"
+    },
+    {
+      "id": "challenge-shot-opportunity",
+      "label": "Challenge scoring/shot opportunity",
+      "startScore10": null,
+      "currentScore10": 5.1,
+      "delta10": null,
+      "progressClass": "stalled",
+      "playerMeaning": "Whether players get clear, learnable bonus-shot routes.",
+      "startReport": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-17-edf46536/report.json",
+      "currentReport": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-18-6d76050d/report.json"
+    },
+    {
+      "id": "challenge-safety",
+      "label": "Challenge no-combat safety guardrail",
+      "startScore10": 10,
+      "currentScore10": 10,
+      "delta10": 0,
+      "progressClass": "guardrail",
+      "playerMeaning": "No enemy shots, no attack starts, no ship deaths in challenge windows.",
+      "startReport": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-17-edf46536/report.json",
+      "currentReport": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-18-6d76050d/report.json"
+    },
+    {
+      "id": "overall-quality",
+      "label": "Overall quality rollup after strict challenge metric",
+      "startScore10": 8.7,
+      "currentScore10": 8.8,
+      "delta10": 0.1,
+      "progressClass": "nudged",
+      "playerMeaning": "Release score moved only slightly because the stricter challenge metric exposed a large gap.",
+      "startReport": "reference-artifacts/analyses/quality-conformance/2026-05-17-edf46536/report.json",
+      "currentReport": "reference-artifacts/analyses/quality-conformance/2026-05-18-6d76050d/report.json"
+    },
+    {
+      "id": "audio-release-category",
+      "label": "Audio release-category read",
+      "startScore10": 7,
+      "currentScore10": 7.3,
+      "delta10": 0.3,
+      "progressClass": "mixed",
+      "playerMeaning": "The release score nudged upward, but accepted runtime cue promotion remains blocked by full-theme instability.",
+      "startReport": "reference-artifacts/analyses/quality-conformance/2026-05-17-edf46536/report.json",
+      "currentReport": "reference-artifacts/analyses/quality-conformance/2026-05-18-6d76050d/report.json"
+    },
+    {
+      "id": "audio-runtime-promotion",
+      "label": "Audio runtime promotion success",
+      "startScore10": 0,
+      "currentScore10": 0,
+      "delta10": 0,
+      "progressClass": "stalled",
+      "playerMeaning": "No candidate is accepted into runtime audio yet; the process improved, the shipped sound did not meaningfully move from these candidates.",
+      "currentReport": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json"
+    },
+    {
+      "id": "runtime-sprite-static",
+      "label": "Live runtime static sprite conformance",
+      "startScore10": null,
+      "currentScore10": 6.19,
+      "delta10": null,
+      "progressClass": "known-gap",
+      "playerMeaning": "Static runtime sprite identity is measured around 6/10 and active motion is still a planning row, so graphics remain visually incomplete.",
+      "currentReport": "reference-artifacts/analyses/application-artifact-conformance/latest.json"
+    }
+  ],
+  "movedMost": [
+    "Strict challenge-stage truth improved: the old broad read around 6.1/10 was replaced by a stricter baseline at 2.5/10, then recovered to 3.8/10. This is progress, but it is mostly better measurement plus partial graphical evidence, not a solved gameplay problem.",
+    "Challenge graphical conformance moved from 2.1/10 to 4.3/10 after object-track/static visual evidence landed.",
+    "Overall quality under the strict challenge metric moved only 8.7/10 -> 8.8/10, which is an honest signal that the user-visible game has not leapt forward as much as the harness did."
+  ],
+  "movedLeast": [
+    "Alien novelty remains 3.4/10; it did not materially move during the focused block.",
+    "Stage-to-stage challenge progression remains 3/10; late challenges still do not yet read as distinct Galaga-like lessons.",
+    "Challenge movement conformance is only 3.4/10 and has plateaued relative to the amount of analysis effort.",
+    "Audio runtime promotion is still zero accepted cues even though cue contracts and candidate loops improved the process."
+  ],
+  "failurePatterns": [
+    "Challenge-stage layout sweeps are too shallow for the real problem. The gap is trajectory grammar, entry/exit choreography, alien-family staging, and temporal sprite motion, not just spawn timing and lane offsets.",
+    "Audio candidate loops are optimizing isolated clips faster than they are improving full-theme live capture. Reference-vs-reference calibration and repeated full-theme stability gates must come before more runtime promotion.",
+    "Some graphics artifacts are useful to the harness but not useful enough to a human reviewer. Dense contact sheets and tiny \"view larger\" images need to become stage-by-stage temporal crop strips and object-track overlays.",
+    "The economics ledger still undercounts Codex/model/human orchestration time. The charts correctly show measured local CPU/browser spend, but cloud/model work is only visible when manually logged.",
+    "High broad scores can mask low strict scores. The broad alien/challenge novelty score is useful context, but the strict challenge-stage set-piece score is the one that matches the human complaint."
+  ],
+  "recommendations": [
+    "Make challenge-stage path grammar the next primary gameplay investment: define per-challenge contracts for group order, first-visible frame, path length, turn count, exit side, alien family, animation phases, and bonus-shot opportunity.",
+    "Build direct target object tracks from the supplied Galaga challenge videos and compare Aurora tracks against those trajectories before authoring another large sweep.",
+    "Replace dense challenge contact sheets in the human docs with larger expandable crop sequences: reference target strip, Aurora current strip, object-track overlay, and per-axis score.",
+    "Freeze audio runtime promotion until reference-vs-reference and current-vs-current variance is known for challengePerfect, challengeTransition, gameOver, captureBeam, and stagePulse.",
+    "Log every multi-hour cycle with `npm run harness:measure`, and add a manual GPU-equivalent Codex entry whenever model work materially designs, interprets, or changes the harness.",
+    "Treat the next beta justification as requiring visible player-facing lift in challenge movement/novelty or audio clarity, not just more documentation or scorer sophistication."
+  ],
+  "candidateSweepRead": {
+    "recentSweeps": [
+      {
+        "file": "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/challenge-stage-candidate-sweep/2026-05-16T20-51-01-498e13b9/report.json",
+        "report": "reference-artifacts/analyses/challenge-stage-candidate-sweep/2026-05-16T20-51-01-498e13b9/report.json",
+        "stamp": "2026-05-16T20-51-01-498e13b9",
+        "stage": 11,
+        "baselineExpectedScore10": 7.4,
+        "bestExpectedScore10": 7.6,
+        "lift10": 0.2,
+        "bestCandidateId": "stage11-a208-d096-x86-p0",
+        "baselineBestMatch": "challenge-3-arrival-group-1",
+        "bestMatch": "challenge-3-arrival-group-1",
+        "candidateCount": 181,
+        "keepable": false
+      },
+      {
+        "file": "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/challenge-stage-candidate-sweep/2026-05-18T11-10-07-6d76050d/report.json",
+        "report": "reference-artifacts/analyses/challenge-stage-candidate-sweep/2026-05-18T11-10-07-6d76050d/report.json",
+        "stamp": "2026-05-18T11-10-07-6d76050d",
+        "stage": 23,
+        "baselineExpectedScore10": 3.6,
+        "bestExpectedScore10": 3.8,
+        "lift10": 0.2,
+        "bestCandidateId": "stage23-a142-d118-x88-w098-s007",
+        "baselineBestMatch": "challenge-1-arrival-group-1",
+        "bestMatch": "challenge-1-arrival-group-1",
+        "candidateCount": 109,
+        "keepable": false
+      },
+      {
+        "file": "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/challenge-stage-candidate-sweep/2026-05-18T11-35-52-6d76050d/report.json",
+        "report": "reference-artifacts/analyses/challenge-stage-candidate-sweep/2026-05-18T11-35-52-6d76050d/report.json",
+        "stamp": "2026-05-18T11-35-52-6d76050d",
+        "stage": 27,
+        "baselineExpectedScore10": 2.6,
+        "bestExpectedScore10": 3.4,
+        "lift10": 0.8,
+        "bestCandidateId": "stage27-a168-d142-x84-w094-s0085",
+        "baselineBestMatch": "challenge-1-arrival-group-1",
+        "bestMatch": "challenge-1-arrival-group-1",
+        "candidateCount": 109,
+        "keepable": false
+      }
+    ],
+    "interpretation": "Recent stage candidate sweeps found small theoretical lifts, but no broad keeper that solves late challenge choreography. This supports a pivot from parameter sweeps to authored path contracts plus direct object-track scoring."
+  },
+  "resourceRead": {
+    "dashboardChallengeSpend": {
+      "runs": 161,
+      "wallMinutes": 24,
+      "cpuMinutes": 39.7,
+      "label": "161 runs; 24 min wall; 39.7 min CPU"
+    },
+    "dashboardAudioSpend": {
+      "runs": 309,
+      "wallMinutes": 253.7,
+      "cpuMinutes": 459.4,
+      "label": "309 runs; 253.7 min wall; 459.4 min CPU"
+    },
+    "challengeCurrentScore10": 3.8,
+    "audioCurrentScore10": 7.3,
+    "estimatedUnloggedHours": 10,
+    "accountingDebt": "Recent repo work includes merge/review/documentation and model-assisted reasoning that is not fully represented in the measured run ledger. Treat cost charts as a lower bound until manual Codex/model entries are logged per work cycle.",
+    "dashboardSource": "reference-artifacts/analyses/release-conformance-dashboard/latest.json"
+  },
+  "sourceReports": {
+    "challengeStageConformance": "reference-artifacts/analyses/challenge-stage-conformance/2026-05-18-6d76050d/report.json",
+    "qualityConformance": "reference-artifacts/analyses/quality-conformance/2026-05-18-6d76050d/report.json",
+    "audioLabV2": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json",
+    "audioCueContracts": "reference-artifacts/analyses/aurora-audio-cue-contracts/latest.json",
+    "applicationArtifactConformance": "reference-artifacts/analyses/application-artifact-conformance/latest.json",
+    "releaseConformanceDashboard": "reference-artifacts/analyses/release-conformance-dashboard/latest.json"
+  },
+  "deepLinks": [
+    {
+      "label": "Local Cost / Value dashboard",
+      "href": "http://127.0.0.1:4312/local-dev/conformance-dashboard.html?game=aurora-galactica#cost"
+    },
+    {
+      "label": "Hosted dev Cost / Value dashboard",
+      "href": "https://sgwoods.github.io/Aurora-Galactica/dev/conformance-dashboard.html?game=aurora-galactica#cost"
+    },
+    {
+      "label": "Hosted dev conformance dashboard",
+      "href": "https://sgwoods.github.io/Aurora-Galactica/dev/conformance-dashboard.html?game=aurora-galactica#conformance"
+    },
+    {
+      "label": "Project guide retrospective section",
+      "href": "project-guide.html#conformance-investment-retrospective-doc"
+    }
+  ]
+}

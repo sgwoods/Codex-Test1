@@ -217,6 +217,8 @@
     "harness:check:documentation-freshness": "node tools/harness/check-documentation-freshness.js",
     "dev:conformance-dashboard": "node tools/dev/conformance-dashboard-watch.js",
     "harness:analyze:conformance-economics": "node tools/harness/analyze-conformance-economics.js",
+    "harness:analyze:conformance-investment-retrospective": "node tools/harness/analyze-conformance-investment-retrospective.js",
+    "harness:check:conformance-investment-retrospective": "node tools/harness/check-conformance-investment-retrospective.js",
     "harness:measure": "node tools/harness/measure-conformance-command.js",
     "harness:check:galaxy-guardians-score-progression": "node tools/harness/check-galaxy-guardians-score-progression.js",
     "harness:check:galaxy-guardians-threat-scoring": "node tools/harness/check-galaxy-guardians-threat-scoring.js",

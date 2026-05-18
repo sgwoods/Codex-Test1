@@ -479,6 +479,11 @@
           "detail": "Local CPU/browser versus GPU-equivalent model/API usage and cost-per-score movement."
         },
         {
+          "label": "Conformance Investment Retrospective",
+          "href": "project-guide.html#conformance-investment-retrospective-doc",
+          "detail": "Latest self-critical work-block read separating measurement progress from player-facing conformance progress."
+        },
+        {
           "label": "Testing And Release Gates",
           "href": "https://github.com/sgwoods/Codex-Test1/blob/main/TESTING_AND_RELEASE_GATES.md",
           "detail": "Automation-first release gate policy and lane expectations."
@@ -612,6 +617,12 @@
       "title": "Conformance Economics Source",
       "summary": "Detailed resource/time/GPU-equivalent accounting and charts for comparing conformance gains against local and model-assisted compute spend.",
       "file": "CONFORMANCE_ECONOMICS.md"
+    },
+    {
+      "id": "conformance-investment-retrospective-doc",
+      "title": "Conformance Investment Retrospective Source",
+      "summary": "Generated self-critical read of the latest focused work block, including score movement, stalled metrics, accounting debt, and recommended corrections.",
+      "file": "CONFORMANCE_INVESTMENT_RETROSPECTIVE.md"
     },
     {
       "id": "classic-arcade-ingestion-framework-doc",

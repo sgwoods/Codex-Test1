@@ -43,10 +43,12 @@
           "label": "Value versus compute",
           "sourceArtifacts": [
             "reference-artifacts/analyses/release-conformance-dashboard/latest.json",
+            "reference-artifacts/analyses/conformance-investment-retrospective/latest.json",
             "CONFORMANCE_ECONOMICS.md",
+            "CONFORMANCE_INVESTMENT_RETROSPECTIVE.md",
             "reference-artifacts/analyses/conformance-economics"
           ],
-          "currentness": "Resource cards and investment rows are generated from economics fields in the dashboard artifact and linked economics docs.",
+          "currentness": "Resource cards, investment rows, and the self-critical work-block read are generated from economics fields, retrospective artifacts, and linked economics docs.",
           "riskIfStale": "CPU/GPU-equivalent spend can drift away from the measured conformance gains it is supposed to justify."
         },
         {
@@ -107,6 +109,7 @@
           "sourceArtifacts": [
             "project-guide.json",
             "PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md",
+            "CONFORMANCE_INVESTMENT_RETROSPECTIVE.md",
             "CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md",
             "GALAGA_CHALLENGE_VIDEO_REFERENCE_ANALYSIS.md",
             "reference-artifacts/analyses/challenge-stage-conformance/latest.json",

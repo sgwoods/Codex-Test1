@@ -798,6 +798,38 @@ function html(data, options = {}){
         + '</section>';
     }
 
+    function retrospectivePanel(economics){
+      const retro = economics.retrospective || {};
+      if(!retro || !retro.executiveRead) return '';
+      const hasNumber = value => value !== null && value !== undefined && Number.isFinite(Number(value));
+      const moves = (retro.metricMovements || []).slice(0, 8).map(row => ({
+        Metric: row.label,
+        Start: hasNumber(row.startScore10) ? Number(row.startScore10).toFixed(1) + '/10' : 'n/a',
+        Current: hasNumber(row.currentScore10) ? Number(row.currentScore10).toFixed(1) + '/10' : 'n/a',
+        Delta: hasNumber(row.delta10) ? (Number(row.delta10) >= 0 ? '+' : '') + row.delta10 : 'n/a',
+        Read: row.progressClass || ''
+      }));
+      const links = (retro.deepLinks || []).slice(0, 4).map(link => {
+        const href = link.href && (/^https?:/.test(link.href) || /\.html(?:[?#]|$)/.test(link.href)) ? link.href : artifactHref(link.href || retro.sourceReport || '');
+        return '<a href="' + esc(href) + '">' + esc(link.label || 'Open') + '</a>';
+      }).join('');
+      const chartData = (retro.charts || []).map(chart => ({
+        title: chartTitle(chart),
+        href: artifactHref(chart),
+        src: rawArtifactHref(chart)
+      }));
+      const chartMarkup = chartData.length
+        ? '<div class="chartGrid">' + chartData.map(chart => '<article class="card chartCard"><h2>' + esc(chart.title) + '</h2><a href="' + esc(chart.href) + '"><img src="' + esc(chart.src) + '" alt="' + esc(chart.title) + ' chart"></a></article>').join('') + '</div>'
+        : '';
+      return '<section class="card">'
+        + '<h2>Self-Critical Work Block</h2>'
+        + '<p class="small">' + esc(retro.executiveRead) + '</p>'
+        + '<div class="chartLinks">' + links + '</div>'
+        + tableFromRows(moves, 'No retrospective metric movement rows generated yet.')
+        + chartMarkup
+        + '</section>';
+    }
+
     function costView(data, rows){
       const economics = data.economicsSummary || {};
       return \`
@@ -809,6 +841,7 @@ function html(data, options = {}){
             <div class="card"><span class="label">Wall time</span><span class="value">\${esc(Math.round((economics.wallSeconds || 0) / 60))} min</span></div>
             <div class="card"><span class="label">CPU time</span><span class="value">\${esc(Math.round((economics.cpuSeconds || 0) / 60))} min</span></div>
           </div>
+          \${retrospectivePanel(economics)}
           \${computeApplicationPanel(economics)}
           <section class="card">
             <h2>Economics Charts</h2>

@@ -56,6 +56,11 @@ function walkReports(root){
   return out.sort();
 }
 
+function latestReport(root){
+  const reports = walkReports(root);
+  return reports.length ? reports[reports.length - 1] : null;
+}
+
 function dirBytes(dir){
   let total = 0;
   if(!fs.existsSync(dir)) return 0;
@@ -881,7 +886,13 @@ function table(headers, rows){
   ].join('\n');
 }
 
+function hasNumber(value){
+  return value !== null && value !== undefined && Number.isFinite(+value);
+}
+
 function buildTopLevelDoc(report, outDir){
+  const retrospectivePath = latestReport(path.join(ANALYSES, 'conformance-investment-retrospective'));
+  const retrospective = retrospectivePath ? readJson(retrospectivePath) : null;
   const ledger = report.summary.ledger;
   const gpuEquivalent = ledger.byResource['gpu-equivalent'] || { runs: 0, wallSeconds: 0, cpuSeconds: 0 };
   const codex = ledger.byResource.codex || { runs: 0, wallSeconds: 0, cpuSeconds: 0 };
@@ -960,6 +971,32 @@ function buildTopLevelDoc(report, outDir){
     `- Model 5h left: ${latestSnapshot.codexModel5hLeftPercent ?? 'n/a'}%`,
     `- Model weekly left: ${latestSnapshot.codexModelWeekLeftPercent ?? 'n/a'}%`
   ] : ['- No Codex quota snapshot has been logged yet.'];
+  const retrospectiveLines = retrospective ? [
+    '## Latest Self-Critical Retrospective',
+    '',
+    retrospective.executiveRead || 'Latest retrospective summary is unavailable.',
+    '',
+    table(
+      ['Metric', 'Start', 'Current', 'Delta', 'Read'],
+      (retrospective.metricMovements || []).slice(0, 10).map(row => [
+        row.label,
+        hasNumber(row.startScore10) ? `${(+row.startScore10).toFixed(1)}/10` : 'n/a',
+        hasNumber(row.currentScore10) ? `${(+row.currentScore10).toFixed(1)}/10` : 'n/a',
+        hasNumber(row.delta10) ? `${+row.delta10 >= 0 ? '+' : ''}${row.delta10}` : 'n/a',
+        row.progressClass || ''
+      ])
+    ),
+    '',
+    'Key correction: treat improved measurement as valuable, but do not confuse it with human-level gameplay conformance. The latest retrospective says the recurring weak spots are challenge movement grammar, alien novelty, challenge progression, and stable audio runtime promotion.',
+    '',
+    `Retrospective artifact: \`${rel(retrospectivePath)}\``,
+    ''
+  ] : [
+    '## Latest Self-Critical Retrospective',
+    '',
+    '_Run `npm run harness:analyze:conformance-investment-retrospective` to add the latest work-block critique._',
+    ''
+  ];
   const lines = [
     '# Conformance Economics And Resource Usage',
     '',
@@ -986,6 +1023,7 @@ function buildTopLevelDoc(report, outDir){
     '',
     'The important read today: measured conformance advancement is overwhelmingly local CPU/browser driven. Codex and OpenAI model work are essential for reasoning, implementation, and synthesis, but the repository ledger currently records only a small fraction of that cloud-side work. We should keep pushing computation into reusable local harnesses whenever possible and explicitly log Codex/model/API assistance as `gpu-equivalent` when it materially drives a work cycle.',
     '',
+    ...retrospectiveLines,
     '## Resource Spend',
     '',
     resourceTable,
@@ -1153,6 +1191,7 @@ function main(){
     ledgerSummary
   };
   writeJson(path.join(outDir, 'report.json'), report);
+  writeJson(path.join(OUT_ROOT, 'latest.json'), report);
   fs.writeFileSync(path.join(outDir, 'README.md'), buildReadme(report));
   buildCharts(outDir, metricPoints, deltas, ledgerSummary, efficiency, computeApplication);
   fs.writeFileSync(TOP_LEVEL_DOC, buildTopLevelDoc(report, outDir));
