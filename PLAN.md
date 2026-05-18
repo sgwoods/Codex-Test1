@@ -133,6 +133,10 @@ resource economics fit together.
   [GALAXY_GUARDIANS_OPENING_SLICE_BASELINE.md](GALAXY_GUARDIANS_OPENING_SLICE_BASELINE.md),
   so the visible `WAIT` / score-table / ready-state work is readable in hosted
   docs and not only as raw manifests, contact sheets, or runtime notes
+- keep the short restart note readable through
+  [GALAXY_GUARDIANS_RESUME_STATE_AND_NEXT_STEPS.md](GALAXY_GUARDIANS_RESUME_STATE_AND_NEXT_STEPS.md),
+  so the current checked state and next work order are easy to reopen without
+  reconstructing context from the longer strategy stack
 - treat the obvious current one-level baseline misses as first-class work:
   `WAIT`/headline treatment, score-advance table, rack march cadence,
   explosion states, swarm palettes, moving starfield motion, missile-ready

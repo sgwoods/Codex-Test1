@@ -2,6 +2,10 @@
 
 Updated: May 13, 2026
 
+Short restart note:
+
+- [GALAXY_GUARDIANS_RESUME_STATE_AND_NEXT_STEPS.md](GALAXY_GUARDIANS_RESUME_STATE_AND_NEXT_STEPS.md)
+
 ## Purpose
 
 This plan turns `Galaxy Guardians` into a first-class conformance program on

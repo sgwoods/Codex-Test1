@@ -146,9 +146,54 @@
           "detail": "Source-backed readable baseline for the visible `WAIT`, score-table, ready-state, starfield, and top-reentry slice."
         },
         {
+          "label": "Read Guardians Resume State",
+          "href": "project-guide.html#guardians-resume-state",
+          "detail": "Short restart note summarizing the current checked state, what just landed, and the next highest-value work order."
+        },
+        {
           "label": "Open Guardians Conformance View",
           "href": "conformance-dashboard.html?game=galaxy-guardians#conformance",
           "detail": "Current score, gaps, and next investment areas for Guardians on the hosted dashboard."
+        }
+      ]
+    },
+    {
+      "id": "guardians-resume-state",
+      "title": "Galaxy Guardians Resume State",
+      "summary": "Short restart point: what is true now, what just landed, and what should happen next.",
+      "cards": [
+        {
+          "title": "Current checked truth",
+          "body": "Hosted `dev` still exposes a one-level visible public slice ending in `mission_complete`, but that slice now includes the opening baseline docs and the new measured opening-rack motion pass."
+        },
+        {
+          "title": "What just landed",
+          "body": "The rack now moves as a broad shared stepped sweep instead of a small per-alien wobble. That pass is grounded in the `matt-hawkins-arcade-intro/opening-rack-entry` evidence window and is preserved as a dedicated `opening-rack-motion-0.1.json` contract."
+        },
+        {
+          "title": "Best next work",
+          "body": "Next highest-value work is: tighten moving starfield motion and top-reentry timing, tighten `WAIT` and score-table layout from frame-extracted intro evidence, improve explosion and hit readability, then finish platform-frame parity before spending heavier effort on deeper stage bands."
+        },
+        {
+          "title": "Why this note exists",
+          "body": "This is the short restart point for the Guardians conformance program so we do not have to reconstruct the current state from the longer first-class, long-surface, and stage-arc plans before resuming work."
+        }
+      ],
+      "links": [
+        {
+          "label": "Read Full Resume Note",
+          "href": "project-guide.html#guardians-resume-doc",
+          "detail": "Rendered source note with the checked state, landed work, remaining gaps, and resume order."
+        },
+        {
+          "label": "Read Opening Baseline",
+          "href": "project-guide.html#guardians-opening-slice-doc",
+          "detail": "Visible first-seconds baseline for the current public Guardians slice."
+        },
+        {
+          "label": "Read Top 10 Queue",
+          "href": "project-guide.html#guardians-top-ten",
+          "detail": "Current ordered work queue after the rack-motion pass."
         }
       ]
     },
@@ -166,33 +211,33 @@
         "rows": [
           [
             "1",
-            "Opening `WAIT`, score table, reserve ships, flags, and player-ready cues",
-            "The one-level public slice still wins or loses trust in its first seconds. These are the most obvious visible misses.",
-            "[Opening-slice baseline](project-guide.html#guardians-opening-slice-doc), [stage assessment](project-guide.html#guardians-stage-arc), and [full stage-arc plan](project-guide.html#guardians-stage-arc-doc)"
+            "Moving starfield motion and top-reentry timing/visibility",
+            "The rack now has a measured shared sweep, so the next most obvious visible motion gap is the rest of the opening board: starfield life and continuous bottom-exit/top-reentry threat.",
+            "[Resume state](project-guide.html#guardians-resume-state), [opening-slice baseline](project-guide.html#guardians-opening-slice-doc), and [Guardians conformance](conformance-dashboard.html?game=galaxy-guardians#conformance)"
           ],
           [
             "2",
-            "Rack march cadence and opening left-right swarm motion",
-            "If the rack does not move with the right march-like pressure, the whole game feels off before the first dive.",
-            "[Guardians conformance](conformance-dashboard.html?game=galaxy-guardians#conformance)"
+            "`WAIT`, headline, and score-table layout/copy tightening",
+            "The copy and structure are closer than before, but they still need frame-extracted intro authority before the first seconds feel truly source-faithful.",
+            "[Opening-slice baseline](project-guide.html#guardians-opening-slice-doc)"
           ],
           [
             "3",
-            "Moving starfield motion and opening palette progression",
-            "The cabinet should feel alive before the game becomes hard; this is a visible part of Galaxian-family identity.",
-            "[Reference media inventory](project-guide.html#reference-media-inventory-doc)"
+            "Explosion, hit, and destruction-state readability",
+            "Combat feedback is still weaker than it should be at live scale even when the board motion is getting closer.",
+            "[Guardians first-class plan](project-guide.html#guardians-first-class-doc)"
           ],
           [
             "4",
-            "Bottom-exit / top-reentry threat continuity",
-            "Visible continuation through the bottom and re-entry from the top is a major authenticity cue and a real gameplay-pressure signal.",
-            "[Full stage-arc plan](project-guide.html#guardians-stage-arc-doc)"
+            "Opening palette progression and swarm color-family authority",
+            "The opening slice should look unmistakably Galaxian-family before deeper-session claims expand.",
+            "[Reference media inventory](project-guide.html#reference-media-inventory-doc)"
           ],
           [
             "5",
-            "Explosion, hit, and destruction-state readability",
-            "Combat feel is still weaker than it should be at live scale even when timing is otherwise acceptable.",
-            "[Guardians first-class plan](project-guide.html#guardians-first-class-doc)"
+            "Platform-frame parity: sign-in, scores, pilot card, replay/video capture, bug reports, music",
+            "Guardians has to sit in Platinum as naturally as Aurora or multi-game validation stays incomplete.",
+            "[Applications on Platinum](project-guide.html#applications-doc)"
           ],
           [
             "6",
@@ -208,15 +253,15 @@
           ],
           [
             "8",
-            "Platform-frame parity: sign-in, scores, pilot card, replay/video capture, bug reports, music",
-            "Guardians has to sit in Platinum as naturally as Aurora, or multi-game validation stays incomplete.",
-            "[Applications on Platinum](project-guide.html#applications-doc)"
-          ],
-          [
-            "9",
             "Game-over, mission-complete, high-score, and run-summary credibility",
             "The game should read like a real run with its own identity and outcomes, not only a preview slice with a stop point.",
             "[Guardians first-class plan](project-guide.html#guardians-first-class-doc)"
+          ],
+          [
+            "9",
+            "Selective audio cue cleanup after the visible motion/readability passes",
+            "Audio is not the first opening-slice blocker anymore; it should follow the higher-return visible board fixes unless a specific cue becomes the next clear miss.",
+            "[Audio conformance lab](project-guide.html#audio-conformance-lab-doc)"
           ],
           [
             "10",
@@ -241,6 +286,11 @@
           "label": "Read Opening-Slice Baseline",
           "href": "project-guide.html#guardians-opening-slice-doc",
           "detail": "Human-readable first-seconds baseline grounded in the committed intro and long-session reference sources."
+        },
+        {
+          "label": "Read Resume State",
+          "href": "project-guide.html#guardians-resume-state",
+          "detail": "Short checked-state note to resume the Guardians program without rereading the full strategy stack first."
         }
       ]
     },
@@ -582,6 +632,12 @@
       "title": "Galaga Target Artifact Coverage",
       "summary": "Maintained target-artifact inventory showing which online/local Galaga references are ingested, partial, candidate, or missing, especially for late challenge-stage movement work.",
       "file": "GALAGA_TARGET_ARTIFACT_COVERAGE.md"
+    },
+    {
+      "id": "guardians-resume-doc",
+      "title": "Galaxy Guardians Resume State And Next Steps",
+      "summary": "Short restart note capturing the current checked state, the opening-rack motion progress just landed, and the exact next work order.",
+      "file": "GALAXY_GUARDIANS_RESUME_STATE_AND_NEXT_STEPS.md"
     },
     {
       "id": "strategic-beta-review-doc",
