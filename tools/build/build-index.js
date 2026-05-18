@@ -68,6 +68,7 @@ const GALAGA_REFERENCE_SPRITE_TARGETS = path.join(ROOT, 'reference-artifacts', '
 const GALAGA_REFERENCE_SPRITE_MODEL = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-reference-sprites', 'model-0.1.json');
 const APPLICATION_ARTIFACT_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'application-artifact-conformance', 'latest.json');
 const CHALLENGE_STAGE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
+const LEVEL_VISUAL_CONFORMANCE_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'level-visual-conformance-index', 'latest.json');
 const GALAGA_TARGET_ARTIFACT_COVERAGE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-artifact-coverage', 'latest.json');
 const PERSONA_PERFORMANCE_DISTRIBUTION = path.join(ROOT, 'reference-artifacts', 'analyses', 'persona-performance-distribution', 'latest.json');
 const CATALOG_MEDIA_SOURCE_PATHS = new Set();
@@ -1359,19 +1360,22 @@ function projectGuideStyles(){
       margin-top:14px;
     }
     .inlineDocPreview,
-    .challengeStageDetail{
+    .challengeStageDetail,
+    .levelVisualDetail{
       border:1px solid rgba(255,255,255,0.10);
       background:rgba(7,19,31,0.72);
       border-radius:18px;
       overflow:hidden;
     }
     .inlineDocPreview summary,
-    .challengeStageDetail summary{
+    .challengeStageDetail summary,
+    .levelVisualDetail summary{
       cursor:pointer;
       list-style:none;
     }
     .inlineDocPreview summary::-webkit-details-marker,
-    .challengeStageDetail summary::-webkit-details-marker{
+    .challengeStageDetail summary::-webkit-details-marker,
+    .levelVisualDetail summary::-webkit-details-marker{
       display:none;
     }
     .inlineDocPreview summary{
@@ -1380,14 +1384,16 @@ function projectGuideStyles(){
       font-weight:800;
     }
     .inlineDocPreview summary::after,
-    .challengeStageDetail summary::after{
+    .challengeStageDetail summary::after,
+    .levelVisualDetail summary::after{
       content:"+";
       float:right;
       color:var(--accent);
       font-weight:900;
     }
     .inlineDocPreview[open] summary::after,
-    .challengeStageDetail[open] summary::after{
+    .challengeStageDetail[open] summary::after,
+    .levelVisualDetail[open] summary::after{
       content:"-";
     }
     .inlineDocPreviewBody{
@@ -1396,11 +1402,13 @@ function projectGuideStyles(){
       font-size:14px;
       line-height:1.6;
     }
-    .challengeStageList{
+    .challengeStageList,
+    .levelVisualList{
       display:grid;
       gap:12px;
     }
-    .challengeStageSummary{
+    .challengeStageSummary,
+    .levelVisualSummary{
       display:grid;
       grid-template-columns:minmax(220px,1fr) auto auto;
       gap:12px;
@@ -1408,15 +1416,32 @@ function projectGuideStyles(){
       padding:14px 16px;
       color:#f2fbff;
     }
-    .challengeStageTitle{
+    .levelVisualSummary{
+      grid-template-columns:minmax(260px,1.2fr) minmax(150px,.7fr) minmax(150px,.7fr) minmax(220px,1fr) auto;
+    }
+    .challengeStageTitle,
+    .levelVisualTitle{
       display:flex;
       flex-direction:column;
       gap:3px;
       font-weight:900;
     }
-    .challengeStageTitle small{
+    .challengeStageTitle small,
+    .levelVisualTitle small{
       color:var(--soft);
       font-weight:600;
+      line-height:1.35;
+    }
+    .levelVisualSummaryCell{
+      color:var(--soft);
+      font-size:12px;
+      line-height:1.35;
+      min-width:0;
+    }
+    .levelVisualSummaryCell strong{
+      display:block;
+      color:#eaf8ff;
+      font-size:13px;
       line-height:1.35;
     }
     .scorePill{
@@ -1433,19 +1458,58 @@ function projectGuideStyles(){
       font-weight:900;
       white-space:nowrap;
     }
-    .challengeStageDetailBody{
+    .challengeStageDetailBody,
+    .levelVisualDetailBody{
       display:grid;
       gap:14px;
       padding:0 16px 16px;
     }
     .challengeCompareGrid,
-    .challengeAxisGrid{
+    .challengeAxisGrid,
+    .levelVisualCompareGrid{
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
       gap:12px;
     }
     .challengeAxisGrid{
       grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+    .levelVisualRoleGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:12px;
+    }
+    .levelRoleCard{
+      min-width:0;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.035);
+    }
+    .levelRoleCard h4{
+      margin:0 0 8px;
+      color:#f2fbff;
+      font-size:13px;
+      letter-spacing:.02em;
+    }
+    .levelRoleImages{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:8px;
+      align-items:start;
+    }
+    .levelVisualMetricGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:8px;
+      margin-top:8px;
+      font-size:12px;
+      color:var(--soft);
+    }
+    .levelVisualMetricGrid span{
+      padding:7px 8px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.04);
     }
     .challengeEvidenceCard{
       min-width:0;
@@ -1486,7 +1550,12 @@ function projectGuideStyles(){
     @media (max-width: 980px){
       .challengeStageSummary,
       .challengeCompareGrid,
-      .challengeAxisGrid{
+      .challengeAxisGrid,
+      .levelVisualSummary,
+      .levelVisualCompareGrid{
+        grid-template-columns:1fr;
+      }
+      .levelRoleImages{
         grid-template-columns:1fr;
       }
       .scorePill{
@@ -3016,6 +3085,7 @@ let galagaReferenceSpriteTargetsCache = null;
 let galagaReferenceSpriteModelCache = null;
 let applicationArtifactConformanceCache = null;
 let challengeStageConformanceCache = null;
+let levelVisualConformanceIndexCache = null;
 let galagaTargetArtifactCoverageCache = null;
 
 function loadGalagaReferenceSpriteTargets(){
@@ -3081,6 +3151,24 @@ function loadChallengeStageConformance(){
     challengeStageConformanceCache = { stageRows: [], summary: {} };
   }
   return challengeStageConformanceCache;
+}
+
+function loadLevelVisualConformanceIndex(){
+  if(levelVisualConformanceIndexCache) return levelVisualConformanceIndexCache;
+  if(!fs.existsSync(LEVEL_VISUAL_CONFORMANCE_INDEX)){
+    levelVisualConformanceIndexCache = { rows: [], summary: {} };
+    return levelVisualConformanceIndexCache;
+  }
+  try {
+    const artifact = readJson(LEVEL_VISUAL_CONFORMANCE_INDEX);
+    levelVisualConformanceIndexCache = Object.assign({}, artifact, {
+      rows: Array.isArray(artifact.rows) ? artifact.rows : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    levelVisualConformanceIndexCache = { rows: [], summary: {} };
+  }
+  return levelVisualConformanceIndexCache;
 }
 
 function loadGalagaTargetArtifactCoverage(){
@@ -3215,6 +3303,151 @@ function challengeObjectTrackDiagramMedia(row = {}){
     alt: `${challengeStageDisplayLabel(row)} object-track and shot-opportunity sketch`,
     note: 'Generated from runtime challenge sprite silhouettes and sampled player shot lanes. This is a readable probe of visible motion and scoreability, not yet Galaga target-crop optical matching.'
   });
+}
+
+function levelVisualScore(value, label = ''){
+  if(value === null || value === undefined || !Number.isFinite(+value)){
+    return label ? `${label}: pending` : 'pending';
+  }
+  return label ? `${label}: ${Number(value).toFixed(1)}/10` : `${Number(value).toFixed(1)}/10`;
+}
+
+function levelVisualStatus(row = {}){
+  const analysis = row.analysis || {};
+  if(row.kind === 'challenge') return 'Exact challenge target';
+  if(row.targetWindow?.exact) return 'Exact regular target';
+  if(analysis.status) return analysis.status;
+  return row.targetScreenshotStatus || 'target status pending';
+}
+
+function levelVisualMedia(row = {}, side = 'current'){
+  const isTarget = side === 'target';
+  const src = isTarget ? row.targetScreenshot : row.currentScreenshot;
+  if(!src || !fs.existsSync(path.join(ROOT, normalizeAssetSourcePath(src)))){
+    return `<div class="mediaPlaceholder">${isTarget ? 'Target Galaga gameplay screenshot' : 'Current Aurora gameplay screenshot'} pending.</div>`;
+  }
+  const label = isTarget ? 'Actual Galaga target gameplay' : 'Current Aurora runtime capture';
+  const note = isTarget
+    ? `${levelVisualStatus(row)}; ${row.targetSourceTimeSeconds !== undefined ? `source time ${row.targetSourceTimeSeconds}s.` : 'source time pending.'}`
+    : `Captured from the current Aurora build at ${row.sampleSeconds ?? 'n/a'}s into this displayed row.`;
+  return renderMediaImage({
+    src,
+    label,
+    alt: `${row.label || 'Level'} ${label}`,
+    note
+  });
+}
+
+function levelVisualReferenceEvidence(row = {}){
+  const target = row.targetWindow || {};
+  const items = [
+    target.contactSheet ? { src: target.contactSheet, label: 'Target contact sheet', alt: `${row.label || 'Level'} target contact sheet`, note: target.motionRead || 'Target contact-sheet evidence.' } : null,
+    target.denseContactSheet ? { src: target.denseContactSheet, label: 'Target dense contact sheet', alt: `${row.label || 'Level'} target dense contact sheet`, note: 'Denser target-stage contact sheet for frame-by-frame visual review.' } : null,
+    target.motionSheet ? { src: target.motionSheet, label: 'Target motion sheet', alt: `${row.label || 'Level'} target motion sheet`, note: 'Motion-difference or motion-review sheet from the target-gameplay evidence.' } : null
+  ].filter(Boolean);
+  if(!items.length) return '<span class="docMeta">No supplemental target contact sheet is linked for this row yet.</span>';
+  return `<div class="levelRoleImages">${items.map(renderMediaImage).join('')}</div>`;
+}
+
+function levelVisualRoleGrid(row = {}){
+  const roles = Array.isArray(row.roles) ? row.roles : [];
+  if(!roles.length) return '<div class="mediaPlaceholder">Ship and alien bitmap evidence pending for this row.</div>';
+  return roles.map(role => {
+    const media = [
+      role.current ? { src: role.current, label: 'Aurora current bitmap', alt: `${role.label || role.key || 'role'} Aurora current bitmap`, pixelated: true, note: 'Captured from the current Aurora runtime sprite-conformance harness.' } : null,
+      role.target ? { src: role.target, label: 'Galaga target bitmap', alt: `${role.label || role.key || 'role'} Galaga target bitmap`, pixelated: true, note: 'Exact source-frame target crop when available.' } : null,
+      role.targetModel ? { src: role.targetModel, label: 'Galaga target model', alt: `${role.label || role.key || 'role'} Galaga target model`, pixelated: true, note: 'Inferred consensus model from the sprite-reference corpus.' } : null
+    ].filter(item => item && item.src && fs.existsSync(path.join(ROOT, normalizeAssetSourcePath(item.src))));
+    return `
+      <article class="levelRoleCard">
+        <h4>${esc(role.label || role.key || 'Role')}</h4>
+        ${media.length ? `<div class="levelRoleImages">${media.map(renderMediaImage).join('')}</div>` : '<div class="mediaPlaceholder">Bitmap pair pending.</div>'}
+      </article>
+    `;
+  }).join('\n');
+}
+
+function levelVisualMetrics(row = {}){
+  const metrics = row.conformanceMetrics || row.analysis || {};
+  const entries = [
+    ['Overall', metrics.score10],
+    ['Movement', metrics.movementScore10],
+    ['Graphics', metrics.graphicsScore10],
+    ['Alien novelty', metrics.noveltyScore10],
+    ['Progression', metrics.progressionScore10]
+  ];
+  return `<div class="levelVisualMetricGrid">${entries.map(([label, value]) => `<span>${esc(levelVisualScore(value, label))}</span>`).join('')}</div>`;
+}
+
+function renderLevelVisualDetail(row = {}){
+  const analysis = row.analysis || {};
+  const metrics = row.conformanceMetrics || {};
+  const score = metrics.score10 ?? analysis.score10;
+  const movement = metrics.movementScore10 ?? analysis.movementScore10;
+  const graphics = metrics.graphicsScore10 ?? analysis.graphicsScore10;
+  const novelty = metrics.noveltyScore10 ?? analysis.noveltyScore10;
+  const orderLabel = row.kind === 'challenge'
+    ? `Challenge ${row.challengeNumber || ''}`
+    : `Level ${row.displayLevel || ''}`;
+  const targetStatus = levelVisualStatus(row);
+  const scoreLabel = score !== null && score !== undefined && Number.isFinite(+score)
+    ? `${Number(score).toFixed(1)}/10`
+    : 'unscored';
+  const targetRead = row.targetWindow?.motionRead || analysis.variationRead || 'Target read pending.';
+  const currentRead = analysis.currentRead || row.currentRoleRead || 'Current scene read pending.';
+  return `
+    <details class="levelVisualDetail" id="level-visual-${esc(row.id || row.displayOrder || '')}">
+      <summary class="levelVisualSummary">
+        <span class="levelVisualTitle">
+          <span>${esc(row.label || orderLabel)}</span>
+          <small>${esc(orderLabel)} · ${esc(row.kind === 'challenge' ? 'Challenging Stage' : 'Regular Level')} · ${esc(targetStatus)}</small>
+        </span>
+        <span class="levelVisualSummaryCell"><strong>${esc(scoreLabel)}</strong>${esc(analysis.status || targetStatus)}</span>
+        <span class="levelVisualSummaryCell"><strong>${esc(levelVisualScore(movement))} movement</strong>${esc(levelVisualScore(graphics))} graphics; ${esc(levelVisualScore(novelty))} novelty</span>
+        <span class="levelVisualSummaryCell"><strong>Scene roles</strong>${esc(row.currentRoleRead || (row.targetWindow?.targetFamilies || []).join(', ') || 'role read pending')}</span>
+        <span class="scorePill">${row.targetWindow?.exact ? 'exact target' : 'representative target'}</span>
+      </summary>
+      <div class="levelVisualDetailBody">
+        <div class="levelVisualCompareGrid">
+          <article class="challengeEvidenceCard">
+            <h3>Reference Target</h3>
+            ${levelVisualMedia(row, 'target')}
+            <p>${esc(targetRead)}</p>
+            <p class="docMeta">Target families: ${esc((row.targetWindow?.targetFamilies || []).join(', ') || 'pending')}.</p>
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>Aurora Current</h3>
+            ${levelVisualMedia(row, 'current')}
+            <p>${esc(currentRead)}</p>
+            <p class="docMeta">Captured from the current local/runtime build. Enemy count ${esc(row.currentEnemyCount ?? 'n/a')}; challenge enemies ${esc(row.challengeEnemyCount ?? 'n/a')}.</p>
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>Conformance Read</h3>
+            <p>${esc(analysis.playerFacingRead || 'Player-facing conformance read pending.')}</p>
+            <p><strong>Critical gap:</strong> ${esc(analysis.criticalGap || 'Gap pending.')}</p>
+            <p><strong>Next:</strong> ${esc(analysis.next || 'Next measurement/action pending.')}</p>
+            ${levelVisualMetrics(row)}
+          </article>
+        </div>
+        <div class="challengeEvidenceCard">
+          <h3>Aliens, Ships, And Bitmaps</h3>
+          <p class="docMeta">The cards below pair current Aurora runtime bitmaps with Galaga target crops/models for each ship or alien family visible or expected in this scene. Static bitmap similarity is not the whole conformance story; live motion, entry route, flapping/pulsing, capture/rescue, and formation context still require temporal scoring.</p>
+          <div class="levelVisualRoleGrid">
+            ${levelVisualRoleGrid(row)}
+          </div>
+        </div>
+        <details class="inlineDocPreview">
+          <summary>Open supporting target sheets and measurement notes</summary>
+          <div class="inlineDocPreviewBody">
+            <p><strong>Target grounding:</strong> ${esc(targetStatus)}. ${row.targetWindow?.exact ? 'This row has an exact ingested target window.' : 'This row uses an actual Galaga gameplay frame as a representative target until exact per-level normal-stage windows are ingested.'}</p>
+            <p><strong>Variation read:</strong> ${esc(analysis.variationRead || 'Variation read pending.')}</p>
+            <p><strong>Aurora contract:</strong> ${esc(row.targetWindow?.auroraContract || 'Contract pending.')}</p>
+            ${levelVisualReferenceEvidence(row)}
+          </div>
+        </details>
+      </div>
+    </details>
+  `;
 }
 
 function renderChallengeStageDetail(row = {}){
@@ -3658,6 +3891,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'conformance-alien-index', title: 'Alien Conformance Index' },
     { id: 'conformance-audio-index', title: 'Audio Conformance Index' },
     { id: 'stage-conformance-summary', title: 'Stage Conformance Summary' },
+    { id: 'level-visual-conformance-index', title: 'Level Visual Index' },
     { id: 'challenge-stage-conformance', title: 'Challenge Stage Deep Dive' },
     { id: 'persona-catalog', title: 'Testing Personas' },
     { id: 'persona-performance-distribution', title: 'Persona Performance Distribution' },
@@ -3824,6 +4058,11 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const challengeSummary = challengeStageConformance.summary || {};
   const challengeStageRows = (challengeStageConformance.stageRows || []).map(renderChallengeStageDetail).join('\n') || `
     <div class="docWrap"><span class="docMeta">Challenge-stage conformance analysis pending. Run <code>npm run harness:analyze:challenge-stage-conformance</code>.</span></div>
+  `;
+  const levelVisualIndex = loadLevelVisualConformanceIndex();
+  const levelVisualSummary = levelVisualIndex.summary || {};
+  const levelVisualRows = (levelVisualIndex.rows || []).map(renderLevelVisualDetail).join('\n') || `
+    <div class="docWrap"><span class="docMeta">Level visual conformance index pending. Run <code>npm run harness:analyze:level-visual-conformance-index</code>.</span></div>
   `;
   const personaRows = (guide.personaRows || []).map((entry) => `
     <tr>
@@ -4195,6 +4434,22 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
                 ${stageConformanceRows}
               </tbody>
             </table>
+          </div>
+        </section>
+
+        <section class="section" id="level-visual-conformance-index">
+          <div class="sectionHeader">
+            <h2>Level Visual Conformance Index</h2>
+            <p>Ordered current-versus-target visual evidence for every Aurora level and each Challenging Stage. Each row keeps the current runtime screenshot beside an actual Galaga gameplay target frame, then expands into scene roles, bitmap pairs, conformance metrics, and the next gap.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Current read:</strong> ${esc(levelVisualSummary.rowCount || 0)} ordered rows; ${esc(levelVisualSummary.regularLevelCount || 0)} regular levels; ${esc(levelVisualSummary.challengeStageCount || 0)} challenging stages; ${esc(levelVisualSummary.currentScreenshotCount || 0)} Aurora screenshots; ${esc(levelVisualSummary.targetScreenshotCount || 0)} target gameplay screenshots.</p>
+            <p><strong>Conformance pressure:</strong> ${esc(levelVisualSummary.challengeScore10 ?? 'n/a')}/10 challenge visual conformance and ${esc(levelVisualSummary.targetGroundingScore10 ?? 'n/a')}/10 target grounding. ${esc(levelVisualSummary.read || 'Run the level visual index analyzer to refresh this readout.')}</p>
+            <p class="docMeta"><strong>Target-grounding caveat:</strong> ${esc(levelVisualSummary.exactTargetRows || 0)}/${esc(levelVisualSummary.rowCount || 0)} rows currently use exact ingested target windows. ${esc(levelVisualSummary.representativeTargetRows || 0)} regular-level rows use representative actual Galaga gameplay frames until the normal-stage corpus is extended. That means the section is excellent for seeing the shape of the gap, but it is not yet a complete per-level proof of conformance.</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/level-visual-conformance-index/latest.json</code>. <strong>Report:</strong> <code>LEVEL_VISUAL_CONFORMANCE_INDEX.md</code>.</p>
+          </div>
+          <div class="levelVisualList">
+            ${levelVisualRows}
           </div>
         </section>
 

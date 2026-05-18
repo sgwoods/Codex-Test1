@@ -1,29 +1,31 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-18T12-38-39-576Z-40429",
-  "startedAt": "2026-05-18T12:38:39.576Z",
-  "endedAt": "2026-05-18T12:38:39.577Z",
+  "id": "2026-05-18T12-57-37-332Z-45674",
+  "startedAt": "2026-05-18T12:57:37.332Z",
+  "endedAt": "2026-05-18T12:58:32.969Z",
   "branch": "codex/macbook-conformance-investment-review",
-  "commit": "e583b558",
+  "commit": "9384ac8e",
   "command": [
-    "manual:model-usage"
+    "npm",
+    "run",
+    "harness:analyze:level-visual-conformance-index"
   ],
   "axes": [
-    "conformance-retrospective",
-    "conformance-economics"
+    "level-visual-index",
+    "challenge-stage-conformance"
   ],
   "resources": [
-    "codex",
-    "gpu-equivalent"
+    "cpu",
+    "browser"
   ],
-  "notes": "model-assisted self-critical conformance investment review, docs/dashboard wiring, and recommendations",
+  "notes": "",
   "measurement": {
-    "wallSeconds": 1800,
-    "timeRealSeconds": null,
-    "timeUserSeconds": null,
-    "timeSystemSeconds": null,
-    "cpuSeconds": 0,
+    "wallSeconds": 55.637,
+    "timeRealSeconds": 55.63,
+    "timeUserSeconds": 60.13,
+    "timeSystemSeconds": 23.38,
+    "cpuSeconds": 83.51,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -31,12 +33,12 @@
   "resourcesDeclared": {
     "gpuMode": null,
     "gpuSeconds": null,
-    "modelProvider": "openai",
-    "modelName": "gpt-5",
+    "modelProvider": null,
+    "modelName": null,
     "modelCalls": 0,
     "inputTokens": 0,
     "outputTokens": 0,
-    "modelMinutes": 30,
+    "modelMinutes": 0,
     "codexUsage5hLeftPercent": null,
     "codexUsageWeekLeftPercent": null,
     "codexModel5hLeftPercent": null,
@@ -45,8 +47,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 1097776840,
-    "artifactBytesAfter": 1097776840,
-    "artifactBytesDelta": 0
+    "artifactBytesBefore": 1098047791,
+    "artifactBytesAfter": 1105151042,
+    "artifactBytesDelta": 7103251
   }
 }
