@@ -213,6 +213,10 @@ function buildReport(){
   const pathFamilyScore = Number.isFinite(+pathFamily.summary?.score10)
     ? +pathFamily.summary.score10
     : null;
+  const pathFamilyCapReason = pathFamily.summary?.referenceComparisonCapReason || null;
+  const pathFamilyLabelSupport = pathFamily.summary?.referenceLabelSupport || {};
+  const pathFamilyTrajectoryComparison = pathFamily.summary?.referenceTrajectoryComparison || {};
+  const labelBackedPathFamilyReady = !!pathFamilyLabelSupport.labelBackedComparisonReady;
   const runtimeSlotTrackCount = (pathSlot.summary?.regularSlotTracks || 0) + (pathSlot.summary?.challengeSlotTracks || 0);
   const runtimePathTrackCount = pathSlot.summary?.movingTracks || 0;
   const runtimeBossMovingTrackCount = pathSlot.summary?.bossMovingTracks || 0;
@@ -269,12 +273,16 @@ function buildReport(){
         ? round(10 * ((0.55 * clamp(pathHintCount / Math.max(windows.length, 1))) + (0.45 * clamp(formationSlotHintCount / Math.max(windows.length, 1)))) , 1)
         : round(pathSlotScore, 1),
       calculation: pathFamilyScore != null
-        ? 'Heuristic path-family comparison score from extracted runtime trajectories, capped until frame-labeled Galaga reference path families are available.'
+        ? (labelBackedPathFamilyReady
+          ? 'Media-backed path-family comparison score from extracted runtime trajectories and accepted Galaga contact-sheet labels, capped below future tracked reference-trajectory comparison.'
+          : 'Heuristic path-family comparison score from extracted runtime trajectories, capped until frame-labeled Galaga reference path families are available.')
         : pathSlotScore == null
         ? 'Direct motion-hint and formation slot-coordinate evidence coverage. This intentionally remains low until frame-level path extraction is promoted.'
         : 'Runtime path/slot extraction score, capped at the current no-reference-comparison ceiling so extraction coverage does not masquerade as arcade-perfect path fidelity.',
       currentRead: pathFamilyScore != null
-        ? `${classifiedPathFamilyCount} tracks classified into path families; expected family coverage ${round(expectedPathFamilyCoverage)}; capped score ${pathFamilyScore}/10 until direct reference labels land.`
+        ? (labelBackedPathFamilyReady
+          ? `${classifiedPathFamilyCount} tracks classified into path families; expected family coverage ${round(expectedPathFamilyCoverage)}; accepted Galaga labels ${pathFamilyLabelSupport.acceptedRegularEntryCount || 0} regular / ${pathFamilyLabelSupport.acceptedChallengeEntryCount || 0} challenge; trajectory-vector/rack score ${round(pathFamilyTrajectoryComparison.score10, 1)}/10 (${pathFamilyTrajectoryComparison.status || 'not-run'}); cap ${pathFamilyScore}/10 (${pathFamilyCapReason}).`
+          : `${classifiedPathFamilyCount} tracks classified into path families; expected family coverage ${round(expectedPathFamilyCoverage)}; capped score ${pathFamilyScore}/10 until direct reference labels land.`)
         : pathSlotScore == null
         ? `${pathHintCount} motion hints and ${formationSlotHintCount} formation slot hints across ${windows.length} windows.`
         : `${runtimePathTrackCount} moving tracks, ${runtimeBossMovingTrackCount} moving boss tracks, and ${runtimeSlotTrackCount} slot tracks; capped score ${pathSlotScore}/10 until reference path comparison lands.`,
@@ -311,12 +319,17 @@ function buildReport(){
       runtimeBossMovingTrackCount,
       pathFamilyScore10: pathFamily.summary?.score10 ?? null,
       pathFamilyComparisonConfidence: pathFamily.summary?.comparisonConfidence ?? null,
+      pathFamilyReferenceCapReason: pathFamilyCapReason,
+      pathFamilyReferenceLabelSupport: pathFamilyLabelSupport,
+      pathFamilyReferenceTrajectoryComparison: pathFamilyTrajectoryComparison,
       classifiedPathFamilyCount,
       expectedPathFamilyCoverage,
       weakestMetric,
       strongestMetric,
       topProblem: weakestMetric.id === 'path-shape-precision'
-        ? 'Boss/escort path-shape precision is still capped because the scorer has heuristic runtime path families before it has frame-labeled Galaga reference-family comparison.'
+        ? (labelBackedPathFamilyReady
+          ? 'Boss/escort path-shape precision now has media-backed Galaga path-family labels; the next cap is tracked reference trajectory and rack-slot comparison.'
+          : 'Boss/escort path-shape precision is still capped because the scorer has heuristic runtime path families before it has frame-labeled Galaga reference-family comparison.')
         : `${weakestMetric.label} is the largest measured gap in the current evidence set.`,
       strategy: 'Promote boss/escort/challenge path traces, formation slot coordinates, and stage-family entry labels into the ingestion corpus, then use this scorer to rank stage scripts and runtime changes.',
       successMeasure: 'Raise this family above 8.0/10 with path-shape precision above 5.0/10, minimum regular-stage signature distance above 0.16, and at least two challenge windows with distinct pattern identity.'

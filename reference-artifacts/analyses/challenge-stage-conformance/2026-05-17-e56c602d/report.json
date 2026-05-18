@@ -1,0 +1,2583 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "challenge-stage-conformance",
+  "generatedAt": "2026-05-17T16:54:04.588Z",
+  "commit": "e56c602d",
+  "branch": "codex/macbook-challenge-reference-ingestion",
+  "challengeStages": [
+    3,
+    7,
+    11,
+    15,
+    19,
+    23,
+    27,
+    31
+  ],
+  "summary": {
+    "score10": 2.8,
+    "interestingFactorScore10": 2.8,
+    "movementConformanceScore10": 3,
+    "graphicalConformanceScore10": 2.1,
+    "alienNoveltyScore10": 3.4,
+    "progressionConformanceScore10": 2.6,
+    "safetyRuleScore10": 10,
+    "legacyCoverageScore10": 6.4,
+    "confidence": "medium-high for the gap; medium-low for exact remediation size",
+    "resolution": "strict stage-by-stage browser runtime probe plus media-backed Galaga challenge labels; broad legacy path/type coverage is retained as diagnostic evidence only",
+    "scoringModel": "strict-v2-user-baseline",
+    "startingAssumption": "Each challenge stage starts at 1.0/10 for interesting factor, movement conformance, and graphical conformance. Safety is a pass/fail guardrail and no longer inflates player-facing conformance.",
+    "strongestFinding": "Sampled challenge windows preserve the Galaga-like no-shot/no-ship-loss rule.",
+    "stage3ExpectedReferenceHit": true,
+    "challenge2BestMatchCount": 0,
+    "weakestFinding": "current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 3/10, strict graphics is 2.1/10, alien/stage novelty is 3.4/10, active sprite-motion evidence is missing, and late challenge references are first-pass window labels rather than full five-group object tracks. Diagnostic legacy coverage was 6.4/10, which is why the old read was too generous.",
+    "playerMeaning": "A player should experience challenging stages as safe but tense score exhibitions with memorable entry routes, fresh alien types, readable trajectories, and a learnable perfect-bonus opportunity. Aurora currently preserves the safety rule, but the actual spectacle, motion, and visual novelty are still early.",
+    "designerMeaning": "Design work should move from broad path-family labels to explicit per-challenge contracts: group order, first-visible frame, entry side, exit side, path length, turn count, alien family, animation phases, bonus opportunity, and result feedback.",
+    "sourceScores": {
+      "alienEntryChallengeVariation": 8.3,
+      "challengeArrivalVsAppearance": 8.1,
+      "challengePatternNoveltyDepth": 7.8
+    }
+  },
+  "stageRows": [
+    {
+      "stage": 3,
+      "challengeNumber": 1,
+      "auroraWindowId": "challenge-stage-candidate",
+      "auroraLayoutId": "first-challenge-peel",
+      "pathFamily": "first-challenge-peel",
+      "laneTypes": [
+        "bee",
+        "bee",
+        "bee",
+        "bee",
+        "but",
+        "but",
+        "but",
+        "but"
+      ],
+      "runtimeFirstWaveTypes": "bee, bee, bee, bee, but, but, but, but",
+      "runtimeGroupSignatures": [
+        {
+          "group": 0,
+          "types": [
+            "bee",
+            "bee",
+            "bee",
+            "bee",
+            "but",
+            "but",
+            "but",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "first-challenge-peel"
+          ],
+          "spawnSpan": 0.48
+        },
+        {
+          "group": 1,
+          "types": [
+            "but",
+            "but",
+            "but",
+            "but",
+            "bee",
+            "bee",
+            "bee",
+            "bee"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "first-challenge-peel"
+          ],
+          "spawnSpan": 0.48
+        },
+        {
+          "group": 2,
+          "types": [
+            "bee",
+            "bee",
+            "but",
+            "but",
+            "but",
+            "but",
+            "bee",
+            "bee"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "first-challenge-peel"
+          ],
+          "spawnSpan": 0.48
+        },
+        {
+          "group": 3,
+          "types": [
+            "but",
+            "bee",
+            "bee",
+            "but",
+            "but",
+            "bee",
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "first-challenge-peel"
+          ],
+          "spawnSpan": 0.48
+        },
+        {
+          "group": 4,
+          "types": [
+            "bee",
+            "but",
+            "bee",
+            "but",
+            "but",
+            "bee",
+            "but",
+            "bee"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "first-challenge-peel"
+          ],
+          "spawnSpan": 0.48
+        }
+      ],
+      "runtimeVisualFamilies": [
+        "classic"
+      ],
+      "galagaTarget": "First Galaga-style challenging stage: readable bonus set piece, no fire, no ship loss, upper-band mirrored entries, bee/butterfly line waves, visible arrival/peel-off.",
+      "criticalExpectation": "Should teach the player that challenge stages are safe, scoreable pattern reads rather than combat waves.",
+      "expectedReferenceLabels": [
+        "challenge-1-arrival-group-1",
+        "challenge-1-late-wave-group-4"
+      ],
+      "bestReferenceMatch": {
+        "labelId": "challenge-1-late-wave-group-4",
+        "kind": "challengeEntry",
+        "entityFamily": "butterfly-line",
+        "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/contact-sheet.jpg",
+        "distance": 0.1649,
+        "trajectoryScore10": 7.8,
+        "semanticScore10": null,
+        "score10": 8.2,
+        "components": {
+          "xRange": 1,
+          "yRange": 1,
+          "pathLength": 0.681,
+          "turnCount": 1,
+          "reversalCount": 0.8,
+          "lowerFieldShare": 0.317
+        }
+      },
+      "referenceMatchScore10": 8.2,
+      "runtimeVector": {
+        "xRange": 1.4,
+        "yRange": 0.5081,
+        "pathLength": 0.4901,
+        "turnCount": 1.6,
+        "reversalCount": 0.2,
+        "lowerFieldShare": 0.1556,
+        "rackSlotError": 0,
+        "timingOffsetS": 0
+      },
+      "galagaReferenceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/contact-sheet.jpg",
+      "galagaReferenceMeaning": "late challenge group crosses through upper lanes before peel-off",
+      "safetyProbe": {
+        "noEnemyShots": true,
+        "noAttackStarts": true,
+        "noShipLosses": true,
+        "eventCounts": {
+          "enemyShots": 0,
+          "enemyAttackStarts": 0,
+          "shipLosses": 0,
+          "challengeContacts": 0
+        }
+      },
+      "motionProbe": {
+        "sampleCount": 9,
+        "activeSamples": 9,
+        "minActive": 40,
+        "maxActive": 40,
+        "meanActive": 40,
+        "xRange": 297.811,
+        "yRange": 39.441,
+        "lowerFieldShare": 0.156
+      },
+      "currentRead": "first-challenge-peel / first-challenge-peel; lanes bee, bee, bee, bee, but, but, but, but; first-wave types bee, bee, bee, bee, but, but, but, but; visual families classic; strict movement 3.3/10, graphics 2.1/10, alien novelty 3.4/10.",
+      "graphicsRead": "Strict graphics score 2.1/10. Current visible family/type labels are present, but challenge-window graphics are capped at 2.2/10 until live sprite flaps, pulsing, rotation/dive silhouettes, capture/rescue transitions, and Galaga target sprite crops are scored in motion.",
+      "movementRead": "Strict movement score 3.3/10 against challenge-1-late-wave-group-4: y-range fit 1, path-length fit 0.68, turn fit 1. Current probes are still sampled summaries, so full temporal choreography is not yet proven. Legacy broad vector best-match was 8.2/10 against challenge-1-late-wave-group-4; xRange 1.4, yRange 0.5081, pathLength 0.4901.",
+      "alienVariationRead": "Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments. Opening wave exposes 2 type(s) and classic visual family labels. Group identity diagnostic: 5/5 wave type signatures and 1/5 path signatures; average within-wave spawn span 0.48s.",
+      "groupIdentityRead": "5/5 wave type signatures and 1/5 path signatures; average within-wave spawn span 0.48s.",
+      "groupIdentityScore10": 7.2,
+      "criticalGaps": [
+        "Movement conformance is only 3.3/10 under the strict scorer: current paths are too short/shallow and do not yet show the sweeping, turning, learnable Galaga challenge-stage trajectories.",
+        "Graphical conformance is only 2.1/10 because challenge sprites are still scored as static/type labels; active flapping, pulsing, dive/rotation silhouettes, and reference sprite crops are not yet measured in the challenge window.",
+        "Alien/stage novelty is only 3.4/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns."
+      ],
+      "nextActions": [
+        "Protect the first-challenge bee/butterfly line contract, then tune path length, turn count, and rack-slot precision against challenge-1 arrival and late-wave labels.",
+        "Add contact-sheet comparison for first-visible frame, entry side, exit side, lane occupancy, and group timing so the next tuning pass can improve trajectory precision without subjective guessing."
+      ],
+      "interestingFactor10": 2.9,
+      "conformanceScore10": 2.9,
+      "legacyCoverageScore10": 6.2,
+      "movementConformanceScore10": 3.3,
+      "graphicalConformanceScore10": 2.1,
+      "alienNoveltyScore10": 3.4,
+      "progressionConformanceScore10": 2.8,
+      "safetyRuleScore10": 10,
+      "strictAxisReads": {
+        "movement": {
+          "score10": 3.3,
+          "rawFit": 0.8,
+          "referenceLabelId": "challenge-1-late-wave-group-4",
+          "referenceReliability": 0.92,
+          "temporalCoverage": 0.58,
+          "components": {
+            "yRange": 1,
+            "pathLength": 0.681,
+            "turnCount": 1,
+            "reversalCount": 0.8,
+            "lowerFieldShare": 0.203,
+            "trajectoryBestMatch": 0.78
+          },
+          "read": "Strict movement score 3.3/10 against challenge-1-late-wave-group-4: y-range fit 1, path-length fit 0.68, turn fit 1. Current probes are still sampled summaries, so full temporal choreography is not yet proven."
+        },
+        "graphics": {
+          "score10": 2.1,
+          "activeMotionCap": 2.2,
+          "measuredRuntimeSpriteMotionCoverage": 0,
+          "components": {
+            "alienTypeMix": 0.09,
+            "visualFamilyNovelty": 0,
+            "firstChallengeLineContract": 0.18,
+            "activeSpriteMotionCoverage": 0
+          },
+          "read": "Strict graphics score 2.1/10. Current visible family/type labels are present, but challenge-window graphics are capped at 2.2/10 until live sprite flaps, pulsing, rotation/dive silhouettes, capture/rescue transitions, and Galaga target sprite crops are scored in motion."
+        },
+        "alienNovelty": {
+          "score10": 3.4,
+          "components": {
+            "firstChallengeSemantic": 0.35,
+            "typeMix": 0.14,
+            "familyNovelty": 0,
+            "groupDiversity": 0.2,
+            "referenceStageCredit": 0.16
+          },
+          "read": "Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments."
+        },
+        "progression": {
+          "score10": 2.8,
+          "pathFamilies": [
+            "first-challenge-peel"
+          ],
+          "components": {
+            "pathFamilyCredit": 0.05,
+            "referenceCredit": 0.24,
+            "stageRoleCredit": 0.12,
+            "lateReferencePenalty": 0
+          },
+          "read": "Strict progression score 2.8/10. The current stage has 1 path-family label(s), but later challenge stages are not yet backed by enough reference-specific set-piece contracts to claim real Galaga progression."
+        }
+      },
+      "expectedReferenceHit": true,
+      "scoreComponents": {
+        "baseline": 1,
+        "movementConformance": 3.3,
+        "graphicalConformance": 2.1,
+        "alienNovelty": 3.4,
+        "stageProgression": 2.8,
+        "safetyRule": 10,
+        "legacyCoverageScore": 6.2
+      },
+      "evidence": [
+        "reference-artifacts/analyses/galaga-path-reference-labels/latest.json",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
+        "reference-artifacts/analyses/formation-boss-path-family-comparison/latest.json",
+        "reference-artifacts/analyses/alien-entry-challenge-variation/latest.json",
+        "browser-backed challengeFormationState runtime probe"
+      ]
+    },
+    {
+      "stage": 7,
+      "challengeNumber": 2,
+      "auroraWindowId": "challenge-stage-scorpion-cross",
+      "auroraLayoutId": "scorpion-cross-sweep",
+      "pathFamily": "cross-sweep",
+      "laneTypes": [
+        "but",
+        "boss",
+        "rogue",
+        "bee",
+        "bee",
+        "rogue",
+        "boss",
+        "but"
+      ],
+      "runtimeFirstWaveTypes": "but, boss, rogue, bee, bee, rogue, boss, but",
+      "runtimeGroupSignatures": [
+        {
+          "group": 0,
+          "types": [
+            "but",
+            "boss",
+            "rogue",
+            "bee",
+            "bee",
+            "rogue",
+            "boss",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "cross-sweep"
+          ],
+          "spawnSpan": 0.42
+        },
+        {
+          "group": 1,
+          "types": [
+            "bee",
+            "rogue",
+            "but",
+            "boss",
+            "boss",
+            "but",
+            "rogue",
+            "bee"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "cross-sweep"
+          ],
+          "spawnSpan": 0.42
+        },
+        {
+          "group": 2,
+          "types": [
+            "boss",
+            "but",
+            "bee",
+            "rogue",
+            "rogue",
+            "bee",
+            "but",
+            "boss"
+          ],
+          "families": [
+            "scorpion"
+          ],
+          "pathFamilies": [
+            "hook-arc"
+          ],
+          "spawnSpan": 0.42
+        },
+        {
+          "group": 3,
+          "types": [
+            "rogue",
+            "bee",
+            "boss",
+            "but",
+            "but",
+            "boss",
+            "bee",
+            "rogue"
+          ],
+          "families": [
+            "scorpion"
+          ],
+          "pathFamilies": [
+            "cross-sweep"
+          ],
+          "spawnSpan": 0.42
+        },
+        {
+          "group": 4,
+          "types": [
+            "but",
+            "rogue",
+            "boss",
+            "bee",
+            "bee",
+            "boss",
+            "rogue",
+            "but"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "boss-led-loop"
+          ],
+          "spawnSpan": 0.42
+        }
+      ],
+      "runtimeVisualFamilies": [
+        "classic"
+      ],
+      "galagaTarget": "Second challenge should feel denser and more novel than challenge 1 while staying nonlethal and non-shooting.",
+      "criticalExpectation": "Should introduce a stronger mixed-family visual grammar and a learnable crossing pattern.",
+      "expectedReferenceLabels": [
+        "challenge-2-arrival-group-1"
+      ],
+      "bestReferenceMatch": {
+        "labelId": "challenge-4-pink-serpentine-group-1",
+        "kind": "challengeEntry",
+        "entityFamily": "pink-serpentine-specialty",
+        "sourceAnchor": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-2fps.jpg",
+        "distance": 0.0379,
+        "trajectoryScore10": 8.9,
+        "semanticScore10": null,
+        "score10": 8.9,
+        "components": {
+          "xRange": 1,
+          "yRange": 1,
+          "pathLength": 1,
+          "turnCount": 1,
+          "reversalCount": 0.8,
+          "lowerFieldShare": 0.821
+        }
+      },
+      "referenceMatchScore10": 8.9,
+      "runtimeVector": {
+        "xRange": 1.3571,
+        "yRange": 0.7703,
+        "pathLength": 0.9567,
+        "turnCount": 3.2,
+        "reversalCount": 2.2,
+        "lowerFieldShare": 0.125,
+        "rackSlotError": 0,
+        "timingOffsetS": 0
+      },
+      "galagaReferenceAnchor": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-2fps.jpg",
+      "galagaReferenceMeaning": "late challenge specialty arc with long readable upper-field scoring lane",
+      "safetyProbe": {
+        "noEnemyShots": true,
+        "noAttackStarts": true,
+        "noShipLosses": true,
+        "eventCounts": {
+          "enemyShots": 0,
+          "enemyAttackStarts": 0,
+          "shipLosses": 0,
+          "challengeContacts": 10
+        }
+      },
+      "motionProbe": {
+        "sampleCount": 9,
+        "activeSamples": 8,
+        "minActive": 38,
+        "maxActive": 40,
+        "meanActive": 39,
+        "xRange": 351.256,
+        "yRange": 57.644,
+        "lowerFieldShare": 0.125
+      },
+      "currentRead": "scorpion-cross-sweep / cross-sweep; lanes but, boss, rogue, bee, bee, rogue, boss, but; first-wave types but, boss, rogue, bee, bee, rogue, boss, but; visual families classic; strict movement 2.7/10, graphics 1.7/10, alien novelty 3.4/10.",
+      "graphicsRead": "Strict graphics score 1.7/10. Current visible family/type labels are present, but challenge-window graphics are capped at 2.2/10 until live sprite flaps, pulsing, rotation/dive silhouettes, capture/rescue transitions, and Galaga target sprite crops are scored in motion.",
+      "movementRead": "Strict movement score 2.7/10 against challenge-2-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 1. Current probes are still sampled summaries, so full temporal choreography is not yet proven. Legacy broad vector best-match was 8.9/10 against challenge-4-pink-serpentine-group-1; xRange 1.3571, yRange 0.7703, pathLength 0.9567.",
+      "alienVariationRead": "Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments. Opening wave exposes 4 type(s) and classic visual family labels. Group identity diagnostic: 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.42s.",
+      "groupIdentityRead": "5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.42s.",
+      "groupIdentityScore10": 8.3,
+      "criticalGaps": [
+        "Best reference match is challenge-4-pink-serpentine-group-1, not expected challenge-2-arrival-group-1.",
+        "Movement conformance is only 2.7/10 under the strict scorer: current paths are too short/shallow and do not yet show the sweeping, turning, learnable Galaga challenge-stage trajectories.",
+        "Graphical conformance is only 1.7/10 because challenge sprites are still scored as static/type labels; active flapping, pulsing, dive/rotation silhouettes, and reference sprite crops are not yet measured in the challenge window.",
+        "Alien/stage novelty is only 3.4/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
+        "Cross-sweep identity is visible in labels, but the measured vector still lands closest to the same challenge-2 reference as most other challenge stages."
+      ],
+      "nextActions": [
+        "Tune challenge 2 toward the denser mixed-novelty-line reference instead of relying on a generic cross-sweep.",
+        "Score separate group identities so stage 7 is not just a slightly wider stage 3."
+      ],
+      "interestingFactor10": 2.5,
+      "conformanceScore10": 2.5,
+      "legacyCoverageScore10": 5.9,
+      "movementConformanceScore10": 2.7,
+      "graphicalConformanceScore10": 1.7,
+      "alienNoveltyScore10": 3.4,
+      "progressionConformanceScore10": 2.4,
+      "safetyRuleScore10": 10,
+      "strictAxisReads": {
+        "movement": {
+          "score10": 2.7,
+          "rawFit": 0.85,
+          "referenceLabelId": "challenge-2-arrival-group-1",
+          "referenceReliability": 0.62,
+          "temporalCoverage": 0.58,
+          "components": {
+            "yRange": 1,
+            "pathLength": 1,
+            "turnCount": 1,
+            "reversalCount": 0,
+            "lowerFieldShare": 0.542,
+            "trajectoryBestMatch": 0.89
+          },
+          "read": "Strict movement score 2.7/10 against challenge-2-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 1. Current probes are still sampled summaries, so full temporal choreography is not yet proven."
+        },
+        "graphics": {
+          "score10": 1.7,
+          "activeMotionCap": 2.2,
+          "measuredRuntimeSpriteMotionCoverage": 0,
+          "components": {
+            "alienTypeMix": 0.18,
+            "visualFamilyNovelty": 0,
+            "firstChallengeLineContract": 0,
+            "activeSpriteMotionCoverage": 0
+          },
+          "read": "Strict graphics score 1.7/10. Current visible family/type labels are present, but challenge-window graphics are capped at 2.2/10 until live sprite flaps, pulsing, rotation/dive silhouettes, capture/rescue transitions, and Galaga target sprite crops are scored in motion."
+        },
+        "alienNovelty": {
+          "score10": 3.4,
+          "components": {
+            "firstChallengeSemantic": 0,
+            "typeMix": 0.28,
+            "familyNovelty": 0,
+            "groupDiversity": 0.2,
+            "referenceStageCredit": 0.08
+          },
+          "read": "Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments."
+        },
+        "progression": {
+          "score10": 2.4,
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc",
+            "boss-led-loop"
+          ],
+          "components": {
+            "pathFamilyCredit": 0.15,
+            "referenceCredit": 0,
+            "stageRoleCredit": 0.16,
+            "lateReferencePenalty": 0
+          },
+          "read": "Strict progression score 2.4/10. The current stage has 3 path-family label(s), but later challenge stages are not yet backed by enough reference-specific set-piece contracts to claim real Galaga progression."
+        }
+      },
+      "expectedReferenceHit": false,
+      "scoreComponents": {
+        "baseline": 1,
+        "movementConformance": 2.7,
+        "graphicalConformance": 1.7,
+        "alienNovelty": 3.4,
+        "stageProgression": 2.4,
+        "safetyRule": 10,
+        "legacyCoverageScore": 5.9
+      },
+      "evidence": [
+        "reference-artifacts/analyses/galaga-path-reference-labels/latest.json",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
+        "reference-artifacts/analyses/formation-boss-path-family-comparison/latest.json",
+        "reference-artifacts/analyses/alien-entry-challenge-variation/latest.json",
+        "browser-backed challengeFormationState runtime probe"
+      ]
+    },
+    {
+      "stage": 11,
+      "challengeNumber": 3,
+      "auroraWindowId": "challenge-stage-stingray-hook",
+      "auroraLayoutId": "stingray-crown-hook-hybrid",
+      "pathFamily": "hook-arc",
+      "laneTypes": [
+        "boss",
+        "rogue",
+        "but",
+        "bee",
+        "boss",
+        "bee",
+        "but",
+        "rogue"
+      ],
+      "runtimeFirstWaveTypes": "boss, rogue, but, bee, boss, bee, but, rogue",
+      "runtimeGroupSignatures": [
+        {
+          "group": 0,
+          "types": [
+            "boss",
+            "rogue",
+            "but",
+            "bee",
+            "boss",
+            "bee",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "dragonfly"
+          ],
+          "pathFamilies": [
+            "crown-split-cascade"
+          ],
+          "spawnSpan": 0.36
+        },
+        {
+          "group": 1,
+          "types": [
+            "boss",
+            "boss",
+            "but",
+            "rogue",
+            "bee",
+            "but",
+            "rogue",
+            "boss"
+          ],
+          "families": [
+            "dragonfly"
+          ],
+          "pathFamilies": [
+            "boss-led-loop"
+          ],
+          "spawnSpan": 0.36
+        },
+        {
+          "group": 2,
+          "types": [
+            "rogue",
+            "boss",
+            "bee",
+            "but",
+            "boss",
+            "but",
+            "bee",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "hook-arc"
+          ],
+          "spawnSpan": 0.36
+        },
+        {
+          "group": 3,
+          "types": [
+            "but",
+            "rogue",
+            "boss",
+            "boss",
+            "boss",
+            "boss",
+            "rogue",
+            "but"
+          ],
+          "families": [
+            "galboss"
+          ],
+          "pathFamilies": [
+            "boss-led-loop"
+          ],
+          "spawnSpan": 0.36
+        },
+        {
+          "group": 4,
+          "types": [
+            "boss",
+            "bee",
+            "rogue",
+            "but",
+            "but",
+            "rogue",
+            "bee",
+            "boss"
+          ],
+          "families": [
+            "dragonfly"
+          ],
+          "pathFamilies": [
+            "hook-arc"
+          ],
+          "spawnSpan": 0.36
+        }
+      ],
+      "runtimeVisualFamilies": [
+        "dragonfly"
+      ],
+      "galagaTarget": "Third challenge should make the new visual family and boss-led novelty obvious, with larger sweep vocabulary and no attacks.",
+      "criticalExpectation": "Should read as a later Galaga challenge with alien novelty and a distinct high-bonus route.",
+      "expectedReferenceLabels": [
+        "challenge-3-arrival-group-1"
+      ],
+      "bestReferenceMatch": {
+        "labelId": "challenge-4-pink-serpentine-group-1",
+        "kind": "challengeEntry",
+        "entityFamily": "pink-serpentine-specialty",
+        "sourceAnchor": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-2fps.jpg",
+        "distance": 0.0302,
+        "trajectoryScore10": 9,
+        "semanticScore10": null,
+        "score10": 9,
+        "components": {
+          "xRange": 1,
+          "yRange": 1,
+          "pathLength": 1,
+          "turnCount": 1,
+          "reversalCount": 0.8,
+          "lowerFieldShare": 0.898
+        }
+      },
+      "referenceMatchScore10": 9,
+      "runtimeVector": {
+        "xRange": 1.5143,
+        "yRange": 0.7166,
+        "pathLength": 1.0442,
+        "turnCount": 3.2,
+        "reversalCount": 1.8,
+        "lowerFieldShare": 0.1143,
+        "rackSlotError": 0,
+        "timingOffsetS": 0
+      },
+      "galagaReferenceAnchor": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-2fps.jpg",
+      "galagaReferenceMeaning": "late challenge specialty arc with long readable upper-field scoring lane",
+      "safetyProbe": {
+        "noEnemyShots": true,
+        "noAttackStarts": true,
+        "noShipLosses": true,
+        "eventCounts": {
+          "enemyShots": 0,
+          "enemyAttackStarts": 0,
+          "shipLosses": 0,
+          "challengeContacts": 2
+        }
+      },
+      "motionProbe": {
+        "sampleCount": 9,
+        "activeSamples": 8,
+        "minActive": 21,
+        "maxActive": 40,
+        "meanActive": 33.6,
+        "xRange": 391.024,
+        "yRange": 59.557,
+        "lowerFieldShare": 0.129
+      },
+      "currentRead": "stingray-crown-hook-hybrid / hook-arc; lanes boss, rogue, but, bee, boss, bee, but, rogue; first-wave types boss, rogue, but, bee, boss, bee, but, rogue; visual families dragonfly; strict movement 2.7/10, graphics 2.2/10, alien novelty 3.4/10.",
+      "graphicsRead": "Strict graphics score 2.2/10. Current visible family/type labels are present, but challenge-window graphics are capped at 2.2/10 until live sprite flaps, pulsing, rotation/dive silhouettes, capture/rescue transitions, and Galaga target sprite crops are scored in motion.",
+      "movementRead": "Strict movement score 2.7/10 against challenge-3-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 1. Current probes are still sampled summaries, so full temporal choreography is not yet proven. Legacy broad vector best-match was 9/10 against challenge-4-pink-serpentine-group-1; xRange 1.5143, yRange 0.7166, pathLength 1.0442.",
+      "alienVariationRead": "Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments. Opening wave exposes 4 type(s) and dragonfly visual family labels. Group identity diagnostic: 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.36s.",
+      "groupIdentityRead": "5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.36s.",
+      "groupIdentityScore10": 8,
+      "criticalGaps": [
+        "Best reference match is challenge-4-pink-serpentine-group-1, not expected challenge-3-arrival-group-1.",
+        "Movement conformance is only 2.7/10 under the strict scorer: current paths are too short/shallow and do not yet show the sweeping, turning, learnable Galaga challenge-stage trajectories.",
+        "Graphical conformance is only 2.2/10 because challenge sprites are still scored as static/type labels; active flapping, pulsing, dive/rotation silhouettes, and reference sprite crops are not yet measured in the challenge window.",
+        "Alien/stage novelty is only 3.4/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
+        "Dragonfly family appears, but sprite-motion novelty and tracked Galaga challenge-3 path phases are not yet scored."
+      ],
+      "nextActions": [
+        "Promote challenge-3 boss-led reference phases and score dragonfly visual novelty as animation, not only family label.",
+        "Add motion windows for wing flaps, pulsing, dive/rotation silhouette, and challenge-only nonlethal arrival."
+      ],
+      "interestingFactor10": 2.7,
+      "conformanceScore10": 2.7,
+      "legacyCoverageScore10": 6.5,
+      "movementConformanceScore10": 2.7,
+      "graphicalConformanceScore10": 2.2,
+      "alienNoveltyScore10": 3.4,
+      "progressionConformanceScore10": 2.4,
+      "safetyRuleScore10": 10,
+      "strictAxisReads": {
+        "movement": {
+          "score10": 2.7,
+          "rawFit": 0.885,
+          "referenceLabelId": "challenge-3-arrival-group-1",
+          "referenceReliability": 0.62,
+          "temporalCoverage": 0.58,
+          "components": {
+            "yRange": 1,
+            "pathLength": 1,
+            "turnCount": 1,
+            "reversalCount": 0.2,
+            "lowerFieldShare": 0.714,
+            "trajectoryBestMatch": 0.9
+          },
+          "read": "Strict movement score 2.7/10 against challenge-3-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 1. Current probes are still sampled summaries, so full temporal choreography is not yet proven."
+        },
+        "graphics": {
+          "score10": 2.2,
+          "activeMotionCap": 2.2,
+          "measuredRuntimeSpriteMotionCoverage": 0,
+          "components": {
+            "alienTypeMix": 0.18,
+            "visualFamilyNovelty": 0.14,
+            "firstChallengeLineContract": 0,
+            "activeSpriteMotionCoverage": 0
+          },
+          "read": "Strict graphics score 2.2/10. Current visible family/type labels are present, but challenge-window graphics are capped at 2.2/10 until live sprite flaps, pulsing, rotation/dive silhouettes, capture/rescue transitions, and Galaga target sprite crops are scored in motion."
+        },
+        "alienNovelty": {
+          "score10": 3.4,
+          "components": {
+            "firstChallengeSemantic": 0,
+            "typeMix": 0.28,
+            "familyNovelty": 0.22,
+            "groupDiversity": 0.2,
+            "referenceStageCredit": 0.08
+          },
+          "read": "Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments."
+        },
+        "progression": {
+          "score10": 2.4,
+          "pathFamilies": [
+            "crown-split-cascade",
+            "boss-led-loop",
+            "hook-arc"
+          ],
+          "components": {
+            "pathFamilyCredit": 0.15,
+            "referenceCredit": 0,
+            "stageRoleCredit": 0.16,
+            "lateReferencePenalty": 0
+          },
+          "read": "Strict progression score 2.4/10. The current stage has 3 path-family label(s), but later challenge stages are not yet backed by enough reference-specific set-piece contracts to claim real Galaga progression."
+        }
+      },
+      "expectedReferenceHit": false,
+      "scoreComponents": {
+        "baseline": 1,
+        "movementConformance": 2.7,
+        "graphicalConformance": 2.2,
+        "alienNovelty": 3.4,
+        "stageProgression": 2.4,
+        "safetyRule": 10,
+        "legacyCoverageScore": 6.5
+      },
+      "evidence": [
+        "reference-artifacts/analyses/galaga-path-reference-labels/latest.json",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
+        "reference-artifacts/analyses/formation-boss-path-family-comparison/latest.json",
+        "reference-artifacts/analyses/alien-entry-challenge-variation/latest.json",
+        "browser-backed challengeFormationState runtime probe"
+      ]
+    },
+    {
+      "stage": 15,
+      "challengeNumber": 4,
+      "auroraWindowId": "challenge-stage-pink-serpentine",
+      "auroraLayoutId": "pink-serpentine-late",
+      "pathFamily": "pink-serpentine",
+      "laneTypes": [
+        "boss",
+        "rogue",
+        "but",
+        "bee",
+        "bee",
+        "but",
+        "rogue",
+        "boss"
+      ],
+      "runtimeFirstWaveTypes": "boss, rogue, but, bee, bee, but, rogue, boss",
+      "runtimeGroupSignatures": [
+        {
+          "group": 0,
+          "types": [
+            "boss",
+            "rogue",
+            "but",
+            "bee",
+            "bee",
+            "but",
+            "rogue",
+            "boss"
+          ],
+          "families": [
+            "galboss"
+          ],
+          "pathFamilies": [
+            "pink-serpentine"
+          ],
+          "spawnSpan": 0.3
+        },
+        {
+          "group": 1,
+          "types": [
+            "but",
+            "boss",
+            "rogue",
+            "bee",
+            "bee",
+            "rogue",
+            "boss",
+            "but"
+          ],
+          "families": [
+            "galboss"
+          ],
+          "pathFamilies": [
+            "pink-serpentine"
+          ],
+          "spawnSpan": 0.3
+        },
+        {
+          "group": 2,
+          "types": [
+            "bee",
+            "but",
+            "boss",
+            "rogue",
+            "rogue",
+            "boss",
+            "but",
+            "bee"
+          ],
+          "families": [
+            "dragonfly"
+          ],
+          "pathFamilies": [
+            "green-ladder-split"
+          ],
+          "spawnSpan": 0.3
+        },
+        {
+          "group": 3,
+          "types": [
+            "rogue",
+            "bee",
+            "but",
+            "boss",
+            "boss",
+            "but",
+            "bee",
+            "rogue"
+          ],
+          "families": [
+            "galboss"
+          ],
+          "pathFamilies": [
+            "pink-serpentine"
+          ],
+          "spawnSpan": 0.3
+        },
+        {
+          "group": 4,
+          "types": [
+            "boss",
+            "but",
+            "bee",
+            "rogue",
+            "rogue",
+            "bee",
+            "but",
+            "boss"
+          ],
+          "families": [
+            "dragonfly"
+          ],
+          "pathFamilies": [
+            "pink-green-cascade"
+          ],
+          "spawnSpan": 0.3
+        }
+      ],
+      "runtimeVisualFamilies": [
+        "galboss"
+      ],
+      "galagaTarget": "Fourth challenge should shift into long specialty serpentine arcs with obvious new color/family identity while staying nonlethal.",
+      "criticalExpectation": "Should feel like the first truly late-stage set piece, not a boss-led remix of earlier challenge stages.",
+      "expectedReferenceLabels": [
+        "challenge-4-pink-serpentine-group-1"
+      ],
+      "bestReferenceMatch": {
+        "labelId": "challenge-4-pink-serpentine-group-1",
+        "kind": "challengeEntry",
+        "entityFamily": "pink-serpentine-specialty",
+        "sourceAnchor": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-2fps.jpg",
+        "distance": 0.0379,
+        "trajectoryScore10": 8.9,
+        "semanticScore10": null,
+        "score10": 9.3,
+        "components": {
+          "xRange": 1,
+          "yRange": 1,
+          "pathLength": 1,
+          "turnCount": 1,
+          "reversalCount": 0.8,
+          "lowerFieldShare": 0.821
+        }
+      },
+      "referenceMatchScore10": 9.3,
+      "runtimeVector": {
+        "xRange": 1.5286,
+        "yRange": 0.7771,
+        "pathLength": 1.0173,
+        "turnCount": 3.2,
+        "reversalCount": 1.8,
+        "lowerFieldShare": 0.125,
+        "rackSlotError": 0,
+        "timingOffsetS": 0
+      },
+      "galagaReferenceAnchor": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-2fps.jpg",
+      "galagaReferenceMeaning": "late challenge specialty arc with long readable upper-field scoring lane",
+      "safetyProbe": {
+        "noEnemyShots": true,
+        "noAttackStarts": true,
+        "noShipLosses": true,
+        "eventCounts": {
+          "enemyShots": 0,
+          "enemyAttackStarts": 0,
+          "shipLosses": 0,
+          "challengeContacts": 0
+        }
+      },
+      "motionProbe": {
+        "sampleCount": 9,
+        "activeSamples": 8,
+        "minActive": 9,
+        "maxActive": 40,
+        "meanActive": 32.4,
+        "xRange": 403.079,
+        "yRange": 53.733,
+        "lowerFieldShare": 0.138
+      },
+      "currentRead": "pink-serpentine-late / pink-serpentine; lanes boss, rogue, but, bee, bee, but, rogue, boss; first-wave types boss, rogue, but, bee, bee, but, rogue, boss; visual families galboss; strict movement 3.7/10, graphics 2.2/10, alien novelty 3.4/10.",
+      "graphicsRead": "Strict graphics score 2.2/10. Current visible family/type labels are present, but challenge-window graphics are capped at 2.2/10 until live sprite flaps, pulsing, rotation/dive silhouettes, capture/rescue transitions, and Galaga target sprite crops are scored in motion.",
+      "movementRead": "Strict movement score 3.7/10 against challenge-4-pink-serpentine-group-1: y-range fit 1, path-length fit 1, turn fit 1. Current probes are still sampled summaries, so full temporal choreography is not yet proven. Legacy broad vector best-match was 9.3/10 against challenge-4-pink-serpentine-group-1; xRange 1.5286, yRange 0.7771, pathLength 1.0173.",
+      "alienVariationRead": "Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments. Opening wave exposes 4 type(s) and galboss visual family labels. Group identity diagnostic: 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.3s.",
+      "groupIdentityRead": "5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.3s.",
+      "groupIdentityScore10": 7.7,
+      "criticalGaps": [
+        "Movement conformance is only 3.7/10 under the strict scorer: current paths are too short/shallow and do not yet show the sweeping, turning, learnable Galaga challenge-stage trajectories.",
+        "Graphical conformance is only 2.2/10 because challenge sprites are still scored as static/type labels; active flapping, pulsing, dive/rotation silhouettes, and reference sprite crops are not yet measured in the challenge window.",
+        "Alien/stage novelty is only 3.4/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
+        "Pink-serpentine identity now lands on its first-pass late reference, but it still needs five-group frame labels, target sprite-motion evidence, and stronger player-visible novelty before it can claim maturity."
+      ],
+      "nextActions": [
+        "Promote the Challenge 4 pink-serpentine window into five group labels and tune the runtime path so all groups keep a readable serpentine score lane.",
+        "Add high-bonus readability probes so late-stage complexity stays learnable instead of becoming visual noise."
+      ],
+      "interestingFactor10": 3.1,
+      "conformanceScore10": 3.1,
+      "legacyCoverageScore10": 7,
+      "movementConformanceScore10": 3.7,
+      "graphicalConformanceScore10": 2.2,
+      "alienNoveltyScore10": 3.4,
+      "progressionConformanceScore10": 3.1,
+      "safetyRuleScore10": 10,
+      "strictAxisReads": {
+        "movement": {
+          "score10": 3.7,
+          "rawFit": 0.95,
+          "referenceLabelId": "challenge-4-pink-serpentine-group-1",
+          "referenceReliability": 0.92,
+          "temporalCoverage": 0.58,
+          "components": {
+            "yRange": 1,
+            "pathLength": 1,
+            "turnCount": 1,
+            "reversalCount": 0.8,
+            "lowerFieldShare": 0.792,
+            "trajectoryBestMatch": 0.89
+          },
+          "read": "Strict movement score 3.7/10 against challenge-4-pink-serpentine-group-1: y-range fit 1, path-length fit 1, turn fit 1. Current probes are still sampled summaries, so full temporal choreography is not yet proven."
+        },
+        "graphics": {
+          "score10": 2.2,
+          "activeMotionCap": 2.2,
+          "measuredRuntimeSpriteMotionCoverage": 0,
+          "components": {
+            "alienTypeMix": 0.18,
+            "visualFamilyNovelty": 0.14,
+            "firstChallengeLineContract": 0,
+            "activeSpriteMotionCoverage": 0
+          },
+          "read": "Strict graphics score 2.2/10. Current visible family/type labels are present, but challenge-window graphics are capped at 2.2/10 until live sprite flaps, pulsing, rotation/dive silhouettes, capture/rescue transitions, and Galaga target sprite crops are scored in motion."
+        },
+        "alienNovelty": {
+          "score10": 3.4,
+          "components": {
+            "firstChallengeSemantic": 0,
+            "typeMix": 0.28,
+            "familyNovelty": 0.22,
+            "groupDiversity": 0.2,
+            "referenceStageCredit": 0.16
+          },
+          "read": "Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments."
+        },
+        "progression": {
+          "score10": 3.1,
+          "pathFamilies": [
+            "pink-serpentine",
+            "green-ladder-split",
+            "pink-green-cascade"
+          ],
+          "components": {
+            "pathFamilyCredit": 0.15,
+            "referenceCredit": 0.24,
+            "stageRoleCredit": 0.08,
+            "lateReferencePenalty": 0
+          },
+          "read": "Strict progression score 3.1/10. The current stage has 3 path-family label(s), but later challenge stages are not yet backed by enough reference-specific set-piece contracts to claim real Galaga progression."
+        }
+      },
+      "expectedReferenceHit": true,
+      "scoreComponents": {
+        "baseline": 1,
+        "movementConformance": 3.7,
+        "graphicalConformance": 2.2,
+        "alienNovelty": 3.4,
+        "stageProgression": 3.1,
+        "safetyRule": 10,
+        "legacyCoverageScore": 7
+      },
+      "evidence": [
+        "reference-artifacts/analyses/galaga-path-reference-labels/latest.json",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
+        "reference-artifacts/analyses/formation-boss-path-family-comparison/latest.json",
+        "reference-artifacts/analyses/alien-entry-challenge-variation/latest.json",
+        "browser-backed challengeFormationState runtime probe"
+      ]
+    },
+    {
+      "stage": 19,
+      "challengeNumber": 5,
+      "auroraWindowId": "challenge-stage-pink-green-cascade",
+      "auroraLayoutId": "pink-green-cascade",
+      "pathFamily": "pink-green-cascade",
+      "laneTypes": [
+        "rogue",
+        "boss",
+        "but",
+        "bee",
+        "boss",
+        "but",
+        "bee",
+        "rogue"
+      ],
+      "runtimeFirstWaveTypes": "rogue, boss, but, bee, boss, but, bee, rogue",
+      "runtimeGroupSignatures": [
+        {
+          "group": 0,
+          "types": [
+            "rogue",
+            "boss",
+            "but",
+            "bee",
+            "boss",
+            "but",
+            "bee",
+            "rogue"
+          ],
+          "families": [
+            "galboss"
+          ],
+          "pathFamilies": [
+            "pink-green-cascade"
+          ],
+          "spawnSpan": 0.25
+        },
+        {
+          "group": 1,
+          "types": [
+            "boss",
+            "but",
+            "bee",
+            "rogue",
+            "rogue",
+            "bee",
+            "but",
+            "boss"
+          ],
+          "families": [
+            "dragonfly"
+          ],
+          "pathFamilies": [
+            "green-ladder-split"
+          ],
+          "spawnSpan": 0.25
+        },
+        {
+          "group": 2,
+          "types": [
+            "bee",
+            "rogue",
+            "boss",
+            "but",
+            "but",
+            "boss",
+            "rogue",
+            "bee"
+          ],
+          "families": [
+            "crown"
+          ],
+          "pathFamilies": [
+            "pink-green-cascade"
+          ],
+          "spawnSpan": 0.26
+        },
+        {
+          "group": 3,
+          "types": [
+            "but",
+            "bee",
+            "rogue",
+            "boss",
+            "boss",
+            "rogue",
+            "bee",
+            "but"
+          ],
+          "families": [
+            "dragonfly"
+          ],
+          "pathFamilies": [
+            "pink-serpentine"
+          ],
+          "spawnSpan": 0.25
+        },
+        {
+          "group": 4,
+          "types": [
+            "boss",
+            "rogue",
+            "bee",
+            "but",
+            "but",
+            "bee",
+            "rogue",
+            "boss"
+          ],
+          "families": [
+            "galboss"
+          ],
+          "pathFamilies": [
+            "pink-green-cascade"
+          ],
+          "spawnSpan": 0.26
+        }
+      ],
+      "runtimeVisualFamilies": [
+        "galboss"
+      ],
+      "galagaTarget": "Fifth challenge should distinguish itself with pink/green cascade motion, alternating group identity, and stronger lower-field pass readability.",
+      "criticalExpectation": "Should prove that late challenge progression is authored stage by stage, not repeated from Challenge 4.",
+      "expectedReferenceLabels": [
+        "challenge-5-pink-green-cascade-group-1"
+      ],
+      "bestReferenceMatch": {
+        "labelId": "challenge-5-pink-green-cascade-group-1",
+        "kind": "challengeEntry",
+        "entityFamily": "pink-green-cascade",
+        "sourceAnchor": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/contact-sheet-2fps.jpg",
+        "distance": 0.0969,
+        "trajectoryScore10": 8.4,
+        "semanticScore10": null,
+        "score10": 8.8,
+        "components": {
+          "xRange": 1,
+          "yRange": 1,
+          "pathLength": 0.79,
+          "turnCount": 0.933,
+          "reversalCount": 0.8,
+          "lowerFieldShare": 0.842
+        }
+      },
+      "referenceMatchScore10": 8.8,
+      "runtimeVector": {
+        "xRange": 1.5429,
+        "yRange": 0.509,
+        "pathLength": 0.8055,
+        "turnCount": 2.8,
+        "reversalCount": 2.2,
+        "lowerFieldShare": 0.1179,
+        "rackSlotError": 0,
+        "timingOffsetS": 0
+      },
+      "galagaReferenceAnchor": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/contact-sheet-2fps.jpg",
+      "galagaReferenceMeaning": "alternating specialty groups with lower-field pass awareness while remaining nonlethal",
+      "safetyProbe": {
+        "noEnemyShots": true,
+        "noAttackStarts": true,
+        "noShipLosses": true,
+        "eventCounts": {
+          "enemyShots": 0,
+          "enemyAttackStarts": 0,
+          "shipLosses": 0,
+          "challengeContacts": 0
+        }
+      },
+      "motionProbe": {
+        "sampleCount": 9,
+        "activeSamples": 8,
+        "minActive": 1,
+        "maxActive": 40,
+        "meanActive": 29.8,
+        "xRange": 349.517,
+        "yRange": 51.326,
+        "lowerFieldShare": 0.186
+      },
+      "currentRead": "pink-green-cascade / pink-green-cascade; lanes rogue, boss, but, bee, boss, but, bee, rogue; first-wave types rogue, boss, but, bee, boss, but, bee, rogue; visual families galboss; strict movement 3.5/10, graphics 2.2/10, alien novelty 3.4/10.",
+      "graphicsRead": "Strict graphics score 2.2/10. Current visible family/type labels are present, but challenge-window graphics are capped at 2.2/10 until live sprite flaps, pulsing, rotation/dive silhouettes, capture/rescue transitions, and Galaga target sprite crops are scored in motion.",
+      "movementRead": "Strict movement score 3.5/10 against challenge-5-pink-green-cascade-group-1: y-range fit 1, path-length fit 0.79, turn fit 0.93. Current probes are still sampled summaries, so full temporal choreography is not yet proven. Legacy broad vector best-match was 8.8/10 against challenge-5-pink-green-cascade-group-1; xRange 1.5429, yRange 0.509, pathLength 0.8055.",
+      "alienVariationRead": "Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments. Opening wave exposes 4 type(s) and galboss visual family labels. Group identity diagnostic: 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.25s.",
+      "groupIdentityRead": "5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.25s.",
+      "groupIdentityScore10": 7.5,
+      "criticalGaps": [
+        "Movement conformance is only 3.5/10 under the strict scorer: current paths are too short/shallow and do not yet show the sweeping, turning, learnable Galaga challenge-stage trajectories.",
+        "Graphical conformance is only 2.2/10 because challenge sprites are still scored as static/type labels; active flapping, pulsing, dive/rotation silhouettes, and reference sprite crops are not yet measured in the challenge window.",
+        "Alien/stage novelty is only 3.4/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
+        "Pink/green cascade identity now lands on its first-pass late reference, but the current window still needs five group labels and stronger lower-field route readability."
+      ],
+      "nextActions": [
+        "Promote the Challenge 5 pink/green cascade window into five group labels and tune lower-field pass timing against those labels.",
+        "Score group-to-group alternation so cascade identity is not just a different path-family name."
+      ],
+      "interestingFactor10": 3.1,
+      "conformanceScore10": 3.1,
+      "legacyCoverageScore10": 6.9,
+      "movementConformanceScore10": 3.5,
+      "graphicalConformanceScore10": 2.2,
+      "alienNoveltyScore10": 3.4,
+      "progressionConformanceScore10": 3.1,
+      "safetyRuleScore10": 10,
+      "strictAxisReads": {
+        "movement": {
+          "score10": 3.5,
+          "rawFit": 0.875,
+          "referenceLabelId": "challenge-5-pink-green-cascade-group-1",
+          "referenceReliability": 0.92,
+          "temporalCoverage": 0.58,
+          "components": {
+            "yRange": 1,
+            "pathLength": 0.79,
+            "turnCount": 0.933,
+            "reversalCount": 0.8,
+            "lowerFieldShare": 0.816,
+            "trajectoryBestMatch": 0.84
+          },
+          "read": "Strict movement score 3.5/10 against challenge-5-pink-green-cascade-group-1: y-range fit 1, path-length fit 0.79, turn fit 0.93. Current probes are still sampled summaries, so full temporal choreography is not yet proven."
+        },
+        "graphics": {
+          "score10": 2.2,
+          "activeMotionCap": 2.2,
+          "measuredRuntimeSpriteMotionCoverage": 0,
+          "components": {
+            "alienTypeMix": 0.18,
+            "visualFamilyNovelty": 0.14,
+            "firstChallengeLineContract": 0,
+            "activeSpriteMotionCoverage": 0
+          },
+          "read": "Strict graphics score 2.2/10. Current visible family/type labels are present, but challenge-window graphics are capped at 2.2/10 until live sprite flaps, pulsing, rotation/dive silhouettes, capture/rescue transitions, and Galaga target sprite crops are scored in motion."
+        },
+        "alienNovelty": {
+          "score10": 3.4,
+          "components": {
+            "firstChallengeSemantic": 0,
+            "typeMix": 0.28,
+            "familyNovelty": 0.22,
+            "groupDiversity": 0.2,
+            "referenceStageCredit": 0.16
+          },
+          "read": "Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments."
+        },
+        "progression": {
+          "score10": 3.1,
+          "pathFamilies": [
+            "pink-green-cascade",
+            "green-ladder-split",
+            "pink-serpentine"
+          ],
+          "components": {
+            "pathFamilyCredit": 0.15,
+            "referenceCredit": 0.24,
+            "stageRoleCredit": 0.08,
+            "lateReferencePenalty": 0
+          },
+          "read": "Strict progression score 3.1/10. The current stage has 3 path-family label(s), but later challenge stages are not yet backed by enough reference-specific set-piece contracts to claim real Galaga progression."
+        }
+      },
+      "expectedReferenceHit": true,
+      "scoreComponents": {
+        "baseline": 1,
+        "movementConformance": 3.5,
+        "graphicalConformance": 2.2,
+        "alienNovelty": 3.4,
+        "stageProgression": 3.1,
+        "safetyRule": 10,
+        "legacyCoverageScore": 6.9
+      },
+      "evidence": [
+        "reference-artifacts/analyses/galaga-path-reference-labels/latest.json",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
+        "reference-artifacts/analyses/formation-boss-path-family-comparison/latest.json",
+        "reference-artifacts/analyses/alien-entry-challenge-variation/latest.json",
+        "browser-backed challengeFormationState runtime probe"
+      ]
+    },
+    {
+      "stage": 23,
+      "challengeNumber": 6,
+      "auroraWindowId": "challenge-stage-green-ladder-split",
+      "auroraLayoutId": "green-ladder-split",
+      "pathFamily": "green-ladder-split",
+      "laneTypes": [
+        "bee",
+        "but",
+        "rogue",
+        "boss",
+        "boss",
+        "rogue",
+        "but",
+        "bee"
+      ],
+      "runtimeFirstWaveTypes": "bee, but, rogue, boss, boss, rogue, but, bee",
+      "runtimeGroupSignatures": [
+        {
+          "group": 0,
+          "types": [
+            "bee",
+            "but",
+            "rogue",
+            "boss",
+            "boss",
+            "rogue",
+            "but",
+            "bee"
+          ],
+          "families": [
+            "dragonfly"
+          ],
+          "pathFamilies": [
+            "green-ladder-split"
+          ],
+          "spawnSpan": 0.24
+        },
+        {
+          "group": 1,
+          "types": [
+            "but",
+            "bee",
+            "boss",
+            "rogue",
+            "rogue",
+            "boss",
+            "bee",
+            "but"
+          ],
+          "families": [
+            "dragonfly"
+          ],
+          "pathFamilies": [
+            "green-ladder-split"
+          ],
+          "spawnSpan": 0.24
+        },
+        {
+          "group": 2,
+          "types": [
+            "rogue",
+            "boss",
+            "bee",
+            "but",
+            "but",
+            "bee",
+            "boss",
+            "rogue"
+          ],
+          "families": [
+            "mosquito"
+          ],
+          "pathFamilies": [
+            "pink-green-cascade"
+          ],
+          "spawnSpan": 0.24
+        },
+        {
+          "group": 3,
+          "types": [
+            "boss",
+            "rogue",
+            "but",
+            "bee",
+            "bee",
+            "but",
+            "rogue",
+            "boss"
+          ],
+          "families": [
+            "dragonfly"
+          ],
+          "pathFamilies": [
+            "green-ladder-split"
+          ],
+          "spawnSpan": 0.24
+        },
+        {
+          "group": 4,
+          "types": [
+            "bee",
+            "rogue",
+            "boss",
+            "but",
+            "but",
+            "boss",
+            "rogue",
+            "bee"
+          ],
+          "families": [
+            "mosquito"
+          ],
+          "pathFamilies": [
+            "blue-purple-finale"
+          ],
+          "spawnSpan": 0.24
+        }
+      ],
+      "runtimeVisualFamilies": [
+        "dragonfly"
+      ],
+      "galagaTarget": "Sixth challenge should emphasize green ladder rhythm and split exits.",
+      "criticalExpectation": "Should make staggered group timing and split route separation visible enough for a player to learn.",
+      "expectedReferenceLabels": [
+        "challenge-6-green-ladder-split-group-1"
+      ],
+      "bestReferenceMatch": {
+        "labelId": "challenge-1-late-wave-group-4",
+        "kind": "challengeEntry",
+        "entityFamily": "butterfly-line",
+        "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/contact-sheet.jpg",
+        "distance": 0.2368,
+        "trajectoryScore10": 7.3,
+        "semanticScore10": null,
+        "score10": 7.3,
+        "components": {
+          "xRange": 1,
+          "yRange": 1,
+          "pathLength": 0.677,
+          "turnCount": 1,
+          "reversalCount": 0,
+          "lowerFieldShare": 0.408
+        }
+      },
+      "referenceMatchScore10": 7.3,
+      "runtimeVector": {
+        "xRange": 1.5714,
+        "yRange": 0.4429,
+        "pathLength": 0.4873,
+        "turnCount": 2.2,
+        "reversalCount": 2.8,
+        "lowerFieldShare": 0.1429,
+        "rackSlotError": 0,
+        "timingOffsetS": 0
+      },
+      "galagaReferenceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/contact-sheet.jpg",
+      "galagaReferenceMeaning": "late challenge group crosses through upper lanes before peel-off",
+      "safetyProbe": {
+        "noEnemyShots": true,
+        "noAttackStarts": true,
+        "noShipLosses": true,
+        "eventCounts": {
+          "enemyShots": 0,
+          "enemyAttackStarts": 0,
+          "shipLosses": 0,
+          "challengeContacts": 1
+        }
+      },
+      "motionProbe": {
+        "sampleCount": 9,
+        "activeSamples": 7,
+        "minActive": 23,
+        "maxActive": 40,
+        "meanActive": 36.9,
+        "xRange": 416.766,
+        "yRange": 57.264,
+        "lowerFieldShare": 0.15
+      },
+      "currentRead": "green-ladder-split / green-ladder-split; lanes bee, but, rogue, boss, boss, rogue, but, bee; first-wave types bee, but, rogue, boss, boss, rogue, but, bee; visual families dragonfly; strict movement 2.2/10, graphics 2.2/10, alien novelty 3.4/10.",
+      "graphicsRead": "Strict graphics score 2.2/10. Current visible family/type labels are present, but challenge-window graphics are capped at 2.2/10 until live sprite flaps, pulsing, rotation/dive silhouettes, capture/rescue transitions, and Galaga target sprite crops are scored in motion.",
+      "movementRead": "Strict movement score 2.2/10 against challenge-6-green-ladder-split-group-1: y-range fit 0.71, path-length fit 0.5, turn fit 1. Current probes are still sampled summaries, so full temporal choreography is not yet proven. Legacy broad vector best-match was 7.3/10 against challenge-1-late-wave-group-4; xRange 1.5714, yRange 0.4429, pathLength 0.4873.",
+      "alienVariationRead": "Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments. Opening wave exposes 4 type(s) and dragonfly visual family labels. Group identity diagnostic: 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.24s.",
+      "groupIdentityRead": "5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.24s.",
+      "groupIdentityScore10": 7.4,
+      "criticalGaps": [
+        "Best reference match is challenge-1-late-wave-group-4, not expected challenge-6-green-ladder-split-group-1.",
+        "Movement conformance is only 2.2/10 under the strict scorer: current paths are too short/shallow and do not yet show the sweeping, turning, learnable Galaga challenge-stage trajectories.",
+        "Graphical conformance is only 2.2/10 because challenge sprites are still scored as static/type labels; active flapping, pulsing, dive/rotation silhouettes, and reference sprite crops are not yet measured in the challenge window.",
+        "Alien/stage novelty is only 3.4/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
+        "Green-ladder split is now represented as its own runtime contract, but the measured vector still reads closer to an early challenge than the expected ladder/split reference."
+      ],
+      "nextActions": [
+        "Rebuild Challenge 6 around green ladder and split-exit timing until its measured vector hits challenge-6-green-ladder-split-group-1.",
+        "Add frame labels for staggered ladder rungs, split exit side, and upper-band scoreability."
+      ],
+      "interestingFactor10": 2.4,
+      "conformanceScore10": 2.4,
+      "legacyCoverageScore10": 6.1,
+      "movementConformanceScore10": 2.2,
+      "graphicalConformanceScore10": 2.2,
+      "alienNoveltyScore10": 3.4,
+      "progressionConformanceScore10": 2,
+      "safetyRuleScore10": 10,
+      "strictAxisReads": {
+        "movement": {
+          "score10": 2.2,
+          "rawFit": 0.62,
+          "referenceLabelId": "challenge-6-green-ladder-split-group-1",
+          "referenceReliability": 0.62,
+          "temporalCoverage": 0.58,
+          "components": {
+            "yRange": 0.714,
+            "pathLength": 0.497,
+            "turnCount": 1,
+            "reversalCount": 0,
+            "lowerFieldShare": 0.524,
+            "trajectoryBestMatch": 0.73
+          },
+          "read": "Strict movement score 2.2/10 against challenge-6-green-ladder-split-group-1: y-range fit 0.71, path-length fit 0.5, turn fit 1. Current probes are still sampled summaries, so full temporal choreography is not yet proven."
+        },
+        "graphics": {
+          "score10": 2.2,
+          "activeMotionCap": 2.2,
+          "measuredRuntimeSpriteMotionCoverage": 0,
+          "components": {
+            "alienTypeMix": 0.18,
+            "visualFamilyNovelty": 0.14,
+            "firstChallengeLineContract": 0,
+            "activeSpriteMotionCoverage": 0
+          },
+          "read": "Strict graphics score 2.2/10. Current visible family/type labels are present, but challenge-window graphics are capped at 2.2/10 until live sprite flaps, pulsing, rotation/dive silhouettes, capture/rescue transitions, and Galaga target sprite crops are scored in motion."
+        },
+        "alienNovelty": {
+          "score10": 3.4,
+          "components": {
+            "firstChallengeSemantic": 0,
+            "typeMix": 0.28,
+            "familyNovelty": 0.22,
+            "groupDiversity": 0.2,
+            "referenceStageCredit": 0.08
+          },
+          "read": "Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments."
+        },
+        "progression": {
+          "score10": 2,
+          "pathFamilies": [
+            "green-ladder-split",
+            "pink-green-cascade",
+            "blue-purple-finale"
+          ],
+          "components": {
+            "pathFamilyCredit": 0.15,
+            "referenceCredit": 0,
+            "stageRoleCredit": 0.08,
+            "lateReferencePenalty": 0
+          },
+          "read": "Strict progression score 2/10. The current stage has 3 path-family label(s), but later challenge stages are not yet backed by enough reference-specific set-piece contracts to claim real Galaga progression."
+        }
+      },
+      "expectedReferenceHit": false,
+      "scoreComponents": {
+        "baseline": 1,
+        "movementConformance": 2.2,
+        "graphicalConformance": 2.2,
+        "alienNovelty": 3.4,
+        "stageProgression": 2,
+        "safetyRule": 10,
+        "legacyCoverageScore": 6.1
+      },
+      "evidence": [
+        "reference-artifacts/analyses/galaga-path-reference-labels/latest.json",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
+        "reference-artifacts/analyses/formation-boss-path-family-comparison/latest.json",
+        "reference-artifacts/analyses/alien-entry-challenge-variation/latest.json",
+        "browser-backed challengeFormationState runtime probe"
+      ]
+    },
+    {
+      "stage": 27,
+      "challengeNumber": 7,
+      "auroraWindowId": "challenge-stage-yellow-diagonal-fan",
+      "auroraLayoutId": "yellow-diagonal-fan",
+      "pathFamily": "yellow-diagonal-fan",
+      "laneTypes": [
+        "boss",
+        "bee",
+        "but",
+        "rogue",
+        "rogue",
+        "but",
+        "bee",
+        "boss"
+      ],
+      "runtimeFirstWaveTypes": "boss, bee, but, rogue, rogue, but, bee, boss",
+      "runtimeGroupSignatures": [
+        {
+          "group": 0,
+          "types": [
+            "boss",
+            "bee",
+            "but",
+            "rogue",
+            "rogue",
+            "but",
+            "bee",
+            "boss"
+          ],
+          "families": [
+            "crown"
+          ],
+          "pathFamilies": [
+            "yellow-diagonal-fan"
+          ],
+          "spawnSpan": 0.23
+        },
+        {
+          "group": 1,
+          "types": [
+            "bee",
+            "boss",
+            "rogue",
+            "but",
+            "but",
+            "rogue",
+            "boss",
+            "bee"
+          ],
+          "families": [
+            "crown"
+          ],
+          "pathFamilies": [
+            "yellow-diagonal-fan"
+          ],
+          "spawnSpan": 0.23
+        },
+        {
+          "group": 2,
+          "types": [
+            "but",
+            "rogue",
+            "boss",
+            "bee",
+            "bee",
+            "boss",
+            "rogue",
+            "but"
+          ],
+          "families": [
+            "dragonfly"
+          ],
+          "pathFamilies": [
+            "green-ladder-split"
+          ],
+          "spawnSpan": 0.23
+        },
+        {
+          "group": 3,
+          "types": [
+            "rogue",
+            "but",
+            "bee",
+            "boss",
+            "boss",
+            "bee",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "crown"
+          ],
+          "pathFamilies": [
+            "yellow-diagonal-fan"
+          ],
+          "spawnSpan": 0.22
+        },
+        {
+          "group": 4,
+          "types": [
+            "boss",
+            "rogue",
+            "but",
+            "bee",
+            "bee",
+            "but",
+            "rogue",
+            "boss"
+          ],
+          "families": [
+            "crown"
+          ],
+          "pathFamilies": [
+            "pink-green-cascade"
+          ],
+          "spawnSpan": 0.22
+        }
+      ],
+      "runtimeVisualFamilies": [
+        "crown"
+      ],
+      "galagaTarget": "Seventh challenge should introduce a yellow diagonal fan with a memorable scoring lane.",
+      "criticalExpectation": "Should be visually and tactically unlike the prior ladder/cascade stages.",
+      "expectedReferenceLabels": [
+        "challenge-7-yellow-diagonal-fan-group-1"
+      ],
+      "bestReferenceMatch": {
+        "labelId": "challenge-8-blue-purple-finale-group-1",
+        "kind": "challengeEntry",
+        "entityFamily": "blue-purple-finale-cluster",
+        "sourceAnchor": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-2fps.jpg",
+        "distance": 0.1255,
+        "trajectoryScore10": 8.2,
+        "semanticScore10": null,
+        "score10": 8.2,
+        "components": {
+          "xRange": 1,
+          "yRange": 0.963,
+          "pathLength": 0.796,
+          "turnCount": 0.867,
+          "reversalCount": 0.6,
+          "lowerFieldShare": 0.929
+        }
+      },
+      "referenceMatchScore10": 8.2,
+      "runtimeVector": {
+        "xRange": 1.6,
+        "yRange": 0.4816,
+        "pathLength": 0.8359,
+        "turnCount": 2.6,
+        "reversalCount": 2.4,
+        "lowerFieldShare": 0.17,
+        "rackSlotError": 0,
+        "timingOffsetS": 0
+      },
+      "galagaReferenceAnchor": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-2fps.jpg",
+      "galagaReferenceMeaning": "compact late-loop capstone with clustered arcs and no return to early-stage vocabulary",
+      "safetyProbe": {
+        "noEnemyShots": true,
+        "noAttackStarts": true,
+        "noShipLosses": true,
+        "eventCounts": {
+          "enemyShots": 0,
+          "enemyAttackStarts": 0,
+          "shipLosses": 0,
+          "challengeContacts": 0
+        }
+      },
+      "motionProbe": {
+        "sampleCount": 9,
+        "activeSamples": 7,
+        "minActive": 19,
+        "maxActive": 40,
+        "meanActive": 32.4,
+        "xRange": 414.637,
+        "yRange": 57.094,
+        "lowerFieldShare": 0.173
+      },
+      "currentRead": "yellow-diagonal-fan / yellow-diagonal-fan; lanes boss, bee, but, rogue, rogue, but, bee, boss; first-wave types boss, bee, but, rogue, rogue, but, bee, boss; visual families crown; strict movement 2.4/10, graphics 2.2/10, alien novelty 3.4/10.",
+      "graphicsRead": "Strict graphics score 2.2/10. Current visible family/type labels are present, but challenge-window graphics are capped at 2.2/10 until live sprite flaps, pulsing, rotation/dive silhouettes, capture/rescue transitions, and Galaga target sprite crops are scored in motion.",
+      "movementRead": "Strict movement score 2.4/10 against challenge-7-yellow-diagonal-fan-group-1: y-range fit 0.86, path-length fit 0.76, turn fit 1. Current probes are still sampled summaries, so full temporal choreography is not yet proven. Legacy broad vector best-match was 8.2/10 against challenge-8-blue-purple-finale-group-1; xRange 1.6, yRange 0.4816, pathLength 0.8359.",
+      "alienVariationRead": "Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments. Opening wave exposes 4 type(s) and crown visual family labels. Group identity diagnostic: 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.23s.",
+      "groupIdentityRead": "5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.23s.",
+      "groupIdentityScore10": 7.3,
+      "criticalGaps": [
+        "Best reference match is challenge-8-blue-purple-finale-group-1, not expected challenge-7-yellow-diagonal-fan-group-1.",
+        "Movement conformance is only 2.4/10 under the strict scorer: current paths are too short/shallow and do not yet show the sweeping, turning, learnable Galaga challenge-stage trajectories.",
+        "Graphical conformance is only 2.2/10 because challenge sprites are still scored as static/type labels; active flapping, pulsing, dive/rotation silhouettes, and reference sprite crops are not yet measured in the challenge window.",
+        "Alien/stage novelty is only 3.4/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
+        "Yellow diagonal fan is now represented as its own runtime contract, but it still needs stronger diagonal lane identity and must not collapse into the blue/purple finale signature."
+      ],
+      "nextActions": [
+        "Rebuild Challenge 7 around the yellow diagonal fan so the best match lands on challenge-7-yellow-diagonal-fan-group-1, not the finale label.",
+        "Add a player-hit opportunity probe that rewards firing along the diagonal band rather than center-lane waiting."
+      ],
+      "interestingFactor10": 2.5,
+      "conformanceScore10": 2.5,
+      "legacyCoverageScore10": 6.2,
+      "movementConformanceScore10": 2.4,
+      "graphicalConformanceScore10": 2.2,
+      "alienNoveltyScore10": 3.4,
+      "progressionConformanceScore10": 2,
+      "safetyRuleScore10": 10,
+      "strictAxisReads": {
+        "movement": {
+          "score10": 2.4,
+          "rawFit": 0.731,
+          "referenceLabelId": "challenge-7-yellow-diagonal-fan-group-1",
+          "referenceReliability": 0.62,
+          "temporalCoverage": 0.58,
+          "components": {
+            "yRange": 0.86,
+            "pathLength": 0.76,
+            "turnCount": 1,
+            "reversalCount": 0,
+            "lowerFieldShare": 0.417,
+            "trajectoryBestMatch": 0.82
+          },
+          "read": "Strict movement score 2.4/10 against challenge-7-yellow-diagonal-fan-group-1: y-range fit 0.86, path-length fit 0.76, turn fit 1. Current probes are still sampled summaries, so full temporal choreography is not yet proven."
+        },
+        "graphics": {
+          "score10": 2.2,
+          "activeMotionCap": 2.2,
+          "measuredRuntimeSpriteMotionCoverage": 0,
+          "components": {
+            "alienTypeMix": 0.18,
+            "visualFamilyNovelty": 0.14,
+            "firstChallengeLineContract": 0,
+            "activeSpriteMotionCoverage": 0
+          },
+          "read": "Strict graphics score 2.2/10. Current visible family/type labels are present, but challenge-window graphics are capped at 2.2/10 until live sprite flaps, pulsing, rotation/dive silhouettes, capture/rescue transitions, and Galaga target sprite crops are scored in motion."
+        },
+        "alienNovelty": {
+          "score10": 3.4,
+          "components": {
+            "firstChallengeSemantic": 0,
+            "typeMix": 0.28,
+            "familyNovelty": 0.22,
+            "groupDiversity": 0.2,
+            "referenceStageCredit": 0.08
+          },
+          "read": "Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments."
+        },
+        "progression": {
+          "score10": 2,
+          "pathFamilies": [
+            "yellow-diagonal-fan",
+            "green-ladder-split",
+            "pink-green-cascade"
+          ],
+          "components": {
+            "pathFamilyCredit": 0.15,
+            "referenceCredit": 0,
+            "stageRoleCredit": 0.08,
+            "lateReferencePenalty": 0
+          },
+          "read": "Strict progression score 2/10. The current stage has 3 path-family label(s), but later challenge stages are not yet backed by enough reference-specific set-piece contracts to claim real Galaga progression."
+        }
+      },
+      "expectedReferenceHit": false,
+      "scoreComponents": {
+        "baseline": 1,
+        "movementConformance": 2.4,
+        "graphicalConformance": 2.2,
+        "alienNovelty": 3.4,
+        "stageProgression": 2,
+        "safetyRule": 10,
+        "legacyCoverageScore": 6.2
+      },
+      "evidence": [
+        "reference-artifacts/analyses/galaga-path-reference-labels/latest.json",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
+        "reference-artifacts/analyses/formation-boss-path-family-comparison/latest.json",
+        "reference-artifacts/analyses/alien-entry-challenge-variation/latest.json",
+        "browser-backed challengeFormationState runtime probe"
+      ]
+    },
+    {
+      "stage": 31,
+      "challengeNumber": 8,
+      "auroraWindowId": "challenge-stage-blue-purple-finale",
+      "auroraLayoutId": "blue-purple-finale",
+      "pathFamily": "blue-purple-finale",
+      "laneTypes": [
+        "rogue",
+        "boss",
+        "bee",
+        "but",
+        "but",
+        "bee",
+        "boss",
+        "rogue"
+      ],
+      "runtimeFirstWaveTypes": "rogue, boss, bee, but, but, bee, boss, rogue",
+      "runtimeGroupSignatures": [
+        {
+          "group": 0,
+          "types": [
+            "rogue",
+            "boss",
+            "bee",
+            "but",
+            "but",
+            "bee",
+            "boss",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "blue-purple-finale"
+          ],
+          "spawnSpan": 0.21
+        },
+        {
+          "group": 1,
+          "types": [
+            "boss",
+            "rogue",
+            "but",
+            "bee",
+            "bee",
+            "but",
+            "rogue",
+            "boss"
+          ],
+          "families": [
+            "mosquito"
+          ],
+          "pathFamilies": [
+            "green-ladder-split"
+          ],
+          "spawnSpan": 0.21
+        },
+        {
+          "group": 2,
+          "types": [
+            "bee",
+            "but",
+            "boss",
+            "rogue",
+            "rogue",
+            "boss",
+            "but",
+            "bee"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "blue-purple-finale"
+          ],
+          "spawnSpan": 0.21
+        },
+        {
+          "group": 3,
+          "types": [
+            "but",
+            "bee",
+            "rogue",
+            "boss",
+            "boss",
+            "rogue",
+            "bee",
+            "but"
+          ],
+          "families": [
+            "mosquito"
+          ],
+          "pathFamilies": [
+            "yellow-diagonal-fan"
+          ],
+          "spawnSpan": 0.21
+        },
+        {
+          "group": 4,
+          "types": [
+            "boss",
+            "but",
+            "rogue",
+            "bee",
+            "bee",
+            "rogue",
+            "but",
+            "boss"
+          ],
+          "families": [
+            "galboss"
+          ],
+          "pathFamilies": [
+            "blue-purple-finale"
+          ],
+          "spawnSpan": 0.21
+        }
+      ],
+      "runtimeVisualFamilies": [
+        "stingray"
+      ],
+      "galagaTarget": "Eighth visible challenge should act as a compact blue/purple late-loop capstone.",
+      "criticalExpectation": "Should avoid returning to early-stage column/cross vocabulary and make the late-loop identity obvious.",
+      "expectedReferenceLabels": [
+        "challenge-8-blue-purple-finale-group-1"
+      ],
+      "bestReferenceMatch": {
+        "labelId": "challenge-8-blue-purple-finale-group-1",
+        "kind": "challengeEntry",
+        "entityFamily": "blue-purple-finale-cluster",
+        "sourceAnchor": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-2fps.jpg",
+        "distance": 0.2003,
+        "trajectoryScore10": 7.6,
+        "semanticScore10": null,
+        "score10": 7.9,
+        "components": {
+          "xRange": 1,
+          "yRange": 0.893,
+          "pathLength": 0.524,
+          "turnCount": 0.867,
+          "reversalCount": 0.8,
+          "lowerFieldShare": 0.788
+        }
+      },
+      "referenceMatchScore10": 7.9,
+      "runtimeVector": {
+        "xRange": 1.6143,
+        "yRange": 0.4464,
+        "pathLength": 0.5506,
+        "turnCount": 2.6,
+        "reversalCount": 1.8,
+        "lowerFieldShare": 0.1503,
+        "rackSlotError": 0,
+        "timingOffsetS": 0
+      },
+      "galagaReferenceAnchor": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-2fps.jpg",
+      "galagaReferenceMeaning": "compact late-loop capstone with clustered arcs and no return to early-stage vocabulary",
+      "safetyProbe": {
+        "noEnemyShots": true,
+        "noAttackStarts": true,
+        "noShipLosses": true,
+        "eventCounts": {
+          "enemyShots": 0,
+          "enemyAttackStarts": 0,
+          "shipLosses": 0,
+          "challengeContacts": 2
+        }
+      },
+      "motionProbe": {
+        "sampleCount": 9,
+        "activeSamples": 7,
+        "minActive": 18,
+        "maxActive": 40,
+        "meanActive": 32.9,
+        "xRange": 395.49,
+        "yRange": 62.497,
+        "lowerFieldShare": 0.128
+      },
+      "currentRead": "blue-purple-finale / blue-purple-finale; lanes rogue, boss, bee, but, but, bee, boss, rogue; first-wave types rogue, boss, bee, but, but, bee, boss, rogue; visual families stingray; strict movement 3.2/10, graphics 2.2/10, alien novelty 3.4/10.",
+      "graphicsRead": "Strict graphics score 2.2/10. Current visible family/type labels are present, but challenge-window graphics are capped at 2.2/10 until live sprite flaps, pulsing, rotation/dive silhouettes, capture/rescue transitions, and Galaga target sprite crops are scored in motion.",
+      "movementRead": "Strict movement score 3.2/10 against challenge-8-blue-purple-finale-group-1: y-range fit 0.89, path-length fit 0.52, turn fit 0.87. Current probes are still sampled summaries, so full temporal choreography is not yet proven. Legacy broad vector best-match was 7.9/10 against challenge-8-blue-purple-finale-group-1; xRange 1.6143, yRange 0.4464, pathLength 0.5506.",
+      "alienVariationRead": "Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments. Opening wave exposes 4 type(s) and stingray visual family labels. Group identity diagnostic: 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.21s.",
+      "groupIdentityRead": "5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.21s.",
+      "groupIdentityScore10": 7.2,
+      "criticalGaps": [
+        "Movement conformance is only 3.2/10 under the strict scorer: current paths are too short/shallow and do not yet show the sweeping, turning, learnable Galaga challenge-stage trajectories.",
+        "Graphical conformance is only 2.2/10 because challenge sprites are still scored as static/type labels; active flapping, pulsing, dive/rotation silhouettes, and reference sprite crops are not yet measured in the challenge window.",
+        "Alien/stage novelty is only 3.4/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
+        "Blue/purple finale is now represented as its own runtime contract, but it still needs fuller path length and active sprite-motion evidence before it feels like a late-loop capstone."
+      ],
+      "nextActions": [
+        "Refine the Challenge 8 blue/purple finale with fuller path length and compact late-loop timing.",
+        "Promote challenge enemy active-motion scoring so visual novelty is measured through animation, not only family labels."
+      ],
+      "interestingFactor10": 2.9,
+      "conformanceScore10": 3,
+      "legacyCoverageScore10": 6.7,
+      "movementConformanceScore10": 3.2,
+      "graphicalConformanceScore10": 2.2,
+      "alienNoveltyScore10": 3.4,
+      "progressionConformanceScore10": 3.1,
+      "safetyRuleScore10": 10,
+      "strictAxisReads": {
+        "movement": {
+          "score10": 3.2,
+          "rawFit": 0.748,
+          "referenceLabelId": "challenge-8-blue-purple-finale-group-1",
+          "referenceReliability": 0.92,
+          "temporalCoverage": 0.58,
+          "components": {
+            "yRange": 0.893,
+            "pathLength": 0.524,
+            "turnCount": 0.867,
+            "reversalCount": 0.8,
+            "lowerFieldShare": 0.752,
+            "trajectoryBestMatch": 0.76
+          },
+          "read": "Strict movement score 3.2/10 against challenge-8-blue-purple-finale-group-1: y-range fit 0.89, path-length fit 0.52, turn fit 0.87. Current probes are still sampled summaries, so full temporal choreography is not yet proven."
+        },
+        "graphics": {
+          "score10": 2.2,
+          "activeMotionCap": 2.2,
+          "measuredRuntimeSpriteMotionCoverage": 0,
+          "components": {
+            "alienTypeMix": 0.18,
+            "visualFamilyNovelty": 0.14,
+            "firstChallengeLineContract": 0,
+            "activeSpriteMotionCoverage": 0
+          },
+          "read": "Strict graphics score 2.2/10. Current visible family/type labels are present, but challenge-window graphics are capped at 2.2/10 until live sprite flaps, pulsing, rotation/dive silhouettes, capture/rescue transitions, and Galaga target sprite crops are scored in motion."
+        },
+        "alienNovelty": {
+          "score10": 3.4,
+          "components": {
+            "firstChallengeSemantic": 0,
+            "typeMix": 0.28,
+            "familyNovelty": 0.22,
+            "groupDiversity": 0.2,
+            "referenceStageCredit": 0.16
+          },
+          "read": "Strict alien/progression novelty score 3.4/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments."
+        },
+        "progression": {
+          "score10": 3.1,
+          "pathFamilies": [
+            "blue-purple-finale",
+            "green-ladder-split",
+            "yellow-diagonal-fan"
+          ],
+          "components": {
+            "pathFamilyCredit": 0.15,
+            "referenceCredit": 0.24,
+            "stageRoleCredit": 0.08,
+            "lateReferencePenalty": 0
+          },
+          "read": "Strict progression score 3.1/10. The current stage has 3 path-family label(s), but later challenge stages are not yet backed by enough reference-specific set-piece contracts to claim real Galaga progression."
+        }
+      },
+      "expectedReferenceHit": true,
+      "scoreComponents": {
+        "baseline": 1,
+        "movementConformance": 3.2,
+        "graphicalConformance": 2.2,
+        "alienNovelty": 3.4,
+        "stageProgression": 3.1,
+        "safetyRule": 10,
+        "legacyCoverageScore": 6.7
+      },
+      "evidence": [
+        "reference-artifacts/analyses/galaga-path-reference-labels/latest.json",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
+        "reference-artifacts/analyses/formation-boss-path-family-comparison/latest.json",
+        "reference-artifacts/analyses/alien-entry-challenge-variation/latest.json",
+        "browser-backed challengeFormationState runtime probe"
+      ]
+    }
+  ],
+  "referenceLabels": [
+    {
+      "labelId": "challenge-4-pink-serpentine-group-1",
+      "challengeNumber": 4,
+      "groupIndex": 1,
+      "entityFamily": "pink-serpentine-specialty",
+      "entrySide": "top-right",
+      "exitSide": "left",
+      "sourceAnchor": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-2fps.jpg",
+      "bonusOpportunity": "late challenge specialty arc with long readable upper-field scoring lane",
+      "confidenceScore": 0.72,
+      "comparisonVector": {
+        "xRange": 0.72,
+        "yRange": 0.42,
+        "pathLength": 0.94,
+        "turnCount": 3,
+        "reversalCount": 2,
+        "lowerFieldShare": 0.1,
+        "rackSlotError": 0,
+        "timingOffsetS": 0
+      }
+    },
+    {
+      "labelId": "challenge-5-pink-green-cascade-group-1",
+      "challengeNumber": 5,
+      "groupIndex": 1,
+      "entityFamily": "pink-green-cascade",
+      "entrySide": "top-left",
+      "exitSide": "right",
+      "sourceAnchor": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/contact-sheet-2fps.jpg",
+      "bonusOpportunity": "alternating specialty groups with lower-field pass awareness while remaining nonlethal",
+      "confidenceScore": 0.72,
+      "comparisonVector": {
+        "xRange": 0.7,
+        "yRange": 0.48,
+        "pathLength": 1.02,
+        "turnCount": 3,
+        "reversalCount": 2,
+        "lowerFieldShare": 0.14,
+        "rackSlotError": 0,
+        "timingOffsetS": 0
+      }
+    },
+    {
+      "labelId": "challenge-6-green-ladder-split-group-1",
+      "challengeNumber": 6,
+      "groupIndex": 1,
+      "entityFamily": "green-ladder-split",
+      "entrySide": "top-center",
+      "exitSide": "split",
+      "sourceAnchor": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/contact-sheet-2fps.jpg",
+      "bonusOpportunity": "staggered ladder groups that reward reading route separation before the split exit",
+      "confidenceScore": 0.72,
+      "comparisonVector": {
+        "xRange": 0.62,
+        "yRange": 0.62,
+        "pathLength": 0.98,
+        "turnCount": 2,
+        "reversalCount": 1,
+        "lowerFieldShare": 0.2,
+        "rackSlotError": 0,
+        "timingOffsetS": 0
+      }
+    },
+    {
+      "labelId": "challenge-7-yellow-diagonal-fan-group-1",
+      "challengeNumber": 7,
+      "groupIndex": 1,
+      "entityFamily": "yellow-diagonal-fan",
+      "entrySide": "top-left",
+      "exitSide": "lower-right",
+      "sourceAnchor": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/contact-sheet-2fps.jpg",
+      "bonusOpportunity": "diagonal fan lane that creates a memorable late-stage aim/read pattern",
+      "confidenceScore": 0.72,
+      "comparisonVector": {
+        "xRange": 0.76,
+        "yRange": 0.56,
+        "pathLength": 1.1,
+        "turnCount": 2,
+        "reversalCount": 1,
+        "lowerFieldShare": 0.24,
+        "rackSlotError": 0,
+        "timingOffsetS": 0
+      }
+    },
+    {
+      "labelId": "challenge-8-blue-purple-finale-group-1",
+      "challengeNumber": 8,
+      "groupIndex": 1,
+      "entityFamily": "blue-purple-finale-cluster",
+      "entrySide": "top-right",
+      "exitSide": "lower-left",
+      "sourceAnchor": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-2fps.jpg",
+      "bonusOpportunity": "compact late-loop capstone with clustered arcs and no return to early-stage vocabulary",
+      "confidenceScore": 0.72,
+      "comparisonVector": {
+        "xRange": 0.68,
+        "yRange": 0.5,
+        "pathLength": 1.05,
+        "turnCount": 3,
+        "reversalCount": 2,
+        "lowerFieldShare": 0.18,
+        "rackSlotError": 0,
+        "timingOffsetS": 0
+      }
+    },
+    {
+      "labelId": "challenge-1-arrival-group-1",
+      "challengeNumber": 1,
+      "groupIndex": 1,
+      "entityFamily": "bee-line",
+      "entrySide": "top-right",
+      "exitSide": "left",
+      "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg",
+      "bonusOpportunity": "upper-band mirrored group with no enemy fire",
+      "confidenceScore": 0.76,
+      "comparisonVector": {
+        "xRange": 0.52,
+        "yRange": 0.28,
+        "pathLength": 0.68,
+        "turnCount": 1,
+        "reversalCount": 0,
+        "lowerFieldShare": 0.02,
+        "rackSlotError": 0,
+        "timingOffsetS": 0
+      }
+    },
+    {
+      "labelId": "challenge-1-late-wave-group-4",
+      "challengeNumber": 1,
+      "groupIndex": 4,
+      "entityFamily": "butterfly-line",
+      "entrySide": "top-left",
+      "exitSide": "right",
+      "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/contact-sheet.jpg",
+      "bonusOpportunity": "late challenge group crosses through upper lanes before peel-off",
+      "confidenceScore": 0.74,
+      "comparisonVector": {
+        "xRange": 0.58,
+        "yRange": 0.32,
+        "pathLength": 0.72,
+        "turnCount": 1,
+        "reversalCount": 0,
+        "lowerFieldShare": 0.06,
+        "rackSlotError": 0,
+        "timingOffsetS": 0
+      }
+    },
+    {
+      "labelId": "challenge-2-arrival-group-1",
+      "challengeNumber": 2,
+      "groupIndex": 1,
+      "entityFamily": "mixed-novelty-line",
+      "entrySide": "top-left",
+      "exitSide": "right",
+      "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg",
+      "bonusOpportunity": "denser second challenge pattern with visible upper-field score window",
+      "confidenceScore": 0.75,
+      "comparisonVector": {
+        "xRange": 0.66,
+        "yRange": 0.34,
+        "pathLength": 0.82,
+        "turnCount": 2,
+        "reversalCount": 1,
+        "lowerFieldShare": 0.07,
+        "rackSlotError": 0,
+        "timingOffsetS": 0
+      }
+    },
+    {
+      "labelId": "challenge-3-arrival-group-1",
+      "challengeNumber": 3,
+      "groupIndex": 1,
+      "entityFamily": "boss-led-novelty-line",
+      "entrySide": "top-right",
+      "exitSide": "left",
+      "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-3-arrival/contact-sheet.jpg",
+      "bonusOpportunity": "later challenge pattern with larger visual novelty while remaining non-attacking",
+      "confidenceScore": 0.75,
+      "comparisonVector": {
+        "xRange": 0.68,
+        "yRange": 0.36,
+        "pathLength": 0.86,
+        "turnCount": 2,
+        "reversalCount": 1,
+        "lowerFieldShare": 0.08,
+        "rackSlotError": 0,
+        "timingOffsetS": 0
+      }
+    }
+  ],
+  "sourceArtifacts": {
+    "galagaPathReferenceLabels": "reference-artifacts/analyses/galaga-path-reference-labels/latest.json",
+    "galagaChallengeVideoReference": "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
+    "galagaTargetArtifactCoverage": "reference-artifacts/analyses/galaga-target-artifact-coverage/latest.json",
+    "pathFamilyComparison": "reference-artifacts/analyses/formation-boss-path-family-comparison/latest.json",
+    "alienEntryChallengeVariation": "reference-artifacts/analyses/alien-entry-challenge-variation/latest.json",
+    "challengeCollisionGuardrail": "tools/harness/check-challenge-collision.js",
+    "challengeMotionProfileGuardrail": "tools/harness/check-challenge-motion-profile.js"
+  },
+  "targetArtifactCoverage": {
+    "summary": {
+      "coverageScore10": 5.1,
+      "challengeStageReadiness10": 4.5,
+      "sourceCount": 12,
+      "criticalSourceCount": 4,
+      "criticalOpenCount": 4,
+      "ingestedSourceCount": 4,
+      "partialSourceCount": 4,
+      "candidateOrPlannedSourceCount": 2,
+      "notIngestedSourceCount": 2,
+      "existingEvidenceCount": 35,
+      "missingEvidenceCount": 0,
+      "lateChallengeGapCount": 0,
+      "lateChallengePartialCount": 5,
+      "interpretation": "Aurora now has media-backed windows for all tracked Galaga challenge stages, including Challenges 4-8. The bottleneck has moved from source acquisition to precision: each window needs five-group frame labels for entry side, path family, scoreable band, exit side, alien family, and perfect-bonus opportunity before direct trajectory scoring should rise."
+    },
+    "challengeStageCoverage": [
+      {
+        "challengeNumber": 1,
+        "stageMarker": 3,
+        "status": "partially-ingested",
+        "currentEvidence": [
+          "challenge-1-arrival",
+          "challenge-1-late-wave",
+          "challenge-01-classic-column-lesson"
+        ],
+        "nextNeed": "Convert existing windows into fuller five-group trajectory labels and build Aurora Stage 3 against those exact group contracts.",
+        "coverage10": 4.5,
+        "evidenceCount": 3
+      },
+      {
+        "challengeNumber": 2,
+        "stageMarker": 7,
+        "status": "partially-ingested",
+        "currentEvidence": [
+          "challenge-2-arrival",
+          "challenge-02-cross-and-column"
+        ],
+        "nextNeed": "Add late-wave/results windows and group 2-5 labels.",
+        "coverage10": 4.5,
+        "evidenceCount": 2
+      },
+      {
+        "challengeNumber": 3,
+        "stageMarker": 11,
+        "status": "partially-ingested",
+        "currentEvidence": [
+          "challenge-3-arrival",
+          "challenge-03-blue-hook-and-green-novelty"
+        ],
+        "nextNeed": "Add late-wave/results windows and map specialty alien novelty explicitly.",
+        "coverage10": 4.5,
+        "evidenceCount": 2
+      },
+      {
+        "challengeNumber": 4,
+        "stageMarker": 15,
+        "status": "partially-ingested",
+        "currentEvidence": [
+          "challenge-04-pink-serpentine"
+        ],
+        "nextNeed": "Promote five-group labels for the pink serpentine reference and rebuild Aurora Stage 15 around a distinct late-stage specialty arc.",
+        "coverage10": 4.5,
+        "evidenceCount": 1
+      },
+      {
+        "challengeNumber": 5,
+        "stageMarker": 19,
+        "status": "partially-ingested",
+        "currentEvidence": [
+          "challenge-05-pink-and-green-cascade"
+        ],
+        "nextNeed": "Promote five-group labels for the pink/green cascade reference and align Aurora's mosquito/specialty-family novelty to the visible target.",
+        "coverage10": 4.5,
+        "evidenceCount": 1
+      },
+      {
+        "challengeNumber": 6,
+        "stageMarker": 23,
+        "status": "partially-ingested",
+        "currentEvidence": [
+          "challenge-06-green-ladder-split"
+        ],
+        "nextNeed": "Promote five-group labels for the green ladder/split reference and add runtime probes for staggered group spacing.",
+        "coverage10": 4.5,
+        "evidenceCount": 1
+      },
+      {
+        "challengeNumber": 7,
+        "stageMarker": 27,
+        "status": "partially-ingested",
+        "currentEvidence": [
+          "challenge-07-yellow-diagonal-fan"
+        ],
+        "nextNeed": "Promote five-group labels for the yellow diagonal fan reference and use it as the strongest late-stage visual novelty target.",
+        "coverage10": 4.5,
+        "evidenceCount": 1
+      },
+      {
+        "challengeNumber": 8,
+        "stageMarker": 31,
+        "status": "partially-ingested",
+        "currentEvidence": [
+          "challenge-08-blue-purple-finale"
+        ],
+        "nextNeed": "Promote five-group labels for the blue/purple finale reference and use it as the late-loop capstone contract.",
+        "coverage10": 4.5,
+        "evidenceCount": 1
+      }
+    ]
+  },
+  "improvementPlan": [
+    "Use strict challenge-stage scores as the release-facing truth; keep broad coverage scores only as diagnostics.",
+    "Define a challenge-stage target grammar for group order, entry/exit side, path length, turn count, featured alien, scoring window, perfect bonus, animation phases, and result feedback.",
+    "Stage 3: rebuild Challenging Stage 1 against the Galaga challenge-1 arrival and late-wave references with visibly longer movement and readable exits.",
+    "Stage 7: rebuild Challenging Stage 2 as a separate mixed-novelty crossing set piece with different entry/exit and timing grammar.",
+    "Stage 11: rebuild Challenging Stage 3 around boss-led novelty plus active sprite-motion scoring.",
+    "Stage 15/19/23/27/31: continue replacing repeated late-stage patterns with first-pass media-backed contracts, then promote each to five-group frame labels.",
+    "Publish contact sheets, trajectory SVGs, per-stage critical gaps, and strict axis scores in generated docs."
+  ]
+}

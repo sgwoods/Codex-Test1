@@ -1,0 +1,268 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "platinum-code-review-packet",
+  "generatedAt": "2026-05-15T16:34:47.808Z",
+  "branch": "codex/macbook-audio-entry-grounding-cycle",
+  "baseRef": "origin/main",
+  "baseCommit": "93dbdad81d7154fbdc74512c4fb4502752be0be5",
+  "headCommit": "93dbdad8",
+  "dirty": true,
+  "statusShort": [
+    "M CONFORMANCE_ECONOMICS.md",
+    " M CONFORMANCE_METRICS_OVERVIEW.md",
+    " M CONFORMANCE_METRIC_OVERVIEW.md",
+    " M GAME_CONFORMANCE_CATALOG.md",
+    " M RELEASE_CONFORMANCE_DASHBOARD.md",
+    " M REVIEW_LEARNING_LEDGER.md",
+    " M reference-artifacts/analyses/alien-entry-challenge-variation/latest.json",
+    " M reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json",
+    " M reference-artifacts/analyses/aurora-audio-cue-candidates/latest-challenge-perfect.json",
+    " M reference-artifacts/analyses/aurora-audio-cue-candidates/latest-focus.json",
+    " M reference-artifacts/analyses/aurora-audio-cue-candidates/latest-formation-pulse.json",
+    " M reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
+    " M reference-artifacts/analyses/aurora-stage-pulse-cadence/latest.json",
+    " M reference-artifacts/analyses/code-review/latest.json",
+    " M reference-artifacts/analyses/conformance-economics/latest-run.json",
+    " M reference-artifacts/analyses/conformance-economics/run-ledger.jsonl",
+    " M reference-artifacts/analyses/galaga-path-reference-label-plan/latest.json",
+    " M reference-artifacts/analyses/galaga-path-reference-labels/latest.json",
+    " M reference-artifacts/analyses/release-conformance-dashboard/latest.json",
+    " M reference-artifacts/analyses/review-learning/latest.json",
+    " M tools/harness/plan-galaga-path-reference-labels.js",
+    "?? reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-15-93dbdad8/",
+    "?? reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-15-93dbdad8-dirty/",
+    "?? reference-artifacts/analyses/aurora-stage-pulse-cadence/2026-05-15-93dbdad8-dirty/",
+    "?? reference-artifacts/analyses/code-review/2026-05-15-93dbdad8/",
+    "?? reference-artifacts/analyses/conformance-economics/2026-05-15-93dbdad8/",
+    "?? reference-artifacts/analyses/galaga-path-reference-label-plan/2026-05-15-93dbdad8/",
+    "?? reference-artifacts/analyses/galaga-path-reference-labels/2026-05-15-93dbdad8/",
+    "?? reference-artifacts/analyses/release-conformance-dashboard/2026-05-15-93dbdad8-dirty/",
+    "?? reference-artifacts/analyses/review-learning/2026-05-15-93dbdad8/"
+  ],
+  "reviewSkill": {
+    "path": "codex-skills/platinum-code-review/SKILL.md",
+    "modelDoc": "CODE_REVIEW_MODEL.md"
+  },
+  "architecture": {
+    "installedArchitectSkillFound": false,
+    "repoArchitectureDocs": [
+      "ARCHITECTURE.md",
+      "PLATINUM_ARCHITECTURE_OVERVIEW.md",
+      "APPLICATIONS_ON_PLATINUM.md",
+      "PLATINUM_GAME_BOUNDARY_AUDIT.md"
+    ],
+    "boundaryHarnesses": [
+      "npm run harness:check:gameplay-adapter-boundaries",
+      "npm run harness:check:pack-registry-boundaries",
+      "npm run harness:check:platinum-renderer-boundaries",
+      "npm run harness:check:platinum-pack-boot"
+    ]
+  },
+  "summary": {
+    "changedFileCount": 26,
+    "p0": 0,
+    "p1": 0,
+    "p2": 0,
+    "p3": 0,
+    "riskTaggedFileCount": 3
+  },
+  "changedFiles": [
+    {
+      "status": "M",
+      "file": "CONFORMANCE_ECONOMICS.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "CONFORMANCE_METRIC_OVERVIEW.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "CONFORMANCE_METRICS_OVERVIEW.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "GAME_CONFORMANCE_CATALOG.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-15-93dbdad8/",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/alien-entry-challenge-variation/latest.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-15-93dbdad8-dirty/",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-challenge-perfect.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-focus.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-formation-pulse.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/aurora-stage-pulse-cadence/2026-05-15-93dbdad8-dirty/",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/aurora-stage-pulse-cadence/latest.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/conformance-economics/2026-05-15-93dbdad8/",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/conformance-economics/latest-run.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/conformance-economics/run-ledger.jsonl",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/galaga-path-reference-label-plan/2026-05-15-93dbdad8/",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/galaga-path-reference-label-plan/latest.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/galaga-path-reference-labels/2026-05-15-93dbdad8/",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/galaga-path-reference-labels/latest.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/release-conformance-dashboard/2026-05-15-93dbdad8-dirty/",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/release-conformance-dashboard/latest.json",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "RELEASE_CONFORMANCE_DASHBOARD.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "REVIEW_LEARNING_LEDGER.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "tools/harness/plan-galaga-path-reference-labels.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    }
+  ],
+  "automaticFindings": [],
+  "recommendedChecks": [
+    "npm run build",
+    "npm run harness:check:audio-runtime-recovery",
+    "npm run harness:check:trophy-replay-surface",
+    "npm run publish:check:dev",
+    "npm run review:code:check"
+  ]
+}

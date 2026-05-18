@@ -1323,6 +1323,7 @@ async function main(){
   fs.writeFileSync(path.join(outRoot, 'report.json'), `${JSON.stringify(report, null, 2)}\n`);
   fs.writeFileSync(path.join(outRoot, 'README.md'), markdown(report));
   fs.writeFileSync(path.join(OUT_ROOT, 'latest.json'), `${JSON.stringify(report, null, 2)}\n`);
+  fs.writeFileSync(path.join(OUT_ROOT, `latest-${ENTRY_ID}.json`), `${JSON.stringify(report, null, 2)}\n`);
 
   console.log(JSON.stringify({
     ok: true,

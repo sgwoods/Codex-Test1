@@ -84,11 +84,12 @@ function updateChallengeEnemy(e,dt){
  // Challenge-stage fidelity is intentionally isolated here so we can tune the
  // first challenge pattern against reference footage without disturbing the
  // normal stage attack logic.
+	 const pathFamily=e.pathFamily||'classic-lane-wave';
 	 const fm=familyMotion(e);
 	 const classicStage3=S.stage===3&&e.fam==='classic';
-	 e.tm+=dt*((classicStage3?.345:.355)+(e.wave||0)*.007+Math.min(.012,S.stage*.0015));
+	 const baseChallengeSpeed=pathFamily==='yellow-diagonal-fan'?.388:pathFamily==='green-ladder-split'?.386:pathFamily==='first-challenge-peel'?.345:(classicStage3?.345:.355);
+	 e.tm+=dt*(baseChallengeSpeed+(e.wave||0)*.007+Math.min(.012,S.stage*.0015));
 	 const u=e.tm,p=e.ph,wave=e.wave||0,side=e.side||1,slot=e.slot||0,row=e.row||0,sweep=e.sweep||1;
-	 const pathFamily=e.pathFamily||'classic-lane-wave';
 	 const arcAmp=e.arcAmp||1,dropAmp=e.dropAmp||1;
 	 const laneX=PLAY_W/2+side*(48+slot*16);
 	 const topY=38+wave*14+row*8;
@@ -97,9 +98,29 @@ function updateChallengeEnemy(e,dt){
 	  if(pathFamily==='hook-arc'){
 	   e.x=startX+(laneX-startX)*(q<.58?Math.sin(q/.58*Math.PI/2):.82+(q-.58)*.43);
 	   e.y=topY+Math.sin(q*Math.PI*1.65+p)*7*arcAmp;
+	  }else if(pathFamily==='first-challenge-peel'){
+	   e.x=startX+(laneX-startX)*Math.sin(q*Math.PI/2);
+	   e.y=topY+q*2.8*dropAmp;
 	  }else if(pathFamily==='crown-split-cascade'){
 	   e.x=startX+(laneX-startX)*curve+sweep*Math.sin(q*Math.PI*2.6+p+slot*.35)*22*arcAmp;
 	   e.y=topY+Math.sin(q*Math.PI*1.8+p)*9*arcAmp+q*5*dropAmp;
+	  }else if(pathFamily==='pink-serpentine'){
+	   e.x=startX+(laneX-startX)*curve+sweep*Math.sin(q*Math.PI*2.8+p+wave*.64)*20*arcAmp;
+	   e.y=topY+q*8*dropAmp+Math.sin(q*Math.PI*3.4+p)*8*arcAmp;
+	  }else if(pathFamily==='pink-green-cascade'){
+	   e.x=startX+(laneX-startX)*curve+sweep*Math.sin(q*Math.PI*(1.6+wave*.22)+p+slot*.3)*28*arcAmp;
+	   e.y=topY+q*(10+wave*1.2)*dropAmp+Math.sin(q*Math.PI*2.4+p)*7*arcAmp;
+	  }else if(pathFamily==='green-ladder-split'){
+	   const rung=slot%2?-1:1;
+	   e.x=startX+(laneX-startX)*q+sweep*((q-.5)*12+rung*(9+q*5))*arcAmp;
+	   e.y=topY+q*(38+slot*5)*dropAmp+row*5;
+	  }else if(pathFamily==='yellow-diagonal-fan'){
+	   const fanDir=wave%2?-1:1;
+	   e.x=startX+(laneX-startX)*q+fanDir*(q*68+(slot-1.5)*14)*arcAmp;
+	   e.y=topY+q*(48+slot*8)*dropAmp;
+	  }else if(pathFamily==='blue-purple-finale'){
+	   e.x=startX+(laneX-startX)*curve+sweep*Math.sin(q*Math.PI*3.4+p+slot*.4)*24*arcAmp;
+	   e.y=topY+q*6*dropAmp+Math.cos(q*Math.PI*2+p)*10*arcAmp;
 	  }else if(pathFamily==='boss-led-loop'){
 	   e.x=startX+(laneX-startX)*curve+sweep*Math.sin(q*Math.PI*2+p)*9*arcAmp;
 	   e.y=topY+Math.sin(q*Math.PI*2.2+p)*6*arcAmp;
@@ -115,10 +136,32 @@ function updateChallengeEnemy(e,dt){
 	  if(pathFamily==='hook-arc'){
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*1.2)*42+Math.sin(q*Math.PI*3+p)*6)*fm.challengeSweep*arcAmp;
 	   e.y=topY+q*12*dropAmp+Math.sin(q*7.2+p)*2.2;
+	  }else if(pathFamily==='first-challenge-peel'){
+	   const glide=18+slot*4;
+	   e.x=laneX-side*(q*glide);
+	   e.y=topY+q*4.2*dropAmp;
 	  }else if(pathFamily==='crown-split-cascade'){
 	   const cascade=slot%2?-1:1;
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.4+p*.4)*44+Math.sin(q*Math.PI)*28)*fm.challengeSweep*arcAmp*.82;
 	   e.y=topY+q*(10+slot*1.5)*dropAmp+Math.sin(q*8.4+p+wave*.35)*3.4+Math.max(0,q-.42)*cascade*9;
+	  }else if(pathFamily==='pink-serpentine'){
+	   e.x=laneX+sweep*(Math.sin(q*Math.PI*3.2+p)*50+Math.sin(q*Math.PI*.8)*32)*fm.challengeSweep*arcAmp;
+	   e.y=topY+q*(52+slot*8)*dropAmp+Math.sin(q*9.2+p+wave*.4)*6.5;
+	  }else if(pathFamily==='pink-green-cascade'){
+	   const cascade=slot%2?-1:1;
+	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.5+p)*42+Math.sin(q*Math.PI*(1.1+wave*.1))*25)*fm.challengeSweep*arcAmp;
+	   e.y=topY+q*(64+slot*10)*dropAmp+Math.sin(q*8.8+p)*4+Math.max(0,q-.45)*cascade*12;
+	  }else if(pathFamily==='green-ladder-split'){
+	   const rung=slot%2?-1:1;
+	   e.x=laneX+sweep*((q-.5)*44+rung*(18+q*13))*fm.challengeSweep*arcAmp;
+	   e.y=topY+q*(146+slot*14)*dropAmp+(wave%2?Math.sin(q*Math.PI)*7:0);
+	  }else if(pathFamily==='yellow-diagonal-fan'){
+	   const fanDir=wave%2?-1:1;
+	   e.x=laneX+fanDir*(((q-.22)*202)+(slot-1.5)*32)*fm.challengeSweep*arcAmp;
+	   e.y=topY+q*(188+slot*27)*dropAmp;
+	  }else if(pathFamily==='blue-purple-finale'){
+	   e.x=laneX+sweep*(Math.sin(q*Math.PI*4+p)*42+Math.sin(q*Math.PI*1.5)*28)*fm.challengeSweep*arcAmp;
+	   e.y=topY+q*(78+slot*12)*dropAmp+Math.cos(q*Math.PI*3+p)*10*arcAmp;
 	  }else if(pathFamily==='boss-led-loop'){
 	   const leader=e.t==='boss'?1:.72;
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.05+p*.35)*34+Math.sin(q*Math.PI)*18)*fm.challengeSweep*arcAmp*leader;
@@ -135,10 +178,32 @@ function updateChallengeEnemy(e,dt){
 	  if(pathFamily==='hook-arc'){
 	   e.x=laneX+sweep*(36-q*78)*fm.challengeSweep*arcAmp+Math.sin(q*7.4+p)*2.4;
 	   e.y=topY+10+q*205*fm.challengeDrop*dropAmp;
+	  }else if(pathFamily==='first-challenge-peel'){
+	   const glide=18+slot*4;
+	   e.x=laneX-side*(glide+q*(44+slot*4));
+	   e.y=topY+6+q*132*fm.challengeDrop*dropAmp;
 	  }else if(pathFamily==='crown-split-cascade'){
 	   const exit=sweep*(slot%2?-1:1);
 	   e.x=laneX+exit*(22+q*92)*fm.challengeSweep*arcAmp+Math.sin(q*11+p)*4.2;
 	   e.y=topY+12+q*224*fm.challengeDrop*dropAmp;
+	  }else if(pathFamily==='pink-serpentine'){
+	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.2+p)*26-q*92)*fm.challengeSweep*arcAmp;
+	   e.y=topY+20+q*214*fm.challengeDrop*dropAmp;
+	  }else if(pathFamily==='pink-green-cascade'){
+	   const exit=sweep*(slot%2?-1:1);
+	   e.x=laneX+exit*(26+q*104)*fm.challengeSweep*arcAmp+Math.sin(q*10.5+p+wave)*5;
+	   e.y=topY+16+q*228*fm.challengeDrop*dropAmp;
+	  }else if(pathFamily==='green-ladder-split'){
+	   const exit=sweep*(slot%2?-1:1);
+	   e.x=laneX+sweep*(28+q*72)*fm.challengeSweep*arcAmp+exit*(12+q*38)*arcAmp;
+	   e.y=topY+24+q*258*fm.challengeDrop*dropAmp;
+	  }else if(pathFamily==='yellow-diagonal-fan'){
+	   const fanDir=wave%2?-1:1;
+	   e.x=laneX+fanDir*(118+q*186+(slot-1.5)*20)*fm.challengeSweep*arcAmp;
+	   e.y=topY+44+q*344*fm.challengeDrop*dropAmp;
+	  }else if(pathFamily==='blue-purple-finale'){
+	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.8+p)*34-q*76)*fm.challengeSweep*arcAmp;
+	   e.y=topY+18+q*216*fm.challengeDrop*dropAmp+Math.cos(q*8+p)*4;
 	  }else if(pathFamily==='boss-led-loop'){
 	   e.x=laneX-sweep*(8+q*48*fm.challengeSweep)*arcAmp+Math.sin(q*10+p)*5;
 	   e.y=topY+10+q*(e.t==='boss'?218:194)*fm.challengeDrop*dropAmp;

@@ -1,0 +1,59 @@
+{
+  "schema": "galaga-design-grounding-official-notes-0.1",
+  "source": {
+    "id": "bandai-namco-official-galaga-history",
+    "title": "Bandai Namco Galaga Web history/game page",
+    "url": "https://galaga.com/en/history/galaga.php",
+    "sourceType": "official-web",
+    "capturedAt": "2026-05-17"
+  },
+  "derivedAssertions": [
+    {
+      "id": "official-release-identity",
+      "axis": "game identity",
+      "paraphrase": "Galaga is an arcade space shooter released by Namco in 1981 and positioned as a successor to Galaxian.",
+      "conformanceUse": "Use as high-authority identity grounding for Aurora's Galaga-like target, not as a pixel or timing target."
+    },
+    {
+      "id": "official-player-controls",
+      "axis": "rules",
+      "paraphrase": "The player moves the fighter left and right and fires cannon shots, with only two shots active on screen.",
+      "conformanceUse": "Supports shot-cap, horizontal-motion, and control simplicity checks."
+    },
+    {
+      "id": "official-formation-entry",
+      "axis": "formation entry",
+      "paraphrase": "At the start of each stage, enemy formations fly into the screen before settling into lines.",
+      "conformanceUse": "Supports the requirement that aliens visibly arrive through authored paths rather than simply appearing in place."
+    },
+    {
+      "id": "official-enemy-roles",
+      "axis": "enemy taxonomy",
+      "paraphrase": "The force is described in three role families: bosses, guards, and grunts.",
+      "conformanceUse": "Maps to Aurora boss, butterfly/escort, and bee/line roles, while leaving exact sprite scoring to measured sprite artifacts."
+    },
+    {
+      "id": "official-progressive-depth",
+      "axis": "progression",
+      "paraphrase": "As stages progress, enemies show varied flight patterns and special formation attacks.",
+      "conformanceUse": "Supports strict penalties when later Aurora stages are only faster repetitions of earlier movement."
+    },
+    {
+      "id": "official-capture-rescue",
+      "axis": "capture-rescue",
+      "paraphrase": "Boss Galaga can capture the player fighter; rescuing that fighter creates Dual Fighter mode with more firepower and a wider risk profile.",
+      "conformanceUse": "Grounds capture, rescue, carried-fighter, and dual-fighter transition metrics."
+    },
+    {
+      "id": "official-challenging-stage-depth",
+      "axis": "challenge-stage purpose",
+      "paraphrase": "Challenging stages are part of the game's long-term depth and replay enjoyment.",
+      "conformanceUse": "Supports treating challenge stages as authored score exhibitions with novelty, not as filler waves."
+    }
+  ],
+  "measurementLimits": [
+    "This source provides high-authority design grounding but does not provide enough frame-level data for trajectory or timing scores.",
+    "Use measured gameplay windows, contact sheets, and path labels for movement conformance.",
+    "Use reference sprite and audio artifacts for pixel and waveform conformance."
+  ]
+}

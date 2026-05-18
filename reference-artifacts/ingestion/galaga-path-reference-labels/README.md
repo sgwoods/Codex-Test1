@@ -26,7 +26,8 @@ The direct-reference path comparison gate opens only when all of these are true:
 - at least 6 accepted `regularEntry` labels
 - at least 4 accepted `challengeEntry` labels
 - mean confidence is at least 0.72
-- referenced source anchors exist in the repo
+- referenced source anchors exist in the repo and point to committed
+  frame/contact-sheet/video media, not README-only provenance
 
 Until then, the conformance dashboard should show this work as reference-label
 readiness, not as a completed path-precision score.

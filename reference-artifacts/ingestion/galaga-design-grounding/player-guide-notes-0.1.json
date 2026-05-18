@@ -1,0 +1,53 @@
+{
+  "schema": "galaga-design-grounding-player-guide-notes-0.1",
+  "source": {
+    "id": "strategywiki-galaga-walkthrough",
+    "title": "StrategyWiki Galaga walkthrough",
+    "url": "https://strategywiki.org/wiki/Galaga/Walkthrough",
+    "sourceType": "expert-player-guide",
+    "capturedAt": "2026-05-17"
+  },
+  "derivedAssertions": [
+    {
+      "id": "player-anticipation-core",
+      "axis": "player tactics",
+      "paraphrase": "High-quality play depends on anticipating where enemies enter and how they move before they arrive.",
+      "conformanceUse": "Challenge and normal-stage path contracts should be learnable and repeatable enough to reward anticipation."
+    },
+    {
+      "id": "entrance-pattern-families",
+      "axis": "entrance-pattern explanation",
+      "paraphrase": "The guide distinguishes three entrance pattern families, including simultaneous two-side entry and one-side row entries.",
+      "conformanceUse": "Aurora should expose distinct pattern families over progression, not just speed-scaled clones."
+    },
+    {
+      "id": "challenge-cadence",
+      "axis": "challenge-stage learnability",
+      "paraphrase": "Challenging stages recur after the main entrance-pattern cycle and become their own repeated learning problem.",
+      "conformanceUse": "Docs and metrics should treat Challenging Stage 1, 2, 3, etc. separately from normal stage numbers."
+    },
+    {
+      "id": "challenge-five-groups",
+      "axis": "challenge-stage structure",
+      "paraphrase": "Challenge stages are understood by players as five groups of enemies with different positioning requirements as difficulty grows.",
+      "conformanceUse": "Future target contracts should label five group windows per challenge: entry side, aim band, alien family, exit side, and scoring opportunity."
+    },
+    {
+      "id": "capture-rescue-risk-reward",
+      "axis": "capture-rescue explanation",
+      "paraphrase": "Rescuing a captured fighter is valuable because it doubles firepower, but it creates a wider ship profile and specific rescue timing risk.",
+      "conformanceUse": "Capture/rescue conformance should include player meaning, audio clarity, visual clarity, and risk/reward timing."
+    },
+    {
+      "id": "transform-progression",
+      "axis": "transform progression",
+      "paraphrase": "Special transform enemies begin appearing after the early stages and change type as progression advances.",
+      "conformanceUse": "Late-stage and challenge-stage novelty metrics should track new alien families and transformation-like events."
+    }
+  ],
+  "measurementLimits": [
+    "This guide is useful for player meaning and strategy shape, but it is not the final authority for exact frame timing.",
+    "Use it to define what to measure and how to explain player-facing gaps.",
+    "Use measured media windows for numeric movement and visual trajectory scoring."
+  ]
+}

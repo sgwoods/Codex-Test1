@@ -1,6 +1,6 @@
 # Project State And Conformance Program
 
-Updated: May 12, 2026
+Updated: May 16, 2026
 
 This is the maintained top-level explanation of the broader Aurora / Platinum
 effort. It is meant to answer four questions at once:
@@ -47,27 +47,54 @@ game truth stays with the game and reference truth stays in ingestion artifacts.
 
 ## Current Project State
 
-Aurora / Platinum is in a post-`1.3.0` shipped posture.
+Aurora / Platinum is in a post-`1.4.0` production development posture.
 
-- hosted `/production` carries the refreshed public `1.3.0` family
-- hosted `/beta` is the reviewed lane aligned with that refreshed public family
-- hosted `/dev` carries the active `1.3.0.1` integrated hosted forward-review
-  line
+- hosted `/production` is the stable public `1.4.0` family
+- hosted `/beta` remains the authority-gated review lane for the next deliberate
+  candidate cycle
+- hosted `/dev` is the forward-review lane for the next coherent improvement
+  bundle and currently tracks the `1.4.0.1` line
 - local `localhost` is the active engineering lane
-- `main` is the authoritative integration line for the deliberate `1.4.0`
-  pickup
+- `main` remains the authoritative integration line, while current MacBook
+  development is happening on short-lived topic branches such as
+  `codex/macbook-audio-entry-grounding-cycle`
+- release authority for beta and production remains on `imacm1 / iMacM1`
+  unless explicitly transferred
 
 The active direction is no longer "can Platinum host Aurora?" It can. The active
 direction is:
 
 - raise Aurora's Galaga-like conformance in the areas that most affect player
-  experience
+  experience, especially audio feedback and challenge-stage set-piece quality
 - make conformance measurement more precise and more automated
 - keep local CPU/browser harnesses doing as much assessment work as possible
 - use Codex and model calls to design, implement, analyze, and explain better
   local systems rather than replacing measurement with opinion
 - make Galaxy Guardians and later games arrive through ingestion-backed,
   game-owned conformance packages
+
+## Current Path.Plan
+
+The current path toward the next beta request is:
+
+1. Conformance-critical gameplay first: challenge-stage motion, alien entry,
+   stage-specific formations, bonus-stage readability, and audio event clarity.
+2. Safety and release gates second: auth lanes, score integrity, replay/storage
+   boundaries, Supabase RLS posture, logging/privacy limits, and public/private
+   dashboard separation.
+3. Generated documentation and dashboards throughout: every serious score,
+   cost, artifact, and recommendation should remain visible in the public
+   project/Application Guide surfaces, not only hidden in repo artifacts.
+4. Low-risk delight after the guardrails stay green: Arcade Music, Watch Mode,
+   Player Two UX clarity, and Commentator callouts may continue when they remain
+   safely scoped and do not pollute production scores.
+5. High-risk delight last: YouTube high-score posting and externally hosted
+   replay publishing must wait behind explicit auth, consent, storage,
+   moderation, token, and revoke/failure-mode review.
+
+The immediate work priority is still Aurora challenge-stage conformance because
+it is one of the clearest remaining "this does not yet feel enough like Galaga"
+gaps and now has a dedicated scorer, evidence panels, and safety guardrails.
 
 ## Current Conformance Read
 
@@ -82,10 +109,14 @@ Current Aurora read:
 - weakest high-value category: audio identity and cue alignment, currently
   `7.3/10`
 - audio cue-contract readiness: `9.09/10`; semantic event scoring is strong at
-  `9.78/10`, but acoustic event fit remains the active gap at `6.31/10`
+  `9.78/10`, but acoustic event fit remains the active gap at roughly
+  `6.3-6.5/10` depending on whether the cue-contract or full quality report is
+  used as the source
 - level arc and encounter shape: `8.8/10`
-- boss entry and formation grammar: `9.2/10`
-- alien entry and challenge-stage novelty: `7.8/10`
+- boss entry and formation grammar: `9.4/10`
+- broad alien entry and challenge-stage planning variation: `8.3/10`
+- dedicated challenge-stage set-piece conformance: `5.7/10`; interesting
+  factor is `5.6/10`
 - player movement, shot/hit responsiveness, stage-1 geometry, and
   capture/rescue rules are current guardrail passes at `10/10` under current
   scorer resolution
@@ -100,18 +131,26 @@ Important interpretation:
   because it exposes a truer gap
 - the latest audio and challenge-stage work is a good example: stabilizing
   browser audio capture, adding composite analysis windows, and then adding
-  calibrated browser-reference gates first exposed `playerHit` tail/body fit
-  and then enabled a measured ship-loss runtime promotion. The remaining
-  `playerHit` tail gap is now smaller and better explained, while the stricter
-  challenge scorer lowered confidence in "arrival versus appearance" and
-  exposed a truer stage-variation gap
+  calibrated browser-reference gates exposed the remaining cue-fit problem,
+  while the stricter challenge-stage scorer lowered the apparent score because
+  it now asks a better question about stage-by-stage arrival, alien novelty,
+  choreography, and bonus-opportunity readability
+- recent challenge-stage passes improved the dedicated score from `4.5/10` to
+  `5.1/10`, then to `5.8/10` after adding measured wave/group identity. The
+  latest no-fire reference-motion extraction pass intentionally tightened the
+  read to `5.7/10` conformance and `5.6/10` interesting factor by measuring
+  authored challenge motion without bullet-truncated paths. The current gap is
+  no longer only "do challenge stages exist safely"; it is now stronger
+  trajectory/reference matching, the stage-11 challenge-3 reference miss, active
+  sprite-motion novelty, late Galaga reference labels, and bonus-readability
+  probes.
 
 ## Per-Game Status
 
 | Game | Role | Current conformance posture | Next conformance need |
 | --- | --- | --- | --- |
-| Aurora Galactica | First shipped Platinum application and current active investment target | Strong release-quality baseline with focused gaps in audio identity, level arc precision, boss/formation stage variation, visual reference grounding, and pressure replay precision | Move toward the `1.4.0` arcade-depth gate with better measured audio feedback, stage-by-stage shape, visual/reference comparison, and long-play pressure/reward evidence |
-| Galaxy Guardians | Second-game preview, branch-level playable-game push, and Galaxian-style ingestion proof | Preview metrics exist, public readiness is intentionally low, live dev/beta still expose a one-level public slice, and the branch now treats the deeper repeated-rack/persona work as an internal first-class conformance target with its own plan and aggregate process gate | Promote source-derived rack timing, dive paths, sprite/cue evidence, score/result identity, later-band fairness, and playtest-weighted scoring through [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md) and [GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md](GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md), but keep public claims tied to the one-level playable slice until deeper stage-band depth is actually surfaced |
+| Aurora Galactica | First shipped Platinum application and current active investment target | Strong release-quality baseline with focused gaps in audio identity, dedicated challenge-stage set-piece conformance, regular entry geometry separation, visual reference grounding, boss/formation stage variation, and pressure replay precision | Move toward the next `1.4.0.1` dev/beta candidate with better measured audio feedback, stage-by-stage challenge authorship, late-stage reference labeling, visual/reference comparison, and long-play pressure/reward evidence |
+| Galaxy Guardians | Second-game preview, branch-level playable-game push, and Galaxian-style ingestion proof | Preview metrics exist, public readiness is intentionally low, live dev/beta still expose a one-level public slice, and the branch now treats deeper repeated-rack/persona work as an internal first-class conformance target with its own plan, longer-surface/persona review layer, and aggregate process gate | Promote source-derived rack timing, dive paths, sprite/cue evidence, score/result identity, later-band fairness, and playtest-weighted scoring through [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md) and [GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md](GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md), but keep public claims tied to the one-level playable slice until deeper stage-band depth is actually surfaced |
 | Future games | Long-term repeatable ingestion target | Not yet active as playable work | Arrive through source manifests, reference windows, event logs, semantic profiles, score targets, and game-owned harnesses before design claims are made |
 
 ## How The Platform Helps The Conformance Effort
@@ -221,16 +260,18 @@ The dashboard currently keeps the detailed investment queue. At the strategic
 level, the important areas are:
 
 1. audio identity, event feedback, and cue alignment
-2. alien entry, challenge-stage arrival, and challenge-stage novelty
-3. level arc and encounter shape
-4. boss entry and formation grammar
-5. visual look and feel, including start/attract typography and gameplay
+2. dedicated challenge-stage arrival, alien novelty, trajectory variation, and
+   high-bonus readability
+3. regular alien entry geometry separation and path-family diversity
+4. level arc and encounter shape
+5. boss entry and formation grammar
+6. visual look and feel, including start/attract typography and gameplay
    readability
-6. arcade cabinet frame, popup, help, scoring, leaderboard, and result surfaces
-7. pressure curve precision and exact replay of known source windows
-8. Guardians ingestion promotion from preview metrics into stronger
+7. arcade cabinet frame, popup, help, scoring, leaderboard, and result surfaces
+8. pressure curve precision and exact replay of known source windows
+9. Guardians ingestion promotion from preview metrics into stronger
    frame/audio/playtest evidence
-9. Guardians score/progression/result identity so Platinum changes are
+10. Guardians score/progression/result identity so Platinum changes are
    validated against two real games instead of one game plus one preview shell
 
 The next major release gate should be judged not only by a higher overall score,
@@ -240,24 +281,26 @@ but by whether the improved categories are the ones players actually feel.
 
 Current recommendation:
 
-- treat the refreshed public `1.3.0` family as the stable current line
-- treat hosted `/dev` as the current forward-review increment rather than as an
-  automatic release candidate
-- use the next coherent hosted `/dev` bundle to justify the next beta request
-- keep the larger `1.4.0` family focused on arcade depth: alien entry,
-  challenge-stage novelty, stage progression, boss/formation grammar, visual
-  reference grounding, and measured audio feedback
+- treat the refreshed public `1.4.0` family as the stable production line
+- treat hosted `/beta` as the authority-gated review lane for the next
+  deliberate `1.4.0.1` candidate, not as an automatic mirror of local work
+- treat hosted `/dev` and local topic branches as the place to assemble the
+  next coherent improvement bundle
+- keep the larger `1.4.x` family focused on arcade depth: audio feedback,
+  dedicated challenge-stage set pieces, alien entry, stage progression,
+  boss/formation grammar, visual reference grounding, and measured player
+  experience evidence
 
 Short term:
 
-- keep the refreshed `1.3.0` release note and readiness docs aligned with the
-  live public line
+- keep beta-facing release notes and readiness docs aligned with the current
+  `1.4.0-beta.1` baseline and any new topic-branch improvements
 - keep all candidate work wrapped in `harness:measure`
 - keep dashboard, scorecard, public project page, project guide, release notes,
   and strategic review aligned with the same current score read before the next
   beta candidate is cut
 
-Latest local playtest response:
+Latest local conformance response:
 
 - `stageTransition` now uses a longer reference-backed window so the inter-level
   moment is less abrupt.
@@ -269,6 +312,12 @@ Latest local playtest response:
   clunky full-destruction bursts.
 - challenge-stage timing still passes, but challenge-stage arrival and pattern
   novelty are now separated as their own conformance problem.
+- sampled challenge stages preserve the safe Galaga-like no-shot/no-ship-loss
+  rule, but the dedicated set-piece score is still only `5.1/10`.
+- Stage 3, Stage 7, Stage 11, and Stage 15 now better separate their best
+  reference matches, while Stage 19 has a new runtime extraction path but needs
+  late-reference labels before it can become a high-confidence conformance
+  target.
 
 Medium term:
 
@@ -292,6 +341,7 @@ The documentation should remain layered so readers can choose the right depth.
 | Top-level project state and why this work matters | This document |
 | Current score table and metric targets | [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md) |
 | At-a-glance priority queue and dashboard logic | [RELEASE_CONFORMANCE_DASHBOARD.md](RELEASE_CONFORMANCE_DASHBOARD.md) |
+| Dedicated Aurora challenge-stage analysis and next plan | [CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md](CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md) and the rendered Application Guide challenge-stage section |
 | Resource usage, local CPU, GPU-equivalent model work, and cost-per-score | [CONFORMANCE_ECONOMICS.md](CONFORMANCE_ECONOMICS.md) |
 | Platform ownership and architecture | [PLATINUM.md](PLATINUM.md) and [PLATINUM_ARCHITECTURE_OVERVIEW.md](PLATINUM_ARCHITECTURE_OVERVIEW.md) |
 | Game/platform boundary | [APPLICATIONS_ON_PLATINUM.md](APPLICATIONS_ON_PLATINUM.md) |

@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-runtime-trial-decision",
+  "generatedAt": "2026-05-17T02:12:01.897Z",
+  "branch": "codex/macbook-audio-entry-grounding-cycle",
+  "commit": "612f086f",
+  "dirty": true,
+  "cue": "challengePerfect",
+  "candidate": "perfect-onset-body-separated-soft-tail",
+  "decision": {
+    "status": "runtime-trial-rejected",
+    "promoteRuntime": false,
+    "reason": "Guarded runtime trial rejected after confirmation: separated-soft-tail had one promising live rollup, but repeated full-theme captures returned Challenge Perfect to highest audio risk around 7.1/10 and worsened average worst-segment risk, so the runtime cue is reverted."
+  },
+  "problem": "Challenge Perfect is still the highest measured audio cue risk. Focused/offline candidate scoring can find a strong onset/body match, but live runtime capture can still collapse the ceremony tail or shift segment boundaries enough to fail release-facing scoring.",
+  "strategy": "Treat focused candidate loops and promotion prechecks as proposal gates only. Accept runtime audio changes only after live/full-theme comparison, event-gap rollup, cue-alignment guardrails, and quality scoring hold or improve; persist rejected trials so future generators avoid repeating failed strategies.",
+  "trialCandidateEvidence": {
+    "focusedCandidateReport": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-challenge-perfect.json",
+    "candidateDecisionStatus": "candidate-recommended",
+    "candidateKeep": true,
+    "candidateBest": "perfect-onset-body-separated-brief-medium-tail",
+    "measuredBest": "perfect-onset-body",
+    "riskDelta10": 0.42,
+    "segmentRiskDelta10": 0.2,
+    "candidateRisk10": 3.12,
+    "candidateWorstSegmentRisk10": 4.28,
+    "candidateKeeperRead": "whole-cue risk improved only 0.04",
+    "promotionPrecheck": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-17-612f086f-dirty-020503-challengePerfect/report.json",
+    "precheckStatus": "precheck-trial-allowed",
+    "allowRuntimeTrial": true,
+    "promoteRuntime": false,
+    "precheckWins": [
+      "Full-theme cue gap improves by 1.5/10.",
+      "Worst segment risk improves by 0.57/10."
+    ],
+    "precheckBlockers": []
+  },
+  "runtimeTrialEvidence": {
+    "audioThemeComparison": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-612f086f-020947/metrics.json",
+    "themeAverageWorstSegmentRisk10": 4.47,
+    "themeCueRisk10": 7.13,
+    "themeCueWorstSegmentRisk10": 0,
+    "ledger": "reference-artifacts/analyses/conformance-economics/run-ledger.jsonl",
+    "trialLedgerRows": [
+      {
+        "id": "2026-05-17T01-57-21-864Z-6385",
+        "command": "npm run harness:analyze-audio-theme-comparison",
+        "axes": [
+          "audio-theme-comparison",
+          "challenge-perfect",
+          "audio-runtime-trial"
+        ],
+        "resources": [
+          "cpu",
+          "browser"
+        ],
+        "notes": "Full audio comparison for challengePerfect separated-soft-tail runtime trial",
+        "wallSeconds": 85.632,
+        "cpuSeconds": 169.68,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-17T01-58-57-697Z-10757",
+        "command": "npm run harness:analyze:aurora-audio-event-gap",
+        "axes": [
+          "audio-event-gap",
+          "challenge-perfect",
+          "audio-runtime-trial"
+        ],
+        "resources": [
+          "cpu"
+        ],
+        "notes": "Event-gap rollup for challengePerfect separated-soft-tail runtime trial",
+        "wallSeconds": 0.245,
+        "cpuSeconds": 0.3,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-17T01-59-07-150Z-11012",
+        "command": "npm run harness:analyze:aurora-audio-conformance-lab-v2",
+        "axes": [
+          "audio-lab-rollup",
+          "challenge-perfect",
+          "audio-runtime-trial"
+        ],
+        "resources": [
+          "cpu"
+        ],
+        "notes": "Audio Lab v2 rollup for challengePerfect separated-soft-tail runtime trial",
+        "wallSeconds": 0.265,
+        "cpuSeconds": 0.3,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-17T01-59-07-150Z-11025",
+        "command": "npm run harness:check:audio-cue-alignment",
+        "axes": [
+          "audio-cue-alignment",
+          "challenge-perfect",
+          "audio-runtime-trial"
+        ],
+        "resources": [
+          "cpu",
+          "browser"
+        ],
+        "notes": "Cue alignment guard for challengePerfect separated-soft-tail runtime trial",
+        "wallSeconds": 10.149,
+        "cpuSeconds": 16.7,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-17T01-59-34-442Z-12131",
+        "command": "npm run harness:score:quality-conformance",
+        "axes": [
+          "quality-conformance",
+          "challenge-perfect",
+          "audio-runtime-trial"
+        ],
+        "resources": [
+          "cpu",
+          "browser"
+        ],
+        "notes": "Quality guard for challengePerfect separated-soft-tail runtime trial",
+        "wallSeconds": 68.297,
+        "cpuSeconds": 81.82,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-17T02-00-55-942Z-14253",
+        "command": "npm run harness:analyze:aurora-audio-runtime-trial -- --cue challengePerfect --status accepted --reason Guarded runtime trial accepted: separated-soft-tail Challenge Perfect moved highest audio risk off challengePerfect, preserved cue alignment 9/9, kept semantic score high, and held overall quality at 9.2/10. --next-step Keep Challenge Perfect under regression guardrails. Next audio focus should move to bossHit whole-cue risk or challengeTransition onset segment risk, whichever gives the best user-experience return after conformance economics refresh.",
+        "axes": [
+          "audio-runtime-trial",
+          "challenge-perfect"
+        ],
+        "resources": [
+          "cpu"
+        ],
+        "notes": "Record accepted challengePerfect separated-soft-tail runtime trial",
+        "wallSeconds": 0.262,
+        "cpuSeconds": 0.3,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-17T02-02-11-892Z-15287",
+        "command": "npm run harness:analyze:aurora-audio-focus-candidates -- --cue challenge-perfect --reference-grid-limit 0 --repeats 2",
+        "axes": [
+          "audio-focus-candidate",
+          "challenge-perfect",
+          "audio-runtime-trial",
+          "audio-activity-profile"
+        ],
+        "resources": [
+          "cpu",
+          "browser"
+        ],
+        "notes": "Refresh Challenge Perfect candidate report after accepted runtime trial",
+        "wallSeconds": 137.273,
+        "cpuSeconds": 269.41,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-17T02-05-03-550Z-18260",
+        "command": "npm run harness:analyze:aurora-audio-promotion-precheck -- --cue challengePerfect --candidate-id perfect-onset-body-separated-brief-medium-tail",
+        "axes": [
+          "audio-promotion-precheck",
+          "challenge-perfect",
+          "audio-activity-profile"
+        ],
+        "resources": [
+          "cpu"
+        ],
+        "notes": "Challenge Perfect brief-medium-tail promotion precheck after accepted soft-tail runtime",
+        "wallSeconds": 0.365,
+        "cpuSeconds": 0.47,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-17T02-05-25-493Z-18871",
+        "command": "npm run harness:analyze-audio-theme-comparison",
+        "axes": [
+          "audio-theme-comparison",
+          "challenge-perfect",
+          "audio-runtime-trial"
+        ],
+        "resources": [
+          "cpu",
+          "browser"
+        ],
+        "notes": "Full audio comparison for challengePerfect brief-medium-tail runtime trial",
+        "wallSeconds": 86.23,
+        "cpuSeconds": 171.78,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-17T02-07-04-358Z-23449",
+        "command": "npm run harness:analyze:aurora-audio-event-gap",
+        "axes": [
+          "audio-event-gap",
+          "challenge-perfect",
+          "audio-runtime-trial"
+        ],
+        "resources": [
+          "cpu"
+        ],
+        "notes": "Event-gap rollup for challengePerfect brief-medium-tail runtime trial",
+        "wallSeconds": 0.247,
+        "cpuSeconds": 0.3,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-17T02-07-22-365Z-23731",
+        "command": "npm run harness:analyze:aurora-audio-runtime-trial -- --cue challengePerfect --candidate-id perfect-onset-body-separated-brief-medium-tail --status rejected --reason Guarded runtime trial rejected: brief-medium-tail improved the focused candidate read but live full-theme event-gap worsened average worst-segment risk to 3.93/10 and moved highest risk to challengeTransition, so it did not beat the accepted soft-tail runtime state. --next-step Keep the accepted separated-soft-tail runtime cue. Use brief-medium only as candidate-history evidence and tune bossHit or challengeTransition next.",
+        "axes": [
+          "audio-runtime-trial",
+          "challenge-perfect"
+        ],
+        "resources": [
+          "cpu"
+        ],
+        "notes": "Record rejected challengePerfect brief-medium-tail runtime trial",
+        "wallSeconds": 0.247,
+        "cpuSeconds": 0.3,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-17T02-07-47-403Z-24277",
+        "command": "npm run harness:analyze-audio-theme-comparison",
+        "axes": [
+          "audio-theme-comparison",
+          "challenge-perfect",
+          "audio-runtime-trial"
+        ],
+        "resources": [
+          "cpu",
+          "browser"
+        ],
+        "notes": "Restore accepted challengePerfect separated-soft-tail audio comparison after rejected brief-medium trial",
+        "wallSeconds": 86.369,
+        "cpuSeconds": 171.95,
+        "exitCode": 0
+      }
+    ]
+  },
+  "postTrialEvidence": {
+    "eventGap": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
+    "quality": "reference-artifacts/analyses/quality-conformance/2026-05-17-612f086f/report.json",
+    "currentOverallScore10": 9.2,
+    "currentAudioScore10": 7,
+    "currentHighestRiskCue": "challengePerfect",
+    "currentHighestRisk10": 7.13,
+    "currentHighestSegmentRiskCue": "challengePerfect",
+    "currentHighestSegmentRiskRole": "onset",
+    "currentAverageWorstSegmentRisk10": 4.14,
+    "currentCueGapRisk10": 7.13,
+    "currentCueWorstSegmentRisk10": 7.41,
+    "currentSemanticScore10": 10
+  },
+  "learning": [
+    "Focused cue similarity and promotion precheck are necessary but not sufficient for release-safe runtime promotion.",
+    "Runtime audio candidates must be validated through the same full-theme live capture and quality gates that drive release scoring.",
+    "challengePerfect candidate history should guide the next generator pass, but rejected runtime decisions must block direct promotion until the failed gate is specifically addressed."
+  ],
+  "nextStep": "Do not promote Challenge Perfect runtime audio yet. Keep activity-span profiling and calibrated segment gates, then either stabilize capture/segmentation or pivot to bossHit/challengeTransition for higher reliable return."
+}

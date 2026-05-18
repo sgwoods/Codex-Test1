@@ -854,9 +854,9 @@
       "referenceClip": "assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a",
       "referenceWindow": {
         "startSeconds": 2.399,
-        "endSeconds": 2.759,
-        "source": "aurora-audio-theme-comparison/2026-05-08-main-ebd04ec corrected-capture best candidate",
-        "selection": "highest-scoring non-overlapping reference subwindow after explicit Aurora audio-theme capture"
+        "endSeconds": 2.579,
+        "source": "aurora-audio-cue-candidates/2026-05-15-c8c7246f-dirty-audio-focus-202330 rescueJoin keeper",
+        "selection": "highest-scoring stable keeper after focused rescueJoin candidate loop and full-theme promotion precheck"
       },
       "mappingStatus": "Strong direct mapping.",
       "mappingConfidence": "high"
@@ -1321,7 +1321,7 @@
       "cues": "gameStart, formationArrival, stageTransition",
       "meaning": "Begins run and anchors formation-arrival timing.",
       "reference": "galaga2-game-start, galaga3-level-underscore, galaga-level-flag.",
-      "score": "6.9/10 audio category",
+      "score": "7.1/10 audio category",
       "confidence": "medium",
       "next": "Continue waveform/spectral comparison and fit full reference phrases where runtime windows allow."
     },
@@ -1357,9 +1357,9 @@
       "cues": "captureBeam, captureSuccess, captureRetreat, rescueJoin, capturedFighterDestroyed",
       "meaning": "Explains the most important Galaga-style risk/reward loop.",
       "reference": "Tractor beam, captured-fighter, capturing, rescued-double-ship, and captured-fighter-destroyed clips.",
-      "score": "flow guardrail pass",
+      "score": "flow guardrail pass; rescueJoin keeper promoted after full-theme precheck",
       "confidence": "medium-high",
-      "next": "Improve event-rich logs and status/commentary hooks around capture and rescue."
+      "next": "Improve event-rich logs and status/commentary hooks around capture and rescue, then revisit captureBeam tail separation."
     },
     {
       "family": "Player loss and game over",
@@ -1390,10 +1390,10 @@
     },
     {
       "stage": "Stage 3 / first challenge",
-      "summary": "First challenging stage and bonus-stage learning moment.",
-      "aspects": "Non-lethal challenge behavior, scoreable windows, group readability, perfect-result feedback.",
-      "evidence": "Challenge timing guardrails and challenge-stage candidate window.",
-      "gap": "Add direct Galaga challenge contact-sheet path labels."
+      "summary": "First challenging stage and bonus-stage learning moment. Current critical read: the rule baseline is present, but the set piece does not yet read enough like Galaga's first challenge.",
+      "aspects": "Non-lethal challenge behavior, no enemy shooting, no ship loss, visible arrival and peel-off patterns, bee/butterfly bonus-line grammar.",
+      "evidence": "Challenge timing guardrails, challenge-stage candidate window, and reference-artifacts/analyses/challenge-stage-conformance/latest.json.",
+      "gap": "Make stage 3 best-match challenge-1 arrival/late-wave references instead of a later mixed challenge target."
     },
     {
       "stage": "Stage 4",
@@ -1404,17 +1404,17 @@
     },
     {
       "stage": "Stage 7 challenge",
-      "summary": "Scorpion cross-sweep challenge set piece.",
-      "aspects": "New trajectory family, challenge alien novelty, bonus opportunity clarity.",
-      "evidence": "challenge-stage-scorpion-cross; alien-entry/challenge score 7.8/10.",
-      "gap": "Score reward clarity and reference-grounded path precision."
+      "summary": "Scorpion cross-sweep challenge set piece. Current critical read: the label variation exists, but the measured vector still clusters too close to the same broad challenge-reference family.",
+      "aspects": "No enemy shooting, no ship loss, mixed alien families, cross-sweep path family, higher-density bonus pattern.",
+      "evidence": "challenge-stage-scorpion-cross, alien-entry/challenge-variation, formation-boss path extraction, and challenge-stage conformance artifacts.",
+      "gap": "Turn stage 7 into a true challenge-2 contract with group-by-group mixed-novelty scoring and visible entry/exit differences."
     },
     {
       "stage": "Stage 11 challenge",
-      "summary": "Stingray hook-arc challenge set piece.",
-      "aspects": "Hooking trajectories, mixed alien composition, learning-stage novelty.",
-      "evidence": "challenge-stage-stingray-hook; challenge trajectory variation maxed at current scorer resolution.",
-      "gap": "Move from internal variation scoring to direct reference comparison."
+      "summary": "Stingray hook-arc challenge set piece. Current critical read: dragonfly family presentation is visible, but active sprite-motion novelty is not yet measured.",
+      "aspects": "No enemy shooting, no ship loss, new challenge-family visual language, hook-arc motion, later-stage bonus pattern novelty.",
+      "evidence": "challenge-stage-stingray-hook, path-family comparison, and challenge-stage conformance artifact.",
+      "gap": "Add challenge-3 reference phase scoring and active visual-motion scoring for flapping, pulsing, and silhouette changes."
     },
     {
       "stage": "Stage 12 to 14",
@@ -1425,10 +1425,17 @@
     },
     {
       "stage": "Stage 15 challenge",
-      "summary": "Boss-led late-loop challenge set piece.",
-      "aspects": "Boss-led entry style, late challenge novelty, high bonus readability.",
-      "evidence": "challenge-stage-boss-led-loop; challenge window coverage now 4/4.",
-      "gap": "Ground boss-led challenge path against extracted Galaga challenge-stage reference paths."
+      "summary": "Boss-led late-loop challenge set piece. Current critical read: the widest motion shape is present, but it still lacks a mature late-challenge reference target.",
+      "aspects": "No enemy shooting, no ship loss, boss-heavy formation choreography, late-loop motion, advanced bonus-stage path reading.",
+      "evidence": "challenge-stage-boss-led-loop, formation-boss path-slot extraction, alien-entry challenge variation, and challenge-stage conformance artifact.",
+      "gap": "Capture or label later Galaga challenge references, then tune boss-led late-loop exits and high-bonus readability against that target."
+    },
+    {
+      "stage": "Stage 19 challenge",
+      "summary": "Crown split-cascade challenge set piece configured for very-late play, but not yet mature as a documented conformance target.",
+      "aspects": "No enemy shooting, no ship loss, mosquito-family visual novelty, split/cascade path identity, late-stage bonus complexity.",
+      "evidence": "reference-artifacts/analyses/challenge-stage-conformance/latest.json.",
+      "gap": "Create durable stage-19 evidence windows and late Galaga challenge reference labels before treating this as conformant."
     }
   ],
   "personaRows": [
@@ -1747,10 +1754,10 @@
       "event": "Rescue join / dual fighter rejoin",
       "phase": "stage",
       "timing": "When the released fighter docks back and the dual-fighter state is established.",
-      "audioName": "rescueJoin -> galaga2-fighter-rescued-double-ship.m4a",
+      "audioName": "rescueJoin -> galaga2-fighter-rescued-double-ship.m4a excerpt 2.399s-2.579s",
       "trigger": "Initiated at the rescue-join completion beat.",
       "stop": "One-shot cue with cooldown.",
-      "note": "Dedicated slot and strong reference target.",
+      "note": "Dedicated slot and measured reference-window keeper promoted after full-theme precheck.",
       "entryId": "rescue-join",
       "status": "Implemented"
     },

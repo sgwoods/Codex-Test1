@@ -1,0 +1,285 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "platinum-review-learning-ledger",
+  "generatedAt": "2026-05-15T16:34:47.534Z",
+  "branch": "codex/macbook-audio-entry-grounding-cycle",
+  "commit": "93dbdad81d7154fbdc74512c4fb4502752be0be5",
+  "shortCommit": "93dbdad8",
+  "sources": [
+    "CODE_REVIEW_MODEL.md",
+    "ARCHITECT_REVIEW_RESPONSE.md",
+    "codex-skills/platinum-code-review/SKILL.md",
+    "reference-artifacts/analyses/code-review/latest.json"
+  ],
+  "summary": {
+    "reviewCycleCount": 3,
+    "issueNoteCount": 4,
+    "acceptedChangeCount": 3,
+    "automaticFindingCount": 0,
+    "p0": 0,
+    "p1": 0,
+    "p2": 4,
+    "p3": 0,
+    "productionDisposition": {
+      "addressed": 1,
+      "dismissed": 3,
+      "missing": 0
+    }
+  },
+  "taxonomy": [
+    {
+      "id": "architecture-boundary",
+      "label": "Architecture boundary",
+      "meaning": "Platform responsibilities, game-pack ownership, and shared service seams."
+    },
+    {
+      "id": "release-tooling",
+      "label": "Release tooling",
+      "meaning": "Publish commands, lane authority, build stamps, and generated release artifacts."
+    },
+    {
+      "id": "auth-privacy-score",
+      "label": "Auth, privacy, score trust",
+      "meaning": "Login, Supabase, protected score submission, replay identity, and user data handling."
+    },
+    {
+      "id": "browser-media-safety",
+      "label": "Browser and media safety",
+      "meaning": "HTML injection, windows, embeds, audio/video lifecycle, autoplay, and cross-origin behavior."
+    },
+    {
+      "id": "performance-loop",
+      "label": "Performance loop",
+      "meaning": "Animation cadence, timers, event listeners, CPU/GPU use, and long-running harness cost."
+    },
+    {
+      "id": "harness-fragility",
+      "label": "Harness fragility",
+      "meaning": "Tests that are too replay-specific, too timing-tight, or not grounded in durable contracts."
+    },
+    {
+      "id": "docs-artifact-traceability",
+      "label": "Docs and artifact traceability",
+      "meaning": "Whether human docs, generated artifacts, dashboards, and release notes tell one story."
+    },
+    {
+      "id": "conformance-evidence",
+      "label": "Conformance evidence",
+      "meaning": "Reference-backed measurement before gameplay, audio, motion, or visual tuning."
+    }
+  ],
+  "reviewCycles": [
+    {
+      "id": "architect-lueck-baseline",
+      "date": "historical",
+      "focus": "Platform architecture baseline",
+      "source": "ARCHITECT_REVIEW_RESPONSE.md",
+      "changedFileCount": null,
+      "p0": 0,
+      "p1": 0,
+      "p2": 4,
+      "p3": 0,
+      "outcome": "Baseline concerns are partly covered and partly continuing maturity work."
+    },
+    {
+      "id": "code-review-gate-setup",
+      "date": "2026-05-14",
+      "focus": "Local-to-hosted-dev code review gate",
+      "source": "CODE_REVIEW_MODEL.md",
+      "changedFileCount": null,
+      "p0": 0,
+      "p1": 0,
+      "p2": 0,
+      "p3": 0,
+      "outcome": "Accepted as a lightweight release-safety gate for development lane movement."
+    },
+    {
+      "id": "code-review-packet-93dbdad8",
+      "date": "2026-05-15",
+      "focus": "Current branch code review packet",
+      "source": "reference-artifacts/analyses/code-review/latest.json",
+      "changedFileCount": 26,
+      "p0": 0,
+      "p1": 0,
+      "p2": 0,
+      "p3": 0,
+      "outcome": "Use automatic findings as review notes and blocking P0/P1 gates; P2/P3 remain explicit human-review items."
+    }
+  ],
+  "issueNotes": [
+    {
+      "id": "architect-key-abstractions",
+      "category": "architecture-boundary",
+      "severity": "P2",
+      "status": "accepted",
+      "source": "ARCHITECT_REVIEW_RESPONSE.md",
+      "note": "Keep core runtime, shell, service adapter, game-pack, entity, scoring, stage, render, and auth concerns named and separated.",
+      "proposedChange": "Continue moving shared behavior into Platinum-owned contracts and game-specific behavior into pack-owned data or adapters.",
+      "acceptedChange": "Architecture docs and boundary harnesses are the standing source of truth.",
+      "productionDisposition": {
+        "decision": "addressed",
+        "reason": "The platform/application architecture documents and boundary harnesses now define the core runtime, shell, service adapter, game-pack, entity, scoring, stage, render, and auth concerns.",
+        "evidence": [
+          "ARCHITECTURE.md",
+          "PLATINUM_ARCHITECTURE_OVERVIEW.md",
+          "APPLICATIONS_ON_PLATINUM.md",
+          "tools/harness/check-gameplay-adapter-boundaries.js",
+          "tools/harness/check-pack-registry-boundaries.js"
+        ]
+      }
+    },
+    {
+      "id": "architect-magic-constants",
+      "category": "architecture-boundary",
+      "severity": "P2",
+      "status": "in_progress",
+      "source": "ARCHITECT_REVIEW_RESPONSE.md",
+      "note": "Some movement, render spacing, animation timing, and gameplay update values still need clearer structural ownership.",
+      "proposedChange": "Move stable game-design values into pack/spec structures; keep local math values near implementation with intent comments.",
+      "acceptedChange": "Track this as continuing 1.4.0 platform maturity work.",
+      "productionDisposition": {
+        "decision": "dismissed",
+        "reason": "Remaining movement, render-spacing, animation-timing, and gameplay tuning constants are a next-cycle maintainability concern, not a blocker for the current production candidate when targeted gameplay and boundary checks pass.",
+        "evidence": [
+          "ARCHITECT_REVIEW_RESPONSE.md",
+          "CODE_REVIEW_MODEL.md",
+          "TESTING_AND_RELEASE_GATES.md"
+        ]
+      }
+    },
+    {
+      "id": "architect-harness-fragility",
+      "category": "harness-fragility",
+      "severity": "P2",
+      "status": "in_progress",
+      "source": "ARCHITECT_REVIEW_RESPONSE.md",
+      "note": "Recorded-path harnesses can become brittle after motion and pacing changes.",
+      "proposedChange": "Prefer state-based assertions, coarse behavioral envelopes, and repeated-run averages where exact replay geometry is not the contract.",
+      "acceptedChange": "Measured conformance work should leave more reusable harness logic behind than one-off replay checks.",
+      "productionDisposition": {
+        "decision": "dismissed",
+        "reason": "Recorded-path fragility is acknowledged and retained as a harness-maturity concern. It does not block the current production candidate if the relevant release harnesses, documentation freshness check, and publish preflight pass.",
+        "evidence": [
+          "ARCHITECT_REVIEW_RESPONSE.md",
+          "reference-artifacts/analyses/code-review/latest.json",
+          "TESTING_AND_RELEASE_GATES.md"
+        ]
+      }
+    },
+    {
+      "id": "architect-enemy-spec",
+      "category": "conformance-evidence",
+      "severity": "P2",
+      "status": "in_progress",
+      "source": "ARCHITECT_REVIEW_RESPONSE.md",
+      "note": "Enemy family definitions should become declarative enough to support new game ingestion and controlled experimentation.",
+      "proposedChange": "Continue extracting enemy family, attack pattern, and stage grammar data into game-owned specs.",
+      "acceptedChange": "Use ingestion-backed specs before considering heavier persistence infrastructure.",
+      "productionDisposition": {
+        "decision": "dismissed",
+        "reason": "Declarative enemy-family and attack-pattern specs remain important for 1.4.0 and later conformance work. This is not a production blocker for a reviewed candidate unless the release claims those specs as complete.",
+        "evidence": [
+          "ARCHITECT_REVIEW_RESPONSE.md",
+          "GAME_CONFORMANCE_CATALOG.md",
+          "PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md"
+        ]
+      }
+    }
+  ],
+  "proposedChanges": [
+    {
+      "id": "architect-key-abstractions-proposal",
+      "category": "architecture-boundary",
+      "status": "accepted",
+      "source": "ARCHITECT_REVIEW_RESPONSE.md",
+      "proposedChange": "Continue moving shared behavior into Platinum-owned contracts and game-specific behavior into pack-owned data or adapters.",
+      "decision": "Architecture docs and boundary harnesses are the standing source of truth."
+    },
+    {
+      "id": "architect-magic-constants-proposal",
+      "category": "architecture-boundary",
+      "status": "in_progress",
+      "source": "ARCHITECT_REVIEW_RESPONSE.md",
+      "proposedChange": "Move stable game-design values into pack/spec structures; keep local math values near implementation with intent comments.",
+      "decision": "Track this as continuing 1.4.0 platform maturity work."
+    },
+    {
+      "id": "architect-harness-fragility-proposal",
+      "category": "harness-fragility",
+      "status": "in_progress",
+      "source": "ARCHITECT_REVIEW_RESPONSE.md",
+      "proposedChange": "Prefer state-based assertions, coarse behavioral envelopes, and repeated-run averages where exact replay geometry is not the contract.",
+      "decision": "Measured conformance work should leave more reusable harness logic behind than one-off replay checks."
+    },
+    {
+      "id": "architect-enemy-spec-proposal",
+      "category": "conformance-evidence",
+      "status": "in_progress",
+      "source": "ARCHITECT_REVIEW_RESPONSE.md",
+      "proposedChange": "Continue extracting enemy family, attack pattern, and stage grammar data into game-owned specs.",
+      "decision": "Use ingestion-backed specs before considering heavier persistence infrastructure."
+    }
+  ],
+  "acceptedChanges": [
+    {
+      "id": "local-code-review-gate",
+      "category": "release-tooling",
+      "status": "accepted",
+      "source": "CODE_REVIEW_MODEL.md",
+      "proposedChange": "Introduce a local code review packet and hosted-dev gate before publish.",
+      "acceptedChange": "Implemented `npm run review:code:packet`, `npm run review:code:check`, and a hosted-dev publish gate that blocks stale packets and P0/P1 findings.",
+      "learning": "A lightweight deterministic gate catches obvious release, security, and boundary risk without turning every dev publish into a full architecture board."
+    },
+    {
+      "id": "code-review-packet-freshness",
+      "category": "release-tooling",
+      "status": "accepted",
+      "source": "tools/review/check-code-review-gate.js",
+      "proposedChange": "Make the gate compare the review packet against the current changed source set.",
+      "acceptedChange": "Implemented freshness checking so a stale packet fails before hosted-dev publish.",
+      "learning": "Review artifacts must stay tied to the exact changed set they describe."
+    },
+    {
+      "id": "review-learning-ledger",
+      "category": "docs-artifact-traceability",
+      "status": "accepted",
+      "source": "REVIEW_LEARNING_LEDGER.md",
+      "proposedChange": "Track architecture and code review issues, notes, proposed changes, accepted changes, and learning patterns in a separate durable location.",
+      "acceptedChange": "Created this ledger and a generated JSON artifact under `reference-artifacts/analyses/review-learning/`.",
+      "learning": "Review value compounds when repeated issue types become visible and can be turned into future harnesses, checks, and design rules."
+    }
+  ],
+  "learningPatterns": [
+    {
+      "id": "release-tooling-churn",
+      "pattern": "Changes to scripts or release tooling often look small but affect lane authority and publish behavior.",
+      "response": "Require `npm run publish:check:dev` plus the review packet before hosted-dev movement.",
+      "evidence": "Latest packet recommends publish preflight."
+    },
+    {
+      "id": "generated-artifact-self-noise",
+      "pattern": "Generated review artifacts can make review packets appear stale if they are treated as source inputs.",
+      "response": "Exclude generated review artifact directories from packet freshness while keeping human-facing review docs in scope.",
+      "evidence": "Code review and review-learning artifact directories are excluded from freshness checks."
+    },
+    {
+      "id": "harness-before-subjective-tuning",
+      "pattern": "Motion, audio, pacing, and transition polish can drift when tuned subjectively.",
+      "response": "Start with reference evidence, extracted clips, timing windows, or semantic logs, then promote only measured keepers.",
+      "evidence": "Matches the repo AGENTS.md instruction for game polish and fidelity work."
+    },
+    {
+      "id": "review-notes-should-teach",
+      "pattern": "One-off review comments lose value unless they become future prevention mechanisms.",
+      "response": "Classify recurring findings and decide whether each should become a harness, release check, documentation rule, or code simplification.",
+      "evidence": "This ledger tracks issue notes, proposed changes, accepted changes, and learning patterns."
+    }
+  ],
+  "nextReviewQuestions": [
+    "Did this change introduce platform behavior that should be owned by a game pack or game-specific adapter instead?",
+    "Did a release, auth, score, or external-media surface change without a targeted harness or publish preflight?",
+    "Did any review note recur often enough to deserve a new automatic check?",
+    "Did generated artifacts and human-facing docs stay synchronized with the source change?",
+    "Did conformance polish leave behind reusable ingestion, analysis, or scoring logic?"
+  ]
+}

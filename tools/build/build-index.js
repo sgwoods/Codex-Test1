@@ -67,6 +67,8 @@ const LOCAL_DEV_PUBLIC_PROJECT_PREVIEW = path.join(ROOT, 'local-dev', 'public-au
 const GALAGA_REFERENCE_SPRITE_TARGETS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-reference-sprites', 'pixel-targets-0.1.json');
 const GALAGA_REFERENCE_SPRITE_MODEL = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-reference-sprites', 'model-0.1.json');
 const APPLICATION_ARTIFACT_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'application-artifact-conformance', 'latest.json');
+const CHALLENGE_STAGE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
+const GALAGA_TARGET_ARTIFACT_COVERAGE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-artifact-coverage', 'latest.json');
 const PERSONA_PERFORMANCE_DISTRIBUTION = path.join(ROOT, 'reference-artifacts', 'analyses', 'persona-performance-distribution', 'latest.json');
 const CATALOG_MEDIA_SOURCE_PATHS = new Set();
 let ACTIVE_SOURCE_BLOB_BASE = 'https://github.com/sgwoods/Codex-Test1/blob/main/';
@@ -1351,6 +1353,146 @@ function projectGuideStyles(){
       font-size:13px;
       line-height:1.55;
     }
+    .inlineDocShelf{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+    .inlineDocPreview,
+    .challengeStageDetail{
+      border:1px solid rgba(255,255,255,0.10);
+      background:rgba(7,19,31,0.72);
+      border-radius:18px;
+      overflow:hidden;
+    }
+    .inlineDocPreview summary,
+    .challengeStageDetail summary{
+      cursor:pointer;
+      list-style:none;
+    }
+    .inlineDocPreview summary::-webkit-details-marker,
+    .challengeStageDetail summary::-webkit-details-marker{
+      display:none;
+    }
+    .inlineDocPreview summary{
+      padding:12px 14px;
+      color:#f2fbff;
+      font-weight:800;
+    }
+    .inlineDocPreview summary::after,
+    .challengeStageDetail summary::after{
+      content:"+";
+      float:right;
+      color:var(--accent);
+      font-weight:900;
+    }
+    .inlineDocPreview[open] summary::after,
+    .challengeStageDetail[open] summary::after{
+      content:"-";
+    }
+    .inlineDocPreviewBody{
+      padding:0 14px 14px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+    .challengeStageList{
+      display:grid;
+      gap:12px;
+    }
+    .challengeStageSummary{
+      display:grid;
+      grid-template-columns:minmax(220px,1fr) auto auto;
+      gap:12px;
+      align-items:center;
+      padding:14px 16px;
+      color:#f2fbff;
+    }
+    .challengeStageTitle{
+      display:flex;
+      flex-direction:column;
+      gap:3px;
+      font-weight:900;
+    }
+    .challengeStageTitle small{
+      color:var(--soft);
+      font-weight:600;
+      line-height:1.35;
+    }
+    .scorePill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:92px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(126,242,255,0.22);
+      background:rgba(126,242,255,0.08);
+      color:#e8fbff;
+      font-size:12px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+    .challengeStageDetailBody{
+      display:grid;
+      gap:14px;
+      padding:0 16px 16px;
+    }
+    .challengeCompareGrid,
+    .challengeAxisGrid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+    }
+    .challengeAxisGrid{
+      grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+    .challengeEvidenceCard{
+      min-width:0;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+    }
+    .challengeEvidenceCard h3{
+      margin:0 0 8px;
+      color:#f2fbff;
+      font-size:15px;
+      letter-spacing:.02em;
+    }
+    .challengeEvidenceCard p,
+    .challengeEvidenceCard li{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .challengeEvidenceCard ul{
+      margin:8px 0 0;
+      padding-left:18px;
+    }
+    .challengeComponentGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:6px;
+      margin-top:8px;
+      font-size:12px;
+      color:var(--soft);
+    }
+    .challengeComponentGrid span{
+      padding:6px 8px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.04);
+    }
+    @media (max-width: 980px){
+      .challengeStageSummary,
+      .challengeCompareGrid,
+      .challengeAxisGrid{
+        grid-template-columns:1fr;
+      }
+      .scorePill{
+        justify-content:flex-start;
+      }
+    }
     .markdown h3,.markdown h4,.markdown h5{
       margin:24px 0 10px;
       letter-spacing:-0.02em;
@@ -1813,6 +1955,128 @@ function applicationGuideStyles(){
     }
     .catalogMediaImg.isPixelated{
       image-rendering:pixelated;
+    }
+    .catalogMediaExpand{
+      margin-top:8px;
+      border-radius:10px;
+      background:rgba(126,242,255,0.045);
+      border:1px solid rgba(126,242,255,0.12);
+      overflow:hidden;
+    }
+    .catalogMediaExpand summary{
+      cursor:pointer;
+      list-style:none;
+      padding:7px 9px;
+      color:#dff7ff;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+    .catalogMediaExpand summary::-webkit-details-marker{
+      display:none;
+    }
+    .catalogMediaExpand summary::after{
+      content:"";
+      display:none;
+    }
+    .catalogMediaExpand .mediaSummaryOpen{
+      display:none;
+    }
+    .catalogMediaExpand[open] summary::after{
+      content:"";
+    }
+    .catalogMediaExpand[open] .mediaSummaryClosed{
+      display:none;
+    }
+    .catalogMediaExpand[open] .mediaSummaryOpen{
+      display:inline;
+    }
+    .catalogMediaExpand[open] summary{
+      position:fixed;
+      z-index:1002;
+      top:18px;
+      right:22px;
+      min-width:168px;
+      border-radius:12px;
+      border:1px solid rgba(126,242,255,0.34);
+      background:#061320;
+      box-shadow:0 12px 34px rgba(0,0,0,0.44);
+    }
+    .catalogMediaExpanded{
+      padding:10px;
+      border-top:1px solid rgba(126,242,255,0.10);
+      background:rgba(1,6,12,0.82);
+    }
+    .catalogMediaExpand[open] .catalogMediaExpanded{
+      position:fixed;
+      inset:0;
+      z-index:1001;
+      display:grid;
+      grid-template-rows:auto minmax(0,1fr);
+      gap:14px;
+      padding:74px 24px 24px;
+      overflow:hidden;
+      background:rgba(1,6,12,0.96);
+      border:0;
+    }
+    .catalogMediaExpandedHeader{
+      max-width:1440px;
+      margin:0 auto;
+      color:#dff7ff;
+    }
+    .catalogMediaExpandedHeader strong{
+      display:block;
+      color:#f2fbff;
+      font-size:18px;
+      line-height:1.25;
+    }
+    .catalogMediaExpandedHeader p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+    .catalogMediaExpandedScroll{
+      min-width:0;
+      min-height:0;
+      max-width:1440px;
+      width:100%;
+      margin:0 auto;
+      overflow:auto;
+      border-radius:16px;
+      border:1px solid rgba(126,242,255,0.16);
+      background:#02070d;
+      box-shadow:0 18px 60px rgba(0,0,0,0.42);
+    }
+    .catalogMediaExpanded img{
+      display:block;
+      width:auto;
+      max-width:100%;
+      max-height:min(70vh,760px);
+      margin:0 auto;
+      object-fit:contain;
+      border-radius:8px;
+      background:#02070d;
+      border:1px solid rgba(255,255,255,0.10);
+    }
+    .catalogMediaExpand[open] .catalogMediaExpandedScroll img{
+      max-width:100%;
+      max-height:none;
+      border:0;
+      border-radius:0;
+    }
+    .catalogMediaExpand[open].isContactSheet .catalogMediaExpandedScroll img{
+      max-width:none;
+      max-height:none;
+      margin:0 auto;
+    }
+    .catalogMediaExpanded img.isPixelated{
+      image-rendering:pixelated;
+    }
+    .mediaCropExpanded{
+      max-width:100%;
+      margin:0 auto;
     }
     .mediaCrop{
       position:relative;
@@ -2410,10 +2674,62 @@ function buildDocumentationProvenanceGuideSection(provenance){
   };
 }
 
+function buildChallengeStageEffortGuideSection(){
+  const artifact = loadChallengeStageConformance();
+  const summary = artifact.summary || {};
+  const rows = (artifact.stageRows || []).map(row => [
+    `Stage ${row.stage || ''} / Challenge ${row.challengeNumber || ''}`,
+    `Interest: **${row.interestingFactor10 ?? 'n/a'}/10**\n\nConformance: **${row.conformanceScore10 ?? 'n/a'}/10**\n\nBest ref: \`${row.bestReferenceMatch?.labelId || 'pending'}\` (${row.referenceMatchScore10 ?? 'n/a'}/10)`,
+    row.currentRead || 'Current read pending.',
+    (row.criticalGaps || [])[0] || 'Critical gap pending.',
+    (row.nextActions || [])[0] || 'Next action pending.'
+  ]);
+  return {
+    id: 'challenge-stage-conformance-effort',
+    title: 'Challenge Stage Conformance Effort',
+    summary: `Living sub-effort for Galaga-like challenge stages. Current strict read: ${summary.interestingFactorScore10 ?? 'n/a'}/10 interesting factor, ${summary.movementConformanceScore10 ?? 'n/a'}/10 movement, ${summary.graphicalConformanceScore10 ?? 'n/a'}/10 graphics, ${summary.alienNoveltyScore10 ?? 'n/a'}/10 alien novelty, ${summary.playerShotOpportunityScore10 ?? 'n/a'}/10 shot opportunity, and ${summary.score10 ?? 'n/a'}/10 challenge-stage conformance. ${summary.weakestFinding || 'Run the challenge-stage analyzer to refresh the report.'}`,
+    cards: [
+      {
+        title: 'Problem',
+        body: summary.playerMeaning || 'Challenge stages must be safe bonus-stage exhibitions and also memorable authored visual set pieces with readable alien movement and novelty.'
+      },
+      {
+        title: 'Measurement',
+        body: 'Generated from `reference-artifacts/analyses/challenge-stage-conformance/latest.json`, Galaga path-reference labels, Aurora browser runtime probes, and challenge timing/collision guardrails. Safety is a guardrail; broad legacy coverage is diagnostic only.'
+      },
+      {
+        title: 'Next Best Step',
+        body: (artifact.improvementPlan || [])[2] || 'Attack Stage 3 first: rebuild it against the Galaga challenge-1 arrival and late-wave references while preserving 0 enemy shots, 0 attack starts, and 0 ship losses.'
+      }
+    ],
+    links: [
+      {
+        label: 'Open Challenge Deep Dive',
+        href: 'application-guide.html#challenge-stage-conformance',
+        detail: 'Generated Application Guide table with per-stage graphics, movement, critical gaps, and next actions.'
+      },
+      {
+        label: 'Open Rendered Effort Report',
+        href: 'project-guide.html#challenge-stage-conformance-analysis-doc',
+        detail: 'Human-readable generated report with executive summary, stage-by-stage critique, plan, measurements, and success criteria.'
+      },
+      {
+        label: 'Open Conformance Dashboard',
+        href: 'conformance-dashboard.html?game=aurora-galactica#conformance',
+        detail: 'Dashboard context for comparing this sub-effort against other conformance priorities and costs.'
+      }
+    ],
+    table: {
+      columns: ['Stage', 'Measurement', 'Aurora Current', 'Current Gap', 'Recommended Next Step'],
+      rows
+    }
+  };
+}
+
 function buildProjectGuide(buildInfo, latestNote, guide){
   const template = read(PROJECT_GUIDE_TEMPLATE);
   const provenanceSection = buildDocumentationProvenanceGuideSection(loadDocumentationProvenance());
-  const guideSections = [...(guide.sections || []), provenanceSection];
+  const guideSections = [...(guide.sections || []), buildChallengeStageEffortGuideSection(), provenanceSection];
   const orderedSections = [...guideSections, ...(guide.sourceDocs || [])];
   const toc = orderedSections.map(section => `
     <li><a href="#${esc(section.id)}">${esc(section.title)}</a></li>
@@ -2699,6 +3015,8 @@ const ALIEN_REFERENCE_CONTEXT = {
 let galagaReferenceSpriteTargetsCache = null;
 let galagaReferenceSpriteModelCache = null;
 let applicationArtifactConformanceCache = null;
+let challengeStageConformanceCache = null;
+let galagaTargetArtifactCoverageCache = null;
 
 function loadGalagaReferenceSpriteTargets(){
   if(galagaReferenceSpriteTargetsCache) return galagaReferenceSpriteTargetsCache;
@@ -2745,6 +3063,242 @@ function loadApplicationArtifactConformance(){
     applicationArtifactConformanceCache = { rows: [] };
   }
   return applicationArtifactConformanceCache;
+}
+
+function loadChallengeStageConformance(){
+  if(challengeStageConformanceCache) return challengeStageConformanceCache;
+  if(!fs.existsSync(CHALLENGE_STAGE_CONFORMANCE)){
+    challengeStageConformanceCache = { stageRows: [], summary: {} };
+    return challengeStageConformanceCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_STAGE_CONFORMANCE);
+    challengeStageConformanceCache = Object.assign({}, artifact, {
+      stageRows: Array.isArray(artifact.stageRows) ? artifact.stageRows : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    challengeStageConformanceCache = { stageRows: [], summary: {} };
+  }
+  return challengeStageConformanceCache;
+}
+
+function loadGalagaTargetArtifactCoverage(){
+  if(galagaTargetArtifactCoverageCache) return galagaTargetArtifactCoverageCache;
+  if(!fs.existsSync(GALAGA_TARGET_ARTIFACT_COVERAGE)){
+    galagaTargetArtifactCoverageCache = { rows: [], challengeStageCoverage: [], summary: {} };
+    return galagaTargetArtifactCoverageCache;
+  }
+  try {
+    const artifact = readJson(GALAGA_TARGET_ARTIFACT_COVERAGE);
+    galagaTargetArtifactCoverageCache = Object.assign({}, artifact, {
+      rows: Array.isArray(artifact.rows) ? artifact.rows : [],
+      challengeStageCoverage: Array.isArray(artifact.challengeStageCoverage) ? artifact.challengeStageCoverage : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    galagaTargetArtifactCoverageCache = { rows: [], challengeStageCoverage: [], summary: {} };
+  }
+  return galagaTargetArtifactCoverageCache;
+}
+
+function challengeStageDisplayLabel(row = {}){
+  const number = Number.isFinite(+row.challengeNumber) ? +row.challengeNumber : '';
+  const marker = Number.isFinite(+row.stage) ? +row.stage : '';
+  const between = marker ? `Levels ${marker}-${marker + 1}` : 'level bracket pending';
+  return `Challenging Stage ${number || ''} (${between})`.trim();
+}
+
+function challengeStageInternalLabel(row = {}){
+  const marker = Number.isFinite(+row.stage) ? `Internal challenge marker ${row.stage}` : 'Internal marker pending';
+  const layout = row.auroraLayoutId || row.pathFamily || 'layout pending';
+  return `${marker}; runtime layout ${layout}`;
+}
+
+function challengeRuntimeArtifactDir(row = {}){
+  const candidates = [
+    row.auroraWindowId,
+    row.auroraLayoutId,
+    row.pathFamily
+  ].map(value => String(value || '').toLowerCase());
+  if(candidates.some(value => value.includes('candidate') || value.includes('first-challenge') || value.includes('peel'))) return 'challenge-stage-candidate';
+  if(candidates.some(value => value.includes('scorpion') || value.includes('cross'))) return 'challenge-stage-scorpion-cross';
+  if(candidates.some(value => value.includes('stingray') || value.includes('hook'))) return 'challenge-stage-stingray-hook';
+  if(candidates.some(value => value.includes('boss-led') || value.includes('loop'))) return 'challenge-stage-boss-led-loop';
+  if(candidates.some(value => value.includes('crown') || value.includes('cascade'))) return 'challenge-stage-crown-split-cascade';
+  return '';
+}
+
+function challengeRuntimeMedia(row = {}){
+  const dir = challengeRuntimeArtifactDir(row);
+  if(!dir) return '<div class="mediaPlaceholder">Aurora runtime contact sheet pending for this challenge stage.</div>';
+  const src = `reference-artifacts/analyses/aurora-level-expansion-cycle/${dir}/frames/contact-sheet-1s.png`;
+  if(!fs.existsSync(path.join(ROOT, src))){
+    return '<div class="mediaPlaceholder">Aurora runtime contact sheet pending for this challenge stage.</div>';
+  }
+  return renderMediaImage({
+    src,
+    label: 'Aurora current contact sheet',
+    alt: `${challengeStageDisplayLabel(row)} Aurora current state contact sheet`,
+    note: row.pathFamily ? `Runtime path family: ${row.pathFamily}` : ''
+  });
+}
+
+function challengeReferenceMedia(row = {}){
+  const src = row.galagaReferenceAnchor || row.bestReferenceMatch?.sourceAnchor || '';
+  if(!src || !fs.existsSync(path.join(ROOT, normalizeAssetSourcePath(src)))){
+    return '<div class="mediaPlaceholder">Reference contact sheet pending for this challenge stage.</div>';
+  }
+  return renderMediaImage({
+    src,
+    label: 'Galaga target contact sheet',
+    alt: `${challengeStageDisplayLabel(row)} Galaga target contact sheet`,
+    note: row.bestReferenceMatch?.labelId ? `Best current reference label: ${row.bestReferenceMatch.labelId}` : ''
+  });
+}
+
+function challengeList(items = []){
+  const rows = Array.isArray(items) ? items.filter(Boolean) : [];
+  if(!rows.length) return '<span class="docMeta">No items recorded.</span>';
+  return `<ul>${rows.map(item => `<li>${esc(item)}</li>`).join('')}</ul>`;
+}
+
+function challengeScoreComponents(row = {}){
+  const entries = Object.entries(row.scoreComponents || {});
+  if(!entries.length) return '<span class="docMeta">Score component detail pending.</span>';
+  return `<div class="challengeComponentGrid">${entries.map(([key, value]) => `<span>${esc(key)}: ${esc(value)}</span>`).join('')}</div>`;
+}
+
+function challengeSafetySummary(row = {}){
+  const safety = row.safetyProbe || {};
+  const counts = safety.eventCounts || {};
+  return [
+    `Enemy shots: ${counts.enemyShots ?? 'n/a'}`,
+    `Attack starts: ${counts.enemyAttackStarts ?? 'n/a'}`,
+    `Ship losses: ${counts.shipLosses ?? 'n/a'}`,
+    `Challenge contacts: ${counts.challengeContacts ?? 'n/a'}`
+  ];
+}
+
+function challengeMotionSummary(row = {}){
+  const motion = row.motionProbe || {};
+  return [
+    `Samples: ${motion.activeSamples ?? motion.sampleCount ?? 'n/a'}/${motion.sampleCount ?? 'n/a'}`,
+    `Active enemies: ${motion.minActive ?? 'n/a'}-${motion.maxActive ?? 'n/a'}`,
+    `X range: ${motion.xRange ?? 'n/a'}`,
+    `Y range: ${motion.yRange ?? 'n/a'}`,
+    `Lower-field share: ${motion.lowerFieldShare ?? 'n/a'}`
+  ];
+}
+
+function challengeTrajectoryDiagramMedia(row = {}){
+  const src = row.trajectoryDiagram || '';
+  if(!src || !fs.existsSync(path.join(ROOT, normalizeAssetSourcePath(src)))){
+    return '<div class="mediaPlaceholder">Readable trajectory diagram pending for this challenge stage.</div>';
+  }
+  return renderMediaImage({
+    src,
+    label: 'Readable trajectory diagram',
+    alt: `${challengeStageDisplayLabel(row)} reference-versus-current trajectory sketch`,
+    note: 'Generated from the challenge-stage metric artifact. This is a human-review sketch of target/current motion vectors, not raw optical tracking.'
+  });
+}
+
+function challengeObjectTrackDiagramMedia(row = {}){
+  const src = row.objectTrackDiagram || '';
+  if(!src || !fs.existsSync(path.join(ROOT, normalizeAssetSourcePath(src)))){
+    return '<div class="mediaPlaceholder">Object-track and shot-opportunity diagram pending for this challenge stage.</div>';
+  }
+  return renderMediaImage({
+    src,
+    label: 'Object-track / shot-opportunity diagram',
+    alt: `${challengeStageDisplayLabel(row)} object-track and shot-opportunity sketch`,
+    note: 'Generated from runtime challenge sprite silhouettes and sampled player shot lanes. This is a readable probe of visible motion and scoreability, not yet Galaga target-crop optical matching.'
+  });
+}
+
+function renderChallengeStageDetail(row = {}){
+  const label = challengeStageDisplayLabel(row);
+  const score = row.conformanceScore10 ?? 'n/a';
+  const interest = row.interestingFactor10 ?? 'n/a';
+  const movement = row.movementConformanceScore10 ?? 'n/a';
+  const graphics = row.graphicalConformanceScore10 ?? 'n/a';
+  const novelty = row.alienNoveltyScore10 ?? 'n/a';
+  const bestRef = row.bestReferenceMatch?.labelId || 'pending';
+  const targetText = row.galagaTarget || 'Target pending.';
+  const currentText = row.currentRead || 'Current read pending.';
+  const gaps = row.criticalGaps || [];
+  const actions = row.nextActions || [];
+  return `
+    <details class="challengeStageDetail" id="challenge-stage-${esc(row.challengeNumber || row.stage || '')}">
+      <summary class="challengeStageSummary">
+        <span class="challengeStageTitle">
+          <span>${esc(label)}</span>
+          <small>${esc(challengeStageInternalLabel(row))}</small>
+        </span>
+        <span class="scorePill">${esc(interest)}/10 interest</span>
+        <span class="scorePill">${esc(movement)}/10 movement</span>
+        <span class="scorePill">${esc(graphics)}/10 graphics</span>
+        <span class="scorePill">${esc(novelty)}/10 alien novelty</span>
+        <span class="scorePill">${esc(score)}/10 conform</span>
+      </summary>
+      <div class="challengeStageDetailBody">
+        <div class="challengeCompareGrid">
+          <article class="challengeEvidenceCard">
+            <h3>Reference Target</h3>
+            ${challengeReferenceMedia(row)}
+            <p>${esc(targetText)}</p>
+            <p class="docMeta">${esc(row.galagaReferenceMeaning || 'Reference meaning pending.')}</p>
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>Aurora Current</h3>
+            ${challengeRuntimeMedia(row)}
+            <p>${esc(currentText)}</p>
+            <p class="docMeta">${esc(row.movementRead || '')}</p>
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>Conformance Read</h3>
+            ${challengeTrajectoryDiagramMedia(row)}
+            <p><strong>Strict read:</strong> movement ${esc(movement)}/10, graphics ${esc(graphics)}/10, alien novelty ${esc(novelty)}/10, progression ${esc(row.progressionConformanceScore10 ?? 'n/a')}/10.</p>
+            <p><strong>Diagnostic best reference:</strong> <code>${esc(bestRef)}</code> (${esc(row.referenceMatchScore10 ?? 'n/a')}/10 legacy broad coverage).</p>
+            <p>${esc(row.criticalExpectation || 'Critical expectation pending.')}</p>
+            ${challengeScoreComponents(row)}
+          </article>
+        </div>
+        <div class="challengeAxisGrid">
+          <article class="challengeEvidenceCard">
+            <h3>Aliens</h3>
+            <p>${esc(row.alienVariationRead || 'Alien variation read pending.')}</p>
+            <p class="docMeta">Group identity: ${esc(row.groupIdentityScore10 ?? 'n/a')}/10. ${esc(row.groupIdentityRead || 'Wave/group identity read pending.')}</p>
+            <p class="docMeta">Lane types: ${esc((row.laneTypes || []).join(', ') || 'pending')}</p>
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>Movement</h3>
+            <p>${esc(row.movementRead || 'Movement read pending.')}</p>
+            <p class="docMeta">${esc(row.strictAxisReads?.movement?.read || '')}</p>
+            ${challengeList(challengeMotionSummary(row))}
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>Sprite Motion / Shot Route</h3>
+            ${challengeObjectTrackDiagramMedia(row)}
+            <p>${esc(row.spriteMotionRead || 'Sprite-motion read pending.')}</p>
+            <p>${esc(row.shotOpportunityRead || 'Shot-opportunity read pending.')}</p>
+            <p class="docMeta">Object silhouettes: ${esc(row.objectTrackProbe?.score10 ?? 'n/a')}/10; player shot opportunity: ${esc(row.playerShotOpportunityScore10 ?? 'n/a')}/10.</p>
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>Safety / Rules</h3>
+            <p>Challenging stages are evaluated separately from normal levels: they should preserve the no-shooting, no-ship-loss bonus-stage rule before they earn interest/conformance credit.</p>
+            ${challengeList(challengeSafetySummary(row))}
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>Gaps / Next</h3>
+            ${challengeList(gaps.length ? gaps : ['No critical gap recorded for this row yet; continue improving scorer resolution.'])}
+            ${challengeList(actions)}
+          </article>
+        </div>
+      </div>
+    </details>
+  `;
 }
 
 function loadPersonaPerformanceDistribution(){
@@ -2880,6 +3434,7 @@ function renderPixelSprite(sprite){
 function renderMediaImage(item){
   if(!item || !item.src) return '';
   const href = catalogMediaHref(item.src);
+  const label = item.label || 'Evidence image';
   const crop = item.crop || {};
   const cropWidth = Number(crop.width || crop.w);
   const cropHeight = Number(crop.height || crop.h);
@@ -2890,15 +3445,36 @@ function renderMediaImage(item){
   const scale = Number(crop.scale || 4);
   const hasCrop = [cropWidth, cropHeight, sourceWidth, sourceHeight, cropX, cropY, scale]
     .every(Number.isFinite) && cropWidth > 0 && cropHeight > 0 && sourceWidth > 0 && sourceHeight > 0 && scale > 0;
+  const alt = item.alt || item.label || 'Evidence image';
+  const isContactSheet = /contact[- ]sheet/i.test(`${item.src || ''} ${label}`);
+  const panelNote = isContactSheet
+    ? 'Contact sheets are supporting visual evidence for scanning motion shape, frame progression, and density. They are not the primary score explanation; use the surrounding target/current/conformance text for the human-readable judgment, and scroll this panel at native scale when the pixels matter.'
+    : (item.note || 'Expanded evidence view.');
+  const expandedScale = hasCrop ? Math.min(12, Math.max(scale, 6, scale * 2)) : scale;
   const media = hasCrop
     ? `<div class="mediaCrop" style="width:${Math.round(cropWidth * scale)}px;height:${Math.round(cropHeight * scale)}px">
-        <img src="${esc(href)}" alt="${esc(item.alt || item.label || 'Evidence image')}" loading="lazy" style="width:${Math.round(sourceWidth * scale)}px;height:${Math.round(sourceHeight * scale)}px;transform:translate(-${Math.round(cropX * scale)}px,-${Math.round(cropY * scale)}px)">
+        <img src="${esc(href)}" alt="${esc(alt)}" loading="lazy" style="width:${Math.round(sourceWidth * scale)}px;height:${Math.round(sourceHeight * scale)}px;transform:translate(-${Math.round(cropX * scale)}px,-${Math.round(cropY * scale)}px)">
       </div>`
-    : `<img class="catalogMediaImg${item.pixelated ? ' isPixelated' : ''}" src="${esc(href)}" alt="${esc(item.alt || item.label || 'Evidence image')}" loading="lazy">`;
+    : `<img class="catalogMediaImg${item.pixelated ? ' isPixelated' : ''}" src="${esc(href)}" alt="${esc(alt)}" loading="lazy">`;
+  const expandedMedia = hasCrop
+    ? `<div class="mediaCrop mediaCropExpanded" style="width:${Math.round(cropWidth * expandedScale)}px;height:${Math.round(cropHeight * expandedScale)}px">
+        <img src="${esc(href)}" alt="${esc(`${alt} expanded crop`)}" loading="lazy" style="width:${Math.round(sourceWidth * expandedScale)}px;height:${Math.round(sourceHeight * expandedScale)}px;transform:translate(-${Math.round(cropX * expandedScale)}px,-${Math.round(cropY * expandedScale)}px)">
+      </div>`
+    : `<img class="${item.pixelated ? 'isPixelated' : ''}" src="${esc(href)}" alt="${esc(`${alt} expanded`)}" loading="lazy">`;
   return `
     <div class="catalogMediaItem">
-      <span class="catalogMediaLabel">${esc(item.label || 'Evidence image')}</span>
+      <span class="catalogMediaLabel">${esc(label)}</span>
       ${media}
+      <details class="catalogMediaExpand${isContactSheet ? ' isContactSheet' : ''}">
+        <summary><span class="mediaSummaryClosed">Open evidence panel</span><span class="mediaSummaryOpen">Close evidence panel</span></summary>
+        <div class="catalogMediaExpanded">
+          <div class="catalogMediaExpandedHeader">
+            <strong>${esc(label)}</strong>
+            <p>${esc(panelNote)}</p>
+          </div>
+          <div class="catalogMediaExpandedScroll">${expandedMedia}</div>
+        </div>
+      </details>
       ${item.note ? `<span class="catalogMediaNote">${esc(item.note)}</span>` : ''}
     </div>
   `;
@@ -3019,6 +3595,54 @@ function renderArtifactEvidenceList(evidence){
   return items.map(item => `<code>${esc(item)}</code>`).join('<br>');
 }
 
+function renderSourceLinks(links){
+  const items = (Array.isArray(links) ? links : [])
+    .filter(Boolean)
+    .slice(0, 3)
+    .map((href, index) => `<a href="${esc(href)}">source ${index + 1}</a>`);
+  return items.length ? items.join('<br>') : '<span class="docMeta">Local or derived source</span>';
+}
+
+function renderTargetArtifactCoverageRows(report){
+  const rows = Array.isArray(report?.rows) ? report.rows : [];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="7"><span class="docMeta">Galaga target artifact coverage pending. Run <code>npm run harness:analyze:galaga-target-artifact-coverage</code>.</span></td>
+    </tr>`;
+  }
+  return rows.map((entry) => `
+    <tr>
+      <td><strong>${esc(entry.title || entry.id || '')}</strong><br><span class="docMeta"><code>${esc(entry.id || '')}</code><br>${renderSourceLinks(entry.sourceUrls)}</span></td>
+      <td><strong>${esc(entry.ingestionStatus || 'pending')}</strong><br><span class="docMeta">${esc(entry.priority || 'priority pending')} priority; confidence ${esc(entry.confidence || 'unknown')}</span></td>
+      <td><strong>${esc(entry.coverage10 ?? 'n/a')}/10</strong><br><span class="docMeta">axes: ${esc((entry.coverageAxes || []).slice(0, 4).join(', ') || 'pending')}</span></td>
+      <td>${esc(entry.targetUse || '')}</td>
+      <td>${esc(entry.currentUse || '')}</td>
+      <td>${esc(entry.missingWork || '')}</td>
+      <td>${esc(entry.evidenceExistingCount ?? 0)}/${esc((entry.localEvidence || []).length)} local anchors</td>
+    </tr>
+  `).join('\n');
+}
+
+function renderChallengeTargetCoverageRows(report){
+  const rows = Array.isArray(report?.challengeStageCoverage) ? report.challengeStageCoverage : [];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="6"><span class="docMeta">Challenge-stage target window coverage pending.</span></td>
+    </tr>`;
+  }
+  return rows.map((entry) => `
+    <tr>
+      <td><strong>Challenging Stage ${esc(entry.challengeNumber || '')}</strong><br><span class="docMeta">marker ${esc(entry.stageMarker || '')}</span></td>
+      <td>${esc(entry.status || '')}</td>
+      <td><strong>${esc(entry.coverage10 ?? 'n/a')}/10</strong></td>
+      <td>${esc((entry.currentEvidence || []).join(', ') || 'No committed media-backed challenge window yet.')}</td>
+      <td>${esc(entry.nextNeed || '')}</td>
+    </tr>
+  `).join('\n');
+}
+
 function buildApplicationGuide(buildInfo, latestNote, guide){
   const template = read(APPLICATION_GUIDE_TEMPLATE);
   const tocItems = [
@@ -3030,9 +3654,11 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'ship-catalog', title: 'Ship And Enemy Catalog' },
     { id: 'stage-families', title: 'Stage Family Progression' },
     { id: 'artifact-conformance-status', title: 'Artifact Conformance Status' },
+    { id: 'target-artifact-coverage', title: 'Target Artifact Coverage' },
     { id: 'conformance-alien-index', title: 'Alien Conformance Index' },
     { id: 'conformance-audio-index', title: 'Audio Conformance Index' },
     { id: 'stage-conformance-summary', title: 'Stage Conformance Summary' },
+    { id: 'challenge-stage-conformance', title: 'Challenge Stage Deep Dive' },
     { id: 'persona-catalog', title: 'Testing Personas' },
     { id: 'persona-performance-distribution', title: 'Persona Performance Distribution' },
     { id: 'graphics-controls', title: 'Presentation Controls' },
@@ -3160,6 +3786,10 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
       <td colspan="5"><span class="docMeta">Artifact conformance status pending. Run <code>npm run harness:analyze:application-artifact-conformance</code> to generate this table.</span></td>
     </tr>
   `;
+  const galagaTargetArtifactCoverage = loadGalagaTargetArtifactCoverage();
+  const targetArtifactSummary = galagaTargetArtifactCoverage.summary || {};
+  const targetArtifactRows = renderTargetArtifactCoverageRows(galagaTargetArtifactCoverage);
+  const challengeTargetRows = renderChallengeTargetCoverageRows(galagaTargetArtifactCoverage);
   const conformanceAlienRows = (guide.conformanceAlienRows || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.name || '')}</strong><br><span class="docMeta">${esc(entry.runtime || '')}</span></td>
@@ -3190,6 +3820,11 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
       <td>${esc(entry.gap || '')}</td>
     </tr>
   `).join('\n');
+  const challengeStageConformance = loadChallengeStageConformance();
+  const challengeSummary = challengeStageConformance.summary || {};
+  const challengeStageRows = (challengeStageConformance.stageRows || []).map(renderChallengeStageDetail).join('\n') || `
+    <div class="docWrap"><span class="docMeta">Challenge-stage conformance analysis pending. Run <code>npm run harness:analyze:challenge-stage-conformance</code>.</span></div>
+  `;
   const personaRows = (guide.personaRows || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.label || '')}</strong><br><span class="docMeta">${esc(entry.harnessId || '')}</span></td>
@@ -3445,6 +4080,52 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           </div>
         </section>
 
+        <section class="section" id="target-artifact-coverage">
+          <div class="sectionHeader">
+            <h2>Target Artifact Coverage</h2>
+            <p>The online and local Galaga artifacts that best illustrate Aurora's target, with explicit status for what has actually been ingested. This keeps challenge-stage, sprite, audio, rules, and screen-surface work tied to visible evidence instead of loose memory.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Coverage read:</strong> ${esc(targetArtifactSummary.coverageScore10 ?? 'n/a')}/10 overall target-artifact ingestion; ${esc(targetArtifactSummary.challengeStageReadiness10 ?? 'n/a')}/10 challenge-stage target readiness; ${esc(targetArtifactSummary.lateChallengeGapCount ?? 'n/a')} late challenge windows still missing.</p>
+            <p>${esc(targetArtifactSummary.interpretation || 'Run the Galaga target artifact coverage analyzer to refresh this readout.')}</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-target-artifact-coverage/latest.json</code>. <strong>Report:</strong> <code>GALAGA_TARGET_ARTIFACT_COVERAGE.md</code>.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Target Artifact</th>
+                  <th>Status</th>
+                  <th>Coverage</th>
+                  <th>Why It Matters</th>
+                  <th>Current Use</th>
+                  <th>Missing Work</th>
+                  <th>Evidence</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${targetArtifactRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Challenge Target</th>
+                  <th>Status</th>
+                  <th>Coverage</th>
+                  <th>Current Evidence</th>
+                  <th>Next Need</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${challengeTargetRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
         <section class="section" id="conformance-alien-index">
           <div class="sectionHeader">
             <h2>Alien Conformance Index</h2>
@@ -3514,6 +4195,42 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
                 ${stageConformanceRows}
               </tbody>
             </table>
+          </div>
+        </section>
+
+        <section class="section" id="challenge-stage-conformance">
+          <div class="sectionHeader">
+            <h2>Challenge Stage Deep Dive</h2>
+            <p>A deliberately critical stage-by-stage comparison of Aurora challenging stages against Galaga-style bonus-stage behavior. This separates rule conformance from interesting visual conformance: no enemy shooting and no ship loss are necessary, but the higher-value gap is authored alien movement, alien-family variation, and learnable set-piece novelty.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Current strict read:</strong> ${esc(challengeSummary.interestingFactorScore10 || 'n/a')}/10 interesting factor; ${esc(challengeSummary.movementConformanceScore10 || 'n/a')}/10 movement; ${esc(challengeSummary.graphicalConformanceScore10 || 'n/a')}/10 graphics; ${esc(challengeSummary.alienNoveltyScore10 || 'n/a')}/10 alien novelty; ${esc(challengeSummary.playerShotOpportunityScore10 || 'n/a')}/10 shot opportunity; ${esc(challengeSummary.score10 || 'n/a')}/10 challenge-stage conformance.</p>
+            <p>${esc(challengeSummary.weakestFinding || 'Run the challenge-stage conformance analyzer to refresh this readout.')}</p>
+            <p class="docMeta"><strong>Scoring model:</strong> ${esc(challengeSummary.scoringModel || 'strict-v2')}. Each challenge starts at 1/10 for interest, movement, and graphics; no-shot/no-kill safety is a required guardrail, not a score booster. Legacy broad coverage is diagnostic only.</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/challenge-stage-conformance/latest.json</code>. <strong>Report:</strong> <code>CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md</code>.</p>
+            <p class="docMeta"><strong>Naming rule:</strong> normal Levels and Challenging Stages are separate. The challenge rows below use labels like <strong>Challenging Stage 1 (Levels 3-4)</strong> instead of calling that set piece Level 4.</p>
+            <p class="docMeta"><strong>Evidence-image rule:</strong> contact sheets are supporting artifacts for visual inspection, not the main human-readable conformance explanation. Use each row's target/current/conformance text for the judgment; open the evidence panel only when you need to inspect the underlying frames at native scale.</p>
+            <div class="inlineDocShelf">
+              <details class="inlineDocPreview">
+                <summary>Peek at the living effort summary</summary>
+                <div class="inlineDocPreviewBody">
+                  <p>${esc(challengeSummary.playerMeaning || 'Challenge stages should be safe but tense score exhibitions with memorable entry routes and alien novelty.')}</p>
+                  <p><a class="button" href="project-guide.html#challenge-stage-conformance-effort">Open full effort summary</a></p>
+                </div>
+              </details>
+              <details class="inlineDocPreview">
+                <summary>Peek at related report and measurements</summary>
+                <div class="inlineDocPreviewBody">
+                  <p>${esc(challengeSummary.designerMeaning || 'Design work should move from broad path-family labels to explicit per-challenge contracts.')}</p>
+                  <p><strong>Improvement plan:</strong></p>
+                  ${challengeList(challengeStageConformance.improvementPlan || [])}
+                  <p><a class="button" href="project-guide.html#challenge-stage-conformance-analysis-doc">Open rendered effort report</a></p>
+                </div>
+              </details>
+            </div>
+          </div>
+          <div class="challengeStageList">
+            ${challengeStageRows}
           </div>
         </section>
 

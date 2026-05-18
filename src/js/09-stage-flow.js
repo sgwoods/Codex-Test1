@@ -100,27 +100,35 @@ function spawnChallenge(){
  for(let i=0;i<total;i++){
   const lane=i%layout.enemiesPerGroup;
   const wave=(i/layout.enemiesPerGroup)|0;
-  const t=layout.laneTypes[lane]||'bee';
+  const waveLaneTypes=Array.isArray(layout.groupLaneTypes)&&layout.groupLaneTypes[wave]
+   ? layout.groupLaneTypes[wave]
+   : layout.laneTypes;
+  const wavePathFamilies=Array.isArray(layout.groupPathFamilies)?layout.groupPathFamilies:null;
+  const waveVisualFamilies=Array.isArray(layout.groupVisualFamilies)?layout.groupVisualFamilies:null;
+  const t=waveLaneTypes[lane]||layout.laneTypes[lane]||'bee';
   const side=lane<layout.enemiesPerGroup/2?-1:1,slot=lane%(layout.enemiesPerGroup/2),row=slot<2?0:1;
+  const pathFamily=wavePathFamilies?.[wave]||layout.pathFamily||'classic-lane-wave';
+  const challengeFamily=waveVisualFamilies?.[wave]||layout.visualFamily||profile.challengeFamily;
+  const waveProfile=challengeFamily===profile.challengeFamily?profile:Object.assign({},profile,{challengeFamily});
   S.e.push(makePackChallengeEnemyState({
    gamePack:currentGamePack(),
    type:t,
    lane,
-   profile,
+   profile:waveProfile,
    x:side>0?PLAY_W+layout.spawnOffsetX:-layout.spawnOffsetX,
    y:34+wave*layout.waveSpacingY+row*layout.rowSpacingY,
    wave,
    side,
    slot,
    row,
-	   group:wave,
-	   sweep:wave%2?-1:1,
-	   upperBandY,
-   pathFamily:layout.pathFamily||'classic-lane-wave',
+   group:wave,
+   sweep:wave%2?-1:1,
+   upperBandY,
+   pathFamily,
    arcAmp:layout.arcAmp||1,
    dropAmp:layout.dropAmp||1,
-	   spawn:baseEntryDelay+wave*layout.waveDelay+slot*layout.slotDelay
-	  }));
+   spawn:baseEntryDelay+wave*layout.waveDelay+slot*layout.slotDelay
+  }));
  }
  S.ch={hits:0,total,done:0,groups:Array.from({length:layout.groups},()=>0),bonus:0,perfect:0,upperBandY,upperBandTime:0,upperBandSamples:0};
 }

@@ -1,0 +1,266 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-runtime-trial-decision",
+  "generatedAt": "2026-05-17T10:51:44.162Z",
+  "branch": "codex/macbook-audio-entry-grounding-cycle",
+  "commit": "ab80e4c7",
+  "dirty": true,
+  "cue": "rescueJoin",
+  "candidate": "refclip-s2399-d300-v116",
+  "decision": {
+    "status": "runtime-trial-rejected",
+    "promoteRuntime": false,
+    "reason": "Focused and precheck evidence looked strong, but the measured runtime trial did not improve rescueJoin in the live full-theme event-gap report and worsened aggregate/highest audio risk; runtime cue was reverted."
+  },
+  "problem": "rescueJoin needs a durable record of runtime-trial decisions so focused candidate wins do not become automatic runtime promotions.",
+  "strategy": "Treat focused candidate loops and promotion prechecks as proposal gates only. Accept runtime audio changes only after live/full-theme comparison, event-gap rollup, cue-alignment guardrails, and quality scoring hold or improve; persist rejected trials so future generators avoid repeating failed strategies.",
+  "trialCandidateEvidence": {
+    "focusedCandidateReport": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-rescue-join.json",
+    "candidateDecisionStatus": "candidate-recommended",
+    "candidateKeep": true,
+    "candidateBest": "refclip-s2399-d300-v116",
+    "measuredBest": "refclip-s2399-d300-v116",
+    "riskDelta10": 2.39,
+    "segmentRiskDelta10": 4.04,
+    "candidateRisk10": 0.73,
+    "candidateWorstSegmentRisk10": 0.76,
+    "candidateKeeperRead": "clears keeper gates",
+    "promotionPrecheck": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-17-ab80e4c7-dirty-104323-rescueJoin/report.json",
+    "precheckStatus": "precheck-trial-allowed",
+    "allowRuntimeTrial": true,
+    "promoteRuntime": false,
+    "precheckWins": [
+      "Full-theme cue gap improves by 2.33/10.",
+      "Worst segment risk improves by 3.69/10.",
+      "Theme average worst-segment risk improves by 0.18/10."
+    ],
+    "precheckBlockers": []
+  },
+  "runtimeTrialEvidence": {
+    "audioThemeComparison": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-17-main-ab80e4c7-104719/metrics.json",
+    "themeAverageWorstSegmentRisk10": 3.77,
+    "themeCueRisk10": 3.57,
+    "themeCueWorstSegmentRisk10": 0,
+    "ledger": "reference-artifacts/analyses/conformance-economics/run-ledger.jsonl",
+    "trialLedgerRows": [
+      {
+        "id": "2026-05-09T00-28-23-987Z-69296",
+        "command": "npm run harness:analyze-audio-theme-comparison",
+        "axes": [
+          "audio",
+          "capture-retreat",
+          "captured-fighter-destroyed",
+          "rescue-join",
+          "audio-theme-comparison",
+          "audio-event-gap",
+          "capture-lifecycle"
+        ],
+        "resources": [
+          "cpu",
+          "browser"
+        ],
+        "notes": "Runtime validation after capture lifecycle audio cue promotion",
+        "wallSeconds": 76.262,
+        "cpuSeconds": 142.46,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-09T00-30-35-653Z-74484",
+        "command": "npm run harness:analyze:aurora-audio-focus-candidates -- --cues=capture-beam,rescue-join,capture-retreat --reference-grid-limit=72",
+        "axes": [
+          "audio",
+          "capture-beam",
+          "rescue-join",
+          "capture-retreat",
+          "audio-focus-candidate",
+          "capture-lifecycle"
+        ],
+        "resources": [
+          "cpu",
+          "browser"
+        ],
+        "notes": "Focused capture beam and rescue tail candidate sweep after runtime validation",
+        "wallSeconds": 384.761,
+        "cpuSeconds": 688.99,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-09T00-37-36-140Z-85468",
+        "command": "npm run harness:analyze-audio-theme-comparison",
+        "axes": [
+          "audio",
+          "capture-beam",
+          "rescue-join",
+          "capture-retreat",
+          "captured-fighter-destroyed",
+          "audio-theme-comparison",
+          "audio-event-gap",
+          "capture-lifecycle"
+        ],
+        "resources": [
+          "cpu",
+          "browser"
+        ],
+        "notes": "Runtime validation after capture beam keeper and rescue measured-best promotion",
+        "wallSeconds": 72.932,
+        "cpuSeconds": 127.99,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-09T00-43-20-848Z-93064",
+        "command": "npm run harness:analyze-audio-theme-comparison",
+        "axes": [
+          "audio",
+          "capture-retreat",
+          "captured-fighter-destroyed",
+          "rescue-join",
+          "audio-theme-comparison",
+          "audio-event-gap",
+          "capture-lifecycle"
+        ],
+        "resources": [
+          "cpu",
+          "browser"
+        ],
+        "notes": "Runtime validation after rejecting rescueJoin measured-best candidate",
+        "wallSeconds": 72.532,
+        "cpuSeconds": 127.37,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-15T20-09-22-857Z-90536",
+        "command": "npm run harness:analyze:aurora-audio-promotion-precheck -- --cue rescueJoin",
+        "axes": [
+          "audio",
+          "rescue-join",
+          "promotion-precheck"
+        ],
+        "resources": [
+          "cpu"
+        ],
+        "notes": "precheck existing rescueJoin keeper before runtime promotion",
+        "wallSeconds": 0.19,
+        "cpuSeconds": 0.25,
+        "exitCode": 1
+      },
+      {
+        "id": "2026-05-15T20-15-46-630Z-147",
+        "command": "npm run harness:analyze:aurora-audio-promotion-precheck -- --cue rescueJoin",
+        "axes": [
+          "audio",
+          "rescue-join",
+          "promotion-precheck"
+        ],
+        "resources": [
+          "cpu"
+        ],
+        "notes": "precheck regenerated rescueJoin keeper before runtime promotion",
+        "wallSeconds": 0.326,
+        "cpuSeconds": 0.44,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-15T20-23-08-028Z-11359",
+        "command": "npm run harness:analyze:aurora-audio-focus-candidates -- --cue rescue-join --candidate-ids refclip-s2399-d180-v86 --reference-grid-limit=0 --repeats=3",
+        "axes": [
+          "audio",
+          "rescue-join",
+          "candidate-loop"
+        ],
+        "resources": [
+          "browser"
+        ],
+        "notes": "refresh rescueJoin keeper after docs/runtime window alignment",
+        "wallSeconds": 6.364,
+        "cpuSeconds": 10.75,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-17T10-43-58-111Z-74124",
+        "command": "npm run harness:analyze-audio-theme-comparison",
+        "axes": [
+          "rescue-join",
+          "audio-runtime-trial",
+          "audio-theme-comparison"
+        ],
+        "resources": [
+          "cpu",
+          "browser"
+        ],
+        "notes": "runtime trial audio comparison for rescueJoin keeper",
+        "wallSeconds": 83.848,
+        "cpuSeconds": 161.14,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-17T10-45-28-857Z-78358",
+        "command": "npm run harness:analyze:aurora-audio-event-gap",
+        "axes": [
+          "rescue-join",
+          "audio-runtime-trial",
+          "audio-event-gap"
+        ],
+        "resources": [
+          "cpu"
+        ],
+        "notes": "runtime trial event-gap for rescueJoin keeper",
+        "wallSeconds": 0.269,
+        "cpuSeconds": 0.32,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-17T10-47-19-285Z-81275",
+        "command": "npm run harness:analyze-audio-theme-comparison",
+        "axes": [
+          "rescue-join",
+          "audio-post-revert",
+          "audio-theme-comparison"
+        ],
+        "resources": [
+          "cpu",
+          "browser"
+        ],
+        "notes": "post-revert audio comparison after rejected rescueJoin trial",
+        "wallSeconds": 84.09,
+        "cpuSeconds": 162.81,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-17T10-48-48-173Z-85558",
+        "command": "npm run harness:analyze:aurora-audio-event-gap",
+        "axes": [
+          "rescue-join",
+          "audio-post-revert",
+          "audio-event-gap"
+        ],
+        "resources": [
+          "cpu"
+        ],
+        "notes": "post-revert event-gap after rejected rescueJoin trial",
+        "wallSeconds": 0.217,
+        "cpuSeconds": 0.28,
+        "exitCode": 0
+      }
+    ]
+  },
+  "postTrialEvidence": {
+    "eventGap": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
+    "quality": "reference-artifacts/analyses/quality-conformance/2026-05-17-ab80e4c7/report.json",
+    "currentOverallScore10": 9.2,
+    "currentAudioScore10": 7.3,
+    "currentHighestRiskCue": "challengePerfect",
+    "currentHighestRisk10": 7.07,
+    "currentHighestSegmentRiskCue": "challengePerfect",
+    "currentHighestSegmentRiskRole": "onset",
+    "currentAverageWorstSegmentRisk10": 3.44,
+    "currentCueGapRisk10": 3.57,
+    "currentCueWorstSegmentRisk10": 5.96,
+    "currentSemanticScore10": 10
+  },
+  "learning": [
+    "Focused cue similarity and promotion precheck are necessary but not sufficient for release-safe runtime promotion.",
+    "Runtime audio candidates must be validated through the same full-theme live capture and quality gates that drive release scoring.",
+    "rescueJoin candidate history should guide the next generator pass, but rejected runtime decisions must block direct promotion until the failed gate is specifically addressed."
+  ],
+  "nextStep": "Do not retry this rescueJoin subwindow directly. Use the audio risk stability report to require repeated or median full-theme confirmation before runtime promotion, then return to challengePerfect/gameOver only after capture volatility is controlled."
+}

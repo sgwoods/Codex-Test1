@@ -1,0 +1,5707 @@
+{
+  "commit": "eb6d951f",
+  "version": "1.4.0",
+  "items": [
+    {
+      "id": "baseline-current-r01",
+      "label": "Current Aurora baseline",
+      "focus": "Candidate comparison for Challenge Perfect.",
+      "cue": "challengePerfect",
+      "analysisPolicy": {},
+      "variants": {
+        "aurora": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.6581,
+            "rms": 0.1193,
+            "spectral_centroid_hz": 1959.4,
+            "zero_crossings_per_s": 2634.5,
+            "spectral_spread_hz": 1707.3,
+            "spectral_rolloff_85_hz": 3688.1,
+            "spectral_flatness": 0.2236,
+            "band_energy": {
+              "sub_500": 0.1638,
+              "low_mid_500_1500": 0.2975,
+              "mid_1500_3000": 0.3118,
+              "presence_3000_6000": 0.197,
+              "air_6000_plus": 0.0299
+            },
+            "attack_peak_position": 1.0,
+            "decay_ratio": 12.893,
+            "envelope_contrast": 4.444,
+            "burst_share": 0.264
+          },
+          "activeWindow": {
+            "start_s": 0.379,
+            "end_s": 0.699,
+            "duration_s": 0.32,
+            "coverage": 0.38,
+            "threshold_rms": 0.071
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.32,
+            "peak": 0.6281,
+            "rms": 0.1397,
+            "spectral_centroid_hz": 1957.5,
+            "zero_crossings_per_s": 1583.5,
+            "spectral_spread_hz": 1626.6,
+            "spectral_rolloff_85_hz": 3702.1,
+            "spectral_flatness": 0.1885,
+            "band_energy": {
+              "sub_500": 0.1489,
+              "low_mid_500_1500": 0.3012,
+              "mid_1500_3000": 0.3194,
+              "presence_3000_6000": 0.2059,
+              "air_6000_plus": 0.0247
+            },
+            "attack_peak_position": 0.675,
+            "decay_ratio": 1.002,
+            "envelope_contrast": 4.184,
+            "burst_share": 0.341
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.08,
+                "end_s": 0.24,
+                "duration_s": 0.16,
+                "metrics": {
+                  "duration_s": 0.16,
+                  "peak": 0.6281,
+                  "rms": 0.1909,
+                  "spectral_centroid_hz": 1986.6,
+                  "zero_crossings_per_s": 2573.9,
+                  "spectral_spread_hz": 1625.7,
+                  "spectral_rolloff_85_hz": 3732.4,
+                  "spectral_flatness": 0.1893,
+                  "band_energy": {
+                    "sub_500": 0.1372,
+                    "low_mid_500_1500": 0.3021,
+                    "mid_1500_3000": 0.3256,
+                    "presence_3000_6000": 0.21,
+                    "air_6000_plus": 0.0251
+                  },
+                  "attack_peak_position": 0.85,
+                  "decay_ratio": 0.953,
+                  "envelope_contrast": 1.08,
+                  "burst_share": 0.238
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1045,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.08,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.6581,
+            "rms": 0.1193,
+            "spectral_centroid_hz": 1959.4,
+            "zero_crossings_per_s": 2634.5,
+            "spectral_spread_hz": 1707.3,
+            "spectral_rolloff_85_hz": 3688.1,
+            "spectral_flatness": 0.2236,
+            "band_energy": {
+              "sub_500": 0.1638,
+              "low_mid_500_1500": 0.2975,
+              "mid_1500_3000": 0.3118,
+              "presence_3000_6000": 0.197,
+              "air_6000_plus": 0.0299
+            },
+            "attack_peak_position": 1.0,
+            "decay_ratio": 12.893,
+            "envelope_contrast": 4.444,
+            "burst_share": 0.264
+          },
+          "activeWindow": {
+            "start_s": 0.379,
+            "end_s": 0.699,
+            "duration_s": 0.32,
+            "coverage": 0.38,
+            "threshold_rms": 0.071
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.32,
+            "peak": 0.6281,
+            "rms": 0.1397,
+            "spectral_centroid_hz": 1957.5,
+            "zero_crossings_per_s": 1583.5,
+            "spectral_spread_hz": 1626.6,
+            "spectral_rolloff_85_hz": 3702.1,
+            "spectral_flatness": 0.1885,
+            "band_energy": {
+              "sub_500": 0.1489,
+              "low_mid_500_1500": 0.3012,
+              "mid_1500_3000": 0.3194,
+              "presence_3000_6000": 0.2059,
+              "air_6000_plus": 0.0247
+            },
+            "attack_peak_position": 0.675,
+            "decay_ratio": 1.002,
+            "envelope_contrast": 4.184,
+            "burst_share": 0.341
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.08,
+                "end_s": 0.24,
+                "duration_s": 0.16,
+                "metrics": {
+                  "duration_s": 0.16,
+                  "peak": 0.6281,
+                  "rms": 0.1909,
+                  "spectral_centroid_hz": 1986.6,
+                  "zero_crossings_per_s": 2573.9,
+                  "spectral_spread_hz": 1625.7,
+                  "spectral_rolloff_85_hz": 3732.4,
+                  "spectral_flatness": 0.1893,
+                  "band_energy": {
+                    "sub_500": 0.1372,
+                    "low_mid_500_1500": 0.3021,
+                    "mid_1500_3000": 0.3256,
+                    "presence_3000_6000": 0.21,
+                    "air_6000_plus": 0.0251
+                  },
+                  "attack_peak_position": 0.85,
+                  "decay_ratio": 0.953,
+                  "envelope_contrast": 1.08,
+                  "burst_share": 0.238
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1045,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.08,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2,
+            "spectral_spread_hz": 2399.6,
+            "spectral_rolloff_85_hz": 5333.3,
+            "spectral_flatness": 0.2305,
+            "band_energy": {
+              "sub_500": 0.2965,
+              "low_mid_500_1500": 0.3324,
+              "mid_1500_3000": 0.146,
+              "presence_3000_6000": 0.1411,
+              "air_6000_plus": 0.0841
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.915,
+            "envelope_contrast": 1.163,
+            "burst_share": 0.262
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.17,
+            "duration_s": 0.17,
+            "coverage": 0.354,
+            "threshold_rms": 0.1415
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.17,
+            "peak": 0.4117,
+            "rms": 0.1544,
+            "spectral_centroid_hz": 1915.2,
+            "zero_crossings_per_s": 1843.4,
+            "spectral_spread_hz": 2271.7,
+            "spectral_rolloff_85_hz": 5117.9,
+            "spectral_flatness": 0.2052,
+            "band_energy": {
+              "sub_500": 0.3118,
+              "low_mid_500_1500": 0.3615,
+              "mid_1500_3000": 0.1172,
+              "presence_3000_6000": 0.1421,
+              "air_6000_plus": 0.0674
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.828,
+            "envelope_contrast": 1.142,
+            "burst_share": 0.182
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.0,
+                "end_s": 0.09,
+                "duration_s": 0.09,
+                "metrics": {
+                  "duration_s": 0.09,
+                  "peak": 0.4117,
+                  "rms": 0.1671,
+                  "spectral_centroid_hz": 2031.5,
+                  "zero_crossings_per_s": 1280.0,
+                  "spectral_spread_hz": 2309.6,
+                  "spectral_rolloff_85_hz": 5353.9,
+                  "spectral_flatness": 0.2359,
+                  "band_energy": {
+                    "sub_500": 0.2852,
+                    "low_mid_500_1500": 0.3513,
+                    "mid_1500_3000": 0.1294,
+                    "presence_3000_6000": 0.1622,
+                    "air_6000_plus": 0.0719
+                  },
+                  "attack_peak_position": 0.0,
+                  "decay_ratio": 0.883,
+                  "envelope_contrast": 1.115,
+                  "burst_share": 0.25
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1494,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.0,
+                "end_s": 0.09
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.0,
+          "spectral_centroid_hz": 0.0,
+          "zero_crossings_per_s": 0.0,
+          "rms": 0.0,
+          "spectral_spread_hz": 0.0,
+          "spectral_rolloff_85_hz": 0.0,
+          "spectral_flatness": 0.0,
+          "band_shape_distance": 0.0,
+          "attack_peak_position": 0.0,
+          "decay_ratio": 0.0,
+          "envelope_contrast": 0.0,
+          "burst_share": 0.0
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.15,
+          "spectral_centroid_hz": 42.3,
+          "zero_crossings_per_s": 259.9,
+          "rms": 0.0147,
+          "spectral_spread_hz": 645.1,
+          "spectral_rolloff_85_hz": 1415.8,
+          "spectral_flatness": 0.0167,
+          "band_shape_distance": 0.266,
+          "attack_peak_position": 0.675,
+          "decay_ratio": 0.174,
+          "envelope_contrast": 3.042,
+          "burst_share": 0.159
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.15,
+          "spectral_centroid_hz": 42.3,
+          "zero_crossings_per_s": 259.9,
+          "rms": 0.0147,
+          "spectral_spread_hz": 645.1,
+          "spectral_rolloff_85_hz": 1415.8,
+          "spectral_flatness": 0.0167,
+          "band_shape_distance": 0.266,
+          "attack_peak_position": 0.675,
+          "decay_ratio": 0.174,
+          "envelope_contrast": 3.042,
+          "burst_share": 0.159
+        },
+        "referenceWindowStatus": "active-segment-detected"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.32,
+          "score": 0.821,
+          "metrics": {
+            "duration_s": 0.32,
+            "peak": 0.4117,
+            "rms": 0.145,
+            "spectral_centroid_hz": 1964.9,
+            "zero_crossings_per_s": 2031.2,
+            "spectral_spread_hz": 2274.9,
+            "spectral_rolloff_85_hz": 5084.4,
+            "spectral_flatness": 0.2119,
+            "band_energy": {
+              "sub_500": 0.2934,
+              "low_mid_500_1500": 0.3433,
+              "mid_1500_3000": 0.1488,
+              "presence_3000_6000": 0.1453,
+              "air_6000_plus": 0.0692
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.857,
+            "envelope_contrast": 1.18,
+            "burst_share": 0.244
+          }
+        }
+      ],
+      "referenceSegmentation": {
+        "segments": [
+          {
+            "role": "onset",
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09,
+            "metrics": {
+              "duration_s": 0.09,
+              "peak": 0.4117,
+              "rms": 0.1671,
+              "spectral_centroid_hz": 2031.5,
+              "zero_crossings_per_s": 1280.0,
+              "spectral_spread_hz": 2309.6,
+              "spectral_rolloff_85_hz": 5353.9,
+              "spectral_flatness": 0.2359,
+              "band_energy": {
+                "sub_500": 0.2852,
+                "low_mid_500_1500": 0.3513,
+                "mid_1500_3000": 0.1294,
+                "presence_3000_6000": 0.1622,
+                "air_6000_plus": 0.0719
+              },
+              "attack_peak_position": 0.0,
+              "decay_ratio": 0.883,
+              "envelope_contrast": 1.115,
+              "burst_share": 0.25
+            }
+          }
+        ],
+        "summary": {
+          "segmentCount": 1,
+          "status": "single-reference-body",
+          "thresholdRms": 0.1494,
+          "dominantRole": "onset",
+          "dominantWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09
+          }
+        }
+      },
+      "segmentRoleComparisons": [
+        {
+          "role": "onset",
+          "referenceWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09
+          },
+          "auroraWindow": {
+            "start_s": 0.08,
+            "end_s": 0.24,
+            "duration_s": 0.16
+          },
+          "syntheticGalagaWindow": {
+            "start_s": 0.08,
+            "end_s": 0.24,
+            "duration_s": 0.16
+          },
+          "auroraExactRoleMatch": true,
+          "syntheticGalagaExactRoleMatch": true,
+          "auroraVsReference": {
+            "duration_s": 0.07,
+            "spectral_centroid_hz": 44.9,
+            "zero_crossings_per_s": 1293.9,
+            "rms": 0.0238,
+            "spectral_spread_hz": 683.9,
+            "spectral_rolloff_85_hz": 1621.5,
+            "spectral_flatness": 0.0466,
+            "band_shape_distance": 0.244,
+            "attack_peak_position": 0.85,
+            "decay_ratio": 0.07,
+            "envelope_contrast": 0.035,
+            "burst_share": 0.012
+          },
+          "syntheticGalagaVsReference": {
+            "duration_s": 0.07,
+            "spectral_centroid_hz": 44.9,
+            "zero_crossings_per_s": 1293.9,
+            "rms": 0.0238,
+            "spectral_spread_hz": 683.9,
+            "spectral_rolloff_85_hz": 1621.5,
+            "spectral_flatness": 0.0466,
+            "band_shape_distance": 0.244,
+            "attack_peak_position": 0.85,
+            "decay_ratio": 0.07,
+            "envelope_contrast": 0.035,
+            "burst_share": 0.012
+          },
+          "auroraSegmentRisk10": 4.03,
+          "syntheticGalagaSegmentRisk10": 4.03,
+          "interpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+        }
+      ],
+      "cadencePressureAnalysis": null
+    },
+    {
+      "id": "baseline-current-r02",
+      "label": "Current Aurora baseline",
+      "focus": "Candidate comparison for Challenge Perfect.",
+      "cue": "challengePerfect",
+      "analysisPolicy": {},
+      "variants": {
+        "aurora": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r02.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.639,
+            "rms": 0.1157,
+            "spectral_centroid_hz": 1916.7,
+            "zero_crossings_per_s": 2732.1,
+            "spectral_spread_hz": 1638.8,
+            "spectral_rolloff_85_hz": 3641.7,
+            "spectral_flatness": 0.1868,
+            "band_energy": {
+              "sub_500": 0.1742,
+              "low_mid_500_1500": 0.2918,
+              "mid_1500_3000": 0.3088,
+              "presence_3000_6000": 0.1999,
+              "air_6000_plus": 0.0254
+            },
+            "attack_peak_position": 0.733,
+            "decay_ratio": 14.76,
+            "envelope_contrast": 4.417,
+            "burst_share": 0.255
+          },
+          "activeWindow": {
+            "start_s": 0.399,
+            "end_s": 0.719,
+            "duration_s": 0.32,
+            "coverage": 0.38,
+            "threshold_rms": 0.0713
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.32,
+            "peak": 0.6345,
+            "rms": 0.1397,
+            "spectral_centroid_hz": 1960.6,
+            "zero_crossings_per_s": 1545.9,
+            "spectral_spread_hz": 1624.5,
+            "spectral_rolloff_85_hz": 3695.9,
+            "spectral_flatness": 0.1887,
+            "band_energy": {
+              "sub_500": 0.1469,
+              "low_mid_500_1500": 0.3026,
+              "mid_1500_3000": 0.3194,
+              "presence_3000_6000": 0.2066,
+              "air_6000_plus": 0.0245
+            },
+            "attack_peak_position": 0.675,
+            "decay_ratio": 1.022,
+            "envelope_contrast": 4.219,
+            "burst_share": 0.366
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.08,
+                "end_s": 0.24,
+                "duration_s": 0.16,
+                "metrics": {
+                  "duration_s": 0.16,
+                  "peak": 0.6345,
+                  "rms": 0.1908,
+                  "spectral_centroid_hz": 1997.9,
+                  "zero_crossings_per_s": 2548.8,
+                  "spectral_spread_hz": 1637.0,
+                  "spectral_rolloff_85_hz": 3744.9,
+                  "spectral_flatness": 0.2006,
+                  "band_energy": {
+                    "sub_500": 0.1344,
+                    "low_mid_500_1500": 0.3032,
+                    "mid_1500_3000": 0.3257,
+                    "presence_3000_6000": 0.2109,
+                    "air_6000_plus": 0.0258
+                  },
+                  "attack_peak_position": 0.85,
+                  "decay_ratio": 0.993,
+                  "envelope_contrast": 1.094,
+                  "burst_share": 0.286
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1044,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.08,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.6581,
+            "rms": 0.1193,
+            "spectral_centroid_hz": 1959.4,
+            "zero_crossings_per_s": 2634.5,
+            "spectral_spread_hz": 1707.3,
+            "spectral_rolloff_85_hz": 3688.1,
+            "spectral_flatness": 0.2236,
+            "band_energy": {
+              "sub_500": 0.1638,
+              "low_mid_500_1500": 0.2975,
+              "mid_1500_3000": 0.3118,
+              "presence_3000_6000": 0.197,
+              "air_6000_plus": 0.0299
+            },
+            "attack_peak_position": 1.0,
+            "decay_ratio": 12.893,
+            "envelope_contrast": 4.444,
+            "burst_share": 0.264
+          },
+          "activeWindow": {
+            "start_s": 0.379,
+            "end_s": 0.699,
+            "duration_s": 0.32,
+            "coverage": 0.38,
+            "threshold_rms": 0.071
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.32,
+            "peak": 0.6281,
+            "rms": 0.1397,
+            "spectral_centroid_hz": 1957.5,
+            "zero_crossings_per_s": 1583.5,
+            "spectral_spread_hz": 1626.6,
+            "spectral_rolloff_85_hz": 3702.1,
+            "spectral_flatness": 0.1885,
+            "band_energy": {
+              "sub_500": 0.1489,
+              "low_mid_500_1500": 0.3012,
+              "mid_1500_3000": 0.3194,
+              "presence_3000_6000": 0.2059,
+              "air_6000_plus": 0.0247
+            },
+            "attack_peak_position": 0.675,
+            "decay_ratio": 1.002,
+            "envelope_contrast": 4.184,
+            "burst_share": 0.341
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.08,
+                "end_s": 0.24,
+                "duration_s": 0.16,
+                "metrics": {
+                  "duration_s": 0.16,
+                  "peak": 0.6281,
+                  "rms": 0.1909,
+                  "spectral_centroid_hz": 1986.6,
+                  "zero_crossings_per_s": 2573.9,
+                  "spectral_spread_hz": 1625.7,
+                  "spectral_rolloff_85_hz": 3732.4,
+                  "spectral_flatness": 0.1893,
+                  "band_energy": {
+                    "sub_500": 0.1372,
+                    "low_mid_500_1500": 0.3021,
+                    "mid_1500_3000": 0.3256,
+                    "presence_3000_6000": 0.21,
+                    "air_6000_plus": 0.0251
+                  },
+                  "attack_peak_position": 0.85,
+                  "decay_ratio": 0.953,
+                  "envelope_contrast": 1.08,
+                  "burst_share": 0.238
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1045,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.08,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2,
+            "spectral_spread_hz": 2399.6,
+            "spectral_rolloff_85_hz": 5333.3,
+            "spectral_flatness": 0.2305,
+            "band_energy": {
+              "sub_500": 0.2965,
+              "low_mid_500_1500": 0.3324,
+              "mid_1500_3000": 0.146,
+              "presence_3000_6000": 0.1411,
+              "air_6000_plus": 0.0841
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.915,
+            "envelope_contrast": 1.163,
+            "burst_share": 0.262
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.17,
+            "duration_s": 0.17,
+            "coverage": 0.354,
+            "threshold_rms": 0.1415
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.17,
+            "peak": 0.4117,
+            "rms": 0.1544,
+            "spectral_centroid_hz": 1915.2,
+            "zero_crossings_per_s": 1843.4,
+            "spectral_spread_hz": 2271.7,
+            "spectral_rolloff_85_hz": 5117.9,
+            "spectral_flatness": 0.2052,
+            "band_energy": {
+              "sub_500": 0.3118,
+              "low_mid_500_1500": 0.3615,
+              "mid_1500_3000": 0.1172,
+              "presence_3000_6000": 0.1421,
+              "air_6000_plus": 0.0674
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.828,
+            "envelope_contrast": 1.142,
+            "burst_share": 0.182
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.0,
+                "end_s": 0.09,
+                "duration_s": 0.09,
+                "metrics": {
+                  "duration_s": 0.09,
+                  "peak": 0.4117,
+                  "rms": 0.1671,
+                  "spectral_centroid_hz": 2031.5,
+                  "zero_crossings_per_s": 1280.0,
+                  "spectral_spread_hz": 2309.6,
+                  "spectral_rolloff_85_hz": 5353.9,
+                  "spectral_flatness": 0.2359,
+                  "band_energy": {
+                    "sub_500": 0.2852,
+                    "low_mid_500_1500": 0.3513,
+                    "mid_1500_3000": 0.1294,
+                    "presence_3000_6000": 0.1622,
+                    "air_6000_plus": 0.0719
+                  },
+                  "attack_peak_position": 0.0,
+                  "decay_ratio": 0.883,
+                  "envelope_contrast": 1.115,
+                  "burst_share": 0.25
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1494,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.0,
+                "end_s": 0.09
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.0,
+          "spectral_centroid_hz": 3.1,
+          "zero_crossings_per_s": 37.6,
+          "rms": 0.0,
+          "spectral_spread_hz": 2.1,
+          "spectral_rolloff_85_hz": 6.2,
+          "spectral_flatness": 0.0002,
+          "band_shape_distance": 0.0021,
+          "attack_peak_position": 0.0,
+          "decay_ratio": 0.02,
+          "envelope_contrast": 0.035,
+          "burst_share": 0.025
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.15,
+          "spectral_centroid_hz": 45.4,
+          "zero_crossings_per_s": 297.5,
+          "rms": 0.0147,
+          "spectral_spread_hz": 647.2,
+          "spectral_rolloff_85_hz": 1422.0,
+          "spectral_flatness": 0.0165,
+          "band_shape_distance": 0.2667,
+          "attack_peak_position": 0.675,
+          "decay_ratio": 0.194,
+          "envelope_contrast": 3.077,
+          "burst_share": 0.184
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.15,
+          "spectral_centroid_hz": 42.3,
+          "zero_crossings_per_s": 259.9,
+          "rms": 0.0147,
+          "spectral_spread_hz": 645.1,
+          "spectral_rolloff_85_hz": 1415.8,
+          "spectral_flatness": 0.0167,
+          "band_shape_distance": 0.266,
+          "attack_peak_position": 0.675,
+          "decay_ratio": 0.174,
+          "envelope_contrast": 3.042,
+          "burst_share": 0.159
+        },
+        "referenceWindowStatus": "active-segment-detected"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.32,
+          "score": 0.812,
+          "metrics": {
+            "duration_s": 0.32,
+            "peak": 0.4117,
+            "rms": 0.145,
+            "spectral_centroid_hz": 1964.9,
+            "zero_crossings_per_s": 2031.2,
+            "spectral_spread_hz": 2274.9,
+            "spectral_rolloff_85_hz": 5084.4,
+            "spectral_flatness": 0.2119,
+            "band_energy": {
+              "sub_500": 0.2934,
+              "low_mid_500_1500": 0.3433,
+              "mid_1500_3000": 0.1488,
+              "presence_3000_6000": 0.1453,
+              "air_6000_plus": 0.0692
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.857,
+            "envelope_contrast": 1.18,
+            "burst_share": 0.244
+          }
+        }
+      ],
+      "referenceSegmentation": {
+        "segments": [
+          {
+            "role": "onset",
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09,
+            "metrics": {
+              "duration_s": 0.09,
+              "peak": 0.4117,
+              "rms": 0.1671,
+              "spectral_centroid_hz": 2031.5,
+              "zero_crossings_per_s": 1280.0,
+              "spectral_spread_hz": 2309.6,
+              "spectral_rolloff_85_hz": 5353.9,
+              "spectral_flatness": 0.2359,
+              "band_energy": {
+                "sub_500": 0.2852,
+                "low_mid_500_1500": 0.3513,
+                "mid_1500_3000": 0.1294,
+                "presence_3000_6000": 0.1622,
+                "air_6000_plus": 0.0719
+              },
+              "attack_peak_position": 0.0,
+              "decay_ratio": 0.883,
+              "envelope_contrast": 1.115,
+              "burst_share": 0.25
+            }
+          }
+        ],
+        "summary": {
+          "segmentCount": 1,
+          "status": "single-reference-body",
+          "thresholdRms": 0.1494,
+          "dominantRole": "onset",
+          "dominantWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09
+          }
+        }
+      },
+      "segmentRoleComparisons": [
+        {
+          "role": "onset",
+          "referenceWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09
+          },
+          "auroraWindow": {
+            "start_s": 0.08,
+            "end_s": 0.24,
+            "duration_s": 0.16
+          },
+          "syntheticGalagaWindow": {
+            "start_s": 0.08,
+            "end_s": 0.24,
+            "duration_s": 0.16
+          },
+          "auroraExactRoleMatch": true,
+          "syntheticGalagaExactRoleMatch": true,
+          "auroraVsReference": {
+            "duration_s": 0.07,
+            "spectral_centroid_hz": 33.6,
+            "zero_crossings_per_s": 1268.8,
+            "rms": 0.0237,
+            "spectral_spread_hz": 672.6,
+            "spectral_rolloff_85_hz": 1609.0,
+            "spectral_flatness": 0.0353,
+            "band_shape_distance": 0.245,
+            "attack_peak_position": 0.85,
+            "decay_ratio": 0.11,
+            "envelope_contrast": 0.021,
+            "burst_share": 0.036
+          },
+          "syntheticGalagaVsReference": {
+            "duration_s": 0.07,
+            "spectral_centroid_hz": 44.9,
+            "zero_crossings_per_s": 1293.9,
+            "rms": 0.0238,
+            "spectral_spread_hz": 683.9,
+            "spectral_rolloff_85_hz": 1621.5,
+            "spectral_flatness": 0.0466,
+            "band_shape_distance": 0.244,
+            "attack_peak_position": 0.85,
+            "decay_ratio": 0.07,
+            "envelope_contrast": 0.035,
+            "burst_share": 0.012
+          },
+          "auroraSegmentRisk10": 4.06,
+          "syntheticGalagaSegmentRisk10": 4.03,
+          "interpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+        }
+      ],
+      "cadencePressureAnalysis": null
+    },
+    {
+      "id": "baseline-current-r03",
+      "label": "Current Aurora baseline",
+      "focus": "Candidate comparison for Challenge Perfect.",
+      "cue": "challengePerfect",
+      "analysisPolicy": {},
+      "variants": {
+        "aurora": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r03.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.6538,
+            "rms": 0.1161,
+            "spectral_centroid_hz": 1917.2,
+            "zero_crossings_per_s": 2729.8,
+            "spectral_spread_hz": 1637.3,
+            "spectral_rolloff_85_hz": 3641.7,
+            "spectral_flatness": 0.1877,
+            "band_energy": {
+              "sub_500": 0.1725,
+              "low_mid_500_1500": 0.2937,
+              "mid_1500_3000": 0.3087,
+              "presence_3000_6000": 0.1999,
+              "air_6000_plus": 0.0253
+            },
+            "attack_peak_position": 0.733,
+            "decay_ratio": 14.794,
+            "envelope_contrast": 4.468,
+            "burst_share": 0.264
+          },
+          "activeWindow": {
+            "start_s": 0.399,
+            "end_s": 0.719,
+            "duration_s": 0.32,
+            "coverage": 0.38,
+            "threshold_rms": 0.0709
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.32,
+            "peak": 0.6345,
+            "rms": 0.1397,
+            "spectral_centroid_hz": 1960.6,
+            "zero_crossings_per_s": 1545.9,
+            "spectral_spread_hz": 1624.4,
+            "spectral_rolloff_85_hz": 3695.9,
+            "spectral_flatness": 0.1886,
+            "band_energy": {
+              "sub_500": 0.1469,
+              "low_mid_500_1500": 0.3026,
+              "mid_1500_3000": 0.3194,
+              "presence_3000_6000": 0.2066,
+              "air_6000_plus": 0.0245
+            },
+            "attack_peak_position": 0.675,
+            "decay_ratio": 1.022,
+            "envelope_contrast": 4.219,
+            "burst_share": 0.366
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.08,
+                "end_s": 0.24,
+                "duration_s": 0.16,
+                "metrics": {
+                  "duration_s": 0.16,
+                  "peak": 0.6345,
+                  "rms": 0.1908,
+                  "spectral_centroid_hz": 1997.9,
+                  "zero_crossings_per_s": 2548.8,
+                  "spectral_spread_hz": 1637.0,
+                  "spectral_rolloff_85_hz": 3744.9,
+                  "spectral_flatness": 0.2006,
+                  "band_energy": {
+                    "sub_500": 0.1344,
+                    "low_mid_500_1500": 0.3032,
+                    "mid_1500_3000": 0.3257,
+                    "presence_3000_6000": 0.2109,
+                    "air_6000_plus": 0.0258
+                  },
+                  "attack_peak_position": 0.85,
+                  "decay_ratio": 0.993,
+                  "envelope_contrast": 1.094,
+                  "burst_share": 0.286
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1044,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.08,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.6581,
+            "rms": 0.1193,
+            "spectral_centroid_hz": 1959.4,
+            "zero_crossings_per_s": 2634.5,
+            "spectral_spread_hz": 1707.3,
+            "spectral_rolloff_85_hz": 3688.1,
+            "spectral_flatness": 0.2236,
+            "band_energy": {
+              "sub_500": 0.1638,
+              "low_mid_500_1500": 0.2975,
+              "mid_1500_3000": 0.3118,
+              "presence_3000_6000": 0.197,
+              "air_6000_plus": 0.0299
+            },
+            "attack_peak_position": 1.0,
+            "decay_ratio": 12.893,
+            "envelope_contrast": 4.444,
+            "burst_share": 0.264
+          },
+          "activeWindow": {
+            "start_s": 0.379,
+            "end_s": 0.699,
+            "duration_s": 0.32,
+            "coverage": 0.38,
+            "threshold_rms": 0.071
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.32,
+            "peak": 0.6281,
+            "rms": 0.1397,
+            "spectral_centroid_hz": 1957.5,
+            "zero_crossings_per_s": 1583.5,
+            "spectral_spread_hz": 1626.6,
+            "spectral_rolloff_85_hz": 3702.1,
+            "spectral_flatness": 0.1885,
+            "band_energy": {
+              "sub_500": 0.1489,
+              "low_mid_500_1500": 0.3012,
+              "mid_1500_3000": 0.3194,
+              "presence_3000_6000": 0.2059,
+              "air_6000_plus": 0.0247
+            },
+            "attack_peak_position": 0.675,
+            "decay_ratio": 1.002,
+            "envelope_contrast": 4.184,
+            "burst_share": 0.341
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.08,
+                "end_s": 0.24,
+                "duration_s": 0.16,
+                "metrics": {
+                  "duration_s": 0.16,
+                  "peak": 0.6281,
+                  "rms": 0.1909,
+                  "spectral_centroid_hz": 1986.6,
+                  "zero_crossings_per_s": 2573.9,
+                  "spectral_spread_hz": 1625.7,
+                  "spectral_rolloff_85_hz": 3732.4,
+                  "spectral_flatness": 0.1893,
+                  "band_energy": {
+                    "sub_500": 0.1372,
+                    "low_mid_500_1500": 0.3021,
+                    "mid_1500_3000": 0.3256,
+                    "presence_3000_6000": 0.21,
+                    "air_6000_plus": 0.0251
+                  },
+                  "attack_peak_position": 0.85,
+                  "decay_ratio": 0.953,
+                  "envelope_contrast": 1.08,
+                  "burst_share": 0.238
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1045,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.08,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2,
+            "spectral_spread_hz": 2399.6,
+            "spectral_rolloff_85_hz": 5333.3,
+            "spectral_flatness": 0.2305,
+            "band_energy": {
+              "sub_500": 0.2965,
+              "low_mid_500_1500": 0.3324,
+              "mid_1500_3000": 0.146,
+              "presence_3000_6000": 0.1411,
+              "air_6000_plus": 0.0841
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.915,
+            "envelope_contrast": 1.163,
+            "burst_share": 0.262
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.17,
+            "duration_s": 0.17,
+            "coverage": 0.354,
+            "threshold_rms": 0.1415
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.17,
+            "peak": 0.4117,
+            "rms": 0.1544,
+            "spectral_centroid_hz": 1915.2,
+            "zero_crossings_per_s": 1843.4,
+            "spectral_spread_hz": 2271.7,
+            "spectral_rolloff_85_hz": 5117.9,
+            "spectral_flatness": 0.2052,
+            "band_energy": {
+              "sub_500": 0.3118,
+              "low_mid_500_1500": 0.3615,
+              "mid_1500_3000": 0.1172,
+              "presence_3000_6000": 0.1421,
+              "air_6000_plus": 0.0674
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.828,
+            "envelope_contrast": 1.142,
+            "burst_share": 0.182
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.0,
+                "end_s": 0.09,
+                "duration_s": 0.09,
+                "metrics": {
+                  "duration_s": 0.09,
+                  "peak": 0.4117,
+                  "rms": 0.1671,
+                  "spectral_centroid_hz": 2031.5,
+                  "zero_crossings_per_s": 1280.0,
+                  "spectral_spread_hz": 2309.6,
+                  "spectral_rolloff_85_hz": 5353.9,
+                  "spectral_flatness": 0.2359,
+                  "band_energy": {
+                    "sub_500": 0.2852,
+                    "low_mid_500_1500": 0.3513,
+                    "mid_1500_3000": 0.1294,
+                    "presence_3000_6000": 0.1622,
+                    "air_6000_plus": 0.0719
+                  },
+                  "attack_peak_position": 0.0,
+                  "decay_ratio": 0.883,
+                  "envelope_contrast": 1.115,
+                  "burst_share": 0.25
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1494,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.0,
+                "end_s": 0.09
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.0,
+          "spectral_centroid_hz": 3.1,
+          "zero_crossings_per_s": 37.6,
+          "rms": 0.0,
+          "spectral_spread_hz": 2.2,
+          "spectral_rolloff_85_hz": 6.2,
+          "spectral_flatness": 0.0001,
+          "band_shape_distance": 0.0021,
+          "attack_peak_position": 0.0,
+          "decay_ratio": 0.02,
+          "envelope_contrast": 0.035,
+          "burst_share": 0.025
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.15,
+          "spectral_centroid_hz": 45.4,
+          "zero_crossings_per_s": 297.5,
+          "rms": 0.0147,
+          "spectral_spread_hz": 647.3,
+          "spectral_rolloff_85_hz": 1422.0,
+          "spectral_flatness": 0.0166,
+          "band_shape_distance": 0.2667,
+          "attack_peak_position": 0.675,
+          "decay_ratio": 0.194,
+          "envelope_contrast": 3.077,
+          "burst_share": 0.184
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.15,
+          "spectral_centroid_hz": 42.3,
+          "zero_crossings_per_s": 259.9,
+          "rms": 0.0147,
+          "spectral_spread_hz": 645.1,
+          "spectral_rolloff_85_hz": 1415.8,
+          "spectral_flatness": 0.0167,
+          "band_shape_distance": 0.266,
+          "attack_peak_position": 0.675,
+          "decay_ratio": 0.174,
+          "envelope_contrast": 3.042,
+          "burst_share": 0.159
+        },
+        "referenceWindowStatus": "active-segment-detected"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.32,
+          "score": 0.812,
+          "metrics": {
+            "duration_s": 0.32,
+            "peak": 0.4117,
+            "rms": 0.145,
+            "spectral_centroid_hz": 1964.9,
+            "zero_crossings_per_s": 2031.2,
+            "spectral_spread_hz": 2274.9,
+            "spectral_rolloff_85_hz": 5084.4,
+            "spectral_flatness": 0.2119,
+            "band_energy": {
+              "sub_500": 0.2934,
+              "low_mid_500_1500": 0.3433,
+              "mid_1500_3000": 0.1488,
+              "presence_3000_6000": 0.1453,
+              "air_6000_plus": 0.0692
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.857,
+            "envelope_contrast": 1.18,
+            "burst_share": 0.244
+          }
+        }
+      ],
+      "referenceSegmentation": {
+        "segments": [
+          {
+            "role": "onset",
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09,
+            "metrics": {
+              "duration_s": 0.09,
+              "peak": 0.4117,
+              "rms": 0.1671,
+              "spectral_centroid_hz": 2031.5,
+              "zero_crossings_per_s": 1280.0,
+              "spectral_spread_hz": 2309.6,
+              "spectral_rolloff_85_hz": 5353.9,
+              "spectral_flatness": 0.2359,
+              "band_energy": {
+                "sub_500": 0.2852,
+                "low_mid_500_1500": 0.3513,
+                "mid_1500_3000": 0.1294,
+                "presence_3000_6000": 0.1622,
+                "air_6000_plus": 0.0719
+              },
+              "attack_peak_position": 0.0,
+              "decay_ratio": 0.883,
+              "envelope_contrast": 1.115,
+              "burst_share": 0.25
+            }
+          }
+        ],
+        "summary": {
+          "segmentCount": 1,
+          "status": "single-reference-body",
+          "thresholdRms": 0.1494,
+          "dominantRole": "onset",
+          "dominantWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09
+          }
+        }
+      },
+      "segmentRoleComparisons": [
+        {
+          "role": "onset",
+          "referenceWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09
+          },
+          "auroraWindow": {
+            "start_s": 0.08,
+            "end_s": 0.24,
+            "duration_s": 0.16
+          },
+          "syntheticGalagaWindow": {
+            "start_s": 0.08,
+            "end_s": 0.24,
+            "duration_s": 0.16
+          },
+          "auroraExactRoleMatch": true,
+          "syntheticGalagaExactRoleMatch": true,
+          "auroraVsReference": {
+            "duration_s": 0.07,
+            "spectral_centroid_hz": 33.6,
+            "zero_crossings_per_s": 1268.8,
+            "rms": 0.0237,
+            "spectral_spread_hz": 672.6,
+            "spectral_rolloff_85_hz": 1609.0,
+            "spectral_flatness": 0.0353,
+            "band_shape_distance": 0.245,
+            "attack_peak_position": 0.85,
+            "decay_ratio": 0.11,
+            "envelope_contrast": 0.021,
+            "burst_share": 0.036
+          },
+          "syntheticGalagaVsReference": {
+            "duration_s": 0.07,
+            "spectral_centroid_hz": 44.9,
+            "zero_crossings_per_s": 1293.9,
+            "rms": 0.0238,
+            "spectral_spread_hz": 683.9,
+            "spectral_rolloff_85_hz": 1621.5,
+            "spectral_flatness": 0.0466,
+            "band_shape_distance": 0.244,
+            "attack_peak_position": 0.85,
+            "decay_ratio": 0.07,
+            "envelope_contrast": 0.035,
+            "burst_share": 0.012
+          },
+          "auroraSegmentRisk10": 4.06,
+          "syntheticGalagaSegmentRisk10": 4.03,
+          "interpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+        }
+      ],
+      "cadencePressureAnalysis": null
+    },
+    {
+      "id": "perfect-measured-onset-soft-ceremony-tail-r01",
+      "label": "Perfect measured onset with soft ceremony tail",
+      "focus": "Candidate comparison for Challenge Perfect.",
+      "cue": "challengePerfect",
+      "analysisPolicy": {},
+      "variants": {
+        "aurora": {
+          "label": "Perfect measured onset with soft ceremony tail",
+          "wav": "samples/perfect-measured-onset-soft-ceremony-tail-r01.wav",
+          "metrics": {
+            "duration_s": 1.5,
+            "peak": 0.6633,
+            "rms": 0.136,
+            "spectral_centroid_hz": 1934.4,
+            "zero_crossings_per_s": 1770.0,
+            "spectral_spread_hz": 1701.1,
+            "spectral_rolloff_85_hz": 3767.3,
+            "spectral_flatness": 0.185,
+            "band_energy": {
+              "sub_500": 0.1845,
+              "low_mid_500_1500": 0.2926,
+              "mid_1500_3000": 0.2947,
+              "presence_3000_6000": 0.2,
+              "air_6000_plus": 0.0282
+            },
+            "attack_peak_position": 0.995,
+            "decay_ratio": 1.259,
+            "envelope_contrast": 2.74,
+            "burst_share": 0.282
+          },
+          "activeWindow": {
+            "start_s": 0.319,
+            "end_s": 0.629,
+            "duration_s": 0.31,
+            "coverage": 0.258,
+            "threshold_rms": 0.1068
+          },
+          "analysisWindow": {
+            "start_s": 0.08,
+            "end_s": 1.28,
+            "duration_s": 1.2
+          },
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.31,
+            "peak": 0.6476,
+            "rms": 0.1435,
+            "spectral_centroid_hz": 1947.5,
+            "zero_crossings_per_s": 1812.2,
+            "spectral_spread_hz": 1679.0,
+            "spectral_rolloff_85_hz": 3708.4,
+            "spectral_flatness": 0.2153,
+            "band_energy": {
+              "sub_500": 0.1666,
+              "low_mid_500_1500": 0.2963,
+              "mid_1500_3000": 0.3078,
+              "presence_3000_6000": 0.2015,
+              "air_6000_plus": 0.0278
+            },
+            "attack_peak_position": 0.684,
+            "decay_ratio": 0.992,
+            "envelope_contrast": 3.544,
+            "burst_share": 0.333
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.07,
+                "end_s": 0.24,
+                "duration_s": 0.17,
+                "metrics": {
+                  "duration_s": 0.17,
+                  "peak": 0.6476,
+                  "rms": 0.1863,
+                  "spectral_centroid_hz": 1988.1,
+                  "zero_crossings_per_s": 2617.0,
+                  "spectral_spread_hz": 1640.3,
+                  "spectral_rolloff_85_hz": 3748.7,
+                  "spectral_flatness": 0.1954,
+                  "band_energy": {
+                    "sub_500": 0.1398,
+                    "low_mid_500_1500": 0.3047,
+                    "mid_1500_3000": 0.3191,
+                    "presence_3000_6000": 0.2106,
+                    "air_6000_plus": 0.0258
+                  },
+                  "attack_peak_position": 0.857,
+                  "decay_ratio": 0.933,
+                  "envelope_contrast": 1.042,
+                  "burst_share": 0.455
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1071,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.07,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.6581,
+            "rms": 0.1193,
+            "spectral_centroid_hz": 1959.4,
+            "zero_crossings_per_s": 2634.5,
+            "spectral_spread_hz": 1707.3,
+            "spectral_rolloff_85_hz": 3688.1,
+            "spectral_flatness": 0.2236,
+            "band_energy": {
+              "sub_500": 0.1638,
+              "low_mid_500_1500": 0.2975,
+              "mid_1500_3000": 0.3118,
+              "presence_3000_6000": 0.197,
+              "air_6000_plus": 0.0299
+            },
+            "attack_peak_position": 1.0,
+            "decay_ratio": 12.893,
+            "envelope_contrast": 4.444,
+            "burst_share": 0.264
+          },
+          "activeWindow": {
+            "start_s": 0.379,
+            "end_s": 0.699,
+            "duration_s": 0.32,
+            "coverage": 0.38,
+            "threshold_rms": 0.071
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.32,
+            "peak": 0.6281,
+            "rms": 0.1397,
+            "spectral_centroid_hz": 1957.5,
+            "zero_crossings_per_s": 1583.5,
+            "spectral_spread_hz": 1626.6,
+            "spectral_rolloff_85_hz": 3702.1,
+            "spectral_flatness": 0.1885,
+            "band_energy": {
+              "sub_500": 0.1489,
+              "low_mid_500_1500": 0.3012,
+              "mid_1500_3000": 0.3194,
+              "presence_3000_6000": 0.2059,
+              "air_6000_plus": 0.0247
+            },
+            "attack_peak_position": 0.675,
+            "decay_ratio": 1.002,
+            "envelope_contrast": 4.184,
+            "burst_share": 0.341
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.08,
+                "end_s": 0.24,
+                "duration_s": 0.16,
+                "metrics": {
+                  "duration_s": 0.16,
+                  "peak": 0.6281,
+                  "rms": 0.1909,
+                  "spectral_centroid_hz": 1986.6,
+                  "zero_crossings_per_s": 2573.9,
+                  "spectral_spread_hz": 1625.7,
+                  "spectral_rolloff_85_hz": 3732.4,
+                  "spectral_flatness": 0.1893,
+                  "band_energy": {
+                    "sub_500": 0.1372,
+                    "low_mid_500_1500": 0.3021,
+                    "mid_1500_3000": 0.3256,
+                    "presence_3000_6000": 0.21,
+                    "air_6000_plus": 0.0251
+                  },
+                  "attack_peak_position": 0.85,
+                  "decay_ratio": 0.953,
+                  "envelope_contrast": 1.08,
+                  "burst_share": 0.238
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1045,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.08,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2,
+            "spectral_spread_hz": 2399.6,
+            "spectral_rolloff_85_hz": 5333.3,
+            "spectral_flatness": 0.2305,
+            "band_energy": {
+              "sub_500": 0.2965,
+              "low_mid_500_1500": 0.3324,
+              "mid_1500_3000": 0.146,
+              "presence_3000_6000": 0.1411,
+              "air_6000_plus": 0.0841
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.915,
+            "envelope_contrast": 1.163,
+            "burst_share": 0.262
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.17,
+            "duration_s": 0.17,
+            "coverage": 0.354,
+            "threshold_rms": 0.1415
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.17,
+            "peak": 0.4117,
+            "rms": 0.1544,
+            "spectral_centroid_hz": 1915.2,
+            "zero_crossings_per_s": 1843.4,
+            "spectral_spread_hz": 2271.7,
+            "spectral_rolloff_85_hz": 5117.9,
+            "spectral_flatness": 0.2052,
+            "band_energy": {
+              "sub_500": 0.3118,
+              "low_mid_500_1500": 0.3615,
+              "mid_1500_3000": 0.1172,
+              "presence_3000_6000": 0.1421,
+              "air_6000_plus": 0.0674
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.828,
+            "envelope_contrast": 1.142,
+            "burst_share": 0.182
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.0,
+                "end_s": 0.09,
+                "duration_s": 0.09,
+                "metrics": {
+                  "duration_s": 0.09,
+                  "peak": 0.4117,
+                  "rms": 0.1671,
+                  "spectral_centroid_hz": 2031.5,
+                  "zero_crossings_per_s": 1280.0,
+                  "spectral_spread_hz": 2309.6,
+                  "spectral_rolloff_85_hz": 5353.9,
+                  "spectral_flatness": 0.2359,
+                  "band_energy": {
+                    "sub_500": 0.2852,
+                    "low_mid_500_1500": 0.3513,
+                    "mid_1500_3000": 0.1294,
+                    "presence_3000_6000": 0.1622,
+                    "air_6000_plus": 0.0719
+                  },
+                  "attack_peak_position": 0.0,
+                  "decay_ratio": 0.883,
+                  "envelope_contrast": 1.115,
+                  "burst_share": 0.25
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1494,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.0,
+                "end_s": 0.09
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.01,
+          "spectral_centroid_hz": 10.0,
+          "zero_crossings_per_s": 228.7,
+          "rms": 0.0038,
+          "spectral_spread_hz": 52.4,
+          "spectral_rolloff_85_hz": 6.3,
+          "spectral_flatness": 0.0268,
+          "band_shape_distance": 0.0208,
+          "attack_peak_position": 0.009,
+          "decay_ratio": 0.01,
+          "envelope_contrast": 0.64,
+          "burst_share": 0.008
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.14,
+          "spectral_centroid_hz": 32.3,
+          "zero_crossings_per_s": 31.2,
+          "rms": 0.0109,
+          "spectral_spread_hz": 592.7,
+          "spectral_rolloff_85_hz": 1409.5,
+          "spectral_flatness": 0.0101,
+          "band_shape_distance": 0.25,
+          "attack_peak_position": 0.684,
+          "decay_ratio": 0.164,
+          "envelope_contrast": 2.402,
+          "burst_share": 0.151
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.15,
+          "spectral_centroid_hz": 42.3,
+          "zero_crossings_per_s": 259.9,
+          "rms": 0.0147,
+          "spectral_spread_hz": 645.1,
+          "spectral_rolloff_85_hz": 1415.8,
+          "spectral_flatness": 0.0167,
+          "band_shape_distance": 0.266,
+          "attack_peak_position": 0.675,
+          "decay_ratio": 0.174,
+          "envelope_contrast": 3.042,
+          "burst_share": 0.159
+        },
+        "referenceWindowStatus": "active-segment-detected"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.31,
+          "score": 0.878,
+          "metrics": {
+            "duration_s": 0.31,
+            "peak": 0.4117,
+            "rms": 0.1457,
+            "spectral_centroid_hz": 1949.4,
+            "zero_crossings_per_s": 2058.2,
+            "spectral_spread_hz": 2289.3,
+            "spectral_rolloff_85_hz": 5081.0,
+            "spectral_flatness": 0.2231,
+            "band_energy": {
+              "sub_500": 0.3059,
+              "low_mid_500_1500": 0.3292,
+              "mid_1500_3000": 0.1515,
+              "presence_3000_6000": 0.1438,
+              "air_6000_plus": 0.0696
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.86,
+            "envelope_contrast": 1.178,
+            "burst_share": 0.256
+          }
+        }
+      ],
+      "referenceSegmentation": {
+        "segments": [
+          {
+            "role": "onset",
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09,
+            "metrics": {
+              "duration_s": 0.09,
+              "peak": 0.4117,
+              "rms": 0.1671,
+              "spectral_centroid_hz": 2031.5,
+              "zero_crossings_per_s": 1280.0,
+              "spectral_spread_hz": 2309.6,
+              "spectral_rolloff_85_hz": 5353.9,
+              "spectral_flatness": 0.2359,
+              "band_energy": {
+                "sub_500": 0.2852,
+                "low_mid_500_1500": 0.3513,
+                "mid_1500_3000": 0.1294,
+                "presence_3000_6000": 0.1622,
+                "air_6000_plus": 0.0719
+              },
+              "attack_peak_position": 0.0,
+              "decay_ratio": 0.883,
+              "envelope_contrast": 1.115,
+              "burst_share": 0.25
+            }
+          }
+        ],
+        "summary": {
+          "segmentCount": 1,
+          "status": "single-reference-body",
+          "thresholdRms": 0.1494,
+          "dominantRole": "onset",
+          "dominantWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09
+          }
+        }
+      },
+      "segmentRoleComparisons": [
+        {
+          "role": "onset",
+          "referenceWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09
+          },
+          "auroraWindow": {
+            "start_s": 0.07,
+            "end_s": 0.24,
+            "duration_s": 0.17
+          },
+          "syntheticGalagaWindow": {
+            "start_s": 0.08,
+            "end_s": 0.24,
+            "duration_s": 0.16
+          },
+          "auroraExactRoleMatch": true,
+          "syntheticGalagaExactRoleMatch": true,
+          "auroraVsReference": {
+            "duration_s": 0.08,
+            "spectral_centroid_hz": 43.4,
+            "zero_crossings_per_s": 1337.0,
+            "rms": 0.0192,
+            "spectral_spread_hz": 669.3,
+            "spectral_rolloff_85_hz": 1605.2,
+            "spectral_flatness": 0.0405,
+            "band_shape_distance": 0.2381,
+            "attack_peak_position": 0.857,
+            "decay_ratio": 0.05,
+            "envelope_contrast": 0.073,
+            "burst_share": 0.205
+          },
+          "syntheticGalagaVsReference": {
+            "duration_s": 0.07,
+            "spectral_centroid_hz": 44.9,
+            "zero_crossings_per_s": 1293.9,
+            "rms": 0.0238,
+            "spectral_spread_hz": 683.9,
+            "spectral_rolloff_85_hz": 1621.5,
+            "spectral_flatness": 0.0466,
+            "band_shape_distance": 0.244,
+            "attack_peak_position": 0.85,
+            "decay_ratio": 0.07,
+            "envelope_contrast": 0.035,
+            "burst_share": 0.012
+          },
+          "auroraSegmentRisk10": 4.63,
+          "syntheticGalagaSegmentRisk10": 4.03,
+          "interpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+        }
+      ],
+      "cadencePressureAnalysis": null
+    },
+    {
+      "id": "perfect-measured-onset-soft-ceremony-tail-r02",
+      "label": "Perfect measured onset with soft ceremony tail",
+      "focus": "Candidate comparison for Challenge Perfect.",
+      "cue": "challengePerfect",
+      "analysisPolicy": {},
+      "variants": {
+        "aurora": {
+          "label": "Perfect measured onset with soft ceremony tail",
+          "wav": "samples/perfect-measured-onset-soft-ceremony-tail-r02.wav",
+          "metrics": {
+            "duration_s": 1.5,
+            "peak": 0.6562,
+            "rms": 0.1356,
+            "spectral_centroid_hz": 1923.6,
+            "zero_crossings_per_s": 1752.7,
+            "spectral_spread_hz": 1714.2,
+            "spectral_rolloff_85_hz": 3766.0,
+            "spectral_flatness": 0.1754,
+            "band_energy": {
+              "sub_500": 0.1902,
+              "low_mid_500_1500": 0.2934,
+              "mid_1500_3000": 0.2908,
+              "presence_3000_6000": 0.1967,
+              "air_6000_plus": 0.0289
+            },
+            "attack_peak_position": 0.401,
+            "decay_ratio": 1.19,
+            "envelope_contrast": 2.654,
+            "burst_share": 0.293
+          },
+          "activeWindow": {
+            "start_s": 0.309,
+            "end_s": 0.619,
+            "duration_s": 0.31,
+            "coverage": 0.258,
+            "threshold_rms": 0.1055
+          },
+          "analysisWindow": {
+            "start_s": 0.08,
+            "end_s": 1.28,
+            "duration_s": 1.2
+          },
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.31,
+            "peak": 0.6324,
+            "rms": 0.1444,
+            "spectral_centroid_hz": 1948.6,
+            "zero_crossings_per_s": 1760.5,
+            "spectral_spread_hz": 1666.9,
+            "spectral_rolloff_85_hz": 3718.1,
+            "spectral_flatness": 0.204,
+            "band_energy": {
+              "sub_500": 0.1637,
+              "low_mid_500_1500": 0.2952,
+              "mid_1500_3000": 0.312,
+              "presence_3000_6000": 0.2017,
+              "air_6000_plus": 0.0274
+            },
+            "attack_peak_position": 0.684,
+            "decay_ratio": 0.968,
+            "envelope_contrast": 3.559,
+            "burst_share": 0.333
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.07,
+                "end_s": 0.24,
+                "duration_s": 0.17,
+                "metrics": {
+                  "duration_s": 0.17,
+                  "peak": 0.6324,
+                  "rms": 0.1866,
+                  "spectral_centroid_hz": 2005.0,
+                  "zero_crossings_per_s": 2499.1,
+                  "spectral_spread_hz": 1634.0,
+                  "spectral_rolloff_85_hz": 3772.3,
+                  "spectral_flatness": 0.1906,
+                  "band_energy": {
+                    "sub_500": 0.1308,
+                    "low_mid_500_1500": 0.3058,
+                    "mid_1500_3000": 0.3253,
+                    "presence_3000_6000": 0.2123,
+                    "air_6000_plus": 0.0257
+                  },
+                  "attack_peak_position": 0.857,
+                  "decay_ratio": 0.921,
+                  "envelope_contrast": 1.069,
+                  "burst_share": 0.409
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1072,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.07,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.6581,
+            "rms": 0.1193,
+            "spectral_centroid_hz": 1959.4,
+            "zero_crossings_per_s": 2634.5,
+            "spectral_spread_hz": 1707.3,
+            "spectral_rolloff_85_hz": 3688.1,
+            "spectral_flatness": 0.2236,
+            "band_energy": {
+              "sub_500": 0.1638,
+              "low_mid_500_1500": 0.2975,
+              "mid_1500_3000": 0.3118,
+              "presence_3000_6000": 0.197,
+              "air_6000_plus": 0.0299
+            },
+            "attack_peak_position": 1.0,
+            "decay_ratio": 12.893,
+            "envelope_contrast": 4.444,
+            "burst_share": 0.264
+          },
+          "activeWindow": {
+            "start_s": 0.379,
+            "end_s": 0.699,
+            "duration_s": 0.32,
+            "coverage": 0.38,
+            "threshold_rms": 0.071
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.32,
+            "peak": 0.6281,
+            "rms": 0.1397,
+            "spectral_centroid_hz": 1957.5,
+            "zero_crossings_per_s": 1583.5,
+            "spectral_spread_hz": 1626.6,
+            "spectral_rolloff_85_hz": 3702.1,
+            "spectral_flatness": 0.1885,
+            "band_energy": {
+              "sub_500": 0.1489,
+              "low_mid_500_1500": 0.3012,
+              "mid_1500_3000": 0.3194,
+              "presence_3000_6000": 0.2059,
+              "air_6000_plus": 0.0247
+            },
+            "attack_peak_position": 0.675,
+            "decay_ratio": 1.002,
+            "envelope_contrast": 4.184,
+            "burst_share": 0.341
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.08,
+                "end_s": 0.24,
+                "duration_s": 0.16,
+                "metrics": {
+                  "duration_s": 0.16,
+                  "peak": 0.6281,
+                  "rms": 0.1909,
+                  "spectral_centroid_hz": 1986.6,
+                  "zero_crossings_per_s": 2573.9,
+                  "spectral_spread_hz": 1625.7,
+                  "spectral_rolloff_85_hz": 3732.4,
+                  "spectral_flatness": 0.1893,
+                  "band_energy": {
+                    "sub_500": 0.1372,
+                    "low_mid_500_1500": 0.3021,
+                    "mid_1500_3000": 0.3256,
+                    "presence_3000_6000": 0.21,
+                    "air_6000_plus": 0.0251
+                  },
+                  "attack_peak_position": 0.85,
+                  "decay_ratio": 0.953,
+                  "envelope_contrast": 1.08,
+                  "burst_share": 0.238
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1045,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.08,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2,
+            "spectral_spread_hz": 2399.6,
+            "spectral_rolloff_85_hz": 5333.3,
+            "spectral_flatness": 0.2305,
+            "band_energy": {
+              "sub_500": 0.2965,
+              "low_mid_500_1500": 0.3324,
+              "mid_1500_3000": 0.146,
+              "presence_3000_6000": 0.1411,
+              "air_6000_plus": 0.0841
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.915,
+            "envelope_contrast": 1.163,
+            "burst_share": 0.262
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.17,
+            "duration_s": 0.17,
+            "coverage": 0.354,
+            "threshold_rms": 0.1415
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.17,
+            "peak": 0.4117,
+            "rms": 0.1544,
+            "spectral_centroid_hz": 1915.2,
+            "zero_crossings_per_s": 1843.4,
+            "spectral_spread_hz": 2271.7,
+            "spectral_rolloff_85_hz": 5117.9,
+            "spectral_flatness": 0.2052,
+            "band_energy": {
+              "sub_500": 0.3118,
+              "low_mid_500_1500": 0.3615,
+              "mid_1500_3000": 0.1172,
+              "presence_3000_6000": 0.1421,
+              "air_6000_plus": 0.0674
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.828,
+            "envelope_contrast": 1.142,
+            "burst_share": 0.182
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.0,
+                "end_s": 0.09,
+                "duration_s": 0.09,
+                "metrics": {
+                  "duration_s": 0.09,
+                  "peak": 0.4117,
+                  "rms": 0.1671,
+                  "spectral_centroid_hz": 2031.5,
+                  "zero_crossings_per_s": 1280.0,
+                  "spectral_spread_hz": 2309.6,
+                  "spectral_rolloff_85_hz": 5353.9,
+                  "spectral_flatness": 0.2359,
+                  "band_energy": {
+                    "sub_500": 0.2852,
+                    "low_mid_500_1500": 0.3513,
+                    "mid_1500_3000": 0.1294,
+                    "presence_3000_6000": 0.1622,
+                    "air_6000_plus": 0.0719
+                  },
+                  "attack_peak_position": 0.0,
+                  "decay_ratio": 0.883,
+                  "envelope_contrast": 1.115,
+                  "burst_share": 0.25
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1494,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.0,
+                "end_s": 0.09
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.01,
+          "spectral_centroid_hz": 8.9,
+          "zero_crossings_per_s": 177.0,
+          "rms": 0.0047,
+          "spectral_spread_hz": 40.3,
+          "spectral_rolloff_85_hz": 16.0,
+          "spectral_flatness": 0.0155,
+          "band_shape_distance": 0.0176,
+          "attack_peak_position": 0.009,
+          "decay_ratio": 0.034,
+          "envelope_contrast": 0.625,
+          "burst_share": 0.008
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.14,
+          "spectral_centroid_hz": 33.4,
+          "zero_crossings_per_s": 82.9,
+          "rms": 0.01,
+          "spectral_spread_hz": 604.8,
+          "spectral_rolloff_85_hz": 1399.8,
+          "spectral_flatness": 0.0012,
+          "band_shape_distance": 0.2544,
+          "attack_peak_position": 0.684,
+          "decay_ratio": 0.14,
+          "envelope_contrast": 2.417,
+          "burst_share": 0.151
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.15,
+          "spectral_centroid_hz": 42.3,
+          "zero_crossings_per_s": 259.9,
+          "rms": 0.0147,
+          "spectral_spread_hz": 645.1,
+          "spectral_rolloff_85_hz": 1415.8,
+          "spectral_flatness": 0.0167,
+          "band_shape_distance": 0.266,
+          "attack_peak_position": 0.675,
+          "decay_ratio": 0.174,
+          "envelope_contrast": 3.042,
+          "burst_share": 0.159
+        },
+        "referenceWindowStatus": "active-segment-detected"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.31,
+          "score": 0.867,
+          "metrics": {
+            "duration_s": 0.31,
+            "peak": 0.4117,
+            "rms": 0.1457,
+            "spectral_centroid_hz": 1949.4,
+            "zero_crossings_per_s": 2058.2,
+            "spectral_spread_hz": 2289.3,
+            "spectral_rolloff_85_hz": 5081.0,
+            "spectral_flatness": 0.2231,
+            "band_energy": {
+              "sub_500": 0.3059,
+              "low_mid_500_1500": 0.3292,
+              "mid_1500_3000": 0.1515,
+              "presence_3000_6000": 0.1438,
+              "air_6000_plus": 0.0696
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.86,
+            "envelope_contrast": 1.178,
+            "burst_share": 0.256
+          }
+        }
+      ],
+      "referenceSegmentation": {
+        "segments": [
+          {
+            "role": "onset",
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09,
+            "metrics": {
+              "duration_s": 0.09,
+              "peak": 0.4117,
+              "rms": 0.1671,
+              "spectral_centroid_hz": 2031.5,
+              "zero_crossings_per_s": 1280.0,
+              "spectral_spread_hz": 2309.6,
+              "spectral_rolloff_85_hz": 5353.9,
+              "spectral_flatness": 0.2359,
+              "band_energy": {
+                "sub_500": 0.2852,
+                "low_mid_500_1500": 0.3513,
+                "mid_1500_3000": 0.1294,
+                "presence_3000_6000": 0.1622,
+                "air_6000_plus": 0.0719
+              },
+              "attack_peak_position": 0.0,
+              "decay_ratio": 0.883,
+              "envelope_contrast": 1.115,
+              "burst_share": 0.25
+            }
+          }
+        ],
+        "summary": {
+          "segmentCount": 1,
+          "status": "single-reference-body",
+          "thresholdRms": 0.1494,
+          "dominantRole": "onset",
+          "dominantWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09
+          }
+        }
+      },
+      "segmentRoleComparisons": [
+        {
+          "role": "onset",
+          "referenceWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09
+          },
+          "auroraWindow": {
+            "start_s": 0.07,
+            "end_s": 0.24,
+            "duration_s": 0.17
+          },
+          "syntheticGalagaWindow": {
+            "start_s": 0.08,
+            "end_s": 0.24,
+            "duration_s": 0.16
+          },
+          "auroraExactRoleMatch": true,
+          "syntheticGalagaExactRoleMatch": true,
+          "auroraVsReference": {
+            "duration_s": 0.08,
+            "spectral_centroid_hz": 26.5,
+            "zero_crossings_per_s": 1219.1,
+            "rms": 0.0195,
+            "spectral_spread_hz": 675.6,
+            "spectral_rolloff_85_hz": 1581.6,
+            "spectral_flatness": 0.0453,
+            "band_shape_distance": 0.246,
+            "attack_peak_position": 0.857,
+            "decay_ratio": 0.038,
+            "envelope_contrast": 0.046,
+            "burst_share": 0.159
+          },
+          "syntheticGalagaVsReference": {
+            "duration_s": 0.07,
+            "spectral_centroid_hz": 44.9,
+            "zero_crossings_per_s": 1293.9,
+            "rms": 0.0238,
+            "spectral_spread_hz": 683.9,
+            "spectral_rolloff_85_hz": 1621.5,
+            "spectral_flatness": 0.0466,
+            "band_shape_distance": 0.244,
+            "attack_peak_position": 0.85,
+            "decay_ratio": 0.07,
+            "envelope_contrast": 0.035,
+            "burst_share": 0.012
+          },
+          "auroraSegmentRisk10": 4.38,
+          "syntheticGalagaSegmentRisk10": 4.03,
+          "interpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+        }
+      ],
+      "cadencePressureAnalysis": null
+    },
+    {
+      "id": "perfect-measured-onset-soft-ceremony-tail-r03",
+      "label": "Perfect measured onset with soft ceremony tail",
+      "focus": "Candidate comparison for Challenge Perfect.",
+      "cue": "challengePerfect",
+      "analysisPolicy": {},
+      "variants": {
+        "aurora": {
+          "label": "Perfect measured onset with soft ceremony tail",
+          "wav": "samples/perfect-measured-onset-soft-ceremony-tail-r03.wav",
+          "metrics": {
+            "duration_s": 1.5,
+            "peak": 0.6454,
+            "rms": 0.1355,
+            "spectral_centroid_hz": 1921.7,
+            "zero_crossings_per_s": 1751.3,
+            "spectral_spread_hz": 1714.7,
+            "spectral_rolloff_85_hz": 3758.0,
+            "spectral_flatness": 0.1768,
+            "band_energy": {
+              "sub_500": 0.1889,
+              "low_mid_500_1500": 0.2963,
+              "mid_1500_3000": 0.2899,
+              "presence_3000_6000": 0.1958,
+              "air_6000_plus": 0.029
+            },
+            "attack_peak_position": 0.572,
+            "decay_ratio": 1.261,
+            "envelope_contrast": 2.515,
+            "burst_share": 0.287
+          },
+          "activeWindow": {
+            "start_s": 0.309,
+            "end_s": 0.619,
+            "duration_s": 0.31,
+            "coverage": 0.258,
+            "threshold_rms": 0.106
+          },
+          "analysisWindow": {
+            "start_s": 0.08,
+            "end_s": 1.28,
+            "duration_s": 1.2
+          },
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.31,
+            "peak": 0.6447,
+            "rms": 0.1431,
+            "spectral_centroid_hz": 1948.8,
+            "zero_crossings_per_s": 1799.3,
+            "spectral_spread_hz": 1670.3,
+            "spectral_rolloff_85_hz": 3747.1,
+            "spectral_flatness": 0.2035,
+            "band_energy": {
+              "sub_500": 0.1653,
+              "low_mid_500_1500": 0.2948,
+              "mid_1500_3000": 0.3108,
+              "presence_3000_6000": 0.2018,
+              "air_6000_plus": 0.0273
+            },
+            "attack_peak_position": 0.711,
+            "decay_ratio": 0.979,
+            "envelope_contrast": 3.489,
+            "burst_share": 0.333
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.07,
+                "end_s": 0.24,
+                "duration_s": 0.17,
+                "metrics": {
+                  "duration_s": 0.17,
+                  "peak": 0.6447,
+                  "rms": 0.1846,
+                  "spectral_centroid_hz": 2005.3,
+                  "zero_crossings_per_s": 2499.1,
+                  "spectral_spread_hz": 1637.0,
+                  "spectral_rolloff_85_hz": 3778.1,
+                  "spectral_flatness": 0.1895,
+                  "band_energy": {
+                    "sub_500": 0.1323,
+                    "low_mid_500_1500": 0.3053,
+                    "mid_1500_3000": 0.3239,
+                    "presence_3000_6000": 0.2129,
+                    "air_6000_plus": 0.0255
+                  },
+                  "attack_peak_position": 0.857,
+                  "decay_ratio": 0.938,
+                  "envelope_contrast": 1.071,
+                  "burst_share": 0.364
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1062,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.07,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.6581,
+            "rms": 0.1193,
+            "spectral_centroid_hz": 1959.4,
+            "zero_crossings_per_s": 2634.5,
+            "spectral_spread_hz": 1707.3,
+            "spectral_rolloff_85_hz": 3688.1,
+            "spectral_flatness": 0.2236,
+            "band_energy": {
+              "sub_500": 0.1638,
+              "low_mid_500_1500": 0.2975,
+              "mid_1500_3000": 0.3118,
+              "presence_3000_6000": 0.197,
+              "air_6000_plus": 0.0299
+            },
+            "attack_peak_position": 1.0,
+            "decay_ratio": 12.893,
+            "envelope_contrast": 4.444,
+            "burst_share": 0.264
+          },
+          "activeWindow": {
+            "start_s": 0.379,
+            "end_s": 0.699,
+            "duration_s": 0.32,
+            "coverage": 0.38,
+            "threshold_rms": 0.071
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.32,
+            "peak": 0.6281,
+            "rms": 0.1397,
+            "spectral_centroid_hz": 1957.5,
+            "zero_crossings_per_s": 1583.5,
+            "spectral_spread_hz": 1626.6,
+            "spectral_rolloff_85_hz": 3702.1,
+            "spectral_flatness": 0.1885,
+            "band_energy": {
+              "sub_500": 0.1489,
+              "low_mid_500_1500": 0.3012,
+              "mid_1500_3000": 0.3194,
+              "presence_3000_6000": 0.2059,
+              "air_6000_plus": 0.0247
+            },
+            "attack_peak_position": 0.675,
+            "decay_ratio": 1.002,
+            "envelope_contrast": 4.184,
+            "burst_share": 0.341
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.08,
+                "end_s": 0.24,
+                "duration_s": 0.16,
+                "metrics": {
+                  "duration_s": 0.16,
+                  "peak": 0.6281,
+                  "rms": 0.1909,
+                  "spectral_centroid_hz": 1986.6,
+                  "zero_crossings_per_s": 2573.9,
+                  "spectral_spread_hz": 1625.7,
+                  "spectral_rolloff_85_hz": 3732.4,
+                  "spectral_flatness": 0.1893,
+                  "band_energy": {
+                    "sub_500": 0.1372,
+                    "low_mid_500_1500": 0.3021,
+                    "mid_1500_3000": 0.3256,
+                    "presence_3000_6000": 0.21,
+                    "air_6000_plus": 0.0251
+                  },
+                  "attack_peak_position": 0.85,
+                  "decay_ratio": 0.953,
+                  "envelope_contrast": 1.08,
+                  "burst_share": 0.238
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1045,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.08,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2,
+            "spectral_spread_hz": 2399.6,
+            "spectral_rolloff_85_hz": 5333.3,
+            "spectral_flatness": 0.2305,
+            "band_energy": {
+              "sub_500": 0.2965,
+              "low_mid_500_1500": 0.3324,
+              "mid_1500_3000": 0.146,
+              "presence_3000_6000": 0.1411,
+              "air_6000_plus": 0.0841
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.915,
+            "envelope_contrast": 1.163,
+            "burst_share": 0.262
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.17,
+            "duration_s": 0.17,
+            "coverage": 0.354,
+            "threshold_rms": 0.1415
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.17,
+            "peak": 0.4117,
+            "rms": 0.1544,
+            "spectral_centroid_hz": 1915.2,
+            "zero_crossings_per_s": 1843.4,
+            "spectral_spread_hz": 2271.7,
+            "spectral_rolloff_85_hz": 5117.9,
+            "spectral_flatness": 0.2052,
+            "band_energy": {
+              "sub_500": 0.3118,
+              "low_mid_500_1500": 0.3615,
+              "mid_1500_3000": 0.1172,
+              "presence_3000_6000": 0.1421,
+              "air_6000_plus": 0.0674
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.828,
+            "envelope_contrast": 1.142,
+            "burst_share": 0.182
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.0,
+                "end_s": 0.09,
+                "duration_s": 0.09,
+                "metrics": {
+                  "duration_s": 0.09,
+                  "peak": 0.4117,
+                  "rms": 0.1671,
+                  "spectral_centroid_hz": 2031.5,
+                  "zero_crossings_per_s": 1280.0,
+                  "spectral_spread_hz": 2309.6,
+                  "spectral_rolloff_85_hz": 5353.9,
+                  "spectral_flatness": 0.2359,
+                  "band_energy": {
+                    "sub_500": 0.2852,
+                    "low_mid_500_1500": 0.3513,
+                    "mid_1500_3000": 0.1294,
+                    "presence_3000_6000": 0.1622,
+                    "air_6000_plus": 0.0719
+                  },
+                  "attack_peak_position": 0.0,
+                  "decay_ratio": 0.883,
+                  "envelope_contrast": 1.115,
+                  "burst_share": 0.25
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1494,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.0,
+                "end_s": 0.09
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.01,
+          "spectral_centroid_hz": 8.7,
+          "zero_crossings_per_s": 215.8,
+          "rms": 0.0034,
+          "spectral_spread_hz": 43.7,
+          "spectral_rolloff_85_hz": 45.0,
+          "spectral_flatness": 0.015,
+          "band_shape_distance": 0.0191,
+          "attack_peak_position": 0.036,
+          "decay_ratio": 0.023,
+          "envelope_contrast": 0.695,
+          "burst_share": 0.008
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.14,
+          "spectral_centroid_hz": 33.6,
+          "zero_crossings_per_s": 44.1,
+          "rms": 0.0113,
+          "spectral_spread_hz": 601.4,
+          "spectral_rolloff_85_hz": 1370.8,
+          "spectral_flatness": 0.0017,
+          "band_shape_distance": 0.2533,
+          "attack_peak_position": 0.711,
+          "decay_ratio": 0.151,
+          "envelope_contrast": 2.347,
+          "burst_share": 0.151
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.15,
+          "spectral_centroid_hz": 42.3,
+          "zero_crossings_per_s": 259.9,
+          "rms": 0.0147,
+          "spectral_spread_hz": 645.1,
+          "spectral_rolloff_85_hz": 1415.8,
+          "spectral_flatness": 0.0167,
+          "band_shape_distance": 0.266,
+          "attack_peak_position": 0.675,
+          "decay_ratio": 0.174,
+          "envelope_contrast": 3.042,
+          "burst_share": 0.159
+        },
+        "referenceWindowStatus": "active-segment-detected"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.31,
+          "score": 0.875,
+          "metrics": {
+            "duration_s": 0.31,
+            "peak": 0.4117,
+            "rms": 0.1457,
+            "spectral_centroid_hz": 1949.4,
+            "zero_crossings_per_s": 2058.2,
+            "spectral_spread_hz": 2289.3,
+            "spectral_rolloff_85_hz": 5081.0,
+            "spectral_flatness": 0.2231,
+            "band_energy": {
+              "sub_500": 0.3059,
+              "low_mid_500_1500": 0.3292,
+              "mid_1500_3000": 0.1515,
+              "presence_3000_6000": 0.1438,
+              "air_6000_plus": 0.0696
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.86,
+            "envelope_contrast": 1.178,
+            "burst_share": 0.256
+          }
+        }
+      ],
+      "referenceSegmentation": {
+        "segments": [
+          {
+            "role": "onset",
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09,
+            "metrics": {
+              "duration_s": 0.09,
+              "peak": 0.4117,
+              "rms": 0.1671,
+              "spectral_centroid_hz": 2031.5,
+              "zero_crossings_per_s": 1280.0,
+              "spectral_spread_hz": 2309.6,
+              "spectral_rolloff_85_hz": 5353.9,
+              "spectral_flatness": 0.2359,
+              "band_energy": {
+                "sub_500": 0.2852,
+                "low_mid_500_1500": 0.3513,
+                "mid_1500_3000": 0.1294,
+                "presence_3000_6000": 0.1622,
+                "air_6000_plus": 0.0719
+              },
+              "attack_peak_position": 0.0,
+              "decay_ratio": 0.883,
+              "envelope_contrast": 1.115,
+              "burst_share": 0.25
+            }
+          }
+        ],
+        "summary": {
+          "segmentCount": 1,
+          "status": "single-reference-body",
+          "thresholdRms": 0.1494,
+          "dominantRole": "onset",
+          "dominantWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09
+          }
+        }
+      },
+      "segmentRoleComparisons": [
+        {
+          "role": "onset",
+          "referenceWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09
+          },
+          "auroraWindow": {
+            "start_s": 0.07,
+            "end_s": 0.24,
+            "duration_s": 0.17
+          },
+          "syntheticGalagaWindow": {
+            "start_s": 0.08,
+            "end_s": 0.24,
+            "duration_s": 0.16
+          },
+          "auroraExactRoleMatch": true,
+          "syntheticGalagaExactRoleMatch": true,
+          "auroraVsReference": {
+            "duration_s": 0.08,
+            "spectral_centroid_hz": 26.2,
+            "zero_crossings_per_s": 1219.1,
+            "rms": 0.0175,
+            "spectral_spread_hz": 672.6,
+            "spectral_rolloff_85_hz": 1575.8,
+            "spectral_flatness": 0.0464,
+            "band_shape_distance": 0.2453,
+            "attack_peak_position": 0.857,
+            "decay_ratio": 0.055,
+            "envelope_contrast": 0.044,
+            "burst_share": 0.114
+          },
+          "syntheticGalagaVsReference": {
+            "duration_s": 0.07,
+            "spectral_centroid_hz": 44.9,
+            "zero_crossings_per_s": 1293.9,
+            "rms": 0.0238,
+            "spectral_spread_hz": 683.9,
+            "spectral_rolloff_85_hz": 1621.5,
+            "spectral_flatness": 0.0466,
+            "band_shape_distance": 0.244,
+            "attack_peak_position": 0.85,
+            "decay_ratio": 0.07,
+            "envelope_contrast": 0.035,
+            "burst_share": 0.012
+          },
+          "auroraSegmentRisk10": 4.23,
+          "syntheticGalagaSegmentRisk10": 4.03,
+          "interpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+        }
+      ],
+      "cadencePressureAnalysis": null
+    },
+    {
+      "id": "perfect-measured-onset-quiet-ceremony-tail-r01",
+      "label": "Perfect measured onset with quiet ceremony tail",
+      "focus": "Candidate comparison for Challenge Perfect.",
+      "cue": "challengePerfect",
+      "analysisPolicy": {},
+      "variants": {
+        "aurora": {
+          "label": "Perfect measured onset with quiet ceremony tail",
+          "wav": "samples/perfect-measured-onset-quiet-ceremony-tail-r01.wav",
+          "metrics": {
+            "duration_s": 1.5,
+            "peak": 0.6433,
+            "rms": 0.1362,
+            "spectral_centroid_hz": 1927.8,
+            "zero_crossings_per_s": 1688.0,
+            "spectral_spread_hz": 1695.9,
+            "spectral_rolloff_85_hz": 3743.3,
+            "spectral_flatness": 0.1871,
+            "band_energy": {
+              "sub_500": 0.183,
+              "low_mid_500_1500": 0.2964,
+              "mid_1500_3000": 0.2948,
+              "presence_3000_6000": 0.1978,
+              "air_6000_plus": 0.028
+            },
+            "attack_peak_position": 0.829,
+            "decay_ratio": 1.253,
+            "envelope_contrast": 2.712,
+            "burst_share": 0.282
+          },
+          "activeWindow": {
+            "start_s": 0.319,
+            "end_s": 0.629,
+            "duration_s": 0.31,
+            "coverage": 0.258,
+            "threshold_rms": 0.1054
+          },
+          "analysisWindow": {
+            "start_s": 0.08,
+            "end_s": 1.28,
+            "duration_s": 1.2
+          },
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.31,
+            "peak": 0.6233,
+            "rms": 0.1426,
+            "spectral_centroid_hz": 1933.7,
+            "zero_crossings_per_s": 1712.1,
+            "spectral_spread_hz": 1647.7,
+            "spectral_rolloff_85_hz": 3682.5,
+            "spectral_flatness": 0.1952,
+            "band_energy": {
+              "sub_500": 0.165,
+              "low_mid_500_1500": 0.2984,
+              "mid_1500_3000": 0.3107,
+              "presence_3000_6000": 0.1996,
+              "air_6000_plus": 0.0263
+            },
+            "attack_peak_position": 0.684,
+            "decay_ratio": 0.994,
+            "envelope_contrast": 3.768,
+            "burst_share": 0.333
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.07,
+                "end_s": 0.24,
+                "duration_s": 0.17,
+                "metrics": {
+                  "duration_s": 0.17,
+                  "peak": 0.6233,
+                  "rms": 0.1853,
+                  "spectral_centroid_hz": 1988.8,
+                  "zero_crossings_per_s": 2546.3,
+                  "spectral_spread_hz": 1633.0,
+                  "spectral_rolloff_85_hz": 3742.8,
+                  "spectral_flatness": 0.1931,
+                  "band_energy": {
+                    "sub_500": 0.1369,
+                    "low_mid_500_1500": 0.3062,
+                    "mid_1500_3000": 0.3222,
+                    "presence_3000_6000": 0.209,
+                    "air_6000_plus": 0.0258
+                  },
+                  "attack_peak_position": 0.857,
+                  "decay_ratio": 0.926,
+                  "envelope_contrast": 1.048,
+                  "burst_share": 0.455
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1046,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.07,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.6581,
+            "rms": 0.1193,
+            "spectral_centroid_hz": 1959.4,
+            "zero_crossings_per_s": 2634.5,
+            "spectral_spread_hz": 1707.3,
+            "spectral_rolloff_85_hz": 3688.1,
+            "spectral_flatness": 0.2236,
+            "band_energy": {
+              "sub_500": 0.1638,
+              "low_mid_500_1500": 0.2975,
+              "mid_1500_3000": 0.3118,
+              "presence_3000_6000": 0.197,
+              "air_6000_plus": 0.0299
+            },
+            "attack_peak_position": 1.0,
+            "decay_ratio": 12.893,
+            "envelope_contrast": 4.444,
+            "burst_share": 0.264
+          },
+          "activeWindow": {
+            "start_s": 0.379,
+            "end_s": 0.699,
+            "duration_s": 0.32,
+            "coverage": 0.38,
+            "threshold_rms": 0.071
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.32,
+            "peak": 0.6281,
+            "rms": 0.1397,
+            "spectral_centroid_hz": 1957.5,
+            "zero_crossings_per_s": 1583.5,
+            "spectral_spread_hz": 1626.6,
+            "spectral_rolloff_85_hz": 3702.1,
+            "spectral_flatness": 0.1885,
+            "band_energy": {
+              "sub_500": 0.1489,
+              "low_mid_500_1500": 0.3012,
+              "mid_1500_3000": 0.3194,
+              "presence_3000_6000": 0.2059,
+              "air_6000_plus": 0.0247
+            },
+            "attack_peak_position": 0.675,
+            "decay_ratio": 1.002,
+            "envelope_contrast": 4.184,
+            "burst_share": 0.341
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.08,
+                "end_s": 0.24,
+                "duration_s": 0.16,
+                "metrics": {
+                  "duration_s": 0.16,
+                  "peak": 0.6281,
+                  "rms": 0.1909,
+                  "spectral_centroid_hz": 1986.6,
+                  "zero_crossings_per_s": 2573.9,
+                  "spectral_spread_hz": 1625.7,
+                  "spectral_rolloff_85_hz": 3732.4,
+                  "spectral_flatness": 0.1893,
+                  "band_energy": {
+                    "sub_500": 0.1372,
+                    "low_mid_500_1500": 0.3021,
+                    "mid_1500_3000": 0.3256,
+                    "presence_3000_6000": 0.21,
+                    "air_6000_plus": 0.0251
+                  },
+                  "attack_peak_position": 0.85,
+                  "decay_ratio": 0.953,
+                  "envelope_contrast": 1.08,
+                  "burst_share": 0.238
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1045,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.08,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2,
+            "spectral_spread_hz": 2399.6,
+            "spectral_rolloff_85_hz": 5333.3,
+            "spectral_flatness": 0.2305,
+            "band_energy": {
+              "sub_500": 0.2965,
+              "low_mid_500_1500": 0.3324,
+              "mid_1500_3000": 0.146,
+              "presence_3000_6000": 0.1411,
+              "air_6000_plus": 0.0841
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.915,
+            "envelope_contrast": 1.163,
+            "burst_share": 0.262
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.17,
+            "duration_s": 0.17,
+            "coverage": 0.354,
+            "threshold_rms": 0.1415
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.17,
+            "peak": 0.4117,
+            "rms": 0.1544,
+            "spectral_centroid_hz": 1915.2,
+            "zero_crossings_per_s": 1843.4,
+            "spectral_spread_hz": 2271.7,
+            "spectral_rolloff_85_hz": 5117.9,
+            "spectral_flatness": 0.2052,
+            "band_energy": {
+              "sub_500": 0.3118,
+              "low_mid_500_1500": 0.3615,
+              "mid_1500_3000": 0.1172,
+              "presence_3000_6000": 0.1421,
+              "air_6000_plus": 0.0674
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.828,
+            "envelope_contrast": 1.142,
+            "burst_share": 0.182
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.0,
+                "end_s": 0.09,
+                "duration_s": 0.09,
+                "metrics": {
+                  "duration_s": 0.09,
+                  "peak": 0.4117,
+                  "rms": 0.1671,
+                  "spectral_centroid_hz": 2031.5,
+                  "zero_crossings_per_s": 1280.0,
+                  "spectral_spread_hz": 2309.6,
+                  "spectral_rolloff_85_hz": 5353.9,
+                  "spectral_flatness": 0.2359,
+                  "band_energy": {
+                    "sub_500": 0.2852,
+                    "low_mid_500_1500": 0.3513,
+                    "mid_1500_3000": 0.1294,
+                    "presence_3000_6000": 0.1622,
+                    "air_6000_plus": 0.0719
+                  },
+                  "attack_peak_position": 0.0,
+                  "decay_ratio": 0.883,
+                  "envelope_contrast": 1.115,
+                  "burst_share": 0.25
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1494,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.0,
+                "end_s": 0.09
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.01,
+          "spectral_centroid_hz": 23.8,
+          "zero_crossings_per_s": 128.6,
+          "rms": 0.0029,
+          "spectral_spread_hz": 21.1,
+          "spectral_rolloff_85_hz": 19.6,
+          "spectral_flatness": 0.0067,
+          "band_shape_distance": 0.0178,
+          "attack_peak_position": 0.009,
+          "decay_ratio": 0.008,
+          "envelope_contrast": 0.416,
+          "burst_share": 0.008
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.14,
+          "spectral_centroid_hz": 18.5,
+          "zero_crossings_per_s": 131.3,
+          "rms": 0.0118,
+          "spectral_spread_hz": 624.0,
+          "spectral_rolloff_85_hz": 1435.4,
+          "spectral_flatness": 0.01,
+          "band_shape_distance": 0.251,
+          "attack_peak_position": 0.684,
+          "decay_ratio": 0.166,
+          "envelope_contrast": 2.626,
+          "burst_share": 0.151
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.15,
+          "spectral_centroid_hz": 42.3,
+          "zero_crossings_per_s": 259.9,
+          "rms": 0.0147,
+          "spectral_spread_hz": 645.1,
+          "spectral_rolloff_85_hz": 1415.8,
+          "spectral_flatness": 0.0167,
+          "band_shape_distance": 0.266,
+          "attack_peak_position": 0.675,
+          "decay_ratio": 0.174,
+          "envelope_contrast": 3.042,
+          "burst_share": 0.159
+        },
+        "referenceWindowStatus": "active-segment-detected"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.31,
+          "score": 0.85,
+          "metrics": {
+            "duration_s": 0.31,
+            "peak": 0.4117,
+            "rms": 0.1457,
+            "spectral_centroid_hz": 1949.4,
+            "zero_crossings_per_s": 2058.2,
+            "spectral_spread_hz": 2289.3,
+            "spectral_rolloff_85_hz": 5081.0,
+            "spectral_flatness": 0.2231,
+            "band_energy": {
+              "sub_500": 0.3059,
+              "low_mid_500_1500": 0.3292,
+              "mid_1500_3000": 0.1515,
+              "presence_3000_6000": 0.1438,
+              "air_6000_plus": 0.0696
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.86,
+            "envelope_contrast": 1.178,
+            "burst_share": 0.256
+          }
+        }
+      ],
+      "referenceSegmentation": {
+        "segments": [
+          {
+            "role": "onset",
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09,
+            "metrics": {
+              "duration_s": 0.09,
+              "peak": 0.4117,
+              "rms": 0.1671,
+              "spectral_centroid_hz": 2031.5,
+              "zero_crossings_per_s": 1280.0,
+              "spectral_spread_hz": 2309.6,
+              "spectral_rolloff_85_hz": 5353.9,
+              "spectral_flatness": 0.2359,
+              "band_energy": {
+                "sub_500": 0.2852,
+                "low_mid_500_1500": 0.3513,
+                "mid_1500_3000": 0.1294,
+                "presence_3000_6000": 0.1622,
+                "air_6000_plus": 0.0719
+              },
+              "attack_peak_position": 0.0,
+              "decay_ratio": 0.883,
+              "envelope_contrast": 1.115,
+              "burst_share": 0.25
+            }
+          }
+        ],
+        "summary": {
+          "segmentCount": 1,
+          "status": "single-reference-body",
+          "thresholdRms": 0.1494,
+          "dominantRole": "onset",
+          "dominantWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09
+          }
+        }
+      },
+      "segmentRoleComparisons": [
+        {
+          "role": "onset",
+          "referenceWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09
+          },
+          "auroraWindow": {
+            "start_s": 0.07,
+            "end_s": 0.24,
+            "duration_s": 0.17
+          },
+          "syntheticGalagaWindow": {
+            "start_s": 0.08,
+            "end_s": 0.24,
+            "duration_s": 0.16
+          },
+          "auroraExactRoleMatch": true,
+          "syntheticGalagaExactRoleMatch": true,
+          "auroraVsReference": {
+            "duration_s": 0.08,
+            "spectral_centroid_hz": 42.7,
+            "zero_crossings_per_s": 1266.3,
+            "rms": 0.0182,
+            "spectral_spread_hz": 676.6,
+            "spectral_rolloff_85_hz": 1611.1,
+            "spectral_flatness": 0.0428,
+            "band_shape_distance": 0.2395,
+            "attack_peak_position": 0.857,
+            "decay_ratio": 0.043,
+            "envelope_contrast": 0.067,
+            "burst_share": 0.205
+          },
+          "syntheticGalagaVsReference": {
+            "duration_s": 0.07,
+            "spectral_centroid_hz": 44.9,
+            "zero_crossings_per_s": 1293.9,
+            "rms": 0.0238,
+            "spectral_spread_hz": 683.9,
+            "spectral_rolloff_85_hz": 1621.5,
+            "spectral_flatness": 0.0466,
+            "band_shape_distance": 0.244,
+            "attack_peak_position": 0.85,
+            "decay_ratio": 0.07,
+            "envelope_contrast": 0.035,
+            "burst_share": 0.012
+          },
+          "auroraSegmentRisk10": 4.56,
+          "syntheticGalagaSegmentRisk10": 4.03,
+          "interpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+        }
+      ],
+      "cadencePressureAnalysis": null
+    },
+    {
+      "id": "perfect-measured-onset-quiet-ceremony-tail-r02",
+      "label": "Perfect measured onset with quiet ceremony tail",
+      "focus": "Candidate comparison for Challenge Perfect.",
+      "cue": "challengePerfect",
+      "analysisPolicy": {},
+      "variants": {
+        "aurora": {
+          "label": "Perfect measured onset with quiet ceremony tail",
+          "wav": "samples/perfect-measured-onset-quiet-ceremony-tail-r02.wav",
+          "metrics": {
+            "duration_s": 1.5,
+            "peak": 1.0,
+            "rms": 0.1448,
+            "spectral_centroid_hz": 1773.6,
+            "zero_crossings_per_s": 1638.0,
+            "spectral_spread_hz": 1570.8,
+            "spectral_rolloff_85_hz": 3424.7,
+            "spectral_flatness": 0.1789,
+            "band_energy": {
+              "sub_500": 0.1685,
+              "low_mid_500_1500": 0.3682,
+              "mid_1500_3000": 0.285,
+              "presence_3000_6000": 0.1551,
+              "air_6000_plus": 0.0232
+            },
+            "attack_peak_position": 0.968,
+            "decay_ratio": 1.272,
+            "envelope_contrast": 2.712,
+            "burst_share": 0.303
+          },
+          "activeWindow": {
+            "start_s": 0.898,
+            "end_s": 1.2,
+            "duration_s": 0.302,
+            "coverage": 0.252,
+            "threshold_rms": 0.1076
+          },
+          "analysisWindow": {
+            "start_s": 0.08,
+            "end_s": 1.28,
+            "duration_s": 1.2
+          },
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.302,
+            "peak": 0.6289,
+            "rms": 0.143,
+            "spectral_centroid_hz": 1945.3,
+            "zero_crossings_per_s": 1727.7,
+            "spectral_spread_hz": 1635.9,
+            "spectral_rolloff_85_hz": 3707.0,
+            "spectral_flatness": 0.1874,
+            "band_energy": {
+              "sub_500": 0.1618,
+              "low_mid_500_1500": 0.2963,
+              "mid_1500_3000": 0.3095,
+              "presence_3000_6000": 0.2077,
+              "air_6000_plus": 0.0247
+            },
+            "attack_peak_position": 0.73,
+            "decay_ratio": 1.146,
+            "envelope_contrast": 4.095,
+            "burst_share": 0.342
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.08,
+                "end_s": 0.24,
+                "duration_s": 0.16,
+                "metrics": {
+                  "duration_s": 0.16,
+                  "peak": 0.6289,
+                  "rms": 0.1906,
+                  "spectral_centroid_hz": 2005.1,
+                  "zero_crossings_per_s": 2592.6,
+                  "spectral_spread_hz": 1626.8,
+                  "spectral_rolloff_85_hz": 3770.0,
+                  "spectral_flatness": 0.1872,
+                  "band_energy": {
+                    "sub_500": 0.1324,
+                    "low_mid_500_1500": 0.3075,
+                    "mid_1500_3000": 0.3193,
+                    "presence_3000_6000": 0.2156,
+                    "air_6000_plus": 0.0252
+                  },
+                  "attack_peak_position": 0.85,
+                  "decay_ratio": 0.936,
+                  "envelope_contrast": 1.08,
+                  "burst_share": 0.19
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1046,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.08,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.6581,
+            "rms": 0.1193,
+            "spectral_centroid_hz": 1959.4,
+            "zero_crossings_per_s": 2634.5,
+            "spectral_spread_hz": 1707.3,
+            "spectral_rolloff_85_hz": 3688.1,
+            "spectral_flatness": 0.2236,
+            "band_energy": {
+              "sub_500": 0.1638,
+              "low_mid_500_1500": 0.2975,
+              "mid_1500_3000": 0.3118,
+              "presence_3000_6000": 0.197,
+              "air_6000_plus": 0.0299
+            },
+            "attack_peak_position": 1.0,
+            "decay_ratio": 12.893,
+            "envelope_contrast": 4.444,
+            "burst_share": 0.264
+          },
+          "activeWindow": {
+            "start_s": 0.379,
+            "end_s": 0.699,
+            "duration_s": 0.32,
+            "coverage": 0.38,
+            "threshold_rms": 0.071
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.32,
+            "peak": 0.6281,
+            "rms": 0.1397,
+            "spectral_centroid_hz": 1957.5,
+            "zero_crossings_per_s": 1583.5,
+            "spectral_spread_hz": 1626.6,
+            "spectral_rolloff_85_hz": 3702.1,
+            "spectral_flatness": 0.1885,
+            "band_energy": {
+              "sub_500": 0.1489,
+              "low_mid_500_1500": 0.3012,
+              "mid_1500_3000": 0.3194,
+              "presence_3000_6000": 0.2059,
+              "air_6000_plus": 0.0247
+            },
+            "attack_peak_position": 0.675,
+            "decay_ratio": 1.002,
+            "envelope_contrast": 4.184,
+            "burst_share": 0.341
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.08,
+                "end_s": 0.24,
+                "duration_s": 0.16,
+                "metrics": {
+                  "duration_s": 0.16,
+                  "peak": 0.6281,
+                  "rms": 0.1909,
+                  "spectral_centroid_hz": 1986.6,
+                  "zero_crossings_per_s": 2573.9,
+                  "spectral_spread_hz": 1625.7,
+                  "spectral_rolloff_85_hz": 3732.4,
+                  "spectral_flatness": 0.1893,
+                  "band_energy": {
+                    "sub_500": 0.1372,
+                    "low_mid_500_1500": 0.3021,
+                    "mid_1500_3000": 0.3256,
+                    "presence_3000_6000": 0.21,
+                    "air_6000_plus": 0.0251
+                  },
+                  "attack_peak_position": 0.85,
+                  "decay_ratio": 0.953,
+                  "envelope_contrast": 1.08,
+                  "burst_share": 0.238
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1045,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.08,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2,
+            "spectral_spread_hz": 2399.6,
+            "spectral_rolloff_85_hz": 5333.3,
+            "spectral_flatness": 0.2305,
+            "band_energy": {
+              "sub_500": 0.2965,
+              "low_mid_500_1500": 0.3324,
+              "mid_1500_3000": 0.146,
+              "presence_3000_6000": 0.1411,
+              "air_6000_plus": 0.0841
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.915,
+            "envelope_contrast": 1.163,
+            "burst_share": 0.262
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.17,
+            "duration_s": 0.17,
+            "coverage": 0.354,
+            "threshold_rms": 0.1415
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.17,
+            "peak": 0.4117,
+            "rms": 0.1544,
+            "spectral_centroid_hz": 1915.2,
+            "zero_crossings_per_s": 1843.4,
+            "spectral_spread_hz": 2271.7,
+            "spectral_rolloff_85_hz": 5117.9,
+            "spectral_flatness": 0.2052,
+            "band_energy": {
+              "sub_500": 0.3118,
+              "low_mid_500_1500": 0.3615,
+              "mid_1500_3000": 0.1172,
+              "presence_3000_6000": 0.1421,
+              "air_6000_plus": 0.0674
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.828,
+            "envelope_contrast": 1.142,
+            "burst_share": 0.182
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.0,
+                "end_s": 0.09,
+                "duration_s": 0.09,
+                "metrics": {
+                  "duration_s": 0.09,
+                  "peak": 0.4117,
+                  "rms": 0.1671,
+                  "spectral_centroid_hz": 2031.5,
+                  "zero_crossings_per_s": 1280.0,
+                  "spectral_spread_hz": 2309.6,
+                  "spectral_rolloff_85_hz": 5353.9,
+                  "spectral_flatness": 0.2359,
+                  "band_energy": {
+                    "sub_500": 0.2852,
+                    "low_mid_500_1500": 0.3513,
+                    "mid_1500_3000": 0.1294,
+                    "presence_3000_6000": 0.1622,
+                    "air_6000_plus": 0.0719
+                  },
+                  "attack_peak_position": 0.0,
+                  "decay_ratio": 0.883,
+                  "envelope_contrast": 1.115,
+                  "burst_share": 0.25
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1494,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.0,
+                "end_s": 0.09
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.018,
+          "spectral_centroid_hz": 12.2,
+          "zero_crossings_per_s": 144.2,
+          "rms": 0.0033,
+          "spectral_spread_hz": 9.3,
+          "spectral_rolloff_85_hz": 4.9,
+          "spectral_flatness": 0.0011,
+          "band_shape_distance": 0.0148,
+          "attack_peak_position": 0.055,
+          "decay_ratio": 0.144,
+          "envelope_contrast": 0.089,
+          "burst_share": 0.001
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.132,
+          "spectral_centroid_hz": 30.1,
+          "zero_crossings_per_s": 115.7,
+          "rms": 0.0114,
+          "spectral_spread_hz": 635.8,
+          "spectral_rolloff_85_hz": 1410.9,
+          "spectral_flatness": 0.0178,
+          "band_shape_distance": 0.2579,
+          "attack_peak_position": 0.73,
+          "decay_ratio": 0.318,
+          "envelope_contrast": 2.953,
+          "burst_share": 0.16
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.15,
+          "spectral_centroid_hz": 42.3,
+          "zero_crossings_per_s": 259.9,
+          "rms": 0.0147,
+          "spectral_spread_hz": 645.1,
+          "spectral_rolloff_85_hz": 1415.8,
+          "spectral_flatness": 0.0167,
+          "band_shape_distance": 0.266,
+          "attack_peak_position": 0.675,
+          "decay_ratio": 0.174,
+          "envelope_contrast": 3.042,
+          "burst_share": 0.159
+        },
+        "referenceWindowStatus": "active-segment-detected"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.302,
+          "score": 0.825,
+          "metrics": {
+            "duration_s": 0.302,
+            "peak": 0.4117,
+            "rms": 0.1463,
+            "spectral_centroid_hz": 1883.7,
+            "zero_crossings_per_s": 2086.1,
+            "spectral_spread_hz": 2212.9,
+            "spectral_rolloff_85_hz": 4715.3,
+            "spectral_flatness": 0.195,
+            "band_energy": {
+              "sub_500": 0.3051,
+              "low_mid_500_1500": 0.3443,
+              "mid_1500_3000": 0.1504,
+              "presence_3000_6000": 0.137,
+              "air_6000_plus": 0.0633
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.864,
+            "envelope_contrast": 1.175,
+            "burst_share": 0.263
+          }
+        }
+      ],
+      "referenceSegmentation": {
+        "segments": [
+          {
+            "role": "onset",
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09,
+            "metrics": {
+              "duration_s": 0.09,
+              "peak": 0.4117,
+              "rms": 0.1671,
+              "spectral_centroid_hz": 2031.5,
+              "zero_crossings_per_s": 1280.0,
+              "spectral_spread_hz": 2309.6,
+              "spectral_rolloff_85_hz": 5353.9,
+              "spectral_flatness": 0.2359,
+              "band_energy": {
+                "sub_500": 0.2852,
+                "low_mid_500_1500": 0.3513,
+                "mid_1500_3000": 0.1294,
+                "presence_3000_6000": 0.1622,
+                "air_6000_plus": 0.0719
+              },
+              "attack_peak_position": 0.0,
+              "decay_ratio": 0.883,
+              "envelope_contrast": 1.115,
+              "burst_share": 0.25
+            }
+          }
+        ],
+        "summary": {
+          "segmentCount": 1,
+          "status": "single-reference-body",
+          "thresholdRms": 0.1494,
+          "dominantRole": "onset",
+          "dominantWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09
+          }
+        }
+      },
+      "segmentRoleComparisons": [
+        {
+          "role": "onset",
+          "referenceWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09
+          },
+          "auroraWindow": {
+            "start_s": 0.08,
+            "end_s": 0.24,
+            "duration_s": 0.16
+          },
+          "syntheticGalagaWindow": {
+            "start_s": 0.08,
+            "end_s": 0.24,
+            "duration_s": 0.16
+          },
+          "auroraExactRoleMatch": true,
+          "syntheticGalagaExactRoleMatch": true,
+          "auroraVsReference": {
+            "duration_s": 0.07,
+            "spectral_centroid_hz": 26.4,
+            "zero_crossings_per_s": 1312.6,
+            "rms": 0.0235,
+            "spectral_spread_hz": 682.8,
+            "spectral_rolloff_85_hz": 1583.9,
+            "spectral_flatness": 0.0487,
+            "band_shape_distance": 0.2433,
+            "attack_peak_position": 0.85,
+            "decay_ratio": 0.053,
+            "envelope_contrast": 0.035,
+            "burst_share": 0.06
+          },
+          "syntheticGalagaVsReference": {
+            "duration_s": 0.07,
+            "spectral_centroid_hz": 44.9,
+            "zero_crossings_per_s": 1293.9,
+            "rms": 0.0238,
+            "spectral_spread_hz": 683.9,
+            "spectral_rolloff_85_hz": 1621.5,
+            "spectral_flatness": 0.0466,
+            "band_shape_distance": 0.244,
+            "attack_peak_position": 0.85,
+            "decay_ratio": 0.07,
+            "envelope_contrast": 0.035,
+            "burst_share": 0.012
+          },
+          "auroraSegmentRisk10": 4.14,
+          "syntheticGalagaSegmentRisk10": 4.03,
+          "interpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+        }
+      ],
+      "cadencePressureAnalysis": null
+    },
+    {
+      "id": "perfect-measured-onset-quiet-ceremony-tail-r03",
+      "label": "Perfect measured onset with quiet ceremony tail",
+      "focus": "Candidate comparison for Challenge Perfect.",
+      "cue": "challengePerfect",
+      "analysisPolicy": {},
+      "variants": {
+        "aurora": {
+          "label": "Perfect measured onset with quiet ceremony tail",
+          "wav": "samples/perfect-measured-onset-quiet-ceremony-tail-r03.wav",
+          "metrics": {
+            "duration_s": 1.5,
+            "peak": 0.7489,
+            "rms": 0.1454,
+            "spectral_centroid_hz": 1826.1,
+            "zero_crossings_per_s": 1676.0,
+            "spectral_spread_hz": 1621.5,
+            "spectral_rolloff_85_hz": 3583.3,
+            "spectral_flatness": 0.1787,
+            "band_energy": {
+              "sub_500": 0.1682,
+              "low_mid_500_1500": 0.3577,
+              "mid_1500_3000": 0.2744,
+              "presence_3000_6000": 0.1749,
+              "air_6000_plus": 0.0248
+            },
+            "attack_peak_position": 0.176,
+            "decay_ratio": 1.113,
+            "envelope_contrast": 2.779,
+            "burst_share": 0.33
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.28,
+            "duration_s": 0.28,
+            "coverage": 0.233,
+            "threshold_rms": 0.1102
+          },
+          "analysisWindow": {
+            "start_s": 0.08,
+            "end_s": 1.28,
+            "duration_s": 1.2
+          },
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.28,
+            "peak": 0.7489,
+            "rms": 0.1684,
+            "spectral_centroid_hz": 2028.9,
+            "zero_crossings_per_s": 2282.3,
+            "spectral_spread_hz": 1737.6,
+            "spectral_rolloff_85_hz": 3813.3,
+            "spectral_flatness": 0.2112,
+            "band_energy": {
+              "sub_500": 0.1498,
+              "low_mid_500_1500": 0.3078,
+              "mid_1500_3000": 0.3034,
+              "presence_3000_6000": 0.2071,
+              "air_6000_plus": 0.0319
+            },
+            "attack_peak_position": 0.257,
+            "decay_ratio": 0.767,
+            "envelope_contrast": 1.994,
+            "burst_share": 0.361
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.04,
+                "end_s": 0.2,
+                "duration_s": 0.16,
+                "metrics": {
+                  "duration_s": 0.16,
+                  "peak": 0.7489,
+                  "rms": 0.208,
+                  "spectral_centroid_hz": 2031.1,
+                  "zero_crossings_per_s": 2836.9,
+                  "spectral_spread_hz": 1756.3,
+                  "spectral_rolloff_85_hz": 3795.0,
+                  "spectral_flatness": 0.2368,
+                  "band_energy": {
+                    "sub_500": 0.1494,
+                    "low_mid_500_1500": 0.3058,
+                    "mid_1500_3000": 0.3067,
+                    "presence_3000_6000": 0.2047,
+                    "air_6000_plus": 0.0335
+                  },
+                  "attack_peak_position": 0.2,
+                  "decay_ratio": 1.018,
+                  "envelope_contrast": 1.117,
+                  "burst_share": 0.286
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1419,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.04,
+                "end_s": 0.2
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.6581,
+            "rms": 0.1193,
+            "spectral_centroid_hz": 1959.4,
+            "zero_crossings_per_s": 2634.5,
+            "spectral_spread_hz": 1707.3,
+            "spectral_rolloff_85_hz": 3688.1,
+            "spectral_flatness": 0.2236,
+            "band_energy": {
+              "sub_500": 0.1638,
+              "low_mid_500_1500": 0.2975,
+              "mid_1500_3000": 0.3118,
+              "presence_3000_6000": 0.197,
+              "air_6000_plus": 0.0299
+            },
+            "attack_peak_position": 1.0,
+            "decay_ratio": 12.893,
+            "envelope_contrast": 4.444,
+            "burst_share": 0.264
+          },
+          "activeWindow": {
+            "start_s": 0.379,
+            "end_s": 0.699,
+            "duration_s": 0.32,
+            "coverage": 0.38,
+            "threshold_rms": 0.071
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.32,
+            "peak": 0.6281,
+            "rms": 0.1397,
+            "spectral_centroid_hz": 1957.5,
+            "zero_crossings_per_s": 1583.5,
+            "spectral_spread_hz": 1626.6,
+            "spectral_rolloff_85_hz": 3702.1,
+            "spectral_flatness": 0.1885,
+            "band_energy": {
+              "sub_500": 0.1489,
+              "low_mid_500_1500": 0.3012,
+              "mid_1500_3000": 0.3194,
+              "presence_3000_6000": 0.2059,
+              "air_6000_plus": 0.0247
+            },
+            "attack_peak_position": 0.675,
+            "decay_ratio": 1.002,
+            "envelope_contrast": 4.184,
+            "burst_share": 0.341
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.08,
+                "end_s": 0.24,
+                "duration_s": 0.16,
+                "metrics": {
+                  "duration_s": 0.16,
+                  "peak": 0.6281,
+                  "rms": 0.1909,
+                  "spectral_centroid_hz": 1986.6,
+                  "zero_crossings_per_s": 2573.9,
+                  "spectral_spread_hz": 1625.7,
+                  "spectral_rolloff_85_hz": 3732.4,
+                  "spectral_flatness": 0.1893,
+                  "band_energy": {
+                    "sub_500": 0.1372,
+                    "low_mid_500_1500": 0.3021,
+                    "mid_1500_3000": 0.3256,
+                    "presence_3000_6000": 0.21,
+                    "air_6000_plus": 0.0251
+                  },
+                  "attack_peak_position": 0.85,
+                  "decay_ratio": 0.953,
+                  "envelope_contrast": 1.08,
+                  "burst_share": 0.238
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1045,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.08,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2,
+            "spectral_spread_hz": 2399.6,
+            "spectral_rolloff_85_hz": 5333.3,
+            "spectral_flatness": 0.2305,
+            "band_energy": {
+              "sub_500": 0.2965,
+              "low_mid_500_1500": 0.3324,
+              "mid_1500_3000": 0.146,
+              "presence_3000_6000": 0.1411,
+              "air_6000_plus": 0.0841
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.915,
+            "envelope_contrast": 1.163,
+            "burst_share": 0.262
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.17,
+            "duration_s": 0.17,
+            "coverage": 0.354,
+            "threshold_rms": 0.1415
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.17,
+            "peak": 0.4117,
+            "rms": 0.1544,
+            "spectral_centroid_hz": 1915.2,
+            "zero_crossings_per_s": 1843.4,
+            "spectral_spread_hz": 2271.7,
+            "spectral_rolloff_85_hz": 5117.9,
+            "spectral_flatness": 0.2052,
+            "band_energy": {
+              "sub_500": 0.3118,
+              "low_mid_500_1500": 0.3615,
+              "mid_1500_3000": 0.1172,
+              "presence_3000_6000": 0.1421,
+              "air_6000_plus": 0.0674
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.828,
+            "envelope_contrast": 1.142,
+            "burst_share": 0.182
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.0,
+                "end_s": 0.09,
+                "duration_s": 0.09,
+                "metrics": {
+                  "duration_s": 0.09,
+                  "peak": 0.4117,
+                  "rms": 0.1671,
+                  "spectral_centroid_hz": 2031.5,
+                  "zero_crossings_per_s": 1280.0,
+                  "spectral_spread_hz": 2309.6,
+                  "spectral_rolloff_85_hz": 5353.9,
+                  "spectral_flatness": 0.2359,
+                  "band_energy": {
+                    "sub_500": 0.2852,
+                    "low_mid_500_1500": 0.3513,
+                    "mid_1500_3000": 0.1294,
+                    "presence_3000_6000": 0.1622,
+                    "air_6000_plus": 0.0719
+                  },
+                  "attack_peak_position": 0.0,
+                  "decay_ratio": 0.883,
+                  "envelope_contrast": 1.115,
+                  "burst_share": 0.25
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1494,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.0,
+                "end_s": 0.09
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.04,
+          "spectral_centroid_hz": 71.4,
+          "zero_crossings_per_s": 698.8,
+          "rms": 0.0287,
+          "spectral_spread_hz": 111.0,
+          "spectral_rolloff_85_hz": 111.2,
+          "spectral_flatness": 0.0227,
+          "band_shape_distance": 0.0159,
+          "attack_peak_position": 0.418,
+          "decay_ratio": 0.235,
+          "envelope_contrast": 2.19,
+          "burst_share": 0.02
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.11,
+          "spectral_centroid_hz": 113.7,
+          "zero_crossings_per_s": 438.9,
+          "rms": 0.014,
+          "spectral_spread_hz": 534.1,
+          "spectral_rolloff_85_hz": 1304.6,
+          "spectral_flatness": 0.006,
+          "band_shape_distance": 0.2512,
+          "attack_peak_position": 0.257,
+          "decay_ratio": 0.061,
+          "envelope_contrast": 0.852,
+          "burst_share": 0.179
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.15,
+          "spectral_centroid_hz": 42.3,
+          "zero_crossings_per_s": 259.9,
+          "rms": 0.0147,
+          "spectral_spread_hz": 645.1,
+          "spectral_rolloff_85_hz": 1415.8,
+          "spectral_flatness": 0.0167,
+          "band_shape_distance": 0.266,
+          "attack_peak_position": 0.675,
+          "decay_ratio": 0.174,
+          "envelope_contrast": 3.042,
+          "burst_share": 0.159
+        },
+        "referenceWindowStatus": "active-segment-detected"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.1,
+          "end_s": 0.38,
+          "score": 0.878,
+          "metrics": {
+            "duration_s": 0.28,
+            "peak": 0.4068,
+            "rms": 0.1363,
+            "spectral_centroid_hz": 2080.9,
+            "zero_crossings_per_s": 2364.3,
+            "spectral_spread_hz": 2378.7,
+            "spectral_rolloff_85_hz": 5332.1,
+            "spectral_flatness": 0.2422,
+            "band_energy": {
+              "sub_500": 0.2761,
+              "low_mid_500_1500": 0.3317,
+              "mid_1500_3000": 0.1617,
+              "presence_3000_6000": 0.1499,
+              "air_6000_plus": 0.0806
+            },
+            "attack_peak_position": 0.857,
+            "decay_ratio": 1.035,
+            "envelope_contrast": 1.108,
+            "burst_share": 0.25
+          }
+        }
+      ],
+      "referenceSegmentation": {
+        "segments": [
+          {
+            "role": "onset",
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09,
+            "metrics": {
+              "duration_s": 0.09,
+              "peak": 0.4117,
+              "rms": 0.1671,
+              "spectral_centroid_hz": 2031.5,
+              "zero_crossings_per_s": 1280.0,
+              "spectral_spread_hz": 2309.6,
+              "spectral_rolloff_85_hz": 5353.9,
+              "spectral_flatness": 0.2359,
+              "band_energy": {
+                "sub_500": 0.2852,
+                "low_mid_500_1500": 0.3513,
+                "mid_1500_3000": 0.1294,
+                "presence_3000_6000": 0.1622,
+                "air_6000_plus": 0.0719
+              },
+              "attack_peak_position": 0.0,
+              "decay_ratio": 0.883,
+              "envelope_contrast": 1.115,
+              "burst_share": 0.25
+            }
+          }
+        ],
+        "summary": {
+          "segmentCount": 1,
+          "status": "single-reference-body",
+          "thresholdRms": 0.1494,
+          "dominantRole": "onset",
+          "dominantWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09
+          }
+        }
+      },
+      "segmentRoleComparisons": [
+        {
+          "role": "onset",
+          "referenceWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09
+          },
+          "auroraWindow": {
+            "start_s": 0.04,
+            "end_s": 0.2,
+            "duration_s": 0.16
+          },
+          "syntheticGalagaWindow": {
+            "start_s": 0.08,
+            "end_s": 0.24,
+            "duration_s": 0.16
+          },
+          "auroraExactRoleMatch": true,
+          "syntheticGalagaExactRoleMatch": true,
+          "auroraVsReference": {
+            "duration_s": 0.07,
+            "spectral_centroid_hz": 0.4,
+            "zero_crossings_per_s": 1556.9,
+            "rms": 0.0409,
+            "spectral_spread_hz": 553.3,
+            "spectral_rolloff_85_hz": 1558.9,
+            "spectral_flatness": 0.0009,
+            "band_shape_distance": 0.2197,
+            "attack_peak_position": 0.2,
+            "decay_ratio": 0.135,
+            "envelope_contrast": 0.002,
+            "burst_share": 0.036
+          },
+          "syntheticGalagaVsReference": {
+            "duration_s": 0.07,
+            "spectral_centroid_hz": 44.9,
+            "zero_crossings_per_s": 1293.9,
+            "rms": 0.0238,
+            "spectral_spread_hz": 683.9,
+            "spectral_rolloff_85_hz": 1621.5,
+            "spectral_flatness": 0.0466,
+            "band_shape_distance": 0.244,
+            "attack_peak_position": 0.85,
+            "decay_ratio": 0.07,
+            "envelope_contrast": 0.035,
+            "burst_share": 0.012
+          },
+          "auroraSegmentRisk10": 3.81,
+          "syntheticGalagaSegmentRisk10": 4.03,
+          "interpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+        }
+      ],
+      "cadencePressureAnalysis": null
+    },
+    {
+      "id": "perfect-measured-onset-air-tail-r01",
+      "label": "Perfect measured onset with air tail",
+      "focus": "Candidate comparison for Challenge Perfect.",
+      "cue": "challengePerfect",
+      "analysisPolicy": {},
+      "variants": {
+        "aurora": {
+          "label": "Perfect measured onset with air tail",
+          "wav": "samples/perfect-measured-onset-air-tail-r01.wav",
+          "metrics": {
+            "duration_s": 1.5,
+            "peak": 0.6577,
+            "rms": 0.1356,
+            "spectral_centroid_hz": 1918.1,
+            "zero_crossings_per_s": 1668.7,
+            "spectral_spread_hz": 1698.0,
+            "spectral_rolloff_85_hz": 3724.0,
+            "spectral_flatness": 0.1697,
+            "band_energy": {
+              "sub_500": 0.1879,
+              "low_mid_500_1500": 0.2953,
+              "mid_1500_3000": 0.2924,
+              "presence_3000_6000": 0.1964,
+              "air_6000_plus": 0.028
+            },
+            "attack_peak_position": 0.406,
+            "decay_ratio": 1.247,
+            "envelope_contrast": 2.521,
+            "burst_share": 0.298
+          },
+          "activeWindow": {
+            "start_s": 0.559,
+            "end_s": 0.868,
+            "duration_s": 0.31,
+            "coverage": 0.258,
+            "threshold_rms": 0.1047
+          },
+          "analysisWindow": {
+            "start_s": 0.08,
+            "end_s": 1.28,
+            "duration_s": 1.2
+          },
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.31,
+            "peak": 0.6414,
+            "rms": 0.1413,
+            "spectral_centroid_hz": 1968.2,
+            "zero_crossings_per_s": 1599.0,
+            "spectral_spread_hz": 1633.8,
+            "spectral_rolloff_85_hz": 3737.5,
+            "spectral_flatness": 0.1925,
+            "band_energy": {
+              "sub_500": 0.1494,
+              "low_mid_500_1500": 0.2985,
+              "mid_1500_3000": 0.3194,
+              "presence_3000_6000": 0.2075,
+              "air_6000_plus": 0.0251
+            },
+            "attack_peak_position": 0.684,
+            "decay_ratio": 1.02,
+            "envelope_contrast": 4.032,
+            "burst_share": 0.385
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.07,
+                "end_s": 0.23,
+                "duration_s": 0.16,
+                "metrics": {
+                  "duration_s": 0.16,
+                  "peak": 0.6414,
+                  "rms": 0.1902,
+                  "spectral_centroid_hz": 1999.0,
+                  "zero_crossings_per_s": 2598.9,
+                  "spectral_spread_hz": 1627.5,
+                  "spectral_rolloff_85_hz": 3770.0,
+                  "spectral_flatness": 0.1932,
+                  "band_energy": {
+                    "sub_500": 0.1348,
+                    "low_mid_500_1500": 0.3023,
+                    "mid_1500_3000": 0.326,
+                    "presence_3000_6000": 0.2116,
+                    "air_6000_plus": 0.0252
+                  },
+                  "attack_peak_position": 0.85,
+                  "decay_ratio": 1.006,
+                  "envelope_contrast": 1.075,
+                  "burst_share": 0.238
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1037,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.07,
+                "end_s": 0.23
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.6581,
+            "rms": 0.1193,
+            "spectral_centroid_hz": 1959.4,
+            "zero_crossings_per_s": 2634.5,
+            "spectral_spread_hz": 1707.3,
+            "spectral_rolloff_85_hz": 3688.1,
+            "spectral_flatness": 0.2236,
+            "band_energy": {
+              "sub_500": 0.1638,
+              "low_mid_500_1500": 0.2975,
+              "mid_1500_3000": 0.3118,
+              "presence_3000_6000": 0.197,
+              "air_6000_plus": 0.0299
+            },
+            "attack_peak_position": 1.0,
+            "decay_ratio": 12.893,
+            "envelope_contrast": 4.444,
+            "burst_share": 0.264
+          },
+          "activeWindow": {
+            "start_s": 0.379,
+            "end_s": 0.699,
+            "duration_s": 0.32,
+            "coverage": 0.38,
+            "threshold_rms": 0.071
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.32,
+            "peak": 0.6281,
+            "rms": 0.1397,
+            "spectral_centroid_hz": 1957.5,
+            "zero_crossings_per_s": 1583.5,
+            "spectral_spread_hz": 1626.6,
+            "spectral_rolloff_85_hz": 3702.1,
+            "spectral_flatness": 0.1885,
+            "band_energy": {
+              "sub_500": 0.1489,
+              "low_mid_500_1500": 0.3012,
+              "mid_1500_3000": 0.3194,
+              "presence_3000_6000": 0.2059,
+              "air_6000_plus": 0.0247
+            },
+            "attack_peak_position": 0.675,
+            "decay_ratio": 1.002,
+            "envelope_contrast": 4.184,
+            "burst_share": 0.341
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.08,
+                "end_s": 0.24,
+                "duration_s": 0.16,
+                "metrics": {
+                  "duration_s": 0.16,
+                  "peak": 0.6281,
+                  "rms": 0.1909,
+                  "spectral_centroid_hz": 1986.6,
+                  "zero_crossings_per_s": 2573.9,
+                  "spectral_spread_hz": 1625.7,
+                  "spectral_rolloff_85_hz": 3732.4,
+                  "spectral_flatness": 0.1893,
+                  "band_energy": {
+                    "sub_500": 0.1372,
+                    "low_mid_500_1500": 0.3021,
+                    "mid_1500_3000": 0.3256,
+                    "presence_3000_6000": 0.21,
+                    "air_6000_plus": 0.0251
+                  },
+                  "attack_peak_position": 0.85,
+                  "decay_ratio": 0.953,
+                  "envelope_contrast": 1.08,
+                  "burst_share": 0.238
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1045,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.08,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2,
+            "spectral_spread_hz": 2399.6,
+            "spectral_rolloff_85_hz": 5333.3,
+            "spectral_flatness": 0.2305,
+            "band_energy": {
+              "sub_500": 0.2965,
+              "low_mid_500_1500": 0.3324,
+              "mid_1500_3000": 0.146,
+              "presence_3000_6000": 0.1411,
+              "air_6000_plus": 0.0841
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.915,
+            "envelope_contrast": 1.163,
+            "burst_share": 0.262
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.17,
+            "duration_s": 0.17,
+            "coverage": 0.354,
+            "threshold_rms": 0.1415
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.17,
+            "peak": 0.4117,
+            "rms": 0.1544,
+            "spectral_centroid_hz": 1915.2,
+            "zero_crossings_per_s": 1843.4,
+            "spectral_spread_hz": 2271.7,
+            "spectral_rolloff_85_hz": 5117.9,
+            "spectral_flatness": 0.2052,
+            "band_energy": {
+              "sub_500": 0.3118,
+              "low_mid_500_1500": 0.3615,
+              "mid_1500_3000": 0.1172,
+              "presence_3000_6000": 0.1421,
+              "air_6000_plus": 0.0674
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.828,
+            "envelope_contrast": 1.142,
+            "burst_share": 0.182
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.0,
+                "end_s": 0.09,
+                "duration_s": 0.09,
+                "metrics": {
+                  "duration_s": 0.09,
+                  "peak": 0.4117,
+                  "rms": 0.1671,
+                  "spectral_centroid_hz": 2031.5,
+                  "zero_crossings_per_s": 1280.0,
+                  "spectral_spread_hz": 2309.6,
+                  "spectral_rolloff_85_hz": 5353.9,
+                  "spectral_flatness": 0.2359,
+                  "band_energy": {
+                    "sub_500": 0.2852,
+                    "low_mid_500_1500": 0.3513,
+                    "mid_1500_3000": 0.1294,
+                    "presence_3000_6000": 0.1622,
+                    "air_6000_plus": 0.0719
+                  },
+                  "attack_peak_position": 0.0,
+                  "decay_ratio": 0.883,
+                  "envelope_contrast": 1.115,
+                  "burst_share": 0.25
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1494,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.0,
+                "end_s": 0.09
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.01,
+          "spectral_centroid_hz": 10.7,
+          "zero_crossings_per_s": 15.5,
+          "rms": 0.0016,
+          "spectral_spread_hz": 7.2,
+          "spectral_rolloff_85_hz": 35.4,
+          "spectral_flatness": 0.004,
+          "band_shape_distance": 0.0026,
+          "attack_peak_position": 0.009,
+          "decay_ratio": 0.018,
+          "envelope_contrast": 0.152,
+          "burst_share": 0.044
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.14,
+          "spectral_centroid_hz": 53.0,
+          "zero_crossings_per_s": 244.4,
+          "rms": 0.0131,
+          "spectral_spread_hz": 637.9,
+          "spectral_rolloff_85_hz": 1380.4,
+          "spectral_flatness": 0.0127,
+          "band_shape_distance": 0.2676,
+          "attack_peak_position": 0.684,
+          "decay_ratio": 0.192,
+          "envelope_contrast": 2.89,
+          "burst_share": 0.203
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.15,
+          "spectral_centroid_hz": 42.3,
+          "zero_crossings_per_s": 259.9,
+          "rms": 0.0147,
+          "spectral_spread_hz": 645.1,
+          "spectral_rolloff_85_hz": 1415.8,
+          "spectral_flatness": 0.0167,
+          "band_shape_distance": 0.266,
+          "attack_peak_position": 0.675,
+          "decay_ratio": 0.174,
+          "envelope_contrast": 3.042,
+          "burst_share": 0.159
+        },
+        "referenceWindowStatus": "active-segment-detected"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.31,
+          "score": 0.816,
+          "metrics": {
+            "duration_s": 0.31,
+            "peak": 0.4117,
+            "rms": 0.1457,
+            "spectral_centroid_hz": 1949.4,
+            "zero_crossings_per_s": 2058.2,
+            "spectral_spread_hz": 2289.3,
+            "spectral_rolloff_85_hz": 5081.0,
+            "spectral_flatness": 0.2231,
+            "band_energy": {
+              "sub_500": 0.3059,
+              "low_mid_500_1500": 0.3292,
+              "mid_1500_3000": 0.1515,
+              "presence_3000_6000": 0.1438,
+              "air_6000_plus": 0.0696
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.86,
+            "envelope_contrast": 1.178,
+            "burst_share": 0.256
+          }
+        }
+      ],
+      "referenceSegmentation": {
+        "segments": [
+          {
+            "role": "onset",
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09,
+            "metrics": {
+              "duration_s": 0.09,
+              "peak": 0.4117,
+              "rms": 0.1671,
+              "spectral_centroid_hz": 2031.5,
+              "zero_crossings_per_s": 1280.0,
+              "spectral_spread_hz": 2309.6,
+              "spectral_rolloff_85_hz": 5353.9,
+              "spectral_flatness": 0.2359,
+              "band_energy": {
+                "sub_500": 0.2852,
+                "low_mid_500_1500": 0.3513,
+                "mid_1500_3000": 0.1294,
+                "presence_3000_6000": 0.1622,
+                "air_6000_plus": 0.0719
+              },
+              "attack_peak_position": 0.0,
+              "decay_ratio": 0.883,
+              "envelope_contrast": 1.115,
+              "burst_share": 0.25
+            }
+          }
+        ],
+        "summary": {
+          "segmentCount": 1,
+          "status": "single-reference-body",
+          "thresholdRms": 0.1494,
+          "dominantRole": "onset",
+          "dominantWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09
+          }
+        }
+      },
+      "segmentRoleComparisons": [
+        {
+          "role": "onset",
+          "referenceWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09
+          },
+          "auroraWindow": {
+            "start_s": 0.07,
+            "end_s": 0.23,
+            "duration_s": 0.16
+          },
+          "syntheticGalagaWindow": {
+            "start_s": 0.08,
+            "end_s": 0.24,
+            "duration_s": 0.16
+          },
+          "auroraExactRoleMatch": true,
+          "syntheticGalagaExactRoleMatch": true,
+          "auroraVsReference": {
+            "duration_s": 0.07,
+            "spectral_centroid_hz": 32.5,
+            "zero_crossings_per_s": 1318.9,
+            "rms": 0.0231,
+            "spectral_spread_hz": 682.1,
+            "spectral_rolloff_85_hz": 1583.9,
+            "spectral_flatness": 0.0427,
+            "band_shape_distance": 0.2461,
+            "attack_peak_position": 0.85,
+            "decay_ratio": 0.123,
+            "envelope_contrast": 0.04,
+            "burst_share": 0.012
+          },
+          "syntheticGalagaVsReference": {
+            "duration_s": 0.07,
+            "spectral_centroid_hz": 44.9,
+            "zero_crossings_per_s": 1293.9,
+            "rms": 0.0238,
+            "spectral_spread_hz": 683.9,
+            "spectral_rolloff_85_hz": 1621.5,
+            "spectral_flatness": 0.0466,
+            "band_shape_distance": 0.244,
+            "attack_peak_position": 0.85,
+            "decay_ratio": 0.07,
+            "envelope_contrast": 0.035,
+            "burst_share": 0.012
+          },
+          "auroraSegmentRisk10": 4.03,
+          "syntheticGalagaSegmentRisk10": 4.03,
+          "interpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+        }
+      ],
+      "cadencePressureAnalysis": null
+    },
+    {
+      "id": "perfect-measured-onset-air-tail-r02",
+      "label": "Perfect measured onset with air tail",
+      "focus": "Candidate comparison for Challenge Perfect.",
+      "cue": "challengePerfect",
+      "analysisPolicy": {},
+      "variants": {
+        "aurora": {
+          "label": "Perfect measured onset with air tail",
+          "wav": "samples/perfect-measured-onset-air-tail-r02.wav",
+          "metrics": {
+            "duration_s": 1.5,
+            "peak": 0.7291,
+            "rms": 0.1485,
+            "spectral_centroid_hz": 1944.7,
+            "zero_crossings_per_s": 1791.3,
+            "spectral_spread_hz": 1685.3,
+            "spectral_rolloff_85_hz": 3766.0,
+            "spectral_flatness": 0.1858,
+            "band_energy": {
+              "sub_500": 0.174,
+              "low_mid_500_1500": 0.2978,
+              "mid_1500_3000": 0.2982,
+              "presence_3000_6000": 0.2027,
+              "air_6000_plus": 0.0273
+            },
+            "attack_peak_position": 0.166,
+            "decay_ratio": 1.076,
+            "envelope_contrast": 2.553,
+            "burst_share": 0.346
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.27,
+            "duration_s": 0.27,
+            "coverage": 0.225,
+            "threshold_rms": 0.1097
+          },
+          "analysisWindow": {
+            "start_s": 0.08,
+            "end_s": 1.28,
+            "duration_s": 1.2
+          },
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.27,
+            "peak": 0.7291,
+            "rms": 0.1713,
+            "spectral_centroid_hz": 2022.9,
+            "zero_crossings_per_s": 2210.9,
+            "spectral_spread_hz": 1717.7,
+            "spectral_rolloff_85_hz": 3813.5,
+            "spectral_flatness": 0.2004,
+            "band_energy": {
+              "sub_500": 0.1467,
+              "low_mid_500_1500": 0.3144,
+              "mid_1500_3000": 0.2994,
+              "presence_3000_6000": 0.209,
+              "air_6000_plus": 0.0306
+            },
+            "attack_peak_position": 0.636,
+            "decay_ratio": 0.724,
+            "envelope_contrast": 2.034,
+            "burst_share": 0.382
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.03,
+                "end_s": 0.19,
+                "duration_s": 0.16,
+                "metrics": {
+                  "duration_s": 0.16,
+                  "peak": 0.7291,
+                  "rms": 0.2109,
+                  "spectral_centroid_hz": 1997.8,
+                  "zero_crossings_per_s": 2736.7,
+                  "spectral_spread_hz": 1705.2,
+                  "spectral_rolloff_85_hz": 3795.0,
+                  "spectral_flatness": 0.2083,
+                  "band_energy": {
+                    "sub_500": 0.151,
+                    "low_mid_500_1500": 0.3128,
+                    "mid_1500_3000": 0.3002,
+                    "presence_3000_6000": 0.2064,
+                    "air_6000_plus": 0.0295
+                  },
+                  "attack_peak_position": 0.85,
+                  "decay_ratio": 0.942,
+                  "envelope_contrast": 1.067,
+                  "burst_share": 0.286
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1374,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.03,
+                "end_s": 0.19
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.6581,
+            "rms": 0.1193,
+            "spectral_centroid_hz": 1959.4,
+            "zero_crossings_per_s": 2634.5,
+            "spectral_spread_hz": 1707.3,
+            "spectral_rolloff_85_hz": 3688.1,
+            "spectral_flatness": 0.2236,
+            "band_energy": {
+              "sub_500": 0.1638,
+              "low_mid_500_1500": 0.2975,
+              "mid_1500_3000": 0.3118,
+              "presence_3000_6000": 0.197,
+              "air_6000_plus": 0.0299
+            },
+            "attack_peak_position": 1.0,
+            "decay_ratio": 12.893,
+            "envelope_contrast": 4.444,
+            "burst_share": 0.264
+          },
+          "activeWindow": {
+            "start_s": 0.379,
+            "end_s": 0.699,
+            "duration_s": 0.32,
+            "coverage": 0.38,
+            "threshold_rms": 0.071
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.32,
+            "peak": 0.6281,
+            "rms": 0.1397,
+            "spectral_centroid_hz": 1957.5,
+            "zero_crossings_per_s": 1583.5,
+            "spectral_spread_hz": 1626.6,
+            "spectral_rolloff_85_hz": 3702.1,
+            "spectral_flatness": 0.1885,
+            "band_energy": {
+              "sub_500": 0.1489,
+              "low_mid_500_1500": 0.3012,
+              "mid_1500_3000": 0.3194,
+              "presence_3000_6000": 0.2059,
+              "air_6000_plus": 0.0247
+            },
+            "attack_peak_position": 0.675,
+            "decay_ratio": 1.002,
+            "envelope_contrast": 4.184,
+            "burst_share": 0.341
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.08,
+                "end_s": 0.24,
+                "duration_s": 0.16,
+                "metrics": {
+                  "duration_s": 0.16,
+                  "peak": 0.6281,
+                  "rms": 0.1909,
+                  "spectral_centroid_hz": 1986.6,
+                  "zero_crossings_per_s": 2573.9,
+                  "spectral_spread_hz": 1625.7,
+                  "spectral_rolloff_85_hz": 3732.4,
+                  "spectral_flatness": 0.1893,
+                  "band_energy": {
+                    "sub_500": 0.1372,
+                    "low_mid_500_1500": 0.3021,
+                    "mid_1500_3000": 0.3256,
+                    "presence_3000_6000": 0.21,
+                    "air_6000_plus": 0.0251
+                  },
+                  "attack_peak_position": 0.85,
+                  "decay_ratio": 0.953,
+                  "envelope_contrast": 1.08,
+                  "burst_share": 0.238
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1045,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.08,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2,
+            "spectral_spread_hz": 2399.6,
+            "spectral_rolloff_85_hz": 5333.3,
+            "spectral_flatness": 0.2305,
+            "band_energy": {
+              "sub_500": 0.2965,
+              "low_mid_500_1500": 0.3324,
+              "mid_1500_3000": 0.146,
+              "presence_3000_6000": 0.1411,
+              "air_6000_plus": 0.0841
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.915,
+            "envelope_contrast": 1.163,
+            "burst_share": 0.262
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.17,
+            "duration_s": 0.17,
+            "coverage": 0.354,
+            "threshold_rms": 0.1415
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.17,
+            "peak": 0.4117,
+            "rms": 0.1544,
+            "spectral_centroid_hz": 1915.2,
+            "zero_crossings_per_s": 1843.4,
+            "spectral_spread_hz": 2271.7,
+            "spectral_rolloff_85_hz": 5117.9,
+            "spectral_flatness": 0.2052,
+            "band_energy": {
+              "sub_500": 0.3118,
+              "low_mid_500_1500": 0.3615,
+              "mid_1500_3000": 0.1172,
+              "presence_3000_6000": 0.1421,
+              "air_6000_plus": 0.0674
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.828,
+            "envelope_contrast": 1.142,
+            "burst_share": 0.182
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.0,
+                "end_s": 0.09,
+                "duration_s": 0.09,
+                "metrics": {
+                  "duration_s": 0.09,
+                  "peak": 0.4117,
+                  "rms": 0.1671,
+                  "spectral_centroid_hz": 2031.5,
+                  "zero_crossings_per_s": 1280.0,
+                  "spectral_spread_hz": 2309.6,
+                  "spectral_rolloff_85_hz": 5353.9,
+                  "spectral_flatness": 0.2359,
+                  "band_energy": {
+                    "sub_500": 0.2852,
+                    "low_mid_500_1500": 0.3513,
+                    "mid_1500_3000": 0.1294,
+                    "presence_3000_6000": 0.1622,
+                    "air_6000_plus": 0.0719
+                  },
+                  "attack_peak_position": 0.0,
+                  "decay_ratio": 0.883,
+                  "envelope_contrast": 1.115,
+                  "burst_share": 0.25
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1494,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.0,
+                "end_s": 0.09
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.05,
+          "spectral_centroid_hz": 65.4,
+          "zero_crossings_per_s": 627.4,
+          "rms": 0.0316,
+          "spectral_spread_hz": 91.1,
+          "spectral_rolloff_85_hz": 111.4,
+          "spectral_flatness": 0.0119,
+          "band_shape_distance": 0.0222,
+          "attack_peak_position": 0.039,
+          "decay_ratio": 0.278,
+          "envelope_contrast": 2.15,
+          "burst_share": 0.041
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.1,
+          "spectral_centroid_hz": 107.7,
+          "zero_crossings_per_s": 367.5,
+          "rms": 0.0169,
+          "spectral_spread_hz": 554.0,
+          "spectral_rolloff_85_hz": 1304.4,
+          "spectral_flatness": 0.0048,
+          "band_shape_distance": 0.249,
+          "attack_peak_position": 0.636,
+          "decay_ratio": 0.104,
+          "envelope_contrast": 0.892,
+          "burst_share": 0.2
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.15,
+          "spectral_centroid_hz": 42.3,
+          "zero_crossings_per_s": 259.9,
+          "rms": 0.0147,
+          "spectral_spread_hz": 645.1,
+          "spectral_rolloff_85_hz": 1415.8,
+          "spectral_flatness": 0.0167,
+          "band_shape_distance": 0.266,
+          "attack_peak_position": 0.675,
+          "decay_ratio": 0.174,
+          "envelope_contrast": 3.042,
+          "burst_share": 0.159
+        },
+        "referenceWindowStatus": "active-segment-detected"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.05,
+          "end_s": 0.32,
+          "score": 0.892,
+          "metrics": {
+            "duration_s": 0.27,
+            "peak": 0.4068,
+            "rms": 0.1391,
+            "spectral_centroid_hz": 2128.2,
+            "zero_crossings_per_s": 2207.6,
+            "spectral_spread_hz": 2351.7,
+            "spectral_rolloff_85_hz": 5363.4,
+            "spectral_flatness": 0.2216,
+            "band_energy": {
+              "sub_500": 0.2408,
+              "low_mid_500_1500": 0.3586,
+              "mid_1500_3000": 0.1688,
+              "presence_3000_6000": 0.1512,
+              "air_6000_plus": 0.0806
+            },
+            "attack_peak_position": 0.061,
+            "decay_ratio": 0.907,
+            "envelope_contrast": 1.144,
+            "burst_share": 0.235
+          }
+        }
+      ],
+      "referenceSegmentation": {
+        "segments": [
+          {
+            "role": "onset",
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09,
+            "metrics": {
+              "duration_s": 0.09,
+              "peak": 0.4117,
+              "rms": 0.1671,
+              "spectral_centroid_hz": 2031.5,
+              "zero_crossings_per_s": 1280.0,
+              "spectral_spread_hz": 2309.6,
+              "spectral_rolloff_85_hz": 5353.9,
+              "spectral_flatness": 0.2359,
+              "band_energy": {
+                "sub_500": 0.2852,
+                "low_mid_500_1500": 0.3513,
+                "mid_1500_3000": 0.1294,
+                "presence_3000_6000": 0.1622,
+                "air_6000_plus": 0.0719
+              },
+              "attack_peak_position": 0.0,
+              "decay_ratio": 0.883,
+              "envelope_contrast": 1.115,
+              "burst_share": 0.25
+            }
+          }
+        ],
+        "summary": {
+          "segmentCount": 1,
+          "status": "single-reference-body",
+          "thresholdRms": 0.1494,
+          "dominantRole": "onset",
+          "dominantWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09
+          }
+        }
+      },
+      "segmentRoleComparisons": [
+        {
+          "role": "onset",
+          "referenceWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09
+          },
+          "auroraWindow": {
+            "start_s": 0.03,
+            "end_s": 0.19,
+            "duration_s": 0.16
+          },
+          "syntheticGalagaWindow": {
+            "start_s": 0.08,
+            "end_s": 0.24,
+            "duration_s": 0.16
+          },
+          "auroraExactRoleMatch": true,
+          "syntheticGalagaExactRoleMatch": true,
+          "auroraVsReference": {
+            "duration_s": 0.07,
+            "spectral_centroid_hz": 33.7,
+            "zero_crossings_per_s": 1456.7,
+            "rms": 0.0438,
+            "spectral_spread_hz": 604.4,
+            "spectral_rolloff_85_hz": 1558.9,
+            "spectral_flatness": 0.0276,
+            "band_shape_distance": 0.2151,
+            "attack_peak_position": 0.85,
+            "decay_ratio": 0.059,
+            "envelope_contrast": 0.048,
+            "burst_share": 0.036
+          },
+          "syntheticGalagaVsReference": {
+            "duration_s": 0.07,
+            "spectral_centroid_hz": 44.9,
+            "zero_crossings_per_s": 1293.9,
+            "rms": 0.0238,
+            "spectral_spread_hz": 683.9,
+            "spectral_rolloff_85_hz": 1621.5,
+            "spectral_flatness": 0.0466,
+            "band_shape_distance": 0.244,
+            "attack_peak_position": 0.85,
+            "decay_ratio": 0.07,
+            "envelope_contrast": 0.035,
+            "burst_share": 0.012
+          },
+          "auroraSegmentRisk10": 4.25,
+          "syntheticGalagaSegmentRisk10": 4.03,
+          "interpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+        }
+      ],
+      "cadencePressureAnalysis": null
+    },
+    {
+      "id": "perfect-measured-onset-air-tail-r03",
+      "label": "Perfect measured onset with air tail",
+      "focus": "Candidate comparison for Challenge Perfect.",
+      "cue": "challengePerfect",
+      "analysisPolicy": {},
+      "variants": {
+        "aurora": {
+          "label": "Perfect measured onset with air tail",
+          "wav": "samples/perfect-measured-onset-air-tail-r03.wav",
+          "metrics": {
+            "duration_s": 1.5,
+            "peak": 0.6271,
+            "rms": 0.1359,
+            "spectral_centroid_hz": 1921.2,
+            "zero_crossings_per_s": 1680.7,
+            "spectral_spread_hz": 1708.0,
+            "spectral_rolloff_85_hz": 3758.0,
+            "spectral_flatness": 0.1727,
+            "band_energy": {
+              "sub_500": 0.1881,
+              "low_mid_500_1500": 0.2949,
+              "mid_1500_3000": 0.2923,
+              "presence_3000_6000": 0.196,
+              "air_6000_plus": 0.0287
+            },
+            "attack_peak_position": 0.824,
+            "decay_ratio": 1.2,
+            "envelope_contrast": 2.743,
+            "burst_share": 0.287
+          },
+          "activeWindow": {
+            "start_s": 0.549,
+            "end_s": 0.858,
+            "duration_s": 0.31,
+            "coverage": 0.258,
+            "threshold_rms": 0.1043
+          },
+          "analysisWindow": {
+            "start_s": 0.08,
+            "end_s": 1.28,
+            "duration_s": 1.2
+          },
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.31,
+            "peak": 0.6231,
+            "rms": 0.1417,
+            "spectral_centroid_hz": 1967.9,
+            "zero_crossings_per_s": 1563.5,
+            "spectral_spread_hz": 1625.7,
+            "spectral_rolloff_85_hz": 3701.9,
+            "spectral_flatness": 0.1903,
+            "band_energy": {
+              "sub_500": 0.1473,
+              "low_mid_500_1500": 0.2985,
+              "mid_1500_3000": 0.322,
+              "presence_3000_6000": 0.2071,
+              "air_6000_plus": 0.025
+            },
+            "attack_peak_position": 0.684,
+            "decay_ratio": 1.04,
+            "envelope_contrast": 4.174,
+            "burst_share": 0.333
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.07,
+                "end_s": 0.24,
+                "duration_s": 0.17,
+                "metrics": {
+                  "duration_s": 0.17,
+                  "peak": 0.6231,
+                  "rms": 0.1856,
+                  "spectral_centroid_hz": 2001.0,
+                  "zero_crossings_per_s": 2434.3,
+                  "spectral_spread_hz": 1641.5,
+                  "spectral_rolloff_85_hz": 3748.7,
+                  "spectral_flatness": 0.2048,
+                  "band_energy": {
+                    "sub_500": 0.1362,
+                    "low_mid_500_1500": 0.3004,
+                    "mid_1500_3000": 0.3265,
+                    "presence_3000_6000": 0.2107,
+                    "air_6000_plus": 0.0262
+                  },
+                  "attack_peak_position": 0.857,
+                  "decay_ratio": 0.953,
+                  "envelope_contrast": 1.086,
+                  "burst_share": 0.364
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1049,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.07,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "galaga": {
+          "label": "Current Aurora baseline",
+          "wav": "samples/baseline-current-r01.wav",
+          "metrics": {
+            "duration_s": 0.84,
+            "peak": 0.6581,
+            "rms": 0.1193,
+            "spectral_centroid_hz": 1959.4,
+            "zero_crossings_per_s": 2634.5,
+            "spectral_spread_hz": 1707.3,
+            "spectral_rolloff_85_hz": 3688.1,
+            "spectral_flatness": 0.2236,
+            "band_energy": {
+              "sub_500": 0.1638,
+              "low_mid_500_1500": 0.2975,
+              "mid_1500_3000": 0.3118,
+              "presence_3000_6000": 0.197,
+              "air_6000_plus": 0.0299
+            },
+            "attack_peak_position": 1.0,
+            "decay_ratio": 12.893,
+            "envelope_contrast": 4.444,
+            "burst_share": 0.264
+          },
+          "activeWindow": {
+            "start_s": 0.379,
+            "end_s": 0.699,
+            "duration_s": 0.32,
+            "coverage": 0.38,
+            "threshold_rms": 0.071
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.32,
+            "peak": 0.6281,
+            "rms": 0.1397,
+            "spectral_centroid_hz": 1957.5,
+            "zero_crossings_per_s": 1583.5,
+            "spectral_spread_hz": 1626.6,
+            "spectral_rolloff_85_hz": 3702.1,
+            "spectral_flatness": 0.1885,
+            "band_energy": {
+              "sub_500": 0.1489,
+              "low_mid_500_1500": 0.3012,
+              "mid_1500_3000": 0.3194,
+              "presence_3000_6000": 0.2059,
+              "air_6000_plus": 0.0247
+            },
+            "attack_peak_position": 0.675,
+            "decay_ratio": 1.002,
+            "envelope_contrast": 4.184,
+            "burst_share": 0.341
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.08,
+                "end_s": 0.24,
+                "duration_s": 0.16,
+                "metrics": {
+                  "duration_s": 0.16,
+                  "peak": 0.6281,
+                  "rms": 0.1909,
+                  "spectral_centroid_hz": 1986.6,
+                  "zero_crossings_per_s": 2573.9,
+                  "spectral_spread_hz": 1625.7,
+                  "spectral_rolloff_85_hz": 3732.4,
+                  "spectral_flatness": 0.1893,
+                  "band_energy": {
+                    "sub_500": 0.1372,
+                    "low_mid_500_1500": 0.3021,
+                    "mid_1500_3000": 0.3256,
+                    "presence_3000_6000": 0.21,
+                    "air_6000_plus": 0.0251
+                  },
+                  "attack_peak_position": 0.85,
+                  "decay_ratio": 0.953,
+                  "envelope_contrast": 1.08,
+                  "burst_share": 0.238
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1045,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.08,
+                "end_s": 0.24
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        },
+        "reference": {
+          "label": "Challenging Stage Perfect",
+          "wav": "samples/challenge-perfect-reference.wav",
+          "metrics": {
+            "duration_s": 0.48,
+            "peak": 0.4117,
+            "rms": 0.1421,
+            "spectral_centroid_hz": 2040.1,
+            "zero_crossings_per_s": 2256.2,
+            "spectral_spread_hz": 2399.6,
+            "spectral_rolloff_85_hz": 5333.3,
+            "spectral_flatness": 0.2305,
+            "band_energy": {
+              "sub_500": 0.2965,
+              "low_mid_500_1500": 0.3324,
+              "mid_1500_3000": 0.146,
+              "presence_3000_6000": 0.1411,
+              "air_6000_plus": 0.0841
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.915,
+            "envelope_contrast": 1.163,
+            "burst_share": 0.262
+          },
+          "activeWindow": {
+            "start_s": 0.0,
+            "end_s": 0.17,
+            "duration_s": 0.17,
+            "coverage": 0.354,
+            "threshold_rms": 0.1415
+          },
+          "analysisWindow": null,
+          "activeMetricsSource": "activeWindow",
+          "activeMetrics": {
+            "duration_s": 0.17,
+            "peak": 0.4117,
+            "rms": 0.1544,
+            "spectral_centroid_hz": 1915.2,
+            "zero_crossings_per_s": 1843.4,
+            "spectral_spread_hz": 2271.7,
+            "spectral_rolloff_85_hz": 5117.9,
+            "spectral_flatness": 0.2052,
+            "band_energy": {
+              "sub_500": 0.3118,
+              "low_mid_500_1500": 0.3615,
+              "mid_1500_3000": 0.1172,
+              "presence_3000_6000": 0.1421,
+              "air_6000_plus": 0.0674
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.828,
+            "envelope_contrast": 1.142,
+            "burst_share": 0.182
+          },
+          "eventSegmentation": {
+            "segments": [
+              {
+                "role": "onset",
+                "start_s": 0.0,
+                "end_s": 0.09,
+                "duration_s": 0.09,
+                "metrics": {
+                  "duration_s": 0.09,
+                  "peak": 0.4117,
+                  "rms": 0.1671,
+                  "spectral_centroid_hz": 2031.5,
+                  "zero_crossings_per_s": 1280.0,
+                  "spectral_spread_hz": 2309.6,
+                  "spectral_rolloff_85_hz": 5353.9,
+                  "spectral_flatness": 0.2359,
+                  "band_energy": {
+                    "sub_500": 0.2852,
+                    "low_mid_500_1500": 0.3513,
+                    "mid_1500_3000": 0.1294,
+                    "presence_3000_6000": 0.1622,
+                    "air_6000_plus": 0.0719
+                  },
+                  "attack_peak_position": 0.0,
+                  "decay_ratio": 0.883,
+                  "envelope_contrast": 1.115,
+                  "burst_share": 0.25
+                }
+              }
+            ],
+            "summary": {
+              "segmentCount": 1,
+              "status": "single-reference-body",
+              "thresholdRms": 0.1494,
+              "dominantRole": "onset",
+              "dominantWindow": {
+                "start_s": 0.0,
+                "end_s": 0.09
+              }
+            }
+          },
+          "waveform": null,
+          "spectrogram": null
+        }
+      },
+      "comparisons": {
+        "auroraVsSyntheticGalaga": {
+          "duration_s": 0.01,
+          "spectral_centroid_hz": 10.4,
+          "zero_crossings_per_s": 20.0,
+          "rms": 0.002,
+          "spectral_spread_hz": 0.9,
+          "spectral_rolloff_85_hz": 0.2,
+          "spectral_flatness": 0.0018,
+          "band_shape_distance": 0.0042,
+          "attack_peak_position": 0.009,
+          "decay_ratio": 0.038,
+          "envelope_contrast": 0.01,
+          "burst_share": 0.008
+        },
+        "auroraVsReferenceActive": {
+          "duration_s": 0.14,
+          "spectral_centroid_hz": 52.7,
+          "zero_crossings_per_s": 279.9,
+          "rms": 0.0127,
+          "spectral_spread_hz": 646.0,
+          "spectral_rolloff_85_hz": 1416.0,
+          "spectral_flatness": 0.0149,
+          "band_shape_distance": 0.2699,
+          "attack_peak_position": 0.684,
+          "decay_ratio": 0.212,
+          "envelope_contrast": 3.032,
+          "burst_share": 0.151
+        },
+        "syntheticGalagaVsReferenceActive": {
+          "duration_s": 0.15,
+          "spectral_centroid_hz": 42.3,
+          "zero_crossings_per_s": 259.9,
+          "rms": 0.0147,
+          "spectral_spread_hz": 645.1,
+          "spectral_rolloff_85_hz": 1415.8,
+          "spectral_flatness": 0.0167,
+          "band_shape_distance": 0.266,
+          "attack_peak_position": 0.675,
+          "decay_ratio": 0.174,
+          "envelope_contrast": 3.042,
+          "burst_share": 0.159
+        },
+        "referenceWindowStatus": "active-segment-detected"
+      },
+      "referenceSegmentCandidates": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.31,
+          "score": 0.806,
+          "metrics": {
+            "duration_s": 0.31,
+            "peak": 0.4117,
+            "rms": 0.1457,
+            "spectral_centroid_hz": 1949.4,
+            "zero_crossings_per_s": 2058.2,
+            "spectral_spread_hz": 2289.3,
+            "spectral_rolloff_85_hz": 5081.0,
+            "spectral_flatness": 0.2231,
+            "band_energy": {
+              "sub_500": 0.3059,
+              "low_mid_500_1500": 0.3292,
+              "mid_1500_3000": 0.1515,
+              "presence_3000_6000": 0.1438,
+              "air_6000_plus": 0.0696
+            },
+            "attack_peak_position": 0.0,
+            "decay_ratio": 0.86,
+            "envelope_contrast": 1.178,
+            "burst_share": 0.256
+          }
+        }
+      ],
+      "referenceSegmentation": {
+        "segments": [
+          {
+            "role": "onset",
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09,
+            "metrics": {
+              "duration_s": 0.09,
+              "peak": 0.4117,
+              "rms": 0.1671,
+              "spectral_centroid_hz": 2031.5,
+              "zero_crossings_per_s": 1280.0,
+              "spectral_spread_hz": 2309.6,
+              "spectral_rolloff_85_hz": 5353.9,
+              "spectral_flatness": 0.2359,
+              "band_energy": {
+                "sub_500": 0.2852,
+                "low_mid_500_1500": 0.3513,
+                "mid_1500_3000": 0.1294,
+                "presence_3000_6000": 0.1622,
+                "air_6000_plus": 0.0719
+              },
+              "attack_peak_position": 0.0,
+              "decay_ratio": 0.883,
+              "envelope_contrast": 1.115,
+              "burst_share": 0.25
+            }
+          }
+        ],
+        "summary": {
+          "segmentCount": 1,
+          "status": "single-reference-body",
+          "thresholdRms": 0.1494,
+          "dominantRole": "onset",
+          "dominantWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09
+          }
+        }
+      },
+      "segmentRoleComparisons": [
+        {
+          "role": "onset",
+          "referenceWindow": {
+            "start_s": 0.0,
+            "end_s": 0.09,
+            "duration_s": 0.09
+          },
+          "auroraWindow": {
+            "start_s": 0.07,
+            "end_s": 0.24,
+            "duration_s": 0.17
+          },
+          "syntheticGalagaWindow": {
+            "start_s": 0.08,
+            "end_s": 0.24,
+            "duration_s": 0.16
+          },
+          "auroraExactRoleMatch": true,
+          "syntheticGalagaExactRoleMatch": true,
+          "auroraVsReference": {
+            "duration_s": 0.08,
+            "spectral_centroid_hz": 30.5,
+            "zero_crossings_per_s": 1154.3,
+            "rms": 0.0185,
+            "spectral_spread_hz": 668.1,
+            "spectral_rolloff_85_hz": 1605.2,
+            "spectral_flatness": 0.0311,
+            "band_shape_distance": 0.2456,
+            "attack_peak_position": 0.857,
+            "decay_ratio": 0.07,
+            "envelope_contrast": 0.029,
+            "burst_share": 0.114
+          },
+          "syntheticGalagaVsReference": {
+            "duration_s": 0.07,
+            "spectral_centroid_hz": 44.9,
+            "zero_crossings_per_s": 1293.9,
+            "rms": 0.0238,
+            "spectral_spread_hz": 683.9,
+            "spectral_rolloff_85_hz": 1621.5,
+            "spectral_flatness": 0.0466,
+            "band_shape_distance": 0.244,
+            "attack_peak_position": 0.85,
+            "decay_ratio": 0.07,
+            "envelope_contrast": 0.035,
+            "burst_share": 0.012
+          },
+          "auroraSegmentRisk10": 4.2,
+          "syntheticGalagaSegmentRisk10": 4.03,
+          "interpretation": "onset timbre is the leading gap: band shape/rolloff differ from the reference segment."
+        }
+      ],
+      "cadencePressureAnalysis": null
+    }
+  ],
+  "summary": {
+    "itemCount": 12,
+    "broadReferenceWindowCount": 0,
+    "referenceSegmentCandidateCount": 12,
+    "referenceSegmentCount": 12,
+    "segmentRoleComparisonCount": 12,
+    "averageWorstSegmentRisk10": 4.198,
+    "averageAuroraVsSyntheticGalagaDurationDeltaS": 0.014,
+    "averageAuroraVsReferenceActiveDurationDeltaS": 0.136,
+    "averageAuroraVsReferenceActiveCentroidDeltaHz": 50.675,
+    "averageAuroraVsReferenceBandShapeDistance": 0.259,
+    "averageAuroraVsReferenceEnvelopeDecayDelta": 0.172
+  }
+}

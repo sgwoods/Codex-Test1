@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-focus-candidate-loop-summary",
+  "generatedAt": "2026-05-15T20:23:30.858Z",
+  "branch": "codex/macbook-audio-entry-grounding-cycle",
+  "commit": "c8c7246f",
+  "dirty": true,
+  "gridLimit": 96,
+  "repetitions": 3,
+  "results": [
+    {
+      "key": "rescue-join",
+      "report": "reference-artifacts/analyses/aurora-audio-cue-candidates/2026-05-15-c8c7246f-dirty-audio-focus-202330/rescue-join/report.json",
+      "decision": {
+        "status": "candidate-recommended",
+        "keep": true,
+        "baseline": "baseline-current",
+        "best": "refclip-s2399-d180-v86",
+        "measuredBest": "refclip-s2399-d180-v86",
+        "riskDelta": 2.66,
+        "segmentRiskDelta": 3.73,
+        "durationDeltaSeconds": 0.177,
+        "bandDelta": 0.2155,
+        "reason": "Rescue Join candidate clears measured keeper gates."
+      },
+      "topCandidates": [
+        {
+          "id": "refclip-s2399-d180-v86",
+          "risk10": 0.48,
+          "worstSegmentRisk10": 0.77,
+          "worstSegmentRole": "onset",
+          "durationGapSeconds": 0,
+          "centroidGapHz": 9.9,
+          "bandShapeGap": 0.0228,
+          "lossCompositeScore10": null,
+          "lossCompositeDurationGapSeconds": null,
+          "lossCompositeClears": null,
+          "cadencePressureScore10": null,
+          "cadenceWeakestAxis": "",
+          "maskingSeparationScore10": null,
+          "maskingWeakestAxis": "",
+          "keeperRead": "clears keeper gates"
+        }
+      ]
+    }
+  ]
+}

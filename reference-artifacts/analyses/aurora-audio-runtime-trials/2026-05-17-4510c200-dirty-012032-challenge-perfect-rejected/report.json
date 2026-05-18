@@ -1,0 +1,253 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-audio-runtime-trial-decision",
+  "generatedAt": "2026-05-17T01:20:32.945Z",
+  "branch": "codex/macbook-audio-entry-grounding-cycle",
+  "commit": "4510c200",
+  "dirty": true,
+  "cue": "challengePerfect",
+  "candidate": "perfect-measured-onset-soft-ceremony-tail",
+  "decision": {
+    "status": "runtime-trial-rejected",
+    "promoteRuntime": false,
+    "reason": "Guarded runtime trial evidence showed the focused Challenge Perfect keeper was not release-safe: the live/full-theme recapture still left Challenge Perfect as the highest audio risk, so the runtime cue was reverted and the candidate remains generator evidence only."
+  },
+  "problem": "Challenge Perfect is still the highest measured audio cue risk. Focused/offline candidate scoring can find a strong onset/body match, but live runtime capture can still collapse the ceremony tail or shift segment boundaries enough to fail release-facing scoring.",
+  "strategy": "Treat focused candidate loops and promotion prechecks as proposal gates only. Accept runtime audio changes only after live/full-theme comparison, event-gap rollup, cue-alignment guardrails, and quality scoring hold or improve; persist rejected trials so future generators avoid repeating failed strategies.",
+  "trialCandidateEvidence": {
+    "focusedCandidateReport": "reference-artifacts/analyses/aurora-audio-cue-candidates/latest-challenge-perfect.json",
+    "candidateDecisionStatus": "candidate-recommended",
+    "candidateKeep": true,
+    "candidateBest": "perfect-measured-onset-soft-ceremony-tail",
+    "measuredBest": "perfect-guide-window",
+    "riskDelta10": 4.78,
+    "segmentRiskDelta10": 4.62,
+    "candidateRisk10": 1.06,
+    "candidateWorstSegmentRisk10": 2.97,
+    "candidateKeeperRead": "clears keeper gates",
+    "promotionPrecheck": "reference-artifacts/analyses/aurora-audio-promotion-precheck/2026-05-16-8a54cf6f-dirty-234033-challengePerfect/report.json",
+    "precheckStatus": "precheck-trial-allowed",
+    "allowRuntimeTrial": true,
+    "promoteRuntime": false,
+    "precheckWins": [
+      "Full-theme cue gap improves by 6.79/10.",
+      "Worst segment risk improves by 4.99/10.",
+      "Theme average worst-segment risk improves by 0.24/10."
+    ],
+    "precheckBlockers": []
+  },
+  "runtimeTrialEvidence": {
+    "audioThemeComparison": "reference-artifacts/analyses/aurora-audio-theme-comparison/2026-05-16-main-8a54cf6f-235008/metrics.json",
+    "themeAverageWorstSegmentRisk10": 3.84,
+    "themeCueRisk10": 6.97,
+    "themeCueWorstSegmentRisk10": 0,
+    "ledger": "reference-artifacts/analyses/conformance-economics/run-ledger.jsonl",
+    "trialLedgerRows": [
+      {
+        "id": "2026-05-16T23-42-15-561Z-46383",
+        "command": "npm run harness:analyze-audio-theme-comparison",
+        "axes": [
+          "audio-theme-comparison",
+          "challenge-perfect"
+        ],
+        "resources": [
+          "cpu",
+          "browser"
+        ],
+        "notes": "Full audio comparison after challengePerfect runtime trial promotion",
+        "wallSeconds": 86.827,
+        "cpuSeconds": 173.36,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-16T23-43-59-650Z-50885",
+        "command": "npm run harness:analyze:aurora-audio-event-gap",
+        "axes": [
+          "audio-event-gap",
+          "challenge-perfect"
+        ],
+        "resources": [
+          "cpu"
+        ],
+        "notes": "Full event-gap refresh after challengePerfect runtime trial promotion",
+        "wallSeconds": 0.272,
+        "cpuSeconds": 0.32,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-16T23-44-08-231Z-51115",
+        "command": "npm run harness:analyze:aurora-audio-conformance-lab-v2",
+        "axes": [
+          "audio-lab-rollup",
+          "challenge-perfect"
+        ],
+        "resources": [
+          "cpu"
+        ],
+        "notes": "Audio Lab v2 after challengePerfect runtime trial promotion",
+        "wallSeconds": 0.273,
+        "cpuSeconds": 0.31,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-16T23-44-49-932Z-51409",
+        "command": "npm run harness:analyze-audio-theme-comparison",
+        "axes": [
+          "audio-theme-comparison",
+          "challenge-perfect"
+        ],
+        "resources": [
+          "cpu",
+          "browser"
+        ],
+        "notes": "Confirmation audio comparison for challengePerfect runtime trial volatility",
+        "wallSeconds": 86.857,
+        "cpuSeconds": 173,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-16T23-46-27-364Z-55946",
+        "command": "npm run harness:analyze:aurora-audio-event-gap",
+        "axes": [
+          "audio-event-gap",
+          "challenge-perfect"
+        ],
+        "resources": [
+          "cpu"
+        ],
+        "notes": "Confirmation event-gap for challengePerfect runtime trial volatility",
+        "wallSeconds": 0.264,
+        "cpuSeconds": 0.3,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-16T23-46-37-108Z-56178",
+        "command": "npm run harness:analyze:aurora-audio-conformance-lab-v2",
+        "axes": [
+          "audio-lab-rollup",
+          "challenge-perfect"
+        ],
+        "resources": [
+          "cpu"
+        ],
+        "notes": "Confirmation Audio Lab v2 after challengePerfect runtime trial",
+        "wallSeconds": 0.254,
+        "cpuSeconds": 0.3,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-16T23-47-43-442Z-56520",
+        "command": "npm run harness:score:quality-conformance",
+        "axes": [
+          "quality-conformance",
+          "challenge-perfect"
+        ],
+        "resources": [
+          "cpu",
+          "browser"
+        ],
+        "notes": "Quality guard after confirmed challengePerfect runtime trial",
+        "wallSeconds": 68.685,
+        "cpuSeconds": 81.9,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-16T23-50-08-222Z-59073",
+        "command": "npm run harness:analyze-audio-theme-comparison",
+        "axes": [
+          "audio-theme-comparison",
+          "challenge-perfect"
+        ],
+        "resources": [
+          "cpu",
+          "browser"
+        ],
+        "notes": "Post-revert audio comparison after rejected challengePerfect runtime trial",
+        "wallSeconds": 86.087,
+        "cpuSeconds": 172.89,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-16T23-51-53-572Z-63597",
+        "command": "npm run harness:analyze:aurora-audio-event-gap",
+        "axes": [
+          "audio-event-gap",
+          "challenge-perfect"
+        ],
+        "resources": [
+          "cpu"
+        ],
+        "notes": "Post-revert event-gap after rejected challengePerfect runtime trial",
+        "wallSeconds": 0.254,
+        "cpuSeconds": 0.3,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-16T23-52-03-033Z-63856",
+        "command": "npm run harness:analyze:aurora-audio-conformance-lab-v2",
+        "axes": [
+          "audio-lab-rollup",
+          "challenge-perfect"
+        ],
+        "resources": [
+          "cpu"
+        ],
+        "notes": "Post-revert Audio Lab v2 after rejected challengePerfect runtime trial",
+        "wallSeconds": 0.261,
+        "cpuSeconds": 0.32,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-16T23-52-12-095Z-64127",
+        "command": "npm run harness:score:quality-conformance",
+        "axes": [
+          "quality-conformance",
+          "challenge-perfect"
+        ],
+        "resources": [
+          "cpu",
+          "browser"
+        ],
+        "notes": "Post-revert quality guard after rejected challengePerfect runtime trial",
+        "wallSeconds": 68.571,
+        "cpuSeconds": 82.72,
+        "exitCode": 0
+      },
+      {
+        "id": "2026-05-16T23-53-39-923Z-66190",
+        "command": "npm run harness:analyze:aurora-audio-conformance-lab-v2",
+        "axes": [
+          "audio-lab-rollup",
+          "challenge-perfect"
+        ],
+        "resources": [
+          "cpu"
+        ],
+        "notes": "Final Audio Lab v2 after post-revert quality refresh",
+        "wallSeconds": 0.276,
+        "cpuSeconds": 0.31,
+        "exitCode": 0
+      }
+    ]
+  },
+  "postTrialEvidence": {
+    "eventGap": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
+    "quality": "reference-artifacts/analyses/quality-conformance/2026-05-16-8a54cf6f/report.json",
+    "currentOverallScore10": 9.2,
+    "currentAudioScore10": 7.1,
+    "currentHighestRiskCue": "challengePerfect",
+    "currentHighestRisk10": 6.97,
+    "currentHighestSegmentRiskCue": "challengePerfect",
+    "currentHighestSegmentRiskRole": "onset",
+    "currentAverageWorstSegmentRisk10": 3.54,
+    "currentCueGapRisk10": 6.97,
+    "currentCueWorstSegmentRisk10": 7.38,
+    "currentSemanticScore10": 10
+  },
+  "learning": [
+    "Focused cue similarity and promotion precheck are necessary but not sufficient for release-safe runtime promotion.",
+    "Runtime audio candidates must be validated through the same full-theme live capture and quality gates that drive release scoring.",
+    "challengePerfect candidate history should guide the next generator pass, but rejected runtime decisions must block direct promotion until the failed gate is specifically addressed."
+  ],
+  "nextStep": "Preserve perfect-measured-onset-soft-ceremony-tail as a focused keeper, but do not promote it directly. Next generate a safer Challenge Perfect ceremony-tail family that keeps the measured onset/body subclip, reduces tail/overlap collapse under live capture, and must hold or improve audio score, event-gap rollup, cue alignment, and overall quality."
+}

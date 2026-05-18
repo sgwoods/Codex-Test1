@@ -178,8 +178,11 @@ Each category scores from `1` to `10`.
 - `3-4.9`: meaningfully behind the intended standard
 - `1-2.9`: clearly weak and likely release-shaping
 
-The roll-up score is the simple average of the twelve category scores so that the
-low-scoring gaps stay visible.
+The roll-up score is the simple average of the current category scores so that
+low-scoring gaps stay visible. New first-class categories can be added when a
+previously broad proxy is found to be too generous. The strict challenge-stage
+set-piece category is one example: no-shot/no-kill timing alone did not describe
+whether the bonus stages were interesting, graphical, or Galaga-like.
 
 A `10/10` means "maxed at current scorer resolution", not perfect imitation.
 If ingestion improves the reference evidence or the scorer becomes more precise,

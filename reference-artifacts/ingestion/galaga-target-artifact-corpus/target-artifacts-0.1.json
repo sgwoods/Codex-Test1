@@ -1,0 +1,391 @@
+{
+  "schema": "galaga-target-artifact-corpus-0.1",
+  "game": "aurora-galactica",
+  "referenceTarget": "Galaga 1981 arcade",
+  "generatedFrom": "manual local source review, existing ingested artifacts, and online source discovery on 2026-05-17",
+  "copyrightPolicy": "Use online and local sources for measured analysis, source manifests, contact sheets, labels, and derived metrics. Avoid committing full third-party gameplay videos or raw copyrighted audio unless explicitly approved.",
+  "artifacts": [
+    {
+      "id": "bandai-namco-official-galaga-history",
+      "title": "Bandai Namco Galaga Web history/game page",
+      "sourceType": "official-web",
+      "sourceUrls": [
+        "https://galaga.com/en/history/galaga.php"
+      ],
+      "targetUse": "Official grounding for the game identity: formation entry, three enemy roles, tractor beam, dual fighter, challenging stages, and depth over repeat play.",
+      "coverageAxes": [
+        "rules",
+        "enemy taxonomy",
+        "formation entry",
+        "challenge-stage purpose",
+        "player-facing explanation"
+      ],
+      "ingestionStatus": "ingested",
+      "localEvidence": [
+        "reference-artifacts/ingestion/galaga-design-grounding/README.md",
+        "reference-artifacts/ingestion/galaga-design-grounding/official-history-notes-0.1.json"
+      ],
+      "currentUse": "Formal official-source notes now ground Galaga identity, formation entry, enemy-role taxonomy, capture/rescue, and challenge-stage depth.",
+      "missingWork": "Promote selected assertions into rule-specific checks where they can reduce prose-only documentation debt.",
+      "priority": "high",
+      "confidence": "high"
+    },
+    {
+      "id": "galaga-1981-namco-manual",
+      "title": "Galaga 1981 Namco/Midway manual",
+      "sourceType": "manual",
+      "sourceUrls": [
+        "https://manuals.plus/m/e1eb9faf55f80332dfb648bd6274d509f9ab437398396c2c1e492d16cc41ea34",
+        "https://archives.museumofplay.org/repositories/3/archival_objects/30294"
+      ],
+      "targetUse": "Rules, scoring, challenge-stage structure, capture behavior, bonus logic, presentation flow, and official cabinet/operator framing.",
+      "coverageAxes": [
+        "rules",
+        "scoring",
+        "challenge-stage structure",
+        "capture-rescue",
+        "presentation"
+      ],
+      "ingestionStatus": "ingested",
+      "localEvidence": [
+        "reference-artifacts/manuals/galaga-1981-namco/README.md",
+        "reference-artifacts/manuals/galaga-1981-namco/Galaga_-_1981_-_Namco.pdf"
+      ],
+      "currentUse": "Manual observations already support challenge-stage and scoring rules.",
+      "missingWork": "Promote richer manual-derived assertions into structured per-rule artifacts so checks can cite rule IDs instead of prose notes.",
+      "priority": "high",
+      "confidence": "high"
+    },
+    {
+      "id": "snake-latino-galaga-gameplay-video",
+      "title": "Galaga (1981) - Gameplay Arcade - Snake Latino",
+      "sourceType": "gameplay-video",
+      "sourceUrls": [
+        "https://rawg.io/games/galaga/youtube",
+        "https://gamefaqs.gamespot.com/atari2600/584760-galaga/videos/1323989"
+      ],
+      "targetUse": "Concrete visual timing reference for early normal-stage entry, first challenge arrival, early challenge result flow, and early capture pressure.",
+      "coverageAxes": [
+        "normal-stage entry",
+        "challenge-stage entry",
+        "trajectory",
+        "contact sheets",
+        "frame indexes",
+        "path labels"
+      ],
+      "ingestionStatus": "partial",
+      "localEvidence": [
+        "reference-artifacts/analyses/galaga-path-reference-media/README.md",
+        "reference-artifacts/analyses/galaga-path-reference-media/latest.json",
+        "reference-artifacts/analyses/galaga-path-reference-media/stage-1-opening-entry/contact-sheet.jpg",
+        "reference-artifacts/analyses/galaga-path-reference-media/stage-2-early-entry/contact-sheet.jpg",
+        "reference-artifacts/analyses/galaga-path-reference-media/stage-4-post-challenge-entry/contact-sheet.jpg",
+        "reference-artifacts/analyses/galaga-path-reference-media/stage-5-opening-entry/contact-sheet.jpg",
+        "reference-artifacts/analyses/galaga-path-reference-media/stage-6-capture-pressure/contact-sheet.jpg",
+        "reference-artifacts/analyses/galaga-path-reference-media/stage-10-opening-entry/contact-sheet.jpg",
+        "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg",
+        "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/contact-sheet.jpg",
+        "reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg",
+        "reference-artifacts/analyses/galaga-path-reference-media/challenge-3-arrival/contact-sheet.jpg",
+        "reference-artifacts/analyses/galaga-path-reference-labels/latest.json"
+      ],
+      "currentUse": "This is the current strongest media-backed path reference. It has 10 extracted windows and validated path labels, including 4 accepted challenge-entry labels.",
+      "missingWork": "It is only a 360p early-window corpus. Add complete challenge-stage windows and later challenge stages beyond Challenge 3 before using it as the sole movement target.",
+      "priority": "critical",
+      "confidence": "medium-high"
+    },
+    {
+      "id": "user-supplied-galaga-challenge-compilations",
+      "title": "User-supplied Galaga challenge-stage compilation videos",
+      "sourceType": "local-user-supplied-gameplay-video",
+      "sourceUrls": [],
+      "targetUse": "Concrete challenge-stage choreography reference for all eight visible Galaga challenge stages, including late-stage alien-family novelty, five-group score exhibitions, perfect-result cadence, and non-combat safety.",
+      "coverageAxes": [
+        "challenge-stage entry",
+        "late challenge-stage progression",
+        "later challenge stages",
+        "trajectory",
+        "special enemy appearance",
+        "perfect-bonus learning",
+        "contact sheets",
+        "frame indexes"
+      ],
+      "ingestionStatus": "partial",
+      "localEvidence": [
+        "GALAGA_CHALLENGE_VIDEO_REFERENCE_ANALYSIS.md",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/overview-5s-contact-sheet.jpg",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-1fps.jpg",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/contact-sheet-1fps.jpg",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/contact-sheet-1fps.jpg",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/contact-sheet-1fps.jpg",
+        "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-1fps.jpg"
+      ],
+      "currentUse": "All eight challenge stages now have first-pass media-backed windows and Aurora implementation contracts. Late challenges 4-8 are no longer empty evidence gaps, but they still need five-group frame labels before direct trajectory scoring can be trusted.",
+      "missingWork": "Promote five-group labels for each challenge window: first visible time, entry side, path family, scoreable upper-band interval, exit side, alien family, and perfect-bonus opportunity.",
+      "priority": "critical",
+      "confidence": "medium"
+    },
+    {
+      "id": "gamesdatabase-galaga-screens-and-rules",
+      "title": "GamesDatabase Galaga page",
+      "sourceType": "reference-page",
+      "sourceUrls": [
+        "https://www.gamesdatabase.org/game/arcade/galaga.aspx"
+      ],
+      "targetUse": "Readable screen-surface examples and rule summaries: title, game-over, high-score, cabinet/artwork, challenge-stage non-combat rule, transforms, and alien roles.",
+      "coverageAxes": [
+        "screen surfaces",
+        "high-score UI",
+        "title UI",
+        "game-over UI",
+        "challenge-stage rule summary",
+        "transform enemy notes"
+      ],
+      "ingestionStatus": "partial",
+      "localEvidence": [
+        "reference-artifacts/ingestion/galaga-screen-surface-targets/README.md",
+        "reference-artifacts/ingestion/galaga-screen-surface-targets/screen-surface-targets-0.1.json"
+      ],
+      "currentUse": "A derived screen-surface target map now identifies title, in-game, high-score, game-over, cabinet, and challenge-result surfaces.",
+      "missingWork": "Add approved screenshot/contact-sheet provenance before using this source for fine pixel/layout scoring.",
+      "priority": "medium-high",
+      "confidence": "medium"
+    },
+    {
+      "id": "strategywiki-galaga-walkthrough",
+      "title": "StrategyWiki Galaga walkthrough",
+      "sourceType": "expert-player-guide",
+      "sourceUrls": [
+        "https://strategywiki.org/wiki/Galaga/Walkthrough"
+      ],
+      "targetUse": "Player-experience interpretation of entrance patterns, challenge-stage positioning, perfect-bonus learning, capture/rescue tactics, and transform progression.",
+      "coverageAxes": [
+        "player tactics",
+        "challenge-stage learnability",
+        "entrance-pattern explanation",
+        "capture-rescue explanation",
+        "transform progression"
+      ],
+      "ingestionStatus": "partial",
+      "localEvidence": [
+        "reference-artifacts/ingestion/galaga-design-grounding/README.md",
+        "reference-artifacts/ingestion/galaga-design-grounding/player-guide-notes-0.1.json"
+      ],
+      "currentUse": "Derived player-guide notes now ground challenge-stage learnability, five-group challenge structure, entrance anticipation, capture/rescue risk, and transform progression.",
+      "missingWork": "Use the notes to define player/designer meaning rows, then use measured media windows for actual path scoring.",
+      "priority": "medium",
+      "confidence": "medium"
+    },
+    {
+      "id": "galaga-fandom-challenging-stage",
+      "title": "Galaga Collection Fandom challenging-stage page",
+      "sourceType": "community-reference",
+      "sourceUrls": [
+        "https://galaga.fandom.com/wiki/Challenging_Stage"
+      ],
+      "targetUse": "Supplemental challenge-stage cadence and set-point totals.",
+      "coverageAxes": [
+        "challenge-stage cadence",
+        "challenge scoring totals",
+        "community summary"
+      ],
+      "ingestionStatus": "not-ingested",
+      "localEvidence": [],
+      "currentUse": "Useful cross-check only; lower authority than manual or measured video.",
+      "missingWork": "Use only as a secondary consistency check against manual and captured gameplay.",
+      "priority": "low-medium",
+      "confidence": "medium-low"
+    },
+    {
+      "id": "arcade-game-series-late-perfect-guides",
+      "title": "Arcade Game Series Galaga perfect challenge-stage guides",
+      "sourceType": "modern-release-player-guide",
+      "sourceUrls": [
+        "https://knoef.info/trophy-guides/ps4-guides/arcade-game-series-galaga-trophy-guide/",
+        "https://www.playstationtrophies.org/game/galaga/guide/",
+        "https://www.truetrophies.com/game/ARCADE-GAME-SERIES-GALAGA/walkthrough"
+      ],
+      "targetUse": "Late challenge-stage progression, perfect-bonus examples, and novelty enemy appearances around stages 11, 15, 19, 23, 27, and 31.",
+      "coverageAxes": [
+        "late challenge-stage progression",
+        "perfect-bonus learning",
+        "special enemy appearance",
+        "late challenge-stage target list"
+      ],
+      "ingestionStatus": "not-ingested",
+      "localEvidence": [],
+      "currentUse": "Identifies the late challenge stages that matter most for the next media capture pass.",
+      "missingWork": "Acquire lawful gameplay windows for the late challenge stages and promote per-group labels. Use the guides only to prioritize stage windows and expected novelty, not as pixel/motion ground truth.",
+      "priority": "critical",
+      "confidence": "medium"
+    },
+    {
+      "id": "world-of-longplays-galaga-longplay",
+      "title": "Arcade Longplay Galaga by World of Longplays",
+      "sourceType": "gameplay-video",
+      "sourceUrls": [
+        "https://www.destructoid.com/iconic-namco-shmup-galaga-blasts-onto-the-arcade-archives/"
+      ],
+      "targetUse": "Long-run gameplay reference for later stages, challenge-stage variation, and progression beyond early windows.",
+      "coverageAxes": [
+        "late-stage progression",
+        "later challenge stages",
+        "long-run pacing",
+        "enemy novelty"
+      ],
+      "ingestionStatus": "candidate",
+      "localEvidence": [],
+      "currentUse": "Discovered as a likely useful longplay source through third-party references, but not yet ingested.",
+      "missingWork": "Find the exact source URL, record provenance, extract later challenge-stage windows, and label at least Challenges 4-8.",
+      "priority": "high",
+      "confidence": "medium"
+    },
+    {
+      "id": "controlled-emulation-capture",
+      "title": "Controlled local arcade/MAME-style capture",
+      "sourceType": "controlled-capture-plan",
+      "sourceUrls": [
+        "https://docs.mamedev.org/"
+      ],
+      "targetUse": "Repeatable clean capture of exact challenge-stage windows with consistent frame rate, native aspect, known input, and reproducible timestamps.",
+      "coverageAxes": [
+        "controlled reference capture",
+        "native timing",
+        "late challenge-stage windows",
+        "trajectory extraction",
+        "sprite motion"
+      ],
+      "ingestionStatus": "planned",
+      "localEvidence": [],
+      "currentUse": "Not currently used. This is the best future route for high-precision stage-by-stage measurement if lawful source setup is available.",
+      "missingWork": "Set up an approved capture source, record source manifest, capture challenges 1-8, and extract trajectories/contact sheets with the same harness shape used for existing media.",
+      "priority": "critical",
+      "confidence": "high-if-source-approved"
+    },
+    {
+      "id": "galaga-reference-sprite-models",
+      "title": "Galaga inferred sprite target models",
+      "sourceType": "derived-sprite-model",
+      "sourceUrls": [],
+      "targetUse": "Static sprite target comparison for player fighter, dual fighter, boss, butterfly, bee, and specialty challenge families.",
+      "coverageAxes": [
+        "sprites",
+        "pixel targets",
+        "static runtime crop comparison",
+        "visual identity"
+      ],
+      "ingestionStatus": "ingested",
+      "localEvidence": [
+        "reference-artifacts/analyses/galaga-reference-sprites/model-0.1.json",
+        "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1.json",
+        "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json"
+      ],
+      "currentUse": "Static sprite comparisons are active and measured, but motion is intentionally unscored.",
+      "missingWork": "Add active sprite motion windows for flapping, pulsing, dive/rotation, capture/rescue, and carried-fighter transitions.",
+      "priority": "high",
+      "confidence": "medium-high-static-only"
+    },
+    {
+      "id": "galaga-reference-audio-cues",
+      "title": "Galaga reference audio cue library",
+      "sourceType": "derived-audio-cue-library",
+      "sourceUrls": [],
+      "targetUse": "Reference cue comparison for shots, impacts, explosions, capture/rescue, challenge transition/results/perfect, stage start, and game over.",
+      "coverageAxes": [
+        "audio",
+        "cue comparison",
+        "event feedback",
+        "challenge result feedback"
+      ],
+      "ingestionStatus": "ingested",
+      "localEvidence": [
+        "reference-artifacts/analyses/aurora-audio-theme-comparison",
+        "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json",
+        "reference-artifacts/analyses/aurora-audio-event-gap/latest.json"
+      ],
+      "currentUse": "Audio reference comparison is active and has extensive candidate history.",
+      "missingWork": "Improve scoring stability and segment-boundary strategy before promoting more runtime audio changes.",
+      "priority": "high",
+      "confidence": "medium-high"
+    }
+  ],
+  "challengeStagePriorityTargets": [
+    {
+      "challengeNumber": 1,
+      "stageMarker": 3,
+      "status": "partially-ingested",
+      "currentEvidence": [
+        "challenge-1-arrival",
+        "challenge-1-late-wave",
+        "challenge-01-classic-column-lesson"
+      ],
+      "nextNeed": "Convert existing windows into fuller five-group trajectory labels and build Aurora Stage 3 against those exact group contracts."
+    },
+    {
+      "challengeNumber": 2,
+      "stageMarker": 7,
+      "status": "partially-ingested",
+      "currentEvidence": [
+        "challenge-2-arrival",
+        "challenge-02-cross-and-column"
+      ],
+      "nextNeed": "Add late-wave/results windows and group 2-5 labels."
+    },
+    {
+      "challengeNumber": 3,
+      "stageMarker": 11,
+      "status": "partially-ingested",
+      "currentEvidence": [
+        "challenge-3-arrival",
+        "challenge-03-blue-hook-and-green-novelty"
+      ],
+      "nextNeed": "Add late-wave/results windows and map specialty alien novelty explicitly."
+    },
+    {
+      "challengeNumber": 4,
+      "stageMarker": 15,
+      "status": "partially-ingested",
+      "currentEvidence": [
+        "challenge-04-pink-serpentine"
+      ],
+      "nextNeed": "Promote five-group labels for the pink serpentine reference and rebuild Aurora Stage 15 around a distinct late-stage specialty arc."
+    },
+    {
+      "challengeNumber": 5,
+      "stageMarker": 19,
+      "status": "partially-ingested",
+      "currentEvidence": [
+        "challenge-05-pink-and-green-cascade"
+      ],
+      "nextNeed": "Promote five-group labels for the pink/green cascade reference and align Aurora's mosquito/specialty-family novelty to the visible target."
+    },
+    {
+      "challengeNumber": 6,
+      "stageMarker": 23,
+      "status": "partially-ingested",
+      "currentEvidence": [
+        "challenge-06-green-ladder-split"
+      ],
+      "nextNeed": "Promote five-group labels for the green ladder/split reference and add runtime probes for staggered group spacing."
+    },
+    {
+      "challengeNumber": 7,
+      "stageMarker": 27,
+      "status": "partially-ingested",
+      "currentEvidence": [
+        "challenge-07-yellow-diagonal-fan"
+      ],
+      "nextNeed": "Promote five-group labels for the yellow diagonal fan reference and use it as the strongest late-stage visual novelty target."
+    },
+    {
+      "challengeNumber": 8,
+      "stageMarker": 31,
+      "status": "partially-ingested",
+      "currentEvidence": [
+        "challenge-08-blue-purple-finale"
+      ],
+      "nextNeed": "Promote five-group labels for the blue/purple finale reference and use it as the late-loop capstone contract."
+    }
+  ]
+}

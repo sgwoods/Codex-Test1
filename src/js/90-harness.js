@@ -11,13 +11,16 @@ window.__galagaHarness__={
    if(!cfg.autoVideo&&VIDEO_REC.active&&typeof stopRunRecording==='function')stopRunRecording();
   }
   if(typeof cfg.debugCarry==='boolean')window.setCarryDebug(!!cfg.debugCarry,'harness-start');
- if(cfg.stage||cfg.ships||cfg.challenge!==undefined||cfg.extendFirst!==undefined||cfg.extendRecurring!==undefined||cfg.audioTheme!==undefined||cfg.graphicsTheme!==undefined||cfg.starfieldIntensity!==undefined||cfg.starfieldSpeed!==undefined){
+ if(cfg.stage||cfg.ships||cfg.challenge!==undefined||cfg.startKind!==undefined||cfg.challengeStage!==undefined||cfg.extendFirst!==undefined||cfg.extendRecurring!==undefined||cfg.audioTheme!==undefined||cfg.graphicsTheme!==undefined||cfg.starfieldIntensity!==undefined||cfg.starfieldSpeed!==undefined){
   const currentCfg=loadTestCfg();
+  const nextStartKind=cfg.startKind!==undefined?sanitizeStartKind(cfg.startKind):(cfg.challenge?'challenge':'level');
+  if(typeof testStartKind!=='undefined'&&testStartKind)testStartKind.value=nextStartKind;
   testStage.value=cl(+cfg.stage||1,1,99)|0;
+  if(typeof testChallengeStage!=='undefined'&&testChallengeStage)testChallengeStage.value=cfg.challengeStage!==undefined?cl(+cfg.challengeStage||1,1,99)|0:(currentCfg.challengeStage||1);
   testShips.value=cl(+cfg.ships||3,1,9)|0;
   testExtendFirst.value=cfg.extendFirst!==undefined?cl(Math.max(0,+cfg.extendFirst||0),0,999999)|0:currentCfg.extendFirst;
   testExtendRecurring.value=cfg.extendRecurring!==undefined?cl(Math.max(0,+cfg.extendRecurring||0),0,999999)|0:currentCfg.extendRecurring;
-  testChallenge.checked=!!cfg.challenge;
+  testChallenge.checked=nextStartKind==='challenge'||!!cfg.challenge;
   if(typeof audioTheme!=='undefined'&&audioTheme)audioTheme.value=cfg.audioTheme!==undefined?String(cfg.audioTheme||'auto'):currentCfg.audioTheme;
   if(typeof graphicsTheme!=='undefined'&&graphicsTheme)graphicsTheme.value=cfg.graphicsTheme!==undefined?String(cfg.graphicsTheme||'auto'):currentCfg.graphicsTheme;
   if(typeof graphicsStarfieldIntensity!=='undefined'&&graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=cfg.starfieldIntensity!==undefined?String(cfg.starfieldIntensity):String(currentCfg.starfieldIntensity);
@@ -1048,7 +1051,7 @@ window.__galagaHarness__={
   return {
    stage:S.stage,
    challenge:!!S.challenge,
-	   layout:typeof currentGamePackChallengeLayout==='function'?currentGamePackChallengeLayout(S.stage):null,
+	   layout:S.harnessChallengeLayoutSnapshot||(typeof currentGamePackChallengeLayout==='function'?currentGamePackChallengeLayout(S.stage):null),
 	  enemies:active.map(e=>({
 	   id:e.id,
 	   type:e.t,
@@ -1061,6 +1064,8 @@ window.__galagaHarness__={
    spawn:+(+e.spawn||0).toFixed(2),
    spawnPlan:+(+e.spawnPlan||0).toFixed(2),
    tm:+(+e.tm||0).toFixed(3),
+   flapOpen:Math.sin((+e.tm||0)*11+(+e.ph||0))>.12,
+   animationPhase:+(((+e.tm||0)*11+(+e.ph||0))%(Math.PI*2)).toFixed(3),
    x:+(+e.x||0).toFixed(2),
    y:+(+e.y||0).toFixed(2)
   }))
@@ -1458,7 +1463,15 @@ window.__galagaHarness__={
   p.returning=0;
   p.capBoss=null;
 	  p.capT=0;
+	  S.harnessChallengeLayoutSnapshot=null;
+	  S.harnessChallengeLayoutOverride=cfg.layoutOverride&&typeof cfg.layoutOverride==='object'
+	   ? {stage:S.stage,layout:cfg.layoutOverride}
+	   : null;
 	  spawnStage();
+	  S.harnessChallengeLayoutSnapshot=typeof currentGamePackChallengeLayout==='function'
+	   ? currentGamePackChallengeLayout(S.stage)
+	   : null;
+	  S.harnessChallengeLayoutOverride=null;
 	  const challengeSpawnBase=Math.min(...S.e.filter(e=>e?.ch&&e.hp>0).map(e=>+e.spawnPlan||0));
 	  for(const e of S.e){
 	   if(!e?.ch||e.hp<=0)continue;
@@ -1592,12 +1605,15 @@ window.__galagaHarness__={
   syncRecordUi();
  },
  setTest(cfg={}){
-  const currentCfg=loadTestCfg();
+ const currentCfg=loadTestCfg();
+  const nextStartKind=cfg.startKind!==undefined?sanitizeStartKind(cfg.startKind):(cfg.challenge?'challenge':'level');
+  if(typeof testStartKind!=='undefined'&&testStartKind)testStartKind.value=nextStartKind;
   testStage.value=cl(+cfg.stage||1,1,99)|0;
+ if(typeof testChallengeStage!=='undefined'&&testChallengeStage)testChallengeStage.value=cfg.challengeStage!==undefined?cl(+cfg.challengeStage||1,1,99)|0:(currentCfg.challengeStage||1);
  testShips.value=cl(+cfg.ships||3,1,9)|0;
  testExtendFirst.value=cfg.extendFirst!==undefined?cl(Math.max(0,+cfg.extendFirst||0),0,999999)|0:currentCfg.extendFirst;
  testExtendRecurring.value=cfg.extendRecurring!==undefined?cl(Math.max(0,+cfg.extendRecurring||0),0,999999)|0:currentCfg.extendRecurring;
- testChallenge.checked=!!cfg.challenge;
+ testChallenge.checked=nextStartKind==='challenge'||!!cfg.challenge;
   if(typeof audioTheme!=='undefined'&&audioTheme)audioTheme.value=cfg.audioTheme!==undefined?String(cfg.audioTheme||'auto'):currentCfg.audioTheme;
   if(typeof graphicsTheme!=='undefined'&&graphicsTheme)graphicsTheme.value=cfg.graphicsTheme!==undefined?String(cfg.graphicsTheme||'auto'):currentCfg.graphicsTheme;
   if(typeof graphicsStarfieldIntensity!=='undefined'&&graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=cfg.starfieldIntensity!==undefined?String(cfg.starfieldIntensity):String(currentCfg.starfieldIntensity);

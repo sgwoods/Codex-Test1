@@ -66,7 +66,11 @@
           "label": "Game conformance catalog",
           "sourceArtifacts": [
             "reference-artifacts/analyses/release-conformance-dashboard/latest.json",
+            "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+            "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
             "GAME_CONFORMANCE_CATALOG.md",
+            "CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md",
+            "GALAGA_CHALLENGE_VIDEO_REFERENCE_ANALYSIS.md",
             "application-guide.json",
             "reference-artifacts/analyses/application-artifact-conformance/latest.json",
             "reference-artifacts/analyses/persona-performance-distribution/latest.json"
@@ -103,6 +107,10 @@
           "sourceArtifacts": [
             "project-guide.json",
             "PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md",
+            "CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md",
+            "GALAGA_CHALLENGE_VIDEO_REFERENCE_ANALYSIS.md",
+            "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+            "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
             "PLAN.md",
             "PRODUCT_ROADMAP.md",
             "GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md",
@@ -211,7 +219,7 @@
       "visiblePath": "application-guide.html",
       "template": "src/application-guide.template.html",
       "builder": "tools/build/build-index.js#buildApplicationGuide",
-      "summary": "Aurora-owned audio, visual, alien, stage, artifact-conformance, and persona catalog.",
+      "summary": "Aurora-owned audio, visual, alien, stage, target-artifact, artifact-conformance, and persona catalog.",
       "sections": [
         {
           "id": "audio-visual-catalog",
@@ -220,7 +228,10 @@
             "application-guide.json",
             "src/js/13-aurora-game-pack.js",
             "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json",
-            "reference-artifacts/analyses/aurora-audio-event-gap/latest.json"
+            "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
+            "reference-artifacts/analyses/aurora-audio-promotion-stability-gate/latest.json",
+            "reference-artifacts/analyses/aurora-audio-strategy-review/latest.json",
+            "AUDIO_CONFORMANCE_STRATEGY_REVIEW.md"
           ],
           "currentness": "Guide rows are generated from application-guide.json and freshness-checked against runtime audio cue durations.",
           "riskIfStale": "Audio review buttons and event descriptions can drift away from runtime cues."
@@ -232,10 +243,16 @@
             "reference-artifacts/analyses/application-artifact-conformance/latest.json",
             "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json",
             "reference-artifacts/analyses/aurora-visual-look-conformance/latest.json",
+            "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+            "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
+            "reference-artifacts/analyses/galaga-target-artifact-coverage/latest.json",
+            "GALAGA_TARGET_ARTIFACT_COVERAGE.md",
+            "CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md",
+            "GALAGA_CHALLENGE_VIDEO_REFERENCE_ANALYSIS.md",
             "reference-artifacts/analyses/persona-performance-distribution/latest.json"
           ],
-          "currentness": "The artifact scorecard and persona performance distribution are generated from analysis outputs rather than single static claims.",
-          "riskIfStale": "Sprite/audio/visual/persona claims can look precise while no longer matching the latest harness artifacts."
+          "currentness": "The artifact scorecard, target artifact coverage, and persona performance distribution are generated from analysis outputs rather than single static claims.",
+          "riskIfStale": "Sprite/audio/visual/target-artifact/persona claims can look precise while no longer matching the latest harness artifacts."
         }
       ]
     },

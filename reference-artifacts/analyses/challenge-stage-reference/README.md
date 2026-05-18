@@ -3,12 +3,17 @@
 Primary source:
 
 - downloaded video:
-  - `/Users/stevenwoods/Downloads/challenging stage perfect scores.mp4`
+  - `/Users/sgwoods/Downloads/🎮🕹️👉Galaga (1981) - Gameplay Arcade - Snake Latino (360p, h264).mp4`
 
-Derived artifact:
+Derived artifacts in this clone:
 
 - contact sheet:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/challenge-stage-reference/contact-sheet.png`
+  - `reference-artifacts/analyses/challenge-stage-reference/contact-sheet.png`
+- frame-indexed source windows:
+  - `reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg`
+  - `reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/contact-sheet.jpg`
+  - `reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg`
+  - `reference-artifacts/analyses/galaga-path-reference-media/challenge-3-arrival/contact-sheet.jpg`
 
 Why this exists:
 

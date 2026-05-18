@@ -29,6 +29,9 @@ persona testing expectations.
 | First challenge-stage baseline | `reference-artifacts/analyses/first-challenge-stage/README.md` | focused challenge-stage baseline from original capture | early challenge motion, group readability, scoreable windows |
 | Release reference pack | `reference-artifacts/analyses/release-reference-pack/README.md` | curated windows for capture, transition, Stage 4, later pressure | release-shaping comparisons beyond stage 1 |
 | Galaga manual / cabinet-era material | `reference-artifacts/manuals/galaga-1981-namco/README.md` | manual-backed rules and presentation anchors | source-of-truth rule checking before tuning or release claims |
+| Galaga target artifact corpus | `reference-artifacts/analyses/galaga-target-artifact-coverage/latest.json` and `GALAGA_TARGET_ARTIFACT_COVERAGE.md` | online/local target inventory, ingestion status, challenge-window readiness, and next acquisition needs | deciding which reference artifacts are strong enough to guide implementation versus only useful as planning or supplemental context |
+| Galaga design grounding notes | `reference-artifacts/ingestion/galaga-design-grounding/README.md` | derived official-source and player-guide assertions for identity, entry, challenge-stage learnability, capture/rescue, and transform progression | grounding player/designer meaning while keeping numeric movement scores tied to measured media |
+| Galaga screen-surface targets | `reference-artifacts/ingestion/galaga-screen-surface-targets/README.md` | derived target map for title, in-game, high-score, game-over, cabinet, and challenge-result surfaces | planning visual/UI conformance work before approved screenshot/contact-sheet targets exist |
 | Reference audio clips | `src/assets/reference-audio/` | clipped reference cues mirrored into app assets | cue alignment, phrase comparison, reference-theme playback |
 
 ## Derived Analysis Packs Already In The Repo
@@ -47,6 +50,7 @@ persona testing expectations.
 | Stage 1 opening correspondence | `reference-artifacts/analyses/correspondence/stage1-opening-first-dive` | how closely Aurora opening timing matches the reference timing library |
 | Stage 1 opening spacing | `reference-artifacts/analyses/correspondence/stage1-opening-spacing` | whether formation geometry and spacing remain on target |
 | Challenge-stage correspondence | `reference-artifacts/analyses/correspondence/challenge-stage-timing` | whether challenge entry and result timing matches the target model |
+| Galaga target artifact coverage | `reference-artifacts/analyses/galaga-target-artifact-coverage/latest.json` | which official/manual/video/player-guide/sprite/audio sources are ingested, partial, candidate, or missing |
 | Capture-rescue correspondence | `reference-artifacts/analyses/correspondence/capture-rescue` | whether capture/rescue state flow still matches the intended baseline |
 | Persona progression correspondence | `reference-artifacts/analyses/correspondence/persona-progression` | whether progression depth and persona ordering remain healthy |
 | Player movement correspondence | `reference-artifacts/analyses/correspondence/player-movement` | whether movement still matches current joystick-translation principles |
@@ -79,6 +83,15 @@ These are the most important missing reference structures, not missing media fil
    and harness targets.
 9. A formal promoted-evidence index that ties gameplay captures to quality
    conformance, player-profile training, and future Player 2 simulation needs.
+10. Late Galaga challenging-stage precision labels. The user-supplied
+    `challenge-all2.mp4` and `challenging.mp4` sources are now preserved through
+    derived contact sheets and hashes in
+    `reference-artifacts/analyses/galaga-challenge-video-reference/latest.json`,
+    so Challenge Stages 4-8 are no longer empty media gaps. The remaining gap is
+    five-group frame/object labels for each challenge window, especially the
+    green-ladder, yellow-fan, and blue/purple finale stages.
+11. Approved screen-surface screenshots or controlled frames for Galaga title,
+    high-score, game-over, challenge-result, and cabinet/control-panel surfaces.
 
 ## Working Rule
 

@@ -8,6 +8,7 @@ const ANALYSES = path.join(ROOT, 'reference-artifacts', 'analyses');
 const OUT_ROOT = path.join(ANALYSES, 'aurora-audio-conformance-lab-v2');
 const EVENT_GAP_ROOT = path.join(ANALYSES, 'aurora-audio-event-gap');
 const CANDIDATE_ROOT = path.join(ANALYSES, 'aurora-audio-cue-candidates');
+const RUNTIME_TRIAL_ROOT = path.join(ANALYSES, 'aurora-audio-runtime-trials');
 const QUALITY_ROOT = path.join(ANALYSES, 'quality-conformance');
 const CONTRACT_ROOT = path.join(ANALYSES, 'aurora-audio-cue-contracts');
 const CONTRACT_PATH = path.join(ROOT, 'reference-artifacts', 'contracts', 'audio', 'aurora-audio-cue-contracts.json');
@@ -50,7 +51,7 @@ const CUE_FAMILIES = [
     candidateFiles: {
       playerHit: 'latest-player-hit-focus.json',
       rescueJoin: 'latest-rescue-join.json',
-      challengePerfect: 'latest.json'
+      challengePerfect: 'latest-challenge-perfect.json'
     }
   }
 ];
@@ -120,6 +121,20 @@ function candidateReport(fileName, cue){
   const report = readJson(file);
   if(cue && report.cue && report.cue !== cue) return null;
   return { file, report };
+}
+
+function latestRuntimeTrial(cue){
+  const reports = walkReports(RUNTIME_TRIAL_ROOT)
+    .map(file => {
+      try{
+        const report = readJson(file);
+        return report.cue === cue ? { file, report } : null;
+      }catch{
+        return null;
+      }
+    })
+    .filter(Boolean);
+  return reports.length ? reports[reports.length - 1] : null;
 }
 
 function qualityAudioSummary(){
@@ -275,6 +290,8 @@ function cueArtifact({ cue, family, comparisonByCue, risks }){
   const risk = risks.get(cue) || null;
   const candidate = candidateReport(family.candidateFiles?.[cue], cue);
   const decision = candidate?.report?.decision || null;
+  const runtimeTrial = latestRuntimeTrial(cue);
+  const runtimeTrialDecision = runtimeTrial?.report?.decision || null;
   const runtimePromotion = candidate && decision?.keep ? promotedRuntimeSpec(cue, candidate.report) : null;
   const mapping = cueMapping(cue, comparisonByCue);
   const accepted = !!decision?.keep;
@@ -307,29 +324,46 @@ function cueArtifact({ cue, family, comparisonByCue, risks }){
       candidateCount: (candidate.report.candidates || []).length,
       repetitions: candidate.report.repetitions || 1,
       topCandidates: topCandidateRows(candidate.report),
+      nextStep: candidate.report.nextStep || '',
       decision
     } : {
       artifact: null,
       candidateCount: 0,
       repetitions: 0,
       topCandidates: [],
+      nextStep: '',
       decision: {
         status: 'not-yet-swept',
         keep: false,
         reason: 'No focused candidate loop artifact exists yet for this cue.'
       }
     },
+    runtimeTrial: runtimeTrial ? {
+      artifact: rel(runtimeTrial.file),
+      candidate: runtimeTrial.report?.candidate || null,
+      status: runtimeTrialDecision?.status || 'unknown',
+      promoteRuntime: runtimeTrialDecision?.promoteRuntime === true,
+      reason: runtimeTrialDecision?.reason || '',
+      currentAudioScore10: runtimeTrial.report?.postTrialEvidence?.currentAudioScore10 ?? null,
+      currentHighestRiskCue: runtimeTrial.report?.postTrialEvidence?.currentHighestRiskCue || null,
+      currentHighestRisk10: runtimeTrial.report?.postTrialEvidence?.currentHighestRisk10 ?? null,
+      nextStep: runtimeTrial.report?.nextStep || ''
+    } : null,
     decision: candidate ? {
-      status: decision?.status || 'unknown',
+      status: runtimeTrialDecision?.status || decision?.status || 'unknown',
+      candidateStatus: decision?.status || 'unknown',
       keep: accepted,
-      acceptedRuntimePromotion: !!runtimePromotion,
+      runtimeTrialRejected: runtimeTrialDecision?.status === 'runtime-trial-rejected',
+      acceptedRuntimePromotion: !!runtimePromotion && runtimeTrialDecision?.status !== 'runtime-trial-rejected',
       runtimePromotion,
       best: decision?.best || null,
       measuredBest: decision?.measuredBest || null,
-      reason: decision?.reason || ''
+      reason: runtimeTrialDecision?.reason || decision?.reason || ''
     } : {
       status: 'candidate-loop-missing',
+      candidateStatus: 'candidate-loop-missing',
       keep: false,
+      runtimeTrialRejected: false,
       acceptedRuntimePromotion: false,
       best: null,
       measuredBest: null,
@@ -340,27 +374,38 @@ function cueArtifact({ cue, family, comparisonByCue, risks }){
 
 function familyDecision(family, cues){
   const acceptedCueCount = cues.filter(cue => cue.decision.keep).length;
+  const rejectedTrialCueCount = cues.filter(cue => cue.decision.runtimeTrialRejected).length;
   const sweptCueCount = cues.filter(cue => cue.candidateHistory.candidateCount > 0).length;
   const missingCueCount = cues.length - sweptCueCount;
   const highestRiskCue = cues
     .filter(cue => cue.currentRisk)
     .slice()
     .sort((a, b) => (+b.currentRisk.gapRisk10 || 0) - (+a.currentRisk.gapRisk10 || 0))[0] || null;
+  const rejectedTrialCue = cues.find(cue => cue.decision.runtimeTrialRejected && cue.cue === highestRiskCue?.cue)
+    || cues.find(cue => cue.decision.runtimeTrialRejected)
+    || null;
   const noKeeperCueCount = cues.filter(cue => cue.candidateHistory.candidateCount > 0 && !cue.decision.keep).length;
-  const runtimePromotionReady = acceptedCueCount > 0 && family.id !== 'formation-stage-ambience';
+  const runtimePromotionReady = acceptedCueCount > 0 && !rejectedTrialCueCount && family.id !== 'formation-stage-ambience';
   return {
-    status: acceptedCueCount ? 'keeper-found-awaiting-full-promotion-gates' : (sweptCueCount ? 'swept-no-runtime-keeper' : 'candidate-loop-needed'),
+    status: rejectedTrialCueCount ? 'runtime-trial-rejected-needs-new-strategy' : (acceptedCueCount ? 'keeper-found-awaiting-full-promotion-gates' : (sweptCueCount ? 'swept-no-runtime-keeper' : 'candidate-loop-needed')),
     acceptedCueCount,
+    rejectedTrialCueCount,
     sweptCueCount,
     missingCueCount,
     noKeeperCueCount,
     highestRiskCue: highestRiskCue?.cue || '',
     highestRisk10: round(highestRiskCue?.currentRisk?.gapRisk10, 2),
     runtimePromotionReady,
-    recommendation: runtimePromotionReady
-      ? `Review accepted ${family.label} cue(s) against final theme comparison, semantic score, and overall quality before editing runtime audio.`
+    recommendation: rejectedTrialCue
+      ? `${rejectedTrialCue.cue}: ${rejectedTrialCue.runtimeTrial?.nextStep || 'Preserve the rejected runtime-trial evidence and generate a safer candidate before another promotion attempt.'}`
+      : runtimePromotionReady && highestRiskCue && !highestRiskCue.decision.keep && highestRiskCue.candidateHistory?.nextStep
+      ? `${highestRiskCue.cue}: ${highestRiskCue.candidateHistory.nextStep}`
+      : runtimePromotionReady
+        ? `Review accepted ${family.label} cue(s) against final theme comparison, semantic score, and overall quality before editing runtime audio.`
       : (highestRiskCue
-        ? `Continue candidate generation for ${highestRiskCue.cue}; current risk ${round(highestRiskCue.currentRisk.gapRisk10, 2)}/10.`
+        ? (highestRiskCue.candidateHistory?.nextStep
+          ? `${highestRiskCue.cue}: ${highestRiskCue.candidateHistory.nextStep}`
+          : `Continue candidate generation for ${highestRiskCue.cue}; current risk ${round(highestRiskCue.currentRisk.gapRisk10, 2)}/10.`)
         : `Add focused candidate loops for ${family.label}.`)
   };
 }
@@ -400,6 +445,7 @@ function markdown(report){
     `- Highest current risk: ${report.summary.highestRiskCue || 'n/a'} ${report.summary.highestRisk10 ?? 'n/a'}/10`,
     `- Cue-contract readiness: ${report.summary.contractReadinessScore10 ?? 'n/a'}/10`,
     `- Contract blocked cues: ${report.summary.contractBlockedCueCount ?? 'n/a'}`,
+    `- Runtime trial rejections tracked: ${report.summary.runtimeTrialRejectedCount}`,
     `- Runtime promotions accepted by this lab: ${report.summary.runtimePromotionCount}`,
     '',
     '## Cue Families',
@@ -410,7 +456,7 @@ function markdown(report){
   for(const family of report.families){
     lines.push(`| ${family.label} | ${family.cues.map(cue => cue.cue).join(', ')} | ${family.decision.sweptCueCount}/${family.cues.length} | ${family.decision.acceptedCueCount} | ${family.scoreContext.averageRisk10 ?? 'n/a'} | ${family.decision.status} | ${family.decision.recommendation} |`);
   }
-  lines.push('', '## Promotion Rule', '', report.promotionRule, '');
+  lines.push('', '## Promotion Rule', '', report.promotionRule);
   return `${lines.join('\n')}\n`;
 }
 
@@ -433,9 +479,14 @@ function main(){
   const risks = cueRiskRows(eventGap);
   const families = CUE_FAMILIES.map(family => familyArtifact({ family, comparisonByCue, risks }));
   const runtimePromotionCount = families.reduce((sum, family) => sum + family.cues.filter(cue => cue.decision.keep && cue.decision.acceptedRuntimePromotion).length, 0);
+  const runtimeTrialRejectedCount = families.reduce((sum, family) => sum + family.cues.filter(cue => cue.decision.runtimeTrialRejected).length, 0);
   const keeperCueCount = families.reduce((sum, family) => sum + family.cues.filter(cue => cue.decision.keep).length, 0);
   const sweptCueCount = families.reduce((sum, family) => sum + family.cues.filter(cue => cue.candidateHistory.candidateCount > 0).length, 0);
   const cueCount = families.reduce((sum, family) => sum + family.cues.length, 0);
+  const highestRiskFamily = families
+    .slice()
+    .sort((a, b) => (+b.decision.highestRisk10 || 0) - (+a.decision.highestRisk10 || 0))[0] || null;
+  const labNextStep = highestRiskFamily?.decision?.recommendation || contractAnalysis?.nextStep || eventGap.nextStep || 'Run the next focused audio candidate loop, then rebuild this lab artifact.';
   const report = {
     schemaVersion: 1,
     artifactType: 'aurora-audio-conformance-lab-v2',
@@ -443,7 +494,7 @@ function main(){
     branch,
     commit,
     dirty,
-    problem: 'Aurora audio is the current weakest quality category; stagePulse onset and acoustic event matching are the highest measured risks.',
+    problem: 'Aurora audio is the current weakest quality category; the lab keeps cue-family candidate history tied to the latest measured event-gap risks.',
     strategy: 'Group cue families by player meaning, attach current event-gap risk, attach focused candidate-loop history, and allow runtime promotion only after measured keeper gates plus full audio/semantic/quality checks.',
     successMeasure: 'Move audio toward 7.5+/10 while preserving 9/9 cue alignment, semantic audio near 9.78/10, and overall quality >= 9.2/10.',
     promotionRule: 'This analyzer records keeper candidates but does not edit runtime cue definitions. Runtime promotion requires a keeper, a refreshed full theme comparison, no cue-alignment regression, no semantic regression, and overall quality >= 9.2.',
@@ -453,7 +504,8 @@ function main(){
       applicationGuide: rel(GUIDE_PATH),
       audioCueContracts: fs.existsSync(CONTRACT_PATH) ? rel(CONTRACT_PATH) : null,
       contractAnalysis: contractAnalysisPath ? rel(contractAnalysisPath) : null,
-      candidateRoot: rel(CANDIDATE_ROOT)
+      candidateRoot: rel(CANDIDATE_ROOT),
+      runtimeTrialRoot: rel(RUNTIME_TRIAL_ROOT)
     },
     summary: {
       audioScore10: round(qualityAudio.category?.score10, 2),
@@ -468,6 +520,7 @@ function main(){
       sweptCueCount,
       keeperCueCount,
       runtimePromotionCount,
+      runtimeTrialRejectedCount,
       candidateLoopCoverage: round(cueCount ? sweptCueCount / cueCount : 0, 3),
       contractReadinessScore10: round(contractAnalysis?.summary?.averageReadinessScore10, 2),
       contractBlockedCueCount: contractAnalysis?.summary?.blockedCueCount ?? null,
@@ -475,7 +528,7 @@ function main(){
       nextGap: eventGap.nextStep || ''
     },
     families,
-    nextStep: contractAnalysis?.nextStep || eventGap.nextStep || 'Run the next focused audio candidate loop, then rebuild this lab artifact.'
+    nextStep: labNextStep
   };
   const outDir = path.join(OUT_ROOT, `${generatedAt.slice(0, 10)}-${commit}${dirty ? '-dirty' : ''}`);
   writeJson(path.join(outDir, 'report.json'), report);

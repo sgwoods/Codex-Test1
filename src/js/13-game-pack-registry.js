@@ -97,14 +97,18 @@ function currentGamePackStagePresentation(stage,challenge){
   else break;
  }
  const shownStage=formatDisplayedStage(stage,challenge);
+ const challengeNumber=typeof challengeStageNumberForInternalStage==='function'
+  ? challengeStageNumberForInternalStage(stage)
+  : '';
+ const challengeBracket=challenge?`LEVELS ${stage}-${stage+1}`:'';
  const atmosphereTheme=theme?.atmosphereTheme||theme?.backgroundMode||pack.frontDoor?.atmosphereTheme||'classic-arcade';
  return Object.assign({},theme,{
   atmosphereTheme,
   backgroundMode:resolvePackAtmosphereBackground({pack,atmosphereTheme,phase:challenge?'challenge':'stage'}),
-  challengeTitle:challenge?'CHALLENGING STAGE':`STAGE ${shownStage}`,
-  stageLabel:challenge?'BONUS STAGE':`STAGE ${shownStage}`,
-  transitionTitle:challenge?'CHALLENGING STAGE':`STAGE ${shownStage}`,
-  transitionSub:challenge?'BONUS STAGE':'NEXT PHASE'
+  challengeTitle:challenge?`CHALLENGING STAGE ${challengeNumber||''}`.trim():`STAGE ${shownStage}`,
+  stageLabel:challenge?challengeBracket:`STAGE ${shownStage}`,
+  transitionTitle:challenge?`CHALLENGING STAGE ${challengeNumber||''}`.trim():`STAGE ${shownStage}`,
+  transitionSub:challenge?challengeBracket:'NEXT PHASE'
  });
 }
 
@@ -203,16 +207,29 @@ function currentGamePackFormationLayout(stage){
 function currentGamePackChallengeLayout(stage){
  const pack=currentGamePack();
  const stageNumber=Number.isFinite(+stage)?+stage:(typeof S!=='undefined'?S.stage:1);
- if(typeof pack.challengeLayoutForStage==='function')return pack.challengeLayoutForStage(stageNumber);
- if(Array.isArray(pack.challengeLayouts)){
-  let layout=pack.challengeLayouts[0];
+ let layout=null;
+ if(typeof pack.challengeLayoutForStage==='function')layout=pack.challengeLayoutForStage(stageNumber);
+ else if(Array.isArray(pack.challengeLayouts)){
+  layout=pack.challengeLayouts[0];
   for(const candidate of pack.challengeLayouts){
    if(stageNumber>=candidate.fromStage)layout=candidate;
    else break;
   }
-  return layout;
+ }else layout=pack.challengeLayout;
+ const harnessOverride=typeof S!=='undefined'&&S.harnessChallengeLayoutOverride
+  ? S.harnessChallengeLayoutOverride
+  : null;
+ const overrideLayout=harnessOverride&&(!Number.isFinite(+harnessOverride.stage)||+harnessOverride.stage===stageNumber)
+  ? harnessOverride.layout
+  : null;
+ if(overrideLayout&&typeof overrideLayout==='object'){
+  return Object.assign({},layout||{},overrideLayout,{
+   laneTypes:Array.isArray(overrideLayout.laneTypes)?overrideLayout.laneTypes:(layout?.laneTypes||[]),
+   groupLaneTypes:Array.isArray(overrideLayout.groupLaneTypes)?overrideLayout.groupLaneTypes:(layout?.groupLaneTypes||[]),
+   groupPathFamilies:Array.isArray(overrideLayout.groupPathFamilies)?overrideLayout.groupPathFamilies:(layout?.groupPathFamilies||[])
+  });
  }
- return pack.challengeLayout;
+ return layout;
 }
 
 function currentGamePackFrameAccentTheme(stagePresentation){

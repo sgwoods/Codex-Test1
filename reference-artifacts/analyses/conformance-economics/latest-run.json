@@ -1,29 +1,31 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-15T02-09-09-476Z-49173",
-  "startedAt": "2026-05-15T02:09:09.476Z",
-  "endedAt": "2026-05-15T02:10:15.449Z",
-  "branch": "codex/macbook-post-beta-conformance-10h",
-  "commit": "02ae3190",
+  "id": "2026-05-17T12-53-02-059Z-31554",
+  "startedAt": "2026-05-17T12:53:02.059Z",
+  "endedAt": "2026-05-17T12:54:17.107Z",
+  "branch": "codex/macbook-audio-entry-grounding-cycle",
+  "commit": "f9e7374c",
   "command": [
     "npm",
     "run",
     "harness:score:quality-conformance"
   ],
   "axes": [
-    "unspecified"
+    "quality-score",
+    "audio-conformance",
+    "challenge-stage-conformance"
   ],
   "resources": [
     "cpu"
   ],
   "notes": "",
   "measurement": {
-    "wallSeconds": 65.973,
-    "timeRealSeconds": 65.96,
-    "timeUserSeconds": 58.05,
-    "timeSystemSeconds": 18.14,
-    "cpuSeconds": 76.19,
+    "wallSeconds": 75.048,
+    "timeRealSeconds": 75.04,
+    "timeUserSeconds": 65.79,
+    "timeSystemSeconds": 21.93,
+    "cpuSeconds": 87.72,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -45,8 +47,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 634536001,
-    "artifactBytesAfter": 635128432,
-    "artifactBytesDelta": 592431
+    "artifactBytesBefore": 1072002552,
+    "artifactBytesAfter": 1072702925,
+    "artifactBytesDelta": 700373
   }
 }

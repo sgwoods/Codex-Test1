@@ -1,0 +1,195 @@
+{
+  "generatedAt": "2026-05-16T12:39:43.103Z",
+  "commit": "82fd62cb",
+  "artifactType": "alien-entry-challenge-variation",
+  "score10": 8.2,
+  "summary": {
+    "score10": 8.2,
+    "confidence": "medium",
+    "resolution": "Dedicated planning scorer using stage-signature distance, runtime path-family signatures, challenge-window coverage, alien-family novelty, and reference-comparison readiness.",
+    "problem": "Aurora still reads too repetitive for alien entry and challenge-stage invention: regular stages are not distinct enough, challenge stages need stronger arrival-versus-appearance evidence, and alien novelty is not yet scored against multiple reference-like challenge set pieces.",
+    "strategy": "Run a long-cycle evidence pass before gameplay tuning: capture early/mid/late regular entries and several challenge stages, label first-visible arrival, alien families, path families, target groups, exits, and bonus opportunities, promote reference contact sheets, then tune stage scripts and challenge waves against the resulting gaps.",
+    "successMeasure": "Raise this score above 7.5 with at least four challenge evidence windows, regular-stage minimum signature distance above 0.22, two or more distinct challenge trajectory signatures, challenge arrival/readability above 7.2, and reference-grounded path precision readiness above 7.0.",
+    "weakestMetric": {
+      "id": "regular-entry-geometry-separation",
+      "label": "Regular-entry geometry separation",
+      "score10": 5.9,
+      "currentRead": "Minimum regular geometry distance 0.083; mean regular geometry distance 0.127; closest pair mid-run-entry-variant / late-run-cleanup-or-failure.",
+      "calculation": "Measures whether regular stages differ in actual trajectory geometry, using mean x/y range, path length, turns, reversals, and lower-field share instead of accepting a path-family label alone.",
+      "strategy": "Tune the weakest close pair with a visibly different entry route, then rerun path-slot extraction and this scorer."
+    }
+  },
+  "metrics": [
+    {
+      "id": "regular-stage-entry-variation",
+      "label": "Regular-stage alien entry variation",
+      "score10": 10,
+      "currentRead": "Minimum regular-stage distance 0.261; mean regular distance 0.315; distinct-pair ratio 1.",
+      "calculation": "Measures whether nearby regular stages have meaningfully different entry/rack/attack signatures instead of repeated mid-stage patterns.",
+      "strategy": "Increase stage-specific entry scripts and rack/formation differences, then rerun stage-signature distance and path-family comparison."
+    },
+    {
+      "id": "entry-path-family-specificity",
+      "label": "Entry trajectory and path-family specificity by stage",
+      "score10": 8.8,
+      "currentRead": "7/7 regular path-family signatures are distinct; repetition risk 0; path-family score 8.2/10.",
+      "calculation": "Measures whether stages use recognizably different entry trajectories and path families, not only the same broad family names with changed pressure.",
+      "strategy": "Promote per-stage path family labels and add authored route variants for early/mid/late stages before retuning score targets."
+    },
+    {
+      "id": "regular-entry-geometry-separation",
+      "label": "Regular-entry geometry separation",
+      "score10": 5.9,
+      "currentRead": "Minimum regular geometry distance 0.083; mean regular geometry distance 0.127; closest pair mid-run-entry-variant / late-run-cleanup-or-failure.",
+      "calculation": "Measures whether regular stages differ in actual trajectory geometry, using mean x/y range, path length, turns, reversals, and lower-field share instead of accepting a path-family label alone.",
+      "strategy": "Tune the weakest close pair with a visibly different entry route, then rerun path-slot extraction and this scorer."
+    },
+    {
+      "id": "challenge-trajectory-variation",
+      "label": "Challenging-stage trajectory variation",
+      "score10": 10,
+      "currentRead": "4/4 challenge path windows; 4 distinct challenge path-family signatures; first challenge family count 9.",
+      "calculation": "Measures whether challenge stages introduce multiple learnable trajectory set pieces rather than one repeated challenge vocabulary.",
+      "strategy": "Capture and compare challenge stages across several challenge numbers, then add trajectory families for sweeps, arcs, lane waves, boss-led waves, and late-stage specialty entries."
+    },
+    {
+      "id": "challenge-arrival-vs-appearance",
+      "label": "Challenging-stage arrival versus appearance",
+      "score10": 7.4,
+      "currentRead": "Runtime arrival evidence score 7.4/10; reference cap 10/10; challenge geometry mean distance 0.076.",
+      "calculation": "Measures whether challenge-stage aliens visibly arrive through readable paths rather than feeling like they simply appear in place. This is capped until contact-sheet or frame-labeled Galaga challenge references prove the arrival grammar.",
+      "strategy": "Add challenge-stage contact sheets with first-visible, entry-side, path-commit, target-group, and exit labels; then tune challenge spawns and paths against the weakest arrival/readability delta."
+    },
+    {
+      "id": "challenge-alien-novelty",
+      "label": "Challenging-stage alien novelty and introduction",
+      "score10": 7.9,
+      "currentRead": "4/4 challenge evidence windows; challenge entity signatures bee|boss|but|rogue, bee|boss|but, bee|boss|but|rogue, bee|boss|but|rogue.",
+      "calculation": "Measures whether challenge stages use alien introductions and enemy composition as a teaching/reward device.",
+      "strategy": "Add evidence windows for successive challenge stages and score new-alien introduction, path novelty, bonus opportunity clarity, and result feedback as separate signals."
+    },
+    {
+      "id": "challenge-pattern-novelty-depth",
+      "label": "Challenging-stage pattern novelty depth",
+      "score10": 7.2,
+      "currentRead": "Pattern-depth raw score 7.2/10; 4 challenge path signatures; challenge entity novelty ratio 0.5.",
+      "calculation": "Measures whether later challenge stages create genuinely new learnable set pieces by combining path family, alien composition, group timing, and bonus opportunity instead of reskinning the same wave.",
+      "strategy": "Split challenge stages into named pattern contracts, then run long-cycle persona and path extraction to verify each challenge stage teaches a distinct bonus-stage skill."
+    },
+    {
+      "id": "reference-grounded-path-precision",
+      "label": "Reference-grounded path precision readiness",
+      "score10": 8.8,
+      "currentRead": "Path comparison confidence 0.8; accepted reference labels 6 regular / 4 challenge; label coverage 10/10; current cap 8.2/10 (media-backed-reference-label-cap); trajectory-vector/rack score 5.3/10 (reference-trajectory-vector-comparison-active-no-cap-lift); path-slot extraction score 9.8/10.",
+      "calculation": "Measures whether the harness is ready to compare Aurora trajectories to frame-labeled Galaga reference paths instead of heuristic runtime families.",
+      "strategy": "Use the active trajectory-vector/rack-slot comparison to tune the weakest runtime windows against their best Galaga reference matches before lifting the cap."
+    }
+  ],
+  "observed": {
+    "regularWindowCount": 7,
+    "challengeWindowCount": 4,
+    "regularPathWindowCount": 7,
+    "challengePathWindowCount": 4,
+    "minRegularDistance": 0.261,
+    "meanRegularDistance": 0.315,
+    "minRegularGeometryDistance": 0.083,
+    "meanRegularGeometryDistance": 0.127,
+    "closestRegularGeometryPair": {
+      "a": "mid-run-entry-variant",
+      "b": "late-run-cleanup-or-failure",
+      "distance": 0.083,
+      "aVector": {
+        "xRange": 160.468,
+        "yRange": 252.584,
+        "pathLength": 638.005,
+        "turnCount": 11.875,
+        "reversalCount": 4.6,
+        "lowerFieldShare": 0.02
+      },
+      "bVector": {
+        "xRange": 151.036,
+        "yRange": 312.721,
+        "pathLength": 677.746,
+        "turnCount": 12.35,
+        "reversalCount": 3.225,
+        "lowerFieldShare": 0.022
+      },
+      "delta": {
+        "xRange": -9.432,
+        "yRange": 60.137,
+        "pathLength": 39.741,
+        "turnCount": 0.475,
+        "reversalCount": -1.375,
+        "lowerFieldShare": 0.002
+      }
+    },
+    "minChallengeGeometryDistance": 0.031,
+    "meanChallengeGeometryDistance": 0.076,
+    "closestChallengeGeometryPair": {
+      "a": "challenge-stage-scorpion-cross",
+      "b": "challenge-stage-stingray-hook",
+      "distance": 0.031,
+      "aVector": {
+        "xRange": 153.988,
+        "yRange": 143.932,
+        "pathLength": 359.414,
+        "turnCount": 3.875,
+        "reversalCount": 2.625,
+        "lowerFieldShare": 0.039
+      },
+      "bVector": {
+        "xRange": 136.751,
+        "yRange": 151.197,
+        "pathLength": 340.398,
+        "turnCount": 3.6,
+        "reversalCount": 2.325,
+        "lowerFieldShare": 0.034
+      },
+      "delta": {
+        "xRange": -17.237,
+        "yRange": 7.265,
+        "pathLength": -19.016,
+        "turnCount": -0.275,
+        "reversalCount": -0.3,
+        "lowerFieldShare": -0.005
+      }
+    },
+    "distinctPairRatio": 1,
+    "repetitionRisk": 0,
+    "regularSignatureCount": 7,
+    "challengeSignatureCount": 4,
+    "regularEntitySignatures": [
+      "bee|boss|but",
+      "bee|boss|but|game_start|key_down"
+    ],
+    "challengeEntitySignatures": [
+      "bee|boss|but|rogue",
+      "bee|boss|but"
+    ],
+    "acceptedReferenceLabelCounts": {
+      "regularEntry": 6,
+      "challengeEntry": 4,
+      "coverageScore10": 10,
+      "directReferenceReady": true,
+      "labelBackedComparisonReady": true,
+      "referenceCapReason": "media-backed-reference-label-cap",
+      "trajectoryComparisonScore10": 5.3,
+      "trajectoryComparisonStatus": "reference-trajectory-vector-comparison-active-no-cap-lift",
+      "trajectoryComparisonCapLiftReady": false
+    }
+  },
+  "sourceReports": {
+    "formationBossGrammar": "reference-artifacts/analyses/formation-boss-grammar-conformance/2026-05-15-eb6d951f/report.json",
+    "pathFamilyComparison": "reference-artifacts/analyses/formation-boss-path-family-comparison/2026-05-16-82fd62cb/report.json",
+    "stageSignatureDistance": "reference-artifacts/analyses/stage-signature-distance/2026-05-15-60326a33/report.json",
+    "pathSlotExtraction": "reference-artifacts/analyses/formation-boss-path-slot-extraction/2026-05-16-82fd62cb/report.json",
+    "galagaPathReferenceLabels": "reference-artifacts/analyses/galaga-path-reference-labels/2026-05-15-c8c7246f/report.json"
+  },
+  "longCyclePlan": [
+    "Refresh runtime extraction across stage 1, 2, 4, 6, 8, 10, 12, 14 and challenge stages 3, 7, 11, 15.",
+    "Generate contact sheets and path SVGs for each window, then label alien family, first visible frame, entry side, arrival path, target group, exit path, rack target, novelty role, and bonus opportunity.",
+    "Add Galaga-family reference contact sheets for regular entries and challenging stages so path precision can move from heuristic coverage to direct comparison.",
+    "Rank gameplay changes by measured gap: regular-stage signature distance first, challenge trajectory family count second, alien novelty and reward clarity third.",
+    "After each candidate change, rerun path-slot extraction, path-family comparison, this scorer, level-arc scoring, and quality conformance."
+  ]
+}

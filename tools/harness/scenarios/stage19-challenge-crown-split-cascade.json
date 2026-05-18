@@ -1,0 +1,26 @@
+{
+  "name": "stage19-challenge-crown-split-cascade",
+  "seed": 19019,
+  "duration": 24,
+  "config": {
+    "stage": 19,
+    "ships": 5,
+    "challenge": true
+  },
+  "actions": [
+    { "t": 0.35, "action": "down", "code": "Space" },
+    { "t": 0.55, "action": "down", "code": "ArrowRight" },
+    { "t": 2.9, "action": "up", "code": "ArrowRight" },
+    { "t": 2.91, "action": "down", "code": "ArrowLeft" },
+    { "t": 5.9, "action": "up", "code": "ArrowLeft" },
+    { "t": 5.91, "action": "down", "code": "ArrowRight" },
+    { "t": 9.4, "action": "up", "code": "ArrowRight" },
+    { "t": 9.41, "action": "down", "code": "ArrowLeft" },
+    { "t": 13.6, "action": "up", "code": "ArrowLeft" },
+    { "t": 13.61, "action": "down", "code": "ArrowRight" },
+    { "t": 17.9, "action": "up", "code": "ArrowRight" },
+    { "t": 17.91, "action": "down", "code": "ArrowLeft" },
+    { "t": 20.8, "action": "up", "code": "ArrowLeft" },
+    { "t": 21.2, "action": "up", "code": "Space" }
+  ]
+}

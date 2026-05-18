@@ -21,7 +21,11 @@ async function readStageSnapshot(page){
       snap: window.__galagaHarness__.snapshot(),
       banner,
       requestedStage: +document.getElementById('testStage')?.value || 0,
+      requestedStartKind: document.getElementById('testStartKind')?.value || 'level',
+      requestedChallengeStage: +document.getElementById('testChallengeStage')?.value || 0,
       savedStage: +saved.stage || 0,
+      savedStartKind: saved.startKind || '',
+      savedChallengeStage: +saved.challengeStage || 0,
       displayedStage: shownMatch ? +shownMatch[1] : null
     };
   });
@@ -32,13 +36,36 @@ async function readDeveloperStart(stage){
     await page.evaluate(requestedStage => {
       if(typeof installGamePack === 'function')installGamePack('aurora-galactica');
       const stageEl = document.getElementById('testStage');
+      const startKindEl = document.getElementById('testStartKind');
+      const challengeStageEl = document.getElementById('testChallengeStage');
       const shipsEl = document.getElementById('testShips');
       const challengeEl = document.getElementById('testChallenge');
+      if(startKindEl)startKindEl.value = 'level';
       if(stageEl)stageEl.value = String(requestedStage);
+      if(challengeStageEl)challengeStageEl.value = '1';
       if(shipsEl)shipsEl.value = '3';
       if(challengeEl)challengeEl.checked = false;
       window.startActiveGamePack();
     }, stage);
+    await sleep(250);
+    return readStageSnapshot(page);
+  });
+}
+
+async function readDeveloperChallengeStart(challengeStage){
+  return withHarnessPage({ skipStart: true, seed: 7709 }, async ({ page }) => {
+    await page.evaluate(requestedChallenge => {
+      if(typeof installGamePack === 'function')installGamePack('aurora-galactica');
+      const startKindEl = document.getElementById('testStartKind');
+      const challengeStageEl = document.getElementById('testChallengeStage');
+      const stageEl = document.getElementById('testStage');
+      const shipsEl = document.getElementById('testShips');
+      if(startKindEl)startKindEl.value = 'challenge';
+      if(challengeStageEl)challengeStageEl.value = String(requestedChallenge);
+      if(stageEl)stageEl.value = '1';
+      if(shipsEl)shipsEl.value = '3';
+      window.startActiveGamePack();
+    }, challengeStage);
     await sleep(250);
     return readStageSnapshot(page);
   });
@@ -71,8 +98,19 @@ async function main(){
   if(harnessStage7.state.stage !== 7 || !harnessStage7.state.challenge){
     fail('harness stage 7 should keep the historical internal-stage semantics used by conformance scenarios', harnessStage7);
   }
-  if(harnessStage7.banner?.bannerTxt !== 'CHALLENGING STAGE'){
+  if(harnessStage7.banner?.bannerTxt !== 'CHALLENGING STAGE 2'){
     fail('harness internal stage 7 should still present the second challenge window', harnessStage7);
+  }
+
+  const developerChallenge2 = await readDeveloperChallengeStart(2);
+  if(!developerChallenge2.state.started || !developerChallenge2.state.challenge){
+    fail('developer challenge-stage start did not enter challenge gameplay', developerChallenge2);
+  }
+  if(developerChallenge2.state.stage !== 7 || developerChallenge2.requestedStartKind !== 'challenge' || developerChallenge2.requestedChallengeStage !== 2){
+    fail('developer Challenging Stage 2 should map to Aurora internal challenge marker 7', developerChallenge2);
+  }
+  if(developerChallenge2.banner?.bannerTxt !== 'CHALLENGING STAGE 2' || developerChallenge2.banner?.bannerSub !== 'LEVELS 7-8'){
+    fail('developer challenge-stage start should present challenge-stage numbering and level bracket separately', developerChallenge2);
   }
 
   console.log(JSON.stringify({
@@ -90,6 +128,13 @@ async function main(){
       displayedStage: harnessStage7.displayedStage,
       challenge: harnessStage7.state.challenge,
       bannerTxt: harnessStage7.banner.bannerTxt
+    },
+    developerChallengeStart: {
+      requestedChallengeStage: developerChallenge2.requestedChallengeStage,
+      internalStage: developerChallenge2.state.stage,
+      challenge: developerChallenge2.state.challenge,
+      bannerTxt: developerChallenge2.banner.bannerTxt,
+      bannerSub: developerChallenge2.banner.bannerSub
     }
   }, null, 2));
 }
