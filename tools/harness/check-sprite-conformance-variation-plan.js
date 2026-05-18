@@ -5,6 +5,7 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..', '..');
 const PLAN = path.join(ROOT, 'reference-artifacts', 'ingestion', 'sprite-conformance-variation-plan', 'plan-0.1.json');
 const CROP_MANIFEST = path.join(ROOT, 'reference-artifacts', 'ingestion', 'galaga-alien-visual-reference', 'crop-box-manifest-0.1.json');
+const CROP_PREVIEW = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-visual-crop-previews', 'latest.json');
 
 function fail(message, payload){
   console.error(message);
@@ -66,6 +67,18 @@ const missingArtifacts = (plan.artifacts || [])
 if(missingArtifacts.length){
   fail('Sprite plan references missing artifacts.', { missingArtifacts });
 }
+const artifactPaths = new Set((plan.artifacts || []).map(item => item.path));
+for(const expected of [
+  'GALAGA_ALIEN_CROP_PREVIEW.md',
+  'reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json'
+]){
+  if(!artifactPaths.has(expected)){
+    fail('Sprite plan should include the generated crop-preview artifact.', { expected });
+  }
+}
+if(!fs.existsSync(CROP_PREVIEW)){
+  fail(`Missing generated Galaga alien crop preview report: ${rel(CROP_PREVIEW)}`);
+}
 
 const requiredRoles = [
   'player-fighter',
@@ -94,5 +107,6 @@ console.log(JSON.stringify({
   successCriteriaCount: (plan.successCriteria || []).length,
   cropRegionCount: (cropManifest.regions || []).length,
   targetRoleCount: (cropManifest.targetRolePlan || []).length,
+  cropPreview: rel(CROP_PREVIEW),
   nextBestStep: plan.nextBestStep || ''
 }, null, 2));

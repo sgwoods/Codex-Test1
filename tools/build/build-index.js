@@ -71,6 +71,7 @@ const CHALLENGE_STAGE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'anal
 const LEVEL_VISUAL_CONFORMANCE_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'level-visual-conformance-index', 'latest.json');
 const GALAGA_TARGET_ARTIFACT_COVERAGE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-artifact-coverage', 'latest.json');
 const GALAGA_ALIEN_VISUAL_REFERENCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-visual-reference', 'latest.json');
+const GALAGA_ALIEN_CROP_PREVIEWS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-visual-crop-previews', 'latest.json');
 const SPRITE_CONFORMANCE_VARIATION_PLAN = path.join(ROOT, 'reference-artifacts', 'ingestion', 'sprite-conformance-variation-plan', 'plan-0.1.json');
 const PERSONA_PERFORMANCE_DISTRIBUTION = path.join(ROOT, 'reference-artifacts', 'analyses', 'persona-performance-distribution', 'latest.json');
 const CATALOG_MEDIA_SOURCE_PATHS = new Set();
@@ -3107,6 +3108,7 @@ let challengeStageConformanceCache = null;
 let levelVisualConformanceIndexCache = null;
 let galagaTargetArtifactCoverageCache = null;
 let galagaAlienVisualReferenceCache = null;
+let galagaAlienCropPreviewsCache = null;
 let spriteConformanceVariationPlanCache = null;
 
 function loadGalagaReferenceSpriteTargets(){
@@ -3156,6 +3158,25 @@ function loadGalagaAlienVisualReference(){
     galagaAlienVisualReferenceCache = { entries: [], roleCoverage: [], summary: {} };
   }
   return galagaAlienVisualReferenceCache;
+}
+
+function loadGalagaAlienCropPreviews(){
+  if(galagaAlienCropPreviewsCache) return galagaAlienCropPreviewsCache;
+  if(!fs.existsSync(GALAGA_ALIEN_CROP_PREVIEWS)){
+    galagaAlienCropPreviewsCache = { regions: [], targetRolePlan: [], summary: {} };
+    return galagaAlienCropPreviewsCache;
+  }
+  try {
+    const artifact = readJson(GALAGA_ALIEN_CROP_PREVIEWS);
+    galagaAlienCropPreviewsCache = Object.assign({}, artifact, {
+      regions: Array.isArray(artifact.regions) ? artifact.regions : [],
+      targetRolePlan: Array.isArray(artifact.targetRolePlan) ? artifact.targetRolePlan : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    galagaAlienCropPreviewsCache = { regions: [], targetRolePlan: [], summary: {} };
+  }
+  return galagaAlienCropPreviewsCache;
 }
 
 function loadSpriteConformanceVariationPlan(){
@@ -4070,6 +4091,60 @@ function renderSpriteConformanceSuccessRows(plan){
   `).join('\n');
 }
 
+function renderGalagaAlienCropPreviewRows(report){
+  const regions = Array.isArray(report?.regions) ? report.regions : [];
+  if(!regions.length){
+    return `
+    <tr>
+      <td colspan="5"><span class="docMeta">Crop previews pending. Run <code>npm run harness:analyze:galaga-alien-crop-previews</code>.</span></td>
+    </tr>`;
+  }
+  return regions.map((region) => {
+    const hasGrid = Number.isFinite(+region.gridCellCount) && +region.gridCellCount > 0;
+    const candidateRead = hasGrid
+      ? `<strong>${esc(region.interestingCellCount ?? 0)}/${esc(region.gridCellCount ?? 0)}</strong> lit candidate cells<br><span class="docMeta">channels: ${esc((region.tokenChannels || []).join(', ') || 'none')}</span>`
+      : `<strong>Region-level review</strong><br><span class="docMeta">${esc(region.litPixels ?? 0)} lit pixels; channels: ${esc((region.tokenChannels || []).join(', ') || 'none')}</span>`;
+    return `
+    <tr>
+      <td><strong>${esc(region.label || region.id || '')}</strong><br><span class="docMeta"><code>${esc(region.id || '')}</code><br>${esc(region.promotionStatus || '')}</span></td>
+      <td>${renderMediaImage({
+        label: 'Region preview',
+        src: region.previewImage,
+        pixelated: true,
+        note: 'Source-sheet region crop generated from the crop-box manifest.'
+      })}</td>
+      <td>${region.gridPreviewImage ? renderMediaImage({
+        label: 'Grid review overlay',
+        src: region.gridPreviewImage,
+        pixelated: true,
+        note: 'Grid overlay for reviewing exact candidate cells before promotion.'
+      }) : '<span class="docMeta">No grid overlay for this region.</span>'}</td>
+      <td>${candidateRead}</td>
+      <td>${esc(region.nextReview || '')}</td>
+    </tr>
+  `;
+  }).join('\n');
+}
+
+function renderGalagaAlienCropRoleRows(report){
+  const roles = Array.isArray(report?.targetRolePlan) ? report.targetRolePlan : [];
+  if(!roles.length){
+    return `
+    <tr>
+      <td colspan="5"><span class="docMeta">Target role crop review pending.</span></td>
+    </tr>`;
+  }
+  return roles.map((role) => `
+    <tr>
+      <td><strong>${esc(role.roleKey || '')}</strong><br><span class="docMeta">${esc(role.promotionStatus || '')}</span></td>
+      <td>${(role.requiredPoses || []).map(pose => `<code>${esc(pose)}</code>`).join('<br>')}</td>
+      <td>${(role.candidateRegions || []).map(region => `<code>${esc(region)}</code>`).join('<br>')}</td>
+      <td><strong>${esc(role.interestingCellCount ?? 0)}/${esc(role.candidateCellCount ?? 0)}</strong> candidate cells<br><span class="docMeta">${esc(role.candidateRegionCount ?? 0)} source region(s)</span></td>
+      <td>${esc(role.nextAction || '')}</td>
+    </tr>
+  `).join('\n');
+}
+
 function renderChallengeTargetCoverageRows(report){
   const rows = Array.isArray(report?.challengeStageCoverage) ? report.challengeStageCoverage : [];
   if(!rows.length){
@@ -4246,6 +4321,10 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const spriteConformanceLaneRows = renderSpriteConformanceLaneRows(spriteConformanceVariationPlan);
   const spriteConformancePipelineRows = renderSpriteConformancePipelineRows(spriteConformanceVariationPlan);
   const spriteConformanceSuccessRows = renderSpriteConformanceSuccessRows(spriteConformanceVariationPlan);
+  const galagaAlienCropPreviews = loadGalagaAlienCropPreviews();
+  const galagaAlienCropPreviewSummary = galagaAlienCropPreviews.summary || {};
+  const galagaAlienCropPreviewRows = renderGalagaAlienCropPreviewRows(galagaAlienCropPreviews);
+  const galagaAlienCropRoleRows = renderGalagaAlienCropRoleRows(galagaAlienCropPreviews);
   const conformanceAlienRows = (guide.conformanceAlienRows || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.name || '')}</strong><br><span class="docMeta">${esc(entry.runtime || '')}</span></td>
@@ -4623,6 +4702,50 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <p><strong>Plan status:</strong> ${esc(spriteConformanceVariationPlan.status || 'pending')}. <strong>Next best step:</strong> ${esc(spriteConformanceVariationPlan.nextBestStep || 'Create target crop manifests before raising sprite conformance claims.')}</p>
             <p>This plan separates the internal reference-conformance lane from the Aurora production theme lane. The goal is to ingest and measure toward a conforming experience, then let Aurora and later Platinum games ship distinctive original visual styles that preserve era, motion, role readability, and gameplay meaning.</p>
             <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/ingestion/sprite-conformance-variation-plan/plan-0.1.json</code>. <strong>Readable plan:</strong> <code>SPRITE_CONFORMANCE_VARIATION_STRATEGY.md</code>.</p>
+          </div>
+          <div class="docWrap" style="margin-top:16px;">
+            <h3>Galaga Sprite Crop Preview</h3>
+            <p>The supplied Galaga general sprite sheet now has generated region previews and grid overlays. These are review artifacts, not promoted canonical targets yet: the next conformance step is to choose exact per-role and per-pose boxes, then score Aurora runtime sprites against those accepted targets.</p>
+            <p><strong>Preview status:</strong> ${esc(galagaAlienCropPreviews.status || 'pending')}. <strong>Scoring status:</strong> ${esc(galagaAlienCropPreviewSummary.scoredStatus || 'unscored-preview-only')}.</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json</code>. <strong>Readable report:</strong> <code>GALAGA_ALIEN_CROP_PREVIEW.md</code>. <strong>Generated:</strong> ${esc(galagaAlienCropPreviews.generatedAt || 'pending')}.</p>
+            <div class="metricGrid">
+              <div class="metricCard"><span class="metricLabel">Preview Regions</span><strong>${esc(galagaAlienCropPreviewSummary.regionCount ?? 0)}</strong><span>source-sheet sections</span></div>
+              <div class="metricCard"><span class="metricLabel">Grid Cells</span><strong>${esc(galagaAlienCropPreviewSummary.gridCellCount ?? 0)}</strong><span>candidate cells scanned</span></div>
+              <div class="metricCard"><span class="metricLabel">Lit Candidates</span><strong>${esc(galagaAlienCropPreviewSummary.interestingCellCount ?? 0)}</strong><span>persisted for crop promotion</span></div>
+              <div class="metricCard"><span class="metricLabel">Target Roles</span><strong>${esc(galagaAlienCropPreviewSummary.targetRoleCount ?? 0)}</strong><span>planned for crop promotion</span></div>
+            </div>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Source Region</th>
+                  <th>Preview</th>
+                  <th>Grid Review</th>
+                  <th>Candidate Read</th>
+                  <th>Next Review</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${galagaAlienCropPreviewRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Target Role</th>
+                  <th>Required Poses</th>
+                  <th>Candidate Regions</th>
+                  <th>Candidate Cells</th>
+                  <th>Next Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${galagaAlienCropRoleRows}
+              </tbody>
+            </table>
           </div>
           <div class="tableWrap">
             <table class="dataTable">

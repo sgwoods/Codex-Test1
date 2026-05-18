@@ -147,10 +147,12 @@
         "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
         "reference-artifacts/ingestion/galaga-alien-visual-reference/crop-box-manifest-0.1.json",
         "reference-artifacts/analyses/galaga-alien-visual-reference/latest.json",
+        "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json",
+        "GALAGA_ALIEN_CROP_PREVIEW.md",
         "GALAGA_ALIEN_VISUAL_REFERENCE.md"
       ],
-      "currentUse": "The pack now distinguishes source-sheet crop candidates from fan/product/context images, links the images to role keys, exposes the analysis in the Application Guide alien visual-reference section, and includes a first-pass crop-box manifest for the strongest sprite sheet.",
-      "missingWork": "Generate preview crops from the crop-box manifest, review exact boxes, promote per-role and per-pose target crops, and update runtime sprite scoring so challenge aliens, projectiles, tractor beam, and explosion visuals can be scored against richer Galaga visual vocabulary.",
+      "currentUse": "The pack now distinguishes source-sheet crop candidates from fan/product/context images, links the images to role keys, exposes the analysis in the Application Guide alien visual-reference section, includes a first-pass crop-box manifest for the strongest sprite sheet, and includes generated crop previews/grid overlays for review.",
+      "missingWork": "Review the generated crop previews, promote per-role and per-pose target crops, and update runtime sprite scoring so challenge aliens, projectiles, tractor beam, and explosion visuals can be scored against richer Galaga visual vocabulary.",
       "priority": "critical",
       "confidence": "medium-high"
     },

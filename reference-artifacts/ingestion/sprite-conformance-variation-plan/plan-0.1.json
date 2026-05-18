@@ -87,8 +87,8 @@
       "id": "crop-box-manifest",
       "label": "Crop-Box Manifest",
       "goal": "Define bounding boxes for player, bee, butterfly, boss, captured fighter, projectiles, tractor beam, explosions, challenge aliens, and each important pose frame.",
-      "currentStatus": "First-pass region manifest exists at reference-artifacts/ingestion/galaga-alien-visual-reference/crop-box-manifest-0.1.json; exact per-sprite boxes still need preview generation and review.",
-      "nextAction": "Generate preview crops from crop-box-manifest-0.1.json, review exact boxes, and promote accepted per-role and per-pose target crops."
+      "currentStatus": "First-pass region manifest exists at reference-artifacts/ingestion/galaga-alien-visual-reference/crop-box-manifest-0.1.json, and generated review previews now exist at reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json. Exact per-sprite boxes still need human review and promotion.",
+      "nextAction": "Review the generated crop previews and grid overlays, then promote accepted per-role and per-pose target crops."
     },
     {
       "id": "pose-and-motion-targets",
@@ -162,6 +162,14 @@
       "path": "reference-artifacts/ingestion/galaga-alien-visual-reference/crop-box-manifest-0.1.json"
     },
     {
+      "label": "Galaga alien crop preview report",
+      "path": "GALAGA_ALIEN_CROP_PREVIEW.md"
+    },
+    {
+      "label": "Galaga alien crop preview analysis",
+      "path": "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json"
+    },
+    {
       "label": "Runtime static sprite conformance",
       "path": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json"
     },
@@ -170,5 +178,5 @@
       "path": "GALAGA_TARGET_ARTIFACT_COVERAGE.md"
     }
   ],
-  "nextBestStep": "Generate preview crops from reference-artifacts/ingestion/galaga-alien-visual-reference/crop-box-manifest-0.1.json, review exact boxes, then promote per-role and per-pose target crops for the runtime scorer."
+  "nextBestStep": "Use the crop-box manifest and generated preview grids to review exact boxes, then promote per-role and per-pose target crops for the runtime scorer."
 }

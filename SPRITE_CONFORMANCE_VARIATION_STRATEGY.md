@@ -120,6 +120,11 @@ score should only rise when it reflects visible, measurable runtime evidence.
   sheet.
 - A first-pass crop-box manifest now identifies the general sprite sheet regions
   and role plans that need exact crop promotion.
+- Generated crop-preview evidence now exists for the general sprite sheet:
+  `GALAGA_ALIEN_CROP_PREVIEW.md` and
+  `reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json`.
+  These previews expose region crops, grid overlays, and role-candidate cell
+  counts for review.
 - Runtime static sprite conformance exists and is around `6.2/10`.
 - Active sprite motion is still the major precision gap.
 - Production Aurora sprites remain original/theme-oriented, but they do not yet
@@ -127,9 +132,9 @@ score should only rise when it reflects visible, measurable runtime evidence.
 
 ## Next Best Steps
 
-1. Generate preview crops from
-   `reference-artifacts/ingestion/galaga-alien-visual-reference/crop-box-manifest-0.1.json`.
-2. Review exact crop boxes and promote first-pass target crops for player fighter, dual fighter, bee,
+1. Review the generated crop previews and grid overlays from
+   `reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json`.
+2. Promote first-pass target crops for player fighter, dual fighter, bee,
    butterfly, boss, captured fighter, projectile, tractor beam, explosion, and
    challenge alien families.
 3. Update runtime sprite scoring to compare multiple target poses instead of one
