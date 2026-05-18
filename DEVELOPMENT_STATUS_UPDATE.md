@@ -1,55 +1,75 @@
 # Aurora Galactica Development Status Update
 
-Current state:
+Updated: May 18, 2026
 
-- `1.0.0` is now live in production
-- the beta -> approve -> production release path is proven in real release use
-- the production leaderboard baseline is clean for official post-launch scoring
+This is the quick reopen note for the repo's current checked state and the
+short list of work that still needs to happen after the latest white-paper,
+preserved-source, and review-cadence pass.
 
-Recently completed:
+Use this together with:
 
-- non-production and production lane behavior clarified and hardened
-- production promotion now requires an approved beta candidate
-- pilot profile, replay viewer, and in-frame popup surfaces were stabilized
-- ship-loss messaging bug fixed and regression-covered
-- launch blocker plan and release-readiness review refreshed
-- public build metadata no longer exposes non-production test-pilot identity
-  fields
-- the production leaderboard reset for the true `1.0` baseline was completed
+- [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md)
+- [PLAN.md](PLAN.md)
+- [WHITE_PAPER.md](WHITE_PAPER.md)
+- [reference-artifacts/preserved-sources/README.md](reference-artifacts/preserved-sources/README.md)
 
-Immediate post-launch focus:
+## Current Checked State
 
-- begin the structured `1.x` refinement track without reopening `1.0` scope
-- keep the live production scoreboard and pilot flows stable
-- move planned identity, admin, and media improvements into their tracked `1.x`
-  issues
+- hosted `/production` is live on `1.4.0+build.748.sha.09a4c633`
+- hosted `/dev` is live on `1.4.0.1+build.818.sha.1b30577c`
+- local `main` and `origin/main` now include newer cleanup work through
+  `db847d7f`, including preserved-source promotion, white-paper tightening, and
+  review-cadence hardening
+- the white paper is live on hosted `/dev` at
+  `https://sgwoods.github.io/Aurora-Galactica/dev/white-paper.html`
+- the intended hosted `/production` white-paper URL still returns `404` as of
+  May 18, 2026:
+  `https://sgwoods.github.io/Aurora-Galactica/white-paper.html`
+- the top-level `sgwoods` public index currently reaches the Aurora project page
+  cleanly, but that public Aurora page still does not expose a white-paper
+  button
 
-What is intentionally moving to `1.x`:
+## What Just Landed
 
-- version-aware leaderboard tracking:
-  - `#129`
-- cleaner non-production Supabase split:
-  - `#126`
-- stronger pilot identity/account model:
-  - `#127`
-- richer account email branding:
-  - `#128`
-- control-centre/admin tooling:
-  - `#124`
-- shared authenticated pilot media and publishing:
-  - `#121`
-- broader HUD/operator refinements such as the bottom-right stage indicator:
-  - `#44`
+- a canonical preserved-source lane for recovered Galaga/Galaxian reference
+  media:
+  `reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/`
+- a first representative preserved-source lane for historical Neo-Galaga
+  session/video pairs:
+  `reference-artifacts/preserved-sources/neo-galaga-history-2026-03-to-2026-04/`
+- active docs and one timing-alignment harness updated away from stale
+  old-machine absolute paths
+- a white-paper review cadence and preserved-source integrity check:
+  `white-paper/REVIEW_CADENCE.md` and
+  `tools/review/check-reference-source-integrity.js`
+- a tighter white-paper draft with stronger provenance and related-work framing
+- a refreshed Galaga timing-alignment artifact against the canonical preserved
+  stage-reference proxy
 
-Release lanes right now:
+## Work Yet To Be Done
 
-- beta:
-  - `1.0.0-beta.1+build.276.sha.a59c5ad.beta`
-- production:
-  - `1.0.0+build.276.sha.a59c5ad`
+1. Publish the current `main` commit to hosted `/dev` so the live dev lane
+   catches up to the repo's preserved-source and white-paper cleanup work.
+2. Decide whether to promote the white paper beyond `/dev`, especially whether
+   `/beta` or `/production` should carry `white-paper.html` next.
+3. Update the `sgwoods/public` Aurora project page so the navigation path from
+   the top-level public index to the white paper is real end to end.
+4. Decide whether the committed `64.76 MB` stage-reference proxy should remain
+   in normal Git, move to Git LFS, or move to an external preserved-artifact
+   lane with manifest-only tracking in this repo.
+5. Decide whether the historical Neo-Galaga archive should remain at the
+   current curated 22-pair subset or expand to a larger preserved tier.
+6. Continue the next highest-value conformance work: Aurora audio identity,
+   challenge-stage set-piece quality, and Galaxy Guardians opening-slice/frame
+   parity.
 
-Guiding principle:
+## Practical Reopen Order
 
-- keep `1.0` focused on the shipped four-stage arcade slice
-- move broader admin/platform/media refinements into `1.x` without muddying
-  the launch decision
+1. This note
+2. [PLAN.md](PLAN.md)
+3. [WHITE_PAPER.md](WHITE_PAPER.md)
+4. [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md)
+5. [GALAXY_GUARDIANS_RESUME_STATE_AND_NEXT_STEPS.md](GALAXY_GUARDIANS_RESUME_STATE_AND_NEXT_STEPS.md)
+
+That sequence gives a fast current-state read without reopening older launch-era
+or pre-`1.4.0` assumptions first.

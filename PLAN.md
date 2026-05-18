@@ -2,31 +2,29 @@
 
 ## Current State
 
-Verified May 14, 2026:
+Verified May 18, 2026:
 
 - hosted `/dev`
   - active `1.4.0.1` forward-review line
 - hosted `/beta`
   - active `1.4.0-beta.1` reviewed candidate lane
 - hosted `/production`
-  - stable `1.3.0` public line
+  - stable `1.4.0` public line
 - `main`
-  - authoritative integration branch for the live `1.4.0` candidate family
+  - authoritative integration branch for the live `1.4.0` follow-through line
 
 This means:
 
-- the `1.3.0` fidelity-and-second-cabinet release remains the public
-  production family
-- hosted `/dev` and hosted `/beta` now carry the deliberate `1.4.0`
-  candidate family, while `/production` remains on the stable public `1.3.0`
-  story
-- that same-family production refresh should be treated as an exception, not
-  the normal public versioning pattern
-- the active source-planning question has moved from "what is the cleanest
-  deliberate `1.4.0` pickup?" to "what must be improved, verified, or cut
-  before `1.4.0` is strong enough for production?"
-- the post-release work should now be treated as intentional carry-forward, not
-  as rediscovery after the ship is already done
+- the `1.4.0` multi-game release is now the public production family
+- hosted `/dev` and hosted `/beta` remain the next deliberate review lanes
+  rather than shadow production mirrors
+- the active source-planning question is now "what is the cleanest next
+  follow-through bundle after `1.4.0`?" rather than "is `1.4.0` ready to ship?"
+- the post-`1.4.0` work should be treated as intentional carry-forward and
+  release-quality tightening, not as rediscovery of the shipped baseline
+- the white paper and preserved-source recovery work are now part of the
+  maintained release/documentation posture, but they are not yet fully
+  published on every hosted lane
 
 Top-level program framing is now maintained in
 [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md).
@@ -34,11 +32,14 @@ Use it as the first read for how Platinum, Aurora, Galaxy Guardians, ingestion,
 harnesses, dashboards, release lanes, Codex/model assistance, and local
 resource economics fit together.
 
+For the fastest quick current-state reopen, pair it with
+[DEVELOPMENT_STATUS_UPDATE.md](DEVELOPMENT_STATUS_UPDATE.md).
+
 ## Active Workstreams
 
-### 1. `1.3.0` Production Stabilization
+### 1. `1.4.0` Production Stabilization
 
-- keep the refreshed `1.3.0` production line trustworthy
+- keep the shipped `1.4.0` production line trustworthy
 - keep release docs, scorecards, and committed evidence current
 - keep the public project surfaces in sync with the real shipped state
 - use [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md) as the
@@ -53,7 +54,7 @@ resource economics fit together.
 - keep public project-page and rendered-homepage verification inside the
   release workflow
 
-### 3. `1.4.0` Beta Candidate Improvement
+### 3. Post-`1.4.0` Follow-Through Improvement
 
 - improve ship movement feel against real Galaga footage
 - continue audio identity polish beyond cue timing
@@ -244,17 +245,17 @@ Current conformance read:
 - hosted `/dev`, hosted `/beta`, and hosted `/production` now reflect the same
   release discipline, but hosted `/dev` is intentionally ahead as the
   `1.4.0.1` review increment
-- the active source line now presents itself as the deliberate `1.4.0`
-  candidate family
-- the latest practical beta artifact is now `1.4.0-beta.1`, while the accepted
-  `1.3.0.1` hosted-dev review increment remains the source of the refreshed
-  public `1.3.0` family
-- the next hosted `/beta` decision is now about whether to keep strengthening
-  the `1.4.0` candidate family or cut scope before production
-- `1.3.0` was the intentional bundle for fidelity, trust, and the first
-  significant second-game Platinum story
-- the shipped `1.3.0` family is now the stable public baseline while `main`
-  begins the next minor-cycle work
+- the active source line now presents itself as the deliberate post-`1.4.0`
+  follow-through family, not a pre-production candidate
+- the latest accepted beta artifact remains `1.4.0-beta.1`, while the accepted
+  production artifact is the public `1.4.0+build.748.sha.09a4c633` family
+- the next hosted `/beta` decision is now about when the `1.4.0.1`-style
+  follow-through work is coherent enough to become the next reviewed beta
+  candidate
+- `1.4.0` is the intentional shipped bundle for multi-game public identity,
+  Platinum release discipline, and the first public Galaxy Guardians slice
+- the shipped `1.4.0` family is now the stable public baseline while `main`
+  carries the next measured documentation, evidence, and conformance follow-up
 - the longer release-family phasing plan is tracked in
   [LONG_TERM_RELEASE_ROADMAP.md](LONG_TERM_RELEASE_ROADMAP.md)
 - the concrete first level-expansion execution plan is tracked in
@@ -263,13 +264,14 @@ Current conformance read:
   [STRATEGIC_BETA_REVIEW.md](STRATEGIC_BETA_REVIEW.md) and should be refreshed
   after each major hosted `/beta` push
 
-## Post-1.3.0 Pickup
+## Post-1.4.0 Pickup
 
-After `1.3.0` ships, the plan should pick up in this order:
+After `1.4.0` ships, the plan should pick up in this order:
 
-1. Short term: keep the refreshed `1.3.0` public line trustworthy while
-   reviewing the live `1.4.0.1` and `1.4.0-beta.1` candidate lanes.
-2. Medium term: `1.4.0` arcade depth and platform-contract follow-through,
+1. Short term: keep the live `1.4.0` public line trustworthy while publishing
+   and reviewing the next `1.4.0.1` dev follow-through work cleanly.
+2. Medium term: deepen post-`1.4.0` arcade depth and platform-contract
+   follow-through,
    including alien entry/challenge novelty, stage shape, audio/event feedback,
    and visual reference grounding.
 3. Longer term: `1.5.0` shared-video evidence and flight-recorder capabilities,

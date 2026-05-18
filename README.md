@@ -65,12 +65,15 @@ If you are looking for the active issue tracker, use:
 
 The hosted documentation set should now move with the release lanes.
 
-Primary hosted docs on hosted `/production`:
+Currently verified hosted docs:
 
 - project guide:
   - `https://sgwoods.github.io/Aurora-Galactica/project-guide.html`
-- white paper:
+- white paper on hosted `/dev`:
+  - `https://sgwoods.github.io/Aurora-Galactica/dev/white-paper.html`
+- intended white paper on hosted `/production`:
   - `https://sgwoods.github.io/Aurora-Galactica/white-paper.html`
+  - still pending publication as of May 18, 2026
 - Platinum guide:
   - `https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html`
 - player guide:
@@ -85,6 +88,7 @@ Equivalent docs should also exist on hosted `/dev` and hosted `/beta`.
 Best top-level state and conformance-program overview:
 
 - [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md)
+- [DEVELOPMENT_STATUS_UPDATE.md](DEVELOPMENT_STATUS_UPDATE.md)
 
 Best living white paper and project-area narrative:
 
@@ -154,8 +158,8 @@ What that means:
 - the public production family is now `1.4.0`, while hosted `/dev` remains the
   visible `1.4.0.1` forward-review line and hosted `/beta` remains the approved
   `1.4.0-beta.1` production-source lane
-- hosted `/dev` remains the visible forward-review lane for the current beta
-  family
+- hosted `/dev` remains the visible forward-review lane for the next
+  post-`1.4.0` follow-through cycle
 - Galaxy Guardians is now part of the beta review story as a playable preview
   with game-owned conformance and release identity
 - hosted `/dev`, hosted `/beta`, and hosted `/production` are now explicit lanes
@@ -171,7 +175,8 @@ Current go-forward focus:
   as the maintained overview of how Platinum, applications, ingestion,
   harnessing, conformance metrics, and resource economics fit together
 - use [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md) for the
-  current readable quality table while reviewing the `1.4.0` candidate
+  current readable quality table while shaping the next post-`1.4.0`
+  improvement bundle
 - use the multi-machine bootstrap and release-authority workflow
 - keep folding in the other machine's Galaxians-style second-game work and
   stronger harness/reference analysis
