@@ -50,6 +50,15 @@ if(missingScreenshots.length) fail('rows are missing current or target screensho
   targetScreenshot: row.targetScreenshot
 })));
 
+const missingVideos = rows.filter(row => !exists(row.currentVideo) || !exists(row.targetVideo));
+if(missingVideos.length) fail('rows are missing current or target 10s video snippets', missingVideos.map(row => ({
+  id: row.id,
+  currentVideo: row.currentVideo,
+  targetVideo: row.targetVideo,
+  currentVideoStatus: row.currentVideoStatus,
+  targetVideoStatus: row.targetVideoStatus
+})));
+
 const missingRoles = rows.filter(row => !Array.isArray(row.roles) || !row.roles.length || row.roles.some(role => !exists(role.current) || !exists(role.target)));
 if(missingRoles.length) fail('rows are missing current/target role bitmap evidence', missingRoles.map(row => row.id));
 
@@ -65,7 +74,7 @@ if(!representativeRegular.length){
 
 if(!fs.existsSync(MARKDOWN)) fail('top-level markdown report missing', { markdown: 'LEVEL_VISUAL_CONFORMANCE_INDEX.md' });
 const md = fs.readFileSync(MARKDOWN, 'utf8');
-for(const required of ['Level Visual Conformance Index', 'Challenging Stage 1', 'Aurora current', 'Galaga target', 'Critical gap']){
+for(const required of ['Level Visual Conformance Index', 'Challenging Stage 1', 'Aurora current', 'Galaga target', 'Aurora 10s video', 'Galaga target 10s video', 'Critical gap']){
   if(!md.includes(required)) fail('markdown report missing required text', { required });
 }
 
@@ -75,5 +84,7 @@ console.log(JSON.stringify({
   regularRows: regularRows.length,
   challengeRows: challengeRows.length,
   representativeRegularRows: representativeRegular.length,
-  exactChallengeTargets: exactChallengeTargets.length
+  exactChallengeTargets: exactChallengeTargets.length,
+  currentVideos: rows.filter(row => exists(row.currentVideo)).length,
+  targetVideos: rows.filter(row => exists(row.targetVideo)).length
 }, null, 2));

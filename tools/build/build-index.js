@@ -1479,6 +1479,22 @@ function projectGuideStyles(){
       grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
       gap:12px;
     }
+    .levelVisualVideoGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(320px,1fr));
+      gap:12px;
+      align-items:start;
+    }
+    .catalogMediaVideo{
+      display:block;
+      width:100%;
+      min-height:260px;
+      max-height:430px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.10);
+      background:#020712;
+      object-fit:contain;
+    }
     .levelRoleCard{
       min-width:0;
       padding:12px;
@@ -1552,7 +1568,8 @@ function projectGuideStyles(){
       .challengeCompareGrid,
       .challengeAxisGrid,
       .levelVisualSummary,
-      .levelVisualCompareGrid{
+      .levelVisualCompareGrid,
+      .levelVisualVideoGrid{
         grid-template-columns:1fr;
       }
       .levelRoleImages{
@@ -3338,6 +3355,23 @@ function levelVisualMedia(row = {}, side = 'current'){
   });
 }
 
+function levelVisualVideo(row = {}, side = 'current'){
+  const isTarget = side === 'target';
+  const src = isTarget ? row.targetVideo : row.currentVideo;
+  if(!src || !fs.existsSync(path.join(ROOT, normalizeAssetSourcePath(src)))){
+    return `<div class="mediaPlaceholder">${isTarget ? 'Target Galaga 10s gameplay clip' : 'Current Aurora 10s gameplay clip'} pending.</div>`;
+  }
+  return renderMediaVideo({
+    src,
+    poster: isTarget ? row.targetScreenshot : row.currentScreenshot,
+    label: isTarget ? 'Target Galaga 10s gameplay' : 'Aurora current 10s gameplay',
+    alt: `${row.label || 'Level'} ${isTarget ? 'target Galaga gameplay clip' : 'Aurora current gameplay clip'}`,
+    note: isTarget
+      ? `${row.targetVideoStatus || 'target clip'}; starts at ${row.targetSourceTimeSeconds ?? 'n/a'}s in the source video.`
+      : `${row.currentVideoStatus || 'current clip'}; starts at the row's ${row.sampleSeconds ?? 'n/a'}s Aurora sample point.`
+  });
+}
+
 function levelVisualReferenceEvidence(row = {}){
   const target = row.targetWindow || {};
   const items = [
@@ -3428,6 +3462,14 @@ function renderLevelVisualDetail(row = {}){
             <p><strong>Next:</strong> ${esc(analysis.next || 'Next measurement/action pending.')}</p>
             ${levelVisualMetrics(row)}
           </article>
+        </div>
+        <div class="challengeEvidenceCard">
+          <h3>10s Motion Review Clips</h3>
+          <p class="docMeta">These clips are intentionally large enough to compare side by side in-page. They are the first human-readable motion layer for this index: the still frame anchors the moment, while the clip exposes entry route, pacing, turn shape, density, and whether the level feels authored or merely populated.</p>
+          <div class="levelVisualVideoGrid">
+            ${levelVisualVideo(row, 'target')}
+            ${levelVisualVideo(row, 'current')}
+          </div>
         </div>
         <div class="challengeEvidenceCard">
           <h3>Aliens, Ships, And Bitmaps</h3>
@@ -3709,6 +3751,25 @@ function renderMediaImage(item){
         </div>
       </details>
       ${item.note ? `<span class="catalogMediaNote">${esc(item.note)}</span>` : ''}
+    </div>
+  `;
+}
+
+function renderMediaVideo(item){
+  if(!item || !item.src) return '';
+  const href = catalogMediaHref(item.src);
+  const poster = item.poster ? catalogMediaHref(item.poster) : '';
+  const label = item.label || 'Evidence video';
+  const alt = item.alt || label;
+  const note = item.note || '10-second evidence clip for inline motion review.';
+  return `
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">${esc(label)}</span>
+      <video class="catalogMediaVideo" controls preload="metadata"${poster ? ` poster="${esc(poster)}"` : ''} aria-label="${esc(alt)}">
+        <source src="${esc(href)}" type="video/webm">
+        Your browser cannot play this evidence video. Open <a href="${esc(href)}">the clip</a> directly.
+      </video>
+      <span class="catalogMediaNote">${esc(note)}</span>
     </div>
   `;
 }
@@ -4443,7 +4504,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <p>Ordered current-versus-target visual evidence for every Aurora level and each Challenging Stage. Each row keeps the current runtime screenshot beside an actual Galaga gameplay target frame, then expands into scene roles, bitmap pairs, conformance metrics, and the next gap.</p>
           </div>
           <div class="docWrap">
-            <p><strong>Current read:</strong> ${esc(levelVisualSummary.rowCount || 0)} ordered rows; ${esc(levelVisualSummary.regularLevelCount || 0)} regular levels; ${esc(levelVisualSummary.challengeStageCount || 0)} challenging stages; ${esc(levelVisualSummary.currentScreenshotCount || 0)} Aurora screenshots; ${esc(levelVisualSummary.targetScreenshotCount || 0)} target gameplay screenshots.</p>
+            <p><strong>Current read:</strong> ${esc(levelVisualSummary.rowCount || 0)} ordered rows; ${esc(levelVisualSummary.regularLevelCount || 0)} regular levels; ${esc(levelVisualSummary.challengeStageCount || 0)} challenging stages; ${esc(levelVisualSummary.currentScreenshotCount || 0)} Aurora screenshots; ${esc(levelVisualSummary.targetScreenshotCount || 0)} target gameplay screenshots; ${esc(levelVisualSummary.currentVideoCount || 0)} Aurora 10s clips; ${esc(levelVisualSummary.targetVideoCount || 0)} target 10s clips.</p>
             <p><strong>Conformance pressure:</strong> ${esc(levelVisualSummary.challengeScore10 ?? 'n/a')}/10 challenge visual conformance and ${esc(levelVisualSummary.targetGroundingScore10 ?? 'n/a')}/10 target grounding. ${esc(levelVisualSummary.read || 'Run the level visual index analyzer to refresh this readout.')}</p>
             <p class="docMeta"><strong>Target-grounding caveat:</strong> ${esc(levelVisualSummary.exactTargetRows || 0)}/${esc(levelVisualSummary.rowCount || 0)} rows currently use exact ingested target windows. ${esc(levelVisualSummary.representativeTargetRows || 0)} regular-level rows use representative actual Galaga gameplay frames until the normal-stage corpus is extended. That means the section is excellent for seeing the shape of the gap, but it is not yet a complete per-level proof of conformance.</p>
             <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/level-visual-conformance-index/latest.json</code>. <strong>Report:</strong> <code>LEVEL_VISUAL_CONFORMANCE_INDEX.md</code>.</p>

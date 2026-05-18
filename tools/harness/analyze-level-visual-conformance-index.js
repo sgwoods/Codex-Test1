@@ -9,12 +9,17 @@ const ANALYSES = path.join(ROOT, 'reference-artifacts', 'analyses');
 const OUT_ROOT = path.join(ANALYSES, 'level-visual-conformance-index');
 const CURRENT_DIR = path.join(OUT_ROOT, 'latest-current-screenshots');
 const TARGET_DIR = path.join(OUT_ROOT, 'latest-target-screenshots');
+const CURRENT_VIDEO_DIR = path.join(OUT_ROOT, 'latest-current-videos');
+const TARGET_VIDEO_DIR = path.join(OUT_ROOT, 'latest-target-videos');
+const TEMP_FRAME_DIR = path.join(OUT_ROOT, '.tmp-current-video-frames');
 const LATEST_JSON = path.join(OUT_ROOT, 'latest.json');
 const TOP_LEVEL_MD = path.join(ROOT, 'LEVEL_VISUAL_CONFORMANCE_INDEX.md');
 
 const REGULAR_LEVEL_COUNT = 31;
 const CHALLENGE_COUNT = 8;
 const CHALLENGE_MARKERS = [3, 7, 11, 15, 19, 23, 27, 31];
+const VIDEO_SECONDS = 10;
+const CURRENT_VIDEO_FPS = 10;
 const SNAKE_LATINO_SOURCE = '/Users/sgwoods/Downloads/🎮🕹️👉Galaga (1981) - Gameplay Arcade - Snake Latino (360p, h264).mp4';
 const CHALLENGE_ALL_SOURCE = '/Users/sgwoods/Downloads/challenge-all2.mp4';
 
@@ -170,6 +175,11 @@ function writeText(file, value){
   fs.writeFileSync(file, String(value).replace(/\r\n/g, '\n').trimEnd() + '\n');
 }
 
+function safeRemove(dir){
+  if(!dir || !dir.startsWith(OUT_ROOT)) return;
+  fs.rmSync(dir, { recursive: true, force: true });
+}
+
 function git(args, fallback = ''){
   try {
     return execFileSync('git', ['-C', ROOT, ...args], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
@@ -295,6 +305,10 @@ function targetWindowForRow(row){
   };
 }
 
+function targetFrameSeconds(target){
+  return Math.max(0, (+target?.start || 0) + Math.max(1.0, (+target?.duration || 0) * 0.46));
+}
+
 function extractFrame(row, target){
   const source = target?.source || '';
   const output = path.join(TARGET_DIR, `${row.id}.jpg`);
@@ -307,7 +321,7 @@ function extractFrame(row, target){
     };
   }
   const ffmpeg = process.env.FFMPEG || 'ffmpeg';
-  const seconds = Math.max(0, (+target.start || 0) + Math.max(1.0, (+target.duration || 0) * 0.46));
+  const seconds = targetFrameSeconds(target);
   ensureDir(path.dirname(output));
   const result = spawnSync(ffmpeg, [
     '-hide_banner',
@@ -332,6 +346,52 @@ function extractFrame(row, target){
     image: rel(output),
     status: 'extracted-target-frame',
     tSourceSeconds: round(seconds, 3)
+  };
+}
+
+function extractTargetClip(row, target, frameSeconds){
+  const source = target?.source || '';
+  const output = path.join(TARGET_VIDEO_DIR, `${row.id}.webm`);
+  if(!source || !fs.existsSync(source)){
+    return {
+      ok: false,
+      video: null,
+      status: 'source-missing',
+      error: source ? `missing source ${source}` : 'target source missing'
+    };
+  }
+  const ffmpeg = process.env.FFMPEG || 'ffmpeg';
+  const seconds = Math.max(0, Number.isFinite(+frameSeconds) ? +frameSeconds : targetFrameSeconds(target));
+  ensureDir(path.dirname(output));
+  const result = spawnSync(ffmpeg, [
+    '-hide_banner',
+    '-loglevel', 'error',
+    '-y',
+    '-ss', String(round(seconds, 3)),
+    '-i', source,
+    '-t', String(VIDEO_SECONDS),
+    '-an',
+    '-vf', 'scale=720:-2,fps=24',
+    '-c:v', 'libvpx-vp9',
+    '-b:v', '0',
+    '-crf', '38',
+    '-row-mt', '1',
+    output
+  ], { encoding: 'utf8' });
+  if(result.status !== 0 || !fs.existsSync(output)){
+    return {
+      ok: false,
+      video: null,
+      status: 'ffmpeg-target-clip-failed',
+      error: `${result.stderr || result.stdout || 'ffmpeg failed'}`.trim()
+    };
+  }
+  return {
+    ok: true,
+    video: rel(output),
+    status: 'extracted-target-10s-video',
+    tSourceSeconds: round(seconds, 3),
+    durationSeconds: VIDEO_SECONDS
   };
 }
 
@@ -377,7 +437,9 @@ function targetRolesForRow(row, target){
 
 async function captureCurrentRow(row){
   const output = path.join(CURRENT_DIR, `${row.id}.png`);
+  const videoOutput = path.join(CURRENT_VIDEO_DIR, `${row.id}.webm`);
   ensureDir(path.dirname(output));
+  ensureDir(path.dirname(videoOutput));
   return withHarnessPage({
     skipStart: true,
     seed: 57000 + row.displayOrder,
@@ -443,13 +505,70 @@ async function captureCurrentRow(row){
       };
     });
     await page.locator('#c').screenshot({ path: output });
+    const video = await captureCurrentClip(page, row, videoOutput);
     return {
       ok: true,
       image: rel(output),
+      video: video.video,
+      videoStatus: video.status,
+      videoError: video.error || null,
+      videoDurationSeconds: video.durationSeconds || VIDEO_SECONDS,
+      videoFps: video.fps || CURRENT_VIDEO_FPS,
       state,
       sampleSeconds: row.sampleSeconds
     };
   });
+}
+
+async function captureCurrentClip(page, row, output){
+  const frameDir = path.join(TEMP_FRAME_DIR, row.id);
+  safeRemove(frameDir);
+  ensureDir(frameDir);
+  const frameCount = Math.max(1, Math.round(VIDEO_SECONDS * CURRENT_VIDEO_FPS));
+  try {
+    for(let index = 0; index < frameCount; index += 1){
+      const framePath = path.join(frameDir, `frame-${String(index).padStart(4, '0')}.png`);
+      await page.locator('#c').screenshot({ path: framePath });
+      await page.evaluate(stepSeconds => {
+        const h = window.__galagaHarness__;
+        h.advanceFor(stepSeconds, { step: 1 / 60, stopOnGameOver: false });
+        h.redraw();
+      }, 1 / CURRENT_VIDEO_FPS);
+    }
+    const ffmpeg = process.env.FFMPEG || 'ffmpeg';
+    const result = spawnSync(ffmpeg, [
+      '-hide_banner',
+      '-loglevel', 'error',
+      '-y',
+      '-framerate', String(CURRENT_VIDEO_FPS),
+      '-i', path.join(frameDir, 'frame-%04d.png'),
+      '-t', String(VIDEO_SECONDS),
+      '-an',
+      '-vf', 'scale=720:-2',
+      '-c:v', 'libvpx-vp9',
+      '-b:v', '0',
+      '-crf', '36',
+      '-row-mt', '1',
+      output
+    ], { encoding: 'utf8' });
+    if(result.status !== 0 || !fs.existsSync(output)){
+      return {
+        ok: false,
+        video: null,
+        status: 'ffmpeg-current-clip-failed',
+        error: `${result.stderr || result.stdout || 'ffmpeg failed'}`.trim()
+      };
+    }
+    return {
+      ok: true,
+      video: rel(output),
+      status: 'rendered-current-10s-video',
+      durationSeconds: VIDEO_SECONDS,
+      fps: CURRENT_VIDEO_FPS
+    };
+  } finally {
+    safeRemove(frameDir);
+  }
 }
 
 function loadChallengeConformance(){
@@ -544,7 +663,7 @@ function analysisForRow(row, target, capture, challengeArtifact, levelArc){
   };
 }
 
-function rowSummary(row, target, targetFrame, capture, challengeArtifact, levelArc){
+function rowSummary(row, target, targetFrame, targetClip, capture, challengeArtifact, levelArc){
   const roleKeys = Array.from(new Set([
     ...targetRolesForRow(row, target),
     ...currentRoleKeys(capture)
@@ -568,6 +687,15 @@ function rowSummary(row, target, targetFrame, capture, challengeArtifact, levelA
     targetScreenshot: targetFrame.image,
     targetScreenshotStatus: targetFrame.status,
     targetSourceTimeSeconds: targetFrame.tSourceSeconds ?? null,
+    currentVideo: capture.video || null,
+    targetVideo: targetClip.video || null,
+    currentVideoStatus: capture.videoStatus || 'missing-current-video',
+    targetVideoStatus: targetClip.status || 'missing-target-video',
+    videoDurationSeconds: VIDEO_SECONDS,
+    videoFrameRate: {
+      current: capture.videoFps || CURRENT_VIDEO_FPS,
+      target: 24
+    },
     targetWindow: {
       id: target?.id || '',
       title: target?.title || '',
@@ -596,6 +724,8 @@ function rowSummary(row, target, targetFrame, capture, challengeArtifact, levelA
     evidence: [
       capture.image,
       targetFrame.image,
+      capture.video,
+      targetClip.video,
       target?.contactSheet,
       target?.denseContactSheet,
       target?.motionSheet,
@@ -614,6 +744,10 @@ function buildMarkdown(report){
 ![Aurora current](${row.currentScreenshot})
 
 ![Galaga target](${row.targetScreenshot})
+
+**Aurora 10s video:** ${row.currentVideo ? `\`${row.currentVideo}\`` : 'pending'}
+
+**Galaga target 10s video:** ${row.targetVideo ? `\`${row.targetVideo}\`` : 'pending'}
 
 **Target source:** ${row.targetWindow.title || 'target pending'}; ${row.targetWindow.exact ? 'exact target row' : 'representative actual target gameplay row'}.
 
@@ -654,6 +788,9 @@ ${sections}
 async function buildReport(){
   ensureDir(CURRENT_DIR);
   ensureDir(TARGET_DIR);
+  ensureDir(CURRENT_VIDEO_DIR);
+  ensureDir(TARGET_VIDEO_DIR);
+  safeRemove(TEMP_FRAME_DIR);
   const generatedAt = new Date().toISOString();
   const commit = git(['rev-parse', '--short', 'HEAD'], 'unknown');
   const branch = git(['branch', '--show-current'], 'unknown');
@@ -663,8 +800,9 @@ async function buildReport(){
   for(const row of levelRows()){
     const target = targetWindowForRow(row);
     const targetFrame = extractFrame(row, target);
+    const targetClip = extractTargetClip(row, target, targetFrame.tSourceSeconds);
     const capture = await captureCurrentRow(row);
-    rows.push(rowSummary(row, target, targetFrame, capture, challengeArtifact, levelArc));
+    rows.push(rowSummary(row, target, targetFrame, targetClip, capture, challengeArtifact, levelArc));
   }
   const exactTargets = rows.filter(row => row.targetWindow.exact).length;
   const challengeRows = rows.filter(row => row.kind === 'challenge');
@@ -677,6 +815,8 @@ async function buildReport(){
     challengeStageCount: challengeRows.length,
     currentScreenshotCount: rows.filter(row => row.currentScreenshot && fs.existsSync(path.join(ROOT, row.currentScreenshot))).length,
     targetScreenshotCount: rows.filter(row => row.targetScreenshot && fs.existsSync(path.join(ROOT, row.targetScreenshot))).length,
+    currentVideoCount: rows.filter(row => row.currentVideo && fs.existsSync(path.join(ROOT, row.currentVideo))).length,
+    targetVideoCount: rows.filter(row => row.targetVideo && fs.existsSync(path.join(ROOT, row.targetVideo))).length,
     exactTargetRows: exactTargets,
     representativeTargetRows: rows.length - exactTargets,
     score10: round(average(numericScores), 1),
@@ -687,7 +827,7 @@ async function buildReport(){
       .sort((a, b) => (a.conformanceMetrics.score10 ?? 99) - (b.conformanceMetrics.score10 ?? 99) || a.displayOrder - b.displayOrder)
       .slice(0, 5)
       .map(row => ({ label: row.label, score10: row.conformanceMetrics.score10, criticalGap: row.analysis.criticalGap })),
-    read: `The generated index now contains ${rows.length} ordered rows: ${regularRows.length} regular levels and ${challengeRows.length} challenging stages. Every row has a current Aurora runtime screenshot and an actual Galaga target-gameplay frame. The important caveat is grounding quality: ${exactTargets}/${rows.length} target rows are exact ingested windows, while ${rows.length - exactTargets} regular-level rows use representative actual Galaga gameplay until a full per-level normal-stage corpus is ingested. Challenge-stage visual conformance remains the most human-visible failure: exact challenge target screenshots exist, but the strict challenge score is only ${round(average(challengeScores), 1) ?? 'n/a'}/10.`
+    read: `The generated index now contains ${rows.length} ordered rows: ${regularRows.length} regular levels and ${challengeRows.length} challenging stages. Every row has a current Aurora runtime screenshot, an actual Galaga target-gameplay frame, and paired 10-second current/target gameplay clips for inline motion review. The important caveat is grounding quality: ${exactTargets}/${rows.length} target rows are exact ingested windows, while ${rows.length - exactTargets} regular-level rows use representative actual Galaga gameplay until a full per-level normal-stage corpus is ingested. Challenge-stage visual conformance remains the most human-visible failure: exact challenge target screenshots exist, but the strict challenge score is only ${round(average(challengeScores), 1) ?? 'n/a'}/10.`
   };
   return {
     schemaVersion: 1,
@@ -705,7 +845,9 @@ async function buildReport(){
     },
     measurementLimits: [
       'Current Aurora screenshots are deterministic browser harness samples from a single mid-level timestamp, not full temporal proof.',
+      'Current Aurora 10-second clips are deterministic controlled-clock canvas renders at 10fps, intended for human motion review rather than audio/video performance benchmarking.',
       'Challenge target screenshots are exact frames extracted from the user-supplied all-challenge Galaga video.',
+      'Target 10-second clips begin at the same source timestamp as the target screenshot. Exactness follows the row target window: all challenge rows are exact; many regular rows are representative until a fuller normal-stage corpus is ingested.',
       'Regular target screenshots are exact only for ingested regular-stage windows. Other regular levels use the nearest actual Galaga reference window and are explicitly marked as representative.',
       'Sprite bitmap rows show current and target static sprites; active motion, rotation, flapping, and capture/rescue transitions remain separate motion-scoring work.'
     ],
@@ -733,6 +875,8 @@ async function main(){
     rows: report.summary.rowCount,
     currentScreenshots: report.summary.currentScreenshotCount,
     targetScreenshots: report.summary.targetScreenshotCount,
+    currentVideos: report.summary.currentVideoCount,
+    targetVideos: report.summary.targetVideoCount,
     exactTargetRows: report.summary.exactTargetRows,
     representativeTargetRows: report.summary.representativeTargetRows,
     latest: rel(LATEST_JSON),
