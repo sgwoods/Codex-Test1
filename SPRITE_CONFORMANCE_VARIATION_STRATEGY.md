@@ -125,20 +125,34 @@ score should only rise when it reflects visible, measurable runtime evidence.
   `reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json`.
   These previews expose region crops, grid overlays, and role-candidate cell
   counts for review.
+- A promoted first-pass target crop library now exists:
+  `GALAGA_ALIEN_TARGET_CROPS.md` and
+  `reference-artifacts/analyses/galaga-alien-target-crops/latest.json`. It
+  contains `32` exact source-sheet crops across `7` role sets: player fighter,
+  bee/Zako, butterfly/escort, boss Galaga, challenge specialty aliens,
+  projectiles/impacts, and tractor beam.
 - Runtime static sprite conformance exists and is around `6.2/10`.
+- A stricter first-pass runtime-vs-promoted-target-crop comparator now exists:
+  `reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json`.
+  Its current average is about `3.4/10`, with the weakest visible crop at about
+  `2.1/10`. This is intentionally sobering: it compares already-captured Aurora
+  runtime PNGs directly against exact source-sheet target crops and shows that
+  the previous inferred-model `6.2/10` score was a useful proxy, not a claim of
+  high sprite conformance.
 - Active sprite motion is still the major precision gap.
 - Production Aurora sprites remain original/theme-oriented, but they do not yet
   flow from a formal target-pose manifest.
 
 ## Next Best Steps
 
-1. Review the generated crop previews and grid overlays from
-   `reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json`.
-2. Promote first-pass target crops for player fighter, dual fighter, bee,
-   butterfly, boss, captured fighter, projectile, tractor beam, explosion, and
-   challenge alien families.
-3. Update runtime sprite scoring to compare multiple target poses instead of one
-   static proxy.
+1. Review the promoted target crops in
+   `reference-artifacts/analyses/galaga-alien-target-crops/latest.json` and mark
+   any disputed cells for replacement if a better source crop appears.
+2. Use the runtime-vs-promoted-target-crop mismatch artifact to prioritize
+   Aurora sprite geometry work, starting with dual fighter, challenge-specialty
+   aliens, and roles whose best target match is semantically wrong.
+3. Add temporal windows for flap, dive, damage, capture/rescue, projectile,
+   explosion, tractor beam, and challenge-specialty motion.
 4. Add a development-only sprite-rendering mode that can draw from a target
    sprite atlas or target-derived pixel-row manifest.
 5. Add Application Guide and dashboard rows that separately show strict

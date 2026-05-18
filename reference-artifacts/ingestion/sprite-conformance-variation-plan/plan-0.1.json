@@ -87,15 +87,15 @@
       "id": "crop-box-manifest",
       "label": "Crop-Box Manifest",
       "goal": "Define bounding boxes for player, bee, butterfly, boss, captured fighter, projectiles, tractor beam, explosions, challenge aliens, and each important pose frame.",
-      "currentStatus": "First-pass region manifest exists at reference-artifacts/ingestion/galaga-alien-visual-reference/crop-box-manifest-0.1.json, and generated review previews now exist at reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json. Exact per-sprite boxes still need human review and promotion.",
-      "nextAction": "Review the generated crop previews and grid overlays, then promote accepted per-role and per-pose target crops."
+      "currentStatus": "First-pass region manifest exists at reference-artifacts/ingestion/galaga-alien-visual-reference/crop-box-manifest-0.1.json, generated review previews exist at reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json, and accepted first-pass per-role/per-pose target crops now exist at reference-artifacts/analyses/galaga-alien-target-crops/latest.json.",
+      "nextAction": "Review any disputed source-sheet cells, then keep the promoted crop library current as new target sources or better source crops are ingested."
     },
     {
       "id": "pose-and-motion-targets",
       "label": "Pose And Motion Targets",
       "goal": "Group static crops into temporal identities: flap cycles, dive turns, boss damage, capture/rescue, dual fighter, projectiles, and explosions.",
-      "currentStatus": "Static model and runtime crop scoring exist; motion remains the major gap.",
-      "nextAction": "Add pose-set metadata and minimum phase coverage requirements before raising sprite conformance claims."
+      "currentStatus": "Static model and runtime crop scoring exist, and a 32-crop/7-role promoted source-sheet library now supplies multi-pose static targets. Motion remains the major gap.",
+      "nextAction": "Compare Aurora runtime crops against the promoted multi-pose target library, then add temporal windows and minimum phase coverage requirements before raising sprite conformance claims."
     },
     {
       "id": "runtime-renderer-path",
@@ -108,8 +108,8 @@
       "id": "scoring-and-gates",
       "label": "Scoring And Gates",
       "goal": "Score static crops, active motion, stage context, player meaning, and shipped-theme originality separately.",
-      "currentStatus": "Runtime static sprite score is about 6.2/10; active sprite motion is captured as a planning gap rather than a scored mature metric.",
-      "nextAction": "Update runtime sprite scoring to compare multiple target poses and report confidence/resolution."
+      "currentStatus": "Runtime static sprite score is about 6.2/10 against inferred models. A stricter first-pass runtime-vs-promoted-target-crop comparator now scores about 3.4/10, making the visible sprite geometry gap explicit. Active sprite motion is still captured as a planning gap rather than a scored mature metric.",
+      "nextAction": "Use the runtime-vs-target-crop mismatch data to choose sprite geometry and target-mapping improvements, then add confidence/resolution and temporal motion scoring."
     },
     {
       "id": "variation-generation",
@@ -170,13 +170,25 @@
       "path": "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json"
     },
     {
+      "label": "Galaga alien target crop report",
+      "path": "GALAGA_ALIEN_TARGET_CROPS.md"
+    },
+    {
+      "label": "Galaga alien target crop analysis",
+      "path": "reference-artifacts/analyses/galaga-alien-target-crops/latest.json"
+    },
+    {
       "label": "Runtime static sprite conformance",
       "path": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json"
+    },
+    {
+      "label": "Runtime versus promoted Galaga target crops",
+      "path": "reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json"
     },
     {
       "label": "Target artifact coverage",
       "path": "GALAGA_TARGET_ARTIFACT_COVERAGE.md"
     }
   ],
-  "nextBestStep": "Use the crop-box manifest and generated preview grids to review exact boxes, then promote per-role and per-pose target crops for the runtime scorer."
+  "nextBestStep": "Use the first-pass runtime-vs-promoted-target-crop mismatch data to improve Aurora sprite geometry and target mappings, then add temporal motion windows for flap, dive, damage, capture, rescue, projectile, explosion, and challenge-stage specialty behavior."
 }

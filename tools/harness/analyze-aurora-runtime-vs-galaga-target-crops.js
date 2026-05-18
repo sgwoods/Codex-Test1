@@ -1,0 +1,300 @@
+#!/usr/bin/env node
+const fs = require('fs');
+const path = require('path');
+const { execFileSync, spawnSync } = require('child_process');
+
+const ROOT = path.resolve(__dirname, '..', '..');
+const RUNTIME_ARTIFACT = 'reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json';
+const TARGET_ARTIFACT = 'reference-artifacts/analyses/galaga-alien-target-crops/latest.json';
+const OUT_DIR = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-runtime-vs-galaga-target-crops');
+const OUT = path.join(OUT_DIR, 'latest.json');
+
+const ROLE_CANDIDATES = {
+  'player-fighter': ['player-fighter'],
+  'dual-fighter': ['player-fighter'],
+  'bee-line': ['bee-zako'],
+  'but-line': ['butterfly-escort'],
+  'boss-line': ['boss-galaga'],
+  'rogue-fighter': ['player-fighter', 'boss-galaga'],
+  'challenge-dragonfly': ['challenge-specialty-aliens'],
+  'challenge-mosquito': ['challenge-specialty-aliens']
+};
+
+function fail(message, payload){
+  console.error(message);
+  if(payload) console.error(JSON.stringify(payload, null, 2));
+  process.exit(1);
+}
+
+function rel(file){
+  return path.relative(ROOT, file).split(path.sep).join('/');
+}
+
+function abs(relPath){
+  return path.join(ROOT, relPath);
+}
+
+function exists(relPath){
+  return !!relPath && fs.existsSync(abs(relPath));
+}
+
+function readJson(relPath){
+  return JSON.parse(fs.readFileSync(abs(relPath), 'utf8'));
+}
+
+function writeJson(file, value){
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`);
+}
+
+function git(args, fallback = ''){
+  try{
+    return execFileSync('git', ['-C', ROOT, ...args], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+  }catch{
+    return fallback;
+  }
+}
+
+function rounded(value, places = 3){
+  if(!Number.isFinite(+value)) return null;
+  const scale = 10 ** places;
+  return Math.round(+value * scale) / scale;
+}
+
+function run(cmd, args, opts = {}){
+  const result = spawnSync(cmd, args, Object.assign({
+    cwd: ROOT,
+    encoding: opts.encoding || 'utf8',
+    maxBuffer: opts.maxBuffer || 1024 * 1024 * 256,
+    timeout: 1000 * 60 * 3
+  }, opts));
+  if(result.status !== 0){
+    throw new Error(`${cmd} failed\nargs: ${args.join(' ')}\n${result.stderr || result.stdout || ''}`);
+  }
+  return result.stdout;
+}
+
+function probeImage(file){
+  const raw = run('ffprobe', ['-v', 'error', '-show_entries', 'stream=width,height', '-of', 'json', file]);
+  const stream = JSON.parse(raw).streams?.[0] || {};
+  return { width: stream.width || 0, height: stream.height || 0 };
+}
+
+function decodeImage(file){
+  const { width, height } = probeImage(file);
+  const raw = run('ffmpeg', ['-v', 'error', '-i', file, '-f', 'rawvideo', '-pix_fmt', 'rgb24', 'pipe:1'], { encoding: 'buffer' });
+  return { width, height, raw };
+}
+
+function colorSimilarity(a, b){
+  const dr = a[0] - b[0];
+  const dg = a[1] - b[1];
+  const db = a[2] - b[2];
+  return Math.max(0, 1 - Math.sqrt(dr * dr + dg * dg + db * db) / Math.sqrt(255 * 255 * 3));
+}
+
+function sampleCell(image, gx, gy, cols, rows){
+  const x0 = Math.floor(gx * image.width / cols);
+  const x1 = Math.max(x0 + 1, Math.floor((gx + 1) * image.width / cols));
+  const y0 = Math.floor(gy * image.height / rows);
+  const y1 = Math.max(y0 + 1, Math.floor((gy + 1) * image.height / rows));
+  let lit = 0;
+  let r = 0;
+  let g = 0;
+  let b = 0;
+  for(let y = y0; y < y1; y++){
+    for(let x = x0; x < x1; x++){
+      const i = (y * image.width + x) * 3;
+      const rr = image.raw[i];
+      const gg = image.raw[i + 1];
+      const bb = image.raw[i + 2];
+      const luma = .299 * rr + .587 * gg + .114 * bb;
+      if(!(rr + gg + bb > 90 && Math.max(rr, gg, bb) > 38 && luma > 18)) continue;
+      lit++;
+      r += rr;
+      g += gg;
+      b += bb;
+    }
+  }
+  return lit ? {
+    lit: true,
+    rgb: [Math.round(r / lit), Math.round(g / lit), Math.round(b / lit)]
+  } : { lit: false, rgb: [0, 0, 0] };
+}
+
+function gridForImage(file, cols = 32, rows = 32){
+  const image = decodeImage(file);
+  const grid = [];
+  let filled = 0;
+  for(let y = 0; y < rows; y++){
+    const row = [];
+    for(let x = 0; x < cols; x++){
+      const cell = sampleCell(image, x, y, cols, rows);
+      if(cell.lit) filled++;
+      row.push(cell);
+    }
+    grid.push(row);
+  }
+  return {
+    width: image.width,
+    height: image.height,
+    grid,
+    filled,
+    fillRatio: filled / Math.max(1, cols * rows)
+  };
+}
+
+function compareGrids(runtime, target){
+  const rows = runtime.grid.length;
+  const cols = runtime.grid[0]?.length || 0;
+  let intersection = 0;
+  let union = 0;
+  let silhouetteMatches = 0;
+  let colorPairs = 0;
+  let colorSum = 0;
+  for(let y = 0; y < rows; y++){
+    for(let x = 0; x < cols; x++){
+      const a = runtime.grid[y][x];
+      const b = target.grid[y][x];
+      if(a.lit || b.lit) union++;
+      if(a.lit && b.lit){
+        intersection++;
+        colorPairs++;
+        colorSum += colorSimilarity(a.rgb, b.rgb);
+      }
+      if(a.lit === b.lit) silhouetteMatches++;
+    }
+  }
+  const total = Math.max(1, rows * cols);
+  const jaccard = union ? intersection / union : 0;
+  const silhouetteAgreement = silhouetteMatches / total;
+  const colorMatch = colorPairs ? colorSum / colorPairs : 0;
+  const aspectDelta = Math.abs((runtime.width / Math.max(1, runtime.height)) - (target.width / Math.max(1, target.height)));
+  const aspectPenalty = Math.min(.14, aspectDelta * .08);
+  const score = Math.max(0, (jaccard * .55 + silhouetteAgreement * .25 + colorMatch * .2 - aspectPenalty) * 10);
+  return {
+    score10: rounded(score, 2),
+    jaccard: rounded(jaccard, 4),
+    silhouetteAgreement: rounded(silhouetteAgreement, 4),
+    colorSimilarity: rounded(colorMatch, 4),
+    fillRatioDelta: rounded(Math.abs(runtime.fillRatio - target.fillRatio), 4),
+    aspectDelta: rounded(aspectDelta, 4)
+  };
+}
+
+function targetCandidatesForSample(sample, targetCrops){
+  const roles = ROLE_CANDIDATES[sample.spriteKey] || [];
+  const candidates = targetCrops.filter(crop => roles.includes(crop.roleKey));
+  return candidates.length ? candidates : targetCrops;
+}
+
+function compareSample(sample, targetCrops, targetGrids){
+  if(!exists(sample.cropImage)) fail(`Runtime crop image is missing for ${sample.spriteKey}`, sample);
+  const runtimeFile = abs(sample.cropImage);
+  const runtimeGrid = gridForImage(runtimeFile);
+  const candidateResults = targetCandidatesForSample(sample, targetCrops)
+    .map(target => {
+      const targetGrid = targetGrids.get(target.id) || gridForImage(abs(target.targetCrop));
+      targetGrids.set(target.id, targetGrid);
+      const comparison = compareGrids(runtimeGrid, targetGrid);
+      return Object.assign({
+        targetCropId: target.id,
+        targetRoleKey: target.roleKey,
+        targetPoseKey: target.poseKey,
+        targetCrop: target.targetCrop
+      }, comparison);
+    })
+    .sort((a, b) => b.score10 - a.score10);
+  const best = candidateResults[0] || null;
+  return {
+    spriteKey: sample.spriteKey,
+    runtimeCrop: sample.cropImage,
+    runtimeModelScore10: sample.score10,
+    candidateRoleKeys: ROLE_CANDIDATES[sample.spriteKey] || [],
+    candidateCount: candidateResults.length,
+    bestTargetCropId: best?.targetCropId || null,
+    bestTargetRoleKey: best?.targetRoleKey || null,
+    bestTargetPoseKey: best?.targetPoseKey || null,
+    bestTargetCrop: best?.targetCrop || null,
+    bestScore10: best?.score10 || null,
+    bestComponents: best ? {
+      jaccard: best.jaccard,
+      silhouetteAgreement: best.silhouetteAgreement,
+      colorSimilarity: best.colorSimilarity,
+      fillRatioDelta: best.fillRatioDelta,
+      aspectDelta: best.aspectDelta
+    } : null,
+    topCandidates: candidateResults.slice(0, 4)
+  };
+}
+
+function main(){
+  if(!exists(RUNTIME_ARTIFACT)) fail(`Missing runtime sprite conformance artifact: ${RUNTIME_ARTIFACT}`);
+  if(!exists(TARGET_ARTIFACT)) fail(`Missing Galaga target crop artifact: ${TARGET_ARTIFACT}`);
+  const runtime = readJson(RUNTIME_ARTIFACT);
+  const target = readJson(TARGET_ARTIFACT);
+  const samples = Array.isArray(runtime.samples) ? runtime.samples : [];
+  const targetCrops = Array.isArray(target.targetCrops) ? target.targetCrops : [];
+  if(samples.length < 1) fail('Runtime sprite artifact has no samples.', runtime.summary);
+  if(targetCrops.length < 1) fail('Target crop artifact has no target crops.', target.summary);
+  for(const crop of targetCrops){
+    if(!exists(crop.targetCrop)) fail(`Promoted target crop image is missing: ${crop.targetCrop}`, crop);
+  }
+  const targetGrids = new Map();
+  const comparisons = samples.map(sample => compareSample(sample, targetCrops, targetGrids));
+  const scored = comparisons.filter(item => Number.isFinite(+item.bestScore10));
+  const averageScore10 = scored.length
+    ? rounded(scored.reduce((sum, item) => sum + item.bestScore10, 0) / scored.length, 2)
+    : null;
+  const weakest = scored.slice().sort((a, b) => a.bestScore10 - b.bestScore10)[0] || null;
+  const strongest = scored.slice().sort((a, b) => b.bestScore10 - a.bestScore10)[0] || null;
+  const artifact = {
+    schemaVersion: 1,
+    artifactType: 'aurora-runtime-vs-galaga-target-crops',
+    generatedAt: new Date().toISOString(),
+    commit: git(['rev-parse', '--short', 'HEAD'], 'unknown'),
+    branch: git(['branch', '--show-current'], 'unknown'),
+    dirty: !!git(['status', '--porcelain'], ''),
+    gameKey: 'aurora-galactica',
+    sources: {
+      runtimeSprite: RUNTIME_ARTIFACT,
+      targetCrops: TARGET_ARTIFACT
+    },
+    summary: {
+      sampleCount: comparisons.length,
+      targetCropCount: targetCrops.length,
+      roleSetCount: target.summary?.roleSetCount || 0,
+      averageScore10,
+      weakestSpriteKey: weakest?.spriteKey || null,
+      weakestScore10: weakest?.bestScore10 || null,
+      weakestBestTarget: weakest?.bestTargetCropId || null,
+      strongestSpriteKey: strongest?.spriteKey || null,
+      strongestScore10: strongest?.bestScore10 || null,
+      scoringMode: 'first-pass-normalized-image-grid-comparison'
+    },
+    measurementLimits: [
+      'This is a first-pass static-image comparator using already-captured Aurora runtime crop PNGs and promoted source-sheet target crop PNGs.',
+      'Images are normalized to a shared grid, so this is useful for role/pose target triage but not yet a final pixel-perfect conformance score.',
+      'The comparator does not score animation timing, flap cadence, dive rotation, formation context, capture/rescue transitions, or target-crop authority disputes.',
+      'Dual fighter and carried/captured fighter matching still need composite target promotion before their scores should be treated as mature.'
+    ],
+    comparisons
+  };
+  writeJson(OUT, artifact);
+  console.log(JSON.stringify({
+    ok: true,
+    artifact: rel(OUT),
+    sampleCount: comparisons.length,
+    targetCropCount: targetCrops.length,
+    averageScore10,
+    weakestSpriteKey: artifact.summary.weakestSpriteKey,
+    weakestScore10: artifact.summary.weakestScore10,
+    weakestBestTarget: artifact.summary.weakestBestTarget
+  }, null, 2));
+}
+
+try{
+  main();
+}catch(err){
+  fail(err && err.stack || String(err));
+}

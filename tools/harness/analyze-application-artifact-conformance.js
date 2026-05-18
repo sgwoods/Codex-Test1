@@ -11,7 +11,9 @@ const OUT = path.join(OUT_DIR, 'latest.json');
 const SOURCES = {
   spriteModel: 'reference-artifacts/analyses/galaga-reference-sprites/model-0.1.json',
   spriteTargets: 'reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1.json',
+  spriteSheetTargetCrops: 'reference-artifacts/analyses/galaga-alien-target-crops/latest.json',
   runtimeSprite: 'reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json',
+  runtimeVsTargetCrops: 'reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json',
   audioLab: 'reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json',
   audioGap: 'reference-artifacts/analyses/aurora-audio-event-gap/latest.json',
   visualLook: 'reference-artifacts/analyses/aurora-visual-look-conformance/latest.json',
@@ -247,7 +249,9 @@ function row({ id, surface, current, target, score10, confidence, status, measur
 function main(){
   const spriteModel = readOptionalJson(SOURCES.spriteModel);
   const spriteTargets = readOptionalJson(SOURCES.spriteTargets);
+  const spriteSheetTargetCrops = readOptionalJson(SOURCES.spriteSheetTargetCrops);
   const runtimeSprite = readOptionalJson(SOURCES.runtimeSprite);
+  const runtimeVsTargetCrops = readOptionalJson(SOURCES.runtimeVsTargetCrops);
   const audioLab = readOptionalJson(SOURCES.audioLab);
   const audioGap = readOptionalJson(SOURCES.audioGap);
   const visualLook = readOptionalJson(SOURCES.visualLook);
@@ -259,6 +263,7 @@ function main(){
   const runtimeSpriteSummary = runtimeSprite?.summary || {};
   const runtimeSpriteSamples = Array.isArray(runtimeSprite?.samples) ? runtimeSprite.samples : [];
   const runtimeWeakest = runtimeSpriteSamples.slice().sort((a, b) => (a.score10 || 0) - (b.score10 || 0))[0] || null;
+  const runtimeVsTargetSummary = runtimeVsTargetCrops?.summary || {};
   const audioGate = findGate(releaseDashboard, 'audio identity');
   const visualGate = findGate(releaseDashboard, 'visual look');
   const frameGate = findGate(releaseDashboard, 'arcade frame');
@@ -270,6 +275,11 @@ function main(){
   const audioGapSummary = audioGap?.summary || {};
   const sourceTargetCatalogKeys = spriteTargets?.summary?.catalogKeys || [];
   const sourceTargetCount = spriteTargets?.summary?.targetCount || 0;
+  const sheetTargetCropSummary = spriteSheetTargetCrops?.summary || {};
+  const sheetTargetRoleSets = Array.isArray(spriteSheetTargetCrops?.roleSets) ? spriteSheetTargetCrops.roleSets : [];
+  const sheetTargetRoles = sheetTargetRoleSets.map(role => role.roleKey).filter(Boolean);
+  const sheetTargetCropCount = sheetTargetCropSummary.targetCropCount || (Array.isArray(spriteSheetTargetCrops?.targetCrops) ? spriteSheetTargetCrops.targetCrops.length : 0);
+  const sheetTargetRoleCount = sheetTargetCropSummary.roleSetCount || sheetTargetRoleSets.length;
   const surfaceCheckCount = quality?.surfaceRun?.checks?.length || 0;
   const audioAlignment = quality?.audioAlignmentRun?.summary || quality?.audioAlignmentRun || {};
 
@@ -301,6 +311,22 @@ function main(){
       next: 'Expand from static isolated poses into animation-phase, dive-rotation, formation-context, and capture/rescue runtime sprite windows.'
     }),
     row({
+      id: 'sprite-runtime-vs-promoted-target-crops',
+      surface: 'Sprites: live runtime crops vs promoted Galaga target crops',
+      current: runtimeVsTargetCrops ? scoreText(runtimeVsTargetSummary.averageScore10) : 'direct target-crop comparison pending',
+      target: '>=8.5/10 against promoted multi-pose target crop library',
+      score10: runtimeVsTargetSummary.averageScore10,
+      confidence: runtimeVsTargetCrops ? 'medium-low' : 'pending',
+      status: runtimeVsTargetCrops
+        ? (runtimeVsTargetSummary.scoringMode || 'first-pass normalized image-grid comparison')
+        : 'Direct runtime-vs-promoted-target-crop artifact pending',
+      measurement: runtimeVsTargetCrops
+        ? `${runtimeVsTargetSummary.sampleCount || 0} live runtime crop PNGs compared against ${runtimeVsTargetSummary.targetCropCount || 0} promoted target crops; weakest ${runtimeVsTargetSummary.weakestSpriteKey || 'n/a'} ${scoreText(runtimeVsTargetSummary.weakestScore10)}; best matched target ${runtimeVsTargetSummary.weakestBestTarget || 'n/a'}.`
+        : 'Run npm run harness:analyze:aurora-runtime-vs-galaga-target-crops after runtime sprite crops and target crops exist.',
+      evidence: runtimeVsTargetCrops ? SOURCES.runtimeVsTargetCrops : `${SOURCES.runtimeSprite}; ${SOURCES.spriteSheetTargetCrops}`,
+      next: 'Use the top candidate mismatch data to update sprite geometry, target mappings, and composite targets; then add temporal windows for flap, dive, capture/rescue, projectile, explosion, tractor beam, and challenge-stage specialty motion.'
+    }),
+    row({
       id: 'sprite-motion-animation-coverage',
       surface: 'Sprite motion: flapping, pulsing, dive poses, and transition animation',
       current: runtimeSprite
@@ -327,6 +353,24 @@ function main(){
       measurement: `${sourceTargetCount} unscaled PNG crops cover ${sourceTargetCatalogKeys.join(', ')}; target dimensions are verified against crop metadata.`,
       evidence: SOURCES.spriteTargets,
       next: 'Add additional formation, animation-phase, and damage-state crops so target references cover more than the static catalog poses.'
+    }),
+    row({
+      id: 'sprite-sheet-target-pose-crops',
+      surface: 'Reference sprite targets: promoted sheet pose crops',
+      current: spriteSheetTargetCrops
+        ? `${sheetTargetCropCount} promoted crops across ${sheetTargetRoleCount} role sets`
+        : 'promoted target crops pending',
+      target: 'Multi-pose target sets for player, bee, butterfly, boss, challenge aliens, projectiles, explosions, and tractor beam',
+      score10: null,
+      confidence: spriteSheetTargetCrops ? 'medium' : 'pending',
+      status: spriteSheetTargetCrops
+        ? `First-pass source-sheet target library; ${sheetTargetCropSummary.scoringStatus || 'runtime comparison pending'}`
+        : 'Target crop promotion not generated',
+      measurement: spriteSheetTargetCrops
+        ? `${sheetTargetCropCount} exact 1x source-sheet crops; roles ${sheetTargetRoles.join(', ') || 'n/a'}; source-pixel exact ${sheetTargetCropSummary.sourcePixelExact ? 'yes' : 'pending'}.`
+        : 'Run npm run harness:promote:galaga-alien-target-crops to generate the target crop library.',
+      evidence: spriteSheetTargetCrops ? SOURCES.spriteSheetTargetCrops : SOURCES.spriteTargets,
+      next: spriteSheetTargetCrops?.nextBestStep || 'Compare Aurora runtime crops against the promoted multi-pose target crop library and add temporal scoring windows.'
     }),
     row({
       id: 'audio-cue-assets',
@@ -432,6 +476,7 @@ function main(){
       weakestRow: numericRows.slice().sort((a, b) => a.score10 - b.score10)[0]?.id || null,
       spriteCatalogProxyScore10: spriteComparison.averageScore10,
       spriteRuntimeCanvasScore10: runtimeSpriteSummary.averageScore10 || null,
+      spriteRuntimeVsTargetCropScore10: runtimeVsTargetSummary.averageScore10 || null,
       spriteModelAverageConfidence: rounded(spriteModel?.summary?.averageConfidence || 0, 4),
       audioScore10: audioLabSummary.audioScore10 || parseScore(audioGate?.Current),
       visualScore10: visualSummary.score10 || parseScore(visualGate?.Current),
@@ -440,12 +485,20 @@ function main(){
     },
     measurementLimits: [
       'Sprite rows intentionally include both a docs/catalog proxy and a live runtime-canvas score; they answer different questions and should not be collapsed.',
+      'The promoted-target-crop runtime row is a first-pass static image-grid comparison against exact source-sheet crops; it is deliberately stricter and currently exposes a larger visual gap than the inferred-model runtime score.',
       'Sprite conformance is not complete until temporal behavior is measured. Current sprite scores isolate static poses; animation phases, flapping cadence, pulsing, rotations, dive poses, capture/rescue transitions, and formation context still need their own windows.',
       'Fonts are measured through text containment and text-heavy visual surface scoring; arcade font identity still needs dedicated pixel targets.',
       'Background and shell scores use the first-pass visual scorer plus release gates; direct Galaga contact-sheet metrics are the next fidelity step.'
     ],
     spriteComparisons: spriteComparison.comparisons,
     runtimeSpriteComparisons: runtimeSpriteSamples,
+    runtimeVsTargetCropComparisons: Array.isArray(runtimeVsTargetCrops?.comparisons) ? runtimeVsTargetCrops.comparisons : [],
+    spriteSheetTargetCrops: spriteSheetTargetCrops ? {
+      summary: sheetTargetCropSummary,
+      roleSets: sheetTargetRoleSets,
+      targetCropCount: sheetTargetCropCount,
+      roleSetCount: sheetTargetRoleCount
+    } : null,
     rows
   };
 

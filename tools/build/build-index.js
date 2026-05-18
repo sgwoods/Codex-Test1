@@ -72,6 +72,7 @@ const LEVEL_VISUAL_CONFORMANCE_INDEX = path.join(ROOT, 'reference-artifacts', 'a
 const GALAGA_TARGET_ARTIFACT_COVERAGE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-artifact-coverage', 'latest.json');
 const GALAGA_ALIEN_VISUAL_REFERENCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-visual-reference', 'latest.json');
 const GALAGA_ALIEN_CROP_PREVIEWS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-visual-crop-previews', 'latest.json');
+const GALAGA_ALIEN_TARGET_CROPS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-target-crops', 'latest.json');
 const SPRITE_CONFORMANCE_VARIATION_PLAN = path.join(ROOT, 'reference-artifacts', 'ingestion', 'sprite-conformance-variation-plan', 'plan-0.1.json');
 const PERSONA_PERFORMANCE_DISTRIBUTION = path.join(ROOT, 'reference-artifacts', 'analyses', 'persona-performance-distribution', 'latest.json');
 const CATALOG_MEDIA_SOURCE_PATHS = new Set();
@@ -3109,6 +3110,7 @@ let levelVisualConformanceIndexCache = null;
 let galagaTargetArtifactCoverageCache = null;
 let galagaAlienVisualReferenceCache = null;
 let galagaAlienCropPreviewsCache = null;
+let galagaAlienTargetCropsCache = null;
 let spriteConformanceVariationPlanCache = null;
 
 function loadGalagaReferenceSpriteTargets(){
@@ -3177,6 +3179,25 @@ function loadGalagaAlienCropPreviews(){
     galagaAlienCropPreviewsCache = { regions: [], targetRolePlan: [], summary: {} };
   }
   return galagaAlienCropPreviewsCache;
+}
+
+function loadGalagaAlienTargetCrops(){
+  if(galagaAlienTargetCropsCache) return galagaAlienTargetCropsCache;
+  if(!fs.existsSync(GALAGA_ALIEN_TARGET_CROPS)){
+    galagaAlienTargetCropsCache = { targetCrops: [], roleSets: [], summary: {} };
+    return galagaAlienTargetCropsCache;
+  }
+  try {
+    const artifact = readJson(GALAGA_ALIEN_TARGET_CROPS);
+    galagaAlienTargetCropsCache = Object.assign({}, artifact, {
+      targetCrops: Array.isArray(artifact.targetCrops) ? artifact.targetCrops : [],
+      roleSets: Array.isArray(artifact.roleSets) ? artifact.roleSets : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    galagaAlienTargetCropsCache = { targetCrops: [], roleSets: [], summary: {} };
+  }
+  return galagaAlienTargetCropsCache;
 }
 
 function loadSpriteConformanceVariationPlan(){
@@ -4145,6 +4166,56 @@ function renderGalagaAlienCropRoleRows(report){
   `).join('\n');
 }
 
+function renderGalagaAlienTargetRoleRows(report){
+  const roles = Array.isArray(report?.roleSets) ? report.roleSets : [];
+  if(!roles.length){
+    return `
+    <tr>
+      <td colspan="4"><span class="docMeta">Promoted target crop role sets pending. Run <code>npm run harness:promote:galaga-alien-target-crops</code>.</span></td>
+    </tr>`;
+  }
+  return roles.map((role) => `
+    <tr>
+      <td><strong>${esc(role.label || role.roleKey || '')}</strong><br><span class="docMeta"><code>${esc(role.roleKey || '')}</code></span></td>
+      <td>${(role.promotedPoses || []).map(pose => `<code>${esc(pose)}</code>`).join('<br>')}</td>
+      <td><strong>${esc(role.promotedPoseCount ?? (role.targetCrops || []).length ?? 0)}</strong> promoted crop(s)<br><span class="docMeta">${esc(role.status || '')}</span></td>
+      <td>${esc(role.coverageRead || '')}</td>
+    </tr>
+  `).join('\n');
+}
+
+function renderGalagaAlienTargetCropRows(report){
+  const crops = Array.isArray(report?.targetCrops) ? report.targetCrops : [];
+  if(!crops.length){
+    return `
+    <tr>
+      <td colspan="6"><span class="docMeta">Promoted target crops pending. Run <code>npm run harness:promote:galaga-alien-target-crops</code>.</span></td>
+    </tr>`;
+  }
+  return crops.map((crop) => {
+    const source = crop.sourceCell
+      ? `${crop.sourceRegion || ''} r${crop.sourceCell.row} c${crop.sourceCell.column}`
+      : (crop.sourceRegion || 'custom crop');
+    const box = crop.crop || {};
+    const metricText = `${crop.metrics?.litPixels ?? 0} lit px; ${esc((crop.metrics?.tokenChannels || []).join(', ') || 'no channels')}`;
+    return `
+    <tr>
+      <td><strong>${esc(crop.roleKey || '')}</strong><br><span class="docMeta">${esc(crop.reviewStatus || '')}</span></td>
+      <td><code>${esc(crop.poseKey || '')}</code></td>
+      <td>${renderMediaImage({
+        label: crop.poseKey || crop.id || 'Target crop',
+        src: crop.targetCrop,
+        pixelated: true,
+        note: 'Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.'
+      })}</td>
+      <td>${esc(source)}<br><span class="docMeta"><code>${esc(`${box.x ?? '?'}:${box.y ?? '?'} ${box.width ?? '?'}x${box.height ?? '?'}`)}</code></span></td>
+      <td>${metricText}</td>
+      <td>${esc(crop.note || '')}</td>
+    </tr>
+  `;
+  }).join('\n');
+}
+
 function renderChallengeTargetCoverageRows(report){
   const rows = Array.isArray(report?.challengeStageCoverage) ? report.challengeStageCoverage : [];
   if(!rows.length){
@@ -4325,6 +4396,10 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const galagaAlienCropPreviewSummary = galagaAlienCropPreviews.summary || {};
   const galagaAlienCropPreviewRows = renderGalagaAlienCropPreviewRows(galagaAlienCropPreviews);
   const galagaAlienCropRoleRows = renderGalagaAlienCropRoleRows(galagaAlienCropPreviews);
+  const galagaAlienTargetCrops = loadGalagaAlienTargetCrops();
+  const galagaAlienTargetCropSummary = galagaAlienTargetCrops.summary || {};
+  const galagaAlienTargetRoleRows = renderGalagaAlienTargetRoleRows(galagaAlienTargetCrops);
+  const galagaAlienTargetCropRows = renderGalagaAlienTargetCropRows(galagaAlienTargetCrops);
   const conformanceAlienRows = (guide.conformanceAlienRows || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.name || '')}</strong><br><span class="docMeta">${esc(entry.runtime || '')}</span></td>
@@ -4744,6 +4819,49 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               </thead>
               <tbody>
                 ${galagaAlienCropRoleRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="docWrap" style="margin-top:16px;">
+            <h3>Promoted Galaga Target Crops</h3>
+            <p>The first exact source-sheet crop library is now promoted from the preview grids. These crops are target-lane evidence for measurement and review; they are not public production art. The next lift is to compare Aurora live runtime sprites against this multi-pose library and then add temporal windows for flap, dive, beam, explosion, capture, and challenge-stage motion.</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-target-crops/latest.json</code>. <strong>Readable report:</strong> <code>GALAGA_ALIEN_TARGET_CROPS.md</code>. <strong>Generated:</strong> ${esc(galagaAlienTargetCrops.generatedAt || 'pending')}.</p>
+            <div class="metricGrid">
+              <div class="metricCard"><span class="metricLabel">Target Crops</span><strong>${esc(galagaAlienTargetCropSummary.targetCropCount ?? 0)}</strong><span>exact source-sheet images</span></div>
+              <div class="metricCard"><span class="metricLabel">Role Sets</span><strong>${esc(galagaAlienTargetCropSummary.roleSetCount ?? 0)}</strong><span>player, aliens, effects, beam</span></div>
+              <div class="metricCard"><span class="metricLabel">Source Pixels</span><strong>${galagaAlienTargetCropSummary.sourcePixelExact ? '1x exact' : 'pending'}</strong><span>no generated interpolation</span></div>
+              <div class="metricCard"><span class="metricLabel">Scoring Status</span><strong>${esc(galagaAlienTargetCropSummary.scoringStatus || 'pending')}</strong><span>runtime comparison next</span></div>
+            </div>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Promoted Poses</th>
+                  <th>Promotion</th>
+                  <th>Coverage Read</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${galagaAlienTargetRoleRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Pose</th>
+                  <th>Crop</th>
+                  <th>Source</th>
+                  <th>Metrics</th>
+                  <th>Conformance Use</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${galagaAlienTargetCropRows}
               </tbody>
             </table>
           </div>

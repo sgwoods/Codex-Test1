@@ -7,8 +7,10 @@ const ARTIFACT = 'reference-artifacts/analyses/application-artifact-conformance/
 const REQUIRED_ROWS = [
   'sprite-model-current-vs-target',
   'sprite-runtime-canvas-vs-target',
+  'sprite-runtime-vs-promoted-target-crops',
   'sprite-motion-animation-coverage',
   'source-frame-pixel-targets',
+  'sprite-sheet-target-pose-crops',
   'audio-cue-assets',
   'audio-event-alignment',
   'backgrounds-starfield-atmosphere',
@@ -98,9 +100,22 @@ function main(){
       fail('Application artifact conformance runtime sprite comparison is missing image evidence', { comparison, payload });
     }
   }
+  const runtimeVsTargetCropComparisons = Array.isArray(artifact.runtimeVsTargetCropComparisons) ? artifact.runtimeVsTargetCropComparisons : [];
+  if(runtimeVsTargetCropComparisons.length < 7){
+    fail('Application artifact conformance status does not include enough runtime-vs-target crop comparisons', payload);
+  }
+  for(const comparison of runtimeVsTargetCropComparisons){
+    if(!Number.isFinite(+comparison.bestScore10) || comparison.bestScore10 <= 0 || comparison.bestScore10 > 10){
+      fail('Application artifact conformance runtime-vs-target crop comparison has an invalid score', { comparison, payload });
+    }
+    if(!exists(comparison.runtimeCrop) || !exists(comparison.bestTargetCrop)){
+      fail('Application artifact conformance runtime-vs-target crop comparison is missing image evidence', { comparison, payload });
+    }
+  }
   const requiredNumeric = [
     'sprite-model-current-vs-target',
     'sprite-runtime-canvas-vs-target',
+    'sprite-runtime-vs-promoted-target-crops',
     'source-frame-pixel-targets',
     'audio-cue-assets',
     'backgrounds-starfield-atmosphere',
@@ -119,7 +134,8 @@ function main(){
     averageScore10: artifact.summary?.averageScore10,
     weakestRow: artifact.summary?.weakestRow,
     spriteComparisons: spriteComparisons.length,
-    runtimeSpriteComparisons: runtimeSpriteComparisons.length
+    runtimeSpriteComparisons: runtimeSpriteComparisons.length,
+    runtimeVsTargetCropComparisons: runtimeVsTargetCropComparisons.length
   }, null, 2));
 }
 

@@ -6,6 +6,7 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const PLAN = path.join(ROOT, 'reference-artifacts', 'ingestion', 'sprite-conformance-variation-plan', 'plan-0.1.json');
 const CROP_MANIFEST = path.join(ROOT, 'reference-artifacts', 'ingestion', 'galaga-alien-visual-reference', 'crop-box-manifest-0.1.json');
 const CROP_PREVIEW = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-visual-crop-previews', 'latest.json');
+const TARGET_CROPS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-target-crops', 'latest.json');
 
 function fail(message, payload){
   console.error(message);
@@ -55,8 +56,8 @@ const missingSteps = requiredSteps.filter(id => !steps.has(id));
 if(missingLanes.length) fail('Sprite plan is missing required lanes.', { missingLanes });
 if(missingSteps.length) fail('Sprite plan is missing required pipeline steps.', { missingSteps });
 
-if(!/crop-box[- ]manifest/i.test(String(plan.nextBestStep || ''))){
-  fail('Sprite plan nextBestStep should keep the crop-box manifest as the immediate implementation focus.', {
+if(!/target[- ]crop|runtime[- ]crop|runtime-vs|multi-pose/i.test(String(plan.nextBestStep || ''))){
+  fail('Sprite plan nextBestStep should advance from crop promotion into runtime-vs-target crop comparison.', {
     nextBestStep: plan.nextBestStep || ''
   });
 }
@@ -70,14 +71,20 @@ if(missingArtifacts.length){
 const artifactPaths = new Set((plan.artifacts || []).map(item => item.path));
 for(const expected of [
   'GALAGA_ALIEN_CROP_PREVIEW.md',
-  'reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json'
+  'reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json',
+  'GALAGA_ALIEN_TARGET_CROPS.md',
+  'reference-artifacts/analyses/galaga-alien-target-crops/latest.json',
+  'reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json'
 ]){
   if(!artifactPaths.has(expected)){
-    fail('Sprite plan should include the generated crop-preview artifact.', { expected });
+    fail('Sprite plan should include the generated crop-preview and target-crop artifacts.', { expected });
   }
 }
 if(!fs.existsSync(CROP_PREVIEW)){
   fail(`Missing generated Galaga alien crop preview report: ${rel(CROP_PREVIEW)}`);
+}
+if(!fs.existsSync(TARGET_CROPS)){
+  fail(`Missing promoted Galaga alien target crop report: ${rel(TARGET_CROPS)}`);
 }
 
 const requiredRoles = [
@@ -108,5 +115,6 @@ console.log(JSON.stringify({
   cropRegionCount: (cropManifest.regions || []).length,
   targetRoleCount: (cropManifest.targetRolePlan || []).length,
   cropPreview: rel(CROP_PREVIEW),
+  targetCrops: rel(TARGET_CROPS),
   nextBestStep: plan.nextBestStep || ''
 }, null, 2));
