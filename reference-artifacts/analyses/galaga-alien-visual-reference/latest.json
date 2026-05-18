@@ -1,0 +1,495 @@
+{
+  "artifactType": "galaga-alien-visual-reference-pack",
+  "schemaVersion": 1,
+  "generatedAt": "2026-05-18T13:56:31.535Z",
+  "branch": "codex/macbook-conformance-investment-review",
+  "commit": "f520c1b4",
+  "source": "user-supplied close-up Galaga alien reference images copied from local Downloads on 2026-05-18",
+  "sourceDirectory": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images",
+  "policy": "Only the ripped sprite sheet and explicit pixel-grid references are target candidates. Fan art, stickers, posters, and product images are retained as human-review context and must not drive numeric pixel conformance scores.",
+  "summary": {
+    "suppliedImageCount": 11,
+    "existingImageCount": 11,
+    "uniqueImageHashCount": 10,
+    "duplicateImageCount": 2,
+    "targetCandidateCount": 2,
+    "roleCoverageCount": 11,
+    "strongestTargetSource": "general-sprites-sheet",
+    "currentUse": "Close-up visual reference for alien role indexing, sprite crop target planning, challenge-stage graphical novelty, and future pixel-pose atlas extraction."
+  },
+  "roleCoverage": [
+    {
+      "roleKey": "bee-line",
+      "imageCount": 7,
+      "targetCandidateCount": 1,
+      "strongestScore": 10,
+      "images": [
+        "general-sprites-sheet",
+        "closeup-alien-lineup-black",
+        "pixel-cutout-lineup",
+        "formation-lineup-black",
+        "mobile-title-formation-reference",
+        "vertical-formation-art",
+        "compact-player-alien-lineup"
+      ]
+    },
+    {
+      "roleKey": "boss-line",
+      "imageCount": 9,
+      "targetCandidateCount": 1,
+      "strongestScore": 10,
+      "images": [
+        "general-sprites-sheet",
+        "closeup-alien-lineup-black",
+        "pixel-cutout-lineup",
+        "formation-lineup-black",
+        "mobile-title-formation-reference",
+        "vertical-formation-art",
+        "tractor-beam-poster-a",
+        "compact-player-alien-lineup",
+        "tractor-beam-poster-b-duplicate"
+      ]
+    },
+    {
+      "roleKey": "but-line",
+      "imageCount": 7,
+      "targetCandidateCount": 1,
+      "strongestScore": 10,
+      "images": [
+        "general-sprites-sheet",
+        "closeup-alien-lineup-black",
+        "pixel-cutout-lineup",
+        "formation-lineup-black",
+        "mobile-title-formation-reference",
+        "vertical-formation-art",
+        "compact-player-alien-lineup"
+      ]
+    },
+    {
+      "roleKey": "challenge-dragonfly",
+      "imageCount": 2,
+      "targetCandidateCount": 1,
+      "strongestScore": 10,
+      "images": [
+        "general-sprites-sheet",
+        "closeup-alien-lineup-black"
+      ]
+    },
+    {
+      "roleKey": "challenge-mosquito",
+      "imageCount": 2,
+      "targetCandidateCount": 1,
+      "strongestScore": 10,
+      "images": [
+        "general-sprites-sheet",
+        "closeup-alien-lineup-black"
+      ]
+    },
+    {
+      "roleKey": "dual-fighter",
+      "imageCount": 1,
+      "targetCandidateCount": 1,
+      "strongestScore": 10,
+      "images": [
+        "general-sprites-sheet"
+      ]
+    },
+    {
+      "roleKey": "explosions",
+      "imageCount": 1,
+      "targetCandidateCount": 1,
+      "strongestScore": 10,
+      "images": [
+        "general-sprites-sheet"
+      ]
+    },
+    {
+      "roleKey": "player-fighter",
+      "imageCount": 11,
+      "targetCandidateCount": 2,
+      "strongestScore": 10,
+      "images": [
+        "general-sprites-sheet",
+        "closeup-alien-lineup-black",
+        "pixel-cutout-lineup",
+        "player-fighter-grid",
+        "formation-lineup-black",
+        "mobile-title-formation-reference",
+        "vertical-formation-art",
+        "tractor-beam-poster-a",
+        "compact-player-alien-lineup",
+        "player-fighter-sticker",
+        "tractor-beam-poster-b-duplicate"
+      ]
+    },
+    {
+      "roleKey": "projectiles",
+      "imageCount": 4,
+      "targetCandidateCount": 1,
+      "strongestScore": 10,
+      "images": [
+        "general-sprites-sheet",
+        "closeup-alien-lineup-black",
+        "formation-lineup-black",
+        "compact-player-alien-lineup"
+      ]
+    },
+    {
+      "roleKey": "rogue-fighter",
+      "imageCount": 5,
+      "targetCandidateCount": 1,
+      "strongestScore": 10,
+      "images": [
+        "general-sprites-sheet",
+        "closeup-alien-lineup-black",
+        "mobile-title-formation-reference",
+        "tractor-beam-poster-a",
+        "tractor-beam-poster-b-duplicate"
+      ]
+    },
+    {
+      "roleKey": "tractor-beam",
+      "imageCount": 4,
+      "targetCandidateCount": 1,
+      "strongestScore": 10,
+      "images": [
+        "general-sprites-sheet",
+        "mobile-title-formation-reference",
+        "tractor-beam-poster-a",
+        "tractor-beam-poster-b-duplicate"
+      ]
+    }
+  ],
+  "entries": [
+    {
+      "id": "general-sprites-sheet",
+      "file": "general-sprites-sheet.png",
+      "originalName": "Arcade - Galaga - Miscellaneous - General Sprites.png",
+      "label": "General sprite sheet",
+      "sourceClass": "ripped-sprite-sheet",
+      "authority": "strongest supplied static target; still secondary to controlled emulator/lossless extraction",
+      "targetUse": "direct crop target candidate",
+      "roleKeys": [
+        "player-fighter",
+        "dual-fighter",
+        "rogue-fighter",
+        "bee-line",
+        "but-line",
+        "boss-line",
+        "challenge-dragonfly",
+        "challenge-mosquito",
+        "tractor-beam",
+        "projectiles",
+        "explosions"
+      ],
+      "coverageAxes": [
+        "sprites",
+        "alien taxonomy",
+        "tractor beam",
+        "projectiles",
+        "explosions"
+      ],
+      "notes": "Best close-up artifact in this pack. Use for crop-box authoring and pose taxonomy before promotion into pixel target scoring.",
+      "path": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "exists": true,
+      "sha256": "f0cb3137ca57e8bd5b33a8d5988806452ff12c0dd7b74e74a44a8f251af20ef8",
+      "width": 458,
+      "height": 216,
+      "bytes": 16145,
+      "targetCandidateScore": 10
+    },
+    {
+      "id": "closeup-alien-lineup-black",
+      "file": "closeup-alien-lineup-black.jpg",
+      "originalName": "3d5114e715baffb1fe3c6e821516a612.jpg",
+      "label": "Close-up alien and fighter lineup on black",
+      "sourceClass": "assembled-pixel-reference",
+      "authority": "human-readable role reference, not pixel-exact source",
+      "targetUse": "human review and role-shape target context",
+      "roleKeys": [
+        "player-fighter",
+        "rogue-fighter",
+        "bee-line",
+        "but-line",
+        "boss-line",
+        "challenge-dragonfly",
+        "challenge-mosquito",
+        "projectiles"
+      ],
+      "coverageAxes": [
+        "sprites",
+        "alien taxonomy",
+        "projectiles"
+      ],
+      "notes": "Good for visual vocabulary: boss wings, butterfly/bee silhouettes, challenge alien color families, projectile scale.",
+      "path": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/closeup-alien-lineup-black.jpg",
+      "exists": true,
+      "sha256": "632089466adf779728fe40283aa77a647ecd2b8f50563c74e08c23c5e2971db2",
+      "width": 900,
+      "height": 1082,
+      "bytes": 55121,
+      "targetCandidateScore": 5
+    },
+    {
+      "id": "pixel-cutout-lineup",
+      "file": "pixel-cutout-lineup.jpg",
+      "originalName": "459144ad6991bbad361f2d1fbd6ab453.jpg",
+      "label": "Physical pixel cutout lineup",
+      "sourceClass": "fan-product-reference",
+      "authority": "low for pixel measurement; useful for coarse silhouette recognition",
+      "targetUse": "human review only",
+      "roleKeys": [
+        "player-fighter",
+        "bee-line",
+        "but-line",
+        "boss-line"
+      ],
+      "coverageAxes": [
+        "sprites",
+        "alien taxonomy"
+      ],
+      "notes": "Useful as a quick visual teaching aid; do not use for automated conformance scoring.",
+      "path": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/pixel-cutout-lineup.jpg",
+      "exists": true,
+      "sha256": "8c5c749e7151dcaff962dddb6fbe0750922af922fb410033fcbf1e74792b927f",
+      "width": 570,
+      "height": 428,
+      "bytes": 26311,
+      "targetCandidateScore": 1
+    },
+    {
+      "id": "player-fighter-grid",
+      "file": "player-fighter-grid.jpg",
+      "originalName": "1077486279580289864.jpeg",
+      "label": "Player fighter pixel grid",
+      "sourceClass": "pixel-grid-reference",
+      "authority": "medium static player-fighter target context",
+      "targetUse": "player fighter crop-grid candidate",
+      "roleKeys": [
+        "player-fighter"
+      ],
+      "coverageAxes": [
+        "sprites",
+        "player ship"
+      ],
+      "notes": "Good for the player-fighter silhouette, color placement, and centerline proportions.",
+      "path": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/player-fighter-grid.jpg",
+      "exists": true,
+      "sha256": "9bfb59ed1e03492f79e5b07f347a3ee9289ba9d8ae8cf95db298bdfa15cd4c86",
+      "width": 735,
+      "height": 485,
+      "bytes": 75936,
+      "targetCandidateScore": 7
+    },
+    {
+      "id": "formation-lineup-black",
+      "file": "formation-lineup-black.jpg",
+      "originalName": "spaceship destroyers.jpeg",
+      "label": "Fighter and four-alien lineup",
+      "sourceClass": "assembled-pixel-reference",
+      "authority": "medium human-reference context",
+      "targetUse": "role proportion context",
+      "roleKeys": [
+        "player-fighter",
+        "bee-line",
+        "but-line",
+        "boss-line",
+        "projectiles"
+      ],
+      "coverageAxes": [
+        "sprites",
+        "alien taxonomy",
+        "projectiles"
+      ],
+      "notes": "Useful for relative scale and the simple early-game family palette.",
+      "path": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/formation-lineup-black.jpg",
+      "exists": true,
+      "sha256": "7f15c4d5f948bdfc1659ff8a4c58d1932c27effb0816f24ed2f86c976a67bc27",
+      "width": 736,
+      "height": 552,
+      "bytes": 19627,
+      "targetCandidateScore": 5
+    },
+    {
+      "id": "mobile-title-formation-reference",
+      "file": "mobile-title-formation-reference.jpg",
+      "originalName": "Galaga (2).jpeg",
+      "label": "Mobile title and formation reference",
+      "sourceClass": "screen-context-reference",
+      "authority": "context only; likely modern/mobile presentation",
+      "targetUse": "start-screen and formation composition context",
+      "roleKeys": [
+        "player-fighter",
+        "rogue-fighter",
+        "bee-line",
+        "but-line",
+        "boss-line",
+        "tractor-beam"
+      ],
+      "coverageAxes": [
+        "screen surfaces",
+        "sprites",
+        "formation composition",
+        "tractor beam"
+      ],
+      "notes": "Useful for title/wait-mode messiness review and screen composition, not source-accurate sprite measurement.",
+      "path": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/mobile-title-formation-reference.jpg",
+      "exists": true,
+      "sha256": "e54660bf1ba3c7322845e0463d173347e27af90f1263e96281bcd1c82960d1a9",
+      "width": 480,
+      "height": 800,
+      "bytes": 45315,
+      "targetCandidateScore": 3
+    },
+    {
+      "id": "vertical-formation-art",
+      "file": "vertical-formation-art.jpg",
+      "originalName": "476537204326624455.jpeg",
+      "label": "Vertical formation art",
+      "sourceClass": "fan-art-reference",
+      "authority": "low for scoring; useful for role recognition",
+      "targetUse": "human review only",
+      "roleKeys": [
+        "player-fighter",
+        "bee-line",
+        "but-line",
+        "boss-line"
+      ],
+      "coverageAxes": [
+        "sprites",
+        "formation composition"
+      ],
+      "notes": "Good for explaining the role stack to a human reviewer; not a crop target.",
+      "path": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/vertical-formation-art.jpg",
+      "exists": true,
+      "sha256": "a332a2d006ba2ab32813bd460e4ad55190cb105af841c388f40c4d1be13dc543",
+      "width": 570,
+      "height": 713,
+      "bytes": 79310,
+      "targetCandidateScore": 1
+    },
+    {
+      "id": "tractor-beam-poster-a",
+      "file": "tractor-beam-poster-a.jpg",
+      "originalName": "Galaga (1).jpeg",
+      "label": "Tractor beam poster A",
+      "sourceClass": "fan-art-reference",
+      "authority": "context only",
+      "targetUse": "capture/tractor-beam context",
+      "roleKeys": [
+        "player-fighter",
+        "rogue-fighter",
+        "boss-line",
+        "tractor-beam"
+      ],
+      "coverageAxes": [
+        "tractor beam",
+        "capture state",
+        "screen surfaces"
+      ],
+      "notes": "Human-readable capture-beam staging reference. Treat as composition context, not gameplay-source evidence.",
+      "path": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/tractor-beam-poster-a.jpg",
+      "exists": true,
+      "sha256": "0b4d6f5886548f8908d8db4e700b886d587be01519ec8ef3128efcbf735995e2",
+      "width": 677,
+      "height": 1200,
+      "bytes": 55669,
+      "targetCandidateScore": 1
+    },
+    {
+      "id": "compact-player-alien-lineup",
+      "file": "compact-player-alien-lineup.jpg",
+      "originalName": "756886281095110972.jpeg",
+      "label": "Compact player and alien lineup",
+      "sourceClass": "assembled-pixel-reference",
+      "authority": "medium human-reference context",
+      "targetUse": "role proportion context",
+      "roleKeys": [
+        "player-fighter",
+        "bee-line",
+        "but-line",
+        "boss-line",
+        "projectiles"
+      ],
+      "coverageAxes": [
+        "sprites",
+        "projectiles"
+      ],
+      "notes": "Compact reference for projectile scale and core role silhouettes.",
+      "path": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/compact-player-alien-lineup.jpg",
+      "exists": true,
+      "sha256": "d01d8f874f3b402745fc2ba78056db1345a4f17422ba5a32d783b9453f4297ec",
+      "width": 300,
+      "height": 300,
+      "bytes": 8975,
+      "targetCandidateScore": 5
+    },
+    {
+      "id": "player-fighter-sticker",
+      "file": "player-fighter-sticker.jpg",
+      "originalName": "Decorate laptops, Hydro Flasks, cars and more with….jpeg",
+      "label": "Player fighter sticker",
+      "sourceClass": "fan-product-reference",
+      "authority": "low for scoring; useful for player-fighter silhouette review",
+      "targetUse": "human review only",
+      "roleKeys": [
+        "player-fighter"
+      ],
+      "coverageAxes": [
+        "sprites",
+        "player ship"
+      ],
+      "notes": "Readable but product-stylized. Do not use as a numeric pixel target.",
+      "path": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/player-fighter-sticker.jpg",
+      "exists": true,
+      "sha256": "6d79f7330ebb04250a186e887d570ee63c65d1e2b4e46835a050d833cb3cd312",
+      "width": 600,
+      "height": 600,
+      "bytes": 17068,
+      "targetCandidateScore": 1
+    },
+    {
+      "id": "tractor-beam-poster-b-duplicate",
+      "file": "tractor-beam-poster-b-duplicate.jpg",
+      "originalName": "Galaga.jpeg",
+      "label": "Tractor beam poster B duplicate",
+      "sourceClass": "fan-art-reference",
+      "authority": "duplicate context only",
+      "targetUse": "duplicate of tractor-beam-poster-a",
+      "roleKeys": [
+        "player-fighter",
+        "rogue-fighter",
+        "boss-line",
+        "tractor-beam"
+      ],
+      "coverageAxes": [
+        "tractor beam",
+        "capture state",
+        "screen surfaces"
+      ],
+      "duplicateOf": "tractor-beam-poster-a",
+      "notes": "Byte-identical duplicate of the supplied tractor-beam poster; retained so the ingestion manifest accounts for every supplied file.",
+      "path": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/tractor-beam-poster-b-duplicate.jpg",
+      "exists": true,
+      "sha256": "0b4d6f5886548f8908d8db4e700b886d587be01519ec8ef3128efcbf735995e2",
+      "width": 677,
+      "height": 1200,
+      "bytes": 55669,
+      "targetCandidateScore": 1
+    }
+  ],
+  "targetPromotionPlan": [
+    "Crop the general sprite sheet into per-role, per-pose target candidates for player, dual fighter, bee/Zako, butterfly, Boss Galaga, challenge aliens, projectiles, tractor beam, and explosions.",
+    "Label each crop as source-sheet, gameplay-frame, fan-context, or poster-context so automated scoring never treats fan/product art as exact Galaga pixels.",
+    "Replace the current one specialty-dive proxy with challenge-specific target families once clean crop boxes are accepted.",
+    "Use the target atlas in runtime sprite scoring: static pose first, then flap/pulse/dive/capture/rescue animation phases.",
+    "Attach challenge-stage object tracks to target role families so alien novelty and graphical conformance can score against actual Galaga visual vocabulary."
+  ],
+  "nextBestSteps": [
+    "Add a crop-box manifest for general-sprites-sheet and promote exact role/pose crops.",
+    "Update the runtime sprite scorer to compare Aurora live crops against multiple target poses per role, not one proxy pose.",
+    "Add challenge-stage target-family expectations: which alien families appear in each challenge stage and how novelty increases over time.",
+    "Add projectile, tractor-beam, and explosion visual-event targets so impact/capture feedback can be assessed with the same artifact strategy.",
+    "Keep the assembled/poster/product images visible in docs as human-review context but exclude them from numeric pixel conformance."
+  ]
+}

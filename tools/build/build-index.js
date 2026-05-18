@@ -70,6 +70,7 @@ const APPLICATION_ARTIFACT_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 
 const CHALLENGE_STAGE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
 const LEVEL_VISUAL_CONFORMANCE_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'level-visual-conformance-index', 'latest.json');
 const GALAGA_TARGET_ARTIFACT_COVERAGE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-artifact-coverage', 'latest.json');
+const GALAGA_ALIEN_VISUAL_REFERENCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-visual-reference', 'latest.json');
 const PERSONA_PERFORMANCE_DISTRIBUTION = path.join(ROOT, 'reference-artifacts', 'analyses', 'persona-performance-distribution', 'latest.json');
 const CATALOG_MEDIA_SOURCE_PATHS = new Set();
 let ACTIVE_SOURCE_BLOB_BASE = 'https://github.com/sgwoods/Codex-Test1/blob/main/';
@@ -3104,6 +3105,7 @@ let applicationArtifactConformanceCache = null;
 let challengeStageConformanceCache = null;
 let levelVisualConformanceIndexCache = null;
 let galagaTargetArtifactCoverageCache = null;
+let galagaAlienVisualReferenceCache = null;
 
 function loadGalagaReferenceSpriteTargets(){
   if(galagaReferenceSpriteTargetsCache) return galagaReferenceSpriteTargetsCache;
@@ -3133,6 +3135,25 @@ function loadGalagaReferenceSpriteModels(){
     galagaReferenceSpriteModelCache = [];
   }
   return galagaReferenceSpriteModelCache;
+}
+
+function loadGalagaAlienVisualReference(){
+  if(galagaAlienVisualReferenceCache) return galagaAlienVisualReferenceCache;
+  if(!fs.existsSync(GALAGA_ALIEN_VISUAL_REFERENCE)){
+    galagaAlienVisualReferenceCache = { entries: [], roleCoverage: [], summary: {} };
+    return galagaAlienVisualReferenceCache;
+  }
+  try {
+    const artifact = readJson(GALAGA_ALIEN_VISUAL_REFERENCE);
+    galagaAlienVisualReferenceCache = Object.assign({}, artifact, {
+      entries: Array.isArray(artifact.entries) ? artifact.entries : [],
+      roleCoverage: Array.isArray(artifact.roleCoverage) ? artifact.roleCoverage : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    galagaAlienVisualReferenceCache = { entries: [], roleCoverage: [], summary: {} };
+  }
+  return galagaAlienVisualReferenceCache;
 }
 
 function loadApplicationArtifactConformance(){
@@ -3643,6 +3664,27 @@ function referenceSpriteMediaForKey(spriteKey){
   ];
 }
 
+function alienVisualReferenceMediaForKey(spriteKey){
+  if(!spriteKey) return [];
+  const aliases = {
+    'rogue-fighter': ['rogue-fighter', 'player-fighter', 'tractor-beam'],
+    'challenge-dragonfly': ['challenge-dragonfly', 'challenge-mosquito'],
+    'challenge-mosquito': ['challenge-mosquito', 'challenge-dragonfly']
+  };
+  const keys = new Set([spriteKey, ...(aliases[spriteKey] || [])]);
+  return (loadGalagaAlienVisualReference().entries || [])
+    .filter(entry => entry.exists && Array.isArray(entry.roleKeys) && entry.roleKeys.some(key => keys.has(key)) && entry.path)
+    .sort((a, b) => (Number(b.targetCandidateScore || 0) - Number(a.targetCandidateScore || 0)) || String(a.id).localeCompare(String(b.id)))
+    .slice(0, 3)
+    .map(entry => ({
+      label: entry.label || entry.id || 'Galaga close-up reference',
+      src: entry.path,
+      pixelated: /sprite|pixel|lineup|grid/i.test(`${entry.sourceClass || ''} ${entry.label || ''}`),
+      kind: 'alienVisualReference',
+      note: `${entry.sourceClass || 'reference image'}; ${entry.targetUse || 'visual context'}. ${entry.notes || ''}`.trim()
+    }));
+}
+
 const AUDIO_PLOT_STEMS = {
   gameStart: 'stage-start',
   formationArrival: 'formation-pulse',
@@ -3782,6 +3824,7 @@ function renderCatalogVisualMedia(entry, options = {}){
   const images = [
     ...(Array.isArray(media.images) ? media.images : []),
     ...(wantsReferenceTargets ? referenceSpriteMediaForKey(spriteKey) : []),
+    ...(options.includeReferenceContext ? alienVisualReferenceMediaForKey(spriteKey) : []),
     ...(options.includeReferenceContext ? (ALIEN_REFERENCE_CONTEXT[spriteKey] || []) : [])
   ];
   const items = [
@@ -3918,6 +3961,30 @@ function renderTargetArtifactCoverageRows(report){
   `).join('\n');
 }
 
+function renderAlienVisualReferenceRows(artifact){
+  const entries = Array.isArray(artifact?.entries) ? artifact.entries : [];
+  if(!entries.length){
+    return `
+    <tr>
+      <td colspan="5"><span class="docMeta">Alien visual reference pack pending. Run <code>npm run harness:analyze:galaga-alien-visual-reference</code>.</span></td>
+    </tr>`;
+  }
+  return entries.map((entry) => `
+    <tr>
+      <td><strong>${esc(entry.label || entry.id || '')}</strong><br><span class="docMeta"><code>${esc(entry.id || '')}</code><br>${esc(entry.sourceClass || '')}</span></td>
+      <td>${renderMediaImage({
+        label: 'Supplied reference image',
+        src: entry.path,
+        pixelated: /sprite|pixel|lineup|grid/i.test(`${entry.sourceClass || ''} ${entry.label || ''}`),
+        note: entry.notes || entry.targetUse || ''
+      })}</td>
+      <td>${(entry.roleKeys || []).map(role => `<code>${esc(role)}</code>`).join('<br>')}</td>
+      <td><strong>${esc(entry.targetUse || '')}</strong><br><span class="docMeta">${esc(entry.authority || '')}</span></td>
+      <td>${esc(entry.notes || '')}</td>
+    </tr>
+  `).join('\n');
+}
+
 function renderChallengeTargetCoverageRows(report){
   const rows = Array.isArray(report?.challengeStageCoverage) ? report.challengeStageCoverage : [];
   if(!rows.length){
@@ -3949,6 +4016,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'stage-families', title: 'Stage Family Progression' },
     { id: 'artifact-conformance-status', title: 'Artifact Conformance Status' },
     { id: 'target-artifact-coverage', title: 'Target Artifact Coverage' },
+    { id: 'alien-visual-reference-pack', title: 'Alien Visual References' },
     { id: 'conformance-alien-index', title: 'Alien Conformance Index' },
     { id: 'conformance-audio-index', title: 'Audio Conformance Index' },
     { id: 'stage-conformance-summary', title: 'Stage Conformance Summary' },
@@ -4085,6 +4153,9 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const targetArtifactSummary = galagaTargetArtifactCoverage.summary || {};
   const targetArtifactRows = renderTargetArtifactCoverageRows(galagaTargetArtifactCoverage);
   const challengeTargetRows = renderChallengeTargetCoverageRows(galagaTargetArtifactCoverage);
+  const galagaAlienVisualReference = loadGalagaAlienVisualReference();
+  const alienVisualReferenceSummary = galagaAlienVisualReference.summary || {};
+  const alienVisualReferenceRows = renderAlienVisualReferenceRows(galagaAlienVisualReference);
   const conformanceAlienRows = (guide.conformanceAlienRows || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.name || '')}</strong><br><span class="docMeta">${esc(entry.runtime || '')}</span></td>
@@ -4421,6 +4492,33 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               </thead>
               <tbody>
                 ${challengeTargetRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="alien-visual-reference-pack">
+          <div class="sectionHeader">
+            <h2>Alien Visual References</h2>
+            <p>Close-up Galaga alien and player-fighter references supplied for sprite analysis, role indexing, target-crop planning, and future graphical conformance scoring. The guide intentionally separates target candidates from fan/product/context images so automated scoring stays grounded.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Current read:</strong> ${esc(alienVisualReferenceSummary.existingImageCount || 0)} committed images, ${esc(alienVisualReferenceSummary.uniqueImageHashCount || 0)} unique hashes, ${esc(alienVisualReferenceSummary.targetCandidateCount || 0)} target candidates, and ${esc(alienVisualReferenceSummary.roleCoverageCount || 0)} covered role families.</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-visual-reference/latest.json</code>. <strong>Report:</strong> <code>GALAGA_ALIEN_VISUAL_REFERENCE.md</code>. Strongest current source: <code>${esc(alienVisualReferenceSummary.strongestTargetSource || 'pending')}</code>.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Reference</th>
+                  <th>Preview</th>
+                  <th>Role Coverage</th>
+                  <th>Target Use</th>
+                  <th>Promotion Note</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${alienVisualReferenceRows}
               </tbody>
             </table>
           </div>
