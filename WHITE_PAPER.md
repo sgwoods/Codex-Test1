@@ -1,8 +1,8 @@
 # Platinum, Aurora, and the Conformance Project
 
 Status: living white paper
-Current draft: `v0.3.0-draft`
-Date: `2026-05-16`
+Current draft: `v0.4.0-draft`
+Date: `2026-05-17`
 Audience: broad technical readers, interested builders, collaborators, future
 reviewers, and public-facing project storytelling
 
@@ -16,6 +16,7 @@ See also:
 
 - [white-paper/README.md](white-paper/README.md)
 - [white-paper/CITATION_LEDGER.md](white-paper/CITATION_LEDGER.md)
+- [white-paper/REVIEW_CADENCE.md](white-paper/REVIEW_CADENCE.md)
 
 ![Platinum Hero](reference-artifacts/diagrams/platinum/platinum-hero.svg)
 
@@ -66,8 +67,11 @@ The larger point is that we are building a system in which:
   replacing evidence.
 - `8. Historical evolution`: how the project moved from launch to platform to
   multi-game conformance.
-- `9. Citation program`: how outside ideas and source work should be tracked.
-- `10. Living-paper policy`: how this white paper should be maintained and
+- `9. Citation program`: how outside ideas and source recovery work should be
+  tracked explicitly.
+- `10. Related work and internal references`: how this paper stays short
+  without losing traceability.
+- `11. Living-paper policy`: how this white paper should be maintained and
   released over time.
 
 ## How To Read This Paper
@@ -126,7 +130,7 @@ Further detail:
 
 ### 2. Program Snapshot
 
-As of `2026-05-16`, the project can be described in one page:
+As of `2026-05-17`, the project can be described in one page:
 
 | Area | Current role | Why it matters |
 | --- | --- | --- |
@@ -145,6 +149,15 @@ Current maintained metric read:
 | `Galaxy Guardians` reference preview | `7.6/10` | Credible second-game proof, but intentionally not presented as production-ready parity. |
 | `Galaxy Guardians` playtest-weighted preview | `6.9/10` | Useful reminder that a game can have process maturity before it has public-readiness maturity. |
 | Local-vs-cloud resource split | about `92.8%` local wall, about `7.4%` declared GPU-equivalent wall | Shows the intended operating doctrine: repeated measurement local, model help strategic. |
+
+The evidence program also became more concrete in this pass:
+
+- the recovered March-April Neo-Galaga history now has a canonical
+  representative preserved-source lane
+- the cited Galaga/Galaxian source media now live under repo-owned
+  preserved-source paths instead of stale old-machine download references
+- the white-paper review spine now explicitly checks preserved-source drift as
+  part of release quality
 
 ![Aurora Pack Card](reference-artifacts/diagrams/platinum/aurora-pack-card.svg)
 
@@ -251,6 +264,14 @@ ingestion claim in a form a non-expert can understand quickly. We are not only
 describing classic arcade behavior; we are collecting windows, studying them,
 and turning them into reusable evidence.
 
+That claim is now easier to defend concretely because the repo carries
+preserved-source lanes as well as derived analyses. The recovered Galaga source
+videos, Freesound pack, Galaxian cabinet wav, and the first representative
+historical Neo-Galaga archive slice now live under
+`reference-artifacts/preserved-sources/` with manifests and checksums. In
+other words, the project is moving source recovery out of memory and into
+committed provenance.
+
 > TODO illustration:
 > Pick the single best “ingestion in action” image for v1. The strongest option
 > might be a contact sheet, a waveform-plus-contact-sheet pair, or a staged
@@ -262,6 +283,7 @@ Further detail:
 - [project-guide.html#classic-arcade-ingestion-framework-doc](project-guide.html#classic-arcade-ingestion-framework-doc)
 - [application-guide.html](application-guide.html)
 - [CLASSIC_ARCADE_INGESTION_FRAMEWORK.md](CLASSIC_ARCADE_INGESTION_FRAMEWORK.md)
+- [reference-artifacts/preserved-sources/README.md](reference-artifacts/preserved-sources/README.md)
 
 ### 5. Harnessing And Conformance
 
@@ -362,6 +384,7 @@ Further detail:
 - [project-guide.html#testing-doc](project-guide.html#testing-doc)
 - [project-guide.html#code-review-model-doc](project-guide.html#code-review-model-doc)
 - [white-paper/REVIEWER_CHECKLIST.md](white-paper/REVIEWER_CHECKLIST.md)
+- [white-paper/REVIEW_CADENCE.md](white-paper/REVIEW_CADENCE.md)
 
 ### 7. How Generative AI Fits
 
@@ -473,8 +496,8 @@ Further detail:
 
 ### 10. Citation Program
 
-This white paper should not quietly absorb ideas from other work without naming
-them.
+This white paper should not quietly absorb ideas or source recovery work
+without naming them.
 
 We want a maintained citation program that records:
 
@@ -487,6 +510,15 @@ We want a maintained citation program that records:
 The living ledger for that work starts here:
 
 - [white-paper/CITATION_LEDGER.md](white-paper/CITATION_LEDGER.md)
+
+The source-recovery side of that program now has a matching repo-owned surface:
+
+- [reference-artifacts/preserved-sources/README.md](reference-artifacts/preserved-sources/README.md)
+
+That matters because provenance is not only a footnote here. It is a release
+quality concern. If a timing study, audio comparison, or historical claim
+depends on a file that only exists in somebody’s old downloads folder, the
+project is less professional than it looks.
 
 The first open citation debt is the prior standalone assessment of the
 Karpathy-style research/evaluator loop. The repo contains the conceptual thread
@@ -511,12 +543,34 @@ Current seeded related-work set:
 - [Anthropic, "Writing effective tools for agents - with agents" (2025-09-11)](https://www.anthropic.com/engineering/writing-tools-for-agents): relevant because our harnesses, scripts, and release tools are all explicit contracts between model assistance and deterministic system behavior.
 - [Anthropic, "Demystifying evals for AI agents" (2026-01-09)](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents): relevant because it reinforces our investment in transcripts, graders, repeated trials, and measurable evaluator quality instead of anecdotal confidence.
 - [Anthropic, "Trustworthy agents in practice" (2026-04-09)](https://www.anthropic.com/engineering/building-trustworthy-agents): relevant because it frames guardrails, reviews, and operator-visible controls as part of the product surface, not only as implementation details.
+- [METR, "Measuring AI Ability to Complete Long Tasks" (2025-03-19)](https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/): relevant because it gives a sharper lens on what kinds of work current agents can sustain autonomously, which is directly relevant to our preference for small evaluator-visible loops and local reruns over vague claims of full autonomy.
+- [OpenAI, "PaperBench" (2025-04-02)](https://openai.com/index/paperbench/): relevant because it shows how large agentic tasks become more reviewable when decomposed into explicit rubrics and many individually gradable subtasks, which is close to how our own harnesses and conformance categories create reviewable surfaces.
 
 Maintained deeper log:
 
 - [white-paper/RELATED_WORK.md](white-paper/RELATED_WORK.md)
 
-### 12. Why This Project Matters
+### 12. Internal Canonical Docs
+
+This paper should stay readable because the repo already has deeper canonical
+surfaces nearby.
+
+The shortest list of internal references that best supports the claims here is:
+
+- [project-guide.html](project-guide.html)
+- [platinum-guide.html](platinum-guide.html)
+- [application-guide.html](application-guide.html)
+- [conformance-dashboard.html](conformance-dashboard.html)
+- [release-dashboard.html](release-dashboard.html)
+- [CLASSIC_ARCADE_INGESTION_FRAMEWORK.md](CLASSIC_ARCADE_INGESTION_FRAMEWORK.md)
+- [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md)
+- [CONFORMANCE_ECONOMICS.md](CONFORMANCE_ECONOMICS.md)
+- [reference-artifacts/preserved-sources/README.md](reference-artifacts/preserved-sources/README.md)
+
+If the main paper starts to feel long, that is usually a sign that one of these
+surfaces should carry more of the detail instead.
+
+### 13. Why This Project Matters
 
 The project matters because it is trying to demonstrate a concrete alternative
 to two weak extremes.
@@ -544,7 +598,7 @@ This is also why the paper should remain readable. A broad technical reader
 does not need every source artifact inline. They need a coherent narrative,
 selected visual proof, and obvious places to go next if they want more depth.
 
-### 13. Living White Paper Policy
+### 14. Living White Paper Policy
 
 This document should evolve the same way the project evolves: intentionally,
 versioned, and with historical memory preserved.
@@ -562,6 +616,8 @@ Working policy:
   project story
 - the related-work log should be refreshed periodically with focused online
   searches and brief relevance commentary
+- the recurring reviewer rhythm in `white-paper/REVIEW_CADENCE.md` should be
+  treated as normal maintenance, not as a one-off cleanup exercise
 - reviewer-checklist expectations should be treated as part of release quality,
   not optional cleanup
 - every meaningful software release does not need a new white paper release, but
@@ -579,11 +635,12 @@ Good triggers for a new white paper release:
 
 - Recover and link the earlier Karpathy-style assessment if it exists outside
   this repo.
-- Add a compact bibliography of internal canonical docs and public release
-  notes.
 - Add one deliberate progression gallery for milestone history and one deliberate
   “evidence in action” case-study image once we decide which examples explain
   the project most clearly.
+- Decide whether the historical Neo-Galaga archive should stop at the current
+  representative `22`-pair preserved slice or grow into a larger non-git or
+  secondary preserved-source lane.
 - Keep the HTML and PDF release surfaces under reviewer scrutiny so that spacing,
   diagrams, repeated ideas, and print behavior all improve with the narrative.
 - Keep the audience tuned for a broad technical and builder readership: assume

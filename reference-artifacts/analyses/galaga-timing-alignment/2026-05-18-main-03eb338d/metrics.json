@@ -1,0 +1,69 @@
+{
+  "generatedAt": "2026-05-18T12:20:28.139Z",
+  "commit": "03eb338d815fc5aee106d0926f75f9852ccfe048",
+  "shortCommit": "03eb338d",
+  "referenceDurations": {
+    "gameStart": 4,
+    "stagePulse": 8,
+    "challengeEntry": 4,
+    "challengeResults": 4,
+    "challengePerfect": 4,
+    "playerHit": 2
+  },
+  "referenceFiles": {
+    "stageVideo": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/video/galaga-stage-reference-video-proxy.mp4",
+    "gameStart": "src/assets/reference-audio/galaga2-game-start.m4a",
+    "stagePulse": "src/assets/reference-audio/galaga3-ambience-convoy.m4a",
+    "challengeEntry": "src/assets/reference-audio/galaga2-challenging-stage.m4a",
+    "challengeResults": "src/assets/reference-audio/galaga2-challenging-stage-results.m4a",
+    "challengePerfect": "src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a",
+    "playerHit": "src/assets/reference-audio/galaga3-death.m4a"
+  },
+  "aurora": {
+    "stage1": {
+      "stageSpawnAt": 0.002,
+      "gameStartCueAfterSpawn": 0.002,
+      "firstStagePulseAfterSpawn": 6.301,
+      "firstAttackAfterSpawn": 8.201,
+      "firstLowerFieldAfterSpawn": 9.35
+    },
+    "challengeEntry": {
+      "probeAt": 0.111,
+      "challengeCueAfterProbe": 2.219,
+      "challengeSpawnAfterProbe": 3.336,
+      "challengeSpawnAfterCue": 1.117,
+      "firstChallengePulseAfterSpawn": null
+    },
+    "challengePerfect": {
+      "challengeClearAt": 1.224,
+      "challengePerfectCueAfterClear": 0.35,
+      "nextStageCueAfterClear": 2.883,
+      "nextStageSpawnAfterClear": 4.433,
+      "nextStageSpawnAfterCue": 1.55
+    },
+    "shipLoss": {
+      "shipLostAt": 0.236,
+      "playerHitCueRelativeToLoss": 0.001
+    }
+  },
+  "files": {
+    "contactSheet": "reference-artifacts/analyses/galaga-timing-alignment/2026-05-18-main-03eb338d/stage1-first-16s-contact.png",
+    "metrics": "reference-artifacts/analyses/galaga-timing-alignment/2026-05-18-main-03eb338d/metrics.json",
+    "readme": "reference-artifacts/analyses/galaga-timing-alignment/2026-05-18-main-03eb338d/README.md",
+    "runRoot": "harness-artifacts/timing-alignment"
+  },
+  "runs": {
+    "stage1": {
+      "outDir": "harness-artifacts/timing-alignment/timing-stage1-descent-seed2003-2026-05-18T12-19-30-326Z-65699-bjd80k"
+    },
+    "challengeEntry": {
+      "outDir": "harness-artifacts/timing-alignment/timing-stage2-to-stage3-challenge-seed9203-2026-05-18T12-19-59-427Z-67022-q3zmx2"
+    },
+    "challengePerfect": {
+      "outDir": "harness-artifacts/timing-alignment/timing-stage3-perfect-transition-seed3011-2026-05-18T12-20-07-352Z-67166-xbfakg"
+    },
+    "shipLoss": {
+      "outDir": "harness-artifacts/timing-alignment/timing-close-shot-loss-seed9211-2026-05-18T12-20-20-333Z-67853-my1nuf"
+    }
+  }
+}

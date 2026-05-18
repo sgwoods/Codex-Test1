@@ -5,9 +5,11 @@ we can reuse as a durable visual and motion reference for Aurora fidelity work.
 
 ## Source Artifact
 
-- Original file:
-  - `/Users/stevenwoods/Downloads/90 stage 1 player galaga example.mp4`
-- Technical profile:
+- Repo-preserved review proxy:
+  - `reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/video/galaga-stage-reference-video-proxy.mp4`
+- Source manifest with original-file hash and external source path:
+  - `reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/source-manifest.json`
+- Original-source technical profile:
   - container: `MP4`
   - video codec: `h264`
   - audio codec: `aac`
@@ -39,28 +41,28 @@ possible.
 
 This folder includes a few checkpoint stills:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png`
+- `reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png`
   - early scoring / title-state board
   - useful for:
     - starfield visibility against low board clutter
     - title/text color intensity
     - basic contrast ratios
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-05m00s.png`
+- `reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-05m00s.png`
   - live gameplay with sparse surviving enemies
   - useful for:
     - starfield visibility during active play
     - bullet brightness
     - ship readability against the moving field
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png`
+- `reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png`
   - fuller active board state
   - useful for:
     - mixed enemy motion readability
     - starfield intensity under heavier play pressure
     - on-screen sprite hierarchy
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-20m00s.png`
+- `reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-20m00s.png`
   - score/results style state
   - useful for:
     - starfield readability in non-combat presentation

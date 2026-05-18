@@ -7,7 +7,14 @@ const { execFileSync } = require('child_process');
 const ROOT = path.resolve(__dirname, '..', '..');
 const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-timing-alignment');
 const RUN_OUT = path.join(ROOT, 'harness-artifacts', 'timing-alignment');
-const STAGE_REF_VIDEO = '/Users/stevenwoods/Downloads/90 stage 1 player galaga example.mp4';
+const STAGE_REF_VIDEO = path.join(
+  ROOT,
+  'reference-artifacts',
+  'preserved-sources',
+  'galaga-classic-recovery-2026-05-17',
+  'video',
+  'galaga-stage-reference-video-proxy.mp4'
+);
 const EXISTING_SCENARIOS = path.join(ROOT, 'tools', 'harness', 'scenarios');
 
 const REFERENCE_CLIPS = {
@@ -21,6 +28,10 @@ const REFERENCE_CLIPS = {
 
 function git(...args){
   return execFileSync('git', ['-C', ROOT, ...args.flat()], { encoding: 'utf8' }).trim();
+}
+
+function rel(file){
+  return path.relative(ROOT, file).replace(/\\/g, '/');
 }
 
 function ffprobeDuration(file){
@@ -230,14 +241,14 @@ function buildReadme(report){
     '',
     '## Source references',
     '',
-    `- Stage 1 gameplay video: \`${STAGE_REF_VIDEO}\``,
+    `- Stage 1 gameplay video: \`${report.referenceFiles.stageVideo}\``,
     `- Contact sheet: \`${report.files.contactSheet}\``,
-    `- Game start clip: \`${REFERENCE_CLIPS.gameStart}\``,
-    `- Convoy cadence clip: \`${REFERENCE_CLIPS.stagePulse}\``,
-    `- Challenge entry clip: \`${REFERENCE_CLIPS.challengeEntry}\``,
-    `- Challenge results clip: \`${REFERENCE_CLIPS.challengeResults}\``,
-    `- Challenge perfect clip: \`${REFERENCE_CLIPS.challengePerfect}\``,
-    `- Player hit clip: \`${REFERENCE_CLIPS.playerHit}\``,
+    `- Game start clip: \`${report.referenceFiles.gameStart}\``,
+    `- Convoy cadence clip: \`${report.referenceFiles.stagePulse}\``,
+    `- Challenge entry clip: \`${report.referenceFiles.challengeEntry}\``,
+    `- Challenge results clip: \`${report.referenceFiles.challengeResults}\``,
+    `- Challenge perfect clip: \`${report.referenceFiles.challengePerfect}\``,
+    `- Player hit clip: \`${report.referenceFiles.playerHit}\``,
     '',
     '## Reference clip durations',
     '',
@@ -299,6 +310,8 @@ function main(){
   ensureDir(outDir);
 
   const contactSheet = makeContactSheet(outDir);
+  const metricsFile = path.join(outDir, 'metrics.json');
+  const readmeFile = path.join(outDir, 'README.md');
   const stage1Run = runScenario('stage1', stage1Scenario());
   const challengeEntryRun = runScenario('challenge-entry', challengeEntryScenario());
   const challengePerfectRun = runScenario('challenge-perfect', challengePerfectScenario());
@@ -309,6 +322,15 @@ function main(){
     commit: git(['rev-parse', 'HEAD']),
     shortCommit,
     referenceDurations: Object.fromEntries(Object.entries(REFERENCE_CLIPS).map(([key, file]) => [key, ffprobeDuration(file)])),
+    referenceFiles: {
+      stageVideo: rel(STAGE_REF_VIDEO),
+      gameStart: rel(REFERENCE_CLIPS.gameStart),
+      stagePulse: rel(REFERENCE_CLIPS.stagePulse),
+      challengeEntry: rel(REFERENCE_CLIPS.challengeEntry),
+      challengeResults: rel(REFERENCE_CLIPS.challengeResults),
+      challengePerfect: rel(REFERENCE_CLIPS.challengePerfect),
+      playerHit: rel(REFERENCE_CLIPS.playerHit)
+    },
     aurora: {
       stage1: stage1Metrics(loadSession(stage1Run)),
       challengeEntry: challengeEntryMetrics(loadSession(challengeEntryRun)),
@@ -316,24 +338,24 @@ function main(){
       shipLoss: shipLossMetrics(loadSession(shipLossRun))
     },
     files: {
-      contactSheet,
-      metrics: path.join(outDir, 'metrics.json'),
-      readme: path.join(outDir, 'README.md'),
-      runRoot: RUN_OUT
+      contactSheet: rel(contactSheet),
+      metrics: rel(metricsFile),
+      readme: rel(readmeFile),
+      runRoot: rel(RUN_OUT)
     },
     runs: {
-      stage1: { outDir: stage1Run.outDir },
-      challengeEntry: { outDir: challengeEntryRun.outDir },
-      challengePerfect: { outDir: challengePerfectRun.outDir },
-      shipLoss: { outDir: shipLossRun.outDir }
+      stage1: { outDir: rel(stage1Run.outDir) },
+      challengeEntry: { outDir: rel(challengeEntryRun.outDir) },
+      challengePerfect: { outDir: rel(challengePerfectRun.outDir) },
+      shipLoss: { outDir: rel(shipLossRun.outDir) }
     }
   };
 
-  writeJson(report.files.metrics, report);
-  fs.writeFileSync(report.files.readme, buildReadme(report));
+  writeJson(metricsFile, report);
+  fs.writeFileSync(readmeFile, buildReadme(report));
   console.log(JSON.stringify({
     ok: true,
-    outDir,
+    outDir: rel(outDir),
     metrics: report.files.metrics,
     readme: report.files.readme
   }, null, 2));

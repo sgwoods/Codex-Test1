@@ -24,6 +24,9 @@ The white paper is meant to be both:
   - dated log of external/public work, why it matters here, and where it fits
 - `REVIEWER_CHECKLIST.md`
   - release-minded checklist for HTML, PDF, narrative, and citation review
+- `REVIEW_CADENCE.md`
+  - the small recurring rhythm for when and how the white-paper review pass
+    should be run
 - `releases/<date>-v<version>/WHITE_PAPER.md`
   - exact snapshot of the white paper for a given release
 - `releases/<date>-v<version>/WHITE_PAPER.pdf`
@@ -63,8 +66,8 @@ The white paper is meant to be both:
 ## Suggested Review Commands
 
 - `npm run white-paper:review`
-  - refresh the dev-lane PDF, reviewer packet, review gate, and presentation
-    checks together
+  - refresh the dev-lane PDF, reviewer packet, review gate,
+    preserved-source-integrity check, and presentation checks together
 - `npm run white-paper:review:beta`
   - run the same white-paper review spine for the beta lane
 - `npm run white-paper:review:production`

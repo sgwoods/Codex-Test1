@@ -5,6 +5,8 @@ This directory stores durable reference material used to tune the game toward or
 ## Structure
 
 - `manuals/`: scanned manuals, operator guides, and extracted notes
+- `preserved-sources/`: canonical recovered source-media lanes promoted out of
+  intake-only status, with manifests and checksums
 - `clips/`: curated video clips or timing notes for direct comparison
 - `images/`: screenshots or contact sheets used for composition and sprite comparison
 - `analyses/release-reference-pack/`: current release-focused comparison pack

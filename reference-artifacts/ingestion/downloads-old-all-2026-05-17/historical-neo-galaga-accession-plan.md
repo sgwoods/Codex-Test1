@@ -18,6 +18,13 @@ It is intentionally reviewer-oriented:
 - keep the full external archive in place until we decide what belongs in
   canonical repo-owned evidence paths
 
+Current status:
+
+- Tier A has now been promoted into
+  `reference-artifacts/preserved-sources/neo-galaga-history-2026-03-to-2026-04/`
+- this plan remains the decision surface for whether anything beyond that first
+  representative subset should also be preserved
+
 ## Corrected Archive Picture
 
 The corrected numbers for the historical Neo-Galaga export family are:
@@ -138,10 +145,10 @@ matching video.
 
 With this plan in place we can now do the next step cleanly:
 
-1. create a canonical preserved-source location for the Tier A subset
-2. copy only the selected session/video pairs with provenance notes
-3. leave the rest of the external archive under manifest control until a later
+1. keep the current Tier A preserved-source lane stable
+2. leave the rest of the external archive under manifest control until a later
    promotion decision
-
-That keeps the repo historically richer without turning the first accession
-move into a bulk-ingest mistake.
+3. only extend the preserved subset when a new historical or release-facing
+   use case clearly justifies it
+That keeps the repo historically richer without turning source recovery into a
+bulk-ingest mistake.

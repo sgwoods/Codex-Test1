@@ -1,0 +1,8613 @@
+{
+  "session": {
+    "id": "ngt-1775333557968-3",
+    "build": "1.0.2+build.334.sha.a2dcfee.dirty",
+    "reason": "game_start",
+    "createdAt": "2026-04-04T20:12:37.968Z",
+    "url": "http://127.0.0.1:8000/",
+    "viewport": {
+      "w": 1979,
+      "h": 977,
+      "dpr": 1.5
+    },
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "events": [
+      {
+        "t": 0.004,
+        "type": "game_start",
+        "persona": null
+      },
+      {
+        "t": 0.005,
+        "type": "stage_spawn",
+        "stage": 1,
+        "challenge": true,
+        "persona": null
+      },
+      {
+        "t": 0.005,
+        "type": "stage_profile",
+        "stage": 1,
+        "challenge": true,
+        "band": "classic",
+        "challengeFamily": "classic",
+        "beeFamily": "classic",
+        "butFamily": "classic",
+        "bossFamily": "classic",
+        "themeId": "quiet-skies",
+        "backgroundMode": "starfield",
+        "frameAccent": "classic-blue",
+        "bossArchetype": "command-core"
+      },
+      {
+        "t": 0.098,
+        "type": "key_up",
+        "code": "Enter",
+        "key": "Enter"
+      },
+      {
+        "t": 1.51,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 1.616,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 1.708,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 1.784,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 1.872,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 1.873,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 99.3,
+        "y": 322,
+        "shotXs": [
+          99.3
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 1.931,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 2,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 2.006,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 98.25,
+        "y": 322,
+        "shotXs": [
+          98.25
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 2.064,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 2.082,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 2.141,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 2.186,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 2.223,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 2.281,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 755949835,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 0,
+        "lane": 3,
+        "carry": false
+      },
+      {
+        "t": 2.284,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 2.29,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 2.298,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 74.38,
+        "y": 322,
+        "shotXs": [
+          74.38
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 2.366,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 2.372,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 2.414,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 299029108,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 1,
+        "row": 0,
+        "lane": 2,
+        "carry": false
+      },
+      {
+        "t": 2.442,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 2.448,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 56.77,
+        "y": 322,
+        "shotXs": [
+          56.77
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 2.497,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 2.526,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 2.568,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 2.651,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 2.675,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 2.698,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 634384673,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 0,
+        "lane": 2,
+        "carry": false
+      },
+      {
+        "t": 2.709,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 2.735,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 2.739,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 92.57,
+        "y": 322,
+        "shotXs": [
+          92.57
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 2.799,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 2.856,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 667932423,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 1,
+        "carry": false
+      },
+      {
+        "t": 2.857,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 2.881,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 2.881,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 67.27,
+        "y": 322,
+        "shotXs": [
+          67.27
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 2.958,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 2.96,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 3.04,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 3.065,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 3.076,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 3.131,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 895621605,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 0,
+        "lane": 3,
+        "carry": false
+      },
+      {
+        "t": 3.15,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 3.156,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 3.164,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 36,
+        "y": 322,
+        "shotXs": [
+          36
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 3.238,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 3.273,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 607848293,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 1,
+        "row": 0,
+        "lane": 3,
+        "carry": false
+      },
+      {
+        "t": 3.324,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 3.35,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 3.356,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 78.26,
+        "y": 322,
+        "shotXs": [
+          78.26
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 3.382,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 3.426,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 3.48,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 3.522,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 3.589,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 3.59,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 853529455,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 2,
+        "carry": false
+      },
+      {
+        "t": 3.609,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 3.668,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 3.672,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 104.77,
+        "y": 322,
+        "shotXs": [
+          104.77
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 3.731,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 324298445,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 0,
+        "lane": 2,
+        "carry": false
+      },
+      {
+        "t": 3.732,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 3.732,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 3.841,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 3.847,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 79.96,
+        "y": 322,
+        "shotXs": [
+          79.96
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 3.922,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 4.017,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 4.08,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 4.097,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 209919171,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 0,
+        "lane": 3,
+        "carry": false
+      },
+      {
+        "t": 4.166,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 4.173,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 79.03,
+        "y": 322,
+        "shotXs": [
+          79.03
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 4.232,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 4.273,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 798965429,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 2,
+        "carry": false
+      },
+      {
+        "t": 4.323,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 4.323,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 79.03,
+        "y": 322,
+        "shotXs": [
+          79.03
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 4.383,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 4.415,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 4.538,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 4.573,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 340338212,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 0,
+        "lane": 2,
+        "carry": false
+      },
+      {
+        "t": 4.58,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 4.581,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 112.33,
+        "y": 322,
+        "shotXs": [
+          112.33
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 4.676,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 4.685,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 4.747,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 80441909,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 1,
+        "row": 0,
+        "lane": 2,
+        "carry": false
+      },
+      {
+        "t": 4.776,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 4.796,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 4.798,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 140.84,
+        "y": 322,
+        "shotXs": [
+          140.84
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 4.842,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 4.899,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 4.998,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 5.006,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 5.015,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 449932889,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 0,
+        "lane": 4,
+        "carry": false
+      },
+      {
+        "t": 5.022,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 110.11,
+        "y": 322,
+        "shotXs": [
+          110.11
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 5.099,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 5.156,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 467593285,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 0,
+        "lane": 5,
+        "carry": false
+      },
+      {
+        "t": 5.191,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 5.198,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 98.64,
+        "y": 322,
+        "shotXs": [
+          98.64
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 5.21,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 5.282,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 5.332,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 5.399,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 5.426,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 5.456,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 174099858,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 1,
+        "row": 0,
+        "lane": 3,
+        "carry": false
+      },
+      {
+        "t": 5.464,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 63.72,
+        "y": 322,
+        "shotXs": [
+          63.72
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 5.497,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 5.54,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 5.591,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 5.617,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 5.692,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 5.7,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 5.766,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 5.768,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 5.831,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 14.01,
+        "y": 322,
+        "shotXs": [
+          14.01
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 5.86,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 5.863,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 5.934,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 5.959,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 6.032,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 6.058,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 6.107,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 6.114,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 6.174,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 6.181,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 604543122,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 0,
+        "lane": 1,
+        "carry": false
+      },
+      {
+        "t": 6.224,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 6.249,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 6.256,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 10.88,
+        "y": 322,
+        "shotXs": [
+          10.88
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 6.324,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 6.415,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 6.422,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 6.465,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 510778521,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 1,
+        "carry": false
+      },
+      {
+        "t": 6.473,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 64.01,
+        "y": 322,
+        "shotXs": [
+          64.01
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 6.474,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 6.484,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 6.532,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 6.548,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 6.582,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 6.657,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 6.66,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 6.734,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 6.798,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 239517404,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 0,
+        "lane": 3,
+        "carry": false
+      },
+      {
+        "t": 6.799,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 6.806,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 61.62,
+        "y": 322,
+        "shotXs": [
+          61.62
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 6.882,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 6.899,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 6.952,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 6.976,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 6.981,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 95.65,
+        "y": 322,
+        "shotXs": [
+          95.65
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 7.047,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 7.051,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 7.125,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 7.131,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 196026387,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 2,
+        "carry": false
+      },
+      {
+        "t": 7.141,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 7.148,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 117.35,
+        "y": 322,
+        "shotXs": [
+          117.35
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 7.215,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 7.226,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 7.306,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 150967118,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 0,
+        "lane": 4,
+        "carry": false
+      },
+      {
+        "t": 7.332,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 7.34,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 138.43,
+        "y": 322,
+        "shotXs": [
+          138.43
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 7.385,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 7.466,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 7.467,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 7.473,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 778971637,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 1,
+        "row": 0,
+        "lane": 3,
+        "carry": false
+      },
+      {
+        "t": 7.481,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 138.32,
+        "y": 322,
+        "shotXs": [
+          138.32
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 7.557,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 7.574,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 7.624,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 7.649,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 7.724,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 7.79,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 7.824,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 7.85,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 7.932,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 8.034,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 8.034,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 8.039,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 111.15,
+        "y": 322,
+        "shotXs": [
+          111.15
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 8.106,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 8.133,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 8.199,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 8.2,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 8.206,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 132.71,
+        "y": 322,
+        "shotXs": [
+          132.71
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 8.264,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 8.298,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 8.331,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 8.358,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 8.415,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 8.466,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 8.482,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 8.525,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 8.564,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 8.609,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 8.657,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 8.765,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 8.789,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 8.79,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 159.6,
+        "y": 322,
+        "shotXs": [
+          159.6
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 8.815,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 8.857,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 8.923,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 8.932,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 8.94,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 168.28,
+        "y": 322,
+        "shotXs": [
+          168.28
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 8.957,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 797155234,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 0,
+        "lane": 5,
+        "carry": false
+      },
+      {
+        "t": 8.959,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 9.014,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 9.075,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 9.089,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 951035476,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 0,
+        "lane": 6,
+        "carry": false
+      },
+      {
+        "t": 9.099,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 9.106,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 172.07,
+        "y": 322,
+        "shotXs": [
+          172.07
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 9.182,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 9.221,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 9.239,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 141658510,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 0,
+        "lane": 5,
+        "carry": false
+      },
+      {
+        "t": 9.248,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 9.267,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 9.273,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 139.69,
+        "y": 322,
+        "shotXs": [
+          139.69
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 9.349,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 9.422,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 9.422,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 9.423,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 167.33,
+        "y": 322,
+        "shotXs": [
+          167.33
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 9.456,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 921008149,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 0,
+        "lane": 5,
+        "carry": false
+      },
+      {
+        "t": 9.49,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 9.507,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 9.564,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 683752162,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 0,
+        "lane": 6,
+        "carry": false
+      },
+      {
+        "t": 9.567,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 9.575,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 9.581,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 190.87,
+        "y": 322,
+        "shotXs": [
+          190.87
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 9.656,
+        "type": "challenge_group_bonus",
+        "stage": 1,
+        "group": 0,
+        "bonus": 1000,
+        "hits": 27,
+        "total": 40
+      },
+      {
+        "t": 9.656,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 341424176,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 0,
+        "lane": 6,
+        "carry": false
+      },
+      {
+        "t": 9.657,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 9.657,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 9.707,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 9.73,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 9.731,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 203.28,
+        "y": 322,
+        "shotXs": [
+          203.28
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 9.792,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 9.806,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 34406704,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 0,
+        "lane": 7,
+        "carry": false
+      },
+      {
+        "t": 9.816,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 9.848,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 9.891,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 9.898,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 215.63,
+        "y": 322,
+        "shotXs": [
+          215.63
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 9.935,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 9.98,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 952100766,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 0,
+        "lane": 7,
+        "carry": false
+      },
+      {
+        "t": 9.989,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 9.996,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 10.058,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 10.064,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 227.77,
+        "y": 322,
+        "shotXs": [
+          227.77
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 10.082,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 10.098,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 220298284,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 0,
+        "lane": 8,
+        "carry": false
+      },
+      {
+        "t": 10.142,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 10.143,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 10.223,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 10.223,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 239.48,
+        "y": 322,
+        "shotXs": [
+          239.48
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 10.232,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 10.232,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 314724234,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 0,
+        "lane": 8,
+        "carry": false
+      },
+      {
+        "t": 10.299,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 10.315,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 10.383,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 10.39,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 254.28,
+        "y": 322,
+        "shotXs": [
+          254.28
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 10.39,
+        "type": "challenge_group_bonus",
+        "stage": 1,
+        "group": 1,
+        "bonus": 1000,
+        "hits": 32,
+        "total": 40
+      },
+      {
+        "t": 10.39,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 684411921,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 0,
+        "lane": 9,
+        "carry": false
+      },
+      {
+        "t": 10.433,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 10.481,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 10.549,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 10.556,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 235.51,
+        "y": 322,
+        "shotXs": [
+          235.51
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 10.581,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 729782102,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 0,
+        "lane": 8,
+        "carry": false
+      },
+      {
+        "t": 10.6,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 10.64,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 10.652,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 10.707,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 10.713,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 199.69,
+        "y": 322,
+        "shotXs": [
+          199.69
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 10.714,
+        "type": "challenge_group_bonus",
+        "stage": 1,
+        "group": 2,
+        "bonus": 1000,
+        "hits": 34,
+        "total": 40
+      },
+      {
+        "t": 10.714,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 689361276,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 0,
+        "lane": 6,
+        "carry": false
+      },
+      {
+        "t": 10.723,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 10.775,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 10.807,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 10.849,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 10.856,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 185.22,
+        "y": 322,
+        "shotXs": [
+          185.22
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 10.864,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 355445098,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 0,
+        "lane": 6,
+        "carry": false
+      },
+      {
+        "t": 10.89,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 10.915,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 10.949,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 11.001,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 11.006,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 183.04,
+        "y": 322,
+        "shotXs": [
+          183.04
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 11.006,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 9,
+        "challenge": 1,
+        "rescued": 0,
+        "turnedHostile": 0,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 69656492,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 0,
+        "lane": 5,
+        "carry": false
+      },
+      {
+        "t": 11.082,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 11.156,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 11.156,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 233.27,
+        "y": 322,
+        "shotXs": [
+          233.27
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 11.21,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 11.21,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 11.256,
+        "type": "ship_lost",
+        "stage": 1,
+        "score": 6600,
+        "livesBefore": 3,
+        "stageClock": 11.258,
+        "attackers": 0,
+        "enemyBullets": 0,
+        "enemies": 4,
+        "playerX": 266.06,
+        "playerY": 340,
+        "playerLane": 9,
+        "dual": false,
+        "pending": false,
+        "carriedEnemies": 0,
+        "timeSinceCaptureStart": null,
+        "timeSinceFighterCaptured": null,
+        "playerHitbox": {
+          "w": 7,
+          "h": 6
+        },
+        "cause": "enemy_collision",
+        "enemyId": 859193350,
+        "enemyType": "bee",
+        "enemyDive": 9,
+        "enemyX": 264.65,
+        "enemyY": 329.41,
+        "enemyLane": 9,
+        "enemyForm": true,
+        "challenge": true
+      },
+      {
+        "t": 11.265,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 11.282,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 11.397,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 11.399,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 11.416,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 11.501,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 11.522,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 11.64,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 11.649,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 11.739,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 12.323,
+        "type": "challenge_clear",
+        "stage": 1,
+        "hits": 36,
+        "total": 40,
+        "upperBandY": 180,
+        "upperBandTime": 141.554,
+        "avgUpperBandTime": 3.539
+      },
+      {
+        "t": 12.323,
+        "type": "challenge_transition_queued",
+        "stage": 1,
+        "pendingStage": 2,
+        "hits": 36,
+        "total": 40,
+        "postChallengeT": 1.1,
+        "bannerMode": "challengeResult",
+        "bonusTotal": 3000
+      },
+      {
+        "t": 13.431,
+        "type": "challenge_transition_timer_elapsed",
+        "stage": 1,
+        "pendingStage": 2,
+        "postChallengeT": 0.001,
+        "nextStageT": 0,
+        "challenge": true,
+        "enemies": 0
+      },
+      {
+        "t": 13.431,
+        "type": "challenge_transition_started",
+        "stage": 1,
+        "pendingStage": 2,
+        "targetStage": 2,
+        "mode": "challengeResult",
+        "nextIsChallenge": false,
+        "nextStageT": 1.25,
+        "postChallengeT": 0,
+        "challenge": true,
+        "enemies": 0
+      },
+      {
+        "t": 14.614,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 14.673,
+        "type": "challenge_transition_spawn_commit",
+        "stage": 1,
+        "pendingStage": 2,
+        "nextStageT": 0.008,
+        "challenge": true
+      },
+      {
+        "t": 14.673,
+        "type": "stage_spawn",
+        "stage": 2,
+        "challenge": false,
+        "persona": null
+      },
+      {
+        "t": 14.673,
+        "type": "stage_profile",
+        "stage": 2,
+        "challenge": false,
+        "band": "classic",
+        "challengeFamily": "classic",
+        "beeFamily": "classic",
+        "butFamily": "classic",
+        "bossFamily": "classic",
+        "themeId": "quiet-skies",
+        "backgroundMode": "starfield",
+        "frameAccent": "classic-blue",
+        "bossArchetype": "command-core"
+      },
+      {
+        "t": 14.765,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 14.99,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 15.065,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 15.073,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 242.45,
+        "y": 322,
+        "shotXs": [
+          242.45
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 15.116,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 15.413,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 15.442,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 15.448,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 102.33,
+        "y": 322,
+        "shotXs": [
+          102.33
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 15.515,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 15.54,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 589770576,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 8,
+        "row": 3,
+        "lane": 8,
+        "carry": false
+      },
+      {
+        "t": 15.582,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 15.61,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 15.682,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 15.706,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 15.774,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 15.781,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 64.95,
+        "y": 322,
+        "shotXs": [
+          64.95
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 15.808,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 15.855,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 15.873,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 87937412,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 3,
+        "lane": 3,
+        "carry": false
+      },
+      {
+        "t": 15.884,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 15.934,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 15.959,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 16.023,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 41.47,
+        "y": 322,
+        "shotXs": [
+          41.47
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 16.035,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 16.082,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 16.124,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 16.181,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 69157285,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 1,
+        "row": 3,
+        "lane": 2,
+        "carry": false
+      },
+      {
+        "t": 16.185,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 16.215,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 16.274,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 16.292,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 16.299,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 16.306,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9.61,
+        "y": 322,
+        "shotXs": [
+          9.61
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 16.39,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 16.456,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 199379671,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 1,
+        "row": 2,
+        "lane": 1,
+        "carry": false
+      },
+      {
+        "t": 16.457,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 16.482,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 16.548,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 56.68,
+        "y": 322,
+        "shotXs": [
+          56.68
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 16.55,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 16.577,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 16.58,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 16.581,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 16.615,
+        "type": "enemy_bullet_fired",
+        "stage": 2,
+        "kind": "formation",
+        "x": 116.7,
+        "y": 53.49,
+        "vx": 0.77,
+        "vy": 162,
+        "bulletLane": 4,
+        "playerLane": 2,
+        "id": 503592984,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 0,
+        "lane": 4,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 16.673,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 16.725,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 16.73,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 16.816,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 16.85,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 16.908,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 16.948,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 16.998,
+        "type": "enemy_killed",
+        "points": 80,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 0,
+        "enemyBullets": 1,
+        "id": 389104145,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 1,
+        "lane": 2,
+        "carry": false
+      },
+      {
+        "t": 16.999,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 17.005,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 9,
+        "y": 322,
+        "shotXs": [
+          9
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 17.066,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 17.156,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 17.158,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 17.247,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 19.62,
+        "y": 322,
+        "shotXs": [
+          19.62
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 17.248,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 17.282,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 17.324,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 17.349,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 17.434,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 17.449,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 17.483,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 17.541,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 17.598,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 17.664,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 17.732,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 17.738,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 32.83,
+        "y": 322,
+        "shotXs": [
+          32.83
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 17.749,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 17.846,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 17.856,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 18.215,
+        "type": "enemy_killed",
+        "points": 80,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 0,
+        "enemyBullets": 1,
+        "id": 457145230,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 0,
+        "lane": 1,
+        "carry": false
+      },
+      {
+        "t": 18.274,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 18.398,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 18.447,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 18.448,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 37.57,
+        "y": 322,
+        "shotXs": [
+          37.57
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 18.492,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 18.539,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 18.572,
+        "type": "enemy_attack_start",
+        "stage": 2,
+        "mode": "dive",
+        "x": 148.94,
+        "y": 53.25,
+        "originLane": 5,
+        "targetLane": 2,
+        "playerLane": 2,
+        "id": 233350572,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 2,
+        "lane": 5,
+        "dive": 1,
+        "carry": false,
+        "targetX": 51.86,
+        "scripted": 0
+      },
+      {
+        "t": 18.574,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 18.633,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 18.682,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 18.689,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 61.17,
+        "y": 322,
+        "shotXs": [
+          61.17
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 18.698,
+        "type": "enemy_bullet_fired",
+        "stage": 2,
+        "kind": "formation",
+        "x": 198.08,
+        "y": 91.41,
+        "vx": 0.61,
+        "vy": 162,
+        "bulletLane": 6,
+        "playerLane": 2,
+        "id": 749632929,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 3,
+        "lane": 6,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 18.717,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 18.741,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 18.817,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 18.848,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 18.897,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 18.923,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 19,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 19.015,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 19.081,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 94.42,
+        "y": 322,
+        "shotXs": [
+          94.42
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 19.084,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 19.085,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 19.168,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 19.185,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 19.239,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 19.255,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 19.349,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 19.355,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 113.76,
+        "y": 322,
+        "shotXs": [
+          113.76
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 19.367,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 19.415,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 19.489,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 400540995,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 3,
+        "lane": 3,
+        "carry": false
+      },
+      {
+        "t": 19.515,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 19.523,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 1,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 0,
+        "enemyBullets": 1,
+        "id": 233350572,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 2,
+        "lane": 4,
+        "carry": false
+      },
+      {
+        "t": 19.534,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 19.598,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 75.14,
+        "y": 322,
+        "shotXs": [
+          75.14
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 19.607,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 19.798,
+        "type": "enemy_attack_start",
+        "stage": 2,
+        "mode": "dive",
+        "x": 139.01,
+        "y": 25.1,
+        "originLane": 4,
+        "targetLane": 2,
+        "playerLane": 2,
+        "id": 591322259,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 4,
+        "dive": 1,
+        "carry": false,
+        "targetX": 72.52,
+        "scripted": 0
+      },
+      {
+        "t": 19.798,
+        "type": "enemy_attack_start",
+        "stage": 2,
+        "mode": "escort",
+        "x": 148.85,
+        "y": 39.08,
+        "originLane": 5,
+        "targetLane": null,
+        "playerLane": 2,
+        "id": 221260124,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 1,
+        "lane": 5,
+        "dive": 5,
+        "carry": false,
+        "lead": 591322259,
+        "offset": -30
+      },
+      {
+        "t": 19.798,
+        "type": "enemy_attack_start",
+        "stage": 2,
+        "mode": "escort",
+        "x": 122.01,
+        "y": 24.68,
+        "originLane": 4,
+        "targetLane": null,
+        "playerLane": 2,
+        "id": 122744387,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 0,
+        "lane": 4,
+        "dive": 5,
+        "carry": false,
+        "lead": 591322259,
+        "offset": 30
+      },
+      {
+        "t": 19.859,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 19.86,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 19.864,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 72.74,
+        "y": 322,
+        "shotXs": [
+          72.74
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 19.973,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 20.022,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 20.079,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 20.118,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 20.166,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 20.2,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 20.275,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 20.281,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 135.01,
+        "y": 322,
+        "shotXs": [
+          135.01
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 20.292,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 20.351,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 20.359,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 20.449,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 20.465,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 20.523,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 155.34,
+        "y": 322,
+        "shotXs": [
+          155.34
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 20.55,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 20.557,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 20.576,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 20.649,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 20.681,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 0,
+        "id": 564302211,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 3,
+        "lane": 5,
+        "carry": false
+      },
+      {
+        "t": 20.724,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 20.755,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 20.826,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 20.831,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 131.07,
+        "y": 322,
+        "shotXs": [
+          131.07
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 20.85,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 20.856,
+        "type": "enemy_bullet_fired",
+        "stage": 2,
+        "kind": "formation",
+        "x": 83.39,
+        "y": 76.82,
+        "vx": 0.37,
+        "vy": 162,
+        "bulletLane": 3,
+        "playerLane": 4,
+        "id": 958940938,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 2,
+        "lane": 3,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 20.906,
+        "type": "enemy_lower_field",
+        "stage": 2,
+        "y": 224.05,
+        "stageClock": 6.233,
+        "playerLane": 4,
+        "id": 591322259,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 3,
+        "dive": 1,
+        "carry": false
+      },
+      {
+        "t": 20.914,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 20.933,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 20.94,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 20.973,
+        "type": "enemy_killed",
+        "points": 80,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 176565047,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 1,
+        "lane": 5,
+        "carry": false
+      },
+      {
+        "t": 20.981,
+        "type": "enemy_killed",
+        "points": 160,
+        "dive": 5,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 0,
+        "enemyBullets": 1,
+        "id": 122744387,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 0,
+        "lane": 4,
+        "carry": false
+      },
+      {
+        "t": 21.007,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 21.073,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 129.94,
+        "y": 322,
+        "shotXs": [
+          129.94
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 21.073,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 21.116,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 21.166,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 21.174,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 21.274,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 21.289,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 21.391,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 21.442,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 21.448,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 191.03,
+        "y": 322,
+        "shotXs": [
+          191.03
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 21.448,
+        "type": "enemy_lower_field",
+        "stage": 2,
+        "y": 361.8,
+        "stageClock": 6.775,
+        "playerLane": 6,
+        "id": 221260124,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 1,
+        "lane": 2,
+        "dive": 1,
+        "carry": false
+      },
+      {
+        "t": 21.449,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 21.455,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 21.558,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 21.598,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 21.649,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 21.689,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 21.706,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 161.11,
+        "y": 322,
+        "shotXs": [
+          161.11
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 21.757,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 21.772,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 21.815,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 21.822,
+        "type": "enemy_attack_start",
+        "stage": 2,
+        "mode": "dive",
+        "x": 187.27,
+        "y": 52.82,
+        "originLane": 6,
+        "targetLane": 5,
+        "playerLane": 5,
+        "id": 292698264,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 8,
+        "row": 2,
+        "lane": 6,
+        "dive": 1,
+        "carry": false,
+        "targetX": 146.93,
+        "scripted": 0
+      },
+      {
+        "t": 21.842,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 21.864,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 320095884,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 9,
+        "row": 3,
+        "lane": 6,
+        "carry": false
+      },
+      {
+        "t": 21.923,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 21.999,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 21.999,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 22.024,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 22.031,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 190.01,
+        "y": 322,
+        "shotXs": [
+          190.01
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 22.114,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 22.132,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 22.148,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 976171475,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 2,
+        "lane": 5,
+        "carry": false
+      },
+      {
+        "t": 22.205,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 22.208,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 22.273,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 166.2,
+        "y": 322,
+        "shotXs": [
+          166.2
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 22.307,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 22.39,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 22.406,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 22.465,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 520423244,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 9,
+        "row": 2,
+        "lane": 6,
+        "carry": false
+      },
+      {
+        "t": 22.508,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 22.513,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 22.531,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 1,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 0,
+        "enemyBullets": 1,
+        "id": 292698264,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 8,
+        "row": 2,
+        "lane": 5,
+        "carry": false
+      },
+      {
+        "t": 22.617,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 22.617,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 22.622,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 95.71,
+        "y": 322,
+        "shotXs": [
+          95.71
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 22.692,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 22.701,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 22.785,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 22.801,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 22.831,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 22.864,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 60.72,
+        "y": 322,
+        "shotXs": [
+          60.72
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 22.88,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 22.881,
+        "type": "enemy_bullet_fired",
+        "stage": 2,
+        "kind": "formation",
+        "x": 116.67,
+        "y": 50.38,
+        "vx": 0.09,
+        "vy": 162,
+        "bulletLane": 4,
+        "playerLane": 2,
+        "id": 955607198,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 0,
+        "lane": 4,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 22.972,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 23.031,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 23.056,
+        "type": "enemy_attack_start",
+        "stage": 2,
+        "mode": "dive",
+        "x": 147.14,
+        "y": 67.75,
+        "originLane": 5,
+        "targetLane": 3,
+        "playerLane": 3,
+        "id": 659880312,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 3,
+        "lane": 5,
+        "dive": 1,
+        "carry": false,
+        "targetX": 104.16,
+        "scripted": 0
+      },
+      {
+        "t": 23.081,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 23.09,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 23.106,
+        "type": "enemy_damaged",
+        "stage": 2,
+        "hpBefore": 2,
+        "hpAfter": 1,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 591322259,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 3,
+        "dive": 3,
+        "carry": false
+      },
+      {
+        "t": 23.19,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 23.198,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 98.87,
+        "y": 322,
+        "shotXs": [
+          98.87
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 23.206,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 23.273,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 779575380,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 3,
+        "lane": 2,
+        "carry": false
+      },
+      {
+        "t": 23.297,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 23.302,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 23.389,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 23.415,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 23.439,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 105.83,
+        "y": 322,
+        "shotXs": [
+          105.83
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 23.48,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 23.494,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 23.573,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 23.574,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 23.593,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 23.663,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 23.681,
+        "type": "enemy_damaged",
+        "stage": 2,
+        "hpBefore": 2,
+        "hpAfter": 1,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 955607198,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 0,
+        "lane": 3,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 23.725,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 23.759,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 23.764,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 128.55,
+        "y": 322,
+        "shotXs": [
+          128.55
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 23.783,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 23.84,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 23.859,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 23.898,
+        "type": "enemy_killed",
+        "points": 80,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 42455813,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 1,
+        "lane": 4,
+        "carry": false
+      },
+      {
+        "t": 23.923,
+        "type": "enemy_killed",
+        "points": 100,
+        "dive": 1,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 0,
+        "enemyBullets": 1,
+        "id": 659880312,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 3,
+        "lane": 4,
+        "carry": false
+      },
+      {
+        "t": 23.95,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 23.955,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 24.006,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 156.75,
+        "y": 322,
+        "shotXs": [
+          156.75
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 24.024,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 24.073,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 24.113,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 24.183,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 24.257,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 24.264,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 181.78,
+        "y": 322,
+        "shotXs": [
+          181.78
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 24.284,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 24.331,
+        "type": "enemy_attack_start",
+        "stage": 2,
+        "mode": "dive",
+        "x": 128.45,
+        "y": 29.37,
+        "originLane": 4,
+        "targetLane": 6,
+        "playerLane": 6,
+        "id": 113725888,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 0,
+        "lane": 4,
+        "dive": 1,
+        "carry": false,
+        "targetX": 186.73,
+        "scripted": 0
+      },
+      {
+        "t": 24.331,
+        "type": "enemy_attack_start",
+        "stage": 2,
+        "mode": "escort",
+        "x": 134.72,
+        "y": 43.34,
+        "originLane": 4,
+        "targetLane": null,
+        "playerLane": 6,
+        "id": 721480273,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 1,
+        "lane": 4,
+        "dive": 5,
+        "carry": false,
+        "lead": 113725888,
+        "offset": -30
+      },
+      {
+        "t": 24.331,
+        "type": "enemy_attack_start",
+        "stage": 2,
+        "mode": "escort",
+        "x": 145.4,
+        "y": 30.73,
+        "originLane": 5,
+        "targetLane": null,
+        "playerLane": 6,
+        "id": 486459430,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 0,
+        "lane": 5,
+        "dive": 5,
+        "carry": false,
+        "lead": 113725888,
+        "offset": 30
+      },
+      {
+        "t": 24.374,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 24.375,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 24.431,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 830824906,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 2,
+        "lane": 5,
+        "carry": false
+      },
+      {
+        "t": 24.465,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 24.49,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 24.506,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 201.75,
+        "y": 322,
+        "shotXs": [
+          201.75
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 24.59,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 24.599,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 24.664,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 749632929,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 3,
+        "lane": 6,
+        "carry": false
+      },
+      {
+        "t": 24.691,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 24.7,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 24.748,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 164.36,
+        "y": 322,
+        "shotXs": [
+          164.36
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 24.805,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 24.816,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 24.907,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 24.915,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 24.964,
+        "type": "enemy_killed",
+        "points": 80,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 305289862,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 9,
+        "row": 1,
+        "lane": 7,
+        "carry": false
+      },
+      {
+        "t": 24.982,
+        "type": "enemy_bullet_fired",
+        "stage": 2,
+        "kind": "formation",
+        "x": 186.47,
+        "y": 68.24,
+        "vx": -1.64,
+        "vy": 162,
+        "bulletLane": 6,
+        "playerLane": 4,
+        "id": 174997224,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 8,
+        "row": 1,
+        "lane": 6,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 24.989,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 24.997,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 25.091,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 25.098,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 122.31,
+        "y": 322,
+        "shotXs": [
+          122.31
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 25.115,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 25.172,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 491942049,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 2,
+        "lane": 5,
+        "carry": false
+      },
+      {
+        "t": 25.191,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 25.24,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 25.307,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 25.406,
+        "type": "enemy_lower_field",
+        "stage": 2,
+        "y": 225.04,
+        "stageClock": 10.733,
+        "playerLane": 5,
+        "id": 113725888,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 0,
+        "lane": 5,
+        "dive": 1,
+        "carry": false
+      },
+      {
+        "t": 25.507,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 25.531,
+        "type": "enemy_killed",
+        "points": 50,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 0,
+        "enemyBullets": 1,
+        "id": 609003112,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 2,
+        "row": 2,
+        "lane": 4,
+        "carry": false
+      },
+      {
+        "t": 25.564,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 25.565,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 215.27,
+        "y": 322,
+        "shotXs": [
+          215.27
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 25.683,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 25.722,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 25.776,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 25.785,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 25.805,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 205.51,
+        "y": 322,
+        "shotXs": [
+          205.51
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 25.806,
+        "type": "enemy_killed",
+        "points": 160,
+        "dive": 5,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 486459430,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 0,
+        "lane": 7,
+        "carry": false
+      },
+      {
+        "t": 25.86,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 25.876,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 25.948,
+        "type": "enemy_lower_field",
+        "stage": 2,
+        "y": 362.74,
+        "stageClock": 11.275,
+        "playerLane": 7,
+        "id": 721480273,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 1,
+        "lane": 5,
+        "dive": 1,
+        "carry": false
+      },
+      {
+        "t": 25.975,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 26.023,
+        "type": "enemy_killed",
+        "points": 80,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 0,
+        "enemyBullets": 1,
+        "id": 174997224,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 8,
+        "row": 1,
+        "lane": 7,
+        "carry": false
+      },
+      {
+        "t": 26.03,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 26.122,
+        "type": "enemy_attack_start",
+        "stage": 2,
+        "mode": "dive",
+        "x": 157.65,
+        "y": 30.49,
+        "originLane": 5,
+        "targetLane": 8,
+        "playerLane": 8,
+        "id": 503592984,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 0,
+        "lane": 5,
+        "dive": 1,
+        "carry": false,
+        "targetX": 264.16,
+        "scripted": 0
+      },
+      {
+        "t": 26.122,
+        "type": "enemy_attack_start",
+        "stage": 2,
+        "mode": "escort",
+        "x": 138.38,
+        "y": 45.07,
+        "originLane": 4,
+        "targetLane": null,
+        "playerLane": 8,
+        "id": 221260124,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 1,
+        "lane": 4,
+        "dive": 5,
+        "carry": false,
+        "lead": 503592984,
+        "offset": -30
+      },
+      {
+        "t": 26.122,
+        "type": "enemy_attack_start",
+        "stage": 2,
+        "mode": "escort",
+        "x": 206.38,
+        "y": 41.21,
+        "originLane": 7,
+        "targetLane": null,
+        "playerLane": 8,
+        "id": 795549506,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 1,
+        "lane": 7,
+        "dive": 5,
+        "carry": false,
+        "lead": 503592984,
+        "offset": 30
+      },
+      {
+        "t": 26.123,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 26.213,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 26.305,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 26.306,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 258.58,
+        "y": 322,
+        "shotXs": [
+          258.58
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 26.439,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 26.49,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 26.616,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 26.84,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 26.885,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 26.973,
+        "type": "enemy_bullet_fired",
+        "stage": 2,
+        "kind": "formation",
+        "x": 201.82,
+        "y": 58.94,
+        "vx": 1.01,
+        "vy": 162,
+        "bulletLane": 6,
+        "playerLane": 8,
+        "id": 721480273,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 1,
+        "lane": 6,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 27.063,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 27.14,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 27.148,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 218.97,
+        "y": 322,
+        "shotXs": [
+          218.97
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 27.205,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 27.206,
+        "type": "enemy_lower_field",
+        "stage": 2,
+        "y": 225.23,
+        "stageClock": 12.533,
+        "playerLane": 7,
+        "id": 503592984,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 0,
+        "lane": 7,
+        "dive": 1,
+        "carry": false
+      },
+      {
+        "t": 27.256,
+        "type": "enemy_damaged",
+        "stage": 2,
+        "hpBefore": 2,
+        "hpAfter": 1,
+        "playerBullets": 0,
+        "enemyBullets": 1,
+        "id": 503592984,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 5,
+        "row": 0,
+        "lane": 7,
+        "dive": 1,
+        "carry": false
+      },
+      {
+        "t": 27.273,
+        "type": "enemy_attack_start",
+        "stage": 2,
+        "mode": "dive",
+        "x": 167.75,
+        "y": 27.49,
+        "originLane": 5,
+        "targetLane": 7,
+        "playerLane": 7,
+        "id": 955607198,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 0,
+        "lane": 5,
+        "dive": 1,
+        "carry": false,
+        "targetX": 216.57,
+        "scripted": 0
+      },
+      {
+        "t": 27.273,
+        "type": "enemy_attack_start",
+        "stage": 2,
+        "mode": "escort",
+        "x": 202.32,
+        "y": 38.1,
+        "originLane": 7,
+        "targetLane": null,
+        "playerLane": 7,
+        "id": 721480273,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 1,
+        "lane": 7,
+        "dive": 5,
+        "carry": false,
+        "lead": 955607198,
+        "offset": -30
+      },
+      {
+        "t": 27.357,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 27.389,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 216.57,
+        "y": 322,
+        "shotXs": [
+          216.57
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 27.39,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 27.681,
+        "type": "ship_lost",
+        "stage": 2,
+        "score": 8400,
+        "livesBefore": 2,
+        "stageClock": 13.007,
+        "attackers": 5,
+        "enemyBullets": 1,
+        "enemies": 15,
+        "playerX": 216.57,
+        "playerY": 340,
+        "playerLane": 7,
+        "dual": false,
+        "pending": false,
+        "carriedEnemies": 0,
+        "timeSinceCaptureStart": null,
+        "timeSinceFighterCaptured": null,
+        "playerHitbox": {
+          "w": 7,
+          "h": 6
+        },
+        "cause": "enemy_collision",
+        "enemyId": 221260124,
+        "enemyType": "but",
+        "enemyDive": 5,
+        "enemyX": 203.46,
+        "enemyY": 343.74,
+        "enemyLane": 7,
+        "enemyForm": true,
+        "challenge": false
+      },
+      {
+        "t": 27.682,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 27.748,
+        "type": "enemy_lower_field",
+        "stage": 2,
+        "y": 362.26,
+        "stageClock": 13.075,
+        "playerLane": 7,
+        "id": 795549506,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 7,
+        "row": 1,
+        "lane": 9,
+        "dive": 1,
+        "carry": false
+      },
+      {
+        "t": 27.792,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 28.275,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 28.373,
+        "type": "enemy_lower_field",
+        "stage": 2,
+        "y": 225.42,
+        "stageClock": 13.7,
+        "playerLane": 7,
+        "id": 955607198,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 4,
+        "row": 0,
+        "lane": 5,
+        "dive": 1,
+        "carry": false
+      },
+      {
+        "t": 28.443,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 28.505,
+        "type": "enemy_bullet_fired",
+        "stage": 2,
+        "kind": "escort",
+        "x": 137.66,
+        "y": 261.28,
+        "vx": 6.6,
+        "vy": 175,
+        "bulletLane": 4,
+        "playerLane": 7,
+        "id": 721480273,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 1,
+        "lane": 4,
+        "dive": 5,
+        "carry": false
+      },
+      {
+        "t": 28.543,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 28.674,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 28.915,
+        "type": "enemy_lower_field",
+        "stage": 2,
+        "y": 362.71,
+        "stageClock": 14.242,
+        "playerLane": 7,
+        "id": 721480273,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 1,
+        "lane": 5,
+        "dive": 1,
+        "carry": false
+      },
+      {
+        "t": 29.407,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 29.431,
+        "type": "enemy_bullet_fired",
+        "stage": 2,
+        "kind": "formation",
+        "x": 77.02,
+        "y": 92.06,
+        "vx": -0.55,
+        "vy": 162,
+        "bulletLane": 2,
+        "playerLane": 7,
+        "id": 364056378,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 3,
+        "lane": 2,
+        "dive": 0,
+        "carry": false
+      },
+      {
+        "t": 29.48,
+        "type": "enemy_attack_start",
+        "stage": 2,
+        "mode": "dive",
+        "x": 30.12,
+        "y": 53.33,
+        "originLane": 1,
+        "targetLane": 7,
+        "playerLane": 7,
+        "id": 958940938,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 2,
+        "lane": 1,
+        "dive": 1,
+        "carry": false,
+        "targetX": 209.23,
+        "scripted": 0
+      },
+      {
+        "t": 29.534,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 29.597,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 29.598,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 186.1,
+        "y": 322,
+        "shotXs": [
+          186.1
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 29.616,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 29.69,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 29.706,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 29.79,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 29.807,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 29.839,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 161.45,
+        "y": 322,
+        "shotXs": [
+          161.45
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 29.888,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 29.889,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 29.98,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 29.98,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 30.043,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 30.074,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 30.081,
+        "type": "enemy_killed",
+        "points": 80,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 129046091,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 9,
+        "row": 0,
+        "lane": 6,
+        "carry": false
+      },
+      {
+        "t": 30.131,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 30.131,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 126.77,
+        "y": 322,
+        "shotXs": [
+          126.77
+        ],
+        "spread": 0,
+        "activeBullets": 2,
+        "captureWindow": false
+      },
+      {
+        "t": 30.191,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 30.225,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 30.249,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 30.316,
+        "type": "key_down",
+        "code": "ArrowRight",
+        "key": "ArrowRight",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 30.323,
+        "type": "enemy_killed",
+        "points": 80,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 1,
+        "enemyBullets": 1,
+        "id": 373364895,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 8,
+        "row": 0,
+        "lane": 5,
+        "carry": false
+      },
+      {
+        "t": 30.49,
+        "type": "enemy_lower_field",
+        "stage": 2,
+        "y": 223.57,
+        "stageClock": 15.817,
+        "playerLane": 5,
+        "id": 958940938,
+        "enemyType": "bee",
+        "enemyFamily": "classic",
+        "column": 0,
+        "row": 2,
+        "lane": 4,
+        "dive": 1,
+        "carry": false
+      },
+      {
+        "t": 30.514,
+        "type": "key_up",
+        "code": "ArrowRight",
+        "key": "ArrowRight"
+      },
+      {
+        "t": 30.581,
+        "type": "enemy_killed",
+        "points": 80,
+        "dive": 0,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 0,
+        "enemyBullets": 1,
+        "id": 721480273,
+        "enemyType": "but",
+        "enemyFamily": "classic",
+        "column": 6,
+        "row": 1,
+        "lane": 4,
+        "carry": false
+      },
+      {
+        "t": 30.584,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 30.588,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 174.05,
+        "y": 322,
+        "shotXs": [
+          174.05
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      },
+      {
+        "t": 30.66,
+        "type": "key_down",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 30.707,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 30.83,
+        "type": "key_up",
+        "code": "ArrowLeft",
+        "key": "ArrowLeft"
+      },
+      {
+        "t": 30.873,
+        "type": "ship_lost",
+        "stage": 2,
+        "score": 8640,
+        "livesBefore": 1,
+        "stageClock": 16.2,
+        "attackers": 1,
+        "enemyBullets": 1,
+        "enemies": 11,
+        "playerX": 135,
+        "playerY": 340,
+        "playerLane": 4,
+        "dual": false,
+        "pending": false,
+        "carriedEnemies": 0,
+        "timeSinceCaptureStart": null,
+        "timeSinceFighterCaptured": null,
+        "playerHitbox": {
+          "w": 7,
+          "h": 6
+        },
+        "cause": "enemy_collision",
+        "enemyId": 958940938,
+        "enemyType": "bee",
+        "enemyDive": 1,
+        "enemyX": 137.07,
+        "enemyY": 331.46,
+        "enemyLane": 4,
+        "enemyForm": true,
+        "challenge": false
+      },
+      {
+        "t": 30.873,
+        "type": "game_over",
+        "score": 8640,
+        "stage": 2
+      }
+    ],
+    "snapshots": [
+      {
+        "t": 0.005,
+        "tag": "stage_spawn",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 0,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 140,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 0.007,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 0,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 140,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 0.506,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 0,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 140,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 1.006,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 0,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 140,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 1.506,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 0,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 140,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 2.006,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 0,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 98.25,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 2.514,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 200,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 55.44,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 38,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 14,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 3.014,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 400,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 55.24,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 36,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 6,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 3.523,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 600,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 105.28,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 34,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 4.031,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 800,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 79.03,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 32,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 4.54,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1000,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 96.34,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 30,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 5.04,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1300,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 108.33,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 27,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 17,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 5.548,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1500,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 48.34,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 25,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 16,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 6.048,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1500,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 9,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 25,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 6.556,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1700,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 75.71,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 23,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 14,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 7.064,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 1800,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 109.57,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 22,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 7.572,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 2100,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 126.43,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 19,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 15,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 8.08,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 2100,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 117.95,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 19,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 8.581,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 2100,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 149.57,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 19,
+          "playerBullets": 2,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 9.089,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 2200,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 173.59,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 18,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "effects": 10,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 9.598,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 2600,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 191.88,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 14,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "effects": 20,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 10.106,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 4000,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 229.24,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 10,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 26,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 10.614,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 5300,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 219.29,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 7,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 17,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 11.123,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 6600,
+        "lives": 3,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 216.89,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 4,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 15,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 11.632,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 6600,
+        "lives": 2,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 266.06,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 3,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 12.139,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 6600,
+        "lives": 2,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 266.06,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 2,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 12.648,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 6600,
+        "lives": 2,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 266.06,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 0,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 13.156,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 6600,
+        "lives": 2,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 266.06,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 0,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 13.664,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 6600,
+        "lives": 2,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 266.06,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 0,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 14.173,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 6600,
+        "lives": 2,
+        "challenge": true,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 266.06,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 0,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 14.673,
+        "tag": "stage_spawn",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 6600,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 266.06,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 14.681,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 6600,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 266.06,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 15.189,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 6600,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 208.25,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 15.698,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 6650,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 78.13,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 39,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "effects": 7,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 16.206,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 6750,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 13.22,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 37,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "effects": 17,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 16.715,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 6800,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 44.2,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 36,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 17.214,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 6880,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 12.66,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 35,
+          "playerBullets": 1,
+          "enemyBullets": 1,
+          "effects": 1,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 17.723,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 6880,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 34.85,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 35,
+          "playerBullets": 1,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 18.231,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 6960,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 9,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 34,
+          "playerBullets": 0,
+          "enemyBullets": 1,
+          "effects": 17,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 18.738,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 6960,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 65.34,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 34,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 19.239,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 6960,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 105.11,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 34,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 19.748,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 7110,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 72.52,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 32,
+          "playerBullets": 1,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 20.256,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 7110,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 133.28,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 32,
+          "playerBullets": 1,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 3
+        }
+      },
+      {
+        "t": 20.764,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 7160,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 141.5,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 31,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "effects": 16,
+          "attackers": 3
+        }
+      },
+      {
+        "t": 21.264,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 7400,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 169.04,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 29,
+          "playerBullets": 1,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 2
+        }
+      },
+      {
+        "t": 21.773,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 7400,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 152.85,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 29,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 22.281,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 7500,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 166.2,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 27,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 10,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 22.79,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 7650,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 73.43,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 25,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 23.298,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 7700,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 87.25,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 24,
+          "playerBullets": 1,
+          "enemyBullets": 1,
+          "effects": 20,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 23.806,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 7700,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 132.44,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 24,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 6,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 24.315,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 7880,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 183.85,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 22,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 24.823,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 7980,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 149.68,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 20,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 10,
+          "attackers": 3
+        }
+      },
+      {
+        "t": 25.331,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 8110,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 152.58,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 18,
+          "playerBullets": 1,
+          "enemyBullets": 1,
+          "effects": 4,
+          "attackers": 3
+        }
+      },
+      {
+        "t": 25.839,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 8320,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 203.38,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 16,
+          "playerBullets": 1,
+          "enemyBullets": 1,
+          "effects": 17,
+          "attackers": 2
+        }
+      },
+      {
+        "t": 26.348,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 8400,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 249.52,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 15,
+          "playerBullets": 1,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 3
+        }
+      },
+      {
+        "t": 26.856,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 8400,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 252.88,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 15,
+          "playerBullets": 1,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 3
+        }
+      },
+      {
+        "t": 27.364,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 8400,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 216.57,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 15,
+          "playerBullets": 0,
+          "enemyBullets": 1,
+          "effects": 4,
+          "attackers": 5
+        }
+      },
+      {
+        "t": 27.872,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 8400,
+        "lives": 1,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 216.57,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 14,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "effects": 23,
+          "attackers": 3
+        }
+      },
+      {
+        "t": 28.373,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 8400,
+        "lives": 1,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 216.57,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 14,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 2
+        }
+      },
+      {
+        "t": 28.881,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 8400,
+        "lives": 1,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 216.57,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 14,
+          "playerBullets": 0,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 2
+        }
+      },
+      {
+        "t": 29.389,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 8400,
+        "lives": 1,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 216.57,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 14,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 29.89,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 8400,
+        "lives": 1,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 155.54,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 14,
+          "playerBullets": 2,
+          "enemyBullets": 1,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 30.398,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 8560,
+        "lives": 1,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 124.15,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 12,
+          "playerBullets": 1,
+          "enemyBullets": 1,
+          "effects": 17,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 30.873,
+        "tag": "game_over",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 8640,
+        "lives": 0,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 135,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 10,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "effects": 100,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 30.873,
+        "tag": "export",
+        "gameKey": "aurora-galactica",
+        "started": false,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 2,
+        "score": 8640,
+        "lives": 0,
+        "challenge": false,
+        "scriptMode": false,
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "player": {
+          "x": 135,
+          "y": 340,
+          "dual": false,
+          "captured": false,
+          "pending": false
+        },
+        "counts": {
+          "enemies": 10,
+          "playerBullets": 1,
+          "enemyBullets": 0,
+          "effects": 100,
+          "attackers": 1
+        }
+      }
+    ],
+    "t0": 1620.2999999523163,
+    "duration": 30.873,
+    "eventCount": 667,
+    "snapshotCount": 65
+  }
+}

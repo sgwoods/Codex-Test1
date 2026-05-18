@@ -2,7 +2,9 @@
 
 Source artifact:
 
-- `/Users/stevenwoods/Downloads/Galaga Sounds with labelling in video.mp4`
+- `reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-videos/galaga-sounds-with-labelling-in-video.mp4`
+- Source manifest:
+  - `reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/source-manifest.json`
 
 Technical profile:
 
@@ -13,10 +15,10 @@ Technical profile:
 
 Cataloged review surfaces:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video/contact-01.png`
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video/contact-02.png`
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video/contact-03.png`
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video/contact-04.png`
+- `reference-artifacts/analyses/galaga-audio-reference-video/contact-01.png`
+- `reference-artifacts/analyses/galaga-audio-reference-video/contact-02.png`
+- `reference-artifacts/analyses/galaga-audio-reference-video/contact-03.png`
+- `reference-artifacts/analyses/galaga-audio-reference-video/contact-04.png`
 
 ## What this artifact is good for
 
@@ -108,11 +110,11 @@ voice. In practice this suggests:
 All 13 labeled Galaga sound/music contexts cataloged above are now available as
 standalone extracted clip files in:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video/clips/`
+- `reference-artifacts/analyses/galaga-audio-reference-video/clips/`
 
 Mirrored app-asset copies are also available in:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/src/assets/reference-audio/`
+- `src/assets/reference-audio/`
 
 Current extracted clip set:
 
@@ -134,9 +136,9 @@ Current extracted clip set:
 
 Use this artifact when reviewing or tuning:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/src/js/13-aurora-game-pack.js`
-- `/Users/stevenwoods/Documents/Codex-Test1/application-guide.json`
-- `/Users/stevenwoods/Documents/Codex-Test1/src/application-guide.template.html`
+- `src/js/13-aurora-game-pack.js`
+- `application-guide.json`
+- `src/application-guide.template.html`
 
 especially for:
 

@@ -23,6 +23,14 @@ This is an intake ledger, not a promotion step. The reviewed source files stay
 in place on the external volume until they are intentionally accessioned,
 deduplicated, and promoted.
 
+Current status note:
+
+- the first representative preserved-source promotions have now been completed
+  for the Neo-Galaga history subset and the cited Galaga/Galaxian source-media
+  family
+- this intake lane remains the planning and provenance surface for the larger
+  external archive
+
 ## Working Rule
 
 - Do not copy the full download drop into live repo paths.
@@ -100,6 +108,8 @@ Supporting intake-lane artifacts:
 
 - `historical-neo-galaga-accession-plan.md`
 - `historical-neo-galaga-curated-manifest.json`
+- `reference-artifacts/preserved-sources/neo-galaga-history-2026-03-to-2026-04/`
+- `reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/`
 
 ### 2. Recoverable Source Media Already Cited In Repo Docs
 
@@ -159,13 +169,13 @@ out of this repo:
 
 ## Recommended Next Actions
 
-1. Use the curated Neo-Galaga accession plan to preserve a representative paired
-   subset first.
-2. Decide whether the larger video slice should be preserved fully outside git
+1. Decide whether the larger Neo-Galaga video slice should be preserved fully
+   outside git
    with a manifest, or selectively promoted as a curated subset.
-3. Preserve the already-cited Galaga/Galaxian source media in a stable canonical
-   reference location under the project's evidence program.
-4. Update committed docs that still point to stale old download paths once the
+2. Extend the preserved-source lanes only when a new historical slice is worth
+   the extra maintenance cost.
+3. Update any remaining committed docs that still point to stale old download
+   paths once the
    canonical preserved-source locations are chosen.
-5. Treat `Abtweak` as a separate historical archive project, not as Aurora
+4. Treat `Abtweak` as a separate historical archive project, not as Aurora
    evidence.

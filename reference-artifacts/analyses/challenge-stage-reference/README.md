@@ -2,8 +2,10 @@
 
 Primary source:
 
-- downloaded video:
-  - `/Users/sgwoods/Downloads/🎮🕹️👉Galaga (1981) - Gameplay Arcade - Snake Latino (360p, h264).mp4`
+- preserved video:
+  - `reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/challenge-stage/challenging-stage-perfect-scores.mp4`
+- source manifest:
+  - `reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/source-manifest.json`
 
 Derived artifacts in this clone:
 
@@ -24,7 +26,7 @@ Why this exists:
 ## Stable observations across the reference video
 
 These are the practical rules and presentation details that are consistently
-visible across the challenge-stage examples in the downloaded reference video.
+visible across the challenge-stage examples in the preserved reference video.
 
 1. Challenge stages are non-attacking bonus rounds.
    - No enemy bullets appear.

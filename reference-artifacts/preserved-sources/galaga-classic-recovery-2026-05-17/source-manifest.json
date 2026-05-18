@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-05-17",
+  "status": "canonical-recovered-source-set",
+  "source_root": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all",
+  "preserved_root": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17",
+  "notes": [
+    "The long-form stage reference video exceeded normal GitHub file-size comfort as an original source artifact, so the repo preserves a full-length committed review proxy plus the original-source metadata and hash.",
+    "The smaller cited audio videos, challenge-stage video, Galaxian wav, and Freesound pack are committed as original recovered source artifacts."
+  ],
+  "stage_reference_video": {
+    "status": "proxy-committed-original-external",
+    "original_source_path": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all/90 stage 1 player galaga example.mp4",
+    "original_bytes": 160128315,
+    "original_sha256": "0fb752a2c822ed1dd0e7aed2babc2e92f11925682ee8b81d88ffff8f7cf9c929",
+    "repo_proxy_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/video/galaga-stage-reference-video-proxy.mp4",
+    "proxy_bytes": 67907622,
+    "proxy_sha256": "9efcc0161bf1f3a33472697d33e455d86c8fe83b38a0bd99d7204f1e09b81e24"
+  },
+  "committed_artifacts": [
+    {
+      "id": "galaga-sounds-with-labelling-in-video",
+      "status": "original-committed",
+      "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-videos/galaga-sounds-with-labelling-in-video.mp4",
+      "bytes": 7133245,
+      "sha256": "f5b14f3f00a72ba3d3bc2927d8a27fd4d155246a417edcff684d6b6dcec7ab4e",
+      "source_path": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all/Galaga Sounds with labelling in video.mp4"
+    },
+    {
+      "id": "galaga-sounds-effects-all-2",
+      "status": "original-committed",
+      "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-videos/galaga-sounds-effects-all-2.mp4",
+      "bytes": 918407,
+      "sha256": "70ae59c0aa4c9f4dafd66e5fc896f1276a6c5982df8191ef94d12c27c66d673e",
+      "source_path": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all/Galaga sounds effects - all 2.mp4"
+    },
+    {
+      "id": "galaga-sounds-effects-all-3",
+      "status": "original-committed",
+      "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-videos/galaga-sounds-effects-all-3.mp4",
+      "bytes": 3554921,
+      "sha256": "4e027f8255344153ca62bf1a5aed56657580797df6e612c36d7842b31f034cae",
+      "source_path": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all/Galaga Sounds effects all 3.mp4"
+    },
+    {
+      "id": "challenging-stage-perfect-scores",
+      "status": "original-committed",
+      "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/challenge-stage/challenging-stage-perfect-scores.mp4",
+      "bytes": 8527459,
+      "sha256": "102678b6283a640a2fe9ff998f1b07ef4f222eabe49e1ff2afe6d4f3c41f1eca",
+      "source_path": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all/challenging stage perfect scores.mp4"
+    },
+    {
+      "id": "261173__portwain__galaxian-arcade-game",
+      "status": "original-committed",
+      "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/galaxian-audio/261173__portwain__galaxian-arcade-game.wav",
+      "bytes": 8999018,
+      "sha256": "d3f4d633aa04bb804d104c475d5c91af036fc10feb799a1dc72b793df6ca9195",
+      "source_path": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all/261173__portwain__galaxian-arcade-game.wav"
+    }
+  ],
+  "freesound_pack": {
+    "status": "original-committed",
+    "source_path": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all/19330__sgtpepperarc360__galaga-remake-music-and-sound-effects",
+    "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-pack/19330__sgtpepperarc360__galaga-remake-music-and-sound-effects",
+    "file_count": 16,
+    "total_bytes": 53080654,
+    "files": [
+      {
+        "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-pack/19330__sgtpepperarc360__galaga-remake-music-and-sound-effects/333257__sgtpepperarc360__03-floating-in-mid-air.wav",
+        "bytes": 10045602,
+        "sha256": "9b042d1ae4e608e67689842ddd765a35ccd4007fd015b1392a9780462233a1aa"
+      },
+      {
+        "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-pack/19330__sgtpepperarc360__galaga-remake-music-and-sound-effects/338862__sgtpepperarc360__galaga-dive-2-new.wav",
+        "bytes": 1155332,
+        "sha256": "0bf46f116d699fec83bdf741c9b83def9fc57bb0451df2779ee0ede0a5a90dd3"
+      },
+      {
+        "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-pack/19330__sgtpepperarc360__galaga-remake-music-and-sound-effects/338863__sgtpepperarc360__galaga-mid-boss-tractor-beam-new.wav",
+        "bytes": 3312980,
+        "sha256": "b9c01bd3cd49d4cf9972d994b8f8f3179d25740301062b4fb70f6828abede936"
+      },
+      {
+        "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-pack/19330__sgtpepperarc360__galaga-remake-music-and-sound-effects/338864__sgtpepperarc360__09-fighter-captured.wav",
+        "bytes": 1495944,
+        "sha256": "96eb9d2fdf9d14d3a145a379cac51d4ffabddc133aacc836ba88028daa43d603"
+      },
+      {
+        "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-pack/19330__sgtpepperarc360__galaga-remake-music-and-sound-effects/338866__sgtpepperarc360__10-fighter-freed.wav",
+        "bytes": 2991622,
+        "sha256": "fd05c92ca8f28f3d9149ae2a95d97d8e47c6e54e984a39fa00006b19080dc1cd"
+      },
+      {
+        "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-pack/19330__sgtpepperarc360__galaga-remake-music-and-sound-effects/338867__sgtpepperarc360__14-fighter-destroyed.wav",
+        "bytes": 2153740,
+        "sha256": "7e2b4bc44dbf2201e432972af33b21a0cdb931dccfa4fa8d5c1442148749def6"
+      },
+      {
+        "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-pack/19330__sgtpepperarc360__galaga-remake-music-and-sound-effects/341370__sgtpepperarc360__galaga-song-here-we-go-opening-theme.wav",
+        "bytes": 4472116,
+        "sha256": "0d1169fb8a6933fa9161c4c7da7d81507658da03d2d4206bddc504cca9657337"
+      },
+      {
+        "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-pack/19330__sgtpepperarc360__galaga-remake-music-and-sound-effects/341484__sgtpepperarc360__galaga-song-02-spreading.wav",
+        "bytes": 6312654,
+        "sha256": "7a9ffe56af355bba37e60a466f91977327a5d4a64557b9889c1a12646ee78da1"
+      },
+      {
+        "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-pack/19330__sgtpepperarc360__galaga-remake-music-and-sound-effects/341799__sgtpepperarc360__galaga-song-16-weightless.wav",
+        "bytes": 5764536,
+        "sha256": "6803549e1c9c17b22929e9689aa108ea0359247c89d3e8e7564a20a9eece0ac5"
+      },
+      {
+        "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-pack/19330__sgtpepperarc360__galaga-remake-music-and-sound-effects/341818__sgtpepperarc360__updated-version-galaga-song-16-weightless.wav",
+        "bytes": 5770182,
+        "sha256": "74353b455fac3de0e5aeb14b9471504c556e291e878a840cce07a5697039783e"
+      },
+      {
+        "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-pack/19330__sgtpepperarc360__galaga-remake-music-and-sound-effects/341909__sgtpepperarc360__05-extend.wav",
+        "bytes": 983294,
+        "sha256": "1a725231570c740619638698ad97b91fb50e1fbd95f106ca3ec3cc4334e5913b"
+      },
+      {
+        "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-pack/19330__sgtpepperarc360__galaga-remake-music-and-sound-effects/341910__sgtpepperarc360__01-coin-credit.wav",
+        "bytes": 541458,
+        "sha256": "4bd9e60bcf4e9ef99a34e6498d65b762637e2718a3ffe8e3bbcbd9252b31f7a6"
+      },
+      {
+        "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-pack/19330__sgtpepperarc360__galaga-remake-music-and-sound-effects/341911__sgtpepperarc360__00-game-load.wav",
+        "bytes": 692992,
+        "sha256": "6d1b432df5c2c38ba25b136012f69de4de091b48dc30ebd664ab8fa6aea59d53"
+      },
+      {
+        "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-pack/19330__sgtpepperarc360__galaga-remake-music-and-sound-effects/341930__sgtpepperarc360__16-explosion.wav",
+        "bytes": 2093056,
+        "sha256": "8222393086e8893183ac1892bce9e2f187a32d1cddc5a3df0b97f9ce08b19181"
+      },
+      {
+        "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-pack/19330__sgtpepperarc360__galaga-remake-music-and-sound-effects/344742__sgtpepperarc360__galaga-song-04-the-view-from-above.wav",
+        "bytes": 5292132,
+        "sha256": "265879789aec9d4d181c4489d1637f0e565cc3282eba661e5471f6169bd0180a"
+      },
+      {
+        "repo_path": "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-pack/19330__sgtpepperarc360__galaga-remake-music-and-sound-effects/_readme_and_license.txt",
+        "bytes": 3014,
+        "sha256": "1b4842baf9578085bfea1e554eb1ca51c9608c9eb4f399018149ddac78d320ed"
+      }
+    ]
+  }
+}

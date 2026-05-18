@@ -32,6 +32,7 @@ persona testing expectations.
 | Galaga target artifact corpus | `reference-artifacts/analyses/galaga-target-artifact-coverage/latest.json` and `GALAGA_TARGET_ARTIFACT_COVERAGE.md` | online/local target inventory, ingestion status, challenge-window readiness, and next acquisition needs | deciding which reference artifacts are strong enough to guide implementation versus only useful as planning or supplemental context |
 | Galaga design grounding notes | `reference-artifacts/ingestion/galaga-design-grounding/README.md` | derived official-source and player-guide assertions for identity, entry, challenge-stage learnability, capture/rescue, and transform progression | grounding player/designer meaning while keeping numeric movement scores tied to measured media |
 | Galaga screen-surface targets | `reference-artifacts/ingestion/galaga-screen-surface-targets/README.md` | derived target map for title, in-game, high-score, game-over, cabinet, and challenge-result surfaces | planning visual/UI conformance work before approved screenshot/contact-sheet targets exist |
+| Galaga classic recovered source lane | `reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/README.md` | recovered source videos, Freesound pack, Galaxian wav, and stage-video proxy with hashes/manifests | current canonical source lane for the active Galaga/Galaxian reference media that older docs used to cite from stale machine paths |
 | Reference audio clips | `src/assets/reference-audio/` | clipped reference cues mirrored into app assets | cue alignment, phrase comparison, reference-theme playback |
 
 ## Derived Analysis Packs Already In The Repo
@@ -64,6 +65,7 @@ persona testing expectations.
 | Stage 4 fairness findings | `reference-artifacts/analyses/stage4-fairness/README.md` | durable record of what did and did not help Stage 4 fairness |
 | External `Galaga5` reference | `reference-artifacts/analyses/external-galaga5/README.md` | implementation-pattern comparison, not canonical fidelity evidence |
 | Galaxian mechanics archive | `reference-artifacts/analyses/galaxian-mechanics/README.md` | early sibling-project archive for future `Galaxian`-derived work |
+| Neo-Galaga historical representative archive | `reference-artifacts/preserved-sources/neo-galaga-history-2026-03-to-2026-04/README.md` | first preserved subset from the recovered March-April Neo-Galaga history for historical runtime provenance, release-story support, and future comparative analysis |
 | Old-machine downloads intake lane | `reference-artifacts/ingestion/downloads-old-all-2026-05-17/README.md` | triaged intake record plus curated Neo-Galaga accession plan for historical exports and recoverable cited source media from the copied old-machine download drop |
 
 ## Current Gaps

@@ -13,24 +13,24 @@ opening handoff in Galaga reference mode.
 ## Sources
 
 - Stage 1 gameplay video:
-  - `/Users/stevenwoods/Downloads/90 stage 1 player galaga example.mp4`
+  - `reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/video/galaga-stage-reference-video-proxy.mp4`
 - Game-start clip:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/assets/reference-audio/galaga2-game-start.m4a`
+  - `src/assets/reference-audio/galaga2-game-start.m4a`
 - Arrival / underscore clip:
-  - `/Users/stevenwoods/Documents/Codex-Test1/src/assets/reference-audio/galaga3-level-underscore.m4a`
+  - `src/assets/reference-audio/galaga3-level-underscore.m4a`
 
 ## Generated reference views
 
 - Contact sheet:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/opening-contact.png`
+  - `reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/opening-contact.png`
 - Tight contact sheet:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/opening-contact-tight.png`
+  - `reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/opening-contact-tight.png`
 - Opening waveform:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/opening-waveform.png`
+  - `reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/opening-waveform.png`
 - Game-start waveform:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/game-start-waveform.png`
+  - `reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/game-start-waveform.png`
 - Level-underscore waveform:
-  - `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/level-underscore-waveform.png`
+  - `reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/level-underscore-waveform.png`
 
 ## Measured durations
 

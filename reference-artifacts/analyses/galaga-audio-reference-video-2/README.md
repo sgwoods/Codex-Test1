@@ -2,7 +2,9 @@
 
 Source artifact:
 
-- `/Users/stevenwoods/Downloads/Galaga sounds effects - all 2.mp4`
+- `reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-videos/galaga-sounds-effects-all-2.mp4`
+- Source manifest:
+  - `reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/source-manifest.json`
 
 Technical profile:
 
@@ -13,8 +15,8 @@ Technical profile:
 
 Cataloged review surfaces:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video-2/contact-01.png`
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video-2/contact-02.png`
+- `reference-artifacts/analyses/galaga-audio-reference-video-2/contact-01.png`
+- `reference-artifacts/analyses/galaga-audio-reference-video-2/contact-02.png`
 
 ## What this artifact is good for
 
@@ -71,11 +73,11 @@ contact sheets.
 
 Reference archive location:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video-2/clips/`
+- `reference-artifacts/analyses/galaga-audio-reference-video-2/clips/`
 
 Mirrored app-asset copies:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/src/assets/reference-audio/`
+- `src/assets/reference-audio/`
 
 Extracted clip set:
 

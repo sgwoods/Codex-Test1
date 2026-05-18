@@ -44,6 +44,8 @@ same seriousness as other user-visible documentation and release artifacts.
   `npm run white-paper:review:production` before publishing those lanes.
 - Treat the review command as responsible for refreshing the code-review packet
   and passing the review gate, not only for rendering a PDF.
+- Confirm the review pass also checks preserved-source integrity so active docs
+  and timing/audio reference work do not drift back to stale machine paths.
 - Commit the refreshed review packet before the clean-tree publish step.
 - Confirm the generated PDF metadata matches the white-paper version/date.
 - Verify the live lane carries both `white-paper.html` and `white-paper.pdf`

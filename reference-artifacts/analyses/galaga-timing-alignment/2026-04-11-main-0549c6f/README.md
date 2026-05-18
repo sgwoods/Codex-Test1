@@ -11,14 +11,14 @@ original Galaga references and Aurora runtime behavior.
 
 ## Source references
 
-- Stage 1 gameplay video: `/Users/stevenwoods/Downloads/90 stage 1 player galaga example.mp4`
-- Contact sheet: `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/stage1-first-16s-contact.png`
-- Game start clip: `/Users/stevenwoods/Documents/Codex-Test1/src/assets/reference-audio/galaga2-game-start.m4a`
-- Convoy cadence clip: `/Users/stevenwoods/Documents/Codex-Test1/src/assets/reference-audio/galaga3-ambience-convoy.m4a`
-- Challenge entry clip: `/Users/stevenwoods/Documents/Codex-Test1/src/assets/reference-audio/galaga2-challenging-stage.m4a`
-- Challenge results clip: `/Users/stevenwoods/Documents/Codex-Test1/src/assets/reference-audio/galaga2-challenging-stage-results.m4a`
-- Challenge perfect clip: `/Users/stevenwoods/Documents/Codex-Test1/src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a`
-- Player hit clip: `/Users/stevenwoods/Documents/Codex-Test1/src/assets/reference-audio/galaga3-death.m4a`
+- Stage 1 gameplay video: `reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/video/galaga-stage-reference-video-proxy.mp4`
+- Contact sheet: `reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/stage1-first-16s-contact.png`
+- Game start clip: `src/assets/reference-audio/galaga2-game-start.m4a`
+- Convoy cadence clip: `src/assets/reference-audio/galaga3-ambience-convoy.m4a`
+- Challenge entry clip: `src/assets/reference-audio/galaga2-challenging-stage.m4a`
+- Challenge results clip: `src/assets/reference-audio/galaga2-challenging-stage-results.m4a`
+- Challenge perfect clip: `src/assets/reference-audio/galaga2-challenging-stage-perfect.m4a`
+- Player hit clip: `src/assets/reference-audio/galaga3-death.m4a`
 
 ## Reference clip durations
 
@@ -64,6 +64,6 @@ original Galaga references and Aurora runtime behavior.
 
 ## Outputs
 
-- Metrics JSON: `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/metrics.json`
-- This README: `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/README.md`
-- Raw run roots: `/Users/stevenwoods/Documents/Codex-Test1/harness-artifacts/timing-alignment`
+- Metrics JSON: `reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/metrics.json`
+- This README: `reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/README.md`
+- Raw run roots: `harness-artifacts/timing-alignment`

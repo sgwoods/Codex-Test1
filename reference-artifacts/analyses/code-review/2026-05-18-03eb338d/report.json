@@ -1,0 +1,290 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "platinum-code-review-packet",
+  "generatedAt": "2026-05-18T12:21:05.338Z",
+  "branch": "main",
+  "baseRef": "origin/main",
+  "baseCommit": "03eb338d815fc5aee106d0926f75f9852ccfe048",
+  "headCommit": "03eb338d",
+  "dirty": true,
+  "statusShort": [
+    "M AUDIO_PLAN.md",
+    " M REFERENCE_MEDIA_INVENTORY.md",
+    " M WHITE_PAPER.md",
+    " M package.json",
+    " M reference-artifacts/README.md",
+    " M reference-artifacts/analyses/challenge-stage-reference/README.md",
+    " M reference-artifacts/analyses/galaga-audio-reference-video-2/README.md",
+    " M reference-artifacts/analyses/galaga-audio-reference-video-3/README.md",
+    " M reference-artifacts/analyses/galaga-audio-reference-video/README.md",
+    " M reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/README.md",
+    " M reference-artifacts/analyses/galaga-stage-reference-video/README.md",
+    " M reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/README.md",
+    " M reference-artifacts/ingestion/downloads-old-all-2026-05-17/README.md",
+    " M reference-artifacts/ingestion/downloads-old-all-2026-05-17/historical-neo-galaga-accession-plan.md",
+    " M reference-artifacts/ingestion/downloads-old-all-2026-05-17/historical-neo-galaga-curated-manifest.json",
+    " M reference-artifacts/ingestion/downloads-old-all-2026-05-17/source-manifest.json",
+    " M tools/harness/analyze-galaga-timing-alignment.js",
+    " M white-paper.json",
+    " M white-paper/CITATION_LEDGER.md",
+    " M white-paper/README.md",
+    " M white-paper/RELATED_WORK.md",
+    " M white-paper/REVIEWER_CHECKLIST.md",
+    "?? reference-artifacts/analyses/galaga-timing-alignment/2026-05-17-main-03eb338d/",
+    "?? reference-artifacts/analyses/galaga-timing-alignment/2026-05-18-main-03eb338d/",
+    "?? reference-artifacts/preserved-sources/",
+    "?? tools/review/check-reference-source-integrity.js",
+    "?? white-paper/REVIEW_CADENCE.md"
+  ],
+  "reviewSkill": {
+    "path": "codex-skills/platinum-code-review/SKILL.md",
+    "modelDoc": "CODE_REVIEW_MODEL.md"
+  },
+  "architecture": {
+    "installedArchitectSkillFound": false,
+    "repoArchitectureDocs": [
+      "ARCHITECTURE.md",
+      "PLATINUM_ARCHITECTURE_OVERVIEW.md",
+      "APPLICATIONS_ON_PLATINUM.md",
+      "PLATINUM_GAME_BOUNDARY_AUDIT.md"
+    ],
+    "boundaryHarnesses": [
+      "npm run harness:check:gameplay-adapter-boundaries",
+      "npm run harness:check:pack-registry-boundaries",
+      "npm run harness:check:platinum-renderer-boundaries",
+      "npm run harness:check:platinum-pack-boot"
+    ]
+  },
+  "summary": {
+    "changedFileCount": 27,
+    "p0": 0,
+    "p1": 0,
+    "p2": 1,
+    "p3": 0,
+    "riskTaggedFileCount": 7
+  },
+  "changedFiles": [
+    {
+      "status": "M",
+      "file": "AUDIO_PLAN.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "package.json",
+      "source": "working-tree",
+      "area": "release-tooling",
+      "riskTags": [
+        "release-lane"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "REFERENCE_MEDIA_INVENTORY.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/challenge-stage-reference/README.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/galaga-audio-reference-video-2/README.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "media-external"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/galaga-audio-reference-video-3/README.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "media-external"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/galaga-audio-reference-video/README.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "media-external"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/README.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/galaga-stage-reference-video/README.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": [
+        "media-external"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/README.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/galaga-timing-alignment/2026-05-17-main-03eb338d/",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/analyses/galaga-timing-alignment/2026-05-18-main-03eb338d/",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/ingestion/downloads-old-all-2026-05-17/historical-neo-galaga-accession-plan.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/ingestion/downloads-old-all-2026-05-17/historical-neo-galaga-curated-manifest.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/ingestion/downloads-old-all-2026-05-17/README.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/ingestion/downloads-old-all-2026-05-17/source-manifest.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "reference-artifacts/preserved-sources/",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "reference-artifacts/README.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "tools/harness/analyze-galaga-timing-alignment.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "??",
+      "file": "tools/review/check-reference-source-integrity.js",
+      "source": "working-tree",
+      "area": "harness-tooling",
+      "riskTags": [
+        "browser-safety",
+        "harness"
+      ]
+    },
+    {
+      "status": "M",
+      "file": "WHITE_PAPER.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "white-paper.json",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "white-paper/CITATION_LEDGER.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "white-paper/README.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "white-paper/RELATED_WORK.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "??",
+      "file": "white-paper/REVIEW_CADENCE.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    },
+    {
+      "status": "M",
+      "file": "white-paper/REVIEWER_CHECKLIST.md",
+      "source": "working-tree",
+      "area": "docs-artifact",
+      "riskTags": []
+    }
+  ],
+  "automaticFindings": [
+    {
+      "severity": "P2",
+      "id": "release-tooling-review",
+      "message": "Release or npm script surface changed; verify lane authority and publish behavior.",
+      "file": "package.json",
+      "evidence": ""
+    }
+  ],
+  "recommendedChecks": [
+    "npm run build",
+    "npm run harness:check:audio-runtime-recovery",
+    "npm run harness:check:trophy-replay-surface",
+    "npm run publish:check:dev",
+    "npm run white-paper:review",
+    "npm run review:code:check"
+  ]
+}

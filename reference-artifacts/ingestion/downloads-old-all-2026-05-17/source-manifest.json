@@ -2,7 +2,7 @@
   "schema_version": 1,
   "reviewed_at": "2026-05-17",
   "source_root": "/Volumes/LaCie1/2026 MacBook Files from iCloud /Downloads-old-all",
-  "status": "triaged_with_curated_plan_not_imported",
+  "status": "triaged_with_preserved_source_promotion",
   "policy": [
     "Do not bulk-copy the full download drop into live repo paths.",
     "Accession and deduplicate source families before promotion.",
@@ -155,9 +155,13 @@
     "pinokio_or_facefusion_runtime_logs",
     "general_utility_source_downloads"
   ],
+  "promoted_preserved_source_paths": [
+    "reference-artifacts/preserved-sources/neo-galaga-history-2026-03-to-2026-04",
+    "reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17"
+  ],
   "next_actions": [
-    "Use the curated Neo-Galaga accession plan to preserve a representative paired subset first.",
-    "Decide whether the larger video slice stays external under manifest control or moves to a separate non-git archive lane.",
-    "Preserve the already-cited Galaga/Galaxian source media in a canonical reference location before updating stale path references."
+    "Decide whether the larger Neo-Galaga video slice stays external under manifest control or moves to a separate non-git archive lane.",
+    "Extend the preserved-source lanes only when a new historical or release-facing use case justifies the maintenance cost.",
+    "Update any remaining active docs or scripts that still point to stale machine-specific source paths."
   ]
 }

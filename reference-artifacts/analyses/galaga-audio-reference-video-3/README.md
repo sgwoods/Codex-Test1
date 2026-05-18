@@ -2,7 +2,9 @@
 
 Source artifact:
 
-- `/Users/stevenwoods/Downloads/Galaga Sounds effects all 3.mp4`
+- `reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/audio-reference-videos/galaga-sounds-effects-all-3.mp4`
+- Source manifest:
+  - `reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/source-manifest.json`
 
 Technical profile:
 
@@ -13,7 +15,7 @@ Technical profile:
 
 Cataloged review surfaces:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video-3/contact-01.png`
+- `reference-artifacts/analyses/galaga-audio-reference-video-3/contact-01.png`
 
 ## Source index used for clipping
 
@@ -57,11 +59,11 @@ extends to the end of the indexed sequence region.
 
 Reference archive location:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video-3/clips/`
+- `reference-artifacts/analyses/galaga-audio-reference-video-3/clips/`
 
 Mirrored app-asset copies:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/src/assets/reference-audio/`
+- `src/assets/reference-audio/`
 
 Extracted clip set:
 
@@ -101,7 +103,7 @@ either grouped together or omitted entirely, especially:
 
 Use this package alongside:
 
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video/README.md`
-- `/Users/stevenwoods/Documents/Codex-Test1/reference-artifacts/analyses/galaga-audio-reference-video-2/README.md`
+- `reference-artifacts/analyses/galaga-audio-reference-video/README.md`
+- `reference-artifacts/analyses/galaga-audio-reference-video-2/README.md`
 
 to build the fullest available original-Galaga reference sound set in this repo.
