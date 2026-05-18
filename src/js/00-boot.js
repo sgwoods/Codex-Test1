@@ -41,7 +41,7 @@ const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=docume
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),platformTrackToast=document.getElementById('platformTrackToast'),platformTrackTitle=document.getElementById('platformTrackTitle'),platformTrackArtist=document.getElementById('platformTrackArtist'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn'),resetTestPilotScoresControl=document.getElementById('resetTestPilotScoresBtn');
-const testPanel=document.getElementById('testPanel'),testStartKind=document.getElementById('testStartKind'),testStage=document.getElementById('testStage'),testChallengeStage=document.getElementById('testChallengeStage'),testChallengeStageField=document.getElementById('testChallengeStageField'),testChallengeStageHint=document.getElementById('testChallengeStageHint'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),commentatorToggle=document.getElementById('commentatorToggle'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
+const testPanel=document.getElementById('testPanel'),testStartKind=document.getElementById('testStartKind'),testExpertPlays=document.getElementById('testExpertPlays'),testExpertPlaysHint=document.getElementById('testExpertPlaysHint'),testStage=document.getElementById('testStage'),testChallengeStage=document.getElementById('testChallengeStage'),testChallengeStageField=document.getElementById('testChallengeStageField'),testChallengeStageHint=document.getElementById('testChallengeStageHint'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),commentatorToggle=document.getElementById('commentatorToggle'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
 const arcadeMusicToggleBtn=document.getElementById('arcadeMusicToggleBtn');
 const arcadeMusicFrameHost=document.getElementById('arcadeMusicFrameHost');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
@@ -1644,6 +1644,7 @@ if((initialBoard[0]?.score||0)>S.best){
 }
 const DEFAULT_TEST_CFG=Object.freeze({
  startKind:'level',
+ expertPlays:'human',
  stage:1,
  challengeStage:1,
  ships:3,
@@ -1662,11 +1663,22 @@ function productionRootModeEnabled(){
 function productionStartStateLocked(){
  return PRODUCTION_RELEASE_LANE&&!productionRootModeEnabled();
 }
+function sanitizeExpertPlayPersona(value=''){
+ const next=String(value||'human').trim().toLowerCase();
+ return ['human','novice','advanced','expert','professional'].includes(next)?next:'human';
+}
+function expertPlayHintText(value=''){
+ const key=sanitizeExpertPlayPersona(value);
+ if(key==='human')return 'Human controls this start.';
+ const labels={novice:'Beginner',advanced:'Intermediate',expert:'Expert',professional:'Professional'};
+ return `${labels[key]||'Selected'} persona will fly this start in Watch Mode.`;
+}
 function effectiveStartStateCfg(cfg){
  const base=Object.assign({},cfg||DEFAULT_TEST_CFG);
  if(!productionStartStateLocked())return base;
  return Object.assign(base,{
   startKind:DEFAULT_TEST_CFG.startKind,
+  expertPlays:DEFAULT_TEST_CFG.expertPlays,
   stage:DEFAULT_TEST_CFG.stage,
   challengeStage:DEFAULT_TEST_CFG.challengeStage,
   ships:DEFAULT_TEST_CFG.ships,
@@ -1695,6 +1707,7 @@ function applyTestCfgToControls(cfg){
  const startCfg=effectiveStartStateCfg(cfg);
  const startKind=sanitizeStartKind(startCfg.startKind||(startCfg.challenge?'challenge':'level'));
  if(testStartKind)testStartKind.value=startKind;
+ if(testExpertPlays)testExpertPlays.value=sanitizeExpertPlayPersona(startCfg.expertPlays||DEFAULT_TEST_CFG.expertPlays);
  if(testStage)testStage.value=startCfg.stage;
  if(testChallengeStage)testChallengeStage.value=startCfg.challengeStage||DEFAULT_TEST_CFG.challengeStage;
  if(testShips)testShips.value=startCfg.ships;
@@ -1714,7 +1727,7 @@ function syncDeveloperToolsUi(){
   ? 'Start-state controls locked to shipped defaults.'
   : 'Root mode active. Start-state controls restored.';
  if(testPanel)testPanel.classList.toggle('locked',locked);
- for(const el of [testStartKind,testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring,testChallenge]){
+ for(const el of [testStartKind,testExpertPlays,testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring,testChallenge]){
   if(el)el.disabled=locked;
  }
  if(openViewerBtn)openViewerBtn.hidden=PRODUCTION_RELEASE_LANE;
@@ -1733,6 +1746,7 @@ function syncChallengeStartControls(){
   testChallengeStage.setAttribute('aria-disabled',testChallengeStage.disabled?'true':'false');
  }
  if(testChallengeStageHint)testChallengeStageHint.textContent=challengeStageDisplayLabel(challengeStage,{challengeNumber:true});
+ if(testExpertPlaysHint)testExpertPlaysHint.textContent=expertPlayHintText(testExpertPlays?.value||cfg.expertPlays||DEFAULT_TEST_CFG.expertPlays);
  if(testChallenge)testChallenge.checked=startKind==='challenge';
 }
 function syncAudioMixControls(){
@@ -1904,6 +1918,7 @@ function loadTestCfg(){
   const startKind=sanitizeStartKind(raw.startKind||(raw.challenge?'challenge':'level'));
   testCfgCache={
    startKind,
+   expertPlays:sanitizeExpertPlayPersona(raw.expertPlays||DEFAULT_TEST_CFG.expertPlays),
    stage:cl(+raw.stage||DEFAULT_TEST_CFG.stage,1,99)|0,
    challengeStage:cl(+raw.challengeStage||DEFAULT_TEST_CFG.challengeStage,1,99)|0,
    ships:cl(+raw.ships||DEFAULT_TEST_CFG.ships,1,9)|0,
@@ -1925,6 +1940,7 @@ function saveTestCfg(){
  const startCfg=productionStartStateLocked()
   ? {
     startKind:sanitizeStartKind(currentCfg.startKind||(currentCfg.challenge?'challenge':'level')),
+    expertPlays:sanitizeExpertPlayPersona(currentCfg.expertPlays||DEFAULT_TEST_CFG.expertPlays),
     stage:cl(+currentCfg.stage||DEFAULT_TEST_CFG.stage,1,99)|0,
     challengeStage:cl(+currentCfg.challengeStage||DEFAULT_TEST_CFG.challengeStage,1,99)|0,
     ships:cl(+currentCfg.ships||DEFAULT_TEST_CFG.ships,1,9)|0,
@@ -1934,6 +1950,7 @@ function saveTestCfg(){
    }
   : {
     startKind:sanitizeStartKind(testStartKind?.value||(testChallenge?.checked?'challenge':'level')),
+    expertPlays:sanitizeExpertPlayPersona(testExpertPlays?.value||DEFAULT_TEST_CFG.expertPlays),
     stage:cl(+testStage.value||DEFAULT_TEST_CFG.stage,1,99)|0,
     challengeStage:cl(+testChallengeStage?.value||DEFAULT_TEST_CFG.challengeStage,1,99)|0,
     ships:cl(+testShips.value||DEFAULT_TEST_CFG.ships,1,9)|0,
@@ -1943,6 +1960,7 @@ function saveTestCfg(){
    };
  const cfg={
   startKind:startCfg.startKind,
+  expertPlays:startCfg.expertPlays,
   stage:startCfg.stage,
   challengeStage:startCfg.challengeStage,
   ships:startCfg.ships,
@@ -2518,7 +2536,7 @@ if(gameSoundVolumeControl){
  gameSoundVolumeControl.addEventListener('input',()=>setGameSoundVolume((+gameSoundVolumeControl.value||0)/100,{log:0,source:'developer_panel'}));
  gameSoundVolumeControl.addEventListener('change',()=>setGameSoundVolume((+gameSoundVolumeControl.value||0)/100,{log:1,source:'developer_panel'}));
 }
-for(const el of [testStartKind,testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,audioTheme,graphicsTheme,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
+for(const el of [testStartKind,testExpertPlays,testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,audioTheme,graphicsTheme,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
 for(const el of [testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring])if(el)el.addEventListener('input',saveTestCfg);
 if(rootMode)rootMode.addEventListener('input',()=>{
  developerRootMode=String(rootMode.value||'').trim()===ROOT_UNLOCK_CODE;

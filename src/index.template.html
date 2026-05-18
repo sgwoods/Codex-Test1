@@ -183,6 +183,17 @@
           </select>
         </div>
         <div class="settingsField settingsFieldCompact">
+          <label for="testExpertPlays">Expert Plays</label>
+          <select id="testExpertPlays">
+            <option value="human" selected>Human Pilot</option>
+            <option value="novice">Beginner Plays</option>
+            <option value="advanced">Intermediate Plays</option>
+            <option value="expert">Expert Plays</option>
+            <option value="professional">Professional Plays</option>
+          </select>
+          <div id="testExpertPlaysHint" class="settingsInlineHint">Human controls this start.</div>
+        </div>
+        <div class="settingsField settingsFieldCompact">
           <label for="testStage">Start Level</label>
           <input id="testStage" type="number" min="1" max="99" step="1" value="1" />
         </div>
@@ -205,7 +216,7 @@
         </div>
       </div>
       <input id="testChallenge" type="checkbox" hidden aria-hidden="true" />
-      <div id="testHint">Applies on next game start only. Levels and Challenging Stages are separate; a challenge start uses labels like Challenging Stage 1 (Levels 3-4), not Level 4. Set either score to 0 to disable that bonus-ship award.</div>
+      <div id="testHint">Applies on next game start only. Levels and Challenging Stages are separate; a challenge start uses labels like Challenging Stage 1 (Levels 3-4), not Level 4. Expert Plays starts the selected persona in Watch Mode for the chosen start point. Set either score to 0 to disable that bonus-ship award.</div>
     </div>
     <div id="settingsMeta">
       <span id="settingsRuntime">Platform Platinum · Pack pending</span>

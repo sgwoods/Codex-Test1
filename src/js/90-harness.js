@@ -11,10 +11,11 @@ window.__galagaHarness__={
    if(!cfg.autoVideo&&VIDEO_REC.active&&typeof stopRunRecording==='function')stopRunRecording();
   }
   if(typeof cfg.debugCarry==='boolean')window.setCarryDebug(!!cfg.debugCarry,'harness-start');
- if(cfg.stage||cfg.ships||cfg.challenge!==undefined||cfg.startKind!==undefined||cfg.challengeStage!==undefined||cfg.extendFirst!==undefined||cfg.extendRecurring!==undefined||cfg.audioTheme!==undefined||cfg.graphicsTheme!==undefined||cfg.starfieldIntensity!==undefined||cfg.starfieldSpeed!==undefined){
+ if(cfg.stage||cfg.ships||cfg.challenge!==undefined||cfg.startKind!==undefined||cfg.challengeStage!==undefined||cfg.expertPlays!==undefined||cfg.extendFirst!==undefined||cfg.extendRecurring!==undefined||cfg.audioTheme!==undefined||cfg.graphicsTheme!==undefined||cfg.starfieldIntensity!==undefined||cfg.starfieldSpeed!==undefined){
   const currentCfg=loadTestCfg();
   const nextStartKind=cfg.startKind!==undefined?sanitizeStartKind(cfg.startKind):(cfg.challenge?'challenge':'level');
   if(typeof testStartKind!=='undefined'&&testStartKind)testStartKind.value=nextStartKind;
+  if(typeof testExpertPlays!=='undefined'&&testExpertPlays)testExpertPlays.value=cfg.expertPlays!==undefined?(typeof sanitizeExpertPlayPersona==='function'?sanitizeExpertPlayPersona(cfg.expertPlays):String(cfg.expertPlays||'human')):(currentCfg.expertPlays||'human');
   testStage.value=cl(+cfg.stage||1,1,99)|0;
   if(typeof testChallengeStage!=='undefined'&&testChallengeStage)testChallengeStage.value=cfg.challengeStage!==undefined?cl(+cfg.challengeStage||1,1,99)|0:(currentCfg.challengeStage||1);
   testShips.value=cl(+cfg.ships||3,1,9)|0;
@@ -1608,6 +1609,7 @@ window.__galagaHarness__={
  const currentCfg=loadTestCfg();
   const nextStartKind=cfg.startKind!==undefined?sanitizeStartKind(cfg.startKind):(cfg.challenge?'challenge':'level');
   if(typeof testStartKind!=='undefined'&&testStartKind)testStartKind.value=nextStartKind;
+  if(typeof testExpertPlays!=='undefined'&&testExpertPlays)testExpertPlays.value=cfg.expertPlays!==undefined?(typeof sanitizeExpertPlayPersona==='function'?sanitizeExpertPlayPersona(cfg.expertPlays):String(cfg.expertPlays||'human')):(currentCfg.expertPlays||'human');
   testStage.value=cl(+cfg.stage||1,1,99)|0;
  if(typeof testChallengeStage!=='undefined'&&testChallengeStage)testChallengeStage.value=cfg.challengeStage!==undefined?cl(+cfg.challengeStage||1,1,99)|0:(currentCfg.challengeStage||1);
  testShips.value=cl(+cfg.ships||3,1,9)|0;

@@ -1,5 +1,12 @@
 // Aurora-specific player lifecycle, harness control, and manual movement helpers.
 
+function resolveDeveloperStartWatchPersona(cfg={}){
+ const raw=typeof sanitizeExpertPlayPersona==='function'
+  ? sanitizeExpertPlayPersona(cfg.expertPlays)
+  : String(cfg.expertPlays||'human').trim().toLowerCase();
+ return raw&&raw!=='human'?normalizePlayerTwoPersona(raw):'';
+}
+
 function startAuroraGameplay(){
  if(typeof clearRuntimeLoopFault==='function')clearRuntimeLoopFault();
  stopAttractLoop();
@@ -21,7 +28,9 @@ function startAuroraGameplay(){
  const nextExtendScore=extendFirst>0?extendFirst:(extendRecurring>0?extendRecurring:0);
  setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
  const pendingPlayerTwoTurn=resolvePendingPlayerTwoTurn();
- const watchPersona=pendingPlayerTwoTurn?'':resolveWatchModeStartPersona();
+ const armedWatchPersona=resolveWatchModeStartPersona();
+ const developerWatchPersona=resolveDeveloperStartWatchPersona(cfg);
+ const watchPersona=pendingPlayerTwoTurn?'':(armedWatchPersona||developerWatchPersona);
  const playerTwoRun=pendingPlayerTwoTurn||resolvePlayerTwoStartState();
  aud=1;AC().resume?.();
  gameOverHtml='';gameOverState=null;
@@ -31,7 +40,7 @@ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:
  S.harnessPersona=(watchPersona||(playerTwoRun?.activeTurn==='p2'?playerTwoRun.personaKey:'')||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inputResetHoldT:0,vx:0});
- logEvent('game_start',{persona:S.harnessPersona||null,watchMode:!!S.watchMode,requestedStage:startStage.requestedStage,stage:startStage.stage,startStageMode:startStage.stageMode,startKind:startStage.startKind||'level',challengeStage:startStage.challengeStage||null,displayLabel:startStage.displayLabel||'',forceChallenge:startStage.forceChallenge,playerTwo:playerTwoRun?.enabled?playerTwoSnapshot(playerTwoRun):null});
+ logEvent('game_start',{persona:S.harnessPersona||null,watchMode:!!S.watchMode,developerExpertPlay:developerWatchPersona||'',requestedStage:startStage.requestedStage,stage:startStage.stage,startStageMode:startStage.stageMode,startKind:startStage.startKind||'level',challengeStage:startStage.challengeStage||null,displayLabel:startStage.displayLabel||'',forceChallenge:startStage.forceChallenge,playerTwo:playerTwoRun?.enabled?playerTwoSnapshot(playerTwoRun):null});
  startRunRecording();
  spawnStage();msg.textContent='';
  const openingTiming=(!startStage.forceChallenge&&startStage.stage===1&&usesReferenceTimingModel())
