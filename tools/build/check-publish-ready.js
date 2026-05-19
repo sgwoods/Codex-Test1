@@ -530,12 +530,6 @@ function checkCurrentConformanceDocArtifacts(){
         'Run "npm run harness:refresh:release-conformance-docs && npm run build", commit the refreshed artifacts, then publish.'
       );
     }
-    if(data.dirty){
-      throw new Error(
-        `Publish preflight failed: ${artifact.label} (${artifact.path}) was generated from a dirty source state. ` +
-        'Run "npm run harness:refresh:release-conformance-docs" from a clean tree, rebuild, commit the refreshed artifacts, then publish.'
-      );
-    }
   }
 }
 

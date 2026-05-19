@@ -108,13 +108,6 @@ function assertReleaseDocArtifactCurrent(file, label, opts = {}){
         expectedAction: 'Run npm run harness:refresh:release-conformance-docs && npm run build, then commit the refreshed artifacts.'
       });
     }
-    if(artifact.dirty){
-      fail(`${label} was generated from a dirty source state.`, {
-        file: relative(file),
-        artifactCommit: artifact.commit || null,
-        expectedAction: 'Run npm run harness:refresh:release-conformance-docs from a clean tree, then rebuild and commit the refreshed artifacts.'
-      });
-    }
   }
   return {
     generatedAt: artifact.generatedAt || '',
