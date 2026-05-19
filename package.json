@@ -238,6 +238,7 @@
     "harness:check:galaxy-guardians-one-level-completion": "node tools/harness/check-galaxy-guardians-one-level-completion.js",
     "harness:build:conformance-metrics-overview": "node tools/harness/build-conformance-metrics-overview.js",
     "harness:build:release-conformance-dashboard": "node tools/harness/build-release-conformance-dashboard.js",
+    "harness:refresh:release-conformance-docs": "npm run harness:analyze:conformance-economics && npm run harness:build:release-conformance-dashboard && npm run harness:analyze:application-artifact-conformance",
     "harness:build:dev-conformance-dashboard": "node tools/harness/build-dev-conformance-dashboard-page.js",
     "harness:check:documentation-freshness": "node tools/harness/check-documentation-freshness.js",
     "dev:conformance-dashboard": "node tools/dev/conformance-dashboard-watch.js",

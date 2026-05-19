@@ -483,6 +483,62 @@ function checkDocumentationFreshness(){
   }
 }
 
+function commitMatchesHead(value, acceptedCommits){
+  const commit = String(value || '').trim();
+  if(!commit) return false;
+  return acceptedCommits.some((candidate) => candidate === commit || candidate.startsWith(commit) || commit.startsWith(candidate));
+}
+
+function checkCurrentConformanceDocArtifacts(){
+  const acceptedCommits = git(['rev-list', '--max-count', '2', 'HEAD'])
+    .split('\n')
+    .map((value) => value.trim())
+    .filter(Boolean);
+  const displayHead = acceptedCommits[0] ? acceptedCommits[0].slice(0, 7) : git(['rev-parse', '--short', 'HEAD']);
+  const artifacts = [
+    {
+      label: 'conformance economics artifact',
+      path: path.join(ROOT, 'reference-artifacts', 'analyses', 'conformance-economics', 'latest.json')
+    },
+    {
+      label: 'release conformance dashboard artifact',
+      path: path.join(ROOT, 'reference-artifacts', 'analyses', 'release-conformance-dashboard', 'latest.json')
+    },
+    {
+      label: 'application artifact conformance status',
+      path: path.join(ROOT, 'reference-artifacts', 'analyses', 'application-artifact-conformance', 'latest.json')
+    }
+  ];
+  for(const artifact of artifacts){
+    if(!fs.existsSync(artifact.path)){
+      throw new Error(
+        `Publish preflight failed: missing ${artifact.path}. ` +
+        'Run "npm run harness:refresh:release-conformance-docs && npm run build", commit the refreshed artifacts, then publish.'
+      );
+    }
+    const data = loadJson(artifact.path);
+    if(!Number.isFinite(Date.parse(data.generatedAt || ''))){
+      throw new Error(
+        `Publish preflight failed: ${artifact.path} is missing a valid generatedAt timestamp. ` +
+        'Run "npm run harness:refresh:release-conformance-docs && npm run build", commit the refreshed artifacts, then publish.'
+      );
+    }
+    if(!commitMatchesHead(data.commit, acceptedCommits)){
+      throw new Error(
+        `Publish preflight failed: ${artifact.label} (${artifact.path}) was generated from ${data.commit || 'unknown'}, ` +
+        `but the acceptable release-prep heads are ${acceptedCommits.map((value) => value.slice(0, 7)).join(', ')} (current HEAD ${displayHead}). ` +
+        'Run "npm run harness:refresh:release-conformance-docs && npm run build", commit the refreshed artifacts, then publish.'
+      );
+    }
+    if(data.dirty){
+      throw new Error(
+        `Publish preflight failed: ${artifact.label} (${artifact.path}) was generated from a dirty source state. ` +
+        'Run "npm run harness:refresh:release-conformance-docs" from a clean tree, rebuild, commit the refreshed artifacts, then publish.'
+      );
+    }
+  }
+}
+
 function checkConformanceDashboardArtifacts(cfg){
   const htmlPath = path.join(cfg.dir, 'conformance-dashboard.html');
   const dataPath = path.join(cfg.dir, 'conformance-dashboard-data.json');
@@ -728,6 +784,7 @@ function main(){
   checkReleaseConformanceDocs();
   checkStrategicBetaReviewDoc();
   checkDocumentationFreshness();
+  checkCurrentConformanceDocArtifacts();
   checkArtifacts(cfg);
   checkConformanceDashboardArtifacts(cfg);
   checkDocumentationVisibility(cfg);
@@ -775,5 +832,6 @@ module.exports = {
   checkPublicProjectPageArtifact,
   checkDocumentationVisibility,
   checkStrategicBetaReviewDoc,
-  checkDocumentationFreshness
+  checkDocumentationFreshness,
+  checkCurrentConformanceDocArtifacts
 };

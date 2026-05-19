@@ -1,12 +1,15 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const APP_GUIDE = path.join(ROOT, 'application-guide.json');
 const AURORA_PACK = path.join(ROOT, 'src', 'js', '13-aurora-game-pack.js');
 const GAME_CATALOG = path.join(ROOT, 'GAME_CONFORMANCE_CATALOG.md');
+const CONFORMANCE_ECONOMICS = path.join(ROOT, 'reference-artifacts', 'analyses', 'conformance-economics', 'latest.json');
 const DASHBOARD = path.join(ROOT, 'reference-artifacts', 'analyses', 'release-conformance-dashboard', 'latest.json');
+const APPLICATION_ARTIFACT = path.join(ROOT, 'reference-artifacts', 'analyses', 'application-artifact-conformance', 'latest.json');
 const PERSONA_DISTRIBUTION = path.join(ROOT, 'reference-artifacts', 'analyses', 'persona-performance-distribution', 'latest.json');
 const DOCUMENTATION_PROVENANCE = path.join(ROOT, 'documentation-provenance.json');
 const PUBLIC_TEMPLATE = path.join(ROOT, 'src', 'public', 'aurora-galactica.template.html');
@@ -15,6 +18,7 @@ const APPLICATION_GUIDE_DIST = path.join(ROOT, 'dist', 'dev', 'application-guide
 const RELEASE_NOTES_DIST = path.join(ROOT, 'dist', 'dev', 'release-notes.html');
 const DIST_PUBLIC_PAGE = path.join(ROOT, 'dist', 'dev', 'public-project-page.html');
 const LOCAL_PUBLIC_PREVIEW = path.join(ROOT, 'local-dev', 'public-aurora-galactica-preview.html');
+const CONFORMANCE_DASHBOARD_DATA_DIST = path.join(ROOT, 'dist', 'dev', 'conformance-dashboard-data.json');
 
 const CHECKED_AUDIO_EVENTS = [
   { entryId: 'formation-arrival', cue: 'formationArrival' },
@@ -30,6 +34,14 @@ function read(file){
 
 function readJson(file){
   return JSON.parse(read(file));
+}
+
+function git(args){
+  const out = execFileSync('git', ['-C', ROOT, ...args], {
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'pipe']
+  });
+  return typeof out === 'string' ? out.trim() : '';
 }
 
 function fail(message, extra = {}){
@@ -71,6 +83,45 @@ function publicSyncMarker(html){
 
 function relative(file){
   return path.relative(ROOT, file).replace(/\\/g, '/');
+}
+
+function commitMatchesHead(value, acceptedCommits){
+  const commit = String(value || '').trim();
+  if(!commit) return false;
+  return acceptedCommits.some((candidate) => candidate === commit || candidate.startsWith(commit) || commit.startsWith(candidate));
+}
+
+function assertReleaseDocArtifactCurrent(file, label, opts = {}){
+  const artifact = readJson(file);
+  if(!Number.isFinite(Date.parse(artifact.generatedAt || ''))){
+    fail(`${label} is missing a valid generatedAt timestamp.`, {
+      file: relative(file),
+      expectedAction: 'Run npm run harness:refresh:release-conformance-docs.'
+    });
+  }
+  if(opts.repoClean){
+    if(!commitMatchesHead(artifact.commit, opts.headShort, opts.headFull)){
+      fail(`${label} does not match the current source head.`, {
+        file: relative(file),
+        artifactCommit: artifact.commit || null,
+        acceptedHeads: opts.acceptedCommits,
+        expectedAction: 'Run npm run harness:refresh:release-conformance-docs && npm run build, then commit the refreshed artifacts.'
+      });
+    }
+    if(artifact.dirty){
+      fail(`${label} was generated from a dirty source state.`, {
+        file: relative(file),
+        artifactCommit: artifact.commit || null,
+        expectedAction: 'Run npm run harness:refresh:release-conformance-docs from a clean tree, then rebuild and commit the refreshed artifacts.'
+      });
+    }
+  }
+  return {
+    generatedAt: artifact.generatedAt || '',
+    commit: artifact.commit || '',
+    branch: artifact.branch || '',
+    dirty: !!artifact.dirty
+  };
 }
 
 function assertDocumentationProvenance(provenance){
@@ -128,7 +179,25 @@ function assertDocumentationProvenance(provenance){
 const guide = readJson(APP_GUIDE);
 const source = read(AURORA_PACK);
 const catalog = read(GAME_CATALOG);
+const repoHeadShort = git(['rev-parse', '--short', 'HEAD']);
+const acceptedArtifactCommits = git(['rev-list', '--max-count', '2', 'HEAD'])
+  .split('\n')
+  .map((value) => value.trim())
+  .filter(Boolean);
+const repoClean = !git(['status', '--short']);
+const conformanceEconomicsMeta = assertReleaseDocArtifactCurrent(CONFORMANCE_ECONOMICS, 'Conformance economics artifact', {
+  repoClean,
+  acceptedCommits: acceptedArtifactCommits
+});
 const dashboard = readJson(DASHBOARD);
+const releaseDashboardMeta = assertReleaseDocArtifactCurrent(DASHBOARD, 'Release conformance dashboard artifact', {
+  repoClean,
+  acceptedCommits: acceptedArtifactCommits
+});
+const applicationArtifactMeta = assertReleaseDocArtifactCurrent(APPLICATION_ARTIFACT, 'Application artifact conformance status', {
+  repoClean,
+  acceptedCommits: acceptedArtifactCommits
+});
 const personaDistribution = readJson(PERSONA_DISTRIBUTION);
 const provenance = readJson(DOCUMENTATION_PROVENANCE);
 
@@ -256,6 +325,21 @@ if(fs.existsSync(APPLICATION_GUIDE_DIST)){
   }
 }
 
+if(fs.existsSync(CONFORMANCE_DASHBOARD_DATA_DIST)){
+  const distDashboard = readJson(CONFORMANCE_DASHBOARD_DATA_DIST);
+  if((distDashboard.generatedAt || '') !== (dashboard.generatedAt || '') || String(distDashboard.commit || '') !== String(dashboard.commit || '')){
+    fail('dist/dev conformance dashboard data is stale against release-conformance-dashboard/latest.json.', {
+      distFile: relative(CONFORMANCE_DASHBOARD_DATA_DIST),
+      sourceArtifact: relative(DASHBOARD),
+      distGeneratedAt: distDashboard.generatedAt || null,
+      sourceGeneratedAt: dashboard.generatedAt || null,
+      distCommit: distDashboard.commit || null,
+      sourceCommit: dashboard.commit || null,
+      expectedAction: 'Run npm run build after refreshing the release conformance dashboard artifact.'
+    });
+  }
+}
+
 if(fs.existsSync(RELEASE_NOTES_DIST)){
   const releaseNotesHtml = read(RELEASE_NOTES_DIST);
   const requiredReleaseNotesText = [
@@ -278,6 +362,10 @@ console.log(JSON.stringify({
   checkedAudioEvents: CHECKED_AUDIO_EVENTS.length,
   audioCurrent,
   personaRuns: personaDistribution.runCount || 0,
+  repoClean,
+  conformanceEconomics: conformanceEconomicsMeta,
+  releaseDashboard: releaseDashboardMeta,
+  applicationArtifactConformance: applicationArtifactMeta,
   provenanceSurfaces: provenance.surfaces.length,
   catalog: path.relative(ROOT, GAME_CATALOG),
   applicationGuide: path.relative(ROOT, APP_GUIDE),

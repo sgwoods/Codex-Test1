@@ -177,6 +177,34 @@ Meaning:
 - hosted `/production`
   - public stable promise
 
+## Conformance Documentation Freshness
+
+Release notes alone are not enough.
+
+If a candidate claims new conformance work, ingestion-process improvements, or
+updated release-readiness evidence, the generated conformance documentation must
+move with it.
+
+The minimum release-owned refresh bundle is:
+
+- `reference-artifacts/analyses/conformance-economics/latest.json`
+- `reference-artifacts/analyses/release-conformance-dashboard/latest.json`
+- `reference-artifacts/analyses/application-artifact-conformance/latest.json`
+
+The standard refresh command is:
+
+- `npm run harness:refresh:release-conformance-docs`
+
+Then:
+
+- `npm run build`
+- commit the refreshed artifacts
+- run the normal publish preflight
+
+The intended effect is simple: if `/dev`, `/beta`, or `/production` tells a
+human that conformance has moved, the hosted documentation should not still be
+quietly reading from an older analysis snapshot.
+
 See also:
 
 - [RELEASE_LANE_MODEL.md](RELEASE_LANE_MODEL.md)

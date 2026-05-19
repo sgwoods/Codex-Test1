@@ -141,6 +141,30 @@ This was not enforced strongly enough before `1.2.0` reached hosted
 
 From now on, it should be treated as part of the release contract.
 
+## Release Conformance Documentation Freshness
+
+Release-facing conformance surfaces now have a stricter rule:
+
+- if hosted docs or dashboards claim a current conformance read, the underlying
+  release-owned analysis artifacts must be intentionally refreshed as part of
+  release prep
+- specifically:
+  - `reference-artifacts/analyses/conformance-economics/latest.json`
+  - `reference-artifacts/analyses/release-conformance-dashboard/latest.json`
+  - `reference-artifacts/analyses/application-artifact-conformance/latest.json`
+
+The practical refresh path is:
+
+- `npm run harness:refresh:release-conformance-docs`
+- `npm run build`
+
+Then commit the refreshed artifacts before any serious `/dev`, `/beta`, or
+`/production` publish attempt.
+
+The publish preflight and documentation-freshness checks should now fail if
+those release-owned conformance artifacts are obviously stale against the
+current release-prep head.
+
 ## Front-Door Copy Gate
 
 Startup, initiation, and wait-mode copy is part of the release surface.
