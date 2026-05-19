@@ -80,22 +80,22 @@
       "id": "source-manifest",
       "label": "Source Manifest",
       "goal": "Register lawful target sources and classify them as scoring targets, human-review context, secondary validation, or planning-only references.",
-      "currentStatus": "Galaga alien close-ups are ingested and classified; general sprite sheet is the strongest current target candidate.",
+      "currentStatus": "Galaga alien close-ups are ingested and classified; general sprite sheet is the strongest current static target candidate; a segmented alien motion/pulse video is now registered as a target-validation and temporal-reference source.",
       "nextAction": "Keep source authority explicit when new sprite sheets, gameplay clips, posters, or manual screenshots enter the project."
     },
     {
       "id": "crop-box-manifest",
       "label": "Crop-Box Manifest",
       "goal": "Define bounding boxes for player, bee, butterfly, boss, captured fighter, projectiles, tractor beam, explosions, challenge aliens, and each important pose frame.",
-      "currentStatus": "First-pass region manifest exists at reference-artifacts/ingestion/galaga-alien-visual-reference/crop-box-manifest-0.1.json, generated review previews exist at reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json, and accepted first-pass per-role/per-pose target crops now exist at reference-artifacts/analyses/galaga-alien-target-crops/latest.json.",
-      "nextAction": "Review any disputed source-sheet cells, then keep the promoted crop library current as new target sources or better source crops are ingested."
+      "currentStatus": "First-pass region manifest exists at reference-artifacts/ingestion/galaga-alien-visual-reference/crop-box-manifest-0.1.json, generated review previews exist at reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json, and accepted first-pass per-role/per-pose target crops now exist at reference-artifacts/analyses/galaga-alien-target-crops/latest.json. Human review has found polluted crop evidence for at least the boss-line row, so the accepted-first-pass library must be treated as provisional.",
+      "nextAction": "Use the segmented motion reference and supplied clean pixel examples to recrop boss, bee, butterfly, and fighter targets before making additional runtime sprite changes."
     },
     {
       "id": "pose-and-motion-targets",
       "label": "Pose And Motion Targets",
       "goal": "Group static crops into temporal identities: flap cycles, dive turns, boss damage, capture/rescue, dual fighter, projectiles, and explosions.",
-      "currentStatus": "Static model and runtime crop scoring exist, and a 33-crop/7-role promoted source-sheet library now supplies multi-pose static targets. Seed runtime windows now cover all four planned motion axes: flap phase pairs, full flap cadence, dive/rotation poses, capture/carry/dual transitions, and first-pass impact/explosion event crops.",
-      "nextAction": "Promote target-frame temporal sequences for flap cadence, projectile/impact/explosion lifecycle, damage pulse, and challenge specialty motion before raising mature sprite conformance claims."
+      "currentStatus": "Static model and runtime crop scoring exist, and a 33-crop/7-role promoted source-sheet library now supplies multi-pose static targets. Seed runtime windows now cover all four planned motion axes: flap phase pairs, full flap cadence, dive/rotation poses, capture/carry/dual transitions, and first-pass impact/explosion event crops. A segmented alien motion/pulse video now provides cleaner human-readable pulse/cadence evidence for Boss, Butterfly, Bee, specialty aliens, Fighter, and Tractor Beam.",
+      "nextAction": "Extract clean target-frame pulse pairs from the motion reference for Bee, Butterfly, and Boss, then score Aurora runtime cadence against those target sequences."
     },
     {
       "id": "runtime-renderer-path",
@@ -178,6 +178,14 @@
       "path": "reference-artifacts/analyses/galaga-alien-target-crops/latest.json"
     },
     {
+      "label": "Galaga alien motion reference report",
+      "path": "GALAGA_ALIEN_MOTION_REFERENCE.md"
+    },
+    {
+      "label": "Galaga alien motion reference analysis",
+      "path": "reference-artifacts/analyses/galaga-alien-motion-reference/latest.json"
+    },
+    {
       "label": "Runtime static sprite conformance",
       "path": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json"
     },
@@ -194,5 +202,5 @@
       "path": "GALAGA_TARGET_ARTIFACT_COVERAGE.md"
     }
   ],
-  "nextBestStep": "Use the first-pass runtime-vs-promoted-target-crop and impact/explosion mismatch data to improve Aurora sprite geometry, event feedback, and target mappings; then add target-frame temporal scoring for flap, dive, damage, capture, rescue, projectile, explosion, and challenge-stage specialty behavior."
+  "nextBestStep": "Clean and recrop the target evidence first, starting with boss, bee, butterfly, and fighter, using the segmented motion/pulse reference plus supplied clean pixel examples. Then regenerate runtime-vs-target scoring and only tune Aurora sprites against the corrected evidence."
 }

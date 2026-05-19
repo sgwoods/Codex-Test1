@@ -71,6 +71,7 @@ const CHALLENGE_STAGE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'anal
 const LEVEL_VISUAL_CONFORMANCE_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'level-visual-conformance-index', 'latest.json');
 const GALAGA_TARGET_ARTIFACT_COVERAGE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-artifact-coverage', 'latest.json');
 const GALAGA_ALIEN_VISUAL_REFERENCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-visual-reference', 'latest.json');
+const GALAGA_ALIEN_MOTION_REFERENCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-motion-reference', 'latest.json');
 const GALAGA_ALIEN_CROP_PREVIEWS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-visual-crop-previews', 'latest.json');
 const GALAGA_ALIEN_TARGET_CROPS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-target-crops', 'latest.json');
 const AURORA_RUNTIME_SPRITE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-runtime-sprite-conformance', 'latest.json');
@@ -3112,6 +3113,7 @@ let challengeStageConformanceCache = null;
 let levelVisualConformanceIndexCache = null;
 let galagaTargetArtifactCoverageCache = null;
 let galagaAlienVisualReferenceCache = null;
+let galagaAlienMotionReferenceCache = null;
 let galagaAlienCropPreviewsCache = null;
 let galagaAlienTargetCropsCache = null;
 let auroraRuntimeSpriteConformanceCache = null;
@@ -3166,6 +3168,24 @@ function loadGalagaAlienVisualReference(){
     galagaAlienVisualReferenceCache = { entries: [], roleCoverage: [], summary: {} };
   }
   return galagaAlienVisualReferenceCache;
+}
+
+function loadGalagaAlienMotionReference(){
+  if(galagaAlienMotionReferenceCache) return galagaAlienMotionReferenceCache;
+  if(!fs.existsSync(GALAGA_ALIEN_MOTION_REFERENCE)){
+    galagaAlienMotionReferenceCache = { roleTaxonomy: [], media: {}, summary: '' };
+    return galagaAlienMotionReferenceCache;
+  }
+  try {
+    const artifact = readJson(GALAGA_ALIEN_MOTION_REFERENCE);
+    galagaAlienMotionReferenceCache = Object.assign({}, artifact, {
+      roleTaxonomy: Array.isArray(artifact.roleTaxonomy) ? artifact.roleTaxonomy : [],
+      media: artifact.media || {}
+    });
+  } catch (err) {
+    galagaAlienMotionReferenceCache = { roleTaxonomy: [], media: {}, summary: '' };
+  }
+  return galagaAlienMotionReferenceCache;
 }
 
 function loadGalagaAlienCropPreviews(){
@@ -3934,11 +3954,17 @@ function renderMediaVideo(item){
   const label = item.label || 'Evidence video';
   const alt = item.alt || label;
   const note = item.note || '10-second evidence clip for inline motion review.';
+  const ext = path.extname(String(item.src || '')).toLowerCase();
+  const type = ext === '.mp4' || ext === '.m4v'
+    ? 'video/mp4'
+    : ext === '.mov'
+      ? 'video/quicktime'
+      : 'video/webm';
   return `
     <div class="catalogMediaItem">
       <span class="catalogMediaLabel">${esc(label)}</span>
       <video class="catalogMediaVideo" controls preload="metadata"${poster ? ` poster="${esc(poster)}"` : ''} aria-label="${esc(alt)}">
-        <source src="${esc(href)}" type="video/webm">
+        <source src="${esc(href)}" type="${esc(type)}">
         Your browser cannot play this evidence video. Open <a href="${esc(href)}">the clip</a> directly.
       </video>
       <span class="catalogMediaNote">${esc(note)}</span>
@@ -4111,6 +4137,28 @@ function renderAlienVisualReferenceRows(artifact){
       <td>${(entry.roleKeys || []).map(role => `<code>${esc(role)}</code>`).join('<br>')}</td>
       <td><strong>${esc(entry.targetUse || '')}</strong><br><span class="docMeta">${esc(entry.authority || '')}</span></td>
       <td>${esc(entry.notes || '')}</td>
+    </tr>
+  `).join('\n');
+}
+
+function renderGalagaAlienMotionRoleRows(report){
+  const roles = Array.isArray(report?.roleTaxonomy) ? report.roleTaxonomy : [];
+  if(!roles.length){
+    return `
+    <tr>
+      <td colspan="4"><span class="docMeta">Alien motion reference pending. Run <code>npm run harness:analyze:galaga-alien-motion-reference</code>.</span></td>
+    </tr>`;
+  }
+  return roles.map((role) => `
+    <tr>
+      <td><strong>${esc(role.label || role.roleKey || '')}</strong><br><span class="docMeta"><code>${esc(role.roleKey || '')}</code><br>${esc((role.aliases || []).join(', '))}</span></td>
+      <td>${esc(role.referenceUse || '')}</td>
+      <td>${esc(role.nextExtraction || '')}</td>
+      <td>${role.roleKey === 'boss-galaga'
+        ? 'Highest priority: current target evidence has visible crop pollution.'
+        : role.roleKey === 'bee-zako' || role.roleKey === 'butterfly-escort'
+          ? 'High priority: core formation aliens need clean pulse pairs.'
+          : 'Use after core formation roles are corrected.'}</td>
     </tr>
   `).join('\n');
 }
@@ -4482,6 +4530,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'artifact-conformance-status', title: 'Artifact Conformance Status' },
     { id: 'target-artifact-coverage', title: 'Target Artifact Coverage' },
     { id: 'alien-visual-reference-pack', title: 'Alien Visual References' },
+    { id: 'galaga-alien-motion-reference', title: 'Alien Motion Reference' },
     { id: 'sprite-conformance-variation-plan', title: 'Sprite Conformance Plan' },
     { id: 'conformance-alien-index', title: 'Alien Conformance Index' },
     { id: 'conformance-audio-index', title: 'Audio Conformance Index' },
@@ -4622,6 +4671,8 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const galagaAlienVisualReference = loadGalagaAlienVisualReference();
   const alienVisualReferenceSummary = galagaAlienVisualReference.summary || {};
   const alienVisualReferenceRows = renderAlienVisualReferenceRows(galagaAlienVisualReference);
+  const galagaAlienMotionReference = loadGalagaAlienMotionReference();
+  const galagaAlienMotionRoleRows = renderGalagaAlienMotionRoleRows(galagaAlienMotionReference);
   const spriteConformanceVariationPlan = loadSpriteConformanceVariationPlan();
   const spriteConformanceLaneRows = renderSpriteConformanceLaneRows(spriteConformanceVariationPlan);
   const spriteConformancePipelineRows = renderSpriteConformancePipelineRows(spriteConformanceVariationPlan);
@@ -5009,6 +5060,59 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               </thead>
               <tbody>
                 ${alienVisualReferenceRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="galaga-alien-motion-reference">
+          <div class="sectionHeader">
+            <h2>Alien Motion Reference</h2>
+            <p>Segmented Galaga alien video reference for pulse cadence, role taxonomy, and clean human-readable sprite identity. This sits between static crop extraction and gameplay trajectory scoring: it helps us see whether the sprite identities move and pulse like the target before we promote a conformance claim.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Current read:</strong> ${esc(galagaAlienMotionReference.status || 'pending')}. ${esc(galagaAlienMotionReference.summary || 'Motion reference analysis pending.')}</p>
+            <p><strong>Conformance use:</strong> ${esc(galagaAlienMotionReference.conformanceRead || 'Use this reference to validate crop boxes and seed temporal sprite scoring.')}</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-motion-reference/latest.json</code>. <strong>Readable report:</strong> <code>GALAGA_ALIEN_MOTION_REFERENCE.md</code>. <strong>Generated:</strong> ${esc(galagaAlienMotionReference.generatedAt || 'pending')}.</p>
+            <div class="metricGrid">
+              <div class="metricCard"><span class="metricLabel">Duration</span><strong>${esc(galagaAlienMotionReference.video?.durationSeconds ?? 'n/a')}s</strong><span>${esc(galagaAlienMotionReference.video?.frameRate || 'frame rate pending')}</span></div>
+              <div class="metricCard"><span class="metricLabel">Frame Size</span><strong>${esc(galagaAlienMotionReference.video?.width || 0)}x${esc(galagaAlienMotionReference.video?.height || 0)}</strong><span>source video pixels</span></div>
+              <div class="metricCard"><span class="metricLabel">Role Families</span><strong>${esc((galagaAlienMotionReference.roleTaxonomy || []).length)}</strong><span>taxonomy rows</span></div>
+              <div class="metricCard"><span class="metricLabel">Next Fix</span><strong>clean crops</strong><span>boss, bee, butterfly first</span></div>
+            </div>
+          </div>
+          <div class="catalogMedia" style="margin-top:16px;">
+            <div class="catalogMediaGrid">
+              ${renderMediaVideo({
+                label: 'Segmented alien pulse reference video',
+                src: galagaAlienMotionReference.media?.inlineVideo,
+                poster: galagaAlienMotionReference.media?.contactSheet,
+                note: 'User-supplied segmented Galaga alien reference showing named roles and pulse/motion phases.'
+              })}
+              ${renderMediaImage({
+                label: 'Alien pulse contact sheet',
+                src: galagaAlienMotionReference.media?.contactSheet,
+                note: '1 fps review sheet for quickly scanning the whole segmented video.'
+              })}
+              ${renderMediaImage({
+                label: 'Alien pulse motion sheet',
+                src: galagaAlienMotionReference.media?.motionSheet,
+                note: '2 fps review sheet for inspecting pulse cadence and transition frames.'
+              })}
+            </div>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Reference Use</th>
+                  <th>Next Extraction</th>
+                  <th>Priority Read</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${galagaAlienMotionRoleRows}
               </tbody>
             </table>
           </div>

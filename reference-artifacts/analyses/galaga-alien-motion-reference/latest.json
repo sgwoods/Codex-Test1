@@ -1,0 +1,131 @@
+{
+  "artifactType": "galaga-alien-motion-reference",
+  "version": "0.1",
+  "generatedAt": "2026-05-19T16:46:29.967Z",
+  "status": "ingested-reference-motion-taxonomy",
+  "summary": "User-supplied Galaga alien motion/pulse video ingested as a durable sprite-motion reference for taxonomy, pulse cadence, and clean role-silhouette review.",
+  "sourceVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+  "report": "GALAGA_ALIEN_MOTION_REFERENCE.md",
+  "video": {
+    "durationSeconds": 20.533,
+    "width": 576,
+    "height": 576,
+    "frameRate": "30 fps",
+    "frameCount": 616,
+    "sourceAuthority": "user-supplied segmented Galaga alien movement reference"
+  },
+  "media": {
+    "contactSheet": "reference-artifacts/analyses/galaga-alien-motion-reference/latest-media/alien-pulse-contact-sheet-1fps.png",
+    "motionSheet": "reference-artifacts/analyses/galaga-alien-motion-reference/latest-media/alien-pulse-motion-sheet-2fps.png",
+    "inlineVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4"
+  },
+  "roleTaxonomy": [
+    {
+      "roleKey": "player-fighter",
+      "label": "Fighter",
+      "aliases": [
+        "Player fighter",
+        "captured fighter",
+        "dual fighter"
+      ],
+      "referenceUse": "Clean player silhouette, red/white/blue color placement, capture/rescue meaning, dual-fighter context.",
+      "nextExtraction": "Extract front, captured-red, and dual-fighter pulse/context crops."
+    },
+    {
+      "roleKey": "bee-zako",
+      "label": "Bee",
+      "aliases": [
+        "Zako",
+        "attack drone"
+      ],
+      "referenceUse": "Formation drone role, flank/wing pulse, small high-count enemy identity.",
+      "nextExtraction": "Extract closed/open pulse frames and score against Aurora bee-line cadence."
+    },
+    {
+      "roleKey": "butterfly-escort",
+      "label": "Butterfly",
+      "aliases": [
+        "Leader convoy",
+        "escort"
+      ],
+      "referenceUse": "Red/white/blue block silhouette and leader-escort pulse identity.",
+      "nextExtraction": "Extract closed/open pulse frames and dive silhouette target."
+    },
+    {
+      "roleKey": "boss-galaga",
+      "label": "Boss",
+      "aliases": [
+        "Boss Galaga",
+        "squad leader"
+      ],
+      "referenceUse": "Boss wing/body shape, open/closed pulse, capture-beam host context, two-hit target identity.",
+      "nextExtraction": "Replace polluted boss crop targets with clean pulse frames and damage-state placeholders."
+    },
+    {
+      "roleKey": "scorpion",
+      "label": "Scorpion",
+      "aliases": [
+        "Morph target"
+      ],
+      "referenceUse": "Later-round morph target taxonomy and distinctive yellow/cyan/red silhouette.",
+      "nextExtraction": "Extract morph target front pose and any pulse frame available."
+    },
+    {
+      "roleKey": "bosconian",
+      "label": "Bosconian-style morph",
+      "aliases": [
+        "Bosconian",
+        "green morph target"
+      ],
+      "referenceUse": "Later-round morph novelty role and green/yellow/red color grammar.",
+      "nextExtraction": "Extract front pose for role taxonomy and future morph scoring."
+    },
+    {
+      "roleKey": "galaxian",
+      "label": "Galaxian",
+      "aliases": [
+        "Galaxian morph target"
+      ],
+      "referenceUse": "Later-round morph novelty and classic Galaxian callback silhouette.",
+      "nextExtraction": "Extract front pose and compare to Aurora specialty enemy families."
+    },
+    {
+      "roleKey": "dragonfly",
+      "label": "Dragonfly",
+      "aliases": [
+        "Challenge-round bonus target"
+      ],
+      "referenceUse": "Challenge-only alien identity and non-combat bonus-stage target shape.",
+      "nextExtraction": "Extract front pose and challenge-stage movement/pulse sample."
+    },
+    {
+      "roleKey": "satellite",
+      "label": "Satellite",
+      "aliases": [
+        "Challenge-round bonus target"
+      ],
+      "referenceUse": "Challenge-only alien identity, rotation-like silhouette, and late-stage novelty.",
+      "nextExtraction": "Extract front/rotation pulse sequence for challenge-stage scoring."
+    },
+    {
+      "roleKey": "starship",
+      "label": "Starship",
+      "aliases": [
+        "Challenge-round bonus target"
+      ],
+      "referenceUse": "Challenge-only alien identity and large blue/red target silhouette.",
+      "nextExtraction": "Extract front pose and compare against Aurora challenge-mosquito/starship proxies."
+    },
+    {
+      "roleKey": "tractor-beam",
+      "label": "Tractor Beam",
+      "aliases": [
+        "Capture beam"
+      ],
+      "referenceUse": "Beam geometry and capture-state screen grammar.",
+      "nextExtraction": "Extract beam width sequence for capture lifecycle visual scoring."
+    }
+  ],
+  "conformanceRead": "This artifact is stronger for human-readable taxonomy, pulse cadence, and clean silhouette targets than the currently polluted crop boxes in some rows. It should not replace source-sheet exact crops alone; it should validate and correct target crops, then seed temporal pulse/cadence scoring.",
+  "nextBestStep": "Use the motion sheet to extract clean per-role pulse pairs for Bee, Butterfly, and Boss first; then regenerate the runtime-vs-target table so bad crop boxes cannot masquerade as sprite conformance evidence."
+}
