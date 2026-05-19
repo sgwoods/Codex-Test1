@@ -295,13 +295,15 @@ const TARGET_EXPLOSION_PALETTE=Object.freeze({
 
 const AURORA_CONFORMANCE_PIXELS=Object.freeze({
  butterfly:Object.freeze({
-  a:[[0,1],[1,1],[10,1],[11,1],[0,2],[1,2],[10,2],[11,2],[0,3],[1,3],[10,3],[11,3],[0,4],[1,4],[10,4],[11,4],[0,5],[1,5],[2,5],[3,5],[8,5],[9,5],[10,5],[11,5],[0,6],[1,6],[10,6],[11,6],[0,7],[1,7],[10,7],[11,7],[0,8],[1,8],[10,8],[11,8]],
-  b:[[4,2],[5,2],[6,2],[7,2],[3,3],[4,3],[5,3],[6,3],[7,3],[8,3],[3,4],[4,4],[5,4],[6,4],[7,4],[8,4],[4,5],[5,5],[6,5],[7,5],[4,6],[5,6],[6,6],[7,6]],
-  c:[[5,0],[7,0],[5,1],[7,1],[4,6],[5,6],[6,6],[7,6],[4,7],[5,7],[6,7],[7,7],[5,8],[6,8],[5,9],[6,9]]
+  a:[[0,0],[7,0],[0,1],[1,1],[6,1],[7,1],[0,2],[1,2],[6,2],[7,2],[0,3],[1,3],[6,3],[7,3],[0,4],[1,4],[6,4],[7,4],[0,5],[1,5],[6,5],[7,5]],
+  b:[[3,0],[4,0],[2,1],[3,1],[4,1],[5,1],[2,2],[3,2],[4,2],[5,2],[3,3],[4,3],[3,4],[4,4]],
+  c:[[3,5],[4,5],[2,6],[3,6],[4,6],[5,6]]
  })
 });
 
 const TARGET_PIXEL_ASPECT_X=1.14;
+const TARGET_REFERENCE_ENEMY_SCALE=0.84;
+const TARGET_REFERENCE_BOSS_SCALE=0.88;
 
 function drawTargetSpriteRows(rows,palette,scale=1,offsetX=0,offsetY=0,opts={}){
  if(!Array.isArray(rows)||!rows.length)return false;
@@ -336,14 +338,14 @@ function referencePixelSpritesEnabled(){
 
 function drawTargetEnemySprite(e,flap){
  if(!referencePixelSpritesEnabled())return false;
- if(e?.fam==='dragonfly')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeGreen,TARGET_SPRITE_PALETTES.challengeGreen,1);
- if(e?.fam==='mosquito')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeYellow,TARGET_SPRITE_PALETTES.challengeYellow,1);
- if(e?.fam==='scorpion')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeMagenta,TARGET_SPRITE_PALETTES.challengeMagenta,1);
- if(e?.fam==='stingray'||e?.fam==='crown')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeBlueYellow,TARGET_SPRITE_PALETTES.challengeBlueYellow,1);
- if(e?.t==='bee')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.beeOpen:TARGET_SPRITE_ROWS.bee,TARGET_SPRITE_PALETTES.bee,1);
- if(e?.t==='but')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.butOpen:TARGET_SPRITE_ROWS.but,TARGET_SPRITE_PALETTES.but,1);
- if(e?.t==='boss')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.bossOpen:TARGET_SPRITE_ROWS.boss,TARGET_SPRITE_PALETTES.boss,1);
- if(e?.t==='rogue')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1);
+ if(e?.fam==='dragonfly')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeGreen,TARGET_SPRITE_PALETTES.challengeGreen,TARGET_REFERENCE_ENEMY_SCALE);
+ if(e?.fam==='mosquito')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeYellow,TARGET_SPRITE_PALETTES.challengeYellow,TARGET_REFERENCE_ENEMY_SCALE);
+ if(e?.fam==='scorpion')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeMagenta,TARGET_SPRITE_PALETTES.challengeMagenta,TARGET_REFERENCE_ENEMY_SCALE);
+ if(e?.fam==='stingray'||e?.fam==='crown')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeBlueYellow,TARGET_SPRITE_PALETTES.challengeBlueYellow,TARGET_REFERENCE_ENEMY_SCALE);
+ if(e?.t==='bee')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.beeOpen:TARGET_SPRITE_ROWS.bee,TARGET_SPRITE_PALETTES.bee,TARGET_REFERENCE_ENEMY_SCALE);
+ if(e?.t==='but')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.butOpen:TARGET_SPRITE_ROWS.but,TARGET_SPRITE_PALETTES.but,TARGET_REFERENCE_ENEMY_SCALE);
+ if(e?.t==='boss')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.bossOpen:TARGET_SPRITE_ROWS.boss,TARGET_SPRITE_PALETTES.boss,TARGET_REFERENCE_BOSS_SCALE);
+ if(e?.t==='rogue')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,TARGET_REFERENCE_ENEMY_SCALE);
  return false;
 }
 
@@ -481,7 +483,7 @@ function drawEnemy(e){
   if(e.fam==='dragonfly')drawPix(-ps*4.5,-ps*3.5,ps,P.dragonfly.a,pal.a,pal.b,P.dragonfly.b,pal.c,P.dragonfly.c);
   else if(e.fam==='mosquito')drawPix(-ps*4.5,-ps*3.5,ps,P.mosquito.a,pal.a,pal.b,P.mosquito.b,pal.c,P.mosquito.c);
   else if(e.t==='bee')drawPix(-ps*4,-ps*3.5,ps,P.but.a,pal.a,pal.b,P.but.b,pal.c,pal.pat||P.but.c);
-  else if(e.t==='but')drawPix(-ps*6,-ps*5,ps,AURORA_CONFORMANCE_PIXELS.butterfly.a,pal.a,pal.b,AURORA_CONFORMANCE_PIXELS.butterfly.b,pal.c,pal.pat||AURORA_CONFORMANCE_PIXELS.butterfly.c);
+  else if(e.t==='but')drawPix(-ps*4,-ps*3.5,ps,AURORA_CONFORMANCE_PIXELS.butterfly.a,pal.a,pal.b,AURORA_CONFORMANCE_PIXELS.butterfly.b,pal.c,pal.pat||AURORA_CONFORMANCE_PIXELS.butterfly.c);
   else if(e.t==='rogue')drawPix(-ps*4,-ps*3.5,ps,P.rogue.a,pal.a,pal.b,P.rogue.b,pal.c,pal.pat||P.rogue.c);
   else drawPix(-ps*4.5,-ps*3.5,ps,P.boss.a,pal.a,pal.b,P.boss.b,pal.c,pal.pat||P.boss.c);
   drawEnemyFlapAccent(e,ps,pal,flap);
