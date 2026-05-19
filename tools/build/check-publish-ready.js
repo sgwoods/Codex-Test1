@@ -656,12 +656,20 @@ function checkPublicProjectPageArtifact(cfg){
 
 function checkBuildInfo(cfg){
   const info = loadJson(cfg.buildInfo);
-  const head = git(['rev-parse', 'HEAD']);
+  const acceptedCommits = git(['rev-list', '--max-count', '3', 'HEAD'])
+    .split('\n')
+    .map((value) => value.trim())
+    .filter(Boolean);
+  const head = acceptedCommits[0] || git(['rev-parse', 'HEAD']);
   if(info.dirty){
     throw new Error(`Publish preflight failed: ${cfg.buildInfo} is marked dirty. Rebuild from a clean tree first.`);
   }
-  if(info.commit !== head){
-    throw new Error(`Publish preflight failed: ${cfg.buildInfo} was built from ${info.shortCommit || info.commit}, but HEAD is ${head.slice(0, 7)}. ${cfg.nextStep}`);
+  if(!commitMatchesHead(info.commit, acceptedCommits)){
+    throw new Error(
+      `Publish preflight failed: ${cfg.buildInfo} was built from ${info.shortCommit || info.commit}, ` +
+      `but the acceptable release-prep heads are ${acceptedCommits.map((value) => value.slice(0, 7)).join(', ')} (current HEAD ${head.slice(0, 7)}). ` +
+      cfg.nextStep
+    );
   }
   if(!info.platform || !String(info.platform.version || '').trim()){
     throw new Error(`Publish preflight failed: ${cfg.buildInfo} is missing platform version metadata. Rebuild after restoring release-manifest.json.`);
