@@ -1,6 +1,6 @@
 # Game Conformance Catalog
 
-Updated: May 11, 2026
+Updated: May 19, 2026
 
 This is the maintained index for game-specific conformance evidence across
 Platinum applications. It gives each game a durable catalog of:
@@ -39,6 +39,8 @@ game is treated as a serious conformance target:
 | Audio cue index | Cue ID, event meaning, gameplay purpose, reference clip or extracted waveform/spectrogram, current implementation, conformance score, confidence, next gap. |
 | Stage index | Stage or wave number, enemy composition, entry formation, maneuvers, trajectories, difficulty, reward opportunity, reference evidence, conformance gaps. |
 | Persona index | Beginner/novice, intermediate/advanced, expert, and professional behavior assumptions, seeds, scenarios, expected outcomes, and game-specific adaptations. |
+| Sprite/runtime scale index | Target crop, live runtime crop, production/current comparison when available, relative scale read, formation/rack readability, and temporal motion coverage plan. |
+| Entry choreography index | Reference window, runtime entry path, first-visible timing, crossing/overlap read, arrival side, formation settle time, and player-facing readability notes. |
 
 The canonical storage pattern is:
 
@@ -47,6 +49,27 @@ The canonical storage pattern is:
 - game-specific evidence: `reference-artifacts/analyses/<game-or-lineage>/`
 - promoted metrics: `reference-artifacts/analyses/<metric-name>/latest.json`
 - runtime harnesses: `tools/harness/`
+
+Recent Aurora sprite work adds one standing rule for future games: do not reduce
+alien or ship conformance to one static number. Track target likeness, live
+runtime crop, relative gameplay scale, formation readability, entry
+choreography, and temporal sprite motion separately. The new Aurora formation
+readability artifact lives at
+`reference-artifacts/analyses/formation-readability/latest.json` and should be
+used as the template for future rack/formation games.
+
+For the second game and subsequent games, the catalog should also record which
+parts of the ingestion package are automatic, semi-automatic, or still
+human-reviewed. The desired direction is:
+
+| Ingestion capability | Current desired treatment |
+| --- | --- |
+| Source/media inventory | Mostly automatic once sources are named; human review confirms provenance and suitability. |
+| Sprite/object target extraction | Semi-automatic: scripts propose crops and names, humans or model-assisted review reject contaminated cells. |
+| Runtime browser capture | Automatic harness requirement for each promoted visual/audio/stage row. |
+| Motion/window annotation | Semi-automatic until temporal object tracking and path labeling are stronger. |
+| Score/dashboard publication | Automatic from promoted artifacts; never hand-edit public HTML as the source of truth. |
+| Release interpretation | Human/model-assisted, but grounded in the generated score, confidence, evidence, and known-gap rows. |
 
 ## Aurora Galactica
 
@@ -220,5 +243,7 @@ confidence.
 The release path now treats catalog visibility as a gate, not a courtesy. Major
 artifact families that influence conformance decisions must appear in generated
 user-visible documentation or dashboard data before a lane publish check passes.
-Use this catalog for game-owned rows; use the release dashboard or conformance
-economics docs for release/resource rows.
+Visual, audio, motion, entry, formation, or scoring changes should leave behind
+the artifact that proves what changed, what did not change, and what remains
+warning-level debt. Use this catalog for game-owned rows; use the release
+dashboard or conformance economics docs for release/resource rows.

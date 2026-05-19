@@ -14,6 +14,14 @@ const REQUIRED_KEYS = [
   'challenge-dragonfly',
   'challenge-mosquito'
 ];
+const SINGLE_ENEMY_KEYS = [
+  'bee-line',
+  'but-line',
+  'boss-line',
+  'challenge-dragonfly',
+  'challenge-mosquito'
+];
+const MAX_SINGLE_ENEMY_BBOX = { width: 84, height: 72 };
 
 function fail(message, payload){
   console.error(message);
@@ -60,6 +68,20 @@ function main(){
     }
     if((sample.litPixels || 0) < 10 || !sample.canvasClip?.bbox){
       fail(`Aurora runtime sprite sample ${sample.spriteKey} did not capture enough visible pixels`, { sample, payload });
+    }
+  }
+  for(const key of SINGLE_ENEMY_KEYS){
+    const sample = samples.find(item => item.spriteKey === key);
+    const bbox = sample?.canvasClip?.bbox;
+    if(!bbox) continue;
+    if(bbox.width > MAX_SINGLE_ENEMY_BBOX.width || bbox.height > MAX_SINGLE_ENEMY_BBOX.height){
+      fail(`Aurora runtime sprite sample ${key} is too large for formation play`, {
+        key,
+        bbox,
+        maxAllowed: MAX_SINGLE_ENEMY_BBOX,
+        read: 'This guard catches renderer changes that improve isolated crop similarity while making dense Galaga-style 40-enemy formation play visually oversized or overlapping.',
+        payload
+      });
     }
   }
   if(!Number.isFinite(+artifact.summary?.averageScore10)){

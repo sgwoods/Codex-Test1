@@ -58,6 +58,38 @@ The past focused block substantially improved our honesty and repeatability, but
 - Log every multi-hour cycle with `npm run harness:measure`, and add a manual GPU-equivalent Codex entry whenever model work materially designs, interprets, or changes the harness.
 - Treat the next beta justification as requiring visible player-facing lift in challenge movement/novelty or audio clarity, not just more documentation or scorer sophistication.
 
+## May 19 Addendum: Sprite Scale And Formation Readability
+
+The post-1.4.0 visual regression pass added a more precise lesson to the
+retrospective: static sprite improvement can hurt the live game if scale and
+formation density are not measured at the same time.
+
+What moved:
+
+- Reference Pixel Lab sprite sizing was corrected after the player ship and
+  alien sprites became visibly oversized in local play.
+- Formation rack spacing was widened to keep the 40-enemy rack readable with
+  more authentic pixel silhouettes.
+- Later-stage entry timing was staggered so stage 4 and stage 8 no longer
+  release almost the whole rack into the same early overlap window.
+- A new `formation-readability` artifact records settled gaps and active
+  overlap windows in both normal and Reference Pixel Lab modes.
+
+What did not move enough:
+
+- Stage-1 opening entry overlap is still warning-level choreography debt. Two
+  small tuning experiments, broader timing and phase/arc tweaks, did not improve
+  the metric, so the correct next step is a reference-timed opening-path scorer
+  rather than more subjective constant tuning.
+
+Process implication:
+
+- Future games should bring target crop, runtime crop, relative gameplay scale,
+  formation/rack readability, entry-path grammar, and temporal sprite-motion
+  evidence as separate rows. This should become part of the ingestion checklist
+  for Galaxy Guardians and any subsequent game before visual conformance is
+  summarized in release notes.
+
 ## Resource Accounting Read
 
 - Challenge-stage dashboard spend: 161 runs; 24 min wall; 39.7 min CPU.

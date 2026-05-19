@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "aurora-runtime-sprite-conformance",
-  "generatedAt": "2026-05-19T18:36:25.371Z",
-  "commit": "591cd98a",
+  "generatedAt": "2026-05-19T19:25:57.364Z",
+  "commit": "883a175f",
   "branch": "codex/macbook-conformance-investment-review",
   "dirty": true,
   "gameKey": "aurora-galactica",
@@ -13,7 +13,7 @@
     "sampleCount": 8,
     "temporalSampleCount": 3,
     "cadenceSampleCount": 3,
-    "averageScore10": 6.58,
+    "averageScore10": 6.54,
     "weakestSpriteKey": "rogue-fighter",
     "weakestScore10": 6.1,
     "captureMode": "isolated-live-canvas-sprite-crops",
@@ -173,14 +173,14 @@
       "currentLabel": "Live runtime canvas but-line",
       "targetId": "galaga-butterfly-escort-model",
       "targetLabel": "Inferred Galaga butterfly escort model",
-      "score10": 6.95,
-      "silhouetteSimilarity": 0.666,
-      "colorSimilarity": 0.749,
-      "fillRatio": 0.6064,
+      "score10": 6.62,
+      "silhouetteSimilarity": 0.606,
+      "colorSimilarity": 0.766,
+      "fillRatio": 0.6713,
       "targetFillRatio": 0.5095,
-      "filledCells": 701,
+      "filledCells": 776,
       "targetFilledCells": 589,
-      "litPixels": 4608,
+      "litPixels": 2688,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line.png",
       "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-butterfly-escort-model.png",
       "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-butterfly-escort.png",
@@ -190,10 +190,10 @@
         "width": 216,
         "height": 184,
         "bbox": {
-          "x": 58,
-          "y": 50,
-          "width": 100,
-          "height": 84
+          "x": 74,
+          "y": 62,
+          "width": 68,
+          "height": 60
         }
       },
       "runtimeSubject": {
@@ -395,12 +395,12 @@
       "motionAxis": "two-phase-flap-pulse",
       "phaseClosedCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-flap-closed.png",
       "phaseOpenCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-flap-open.png",
-      "closedScore10": 6.95,
-      "openScore10": 6.99,
-      "scoreDelta": 0.04,
-      "litPixelDelta": 72,
-      "filledCellDelta": 12,
-      "read": "Captured closed/open flap phases for but-line; lit-pixel delta 72, filled-cell delta 12."
+      "closedScore10": 6.62,
+      "openScore10": 7.54,
+      "scoreDelta": 0.92,
+      "litPixelDelta": 264,
+      "filledCellDelta": 68,
+      "read": "Captured closed/open flap phases for but-line; lit-pixel delta 264, filled-cell delta 68."
     },
     {
       "spriteKey": "boss-line",
@@ -505,84 +505,84 @@
       "motionAxis": "full-flap-cadence-window",
       "frameCount": 8,
       "windowSecondsApprox": 0.385,
-      "scoreRange10": 0.04,
-      "averageAdjacentLitPixelDelta": 20.57,
-      "averageAdjacentFilledCellDelta": 3.43,
+      "scoreRange10": 0.92,
+      "averageAdjacentLitPixelDelta": 75.43,
+      "averageAdjacentFilledCellDelta": 19.43,
       "frames": [
         {
           "frameIndex": 0,
           "enemyTm": 0,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-00.png",
-          "score10": 6.95,
-          "litPixels": 4608,
-          "filledCells": 701,
-          "fillRatio": 0.6064
+          "score10": 6.62,
+          "litPixels": 2688,
+          "filledCells": 776,
+          "fillRatio": 0.6713
         },
         {
           "frameIndex": 1,
           "enemyTm": 0.055,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-01.png",
-          "score10": 6.99,
-          "litPixels": 4680,
-          "filledCells": 713,
-          "fillRatio": 0.6168
+          "score10": 7.54,
+          "litPixels": 2952,
+          "filledCells": 708,
+          "fillRatio": 0.6125
         },
         {
           "frameIndex": 2,
           "enemyTm": 0.11,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-02.png",
-          "score10": 6.99,
-          "litPixels": 4680,
-          "filledCells": 713,
-          "fillRatio": 0.6168
+          "score10": 7.54,
+          "litPixels": 2952,
+          "filledCells": 708,
+          "fillRatio": 0.6125
         },
         {
           "frameIndex": 3,
           "enemyTm": 0.165,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-03.png",
-          "score10": 6.99,
-          "litPixels": 4680,
-          "filledCells": 713,
-          "fillRatio": 0.6168
+          "score10": 7.54,
+          "litPixels": 2952,
+          "filledCells": 708,
+          "fillRatio": 0.6125
         },
         {
           "frameIndex": 4,
           "enemyTm": 0.22,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-04.png",
-          "score10": 6.99,
-          "litPixels": 4680,
-          "filledCells": 713,
-          "fillRatio": 0.6168
+          "score10": 7.54,
+          "litPixels": 2952,
+          "filledCells": 708,
+          "fillRatio": 0.6125
         },
         {
           "frameIndex": 5,
           "enemyTm": 0.275,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-05.png",
-          "score10": 6.95,
-          "litPixels": 4608,
-          "filledCells": 701,
-          "fillRatio": 0.6064
+          "score10": 6.62,
+          "litPixels": 2688,
+          "filledCells": 776,
+          "fillRatio": 0.6713
         },
         {
           "frameIndex": 6,
           "enemyTm": 0.33,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-06.png",
-          "score10": 6.95,
-          "litPixels": 4608,
-          "filledCells": 701,
-          "fillRatio": 0.6064
+          "score10": 6.62,
+          "litPixels": 2688,
+          "filledCells": 776,
+          "fillRatio": 0.6713
         },
         {
           "frameIndex": 7,
           "enemyTm": 0.385,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-07.png",
-          "score10": 6.95,
-          "litPixels": 4608,
-          "filledCells": 701,
-          "fillRatio": 0.6064
+          "score10": 6.62,
+          "litPixels": 2688,
+          "filledCells": 776,
+          "fillRatio": 0.6713
         }
       ],
-      "read": "Captured 8 cadence frames for but-line; average adjacent lit-pixel delta 20.6, filled-cell delta 3.4. This measures visible runtime motion, but not yet Galaga target-frame cadence."
+      "read": "Captured 8 cadence frames for but-line; average adjacent lit-pixel delta 75.4, filled-cell delta 19.4. This measures visible runtime motion, but not yet Galaga target-frame cadence."
     },
     {
       "spriteKey": "boss-line",
@@ -721,14 +721,14 @@
       "currentLabel": "Live runtime canvas but-line-dive-right",
       "targetId": "galaga-butterfly-escort-model",
       "targetLabel": "Inferred Galaga butterfly escort model",
-      "score10": 6.7,
-      "silhouetteSimilarity": 0.685,
-      "colorSimilarity": 0.641,
-      "fillRatio": 0.4369,
+      "score10": 6.72,
+      "silhouetteSimilarity": 0.686,
+      "colorSimilarity": 0.645,
+      "fillRatio": 0.4689,
       "targetFillRatio": 0.5095,
-      "filledCells": 505,
+      "filledCells": 542,
       "targetFilledCells": 589,
-      "litPixels": 4747,
+      "litPixels": 2776,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-dive-right.png",
       "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-butterfly-escort-model.png",
       "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-butterfly-escort.png",
@@ -738,10 +738,10 @@
         "width": 248,
         "height": 240,
         "bbox": {
-          "x": 64,
-          "y": 65,
-          "width": 120,
-          "height": 110
+          "x": 84,
+          "y": 84,
+          "width": 84,
+          "height": 79
         }
       },
       "runtimeSubject": {

@@ -53,7 +53,11 @@ function spawnFormation(){
 	  });
 	  e.pathFamily=regularEntryPathFamily(S.stage);
 	  e.entryMirror=(S.stage>=8&&c>=cols/2)?-1:1;
-	  e.spawn=(S.stage===1?(entry.indexOf(c)*.62+r*1.45+(r>1?1.45:0)+(t==='boss'?.18:0)):r*.08+c*.03)+baseEntryDelay;
+	  const entryOrder=entry.indexOf(c);
+	  const stage1Spawn=entryOrder*.62+r*1.45+(r>1 ? 1.45 : 0)+(t==='boss' ? .18 : 0);
+	  const earlySpawn=r*.08+c*.03;
+	  const laterSpawn=entryOrder*.18+r*.58+(r>1 ? .42 : 0)+(t==='boss' ? .08 : 0);
+	  e.spawn=(S.stage===1?stage1Spawn:(S.stage>=4?laterSpawn:earlySpawn))+baseEntryDelay;
   if(S.stage>=8&&S.stage<12&&!S.challenge){
    if(t==='but'&&(c<=1||c>=8))e.cool=.16+(c<=1?c:9-c)*.12;
    else if(t==='but')e.cool+=.55;

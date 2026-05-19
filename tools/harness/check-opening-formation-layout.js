@@ -29,8 +29,8 @@ async function main(){
   const minTy = Math.min(...tys);
   const maxTy = Math.max(...tys);
 
-  if(Math.abs(result.layout.gx - 17) > 0.01 || Math.abs(result.layout.gy - 14) > 0.01){
-    fail('stage 1 formation spacing drifted away from the expected Aurora rack layout', result);
+  if(Math.abs(result.layout.gx - 20) > 0.01 || Math.abs(result.layout.gy - 18) > 0.01){
+    fail('stage 1 formation spacing drifted away from the expected readable Aurora rack layout', result);
   }
   if(minTx < 40 || maxTx > 240){
     fail('stage 1 formation target columns spilled outside the expected playfield bounds', {

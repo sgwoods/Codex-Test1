@@ -11,7 +11,7 @@ Use it when deciding:
 
 ## Current Release Posture
 
-As of May 16, 2026:
+As of May 19, 2026:
 
 - hosted `/production` is the refreshed public `1.4.0` family
 - hosted `/beta` remains the authority-gated review lane for the next deliberate
@@ -19,7 +19,7 @@ As of May 16, 2026:
 - hosted `/dev` is the forward-review lane for the next coherent improvement
   bundle and currently tracks the `1.4.0.1` line
 - local MacBook development is currently on
-  `codex/macbook-audio-entry-grounding-cycle`
+  `codex/macbook-conformance-investment-review`
 
 This means:
 
@@ -45,6 +45,9 @@ The forward line and the current shipped family now include:
   `5.7/10` conformance and `5.6/10` interesting factor after the measured
   wave/group identity pass and the no-fire reference-motion extractor
   correction
+- the post-1.4.0 sprite-scale regression was corrected, and the current forward
+  branch adds a formation-readability guard so crop improvements cannot quietly
+  damage live board readability
 
 ## Current Path.Plan
 
@@ -66,12 +69,35 @@ do not outrun conformance or public safety:
    publishing wait behind explicit auth, consent, storage, moderation, token,
    and revoke/failure-mode review.
 
-The immediate next work is Aurora challenge-stage conformance: improve
-trajectory/reference matching and player-readable bonus-stage variety while
-keeping no-shoot/no-ship-loss challenge guardrails green. The current tracked
-gap is stage 11 still best-matching the challenge-2 reference instead of the
-intended challenge-3 reference; this is now a documented conformance gap rather
-than a hidden harness failure.
+The immediate next work is to finish the current quality bundle cleanly: protect
+the sprite-scale fix, preserve the wider readable rack, keep later-stage entry
+staggering measured, document stage-1 opening overlap as warning-level
+choreography debt, and then return to Aurora challenge-stage conformance and
+audio event clarity.
+
+The current tracked challenge-stage gap remains that the stages are safe but not
+yet spectacular enough: movement grammar, alien novelty, stage-specific target
+contracts, and active sprite-motion comparison still need more direct reference
+windows.
+
+## Ingestion Automation Carry-Forward
+
+Every serious game entering Platinum should now progress through a visible
+ingestion maturity ladder:
+
+| Step | Proof artifact | Automation direction |
+| --- | --- | --- |
+| Source inventory | Named media, clips, manuals, sprite sheets, and provenance. | Scripts collect and normalize; humans confirm suitability. |
+| Target extraction | Promoted crops, cue windows, stage windows, path labels, and event labels. | Candidate generation should be automated; contaminated or ambiguous targets remain reviewable. |
+| Runtime capture | Browser-rendered sprites, audio captures, event logs, stage traces, and persona distributions. | Harness-owned and repeatable across games. |
+| Metric separation | Likeness, scale, readability, motion, audio meaning, stage shape, and safety scored independently. | Dashboard rows should make broad/proxy scores visibly different from strict scores. |
+| Release visibility | Generated docs, release notes, dashboards, cost charts, and known-gap rows. | Built from persisted artifacts; no public HTML should be the source of truth. |
+| Shared promotion | Game-neutral capture/scoring helpers moved into reusable Platinum/harness code. | Reuse the harness, not Aurora's game-specific rules. |
+
+Galaxy Guardians is the next proving ground for this ladder. Its next meaningful
+quality step should not be a design-only polish pass; it should promote the same
+target/runtime/scale/readability/motion split for flagship, escort, scout,
+player interceptor, rack entry, dive/escort movement, scoring, and audio cues.
 
 ## Current Working Reality
 

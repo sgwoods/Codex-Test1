@@ -1,0 +1,1376 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "formation-readability",
+  "generatedAt": "2026-05-19T20:28:46.465Z",
+  "branch": "main",
+  "commit": "c5ed9301",
+  "dirty": true,
+  "problem": "Galaga-style 40-enemy racks require enough air between sprites that formation rows and entry waves remain readable after moving toward more authentic pixel silhouettes.",
+  "strategy": "Measure settled target rectangle gaps and active entry overlap windows in both normal Aurora rendering and Reference Pixel Lab mode.",
+  "successMeasure": "Settled adjacent gaps stay above 1.8 horizontal and 2.8 vertical logical units, while non-stage-1 active entry overlap stays within 8 pair(s) per sampled window. Stage 1 opening overlap is reported as advisory choreography debt until a reference-timed opening-path scorer exists.",
+  "thresholds": {
+    "minSettledHorizontalGap": 1.8,
+    "minSettledVerticalGap": 2.8,
+    "maxActiveOverlapPairs": 8,
+    "stage1ActiveOverlapAdvisoryPairs": 8
+  },
+  "summary": {
+    "ok": true,
+    "stageCount": 3,
+    "modeCount": 2,
+    "failureCount": 0,
+    "warningCount": 2,
+    "worstSettledHorizontalGap": 2,
+    "worstSettledVerticalGap": 4,
+    "worstActiveOverlapPairs": 12
+  },
+  "warnings": [
+    {
+      "stage": 1,
+      "mode": "auto",
+      "kind": "stage1-active-entry-overlap-advisory",
+      "value": 12
+    },
+    {
+      "stage": 1,
+      "mode": "reference-pixel-lab",
+      "kind": "stage1-active-entry-overlap-advisory",
+      "value": 9
+    }
+  ],
+  "failures": [],
+  "checks": [
+    {
+      "stage": 1,
+      "mode": "auto",
+      "layout": {
+        "fromStage": 1,
+        "gx": 20,
+        "gy": 18,
+        "oy": 30
+      },
+      "settled": {
+        "minHorizontalGap": 2,
+        "minVerticalGap": 4,
+        "compressedHorizontalCount": 0,
+        "compressedVerticalCount": 0,
+        "compressedHorizontal": [],
+        "compressedVertical": []
+      },
+      "activeWindow": {
+        "worstOverlapPairs": 12,
+        "worstOverlapArea": 153.69
+      },
+      "samples": [
+        {
+          "time": 0.65,
+          "stageClock": 0.65,
+          "settled": {
+            "minHorizontalGap": 2,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 0,
+            "overlapPairs": 0,
+            "largestOverlapArea": 0,
+            "overlaps": []
+          }
+        },
+        {
+          "time": 4.8,
+          "stageClock": 4.8,
+          "settled": {
+            "minHorizontalGap": 2,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 14,
+            "overlapPairs": 11,
+            "largestOverlapArea": 106.05,
+            "overlaps": [
+              {
+                "a": 437497093,
+                "b": 845901754,
+                "area": 4.88,
+                "aType": "but",
+                "bType": "boss"
+              },
+              {
+                "a": 437497093,
+                "b": 946218514,
+                "area": 8.28,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 437497093,
+                "b": 993198064,
+                "area": 106.05,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 437497093,
+                "b": 413852713,
+                "area": 0.39,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 762088968,
+                "b": 468251597,
+                "area": 29.22,
+                "aType": "boss",
+                "bType": "boss"
+              },
+              {
+                "a": 762088968,
+                "b": 678916565,
+                "area": 8.37,
+                "aType": "boss",
+                "bType": "but"
+              },
+              {
+                "a": 468251597,
+                "b": 678916565,
+                "area": 24.98,
+                "aType": "boss",
+                "bType": "but"
+              },
+              {
+                "a": 294423463,
+                "b": 601246102,
+                "area": 77.61,
+                "aType": "but",
+                "bType": "bee"
+              },
+              {
+                "a": 272994902,
+                "b": 993198064,
+                "area": 14.18,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 272994902,
+                "b": 413852713,
+                "area": 17.94,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 946218514,
+                "b": 993198064,
+                "area": 60.14,
+                "aType": "but",
+                "bType": "but"
+              }
+            ]
+          }
+        },
+        {
+          "time": 6.2,
+          "stageClock": 6.2,
+          "settled": {
+            "minHorizontalGap": 2,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 21,
+            "overlapPairs": 11,
+            "largestOverlapArea": 121.62,
+            "overlaps": [
+              {
+                "a": 334882525,
+                "b": 437497093,
+                "area": 23.96,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 334882525,
+                "b": 371922646,
+                "area": 8.78,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 334882525,
+                "b": 272994902,
+                "area": 15.61,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 334882525,
+                "b": 946218514,
+                "area": 87.91,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 437497093,
+                "b": 371922646,
+                "area": 29.26,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 437497093,
+                "b": 261830439,
+                "area": 121.62,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 678916565,
+                "b": 153254022,
+                "area": 31.98,
+                "aType": "but",
+                "bType": "bee"
+              },
+              {
+                "a": 272994902,
+                "b": 946218514,
+                "area": 11.6,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 272994902,
+                "b": 601246102,
+                "area": 72.02,
+                "aType": "but",
+                "bType": "bee"
+              },
+              {
+                "a": 946218514,
+                "b": 601246102,
+                "area": 35.95,
+                "aType": "but",
+                "bType": "bee"
+              },
+              {
+                "a": 202787811,
+                "b": 989024619,
+                "area": 110.8,
+                "aType": "but",
+                "bType": "but"
+              }
+            ]
+          }
+        },
+        {
+          "time": 7.6,
+          "stageClock": 7.6,
+          "settled": {
+            "minHorizontalGap": 2,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 28,
+            "overlapPairs": 12,
+            "largestOverlapArea": 82.61,
+            "overlaps": [
+              {
+                "a": 334882525,
+                "b": 437497093,
+                "area": 32.23,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 482739962,
+                "b": 945437629,
+                "area": 57.77,
+                "aType": "boss",
+                "bType": "bee"
+              },
+              {
+                "a": 845901754,
+                "b": 945437629,
+                "area": 81.72,
+                "aType": "boss",
+                "bType": "bee"
+              },
+              {
+                "a": 762088968,
+                "b": 45274092,
+                "area": 24.93,
+                "aType": "boss",
+                "bType": "but"
+              },
+              {
+                "a": 468251597,
+                "b": 45274092,
+                "area": 68.9,
+                "aType": "boss",
+                "bType": "but"
+              },
+              {
+                "a": 678916565,
+                "b": 77479460,
+                "area": 17.22,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 294423463,
+                "b": 77479460,
+                "area": 1.77,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 202787811,
+                "b": 45274092,
+                "area": 18.73,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 989024619,
+                "b": 45274092,
+                "area": 14.14,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 575657146,
+                "b": 25548820,
+                "area": 53.44,
+                "aType": "bee",
+                "bType": "bee"
+              },
+              {
+                "a": 43393095,
+                "b": 601246102,
+                "area": 82.61,
+                "aType": "bee",
+                "bType": "bee"
+              },
+              {
+                "a": 43393095,
+                "b": 153254022,
+                "area": 2.13,
+                "aType": "bee",
+                "bType": "bee"
+              }
+            ]
+          }
+        },
+        {
+          "time": 9,
+          "stageClock": 9,
+          "settled": {
+            "minHorizontalGap": 2,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 32,
+            "overlapPairs": 6,
+            "largestOverlapArea": 153.69,
+            "overlaps": [
+              {
+                "a": 407282108,
+                "b": 261830439,
+                "area": 50.62,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 575657146,
+                "b": 43393095,
+                "area": 153.69,
+                "aType": "bee",
+                "bType": "bee"
+              },
+              {
+                "a": 601246102,
+                "b": 835411372,
+                "area": 123.07,
+                "aType": "bee",
+                "bType": "bee"
+              },
+              {
+                "a": 853345139,
+                "b": 25548820,
+                "area": 0.72,
+                "aType": "bee",
+                "bType": "bee"
+              },
+              {
+                "a": 153254022,
+                "b": 835411372,
+                "area": 2.05,
+                "aType": "bee",
+                "bType": "bee"
+              },
+              {
+                "a": 25548820,
+                "b": 835411372,
+                "area": 38.34,
+                "aType": "bee",
+                "bType": "bee"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "stage": 1,
+      "mode": "reference-pixel-lab",
+      "layout": {
+        "fromStage": 1,
+        "gx": 20,
+        "gy": 18,
+        "oy": 30
+      },
+      "settled": {
+        "minHorizontalGap": 7,
+        "minVerticalGap": 4,
+        "compressedHorizontalCount": 0,
+        "compressedVerticalCount": 0,
+        "compressedHorizontal": [],
+        "compressedVertical": []
+      },
+      "activeWindow": {
+        "worstOverlapPairs": 9,
+        "worstOverlapArea": 72.26
+      },
+      "samples": [
+        {
+          "time": 0.65,
+          "stageClock": 0.65,
+          "settled": {
+            "minHorizontalGap": 7,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 0,
+            "overlapPairs": 0,
+            "largestOverlapArea": 0,
+            "overlaps": []
+          }
+        },
+        {
+          "time": 4.8,
+          "stageClock": 4.8,
+          "settled": {
+            "minHorizontalGap": 7,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 14,
+            "overlapPairs": 2,
+            "largestOverlapArea": 14.76,
+            "overlaps": [
+              {
+                "a": 468251597,
+                "b": 678916565,
+                "area": 14.76,
+                "aType": "boss",
+                "bType": "but"
+              },
+              {
+                "a": 946218514,
+                "b": 993198064,
+                "area": 11.56,
+                "aType": "but",
+                "bType": "but"
+              }
+            ]
+          }
+        },
+        {
+          "time": 6.2,
+          "stageClock": 6.2,
+          "settled": {
+            "minHorizontalGap": 7,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 21,
+            "overlapPairs": 9,
+            "largestOverlapArea": 57.98,
+            "overlaps": [
+              {
+                "a": 334882525,
+                "b": 437497093,
+                "area": 1.28,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 334882525,
+                "b": 261830439,
+                "area": 25.37,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 371922646,
+                "b": 261830439,
+                "area": 40.06,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 845901754,
+                "b": 931862929,
+                "area": 1.19,
+                "aType": "boss",
+                "bType": "but"
+              },
+              {
+                "a": 294423463,
+                "b": 153254022,
+                "area": 53.97,
+                "aType": "but",
+                "bType": "bee"
+              },
+              {
+                "a": 946218514,
+                "b": 601246102,
+                "area": 5.68,
+                "aType": "but",
+                "bType": "bee"
+              },
+              {
+                "a": 993198064,
+                "b": 601246102,
+                "area": 6.78,
+                "aType": "but",
+                "bType": "bee"
+              },
+              {
+                "a": 993198064,
+                "b": 853345139,
+                "area": 0.22,
+                "aType": "but",
+                "bType": "bee"
+              },
+              {
+                "a": 202787811,
+                "b": 989024619,
+                "area": 57.98,
+                "aType": "but",
+                "bType": "but"
+              }
+            ]
+          }
+        },
+        {
+          "time": 7.6,
+          "stageClock": 7.6,
+          "settled": {
+            "minHorizontalGap": 7,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 28,
+            "overlapPairs": 8,
+            "largestOverlapArea": 46.61,
+            "overlaps": [
+              {
+                "a": 762088968,
+                "b": 945437629,
+                "area": 34.52,
+                "aType": "boss",
+                "bType": "bee"
+              },
+              {
+                "a": 678916565,
+                "b": 45274092,
+                "area": 46.61,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 272994902,
+                "b": 25548820,
+                "area": 23.85,
+                "aType": "but",
+                "bType": "bee"
+              },
+              {
+                "a": 413852713,
+                "b": 945437629,
+                "area": 33.54,
+                "aType": "but",
+                "bType": "bee"
+              },
+              {
+                "a": 202787811,
+                "b": 45274092,
+                "area": 6.93,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 989024619,
+                "b": 45274092,
+                "area": 1.3,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 43393095,
+                "b": 601246102,
+                "area": 20.21,
+                "aType": "bee",
+                "bType": "bee"
+              },
+              {
+                "a": 43393095,
+                "b": 153254022,
+                "area": 33.35,
+                "aType": "bee",
+                "bType": "bee"
+              }
+            ]
+          }
+        },
+        {
+          "time": 9,
+          "stageClock": 9,
+          "settled": {
+            "minHorizontalGap": 7,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 31,
+            "overlapPairs": 4,
+            "largestOverlapArea": 72.26,
+            "overlaps": [
+              {
+                "a": 575657146,
+                "b": 43393095,
+                "area": 72.26,
+                "aType": "bee",
+                "bType": "bee"
+              },
+              {
+                "a": 601246102,
+                "b": 835411372,
+                "area": 68.06,
+                "aType": "bee",
+                "bType": "bee"
+              },
+              {
+                "a": 853345139,
+                "b": 25548820,
+                "area": 0.49,
+                "aType": "bee",
+                "bType": "bee"
+              },
+              {
+                "a": 25548820,
+                "b": 835411372,
+                "area": 9.25,
+                "aType": "bee",
+                "bType": "bee"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "stage": 4,
+      "mode": "auto",
+      "layout": {
+        "fromStage": 4,
+        "gx": 20,
+        "gy": 18,
+        "oy": 30
+      },
+      "settled": {
+        "minHorizontalGap": 2,
+        "minVerticalGap": 4,
+        "compressedHorizontalCount": 0,
+        "compressedVerticalCount": 0,
+        "compressedHorizontal": [],
+        "compressedVertical": []
+      },
+      "activeWindow": {
+        "worstOverlapPairs": 4,
+        "worstOverlapArea": 79.47
+      },
+      "samples": [
+        {
+          "time": 0.65,
+          "stageClock": 0.65,
+          "settled": {
+            "minHorizontalGap": 2,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 2,
+            "overlapPairs": 0,
+            "largestOverlapArea": 0,
+            "overlaps": []
+          }
+        },
+        {
+          "time": 4.8,
+          "stageClock": 4.8,
+          "settled": {
+            "minHorizontalGap": 2,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 39,
+            "overlapPairs": 4,
+            "largestOverlapArea": 79.47,
+            "overlaps": [
+              {
+                "a": 756507061,
+                "b": 69412359,
+                "area": 2.61,
+                "aType": "bee",
+                "bType": "bee"
+              },
+              {
+                "a": 756507061,
+                "b": 572141529,
+                "area": 49.96,
+                "aType": "bee",
+                "bType": "bee"
+              },
+              {
+                "a": 69412359,
+                "b": 572141529,
+                "area": 73.1,
+                "aType": "bee",
+                "bType": "bee"
+              },
+              {
+                "a": 92381457,
+                "b": 884425433,
+                "area": 79.47,
+                "aType": "bee",
+                "bType": "bee"
+              }
+            ]
+          }
+        },
+        {
+          "time": 6.2,
+          "stageClock": 6.2,
+          "settled": {
+            "minHorizontalGap": 2,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 37,
+            "overlapPairs": 1,
+            "largestOverlapArea": 9.37,
+            "overlaps": [
+              {
+                "a": 425192733,
+                "b": 12039280,
+                "area": 9.37,
+                "aType": "boss",
+                "bType": "but"
+              }
+            ]
+          }
+        },
+        {
+          "time": 7.6,
+          "stageClock": 7.6,
+          "settled": {
+            "minHorizontalGap": 2,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 39,
+            "overlapPairs": 2,
+            "largestOverlapArea": 56.46,
+            "overlaps": [
+              {
+                "a": 414824467,
+                "b": 117434602,
+                "area": 56.46,
+                "aType": "boss",
+                "bType": "but"
+              },
+              {
+                "a": 425192733,
+                "b": 117434602,
+                "area": 50.38,
+                "aType": "boss",
+                "bType": "but"
+              }
+            ]
+          }
+        },
+        {
+          "time": 9,
+          "stageClock": 9,
+          "settled": {
+            "minHorizontalGap": 2,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 39,
+            "overlapPairs": 0,
+            "largestOverlapArea": 0,
+            "overlaps": []
+          }
+        }
+      ]
+    },
+    {
+      "stage": 4,
+      "mode": "reference-pixel-lab",
+      "layout": {
+        "fromStage": 4,
+        "gx": 20,
+        "gy": 18,
+        "oy": 30
+      },
+      "settled": {
+        "minHorizontalGap": 7,
+        "minVerticalGap": 4,
+        "compressedHorizontalCount": 0,
+        "compressedVerticalCount": 0,
+        "compressedHorizontal": [],
+        "compressedVertical": []
+      },
+      "activeWindow": {
+        "worstOverlapPairs": 3,
+        "worstOverlapArea": 40.98
+      },
+      "samples": [
+        {
+          "time": 0.65,
+          "stageClock": 0.65,
+          "settled": {
+            "minHorizontalGap": 7,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 2,
+            "overlapPairs": 0,
+            "largestOverlapArea": 0,
+            "overlaps": []
+          }
+        },
+        {
+          "time": 4.8,
+          "stageClock": 4.8,
+          "settled": {
+            "minHorizontalGap": 7,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 39,
+            "overlapPairs": 3,
+            "largestOverlapArea": 40.98,
+            "overlaps": [
+              {
+                "a": 756507061,
+                "b": 572141529,
+                "area": 5.98,
+                "aType": "bee",
+                "bType": "bee"
+              },
+              {
+                "a": 69412359,
+                "b": 572141529,
+                "area": 40.98,
+                "aType": "bee",
+                "bType": "bee"
+              },
+              {
+                "a": 92381457,
+                "b": 884425433,
+                "area": 15.26,
+                "aType": "bee",
+                "bType": "bee"
+              }
+            ]
+          }
+        },
+        {
+          "time": 6.2,
+          "stageClock": 6.2,
+          "settled": {
+            "minHorizontalGap": 7,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 37,
+            "overlapPairs": 1,
+            "largestOverlapArea": 3.93,
+            "overlaps": [
+              {
+                "a": 425192733,
+                "b": 12039280,
+                "area": 3.93,
+                "aType": "boss",
+                "bType": "but"
+              }
+            ]
+          }
+        },
+        {
+          "time": 7.6,
+          "stageClock": 7.6,
+          "settled": {
+            "minHorizontalGap": 7,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 39,
+            "overlapPairs": 2,
+            "largestOverlapArea": 23.5,
+            "overlaps": [
+              {
+                "a": 414824467,
+                "b": 117434602,
+                "area": 23.5,
+                "aType": "boss",
+                "bType": "but"
+              },
+              {
+                "a": 425192733,
+                "b": 117434602,
+                "area": 1.11,
+                "aType": "boss",
+                "bType": "but"
+              }
+            ]
+          }
+        },
+        {
+          "time": 9,
+          "stageClock": 9,
+          "settled": {
+            "minHorizontalGap": 7,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 39,
+            "overlapPairs": 0,
+            "largestOverlapArea": 0,
+            "overlaps": []
+          }
+        }
+      ]
+    },
+    {
+      "stage": 8,
+      "mode": "auto",
+      "layout": {
+        "fromStage": 8,
+        "gx": 20,
+        "gy": 18,
+        "oy": 30
+      },
+      "settled": {
+        "minHorizontalGap": 2,
+        "minVerticalGap": 4,
+        "compressedHorizontalCount": 0,
+        "compressedVerticalCount": 0,
+        "compressedHorizontal": [],
+        "compressedVertical": []
+      },
+      "activeWindow": {
+        "worstOverlapPairs": 5,
+        "worstOverlapArea": 207.45
+      },
+      "samples": [
+        {
+          "time": 0.65,
+          "stageClock": 0.65,
+          "settled": {
+            "minHorizontalGap": 2,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 2,
+            "overlapPairs": 0,
+            "largestOverlapArea": 0,
+            "overlaps": []
+          }
+        },
+        {
+          "time": 4.8,
+          "stageClock": 4.8,
+          "settled": {
+            "minHorizontalGap": 2,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 39,
+            "overlapPairs": 5,
+            "largestOverlapArea": 117.1,
+            "overlaps": [
+              {
+                "a": 677648034,
+                "b": 283544293,
+                "area": 23.2,
+                "aType": "but",
+                "bType": "bee"
+              },
+              {
+                "a": 677648034,
+                "b": 663070336,
+                "area": 66.27,
+                "aType": "but",
+                "bType": "bee"
+              },
+              {
+                "a": 677648034,
+                "b": 258980972,
+                "area": 27.15,
+                "aType": "but",
+                "bType": "bee"
+              },
+              {
+                "a": 649219642,
+                "b": 486911426,
+                "area": 117.1,
+                "aType": "bee",
+                "bType": "bee"
+              },
+              {
+                "a": 225602474,
+                "b": 486911426,
+                "area": 22.13,
+                "aType": "bee",
+                "bType": "bee"
+              }
+            ]
+          }
+        },
+        {
+          "time": 6.2,
+          "stageClock": 6.2,
+          "settled": {
+            "minHorizontalGap": 2,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 39,
+            "overlapPairs": 0,
+            "largestOverlapArea": 0,
+            "overlaps": []
+          }
+        },
+        {
+          "time": 7.6,
+          "stageClock": 7.6,
+          "settled": {
+            "minHorizontalGap": 2,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 37,
+            "overlapPairs": 3,
+            "largestOverlapArea": 207.45,
+            "overlaps": [
+              {
+                "a": 880340206,
+                "b": 180875244,
+                "area": 31.01,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 817767118,
+                "b": 180875244,
+                "area": 17.3,
+                "aType": "boss",
+                "bType": "but"
+              },
+              {
+                "a": 524519122,
+                "b": 996218509,
+                "area": 207.45,
+                "aType": "but",
+                "bType": "bee"
+              }
+            ]
+          }
+        },
+        {
+          "time": 9,
+          "stageClock": 9,
+          "settled": {
+            "minHorizontalGap": 2,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 39,
+            "overlapPairs": 0,
+            "largestOverlapArea": 0,
+            "overlaps": []
+          }
+        }
+      ]
+    },
+    {
+      "stage": 8,
+      "mode": "reference-pixel-lab",
+      "layout": {
+        "fromStage": 8,
+        "gx": 20,
+        "gy": 18,
+        "oy": 30
+      },
+      "settled": {
+        "minHorizontalGap": 7,
+        "minVerticalGap": 4,
+        "compressedHorizontalCount": 0,
+        "compressedVerticalCount": 0,
+        "compressedHorizontal": [],
+        "compressedVertical": []
+      },
+      "activeWindow": {
+        "worstOverlapPairs": 4,
+        "worstOverlapArea": 139.75
+      },
+      "samples": [
+        {
+          "time": 0.65,
+          "stageClock": 0.65,
+          "settled": {
+            "minHorizontalGap": 7,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 2,
+            "overlapPairs": 0,
+            "largestOverlapArea": 0,
+            "overlaps": []
+          }
+        },
+        {
+          "time": 4.8,
+          "stageClock": 4.8,
+          "settled": {
+            "minHorizontalGap": 7,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 39,
+            "overlapPairs": 4,
+            "largestOverlapArea": 77.05,
+            "overlaps": [
+              {
+                "a": 677648034,
+                "b": 663070336,
+                "area": 31.78,
+                "aType": "but",
+                "bType": "bee"
+              },
+              {
+                "a": 677648034,
+                "b": 258980972,
+                "area": 15.23,
+                "aType": "but",
+                "bType": "bee"
+              },
+              {
+                "a": 649219642,
+                "b": 486911426,
+                "area": 77.05,
+                "aType": "bee",
+                "bType": "bee"
+              },
+              {
+                "a": 225602474,
+                "b": 486911426,
+                "area": 14.9,
+                "aType": "bee",
+                "bType": "bee"
+              }
+            ]
+          }
+        },
+        {
+          "time": 6.2,
+          "stageClock": 6.2,
+          "settled": {
+            "minHorizontalGap": 7,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 39,
+            "overlapPairs": 0,
+            "largestOverlapArea": 0,
+            "overlaps": []
+          }
+        },
+        {
+          "time": 7.6,
+          "stageClock": 7.6,
+          "settled": {
+            "minHorizontalGap": 7,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 37,
+            "overlapPairs": 2,
+            "largestOverlapArea": 139.75,
+            "overlaps": [
+              {
+                "a": 880340206,
+                "b": 180875244,
+                "area": 11.8,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 524519122,
+                "b": 996218509,
+                "area": 139.75,
+                "aType": "but",
+                "bType": "bee"
+              }
+            ]
+          }
+        },
+        {
+          "time": 9,
+          "stageClock": 9,
+          "settled": {
+            "minHorizontalGap": 7,
+            "minVerticalGap": 4,
+            "compressedHorizontalCount": 0,
+            "compressedVerticalCount": 0,
+            "compressedHorizontal": [],
+            "compressedVertical": []
+          },
+          "active": {
+            "visibleCount": 39,
+            "overlapPairs": 0,
+            "largestOverlapArea": 0,
+            "overlaps": []
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Project State And Conformance Program
 
-Updated: May 16, 2026
+Updated: May 19, 2026
 
 This is the maintained top-level explanation of the broader Aurora / Platinum
 effort. It is meant to answer four questions at once:
@@ -57,7 +57,7 @@ Aurora / Platinum is in a post-`1.4.0` production development posture.
 - local `localhost` is the active engineering lane
 - `main` remains the authoritative integration line, while current MacBook
   development is happening on short-lived topic branches such as
-  `codex/macbook-audio-entry-grounding-cycle`
+  `codex/macbook-conformance-investment-review`
 - release authority for beta and production remains on `imacm1 / iMacM1`
   unless explicitly transferred
 
@@ -92,9 +92,65 @@ The current path toward the next beta request is:
    replay publishing must wait behind explicit auth, consent, storage,
    moderation, token, and revoke/failure-mode review.
 
-The immediate work priority is still Aurora challenge-stage conformance because
-it is one of the clearest remaining "this does not yet feel enough like Galaga"
-gaps and now has a dedicated scorer, evidence panels, and safety guardrails.
+The immediate work priority is to stabilize the current post-1.4.0 quality
+bundle before the next beta handoff. That means fixing visible sprite and
+formation regressions first, then returning to the larger Aurora challenge-stage
+and audio conformance gaps with the same evidence discipline.
+
+## May 19 Sprite And Formation Learning
+
+The latest local work made one important process correction: sprite conformance
+cannot be represented by a single static crop score.
+
+The project now needs to keep these reads separate:
+
+| Read | Question | Current use |
+| --- | --- | --- |
+| Target sprite model | What does the reference alien or ship look like in extracted/source evidence? | Galaga alien source images, crop manifests, and promoted pixel targets. |
+| Runtime sprite crop | What does Aurora actually draw in the browser? | Runtime capture and Reference Pixel Lab scoring. |
+| Relative gameplay scale | Are player, reserve ships, bosses, bees, butterflies, and challenge aliens proportional on the board? | Recently corrected after the oversized sprite regression. |
+| Formation readability | Does a 40-enemy rack still have enough visual air between rows and columns once more authentic pixel silhouettes are used? | New `formation-readability` artifact and guard. |
+| Entry choreography | Do aliens arrive through readable, target-like paths instead of appearing, bunching, or crossing incoherently? | Later-stage burst entry improved; stage-1 opening overlap remains an advisory warning. |
+| Temporal sprite motion | Do flaps, pulses, dives, capture/rescue, carried-fighter, dual-fighter, and damage phases read correctly over time? | Still a high-priority harness gap. |
+
+The current formation-readability pass produced a useful split result:
+
+- settled rack spacing now passes in normal rendering and Reference Pixel Lab
+  mode
+- later-stage entry bursts were reduced by staggering non-stage-1 arrivals
+- stage-1 opening crossing still produces warning-level overlap, so the next
+  true conformance step is a reference-timed opening path scorer rather than
+  more ad hoc constant tuning
+
+This is the kind of learning that must carry into Galaxy Guardians and later
+games. New games should not enter the pipeline with only a nice-looking static
+sprite sheet. They should bring a target crop, runtime crop, gameplay-scale
+read, formation/rack readability check, temporal motion plan, and entry-path
+grammar before the game is called conformant.
+
+## Cross-Game Ingestion Automation Direction
+
+The project is moving toward a repeatable ingestion loop where the model helps
+design and interpret local harnesses, but the durable evidence is produced by
+local CPU/browser/video/audio work whenever possible.
+
+For Aurora, the current sprite/readability cycle proved that source definitions,
+runtime canvas output, gameplay-scale proportions, and motion choreography can
+diverge. For Galaxy Guardians and later games, the first-class ingestion package
+therefore needs this maturity ladder:
+
+| Maturity | Required proof | Why it matters |
+| --- | --- | --- |
+| Source inventory | Named media, clips, screenshots, manuals, sprite sheets, and provenance. | Prevents future work from depending on vague memory or one-off prompts. |
+| Target extraction | Promoted target crops, cue windows, stage windows, motion windows, and event labels. | Gives the harness something stable to compare against. |
+| Runtime capture | Browser-rendered sprite crops, audio captures, event logs, stage traces, and persona runs. | Shows what the player actually experiences. |
+| Metric separation | Independent scores for likeness, scale, readability, motion, audio meaning, stage shape, and safety. | Avoids hiding a bad live experience behind one good static proxy. |
+| Dashboard/release visibility | Scores, confidence, cost, evidence, and next gaps visible in generated docs and dashboards. | Makes release decisions reviewable by humans and reusable for the next game. |
+| Shared harness promotion | Game-neutral capture/scoring helpers moved into reusable Platinum/harness code. | Lets the second and third games get better faster without copying Aurora-specific rules. |
+
+The next conformance-program improvement should make this ladder visible as a
+cross-game dashboard row so Aurora, Galaxy Guardians, and future game packs can
+be compared by ingestion maturity as well as by current gameplay score.
 
 ## Current Conformance Read
 
