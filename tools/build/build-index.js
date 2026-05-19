@@ -74,6 +74,7 @@ const GALAGA_ALIEN_VISUAL_REFERENCE = path.join(ROOT, 'reference-artifacts', 'an
 const GALAGA_ALIEN_MOTION_REFERENCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-motion-reference', 'latest.json');
 const GALAGA_ALIEN_CROP_PREVIEWS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-visual-crop-previews', 'latest.json');
 const GALAGA_ALIEN_TARGET_CROPS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-target-crops', 'latest.json');
+const GALAGA_TARGET_EVIDENCE_AUDIT = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-evidence-audit', 'latest.json');
 const AURORA_RUNTIME_SPRITE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-runtime-sprite-conformance', 'latest.json');
 const AURORA_RUNTIME_VS_GALAGA_TARGET_CROPS = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-runtime-vs-galaga-target-crops', 'latest.json');
 const AURORA_IMPACT_EXPLOSION_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-impact-explosion-conformance', 'latest.json');
@@ -3116,6 +3117,7 @@ let galagaAlienVisualReferenceCache = null;
 let galagaAlienMotionReferenceCache = null;
 let galagaAlienCropPreviewsCache = null;
 let galagaAlienTargetCropsCache = null;
+let galagaTargetEvidenceAuditCache = null;
 let auroraRuntimeSpriteConformanceCache = null;
 let auroraRuntimeVsGalagaTargetCropsCache = null;
 let auroraImpactExplosionConformanceCache = null;
@@ -3224,6 +3226,24 @@ function loadGalagaAlienTargetCrops(){
     galagaAlienTargetCropsCache = { targetCrops: [], roleSets: [], summary: {} };
   }
   return galagaAlienTargetCropsCache;
+}
+
+function loadGalagaTargetEvidenceAudit(){
+  if(galagaTargetEvidenceAuditCache) return galagaTargetEvidenceAuditCache;
+  if(!fs.existsSync(GALAGA_TARGET_EVIDENCE_AUDIT)){
+    galagaTargetEvidenceAuditCache = { rows: [], summary: {} };
+    return galagaTargetEvidenceAuditCache;
+  }
+  try {
+    const artifact = readJson(GALAGA_TARGET_EVIDENCE_AUDIT);
+    galagaTargetEvidenceAuditCache = Object.assign({}, artifact, {
+      rows: Array.isArray(artifact.rows) ? artifact.rows : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    galagaTargetEvidenceAuditCache = { rows: [], summary: {} };
+  }
+  return galagaTargetEvidenceAuditCache;
 }
 
 function loadAuroraRuntimeSpriteConformance(){
@@ -4319,11 +4339,40 @@ function renderGalagaAlienTargetCropRows(report){
         label: crop.poseKey || crop.id || 'Target crop',
         src: crop.targetCrop,
         pixelated: true,
-        note: 'Exact source-sheet target crop promoted from the supplied Galaga general sprite sheet.'
+        note: crop.videoDerivedCleanCrop ? 'Trusted cleaned target crop promoted from the segmented Galaga alien motion reference.' : 'Target crop promoted from the supplied Galaga general sprite sheet.'
       })}</td>
       <td>${esc(source)}<br><span class="docMeta"><code>${esc(`${box.x ?? '?'}:${box.y ?? '?'} ${box.width ?? '?'}x${box.height ?? '?'}`)}</code></span></td>
       <td>${metricText}</td>
       <td>${esc(crop.note || '')}</td>
+    </tr>
+  `;
+  }).join('\n');
+}
+
+function renderGalagaTargetEvidenceAuditRows(report){
+  const rows = Array.isArray(report?.rows) ? report.rows : [];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="6"><span class="docMeta">Trusted target evidence audit pending. Run <code>npm run harness:analyze:galaga-target-evidence-audit</code>.</span></td>
+    </tr>`;
+  }
+  return rows.map((row) => {
+    const crops = Array.isArray(row.linkedCrops) ? row.linkedCrops : [];
+    const cropMedia = crops.slice(0, 4).map((crop) => crop.targetCrop ? renderMediaImage({
+      label: crop.id || 'Target crop',
+      src: crop.targetCrop,
+      pixelated: true,
+      note: `${crop.reviewStatus || 'review pending'}${crop.sourceFrameSeconds !== undefined ? `; frame ${crop.sourceFrameSeconds}s` : ''}`
+    }) : '').join('');
+    return `
+    <tr>
+      <td><strong>${esc(row.label || row.roleKey || '')}</strong><br><span class="docMeta"><code>${esc(row.roleKey || '')}</code><br>${esc(row.status || '')}<br>confidence: ${esc(row.confidence || 'pending')}</span></td>
+      <td>${cropMedia || '<span class="docMeta">No linked crop media.</span>'}</td>
+      <td>${esc(row.previousRisk || '')}</td>
+      <td>${esc(row.scoringUse || '')}</td>
+      <td>${esc(row.playerMeaning || '')}</td>
+      <td>${esc(row.nextGap || '')}</td>
     </tr>
   `;
   }).join('\n');
@@ -4531,6 +4580,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'target-artifact-coverage', title: 'Target Artifact Coverage' },
     { id: 'alien-visual-reference-pack', title: 'Alien Visual References' },
     { id: 'galaga-alien-motion-reference', title: 'Alien Motion Reference' },
+    { id: 'galaga-target-evidence-audit', title: 'Trusted Target Audit' },
     { id: 'sprite-conformance-variation-plan', title: 'Sprite Conformance Plan' },
     { id: 'conformance-alien-index', title: 'Alien Conformance Index' },
     { id: 'conformance-audio-index', title: 'Audio Conformance Index' },
@@ -4685,6 +4735,9 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const galagaAlienTargetCropSummary = galagaAlienTargetCrops.summary || {};
   const galagaAlienTargetRoleRows = renderGalagaAlienTargetRoleRows(galagaAlienTargetCrops);
   const galagaAlienTargetCropRows = renderGalagaAlienTargetCropRows(galagaAlienTargetCrops);
+  const galagaTargetEvidenceAudit = loadGalagaTargetEvidenceAudit();
+  const galagaTargetEvidenceAuditSummary = galagaTargetEvidenceAudit.summary || {};
+  const galagaTargetEvidenceAuditRows = renderGalagaTargetEvidenceAuditRows(galagaTargetEvidenceAudit);
   const auroraRuntimeSpriteConformance = loadAuroraRuntimeSpriteConformance();
   const auroraRuntimeSpriteSummary = auroraRuntimeSpriteConformance.summary || {};
   const auroraRuntimeVsGalagaTargetCrops = loadAuroraRuntimeVsGalagaTargetCrops();
@@ -5118,6 +5171,40 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           </div>
         </section>
 
+        <section class="section" id="galaga-target-evidence-audit">
+          <div class="sectionHeader">
+            <h2>Trusted Target Evidence Audit</h2>
+            <p>Human review found that some visually precise target crops were precise about the wrong thing: polluted sheet cells, partial neighboring sprites, or ambiguous evidence. This audit separates trusted target evidence from provisional planning evidence before scores drive more runtime sprite work.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Current read:</strong> ${esc(galagaTargetEvidenceAudit.status || 'pending')}. <strong>Next best step:</strong> ${esc(galagaTargetEvidenceAudit.nextBestStep || 'Regenerate target evidence audit after crop promotion.')}</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-target-evidence-audit/latest.json</code>. <strong>Readable report:</strong> <code>GALAGA_TARGET_EVIDENCE_AUDIT.md</code>. <strong>Generated:</strong> ${esc(galagaTargetEvidenceAudit.generatedAt || 'pending')}.</p>
+            <div class="metricGrid">
+              <div class="metricCard"><span class="metricLabel">Audited Roles</span><strong>${esc(galagaTargetEvidenceAuditSummary.auditedRoleCount ?? 0)}</strong><span>Boss, Bee, Butterfly, Fighter first</span></div>
+              <div class="metricCard"><span class="metricLabel">Trusted Primaries</span><strong>${esc(galagaTargetEvidenceAuditSummary.trustedPrimaryRoleCount ?? 0)}</strong><span>usable for scoring now</span></div>
+              <div class="metricCard"><span class="metricLabel">Motion Crops</span><strong>${esc(galagaTargetEvidenceAuditSummary.trustedMotionReferenceCount ?? 0)}</strong><span>cleaned from segmented video</span></div>
+              <div class="metricCard"><span class="metricLabel">Provisional Cells</span><strong>${esc(galagaTargetEvidenceAuditSummary.provisionalSourceSheetCount ?? 0)}</strong><span>do not overclaim</span></div>
+            </div>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Evidence</th>
+                  <th>Previous Risk</th>
+                  <th>Scoring Use</th>
+                  <th>Player Meaning</th>
+                  <th>Next Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${galagaTargetEvidenceAuditRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
         <section class="section" id="sprite-conformance-variation-plan">
           <div class="sectionHeader">
             <h2>Sprite Conformance Plan</h2>
@@ -5174,12 +5261,12 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           </div>
           <div class="docWrap" style="margin-top:16px;">
             <h3>Promoted Galaga Target Crops</h3>
-            <p>The first exact source-sheet crop library is now promoted from the preview grids. These crops are target-lane evidence for measurement and review; they are not public production art. Aurora live runtime sprites are now compared against this multi-pose library, and the next lift is deeper temporal windows for flap cadence, dive rotation, beam, explosion, capture, and challenge-stage motion.</p>
+            <p>The target crop library now combines trusted cleaned motion-reference crops for the core Boss, Bee, and Butterfly formation targets with provisional source-sheet pose crops for broader planning coverage. These crops are target-lane evidence for measurement and review; they are not public production art. Aurora live runtime sprites are compared against this multi-pose library, and the next lift is deeper temporal windows for flap cadence, dive rotation, beam, explosion, capture, and challenge-stage motion.</p>
             <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-target-crops/latest.json</code>. <strong>Readable report:</strong> <code>GALAGA_ALIEN_TARGET_CROPS.md</code>. <strong>Generated:</strong> ${esc(galagaAlienTargetCrops.generatedAt || 'pending')}.</p>
             <div class="metricGrid">
-              <div class="metricCard"><span class="metricLabel">Target Crops</span><strong>${esc(galagaAlienTargetCropSummary.targetCropCount ?? 0)}</strong><span>exact source-sheet images</span></div>
+              <div class="metricCard"><span class="metricLabel">Target Crops</span><strong>${esc(galagaAlienTargetCropSummary.targetCropCount ?? 0)}</strong><span>trusted plus provisional images</span></div>
               <div class="metricCard"><span class="metricLabel">Role Sets</span><strong>${esc(galagaAlienTargetCropSummary.roleSetCount ?? 0)}</strong><span>player, aliens, effects, beam</span></div>
-              <div class="metricCard"><span class="metricLabel">Source Pixels</span><strong>${galagaAlienTargetCropSummary.sourcePixelExact ? '1x exact' : 'pending'}</strong><span>no generated interpolation</span></div>
+              <div class="metricCard"><span class="metricLabel">Trusted Motion Crops</span><strong>${esc(galagaAlienTargetCropSummary.trustedMotionReferenceCount ?? 0)}</strong><span>cleaned from video reference</span></div>
               <div class="metricCard"><span class="metricLabel">Scoring Status</span><strong>${esc(galagaAlienTargetCropSummary.scoringStatus || 'pending')}</strong><span>runtime comparison next</span></div>
             </div>
           </div>

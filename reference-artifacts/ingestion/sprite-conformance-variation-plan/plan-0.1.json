@@ -87,14 +87,14 @@
       "id": "crop-box-manifest",
       "label": "Crop-Box Manifest",
       "goal": "Define bounding boxes for player, bee, butterfly, boss, captured fighter, projectiles, tractor beam, explosions, challenge aliens, and each important pose frame.",
-      "currentStatus": "First-pass region manifest exists at reference-artifacts/ingestion/galaga-alien-visual-reference/crop-box-manifest-0.1.json, generated review previews exist at reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json, and accepted first-pass per-role/per-pose target crops now exist at reference-artifacts/analyses/galaga-alien-target-crops/latest.json. Human review has found polluted crop evidence for at least the boss-line row, so the accepted-first-pass library must be treated as provisional.",
-      "nextAction": "Use the segmented motion reference and supplied clean pixel examples to recrop boss, bee, butterfly, and fighter targets before making additional runtime sprite changes."
+      "currentStatus": "First-pass region manifest exists at reference-artifacts/ingestion/galaga-alien-visual-reference/crop-box-manifest-0.1.json, generated review previews exist at reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json, and per-role/per-pose target crops now exist at reference-artifacts/analyses/galaga-alien-target-crops/latest.json. Human review found polluted crop evidence for the original boss/bee/butterfly target rows, so the library now separates trusted cleaned motion-reference crops from provisional source-sheet cells and records that decision in reference-artifacts/analyses/galaga-target-evidence-audit/latest.json.",
+      "nextAction": "Regenerate runtime-vs-target scoring against the trusted boss, bee, and butterfly crops, then promote clean player-fighter and temporal pulse-pair targets before making additional runtime sprite changes."
     },
     {
       "id": "pose-and-motion-targets",
       "label": "Pose And Motion Targets",
       "goal": "Group static crops into temporal identities: flap cycles, dive turns, boss damage, capture/rescue, dual fighter, projectiles, and explosions.",
-      "currentStatus": "Static model and runtime crop scoring exist, and a 33-crop/7-role promoted source-sheet library now supplies multi-pose static targets. Seed runtime windows now cover all four planned motion axes: flap phase pairs, full flap cadence, dive/rotation poses, capture/carry/dual transitions, and first-pass impact/explosion event crops. A segmented alien motion/pulse video now provides cleaner human-readable pulse/cadence evidence for Boss, Butterfly, Bee, specialty aliens, Fighter, and Tractor Beam.",
+      "currentStatus": "Static model and runtime crop scoring exist, and a 33-crop/7-role promoted target library now supplies multi-pose static targets. Five primary Boss/Bee/Butterfly crops are trusted cleaned motion-reference targets; remaining source-sheet cells are provisional until recropped or replaced by temporal windows. Seed runtime windows now cover all four planned motion axes: flap phase pairs, full flap cadence, dive/rotation poses, capture/carry/dual transitions, and first-pass impact/explosion event crops. A segmented alien motion/pulse video now provides cleaner human-readable pulse/cadence evidence for Boss, Butterfly, Bee, specialty aliens, Fighter, and Tractor Beam.",
       "nextAction": "Extract clean target-frame pulse pairs from the motion reference for Bee, Butterfly, and Boss, then score Aurora runtime cadence against those target sequences."
     },
     {
@@ -108,7 +108,7 @@
       "id": "scoring-and-gates",
       "label": "Scoring And Gates",
       "goal": "Score static crops, active motion, stage context, player meaning, and shipped-theme originality separately.",
-      "currentStatus": "Runtime static sprite score is 5.75/10 against inferred models while the stricter runtime-vs-promoted-target-crop comparator reads 4.48/10 and exposes the direct visible geometry gap. Impact/explosion feedback now has a first-pass static crop comparator at 5.86/10 after adding a target-derived pixel explosion layer. Active sprite motion has seed windows but is not yet target-frame temporal scoring.",
+      "currentStatus": "Runtime static sprite score is 5.75/10 against inferred models while the stricter runtime-vs-promoted-target-crop comparator now reads 4.33/10 after replacing polluted Boss/Bee/Butterfly targets with trusted motion-reference crops. That score decrease is useful: it removes false confidence and exposes the direct visible geometry gap. Impact/explosion feedback has a first-pass static crop comparator at 5.86/10 after adding a target-derived pixel explosion layer. Active sprite motion has seed windows but is not yet target-frame temporal scoring.",
       "nextAction": "Move direct target sprite score toward 5.5+ before the next beta claim, keep challenge-stage set-piece conformance above 5.0 before claiming a beta conformance lift, and add confidence/resolution plus temporal target scoring."
     },
     {
@@ -178,6 +178,14 @@
       "path": "reference-artifacts/analyses/galaga-alien-target-crops/latest.json"
     },
     {
+      "label": "Galaga target evidence audit",
+      "path": "GALAGA_TARGET_EVIDENCE_AUDIT.md"
+    },
+    {
+      "label": "Galaga target evidence audit analysis",
+      "path": "reference-artifacts/analyses/galaga-target-evidence-audit/latest.json"
+    },
+    {
       "label": "Galaga alien motion reference report",
       "path": "GALAGA_ALIEN_MOTION_REFERENCE.md"
     },
@@ -202,5 +210,5 @@
       "path": "GALAGA_TARGET_ARTIFACT_COVERAGE.md"
     }
   ],
-  "nextBestStep": "Clean and recrop the target evidence first, starting with boss, bee, butterfly, and fighter, using the segmented motion/pulse reference plus supplied clean pixel examples. Then regenerate runtime-vs-target scoring and only tune Aurora sprites against the corrected evidence."
+  "nextBestStep": "Promote a clean player-fighter target-crop, add temporal pulse-pair targets for Boss/Bee/Butterfly, then tune Aurora runtime-vs-target sprite geometry against the corrected target library before the next beta handoff."
 }

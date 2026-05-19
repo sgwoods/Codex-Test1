@@ -9,27 +9,28 @@ const OUT_DIR = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien
 const CROP_DIR = path.join(OUT_DIR, 'latest-crops');
 const OUT = path.join(OUT_DIR, 'latest.json');
 const MARKDOWN = path.join(ROOT, 'GALAGA_ALIEN_TARGET_CROPS.md');
+const MOTION_REFERENCE_VIDEO = path.join(ROOT, 'reference-artifacts', 'ingestion', 'galaga-alien-motion-reference', 'source-video', 'galaga-alien-pulse-reference.mp4');
 
 const CROP_SPECS = [
   cellSpec('player-fighter-single-front', 'player-fighter', 'single-ship-front', 'left-primary-sprite-grid', 1, 8, 'Best first-pass front-facing fighter cell in the supplied sheet. Dual-fighter remains a composite scoring target.'),
   cellSpec('player-fighter-turn-left', 'player-fighter', 'turn-left', 'left-primary-sprite-grid', 1, 6, 'Rotation/turn pose for future motion and capture/rescue scoring.'),
   cellSpec('player-fighter-turn-right', 'player-fighter', 'turn-right', 'left-primary-sprite-grid', 1, 7, 'Rotation/turn pose for future motion and capture/rescue scoring.'),
 
-  cellSpec('bee-zako-formation-front', 'bee-zako', 'formation-front', 'left-primary-sprite-grid', 6, 8, 'Front-like bee/Zako cell for formation readability.'),
+  motionSpec('bee-zako-formation-front', 'bee-zako', 'formation-front', 10.0, { x: 384, y: 86, width: 58, height: 54 }, 'Trusted clean bee/Zako formation crop from the segmented alien motion reference; replaces the polluted sheet-cell primary target.'),
   cellSpec('bee-zako-flap-a', 'bee-zako', 'flap-a', 'left-primary-sprite-grid', 6, 6, 'Wing/pose phase candidate for future flap cadence scoring.'),
   cellSpec('bee-zako-flap-b', 'bee-zako', 'flap-b', 'left-primary-sprite-grid', 6, 7, 'Alternating wing/pose phase candidate for future flap cadence scoring.'),
   cellSpec('bee-zako-dive-left', 'bee-zako', 'dive-left', 'left-primary-sprite-grid', 6, 1, 'Dive/rotation silhouette candidate for approach-path scoring.'),
   cellSpec('bee-zako-dive-right', 'bee-zako', 'dive-right', 'left-primary-sprite-grid', 6, 2, 'Mirrored dive/rotation silhouette candidate for approach-path scoring.'),
 
-  cellSpec('butterfly-escort-formation-front', 'butterfly-escort', 'formation-front', 'left-primary-sprite-grid', 5, 8, 'Front-like butterfly/escort cell for formation readability.'),
+  motionSpec('butterfly-escort-formation-front', 'butterfly-escort', 'formation-front', 10.0, { x: 225, y: 95, width: 62, height: 42 }, 'Trusted clean butterfly/escort formation crop from the segmented alien motion reference; replaces the polluted sheet-cell primary target.'),
   cellSpec('butterfly-escort-flap-a', 'butterfly-escort', 'flap-a', 'left-primary-sprite-grid', 5, 6, 'Wing/pose phase candidate for future flap cadence scoring.'),
   cellSpec('butterfly-escort-flap-b', 'butterfly-escort', 'flap-b', 'left-primary-sprite-grid', 5, 7, 'Alternating wing/pose phase candidate for future flap cadence scoring.'),
   cellSpec('butterfly-escort-dive-left', 'butterfly-escort', 'dive-left', 'left-primary-sprite-grid', 5, 1, 'Dive/rotation silhouette candidate for escort path scoring.'),
   cellSpec('butterfly-escort-dive-right', 'butterfly-escort', 'dive-right', 'left-primary-sprite-grid', 5, 2, 'Mirrored dive/rotation silhouette candidate for escort path scoring.'),
 
-  cellSpec('boss-galaga-formation-front', 'boss-galaga', 'formation-front', 'left-primary-sprite-grid', 3, 8, 'Front-like boss/command-ship cell for formation and capture-beam host readability.'),
-  cellSpec('boss-galaga-flap-a', 'boss-galaga', 'flap-a', 'left-primary-sprite-grid', 3, 6, 'Boss wing/pose phase candidate.'),
-  cellSpec('boss-galaga-flap-b', 'boss-galaga', 'flap-b', 'left-primary-sprite-grid', 3, 7, 'Alternating boss wing/pose phase candidate.'),
+  motionSpec('boss-galaga-formation-front', 'boss-galaga', 'formation-front', 10.0, { x: 22, y: 78, width: 60, height: 62 }, 'Trusted clean teal boss formation crop from the segmented alien motion reference; replaces the polluted sheet-cell primary target.'),
+  motionSpec('boss-galaga-flap-a', 'boss-galaga', 'flap-a', 10.0, { x: 22, y: 78, width: 60, height: 62 }, 'Trusted clean boss pulse/pose phase A from the segmented alien motion reference.'),
+  motionSpec('boss-galaga-flap-b', 'boss-galaga', 'flap-b', 10.0, { x: 86, y: 78, width: 60, height: 62 }, 'Trusted clean purple boss pulse/pose phase B from the segmented alien motion reference.'),
   cellSpec('boss-galaga-dive-left', 'boss-galaga', 'dive-left', 'left-primary-sprite-grid', 3, 1, 'Boss dive/rotation silhouette candidate.'),
   cellSpec('boss-galaga-dive-right', 'boss-galaga', 'dive-right', 'left-primary-sprite-grid', 3, 2, 'Mirrored boss dive/rotation silhouette candidate.'),
 
@@ -56,10 +57,11 @@ function cellSpec(id, roleKey, poseKey, sourceRegion, row, column, note){
     id,
     roleKey,
     poseKey,
+    sourceKind: 'sheet-cell',
     sourceRegion,
     sourceCell: { row, column },
     note,
-    reviewStatus: 'accepted-first-pass'
+    reviewStatus: 'provisional-source-sheet-cell'
   };
 }
 
@@ -68,10 +70,26 @@ function cropSpec(id, roleKey, poseKey, sourceRegion, crop, note){
     id,
     roleKey,
     poseKey,
+    sourceKind: 'sheet-crop',
     sourceRegion,
     crop,
     note,
-    reviewStatus: 'accepted-first-pass'
+    reviewStatus: 'accepted-source-sheet-crop'
+  };
+}
+
+function motionSpec(id, roleKey, poseKey, timeSeconds, frameCrop, note){
+  return {
+    id,
+    roleKey,
+    poseKey,
+    sourceKind: 'motion-reference-video',
+    sourceRegion: 'segmented-alien-motion-reference',
+    sourceVideo: rel(MOTION_REFERENCE_VIDEO),
+    timeSeconds,
+    frameCrop,
+    note,
+    reviewStatus: 'accepted-trusted-motion-reference'
   };
 }
 
@@ -127,7 +145,8 @@ function rounded(value, places = 3){
 
 function probeImage(file){
   const raw = run('ffprobe', ['-v', 'error', '-show_entries', 'stream=width,height', '-of', 'json', file]);
-  const stream = JSON.parse(raw).streams?.[0] || {};
+  const streams = JSON.parse(raw).streams || [];
+  const stream = streams.find(item => item.width && item.height) || streams[0] || {};
   return { width: stream.width || 0, height: stream.height || 0 };
 }
 
@@ -135,6 +154,122 @@ function decodeImage(file){
   const { width, height } = probeImage(file);
   const raw = run('ffmpeg', ['-v', 'error', '-i', file, '-f', 'rawvideo', '-pix_fmt', 'rgb24', 'pipe:1'], { encoding: 'buffer' });
   return { width, height, raw };
+}
+
+function isSpritePixel(r, g, b){
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  const luma = .299 * r + .587 * g + .114 * b;
+  const saturation = max - min;
+  if(max < 72 || luma < 42) return false;
+  if(luma > 185 && saturation < 52) return true;
+  if(saturation > 46 && max > 95) return true;
+  return false;
+}
+
+function snapSpritePixel(r, g, b){
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  const luma = .299 * r + .587 * g + .114 * b;
+  if(luma > 190 && max - min < 58) return [255, 255, 255];
+  if(r > 150 && g > 120 && b < 110) return [255, 238, 45];
+  if(r > 145 && b > 120 && g < 125) return [210, 58, 255];
+  if(g > 125 && b > 120 && r < 130) return [0, 210, 210];
+  if(g > 120 && r < 130 && b < 130) return [0, 190, 80];
+  if(b > 130 && r < 130) return [35, 100, 255];
+  if(r > 145 && g < 130 && b < 130) return [255, 48, 34];
+  return [r, g, b];
+}
+
+function rawVideoCrop(video, timeSeconds, crop){
+  if(!fs.existsSync(video)) fail('Missing segmented alien motion reference video.', { sourceVideo: rel(video) });
+  return run('ffmpeg', [
+    '-v', 'error',
+    '-ss', String(timeSeconds),
+    '-i', video,
+    '-vf', `crop=${crop.width}:${crop.height}:${crop.x}:${crop.y}`,
+    '-frames:v', '1',
+    '-f', 'rawvideo',
+    '-pix_fmt', 'rgb24',
+    'pipe:1'
+  ], { encoding: 'buffer' });
+}
+
+function cleanMotionReferenceCrop(raw, width, height){
+  const keep = new Uint8Array(width * height);
+  let minX = Infinity;
+  let minY = Infinity;
+  let maxX = -Infinity;
+  let maxY = -Infinity;
+  for(let y = 0; y < height; y++){
+    for(let x = 0; x < width; x++){
+      const i = (y * width + x) * 3;
+      const r = raw[i];
+      const g = raw[i + 1];
+      const b = raw[i + 2];
+      if(!isSpritePixel(r, g, b)) continue;
+      keep[y * width + x] = 1;
+      minX = Math.min(minX, x);
+      minY = Math.min(minY, y);
+      maxX = Math.max(maxX, x);
+      maxY = Math.max(maxY, y);
+    }
+  }
+  if(!Number.isFinite(minX)){
+    return { width, height, raw: Buffer.alloc(width * height * 3), litBox: null };
+  }
+  const pad = 2;
+  const outMinX = Math.max(0, minX - pad);
+  const outMinY = Math.max(0, minY - pad);
+  const outMaxX = Math.min(width - 1, maxX + pad);
+  const outMaxY = Math.min(height - 1, maxY + pad);
+  const outWidth = outMaxX - outMinX + 1;
+  const outHeight = outMaxY - outMinY + 1;
+  const out = Buffer.alloc(outWidth * outHeight * 3);
+  for(let y = outMinY; y <= outMaxY; y++){
+    for(let x = outMinX; x <= outMaxX; x++){
+      const src = (y * width + x) * 3;
+      const dst = ((y - outMinY) * outWidth + (x - outMinX)) * 3;
+      if(!keep[y * width + x]){
+        out[dst] = 0;
+        out[dst + 1] = 0;
+        out[dst + 2] = 0;
+        continue;
+      }
+      const [r, g, b] = snapSpritePixel(raw[src], raw[src + 1], raw[src + 2]);
+      out[dst] = r;
+      out[dst + 1] = g;
+      out[dst + 2] = b;
+    }
+  }
+  return {
+    width: outWidth,
+    height: outHeight,
+    raw: out,
+    litBox: { x: outMinX, y: outMinY, width: outWidth, height: outHeight }
+  };
+}
+
+function encodeRawPng(raw, width, height, outFile){
+  const result = spawnSync('ffmpeg', [
+    '-v', 'error',
+    '-f', 'rawvideo',
+    '-pix_fmt', 'rgb24',
+    '-s', `${width}x${height}`,
+    '-i', 'pipe:0',
+    '-frames:v', '1',
+    '-y',
+    outFile
+  ], {
+    cwd: ROOT,
+    input: raw,
+    encoding: 'utf8',
+    maxBuffer: 1024 * 1024 * 256,
+    timeout: 1000 * 60 * 5
+  });
+  if(result.status !== 0){
+    throw new Error(`ffmpeg failed while encoding ${rel(outFile)}\n${result.stderr || result.stdout || ''}`);
+  }
 }
 
 function colorToken(r, g, b){
@@ -210,6 +345,9 @@ function resolvedCrop(spec, regions){
 }
 
 function promoteCrop(spec, source, sourceDimensions, regions){
+  if(spec.sourceKind === 'motion-reference-video'){
+    return promoteMotionCrop(spec);
+  }
   const crop = resolvedCrop(spec, regions);
   if(crop.x < 0 || crop.y < 0 || crop.width <= 0 || crop.height <= 0 || crop.x + crop.width > sourceDimensions.width || crop.y + crop.height > sourceDimensions.height){
     fail('Target crop exceeds source sheet bounds.', { spec, crop, sourceDimensions });
@@ -232,6 +370,35 @@ function promoteCrop(spec, source, sourceDimensions, regions){
     crop: Object.assign({ sourceWidth: sourceDimensions.width, sourceHeight: sourceDimensions.height }, crop),
     targetCrop: rel(outFile),
     sourcePixelExact: true,
+    pixelScale: 1,
+    metrics
+  });
+}
+
+function promoteMotionCrop(spec){
+  const sourceDimensions = probeImage(MOTION_REFERENCE_VIDEO);
+  const crop = spec.frameCrop;
+  if(crop.x < 0 || crop.y < 0 || crop.width <= 0 || crop.height <= 0 || crop.x + crop.width > sourceDimensions.width || crop.y + crop.height > sourceDimensions.height){
+    fail('Motion-reference crop exceeds source video frame bounds.', { spec, crop, sourceDimensions });
+  }
+  fs.mkdirSync(CROP_DIR, { recursive: true });
+  const outFile = path.join(CROP_DIR, `${spec.id}.png`);
+  const raw = rawVideoCrop(MOTION_REFERENCE_VIDEO, spec.timeSeconds, crop);
+  const cleaned = cleanMotionReferenceCrop(raw, crop.width, crop.height);
+  if(!cleaned.litBox) fail('Motion-reference crop did not contain visible sprite pixels.', { spec, crop });
+  encodeRawPng(cleaned.raw, cleaned.width, cleaned.height, outFile);
+  const metrics = imageMetrics(outFile);
+  if(metrics.litPixels < 3) fail('Motion-reference target crop has too few visible pixels.', { spec, crop, metrics });
+  return Object.assign({}, spec, {
+    label: `${roleLabel(spec.roleKey)} ${spec.poseKey}`,
+    sourceImage: rel(MOTION_REFERENCE_VIDEO),
+    sourceVideo: rel(MOTION_REFERENCE_VIDEO),
+    sourceFrameSeconds: spec.timeSeconds,
+    crop: Object.assign({ sourceWidth: sourceDimensions.width, sourceHeight: sourceDimensions.height }, crop),
+    cleanedCrop: cleaned.litBox,
+    targetCrop: rel(outFile),
+    sourcePixelExact: false,
+    videoDerivedCleanCrop: true,
     pixelScale: 1,
     metrics
   });
@@ -314,7 +481,7 @@ function markdownReport(artifact){
     '',
     `Generated: ${artifact.generatedAt}`,
     '',
-    'This report promotes exact first-pass crops from the supplied Galaga general sprite sheet. These crops are source-sheet targets for richer static, pose, projectile, explosion, and tractor-beam scoring. They are not a ROM-perfect final atlas and they do not yet score temporal motion by themselves.',
+    'This report promotes target crops from two evidence classes: trusted cleaned crops from the segmented Galaga alien motion reference, and provisional/exact crops from the supplied Galaga general sprite sheet. The trusted motion crops now anchor the primary Boss, Bee, and Butterfly formation targets after human review found polluted sheet-cell evidence. These are conformance targets for measurement, not production art, and they do not yet score temporal motion by themselves.',
     '',
     '## Summary',
     '',
@@ -354,6 +521,8 @@ function main(){
   const targetCrops = CROP_SPECS.map(spec => promoteCrop(spec, source, sourceDimensions, regions));
   targetCrops.push(promoteDualFighterComposite(targetCrops));
   const roleSetRows = roleSets(targetCrops, manifest);
+  const trustedMotionCount = targetCrops.filter(crop => crop.videoDerivedCleanCrop).length;
+  const provisionalSheetCount = targetCrops.filter(crop => crop.reviewStatus === 'provisional-source-sheet-cell').length;
   const artifact = {
     schemaVersion: 1,
     artifactType: 'galaga-alien-target-crops',
@@ -361,7 +530,7 @@ function main(){
     commit: git(['rev-parse', '--short', 'HEAD'], 'unknown'),
     branch: git(['branch', '--show-current'], 'unknown'),
     dirty: !!git(['status', '--porcelain'], ''),
-    status: 'accepted-first-pass-target-crops',
+    status: 'trusted-motion-overrides-plus-provisional-sheet-crops',
     sourceManifest: rel(MANIFEST),
     sourceImage: manifest.sourceImage,
     sourceDimensions,
@@ -370,18 +539,21 @@ function main(){
       targetCropCount: targetCrops.length,
       roleSetCount: roleSetRows.length,
       promotedRoles: roleSetRows.map(role => role.roleKey),
-      sourcePixelExact: true,
+      sourcePixelExact: false,
+      trustedMotionReferenceCount: trustedMotionCount,
+      provisionalSourceSheetCount: provisionalSheetCount,
       compositeTargetCount: targetCrops.filter(crop => crop.compositeTarget).length,
-      scoringStatus: 'target-library-ready-runtime-comparison-pending'
+      scoringStatus: 'trusted-core-formation-targets-ready-runtime-comparison-pending'
     },
     measurementLimits: [
-      'These are first-pass accepted crops from the supplied Galaga general sprite sheet, not ROM-perfect final truth.',
+      'Trusted motion-reference crops are cleaned from a compressed segmented reference video; they are better human-readable targets than polluted sheet cells, but not ROM-perfect final truth.',
+      'Remaining source-sheet cell crops are useful provisional pose evidence and should not be treated as final canonical target pixels without human review.',
       'The crops improve role, pose, projectile, explosion, and tractor-beam grounding but do not yet score temporal animation cadence.',
       'Dual-fighter, carried-fighter, boss damage, and capture/rescue transition targets still need composite or temporal promotion.'
     ],
     roleSets: roleSetRows,
     targetCrops,
-    nextBestStep: 'Compare Aurora live runtime crops against these promoted multi-pose targets and add temporal windows for flap, dive, damage, capture, rescue, and challenge-stage specialty motion.'
+    nextBestStep: 'Regenerate Aurora live runtime comparisons against the corrected Boss, Bee, and Butterfly targets, then promote clean player-fighter and temporal pulse/cadence targets before tuning more runtime sprites.'
   };
   writeJson(OUT, artifact);
   writeText(MARKDOWN, markdownReport(artifact));

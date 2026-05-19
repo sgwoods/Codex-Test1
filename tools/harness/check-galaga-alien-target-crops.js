@@ -41,11 +41,11 @@ function main(){
     targetCropIds: targetCrops.map(crop => crop.id),
     roleKeys: roleSets.map(role => role.roleKey)
   };
-  if(artifact.artifactType !== 'galaga-alien-target-crops' || artifact.status !== 'accepted-first-pass-target-crops'){
+  if(artifact.artifactType !== 'galaga-alien-target-crops' || !['accepted-first-pass-target-crops', 'trusted-motion-overrides-plus-provisional-sheet-crops'].includes(artifact.status)){
     fail('Galaga alien target crop artifact has the wrong type or status.', payload);
   }
-  if(!artifact.summary?.sourcePixelExact){
-    fail('Galaga alien target crop artifact should preserve exact source pixels.', payload);
+  if(!artifact.summary?.sourcePixelExact && (artifact.summary?.trustedMotionReferenceCount || 0) < 3){
+    fail('Galaga alien target crop artifact should preserve exact source pixels or expose trusted motion-reference overrides.', payload);
   }
   for(const role of REQUIRED_ROLES){
     const row = roleSets.find(item => item.roleKey === role);
@@ -64,8 +64,8 @@ function main(){
     if(!exists(crop.targetCrop)){
       fail(`Promoted target crop ${crop.id} points at a missing image`, { crop, payload });
     }
-    if(crop.pixelScale !== 1 || (crop.sourcePixelExact !== true && crop.exactComposite !== true)){
-      fail(`Promoted target crop ${crop.id} should be exact 1x source pixels or an exact 1x composite`, { crop, payload });
+    if(crop.pixelScale !== 1 || (crop.sourcePixelExact !== true && crop.exactComposite !== true && crop.videoDerivedCleanCrop !== true)){
+      fail(`Promoted target crop ${crop.id} should be exact 1x source pixels, an exact 1x composite, or a trusted cleaned motion-reference crop`, { crop, payload });
     }
     if(crop.compositeTarget && (!Array.isArray(crop.componentCrops) || crop.componentCrops.length < 2)){
       fail(`Promoted target crop ${crop.id} is marked composite but does not list component crops`, { crop, payload });
