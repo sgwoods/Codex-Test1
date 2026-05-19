@@ -1,19 +1,21 @@
 {
   "schemaVersion": 1,
   "artifactType": "galaga-alien-temporal-targets",
-  "generatedAt": "2026-05-19T21:31:26.787Z",
-  "commit": "0538fb9d",
+  "generatedAt": "2026-05-19T22:28:00.576Z",
+  "commit": "a2cfb8b5",
   "branch": "codex/macbook-challenge-sprite-motion-conformance",
-  "dirty": false,
+  "dirty": true,
   "status": "mixed-confidence-temporal-target-sequences",
   "sourceArtifacts": {
-    "targetCrops": "reference-artifacts/analyses/galaga-alien-target-crops/latest.json"
+    "targetCrops": "reference-artifacts/analyses/galaga-alien-target-crops/latest.json",
+    "frameCadenceTargets": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest.json"
   },
   "summary": {
     "temporalRowCount": 3,
     "trustedCropLinks": 5,
     "provisionalCropLinks": 4,
-    "finalFrameTimedRows": 0,
+    "finalFrameTimedRows": 3,
+    "frameLabeledSegmentedReferenceRows": 3,
     "usableForRuntimeCadenceScoring": 3
   },
   "rows": [
@@ -36,12 +38,116 @@
         "formation-front"
       ],
       "confidence": "medium-high",
-      "status": "trusted-color-pulse-pair-not-frame-timed",
-      "sourceRead": "Uses two cleaned boss identities visible in the segmented alien motion reference as a trusted color/pulse target pair.",
-      "scoringUse": "Good enough to score role/color pulse and broad cadence transitions; not yet exact frame timing.",
-      "nextGap": "Extract a true frame-labeled boss animation window from gameplay or ROM-derived frame evidence.",
+      "status": "frame-timed-target-window",
+      "sourceRead": "Uses two cleaned boss identities visible in the segmented alien motion reference as a trusted color/pulse target pair. Frame-labeled cadence now comes from segmented-motion-reference-video: Frame-labeled window from the preserved segmented Galaga alien motion reference. It shows a repeated compact/extended Boss pulse at readable cadence, but it is not raw gameplay footage.",
+      "scoringUse": "Used for runtime cadence comparison with explicit timecodes and phase labels. Still treated as segmented-reference evidence, not final raw gameplay timing.",
+      "nextGap": "Confirm this segmented-reference cadence against raw gameplay or ROM-derived timing, then extend the same target method to dive/rotation and challenge-only aliens.",
+      "timingStatus": "frame-labeled-segmented-reference-window",
       "trustedCropCount": 3,
       "provisionalCropCount": 0,
+      "frameCadenceTarget": {
+        "id": "boss-galaga-pulse-pair",
+        "status": "frame-labeled-segmented-reference-window",
+        "acceptedForScoring": true,
+        "sourceKind": "segmented-motion-reference-video",
+        "sampleFps": 4,
+        "sampleCount": 24,
+        "cadenceSecondsPerCycle": 1,
+        "phasePattern": [
+          "compact",
+          "compact",
+          "extended",
+          "extended"
+        ],
+        "phaseLabels": [
+          "compact",
+          "extended"
+        ],
+        "averageAdjacentDelta": 126.348,
+        "maxAdjacentDelta": 248,
+        "previewFrames": [
+          {
+            "sampleIndex": 0,
+            "timeSeconds": 2,
+            "phaseLabel": "compact",
+            "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-00-compact.png",
+            "metrics": {
+              "width": 52,
+              "height": 56,
+              "litPixels": 1181,
+              "litRatio": 0.40556,
+              "tokenChannels": [
+                "B",
+                "G",
+                "M",
+                "R",
+                "Y"
+              ],
+              "litBox": {
+                "x": 2,
+                "y": 2,
+                "width": 48,
+                "height": 52
+              }
+            }
+          },
+          {
+            "sampleIndex": 12,
+            "timeSeconds": 5,
+            "phaseLabel": "compact",
+            "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-12-compact.png",
+            "metrics": {
+              "width": 52,
+              "height": 56,
+              "litPixels": 1198,
+              "litRatio": 0.4114,
+              "tokenChannels": [
+                "B",
+                "G",
+                "M",
+                "R",
+                "Y"
+              ],
+              "litBox": {
+                "x": 2,
+                "y": 2,
+                "width": 48,
+                "height": 52
+              }
+            }
+          },
+          {
+            "sampleIndex": 23,
+            "timeSeconds": 7.75,
+            "phaseLabel": "extended",
+            "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-23-extended.png",
+            "metrics": {
+              "width": 52,
+              "height": 56,
+              "litPixels": 1207,
+              "litRatio": 0.41449,
+              "tokenChannels": [
+                "B",
+                "G",
+                "M",
+                "R",
+                "Y"
+              ],
+              "litBox": {
+                "x": 2,
+                "y": 2,
+                "width": 48,
+                "height": 52
+              }
+            }
+          }
+        ],
+        "measurementLimits": [
+          "This row is frame-labeled from a preserved segmented reference clip, not yet from raw arcade gameplay or ROM-derived frame timing.",
+          "The cadence should be used to compare visible runtime pulse/cadence behavior and to prevent provisional sheet cells from over-driving sprite-motion scoring.",
+          "Exact gameplay-time animation cadence still needs raw target gameplay windows."
+        ]
+      },
       "targetCrops": [
         {
           "id": "boss-galaga-formation-front",
@@ -144,13 +250,122 @@
         "flap-a",
         "formation-front"
       ],
-      "confidence": "medium-low",
-      "status": "mixed-trusted-formation-plus-provisional-flap-pair",
-      "sourceRead": "Formation identity is trusted from the segmented alien motion reference; flap pair still comes from provisional source-sheet cells.",
-      "scoringUse": "Useful for exposing Aurora Bee geometry and cadence gaps, but not sufficient for a final temporal conformance claim.",
-      "nextGap": "Promote clean Bee flap frames from a true animated target window.",
+      "confidence": "medium-high",
+      "status": "frame-timed-target-window",
+      "sourceRead": "Formation identity is trusted from the segmented alien motion reference; flap pair still comes from provisional source-sheet cells. Frame-labeled cadence now comes from segmented-motion-reference-video: Frame-labeled window from the preserved segmented Galaga alien motion reference. It cleanly separates Bee wing-open and wing-compact phases for runtime cadence scoring.",
+      "scoringUse": "Used for runtime cadence comparison with explicit timecodes and phase labels. Still treated as segmented-reference evidence, not final raw gameplay timing.",
+      "nextGap": "Confirm this segmented-reference cadence against raw gameplay or ROM-derived timing, then extend the same target method to dive/rotation and challenge-only aliens.",
+      "timingStatus": "frame-labeled-segmented-reference-window",
       "trustedCropCount": 1,
       "provisionalCropCount": 2,
+      "frameCadenceTarget": {
+        "id": "bee-zako-pulse-pair",
+        "status": "frame-labeled-segmented-reference-window",
+        "acceptedForScoring": true,
+        "sourceKind": "segmented-motion-reference-video",
+        "sampleFps": 4,
+        "sampleCount": 24,
+        "cadenceSecondsPerCycle": 1,
+        "phasePattern": [
+          "extended",
+          "compact",
+          "compact",
+          "extended"
+        ],
+        "phaseLabels": [
+          "extended",
+          "compact"
+        ],
+        "averageAdjacentDelta": 87.261,
+        "maxAdjacentDelta": 182,
+        "previewFrames": [
+          {
+            "sampleIndex": 0,
+            "timeSeconds": 2,
+            "phaseLabel": "extended",
+            "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-00-extended.png",
+            "metrics": {
+              "width": 45,
+              "height": 36,
+              "litPixels": 774,
+              "litRatio": 0.47778,
+              "tokenChannels": [
+                "B",
+                "G",
+                "M",
+                "R",
+                "W",
+                "Y"
+              ],
+              "litBox": {
+                "x": 1,
+                "y": 2,
+                "width": 42,
+                "height": 32
+              }
+            }
+          },
+          {
+            "sampleIndex": 12,
+            "timeSeconds": 5,
+            "phaseLabel": "extended",
+            "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-12-extended.png",
+            "metrics": {
+              "width": 45,
+              "height": 36,
+              "litPixels": 771,
+              "litRatio": 0.47593,
+              "tokenChannels": [
+                "B",
+                "C",
+                "G",
+                "M",
+                "R",
+                "W",
+                "Y"
+              ],
+              "litBox": {
+                "x": 1,
+                "y": 2,
+                "width": 42,
+                "height": 32
+              }
+            }
+          },
+          {
+            "sampleIndex": 23,
+            "timeSeconds": 7.75,
+            "phaseLabel": "extended",
+            "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-23-extended.png",
+            "metrics": {
+              "width": 45,
+              "height": 36,
+              "litPixels": 771,
+              "litRatio": 0.47593,
+              "tokenChannels": [
+                "B",
+                "C",
+                "G",
+                "M",
+                "R",
+                "W",
+                "Y"
+              ],
+              "litBox": {
+                "x": 1,
+                "y": 2,
+                "width": 42,
+                "height": 32
+              }
+            }
+          }
+        ],
+        "measurementLimits": [
+          "This row is frame-labeled from a preserved segmented reference clip, not yet from raw arcade gameplay or ROM-derived frame timing.",
+          "The cadence should be used to compare visible runtime pulse/cadence behavior and to prevent provisional sheet cells from over-driving sprite-motion scoring.",
+          "Exact gameplay-time animation cadence still needs raw target gameplay windows."
+        ]
+      },
       "targetCrops": [
         {
           "id": "bee-zako-formation-front",
@@ -255,13 +470,115 @@
         "flap-a",
         "formation-front"
       ],
-      "confidence": "medium-low",
-      "status": "mixed-trusted-formation-plus-provisional-flap-pair",
-      "sourceRead": "Formation identity is trusted from the segmented alien motion reference; flap pair still comes from provisional source-sheet cells.",
-      "scoringUse": "Useful for exposing Aurora Butterfly geometry and cadence gaps, but not sufficient for a final temporal conformance claim.",
-      "nextGap": "Promote clean Butterfly flap frames from a true animated target window.",
+      "confidence": "medium-high",
+      "status": "frame-timed-target-window",
+      "sourceRead": "Formation identity is trusted from the segmented alien motion reference; flap pair still comes from provisional source-sheet cells. Frame-labeled cadence now comes from segmented-motion-reference-video: Frame-labeled window from the preserved segmented Galaga alien motion reference. It cleanly separates Butterfly wing-compact and wing-open phases for runtime cadence scoring.",
+      "scoringUse": "Used for runtime cadence comparison with explicit timecodes and phase labels. Still treated as segmented-reference evidence, not final raw gameplay timing.",
+      "nextGap": "Confirm this segmented-reference cadence against raw gameplay or ROM-derived timing, then extend the same target method to dive/rotation and challenge-only aliens.",
+      "timingStatus": "frame-labeled-segmented-reference-window",
       "trustedCropCount": 1,
       "provisionalCropCount": 2,
+      "frameCadenceTarget": {
+        "id": "butterfly-escort-pulse-pair",
+        "status": "frame-labeled-segmented-reference-window",
+        "acceptedForScoring": true,
+        "sourceKind": "segmented-motion-reference-video",
+        "sampleFps": 4,
+        "sampleCount": 24,
+        "cadenceSecondsPerCycle": 1,
+        "phasePattern": [
+          "compact",
+          "extended",
+          "extended",
+          "compact"
+        ],
+        "phaseLabels": [
+          "compact",
+          "extended"
+        ],
+        "averageAdjacentDelta": 151,
+        "maxAdjacentDelta": 293,
+        "previewFrames": [
+          {
+            "sampleIndex": 0,
+            "timeSeconds": 2,
+            "phaseLabel": "compact",
+            "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-00-compact.png",
+            "metrics": {
+              "width": 34,
+              "height": 36,
+              "litPixels": 664,
+              "litRatio": 0.54248,
+              "tokenChannels": [
+                "B",
+                "R",
+                "W"
+              ],
+              "litBox": {
+                "x": 2,
+                "y": 2,
+                "width": 30,
+                "height": 32
+              }
+            }
+          },
+          {
+            "sampleIndex": 12,
+            "timeSeconds": 5,
+            "phaseLabel": "compact",
+            "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-12-compact.png",
+            "metrics": {
+              "width": 34,
+              "height": 36,
+              "litPixels": 676,
+              "litRatio": 0.55229,
+              "tokenChannels": [
+                "B",
+                "C",
+                "G",
+                "R",
+                "W"
+              ],
+              "litBox": {
+                "x": 2,
+                "y": 2,
+                "width": 30,
+                "height": 32
+              }
+            }
+          },
+          {
+            "sampleIndex": 23,
+            "timeSeconds": 7.75,
+            "phaseLabel": "compact",
+            "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-23-compact.png",
+            "metrics": {
+              "width": 34,
+              "height": 36,
+              "litPixels": 653,
+              "litRatio": 0.5335,
+              "tokenChannels": [
+                "B",
+                "G",
+                "R",
+                "W",
+                "Y"
+              ],
+              "litBox": {
+                "x": 2,
+                "y": 2,
+                "width": 30,
+                "height": 32
+              }
+            }
+          }
+        ],
+        "measurementLimits": [
+          "This row is frame-labeled from a preserved segmented reference clip, not yet from raw arcade gameplay or ROM-derived frame timing.",
+          "The cadence should be used to compare visible runtime pulse/cadence behavior and to prevent provisional sheet cells from over-driving sprite-motion scoring.",
+          "Exact gameplay-time animation cadence still needs raw target gameplay windows."
+        ]
+      },
       "targetCrops": [
         {
           "id": "butterfly-escort-formation-front",
@@ -347,5 +664,5 @@
       ]
     }
   ],
-  "nextBestStep": "Promote true frame-timed Bee and Butterfly flap windows, then replace provisional source-sheet flap cells in this temporal target artifact."
+  "nextBestStep": "Confirm segmented-reference cadence against raw gameplay or ROM-derived timing, then extend the method to dive/rotation and challenge-only aliens."
 }

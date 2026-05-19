@@ -5,6 +5,7 @@ const { execFileSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const TARGET_CROPS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-target-crops', 'latest.json');
+const FRAME_CADENCE_TARGETS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-frame-cadence-targets', 'latest.json');
 const OUT = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-temporal-targets', 'latest.json');
 const MARKDOWN = path.join(ROOT, 'GALAGA_ALIEN_TEMPORAL_TARGETS.md');
 
@@ -64,6 +65,15 @@ function readJson(file){
   return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
+function readOptionalJson(file){
+  if(!fs.existsSync(file)) return null;
+  try{
+    return readJson(file);
+  }catch{
+    return null;
+  }
+}
+
 function writeJson(file, value){
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`);
@@ -81,8 +91,9 @@ function git(args, fallback = ''){
   }
 }
 
-function enrichRows(targetArtifact){
+function enrichRows(targetArtifact, frameCadenceArtifact){
   const crops = new Map((targetArtifact.targetCrops || []).map(crop => [crop.id, crop]));
+  const cadenceRows = new Map((frameCadenceArtifact?.rows || []).map(row => [row.id, row]));
   return TEMPORAL_ROWS.map(row => {
     const targetCrops = row.targetCropIds.map(id => crops.get(id)).filter(Boolean).map(crop => ({
       id: crop.id,
@@ -94,11 +105,39 @@ function enrichRows(targetArtifact){
       sourcePixelExact: !!crop.sourcePixelExact,
       metrics: crop.metrics || {}
     }));
+    const frameCadenceTarget = cadenceRows.get(row.id) || null;
     const trustedCount = targetCrops.filter(crop => crop.videoDerivedCleanCrop || crop.reviewStatus === 'accepted-trusted-motion-reference').length;
     const provisionalCount = targetCrops.filter(crop => String(crop.reviewStatus || '').includes('provisional')).length;
     return Object.assign({}, row, {
+      status: frameCadenceTarget?.acceptedForScoring ? 'frame-timed-target-window' : row.status,
+      timingStatus: frameCadenceTarget?.acceptedForScoring ? frameCadenceTarget.status : 'pose-sequence-only',
+      confidence: frameCadenceTarget?.confidence || row.confidence,
+      sourceRead: frameCadenceTarget?.acceptedForScoring
+        ? `${row.sourceRead} Frame-labeled cadence now comes from ${frameCadenceTarget.sourceKind}: ${frameCadenceTarget.sourceUse}`
+        : row.sourceRead,
+      scoringUse: frameCadenceTarget?.acceptedForScoring
+        ? 'Used for runtime cadence comparison with explicit timecodes and phase labels. Still treated as segmented-reference evidence, not final raw gameplay timing.'
+        : row.scoringUse,
+      nextGap: frameCadenceTarget?.acceptedForScoring
+        ? 'Confirm this segmented-reference cadence against raw gameplay or ROM-derived timing, then extend the same target method to dive/rotation and challenge-only aliens.'
+        : row.nextGap,
       trustedCropCount: trustedCount,
       provisionalCropCount: provisionalCount,
+      frameCadenceTarget: frameCadenceTarget ? {
+        id: frameCadenceTarget.id,
+        status: frameCadenceTarget.status,
+        acceptedForScoring: !!frameCadenceTarget.acceptedForScoring,
+        sourceKind: frameCadenceTarget.sourceKind,
+        sampleFps: frameCadenceTarget.sampleFps,
+        sampleCount: frameCadenceTarget.sampleCount,
+        cadenceSecondsPerCycle: frameCadenceTarget.cadenceSecondsPerCycle,
+        phasePattern: frameCadenceTarget.phasePattern || [],
+        phaseLabels: frameCadenceTarget.phaseLabels || [],
+        averageAdjacentDelta: frameCadenceTarget.averageAdjacentDelta,
+        maxAdjacentDelta: frameCadenceTarget.maxAdjacentDelta,
+        previewFrames: frameCadenceTarget.previewFrames || [],
+        measurementLimits: frameCadenceTarget.measurementLimits || []
+      } : null,
       targetCrops
     });
   });
@@ -126,16 +165,20 @@ function markdownReport(artifact){
   ];
   for(const row of artifact.rows){
     const evidence = row.targetCrops.map(crop => `\`${crop.id}\` (${crop.reviewStatus})`).join('<br>');
-    lines.push(`| ${row.label}<br><code>${row.runtimeSpriteKey}</code> | ${row.status}<br>confidence: ${row.confidence} | ${row.poseSequence.map(pose => `\`${pose}\``).join(' -> ')} | ${row.sourceRead}<br><br>${evidence} | ${row.nextGap} |`);
+    const frameCadence = row.frameCadenceTarget
+      ? `<br><br>Frame-labeled cadence: ${row.frameCadenceTarget.sampleCount} frames at ${row.frameCadenceTarget.sampleFps} fps; cycle ${row.frameCadenceTarget.cadenceSecondsPerCycle}s; phases ${(row.frameCadenceTarget.phaseLabels || []).map(label => `\`${label}\``).join(', ')}.`
+      : '';
+    lines.push(`| ${row.label}<br><code>${row.runtimeSpriteKey}</code> | ${row.status}<br>timing: ${row.timingStatus || 'pending'}<br>confidence: ${row.confidence} | ${row.poseSequence.map(pose => `\`${pose}\``).join(' -> ')} | ${row.sourceRead}${frameCadence}<br><br>${evidence} | ${row.nextGap} |`);
   }
-  lines.push('', '## Measurement Rule', '', 'The runtime-vs-target cadence scorer may consume these pose sequences, but rows with provisional flap cells should remain medium-low confidence until true animated target windows are promoted.', '');
+  lines.push('', '## Measurement Rule', '', 'The runtime-vs-target cadence scorer may consume frame-labeled cadence rows when present. These segmented-reference rows lift the old pose-only cap, but final arcade-perfect timing still needs raw gameplay or ROM-derived windows.', '');
   return `${lines.join('\n')}\n`;
 }
 
 function main(){
   if(!fs.existsSync(TARGET_CROPS)) fail(`Missing Galaga target crop artifact: ${rel(TARGET_CROPS)}`);
   const targetArtifact = readJson(TARGET_CROPS);
-  const rows = enrichRows(targetArtifact);
+  const frameCadenceArtifact = readOptionalJson(FRAME_CADENCE_TARGETS);
+  const rows = enrichRows(targetArtifact, frameCadenceArtifact);
   const artifact = {
     schemaVersion: 1,
     artifactType: 'galaga-alien-temporal-targets',
@@ -145,17 +188,21 @@ function main(){
     dirty: !!git(['status', '--porcelain'], ''),
     status: 'mixed-confidence-temporal-target-sequences',
     sourceArtifacts: {
-      targetCrops: rel(TARGET_CROPS)
+      targetCrops: rel(TARGET_CROPS),
+      frameCadenceTargets: frameCadenceArtifact ? rel(FRAME_CADENCE_TARGETS) : null
     },
     summary: {
       temporalRowCount: rows.length,
       trustedCropLinks: rows.reduce((sum, row) => sum + (row.trustedCropCount || 0), 0),
       provisionalCropLinks: rows.reduce((sum, row) => sum + (row.provisionalCropCount || 0), 0),
       finalFrameTimedRows: rows.filter(row => row.status === 'frame-timed-target-window').length,
+      frameLabeledSegmentedReferenceRows: rows.filter(row => row.frameCadenceTarget?.acceptedForScoring).length,
       usableForRuntimeCadenceScoring: rows.length
     },
     rows,
-    nextBestStep: 'Promote true frame-timed Bee and Butterfly flap windows, then replace provisional source-sheet flap cells in this temporal target artifact.'
+    nextBestStep: rows.some(row => !row.frameCadenceTarget?.acceptedForScoring)
+      ? 'Promote frame-labeled cadence windows for every temporal row, then extend the method to challenge-only aliens.'
+      : 'Confirm segmented-reference cadence against raw gameplay or ROM-derived timing, then extend the method to dive/rotation and challenge-only aliens.'
   };
   writeJson(OUT, artifact);
   writeText(MARKDOWN, markdownReport(artifact));

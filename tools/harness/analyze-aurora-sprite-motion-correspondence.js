@@ -64,8 +64,10 @@ function targetReadinessScore(row, finalFrameTimedRows){
   const trusted = +row.trustedCropCount || 0;
   const provisional = +row.provisionalCropCount || 0;
   const status = String(row.status || '');
+  const hasAcceptedFrameCadence = !!row.frameCadenceTarget?.acceptedForScoring;
   let score = 4.2;
-  if(status === 'frame-timed-target-window') score = 9.2;
+  if(hasAcceptedFrameCadence) score = 8.4;
+  else if(status === 'frame-timed-target-window') score = 9.2;
   else if(trusted >= 3 && provisional === 0) score = 7.2;
   else if(trusted > 0 && provisional > 0) score = 5.6;
   else if(trusted > 0) score = 5.2;
@@ -73,7 +75,7 @@ function targetReadinessScore(row, finalFrameTimedRows){
   if(String(row.confidence || '').includes('medium-high')) score += 0.4;
   if(String(row.confidence || '').includes('medium-low')) score -= 0.2;
   if(finalFrameTimedRows <= 0) score = Math.min(score, 6.5);
-  if(provisional > 0) score = Math.min(score, 5.8);
+  if(provisional > 0 && !hasAcceptedFrameCadence) score = Math.min(score, 5.8);
   return round(score, 2);
 }
 
@@ -117,13 +119,16 @@ function seedCoverageScore(spriteKey, runtime){
 }
 
 function rowCap(row, finalFrameTimedRows){
+  const hasAcceptedFrameCadence = !!row.frameCadenceTarget?.acceptedForScoring;
   let cap = finalFrameTimedRows > 0 ? 8.5 : 6.5;
   let reason = finalFrameTimedRows > 0
-    ? 'Frame-timed target rows exist, so the correspondence score may move beyond planning-level evidence.'
+    ? 'Frame-labeled target rows exist, so the correspondence score may move beyond pose-only planning evidence.'
     : 'Capped because the Galaga target rows are pose sequences without final frame-timed cadence windows.';
-  if((+row.provisionalCropCount || 0) > 0){
+  if((+row.provisionalCropCount || 0) > 0 && !hasAcceptedFrameCadence){
     cap = Math.min(cap, 5.8);
     reason = 'Capped because this row still uses provisional target flap crops; it can guide work but cannot claim mature animation conformance.';
+  }else if((+row.provisionalCropCount || 0) > 0 && hasAcceptedFrameCadence){
+    reason = 'Frame-labeled segmented-reference cadence replaces provisional flap-cell timing for this row; final raw gameplay timing is still needed before high-confidence conformance claims.';
   }
   return { cap, reason };
 }
@@ -153,7 +158,10 @@ function buildRows(temporalTargets, runtime){
     );
     const cap = rowCap(target, finalFrameTimedRows);
     const score10 = round(Math.min(rawScore10, cap.cap), 2);
-    const nextGap = (+target.provisionalCropCount || 0) > 0
+    const hasAcceptedFrameCadence = !!target.frameCadenceTarget?.acceptedForScoring;
+    const nextGap = hasAcceptedFrameCadence
+      ? `Confirm ${target.label || spriteKey} cadence against raw gameplay or ROM-derived timing, then tune Aurora runtime cadence toward that target.`
+      : (+target.provisionalCropCount || 0) > 0
       ? `Promote frame-clean ${target.label || spriteKey} target flaps from source gameplay/video before raising this above planning confidence.`
       : 'Promote a true frame-labeled target cadence window so runtime cadence can be compared to target timing, not only visible runtime change.';
     return {
@@ -171,6 +179,7 @@ function buildRows(temporalTargets, runtime){
         targetReadinessScore10,
         trustedCropCount: target.trustedCropCount || 0,
         provisionalCropCount: target.provisionalCropCount || 0,
+        frameCadenceTarget: target.frameCadenceTarget || null,
         poseSequence: target.poseSequence || [],
         cropIds: target.targetCropIds || []
       },
@@ -201,7 +210,7 @@ function buildRows(temporalTargets, runtime){
         staticCrop: staticSample?.cropImage || null
       },
       playerMeaning: 'This measures whether the alien appears alive: flap/pulse phases, a readable cadence, and enough pose coverage to make movement feel authored rather than static.',
-      designerMeaning: 'This is a bridge score. It should guide sprite-motion tuning and challenge-stage scoring, but it remains capped until target frame timing is exact.',
+      designerMeaning: 'This is a bridge score. It should guide sprite-motion tuning and challenge-stage scoring; segmented-reference cadence can lift pose-only caps, while exact arcade timing still needs raw target gameplay windows.',
       nextGap
     };
   });
@@ -266,21 +275,25 @@ function main(){
       weakestScore10: weakest?.score10 || null,
       finalFrameTimedRows,
       provisionalTargetRows: rows.filter(row => (+row.target.provisionalCropCount || 0) > 0).length,
+      frameLabeledSegmentedReferenceRows: rows.filter(row => row.target.frameCadenceTarget?.acceptedForScoring).length,
       runtimeMotionAxesCovered: runtime.summary?.motionCoverageAxesCovered ?? null,
       runtimeMotionAxesPlanned: runtime.summary?.motionCoverageAxesPlanned ?? null,
-      targetTimingStatus: finalFrameTimedRows > 0 ? 'frame-timed-targets-present' : 'pose-sequence-targets-only',
+      targetTimingStatus: finalFrameTimedRows > 0 ? 'frame-labeled-segmented-reference-windows' : 'pose-sequence-targets-only',
       read: finalFrameTimedRows > 0
-        ? `Aurora runtime motion corresponds to ${rows.length} frame-timed target row(s), average ${scoreText(average(scored.map(row => row.score10)))}.`
+        ? `Aurora runtime motion corresponds to ${rows.length} frame-labeled segmented-reference target row(s), average ${scoreText(average(scored.map(row => row.score10)))}.`
         : `Aurora runtime motion is visible but still target-capped: ${rows.length} sprite families score ${scoreText(average(scored.map(row => row.score10)))}, with ${rows.filter(row => (+row.target.provisionalCropCount || 0) > 0).length} provisional target row(s) and no final frame-timed target cadence rows.`
     },
     rows,
     measurementLimits: [
       'This score joins target pose rows to runtime motion samples; it is not a final arcade-perfect animation score.',
-      'Rows are capped while Galaga target evidence is pose-sequence only and lacks exact frame timing.',
-      'Bee and Butterfly rows remain especially capped while flap targets use provisional source-sheet cells.',
+      'Rows remain capped when Galaga target evidence is pose-sequence only and lacks frame timing with frame-labeled windows.',
+      'Frame-labeled segmented-reference rows are stronger than provisional source-sheet cells, but still lower-confidence than raw gameplay or ROM-derived frame windows.',
+      'Bee and Butterfly rows should no longer be capped solely by provisional flap cells once segmented-reference cadence is present.',
       'This artifact should influence challenge-stage graphical scoring as a measured signal, but gameplay challenge conformance still depends on path choreography, group timing, alien novelty, and shot opportunity.'
     ],
-    nextBestStep: 'Promote true frame-labeled Boss, Bee, and Butterfly target cadence windows, then compare Aurora runtime cadence frames directly against those target windows.'
+    nextBestStep: finalFrameTimedRows > 0
+      ? 'Confirm segmented-reference cadence against raw gameplay or ROM-derived timing, then tune Aurora runtime cadence and challenge-stage alien motion against the accepted target rows.'
+      : 'Promote true frame-labeled Boss, Bee, and Butterfly target cadence windows, then compare Aurora runtime cadence frames directly against those target windows.'
   };
   writeJson(OUT, artifact);
   writeText(MARKDOWN, markdownReport(artifact));

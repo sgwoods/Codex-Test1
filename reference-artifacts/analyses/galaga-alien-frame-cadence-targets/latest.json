@@ -1,0 +1,3635 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "galaga-alien-frame-cadence-targets",
+  "generatedAt": "2026-05-19T22:27:40.099Z",
+  "commit": "a2cfb8b5",
+  "branch": "codex/macbook-challenge-sprite-motion-conformance",
+  "dirty": true,
+  "status": "frame-labeled-segmented-reference-cadence",
+  "sourceVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+  "video": {
+    "width": 576,
+    "height": 576,
+    "frameRate": "30/1",
+    "frameCount": 616,
+    "durationSeconds": 20.533
+  },
+  "summary": {
+    "rowCount": 3,
+    "acceptedForScoringRows": 3,
+    "totalFrameCount": 72,
+    "sampleFps": 4,
+    "cadenceSecondsPerCycle": 1,
+    "targetTimingStatus": "frame-labeled-segmented-reference-windows",
+    "rows": [
+      {
+        "id": "boss-galaga-pulse-pair",
+        "runtimeSpriteKey": "boss-line",
+        "sampleCount": 24,
+        "phaseLabels": [
+          "compact",
+          "extended"
+        ],
+        "averageAdjacentDelta": 126.348
+      },
+      {
+        "id": "bee-zako-pulse-pair",
+        "runtimeSpriteKey": "bee-line",
+        "sampleCount": 24,
+        "phaseLabels": [
+          "extended",
+          "compact"
+        ],
+        "averageAdjacentDelta": 87.261
+      },
+      {
+        "id": "butterfly-escort-pulse-pair",
+        "runtimeSpriteKey": "but-line",
+        "sampleCount": 24,
+        "phaseLabels": [
+          "compact",
+          "extended"
+        ],
+        "averageAdjacentDelta": 151
+      }
+    ]
+  },
+  "rows": [
+    {
+      "id": "boss-galaga-pulse-pair",
+      "roleKey": "boss-galaga",
+      "runtimeSpriteKey": "boss-line",
+      "label": "Boss Galaga Pulse Cadence",
+      "status": "frame-labeled-segmented-reference-window",
+      "acceptedForScoring": true,
+      "sourceKind": "segmented-motion-reference-video",
+      "sourceVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "sourceUse": "Frame-labeled window from the preserved segmented Galaga alien motion reference. It shows a repeated compact/extended Boss pulse at readable cadence, but it is not raw gameplay footage.",
+      "confidence": "medium-high",
+      "sampleFps": 4,
+      "sampleCount": 24,
+      "startSeconds": 2,
+      "endSeconds": 7.75,
+      "cadenceSecondsPerCycle": 1,
+      "phasePattern": [
+        "compact",
+        "compact",
+        "extended",
+        "extended"
+      ],
+      "phaseLabels": [
+        "compact",
+        "extended"
+      ],
+      "phaseRuns": [
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 60,
+          "endFrameIndex": 68,
+          "startTimeSeconds": 2,
+          "endTimeSeconds": 2.25,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 75,
+          "endFrameIndex": 83,
+          "startTimeSeconds": 2.5,
+          "endTimeSeconds": 2.75,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 90,
+          "endFrameIndex": 98,
+          "startTimeSeconds": 3,
+          "endTimeSeconds": 3.25,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 105,
+          "endFrameIndex": 113,
+          "startTimeSeconds": 3.5,
+          "endTimeSeconds": 3.75,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 120,
+          "endFrameIndex": 128,
+          "startTimeSeconds": 4,
+          "endTimeSeconds": 4.25,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 135,
+          "endFrameIndex": 143,
+          "startTimeSeconds": 4.5,
+          "endTimeSeconds": 4.75,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 150,
+          "endFrameIndex": 158,
+          "startTimeSeconds": 5,
+          "endTimeSeconds": 5.25,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 165,
+          "endFrameIndex": 173,
+          "startTimeSeconds": 5.5,
+          "endTimeSeconds": 5.75,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 180,
+          "endFrameIndex": 188,
+          "startTimeSeconds": 6,
+          "endTimeSeconds": 6.25,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 195,
+          "endFrameIndex": 203,
+          "startTimeSeconds": 6.5,
+          "endTimeSeconds": 6.75,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 210,
+          "endFrameIndex": 218,
+          "startTimeSeconds": 7,
+          "endTimeSeconds": 7.25,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 225,
+          "endFrameIndex": 233,
+          "startTimeSeconds": 7.5,
+          "endTimeSeconds": 7.75,
+          "frameCount": 2
+        }
+      ],
+      "averageAdjacentDelta": 126.348,
+      "maxAdjacentDelta": 248,
+      "previewFrames": [
+        {
+          "sampleIndex": 0,
+          "timeSeconds": 2,
+          "phaseLabel": "compact",
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-00-compact.png",
+          "metrics": {
+            "width": 52,
+            "height": 56,
+            "litPixels": 1181,
+            "litRatio": 0.40556,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 12,
+          "timeSeconds": 5,
+          "phaseLabel": "compact",
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-12-compact.png",
+          "metrics": {
+            "width": 52,
+            "height": 56,
+            "litPixels": 1198,
+            "litRatio": 0.4114,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 23,
+          "timeSeconds": 7.75,
+          "phaseLabel": "extended",
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-23-extended.png",
+          "metrics": {
+            "width": 52,
+            "height": 56,
+            "litPixels": 1207,
+            "litRatio": 0.41449,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 52
+            }
+          }
+        }
+      ],
+      "frames": [
+        {
+          "sampleIndex": 0,
+          "frameIndex": 60,
+          "timeSeconds": 2,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 2,
+            "width": 52,
+            "height": 56
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-00-compact.png",
+          "metrics": {
+            "width": 52,
+            "height": 56,
+            "litPixels": 1181,
+            "litRatio": 0.40556,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 1,
+          "frameIndex": 68,
+          "timeSeconds": 2.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 6,
+            "width": 52,
+            "height": 52
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-01-compact.png",
+          "metrics": {
+            "width": 52,
+            "height": 52,
+            "litPixels": 962,
+            "litRatio": 0.35577,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 48
+            }
+          }
+        },
+        {
+          "sampleIndex": 2,
+          "frameIndex": 75,
+          "timeSeconds": 2.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 6,
+            "width": 52,
+            "height": 52
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-02-extended.png",
+          "metrics": {
+            "width": 52,
+            "height": 52,
+            "litPixels": 969,
+            "litRatio": 0.35836,
+            "tokenChannels": [
+              "C",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 48
+            }
+          }
+        },
+        {
+          "sampleIndex": 3,
+          "frameIndex": 83,
+          "timeSeconds": 2.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 2,
+            "width": 52,
+            "height": 56
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-03-extended.png",
+          "metrics": {
+            "width": 52,
+            "height": 56,
+            "litPixels": 1207,
+            "litRatio": 0.41449,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 4,
+          "frameIndex": 90,
+          "timeSeconds": 3,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 2,
+            "width": 52,
+            "height": 56
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-04-compact.png",
+          "metrics": {
+            "width": 52,
+            "height": 56,
+            "litPixels": 1174,
+            "litRatio": 0.40316,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 5,
+          "frameIndex": 98,
+          "timeSeconds": 3.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 6,
+            "width": 52,
+            "height": 52
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-05-compact.png",
+          "metrics": {
+            "width": 52,
+            "height": 52,
+            "litPixels": 972,
+            "litRatio": 0.35947,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 48
+            }
+          }
+        },
+        {
+          "sampleIndex": 6,
+          "frameIndex": 105,
+          "timeSeconds": 3.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 6,
+            "width": 52,
+            "height": 52
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-06-extended.png",
+          "metrics": {
+            "width": 52,
+            "height": 52,
+            "litPixels": 978,
+            "litRatio": 0.36169,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 48
+            }
+          }
+        },
+        {
+          "sampleIndex": 7,
+          "frameIndex": 113,
+          "timeSeconds": 3.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 2,
+            "width": 52,
+            "height": 56
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-07-extended.png",
+          "metrics": {
+            "width": 52,
+            "height": 56,
+            "litPixels": 1218,
+            "litRatio": 0.41827,
+            "tokenChannels": [
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 8,
+          "frameIndex": 120,
+          "timeSeconds": 4,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 2,
+            "width": 52,
+            "height": 56
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-08-compact.png",
+          "metrics": {
+            "width": 52,
+            "height": 56,
+            "litPixels": 1213,
+            "litRatio": 0.41655,
+            "tokenChannels": [
+              "C",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 9,
+          "frameIndex": 128,
+          "timeSeconds": 4.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 6,
+            "width": 52,
+            "height": 52
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-09-compact.png",
+          "metrics": {
+            "width": 52,
+            "height": 52,
+            "litPixels": 981,
+            "litRatio": 0.3628,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 48
+            }
+          }
+        },
+        {
+          "sampleIndex": 10,
+          "frameIndex": 135,
+          "timeSeconds": 4.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 6,
+            "width": 52,
+            "height": 52
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-10-extended.png",
+          "metrics": {
+            "width": 52,
+            "height": 52,
+            "litPixels": 981,
+            "litRatio": 0.3628,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 48
+            }
+          }
+        },
+        {
+          "sampleIndex": 11,
+          "frameIndex": 143,
+          "timeSeconds": 4.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 2,
+            "width": 52,
+            "height": 56
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-11-extended.png",
+          "metrics": {
+            "width": 52,
+            "height": 56,
+            "litPixels": 1210,
+            "litRatio": 0.41552,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 12,
+          "frameIndex": 150,
+          "timeSeconds": 5,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 2,
+            "width": 52,
+            "height": 56
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-12-compact.png",
+          "metrics": {
+            "width": 52,
+            "height": 56,
+            "litPixels": 1198,
+            "litRatio": 0.4114,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 13,
+          "frameIndex": 158,
+          "timeSeconds": 5.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 6,
+            "width": 52,
+            "height": 52
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-13-compact.png",
+          "metrics": {
+            "width": 52,
+            "height": 52,
+            "litPixels": 977,
+            "litRatio": 0.36132,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 48
+            }
+          }
+        },
+        {
+          "sampleIndex": 14,
+          "frameIndex": 165,
+          "timeSeconds": 5.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 6,
+            "width": 52,
+            "height": 52
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-14-extended.png",
+          "metrics": {
+            "width": 52,
+            "height": 52,
+            "litPixels": 977,
+            "litRatio": 0.36132,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 48
+            }
+          }
+        },
+        {
+          "sampleIndex": 15,
+          "frameIndex": 173,
+          "timeSeconds": 5.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 2,
+            "width": 52,
+            "height": 56
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-15-extended.png",
+          "metrics": {
+            "width": 52,
+            "height": 56,
+            "litPixels": 1200,
+            "litRatio": 0.41209,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 16,
+          "frameIndex": 180,
+          "timeSeconds": 6,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 2,
+            "width": 52,
+            "height": 56
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-16-compact.png",
+          "metrics": {
+            "width": 52,
+            "height": 56,
+            "litPixels": 1200,
+            "litRatio": 0.41209,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 17,
+          "frameIndex": 188,
+          "timeSeconds": 6.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 6,
+            "width": 52,
+            "height": 52
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-17-compact.png",
+          "metrics": {
+            "width": 52,
+            "height": 52,
+            "litPixels": 975,
+            "litRatio": 0.36058,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 48
+            }
+          }
+        },
+        {
+          "sampleIndex": 18,
+          "frameIndex": 195,
+          "timeSeconds": 6.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 6,
+            "width": 52,
+            "height": 52
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-18-extended.png",
+          "metrics": {
+            "width": 52,
+            "height": 52,
+            "litPixels": 968,
+            "litRatio": 0.35799,
+            "tokenChannels": [
+              "C",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 48
+            }
+          }
+        },
+        {
+          "sampleIndex": 19,
+          "frameIndex": 203,
+          "timeSeconds": 6.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 2,
+            "width": 52,
+            "height": 56
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-19-extended.png",
+          "metrics": {
+            "width": 52,
+            "height": 56,
+            "litPixels": 1192,
+            "litRatio": 0.40934,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 20,
+          "frameIndex": 210,
+          "timeSeconds": 7,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 2,
+            "width": 52,
+            "height": 56
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-20-compact.png",
+          "metrics": {
+            "width": 52,
+            "height": 56,
+            "litPixels": 1178,
+            "litRatio": 0.40453,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 21,
+          "frameIndex": 218,
+          "timeSeconds": 7.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 6,
+            "width": 52,
+            "height": 51
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-21-compact.png",
+          "metrics": {
+            "width": 52,
+            "height": 51,
+            "litPixels": 958,
+            "litRatio": 0.36124,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 47
+            }
+          }
+        },
+        {
+          "sampleIndex": 22,
+          "frameIndex": 225,
+          "timeSeconds": 7.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 6,
+            "width": 52,
+            "height": 51
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-22-extended.png",
+          "metrics": {
+            "width": 52,
+            "height": 51,
+            "litPixels": 973,
+            "litRatio": 0.36689,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 47
+            }
+          }
+        },
+        {
+          "sampleIndex": 23,
+          "frameIndex": 233,
+          "timeSeconds": 7.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 22,
+            "y": 78,
+            "width": 60,
+            "height": 62
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 2,
+            "width": 52,
+            "height": 56
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-23-extended.png",
+          "metrics": {
+            "width": 52,
+            "height": 56,
+            "litPixels": 1207,
+            "litRatio": 0.41449,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 52
+            }
+          }
+        }
+      ],
+      "measurementLimits": [
+        "This row is frame-labeled from a preserved segmented reference clip, not yet from raw arcade gameplay or ROM-derived frame timing.",
+        "The cadence should be used to compare visible runtime pulse/cadence behavior and to prevent provisional sheet cells from over-driving sprite-motion scoring.",
+        "Exact gameplay-time animation cadence still needs raw target gameplay windows."
+      ],
+      "nextGap": "Replace or confirm this segmented-reference cadence with raw gameplay or ROM-derived timing evidence before claiming final animation conformance."
+    },
+    {
+      "id": "bee-zako-pulse-pair",
+      "roleKey": "bee-zako",
+      "runtimeSpriteKey": "bee-line",
+      "label": "Bee / Zako Pulse Cadence",
+      "status": "frame-labeled-segmented-reference-window",
+      "acceptedForScoring": true,
+      "sourceKind": "segmented-motion-reference-video",
+      "sourceVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "sourceUse": "Frame-labeled window from the preserved segmented Galaga alien motion reference. It cleanly separates Bee wing-open and wing-compact phases for runtime cadence scoring.",
+      "confidence": "medium-high",
+      "sampleFps": 4,
+      "sampleCount": 24,
+      "startSeconds": 2,
+      "endSeconds": 7.75,
+      "cadenceSecondsPerCycle": 1,
+      "phasePattern": [
+        "extended",
+        "compact",
+        "compact",
+        "extended"
+      ],
+      "phaseLabels": [
+        "extended",
+        "compact"
+      ],
+      "phaseRuns": [
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 60,
+          "endFrameIndex": 60,
+          "startTimeSeconds": 2,
+          "endTimeSeconds": 2,
+          "frameCount": 1
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 68,
+          "endFrameIndex": 75,
+          "startTimeSeconds": 2.25,
+          "endTimeSeconds": 2.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 83,
+          "endFrameIndex": 90,
+          "startTimeSeconds": 2.75,
+          "endTimeSeconds": 3,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 98,
+          "endFrameIndex": 105,
+          "startTimeSeconds": 3.25,
+          "endTimeSeconds": 3.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 113,
+          "endFrameIndex": 120,
+          "startTimeSeconds": 3.75,
+          "endTimeSeconds": 4,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 128,
+          "endFrameIndex": 135,
+          "startTimeSeconds": 4.25,
+          "endTimeSeconds": 4.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 143,
+          "endFrameIndex": 150,
+          "startTimeSeconds": 4.75,
+          "endTimeSeconds": 5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 158,
+          "endFrameIndex": 165,
+          "startTimeSeconds": 5.25,
+          "endTimeSeconds": 5.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 173,
+          "endFrameIndex": 180,
+          "startTimeSeconds": 5.75,
+          "endTimeSeconds": 6,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 188,
+          "endFrameIndex": 195,
+          "startTimeSeconds": 6.25,
+          "endTimeSeconds": 6.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 203,
+          "endFrameIndex": 210,
+          "startTimeSeconds": 6.75,
+          "endTimeSeconds": 7,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 218,
+          "endFrameIndex": 225,
+          "startTimeSeconds": 7.25,
+          "endTimeSeconds": 7.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 233,
+          "endFrameIndex": 233,
+          "startTimeSeconds": 7.75,
+          "endTimeSeconds": 7.75,
+          "frameCount": 1
+        }
+      ],
+      "averageAdjacentDelta": 87.261,
+      "maxAdjacentDelta": 182,
+      "previewFrames": [
+        {
+          "sampleIndex": 0,
+          "timeSeconds": 2,
+          "phaseLabel": "extended",
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-00-extended.png",
+          "metrics": {
+            "width": 45,
+            "height": 36,
+            "litPixels": 774,
+            "litRatio": 0.47778,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 1,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 12,
+          "timeSeconds": 5,
+          "phaseLabel": "extended",
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-12-extended.png",
+          "metrics": {
+            "width": 45,
+            "height": 36,
+            "litPixels": 771,
+            "litRatio": 0.47593,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 1,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 23,
+          "timeSeconds": 7.75,
+          "phaseLabel": "extended",
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-23-extended.png",
+          "metrics": {
+            "width": 45,
+            "height": 36,
+            "litPixels": 771,
+            "litRatio": 0.47593,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 1,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        }
+      ],
+      "frames": [
+        {
+          "sampleIndex": 0,
+          "frameIndex": 60,
+          "timeSeconds": 2,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 14,
+            "width": 45,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-00-extended.png",
+          "metrics": {
+            "width": 45,
+            "height": 36,
+            "litPixels": 774,
+            "litRatio": 0.47778,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 1,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 1,
+          "frameIndex": 68,
+          "timeSeconds": 2.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 5,
+            "y": 14,
+            "width": 33,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-01-compact.png",
+          "metrics": {
+            "width": 33,
+            "height": 36,
+            "litPixels": 633,
+            "litRatio": 0.53283,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 29,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 2,
+          "frameIndex": 75,
+          "timeSeconds": 2.5,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 5,
+            "y": 14,
+            "width": 33,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-02-compact.png",
+          "metrics": {
+            "width": 33,
+            "height": 36,
+            "litPixels": 629,
+            "litRatio": 0.52946,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 29,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 3,
+          "frameIndex": 83,
+          "timeSeconds": 2.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 14,
+            "width": 45,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-03-extended.png",
+          "metrics": {
+            "width": 45,
+            "height": 36,
+            "litPixels": 772,
+            "litRatio": 0.47654,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 1,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 4,
+          "frameIndex": 90,
+          "timeSeconds": 3,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 14,
+            "width": 45,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-04-extended.png",
+          "metrics": {
+            "width": 45,
+            "height": 36,
+            "litPixels": 769,
+            "litRatio": 0.47469,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 1,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 5,
+          "frameIndex": 98,
+          "timeSeconds": 3.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 5,
+            "y": 14,
+            "width": 33,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-05-compact.png",
+          "metrics": {
+            "width": 33,
+            "height": 36,
+            "litPixels": 625,
+            "litRatio": 0.52609,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 29,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 6,
+          "frameIndex": 105,
+          "timeSeconds": 3.5,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 5,
+            "y": 14,
+            "width": 33,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-06-compact.png",
+          "metrics": {
+            "width": 33,
+            "height": 36,
+            "litPixels": 625,
+            "litRatio": 0.52609,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 29,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 7,
+          "frameIndex": 113,
+          "timeSeconds": 3.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 14,
+            "width": 45,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-07-extended.png",
+          "metrics": {
+            "width": 45,
+            "height": 36,
+            "litPixels": 774,
+            "litRatio": 0.47778,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 1,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 8,
+          "frameIndex": 120,
+          "timeSeconds": 4,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 14,
+            "width": 45,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-08-extended.png",
+          "metrics": {
+            "width": 45,
+            "height": 36,
+            "litPixels": 775,
+            "litRatio": 0.4784,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 1,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 9,
+          "frameIndex": 128,
+          "timeSeconds": 4.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 5,
+            "y": 14,
+            "width": 33,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-09-compact.png",
+          "metrics": {
+            "width": 33,
+            "height": 36,
+            "litPixels": 619,
+            "litRatio": 0.52104,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 29,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 10,
+          "frameIndex": 135,
+          "timeSeconds": 4.5,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 5,
+            "y": 14,
+            "width": 33,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-10-compact.png",
+          "metrics": {
+            "width": 33,
+            "height": 36,
+            "litPixels": 634,
+            "litRatio": 0.53367,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 29,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 11,
+          "frameIndex": 143,
+          "timeSeconds": 4.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 14,
+            "width": 45,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-11-extended.png",
+          "metrics": {
+            "width": 45,
+            "height": 36,
+            "litPixels": 772,
+            "litRatio": 0.47654,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 1,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 12,
+          "frameIndex": 150,
+          "timeSeconds": 5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 14,
+            "width": 45,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-12-extended.png",
+          "metrics": {
+            "width": 45,
+            "height": 36,
+            "litPixels": 771,
+            "litRatio": 0.47593,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 1,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 13,
+          "frameIndex": 158,
+          "timeSeconds": 5.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 5,
+            "y": 14,
+            "width": 33,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-13-compact.png",
+          "metrics": {
+            "width": 33,
+            "height": 36,
+            "litPixels": 640,
+            "litRatio": 0.53872,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 29,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 14,
+          "frameIndex": 165,
+          "timeSeconds": 5.5,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 5,
+            "y": 14,
+            "width": 33,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-14-compact.png",
+          "metrics": {
+            "width": 33,
+            "height": 36,
+            "litPixels": 640,
+            "litRatio": 0.53872,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 29,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 15,
+          "frameIndex": 173,
+          "timeSeconds": 5.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 14,
+            "width": 45,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-15-extended.png",
+          "metrics": {
+            "width": 45,
+            "height": 36,
+            "litPixels": 774,
+            "litRatio": 0.47778,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 1,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 16,
+          "frameIndex": 180,
+          "timeSeconds": 6,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 14,
+            "width": 45,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-16-extended.png",
+          "metrics": {
+            "width": 45,
+            "height": 36,
+            "litPixels": 770,
+            "litRatio": 0.47531,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 1,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 17,
+          "frameIndex": 188,
+          "timeSeconds": 6.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 5,
+            "y": 14,
+            "width": 33,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-17-compact.png",
+          "metrics": {
+            "width": 33,
+            "height": 36,
+            "litPixels": 640,
+            "litRatio": 0.53872,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 29,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 18,
+          "frameIndex": 195,
+          "timeSeconds": 6.5,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 5,
+            "y": 14,
+            "width": 33,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-18-compact.png",
+          "metrics": {
+            "width": 33,
+            "height": 36,
+            "litPixels": 641,
+            "litRatio": 0.53956,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 29,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 19,
+          "frameIndex": 203,
+          "timeSeconds": 6.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 14,
+            "width": 45,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-19-extended.png",
+          "metrics": {
+            "width": 45,
+            "height": 36,
+            "litPixels": 761,
+            "litRatio": 0.46975,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 1,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 20,
+          "frameIndex": 210,
+          "timeSeconds": 7,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 14,
+            "width": 45,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-20-extended.png",
+          "metrics": {
+            "width": 45,
+            "height": 36,
+            "litPixels": 774,
+            "litRatio": 0.47778,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 1,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 21,
+          "frameIndex": 218,
+          "timeSeconds": 7.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 5,
+            "y": 14,
+            "width": 33,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-21-compact.png",
+          "metrics": {
+            "width": 33,
+            "height": 36,
+            "litPixels": 640,
+            "litRatio": 0.53872,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 29,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 22,
+          "frameIndex": 225,
+          "timeSeconds": 7.5,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 5,
+            "y": 14,
+            "width": 33,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-22-compact.png",
+          "metrics": {
+            "width": 33,
+            "height": 36,
+            "litPixels": 639,
+            "litRatio": 0.53788,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 29,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 23,
+          "frameIndex": 233,
+          "timeSeconds": 7.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 384,
+            "y": 86,
+            "width": 58,
+            "height": 54
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 14,
+            "width": 45,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-23-extended.png",
+          "metrics": {
+            "width": 45,
+            "height": 36,
+            "litPixels": 771,
+            "litRatio": 0.47593,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 1,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        }
+      ],
+      "measurementLimits": [
+        "This row is frame-labeled from a preserved segmented reference clip, not yet from raw arcade gameplay or ROM-derived frame timing.",
+        "The cadence should be used to compare visible runtime pulse/cadence behavior and to prevent provisional sheet cells from over-driving sprite-motion scoring.",
+        "Exact gameplay-time animation cadence still needs raw target gameplay windows."
+      ],
+      "nextGap": "Replace or confirm this segmented-reference cadence with raw gameplay or ROM-derived timing evidence before claiming final animation conformance."
+    },
+    {
+      "id": "butterfly-escort-pulse-pair",
+      "roleKey": "butterfly-escort",
+      "runtimeSpriteKey": "but-line",
+      "label": "Butterfly / Escort Pulse Cadence",
+      "status": "frame-labeled-segmented-reference-window",
+      "acceptedForScoring": true,
+      "sourceKind": "segmented-motion-reference-video",
+      "sourceVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "sourceUse": "Frame-labeled window from the preserved segmented Galaga alien motion reference. It cleanly separates Butterfly wing-compact and wing-open phases for runtime cadence scoring.",
+      "confidence": "medium-high",
+      "sampleFps": 4,
+      "sampleCount": 24,
+      "startSeconds": 2,
+      "endSeconds": 7.75,
+      "cadenceSecondsPerCycle": 1,
+      "phasePattern": [
+        "compact",
+        "extended",
+        "extended",
+        "compact"
+      ],
+      "phaseLabels": [
+        "compact",
+        "extended"
+      ],
+      "phaseRuns": [
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 60,
+          "endFrameIndex": 60,
+          "startTimeSeconds": 2,
+          "endTimeSeconds": 2,
+          "frameCount": 1
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 68,
+          "endFrameIndex": 75,
+          "startTimeSeconds": 2.25,
+          "endTimeSeconds": 2.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 83,
+          "endFrameIndex": 90,
+          "startTimeSeconds": 2.75,
+          "endTimeSeconds": 3,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 98,
+          "endFrameIndex": 105,
+          "startTimeSeconds": 3.25,
+          "endTimeSeconds": 3.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 113,
+          "endFrameIndex": 120,
+          "startTimeSeconds": 3.75,
+          "endTimeSeconds": 4,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 128,
+          "endFrameIndex": 135,
+          "startTimeSeconds": 4.25,
+          "endTimeSeconds": 4.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 143,
+          "endFrameIndex": 150,
+          "startTimeSeconds": 4.75,
+          "endTimeSeconds": 5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 158,
+          "endFrameIndex": 165,
+          "startTimeSeconds": 5.25,
+          "endTimeSeconds": 5.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 173,
+          "endFrameIndex": 180,
+          "startTimeSeconds": 5.75,
+          "endTimeSeconds": 6,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 188,
+          "endFrameIndex": 195,
+          "startTimeSeconds": 6.25,
+          "endTimeSeconds": 6.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 203,
+          "endFrameIndex": 210,
+          "startTimeSeconds": 6.75,
+          "endTimeSeconds": 7,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 218,
+          "endFrameIndex": 225,
+          "startTimeSeconds": 7.25,
+          "endTimeSeconds": 7.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 233,
+          "endFrameIndex": 233,
+          "startTimeSeconds": 7.75,
+          "endTimeSeconds": 7.75,
+          "frameCount": 1
+        }
+      ],
+      "averageAdjacentDelta": 151,
+      "maxAdjacentDelta": 293,
+      "previewFrames": [
+        {
+          "sampleIndex": 0,
+          "timeSeconds": 2,
+          "phaseLabel": "compact",
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-00-compact.png",
+          "metrics": {
+            "width": 34,
+            "height": 36,
+            "litPixels": 664,
+            "litRatio": 0.54248,
+            "tokenChannels": [
+              "B",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 30,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 12,
+          "timeSeconds": 5,
+          "phaseLabel": "compact",
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-12-compact.png",
+          "metrics": {
+            "width": 34,
+            "height": 36,
+            "litPixels": 676,
+            "litRatio": 0.55229,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 30,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 23,
+          "timeSeconds": 7.75,
+          "phaseLabel": "compact",
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-23-compact.png",
+          "metrics": {
+            "width": 34,
+            "height": 36,
+            "litPixels": 653,
+            "litRatio": 0.5335,
+            "tokenChannels": [
+              "B",
+              "G",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 30,
+              "height": 32
+            }
+          }
+        }
+      ],
+      "frames": [
+        {
+          "sampleIndex": 0,
+          "frameIndex": 60,
+          "timeSeconds": 2,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 16,
+            "y": 6,
+            "width": 34,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-00-compact.png",
+          "metrics": {
+            "width": 34,
+            "height": 36,
+            "litPixels": 664,
+            "litRatio": 0.54248,
+            "tokenChannels": [
+              "B",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 30,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 1,
+          "frameIndex": 68,
+          "timeSeconds": 2.25,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 10,
+            "y": 6,
+            "width": 46,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-01-extended.png",
+          "metrics": {
+            "width": 46,
+            "height": 36,
+            "litPixels": 929,
+            "litRatio": 0.56099,
+            "tokenChannels": [
+              "B",
+              "G",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 2,
+          "frameIndex": 75,
+          "timeSeconds": 2.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 10,
+            "y": 6,
+            "width": 46,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-02-extended.png",
+          "metrics": {
+            "width": 46,
+            "height": 36,
+            "litPixels": 917,
+            "litRatio": 0.55374,
+            "tokenChannels": [
+              "B",
+              "G",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 3,
+          "frameIndex": 83,
+          "timeSeconds": 2.75,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 16,
+            "y": 6,
+            "width": 34,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-03-compact.png",
+          "metrics": {
+            "width": 34,
+            "height": 36,
+            "litPixels": 655,
+            "litRatio": 0.53513,
+            "tokenChannels": [
+              "B",
+              "G",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 30,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 4,
+          "frameIndex": 90,
+          "timeSeconds": 3,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 16,
+            "y": 6,
+            "width": 34,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-04-compact.png",
+          "metrics": {
+            "width": 34,
+            "height": 36,
+            "litPixels": 674,
+            "litRatio": 0.55065,
+            "tokenChannels": [
+              "B",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 30,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 5,
+          "frameIndex": 98,
+          "timeSeconds": 3.25,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 10,
+            "y": 6,
+            "width": 46,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-05-extended.png",
+          "metrics": {
+            "width": 46,
+            "height": 36,
+            "litPixels": 930,
+            "litRatio": 0.56159,
+            "tokenChannels": [
+              "B",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 6,
+          "frameIndex": 105,
+          "timeSeconds": 3.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 10,
+            "y": 6,
+            "width": 46,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-06-extended.png",
+          "metrics": {
+            "width": 46,
+            "height": 36,
+            "litPixels": 921,
+            "litRatio": 0.55616,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 7,
+          "frameIndex": 113,
+          "timeSeconds": 3.75,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 16,
+            "y": 6,
+            "width": 34,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-07-compact.png",
+          "metrics": {
+            "width": 34,
+            "height": 36,
+            "litPixels": 668,
+            "litRatio": 0.54575,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 30,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 8,
+          "frameIndex": 120,
+          "timeSeconds": 4,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 16,
+            "y": 6,
+            "width": 34,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-08-compact.png",
+          "metrics": {
+            "width": 34,
+            "height": 36,
+            "litPixels": 672,
+            "litRatio": 0.54902,
+            "tokenChannels": [
+              "B",
+              "C",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 30,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 9,
+          "frameIndex": 128,
+          "timeSeconds": 4.25,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 10,
+            "y": 6,
+            "width": 46,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-09-extended.png",
+          "metrics": {
+            "width": 46,
+            "height": 36,
+            "litPixels": 935,
+            "litRatio": 0.56461,
+            "tokenChannels": [
+              "B",
+              "G",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 10,
+          "frameIndex": 135,
+          "timeSeconds": 4.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 10,
+            "y": 6,
+            "width": 46,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-10-extended.png",
+          "metrics": {
+            "width": 46,
+            "height": 36,
+            "litPixels": 936,
+            "litRatio": 0.56522,
+            "tokenChannels": [
+              "B",
+              "C",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 11,
+          "frameIndex": 143,
+          "timeSeconds": 4.75,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 16,
+            "y": 6,
+            "width": 34,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-11-compact.png",
+          "metrics": {
+            "width": 34,
+            "height": 36,
+            "litPixels": 676,
+            "litRatio": 0.55229,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 30,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 12,
+          "frameIndex": 150,
+          "timeSeconds": 5,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 16,
+            "y": 6,
+            "width": 34,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-12-compact.png",
+          "metrics": {
+            "width": 34,
+            "height": 36,
+            "litPixels": 676,
+            "litRatio": 0.55229,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 30,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 13,
+          "frameIndex": 158,
+          "timeSeconds": 5.25,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 10,
+            "y": 6,
+            "width": 46,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-13-extended.png",
+          "metrics": {
+            "width": 46,
+            "height": 36,
+            "litPixels": 933,
+            "litRatio": 0.56341,
+            "tokenChannels": [
+              "B",
+              "C",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 14,
+          "frameIndex": 165,
+          "timeSeconds": 5.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 10,
+            "y": 6,
+            "width": 46,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-14-extended.png",
+          "metrics": {
+            "width": 46,
+            "height": 36,
+            "litPixels": 924,
+            "litRatio": 0.55797,
+            "tokenChannels": [
+              "B",
+              "G",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 15,
+          "frameIndex": 173,
+          "timeSeconds": 5.75,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 16,
+            "y": 6,
+            "width": 34,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-15-compact.png",
+          "metrics": {
+            "width": 34,
+            "height": 36,
+            "litPixels": 673,
+            "litRatio": 0.54984,
+            "tokenChannels": [
+              "B",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 30,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 16,
+          "frameIndex": 180,
+          "timeSeconds": 6,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 16,
+            "y": 6,
+            "width": 34,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-16-compact.png",
+          "metrics": {
+            "width": 34,
+            "height": 36,
+            "litPixels": 673,
+            "litRatio": 0.54984,
+            "tokenChannels": [
+              "B",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 30,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 17,
+          "frameIndex": 188,
+          "timeSeconds": 6.25,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 10,
+            "y": 6,
+            "width": 46,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-17-extended.png",
+          "metrics": {
+            "width": 46,
+            "height": 36,
+            "litPixels": 926,
+            "litRatio": 0.55918,
+            "tokenChannels": [
+              "B",
+              "G",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 18,
+          "frameIndex": 195,
+          "timeSeconds": 6.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 10,
+            "y": 6,
+            "width": 46,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-18-extended.png",
+          "metrics": {
+            "width": 46,
+            "height": 36,
+            "litPixels": 935,
+            "litRatio": 0.56461,
+            "tokenChannels": [
+              "B",
+              "G",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 19,
+          "frameIndex": 203,
+          "timeSeconds": 6.75,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 16,
+            "y": 6,
+            "width": 34,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-19-compact.png",
+          "metrics": {
+            "width": 34,
+            "height": 36,
+            "litPixels": 666,
+            "litRatio": 0.54412,
+            "tokenChannels": [
+              "B",
+              "G",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 30,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 20,
+          "frameIndex": 210,
+          "timeSeconds": 7,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 16,
+            "y": 6,
+            "width": 34,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-20-compact.png",
+          "metrics": {
+            "width": 34,
+            "height": 36,
+            "litPixels": 671,
+            "litRatio": 0.5482,
+            "tokenChannels": [
+              "B",
+              "C",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 30,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 21,
+          "frameIndex": 218,
+          "timeSeconds": 7.25,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 10,
+            "y": 6,
+            "width": 46,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-21-extended.png",
+          "metrics": {
+            "width": 46,
+            "height": 36,
+            "litPixels": 926,
+            "litRatio": 0.55918,
+            "tokenChannels": [
+              "B",
+              "G",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 22,
+          "frameIndex": 225,
+          "timeSeconds": 7.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 10,
+            "y": 6,
+            "width": 46,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-22-extended.png",
+          "metrics": {
+            "width": 46,
+            "height": 36,
+            "litPixels": 921,
+            "litRatio": 0.55616,
+            "tokenChannels": [
+              "B",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "sampleIndex": 23,
+          "frameIndex": 233,
+          "timeSeconds": 7.75,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 225,
+            "y": 95,
+            "width": 62,
+            "height": 42
+          },
+          "cleanedCrop": {
+            "x": 16,
+            "y": 6,
+            "width": 34,
+            "height": 36
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-23-compact.png",
+          "metrics": {
+            "width": 34,
+            "height": 36,
+            "litPixels": 653,
+            "litRatio": 0.5335,
+            "tokenChannels": [
+              "B",
+              "G",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 30,
+              "height": 32
+            }
+          }
+        }
+      ],
+      "measurementLimits": [
+        "This row is frame-labeled from a preserved segmented reference clip, not yet from raw arcade gameplay or ROM-derived frame timing.",
+        "The cadence should be used to compare visible runtime pulse/cadence behavior and to prevent provisional sheet cells from over-driving sprite-motion scoring.",
+        "Exact gameplay-time animation cadence still needs raw target gameplay windows."
+      ],
+      "nextGap": "Replace or confirm this segmented-reference cadence with raw gameplay or ROM-derived timing evidence before claiming final animation conformance."
+    }
+  ],
+  "measurementLimits": [
+    "The reference windows are frame-labeled and repeatable, but they come from a segmented educational/reference clip rather than direct arcade gameplay.",
+    "They are appropriate for lifting pose-only provisional caps and for measuring whether Aurora has visible pulse/cadence correspondence.",
+    "Future raw gameplay windows should replace or validate these cadence rows before final high-confidence conformance claims."
+  ],
+  "nextBestStep": "Use these frame-labeled cadence rows in temporal-target and runtime correspondence scoring, then add raw gameplay windows for challenge-stage aliens and dive/rotation poses."
+}

@@ -4434,11 +4434,21 @@ function renderGalagaAlienTemporalTargetRows(report){
       pixelated: true,
       note: crop.reviewStatus || 'review pending'
     }) : '').join('');
+    const cadenceFrames = Array.isArray(row.frameCadenceTarget?.previewFrames) ? row.frameCadenceTarget.previewFrames : [];
+    const cadenceMedia = cadenceFrames.map((frame) => frame.cropImage ? renderMediaImage({
+      label: `${row.runtimeSpriteKey || 'target'} ${frame.phaseLabel || 'phase'}`,
+      src: frame.cropImage,
+      pixelated: true,
+      note: `frame-labeled ${frame.timeSeconds}s; ${frame.phaseLabel || 'phase'}`
+    }) : '').join('');
+    const cadenceRead = row.frameCadenceTarget
+      ? `<br><span class="docMeta">Cadence: ${esc(row.frameCadenceTarget.sampleCount || 0)} frames at ${esc(row.frameCadenceTarget.sampleFps || 'n/a')} fps; cycle ${esc(row.frameCadenceTarget.cadenceSecondsPerCycle || 'n/a')}s; phases ${(row.frameCadenceTarget.phaseLabels || []).map(label => `<code>${esc(label)}</code>`).join(' ')}.</span>`
+      : '';
     return `
     <tr>
-      <td><strong>${esc(row.label || row.id || '')}</strong><br><span class="docMeta"><code>${esc(row.runtimeSpriteKey || '')}</code><br>${esc(row.status || '')}<br>confidence: ${esc(row.confidence || 'pending')}</span></td>
+      <td><strong>${esc(row.label || row.id || '')}</strong><br><span class="docMeta"><code>${esc(row.runtimeSpriteKey || '')}</code><br>${esc(row.status || '')}<br>${esc(row.timingStatus || 'pose-sequence-only')}<br>confidence: ${esc(row.confidence || 'pending')}</span></td>
       <td>${(row.poseSequence || []).map(pose => `<code>${esc(pose)}</code>`).join('<br>')}</td>
-      <td>${cropMedia || '<span class="docMeta">No temporal crop media.</span>'}</td>
+      <td><div class="catalogMedia"><div class="catalogMediaGrid">${[cropMedia, cadenceMedia].filter(Boolean).join('')}</div></div>${cadenceRead || (!cropMedia ? '<span class="docMeta">No temporal crop media.</span>' : '')}</td>
       <td>${esc(row.sourceRead || '')}</td>
       <td>${esc(row.scoringUse || '')}</td>
       <td>${esc(row.nextGap || '')}</td>
@@ -5316,12 +5326,12 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           </div>
           <div class="docWrap">
             <p><strong>Current read:</strong> ${esc(galagaAlienTemporalTargets.status || 'pending')}. <strong>Next best step:</strong> ${esc(galagaAlienTemporalTargets.nextBestStep || 'Generate temporal target rows before claiming animation conformance.')}</p>
-            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-temporal-targets/latest.json</code>. <strong>Readable report:</strong> <code>GALAGA_ALIEN_TEMPORAL_TARGETS.md</code>. <strong>Generated:</strong> ${esc(galagaAlienTemporalTargets.generatedAt || 'pending')}.</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-temporal-targets/latest.json</code>. <strong>Cadence artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest.json</code>. <strong>Readable reports:</strong> <code>GALAGA_ALIEN_TEMPORAL_TARGETS.md</code>, <code>GALAGA_ALIEN_FRAME_CADENCE_TARGETS.md</code>. <strong>Generated:</strong> ${esc(galagaAlienTemporalTargets.generatedAt || 'pending')}.</p>
             <div class="metricGrid">
               <div class="metricCard"><span class="metricLabel">Temporal Rows</span><strong>${esc(galagaAlienTemporalTargetSummary.temporalRowCount ?? 0)}</strong><span>Boss, Bee, Butterfly</span></div>
               <div class="metricCard"><span class="metricLabel">Trusted Links</span><strong>${esc(galagaAlienTemporalTargetSummary.trustedCropLinks ?? 0)}</strong><span>motion-reference crops</span></div>
               <div class="metricCard"><span class="metricLabel">Provisional Links</span><strong>${esc(galagaAlienTemporalTargetSummary.provisionalCropLinks ?? 0)}</strong><span>need better windows</span></div>
-              <div class="metricCard"><span class="metricLabel">Frame-Timed Rows</span><strong>${esc(galagaAlienTemporalTargetSummary.finalFrameTimedRows ?? 0)}</strong><span>target timing still pending</span></div>
+              <div class="metricCard"><span class="metricLabel">Frame-Labeled Rows</span><strong>${esc(galagaAlienTemporalTargetSummary.finalFrameTimedRows ?? 0)}</strong><span>${esc(galagaAlienTemporalTargetSummary.frameLabeledSegmentedReferenceRows ?? 0)} segmented reference</span></div>
             </div>
           </div>
           <div class="tableWrap" style="margin-top:16px;">

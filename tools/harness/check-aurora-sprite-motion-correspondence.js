@@ -51,7 +51,8 @@ for(const id of REQUIRED_ROWS){
   if(!row.capReason || !Number.isFinite(+row.capScore10)){
     fail(`Aurora sprite motion correspondence row ${id} is missing its cap explanation`, row);
   }
-  if((+row.target?.provisionalCropCount || 0) > 0 && +row.score10 > 6.0){
+  const hasAcceptedFrameCadence = !!row.target?.frameCadenceTarget?.acceptedForScoring;
+  if((+row.target?.provisionalCropCount || 0) > 0 && !hasAcceptedFrameCadence && +row.score10 > 6.0){
     fail(`Aurora sprite motion correspondence row ${id} overclaims despite provisional target crops`, row);
   }
 }
@@ -59,7 +60,7 @@ for(const id of REQUIRED_ROWS){
 if(!Number.isFinite(+artifact.summary?.averageScore10)){
   fail('Aurora sprite motion correspondence summary is missing averageScore10', artifact.summary);
 }
-if(artifact.summary?.targetTimingStatus !== 'pose-sequence-targets-only' && artifact.summary?.targetTimingStatus !== 'frame-timed-targets-present'){
+if(!['pose-sequence-targets-only', 'frame-timed-targets-present', 'frame-labeled-segmented-reference-windows'].includes(artifact.summary?.targetTimingStatus)){
   fail('Aurora sprite motion correspondence summary has an unknown target timing status', artifact.summary);
 }
 if((+artifact.summary?.finalFrameTimedRows || 0) <= 0 && +artifact.summary.averageScore10 > 6.5){

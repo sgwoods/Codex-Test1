@@ -342,14 +342,14 @@ function main(){
         : 'motion coverage pending',
       target: '>=8.0/10 temporal correspondence against frame-labeled target cadence windows',
       score10: spriteMotionCorrespondenceSummary.averageScore10 ?? null,
-      confidence: spriteMotionCorrespondence ? 'medium-low' : 'planning',
+      confidence: spriteMotionCorrespondenceSummary.frameLabeledSegmentedReferenceRows ? 'medium' : (spriteMotionCorrespondence ? 'medium-low' : 'planning'),
       status: spriteMotionCorrespondence
         ? `Measured correspondence; ${spriteMotionCorrespondenceSummary.targetTimingStatus || 'target timing status pending'}`
         : runtimeSpriteSummary.motionCoverageAxesCovered
           ? 'First temporal phase windows captured; full motion score still pending'
         : 'Not yet scored; current sprite metrics are static-pose measurements',
       measurement: spriteMotionCorrespondence
-        ? `Correspondence score ${scoreText(spriteMotionCorrespondenceSummary.averageScore10)} across ${spriteMotionCorrespondenceSummary.rowCount || 0} Boss/Bee/Butterfly rows; weakest ${spriteMotionCorrespondenceSummary.weakestRowId || 'n/a'} ${scoreText(spriteMotionCorrespondenceSummary.weakestScore10)}; final frame-timed target rows ${spriteMotionCorrespondenceSummary.finalFrameTimedRows ?? 0}; provisional target rows ${spriteMotionCorrespondenceSummary.provisionalTargetRows ?? 0}.`
+        ? `Correspondence score ${scoreText(spriteMotionCorrespondenceSummary.averageScore10)} across ${spriteMotionCorrespondenceSummary.rowCount || 0} Boss/Bee/Butterfly rows; weakest ${spriteMotionCorrespondenceSummary.weakestRowId || 'n/a'} ${scoreText(spriteMotionCorrespondenceSummary.weakestScore10)}; frame-labeled segmented-reference rows ${spriteMotionCorrespondenceSummary.frameLabeledSegmentedReferenceRows ?? 0}; provisional target rows ${spriteMotionCorrespondenceSummary.provisionalTargetRows ?? 0}.`
         : runtimeSprite
         ? `Static live-canvas pose score exists at ${scoreText(runtimeSpriteSummary.averageScore10)}; ${runtimeSpriteSummary.motionCoverageAxesCovered || 0}/${runtimeSpriteSummary.motionCoverageAxesPlanned || 4} planned motion axes have at least seed coverage. Covered: ${(runtimeSpriteSummary.coveredMotionAxes || []).join('; ') || 'none yet'}. Full roadmap: ${(runtimeSpriteSummary.plannedMotionAxes || []).join('; ')}.`
         : 'Runtime sprite artifact has not been generated, so motion coverage cannot be planned from the current capture set yet.',

@@ -1,28 +1,29 @@
 # Aurora Sprite Motion Correspondence
 
-Generated: 2026-05-19T21:50:21.379Z
+Generated: 2026-05-19T22:29:48.257Z
 
 This report joins Galaga temporal target rows to Aurora runtime sprite-motion captures. It is intentionally conservative: visible runtime animation gets credit, but scores are capped until the target side has frame-labeled cadence windows rather than only pose sequences.
 
 ## Summary
 
-- Score: 6/10
+- Score: 8/10
 - Rows: 3
-- Frame-timed target rows: 0
-- Weakest row: bee-zako-pulse-pair (5.8/10)
-- Next best step: Promote true frame-labeled Boss, Bee, and Butterfly target cadence windows, then compare Aurora runtime cadence frames directly against those target windows.
+- Frame-timed target rows: 3
+- Weakest row: bee-zako-pulse-pair (7.7/10)
+- Next best step: Confirm segmented-reference cadence against raw gameplay or ROM-derived timing, then tune Aurora runtime cadence and challenge-stage alien motion against the accepted target rows.
 
 ## Rows
 
 | Row | Score | Target Readiness | Runtime Motion | Cap | Next Gap |
 | --- | ---: | --- | --- | --- | --- |
-| Boss Galaga Pulse Pair<br><code>boss-line</code> | 6.5/10 | 6.5/10; trusted 3, provisional 0 | phase 6.8/10; cadence 7.4/10; static 6.5/10; seeds 4/4 | 6.5/10<br>Capped because the Galaga target rows are pose sequences without final frame-timed cadence windows. | Promote a true frame-labeled target cadence window so runtime cadence can be compared to target timing, not only visible runtime change. |
-| Bee / Zako Pulse Pair<br><code>bee-line</code> | 5.8/10 | 5.4/10; trusted 1, provisional 2 | phase 6.3/10; cadence 7.1/10; static 6.3/10; seeds 4/4 | 5.8/10<br>Capped because this row still uses provisional target flap crops; it can guide work but cannot claim mature animation conformance. | Promote frame-clean Bee / Zako Pulse Pair target flaps from source gameplay/video before raising this above planning confidence. |
-| Butterfly / Escort Pulse Pair<br><code>but-line</code> | 5.8/10 | 5.4/10; trusted 1, provisional 2 | phase 9.4/10; cadence 9.3/10; static 6.6/10; seeds 4/4 | 5.8/10<br>Capped because this row still uses provisional target flap crops; it can guide work but cannot claim mature animation conformance. | Promote frame-clean Butterfly / Escort Pulse Pair target flaps from source gameplay/video before raising this above planning confidence. |
+| Boss Galaga Pulse Pair<br><code>boss-line</code> | 7.9/10 | 8.8/10; trusted 3, provisional 0 | phase 6.8/10; cadence 7.4/10; static 6.5/10; seeds 4/4 | 8.5/10<br>Frame-labeled target rows exist, so the correspondence score may move beyond pose-only planning evidence. | Confirm Boss Galaga Pulse Pair cadence against raw gameplay or ROM-derived timing, then tune Aurora runtime cadence toward that target. |
+| Bee / Zako Pulse Pair<br><code>bee-line</code> | 7.7/10 | 8.8/10; trusted 1, provisional 2 | phase 6.3/10; cadence 7.1/10; static 6.3/10; seeds 4/4 | 8.5/10<br>Frame-labeled segmented-reference cadence replaces provisional flap-cell timing for this row; final raw gameplay timing is still needed before high-confidence conformance claims. | Confirm Bee / Zako Pulse Pair cadence against raw gameplay or ROM-derived timing, then tune Aurora runtime cadence toward that target. |
+| Butterfly / Escort Pulse Pair<br><code>but-line</code> | 8.5/10 | 8.8/10; trusted 1, provisional 2 | phase 9.4/10; cadence 9.3/10; static 6.6/10; seeds 4/4 | 8.5/10<br>Frame-labeled segmented-reference cadence replaces provisional flap-cell timing for this row; final raw gameplay timing is still needed before high-confidence conformance claims. | Confirm Butterfly / Escort Pulse Pair cadence against raw gameplay or ROM-derived timing, then tune Aurora runtime cadence toward that target. |
 
 ## Measurement Limits
 
 - This score joins target pose rows to runtime motion samples; it is not a final arcade-perfect animation score.
-- Rows are capped while Galaga target evidence is pose-sequence only and lacks exact frame timing.
-- Bee and Butterfly rows remain especially capped while flap targets use provisional source-sheet cells.
+- Rows remain capped when Galaga target evidence is pose-sequence only and lacks frame timing with frame-labeled windows.
+- Frame-labeled segmented-reference rows are stronger than provisional source-sheet cells, but still lower-confidence than raw gameplay or ROM-derived frame windows.
+- Bee and Butterfly rows should no longer be capped solely by provisional flap cells once segmented-reference cadence is present.
 - This artifact should influence challenge-stage graphical scoring as a measured signal, but gameplay challenge conformance still depends on path choreography, group timing, alien novelty, and shot opportunity.
