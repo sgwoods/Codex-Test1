@@ -490,7 +490,7 @@ function commitMatchesHead(value, acceptedCommits){
 }
 
 function checkCurrentConformanceDocArtifacts(){
-  const acceptedCommits = git(['rev-list', '--max-count', '3', 'HEAD'])
+  const acceptedCommits = git(['rev-list', '--max-count', '4', 'HEAD'])
     .split('\n')
     .map((value) => value.trim())
     .filter(Boolean);
@@ -656,7 +656,7 @@ function checkPublicProjectPageArtifact(cfg){
 
 function checkBuildInfo(cfg){
   const info = loadJson(cfg.buildInfo);
-  const acceptedCommits = git(['rev-list', '--max-count', '3', 'HEAD'])
+  const acceptedCommits = git(['rev-list', '--max-count', '4', 'HEAD'])
     .split('\n')
     .map((value) => value.trim())
     .filter(Boolean);

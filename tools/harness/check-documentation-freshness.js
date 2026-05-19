@@ -173,7 +173,7 @@ const guide = readJson(APP_GUIDE);
 const source = read(AURORA_PACK);
 const catalog = read(GAME_CATALOG);
 const repoHeadShort = git(['rev-parse', '--short', 'HEAD']);
-const acceptedArtifactCommits = git(['rev-list', '--max-count', '3', 'HEAD'])
+const acceptedArtifactCommits = git(['rev-list', '--max-count', '4', 'HEAD'])
   .split('\n')
   .map((value) => value.trim())
   .filter(Boolean);
