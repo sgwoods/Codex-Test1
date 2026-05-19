@@ -77,6 +77,7 @@
             "GALAGA_CHALLENGE_VIDEO_REFERENCE_ANALYSIS.md",
             "application-guide.json",
             "reference-artifacts/analyses/application-artifact-conformance/latest.json",
+            "reference-artifacts/analyses/formation-readability/latest.json",
             "reference-artifacts/analyses/persona-performance-distribution/latest.json"
           ],
           "currentness": "Game cards come from dashboard game profiles; fuller alien/audio/stage/persona tables come from the application and catalog artifacts.",
@@ -213,7 +214,10 @@
             "RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md",
             "RELEASE_NOTE_1.3.0.1_HOSTED_DEV_REVIEW.md",
             "RELEASE_NOTE_1.3.0_PRODUCTION.md",
-            "RELEASE_NOTE_1.2.3_BUILD_532.md"
+            "RELEASE_NOTE_1.2.3_BUILD_532.md",
+            "RELEASE_NOTE_1.4.0_BETA_1.md",
+            "RELEASE_NOTE_1.4.0_PRODUCTION.md",
+            "RELEASE_NOTE_1.4.0.1_CONFORMANCE_PROCESS_REVIEW.md"
           ],
           "currentness": "When a note declares sourceDoc, the hosted page renders that Markdown directly during build.",
           "riskIfStale": "Readers may only see thin summary notes even when a fuller committed release narrative exists."
