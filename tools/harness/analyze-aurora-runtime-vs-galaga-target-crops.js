@@ -6,6 +6,7 @@ const { execFileSync, spawnSync } = require('child_process');
 const ROOT = path.resolve(__dirname, '..', '..');
 const RUNTIME_ARTIFACT = 'reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json';
 const TARGET_ARTIFACT = 'reference-artifacts/analyses/galaga-alien-target-crops/latest.json';
+const TEMPORAL_TARGET_ARTIFACT = 'reference-artifacts/analyses/galaga-alien-temporal-targets/latest.json';
 const OUT_DIR = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-runtime-vs-galaga-target-crops');
 const OUT = path.join(OUT_DIR, 'latest.json');
 
@@ -36,6 +37,22 @@ const TEMPORAL_POSE_SEQUENCES = {
   'but-line': ['formation-front', 'flap-a', 'flap-b', 'flap-b', 'flap-a', 'formation-front'],
   'boss-line': ['formation-front', 'flap-a', 'flap-b', 'flap-b', 'flap-a', 'formation-front']
 };
+
+function temporalPoseSequences(){
+  if(!exists(TEMPORAL_TARGET_ARTIFACT)) return TEMPORAL_POSE_SEQUENCES;
+  try{
+    const artifact = readJson(TEMPORAL_TARGET_ARTIFACT);
+    const rows = Array.isArray(artifact.rows) ? artifact.rows : [];
+    const map = {};
+    for(const row of rows){
+      if(!row.runtimeSpriteKey || !Array.isArray(row.poseSequence) || row.poseSequence.length < 1) continue;
+      map[row.runtimeSpriteKey] = row.poseSequence;
+    }
+    return Object.keys(map).length ? map : TEMPORAL_POSE_SEQUENCES;
+  }catch{
+    return TEMPORAL_POSE_SEQUENCES;
+  }
+}
 
 function fail(message, payload){
   console.error(message);
@@ -377,9 +394,9 @@ function poseTransitionCount(frames){
   return transitions;
 }
 
-function compareTemporalSequence(sample, targetCrops, targetGrids){
+function compareTemporalSequence(sample, targetCrops, targetGrids, poseSequences){
   const frames = Array.isArray(sample.frames) ? sample.frames : [];
-  const expected = TEMPORAL_POSE_SEQUENCES[sample.spriteKey] || [];
+  const expected = poseSequences[sample.spriteKey] || [];
   if(!frames.length || !expected.length) return null;
   const frameComparisons = frames.map((frame, index) => {
     const poseKey = expected[Math.min(expected.length - 1, Math.floor(index * expected.length / Math.max(1, frames.length)))] || expected[0];
@@ -430,9 +447,10 @@ function main(){
     if(!exists(crop.targetCrop)) fail(`Promoted target crop image is missing: ${crop.targetCrop}`, crop);
   }
   const targetGrids = new Map();
+  const poseSequences = temporalPoseSequences();
   const comparisons = samples.map(sample => compareSample(sample, targetCrops, targetGrids));
   const temporalSequenceComparisons = (Array.isArray(runtime.cadenceSamples) ? runtime.cadenceSamples : [])
-    .map(sample => compareTemporalSequence(sample, targetCrops, targetGrids))
+    .map(sample => compareTemporalSequence(sample, targetCrops, targetGrids, poseSequences))
     .filter(Boolean);
   const scored = comparisons.filter(item => Number.isFinite(+item.bestScore10));
   const temporalScored = temporalSequenceComparisons.filter(item => Number.isFinite(+item.sequenceScore10));
@@ -455,7 +473,8 @@ function main(){
     gameKey: 'aurora-galactica',
     sources: {
       runtimeSprite: RUNTIME_ARTIFACT,
-      targetCrops: TARGET_ARTIFACT
+      targetCrops: TARGET_ARTIFACT,
+      temporalTargets: exists(TEMPORAL_TARGET_ARTIFACT) ? TEMPORAL_TARGET_ARTIFACT : null
     },
     summary: {
       sampleCount: comparisons.length,

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "galaga-alien-target-crops",
-  "generatedAt": "2026-05-19T17:54:25.241Z",
-  "commit": "4113d66a",
+  "generatedAt": "2026-05-19T18:23:33.733Z",
+  "commit": "591cd98a",
   "branch": "codex/macbook-conformance-investment-review",
   "dirty": true,
   "status": "trusted-motion-overrides-plus-provisional-sheet-crops",
@@ -26,8 +26,8 @@
       "tractor-beam"
     ],
     "sourcePixelExact": false,
-    "trustedMotionReferenceCount": 5,
-    "provisionalSourceSheetCount": 19,
+    "trustedMotionReferenceCount": 6,
+    "provisionalSourceSheetCount": 18,
     "compositeTargetCount": 1,
     "scoringStatus": "trusted-core-formation-targets-ready-runtime-comparison-pending"
   },
@@ -231,42 +231,56 @@
       "id": "player-fighter-single-front",
       "roleKey": "player-fighter",
       "poseKey": "single-ship-front",
-      "sourceKind": "sheet-cell",
-      "sourceRegion": "left-primary-sprite-grid",
-      "sourceCell": {
-        "row": 1,
-        "column": 8
+      "sourceKind": "motion-reference-video",
+      "sourceRegion": "segmented-alien-motion-reference",
+      "sourceVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "timeSeconds": 10,
+      "frameCrop": {
+        "x": 248,
+        "y": 430,
+        "width": 82,
+        "height": 64
       },
-      "note": "Best first-pass front-facing fighter cell in the supplied sheet. Dual-fighter remains a composite scoring target.",
-      "reviewStatus": "provisional-source-sheet-cell",
+      "note": "Trusted clean player-fighter crop from the segmented alien motion reference; replaces the provisional sheet-cell primary fighter target.",
+      "reviewStatus": "accepted-trusted-motion-reference",
       "label": "Player Fighter single-ship-front",
-      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "sourceFrameSeconds": 10,
       "crop": {
-        "sourceWidth": 458,
-        "sourceHeight": 216,
-        "x": 112,
-        "y": 0,
-        "width": 16,
-        "height": 16
+        "sourceWidth": 576,
+        "sourceHeight": 576,
+        "x": 248,
+        "y": 430,
+        "width": 82,
+        "height": 64
+      },
+      "cleanedCrop": {
+        "x": 10,
+        "y": 19,
+        "width": 53,
+        "height": 45
       },
       "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-single-front.png",
-      "sourcePixelExact": true,
+      "sourcePixelExact": false,
+      "videoDerivedCleanCrop": true,
       "pixelScale": 1,
       "metrics": {
-        "width": 16,
-        "height": 16,
-        "litPixels": 96,
-        "litRatio": 0.375,
+        "width": 53,
+        "height": 45,
+        "litPixels": 894,
+        "litRatio": 0.37484,
         "tokenChannels": [
           "B",
+          "G",
           "R",
-          "W"
+          "W",
+          "Y"
         ],
         "litBox": {
-          "x": 0,
-          "y": 1,
-          "width": 12,
-          "height": 15
+          "x": 2,
+          "y": 2,
+          "width": 49,
+          "height": 43
         }
       }
     },
@@ -1647,14 +1661,14 @@
       "roleKey": "player-fighter",
       "poseKey": "dual-fighter-front",
       "label": "Player Fighter dual-fighter-front",
-      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
       "sourceRegion": "derived-composite",
       "sourceCell": null,
       "crop": {
         "x": 0,
         "y": 0,
-        "width": 38,
-        "height": 16
+        "width": 114,
+        "height": 45
       },
       "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-dual-front.png",
       "sourcePixelExact": false,
@@ -1669,29 +1683,30 @@
         },
         {
           "id": "player-fighter-single-front",
-          "x": 22,
+          "x": 61,
           "y": 0
         }
       ],
-      "reviewStatus": "accepted-first-pass-composite",
-      "note": "Derived dual-fighter target composed from two exact source-sheet player-fighter crops. This prevents the dual runtime state from being scored against a single fighter while preserving the source crop pixels.",
+      "reviewStatus": "accepted-trusted-motion-reference-composite",
+      "note": "Derived dual-fighter target composed from two trusted cleaned player-fighter crops. This prevents the dual runtime state from being scored against a single fighter while preserving the accepted target proportions.",
       "metrics": {
-        "width": 38,
-        "height": 16,
-        "litPixels": 192,
-        "litRatio": 0.31579,
+        "width": 114,
+        "height": 45,
+        "litPixels": 1798,
+        "litRatio": 0.35049,
         "tokenChannels": [
           "B",
           "C",
           "G",
           "R",
-          "W"
+          "W",
+          "Y"
         ],
         "litBox": {
-          "x": 0,
-          "y": 1,
-          "width": 34,
-          "height": 15
+          "x": 3,
+          "y": 2,
+          "width": 109,
+          "height": 43
         }
       }
     }

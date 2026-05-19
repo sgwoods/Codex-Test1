@@ -75,6 +75,7 @@ const GALAGA_ALIEN_MOTION_REFERENCE = path.join(ROOT, 'reference-artifacts', 'an
 const GALAGA_ALIEN_CROP_PREVIEWS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-visual-crop-previews', 'latest.json');
 const GALAGA_ALIEN_TARGET_CROPS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-target-crops', 'latest.json');
 const GALAGA_TARGET_EVIDENCE_AUDIT = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-evidence-audit', 'latest.json');
+const GALAGA_ALIEN_TEMPORAL_TARGETS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-temporal-targets', 'latest.json');
 const AURORA_RUNTIME_SPRITE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-runtime-sprite-conformance', 'latest.json');
 const AURORA_RUNTIME_VS_GALAGA_TARGET_CROPS = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-runtime-vs-galaga-target-crops', 'latest.json');
 const AURORA_IMPACT_EXPLOSION_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-impact-explosion-conformance', 'latest.json');
@@ -3118,6 +3119,7 @@ let galagaAlienMotionReferenceCache = null;
 let galagaAlienCropPreviewsCache = null;
 let galagaAlienTargetCropsCache = null;
 let galagaTargetEvidenceAuditCache = null;
+let galagaAlienTemporalTargetsCache = null;
 let auroraRuntimeSpriteConformanceCache = null;
 let auroraRuntimeVsGalagaTargetCropsCache = null;
 let auroraImpactExplosionConformanceCache = null;
@@ -3244,6 +3246,24 @@ function loadGalagaTargetEvidenceAudit(){
     galagaTargetEvidenceAuditCache = { rows: [], summary: {} };
   }
   return galagaTargetEvidenceAuditCache;
+}
+
+function loadGalagaAlienTemporalTargets(){
+  if(galagaAlienTemporalTargetsCache) return galagaAlienTemporalTargetsCache;
+  if(!fs.existsSync(GALAGA_ALIEN_TEMPORAL_TARGETS)){
+    galagaAlienTemporalTargetsCache = { rows: [], summary: {} };
+    return galagaAlienTemporalTargetsCache;
+  }
+  try {
+    const artifact = readJson(GALAGA_ALIEN_TEMPORAL_TARGETS);
+    galagaAlienTemporalTargetsCache = Object.assign({}, artifact, {
+      rows: Array.isArray(artifact.rows) ? artifact.rows : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    galagaAlienTemporalTargetsCache = { rows: [], summary: {} };
+  }
+  return galagaAlienTemporalTargetsCache;
 }
 
 function loadAuroraRuntimeSpriteConformance(){
@@ -4378,6 +4398,35 @@ function renderGalagaTargetEvidenceAuditRows(report){
   }).join('\n');
 }
 
+function renderGalagaAlienTemporalTargetRows(report){
+  const rows = Array.isArray(report?.rows) ? report.rows : [];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="6"><span class="docMeta">Alien temporal targets pending. Run <code>npm run harness:analyze:galaga-alien-temporal-targets</code>.</span></td>
+    </tr>`;
+  }
+  return rows.map((row) => {
+    const crops = Array.isArray(row.targetCrops) ? row.targetCrops : [];
+    const cropMedia = crops.slice(0, 4).map((crop) => crop.targetCrop ? renderMediaImage({
+      label: crop.id || 'Temporal target crop',
+      src: crop.targetCrop,
+      pixelated: true,
+      note: crop.reviewStatus || 'review pending'
+    }) : '').join('');
+    return `
+    <tr>
+      <td><strong>${esc(row.label || row.id || '')}</strong><br><span class="docMeta"><code>${esc(row.runtimeSpriteKey || '')}</code><br>${esc(row.status || '')}<br>confidence: ${esc(row.confidence || 'pending')}</span></td>
+      <td>${(row.poseSequence || []).map(pose => `<code>${esc(pose)}</code>`).join('<br>')}</td>
+      <td>${cropMedia || '<span class="docMeta">No temporal crop media.</span>'}</td>
+      <td>${esc(row.sourceRead || '')}</td>
+      <td>${esc(row.scoringUse || '')}</td>
+      <td>${esc(row.nextGap || '')}</td>
+    </tr>
+  `;
+  }).join('\n');
+}
+
 function renderAuroraRuntimeVsTargetRows(report){
   const rows = Array.isArray(report?.comparisons) ? report.comparisons : [];
   if(!rows.length){
@@ -4581,6 +4630,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'alien-visual-reference-pack', title: 'Alien Visual References' },
     { id: 'galaga-alien-motion-reference', title: 'Alien Motion Reference' },
     { id: 'galaga-target-evidence-audit', title: 'Trusted Target Audit' },
+    { id: 'galaga-alien-temporal-targets', title: 'Alien Temporal Targets' },
     { id: 'sprite-conformance-variation-plan', title: 'Sprite Conformance Plan' },
     { id: 'conformance-alien-index', title: 'Alien Conformance Index' },
     { id: 'conformance-audio-index', title: 'Audio Conformance Index' },
@@ -4738,6 +4788,9 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const galagaTargetEvidenceAudit = loadGalagaTargetEvidenceAudit();
   const galagaTargetEvidenceAuditSummary = galagaTargetEvidenceAudit.summary || {};
   const galagaTargetEvidenceAuditRows = renderGalagaTargetEvidenceAuditRows(galagaTargetEvidenceAudit);
+  const galagaAlienTemporalTargets = loadGalagaAlienTemporalTargets();
+  const galagaAlienTemporalTargetSummary = galagaAlienTemporalTargets.summary || {};
+  const galagaAlienTemporalTargetRows = renderGalagaAlienTemporalTargetRows(galagaAlienTemporalTargets);
   const auroraRuntimeSpriteConformance = loadAuroraRuntimeSpriteConformance();
   const auroraRuntimeSpriteSummary = auroraRuntimeSpriteConformance.summary || {};
   const auroraRuntimeVsGalagaTargetCrops = loadAuroraRuntimeVsGalagaTargetCrops();
@@ -5200,6 +5253,40 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               </thead>
               <tbody>
                 ${galagaTargetEvidenceAuditRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="galaga-alien-temporal-targets">
+          <div class="sectionHeader">
+            <h2>Alien Temporal Targets</h2>
+            <p>Temporal sprite identity is now treated separately from static sprite identity. These rows define the pose sequences the runtime cadence scorer uses for Boss, Bee, and Butterfly, while clearly marking which parts are trusted motion-reference evidence and which parts are still provisional.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Current read:</strong> ${esc(galagaAlienTemporalTargets.status || 'pending')}. <strong>Next best step:</strong> ${esc(galagaAlienTemporalTargets.nextBestStep || 'Generate temporal target rows before claiming animation conformance.')}</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-temporal-targets/latest.json</code>. <strong>Readable report:</strong> <code>GALAGA_ALIEN_TEMPORAL_TARGETS.md</code>. <strong>Generated:</strong> ${esc(galagaAlienTemporalTargets.generatedAt || 'pending')}.</p>
+            <div class="metricGrid">
+              <div class="metricCard"><span class="metricLabel">Temporal Rows</span><strong>${esc(galagaAlienTemporalTargetSummary.temporalRowCount ?? 0)}</strong><span>Boss, Bee, Butterfly</span></div>
+              <div class="metricCard"><span class="metricLabel">Trusted Links</span><strong>${esc(galagaAlienTemporalTargetSummary.trustedCropLinks ?? 0)}</strong><span>motion-reference crops</span></div>
+              <div class="metricCard"><span class="metricLabel">Provisional Links</span><strong>${esc(galagaAlienTemporalTargetSummary.provisionalCropLinks ?? 0)}</strong><span>need better windows</span></div>
+              <div class="metricCard"><span class="metricLabel">Frame-Timed Rows</span><strong>${esc(galagaAlienTemporalTargetSummary.finalFrameTimedRows ?? 0)}</strong><span>target timing still pending</span></div>
+            </div>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Temporal Target</th>
+                  <th>Pose Sequence</th>
+                  <th>Evidence</th>
+                  <th>Source Read</th>
+                  <th>Scoring Use</th>
+                  <th>Next Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${galagaAlienTemporalTargetRows}
               </tbody>
             </table>
           </div>

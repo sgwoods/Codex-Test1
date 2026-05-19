@@ -293,6 +293,14 @@ const TARGET_EXPLOSION_PALETTE=Object.freeze({
  M:'#ff43e6'
 });
 
+const AURORA_CONFORMANCE_PIXELS=Object.freeze({
+ butterfly:Object.freeze({
+  a:[[0,1],[1,1],[10,1],[11,1],[0,2],[1,2],[10,2],[11,2],[0,3],[1,3],[10,3],[11,3],[0,4],[1,4],[10,4],[11,4],[0,5],[1,5],[2,5],[3,5],[8,5],[9,5],[10,5],[11,5],[0,6],[1,6],[10,6],[11,6],[0,7],[1,7],[10,7],[11,7],[0,8],[1,8],[10,8],[11,8]],
+  b:[[4,2],[5,2],[6,2],[7,2],[3,3],[4,3],[5,3],[6,3],[7,3],[8,3],[3,4],[4,4],[5,4],[6,4],[7,4],[8,4],[4,5],[5,5],[6,5],[7,5],[4,6],[5,6],[6,6],[7,6]],
+  c:[[5,0],[7,0],[5,1],[7,1],[4,6],[5,6],[6,6],[7,6],[4,7],[5,7],[6,7],[7,7],[5,8],[6,8],[5,9],[6,9]]
+ })
+});
+
 const TARGET_PIXEL_ASPECT_X=1.14;
 
 function drawTargetSpriteRows(rows,palette,scale=1,offsetX=0,offsetY=0,opts={}){
@@ -361,8 +369,8 @@ function enemyPalette(e,flap,hot){
   case 'mosquito':
    return{a:flap?'#ff8c70':'#ffab85',b:hot?'#ffd24c':'#ffe179',c:'#74f4ff',pat:FAMILY_PIXELS.mosquito};
   default:
-   if(e.t==='bee')return{a:flap?'#ff4c4c':'#f02f34',b:hot?'#ffffff':'#e8f4ff',c:'#2f8cff',pat:null};
-   if(e.t==='but')return{a:flap?'#2f73ff':'#1f62de',b:hot?'#fff27d':'#ffd94e',c:'#ff3f4f',pat:null};
+   if(e.t==='bee')return{a:flap?'#2f73ff':'#1f62de',b:hot?'#fff27d':'#ffd94e',c:'#ff3f4f',pat:null};
+   if(e.t==='but')return{a:flap?'#ff4c4c':'#f02f34',b:hot?'#ffffff':'#e8f4ff',c:'#2f8cff',pat:null};
    if(e.t==='rogue')return{a:flap?'#ffffff':'#f4f8ff',b:hot?'#ff6a75':'#ff3347',c:'#5ca8ff',pat:null};
    return damaged?{a:flap?'#7ab5ff':'#add7ff',b:hot?'#ffe177':'#ffe89c',c:'#ff58b4',pat:null}:{a:e.hp>1?(flap?'#31c99d':'#12a987'):(flap?'#64ddc5':'#46c7b0'),b:hot?'#fff27a':'#ffd84c',c:'#f04c30',pat:null};
  }
@@ -472,8 +480,8 @@ function drawEnemy(e){
  if(!drewTarget){
   if(e.fam==='dragonfly')drawPix(-ps*4.5,-ps*3.5,ps,P.dragonfly.a,pal.a,pal.b,P.dragonfly.b,pal.c,P.dragonfly.c);
   else if(e.fam==='mosquito')drawPix(-ps*4.5,-ps*3.5,ps,P.mosquito.a,pal.a,pal.b,P.mosquito.b,pal.c,P.mosquito.c);
-  else if(e.t==='bee')drawPix(-ps*4,-ps*3.5,ps,P.bee.a,pal.a,pal.b,P.bee.b,pal.c,pal.pat||P.bee.c);
-  else if(e.t==='but')drawPix(-ps*4,-ps*3.5,ps,P.but.a,pal.a,pal.b,P.but.b,pal.c,pal.pat||P.but.c);
+  else if(e.t==='bee')drawPix(-ps*4,-ps*3.5,ps,P.but.a,pal.a,pal.b,P.but.b,pal.c,pal.pat||P.but.c);
+  else if(e.t==='but')drawPix(-ps*6,-ps*5,ps,AURORA_CONFORMANCE_PIXELS.butterfly.a,pal.a,pal.b,AURORA_CONFORMANCE_PIXELS.butterfly.b,pal.c,pal.pat||AURORA_CONFORMANCE_PIXELS.butterfly.c);
   else if(e.t==='rogue')drawPix(-ps*4,-ps*3.5,ps,P.rogue.a,pal.a,pal.b,P.rogue.b,pal.c,pal.pat||P.rogue.c);
   else drawPix(-ps*4.5,-ps*3.5,ps,P.boss.a,pal.a,pal.b,P.boss.b,pal.c,pal.pat||P.boss.c);
   drawEnemyFlapAccent(e,ps,pal,flap);

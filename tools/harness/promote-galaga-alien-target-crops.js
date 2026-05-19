@@ -12,7 +12,7 @@ const MARKDOWN = path.join(ROOT, 'GALAGA_ALIEN_TARGET_CROPS.md');
 const MOTION_REFERENCE_VIDEO = path.join(ROOT, 'reference-artifacts', 'ingestion', 'galaga-alien-motion-reference', 'source-video', 'galaga-alien-pulse-reference.mp4');
 
 const CROP_SPECS = [
-  cellSpec('player-fighter-single-front', 'player-fighter', 'single-ship-front', 'left-primary-sprite-grid', 1, 8, 'Best first-pass front-facing fighter cell in the supplied sheet. Dual-fighter remains a composite scoring target.'),
+  motionSpec('player-fighter-single-front', 'player-fighter', 'single-ship-front', 10.0, { x: 248, y: 430, width: 82, height: 64 }, 'Trusted clean player-fighter crop from the segmented alien motion reference; replaces the provisional sheet-cell primary fighter target.'),
   cellSpec('player-fighter-turn-left', 'player-fighter', 'turn-left', 'left-primary-sprite-grid', 1, 6, 'Rotation/turn pose for future motion and capture/rescue scoring.'),
   cellSpec('player-fighter-turn-right', 'player-fighter', 'turn-right', 'left-primary-sprite-grid', 1, 7, 'Rotation/turn pose for future motion and capture/rescue scoring.'),
 
@@ -409,13 +409,18 @@ function promoteDualFighterComposite(targetCrops){
   if(!component) fail('Cannot build dual-fighter composite without player-fighter-single-front.');
   const componentFile = path.join(ROOT, component.targetCrop);
   const outFile = path.join(CROP_DIR, 'player-fighter-dual-front.png');
+  const componentWidth = Math.max(1, +component.metrics?.width || 16);
+  const componentHeight = Math.max(1, +component.metrics?.height || 16);
+  const gap = 8;
+  const width = componentWidth * 2 + gap;
+  const height = componentHeight;
   run('ffmpeg', [
     '-v', 'error',
     '-f', 'lavfi',
-    '-i', 'color=c=black:s=38x16',
+    '-i', `color=c=black:s=${width}x${height}`,
     '-i', componentFile,
     '-i', componentFile,
-    '-filter_complex', '[0:v][1:v]overlay=0:0[tmp];[tmp][2:v]overlay=22:0',
+    '-filter_complex', `[0:v][1:v]overlay=0:0[tmp];[tmp][2:v]overlay=${componentWidth + gap}:0`,
     '-frames:v', '1',
     '-y',
     outFile
@@ -429,7 +434,7 @@ function promoteDualFighterComposite(targetCrops){
     sourceImage: component.sourceImage,
     sourceRegion: 'derived-composite',
     sourceCell: null,
-    crop: { x: 0, y: 0, width: 38, height: 16 },
+    crop: { x: 0, y: 0, width, height },
     targetCrop: rel(outFile),
     sourcePixelExact: false,
     exactComposite: true,
@@ -437,10 +442,10 @@ function promoteDualFighterComposite(targetCrops){
     compositeTarget: true,
     componentCrops: [
       { id: component.id, x: 0, y: 0 },
-      { id: component.id, x: 22, y: 0 }
+      { id: component.id, x: componentWidth + gap, y: 0 }
     ],
-    reviewStatus: 'accepted-first-pass-composite',
-    note: 'Derived dual-fighter target composed from two exact source-sheet player-fighter crops. This prevents the dual runtime state from being scored against a single fighter while preserving the source crop pixels.',
+    reviewStatus: 'accepted-trusted-motion-reference-composite',
+    note: 'Derived dual-fighter target composed from two trusted cleaned player-fighter crops. This prevents the dual runtime state from being scored against a single fighter while preserving the accepted target proportions.',
     metrics
   };
 }

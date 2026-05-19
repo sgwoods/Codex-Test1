@@ -46,13 +46,13 @@ const ROLE_AUDIT = [
   {
     roleKey: 'player-fighter',
     label: 'Player Fighter',
-    previousRisk: 'Player ship proportions have been corrected in runtime, but the target crop lane still needs a clean trusted crop from the user-supplied close-up examples or a stronger source window.',
-    trustedUse: 'Keep current source-sheet player crop as provisional until a dedicated clean player target is promoted.',
+    previousRisk: 'Player ship proportions were corrected in runtime, but the earlier target crop lane still leaned on a tiny provisional source-sheet cell.',
+    trustedUse: 'Use the cleaned player-fighter crop from the segmented alien motion reference as the primary single-fighter target; keep turn poses provisional.',
     cropIds: ['player-fighter-single-front', 'player-fighter-dual-front'],
-    confidence: 'medium',
-    scoringUse: 'Provisional for player-fighter runtime comparison; not yet a final target claim.',
+    confidence: 'medium-high',
+    scoringUse: 'Primary target for player-fighter runtime comparison and the derived dual-fighter composite; turn/capture poses remain provisional.',
     playerMeaning: 'The fighter must feel smaller, crisp, and separate from reserve icons while preserving shot alignment and dual-fighter readability.',
-    nextGap: 'Promote a clean player-fighter target and add dual-fighter spacing/scale target evidence.'
+    nextGap: 'Promote clean turn, captured, carried, rescue, and dual-fighter spacing evidence from true target gameplay windows.'
   }
 ];
 

@@ -1,6 +1,6 @@
 # Galaga Alien Target Crops
 
-Generated: 2026-05-19T17:54:25.241Z
+Generated: 2026-05-19T18:23:33.733Z
 
 This report promotes target crops from two evidence classes: trusted cleaned crops from the segmented Galaga alien motion reference, and provisional/exact crops from the supplied Galaga general sprite sheet. The trusted motion crops now anchor the primary Boss, Bee, and Butterfly formation targets after human review found polluted sheet-cell evidence. These are conformance targets for measurement, not production art, and they do not yet score temporal motion by themselves.
 
@@ -27,7 +27,7 @@ This report promotes target crops from two evidence classes: trusted cleaned cro
 
 | Role | Pose | Crop | Source | Metrics | Note |
 | --- | --- | --- | --- | --- | --- |
-| `player-fighter` | `single-ship-front` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-single-front.png) | left-primary-sprite-grid r1 c8<br>`112,0 16x16` | 96 lit px; channels B, R, W | Best first-pass front-facing fighter cell in the supplied sheet. Dual-fighter remains a composite scoring target. |
+| `player-fighter` | `single-ship-front` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-single-front.png) | segmented-alien-motion-reference<br>`248,430 82x64` | 894 lit px; channels B, G, R, W, Y | Trusted clean player-fighter crop from the segmented alien motion reference; replaces the provisional sheet-cell primary fighter target. |
 | `player-fighter` | `turn-left` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-turn-left.png) | left-primary-sprite-grid r1 c6<br>`80,0 16x16` | 62 lit px; channels B, R, W | Rotation/turn pose for future motion and capture/rescue scoring. |
 | `player-fighter` | `turn-right` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-turn-right.png) | left-primary-sprite-grid r1 c7<br>`96,0 16x16` | 86 lit px; channels B, R, W | Rotation/turn pose for future motion and capture/rescue scoring. |
 | `bee-zako` | `formation-front` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-formation-front.png) | segmented-alien-motion-reference<br>`384,86 58x54` | 766 lit px; channels B, G, M, R, W, Y | Trusted clean bee/Zako formation crop from the segmented alien motion reference; replaces the polluted sheet-cell primary target. |
@@ -59,6 +59,6 @@ This report promotes target crops from two evidence classes: trusted cleaned cro
 | `tractor-beam` | `beam-wide` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/tractor-beam-wide.png) | right-tractor-beam-and-scoring<br>`288,34 50x84` | 898 lit px; channels B, G | Wide tractor-beam band candidate for capture-state width and color rhythm. |
 | `tractor-beam` | `beam-mid` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/tractor-beam-mid.png) | right-tractor-beam-and-scoring<br>`342,34 50x84` | 898 lit px; channels B, G | Mid-width tractor-beam band candidate. |
 | `tractor-beam` | `beam-narrow` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/tractor-beam-narrow.png) | right-tractor-beam-and-scoring<br>`396,34 50x84` | 863 lit px; channels B, G | Narrow tractor-beam band candidate. |
-| `player-fighter` | `dual-fighter-front` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-dual-front.png) | derived-composite<br>`0,0 38x16` | 192 lit px; channels B, C, G, R, W | Derived dual-fighter target composed from two exact source-sheet player-fighter crops. This prevents the dual runtime state from being scored against a single fighter while preserving the source crop pixels. |
+| `player-fighter` | `dual-fighter-front` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-dual-front.png) | derived-composite<br>`0,0 114x45` | 1798 lit px; channels B, C, G, R, W, Y | Derived dual-fighter target composed from two trusted cleaned player-fighter crops. This prevents the dual runtime state from being scored against a single fighter while preserving the accepted target proportions. |
 
 Next best step: Regenerate Aurora live runtime comparisons against the corrected Boss, Bee, and Butterfly targets, then promote clean player-fighter and temporal pulse/cadence targets before tuning more runtime sprites.

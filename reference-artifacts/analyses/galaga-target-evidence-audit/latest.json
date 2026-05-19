@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "galaga-target-evidence-audit",
-  "generatedAt": "2026-05-19T17:59:44.826Z",
-  "commit": "4113d66a",
+  "generatedAt": "2026-05-19T18:24:11.146Z",
+  "commit": "591cd98a",
   "branch": "codex/macbook-conformance-investment-review",
   "dirty": true,
   "status": "trusted-target-manifest-active",
@@ -13,10 +13,10 @@
   },
   "summary": {
     "auditedRoleCount": 4,
-    "trustedPrimaryRoleCount": 3,
-    "provisionalOnlyRoleCount": 1,
-    "trustedMotionReferenceCount": 5,
-    "provisionalSourceSheetCount": 19
+    "trustedPrimaryRoleCount": 4,
+    "provisionalOnlyRoleCount": 0,
+    "trustedMotionReferenceCount": 6,
+    "provisionalSourceSheetCount": 18
   },
   "rows": [
     {
@@ -128,38 +128,39 @@
     {
       "roleKey": "player-fighter",
       "label": "Player Fighter",
-      "previousRisk": "Player ship proportions have been corrected in runtime, but the target crop lane still needs a clean trusted crop from the user-supplied close-up examples or a stronger source window.",
-      "trustedUse": "Keep current source-sheet player crop as provisional until a dedicated clean player target is promoted.",
+      "previousRisk": "Player ship proportions were corrected in runtime, but the earlier target crop lane still leaned on a tiny provisional source-sheet cell.",
+      "trustedUse": "Use the cleaned player-fighter crop from the segmented alien motion reference as the primary single-fighter target; keep turn poses provisional.",
       "cropIds": [
         "player-fighter-single-front",
         "player-fighter-dual-front"
       ],
-      "confidence": "medium",
-      "scoringUse": "Provisional for player-fighter runtime comparison; not yet a final target claim.",
+      "confidence": "medium-high",
+      "scoringUse": "Primary target for player-fighter runtime comparison and the derived dual-fighter composite; turn/capture poses remain provisional.",
       "playerMeaning": "The fighter must feel smaller, crisp, and separate from reserve icons while preserving shot alignment and dual-fighter readability.",
-      "nextGap": "Promote a clean player-fighter target and add dual-fighter spacing/scale target evidence.",
-      "trustedCropCount": 0,
-      "provisionalCropCount": 1,
+      "nextGap": "Promote clean turn, captured, carried, rescue, and dual-fighter spacing evidence from true target gameplay windows.",
+      "trustedCropCount": 1,
+      "provisionalCropCount": 0,
       "linkedCrops": [
         {
           "id": "player-fighter-single-front",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-single-front.png",
-          "reviewStatus": "provisional-source-sheet-cell",
-          "sourceKind": "sheet-cell",
-          "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
-          "videoDerivedCleanCrop": false,
-          "sourcePixelExact": true
+          "reviewStatus": "accepted-trusted-motion-reference",
+          "sourceKind": "motion-reference-video",
+          "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+          "sourceFrameSeconds": 10,
+          "videoDerivedCleanCrop": true,
+          "sourcePixelExact": false
         },
         {
           "id": "player-fighter-dual-front",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-dual-front.png",
-          "reviewStatus": "accepted-first-pass-composite",
-          "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+          "reviewStatus": "accepted-trusted-motion-reference-composite",
+          "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
           "videoDerivedCleanCrop": false,
           "sourcePixelExact": false
         }
       ],
-      "status": "provisional-target-only"
+      "status": "trusted-primary-target-available"
     }
   ],
   "nextBestStep": "Regenerate runtime-vs-target scoring against the trusted Boss, Bee, and Butterfly primary targets, then promote player-fighter and temporal pulse-pair targets."

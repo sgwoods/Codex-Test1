@@ -94,8 +94,8 @@
       "id": "pose-and-motion-targets",
       "label": "Pose And Motion Targets",
       "goal": "Group static crops into temporal identities: flap cycles, dive turns, boss damage, capture/rescue, dual fighter, projectiles, and explosions.",
-      "currentStatus": "Static model and runtime crop scoring exist, and a 33-crop/7-role promoted target library now supplies multi-pose static targets. Five primary Boss/Bee/Butterfly crops are trusted cleaned motion-reference targets; remaining source-sheet cells are provisional until recropped or replaced by temporal windows. Seed runtime windows now cover all four planned motion axes: flap phase pairs, full flap cadence, dive/rotation poses, capture/carry/dual transitions, and first-pass impact/explosion event crops. A segmented alien motion/pulse video now provides cleaner human-readable pulse/cadence evidence for Boss, Butterfly, Bee, specialty aliens, Fighter, and Tractor Beam.",
-      "nextAction": "Extract clean target-frame pulse pairs from the motion reference for Bee, Butterfly, and Boss, then score Aurora runtime cadence against those target sequences."
+      "currentStatus": "Static model and runtime crop scoring exist, and a 33-crop/7-role promoted target library now supplies multi-pose static targets. Primary Boss/Bee/Butterfly/Fighter crops are trusted cleaned motion-reference targets; remaining source-sheet cells are provisional until recropped or replaced by temporal windows. Seed runtime windows now cover all four planned motion axes: flap phase pairs, full flap cadence, dive/rotation poses, capture/carry/dual transitions, and first-pass impact/explosion event crops. A segmented alien motion/pulse video now provides cleaner human-readable pulse/cadence evidence for Boss, Butterfly, Bee, specialty aliens, Fighter, and Tractor Beam. Temporal target rows now exist at reference-artifacts/analyses/galaga-alien-temporal-targets/latest.json, with Boss stronger than Bee/Butterfly because the latter still depend on provisional flap cells.",
+      "nextAction": "Replace provisional Bee and Butterfly flap cells with clean frame-timed target windows, then score Aurora runtime cadence against those target sequences."
     },
     {
       "id": "runtime-renderer-path",
@@ -184,6 +184,14 @@
     {
       "label": "Galaga target evidence audit analysis",
       "path": "reference-artifacts/analyses/galaga-target-evidence-audit/latest.json"
+    },
+    {
+      "label": "Galaga alien temporal target report",
+      "path": "GALAGA_ALIEN_TEMPORAL_TARGETS.md"
+    },
+    {
+      "label": "Galaga alien temporal target analysis",
+      "path": "reference-artifacts/analyses/galaga-alien-temporal-targets/latest.json"
     },
     {
       "label": "Galaga alien motion reference report",
