@@ -323,7 +323,7 @@ function currentSpriteRenderMode(){
 }
 
 function referencePixelSpritesEnabled(){
- return currentSpriteRenderMode()!=='aurora-themed';
+ return currentSpriteRenderMode()==='reference-pixel-lab';
 }
 
 function drawTargetEnemySprite(e,flap){

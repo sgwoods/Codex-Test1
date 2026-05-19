@@ -1711,7 +1711,7 @@ function sanitizeGraphicsThemeValue(value=''){
 }
 function sanitizeSpriteRenderModeValue(value=''){
  const next=String(value||'').trim()||'auto';
- return ['auto','reference-pixel','aurora-themed'].includes(next)?next:DEFAULT_TEST_CFG.spriteRenderMode;
+ return ['auto','reference-pixel-lab','aurora-themed'].includes(next)?next:DEFAULT_TEST_CFG.spriteRenderMode;
 }
 function sanitizeStarfieldMultiplier(value,fallback=1){
  const next=+value;

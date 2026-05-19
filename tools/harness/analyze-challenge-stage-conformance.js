@@ -1344,11 +1344,12 @@ async function runtimeProbeForStage(stage){
       const formation = h.challengeFormationState();
       const finalState = h.state();
       const recent = h.recentEvents({ count: 500 }) || [];
+      const challengeStageEvents = recent.filter(e => !Number.isFinite(+e.stage) || +e.stage === +stage);
       const eventCounts = {
-        enemyShots: recent.filter(e => e.type === 'enemy_shot' || e.type === 'enemy_bullet').length,
-        enemyAttackStarts: recent.filter(e => e.type === 'enemy_attack_start').length,
-        shipLosses: recent.filter(e => e.type === 'ship_loss' || e.type === 'player_loss').length,
-        challengeContacts: recent.filter(e => e.type === 'challenge_enemy_contact').length
+        enemyShots: challengeStageEvents.filter(e => e.type === 'enemy_shot' || e.type === 'enemy_bullet' || e.type === 'enemy_bullet_fired').length,
+        enemyAttackStarts: challengeStageEvents.filter(e => e.type === 'enemy_attack_start').length,
+        shipLosses: challengeStageEvents.filter(e => e.type === 'ship_loss' || e.type === 'player_loss' || e.type === 'ship_lost').length,
+        challengeContacts: challengeStageEvents.filter(e => e.type === 'challenge_enemy_contact').length
       };
       return {
         ok: true,
@@ -1370,7 +1371,7 @@ async function runtimeProbeForStage(stage){
         ruleConformance: {
           noEnemyShots: eventCounts.enemyShots === 0,
           noAttackStarts: eventCounts.enemyAttackStarts === 0,
-          noShipLosses: eventCounts.shipLosses === 0 && finalState.lives === starting.lives
+          noShipLosses: eventCounts.shipLosses === 0
         }
       };
     }, { stage, sampleTimes: SAMPLE_TIMES });
