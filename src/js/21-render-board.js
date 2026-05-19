@@ -386,6 +386,37 @@ function enemyCollisionHitbox(e){
 }
 
 function playerHitbox(){return{w:7,h:6};}
+function playerMovementHalfWidth(subject=null){
+ const dual=subject===true||!!subject?.dual;
+ return dual?18:11;
+}
+
+const AURORA_SHIP_GLYPH_BOUNDS=Object.freeze({
+ left:-8,
+ right:8,
+ top:-7,
+ bottom:7
+});
+
+function shipGlyphBoundsAt(x,y,s=1){
+ return{
+  left:x+AURORA_SHIP_GLYPH_BOUNDS.left*s,
+  right:x+AURORA_SHIP_GLYPH_BOUNDS.right*s,
+  top:y+AURORA_SHIP_GLYPH_BOUNDS.top*s,
+  bottom:y+AURORA_SHIP_GLYPH_BOUNDS.bottom*s
+ };
+}
+
+function mergeBounds(a,b){
+ if(!a)return b;
+ if(!b)return a;
+ return{
+  left:Math.min(a.left,b.left),
+  right:Math.max(a.right,b.right),
+  top:Math.min(a.top,b.top),
+  bottom:Math.max(a.bottom,b.bottom)
+ };
+}
 
 function drawMiniShip(s=1,colA='#9adfff',colB='#72c8ff'){
  const palette=Object.assign({},TARGET_SPRITE_PALETTES.ship,{W:colA,B:colB});
@@ -393,24 +424,12 @@ function drawMiniShip(s=1,colA='#9adfff',colB='#72c8ff'){
   drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,palette,Math.max(1,Math.round(s)));
   return;
  }
- drawAuroraShipGlyph(0,0,Math.max(1,s),colA,colB);
+ drawAuroraShipGlyph(0,0,Math.max(.5,s),colA,colB);
 }
 
 function drawAuroraShipGlyph(x=0,y=0,s=1,colA='#eaf7ff',colB='#78d8ff'){
  const ps=2*s;
- ctx.fillStyle=colA;
- ctx.fillRect(x-ps*1.5,y-ps*8,ps*3,ps*5);
- ctx.fillRect(x-ps*4.5,y-ps*3,ps*9,ps*4);
- ctx.fillRect(x-ps*6.5,y-ps,ps*2,ps);
- ctx.fillRect(x+ps*4.5,y-ps,ps*2,ps);
- ctx.fillRect(x-ps*5.5,y,ps*11,ps*2);
- ctx.fillStyle=colB;
- ctx.fillRect(x-ps*5.5,y-ps*2,ps*2,ps*4);
- ctx.fillRect(x+ps*3.5,y-ps*2,ps*2,ps*4);
- ctx.fillStyle='#ff3448';
- ctx.fillRect(x-ps*4.5,y-ps*6,ps*1.5,ps*2.8);
- ctx.fillRect(x+ps*3,y-ps*6,ps*1.5,ps*2.8);
- ctx.fillRect(x-ps*1.1,y-ps*1.4,ps*2.2,ps*2);
+ drawPix(x-ps*4,y-ps*3.5,ps,P.ship.a,colA,colB,P.ship.b,'#ff3448',P.ship.c);
 }
 
 function endOfRunOverlayActive(){
@@ -524,19 +543,25 @@ function drawPlayerBody(x,y,dual=0,ghost=0){
  ctx.save();
  ctx.translate(Math.round(x),Math.round(y));
  if(ghost)ctx.globalAlpha=.52;
+ let bounds=null;
  if(!referencePixelSpritesEnabled()){
   if(dual){
-   drawAuroraShipGlyph(-10.5,0,1,'#eaf7ff','#ff4a5c');
-   drawAuroraShipGlyph(10.5,0,1,'#eaf7ff','#78d8ff');
+   drawAuroraShipGlyph(-9.5,0,1,'#eaf7ff','#ff4a5c');
+   drawAuroraShipGlyph(9.5,0,1,'#eaf7ff','#78d8ff');
+   bounds=mergeBounds(shipGlyphBoundsAt(x-9.5,y,1),shipGlyphBoundsAt(x+9.5,y,1));
   }else{
    drawAuroraShipGlyph(0,0,1);
+   bounds=shipGlyphBoundsAt(x,y,1);
   }
  }else if(dual){
   drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1,-10.5,0);
   drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1,10.5,0);
+  bounds=mergeBounds(shipGlyphBoundsAt(x-10.5,y,1),shipGlyphBoundsAt(x+10.5,y,1));
  }else{
   drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1);
+  bounds=shipGlyphBoundsAt(x,y,1);
  }
+ if(!ghost)window.__platinumRenderDebug.playerBounds=bounds;
  ctx.restore();
 }
 
@@ -696,8 +721,10 @@ function drawReserveShips(lives){
    ctx.ellipse(0,-1,10.5+2.5*pulse,7.5+1.6*pulse,0,0,7);
    ctx.fill();
    drawMiniShip(.88,'#fff6d2','#ffd34d');
+   window.__platinumRenderDebug.reserveShipBounds.push(shipGlyphBoundsAt(x,y,.88));
   }else{
    drawMiniShip(.82,'#f4f8ff','#ff3347');
+   window.__platinumRenderDebug.reserveShipBounds.push(shipGlyphBoundsAt(x,y,.82));
   }
   ctx.restore();
   reserve--;
@@ -762,6 +789,8 @@ function drawAuroraBoard({ox,oy,scale,dx,dy}){
  window.__platinumRenderDebug.carryDraws.length=0;
  window.__platinumRenderDebug.captureTetherVisible=false;
  window.__platinumRenderDebug.capturedGhostVisible=false;
+ window.__platinumRenderDebug.playerBounds=null;
+ window.__platinumRenderDebug.reserveShipBounds=[];
  ctx.save();
  ctx.beginPath();
  ctx.rect(0,0,PLAY_W,PLAY_H);

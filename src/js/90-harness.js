@@ -704,7 +704,9 @@ window.__galagaHarness__={
     starfieldIntensityScale:+((window.__platinumRenderDebug||window.__auroraRenderDebug)?.starfieldIntensityScale||0),
     starfieldSpeedScale:+((window.__platinumRenderDebug||window.__auroraRenderDebug)?.starfieldSpeedScale||0),
     spriteRenderMode:(window.__platinumRenderDebug||window.__auroraRenderDebug)?.spriteRenderMode||'auto',
-    referencePixelSprites:!!((window.__platinumRenderDebug||window.__auroraRenderDebug)?.referencePixelSprites)
+    referencePixelSprites:!!((window.__platinumRenderDebug||window.__auroraRenderDebug)?.referencePixelSprites),
+    playerBounds:(window.__platinumRenderDebug||window.__auroraRenderDebug)?.playerBounds||null,
+    reserveShipBounds:[...((window.__platinumRenderDebug||window.__auroraRenderDebug)?.reserveShipBounds||[])]
    },
   graphics:graphics?{
     graphicsTheme:graphics.graphicsTheme||'auto',
@@ -1232,6 +1234,49 @@ window.__galagaHarness__={
   S.harnessSpriteRuntimeCapture=0;
   if(typeof draw==='function')draw();
   return this.spriteRuntimeState();
+ },
+ playerVisualContract(cfg={}){
+  return{
+   playfield:{w:PLAY_W,h:PLAY_H},
+   playerBottom:+(VIS.playerBottom||0),
+   playerStartY:+(PLAY_H-(VIS.playerBottom||0)),
+   singleMovementHalfWidth:typeof playerMovementHalfWidth==='function'?playerMovementHalfWidth({dual:false}):playerHitbox().w,
+   dualMovementHalfWidth:typeof playerMovementHalfWidth==='function'?playerMovementHalfWidth({dual:true}):playerHitbox().w
+  };
+ },
+ playerReserveVisualLayout(cfg={}){
+  S.harnessSpriteRuntimeCapture=0;
+  S.lives=Math.max(0,Math.min(8,Number.isFinite(+cfg.reserveShips)?+cfg.reserveShips:2));
+  const margin=typeof playerMovementHalfWidth==='function'?playerMovementHalfWidth({dual:!!cfg.dual})+2:12;
+  Object.assign(S.p,{
+   x:cl(Number.isFinite(+cfg.playerX)?+cfg.playerX:PLAY_W/2,margin,PLAY_W-margin),
+   y:Number.isFinite(+cfg.playerY)?+cfg.playerY:PLAY_H-VIS.playerBottom,
+   vx:0,
+   cd:0,
+   inv:0,
+   dual:cfg.dual?1:0,
+   captured:0,
+   returning:0,
+   pending:0,
+   spawn:0,
+   capBoss:null,
+   capT:0
+  });
+  if(typeof draw==='function')draw();
+  const render=this.state().renderDebug||{};
+  const player=render.playerBounds||null;
+  const reserve=render.reserveShipBounds||[];
+  return{
+   ok:!!player,
+   playfield:{w:PLAY_W,h:PLAY_H},
+   player,
+   reserve,
+   minReserveGap:reserve.length&&player?Math.min(...reserve.map(box=>+(box.top-player.bottom).toFixed(2))):null,
+   minReservePairGap:reserve.length>1?Math.min(...reserve.slice(1).map((box,i)=>+(box.left-reserve[i].right).toFixed(2))):null,
+   leftClearance:player?+player.left.toFixed(2):null,
+   rightClearance:player?+(PLAY_W-player.right).toFixed(2):null,
+   bottomClearance:player?+(PLAY_H-player.bottom).toFixed(2):null
+  };
  },
  setupImpactRuntimeCapture(cfg={}){
   const kind=String(cfg.kind||'enemy-boom');

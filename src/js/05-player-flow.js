@@ -840,14 +840,14 @@ function runHarnessPlayer(dt,p,cfg){
 function runAttractPlayer(dt,p){
  if(p.spawn>0||p.captured)return;
  p.demoTargetT=Math.max(0,(p.demoTargetT||0)-dt);
- const hp=playerHitbox();
+ const hw=typeof playerMovementHalfWidth==='function'?playerMovementHalfWidth(p):playerHitbox().w;
  const axis=attractMoveAxis(p);
  const targetVx=axis*p.s*.68;
  const blend=Math.min(1,p.accel*dt*.82);
  p.vx+=(targetVx-p.vx)*blend;
  if(!axis&&Math.abs(p.vx)<8)p.vx=0;
- p.x=cl(p.x+p.vx*dt,hp.w+2,PLAY_W-hp.w-2);
- if((p.x<=hp.w+2&&p.vx<0)||(p.x>=PLAY_W-hp.w-2&&p.vx>0))p.vx=0;
+ p.x=cl(p.x+p.vx*dt,hw+2,PLAY_W-hw-2);
+ if((p.x<=hw+2&&p.vx<0)||(p.x>=PLAY_W-hw-2&&p.vx>0))p.vx=0;
  const target=S.e.filter(e=>e.hp>0&&(!e.form||e.dive||e.y>72)).sort((a,b)=>Math.abs(a.x-p.x)-Math.abs(b.x-p.x))[0]||S.e.filter(e=>e.hp>0).sort((a,b)=>Math.abs(a.x-p.x)-Math.abs(b.x-p.x))[0];
  if(target&&p.cd<=0&&Math.abs(target.x-p.x)<(target.t==='boss'?16:12)&&S.pb.length<bulletsMax())shoot();
 }
@@ -867,7 +867,7 @@ function updatePlayerControl(dt,p){
   if(S.attract)runAttractPlayer(dt,p);
   else if(harnessPersona&&(S.watchMode||(!manualAxis&&!manualFire)))runHarnessPlayer(dt,p,harnessPersona);
   else{
-   const hp=playerHitbox();
+   const hw=typeof playerMovementHalfWidth==='function'?playerMovementHalfWidth(p):playerHitbox().w;
    const leftHeld=keyHeldMs(...leftCodes);
    const rightHeld=keyHeldMs(...rightCodes);
    const heldMs=manualAxis<0?leftHeld:manualAxis>0?rightHeld:0;
@@ -880,8 +880,8 @@ function updatePlayerControl(dt,p){
    const blend=Math.min(1,(manualAxis?p.accel:p.decel)*dt);
    p.vx+=(targetVx-p.vx)*blend;
    if(!manualAxis&&Math.abs(p.vx)<8)p.vx=0;
-   p.x=cl(p.x+p.vx*dt,hp.w+2,PLAY_W-hp.w-2);
-   if((p.x<=hp.w+2&&p.vx<0)||(p.x>=PLAY_W-hp.w-2&&p.vx>0))p.vx=0;
+   p.x=cl(p.x+p.vx*dt,hw+2,PLAY_W-hw-2);
+   if((p.x<=hw+2&&p.vx<0)||(p.x>=PLAY_W-hw-2&&p.vx>0))p.vx=0;
   }
  }
  if(!S.attract&&!harnessPersona&&keys.Space)shoot();
