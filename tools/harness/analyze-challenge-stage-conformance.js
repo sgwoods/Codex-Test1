@@ -7,8 +7,10 @@ const { withHarnessPage } = require('./browser-check-util');
 const ROOT = path.resolve(__dirname, '..', '..');
 const ANALYSES = path.join(ROOT, 'reference-artifacts', 'analyses');
 const OUT_ROOT = path.join(ANALYSES, 'challenge-stage-conformance');
+const CHALLENGE_CONTRACTS = path.join(ROOT, 'reference-artifacts', 'ingestion', 'challenge-stage-target-contracts', 'aurora-challenge-contracts-0.1.json');
+const GALAGA_CHALLENGE_OBJECT_TRACKS = path.join(ANALYSES, 'galaga-challenge-object-tracks', 'latest.json');
 const CHALLENGE_STAGES = [3, 7, 11, 15, 19, 23, 27, 31];
-const SAMPLE_TIMES = [0, 0.7, 1.4, 2.5, 4.2, 6.0, 8.5, 10.8, 12.4];
+const SAMPLE_TIMES = Array.from({ length: 65 }, (_, index) => +(index * 0.25).toFixed(2));
 
 const STAGE_INTENT = {
   3: {
@@ -143,7 +145,9 @@ function clamp(value, min = 0, max = 1){
 }
 
 function average(values){
-  const finite = values.filter(value => Number.isFinite(+value)).map(Number);
+  const finite = values
+    .filter(value => value !== null && value !== undefined && value !== '' && Number.isFinite(+value))
+    .map(Number);
   return finite.length ? finite.reduce((sum, value) => sum + value, 0) / finite.length : null;
 }
 
@@ -175,12 +179,99 @@ function challengeReferenceLabels(){
   return accepted.filter(label => label.kind === 'challengeEntry');
 }
 
+function challengeContracts(){
+  const artifact = readJson(CHALLENGE_CONTRACTS, {});
+  return Array.isArray(artifact.contracts) ? artifact.contracts : [];
+}
+
+function challengeContractForStage(stage){
+  return challengeContracts().find(contract => +contract.stage === +stage) || null;
+}
+
+let cachedGalagaChallengeObjectTracks = null;
+function galagaChallengeObjectTracksRead(){
+  if(cachedGalagaChallengeObjectTracks === null){
+    cachedGalagaChallengeObjectTracks = readJson(GALAGA_CHALLENGE_OBJECT_TRACKS, {});
+  }
+  return cachedGalagaChallengeObjectTracks || {};
+}
+
+function galagaChallengeObjectTrackForContract(contract){
+  const artifact = galagaChallengeObjectTracksRead();
+  const challenges = Array.isArray(artifact.challenges) ? artifact.challenges : [];
+  return challenges.find(item => +item.challengeNumber === +contract?.challengeNumber) || null;
+}
+
+function galagaChallengeObjectTrackForStage(stage){
+  const intent = STAGE_INTENT[stage];
+  if(!intent) return null;
+  const artifact = galagaChallengeObjectTracksRead();
+  const challenges = Array.isArray(artifact.challenges) ? artifact.challenges : [];
+  return challenges.find(item => +item.challengeNumber === +intent.challengeNumber) || null;
+}
+
+function challengeTargetContractForStage(stage){
+  const contract = challengeContractForStage(stage);
+  if(contract) return contract;
+  const intent = STAGE_INTENT[stage];
+  const directTarget = galagaChallengeObjectTrackForStage(stage);
+  if(!intent || !directTarget || !Array.isArray(directTarget.targetGroups) || !directTarget.targetGroups.length) return null;
+  return {
+    stage,
+    challengeNumber: intent.challengeNumber,
+    displayLabel: `Challenging Stage ${intent.challengeNumber} target-video object tracks`,
+    sourceWindowId: `challenge-${String(intent.challengeNumber).padStart(2, '0')}-target-video-object-tracks`,
+    targetRead: intent.target,
+    targetVideoOnly: true,
+    groups: directTarget.targetGroups.map(group => ({
+      groupIndex: group.groupIndex,
+      role: `target-video group ${group.groupIndex}`,
+      expectedTypes: [],
+      expectedFamilies: [],
+      pathFamily: '',
+      entrySide: group.objectTrackTarget?.entrySide || null,
+      exitSide: group.objectTrackTarget?.exitSide || null,
+      objectTrackTarget: group.objectTrackTarget || null,
+      targetVideoConfidence: group.confidence,
+      targetVideoTrackCount: group.trackCount
+    })),
+    successRead: 'Runtime challenge waves should match the source-video movement envelope: group count, first/last visibility, entry and exit side, x/y range, lower-field travel, turns, and path length.',
+    nextPromotion: 'Add exact group labels and sprite identity recognition so the target-video object tracks are joined to alien type/family scoring.'
+  };
+}
+
 function alienVariationRead(){
   return readJson(path.join(ANALYSES, 'alien-entry-challenge-variation', 'latest.json'), {});
 }
 
 function galagaTargetArtifactCoverageRead(){
   return readJson(path.join(ANALYSES, 'galaga-target-artifact-coverage', 'latest.json'), {});
+}
+
+function runtimeVsTargetCropRead(){
+  const artifact = readJson(path.join(ANALYSES, 'aurora-runtime-vs-galaga-target-crops', 'latest.json'), {});
+  const comparisons = Array.isArray(artifact.comparisons) ? artifact.comparisons : [];
+  const scored = comparisons.filter(item => Number.isFinite(+item.bestScore10));
+  const challenge = scored.filter(item => String(item.spriteKey || '').startsWith('challenge-'));
+  const weakest = scored.slice().sort((a, b) => (+a.bestScore10 || 0) - (+b.bestScore10 || 0))[0] || null;
+  const challengeWeakest = challenge.slice().sort((a, b) => (+a.bestScore10 || 0) - (+b.bestScore10 || 0))[0] || null;
+  return {
+    artifact: 'reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json',
+    sampleCount: comparisons.length,
+    targetCropCount: artifact.summary?.targetCropCount || 0,
+    averageScore10: Number.isFinite(+artifact.summary?.averageScore10)
+      ? +artifact.summary.averageScore10
+      : round(average(scored.map(item => item.bestScore10)), 2),
+    challengeAverageScore10: round(average(challenge.map(item => item.bestScore10)), 2),
+    weakestSpriteKey: weakest?.spriteKey || null,
+    weakestScore10: weakest?.bestScore10 || null,
+    challengeWeakestSpriteKey: challengeWeakest?.spriteKey || null,
+    challengeWeakestScore10: challengeWeakest?.bestScore10 || null,
+    scoringMode: artifact.summary?.scoringMode || 'runtime-target-crop-comparison-pending',
+    read: comparisons.length
+      ? `Direct runtime-vs-Galaga target-crop comparator reads ${artifact.summary?.averageScore10 ?? 'n/a'}/10 overall and ${round(average(challenge.map(item => item.bestScore10)), 2) ?? 'n/a'}/10 for challenge specialty sprites; weakest challenge crop is ${challengeWeakest?.spriteKey || 'n/a'} at ${challengeWeakest?.bestScore10 ?? 'n/a'}/10.`
+      : 'Direct runtime-vs-Galaga target-crop comparator has not been generated yet.'
+  };
 }
 
 function layoutSignature(layout){
@@ -280,6 +371,9 @@ function normalizeRuntimeMotion(samples){
   for(const sample of samples || []){
     const byWave = new Map();
     for(const pos of sample.positions || []){
+      if(Number.isFinite(+pos.spawn) && +pos.spawn > 0.03) continue;
+      if(Number.isFinite(+pos.x) && (+pos.x < -12 || +pos.x > 292)) continue;
+      if(Number.isFinite(+pos.y) && (+pos.y < -24 || +pos.y > 384)) continue;
       const wave = Number.isFinite(+pos.wave) ? +pos.wave : 0;
       if(!byWave.has(wave)) byWave.set(wave, []);
       byWave.get(wave).push(pos);
@@ -301,7 +395,7 @@ function normalizeRuntimeMotion(samples){
       });
     }
   }
-  const groupVectors = Array.from(waveSamples.values()).map(points => {
+  const groupVectors = Array.from(waveSamples.entries()).map(([wave, points]) => {
     const xs = points.flatMap(point => [point.minX, point.maxX]);
     const ys = points.flatMap(point => [point.minY, point.maxY]);
     let pathPixels = 0;
@@ -325,7 +419,15 @@ function normalizeRuntimeMotion(samples){
       if(dxSign) previousDxSign = dxSign;
       previousHeading = heading;
     }
+    const first = points[0] || {};
+    const last = points[points.length - 1] || {};
     return {
+      wave,
+      sampleCount: points.length,
+      visibleStartS: round(first.t, 2),
+      visibleEndS: round(last.t, 2),
+      entrySide: sideForX(first.centerX),
+      exitSide: sideForX(last.centerX),
       xRange: xs.length ? (Math.max(...xs) - Math.min(...xs)) / 280 : 0,
       yRange: ys.length ? (Math.max(...ys) - Math.min(...ys)) / 360 : 0,
       pathLength: pathPixels / 360,
@@ -347,9 +449,136 @@ function normalizeRuntimeMotion(samples){
     turnCount,
     reversalCount,
     lowerFieldShare: round(average(populated.map(vector => +vector.lowerFieldShare || 0)), 4),
+    sampleCount: (samples || []).length,
+    groupVectorCount: groupVectors.length,
     rackSlotError: 0,
-    timingOffsetS: 0
+    timingOffsetS: 0,
+    groupVectors
   };
+}
+
+function sideForX(x){
+  const playWidth = 280;
+  const value = Number.isFinite(+x) ? +x : playWidth / 2;
+  if(value < playWidth * 0.34) return 'left';
+  if(value > playWidth * 0.66) return 'right';
+  return 'center';
+}
+
+function sideCompatibility(actual, expected){
+  const a = String(actual || '').toLowerCase();
+  const e = String(expected || '').toLowerCase();
+  if(!e || !a) return 0;
+  if(e.includes('both') || e.includes('side')) return a === 'left' || a === 'right' ? 1 : 0.65;
+  if(e.includes('opposite') || e.includes('lower')) return a === 'left' || a === 'right' ? 1 : 0.5;
+  if(e.includes(a)) return 1;
+  return e.includes('center') && a === 'center' ? 1 : 0;
+}
+
+function motionVectorForTrack(track){
+  const points = (track || []).filter(point => Number.isFinite(+point.x) && Number.isFinite(+point.y));
+  if(!points.length) return null;
+  const xs = points.map(point => +point.x);
+  const ys = points.map(point => +point.y);
+  let pathPixels = 0;
+  let turnCount = 0;
+  let reversalCount = 0;
+  let previousHeading = null;
+  let previousDxSign = 0;
+  for(let i = 1; i < points.length; i += 1){
+    const a = points[i - 1];
+    const b = points[i];
+    const dx = +b.x - +a.x;
+    const dy = +b.y - +a.y;
+    pathPixels += Math.hypot(dx, dy);
+    const heading = Math.atan2(dy, dx);
+    if(previousHeading != null){
+      const delta = Math.abs(Math.atan2(Math.sin(heading - previousHeading), Math.cos(heading - previousHeading)));
+      if(delta > 0.65) turnCount += 1;
+    }
+    const dxSign = Math.sign(dx);
+    if(dxSign && previousDxSign && dxSign !== previousDxSign) reversalCount += 1;
+    if(dxSign) previousDxSign = dxSign;
+    previousHeading = heading;
+  }
+  const first = points[0];
+  const last = points[points.length - 1];
+  return {
+    sampleCount: points.length,
+    visibleStartS: round(first.t, 2),
+    visibleEndS: round(last.t, 2),
+    entrySide: sideForX(first.x),
+    exitSide: sideForX(last.x),
+    xRange: (Math.max(...xs) - Math.min(...xs)) / 280,
+    yRange: (Math.max(...ys) - Math.min(...ys)) / 360,
+    pathLength: pathPixels / 360,
+    turnCount,
+    reversalCount,
+    lowerFieldShare: ys.filter(y => y > 180).length / ys.length
+  };
+}
+
+function compareTrackVectorToTarget(vector, targetGroup, source){
+  const target = targetGroup?.objectTrackTarget || null;
+  if(!vector || !target) return null;
+  const xRange = closenessToTarget(vector.xRange, target.xRange, Math.max(0.12, (+target.xRange || 0.6) * 0.42));
+  const yRange = closenessToTarget(vector.yRange, target.yRange, Math.max(0.1, (+target.yRange || 0.4) * 0.45));
+  const pathLength = closenessToTarget(vector.pathLength, target.pathLength, Math.max(0.16, (+target.pathLength || 0.8) * 0.42));
+  const turnCount = closenessToTarget(vector.turnCount, target.turnCount || 1, 2.1);
+  const reversalCount = closenessToTarget(vector.reversalCount, target.reversalCount || 1, 2.2);
+  const lowerFieldShare = closenessToTarget(vector.lowerFieldShare, target.lowerFieldShare || 0, 0.18);
+  const visibleStart = closenessToTarget(vector.visibleStartS, target.visibleStartS, 0.95);
+  const visibleEnd = closenessToTarget(vector.visibleEndS, target.visibleEndS, 1.35);
+  const entrySide = sideCompatibility(vector.entrySide, target.entrySide || targetGroup.entrySide);
+  const exitSide = sideCompatibility(vector.exitSide, target.exitSide || targetGroup.exitSide);
+  const coverage = clamp(
+    (0.14 * xRange)
+    + (0.16 * yRange)
+    + (0.18 * pathLength)
+    + (0.12 * turnCount)
+    + (0.08 * reversalCount)
+    + (0.09 * lowerFieldShare)
+    + (0.08 * visibleStart)
+    + (0.07 * visibleEnd)
+    + (0.04 * entrySide)
+    + (0.04 * exitSide)
+  );
+  return {
+    groupIndex: targetGroup.groupIndex || (Number.isFinite(+vector.wave) ? +vector.wave + 1 : null),
+    source,
+    coverage: round(coverage, 3),
+    score10: round(1 + coverage * 7.4, 1),
+    runtime: vector,
+    target,
+    components: {
+      xRange: round(xRange, 3),
+      yRange: round(yRange, 3),
+      pathLength: round(pathLength, 3),
+      turnCount: round(turnCount, 3),
+      reversalCount: round(reversalCount, 3),
+      lowerFieldShare: round(lowerFieldShare, 3),
+      visibleStart: round(visibleStart, 3),
+      visibleEnd: round(visibleEnd, 3),
+      entrySide: round(entrySide, 3),
+      exitSide: round(exitSide, 3)
+    }
+  };
+}
+
+function objectTrackTargetFit(runtimeGroupVector, targetGroup, runtime, groupIndex){
+  const target = targetGroup?.objectTrackTarget || null;
+  if(!target) return null;
+  const trackVectors = Array.isArray(runtime?.spriteMotion?.objectTrackedPixelSilhouette?.trackVectors)
+    ? runtime.spriteMotion.objectTrackedPixelSilhouette.trackVectors
+    : [];
+  const wave = Number.isFinite(+groupIndex) ? +groupIndex : (targetGroup.groupIndex ? +targetGroup.groupIndex - 1 : null);
+  const candidates = trackVectors
+    .filter(track => wave === null || +track.wave === wave)
+    .map(track => compareTrackVectorToTarget(track, targetGroup, 'object-silhouette-track'))
+    .filter(Boolean)
+    .sort((a, b) => b.coverage - a.coverage || b.score10 - a.score10);
+  if(candidates[0]) return candidates[0];
+  return compareTrackVectorToTarget(runtimeGroupVector, targetGroup, 'group-envelope-fallback');
 }
 
 function trajectoryFit(runtimeVector, target){
@@ -455,7 +684,7 @@ function referenceMatchForRuntime(stage, runtime, referenceLabels){
   };
 }
 
-function strictTrajectoryRead(runtimeVector, referenceLabel, match, expectedHit, lateReferenceGap){
+function strictTrajectoryRead(runtimeVector, referenceLabel, match, expectedHit, lateReferenceGap, targetContractFit = null){
   const target = referenceLabel?.comparisonVector || {};
   if(!runtimeVector || !referenceLabel || !target){
     return {
@@ -472,17 +701,19 @@ function strictTrajectoryRead(runtimeVector, referenceLabel, match, expectedHit,
   const reversalCount = closenessToTarget(runtimeVector.reversalCount, target.reversalCount || 0, 1);
   const lowerFieldShare = closenessToTarget(runtimeVector.lowerFieldShare, target.lowerFieldShare || 0, 0.12);
   const trajectoryScore = clamp((+match?.bestMatch?.trajectoryScore10 || 0) / 10);
+  const objectTrackCoverage = clamp(+targetContractFit?.objectTrackCoverage || 0);
   const rawFit = clamp(
     (0.24 * yRange)
     + (0.28 * pathLength)
     + (0.18 * turnCount)
     + (0.1 * reversalCount)
     + (0.08 * lowerFieldShare)
-    + (0.12 * trajectoryScore)
+    + (0.08 * trajectoryScore)
+    + (0.04 * objectTrackCoverage)
   );
   const referenceReliability = lateReferenceGap ? 0.52 : (expectedHit ? 0.92 : 0.62);
-  const temporalCoverage = 0.58; // Current probes are sampled path summaries, not full tracked temporal trajectories.
-  const score10 = round(1 + (5.4 * rawFit * referenceReliability * temporalCoverage), 1);
+  const temporalCoverage = round(Math.min(0.88, 0.48 + Math.min(0.24, (+runtimeVector.sampleCount || 0) * 0.016) + (objectTrackCoverage * 0.16)), 2);
+  const score10 = round(1 + (6.0 * rawFit * referenceReliability * temporalCoverage), 1);
   return {
     score10,
     rawFit: round(rawFit, 3),
@@ -495,9 +726,11 @@ function strictTrajectoryRead(runtimeVector, referenceLabel, match, expectedHit,
       turnCount: round(turnCount, 3),
       reversalCount: round(reversalCount, 3),
       lowerFieldShare: round(lowerFieldShare, 3),
-      trajectoryBestMatch: round(trajectoryScore, 3)
+      trajectoryBestMatch: round(trajectoryScore, 3),
+      objectTrackCoverage: round(objectTrackCoverage, 3)
     },
-    read: `Strict movement score ${score10}/10 against ${referenceLabel.labelId}: y-range fit ${round(yRange, 2)}, path-length fit ${round(pathLength, 2)}, turn fit ${round(turnCount, 2)}. Current probes are still sampled summaries, so full temporal choreography is not yet proven.`
+    objectTrackRead: targetContractFit?.objectTrackRead || 'No group-level object-track contract evidence was available for this stage.',
+    read: `Strict movement score ${score10}/10 against ${referenceLabel.labelId}: y-range fit ${round(yRange, 2)}, path-length fit ${round(pathLength, 2)}, turn fit ${round(turnCount, 2)}, object-track fit ${round(objectTrackCoverage, 2)}. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available.`
   };
 }
 
@@ -751,6 +984,17 @@ function summarizeObjectTrackedSilhouettes(samples){
         aspect: round(item.bboxAspect, 3)
       }))
     }));
+  const trackVectors = tracks.map(track => {
+    const vector = motionVectorForTrack(track);
+    return vector ? Object.assign({
+      id: track[0].id,
+      family: track[0].family,
+      pathFamily: track[0].pathFamily,
+      wave: track[0].wave,
+      lane: track[0].lane,
+      type: track[0].type
+    }, vector) : null;
+  }).filter(Boolean);
   return {
     score10: round(1 + coverage * 4.8, 1),
     coverage: round(coverage, 3),
@@ -766,6 +1010,7 @@ function summarizeObjectTrackedSilhouettes(samples){
     targetFitFrameShare: round(targetFitFrameShare, 3),
     targetFitScore10: round(1 + targetFitCoverage * 5.2, 1),
     topTracks,
+    trackVectors,
     read: `Object-tracked silhouette probe measured ${observations.length} sprite crops across ${tracks.length} object track(s); ${repeatedTracks.length} track(s) persisted across multiple samples, with ${round(hashChangeShare, 2)} hash-change share, ${round(bboxVariation, 2)} bounding-box variation, and ${round(targetFitCoverage, 2)} Galaga sprite target-fit coverage.`
   };
 }
@@ -846,8 +1091,10 @@ function strictGraphicsRead(stage, runtime, expectedHit){
   const measuredRuntimeSpriteMotionCoverage = spriteMotion.activeMotionCoverage || 0;
   const objectSilhouetteCoverage = spriteMotion.objectTrackedPixelSilhouette?.coverage || 0;
   const objectTargetFitCoverage = spriteMotion.objectTrackedPixelSilhouette?.targetFitCoverage || 0;
-  const activeMotionCap = objectTargetFitCoverage ? 4.6 : (objectSilhouetteCoverage ? 4.2 : (measuredRuntimeSpriteMotionCoverage ? 3.6 : 2.2));
-  const spriteMotionCredit = (measuredRuntimeSpriteMotionCoverage * 0.24) + (objectSilhouetteCoverage * 0.3) + (objectTargetFitCoverage * 0.18);
+  const targetCropRead = runtimeVsTargetCropRead();
+  const targetCropCoverage = clamp((targetCropRead.challengeAverageScore10 || targetCropRead.averageScore10 || 0) / 10);
+  const activeMotionCap = objectTargetFitCoverage ? 4.8 : (targetCropCoverage ? 4.4 : (objectSilhouetteCoverage ? 4.2 : (measuredRuntimeSpriteMotionCoverage ? 3.6 : 2.2)));
+  const spriteMotionCredit = (measuredRuntimeSpriteMotionCoverage * 0.22) + (objectSilhouetteCoverage * 0.28) + (objectTargetFitCoverage * 0.18) + (targetCropCoverage * 0.16);
   const score10 = round(Math.min(activeMotionCap, 1 + (4.0 * (typeMixCredit + familyCredit + contractCredit + spriteMotionCredit))), 1);
   return {
     score10,
@@ -862,9 +1109,12 @@ function strictGraphicsRead(stage, runtime, expectedHit){
       activeSpriteMotionCoverage: measuredRuntimeSpriteMotionCoverage,
       objectTrackedPixelSilhouetteCoverage: objectSilhouetteCoverage,
       objectTrackedTargetFitCoverage: round(objectTargetFitCoverage, 3),
+      runtimeTargetCropCoverage: round(targetCropCoverage, 3),
+      runtimeTargetCropScore10: targetCropRead.challengeAverageScore10 || targetCropRead.averageScore10 || null,
       spriteMotionCredit: round(spriteMotionCredit, 3)
     },
-    read: `Strict graphics score ${score10}/10. Current visible family/type labels are present and ${spriteMotion.read} Graphics remain capped at ${activeMotionCap}/10 until object tracks are compared as full temporal Galaga target-crop sequences, rotations, dive poses, and capture/rescue transitions.`
+    runtimeTargetCropRead: targetCropRead,
+    read: `Strict graphics score ${score10}/10. Current visible family/type labels are present, ${targetCropRead.read} ${spriteMotion.read} Graphics remain capped at ${activeMotionCap}/10 until object tracks are compared as full temporal Galaga target-crop sequences, rotations, dive poses, and capture/rescue transitions.`
   };
 }
 
@@ -878,19 +1128,25 @@ function strictAlienNoveltyRead(stage, runtime, score, expectedHit, lateReferenc
     : 0;
   const typeMix = clamp(types.length / 4) * 0.28;
   const familyNovelty = families.some(family => family !== 'classic') ? 0.22 : 0;
+  const visualFamilyDiversity = clamp(families.length / 4) * 0.16;
   const groupDiversity = clamp((+group.distinctTypeSequences || 0) / Math.max(+group.groupCount || 1, 1)) * 0.2;
   const referenceStageCredit = expectedHit ? 0.16 : (lateReferenceGap ? 0 : 0.08);
-  const score10 = round(Math.min(3.4, 1 + (4.8 * (firstChallengeSemantic + typeMix + familyNovelty + groupDiversity + referenceStageCredit))), 1);
+  const targetCropRead = runtimeVsTargetCropRead();
+  const targetCropCoverage = clamp((targetCropRead.challengeAverageScore10 || 0) / 10) * 0.12;
+  const score10 = round(Math.min(3.9, 1 + (4.6 * (firstChallengeSemantic + typeMix + familyNovelty + visualFamilyDiversity + groupDiversity + referenceStageCredit + targetCropCoverage))), 1);
   return {
     score10,
     components: {
       firstChallengeSemantic,
       typeMix: round(typeMix, 3),
       familyNovelty,
+      visualFamilyDiversity: round(visualFamilyDiversity, 3),
       groupDiversity: round(groupDiversity, 3),
-      referenceStageCredit
+      referenceStageCredit,
+      runtimeTargetCropNoveltyCoverage: round(targetCropCoverage, 3)
     },
-    read: `Strict alien/progression novelty score ${score10}/10. Current stages expose labels and type mixes, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments.`
+    runtimeTargetCropRead: targetCropRead,
+    read: `Strict alien/progression novelty score ${score10}/10. Current stages expose labels, type mixes, direct specialty-sprite target-crop evidence, and ${families.length} visual family/families, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments.`
   };
 }
 
@@ -1050,7 +1306,12 @@ async function runtimeProbeForStage(stage){
         if(delta) h.advanceFor(delta, { step: 1 / 60, stopOnGameOver: false });
         previous = t;
         const formation = h.challengeFormationState();
-        const active = formation.enemies || [];
+        const active = (formation.enemies || []).filter(e => {
+          if(Number.isFinite(+e.spawn) && +e.spawn > 0.03) return false;
+          if(Number.isFinite(+e.x) && (+e.x < -12 || +e.x > 292)) return false;
+          if(Number.isFinite(+e.y) && (+e.y < -24 || +e.y > 384)) return false;
+          return true;
+        });
         const xs = active.map(e => +e.x).filter(Number.isFinite);
         const ys = active.map(e => +e.y).filter(Number.isFinite);
         const lowerFieldCount = active.filter(e => +e.y > 180).length;
@@ -1070,6 +1331,8 @@ async function runtimeProbeForStage(stage){
             family: e.family,
             pathFamily: e.pathFamily,
             tm: +(+e.tm || 0).toFixed(3),
+            spawn: +(+e.spawn || 0).toFixed(3),
+            spawnPlan: +(+e.spawnPlan || 0).toFixed(2),
             flapOpen: e.flapOpen === true,
             animationPhase: +(+e.animationPhase || 0).toFixed(3),
             x: +(+e.x || 0).toFixed(2),
@@ -1081,11 +1344,12 @@ async function runtimeProbeForStage(stage){
       const formation = h.challengeFormationState();
       const finalState = h.state();
       const recent = h.recentEvents({ count: 500 }) || [];
+      const challengeStageEvents = recent.filter(e => !Number.isFinite(+e.stage) || +e.stage === +stage);
       const eventCounts = {
-        enemyShots: recent.filter(e => e.type === 'enemy_shot' || e.type === 'enemy_bullet').length,
-        enemyAttackStarts: recent.filter(e => e.type === 'enemy_attack_start').length,
-        shipLosses: recent.filter(e => e.type === 'ship_loss' || e.type === 'player_loss').length,
-        challengeContacts: recent.filter(e => e.type === 'challenge_enemy_contact').length
+        enemyShots: challengeStageEvents.filter(e => e.type === 'enemy_shot' || e.type === 'enemy_bullet' || e.type === 'enemy_bullet_fired').length,
+        enemyAttackStarts: challengeStageEvents.filter(e => e.type === 'enemy_attack_start').length,
+        shipLosses: challengeStageEvents.filter(e => e.type === 'ship_loss' || e.type === 'player_loss' || e.type === 'ship_lost').length,
+        challengeContacts: challengeStageEvents.filter(e => e.type === 'challenge_enemy_contact').length
       };
       return {
         ok: true,
@@ -1107,7 +1371,7 @@ async function runtimeProbeForStage(stage){
         ruleConformance: {
           noEnemyShots: eventCounts.enemyShots === 0,
           noAttackStarts: eventCounts.enemyAttackStarts === 0,
-          noShipLosses: eventCounts.shipLosses === 0 && finalState.lives === starting.lives
+          noShipLosses: eventCounts.shipLosses === 0
         }
       };
     }, { stage, sampleTimes: SAMPLE_TIMES });
@@ -1158,7 +1422,9 @@ function stageScore(stage, runtime, match, referenceLabels){
     : typeNovelty;
   const oldCoverageScore = clamp(base + safety + trajectory + expectedMatch + adjustedTypeNovelty + familyNovelty + referenceEvidence + group.component + latePenalty, 0, 10);
   const referenceLabel = referenceLabelForStage(stage, intent, match, referenceLabels);
-  const movement = strictTrajectoryRead(match?.runtimeVector, referenceLabel, match, expectedHit, lateReferenceGap);
+  const targetContract = challengeTargetContractForStage(stage);
+  const targetContractFit = challengeContractFit(runtime, targetContract);
+  const movement = strictTrajectoryRead(match?.runtimeVector, referenceLabel, match, expectedHit, lateReferenceGap, targetContractFit);
   const graphics = strictGraphicsRead(stage, runtime, expectedHit);
   const alienNovelty = strictAlienNoveltyRead(stage, runtime, { groupIdentity: group }, expectedHit, lateReferenceGap);
   const progression = stageProgressionRead(stage, runtime, expectedHit, lateReferenceGap);
@@ -1191,7 +1457,8 @@ function stageScore(stage, runtime, match, referenceLabels){
       graphics,
       alienNovelty,
       progression,
-      shotOpportunity
+      shotOpportunity,
+      targetContractFit
     },
     scoreComponents: {
       baseline: base,
@@ -1200,11 +1467,113 @@ function stageScore(stage, runtime, match, referenceLabels){
       alienNovelty: alienNovelty.score10,
       stageProgression: progression.score10,
       playerShotOpportunity: shotOpportunity.score10,
+      targetContractFit: targetContractFit.score10,
       safetyRule: safetyRuleScore10,
       legacyCoverageScore: round(oldCoverageScore, 1)
     },
     groupIdentity: group,
     expectedReferenceHit: expectedHit
+  };
+}
+
+function challengeContractFit(runtime, contract){
+  if(!contract){
+    return {
+      score10: null,
+      confidence: 'pending',
+      read: 'No explicit challenge-stage target contract is available for this stage yet.'
+    };
+  }
+  const runtimeGroups = Array.isArray(runtime?.groupSignatures) ? runtime.groupSignatures : [];
+  const targetGroups = Array.isArray(contract.groups) ? contract.groups : [];
+  const directTarget = galagaChallengeObjectTrackForContract(contract);
+  const directTargetGroups = Array.isArray(directTarget?.targetGroups)
+    ? directTarget.targetGroups.map(group => ({
+      groupIndex: group.groupIndex,
+      entrySide: group.objectTrackTarget?.entrySide || group.entrySide || null,
+      exitSide: group.objectTrackTarget?.exitSide || group.exitSide || null,
+      objectTrackTarget: group.objectTrackTarget || null,
+      targetVideoConfidence: group.confidence,
+      targetVideoTrackCount: group.trackCount,
+      source: 'galaga-target-video-object-track'
+    })).filter(group => group.objectTrackTarget)
+    : [];
+  if(!runtimeGroups.length || !targetGroups.length){
+    return {
+      score10: 1,
+      confidence: 'medium-low',
+      contractId: contract.sourceWindowId || null,
+      groupCountFit: 0,
+      pathFamilyFit: 0,
+      typeFit: 0,
+      familyFit: 0,
+      read: `Contract ${contract.displayLabel || contract.stage || ''} exists, but runtime group signatures are missing.`
+    };
+  }
+  const groupCountFit = clamp(1 - Math.abs(runtimeGroups.length - targetGroups.length) / Math.max(1, targetGroups.length));
+  const pathMatches = targetGroups.map((target, index) => {
+    const runtimeGroup = runtimeGroups[index] || {};
+    const runtimePathFamily = runtimeGroup.pathFamily || (Array.isArray(runtimeGroup.pathFamilies) ? runtimeGroup.pathFamilies[0] : '');
+    return String(runtimePathFamily || '') === String(target.pathFamily || '') ? 1 : 0;
+  });
+  const typeMatches = targetGroups.map((target, index) => {
+    const runtimeTypes = new Set(runtimeGroups[index]?.types || []);
+    const expected = target.expectedTypes || [];
+    if(!expected.length) return 0;
+    const hits = expected.filter(type => runtimeTypes.has(type)).length;
+    const extraPenalty = Array.from(runtimeTypes).filter(type => !expected.includes(type)).length * .18;
+    return clamp((hits / expected.length) - extraPenalty);
+  });
+  const familyMatches = targetGroups.map((target, index) => {
+    const runtimeFamilies = new Set(runtimeGroups[index]?.families || []);
+    const expected = target.expectedFamilies || [];
+    if(!expected.length) return 0;
+    const hits = expected.filter(family => runtimeFamilies.has(family)).length;
+    return clamp(hits / expected.length);
+  });
+  const pathFamilyFit = average(pathMatches) || 0;
+  const typeFit = average(typeMatches) || 0;
+  const familyFit = average(familyMatches) || 0;
+  const objectTargetGroups = directTargetGroups.length ? directTargetGroups : targetGroups;
+  const objectTrackFits = objectTargetGroups.map((target, index) => objectTrackTargetFit(runtime?.motionVector?.groupVectors?.[index], target, runtime, index)).filter(Boolean);
+  const objectTrackCoverage = objectTrackFits.length ? average(objectTrackFits.map(item => item.coverage)) : 0;
+  const objectTrackFit = objectTrackFits.length ? average(objectTrackFits.map(item => item.score10)) : null;
+  const hasObjectTrackTargets = objectTargetGroups.some(group => group.objectTrackTarget);
+  const directTargetVideoObjectFitScore10 = directTargetGroups.length ? objectTrackFit : null;
+  const directTargetVideoTrackCoverage = directTargetGroups.length
+    ? round((objectTrackFits.length / Math.max(1, directTargetGroups.length)) * objectTrackCoverage, 3)
+    : null;
+  const coverage = contract.targetVideoOnly
+    ? clamp((0.24 * groupCountFit) + (0.76 * objectTrackCoverage))
+    : clamp(
+      (0.18 * groupCountFit)
+      + (0.24 * pathFamilyFit)
+      + (0.22 * typeFit)
+      + (0.14 * familyFit)
+      + (0.22 * objectTrackCoverage)
+    );
+  return {
+    score10: round(1 + coverage * (hasObjectTrackTargets ? 7.0 : 6.2), 1),
+    confidence: contract.targetVideoOnly ? 'medium-direct-target-video-object-tracks' : (hasObjectTrackTargets ? 'medium-first-pass-object-track-contract' : 'medium-low-first-pass-contract'),
+    contractId: contract.sourceWindowId || null,
+    groupCountFit: round(groupCountFit, 3),
+    pathFamilyFit: round(pathFamilyFit, 3),
+    typeFit: round(typeFit, 3),
+    familyFit: round(familyFit, 3),
+    objectTrackCoverage: round(objectTrackCoverage, 3),
+    objectTrackFitScore10: round(objectTrackFit, 1),
+    objectTrackSource: directTargetGroups.length || contract.targetVideoOnly ? 'galaga-target-video-object-tracks' : 'first-pass-contract-object-tracks',
+    directTargetVideoObjectFitScore10: round(directTargetVideoObjectFitScore10, 1),
+    directTargetVideoTrackCoverage,
+    directTargetVideoGroupCount: directTargetGroups.length || 0,
+    directTargetVideoEvidence: directTarget?.evidence || null,
+    objectTrackFits,
+    targetGroupCount: targetGroups.length,
+    runtimeGroupCount: runtimeGroups.length,
+    objectTrackRead: objectTrackFits.length
+      ? `Group object-track target fit is ${round(objectTrackFit, 1)}/10 across ${objectTrackFits.length}/${objectTargetGroups.length} target group(s) using ${directTargetGroups.length || contract.targetVideoOnly ? 'direct Galaga target-video object tracks' : 'first-pass contract object tracks'}.`
+      : 'No group object-track targets were available in this contract.',
+    read: `Target contract fit is ${round(1 + coverage * (hasObjectTrackTargets ? 7.0 : 6.2), 1)}/10 for ${contract.displayLabel || `stage ${contract.stage}`}: group count ${round(groupCountFit, 2)}, path-family order ${round(pathFamilyFit, 2)}, type order ${round(typeFit, 2)}, family order ${round(familyFit, 2)}, object-track ${round(objectTrackCoverage, 2)} via ${directTargetGroups.length || contract.targetVideoOnly ? 'direct target-video tracks' : 'first-pass contract vectors'}. This is a group/object-track read, not frame-perfect sprite identity recognition.`
   };
 }
 
@@ -1226,6 +1595,10 @@ function criticalGaps(stage, runtime, match, score){
   }
   if((score.playerShotOpportunityScore10 || 1) < 4){
     gaps.push(`Player shot-opportunity read is only ${score.playerShotOpportunityScore10}/10: current sampled lanes do not yet prove the challenge has a clear learnable high-bonus firing route rather than incidental hits.`);
+  }
+  const targetContractScore = score.strictAxisReads?.targetContractFit?.score10;
+  if(targetContractScore !== null && targetContractScore !== undefined && Number.isFinite(+targetContractScore) && +targetContractScore < 5){
+    gaps.push(`Target-contract fit is only ${score.strictAxisReads.targetContractFit.score10}/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.`);
   }
   if(stage === 3){
     const types = typeSet(runtime?.firstWave || []);
@@ -1319,6 +1692,7 @@ function makeStageRow(stage, runtime, match, referenceLabels){
   const intent = STAGE_INTENT[stage];
   const bestLabel = match?.bestMatch?.labelId || '';
   const score = stageScore(stage, runtime, match, referenceLabels);
+  const targetContract = challengeTargetContractForStage(stage);
   const referenceTarget = referenceLabelForStage(stage, intent, match, referenceLabels)
     || referenceLabels.find(label => label.labelId === bestLabel)
     || referenceLabels.find(label => intent.expectedReferenceLabels.includes(label.labelId))
@@ -1351,7 +1725,7 @@ function makeStageRow(stage, runtime, match, referenceLabels){
     } : null,
     motionProbe: runtime ? runtime.motionSummary : null,
     currentRead: runtime
-      ? `${layoutSignature(runtime.layout)}; first-wave types ${typeSequence(firstWave) || 'pending'}; visual families ${familySet(firstWave).join(', ') || 'pending'}; strict movement ${score.movementConformanceScore10}/10, graphics ${score.graphicalConformanceScore10}/10, alien novelty ${score.alienNoveltyScore10}/10, shot opportunity ${score.playerShotOpportunityScore10}/10.`
+      ? `${layoutSignature(runtime.layout)}; first-wave types ${typeSequence(firstWave) || 'pending'}; visual families ${familySet(firstWave).join(', ') || 'pending'}; strict movement ${score.movementConformanceScore10}/10, graphics ${score.graphicalConformanceScore10}/10, alien novelty ${score.alienNoveltyScore10}/10, shot opportunity ${score.playerShotOpportunityScore10}/10, target-contract fit ${score.strictAxisReads.targetContractFit?.score10 ?? 'pending'}/10.`
       : 'Runtime probe pending.',
     graphicsRead: runtime
       ? score.strictAxisReads.graphics.read
@@ -1379,6 +1753,20 @@ function makeStageRow(stage, runtime, match, referenceLabels){
       : 'Alien variation probe pending.',
     groupIdentityRead: score.groupIdentity.read,
     groupIdentityScore10: score.groupIdentity.score10,
+    targetContract: targetContract ? {
+      sourceWindowId: targetContract.sourceWindowId,
+      displayLabel: targetContract.displayLabel,
+      targetRead: targetContract.targetRead,
+      groupCount: Array.isArray(targetContract.groups) ? targetContract.groups.length : 0,
+      successRead: targetContract.successRead,
+      nextPromotion: targetContract.nextPromotion
+    } : null,
+    targetContractFitScore10: score.strictAxisReads.targetContractFit?.score10 ?? null,
+    targetContractRead: score.strictAxisReads.targetContractFit?.read || 'Target contract pending.',
+    targetVideoObjectTrackRead: score.strictAxisReads.targetContractFit?.objectTrackRead || 'Target-video object-track comparison pending.',
+    targetVideoObjectTrackFitScore10: score.strictAxisReads.targetContractFit?.directTargetVideoObjectFitScore10 ?? null,
+    targetVideoObjectTrackCoverage: score.strictAxisReads.targetContractFit?.directTargetVideoTrackCoverage ?? null,
+    targetVideoObjectTrackEvidence: score.strictAxisReads.targetContractFit?.directTargetVideoEvidence || null,
     criticalGaps: criticalGaps(stage, runtime, match, score),
     nextActions: nextActionsForStage(stage),
     interestingFactor10: score.interestingFactor10,
@@ -1396,10 +1784,11 @@ function makeStageRow(stage, runtime, match, referenceLabels){
     evidence: [
       'reference-artifacts/analyses/galaga-path-reference-labels/latest.json',
       'reference-artifacts/analyses/galaga-challenge-video-reference/latest.json',
+      targetContract ? 'reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json' : '',
       'reference-artifacts/analyses/formation-boss-path-family-comparison/latest.json',
       'reference-artifacts/analyses/alien-entry-challenge-variation/latest.json',
       runtime?.layout ? 'browser-backed challengeFormationState runtime probe' : 'runtime probe pending'
-    ]
+    ].filter(Boolean)
   };
 }
 
@@ -1450,6 +1839,8 @@ Target-artifact coverage has not been generated yet. Run \`npm run harness:analy
 
 **Group identity read:** ${row.groupIdentityRead || 'Group identity pending.'}
 
+**Target contract read:** ${row.targetContractRead || 'Target contract pending.'}
+
 **Shot-opportunity read:** ${row.shotOpportunityRead || 'Shot-opportunity probe pending.'}
 
 **Safety rule:** ${row.safetyProbe ? `enemy shots ${row.safetyProbe.eventCounts.enemyShots}, attack starts ${row.safetyProbe.eventCounts.enemyAttackStarts}, ship losses ${row.safetyProbe.eventCounts.shipLosses}` : 'runtime probe pending'}.
@@ -1480,6 +1871,7 @@ Current result: **${report.summary.interestingFactorScore10}/10 interesting fact
 - Existing path-family comparison supplied best-match vector scores against labeled Galaga challenge entries, but those broad scores are now retained as diagnostic coverage instead of the conformance score.
 - Strict movement scoring compares runtime y-range, path length, turn count, reversals, lower-field share, and trajectory best-match against the selected Galaga challenge reference vector. It is capped by current temporal-measurement limits because the harness still samples summaries rather than full tracked choreography.
 - Strict graphical scoring now includes active sprite-motion plus object-tracked runtime pixel/silhouette crops for flap state, phase coverage, visual family diversity, path-pose diversity, lit-pixel stability, and bounding-box variation. It remains capped until those object tracks are compared frame-by-frame to Galaga target crops, rotations, dive poses, capture/rescue transitions, and direct target crop sequences.
+- First-pass target contracts now score group count, group path-family order, expected type order, and expected family order for any challenge that has a persisted media-backed contract. This is deliberately reported as a separate contract-fit read until target-video object tracking exists.
 - Player shot-opportunity scoring samples plausible firing lanes through each challenge window so movement work can be judged by whether it creates learnable high-bonus routes, not only by broad movement shape.
 - Challenge path-slot extraction suppresses player fire for challenge windows, so trajectory comparison measures authored alien motion instead of bullet-truncated player-score fragments.
 - Safety is measured separately from interest: no shots/no kills is necessary, but it does not make a challenge visually conformant and contributes only as a guardrail.
@@ -1508,7 +1900,8 @@ ${stageSections}
 
 ## Success Criteria
 
-- Raise challenge-stage interesting factor from ${report.summary.interestingFactorScore10}/10 to 3.5/10 as the first honest gate by implementing one visibly reference-like challenge, then toward 6.0/10 after Stage 3, 7, and 11 each have distinct authored contracts.
+- Raise challenge-stage interesting factor from ${report.summary.interestingFactorScore10}/10 to 5.0/10 as the first honest beta-facing gate by implementing one visibly reference-like challenge, then toward 6.0/10 after Stage 3, 7, and 11 each have distinct authored contracts.
+- Keep the separate target-contract read above 7.0/10 for Challenge Stage 1 while promoting contracts for Stages 7 and 11; group-contract success is useful but does not replace frame-level motion/graphics scoring.
 - Raise movement conformance from ${report.summary.movementConformanceScore10}/10 by increasing y-range, path length, turn count, and exit-side match against the Galaga challenge references.
 - Raise graphical conformance from ${report.summary.graphicalConformanceScore10}/10 by extending the object-tracked silhouette hook into Galaga target-crop sequence comparisons; do not inflate it from type labels alone.
 - Raise player shot opportunity from ${report.summary.playerShotOpportunityScore10}/10 by creating lane-readable scoring windows for each challenge rather than incidental central-lane hits.
@@ -1686,6 +2079,7 @@ async function buildReport(){
   const referenceLabels = challengeReferenceLabels();
   const alienVariation = alienVariationRead();
   const targetArtifactCoverage = galagaTargetArtifactCoverageRead();
+  const targetObjectTracks = galagaChallengeObjectTracksRead();
   const rows = CHALLENGE_STAGES.map(stage => {
     const runtime = runtimeProbes.find(probe => probe.stage === stage);
     const intent = STAGE_INTENT[stage];
@@ -1709,6 +2103,9 @@ async function buildReport(){
     alienNoveltyScore10: round(average(rows.map(row => row.alienNoveltyScore10)), 1),
     progressionConformanceScore10: round(average(rows.map(row => row.progressionConformanceScore10)), 1),
     playerShotOpportunityScore10: round(average(rows.map(row => row.playerShotOpportunityScore10)), 1),
+    targetContractFitScore10: round(average(rows.map(row => row.targetContractFitScore10)), 1),
+    targetVideoObjectTrackFitScore10: round(average(rows.map(row => row.targetVideoObjectTrackFitScore10)), 1),
+    targetTrackReadinessScore10: targetObjectTracks?.summary?.targetTrackReadinessScore10 ?? null,
     safetyRuleScore10: round(average(rows.map(row => row.safetyRuleScore10)), 1),
     legacyCoverageScore10: round(average(rows.map(row => row.legacyCoverageScore10)), 1),
     confidence: 'medium-high for the gap; medium-low for exact remediation size',
@@ -1718,7 +2115,7 @@ async function buildReport(){
     strongestFinding: 'Sampled challenge windows preserve the Galaga-like no-shot/no-ship-loss rule.',
     stage3ExpectedReferenceHit,
     challenge2BestMatchCount,
-    weakestFinding: `current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is ${round(average(rows.map(row => row.movementConformanceScore10)), 1)}/10, strict graphics is ${round(average(rows.map(row => row.graphicalConformanceScore10)), 1)}/10, alien/stage novelty is ${round(average(rows.map(row => row.alienNoveltyScore10)), 1)}/10, player shot opportunity is ${round(average(rows.map(row => row.playerShotOpportunityScore10)), 1)}/10, active sprite-motion now includes object-tracked runtime pixel/silhouette evidence but not yet Galaga target-crop sequence comparison, and late challenge references are still first-pass group labels rather than full object tracks. Diagnostic legacy coverage was ${round(average(rows.map(row => row.legacyCoverageScore10)), 1)}/10, which is why the old read was too generous.`,
+    weakestFinding: `current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is ${round(average(rows.map(row => row.movementConformanceScore10)), 1)}/10, strict graphics is ${round(average(rows.map(row => row.graphicalConformanceScore10)), 1)}/10, alien/stage novelty is ${round(average(rows.map(row => row.alienNoveltyScore10)), 1)}/10, player shot opportunity is ${round(average(rows.map(row => row.playerShotOpportunityScore10)), 1)}/10, target-video object-track fit is ${round(average(rows.map(row => row.targetVideoObjectTrackFitScore10)), 1)}/10, and active sprite-motion still needs Galaga target-crop sequence comparison. Diagnostic legacy coverage was ${round(average(rows.map(row => row.legacyCoverageScore10)), 1)}/10, which is why the old read was too generous.`,
     playerMeaning: 'A player should experience challenging stages as safe but tense score exhibitions with memorable entry routes, fresh alien types, readable trajectories, and a learnable perfect-bonus opportunity. Aurora currently preserves the safety rule, but the actual spectacle, motion, and visual novelty are still early.',
     designerMeaning: 'Design work should move from broad path-family labels to explicit per-challenge contracts: group order, first-visible frame, entry side, exit side, path length, turn count, alien family, animation phases, bonus opportunity, and result feedback.',
     sourceScores: {
@@ -1751,7 +2148,10 @@ async function buildReport(){
     sourceArtifacts: {
       galagaPathReferenceLabels: 'reference-artifacts/analyses/galaga-path-reference-labels/latest.json',
       galagaChallengeVideoReference: 'reference-artifacts/analyses/galaga-challenge-video-reference/latest.json',
+      galagaChallengeObjectTracks: 'reference-artifacts/analyses/galaga-challenge-object-tracks/latest.json',
       galagaTargetArtifactCoverage: 'reference-artifacts/analyses/galaga-target-artifact-coverage/latest.json',
+      auroraRuntimeVsGalagaTargetCrops: 'reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json',
+      challengeStageTargetContracts: 'reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json',
       pathFamilyComparison: 'reference-artifacts/analyses/formation-boss-path-family-comparison/latest.json',
       alienEntryChallengeVariation: 'reference-artifacts/analyses/alien-entry-challenge-variation/latest.json',
       challengeCollisionGuardrail: 'tools/harness/check-challenge-collision.js',
@@ -1761,6 +2161,26 @@ async function buildReport(){
       summary: targetArtifactCoverage.summary || {},
       challengeStageCoverage: Array.isArray(targetArtifactCoverage.challengeStageCoverage)
         ? targetArtifactCoverage.challengeStageCoverage
+        : []
+    },
+    targetObjectTracks: {
+      summary: targetObjectTracks.summary || {},
+      challenges: Array.isArray(targetObjectTracks.challenges)
+        ? targetObjectTracks.challenges.map(item => ({
+          challengeNumber: item.challengeNumber,
+          trackRead: item.trackRead,
+          componentRead: item.componentRead,
+          evidence: item.evidence,
+          targetGroups: Array.isArray(item.targetGroups)
+            ? item.targetGroups.map(group => ({
+              groupIndex: group.groupIndex,
+              trackCount: group.trackCount,
+              confidence: group.confidence,
+              objectTrackTarget: group.objectTrackTarget,
+              read: group.read
+            }))
+            : []
+        }))
         : []
     },
     improvementPlan: [

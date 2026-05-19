@@ -11,10 +11,11 @@ window.__galagaHarness__={
    if(!cfg.autoVideo&&VIDEO_REC.active&&typeof stopRunRecording==='function')stopRunRecording();
   }
   if(typeof cfg.debugCarry==='boolean')window.setCarryDebug(!!cfg.debugCarry,'harness-start');
- if(cfg.stage||cfg.ships||cfg.challenge!==undefined||cfg.startKind!==undefined||cfg.challengeStage!==undefined||cfg.extendFirst!==undefined||cfg.extendRecurring!==undefined||cfg.audioTheme!==undefined||cfg.graphicsTheme!==undefined||cfg.starfieldIntensity!==undefined||cfg.starfieldSpeed!==undefined){
+ if(cfg.stage||cfg.ships||cfg.challenge!==undefined||cfg.startKind!==undefined||cfg.challengeStage!==undefined||cfg.expertPlays!==undefined||cfg.extendFirst!==undefined||cfg.extendRecurring!==undefined||cfg.audioTheme!==undefined||cfg.graphicsTheme!==undefined||cfg.spriteRenderMode!==undefined||cfg.starfieldIntensity!==undefined||cfg.starfieldSpeed!==undefined){
   const currentCfg=loadTestCfg();
   const nextStartKind=cfg.startKind!==undefined?sanitizeStartKind(cfg.startKind):(cfg.challenge?'challenge':'level');
   if(typeof testStartKind!=='undefined'&&testStartKind)testStartKind.value=nextStartKind;
+  if(typeof testExpertPlays!=='undefined'&&testExpertPlays)testExpertPlays.value=cfg.expertPlays!==undefined?(typeof sanitizeExpertPlayPersona==='function'?sanitizeExpertPlayPersona(cfg.expertPlays):String(cfg.expertPlays||'human')):(currentCfg.expertPlays||'human');
   testStage.value=cl(+cfg.stage||1,1,99)|0;
   if(typeof testChallengeStage!=='undefined'&&testChallengeStage)testChallengeStage.value=cfg.challengeStage!==undefined?cl(+cfg.challengeStage||1,1,99)|0:(currentCfg.challengeStage||1);
   testShips.value=cl(+cfg.ships||3,1,9)|0;
@@ -23,6 +24,7 @@ window.__galagaHarness__={
   testChallenge.checked=nextStartKind==='challenge'||!!cfg.challenge;
   if(typeof audioTheme!=='undefined'&&audioTheme)audioTheme.value=cfg.audioTheme!==undefined?String(cfg.audioTheme||'auto'):currentCfg.audioTheme;
   if(typeof graphicsTheme!=='undefined'&&graphicsTheme)graphicsTheme.value=cfg.graphicsTheme!==undefined?String(cfg.graphicsTheme||'auto'):currentCfg.graphicsTheme;
+  if(typeof spriteRenderMode!=='undefined'&&spriteRenderMode)spriteRenderMode.value=cfg.spriteRenderMode!==undefined?String(cfg.spriteRenderMode||'auto'):(currentCfg.spriteRenderMode||'auto');
   if(typeof graphicsStarfieldIntensity!=='undefined'&&graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=cfg.starfieldIntensity!==undefined?String(cfg.starfieldIntensity):String(currentCfg.starfieldIntensity);
   if(typeof graphicsStarfieldSpeed!=='undefined'&&graphicsStarfieldSpeed)graphicsStarfieldSpeed.value=cfg.starfieldSpeed!==undefined?String(cfg.starfieldSpeed):String(currentCfg.starfieldSpeed);
   saveTestCfg();
@@ -700,10 +702,15 @@ window.__galagaHarness__={
     starfieldProfile:(window.__platinumRenderDebug||window.__auroraRenderDebug)?.starfieldProfile||'',
     starfieldCount:+((window.__platinumRenderDebug||window.__auroraRenderDebug)?.starfieldCount||0),
     starfieldIntensityScale:+((window.__platinumRenderDebug||window.__auroraRenderDebug)?.starfieldIntensityScale||0),
-    starfieldSpeedScale:+((window.__platinumRenderDebug||window.__auroraRenderDebug)?.starfieldSpeedScale||0)
+    starfieldSpeedScale:+((window.__platinumRenderDebug||window.__auroraRenderDebug)?.starfieldSpeedScale||0),
+    spriteRenderMode:(window.__platinumRenderDebug||window.__auroraRenderDebug)?.spriteRenderMode||'auto',
+    referencePixelSprites:!!((window.__platinumRenderDebug||window.__auroraRenderDebug)?.referencePixelSprites),
+    playerBounds:(window.__platinumRenderDebug||window.__auroraRenderDebug)?.playerBounds||null,
+    reserveShipBounds:[...((window.__platinumRenderDebug||window.__auroraRenderDebug)?.reserveShipBounds||[])]
    },
   graphics:graphics?{
     graphicsTheme:graphics.graphicsTheme||'auto',
+    spriteRenderMode:graphics.spriteRenderMode||'auto',
     starfieldIntensity:+(graphics.starfieldIntensity||1),
     starfieldSpeed:+(graphics.starfieldSpeed||1)
    }:null,
@@ -1057,6 +1064,8 @@ window.__galagaHarness__={
 	   type:e.t,
    family:e.fam||'classic',
    pathFamily:e.pathFamily||'classic-lane-wave',
+   speedScale:+(+e.speedScale||1).toFixed(3),
+   lowerFieldBias:+(+e.lowerFieldBias||0).toFixed(2),
 	   lane:e.c,
    wave:e.wave,
    row:e.row,
@@ -1170,6 +1179,7 @@ window.__galagaHarness__={
   S.att=0;
   S.recoverT=8;
   S.attackGapT=8;
+  S.harnessSpriteRuntimeCapture=1;
   if(cfg.clearBackdrop!==false)S.st.length=0;
   Object.assign(S.p,{
    x:cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18),
@@ -1196,10 +1206,10 @@ window.__galagaHarness__={
     hp:spec.t==='boss'?2:1,
     max:spec.t==='boss'?2:1,
     form:1,
-    dive:0,
-    carry:0,
-    beam:0,
-    beamT:0,
+    dive:Number.isFinite(+cfg.enemyDive)?+cfg.enemyDive:0,
+    carry:cfg.enemyCarry?1:0,
+    beam:cfg.enemyBeam?1:0,
+    beamT:Number.isFinite(+cfg.enemyBeamT)?+cfg.enemyBeamT:0,
     low:0,
     esc:0,
     squadId:0,
@@ -1208,15 +1218,116 @@ window.__galagaHarness__={
     y:+cfg.enemyY||132,
     tx:cl(+cfg.enemyX||PLAY_W/2,28,PLAY_W-28),
     ty:+cfg.enemyY||132,
-    vx:0,
-    vy:0,
-    tm:0,
-    ph:0,
+    vx:Number.isFinite(+cfg.enemyVx)?+cfg.enemyVx:0,
+    vy:Number.isFinite(+cfg.enemyVy)?+cfg.enemyVy:0,
+    targetX:Number.isFinite(+cfg.enemyTargetX)?+cfg.enemyTargetX:cl(+cfg.enemyX||PLAY_W/2,28,PLAY_W-28),
+    targetY:Number.isFinite(+cfg.enemyTargetY)?+cfg.enemyTargetY:132,
+    tm:Number.isFinite(+cfg.enemyTm)?+cfg.enemyTm:0,
+    ph:Number.isFinite(+cfg.enemyPh)?+cfg.enemyPh:0,
     cool:99
    });
   }
   if(typeof draw==='function')draw();
   return Object.assign({ok:true,kind},this.spriteRuntimeState());
+ },
+ clearSpriteRuntimeCapture(){
+  S.harnessSpriteRuntimeCapture=0;
+  if(typeof draw==='function')draw();
+  return this.spriteRuntimeState();
+ },
+ playerVisualContract(cfg={}){
+  return{
+   playfield:{w:PLAY_W,h:PLAY_H},
+   playerBottom:+(VIS.playerBottom||0),
+   playerStartY:+(PLAY_H-(VIS.playerBottom||0)),
+   singleMovementHalfWidth:typeof playerMovementHalfWidth==='function'?playerMovementHalfWidth({dual:false}):playerHitbox().w,
+   dualMovementHalfWidth:typeof playerMovementHalfWidth==='function'?playerMovementHalfWidth({dual:true}):playerHitbox().w
+  };
+ },
+ playerReserveVisualLayout(cfg={}){
+  S.harnessSpriteRuntimeCapture=0;
+  S.lives=Math.max(0,Math.min(8,Number.isFinite(+cfg.reserveShips)?+cfg.reserveShips:2));
+  const margin=typeof playerMovementHalfWidth==='function'?playerMovementHalfWidth({dual:!!cfg.dual})+2:12;
+  Object.assign(S.p,{
+   x:cl(Number.isFinite(+cfg.playerX)?+cfg.playerX:PLAY_W/2,margin,PLAY_W-margin),
+   y:Number.isFinite(+cfg.playerY)?+cfg.playerY:PLAY_H-VIS.playerBottom,
+   vx:0,
+   cd:0,
+   inv:0,
+   dual:cfg.dual?1:0,
+   captured:0,
+   returning:0,
+   pending:0,
+   spawn:0,
+   capBoss:null,
+   capT:0
+  });
+  if(typeof draw==='function')draw();
+  const render=this.state().renderDebug||{};
+  const player=render.playerBounds||null;
+  const reserve=render.reserveShipBounds||[];
+  return{
+   ok:!!player,
+   playfield:{w:PLAY_W,h:PLAY_H},
+   player,
+   reserve,
+   minReserveGap:reserve.length&&player?Math.min(...reserve.map(box=>+(box.top-player.bottom).toFixed(2))):null,
+   minReservePairGap:reserve.length>1?Math.min(...reserve.slice(1).map((box,i)=>+(box.left-reserve[i].right).toFixed(2))):null,
+   leftClearance:player?+player.left.toFixed(2):null,
+   rightClearance:player?+(PLAY_W-player.right).toFixed(2):null,
+   bottomClearance:player?+(PLAY_H-player.bottom).toFixed(2):null
+  };
+ },
+ setupImpactRuntimeCapture(cfg={}){
+  const kind=String(cfg.kind||'enemy-boom');
+  S.stage=Math.max(1,+cfg.stage||1);
+  S.challenge=0;
+  S.simT=0;
+  S.stageClock=0;
+  S.pb.length=0;
+  S.eb.length=0;
+  S.fx.length=0;
+  S.st.length=0;
+  S.att=0;
+  S.recoverT=8;
+  S.attackGapT=8;
+  S.harnessSpriteRuntimeCapture=1;
+  for(const e of S.e)e.hp=0;
+  Object.assign(S.p,{
+   x:cl(+cfg.playerX||PLAY_W/2,18,PLAY_W-18),
+   y:+cfg.playerY||PLAY_H-VIS.playerBottom,
+   vx:0,
+   cd:0,
+   inv:0,
+   dual:0,
+   captured:0,
+   returning:0,
+   pending:0,
+   spawn:0,
+   capBoss:null,
+   capT:0
+  });
+  const x=cl(+cfg.x||PLAY_W/2,28,PLAY_W-28);
+  const y=cl(+cfg.y||132,38,PLAY_H-40);
+  if(kind==='boss-first-hit'||kind==='boss-hit'){
+   if(typeof bossDamageFx==='function')bossDamageFx(x,y);
+   else if(typeof ex==='function')ex(x,y,12,'#fff4a8');
+  }else if(kind==='boss-boom'){
+   if(typeof ex==='function'){
+    ex(x,y,28,'#fff5a6');
+    ex(x,y,18,'#ff8cd7');
+    ex(x,y,12,'#d8f2ff');
+   }
+  }else if(kind==='enemy-hit'){
+   if(typeof ex==='function')ex(x,y,8,'#fff7d8');
+  }else if(typeof ex==='function'){
+   ex(x,y,14,'#ffe563');
+  }
+  if(Number.isFinite(+cfg.advanceS)&&+cfg.advanceS>0&&typeof this.advanceFor==='function'){
+   this.advanceFor(+cfg.advanceS,{step:1/60,stopOnGameOver:false});
+  }
+  if(typeof draw==='function')draw();
+  return Object.assign({ok:true,kind,impact:{x:+x.toFixed(2),y:+y.toFixed(2),effectCount:S.fx.length}},this.spriteRuntimeState());
  },
  squadronState(){
   const boss=S.e.find(e=>e.hp>0&&e.squadId&&e.t==='boss');
@@ -1608,6 +1719,7 @@ window.__galagaHarness__={
  const currentCfg=loadTestCfg();
   const nextStartKind=cfg.startKind!==undefined?sanitizeStartKind(cfg.startKind):(cfg.challenge?'challenge':'level');
   if(typeof testStartKind!=='undefined'&&testStartKind)testStartKind.value=nextStartKind;
+  if(typeof testExpertPlays!=='undefined'&&testExpertPlays)testExpertPlays.value=cfg.expertPlays!==undefined?(typeof sanitizeExpertPlayPersona==='function'?sanitizeExpertPlayPersona(cfg.expertPlays):String(cfg.expertPlays||'human')):(currentCfg.expertPlays||'human');
   testStage.value=cl(+cfg.stage||1,1,99)|0;
  if(typeof testChallengeStage!=='undefined'&&testChallengeStage)testChallengeStage.value=cfg.challengeStage!==undefined?cl(+cfg.challengeStage||1,1,99)|0:(currentCfg.challengeStage||1);
  testShips.value=cl(+cfg.ships||3,1,9)|0;
@@ -1616,6 +1728,7 @@ window.__galagaHarness__={
  testChallenge.checked=nextStartKind==='challenge'||!!cfg.challenge;
   if(typeof audioTheme!=='undefined'&&audioTheme)audioTheme.value=cfg.audioTheme!==undefined?String(cfg.audioTheme||'auto'):currentCfg.audioTheme;
   if(typeof graphicsTheme!=='undefined'&&graphicsTheme)graphicsTheme.value=cfg.graphicsTheme!==undefined?String(cfg.graphicsTheme||'auto'):currentCfg.graphicsTheme;
+  if(typeof spriteRenderMode!=='undefined'&&spriteRenderMode)spriteRenderMode.value=cfg.spriteRenderMode!==undefined?String(cfg.spriteRenderMode||'auto'):(currentCfg.spriteRenderMode||'auto');
   if(typeof graphicsStarfieldIntensity!=='undefined'&&graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=cfg.starfieldIntensity!==undefined?String(cfg.starfieldIntensity):String(currentCfg.starfieldIntensity);
   if(typeof graphicsStarfieldSpeed!=='undefined'&&graphicsStarfieldSpeed)graphicsStarfieldSpeed.value=cfg.starfieldSpeed!==undefined?String(cfg.starfieldSpeed):String(currentCfg.starfieldSpeed);
   saveTestCfg();

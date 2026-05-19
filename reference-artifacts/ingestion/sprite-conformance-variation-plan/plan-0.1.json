@@ -1,0 +1,222 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "sprite-conformance-variation-plan",
+  "generatedAt": "2026-05-18T00:00:00.000Z",
+  "status": "active-plan",
+  "title": "Sprite Conformance And Variation Pipeline",
+  "summary": "Build one repeatable sprite pipeline that can reach high measured reference conformance, then branch into production-safe Aurora and future-game visual themes without losing the era, motion, and gameplay readability characteristics of the source.",
+  "principles": [
+    {
+      "id": "separate-target-and-shipped-art",
+      "label": "Separate target conformance from shipped production art",
+      "meaning": "The ingestion system should learn and score against target sprites, poses, motion, and gameplay meaning. Production builds can ship original Aurora-style variations that preserve measured silhouette, role readability, timing, and era characteristics."
+    },
+    {
+      "id": "strict-mode-is-a-lab-output",
+      "label": "Strict conformance mode is a development/lab lane",
+      "meaning": "Developer settings should eventually let us run a conforming reference-experience lane for measurement, comparison, and review. That lane is not the default public creative skin unless rights and release policy allow it."
+    },
+    {
+      "id": "sprite-identity-is-temporal",
+      "label": "Sprite identity is temporal, not static",
+      "meaning": "A high-quality arcade sprite includes static pose, flap cadence, damage pulse, dive and rotation poses, capture/rescue transitions, projectile vocabulary, explosion language, scale, palette, and formation context."
+    },
+    {
+      "id": "platform-supports-games-without-owning-them",
+      "label": "Platinum supports the pipeline, games own their assets",
+      "meaning": "Platinum should provide renderer modes, developer toggles, artifact wiring, replay capture, and harness APIs. Aurora and each future game should own its target mappings, conforming lane, and creative theme variants."
+    }
+  ],
+  "lanes": [
+    {
+      "id": "reference-conformance-lane",
+      "label": "Reference Conformance Lane",
+      "releaseUse": "developer/internal measurement first",
+      "purpose": "Show and measure the closest legally appropriate Galaga-like game experience so the team can assess what conformance would look like before creative variation.",
+      "rendererExpectation": "Fixed low-resolution gameplay buffer, integer or controlled scaling, no smoothing, target-crop sprite atlases or target-derived pixel-row manifests, authored pose frames instead of arbitrary canvas rotation.",
+      "metrics": [
+        "static target crop similarity",
+        "pose-set coverage",
+        "flap and pulse cadence",
+        "dive/rotation silhouette sequence similarity",
+        "capture/rescue transition readability",
+        "projectile/explosion vocabulary alignment",
+        "formation and challenge-stage context fit"
+      ]
+    },
+    {
+      "id": "aurora-production-theme-lane",
+      "label": "Aurora Production Theme Lane",
+      "releaseUse": "public Aurora production",
+      "purpose": "Ship original Aurora art that feels era-faithful and arcade-readable while avoiding a direct copy of target art.",
+      "rendererExpectation": "Uses the same sprite-role/pose manifest shape as the conformance lane, but with Aurora-owned pixel art, palettes, effects, and themed variations.",
+      "metrics": [
+        "role readability",
+        "silhouette family similarity band",
+        "palette-era fit",
+        "motion cadence fit",
+        "player comprehension during hits, captures, rescues, and challenge stages",
+        "theme distinctiveness"
+      ]
+    },
+    {
+      "id": "future-game-ingestion-lane",
+      "label": "Future Game Ingestion Lane",
+      "releaseUse": "new game onboarding",
+      "purpose": "Use the same source-to-target-to-variation loop for Galaxy Guardians and later games so new games begin with measured artifacts, not hand-waved design memory.",
+      "rendererExpectation": "Game-owned target packs and themed packs share the same manifest schema, crop review, scorer, and developer toggle vocabulary.",
+      "metrics": [
+        "source coverage",
+        "target extraction confidence",
+        "role/pose manifest completeness",
+        "runtime-vs-target conformance",
+        "theme variation distance",
+        "compute cost per conformance lift"
+      ]
+    }
+  ],
+  "pipelineSteps": [
+    {
+      "id": "source-manifest",
+      "label": "Source Manifest",
+      "goal": "Register lawful target sources and classify them as scoring targets, human-review context, secondary validation, or planning-only references.",
+      "currentStatus": "Galaga alien close-ups are ingested and classified; general sprite sheet is the strongest current static target candidate; a segmented alien motion/pulse video is now registered as a target-validation and temporal-reference source.",
+      "nextAction": "Keep source authority explicit when new sprite sheets, gameplay clips, posters, or manual screenshots enter the project."
+    },
+    {
+      "id": "crop-box-manifest",
+      "label": "Crop-Box Manifest",
+      "goal": "Define bounding boxes for player, bee, butterfly, boss, captured fighter, projectiles, tractor beam, explosions, challenge aliens, and each important pose frame.",
+      "currentStatus": "First-pass region manifest exists at reference-artifacts/ingestion/galaga-alien-visual-reference/crop-box-manifest-0.1.json, generated review previews exist at reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json, and per-role/per-pose target crops now exist at reference-artifacts/analyses/galaga-alien-target-crops/latest.json. Human review found polluted crop evidence for the original boss/bee/butterfly target rows, so the library now separates trusted cleaned motion-reference crops from provisional source-sheet cells and records that decision in reference-artifacts/analyses/galaga-target-evidence-audit/latest.json.",
+      "nextAction": "Regenerate runtime-vs-target scoring against the trusted boss, bee, and butterfly crops, then promote clean player-fighter and temporal pulse-pair targets before making additional runtime sprite changes."
+    },
+    {
+      "id": "pose-and-motion-targets",
+      "label": "Pose And Motion Targets",
+      "goal": "Group static crops into temporal identities: flap cycles, dive turns, boss damage, capture/rescue, dual fighter, projectiles, and explosions.",
+      "currentStatus": "Static model and runtime crop scoring exist, and a 33-crop/7-role promoted target library now supplies multi-pose static targets. Primary Boss/Bee/Butterfly/Fighter crops are trusted cleaned motion-reference targets; remaining source-sheet cells are provisional until recropped or replaced by temporal windows. Seed runtime windows now cover all four planned motion axes: flap phase pairs, full flap cadence, dive/rotation poses, capture/carry/dual transitions, and first-pass impact/explosion event crops. A segmented alien motion/pulse video now provides cleaner human-readable pulse/cadence evidence for Boss, Butterfly, Bee, specialty aliens, Fighter, and Tractor Beam. Temporal target rows now exist at reference-artifacts/analyses/galaga-alien-temporal-targets/latest.json, with Boss stronger than Bee/Butterfly because the latter still depend on provisional flap cells.",
+      "nextAction": "Replace provisional Bee and Butterfly flap cells with clean frame-timed target windows, then score Aurora runtime cadence against those target sequences."
+    },
+    {
+      "id": "runtime-renderer-path",
+      "label": "Runtime Renderer Path",
+      "goal": "Render sprites through a fixed-buffer, smoothing-free, artifact-driven path that supports target mode and creative theme variants.",
+      "currentStatus": "Current canvas path is DPR-aware and smoothing-free, but sprites are still compact hand-authored patterns and responsive scaling complicates pixel scoring.",
+      "nextAction": "Prototype a sprite atlas/pixel-row renderer behind a development flag before changing normal gameplay."
+    },
+    {
+      "id": "scoring-and-gates",
+      "label": "Scoring And Gates",
+      "goal": "Score static crops, active motion, stage context, player meaning, and shipped-theme originality separately.",
+      "currentStatus": "Runtime static sprite score is 5.75/10 against inferred models while the stricter runtime-vs-promoted-target-crop comparator now reads 4.33/10 after replacing polluted Boss/Bee/Butterfly targets with trusted motion-reference crops. That score decrease is useful: it removes false confidence and exposes the direct visible geometry gap. Impact/explosion feedback has a first-pass static crop comparator at 5.86/10 after adding a target-derived pixel explosion layer. Active sprite motion has seed windows but is not yet target-frame temporal scoring.",
+      "nextAction": "Move direct target sprite score toward 5.5+ before the next beta claim, keep challenge-stage set-piece conformance above 5.0 before claiming a beta conformance lift, and add confidence/resolution plus temporal target scoring."
+    },
+    {
+      "id": "variation-generation",
+      "label": "Variation Generation",
+      "goal": "Use artists, scripts, model-assisted generation, or tools such as agent-sprite-forge to create era-faithful original variants after the target lane is understood.",
+      "currentStatus": "Candidate tooling noted but not adopted; generated assets should be treated as candidates until reviewed, cropped, scored, and committed.",
+      "nextAction": "Evaluate candidate generation tools against the same manifest and scoring shape, not as a replacement for source-grounded targets."
+    },
+    {
+      "id": "developer-controls",
+      "label": "Developer Controls",
+      "goal": "Expose conforming mode, Aurora theme mode, and future-game theme variants through developer settings for visual comparison and evidence capture.",
+      "currentStatus": "Developer graphics/audio settings exist, but no formal sprite-conformance lane toggle exists yet.",
+      "nextAction": "Add a future developer setting for Sprite Mode: Reference Conformance, Aurora Production, and Theme Variant once target packs exist."
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "short-term",
+      "label": "Short Term",
+      "target": "Crop-box manifest exists for the strongest Galaga sprite sheet, and the Application Guide shows target crops beside Aurora runtime crops."
+    },
+    {
+      "id": "medium-term",
+      "label": "Medium Term",
+      "target": "Runtime sprite scoring compares multiple poses per role and moves from static-only 6.2/10 toward 7.5+/10 without overstating motion coverage."
+    },
+    {
+      "id": "release-gate",
+      "label": "Release Gate",
+      "target": "Before the next beta conformance claim, strict direct target sprite conformance should be at least 5.5/10 and challenge-stage set-piece conformance should be at least 5.0/10. Before broad public promotion, production theme sprites are original, readable, era-faithful, and backed by conformance-lane evidence plus variation-distance notes."
+    },
+    {
+      "id": "long-term",
+      "label": "Long Term",
+      "target": "The same sprite ingestion, scoring, and variation pipeline can onboard a new Platinum game with minimal bespoke authoring."
+    }
+  ],
+  "artifacts": [
+    {
+      "label": "Alien visual reference report",
+      "path": "GALAGA_ALIEN_VISUAL_REFERENCE.md"
+    },
+    {
+      "label": "Alien visual reference analysis",
+      "path": "reference-artifacts/analyses/galaga-alien-visual-reference/latest.json"
+    },
+    {
+      "label": "Galaga alien visual crop-box manifest",
+      "path": "reference-artifacts/ingestion/galaga-alien-visual-reference/crop-box-manifest-0.1.json"
+    },
+    {
+      "label": "Galaga alien crop preview report",
+      "path": "GALAGA_ALIEN_CROP_PREVIEW.md"
+    },
+    {
+      "label": "Galaga alien crop preview analysis",
+      "path": "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json"
+    },
+    {
+      "label": "Galaga alien target crop report",
+      "path": "GALAGA_ALIEN_TARGET_CROPS.md"
+    },
+    {
+      "label": "Galaga alien target crop analysis",
+      "path": "reference-artifacts/analyses/galaga-alien-target-crops/latest.json"
+    },
+    {
+      "label": "Galaga target evidence audit",
+      "path": "GALAGA_TARGET_EVIDENCE_AUDIT.md"
+    },
+    {
+      "label": "Galaga target evidence audit analysis",
+      "path": "reference-artifacts/analyses/galaga-target-evidence-audit/latest.json"
+    },
+    {
+      "label": "Galaga alien temporal target report",
+      "path": "GALAGA_ALIEN_TEMPORAL_TARGETS.md"
+    },
+    {
+      "label": "Galaga alien temporal target analysis",
+      "path": "reference-artifacts/analyses/galaga-alien-temporal-targets/latest.json"
+    },
+    {
+      "label": "Galaga alien motion reference report",
+      "path": "GALAGA_ALIEN_MOTION_REFERENCE.md"
+    },
+    {
+      "label": "Galaga alien motion reference analysis",
+      "path": "reference-artifacts/analyses/galaga-alien-motion-reference/latest.json"
+    },
+    {
+      "label": "Runtime static sprite conformance",
+      "path": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json"
+    },
+    {
+      "label": "Runtime versus promoted Galaga target crops",
+      "path": "reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json"
+    },
+    {
+      "label": "Runtime impact/explosion conformance",
+      "path": "reference-artifacts/analyses/aurora-impact-explosion-conformance/latest.json"
+    },
+    {
+      "label": "Target artifact coverage",
+      "path": "GALAGA_TARGET_ARTIFACT_COVERAGE.md"
+    }
+  ],
+  "nextBestStep": "Promote a clean player-fighter target-crop, add temporal pulse-pair targets for Boss/Bee/Butterfly, then tune Aurora runtime-vs-target sprite geometry against the corrected target library before the next beta handoff."
+}

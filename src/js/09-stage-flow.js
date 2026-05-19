@@ -105,6 +105,11 @@ function spawnChallenge(){
    : layout.laneTypes;
   const wavePathFamilies=Array.isArray(layout.groupPathFamilies)?layout.groupPathFamilies:null;
   const waveVisualFamilies=Array.isArray(layout.groupVisualFamilies)?layout.groupVisualFamilies:null;
+  const waveSpawnOffsets=Array.isArray(layout.groupSpawnOffsets)?layout.groupSpawnOffsets:null;
+  const waveArcAmps=Array.isArray(layout.groupArcAmps)?layout.groupArcAmps:null;
+  const waveDropAmps=Array.isArray(layout.groupDropAmps)?layout.groupDropAmps:null;
+  const waveSpeedScales=Array.isArray(layout.groupSpeedScales)?layout.groupSpeedScales:null;
+  const waveLowerFieldBiases=Array.isArray(layout.groupLowerFieldBiases)?layout.groupLowerFieldBiases:null;
   const t=waveLaneTypes[lane]||layout.laneTypes[lane]||'bee';
   const side=lane<layout.enemiesPerGroup/2?-1:1,slot=lane%(layout.enemiesPerGroup/2),row=slot<2?0:1;
   const pathFamily=wavePathFamilies?.[wave]||layout.pathFamily||'classic-lane-wave';
@@ -125,9 +130,11 @@ function spawnChallenge(){
    sweep:wave%2?-1:1,
    upperBandY,
    pathFamily,
-   arcAmp:layout.arcAmp||1,
-   dropAmp:layout.dropAmp||1,
-   spawn:baseEntryDelay+wave*layout.waveDelay+slot*layout.slotDelay
+   arcAmp:waveArcAmps?.[wave]||layout.arcAmp||1,
+   dropAmp:waveDropAmps?.[wave]||layout.dropAmp||1,
+   speedScale:waveSpeedScales?.[wave]||layout.speedScale||1,
+   lowerFieldBias:waveLowerFieldBiases?.[wave]??layout.lowerFieldBias??0,
+   spawn:baseEntryDelay+(waveSpawnOffsets?.[wave]??wave*layout.waveDelay)+slot*layout.slotDelay
   }));
  }
  S.ch={hits:0,total,done:0,groups:Array.from({length:layout.groups},()=>0),bonus:0,perfect:0,upperBandY,upperBandTime:0,upperBandSamples:0};

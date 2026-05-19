@@ -127,6 +127,38 @@
       "confidence": "medium"
     },
     {
+      "id": "user-supplied-galaga-alien-closeups",
+      "title": "User-supplied Galaga alien close-up image pack",
+      "sourceType": "local-user-supplied-sprite-and-context-images",
+      "sourceUrls": [],
+      "targetUse": "Close-up static visual grounding for Galaga alien taxonomy, sprite silhouette, player fighter shape, projectile scale, tractor-beam context, and future crop-target promotion.",
+      "coverageAxes": [
+        "sprites",
+        "enemy taxonomy",
+        "player ship",
+        "projectiles",
+        "tractor beam",
+        "screen surfaces",
+        "explosions"
+      ],
+      "ingestionStatus": "partial",
+      "localEvidence": [
+        "reference-artifacts/ingestion/galaga-alien-visual-reference/README.md",
+        "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+        "reference-artifacts/ingestion/galaga-alien-visual-reference/crop-box-manifest-0.1.json",
+        "reference-artifacts/analyses/galaga-alien-visual-reference/latest.json",
+        "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json",
+        "reference-artifacts/analyses/galaga-alien-target-crops/latest.json",
+        "GALAGA_ALIEN_CROP_PREVIEW.md",
+        "GALAGA_ALIEN_TARGET_CROPS.md",
+        "GALAGA_ALIEN_VISUAL_REFERENCE.md"
+      ],
+      "currentUse": "The pack now distinguishes source-sheet crop candidates from fan/product/context images, links the images to role keys, exposes the analysis in the Application Guide alien visual-reference section, includes a first-pass crop-box manifest for the strongest sprite sheet, includes generated crop previews/grid overlays for review, and promotes 32 exact first-pass source-sheet target crops across 7 role sets.",
+      "missingWork": "Compare Aurora live runtime sprite crops against the promoted multi-pose target crop library, add temporal/motion scoring for flap, dive, damage, capture/rescue, tractor beam, projectile, explosion, and challenge-specialty phases, and replace any disputed target cells when better source crops are ingested.",
+      "priority": "critical",
+      "confidence": "medium-high"
+    },
+    {
       "id": "gamesdatabase-galaga-screens-and-rules",
       "title": "GamesDatabase Galaga page",
       "sourceType": "reference-page",

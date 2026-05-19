@@ -111,6 +111,9 @@ for(const stage of REQUIRED_STAGES){
   if(!row.safetyProbe){
     fail(`stage ${stage} is missing the challenge safety probe`, row);
   }
+  if(!row.safetyProbe.noEnemyShots || !row.safetyProbe.noAttackStarts || !row.safetyProbe.noShipLosses){
+    fail(`stage ${stage} violates the challenge-stage no-combat safety guardrail`, row.safetyProbe);
+  }
   const expectedReference = REQUIRED_REFERENCE_HITS.get(stage);
   if(expectedReference){
     const expectedReferences = Array.isArray(expectedReference) ? expectedReference : [expectedReference];

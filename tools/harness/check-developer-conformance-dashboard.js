@@ -20,6 +20,13 @@ function checkGeneratedDashboardPage(){
     'id="refreshState" type="button"',
     'id="gameSelector"',
     'Select game conformance profile',
+    'Artifact release path and freshness',
+    'Release Path',
+    'Release Lane',
+    'Page Updated',
+    'Source Data Updated',
+    'Source Commit',
+    'local-dev/conformance-dashboard.html via http://127.0.0.1:4312',
     'Selected Game',
     'data-tab="cost"',
     'Cost / Value',
@@ -112,6 +119,7 @@ async function checkDashboardViewportFit(){
         clientWidth: document.documentElement.clientWidth,
         bodyScrollWidth: document.body.scrollWidth,
         bodyClientWidth: document.body.clientWidth,
+        provenanceText: document.querySelector('.provenanceStrip')?.textContent || '',
         tabs: [...document.querySelectorAll('[data-tab]')].map(tab => tab.textContent.trim()),
         cards: document.querySelectorAll('.grid .card').length
       }));
@@ -121,6 +129,11 @@ async function checkDashboardViewportFit(){
       if(before.cards < 4) fail('conformance dashboard lost above-fold rollup cards', { viewport, before });
       if(!before.tabs.includes('Cost / Value') || !before.tabs.includes('Ingestion')){
         fail('conformance dashboard lost tabbed drill-down sections', { viewport, before });
+      }
+      for(const expected of ['Release Path', 'Release Lane', 'Page Updated', 'Source Data Updated', 'Source Commit']){
+        if(!before.provenanceText.includes(expected)){
+          fail('conformance dashboard provenance strip is missing expected release-path metadata', { viewport, expected, before });
+        }
       }
 
       await page.click('[data-detail]');

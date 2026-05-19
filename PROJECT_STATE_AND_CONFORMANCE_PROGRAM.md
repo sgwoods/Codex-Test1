@@ -149,7 +149,7 @@ Important interpretation:
 
 | Game | Role | Current conformance posture | Next conformance need |
 | --- | --- | --- | --- |
-| Aurora Galactica | First shipped Platinum application and current active investment target | Strong release-quality baseline with focused gaps in audio identity, dedicated challenge-stage set-piece conformance, regular entry geometry separation, visual reference grounding, boss/formation stage variation, and pressure replay precision | Move toward the next `1.4.0.1` dev/beta candidate with better measured audio feedback, stage-by-stage challenge authorship, late-stage reference labeling, visual/reference comparison, and long-play pressure/reward evidence |
+| Aurora Galactica | First shipped Platinum application and current active investment target | Strong release-quality baseline with focused gaps in audio identity, dedicated challenge-stage set-piece conformance, regular entry geometry separation, visual reference grounding, boss/formation stage variation, sprite conformance, and pressure replay precision | Move toward the next `1.4.0.1` dev/beta candidate with better measured audio feedback, stage-by-stage challenge authorship, late-stage reference labeling, visual/reference comparison, high-quality sprite target manifests, and long-play pressure/reward evidence |
 | Galaxy Guardians | Second-game preview, branch-level playable-game push, and Galaxian-style ingestion proof | Preview metrics exist, public readiness is intentionally low, live dev/beta still expose a one-level public slice, and the branch now treats deeper repeated-rack/persona work as an internal first-class conformance target with its own plan, longer-surface/persona review layer, and aggregate process gate | Promote source-derived rack timing, dive paths, sprite/cue evidence, score/result identity, later-band fairness, and playtest-weighted scoring through [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md) and [GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md](GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md), but keep public claims tied to the one-level playable slice until deeper stage-band depth is actually surfaced |
 | Future games | Long-term repeatable ingestion target | Not yet active as playable work | Arrive through source manifests, reference windows, event logs, semantic profiles, score targets, and game-owned harnesses before design claims are made |
 
@@ -163,6 +163,9 @@ Platinum helps by providing:
 - local, dev, beta, and production lanes with explicit release identity
 - a stable shell and pack-selection path for comparing games without rewriting
   the host
+- a future sprite-mode surface that can compare reference-conformance lanes,
+  Aurora production themes, and future-game variants without mixing target
+  measurement with shipped creative art
 - shared browser harness utilities and controlled-clock execution
 - a developer conformance dashboard that can be shipped read-only with release
   lanes
@@ -236,6 +239,14 @@ it, study failures, and fold the learning back into the system.
 The standing resource documentation is
 [CONFORMANCE_ECONOMICS.md](CONFORMANCE_ECONOMICS.md).
 
+The standing self-critical work-block review is
+[CONFORMANCE_INVESTMENT_RETROSPECTIVE.md](CONFORMANCE_INVESTMENT_RETROSPECTIVE.md).
+It is generated from challenge-stage history, quality score history, dashboard
+cost context, candidate sweeps, audio artifacts, and application artifact
+scores. Its job is to say plainly where score movement is real, where it is
+mostly measurement progress, and where Aurora is still not moving toward
+human-level conformance quickly enough.
+
 The project currently reads as heavily local-first:
 
 - local CPU/browser harnesses are doing the overwhelming majority of measured
@@ -244,6 +255,9 @@ The project currently reads as heavily local-first:
   and analysis, but is under-instrumented unless we log it manually
 - any serious long-cycle work should be wrapped with `npm run harness:measure`
   so we can compare resource cost against score movement
+- after each large work block, run
+  `npm run harness:analyze:conformance-investment-retrospective` so the public
+  docs and dashboard show the latest self-critical read
 
 The desired pattern is:
 

@@ -690,24 +690,24 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   pathFamily:'first-challenge-peel',
   groups:5,
   enemiesPerGroup:8,
-  upperBandRatio:.47,
-  spawnOffsetX:56,
-  waveSpacingY:12,
+  upperBandRatio:.5,
+  spawnOffsetX:64,
+  waveSpacingY:13,
   rowSpacingY:8,
-  waveDelay:1.46,
-  slotDelay:.16,
-  arcAmp:.78,
-  dropAmp:.68,
+  waveDelay:1.55,
+  slotDelay:.13,
+  arcAmp:1.12,
+  dropAmp:1.02,
   laneTypes:Object.freeze(['bee','bee','bee','bee','but','but','but','but']),
   groupLaneTypes:Object.freeze([
    Object.freeze(['bee','bee','bee','bee','but','but','but','but']),
-   Object.freeze(['but','but','but','but','bee','bee','bee','bee']),
-   Object.freeze(['bee','bee','but','but','but','but','bee','bee']),
-   Object.freeze(['but','bee','bee','but','but','bee','bee','but']),
-   Object.freeze(['bee','but','bee','but','but','bee','but','bee'])
+   Object.freeze(['bee','bee','bee','bee','bee','bee','bee','bee']),
+   Object.freeze(['but','but','but','but','but','but','but','but']),
+   Object.freeze(['bee','but','bee','but','but','bee','but','bee']),
+   Object.freeze(['but','bee','bee','but','but','bee','bee','but'])
   ]),
   groupVisualFamilies:Object.freeze(['classic','classic','classic','classic','classic']),
-  groupPathFamilies:Object.freeze(['first-challenge-peel','first-challenge-peel','first-challenge-peel','first-challenge-peel','first-challenge-peel'])
+  groupPathFamilies:Object.freeze(['first-challenge-peel','classic-column-drop','classic-column-drop','side-hook-return','first-challenge-peel'])
  }),
  Object.freeze({
   fromStage:7,
@@ -715,14 +715,17 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   pathFamily:'cross-sweep',
   groups:5,
   enemiesPerGroup:8,
-  upperBandRatio:.48,
-  spawnOffsetX:50,
+  upperBandRatio:.5,
+  spawnOffsetX:78,
   waveSpacingY:12,
   rowSpacingY:9,
-  waveDelay:1.38,
+  waveDelay:1.28,
   slotDelay:.14,
-  arcAmp:1.22,
-  dropAmp:1.02,
+  arcAmp:1.28,
+  dropAmp:1.14,
+  groupArcAmps:Object.freeze([1.34,1.28,1.46,1.38,1.18]),
+  groupDropAmps:Object.freeze([.86,.94,1.08,1.12,1.02]),
+  groupSpeedScales:Object.freeze([1.34,1.28,1.22,1.18,1.16]),
   laneTypes:Object.freeze(['but','boss','rogue','bee','bee','rogue','boss','but']),
   groupLaneTypes:Object.freeze([
    Object.freeze(['but','boss','rogue','bee','bee','rogue','boss','but']),
@@ -731,8 +734,8 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
    Object.freeze(['rogue','bee','boss','but','but','boss','bee','rogue']),
    Object.freeze(['but','rogue','boss','bee','bee','boss','rogue','but'])
   ]),
-  groupVisualFamilies:Object.freeze(['classic','classic','scorpion','scorpion','stingray']),
-  groupPathFamilies:Object.freeze(['cross-sweep','cross-sweep','hook-arc','cross-sweep','boss-led-loop'])
+  groupVisualFamilies:Object.freeze(['classic','scorpion','scorpion','stingray','stingray']),
+  groupPathFamilies:Object.freeze(['hook-arc','cross-sweep','hook-arc','cross-sweep','boss-led-loop'])
  }),
  Object.freeze({
   fromStage:11,
@@ -748,6 +751,9 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   slotDelay:.12,
   arcAmp:2.08,
   dropAmp:1.02,
+  groupArcAmps:Object.freeze([1.78,1.34,1.52,1.18,1.44]),
+  groupDropAmps:Object.freeze([.9,.98,1.08,1.06,1.12]),
+  groupSpeedScales:Object.freeze([1.24,1.22,1.18,1.14,1.12]),
   laneTypes:Object.freeze(['boss','rogue','but','bee','boss','bee','but','rogue']),
   groupLaneTypes:Object.freeze([
    Object.freeze(['boss','rogue','but','bee','boss','bee','but','rogue']),

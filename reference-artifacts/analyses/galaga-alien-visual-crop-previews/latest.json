@@ -1,0 +1,5255 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "galaga-alien-visual-crop-previews",
+  "generatedAt": "2026-05-18T16:50:10.974Z",
+  "commit": "9e622d8a",
+  "branch": "codex/macbook-conformance-investment-review",
+  "dirty": true,
+  "status": "preview-generated-review-required",
+  "sourceManifest": "reference-artifacts/ingestion/galaga-alien-visual-reference/crop-box-manifest-0.1.json",
+  "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+  "sourceDimensions": {
+    "width": 458,
+    "height": 216
+  },
+  "summary": {
+    "regionCount": 4,
+    "gridCellCount": 197,
+    "interestingCellCount": 187,
+    "targetRoleCount": 7,
+    "persistedInterestingCellCount": 187,
+    "scoredStatus": "unscored-preview-only"
+  },
+  "measurementLimits": [
+    "Region and grid previews are for crop review; they are not promoted canonical sprite targets yet.",
+    "Interesting cells are detected by lit-pixel density and still require human review for exact role and pose assignment.",
+    "All interesting cell boxes are persisted in this artifact so later promotion tools can select exact target crops without re-scanning the source sheet.",
+    "Motion conformance will remain capped until accepted crops are grouped into temporal pose sets."
+  ],
+  "regions": [
+    {
+      "id": "left-primary-sprite-grid",
+      "label": "Primary enemy/player sprite grid",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 0,
+        "y": 0,
+        "width": 144,
+        "height": 216
+      },
+      "previewImage": "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest-previews/left-primary-sprite-grid.png",
+      "gridPreviewImage": "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest-previews/left-primary-sprite-grid-grid.png",
+      "gridHint": {
+        "cellWidth": 16,
+        "cellHeight": 16,
+        "columns": 9,
+        "rows": 13
+      },
+      "expectedContents": [
+        "player fighter and missile poses",
+        "bee/zako-like enemy poses",
+        "butterfly/escort-like enemy poses",
+        "boss and challenge-family small poses",
+        "dive/rotation pose candidates"
+      ],
+      "promotionStatus": "region-only",
+      "litPixels": 7156,
+      "litRatio": 0.23007,
+      "tokenChannels": [
+        "B",
+        "G",
+        "M",
+        "R",
+        "W",
+        "Y"
+      ],
+      "litBox": {
+        "x": 1,
+        "y": 1,
+        "width": 142,
+        "height": 214
+      },
+      "gridCellCount": 117,
+      "interestingCellCount": 108,
+      "interestingCells": [
+        {
+          "cellKey": "left-primary-sprite-grid-r01-c01",
+          "regionId": "left-primary-sprite-grid",
+          "row": 1,
+          "column": 1,
+          "crop": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 109,
+          "litRatio": 0.42578,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 1,
+            "y": 1,
+            "width": 15,
+            "height": 15
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r01-c02",
+          "regionId": "left-primary-sprite-grid",
+          "row": 1,
+          "column": 2,
+          "crop": {
+            "x": 16,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 81,
+          "litRatio": 0.31641,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 1,
+            "width": 16,
+            "height": 15
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r01-c03",
+          "regionId": "left-primary-sprite-grid",
+          "row": 1,
+          "column": 3,
+          "crop": {
+            "x": 32,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 71,
+          "litRatio": 0.27734,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 3,
+            "width": 16,
+            "height": 13
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r01-c04",
+          "regionId": "left-primary-sprite-grid",
+          "row": 1,
+          "column": 4,
+          "crop": {
+            "x": 48,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 60,
+          "litRatio": 0.23438,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 3,
+            "width": 16,
+            "height": 13
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r01-c05",
+          "regionId": "left-primary-sprite-grid",
+          "row": 1,
+          "column": 5,
+          "crop": {
+            "x": 64,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 68,
+          "litRatio": 0.26563,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 2,
+            "width": 16,
+            "height": 14
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r01-c06",
+          "regionId": "left-primary-sprite-grid",
+          "row": 1,
+          "column": 6,
+          "crop": {
+            "x": 80,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 62,
+          "litRatio": 0.24219,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 5,
+            "width": 16,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r01-c07",
+          "regionId": "left-primary-sprite-grid",
+          "row": 1,
+          "column": 7,
+          "crop": {
+            "x": 96,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 86,
+          "litRatio": 0.33594,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 1,
+            "width": 16,
+            "height": 15
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r01-c08",
+          "regionId": "left-primary-sprite-grid",
+          "row": 1,
+          "column": 8,
+          "crop": {
+            "x": 112,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 96,
+          "litRatio": 0.375,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 1,
+            "width": 12,
+            "height": 15
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r02-c01",
+          "regionId": "left-primary-sprite-grid",
+          "row": 2,
+          "column": 1,
+          "crop": {
+            "x": 0,
+            "y": 16,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 99,
+          "litRatio": 0.38672,
+          "tokenChannels": [
+            "B",
+            "R"
+          ],
+          "litBox": {
+            "x": 1,
+            "y": 3,
+            "width": 15,
+            "height": 13
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r02-c02",
+          "regionId": "left-primary-sprite-grid",
+          "row": 2,
+          "column": 2,
+          "crop": {
+            "x": 16,
+            "y": 16,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 75,
+          "litRatio": 0.29297,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r02-c03",
+          "regionId": "left-primary-sprite-grid",
+          "row": 2,
+          "column": 3,
+          "crop": {
+            "x": 32,
+            "y": 16,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 68,
+          "litRatio": 0.26563,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r02-c04",
+          "regionId": "left-primary-sprite-grid",
+          "row": 2,
+          "column": 4,
+          "crop": {
+            "x": 48,
+            "y": 16,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 56,
+          "litRatio": 0.21875,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r02-c05",
+          "regionId": "left-primary-sprite-grid",
+          "row": 2,
+          "column": 5,
+          "crop": {
+            "x": 64,
+            "y": 16,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 65,
+          "litRatio": 0.25391,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r02-c06",
+          "regionId": "left-primary-sprite-grid",
+          "row": 2,
+          "column": 6,
+          "crop": {
+            "x": 80,
+            "y": 16,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 59,
+          "litRatio": 0.23047,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r02-c07",
+          "regionId": "left-primary-sprite-grid",
+          "row": 2,
+          "column": 7,
+          "crop": {
+            "x": 96,
+            "y": 16,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 79,
+          "litRatio": 0.30859,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r02-c08",
+          "regionId": "left-primary-sprite-grid",
+          "row": 2,
+          "column": 8,
+          "crop": {
+            "x": 112,
+            "y": 16,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 81,
+          "litRatio": 0.31641,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r03-c01",
+          "regionId": "left-primary-sprite-grid",
+          "row": 3,
+          "column": 1,
+          "crop": {
+            "x": 0,
+            "y": 32,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 93,
+          "litRatio": 0.36328,
+          "tokenChannels": [
+            "B",
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 1,
+            "y": 0,
+            "width": 15,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r03-c02",
+          "regionId": "left-primary-sprite-grid",
+          "row": 3,
+          "column": 2,
+          "crop": {
+            "x": 16,
+            "y": 32,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 82,
+          "litRatio": 0.32031,
+          "tokenChannels": [
+            "B",
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r03-c03",
+          "regionId": "left-primary-sprite-grid",
+          "row": 3,
+          "column": 3,
+          "crop": {
+            "x": 32,
+            "y": 32,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 73,
+          "litRatio": 0.28516,
+          "tokenChannels": [
+            "B",
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r03-c04",
+          "regionId": "left-primary-sprite-grid",
+          "row": 3,
+          "column": 4,
+          "crop": {
+            "x": 48,
+            "y": 32,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 66,
+          "litRatio": 0.25781,
+          "tokenChannels": [
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r03-c05",
+          "regionId": "left-primary-sprite-grid",
+          "row": 3,
+          "column": 5,
+          "crop": {
+            "x": 64,
+            "y": 32,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 76,
+          "litRatio": 0.29688,
+          "tokenChannels": [
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r03-c06",
+          "regionId": "left-primary-sprite-grid",
+          "row": 3,
+          "column": 6,
+          "crop": {
+            "x": 80,
+            "y": 32,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 64,
+          "litRatio": 0.25,
+          "tokenChannels": [
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r03-c07",
+          "regionId": "left-primary-sprite-grid",
+          "row": 3,
+          "column": 7,
+          "crop": {
+            "x": 96,
+            "y": 32,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 76,
+          "litRatio": 0.29688,
+          "tokenChannels": [
+            "B",
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r03-c08",
+          "regionId": "left-primary-sprite-grid",
+          "row": 3,
+          "column": 8,
+          "crop": {
+            "x": 112,
+            "y": 32,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 104,
+          "litRatio": 0.40625,
+          "tokenChannels": [
+            "B",
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 13,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r03-c09",
+          "regionId": "left-primary-sprite-grid",
+          "row": 3,
+          "column": 9,
+          "crop": {
+            "x": 128,
+            "y": 32,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 81,
+          "litRatio": 0.31641,
+          "tokenChannels": [
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 6,
+            "width": 15,
+            "height": 10
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r04-c01",
+          "regionId": "left-primary-sprite-grid",
+          "row": 4,
+          "column": 1,
+          "crop": {
+            "x": 0,
+            "y": 48,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 105,
+          "litRatio": 0.41016,
+          "tokenChannels": [
+            "B",
+            "G",
+            "M",
+            "R"
+          ],
+          "litBox": {
+            "x": 1,
+            "y": 0,
+            "width": 15,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r04-c02",
+          "regionId": "left-primary-sprite-grid",
+          "row": 4,
+          "column": 2,
+          "crop": {
+            "x": 16,
+            "y": 48,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 81,
+          "litRatio": 0.31641,
+          "tokenChannels": [
+            "B",
+            "G",
+            "M"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r04-c03",
+          "regionId": "left-primary-sprite-grid",
+          "row": 4,
+          "column": 3,
+          "crop": {
+            "x": 32,
+            "y": 48,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 79,
+          "litRatio": 0.30859,
+          "tokenChannels": [
+            "B",
+            "G",
+            "M",
+            "R"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r04-c04",
+          "regionId": "left-primary-sprite-grid",
+          "row": 4,
+          "column": 4,
+          "crop": {
+            "x": 48,
+            "y": 48,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 64,
+          "litRatio": 0.25,
+          "tokenChannels": [
+            "B",
+            "G",
+            "M"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r04-c05",
+          "regionId": "left-primary-sprite-grid",
+          "row": 4,
+          "column": 5,
+          "crop": {
+            "x": 64,
+            "y": 48,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 80,
+          "litRatio": 0.3125,
+          "tokenChannels": [
+            "B",
+            "G",
+            "M",
+            "R"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r04-c06",
+          "regionId": "left-primary-sprite-grid",
+          "row": 4,
+          "column": 6,
+          "crop": {
+            "x": 80,
+            "y": 48,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 50,
+          "litRatio": 0.19531,
+          "tokenChannels": [
+            "B",
+            "G",
+            "M"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r04-c07",
+          "regionId": "left-primary-sprite-grid",
+          "row": 4,
+          "column": 7,
+          "crop": {
+            "x": 96,
+            "y": 48,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 78,
+          "litRatio": 0.30469,
+          "tokenChannels": [
+            "B",
+            "G",
+            "M",
+            "R"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r04-c08",
+          "regionId": "left-primary-sprite-grid",
+          "row": 4,
+          "column": 8,
+          "crop": {
+            "x": 112,
+            "y": 48,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 95,
+          "litRatio": 0.37109,
+          "tokenChannels": [
+            "B",
+            "G",
+            "M",
+            "R"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 13,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r04-c09",
+          "regionId": "left-primary-sprite-grid",
+          "row": 4,
+          "column": 9,
+          "crop": {
+            "x": 128,
+            "y": 48,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 89,
+          "litRatio": 0.34766,
+          "tokenChannels": [
+            "B",
+            "G",
+            "M"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 15,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r05-c01",
+          "regionId": "left-primary-sprite-grid",
+          "row": 5,
+          "column": 1,
+          "crop": {
+            "x": 0,
+            "y": 64,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 90,
+          "litRatio": 0.35156,
+          "tokenChannels": [
+            "B",
+            "M",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 1,
+            "y": 0,
+            "width": 15,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r05-c02",
+          "regionId": "left-primary-sprite-grid",
+          "row": 5,
+          "column": 2,
+          "crop": {
+            "x": 16,
+            "y": 64,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 60,
+          "litRatio": 0.23438,
+          "tokenChannels": [
+            "B",
+            "M",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r05-c03",
+          "regionId": "left-primary-sprite-grid",
+          "row": 5,
+          "column": 3,
+          "crop": {
+            "x": 32,
+            "y": 64,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 59,
+          "litRatio": 0.23047,
+          "tokenChannels": [
+            "B",
+            "M",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r05-c04",
+          "regionId": "left-primary-sprite-grid",
+          "row": 5,
+          "column": 4,
+          "crop": {
+            "x": 48,
+            "y": 64,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 44,
+          "litRatio": 0.17188,
+          "tokenChannels": [
+            "B",
+            "M",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r05-c05",
+          "regionId": "left-primary-sprite-grid",
+          "row": 5,
+          "column": 5,
+          "crop": {
+            "x": 64,
+            "y": 64,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 50,
+          "litRatio": 0.19531,
+          "tokenChannels": [
+            "B",
+            "M",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r05-c06",
+          "regionId": "left-primary-sprite-grid",
+          "row": 5,
+          "column": 6,
+          "crop": {
+            "x": 80,
+            "y": 64,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 41,
+          "litRatio": 0.16016,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r05-c07",
+          "regionId": "left-primary-sprite-grid",
+          "row": 5,
+          "column": 7,
+          "crop": {
+            "x": 96,
+            "y": 64,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 56,
+          "litRatio": 0.21875,
+          "tokenChannels": [
+            "B",
+            "M",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r05-c08",
+          "regionId": "left-primary-sprite-grid",
+          "row": 5,
+          "column": 8,
+          "crop": {
+            "x": 112,
+            "y": 64,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 75,
+          "litRatio": 0.29297,
+          "tokenChannels": [
+            "B",
+            "M",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 13,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r05-c09",
+          "regionId": "left-primary-sprite-grid",
+          "row": 5,
+          "column": 9,
+          "crop": {
+            "x": 128,
+            "y": 64,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 52,
+          "litRatio": 0.20313,
+          "tokenChannels": [
+            "B",
+            "M",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 2,
+            "y": 0,
+            "width": 11,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r06-c01",
+          "regionId": "left-primary-sprite-grid",
+          "row": 6,
+          "column": 1,
+          "crop": {
+            "x": 0,
+            "y": 80,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 71,
+          "litRatio": 0.27734,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 4,
+            "y": 0,
+            "width": 10,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r06-c02",
+          "regionId": "left-primary-sprite-grid",
+          "row": 6,
+          "column": 2,
+          "crop": {
+            "x": 16,
+            "y": 80,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 39,
+          "litRatio": 0.15234,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 5,
+            "y": 0,
+            "width": 11,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r06-c03",
+          "regionId": "left-primary-sprite-grid",
+          "row": 6,
+          "column": 3,
+          "crop": {
+            "x": 32,
+            "y": 80,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 57,
+          "litRatio": 0.22266,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 7,
+            "y": 0,
+            "width": 9,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r06-c04",
+          "regionId": "left-primary-sprite-grid",
+          "row": 6,
+          "column": 4,
+          "crop": {
+            "x": 48,
+            "y": 80,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 45,
+          "litRatio": 0.17578,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r06-c05",
+          "regionId": "left-primary-sprite-grid",
+          "row": 6,
+          "column": 5,
+          "crop": {
+            "x": 64,
+            "y": 80,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 50,
+          "litRatio": 0.19531,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r06-c06",
+          "regionId": "left-primary-sprite-grid",
+          "row": 6,
+          "column": 6,
+          "crop": {
+            "x": 80,
+            "y": 80,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 50,
+          "litRatio": 0.19531,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r06-c07",
+          "regionId": "left-primary-sprite-grid",
+          "row": 6,
+          "column": 7,
+          "crop": {
+            "x": 96,
+            "y": 80,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 46,
+          "litRatio": 0.17969,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r06-c08",
+          "regionId": "left-primary-sprite-grid",
+          "row": 6,
+          "column": 8,
+          "crop": {
+            "x": 112,
+            "y": 80,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 64,
+          "litRatio": 0.25,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r06-c09",
+          "regionId": "left-primary-sprite-grid",
+          "row": 6,
+          "column": 9,
+          "crop": {
+            "x": 128,
+            "y": 80,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 54,
+          "litRatio": 0.21094,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 3,
+            "y": 0,
+            "width": 9,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r07-c01",
+          "regionId": "left-primary-sprite-grid",
+          "row": 7,
+          "column": 1,
+          "crop": {
+            "x": 0,
+            "y": 96,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 62,
+          "litRatio": 0.24219,
+          "tokenChannels": [
+            "B",
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 4,
+            "y": 0,
+            "width": 10,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r07-c02",
+          "regionId": "left-primary-sprite-grid",
+          "row": 7,
+          "column": 2,
+          "crop": {
+            "x": 16,
+            "y": 96,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 62,
+          "litRatio": 0.24219,
+          "tokenChannels": [
+            "B",
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 5,
+            "y": 0,
+            "width": 11,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r07-c03",
+          "regionId": "left-primary-sprite-grid",
+          "row": 7,
+          "column": 3,
+          "crop": {
+            "x": 32,
+            "y": 96,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 61,
+          "litRatio": 0.23828,
+          "tokenChannels": [
+            "B",
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r07-c04",
+          "regionId": "left-primary-sprite-grid",
+          "row": 7,
+          "column": 4,
+          "crop": {
+            "x": 48,
+            "y": 96,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 41,
+          "litRatio": 0.16016,
+          "tokenChannels": [
+            "B",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 10
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r07-c05",
+          "regionId": "left-primary-sprite-grid",
+          "row": 7,
+          "column": 5,
+          "crop": {
+            "x": 64,
+            "y": 96,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 54,
+          "litRatio": 0.21094,
+          "tokenChannels": [
+            "B",
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r07-c06",
+          "regionId": "left-primary-sprite-grid",
+          "row": 7,
+          "column": 6,
+          "crop": {
+            "x": 80,
+            "y": 96,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 37,
+          "litRatio": 0.14453,
+          "tokenChannels": [
+            "B",
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r07-c07",
+          "regionId": "left-primary-sprite-grid",
+          "row": 7,
+          "column": 7,
+          "crop": {
+            "x": 96,
+            "y": 96,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 55,
+          "litRatio": 0.21484,
+          "tokenChannels": [
+            "B",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 9
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r07-c08",
+          "regionId": "left-primary-sprite-grid",
+          "row": 7,
+          "column": 8,
+          "crop": {
+            "x": 112,
+            "y": 96,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 61,
+          "litRatio": 0.23828,
+          "tokenChannels": [
+            "B",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 8
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r07-c09",
+          "regionId": "left-primary-sprite-grid",
+          "row": 7,
+          "column": 9,
+          "crop": {
+            "x": 128,
+            "y": 96,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 52,
+          "litRatio": 0.20313,
+          "tokenChannels": [
+            "B",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 3,
+            "y": 0,
+            "width": 9,
+            "height": 8
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r08-c01",
+          "regionId": "left-primary-sprite-grid",
+          "row": 8,
+          "column": 1,
+          "crop": {
+            "x": 0,
+            "y": 112,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 46,
+          "litRatio": 0.17969,
+          "tokenChannels": [
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 4,
+            "y": 0,
+            "width": 11,
+            "height": 10
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r08-c02",
+          "regionId": "left-primary-sprite-grid",
+          "row": 8,
+          "column": 2,
+          "crop": {
+            "x": 16,
+            "y": 112,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 40,
+          "litRatio": 0.15625,
+          "tokenChannels": [
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 6,
+            "y": 0,
+            "width": 10,
+            "height": 9
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r08-c03",
+          "regionId": "left-primary-sprite-grid",
+          "row": 8,
+          "column": 3,
+          "crop": {
+            "x": 32,
+            "y": 112,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 46,
+          "litRatio": 0.17969,
+          "tokenChannels": [
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r08-c04",
+          "regionId": "left-primary-sprite-grid",
+          "row": 8,
+          "column": 4,
+          "crop": {
+            "x": 48,
+            "y": 112,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 32,
+          "litRatio": 0.125,
+          "tokenChannels": [
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 10
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r08-c05",
+          "regionId": "left-primary-sprite-grid",
+          "row": 8,
+          "column": 5,
+          "crop": {
+            "x": 64,
+            "y": 112,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 36,
+          "litRatio": 0.14063,
+          "tokenChannels": [
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 9
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r08-c06",
+          "regionId": "left-primary-sprite-grid",
+          "row": 8,
+          "column": 6,
+          "crop": {
+            "x": 80,
+            "y": 112,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 37,
+          "litRatio": 0.14453,
+          "tokenChannels": [
+            "G",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r08-c07",
+          "regionId": "left-primary-sprite-grid",
+          "row": 8,
+          "column": 7,
+          "crop": {
+            "x": 96,
+            "y": 112,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 39,
+          "litRatio": 0.15234,
+          "tokenChannels": [
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r08-c08",
+          "regionId": "left-primary-sprite-grid",
+          "row": 8,
+          "column": 8,
+          "crop": {
+            "x": 112,
+            "y": 112,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 46,
+          "litRatio": 0.17969,
+          "tokenChannels": [
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 10,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r09-c01",
+          "regionId": "left-primary-sprite-grid",
+          "row": 9,
+          "column": 1,
+          "crop": {
+            "x": 0,
+            "y": 128,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 64,
+          "litRatio": 0.25,
+          "tokenChannels": [
+            "G",
+            "M",
+            "R"
+          ],
+          "litBox": {
+            "x": 3,
+            "y": 1,
+            "width": 12,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r09-c02",
+          "regionId": "left-primary-sprite-grid",
+          "row": 9,
+          "column": 2,
+          "crop": {
+            "x": 16,
+            "y": 128,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 64,
+          "litRatio": 0.25,
+          "tokenChannels": [
+            "G",
+            "M",
+            "R"
+          ],
+          "litBox": {
+            "x": 5,
+            "y": 2,
+            "width": 11,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r09-c03",
+          "regionId": "left-primary-sprite-grid",
+          "row": 9,
+          "column": 3,
+          "crop": {
+            "x": 32,
+            "y": 128,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 58,
+          "litRatio": 0.22656,
+          "tokenChannels": [
+            "G",
+            "M",
+            "R"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 2,
+            "width": 16,
+            "height": 12
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r09-c04",
+          "regionId": "left-primary-sprite-grid",
+          "row": 9,
+          "column": 4,
+          "crop": {
+            "x": 48,
+            "y": 128,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 56,
+          "litRatio": 0.21875,
+          "tokenChannels": [
+            "G",
+            "M",
+            "R"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 2,
+            "width": 16,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r09-c05",
+          "regionId": "left-primary-sprite-grid",
+          "row": 9,
+          "column": 5,
+          "crop": {
+            "x": 64,
+            "y": 128,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 44,
+          "litRatio": 0.17188,
+          "tokenChannels": [
+            "G",
+            "M",
+            "R"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 2,
+            "width": 16,
+            "height": 12
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r09-c06",
+          "regionId": "left-primary-sprite-grid",
+          "row": 9,
+          "column": 6,
+          "crop": {
+            "x": 80,
+            "y": 128,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 51,
+          "litRatio": 0.19922,
+          "tokenChannels": [
+            "G",
+            "M",
+            "R"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 2,
+            "width": 16,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r09-c07",
+          "regionId": "left-primary-sprite-grid",
+          "row": 9,
+          "column": 7,
+          "crop": {
+            "x": 96,
+            "y": 128,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 56,
+          "litRatio": 0.21875,
+          "tokenChannels": [
+            "G",
+            "M",
+            "R"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 1,
+            "width": 16,
+            "height": 12
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r09-c08",
+          "regionId": "left-primary-sprite-grid",
+          "row": 9,
+          "column": 8,
+          "crop": {
+            "x": 112,
+            "y": 128,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 60,
+          "litRatio": 0.23438,
+          "tokenChannels": [
+            "G",
+            "M",
+            "R"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 1,
+            "width": 10,
+            "height": 12
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r10-c01",
+          "regionId": "left-primary-sprite-grid",
+          "row": 10,
+          "column": 1,
+          "crop": {
+            "x": 0,
+            "y": 144,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 41,
+          "litRatio": 0.16016,
+          "tokenChannels": [
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 4,
+            "y": 4,
+            "width": 11,
+            "height": 9
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r10-c02",
+          "regionId": "left-primary-sprite-grid",
+          "row": 10,
+          "column": 2,
+          "crop": {
+            "x": 16,
+            "y": 144,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 43,
+          "litRatio": 0.16797,
+          "tokenChannels": [
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 6,
+            "y": 5,
+            "width": 10,
+            "height": 9
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r10-c03",
+          "regionId": "left-primary-sprite-grid",
+          "row": 10,
+          "column": 3,
+          "crop": {
+            "x": 32,
+            "y": 144,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 41,
+          "litRatio": 0.16016,
+          "tokenChannels": [
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 5,
+            "width": 16,
+            "height": 8
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r10-c04",
+          "regionId": "left-primary-sprite-grid",
+          "row": 10,
+          "column": 4,
+          "crop": {
+            "x": 48,
+            "y": 144,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 33,
+          "litRatio": 0.12891,
+          "tokenChannels": [
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 6,
+            "width": 16,
+            "height": 7
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r10-c05",
+          "regionId": "left-primary-sprite-grid",
+          "row": 10,
+          "column": 5,
+          "crop": {
+            "x": 64,
+            "y": 144,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 30,
+          "litRatio": 0.11719,
+          "tokenChannels": [
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 5,
+            "width": 16,
+            "height": 9
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r10-c06",
+          "regionId": "left-primary-sprite-grid",
+          "row": 10,
+          "column": 6,
+          "crop": {
+            "x": 80,
+            "y": 144,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 33,
+          "litRatio": 0.12891,
+          "tokenChannels": [
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 5,
+            "width": 16,
+            "height": 10
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r10-c07",
+          "regionId": "left-primary-sprite-grid",
+          "row": 10,
+          "column": 7,
+          "crop": {
+            "x": 96,
+            "y": 144,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 42,
+          "litRatio": 0.16406,
+          "tokenChannels": [
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 4,
+            "width": 8,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r10-c08",
+          "regionId": "left-primary-sprite-grid",
+          "row": 10,
+          "column": 8,
+          "crop": {
+            "x": 112,
+            "y": 144,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 41,
+          "litRatio": 0.16016,
+          "tokenChannels": [
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 4,
+            "width": 9,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r11-c01",
+          "regionId": "left-primary-sprite-grid",
+          "row": 11,
+          "column": 1,
+          "crop": {
+            "x": 0,
+            "y": 160,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 55,
+          "litRatio": 0.21484,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 3,
+            "y": 3,
+            "width": 12,
+            "height": 13
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r11-c02",
+          "regionId": "left-primary-sprite-grid",
+          "row": 11,
+          "column": 2,
+          "crop": {
+            "x": 16,
+            "y": 160,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 52,
+          "litRatio": 0.20313,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 5,
+            "y": 3,
+            "width": 11,
+            "height": 13
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r11-c03",
+          "regionId": "left-primary-sprite-grid",
+          "row": 11,
+          "column": 3,
+          "crop": {
+            "x": 32,
+            "y": 160,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 58,
+          "litRatio": 0.22656,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 3,
+            "width": 16,
+            "height": 13
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r11-c04",
+          "regionId": "left-primary-sprite-grid",
+          "row": 11,
+          "column": 4,
+          "crop": {
+            "x": 48,
+            "y": 160,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 43,
+          "litRatio": 0.16797,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 5,
+            "width": 16,
+            "height": 10
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r11-c05",
+          "regionId": "left-primary-sprite-grid",
+          "row": 11,
+          "column": 5,
+          "crop": {
+            "x": 64,
+            "y": 160,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 48,
+          "litRatio": 0.1875,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 3,
+            "width": 16,
+            "height": 13
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r11-c06",
+          "regionId": "left-primary-sprite-grid",
+          "row": 11,
+          "column": 6,
+          "crop": {
+            "x": 80,
+            "y": 160,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 44,
+          "litRatio": 0.17188,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 4,
+            "width": 16,
+            "height": 12
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r11-c07",
+          "regionId": "left-primary-sprite-grid",
+          "row": 11,
+          "column": 7,
+          "crop": {
+            "x": 96,
+            "y": 160,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 48,
+          "litRatio": 0.1875,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 5,
+            "width": 16,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r11-c08",
+          "regionId": "left-primary-sprite-grid",
+          "row": 11,
+          "column": 8,
+          "crop": {
+            "x": 112,
+            "y": 160,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 51,
+          "litRatio": 0.19922,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 5,
+            "width": 12,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r12-c01",
+          "regionId": "left-primary-sprite-grid",
+          "row": 12,
+          "column": 1,
+          "crop": {
+            "x": 0,
+            "y": 176,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 78,
+          "litRatio": 0.30469,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 1,
+            "y": 0,
+            "width": 15,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r12-c02",
+          "regionId": "left-primary-sprite-grid",
+          "row": 12,
+          "column": 2,
+          "crop": {
+            "x": 16,
+            "y": 176,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 74,
+          "litRatio": 0.28906,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r12-c03",
+          "regionId": "left-primary-sprite-grid",
+          "row": 12,
+          "column": 3,
+          "crop": {
+            "x": 32,
+            "y": 176,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 51,
+          "litRatio": 0.19922,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 7,
+            "width": 16,
+            "height": 9
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r12-c04",
+          "regionId": "left-primary-sprite-grid",
+          "row": 12,
+          "column": 4,
+          "crop": {
+            "x": 48,
+            "y": 176,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 69,
+          "litRatio": 0.26953,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 6,
+            "width": 16,
+            "height": 10
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r12-c05",
+          "regionId": "left-primary-sprite-grid",
+          "row": 12,
+          "column": 5,
+          "crop": {
+            "x": 64,
+            "y": 176,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 54,
+          "litRatio": 0.21094,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 7,
+            "width": 16,
+            "height": 9
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r12-c06",
+          "regionId": "left-primary-sprite-grid",
+          "row": 12,
+          "column": 6,
+          "crop": {
+            "x": 80,
+            "y": 176,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 59,
+          "litRatio": 0.23047,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 6,
+            "width": 16,
+            "height": 10
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r12-c07",
+          "regionId": "left-primary-sprite-grid",
+          "row": 12,
+          "column": 7,
+          "crop": {
+            "x": 96,
+            "y": 176,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 62,
+          "litRatio": 0.24219,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 11,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r13-c01",
+          "regionId": "left-primary-sprite-grid",
+          "row": 13,
+          "column": 1,
+          "crop": {
+            "x": 0,
+            "y": 192,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 111,
+          "litRatio": 0.43359,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 1,
+            "y": 0,
+            "width": 15,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r13-c02",
+          "regionId": "left-primary-sprite-grid",
+          "row": 13,
+          "column": 2,
+          "crop": {
+            "x": 16,
+            "y": 192,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 108,
+          "litRatio": 0.42188,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r13-c03",
+          "regionId": "left-primary-sprite-grid",
+          "row": 13,
+          "column": 3,
+          "crop": {
+            "x": 32,
+            "y": 192,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 95,
+          "litRatio": 0.37109,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r13-c04",
+          "regionId": "left-primary-sprite-grid",
+          "row": 13,
+          "column": 4,
+          "crop": {
+            "x": 48,
+            "y": 192,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 106,
+          "litRatio": 0.41406,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r13-c05",
+          "regionId": "left-primary-sprite-grid",
+          "row": 13,
+          "column": 5,
+          "crop": {
+            "x": 64,
+            "y": 192,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 100,
+          "litRatio": 0.39063,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r13-c06",
+          "regionId": "left-primary-sprite-grid",
+          "row": 13,
+          "column": 6,
+          "crop": {
+            "x": 80,
+            "y": 192,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 81,
+          "litRatio": 0.31641,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r13-c07",
+          "regionId": "left-primary-sprite-grid",
+          "row": 13,
+          "column": 7,
+          "crop": {
+            "x": 96,
+            "y": 192,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 66,
+          "litRatio": 0.25781,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "left-primary-sprite-grid-r13-c08",
+          "regionId": "left-primary-sprite-grid",
+          "row": 13,
+          "column": 8,
+          "crop": {
+            "x": 112,
+            "y": 192,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 74,
+          "litRatio": 0.28906,
+          "tokenChannels": [
+            "B",
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 7,
+            "width": 11,
+            "height": 9
+          }
+        }
+      ],
+      "nextReview": "Review grid overlay, then promote exact role/pose cells into target crops."
+    },
+    {
+      "id": "center-alien-pose-grid",
+      "label": "Alternate alien pose and color grid",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 145,
+        "y": 48,
+        "width": 138,
+        "height": 160
+      },
+      "previewImage": "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest-previews/center-alien-pose-grid.png",
+      "gridPreviewImage": "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest-previews/center-alien-pose-grid-grid.png",
+      "gridHint": {
+        "cellWidth": 16,
+        "cellHeight": 16,
+        "columns": 8,
+        "rows": 10
+      },
+      "expectedContents": [
+        "bee/zako role variants",
+        "butterfly role variants",
+        "boss role variants",
+        "challenge-stage alien families",
+        "flap and color phase candidates"
+      ],
+      "promotionStatus": "region-only",
+      "litPixels": 4551,
+      "litRatio": 0.20611,
+      "tokenChannels": [
+        "G",
+        "M",
+        "R",
+        "W",
+        "Y"
+      ],
+      "litBox": {
+        "x": 0,
+        "y": 0,
+        "width": 138,
+        "height": 160
+      },
+      "gridCellCount": 80,
+      "interestingCellCount": 79,
+      "interestingCells": [
+        {
+          "cellKey": "center-alien-pose-grid-r01-c01",
+          "regionId": "center-alien-pose-grid",
+          "row": 1,
+          "column": 1,
+          "crop": {
+            "x": 145,
+            "y": 48,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 90,
+          "litRatio": 0.35156,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 2,
+            "y": 0,
+            "width": 14,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r01-c02",
+          "regionId": "center-alien-pose-grid",
+          "row": 1,
+          "column": 2,
+          "crop": {
+            "x": 161,
+            "y": 48,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 64,
+          "litRatio": 0.25,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 6,
+            "y": 0,
+            "width": 10,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r01-c03",
+          "regionId": "center-alien-pose-grid",
+          "row": 1,
+          "column": 3,
+          "crop": {
+            "x": 177,
+            "y": 48,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 65,
+          "litRatio": 0.25391,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 7,
+            "y": 0,
+            "width": 9,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r01-c04",
+          "regionId": "center-alien-pose-grid",
+          "row": 1,
+          "column": 4,
+          "crop": {
+            "x": 193,
+            "y": 48,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 51,
+          "litRatio": 0.19922,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r01-c05",
+          "regionId": "center-alien-pose-grid",
+          "row": 1,
+          "column": 5,
+          "crop": {
+            "x": 209,
+            "y": 48,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 52,
+          "litRatio": 0.20313,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r01-c06",
+          "regionId": "center-alien-pose-grid",
+          "row": 1,
+          "column": 6,
+          "crop": {
+            "x": 225,
+            "y": 48,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 47,
+          "litRatio": 0.18359,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r01-c07",
+          "regionId": "center-alien-pose-grid",
+          "row": 1,
+          "column": 7,
+          "crop": {
+            "x": 241,
+            "y": 48,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 58,
+          "litRatio": 0.22656,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r01-c08",
+          "regionId": "center-alien-pose-grid",
+          "row": 1,
+          "column": 8,
+          "crop": {
+            "x": 257,
+            "y": 48,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 69,
+          "litRatio": 0.26953,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r02-c01",
+          "regionId": "center-alien-pose-grid",
+          "row": 2,
+          "column": 1,
+          "crop": {
+            "x": 145,
+            "y": 64,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 65,
+          "litRatio": 0.25391,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 3,
+            "y": 0,
+            "width": 10,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r02-c02",
+          "regionId": "center-alien-pose-grid",
+          "row": 2,
+          "column": 2,
+          "crop": {
+            "x": 161,
+            "y": 64,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 41,
+          "litRatio": 0.16016,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 4,
+            "y": 0,
+            "width": 12,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r02-c03",
+          "regionId": "center-alien-pose-grid",
+          "row": 2,
+          "column": 3,
+          "crop": {
+            "x": 177,
+            "y": 64,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 65,
+          "litRatio": 0.25391,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 6,
+            "y": 0,
+            "width": 10,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r02-c04",
+          "regionId": "center-alien-pose-grid",
+          "row": 2,
+          "column": 4,
+          "crop": {
+            "x": 193,
+            "y": 64,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 43,
+          "litRatio": 0.16797,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r02-c05",
+          "regionId": "center-alien-pose-grid",
+          "row": 2,
+          "column": 5,
+          "crop": {
+            "x": 209,
+            "y": 64,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 49,
+          "litRatio": 0.19141,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r02-c06",
+          "regionId": "center-alien-pose-grid",
+          "row": 2,
+          "column": 6,
+          "crop": {
+            "x": 225,
+            "y": 64,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 46,
+          "litRatio": 0.17969,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r02-c07",
+          "regionId": "center-alien-pose-grid",
+          "row": 2,
+          "column": 7,
+          "crop": {
+            "x": 241,
+            "y": 64,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 43,
+          "litRatio": 0.16797,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r02-c08",
+          "regionId": "center-alien-pose-grid",
+          "row": 2,
+          "column": 8,
+          "crop": {
+            "x": 257,
+            "y": 64,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 52,
+          "litRatio": 0.20313,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 11,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r03-c01",
+          "regionId": "center-alien-pose-grid",
+          "row": 3,
+          "column": 1,
+          "crop": {
+            "x": 145,
+            "y": 80,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 60,
+          "litRatio": 0.23438,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 3,
+            "y": 0,
+            "width": 10,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r03-c02",
+          "regionId": "center-alien-pose-grid",
+          "row": 3,
+          "column": 2,
+          "crop": {
+            "x": 161,
+            "y": 80,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 53,
+          "litRatio": 0.20703,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 4,
+            "y": 0,
+            "width": 12,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r03-c03",
+          "regionId": "center-alien-pose-grid",
+          "row": 3,
+          "column": 3,
+          "crop": {
+            "x": 177,
+            "y": 80,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 51,
+          "litRatio": 0.19922,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 5,
+            "y": 0,
+            "width": 10,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r03-c04",
+          "regionId": "center-alien-pose-grid",
+          "row": 3,
+          "column": 4,
+          "crop": {
+            "x": 193,
+            "y": 80,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 41,
+          "litRatio": 0.16016,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 8,
+            "y": 0,
+            "width": 8,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r03-c05",
+          "regionId": "center-alien-pose-grid",
+          "row": 3,
+          "column": 5,
+          "crop": {
+            "x": 209,
+            "y": 80,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 41,
+          "litRatio": 0.16016,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r03-c06",
+          "regionId": "center-alien-pose-grid",
+          "row": 3,
+          "column": 6,
+          "crop": {
+            "x": 225,
+            "y": 80,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 30,
+          "litRatio": 0.11719,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r03-c07",
+          "regionId": "center-alien-pose-grid",
+          "row": 3,
+          "column": 7,
+          "crop": {
+            "x": 241,
+            "y": 80,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 49,
+          "litRatio": 0.19141,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r03-c08",
+          "regionId": "center-alien-pose-grid",
+          "row": 3,
+          "column": 8,
+          "crop": {
+            "x": 257,
+            "y": 80,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 52,
+          "litRatio": 0.20313,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 11,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r04-c01",
+          "regionId": "center-alien-pose-grid",
+          "row": 4,
+          "column": 1,
+          "crop": {
+            "x": 145,
+            "y": 96,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 42,
+          "litRatio": 0.16406,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 3,
+            "y": 0,
+            "width": 11,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r04-c02",
+          "regionId": "center-alien-pose-grid",
+          "row": 4,
+          "column": 2,
+          "crop": {
+            "x": 161,
+            "y": 96,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 35,
+          "litRatio": 0.13672,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 5,
+            "y": 0,
+            "width": 11,
+            "height": 7
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r04-c03",
+          "regionId": "center-alien-pose-grid",
+          "row": 4,
+          "column": 3,
+          "crop": {
+            "x": 177,
+            "y": 96,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 39,
+          "litRatio": 0.15234,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 9
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r04-c04",
+          "regionId": "center-alien-pose-grid",
+          "row": 4,
+          "column": 4,
+          "crop": {
+            "x": 193,
+            "y": 96,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 30,
+          "litRatio": 0.11719,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 8,
+            "y": 0,
+            "width": 8,
+            "height": 6
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r04-c05",
+          "regionId": "center-alien-pose-grid",
+          "row": 4,
+          "column": 5,
+          "crop": {
+            "x": 209,
+            "y": 96,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 29,
+          "litRatio": 0.11328,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 7
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r04-c06",
+          "regionId": "center-alien-pose-grid",
+          "row": 4,
+          "column": 6,
+          "crop": {
+            "x": 225,
+            "y": 96,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 29,
+          "litRatio": 0.11328,
+          "tokenChannels": [
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 9
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r04-c07",
+          "regionId": "center-alien-pose-grid",
+          "row": 4,
+          "column": 7,
+          "crop": {
+            "x": 241,
+            "y": 96,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 33,
+          "litRatio": 0.12891,
+          "tokenChannels": [
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r04-c08",
+          "regionId": "center-alien-pose-grid",
+          "row": 4,
+          "column": 8,
+          "crop": {
+            "x": 257,
+            "y": 96,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 36,
+          "litRatio": 0.14063,
+          "tokenChannels": [
+            "R",
+            "W"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 9,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r05-c01",
+          "regionId": "center-alien-pose-grid",
+          "row": 5,
+          "column": 1,
+          "crop": {
+            "x": 145,
+            "y": 112,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 60,
+          "litRatio": 0.23438,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 2,
+            "y": 0,
+            "width": 12,
+            "height": 10
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r05-c02",
+          "regionId": "center-alien-pose-grid",
+          "row": 5,
+          "column": 2,
+          "crop": {
+            "x": 161,
+            "y": 112,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 66,
+          "litRatio": 0.25781,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 4,
+            "y": 0,
+            "width": 12,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r05-c03",
+          "regionId": "center-alien-pose-grid",
+          "row": 5,
+          "column": 3,
+          "crop": {
+            "x": 177,
+            "y": 112,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 59,
+          "litRatio": 0.23047,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 7,
+            "y": 0,
+            "width": 9,
+            "height": 12
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r05-c04",
+          "regionId": "center-alien-pose-grid",
+          "row": 5,
+          "column": 4,
+          "crop": {
+            "x": 193,
+            "y": 112,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 59,
+          "litRatio": 0.23047,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r05-c05",
+          "regionId": "center-alien-pose-grid",
+          "row": 5,
+          "column": 5,
+          "crop": {
+            "x": 209,
+            "y": 112,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 46,
+          "litRatio": 0.17969,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 12
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r05-c06",
+          "regionId": "center-alien-pose-grid",
+          "row": 5,
+          "column": 6,
+          "crop": {
+            "x": 225,
+            "y": 112,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 50,
+          "litRatio": 0.19531,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 1,
+            "width": 16,
+            "height": 10
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r05-c07",
+          "regionId": "center-alien-pose-grid",
+          "row": 5,
+          "column": 7,
+          "crop": {
+            "x": 241,
+            "y": 112,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 52,
+          "litRatio": 0.20313,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r05-c08",
+          "regionId": "center-alien-pose-grid",
+          "row": 5,
+          "column": 8,
+          "crop": {
+            "x": 257,
+            "y": 112,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 55,
+          "litRatio": 0.21484,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 9,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r06-c01",
+          "regionId": "center-alien-pose-grid",
+          "row": 6,
+          "column": 1,
+          "crop": {
+            "x": 145,
+            "y": 128,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 63,
+          "litRatio": 0.24609,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 3,
+            "y": 1,
+            "width": 11,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r06-c02",
+          "regionId": "center-alien-pose-grid",
+          "row": 6,
+          "column": 2,
+          "crop": {
+            "x": 161,
+            "y": 128,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 66,
+          "litRatio": 0.25781,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 5,
+            "y": 1,
+            "width": 11,
+            "height": 12
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r06-c03",
+          "regionId": "center-alien-pose-grid",
+          "row": 6,
+          "column": 3,
+          "crop": {
+            "x": 177,
+            "y": 128,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 62,
+          "litRatio": 0.24219,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 6,
+            "y": 1,
+            "width": 10,
+            "height": 12
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r06-c04",
+          "regionId": "center-alien-pose-grid",
+          "row": 6,
+          "column": 4,
+          "crop": {
+            "x": 193,
+            "y": 128,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 51,
+          "litRatio": 0.19922,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 1,
+            "width": 16,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r06-c05",
+          "regionId": "center-alien-pose-grid",
+          "row": 6,
+          "column": 5,
+          "crop": {
+            "x": 209,
+            "y": 128,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 53,
+          "litRatio": 0.20703,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 1,
+            "width": 16,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r06-c06",
+          "regionId": "center-alien-pose-grid",
+          "row": 6,
+          "column": 6,
+          "crop": {
+            "x": 225,
+            "y": 128,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 50,
+          "litRatio": 0.19531,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 1,
+            "width": 16,
+            "height": 12
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r06-c07",
+          "regionId": "center-alien-pose-grid",
+          "row": 6,
+          "column": 7,
+          "crop": {
+            "x": 241,
+            "y": 128,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 61,
+          "litRatio": 0.23828,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 2,
+            "width": 16,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r06-c08",
+          "regionId": "center-alien-pose-grid",
+          "row": 6,
+          "column": 8,
+          "crop": {
+            "x": 257,
+            "y": 128,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 54,
+          "litRatio": 0.21094,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 2,
+            "width": 9,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r07-c01",
+          "regionId": "center-alien-pose-grid",
+          "row": 7,
+          "column": 1,
+          "crop": {
+            "x": 145,
+            "y": 144,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 59,
+          "litRatio": 0.23047,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 2,
+            "y": 1,
+            "width": 12,
+            "height": 15
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r07-c02",
+          "regionId": "center-alien-pose-grid",
+          "row": 7,
+          "column": 2,
+          "crop": {
+            "x": 161,
+            "y": 144,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 57,
+          "litRatio": 0.22266,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 4,
+            "y": 1,
+            "width": 12,
+            "height": 14
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r07-c03",
+          "regionId": "center-alien-pose-grid",
+          "row": 7,
+          "column": 3,
+          "crop": {
+            "x": 177,
+            "y": 144,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 58,
+          "litRatio": 0.22656,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 5,
+            "y": 1,
+            "width": 11,
+            "height": 13
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r07-c04",
+          "regionId": "center-alien-pose-grid",
+          "row": 7,
+          "column": 4,
+          "crop": {
+            "x": 193,
+            "y": 144,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 49,
+          "litRatio": 0.19141,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 2,
+            "width": 16,
+            "height": 11
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r07-c05",
+          "regionId": "center-alien-pose-grid",
+          "row": 7,
+          "column": 5,
+          "crop": {
+            "x": 209,
+            "y": 144,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 44,
+          "litRatio": 0.17188,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 1,
+            "width": 16,
+            "height": 13
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r07-c06",
+          "regionId": "center-alien-pose-grid",
+          "row": 7,
+          "column": 6,
+          "crop": {
+            "x": 225,
+            "y": 144,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 47,
+          "litRatio": 0.18359,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 2,
+            "width": 16,
+            "height": 12
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r07-c07",
+          "regionId": "center-alien-pose-grid",
+          "row": 7,
+          "column": 7,
+          "crop": {
+            "x": 241,
+            "y": 144,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 47,
+          "litRatio": 0.18359,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 3,
+            "width": 16,
+            "height": 12
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r07-c08",
+          "regionId": "center-alien-pose-grid",
+          "row": 7,
+          "column": 8,
+          "crop": {
+            "x": 257,
+            "y": 144,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 48,
+          "litRatio": 0.1875,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 3,
+            "width": 11,
+            "height": 12
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r08-c01",
+          "regionId": "center-alien-pose-grid",
+          "row": 8,
+          "column": 1,
+          "crop": {
+            "x": 145,
+            "y": 160,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 128,
+          "litRatio": 0.5,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 4,
+            "width": 16,
+            "height": 12
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r08-c02",
+          "regionId": "center-alien-pose-grid",
+          "row": 8,
+          "column": 2,
+          "crop": {
+            "x": 161,
+            "y": 160,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 114,
+          "litRatio": 0.44531,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 2,
+            "y": 4,
+            "width": 14,
+            "height": 12
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r08-c03",
+          "regionId": "center-alien-pose-grid",
+          "row": 8,
+          "column": 3,
+          "crop": {
+            "x": 177,
+            "y": 160,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 115,
+          "litRatio": 0.44922,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 3,
+            "width": 16,
+            "height": 13
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r08-c04",
+          "regionId": "center-alien-pose-grid",
+          "row": 8,
+          "column": 4,
+          "crop": {
+            "x": 193,
+            "y": 160,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 122,
+          "litRatio": 0.47656,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 3,
+            "width": 16,
+            "height": 13
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r08-c05",
+          "regionId": "center-alien-pose-grid",
+          "row": 8,
+          "column": 5,
+          "crop": {
+            "x": 209,
+            "y": 160,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 113,
+          "litRatio": 0.44141,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 3,
+            "width": 16,
+            "height": 13
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r08-c06",
+          "regionId": "center-alien-pose-grid",
+          "row": 8,
+          "column": 6,
+          "crop": {
+            "x": 225,
+            "y": 160,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 94,
+          "litRatio": 0.36719,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 3,
+            "width": 16,
+            "height": 13
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r08-c07",
+          "regionId": "center-alien-pose-grid",
+          "row": 8,
+          "column": 7,
+          "crop": {
+            "x": 241,
+            "y": 160,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 97,
+          "litRatio": 0.37891,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 3,
+            "width": 16,
+            "height": 13
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r08-c08",
+          "regionId": "center-alien-pose-grid",
+          "row": 8,
+          "column": 8,
+          "crop": {
+            "x": 257,
+            "y": 160,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 100,
+          "litRatio": 0.39063,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 3,
+            "width": 10,
+            "height": 13
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r09-c01",
+          "regionId": "center-alien-pose-grid",
+          "row": 9,
+          "column": 1,
+          "crop": {
+            "x": 145,
+            "y": 176,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 66,
+          "litRatio": 0.25781,
+          "tokenChannels": [
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 2,
+            "y": 0,
+            "width": 13,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r09-c02",
+          "regionId": "center-alien-pose-grid",
+          "row": 9,
+          "column": 2,
+          "crop": {
+            "x": 161,
+            "y": 176,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 62,
+          "litRatio": 0.24219,
+          "tokenChannels": [
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 6,
+            "y": 0,
+            "width": 9,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r09-c03",
+          "regionId": "center-alien-pose-grid",
+          "row": 9,
+          "column": 3,
+          "crop": {
+            "x": 177,
+            "y": 176,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 59,
+          "litRatio": 0.23047,
+          "tokenChannels": [
+            "G",
+            "M",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 6,
+            "y": 0,
+            "width": 10,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r09-c04",
+          "regionId": "center-alien-pose-grid",
+          "row": 9,
+          "column": 4,
+          "crop": {
+            "x": 193,
+            "y": 176,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 52,
+          "litRatio": 0.20313,
+          "tokenChannels": [
+            "G",
+            "M",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r09-c05",
+          "regionId": "center-alien-pose-grid",
+          "row": 9,
+          "column": 5,
+          "crop": {
+            "x": 209,
+            "y": 176,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 36,
+          "litRatio": 0.14063,
+          "tokenChannels": [
+            "G",
+            "M",
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r09-c06",
+          "regionId": "center-alien-pose-grid",
+          "row": 9,
+          "column": 6,
+          "crop": {
+            "x": 225,
+            "y": 176,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 30,
+          "litRatio": 0.11719,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 14,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r09-c07",
+          "regionId": "center-alien-pose-grid",
+          "row": 9,
+          "column": 7,
+          "crop": {
+            "x": 241,
+            "y": 176,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 40,
+          "litRatio": 0.15625,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 15,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r09-c08",
+          "regionId": "center-alien-pose-grid",
+          "row": 9,
+          "column": 8,
+          "crop": {
+            "x": 257,
+            "y": 176,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 13,
+          "litRatio": 0.05078,
+          "tokenChannels": [
+            "R",
+            "W",
+            "Y"
+          ],
+          "litBox": {
+            "x": 1,
+            "y": 0,
+            "width": 9,
+            "height": 3
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r10-c01",
+          "regionId": "center-alien-pose-grid",
+          "row": 10,
+          "column": 1,
+          "crop": {
+            "x": 145,
+            "y": 192,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 70,
+          "litRatio": 0.27344,
+          "tokenChannels": [
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 2,
+            "y": 0,
+            "width": 13,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r10-c02",
+          "regionId": "center-alien-pose-grid",
+          "row": 10,
+          "column": 2,
+          "crop": {
+            "x": 161,
+            "y": 192,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 46,
+          "litRatio": 0.17969,
+          "tokenChannels": [
+            "G",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 6,
+            "y": 0,
+            "width": 9,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r10-c03",
+          "regionId": "center-alien-pose-grid",
+          "row": 10,
+          "column": 3,
+          "crop": {
+            "x": 177,
+            "y": 192,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 51,
+          "litRatio": 0.19922,
+          "tokenChannels": [
+            "G",
+            "M",
+            "R"
+          ],
+          "litBox": {
+            "x": 6,
+            "y": 0,
+            "width": 10,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r10-c04",
+          "regionId": "center-alien-pose-grid",
+          "row": 10,
+          "column": 4,
+          "crop": {
+            "x": 193,
+            "y": 192,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 51,
+          "litRatio": 0.19922,
+          "tokenChannels": [
+            "G",
+            "M",
+            "R"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r10-c05",
+          "regionId": "center-alien-pose-grid",
+          "row": 10,
+          "column": 5,
+          "crop": {
+            "x": 209,
+            "y": 192,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 37,
+          "litRatio": 0.14453,
+          "tokenChannels": [
+            "G",
+            "M",
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r10-c06",
+          "regionId": "center-alien-pose-grid",
+          "row": 10,
+          "column": 6,
+          "crop": {
+            "x": 225,
+            "y": 192,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 34,
+          "litRatio": 0.13281,
+          "tokenChannels": [
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 16,
+            "height": 16
+          }
+        },
+        {
+          "cellKey": "center-alien-pose-grid-r10-c07",
+          "regionId": "center-alien-pose-grid",
+          "row": 10,
+          "column": 7,
+          "crop": {
+            "x": 241,
+            "y": 192,
+            "width": 16,
+            "height": 16
+          },
+          "interesting": true,
+          "litPixels": 27,
+          "litRatio": 0.10547,
+          "tokenChannels": [
+            "R",
+            "Y"
+          ],
+          "litBox": {
+            "x": 0,
+            "y": 0,
+            "width": 7,
+            "height": 16
+          }
+        }
+      ],
+      "nextReview": "Review grid overlay, then promote exact role/pose cells into target crops."
+    },
+    {
+      "id": "top-effects-and-capture-icons",
+      "label": "Top effects and capture icons",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 145,
+        "y": 0,
+        "width": 142,
+        "height": 48
+      },
+      "previewImage": "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest-previews/top-effects-and-capture-icons.png",
+      "gridPreviewImage": "",
+      "gridHint": null,
+      "expectedContents": [
+        "capture/bonus iconography",
+        "explosion and particle candidates",
+        "high-value effect references"
+      ],
+      "promotionStatus": "region-only",
+      "litPixels": 2329,
+      "litRatio": 0.3417,
+      "tokenChannels": [
+        "G",
+        "R",
+        "W",
+        "Y"
+      ],
+      "litBox": {
+        "x": 0,
+        "y": 1,
+        "width": 142,
+        "height": 47
+      },
+      "gridCellCount": 0,
+      "interestingCellCount": 0,
+      "interestingCells": [],
+      "nextReview": "Review region contents and add exact crop boxes for effects or beam phases."
+    },
+    {
+      "id": "right-tractor-beam-and-scoring",
+      "label": "Tractor beam, projectiles, scoring, and emblems",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 288,
+        "y": 0,
+        "width": 170,
+        "height": 216
+      },
+      "previewImage": "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest-previews/right-tractor-beam-and-scoring.png",
+      "gridPreviewImage": "",
+      "gridHint": null,
+      "expectedContents": [
+        "tractor beam animation bands",
+        "projectile and shot pixels",
+        "score badges and small result symbols",
+        "spare ship and flag-like UI icons"
+      ],
+      "promotionStatus": "region-only",
+      "litPixels": 5294,
+      "litRatio": 0.14417,
+      "tokenChannels": [
+        "B",
+        "G",
+        "R",
+        "W",
+        "Y"
+      ],
+      "litBox": {
+        "x": 1,
+        "y": 1,
+        "width": 168,
+        "height": 214
+      },
+      "gridCellCount": 0,
+      "interestingCellCount": 0,
+      "interestingCells": [],
+      "nextReview": "Review region contents and add exact crop boxes for effects or beam phases."
+    }
+  ],
+  "targetRolePlan": [
+    {
+      "roleKey": "player-fighter",
+      "requiredPoses": [
+        "single-ship-front",
+        "dual-fighter",
+        "captured-or-carried-fighter",
+        "ship-loss-fragment-or-explosion-context"
+      ],
+      "candidateRegions": [
+        "left-primary-sprite-grid"
+      ],
+      "currentRuntimeTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-player-fighter.png",
+      "nextAction": "Promote exact player-fighter cells and compare against the existing source-frame target.",
+      "candidateRegionPreviewImages": [
+        "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest-previews/left-primary-sprite-grid-grid.png"
+      ],
+      "candidateRegionCount": 1,
+      "candidateCellCount": 117,
+      "interestingCellCount": 108,
+      "promotionStatus": "preview-generated-review-required"
+    },
+    {
+      "roleKey": "bee-zako",
+      "requiredPoses": [
+        "formation-front",
+        "flap-a",
+        "flap-b",
+        "dive-or-rotation"
+      ],
+      "candidateRegions": [
+        "left-primary-sprite-grid",
+        "center-alien-pose-grid"
+      ],
+      "currentRuntimeTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-zako-dive.png",
+      "nextAction": "Map cells for formation and dive poses so challenge scoring is not forced to reuse one dive crop.",
+      "candidateRegionPreviewImages": [
+        "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest-previews/left-primary-sprite-grid-grid.png",
+        "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest-previews/center-alien-pose-grid-grid.png"
+      ],
+      "candidateRegionCount": 2,
+      "candidateCellCount": 197,
+      "interestingCellCount": 187,
+      "promotionStatus": "preview-generated-review-required"
+    },
+    {
+      "roleKey": "butterfly-escort",
+      "requiredPoses": [
+        "formation-front",
+        "flap-a",
+        "flap-b",
+        "escort-dive"
+      ],
+      "candidateRegions": [
+        "left-primary-sprite-grid",
+        "center-alien-pose-grid"
+      ],
+      "currentRuntimeTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-butterfly-escort.png",
+      "nextAction": "Promote multiple escort poses and update runtime scoring to treat flap cadence as a first-class identity signal.",
+      "candidateRegionPreviewImages": [
+        "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest-previews/left-primary-sprite-grid-grid.png",
+        "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest-previews/center-alien-pose-grid-grid.png"
+      ],
+      "candidateRegionCount": 2,
+      "candidateCellCount": 197,
+      "interestingCellCount": 187,
+      "promotionStatus": "preview-generated-review-required"
+    },
+    {
+      "roleKey": "boss-galaga",
+      "requiredPoses": [
+        "formation-front",
+        "flap-a",
+        "flap-b",
+        "damage-state",
+        "capture-beam-host"
+      ],
+      "candidateRegions": [
+        "left-primary-sprite-grid",
+        "center-alien-pose-grid"
+      ],
+      "currentRuntimeTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
+      "nextAction": "Promote boss pose and damage-state boxes so first-hit and boss-death feedback can be scored visually.",
+      "candidateRegionPreviewImages": [
+        "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest-previews/left-primary-sprite-grid-grid.png",
+        "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest-previews/center-alien-pose-grid-grid.png"
+      ],
+      "candidateRegionCount": 2,
+      "candidateCellCount": 197,
+      "interestingCellCount": 187,
+      "promotionStatus": "preview-generated-review-required"
+    },
+    {
+      "roleKey": "challenge-specialty-aliens",
+      "requiredPoses": [
+        "dragonfly-or-scorpion-family",
+        "mosquito-or-serpentine-family",
+        "late-blue-purple-family",
+        "flap-cycle"
+      ],
+      "candidateRegions": [
+        "left-primary-sprite-grid",
+        "center-alien-pose-grid"
+      ],
+      "currentRuntimeTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png",
+      "nextAction": "Separate challenge alien families instead of scoring them through a single generic specialty target.",
+      "candidateRegionPreviewImages": [
+        "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest-previews/left-primary-sprite-grid-grid.png",
+        "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest-previews/center-alien-pose-grid-grid.png"
+      ],
+      "candidateRegionCount": 2,
+      "candidateCellCount": 197,
+      "interestingCellCount": 187,
+      "promotionStatus": "preview-generated-review-required"
+    },
+    {
+      "roleKey": "projectiles-and-impacts",
+      "requiredPoses": [
+        "player-shot",
+        "enemy-shot",
+        "first-hit-impact",
+        "enemy-explosion",
+        "boss-explosion"
+      ],
+      "candidateRegions": [
+        "top-effects-and-capture-icons",
+        "right-tractor-beam-and-scoring"
+      ],
+      "nextAction": "Promote projectile and explosion boxes so hit feedback can be measured against target visual vocabulary.",
+      "candidateRegionPreviewImages": [
+        "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest-previews/top-effects-and-capture-icons.png",
+        "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest-previews/right-tractor-beam-and-scoring.png"
+      ],
+      "candidateRegionCount": 2,
+      "candidateCellCount": 0,
+      "interestingCellCount": 0,
+      "promotionStatus": "preview-generated-review-required"
+    },
+    {
+      "roleKey": "tractor-beam",
+      "requiredPoses": [
+        "beam-start",
+        "beam-mid",
+        "beam-wide",
+        "beam-collapse"
+      ],
+      "candidateRegions": [
+        "right-tractor-beam-and-scoring"
+      ],
+      "nextAction": "Extract beam bands and compare against Aurora capture-beam width, cadence, and color-band motion.",
+      "candidateRegionPreviewImages": [
+        "reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest-previews/right-tractor-beam-and-scoring.png"
+      ],
+      "candidateRegionCount": 1,
+      "candidateCellCount": 0,
+      "interestingCellCount": 0,
+      "promotionStatus": "preview-generated-review-required"
+    }
+  ],
+  "nextBestStep": "Review the generated grid overlays and interesting cells, then promote exact accepted per-role and per-pose crops into a scored target-pose artifact."
+}

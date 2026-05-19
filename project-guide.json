@@ -489,6 +489,11 @@
           "detail": "Application Guide table with per-stage graphics, movement, alien-variation, safety, and recommended next actions."
         },
         {
+          "label": "Level Visual Conformance Index",
+          "href": "application-guide.html#level-visual-conformance-index",
+          "detail": "Ordered current-versus-target screenshots for every regular level and challenging stage, with inline analysis, scene roles, sprite bitmaps, and target-grounding caveats."
+        },
+        {
           "label": "Challenge Stage Report",
           "href": "project-guide.html#challenge-stage-conformance-analysis-doc",
           "detail": "Rendered human-readable report generated from the maintained challenge-stage analysis source."
@@ -527,6 +532,11 @@
           "label": "Conformance Economics",
           "href": "https://github.com/sgwoods/Codex-Test1/blob/main/CONFORMANCE_ECONOMICS.md",
           "detail": "Local CPU/browser versus GPU-equivalent model/API usage and cost-per-score movement."
+        },
+        {
+          "label": "Conformance Investment Retrospective",
+          "href": "project-guide.html#conformance-investment-retrospective-doc",
+          "detail": "Latest self-critical work-block read separating measurement progress from player-facing conformance progress."
         },
         {
           "label": "Testing And Release Gates",
@@ -622,6 +632,12 @@
       "file": "CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md"
     },
     {
+      "id": "level-visual-conformance-index-doc",
+      "title": "Level Visual Conformance Index",
+      "summary": "Generated current-versus-target visual index for all regular Aurora levels and challenging stages, including screenshots, target-grounding status, alien/ship bitmap references, and self-critical conformance gaps.",
+      "file": "LEVEL_VISUAL_CONFORMANCE_INDEX.md"
+    },
+    {
       "id": "galaga-challenge-video-reference-analysis-doc",
       "title": "Galaga Challenge Video Reference Analysis",
       "summary": "Media-backed analysis of the two user-supplied Galaga challenge-stage videos, preserving derived contact sheets, all-eight-stage windows, target contracts, and the implementation/measurement plan.",
@@ -668,6 +684,12 @@
       "title": "Conformance Economics Source",
       "summary": "Detailed resource/time/GPU-equivalent accounting and charts for comparing conformance gains against local and model-assisted compute spend.",
       "file": "CONFORMANCE_ECONOMICS.md"
+    },
+    {
+      "id": "conformance-investment-retrospective-doc",
+      "title": "Conformance Investment Retrospective Source",
+      "summary": "Generated self-critical read of the latest focused work block, including score movement, stalled metrics, accounting debt, and recommended corrections.",
+      "file": "CONFORMANCE_INVESTMENT_RETROSPECTIVE.md"
     },
     {
       "id": "classic-arcade-ingestion-framework-doc",

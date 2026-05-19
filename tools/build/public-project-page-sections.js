@@ -5,6 +5,7 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const REVIEW_LEARNING_LATEST = path.join(ROOT, 'reference-artifacts', 'analyses', 'review-learning', 'latest.json');
 const CHALLENGE_STAGE_CONFORMANCE_LATEST = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
 const GALAGA_TARGET_ARTIFACT_COVERAGE_LATEST = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-artifact-coverage', 'latest.json');
+const CONFORMANCE_INVESTMENT_RETROSPECTIVE_LATEST = path.join(ROOT, 'reference-artifacts', 'analyses', 'conformance-investment-retrospective', 'latest.json');
 
 function esc(value = ''){
   return String(value)
@@ -130,6 +131,32 @@ function investmentRows(data){
                     </div>
                 </article>`;
   }).join('\n');
+}
+
+function conformanceRetrospectiveCard(){
+  const artifact = readJson(CONFORMANCE_INVESTMENT_RETROSPECTIVE_LATEST, null);
+  if(!artifact){
+    return `
+                <article class="card">
+                    <h3>Self-critical read pending</h3>
+                    <p>Run npm run harness:analyze:conformance-investment-retrospective to publish the latest work-block critique.</p>
+                </article>`;
+  }
+  const movements = Array.isArray(artifact.metricMovements) ? artifact.metricMovements : [];
+  const weakest = movements
+    .filter(row => Number.isFinite(+row.currentScore10) && row.id !== 'challenge-safety')
+    .sort((a, b) => (+a.currentScore10) - (+b.currentScore10))
+    .slice(0, 3)
+    .map(row => `${row.label}: ${(+row.currentScore10).toFixed(1)}/10`)
+    .join('; ');
+  const source = 'reference-artifacts/analyses/conformance-investment-retrospective/latest.json; CONFORMANCE_INVESTMENT_RETROSPECTIVE.md';
+  return `
+                <article class="card emphasis">
+                    <h3>Latest self-critical work-block read</h3>
+                    <p>${esc(artifact.executiveRead || 'Retrospective summary unavailable.')}</p>
+                    <p class="smallText"><strong>Weakest human-level gaps:</strong> ${esc(weakest || 'not scored yet')}.</p>
+                    <p class="smallText"><strong>Source:</strong> ${esc(source)}.</p>
+                </article>`;
 }
 
 function ingestionCards(data){
@@ -378,6 +405,7 @@ function buildPublicProjectSections(data = {}, provenance = {}){
     PUBLIC_CONFORMANCE_SCORE_CHART: scoreRows(data),
     PUBLIC_RESOURCE_SUMMARY_CARDS: resourceSummary(data),
     PUBLIC_INVESTMENT_QUEUE: investmentRows(data),
+    PUBLIC_CONFORMANCE_RETROSPECTIVE: conformanceRetrospectiveCard(),
     PUBLIC_INGESTION_OVERVIEW_CARDS: ingestionCards(data),
     PUBLIC_GAME_CATALOG_CARDS: gameCatalogCards(data),
     PUBLIC_CHALLENGE_STAGE_ANALYSIS: challengeStagePublicCards(challengeStageConformance),

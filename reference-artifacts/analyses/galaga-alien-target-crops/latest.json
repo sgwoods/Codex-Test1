@@ -1,0 +1,1715 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "galaga-alien-target-crops",
+  "generatedAt": "2026-05-19T18:23:33.733Z",
+  "commit": "591cd98a",
+  "branch": "codex/macbook-conformance-investment-review",
+  "dirty": true,
+  "status": "trusted-motion-overrides-plus-provisional-sheet-crops",
+  "sourceManifest": "reference-artifacts/ingestion/galaga-alien-visual-reference/crop-box-manifest-0.1.json",
+  "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+  "sourceDimensions": {
+    "width": 458,
+    "height": 216
+  },
+  "sourceAuthority": "user-supplied sprite-sheet reference; strongest current target candidate, but still needs exact crop review before promotion as canonical sprite target truth",
+  "summary": {
+    "targetCropCount": 33,
+    "roleSetCount": 7,
+    "promotedRoles": [
+      "bee-zako",
+      "boss-galaga",
+      "butterfly-escort",
+      "challenge-specialty-aliens",
+      "player-fighter",
+      "projectiles-and-impacts",
+      "tractor-beam"
+    ],
+    "sourcePixelExact": false,
+    "trustedMotionReferenceCount": 6,
+    "provisionalSourceSheetCount": 18,
+    "compositeTargetCount": 1,
+    "scoringStatus": "trusted-core-formation-targets-ready-runtime-comparison-pending"
+  },
+  "measurementLimits": [
+    "Trusted motion-reference crops are cleaned from a compressed segmented reference video; they are better human-readable targets than polluted sheet cells, but not ROM-perfect final truth.",
+    "Remaining source-sheet cell crops are useful provisional pose evidence and should not be treated as final canonical target pixels without human review.",
+    "The crops improve role, pose, projectile, explosion, and tractor-beam grounding but do not yet score temporal animation cadence.",
+    "Dual-fighter, carried-fighter, boss damage, and capture/rescue transition targets still need composite or temporal promotion."
+  ],
+  "roleSets": [
+    {
+      "roleKey": "bee-zako",
+      "label": "Bee Zako",
+      "requiredPoses": [
+        "formation-front",
+        "flap-a",
+        "flap-b",
+        "dive-or-rotation"
+      ],
+      "promotedPoseCount": 5,
+      "promotedPoses": [
+        "formation-front",
+        "flap-a",
+        "flap-b",
+        "dive-left",
+        "dive-right"
+      ],
+      "targetCrops": [
+        "bee-zako-formation-front",
+        "bee-zako-flap-a",
+        "bee-zako-flap-b",
+        "bee-zako-dive-left",
+        "bee-zako-dive-right"
+      ],
+      "status": "accepted-first-pass",
+      "coverageRead": "5 promoted crop(s); required pose contract: formation-front, flap-a, flap-b, dive-or-rotation"
+    },
+    {
+      "roleKey": "boss-galaga",
+      "label": "Boss Galaga",
+      "requiredPoses": [
+        "formation-front",
+        "flap-a",
+        "flap-b",
+        "damage-state",
+        "capture-beam-host"
+      ],
+      "promotedPoseCount": 5,
+      "promotedPoses": [
+        "formation-front",
+        "flap-a",
+        "flap-b",
+        "dive-left",
+        "dive-right"
+      ],
+      "targetCrops": [
+        "boss-galaga-formation-front",
+        "boss-galaga-flap-a",
+        "boss-galaga-flap-b",
+        "boss-galaga-dive-left",
+        "boss-galaga-dive-right"
+      ],
+      "status": "accepted-first-pass",
+      "coverageRead": "5 promoted crop(s); required pose contract: formation-front, flap-a, flap-b, damage-state, capture-beam-host"
+    },
+    {
+      "roleKey": "butterfly-escort",
+      "label": "Butterfly Escort",
+      "requiredPoses": [
+        "formation-front",
+        "flap-a",
+        "flap-b",
+        "escort-dive"
+      ],
+      "promotedPoseCount": 5,
+      "promotedPoses": [
+        "formation-front",
+        "flap-a",
+        "flap-b",
+        "dive-left",
+        "dive-right"
+      ],
+      "targetCrops": [
+        "butterfly-escort-formation-front",
+        "butterfly-escort-flap-a",
+        "butterfly-escort-flap-b",
+        "butterfly-escort-dive-left",
+        "butterfly-escort-dive-right"
+      ],
+      "status": "accepted-first-pass",
+      "coverageRead": "5 promoted crop(s); required pose contract: formation-front, flap-a, flap-b, escort-dive"
+    },
+    {
+      "roleKey": "challenge-specialty-aliens",
+      "label": "Challenge Specialty Aliens",
+      "requiredPoses": [
+        "dragonfly-or-scorpion-family",
+        "mosquito-or-serpentine-family",
+        "late-blue-purple-family",
+        "flap-cycle"
+      ],
+      "promotedPoseCount": 6,
+      "promotedPoses": [
+        "green-family-front",
+        "green-family-dive",
+        "yellow-family-front",
+        "yellow-family-dive",
+        "magenta-family-front",
+        "blue-yellow-family-front"
+      ],
+      "targetCrops": [
+        "challenge-green-family-front",
+        "challenge-green-family-dive",
+        "challenge-yellow-family-front",
+        "challenge-yellow-family-dive",
+        "challenge-magenta-family-front",
+        "challenge-blue-yellow-family-front"
+      ],
+      "status": "accepted-first-pass",
+      "coverageRead": "6 promoted crop(s); required pose contract: dragonfly-or-scorpion-family, mosquito-or-serpentine-family, late-blue-purple-family, flap-cycle"
+    },
+    {
+      "roleKey": "player-fighter",
+      "label": "Player Fighter",
+      "requiredPoses": [
+        "single-ship-front",
+        "dual-fighter",
+        "captured-or-carried-fighter",
+        "ship-loss-fragment-or-explosion-context"
+      ],
+      "promotedPoseCount": 4,
+      "promotedPoses": [
+        "single-ship-front",
+        "turn-left",
+        "turn-right",
+        "dual-fighter-front"
+      ],
+      "targetCrops": [
+        "player-fighter-single-front",
+        "player-fighter-turn-left",
+        "player-fighter-turn-right",
+        "player-fighter-dual-front"
+      ],
+      "status": "accepted-first-pass",
+      "coverageRead": "4 promoted crop(s); required pose contract: single-ship-front, dual-fighter, captured-or-carried-fighter, ship-loss-fragment-or-explosion-context"
+    },
+    {
+      "roleKey": "projectiles-and-impacts",
+      "label": "Projectiles And Impacts",
+      "requiredPoses": [
+        "player-shot",
+        "enemy-shot",
+        "first-hit-impact",
+        "enemy-explosion",
+        "boss-explosion"
+      ],
+      "promotedPoseCount": 5,
+      "promotedPoses": [
+        "enemy-explosion-small",
+        "boss-explosion-large",
+        "player-shot",
+        "enemy-shot",
+        "diagonal-shot"
+      ],
+      "targetCrops": [
+        "impact-explosion-small",
+        "impact-explosion-large",
+        "projectile-player-shot",
+        "projectile-enemy-shot",
+        "projectile-diagonal-shot"
+      ],
+      "status": "accepted-first-pass",
+      "coverageRead": "5 promoted crop(s); required pose contract: player-shot, enemy-shot, first-hit-impact, enemy-explosion, boss-explosion"
+    },
+    {
+      "roleKey": "tractor-beam",
+      "label": "Tractor Beam",
+      "requiredPoses": [
+        "beam-start",
+        "beam-mid",
+        "beam-wide",
+        "beam-collapse"
+      ],
+      "promotedPoseCount": 3,
+      "promotedPoses": [
+        "beam-wide",
+        "beam-mid",
+        "beam-narrow"
+      ],
+      "targetCrops": [
+        "tractor-beam-wide",
+        "tractor-beam-mid",
+        "tractor-beam-narrow"
+      ],
+      "status": "accepted-first-pass",
+      "coverageRead": "3 promoted crop(s); required pose contract: beam-start, beam-mid, beam-wide, beam-collapse"
+    }
+  ],
+  "targetCrops": [
+    {
+      "id": "player-fighter-single-front",
+      "roleKey": "player-fighter",
+      "poseKey": "single-ship-front",
+      "sourceKind": "motion-reference-video",
+      "sourceRegion": "segmented-alien-motion-reference",
+      "sourceVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "timeSeconds": 10,
+      "frameCrop": {
+        "x": 248,
+        "y": 430,
+        "width": 82,
+        "height": 64
+      },
+      "note": "Trusted clean player-fighter crop from the segmented alien motion reference; replaces the provisional sheet-cell primary fighter target.",
+      "reviewStatus": "accepted-trusted-motion-reference",
+      "label": "Player Fighter single-ship-front",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "sourceFrameSeconds": 10,
+      "crop": {
+        "sourceWidth": 576,
+        "sourceHeight": 576,
+        "x": 248,
+        "y": 430,
+        "width": 82,
+        "height": 64
+      },
+      "cleanedCrop": {
+        "x": 10,
+        "y": 19,
+        "width": 53,
+        "height": 45
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-single-front.png",
+      "sourcePixelExact": false,
+      "videoDerivedCleanCrop": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 53,
+        "height": 45,
+        "litPixels": 894,
+        "litRatio": 0.37484,
+        "tokenChannels": [
+          "B",
+          "G",
+          "R",
+          "W",
+          "Y"
+        ],
+        "litBox": {
+          "x": 2,
+          "y": 2,
+          "width": 49,
+          "height": 43
+        }
+      }
+    },
+    {
+      "id": "player-fighter-turn-left",
+      "roleKey": "player-fighter",
+      "poseKey": "turn-left",
+      "sourceKind": "sheet-cell",
+      "sourceRegion": "left-primary-sprite-grid",
+      "sourceCell": {
+        "row": 1,
+        "column": 6
+      },
+      "note": "Rotation/turn pose for future motion and capture/rescue scoring.",
+      "reviewStatus": "provisional-source-sheet-cell",
+      "label": "Player Fighter turn-left",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 80,
+        "y": 0,
+        "width": 16,
+        "height": 16
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-turn-left.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 62,
+        "litRatio": 0.24219,
+        "tokenChannels": [
+          "B",
+          "R",
+          "W"
+        ],
+        "litBox": {
+          "x": 0,
+          "y": 5,
+          "width": 16,
+          "height": 11
+        }
+      }
+    },
+    {
+      "id": "player-fighter-turn-right",
+      "roleKey": "player-fighter",
+      "poseKey": "turn-right",
+      "sourceKind": "sheet-cell",
+      "sourceRegion": "left-primary-sprite-grid",
+      "sourceCell": {
+        "row": 1,
+        "column": 7
+      },
+      "note": "Rotation/turn pose for future motion and capture/rescue scoring.",
+      "reviewStatus": "provisional-source-sheet-cell",
+      "label": "Player Fighter turn-right",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 96,
+        "y": 0,
+        "width": 16,
+        "height": 16
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-turn-right.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 86,
+        "litRatio": 0.33594,
+        "tokenChannels": [
+          "B",
+          "R",
+          "W"
+        ],
+        "litBox": {
+          "x": 0,
+          "y": 1,
+          "width": 16,
+          "height": 15
+        }
+      }
+    },
+    {
+      "id": "bee-zako-formation-front",
+      "roleKey": "bee-zako",
+      "poseKey": "formation-front",
+      "sourceKind": "motion-reference-video",
+      "sourceRegion": "segmented-alien-motion-reference",
+      "sourceVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "timeSeconds": 10,
+      "frameCrop": {
+        "x": 384,
+        "y": 86,
+        "width": 58,
+        "height": 54
+      },
+      "note": "Trusted clean bee/Zako formation crop from the segmented alien motion reference; replaces the polluted sheet-cell primary target.",
+      "reviewStatus": "accepted-trusted-motion-reference",
+      "label": "Bee Zako formation-front",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "sourceFrameSeconds": 10,
+      "crop": {
+        "sourceWidth": 576,
+        "sourceHeight": 576,
+        "x": 384,
+        "y": 86,
+        "width": 58,
+        "height": 54
+      },
+      "cleanedCrop": {
+        "x": 0,
+        "y": 14,
+        "width": 45,
+        "height": 36
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-formation-front.png",
+      "sourcePixelExact": false,
+      "videoDerivedCleanCrop": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 45,
+        "height": 36,
+        "litPixels": 766,
+        "litRatio": 0.47284,
+        "tokenChannels": [
+          "B",
+          "G",
+          "M",
+          "R",
+          "W",
+          "Y"
+        ],
+        "litBox": {
+          "x": 1,
+          "y": 2,
+          "width": 42,
+          "height": 32
+        }
+      }
+    },
+    {
+      "id": "bee-zako-flap-a",
+      "roleKey": "bee-zako",
+      "poseKey": "flap-a",
+      "sourceKind": "sheet-cell",
+      "sourceRegion": "left-primary-sprite-grid",
+      "sourceCell": {
+        "row": 6,
+        "column": 6
+      },
+      "note": "Wing/pose phase candidate for future flap cadence scoring.",
+      "reviewStatus": "provisional-source-sheet-cell",
+      "label": "Bee Zako flap-a",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 80,
+        "y": 80,
+        "width": 16,
+        "height": 16
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-flap-a.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 50,
+        "litRatio": 0.19531,
+        "tokenChannels": [
+          "B",
+          "R",
+          "W",
+          "Y"
+        ],
+        "litBox": {
+          "x": 0,
+          "y": 0,
+          "width": 16,
+          "height": 16
+        }
+      }
+    },
+    {
+      "id": "bee-zako-flap-b",
+      "roleKey": "bee-zako",
+      "poseKey": "flap-b",
+      "sourceKind": "sheet-cell",
+      "sourceRegion": "left-primary-sprite-grid",
+      "sourceCell": {
+        "row": 6,
+        "column": 7
+      },
+      "note": "Alternating wing/pose phase candidate for future flap cadence scoring.",
+      "reviewStatus": "provisional-source-sheet-cell",
+      "label": "Bee Zako flap-b",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 96,
+        "y": 80,
+        "width": 16,
+        "height": 16
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-flap-b.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 46,
+        "litRatio": 0.17969,
+        "tokenChannels": [
+          "B",
+          "R",
+          "W",
+          "Y"
+        ],
+        "litBox": {
+          "x": 0,
+          "y": 0,
+          "width": 16,
+          "height": 16
+        }
+      }
+    },
+    {
+      "id": "bee-zako-dive-left",
+      "roleKey": "bee-zako",
+      "poseKey": "dive-left",
+      "sourceKind": "sheet-cell",
+      "sourceRegion": "left-primary-sprite-grid",
+      "sourceCell": {
+        "row": 6,
+        "column": 1
+      },
+      "note": "Dive/rotation silhouette candidate for approach-path scoring.",
+      "reviewStatus": "provisional-source-sheet-cell",
+      "label": "Bee Zako dive-left",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 0,
+        "y": 80,
+        "width": 16,
+        "height": 16
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-dive-left.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 71,
+        "litRatio": 0.27734,
+        "tokenChannels": [
+          "B",
+          "R",
+          "W"
+        ],
+        "litBox": {
+          "x": 4,
+          "y": 0,
+          "width": 10,
+          "height": 16
+        }
+      }
+    },
+    {
+      "id": "bee-zako-dive-right",
+      "roleKey": "bee-zako",
+      "poseKey": "dive-right",
+      "sourceKind": "sheet-cell",
+      "sourceRegion": "left-primary-sprite-grid",
+      "sourceCell": {
+        "row": 6,
+        "column": 2
+      },
+      "note": "Mirrored dive/rotation silhouette candidate for approach-path scoring.",
+      "reviewStatus": "provisional-source-sheet-cell",
+      "label": "Bee Zako dive-right",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 16,
+        "y": 80,
+        "width": 16,
+        "height": 16
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-dive-right.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 39,
+        "litRatio": 0.15234,
+        "tokenChannels": [
+          "B",
+          "R",
+          "W"
+        ],
+        "litBox": {
+          "x": 5,
+          "y": 0,
+          "width": 11,
+          "height": 16
+        }
+      }
+    },
+    {
+      "id": "butterfly-escort-formation-front",
+      "roleKey": "butterfly-escort",
+      "poseKey": "formation-front",
+      "sourceKind": "motion-reference-video",
+      "sourceRegion": "segmented-alien-motion-reference",
+      "sourceVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "timeSeconds": 10,
+      "frameCrop": {
+        "x": 225,
+        "y": 95,
+        "width": 62,
+        "height": 42
+      },
+      "note": "Trusted clean butterfly/escort formation crop from the segmented alien motion reference; replaces the polluted sheet-cell primary target.",
+      "reviewStatus": "accepted-trusted-motion-reference",
+      "label": "Butterfly Escort formation-front",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "sourceFrameSeconds": 10,
+      "crop": {
+        "sourceWidth": 576,
+        "sourceHeight": 576,
+        "x": 225,
+        "y": 95,
+        "width": 62,
+        "height": 42
+      },
+      "cleanedCrop": {
+        "x": 16,
+        "y": 6,
+        "width": 34,
+        "height": 36
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-formation-front.png",
+      "sourcePixelExact": false,
+      "videoDerivedCleanCrop": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 34,
+        "height": 36,
+        "litPixels": 677,
+        "litRatio": 0.5531,
+        "tokenChannels": [
+          "B",
+          "G",
+          "R",
+          "W",
+          "Y"
+        ],
+        "litBox": {
+          "x": 2,
+          "y": 2,
+          "width": 30,
+          "height": 32
+        }
+      }
+    },
+    {
+      "id": "butterfly-escort-flap-a",
+      "roleKey": "butterfly-escort",
+      "poseKey": "flap-a",
+      "sourceKind": "sheet-cell",
+      "sourceRegion": "left-primary-sprite-grid",
+      "sourceCell": {
+        "row": 5,
+        "column": 6
+      },
+      "note": "Wing/pose phase candidate for future flap cadence scoring.",
+      "reviewStatus": "provisional-source-sheet-cell",
+      "label": "Butterfly Escort flap-a",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 80,
+        "y": 64,
+        "width": 16,
+        "height": 16
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-flap-a.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 41,
+        "litRatio": 0.16016,
+        "tokenChannels": [
+          "B",
+          "R",
+          "W"
+        ],
+        "litBox": {
+          "x": 0,
+          "y": 0,
+          "width": 16,
+          "height": 16
+        }
+      }
+    },
+    {
+      "id": "butterfly-escort-flap-b",
+      "roleKey": "butterfly-escort",
+      "poseKey": "flap-b",
+      "sourceKind": "sheet-cell",
+      "sourceRegion": "left-primary-sprite-grid",
+      "sourceCell": {
+        "row": 5,
+        "column": 7
+      },
+      "note": "Alternating wing/pose phase candidate for future flap cadence scoring.",
+      "reviewStatus": "provisional-source-sheet-cell",
+      "label": "Butterfly Escort flap-b",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 96,
+        "y": 64,
+        "width": 16,
+        "height": 16
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-flap-b.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 56,
+        "litRatio": 0.21875,
+        "tokenChannels": [
+          "B",
+          "M",
+          "R",
+          "W"
+        ],
+        "litBox": {
+          "x": 0,
+          "y": 0,
+          "width": 16,
+          "height": 16
+        }
+      }
+    },
+    {
+      "id": "butterfly-escort-dive-left",
+      "roleKey": "butterfly-escort",
+      "poseKey": "dive-left",
+      "sourceKind": "sheet-cell",
+      "sourceRegion": "left-primary-sprite-grid",
+      "sourceCell": {
+        "row": 5,
+        "column": 1
+      },
+      "note": "Dive/rotation silhouette candidate for escort path scoring.",
+      "reviewStatus": "provisional-source-sheet-cell",
+      "label": "Butterfly Escort dive-left",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 0,
+        "y": 64,
+        "width": 16,
+        "height": 16
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-dive-left.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 90,
+        "litRatio": 0.35156,
+        "tokenChannels": [
+          "B",
+          "M",
+          "R",
+          "W"
+        ],
+        "litBox": {
+          "x": 1,
+          "y": 0,
+          "width": 15,
+          "height": 16
+        }
+      }
+    },
+    {
+      "id": "butterfly-escort-dive-right",
+      "roleKey": "butterfly-escort",
+      "poseKey": "dive-right",
+      "sourceKind": "sheet-cell",
+      "sourceRegion": "left-primary-sprite-grid",
+      "sourceCell": {
+        "row": 5,
+        "column": 2
+      },
+      "note": "Mirrored dive/rotation silhouette candidate for escort path scoring.",
+      "reviewStatus": "provisional-source-sheet-cell",
+      "label": "Butterfly Escort dive-right",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 16,
+        "y": 64,
+        "width": 16,
+        "height": 16
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-dive-right.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 60,
+        "litRatio": 0.23438,
+        "tokenChannels": [
+          "B",
+          "M",
+          "R",
+          "W"
+        ],
+        "litBox": {
+          "x": 0,
+          "y": 0,
+          "width": 16,
+          "height": 16
+        }
+      }
+    },
+    {
+      "id": "boss-galaga-formation-front",
+      "roleKey": "boss-galaga",
+      "poseKey": "formation-front",
+      "sourceKind": "motion-reference-video",
+      "sourceRegion": "segmented-alien-motion-reference",
+      "sourceVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "timeSeconds": 10,
+      "frameCrop": {
+        "x": 22,
+        "y": 78,
+        "width": 60,
+        "height": 62
+      },
+      "note": "Trusted clean teal boss formation crop from the segmented alien motion reference; replaces the polluted sheet-cell primary target.",
+      "reviewStatus": "accepted-trusted-motion-reference",
+      "label": "Boss Galaga formation-front",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "sourceFrameSeconds": 10,
+      "crop": {
+        "sourceWidth": 576,
+        "sourceHeight": 576,
+        "x": 22,
+        "y": 78,
+        "width": 60,
+        "height": 62
+      },
+      "cleanedCrop": {
+        "x": 0,
+        "y": 2,
+        "width": 52,
+        "height": 56
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-formation-front.png",
+      "sourcePixelExact": false,
+      "videoDerivedCleanCrop": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 52,
+        "height": 56,
+        "litPixels": 1174,
+        "litRatio": 0.40316,
+        "tokenChannels": [
+          "B",
+          "G",
+          "M",
+          "R",
+          "Y"
+        ],
+        "litBox": {
+          "x": 2,
+          "y": 2,
+          "width": 48,
+          "height": 52
+        }
+      }
+    },
+    {
+      "id": "boss-galaga-flap-a",
+      "roleKey": "boss-galaga",
+      "poseKey": "flap-a",
+      "sourceKind": "motion-reference-video",
+      "sourceRegion": "segmented-alien-motion-reference",
+      "sourceVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "timeSeconds": 10,
+      "frameCrop": {
+        "x": 22,
+        "y": 78,
+        "width": 60,
+        "height": 62
+      },
+      "note": "Trusted clean boss pulse/pose phase A from the segmented alien motion reference.",
+      "reviewStatus": "accepted-trusted-motion-reference",
+      "label": "Boss Galaga flap-a",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "sourceFrameSeconds": 10,
+      "crop": {
+        "sourceWidth": 576,
+        "sourceHeight": 576,
+        "x": 22,
+        "y": 78,
+        "width": 60,
+        "height": 62
+      },
+      "cleanedCrop": {
+        "x": 0,
+        "y": 2,
+        "width": 52,
+        "height": 56
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-flap-a.png",
+      "sourcePixelExact": false,
+      "videoDerivedCleanCrop": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 52,
+        "height": 56,
+        "litPixels": 1174,
+        "litRatio": 0.40316,
+        "tokenChannels": [
+          "B",
+          "G",
+          "M",
+          "R",
+          "Y"
+        ],
+        "litBox": {
+          "x": 2,
+          "y": 2,
+          "width": 48,
+          "height": 52
+        }
+      }
+    },
+    {
+      "id": "boss-galaga-flap-b",
+      "roleKey": "boss-galaga",
+      "poseKey": "flap-b",
+      "sourceKind": "motion-reference-video",
+      "sourceRegion": "segmented-alien-motion-reference",
+      "sourceVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "timeSeconds": 10,
+      "frameCrop": {
+        "x": 86,
+        "y": 78,
+        "width": 60,
+        "height": 62
+      },
+      "note": "Trusted clean purple boss pulse/pose phase B from the segmented alien motion reference.",
+      "reviewStatus": "accepted-trusted-motion-reference",
+      "label": "Boss Galaga flap-b",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "sourceFrameSeconds": 10,
+      "crop": {
+        "sourceWidth": 576,
+        "sourceHeight": 576,
+        "x": 86,
+        "y": 78,
+        "width": 60,
+        "height": 62
+      },
+      "cleanedCrop": {
+        "x": 0,
+        "y": 2,
+        "width": 52,
+        "height": 56
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-flap-b.png",
+      "sourcePixelExact": false,
+      "videoDerivedCleanCrop": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 52,
+        "height": 56,
+        "litPixels": 1298,
+        "litRatio": 0.44574,
+        "tokenChannels": [
+          "B",
+          "M"
+        ],
+        "litBox": {
+          "x": 2,
+          "y": 2,
+          "width": 48,
+          "height": 52
+        }
+      }
+    },
+    {
+      "id": "boss-galaga-dive-left",
+      "roleKey": "boss-galaga",
+      "poseKey": "dive-left",
+      "sourceKind": "sheet-cell",
+      "sourceRegion": "left-primary-sprite-grid",
+      "sourceCell": {
+        "row": 3,
+        "column": 1
+      },
+      "note": "Boss dive/rotation silhouette candidate.",
+      "reviewStatus": "provisional-source-sheet-cell",
+      "label": "Boss Galaga dive-left",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 0,
+        "y": 32,
+        "width": 16,
+        "height": 16
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-dive-left.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 93,
+        "litRatio": 0.36328,
+        "tokenChannels": [
+          "B",
+          "G",
+          "R",
+          "Y"
+        ],
+        "litBox": {
+          "x": 1,
+          "y": 0,
+          "width": 15,
+          "height": 16
+        }
+      }
+    },
+    {
+      "id": "boss-galaga-dive-right",
+      "roleKey": "boss-galaga",
+      "poseKey": "dive-right",
+      "sourceKind": "sheet-cell",
+      "sourceRegion": "left-primary-sprite-grid",
+      "sourceCell": {
+        "row": 3,
+        "column": 2
+      },
+      "note": "Mirrored boss dive/rotation silhouette candidate.",
+      "reviewStatus": "provisional-source-sheet-cell",
+      "label": "Boss Galaga dive-right",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 16,
+        "y": 32,
+        "width": 16,
+        "height": 16
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-dive-right.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 82,
+        "litRatio": 0.32031,
+        "tokenChannels": [
+          "B",
+          "G",
+          "R",
+          "Y"
+        ],
+        "litBox": {
+          "x": 0,
+          "y": 0,
+          "width": 16,
+          "height": 16
+        }
+      }
+    },
+    {
+      "id": "challenge-green-family-front",
+      "roleKey": "challenge-specialty-aliens",
+      "poseKey": "green-family-front",
+      "sourceKind": "sheet-cell",
+      "sourceRegion": "left-primary-sprite-grid",
+      "sourceCell": {
+        "row": 8,
+        "column": 7
+      },
+      "note": "Green specialty/challenge-family pose; first-pass target for late challenge novelty.",
+      "reviewStatus": "provisional-source-sheet-cell",
+      "label": "Challenge Specialty Aliens green-family-front",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 96,
+        "y": 112,
+        "width": 16,
+        "height": 16
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-green-family-front.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 39,
+        "litRatio": 0.15234,
+        "tokenChannels": [
+          "G",
+          "R",
+          "Y"
+        ],
+        "litBox": {
+          "x": 0,
+          "y": 0,
+          "width": 16,
+          "height": 11
+        }
+      }
+    },
+    {
+      "id": "challenge-green-family-dive",
+      "roleKey": "challenge-specialty-aliens",
+      "poseKey": "green-family-dive",
+      "sourceKind": "sheet-cell",
+      "sourceRegion": "left-primary-sprite-grid",
+      "sourceCell": {
+        "row": 8,
+        "column": 1
+      },
+      "note": "Green specialty/challenge-family dive silhouette.",
+      "reviewStatus": "provisional-source-sheet-cell",
+      "label": "Challenge Specialty Aliens green-family-dive",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 0,
+        "y": 112,
+        "width": 16,
+        "height": 16
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-green-family-dive.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 46,
+        "litRatio": 0.17969,
+        "tokenChannels": [
+          "G",
+          "R",
+          "Y"
+        ],
+        "litBox": {
+          "x": 4,
+          "y": 0,
+          "width": 11,
+          "height": 10
+        }
+      }
+    },
+    {
+      "id": "challenge-yellow-family-front",
+      "roleKey": "challenge-specialty-aliens",
+      "poseKey": "yellow-family-front",
+      "sourceKind": "sheet-cell",
+      "sourceRegion": "left-primary-sprite-grid",
+      "sourceCell": {
+        "row": 9,
+        "column": 7
+      },
+      "note": "Yellow specialty/challenge-family pose; first-pass target for late challenge novelty.",
+      "reviewStatus": "provisional-source-sheet-cell",
+      "label": "Challenge Specialty Aliens yellow-family-front",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 96,
+        "y": 128,
+        "width": 16,
+        "height": 16
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-yellow-family-front.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 56,
+        "litRatio": 0.21875,
+        "tokenChannels": [
+          "G",
+          "M",
+          "R"
+        ],
+        "litBox": {
+          "x": 0,
+          "y": 1,
+          "width": 16,
+          "height": 12
+        }
+      }
+    },
+    {
+      "id": "challenge-yellow-family-dive",
+      "roleKey": "challenge-specialty-aliens",
+      "poseKey": "yellow-family-dive",
+      "sourceKind": "sheet-cell",
+      "sourceRegion": "left-primary-sprite-grid",
+      "sourceCell": {
+        "row": 9,
+        "column": 1
+      },
+      "note": "Yellow specialty/challenge-family dive silhouette.",
+      "reviewStatus": "provisional-source-sheet-cell",
+      "label": "Challenge Specialty Aliens yellow-family-dive",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 0,
+        "y": 128,
+        "width": 16,
+        "height": 16
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-yellow-family-dive.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 64,
+        "litRatio": 0.25,
+        "tokenChannels": [
+          "G",
+          "M",
+          "R"
+        ],
+        "litBox": {
+          "x": 3,
+          "y": 1,
+          "width": 12,
+          "height": 11
+        }
+      }
+    },
+    {
+      "id": "challenge-magenta-family-front",
+      "roleKey": "challenge-specialty-aliens",
+      "poseKey": "magenta-family-front",
+      "sourceKind": "sheet-cell",
+      "sourceRegion": "center-alien-pose-grid",
+      "sourceCell": {
+        "row": 10,
+        "column": 3
+      },
+      "note": "Magenta late-family cell for challenge-stage alien variety.",
+      "reviewStatus": "provisional-source-sheet-cell",
+      "label": "Challenge Specialty Aliens magenta-family-front",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 177,
+        "y": 192,
+        "width": 16,
+        "height": 16
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-magenta-family-front.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 51,
+        "litRatio": 0.19922,
+        "tokenChannels": [
+          "G",
+          "M",
+          "R"
+        ],
+        "litBox": {
+          "x": 6,
+          "y": 0,
+          "width": 10,
+          "height": 16
+        }
+      }
+    },
+    {
+      "id": "challenge-blue-yellow-family-front",
+      "roleKey": "challenge-specialty-aliens",
+      "poseKey": "blue-yellow-family-front",
+      "sourceKind": "sheet-cell",
+      "sourceRegion": "center-alien-pose-grid",
+      "sourceCell": {
+        "row": 10,
+        "column": 6
+      },
+      "note": "Blue/yellow late-family cell for challenge-stage alien variety.",
+      "reviewStatus": "provisional-source-sheet-cell",
+      "label": "Challenge Specialty Aliens blue-yellow-family-front",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 225,
+        "y": 192,
+        "width": 16,
+        "height": 16
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-blue-yellow-family-front.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 34,
+        "litRatio": 0.13281,
+        "tokenChannels": [
+          "R",
+          "Y"
+        ],
+        "litBox": {
+          "x": 0,
+          "y": 0,
+          "width": 16,
+          "height": 16
+        }
+      }
+    },
+    {
+      "id": "impact-explosion-small",
+      "roleKey": "projectiles-and-impacts",
+      "poseKey": "enemy-explosion-small",
+      "sourceKind": "sheet-crop",
+      "sourceRegion": "top-effects-and-capture-icons",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 177,
+        "y": 0,
+        "width": 32,
+        "height": 32
+      },
+      "note": "Small-to-medium explosion/impact phase candidate.",
+      "reviewStatus": "accepted-source-sheet-crop",
+      "label": "Projectiles And Impacts enemy-explosion-small",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 32,
+        "height": 32,
+        "litPixels": 402,
+        "litRatio": 0.39258,
+        "tokenChannels": [
+          "G",
+          "R",
+          "W"
+        ],
+        "litBox": {
+          "x": 3,
+          "y": 3,
+          "width": 29,
+          "height": 29
+        }
+      }
+    },
+    {
+      "id": "impact-explosion-large",
+      "roleKey": "projectiles-and-impacts",
+      "poseKey": "boss-explosion-large",
+      "sourceKind": "sheet-crop",
+      "sourceRegion": "top-effects-and-capture-icons",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 209,
+        "y": 0,
+        "width": 32,
+        "height": 32
+      },
+      "note": "Large explosion/impact phase candidate for boss and ship-loss feedback.",
+      "reviewStatus": "accepted-source-sheet-crop",
+      "label": "Projectiles And Impacts boss-explosion-large",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-large.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 32,
+        "height": 32,
+        "litPixels": 572,
+        "litRatio": 0.55859,
+        "tokenChannels": [
+          "G",
+          "R",
+          "W"
+        ],
+        "litBox": {
+          "x": 5,
+          "y": 1,
+          "width": 27,
+          "height": 31
+        }
+      }
+    },
+    {
+      "id": "projectile-player-shot",
+      "roleKey": "projectiles-and-impacts",
+      "poseKey": "player-shot",
+      "sourceKind": "sheet-crop",
+      "sourceRegion": "right-tractor-beam-and-scoring",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 304,
+        "y": 120,
+        "width": 16,
+        "height": 16
+      },
+      "note": "Vertical projectile candidate for player-shot scale and palette.",
+      "reviewStatus": "accepted-source-sheet-crop",
+      "label": "Projectiles And Impacts player-shot",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/projectile-player-shot.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 12,
+        "litRatio": 0.04688,
+        "tokenChannels": [
+          "B",
+          "R",
+          "W"
+        ],
+        "litBox": {
+          "x": 9,
+          "y": 2,
+          "width": 3,
+          "height": 8
+        }
+      }
+    },
+    {
+      "id": "projectile-enemy-shot",
+      "roleKey": "projectiles-and-impacts",
+      "poseKey": "enemy-shot",
+      "sourceKind": "sheet-crop",
+      "sourceRegion": "right-tractor-beam-and-scoring",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 304,
+        "y": 136,
+        "width": 16,
+        "height": 16
+      },
+      "note": "Enemy projectile candidate for shot feedback and avoidance readability.",
+      "reviewStatus": "accepted-source-sheet-crop",
+      "label": "Projectiles And Impacts enemy-shot",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/projectile-enemy-shot.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 12,
+        "litRatio": 0.04688,
+        "tokenChannels": [
+          "G",
+          "R",
+          "W"
+        ],
+        "litBox": {
+          "x": 9,
+          "y": 4,
+          "width": 3,
+          "height": 8
+        }
+      }
+    },
+    {
+      "id": "projectile-diagonal-shot",
+      "roleKey": "projectiles-and-impacts",
+      "poseKey": "diagonal-shot",
+      "sourceKind": "sheet-crop",
+      "sourceRegion": "right-tractor-beam-and-scoring",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 320,
+        "y": 120,
+        "width": 16,
+        "height": 16
+      },
+      "note": "Diagonal projectile candidate for enemy-shot vocabulary.",
+      "reviewStatus": "accepted-source-sheet-crop",
+      "label": "Projectiles And Impacts diagonal-shot",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/projectile-diagonal-shot.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 16,
+        "height": 16,
+        "litPixels": 13,
+        "litRatio": 0.05078,
+        "tokenChannels": [
+          "B",
+          "R",
+          "W"
+        ],
+        "litBox": {
+          "x": 9,
+          "y": 3,
+          "width": 7,
+          "height": 7
+        }
+      }
+    },
+    {
+      "id": "tractor-beam-wide",
+      "roleKey": "tractor-beam",
+      "poseKey": "beam-wide",
+      "sourceKind": "sheet-crop",
+      "sourceRegion": "right-tractor-beam-and-scoring",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 288,
+        "y": 34,
+        "width": 50,
+        "height": 84
+      },
+      "note": "Wide tractor-beam band candidate for capture-state width and color rhythm.",
+      "reviewStatus": "accepted-source-sheet-crop",
+      "label": "Tractor Beam beam-wide",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/tractor-beam-wide.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 50,
+        "height": 84,
+        "litPixels": 898,
+        "litRatio": 0.21381,
+        "tokenChannels": [
+          "B",
+          "G"
+        ],
+        "litBox": {
+          "x": 2,
+          "y": 2,
+          "width": 46,
+          "height": 80
+        }
+      }
+    },
+    {
+      "id": "tractor-beam-mid",
+      "roleKey": "tractor-beam",
+      "poseKey": "beam-mid",
+      "sourceKind": "sheet-crop",
+      "sourceRegion": "right-tractor-beam-and-scoring",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 342,
+        "y": 34,
+        "width": 50,
+        "height": 84
+      },
+      "note": "Mid-width tractor-beam band candidate.",
+      "reviewStatus": "accepted-source-sheet-crop",
+      "label": "Tractor Beam beam-mid",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/tractor-beam-mid.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 50,
+        "height": 84,
+        "litPixels": 898,
+        "litRatio": 0.21381,
+        "tokenChannels": [
+          "B",
+          "G"
+        ],
+        "litBox": {
+          "x": 0,
+          "y": 2,
+          "width": 50,
+          "height": 80
+        }
+      }
+    },
+    {
+      "id": "tractor-beam-narrow",
+      "roleKey": "tractor-beam",
+      "poseKey": "beam-narrow",
+      "sourceKind": "sheet-crop",
+      "sourceRegion": "right-tractor-beam-and-scoring",
+      "crop": {
+        "sourceWidth": 458,
+        "sourceHeight": 216,
+        "x": 396,
+        "y": 34,
+        "width": 50,
+        "height": 84
+      },
+      "note": "Narrow tractor-beam band candidate.",
+      "reviewStatus": "accepted-source-sheet-crop",
+      "label": "Tractor Beam beam-narrow",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/tractor-beam-narrow.png",
+      "sourcePixelExact": true,
+      "pixelScale": 1,
+      "metrics": {
+        "width": 50,
+        "height": 84,
+        "litPixels": 863,
+        "litRatio": 0.20548,
+        "tokenChannels": [
+          "B",
+          "G"
+        ],
+        "litBox": {
+          "x": 0,
+          "y": 2,
+          "width": 40,
+          "height": 80
+        }
+      }
+    },
+    {
+      "id": "player-fighter-dual-front",
+      "roleKey": "player-fighter",
+      "poseKey": "dual-fighter-front",
+      "label": "Player Fighter dual-fighter-front",
+      "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "sourceRegion": "derived-composite",
+      "sourceCell": null,
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "width": 114,
+        "height": 45
+      },
+      "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-dual-front.png",
+      "sourcePixelExact": false,
+      "exactComposite": true,
+      "pixelScale": 1,
+      "compositeTarget": true,
+      "componentCrops": [
+        {
+          "id": "player-fighter-single-front",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "player-fighter-single-front",
+          "x": 61,
+          "y": 0
+        }
+      ],
+      "reviewStatus": "accepted-trusted-motion-reference-composite",
+      "note": "Derived dual-fighter target composed from two trusted cleaned player-fighter crops. This prevents the dual runtime state from being scored against a single fighter while preserving the accepted target proportions.",
+      "metrics": {
+        "width": 114,
+        "height": 45,
+        "litPixels": 1798,
+        "litRatio": 0.35049,
+        "tokenChannels": [
+          "B",
+          "C",
+          "G",
+          "R",
+          "W",
+          "Y"
+        ],
+        "litBox": {
+          "x": 3,
+          "y": 2,
+          "width": 109,
+          "height": 43
+        }
+      }
+    }
+  ],
+  "nextBestStep": "Regenerate Aurora live runtime comparisons against the corrected Boss, Bee, and Butterfly targets, then promote clean player-fighter and temporal pulse/cadence targets before tuning more runtime sprites."
+}

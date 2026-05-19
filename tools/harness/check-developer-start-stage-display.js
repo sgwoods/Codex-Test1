@@ -22,50 +22,56 @@ async function readStageSnapshot(page){
       banner,
       requestedStage: +document.getElementById('testStage')?.value || 0,
       requestedStartKind: document.getElementById('testStartKind')?.value || 'level',
+      requestedExpertPlays: document.getElementById('testExpertPlays')?.value || 'human',
       requestedChallengeStage: +document.getElementById('testChallengeStage')?.value || 0,
       savedStage: +saved.stage || 0,
       savedStartKind: saved.startKind || '',
+      savedExpertPlays: saved.expertPlays || 'human',
       savedChallengeStage: +saved.challengeStage || 0,
       displayedStage: shownMatch ? +shownMatch[1] : null
     };
   });
 }
 
-async function readDeveloperStart(stage){
+async function readDeveloperStart(stage, expertPlays = 'human'){
   return withHarnessPage({ skipStart: true, seed: 7707 }, async ({ page }) => {
-    await page.evaluate(requestedStage => {
+    await page.evaluate(({ requestedStage, expertPlays }) => {
       if(typeof installGamePack === 'function')installGamePack('aurora-galactica');
       const stageEl = document.getElementById('testStage');
       const startKindEl = document.getElementById('testStartKind');
+      const expertPlaysEl = document.getElementById('testExpertPlays');
       const challengeStageEl = document.getElementById('testChallengeStage');
       const shipsEl = document.getElementById('testShips');
       const challengeEl = document.getElementById('testChallenge');
       if(startKindEl)startKindEl.value = 'level';
+      if(expertPlaysEl)expertPlaysEl.value = expertPlays;
       if(stageEl)stageEl.value = String(requestedStage);
       if(challengeStageEl)challengeStageEl.value = '1';
       if(shipsEl)shipsEl.value = '3';
       if(challengeEl)challengeEl.checked = false;
       window.startActiveGamePack();
-    }, stage);
+    }, { requestedStage: stage, expertPlays });
     await sleep(250);
     return readStageSnapshot(page);
   });
 }
 
-async function readDeveloperChallengeStart(challengeStage){
+async function readDeveloperChallengeStart(challengeStage, expertPlays = 'human'){
   return withHarnessPage({ skipStart: true, seed: 7709 }, async ({ page }) => {
-    await page.evaluate(requestedChallenge => {
+    await page.evaluate(({ requestedChallenge, expertPlays }) => {
       if(typeof installGamePack === 'function')installGamePack('aurora-galactica');
       const startKindEl = document.getElementById('testStartKind');
+      const expertPlaysEl = document.getElementById('testExpertPlays');
       const challengeStageEl = document.getElementById('testChallengeStage');
       const stageEl = document.getElementById('testStage');
       const shipsEl = document.getElementById('testShips');
       if(startKindEl)startKindEl.value = 'challenge';
+      if(expertPlaysEl)expertPlaysEl.value = expertPlays;
       if(challengeStageEl)challengeStageEl.value = String(requestedChallenge);
       if(stageEl)stageEl.value = '1';
       if(shipsEl)shipsEl.value = '3';
       window.startActiveGamePack();
-    }, challengeStage);
+    }, { requestedChallenge: challengeStage, expertPlays });
     await sleep(250);
     return readStageSnapshot(page);
   });
@@ -93,6 +99,20 @@ async function main(){
   if(developerStage7.displayedStage !== 7 || developerStage7.banner?.bannerTxt !== 'STAGE 07'){
     fail('developer Start Stage 7 should present the visible Stage 07 banner', developerStage7);
   }
+  if(developerStage7.state.watchMode || developerStage7.requestedExpertPlays !== 'human' || developerStage7.savedExpertPlays !== 'human'){
+    fail('developer Start Stage should default to human-controlled gameplay', developerStage7);
+  }
+
+  const developerExpertStage7 = await readDeveloperStart(7, 'expert');
+  if(!developerExpertStage7.state.started || !developerExpertStage7.state.watchMode){
+    fail('developer Expert Plays start should enter watch mode at the requested start level', developerExpertStage7);
+  }
+  if(developerExpertStage7.state.harnessPersona !== 'expert' || developerExpertStage7.state.watchPersona !== 'expert'){
+    fail('developer Expert Plays start should assign the expert persona to the run', developerExpertStage7);
+  }
+  if(developerExpertStage7.state.stage !== 9 || developerExpertStage7.displayedStage !== 7){
+    fail('developer Expert Plays should preserve the requested displayed level mapping', developerExpertStage7);
+  }
 
   const harnessStage7 = await readHarnessInternalStart(7);
   if(harnessStage7.state.stage !== 7 || !harnessStage7.state.challenge){
@@ -111,6 +131,17 @@ async function main(){
   }
   if(developerChallenge2.banner?.bannerTxt !== 'CHALLENGING STAGE 2' || developerChallenge2.banner?.bannerSub !== 'LEVELS 7-8'){
     fail('developer challenge-stage start should present challenge-stage numbering and level bracket separately', developerChallenge2);
+  }
+
+  const developerProChallenge2 = await readDeveloperChallengeStart(2, 'professional');
+  if(!developerProChallenge2.state.started || !developerProChallenge2.state.watchMode || !developerProChallenge2.state.challenge){
+    fail('developer Professional Plays challenge start should enter watch-mode challenge gameplay', developerProChallenge2);
+  }
+  if(developerProChallenge2.state.harnessPersona !== 'professional' || developerProChallenge2.state.watchPersona !== 'professional'){
+    fail('developer Professional Plays challenge start should assign the professional persona to the run', developerProChallenge2);
+  }
+  if(developerProChallenge2.state.stage !== 7 || developerProChallenge2.banner?.bannerTxt !== 'CHALLENGING STAGE 2'){
+    fail('developer Professional Plays challenge start should preserve challenge-stage mapping', developerProChallenge2);
   }
 
   console.log(JSON.stringify({
@@ -135,6 +166,20 @@ async function main(){
       challenge: developerChallenge2.state.challenge,
       bannerTxt: developerChallenge2.banner.bannerTxt,
       bannerSub: developerChallenge2.banner.bannerSub
+    },
+    expertPlays: {
+      requestedStage: developerExpertStage7.requestedStage,
+      internalStage: developerExpertStage7.state.stage,
+      watchMode: developerExpertStage7.state.watchMode,
+      persona: developerExpertStage7.state.harnessPersona,
+      bannerTxt: developerExpertStage7.banner.bannerTxt
+    },
+    professionalChallengePlays: {
+      requestedChallengeStage: developerProChallenge2.requestedChallengeStage,
+      internalStage: developerProChallenge2.state.stage,
+      watchMode: developerProChallenge2.state.watchMode,
+      persona: developerProChallenge2.state.harnessPersona,
+      bannerTxt: developerProChallenge2.banner.bannerTxt
     }
   }, null, 2));
 }

@@ -1,5 +1,12 @@
 // Aurora-specific player lifecycle, harness control, and manual movement helpers.
 
+function resolveDeveloperStartWatchPersona(cfg={}){
+ const raw=typeof sanitizeExpertPlayPersona==='function'
+  ? sanitizeExpertPlayPersona(cfg.expertPlays)
+  : String(cfg.expertPlays||'human').trim().toLowerCase();
+ return raw&&raw!=='human'?normalizePlayerTwoPersona(raw):'';
+}
+
 function startAuroraGameplay(){
  if(typeof clearRuntimeLoopFault==='function')clearRuntimeLoopFault();
  stopAttractLoop();
@@ -21,7 +28,9 @@ function startAuroraGameplay(){
  const nextExtendScore=extendFirst>0?extendFirst:(extendRecurring>0?extendRecurring:0);
  setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
  const pendingPlayerTwoTurn=resolvePendingPlayerTwoTurn();
- const watchPersona=pendingPlayerTwoTurn?'':resolveWatchModeStartPersona();
+ const armedWatchPersona=resolveWatchModeStartPersona();
+ const developerWatchPersona=resolveDeveloperStartWatchPersona(cfg);
+ const watchPersona=pendingPlayerTwoTurn?'':(armedWatchPersona||developerWatchPersona);
  const playerTwoRun=pendingPlayerTwoTurn||resolvePlayerTwoStartState();
  aud=1;AC().resume?.();
  gameOverHtml='';gameOverState=null;
@@ -31,7 +40,7 @@ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:
  S.harnessPersona=(watchPersona||(playerTwoRun?.activeTurn==='p2'?playerTwoRun.personaKey:'')||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inputResetHoldT:0,vx:0});
- logEvent('game_start',{persona:S.harnessPersona||null,watchMode:!!S.watchMode,requestedStage:startStage.requestedStage,stage:startStage.stage,startStageMode:startStage.stageMode,startKind:startStage.startKind||'level',challengeStage:startStage.challengeStage||null,displayLabel:startStage.displayLabel||'',forceChallenge:startStage.forceChallenge,playerTwo:playerTwoRun?.enabled?playerTwoSnapshot(playerTwoRun):null});
+ logEvent('game_start',{persona:S.harnessPersona||null,watchMode:!!S.watchMode,developerExpertPlay:developerWatchPersona||'',requestedStage:startStage.requestedStage,stage:startStage.stage,startStageMode:startStage.stageMode,startKind:startStage.startKind||'level',challengeStage:startStage.challengeStage||null,displayLabel:startStage.displayLabel||'',forceChallenge:startStage.forceChallenge,playerTwo:playerTwoRun?.enabled?playerTwoSnapshot(playerTwoRun):null});
  startRunRecording();
  spawnStage();msg.textContent='';
  const openingTiming=(!startStage.forceChallenge&&startStage.stage===1&&usesReferenceTimingModel())
@@ -831,14 +840,14 @@ function runHarnessPlayer(dt,p,cfg){
 function runAttractPlayer(dt,p){
  if(p.spawn>0||p.captured)return;
  p.demoTargetT=Math.max(0,(p.demoTargetT||0)-dt);
- const hp=playerHitbox();
+ const hw=typeof playerMovementHalfWidth==='function'?playerMovementHalfWidth(p):playerHitbox().w;
  const axis=attractMoveAxis(p);
  const targetVx=axis*p.s*.68;
  const blend=Math.min(1,p.accel*dt*.82);
  p.vx+=(targetVx-p.vx)*blend;
  if(!axis&&Math.abs(p.vx)<8)p.vx=0;
- p.x=cl(p.x+p.vx*dt,hp.w+2,PLAY_W-hp.w-2);
- if((p.x<=hp.w+2&&p.vx<0)||(p.x>=PLAY_W-hp.w-2&&p.vx>0))p.vx=0;
+ p.x=cl(p.x+p.vx*dt,hw+2,PLAY_W-hw-2);
+ if((p.x<=hw+2&&p.vx<0)||(p.x>=PLAY_W-hw-2&&p.vx>0))p.vx=0;
  const target=S.e.filter(e=>e.hp>0&&(!e.form||e.dive||e.y>72)).sort((a,b)=>Math.abs(a.x-p.x)-Math.abs(b.x-p.x))[0]||S.e.filter(e=>e.hp>0).sort((a,b)=>Math.abs(a.x-p.x)-Math.abs(b.x-p.x))[0];
  if(target&&p.cd<=0&&Math.abs(target.x-p.x)<(target.t==='boss'?16:12)&&S.pb.length<bulletsMax())shoot();
 }
@@ -858,7 +867,7 @@ function updatePlayerControl(dt,p){
   if(S.attract)runAttractPlayer(dt,p);
   else if(harnessPersona&&(S.watchMode||(!manualAxis&&!manualFire)))runHarnessPlayer(dt,p,harnessPersona);
   else{
-   const hp=playerHitbox();
+   const hw=typeof playerMovementHalfWidth==='function'?playerMovementHalfWidth(p):playerHitbox().w;
    const leftHeld=keyHeldMs(...leftCodes);
    const rightHeld=keyHeldMs(...rightCodes);
    const heldMs=manualAxis<0?leftHeld:manualAxis>0?rightHeld:0;
@@ -871,8 +880,8 @@ function updatePlayerControl(dt,p){
    const blend=Math.min(1,(manualAxis?p.accel:p.decel)*dt);
    p.vx+=(targetVx-p.vx)*blend;
    if(!manualAxis&&Math.abs(p.vx)<8)p.vx=0;
-   p.x=cl(p.x+p.vx*dt,hp.w+2,PLAY_W-hp.w-2);
-   if((p.x<=hp.w+2&&p.vx<0)||(p.x>=PLAY_W-hp.w-2&&p.vx>0))p.vx=0;
+   p.x=cl(p.x+p.vx*dt,hw+2,PLAY_W-hw-2);
+   if((p.x<=hw+2&&p.vx<0)||(p.x>=PLAY_W-hw-2&&p.vx>0))p.vx=0;
   }
  }
  if(!S.attract&&!harnessPersona&&keys.Space)shoot();

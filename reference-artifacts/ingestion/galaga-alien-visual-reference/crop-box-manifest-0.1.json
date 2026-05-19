@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "galaga-alien-visual-reference-crop-box-manifest",
+  "generatedAt": "2026-05-18T00:00:00.000Z",
+  "status": "first-pass-review-needed",
+  "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+  "sourceDimensions": {
+    "width": 458,
+    "height": 216
+  },
+  "authority": "user-supplied sprite-sheet reference; strongest current target candidate, but still needs exact crop review before promotion as canonical sprite target truth",
+  "purpose": "Define the first crop-box structure for extracting Galaga role and pose targets from the supplied general sprite sheet. This is a bridge artifact between the visual reference pack and future exact target crops.",
+  "measurementLimits": [
+    "This first pass identifies sheet regions and role-candidate regions; it does not yet claim final exact per-sprite crop boxes.",
+    "Final scoring targets should be promoted only after crop previews are generated, reviewed, and compared against existing source-frame pixel targets.",
+    "Fan/product/poster references remain context only; this manifest targets the supplied sprite sheet image."
+  ],
+  "regions": [
+    {
+      "id": "left-primary-sprite-grid",
+      "label": "Primary enemy/player sprite grid",
+      "crop": { "x": 0, "y": 0, "width": 144, "height": 216 },
+      "gridHint": { "cellWidth": 16, "cellHeight": 16, "columns": 9, "rows": 13 },
+      "expectedContents": [
+        "player fighter and missile poses",
+        "bee/zako-like enemy poses",
+        "butterfly/escort-like enemy poses",
+        "boss and challenge-family small poses",
+        "dive/rotation pose candidates"
+      ],
+      "promotionStatus": "region-only"
+    },
+    {
+      "id": "center-alien-pose-grid",
+      "label": "Alternate alien pose and color grid",
+      "crop": { "x": 145, "y": 48, "width": 138, "height": 160 },
+      "gridHint": { "cellWidth": 16, "cellHeight": 16, "columns": 8, "rows": 10 },
+      "expectedContents": [
+        "bee/zako role variants",
+        "butterfly role variants",
+        "boss role variants",
+        "challenge-stage alien families",
+        "flap and color phase candidates"
+      ],
+      "promotionStatus": "region-only"
+    },
+    {
+      "id": "top-effects-and-capture-icons",
+      "label": "Top effects and capture icons",
+      "crop": { "x": 145, "y": 0, "width": 142, "height": 48 },
+      "expectedContents": [
+        "capture/bonus iconography",
+        "explosion and particle candidates",
+        "high-value effect references"
+      ],
+      "promotionStatus": "region-only"
+    },
+    {
+      "id": "right-tractor-beam-and-scoring",
+      "label": "Tractor beam, projectiles, scoring, and emblems",
+      "crop": { "x": 288, "y": 0, "width": 170, "height": 216 },
+      "expectedContents": [
+        "tractor beam animation bands",
+        "projectile and shot pixels",
+        "score badges and small result symbols",
+        "spare ship and flag-like UI icons"
+      ],
+      "promotionStatus": "region-only"
+    }
+  ],
+  "targetRolePlan": [
+    {
+      "roleKey": "player-fighter",
+      "requiredPoses": ["single-ship-front", "dual-fighter", "captured-or-carried-fighter", "ship-loss-fragment-or-explosion-context"],
+      "candidateRegions": ["left-primary-sprite-grid"],
+      "currentRuntimeTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-player-fighter.png",
+      "nextAction": "Promote exact player-fighter cells and compare against the existing source-frame target."
+    },
+    {
+      "roleKey": "bee-zako",
+      "requiredPoses": ["formation-front", "flap-a", "flap-b", "dive-or-rotation"],
+      "candidateRegions": ["left-primary-sprite-grid", "center-alien-pose-grid"],
+      "currentRuntimeTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-zako-dive.png",
+      "nextAction": "Map cells for formation and dive poses so challenge scoring is not forced to reuse one dive crop."
+    },
+    {
+      "roleKey": "butterfly-escort",
+      "requiredPoses": ["formation-front", "flap-a", "flap-b", "escort-dive"],
+      "candidateRegions": ["left-primary-sprite-grid", "center-alien-pose-grid"],
+      "currentRuntimeTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-butterfly-escort.png",
+      "nextAction": "Promote multiple escort poses and update runtime scoring to treat flap cadence as a first-class identity signal."
+    },
+    {
+      "roleKey": "boss-galaga",
+      "requiredPoses": ["formation-front", "flap-a", "flap-b", "damage-state", "capture-beam-host"],
+      "candidateRegions": ["left-primary-sprite-grid", "center-alien-pose-grid"],
+      "currentRuntimeTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
+      "nextAction": "Promote boss pose and damage-state boxes so first-hit and boss-death feedback can be scored visually."
+    },
+    {
+      "roleKey": "challenge-specialty-aliens",
+      "requiredPoses": ["dragonfly-or-scorpion-family", "mosquito-or-serpentine-family", "late-blue-purple-family", "flap-cycle"],
+      "candidateRegions": ["left-primary-sprite-grid", "center-alien-pose-grid"],
+      "currentRuntimeTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png",
+      "nextAction": "Separate challenge alien families instead of scoring them through a single generic specialty target."
+    },
+    {
+      "roleKey": "projectiles-and-impacts",
+      "requiredPoses": ["player-shot", "enemy-shot", "first-hit-impact", "enemy-explosion", "boss-explosion"],
+      "candidateRegions": ["top-effects-and-capture-icons", "right-tractor-beam-and-scoring"],
+      "nextAction": "Promote projectile and explosion boxes so hit feedback can be measured against target visual vocabulary."
+    },
+    {
+      "roleKey": "tractor-beam",
+      "requiredPoses": ["beam-start", "beam-mid", "beam-wide", "beam-collapse"],
+      "candidateRegions": ["right-tractor-beam-and-scoring"],
+      "nextAction": "Extract beam bands and compare against Aurora capture-beam width, cadence, and color-band motion."
+    }
+  ],
+  "nextBestStep": "Generate preview crops for the targetRolePlan entries, review exact boxes, then promote accepted boxes into a scored target-pose artifact."
+}

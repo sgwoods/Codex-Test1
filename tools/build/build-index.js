@@ -68,7 +68,18 @@ const GALAGA_REFERENCE_SPRITE_TARGETS = path.join(ROOT, 'reference-artifacts', '
 const GALAGA_REFERENCE_SPRITE_MODEL = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-reference-sprites', 'model-0.1.json');
 const APPLICATION_ARTIFACT_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'application-artifact-conformance', 'latest.json');
 const CHALLENGE_STAGE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
+const LEVEL_VISUAL_CONFORMANCE_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'level-visual-conformance-index', 'latest.json');
 const GALAGA_TARGET_ARTIFACT_COVERAGE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-artifact-coverage', 'latest.json');
+const GALAGA_ALIEN_VISUAL_REFERENCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-visual-reference', 'latest.json');
+const GALAGA_ALIEN_MOTION_REFERENCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-motion-reference', 'latest.json');
+const GALAGA_ALIEN_CROP_PREVIEWS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-visual-crop-previews', 'latest.json');
+const GALAGA_ALIEN_TARGET_CROPS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-target-crops', 'latest.json');
+const GALAGA_TARGET_EVIDENCE_AUDIT = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-evidence-audit', 'latest.json');
+const GALAGA_ALIEN_TEMPORAL_TARGETS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-temporal-targets', 'latest.json');
+const AURORA_RUNTIME_SPRITE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-runtime-sprite-conformance', 'latest.json');
+const AURORA_RUNTIME_VS_GALAGA_TARGET_CROPS = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-runtime-vs-galaga-target-crops', 'latest.json');
+const AURORA_IMPACT_EXPLOSION_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-impact-explosion-conformance', 'latest.json');
+const SPRITE_CONFORMANCE_VARIATION_PLAN = path.join(ROOT, 'reference-artifacts', 'ingestion', 'sprite-conformance-variation-plan', 'plan-0.1.json');
 const PERSONA_PERFORMANCE_DISTRIBUTION = path.join(ROOT, 'reference-artifacts', 'analyses', 'persona-performance-distribution', 'latest.json');
 const CATALOG_MEDIA_SOURCE_PATHS = new Set();
 let ACTIVE_SOURCE_BLOB_BASE = 'https://github.com/sgwoods/Codex-Test1/blob/main/';
@@ -1359,19 +1370,22 @@ function projectGuideStyles(){
       margin-top:14px;
     }
     .inlineDocPreview,
-    .challengeStageDetail{
+    .challengeStageDetail,
+    .levelVisualDetail{
       border:1px solid rgba(255,255,255,0.10);
       background:rgba(7,19,31,0.72);
       border-radius:18px;
       overflow:hidden;
     }
     .inlineDocPreview summary,
-    .challengeStageDetail summary{
+    .challengeStageDetail summary,
+    .levelVisualDetail summary{
       cursor:pointer;
       list-style:none;
     }
     .inlineDocPreview summary::-webkit-details-marker,
-    .challengeStageDetail summary::-webkit-details-marker{
+    .challengeStageDetail summary::-webkit-details-marker,
+    .levelVisualDetail summary::-webkit-details-marker{
       display:none;
     }
     .inlineDocPreview summary{
@@ -1380,14 +1394,16 @@ function projectGuideStyles(){
       font-weight:800;
     }
     .inlineDocPreview summary::after,
-    .challengeStageDetail summary::after{
+    .challengeStageDetail summary::after,
+    .levelVisualDetail summary::after{
       content:"+";
       float:right;
       color:var(--accent);
       font-weight:900;
     }
     .inlineDocPreview[open] summary::after,
-    .challengeStageDetail[open] summary::after{
+    .challengeStageDetail[open] summary::after,
+    .levelVisualDetail[open] summary::after{
       content:"-";
     }
     .inlineDocPreviewBody{
@@ -1396,11 +1412,13 @@ function projectGuideStyles(){
       font-size:14px;
       line-height:1.6;
     }
-    .challengeStageList{
+    .challengeStageList,
+    .levelVisualList{
       display:grid;
       gap:12px;
     }
-    .challengeStageSummary{
+    .challengeStageSummary,
+    .levelVisualSummary{
       display:grid;
       grid-template-columns:minmax(220px,1fr) auto auto;
       gap:12px;
@@ -1408,15 +1426,32 @@ function projectGuideStyles(){
       padding:14px 16px;
       color:#f2fbff;
     }
-    .challengeStageTitle{
+    .levelVisualSummary{
+      grid-template-columns:minmax(260px,1.2fr) minmax(150px,.7fr) minmax(150px,.7fr) minmax(220px,1fr) auto;
+    }
+    .challengeStageTitle,
+    .levelVisualTitle{
       display:flex;
       flex-direction:column;
       gap:3px;
       font-weight:900;
     }
-    .challengeStageTitle small{
+    .challengeStageTitle small,
+    .levelVisualTitle small{
       color:var(--soft);
       font-weight:600;
+      line-height:1.35;
+    }
+    .levelVisualSummaryCell{
+      color:var(--soft);
+      font-size:12px;
+      line-height:1.35;
+      min-width:0;
+    }
+    .levelVisualSummaryCell strong{
+      display:block;
+      color:#eaf8ff;
+      font-size:13px;
       line-height:1.35;
     }
     .scorePill{
@@ -1433,19 +1468,74 @@ function projectGuideStyles(){
       font-weight:900;
       white-space:nowrap;
     }
-    .challengeStageDetailBody{
+    .challengeStageDetailBody,
+    .levelVisualDetailBody{
       display:grid;
       gap:14px;
       padding:0 16px 16px;
     }
     .challengeCompareGrid,
-    .challengeAxisGrid{
+    .challengeAxisGrid,
+    .levelVisualCompareGrid{
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
       gap:12px;
     }
     .challengeAxisGrid{
       grid-template-columns:repeat(4,minmax(0,1fr));
+    }
+    .levelVisualRoleGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:12px;
+    }
+    .levelVisualVideoGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(320px,1fr));
+      gap:12px;
+      align-items:start;
+    }
+    .catalogMediaVideo{
+      display:block;
+      width:100%;
+      min-height:260px;
+      max-height:430px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.10);
+      background:#020712;
+      object-fit:contain;
+    }
+    .levelRoleCard{
+      min-width:0;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.035);
+    }
+    .levelRoleCard h4{
+      margin:0 0 8px;
+      color:#f2fbff;
+      font-size:13px;
+      letter-spacing:.02em;
+    }
+    .levelRoleImages{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:8px;
+      align-items:start;
+    }
+    .levelVisualMetricGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:8px;
+      margin-top:8px;
+      font-size:12px;
+      color:var(--soft);
+    }
+    .levelVisualMetricGrid span{
+      padding:7px 8px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.04);
     }
     .challengeEvidenceCard{
       min-width:0;
@@ -1486,7 +1576,13 @@ function projectGuideStyles(){
     @media (max-width: 980px){
       .challengeStageSummary,
       .challengeCompareGrid,
-      .challengeAxisGrid{
+      .challengeAxisGrid,
+      .levelVisualSummary,
+      .levelVisualCompareGrid,
+      .levelVisualVideoGrid{
+        grid-template-columns:1fr;
+      }
+      .levelRoleImages{
         grid-template-columns:1fr;
       }
       .scorePill{
@@ -3016,7 +3112,18 @@ let galagaReferenceSpriteTargetsCache = null;
 let galagaReferenceSpriteModelCache = null;
 let applicationArtifactConformanceCache = null;
 let challengeStageConformanceCache = null;
+let levelVisualConformanceIndexCache = null;
 let galagaTargetArtifactCoverageCache = null;
+let galagaAlienVisualReferenceCache = null;
+let galagaAlienMotionReferenceCache = null;
+let galagaAlienCropPreviewsCache = null;
+let galagaAlienTargetCropsCache = null;
+let galagaTargetEvidenceAuditCache = null;
+let galagaAlienTemporalTargetsCache = null;
+let auroraRuntimeSpriteConformanceCache = null;
+let auroraRuntimeVsGalagaTargetCropsCache = null;
+let auroraImpactExplosionConformanceCache = null;
+let spriteConformanceVariationPlanCache = null;
 
 function loadGalagaReferenceSpriteTargets(){
   if(galagaReferenceSpriteTargetsCache) return galagaReferenceSpriteTargetsCache;
@@ -3046,6 +3153,196 @@ function loadGalagaReferenceSpriteModels(){
     galagaReferenceSpriteModelCache = [];
   }
   return galagaReferenceSpriteModelCache;
+}
+
+function loadGalagaAlienVisualReference(){
+  if(galagaAlienVisualReferenceCache) return galagaAlienVisualReferenceCache;
+  if(!fs.existsSync(GALAGA_ALIEN_VISUAL_REFERENCE)){
+    galagaAlienVisualReferenceCache = { entries: [], roleCoverage: [], summary: {} };
+    return galagaAlienVisualReferenceCache;
+  }
+  try {
+    const artifact = readJson(GALAGA_ALIEN_VISUAL_REFERENCE);
+    galagaAlienVisualReferenceCache = Object.assign({}, artifact, {
+      entries: Array.isArray(artifact.entries) ? artifact.entries : [],
+      roleCoverage: Array.isArray(artifact.roleCoverage) ? artifact.roleCoverage : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    galagaAlienVisualReferenceCache = { entries: [], roleCoverage: [], summary: {} };
+  }
+  return galagaAlienVisualReferenceCache;
+}
+
+function loadGalagaAlienMotionReference(){
+  if(galagaAlienMotionReferenceCache) return galagaAlienMotionReferenceCache;
+  if(!fs.existsSync(GALAGA_ALIEN_MOTION_REFERENCE)){
+    galagaAlienMotionReferenceCache = { roleTaxonomy: [], media: {}, summary: '' };
+    return galagaAlienMotionReferenceCache;
+  }
+  try {
+    const artifact = readJson(GALAGA_ALIEN_MOTION_REFERENCE);
+    galagaAlienMotionReferenceCache = Object.assign({}, artifact, {
+      roleTaxonomy: Array.isArray(artifact.roleTaxonomy) ? artifact.roleTaxonomy : [],
+      media: artifact.media || {}
+    });
+  } catch (err) {
+    galagaAlienMotionReferenceCache = { roleTaxonomy: [], media: {}, summary: '' };
+  }
+  return galagaAlienMotionReferenceCache;
+}
+
+function loadGalagaAlienCropPreviews(){
+  if(galagaAlienCropPreviewsCache) return galagaAlienCropPreviewsCache;
+  if(!fs.existsSync(GALAGA_ALIEN_CROP_PREVIEWS)){
+    galagaAlienCropPreviewsCache = { regions: [], targetRolePlan: [], summary: {} };
+    return galagaAlienCropPreviewsCache;
+  }
+  try {
+    const artifact = readJson(GALAGA_ALIEN_CROP_PREVIEWS);
+    galagaAlienCropPreviewsCache = Object.assign({}, artifact, {
+      regions: Array.isArray(artifact.regions) ? artifact.regions : [],
+      targetRolePlan: Array.isArray(artifact.targetRolePlan) ? artifact.targetRolePlan : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    galagaAlienCropPreviewsCache = { regions: [], targetRolePlan: [], summary: {} };
+  }
+  return galagaAlienCropPreviewsCache;
+}
+
+function loadGalagaAlienTargetCrops(){
+  if(galagaAlienTargetCropsCache) return galagaAlienTargetCropsCache;
+  if(!fs.existsSync(GALAGA_ALIEN_TARGET_CROPS)){
+    galagaAlienTargetCropsCache = { targetCrops: [], roleSets: [], summary: {} };
+    return galagaAlienTargetCropsCache;
+  }
+  try {
+    const artifact = readJson(GALAGA_ALIEN_TARGET_CROPS);
+    galagaAlienTargetCropsCache = Object.assign({}, artifact, {
+      targetCrops: Array.isArray(artifact.targetCrops) ? artifact.targetCrops : [],
+      roleSets: Array.isArray(artifact.roleSets) ? artifact.roleSets : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    galagaAlienTargetCropsCache = { targetCrops: [], roleSets: [], summary: {} };
+  }
+  return galagaAlienTargetCropsCache;
+}
+
+function loadGalagaTargetEvidenceAudit(){
+  if(galagaTargetEvidenceAuditCache) return galagaTargetEvidenceAuditCache;
+  if(!fs.existsSync(GALAGA_TARGET_EVIDENCE_AUDIT)){
+    galagaTargetEvidenceAuditCache = { rows: [], summary: {} };
+    return galagaTargetEvidenceAuditCache;
+  }
+  try {
+    const artifact = readJson(GALAGA_TARGET_EVIDENCE_AUDIT);
+    galagaTargetEvidenceAuditCache = Object.assign({}, artifact, {
+      rows: Array.isArray(artifact.rows) ? artifact.rows : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    galagaTargetEvidenceAuditCache = { rows: [], summary: {} };
+  }
+  return galagaTargetEvidenceAuditCache;
+}
+
+function loadGalagaAlienTemporalTargets(){
+  if(galagaAlienTemporalTargetsCache) return galagaAlienTemporalTargetsCache;
+  if(!fs.existsSync(GALAGA_ALIEN_TEMPORAL_TARGETS)){
+    galagaAlienTemporalTargetsCache = { rows: [], summary: {} };
+    return galagaAlienTemporalTargetsCache;
+  }
+  try {
+    const artifact = readJson(GALAGA_ALIEN_TEMPORAL_TARGETS);
+    galagaAlienTemporalTargetsCache = Object.assign({}, artifact, {
+      rows: Array.isArray(artifact.rows) ? artifact.rows : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    galagaAlienTemporalTargetsCache = { rows: [], summary: {} };
+  }
+  return galagaAlienTemporalTargetsCache;
+}
+
+function loadAuroraRuntimeSpriteConformance(){
+  if(auroraRuntimeSpriteConformanceCache) return auroraRuntimeSpriteConformanceCache;
+  if(!fs.existsSync(AURORA_RUNTIME_SPRITE_CONFORMANCE)){
+    auroraRuntimeSpriteConformanceCache = { samples: [], temporalSamples: [], cadenceSamples: [], divePoseSamples: [], transitionPoseSamples: [], summary: {} };
+    return auroraRuntimeSpriteConformanceCache;
+  }
+  try {
+    const artifact = readJson(AURORA_RUNTIME_SPRITE_CONFORMANCE);
+    auroraRuntimeSpriteConformanceCache = Object.assign({}, artifact, {
+      samples: Array.isArray(artifact.samples) ? artifact.samples : [],
+      temporalSamples: Array.isArray(artifact.temporalSamples) ? artifact.temporalSamples : [],
+      cadenceSamples: Array.isArray(artifact.cadenceSamples) ? artifact.cadenceSamples : [],
+      divePoseSamples: Array.isArray(artifact.divePoseSamples) ? artifact.divePoseSamples : [],
+      transitionPoseSamples: Array.isArray(artifact.transitionPoseSamples) ? artifact.transitionPoseSamples : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    auroraRuntimeSpriteConformanceCache = { samples: [], temporalSamples: [], cadenceSamples: [], divePoseSamples: [], transitionPoseSamples: [], summary: {} };
+  }
+  return auroraRuntimeSpriteConformanceCache;
+}
+
+function loadAuroraRuntimeVsGalagaTargetCrops(){
+  if(auroraRuntimeVsGalagaTargetCropsCache) return auroraRuntimeVsGalagaTargetCropsCache;
+  if(!fs.existsSync(AURORA_RUNTIME_VS_GALAGA_TARGET_CROPS)){
+    auroraRuntimeVsGalagaTargetCropsCache = { comparisons: [], summary: {} };
+    return auroraRuntimeVsGalagaTargetCropsCache;
+  }
+  try {
+    const artifact = readJson(AURORA_RUNTIME_VS_GALAGA_TARGET_CROPS);
+    auroraRuntimeVsGalagaTargetCropsCache = Object.assign({}, artifact, {
+      comparisons: Array.isArray(artifact.comparisons) ? artifact.comparisons : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    auroraRuntimeVsGalagaTargetCropsCache = { comparisons: [], summary: {} };
+  }
+  return auroraRuntimeVsGalagaTargetCropsCache;
+}
+
+function loadAuroraImpactExplosionConformance(){
+  if(auroraImpactExplosionConformanceCache) return auroraImpactExplosionConformanceCache;
+  if(!fs.existsSync(AURORA_IMPACT_EXPLOSION_CONFORMANCE)){
+    auroraImpactExplosionConformanceCache = { samples: [], summary: {} };
+    return auroraImpactExplosionConformanceCache;
+  }
+  try {
+    const artifact = readJson(AURORA_IMPACT_EXPLOSION_CONFORMANCE);
+    auroraImpactExplosionConformanceCache = Object.assign({}, artifact, {
+      samples: Array.isArray(artifact.samples) ? artifact.samples : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    auroraImpactExplosionConformanceCache = { samples: [], summary: {} };
+  }
+  return auroraImpactExplosionConformanceCache;
+}
+
+function loadSpriteConformanceVariationPlan(){
+  if(spriteConformanceVariationPlanCache) return spriteConformanceVariationPlanCache;
+  if(!fs.existsSync(SPRITE_CONFORMANCE_VARIATION_PLAN)){
+    spriteConformanceVariationPlanCache = { lanes: [], pipelineSteps: [], successCriteria: [], artifacts: [], principles: [] };
+    return spriteConformanceVariationPlanCache;
+  }
+  try {
+    const artifact = readJson(SPRITE_CONFORMANCE_VARIATION_PLAN);
+    spriteConformanceVariationPlanCache = Object.assign({}, artifact, {
+      lanes: Array.isArray(artifact.lanes) ? artifact.lanes : [],
+      pipelineSteps: Array.isArray(artifact.pipelineSteps) ? artifact.pipelineSteps : [],
+      successCriteria: Array.isArray(artifact.successCriteria) ? artifact.successCriteria : [],
+      artifacts: Array.isArray(artifact.artifacts) ? artifact.artifacts : [],
+      principles: Array.isArray(artifact.principles) ? artifact.principles : []
+    });
+  } catch (err) {
+    spriteConformanceVariationPlanCache = { lanes: [], pipelineSteps: [], successCriteria: [], artifacts: [], principles: [] };
+  }
+  return spriteConformanceVariationPlanCache;
 }
 
 function loadApplicationArtifactConformance(){
@@ -3081,6 +3378,24 @@ function loadChallengeStageConformance(){
     challengeStageConformanceCache = { stageRows: [], summary: {} };
   }
   return challengeStageConformanceCache;
+}
+
+function loadLevelVisualConformanceIndex(){
+  if(levelVisualConformanceIndexCache) return levelVisualConformanceIndexCache;
+  if(!fs.existsSync(LEVEL_VISUAL_CONFORMANCE_INDEX)){
+    levelVisualConformanceIndexCache = { rows: [], summary: {} };
+    return levelVisualConformanceIndexCache;
+  }
+  try {
+    const artifact = readJson(LEVEL_VISUAL_CONFORMANCE_INDEX);
+    levelVisualConformanceIndexCache = Object.assign({}, artifact, {
+      rows: Array.isArray(artifact.rows) ? artifact.rows : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    levelVisualConformanceIndexCache = { rows: [], summary: {} };
+  }
+  return levelVisualConformanceIndexCache;
 }
 
 function loadGalagaTargetArtifactCoverage(){
@@ -3217,6 +3532,176 @@ function challengeObjectTrackDiagramMedia(row = {}){
   });
 }
 
+function levelVisualScore(value, label = ''){
+  if(value === null || value === undefined || !Number.isFinite(+value)){
+    return label ? `${label}: pending` : 'pending';
+  }
+  return label ? `${label}: ${Number(value).toFixed(1)}/10` : `${Number(value).toFixed(1)}/10`;
+}
+
+function levelVisualStatus(row = {}){
+  const analysis = row.analysis || {};
+  if(row.kind === 'challenge') return 'Exact challenge target';
+  if(row.targetWindow?.exact) return 'Exact regular target';
+  if(analysis.status) return analysis.status;
+  return row.targetScreenshotStatus || 'target status pending';
+}
+
+function levelVisualMedia(row = {}, side = 'current'){
+  const isTarget = side === 'target';
+  const src = isTarget ? row.targetScreenshot : row.currentScreenshot;
+  if(!src || !fs.existsSync(path.join(ROOT, normalizeAssetSourcePath(src)))){
+    return `<div class="mediaPlaceholder">${isTarget ? 'Target Galaga gameplay screenshot' : 'Current Aurora gameplay screenshot'} pending.</div>`;
+  }
+  const label = isTarget ? 'Actual Galaga target gameplay' : 'Current Aurora runtime capture';
+  const note = isTarget
+    ? `${levelVisualStatus(row)}; ${row.targetSourceTimeSeconds !== undefined ? `source time ${row.targetSourceTimeSeconds}s.` : 'source time pending.'}`
+    : `Captured from the current Aurora build at ${row.sampleSeconds ?? 'n/a'}s into this displayed row.`;
+  return renderMediaImage({
+    src,
+    label,
+    alt: `${row.label || 'Level'} ${label}`,
+    note
+  });
+}
+
+function levelVisualVideo(row = {}, side = 'current'){
+  const isTarget = side === 'target';
+  const src = isTarget ? row.targetVideo : row.currentVideo;
+  if(!src || !fs.existsSync(path.join(ROOT, normalizeAssetSourcePath(src)))){
+    return `<div class="mediaPlaceholder">${isTarget ? 'Target Galaga 10s gameplay clip' : 'Current Aurora 10s gameplay clip'} pending.</div>`;
+  }
+  return renderMediaVideo({
+    src,
+    poster: isTarget ? row.targetScreenshot : row.currentScreenshot,
+    label: isTarget ? 'Target Galaga 10s gameplay' : 'Aurora current 10s gameplay',
+    alt: `${row.label || 'Level'} ${isTarget ? 'target Galaga gameplay clip' : 'Aurora current gameplay clip'}`,
+    note: isTarget
+      ? `${row.targetVideoStatus || 'target clip'}; starts at ${row.targetSourceTimeSeconds ?? 'n/a'}s in the source video.`
+      : `${row.currentVideoStatus || 'current clip'}; starts at the row's ${row.sampleSeconds ?? 'n/a'}s Aurora sample point.`
+  });
+}
+
+function levelVisualReferenceEvidence(row = {}){
+  const target = row.targetWindow || {};
+  const items = [
+    target.contactSheet ? { src: target.contactSheet, label: 'Target contact sheet', alt: `${row.label || 'Level'} target contact sheet`, note: target.motionRead || 'Target contact-sheet evidence.' } : null,
+    target.denseContactSheet ? { src: target.denseContactSheet, label: 'Target dense contact sheet', alt: `${row.label || 'Level'} target dense contact sheet`, note: 'Denser target-stage contact sheet for frame-by-frame visual review.' } : null,
+    target.motionSheet ? { src: target.motionSheet, label: 'Target motion sheet', alt: `${row.label || 'Level'} target motion sheet`, note: 'Motion-difference or motion-review sheet from the target-gameplay evidence.' } : null
+  ].filter(Boolean);
+  if(!items.length) return '<span class="docMeta">No supplemental target contact sheet is linked for this row yet.</span>';
+  return `<div class="levelRoleImages">${items.map(renderMediaImage).join('')}</div>`;
+}
+
+function levelVisualRoleGrid(row = {}){
+  const roles = Array.isArray(row.roles) ? row.roles : [];
+  if(!roles.length) return '<div class="mediaPlaceholder">Ship and alien bitmap evidence pending for this row.</div>';
+  return roles.map(role => {
+    const media = [
+      role.current ? { src: role.current, label: 'Aurora current bitmap', alt: `${role.label || role.key || 'role'} Aurora current bitmap`, pixelated: true, note: 'Captured from the current Aurora runtime sprite-conformance harness.' } : null,
+      role.target ? { src: role.target, label: 'Galaga target bitmap', alt: `${role.label || role.key || 'role'} Galaga target bitmap`, pixelated: true, note: 'Exact source-frame target crop when available.' } : null,
+      role.targetModel ? { src: role.targetModel, label: 'Galaga target model', alt: `${role.label || role.key || 'role'} Galaga target model`, pixelated: true, note: 'Inferred consensus model from the sprite-reference corpus.' } : null
+    ].filter(item => item && item.src && fs.existsSync(path.join(ROOT, normalizeAssetSourcePath(item.src))));
+    return `
+      <article class="levelRoleCard">
+        <h4>${esc(role.label || role.key || 'Role')}</h4>
+        ${media.length ? `<div class="levelRoleImages">${media.map(renderMediaImage).join('')}</div>` : '<div class="mediaPlaceholder">Bitmap pair pending.</div>'}
+      </article>
+    `;
+  }).join('\n');
+}
+
+function levelVisualMetrics(row = {}){
+  const metrics = row.conformanceMetrics || row.analysis || {};
+  const entries = [
+    ['Overall', metrics.score10],
+    ['Movement', metrics.movementScore10],
+    ['Graphics', metrics.graphicsScore10],
+    ['Alien novelty', metrics.noveltyScore10],
+    ['Progression', metrics.progressionScore10]
+  ];
+  return `<div class="levelVisualMetricGrid">${entries.map(([label, value]) => `<span>${esc(levelVisualScore(value, label))}</span>`).join('')}</div>`;
+}
+
+function renderLevelVisualDetail(row = {}){
+  const analysis = row.analysis || {};
+  const metrics = row.conformanceMetrics || {};
+  const score = metrics.score10 ?? analysis.score10;
+  const movement = metrics.movementScore10 ?? analysis.movementScore10;
+  const graphics = metrics.graphicsScore10 ?? analysis.graphicsScore10;
+  const novelty = metrics.noveltyScore10 ?? analysis.noveltyScore10;
+  const orderLabel = row.kind === 'challenge'
+    ? `Challenge ${row.challengeNumber || ''}`
+    : `Level ${row.displayLevel || ''}`;
+  const targetStatus = levelVisualStatus(row);
+  const scoreLabel = score !== null && score !== undefined && Number.isFinite(+score)
+    ? `${Number(score).toFixed(1)}/10`
+    : 'unscored';
+  const targetRead = row.targetWindow?.motionRead || analysis.variationRead || 'Target read pending.';
+  const currentRead = analysis.currentRead || row.currentRoleRead || 'Current scene read pending.';
+  return `
+    <details class="levelVisualDetail" id="level-visual-${esc(row.id || row.displayOrder || '')}">
+      <summary class="levelVisualSummary">
+        <span class="levelVisualTitle">
+          <span>${esc(row.label || orderLabel)}</span>
+          <small>${esc(orderLabel)} · ${esc(row.kind === 'challenge' ? 'Challenging Stage' : 'Regular Level')} · ${esc(targetStatus)}</small>
+        </span>
+        <span class="levelVisualSummaryCell"><strong>${esc(scoreLabel)}</strong>${esc(analysis.status || targetStatus)}</span>
+        <span class="levelVisualSummaryCell"><strong>${esc(levelVisualScore(movement))} movement</strong>${esc(levelVisualScore(graphics))} graphics; ${esc(levelVisualScore(novelty))} novelty</span>
+        <span class="levelVisualSummaryCell"><strong>Scene roles</strong>${esc(row.currentRoleRead || (row.targetWindow?.targetFamilies || []).join(', ') || 'role read pending')}</span>
+        <span class="scorePill">${row.targetWindow?.exact ? 'exact target' : 'representative target'}</span>
+      </summary>
+      <div class="levelVisualDetailBody">
+        <div class="levelVisualCompareGrid">
+          <article class="challengeEvidenceCard">
+            <h3>Reference Target</h3>
+            ${levelVisualMedia(row, 'target')}
+            <p>${esc(targetRead)}</p>
+            <p class="docMeta">Target families: ${esc((row.targetWindow?.targetFamilies || []).join(', ') || 'pending')}.</p>
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>Aurora Current</h3>
+            ${levelVisualMedia(row, 'current')}
+            <p>${esc(currentRead)}</p>
+            <p class="docMeta">Captured from the current local/runtime build. Enemy count ${esc(row.currentEnemyCount ?? 'n/a')}; challenge enemies ${esc(row.challengeEnemyCount ?? 'n/a')}.</p>
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>Conformance Read</h3>
+            <p>${esc(analysis.playerFacingRead || 'Player-facing conformance read pending.')}</p>
+            <p><strong>Critical gap:</strong> ${esc(analysis.criticalGap || 'Gap pending.')}</p>
+            <p><strong>Next:</strong> ${esc(analysis.next || 'Next measurement/action pending.')}</p>
+            ${levelVisualMetrics(row)}
+          </article>
+        </div>
+        <div class="challengeEvidenceCard">
+          <h3>10s Motion Review Clips</h3>
+          <p class="docMeta">These clips are intentionally large enough to compare side by side in-page. They are the first human-readable motion layer for this index: the still frame anchors the moment, while the clip exposes entry route, pacing, turn shape, density, and whether the level feels authored or merely populated.</p>
+          <div class="levelVisualVideoGrid">
+            ${levelVisualVideo(row, 'target')}
+            ${levelVisualVideo(row, 'current')}
+          </div>
+        </div>
+        <div class="challengeEvidenceCard">
+          <h3>Aliens, Ships, And Bitmaps</h3>
+          <p class="docMeta">The cards below pair current Aurora runtime bitmaps with Galaga target crops/models for each ship or alien family visible or expected in this scene. Static bitmap similarity is not the whole conformance story; live motion, entry route, flapping/pulsing, capture/rescue, and formation context still require temporal scoring.</p>
+          <div class="levelVisualRoleGrid">
+            ${levelVisualRoleGrid(row)}
+          </div>
+        </div>
+        <details class="inlineDocPreview">
+          <summary>Open supporting target sheets and measurement notes</summary>
+          <div class="inlineDocPreviewBody">
+            <p><strong>Target grounding:</strong> ${esc(targetStatus)}. ${row.targetWindow?.exact ? 'This row has an exact ingested target window.' : 'This row uses an actual Galaga gameplay frame as a representative target until exact per-level normal-stage windows are ingested.'}</p>
+            <p><strong>Variation read:</strong> ${esc(analysis.variationRead || 'Variation read pending.')}</p>
+            <p><strong>Aurora contract:</strong> ${esc(row.targetWindow?.auroraContract || 'Contract pending.')}</p>
+            ${levelVisualReferenceEvidence(row)}
+          </div>
+        </details>
+      </div>
+    </details>
+  `;
+}
+
 function renderChallengeStageDetail(row = {}){
   const label = challengeStageDisplayLabel(row);
   const score = row.conformanceScore10 ?? 'n/a';
@@ -3261,6 +3746,7 @@ function renderChallengeStageDetail(row = {}){
             ${challengeTrajectoryDiagramMedia(row)}
             <p><strong>Strict read:</strong> movement ${esc(movement)}/10, graphics ${esc(graphics)}/10, alien novelty ${esc(novelty)}/10, progression ${esc(row.progressionConformanceScore10 ?? 'n/a')}/10.</p>
             <p><strong>Diagnostic best reference:</strong> <code>${esc(bestRef)}</code> (${esc(row.referenceMatchScore10 ?? 'n/a')}/10 legacy broad coverage).</p>
+            <p><strong>Target contract:</strong> ${esc(row.targetContractFitScore10 ?? 'pending')}/10. ${esc(row.targetContractRead || 'No explicit contract yet.')}</p>
             <p>${esc(row.criticalExpectation || 'Critical expectation pending.')}</p>
             ${challengeScoreComponents(row)}
           </article>
@@ -3366,6 +3852,27 @@ function referenceSpriteMediaForKey(spriteKey){
       note: target.note || 'Exact source-frame pixel target.'
     }))
   ];
+}
+
+function alienVisualReferenceMediaForKey(spriteKey){
+  if(!spriteKey) return [];
+  const aliases = {
+    'rogue-fighter': ['rogue-fighter', 'player-fighter', 'tractor-beam'],
+    'challenge-dragonfly': ['challenge-dragonfly', 'challenge-mosquito'],
+    'challenge-mosquito': ['challenge-mosquito', 'challenge-dragonfly']
+  };
+  const keys = new Set([spriteKey, ...(aliases[spriteKey] || [])]);
+  return (loadGalagaAlienVisualReference().entries || [])
+    .filter(entry => entry.exists && Array.isArray(entry.roleKeys) && entry.roleKeys.some(key => keys.has(key)) && entry.path)
+    .sort((a, b) => (Number(b.targetCandidateScore || 0) - Number(a.targetCandidateScore || 0)) || String(a.id).localeCompare(String(b.id)))
+    .slice(0, 3)
+    .map(entry => ({
+      label: entry.label || entry.id || 'Galaga close-up reference',
+      src: entry.path,
+      pixelated: /sprite|pixel|lineup|grid/i.test(`${entry.sourceClass || ''} ${entry.label || ''}`),
+      kind: 'alienVisualReference',
+      note: `${entry.sourceClass || 'reference image'}; ${entry.targetUse || 'visual context'}. ${entry.notes || ''}`.trim()
+    }));
 }
 
 const AUDIO_PLOT_STEMS = {
@@ -3480,6 +3987,31 @@ function renderMediaImage(item){
   `;
 }
 
+function renderMediaVideo(item){
+  if(!item || !item.src) return '';
+  const href = catalogMediaHref(item.src);
+  const poster = item.poster ? catalogMediaHref(item.poster) : '';
+  const label = item.label || 'Evidence video';
+  const alt = item.alt || label;
+  const note = item.note || '10-second evidence clip for inline motion review.';
+  const ext = path.extname(String(item.src || '')).toLowerCase();
+  const type = ext === '.mp4' || ext === '.m4v'
+    ? 'video/mp4'
+    : ext === '.mov'
+      ? 'video/quicktime'
+      : 'video/webm';
+  return `
+    <div class="catalogMediaItem">
+      <span class="catalogMediaLabel">${esc(label)}</span>
+      <video class="catalogMediaVideo" controls preload="metadata"${poster ? ` poster="${esc(poster)}"` : ''} aria-label="${esc(alt)}">
+        <source src="${esc(href)}" type="${esc(type)}">
+        Your browser cannot play this evidence video. Open <a href="${esc(href)}">the clip</a> directly.
+      </video>
+      <span class="catalogMediaNote">${esc(note)}</span>
+    </div>
+  `;
+}
+
 function renderCatalogVisualMedia(entry, options = {}){
   const sprite = catalogSpriteForEntry(entry);
   const spriteKey = spriteKeyForEntry(entry);
@@ -3488,6 +4020,7 @@ function renderCatalogVisualMedia(entry, options = {}){
   const images = [
     ...(Array.isArray(media.images) ? media.images : []),
     ...(wantsReferenceTargets ? referenceSpriteMediaForKey(spriteKey) : []),
+    ...(options.includeReferenceContext ? alienVisualReferenceMediaForKey(spriteKey) : []),
     ...(options.includeReferenceContext ? (ALIEN_REFERENCE_CONTEXT[spriteKey] || []) : [])
   ];
   const items = [
@@ -3624,6 +4157,445 @@ function renderTargetArtifactCoverageRows(report){
   `).join('\n');
 }
 
+function renderAlienVisualReferenceRows(artifact){
+  const entries = Array.isArray(artifact?.entries) ? artifact.entries : [];
+  if(!entries.length){
+    return `
+    <tr>
+      <td colspan="5"><span class="docMeta">Alien visual reference pack pending. Run <code>npm run harness:analyze:galaga-alien-visual-reference</code>.</span></td>
+    </tr>`;
+  }
+  return entries.map((entry) => `
+    <tr>
+      <td><strong>${esc(entry.label || entry.id || '')}</strong><br><span class="docMeta"><code>${esc(entry.id || '')}</code><br>${esc(entry.sourceClass || '')}</span></td>
+      <td>${renderMediaImage({
+        label: 'Supplied reference image',
+        src: entry.path,
+        pixelated: /sprite|pixel|lineup|grid/i.test(`${entry.sourceClass || ''} ${entry.label || ''}`),
+        note: entry.notes || entry.targetUse || ''
+      })}</td>
+      <td>${(entry.roleKeys || []).map(role => `<code>${esc(role)}</code>`).join('<br>')}</td>
+      <td><strong>${esc(entry.targetUse || '')}</strong><br><span class="docMeta">${esc(entry.authority || '')}</span></td>
+      <td>${esc(entry.notes || '')}</td>
+    </tr>
+  `).join('\n');
+}
+
+function renderGalagaAlienMotionRoleRows(report){
+  const roles = Array.isArray(report?.roleTaxonomy) ? report.roleTaxonomy : [];
+  if(!roles.length){
+    return `
+    <tr>
+      <td colspan="4"><span class="docMeta">Alien motion reference pending. Run <code>npm run harness:analyze:galaga-alien-motion-reference</code>.</span></td>
+    </tr>`;
+  }
+  return roles.map((role) => `
+    <tr>
+      <td><strong>${esc(role.label || role.roleKey || '')}</strong><br><span class="docMeta"><code>${esc(role.roleKey || '')}</code><br>${esc((role.aliases || []).join(', '))}</span></td>
+      <td>${esc(role.referenceUse || '')}</td>
+      <td>${esc(role.nextExtraction || '')}</td>
+      <td>${role.roleKey === 'boss-galaga'
+        ? 'Highest priority: current target evidence has visible crop pollution.'
+        : role.roleKey === 'bee-zako' || role.roleKey === 'butterfly-escort'
+          ? 'High priority: core formation aliens need clean pulse pairs.'
+          : 'Use after core formation roles are corrected.'}</td>
+    </tr>
+  `).join('\n');
+}
+
+function renderSpriteConformanceLaneRows(plan){
+  const lanes = Array.isArray(plan?.lanes) ? plan.lanes : [];
+  if(!lanes.length){
+    return `
+    <tr>
+      <td colspan="5"><span class="docMeta">Sprite conformance and variation plan pending.</span></td>
+    </tr>`;
+  }
+  return lanes.map((lane) => `
+    <tr>
+      <td><strong>${esc(lane.label || lane.id || '')}</strong><br><span class="docMeta"><code>${esc(lane.id || '')}</code><br>${esc(lane.releaseUse || '')}</span></td>
+      <td>${esc(lane.purpose || '')}</td>
+      <td>${esc(lane.rendererExpectation || '')}</td>
+      <td>${(lane.metrics || []).map(metric => `<code>${esc(metric)}</code>`).join('<br>')}</td>
+      <td>${lane.id === 'reference-conformance-lane'
+        ? 'Use for internal target comparison and measurement.'
+        : lane.id === 'aurora-production-theme-lane'
+          ? 'Use for public Aurora originality and era-faithful presentation.'
+          : 'Use to onboard future games through the same artifact loop.'}</td>
+    </tr>
+  `).join('\n');
+}
+
+function renderSpriteConformancePipelineRows(plan){
+  const steps = Array.isArray(plan?.pipelineSteps) ? plan.pipelineSteps : [];
+  if(!steps.length){
+    return `
+    <tr>
+      <td colspan="4"><span class="docMeta">Sprite pipeline steps pending.</span></td>
+    </tr>`;
+  }
+  return steps.map((step, index) => `
+    <tr>
+      <td><strong>${esc(index + 1)}. ${esc(step.label || step.id || '')}</strong><br><span class="docMeta"><code>${esc(step.id || '')}</code></span></td>
+      <td>${esc(step.goal || '')}</td>
+      <td>${esc(step.currentStatus || '')}</td>
+      <td>${esc(step.nextAction || '')}</td>
+    </tr>
+  `).join('\n');
+}
+
+function renderSpriteConformanceSuccessRows(plan){
+  const rows = Array.isArray(plan?.successCriteria) ? plan.successCriteria : [];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="3"><span class="docMeta">Sprite success criteria pending.</span></td>
+    </tr>`;
+  }
+  return rows.map((row) => `
+    <tr>
+      <td><strong>${esc(row.label || row.id || '')}</strong><br><span class="docMeta"><code>${esc(row.id || '')}</code></span></td>
+      <td>${esc(row.target || '')}</td>
+      <td>${row.id === 'short-term'
+        ? 'Next practical implementation target.'
+        : row.id === 'release-gate'
+          ? 'Required before broad public claims.'
+          : 'Tracked as the sprite pipeline matures.'}</td>
+    </tr>
+  `).join('\n');
+}
+
+function renderGalagaAlienCropPreviewRows(report){
+  const regions = Array.isArray(report?.regions) ? report.regions : [];
+  if(!regions.length){
+    return `
+    <tr>
+      <td colspan="5"><span class="docMeta">Crop previews pending. Run <code>npm run harness:analyze:galaga-alien-crop-previews</code>.</span></td>
+    </tr>`;
+  }
+  return regions.map((region) => {
+    const hasGrid = Number.isFinite(+region.gridCellCount) && +region.gridCellCount > 0;
+    const candidateRead = hasGrid
+      ? `<strong>${esc(region.interestingCellCount ?? 0)}/${esc(region.gridCellCount ?? 0)}</strong> lit candidate cells<br><span class="docMeta">channels: ${esc((region.tokenChannels || []).join(', ') || 'none')}</span>`
+      : `<strong>Region-level review</strong><br><span class="docMeta">${esc(region.litPixels ?? 0)} lit pixels; channels: ${esc((region.tokenChannels || []).join(', ') || 'none')}</span>`;
+    return `
+    <tr>
+      <td><strong>${esc(region.label || region.id || '')}</strong><br><span class="docMeta"><code>${esc(region.id || '')}</code><br>${esc(region.promotionStatus || '')}</span></td>
+      <td>${renderMediaImage({
+        label: 'Region preview',
+        src: region.previewImage,
+        pixelated: true,
+        note: 'Source-sheet region crop generated from the crop-box manifest.'
+      })}</td>
+      <td>${region.gridPreviewImage ? renderMediaImage({
+        label: 'Grid review overlay',
+        src: region.gridPreviewImage,
+        pixelated: true,
+        note: 'Grid overlay for reviewing exact candidate cells before promotion.'
+      }) : '<span class="docMeta">No grid overlay for this region.</span>'}</td>
+      <td>${candidateRead}</td>
+      <td>${esc(region.nextReview || '')}</td>
+    </tr>
+  `;
+  }).join('\n');
+}
+
+function renderGalagaAlienCropRoleRows(report){
+  const roles = Array.isArray(report?.targetRolePlan) ? report.targetRolePlan : [];
+  if(!roles.length){
+    return `
+    <tr>
+      <td colspan="5"><span class="docMeta">Target role crop review pending.</span></td>
+    </tr>`;
+  }
+  return roles.map((role) => `
+    <tr>
+      <td><strong>${esc(role.roleKey || '')}</strong><br><span class="docMeta">${esc(role.promotionStatus || '')}</span></td>
+      <td>${(role.requiredPoses || []).map(pose => `<code>${esc(pose)}</code>`).join('<br>')}</td>
+      <td>${(role.candidateRegions || []).map(region => `<code>${esc(region)}</code>`).join('<br>')}</td>
+      <td><strong>${esc(role.interestingCellCount ?? 0)}/${esc(role.candidateCellCount ?? 0)}</strong> candidate cells<br><span class="docMeta">${esc(role.candidateRegionCount ?? 0)} source region(s)</span></td>
+      <td>${esc(role.nextAction || '')}</td>
+    </tr>
+  `).join('\n');
+}
+
+function renderGalagaAlienTargetRoleRows(report){
+  const roles = Array.isArray(report?.roleSets) ? report.roleSets : [];
+  if(!roles.length){
+    return `
+    <tr>
+      <td colspan="4"><span class="docMeta">Promoted target crop role sets pending. Run <code>npm run harness:promote:galaga-alien-target-crops</code>.</span></td>
+    </tr>`;
+  }
+  return roles.map((role) => `
+    <tr>
+      <td><strong>${esc(role.label || role.roleKey || '')}</strong><br><span class="docMeta"><code>${esc(role.roleKey || '')}</code></span></td>
+      <td>${(role.promotedPoses || []).map(pose => `<code>${esc(pose)}</code>`).join('<br>')}</td>
+      <td><strong>${esc(role.promotedPoseCount ?? (role.targetCrops || []).length ?? 0)}</strong> promoted crop(s)<br><span class="docMeta">${esc(role.status || '')}</span></td>
+      <td>${esc(role.coverageRead || '')}</td>
+    </tr>
+  `).join('\n');
+}
+
+function renderGalagaAlienTargetCropRows(report){
+  const crops = Array.isArray(report?.targetCrops) ? report.targetCrops : [];
+  if(!crops.length){
+    return `
+    <tr>
+      <td colspan="6"><span class="docMeta">Promoted target crops pending. Run <code>npm run harness:promote:galaga-alien-target-crops</code>.</span></td>
+    </tr>`;
+  }
+  return crops.map((crop) => {
+    const source = crop.sourceCell
+      ? `${crop.sourceRegion || ''} r${crop.sourceCell.row} c${crop.sourceCell.column}`
+      : (crop.sourceRegion || 'custom crop');
+    const box = crop.crop || {};
+    const metricText = `${crop.metrics?.litPixels ?? 0} lit px; ${esc((crop.metrics?.tokenChannels || []).join(', ') || 'no channels')}`;
+    return `
+    <tr>
+      <td><strong>${esc(crop.roleKey || '')}</strong><br><span class="docMeta">${esc(crop.reviewStatus || '')}</span></td>
+      <td><code>${esc(crop.poseKey || '')}</code></td>
+      <td>${renderMediaImage({
+        label: crop.poseKey || crop.id || 'Target crop',
+        src: crop.targetCrop,
+        pixelated: true,
+        note: crop.videoDerivedCleanCrop ? 'Trusted cleaned target crop promoted from the segmented Galaga alien motion reference.' : 'Target crop promoted from the supplied Galaga general sprite sheet.'
+      })}</td>
+      <td>${esc(source)}<br><span class="docMeta"><code>${esc(`${box.x ?? '?'}:${box.y ?? '?'} ${box.width ?? '?'}x${box.height ?? '?'}`)}</code></span></td>
+      <td>${metricText}</td>
+      <td>${esc(crop.note || '')}</td>
+    </tr>
+  `;
+  }).join('\n');
+}
+
+function renderGalagaTargetEvidenceAuditRows(report){
+  const rows = Array.isArray(report?.rows) ? report.rows : [];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="6"><span class="docMeta">Trusted target evidence audit pending. Run <code>npm run harness:analyze:galaga-target-evidence-audit</code>.</span></td>
+    </tr>`;
+  }
+  return rows.map((row) => {
+    const crops = Array.isArray(row.linkedCrops) ? row.linkedCrops : [];
+    const cropMedia = crops.slice(0, 4).map((crop) => crop.targetCrop ? renderMediaImage({
+      label: crop.id || 'Target crop',
+      src: crop.targetCrop,
+      pixelated: true,
+      note: `${crop.reviewStatus || 'review pending'}${crop.sourceFrameSeconds !== undefined ? `; frame ${crop.sourceFrameSeconds}s` : ''}`
+    }) : '').join('');
+    return `
+    <tr>
+      <td><strong>${esc(row.label || row.roleKey || '')}</strong><br><span class="docMeta"><code>${esc(row.roleKey || '')}</code><br>${esc(row.status || '')}<br>confidence: ${esc(row.confidence || 'pending')}</span></td>
+      <td>${cropMedia || '<span class="docMeta">No linked crop media.</span>'}</td>
+      <td>${esc(row.previousRisk || '')}</td>
+      <td>${esc(row.scoringUse || '')}</td>
+      <td>${esc(row.playerMeaning || '')}</td>
+      <td>${esc(row.nextGap || '')}</td>
+    </tr>
+  `;
+  }).join('\n');
+}
+
+function renderGalagaAlienTemporalTargetRows(report){
+  const rows = Array.isArray(report?.rows) ? report.rows : [];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="6"><span class="docMeta">Alien temporal targets pending. Run <code>npm run harness:analyze:galaga-alien-temporal-targets</code>.</span></td>
+    </tr>`;
+  }
+  return rows.map((row) => {
+    const crops = Array.isArray(row.targetCrops) ? row.targetCrops : [];
+    const cropMedia = crops.slice(0, 4).map((crop) => crop.targetCrop ? renderMediaImage({
+      label: crop.id || 'Temporal target crop',
+      src: crop.targetCrop,
+      pixelated: true,
+      note: crop.reviewStatus || 'review pending'
+    }) : '').join('');
+    return `
+    <tr>
+      <td><strong>${esc(row.label || row.id || '')}</strong><br><span class="docMeta"><code>${esc(row.runtimeSpriteKey || '')}</code><br>${esc(row.status || '')}<br>confidence: ${esc(row.confidence || 'pending')}</span></td>
+      <td>${(row.poseSequence || []).map(pose => `<code>${esc(pose)}</code>`).join('<br>')}</td>
+      <td>${cropMedia || '<span class="docMeta">No temporal crop media.</span>'}</td>
+      <td>${esc(row.sourceRead || '')}</td>
+      <td>${esc(row.scoringUse || '')}</td>
+      <td>${esc(row.nextGap || '')}</td>
+    </tr>
+  `;
+  }).join('\n');
+}
+
+function renderAuroraRuntimeVsTargetRows(report){
+  const rows = Array.isArray(report?.comparisons) ? report.comparisons : [];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="5"><span class="docMeta">Runtime-vs-target sprite comparisons pending. Run <code>npm run harness:analyze:aurora-runtime-vs-galaga-target-crops</code>.</span></td>
+    </tr>`;
+  }
+  return rows.map((row) => `
+    <tr>
+      <td><strong>${esc(row.spriteKey || '')}</strong><br><span class="docMeta">runtime model ${Number.isFinite(+row.runtimeModelScore10) ? `${Number(row.runtimeModelScore10).toFixed(1)}/10` : 'n/a'}</span></td>
+      <td>${renderMediaImage({
+        label: 'Aurora runtime crop',
+        src: row.runtimeCrop,
+        pixelated: true,
+        note: 'Isolated live canvas crop from the current Aurora renderer.'
+      })}</td>
+      <td>${renderMediaImage({
+        label: row.bestTargetCropId || 'Best Galaga target crop',
+        src: row.bestTargetCrop,
+        pixelated: true,
+        note: `${row.bestTargetRoleKey || 'target role'} / ${row.bestTargetPoseKey || 'target pose'}`
+      })}</td>
+      <td><strong>${Number.isFinite(+row.bestScore10) ? `${Number(row.bestScore10).toFixed(1)}/10` : 'pending'}</strong><br><span class="docMeta">candidates: ${esc(row.candidateCount ?? 0)}; role filter: ${(row.candidateRoleKeys || []).map(key => `<code>${esc(key)}</code>`).join(' ')}</span></td>
+      <td>${row.bestComponents ? `Jaccard ${esc(row.bestComponents.jaccard ?? 'n/a')}; silhouette ${esc(row.bestComponents.silhouetteAgreement ?? 'n/a')}; color ${esc(row.bestComponents.colorSimilarity ?? 'n/a')}.` : 'Component scoring pending.'}</td>
+    </tr>
+  `).join('\n');
+}
+
+function renderAuroraSpriteTemporalRows(report){
+  const rows = Array.isArray(report?.temporalSamples) ? report.temporalSamples : [];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="5"><span class="docMeta">Temporal sprite phase windows pending.</span></td>
+    </tr>`;
+  }
+  return rows.map((row) => `
+    <tr>
+      <td><strong>${esc(row.spriteKey || '')}</strong><br><span class="docMeta">${esc(row.motionAxis || '')}</span></td>
+      <td>${renderMediaImage({
+        label: 'Closed phase',
+        src: row.phaseClosedCrop,
+        pixelated: true,
+        note: 'Harness-captured closed/static flap phase.'
+      })}</td>
+      <td>${renderMediaImage({
+        label: 'Open phase',
+        src: row.phaseOpenCrop,
+        pixelated: true,
+        note: 'Harness-captured open flap phase.'
+      })}</td>
+      <td><strong>${esc(row.filledCellDelta ?? 0)}</strong> filled-cell delta<br><span class="docMeta">${esc(row.litPixelDelta ?? 0)} lit-pixel delta; score delta ${esc(row.scoreDelta ?? 0)}</span></td>
+      <td>${esc(row.read || '')}</td>
+    </tr>
+  `).join('\n');
+}
+
+function renderAuroraSpriteCadenceRows(report){
+  const rows = Array.isArray(report?.cadenceSamples) ? report.cadenceSamples : [];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="5"><span class="docMeta">Full flap-cadence windows pending.</span></td>
+    </tr>`;
+  }
+  return rows.map((row) => {
+    const frames = Array.isArray(row.frames) ? row.frames : [];
+    const previewFrames = frames.filter((_, index) => index === 0 || index === Math.floor(frames.length / 2) || index === frames.length - 1);
+    return `
+    <tr>
+      <td><strong>${esc(row.spriteKey || '')}</strong><br><span class="docMeta">${esc(row.motionAxis || '')}; ${esc(row.frameCount || 0)} frame(s)</span></td>
+      <td><div class="catalogMedia"><div class="catalogMediaGrid">${previewFrames.map(frame => renderMediaImage({
+        label: `Frame ${frame.frameIndex}`,
+        src: frame.cropImage,
+        pixelated: true,
+        note: `tm ${frame.enemyTm}; score ${Number.isFinite(+frame.score10) ? `${Number(frame.score10).toFixed(1)}/10` : 'n/a'}`
+      })).join('')}</div></div></td>
+      <td><strong>${esc(row.scoreRange10 ?? 'n/a')}</strong> score range<br><span class="docMeta">${esc(row.averageAdjacentLitPixelDelta ?? 'n/a')} avg adjacent lit-pixel delta</span></td>
+      <td>${esc(row.averageAdjacentFilledCellDelta ?? 'n/a')} avg adjacent filled-cell delta</td>
+      <td>${esc(row.read || '')}</td>
+    </tr>
+  `;
+  }).join('\n');
+}
+
+function renderAuroraRuntimeVsTargetTemporalRows(report){
+  const rows = Array.isArray(report?.temporalSequenceComparisons) ? report.temporalSequenceComparisons : [];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="5"><span class="docMeta">Target-relative temporal sprite sequence scoring pending. Run <code>npm run harness:analyze:aurora-runtime-vs-galaga-target-crops</code> after runtime cadence windows exist.</span></td>
+    </tr>`;
+  }
+  return rows.map((row) => {
+    const frames = Array.isArray(row.frames) ? row.frames : [];
+    const previewFrames = frames.filter((_, index) => index === 0 || index === Math.floor(frames.length / 2) || index === frames.length - 1);
+    return `
+    <tr>
+      <td><strong>${esc(row.spriteKey || '')}</strong><br><span class="docMeta">${esc(row.motionAxis || '')}; ${esc(row.frameCount || 0)} frame(s)</span></td>
+      <td>${esc((row.expectedPoseSequence || []).join(' -> ') || 'pending')}</td>
+      <td><div class="catalogMedia"><div class="catalogMediaGrid">${previewFrames.map(frame => renderMediaImage({
+        label: `Frame ${frame.frameIndex}`,
+        src: frame.runtimeCrop,
+        pixelated: true,
+        note: `expected ${frame.expectedPoseKey || 'pose'}; best target ${frame.bestTargetPoseKey || 'n/a'}`
+      })).join('')}</div></div></td>
+      <td><strong>${Number.isFinite(+row.sequenceScore10) ? `${Number(row.sequenceScore10).toFixed(1)}/10` : 'pending'}</strong><br><span class="docMeta">avg frame ${Number.isFinite(+row.averageFrameScore10) ? `${Number(row.averageFrameScore10).toFixed(1)}/10` : 'n/a'}; pose coverage ${Number.isFinite(+row.expectedPoseCoverage) ? `${Math.round(+row.expectedPoseCoverage * 100)}%` : 'n/a'}</span></td>
+      <td>${esc(row.read || '')}</td>
+    </tr>
+  `;
+  }).join('\n');
+}
+
+function renderAuroraSpritePoseRows(report){
+  const rows = [
+    ...(Array.isArray(report?.divePoseSamples) ? report.divePoseSamples : []),
+    ...(Array.isArray(report?.transitionPoseSamples) ? report.transitionPoseSamples : [])
+  ];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="4"><span class="docMeta">Dive and transition pose windows pending.</span></td>
+    </tr>`;
+  }
+  return rows.map((row) => `
+    <tr>
+      <td><strong>${esc(row.spriteKey || '')}</strong><br><span class="docMeta">${esc(row.motionAxis || '')}</span></td>
+      <td>${renderMediaImage({
+        label: row.spriteKey || 'Runtime pose',
+        src: row.cropImage,
+        pixelated: true,
+        note: 'Harness-captured runtime pose seed for active sprite-motion conformance.'
+      })}</td>
+      <td><strong>${Number.isFinite(+row.score10) ? `${Number(row.score10).toFixed(1)}/10` : 'unscored'}</strong><br><span class="docMeta">filled ${esc(row.filledCells ?? 'n/a')}; lit ${esc(row.litPixels ?? 'n/a')}</span></td>
+      <td>${esc(row.read || '')}</td>
+    </tr>
+  `).join('\n');
+}
+
+function renderAuroraImpactExplosionRows(report){
+  const rows = Array.isArray(report?.samples) ? report.samples : [];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="5"><span class="docMeta">Impact/explosion comparison pending. Run <code>npm run harness:analyze:aurora-impact-explosion-conformance</code>.</span></td>
+    </tr>`;
+  }
+  return rows.map(row => `
+    <tr>
+      <td><strong>${esc(row.key || '')}</strong><br><span class="docMeta">${esc(row.decision || '')}</span></td>
+      <td>${renderMediaImage({
+        label: 'Aurora runtime event',
+        src: row.runtimeCrop,
+        pixelated: true,
+        note: row.playerMeaning || 'Runtime impact/explosion crop from the current Aurora renderer.'
+      })}</td>
+      <td>${renderMediaImage({
+        label: row.bestTargetCropId || 'Best Galaga target',
+        src: row.bestTargetCrop,
+        pixelated: true,
+        note: 'Promoted Galaga target-crop candidate for this event family.'
+      })}</td>
+      <td><strong>${Number.isFinite(+row.score10) ? `${Number(row.score10).toFixed(1)}/10` : 'pending'}</strong><br><span class="docMeta">${row.bestComponents ? `Jaccard ${esc(row.bestComponents.jaccard ?? 'n/a')}; silhouette ${esc(row.bestComponents.silhouetteAgreement ?? 'n/a')}; color ${esc(row.bestComponents.colorSimilarity ?? 'n/a')}` : 'component scoring pending'}</span><br><span class="docMeta">lifecycle ${Number.isFinite(+row.lifecycle?.lifecycleScore10) ? `${Number(row.lifecycle.lifecycleScore10).toFixed(1)}/10` : 'pending'}; audio ${Number.isFinite(+row.audioCouplingScore10) ? `${Number(row.audioCouplingScore10).toFixed(1)}/10` : 'pending'}</span></td>
+      <td>${esc(row.playerMeaning || '')}<br><span class="docMeta">${esc(row.lifecycle?.read || '')}</span><br><span class="docMeta">${esc(row.audioCouplingRead || '')}</span></td>
+    </tr>
+  `).join('\n');
+}
+
 function renderChallengeTargetCoverageRows(report){
   const rows = Array.isArray(report?.challengeStageCoverage) ? report.challengeStageCoverage : [];
   if(!rows.length){
@@ -3655,9 +4627,15 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'stage-families', title: 'Stage Family Progression' },
     { id: 'artifact-conformance-status', title: 'Artifact Conformance Status' },
     { id: 'target-artifact-coverage', title: 'Target Artifact Coverage' },
+    { id: 'alien-visual-reference-pack', title: 'Alien Visual References' },
+    { id: 'galaga-alien-motion-reference', title: 'Alien Motion Reference' },
+    { id: 'galaga-target-evidence-audit', title: 'Trusted Target Audit' },
+    { id: 'galaga-alien-temporal-targets', title: 'Alien Temporal Targets' },
+    { id: 'sprite-conformance-variation-plan', title: 'Sprite Conformance Plan' },
     { id: 'conformance-alien-index', title: 'Alien Conformance Index' },
     { id: 'conformance-audio-index', title: 'Audio Conformance Index' },
     { id: 'stage-conformance-summary', title: 'Stage Conformance Summary' },
+    { id: 'level-visual-conformance-index', title: 'Level Visual Index' },
     { id: 'challenge-stage-conformance', title: 'Challenge Stage Deep Dive' },
     { id: 'persona-catalog', title: 'Testing Personas' },
     { id: 'persona-performance-distribution', title: 'Persona Performance Distribution' },
@@ -3790,6 +4768,41 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const targetArtifactSummary = galagaTargetArtifactCoverage.summary || {};
   const targetArtifactRows = renderTargetArtifactCoverageRows(galagaTargetArtifactCoverage);
   const challengeTargetRows = renderChallengeTargetCoverageRows(galagaTargetArtifactCoverage);
+  const galagaAlienVisualReference = loadGalagaAlienVisualReference();
+  const alienVisualReferenceSummary = galagaAlienVisualReference.summary || {};
+  const alienVisualReferenceRows = renderAlienVisualReferenceRows(galagaAlienVisualReference);
+  const galagaAlienMotionReference = loadGalagaAlienMotionReference();
+  const galagaAlienMotionRoleRows = renderGalagaAlienMotionRoleRows(galagaAlienMotionReference);
+  const spriteConformanceVariationPlan = loadSpriteConformanceVariationPlan();
+  const spriteConformanceLaneRows = renderSpriteConformanceLaneRows(spriteConformanceVariationPlan);
+  const spriteConformancePipelineRows = renderSpriteConformancePipelineRows(spriteConformanceVariationPlan);
+  const spriteConformanceSuccessRows = renderSpriteConformanceSuccessRows(spriteConformanceVariationPlan);
+  const galagaAlienCropPreviews = loadGalagaAlienCropPreviews();
+  const galagaAlienCropPreviewSummary = galagaAlienCropPreviews.summary || {};
+  const galagaAlienCropPreviewRows = renderGalagaAlienCropPreviewRows(galagaAlienCropPreviews);
+  const galagaAlienCropRoleRows = renderGalagaAlienCropRoleRows(galagaAlienCropPreviews);
+  const galagaAlienTargetCrops = loadGalagaAlienTargetCrops();
+  const galagaAlienTargetCropSummary = galagaAlienTargetCrops.summary || {};
+  const galagaAlienTargetRoleRows = renderGalagaAlienTargetRoleRows(galagaAlienTargetCrops);
+  const galagaAlienTargetCropRows = renderGalagaAlienTargetCropRows(galagaAlienTargetCrops);
+  const galagaTargetEvidenceAudit = loadGalagaTargetEvidenceAudit();
+  const galagaTargetEvidenceAuditSummary = galagaTargetEvidenceAudit.summary || {};
+  const galagaTargetEvidenceAuditRows = renderGalagaTargetEvidenceAuditRows(galagaTargetEvidenceAudit);
+  const galagaAlienTemporalTargets = loadGalagaAlienTemporalTargets();
+  const galagaAlienTemporalTargetSummary = galagaAlienTemporalTargets.summary || {};
+  const galagaAlienTemporalTargetRows = renderGalagaAlienTemporalTargetRows(galagaAlienTemporalTargets);
+  const auroraRuntimeSpriteConformance = loadAuroraRuntimeSpriteConformance();
+  const auroraRuntimeSpriteSummary = auroraRuntimeSpriteConformance.summary || {};
+  const auroraRuntimeVsGalagaTargetCrops = loadAuroraRuntimeVsGalagaTargetCrops();
+  const auroraRuntimeVsGalagaTargetSummary = auroraRuntimeVsGalagaTargetCrops.summary || {};
+  const auroraRuntimeVsTargetRows = renderAuroraRuntimeVsTargetRows(auroraRuntimeVsGalagaTargetCrops);
+  const auroraSpriteTemporalRows = renderAuroraSpriteTemporalRows(auroraRuntimeSpriteConformance);
+  const auroraSpriteCadenceRows = renderAuroraSpriteCadenceRows(auroraRuntimeSpriteConformance);
+  const auroraRuntimeVsTargetTemporalRows = renderAuroraRuntimeVsTargetTemporalRows(auroraRuntimeVsGalagaTargetCrops);
+  const auroraSpritePoseRows = renderAuroraSpritePoseRows(auroraRuntimeSpriteConformance);
+  const auroraImpactExplosionConformance = loadAuroraImpactExplosionConformance();
+  const auroraImpactExplosionSummary = auroraImpactExplosionConformance.summary || {};
+  const auroraImpactExplosionRows = renderAuroraImpactExplosionRows(auroraImpactExplosionConformance);
   const conformanceAlienRows = (guide.conformanceAlienRows || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.name || '')}</strong><br><span class="docMeta">${esc(entry.runtime || '')}</span></td>
@@ -3824,6 +4837,11 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const challengeSummary = challengeStageConformance.summary || {};
   const challengeStageRows = (challengeStageConformance.stageRows || []).map(renderChallengeStageDetail).join('\n') || `
     <div class="docWrap"><span class="docMeta">Challenge-stage conformance analysis pending. Run <code>npm run harness:analyze:challenge-stage-conformance</code>.</span></div>
+  `;
+  const levelVisualIndex = loadLevelVisualConformanceIndex();
+  const levelVisualSummary = levelVisualIndex.summary || {};
+  const levelVisualRows = (levelVisualIndex.rows || []).map(renderLevelVisualDetail).join('\n') || `
+    <div class="docWrap"><span class="docMeta">Level visual conformance index pending. Run <code>npm run harness:analyze:level-visual-conformance-index</code>.</span></div>
   `;
   const personaRows = (guide.personaRows || []).map((entry) => `
     <tr>
@@ -4126,6 +5144,411 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           </div>
         </section>
 
+        <section class="section" id="alien-visual-reference-pack">
+          <div class="sectionHeader">
+            <h2>Alien Visual References</h2>
+            <p>Close-up Galaga alien and player-fighter references supplied for sprite analysis, role indexing, target-crop planning, and future graphical conformance scoring. The guide intentionally separates target candidates from fan/product/context images so automated scoring stays grounded.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Current read:</strong> ${esc(alienVisualReferenceSummary.existingImageCount || 0)} committed images, ${esc(alienVisualReferenceSummary.uniqueImageHashCount || 0)} unique hashes, ${esc(alienVisualReferenceSummary.targetCandidateCount || 0)} target candidates, and ${esc(alienVisualReferenceSummary.roleCoverageCount || 0)} covered role families.</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-visual-reference/latest.json</code>. <strong>Report:</strong> <code>GALAGA_ALIEN_VISUAL_REFERENCE.md</code>. Strongest current source: <code>${esc(alienVisualReferenceSummary.strongestTargetSource || 'pending')}</code>.</p>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Reference</th>
+                  <th>Preview</th>
+                  <th>Role Coverage</th>
+                  <th>Target Use</th>
+                  <th>Promotion Note</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${alienVisualReferenceRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="galaga-alien-motion-reference">
+          <div class="sectionHeader">
+            <h2>Alien Motion Reference</h2>
+            <p>Segmented Galaga alien video reference for pulse cadence, role taxonomy, and clean human-readable sprite identity. This sits between static crop extraction and gameplay trajectory scoring: it helps us see whether the sprite identities move and pulse like the target before we promote a conformance claim.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Current read:</strong> ${esc(galagaAlienMotionReference.status || 'pending')}. ${esc(galagaAlienMotionReference.summary || 'Motion reference analysis pending.')}</p>
+            <p><strong>Conformance use:</strong> ${esc(galagaAlienMotionReference.conformanceRead || 'Use this reference to validate crop boxes and seed temporal sprite scoring.')}</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-motion-reference/latest.json</code>. <strong>Readable report:</strong> <code>GALAGA_ALIEN_MOTION_REFERENCE.md</code>. <strong>Generated:</strong> ${esc(galagaAlienMotionReference.generatedAt || 'pending')}.</p>
+            <div class="metricGrid">
+              <div class="metricCard"><span class="metricLabel">Duration</span><strong>${esc(galagaAlienMotionReference.video?.durationSeconds ?? 'n/a')}s</strong><span>${esc(galagaAlienMotionReference.video?.frameRate || 'frame rate pending')}</span></div>
+              <div class="metricCard"><span class="metricLabel">Frame Size</span><strong>${esc(galagaAlienMotionReference.video?.width || 0)}x${esc(galagaAlienMotionReference.video?.height || 0)}</strong><span>source video pixels</span></div>
+              <div class="metricCard"><span class="metricLabel">Role Families</span><strong>${esc((galagaAlienMotionReference.roleTaxonomy || []).length)}</strong><span>taxonomy rows</span></div>
+              <div class="metricCard"><span class="metricLabel">Next Fix</span><strong>clean crops</strong><span>boss, bee, butterfly first</span></div>
+            </div>
+          </div>
+          <div class="catalogMedia" style="margin-top:16px;">
+            <div class="catalogMediaGrid">
+              ${renderMediaVideo({
+                label: 'Segmented alien pulse reference video',
+                src: galagaAlienMotionReference.media?.inlineVideo,
+                poster: galagaAlienMotionReference.media?.contactSheet,
+                note: 'User-supplied segmented Galaga alien reference showing named roles and pulse/motion phases.'
+              })}
+              ${renderMediaImage({
+                label: 'Alien pulse contact sheet',
+                src: galagaAlienMotionReference.media?.contactSheet,
+                note: '1 fps review sheet for quickly scanning the whole segmented video.'
+              })}
+              ${renderMediaImage({
+                label: 'Alien pulse motion sheet',
+                src: galagaAlienMotionReference.media?.motionSheet,
+                note: '2 fps review sheet for inspecting pulse cadence and transition frames.'
+              })}
+            </div>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Reference Use</th>
+                  <th>Next Extraction</th>
+                  <th>Priority Read</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${galagaAlienMotionRoleRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="galaga-target-evidence-audit">
+          <div class="sectionHeader">
+            <h2>Trusted Target Evidence Audit</h2>
+            <p>Human review found that some visually precise target crops were precise about the wrong thing: polluted sheet cells, partial neighboring sprites, or ambiguous evidence. This audit separates trusted target evidence from provisional planning evidence before scores drive more runtime sprite work.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Current read:</strong> ${esc(galagaTargetEvidenceAudit.status || 'pending')}. <strong>Next best step:</strong> ${esc(galagaTargetEvidenceAudit.nextBestStep || 'Regenerate target evidence audit after crop promotion.')}</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-target-evidence-audit/latest.json</code>. <strong>Readable report:</strong> <code>GALAGA_TARGET_EVIDENCE_AUDIT.md</code>. <strong>Generated:</strong> ${esc(galagaTargetEvidenceAudit.generatedAt || 'pending')}.</p>
+            <div class="metricGrid">
+              <div class="metricCard"><span class="metricLabel">Audited Roles</span><strong>${esc(galagaTargetEvidenceAuditSummary.auditedRoleCount ?? 0)}</strong><span>Boss, Bee, Butterfly, Fighter first</span></div>
+              <div class="metricCard"><span class="metricLabel">Trusted Primaries</span><strong>${esc(galagaTargetEvidenceAuditSummary.trustedPrimaryRoleCount ?? 0)}</strong><span>usable for scoring now</span></div>
+              <div class="metricCard"><span class="metricLabel">Motion Crops</span><strong>${esc(galagaTargetEvidenceAuditSummary.trustedMotionReferenceCount ?? 0)}</strong><span>cleaned from segmented video</span></div>
+              <div class="metricCard"><span class="metricLabel">Provisional Cells</span><strong>${esc(galagaTargetEvidenceAuditSummary.provisionalSourceSheetCount ?? 0)}</strong><span>do not overclaim</span></div>
+            </div>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Evidence</th>
+                  <th>Previous Risk</th>
+                  <th>Scoring Use</th>
+                  <th>Player Meaning</th>
+                  <th>Next Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${galagaTargetEvidenceAuditRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="galaga-alien-temporal-targets">
+          <div class="sectionHeader">
+            <h2>Alien Temporal Targets</h2>
+            <p>Temporal sprite identity is now treated separately from static sprite identity. These rows define the pose sequences the runtime cadence scorer uses for Boss, Bee, and Butterfly, while clearly marking which parts are trusted motion-reference evidence and which parts are still provisional.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Current read:</strong> ${esc(galagaAlienTemporalTargets.status || 'pending')}. <strong>Next best step:</strong> ${esc(galagaAlienTemporalTargets.nextBestStep || 'Generate temporal target rows before claiming animation conformance.')}</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-temporal-targets/latest.json</code>. <strong>Readable report:</strong> <code>GALAGA_ALIEN_TEMPORAL_TARGETS.md</code>. <strong>Generated:</strong> ${esc(galagaAlienTemporalTargets.generatedAt || 'pending')}.</p>
+            <div class="metricGrid">
+              <div class="metricCard"><span class="metricLabel">Temporal Rows</span><strong>${esc(galagaAlienTemporalTargetSummary.temporalRowCount ?? 0)}</strong><span>Boss, Bee, Butterfly</span></div>
+              <div class="metricCard"><span class="metricLabel">Trusted Links</span><strong>${esc(galagaAlienTemporalTargetSummary.trustedCropLinks ?? 0)}</strong><span>motion-reference crops</span></div>
+              <div class="metricCard"><span class="metricLabel">Provisional Links</span><strong>${esc(galagaAlienTemporalTargetSummary.provisionalCropLinks ?? 0)}</strong><span>need better windows</span></div>
+              <div class="metricCard"><span class="metricLabel">Frame-Timed Rows</span><strong>${esc(galagaAlienTemporalTargetSummary.finalFrameTimedRows ?? 0)}</strong><span>target timing still pending</span></div>
+            </div>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Temporal Target</th>
+                  <th>Pose Sequence</th>
+                  <th>Evidence</th>
+                  <th>Source Read</th>
+                  <th>Scoring Use</th>
+                  <th>Next Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${galagaAlienTemporalTargetRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="sprite-conformance-variation-plan">
+          <div class="sectionHeader">
+            <h2>Sprite Conformance Plan</h2>
+            <p>${esc(spriteConformanceVariationPlan.summary || 'Plan the sprite path from source-grounded conformance to production-safe themed variation.')}</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Plan status:</strong> ${esc(spriteConformanceVariationPlan.status || 'pending')}. <strong>Next best step:</strong> ${esc(spriteConformanceVariationPlan.nextBestStep || 'Create target crop manifests before raising sprite conformance claims.')}</p>
+            <p>This plan separates the internal reference-conformance lane from the Aurora production theme lane. The goal is to ingest and measure toward a conforming experience, then let Aurora and later Platinum games ship distinctive original visual styles that preserve era, motion, role readability, and gameplay meaning.</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/ingestion/sprite-conformance-variation-plan/plan-0.1.json</code>. <strong>Readable plan:</strong> <code>SPRITE_CONFORMANCE_VARIATION_STRATEGY.md</code>.</p>
+          </div>
+          <div class="docWrap" style="margin-top:16px;">
+            <h3>Galaga Sprite Crop Preview</h3>
+            <p>The supplied Galaga general sprite sheet now has generated region previews and grid overlays. These are review artifacts, not promoted canonical targets yet: the next conformance step is to choose exact per-role and per-pose boxes, then score Aurora runtime sprites against those accepted targets.</p>
+            <p><strong>Preview status:</strong> ${esc(galagaAlienCropPreviews.status || 'pending')}. <strong>Scoring status:</strong> ${esc(galagaAlienCropPreviewSummary.scoredStatus || 'unscored-preview-only')}.</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-visual-crop-previews/latest.json</code>. <strong>Readable report:</strong> <code>GALAGA_ALIEN_CROP_PREVIEW.md</code>. <strong>Generated:</strong> ${esc(galagaAlienCropPreviews.generatedAt || 'pending')}.</p>
+            <div class="metricGrid">
+              <div class="metricCard"><span class="metricLabel">Preview Regions</span><strong>${esc(galagaAlienCropPreviewSummary.regionCount ?? 0)}</strong><span>source-sheet sections</span></div>
+              <div class="metricCard"><span class="metricLabel">Grid Cells</span><strong>${esc(galagaAlienCropPreviewSummary.gridCellCount ?? 0)}</strong><span>candidate cells scanned</span></div>
+              <div class="metricCard"><span class="metricLabel">Lit Candidates</span><strong>${esc(galagaAlienCropPreviewSummary.interestingCellCount ?? 0)}</strong><span>persisted for crop promotion</span></div>
+              <div class="metricCard"><span class="metricLabel">Target Roles</span><strong>${esc(galagaAlienCropPreviewSummary.targetRoleCount ?? 0)}</strong><span>planned for crop promotion</span></div>
+            </div>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Source Region</th>
+                  <th>Preview</th>
+                  <th>Grid Review</th>
+                  <th>Candidate Read</th>
+                  <th>Next Review</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${galagaAlienCropPreviewRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Target Role</th>
+                  <th>Required Poses</th>
+                  <th>Candidate Regions</th>
+                  <th>Candidate Cells</th>
+                  <th>Next Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${galagaAlienCropRoleRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="docWrap" style="margin-top:16px;">
+            <h3>Promoted Galaga Target Crops</h3>
+            <p>The target crop library now combines trusted cleaned motion-reference crops for the core Boss, Bee, and Butterfly formation targets with provisional source-sheet pose crops for broader planning coverage. These crops are target-lane evidence for measurement and review; they are not public production art. Aurora live runtime sprites are compared against this multi-pose library, and the next lift is deeper temporal windows for flap cadence, dive rotation, beam, explosion, capture, and challenge-stage motion.</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-target-crops/latest.json</code>. <strong>Readable report:</strong> <code>GALAGA_ALIEN_TARGET_CROPS.md</code>. <strong>Generated:</strong> ${esc(galagaAlienTargetCrops.generatedAt || 'pending')}.</p>
+            <div class="metricGrid">
+              <div class="metricCard"><span class="metricLabel">Target Crops</span><strong>${esc(galagaAlienTargetCropSummary.targetCropCount ?? 0)}</strong><span>trusted plus provisional images</span></div>
+              <div class="metricCard"><span class="metricLabel">Role Sets</span><strong>${esc(galagaAlienTargetCropSummary.roleSetCount ?? 0)}</strong><span>player, aliens, effects, beam</span></div>
+              <div class="metricCard"><span class="metricLabel">Trusted Motion Crops</span><strong>${esc(galagaAlienTargetCropSummary.trustedMotionReferenceCount ?? 0)}</strong><span>cleaned from video reference</span></div>
+              <div class="metricCard"><span class="metricLabel">Scoring Status</span><strong>${esc(galagaAlienTargetCropSummary.scoringStatus || 'pending')}</strong><span>runtime comparison next</span></div>
+            </div>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Promoted Poses</th>
+                  <th>Promotion</th>
+                  <th>Coverage Read</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${galagaAlienTargetRoleRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Pose</th>
+                  <th>Crop</th>
+                  <th>Source</th>
+                  <th>Metrics</th>
+                  <th>Conformance Use</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${galagaAlienTargetCropRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="docWrap" style="margin-top:16px;">
+            <h3>Aurora Runtime Versus Target Crops</h3>
+            <p>This is the stricter live-rendered sprite read: each Aurora canvas crop is compared against accepted Galaga target crops after semantic role filtering. Low values here are not failures of the plan; they are the exact gaps the next sprite passes should attack.</p>
+            <p class="docMeta"><strong>Runtime artifact:</strong> <code>reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json</code>. <strong>Direct target artifact:</strong> <code>reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json</code>. <strong>Generated:</strong> ${esc(auroraRuntimeVsGalagaTargetCrops.generatedAt || 'pending')}.</p>
+            <div class="metricGrid">
+              <div class="metricCard"><span class="metricLabel">Runtime Static Score</span><strong>${Number.isFinite(+auroraRuntimeSpriteSummary.averageScore10) ? Number(auroraRuntimeSpriteSummary.averageScore10).toFixed(1) : 'n/a'}/10</strong><span>${esc(auroraRuntimeSpriteSummary.sampleCount ?? 0)} live canvas crop(s)</span></div>
+              <div class="metricCard"><span class="metricLabel">Direct Target Score</span><strong>${Number.isFinite(+auroraRuntimeVsGalagaTargetSummary.averageScore10) ? Number(auroraRuntimeVsGalagaTargetSummary.averageScore10).toFixed(1) : 'n/a'}/10</strong><span>${esc(auroraRuntimeVsGalagaTargetSummary.targetCropCount ?? 0)} target crop(s)</span></div>
+              <div class="metricCard"><span class="metricLabel">Target Sequence Score</span><strong>${Number.isFinite(+auroraRuntimeVsGalagaTargetSummary.averageTemporalSequenceScore10) ? Number(auroraRuntimeVsGalagaTargetSummary.averageTemporalSequenceScore10).toFixed(1) : 'n/a'}/10</strong><span>${esc(auroraRuntimeVsGalagaTargetSummary.temporalSequenceSampleCount ?? 0)} cadence sequence(s)</span></div>
+              <div class="metricCard"><span class="metricLabel">Weakest Direct Match</span><strong>${esc(auroraRuntimeVsGalagaTargetSummary.weakestSpriteKey || 'pending')}</strong><span>${Number.isFinite(+auroraRuntimeVsGalagaTargetSummary.weakestScore10) ? `${Number(auroraRuntimeVsGalagaTargetSummary.weakestScore10).toFixed(1)}/10` : 'pending'}</span></div>
+              <div class="metricCard"><span class="metricLabel">Motion Axes Covered</span><strong>${esc(auroraRuntimeSpriteSummary.motionCoverageAxesCovered ?? 0)}/${esc(auroraRuntimeSpriteSummary.motionCoverageAxesPlanned ?? 4)}</strong><span>${esc(auroraRuntimeSpriteSummary.temporalSampleCount ?? 0)} phase pair(s); ${esc(auroraRuntimeSpriteSummary.cadenceSampleCount ?? 0)} cadence window(s)</span></div>
+            </div>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Runtime Sprite</th>
+                  <th>Aurora Current</th>
+                  <th>Best Galaga Target</th>
+                  <th>Score</th>
+                  <th>Component Read</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${auroraRuntimeVsTargetRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Motion Subject</th>
+                  <th>Closed Phase</th>
+                  <th>Open Phase</th>
+                  <th>Delta</th>
+                  <th>Read</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${auroraSpriteTemporalRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Cadence Subject</th>
+                  <th>Runtime Window Frames</th>
+                  <th>Score Motion</th>
+                  <th>Pixel Motion</th>
+                  <th>Read</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${auroraSpriteCadenceRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Target Sequence</th>
+                  <th>Expected Poses</th>
+                  <th>Runtime Frames</th>
+                  <th>Sequence Score</th>
+                  <th>Read</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${auroraRuntimeVsTargetTemporalRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Active Pose</th>
+                  <th>Runtime Crop</th>
+                  <th>Model Score</th>
+                  <th>Read</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${auroraSpritePoseRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="docWrap" style="margin-top:16px;">
+            <h3>Impact And Explosion Feedback</h3>
+            <p>The first impact/explosion comparator captures event visuals from the current runtime and compares them against promoted Galaga target explosion crops. This is the start of making missile impacts, boss damage, kills, and death rewards measurable instead of relying on subjective review.</p>
+            <p><strong>Current read:</strong> ${Number.isFinite(+auroraImpactExplosionSummary.averageScore10) ? `${Number(auroraImpactExplosionSummary.averageScore10).toFixed(1)}/10` : 'pending'} average static event score; ${Number.isFinite(+auroraImpactExplosionSummary.averageLifecycleScore10) ? `${Number(auroraImpactExplosionSummary.averageLifecycleScore10).toFixed(1)}/10 lifecycle score` : 'lifecycle pending'}; weakest ${esc(auroraImpactExplosionSummary.weakestKey || 'pending')} ${Number.isFinite(+auroraImpactExplosionSummary.weakestScore10) ? `${Number(auroraImpactExplosionSummary.weakestScore10).toFixed(1)}/10` : ''}.</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/aurora-impact-explosion-conformance/latest.json</code>. The scorer now captures onset/expansion/decay and expected audio cue coupling, but still needs exact target-video frame labels.</p>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Event</th>
+                  <th>Aurora Current</th>
+                  <th>Galaga Target</th>
+                  <th>Score</th>
+                  <th>Player Meaning</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${auroraImpactExplosionRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Lane</th>
+                  <th>Purpose</th>
+                  <th>Renderer Expectation</th>
+                  <th>Metrics</th>
+                  <th>Use</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${spriteConformanceLaneRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Pipeline Step</th>
+                  <th>Goal</th>
+                  <th>Current Status</th>
+                  <th>Next Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${spriteConformancePipelineRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Gate</th>
+                  <th>Target</th>
+                  <th>Meaning</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${spriteConformanceSuccessRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
         <section class="section" id="conformance-alien-index">
           <div class="sectionHeader">
             <h2>Alien Conformance Index</h2>
@@ -4195,6 +5618,22 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
                 ${stageConformanceRows}
               </tbody>
             </table>
+          </div>
+        </section>
+
+        <section class="section" id="level-visual-conformance-index">
+          <div class="sectionHeader">
+            <h2>Level Visual Conformance Index</h2>
+            <p>Ordered current-versus-target visual evidence for every Aurora level and each Challenging Stage. Each row keeps the current runtime screenshot beside an actual Galaga gameplay target frame, then expands into scene roles, bitmap pairs, conformance metrics, and the next gap.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Current read:</strong> ${esc(levelVisualSummary.rowCount || 0)} ordered rows; ${esc(levelVisualSummary.regularLevelCount || 0)} regular levels; ${esc(levelVisualSummary.challengeStageCount || 0)} challenging stages; ${esc(levelVisualSummary.currentScreenshotCount || 0)} Aurora screenshots; ${esc(levelVisualSummary.targetScreenshotCount || 0)} target gameplay screenshots; ${esc(levelVisualSummary.currentVideoCount || 0)} Aurora 10s clips; ${esc(levelVisualSummary.targetVideoCount || 0)} target 10s clips.</p>
+            <p><strong>Conformance pressure:</strong> ${esc(levelVisualSummary.challengeScore10 ?? 'n/a')}/10 challenge visual conformance and ${esc(levelVisualSummary.targetGroundingScore10 ?? 'n/a')}/10 target grounding. ${esc(levelVisualSummary.read || 'Run the level visual index analyzer to refresh this readout.')}</p>
+            <p class="docMeta"><strong>Target-grounding caveat:</strong> ${esc(levelVisualSummary.exactTargetRows || 0)}/${esc(levelVisualSummary.rowCount || 0)} rows currently use exact ingested target windows. ${esc(levelVisualSummary.representativeTargetRows || 0)} regular-level rows use representative actual Galaga gameplay frames until the normal-stage corpus is extended. That means the section is excellent for seeing the shape of the gap, but it is not yet a complete per-level proof of conformance.</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/level-visual-conformance-index/latest.json</code>. <strong>Report:</strong> <code>LEVEL_VISUAL_CONFORMANCE_INDEX.md</code>.</p>
+          </div>
+          <div class="levelVisualList">
+            ${levelVisualRows}
           </div>
         </section>
 
@@ -4918,6 +6357,14 @@ function build(options = {}){
     markdownHref: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/RELEASE_CONFORMANCE_DASHBOARD.md`,
     markdownLabel: 'Markdown',
     dataHref: 'conformance-dashboard-data.json',
+    releasePathLabel: buildLane === 'production' ? 'Production lane dashboard' : 'Development lane dashboard',
+    releasePath: buildLane === 'production' ? '/Aurora-Galactica/conformance-dashboard.html' : '/Aurora-Galactica/dev/conformance-dashboard.html',
+    releaseLane: buildReleaseChannel,
+    buildLabel,
+    pageBuiltAt: buildUtc,
+    buildCommit,
+    buildBranch,
+    sourceArtifact: 'reference-artifacts/analyses/release-conformance-dashboard/latest.json',
     artifactBase: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/`,
     rawArtifactBase: `https://raw.githubusercontent.com/sgwoods/Codex-Test1/${buildCommit}/`
   }));
@@ -4957,6 +6404,14 @@ function build(options = {}){
     markdownHref: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/RELEASE_CONFORMANCE_DASHBOARD.md`,
     markdownLabel: 'Markdown',
     dataHref: 'conformance-dashboard-data.json',
+    releasePathLabel: buildLane === 'production' ? 'Production bundled asset dashboard' : 'Development bundled asset dashboard',
+    releasePath: buildLane === 'production' ? '/Aurora-Galactica/assets/conformance-dashboard.html' : '/Aurora-Galactica/dev/assets/conformance-dashboard.html',
+    releaseLane: buildReleaseChannel,
+    buildLabel,
+    pageBuiltAt: buildUtc,
+    buildCommit,
+    buildBranch,
+    sourceArtifact: 'reference-artifacts/analyses/release-conformance-dashboard/latest.json',
     artifactBase: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/`,
     rawArtifactBase: `https://raw.githubusercontent.com/sgwoods/Codex-Test1/${buildCommit}/`
   }));

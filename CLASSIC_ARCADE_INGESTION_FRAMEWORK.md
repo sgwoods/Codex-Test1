@@ -196,6 +196,14 @@ Candidate source types:
 Each candidate source should be entered into a source manifest before it is
 treated as evidence.
 
+Sprite sources need one extra separation from the start: the reference artifact
+can define a target-conformance lane, while production game art should remain
+game-owned and release-safe. The ingestion framework should therefore preserve
+source crops, target pose manifests, and runtime scorer inputs separately from
+Aurora or future-game theme variants. This lets a game reach a highly measured
+conforming experience and then branch into original era-faithful production
+styles without losing the target evidence.
+
 Minimum manifest fields:
 
 - `source_id`

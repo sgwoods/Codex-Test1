@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "galaga-target-evidence-audit",
+  "generatedAt": "2026-05-19T18:24:11.146Z",
+  "commit": "591cd98a",
+  "branch": "codex/macbook-conformance-investment-review",
+  "dirty": true,
+  "status": "trusted-target-manifest-active",
+  "sourceArtifacts": {
+    "targetCrops": "reference-artifacts/analyses/galaga-alien-target-crops/latest.json",
+    "motionReference": "reference-artifacts/analyses/galaga-alien-motion-reference/latest.json",
+    "motionReferenceVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4"
+  },
+  "summary": {
+    "auditedRoleCount": 4,
+    "trustedPrimaryRoleCount": 4,
+    "provisionalOnlyRoleCount": 0,
+    "trustedMotionReferenceCount": 6,
+    "provisionalSourceSheetCount": 18
+  },
+  "rows": [
+    {
+      "roleKey": "boss-galaga",
+      "label": "Boss Galaga",
+      "previousRisk": "The prior sheet-cell primary crop visibly included neighboring/polluted pixels and was misleading in the Application Guide.",
+      "trustedUse": "Use cleaned motion-reference crops for formation-front and the two boss pulse/color phases.",
+      "cropIds": [
+        "boss-galaga-formation-front",
+        "boss-galaga-flap-a",
+        "boss-galaga-flap-b"
+      ],
+      "confidence": "medium-high",
+      "scoringUse": "Primary target for boss-line runtime comparison; sheet dive cells remain provisional until recropped from gameplay/motion windows.",
+      "playerMeaning": "Boss identity needs to read as the capture-beam host and high-value threat before motion and damage states are tuned.",
+      "nextGap": "Promote clean boss dive, damage, tractor-beam host, and captured-fighter paired frames.",
+      "trustedCropCount": 3,
+      "provisionalCropCount": 0,
+      "linkedCrops": [
+        {
+          "id": "boss-galaga-formation-front",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-formation-front.png",
+          "reviewStatus": "accepted-trusted-motion-reference",
+          "sourceKind": "motion-reference-video",
+          "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+          "sourceFrameSeconds": 10,
+          "videoDerivedCleanCrop": true,
+          "sourcePixelExact": false
+        },
+        {
+          "id": "boss-galaga-flap-a",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-flap-a.png",
+          "reviewStatus": "accepted-trusted-motion-reference",
+          "sourceKind": "motion-reference-video",
+          "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+          "sourceFrameSeconds": 10,
+          "videoDerivedCleanCrop": true,
+          "sourcePixelExact": false
+        },
+        {
+          "id": "boss-galaga-flap-b",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-flap-b.png",
+          "reviewStatus": "accepted-trusted-motion-reference",
+          "sourceKind": "motion-reference-video",
+          "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+          "sourceFrameSeconds": 10,
+          "videoDerivedCleanCrop": true,
+          "sourcePixelExact": false
+        }
+      ],
+      "status": "trusted-primary-target-available"
+    },
+    {
+      "roleKey": "bee-zako",
+      "label": "Bee / Zako",
+      "previousRisk": "The prior sheet-cell crop was usable as a source-sheet hint but too small and ambiguous as a primary visible target.",
+      "trustedUse": "Use cleaned motion-reference crop for formation-front identity.",
+      "cropIds": [
+        "bee-zako-formation-front"
+      ],
+      "confidence": "medium",
+      "scoringUse": "Primary formation target for bee-line; flap and dive sheet cells remain provisional evidence.",
+      "playerMeaning": "Bee sprites set the baseline fleet texture and need to stay readable during formation rows and fast challenge-stage entries.",
+      "nextGap": "Extract target pulse pairs and dive silhouettes from clean temporal windows.",
+      "trustedCropCount": 1,
+      "provisionalCropCount": 0,
+      "linkedCrops": [
+        {
+          "id": "bee-zako-formation-front",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-formation-front.png",
+          "reviewStatus": "accepted-trusted-motion-reference",
+          "sourceKind": "motion-reference-video",
+          "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+          "sourceFrameSeconds": 10,
+          "videoDerivedCleanCrop": true,
+          "sourcePixelExact": false
+        }
+      ],
+      "status": "trusted-primary-target-available"
+    },
+    {
+      "roleKey": "butterfly-escort",
+      "label": "Butterfly / Escort",
+      "previousRisk": "The prior sheet-cell crop was not reliable enough for a human-readable target row.",
+      "trustedUse": "Use cleaned motion-reference crop for formation-front identity.",
+      "cropIds": [
+        "butterfly-escort-formation-front"
+      ],
+      "confidence": "medium",
+      "scoringUse": "Primary formation target for but-line; flap and dive sheet cells remain provisional evidence.",
+      "playerMeaning": "Butterflies are the player’s main convoy-shape cue; their red/white/blue block silhouette must be recognizable at speed.",
+      "nextGap": "Extract target pulse pairs and dive/escort turns from gameplay/motion windows.",
+      "trustedCropCount": 1,
+      "provisionalCropCount": 0,
+      "linkedCrops": [
+        {
+          "id": "butterfly-escort-formation-front",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-formation-front.png",
+          "reviewStatus": "accepted-trusted-motion-reference",
+          "sourceKind": "motion-reference-video",
+          "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+          "sourceFrameSeconds": 10,
+          "videoDerivedCleanCrop": true,
+          "sourcePixelExact": false
+        }
+      ],
+      "status": "trusted-primary-target-available"
+    },
+    {
+      "roleKey": "player-fighter",
+      "label": "Player Fighter",
+      "previousRisk": "Player ship proportions were corrected in runtime, but the earlier target crop lane still leaned on a tiny provisional source-sheet cell.",
+      "trustedUse": "Use the cleaned player-fighter crop from the segmented alien motion reference as the primary single-fighter target; keep turn poses provisional.",
+      "cropIds": [
+        "player-fighter-single-front",
+        "player-fighter-dual-front"
+      ],
+      "confidence": "medium-high",
+      "scoringUse": "Primary target for player-fighter runtime comparison and the derived dual-fighter composite; turn/capture poses remain provisional.",
+      "playerMeaning": "The fighter must feel smaller, crisp, and separate from reserve icons while preserving shot alignment and dual-fighter readability.",
+      "nextGap": "Promote clean turn, captured, carried, rescue, and dual-fighter spacing evidence from true target gameplay windows.",
+      "trustedCropCount": 1,
+      "provisionalCropCount": 0,
+      "linkedCrops": [
+        {
+          "id": "player-fighter-single-front",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-single-front.png",
+          "reviewStatus": "accepted-trusted-motion-reference",
+          "sourceKind": "motion-reference-video",
+          "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+          "sourceFrameSeconds": 10,
+          "videoDerivedCleanCrop": true,
+          "sourcePixelExact": false
+        },
+        {
+          "id": "player-fighter-dual-front",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-dual-front.png",
+          "reviewStatus": "accepted-trusted-motion-reference-composite",
+          "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+          "videoDerivedCleanCrop": false,
+          "sourcePixelExact": false
+        }
+      ],
+      "status": "trusted-primary-target-available"
+    }
+  ],
+  "nextBestStep": "Regenerate runtime-vs-target scoring against the trusted Boss, Bee, and Butterfly primary targets, then promote player-fighter and temporal pulse-pair targets."
+}

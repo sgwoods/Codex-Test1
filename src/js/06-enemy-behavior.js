@@ -88,7 +88,7 @@ function updateChallengeEnemy(e,dt){
 	 const fm=familyMotion(e);
 	 const classicStage3=S.stage===3&&e.fam==='classic';
 	 const baseChallengeSpeed=pathFamily==='yellow-diagonal-fan'?.388:pathFamily==='green-ladder-split'?.386:pathFamily==='first-challenge-peel'?.345:(classicStage3?.345:.355);
-	 e.tm+=dt*(baseChallengeSpeed+(e.wave||0)*.007+Math.min(.012,S.stage*.0015));
+	 e.tm+=dt*(baseChallengeSpeed+(e.wave||0)*.007+Math.min(.012,S.stage*.0015))*(e.speedScale||1);
 	 const u=e.tm,p=e.ph,wave=e.wave||0,side=e.side||1,slot=e.slot||0,row=e.row||0,sweep=e.sweep||1;
 	 const arcAmp=e.arcAmp||1,dropAmp=e.dropAmp||1;
 	 const laneX=PLAY_W/2+side*(48+slot*16);
@@ -100,7 +100,14 @@ function updateChallengeEnemy(e,dt){
 	   e.y=topY+Math.sin(q*Math.PI*1.65+p)*7*arcAmp;
 	  }else if(pathFamily==='first-challenge-peel'){
 	   e.x=startX+(laneX-startX)*Math.sin(q*Math.PI/2);
-	   e.y=topY+q*2.8*dropAmp;
+	   e.y=topY+q*5.2*dropAmp;
+	  }else if(pathFamily==='classic-column-drop'){
+	   const columnX=PLAY_W/2+(slot-1.5)*24*side;
+	   e.x=columnX+Math.sin(q*Math.PI+p+wave*.35)*5*arcAmp;
+	   e.y=-26+q*(topY+34);
+	  }else if(pathFamily==='side-hook-return'){
+	   e.x=startX+(laneX-startX)*Math.sin(q*Math.PI/2)+side*Math.sin(q*Math.PI*1.4+p)*12*arcAmp;
+	   e.y=topY+Math.sin(q*Math.PI*.9+p)*12*dropAmp;
 	  }else if(pathFamily==='crown-split-cascade'){
 	   e.x=startX+(laneX-startX)*curve+sweep*Math.sin(q*Math.PI*2.6+p+slot*.35)*22*arcAmp;
 	   e.y=topY+Math.sin(q*Math.PI*1.8+p)*9*arcAmp+q*5*dropAmp;
@@ -137,9 +144,17 @@ function updateChallengeEnemy(e,dt){
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*1.2)*42+Math.sin(q*Math.PI*3+p)*6)*fm.challengeSweep*arcAmp;
 	   e.y=topY+q*12*dropAmp+Math.sin(q*7.2+p)*2.2;
 	  }else if(pathFamily==='first-challenge-peel'){
-	   const glide=18+slot*4;
+	   const glide=22+slot*5;
 	   e.x=laneX-side*(q*glide);
-	   e.y=topY+q*4.2*dropAmp;
+	   e.y=topY+q*9.5*dropAmp;
+	  }else if(pathFamily==='classic-column-drop'){
+	   const columnX=PLAY_W/2+(slot-1.5)*24*side;
+	   e.x=columnX+Math.sin(q*Math.PI*2.2+p+wave*.4)*7*arcAmp;
+	   e.y=topY+q*(174+slot*7)*dropAmp;
+	  }else if(pathFamily==='side-hook-return'){
+	   const hook=Math.sin(q*Math.PI);
+	   e.x=laneX-side*(hook*72+Math.sin(q*Math.PI*2.2+p)*9)*fm.challengeSweep*arcAmp;
+	   e.y=topY+q*(72+slot*9)*dropAmp+Math.cos(q*Math.PI*1.4+p)*5;
 	  }else if(pathFamily==='crown-split-cascade'){
 	   const cascade=slot%2?-1:1;
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*2.4+p*.4)*44+Math.sin(q*Math.PI)*28)*fm.challengeSweep*arcAmp*.82;
@@ -179,9 +194,16 @@ function updateChallengeEnemy(e,dt){
 	   e.x=laneX+sweep*(36-q*78)*fm.challengeSweep*arcAmp+Math.sin(q*7.4+p)*2.4;
 	   e.y=topY+10+q*205*fm.challengeDrop*dropAmp;
 	  }else if(pathFamily==='first-challenge-peel'){
-	   const glide=18+slot*4;
-	   e.x=laneX-side*(glide+q*(44+slot*4));
-	   e.y=topY+6+q*132*fm.challengeDrop*dropAmp;
+	   const glide=22+slot*5;
+	   e.x=laneX-side*(glide+q*(56+slot*5));
+	   e.y=topY+8+q*164*fm.challengeDrop*dropAmp;
+	  }else if(pathFamily==='classic-column-drop'){
+	   const columnX=PLAY_W/2+(slot-1.5)*24*side;
+	   e.x=columnX+side*(12+q*(54+slot*8))*arcAmp;
+	   e.y=topY+160+q*188*fm.challengeDrop*dropAmp;
+	  }else if(pathFamily==='side-hook-return'){
+	   e.x=laneX-side*(46+q*(92+slot*9))*fm.challengeSweep*arcAmp+Math.sin(q*8+p)*4;
+	   e.y=topY+70+q*216*fm.challengeDrop*dropAmp;
 	  }else if(pathFamily==='crown-split-cascade'){
 	   const exit=sweep*(slot%2?-1:1);
 	   e.x=laneX+exit*(22+q*92)*fm.challengeSweep*arcAmp+Math.sin(q*11+p)*4.2;
@@ -215,6 +237,11 @@ function updateChallengeEnemy(e,dt){
 	   e.y=topY+8+q*(classicStage3?188:198)*fm.challengeDrop;
 	  }
 	 }
+ const lowerFieldBias=Number.isFinite(+e.lowerFieldBias)?+e.lowerFieldBias:0;
+ if(lowerFieldBias&&u>2.4){
+  const lowerQ=cl((u-2.4)/8.8,0,1);
+  e.y+=lowerFieldBias*lowerQ*lowerQ;
+ }
  if(e.y<=enemyChallengeUpperBandY(e)){
   e.ub+=dt;
   if(S.ch){

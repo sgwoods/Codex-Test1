@@ -1,0 +1,64 @@
+# Galaga Alien Target Crops
+
+Generated: 2026-05-19T18:23:33.733Z
+
+This report promotes target crops from two evidence classes: trusted cleaned crops from the segmented Galaga alien motion reference, and provisional/exact crops from the supplied Galaga general sprite sheet. The trusted motion crops now anchor the primary Boss, Bee, and Butterfly formation targets after human review found polluted sheet-cell evidence. These are conformance targets for measurement, not production art, and they do not yet score temporal motion by themselves.
+
+## Summary
+
+- Source image: `reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png`
+- Promoted target crops: 33
+- Role sets: 7
+- Review status: trusted-motion-overrides-plus-provisional-sheet-crops
+
+## Role Sets
+
+| Role | Promoted Poses | Coverage Read |
+| --- | --- | --- |
+| `bee-zako` | `formation-front`, `flap-a`, `flap-b`, `dive-left`, `dive-right` | 5 promoted crop(s); required pose contract: formation-front, flap-a, flap-b, dive-or-rotation |
+| `boss-galaga` | `formation-front`, `flap-a`, `flap-b`, `dive-left`, `dive-right` | 5 promoted crop(s); required pose contract: formation-front, flap-a, flap-b, damage-state, capture-beam-host |
+| `butterfly-escort` | `formation-front`, `flap-a`, `flap-b`, `dive-left`, `dive-right` | 5 promoted crop(s); required pose contract: formation-front, flap-a, flap-b, escort-dive |
+| `challenge-specialty-aliens` | `green-family-front`, `green-family-dive`, `yellow-family-front`, `yellow-family-dive`, `magenta-family-front`, `blue-yellow-family-front` | 6 promoted crop(s); required pose contract: dragonfly-or-scorpion-family, mosquito-or-serpentine-family, late-blue-purple-family, flap-cycle |
+| `player-fighter` | `single-ship-front`, `turn-left`, `turn-right`, `dual-fighter-front` | 4 promoted crop(s); required pose contract: single-ship-front, dual-fighter, captured-or-carried-fighter, ship-loss-fragment-or-explosion-context |
+| `projectiles-and-impacts` | `enemy-explosion-small`, `boss-explosion-large`, `player-shot`, `enemy-shot`, `diagonal-shot` | 5 promoted crop(s); required pose contract: player-shot, enemy-shot, first-hit-impact, enemy-explosion, boss-explosion |
+| `tractor-beam` | `beam-wide`, `beam-mid`, `beam-narrow` | 3 promoted crop(s); required pose contract: beam-start, beam-mid, beam-wide, beam-collapse |
+
+## Target Crops
+
+| Role | Pose | Crop | Source | Metrics | Note |
+| --- | --- | --- | --- | --- | --- |
+| `player-fighter` | `single-ship-front` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-single-front.png) | segmented-alien-motion-reference<br>`248,430 82x64` | 894 lit px; channels B, G, R, W, Y | Trusted clean player-fighter crop from the segmented alien motion reference; replaces the provisional sheet-cell primary fighter target. |
+| `player-fighter` | `turn-left` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-turn-left.png) | left-primary-sprite-grid r1 c6<br>`80,0 16x16` | 62 lit px; channels B, R, W | Rotation/turn pose for future motion and capture/rescue scoring. |
+| `player-fighter` | `turn-right` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-turn-right.png) | left-primary-sprite-grid r1 c7<br>`96,0 16x16` | 86 lit px; channels B, R, W | Rotation/turn pose for future motion and capture/rescue scoring. |
+| `bee-zako` | `formation-front` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-formation-front.png) | segmented-alien-motion-reference<br>`384,86 58x54` | 766 lit px; channels B, G, M, R, W, Y | Trusted clean bee/Zako formation crop from the segmented alien motion reference; replaces the polluted sheet-cell primary target. |
+| `bee-zako` | `flap-a` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-flap-a.png) | left-primary-sprite-grid r6 c6<br>`80,80 16x16` | 50 lit px; channels B, R, W, Y | Wing/pose phase candidate for future flap cadence scoring. |
+| `bee-zako` | `flap-b` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-flap-b.png) | left-primary-sprite-grid r6 c7<br>`96,80 16x16` | 46 lit px; channels B, R, W, Y | Alternating wing/pose phase candidate for future flap cadence scoring. |
+| `bee-zako` | `dive-left` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-dive-left.png) | left-primary-sprite-grid r6 c1<br>`0,80 16x16` | 71 lit px; channels B, R, W | Dive/rotation silhouette candidate for approach-path scoring. |
+| `bee-zako` | `dive-right` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-dive-right.png) | left-primary-sprite-grid r6 c2<br>`16,80 16x16` | 39 lit px; channels B, R, W | Mirrored dive/rotation silhouette candidate for approach-path scoring. |
+| `butterfly-escort` | `formation-front` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-formation-front.png) | segmented-alien-motion-reference<br>`225,95 62x42` | 677 lit px; channels B, G, R, W, Y | Trusted clean butterfly/escort formation crop from the segmented alien motion reference; replaces the polluted sheet-cell primary target. |
+| `butterfly-escort` | `flap-a` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-flap-a.png) | left-primary-sprite-grid r5 c6<br>`80,64 16x16` | 41 lit px; channels B, R, W | Wing/pose phase candidate for future flap cadence scoring. |
+| `butterfly-escort` | `flap-b` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-flap-b.png) | left-primary-sprite-grid r5 c7<br>`96,64 16x16` | 56 lit px; channels B, M, R, W | Alternating wing/pose phase candidate for future flap cadence scoring. |
+| `butterfly-escort` | `dive-left` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-dive-left.png) | left-primary-sprite-grid r5 c1<br>`0,64 16x16` | 90 lit px; channels B, M, R, W | Dive/rotation silhouette candidate for escort path scoring. |
+| `butterfly-escort` | `dive-right` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-dive-right.png) | left-primary-sprite-grid r5 c2<br>`16,64 16x16` | 60 lit px; channels B, M, R, W | Mirrored dive/rotation silhouette candidate for escort path scoring. |
+| `boss-galaga` | `formation-front` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-formation-front.png) | segmented-alien-motion-reference<br>`22,78 60x62` | 1174 lit px; channels B, G, M, R, Y | Trusted clean teal boss formation crop from the segmented alien motion reference; replaces the polluted sheet-cell primary target. |
+| `boss-galaga` | `flap-a` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-flap-a.png) | segmented-alien-motion-reference<br>`22,78 60x62` | 1174 lit px; channels B, G, M, R, Y | Trusted clean boss pulse/pose phase A from the segmented alien motion reference. |
+| `boss-galaga` | `flap-b` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-flap-b.png) | segmented-alien-motion-reference<br>`86,78 60x62` | 1298 lit px; channels B, M | Trusted clean purple boss pulse/pose phase B from the segmented alien motion reference. |
+| `boss-galaga` | `dive-left` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-dive-left.png) | left-primary-sprite-grid r3 c1<br>`0,32 16x16` | 93 lit px; channels B, G, R, Y | Boss dive/rotation silhouette candidate. |
+| `boss-galaga` | `dive-right` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-dive-right.png) | left-primary-sprite-grid r3 c2<br>`16,32 16x16` | 82 lit px; channels B, G, R, Y | Mirrored boss dive/rotation silhouette candidate. |
+| `challenge-specialty-aliens` | `green-family-front` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-green-family-front.png) | left-primary-sprite-grid r8 c7<br>`96,112 16x16` | 39 lit px; channels G, R, Y | Green specialty/challenge-family pose; first-pass target for late challenge novelty. |
+| `challenge-specialty-aliens` | `green-family-dive` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-green-family-dive.png) | left-primary-sprite-grid r8 c1<br>`0,112 16x16` | 46 lit px; channels G, R, Y | Green specialty/challenge-family dive silhouette. |
+| `challenge-specialty-aliens` | `yellow-family-front` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-yellow-family-front.png) | left-primary-sprite-grid r9 c7<br>`96,128 16x16` | 56 lit px; channels G, M, R | Yellow specialty/challenge-family pose; first-pass target for late challenge novelty. |
+| `challenge-specialty-aliens` | `yellow-family-dive` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-yellow-family-dive.png) | left-primary-sprite-grid r9 c1<br>`0,128 16x16` | 64 lit px; channels G, M, R | Yellow specialty/challenge-family dive silhouette. |
+| `challenge-specialty-aliens` | `magenta-family-front` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-magenta-family-front.png) | center-alien-pose-grid r10 c3<br>`177,192 16x16` | 51 lit px; channels G, M, R | Magenta late-family cell for challenge-stage alien variety. |
+| `challenge-specialty-aliens` | `blue-yellow-family-front` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-blue-yellow-family-front.png) | center-alien-pose-grid r10 c6<br>`225,192 16x16` | 34 lit px; channels R, Y | Blue/yellow late-family cell for challenge-stage alien variety. |
+| `projectiles-and-impacts` | `enemy-explosion-small` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png) | top-effects-and-capture-icons<br>`177,0 32x32` | 402 lit px; channels G, R, W | Small-to-medium explosion/impact phase candidate. |
+| `projectiles-and-impacts` | `boss-explosion-large` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-large.png) | top-effects-and-capture-icons<br>`209,0 32x32` | 572 lit px; channels G, R, W | Large explosion/impact phase candidate for boss and ship-loss feedback. |
+| `projectiles-and-impacts` | `player-shot` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/projectile-player-shot.png) | right-tractor-beam-and-scoring<br>`304,120 16x16` | 12 lit px; channels B, R, W | Vertical projectile candidate for player-shot scale and palette. |
+| `projectiles-and-impacts` | `enemy-shot` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/projectile-enemy-shot.png) | right-tractor-beam-and-scoring<br>`304,136 16x16` | 12 lit px; channels G, R, W | Enemy projectile candidate for shot feedback and avoidance readability. |
+| `projectiles-and-impacts` | `diagonal-shot` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/projectile-diagonal-shot.png) | right-tractor-beam-and-scoring<br>`320,120 16x16` | 13 lit px; channels B, R, W | Diagonal projectile candidate for enemy-shot vocabulary. |
+| `tractor-beam` | `beam-wide` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/tractor-beam-wide.png) | right-tractor-beam-and-scoring<br>`288,34 50x84` | 898 lit px; channels B, G | Wide tractor-beam band candidate for capture-state width and color rhythm. |
+| `tractor-beam` | `beam-mid` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/tractor-beam-mid.png) | right-tractor-beam-and-scoring<br>`342,34 50x84` | 898 lit px; channels B, G | Mid-width tractor-beam band candidate. |
+| `tractor-beam` | `beam-narrow` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/tractor-beam-narrow.png) | right-tractor-beam-and-scoring<br>`396,34 50x84` | 863 lit px; channels B, G | Narrow tractor-beam band candidate. |
+| `player-fighter` | `dual-fighter-front` | ![](reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-dual-front.png) | derived-composite<br>`0,0 114x45` | 1798 lit px; channels B, C, G, R, W, Y | Derived dual-fighter target composed from two trusted cleaned player-fighter crops. This prevents the dual runtime state from being scored against a single fighter while preserving the accepted target proportions. |
+
+Next best step: Regenerate Aurora live runtime comparisons against the corrected Boss, Bee, and Butterfly targets, then promote clean player-fighter and temporal pulse/cadence targets before tuning more runtime sprites.

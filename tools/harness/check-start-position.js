@@ -11,11 +11,13 @@ async function main(){
   const result = await withHarnessPage({ stage: 5, ships: 1, challenge: false, seed: 9047 }, async ({ page }) => {
     const state = await page.evaluate(() => window.__galagaHarness__.state());
     const snap = await page.evaluate(() => window.__galagaHarness__.snapshot());
-    return { state, snap };
+    const visualContract = await page.evaluate(() => window.__galagaHarness__.playerVisualContract());
+    return { state, snap, visualContract };
   });
 
   const player = result.snap.player || {};
-  if(Math.abs((player.y || 0) - 340) > 2){
+  const expectedY = +(result.visualContract?.playerStartY || 340);
+  if(Math.abs((player.y || 0) - expectedY) > 2){
     fail('fresh game did not start the player on the normal bottom row', result);
   }
   if(Math.abs((player.x || 0) - 140) > 2){

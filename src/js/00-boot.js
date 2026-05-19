@@ -41,7 +41,7 @@ const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=docume
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),platformTrackToast=document.getElementById('platformTrackToast'),platformTrackTitle=document.getElementById('platformTrackTitle'),platformTrackArtist=document.getElementById('platformTrackArtist'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn'),resetTestPilotScoresControl=document.getElementById('resetTestPilotScoresBtn');
-const testPanel=document.getElementById('testPanel'),testStartKind=document.getElementById('testStartKind'),testStage=document.getElementById('testStage'),testChallengeStage=document.getElementById('testChallengeStage'),testChallengeStageField=document.getElementById('testChallengeStageField'),testChallengeStageHint=document.getElementById('testChallengeStageHint'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),commentatorToggle=document.getElementById('commentatorToggle'),graphicsTheme=document.getElementById('graphicsTheme'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
+const testPanel=document.getElementById('testPanel'),testStartKind=document.getElementById('testStartKind'),testExpertPlays=document.getElementById('testExpertPlays'),testExpertPlaysHint=document.getElementById('testExpertPlaysHint'),testStage=document.getElementById('testStage'),testChallengeStage=document.getElementById('testChallengeStage'),testChallengeStageField=document.getElementById('testChallengeStageField'),testChallengeStageHint=document.getElementById('testChallengeStageHint'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),commentatorToggle=document.getElementById('commentatorToggle'),graphicsTheme=document.getElementById('graphicsTheme'),spriteRenderMode=document.getElementById('spriteRenderMode'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
 const arcadeMusicToggleBtn=document.getElementById('arcadeMusicToggleBtn');
 const arcadeMusicFrameHost=document.getElementById('arcadeMusicFrameHost');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
@@ -1069,29 +1069,39 @@ window.__auroraDocsPreview=window.__platinumDocsPreview={
 
 const P={
  ship:{
-  a:[[2,0],[3,0],[1,1],[2,1],[3,1],[4,1],[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[1,3],[2,3],[3,3],[4,3],[2,4],[3,4]],
-  b:[[2,1],[3,1],[2,2],[3,2],[2,3],[3,3]],
-  c:[[0,2],[5,2],[1,1],[4,1]]
+  a:[[3,0],[4,0],[3,1],[4,1],[2,2],[3,2],[4,2],[5,2],[1,3],[2,3],[3,3],[4,3],[5,3],[6,3],[0,4],[1,4],[2,4],[3,4],[4,4],[5,4],[6,4],[7,4],[0,5],[1,5],[2,5],[5,5],[6,5],[7,5],[0,6],[1,6],[6,6],[7,6]],
+  b:[[3,3],[4,3],[3,4],[4,4],[1,5],[6,5],[2,6],[3,6],[4,6],[5,6]],
+  c:[[1,4],[6,4],[2,5],[5,5]]
  },
  bee:{
-  a:[[0,1],[6,1],[-1,2],[0,2],[6,2],[7,2],[0,3],[6,3],[1,4],[5,4]],
-  b:[[2,0],[3,0],[1,1],[2,1],[3,1],[4,1],[1,2],[2,2],[3,2],[4,2],[2,3],[3,3],[2,4],[3,4]],
-  c:[[2,1],[3,1],[2,4],[3,4]]
+  a:[[0,1],[1,1],[6,1],[7,1],[0,2],[1,2],[6,2],[7,2],[0,3],[1,3],[6,3],[7,3],[1,4],[6,4]],
+  b:[[2,0],[3,0],[4,0],[5,0],[2,1],[3,1],[4,1],[5,1],[2,2],[5,2],[2,3],[3,3],[4,3],[5,3],[3,4],[4,4],[3,5],[4,5]],
+  c:[[3,1],[4,1],[2,3],[5,3]]
  },
  but:{
-  a:[[0,1],[6,1],[-1,2],[0,2],[6,2],[7,2],[0,3],[6,3],[1,4],[5,4]],
-  b:[[2,0],[3,0],[1,1],[2,1],[3,1],[4,1],[1,2],[2,2],[3,2],[4,2],[1,3],[2,3],[3,3],[4,3],[2,4],[3,4]],
-  c:[[2,1],[3,1],[2,3],[3,3]]
+  a:[[0,0],[7,0],[0,1],[1,1],[6,1],[7,1],[1,2],[2,2],[5,2],[6,2],[2,3],[5,3],[1,4],[6,4],[1,5],[6,5],[0,6],[7,6]],
+  b:[[3,0],[4,0],[3,1],[4,1],[2,2],[3,2],[4,2],[5,2],[3,3],[4,3],[3,4],[4,4],[3,5],[4,5]],
+  c:[[3,2],[4,2],[2,4],[5,4],[3,6],[4,6]]
  },
  boss:{
-  a:[[0,1],[1,1],[6,1],[7,1],[-1,2],[0,2],[1,2],[6,2],[7,2],[8,2],[0,3],[1,3],[6,3],[7,3],[1,4],[6,4]],
-  b:[[2,0],[3,0],[4,0],[5,0],[2,1],[3,1],[4,1],[5,1],[2,2],[3,2],[4,2],[5,2],[2,3],[3,3],[4,3],[5,3],[3,4],[4,4]],
-  c:[[2,0],[5,0],[3,2],[4,2]]
+  a:[[0,2],[1,2],[7,2],[8,2],[0,3],[1,3],[7,3],[8,3],[1,4],[2,4],[6,4],[7,4],[1,5],[2,5],[6,5],[7,5],[2,6],[6,6]],
+  b:[[3,0],[4,0],[5,0],[2,1],[3,1],[4,1],[5,1],[6,1],[2,2],[3,2],[4,2],[5,2],[6,2],[3,3],[4,3],[5,3],[3,4],[4,4],[5,4],[4,5]],
+  c:[[3,1],[5,1],[2,4],[6,4],[3,6],[5,6]]
+ },
+ dragonfly:{
+  a:[[0,2],[1,1],[1,2],[1,3],[2,2],[6,2],[7,1],[7,2],[7,3],[8,2],[0,4],[1,4],[7,4],[8,4]],
+  b:[[4,0],[3,1],[4,1],[5,1],[3,2],[4,2],[5,2],[3,3],[4,3],[5,3],[4,4],[4,5],[4,6]],
+  c:[[3,2],[5,2],[2,4],[6,4],[4,6]]
+ },
+ mosquito:{
+  a:[[0,3],[1,2],[1,3],[1,4],[2,3],[6,3],[7,2],[7,3],[7,4],[8,3],[2,5],[6,5]],
+  b:[[4,0],[4,1],[3,2],[4,2],[5,2],[3,3],[4,3],[5,3],[3,4],[4,4],[5,4],[4,5],[4,6]],
+  c:[[3,1],[5,1],[2,3],[6,3],[4,6]]
  },
  rogue:{
-  a:[[0,1],[1,1],[6,1],[7,1],[-1,2],[0,2],[1,2],[6,2],[7,2],[8,2],[0,3],[1,3],[6,3],[7,3],[1,4],[6,4]],
-  b:[[2,0],[3,0],[4,0],[5,0],[2,1],[3,1],[4,1],[5,1],[2,2],[3,2],[4,2],[5,2],[2,3],[3,3],[4,3],[5,3],[3,4],[4,4]],
-  c:[[2,0],[5,0],[3,2],[4,2]]
+  a:[[3,0],[4,0],[3,1],[4,1],[2,2],[3,2],[4,2],[5,2],[1,3],[2,3],[3,3],[4,3],[5,3],[6,3],[0,4],[1,4],[2,4],[3,4],[4,4],[5,4],[6,4],[7,4],[0,5],[1,5],[2,5],[5,5],[6,5],[7,5],[0,6],[1,6],[6,6],[7,6]],
+  b:[[3,3],[4,3],[3,4],[4,4],[1,5],[6,5],[2,6],[3,6],[4,6],[5,6]],
+  c:[[1,4],[6,4],[2,5],[5,5]]
  }
 };
 
@@ -1644,16 +1654,18 @@ if((initialBoard[0]?.score||0)>S.best){
 }
 const DEFAULT_TEST_CFG=Object.freeze({
  startKind:'level',
+ expertPlays:'human',
  stage:1,
  challengeStage:1,
  ships:3,
  extendFirst:20000,
  extendRecurring:70000,
- challenge:false,
- audioTheme:'galaga-reference-assets',
- graphicsTheme:'aurora-borealis',
- starfieldIntensity:1.25,
- starfieldSpeed:1
+  challenge:false,
+  audioTheme:'galaga-reference-assets',
+  graphicsTheme:'aurora-borealis',
+  spriteRenderMode:'auto',
+  starfieldIntensity:1.25,
+  starfieldSpeed:1
 });
 let testCfgCache=null;
 function productionRootModeEnabled(){
@@ -1662,11 +1674,22 @@ function productionRootModeEnabled(){
 function productionStartStateLocked(){
  return PRODUCTION_RELEASE_LANE&&!productionRootModeEnabled();
 }
+function sanitizeExpertPlayPersona(value=''){
+ const next=String(value||'human').trim().toLowerCase();
+ return ['human','novice','advanced','expert','professional'].includes(next)?next:'human';
+}
+function expertPlayHintText(value=''){
+ const key=sanitizeExpertPlayPersona(value);
+ if(key==='human')return 'Human controls this start.';
+ const labels={novice:'Beginner',advanced:'Intermediate',expert:'Expert',professional:'Professional'};
+ return `${labels[key]||'Selected'} persona will fly this start in Watch Mode.`;
+}
 function effectiveStartStateCfg(cfg){
  const base=Object.assign({},cfg||DEFAULT_TEST_CFG);
  if(!productionStartStateLocked())return base;
  return Object.assign(base,{
   startKind:DEFAULT_TEST_CFG.startKind,
+  expertPlays:DEFAULT_TEST_CFG.expertPlays,
   stage:DEFAULT_TEST_CFG.stage,
   challengeStage:DEFAULT_TEST_CFG.challengeStage,
   ships:DEFAULT_TEST_CFG.ships,
@@ -1683,8 +1706,12 @@ function sanitizeGraphicsThemeValue(value=''){
  const next=String(value||'').trim()||'auto';
  if(next==='auto')return 'auto';
  if(typeof currentGamePackAtmosphereTheme!=='function')return 'auto';
- const resolved=currentGamePackAtmosphereTheme(next);
- return resolved?.id===next?next:DEFAULT_TEST_CFG.graphicsTheme;
+  const resolved=currentGamePackAtmosphereTheme(next);
+  return resolved?.id===next?next:DEFAULT_TEST_CFG.graphicsTheme;
+}
+function sanitizeSpriteRenderModeValue(value=''){
+ const next=String(value||'').trim()||'auto';
+ return ['auto','reference-pixel-lab','aurora-themed'].includes(next)?next:DEFAULT_TEST_CFG.spriteRenderMode;
 }
 function sanitizeStarfieldMultiplier(value,fallback=1){
  const next=+value;
@@ -1695,6 +1722,7 @@ function applyTestCfgToControls(cfg){
  const startCfg=effectiveStartStateCfg(cfg);
  const startKind=sanitizeStartKind(startCfg.startKind||(startCfg.challenge?'challenge':'level'));
  if(testStartKind)testStartKind.value=startKind;
+ if(testExpertPlays)testExpertPlays.value=sanitizeExpertPlayPersona(startCfg.expertPlays||DEFAULT_TEST_CFG.expertPlays);
  if(testStage)testStage.value=startCfg.stage;
  if(testChallengeStage)testChallengeStage.value=startCfg.challengeStage||DEFAULT_TEST_CFG.challengeStage;
  if(testShips)testShips.value=startCfg.ships;
@@ -1703,6 +1731,7 @@ function applyTestCfgToControls(cfg){
  if(testChallenge)testChallenge.checked=startKind==='challenge'||!!startCfg.challenge;
  if(audioTheme)audioTheme.value=cfg.audioTheme;
  if(graphicsTheme)graphicsTheme.value=cfg.graphicsTheme;
+ if(spriteRenderMode)spriteRenderMode.value=sanitizeSpriteRenderModeValue(cfg.spriteRenderMode);
  if(graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=String(cfg.starfieldIntensity);
  if(graphicsStarfieldSpeed)graphicsStarfieldSpeed.value=String(cfg.starfieldSpeed);
  syncChallengeStartControls();
@@ -1714,7 +1743,7 @@ function syncDeveloperToolsUi(){
   ? 'Start-state controls locked to shipped defaults.'
   : 'Root mode active. Start-state controls restored.';
  if(testPanel)testPanel.classList.toggle('locked',locked);
- for(const el of [testStartKind,testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring,testChallenge]){
+ for(const el of [testStartKind,testExpertPlays,testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring,testChallenge]){
   if(el)el.disabled=locked;
  }
  if(openViewerBtn)openViewerBtn.hidden=PRODUCTION_RELEASE_LANE;
@@ -1733,6 +1762,7 @@ function syncChallengeStartControls(){
   testChallengeStage.setAttribute('aria-disabled',testChallengeStage.disabled?'true':'false');
  }
  if(testChallengeStageHint)testChallengeStageHint.textContent=challengeStageDisplayLabel(challengeStage,{challengeNumber:true});
+ if(testExpertPlaysHint)testExpertPlaysHint.textContent=expertPlayHintText(testExpertPlays?.value||cfg.expertPlays||DEFAULT_TEST_CFG.expertPlays);
  if(testChallenge)testChallenge.checked=startKind==='challenge';
 }
 function syncAudioMixControls(){
@@ -1860,6 +1890,7 @@ function currentGraphicsOverrides(){
  const cfg=testCfgCache||loadTestCfg();
  return{
   graphicsTheme:sanitizeGraphicsThemeValue(cfg.graphicsTheme),
+  spriteRenderMode:sanitizeSpriteRenderModeValue(cfg.spriteRenderMode),
   starfieldIntensity:sanitizeStarfieldMultiplier(cfg.starfieldIntensity,1),
   starfieldSpeed:sanitizeStarfieldMultiplier(cfg.starfieldSpeed,1)
  };
@@ -1904,6 +1935,7 @@ function loadTestCfg(){
   const startKind=sanitizeStartKind(raw.startKind||(raw.challenge?'challenge':'level'));
   testCfgCache={
    startKind,
+   expertPlays:sanitizeExpertPlayPersona(raw.expertPlays||DEFAULT_TEST_CFG.expertPlays),
    stage:cl(+raw.stage||DEFAULT_TEST_CFG.stage,1,99)|0,
    challengeStage:cl(+raw.challengeStage||DEFAULT_TEST_CFG.challengeStage,1,99)|0,
    ships:cl(+raw.ships||DEFAULT_TEST_CFG.ships,1,9)|0,
@@ -1912,6 +1944,7 @@ function loadTestCfg(){
    challenge:startKind==='challenge'||!!raw.challenge,
    audioTheme:sanitizeAudioThemeValue(raw.audioTheme||DEFAULT_TEST_CFG.audioTheme),
    graphicsTheme:sanitizeGraphicsThemeValue(raw.graphicsTheme||DEFAULT_TEST_CFG.graphicsTheme),
+   spriteRenderMode:sanitizeSpriteRenderModeValue(raw.spriteRenderMode||DEFAULT_TEST_CFG.spriteRenderMode),
    starfieldIntensity:sanitizeStarfieldMultiplier(raw.starfieldIntensity,DEFAULT_TEST_CFG.starfieldIntensity),
    starfieldSpeed:sanitizeStarfieldMultiplier(raw.starfieldSpeed,DEFAULT_TEST_CFG.starfieldSpeed)
   };
@@ -1925,6 +1958,7 @@ function saveTestCfg(){
  const startCfg=productionStartStateLocked()
   ? {
     startKind:sanitizeStartKind(currentCfg.startKind||(currentCfg.challenge?'challenge':'level')),
+    expertPlays:sanitizeExpertPlayPersona(currentCfg.expertPlays||DEFAULT_TEST_CFG.expertPlays),
     stage:cl(+currentCfg.stage||DEFAULT_TEST_CFG.stage,1,99)|0,
     challengeStage:cl(+currentCfg.challengeStage||DEFAULT_TEST_CFG.challengeStage,1,99)|0,
     ships:cl(+currentCfg.ships||DEFAULT_TEST_CFG.ships,1,9)|0,
@@ -1934,6 +1968,7 @@ function saveTestCfg(){
    }
   : {
     startKind:sanitizeStartKind(testStartKind?.value||(testChallenge?.checked?'challenge':'level')),
+    expertPlays:sanitizeExpertPlayPersona(testExpertPlays?.value||DEFAULT_TEST_CFG.expertPlays),
     stage:cl(+testStage.value||DEFAULT_TEST_CFG.stage,1,99)|0,
     challengeStage:cl(+testChallengeStage?.value||DEFAULT_TEST_CFG.challengeStage,1,99)|0,
     ships:cl(+testShips.value||DEFAULT_TEST_CFG.ships,1,9)|0,
@@ -1943,6 +1978,7 @@ function saveTestCfg(){
    };
  const cfg={
   startKind:startCfg.startKind,
+  expertPlays:startCfg.expertPlays,
   stage:startCfg.stage,
   challengeStage:startCfg.challengeStage,
   ships:startCfg.ships,
@@ -1951,14 +1987,17 @@ function saveTestCfg(){
   challenge:startCfg.challenge,
   audioTheme:sanitizeAudioThemeValue(audioTheme?.value||DEFAULT_TEST_CFG.audioTheme),
   graphicsTheme:sanitizeGraphicsThemeValue(graphicsTheme?.value||DEFAULT_TEST_CFG.graphicsTheme),
+  spriteRenderMode:sanitizeSpriteRenderModeValue(spriteRenderMode?.value||DEFAULT_TEST_CFG.spriteRenderMode),
   starfieldIntensity:sanitizeStarfieldMultiplier(graphicsStarfieldIntensity?.value,DEFAULT_TEST_CFG.starfieldIntensity),
   starfieldSpeed:sanitizeStarfieldMultiplier(graphicsStarfieldSpeed?.value,DEFAULT_TEST_CFG.starfieldSpeed)
  };
+ const spriteModeChanged=sanitizeSpriteRenderModeValue(currentCfg.spriteRenderMode)!==cfg.spriteRenderMode;
  testCfgCache=cfg;
  applyTestCfgToControls(cfg);
  syncDeveloperToolsUi();
  writePref(TEST_PREF_KEY,JSON.stringify(cfg));
  if(typeof sfx!=='undefined'&&typeof sfx.primeReferenceTheme==='function')sfx.primeReferenceTheme(cfg.audioTheme);
+ if(spriteModeChanged)logEvent('sprite_render_mode_changed',{mode:cfg.spriteRenderMode,graphicsTheme:cfg.graphicsTheme});
  return Object.assign({},cfg);
 }
 function syncSettingsUi(){
@@ -2478,7 +2517,7 @@ function rs(){
  c.width=innerWidth*DPR;c.height=innerHeight*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);
  ctx.imageSmoothingEnabled=false;
  syncStarfieldProfile();
- VIS.gx=17;VIS.gy=14;VIS.playerBottom=20;VIS.beamLen=300;VIS.formTop=28;
+ VIS.gx=17;VIS.gy=14;VIS.playerBottom=25;VIS.beamLen=300;VIS.formTop=28;
  S.p.x=PLAY_W/2;S.p.y=PLAY_H-VIS.playerBottom;
 }
 addEventListener('resize',rs);
@@ -2518,7 +2557,7 @@ if(gameSoundVolumeControl){
  gameSoundVolumeControl.addEventListener('input',()=>setGameSoundVolume((+gameSoundVolumeControl.value||0)/100,{log:0,source:'developer_panel'}));
  gameSoundVolumeControl.addEventListener('change',()=>setGameSoundVolume((+gameSoundVolumeControl.value||0)/100,{log:1,source:'developer_panel'}));
 }
-for(const el of [testStartKind,testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,audioTheme,graphicsTheme,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
+for(const el of [testStartKind,testExpertPlays,testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,audioTheme,graphicsTheme,spriteRenderMode,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
 for(const el of [testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring])if(el)el.addEventListener('input',saveTestCfg);
 if(rootMode)rootMode.addEventListener('input',()=>{
  developerRootMode=String(rootMode.value||'').trim()===ROOT_UNLOCK_CODE;

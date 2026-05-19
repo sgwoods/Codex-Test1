@@ -1,0 +1,351 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "galaga-alien-temporal-targets",
+  "generatedAt": "2026-05-19T18:24:11.103Z",
+  "commit": "591cd98a",
+  "branch": "codex/macbook-conformance-investment-review",
+  "dirty": true,
+  "status": "mixed-confidence-temporal-target-sequences",
+  "sourceArtifacts": {
+    "targetCrops": "reference-artifacts/analyses/galaga-alien-target-crops/latest.json"
+  },
+  "summary": {
+    "temporalRowCount": 3,
+    "trustedCropLinks": 5,
+    "provisionalCropLinks": 4,
+    "finalFrameTimedRows": 0,
+    "usableForRuntimeCadenceScoring": 3
+  },
+  "rows": [
+    {
+      "id": "boss-galaga-pulse-pair",
+      "roleKey": "boss-galaga",
+      "runtimeSpriteKey": "boss-line",
+      "label": "Boss Galaga Pulse Pair",
+      "targetCropIds": [
+        "boss-galaga-formation-front",
+        "boss-galaga-flap-a",
+        "boss-galaga-flap-b"
+      ],
+      "poseSequence": [
+        "formation-front",
+        "flap-a",
+        "flap-b",
+        "flap-b",
+        "flap-a",
+        "formation-front"
+      ],
+      "confidence": "medium-high",
+      "status": "trusted-color-pulse-pair-not-frame-timed",
+      "sourceRead": "Uses two cleaned boss identities visible in the segmented alien motion reference as a trusted color/pulse target pair.",
+      "scoringUse": "Good enough to score role/color pulse and broad cadence transitions; not yet exact frame timing.",
+      "nextGap": "Extract a true frame-labeled boss animation window from gameplay or ROM-derived frame evidence.",
+      "trustedCropCount": 3,
+      "provisionalCropCount": 0,
+      "targetCrops": [
+        {
+          "id": "boss-galaga-formation-front",
+          "poseKey": "formation-front",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-formation-front.png",
+          "reviewStatus": "accepted-trusted-motion-reference",
+          "sourceKind": "motion-reference-video",
+          "videoDerivedCleanCrop": true,
+          "sourcePixelExact": false,
+          "metrics": {
+            "width": 52,
+            "height": 56,
+            "litPixels": 1174,
+            "litRatio": 0.40316,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 52
+            }
+          }
+        },
+        {
+          "id": "boss-galaga-flap-a",
+          "poseKey": "flap-a",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-flap-a.png",
+          "reviewStatus": "accepted-trusted-motion-reference",
+          "sourceKind": "motion-reference-video",
+          "videoDerivedCleanCrop": true,
+          "sourcePixelExact": false,
+          "metrics": {
+            "width": 52,
+            "height": 56,
+            "litPixels": 1174,
+            "litRatio": 0.40316,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 52
+            }
+          }
+        },
+        {
+          "id": "boss-galaga-flap-b",
+          "poseKey": "flap-b",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-flap-b.png",
+          "reviewStatus": "accepted-trusted-motion-reference",
+          "sourceKind": "motion-reference-video",
+          "videoDerivedCleanCrop": true,
+          "sourcePixelExact": false,
+          "metrics": {
+            "width": 52,
+            "height": 56,
+            "litPixels": 1298,
+            "litRatio": 0.44574,
+            "tokenChannels": [
+              "B",
+              "M"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 48,
+              "height": 52
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "bee-zako-pulse-pair",
+      "roleKey": "bee-zako",
+      "runtimeSpriteKey": "bee-line",
+      "label": "Bee / Zako Pulse Pair",
+      "targetCropIds": [
+        "bee-zako-formation-front",
+        "bee-zako-flap-a",
+        "bee-zako-flap-b"
+      ],
+      "poseSequence": [
+        "formation-front",
+        "flap-a",
+        "flap-b",
+        "flap-b",
+        "flap-a",
+        "formation-front"
+      ],
+      "confidence": "medium-low",
+      "status": "mixed-trusted-formation-plus-provisional-flap-pair",
+      "sourceRead": "Formation identity is trusted from the segmented alien motion reference; flap pair still comes from provisional source-sheet cells.",
+      "scoringUse": "Useful for exposing Aurora Bee geometry and cadence gaps, but not sufficient for a final temporal conformance claim.",
+      "nextGap": "Promote clean Bee flap frames from a true animated target window.",
+      "trustedCropCount": 1,
+      "provisionalCropCount": 2,
+      "targetCrops": [
+        {
+          "id": "bee-zako-formation-front",
+          "poseKey": "formation-front",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-formation-front.png",
+          "reviewStatus": "accepted-trusted-motion-reference",
+          "sourceKind": "motion-reference-video",
+          "videoDerivedCleanCrop": true,
+          "sourcePixelExact": false,
+          "metrics": {
+            "width": 45,
+            "height": 36,
+            "litPixels": 766,
+            "litRatio": 0.47284,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 1,
+              "y": 2,
+              "width": 42,
+              "height": 32
+            }
+          }
+        },
+        {
+          "id": "bee-zako-flap-a",
+          "poseKey": "flap-a",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-flap-a.png",
+          "reviewStatus": "provisional-source-sheet-cell",
+          "sourceKind": "sheet-cell",
+          "videoDerivedCleanCrop": false,
+          "sourcePixelExact": true,
+          "metrics": {
+            "width": 16,
+            "height": 16,
+            "litPixels": 50,
+            "litRatio": 0.19531,
+            "tokenChannels": [
+              "B",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 0,
+              "width": 16,
+              "height": 16
+            }
+          }
+        },
+        {
+          "id": "bee-zako-flap-b",
+          "poseKey": "flap-b",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-flap-b.png",
+          "reviewStatus": "provisional-source-sheet-cell",
+          "sourceKind": "sheet-cell",
+          "videoDerivedCleanCrop": false,
+          "sourcePixelExact": true,
+          "metrics": {
+            "width": 16,
+            "height": 16,
+            "litPixels": 46,
+            "litRatio": 0.17969,
+            "tokenChannels": [
+              "B",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 0,
+              "width": 16,
+              "height": 16
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "butterfly-escort-pulse-pair",
+      "roleKey": "butterfly-escort",
+      "runtimeSpriteKey": "but-line",
+      "label": "Butterfly / Escort Pulse Pair",
+      "targetCropIds": [
+        "butterfly-escort-formation-front",
+        "butterfly-escort-flap-a",
+        "butterfly-escort-flap-b"
+      ],
+      "poseSequence": [
+        "formation-front",
+        "flap-a",
+        "flap-b",
+        "flap-b",
+        "flap-a",
+        "formation-front"
+      ],
+      "confidence": "medium-low",
+      "status": "mixed-trusted-formation-plus-provisional-flap-pair",
+      "sourceRead": "Formation identity is trusted from the segmented alien motion reference; flap pair still comes from provisional source-sheet cells.",
+      "scoringUse": "Useful for exposing Aurora Butterfly geometry and cadence gaps, but not sufficient for a final temporal conformance claim.",
+      "nextGap": "Promote clean Butterfly flap frames from a true animated target window.",
+      "trustedCropCount": 1,
+      "provisionalCropCount": 2,
+      "targetCrops": [
+        {
+          "id": "butterfly-escort-formation-front",
+          "poseKey": "formation-front",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-formation-front.png",
+          "reviewStatus": "accepted-trusted-motion-reference",
+          "sourceKind": "motion-reference-video",
+          "videoDerivedCleanCrop": true,
+          "sourcePixelExact": false,
+          "metrics": {
+            "width": 34,
+            "height": 36,
+            "litPixels": 677,
+            "litRatio": 0.5531,
+            "tokenChannels": [
+              "B",
+              "G",
+              "R",
+              "W",
+              "Y"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 30,
+              "height": 32
+            }
+          }
+        },
+        {
+          "id": "butterfly-escort-flap-a",
+          "poseKey": "flap-a",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-flap-a.png",
+          "reviewStatus": "provisional-source-sheet-cell",
+          "sourceKind": "sheet-cell",
+          "videoDerivedCleanCrop": false,
+          "sourcePixelExact": true,
+          "metrics": {
+            "width": 16,
+            "height": 16,
+            "litPixels": 41,
+            "litRatio": 0.16016,
+            "tokenChannels": [
+              "B",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 0,
+              "width": 16,
+              "height": 16
+            }
+          }
+        },
+        {
+          "id": "butterfly-escort-flap-b",
+          "poseKey": "flap-b",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-flap-b.png",
+          "reviewStatus": "provisional-source-sheet-cell",
+          "sourceKind": "sheet-cell",
+          "videoDerivedCleanCrop": false,
+          "sourcePixelExact": true,
+          "metrics": {
+            "width": 16,
+            "height": 16,
+            "litPixels": 56,
+            "litRatio": 0.21875,
+            "tokenChannels": [
+              "B",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 0,
+              "width": 16,
+              "height": 16
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "nextBestStep": "Promote true frame-timed Bee and Butterfly flap windows, then replace provisional source-sheet flap cells in this temporal target artifact."
+}

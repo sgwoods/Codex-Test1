@@ -232,10 +232,13 @@ Practical standard:
   quality category at `7.3/10`; semantic event score is `9.78/10`, acoustic
   event fit is roughly `6.3-6.5/10`, and the next audio pass should target the
   highest-risk cue family while preserving `9/9` cue alignment
-- the dedicated challenge-stage conformance score is now `5.1/10`, with
-  interesting factor at `5.0/10`; the next pass should add late Galaga
-  reference labels, high-bonus readability probes, and temporal motion windows
-  before major gameplay retuning
+- the dedicated challenge-stage conformance score is now `4.1/10`, with
+  interesting factor at `4.2/10`; Challenge Stage 1 now has a separate
+  first-pass group target-contract fit of `7.2/10`, but the beta-facing
+  challenge gate remains `5.0/10` for the full strict score. The next pass
+  should add Stage 7 and Stage 11 target contracts, high-bonus readability
+  probes, and frame-level temporal motion windows before claiming a broad
+  challenge-stage lift
 - level arc and encounter shape is now a first-class quality category at
   `8.8/10`; this should be treated as a high-priority `1.4` workstream because
   it measures whether the run develops Galaga-like stage shape instead of

@@ -21,6 +21,30 @@ const CAPTURE_SPECS = [
   { spriteKey: 'challenge-mosquito', kind: 'challenge-mosquito', subject: 'enemy', playfieldWidth: 50, playfieldHeight: 44 }
 ];
 
+const TEMPORAL_PHASE_SPECS = [
+  { spriteKey: 'bee-line', kind: 'bee-line', subject: 'enemy', playfieldWidth: 54, playfieldHeight: 48 },
+  { spriteKey: 'but-line', kind: 'but-line', subject: 'enemy', playfieldWidth: 58, playfieldHeight: 50 },
+  { spriteKey: 'boss-line', kind: 'boss-line', subject: 'enemy', playfieldWidth: 66, playfieldHeight: 54 }
+];
+
+const CADENCE_WINDOW_SPECS = [
+  { spriteKey: 'bee-line', kind: 'bee-line', subject: 'enemy', playfieldWidth: 54, playfieldHeight: 48, frameCount: 8, stepTm: .055 },
+  { spriteKey: 'but-line', kind: 'but-line', subject: 'enemy', playfieldWidth: 58, playfieldHeight: 50, frameCount: 8, stepTm: .055 },
+  { spriteKey: 'boss-line', kind: 'boss-line', subject: 'enemy', playfieldWidth: 66, playfieldHeight: 54, frameCount: 8, stepTm: .055 }
+];
+
+const DIVE_POSE_SPECS = [
+  { spriteKey: 'bee-line-dive-left', modelKey: 'bee-line', kind: 'bee-line', subject: 'enemy', playfieldWidth: 58, playfieldHeight: 58, enemyDive: 1, enemyVx: -88, enemyVy: 134 },
+  { spriteKey: 'but-line-dive-right', modelKey: 'but-line', kind: 'but-line', subject: 'enemy', playfieldWidth: 62, playfieldHeight: 60, enemyDive: 1, enemyVx: 88, enemyVy: 134 },
+  { spriteKey: 'boss-line-dive-left', modelKey: 'boss-line', kind: 'boss-line', subject: 'enemy', playfieldWidth: 70, playfieldHeight: 66, enemyDive: 1, enemyVx: -70, enemyVy: 118 }
+];
+
+const TRANSITION_POSE_SPECS = [
+  { spriteKey: 'boss-capture-beam', modelKey: 'boss-line', kind: 'boss-line', subject: 'enemy', playfieldWidth: 86, playfieldHeight: 132, enemyDive: 2, enemyBeam: 1, enemyBeamT: 1.2 },
+  { spriteKey: 'boss-carrying-fighter', modelKey: 'boss-line', kind: 'boss-line', subject: 'enemy', playfieldWidth: 82, playfieldHeight: 92, enemyCarry: 1 },
+  { spriteKey: 'dual-fighter-transition', modelKey: 'dual-fighter', kind: 'dual-fighter', subject: 'player', playfieldWidth: 78, playfieldHeight: 42 }
+];
+
 function fail(message, payload){
   console.error(message);
   if(payload) console.error(JSON.stringify(payload, null, 2));
@@ -157,7 +181,7 @@ async function captureRuntimeSprite(page, spec, model){
     const sh = Math.max(1, Math.floor(height * (canvas.height / canvasRect.height)));
     const image = ctx.getImageData(sx, sy, sw, sh);
     const data = image.data;
-    const isLit = (px, py) => {
+    const pixelLit = (px, py) => {
       const i = (py * sw + px) * 4;
       const r = data[i];
       const g = data[i + 1];
@@ -165,6 +189,49 @@ async function captureRuntimeSprite(page, spec, model){
       const a = data[i + 3];
       return a > 0 && r + g + b > 90 && Math.max(r, g, b) > 38;
     };
+    const rawLit = new Uint8Array(sw * sh);
+    for(let py = 0; py < sh; py++){
+      for(let px = 0; px < sw; px++){
+        if(pixelLit(px, py)) rawLit[py * sw + px] = 1;
+      }
+    }
+    const seen = new Uint8Array(sw * sh);
+    const components = [];
+    for(let py = 0; py < sh; py++){
+      for(let px = 0; px < sw; px++){
+        const start = py * sw + px;
+        if(!rawLit[start] || seen[start]) continue;
+        const queue = [start];
+        const pixels = [];
+        seen[start] = 1;
+        for(let qi = 0; qi < queue.length; qi++){
+          const idx = queue[qi];
+          pixels.push(idx);
+          const x = idx % sw;
+          const y = Math.floor(idx / sw);
+          const next = [
+            x > 0 ? idx - 1 : -1,
+            x < sw - 1 ? idx + 1 : -1,
+            y > 0 ? idx - sw : -1,
+            y < sh - 1 ? idx + sw : -1
+          ];
+          for(const ni of next){
+            if(ni < 0 || !rawLit[ni] || seen[ni]) continue;
+            seen[ni] = 1;
+            queue.push(ni);
+          }
+        }
+        components.push({ pixels, count: pixels.length });
+      }
+    }
+    const largest = components.reduce((max, item) => Math.max(max, item.count), 0);
+    const minKeep = Math.max(3, largest * (spec.spriteKey === 'dual-fighter' ? .18 : .06));
+    const keepLit = new Uint8Array(sw * sh);
+    for(const component of components){
+      if(component.count < minKeep) continue;
+      for(const idx of component.pixels) keepLit[idx] = 1;
+    }
+    const isLit = (px, py) => keepLit[py * sw + px] === 1;
     let minX = sw;
     let minY = sh;
     let maxX = -1;
@@ -180,7 +247,7 @@ async function captureRuntimeSprite(page, spec, model){
         maxY = Math.max(maxY, py);
       }
     }
-    if(maxX < 0) return { error: 'empty-crop', sx, sy, sw, sh, litPixels };
+    if(maxX < 0) return { error: 'empty-crop', sx, sy, sw, sh, litPixels, rawComponents: components.length };
     const pad = 2;
     const bx = Math.max(0, minX - pad);
     const by = Math.max(0, minY - pad);
@@ -237,6 +304,11 @@ async function captureRuntimeSprite(page, spec, model){
     };
   }, { subject, spec, grid });
   if(capture.error) throw new Error(`Runtime capture failed for ${spec.spriteKey}: ${capture.error}`);
+  await page.evaluate(() => {
+    if(window.__galagaHarness__?.clearSpriteRuntimeCapture){
+      window.__galagaHarness__.clearSpriteRuntimeCapture();
+    }
+  });
   const outFile = path.join(CROP_DIR, `${spec.spriteKey}.png`);
   fs.mkdirSync(path.dirname(outFile), { recursive: true });
   fs.writeFileSync(outFile, Buffer.from(String(capture.dataUrl).split(',')[1] || '', 'base64'));
@@ -273,11 +345,92 @@ async function captureRuntimeSprite(page, spec, model){
 async function main(){
   const modelArtifact = readJson(MODEL_ARTIFACT);
   const samples = [];
+  const temporalSamples = [];
+  const cadenceSamples = [];
+  const divePoseSamples = [];
+  const transitionPoseSamples = [];
   await withHarnessPage({ stage: 1, ships: 3, challenge: false, seed: 91577 }, async ({ page }) => {
     for(const spec of CAPTURE_SPECS){
       const model = modelForKey(modelArtifact, spec.spriteKey);
       if(!model) throw new Error(`Missing model for runtime sprite key ${spec.spriteKey}`);
       samples.push(await captureRuntimeSprite(page, spec, model));
+    }
+    for(const spec of TEMPORAL_PHASE_SPECS){
+      const model = modelForKey(modelArtifact, spec.spriteKey);
+      if(!model) throw new Error(`Missing model for temporal sprite key ${spec.spriteKey}`);
+      const closed = await captureRuntimeSprite(page, Object.assign({}, spec, {
+        spriteKey: `${spec.spriteKey}-flap-closed`,
+        enemyTm: 0
+      }), model);
+      const open = await captureRuntimeSprite(page, Object.assign({}, spec, {
+        spriteKey: `${spec.spriteKey}-flap-open`,
+        enemyTm: .18
+      }), model);
+      temporalSamples.push({
+        spriteKey: spec.spriteKey,
+        motionAxis: 'two-phase-flap-pulse',
+        phaseClosedCrop: closed.cropImage,
+        phaseOpenCrop: open.cropImage,
+        closedScore10: closed.score10,
+        openScore10: open.score10,
+        scoreDelta: rounded(Math.abs(open.score10 - closed.score10), 2),
+        litPixelDelta: Math.abs((open.litPixels || 0) - (closed.litPixels || 0)),
+        filledCellDelta: Math.abs((open.filledCells || 0) - (closed.filledCells || 0)),
+        read: `Captured closed/open flap phases for ${spec.spriteKey}; lit-pixel delta ${Math.abs((open.litPixels || 0) - (closed.litPixels || 0))}, filled-cell delta ${Math.abs((open.filledCells || 0) - (closed.filledCells || 0))}.`
+      });
+    }
+    for(const spec of CADENCE_WINDOW_SPECS){
+      const model = modelForKey(modelArtifact, spec.spriteKey);
+      if(!model) throw new Error(`Missing model for cadence sprite key ${spec.spriteKey}`);
+      const frames = [];
+      for(let frameIndex = 0; frameIndex < spec.frameCount; frameIndex += 1){
+        const enemyTm = rounded((spec.startTm || 0) + frameIndex * spec.stepTm, 3);
+        const frame = await captureRuntimeSprite(page, Object.assign({}, spec, {
+          spriteKey: `${spec.spriteKey}-cadence-${String(frameIndex).padStart(2, '0')}`,
+          enemyTm
+        }), model);
+        frames.push({
+          frameIndex,
+          enemyTm,
+          cropImage: frame.cropImage,
+          score10: frame.score10,
+          litPixels: frame.litPixels,
+          filledCells: frame.filledCells,
+          fillRatio: frame.fillRatio
+        });
+      }
+      const scoreValues = frames.map(frame => frame.score10).filter(Number.isFinite);
+      const litDeltas = frames.slice(1).map((frame, index) => Math.abs((frame.litPixels || 0) - (frames[index].litPixels || 0)));
+      const fillDeltas = frames.slice(1).map((frame, index) => Math.abs((frame.filledCells || 0) - (frames[index].filledCells || 0)));
+      cadenceSamples.push({
+        spriteKey: spec.spriteKey,
+        motionAxis: 'full-flap-cadence-window',
+        frameCount: frames.length,
+        windowSecondsApprox: rounded((frames.length - 1) * spec.stepTm, 3),
+        scoreRange10: scoreValues.length ? rounded(Math.max(...scoreValues) - Math.min(...scoreValues), 2) : null,
+        averageAdjacentLitPixelDelta: rounded(litDeltas.length ? litDeltas.reduce((sum, item) => sum + item, 0) / litDeltas.length : 0, 2),
+        averageAdjacentFilledCellDelta: rounded(fillDeltas.length ? fillDeltas.reduce((sum, item) => sum + item, 0) / fillDeltas.length : 0, 2),
+        frames,
+        read: `Captured ${frames.length} cadence frames for ${spec.spriteKey}; average adjacent lit-pixel delta ${rounded(litDeltas.length ? litDeltas.reduce((sum, item) => sum + item, 0) / litDeltas.length : 0, 1)}, filled-cell delta ${rounded(fillDeltas.length ? fillDeltas.reduce((sum, item) => sum + item, 0) / fillDeltas.length : 0, 1)}. This measures visible runtime motion, but not yet Galaga target-frame cadence.`
+      });
+    }
+    for(const spec of DIVE_POSE_SPECS){
+      const model = modelForKey(modelArtifact, spec.modelKey || spec.spriteKey);
+      if(!model) throw new Error(`Missing model for dive sprite key ${spec.modelKey || spec.spriteKey}`);
+      const sample = await captureRuntimeSprite(page, spec, model);
+      divePoseSamples.push(Object.assign({}, sample, {
+        motionAxis: 'dive-rotation-pose',
+        read: `Captured ${spec.spriteKey} with forced dive vector (${spec.enemyVx}, ${spec.enemyVy}) so rotation silhouette can be tracked over time.`
+      }));
+    }
+    for(const spec of TRANSITION_POSE_SPECS){
+      const model = modelForKey(modelArtifact, spec.modelKey || spec.spriteKey);
+      if(!model) throw new Error(`Missing model for transition sprite key ${spec.modelKey || spec.spriteKey}`);
+      const sample = await captureRuntimeSprite(page, spec, model);
+      transitionPoseSamples.push(Object.assign({}, sample, {
+        motionAxis: 'capture-rescue-dual-transition',
+        read: `Captured ${spec.spriteKey} as a first transition-state measurement seed.`
+      }));
     }
   });
   const averageScore10 = samples.length
@@ -297,32 +450,55 @@ async function main(){
     },
     summary: {
       sampleCount: samples.length,
+      temporalSampleCount: temporalSamples.length,
+      cadenceSampleCount: cadenceSamples.length,
       averageScore10,
       weakestSpriteKey: weakest?.spriteKey || null,
       weakestScore10: weakest?.score10 || null,
       captureMode: 'isolated-live-canvas-sprite-crops',
       measuredKeys: samples.map(item => item.spriteKey),
-      staticPoseOnly: true,
-      motionCoverageAxesCovered: 0,
+      staticPoseOnly: false,
+      motionCoverageAxesCovered: [
+        temporalSamples.length ? 'two-phase flap/pulse static sprite delta for bee, butterfly, and boss families' : '',
+        cadenceSamples.length ? 'full flap-cycle cadence windows for bee, butterfly, and boss families' : '',
+        divePoseSamples.length ? 'forced dive/rotation pose silhouettes for bee, butterfly, and boss families' : '',
+        transitionPoseSamples.length ? 'capture-beam, carried-fighter, and dual-fighter transition seed poses' : ''
+      ].filter(Boolean).length,
       motionCoverageAxesPlanned: 4,
+      coveredMotionAxes: [
+        temporalSamples.length ? 'two-phase flap/pulse static sprite delta for bee, butterfly, and boss families' : '',
+        cadenceSamples.length ? 'full flap-cycle cadence windows for bee, butterfly, and boss families' : '',
+        divePoseSamples.length ? 'forced dive/rotation pose silhouettes for bee, butterfly, and boss families' : '',
+        transitionPoseSamples.length ? 'capture-beam, carried-fighter, and dual-fighter transition seed poses' : ''
+      ].filter(Boolean),
       plannedMotionAxes: [
-        'flap-cycle cadence and alternating wing/body pixels',
+        'flap-cycle cadence and alternating wing/body pixels over full temporal windows',
         'pulse and damage-state brightness/color phases',
         'dive/rotation pose silhouettes',
         'capture, carried-fighter, rescue, and dual-fighter transition poses'
       ]
     },
     measurementLimits: [
-      'Runtime captures isolate static sprite poses through the harness; they do not yet score animation phases, rotations, dive poses, pulsing, flapping cadence, capture/rescue transitions, or formation context.',
+      'Runtime captures isolate static sprite poses through the harness with starfield, reserve ships, stage badges, bullets, and effects suppressed.',
+      'The first temporal windows capture closed/open flap phases, full cadence windows, forced dive/rotation poses, and capture/dual-fighter transition seed poses; they do not yet score damage pulsing, complete capture/rescue timelines, or formation context.',
+      'Cadence windows are runtime-visible motion probes; they are not yet matched against frame-labeled Galaga target cadence windows.',
       'The current score compares visible rendered Aurora pixels to inferred source-frame Galaga models, not to a direct Galaga ROM sprite sheet.'
     ],
-    samples
+    samples,
+    temporalSamples,
+    cadenceSamples,
+    divePoseSamples,
+    transitionPoseSamples
   };
   writeJson(OUT, artifact);
   console.log(JSON.stringify({
     ok: true,
     artifact: rel(OUT),
     sampleCount: samples.length,
+    temporalSampleCount: temporalSamples.length,
+    cadenceSampleCount: cadenceSamples.length,
+    divePoseSampleCount: divePoseSamples.length,
+    transitionPoseSampleCount: transitionPoseSamples.length,
     averageScore10,
     weakestSpriteKey: weakest?.spriteKey || null,
     weakestScore10: weakest?.score10 || null,
