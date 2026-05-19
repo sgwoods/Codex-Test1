@@ -88,7 +88,7 @@ function relative(file){
 function commitMatchesHead(value, acceptedCommits){
   const commit = String(value || '').trim();
   if(!commit) return false;
-  return acceptedCommits.some((candidate) => candidate === commit || candidate.startsWith(commit) || commit.startsWith(candidate));
+  return (acceptedCommits || []).some((candidate) => candidate === commit || candidate.startsWith(commit) || commit.startsWith(candidate));
 }
 
 function assertReleaseDocArtifactCurrent(file, label, opts = {}){
@@ -100,7 +100,7 @@ function assertReleaseDocArtifactCurrent(file, label, opts = {}){
     });
   }
   if(opts.repoClean){
-    if(!commitMatchesHead(artifact.commit, opts.headShort, opts.headFull)){
+    if(!commitMatchesHead(artifact.commit, opts.acceptedCommits)){
       fail(`${label} does not match the current source head.`, {
         file: relative(file),
         artifactCommit: artifact.commit || null,
