@@ -723,6 +723,9 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   slotDelay:.12,
   arcAmp:1.46,
   dropAmp:1.08,
+  groupArcAmps:Object.freeze([1.34,1.28,1.46,1.38,1.18]),
+  groupDropAmps:Object.freeze([.86,.94,1.08,1.12,1.02]),
+  groupSpeedScales:Object.freeze([1.34,1.28,1.22,1.18,1.16]),
   laneTypes:Object.freeze(['but','boss','rogue','bee','bee','rogue','boss','but']),
   groupLaneTypes:Object.freeze([
    Object.freeze(['but','boss','rogue','bee','bee','rogue','boss','but']),
@@ -748,6 +751,9 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   slotDelay:.12,
   arcAmp:2.08,
   dropAmp:1.02,
+  groupArcAmps:Object.freeze([1.78,1.34,1.52,1.18,1.44]),
+  groupDropAmps:Object.freeze([.9,.98,1.08,1.06,1.12]),
+  groupSpeedScales:Object.freeze([1.24,1.22,1.18,1.14,1.12]),
   laneTypes:Object.freeze(['boss','rogue','but','bee','boss','bee','but','rogue']),
   groupLaneTypes:Object.freeze([
    Object.freeze(['boss','rogue','but','bee','boss','bee','but','rogue']),

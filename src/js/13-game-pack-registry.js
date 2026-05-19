@@ -226,7 +226,10 @@ function currentGamePackChallengeLayout(stage){
   return Object.assign({},layout||{},overrideLayout,{
    laneTypes:Array.isArray(overrideLayout.laneTypes)?overrideLayout.laneTypes:(layout?.laneTypes||[]),
    groupLaneTypes:Array.isArray(overrideLayout.groupLaneTypes)?overrideLayout.groupLaneTypes:(layout?.groupLaneTypes||[]),
-   groupPathFamilies:Array.isArray(overrideLayout.groupPathFamilies)?overrideLayout.groupPathFamilies:(layout?.groupPathFamilies||[])
+   groupPathFamilies:Array.isArray(overrideLayout.groupPathFamilies)?overrideLayout.groupPathFamilies:(layout?.groupPathFamilies||[]),
+   groupArcAmps:Array.isArray(overrideLayout.groupArcAmps)?overrideLayout.groupArcAmps:(layout?.groupArcAmps||[]),
+   groupDropAmps:Array.isArray(overrideLayout.groupDropAmps)?overrideLayout.groupDropAmps:(layout?.groupDropAmps||[]),
+   groupSpeedScales:Array.isArray(overrideLayout.groupSpeedScales)?overrideLayout.groupSpeedScales:(layout?.groupSpeedScales||[])
   });
  }
  return layout;

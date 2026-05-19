@@ -318,6 +318,9 @@ function normalizeRuntimeMotion(samples){
   for(const sample of samples || []){
     const byWave = new Map();
     for(const pos of sample.positions || []){
+      if(Number.isFinite(+pos.spawn) && +pos.spawn > 0.03) continue;
+      if(Number.isFinite(+pos.x) && (+pos.x < -12 || +pos.x > 292)) continue;
+      if(Number.isFinite(+pos.y) && (+pos.y < -24 || +pos.y > 384)) continue;
       const wave = Number.isFinite(+pos.wave) ? +pos.wave : 0;
       if(!byWave.has(wave)) byWave.set(wave, []);
       byWave.get(wave).push(pos);
@@ -339,7 +342,7 @@ function normalizeRuntimeMotion(samples){
       });
     }
   }
-  const groupVectors = Array.from(waveSamples.values()).map(points => {
+  const groupVectors = Array.from(waveSamples.entries()).map(([wave, points]) => {
     const xs = points.flatMap(point => [point.minX, point.maxX]);
     const ys = points.flatMap(point => [point.minY, point.maxY]);
     let pathPixels = 0;
@@ -363,7 +366,15 @@ function normalizeRuntimeMotion(samples){
       if(dxSign) previousDxSign = dxSign;
       previousHeading = heading;
     }
+    const first = points[0] || {};
+    const last = points[points.length - 1] || {};
     return {
+      wave,
+      sampleCount: points.length,
+      visibleStartS: round(first.t, 2),
+      visibleEndS: round(last.t, 2),
+      entrySide: sideForX(first.centerX),
+      exitSide: sideForX(last.centerX),
       xRange: xs.length ? (Math.max(...xs) - Math.min(...xs)) / 280 : 0,
       yRange: ys.length ? (Math.max(...ys) - Math.min(...ys)) / 360 : 0,
       pathLength: pathPixels / 360,
@@ -388,8 +399,133 @@ function normalizeRuntimeMotion(samples){
     sampleCount: (samples || []).length,
     groupVectorCount: groupVectors.length,
     rackSlotError: 0,
-    timingOffsetS: 0
+    timingOffsetS: 0,
+    groupVectors
   };
+}
+
+function sideForX(x){
+  const playWidth = 280;
+  const value = Number.isFinite(+x) ? +x : playWidth / 2;
+  if(value < playWidth * 0.34) return 'left';
+  if(value > playWidth * 0.66) return 'right';
+  return 'center';
+}
+
+function sideCompatibility(actual, expected){
+  const a = String(actual || '').toLowerCase();
+  const e = String(expected || '').toLowerCase();
+  if(!e || !a) return 0;
+  if(e.includes('both') || e.includes('side')) return a === 'left' || a === 'right' ? 1 : 0.65;
+  if(e.includes('opposite') || e.includes('lower')) return a === 'left' || a === 'right' ? 1 : 0.5;
+  if(e.includes(a)) return 1;
+  return e.includes('center') && a === 'center' ? 1 : 0;
+}
+
+function motionVectorForTrack(track){
+  const points = (track || []).filter(point => Number.isFinite(+point.x) && Number.isFinite(+point.y));
+  if(!points.length) return null;
+  const xs = points.map(point => +point.x);
+  const ys = points.map(point => +point.y);
+  let pathPixels = 0;
+  let turnCount = 0;
+  let reversalCount = 0;
+  let previousHeading = null;
+  let previousDxSign = 0;
+  for(let i = 1; i < points.length; i += 1){
+    const a = points[i - 1];
+    const b = points[i];
+    const dx = +b.x - +a.x;
+    const dy = +b.y - +a.y;
+    pathPixels += Math.hypot(dx, dy);
+    const heading = Math.atan2(dy, dx);
+    if(previousHeading != null){
+      const delta = Math.abs(Math.atan2(Math.sin(heading - previousHeading), Math.cos(heading - previousHeading)));
+      if(delta > 0.65) turnCount += 1;
+    }
+    const dxSign = Math.sign(dx);
+    if(dxSign && previousDxSign && dxSign !== previousDxSign) reversalCount += 1;
+    if(dxSign) previousDxSign = dxSign;
+    previousHeading = heading;
+  }
+  const first = points[0];
+  const last = points[points.length - 1];
+  return {
+    sampleCount: points.length,
+    visibleStartS: round(first.t, 2),
+    visibleEndS: round(last.t, 2),
+    entrySide: sideForX(first.x),
+    exitSide: sideForX(last.x),
+    xRange: (Math.max(...xs) - Math.min(...xs)) / 280,
+    yRange: (Math.max(...ys) - Math.min(...ys)) / 360,
+    pathLength: pathPixels / 360,
+    turnCount,
+    reversalCount,
+    lowerFieldShare: ys.filter(y => y > 180).length / ys.length
+  };
+}
+
+function compareTrackVectorToTarget(vector, targetGroup, source){
+  const target = targetGroup?.objectTrackTarget || null;
+  if(!vector || !target) return null;
+  const xRange = closenessToTarget(vector.xRange, target.xRange, Math.max(0.12, (+target.xRange || 0.6) * 0.42));
+  const yRange = closenessToTarget(vector.yRange, target.yRange, Math.max(0.1, (+target.yRange || 0.4) * 0.45));
+  const pathLength = closenessToTarget(vector.pathLength, target.pathLength, Math.max(0.16, (+target.pathLength || 0.8) * 0.42));
+  const turnCount = closenessToTarget(vector.turnCount, target.turnCount || 1, 2.1);
+  const reversalCount = closenessToTarget(vector.reversalCount, target.reversalCount || 1, 2.2);
+  const lowerFieldShare = closenessToTarget(vector.lowerFieldShare, target.lowerFieldShare || 0, 0.18);
+  const visibleStart = closenessToTarget(vector.visibleStartS, target.visibleStartS, 0.95);
+  const visibleEnd = closenessToTarget(vector.visibleEndS, target.visibleEndS, 1.35);
+  const entrySide = sideCompatibility(vector.entrySide, target.entrySide || targetGroup.entrySide);
+  const exitSide = sideCompatibility(vector.exitSide, target.exitSide || targetGroup.exitSide);
+  const coverage = clamp(
+    (0.14 * xRange)
+    + (0.16 * yRange)
+    + (0.18 * pathLength)
+    + (0.12 * turnCount)
+    + (0.08 * reversalCount)
+    + (0.09 * lowerFieldShare)
+    + (0.08 * visibleStart)
+    + (0.07 * visibleEnd)
+    + (0.04 * entrySide)
+    + (0.04 * exitSide)
+  );
+  return {
+    groupIndex: targetGroup.groupIndex || (Number.isFinite(+vector.wave) ? +vector.wave + 1 : null),
+    source,
+    coverage: round(coverage, 3),
+    score10: round(1 + coverage * 7.4, 1),
+    runtime: vector,
+    target,
+    components: {
+      xRange: round(xRange, 3),
+      yRange: round(yRange, 3),
+      pathLength: round(pathLength, 3),
+      turnCount: round(turnCount, 3),
+      reversalCount: round(reversalCount, 3),
+      lowerFieldShare: round(lowerFieldShare, 3),
+      visibleStart: round(visibleStart, 3),
+      visibleEnd: round(visibleEnd, 3),
+      entrySide: round(entrySide, 3),
+      exitSide: round(exitSide, 3)
+    }
+  };
+}
+
+function objectTrackTargetFit(runtimeGroupVector, targetGroup, runtime, groupIndex){
+  const target = targetGroup?.objectTrackTarget || null;
+  if(!target) return null;
+  const trackVectors = Array.isArray(runtime?.spriteMotion?.objectTrackedPixelSilhouette?.trackVectors)
+    ? runtime.spriteMotion.objectTrackedPixelSilhouette.trackVectors
+    : [];
+  const wave = Number.isFinite(+groupIndex) ? +groupIndex : (targetGroup.groupIndex ? +targetGroup.groupIndex - 1 : null);
+  const candidates = trackVectors
+    .filter(track => wave === null || +track.wave === wave)
+    .map(track => compareTrackVectorToTarget(track, targetGroup, 'object-silhouette-track'))
+    .filter(Boolean)
+    .sort((a, b) => b.coverage - a.coverage || b.score10 - a.score10);
+  if(candidates[0]) return candidates[0];
+  return compareTrackVectorToTarget(runtimeGroupVector, targetGroup, 'group-envelope-fallback');
 }
 
 function trajectoryFit(runtimeVector, target){
@@ -495,7 +631,7 @@ function referenceMatchForRuntime(stage, runtime, referenceLabels){
   };
 }
 
-function strictTrajectoryRead(runtimeVector, referenceLabel, match, expectedHit, lateReferenceGap){
+function strictTrajectoryRead(runtimeVector, referenceLabel, match, expectedHit, lateReferenceGap, targetContractFit = null){
   const target = referenceLabel?.comparisonVector || {};
   if(!runtimeVector || !referenceLabel || !target){
     return {
@@ -512,17 +648,19 @@ function strictTrajectoryRead(runtimeVector, referenceLabel, match, expectedHit,
   const reversalCount = closenessToTarget(runtimeVector.reversalCount, target.reversalCount || 0, 1);
   const lowerFieldShare = closenessToTarget(runtimeVector.lowerFieldShare, target.lowerFieldShare || 0, 0.12);
   const trajectoryScore = clamp((+match?.bestMatch?.trajectoryScore10 || 0) / 10);
+  const objectTrackCoverage = clamp(+targetContractFit?.objectTrackCoverage || 0);
   const rawFit = clamp(
     (0.24 * yRange)
     + (0.28 * pathLength)
     + (0.18 * turnCount)
     + (0.1 * reversalCount)
     + (0.08 * lowerFieldShare)
-    + (0.12 * trajectoryScore)
+    + (0.08 * trajectoryScore)
+    + (0.04 * objectTrackCoverage)
   );
   const referenceReliability = lateReferenceGap ? 0.52 : (expectedHit ? 0.92 : 0.62);
-  const temporalCoverage = round(Math.min(0.72, 0.48 + Math.min(0.24, (+runtimeVector.sampleCount || 0) * 0.016)), 2);
-  const score10 = round(1 + (5.4 * rawFit * referenceReliability * temporalCoverage), 1);
+  const temporalCoverage = round(Math.min(0.88, 0.48 + Math.min(0.24, (+runtimeVector.sampleCount || 0) * 0.016) + (objectTrackCoverage * 0.16)), 2);
+  const score10 = round(1 + (6.0 * rawFit * referenceReliability * temporalCoverage), 1);
   return {
     score10,
     rawFit: round(rawFit, 3),
@@ -535,9 +673,11 @@ function strictTrajectoryRead(runtimeVector, referenceLabel, match, expectedHit,
       turnCount: round(turnCount, 3),
       reversalCount: round(reversalCount, 3),
       lowerFieldShare: round(lowerFieldShare, 3),
-      trajectoryBestMatch: round(trajectoryScore, 3)
+      trajectoryBestMatch: round(trajectoryScore, 3),
+      objectTrackCoverage: round(objectTrackCoverage, 3)
     },
-    read: `Strict movement score ${score10}/10 against ${referenceLabel.labelId}: y-range fit ${round(yRange, 2)}, path-length fit ${round(pathLength, 2)}, turn fit ${round(turnCount, 2)}. Current probes are still sampled summaries, so full temporal choreography is not yet proven.`
+    objectTrackRead: targetContractFit?.objectTrackRead || 'No group-level object-track contract evidence was available for this stage.',
+    read: `Strict movement score ${score10}/10 against ${referenceLabel.labelId}: y-range fit ${round(yRange, 2)}, path-length fit ${round(pathLength, 2)}, turn fit ${round(turnCount, 2)}, object-track fit ${round(objectTrackCoverage, 2)}. Current probes now include first-pass group object tracks, but full target-video optical tracking is still not proven.`
   };
 }
 
@@ -791,6 +931,17 @@ function summarizeObjectTrackedSilhouettes(samples){
         aspect: round(item.bboxAspect, 3)
       }))
     }));
+  const trackVectors = tracks.map(track => {
+    const vector = motionVectorForTrack(track);
+    return vector ? Object.assign({
+      id: track[0].id,
+      family: track[0].family,
+      pathFamily: track[0].pathFamily,
+      wave: track[0].wave,
+      lane: track[0].lane,
+      type: track[0].type
+    }, vector) : null;
+  }).filter(Boolean);
   return {
     score10: round(1 + coverage * 4.8, 1),
     coverage: round(coverage, 3),
@@ -806,6 +957,7 @@ function summarizeObjectTrackedSilhouettes(samples){
     targetFitFrameShare: round(targetFitFrameShare, 3),
     targetFitScore10: round(1 + targetFitCoverage * 5.2, 1),
     topTracks,
+    trackVectors,
     read: `Object-tracked silhouette probe measured ${observations.length} sprite crops across ${tracks.length} object track(s); ${repeatedTracks.length} track(s) persisted across multiple samples, with ${round(hashChangeShare, 2)} hash-change share, ${round(bboxVariation, 2)} bounding-box variation, and ${round(targetFitCoverage, 2)} Galaga sprite target-fit coverage.`
   };
 }
@@ -1121,6 +1273,8 @@ async function runtimeProbeForStage(stage){
             family: e.family,
             pathFamily: e.pathFamily,
             tm: +(+e.tm || 0).toFixed(3),
+            spawn: +(+e.spawn || 0).toFixed(3),
+            spawnPlan: +(+e.spawnPlan || 0).toFixed(2),
             flapOpen: e.flapOpen === true,
             animationPhase: +(+e.animationPhase || 0).toFixed(3),
             x: +(+e.x || 0).toFixed(2),
@@ -1209,13 +1363,13 @@ function stageScore(stage, runtime, match, referenceLabels){
     : typeNovelty;
   const oldCoverageScore = clamp(base + safety + trajectory + expectedMatch + adjustedTypeNovelty + familyNovelty + referenceEvidence + group.component + latePenalty, 0, 10);
   const referenceLabel = referenceLabelForStage(stage, intent, match, referenceLabels);
-  const movement = strictTrajectoryRead(match?.runtimeVector, referenceLabel, match, expectedHit, lateReferenceGap);
+  const targetContract = challengeContractForStage(stage);
+  const targetContractFit = challengeContractFit(runtime, targetContract);
+  const movement = strictTrajectoryRead(match?.runtimeVector, referenceLabel, match, expectedHit, lateReferenceGap, targetContractFit);
   const graphics = strictGraphicsRead(stage, runtime, expectedHit);
   const alienNovelty = strictAlienNoveltyRead(stage, runtime, { groupIdentity: group }, expectedHit, lateReferenceGap);
   const progression = stageProgressionRead(stage, runtime, expectedHit, lateReferenceGap);
   const shotOpportunity = runtime?.shotOpportunity || summarizeShotOpportunity(runtime?.samples || []);
-  const targetContract = challengeContractForStage(stage);
-  const targetContractFit = challengeContractFit(runtime, targetContract);
   const safetyRuleScore10 = safetyPass ? 10 : 1;
   const conformanceRaw = (0.34 * movement.score10)
     + (0.25 * graphics.score10)
@@ -1309,23 +1463,34 @@ function challengeContractFit(runtime, contract){
   const pathFamilyFit = average(pathMatches) || 0;
   const typeFit = average(typeMatches) || 0;
   const familyFit = average(familyMatches) || 0;
+  const objectTrackFits = targetGroups.map((target, index) => objectTrackTargetFit(runtime?.motionVector?.groupVectors?.[index], target, runtime, index)).filter(Boolean);
+  const objectTrackCoverage = objectTrackFits.length ? average(objectTrackFits.map(item => item.coverage)) : 0;
+  const objectTrackFit = objectTrackFits.length ? average(objectTrackFits.map(item => item.score10)) : null;
+  const hasObjectTrackTargets = targetGroups.some(group => group.objectTrackTarget);
   const coverage = clamp(
-    (0.22 * groupCountFit)
-    + (0.34 * pathFamilyFit)
-    + (0.28 * typeFit)
-    + (0.16 * familyFit)
+    (0.18 * groupCountFit)
+    + (0.24 * pathFamilyFit)
+    + (0.22 * typeFit)
+    + (0.14 * familyFit)
+    + (0.22 * objectTrackCoverage)
   );
   return {
-    score10: round(1 + coverage * 6.2, 1),
-    confidence: 'medium-low-first-pass-contract',
+    score10: round(1 + coverage * (hasObjectTrackTargets ? 7.0 : 6.2), 1),
+    confidence: hasObjectTrackTargets ? 'medium-first-pass-object-track-contract' : 'medium-low-first-pass-contract',
     contractId: contract.sourceWindowId || null,
     groupCountFit: round(groupCountFit, 3),
     pathFamilyFit: round(pathFamilyFit, 3),
     typeFit: round(typeFit, 3),
     familyFit: round(familyFit, 3),
+    objectTrackCoverage: round(objectTrackCoverage, 3),
+    objectTrackFitScore10: round(objectTrackFit, 1),
+    objectTrackFits,
     targetGroupCount: targetGroups.length,
     runtimeGroupCount: runtimeGroups.length,
-    read: `First-pass target contract fit is ${round(1 + coverage * 6.2, 1)}/10 for ${contract.displayLabel || `stage ${contract.stage}`}: group count ${round(groupCountFit, 2)}, path-family order ${round(pathFamilyFit, 2)}, type order ${round(typeFit, 2)}, family order ${round(familyFit, 2)}. This is a group-contract read, not frame-perfect optical tracking.`
+    objectTrackRead: objectTrackFits.length
+      ? `Group object-track target fit is ${round(objectTrackFit, 1)}/10 across ${objectTrackFits.length}/${targetGroups.length} target group(s).`
+      : 'No group object-track targets were available in this contract.',
+    read: `First-pass target contract fit is ${round(1 + coverage * (hasObjectTrackTargets ? 7.0 : 6.2), 1)}/10 for ${contract.displayLabel || `stage ${contract.stage}`}: group count ${round(groupCountFit, 2)}, path-family order ${round(pathFamilyFit, 2)}, type order ${round(typeFit, 2)}, family order ${round(familyFit, 2)}, object-track ${round(objectTrackCoverage, 2)}. This is now a first-pass group/object-track read, not frame-perfect optical tracking.`
   };
 }
 

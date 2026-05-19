@@ -88,7 +88,7 @@ function updateChallengeEnemy(e,dt){
 	 const fm=familyMotion(e);
 	 const classicStage3=S.stage===3&&e.fam==='classic';
 	 const baseChallengeSpeed=pathFamily==='yellow-diagonal-fan'?.388:pathFamily==='green-ladder-split'?.386:pathFamily==='first-challenge-peel'?.345:(classicStage3?.345:.355);
-	 e.tm+=dt*(baseChallengeSpeed+(e.wave||0)*.007+Math.min(.012,S.stage*.0015));
+	 e.tm+=dt*(baseChallengeSpeed+(e.wave||0)*.007+Math.min(.012,S.stage*.0015))*(e.speedScale||1);
 	 const u=e.tm,p=e.ph,wave=e.wave||0,side=e.side||1,slot=e.slot||0,row=e.row||0,sweep=e.sweep||1;
 	 const arcAmp=e.arcAmp||1,dropAmp=e.dropAmp||1;
 	 const laneX=PLAY_W/2+side*(48+slot*16);

@@ -33,7 +33,19 @@
           "entrySide": "both-sides",
           "exitSide": "lower-sides",
           "scoreWindow": "upper-band mirrored targets",
-          "targetVisibleS": [0.9, 6.4]
+          "targetVisibleS": [0.9, 6.4],
+          "objectTrackTarget": {
+            "entrySide": "top-right",
+            "exitSide": "left",
+            "visibleStartS": 0.9,
+            "visibleEndS": 6.4,
+            "xRange": 0.52,
+            "yRange": 0.28,
+            "pathLength": 0.68,
+            "turnCount": 1,
+            "reversalCount": 0,
+            "lowerFieldShare": 0.02
+          }
         },
         {
           "groupIndex": 2,
@@ -44,7 +56,19 @@
           "entrySide": "top",
           "exitSide": "lower",
           "scoreWindow": "center columns",
-          "targetVisibleS": [2.2, 8.2]
+          "targetVisibleS": [2.2, 8.2],
+          "objectTrackTarget": {
+            "entrySide": "top",
+            "exitSide": "lower",
+            "visibleStartS": 2.2,
+            "visibleEndS": 8.2,
+            "xRange": 0.42,
+            "yRange": 0.36,
+            "pathLength": 0.64,
+            "turnCount": 1,
+            "reversalCount": 0,
+            "lowerFieldShare": 0.06
+          }
         },
         {
           "groupIndex": 3,
@@ -55,7 +79,19 @@
           "entrySide": "top",
           "exitSide": "lower",
           "scoreWindow": "center columns",
-          "targetVisibleS": [3.7, 9.6]
+          "targetVisibleS": [3.7, 9.6],
+          "objectTrackTarget": {
+            "entrySide": "top",
+            "exitSide": "lower",
+            "visibleStartS": 3.7,
+            "visibleEndS": 9.6,
+            "xRange": 0.46,
+            "yRange": 0.38,
+            "pathLength": 0.68,
+            "turnCount": 1,
+            "reversalCount": 0,
+            "lowerFieldShare": 0.07
+          }
         },
         {
           "groupIndex": 4,
@@ -66,7 +102,19 @@
           "entrySide": "sides",
           "exitSide": "lower-sides",
           "scoreWindow": "hook crossing lanes",
-          "targetVisibleS": [5.1, 11.1]
+          "targetVisibleS": [5.1, 11.1],
+          "objectTrackTarget": {
+            "entrySide": "top-left",
+            "exitSide": "right",
+            "visibleStartS": 5.1,
+            "visibleEndS": 11.1,
+            "xRange": 0.58,
+            "yRange": 0.32,
+            "pathLength": 0.72,
+            "turnCount": 1,
+            "reversalCount": 0,
+            "lowerFieldShare": 0.06
+          }
         },
         {
           "groupIndex": 5,
@@ -77,7 +125,19 @@
           "entrySide": "both-sides",
           "exitSide": "lower-sides",
           "scoreWindow": "late upper-band cleanup",
-          "targetVisibleS": [6.8, 13.2]
+          "targetVisibleS": [6.8, 13.2],
+          "objectTrackTarget": {
+            "entrySide": "top-left",
+            "exitSide": "right",
+            "visibleStartS": 6.8,
+            "visibleEndS": 13.2,
+            "xRange": 0.58,
+            "yRange": 0.34,
+            "pathLength": 0.76,
+            "turnCount": 1,
+            "reversalCount": 0,
+            "lowerFieldShare": 0.08
+          }
         }
       ],
       "successRead": "The first challenge should look authored as a safe score exhibition before it looks difficult.",
@@ -103,7 +163,19 @@
           "entrySide": "both-sides",
           "exitSide": "opposite-lower-sides",
           "scoreWindow": "wide crossing lanes",
-          "targetVisibleS": [0.8, 6.0]
+          "targetVisibleS": [0.8, 6.0],
+          "objectTrackTarget": {
+            "entrySide": "both-sides",
+            "exitSide": "opposite-lower-sides",
+            "visibleStartS": 0.8,
+            "visibleEndS": 6.0,
+            "xRange": 0.66,
+            "yRange": 0.34,
+            "pathLength": 0.82,
+            "turnCount": 2,
+            "reversalCount": 1,
+            "lowerFieldShare": 0.07
+          }
         },
         {
           "groupIndex": 2,
@@ -114,7 +186,19 @@
           "entrySide": "both-sides",
           "exitSide": "opposite-lower-sides",
           "scoreWindow": "new-family crossing lanes",
-          "targetVisibleS": [2.0, 7.4]
+          "targetVisibleS": [2.0, 7.4],
+          "objectTrackTarget": {
+            "entrySide": "both-sides",
+            "exitSide": "opposite-lower-sides",
+            "visibleStartS": 2.0,
+            "visibleEndS": 7.4,
+            "xRange": 0.7,
+            "yRange": 0.38,
+            "pathLength": 0.9,
+            "turnCount": 2,
+            "reversalCount": 1,
+            "lowerFieldShare": 0.09
+          }
         },
         {
           "groupIndex": 3,
@@ -125,7 +209,19 @@
           "entrySide": "side",
           "exitSide": "lower-hook",
           "scoreWindow": "turning hook lanes",
-          "targetVisibleS": [3.5, 9.3]
+          "targetVisibleS": [3.5, 9.3],
+          "objectTrackTarget": {
+            "entrySide": "side",
+            "exitSide": "lower-hook",
+            "visibleStartS": 3.5,
+            "visibleEndS": 9.3,
+            "xRange": 0.62,
+            "yRange": 0.46,
+            "pathLength": 1.0,
+            "turnCount": 3,
+            "reversalCount": 1,
+            "lowerFieldShare": 0.12
+          }
         },
         {
           "groupIndex": 4,
@@ -136,7 +232,19 @@
           "entrySide": "side",
           "exitSide": "lower-hook",
           "scoreWindow": "late specialty hook lanes",
-          "targetVisibleS": [5.1, 11.0]
+          "targetVisibleS": [5.1, 11.0],
+          "objectTrackTarget": {
+            "entrySide": "side",
+            "exitSide": "lower-hook",
+            "visibleStartS": 5.1,
+            "visibleEndS": 11.0,
+            "xRange": 0.64,
+            "yRange": 0.48,
+            "pathLength": 1.05,
+            "turnCount": 3,
+            "reversalCount": 1,
+            "lowerFieldShare": 0.13
+          }
         },
         {
           "groupIndex": 5,
@@ -147,7 +255,19 @@
           "entrySide": "upper-side",
           "exitSide": "lower-sides",
           "scoreWindow": "boss-led loop cleanup",
-          "targetVisibleS": [6.8, 13.0]
+          "targetVisibleS": [6.8, 13.0],
+          "objectTrackTarget": {
+            "entrySide": "upper-side",
+            "exitSide": "lower-sides",
+            "visibleStartS": 6.8,
+            "visibleEndS": 13.0,
+            "xRange": 0.56,
+            "yRange": 0.42,
+            "pathLength": 0.92,
+            "turnCount": 2,
+            "reversalCount": 1,
+            "lowerFieldShare": 0.1
+          }
         }
       ],
       "successRead": "The second challenge should feel like the first real escalation: still safe, but much more authored, colorful, and learnable as a new pattern.",
@@ -173,7 +293,19 @@
           "entrySide": "top-and-sides",
           "exitSide": "lower-sides",
           "scoreWindow": "split crown lanes",
-          "targetVisibleS": [0.8, 6.6]
+          "targetVisibleS": [0.8, 6.6],
+          "objectTrackTarget": {
+            "entrySide": "top-and-sides",
+            "exitSide": "lower-sides",
+            "visibleStartS": 0.8,
+            "visibleEndS": 6.6,
+            "xRange": 0.72,
+            "yRange": 0.48,
+            "pathLength": 1.12,
+            "turnCount": 4,
+            "reversalCount": 2,
+            "lowerFieldShare": 0.14
+          }
         },
         {
           "groupIndex": 2,
@@ -184,7 +316,19 @@
           "entrySide": "upper-side",
           "exitSide": "lower-sides",
           "scoreWindow": "early boss-led loop",
-          "targetVisibleS": [2.2, 8.2]
+          "targetVisibleS": [2.2, 8.2],
+          "objectTrackTarget": {
+            "entrySide": "upper-side",
+            "exitSide": "lower-sides",
+            "visibleStartS": 2.2,
+            "visibleEndS": 8.2,
+            "xRange": 0.64,
+            "yRange": 0.44,
+            "pathLength": 1.02,
+            "turnCount": 3,
+            "reversalCount": 1,
+            "lowerFieldShare": 0.12
+          }
         },
         {
           "groupIndex": 3,
@@ -195,7 +339,19 @@
           "entrySide": "side",
           "exitSide": "lower-hook",
           "scoreWindow": "turning specialty lanes",
-          "targetVisibleS": [3.8, 9.9]
+          "targetVisibleS": [3.8, 9.9],
+          "objectTrackTarget": {
+            "entrySide": "side",
+            "exitSide": "lower-hook",
+            "visibleStartS": 3.8,
+            "visibleEndS": 9.9,
+            "xRange": 0.66,
+            "yRange": 0.5,
+            "pathLength": 1.1,
+            "turnCount": 3,
+            "reversalCount": 1,
+            "lowerFieldShare": 0.14
+          }
         },
         {
           "groupIndex": 4,
@@ -206,7 +362,19 @@
           "entrySide": "upper-side",
           "exitSide": "lower-sides",
           "scoreWindow": "dense boss-led bonus lane",
-          "targetVisibleS": [5.3, 11.6]
+          "targetVisibleS": [5.3, 11.6],
+          "objectTrackTarget": {
+            "entrySide": "upper-side",
+            "exitSide": "lower-sides",
+            "visibleStartS": 5.3,
+            "visibleEndS": 11.6,
+            "xRange": 0.62,
+            "yRange": 0.48,
+            "pathLength": 1.08,
+            "turnCount": 3,
+            "reversalCount": 1,
+            "lowerFieldShare": 0.14
+          }
         },
         {
           "groupIndex": 5,
@@ -217,7 +385,19 @@
           "entrySide": "side",
           "exitSide": "lower-hook",
           "scoreWindow": "late hook cleanup",
-          "targetVisibleS": [7.0, 13.7]
+          "targetVisibleS": [7.0, 13.7],
+          "objectTrackTarget": {
+            "entrySide": "side",
+            "exitSide": "lower-hook",
+            "visibleStartS": 7.0,
+            "visibleEndS": 13.7,
+            "xRange": 0.68,
+            "yRange": 0.52,
+            "pathLength": 1.16,
+            "turnCount": 3,
+            "reversalCount": 1,
+            "lowerFieldShare": 0.16
+          }
         }
       ],
       "successRead": "The third challenge should read as a new choreographed set piece: more boss-led structure, more visual novelty, and more satisfying learned firing windows.",
