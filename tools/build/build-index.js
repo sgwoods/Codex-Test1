@@ -77,6 +77,7 @@ const GALAGA_ALIEN_TARGET_CROPS = path.join(ROOT, 'reference-artifacts', 'analys
 const GALAGA_TARGET_EVIDENCE_AUDIT = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-evidence-audit', 'latest.json');
 const GALAGA_ALIEN_TEMPORAL_TARGETS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-temporal-targets', 'latest.json');
 const AURORA_RUNTIME_SPRITE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-runtime-sprite-conformance', 'latest.json');
+const AURORA_SPRITE_MOTION_CORRESPONDENCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-sprite-motion-correspondence', 'latest.json');
 const AURORA_RUNTIME_VS_GALAGA_TARGET_CROPS = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-runtime-vs-galaga-target-crops', 'latest.json');
 const AURORA_IMPACT_EXPLOSION_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-impact-explosion-conformance', 'latest.json');
 const SPRITE_CONFORMANCE_VARIATION_PLAN = path.join(ROOT, 'reference-artifacts', 'ingestion', 'sprite-conformance-variation-plan', 'plan-0.1.json');
@@ -3121,6 +3122,7 @@ let galagaAlienTargetCropsCache = null;
 let galagaTargetEvidenceAuditCache = null;
 let galagaAlienTemporalTargetsCache = null;
 let auroraRuntimeSpriteConformanceCache = null;
+let auroraSpriteMotionCorrespondenceCache = null;
 let auroraRuntimeVsGalagaTargetCropsCache = null;
 let auroraImpactExplosionConformanceCache = null;
 let spriteConformanceVariationPlanCache = null;
@@ -3286,6 +3288,24 @@ function loadAuroraRuntimeSpriteConformance(){
     auroraRuntimeSpriteConformanceCache = { samples: [], temporalSamples: [], cadenceSamples: [], divePoseSamples: [], transitionPoseSamples: [], summary: {} };
   }
   return auroraRuntimeSpriteConformanceCache;
+}
+
+function loadAuroraSpriteMotionCorrespondence(){
+  if(auroraSpriteMotionCorrespondenceCache) return auroraSpriteMotionCorrespondenceCache;
+  if(!fs.existsSync(AURORA_SPRITE_MOTION_CORRESPONDENCE)){
+    auroraSpriteMotionCorrespondenceCache = { rows: [], summary: {} };
+    return auroraSpriteMotionCorrespondenceCache;
+  }
+  try {
+    const artifact = readJson(AURORA_SPRITE_MOTION_CORRESPONDENCE);
+    auroraSpriteMotionCorrespondenceCache = Object.assign({}, artifact, {
+      rows: Array.isArray(artifact.rows) ? artifact.rows : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    auroraSpriteMotionCorrespondenceCache = { rows: [], summary: {} };
+  }
+  return auroraSpriteMotionCorrespondenceCache;
 }
 
 function loadAuroraRuntimeVsGalagaTargetCrops(){
@@ -4513,6 +4533,33 @@ function renderAuroraSpriteCadenceRows(report){
   }).join('\n');
 }
 
+function renderAuroraSpriteMotionCorrespondenceRows(report){
+  const rows = Array.isArray(report?.rows) ? report.rows : [];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="6"><span class="docMeta">Sprite-motion correspondence pending. Run <code>npm run harness:analyze:aurora-sprite-motion-correspondence</code>.</span></td>
+    </tr>`;
+  }
+  return rows.map((row) => {
+    const previewFrames = row.runtime?.cadenceSample?.previewFrames || [];
+    return `
+    <tr>
+      <td><strong>${esc(row.label || row.id || '')}</strong><br><span class="docMeta"><code>${esc(row.runtimeSpriteKey || '')}</code><br>${esc(row.status || '')}</span></td>
+      <td><strong>${Number.isFinite(+row.score10) ? `${Number(row.score10).toFixed(1)}/10` : 'pending'}</strong><br><span class="docMeta">raw ${Number.isFinite(+row.rawScore10) ? `${Number(row.rawScore10).toFixed(1)}/10` : 'n/a'}; cap ${Number.isFinite(+row.capScore10) ? `${Number(row.capScore10).toFixed(1)}/10` : 'n/a'}</span></td>
+      <td>target ${Number.isFinite(+row.target?.targetReadinessScore10) ? `${Number(row.target.targetReadinessScore10).toFixed(1)}/10` : 'n/a'}<br><span class="docMeta">trusted ${esc(row.target?.trustedCropCount ?? 0)}; provisional ${esc(row.target?.provisionalCropCount ?? 0)}</span></td>
+      <td>phase ${Number.isFinite(+row.runtime?.twoPhaseVisibilityScore10) ? `${Number(row.runtime.twoPhaseVisibilityScore10).toFixed(1)}/10` : 'n/a'}<br>cadence ${Number.isFinite(+row.runtime?.cadenceVisibilityScore10) ? `${Number(row.runtime.cadenceVisibilityScore10).toFixed(1)}/10` : 'n/a'}<br><span class="docMeta">static ${Number.isFinite(+row.runtime?.staticLikenessScore10) ? `${Number(row.runtime.staticLikenessScore10).toFixed(1)}/10` : 'n/a'}</span></td>
+      <td><div class="catalogMedia"><div class="catalogMediaGrid">${[
+        row.runtime?.temporalSample?.phaseClosedCrop ? renderMediaImage({ label: 'Closed phase', src: row.runtime.temporalSample.phaseClosedCrop, pixelated: true, note: 'Runtime closed/pulse phase.' }) : '',
+        row.runtime?.temporalSample?.phaseOpenCrop ? renderMediaImage({ label: 'Open phase', src: row.runtime.temporalSample.phaseOpenCrop, pixelated: true, note: 'Runtime open/pulse phase.' }) : '',
+        ...previewFrames.slice(0, 2).map(frame => renderMediaImage({ label: `Cadence ${frame.frameIndex}`, src: frame.cropImage, pixelated: true, note: `Runtime cadence frame; score ${Number.isFinite(+frame.score10) ? `${Number(frame.score10).toFixed(1)}/10` : 'n/a'}` }))
+      ].filter(Boolean).join('')}</div></div></td>
+      <td>${esc(row.capReason || '')}<br><span class="docMeta">${esc(row.nextGap || '')}</span></td>
+    </tr>
+  `;
+  }).join('\n');
+}
+
 function renderAuroraRuntimeVsTargetTemporalRows(report){
   const rows = Array.isArray(report?.temporalSequenceComparisons) ? report.temporalSequenceComparisons : [];
   if(!rows.length){
@@ -4631,6 +4678,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'galaga-alien-motion-reference', title: 'Alien Motion Reference' },
     { id: 'galaga-target-evidence-audit', title: 'Trusted Target Audit' },
     { id: 'galaga-alien-temporal-targets', title: 'Alien Temporal Targets' },
+    { id: 'aurora-sprite-motion-correspondence', title: 'Sprite Motion Correspondence' },
     { id: 'sprite-conformance-variation-plan', title: 'Sprite Conformance Plan' },
     { id: 'conformance-alien-index', title: 'Alien Conformance Index' },
     { id: 'conformance-audio-index', title: 'Audio Conformance Index' },
@@ -4793,6 +4841,9 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const galagaAlienTemporalTargetRows = renderGalagaAlienTemporalTargetRows(galagaAlienTemporalTargets);
   const auroraRuntimeSpriteConformance = loadAuroraRuntimeSpriteConformance();
   const auroraRuntimeSpriteSummary = auroraRuntimeSpriteConformance.summary || {};
+  const auroraSpriteMotionCorrespondence = loadAuroraSpriteMotionCorrespondence();
+  const auroraSpriteMotionCorrespondenceSummary = auroraSpriteMotionCorrespondence.summary || {};
+  const auroraSpriteMotionCorrespondenceRows = renderAuroraSpriteMotionCorrespondenceRows(auroraSpriteMotionCorrespondence);
   const auroraRuntimeVsGalagaTargetCrops = loadAuroraRuntimeVsGalagaTargetCrops();
   const auroraRuntimeVsGalagaTargetSummary = auroraRuntimeVsGalagaTargetCrops.summary || {};
   const auroraRuntimeVsTargetRows = renderAuroraRuntimeVsTargetRows(auroraRuntimeVsGalagaTargetCrops);
@@ -5287,6 +5338,40 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               </thead>
               <tbody>
                 ${galagaAlienTemporalTargetRows}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="aurora-sprite-motion-correspondence">
+          <div class="sectionHeader">
+            <h2>Sprite Motion Correspondence</h2>
+            <p>This is the bridge between Galaga temporal target evidence and Aurora runtime motion captures. It answers whether current sprites merely look acceptable in still crops or actually move with enough flap, pulse, cadence, dive, and transition evidence to support challenge-stage conformance claims.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Current read:</strong> ${Number.isFinite(+auroraSpriteMotionCorrespondenceSummary.averageScore10) ? `${Number(auroraSpriteMotionCorrespondenceSummary.averageScore10).toFixed(1)}/10` : 'pending'}. <strong>Timing status:</strong> ${esc(auroraSpriteMotionCorrespondenceSummary.targetTimingStatus || 'pending')}. <strong>Next best step:</strong> ${esc(auroraSpriteMotionCorrespondence.nextBestStep || 'Promote frame-labeled target cadence windows before raising animation conformance claims.')}</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/aurora-sprite-motion-correspondence/latest.json</code>. <strong>Readable report:</strong> <code>AURORA_SPRITE_MOTION_CORRESPONDENCE.md</code>. <strong>Generated:</strong> ${esc(auroraSpriteMotionCorrespondence.generatedAt || 'pending')}.</p>
+            <div class="metricGrid">
+              <div class="metricCard"><span class="metricLabel">Rows</span><strong>${esc(auroraSpriteMotionCorrespondenceSummary.rowCount ?? 0)}</strong><span>Boss, Bee, Butterfly</span></div>
+              <div class="metricCard"><span class="metricLabel">Weakest</span><strong>${esc(auroraSpriteMotionCorrespondenceSummary.weakestRuntimeSpriteKey || 'n/a')}</strong><span>${Number.isFinite(+auroraSpriteMotionCorrespondenceSummary.weakestScore10) ? `${Number(auroraSpriteMotionCorrespondenceSummary.weakestScore10).toFixed(1)}/10` : 'pending'}</span></div>
+              <div class="metricCard"><span class="metricLabel">Frame Timed</span><strong>${esc(auroraSpriteMotionCorrespondenceSummary.finalFrameTimedRows ?? 0)}</strong><span>target cadence rows</span></div>
+              <div class="metricCard"><span class="metricLabel">Provisional</span><strong>${esc(auroraSpriteMotionCorrespondenceSummary.provisionalTargetRows ?? 0)}</strong><span>target rows capped</span></div>
+            </div>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Motion Row</th>
+                  <th>Score</th>
+                  <th>Target Readiness</th>
+                  <th>Runtime Readiness</th>
+                  <th>Evidence</th>
+                  <th>Cap / Next Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${auroraSpriteMotionCorrespondenceRows}
               </tbody>
             </table>
           </div>

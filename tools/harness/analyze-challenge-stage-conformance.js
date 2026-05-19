@@ -9,6 +9,7 @@ const ANALYSES = path.join(ROOT, 'reference-artifacts', 'analyses');
 const OUT_ROOT = path.join(ANALYSES, 'challenge-stage-conformance');
 const CHALLENGE_CONTRACTS = path.join(ROOT, 'reference-artifacts', 'ingestion', 'challenge-stage-target-contracts', 'aurora-challenge-contracts-0.1.json');
 const GALAGA_CHALLENGE_OBJECT_TRACKS = path.join(ANALYSES, 'galaga-challenge-object-tracks', 'latest.json');
+const AURORA_SPRITE_MOTION_CORRESPONDENCE = path.join(ANALYSES, 'aurora-sprite-motion-correspondence', 'latest.json');
 const CHALLENGE_STAGES = [3, 7, 11, 15, 19, 23, 27, 31];
 const SAMPLE_TIMES = Array.from({ length: 65 }, (_, index) => +(index * 0.25).toFixed(2));
 
@@ -271,6 +272,33 @@ function runtimeVsTargetCropRead(){
     read: comparisons.length
       ? `Direct runtime-vs-Galaga target-crop comparator reads ${artifact.summary?.averageScore10 ?? 'n/a'}/10 overall and ${round(average(challenge.map(item => item.bestScore10)), 2) ?? 'n/a'}/10 for challenge specialty sprites; weakest challenge crop is ${challengeWeakest?.spriteKey || 'n/a'} at ${challengeWeakest?.bestScore10 ?? 'n/a'}/10.`
       : 'Direct runtime-vs-Galaga target-crop comparator has not been generated yet.'
+  };
+}
+
+function spriteMotionCorrespondenceRead(){
+  const artifact = readJson(AURORA_SPRITE_MOTION_CORRESPONDENCE, {});
+  const rows = Array.isArray(artifact.rows) ? artifact.rows : [];
+  const summary = artifact.summary || {};
+  const scored = rows.filter(row => Number.isFinite(+row.score10));
+  const weakest = scored.slice().sort((a, b) => (+a.score10 || 0) - (+b.score10 || 0))[0] || null;
+  const averageScore10 = Number.isFinite(+summary.averageScore10)
+    ? +summary.averageScore10
+    : round(average(scored.map(row => row.score10)), 2);
+  return {
+    artifact: 'reference-artifacts/analyses/aurora-sprite-motion-correspondence/latest.json',
+    available: rows.length > 0,
+    rowCount: rows.length,
+    averageScore10,
+    coverage: clamp((averageScore10 || 0) / 10),
+    weakestRowId: summary.weakestRowId || weakest?.id || null,
+    weakestRuntimeSpriteKey: summary.weakestRuntimeSpriteKey || weakest?.runtimeSpriteKey || null,
+    weakestScore10: summary.weakestScore10 || weakest?.score10 || null,
+    targetTimingStatus: summary.targetTimingStatus || 'pending',
+    finalFrameTimedRows: summary.finalFrameTimedRows ?? null,
+    provisionalTargetRows: summary.provisionalTargetRows ?? null,
+    read: rows.length
+      ? `${summary.read || `Sprite-motion correspondence reads ${averageScore10 ?? 'n/a'}/10.`} Weakest row ${summary.weakestRowId || weakest?.id || 'n/a'} at ${summary.weakestScore10 || weakest?.score10 || 'n/a'}/10.`
+      : 'Sprite-motion correspondence has not been generated yet; run npm run harness:analyze:aurora-sprite-motion-correspondence.'
   };
 }
 
@@ -1092,15 +1120,20 @@ function strictGraphicsRead(stage, runtime, expectedHit){
   const objectSilhouetteCoverage = spriteMotion.objectTrackedPixelSilhouette?.coverage || 0;
   const objectTargetFitCoverage = spriteMotion.objectTrackedPixelSilhouette?.targetFitCoverage || 0;
   const targetCropRead = runtimeVsTargetCropRead();
+  const spriteMotionCorrespondence = spriteMotionCorrespondenceRead();
   const targetCropCoverage = clamp((targetCropRead.challengeAverageScore10 || targetCropRead.averageScore10 || 0) / 10);
-  const activeMotionCap = objectTargetFitCoverage ? 4.8 : (targetCropCoverage ? 4.4 : (objectSilhouetteCoverage ? 4.2 : (measuredRuntimeSpriteMotionCoverage ? 3.6 : 2.2)));
-  const spriteMotionCredit = (measuredRuntimeSpriteMotionCoverage * 0.22) + (objectSilhouetteCoverage * 0.28) + (objectTargetFitCoverage * 0.18) + (targetCropCoverage * 0.16);
+  const correspondenceCoverage = spriteMotionCorrespondence.coverage || 0;
+  const activeMotionCap = objectTargetFitCoverage
+    ? (correspondenceCoverage ? 5.1 : 4.8)
+    : (targetCropCoverage ? 4.4 : (objectSilhouetteCoverage ? 4.2 : (measuredRuntimeSpriteMotionCoverage ? 3.6 : 2.2)));
+  const spriteMotionCredit = (measuredRuntimeSpriteMotionCoverage * 0.2) + (objectSilhouetteCoverage * 0.26) + (objectTargetFitCoverage * 0.16) + (targetCropCoverage * 0.14) + (correspondenceCoverage * 0.12);
   const score10 = round(Math.min(activeMotionCap, 1 + (4.0 * (typeMixCredit + familyCredit + contractCredit + spriteMotionCredit))), 1);
   return {
     score10,
     activeMotionCap,
     measuredRuntimeSpriteMotionCoverage,
     objectSilhouetteCoverage,
+    spriteMotionCorrespondence,
     spriteMotion,
     components: {
       alienTypeMix: round(typeMixCredit, 3),
@@ -1111,10 +1144,12 @@ function strictGraphicsRead(stage, runtime, expectedHit){
       objectTrackedTargetFitCoverage: round(objectTargetFitCoverage, 3),
       runtimeTargetCropCoverage: round(targetCropCoverage, 3),
       runtimeTargetCropScore10: targetCropRead.challengeAverageScore10 || targetCropRead.averageScore10 || null,
+      spriteMotionCorrespondenceCoverage: round(correspondenceCoverage, 3),
+      spriteMotionCorrespondenceScore10: spriteMotionCorrespondence.averageScore10 || null,
       spriteMotionCredit: round(spriteMotionCredit, 3)
     },
     runtimeTargetCropRead: targetCropRead,
-    read: `Strict graphics score ${score10}/10. Current visible family/type labels are present, ${targetCropRead.read} ${spriteMotion.read} Graphics remain capped at ${activeMotionCap}/10 until object tracks are compared as full temporal Galaga target-crop sequences, rotations, dive poses, and capture/rescue transitions.`
+    read: `Strict graphics score ${score10}/10. Current visible family/type labels are present, ${targetCropRead.read} ${spriteMotion.read} ${spriteMotionCorrespondence.read} Graphics remain capped at ${activeMotionCap}/10 until object tracks are compared as full temporal Galaga target-crop sequences, rotations, dive poses, and capture/rescue transitions.`
   };
 }
 
@@ -1590,6 +1625,10 @@ function criticalGaps(stage, runtime, match, score){
   if((score.graphicalConformanceScore10 || 1) < 4){
     gaps.push(`Graphical conformance is only ${score.graphicalConformanceScore10}/10: runtime object-track silhouettes are now measured, but they are not yet matched frame-by-frame against Galaga target sprite crops, rotations, dive poses, and pulsing/flapping cadence.`);
   }
+  const spriteMotionCorrespondence = score.strictAxisReads?.graphics?.spriteMotionCorrespondence;
+  if(spriteMotionCorrespondence?.averageScore10 && spriteMotionCorrespondence.averageScore10 < 6.5){
+    gaps.push(`Sprite-motion correspondence is ${spriteMotionCorrespondence.averageScore10}/10: runtime flapping/cadence is visible, but target frame timing is still ${spriteMotionCorrespondence.targetTimingStatus || 'pending'} and weakest motion row is ${spriteMotionCorrespondence.weakestRowId || 'unknown'}.`);
+  }
   if((score.alienNoveltyScore10 || 1) < 4){
     gaps.push(`Alien/stage novelty is only ${score.alienNoveltyScore10}/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.`);
   }
@@ -1736,6 +1775,12 @@ function makeStageRow(stage, runtime, match, referenceLabels){
     spriteMotionProbe: runtime
       ? score.strictAxisReads.graphics.spriteMotion || null
       : null,
+    spriteMotionCorrespondenceRead: runtime
+      ? score.strictAxisReads.graphics.spriteMotionCorrespondence?.read || 'Sprite-motion correspondence pending.'
+      : 'Sprite-motion correspondence pending.',
+    spriteMotionCorrespondenceScore10: runtime
+      ? score.strictAxisReads.graphics.spriteMotionCorrespondence?.averageScore10 ?? null
+      : null,
     objectTrackProbe: runtime
       ? score.strictAxisReads.graphics.spriteMotion?.objectTrackedPixelSilhouette || null
       : null,
@@ -1785,6 +1830,7 @@ function makeStageRow(stage, runtime, match, referenceLabels){
       'reference-artifacts/analyses/galaga-path-reference-labels/latest.json',
       'reference-artifacts/analyses/galaga-challenge-video-reference/latest.json',
       targetContract ? 'reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json' : '',
+      'reference-artifacts/analyses/aurora-sprite-motion-correspondence/latest.json',
       'reference-artifacts/analyses/formation-boss-path-family-comparison/latest.json',
       'reference-artifacts/analyses/alien-entry-challenge-variation/latest.json',
       runtime?.layout ? 'browser-backed challengeFormationState runtime probe' : 'runtime probe pending'
@@ -2092,9 +2138,10 @@ async function buildReport(){
   const stage3Row = rows.find(row => row.stage === 3);
   const stage3ExpectedReferenceHit = !!stage3Row?.expectedReferenceHit;
   const challenge2BestMatchCount = rows.filter(row => row.bestReferenceMatch?.labelId === 'challenge-2-arrival-group-1').length;
+  const spriteMotionCorrespondence = spriteMotionCorrespondenceRead();
   const weakestFinding = stage3ExpectedReferenceHit
-    ? `challenge stages are still not authored enough as memorable Galaga-like set pieces: ${challenge2BestMatchCount} sampled stage(s) still best-match the same Galaga challenge-2 reference, stage 3 now lands on the first-challenge bee-line reference but needs stronger trajectory precision, active sprite-motion is now detected only as phase/family coverage, and late stages need object-tracked group refinement.`
-    : `challenge stages are still not authored enough as memorable Galaga-like set pieces: most measured runtime vectors best-match the same Galaga challenge-2 reference, stage 3 does not read as the original first challenge, active sprite-motion is now detected only as phase/family coverage, and late-stage labels need per-group refinement.`;
+    ? `challenge stages are still not authored enough as memorable Galaga-like set pieces: ${challenge2BestMatchCount} sampled stage(s) still best-match the same Galaga challenge-2 reference, stage 3 now lands on the first-challenge bee-line reference but needs stronger trajectory precision, sprite-motion correspondence is ${spriteMotionCorrespondence.averageScore10 ?? 'n/a'}/10 and target-capped, and late stages need object-tracked group refinement.`
+    : `challenge stages are still not authored enough as memorable Galaga-like set pieces: most measured runtime vectors best-match the same Galaga challenge-2 reference, stage 3 does not read as the original first challenge, sprite-motion correspondence is ${spriteMotionCorrespondence.averageScore10 ?? 'n/a'}/10 and target-capped, and late-stage labels need per-group refinement.`;
   const summary = {
     score10: round(average(rows.map(row => row.conformanceScore10)), 1),
     interestingFactorScore10: round(average(rows.map(row => row.interestingFactor10)), 1),
@@ -2106,6 +2153,8 @@ async function buildReport(){
     targetContractFitScore10: round(average(rows.map(row => row.targetContractFitScore10)), 1),
     targetVideoObjectTrackFitScore10: round(average(rows.map(row => row.targetVideoObjectTrackFitScore10)), 1),
     targetTrackReadinessScore10: targetObjectTracks?.summary?.targetTrackReadinessScore10 ?? null,
+    spriteMotionCorrespondenceScore10: spriteMotionCorrespondence.averageScore10 ?? null,
+    spriteMotionCorrespondenceTimingStatus: spriteMotionCorrespondence.targetTimingStatus,
     safetyRuleScore10: round(average(rows.map(row => row.safetyRuleScore10)), 1),
     legacyCoverageScore10: round(average(rows.map(row => row.legacyCoverageScore10)), 1),
     confidence: 'medium-high for the gap; medium-low for exact remediation size',
@@ -2115,7 +2164,7 @@ async function buildReport(){
     strongestFinding: 'Sampled challenge windows preserve the Galaga-like no-shot/no-ship-loss rule.',
     stage3ExpectedReferenceHit,
     challenge2BestMatchCount,
-    weakestFinding: `current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is ${round(average(rows.map(row => row.movementConformanceScore10)), 1)}/10, strict graphics is ${round(average(rows.map(row => row.graphicalConformanceScore10)), 1)}/10, alien/stage novelty is ${round(average(rows.map(row => row.alienNoveltyScore10)), 1)}/10, player shot opportunity is ${round(average(rows.map(row => row.playerShotOpportunityScore10)), 1)}/10, target-video object-track fit is ${round(average(rows.map(row => row.targetVideoObjectTrackFitScore10)), 1)}/10, and active sprite-motion still needs Galaga target-crop sequence comparison. Diagnostic legacy coverage was ${round(average(rows.map(row => row.legacyCoverageScore10)), 1)}/10, which is why the old read was too generous.`,
+    weakestFinding: `current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is ${round(average(rows.map(row => row.movementConformanceScore10)), 1)}/10, strict graphics is ${round(average(rows.map(row => row.graphicalConformanceScore10)), 1)}/10, alien/stage novelty is ${round(average(rows.map(row => row.alienNoveltyScore10)), 1)}/10, player shot opportunity is ${round(average(rows.map(row => row.playerShotOpportunityScore10)), 1)}/10, target-video object-track fit is ${round(average(rows.map(row => row.targetVideoObjectTrackFitScore10)), 1)}/10, and sprite-motion correspondence is ${spriteMotionCorrespondence.averageScore10 ?? 'n/a'}/10 with target timing status ${spriteMotionCorrespondence.targetTimingStatus}. Diagnostic legacy coverage was ${round(average(rows.map(row => row.legacyCoverageScore10)), 1)}/10, which is why the old read was too generous.`,
     playerMeaning: 'A player should experience challenging stages as safe but tense score exhibitions with memorable entry routes, fresh alien types, readable trajectories, and a learnable perfect-bonus opportunity. Aurora currently preserves the safety rule, but the actual spectacle, motion, and visual novelty are still early.',
     designerMeaning: 'Design work should move from broad path-family labels to explicit per-challenge contracts: group order, first-visible frame, entry side, exit side, path length, turn count, alien family, animation phases, bonus opportunity, and result feedback.',
     sourceScores: {
@@ -2151,6 +2200,7 @@ async function buildReport(){
       galagaChallengeObjectTracks: 'reference-artifacts/analyses/galaga-challenge-object-tracks/latest.json',
       galagaTargetArtifactCoverage: 'reference-artifacts/analyses/galaga-target-artifact-coverage/latest.json',
       auroraRuntimeVsGalagaTargetCrops: 'reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json',
+      auroraSpriteMotionCorrespondence: 'reference-artifacts/analyses/aurora-sprite-motion-correspondence/latest.json',
       challengeStageTargetContracts: 'reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json',
       pathFamilyComparison: 'reference-artifacts/analyses/formation-boss-path-family-comparison/latest.json',
       alienEntryChallengeVariation: 'reference-artifacts/analyses/alien-entry-challenge-variation/latest.json',
@@ -2183,6 +2233,7 @@ async function buildReport(){
         }))
         : []
     },
+    spriteMotionCorrespondence,
     improvementPlan: [
       'Use strict challenge-stage scores as the release-facing truth; keep broad coverage scores only as diagnostics.',
       'Define a challenge-stage target grammar for group order, entry/exit side, path length, turn count, featured alien, scoring window, perfect bonus, animation phases, and result feedback.',

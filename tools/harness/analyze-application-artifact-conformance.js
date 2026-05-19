@@ -13,6 +13,7 @@ const SOURCES = {
   spriteTargets: 'reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1.json',
   spriteSheetTargetCrops: 'reference-artifacts/analyses/galaga-alien-target-crops/latest.json',
   runtimeSprite: 'reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json',
+  spriteMotionCorrespondence: 'reference-artifacts/analyses/aurora-sprite-motion-correspondence/latest.json',
   runtimeVsTargetCrops: 'reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json',
   impactExplosion: 'reference-artifacts/analyses/aurora-impact-explosion-conformance/latest.json',
   audioLab: 'reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json',
@@ -252,6 +253,7 @@ function main(){
   const spriteTargets = readOptionalJson(SOURCES.spriteTargets);
   const spriteSheetTargetCrops = readOptionalJson(SOURCES.spriteSheetTargetCrops);
   const runtimeSprite = readOptionalJson(SOURCES.runtimeSprite);
+  const spriteMotionCorrespondence = readOptionalJson(SOURCES.spriteMotionCorrespondence);
   const runtimeVsTargetCrops = readOptionalJson(SOURCES.runtimeVsTargetCrops);
   const impactExplosion = readOptionalJson(SOURCES.impactExplosion);
   const audioLab = readOptionalJson(SOURCES.audioLab);
@@ -263,6 +265,7 @@ function main(){
 
   const spriteComparison = buildSpriteComparison(spriteModel);
   const runtimeSpriteSummary = runtimeSprite?.summary || {};
+  const spriteMotionCorrespondenceSummary = spriteMotionCorrespondence?.summary || {};
   const runtimeSpriteSamples = Array.isArray(runtimeSprite?.samples) ? runtimeSprite.samples : [];
   const runtimeWeakest = runtimeSpriteSamples.slice().sort((a, b) => (a.score10 || 0) - (b.score10 || 0))[0] || null;
   const runtimeVsTargetSummary = runtimeVsTargetCrops?.summary || {};
@@ -332,20 +335,26 @@ function main(){
     row({
       id: 'sprite-motion-animation-coverage',
       surface: 'Sprite motion: flapping, pulsing, dive poses, and transition animation',
-      current: runtimeSprite
-        ? `${runtimeSpriteSummary.motionCoverageAxesCovered || 0}/${runtimeSpriteSummary.motionCoverageAxesPlanned || 4} planned motion axes covered`
+      current: spriteMotionCorrespondence
+        ? scoreText(spriteMotionCorrespondenceSummary.averageScore10)
+        : runtimeSprite
+          ? `${runtimeSpriteSummary.motionCoverageAxesCovered || 0}/${runtimeSpriteSummary.motionCoverageAxesPlanned || 4} planned motion axes covered`
         : 'motion coverage pending',
-      target: 'Temporal sprite score across flap cadence, pulse/damage phases, dive rotation, and capture/rescue transitions',
-      score10: null,
-      confidence: 'planning',
-      status: runtimeSpriteSummary.motionCoverageAxesCovered
-        ? 'First temporal phase windows captured; full motion score still pending'
+      target: '>=8.0/10 temporal correspondence against frame-labeled target cadence windows',
+      score10: spriteMotionCorrespondenceSummary.averageScore10 ?? null,
+      confidence: spriteMotionCorrespondence ? 'medium-low' : 'planning',
+      status: spriteMotionCorrespondence
+        ? `Measured correspondence; ${spriteMotionCorrespondenceSummary.targetTimingStatus || 'target timing status pending'}`
+        : runtimeSpriteSummary.motionCoverageAxesCovered
+          ? 'First temporal phase windows captured; full motion score still pending'
         : 'Not yet scored; current sprite metrics are static-pose measurements',
-      measurement: runtimeSprite
+      measurement: spriteMotionCorrespondence
+        ? `Correspondence score ${scoreText(spriteMotionCorrespondenceSummary.averageScore10)} across ${spriteMotionCorrespondenceSummary.rowCount || 0} Boss/Bee/Butterfly rows; weakest ${spriteMotionCorrespondenceSummary.weakestRowId || 'n/a'} ${scoreText(spriteMotionCorrespondenceSummary.weakestScore10)}; final frame-timed target rows ${spriteMotionCorrespondenceSummary.finalFrameTimedRows ?? 0}; provisional target rows ${spriteMotionCorrespondenceSummary.provisionalTargetRows ?? 0}.`
+        : runtimeSprite
         ? `Static live-canvas pose score exists at ${scoreText(runtimeSpriteSummary.averageScore10)}; ${runtimeSpriteSummary.motionCoverageAxesCovered || 0}/${runtimeSpriteSummary.motionCoverageAxesPlanned || 4} planned motion axes have at least seed coverage. Covered: ${(runtimeSpriteSummary.coveredMotionAxes || []).join('; ') || 'none yet'}. Full roadmap: ${(runtimeSpriteSummary.plannedMotionAxes || []).join('; ')}.`
         : 'Runtime sprite artifact has not been generated, so motion coverage cannot be planned from the current capture set yet.',
-      evidence: runtimeSprite ? SOURCES.runtimeSprite : SOURCES.spriteModel,
-      next: 'Add harness windows for flap cycle A/B frames, pulse and damage-state timing, dive-rotation silhouettes, and carried/rescue/dual-fighter transition frames before treating sprite conformance as visually complete.'
+      evidence: spriteMotionCorrespondence ? `${SOURCES.spriteMotionCorrespondence}; ${SOURCES.runtimeSprite}` : runtimeSprite ? SOURCES.runtimeSprite : SOURCES.spriteModel,
+      next: spriteMotionCorrespondence?.nextBestStep || 'Add harness windows for flap cycle A/B frames, pulse and damage-state timing, dive-rotation silhouettes, and carried/rescue/dual-fighter transition frames before treating sprite conformance as visually complete.'
     }),
     row({
       id: 'impact-explosion-visual-feedback',
@@ -499,6 +508,7 @@ function main(){
       spriteRuntimeCanvasScore10: runtimeSpriteSummary.averageScore10 || null,
       spriteRuntimeVsTargetCropScore10: runtimeVsTargetSummary.averageScore10 || null,
       impactExplosionScore10: impactExplosionSummary.averageScore10 || null,
+      spriteMotionCorrespondenceScore10: spriteMotionCorrespondenceSummary.averageScore10 || null,
       spriteModelAverageConfidence: rounded(spriteModel?.summary?.averageConfidence || 0, 4),
       audioScore10: audioLabSummary.audioScore10 || parseScore(audioGate?.Current),
       visualScore10: visualSummary.score10 || parseScore(visualGate?.Current),
@@ -514,6 +524,7 @@ function main(){
     ],
     spriteComparisons: spriteComparison.comparisons,
     runtimeSpriteComparisons: runtimeSpriteSamples,
+    spriteMotionCorrespondenceRows: Array.isArray(spriteMotionCorrespondence?.rows) ? spriteMotionCorrespondence.rows : [],
     runtimeVsTargetCropComparisons: Array.isArray(runtimeVsTargetCrops?.comparisons) ? runtimeVsTargetCrops.comparisons : [],
     impactExplosionComparisons: Array.isArray(impactExplosion?.samples) ? impactExplosion.samples : [],
     spriteSheetTargetCrops: spriteSheetTargetCrops ? {

@@ -1,0 +1,299 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-sprite-motion-correspondence",
+  "generatedAt": "2026-05-19T21:50:21.379Z",
+  "commit": "0538fb9d",
+  "branch": "codex/macbook-challenge-sprite-motion-conformance",
+  "dirty": true,
+  "sourceArtifacts": {
+    "galagaAlienTemporalTargets": "reference-artifacts/analyses/galaga-alien-temporal-targets/latest.json",
+    "auroraRuntimeSpriteConformance": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json"
+  },
+  "summary": {
+    "rowCount": 3,
+    "averageScore10": 6.03,
+    "rawAverageScore10": 7.37,
+    "weakestRowId": "bee-zako-pulse-pair",
+    "weakestRuntimeSpriteKey": "bee-line",
+    "weakestScore10": 5.8,
+    "finalFrameTimedRows": 0,
+    "provisionalTargetRows": 2,
+    "runtimeMotionAxesCovered": 4,
+    "runtimeMotionAxesPlanned": 4,
+    "targetTimingStatus": "pose-sequence-targets-only",
+    "read": "Aurora runtime motion is visible but still target-capped: 3 sprite families score 6/10, with 2 provisional target row(s) and no final frame-timed target cadence rows."
+  },
+  "rows": [
+    {
+      "id": "boss-galaga-pulse-pair",
+      "label": "Boss Galaga Pulse Pair",
+      "roleKey": "boss-galaga",
+      "runtimeSpriteKey": "boss-line",
+      "score10": 6.5,
+      "rawScore10": 7.28,
+      "capScore10": 6.5,
+      "capReason": "Capped because the Galaga target rows are pose sequences without final frame-timed cadence windows.",
+      "confidence": "medium-high",
+      "status": "trusted-color-pulse-pair-not-frame-timed",
+      "target": {
+        "targetReadinessScore10": 6.5,
+        "trustedCropCount": 3,
+        "provisionalCropCount": 0,
+        "poseSequence": [
+          "formation-front",
+          "flap-a",
+          "flap-b",
+          "flap-b",
+          "flap-a",
+          "formation-front"
+        ],
+        "cropIds": [
+          "boss-galaga-formation-front",
+          "boss-galaga-flap-a",
+          "boss-galaga-flap-b"
+        ]
+      },
+      "runtime": {
+        "staticLikenessScore10": 6.46,
+        "twoPhaseVisibilityScore10": 6.84,
+        "cadenceVisibilityScore10": 7.38,
+        "seedCoverageScore10": 10,
+        "seedCoverageAxes": [
+          {
+            "axis": "two-phase flap/pulse",
+            "covered": true
+          },
+          {
+            "axis": "cadence window",
+            "covered": true
+          },
+          {
+            "axis": "dive/rotation pose",
+            "covered": true
+          },
+          {
+            "axis": "capture/transition seed",
+            "covered": true
+          }
+        ],
+        "temporalSample": {
+          "litPixelDelta": 256,
+          "filledCellDelta": 37,
+          "scoreDelta": 0.22,
+          "phaseClosedCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-flap-closed.png",
+          "phaseOpenCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-flap-open.png"
+        },
+        "cadenceSample": {
+          "frameCount": 8,
+          "scoreRange10": 0.22,
+          "averageAdjacentLitPixelDelta": 73.14,
+          "averageAdjacentFilledCellDelta": 10.57,
+          "previewFrames": [
+            {
+              "frameIndex": 0,
+              "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-00.png",
+              "score10": 6.46
+            },
+            {
+              "frameIndex": 4,
+              "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-04.png",
+              "score10": 6.24
+            },
+            {
+              "frameIndex": 7,
+              "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-07.png",
+              "score10": 6.46
+            }
+          ]
+        },
+        "staticCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line.png"
+      },
+      "playerMeaning": "This measures whether the alien appears alive: flap/pulse phases, a readable cadence, and enough pose coverage to make movement feel authored rather than static.",
+      "designerMeaning": "This is a bridge score. It should guide sprite-motion tuning and challenge-stage scoring, but it remains capped until target frame timing is exact.",
+      "nextGap": "Promote a true frame-labeled target cadence window so runtime cadence can be compared to target timing, not only visible runtime change."
+    },
+    {
+      "id": "bee-zako-pulse-pair",
+      "label": "Bee / Zako Pulse Pair",
+      "roleKey": "bee-zako",
+      "runtimeSpriteKey": "bee-line",
+      "score10": 5.8,
+      "rawScore10": 6.8,
+      "capScore10": 5.8,
+      "capReason": "Capped because this row still uses provisional target flap crops; it can guide work but cannot claim mature animation conformance.",
+      "confidence": "medium-low",
+      "status": "mixed-trusted-formation-plus-provisional-flap-pair",
+      "target": {
+        "targetReadinessScore10": 5.4,
+        "trustedCropCount": 1,
+        "provisionalCropCount": 2,
+        "poseSequence": [
+          "formation-front",
+          "flap-a",
+          "flap-b",
+          "flap-b",
+          "flap-a",
+          "formation-front"
+        ],
+        "cropIds": [
+          "bee-zako-formation-front",
+          "bee-zako-flap-a",
+          "bee-zako-flap-b"
+        ]
+      },
+      "runtime": {
+        "staticLikenessScore10": 6.34,
+        "twoPhaseVisibilityScore10": 6.32,
+        "cadenceVisibilityScore10": 7.1,
+        "seedCoverageScore10": 10,
+        "seedCoverageAxes": [
+          {
+            "axis": "two-phase flap/pulse",
+            "covered": true
+          },
+          {
+            "axis": "cadence window",
+            "covered": true
+          },
+          {
+            "axis": "dive/rotation pose",
+            "covered": true
+          },
+          {
+            "axis": "transition seed not required for this row",
+            "covered": true
+          }
+        ],
+        "temporalSample": {
+          "litPixelDelta": 128,
+          "filledCellDelta": 83,
+          "scoreDelta": 0.1,
+          "phaseClosedCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-flap-closed.png",
+          "phaseOpenCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-flap-open.png"
+        },
+        "cadenceSample": {
+          "frameCount": 8,
+          "scoreRange10": 0.1,
+          "averageAdjacentLitPixelDelta": 36.57,
+          "averageAdjacentFilledCellDelta": 23.71,
+          "previewFrames": [
+            {
+              "frameIndex": 0,
+              "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-cadence-00.png",
+              "score10": 6.34
+            },
+            {
+              "frameIndex": 4,
+              "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-cadence-04.png",
+              "score10": 6.44
+            },
+            {
+              "frameIndex": 7,
+              "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-cadence-07.png",
+              "score10": 6.34
+            }
+          ]
+        },
+        "staticCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line.png"
+      },
+      "playerMeaning": "This measures whether the alien appears alive: flap/pulse phases, a readable cadence, and enough pose coverage to make movement feel authored rather than static.",
+      "designerMeaning": "This is a bridge score. It should guide sprite-motion tuning and challenge-stage scoring, but it remains capped until target frame timing is exact.",
+      "nextGap": "Promote frame-clean Bee / Zako Pulse Pair target flaps from source gameplay/video before raising this above planning confidence."
+    },
+    {
+      "id": "butterfly-escort-pulse-pair",
+      "label": "Butterfly / Escort Pulse Pair",
+      "roleKey": "butterfly-escort",
+      "runtimeSpriteKey": "but-line",
+      "score10": 5.8,
+      "rawScore10": 8.04,
+      "capScore10": 5.8,
+      "capReason": "Capped because this row still uses provisional target flap crops; it can guide work but cannot claim mature animation conformance.",
+      "confidence": "medium-low",
+      "status": "mixed-trusted-formation-plus-provisional-flap-pair",
+      "target": {
+        "targetReadinessScore10": 5.4,
+        "trustedCropCount": 1,
+        "provisionalCropCount": 2,
+        "poseSequence": [
+          "formation-front",
+          "flap-a",
+          "flap-b",
+          "flap-b",
+          "flap-a",
+          "formation-front"
+        ],
+        "cropIds": [
+          "butterfly-escort-formation-front",
+          "butterfly-escort-flap-a",
+          "butterfly-escort-flap-b"
+        ]
+      },
+      "runtime": {
+        "staticLikenessScore10": 6.62,
+        "twoPhaseVisibilityScore10": 9.38,
+        "cadenceVisibilityScore10": 9.27,
+        "seedCoverageScore10": 10,
+        "seedCoverageAxes": [
+          {
+            "axis": "two-phase flap/pulse",
+            "covered": true
+          },
+          {
+            "axis": "cadence window",
+            "covered": true
+          },
+          {
+            "axis": "dive/rotation pose",
+            "covered": true
+          },
+          {
+            "axis": "transition seed not required for this row",
+            "covered": true
+          }
+        ],
+        "temporalSample": {
+          "litPixelDelta": 264,
+          "filledCellDelta": 68,
+          "scoreDelta": 0.92,
+          "phaseClosedCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-flap-closed.png",
+          "phaseOpenCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-flap-open.png"
+        },
+        "cadenceSample": {
+          "frameCount": 8,
+          "scoreRange10": 0.92,
+          "averageAdjacentLitPixelDelta": 75.43,
+          "averageAdjacentFilledCellDelta": 19.43,
+          "previewFrames": [
+            {
+              "frameIndex": 0,
+              "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-00.png",
+              "score10": 6.62
+            },
+            {
+              "frameIndex": 4,
+              "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-04.png",
+              "score10": 7.54
+            },
+            {
+              "frameIndex": 7,
+              "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-07.png",
+              "score10": 6.62
+            }
+          ]
+        },
+        "staticCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line.png"
+      },
+      "playerMeaning": "This measures whether the alien appears alive: flap/pulse phases, a readable cadence, and enough pose coverage to make movement feel authored rather than static.",
+      "designerMeaning": "This is a bridge score. It should guide sprite-motion tuning and challenge-stage scoring, but it remains capped until target frame timing is exact.",
+      "nextGap": "Promote frame-clean Butterfly / Escort Pulse Pair target flaps from source gameplay/video before raising this above planning confidence."
+    }
+  ],
+  "measurementLimits": [
+    "This score joins target pose rows to runtime motion samples; it is not a final arcade-perfect animation score.",
+    "Rows are capped while Galaga target evidence is pose-sequence only and lacks exact frame timing.",
+    "Bee and Butterfly rows remain especially capped while flap targets use provisional source-sheet cells.",
+    "This artifact should influence challenge-stage graphical scoring as a measured signal, but gameplay challenge conformance still depends on path choreography, group timing, alien novelty, and shot opportunity."
+  ],
+  "nextBestStep": "Promote true frame-labeled Boss, Bee, and Butterfly target cadence windows, then compare Aurora runtime cadence frames directly against those target windows."
+}

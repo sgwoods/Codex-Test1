@@ -1,29 +1,29 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-19T11-24-55-753Z-23747",
-  "startedAt": "2026-05-19T11:24:55.753Z",
-  "endedAt": "2026-05-19T11:25:08.186Z",
-  "branch": "codex/macbook-conformance-investment-review",
-  "commit": "8f1d8190",
+  "id": "2026-05-19T21-50-21-236Z-86798",
+  "startedAt": "2026-05-19T21:50:21.236Z",
+  "endedAt": "2026-05-19T21:50:21.460Z",
+  "branch": "codex/macbook-challenge-sprite-motion-conformance",
+  "commit": "0538fb9d",
   "command": [
     "npm",
     "run",
-    "harness:analyze:challenge-stage-conformance"
+    "harness:analyze:aurora-sprite-motion-correspondence"
   ],
   "axes": [
-    "challenge-set-piece"
+    "sprite-motion"
   ],
   "resources": [
-    "browser"
+    "cpu"
   ],
   "notes": "",
   "measurement": {
-    "wallSeconds": 12.433,
-    "timeRealSeconds": 12.43,
-    "timeUserSeconds": 17.37,
-    "timeSystemSeconds": 4.71,
-    "cpuSeconds": 22.08,
+    "wallSeconds": 0.224,
+    "timeRealSeconds": 0.22,
+    "timeUserSeconds": 0.15,
+    "timeSystemSeconds": 0.13,
+    "cpuSeconds": 0.28,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -45,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 1299110049,
-    "artifactBytesAfter": 1299108063,
-    "artifactBytesDelta": -1986
+    "artifactBytesBefore": 1647341210,
+    "artifactBytesAfter": 1647341210,
+    "artifactBytesDelta": 0
   }
 }

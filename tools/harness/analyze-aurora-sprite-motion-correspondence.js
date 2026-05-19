@@ -1,0 +1,301 @@
+#!/usr/bin/env node
+const fs = require('fs');
+const path = require('path');
+const { execFileSync } = require('child_process');
+
+const ROOT = path.resolve(__dirname, '..', '..');
+const TEMPORAL_TARGETS = 'reference-artifacts/analyses/galaga-alien-temporal-targets/latest.json';
+const RUNTIME_SPRITES = 'reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json';
+const OUT_DIR = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-sprite-motion-correspondence');
+const OUT = path.join(OUT_DIR, 'latest.json');
+const MARKDOWN = path.join(ROOT, 'AURORA_SPRITE_MOTION_CORRESPONDENCE.md');
+
+function fail(message, payload){
+  console.error(message);
+  if(payload) console.error(JSON.stringify(payload, null, 2));
+  process.exit(1);
+}
+
+function readJson(relPath){
+  return JSON.parse(fs.readFileSync(path.join(ROOT, relPath), 'utf8'));
+}
+
+function writeJson(file, value){
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`);
+}
+
+function writeText(file, value){
+  fs.writeFileSync(file, `${String(value).replace(/\r\n/g, '\n').trimEnd()}\n`);
+}
+
+function rel(file){
+  return path.relative(ROOT, file).split(path.sep).join('/');
+}
+
+function git(args, fallback = ''){
+  try{
+    return execFileSync('git', ['-C', ROOT, ...args], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+  }catch{
+    return fallback;
+  }
+}
+
+function round(value, places = 2){
+  if(!Number.isFinite(+value)) return null;
+  const scale = 10 ** places;
+  return Math.round(+value * scale) / scale;
+}
+
+function average(values){
+  const finite = values.filter(value => Number.isFinite(+value)).map(Number);
+  return finite.length ? finite.reduce((sum, value) => sum + value, 0) / finite.length : null;
+}
+
+function clamp(value, min = 0, max = 1){
+  return Math.max(min, Math.min(max, Number.isFinite(+value) ? +value : 0));
+}
+
+function scoreText(value){
+  return Number.isFinite(+value) ? `${round(value, 1).toFixed(1).replace(/\.0$/, '')}/10` : 'unscored';
+}
+
+function targetReadinessScore(row, finalFrameTimedRows){
+  const trusted = +row.trustedCropCount || 0;
+  const provisional = +row.provisionalCropCount || 0;
+  const status = String(row.status || '');
+  let score = 4.2;
+  if(status === 'frame-timed-target-window') score = 9.2;
+  else if(trusted >= 3 && provisional === 0) score = 7.2;
+  else if(trusted > 0 && provisional > 0) score = 5.6;
+  else if(trusted > 0) score = 5.2;
+
+  if(String(row.confidence || '').includes('medium-high')) score += 0.4;
+  if(String(row.confidence || '').includes('medium-low')) score -= 0.2;
+  if(finalFrameTimedRows <= 0) score = Math.min(score, 6.5);
+  if(provisional > 0) score = Math.min(score, 5.8);
+  return round(score, 2);
+}
+
+function twoPhaseVisibilityScore(temporal){
+  if(!temporal) return 1;
+  const litDelta = clamp((+temporal.litPixelDelta || 0) / 260);
+  const filledDelta = clamp((+temporal.filledCellDelta || 0) / 80);
+  const scoreDelta = clamp((+temporal.scoreDelta || 0) / 1.0);
+  return round(1 + 9 * ((0.45 * litDelta) + (0.35 * filledDelta) + (0.2 * scoreDelta)), 2);
+}
+
+function cadenceVisibilityScore(cadence){
+  if(!cadence) return 1;
+  const frameCoverage = clamp((+cadence.frameCount || (cadence.frames || []).length || 0) / 8);
+  const litChange = clamp((+cadence.averageAdjacentLitPixelDelta || 0) / 80);
+  const filledChange = clamp((+cadence.averageAdjacentFilledCellDelta || 0) / 24);
+  const scoreRange = clamp((+cadence.scoreRange10 || 0) / 1.0);
+  return round(1 + 9 * ((0.25 * frameCoverage) + (0.34 * litChange) + (0.26 * filledChange) + (0.15 * scoreRange)), 2);
+}
+
+function seedCoverageScore(spriteKey, runtime){
+  const hasTemporal = (runtime.temporalSamples || []).some(item => item.spriteKey === spriteKey);
+  const hasCadence = (runtime.cadenceSamples || []).some(item => item.spriteKey === spriteKey);
+  const hasDive = (runtime.divePoseSamples || []).some(item => item.modelKey === spriteKey || String(item.spriteKey || '').startsWith(spriteKey));
+  const hasTransition = spriteKey === 'boss-line'
+    ? (runtime.transitionPoseSamples || []).some(item => item.modelKey === spriteKey || String(item.spriteKey || '').startsWith('boss-'))
+    : true;
+  const axes = [
+    { axis: 'two-phase flap/pulse', covered: hasTemporal },
+    { axis: 'cadence window', covered: hasCadence },
+    { axis: 'dive/rotation pose', covered: hasDive },
+    { axis: spriteKey === 'boss-line' ? 'capture/transition seed' : 'transition seed not required for this row', covered: hasTransition }
+  ];
+  const covered = axes.filter(axis => axis.covered).length;
+  return {
+    score10: round(1 + 9 * (covered / axes.length), 2),
+    covered,
+    total: axes.length,
+    axes
+  };
+}
+
+function rowCap(row, finalFrameTimedRows){
+  let cap = finalFrameTimedRows > 0 ? 8.5 : 6.5;
+  let reason = finalFrameTimedRows > 0
+    ? 'Frame-timed target rows exist, so the correspondence score may move beyond planning-level evidence.'
+    : 'Capped because the Galaga target rows are pose sequences without final frame-timed cadence windows.';
+  if((+row.provisionalCropCount || 0) > 0){
+    cap = Math.min(cap, 5.8);
+    reason = 'Capped because this row still uses provisional target flap crops; it can guide work but cannot claim mature animation conformance.';
+  }
+  return { cap, reason };
+}
+
+function buildRows(temporalTargets, runtime){
+  const finalFrameTimedRows = +temporalTargets.summary?.finalFrameTimedRows || 0;
+  const staticSamples = new Map((runtime.samples || []).map(sample => [sample.spriteKey, sample]));
+  const temporalSamples = new Map((runtime.temporalSamples || []).map(sample => [sample.spriteKey, sample]));
+  const cadenceSamples = new Map((runtime.cadenceSamples || []).map(sample => [sample.spriteKey, sample]));
+  return (temporalTargets.rows || []).map(target => {
+    const spriteKey = target.runtimeSpriteKey;
+    const staticSample = staticSamples.get(spriteKey) || null;
+    const temporalSample = temporalSamples.get(spriteKey) || null;
+    const cadenceSample = cadenceSamples.get(spriteKey) || null;
+    const targetReadinessScore10 = targetReadinessScore(target, finalFrameTimedRows);
+    const twoPhaseVisibilityScore10 = twoPhaseVisibilityScore(temporalSample);
+    const cadenceVisibilityScore10 = cadenceVisibilityScore(cadenceSample);
+    const staticLikenessScore10 = Number.isFinite(+staticSample?.score10) ? round(staticSample.score10, 2) : 1;
+    const seedCoverage = seedCoverageScore(spriteKey, runtime);
+    const rawScore10 = round(
+      (0.25 * targetReadinessScore10)
+      + (0.25 * twoPhaseVisibilityScore10)
+      + (0.2 * cadenceVisibilityScore10)
+      + (0.15 * staticLikenessScore10)
+      + (0.15 * seedCoverage.score10),
+      2
+    );
+    const cap = rowCap(target, finalFrameTimedRows);
+    const score10 = round(Math.min(rawScore10, cap.cap), 2);
+    const nextGap = (+target.provisionalCropCount || 0) > 0
+      ? `Promote frame-clean ${target.label || spriteKey} target flaps from source gameplay/video before raising this above planning confidence.`
+      : 'Promote a true frame-labeled target cadence window so runtime cadence can be compared to target timing, not only visible runtime change.';
+    return {
+      id: target.id,
+      label: target.label,
+      roleKey: target.roleKey,
+      runtimeSpriteKey: spriteKey,
+      score10,
+      rawScore10,
+      capScore10: cap.cap,
+      capReason: cap.reason,
+      confidence: target.confidence,
+      status: target.status,
+      target: {
+        targetReadinessScore10,
+        trustedCropCount: target.trustedCropCount || 0,
+        provisionalCropCount: target.provisionalCropCount || 0,
+        poseSequence: target.poseSequence || [],
+        cropIds: target.targetCropIds || []
+      },
+      runtime: {
+        staticLikenessScore10,
+        twoPhaseVisibilityScore10,
+        cadenceVisibilityScore10,
+        seedCoverageScore10: seedCoverage.score10,
+        seedCoverageAxes: seedCoverage.axes,
+        temporalSample: temporalSample ? {
+          litPixelDelta: temporalSample.litPixelDelta,
+          filledCellDelta: temporalSample.filledCellDelta,
+          scoreDelta: temporalSample.scoreDelta,
+          phaseClosedCrop: temporalSample.phaseClosedCrop,
+          phaseOpenCrop: temporalSample.phaseOpenCrop
+        } : null,
+        cadenceSample: cadenceSample ? {
+          frameCount: cadenceSample.frameCount || (cadenceSample.frames || []).length,
+          scoreRange10: cadenceSample.scoreRange10,
+          averageAdjacentLitPixelDelta: cadenceSample.averageAdjacentLitPixelDelta,
+          averageAdjacentFilledCellDelta: cadenceSample.averageAdjacentFilledCellDelta,
+          previewFrames: (cadenceSample.frames || []).filter((_, index) => index === 0 || index === Math.floor((cadenceSample.frames || []).length / 2) || index === (cadenceSample.frames || []).length - 1).map(frame => ({
+            frameIndex: frame.frameIndex,
+            cropImage: frame.cropImage,
+            score10: frame.score10
+          }))
+        } : null,
+        staticCrop: staticSample?.cropImage || null
+      },
+      playerMeaning: 'This measures whether the alien appears alive: flap/pulse phases, a readable cadence, and enough pose coverage to make movement feel authored rather than static.',
+      designerMeaning: 'This is a bridge score. It should guide sprite-motion tuning and challenge-stage scoring, but it remains capped until target frame timing is exact.',
+      nextGap
+    };
+  });
+}
+
+function markdownReport(artifact){
+  const lines = [
+    '# Aurora Sprite Motion Correspondence',
+    '',
+    `Generated: ${artifact.generatedAt}`,
+    '',
+    'This report joins Galaga temporal target rows to Aurora runtime sprite-motion captures. It is intentionally conservative: visible runtime animation gets credit, but scores are capped until the target side has frame-labeled cadence windows rather than only pose sequences.',
+    '',
+    '## Summary',
+    '',
+    `- Score: ${scoreText(artifact.summary.averageScore10)}`,
+    `- Rows: ${artifact.summary.rowCount}`,
+    `- Frame-timed target rows: ${artifact.summary.finalFrameTimedRows}`,
+    `- Weakest row: ${artifact.summary.weakestRowId || 'n/a'} (${scoreText(artifact.summary.weakestScore10)})`,
+    `- Next best step: ${artifact.nextBestStep}`,
+    '',
+    '## Rows',
+    '',
+    '| Row | Score | Target Readiness | Runtime Motion | Cap | Next Gap |',
+    '| --- | ---: | --- | --- | --- | --- |'
+  ];
+  for(const row of artifact.rows){
+    lines.push(`| ${row.label}<br><code>${row.runtimeSpriteKey}</code> | ${scoreText(row.score10)} | ${scoreText(row.target.targetReadinessScore10)}; trusted ${row.target.trustedCropCount}, provisional ${row.target.provisionalCropCount} | phase ${scoreText(row.runtime.twoPhaseVisibilityScore10)}; cadence ${scoreText(row.runtime.cadenceVisibilityScore10)}; static ${scoreText(row.runtime.staticLikenessScore10)}; seeds ${row.runtime.seedCoverageAxes.filter(axis => axis.covered).length}/${row.runtime.seedCoverageAxes.length} | ${scoreText(row.capScore10)}<br>${row.capReason} | ${row.nextGap} |`);
+  }
+  lines.push('', '## Measurement Limits', '');
+  for(const item of artifact.measurementLimits) lines.push(`- ${item}`);
+  lines.push('');
+  return `${lines.join('\n')}\n`;
+}
+
+function main(){
+  if(!fs.existsSync(path.join(ROOT, TEMPORAL_TARGETS))) fail(`Missing temporal target artifact: ${TEMPORAL_TARGETS}`);
+  if(!fs.existsSync(path.join(ROOT, RUNTIME_SPRITES))) fail(`Missing runtime sprite artifact: ${RUNTIME_SPRITES}`);
+  const temporalTargets = readJson(TEMPORAL_TARGETS);
+  const runtime = readJson(RUNTIME_SPRITES);
+  const rows = buildRows(temporalTargets, runtime);
+  const scored = rows.filter(row => Number.isFinite(+row.score10));
+  const weakest = scored.slice().sort((a, b) => a.score10 - b.score10)[0] || null;
+  const finalFrameTimedRows = +temporalTargets.summary?.finalFrameTimedRows || 0;
+  const artifact = {
+    schemaVersion: 1,
+    artifactType: 'aurora-sprite-motion-correspondence',
+    generatedAt: new Date().toISOString(),
+    commit: git(['rev-parse', '--short', 'HEAD'], 'unknown'),
+    branch: git(['branch', '--show-current'], 'unknown'),
+    dirty: !!git(['status', '--porcelain'], ''),
+    sourceArtifacts: {
+      galagaAlienTemporalTargets: TEMPORAL_TARGETS,
+      auroraRuntimeSpriteConformance: RUNTIME_SPRITES
+    },
+    summary: {
+      rowCount: rows.length,
+      averageScore10: round(average(scored.map(row => row.score10)), 2),
+      rawAverageScore10: round(average(scored.map(row => row.rawScore10)), 2),
+      weakestRowId: weakest?.id || null,
+      weakestRuntimeSpriteKey: weakest?.runtimeSpriteKey || null,
+      weakestScore10: weakest?.score10 || null,
+      finalFrameTimedRows,
+      provisionalTargetRows: rows.filter(row => (+row.target.provisionalCropCount || 0) > 0).length,
+      runtimeMotionAxesCovered: runtime.summary?.motionCoverageAxesCovered ?? null,
+      runtimeMotionAxesPlanned: runtime.summary?.motionCoverageAxesPlanned ?? null,
+      targetTimingStatus: finalFrameTimedRows > 0 ? 'frame-timed-targets-present' : 'pose-sequence-targets-only',
+      read: finalFrameTimedRows > 0
+        ? `Aurora runtime motion corresponds to ${rows.length} frame-timed target row(s), average ${scoreText(average(scored.map(row => row.score10)))}.`
+        : `Aurora runtime motion is visible but still target-capped: ${rows.length} sprite families score ${scoreText(average(scored.map(row => row.score10)))}, with ${rows.filter(row => (+row.target.provisionalCropCount || 0) > 0).length} provisional target row(s) and no final frame-timed target cadence rows.`
+    },
+    rows,
+    measurementLimits: [
+      'This score joins target pose rows to runtime motion samples; it is not a final arcade-perfect animation score.',
+      'Rows are capped while Galaga target evidence is pose-sequence only and lacks exact frame timing.',
+      'Bee and Butterfly rows remain especially capped while flap targets use provisional source-sheet cells.',
+      'This artifact should influence challenge-stage graphical scoring as a measured signal, but gameplay challenge conformance still depends on path choreography, group timing, alien novelty, and shot opportunity.'
+    ],
+    nextBestStep: 'Promote true frame-labeled Boss, Bee, and Butterfly target cadence windows, then compare Aurora runtime cadence frames directly against those target windows.'
+  };
+  writeJson(OUT, artifact);
+  writeText(MARKDOWN, markdownReport(artifact));
+  console.log(JSON.stringify({
+    ok: true,
+    artifact: rel(OUT),
+    markdown: rel(MARKDOWN),
+    averageScore10: artifact.summary.averageScore10,
+    weakestRowId: artifact.summary.weakestRowId,
+    targetTimingStatus: artifact.summary.targetTimingStatus
+  }, null, 2));
+}
+
+try{
+  main();
+}catch(err){
+  fail(err && err.stack || String(err));
+}

@@ -1,6 +1,6 @@
 # Galaga Alien Temporal Targets
 
-Generated: 2026-05-19T18:24:11.103Z
+Generated: 2026-05-19T21:31:26.787Z
 
 This report promotes target pose sequences for Boss, Bee, and Butterfly runtime cadence scoring. It deliberately distinguishes trusted motion-reference crops from provisional source-sheet flaps so the metric can improve without pretending we have final frame-timed animation truth.
 
