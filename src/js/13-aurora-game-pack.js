@@ -779,6 +779,8 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   slotDelay:.1,
   arcAmp:1.68,
   dropAmp:1.08,
+  groupSpawnOffsets:Object.freeze([0,.46,2.65,5.87,12.08]),
+  groupSpeedScales:Object.freeze([2.52,2.98,2.19,2.34,.82]),
   laneTypes:Object.freeze(['boss','rogue','but','bee','bee','but','rogue','boss']),
   groupLaneTypes:Object.freeze([
    Object.freeze(['boss','rogue','but','bee','bee','but','rogue','boss']),
@@ -788,7 +790,7 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
    Object.freeze(['boss','but','bee','rogue','rogue','bee','but','boss'])
   ]),
   groupVisualFamilies:Object.freeze(['galboss','galboss','dragonfly','galboss','dragonfly']),
-  groupPathFamilies:Object.freeze(['pink-serpentine','pink-serpentine','green-ladder-split','pink-serpentine','pink-green-cascade'])
+  groupPathFamilies:Object.freeze(['green-ladder-split','pink-serpentine','pink-green-cascade','pink-serpentine','pink-serpentine'])
  }),
  Object.freeze({
   fromStage:19,
@@ -847,13 +849,15 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   groups:5,
   enemiesPerGroup:8,
   upperBandRatio:.4,
-  spawnOffsetX:84,
+  spawnOffsetX:76,
   waveSpacingY:8,
   rowSpacingY:8,
-  waveDelay:1,
-  slotDelay:.075,
+  waveDelay:.94,
+  slotDelay:.065,
   arcAmp:1.88,
-  dropAmp:1.6,
+  dropAmp:1.42,
+  groupSpawnOffsets:Object.freeze([0,1.05,4.5,8.85,10.25]),
+  groupSpeedScales:Object.freeze([.92,.9,.92,.9,.78]),
   laneTypes:Object.freeze(['boss','bee','but','rogue','rogue','but','bee','boss']),
   groupLaneTypes:Object.freeze([
    Object.freeze(['boss','bee','but','rogue','rogue','but','bee','boss']),

@@ -105,6 +105,7 @@ function spawnChallenge(){
    : layout.laneTypes;
   const wavePathFamilies=Array.isArray(layout.groupPathFamilies)?layout.groupPathFamilies:null;
   const waveVisualFamilies=Array.isArray(layout.groupVisualFamilies)?layout.groupVisualFamilies:null;
+  const waveSpawnOffsets=Array.isArray(layout.groupSpawnOffsets)?layout.groupSpawnOffsets:null;
   const waveArcAmps=Array.isArray(layout.groupArcAmps)?layout.groupArcAmps:null;
   const waveDropAmps=Array.isArray(layout.groupDropAmps)?layout.groupDropAmps:null;
   const waveSpeedScales=Array.isArray(layout.groupSpeedScales)?layout.groupSpeedScales:null;
@@ -131,7 +132,7 @@ function spawnChallenge(){
    arcAmp:waveArcAmps?.[wave]||layout.arcAmp||1,
    dropAmp:waveDropAmps?.[wave]||layout.dropAmp||1,
    speedScale:waveSpeedScales?.[wave]||layout.speedScale||1,
-   spawn:baseEntryDelay+wave*layout.waveDelay+slot*layout.slotDelay
+   spawn:baseEntryDelay+(waveSpawnOffsets?.[wave]??wave*layout.waveDelay)+slot*layout.slotDelay
   }));
  }
  S.ch={hits:0,total,done:0,groups:Array.from({length:layout.groups},()=>0),bonus:0,perfect:0,upperBandY,upperBandTime:0,upperBandSamples:0};

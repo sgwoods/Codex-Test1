@@ -10,7 +10,7 @@ const OUT_ROOT = path.join(ANALYSES, 'challenge-stage-conformance');
 const CHALLENGE_CONTRACTS = path.join(ROOT, 'reference-artifacts', 'ingestion', 'challenge-stage-target-contracts', 'aurora-challenge-contracts-0.1.json');
 const GALAGA_CHALLENGE_OBJECT_TRACKS = path.join(ANALYSES, 'galaga-challenge-object-tracks', 'latest.json');
 const CHALLENGE_STAGES = [3, 7, 11, 15, 19, 23, 27, 31];
-const SAMPLE_TIMES = Array.from({ length: 53 }, (_, index) => +(index * 0.25).toFixed(2));
+const SAMPLE_TIMES = Array.from({ length: 65 }, (_, index) => +(index * 0.25).toFixed(2));
 
 const STAGE_INTENT = {
   3: {
@@ -1306,7 +1306,12 @@ async function runtimeProbeForStage(stage){
         if(delta) h.advanceFor(delta, { step: 1 / 60, stopOnGameOver: false });
         previous = t;
         const formation = h.challengeFormationState();
-        const active = formation.enemies || [];
+        const active = (formation.enemies || []).filter(e => {
+          if(Number.isFinite(+e.spawn) && +e.spawn > 0.03) return false;
+          if(Number.isFinite(+e.x) && (+e.x < -12 || +e.x > 292)) return false;
+          if(Number.isFinite(+e.y) && (+e.y < -24 || +e.y > 384)) return false;
+          return true;
+        });
         const xs = active.map(e => +e.x).filter(Number.isFinite);
         const ys = active.map(e => +e.y).filter(Number.isFinite);
         const lowerFieldCount = active.filter(e => +e.y > 180).length;

@@ -2,8 +2,8 @@
 
 This is the project section for tracking how Aurora / Platinum conformance improves relative to the resources spent to get there. It is intentionally local-first: we want the MacBook CPU/browser harnesses to carry as much measurement and iteration as possible, while Codex/OpenAI model work is used for strategy, harness design, code generation, interpretation, and selected higher-value analysis.
 
-Generated: `2026-05-19T03:43:06.554Z`
-Latest artifact: `reference-artifacts/analyses/conformance-economics/2026-05-19-fba7f625/report.json`
+Generated: `2026-05-19T10:56:53.939Z`
+Latest artifact: `reference-artifacts/analyses/conformance-economics/2026-05-19-fda97ed9/report.json`
 
 ## Current Local-Vs-Cloud Read
 
@@ -11,12 +11,12 @@ Latest artifact: `reference-artifacts/analyses/conformance-economics/2026-05-19-
 | --- | --- | --- |
 | Overall quality | 8.8/10 | Current release-quality conformance roll-up. |
 | Level arc | 8.8/10 | Current long-play/gameplay-shape roll-up. |
-| Measured runs | 833 | Commands or manual entries logged in the economics ledger. |
+| Measured runs | 834 | Commands or manual entries logged in the economics ledger. |
 | Local CPU tracked wall | 556.7 min | Main measured engine for harness execution, report generation, waveform/spectral work, and scoring. |
 | Browser-backed local wall | 406.1 min | Subset of local work that exercised Chromium/gameplay runtime. |
 | GPU-equivalent tracked wall | 630.8 min | Declared Codex/model/API/GPU usage. This is currently small and under-instrumented. |
 | GPU-equivalent share | 66.6% | Approximate declared cloud/model share of tracked wall time. |
-| Artifact growth | 1328.2 MB | Evidence volume and review/storage-cost proxy. |
+| Artifact growth | 1329.6 MB | Evidence volume and review/storage-cost proxy. |
 
 The important read today: measured conformance advancement is overwhelmingly local CPU/browser driven. Codex and OpenAI model work are essential for reasoning, implementation, and synthesis, but the repository ledger currently records only a small fraction of that cloud-side work. We should keep pushing computation into reusable local harnesses whenever possible and explicitly log Codex/model/API assistance as `gpu-equivalent` when it materially drives a work cycle.
 
@@ -46,7 +46,7 @@ Retrospective artifact: `reference-artifacts/analyses/conformance-investment-ret
 | Resource class | Measured runs | Wall time | CPU time | Share of tracked wall |
 | --- | --- | --- | --- | --- |
 | gpu-equivalent | 18 | 630.8 min | 1.2 min | 66.6% |
-| cpu | 809 | 556.7 min | 894.3 min | 58.8% |
+| cpu | 810 | 556.7 min | 894.3 min | 58.8% |
 | browser | 290 | 406.1 min | 627.7 min | 42.9% |
 | codex | 13 | 365.7 min | 1.2 min | 38.6% |
 | openai-gpu-equivalent | 1 | 75 min | 0 min | 7.9% |
@@ -75,7 +75,7 @@ These tables answer the practical question behind the economics work: when we sp
 | Gameplay behavior and level complexity | 292 | 67.4 min | 11.6% | Moves player-facing pressure, stage shape, alien entry novelty, challenge-stage learning value, and long-play texture. |
 | Harness, ingestion, and assessment logic | 9 | 10.2 min | 1.7% | Moves reusable automation: scorers, artifact extraction, candidate loops, measurement confidence, and future game ingestion. |
 | Visual and video reference analysis | 10 | 0.3 min | 0.1% | Moves graphical identity, reference inspection, contact-sheet review, sprite/surface comparison, and readability. |
-| Dashboard, docs, and release planning | 5 | 0 min | 0% | Moves decision quality: what to invest in next, how to explain releases, and how to keep dev/beta/prod evidence aligned. |
+| Dashboard, docs, and release planning | 6 | 0 min | 0% | Moves decision quality: what to invest in next, how to explain releases, and how to keep dev/beta/prod evidence aligned. |
 
 ### Positive Score Movement By Project Area
 
@@ -100,7 +100,7 @@ These tables answer the practical question behind the economics work: when we sp
 | challenge-stage | 94 | 84.2 min | 16.1 min |
 | audio-theme-comparison | 39 | 84.2 min | 100.1 min |
 | audio-focus-candidate | 39 | 78.5 min | 146.2 min |
-| conformance-economics | 100 | 76.4 min | 30.7 min |
+| conformance-economics | 101 | 76.4 min | 30.7 min |
 | sprite-conformance | 10 | 75.2 min | 0.3 min |
 
 ## Cost Per Score Movement
@@ -122,19 +122,19 @@ These tables answer the practical question behind the economics work: when we sp
 
 ## Charts
 
-![Conformance score trends](reference-artifacts/analyses/conformance-economics/2026-05-19-fba7f625/score-trends.svg)
+![Conformance score trends](reference-artifacts/analyses/conformance-economics/2026-05-19-fda97ed9/score-trends.svg)
 
-![Largest score deltas](reference-artifacts/analyses/conformance-economics/2026-05-19-fba7f625/largest-score-deltas.svg)
+![Largest score deltas](reference-artifacts/analyses/conformance-economics/2026-05-19-fda97ed9/largest-score-deltas.svg)
 
-![Compute minutes by resource](reference-artifacts/analyses/conformance-economics/2026-05-19-fba7f625/compute-minutes-by-resource.svg)
+![Compute minutes by resource](reference-artifacts/analyses/conformance-economics/2026-05-19-fda97ed9/compute-minutes-by-resource.svg)
 
-![Cost per positive score point](reference-artifacts/analyses/conformance-economics/2026-05-19-fba7f625/cost-per-positive-score-point.svg)
+![Cost per positive score point](reference-artifacts/analyses/conformance-economics/2026-05-19-fda97ed9/cost-per-positive-score-point.svg)
 
-![GPU-equivalent use by purpose](reference-artifacts/analyses/conformance-economics/2026-05-19-fba7f625/gpu-equivalent-use-by-purpose.svg)
+![GPU-equivalent use by purpose](reference-artifacts/analyses/conformance-economics/2026-05-19-fda97ed9/gpu-equivalent-use-by-purpose.svg)
 
-![Local CPU use by purpose](reference-artifacts/analyses/conformance-economics/2026-05-19-fba7f625/cpu-use-by-purpose.svg)
+![Local CPU use by purpose](reference-artifacts/analyses/conformance-economics/2026-05-19-fda97ed9/cpu-use-by-purpose.svg)
 
-![Gameplay improvement by project part](reference-artifacts/analyses/conformance-economics/2026-05-19-fba7f625/gameplay-improvement-by-project-part.svg)
+![Gameplay improvement by project part](reference-artifacts/analyses/conformance-economics/2026-05-19-fda97ed9/gameplay-improvement-by-project-part.svg)
 
 ## Codex / OpenAI Accounting
 

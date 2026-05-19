@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "application-artifact-conformance-status",
-  "generatedAt": "2026-05-19T03:41:55.861Z",
-  "commit": "fba7f625",
+  "generatedAt": "2026-05-19T10:57:06.123Z",
+  "commit": "fda97ed9",
   "branch": "codex/macbook-conformance-investment-review",
   "dirty": true,
   "sources": {
@@ -16,7 +16,7 @@
     "audioGap": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
     "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/latest.json",
     "releaseDashboard": "reference-artifacts/analyses/release-conformance-dashboard/latest.json",
-    "qualityReport": "reference-artifacts/analyses/quality-conformance/2026-05-19-6fd7f6ad/report.json"
+    "qualityReport": "reference-artifacts/analyses/quality-conformance/2026-05-19-fda97ed9/report.json"
   },
   "summary": {
     "rowCount": 14,
@@ -2674,7 +2674,7 @@
       "confidence": "medium-high",
       "status": "Primary user-experience gap",
       "measurement": "21 cue/event comparisons, 31 segment-role comparisons, semantic score 9.8/10, highest risk challengePerfect 7/10.",
-      "evidence": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json; reference-artifacts/analyses/aurora-audio-event-gap/latest.json; reference-artifacts/analyses/quality-conformance/2026-05-19-6fd7f6ad/report.json",
+      "evidence": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json; reference-artifacts/analyses/aurora-audio-event-gap/latest.json; reference-artifacts/analyses/quality-conformance/2026-05-19-fda97ed9/report.json",
       "next": "Tune the highest segment-level gap next: challengePerfect onset. Rerun audio comparison and event-gap analysis after the change."
     },
     {
@@ -2686,7 +2686,7 @@
       "confidence": "medium",
       "status": "Guardrail measured in quality conformance",
       "measurement": "Worst current delta 6.31 ms; worst drift from baseline 0 ms.",
-      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-19-6fd7f6ad/report.json",
+      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-19-fda97ed9/report.json",
       "next": "Keep event alignment coupled to the cue-contract promotion pass so timing does not regress while changing source clips."
     },
     {
@@ -2710,7 +2710,7 @@
       "confidence": "medium",
       "status": "Split from generic UI shell before final gate",
       "measurement": "12 surface guardrails in latest quality report; visual scorer weakest shell surface Developer/settings popup surface 7.1/10.",
-      "evidence": "reference-artifacts/analyses/release-conformance-dashboard/latest.json; reference-artifacts/analyses/quality-conformance/2026-05-19-6fd7f6ad/report.json; reference-artifacts/analyses/aurora-visual-look-conformance/latest.json",
+      "evidence": "reference-artifacts/analyses/release-conformance-dashboard/latest.json; reference-artifacts/analyses/quality-conformance/2026-05-19-fda97ed9/report.json; reference-artifacts/analyses/aurora-visual-look-conformance/latest.json",
       "next": "Split iconography, dock-button affordance, and popup typography into separate target rows once we have icon/font-specific captures."
     },
     {

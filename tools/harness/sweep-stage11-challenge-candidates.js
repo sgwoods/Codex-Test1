@@ -21,6 +21,20 @@ const EXPECTED_LABELS_BY_STAGE = {
   3: ['challenge-1-arrival-group-1', 'challenge-1-late-wave-group-4'],
   7: ['challenge-2-arrival-group-1'],
   11: ['challenge-3-arrival-group-1'],
+  15: [
+    'challenge-4-pink-serpentine-group-1',
+    'challenge-4-pink-serpentine-group-2',
+    'challenge-4-pink-serpentine-group-3',
+    'challenge-4-pink-serpentine-group-4',
+    'challenge-4-pink-serpentine-group-5'
+  ],
+  19: [
+    'challenge-5-pink-green-cascade-group-1',
+    'challenge-5-pink-green-cascade-group-2',
+    'challenge-5-pink-green-cascade-group-3',
+    'challenge-5-pink-green-cascade-group-4',
+    'challenge-5-pink-green-cascade-group-5'
+  ],
   23: [
     'challenge-6-green-ladder-split-group-1',
     'challenge-6-green-ladder-split-group-2',
@@ -34,13 +48,20 @@ const EXPECTED_LABELS_BY_STAGE = {
     'challenge-7-yellow-diagonal-fan-group-3',
     'challenge-7-yellow-diagonal-fan-group-4',
     'challenge-7-yellow-diagonal-fan-group-5'
+  ],
+  31: [
+    'challenge-8-blue-purple-finale-group-1',
+    'challenge-8-blue-purple-finale-group-2',
+    'challenge-8-blue-purple-finale-group-3',
+    'challenge-8-blue-purple-finale-group-4',
+    'challenge-8-blue-purple-finale-group-5'
   ]
 };
 const EXPECTED_LABELS = (argValue('expected-labels') || '').split(',').map(item => item.trim()).filter(Boolean).length
   ? (argValue('expected-labels') || '').split(',').map(item => item.trim()).filter(Boolean)
   : (EXPECTED_LABELS_BY_STAGE[STAGE] || ['challenge-3-arrival-group-1']);
 const EXPECTED_LABEL = EXPECTED_LABELS[0];
-const SAMPLE_TIMES = Array.from({ length: 35 }, (_, index) => +(index * 0.25).toFixed(2));
+const SAMPLE_TIMES = Array.from({ length: 65 }, (_, index) => +(index * 0.25).toFixed(2));
 const TRAJECTORY_VECTOR_FIELDS = ['xRange', 'yRange', 'pathLength', 'turnCount', 'reversalCount', 'lowerFieldShare', 'rackSlotError'];
 const TRAJECTORY_VECTOR_WEIGHTS = {
   xRange: 0.18,
@@ -481,6 +502,76 @@ function combinedTrajectorySemanticScore(trajectoryScore10, semanticScore10){
   return round((1 - CHALLENGE_SEMANTIC_SCORE_WEIGHT) * trajectoryScore10 + CHALLENGE_SEMANTIC_SCORE_WEIGHT * semanticScore10, 1);
 }
 
+function challengeNumberForStage(stage){
+  return stage >= 3 ? Math.floor((stage - 3) / 4) + 1 : null;
+}
+
+function targetGroupsForStage(stage){
+  const artifact = readJson(TARGET_TRACKS_PATH, {});
+  const challengeNumber = challengeNumberForStage(stage);
+  const challenge = (artifact.challenges || []).find(item => +item.challengeNumber === +challengeNumber);
+  return Array.isArray(challenge?.targetGroups) ? challenge.targetGroups : [];
+}
+
+function targetTimingCandidates(base, pathSets = []){
+  const groups = targetGroupsForStage(STAGE);
+  if(groups.length < 3) return [];
+  const starts = groups.map(group => round(+(group.objectTrackTarget?.visibleStartS || 0), 2));
+  const durations = groups.map(group => {
+    const target = group.objectTrackTarget || {};
+    return Math.max(0.75, (+target.visibleEndS || 0) - (+target.visibleStartS || 0));
+  });
+  const baseSpeeds = Array.isArray(base.groupSpeedScales) && base.groupSpeedScales.length
+    ? base.groupSpeedScales
+    : Array.from({ length: groups.length }, () => 1);
+  const offsetVariants = [
+    {
+      id: 'target-starts',
+      groupSpawnOffsets: starts
+    },
+    {
+      id: 'target-compressed',
+      groupSpawnOffsets: starts.map((value, index) => round(index ? value * 0.92 : 0, 2))
+    },
+    {
+      id: 'target-late-hold',
+      groupSpawnOffsets: starts.map((value, index) => round(value + (index >= 3 ? 0.35 : 0), 2))
+    }
+  ];
+  const speedVariants = [
+    {
+      id: 'current-speed',
+      groupSpeedScales: baseSpeeds
+    },
+    {
+      id: 'target-duration',
+      groupSpeedScales: durations.map(duration => round(clamp(8.2 / duration, 0.72, 3.4), 2))
+    },
+    {
+      id: 'late-hold-speed',
+      groupSpeedScales: baseSpeeds.map((value, index) => round(value * (index >= 3 ? 0.78 : 1), 2))
+    }
+  ];
+  const pathVariants = pathSets.length ? pathSets : [base.groupPathFamilies || []];
+  const candidates = [];
+  for(const offsets of offsetVariants){
+    for(const speeds of speedVariants){
+      for(let pathIndex = 0; pathIndex < pathVariants.length; pathIndex += 1){
+        candidates.push({
+          id: `stage${STAGE}-${offsets.id}-${speeds.id}-p${pathIndex}`,
+          description: `Stage ${STAGE} target-video timing candidate: ${offsets.id}, ${speeds.id}, path set ${pathIndex}.`,
+          layoutOverride: Object.assign({}, base, {
+            groupSpawnOffsets: offsets.groupSpawnOffsets,
+            groupSpeedScales: speeds.groupSpeedScales,
+            groupPathFamilies: pathVariants[pathIndex]
+          })
+        });
+      }
+    }
+  }
+  return candidates;
+}
+
 function candidateBaseLayout(){
   if(STAGE === 3){
     return {
@@ -496,6 +587,8 @@ function candidateBaseLayout(){
       slotDelay: 0.13,
       arcAmp: 1.12,
       dropAmp: 1.02,
+      groupSpawnOffsets: [0,4.1,7.4,10.9,14.5],
+      groupSpeedScales: [2.65,1.58,1.5,1.44,1.28],
       laneTypes: ['bee','bee','bee','bee','but','but','but','but'],
       groupLaneTypes: [
         ['bee','bee','bee','bee','but','but','but','but'],
@@ -537,6 +630,34 @@ function candidateBaseLayout(){
       groupPathFamilies: ['cross-sweep','cross-sweep','hook-arc','hook-arc','boss-led-loop']
     };
   }
+  if(STAGE === 15){
+    return {
+      id: 'pink-serpentine-late',
+      pathFamily: 'pink-serpentine',
+      groups: 5,
+      enemiesPerGroup: 8,
+      upperBandRatio: 0.43,
+      spawnOffsetX: 74,
+      waveSpacingY: 10,
+      rowSpacingY: 9,
+      waveDelay: 1.22,
+      slotDelay: 0.1,
+      arcAmp: 1.68,
+      dropAmp: 1.08,
+      groupSpawnOffsets: [0,0.45,2.85,6.25,12.85],
+      groupSpeedScales: [2.1,1.85,1.5,1.3,1.05],
+      laneTypes: ['boss','rogue','but','bee','bee','but','rogue','boss'],
+      groupLaneTypes: [
+        ['boss','rogue','but','bee','bee','but','rogue','boss'],
+        ['but','boss','rogue','bee','bee','rogue','boss','but'],
+        ['bee','but','boss','rogue','rogue','boss','but','bee'],
+        ['rogue','bee','but','boss','boss','but','bee','rogue'],
+        ['boss','but','bee','rogue','rogue','bee','but','boss']
+      ],
+      groupVisualFamilies: ['galboss','galboss','dragonfly','galboss','dragonfly'],
+      groupPathFamilies: ['pink-serpentine','pink-serpentine','green-ladder-split','pink-serpentine','pink-green-cascade']
+    };
+  }
   if(STAGE === 23){
     return {
       id: 'green-ladder-split',
@@ -551,6 +672,7 @@ function candidateBaseLayout(){
       slotDelay: 0.08,
       arcAmp: 1.58,
       dropAmp: 1.34,
+      groupSpeedScales: [1,1,1,1,1],
       laneTypes: ['bee','but','rogue','boss','boss','rogue','but','bee'],
       groupLaneTypes: [
         ['bee','but','rogue','boss','boss','rogue','but','bee'],
@@ -577,6 +699,8 @@ function candidateBaseLayout(){
       slotDelay: 0.075,
       arcAmp: 1.88,
       dropAmp: 1.6,
+      groupSpawnOffsets: [0,1.05,4.5,8.85,10.25],
+      groupSpeedScales: [0.92,0.9,0.92,0.9,0.78],
       laneTypes: ['boss','bee','but','rogue','rogue','but','bee','boss'],
       groupLaneTypes: [
         ['boss','bee','but','rogue','rogue','but','bee','boss'],
@@ -662,6 +786,50 @@ function candidateDefinitions(){
         }
       }
     }
+    candidates.push(...targetTimingCandidates(base, pathSets));
+    return candidates;
+  }
+  if(STAGE === 15){
+    const arcValues = [1.42, 1.68, 1.94];
+    const dropValues = [0.92, 1.08, 1.24];
+    const spawnValues = [68, 74, 82];
+    const waveValues = [1.06, 1.22];
+    const slotValues = [0.08, 0.1];
+    const pathSets = [
+      ['pink-serpentine','pink-serpentine','green-ladder-split','pink-serpentine','pink-green-cascade'],
+      ['pink-serpentine','green-ladder-split','pink-serpentine','pink-green-cascade','pink-serpentine'],
+      ['green-ladder-split','pink-serpentine','pink-green-cascade','pink-serpentine','pink-green-cascade']
+    ];
+    const candidates = [{
+      id: 'baseline-current',
+      description: `Current stage-${STAGE} layout, used as the measured baseline.`,
+      layoutOverride: {}
+    }];
+    for(const arcAmp of arcValues){
+      for(const dropAmp of dropValues){
+        for(const spawnOffsetX of spawnValues){
+          for(const waveDelay of waveValues){
+            for(const slotDelay of slotValues){
+              for(let pathIndex = 0; pathIndex < pathSets.length; pathIndex += 1){
+                candidates.push({
+                  id: `stage${STAGE}-a${String(arcAmp).replace('.','')}-d${String(dropAmp).replace('.','')}-x${spawnOffsetX}-w${String(waveDelay).replace('.','')}-s${String(slotDelay).replace('.','')}-p${pathIndex}`,
+                  description: `Stage ${STAGE} sweep: arc ${arcAmp}, drop ${dropAmp}, spawn ${spawnOffsetX}, wave ${waveDelay}, slot ${slotDelay}, path set ${pathIndex}.`,
+                  layoutOverride: Object.assign({}, base, {
+                    arcAmp,
+                    dropAmp,
+                    spawnOffsetX,
+                    waveDelay,
+                    slotDelay,
+                    groupPathFamilies: pathSets[pathIndex]
+                  })
+                });
+              }
+            }
+          }
+        }
+      }
+    }
+    candidates.push(...targetTimingCandidates(base, pathSets));
     return candidates;
   }
   if(STAGE === 23 || STAGE === 27){
@@ -696,6 +864,7 @@ function candidateDefinitions(){
         }
       }
     }
+    candidates.push(...targetTimingCandidates(base, [base.groupPathFamilies || []]));
     return candidates;
   }
   const pathSets = [
@@ -729,6 +898,7 @@ function candidateDefinitions(){
       }
     }
   }
+  candidates.push(...targetTimingCandidates(base, pathSets));
   return candidates;
 }
 
@@ -744,6 +914,9 @@ async function measureCandidates(candidates){
         const record = t => {
           const formation = h.challengeFormationState();
           for(const e of formation.enemies || []){
+            if(Number.isFinite(+e.spawn) && +e.spawn > 0.03) continue;
+            if(Number.isFinite(+e.x) && (+e.x < -12 || +e.x > 292)) continue;
+            if(Number.isFinite(+e.y) && (+e.y < -24 || +e.y > 384)) continue;
             const id = `${e.wave}:${e.lane}:${e.id}`;
             if(!tracks[id]){
               tracks[id] = {
@@ -878,10 +1051,30 @@ async function main(){
     .map(item => scoreMeasuredCandidate(item, labels))
     .sort((a, b) => b.selectionScore10 - a.selectionScore10 || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0) || a.candidateId.localeCompare(b.candidateId));
   const baseline = scored.find(row => row.candidateId === 'baseline-current') || scored.at(-1);
-  const best = scored[0];
+  const baselineExpectedScore = baseline.expectedMatch?.score10 || 0;
+  const baselineTargetVideoScore = baseline.targetVideoObjectFit?.score10 || 0;
+  const promotionCandidates = scored.filter(candidate => {
+    const candidateExpectedLift = round((candidate.expectedMatch?.score10 || 0) - baselineExpectedScore, 2);
+    const candidateTargetVideoLift = round((candidate.targetVideoObjectFit?.score10 || 0) - baselineTargetVideoScore, 2);
+    const candidateTargetVideoComparable = Number.isFinite(+(baseline.targetVideoObjectFit?.score10)) && Number.isFinite(+(candidate.targetVideoObjectFit?.score10));
+    const candidateNoTargetRegression = !candidateTargetVideoComparable || candidateTargetVideoLift >= -0.05;
+    const intendedStageSupported = candidate.expectedReferenceHit || (candidateExpectedLift >= 0.25 && candidateTargetVideoLift >= 0.25);
+    return candidate.noSafetyRegression
+      && candidateNoTargetRegression
+      && intendedStageSupported
+      && (candidateExpectedLift >= 0.35 || candidateTargetVideoLift >= 0.35 || (candidateExpectedLift >= 0.25 && candidateTargetVideoLift >= 0.25));
+  }).sort((a, b) => {
+    const aLift = ((a.expectedMatch?.score10 || 0) - baselineExpectedScore) + ((a.targetVideoObjectFit?.score10 || 0) - baselineTargetVideoScore);
+    const bLift = ((b.expectedMatch?.score10 || 0) - baselineExpectedScore) + ((b.targetVideoObjectFit?.score10 || 0) - baselineTargetVideoScore);
+    return bLift - aLift || b.selectionScore10 - a.selectionScore10 || a.candidateId.localeCompare(b.candidateId);
+  });
+  const best = promotionCandidates[0] || scored[0];
   const expectedLift = round((best.expectedMatch?.score10 || 0) - (baseline.expectedMatch?.score10 || 0), 2);
   const targetVideoLift = round((best.targetVideoObjectFit?.score10 || 0) - (baseline.targetVideoObjectFit?.score10 || 0), 2);
-  const keeper = best.expectedReferenceHit && best.noSafetyRegression && (expectedLift >= 0.35 || targetVideoLift >= 0.35);
+  const targetVideoComparable = Number.isFinite(+(baseline.targetVideoObjectFit?.score10)) && Number.isFinite(+(best.targetVideoObjectFit?.score10));
+  const noTargetVideoRegression = !targetVideoComparable || targetVideoLift >= -0.05;
+  const intendedStageSupported = best.expectedReferenceHit || (expectedLift >= 0.25 && targetVideoLift >= 0.25);
+  const keeper = best.noSafetyRegression && noTargetVideoRegression && intendedStageSupported && (expectedLift >= 0.35 || targetVideoLift >= 0.35 || (expectedLift >= 0.25 && targetVideoLift >= 0.25));
   const report = {
     schemaVersion: 1,
     artifactType: 'challenge-stage-candidate-sweep',
@@ -905,6 +1098,8 @@ async function main(){
       bestMatch: best.bestMatch,
       expectedLift10: expectedLift,
       targetVideoObjectFitLift10: targetVideoLift,
+      targetVideoComparable,
+      noTargetVideoRegression,
       keeperDecision: keeper ? 'keeper-ready-for-runtime-review' : 'no-runtime-keeper-yet',
       playerMeaning: keeper
         ? `A measured stage-${STAGE} layout candidate now better matches the expected Galaga challenge reference while keeping challenge stages safe.`
