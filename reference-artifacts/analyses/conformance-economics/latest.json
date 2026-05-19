@@ -1,25 +1,25 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics",
-  "generatedAt": "2026-05-19T10:56:53.939Z",
+  "generatedAt": "2026-05-19T11:30:22.343Z",
   "branch": "codex/macbook-conformance-investment-review",
-  "commit": "fda97ed9",
+  "commit": "8f1d8190",
   "problem": "Plan conformance work by comparing score gains, evidence uncertainty reduction, and compute/resource expenditure.",
   "strategy": "Combine conformance score history, artifact-volume proxies, and measured command ledger entries into ROI-oriented charts.",
   "successMeasure": "Each major work cycle can report metric movement, compute cost, resource class, and whether the gain was gameplay-facing or measurement-facing.",
   "ledgerPath": "reference-artifacts/analyses/conformance-economics/run-ledger.jsonl",
   "summary": {
-    "metricPointCount": 1970,
+    "metricPointCount": 1993,
     "axisCount": 31,
     "deltaCount": 162,
     "latestOverallScore10": 8.8,
     "latestLevelArcScore10": 8.8,
     "costEfficiencyAxisCount": 126,
     "ledger": {
-      "runs": 834,
-      "wallSeconds": 56825.197,
-      "cpuSeconds": 56446.75,
-      "artifactBytes": 1329641161,
+      "runs": 848,
+      "wallSeconds": 57086.332,
+      "cpuSeconds": 56811.18,
+      "artifactBytes": 1426423309,
       "byResource": {
         "cpu": {
           "runs": 810,
@@ -27,9 +27,9 @@
           "cpuSeconds": 53660.48
         },
         "browser": {
-          "runs": 290,
-          "wallSeconds": 24365.546,
-          "cpuSeconds": 37664.86
+          "runs": 304,
+          "wallSeconds": 24626.681,
+          "cpuSeconds": 38029.29
         },
         "gpu": {
           "runs": 1,
@@ -627,6 +627,11 @@
           "runs": 1,
           "wallSeconds": 381.192,
           "cpuSeconds": 793.04
+        },
+        "challenge-set-piece": {
+          "runs": 14,
+          "wallSeconds": 261.135,
+          "cpuSeconds": 364.43
         }
       },
       "modelUsage": {
@@ -28430,6 +28435,329 @@
         "label": "UI, shell, and graphics integrity",
         "read": "The bundled front-door, panel, dock, graphics, attract, leaderboard, and audio shell surface suite passed."
       }
+    },
+    {
+      "axis": "level-arc",
+      "score10": 8.8,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.182Z",
+      "report": "reference-artifacts/analyses/level-arc-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/level-arc-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 7875,
+      "details": {
+        "weakestSubmetric": "long-run-non-repetition",
+        "pressureReplayCoverage": 0,
+        "pressureCollisionReplayCoverage": 0
+      }
+    },
+    {
+      "axis": "level-arc:stage-distinctiveness",
+      "score10": 10,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.182Z",
+      "report": "reference-artifacts/analyses/level-arc-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/level-arc-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 7875,
+      "details": {
+        "label": "Stage distinctiveness",
+        "read": "6/6 stage families are blueprinted and 11/6 target evidence windows are present; stage-signature distinct pair ratio is 1."
+      }
+    },
+    {
+      "axis": "level-arc:challenge-stage-identity",
+      "score10": 9.3,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.182Z",
+      "report": "reference-artifacts/analyses/level-arc-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/level-arc-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 7875,
+      "details": {
+        "label": "Challenge-stage identity",
+        "read": "5/5 challenge timing checks pass and 3/3 content layers are blueprinted; opportunity-window readiness is 7.8/10."
+      }
+    },
+    {
+      "axis": "level-arc:movement-grammar-expansion",
+      "score10": 10,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.182Z",
+      "report": "reference-artifacts/analyses/level-arc-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/level-arc-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 7875,
+      "details": {
+        "label": "Movement grammar expansion",
+        "read": "Later-level entry, escort, regrouping, and challenge-path grammar is planned; the stage-signature distance score is 10/10."
+      }
+    },
+    {
+      "axis": "level-arc:pressure-curve-over-time",
+      "score10": 7.5,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.182Z",
+      "report": "reference-artifacts/analyses/level-arc-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/level-arc-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 7875,
+      "details": {
+        "label": "Pressure curve over time",
+        "read": "3/3 source pressure/loss windows are found, but 0 reproduce as exact losses under replay. Pressure-collision replay diagnostics classify 0 as same-window or exact collision pressure."
+      }
+    },
+    {
+      "axis": "level-arc:boss-reward-opportunity",
+      "score10": 8.1,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.182Z",
+      "report": "reference-artifacts/analyses/level-arc-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/level-arc-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 7875,
+      "details": {
+        "label": "Boss and reward opportunity design",
+        "read": "3/3 capture/rescue scenarios match; level-arc opportunity windows show mean reward/opportunity signal 3.8/10."
+      }
+    },
+    {
+      "axis": "level-arc:boss-entry-formation-grammar",
+      "score10": 9.3,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.182Z",
+      "report": "reference-artifacts/analyses/level-arc-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/level-arc-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 7875,
+      "details": {
+        "label": "Boss entry and formation grammar",
+        "read": "Boss/formation grammar scores 9.4/10; weakest metric is Path shape and set-formation precision (8.2/10)."
+      }
+    },
+    {
+      "axis": "level-arc:learning-mastery-windows",
+      "score10": 8.8,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.182Z",
+      "report": "reference-artifacts/analyses/level-arc-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/level-arc-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 7875,
+      "details": {
+        "label": "Learning and mastery windows",
+        "read": "19/20 persona checks pass; progression ordering is not fully preserved."
+      }
+    },
+    {
+      "axis": "level-arc:long-run-non-repetition",
+      "score10": 6,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.182Z",
+      "report": "reference-artifacts/analyses/level-arc-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/level-arc-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 7875,
+      "details": {
+        "label": "Long-run non-repetition",
+        "read": "Stage-signature repetition risk is 0; closest pair is late-run-crown-entry / late-run-escort-variant."
+      }
+    },
+    {
+      "axis": "overall-quality",
+      "score10": 8.8,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.394Z",
+      "report": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 72285,
+      "details": {
+        "strongest": "movement",
+        "weakest": "challenge-set-piece"
+      }
+    },
+    {
+      "axis": "quality:movement",
+      "score10": 10,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.394Z",
+      "report": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 72285,
+      "details": {
+        "label": "Player movement conformance",
+        "read": "Current movement scored 10/10 against the control-principles profile, versus 10/10 for the shipped local baseline."
+      }
+    },
+    {
+      "axis": "quality:combat-responsiveness",
+      "score10": 10,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.394Z",
+      "report": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 72285,
+      "details": {
+        "label": "Shot and hit responsiveness",
+        "read": "Close-shot responsiveness passed, and movement-fire post-shot travel was 46.44, with shot delay 6ms."
+      }
+    },
+    {
+      "axis": "quality:stage1-timing",
+      "score10": 8.5,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.394Z",
+      "report": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 72285,
+      "details": {
+        "label": "Stage-1 opening timing fidelity",
+        "read": "4/4 metrics were within tolerance; worst current delta was 0.18."
+      }
+    },
+    {
+      "axis": "quality:stage1-geometry",
+      "score10": 10,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.394Z",
+      "report": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 72285,
+      "details": {
+        "label": "Stage-1 opening geometry fidelity",
+        "read": "Geometry held steady with 0 changed targets and max drift 0."
+      }
+    },
+    {
+      "axis": "quality:dive-safety",
+      "score10": 9.1,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.394Z",
+      "report": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 72285,
+      "details": {
+        "label": "Dive fairness and safety",
+        "read": "Shared stage-2 safety seeds passed, which keeps the early dive/collision windows within the intended persona guardrail."
+      }
+    },
+    {
+      "axis": "quality:capture-rescue",
+      "score10": 10,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.394Z",
+      "report": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 72285,
+      "details": {
+        "label": "Capture and rescue rule fidelity",
+        "read": "3/3 capture scenarios matched, with worst tracked-time drift 0.004."
+      }
+    },
+    {
+      "axis": "quality:challenge-timing",
+      "score10": 10,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.394Z",
+      "report": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 72285,
+      "details": {
+        "label": "Challenge-stage timing fidelity",
+        "read": "5/5 challenge timing metrics were within tolerance; worst current delta was 0.032."
+      }
+    },
+    {
+      "axis": "quality:challenge-set-piece",
+      "score10": 4.2,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.394Z",
+      "report": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 72285,
+      "details": {
+        "label": "Challenge-stage set-piece conformance",
+        "read": "Strict challenge-stage score is 4.2/10 with movement 4.3/10, graphics 4.4/10, alien novelty 3.9/10, and safety 10/10. current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.3/10, strict graphics is 4.4/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.5/10, target-video object-track fit is 3.4/10, and active sprite-motion still needs Galaga target-crop sequence comparison. Diagnostic legacy coverage was 6.8/10, which is why the old read was too generous."
+      }
+    },
+    {
+      "axis": "quality:progression",
+      "score10": 8.4,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.394Z",
+      "report": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 72285,
+      "details": {
+        "label": "Progression and persona depth",
+        "read": "19/20 persona checks passed; progression ordering is still missing one ordering edge case."
+      }
+    },
+    {
+      "axis": "quality:formation-boss-grammar",
+      "score10": 9.4,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.394Z",
+      "report": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 72285,
+      "details": {
+        "label": "Boss entry and formation grammar",
+        "read": "Boss/formation grammar scores 9.4/10 across 11 evidence windows; weakest metric is Path shape and set-formation precision (8.2/10)."
+      }
+    },
+    {
+      "axis": "quality:level-arc",
+      "score10": 8.8,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.394Z",
+      "report": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 72285,
+      "details": {
+        "label": "Level arc and encounter shape",
+        "read": "Level arc score is 8.8/10 with 6/6 stage families blueprinted and 11/6 evidence windows present; weakest submetric is Long-run non-repetition (6/10)."
+      }
+    },
+    {
+      "axis": "quality:audio",
+      "score10": 7.3,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.394Z",
+      "report": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 72285,
+      "details": {
+        "label": "Audio identity and cue alignment",
+        "read": "Audio score blends cue identity, active reference similarity, reference-window precision, overlap timing, cue alignment, semantic event mapping, and acoustic event-gap severity. 0/21 reference windows still need tighter segmentation; 25 candidate subwindows were found; semantic event score is 9.78/10, acoustic event score is 6.53/10, and highest segment risk is challengePerfect onset."
+      }
+    },
+    {
+      "axis": "quality:ui-shell",
+      "score10": 9.2,
+      "commit": "8f1d8190",
+      "date": "2026-05-19",
+      "generatedAt": "2026-05-19T11:29:59.394Z",
+      "report": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190/report.json",
+      "artifactDir": "reference-artifacts/analyses/quality-conformance/2026-05-19-8f1d8190",
+      "artifactBytes": 72285,
+      "details": {
+        "label": "UI, shell, and graphics integrity",
+        "read": "The bundled front-door, panel, dock, graphics, attract, leaderboard, and audio shell surface suite passed."
+      }
     }
   ],
   "deltas": [
@@ -30274,6 +30602,20 @@
       "attribution": "tracked-spend-and-score-movement"
     },
     {
+      "axis": "challenge-set-piece",
+      "runs": 14,
+      "wallMinutes": 4.352,
+      "cpuMinutes": 6.074,
+      "positiveScore10": 1.7,
+      "negativeScore10": 0,
+      "deltaCount": 7,
+      "largestPositiveDelta10": 0.6,
+      "largestNegativeDelta10": 0,
+      "wallMinutesPerPositiveScore10": 2.56,
+      "cpuMinutesPerPositiveScore10": 3.57,
+      "attribution": "tracked-spend-and-score-movement"
+    },
+    {
       "axis": "audio",
       "runs": 309,
       "wallMinutes": 253.734,
@@ -30394,20 +30736,6 @@
       "negativeScore10": 0,
       "deltaCount": 4,
       "largestPositiveDelta10": 1.1,
-      "largestNegativeDelta10": 0,
-      "wallMinutesPerPositiveScore10": null,
-      "cpuMinutesPerPositiveScore10": null,
-      "attribution": "historical-score-movement-without-tracked-spend"
-    },
-    {
-      "axis": "challenge-set-piece",
-      "runs": 0,
-      "wallMinutes": 0,
-      "cpuMinutes": 0,
-      "positiveScore10": 1.7,
-      "negativeScore10": 0,
-      "deltaCount": 7,
-      "largestPositiveDelta10": 0.6,
       "largestNegativeDelta10": 0,
       "wallMinutesPerPositiveScore10": null,
       "cpuMinutesPerPositiveScore10": null,
@@ -32047,8 +32375,8 @@
         "wallSeconds": 30250.28,
         "wallMinutes": 504.17,
         "cpuSeconds": 48646.62,
-        "share": 0.8661,
-        "sharePercent": 86.6,
+        "share": 0.8597,
+        "sharePercent": 86,
         "examples": [
           "Stage4 lane2 after bounded column5 cue",
           "Stage4 lane2 source-exact scenario after cue",
@@ -32058,12 +32386,12 @@
       },
       {
         "purpose": "Gameplay behavior and level complexity",
-        "runs": 292,
-        "wallSeconds": 4045.105,
-        "wallMinutes": 67.42,
-        "cpuSeconds": 7070.77,
-        "share": 0.1158,
-        "sharePercent": 11.6,
+        "runs": 306,
+        "wallSeconds": 4306.24,
+        "wallMinutes": 71.77,
+        "cpuSeconds": 7435.2,
+        "share": 0.1224,
+        "sharePercent": 12.2,
         "examples": [
           "Stage4 lane2 action precision baseline",
           "Stage4 lane2 action precision baseline",
@@ -32077,7 +32405,7 @@
         "wallSeconds": 610.144,
         "wallMinutes": 10.17,
         "cpuSeconds": 704.93,
-        "share": 0.0175,
+        "share": 0.0173,
         "sharePercent": 1.7,
         "examples": [
           "quality score after cadence generator no-keeper cycle",
@@ -32176,7 +32504,7 @@
     ],
     "totals": {
       "gpuEquivalentWallSeconds": 21947.178,
-      "cpuLocalWallSeconds": 34925.197,
+      "cpuLocalWallSeconds": 35186.332,
       "positiveScore10Attributed": 66.9
     },
     "limitations": [
@@ -32186,10 +32514,10 @@
     ]
   },
   "ledgerSummary": {
-    "runs": 834,
-    "wallSeconds": 56825.197,
-    "cpuSeconds": 56446.75,
-    "artifactBytes": 1329641161,
+    "runs": 848,
+    "wallSeconds": 57086.332,
+    "cpuSeconds": 56811.18,
+    "artifactBytes": 1426423309,
     "byResource": {
       "cpu": {
         "runs": 810,
@@ -32197,9 +32525,9 @@
         "cpuSeconds": 53660.48
       },
       "browser": {
-        "runs": 290,
-        "wallSeconds": 24365.546,
-        "cpuSeconds": 37664.86
+        "runs": 304,
+        "wallSeconds": 24626.681,
+        "cpuSeconds": 38029.29
       },
       "gpu": {
         "runs": 1,
@@ -32797,6 +33125,11 @@
         "runs": 1,
         "wallSeconds": 381.192,
         "cpuSeconds": 793.04
+      },
+      "challenge-set-piece": {
+        "runs": 14,
+        "wallSeconds": 261.135,
+        "cpuSeconds": 364.43
       }
     },
     "modelUsage": {

@@ -1,14 +1,14 @@
 # Challenge Stage Conformance Analysis
 
-Generated: 2026-05-19T04:15:21.961Z
-Commit: fda97ed9
+Generated: 2026-05-19T11:24:55.915Z
+Commit: 8f1d8190
 Branch: codex/macbook-conformance-investment-review
 
 ## Executive Summary
 
 This is now a strict challenge-stage readout. The prior alien-entry score looked too healthy because it rewarded coverage, type labels, and broad stage signatures. That was useful harness progress, but it overstated the player-facing experience. This report follows the current project decision that challenging stages start at **1/10 interesting**, **1/10 movement**, and **1/10 graphical conformance** until they earn credit through reference-grounded movement, active visual evidence, alien/stage novelty, and durable bonus-stage contracts.
 
-Current result: **4.2/10 interesting factor** and **4.2/10 challenge-stage conformance**. Movement is **4.3/10**, graphical conformance is **4.4/10**, alien/stage novelty is **3.9/10**, and player shot opportunity is **5.5/10**. The strongest rule finding is that current probes show no enemy shots, no attack starts, and no ship losses during sampled challenge windows. The weakest player-facing finding is that current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.3/10, strict graphics is 4.4/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.5/10, target-video object-track fit is 3.5/10, and active sprite-motion still needs Galaga target-crop sequence comparison. Diagnostic legacy coverage was 6.8/10, which is why the old read was too generous.
+Current result: **4.2/10 interesting factor** and **4.2/10 challenge-stage conformance**. Movement is **4.3/10**, graphical conformance is **4.4/10**, alien/stage novelty is **3.9/10**, and player shot opportunity is **5.5/10**. The strongest rule finding is that current probes show no enemy shots, no attack starts, and no ship losses during sampled challenge windows. The weakest player-facing finding is that current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.3/10, strict graphics is 4.4/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.5/10, target-video object-track fit is 3.4/10, and active sprite-motion still needs Galaga target-crop sequence comparison. Diagnostic legacy coverage was 6.8/10, which is why the old read was too generous.
 
 ## Method
 
@@ -46,37 +46,37 @@ Full target-artifact report: `GALAGA_TARGET_ARTIFACT_COVERAGE.md` and `reference
 
 | Stage | Challenge | Interest | Movement | Graphics | Alien Novelty | Shot Opportunity | Strict Score | Diagnostic Best Reference | No-Shot/No-Kill | Critical Gap |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
-| 3 | 1 | 4.1/10 | 4/10 | 4.3/10 | 3.9/10 | 5.6/10 | 4.1/10 | challenge-1-arrival-group-1 (8.1/10 legacy) | pass | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns. |
+| 3 | 1 | 4.2/10 | 4.2/10 | 4.3/10 | 3.9/10 | 5.8/10 | 4.2/10 | challenge-1-arrival-group-1 (8.5/10 legacy) | pass | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns. |
 | 7 | 2 | 4.2/10 | 4.3/10 | 4/10 | 3.9/10 | 5.5/10 | 4.1/10 | challenge-2-arrival-group-1 (8.9/10 legacy) | pass | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.<br>Cross-sweep identity now lands on the expected Challenge 2 reference family; next work is trajectory precision and active visual novelty, not basic identity. |
 | 11 | 3 | 4.3/10 | 4.3/10 | 4.5/10 | 3.9/10 | 5.6/10 | 4.3/10 | challenge-3-arrival-group-1 (8.9/10 legacy) | pass | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.<br>Dragonfly/boss-led identity now lands on the expected Challenge 3 reference family, but sprite-motion novelty and tracked Galaga challenge-3 path phases are not yet scored. |
 | 15 | 4 | 4.3/10 | 4.3/10 | 4.5/10 | 3.9/10 | 5.5/10 | 4.2/10 | challenge-4-pink-serpentine-group-1 (8.9/10 legacy) | pass | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.<br>Target-contract fit is only 4.5/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.<br>Pink-serpentine identity now lands on its first-pass late reference, but it still needs five-group frame labels, target sprite-motion evidence, and stronger player-visible novelty before it can claim maturity. |
 | 19 | 5 | 4.4/10 | 4.6/10 | 4.5/10 | 3.9/10 | 5.5/10 | 4.3/10 | challenge-5-pink-green-cascade-group-4 (9.7/10 legacy) | pass | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.<br>Target-contract fit is only 4.3/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.<br>Pink/green cascade identity now lands on its first-pass late reference, but the current window still needs five group labels and stronger lower-field route readability. |
 | 23 | 6 | 4.2/10 | 4.3/10 | 4.4/10 | 3.9/10 | 5.9/10 | 4.2/10 | challenge-6-green-ladder-split-group-1 (8.9/10 legacy) | pass | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.<br>Target-contract fit is only 4.6/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.<br>Green-ladder split now lands on a Challenge 6 ladder/split reference; remaining work is fuller path length, lower reversal noise, and object-tracked group timing. |
-| 27 | 7 | 4/10 | 4.2/10 | 4.3/10 | 3.9/10 | 4.5/10 | 4/10 | challenge-7-yellow-diagonal-fan-group-4 (8.8/10 legacy) | pass | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.<br>Target-contract fit is only 4.7/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.<br>Yellow diagonal fan now lands on a Challenge 7 diagonal-fan reference; remaining work is stronger lower-field travel and object-tracked diagonal lane timing. |
+| 27 | 7 | 4/10 | 4.2/10 | 4.4/10 | 3.9/10 | 4.5/10 | 4/10 | challenge-7-yellow-diagonal-fan-group-4 (8.8/10 legacy) | pass | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.<br>Target-contract fit is only 4.7/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.<br>Yellow diagonal fan now lands on a Challenge 7 diagonal-fan reference; remaining work is stronger lower-field travel and object-tracked diagonal lane timing. |
 | 31 | 8 | 4.3/10 | 4.4/10 | 4.5/10 | 3.9/10 | 5.6/10 | 4.3/10 | challenge-8-blue-purple-finale-group-4 (9.2/10 legacy) | pass | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.<br>Target-contract fit is only 4.3/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.<br>Blue/purple finale is now represented as its own runtime contract, but it still needs fuller path length and active sprite-motion evidence before it feels like a late-loop capstone. |
 
 
 ## Stage 3 / Challenge 1
 
-**Current score:** interesting factor 4.1/10; challenge conformance 4.1/10. Movement 4/10, graphics 4.3/10, alien novelty 3.9/10, progression 3.2/10, player shot opportunity 5.6/10.
+**Current score:** interesting factor 4.2/10; challenge conformance 4.2/10. Movement 4.2/10, graphics 4.3/10, alien novelty 3.9/10, progression 3.2/10, player shot opportunity 5.8/10.
 
-**Legacy broad coverage score:** 6.3/10. This is retained as diagnostic evidence only; it no longer counts as the player-facing conformance score.
+**Legacy broad coverage score:** 6.4/10. This is retained as diagnostic evidence only; it no longer counts as the player-facing conformance score.
 
 **Original target:** First Galaga-style challenging stage: readable bonus set piece, no fire, no ship loss, upper-band mirrored entries, bee/butterfly line waves, visible arrival/peel-off.
 
-**Aurora current:** first-challenge-peel / first-challenge-peel; lanes bee, bee, bee, bee, but, but, but, but; first-wave types bee, bee, bee, bee, but, but, but, but; visual families classic; strict movement 4/10, graphics 4.3/10, alien novelty 3.9/10, shot opportunity 5.6/10, target-contract fit 6.9/10.
+**Aurora current:** first-challenge-peel / first-challenge-peel; lanes bee, bee, bee, bee, but, but, but, but; first-wave types bee, bee, bee, bee, but, but, but, but; visual families classic; strict movement 4.2/10, graphics 4.3/10, alien novelty 3.9/10, shot opportunity 5.8/10, target-contract fit 6.8/10.
 
-**Graphics read:** Strict graphics score 4.3/10. Current visible family/type labels are present, Direct runtime-vs-Galaga target-crop comparator reads 4.48/10 overall and 4.46/10 for challenge specialty sprites; weakest challenge crop is challenge-dragonfly at 4.46/10. Runtime sprite-motion hook observed 1 visual family/families, 3 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 36 object-tracked silhouette track(s). Graphics remain capped at 4.8/10 until object tracks are compared as full temporal Galaga target-crop sequences, rotations, dive poses, and capture/rescue transitions.
+**Graphics read:** Strict graphics score 4.3/10. Current visible family/type labels are present, Direct runtime-vs-Galaga target-crop comparator reads 4.48/10 overall and 4.46/10 for challenge specialty sprites; weakest challenge crop is challenge-dragonfly at 4.46/10. Runtime sprite-motion hook observed 1 visual family/families, 3 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 40 object-tracked silhouette track(s). Graphics remain capped at 4.8/10 until object tracks are compared as full temporal Galaga target-crop sequences, rotations, dive poses, and capture/rescue transitions.
 
-**Movement read:** Strict movement score 4/10 against challenge-1-arrival-group-1: y-range fit 1, path-length fit 0.8, turn fit 1, object-track fit 0.32. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.1/10 against challenge-1-arrival-group-1; xRange 0.7867, yRange 0.5443, pathLength 0.5468.
+**Movement read:** Strict movement score 4.2/10 against challenge-1-arrival-group-1: y-range fit 1, path-length fit 1, turn fit 1, object-track fit 0.22. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.5/10 against challenge-1-arrival-group-1; xRange 0.8039, yRange 0.871, pathLength 0.8953.
 
 **Alien variation read:** Strict alien/progression novelty score 3.9/10. Current stages expose labels, type mixes, direct specialty-sprite target-crop evidence, and 1 visual family/families, but this does not yet prove Galaga-like stage-by-stage introduction, fresh featured aliens, or memorable bonus-stage teaching moments. Opening wave exposes 2 type(s) and classic visual family labels. Group identity diagnostic: 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.39s.
 
 **Group identity read:** 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.39s.
 
-**Target contract read:** Target contract fit is 6.9/10 for Challenging Stage 1 (Levels 3-4): group count 1, path-family order 1, type order 1, family order 1, object-track 0.32 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.
+**Target contract read:** Target contract fit is 6.8/10 for Challenging Stage 1 (Levels 3-4): group count 1, path-family order 1, type order 1, family order 1, object-track 0.22 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.
 
-**Shot-opportunity read:** Shot-opportunity probe found scoreable targets in 41 sampled windows; 71% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.29.
+**Shot-opportunity read:** Shot-opportunity probe found scoreable targets in 44 sampled windows; 86% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.33.
 
 **Safety rule:** enemy shots 0, attack starts 0, ship losses 0.
 
@@ -258,15 +258,15 @@ Full target-artifact report: `GALAGA_TARGET_ARTIFACT_COVERAGE.md` and `reference
 
 ## Stage 27 / Challenge 7
 
-**Current score:** interesting factor 4/10; challenge conformance 4/10. Movement 4.2/10, graphics 4.3/10, alien novelty 3.9/10, progression 2.7/10, player shot opportunity 4.5/10.
+**Current score:** interesting factor 4/10; challenge conformance 4/10. Movement 4.2/10, graphics 4.4/10, alien novelty 3.9/10, progression 2.7/10, player shot opportunity 4.5/10.
 
 **Legacy broad coverage score:** 6.8/10. This is retained as diagnostic evidence only; it no longer counts as the player-facing conformance score.
 
 **Original target:** Seventh challenge should introduce a yellow diagonal fan with a memorable scoring lane.
 
-**Aurora current:** yellow-diagonal-fan / yellow-diagonal-fan; lanes boss, bee, but, rogue, rogue, but, bee, boss; first-wave types boss, bee, but, rogue, rogue, but, bee, boss; visual families crown; strict movement 4.2/10, graphics 4.3/10, alien novelty 3.9/10, shot opportunity 4.5/10, target-contract fit 4.7/10.
+**Aurora current:** yellow-diagonal-fan / yellow-diagonal-fan; lanes boss, bee, but, rogue, rogue, but, bee, boss; first-wave types boss, bee, but, rogue, rogue, but, bee, boss; visual families crown; strict movement 4.2/10, graphics 4.4/10, alien novelty 3.9/10, shot opportunity 4.5/10, target-contract fit 4.7/10.
 
-**Graphics read:** Strict graphics score 4.3/10. Current visible family/type labels are present, Direct runtime-vs-Galaga target-crop comparator reads 4.48/10 overall and 4.46/10 for challenge specialty sprites; weakest challenge crop is challenge-dragonfly at 4.46/10. Runtime sprite-motion hook observed 1 visual family/families, 1 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 18 object-tracked silhouette track(s). Graphics remain capped at 4.8/10 until object tracks are compared as full temporal Galaga target-crop sequences, rotations, dive poses, and capture/rescue transitions.
+**Graphics read:** Strict graphics score 4.4/10. Current visible family/type labels are present, Direct runtime-vs-Galaga target-crop comparator reads 4.48/10 overall and 4.46/10 for challenge specialty sprites; weakest challenge crop is challenge-dragonfly at 4.46/10. Runtime sprite-motion hook observed 1 visual family/families, 1 path pose family/families, 6/6 animation phase buckets, both flap state(s), and 18 object-tracked silhouette track(s). Graphics remain capped at 4.8/10 until object tracks are compared as full temporal Galaga target-crop sequences, rotations, dive poses, and capture/rescue transitions.
 
 **Movement read:** Strict movement score 4.2/10 against challenge-7-yellow-diagonal-fan-group-4: y-range fit 0.73, path-length fit 1, turn fit 1, object-track fit 0.38. Current probes now include runtime object tracks compared against CPU-extracted Galaga target-video object tracks where available. Legacy broad vector best-match was 8.8/10 against challenge-7-yellow-diagonal-fan-group-4; xRange 1.0287, yRange 0.4809, pathLength 1.403.
 

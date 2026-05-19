@@ -230,6 +230,7 @@ function currentGamePackChallengeLayout(stage){
    groupSpawnOffsets:Array.isArray(overrideLayout.groupSpawnOffsets)?overrideLayout.groupSpawnOffsets:(layout?.groupSpawnOffsets||[]),
    groupArcAmps:Array.isArray(overrideLayout.groupArcAmps)?overrideLayout.groupArcAmps:(layout?.groupArcAmps||[]),
    groupDropAmps:Array.isArray(overrideLayout.groupDropAmps)?overrideLayout.groupDropAmps:(layout?.groupDropAmps||[]),
+   groupLowerFieldBiases:Array.isArray(overrideLayout.groupLowerFieldBiases)?overrideLayout.groupLowerFieldBiases:(layout?.groupLowerFieldBiases||[]),
    groupSpeedScales:Array.isArray(overrideLayout.groupSpeedScales)?overrideLayout.groupSpeedScales:(layout?.groupSpeedScales||[])
   });
  }

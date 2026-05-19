@@ -658,6 +658,32 @@ function candidateBaseLayout(){
       groupPathFamilies: ['pink-serpentine','pink-serpentine','green-ladder-split','pink-serpentine','pink-green-cascade']
     };
   }
+  if(STAGE === 19){
+    return {
+      id: 'pink-green-cascade',
+      pathFamily: 'pink-green-cascade',
+      groups: 5,
+      enemiesPerGroup: 8,
+      upperBandRatio: 0.42,
+      spawnOffsetX: 76,
+      waveSpacingY: 9,
+      rowSpacingY: 8,
+      waveDelay: 1.1,
+      slotDelay: 0.085,
+      arcAmp: 1.86,
+      dropAmp: 1.22,
+      laneTypes: ['rogue','boss','but','bee','boss','but','bee','rogue'],
+      groupLaneTypes: [
+        ['rogue','boss','but','bee','boss','but','bee','rogue'],
+        ['boss','but','bee','rogue','rogue','bee','but','boss'],
+        ['bee','rogue','boss','but','but','boss','rogue','bee'],
+        ['but','bee','rogue','boss','boss','rogue','bee','but'],
+        ['boss','rogue','bee','but','but','bee','rogue','boss']
+      ],
+      groupVisualFamilies: ['galboss','dragonfly','crown','dragonfly','galboss'],
+      groupPathFamilies: ['pink-green-cascade','green-ladder-split','pink-green-cascade','pink-serpentine','pink-green-cascade']
+    };
+  }
   if(STAGE === 23){
     return {
       id: 'green-ladder-split',
@@ -713,6 +739,32 @@ function candidateBaseLayout(){
       groupPathFamilies: ['yellow-diagonal-fan','yellow-diagonal-fan','yellow-diagonal-fan','yellow-diagonal-fan','yellow-diagonal-fan']
     };
   }
+  if(STAGE === 31){
+    return {
+      id: 'blue-purple-finale',
+      pathFamily: 'blue-purple-finale',
+      groups: 5,
+      enemiesPerGroup: 8,
+      upperBandRatio: 0.4,
+      spawnOffsetX: 86,
+      waveSpacingY: 8,
+      rowSpacingY: 7,
+      waveDelay: 0.96,
+      slotDelay: 0.07,
+      arcAmp: 1.8,
+      dropAmp: 1.26,
+      laneTypes: ['rogue','boss','bee','but','but','bee','boss','rogue'],
+      groupLaneTypes: [
+        ['rogue','boss','bee','but','but','bee','boss','rogue'],
+        ['boss','rogue','but','bee','bee','but','rogue','boss'],
+        ['bee','but','boss','rogue','rogue','boss','but','bee'],
+        ['but','bee','rogue','boss','boss','rogue','bee','but'],
+        ['boss','but','rogue','bee','bee','rogue','but','boss']
+      ],
+      groupVisualFamilies: ['stingray','mosquito','stingray','mosquito','galboss'],
+      groupPathFamilies: ['blue-purple-finale','green-ladder-split','blue-purple-finale','yellow-diagonal-fan','blue-purple-finale']
+    };
+  }
   return {
     id: 'stingray-crown-hook-hybrid',
     pathFamily: 'hook-arc',
@@ -746,6 +798,7 @@ function candidateDefinitions(){
     const spawnValues = STAGE === 3 ? [56, 72] : [62, 78];
     const waveValues = STAGE === 3 ? [1.42, 1.68] : [1.28, 1.56];
     const slotValues = STAGE === 3 ? [0.1, 0.15] : [0.09, 0.14];
+    const lowerBiasValues = STAGE === 3 ? [0, 20, 40, 60] : [0, 24, 48, 72];
     const pathSets = STAGE === 3
       ? [
         ['first-challenge-peel','classic-column-drop','classic-column-drop','side-hook-return','first-challenge-peel'],
@@ -767,19 +820,22 @@ function candidateDefinitions(){
         for(const spawnOffsetX of spawnValues){
           for(const waveDelay of waveValues){
             for(const slotDelay of slotValues){
-              for(let pathIndex = 0; pathIndex < pathSets.length; pathIndex += 1){
-                candidates.push({
-                  id: `stage${STAGE}-a${String(arcAmp).replace('.','')}-d${String(dropAmp).replace('.','')}-x${spawnOffsetX}-w${String(waveDelay).replace('.','')}-s${String(slotDelay).replace('.','')}-p${pathIndex}`,
-                  description: `Stage ${STAGE} sweep: arc ${arcAmp}, drop ${dropAmp}, spawn ${spawnOffsetX}, wave ${waveDelay}, slot ${slotDelay}, path set ${pathIndex}.`,
-                  layoutOverride: Object.assign({}, base, {
-                    arcAmp,
-                    dropAmp,
-                    spawnOffsetX,
-                    waveDelay,
-                    slotDelay,
-                    groupPathFamilies: pathSets[pathIndex]
-                  })
-                });
+              for(const lowerFieldBias of lowerBiasValues){
+                for(let pathIndex = 0; pathIndex < pathSets.length; pathIndex += 1){
+                  candidates.push({
+                    id: `stage${STAGE}-a${String(arcAmp).replace('.','')}-d${String(dropAmp).replace('.','')}-x${spawnOffsetX}-w${String(waveDelay).replace('.','')}-s${String(slotDelay).replace('.','')}-lb${lowerFieldBias}-p${pathIndex}`,
+                    description: `Stage ${STAGE} sweep: arc ${arcAmp}, drop ${dropAmp}, spawn ${spawnOffsetX}, wave ${waveDelay}, slot ${slotDelay}, lower-field bias ${lowerFieldBias}, path set ${pathIndex}.`,
+                    layoutOverride: Object.assign({}, base, {
+                      arcAmp,
+                      dropAmp,
+                      spawnOffsetX,
+                      waveDelay,
+                      slotDelay,
+                      lowerFieldBias,
+                      groupPathFamilies: pathSets[pathIndex]
+                    })
+                  });
+                }
               }
             }
           }
@@ -823,6 +879,59 @@ function candidateDefinitions(){
                     groupPathFamilies: pathSets[pathIndex]
                   })
                 });
+              }
+            }
+          }
+        }
+      }
+    }
+    candidates.push(...targetTimingCandidates(base, pathSets));
+    return candidates;
+  }
+  if(STAGE === 19 || STAGE === 31){
+    const arcValues = STAGE === 19 ? [1.62, 1.86, 2.08] : [1.62, 1.8, 2.02];
+    const dropValues = STAGE === 19 ? [1.06, 1.22, 1.4] : [1.08, 1.26, 1.44];
+    const spawnValues = STAGE === 19 ? [68, 76, 84] : [78, 86, 94];
+    const waveValues = STAGE === 19 ? [0.96, 1.1] : [0.86, 0.96, 1.08];
+    const slotValues = STAGE === 19 ? [0.07, 0.085] : [0.055, 0.07];
+    const lowerBiasValues = STAGE === 19 ? [0, 28, 52, 76] : [0, 24, 48, 72];
+    const pathSets = STAGE === 19
+      ? [
+        ['pink-green-cascade','green-ladder-split','pink-green-cascade','pink-serpentine','pink-green-cascade'],
+        ['pink-green-cascade','pink-green-cascade','green-ladder-split','pink-green-cascade','pink-serpentine'],
+        ['green-ladder-split','pink-green-cascade','pink-serpentine','pink-green-cascade','pink-green-cascade']
+      ]
+      : [
+        ['blue-purple-finale','green-ladder-split','blue-purple-finale','yellow-diagonal-fan','blue-purple-finale'],
+        ['blue-purple-finale','blue-purple-finale','green-ladder-split','blue-purple-finale','yellow-diagonal-fan'],
+        ['yellow-diagonal-fan','blue-purple-finale','green-ladder-split','blue-purple-finale','blue-purple-finale']
+      ];
+    const candidates = [{
+      id: 'baseline-current',
+      description: `Current stage-${STAGE} layout, used as the measured baseline.`,
+      layoutOverride: {}
+    }];
+    for(const arcAmp of arcValues){
+      for(const dropAmp of dropValues){
+        for(const spawnOffsetX of spawnValues){
+          for(const waveDelay of waveValues){
+            for(const slotDelay of slotValues){
+              for(const lowerFieldBias of lowerBiasValues){
+                for(let pathIndex = 0; pathIndex < pathSets.length; pathIndex += 1){
+                  candidates.push({
+                    id: `stage${STAGE}-a${String(arcAmp).replace('.','')}-d${String(dropAmp).replace('.','')}-x${spawnOffsetX}-w${String(waveDelay).replace('.','')}-s${String(slotDelay).replace('.','')}-lb${lowerFieldBias}-p${pathIndex}`,
+                    description: `Stage ${STAGE} sweep: arc ${arcAmp}, drop ${dropAmp}, spawn ${spawnOffsetX}, wave ${waveDelay}, slot ${slotDelay}, lower-field bias ${lowerFieldBias}, path set ${pathIndex}.`,
+                    layoutOverride: Object.assign({}, base, {
+                      arcAmp,
+                      dropAmp,
+                      spawnOffsetX,
+                      waveDelay,
+                      slotDelay,
+                      lowerFieldBias,
+                      groupPathFamilies: pathSets[pathIndex]
+                    })
+                  });
+                }
               }
             }
           }
@@ -1058,9 +1167,14 @@ async function main(){
     const candidateTargetVideoLift = round((candidate.targetVideoObjectFit?.score10 || 0) - baselineTargetVideoScore, 2);
     const candidateTargetVideoComparable = Number.isFinite(+(baseline.targetVideoObjectFit?.score10)) && Number.isFinite(+(candidate.targetVideoObjectFit?.score10));
     const candidateNoTargetRegression = !candidateTargetVideoComparable || candidateTargetVideoLift >= -0.05;
-    const intendedStageSupported = candidate.expectedReferenceHit || (candidateExpectedLift >= 0.25 && candidateTargetVideoLift >= 0.25);
+    const candidateNoExpectedRegression = candidateExpectedLift >= -0.05;
+    const strongExpectedLift = (candidate.expectedMatch?.score10 || 0) >= 7
+      && candidateExpectedLift >= 0.5
+      && candidateTargetVideoLift >= 0.8;
+    const intendedStageSupported = candidate.expectedReferenceHit || strongExpectedLift;
     return candidate.noSafetyRegression
       && candidateNoTargetRegression
+      && candidateNoExpectedRegression
       && intendedStageSupported
       && (candidateExpectedLift >= 0.35 || candidateTargetVideoLift >= 0.35 || (candidateExpectedLift >= 0.25 && candidateTargetVideoLift >= 0.25));
   }).sort((a, b) => {
@@ -1073,8 +1187,12 @@ async function main(){
   const targetVideoLift = round((best.targetVideoObjectFit?.score10 || 0) - (baseline.targetVideoObjectFit?.score10 || 0), 2);
   const targetVideoComparable = Number.isFinite(+(baseline.targetVideoObjectFit?.score10)) && Number.isFinite(+(best.targetVideoObjectFit?.score10));
   const noTargetVideoRegression = !targetVideoComparable || targetVideoLift >= -0.05;
-  const intendedStageSupported = best.expectedReferenceHit || (expectedLift >= 0.25 && targetVideoLift >= 0.25);
-  const keeper = best.noSafetyRegression && noTargetVideoRegression && intendedStageSupported && (expectedLift >= 0.35 || targetVideoLift >= 0.35 || (expectedLift >= 0.25 && targetVideoLift >= 0.25));
+  const noExpectedRegression = expectedLift >= -0.05;
+  const strongExpectedLift = (best.expectedMatch?.score10 || 0) >= 7
+    && expectedLift >= 0.5
+    && targetVideoLift >= 0.8;
+  const intendedStageSupported = best.expectedReferenceHit || strongExpectedLift;
+  const keeper = best.noSafetyRegression && noTargetVideoRegression && noExpectedRegression && intendedStageSupported && (expectedLift >= 0.35 || targetVideoLift >= 0.35 || (expectedLift >= 0.25 && targetVideoLift >= 0.25));
   const report = {
     schemaVersion: 1,
     artifactType: 'challenge-stage-candidate-sweep',
@@ -1100,13 +1218,17 @@ async function main(){
       targetVideoObjectFitLift10: targetVideoLift,
       targetVideoComparable,
       noTargetVideoRegression,
-      keeperDecision: keeper ? 'keeper-ready-for-runtime-review' : 'no-runtime-keeper-yet',
+      noExpectedRegression,
+      intendedStageSupported,
+      strongExpectedLift,
+      intendedStageSupportPolicy: 'runtime promotion requires no expected-label regression, and either the best trajectory match to be one of the expected stage labels or a strong expected-label score >=7 with >=0.5 expected lift and >=0.8 target-video lift',
+      keeperDecision: keeper ? 'candidate-ready-for-full-analyzer-review' : 'no-runtime-keeper-yet',
       playerMeaning: keeper
-        ? `A measured stage-${STAGE} layout candidate now better matches the expected Galaga challenge reference while keeping challenge stages safe.`
+        ? `A measured stage-${STAGE} layout candidate is worth a temporary runtime review, but it must be confirmed by the full challenge-stage analyzer and persona guardrails before promotion.`
         : 'This pass improved the search process more than the shipped game: no candidate earned enough measured lift to promote safely.',
       processMeaning: 'Future challenge tuning can now compare many runtime candidates against Galaga labels before editing game constants.',
       nextStep: keeper
-        ? `Promote the best candidate into the stage-${STAGE} layout, rebuild, and rerun challenge-stage conformance plus guardrails.`
+        ? `Apply the best candidate temporarily, rerun full challenge-stage conformance plus guardrails, and accept it only if the full analyzer confirms the expected lift.`
         : `Broaden the candidate strategy to include path-shape constants or richer reference labels before changing runtime stage-${STAGE} gameplay.`
     },
     candidates: scored.map(row => ({

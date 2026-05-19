@@ -237,6 +237,11 @@ function updateChallengeEnemy(e,dt){
 	   e.y=topY+8+q*(classicStage3?188:198)*fm.challengeDrop;
 	  }
 	 }
+ const lowerFieldBias=Number.isFinite(+e.lowerFieldBias)?+e.lowerFieldBias:0;
+ if(lowerFieldBias&&u>2.4){
+  const lowerQ=cl((u-2.4)/8.8,0,1);
+  e.y+=lowerFieldBias*lowerQ*lowerQ;
+ }
  if(e.y<=enemyChallengeUpperBandY(e)){
   e.ub+=dt;
   if(S.ch){

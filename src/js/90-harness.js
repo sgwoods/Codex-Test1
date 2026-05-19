@@ -1063,6 +1063,7 @@ window.__galagaHarness__={
    family:e.fam||'classic',
    pathFamily:e.pathFamily||'classic-lane-wave',
    speedScale:+(+e.speedScale||1).toFixed(3),
+   lowerFieldBias:+(+e.lowerFieldBias||0).toFixed(2),
 	   lane:e.c,
    wave:e.wave,
    row:e.row,

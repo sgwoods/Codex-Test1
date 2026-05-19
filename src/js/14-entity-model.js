@@ -81,7 +81,8 @@ function enemyChallengeState({
   pathFamily='classic-lane-wave',
   arcAmp=1,
   dropAmp=1,
-  speedScale=1
+  speedScale=1,
+  lowerFieldBias=0
 }={}){
  return {
   ch:1,
@@ -96,7 +97,8 @@ function enemyChallengeState({
   pathFamily,
   arcAmp,
   dropAmp,
-  speedScale
+  speedScale,
+  lowerFieldBias
  };
 }
 
@@ -177,6 +179,7 @@ function makePackChallengeEnemyState({
  arcAmp=1,
  dropAmp=1,
  speedScale=1,
+ lowerFieldBias=0,
  spawn=0
 }){
  return Object.assign({
@@ -218,5 +221,5 @@ function makePackChallengeEnemyState({
   miss:0,
   low:0,
   hitT:0
- }, enemyChallengeState({wave,side,slot,row,group,sweep,upperBandY,pathFamily,arcAmp,dropAmp,speedScale}));
+ }, enemyChallengeState({wave,side,slot,row,group,sweep,upperBandY,pathFamily,arcAmp,dropAmp,speedScale,lowerFieldBias}));
 }
