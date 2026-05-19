@@ -10,9 +10,9 @@ or simpler platform/game boundaries.
 
 ## Current Snapshot
 
-- generated: `2026-05-19T18:40:33.640Z`
+- generated: `2026-05-19T18:45:00.244Z`
 - branch: `codex/macbook-conformance-investment-review`
-- commit: `591cd98a`
+- commit: `796835e1`
 - review cycles tracked: `3`
 - issue notes tracked: `6`
 - accepted changes tracked: `3`
@@ -51,7 +51,7 @@ or simpler platform/game boundaries.
 | --- | --- | --- | --- | --- | --- |
 | historical | Platform architecture baseline | ARCHITECT_REVIEW_RESPONSE.md | standing | P0 0 / P1 0 / P2 4 / P3 0 | Baseline concerns are partly covered and partly continuing maturity work. |
 | 2026-05-14 | Local-to-hosted-dev code review gate | CODE_REVIEW_MODEL.md | standing | P0 0 / P1 0 / P2 0 / P3 0 | Accepted as a lightweight release-safety gate for development lane movement. |
-| 2026-05-19 | Current branch code review packet | reference-artifacts/analyses/code-review/latest.json | 756 | P0 0 / P1 0 / P2 2 / P3 0 | Use automatic findings as review notes and blocking P0/P1 gates; P2/P3 remain explicit human-review items. |
+| 2026-05-19 | Current branch code review packet | reference-artifacts/analyses/code-review/latest.json | 757 | P0 0 / P1 0 / P2 2 / P3 0 | Use automatic findings as review notes and blocking P0/P1 gates; P2/P3 remain explicit human-review items. |
 
 ## Issues And Notes
 
