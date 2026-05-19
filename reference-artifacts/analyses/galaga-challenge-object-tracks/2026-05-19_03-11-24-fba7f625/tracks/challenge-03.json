@@ -1,0 +1,4279 @@
+{
+  "challengeNumber": 3,
+  "sourceVideo": "reference-artifacts/analyses/level-visual-conformance-index/latest-target-videos/challenge-03.webm",
+  "frameSize": {
+    "width": 720,
+    "height": 540
+  },
+  "sampleFps": 12,
+  "sampledFrameCount": 120,
+  "durationSeconds": 10,
+  "playfieldRoi": {
+    "x": 154,
+    "y": 0,
+    "w": 412,
+    "h": 521,
+    "normalized": {
+      "x": 0.2139,
+      "y": 0,
+      "w": 0.5722,
+      "h": 0.9648
+    }
+  },
+  "componentRead": {
+    "medianComponentCount": 9,
+    "p90ComponentCount": 26,
+    "activeFrameShare": 0.817
+  },
+  "trackRead": {
+    "trackCount": 39,
+    "groupCount": 5,
+    "medianTrackDurationSeconds": 3.08,
+    "medianPathLength": 0.0138,
+    "medianYRange": 0.0024,
+    "medianXRange": 0.0104,
+    "lowerFieldShare": 0.8355
+  },
+  "targetGroups": [
+    {
+      "groupIndex": 1,
+      "trackCount": 8,
+      "sampleCount": 80,
+      "objectTrackTarget": {
+        "visibleStartS": 1.67,
+        "visibleEndS": 9.75,
+        "entrySide": "center",
+        "exitSide": "center",
+        "xRange": 0.5933,
+        "yRange": 0.0115,
+        "pathLength": 0.0537,
+        "turnCount": 44.25,
+        "reversalCount": 25.38,
+        "lowerFieldShare": 1
+      },
+      "confidence": 0.804,
+      "trackIds": [
+        "target-track-2",
+        "target-track-4",
+        "target-track-1",
+        "target-track-3",
+        "target-track-5",
+        "target-track-7",
+        "target-track-8",
+        "target-track-6"
+      ],
+      "read": "Target group 1 tracks 8 object trace(s), visible 1.67-9.75s, path 0.05, x/y range 0.59/0.01."
+    },
+    {
+      "groupIndex": 2,
+      "trackCount": 7,
+      "sampleCount": 65,
+      "objectTrackTarget": {
+        "visibleStartS": 3.67,
+        "visibleEndS": 9.75,
+        "entrySide": "left",
+        "exitSide": "center",
+        "xRange": 0.3242,
+        "yRange": 0.091,
+        "pathLength": 0.0609,
+        "turnCount": 25.86,
+        "reversalCount": 12.29,
+        "lowerFieldShare": 0.0832
+      },
+      "confidence": 0.751,
+      "trackIds": [
+        "target-track-9",
+        "target-track-10",
+        "target-track-19",
+        "target-track-17",
+        "target-track-18",
+        "target-track-20",
+        "target-track-21"
+      ],
+      "read": "Target group 2 tracks 7 object trace(s), visible 3.67-9.75s, path 0.06, x/y range 0.32/0.09."
+    },
+    {
+      "groupIndex": 3,
+      "trackCount": 12,
+      "sampleCount": 120,
+      "objectTrackTarget": {
+        "visibleStartS": 6.67,
+        "visibleEndS": 9.75,
+        "entrySide": "right",
+        "exitSide": "right",
+        "xRange": 0.784,
+        "yRange": 0.0092,
+        "pathLength": 0.0193,
+        "turnCount": 18.58,
+        "reversalCount": 8.75,
+        "lowerFieldShare": 1
+      },
+      "confidence": 0.799,
+      "trackIds": [
+        "target-track-23",
+        "target-track-22",
+        "target-track-25",
+        "target-track-24",
+        "target-track-26",
+        "target-track-30",
+        "target-track-28",
+        "target-track-33",
+        "target-track-32",
+        "target-track-31",
+        "target-track-27",
+        "target-track-29"
+      ],
+      "read": "Target group 3 tracks 12 object trace(s), visible 6.67-9.75s, path 0.02, x/y range 0.78/0.01."
+    },
+    {
+      "groupIndex": 4,
+      "trackCount": 6,
+      "sampleCount": 36,
+      "objectTrackTarget": {
+        "visibleStartS": 9.33,
+        "visibleEndS": 9.75,
+        "entrySide": "left",
+        "exitSide": "right",
+        "xRange": 0.7759,
+        "yRange": 0.0922,
+        "pathLength": 0.0144,
+        "turnCount": 2.33,
+        "reversalCount": 1.33,
+        "lowerFieldShare": 1
+      },
+      "confidence": 0.568,
+      "trackIds": [
+        "target-track-35",
+        "target-track-34",
+        "target-track-36",
+        "target-track-37",
+        "target-track-38",
+        "target-track-39"
+      ],
+      "read": "Target group 4 tracks 6 object trace(s), visible 9.33-9.75s, path 0.01, x/y range 0.78/0.09."
+    },
+    {
+      "groupIndex": 5,
+      "trackCount": 6,
+      "sampleCount": 29,
+      "objectTrackTarget": {
+        "visibleStartS": 9.42,
+        "visibleEndS": 9.75,
+        "entrySide": "center",
+        "exitSide": "left",
+        "xRange": 0.3833,
+        "yRange": 0.0873,
+        "pathLength": 0.012,
+        "turnCount": 2.17,
+        "reversalCount": 1,
+        "lowerFieldShare": 1
+      },
+      "confidence": 0.564,
+      "trackIds": [
+        "target-track-43",
+        "target-track-42",
+        "target-track-44",
+        "target-track-41",
+        "target-track-46",
+        "target-track-40"
+      ],
+      "read": "Target group 5 tracks 6 object trace(s), visible 9.42-9.75s, path 0.01, x/y range 0.38/0.09."
+    }
+  ],
+  "candidateTracks": [
+    {
+      "id": "target-track-9",
+      "sampleCount": 64,
+      "visibleStartS": 3.67,
+      "visibleEndS": 9.75,
+      "durationSeconds": 6.08,
+      "entrySide": "left",
+      "exitSide": "center",
+      "xRange": 0.0987,
+      "yRange": 0.0899,
+      "pathLength": 0.1804,
+      "turnCount": 25,
+      "reversalCount": 12,
+      "lowerFieldShare": 0.2969,
+      "meanArea": 151.9,
+      "areaStability": 0.987,
+      "first": {
+        "x": 0.3374,
+        "y": 0.5304
+      },
+      "last": {
+        "x": 0.4361,
+        "y": 0.4405
+      },
+      "sampledPoints": [
+        {
+          "t": 3.67,
+          "x": 0.3374,
+          "y": 0.5304
+        },
+        {
+          "t": 4.25,
+          "x": 0.3374,
+          "y": 0.5304
+        },
+        {
+          "t": 4.83,
+          "x": 0.3374,
+          "y": 0.5304
+        },
+        {
+          "t": 5.75,
+          "x": 0.3715,
+          "y": 0.4421
+        },
+        {
+          "t": 6.83,
+          "x": 0.3717,
+          "y": 0.4421
+        },
+        {
+          "t": 7.42,
+          "x": 0.3717,
+          "y": 0.442
+        },
+        {
+          "t": 8,
+          "x": 0.372,
+          "y": 0.4418
+        },
+        {
+          "t": 8.58,
+          "x": 0.372,
+          "y": 0.4419
+        },
+        {
+          "t": 9.17,
+          "x": 0.372,
+          "y": 0.4421
+        },
+        {
+          "t": 9.75,
+          "x": 0.4361,
+          "y": 0.4405
+        }
+      ]
+    },
+    {
+      "id": "target-track-2",
+      "sampleCount": 98,
+      "visibleStartS": 1.67,
+      "visibleEndS": 9.75,
+      "durationSeconds": 8.08,
+      "entrySide": "center",
+      "exitSide": "center",
+      "xRange": 0.0228,
+      "yRange": 0.0073,
+      "pathLength": 0.1019,
+      "turnCount": 44,
+      "reversalCount": 29,
+      "lowerFieldShare": 1,
+      "meanArea": 304,
+      "areaStability": 0.839,
+      "first": {
+        "x": 0.3565,
+        "y": 0.5302
+      },
+      "last": {
+        "x": 0.3792,
+        "y": 0.537
+      },
+      "sampledPoints": [
+        {
+          "t": 1.67,
+          "x": 0.3565,
+          "y": 0.5302
+        },
+        {
+          "t": 2.58,
+          "x": 0.3565,
+          "y": 0.5303
+        },
+        {
+          "t": 3.5,
+          "x": 0.3566,
+          "y": 0.5302
+        },
+        {
+          "t": 4.33,
+          "x": 0.373,
+          "y": 0.5301
+        },
+        {
+          "t": 5.25,
+          "x": 0.3731,
+          "y": 0.5302
+        },
+        {
+          "t": 6.17,
+          "x": 0.357,
+          "y": 0.5301
+        },
+        {
+          "t": 7.08,
+          "x": 0.357,
+          "y": 0.5301
+        },
+        {
+          "t": 7.92,
+          "x": 0.3573,
+          "y": 0.53
+        },
+        {
+          "t": 8.83,
+          "x": 0.357,
+          "y": 0.5301
+        },
+        {
+          "t": 9.75,
+          "x": 0.3792,
+          "y": 0.537
+        }
+      ]
+    },
+    {
+      "id": "target-track-4",
+      "sampleCount": 98,
+      "visibleStartS": 1.67,
+      "visibleEndS": 9.75,
+      "durationSeconds": 8.08,
+      "entrySide": "center",
+      "exitSide": "center",
+      "xRange": 0.0132,
+      "yRange": 0.0059,
+      "pathLength": 0.1073,
+      "turnCount": 53,
+      "reversalCount": 34,
+      "lowerFieldShare": 1,
+      "meanArea": 248.6,
+      "areaStability": 0.871,
+      "first": {
+        "x": 0.6526,
+        "y": 0.5299
+      },
+      "last": {
+        "x": 0.6556,
+        "y": 0.5255
+      },
+      "sampledPoints": [
+        {
+          "t": 1.67,
+          "x": 0.6526,
+          "y": 0.5299
+        },
+        {
+          "t": 2.58,
+          "x": 0.6525,
+          "y": 0.5297
+        },
+        {
+          "t": 3.5,
+          "x": 0.6526,
+          "y": 0.5298
+        },
+        {
+          "t": 4.33,
+          "x": 0.6524,
+          "y": 0.5295
+        },
+        {
+          "t": 5.25,
+          "x": 0.6648,
+          "y": 0.5308
+        },
+        {
+          "t": 6.17,
+          "x": 0.6523,
+          "y": 0.5297
+        },
+        {
+          "t": 7.08,
+          "x": 0.6525,
+          "y": 0.5297
+        },
+        {
+          "t": 7.92,
+          "x": 0.6523,
+          "y": 0.5297
+        },
+        {
+          "t": 8.83,
+          "x": 0.6523,
+          "y": 0.5297
+        },
+        {
+          "t": 9.75,
+          "x": 0.6556,
+          "y": 0.5255
+        }
+      ]
+    },
+    {
+      "id": "target-track-10",
+      "sampleCount": 56,
+      "visibleStartS": 4.67,
+      "visibleEndS": 9.75,
+      "durationSeconds": 5.08,
+      "entrySide": "center",
+      "exitSide": "right",
+      "xRange": 0.0318,
+      "yRange": 0.0893,
+      "pathLength": 0.105,
+      "turnCount": 39,
+      "reversalCount": 18,
+      "lowerFieldShare": 0.2857,
+      "meanArea": 88.4,
+      "areaStability": 0.94,
+      "first": {
+        "x": 0.6313,
+        "y": 0.5275
+      },
+      "last": {
+        "x": 0.6615,
+        "y": 0.4394
+      },
+      "sampledPoints": [
+        {
+          "t": 4.67,
+          "x": 0.6313,
+          "y": 0.5275
+        },
+        {
+          "t": 5.17,
+          "x": 0.6312,
+          "y": 0.5278
+        },
+        {
+          "t": 5.75,
+          "x": 0.6311,
+          "y": 0.5273
+        },
+        {
+          "t": 6.67,
+          "x": 0.6611,
+          "y": 0.4432
+        },
+        {
+          "t": 7.17,
+          "x": 0.6608,
+          "y": 0.4432
+        },
+        {
+          "t": 7.75,
+          "x": 0.6609,
+          "y": 0.4429
+        },
+        {
+          "t": 8.25,
+          "x": 0.6609,
+          "y": 0.4429
+        },
+        {
+          "t": 8.75,
+          "x": 0.661,
+          "y": 0.4428
+        },
+        {
+          "t": 9.25,
+          "x": 0.661,
+          "y": 0.4433
+        },
+        {
+          "t": 9.75,
+          "x": 0.6615,
+          "y": 0.4394
+        }
+      ]
+    },
+    {
+      "id": "target-track-1",
+      "sampleCount": 98,
+      "visibleStartS": 1.67,
+      "visibleEndS": 9.75,
+      "durationSeconds": 8.08,
+      "entrySide": "left",
+      "exitSide": "left",
+      "xRange": 0.0306,
+      "yRange": 0.0015,
+      "pathLength": 0.0481,
+      "turnCount": 59,
+      "reversalCount": 37,
+      "lowerFieldShare": 1,
+      "meanArea": 711.8,
+      "areaStability": 0.994,
+      "first": {
+        "x": 0.2478,
+        "y": 0.5307
+      },
+      "last": {
+        "x": 0.218,
+        "y": 0.5318
+      },
+      "sampledPoints": [
+        {
+          "t": 1.67,
+          "x": 0.2478,
+          "y": 0.5307
+        },
+        {
+          "t": 2.58,
+          "x": 0.248,
+          "y": 0.5307
+        },
+        {
+          "t": 3.5,
+          "x": 0.2481,
+          "y": 0.5305
+        },
+        {
+          "t": 4.33,
+          "x": 0.2481,
+          "y": 0.5303
+        },
+        {
+          "t": 5.25,
+          "x": 0.2484,
+          "y": 0.5304
+        },
+        {
+          "t": 6.17,
+          "x": 0.2479,
+          "y": 0.5306
+        },
+        {
+          "t": 7.08,
+          "x": 0.248,
+          "y": 0.5305
+        },
+        {
+          "t": 7.92,
+          "x": 0.2479,
+          "y": 0.5305
+        },
+        {
+          "t": 8.83,
+          "x": 0.2481,
+          "y": 0.5305
+        },
+        {
+          "t": 9.75,
+          "x": 0.218,
+          "y": 0.5318
+        }
+      ]
+    },
+    {
+      "id": "target-track-3",
+      "sampleCount": 98,
+      "visibleStartS": 1.67,
+      "visibleEndS": 9.75,
+      "durationSeconds": 8.08,
+      "entrySide": "center",
+      "exitSide": "center",
+      "xRange": 0.0266,
+      "yRange": 0.0028,
+      "pathLength": 0.0386,
+      "turnCount": 51,
+      "reversalCount": 34,
+      "lowerFieldShare": 1,
+      "meanArea": 307.7,
+      "areaStability": 0.993,
+      "first": {
+        "x": 0.4602,
+        "y": 0.5293
+      },
+      "last": {
+        "x": 0.435,
+        "y": 0.5314
+      },
+      "sampledPoints": [
+        {
+          "t": 1.67,
+          "x": 0.4602,
+          "y": 0.5293
+        },
+        {
+          "t": 2.58,
+          "x": 0.4602,
+          "y": 0.5292
+        },
+        {
+          "t": 3.5,
+          "x": 0.4607,
+          "y": 0.529
+        },
+        {
+          "t": 4.33,
+          "x": 0.4606,
+          "y": 0.5289
+        },
+        {
+          "t": 5.25,
+          "x": 0.4606,
+          "y": 0.5289
+        },
+        {
+          "t": 6.17,
+          "x": 0.4607,
+          "y": 0.5289
+        },
+        {
+          "t": 7.08,
+          "x": 0.4612,
+          "y": 0.5286
+        },
+        {
+          "t": 7.92,
+          "x": 0.4606,
+          "y": 0.5289
+        },
+        {
+          "t": 8.83,
+          "x": 0.4606,
+          "y": 0.5289
+        },
+        {
+          "t": 9.75,
+          "x": 0.435,
+          "y": 0.5314
+        }
+      ]
+    },
+    {
+      "id": "target-track-5",
+      "sampleCount": 98,
+      "visibleStartS": 1.67,
+      "visibleEndS": 9.75,
+      "durationSeconds": 8.08,
+      "entrySide": "center",
+      "exitSide": "center",
+      "xRange": 0.0109,
+      "yRange": 0.0008,
+      "pathLength": 0.019,
+      "turnCount": 37,
+      "reversalCount": 19,
+      "lowerFieldShare": 1,
+      "meanArea": 163.2,
+      "areaStability": 0.992,
+      "first": {
+        "x": 0.5558,
+        "y": 0.5305
+      },
+      "last": {
+        "x": 0.5455,
+        "y": 0.5301
+      },
+      "sampledPoints": [
+        {
+          "t": 1.67,
+          "x": 0.5558,
+          "y": 0.5305
+        },
+        {
+          "t": 2.58,
+          "x": 0.5558,
+          "y": 0.5305
+        },
+        {
+          "t": 3.5,
+          "x": 0.5558,
+          "y": 0.5305
+        },
+        {
+          "t": 4.33,
+          "x": 0.5555,
+          "y": 0.5305
+        },
+        {
+          "t": 5.25,
+          "x": 0.5554,
+          "y": 0.5303
+        },
+        {
+          "t": 6.17,
+          "x": 0.5556,
+          "y": 0.5305
+        },
+        {
+          "t": 7.08,
+          "x": 0.5556,
+          "y": 0.5305
+        },
+        {
+          "t": 7.92,
+          "x": 0.5556,
+          "y": 0.5305
+        },
+        {
+          "t": 8.83,
+          "x": 0.5556,
+          "y": 0.5305
+        },
+        {
+          "t": 9.75,
+          "x": 0.5455,
+          "y": 0.5301
+        }
+      ]
+    },
+    {
+      "id": "target-track-7",
+      "sampleCount": 78,
+      "visibleStartS": 3.33,
+      "visibleEndS": 9.75,
+      "durationSeconds": 6.42,
+      "entrySide": "right",
+      "exitSide": "right",
+      "xRange": 0.0361,
+      "yRange": 0.0051,
+      "pathLength": 0.0498,
+      "turnCount": 30,
+      "reversalCount": 13,
+      "lowerFieldShare": 1,
+      "meanArea": 140.9,
+      "areaStability": 0.986,
+      "first": {
+        "x": 0.8112,
+        "y": 0.5309
+      },
+      "last": {
+        "x": 0.7817,
+        "y": 0.5347
+      },
+      "sampledPoints": [
+        {
+          "t": 3.33,
+          "x": 0.8112,
+          "y": 0.5309
+        },
+        {
+          "t": 4.08,
+          "x": 0.811,
+          "y": 0.5302
+        },
+        {
+          "t": 4.75,
+          "x": 0.8109,
+          "y": 0.5301
+        },
+        {
+          "t": 5.5,
+          "x": 0.7755,
+          "y": 0.53
+        },
+        {
+          "t": 6.17,
+          "x": 0.7755,
+          "y": 0.5301
+        },
+        {
+          "t": 6.92,
+          "x": 0.7755,
+          "y": 0.5301
+        },
+        {
+          "t": 7.58,
+          "x": 0.7755,
+          "y": 0.5301
+        },
+        {
+          "t": 8.33,
+          "x": 0.7755,
+          "y": 0.5301
+        },
+        {
+          "t": 9,
+          "x": 0.7756,
+          "y": 0.5301
+        },
+        {
+          "t": 9.75,
+          "x": 0.7817,
+          "y": 0.5347
+        }
+      ]
+    },
+    {
+      "id": "target-track-8",
+      "sampleCount": 77,
+      "visibleStartS": 3.33,
+      "visibleEndS": 9.75,
+      "durationSeconds": 6.42,
+      "entrySide": "right",
+      "exitSide": "right",
+      "xRange": 0.0358,
+      "yRange": 0.0042,
+      "pathLength": 0.0507,
+      "turnCount": 22,
+      "reversalCount": 11,
+      "lowerFieldShare": 1,
+      "meanArea": 138.3,
+      "areaStability": 0.993,
+      "first": {
+        "x": 0.7755,
+        "y": 0.5298
+      },
+      "last": {
+        "x": 0.8025,
+        "y": 0.5336
+      },
+      "sampledPoints": [
+        {
+          "t": 3.33,
+          "x": 0.7755,
+          "y": 0.5298
+        },
+        {
+          "t": 4,
+          "x": 0.7755,
+          "y": 0.53
+        },
+        {
+          "t": 4.75,
+          "x": 0.7755,
+          "y": 0.53
+        },
+        {
+          "t": 5.5,
+          "x": 0.8113,
+          "y": 0.5303
+        },
+        {
+          "t": 6.25,
+          "x": 0.8113,
+          "y": 0.5303
+        },
+        {
+          "t": 6.92,
+          "x": 0.8113,
+          "y": 0.5303
+        },
+        {
+          "t": 7.67,
+          "x": 0.8113,
+          "y": 0.5302
+        },
+        {
+          "t": 8.33,
+          "x": 0.8113,
+          "y": 0.5302
+        },
+        {
+          "t": 9.08,
+          "x": 0.8113,
+          "y": 0.5302
+        },
+        {
+          "t": 9.75,
+          "x": 0.8025,
+          "y": 0.5336
+        }
+      ]
+    },
+    {
+      "id": "target-track-6",
+      "sampleCount": 98,
+      "visibleStartS": 1.67,
+      "visibleEndS": 9.75,
+      "durationSeconds": 8.08,
+      "entrySide": "center",
+      "exitSide": "center",
+      "xRange": 0.0015,
+      "yRange": 0.0017,
+      "pathLength": 0.0138,
+      "turnCount": 58,
+      "reversalCount": 26,
+      "lowerFieldShare": 1,
+      "meanArea": 127.4,
+      "areaStability": 0.995,
+      "first": {
+        "x": 0.5943,
+        "y": 0.5305
+      },
+      "last": {
+        "x": 0.5939,
+        "y": 0.5319
+      },
+      "sampledPoints": [
+        {
+          "t": 1.67,
+          "x": 0.5943,
+          "y": 0.5305
+        },
+        {
+          "t": 2.58,
+          "x": 0.5944,
+          "y": 0.5305
+        },
+        {
+          "t": 3.5,
+          "x": 0.5944,
+          "y": 0.5305
+        },
+        {
+          "t": 4.33,
+          "x": 0.5945,
+          "y": 0.5309
+        },
+        {
+          "t": 5.25,
+          "x": 0.5946,
+          "y": 0.531
+        },
+        {
+          "t": 6.17,
+          "x": 0.5946,
+          "y": 0.5304
+        },
+        {
+          "t": 7.08,
+          "x": 0.5946,
+          "y": 0.5305
+        },
+        {
+          "t": 7.92,
+          "x": 0.5947,
+          "y": 0.5306
+        },
+        {
+          "t": 8.83,
+          "x": 0.5946,
+          "y": 0.5305
+        },
+        {
+          "t": 9.75,
+          "x": 0.5939,
+          "y": 0.5319
+        }
+      ]
+    },
+    {
+      "id": "target-track-19",
+      "sampleCount": 45,
+      "visibleStartS": 5.58,
+      "visibleEndS": 9.75,
+      "durationSeconds": 4.17,
+      "entrySide": "center",
+      "exitSide": "center",
+      "xRange": 0.048,
+      "yRange": 0.0047,
+      "pathLength": 0.0649,
+      "turnCount": 34,
+      "reversalCount": 14,
+      "lowerFieldShare": 0,
+      "meanArea": 134,
+      "areaStability": 0.981,
+      "first": {
+        "x": 0.5554,
+        "y": 0.4441
+      },
+      "last": {
+        "x": 0.5956,
+        "y": 0.4417
+      },
+      "sampledPoints": [
+        {
+          "t": 5.58,
+          "x": 0.5554,
+          "y": 0.4441
+        },
+        {
+          "t": 6.25,
+          "x": 0.5557,
+          "y": 0.4435
+        },
+        {
+          "t": 6.92,
+          "x": 0.5552,
+          "y": 0.4439
+        },
+        {
+          "t": 7.33,
+          "x": 0.5553,
+          "y": 0.4441
+        },
+        {
+          "t": 7.75,
+          "x": 0.5556,
+          "y": 0.4444
+        },
+        {
+          "t": 8.08,
+          "x": 0.5557,
+          "y": 0.4444
+        },
+        {
+          "t": 8.5,
+          "x": 0.5556,
+          "y": 0.4439
+        },
+        {
+          "t": 8.92,
+          "x": 0.5557,
+          "y": 0.4444
+        },
+        {
+          "t": 9.33,
+          "x": 0.5556,
+          "y": 0.4441
+        },
+        {
+          "t": 9.75,
+          "x": 0.5956,
+          "y": 0.4417
+        }
+      ]
+    },
+    {
+      "id": "target-track-17",
+      "sampleCount": 45,
+      "visibleStartS": 5.58,
+      "visibleEndS": 9.75,
+      "durationSeconds": 4.17,
+      "entrySide": "center",
+      "exitSide": "center",
+      "xRange": 0.0168,
+      "yRange": 0.0084,
+      "pathLength": 0.0509,
+      "turnCount": 26,
+      "reversalCount": 18,
+      "lowerFieldShare": 0,
+      "meanArea": 460.6,
+      "areaStability": 0.974,
+      "first": {
+        "x": 0.4438,
+        "y": 0.4432
+      },
+      "last": {
+        "x": 0.453,
+        "y": 0.4511
+      },
+      "sampledPoints": [
+        {
+          "t": 5.58,
+          "x": 0.4438,
+          "y": 0.4432
+        },
+        {
+          "t": 6.25,
+          "x": 0.4441,
+          "y": 0.4431
+        },
+        {
+          "t": 6.92,
+          "x": 0.4445,
+          "y": 0.4431
+        },
+        {
+          "t": 7.33,
+          "x": 0.4436,
+          "y": 0.4436
+        },
+        {
+          "t": 7.75,
+          "x": 0.4439,
+          "y": 0.4432
+        },
+        {
+          "t": 8.08,
+          "x": 0.4434,
+          "y": 0.4435
+        },
+        {
+          "t": 8.5,
+          "x": 0.444,
+          "y": 0.4432
+        },
+        {
+          "t": 8.92,
+          "x": 0.4442,
+          "y": 0.4432
+        },
+        {
+          "t": 9.33,
+          "x": 0.4446,
+          "y": 0.4432
+        },
+        {
+          "t": 9.75,
+          "x": 0.453,
+          "y": 0.4511
+        }
+      ]
+    },
+    {
+      "id": "target-track-23",
+      "sampleCount": 38,
+      "visibleStartS": 6.67,
+      "visibleEndS": 9.75,
+      "durationSeconds": 3.08,
+      "entrySide": "right",
+      "exitSide": "right",
+      "xRange": 0.0365,
+      "yRange": 0.0006,
+      "pathLength": 0.0497,
+      "turnCount": 21,
+      "reversalCount": 11,
+      "lowerFieldShare": 1,
+      "meanArea": 411,
+      "areaStability": 0.651,
+      "first": {
+        "x": 0.6652,
+        "y": 0.6164
+      },
+      "last": {
+        "x": 0.6912,
+        "y": 0.6164
+      },
+      "sampledPoints": [
+        {
+          "t": 6.67,
+          "x": 0.6652,
+          "y": 0.6164
+        },
+        {
+          "t": 7,
+          "x": 0.6652,
+          "y": 0.6165
+        },
+        {
+          "t": 7.33,
+          "x": 0.6653,
+          "y": 0.6165
+        },
+        {
+          "t": 7.67,
+          "x": 0.6652,
+          "y": 0.6165
+        },
+        {
+          "t": 8,
+          "x": 0.6651,
+          "y": 0.6166
+        },
+        {
+          "t": 8.42,
+          "x": 0.6837,
+          "y": 0.6165
+        },
+        {
+          "t": 8.75,
+          "x": 0.6837,
+          "y": 0.6165
+        },
+        {
+          "t": 9.08,
+          "x": 0.6837,
+          "y": 0.6165
+        },
+        {
+          "t": 9.42,
+          "x": 0.7011,
+          "y": 0.616
+        },
+        {
+          "t": 9.75,
+          "x": 0.6912,
+          "y": 0.6164
+        }
+      ]
+    },
+    {
+      "id": "target-track-22",
+      "sampleCount": 38,
+      "visibleStartS": 6.67,
+      "visibleEndS": 9.75,
+      "durationSeconds": 3.08,
+      "entrySide": "center",
+      "exitSide": "center",
+      "xRange": 0.0211,
+      "yRange": 0.0008,
+      "pathLength": 0.0472,
+      "turnCount": 23,
+      "reversalCount": 13,
+      "lowerFieldShare": 1,
+      "meanArea": 763.8,
+      "areaStability": 0.777,
+      "first": {
+        "x": 0.4432,
+        "y": 0.6169
+      },
+      "last": {
+        "x": 0.4466,
+        "y": 0.6163
+      },
+      "sampledPoints": [
+        {
+          "t": 6.67,
+          "x": 0.4432,
+          "y": 0.6169
+        },
+        {
+          "t": 7,
+          "x": 0.4427,
+          "y": 0.6168
+        },
+        {
+          "t": 7.33,
+          "x": 0.4426,
+          "y": 0.6168
+        },
+        {
+          "t": 7.67,
+          "x": 0.4426,
+          "y": 0.6168
+        },
+        {
+          "t": 8,
+          "x": 0.4426,
+          "y": 0.6168
+        },
+        {
+          "t": 8.42,
+          "x": 0.442,
+          "y": 0.6169
+        },
+        {
+          "t": 8.75,
+          "x": 0.4426,
+          "y": 0.617
+        },
+        {
+          "t": 9.08,
+          "x": 0.4428,
+          "y": 0.6169
+        },
+        {
+          "t": 9.42,
+          "x": 0.4624,
+          "y": 0.6171
+        },
+        {
+          "t": 9.75,
+          "x": 0.4466,
+          "y": 0.6163
+        }
+      ]
+    },
+    {
+      "id": "target-track-18",
+      "sampleCount": 44,
+      "visibleStartS": 5.58,
+      "visibleEndS": 9.67,
+      "durationSeconds": 4.09,
+      "entrySide": "center",
+      "exitSide": "center",
+      "xRange": 0.0067,
+      "yRange": 0.001,
+      "pathLength": 0.0161,
+      "turnCount": 31,
+      "reversalCount": 12,
+      "lowerFieldShare": 0,
+      "meanArea": 151.8,
+      "areaStability": 0.985,
+      "first": {
+        "x": 0.5209,
+        "y": 0.4442
+      },
+      "last": {
+        "x": 0.5142,
+        "y": 0.4446
+      },
+      "sampledPoints": [
+        {
+          "t": 5.58,
+          "x": 0.5209,
+          "y": 0.4442
+        },
+        {
+          "t": 6.25,
+          "x": 0.5206,
+          "y": 0.4443
+        },
+        {
+          "t": 6.92,
+          "x": 0.5202,
+          "y": 0.4436
+        },
+        {
+          "t": 7.25,
+          "x": 0.5197,
+          "y": 0.4443
+        },
+        {
+          "t": 7.67,
+          "x": 0.5205,
+          "y": 0.4442
+        },
+        {
+          "t": 8.08,
+          "x": 0.5204,
+          "y": 0.4441
+        },
+        {
+          "t": 8.5,
+          "x": 0.5204,
+          "y": 0.4438
+        },
+        {
+          "t": 8.83,
+          "x": 0.5203,
+          "y": 0.4441
+        },
+        {
+          "t": 9.25,
+          "x": 0.5205,
+          "y": 0.4442
+        },
+        {
+          "t": 9.67,
+          "x": 0.5142,
+          "y": 0.4446
+        }
+      ]
+    },
+    {
+      "id": "target-track-25",
+      "sampleCount": 38,
+      "visibleStartS": 6.67,
+      "visibleEndS": 9.75,
+      "durationSeconds": 3.08,
+      "entrySide": "right",
+      "exitSide": "right",
+      "xRange": 0.0149,
+      "yRange": 0.0064,
+      "pathLength": 0.0336,
+      "turnCount": 22,
+      "reversalCount": 16,
+      "lowerFieldShare": 1,
+      "meanArea": 235.5,
+      "areaStability": 0.84,
+      "first": {
+        "x": 0.8704,
+        "y": 0.6153
+      },
+      "last": {
+        "x": 0.8734,
+        "y": 0.6109
+      },
+      "sampledPoints": [
+        {
+          "t": 6.67,
+          "x": 0.8704,
+          "y": 0.6153
+        },
+        {
+          "t": 7,
+          "x": 0.8703,
+          "y": 0.6156
+        },
+        {
+          "t": 7.33,
+          "x": 0.8702,
+          "y": 0.6157
+        },
+        {
+          "t": 7.67,
+          "x": 0.8703,
+          "y": 0.6155
+        },
+        {
+          "t": 8,
+          "x": 0.8705,
+          "y": 0.6156
+        },
+        {
+          "t": 8.42,
+          "x": 0.8705,
+          "y": 0.6156
+        },
+        {
+          "t": 8.75,
+          "x": 0.8705,
+          "y": 0.6156
+        },
+        {
+          "t": 9.08,
+          "x": 0.8708,
+          "y": 0.6155
+        },
+        {
+          "t": 9.42,
+          "x": 0.8827,
+          "y": 0.617
+        },
+        {
+          "t": 9.75,
+          "x": 0.8734,
+          "y": 0.6109
+        }
+      ]
+    },
+    {
+      "id": "target-track-20",
+      "sampleCount": 44,
+      "visibleStartS": 5.58,
+      "visibleEndS": 9.67,
+      "durationSeconds": 4.09,
+      "entrySide": "center",
+      "exitSide": "center",
+      "xRange": 0.001,
+      "yRange": 0.0024,
+      "pathLength": 0.0079,
+      "turnCount": 24,
+      "reversalCount": 11,
+      "lowerFieldShare": 0,
+      "meanArea": 95.9,
+      "areaStability": 0.986,
+      "first": {
+        "x": 0.5951,
+        "y": 0.4408
+      },
+      "last": {
+        "x": 0.5948,
+        "y": 0.4428
+      },
+      "sampledPoints": [
+        {
+          "t": 5.58,
+          "x": 0.5951,
+          "y": 0.4408
+        },
+        {
+          "t": 6.25,
+          "x": 0.5951,
+          "y": 0.4406
+        },
+        {
+          "t": 6.92,
+          "x": 0.5953,
+          "y": 0.4408
+        },
+        {
+          "t": 7.25,
+          "x": 0.5943,
+          "y": 0.4408
+        },
+        {
+          "t": 7.67,
+          "x": 0.5952,
+          "y": 0.4408
+        },
+        {
+          "t": 8.08,
+          "x": 0.5951,
+          "y": 0.4407
+        },
+        {
+          "t": 8.5,
+          "x": 0.5952,
+          "y": 0.4408
+        },
+        {
+          "t": 8.83,
+          "x": 0.5951,
+          "y": 0.4407
+        },
+        {
+          "t": 9.25,
+          "x": 0.5951,
+          "y": 0.4407
+        },
+        {
+          "t": 9.67,
+          "x": 0.5948,
+          "y": 0.4428
+        }
+      ]
+    },
+    {
+      "id": "target-track-24",
+      "sampleCount": 38,
+      "visibleStartS": 6.67,
+      "visibleEndS": 9.75,
+      "durationSeconds": 3.08,
+      "entrySide": "left",
+      "exitSide": "left",
+      "xRange": 0.0182,
+      "yRange": 0.0017,
+      "pathLength": 0.031,
+      "turnCount": 23,
+      "reversalCount": 12,
+      "lowerFieldShare": 1,
+      "meanArea": 276.2,
+      "areaStability": 0.803,
+      "first": {
+        "x": 0.0987,
+        "y": 0.6154
+      },
+      "last": {
+        "x": 0.1093,
+        "y": 0.6154
+      },
+      "sampledPoints": [
+        {
+          "t": 6.67,
+          "x": 0.0987,
+          "y": 0.6154
+        },
+        {
+          "t": 7,
+          "x": 0.0989,
+          "y": 0.6156
+        },
+        {
+          "t": 7.33,
+          "x": 0.0989,
+          "y": 0.6156
+        },
+        {
+          "t": 7.67,
+          "x": 0.0989,
+          "y": 0.6156
+        },
+        {
+          "t": 8,
+          "x": 0.0989,
+          "y": 0.6156
+        },
+        {
+          "t": 8.42,
+          "x": 0.0991,
+          "y": 0.6156
+        },
+        {
+          "t": 8.75,
+          "x": 0.0991,
+          "y": 0.6158
+        },
+        {
+          "t": 9.08,
+          "x": 0.0994,
+          "y": 0.6159
+        },
+        {
+          "t": 9.42,
+          "x": 0.1169,
+          "y": 0.6146
+        },
+        {
+          "t": 9.75,
+          "x": 0.1093,
+          "y": 0.6154
+        }
+      ]
+    },
+    {
+      "id": "target-track-26",
+      "sampleCount": 38,
+      "visibleStartS": 6.67,
+      "visibleEndS": 9.75,
+      "durationSeconds": 3.08,
+      "entrySide": "left",
+      "exitSide": "left",
+      "xRange": 0.0095,
+      "yRange": 0.0012,
+      "pathLength": 0.0128,
+      "turnCount": 21,
+      "reversalCount": 7,
+      "lowerFieldShare": 1,
+      "meanArea": 153,
+      "areaStability": 0.961,
+      "first": {
+        "x": 0.2644,
+        "y": 0.617
+      },
+      "last": {
+        "x": 0.2738,
+        "y": 0.6179
+      },
+      "sampledPoints": [
+        {
+          "t": 6.67,
+          "x": 0.2644,
+          "y": 0.617
+        },
+        {
+          "t": 7,
+          "x": 0.2644,
+          "y": 0.6169
+        },
+        {
+          "t": 7.33,
+          "x": 0.2644,
+          "y": 0.6168
+        },
+        {
+          "t": 7.67,
+          "x": 0.2644,
+          "y": 0.6169
+        },
+        {
+          "t": 8,
+          "x": 0.2645,
+          "y": 0.617
+        },
+        {
+          "t": 8.42,
+          "x": 0.2645,
+          "y": 0.617
+        },
+        {
+          "t": 8.75,
+          "x": 0.2645,
+          "y": 0.617
+        },
+        {
+          "t": 9.08,
+          "x": 0.2645,
+          "y": 0.617
+        },
+        {
+          "t": 9.42,
+          "x": 0.2643,
+          "y": 0.6167
+        },
+        {
+          "t": 9.75,
+          "x": 0.2738,
+          "y": 0.6179
+        }
+      ]
+    },
+    {
+      "id": "target-track-30",
+      "sampleCount": 38,
+      "visibleStartS": 6.67,
+      "visibleEndS": 9.75,
+      "durationSeconds": 3.08,
+      "entrySide": "left",
+      "exitSide": "left",
+      "xRange": 0.0073,
+      "yRange": 0.0025,
+      "pathLength": 0.0126,
+      "turnCount": 22,
+      "reversalCount": 7,
+      "lowerFieldShare": 1,
+      "meanArea": 127.7,
+      "areaStability": 0.948,
+      "first": {
+        "x": 0.1909,
+        "y": 0.6167
+      },
+      "last": {
+        "x": 0.1838,
+        "y": 0.616
+      },
+      "sampledPoints": [
+        {
+          "t": 6.67,
+          "x": 0.1909,
+          "y": 0.6167
+        },
+        {
+          "t": 7,
+          "x": 0.191,
+          "y": 0.6165
+        },
+        {
+          "t": 7.33,
+          "x": 0.1909,
+          "y": 0.6168
+        },
+        {
+          "t": 7.67,
+          "x": 0.1905,
+          "y": 0.6167
+        },
+        {
+          "t": 8,
+          "x": 0.191,
+          "y": 0.6166
+        },
+        {
+          "t": 8.42,
+          "x": 0.191,
+          "y": 0.6166
+        },
+        {
+          "t": 8.75,
+          "x": 0.191,
+          "y": 0.6166
+        },
+        {
+          "t": 9.08,
+          "x": 0.1907,
+          "y": 0.6168
+        },
+        {
+          "t": 9.42,
+          "x": 0.1907,
+          "y": 0.6165
+        },
+        {
+          "t": 9.75,
+          "x": 0.1838,
+          "y": 0.616
+        }
+      ]
+    },
+    {
+      "id": "target-track-28",
+      "sampleCount": 38,
+      "visibleStartS": 6.67,
+      "visibleEndS": 9.75,
+      "durationSeconds": 3.08,
+      "entrySide": "left",
+      "exitSide": "left",
+      "xRange": 0.0064,
+      "yRange": 0.0023,
+      "pathLength": 0.0112,
+      "turnCount": 18,
+      "reversalCount": 8,
+      "lowerFieldShare": 1,
+      "meanArea": 139.6,
+      "areaStability": 0.955,
+      "first": {
+        "x": 0.155,
+        "y": 0.616
+      },
+      "last": {
+        "x": 0.1488,
+        "y": 0.6152
+      },
+      "sampledPoints": [
+        {
+          "t": 6.67,
+          "x": 0.155,
+          "y": 0.616
+        },
+        {
+          "t": 7,
+          "x": 0.155,
+          "y": 0.6164
+        },
+        {
+          "t": 7.33,
+          "x": 0.1549,
+          "y": 0.6164
+        },
+        {
+          "t": 7.67,
+          "x": 0.1549,
+          "y": 0.6164
+        },
+        {
+          "t": 8,
+          "x": 0.1549,
+          "y": 0.6164
+        },
+        {
+          "t": 8.42,
+          "x": 0.155,
+          "y": 0.6164
+        },
+        {
+          "t": 8.75,
+          "x": 0.155,
+          "y": 0.6164
+        },
+        {
+          "t": 9.08,
+          "x": 0.155,
+          "y": 0.6164
+        },
+        {
+          "t": 9.42,
+          "x": 0.1544,
+          "y": 0.6167
+        },
+        {
+          "t": 9.75,
+          "x": 0.1488,
+          "y": 0.6152
+        }
+      ]
+    },
+    {
+      "id": "target-track-33",
+      "sampleCount": 38,
+      "visibleStartS": 6.67,
+      "visibleEndS": 9.75,
+      "durationSeconds": 3.08,
+      "entrySide": "center",
+      "exitSide": "center",
+      "xRange": 0.0019,
+      "yRange": 0.0037,
+      "pathLength": 0.0124,
+      "turnCount": 23,
+      "reversalCount": 13,
+      "lowerFieldShare": 1,
+      "meanArea": 98.6,
+      "areaStability": 0.962,
+      "first": {
+        "x": 0.5943,
+        "y": 0.6197
+      },
+      "last": {
+        "x": 0.595,
+        "y": 0.6172
+      },
+      "sampledPoints": [
+        {
+          "t": 6.67,
+          "x": 0.5943,
+          "y": 0.6197
+        },
+        {
+          "t": 7,
+          "x": 0.5941,
+          "y": 0.6192
+        },
+        {
+          "t": 7.33,
+          "x": 0.5941,
+          "y": 0.6192
+        },
+        {
+          "t": 7.67,
+          "x": 0.5941,
+          "y": 0.6193
+        },
+        {
+          "t": 8,
+          "x": 0.5941,
+          "y": 0.6193
+        },
+        {
+          "t": 8.42,
+          "x": 0.5941,
+          "y": 0.6193
+        },
+        {
+          "t": 8.75,
+          "x": 0.5941,
+          "y": 0.6193
+        },
+        {
+          "t": 9.08,
+          "x": 0.5941,
+          "y": 0.6192
+        },
+        {
+          "t": 9.42,
+          "x": 0.5941,
+          "y": 0.6189
+        },
+        {
+          "t": 9.75,
+          "x": 0.595,
+          "y": 0.6172
+        }
+      ]
+    },
+    {
+      "id": "target-track-32",
+      "sampleCount": 38,
+      "visibleStartS": 6.67,
+      "visibleEndS": 9.75,
+      "durationSeconds": 3.08,
+      "entrySide": "left",
+      "exitSide": "left",
+      "xRange": 0.0042,
+      "yRange": 0.004,
+      "pathLength": 0.0086,
+      "turnCount": 11,
+      "reversalCount": 3,
+      "lowerFieldShare": 1,
+      "meanArea": 96.7,
+      "areaStability": 0.93,
+      "first": {
+        "x": 0.2983,
+        "y": 0.6201
+      },
+      "last": {
+        "x": 0.2943,
+        "y": 0.6161
+      },
+      "sampledPoints": [
+        {
+          "t": 6.67,
+          "x": 0.2983,
+          "y": 0.6201
+        },
+        {
+          "t": 7,
+          "x": 0.2983,
+          "y": 0.6199
+        },
+        {
+          "t": 7.33,
+          "x": 0.2983,
+          "y": 0.6199
+        },
+        {
+          "t": 7.67,
+          "x": 0.2983,
+          "y": 0.6199
+        },
+        {
+          "t": 8,
+          "x": 0.2978,
+          "y": 0.6195
+        },
+        {
+          "t": 8.42,
+          "x": 0.2976,
+          "y": 0.6195
+        },
+        {
+          "t": 8.75,
+          "x": 0.2976,
+          "y": 0.6195
+        },
+        {
+          "t": 9.08,
+          "x": 0.2976,
+          "y": 0.6195
+        },
+        {
+          "t": 9.42,
+          "x": 0.2976,
+          "y": 0.6198
+        },
+        {
+          "t": 9.75,
+          "x": 0.2943,
+          "y": 0.6161
+        }
+      ]
+    },
+    {
+      "id": "target-track-31",
+      "sampleCount": 38,
+      "visibleStartS": 6.67,
+      "visibleEndS": 9.75,
+      "durationSeconds": 3.08,
+      "entrySide": "left",
+      "exitSide": "left",
+      "xRange": 0.0014,
+      "yRange": 0.0012,
+      "pathLength": 0.0074,
+      "turnCount": 26,
+      "reversalCount": 13,
+      "lowerFieldShare": 1,
+      "meanArea": 120.2,
+      "areaStability": 0.942,
+      "first": {
+        "x": 0.23,
+        "y": 0.6166
+      },
+      "last": {
+        "x": 0.2312,
+        "y": 0.6159
+      },
+      "sampledPoints": [
+        {
+          "t": 6.67,
+          "x": 0.23,
+          "y": 0.6166
+        },
+        {
+          "t": 7,
+          "x": 0.2299,
+          "y": 0.6165
+        },
+        {
+          "t": 7.33,
+          "x": 0.2299,
+          "y": 0.6165
+        },
+        {
+          "t": 7.67,
+          "x": 0.23,
+          "y": 0.6164
+        },
+        {
+          "t": 8,
+          "x": 0.23,
+          "y": 0.6164
+        },
+        {
+          "t": 8.42,
+          "x": 0.23,
+          "y": 0.6164
+        },
+        {
+          "t": 8.75,
+          "x": 0.23,
+          "y": 0.6164
+        },
+        {
+          "t": 9.08,
+          "x": 0.23,
+          "y": 0.6164
+        },
+        {
+          "t": 9.42,
+          "x": 0.2301,
+          "y": 0.6169
+        },
+        {
+          "t": 9.75,
+          "x": 0.2312,
+          "y": 0.6159
+        }
+      ]
+    },
+    {
+      "id": "target-track-27",
+      "sampleCount": 38,
+      "visibleStartS": 6.67,
+      "visibleEndS": 9.75,
+      "durationSeconds": 3.08,
+      "entrySide": "right",
+      "exitSide": "right",
+      "xRange": 0.0025,
+      "yRange": 0.0015,
+      "pathLength": 0.0043,
+      "turnCount": 6,
+      "reversalCount": 2,
+      "lowerFieldShare": 1,
+      "meanArea": 144.9,
+      "areaStability": 0.954,
+      "first": {
+        "x": 0.8083,
+        "y": 0.6141
+      },
+      "last": {
+        "x": 0.8065,
+        "y": 0.6155
+      },
+      "sampledPoints": [
+        {
+          "t": 6.67,
+          "x": 0.8083,
+          "y": 0.6141
+        },
+        {
+          "t": 7,
+          "x": 0.8083,
+          "y": 0.6141
+        },
+        {
+          "t": 7.33,
+          "x": 0.8083,
+          "y": 0.6141
+        },
+        {
+          "t": 7.67,
+          "x": 0.8081,
+          "y": 0.6141
+        },
+        {
+          "t": 8,
+          "x": 0.8081,
+          "y": 0.6141
+        },
+        {
+          "t": 8.42,
+          "x": 0.8081,
+          "y": 0.6141
+        },
+        {
+          "t": 8.75,
+          "x": 0.8081,
+          "y": 0.6141
+        },
+        {
+          "t": 9.08,
+          "x": 0.8081,
+          "y": 0.6141
+        },
+        {
+          "t": 9.42,
+          "x": 0.8085,
+          "y": 0.6145
+        },
+        {
+          "t": 9.75,
+          "x": 0.8065,
+          "y": 0.6155
+        }
+      ]
+    },
+    {
+      "id": "target-track-35",
+      "sampleCount": 6,
+      "visibleStartS": 9.33,
+      "visibleEndS": 9.75,
+      "durationSeconds": 0.42,
+      "entrySide": "left",
+      "exitSide": "left",
+      "xRange": 0.027,
+      "yRange": 0.005,
+      "pathLength": 0.0279,
+      "turnCount": 1,
+      "reversalCount": 0,
+      "lowerFieldShare": 1,
+      "meanArea": 92,
+      "areaStability": 0.714,
+      "first": {
+        "x": 0.3368,
+        "y": 0.5297
+      },
+      "last": {
+        "x": 0.3098,
+        "y": 0.5254
+      },
+      "sampledPoints": [
+        {
+          "t": 9.33,
+          "x": 0.3368,
+          "y": 0.5297
+        },
+        {
+          "t": 9.42,
+          "x": 0.3365,
+          "y": 0.5302
+        },
+        {
+          "t": 9.5,
+          "x": 0.3365,
+          "y": 0.5303
+        },
+        {
+          "t": 9.58,
+          "x": 0.3357,
+          "y": 0.5304
+        },
+        {
+          "t": 9.67,
+          "x": 0.3328,
+          "y": 0.5299
+        },
+        {
+          "t": 9.75,
+          "x": 0.3098,
+          "y": 0.5254
+        }
+      ]
+    },
+    {
+      "id": "target-track-34",
+      "sampleCount": 6,
+      "visibleStartS": 9.33,
+      "visibleEndS": 9.75,
+      "durationSeconds": 0.42,
+      "entrySide": "center",
+      "exitSide": "center",
+      "xRange": 0.0185,
+      "yRange": 0.0025,
+      "pathLength": 0.0287,
+      "turnCount": 2,
+      "reversalCount": 1,
+      "lowerFieldShare": 1,
+      "meanArea": 107.3,
+      "areaStability": 0.275,
+      "first": {
+        "x": 0.6464,
+        "y": 0.6165
+      },
+      "last": {
+        "x": 0.6377,
+        "y": 0.6142
+      },
+      "sampledPoints": [
+        {
+          "t": 9.33,
+          "x": 0.6464,
+          "y": 0.6165
+        },
+        {
+          "t": 9.42,
+          "x": 0.6283,
+          "y": 0.6163
+        },
+        {
+          "t": 9.5,
+          "x": 0.6279,
+          "y": 0.6166
+        },
+        {
+          "t": 9.58,
+          "x": 0.6286,
+          "y": 0.6164
+        },
+        {
+          "t": 9.67,
+          "x": 0.637,
+          "y": 0.6141
+        },
+        {
+          "t": 9.75,
+          "x": 0.6377,
+          "y": 0.6142
+        }
+      ]
+    },
+    {
+      "id": "target-track-29",
+      "sampleCount": 19,
+      "visibleStartS": 6.67,
+      "visibleEndS": 8.17,
+      "durationSeconds": 1.5,
+      "entrySide": "right",
+      "exitSide": "right",
+      "xRange": 0.0001,
+      "yRange": 0.0002,
+      "pathLength": 0.0007,
+      "turnCount": 7,
+      "reversalCount": 0,
+      "lowerFieldShare": 1,
+      "meanArea": 140.1,
+      "areaStability": 0.995,
+      "first": {
+        "x": 0.7381,
+        "y": 0.6165
+      },
+      "last": {
+        "x": 0.7382,
+        "y": 0.6167
+      },
+      "sampledPoints": [
+        {
+          "t": 6.67,
+          "x": 0.7381,
+          "y": 0.6165
+        },
+        {
+          "t": 6.83,
+          "x": 0.7382,
+          "y": 0.6165
+        },
+        {
+          "t": 7,
+          "x": 0.7382,
+          "y": 0.6166
+        },
+        {
+          "t": 7.17,
+          "x": 0.7382,
+          "y": 0.6166
+        },
+        {
+          "t": 7.33,
+          "x": 0.7382,
+          "y": 0.6166
+        },
+        {
+          "t": 7.5,
+          "x": 0.7382,
+          "y": 0.6166
+        },
+        {
+          "t": 7.67,
+          "x": 0.7382,
+          "y": 0.6167
+        },
+        {
+          "t": 7.83,
+          "x": 0.7382,
+          "y": 0.6167
+        },
+        {
+          "t": 8,
+          "x": 0.7382,
+          "y": 0.6165
+        },
+        {
+          "t": 8.17,
+          "x": 0.7382,
+          "y": 0.6167
+        }
+      ]
+    },
+    {
+      "id": "target-track-43",
+      "sampleCount": 5,
+      "visibleStartS": 9.42,
+      "visibleEndS": 9.75,
+      "durationSeconds": 0.33,
+      "entrySide": "center",
+      "exitSide": "center",
+      "xRange": 0.0096,
+      "yRange": 0.0064,
+      "pathLength": 0.014,
+      "turnCount": 2,
+      "reversalCount": 0,
+      "lowerFieldShare": 1,
+      "meanArea": 87.8,
+      "areaStability": 0.593,
+      "first": {
+        "x": 0.5191,
+        "y": 0.6168
+      },
+      "last": {
+        "x": 0.5095,
+        "y": 0.6107
+      },
+      "sampledPoints": [
+        {
+          "t": 9.42,
+          "x": 0.5191,
+          "y": 0.6168
+        },
+        {
+          "t": 9.5,
+          "x": 0.5188,
+          "y": 0.617
+        },
+        {
+          "t": 9.58,
+          "x": 0.5187,
+          "y": 0.6171
+        },
+        {
+          "t": 9.67,
+          "x": 0.5186,
+          "y": 0.613
+        },
+        {
+          "t": 9.75,
+          "x": 0.5095,
+          "y": 0.6107
+        }
+      ]
+    },
+    {
+      "id": "target-track-36",
+      "sampleCount": 6,
+      "visibleStartS": 9.33,
+      "visibleEndS": 9.75,
+      "durationSeconds": 0.42,
+      "entrySide": "left",
+      "exitSide": "left",
+      "xRange": 0.0083,
+      "yRange": 0.0053,
+      "pathLength": 0.0107,
+      "turnCount": 1,
+      "reversalCount": 1,
+      "lowerFieldShare": 1,
+      "meanArea": 97.2,
+      "areaStability": 0.766,
+      "first": {
+        "x": 0.0819,
+        "y": 0.6168
+      },
+      "last": {
+        "x": 0.0738,
+        "y": 0.6123
+      },
+      "sampledPoints": [
+        {
+          "t": 9.33,
+          "x": 0.0819,
+          "y": 0.6168
+        },
+        {
+          "t": 9.42,
+          "x": 0.082,
+          "y": 0.6171
+        },
+        {
+          "t": 9.5,
+          "x": 0.0821,
+          "y": 0.6176
+        },
+        {
+          "t": 9.58,
+          "x": 0.0818,
+          "y": 0.6171
+        },
+        {
+          "t": 9.67,
+          "x": 0.0813,
+          "y": 0.6167
+        },
+        {
+          "t": 9.75,
+          "x": 0.0738,
+          "y": 0.6123
+        }
+      ]
+    },
+    {
+      "id": "target-track-37",
+      "sampleCount": 6,
+      "visibleStartS": 9.33,
+      "visibleEndS": 9.75,
+      "durationSeconds": 0.42,
+      "entrySide": "right",
+      "exitSide": "right",
+      "xRange": 0.0102,
+      "yRange": 0.0021,
+      "pathLength": 0.0114,
+      "turnCount": 4,
+      "reversalCount": 1,
+      "lowerFieldShare": 1,
+      "meanArea": 87.7,
+      "areaStability": 0.685,
+      "first": {
+        "x": 0.7384,
+        "y": 0.6165
+      },
+      "last": {
+        "x": 0.748,
+        "y": 0.6154
+      },
+      "sampledPoints": [
+        {
+          "t": 9.33,
+          "x": 0.7384,
+          "y": 0.6165
+        },
+        {
+          "t": 9.42,
+          "x": 0.7381,
+          "y": 0.6164
+        },
+        {
+          "t": 9.5,
+          "x": 0.7381,
+          "y": 0.6163
+        },
+        {
+          "t": 9.58,
+          "x": 0.7378,
+          "y": 0.6163
+        },
+        {
+          "t": 9.67,
+          "x": 0.7464,
+          "y": 0.6144
+        },
+        {
+          "t": 9.75,
+          "x": 0.748,
+          "y": 0.6154
+        }
+      ]
+    },
+    {
+      "id": "target-track-42",
+      "sampleCount": 5,
+      "visibleStartS": 9.42,
+      "visibleEndS": 9.75,
+      "durationSeconds": 0.33,
+      "entrySide": "center",
+      "exitSide": "center",
+      "xRange": 0.0114,
+      "yRange": 0.0014,
+      "pathLength": 0.0129,
+      "turnCount": 3,
+      "reversalCount": 1,
+      "lowerFieldShare": 1,
+      "meanArea": 92.2,
+      "areaStability": 0.669,
+      "first": {
+        "x": 0.4098,
+        "y": 0.6163
+      },
+      "last": {
+        "x": 0.3989,
+        "y": 0.6159
+      },
+      "sampledPoints": [
+        {
+          "t": 9.42,
+          "x": 0.4098,
+          "y": 0.6163
+        },
+        {
+          "t": 9.5,
+          "x": 0.4098,
+          "y": 0.6167
+        },
+        {
+          "t": 9.58,
+          "x": 0.4103,
+          "y": 0.617
+        },
+        {
+          "t": 9.67,
+          "x": 0.4004,
+          "y": 0.6173
+        },
+        {
+          "t": 9.75,
+          "x": 0.3989,
+          "y": 0.6159
+        }
+      ]
+    }
+  ],
+  "sampledFrames": [
+    {
+      "index": 0,
+      "t": 0,
+      "componentCount": 0,
+      "largestComponents": []
+    },
+    {
+      "index": 10,
+      "t": 0.83,
+      "componentCount": 0,
+      "largestComponents": []
+    },
+    {
+      "index": 20,
+      "t": 1.67,
+      "componentCount": 6,
+      "largestComponents": [
+        {
+          "area": 735,
+          "x": 0.2478,
+          "y": 0.5307,
+          "box": {
+            "x": 0.1748,
+            "y": 0.5163,
+            "w": 0.1456,
+            "h": 0.0307
+          },
+          "density": 0.766,
+          "meanColor": {
+            "r": 18.2,
+            "g": 175.8,
+            "b": 177.8
+          }
+        },
+        {
+          "area": 355,
+          "x": 0.3565,
+          "y": 0.5302,
+          "box": {
+            "x": 0.3252,
+            "y": 0.5163,
+            "w": 0.068,
+            "h": 0.0307
+          },
+          "density": 0.792,
+          "meanColor": {
+            "r": 22.1,
+            "g": 166.5,
+            "b": 167
+          }
+        },
+        {
+          "area": 313,
+          "x": 0.4602,
+          "y": 0.5293,
+          "box": {
+            "x": 0.4296,
+            "y": 0.5163,
+            "w": 0.0704,
+            "h": 0.0307
+          },
+          "density": 0.675,
+          "meanColor": {
+            "r": 24.9,
+            "g": 166.8,
+            "b": 164.5
+          }
+        },
+        {
+          "area": 278,
+          "x": 0.6526,
+          "y": 0.5299,
+          "box": {
+            "x": 0.6189,
+            "y": 0.5163,
+            "w": 0.0655,
+            "h": 0.0307
+          },
+          "density": 0.644,
+          "meanColor": {
+            "r": 23.2,
+            "g": 163,
+            "b": 158.9
+          }
+        },
+        {
+          "area": 165,
+          "x": 0.5558,
+          "y": 0.5305,
+          "box": {
+            "x": 0.5388,
+            "y": 0.5182,
+            "w": 0.0364,
+            "h": 0.0269
+          },
+          "density": 0.786,
+          "meanColor": {
+            "r": 32.2,
+            "g": 174.6,
+            "b": 167
+          }
+        },
+        {
+          "area": 131,
+          "x": 0.5943,
+          "y": 0.5305,
+          "box": {
+            "x": 0.5801,
+            "y": 0.5163,
+            "w": 0.0316,
+            "h": 0.0307
+          },
+          "density": 0.63,
+          "meanColor": {
+            "r": 24,
+            "g": 166.2,
+            "b": 160.5
+          }
+        }
+      ]
+    },
+    {
+      "index": 30,
+      "t": 2.5,
+      "componentCount": 6,
+      "largestComponents": [
+        {
+          "area": 737,
+          "x": 0.248,
+          "y": 0.5307,
+          "box": {
+            "x": 0.1748,
+            "y": 0.5163,
+            "w": 0.1456,
+            "h": 0.0307
+          },
+          "density": 0.768,
+          "meanColor": {
+            "r": 16.9,
+            "g": 176.5,
+            "b": 178.4
+          }
+        },
+        {
+          "area": 354,
+          "x": 0.3565,
+          "y": 0.5303,
+          "box": {
+            "x": 0.3252,
+            "y": 0.5163,
+            "w": 0.068,
+            "h": 0.0307
+          },
+          "density": 0.79,
+          "meanColor": {
+            "r": 21.1,
+            "g": 167.2,
+            "b": 166.8
+          }
+        },
+        {
+          "area": 317,
+          "x": 0.4602,
+          "y": 0.5292,
+          "box": {
+            "x": 0.4296,
+            "y": 0.5163,
+            "w": 0.0704,
+            "h": 0.0307
+          },
+          "density": 0.683,
+          "meanColor": {
+            "r": 24.6,
+            "g": 166.5,
+            "b": 164.5
+          }
+        },
+        {
+          "area": 279,
+          "x": 0.6525,
+          "y": 0.5297,
+          "box": {
+            "x": 0.6189,
+            "y": 0.5163,
+            "w": 0.0655,
+            "h": 0.0307
+          },
+          "density": 0.646,
+          "meanColor": {
+            "r": 23,
+            "g": 162.7,
+            "b": 159.8
+          }
+        },
+        {
+          "area": 164,
+          "x": 0.5558,
+          "y": 0.5305,
+          "box": {
+            "x": 0.5388,
+            "y": 0.5182,
+            "w": 0.0364,
+            "h": 0.0269
+          },
+          "density": 0.781,
+          "meanColor": {
+            "r": 33.1,
+            "g": 176.6,
+            "b": 172.7
+          }
+        },
+        {
+          "area": 130,
+          "x": 0.5944,
+          "y": 0.5305,
+          "box": {
+            "x": 0.5801,
+            "y": 0.5163,
+            "w": 0.0316,
+            "h": 0.0307
+          },
+          "density": 0.625,
+          "meanColor": {
+            "r": 22.3,
+            "g": 167.7,
+            "b": 159.6
+          }
+        }
+      ]
+    },
+    {
+      "index": 40,
+      "t": 3.33,
+      "componentCount": 8,
+      "largestComponents": [
+        {
+          "area": 743,
+          "x": 0.2482,
+          "y": 0.5306,
+          "box": {
+            "x": 0.1748,
+            "y": 0.5163,
+            "w": 0.1456,
+            "h": 0.0307
+          },
+          "density": 0.774,
+          "meanColor": {
+            "r": 16.9,
+            "g": 175.9,
+            "b": 177.8
+          }
+        },
+        {
+          "area": 358,
+          "x": 0.357,
+          "y": 0.5304,
+          "box": {
+            "x": 0.3252,
+            "y": 0.5163,
+            "w": 0.068,
+            "h": 0.0326
+          },
+          "density": 0.752,
+          "meanColor": {
+            "r": 21.9,
+            "g": 166.8,
+            "b": 168.4
+          }
+        },
+        {
+          "area": 320,
+          "x": 0.4607,
+          "y": 0.529,
+          "box": {
+            "x": 0.4296,
+            "y": 0.5163,
+            "w": 0.0704,
+            "h": 0.0307
+          },
+          "density": 0.69,
+          "meanColor": {
+            "r": 24.1,
+            "g": 166,
+            "b": 164
+          }
+        },
+        {
+          "area": 279,
+          "x": 0.6525,
+          "y": 0.5297,
+          "box": {
+            "x": 0.6189,
+            "y": 0.5163,
+            "w": 0.0655,
+            "h": 0.0307
+          },
+          "density": 0.646,
+          "meanColor": {
+            "r": 23,
+            "g": 162.9,
+            "b": 159.7
+          }
+        },
+        {
+          "area": 164,
+          "x": 0.5558,
+          "y": 0.5305,
+          "box": {
+            "x": 0.5388,
+            "y": 0.5182,
+            "w": 0.0364,
+            "h": 0.0269
+          },
+          "density": 0.781,
+          "meanColor": {
+            "r": 33,
+            "g": 176.6,
+            "b": 172.6
+          }
+        },
+        {
+          "area": 146,
+          "x": 0.8112,
+          "y": 0.5309,
+          "box": {
+            "x": 0.7937,
+            "y": 0.5182,
+            "w": 0.0364,
+            "h": 0.0288
+          },
+          "density": 0.649,
+          "meanColor": {
+            "r": 19.8,
+            "g": 169.2,
+            "b": 155.3
+          }
+        },
+        {
+          "area": 141,
+          "x": 0.7755,
+          "y": 0.5298,
+          "box": {
+            "x": 0.7573,
+            "y": 0.5163,
+            "w": 0.034,
+            "h": 0.0288
+          },
+          "density": 0.671,
+          "meanColor": {
+            "r": 20.4,
+            "g": 178.5,
+            "b": 165.9
+          }
+        },
+        {
+          "area": 130,
+          "x": 0.5944,
+          "y": 0.5305,
+          "box": {
+            "x": 0.5801,
+            "y": 0.5163,
+            "w": 0.0316,
+            "h": 0.0307
+          },
+          "density": 0.625,
+          "meanColor": {
+            "r": 22.3,
+            "g": 167.6,
+            "b": 159.5
+          }
+        }
+      ]
+    },
+    {
+      "index": 50,
+      "t": 4.17,
+      "componentCount": 9,
+      "largestComponents": [
+        {
+          "area": 732,
+          "x": 0.2482,
+          "y": 0.5304,
+          "box": {
+            "x": 0.1748,
+            "y": 0.5163,
+            "w": 0.1456,
+            "h": 0.0307
+          },
+          "density": 0.762,
+          "meanColor": {
+            "r": 17.4,
+            "g": 176.8,
+            "b": 180.9
+          }
+        },
+        {
+          "area": 316,
+          "x": 0.4605,
+          "y": 0.5289,
+          "box": {
+            "x": 0.4296,
+            "y": 0.5163,
+            "w": 0.0704,
+            "h": 0.0307
+          },
+          "density": 0.681,
+          "meanColor": {
+            "r": 22.6,
+            "g": 168.6,
+            "b": 167
+          }
+        },
+        {
+          "area": 283,
+          "x": 0.6519,
+          "y": 0.5301,
+          "box": {
+            "x": 0.6189,
+            "y": 0.5163,
+            "w": 0.0655,
+            "h": 0.0326
+          },
+          "density": 0.617,
+          "meanColor": {
+            "r": 24,
+            "g": 162.3,
+            "b": 159.8
+          }
+        },
+        {
+          "area": 189,
+          "x": 0.373,
+          "y": 0.5301,
+          "box": {
+            "x": 0.3568,
+            "y": 0.5163,
+            "w": 0.0364,
+            "h": 0.0288
+          },
+          "density": 0.84,
+          "meanColor": {
+            "r": 17.8,
+            "g": 176.3,
+            "b": 174.8
+          }
+        },
+        {
+          "area": 168,
+          "x": 0.5554,
+          "y": 0.5303,
+          "box": {
+            "x": 0.5388,
+            "y": 0.5163,
+            "w": 0.0364,
+            "h": 0.0288
+          },
+          "density": 0.747,
+          "meanColor": {
+            "r": 29.6,
+            "g": 172.5,
+            "b": 170.7
+          }
+        },
+        {
+          "area": 158,
+          "x": 0.3374,
+          "y": 0.5304,
+          "box": {
+            "x": 0.3252,
+            "y": 0.5163,
+            "w": 0.0291,
+            "h": 0.0307
+          },
+          "density": 0.823,
+          "meanColor": {
+            "r": 26.1,
+            "g": 163.7,
+            "b": 164.3
+          }
+        },
+        {
+          "area": 146,
+          "x": 0.7757,
+          "y": 0.5294,
+          "box": {
+            "x": 0.7573,
+            "y": 0.5144,
+            "w": 0.034,
+            "h": 0.0307
+          },
+          "density": 0.652,
+          "meanColor": {
+            "r": 21.9,
+            "g": 180.2,
+            "b": 175.8
+          }
+        },
+        {
+          "area": 145,
+          "x": 0.811,
+          "y": 0.5302,
+          "box": {
+            "x": 0.7937,
+            "y": 0.5163,
+            "w": 0.0364,
+            "h": 0.0288
+          },
+          "density": 0.644,
+          "meanColor": {
+            "r": 20.8,
+            "g": 169.8,
+            "b": 165.3
+          }
+        },
+        {
+          "area": 134,
+          "x": 0.5949,
+          "y": 0.5313,
+          "box": {
+            "x": 0.5801,
+            "y": 0.5163,
+            "w": 0.0316,
+            "h": 0.0307
+          },
+          "density": 0.644,
+          "meanColor": {
+            "r": 23.3,
+            "g": 168.1,
+            "b": 164
+          }
+        }
+      ]
+    },
+    {
+      "index": 60,
+      "t": 5,
+      "componentCount": 16,
+      "largestComponents": [
+        {
+          "area": 730,
+          "x": 0.2483,
+          "y": 0.5304,
+          "box": {
+            "x": 0.1748,
+            "y": 0.5163,
+            "w": 0.1456,
+            "h": 0.0307
+          },
+          "density": 0.76,
+          "meanColor": {
+            "r": 17.7,
+            "g": 177.3,
+            "b": 180.9
+          }
+        },
+        {
+          "area": 522,
+          "x": 0.4443,
+          "y": 0.443,
+          "box": {
+            "x": 0.3981,
+            "y": 0.4261,
+            "w": 0.1019,
+            "h": 0.0345
+          },
+          "density": 0.69,
+          "meanColor": {
+            "r": 197.9,
+            "g": 37.7,
+            "b": 26.1
+          }
+        },
+        {
+          "area": 318,
+          "x": 0.4607,
+          "y": 0.5289,
+          "box": {
+            "x": 0.4296,
+            "y": 0.5163,
+            "w": 0.0704,
+            "h": 0.0307
+          },
+          "density": 0.685,
+          "meanColor": {
+            "r": 23.1,
+            "g": 168.3,
+            "b": 168.4
+          }
+        },
+        {
+          "area": 191,
+          "x": 0.3731,
+          "y": 0.5302,
+          "box": {
+            "x": 0.3568,
+            "y": 0.5163,
+            "w": 0.0364,
+            "h": 0.0307
+          },
+          "density": 0.796,
+          "meanColor": {
+            "r": 17.2,
+            "g": 174.8,
+            "b": 173.1
+          }
+        },
+        {
+          "area": 172,
+          "x": 0.6648,
+          "y": 0.5308,
+          "box": {
+            "x": 0.6481,
+            "y": 0.5163,
+            "w": 0.0364,
+            "h": 0.0307
+          },
+          "density": 0.717,
+          "meanColor": {
+            "r": 27,
+            "g": 160.5,
+            "b": 154.4
+          }
+        },
+        {
+          "area": 168,
+          "x": 0.5554,
+          "y": 0.5303,
+          "box": {
+            "x": 0.5388,
+            "y": 0.5163,
+            "w": 0.0364,
+            "h": 0.0288
+          },
+          "density": 0.747,
+          "meanColor": {
+            "r": 29.6,
+            "g": 172.5,
+            "b": 170.7
+          }
+        },
+        {
+          "area": 165,
+          "x": 0.5205,
+          "y": 0.4443,
+          "box": {
+            "x": 0.5073,
+            "y": 0.4299,
+            "w": 0.0316,
+            "h": 0.0307
+          },
+          "density": 0.793,
+          "meanColor": {
+            "r": 188.3,
+            "g": 35.9,
+            "b": 29.4
+          }
+        },
+        {
+          "area": 162,
+          "x": 0.372,
+          "y": 0.442,
+          "box": {
+            "x": 0.3568,
+            "y": 0.4299,
+            "w": 0.0364,
+            "h": 0.0307
+          },
+          "density": 0.675,
+          "meanColor": {
+            "r": 199.2,
+            "g": 38.6,
+            "b": 31.6
+          }
+        },
+        {
+          "area": 158,
+          "x": 0.3374,
+          "y": 0.5304,
+          "box": {
+            "x": 0.3252,
+            "y": 0.5163,
+            "w": 0.0291,
+            "h": 0.0307
+          },
+          "density": 0.823,
+          "meanColor": {
+            "r": 26.4,
+            "g": 163.6,
+            "b": 164.3
+          }
+        },
+        {
+          "area": 146,
+          "x": 0.5555,
+          "y": 0.4443,
+          "box": {
+            "x": 0.5388,
+            "y": 0.4299,
+            "w": 0.0364,
+            "h": 0.0307
+          },
+          "density": 0.608,
+          "meanColor": {
+            "r": 190.1,
+            "g": 40.2,
+            "b": 31.5
+          }
+        },
+        {
+          "area": 145,
+          "x": 0.7757,
+          "y": 0.5302,
+          "box": {
+            "x": 0.7573,
+            "y": 0.5163,
+            "w": 0.034,
+            "h": 0.0307
+          },
+          "density": 0.647,
+          "meanColor": {
+            "r": 19.4,
+            "g": 180.5,
+            "b": 179.9
+          }
+        },
+        {
+          "area": 144,
+          "x": 0.8109,
+          "y": 0.5301,
+          "box": {
+            "x": 0.7937,
+            "y": 0.5163,
+            "w": 0.0364,
+            "h": 0.0288
+          },
+          "density": 0.64,
+          "meanColor": {
+            "r": 20.8,
+            "g": 170.4,
+            "b": 166
+          }
+        }
+      ]
+    },
+    {
+      "index": 70,
+      "t": 5.83,
+      "componentCount": 9,
+      "largestComponents": [
+        {
+          "area": 740,
+          "x": 0.248,
+          "y": 0.5305,
+          "box": {
+            "x": 0.1748,
+            "y": 0.5163,
+            "w": 0.1456,
+            "h": 0.0307
+          },
+          "density": 0.771,
+          "meanColor": {
+            "r": 17,
+            "g": 175.3,
+            "b": 179.3
+          }
+        },
+        {
+          "area": 344,
+          "x": 0.357,
+          "y": 0.5301,
+          "box": {
+            "x": 0.3252,
+            "y": 0.5163,
+            "w": 0.068,
+            "h": 0.0307
+          },
+          "density": 0.768,
+          "meanColor": {
+            "r": 21.2,
+            "g": 170.6,
+            "b": 171
+          }
+        },
+        {
+          "area": 318,
+          "x": 0.4606,
+          "y": 0.5289,
+          "box": {
+            "x": 0.4296,
+            "y": 0.5163,
+            "w": 0.0704,
+            "h": 0.0307
+          },
+          "density": 0.685,
+          "meanColor": {
+            "r": 23.7,
+            "g": 168.9,
+            "b": 166.4
+          }
+        },
+        {
+          "area": 174,
+          "x": 0.6646,
+          "y": 0.531,
+          "box": {
+            "x": 0.6481,
+            "y": 0.5163,
+            "w": 0.0364,
+            "h": 0.0307
+          },
+          "density": 0.725,
+          "meanColor": {
+            "r": 27.1,
+            "g": 161,
+            "b": 155.5
+          }
+        },
+        {
+          "area": 166,
+          "x": 0.5556,
+          "y": 0.5305,
+          "box": {
+            "x": 0.5388,
+            "y": 0.5163,
+            "w": 0.0364,
+            "h": 0.0288
+          },
+          "density": 0.738,
+          "meanColor": {
+            "r": 28.4,
+            "g": 173.9,
+            "b": 171.7
+          }
+        },
+        {
+          "area": 143,
+          "x": 0.8113,
+          "y": 0.5303,
+          "box": {
+            "x": 0.7937,
+            "y": 0.5163,
+            "w": 0.0364,
+            "h": 0.0307
+          },
+          "density": 0.596,
+          "meanColor": {
+            "r": 18.6,
+            "g": 170.4,
+            "b": 170.4
+          }
+        },
+        {
+          "area": 141,
+          "x": 0.7755,
+          "y": 0.5301,
+          "box": {
+            "x": 0.7573,
+            "y": 0.5163,
+            "w": 0.034,
+            "h": 0.0288
+          },
+          "density": 0.671,
+          "meanColor": {
+            "r": 19.5,
+            "g": 180.1,
+            "b": 180.7
+          }
+        },
+        {
+          "area": 130,
+          "x": 0.5946,
+          "y": 0.5305,
+          "box": {
+            "x": 0.5801,
+            "y": 0.5163,
+            "w": 0.0316,
+            "h": 0.0307
+          },
+          "density": 0.625,
+          "meanColor": {
+            "r": 20.6,
+            "g": 167.4,
+            "b": 162.5
+          }
+        },
+        {
+          "area": 99,
+          "x": 0.6311,
+          "y": 0.5273,
+          "box": {
+            "x": 0.6189,
+            "y": 0.5163,
+            "w": 0.0267,
+            "h": 0.0288
+          },
+          "density": 0.6,
+          "meanColor": {
+            "r": 21.2,
+            "g": 173.4,
+            "b": 176.6
+          }
+        }
+      ]
+    },
+    {
+      "index": 80,
+      "t": 6.67,
+      "componentCount": 26,
+      "largestComponents": [
+        {
+          "area": 856,
+          "x": 0.4432,
+          "y": 0.6169,
+          "box": {
+            "x": 0.3568,
+            "y": 0.5988,
+            "w": 0.182,
+            "h": 0.0345
+          },
+          "density": 0.634,
+          "meanColor": {
+            "r": 177.2,
+            "g": 178.7,
+            "b": 30
+          }
+        },
+        {
+          "area": 744,
+          "x": 0.248,
+          "y": 0.5306,
+          "box": {
+            "x": 0.1748,
+            "y": 0.5163,
+            "w": 0.1456,
+            "h": 0.0307
+          },
+          "density": 0.775,
+          "meanColor": {
+            "r": 17,
+            "g": 174.7,
+            "b": 179.3
+          }
+        },
+        {
+          "area": 494,
+          "x": 0.4443,
+          "y": 0.4434,
+          "box": {
+            "x": 0.3981,
+            "y": 0.4299,
+            "w": 0.1019,
+            "h": 0.0307
+          },
+          "density": 0.735,
+          "meanColor": {
+            "r": 196.8,
+            "g": 38.8,
+            "b": 27.1
+          }
+        },
+        {
+          "area": 412,
+          "x": 0.6652,
+          "y": 0.6164,
+          "box": {
+            "x": 0.6117,
+            "y": 0.6027,
+            "w": 0.1068,
+            "h": 0.0307
+          },
+          "density": 0.585,
+          "meanColor": {
+            "r": 173.8,
+            "g": 176.3,
+            "b": 34.4
+          }
+        },
+        {
+          "area": 344,
+          "x": 0.357,
+          "y": 0.5301,
+          "box": {
+            "x": 0.3252,
+            "y": 0.5163,
+            "w": 0.068,
+            "h": 0.0307
+          },
+          "density": 0.768,
+          "meanColor": {
+            "r": 21,
+            "g": 170.4,
+            "b": 170.5
+          }
+        },
+        {
+          "area": 316,
+          "x": 0.4607,
+          "y": 0.5289,
+          "box": {
+            "x": 0.4296,
+            "y": 0.5163,
+            "w": 0.0704,
+            "h": 0.0307
+          },
+          "density": 0.681,
+          "meanColor": {
+            "r": 22.9,
+            "g": 168.5,
+            "b": 166.5
+          }
+        },
+        {
+          "area": 309,
+          "x": 0.0987,
+          "y": 0.6154,
+          "box": {
+            "x": 0.0655,
+            "y": 0.6027,
+            "w": 0.0728,
+            "h": 0.0307
+          },
+          "density": 0.644,
+          "meanColor": {
+            "r": 170.2,
+            "g": 174,
+            "b": 41.2
+          }
+        },
+        {
+          "area": 277,
+          "x": 0.6522,
+          "y": 0.5297,
+          "box": {
+            "x": 0.6165,
+            "y": 0.5163,
+            "w": 0.068,
+            "h": 0.0307
+          },
+          "density": 0.618,
+          "meanColor": {
+            "r": 25.5,
+            "g": 164.6,
+            "b": 163.3
+          }
+        },
+        {
+          "area": 262,
+          "x": 0.8704,
+          "y": 0.6153,
+          "box": {
+            "x": 0.835,
+            "y": 0.5988,
+            "w": 0.068,
+            "h": 0.0345
+          },
+          "density": 0.52,
+          "meanColor": {
+            "r": 170,
+            "g": 169.7,
+            "b": 36.9
+          }
+        },
+        {
+          "area": 166,
+          "x": 0.5556,
+          "y": 0.5305,
+          "box": {
+            "x": 0.5388,
+            "y": 0.5163,
+            "w": 0.0364,
+            "h": 0.0288
+          },
+          "density": 0.738,
+          "meanColor": {
+            "r": 28.3,
+            "g": 174,
+            "b": 171.8
+          }
+        },
+        {
+          "area": 160,
+          "x": 0.3717,
+          "y": 0.4421,
+          "box": {
+            "x": 0.3568,
+            "y": 0.4299,
+            "w": 0.0364,
+            "h": 0.0288
+          },
+          "density": 0.711,
+          "meanColor": {
+            "r": 198.9,
+            "g": 42.5,
+            "b": 33.8
+          }
+        },
+        {
+          "area": 159,
+          "x": 0.2644,
+          "y": 0.617,
+          "box": {
+            "x": 0.2476,
+            "y": 0.6027,
+            "w": 0.0364,
+            "h": 0.0288
+          },
+          "density": 0.707,
+          "meanColor": {
+            "r": 181,
+            "g": 183.7,
+            "b": 33.1
+          }
+        }
+      ]
+    },
+    {
+      "index": 90,
+      "t": 7.5,
+      "componentCount": 26,
+      "largestComponents": [
+        {
+          "area": 853,
+          "x": 0.4428,
+          "y": 0.6168,
+          "box": {
+            "x": 0.3568,
+            "y": 0.6027,
+            "w": 0.182,
+            "h": 0.0307
+          },
+          "density": 0.711,
+          "meanColor": {
+            "r": 178.4,
+            "g": 178.5,
+            "b": 30.7
+          }
+        },
+        {
+          "area": 747,
+          "x": 0.2474,
+          "y": 0.5304,
+          "box": {
+            "x": 0.1748,
+            "y": 0.5144,
+            "w": 0.1456,
+            "h": 0.0326
+          },
+          "density": 0.732,
+          "meanColor": {
+            "r": 17.6,
+            "g": 174.8,
+            "b": 178.3
+          }
+        },
+        {
+          "area": 491,
+          "x": 0.4438,
+          "y": 0.4433,
+          "box": {
+            "x": 0.3981,
+            "y": 0.4299,
+            "w": 0.1019,
+            "h": 0.0307
+          },
+          "density": 0.731,
+          "meanColor": {
+            "r": 198.9,
+            "g": 39.2,
+            "b": 23.1
+          }
+        },
+        {
+          "area": 414,
+          "x": 0.6652,
+          "y": 0.6165,
+          "box": {
+            "x": 0.6117,
+            "y": 0.6027,
+            "w": 0.1068,
+            "h": 0.0307
+          },
+          "density": 0.588,
+          "meanColor": {
+            "r": 173.6,
+            "g": 175.5,
+            "b": 35.1
+          }
+        },
+        {
+          "area": 344,
+          "x": 0.357,
+          "y": 0.5301,
+          "box": {
+            "x": 0.3252,
+            "y": 0.5163,
+            "w": 0.068,
+            "h": 0.0307
+          },
+          "density": 0.768,
+          "meanColor": {
+            "r": 21.8,
+            "g": 170.9,
+            "b": 171
+          }
+        },
+        {
+          "area": 313,
+          "x": 0.4606,
+          "y": 0.5288,
+          "box": {
+            "x": 0.4296,
+            "y": 0.5163,
+            "w": 0.0704,
+            "h": 0.0307
+          },
+          "density": 0.675,
+          "meanColor": {
+            "r": 23,
+            "g": 168.9,
+            "b": 166.8
+          }
+        },
+        {
+          "area": 308,
+          "x": 0.0989,
+          "y": 0.6156,
+          "box": {
+            "x": 0.0655,
+            "y": 0.6027,
+            "w": 0.0728,
+            "h": 0.0307
+          },
+          "density": 0.642,
+          "meanColor": {
+            "r": 171.2,
+            "g": 175,
+            "b": 41.2
+          }
+        },
+        {
+          "area": 276,
+          "x": 0.6523,
+          "y": 0.5297,
+          "box": {
+            "x": 0.6189,
+            "y": 0.5163,
+            "w": 0.0655,
+            "h": 0.0307
+          },
+          "density": 0.639,
+          "meanColor": {
+            "r": 25.2,
+            "g": 164.6,
+            "b": 163
+          }
+        },
+        {
+          "area": 260,
+          "x": 0.8704,
+          "y": 0.6156,
+          "box": {
+            "x": 0.8374,
+            "y": 0.6027,
+            "w": 0.0655,
+            "h": 0.0307
+          },
+          "density": 0.602,
+          "meanColor": {
+            "r": 171.8,
+            "g": 171.2,
+            "b": 40.2
+          }
+        },
+        {
+          "area": 166,
+          "x": 0.5556,
+          "y": 0.5305,
+          "box": {
+            "x": 0.5388,
+            "y": 0.5163,
+            "w": 0.0364,
+            "h": 0.0288
+          },
+          "density": 0.738,
+          "meanColor": {
+            "r": 28.2,
+            "g": 173.8,
+            "b": 171.7
+          }
+        },
+        {
+          "area": 161,
+          "x": 0.2644,
+          "y": 0.6169,
+          "box": {
+            "x": 0.2476,
+            "y": 0.6027,
+            "w": 0.0364,
+            "h": 0.0288
+          },
+          "density": 0.716,
+          "meanColor": {
+            "r": 179.9,
+            "g": 183.7,
+            "b": 32
+          }
+        },
+        {
+          "area": 158,
+          "x": 0.5204,
+          "y": 0.4444,
+          "box": {
+            "x": 0.5073,
+            "y": 0.4299,
+            "w": 0.0316,
+            "h": 0.0307
+          },
+          "density": 0.76,
+          "meanColor": {
+            "r": 195.3,
+            "g": 37.9,
+            "b": 31.4
+          }
+        }
+      ]
+    },
+    {
+      "index": 100,
+      "t": 8.33,
+      "componentCount": 25,
+      "largestComponents": [
+        {
+          "area": 869,
+          "x": 0.4413,
+          "y": 0.6171,
+          "box": {
+            "x": 0.3544,
+            "y": 0.6027,
+            "w": 0.1845,
+            "h": 0.0345
+          },
+          "density": 0.635,
+          "meanColor": {
+            "r": 177.9,
+            "g": 177.1,
+            "b": 32.5
+          }
+        },
+        {
+          "area": 741,
+          "x": 0.2483,
+          "y": 0.5305,
+          "box": {
+            "x": 0.1748,
+            "y": 0.5163,
+            "w": 0.1456,
+            "h": 0.0307
+          },
+          "density": 0.772,
+          "meanColor": {
+            "r": 17,
+            "g": 175.2,
+            "b": 178.7
+          }
+        },
+        {
+          "area": 557,
+          "x": 0.6836,
+          "y": 0.6164,
+          "box": {
+            "x": 0.6117,
+            "y": 0.6027,
+            "w": 0.1456,
+            "h": 0.0307
+          },
+          "density": 0.58,
+          "meanColor": {
+            "r": 174.4,
+            "g": 175,
+            "b": 33.8
+          }
+        },
+        {
+          "area": 492,
+          "x": 0.4438,
+          "y": 0.4433,
+          "box": {
+            "x": 0.3981,
+            "y": 0.4299,
+            "w": 0.1019,
+            "h": 0.0307
+          },
+          "density": 0.732,
+          "meanColor": {
+            "r": 201.3,
+            "g": 39,
+            "b": 23.3
+          }
+        },
+        {
+          "area": 344,
+          "x": 0.357,
+          "y": 0.5301,
+          "box": {
+            "x": 0.3252,
+            "y": 0.5163,
+            "w": 0.068,
+            "h": 0.0307
+          },
+          "density": 0.768,
+          "meanColor": {
+            "r": 21.1,
+            "g": 171.2,
+            "b": 171.3
+          }
+        },
+        {
+          "area": 316,
+          "x": 0.4606,
+          "y": 0.5289,
+          "box": {
+            "x": 0.4296,
+            "y": 0.5163,
+            "w": 0.0704,
+            "h": 0.0307
+          },
+          "density": 0.681,
+          "meanColor": {
+            "r": 23.1,
+            "g": 168.2,
+            "b": 167.2
+          }
+        },
+        {
+          "area": 311,
+          "x": 0.099,
+          "y": 0.6157,
+          "box": {
+            "x": 0.0655,
+            "y": 0.6027,
+            "w": 0.0728,
+            "h": 0.0307
+          },
+          "density": 0.648,
+          "meanColor": {
+            "r": 171.8,
+            "g": 175.8,
+            "b": 41.4
+          }
+        },
+        {
+          "area": 275,
+          "x": 0.6523,
+          "y": 0.5297,
+          "box": {
+            "x": 0.6189,
+            "y": 0.5163,
+            "w": 0.0655,
+            "h": 0.0307
+          },
+          "density": 0.637,
+          "meanColor": {
+            "r": 25.6,
+            "g": 164.8,
+            "b": 163.9
+          }
+        },
+        {
+          "area": 260,
+          "x": 0.8705,
+          "y": 0.6156,
+          "box": {
+            "x": 0.8374,
+            "y": 0.6027,
+            "w": 0.0655,
+            "h": 0.0307
+          },
+          "density": 0.602,
+          "meanColor": {
+            "r": 172.8,
+            "g": 172.2,
+            "b": 37.9
+          }
+        },
+        {
+          "area": 166,
+          "x": 0.5556,
+          "y": 0.5305,
+          "box": {
+            "x": 0.5388,
+            "y": 0.5163,
+            "w": 0.0364,
+            "h": 0.0288
+          },
+          "density": 0.738,
+          "meanColor": {
+            "r": 28.3,
+            "g": 174.3,
+            "b": 171.5
+          }
+        },
+        {
+          "area": 162,
+          "x": 0.2645,
+          "y": 0.617,
+          "box": {
+            "x": 0.2476,
+            "y": 0.6027,
+            "w": 0.0364,
+            "h": 0.0307
+          },
+          "density": 0.675,
+          "meanColor": {
+            "r": 180.7,
+            "g": 183.1,
+            "b": 32.2
+          }
+        },
+        {
+          "area": 157,
+          "x": 0.372,
+          "y": 0.4419,
+          "box": {
+            "x": 0.3568,
+            "y": 0.4299,
+            "w": 0.0364,
+            "h": 0.0288
+          },
+          "density": 0.698,
+          "meanColor": {
+            "r": 206.5,
+            "g": 41.6,
+            "b": 27
+          }
+        }
+      ]
+    },
+    {
+      "index": 110,
+      "t": 9.17,
+      "componentCount": 25,
+      "largestComponents": [
+        {
+          "area": 851,
+          "x": 0.4418,
+          "y": 0.6168,
+          "box": {
+            "x": 0.3568,
+            "y": 0.6027,
+            "w": 0.182,
+            "h": 0.0307
+          },
+          "density": 0.709,
+          "meanColor": {
+            "r": 179.6,
+            "g": 177.9,
+            "b": 31.8
+          }
+        },
+        {
+          "area": 743,
+          "x": 0.2483,
+          "y": 0.5305,
+          "box": {
+            "x": 0.1748,
+            "y": 0.5163,
+            "w": 0.1456,
+            "h": 0.0307
+          },
+          "density": 0.774,
+          "meanColor": {
+            "r": 17,
+            "g": 175.1,
+            "b": 178.6
+          }
+        },
+        {
+          "area": 557,
+          "x": 0.6835,
+          "y": 0.6166,
+          "box": {
+            "x": 0.6117,
+            "y": 0.6027,
+            "w": 0.1456,
+            "h": 0.0307
+          },
+          "density": 0.58,
+          "meanColor": {
+            "r": 174.8,
+            "g": 175.9,
+            "b": 34.5
+          }
+        },
+        {
+          "area": 492,
+          "x": 0.4442,
+          "y": 0.4432,
+          "box": {
+            "x": 0.3981,
+            "y": 0.4299,
+            "w": 0.1019,
+            "h": 0.0307
+          },
+          "density": 0.732,
+          "meanColor": {
+            "r": 201.5,
+            "g": 38.7,
+            "b": 24.8
+          }
+        },
+        {
+          "area": 344,
+          "x": 0.357,
+          "y": 0.5301,
+          "box": {
+            "x": 0.3252,
+            "y": 0.5163,
+            "w": 0.068,
+            "h": 0.0307
+          },
+          "density": 0.768,
+          "meanColor": {
+            "r": 21.6,
+            "g": 170.9,
+            "b": 171.6
+          }
+        },
+        {
+          "area": 315,
+          "x": 0.4607,
+          "y": 0.5289,
+          "box": {
+            "x": 0.4296,
+            "y": 0.5163,
+            "w": 0.0704,
+            "h": 0.0307
+          },
+          "density": 0.679,
+          "meanColor": {
+            "r": 23.4,
+            "g": 167.9,
+            "b": 166.4
+          }
+        },
+        {
+          "area": 312,
+          "x": 0.0995,
+          "y": 0.6157,
+          "box": {
+            "x": 0.0655,
+            "y": 0.6027,
+            "w": 0.0728,
+            "h": 0.0307
+          },
+          "density": 0.65,
+          "meanColor": {
+            "r": 170.4,
+            "g": 174.5,
+            "b": 40
+          }
+        },
+        {
+          "area": 275,
+          "x": 0.6523,
+          "y": 0.5297,
+          "box": {
+            "x": 0.6189,
+            "y": 0.5163,
+            "w": 0.0655,
+            "h": 0.0307
+          },
+          "density": 0.637,
+          "meanColor": {
+            "r": 25.6,
+            "g": 164.8,
+            "b": 164
+          }
+        },
+        {
+          "area": 257,
+          "x": 0.8703,
+          "y": 0.6155,
+          "box": {
+            "x": 0.8374,
+            "y": 0.6027,
+            "w": 0.0655,
+            "h": 0.0307
+          },
+          "density": 0.595,
+          "meanColor": {
+            "r": 173.3,
+            "g": 172.6,
+            "b": 38.5
+          }
+        },
+        {
+          "area": 166,
+          "x": 0.5556,
+          "y": 0.5305,
+          "box": {
+            "x": 0.5388,
+            "y": 0.5163,
+            "w": 0.0364,
+            "h": 0.0288
+          },
+          "density": 0.738,
+          "meanColor": {
+            "r": 28.9,
+            "g": 175,
+            "b": 172.5
+          }
+        },
+        {
+          "area": 162,
+          "x": 0.2645,
+          "y": 0.617,
+          "box": {
+            "x": 0.2476,
+            "y": 0.6027,
+            "w": 0.0364,
+            "h": 0.0307
+          },
+          "density": 0.675,
+          "meanColor": {
+            "r": 180.7,
+            "g": 183.1,
+            "b": 32.2
+          }
+        },
+        {
+          "area": 159,
+          "x": 0.5205,
+          "y": 0.4442,
+          "box": {
+            "x": 0.5073,
+            "y": 0.4299,
+            "w": 0.0316,
+            "h": 0.0307
+          },
+          "density": 0.764,
+          "meanColor": {
+            "r": 194.1,
+            "g": 39.4,
+            "b": 25.5
+          }
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "overlaySvg": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-11-24-fba7f625/overlays/challenge-03-target-tracks.svg",
+    "contactSheetSvg": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-11-24-fba7f625/contact-sheets/challenge-03-target-samples.svg",
+    "perChallengeJson": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-11-24-fba7f625/tracks/challenge-03.json"
+  },
+  "measurementLimits": [
+    "CPU connected-component target tracking is not final sprite identity recognition.",
+    "The tracker intentionally ignores score text, player ship, lives, and most stars so it can focus on challenge-stage alien/object movement.",
+    "Groups are clustered from object-track start times; they are useful target vectors for movement comparison but still need human-readable review for exact wave identity."
+  ]
+}

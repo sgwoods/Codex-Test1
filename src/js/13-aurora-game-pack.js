@@ -716,13 +716,13 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   groups:5,
   enemiesPerGroup:8,
   upperBandRatio:.5,
-  spawnOffsetX:68,
+  spawnOffsetX:78,
   waveSpacingY:12,
   rowSpacingY:9,
-  waveDelay:1.46,
-  slotDelay:.12,
-  arcAmp:1.46,
-  dropAmp:1.08,
+  waveDelay:1.28,
+  slotDelay:.14,
+  arcAmp:1.28,
+  dropAmp:1.14,
   groupArcAmps:Object.freeze([1.34,1.28,1.46,1.38,1.18]),
   groupDropAmps:Object.freeze([.86,.94,1.08,1.12,1.02]),
   groupSpeedScales:Object.freeze([1.34,1.28,1.22,1.18,1.16]),
@@ -735,7 +735,7 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
    Object.freeze(['but','rogue','boss','bee','bee','boss','rogue','but'])
   ]),
   groupVisualFamilies:Object.freeze(['classic','scorpion','scorpion','stingray','stingray']),
-  groupPathFamilies:Object.freeze(['cross-sweep','cross-sweep','hook-arc','hook-arc','boss-led-loop'])
+  groupPathFamilies:Object.freeze(['hook-arc','cross-sweep','hook-arc','cross-sweep','boss-led-loop'])
  }),
  Object.freeze({
   fromStage:11,
