@@ -486,11 +486,11 @@ function checkDocumentationFreshness(){
 function commitMatchesHead(value, acceptedCommits){
   const commit = String(value || '').trim();
   if(!commit) return false;
-  return acceptedCommits.some((candidate) => candidate === commit || candidate.startsWith(commit) || commit.startsWith(candidate));
+  return (acceptedCommits || []).some((candidate) => candidate === commit || candidate.startsWith(commit) || commit.startsWith(candidate));
 }
 
 function checkCurrentConformanceDocArtifacts(){
-  const acceptedCommits = git(['rev-list', '--max-count', '2', 'HEAD'])
+  const acceptedCommits = git(['rev-list', '--max-count', '3', 'HEAD'])
     .split('\n')
     .map((value) => value.trim())
     .filter(Boolean);
