@@ -1,6 +1,6 @@
 # Galaxy Guardians First-Class Conformance Plan
 
-Updated: May 13, 2026
+Updated: May 19, 2026
 
 Short restart note:
 
@@ -39,6 +39,22 @@ As a standing rule, artifact-grounded evidence should lead the process. Human
 play/listen/look review is still allowed when the evidence package cannot yet
 settle a question cleanly, but it should be fallback confirmation rather than
 the primary baseline.
+
+Aurora has also already paid for a large amount of reusable conformance
+machinery that Guardians should inherit rather than re-invent.
+
+That shared machinery includes:
+
+- promoted sprite-target pipelines and contamination guards
+- temporal sprite-target extraction and sequence scoring
+- waveform, spectrogram, cue-window, and audio-lab comparison flows
+- hosted documentation, dashboards, release-note, and review-packet surfaces
+- release-gate, review-disposition, and lane-verification discipline
+
+Guardians should only diverge from Aurora's graphics/audio conformance tooling
+when the game grammar truly needs a different contract. The default is to reuse
+the same durable infrastructure with Guardians-owned targets, clips, score rows,
+and interpretation.
 
 ## Current Baseline
 
@@ -94,6 +110,25 @@ lane actually surfaces that depth.
 
 The immediate visual baseline for the current public slice should therefore be
 treated as a first-order plan item, not a cosmetic afterthought.
+
+## Immediate Post-Merge Pickup
+
+Once the incoming ship-sizing fix is merged, the next Guardians pass should
+resume in this order:
+
+1. re-baseline the current public slice with the merged ship geometry and rerun
+   the opening-slice/render/motion harness spine before making more visual
+   claims
+2. preserve Aurora-built graphics and audio conformance machinery as shared
+   infrastructure, then swap in Guardians-owned evidence, targets, and runtime
+   windows where needed instead of creating bespoke second-game pipelines
+3. tighten the visible one-level slice first: `WAIT`, score table, rack march,
+   starfield, reserve ships, ready-state cue, flags, explosions, and top
+   re-entry
+4. only after the opening slice looks and sounds authoritative, expand the
+   public playable depth beyond the current one-level `mission_complete` slice
+5. use every resulting improvement as both a Guardians lift and a two-game
+   Platinum validation pressure test
 
 ## First-Class Definition
 
@@ -257,6 +292,9 @@ and the current machine-readable source baseline lives in
   rack march cadence, explosion states, palettes, moving starfield motion,
   reserve ships, missile-ready state, stage flags, and bottom-pass-through top
   re-entry behavior
+- reuse Aurora-proven graphics/audio machinery first, then promote
+  Guardians-owned target rows, contact sheets, cue windows, and runtime traces
+  on top of that shared spine
 - promote artifact-backed sprite targets and attract/score surfaces
 - promote artifact-backed cue targets and runtime/reference audio pairs
 - compare motion pressure after each measured timing change using captured

@@ -1,6 +1,6 @@
 # Galaxy Guardians Stage Arc And Homage Plan
 
-Updated: May 16, 2026
+Updated: May 19, 2026
 
 ## Purpose
 
@@ -61,6 +61,29 @@ Use them differently:
 - `arcades-lounge-level-5` for a denser still-readable midgame pressure window
 - `nenriki-15-wave-session` for moving starfield motion, longer-session rack
   cadence, escort pressure, and bottom-exit/top-reentry behavior
+
+## Reuse Principle
+
+Guardians should not be treated as a fresh tooling problem every time we return
+to it.
+
+Aurora's recent visual/audio conformance work already established reusable
+infrastructure for:
+
+- promoted sprite-target evidence and crop hygiene
+- temporal target artifacts and sequence comparison
+- cue contracts, waveform/spectrogram comparisons, and runtime audio labs
+- hosted documentation, readable dashboards, and review/release packet flow
+
+For Guardians, the default should be:
+
+1. keep that shared machinery
+2. replace Aurora-specific targets with Guardians/Galaxian-family targets
+3. only invent new pipelines when the second game needs a genuinely different
+   contract
+
+That keeps the second game from lagging only because the same support work is
+paid for twice.
 
 ## Game Arc
 
@@ -207,6 +230,8 @@ Primary metric additions:
 
 - explicit opening-stage presentation and HUD fidelity
 - explicit rack-march and starfield-motion fidelity
+- explicit reuse of Aurora-proven graphics/audio measurement machinery with
+  Guardians-owned targets and interpretations
 
 ### Track 2. Pressure grammar and motion
 
@@ -355,12 +380,18 @@ That means:
 
 ## Immediate Next Work
 
-1. finish the opening-slice baseline so the public visible level looks clearly
+1. merge the incoming ship-sizing/runtime-size fix and rerun the opening-slice
+   artifact spine so the visible public slice is re-grounded on the corrected
+   geometry
+2. finish the opening-slice baseline so the public visible level looks clearly
    Galaxian-family before we talk too much about later depth
-2. promote stage-band motion and pressure artifacts for stages `3-5` and `6-9`
-3. add a platform-frame parity scorecard row that compares Aurora and Guardians
+3. reuse Aurora's promoted graphics/audio machinery for Guardians targets
+   wherever that shared contract still fits, instead of rebuilding equivalent
+   second-game-only infrastructure
+4. promote stage-band motion and pressure artifacts for stages `3-5` and `6-9`
+5. add a platform-frame parity scorecard row that compares Aurora and Guardians
    directly
-4. only after those steps, start designing homage variants from the preserved
+6. only after those steps, start designing homage variants from the preserved
    invariant grammar instead of improvising novel mechanics too early
 
 ## Current Top 10 Improvement Queue

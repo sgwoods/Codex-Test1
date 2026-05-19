@@ -147,6 +147,11 @@ For the fastest quick current-state reopen, pair it with
   sign-in, high scores, pilot card, replay/video capture, bug reports, and
   music/sound-control surfaces so platform capability work is validated against
   two games, not one
+- after the incoming ship-sizing merge, treat Aurora's upgraded
+  graphics/audio/reference machinery as shared infrastructure for Guardians;
+  reuse the existing target-promotion, contamination-guard, temporal-sequence,
+  cue-window, waveform/spectrogram, dashboard, and review flows unless
+  Guardians truly requires a different contract
 - actively advance the longer-range `Galaxian`-style ingestion path through
   durable reference analysis, platform extension planning, and the other
   machine's parallel work
@@ -172,12 +177,16 @@ For the fastest quick current-state reopen, pair it with
 2. keep the multi-machine bootstrap and release-authority workflow healthy
 3. keep hosted `/dev` available for the next coherent review bundle instead of
    using it as a casual mirror of `main`
-4. prioritize audio/event feedback and stage-shape conformance over more broad
+4. after the ship-sizing fix lands, resume Guardians by re-baselining the
+   one-level visible slice first, then reusing Aurora-proven graphics/audio
+   conformance machinery for Guardians-owned targets before asking for more
+   public depth claims
+5. prioritize audio/event feedback and stage-shape conformance over more broad
    planning; the planning scaffolding is strong enough, while runtime feel still
    needs a measurable lift
-5. incorporate the other machine's Galaxians-style second-game, harness, and
+6. incorporate the other machine's Galaxians-style second-game, harness, and
    analysis progress into the main roadmap
-6. use the new Guardians playable branch to force score, replay, result, and
+7. use the new Guardians playable branch to force score, replay, result, and
    platform validation across two games rather than one
 7. keep
    [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md)
