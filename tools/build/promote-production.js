@@ -21,6 +21,25 @@ function normalizeProductionVersion(version){
   return String(version || '').replace(/-(alpha|beta|rc)(\.[0-9]+)?$/, '');
 }
 
+function slugify(value=''){
+  return String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 96) || 'release-note';
+}
+
+function releaseNoteAnchor(note, index = 0){
+  const stem = [note?.date, note?.version, note?.title].filter(Boolean).join('-');
+  return `release-note-${slugify(stem || `item-${index + 1}`)}`;
+}
+
+function releaseNoteGitHubHref(commit, note){
+  const sourceDoc = String(note?.sourceDoc || '').trim();
+  if(!sourceDoc) return '';
+  return `https://github.com/sgwoods/Codex-Test1/blob/${commit}/${sourceDoc}`;
+}
+
 function loadReleaseNotes(){
   if(!fs.existsSync(RELEASE_NOTES)) return [];
   try{
@@ -59,6 +78,7 @@ function rewriteProductionText(filePath, sourceInfo, productionInfo, releaseNote
   if(!fs.existsSync(filePath)) return;
   let text = fs.readFileSync(filePath, 'utf8');
   const sourceNote = sourceInfo.latestReleaseNote || {};
+  const productionReleaseNotesHref = 'public-project-page.html#latest-release-note';
   const replacements = [
     [new RegExp(escapeRegex(sourceInfo.label), 'g'), productionInfo.label],
     [new RegExp(`version:'${escapeRegex(sourceInfo.version)}'`, 'g'), `version:'${productionInfo.version}'`],
@@ -74,7 +94,8 @@ function rewriteProductionText(filePath, sourceInfo, productionInfo, releaseNote
     [/Beta lane Project Page/g, 'Production lane Project Page'],
     [/Beta lane<\/span>/g, 'Production lane</span>'],
     [/Generated from the beta lane artifacts promoted from the reviewed development build\./g, 'Generated from the production lane artifacts that feed the public release path.'],
-    [/Beta lane project-page summary generated from promoted lane artifacts\./g, 'Production lane project-page summary generated from approved release artifacts.']
+    [/Beta lane project-page summary generated from promoted lane artifacts\./g, 'Production lane project-page summary generated from approved release artifacts.'],
+    [/releases\.html(?=["'])/g, productionReleaseNotesHref]
   ];
   if(releaseNote && releaseNote.title && sourceNote.title){
     replacements.push([new RegExp(escapeRegex(sourceNote.title), 'g'), releaseNote.title]);
@@ -82,8 +103,30 @@ function rewriteProductionText(filePath, sourceInfo, productionInfo, releaseNote
   if(releaseNote && releaseNote.summary && sourceNote.summary){
     replacements.push([new RegExp(escapeRegex(sourceNote.summary), 'g'), releaseNote.summary]);
   }
+  if(releaseNote && releaseNote.sourceDoc && sourceNote.sourceDoc){
+    replacements.push([new RegExp(escapeRegex(sourceNote.sourceDoc), 'g'), releaseNote.sourceDoc]);
+  }
+  if(sourceNote && sourceNote.sourceDoc){
+    replacements.push([
+      new RegExp(escapeRegex(`releases.html#${releaseNoteAnchor(sourceNote)}`), 'g'),
+      productionReleaseNotesHref
+    ]);
+  }
+  if(releaseNote && releaseNote.sourceDoc){
+    replacements.push([
+      new RegExp(escapeRegex(`releases.html#${releaseNoteAnchor(releaseNote)}`), 'g'),
+      productionReleaseNotesHref
+    ]);
+  }
   for(const [pattern, replacement] of replacements){
     text = text.replace(pattern, replacement);
+  }
+  const releaseNotes = loadReleaseNotes();
+  for(const [index, note] of releaseNotes.entries()){
+    const legacyHref = `releases.html#${releaseNoteAnchor(note, index)}`;
+    const sourceHref = releaseNoteGitHubHref(productionInfo.commit, note);
+    if(!sourceHref) continue;
+    text = text.replace(new RegExp(escapeRegex(legacyHref), 'g'), sourceHref);
   }
   fs.writeFileSync(filePath, text);
 }
