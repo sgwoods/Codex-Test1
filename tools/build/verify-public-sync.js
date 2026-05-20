@@ -14,6 +14,8 @@ const TOKEN = process.env.PUBLIC_REPO_SYNC_TOKEN || process.env.GH_TOKEN || load
 const API_ROOT = `https://api.github.com/repos/${OWNER}/${REPO}/contents`;
 const RAW_ROOT = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main`;
 const RENDERED_ROOT = `https://${OWNER}.github.io/${REPO}`;
+const RENDERED_VERIFY_ATTEMPTS = Number(process.env.PUBLIC_RENDER_VERIFY_ATTEMPTS || 20);
+const RENDERED_VERIFY_DELAY_MS = Number(process.env.PUBLIC_RENDER_VERIFY_DELAY_MS || 5000);
 
 function loadGhToken(){
   try{
@@ -76,12 +78,15 @@ function sleep(ms){
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function fetchTextEventually(url, requiredBits, context, attempts = 10, delayMs = 3000){
+async function fetchTextEventually(url, requiredBits, context, attempts = RENDERED_VERIFY_ATTEMPTS, delayMs = RENDERED_VERIFY_DELAY_MS){
   let last = '';
   for(let attempt = 0; attempt < attempts; attempt += 1){
     last = await fetchText(url);
     if(requiredBits.every((needle) => last.includes(needle))){
       return last;
+    }
+    if(attempt === 0 || attempt === attempts - 1){
+      console.log(`[verify-public-sync] waiting for ${context} to render (${attempt + 1}/${attempts})`);
     }
     if(attempt < attempts - 1){
       await sleep(delayMs);
