@@ -173,6 +173,118 @@
             font-size: 18px;
         }
 
+        .releaseNoteMeta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .releaseNoteMetaCard {
+            padding: 14px 16px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.075);
+        }
+
+        .releaseNoteMetaCard strong {
+            display: block;
+            margin-bottom: 6px;
+            color: #8fb3cc;
+            font-size: 12px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .releaseNoteDetail {
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .releaseNoteDetail .markdown {
+            display: grid;
+            gap: 14px;
+        }
+
+        .releaseNoteDetail .markdown > :first-child {
+            margin-top: 0;
+        }
+
+        .releaseNoteDetail .markdown h2,
+        .releaseNoteDetail .markdown h3,
+        .releaseNoteDetail .markdown h4 {
+            margin: 8px 0 0;
+            font-size: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .releaseNoteDetail .markdown p,
+        .releaseNoteDetail .markdown li {
+            color: #deefff;
+            line-height: 1.65;
+        }
+
+        .releaseNoteDetail .markdown ul,
+        .releaseNoteDetail .markdown ol {
+            margin: 0;
+            padding-left: 22px;
+        }
+
+        .releaseNoteDetail .markdown blockquote {
+            margin: 0;
+            padding: 14px 16px;
+            border-left: 3px solid rgba(121, 184, 255, 0.4);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.045);
+        }
+
+        .releaseNoteDetail .markdown code {
+            padding: 2px 6px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            font-family: "SFMono-Regular", "SF Mono", ui-monospace, monospace;
+            font-size: 0.95em;
+        }
+
+        .releaseNoteDetail .markdown pre {
+            margin: 0;
+            padding: 14px 16px;
+            overflow-x: auto;
+            border-radius: 16px;
+            background: rgba(0, 0, 0, 0.28);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .releaseNoteDetail .markdown pre code {
+            padding: 0;
+            background: transparent;
+        }
+
+        .releaseNoteDetail .markdown .tableWrap {
+            overflow-x: auto;
+        }
+
+        .releaseNoteDetail .markdown table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .releaseNoteDetail .markdown th,
+        .releaseNoteDetail .markdown td {
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .releaseNoteDetail .markdown img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
         .narrative {
             max-width: 900px;
             margin: 0 0 18px;
@@ -625,14 +737,15 @@
             </div>
         </section>
 
-        <section class="panel">
+        <section class="panel" id="latest-release-note">
             <h2>Latest release note</h2>
             <div class="card">
                 <h3>{{LATEST_RELEASE_TITLE}}</h3>
                 <p>{{LATEST_RELEASE_BODY}}</p>
                 <div class="links">
-                    <a class="button" href="{{LANE_RELEASE_NOTES_HREF}}">Open full release notes</a>
+{{LATEST_RELEASE_ACTIONS}}
                 </div>
+{{LATEST_RELEASE_SOURCE_HTML}}
             </div>
         </section>
 

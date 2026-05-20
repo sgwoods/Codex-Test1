@@ -2315,6 +2315,85 @@ function releaseNoteGitHubHref(commit, sourceDoc){
   return `https://github.com/sgwoods/Codex-Test1/blob/${commit}/${sourceDoc}`;
 }
 
+function isProductionLaneBuild(buildInfo){
+  return String(buildInfo?.releaseChannel || '').trim().toLowerCase() === 'production';
+}
+
+function releaseNotesLandingHref(buildInfo){
+  return isProductionLaneBuild(buildInfo)
+    ? 'public-project-page.html#latest-release-note'
+    : 'releases.html';
+}
+
+function releaseNoteDetailHref(buildInfo, note, index = 0){
+  if(!note) return '';
+  if(isProductionLaneBuild(buildInfo)){
+    const sourceDoc = resolveReleaseNoteSource(note);
+    return releaseNoteGitHubHref(buildInfo.commit, sourceDoc);
+  }
+  return `releases.html#${releaseNoteAnchor(note, index)}`;
+}
+
+function renderReleaseNoteSourceBody(note){
+  const sourceDoc = resolveReleaseNoteSource(note);
+  return sourceDoc
+    ? renderMarkdown(read(path.join(ROOT, sourceDoc)))
+    : `<p>${esc(note.summary || 'Detailed release-note source document not yet attached for this milestone. The summary in release-notes.json is the current visible note.')}</p>`;
+}
+
+function buildLatestReleaseActions(buildInfo, note){
+  const actions = [
+    `<a class="button" href="${esc(releaseNotesLandingHref(buildInfo))}">Open release notes</a>`
+  ];
+  const sourceDoc = resolveReleaseNoteSource(note);
+  const sourceHref = releaseNoteGitHubHref(buildInfo.commit, sourceDoc);
+  if(sourceHref){
+    actions.push(`<a class="button" href="${esc(sourceHref)}">Open source markdown</a>`);
+  }
+  return actions.join('\n');
+}
+
+function buildLatestReleaseSourceHtml(buildInfo, note){
+  if(!isProductionLaneBuild(buildInfo) || !note) return '';
+  const sourceDoc = resolveReleaseNoteSource(note);
+  const sourceHref = releaseNoteGitHubHref(buildInfo.commit, sourceDoc);
+  return `
+            <div class="releaseNoteMeta">
+                <div class="releaseNoteMetaCard">
+                    <strong>Version</strong>
+                    <span>${esc(note.version || '--')}</span>
+                </div>
+                <div class="releaseNoteMetaCard">
+                    <strong>Date</strong>
+                    <span>${esc(releaseNoteDateLong(note.date))}</span>
+                </div>
+                <div class="releaseNoteMetaCard">
+                    <strong>Source</strong>
+                    <span>${sourceHref ? `<a href="${esc(sourceHref)}">${esc(sourceDoc || 'release-notes.json summary')}</a>` : esc(sourceDoc || 'release-notes.json summary')}</span>
+                </div>
+            </div>
+            <div class="releaseNoteDetail">
+                <div class="markdown">
+${renderReleaseNoteSourceBody(note)}
+                </div>
+            </div>
+  `.trim();
+}
+
+function rewriteGuideReleaseNoteLinks(guide, buildInfo){
+  const releaseHref = releaseNotesLandingHref(buildInfo);
+  const clone = JSON.parse(JSON.stringify(guide || {}));
+  for(const section of Array.isArray(clone.sections) ? clone.sections : []){
+    for(const link of Array.isArray(section.links) ? section.links : []){
+      const href = String(link?.href || '').trim();
+      if(href === 'releases.html' || href === 'release-notes.html'){
+        link.href = releaseHref;
+      }
+    }
+  }
+  return clone;
+}
+
 function findReleaseNote(notes, ref = {}){
   if(!Array.isArray(notes) || !notes.length) return null;
   const version = String(ref.releaseNoteVersion || ref.version || '').trim();
@@ -2331,10 +2410,10 @@ function findReleaseNote(notes, ref = {}){
 function buildReleaseDashboard(buildInfo, latestNote, dashboard, releaseNotes){
   const template = read(DASHBOARD_TEMPLATE);
   const conformanceSummary = loadConformanceDashboardSummary();
-  const latestNoteLink = latestNote ? `releases.html#${releaseNoteAnchor(latestNote)}` : 'releases.html';
+  const latestNoteLink = latestNote ? releaseNotesLandingHref(buildInfo) : releaseNotesLandingHref(buildInfo);
   const timeline = (dashboard.timeline || []).map((step, index) => {
     const note = findReleaseNote(releaseNotes, step);
-    const noteHref = note ? `releases.html#${releaseNoteAnchor(note, index)}` : '';
+    const noteHref = note ? releaseNoteDetailHref(buildInfo, note, index) : '';
     const titleHtml = noteHref
       ? `<a href="${esc(noteHref)}">${esc(step.title)}</a>`
       : esc(step.title);
@@ -2407,7 +2486,7 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard, releaseNotes){
         <div class="heroLinks">
           <a class="button" href="assets/conformance-dashboard.html">Open conformance dashboard</a>
           <a class="button" href="public-project-page.html">Open lane project page</a>
-          <a class="button" href="releases.html">Open release notes</a>
+          <a class="button" href="${esc(releaseNotesLandingHref(buildInfo))}">Open release notes</a>
         </div>
       </section>
       <section class="timeline">
@@ -2441,9 +2520,7 @@ function buildReleaseNotesPage(buildInfo, latestNote, releaseNotes){
     const anchor = releaseNoteAnchor(note, index);
     const sourceDoc = resolveReleaseNoteSource(note);
     const sourceHref = releaseNoteGitHubHref(buildInfo.commit, sourceDoc);
-    const sourceBody = sourceDoc
-      ? `<div class="markdown">${renderMarkdown(read(path.join(ROOT, sourceDoc)))}</div>`
-      : `<div class="markdown"><p>${esc(note.summary || 'Detailed release-note source document not yet attached for this milestone. The summary in release-notes.json is the current visible note.')}</p></div>`;
+    const sourceBody = `<div class="markdown">${renderReleaseNoteSourceBody(note)}</div>`;
     return `
       <section class="section" id="${esc(anchor)}">
         <div class="sectionHeader">
@@ -2834,13 +2911,14 @@ function buildChallengeStageEffortGuideSection(){
 function buildProjectGuide(buildInfo, latestNote, guide){
   const template = read(PROJECT_GUIDE_TEMPLATE);
   const provenanceSection = buildDocumentationProvenanceGuideSection(loadDocumentationProvenance());
-  const guideSections = [...(guide.sections || []), buildChallengeStageEffortGuideSection(), provenanceSection];
-  const orderedSections = [...guideSections, ...(guide.sourceDocs || [])];
+  const normalizedGuide = rewriteGuideReleaseNoteLinks(guide, buildInfo);
+  const guideSections = [...(normalizedGuide.sections || []), buildChallengeStageEffortGuideSection(), provenanceSection];
+  const orderedSections = [...guideSections, ...(normalizedGuide.sourceDocs || [])];
   const toc = orderedSections.map(section => `
     <li><a href="#${esc(section.id)}">${esc(section.title)}</a></li>
   `).join('\n');
   const sections = guideSections.map(renderGuideSection).join('\n');
-  const sourceDocs = (guide.sourceDocs || []).map(renderSourceDocSection).join('\n');
+  const sourceDocs = (normalizedGuide.sourceDocs || []).map(renderSourceDocSection).join('\n');
   const body = `
     <main class="shell">
       <div class="main">
@@ -2878,7 +2956,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
             <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="platinum-guide.html">Open Platinum guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
-            <a class="button" href="releases.html">Open release notes</a>
+            <a class="button" href="${esc(releaseNotesLandingHref(buildInfo))}">Open release notes</a>
             <a class="button" href="release-dashboard.html">Open release dashboard</a>
             <a class="button" href="conformance-dashboard.html">Open conformance dashboard</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
@@ -3022,12 +3100,14 @@ function buildPublicProjectPage(buildInfo, latestNote, dashboard){
     PUBLIC_CURRENT_FOCUS: dashboard.currentFocus || latestNote.title || 'Active development',
     LATEST_RELEASE_TITLE: latestNote.title,
     LATEST_RELEASE_BODY: latestNote.summary,
+    LATEST_RELEASE_ACTIONS: buildLatestReleaseActions(buildInfo, latestNote),
+    LATEST_RELEASE_SOURCE_HTML: buildLatestReleaseSourceHtml(buildInfo, latestNote),
     LANE_GAME_HREF: 'index.html',
     BETA_BUILD_HREF: 'https://sgwoods.github.io/Aurora-Galactica/beta/',
     LANE_RELEASE_DASHBOARD_HREF: 'release-dashboard.html',
     LANE_CONFORMANCE_DASHBOARD_HREF: 'conformance-dashboard.html',
     LANE_CONFORMANCE_DATA_HREF: 'conformance-dashboard-data.json',
-    LANE_RELEASE_NOTES_HREF: 'releases.html',
+    LANE_RELEASE_NOTES_HREF: releaseNotesLandingHref(buildInfo),
     LANE_WHITE_PAPER_HREF: 'white-paper.html',
     LANE_PROJECT_GUIDE_HREF: 'project-guide.html',
     LANE_APPLICATION_GUIDE_HREF: 'application-guide.html',

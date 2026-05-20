@@ -69,7 +69,6 @@ function laneConfig(lane){
         'https://sgwoods.github.io/Aurora-Galactica/conformance-dashboard.html',
         'https://sgwoods.github.io/Aurora-Galactica/conformance-dashboard-data.json',
         'https://sgwoods.github.io/Aurora-Galactica/application-guide.html',
-        'https://sgwoods.github.io/Aurora-Galactica/releases.html',
         'https://sgwoods.github.io/Aurora-Galactica/white-paper.html',
         'https://sgwoods.github.io/Aurora-Galactica/white-paper.pdf',
         'https://sgwoods.github.io/Aurora-Galactica/white-paper-pdf.json',

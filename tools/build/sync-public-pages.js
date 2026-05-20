@@ -93,6 +93,34 @@ function publicDateLong(source){
   }).format(new Date(source));
 }
 
+function resolveReleaseNoteSource(note){
+  const file = String(note?.sourceDoc || '').trim();
+  if(!file) return '';
+  const full = path.join(ROOT, file);
+  return fs.existsSync(full) ? file : '';
+}
+
+function releaseNoteGitHubHref(commit, sourceDoc){
+  if(!sourceDoc) return '';
+  return `https://github.com/sgwoods/Codex-Test1/blob/${commit}/${sourceDoc}`;
+}
+
+function releaseNotesLandingHref(){
+  return 'https://sgwoods.github.io/Aurora-Galactica/public-project-page.html#latest-release-note';
+}
+
+function buildLatestReleaseActions(buildInfo, note){
+  const actions = [
+    `<a class="button" href="${releaseNotesLandingHref()}">Open release notes</a>`
+  ];
+  const sourceDoc = resolveReleaseNoteSource(note);
+  const sourceHref = releaseNoteGitHubHref(buildInfo.commit, sourceDoc);
+  if(sourceHref){
+    actions.push(`<a class="button" href="${sourceHref}">Open source markdown</a>`);
+  }
+  return actions.join('\n');
+}
+
 function request(url, options = {}){
   if(!TOKEN){
     console.log('Skipping public-pages sync: no PUBLIC_REPO_SYNC_TOKEN or gh auth token available.');
@@ -151,12 +179,14 @@ function buildProjectPage(buildInfo, latestNote, dashboard, pushedAt){
     PUBLIC_CURRENT_FOCUS: dashboard.currentFocus || latestNote.title || 'Active development',
     LATEST_RELEASE_TITLE: latestNote.title,
     LATEST_RELEASE_BODY: latestNote.summary,
+    LATEST_RELEASE_ACTIONS: buildLatestReleaseActions(buildInfo, latestNote),
+    LATEST_RELEASE_SOURCE_HTML: '',
     LANE_GAME_HREF: 'https://sgwoods.github.io/Aurora-Galactica/',
     BETA_BUILD_HREF: 'https://sgwoods.github.io/Aurora-Galactica/beta/',
     LANE_RELEASE_DASHBOARD_HREF: 'https://sgwoods.github.io/Aurora-Galactica/release-dashboard.html',
     LANE_CONFORMANCE_DASHBOARD_HREF: 'https://sgwoods.github.io/Aurora-Galactica/conformance-dashboard.html',
     LANE_CONFORMANCE_DATA_HREF: 'https://sgwoods.github.io/Aurora-Galactica/conformance-dashboard-data.json',
-    LANE_RELEASE_NOTES_HREF: 'https://sgwoods.github.io/Aurora-Galactica/releases.html',
+    LANE_RELEASE_NOTES_HREF: releaseNotesLandingHref(),
     LANE_WHITE_PAPER_HREF: 'https://sgwoods.github.io/Aurora-Galactica/white-paper.html',
     LANE_PROJECT_GUIDE_HREF: 'https://sgwoods.github.io/Aurora-Galactica/project-guide.html',
     LANE_APPLICATION_GUIDE_HREF: 'https://sgwoods.github.io/Aurora-Galactica/application-guide.html',

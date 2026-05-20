@@ -781,7 +781,7 @@ function checkProductionReleaseNoteLinkage(cfg, productionInfo){
       );
     }
   }
-  const publicProjectRequired = [title, summary];
+  const publicProjectRequired = [title, summary, sourceDoc];
   for(const text of publicProjectRequired){
     if(text && !publicProjectHtml.includes(text)){
       throw new Error(
