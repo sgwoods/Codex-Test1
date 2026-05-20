@@ -86,8 +86,9 @@ The current path toward the next beta request is:
    cost, artifact, and recommendation should remain visible in the public
    project/Application Guide surfaces, not only hidden in repo artifacts.
 4. Low-risk delight after the guardrails stay green: Arcade Music, Watch Mode,
-   Player Two UX clarity, and Commentator callouts may continue when they remain
-   safely scoped and do not pollute production scores.
+   Player Two UX clarity, Commentator callouts, and optional immersive
+   full-window gameplay may continue when they remain safely scoped, reversible,
+   measured, and do not pollute production scores.
 5. High-risk delight last: YouTube high-score posting and externally hosted
    replay publishing must wait behind explicit auth, consent, storage,
    moderation, token, and revoke/failure-mode review.
@@ -222,6 +223,9 @@ Platinum helps by providing:
 - a future sprite-mode surface that can compare reference-conformance lanes,
   Aurora production themes, and future-game variants without mixing target
   measurement with shipped creative art
+- an optional full-window/cabinet display mode that can enlarge the active board
+  for play and review while preserving game-owned mechanics, input mapping, and
+  replay evidence
 - shared browser harness utilities and controlled-clock execution
 - a developer conformance dashboard that can be shipped read-only with release
   lanes
@@ -414,6 +418,7 @@ The documentation should remain layered so readers can choose the right depth.
 | Dedicated Aurora challenge-stage analysis and next plan | [CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md](CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md) and the rendered Application Guide challenge-stage section |
 | Resource usage, local CPU, GPU-equivalent model work, and cost-per-score | [CONFORMANCE_ECONOMICS.md](CONFORMANCE_ECONOMICS.md) |
 | Platform ownership and architecture | [PLATINUM.md](PLATINUM.md) and [PLATINUM_ARCHITECTURE_OVERVIEW.md](PLATINUM_ARCHITECTURE_OVERVIEW.md) |
+| Immersive full-window gameplay mode | [IMMERSIVE_FULL_WINDOW_GAMEPLAY_MODE_PLAN.md](IMMERSIVE_FULL_WINDOW_GAMEPLAY_MODE_PLAN.md) |
 | Game/platform boundary | [APPLICATIONS_ON_PLATINUM.md](APPLICATIONS_ON_PLATINUM.md) |
 | Per-game alien, audio, stage, and persona catalog | [GAME_CONFORMANCE_CATALOG.md](GAME_CONFORMANCE_CATALOG.md) |
 | Guardians stage arc, stage-band plan, and homage-variant guardrails | [GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md](GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md) |

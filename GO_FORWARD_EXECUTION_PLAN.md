@@ -62,8 +62,9 @@ do not outrun conformance or public safety:
 3. Generated docs and dashboards: keep score, confidence, resolution, evidence,
    CPU/GPU-equivalent spend, and next-step recommendations visible from
    persisted artifacts.
-4. Lower-risk delight: Arcade Music, Watch Mode, Player Two UX clarity, and
-   Commentator callouts may continue when they remain scoped and do not pollute
+4. Lower-risk delight: Arcade Music, Watch Mode, Player Two UX clarity,
+   Commentator callouts, and an optional immersive full-window gameplay mode may
+   continue when they remain scoped, measured, reversible, and do not pollute
    production scores.
 5. Higher-risk delight: YouTube top-10 posting and externally hosted replay
    publishing wait behind explicit auth, consent, storage, moderation, token,
@@ -291,6 +292,8 @@ Practical standard:
   - audio identity, cue contracts, and theme latitude
   - gameplay trust and edge-case correctness
   - shell, overlay, and dock polish
+  - immersive full-window/cabinet display mode as a Platinum-owned presentation
+    feature, not a game-specific mechanics change
   - pilot, leaderboard, replay, and admin operations
   - non-production versus production environment separation
   - Platinum multi-game and pack-contract maturation
@@ -380,6 +383,12 @@ The rule is:
   - start from [MOVEMENT_REFERENCE_TRACE_PLAN.md](MOVEMENT_REFERENCE_TRACE_PLAN.md)
   - use `tools/harness/reference-profiles/player-movement-reference-traces.json`
   - avoid further blind movement-constant tuning before trace-backed evidence exists
+- fullscreen or full-window display work follows the same principle:
+  - start from
+    [IMMERSIVE_FULL_WINDOW_GAMEPLAY_MODE_PLAN.md](IMMERSIVE_FULL_WINDOW_GAMEPLAY_MODE_PLAN.md)
+  - preserve gameplay coordinates and input mapping
+  - add board-bounds, overlay-escape, screenshot, replay/video, and pack-boundary
+    checks before public exposure
 
 ### 3. Keep Change Scope Small
 

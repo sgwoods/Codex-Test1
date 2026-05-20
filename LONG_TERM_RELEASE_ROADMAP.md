@@ -69,7 +69,8 @@ Medium term:
 Longer term:
 
 - use `1.5.0` for shared videos, replay evidence, and flight recorder
-- use `1.6.0` for message-to-pilot and cabinet polish
+- use `1.6.0` for message-to-pilot, cabinet polish, and optional full-window
+  gameplay presentation
 - reserve `2.0` for a credible multi-game Platinum milestone backed by
   ingestion-driven game-owned conformance packages
 
@@ -258,6 +259,9 @@ Bundle:
 - split `Platform Developer Tools` from game-specific settings as separate
   first-class surfaces, with game settings visually anchored near the
   game-selection rocket instead of folded into global platform tools
+- add optional immersive full-window gameplay mode so the board can use the
+  available browser window during play while dock/settings/pilot surfaces
+  collapse into reachable overlays
 - preserve release information as one message type rather than the whole panel
 - use published-run and scorebook signals as future message sources once those
   systems exist
@@ -270,6 +274,8 @@ Representative issue families:
 - scoreboard loading and score-view affordance: `#59`, `#60`, `#63`
 - manual and information surfaces: `#104`
 - visual polish and display options: `#52`, `#57`, `#65`, `#68`
+- immersive full-window gameplay mode:
+  [IMMERSIVE_FULL_WINDOW_GAMEPLAY_MODE_PLAN.md](IMMERSIVE_FULL_WINDOW_GAMEPLAY_MODE_PLAN.md)
 - one-time hotfix/change notices: `#138`
 
 Exit standard:
@@ -277,6 +283,8 @@ Exit standard:
 - shell copy has an ownership table
 - message queue and rotation behavior are harnessed
 - the main cabinet frame has fewer one-off panel behaviors
+- full-window mode has board-bounds, input-mapping, overlay-escape,
+  screenshot, replay/video, and pack-boundary checks before public exposure
 
 ## Release Family 1.7: Pilot Identity And Scorebook
 

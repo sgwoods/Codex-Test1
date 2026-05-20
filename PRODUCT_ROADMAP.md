@@ -93,6 +93,9 @@ That pickup should focus on:
 - movement fidelity as a guardrail plus targeted browser/manual review
 - gameplay trust fixes
 - platform-contract follow-through after the first layered release/version pass
+- optional immersive full-window gameplay mode as a Platinum cabinet/display
+  capability once input mapping, overlays, replay capture, and pack boundaries
+  are harnessed
 - level-by-level expansion planning
 - challenging-stage and later-level depth
 - shared-video evidence and publishing foundations
@@ -160,6 +163,10 @@ Specific deferred shell/UI cleanup to hold for that `1.6.0` family:
 - keep a first-class platform developer-tools entry in the quick-tools cluster
 - add a first-class game-settings entry beside the game-selection/rocket area
   so active-game controls visually live with cabinet choice, not platform tools
+- add the optional immersive full-window gameplay mode described in
+  [IMMERSIVE_FULL_WINDOW_GAMEPLAY_MODE_PLAN.md](IMMERSIVE_FULL_WINDOW_GAMEPLAY_MODE_PLAN.md),
+  with an earlier hidden `F` shortcut prototype allowed only while it remains
+  guarded and measurable
 
 Current conformance read:
 
@@ -285,10 +292,29 @@ Why:
 Target:
 
 - unify popup, dock, and panel behavior and keep all surfaces well-contained
+- add an optional full-window play presentation that reduces nonessential frame
+  overhead while preserving escape, settings, score, help, and feedback access
 
 Why:
 
 - cabinet presentation and panel consistency are highly visible quality signals
+- a larger board improves human review of sprites, motion, and challenge paths,
+  but must stay separate from strict gameplay conformance scoring
+
+### 6a. Immersive full-window play
+
+Target:
+
+- provide a hidden/developer `F` toggle that lets the active game board fill
+  the available browser window without changing gameplay mechanics
+
+Themes:
+
+- preserve logical coordinates, input mapping, replay determinism, and scoring
+- keep crisp pixel rendering and stable aspect ratio
+- auto-collapse nonessential rails while keeping overlays reachable
+- log mode changes so production and review usage can be understood later
+- validate Aurora and Galaxy Guardians through shared Platinum shell harnesses
 
 ### 7. Pilot, leaderboard, replay, and operations
 
