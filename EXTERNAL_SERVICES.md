@@ -46,11 +46,13 @@ Aurora Galactica, what they are used for, and what is local-only instead.
 ### YouTube Playlist Embed
 
 - Status:
-  - optional, configured by `release-manifest.json` and overrideable with `ARCADE_MUSIC_PLAYLIST_ID` or `NEXT_PUBLIC_ARCADE_MUSIC_PLAYLIST_ID` at build time
+  - optional, configured by `release-manifest.json`
+  - individual game packs may provide `media.arcadeMusicPlaylistId`; if they do not, they inherit the platform default playlist
 - Used for:
   - opt-in Arcade Music playback from the right rail
 - Boundary:
   - the playlist embed is shell ambience, not Aurora reference audio
+  - playlist IDs are configuration-controlled; public URL parameters must not switch the playlist
   - the game mute control remains scoped to game audio
   - high-score video upload credentials are not part of this client-side feature
 - Main runtime code:
