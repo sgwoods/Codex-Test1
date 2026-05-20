@@ -56,24 +56,65 @@ function sanitizeArcadeMusicPlaylistId(value=''){
  const raw=String(value||'').trim();
  return /^[A-Za-z0-9_-]{8,160}$/.test(raw)?raw:'';
 }
-function arcadeMusicQueryPlaylistId(){
+function arcadeMusicPlatformDefaultPlaylistId(){
+ return sanitizeArcadeMusicPlaylistId(BUILD_INFO?.platform?.media?.arcadeMusicPlaylistId||ARCADE_MUSIC_PLAYLIST_ID);
+}
+function arcadeMusicHarnessOverrideAllowed(){
  try{
-  const params=new URLSearchParams(location.search||'');
-  return sanitizeArcadeMusicPlaylistId(params.get('arcadeMusicPlaylist')||params.get('musicPlaylist')||'');
+  const host=String(location?.hostname||'').toLowerCase();
+  return host==='127.0.0.1'||host==='localhost'||host==='::1'||!!DOCS_PREVIEW_MODE;
  }catch{
-  return '';
+  return false;
  }
 }
+function arcadeMusicResolvedConfig(){
+ const pack=typeof window!=='undefined'&&typeof window.currentGamePack==='function'?window.currentGamePack():null;
+ const gameKey=String(pack?.metadata?.gameKey||'').trim();
+ const gameTitle=String(pack?.metadata?.title||'Current game').trim();
+ const media=pack?.media||pack?.metadata?.media||{};
+ const platformPlaylistId=arcadeMusicPlatformDefaultPlaylistId();
+ const gamePlaylistId=sanitizeArcadeMusicPlaylistId(media.arcadeMusicPlaylistId);
+ const harnessPlaylistId=sanitizeArcadeMusicPlaylistId(ARCADE_MUSIC.playlistOverride);
+ const base=Object.freeze({
+  playlistId:gamePlaylistId||platformPlaylistId,
+  playlistSource:gamePlaylistId?'game':'platform',
+  playlistLabel:String(media.arcadeMusicPlaylistLabel||(gamePlaylistId?`${gameTitle} arcade music`:BUILD_INFO?.platform?.media?.arcadeMusicPlaylistLabel||'Default Platinum Arcade Music')).trim(),
+  gameKey,
+  gameTitle,
+  platformPlaylistId,
+  gamePlaylistId,
+  configured:!!(gamePlaylistId||platformPlaylistId),
+  harnessOverrideActive:false
+ });
+ if(harnessPlaylistId&&arcadeMusicHarnessOverrideAllowed()){
+  return Object.assign({},base,{
+   playlistId:harnessPlaylistId,
+   playlistSource:'harness',
+   playlistLabel:'Harness arcade music',
+   harnessOverrideActive:true
+  });
+ }
+ return base;
+}
 function arcadeMusicPlaylistId(){
- return sanitizeArcadeMusicPlaylistId(ARCADE_MUSIC.playlistOverride)||arcadeMusicQueryPlaylistId()||sanitizeArcadeMusicPlaylistId(ARCADE_MUSIC_PLAYLIST_ID);
+ return arcadeMusicResolvedConfig().playlistId;
 }
 function arcadeMusicState(){
+ const config=arcadeMusicResolvedConfig();
  return {
   state:ARCADE_MUSIC.state,
   requested:!!ARCADE_MUSIC.requested,
-  configured:!!arcadeMusicPlaylistId(),
+  configured:!!config.configured,
   hasFrame:!!(arcadeMusicFrameHost&&arcadeMusicFrameHost.querySelector('iframe')),
-  playlistId:arcadeMusicPlaylistId(),
+  playlistId:config.playlistId,
+  playlistSource:config.playlistSource,
+  playlistLabel:config.playlistLabel,
+  platformPlaylistId:config.platformPlaylistId,
+  gamePlaylistId:config.gamePlaylistId,
+  gameKey:config.gameKey,
+  gameTitle:config.gameTitle,
+  activePlaylistId:ARCADE_MUSIC.activePlaylistId||'',
+  activePlaylistSource:ARCADE_MUSIC.activePlaylistSource||'',
   arcadeMusicVolume:+arcadeMusicVolume.toFixed(3),
   arcadeMusicMuted:!!arcadeMusicMuted,
   audible:!!((ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading')&&!arcadeMusicMuted&&arcadeMusicVolume>0),
@@ -84,12 +125,14 @@ function arcadeMusicState(){
 function syncArcadeMusicUi(){
  if(!arcadeMusicToggleBtn)return;
  const active=ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading';
- const unavailable=ARCADE_MUSIC.state==='unavailable'||!arcadeMusicPlaylistId();
+ const config=arcadeMusicResolvedConfig();
+ const unavailable=ARCADE_MUSIC.state==='unavailable'||!config.playlistId;
  const muted=active&&!!arcadeMusicMuted;
  arcadeMusicToggleBtn.dataset.musicState=active?(muted?'muted':ARCADE_MUSIC.state):(unavailable?'unavailable':'off');
  arcadeMusicToggleBtn.dataset.musicPlaying=active?'true':'false';
  arcadeMusicToggleBtn.dataset.musicMuted=muted?'true':'false';
- arcadeMusicToggleBtn.dataset.configured=arcadeMusicPlaylistId()?'true':'false';
+ arcadeMusicToggleBtn.dataset.configured=config.playlistId?'true':'false';
+ arcadeMusicToggleBtn.dataset.playlistSource=config.playlistSource||'';
  arcadeMusicToggleBtn.setAttribute('aria-pressed',muted?'true':'false');
  const label=unavailable?'Arcade Music unavailable':(!active?'Start Arcade Music':(muted?'Unmute Arcade Music':'Mute Arcade Music'));
  arcadeMusicToggleBtn.setAttribute('aria-label',label);
@@ -130,6 +173,11 @@ function primeArcadeMusicPlayerApi(){
  arcadeMusicCommand('addEventListener',['onReady']);
  applyArcadeMusicVolume();
  arcadeMusicCommand('getVideoData',[]);
+}
+function onArcadeMusicFrameLoaded(){
+ ARCADE_MUSIC.state='playing';
+ syncArcadeMusicUi();
+ [80,350,1100,2600].forEach(delay=>setTimeout(primeArcadeMusicPlayerApi,delay));
 }
 function normalizeArcadeMusicTrack(videoData={}){
  const title=String(videoData.title||videoData.video_title||videoData.videoTitle||'').trim();
@@ -185,8 +233,9 @@ if(typeof window!=='undefined'&&!window.__platinumArcadeMusicMessageListener){
  window.__platinumArcadeMusicMessageListener=1;
  window.addEventListener('message',handleArcadeMusicPlayerMessage);
 }
-function startArcadeMusic(){
- const playlistId=arcadeMusicPlaylistId();
+function startArcadeMusic(opts={}){
+ const config=arcadeMusicResolvedConfig();
+ const playlistId=config.playlistId;
  if(!playlistId){
   ARCADE_MUSIC.state='unavailable';
   ARCADE_MUSIC.requested=false;
@@ -207,13 +256,11 @@ function startArcadeMusic(){
  frame.allow='autoplay; encrypted-media; picture-in-picture';
  frame.referrerPolicy='strict-origin-when-cross-origin';
  frame.src=arcadeMusicEmbedUrl(playlistId);
- frame.addEventListener('load',()=>{
-  ARCADE_MUSIC.state='playing';
-  syncArcadeMusicUi();
-  [80,350,1100,2600].forEach(delay=>setTimeout(primeArcadeMusicPlayerApi,delay));
- },{once:true});
+ frame.addEventListener('load',onArcadeMusicFrameLoaded,{once:true});
  arcadeMusicFrameHost.appendChild(frame);
  ARCADE_MUSIC.iframe=frame;
+ ARCADE_MUSIC.activePlaylistId=playlistId;
+ ARCADE_MUSIC.activePlaylistSource=config.playlistSource||'';
  ARCADE_MUSIC.lastTrackSignature='';
  ARCADE_MUSIC.lastTrack=null;
  ARCADE_MUSIC.state='playing';
@@ -221,8 +268,8 @@ function startArcadeMusic(){
  writePref(ARCADE_MUSIC_PREF_KEY,'1');
  syncArcadeMusicUi();
  [120,600,1800].forEach(delay=>setTimeout(primeArcadeMusicPlayerApi,delay));
- showToast('Arcade Music on');
- if(typeof logEvent==='function')logEvent('arcade_music_on',{playlistConfigured:true,arcadeMusicVolume:+arcadeMusicVolume.toFixed(3),arcadeMusicMuted:!!arcadeMusicMuted,gameSoundVolume:+gameSoundVolume.toFixed(3),soundEffectsMuted:!!audioMuted});
+ if(!opts.silent)showToast('Arcade Music on');
+ if(typeof logEvent==='function')logEvent('arcade_music_on',{playlistConfigured:true,playlistId,playlistSource:config.playlistSource,gameKey:config.gameKey,arcadeMusicVolume:+arcadeMusicVolume.toFixed(3),arcadeMusicMuted:!!arcadeMusicMuted,gameSoundVolume:+gameSoundVolume.toFixed(3),soundEffectsMuted:!!audioMuted,source:String(opts.source||'dock')});
  return true;
 }
 function stopArcadeMusic(opts={}){
@@ -230,6 +277,8 @@ function stopArcadeMusic(opts={}){
  ARCADE_MUSIC.iframe=null;
  ARCADE_MUSIC.state='off';
  ARCADE_MUSIC.requested=false;
+ ARCADE_MUSIC.activePlaylistId='';
+ ARCADE_MUSIC.activePlaylistSource='';
  ARCADE_MUSIC.lastTrackSignature='';
  ARCADE_MUSIC.lastTrack=null;
  writePref(ARCADE_MUSIC_PREF_KEY,'0');
@@ -263,6 +312,30 @@ function toggleArcadeMusicMute(){
 }
 function toggleArcadeMusic(){
  toggleArcadeMusicMute();
+}
+function syncArcadeMusicForGamePackChange(){
+ const config=arcadeMusicResolvedConfig();
+ if(typeof syncAudioMixControls==='function')syncAudioMixControls();
+ syncArcadeMusicUi();
+ const frame=ARCADE_MUSIC.iframe||(arcadeMusicFrameHost&&arcadeMusicFrameHost.querySelector('iframe'));
+ const active=!!(frame&&(ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.state==='loading'));
+ if(!active||!config.playlistId||ARCADE_MUSIC.activePlaylistId===config.playlistId)return;
+ ARCADE_MUSIC.activePlaylistId=config.playlistId;
+ ARCADE_MUSIC.activePlaylistSource=config.playlistSource||'';
+ ARCADE_MUSIC.lastTrackSignature='';
+ ARCADE_MUSIC.lastTrack=null;
+ ARCADE_MUSIC.state='loading';
+ frame.addEventListener('load',onArcadeMusicFrameLoaded,{once:true});
+ frame.src=arcadeMusicEmbedUrl(config.playlistId);
+ syncArcadeMusicUi();
+ if(typeof logEvent==='function')logEvent('arcade_music_playlist_changed',{
+  playlistId:config.playlistId,
+  playlistSource:config.playlistSource,
+  gameKey:config.gameKey,
+  gameTitle:config.gameTitle,
+  arcadeMusicMuted:!!arcadeMusicMuted,
+  arcadeMusicVolume:+arcadeMusicVolume.toFixed(3)
+ });
 }
 function syncPauseUi(){
  if(!pauseToggleBtn)return;

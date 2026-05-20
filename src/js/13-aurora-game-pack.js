@@ -948,6 +948,10 @@ const AURORA_GAME_PACK=Object.freeze({
   playable:1,
   previewOnly:0
  }),
+ media:Object.freeze({
+  arcadeMusicPlaylistLabel:'Aurora Galactica arcade music',
+  arcadeMusicPlaylistMode:'platform-default'
+ }),
  frontDoor:Object.freeze({
   marqueeTitle:'Aurora Galactica',
   title:'AURORA GALACTICA',

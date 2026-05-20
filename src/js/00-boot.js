@@ -343,7 +343,7 @@ let arcadeMusicMuted=readPref(ARCADE_MUSIC_MUTED_PREF_KEY)==='1';
 let gameSoundVolume=readVolumePref(GAME_SOUND_VOLUME_PREF_KEY,DEFAULT_GAME_SOUND_VOLUME);
 let arcadeMusicVolume=readVolumePref(ARCADE_MUSIC_VOLUME_PREF_KEY,DEFAULT_ARCADE_MUSIC_VOLUME);
 const ARCADE_MUSIC_PLAYLIST_ID={{ARCADE_MUSIC_PLAYLIST_ID_JSON}};
-const ARCADE_MUSIC={state:'off',requested:readPref(ARCADE_MUSIC_PREF_KEY)==='1',playlistOverride:'',iframe:null,lastTrackSignature:'',lastTrack:null};
+const ARCADE_MUSIC={state:'off',requested:readPref(ARCADE_MUSIC_PREF_KEY)==='1',playlistOverride:'',iframe:null,activePlaylistId:'',activePlaylistSource:'',lastTrackSignature:'',lastTrack:null};
 function readPref(key){
  try{
   const current=localStorage.getItem(key);
@@ -1778,13 +1778,22 @@ function syncAudioMixControls(){
   musicVolume.setAttribute('aria-valuetext',volumePercentText(arcadeMusicVolume));
  }
  if(musicVolumeValue)musicVolumeValue.textContent=volumePercentText(arcadeMusicVolume);
+ const playlistConfig=typeof arcadeMusicResolvedConfig==='function'?arcadeMusicResolvedConfig():null;
+ const playlistGameEl=document.getElementById('arcadeMusicPlaylistGame');
+ const playlistSourceEl=document.getElementById('arcadeMusicPlaylistSource');
+ const playlistIdEl=document.getElementById('arcadeMusicPlaylistId');
+ if(playlistGameEl)playlistGameEl.textContent=playlistConfig?.gameTitle||'Current game';
+ if(playlistSourceEl)playlistSourceEl.textContent=playlistConfig?.playlistSource==='game'?'Game override':playlistConfig?.playlistSource==='harness'?'Harness':'Platform default';
+ if(playlistIdEl)playlistIdEl.textContent=playlistConfig?.playlistId||'No playlist configured';
  const debug=window.__platinumAudioDebug||window.__auroraAudioDebug;
  if(debug)debug.mix={
   gameSoundVolume:+gameSoundVolume.toFixed(3),
   arcadeMusicVolume:+arcadeMusicVolume.toFixed(3),
   muted:!!audioMuted,
   soundEffectsMuted:!!audioMuted,
-  arcadeMusicMuted:!!arcadeMusicMuted
+  arcadeMusicMuted:!!arcadeMusicMuted,
+  arcadeMusicPlaylistId:playlistConfig?.playlistId||'',
+  arcadeMusicPlaylistSource:playlistConfig?.playlistSource||''
  };
 }
 function audioMixTelemetryBase(){

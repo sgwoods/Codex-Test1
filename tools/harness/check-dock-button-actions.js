@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 const { withHarnessPage, waitForHarness } = require('./browser-check-util');
 
+const PLATFORM_ARCADE_MUSIC_PLAYLIST = 'PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH';
+const GUARDIANS_ARCADE_MUSIC_PLAYLIST = 'PLWDxjyS0X-zm5GrG4zytIyqRPQ8Jv4TA-';
+
 function fail(message, payload){
   console.error(message);
   if(payload) console.error(JSON.stringify(payload, null, 2));
@@ -104,6 +107,13 @@ async function main(){
     );
 
     const musicDefault = await page.evaluate(() => window.__platinumArcadeMusic?.state?.());
+    const musicGuardians = await page.evaluate(() => {
+      window.installGamePack?.('galaxy-guardians-preview', { persist: false });
+      const guardians = window.__platinumArcadeMusic?.state?.();
+      window.installGamePack?.('aurora-galactica', { persist: false });
+      const restored = window.__platinumArcadeMusic?.state?.();
+      return { guardians, restored };
+    });
     await page.evaluate(() => window.__platinumArcadeMusic?.setPlaylistForHarness?.('PLarcadeMusicHarness01'));
     const musicBefore = await page.locator('#arcadeMusicToggleBtn').getAttribute('aria-pressed');
     await page.locator('#arcadeMusicToggleBtn').click();
@@ -210,6 +220,7 @@ async function main(){
         state: window.__platinumArcadeMusic?.state?.()
       };
     });
+    await page.evaluate(() => window.__platinumArcadeMusic?.setPlaylistForHarness?.(''));
 
     const muteBefore = await page.locator('#muteToggleBtn').getAttribute('aria-pressed');
     await page.locator('#muteToggleBtn').click();
@@ -291,7 +302,10 @@ async function main(){
         const panel = document.querySelector('#settingsPanel');
         return panel && panel.classList.contains('open') ? {
           expanded: document.querySelector('#settingsBtn')?.getAttribute('aria-expanded') || '',
-          title: document.querySelector('#settingsPanelTitle')?.textContent || ''
+          title: document.querySelector('#settingsPanelTitle')?.textContent || '',
+          playlistGame: document.querySelector('#arcadeMusicPlaylistGame')?.textContent || '',
+          playlistSource: document.querySelector('#arcadeMusicPlaylistSource')?.textContent || '',
+          playlistId: document.querySelector('#arcadeMusicPlaylistId')?.textContent || ''
         } : null;
       },
       '#settingsPanelClose'
@@ -308,7 +322,7 @@ async function main(){
       scores,
       feedback,
       settings,
-      music: { default: musicDefault, before: musicBefore, active: musicActive, muted: musicMuted, unmuted: musicUnmuted, stopped: musicStopped, trackToast: musicTrackToast },
+      music: { default: musicDefault, guardians: musicGuardians, before: musicBefore, active: musicActive, muted: musicMuted, unmuted: musicUnmuted, stopped: musicStopped, trackToast: musicTrackToast },
       audioMix,
       mute: { before: muteBefore, after: muteAfter, restored: muteRestored },
       audioToggleEvents,
@@ -340,8 +354,20 @@ async function main(){
   if(!result.music.default?.configured){
     fail('Arcade Music is not configured with a product playlist by default', result);
   }
+  if(result.music.default.playlistId !== PLATFORM_ARCADE_MUSIC_PLAYLIST || result.music.default.playlistSource !== 'platform' || result.music.default.gameKey !== 'aurora-galactica'){
+    fail('Aurora should inherit the platform Arcade Music playlist by default', result);
+  }
+  if(result.music.guardians.guardians?.playlistId !== GUARDIANS_ARCADE_MUSIC_PLAYLIST || result.music.guardians.guardians?.playlistSource !== 'game' || result.music.guardians.guardians?.gameKey !== 'galaxy-guardians-preview'){
+    fail('Galaxy Guardians should resolve to its game-pack Arcade Music playlist override', result);
+  }
+  if(result.music.guardians.restored?.playlistId !== PLATFORM_ARCADE_MUSIC_PLAYLIST || result.music.guardians.restored?.playlistSource !== 'platform'){
+    fail('Returning to Aurora should restore the platform default Arcade Music playlist', result);
+  }
   if(result.music.before !== 'false' || result.music.active.aria !== 'false' || result.music.active.title !== 'Mute Arcade Music' || result.music.active.actionTip !== 'Mute Arcade Music' || result.music.active.musicPlaying !== 'true' || result.music.active.musicMuted !== 'false' || result.music.active.state?.arcadeMusicMuted || !/youtube-nocookie\.com\/embed\/videoseries/.test(result.music.active.src)){
     fail('Arcade Music dock button did not start the configured playlist embed correctly', result);
+  }
+  if(result.music.active.state?.playlistSource !== 'harness' || !result.music.active.src.includes('PLarcadeMusicHarness01')){
+    fail('Arcade Music harness override did not remain confined to the harness path', result);
   }
   if(result.music.active.icon !== '🎶' || result.music.active.iconFontSize !== result.music.active.muteIconFontSize || result.music.active.iconAnimation === 'none'){
     fail('Arcade Music dock icon did not match the sound icon size or active pulse state', result);
@@ -371,6 +397,9 @@ async function main(){
   if(result.scores.expanded !== 'true') fail('scores dock button did not open via a real click', result);
   if(result.feedback.expanded !== 'true') fail('feedback dock button did not open via a real click', result);
   if(result.settings.expanded !== 'true') fail('settings dock button did not open via a real click', result);
+  if(!result.settings.playlistGame.includes('Aurora Galactica') || result.settings.playlistSource !== 'Platform default' || result.settings.playlistId !== PLATFORM_ARCADE_MUSIC_PLAYLIST){
+    fail('Developer Tools did not expose the active game Arcade Music playlist configuration', result);
+  }
   if(result.mute.before === result.mute.after || result.mute.before !== result.mute.restored){
     fail('mute button did not toggle and restore aria-pressed state', result);
   }

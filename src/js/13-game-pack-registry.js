@@ -62,6 +62,8 @@ function installGamePack(key=DEFAULT_GAME_PACK_KEY,opts={}){
  if(opts.persist)writePref(GAME_PACK_PREF_KEY,ACTIVE_GAME_PACK_KEY);
  if(typeof syncLeaderboardUi==='function')syncLeaderboardUi();
  if(typeof syncAccountUi==='function')syncAccountUi();
+ if(typeof syncArcadeMusicForGamePackChange==='function')syncArcadeMusicForGamePackChange();
+ else if(typeof syncAudioMixControls==='function')syncAudioMixControls();
  return ACTIVE_GAME_PACK;
 }
 
@@ -505,6 +507,7 @@ function challengeGroupBonus(stage){
 }
 window.availableGamePacks=availableGamePacks;
 window.getGamePack=getGamePack;
+window.installGamePack=installGamePack;
 window.currentGamePack=currentGamePack;
 window.currentGamePackKey=currentGamePackKey;
 window.currentGamePackPlayable=currentGamePackPlayable;

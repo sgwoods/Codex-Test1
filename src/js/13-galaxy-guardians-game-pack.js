@@ -401,6 +401,11 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   playable:0,
   previewOnly:1
  }),
+ media:Object.freeze({
+  arcadeMusicPlaylistId:'PLWDxjyS0X-zm5GrG4zytIyqRPQ8Jv4TA-',
+  arcadeMusicPlaylistLabel:'Galaxy Guardians arcade music',
+  arcadeMusicPlaylistMode:'game-override'
+ }),
  frontDoor:Object.freeze({
   marqueeTitle:'Galaxy Guardians',
   title:'GALAXY GUARDIANS',
