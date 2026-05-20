@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const { execSync } = require('child_process');
 const { ROOT, PRODUCTION_BUILD_INFO } = require('./paths');
 const { buildPublicProjectSections } = require('./public-project-page-sections');
+const { selectReleaseNoteForBuild } = require('./release-note-selection');
 const {
   checkGitClean,
   checkProductionCheckoutCurrent,
@@ -166,7 +167,9 @@ function buildProjectPage(buildInfo, latestNote, dashboard, pushedAt){
 }
 
 function buildStatusManifest(buildInfo, dashboard, pushedAt, { projectId, projectPagePath, active }, syncedAt, templateSha){
-  const latestNote = (readJson(RELEASE_NOTES).notes || [])[0] || buildInfo.latestReleaseNote || {};
+  const latestNote = selectReleaseNoteForBuild(readJson(RELEASE_NOTES).notes || [], buildInfo, { lane: 'production' })
+    || buildInfo.latestReleaseNote
+    || {};
   const status = {
     schema_version: '1.0',
     project_id: projectId,
@@ -237,7 +240,9 @@ async function main(){
   }
   const releaseNotes = readJson(RELEASE_NOTES);
   const dashboard = readJson(RELEASE_DASHBOARD);
-  const latestNote = (releaseNotes.notes && releaseNotes.notes[0]) || buildInfo.latestReleaseNote || {
+  const latestNote = selectReleaseNoteForBuild(releaseNotes.notes || [], buildInfo, { lane: 'production' })
+    || buildInfo.latestReleaseNote
+    || {
     title: 'No release note yet',
     summary: 'No release summary available for this build.'
   };

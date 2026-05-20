@@ -14,6 +14,7 @@ const {
 } = require('./paths');
 const { devFiles, betaFiles, productionFiles } = require('./lane-files');
 const { assertReleaseAuthority, assertReleaseMainCurrent } = require('./release-authority');
+const { selectReleaseNoteForBuild } = require('./release-note-selection');
 
 const REQUIRED_SOURCE_DOCS = [
   'README.md',
@@ -745,6 +746,52 @@ function checkProductionReleaseDocs(productionInfo){
   }
 }
 
+function checkProductionReleaseNoteLinkage(cfg, productionInfo){
+  const notes = loadJson(path.join(ROOT, 'release-notes.json')).notes || [];
+  const selectedNote = selectReleaseNoteForBuild(notes, productionInfo, { lane: 'production' });
+  if(!selectedNote){
+    throw new Error('Publish preflight failed: release-notes.json does not contain a release note for the current production build. Add a linked production release note before publishing.');
+  }
+  const expectedVersion = String(productionInfo.version || '').trim();
+  const selectedVersion = String(selectedNote.version || '').trim();
+  if(expectedVersion && selectedVersion !== expectedVersion){
+    throw new Error(
+      `Publish preflight failed: the selected production release note is version ${selectedVersion || 'unknown'}, ` +
+      `but the production build is ${expectedVersion}. Update release-notes.json so the latest production note matches the production build before publishing.`
+    );
+  }
+  const sourceDoc = String(selectedNote.sourceDoc || '').trim();
+  if(!sourceDoc){
+    throw new Error('Publish preflight failed: the selected production release note has no sourceDoc. Attach a maintained Markdown release note before publishing.');
+  }
+  const sourcePath = path.join(ROOT, sourceDoc);
+  if(!fs.existsSync(sourcePath)){
+    throw new Error(`Publish preflight failed: the selected production release note source doc is missing (${sourcePath}). Restore it before publishing.`);
+  }
+  const title = String(selectedNote.title || '').trim();
+  const summary = String(selectedNote.summary || '').trim();
+  const releaseNotesHtml = loadText(path.join(cfg.dir, 'release-notes.html'));
+  const publicProjectHtml = loadText(path.join(cfg.dir, 'public-project-page.html'));
+  const releaseNotesRequired = [title, sourceDoc];
+  for(const text of releaseNotesRequired){
+    if(text && !releaseNotesHtml.includes(text)){
+      throw new Error(
+        `Publish preflight failed: ${path.join(cfg.dir, 'release-notes.html')} does not render the current production release note text "${text}". ` +
+        'Run npm run build after updating the production release note and try again.'
+      );
+    }
+  }
+  const publicProjectRequired = [title, summary];
+  for(const text of publicProjectRequired){
+    if(text && !publicProjectHtml.includes(text)){
+      throw new Error(
+        `Publish preflight failed: ${path.join(cfg.dir, 'public-project-page.html')} does not surface the current production release note text "${text}". ` +
+        'Run npm run build after updating the production release note and try again.'
+      );
+    }
+  }
+}
+
 function checkProductionReviewDispositions(){
   const script = path.join(ROOT, 'tools', 'review', 'check-review-dispositions.js');
   try{
@@ -798,6 +845,7 @@ function main(){
     checkPublicProjectTemplate();
     checkApprovedBetaForProduction(info);
     checkProductionReleaseDocs(info);
+    checkProductionReleaseNoteLinkage(cfg, info);
     checkProductionReviewDispositions();
   }
   console.log(JSON.stringify({
@@ -835,5 +883,6 @@ module.exports = {
   checkDocumentationVisibility,
   checkStrategicBetaReviewDoc,
   checkDocumentationFreshness,
-  checkCurrentConformanceDocArtifacts
+  checkCurrentConformanceDocArtifacts,
+  checkProductionReleaseNoteLinkage
 };

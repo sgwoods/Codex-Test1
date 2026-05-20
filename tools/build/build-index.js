@@ -38,6 +38,7 @@ const {
 } = require('./paths');
 const { html: buildConformanceDashboardHtml } = require('../harness/build-dev-conformance-dashboard-page');
 const { buildPublicProjectSections } = require('./public-project-page-sections');
+const { selectReleaseNoteForBuild } = require('./release-note-selection');
 const pkg = require(path.resolve(ROOT, 'package.json'));
 
 const SRC = path.join(ROOT, 'src');
@@ -6368,7 +6369,11 @@ function build(options = {}){
   const applicationGuide = loadApplicationGuide();
   const platinumGuide = loadPlatinumGuide();
   const playerGuide = loadPlayerGuide();
-  const latestNote = releaseNotes[0] || {
+  const latestNote = selectReleaseNoteForBuild(releaseNotes, {
+    version: buildVersion,
+    versionLine: buildVersionLine,
+    releaseChannel: buildReleaseChannel
+  }, { lane: buildLane }) || {
     title: 'No release notes yet',
     summary: 'This build has stamped identity, but no human-written note has been added yet.'
   };
