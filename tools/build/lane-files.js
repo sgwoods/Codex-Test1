@@ -8,6 +8,7 @@ const DEV_BASE_FILES = Object.freeze([
   'conformance-dashboard-data.json',
   'public-project-page.html',
   'release-notes.html',
+  'releases.html',
   'white-paper.html',
   'white-paper.pdf',
   'white-paper-pdf.json',

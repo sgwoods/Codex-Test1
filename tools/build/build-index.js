@@ -93,6 +93,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/conformance-dashboard-data.json',
   'dist/dev/public-project-page.html',
   'dist/dev/release-notes.html',
+  'dist/dev/releases.html',
   'dist/dev/white-paper.html',
   'dist/dev/project-guide.html',
   'dist/dev/application-guide.html',
@@ -110,6 +111,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/production/conformance-dashboard-data.json',
   'dist/production/public-project-page.html',
   'dist/production/release-notes.html',
+  'dist/production/releases.html',
   'dist/production/white-paper.html',
   'dist/production/project-guide.html',
   'dist/production/application-guide.html',
@@ -126,6 +128,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/beta/conformance-dashboard-data.json',
   'dist/beta/public-project-page.html',
   'dist/beta/release-notes.html',
+  'dist/beta/releases.html',
   'dist/beta/white-paper.html',
   'dist/beta/project-guide.html',
   'dist/beta/application-guide.html',
@@ -144,6 +147,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'conformance-dashboard-data.json',
   'public-project-page.html',
   'release-notes.html',
+  'releases.html',
   'white-paper.html',
   'project-guide.html',
   'application-guide.html',
@@ -156,6 +160,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'dev/conformance-dashboard-data.json',
   'dev/public-project-page.html',
   'dev/release-notes.html',
+  'dev/releases.html',
   'dev/white-paper.html',
   'dev/project-guide.html',
   'dev/application-guide.html',
@@ -169,6 +174,7 @@ const GENERATED_BUILD_PATHS = new Set([
   'beta/conformance-dashboard-data.json',
   'beta/public-project-page.html',
   'beta/release-notes.html',
+  'beta/releases.html',
   'beta/white-paper.html',
   'beta/project-guide.html',
   'beta/application-guide.html',
@@ -2325,10 +2331,10 @@ function findReleaseNote(notes, ref = {}){
 function buildReleaseDashboard(buildInfo, latestNote, dashboard, releaseNotes){
   const template = read(DASHBOARD_TEMPLATE);
   const conformanceSummary = loadConformanceDashboardSummary();
-  const latestNoteLink = latestNote ? `release-notes.html#${releaseNoteAnchor(latestNote)}` : 'release-notes.html';
+  const latestNoteLink = latestNote ? `releases.html#${releaseNoteAnchor(latestNote)}` : 'releases.html';
   const timeline = (dashboard.timeline || []).map((step, index) => {
     const note = findReleaseNote(releaseNotes, step);
-    const noteHref = note ? `release-notes.html#${releaseNoteAnchor(note, index)}` : '';
+    const noteHref = note ? `releases.html#${releaseNoteAnchor(note, index)}` : '';
     const titleHtml = noteHref
       ? `<a href="${esc(noteHref)}">${esc(step.title)}</a>`
       : esc(step.title);
@@ -2401,7 +2407,7 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard, releaseNotes){
         <div class="heroLinks">
           <a class="button" href="assets/conformance-dashboard.html">Open conformance dashboard</a>
           <a class="button" href="public-project-page.html">Open lane project page</a>
-          <a class="button" href="release-notes.html">Open release notes</a>
+          <a class="button" href="releases.html">Open release notes</a>
         </div>
       </section>
       <section class="timeline">
@@ -2872,7 +2878,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
             <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="platinum-guide.html">Open Platinum guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
-            <a class="button" href="release-notes.html">Open release notes</a>
+            <a class="button" href="releases.html">Open release notes</a>
             <a class="button" href="release-dashboard.html">Open release dashboard</a>
             <a class="button" href="conformance-dashboard.html">Open conformance dashboard</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
@@ -3021,7 +3027,7 @@ function buildPublicProjectPage(buildInfo, latestNote, dashboard){
     LANE_RELEASE_DASHBOARD_HREF: 'release-dashboard.html',
     LANE_CONFORMANCE_DASHBOARD_HREF: 'conformance-dashboard.html',
     LANE_CONFORMANCE_DATA_HREF: 'conformance-dashboard-data.json',
-    LANE_RELEASE_NOTES_HREF: 'release-notes.html',
+    LANE_RELEASE_NOTES_HREF: 'releases.html',
     LANE_WHITE_PAPER_HREF: 'white-paper.html',
     LANE_PROJECT_GUIDE_HREF: 'project-guide.html',
     LANE_APPLICATION_GUIDE_HREF: 'application-guide.html',
@@ -6296,6 +6302,7 @@ function lanePaths(lane){
       conformanceDashboardData: PRODUCTION_CONFORMANCE_DASHBOARD_DATA,
       publicProjectPage: PRODUCTION_PUBLIC_PROJECT_PAGE,
       releaseNotesPage: PRODUCTION_RELEASE_NOTES_PAGE,
+      releaseNotesAliasPage: path.join(DIST_PRODUCTION, 'releases.html'),
       whitePaper: PRODUCTION_WHITE_PAPER,
       projectGuide: PRODUCTION_PROJECT_GUIDE,
       applicationGuide: PRODUCTION_APPLICATION_GUIDE,
@@ -6314,6 +6321,7 @@ function lanePaths(lane){
     conformanceDashboardData: DEV_CONFORMANCE_DASHBOARD_DATA,
     publicProjectPage: DEV_PUBLIC_PROJECT_PAGE,
     releaseNotesPage: DEV_RELEASE_NOTES_PAGE,
+    releaseNotesAliasPage: path.join(DIST_DEV, 'releases.html'),
     whitePaper: DEV_WHITE_PAPER,
     projectGuide: DEV_PROJECT_GUIDE,
     applicationGuide: DEV_APPLICATION_GUIDE,
@@ -6493,7 +6501,10 @@ function build(options = {}){
   fs.writeFileSync(out.conformanceDashboardData, JSON.stringify(conformanceDashboardData, null, 2) + '\n');
   const publicProjectPageHtml = buildPublicProjectPage(buildInfo, latestNote, releaseDashboard);
   fs.writeFileSync(out.publicProjectPage, publicProjectPageHtml);
-  fs.writeFileSync(out.releaseNotesPage, buildReleaseNotesPage(buildInfo, latestNote, releaseNotes));
+  const releaseNotesPageHtml = buildReleaseNotesPage(buildInfo, latestNote, releaseNotes);
+  fs.writeFileSync(out.releaseNotesPage, releaseNotesPageHtml);
+  // Keep the historical filename, but drive linked docs through a fresh route.
+  fs.writeFileSync(out.releaseNotesAliasPage, releaseNotesPageHtml);
   fs.writeFileSync(out.whitePaper, buildWhitePaperGuide(buildInfo, latestNote, whitePaperGuide));
   if(buildLane === 'dev'){
     fs.mkdirSync(path.dirname(LOCAL_DEV_PUBLIC_PROJECT_PREVIEW), { recursive: true });
@@ -6545,6 +6556,7 @@ function build(options = {}){
     out.conformanceDashboardData,
     out.publicProjectPage,
     out.releaseNotesPage,
+    out.releaseNotesAliasPage,
     out.whitePaper,
     ...(buildLane === 'dev' ? [LOCAL_DEV_PUBLIC_PROJECT_PREVIEW] : []),
     out.projectGuide,

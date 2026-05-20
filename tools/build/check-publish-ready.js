@@ -66,7 +66,7 @@ const REQUIRED_SOURCE_DOCS = [
 
 const USER_VISIBLE_DOC_FILES = [
   'public-project-page.html',
-  'release-notes.html',
+  'releases.html',
   'white-paper.html',
   'white-paper-pdf.json',
   'project-guide.html',
@@ -100,7 +100,7 @@ const USER_VISIBLE_SECTIONS = [
   },
   {
     id: 'release-notes-archive',
-    file: 'release-notes.html',
+    file: 'releases.html',
     requiredText: [
       'Aurora / Platinum Release Notes',
       'release-notes.json',
@@ -770,13 +770,13 @@ function checkProductionReleaseNoteLinkage(cfg, productionInfo){
   }
   const title = String(selectedNote.title || '').trim();
   const summary = String(selectedNote.summary || '').trim();
-  const releaseNotesHtml = loadText(path.join(cfg.dir, 'release-notes.html'));
+  const releaseNotesHtml = loadText(path.join(cfg.dir, 'releases.html'));
   const publicProjectHtml = loadText(path.join(cfg.dir, 'public-project-page.html'));
   const releaseNotesRequired = [title, sourceDoc];
   for(const text of releaseNotesRequired){
     if(text && !releaseNotesHtml.includes(text)){
       throw new Error(
-        `Publish preflight failed: ${path.join(cfg.dir, 'release-notes.html')} does not render the current production release note text "${text}". ` +
+        `Publish preflight failed: ${path.join(cfg.dir, 'releases.html')} does not render the current production release note text "${text}". ` +
         'Run npm run build after updating the production release note and try again.'
       );
     }
