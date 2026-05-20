@@ -2,21 +2,21 @@
 
 ## Current Shipped State
 
-Verified May 14, 2026:
+Verified May 20, 2026:
 
 - hosted `/dev`
   - active `1.4.0.1` forward-review line
 - hosted `/beta`
   - active `1.4.0-beta.1` reviewed candidate lane
 - hosted `/production`
-  - stable `1.3.0` public line
+  - stable `1.4.0` public line
 
-Aurora is in a post-`1.3.0` ship posture:
+Aurora is in a post-`1.4.0` ship posture:
 
-- production now carries the current `1.3.0` public family
-- beta now carries the first deliberate `1.4.0-beta.1` candidate
+- production now carries the current `1.4.0` public family
+- beta remains the review lane for the next deliberate candidate
 - dev carries the aligned `1.4.0.1` forward-review line
-- `main` is the forward line for the deliberate `1.4.0` pickup
+- `main` is the forward line for the deliberate `1.4.0.x` pickup
 - future production promotions of similar scope should move a real public
   SemVer version rather than repeat the May 12 same-family exception
 
@@ -42,26 +42,27 @@ The maintained top-level explanation of this program is
 
 ## Near-Term Release Direction
 
-### Stabilize `1.3.0`
+### Stabilize `1.4.0`
 
 Goals:
 
 - keep hosted `/production`, hosted `/beta`, and hosted `/dev` aligned and
-  trustworthy after the fidelity-and-second-cabinet release
+  trustworthy after the first public multi-game/platform release family
 - keep release docs, scorecards, and committed evidence current
 - make new-machine and two-machine development simple and safe
 
-### `1.4.0` Candidate Is Now Under Review
+### `1.4.0.x` Candidate Is Now Under Review
 
 The current practical artifacts are:
 
 - hosted `/dev`: `1.4.0.1`
 - hosted `/beta`: `1.4.0-beta.1`
 
-This family collects the merged Guardians playable/conformance tranche,
-side-by-side game conformance entry points, documentation/release-note
-backfill, and the next round of platform/application boundary cleanup while
-keeping hosted `/production` stable on `1.3.0`.
+This follow-through family collects measured Aurora challenge/sprite/audio
+conformance work, Guardians playable/conformance maturation, side-by-side game
+conformance entry points, documentation/release-note backfill, and the next
+round of platform/application boundary cleanup while keeping hosted
+`/production` stable on the public `1.4.0` family.
 
 Recommended gate:
 
@@ -69,8 +70,34 @@ Recommended gate:
   candidate
 - require at least one measurable user-facing improvement or a clearly
   documented negative result that changes the next investment decision
-- keep hosted `/production` stable until the `1.4.0` candidate earns
-  production promotion
+- keep hosted `/production` stable until the next `1.4.0.x` candidate earns
+  beta and production promotion
+
+### Conformance Before Public Theme Variation
+
+The product direction should now explicitly separate internal reference
+conformance from broad-user production themes.
+
+Reference/conformance mode is for:
+
+- target-game comparison
+- developer settings
+- harnesses
+- source-artifact validation
+- metric calibration
+
+Production theme mode is for:
+
+- unique aliens and naming
+- unique backgrounds and cabinet language
+- unique sound/music identity
+- era-faithful but original movement and stage presentation
+- broad users who should experience Aurora and future games as their own
+  products, not as target-game copies
+
+The ordering matters. High-quality variation requires knowing the reference
+shape first: sprite scale, cadence, formation grammar, challenge-stage
+trajectory, scoring opportunity, audio meaning, and pressure over time.
 
 ### Pick Up `1.4.0`
 
@@ -123,6 +150,9 @@ Current decision:
   second real game
 - reserve `2.0` for the first genuinely multi-game Platinum milestone
 - treat `1.4` as the first post-ship arcade-depth and platform-boundary family
+- treat the current `1.4.0.x` line as the integration lane for challenge-stage
+  path-shape conformance, sprite-motion evidence, audio/acoustic clarity,
+  Guardians second-game proof, and conformance-program documentation
 - make conformance-program maturity a release asset: every major pickup should
   improve either the game, the ingestion/scoring system, the platform substrate,
   or the resource-economics loop
@@ -131,6 +161,9 @@ Current decision:
 - make shared gameplay-video publishing an early roadmap capability
 - bring a preliminary second-game Platinum sneak peek forward before the full
   `2.0` multi-game release
+- prepare a third-game candidate path, likely Galaga-family variant or
+  Space-Invaders-family, only after Aurora and Guardians have proven the
+  repeatable ingestion package pattern
 - use the first post-`1.3.0` iMac branch to make that second game genuinely
   playable enough to validate platform changes against two games
 - treat near-parity for `Galaxy Guardians` as process parity first:
@@ -138,18 +171,20 @@ Current decision:
   identity, and a readable candidate-review path before demanding Aurora-like
   maturity
 
-### Pick Up After `1.3.0`
+### Pick Up After `1.4.0`
 
-Once `1.3.0` is out, the roadmap pickup should be:
+Now that `1.4.0` is the public family, the roadmap pickup should be:
 
-- Short term: keep the refreshed `1.3.0` public family stable while using
-  hosted `/dev` and hosted `/beta` to review the live `1.4.0` candidate
-  family.
-- Medium term: `1.4.0` for level-by-level arcade depth plus
-  platform-contract cleanup.
+- Short term: keep the refreshed `1.4.0` public family stable while using
+  hosted `/dev` and hosted `/beta` to review a focused `1.4.0.x` conformance
+  improvement bundle.
+- Medium term: push Aurora challenge-stage, sprite-motion, audio, and
+  stage-arc quality far enough that the game feels materially more arcade
+  authored, while Guardians proves the same pipeline on a second game.
 - Longer term: `1.5.0` for shared-video evidence and flight-recorder
   publishing, `1.6.0` for pilot-facing shell/message/cabinet-surface polish,
-  and `2.0` for a genuinely multi-game Platinum candidate.
+  and `2.0` for a genuinely multi-game Platinum candidate with reference and
+  themed modes separated cleanly.
 
 That sequencing should be treated as intentional carry-forward planning, not
 something to rediscover after the release is already shipped.
@@ -165,11 +200,13 @@ Current conformance read:
 
 - see the generated score/target roll-up in
   [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md)
-- overall Aurora quality is `9.1/10` across the current scored categories
-- audio identity and cue alignment is the weakest category at `6.9/10`; the
-  process is stronger than the rounded runtime score, with cue-contract
-  readiness at `9.09/10`, semantic event score at `9.78/10`, and acoustic event
-  score at `6.30/10`
+- overall Aurora quality is approximately `8.8-9.2/10` depending on the current
+  scored category set
+- the sharpest current user-experience gaps are dedicated challenge-stage
+  conformance (`4.3/10`), runtime-vs-target sprite fit, and audio/acoustic event
+  fit. Sprite motion correspondence now has a measured row at `7.83/10`, which
+  is useful but not yet proof of full target-like animation, dive, capture, and
+  challenge-stage motion
 - level arc and encounter shape is now a high-priority scored category at
   `8.8/10`, backed by level-arc and stage-signature evidence. Remaining
   opportunity is in long-run non-repetition, exact pressure replay, and

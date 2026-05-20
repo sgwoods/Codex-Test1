@@ -2,7 +2,7 @@
 
 ## Current State
 
-Verified May 18, 2026:
+Verified May 20, 2026:
 
 - hosted `/dev`
   - active `1.4.0.1` forward-review line
@@ -34,6 +34,43 @@ resource economics fit together.
 
 For the fastest quick current-state reopen, pair it with
 [DEVELOPMENT_STATUS_UPDATE.md](DEVELOPMENT_STATUS_UPDATE.md).
+
+## May 20 Medium-Term Roadmap Reset
+
+The project is now entering a broader conformance-to-product phase. The goal is
+not only to make Aurora incrementally better, but to make the whole Platinum
+process capable of producing multiple high-quality, reference-grounded arcade
+games.
+
+The medium-term strategy is:
+
+1. **Aurora first-game excellence.** Use Aurora as the highest-pressure
+   reference-conformance proving ground. The biggest current gap is not whether
+   the game works; it is whether challenge stages, alien entry, sprite motion,
+   audio meaning, and long-run stage texture feel authored at a Galaga-like
+   level.
+2. **Galaxy Guardians second-game proof.** Move Guardians from preview slice to
+   a stable, usable second game with its own evidence, harnesses, scoring,
+   replay/result identity, and platform parity. Do not let Aurora-specific
+   assumptions leak into the platform.
+3. **Ingestion as reusable machinery.** Promote every useful measurement lesson
+   into game-neutral or game-owned ingestion harnesses: source inventory,
+   target extraction, runtime capture, metric separation, dashboard visibility,
+   economics, and release gates.
+4. **Reference mode before theme mode.** Build high-quality conformant
+   reference baselines for internal testing and measurement. Public-facing
+   production variants should then become unique, era-faithful themes with
+   distinct aliens, sounds, movement, backgrounds, names, and cabinet language.
+5. **Third-game readiness.** Prepare for a third game only after the Aurora and
+   Guardians pipelines prove repeatable. The likely candidate space is a
+   Galaga-family variant or Space-Invaders-family game, but selection should be
+   driven by source-artifact availability and how well it stress-tests Platinum.
+
+The current MacBook challenge/sprite-motion branch
+`codex/macbook-challenge-sprite-motion-conformance` is a useful checkpoint:
+it improves the measurement system and documentation, but its stricter
+challenge-stage score of `4.3/10` confirms that the next arcade-depth lift must
+re-author path shapes and stage identity, not merely tune offsets.
 
 ## Active Workstreams
 
@@ -74,12 +111,18 @@ For the fastest quick current-state reopen, pair it with
 - keep conformance as its own project layer, not only as Aurora polish
 - use ingestion packages as the evidence front-end for both Aurora refinements
   and future games
+- require every new game to maintain game-owned source manifests, target
+  windows, runtime captures, semantic event logs, metric rows, and release
+  evidence before it is treated as production-grade
 - keep metrics, confidence, resolution, dashboards, and economics current after
   each meaningful work cycle
 - convert Codex/model-assisted analysis into durable local harnesses, scorers,
   reports, and platform capabilities whenever possible
 - prefer local CPU/browser sweeps for repeated measurement and use
   GPU-equivalent model effort where it increases leverage
+- keep the reference-conformance lane distinct from production theme lanes, so
+  future broad-user builds can be original while still measured against a
+  source-grounded baseline
 
 ### 4. Gameplay Trust And Edge-Case Correctness
 
@@ -175,31 +218,35 @@ For the fastest quick current-state reopen, pair it with
 
 1. treat `main` as the authoritative post-production integration line
 2. keep the multi-machine bootstrap and release-authority workflow healthy
-3. keep hosted `/dev` available for the next coherent review bundle instead of
+3. integrate the MacBook challenge/sprite-motion branch through the iMacM1
+   authority path, then use its stricter `4.3/10` challenge-stage read as the
+   next Aurora arcade-depth baseline
+4. keep hosted `/dev` available for the next coherent review bundle instead of
    using it as a casual mirror of `main`
-4. after the ship-sizing fix lands, resume Guardians by re-baselining the
+5. after the current Aurora branch lands, resume Guardians by re-baselining the
    one-level visible slice first, then reusing Aurora-proven graphics/audio
    conformance machinery for Guardians-owned targets before asking for more
    public depth claims
-5. prioritize audio/event feedback and stage-shape conformance over more broad
+6. prioritize challenge-stage path shape, alien novelty, sprite motion, and
+   audio/event feedback over more broad
    planning; the planning scaffolding is strong enough, while runtime feel still
    needs a measurable lift
-6. incorporate the other machine's Galaxians-style second-game, harness, and
+7. incorporate the other machine's Galaxians-style second-game, harness, and
    analysis progress into the main roadmap
-7. use the new Guardians playable branch to force score, replay, result, and
+8. use the new Guardians playable branch to force score, replay, result, and
    platform validation across two games rather than one
-7. keep
+9. keep
    [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md)
    and `harness:check:galaxy-guardians-first-class-conformance` healthy so
    Galaxy review discipline approaches Aurora's
-8. prioritize level-by-level arcade depth as the next major product pillar,
+10. prioritize level-by-level arcade depth as the next major product pillar,
    using
    [GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md](GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md)
    as the maintained map from opening slice to deeper repeated-rack play and
    future homage variants
-9. make shared gameplay-video publishing an early evidence/product capability
-10. continue narrow trust fixes from the open issue stream
-11. execute the measured Galaga long-cycle quality plan in
+11. make shared gameplay-video publishing an early evidence/product capability
+12. continue narrow trust fixes from the open issue stream
+13. execute the measured Galaga long-cycle quality plan in
    [AURORA_GALAGA_LONG_CYCLE_REVIEW.md](AURORA_GALAGA_LONG_CYCLE_REVIEW.md)
    before broad gameplay, complexity, or graphical tuning
 

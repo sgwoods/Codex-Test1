@@ -1,7 +1,7 @@
 {
   "title": "Aurora Galactica And Platinum Project Guide",
   "strapline": "A current, hosted map of the project: what Platinum is, what each game owns, how ingestion and conformance work, how release lanes move, and which maintained docs are the source of truth.",
-  "currentGoal": "Keep production trustworthy on the live 1.4.0 public family while shaping the next deliberate follow-through: improve Aurora's Galaga-like gameplay/audio/visual quality, keep Platinum clean as the reusable host, and keep turning ingestion plus local harnessing into a repeatable path for future games.",
+  "currentGoal": "Keep production trustworthy on the live 1.4.0 public family while shaping the next deliberate follow-through: make Aurora materially more Galaga-like where players feel it, move Galaxy Guardians toward a stable second-game proof, preserve Platinum/game separation, and turn ingestion plus local harnessing into a repeatable path for future themed games.",
   "sections": [
     {
       "id": "snapshot",
@@ -23,6 +23,50 @@
         {
           "title": "Current Focus",
           "body": "The main work is now post-1.4.0 follow-through: audio/event feedback, level arc, boss and formation grammar, visual reference grounding, resource economics, and first-class playable/conformance advancement for Galaxy Guardians and future games."
+        }
+      ]
+    },
+    {
+      "id": "may-20-roadmap",
+      "title": "May 20 Medium-Term Roadmap",
+      "summary": "The current planning reset: conformance first, then unique production themes, while Platinum grows from one shipped game toward a repeatable multi-game ingestion platform.",
+      "cards": [
+        {
+          "title": "Top-line goal",
+          "body": "Build a repeatable system for creating polished, inspired arcade games with source-grounded conformance, local harness measurement, Codex/model-assisted engineering, and release-ready documentation. Aurora is the first proving ground; Galaxy Guardians is the second-game proof; the third game should arrive only after the pipeline is more repeatable."
+        },
+        {
+          "title": "Reference mode versus production theme",
+          "body": "Reference-conformance mode is for developer testing, harnesses, target comparison, and metric calibration. Broad-user production builds should become unique era-faithful themes with distinct aliens, movements, backgrounds, sounds, names, and cabinet language once the reference baseline is good enough to vary intentionally."
+        },
+        {
+          "title": "Aurora priority",
+          "body": "Aurora's next major quality lift is challenge-stage and stage-authorship conformance: path-shape re-authoring, alien novelty, temporal sprite motion, lower-field route readability, bonus-shot opportunity, and audio/acoustic event clarity. The current strict challenge-stage read is 4.3/10, which is a useful truth rather than a failure of the planning process."
+        },
+        {
+          "title": "Galaxy Guardians priority",
+          "body": "Guardians should become the proof that Platinum can host more than Aurora. Its next work should promote game-owned rack timing, dive paths, sprite and cue evidence, score/result identity, replay, persona review, and platform-frame parity while keeping public claims tied to what the visible slice can actually support."
+        },
+        {
+          "title": "Third game preparation",
+          "body": "The third game should be selected from evidence, not appetite. A Galaga-family variant can validate richer late-stage variation and themed derivative design; a Space-Invaders-family game can stress stricter rack motion, projectile rhythm, shelter/block state, and a different arcade pressure model."
+        }
+      ],
+      "links": [
+        {
+          "label": "Read Project State And Conformance Program",
+          "href": "project-guide.html#project-state-conformance-doc",
+          "detail": "Top-level explanation of Platinum, games, ingestion, conformance, resource economics, and release lanes."
+        },
+        {
+          "label": "Read Product Roadmap",
+          "href": "project-guide.html#roadmap-doc",
+          "detail": "Release-family and product strategy after the 1.4.0 public line."
+        },
+        {
+          "label": "Read Go-Forward Execution Plan",
+          "href": "project-guide.html#go-forward-execution-doc",
+          "detail": "Concrete operating plan for choosing work, shaping beta candidates, and preserving release discipline."
         }
       ]
     },
@@ -580,11 +624,13 @@
       "title": "Likely Next Steps",
       "summary": "The work that most naturally follows the current shipped state.",
       "bullets": [
+        "Integrate the current MacBook challenge/sprite-motion branch through the iMacM1 release-authority path, then use the stricter 4.3/10 challenge-stage baseline as the next arcade-depth scoreboard.",
         "Use the conformance dashboard to choose the highest-value Aurora investment by score gap, user impact, confidence, and resource cost.",
-        "Prioritize audio/event feedback, level arc, boss/formation grammar, and visual reference grounding for the next major user-experience lift.",
+        "Prioritize challenge-stage path-shape authorship, alien novelty, temporal sprite motion, and audio/acoustic event clarity for the next major user-experience lift.",
         "Use the hosted Guardians stage assessment and top-10 queue as the current documentation-first map for second-game follow-through, not only the raw source docs.",
         "Keep Platinum shell and docs discipline boring and reliable while the games become more ambitious.",
-        "Advance Galaxy Guardians through ingestion-backed reference evidence before treating it as a serious public playable candidate."
+        "Advance Galaxy Guardians through ingestion-backed reference evidence before treating it as a serious public playable candidate.",
+        "Keep reference-conformance modes separate from public production themes so future broad-user variants can be original while remaining source-grounded."
       ]
     }
   ],
@@ -738,6 +784,18 @@
       "title": "Roadmap Source",
       "summary": "Milestones, release lines, and what belongs to platform work versus later application expansion.",
       "file": "PRODUCT_ROADMAP.md"
+    },
+    {
+      "id": "go-forward-execution-doc",
+      "title": "Go-Forward Execution Plan",
+      "summary": "Concrete operating plan for current priorities, beta shaping, release-lane movement, ingestion carry-forward, and medium-term conformance investment.",
+      "file": "GO_FORWARD_EXECUTION_PLAN.md"
+    },
+    {
+      "id": "long-term-roadmap-doc",
+      "title": "Long-Term Release Roadmap",
+      "summary": "Release-family roadmap covering Aurora arcade depth, Galaxy Guardians second-game proof, shared evidence/video plans, cabinet polish, and third-game readiness.",
+      "file": "LONG_TERM_RELEASE_ROADMAP.md"
     },
     {
       "id": "application-guide-doc",

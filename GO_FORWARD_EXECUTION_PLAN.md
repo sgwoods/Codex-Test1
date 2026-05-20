@@ -11,15 +11,16 @@ Use it when deciding:
 
 ## Current Release Posture
 
-As of May 19, 2026:
+As of May 20, 2026:
 
 - hosted `/production` is the refreshed public `1.4.0` family
 - hosted `/beta` remains the authority-gated review lane for the next deliberate
   candidate cycle
 - hosted `/dev` is the forward-review lane for the next coherent improvement
   bundle and currently tracks the `1.4.0.1` line
-- local MacBook development is currently on
-  `codex/macbook-conformance-investment-review`
+- local MacBook development uses short-lived topic branches. The latest
+  challenge/sprite-motion conformance branch prepared for iMacM1 integration is
+  `codex/macbook-challenge-sprite-motion-conformance`
 
 This means:
 
@@ -41,13 +42,15 @@ The forward line and the current shipped family now include:
 - the refreshed audio theme comparison harness captures each cue in a fresh
   harness session, which gives us branch-local audio identity evidence again on
   this machine
-- the dedicated challenge-stage scorer now shows the real set-piece gap:
-  `5.7/10` conformance and `5.6/10` interesting factor after the measured
-  wave/group identity pass and the no-fire reference-motion extractor
-  correction
+- the dedicated challenge-stage scorer now shows the real set-piece gap more
+  sharply: `4.3/10` conformance and `4.3/10` interesting factor, with movement
+  `4.3/10`, graphics `4.6/10`, and alien novelty `3.9/10`
 - the post-1.4.0 sprite-scale regression was corrected, and the current forward
   branch adds a formation-readability guard so crop improvements cannot quietly
   damage live board readability
+- sprite motion correspondence is now a measured artifact row at `7.83/10`,
+  which makes temporal sprite behavior visible without pretending the full
+  animation/capture/dive problem is solved
 
 ## Current Path.Plan
 
@@ -69,16 +72,36 @@ do not outrun conformance or public safety:
    publishing wait behind explicit auth, consent, storage, moderation, token,
    and revoke/failure-mode review.
 
-The immediate next work is to finish the current quality bundle cleanly: protect
-the sprite-scale fix, preserve the wider readable rack, keep later-stage entry
-staggering measured, document stage-1 opening overlap as warning-level
-choreography debt, and then return to Aurora challenge-stage conformance and
-audio event clarity.
+The immediate next work is to integrate the current challenge/sprite-motion
+bundle, then use the stricter evidence to attack the highest-value gaps. The
+latest timing-offset work was useful, but it did not materially move the
+challenge-stage score. The next improvement cycle should therefore prioritize
+path-shape re-authoring, target-video object-track comparison, alien novelty,
+stage-specific entry grammar, lower-field route readability, and bonus-shot
+opportunity.
 
 The current tracked challenge-stage gap remains that the stages are safe but not
 yet spectacular enough: movement grammar, alien novelty, stage-specific target
 contracts, and active sprite-motion comparison still need more direct reference
 windows.
+
+## Medium-Term Priority Stack
+
+Use this stack when choosing the next several work blocks.
+
+| Priority | Work block | Why it matters | Success signal |
+| --- | --- | --- | --- |
+| 1 | Aurora challenge-stage authorship | This is now the most visible human-level conformance gap: stages exist, but they lack Galaga-like trajectory variation, alien novelty, and authored bonus-stage learning. | Dedicated challenge-stage conformance moves materially above `4.3/10` with better stage-by-stage evidence, not just looser scoring. |
+| 2 | Aurora sprite and motion reference quality | Sprite scale/readability regressions showed that static crops, runtime crops, relative scale, and temporal motion must be separated. | Runtime-vs-target sprite rows, sprite-motion correspondence, and formation readability all improve without making the game look crowded or unstable. |
+| 3 | Audio/acoustic event clarity | Audio still has a strong semantic layer but weaker acoustic fit, and player feedback depends on impact, rescue, loss, and challenge events being readable. | Acoustic event fit improves while cue alignment remains `9/9` and semantic score stays high. |
+| 4 | Galaxy Guardians second-game proof | Platinum needs a real second application to prove game/platform separation and reusable ingestion. | Guardians gains game-owned evidence for rack timing, dive paths, scoring/result identity, audio cues, replay, and platform-frame parity. |
+| 5 | Ingestion package generalization | The project must become repeatable for future games, not hand-tuned for Aurora. | Cross-game ingestion maturity rows exist for source inventory, target extraction, runtime capture, metric separation, release visibility, and harness promotion. |
+| 6 | Third-game candidate readiness | A third game should stress the platform after the first two games stabilize, not before. | Candidate source availability and ingestion fit are documented before implementation starts. |
+
+Public creative theme work should remain downstream of reference conformance.
+The broad-user games should eventually be original and thematically distinct,
+but reference-identical modes should be treated as developer/test baselines,
+not the main public identity.
 
 ## Ingestion Automation Carry-Forward
 

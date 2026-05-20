@@ -1,7 +1,7 @@
-# Long-Term Aurora Release Roadmap
+# Long-Term Aurora / Platinum Release Roadmap
 
 This is the working release-family roadmap for Aurora Galactica and Platinum
-after the `1.3.0` production release.
+after the `1.4.0` production release.
 
 It groups the large open themes and issue families into coherent future release
 bundles. The specific issue list will change, but the phasing is meant to keep
@@ -11,8 +11,9 @@ work from becoming a loose bag of good ideas.
 
 - A "release family" here means a meaningful public milestone, not necessarily
   a strict SemVer major version.
-- Keep `1.x` focused on making Aurora excellent and preparing Platinum for a
-  second game.
+- Keep `1.x` focused on making Aurora excellent, making Galaxy Guardians a real
+  second-game proof, and preparing Platinum for a third game through ingestion
+  rather than one-off design.
 - Reserve `2.0` for the first genuinely multi-game Platinum milestone, where at
   least two applications are meaningfully playable or one second-game proof is
   strong enough to change the product promise.
@@ -23,25 +24,28 @@ work from becoming a loose bag of good ideas.
   background polish.
 - Treat shared game-video publishing as a product and evidence capability, not
   just a debugging convenience.
-- Bring a second-game Platinum sneak peek forward early enough to pressure-test
-  the platform layer before the full multi-game milestone.
+- Bring a second-game Platinum proof forward early enough to pressure-test the
+  platform layer before the full multi-game milestone.
+- Keep reference-conformance modes separate from production theme modes. The
+  target-identical experience is for testing, measurement, and review; public
+  variants should become unique era-faithful games once the baseline is known.
 
 ## Current Baseline
 
-As of May 12, 2026:
+As of May 20, 2026:
 
 - shipped production family:
-  - `1.3.0`
-- hosted `/dev` carries the `1.3.0.1` forward-review increment while hosted
-  `/beta` and hosted `/production` now carry the refreshed public `1.3.0`
-  family
+  - `1.4.0`
+- hosted `/dev` carries the `1.4.0.1` forward-review increment while hosted
+  `/beta` remains the authority-gated review lane and hosted `/production`
+  carries the refreshed public `1.4.0` family
 - `main` is the authoritative forward integration line
-- the other machine is already advancing a Galaxians-style sibling track and
-  stronger harness/reference analysis
-- the accepted `1.3.0.1` bundle refreshed the public `1.3.0` family with
-  current conformance dashboards, public/project docs, resource economics,
-  application artifact conformance, runtime static sprite scoring, and a
-  measured audio/event-feedback lift
+- the other machine is already advancing release-authority integration and
+  Galaxians-style sibling work
+- the latest MacBook challenge/sprite-motion branch has been prepared for
+  iMacM1 integration with sprite-motion correspondence, Galaga alien cadence
+  targets, stricter challenge-stage scoring, and refreshed application artifact
+  conformance
 
 The current shipped line is strong enough that the next cycle should not be a
 recovery release. It should be the first intentional polish-and-platform cycle
@@ -51,19 +55,22 @@ toward the next era.
 
 Short term:
 
-- keep the refreshed public `1.3.0` line trustworthy while assembling the next
+- keep the refreshed public `1.4.0` line trustworthy while assembling the next
   coherent hosted `/dev` review bundle
 - keep release notes, scorecards, dashboards, public project docs, and
   economics aligned with the same current score read
-- after the beta decision, prioritize the next highest-value conformance lift:
-  audio/event feedback, alien/challenge variation, level arc, or visual motion
-  fidelity depending on cost/value evidence
+- prioritize the next highest-value conformance lift: challenge-stage
+  authorship first, then sprite/motion reference quality, audio/acoustic event
+  clarity, Galaxy Guardians second-game proof, and ingestion-package
+  generalization
 
 Medium term:
 
-- make `1.4.0` the first serious arcade-depth beta family
-- emphasize alien entry variation, challenge-stage novelty, stage progression,
-  boss/formation grammar, visual reference grounding, and audio/event feedback
+- use the `1.4.0.x` line as the arcade-depth and conformance-process family
+- raise Aurora's challenge-stage, sprite-motion, audio, and stage-arc quality
+  enough that the user-visible experience is materially stronger
+- make Guardians a stable usable second-game proof with game-owned evidence and
+  platform parity
 - keep Platinum/application seams explicit as the game work deepens
 
 Longer term:
@@ -72,6 +79,9 @@ Longer term:
 - use `1.6.0` for message-to-pilot and cabinet polish
 - reserve `2.0` for a credible multi-game Platinum milestone backed by
   ingestion-driven game-owned conformance packages
+- choose and begin a third-game candidate only when the ingestion framework can
+  carry source inventory, target extraction, runtime capture, scoring, docs,
+  and release visibility with much less Aurora-specific invention
 
 ## Major Roadmap Adjustment
 
@@ -153,7 +163,7 @@ Post-release pickup:
   the roadmap drift back into generic polish
 - keep `1.5.0` and `1.6.0` queued behind that as the next explicit families
 
-## Release Family 1.4: Level-By-Level Arcade Expansion
+## Release Family 1.4.x: Level-By-Level Arcade Expansion And Conformance Process
 
 Working title:
 
@@ -163,6 +173,8 @@ Primary goal:
 
 - make Aurora's game progression richer and more comparable to original Galaga
   across stages, not only in the Stage 1 opening
+- make the conformance process mature enough that Galaxy Guardians and future
+  games can reuse it
 
 Bundle:
 
@@ -178,6 +190,8 @@ Bundle:
   collapse too early
 - add harnesses and reference artifacts for at least one expanded challenge
   stage and one later-level movement/entry family
+- keep reference-conformance and production-theme lanes separate so future
+  public builds can become original without losing measurement truth
 
 Representative issue families:
 
@@ -195,6 +209,37 @@ Exit standard:
 - challenge stages read as intentional bonus stages with distinct content
 - at least one new alien/movement/challenge family is visible in normal play
 - gameplay depth improves without sacrificing early-run trust
+- Galaxy Guardians has a clearer second-game proof path with game-owned
+  conformance evidence
+- the ingestion maturity ladder is visible in docs/dashboard artifacts for at
+  least Aurora and Guardians
+
+## Third-Game Preparation Lane
+
+Working title:
+
+- `2.0 candidate input` "Third Game Readiness"
+
+Primary goal:
+
+- choose the next game only after the ingestion framework has enough shape to
+  make that choice rational.
+
+Candidate directions:
+
+- a Galaga-family variant if it helps validate late-stage variation,
+  challenge-stage novelty, and themed derivative design
+- a Space-Invaders-family game if it better stress-tests formation/rack motion,
+  shelter/block state, projectile pressure, and simpler but stricter arcade
+  rhythm
+
+Entry standard:
+
+- source media is available and cataloged
+- target sprites/audio/stage windows can be extracted cleanly enough to score
+- the game can own its own rules and evidence without changing Platinum
+- the first playable slice can validate a platform need that Aurora and
+  Guardians do not already cover
 
 ## Release Family 1.5: Shared Videos And Flight Recorder
 
