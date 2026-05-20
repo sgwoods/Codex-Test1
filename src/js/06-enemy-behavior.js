@@ -111,8 +111,9 @@ function updateChallengeEnemy(e,dt){
 		 const arcAmp=e.arcAmp||1,dropAmp=e.dropAmp||1;
 	 const laneX=PLAY_W/2+side*(48+slot*16);
 	 const topY=38+wave*14+row*8;
-	 if(u<3.15){
-	  const q=u/3.15,startX=side>0?PLAY_W+44:-44,curve=1-Math.pow(1-q,2);
+	 const entryDuration=pathFamily==='first-challenge-peel'?3.35:3.15;
+	 if(u<entryDuration){
+	  const q=u/entryDuration,startX=side>0?PLAY_W+44:-44,curve=1-Math.pow(1-q,2);
 	  if(pathFamily==='hook-arc'){
 	   e.x=startX+(laneX-startX)*(q<.58?Math.sin(q/.58*Math.PI/2):.82+(q-.58)*.43);
 	   e.y=topY+Math.sin(q*Math.PI*1.65+p)*7*arcAmp;
@@ -157,7 +158,7 @@ function updateChallengeEnemy(e,dt){
 	   e.y=topY+Math.sin(q*3.14+p)*2*fm.challengeDrop;
 	  }
 	 }else if(u<9.7){
-	  const q=(u-3.15)/6.55;
+	  const q=(u-entryDuration)/6.55;
 	  if(pathFamily==='hook-arc'){
 	   e.x=laneX+sweep*(Math.sin(q*Math.PI*1.2)*42+Math.sin(q*Math.PI*3+p)*6)*fm.challengeSweep*arcAmp;
 	   e.y=topY+q*12*dropAmp+Math.sin(q*7.2+p)*2.2;

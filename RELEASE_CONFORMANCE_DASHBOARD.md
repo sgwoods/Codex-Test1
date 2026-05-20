@@ -1,6 +1,6 @@
 # Release Conformance Dashboard
 
-Generated: `2026-05-19T21:55:51.707Z`
+Generated: `2026-05-20T12:21:30.908Z`
 
 This is the primary at-a-glance planning artifact for Aurora conformance work. It answers what we are trying to improve, why it matters, how close it is to a significant user-facing release gate, and what the next investment should be.
 
@@ -18,13 +18,13 @@ Aurora remains the active investment target, but Galaxy Guardians is also repres
 | --- | --- | --- | --- |
 | Overall quality | 9.2/10 | >=9.3 | Full score refresh after all major cycles |
 | Audio identity | 7.3/10 | >=7.5 | Primary user-experience gap |
-| Challenge-stage set-piece conformance | 4.2/10 | >=5.0 before next beta claim; >=6.0 next major gate; >=9.0 mature | Strict movement/graphics/alien-novelty gate; safety does not inflate this score |
+| Challenge-stage set-piece conformance | 4.3/10 | >=5.0 before next beta claim; >=6.0 next major gate; >=9.0 mature | Strict movement/graphics/alien-novelty gate; safety does not inflate this score |
 | Direct target sprite conformance | 5.5/10 | >=5.5 before next beta claim; >=7.5 mature preview | Strict runtime-vs-promoted-target-crop row; static proxy scores do not satisfy this gate |
 | Level arc | 8.8/10 | >=8.8 | Long-play gameplay-quality gate |
 | Alien entry and challenge-stage novelty | 8.2/10 | >=7.5 first gate; >=9.0 mature | New high-priority long-cycle gameplay-authenticity gate |
 | Boss entry and formation grammar | 9.4/10 | >=8.0 first gate; >=9.0 mature | New measured gate for stage choreography |
 | Alien entry / formations | 10/10 measured | >=9.2 with path/rack scorer | Now backed by dedicated alien-entry/challenge variation scorer |
-| Challenge variation | 4.2/10 measured | >=9.2 with dedicated scorer | Dedicated stage-by-stage challenge conformance gate |
+| Challenge variation | 4.3/10 measured | >=9.2 with dedicated scorer | Dedicated stage-by-stage challenge conformance gate |
 | Visual look and feel | 8.6/10 | >=8.4 | New explicit gate; first-pass scorer measured |
 | Arcade frame and popup surfaces | 9.2/10 | >=9.4 | Split from generic UI shell before final gate |
 | No-regression guardrails | movement/combat/capture >=10; challenge timing >=9.8 | Maintain | Hard blockers |
@@ -46,7 +46,7 @@ An `x/10` score is a measured roll-up at the current scorer resolution, not a cl
 
 | Priority | Metric | Current | Confidence | Resolution | Cost / resources | Tracked spend | Major-gate target | Measurement status | Why this matters | Effort / time estimate | Recommended next step | Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Challenge-stage set-piece conformance: movement, graphics, alien novelty | 4.2/10 | medium-high for gap direction; medium-low for exact lift estimate | strict stage-by-stage challenge scorer using 1/10 baseline for interest, movement, and graphics; no-shot/no-kill is treated as a guardrail rather than score inflation | high; cpu, browser, gpu | 161 runs; 24 min wall; 39.7 min CPU | >=5.0 before next beta claim; 6.0 after three authored challenges; 9.0+ mature | Strict dedicated stage-by-stage scorer; current high-priority gameplay-authenticity gap | The challenging stages should be spectacular safe Galaga-like bonus exhibitions. Current safety is good, but movement variation, alien novelty, and graphical conformance are not yet close. | High; long-cycle CPU/browser extraction plus gameplay authoring and sprite-motion/reference labeling | Stage 3: rebuild Challenging Stage 1 against the Galaga challenge-1 arrival and late-wave references with visibly longer movement and readable exits. | reference-artifacts/analyses/challenge-stage-conformance/2026-05-19-fda97ed9/report.json |
+| 1 | Challenge-stage set-piece conformance: movement, graphics, alien novelty | 4.3/10 | medium-high for gap direction; medium-low for exact lift estimate | strict stage-by-stage challenge scorer using 1/10 baseline for interest, movement, and graphics; no-shot/no-kill is treated as a guardrail rather than score inflation | high; cpu, browser, gpu | 161 runs; 24 min wall; 39.7 min CPU | >=5.0 before next beta claim; 6.0 after three authored challenges; 9.0+ mature | Strict dedicated stage-by-stage scorer; current high-priority gameplay-authenticity gap | The challenging stages should be spectacular safe Galaga-like bonus exhibitions. Current safety is good, but movement variation, alien novelty, and graphical conformance are not yet close. | High; long-cycle CPU/browser extraction plus gameplay authoring and sprite-motion/reference labeling | Stage 3: rebuild Challenging Stage 1 against the Galaga challenge-1 arrival and late-wave references with visibly longer movement and readable exits. | reference-artifacts/analyses/challenge-stage-conformance/2026-05-20-23b54c7e/report.json |
 | 2 | Audio identity, event feedback, and cue alignment | 7.3/10 | medium-high | 21 cue/event comparisons with waveform, spectral, overlap, alignment, and semantic event-mapping features | high; cpu, model-api, openai-api | 309 runs; 253.7 min wall; 459.4 min CPU | 7.5-8.0 | Measured release category; weakest axis | Largest current score gap and high user-experience impact: shots, explosions, boss damage, challenge results, capture/rescue feedback. | High; 3-6 hrs local/model-assisted analysis | Challenge Perfect runtime trial rejected perfect-clean-onset-soft-tail; do not directly promote the focused keeper. Do not promote Challenge Perfect from isolated onset/body candidates. Replace the next audio strategy with full-phrase/segment-boundary work: stabilize the scorer on canonical reference-vs-reference capture, then generate candidates that optimize onset, body, tail, and live capture segmentation together. | reference-artifacts/analyses/quality-conformance/2026-05-16-08c327dd/report.json; reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-11-b83393cd-dirty-201628/report.json |
 | 3 | Alien entry and broad challenge-stage novelty | 8.2/10 | medium | composite proxy from opening timing, geometry, and movement grammar | estimated; cpu, browser | 112 runs; 26.4 min wall; 34.8 min CPU | 7.5 first gate; 9.0+ mature | Dedicated long-cycle broad scorer; useful diagnostic but less strict than set-piece score | Regular-stage alien entry, challenge-stage trajectories, and new-alien introduction still need stronger reference grounding; this broad metric should not mask the stricter challenge-stage gap. | High; long-cycle CPU/browser extraction plus reference contact-sheet and path-labeling pass | Attack Regular-entry geometry separation: Minimum regular geometry distance 0.083; mean regular geometry distance 0.127; closest pair mid-run-entry-variant / late-run-cleanup-or-failure. | reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-16-82fd62cb/report.json |
 | 4 | Level arc and encounter shape | 8.8/10 | medium-high | multi-submetric level-arc report with stage families, challenge layers, pressure, reward, and persona evidence | low; cpu, browser | 161 runs; 24 min wall; 39.7 min CPU | 8.8-9.0 | Measured release category | Controls whether long play feels like Galaga-like escalation rather than repeated pressure. | Medium-high; 2-5 hrs | Use the top-ranked opportunity window to add or widen deterministic evidence before changing gameplay tuning. | reference-artifacts/analyses/level-arc-conformance/2026-05-16-08c327dd/report.json |
@@ -55,7 +55,7 @@ An `x/10` score is a measured roll-up at the current scorer resolution, not a cl
 | 6 | Overall visual look and feel: gameplay, start page, typography complexity | 8.6/10 | medium-low | first-pass visual scorer when available; still needs reference-backed contact sheets and sprite/style sub-scorers | medium; cpu, browser, gpu | 1 runs; 0.1 min wall; 0.1 min CPU | 8.4-8.8 | Measured visual scorer; medium-low confidence | A high score can still feel off if start text, density, contrast, alien readability, and arcade typography do not cohere. | Medium; next pass should add reference-backed contact sheets and GPU/model-assisted review | Defer unless new ingestion evidence reveals a larger graphics-conformance gap. | reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json |
 | 7 | Stage 4 pressure exact replay / pressure curve precision | 6/10 | medium | narrow pressure/loss replay windows; exact replay coverage still limited | medium; cpu, browser | 28 runs; 12.8 min wall; 18.5 min CPU | 8.2-8.6 | Measured level-arc weak submetric | Pressure should be learnable and reproducible, not merely present in one run. | Medium-high; prior runs ~12.8 min wall / 18.5 min CPU | Run focused source-window replay matching after the Stage 12 loop validates candidate mechanics. | reference-artifacts/analyses/level-arc-conformance/2026-05-16-08c327dd/report.json |
 | 8 | Alien entry to levels: formation, timing, and methods | 10/10 | medium | composite proxy from opening timing, geometry, and movement grammar | estimated; cpu, browser | 112 runs; 26.4 min wall; 34.8 min CPU | 9.0-9.4 with path and rack-slot scorer | Dedicated alien-entry submetric | Entry formations and rack timing are a first-order arcade authenticity signal before combat even starts. | Medium; 1-3 hrs plus visual review | Raise regular-stage minimum signature distance and add stage-specific alien entry scripts before retuning broad level arc. | reference-artifacts/analyses/alien-entry-challenge-variation/2026-05-16-82fd62cb/report.json |
-| 9 | Challenge-stage variation and new alien/formations introduction | 4.2/10 | medium | strict dedicated stage-by-stage challenge conformance report when available; fallback proxy uses challenge timing, challenge identity, and non-repetition | estimated; cpu, browser | 112 runs; 26.4 min wall; 34.8 min CPU | 9.0-9.4 with dedicated scorer | Dedicated stage-by-stage challenge conformance report | Challenge stages should teach new motion/reward patterns, not only pause normal combat. | Medium-high; 2-4 hrs | Close dedicated challenge-stage gaps: current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.3/10, strict graphics is 4.4/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.5/10, target-video object-track fit is 3.5/10, and active sprite-motion still needs Galaga target-crop sequence comparison. Diagnostic legacy coverage was 6.8/10, which is why the old read was too generous. | reference-artifacts/analyses/challenge-stage-conformance/2026-05-19-fda97ed9/report.json |
+| 9 | Challenge-stage variation and new alien/formations introduction | 4.3/10 | medium | strict dedicated stage-by-stage challenge conformance report when available; fallback proxy uses challenge timing, challenge identity, and non-repetition | estimated; cpu, browser | 112 runs; 26.4 min wall; 34.8 min CPU | 9.0-9.4 with dedicated scorer | Dedicated stage-by-stage challenge conformance report | Challenge stages should teach new motion/reward patterns, not only pause normal combat. | Medium-high; 2-4 hrs | Close dedicated challenge-stage gaps: current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.3/10, strict graphics is 4.6/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.5/10, target-video object-track fit is 3.4/10, and sprite-motion correspondence is 7.83/10 with target timing status frame-labeled-segmented-reference-windows. Diagnostic legacy coverage was 6.8/10, which is why the old read was too generous. | reference-artifacts/analyses/challenge-stage-conformance/2026-05-20-23b54c7e/report.json |
 | 10 | Progression and persona depth | 8.4/10 | medium | scorer-backed artifact with selected harness windows | estimated; cpu | 16 runs; 17.6 min wall; 20.4 min CPU | 9.1+ | Measured release category | Keeps the game learnable across skill levels and supports later-stage quality. | Low-medium; 1-2 hrs | Resolve remaining ordering edge case after higher-value audio/level-arc work. | reference-artifacts/analyses/quality-conformance/2026-05-16-08c327dd/report.json |
 | 11 | Stage 1 opening timing fidelity | 8.5/10 | medium | scorer-backed artifact with selected harness windows | medium; cpu, browser | 16 runs; 17.6 min wall; 20.4 min CPU | 8.8-9.2 | Measured release category | First impression and direct reference feel. | Low-medium; 1-2 hrs | Defer until higher-gap audio and level-arc candidates have been exercised. | reference-artifacts/analyses/quality-conformance/2026-05-16-08c327dd/report.json |
 | 12 | Arcade console frame UI style | 9.2/10 | medium | UI shell proxy; dedicated visual/modal rubric still needed | medium; cpu, browser, gpu | 16 runs; 17.6 min wall; 20.4 min CPU | 9.4-9.6 | Measured as UI shell; needs separate arcade-frame style rubric | The cabinet frame is the constant product surface around every game. | Medium; 1-3 hrs visual QA | Defer unless new ingestion evidence reveals a larger graphics-conformance gap. | reference-artifacts/analyses/quality-conformance/2026-05-16-08c327dd/report.json |
@@ -77,10 +77,10 @@ Every release candidate should include both a conformance read and a resource/ti
 | Latest level-arc conformance | 8.8/10 | Long-play gameplay-shape gate |
 | Metric points scanned | 1253 | History depth behind score trends |
 | Score deltas found | 137 | Past-goal movement available for review |
-| Measured runs | 848 | Tracked harness/model/local compute work |
-| Tracked wall time | 951.4 min | Human clock-time planning input |
-| Tracked CPU time | 946.9 min | Local compute-cost planning input |
-| Tracked artifact growth | 1426.4 MB | Evidence volume and storage/review-cost proxy |
+| Measured runs | 859 | Tracked harness/model/local compute work |
+| Tracked wall time | 952.1 min | Human clock-time planning input |
+| Tracked CPU time | 947.9 min | Local compute-cost planning input |
+| Tracked artifact growth | 1428.9 MB | Evidence volume and storage/review-cost proxy |
 
 ### Latest Self-Critical Work-Block Read
 
@@ -112,10 +112,10 @@ The economics view now separates _how_ resources were applied from _what_ improv
 
 | Local CPU/browser purpose | Runs | Wall time | Share | Meaning |
 | --- | --- | --- | --- | --- |
-| Audio conformance and cue feedback | 510 | 504.2 min | 86% | Moves the moment-to-moment arcade feel: impact clarity, ambience identity, reward/loss feedback, and player understanding. |
-| Gameplay behavior and level complexity | 306 | 71.8 min | 12.2% | Moves player-facing pressure, stage shape, alien entry novelty, challenge-stage learning value, and long-play texture. |
+| Audio conformance and cue feedback | 510 | 504.2 min | 85.9% | Moves the moment-to-moment arcade feel: impact clarity, ambience identity, reward/loss feedback, and player understanding. |
+| Gameplay behavior and level complexity | 312 | 72.4 min | 12.3% | Moves player-facing pressure, stage shape, alien entry novelty, challenge-stage learning value, and long-play texture. |
 | Harness, ingestion, and assessment logic | 9 | 10.2 min | 1.7% | Moves reusable automation: scorers, artifact extraction, candidate loops, measurement confidence, and future game ingestion. |
-| Visual and video reference analysis | 10 | 0.3 min | 0.1% | Moves graphical identity, reference inspection, contact-sheet review, sprite/surface comparison, and readability. |
+| Visual and video reference analysis | 15 | 0.4 min | 0.1% | Moves graphical identity, reference inspection, contact-sheet review, sprite/surface comparison, and readability. |
 | Dashboard, docs, and release planning | 6 | 0 min | 0% | Moves decision quality: what to invest in next, how to explain releases, and how to keep dev/beta/prod evidence aligned. |
 
 | Project part | Positive score movement | Share | Player/designer meaning |
@@ -130,8 +130,8 @@ The economics view now separates _how_ resources were applied from _what_ improv
 | Resource | Measured runs | Wall time | CPU time |
 | --- | --- | --- | --- |
 | gpu-equivalent | 18 | 630.8 min | 1.2 min |
-| cpu | 810 | 556.7 min | 894.3 min |
-| browser | 304 | 410.4 min | 633.8 min |
+| cpu | 820 | 557.3 min | 895.4 min |
+| browser | 305 | 410.5 min | 633.9 min |
 | codex | 13 | 365.7 min | 1.2 min |
 | openai-gpu-equivalent | 1 | 75 min | 0 min |
 | model-api | 2 | 25 min | 0 min |
@@ -149,13 +149,13 @@ The economics view now separates _how_ resources were applied from _what_ improv
 | audio-activity-profile | 10 | 127.2 min | 14 min |
 | audio-risk-stability | 8 | 91.4 min | 2.7 min |
 | release-hardening | 1 | 90 min | 0 min |
-| audio-theme-comparison | 39 | 84.2 min | 100.1 min |
+| challenge-stage | 96 | 84.7 min | 16.9 min |
 
 ### Next Goal Estimates
 
 | Priority | Metric | Current | Target | Gap to target | Estimated effort | Expected resources | Tracked spend | Value / cost read | Next action |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Challenge-stage set-piece conformance: movement, graphics, alien novelty | 4.2/10 | >=5.0 before next beta claim; 6.0 after three authored challenges; 9.0+ mature | +0.8 | High; long-cycle CPU/browser extraction plus gameplay authoring and sprite-motion/reference labeling | cpu, browser, gpu | 161 runs; 24 min wall; 39.7 min CPU | Expected lift 1.8/10 on metric, 0.138/10 overall; investment score 8.4. | Stage 3: rebuild Challenging Stage 1 against the Galaga challenge-1 arrival and late-wave references with visibly longer movement and readable exits. |
+| 1 | Challenge-stage set-piece conformance: movement, graphics, alien novelty | 4.3/10 | >=5.0 before next beta claim; 6.0 after three authored challenges; 9.0+ mature | +0.7 | High; long-cycle CPU/browser extraction plus gameplay authoring and sprite-motion/reference labeling | cpu, browser, gpu | 161 runs; 24 min wall; 39.7 min CPU | Expected lift 1.8/10 on metric, 0.138/10 overall; investment score 8.4. | Stage 3: rebuild Challenging Stage 1 against the Galaga challenge-1 arrival and late-wave references with visibly longer movement and readable exits. |
 | 2 | Audio identity, event feedback, and cue alignment | 7.3/10 | 7.5-8.0 | +0.2 | High; 3-6 hrs local/model-assisted analysis | cpu, model-api, openai-api | 309 runs; 253.7 min wall; 459.4 min CPU | Expected lift 0.7/10 on metric, 0.054/10 overall; investment score 2.67. | Challenge Perfect runtime trial rejected perfect-clean-onset-soft-tail; do not directly promote the focused keeper. Do not promote Challenge Perfect from isolated onset/body candidates. Replace the next audio strategy with full-phrase/segment-boundary work: stabilize the scorer on canonical reference-vs-reference capture, then generate candidates that optimize onset, body, tail, and live capture segmentation together. |
 | 3 | Alien entry and broad challenge-stage novelty | 8.2/10 | 7.5 first gate; 9.0+ mature | at target | High; long-cycle CPU/browser extraction plus reference contact-sheet and path-labeling pass | cpu, browser | 112 runs; 26.4 min wall; 34.8 min CPU | Estimated cost/value; dedicated investment candidate not yet generated. | Attack Regular-entry geometry separation: Minimum regular geometry distance 0.083; mean regular geometry distance 0.127; closest pair mid-run-entry-variant / late-run-cleanup-or-failure. |
 | 4 | Level arc and encounter shape | 8.8/10 | 8.8-9.0 | at target | Medium-high; 2-5 hrs | cpu, browser | 161 runs; 24 min wall; 39.7 min CPU | Expected lift 0.24/10 on metric, 0.018/10 overall; investment score 1.55. | Use the top-ranked opportunity window to add or widen deterministic evidence before changing gameplay tuning. |
@@ -197,19 +197,19 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 
 ### Charts
 
-![score-trends](reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/score-trends.svg)
+![score-trends](reference-artifacts/analyses/conformance-economics/2026-05-20-246f53bd/score-trends.svg)
 
-![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/largest-score-deltas.svg)
+![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-05-20-246f53bd/largest-score-deltas.svg)
 
-![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/compute-minutes-by-resource.svg)
+![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-05-20-246f53bd/compute-minutes-by-resource.svg)
 
-![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/cost-per-positive-score-point.svg)
+![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-05-20-246f53bd/cost-per-positive-score-point.svg)
 
-![gpu-equivalent-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/gpu-equivalent-use-by-purpose.svg)
+![gpu-equivalent-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-05-20-246f53bd/gpu-equivalent-use-by-purpose.svg)
 
-![cpu-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/cpu-use-by-purpose.svg)
+![cpu-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-05-20-246f53bd/cpu-use-by-purpose.svg)
 
-![gameplay-improvement-by-project-part](reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/gameplay-improvement-by-project-part.svg)
+![gameplay-improvement-by-project-part](reference-artifacts/analyses/conformance-economics/2026-05-20-246f53bd/gameplay-improvement-by-project-part.svg)
 
 ## New First-Class Axes Added
 
@@ -235,5 +235,5 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 - Quality report: `reference-artifacts/analyses/quality-conformance/2026-05-16-08c327dd/report.json`
 - Investment priority report: `reference-artifacts/analyses/conformance-investment-priorities/2026-05-19-fba7f625/report.json`
 - Level-arc report: `reference-artifacts/analyses/level-arc-conformance/2026-05-16-08c327dd/report.json`
-- Economics report: `reference-artifacts/analyses/conformance-economics/2026-05-19-95995f49/report.json`
+- Economics report: `reference-artifacts/analyses/conformance-economics/2026-05-20-246f53bd/report.json`
 - Equal current quality-category weight: `0.083`
