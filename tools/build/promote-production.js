@@ -12,14 +12,26 @@ const {
 const { checkGitClean } = require('./check-publish-ready');
 const { assertReleaseAuthority, assertReleaseMainCurrent } = require('./release-authority');
 const { productionFiles } = require('./lane-files');
+const { selectReleaseNoteForBuild } = require('./release-note-selection');
 
 const FILES = productionFiles(DIST_BETA);
+const RELEASE_NOTES = path.join(ROOT, 'release-notes.json');
 
 function normalizeProductionVersion(version){
   return String(version || '').replace(/-(alpha|beta|rc)(\.[0-9]+)?$/, '');
 }
 
-function buildProductionInfo(sourceInfo){
+function loadReleaseNotes(){
+  if(!fs.existsSync(RELEASE_NOTES)) return [];
+  try{
+    const payload = JSON.parse(fs.readFileSync(RELEASE_NOTES, 'utf8'));
+    return Array.isArray(payload.notes) ? payload.notes : [];
+  }catch(err){
+    return [];
+  }
+}
+
+function buildProductionInfo(sourceInfo, releaseNote){
   const version = normalizeProductionVersion(sourceInfo.version);
   const sourceState = sourceInfo.state || `${sourceInfo.branch || 'main'}@${sourceInfo.shortCommit}${sourceInfo.dirty ? ' dirty' : ' clean'}`;
   const productionBranch = 'main';
@@ -34,7 +46,8 @@ function buildProductionInfo(sourceInfo){
     releaseChannel: 'production',
     dirty: false,
     dirtyFiles: [],
-    promotedFromState: sourceState
+    promotedFromState: sourceState,
+    latestReleaseNote: releaseNote || sourceInfo.latestReleaseNote || null
   };
 }
 
@@ -42,9 +55,10 @@ function escapeRegex(value){
   return String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-function rewriteProductionText(filePath, sourceInfo, productionInfo){
+function rewriteProductionText(filePath, sourceInfo, productionInfo, releaseNote){
   if(!fs.existsSync(filePath)) return;
   let text = fs.readFileSync(filePath, 'utf8');
+  const sourceNote = sourceInfo.latestReleaseNote || {};
   const replacements = [
     [new RegExp(escapeRegex(sourceInfo.label), 'g'), productionInfo.label],
     [new RegExp(`version:'${escapeRegex(sourceInfo.version)}'`, 'g'), `version:'${productionInfo.version}'`],
@@ -62,6 +76,12 @@ function rewriteProductionText(filePath, sourceInfo, productionInfo){
     [/Generated from the beta lane artifacts promoted from the reviewed development build\./g, 'Generated from the production lane artifacts that feed the public release path.'],
     [/Beta lane project-page summary generated from promoted lane artifacts\./g, 'Production lane project-page summary generated from approved release artifacts.']
   ];
+  if(releaseNote && releaseNote.title && sourceNote.title){
+    replacements.push([new RegExp(escapeRegex(sourceNote.title), 'g'), releaseNote.title]);
+  }
+  if(releaseNote && releaseNote.summary && sourceNote.summary){
+    replacements.push([new RegExp(escapeRegex(sourceNote.summary), 'g'), releaseNote.summary]);
+  }
   for(const [pattern, replacement] of replacements){
     text = text.replace(pattern, replacement);
   }
@@ -103,21 +123,24 @@ for(const file of FILES){
 
 if(fs.existsSync(BETA_BUILD_INFO)){
   const sourceInfo = betaInfo;
-  const productionInfo = buildProductionInfo(sourceInfo);
+  const releaseNotes = loadReleaseNotes();
+  const productionPreview = buildProductionInfo(sourceInfo, null);
+  const selectedReleaseNote = selectReleaseNoteForBuild(releaseNotes, productionPreview, { lane: 'production' });
+  const productionInfo = buildProductionInfo(sourceInfo, selectedReleaseNote);
   productionInfo.promotedFromApprovedBeta = approvedInfo.label;
   productionInfo.promotedFromApprovedAt = approvedInfo.approvedAt || '';
   fs.writeFileSync(PRODUCTION_BUILD_INFO, JSON.stringify(productionInfo, null, 2) + '\n');
-  rewriteProductionText(path.join(DIST_PRODUCTION, 'index.html'), sourceInfo, productionInfo);
-  rewriteProductionText(path.join(DIST_PRODUCTION, 'project-guide.html'), sourceInfo, productionInfo);
-  rewriteProductionText(path.join(DIST_PRODUCTION, 'release-notes.html'), sourceInfo, productionInfo);
-  rewriteProductionText(path.join(DIST_PRODUCTION, 'white-paper.html'), sourceInfo, productionInfo);
-  rewriteProductionText(path.join(DIST_PRODUCTION, 'application-guide.html'), sourceInfo, productionInfo);
-  rewriteProductionText(path.join(DIST_PRODUCTION, 'platinum-guide.html'), sourceInfo, productionInfo);
-  rewriteProductionText(path.join(DIST_PRODUCTION, 'player-guide.html'), sourceInfo, productionInfo);
-  rewriteProductionText(path.join(DIST_PRODUCTION, 'release-dashboard.html'), sourceInfo, productionInfo);
-  rewriteProductionText(path.join(DIST_PRODUCTION, 'conformance-dashboard.html'), sourceInfo, productionInfo);
-  rewriteProductionText(path.join(DIST_PRODUCTION, 'conformance-dashboard-data.json'), sourceInfo, productionInfo);
-  rewriteProductionText(path.join(DIST_PRODUCTION, 'public-project-page.html'), sourceInfo, productionInfo);
+  rewriteProductionText(path.join(DIST_PRODUCTION, 'index.html'), sourceInfo, productionInfo, selectedReleaseNote);
+  rewriteProductionText(path.join(DIST_PRODUCTION, 'project-guide.html'), sourceInfo, productionInfo, selectedReleaseNote);
+  rewriteProductionText(path.join(DIST_PRODUCTION, 'release-notes.html'), sourceInfo, productionInfo, selectedReleaseNote);
+  rewriteProductionText(path.join(DIST_PRODUCTION, 'white-paper.html'), sourceInfo, productionInfo, selectedReleaseNote);
+  rewriteProductionText(path.join(DIST_PRODUCTION, 'application-guide.html'), sourceInfo, productionInfo, selectedReleaseNote);
+  rewriteProductionText(path.join(DIST_PRODUCTION, 'platinum-guide.html'), sourceInfo, productionInfo, selectedReleaseNote);
+  rewriteProductionText(path.join(DIST_PRODUCTION, 'player-guide.html'), sourceInfo, productionInfo, selectedReleaseNote);
+  rewriteProductionText(path.join(DIST_PRODUCTION, 'release-dashboard.html'), sourceInfo, productionInfo, selectedReleaseNote);
+  rewriteProductionText(path.join(DIST_PRODUCTION, 'conformance-dashboard.html'), sourceInfo, productionInfo, selectedReleaseNote);
+  rewriteProductionText(path.join(DIST_PRODUCTION, 'conformance-dashboard-data.json'), sourceInfo, productionInfo, selectedReleaseNote);
+  rewriteProductionText(path.join(DIST_PRODUCTION, 'public-project-page.html'), sourceInfo, productionInfo, selectedReleaseNote);
 }
 
 console.log(`Promoted approved beta artifacts to ${DIST_PRODUCTION}`);
