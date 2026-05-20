@@ -1,6 +1,6 @@
 # Aurora Sprite Motion Correspondence
 
-Generated: 2026-05-19T23:44:23.414Z
+Generated: 2026-05-20T01:18:31.554Z
 
 This report joins Galaga temporal target rows to Aurora runtime sprite-motion captures. It is intentionally conservative: visible runtime animation gets credit, but scores are capped until the target side has frame-labeled cadence windows rather than only pose sequences.
 

@@ -1,32 +1,34 @@
 {
   "schemaVersion": 1,
   "artifactType": "application-artifact-conformance-status",
-  "generatedAt": "2026-05-19T21:55:52.702Z",
-  "commit": "95995f49",
-  "branch": "main",
+  "generatedAt": "2026-05-20T01:20:40.762Z",
+  "commit": "23b54c7e",
+  "branch": "codex/macbook-challenge-sprite-motion-conformance",
   "dirty": true,
   "sources": {
     "spriteModel": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1.json",
     "spriteTargets": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1.json",
     "spriteSheetTargetCrops": "reference-artifacts/analyses/galaga-alien-target-crops/latest.json",
     "runtimeSprite": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json",
+    "spriteMotionCorrespondence": "reference-artifacts/analyses/aurora-sprite-motion-correspondence/latest.json",
     "runtimeVsTargetCrops": "reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json",
     "impactExplosion": "reference-artifacts/analyses/aurora-impact-explosion-conformance/latest.json",
     "audioLab": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json",
     "audioGap": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
     "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/latest.json",
     "releaseDashboard": "reference-artifacts/analyses/release-conformance-dashboard/latest.json",
-    "qualityReport": "reference-artifacts/analyses/quality-conformance/2026-05-16-08c327dd/report.json"
+    "qualityReport": "reference-artifacts/analyses/quality-conformance/2026-05-20-23b54c7e/report.json"
   },
   "summary": {
     "rowCount": 14,
-    "numericRowCount": 12,
+    "numericRowCount": 13,
     "averageScore10": 7.87,
     "weakestRow": "sprite-runtime-vs-promoted-target-crops",
     "spriteCatalogProxyScore10": 6.22,
     "spriteRuntimeCanvasScore10": 6.54,
     "spriteRuntimeVsTargetCropScore10": 5.48,
     "impactExplosionScore10": 5.86,
+    "spriteMotionCorrespondenceScore10": 7.83,
     "spriteModelAverageConfidence": 0.9439,
     "audioScore10": 7,
     "visualScore10": 8.62,
@@ -472,6 +474,677 @@
         "dive": 0,
         "carry": false
       }
+    }
+  ],
+  "spriteMotionCorrespondenceRows": [
+    {
+      "id": "boss-galaga-pulse-pair",
+      "label": "Boss Galaga Pulse Pair",
+      "roleKey": "boss-galaga",
+      "runtimeSpriteKey": "boss-line",
+      "score10": 7.65,
+      "rawScore10": 7.65,
+      "capScore10": 8.5,
+      "capReason": "Frame-labeled target rows exist, so the correspondence score may move beyond pose-only planning evidence.",
+      "confidence": "medium-high",
+      "status": "frame-timed-target-window",
+      "target": {
+        "targetReadinessScore10": 8.8,
+        "trustedCropCount": 3,
+        "provisionalCropCount": 0,
+        "frameCadenceTarget": {
+          "id": "boss-galaga-pulse-pair",
+          "status": "frame-labeled-segmented-reference-window",
+          "acceptedForScoring": true,
+          "sourceKind": "segmented-motion-reference-video",
+          "sampleFps": 4,
+          "sampleCount": 24,
+          "cadenceSecondsPerCycle": 1,
+          "phasePattern": [
+            "compact",
+            "compact",
+            "extended",
+            "extended"
+          ],
+          "phaseLabels": [
+            "compact",
+            "extended"
+          ],
+          "averageAdjacentDelta": 126.348,
+          "maxAdjacentDelta": 248,
+          "previewFrames": [
+            {
+              "sampleIndex": 0,
+              "timeSeconds": 2,
+              "phaseLabel": "compact",
+              "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-00-compact.png",
+              "metrics": {
+                "width": 52,
+                "height": 56,
+                "litPixels": 1181,
+                "litRatio": 0.40556,
+                "tokenChannels": [
+                  "B",
+                  "G",
+                  "M",
+                  "R",
+                  "Y"
+                ],
+                "litBox": {
+                  "x": 2,
+                  "y": 2,
+                  "width": 48,
+                  "height": 52
+                }
+              }
+            },
+            {
+              "sampleIndex": 12,
+              "timeSeconds": 5,
+              "phaseLabel": "compact",
+              "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-12-compact.png",
+              "metrics": {
+                "width": 52,
+                "height": 56,
+                "litPixels": 1198,
+                "litRatio": 0.4114,
+                "tokenChannels": [
+                  "B",
+                  "G",
+                  "M",
+                  "R",
+                  "Y"
+                ],
+                "litBox": {
+                  "x": 2,
+                  "y": 2,
+                  "width": 48,
+                  "height": 52
+                }
+              }
+            },
+            {
+              "sampleIndex": 23,
+              "timeSeconds": 7.75,
+              "phaseLabel": "extended",
+              "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/boss-line-23-extended.png",
+              "metrics": {
+                "width": 52,
+                "height": 56,
+                "litPixels": 1207,
+                "litRatio": 0.41449,
+                "tokenChannels": [
+                  "B",
+                  "G",
+                  "M",
+                  "R",
+                  "Y"
+                ],
+                "litBox": {
+                  "x": 2,
+                  "y": 2,
+                  "width": 48,
+                  "height": 52
+                }
+              }
+            }
+          ],
+          "measurementLimits": [
+            "This row is frame-labeled from a preserved segmented reference clip, not yet from raw arcade gameplay or ROM-derived frame timing.",
+            "The cadence should be used to compare visible runtime pulse/cadence behavior and to prevent provisional sheet cells from over-driving sprite-motion scoring.",
+            "Exact gameplay-time animation cadence still needs raw target gameplay windows."
+          ]
+        },
+        "poseSequence": [
+          "formation-front",
+          "flap-a",
+          "flap-b",
+          "flap-b",
+          "flap-a",
+          "formation-front"
+        ],
+        "cropIds": [
+          "boss-galaga-formation-front",
+          "boss-galaga-flap-a",
+          "boss-galaga-flap-b"
+        ]
+      },
+      "runtime": {
+        "staticLikenessScore10": 6.46,
+        "twoPhaseVisibilityScore10": 6.84,
+        "cadenceVisibilityScore10": 7.38,
+        "seedCoverageScore10": 10,
+        "seedCoverageAxes": [
+          {
+            "axis": "two-phase flap/pulse",
+            "covered": true
+          },
+          {
+            "axis": "cadence window",
+            "covered": true
+          },
+          {
+            "axis": "dive/rotation pose",
+            "covered": true
+          },
+          {
+            "axis": "capture/transition seed",
+            "covered": true
+          }
+        ],
+        "temporalSample": {
+          "litPixelDelta": 256,
+          "filledCellDelta": 37,
+          "scoreDelta": 0.22,
+          "phaseClosedCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-flap-closed.png",
+          "phaseOpenCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-flap-open.png"
+        },
+        "cadenceSample": {
+          "frameCount": 8,
+          "scoreRange10": 0.22,
+          "averageAdjacentLitPixelDelta": 73.14,
+          "averageAdjacentFilledCellDelta": 10.57,
+          "previewFrames": [
+            {
+              "frameIndex": 0,
+              "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-00.png",
+              "score10": 6.46
+            },
+            {
+              "frameIndex": 4,
+              "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-04.png",
+              "score10": 6.24
+            },
+            {
+              "frameIndex": 7,
+              "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-07.png",
+              "score10": 6.46
+            }
+          ]
+        },
+        "phaseOrderScore10": 5.92,
+        "phaseOrder": {
+          "score10": 5.92,
+          "runtimePhaseSequence": [
+            "extended",
+            "compact",
+            "compact",
+            "compact",
+            "compact",
+            "extended",
+            "extended",
+            "extended"
+          ],
+          "targetPhaseSequence": [
+            "compact",
+            "compact",
+            "extended",
+            "extended",
+            "compact",
+            "compact",
+            "extended",
+            "extended"
+          ],
+          "bestOrientation": "direct",
+          "directMatchRatio": 0.5,
+          "invertedMatchRatio": 0.5,
+          "runtimeTransitionCount": 2,
+          "targetTransitionCount": 3,
+          "transitionFit": 0.667,
+          "read": "Runtime cadence phase order matches directly at 50% frame-label agreement with transition fit 66.7%."
+        },
+        "staticCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line.png"
+      },
+      "playerMeaning": "This measures whether the alien appears alive: flap/pulse phases, a readable cadence, and enough pose coverage to make movement feel authored rather than static.",
+      "designerMeaning": "This is a bridge score. It should guide sprite-motion tuning and challenge-stage scoring; segmented-reference cadence can lift pose-only caps, while exact arcade timing still needs raw target gameplay windows.",
+      "nextGap": "Confirm Boss Galaga Pulse Pair cadence against raw gameplay or ROM-derived timing, then tune Aurora runtime cadence toward that target."
+    },
+    {
+      "id": "bee-zako-pulse-pair",
+      "label": "Bee / Zako Pulse Pair",
+      "roleKey": "bee-zako",
+      "runtimeSpriteKey": "bee-line",
+      "score10": 7.42,
+      "rawScore10": 7.42,
+      "capScore10": 8.5,
+      "capReason": "Frame-labeled segmented-reference cadence replaces provisional flap-cell timing for this row; final raw gameplay timing is still needed before high-confidence conformance claims.",
+      "confidence": "medium-high",
+      "status": "frame-timed-target-window",
+      "target": {
+        "targetReadinessScore10": 8.8,
+        "trustedCropCount": 1,
+        "provisionalCropCount": 2,
+        "frameCadenceTarget": {
+          "id": "bee-zako-pulse-pair",
+          "status": "frame-labeled-segmented-reference-window",
+          "acceptedForScoring": true,
+          "sourceKind": "segmented-motion-reference-video",
+          "sampleFps": 4,
+          "sampleCount": 24,
+          "cadenceSecondsPerCycle": 1,
+          "phasePattern": [
+            "extended",
+            "compact",
+            "compact",
+            "extended"
+          ],
+          "phaseLabels": [
+            "extended",
+            "compact"
+          ],
+          "averageAdjacentDelta": 87.261,
+          "maxAdjacentDelta": 182,
+          "previewFrames": [
+            {
+              "sampleIndex": 0,
+              "timeSeconds": 2,
+              "phaseLabel": "extended",
+              "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-00-extended.png",
+              "metrics": {
+                "width": 45,
+                "height": 36,
+                "litPixels": 774,
+                "litRatio": 0.47778,
+                "tokenChannels": [
+                  "B",
+                  "G",
+                  "M",
+                  "R",
+                  "W",
+                  "Y"
+                ],
+                "litBox": {
+                  "x": 1,
+                  "y": 2,
+                  "width": 42,
+                  "height": 32
+                }
+              }
+            },
+            {
+              "sampleIndex": 12,
+              "timeSeconds": 5,
+              "phaseLabel": "extended",
+              "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-12-extended.png",
+              "metrics": {
+                "width": 45,
+                "height": 36,
+                "litPixels": 771,
+                "litRatio": 0.47593,
+                "tokenChannels": [
+                  "B",
+                  "C",
+                  "G",
+                  "M",
+                  "R",
+                  "W",
+                  "Y"
+                ],
+                "litBox": {
+                  "x": 1,
+                  "y": 2,
+                  "width": 42,
+                  "height": 32
+                }
+              }
+            },
+            {
+              "sampleIndex": 23,
+              "timeSeconds": 7.75,
+              "phaseLabel": "extended",
+              "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/bee-line-23-extended.png",
+              "metrics": {
+                "width": 45,
+                "height": 36,
+                "litPixels": 771,
+                "litRatio": 0.47593,
+                "tokenChannels": [
+                  "B",
+                  "C",
+                  "G",
+                  "M",
+                  "R",
+                  "W",
+                  "Y"
+                ],
+                "litBox": {
+                  "x": 1,
+                  "y": 2,
+                  "width": 42,
+                  "height": 32
+                }
+              }
+            }
+          ],
+          "measurementLimits": [
+            "This row is frame-labeled from a preserved segmented reference clip, not yet from raw arcade gameplay or ROM-derived frame timing.",
+            "The cadence should be used to compare visible runtime pulse/cadence behavior and to prevent provisional sheet cells from over-driving sprite-motion scoring.",
+            "Exact gameplay-time animation cadence still needs raw target gameplay windows."
+          ]
+        },
+        "poseSequence": [
+          "formation-front",
+          "flap-a",
+          "flap-b",
+          "flap-b",
+          "flap-a",
+          "formation-front"
+        ],
+        "cropIds": [
+          "bee-zako-formation-front",
+          "bee-zako-flap-a",
+          "bee-zako-flap-b"
+        ]
+      },
+      "runtime": {
+        "staticLikenessScore10": 6.34,
+        "twoPhaseVisibilityScore10": 6.32,
+        "cadenceVisibilityScore10": 7.1,
+        "seedCoverageScore10": 10,
+        "seedCoverageAxes": [
+          {
+            "axis": "two-phase flap/pulse",
+            "covered": true
+          },
+          {
+            "axis": "cadence window",
+            "covered": true
+          },
+          {
+            "axis": "dive/rotation pose",
+            "covered": true
+          },
+          {
+            "axis": "transition seed not required for this row",
+            "covered": true
+          }
+        ],
+        "temporalSample": {
+          "litPixelDelta": 128,
+          "filledCellDelta": 83,
+          "scoreDelta": 0.1,
+          "phaseClosedCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-flap-closed.png",
+          "phaseOpenCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-flap-open.png"
+        },
+        "cadenceSample": {
+          "frameCount": 8,
+          "scoreRange10": 0.1,
+          "averageAdjacentLitPixelDelta": 36.57,
+          "averageAdjacentFilledCellDelta": 23.71,
+          "previewFrames": [
+            {
+              "frameIndex": 0,
+              "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-cadence-00.png",
+              "score10": 6.34
+            },
+            {
+              "frameIndex": 4,
+              "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-cadence-04.png",
+              "score10": 6.44
+            },
+            {
+              "frameIndex": 7,
+              "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-cadence-07.png",
+              "score10": 6.34
+            }
+          ]
+        },
+        "phaseOrderScore10": 5.5,
+        "phaseOrder": {
+          "score10": 5.5,
+          "runtimePhaseSequence": [
+            "extended",
+            "compact",
+            "compact",
+            "compact",
+            "compact",
+            "extended",
+            "extended",
+            "extended"
+          ],
+          "targetPhaseSequence": [
+            "extended",
+            "compact",
+            "compact",
+            "extended",
+            "extended",
+            "compact",
+            "compact",
+            "extended"
+          ],
+          "bestOrientation": "direct",
+          "directMatchRatio": 0.5,
+          "invertedMatchRatio": 0.5,
+          "runtimeTransitionCount": 2,
+          "targetTransitionCount": 4,
+          "transitionFit": 0.5,
+          "read": "Runtime cadence phase order matches directly at 50% frame-label agreement with transition fit 50%."
+        },
+        "staticCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line.png"
+      },
+      "playerMeaning": "This measures whether the alien appears alive: flap/pulse phases, a readable cadence, and enough pose coverage to make movement feel authored rather than static.",
+      "designerMeaning": "This is a bridge score. It should guide sprite-motion tuning and challenge-stage scoring; segmented-reference cadence can lift pose-only caps, while exact arcade timing still needs raw target gameplay windows.",
+      "nextGap": "Confirm Bee / Zako Pulse Pair cadence against raw gameplay or ROM-derived timing, then tune Aurora runtime cadence toward that target."
+    },
+    {
+      "id": "butterfly-escort-pulse-pair",
+      "label": "Butterfly / Escort Pulse Pair",
+      "roleKey": "butterfly-escort",
+      "runtimeSpriteKey": "but-line",
+      "score10": 8.43,
+      "rawScore10": 8.43,
+      "capScore10": 8.5,
+      "capReason": "Frame-labeled segmented-reference cadence replaces provisional flap-cell timing for this row; final raw gameplay timing is still needed before high-confidence conformance claims.",
+      "confidence": "medium-high",
+      "status": "frame-timed-target-window",
+      "target": {
+        "targetReadinessScore10": 8.8,
+        "trustedCropCount": 1,
+        "provisionalCropCount": 2,
+        "frameCadenceTarget": {
+          "id": "butterfly-escort-pulse-pair",
+          "status": "frame-labeled-segmented-reference-window",
+          "acceptedForScoring": true,
+          "sourceKind": "segmented-motion-reference-video",
+          "sampleFps": 4,
+          "sampleCount": 24,
+          "cadenceSecondsPerCycle": 1,
+          "phasePattern": [
+            "compact",
+            "extended",
+            "extended",
+            "compact"
+          ],
+          "phaseLabels": [
+            "compact",
+            "extended"
+          ],
+          "averageAdjacentDelta": 151,
+          "maxAdjacentDelta": 293,
+          "previewFrames": [
+            {
+              "sampleIndex": 0,
+              "timeSeconds": 2,
+              "phaseLabel": "compact",
+              "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-00-compact.png",
+              "metrics": {
+                "width": 34,
+                "height": 36,
+                "litPixels": 664,
+                "litRatio": 0.54248,
+                "tokenChannels": [
+                  "B",
+                  "R",
+                  "W"
+                ],
+                "litBox": {
+                  "x": 2,
+                  "y": 2,
+                  "width": 30,
+                  "height": 32
+                }
+              }
+            },
+            {
+              "sampleIndex": 12,
+              "timeSeconds": 5,
+              "phaseLabel": "compact",
+              "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-12-compact.png",
+              "metrics": {
+                "width": 34,
+                "height": 36,
+                "litPixels": 676,
+                "litRatio": 0.55229,
+                "tokenChannels": [
+                  "B",
+                  "C",
+                  "G",
+                  "R",
+                  "W"
+                ],
+                "litBox": {
+                  "x": 2,
+                  "y": 2,
+                  "width": 30,
+                  "height": 32
+                }
+              }
+            },
+            {
+              "sampleIndex": 23,
+              "timeSeconds": 7.75,
+              "phaseLabel": "compact",
+              "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/but-line-23-compact.png",
+              "metrics": {
+                "width": 34,
+                "height": 36,
+                "litPixels": 653,
+                "litRatio": 0.5335,
+                "tokenChannels": [
+                  "B",
+                  "G",
+                  "R",
+                  "W",
+                  "Y"
+                ],
+                "litBox": {
+                  "x": 2,
+                  "y": 2,
+                  "width": 30,
+                  "height": 32
+                }
+              }
+            }
+          ],
+          "measurementLimits": [
+            "This row is frame-labeled from a preserved segmented reference clip, not yet from raw arcade gameplay or ROM-derived frame timing.",
+            "The cadence should be used to compare visible runtime pulse/cadence behavior and to prevent provisional sheet cells from over-driving sprite-motion scoring.",
+            "Exact gameplay-time animation cadence still needs raw target gameplay windows."
+          ]
+        },
+        "poseSequence": [
+          "formation-front",
+          "flap-a",
+          "flap-b",
+          "flap-b",
+          "flap-a",
+          "formation-front"
+        ],
+        "cropIds": [
+          "butterfly-escort-formation-front",
+          "butterfly-escort-flap-a",
+          "butterfly-escort-flap-b"
+        ]
+      },
+      "runtime": {
+        "staticLikenessScore10": 6.62,
+        "twoPhaseVisibilityScore10": 9.38,
+        "cadenceVisibilityScore10": 9.27,
+        "seedCoverageScore10": 10,
+        "seedCoverageAxes": [
+          {
+            "axis": "two-phase flap/pulse",
+            "covered": true
+          },
+          {
+            "axis": "cadence window",
+            "covered": true
+          },
+          {
+            "axis": "dive/rotation pose",
+            "covered": true
+          },
+          {
+            "axis": "transition seed not required for this row",
+            "covered": true
+          }
+        ],
+        "temporalSample": {
+          "litPixelDelta": 264,
+          "filledCellDelta": 68,
+          "scoreDelta": 0.92,
+          "phaseClosedCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-flap-closed.png",
+          "phaseOpenCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-flap-open.png"
+        },
+        "cadenceSample": {
+          "frameCount": 8,
+          "scoreRange10": 0.92,
+          "averageAdjacentLitPixelDelta": 75.43,
+          "averageAdjacentFilledCellDelta": 19.43,
+          "previewFrames": [
+            {
+              "frameIndex": 0,
+              "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-00.png",
+              "score10": 6.62
+            },
+            {
+              "frameIndex": 4,
+              "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-04.png",
+              "score10": 7.54
+            },
+            {
+              "frameIndex": 7,
+              "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-07.png",
+              "score10": 6.62
+            }
+          ]
+        },
+        "phaseOrderScore10": 5.5,
+        "phaseOrder": {
+          "score10": 5.5,
+          "runtimePhaseSequence": [
+            "extended",
+            "compact",
+            "compact",
+            "compact",
+            "compact",
+            "extended",
+            "extended",
+            "extended"
+          ],
+          "targetPhaseSequence": [
+            "compact",
+            "extended",
+            "extended",
+            "compact",
+            "compact",
+            "extended",
+            "extended",
+            "compact"
+          ],
+          "bestOrientation": "direct",
+          "directMatchRatio": 0.5,
+          "invertedMatchRatio": 0.5,
+          "runtimeTransitionCount": 2,
+          "targetTransitionCount": 4,
+          "transitionFit": 0.5,
+          "read": "Runtime cadence phase order matches directly at 50% frame-label agreement with transition fit 50%."
+        },
+        "staticCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line.png"
+      },
+      "playerMeaning": "This measures whether the alien appears alive: flap/pulse phases, a readable cadence, and enough pose coverage to make movement feel authored rather than static.",
+      "designerMeaning": "This is a bridge score. It should guide sprite-motion tuning and challenge-stage scoring; segmented-reference cadence can lift pose-only caps, while exact arcade timing still needs raw target gameplay windows.",
+      "nextGap": "Confirm Butterfly / Escort Pulse Pair cadence against raw gameplay or ROM-derived timing, then tune Aurora runtime cadence toward that target."
     }
   ],
   "runtimeVsTargetCropComparisons": [
@@ -2622,14 +3295,14 @@
     {
       "id": "sprite-motion-animation-coverage",
       "surface": "Sprite motion: flapping, pulsing, dive poses, and transition animation",
-      "current": "4/4 planned motion axes covered",
-      "target": "Temporal sprite score across flap cadence, pulse/damage phases, dive rotation, and capture/rescue transitions",
-      "score10": null,
-      "confidence": "planning",
-      "status": "First temporal phase windows captured; full motion score still pending",
-      "measurement": "Static live-canvas pose score exists at 6.5/10; 4/4 planned motion axes have at least seed coverage. Covered: two-phase flap/pulse static sprite delta for bee, butterfly, and boss families; full flap-cycle cadence windows for bee, butterfly, and boss families; forced dive/rotation pose silhouettes for bee, butterfly, and boss families; capture-beam, carried-fighter, and dual-fighter transition seed poses. Full roadmap: flap-cycle cadence and alternating wing/body pixels over full temporal windows; pulse and damage-state brightness/color phases; dive/rotation pose silhouettes; capture, carried-fighter, rescue, and dual-fighter transition poses.",
-      "evidence": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json",
-      "next": "Add harness windows for flap cycle A/B frames, pulse and damage-state timing, dive-rotation silhouettes, and carried/rescue/dual-fighter transition frames before treating sprite conformance as visually complete."
+      "current": "7.8/10",
+      "target": ">=8.0/10 temporal correspondence against frame-labeled target cadence windows",
+      "score10": 7.83,
+      "confidence": "medium",
+      "status": "Measured correspondence; frame-labeled-segmented-reference-windows",
+      "measurement": "Correspondence score 7.8/10 across 3 Boss/Bee/Butterfly rows; weakest bee-zako-pulse-pair 7.4/10; frame-labeled segmented-reference rows 3; provisional target rows 2.",
+      "evidence": "reference-artifacts/analyses/aurora-sprite-motion-correspondence/latest.json; reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json",
+      "next": "Confirm segmented-reference cadence against raw gameplay or ROM-derived timing, then tune Aurora runtime cadence and challenge-stage alien motion against the accepted target rows."
     },
     {
       "id": "impact-explosion-visual-feedback",
@@ -2676,7 +3349,7 @@
       "confidence": "medium-high",
       "status": "Primary user-experience gap",
       "measurement": "21 cue/event comparisons, 31 segment-role comparisons, semantic score 9.8/10, highest risk challengePerfect 7/10.",
-      "evidence": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json; reference-artifacts/analyses/aurora-audio-event-gap/latest.json; reference-artifacts/analyses/quality-conformance/2026-05-16-08c327dd/report.json",
+      "evidence": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json; reference-artifacts/analyses/aurora-audio-event-gap/latest.json; reference-artifacts/analyses/quality-conformance/2026-05-20-23b54c7e/report.json",
       "next": "Tune the highest segment-level gap next: challengePerfect onset. Rerun audio comparison and event-gap analysis after the change."
     },
     {
@@ -2688,7 +3361,7 @@
       "confidence": "medium",
       "status": "Guardrail measured in quality conformance",
       "measurement": "Worst current delta 6.31 ms; worst drift from baseline 0 ms.",
-      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-16-08c327dd/report.json",
+      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-20-23b54c7e/report.json",
       "next": "Keep event alignment coupled to the cue-contract promotion pass so timing does not regress while changing source clips."
     },
     {
@@ -2712,7 +3385,7 @@
       "confidence": "medium",
       "status": "Split from generic UI shell before final gate",
       "measurement": "12 surface guardrails in latest quality report; visual scorer weakest shell surface Developer/settings popup surface 7.1/10.",
-      "evidence": "reference-artifacts/analyses/release-conformance-dashboard/latest.json; reference-artifacts/analyses/quality-conformance/2026-05-16-08c327dd/report.json; reference-artifacts/analyses/aurora-visual-look-conformance/latest.json",
+      "evidence": "reference-artifacts/analyses/release-conformance-dashboard/latest.json; reference-artifacts/analyses/quality-conformance/2026-05-20-23b54c7e/report.json; reference-artifacts/analyses/aurora-visual-look-conformance/latest.json",
       "next": "Split iconography, dock-button affordance, and popup typography into separate target rows once we have icon/font-specific captures."
     },
     {

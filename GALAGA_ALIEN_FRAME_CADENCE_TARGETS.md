@@ -1,6 +1,6 @@
 # Galaga Alien Frame Cadence Targets
 
-Generated: 2026-05-19T23:41:52.894Z
+Generated: 2026-05-20T01:18:19.398Z
 
 This report promotes frame-labeled cadence windows for Boss, Bee, and Butterfly from the preserved segmented Galaga alien motion reference. These are stronger than pose-only rows because every frame has a timecode and phase label, but they remain segmented-reference evidence rather than raw gameplay truth.
 
