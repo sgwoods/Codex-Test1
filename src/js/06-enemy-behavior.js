@@ -76,6 +76,24 @@ function runStage1Script(dt,p,T){
  }
 }
 
+function challengePathSpeed(pathFamily,stage,classicStage3){
+ switch(pathFamily){
+  case 'first-challenge-peel': return .56;
+  case 'classic-column-drop': return .6;
+  case 'side-hook-return': return .61;
+  case 'cross-sweep': return .64;
+  case 'hook-arc': return .65;
+  case 'boss-led-loop': return .62;
+  case 'crown-split-cascade': return .66;
+  case 'pink-serpentine': return .68;
+  case 'pink-green-cascade': return .7;
+  case 'green-ladder-split': return .72;
+  case 'yellow-diagonal-fan': return .76;
+  case 'blue-purple-finale': return .74;
+  default: return classicStage3 ? .56 : (stage >= 15 ? .68 : .62);
+ }
+}
+
 function updateChallengeEnemy(e,dt){
  if(e.spawn>0){
   e.spawn-=dt;
@@ -85,12 +103,12 @@ function updateChallengeEnemy(e,dt){
  // first challenge pattern against reference footage without disturbing the
  // normal stage attack logic.
 	 const pathFamily=e.pathFamily||'classic-lane-wave';
-	 const fm=familyMotion(e);
-	 const classicStage3=S.stage===3&&e.fam==='classic';
-	 const baseChallengeSpeed=pathFamily==='yellow-diagonal-fan'?.388:pathFamily==='green-ladder-split'?.386:pathFamily==='first-challenge-peel'?.345:(classicStage3?.345:.355);
-	 e.tm+=dt*(baseChallengeSpeed+(e.wave||0)*.007+Math.min(.012,S.stage*.0015))*(e.speedScale||1);
-	 const u=e.tm,p=e.ph,wave=e.wave||0,side=e.side||1,slot=e.slot||0,row=e.row||0,sweep=e.sweep||1;
-	 const arcAmp=e.arcAmp||1,dropAmp=e.dropAmp||1;
+		 const fm=familyMotion(e);
+		 const classicStage3=S.stage===3&&e.fam==='classic';
+		 const baseChallengeSpeed=challengePathSpeed(pathFamily,S.stage,classicStage3);
+		 e.tm+=dt*(baseChallengeSpeed+(e.wave||0)*.007+Math.min(.012,S.stage*.0015))*(e.speedScale||1);
+		 const u=e.tm,p=e.ph,wave=e.wave||0,side=e.side||1,slot=e.slot||0,row=e.row||0,sweep=e.sweep||1;
+		 const arcAmp=e.arcAmp||1,dropAmp=e.dropAmp||1;
 	 const laneX=PLAY_W/2+side*(48+slot*16);
 	 const topY=38+wave*14+row*8;
 	 if(u<3.15){

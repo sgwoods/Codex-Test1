@@ -1,0 +1,637 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "galaga-alien-cadence-validation",
+  "generatedAt": "2026-05-20T00:08:24.169Z",
+  "commit": "19b427b3",
+  "branch": "codex/macbook-challenge-sprite-motion-conformance",
+  "dirty": true,
+  "sourceArtifacts": {
+    "frameCadenceTargets": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest.json",
+    "rawGameplaySourcePolicy": "Raw videos stay local; derived crops, hashes, timing windows, and validation metrics are persisted."
+  },
+  "summary": {
+    "rowCount": 3,
+    "averageRawValidationScore10": 8.04,
+    "rawGameplayCorroboratedRows": 3,
+    "validationStatus": "segmented-cadence-corroborated-by-low-resolution-gameplay",
+    "remainingTimingConfidence": "medium: enough to keep segmented-reference cadence in scoring; not enough for final arcade-perfect timing.",
+    "promotedUse": "Continue using segmented-reference cadence for correspondence scoring, but label it as corroborated-low-resolution rather than ROM-confirmed."
+  },
+  "rows": [
+    {
+      "id": "boss-galaga-pulse-pair",
+      "sourceId": "snake-latino-stage-1-raw-gameplay",
+      "sourcePath": "/Users/sgwoods/Downloads/🎮🕹️👉Galaga (1981) - Gameplay Arcade - Snake Latino (360p, h264).mp4",
+      "startSeconds": 19.35,
+      "sampleFps": 4,
+      "sampleCount": 16,
+      "crop": {
+        "x": 140,
+        "y": 50,
+        "width": 56,
+        "height": 42
+      },
+      "read": "Low-resolution raw gameplay window around the Stage 1 upper formation boss/leader area. It can corroborate visible pulse rhythm, but not exact ROM frame timing.",
+      "exists": true,
+      "sourceSha256": "e4c256737088f27df697e2f322a52b07184b5f5a688b466809f6c88313375daf",
+      "sourceVideo": {
+        "width": 346,
+        "height": 480,
+        "frameRate": "30/1",
+        "durationSeconds": 448.8,
+        "frameCount": 0
+      },
+      "validationStatus": "raw-gameplay-corroborated-low-resolution",
+      "score10": 8.02,
+      "averageLitPixels": 247.13,
+      "averageColorPixels": 222.31,
+      "averageAdjacentDelta": 43.178,
+      "averageHalfCycleDelta": 54.869,
+      "averageFullCycleDelta": 69.437,
+      "halfVsFullCycleDeltaRatio": 0.79,
+      "previewFrames": [
+        {
+          "sampleIndex": 0,
+          "timeSeconds": 19.35,
+          "cropImage": "reference-artifacts/analyses/galaga-alien-cadence-validation/latest-raw-frames/boss-galaga-pulse-pair-00.png",
+          "metric": {
+            "litPixels": 118,
+            "colorPixels": 87
+          }
+        },
+        {
+          "sampleIndex": 8,
+          "timeSeconds": 21.35,
+          "cropImage": "reference-artifacts/analyses/galaga-alien-cadence-validation/latest-raw-frames/boss-galaga-pulse-pair-08.png",
+          "metric": {
+            "litPixels": 433,
+            "colorPixels": 355
+          }
+        },
+        {
+          "sampleIndex": 15,
+          "timeSeconds": 23.1,
+          "cropImage": "reference-artifacts/analyses/galaga-alien-cadence-validation/latest-raw-frames/boss-galaga-pulse-pair-15.png",
+          "metric": {
+            "litPixels": 353,
+            "colorPixels": 346
+          }
+        }
+      ],
+      "frames": [
+        {
+          "sampleIndex": 0,
+          "timeSeconds": 19.35,
+          "metric": {
+            "litPixels": 118,
+            "colorPixels": 87
+          }
+        },
+        {
+          "sampleIndex": 1,
+          "timeSeconds": 19.6,
+          "metric": {
+            "litPixels": 4,
+            "colorPixels": 4
+          }
+        },
+        {
+          "sampleIndex": 2,
+          "timeSeconds": 19.85,
+          "metric": {
+            "litPixels": 0,
+            "colorPixels": 0
+          }
+        },
+        {
+          "sampleIndex": 3,
+          "timeSeconds": 20.1,
+          "metric": {
+            "litPixels": 0,
+            "colorPixels": 0
+          }
+        },
+        {
+          "sampleIndex": 4,
+          "timeSeconds": 20.35,
+          "metric": {
+            "litPixels": 157,
+            "colorPixels": 153
+          }
+        },
+        {
+          "sampleIndex": 5,
+          "timeSeconds": 20.6,
+          "metric": {
+            "litPixels": 281,
+            "colorPixels": 252
+          }
+        },
+        {
+          "sampleIndex": 6,
+          "timeSeconds": 20.85,
+          "metric": {
+            "litPixels": 286,
+            "colorPixels": 263
+          }
+        },
+        {
+          "sampleIndex": 7,
+          "timeSeconds": 21.1,
+          "metric": {
+            "litPixels": 424,
+            "colorPixels": 378
+          }
+        },
+        {
+          "sampleIndex": 8,
+          "timeSeconds": 21.35,
+          "metric": {
+            "litPixels": 433,
+            "colorPixels": 355
+          }
+        },
+        {
+          "sampleIndex": 9,
+          "timeSeconds": 21.6,
+          "metric": {
+            "litPixels": 324,
+            "colorPixels": 269
+          }
+        },
+        {
+          "sampleIndex": 10,
+          "timeSeconds": 21.85,
+          "metric": {
+            "litPixels": 265,
+            "colorPixels": 260
+          }
+        },
+        {
+          "sampleIndex": 11,
+          "timeSeconds": 22.1,
+          "metric": {
+            "litPixels": 256,
+            "colorPixels": 245
+          }
+        },
+        {
+          "sampleIndex": 12,
+          "timeSeconds": 22.35,
+          "metric": {
+            "litPixels": 323,
+            "colorPixels": 265
+          }
+        },
+        {
+          "sampleIndex": 13,
+          "timeSeconds": 22.6,
+          "metric": {
+            "litPixels": 389,
+            "colorPixels": 349
+          }
+        },
+        {
+          "sampleIndex": 14,
+          "timeSeconds": 22.85,
+          "metric": {
+            "litPixels": 341,
+            "colorPixels": 331
+          }
+        },
+        {
+          "sampleIndex": 15,
+          "timeSeconds": 23.1,
+          "metric": {
+            "litPixels": 353,
+            "colorPixels": 346
+          }
+        }
+      ],
+      "segmentedReference": {
+        "status": "frame-labeled-segmented-reference-window",
+        "cadenceSecondsPerCycle": 1,
+        "phasePattern": [
+          "compact",
+          "compact",
+          "extended",
+          "extended"
+        ],
+        "averageAdjacentDelta": 126.348,
+        "acceptedForScoring": true
+      }
+    },
+    {
+      "id": "bee-zako-pulse-pair",
+      "sourceId": "snake-latino-stage-1-raw-gameplay",
+      "sourcePath": "/Users/sgwoods/Downloads/🎮🕹️👉Galaga (1981) - Gameplay Arcade - Snake Latino (360p, h264).mp4",
+      "startSeconds": 19.35,
+      "sampleFps": 4,
+      "sampleCount": 16,
+      "crop": {
+        "x": 142,
+        "y": 88,
+        "width": 58,
+        "height": 44
+      },
+      "read": "Low-resolution raw gameplay window around the Stage 1 lower formation/entry bee area. Compression and movement limit exact phase attribution.",
+      "exists": true,
+      "sourceSha256": "e4c256737088f27df697e2f322a52b07184b5f5a688b466809f6c88313375daf",
+      "sourceVideo": {
+        "width": 346,
+        "height": 480,
+        "frameRate": "30/1",
+        "durationSeconds": 448.8,
+        "frameCount": 0
+      },
+      "validationStatus": "raw-gameplay-corroborated-low-resolution",
+      "score10": 8.04,
+      "averageLitPixels": 403.25,
+      "averageColorPixels": 382.88,
+      "averageAdjacentDelta": 69.445,
+      "averageHalfCycleDelta": 88.178,
+      "averageFullCycleDelta": 106.571,
+      "halfVsFullCycleDeltaRatio": 0.827,
+      "previewFrames": [
+        {
+          "sampleIndex": 0,
+          "timeSeconds": 19.35,
+          "cropImage": "reference-artifacts/analyses/galaga-alien-cadence-validation/latest-raw-frames/bee-zako-pulse-pair-00.png",
+          "metric": {
+            "litPixels": 268,
+            "colorPixels": 252
+          }
+        },
+        {
+          "sampleIndex": 8,
+          "timeSeconds": 21.35,
+          "cropImage": "reference-artifacts/analyses/galaga-alien-cadence-validation/latest-raw-frames/bee-zako-pulse-pair-08.png",
+          "metric": {
+            "litPixels": 750,
+            "colorPixels": 719
+          }
+        },
+        {
+          "sampleIndex": 15,
+          "timeSeconds": 23.1,
+          "cropImage": "reference-artifacts/analyses/galaga-alien-cadence-validation/latest-raw-frames/bee-zako-pulse-pair-15.png",
+          "metric": {
+            "litPixels": 350,
+            "colorPixels": 331
+          }
+        }
+      ],
+      "frames": [
+        {
+          "sampleIndex": 0,
+          "timeSeconds": 19.35,
+          "metric": {
+            "litPixels": 268,
+            "colorPixels": 252
+          }
+        },
+        {
+          "sampleIndex": 1,
+          "timeSeconds": 19.6,
+          "metric": {
+            "litPixels": 59,
+            "colorPixels": 59
+          }
+        },
+        {
+          "sampleIndex": 2,
+          "timeSeconds": 19.85,
+          "metric": {
+            "litPixels": 0,
+            "colorPixels": 0
+          }
+        },
+        {
+          "sampleIndex": 3,
+          "timeSeconds": 20.1,
+          "metric": {
+            "litPixels": 238,
+            "colorPixels": 227
+          }
+        },
+        {
+          "sampleIndex": 4,
+          "timeSeconds": 20.35,
+          "metric": {
+            "litPixels": 297,
+            "colorPixels": 288
+          }
+        },
+        {
+          "sampleIndex": 5,
+          "timeSeconds": 20.6,
+          "metric": {
+            "litPixels": 598,
+            "colorPixels": 572
+          }
+        },
+        {
+          "sampleIndex": 6,
+          "timeSeconds": 20.85,
+          "metric": {
+            "litPixels": 616,
+            "colorPixels": 568
+          }
+        },
+        {
+          "sampleIndex": 7,
+          "timeSeconds": 21.1,
+          "metric": {
+            "litPixels": 599,
+            "colorPixels": 574
+          }
+        },
+        {
+          "sampleIndex": 8,
+          "timeSeconds": 21.35,
+          "metric": {
+            "litPixels": 750,
+            "colorPixels": 719
+          }
+        },
+        {
+          "sampleIndex": 9,
+          "timeSeconds": 21.6,
+          "metric": {
+            "litPixels": 485,
+            "colorPixels": 470
+          }
+        },
+        {
+          "sampleIndex": 10,
+          "timeSeconds": 21.85,
+          "metric": {
+            "litPixels": 349,
+            "colorPixels": 336
+          }
+        },
+        {
+          "sampleIndex": 11,
+          "timeSeconds": 22.1,
+          "metric": {
+            "litPixels": 372,
+            "colorPixels": 340
+          }
+        },
+        {
+          "sampleIndex": 12,
+          "timeSeconds": 22.35,
+          "metric": {
+            "litPixels": 497,
+            "colorPixels": 478
+          }
+        },
+        {
+          "sampleIndex": 13,
+          "timeSeconds": 22.6,
+          "metric": {
+            "litPixels": 562,
+            "colorPixels": 545
+          }
+        },
+        {
+          "sampleIndex": 14,
+          "timeSeconds": 22.85,
+          "metric": {
+            "litPixels": 412,
+            "colorPixels": 367
+          }
+        },
+        {
+          "sampleIndex": 15,
+          "timeSeconds": 23.1,
+          "metric": {
+            "litPixels": 350,
+            "colorPixels": 331
+          }
+        }
+      ],
+      "segmentedReference": {
+        "status": "frame-labeled-segmented-reference-window",
+        "cadenceSecondsPerCycle": 1,
+        "phasePattern": [
+          "extended",
+          "compact",
+          "compact",
+          "extended"
+        ],
+        "averageAdjacentDelta": 87.261,
+        "acceptedForScoring": true
+      }
+    },
+    {
+      "id": "butterfly-escort-pulse-pair",
+      "sourceId": "snake-latino-stage-1-raw-gameplay",
+      "sourcePath": "/Users/sgwoods/Downloads/🎮🕹️👉Galaga (1981) - Gameplay Arcade - Snake Latino (360p, h264).mp4",
+      "startSeconds": 19.35,
+      "sampleFps": 4,
+      "sampleCount": 16,
+      "crop": {
+        "x": 185,
+        "y": 55,
+        "width": 58,
+        "height": 46
+      },
+      "read": "Low-resolution raw gameplay window around the Stage 1 upper butterfly area. It is useful as a contradiction check against the segmented cadence, not as final timing truth.",
+      "exists": true,
+      "sourceSha256": "e4c256737088f27df697e2f322a52b07184b5f5a688b466809f6c88313375daf",
+      "sourceVideo": {
+        "width": 346,
+        "height": 480,
+        "frameRate": "30/1",
+        "durationSeconds": 448.8,
+        "frameCount": 0
+      },
+      "validationStatus": "raw-gameplay-corroborated-low-resolution",
+      "score10": 8.05,
+      "averageLitPixels": 469.5,
+      "averageColorPixels": 429.63,
+      "averageAdjacentDelta": 69.033,
+      "averageHalfCycleDelta": 86.759,
+      "averageFullCycleDelta": 104.488,
+      "halfVsFullCycleDeltaRatio": 0.83,
+      "previewFrames": [
+        {
+          "sampleIndex": 0,
+          "timeSeconds": 19.35,
+          "cropImage": "reference-artifacts/analyses/galaga-alien-cadence-validation/latest-raw-frames/butterfly-escort-pulse-pair-00.png",
+          "metric": {
+            "litPixels": 878,
+            "colorPixels": 737
+          }
+        },
+        {
+          "sampleIndex": 8,
+          "timeSeconds": 21.35,
+          "cropImage": "reference-artifacts/analyses/galaga-alien-cadence-validation/latest-raw-frames/butterfly-escort-pulse-pair-08.png",
+          "metric": {
+            "litPixels": 533,
+            "colorPixels": 495
+          }
+        },
+        {
+          "sampleIndex": 15,
+          "timeSeconds": 23.1,
+          "cropImage": "reference-artifacts/analyses/galaga-alien-cadence-validation/latest-raw-frames/butterfly-escort-pulse-pair-15.png",
+          "metric": {
+            "litPixels": 299,
+            "colorPixels": 286
+          }
+        }
+      ],
+      "frames": [
+        {
+          "sampleIndex": 0,
+          "timeSeconds": 19.35,
+          "metric": {
+            "litPixels": 878,
+            "colorPixels": 737
+          }
+        },
+        {
+          "sampleIndex": 1,
+          "timeSeconds": 19.6,
+          "metric": {
+            "litPixels": 605,
+            "colorPixels": 536
+          }
+        },
+        {
+          "sampleIndex": 2,
+          "timeSeconds": 19.85,
+          "metric": {
+            "litPixels": 577,
+            "colorPixels": 551
+          }
+        },
+        {
+          "sampleIndex": 3,
+          "timeSeconds": 20.1,
+          "metric": {
+            "litPixels": 591,
+            "colorPixels": 481
+          }
+        },
+        {
+          "sampleIndex": 4,
+          "timeSeconds": 20.35,
+          "metric": {
+            "litPixels": 559,
+            "colorPixels": 487
+          }
+        },
+        {
+          "sampleIndex": 5,
+          "timeSeconds": 20.6,
+          "metric": {
+            "litPixels": 569,
+            "colorPixels": 507
+          }
+        },
+        {
+          "sampleIndex": 6,
+          "timeSeconds": 20.85,
+          "metric": {
+            "litPixels": 508,
+            "colorPixels": 467
+          }
+        },
+        {
+          "sampleIndex": 7,
+          "timeSeconds": 21.1,
+          "metric": {
+            "litPixels": 457,
+            "colorPixels": 415
+          }
+        },
+        {
+          "sampleIndex": 8,
+          "timeSeconds": 21.35,
+          "metric": {
+            "litPixels": 533,
+            "colorPixels": 495
+          }
+        },
+        {
+          "sampleIndex": 9,
+          "timeSeconds": 21.6,
+          "metric": {
+            "litPixels": 421,
+            "colorPixels": 404
+          }
+        },
+        {
+          "sampleIndex": 10,
+          "timeSeconds": 21.85,
+          "metric": {
+            "litPixels": 270,
+            "colorPixels": 268
+          }
+        },
+        {
+          "sampleIndex": 11,
+          "timeSeconds": 22.1,
+          "metric": {
+            "litPixels": 280,
+            "colorPixels": 279
+          }
+        },
+        {
+          "sampleIndex": 12,
+          "timeSeconds": 22.35,
+          "metric": {
+            "litPixels": 338,
+            "colorPixels": 338
+          }
+        },
+        {
+          "sampleIndex": 13,
+          "timeSeconds": 22.6,
+          "metric": {
+            "litPixels": 343,
+            "colorPixels": 343
+          }
+        },
+        {
+          "sampleIndex": 14,
+          "timeSeconds": 22.85,
+          "metric": {
+            "litPixels": 284,
+            "colorPixels": 280
+          }
+        },
+        {
+          "sampleIndex": 15,
+          "timeSeconds": 23.1,
+          "metric": {
+            "litPixels": 299,
+            "colorPixels": 286
+          }
+        }
+      ],
+      "segmentedReference": {
+        "status": "frame-labeled-segmented-reference-window",
+        "cadenceSecondsPerCycle": 1,
+        "phasePattern": [
+          "compact",
+          "extended",
+          "extended",
+          "compact"
+        ],
+        "averageAdjacentDelta": 151,
+        "acceptedForScoring": true
+      }
+    }
+  ],
+  "measurementLimits": [
+    "The raw gameplay source is low-resolution 346x480, compressed, and shows moving aliens, so exact per-sprite phase labels are not reliable.",
+    "The validation looks for visible rhythmic sprite changes and no contradiction of the 1s segmented-reference cadence; it does not prove ROM frame timing.",
+    "A final confirmation still needs a higher-resolution direct gameplay capture, emulator frame stepping, or ROM-derived sprite animation timing."
+  ],
+  "nextBestStep": "Acquire or produce a higher-resolution frame-stepped Galaga gameplay/ROM capture, then replace this low-resolution corroboration with direct per-sprite phase labels."
+}

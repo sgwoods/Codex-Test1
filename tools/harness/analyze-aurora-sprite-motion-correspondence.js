@@ -96,6 +96,83 @@ function cadenceVisibilityScore(cadence){
   return round(1 + 9 * ((0.25 * frameCoverage) + (0.34 * litChange) + (0.26 * filledChange) + (0.15 * scoreRange)), 2);
 }
 
+function transitionCount(sequence){
+  if(!Array.isArray(sequence) || sequence.length < 2) return 0;
+  let count = 0;
+  for(let index = 1; index < sequence.length; index += 1){
+    if(sequence[index] !== sequence[index - 1]) count += 1;
+  }
+  return count;
+}
+
+function deriveRuntimePhaseSequence(cadence, targetLabels){
+  const frames = Array.isArray(cadence?.frames) ? cadence.frames : [];
+  if(!frames.length) return [];
+  const labels = Array.isArray(targetLabels) && targetLabels.length >= 2 ? targetLabels : ['compact', 'extended'];
+  const lowLabel = labels.includes('compact') ? 'compact' : labels[0];
+  const highLabel = labels.includes('extended') ? 'extended' : labels[labels.length - 1];
+  const values = frames.map(frame => Number.isFinite(+frame.filledCells) ? +frame.filledCells : +frame.litPixels || 0);
+  const sorted = values.slice().sort((a, b) => a - b);
+  const median = sorted[Math.floor(sorted.length / 2)] || 0;
+  return values.map(value => value >= median ? highLabel : lowLabel);
+}
+
+function targetPhaseSequence(frameCadenceTarget, frameCount){
+  const pattern = Array.isArray(frameCadenceTarget?.phasePattern) && frameCadenceTarget.phasePattern.length
+    ? frameCadenceTarget.phasePattern
+    : Array.isArray(frameCadenceTarget?.phaseLabels) && frameCadenceTarget.phaseLabels.length
+    ? frameCadenceTarget.phaseLabels
+    : [];
+  if(!pattern.length || frameCount <= 0) return [];
+  return Array.from({ length: frameCount }, (_, index) => pattern[index % pattern.length]);
+}
+
+function invertedPhaseSequence(sequence){
+  if(!Array.isArray(sequence)) return [];
+  return sequence.map(label => label === 'compact' ? 'extended' : label === 'extended' ? 'compact' : label);
+}
+
+function phaseOrderScore(cadence, frameCadenceTarget){
+  const frames = Array.isArray(cadence?.frames) ? cadence.frames : [];
+  if(!frames.length || !frameCadenceTarget?.acceptedForScoring){
+    return {
+      score10: 1,
+      runtimePhaseSequence: [],
+      targetPhaseSequence: [],
+      bestOrientation: 'unavailable',
+      directMatchRatio: 0,
+      invertedMatchRatio: 0,
+      transitionFit: 0,
+      read: 'Phase-order scoring is unavailable because runtime cadence or target frame cadence is missing.'
+    };
+  }
+  const runtimeSequence = deriveRuntimePhaseSequence(cadence, frameCadenceTarget.phaseLabels);
+  const expectedSequence = targetPhaseSequence(frameCadenceTarget, runtimeSequence.length);
+  const inverted = invertedPhaseSequence(runtimeSequence);
+  const directMatches = runtimeSequence.filter((label, index) => label === expectedSequence[index]).length;
+  const invertedMatches = inverted.filter((label, index) => label === expectedSequence[index]).length;
+  const directMatchRatio = directMatches / Math.max(1, expectedSequence.length);
+  const invertedMatchRatio = invertedMatches / Math.max(1, expectedSequence.length);
+  const bestMatchRatio = Math.max(directMatchRatio, invertedMatchRatio);
+  const bestOrientation = invertedMatchRatio > directMatchRatio ? 'phase-inverted' : 'direct';
+  const runtimeTransitions = transitionCount(bestOrientation === 'phase-inverted' ? inverted : runtimeSequence);
+  const expectedTransitions = transitionCount(expectedSequence);
+  const transitionFit = 1 - Math.min(1, Math.abs(runtimeTransitions - expectedTransitions) / Math.max(1, expectedTransitions));
+  const score10 = round(1 + 9 * ((0.72 * bestMatchRatio) + (0.28 * transitionFit)), 2);
+  return {
+    score10,
+    runtimePhaseSequence: runtimeSequence,
+    targetPhaseSequence: expectedSequence,
+    bestOrientation,
+    directMatchRatio: round(directMatchRatio, 3),
+    invertedMatchRatio: round(invertedMatchRatio, 3),
+    runtimeTransitionCount: runtimeTransitions,
+    targetTransitionCount: expectedTransitions,
+    transitionFit: round(transitionFit, 3),
+    read: `Runtime cadence phase order ${bestOrientation === 'phase-inverted' ? 'matches after compact/extended inversion' : 'matches directly'} at ${round(bestMatchRatio * 100, 1)}% frame-label agreement with transition fit ${round(transitionFit * 100, 1)}%.`
+  };
+}
+
 function seedCoverageScore(spriteKey, runtime){
   const hasTemporal = (runtime.temporalSamples || []).some(item => item.spriteKey === spriteKey);
   const hasCadence = (runtime.cadenceSamples || []).some(item => item.spriteKey === spriteKey);
@@ -146,13 +223,15 @@ function buildRows(temporalTargets, runtime){
     const targetReadinessScore10 = targetReadinessScore(target, finalFrameTimedRows);
     const twoPhaseVisibilityScore10 = twoPhaseVisibilityScore(temporalSample);
     const cadenceVisibilityScore10 = cadenceVisibilityScore(cadenceSample);
+    const phaseOrder = phaseOrderScore(cadenceSample, target.frameCadenceTarget);
     const staticLikenessScore10 = Number.isFinite(+staticSample?.score10) ? round(staticSample.score10, 2) : 1;
     const seedCoverage = seedCoverageScore(spriteKey, runtime);
     const rawScore10 = round(
-      (0.25 * targetReadinessScore10)
-      + (0.25 * twoPhaseVisibilityScore10)
-      + (0.2 * cadenceVisibilityScore10)
-      + (0.15 * staticLikenessScore10)
+      (0.22 * targetReadinessScore10)
+      + (0.2 * twoPhaseVisibilityScore10)
+      + (0.17 * cadenceVisibilityScore10)
+      + (0.16 * phaseOrder.score10)
+      + (0.1 * staticLikenessScore10)
       + (0.15 * seedCoverage.score10),
       2
     );
@@ -207,6 +286,8 @@ function buildRows(temporalTargets, runtime){
             score10: frame.score10
           }))
         } : null,
+        phaseOrderScore10: phaseOrder.score10,
+        phaseOrder,
         staticCrop: staticSample?.cropImage || null
       },
       playerMeaning: 'This measures whether the alien appears alive: flap/pulse phases, a readable cadence, and enough pose coverage to make movement feel authored rather than static.',
@@ -227,6 +308,7 @@ function markdownReport(artifact){
     '## Summary',
     '',
     `- Score: ${scoreText(artifact.summary.averageScore10)}`,
+    `- Phase-order score: ${scoreText(artifact.summary.averagePhaseOrderScore10)}`,
     `- Rows: ${artifact.summary.rowCount}`,
     `- Frame-timed target rows: ${artifact.summary.finalFrameTimedRows}`,
     `- Weakest row: ${artifact.summary.weakestRowId || 'n/a'} (${scoreText(artifact.summary.weakestScore10)})`,
@@ -238,7 +320,7 @@ function markdownReport(artifact){
     '| --- | ---: | --- | --- | --- | --- |'
   ];
   for(const row of artifact.rows){
-    lines.push(`| ${row.label}<br><code>${row.runtimeSpriteKey}</code> | ${scoreText(row.score10)} | ${scoreText(row.target.targetReadinessScore10)}; trusted ${row.target.trustedCropCount}, provisional ${row.target.provisionalCropCount} | phase ${scoreText(row.runtime.twoPhaseVisibilityScore10)}; cadence ${scoreText(row.runtime.cadenceVisibilityScore10)}; static ${scoreText(row.runtime.staticLikenessScore10)}; seeds ${row.runtime.seedCoverageAxes.filter(axis => axis.covered).length}/${row.runtime.seedCoverageAxes.length} | ${scoreText(row.capScore10)}<br>${row.capReason} | ${row.nextGap} |`);
+    lines.push(`| ${row.label}<br><code>${row.runtimeSpriteKey}</code> | ${scoreText(row.score10)} | ${scoreText(row.target.targetReadinessScore10)}; trusted ${row.target.trustedCropCount}, provisional ${row.target.provisionalCropCount} | phase ${scoreText(row.runtime.twoPhaseVisibilityScore10)}; cadence ${scoreText(row.runtime.cadenceVisibilityScore10)}; phase-order ${scoreText(row.runtime.phaseOrderScore10)}; static ${scoreText(row.runtime.staticLikenessScore10)}; seeds ${row.runtime.seedCoverageAxes.filter(axis => axis.covered).length}/${row.runtime.seedCoverageAxes.length} | ${scoreText(row.capScore10)}<br>${row.capReason} | ${row.nextGap} |`);
   }
   lines.push('', '## Measurement Limits', '');
   for(const item of artifact.measurementLimits) lines.push(`- ${item}`);
@@ -270,6 +352,7 @@ function main(){
       rowCount: rows.length,
       averageScore10: round(average(scored.map(row => row.score10)), 2),
       rawAverageScore10: round(average(scored.map(row => row.rawScore10)), 2),
+      averagePhaseOrderScore10: round(average(scored.map(row => row.runtime?.phaseOrderScore10)), 2),
       weakestRowId: weakest?.id || null,
       weakestRuntimeSpriteKey: weakest?.runtimeSpriteKey || null,
       weakestScore10: weakest?.score10 || null,
@@ -280,7 +363,7 @@ function main(){
       runtimeMotionAxesPlanned: runtime.summary?.motionCoverageAxesPlanned ?? null,
       targetTimingStatus: finalFrameTimedRows > 0 ? 'frame-labeled-segmented-reference-windows' : 'pose-sequence-targets-only',
       read: finalFrameTimedRows > 0
-        ? `Aurora runtime motion corresponds to ${rows.length} frame-labeled segmented-reference target row(s), average ${scoreText(average(scored.map(row => row.score10)))}.`
+        ? `Aurora runtime motion corresponds to ${rows.length} frame-labeled segmented-reference target row(s), average ${scoreText(average(scored.map(row => row.score10)))}; phase-order average is ${scoreText(average(scored.map(row => row.runtime?.phaseOrderScore10)))}.`
         : `Aurora runtime motion is visible but still target-capped: ${rows.length} sprite families score ${scoreText(average(scored.map(row => row.score10)))}, with ${rows.filter(row => (+row.target.provisionalCropCount || 0) > 0).length} provisional target row(s) and no final frame-timed target cadence rows.`
     },
     rows,
@@ -288,6 +371,7 @@ function main(){
       'This score joins target pose rows to runtime motion samples; it is not a final arcade-perfect animation score.',
       'Rows remain capped when Galaga target evidence is pose-sequence only and lacks frame timing with frame-labeled windows.',
       'Frame-labeled segmented-reference rows are stronger than provisional source-sheet cells, but still lower-confidence than raw gameplay or ROM-derived frame windows.',
+      'Phase-order scoring compares compact/extended runtime cadence labels against target phase labels, allowing inversion when the runtime metric polarity is reversed.',
       'Bee and Butterfly rows should no longer be capped solely by provisional flap cells once segmented-reference cadence is present.',
       'This artifact should influence challenge-stage graphical scoring as a measured signal, but gameplay challenge conformance still depends on path choreography, group timing, alien novelty, and shot opportunity.'
     ],

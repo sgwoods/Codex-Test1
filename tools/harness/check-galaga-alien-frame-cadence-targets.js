@@ -73,8 +73,11 @@ for(const id of REQUIRED_ROWS){
   }
 }
 
-if((+artifact.summary?.acceptedForScoringRows || 0) !== REQUIRED_ROWS.length){
-  fail('Frame cadence artifact should accept all required rows for scoring.', artifact.summary);
+if((+artifact.summary?.acceptedForScoringRows || 0) < REQUIRED_ROWS.length){
+  fail('Frame cadence artifact should accept at least the core required rows for scoring.', artifact.summary);
+}
+if(rows.filter(row => row.challengeOnly).length < 1){
+  fail('Frame cadence artifact should include at least one challenge-only alien cadence target.', { rows: rows.map(item => item.id) });
 }
 if(!Array.isArray(artifact.measurementLimits) || !artifact.measurementLimits.some(item => String(item).includes('segmented'))){
   fail('Frame cadence artifact must document segmented-reference limits.', artifact.measurementLimits);

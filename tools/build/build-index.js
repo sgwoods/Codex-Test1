@@ -76,6 +76,7 @@ const GALAGA_ALIEN_CROP_PREVIEWS = path.join(ROOT, 'reference-artifacts', 'analy
 const GALAGA_ALIEN_TARGET_CROPS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-target-crops', 'latest.json');
 const GALAGA_TARGET_EVIDENCE_AUDIT = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-evidence-audit', 'latest.json');
 const GALAGA_ALIEN_TEMPORAL_TARGETS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-temporal-targets', 'latest.json');
+const GALAGA_ALIEN_CADENCE_VALIDATION = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-cadence-validation', 'latest.json');
 const AURORA_RUNTIME_SPRITE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-runtime-sprite-conformance', 'latest.json');
 const AURORA_SPRITE_MOTION_CORRESPONDENCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-sprite-motion-correspondence', 'latest.json');
 const AURORA_RUNTIME_VS_GALAGA_TARGET_CROPS = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-runtime-vs-galaga-target-crops', 'latest.json');
@@ -3121,6 +3122,7 @@ let galagaAlienCropPreviewsCache = null;
 let galagaAlienTargetCropsCache = null;
 let galagaTargetEvidenceAuditCache = null;
 let galagaAlienTemporalTargetsCache = null;
+let galagaAlienCadenceValidationCache = null;
 let auroraRuntimeSpriteConformanceCache = null;
 let auroraSpriteMotionCorrespondenceCache = null;
 let auroraRuntimeVsGalagaTargetCropsCache = null;
@@ -3266,6 +3268,24 @@ function loadGalagaAlienTemporalTargets(){
     galagaAlienTemporalTargetsCache = { rows: [], summary: {} };
   }
   return galagaAlienTemporalTargetsCache;
+}
+
+function loadGalagaAlienCadenceValidation(){
+  if(galagaAlienCadenceValidationCache) return galagaAlienCadenceValidationCache;
+  if(!fs.existsSync(GALAGA_ALIEN_CADENCE_VALIDATION)){
+    galagaAlienCadenceValidationCache = { rows: [], summary: {} };
+    return galagaAlienCadenceValidationCache;
+  }
+  try {
+    const artifact = readJson(GALAGA_ALIEN_CADENCE_VALIDATION);
+    galagaAlienCadenceValidationCache = Object.assign({}, artifact, {
+      rows: Array.isArray(artifact.rows) ? artifact.rows : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    galagaAlienCadenceValidationCache = { rows: [], summary: {} };
+  }
+  return galagaAlienCadenceValidationCache;
 }
 
 function loadAuroraRuntimeSpriteConformance(){
@@ -4558,7 +4578,7 @@ function renderAuroraSpriteMotionCorrespondenceRows(report){
       <td><strong>${esc(row.label || row.id || '')}</strong><br><span class="docMeta"><code>${esc(row.runtimeSpriteKey || '')}</code><br>${esc(row.status || '')}</span></td>
       <td><strong>${Number.isFinite(+row.score10) ? `${Number(row.score10).toFixed(1)}/10` : 'pending'}</strong><br><span class="docMeta">raw ${Number.isFinite(+row.rawScore10) ? `${Number(row.rawScore10).toFixed(1)}/10` : 'n/a'}; cap ${Number.isFinite(+row.capScore10) ? `${Number(row.capScore10).toFixed(1)}/10` : 'n/a'}</span></td>
       <td>target ${Number.isFinite(+row.target?.targetReadinessScore10) ? `${Number(row.target.targetReadinessScore10).toFixed(1)}/10` : 'n/a'}<br><span class="docMeta">trusted ${esc(row.target?.trustedCropCount ?? 0)}; provisional ${esc(row.target?.provisionalCropCount ?? 0)}</span></td>
-      <td>phase ${Number.isFinite(+row.runtime?.twoPhaseVisibilityScore10) ? `${Number(row.runtime.twoPhaseVisibilityScore10).toFixed(1)}/10` : 'n/a'}<br>cadence ${Number.isFinite(+row.runtime?.cadenceVisibilityScore10) ? `${Number(row.runtime.cadenceVisibilityScore10).toFixed(1)}/10` : 'n/a'}<br><span class="docMeta">static ${Number.isFinite(+row.runtime?.staticLikenessScore10) ? `${Number(row.runtime.staticLikenessScore10).toFixed(1)}/10` : 'n/a'}</span></td>
+      <td>phase ${Number.isFinite(+row.runtime?.twoPhaseVisibilityScore10) ? `${Number(row.runtime.twoPhaseVisibilityScore10).toFixed(1)}/10` : 'n/a'}<br>cadence ${Number.isFinite(+row.runtime?.cadenceVisibilityScore10) ? `${Number(row.runtime.cadenceVisibilityScore10).toFixed(1)}/10` : 'n/a'}<br>phase order ${Number.isFinite(+row.runtime?.phaseOrderScore10) ? `${Number(row.runtime.phaseOrderScore10).toFixed(1)}/10` : 'n/a'}<br><span class="docMeta">static ${Number.isFinite(+row.runtime?.staticLikenessScore10) ? `${Number(row.runtime.staticLikenessScore10).toFixed(1)}/10` : 'n/a'}</span></td>
       <td><div class="catalogMedia"><div class="catalogMediaGrid">${[
         row.runtime?.temporalSample?.phaseClosedCrop ? renderMediaImage({ label: 'Closed phase', src: row.runtime.temporalSample.phaseClosedCrop, pixelated: true, note: 'Runtime closed/pulse phase.' }) : '',
         row.runtime?.temporalSample?.phaseOpenCrop ? renderMediaImage({ label: 'Open phase', src: row.runtime.temporalSample.phaseOpenCrop, pixelated: true, note: 'Runtime open/pulse phase.' }) : '',
@@ -4849,6 +4869,8 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const galagaAlienTemporalTargets = loadGalagaAlienTemporalTargets();
   const galagaAlienTemporalTargetSummary = galagaAlienTemporalTargets.summary || {};
   const galagaAlienTemporalTargetRows = renderGalagaAlienTemporalTargetRows(galagaAlienTemporalTargets);
+  const galagaAlienCadenceValidation = loadGalagaAlienCadenceValidation();
+  const galagaAlienCadenceValidationSummary = galagaAlienCadenceValidation.summary || {};
   const auroraRuntimeSpriteConformance = loadAuroraRuntimeSpriteConformance();
   const auroraRuntimeSpriteSummary = auroraRuntimeSpriteConformance.summary || {};
   const auroraSpriteMotionCorrespondence = loadAuroraSpriteMotionCorrespondence();
@@ -5326,11 +5348,11 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           </div>
           <div class="docWrap">
             <p><strong>Current read:</strong> ${esc(galagaAlienTemporalTargets.status || 'pending')}. <strong>Next best step:</strong> ${esc(galagaAlienTemporalTargets.nextBestStep || 'Generate temporal target rows before claiming animation conformance.')}</p>
-            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-temporal-targets/latest.json</code>. <strong>Cadence artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest.json</code>. <strong>Readable reports:</strong> <code>GALAGA_ALIEN_TEMPORAL_TARGETS.md</code>, <code>GALAGA_ALIEN_FRAME_CADENCE_TARGETS.md</code>. <strong>Generated:</strong> ${esc(galagaAlienTemporalTargets.generatedAt || 'pending')}.</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-temporal-targets/latest.json</code>. <strong>Cadence artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest.json</code>. <strong>Validation artifact:</strong> <code>reference-artifacts/analyses/galaga-alien-cadence-validation/latest.json</code>. <strong>Readable reports:</strong> <code>GALAGA_ALIEN_TEMPORAL_TARGETS.md</code>, <code>GALAGA_ALIEN_FRAME_CADENCE_TARGETS.md</code>, <code>GALAGA_ALIEN_CADENCE_VALIDATION.md</code>. <strong>Generated:</strong> ${esc(galagaAlienTemporalTargets.generatedAt || 'pending')}.</p>
             <div class="metricGrid">
               <div class="metricCard"><span class="metricLabel">Temporal Rows</span><strong>${esc(galagaAlienTemporalTargetSummary.temporalRowCount ?? 0)}</strong><span>Boss, Bee, Butterfly</span></div>
               <div class="metricCard"><span class="metricLabel">Trusted Links</span><strong>${esc(galagaAlienTemporalTargetSummary.trustedCropLinks ?? 0)}</strong><span>motion-reference crops</span></div>
-              <div class="metricCard"><span class="metricLabel">Provisional Links</span><strong>${esc(galagaAlienTemporalTargetSummary.provisionalCropLinks ?? 0)}</strong><span>need better windows</span></div>
+              <div class="metricCard"><span class="metricLabel">Raw Validation</span><strong>${Number.isFinite(+galagaAlienCadenceValidationSummary.averageRawValidationScore10) ? `${Number(galagaAlienCadenceValidationSummary.averageRawValidationScore10).toFixed(1)}/10` : 'pending'}</strong><span>${esc(galagaAlienCadenceValidationSummary.validationStatus || 'not run')}</span></div>
               <div class="metricCard"><span class="metricLabel">Frame-Labeled Rows</span><strong>${esc(galagaAlienTemporalTargetSummary.finalFrameTimedRows ?? 0)}</strong><span>${esc(galagaAlienTemporalTargetSummary.frameLabeledSegmentedReferenceRows ?? 0)} segmented reference</span></div>
             </div>
           </div>
@@ -5365,7 +5387,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               <div class="metricCard"><span class="metricLabel">Rows</span><strong>${esc(auroraSpriteMotionCorrespondenceSummary.rowCount ?? 0)}</strong><span>Boss, Bee, Butterfly</span></div>
               <div class="metricCard"><span class="metricLabel">Weakest</span><strong>${esc(auroraSpriteMotionCorrespondenceSummary.weakestRuntimeSpriteKey || 'n/a')}</strong><span>${Number.isFinite(+auroraSpriteMotionCorrespondenceSummary.weakestScore10) ? `${Number(auroraSpriteMotionCorrespondenceSummary.weakestScore10).toFixed(1)}/10` : 'pending'}</span></div>
               <div class="metricCard"><span class="metricLabel">Frame Timed</span><strong>${esc(auroraSpriteMotionCorrespondenceSummary.finalFrameTimedRows ?? 0)}</strong><span>target cadence rows</span></div>
-              <div class="metricCard"><span class="metricLabel">Provisional</span><strong>${esc(auroraSpriteMotionCorrespondenceSummary.provisionalTargetRows ?? 0)}</strong><span>target rows capped</span></div>
+              <div class="metricCard"><span class="metricLabel">Phase Order</span><strong>${Number.isFinite(+auroraSpriteMotionCorrespondenceSummary.averagePhaseOrderScore10) ? `${Number(auroraSpriteMotionCorrespondenceSummary.averagePhaseOrderScore10).toFixed(1)}/10` : 'pending'}</strong><span>runtime vs target labels</span></div>
             </div>
           </div>
           <div class="tableWrap" style="margin-top:16px;">

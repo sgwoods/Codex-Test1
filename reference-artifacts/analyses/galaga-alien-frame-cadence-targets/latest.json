@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "galaga-alien-frame-cadence-targets",
-  "generatedAt": "2026-05-19T22:27:40.099Z",
-  "commit": "a2cfb8b5",
+  "generatedAt": "2026-05-19T23:41:52.894Z",
+  "commit": "19b427b3",
   "branch": "codex/macbook-challenge-sprite-motion-conformance",
   "dirty": true,
   "status": "frame-labeled-segmented-reference-cadence",
@@ -15,9 +15,9 @@
     "durationSeconds": 20.533
   },
   "summary": {
-    "rowCount": 3,
-    "acceptedForScoringRows": 3,
-    "totalFrameCount": 72,
+    "rowCount": 6,
+    "acceptedForScoringRows": 6,
+    "totalFrameCount": 144,
     "sampleFps": 4,
     "cadenceSecondsPerCycle": 1,
     "targetTimingStatus": "frame-labeled-segmented-reference-windows",
@@ -25,6 +25,7 @@
       {
         "id": "boss-galaga-pulse-pair",
         "runtimeSpriteKey": "boss-line",
+        "challengeOnly": false,
         "sampleCount": 24,
         "phaseLabels": [
           "compact",
@@ -35,6 +36,7 @@
       {
         "id": "bee-zako-pulse-pair",
         "runtimeSpriteKey": "bee-line",
+        "challengeOnly": false,
         "sampleCount": 24,
         "phaseLabels": [
           "extended",
@@ -45,12 +47,46 @@
       {
         "id": "butterfly-escort-pulse-pair",
         "runtimeSpriteKey": "but-line",
+        "challengeOnly": false,
         "sampleCount": 24,
         "phaseLabels": [
           "compact",
           "extended"
         ],
         "averageAdjacentDelta": 151
+      },
+      {
+        "id": "challenge-dragonfly-pulse-pair",
+        "runtimeSpriteKey": "challenge-dragonfly",
+        "challengeOnly": true,
+        "sampleCount": 24,
+        "phaseLabels": [
+          "extended",
+          "compact"
+        ],
+        "averageAdjacentDelta": 8.174
+      },
+      {
+        "id": "challenge-satellite-pulse-pair",
+        "runtimeSpriteKey": "challenge-satellite",
+        "challengeOnly": true,
+        "sampleCount": 24,
+        "phaseLabels": [
+          "compact",
+          "extended"
+        ],
+        "averageAdjacentDelta": 11.783
+      },
+      {
+        "id": "challenge-starship-pulse-pair",
+        "runtimeSpriteKey": "challenge-starship",
+        "challengeOnly": true,
+        "sampleCount": 24,
+        "phaseLabels": [
+          "compact",
+          "extended"
+        ],
+        "averageAdjacentDelta": 9.304
       }
     ]
   },
@@ -62,6 +98,7 @@
       "label": "Boss Galaga Pulse Cadence",
       "status": "frame-labeled-segmented-reference-window",
       "acceptedForScoring": true,
+      "challengeOnly": false,
       "sourceKind": "segmented-motion-reference-video",
       "sourceVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
       "sourceUse": "Frame-labeled window from the preserved segmented Galaga alien motion reference. It shows a repeated compact/extended Boss pulse at readable cadence, but it is not raw gameplay footage.",
@@ -1244,6 +1281,7 @@
       "label": "Bee / Zako Pulse Cadence",
       "status": "frame-labeled-segmented-reference-window",
       "acceptedForScoring": true,
+      "challengeOnly": false,
       "sourceKind": "segmented-motion-reference-video",
       "sourceVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
       "sourceUse": "Frame-labeled window from the preserved segmented Galaga alien motion reference. It cleanly separates Bee wing-open and wing-compact phases for runtime cadence scoring.",
@@ -2473,6 +2511,7 @@
       "label": "Butterfly / Escort Pulse Cadence",
       "status": "frame-labeled-segmented-reference-window",
       "acceptedForScoring": true,
+      "challengeOnly": false,
       "sourceKind": "segmented-motion-reference-video",
       "sourceVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
       "sourceUse": "Frame-labeled window from the preserved segmented Galaga alien motion reference. It cleanly separates Butterfly wing-compact and wing-open phases for runtime cadence scoring.",
@@ -3614,6 +3653,3546 @@
               "y": 2,
               "width": 30,
               "height": 32
+            }
+          }
+        }
+      ],
+      "measurementLimits": [
+        "This row is frame-labeled from a preserved segmented reference clip, not yet from raw arcade gameplay or ROM-derived frame timing.",
+        "The cadence should be used to compare visible runtime pulse/cadence behavior and to prevent provisional sheet cells from over-driving sprite-motion scoring.",
+        "Exact gameplay-time animation cadence still needs raw target gameplay windows."
+      ],
+      "nextGap": "Replace or confirm this segmented-reference cadence with raw gameplay or ROM-derived timing evidence before claiming final animation conformance."
+    },
+    {
+      "id": "challenge-dragonfly-pulse-pair",
+      "roleKey": "challenge-dragonfly",
+      "runtimeSpriteKey": "challenge-dragonfly",
+      "label": "Challenge Dragonfly Pulse Cadence",
+      "status": "frame-labeled-segmented-reference-window",
+      "acceptedForScoring": true,
+      "challengeOnly": true,
+      "sourceKind": "segmented-motion-reference-video",
+      "sourceVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "sourceUse": "Frame-labeled window from the preserved segmented Galaga alien motion reference. It seeds challenge-only alien cadence evidence so bonus-stage graphics can move beyond static-pose review.",
+      "confidence": "medium",
+      "sampleFps": 4,
+      "sampleCount": 24,
+      "startSeconds": 2,
+      "endSeconds": 7.75,
+      "cadenceSecondsPerCycle": 1,
+      "phasePattern": [
+        "extended",
+        "compact",
+        "compact",
+        "extended"
+      ],
+      "phaseLabels": [
+        "extended",
+        "compact"
+      ],
+      "phaseRuns": [
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 60,
+          "endFrameIndex": 60,
+          "startTimeSeconds": 2,
+          "endTimeSeconds": 2,
+          "frameCount": 1
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 68,
+          "endFrameIndex": 75,
+          "startTimeSeconds": 2.25,
+          "endTimeSeconds": 2.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 83,
+          "endFrameIndex": 90,
+          "startTimeSeconds": 2.75,
+          "endTimeSeconds": 3,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 98,
+          "endFrameIndex": 105,
+          "startTimeSeconds": 3.25,
+          "endTimeSeconds": 3.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 113,
+          "endFrameIndex": 120,
+          "startTimeSeconds": 3.75,
+          "endTimeSeconds": 4,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 128,
+          "endFrameIndex": 135,
+          "startTimeSeconds": 4.25,
+          "endTimeSeconds": 4.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 143,
+          "endFrameIndex": 150,
+          "startTimeSeconds": 4.75,
+          "endTimeSeconds": 5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 158,
+          "endFrameIndex": 165,
+          "startTimeSeconds": 5.25,
+          "endTimeSeconds": 5.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 173,
+          "endFrameIndex": 180,
+          "startTimeSeconds": 5.75,
+          "endTimeSeconds": 6,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 188,
+          "endFrameIndex": 195,
+          "startTimeSeconds": 6.25,
+          "endTimeSeconds": 6.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 203,
+          "endFrameIndex": 210,
+          "startTimeSeconds": 6.75,
+          "endTimeSeconds": 7,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 218,
+          "endFrameIndex": 225,
+          "startTimeSeconds": 7.25,
+          "endTimeSeconds": 7.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 233,
+          "endFrameIndex": 233,
+          "startTimeSeconds": 7.75,
+          "endTimeSeconds": 7.75,
+          "frameCount": 1
+        }
+      ],
+      "averageAdjacentDelta": 8.174,
+      "maxAdjacentDelta": 22,
+      "previewFrames": [
+        {
+          "sampleIndex": 0,
+          "timeSeconds": 2,
+          "phaseLabel": "extended",
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-00-extended.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1147,
+            "litRatio": 0.21973,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 87,
+              "height": 56
+            }
+          }
+        },
+        {
+          "sampleIndex": 12,
+          "timeSeconds": 5,
+          "phaseLabel": "extended",
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-12-extended.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1152,
+            "litRatio": 0.22069,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 1,
+              "width": 87,
+              "height": 57
+            }
+          }
+        },
+        {
+          "sampleIndex": 23,
+          "timeSeconds": 7.75,
+          "phaseLabel": "extended",
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-23-extended.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1141,
+            "litRatio": 0.21858,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 1,
+              "width": 87,
+              "height": 57
+            }
+          }
+        }
+      ],
+      "frames": [
+        {
+          "sampleIndex": 0,
+          "frameIndex": 60,
+          "timeSeconds": 2,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-00-extended.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1147,
+            "litRatio": 0.21973,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 87,
+              "height": 56
+            }
+          }
+        },
+        {
+          "sampleIndex": 1,
+          "frameIndex": 68,
+          "timeSeconds": 2.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-01-compact.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1132,
+            "litRatio": 0.21686,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 87,
+              "height": 56
+            }
+          }
+        },
+        {
+          "sampleIndex": 2,
+          "frameIndex": 75,
+          "timeSeconds": 2.5,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-02-compact.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1117,
+            "litRatio": 0.21398,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 87,
+              "height": 56
+            }
+          }
+        },
+        {
+          "sampleIndex": 3,
+          "frameIndex": 83,
+          "timeSeconds": 2.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-03-extended.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1136,
+            "litRatio": 0.21762,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 87,
+              "height": 56
+            }
+          }
+        },
+        {
+          "sampleIndex": 4,
+          "frameIndex": 90,
+          "timeSeconds": 3,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-04-extended.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1145,
+            "litRatio": 0.21935,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 87,
+              "height": 56
+            }
+          }
+        },
+        {
+          "sampleIndex": 5,
+          "frameIndex": 98,
+          "timeSeconds": 3.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-05-compact.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1131,
+            "litRatio": 0.21667,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 87,
+              "height": 56
+            }
+          }
+        },
+        {
+          "sampleIndex": 6,
+          "frameIndex": 105,
+          "timeSeconds": 3.5,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-06-compact.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1138,
+            "litRatio": 0.21801,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 1,
+              "width": 87,
+              "height": 57
+            }
+          }
+        },
+        {
+          "sampleIndex": 7,
+          "frameIndex": 113,
+          "timeSeconds": 3.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-07-extended.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1153,
+            "litRatio": 0.22088,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 1,
+              "width": 87,
+              "height": 57
+            }
+          }
+        },
+        {
+          "sampleIndex": 8,
+          "frameIndex": 120,
+          "timeSeconds": 4,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-08-extended.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1153,
+            "litRatio": 0.22088,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 1,
+              "width": 87,
+              "height": 57
+            }
+          }
+        },
+        {
+          "sampleIndex": 9,
+          "frameIndex": 128,
+          "timeSeconds": 4.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-09-compact.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1153,
+            "litRatio": 0.22088,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 1,
+              "width": 87,
+              "height": 57
+            }
+          }
+        },
+        {
+          "sampleIndex": 10,
+          "frameIndex": 135,
+          "timeSeconds": 4.5,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-10-compact.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1149,
+            "litRatio": 0.22011,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 1,
+              "width": 87,
+              "height": 57
+            }
+          }
+        },
+        {
+          "sampleIndex": 11,
+          "frameIndex": 143,
+          "timeSeconds": 4.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-11-extended.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1152,
+            "litRatio": 0.22069,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 1,
+              "width": 87,
+              "height": 57
+            }
+          }
+        },
+        {
+          "sampleIndex": 12,
+          "frameIndex": 150,
+          "timeSeconds": 5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-12-extended.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1152,
+            "litRatio": 0.22069,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 1,
+              "width": 87,
+              "height": 57
+            }
+          }
+        },
+        {
+          "sampleIndex": 13,
+          "frameIndex": 158,
+          "timeSeconds": 5.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-13-compact.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1143,
+            "litRatio": 0.21897,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 1,
+              "width": 87,
+              "height": 57
+            }
+          }
+        },
+        {
+          "sampleIndex": 14,
+          "frameIndex": 165,
+          "timeSeconds": 5.5,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-14-compact.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1152,
+            "litRatio": 0.22069,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 1,
+              "width": 87,
+              "height": 57
+            }
+          }
+        },
+        {
+          "sampleIndex": 15,
+          "frameIndex": 173,
+          "timeSeconds": 5.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-15-extended.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1153,
+            "litRatio": 0.22088,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 1,
+              "width": 87,
+              "height": 57
+            }
+          }
+        },
+        {
+          "sampleIndex": 16,
+          "frameIndex": 180,
+          "timeSeconds": 6,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-16-extended.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1149,
+            "litRatio": 0.22011,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 1,
+              "width": 87,
+              "height": 57
+            }
+          }
+        },
+        {
+          "sampleIndex": 17,
+          "frameIndex": 188,
+          "timeSeconds": 6.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-17-compact.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1154,
+            "litRatio": 0.22107,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 1,
+              "width": 87,
+              "height": 57
+            }
+          }
+        },
+        {
+          "sampleIndex": 18,
+          "frameIndex": 195,
+          "timeSeconds": 6.5,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-18-compact.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1152,
+            "litRatio": 0.22069,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 1,
+              "width": 87,
+              "height": 57
+            }
+          }
+        },
+        {
+          "sampleIndex": 19,
+          "frameIndex": 203,
+          "timeSeconds": 6.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-19-extended.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1148,
+            "litRatio": 0.21992,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 1,
+              "width": 87,
+              "height": 57
+            }
+          }
+        },
+        {
+          "sampleIndex": 20,
+          "frameIndex": 210,
+          "timeSeconds": 7,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-20-extended.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1138,
+            "litRatio": 0.21801,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 1,
+              "width": 87,
+              "height": 57
+            }
+          }
+        },
+        {
+          "sampleIndex": 21,
+          "frameIndex": 218,
+          "timeSeconds": 7.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-21-compact.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1130,
+            "litRatio": 0.21648,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 87,
+              "height": 56
+            }
+          }
+        },
+        {
+          "sampleIndex": 22,
+          "frameIndex": 225,
+          "timeSeconds": 7.5,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-22-compact.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1121,
+            "litRatio": 0.21475,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 2,
+              "width": 87,
+              "height": 56
+            }
+          }
+        },
+        {
+          "sampleIndex": 23,
+          "frameIndex": 233,
+          "timeSeconds": 7.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 18,
+            "y": 316,
+            "width": 94,
+            "height": 58
+          },
+          "cleanedCrop": {
+            "x": 4,
+            "y": 0,
+            "width": 90,
+            "height": 58
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-dragonfly-23-extended.png",
+          "metrics": {
+            "width": 90,
+            "height": 58,
+            "litPixels": 1141,
+            "litRatio": 0.21858,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 2,
+              "y": 1,
+              "width": 87,
+              "height": 57
+            }
+          }
+        }
+      ],
+      "measurementLimits": [
+        "This row is frame-labeled from a preserved segmented reference clip, not yet from raw arcade gameplay or ROM-derived frame timing.",
+        "The cadence should be used to compare visible runtime pulse/cadence behavior and to prevent provisional sheet cells from over-driving sprite-motion scoring.",
+        "Exact gameplay-time animation cadence still needs raw target gameplay windows."
+      ],
+      "nextGap": "Replace or confirm this segmented-reference cadence with raw gameplay or ROM-derived timing evidence before claiming final animation conformance."
+    },
+    {
+      "id": "challenge-satellite-pulse-pair",
+      "roleKey": "challenge-satellite",
+      "runtimeSpriteKey": "challenge-satellite",
+      "label": "Challenge Satellite Pulse Cadence",
+      "status": "frame-labeled-segmented-reference-window",
+      "acceptedForScoring": true,
+      "challengeOnly": true,
+      "sourceKind": "segmented-motion-reference-video",
+      "sourceVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "sourceUse": "Frame-labeled window from the preserved segmented Galaga alien motion reference. It records a challenge-only bonus alien cadence target for later runtime mapping.",
+      "confidence": "medium",
+      "sampleFps": 4,
+      "sampleCount": 24,
+      "startSeconds": 2,
+      "endSeconds": 7.75,
+      "cadenceSecondsPerCycle": 1,
+      "phasePattern": [
+        "compact",
+        "extended",
+        "extended",
+        "compact"
+      ],
+      "phaseLabels": [
+        "compact",
+        "extended"
+      ],
+      "phaseRuns": [
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 60,
+          "endFrameIndex": 60,
+          "startTimeSeconds": 2,
+          "endTimeSeconds": 2,
+          "frameCount": 1
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 68,
+          "endFrameIndex": 75,
+          "startTimeSeconds": 2.25,
+          "endTimeSeconds": 2.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 83,
+          "endFrameIndex": 90,
+          "startTimeSeconds": 2.75,
+          "endTimeSeconds": 3,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 98,
+          "endFrameIndex": 105,
+          "startTimeSeconds": 3.25,
+          "endTimeSeconds": 3.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 113,
+          "endFrameIndex": 120,
+          "startTimeSeconds": 3.75,
+          "endTimeSeconds": 4,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 128,
+          "endFrameIndex": 135,
+          "startTimeSeconds": 4.25,
+          "endTimeSeconds": 4.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 143,
+          "endFrameIndex": 150,
+          "startTimeSeconds": 4.75,
+          "endTimeSeconds": 5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 158,
+          "endFrameIndex": 165,
+          "startTimeSeconds": 5.25,
+          "endTimeSeconds": 5.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 173,
+          "endFrameIndex": 180,
+          "startTimeSeconds": 5.75,
+          "endTimeSeconds": 6,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 188,
+          "endFrameIndex": 195,
+          "startTimeSeconds": 6.25,
+          "endTimeSeconds": 6.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 203,
+          "endFrameIndex": 210,
+          "startTimeSeconds": 6.75,
+          "endTimeSeconds": 7,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 218,
+          "endFrameIndex": 225,
+          "startTimeSeconds": 7.25,
+          "endTimeSeconds": 7.5,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 233,
+          "endFrameIndex": 233,
+          "startTimeSeconds": 7.75,
+          "endTimeSeconds": 7.75,
+          "frameCount": 1
+        }
+      ],
+      "averageAdjacentDelta": 11.783,
+      "maxAdjacentDelta": 32,
+      "previewFrames": [
+        {
+          "sampleIndex": 0,
+          "timeSeconds": 2,
+          "phaseLabel": "compact",
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-00-compact.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1138,
+            "litRatio": 0.26343,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 12,
+          "timeSeconds": 5,
+          "phaseLabel": "compact",
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-12-compact.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1147,
+            "litRatio": 0.26551,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 23,
+          "timeSeconds": 7.75,
+          "phaseLabel": "compact",
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-23-compact.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1113,
+            "litRatio": 0.25764,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        }
+      ],
+      "frames": [
+        {
+          "sampleIndex": 0,
+          "frameIndex": 60,
+          "timeSeconds": 2,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-00-compact.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1138,
+            "litRatio": 0.26343,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 1,
+          "frameIndex": 68,
+          "timeSeconds": 2.25,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-01-extended.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1139,
+            "litRatio": 0.26366,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 2,
+          "frameIndex": 75,
+          "timeSeconds": 2.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-02-extended.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1151,
+            "litRatio": 0.26644,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 3,
+          "frameIndex": 83,
+          "timeSeconds": 2.75,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-03-compact.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1122,
+            "litRatio": 0.25972,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 4,
+          "frameIndex": 90,
+          "timeSeconds": 3,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-04-compact.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1123,
+            "litRatio": 0.25995,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 5,
+          "frameIndex": 98,
+          "timeSeconds": 3.25,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-05-extended.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1140,
+            "litRatio": 0.26389,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 6,
+          "frameIndex": 105,
+          "timeSeconds": 3.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-06-extended.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1150,
+            "litRatio": 0.2662,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 7,
+          "frameIndex": 113,
+          "timeSeconds": 3.75,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-07-compact.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1118,
+            "litRatio": 0.2588,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 8,
+          "frameIndex": 120,
+          "timeSeconds": 4,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-08-compact.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1137,
+            "litRatio": 0.26319,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 9,
+          "frameIndex": 128,
+          "timeSeconds": 4.25,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-09-extended.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1150,
+            "litRatio": 0.2662,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 10,
+          "frameIndex": 135,
+          "timeSeconds": 4.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-10-extended.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1153,
+            "litRatio": 0.2669,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 11,
+          "frameIndex": 143,
+          "timeSeconds": 4.75,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-11-compact.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1155,
+            "litRatio": 0.26736,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 12,
+          "frameIndex": 150,
+          "timeSeconds": 5,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-12-compact.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1147,
+            "litRatio": 0.26551,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 13,
+          "frameIndex": 158,
+          "timeSeconds": 5.25,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-13-extended.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1158,
+            "litRatio": 0.26806,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 14,
+          "frameIndex": 165,
+          "timeSeconds": 5.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-14-extended.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1159,
+            "litRatio": 0.26829,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 15,
+          "frameIndex": 173,
+          "timeSeconds": 5.75,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-15-compact.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1135,
+            "litRatio": 0.26273,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 16,
+          "frameIndex": 180,
+          "timeSeconds": 6,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-16-compact.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1151,
+            "litRatio": 0.26644,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 17,
+          "frameIndex": 188,
+          "timeSeconds": 6.25,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-17-extended.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1155,
+            "litRatio": 0.26736,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 18,
+          "frameIndex": 195,
+          "timeSeconds": 6.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-18-extended.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1140,
+            "litRatio": 0.26389,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 19,
+          "frameIndex": 203,
+          "timeSeconds": 6.75,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-19-compact.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1153,
+            "litRatio": 0.2669,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 20,
+          "frameIndex": 210,
+          "timeSeconds": 7,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-20-compact.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1147,
+            "litRatio": 0.26551,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 21,
+          "frameIndex": 218,
+          "timeSeconds": 7.25,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-21-extended.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1136,
+            "litRatio": 0.26296,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 22,
+          "frameIndex": 225,
+          "timeSeconds": 7.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-22-extended.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1135,
+            "litRatio": 0.26273,
+            "tokenChannels": [
+              "B",
+              "C",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        },
+        {
+          "sampleIndex": 23,
+          "frameIndex": 233,
+          "timeSeconds": 7.75,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 224,
+            "y": 302,
+            "width": 80,
+            "height": 64
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 10,
+            "width": 80,
+            "height": 54
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-satellite-23-compact.png",
+          "metrics": {
+            "width": 80,
+            "height": 54,
+            "litPixels": 1113,
+            "litRatio": 0.25764,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 80,
+              "height": 52
+            }
+          }
+        }
+      ],
+      "measurementLimits": [
+        "This row is frame-labeled from a preserved segmented reference clip, not yet from raw arcade gameplay or ROM-derived frame timing.",
+        "The cadence should be used to compare visible runtime pulse/cadence behavior and to prevent provisional sheet cells from over-driving sprite-motion scoring.",
+        "Exact gameplay-time animation cadence still needs raw target gameplay windows."
+      ],
+      "nextGap": "Replace or confirm this segmented-reference cadence with raw gameplay or ROM-derived timing evidence before claiming final animation conformance."
+    },
+    {
+      "id": "challenge-starship-pulse-pair",
+      "roleKey": "challenge-starship",
+      "runtimeSpriteKey": "challenge-starship",
+      "label": "Challenge Starship Pulse Cadence",
+      "status": "frame-labeled-segmented-reference-window",
+      "acceptedForScoring": true,
+      "challengeOnly": true,
+      "sourceKind": "segmented-motion-reference-video",
+      "sourceVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
+      "sourceUse": "Frame-labeled window from the preserved segmented Galaga alien motion reference. It records the larger late challenge target cadence and scale envelope separately from regular formation enemies.",
+      "confidence": "medium",
+      "sampleFps": 4,
+      "sampleCount": 24,
+      "startSeconds": 2,
+      "endSeconds": 7.75,
+      "cadenceSecondsPerCycle": 1,
+      "phasePattern": [
+        "compact",
+        "compact",
+        "extended",
+        "extended"
+      ],
+      "phaseLabels": [
+        "compact",
+        "extended"
+      ],
+      "phaseRuns": [
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 60,
+          "endFrameIndex": 68,
+          "startTimeSeconds": 2,
+          "endTimeSeconds": 2.25,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 75,
+          "endFrameIndex": 83,
+          "startTimeSeconds": 2.5,
+          "endTimeSeconds": 2.75,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 90,
+          "endFrameIndex": 98,
+          "startTimeSeconds": 3,
+          "endTimeSeconds": 3.25,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 105,
+          "endFrameIndex": 113,
+          "startTimeSeconds": 3.5,
+          "endTimeSeconds": 3.75,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 120,
+          "endFrameIndex": 128,
+          "startTimeSeconds": 4,
+          "endTimeSeconds": 4.25,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 135,
+          "endFrameIndex": 143,
+          "startTimeSeconds": 4.5,
+          "endTimeSeconds": 4.75,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 150,
+          "endFrameIndex": 158,
+          "startTimeSeconds": 5,
+          "endTimeSeconds": 5.25,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 165,
+          "endFrameIndex": 173,
+          "startTimeSeconds": 5.5,
+          "endTimeSeconds": 5.75,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 180,
+          "endFrameIndex": 188,
+          "startTimeSeconds": 6,
+          "endTimeSeconds": 6.25,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 195,
+          "endFrameIndex": 203,
+          "startTimeSeconds": 6.5,
+          "endTimeSeconds": 6.75,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "compact",
+          "startFrameIndex": 210,
+          "endFrameIndex": 218,
+          "startTimeSeconds": 7,
+          "endTimeSeconds": 7.25,
+          "frameCount": 2
+        },
+        {
+          "phaseLabel": "extended",
+          "startFrameIndex": 225,
+          "endFrameIndex": 233,
+          "startTimeSeconds": 7.5,
+          "endTimeSeconds": 7.75,
+          "frameCount": 2
+        }
+      ],
+      "averageAdjacentDelta": 9.304,
+      "maxAdjacentDelta": 24,
+      "previewFrames": [
+        {
+          "sampleIndex": 0,
+          "timeSeconds": 2,
+          "phaseLabel": "compact",
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-00-compact.png",
+          "metrics": {
+            "width": 86,
+            "height": 69,
+            "litPixels": 2143,
+            "litRatio": 0.36114,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 84,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 12,
+          "timeSeconds": 5,
+          "phaseLabel": "compact",
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-12-compact.png",
+          "metrics": {
+            "width": 85,
+            "height": 69,
+            "litPixels": 2141,
+            "litRatio": 0.36505,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 83,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 23,
+          "timeSeconds": 7.75,
+          "phaseLabel": "extended",
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-23-extended.png",
+          "metrics": {
+            "width": 86,
+            "height": 69,
+            "litPixels": 2131,
+            "litRatio": 0.35912,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 84,
+              "height": 67
+            }
+          }
+        }
+      ],
+      "frames": [
+        {
+          "sampleIndex": 0,
+          "frameIndex": 60,
+          "timeSeconds": 2,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 86,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-00-compact.png",
+          "metrics": {
+            "width": 86,
+            "height": 69,
+            "litPixels": 2143,
+            "litRatio": 0.36114,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 84,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 1,
+          "frameIndex": 68,
+          "timeSeconds": 2.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 86,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-01-compact.png",
+          "metrics": {
+            "width": 86,
+            "height": 69,
+            "litPixels": 2143,
+            "litRatio": 0.36114,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 84,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 2,
+          "frameIndex": 75,
+          "timeSeconds": 2.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 86,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-02-extended.png",
+          "metrics": {
+            "width": 86,
+            "height": 69,
+            "litPixels": 2136,
+            "litRatio": 0.35996,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 84,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 3,
+          "frameIndex": 83,
+          "timeSeconds": 2.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 85,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-03-extended.png",
+          "metrics": {
+            "width": 85,
+            "height": 69,
+            "litPixels": 2132,
+            "litRatio": 0.36351,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 83,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 4,
+          "frameIndex": 90,
+          "timeSeconds": 3,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 85,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-04-compact.png",
+          "metrics": {
+            "width": 85,
+            "height": 69,
+            "litPixels": 2131,
+            "litRatio": 0.36334,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 83,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 5,
+          "frameIndex": 98,
+          "timeSeconds": 3.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 85,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-05-compact.png",
+          "metrics": {
+            "width": 85,
+            "height": 69,
+            "litPixels": 2143,
+            "litRatio": 0.36539,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 83,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 6,
+          "frameIndex": 105,
+          "timeSeconds": 3.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 85,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-06-extended.png",
+          "metrics": {
+            "width": 85,
+            "height": 69,
+            "litPixels": 2123,
+            "litRatio": 0.36198,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 83,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 7,
+          "frameIndex": 113,
+          "timeSeconds": 3.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 85,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-07-extended.png",
+          "metrics": {
+            "width": 85,
+            "height": 69,
+            "litPixels": 2118,
+            "litRatio": 0.36113,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 83,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 8,
+          "frameIndex": 120,
+          "timeSeconds": 4,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 86,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-08-compact.png",
+          "metrics": {
+            "width": 86,
+            "height": 69,
+            "litPixels": 2134,
+            "litRatio": 0.35962,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 84,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 9,
+          "frameIndex": 128,
+          "timeSeconds": 4.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 85,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-09-compact.png",
+          "metrics": {
+            "width": 85,
+            "height": 69,
+            "litPixels": 2135,
+            "litRatio": 0.36402,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 83,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 10,
+          "frameIndex": 135,
+          "timeSeconds": 4.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 86,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-10-extended.png",
+          "metrics": {
+            "width": 86,
+            "height": 69,
+            "litPixels": 2124,
+            "litRatio": 0.35794,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 84,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 11,
+          "frameIndex": 143,
+          "timeSeconds": 4.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 85,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-11-extended.png",
+          "metrics": {
+            "width": 85,
+            "height": 69,
+            "litPixels": 2129,
+            "litRatio": 0.363,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 83,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 12,
+          "frameIndex": 150,
+          "timeSeconds": 5,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 85,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-12-compact.png",
+          "metrics": {
+            "width": 85,
+            "height": 69,
+            "litPixels": 2141,
+            "litRatio": 0.36505,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 83,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 13,
+          "frameIndex": 158,
+          "timeSeconds": 5.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 86,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-13-compact.png",
+          "metrics": {
+            "width": 86,
+            "height": 69,
+            "litPixels": 2146,
+            "litRatio": 0.36164,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 84,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 14,
+          "frameIndex": 165,
+          "timeSeconds": 5.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 86,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-14-extended.png",
+          "metrics": {
+            "width": 86,
+            "height": 69,
+            "litPixels": 2146,
+            "litRatio": 0.36164,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 84,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 15,
+          "frameIndex": 173,
+          "timeSeconds": 5.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 86,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-15-extended.png",
+          "metrics": {
+            "width": 86,
+            "height": 69,
+            "litPixels": 2148,
+            "litRatio": 0.36198,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 84,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 16,
+          "frameIndex": 180,
+          "timeSeconds": 6,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 86,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-16-compact.png",
+          "metrics": {
+            "width": 86,
+            "height": 69,
+            "litPixels": 2151,
+            "litRatio": 0.36249,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 84,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 17,
+          "frameIndex": 188,
+          "timeSeconds": 6.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 86,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-17-compact.png",
+          "metrics": {
+            "width": 86,
+            "height": 69,
+            "litPixels": 2139,
+            "litRatio": 0.36047,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 84,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 18,
+          "frameIndex": 195,
+          "timeSeconds": 6.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 85,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-18-extended.png",
+          "metrics": {
+            "width": 85,
+            "height": 69,
+            "litPixels": 2140,
+            "litRatio": 0.36488,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 83,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 19,
+          "frameIndex": 203,
+          "timeSeconds": 6.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 85,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-19-extended.png",
+          "metrics": {
+            "width": 85,
+            "height": 69,
+            "litPixels": 2152,
+            "litRatio": 0.36692,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 83,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 20,
+          "frameIndex": 210,
+          "timeSeconds": 7,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 85,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-20-compact.png",
+          "metrics": {
+            "width": 85,
+            "height": 69,
+            "litPixels": 2135,
+            "litRatio": 0.36402,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 83,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 21,
+          "frameIndex": 218,
+          "timeSeconds": 7.25,
+          "phaseLabel": "compact",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 86,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-21-compact.png",
+          "metrics": {
+            "width": 86,
+            "height": 69,
+            "litPixels": 2130,
+            "litRatio": 0.35895,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 84,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 22,
+          "frameIndex": 225,
+          "timeSeconds": 7.5,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 86,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-22-extended.png",
+          "metrics": {
+            "width": 86,
+            "height": 69,
+            "litPixels": 2154,
+            "litRatio": 0.36299,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 84,
+              "height": 67
+            }
+          }
+        },
+        {
+          "sampleIndex": 23,
+          "frameIndex": 233,
+          "timeSeconds": 7.75,
+          "phaseLabel": "extended",
+          "sourceCrop": {
+            "sourceWidth": 576,
+            "sourceHeight": 576,
+            "x": 374,
+            "y": 300,
+            "width": 90,
+            "height": 78
+          },
+          "cleanedCrop": {
+            "x": 0,
+            "y": 9,
+            "width": 86,
+            "height": 69
+          },
+          "cropImage": "reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest-frames/challenge-starship-23-extended.png",
+          "metrics": {
+            "width": 86,
+            "height": 69,
+            "litPixels": 2131,
+            "litRatio": 0.35912,
+            "tokenChannels": [
+              "B",
+              "G",
+              "M",
+              "R",
+              "W"
+            ],
+            "litBox": {
+              "x": 0,
+              "y": 2,
+              "width": 84,
+              "height": 67
             }
           }
         }

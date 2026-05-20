@@ -6,11 +6,11 @@ const { withHarnessPage, sleep } = require('./browser-check-util');
 // reference-backed first-challenge peel lanes are visibly underway.
 const SAMPLE_TIMES = [0.7, 1.05, 1.4, 1.75, 2.1];
 const BASELINE = Object.freeze({
-  0.7: Object.freeze({ avgX: 140, minY: 38.54, maxY: 46.51, lane0X: 18.4, lane7X: 290.35 }),
-  1.05: Object.freeze({ avgX: 140, minY: 38.83, maxY: 46.8, lane0X: 45.45, lane7X: 271.9 }),
-  1.4: Object.freeze({ avgX: 140, minY: 39.12, maxY: 47.09, lane0X: 66.86, lane7X: 256.81 }),
-  1.75: Object.freeze({ avgX: 140, minY: 39.41, maxY: 47.38, lane0X: 82.47, lane7X: 245.18 }),
-  2.1: Object.freeze({ avgX: 140, minY: 39.7, maxY: 47.66, lane0X: 90.65, lane7X: 238.22 })
+  0.7: Object.freeze({ avgX: 140, minY: 39.73, maxY: 47.58, lane0X: 28.23, lane7X: 287.83 }),
+  1.05: Object.freeze({ avgX: 140, minY: 40.67, maxY: 48.53, lane0X: 57.21, lane7X: 267.11 }),
+  1.4: Object.freeze({ avgX: 140, minY: 41.6, maxY: 49.45, lane0X: 77.97, lane7X: 251.1 }),
+  1.75: Object.freeze({ avgX: 140, minY: 42.54, maxY: 50.39, lane0X: 89.83, lane7X: 240.33 }),
+  2.1: Object.freeze({ avgX: 140, minY: 38.16, maxY: 51.18, lane0X: 92.68, lane7X: 236.06 })
 });
 
 function fail(message, payload){
@@ -64,12 +64,13 @@ async function main(){
       lane7X: approxEqual(sample.stats.lane7X, expected.lane7X, 10)
     };
     if(Object.values(checks).some(v => !v)){
-      fail('challenge motion profile drifted away from the shipped production baseline', {
+      fail('challenge motion profile drifted away from the measured branch baseline', {
         sampleTime: sample.t,
         expected,
         actual: sample.stats,
         checks,
-        firstWave: sample.firstWave
+        firstWave: sample.firstWave,
+        allSamples: result.map(item => ({ t: item.t, stats: item.stats }))
       });
     }
   }

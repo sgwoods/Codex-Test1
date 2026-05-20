@@ -45,6 +45,9 @@ for(const id of REQUIRED_ROWS){
   if(!row.runtime?.temporalSample || !row.runtime?.cadenceSample || !row.runtime?.staticCrop){
     fail(`Aurora sprite motion correspondence row ${id} is missing runtime evidence links`, row);
   }
+  if(!Number.isFinite(+row.runtime?.phaseOrderScore10) || !row.runtime?.phaseOrder?.read){
+    fail(`Aurora sprite motion correspondence row ${id} is missing runtime-vs-target phase order scoring`, row);
+  }
   if(!Array.isArray(row.runtime?.seedCoverageAxes) || row.runtime.seedCoverageAxes.length < 3){
     fail(`Aurora sprite motion correspondence row ${id} is missing seed coverage axes`, row);
   }
@@ -59,6 +62,9 @@ for(const id of REQUIRED_ROWS){
 
 if(!Number.isFinite(+artifact.summary?.averageScore10)){
   fail('Aurora sprite motion correspondence summary is missing averageScore10', artifact.summary);
+}
+if(!Number.isFinite(+artifact.summary?.averagePhaseOrderScore10)){
+  fail('Aurora sprite motion correspondence summary is missing averagePhaseOrderScore10', artifact.summary);
 }
 if(!['pose-sequence-targets-only', 'frame-timed-targets-present', 'frame-labeled-segmented-reference-windows'].includes(artifact.summary?.targetTimingStatus)){
   fail('Aurora sprite motion correspondence summary has an unknown target timing status', artifact.summary);

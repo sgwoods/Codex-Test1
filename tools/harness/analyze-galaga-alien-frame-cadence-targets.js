@@ -44,6 +44,39 @@ const ROLE_WINDOWS = [
     phasePattern: ['compact', 'extended', 'extended', 'compact'],
     confidence: 'medium-high',
     sourceUse: 'Frame-labeled window from the preserved segmented Galaga alien motion reference. It cleanly separates Butterfly wing-compact and wing-open phases for runtime cadence scoring.'
+  },
+  {
+    id: 'challenge-dragonfly-pulse-pair',
+    roleKey: 'challenge-dragonfly',
+    runtimeSpriteKey: 'challenge-dragonfly',
+    label: 'Challenge Dragonfly Pulse Cadence',
+    crop: { x: 18, y: 316, width: 94, height: 58 },
+    phasePattern: ['extended', 'compact', 'compact', 'extended'],
+    confidence: 'medium',
+    challengeOnly: true,
+    sourceUse: 'Frame-labeled window from the preserved segmented Galaga alien motion reference. It seeds challenge-only alien cadence evidence so bonus-stage graphics can move beyond static-pose review.'
+  },
+  {
+    id: 'challenge-satellite-pulse-pair',
+    roleKey: 'challenge-satellite',
+    runtimeSpriteKey: 'challenge-satellite',
+    label: 'Challenge Satellite Pulse Cadence',
+    crop: { x: 224, y: 302, width: 80, height: 64 },
+    phasePattern: ['compact', 'extended', 'extended', 'compact'],
+    confidence: 'medium',
+    challengeOnly: true,
+    sourceUse: 'Frame-labeled window from the preserved segmented Galaga alien motion reference. It records a challenge-only bonus alien cadence target for later runtime mapping.'
+  },
+  {
+    id: 'challenge-starship-pulse-pair',
+    roleKey: 'challenge-starship',
+    runtimeSpriteKey: 'challenge-starship',
+    label: 'Challenge Starship Pulse Cadence',
+    crop: { x: 374, y: 300, width: 90, height: 78 },
+    phasePattern: ['compact', 'compact', 'extended', 'extended'],
+    confidence: 'medium',
+    challengeOnly: true,
+    sourceUse: 'Frame-labeled window from the preserved segmented Galaga alien motion reference. It records the larger late challenge target cadence and scale envelope separately from regular formation enemies.'
   }
 ];
 
@@ -352,6 +385,7 @@ function analyzeRow(spec, video){
     label: spec.label,
     status: 'frame-labeled-segmented-reference-window',
     acceptedForScoring: true,
+    challengeOnly: !!spec.challengeOnly,
     sourceKind: 'segmented-motion-reference-video',
     sourceVideo: rel(SOURCE_VIDEO),
     sourceUse: spec.sourceUse,
@@ -443,6 +477,7 @@ function main(){
       rows: rows.map(row => ({
         id: row.id,
         runtimeSpriteKey: row.runtimeSpriteKey,
+        challengeOnly: !!row.challengeOnly,
         sampleCount: row.sampleCount,
         phaseLabels: row.phaseLabels,
         averageAdjacentDelta: row.averageAdjacentDelta

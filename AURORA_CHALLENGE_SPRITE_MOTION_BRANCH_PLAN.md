@@ -25,20 +25,27 @@ Use measured reference-first work before subjective tuning:
 - Graphical conformance: `4.6/10`
 - Alien/stage novelty: `3.9/10`
 - Player shot opportunity: `5.6/10`
-- Sprite-motion correspondence: `8.0/10`
+- Sprite-motion correspondence: `7.83/10`
+- Runtime phase-order correspondence: `5.64/10`
 - Sprite-motion target timing status: `frame-labeled-segmented-reference-windows`
-- Frame-labeled cadence target rows: `3/3`
-- Cadence evidence: `72` labeled Boss/Bee/Butterfly reference frames at `4 fps`
+- Frame-labeled cadence target rows: `6/6`
+- Cadence evidence: `144` labeled reference frames at `4 fps`
+- Raw gameplay cadence validation: `8.04/10`, corroborated from low-resolution gameplay, not ROM-confirmed
 
 ## Progress This Cycle
 
 - Promoted Boss, Bee, and Butterfly frame-labeled cadence windows from the preserved segmented Galaga alien motion reference.
+- Added challenge-only Dragonfly, Satellite, and Starship cadence windows so later bonus-stage aliens enter the same target model rather than remaining undocumented specialty sprites.
 - Added a reusable frame cadence target artifact and checker:
   - `reference-artifacts/analyses/galaga-alien-frame-cadence-targets/latest.json`
   - `GALAGA_ALIEN_FRAME_CADENCE_TARGETS.md`
+- Added low-resolution raw-gameplay cadence corroboration:
+  - `reference-artifacts/analyses/galaga-alien-cadence-validation/latest.json`
+  - `GALAGA_ALIEN_CADENCE_VALIDATION.md`
 - Wired the cadence target rows into temporal targets and runtime correspondence scoring.
-- Lifted the sprite-motion correspondence read from `6.03/10` to `8.0/10` without pretending this is final arcade-perfect timing.
-- Confirmed the larger challenge-stage score barely moved (`4.2/10` to `4.3/10`), which reinforces that the main player-facing gap is now choreography, stage contract, and alien/path variety rather than basic flap/pulse measurement.
+- Added runtime-vs-target phase-order scoring so Aurora is now measured on compact/extended sequence order, not only whether animation exists.
+- Stage 3 challenge readability improved by widening first-challenge wave spacing: max active challenge enemies dropped from `40` to `32`, and mean active enemies dropped from about `24.9` to `18.5`.
+- Confirmed the larger challenge-stage score is still stuck at `4.3/10`; this reinforces that the main player-facing gap is now choreography, target-video track fit, reversal-heavy paths, stage contract, and alien/path variety rather than basic flap/pulse measurement.
 
 ## Success Criteria
 
@@ -50,9 +57,9 @@ Use measured reference-first work before subjective tuning:
 
 ## Next Best Steps
 
-1. Confirm segmented-reference Boss/Bee/Butterfly cadence against raw gameplay or ROM-derived timing where possible.
-2. Add runtime-vs-target sequence scoring that compares actual Aurora cadence frame order against target phase labels, not only component readiness.
-3. Update Stage 3 challenge choreography against the first Galaga challenge target contract.
-4. Expand the same treatment to Stage 7 and Stage 11 after Stage 3 proves the loop.
-5. Add challenge-only alien cadence rows for Dragonfly, Satellite, Starship, Scorpion, Bosconian, and Galaxian families.
+1. Replace low-resolution cadence corroboration with high-resolution frame-stepped gameplay, emulator capture, or ROM-derived animation timing.
+2. Tune Aurora runtime cadence toward the target phase-order rows; current phase-order is only `5.64/10`.
+3. Re-author Stage 3 challenge paths against the first Galaga challenge contract, focusing on fewer reversals, clearer entry side/exit side, and stronger object-track fit.
+4. Expand the same treatment to Stage 7 and Stage 11 once Stage 3 proves a score-moving loop.
+5. Add remaining challenge-only alien cadence rows for Scorpion, Bosconian, and Galaxian families.
 6. Keep conformance-economics measurement around every long run so CPU/GPU/time value is visible.
