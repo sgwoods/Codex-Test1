@@ -6,11 +6,11 @@ const { withHarnessPage, sleep } = require('./browser-check-util');
 // reference-backed first-challenge peel lanes are visibly underway.
 const SAMPLE_TIMES = [0.7, 1.05, 1.4, 1.75, 2.1];
 const BASELINE = Object.freeze({
-  0.7: Object.freeze({ avgX: 140, minY: 39.73, maxY: 47.58, lane0X: 28.23, lane7X: 287.83 }),
-  1.05: Object.freeze({ avgX: 140, minY: 40.67, maxY: 48.53, lane0X: 57.21, lane7X: 267.11 }),
-  1.4: Object.freeze({ avgX: 140, minY: 41.6, maxY: 49.45, lane0X: 77.97, lane7X: 251.1 }),
-  1.75: Object.freeze({ avgX: 140, minY: 42.54, maxY: 50.39, lane0X: 89.83, lane7X: 240.33 }),
-  2.1: Object.freeze({ avgX: 140, minY: 38.16, maxY: 51.18, lane0X: 92.68, lane7X: 236.06 })
+  0.7: Object.freeze({ avgX: 140, minY: 39.8, maxY: 47.65, lane0X: 30.37, lane7X: 286.31 }),
+  1.05: Object.freeze({ avgX: 140, minY: 40.74, maxY: 48.59, lane0X: 58.93, lane7X: 265.81 }),
+  1.4: Object.freeze({ avgX: 140, minY: 41.66, maxY: 49.51, lane0X: 78.99, lane7X: 250.24 }),
+  1.75: Object.freeze({ avgX: 140, minY: 42.6, maxY: 50.46, lane0X: 90.26, lane7X: 239.83 }),
+  2.1: Object.freeze({ avgX: 140, minY: 38.22, maxY: 51.25, lane0X: 92.8, lane7X: 236.01 })
 });
 
 function fail(message, payload){

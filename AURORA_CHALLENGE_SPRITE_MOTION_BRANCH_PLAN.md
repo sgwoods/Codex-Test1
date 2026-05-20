@@ -46,6 +46,7 @@ Use measured reference-first work before subjective tuning:
 - Added runtime-vs-target phase-order scoring so Aurora is now measured on compact/extended sequence order, not only whether animation exists.
 - Stage 3 challenge readability improved by widening first-challenge wave spacing: max active challenge enemies dropped from `40` to `32`, and mean active enemies dropped from about `24.9` to `18.5`.
 - Confirmed the larger challenge-stage score is still stuck at `4.3/10`; this reinforces that the main player-facing gap is now choreography, target-video track fit, reversal-heavy paths, stage contract, and alien/path variety rather than basic flap/pulse measurement.
+- Ran a Stage 3 target-track timing pass using explicit group spawn offsets. The offset-only candidate kept overall challenge conformance at `4.3/10` and Stage 3 at `4.2/10`, nudged Stage 3 target-video object-track coverage from about `0.261` to `0.265`, and shifted later groups from an overly compressed sequence toward a more readable stagger. A more literal target-timing candidate improved Stage 3 object-track fit to about `3.3/10`, but reduced movement/readability because late waves were under-sampled inside the current scoring window; a speed-scale follow-up also failed to improve the score. Conclusion: timing offsets alone are not enough. The next score-moving work needs path-shape re-authoring against entry/exit side, path length, and turn/reversal targets.
 
 ## Success Criteria
 
@@ -59,7 +60,7 @@ Use measured reference-first work before subjective tuning:
 
 1. Replace low-resolution cadence corroboration with high-resolution frame-stepped gameplay, emulator capture, or ROM-derived animation timing.
 2. Tune Aurora runtime cadence toward the target phase-order rows; current phase-order is only `5.64/10`.
-3. Re-author Stage 3 challenge paths against the first Galaga challenge contract, focusing on fewer reversals, clearer entry side/exit side, and stronger object-track fit.
-4. Expand the same treatment to Stage 7 and Stage 11 once Stage 3 proves a score-moving loop.
-5. Add remaining challenge-only alien cadence rows for Scorpion, Bosconian, and Galaxian families.
+3. Re-author Stage 3 challenge paths against the first Galaga challenge contract, focusing on path-shape rather than timing alone: fewer accidental reversals, closer entry side/exit side, shorter first-wave hang time, and stronger object-track fit.
+4. Expand the same path-shape treatment to Stage 7 and Stage 11 once Stage 3 proves a score-moving loop.
+5. Add remaining challenge-only alien cadence rows for Scorpion, Bosconian, and Galaxian families, then connect those rows to challenge-stage visual novelty scoring.
 6. Keep conformance-economics measurement around every long run so CPU/GPU/time value is visible.

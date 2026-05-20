@@ -696,6 +696,7 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   rowSpacingY:9,
   waveDelay:2.2,
   slotDelay:.16,
+  groupSpawnOffsets:Object.freeze([0,3.2,5.95,8.75,11.6]),
   arcAmp:1.12,
   dropAmp:1.02,
   laneTypes:Object.freeze(['bee','bee','bee','bee','but','but','but','but']),
