@@ -94,7 +94,21 @@ For the fastest quick current-state reopen, pair it with
 - improve pilot, leaderboard, and replay surfaces where they are still rough
 - keep production-safe defaults and developer restrictions disciplined
 
-### 5a. Shared Video Evidence
+### 5a. Immersive Full-Window Gameplay Mode
+
+- plan an optional hidden/developer display mode that lets the active game board
+  use the full available browser window for a stronger cabinet-like play
+  experience
+- keep the first prototype behind an `F` keyboard shortcut and/or Developer
+  Tools toggle, with `Escape`/`F` as the clear exit path
+- preserve logical gameplay coordinates, input mapping, replay determinism,
+  scoring, and game-pack boundaries while scaling the board
+- treat this as Platinum-owned display/cabinet capability, not Aurora-specific
+  gameplay logic
+- track the detailed plan in
+  [IMMERSIVE_FULL_WINDOW_GAMEPLAY_MODE_PLAN.md](IMMERSIVE_FULL_WINDOW_GAMEPLAY_MODE_PLAN.md)
+
+### 5b. Shared Video Evidence
 
 - make exported gameplay videos publishable to a shared catalog or repository
 - connect videos to issues, score records, release review, and player-facing
@@ -202,6 +216,11 @@ For the fastest quick current-state reopen, pair it with
 11. execute the measured Galaga long-cycle quality plan in
    [AURORA_GALAGA_LONG_CYCLE_REVIEW.md](AURORA_GALAGA_LONG_CYCLE_REVIEW.md)
    before broad gameplay, complexity, or graphical tuning
+12. carry
+   [IMMERSIVE_FULL_WINDOW_GAMEPLAY_MODE_PLAN.md](IMMERSIVE_FULL_WINDOW_GAMEPLAY_MODE_PLAN.md)
+   as a `1.6.0` cabinet-surface feature, allowing an earlier hidden prototype
+   only if it preserves input mapping, replay determinism, shell escape paths,
+   and game-pack boundaries
 
 Current conformance read:
 
@@ -284,8 +303,8 @@ After `1.4.0` ships, the plan should pick up in this order:
    including alien entry/challenge novelty, stage shape, audio/event feedback,
    and visual reference grounding.
 3. Longer term: `1.5.0` shared-video evidence and flight-recorder capabilities,
-   followed by `1.6.0` pilot-facing shell/message-to-pilot polish and `2.0`
-   multi-game Platinum maturity.
+   followed by `1.6.0` pilot-facing shell/message-to-pilot polish, optional
+   immersive full-window gameplay mode, and `2.0` multi-game Platinum maturity.
 
 That keeps the next cycle from collapsing back into unprioritized polish and
 preserves the release-family shape already captured in the roadmap docs.
@@ -297,6 +316,9 @@ Deferred shell bug to carry into `1.6.0`:
 - keep platform developer tools as a Platinum-owned quick-tools surface
 - place game settings with game identity/selection near the rocket so the
   active game's controls feel first-class and cabinet-local
+- add optional immersive full-window play as a cabinet-surface mode that
+  expands the board without changing gameplay rules or hiding essential escape
+  and settings paths
 
 ## Long-Term Direction
 
@@ -307,6 +329,8 @@ The long-term platform goal is:
   each game
 - same-control compliance across those experiences
 - richer reference-video ingestion and analysis
+- optional full-window/cabinet display modes that improve play and review
+  without changing game-owned mechanics
 - game-owned conformance packages that can support launch through Platinum now
   and thinner hosts later if we choose
 - stronger personas, replay annotation, and future simulated-opponent support
