@@ -79,15 +79,17 @@ function syncGalaxyGuardiansPreviewStarfield(){
  const themeId=GALAXY_GUARDIANS_PACK?.frontDoor?.atmosphereTheme||'signal-rack';
  const profile=Object.assign({
   id:'guardians-signal-stars',
-  count:96,
-  sizeMin:.82,
-  sizeMax:1.42,
+  count:104,
+  sizeMin:.78,
+  sizeMax:1.48,
   alphaMin:.38,
   alphaMax:.92,
-  twinkleMin:.82,
-  twinkleAmp:.18,
-  speedMin:9,
-  speedMax:24,
+  twinkleMin:.8,
+  twinkleAmp:.2,
+  speedMin:14,
+  speedMax:32,
+  driftMin:-6,
+  driftMax:6,
   palette:['#fffdf0','#ffe26a','#ff5b5b','#7bd6ff','#4af26d','#f6f0ff']
  }, GALAXY_GUARDIANS_PACK?.atmosphereThemes?.[themeId]?.starfield||{});
  const sig=JSON.stringify(profile);
@@ -106,7 +108,9 @@ function syncGalaxyGuardiansPreviewStarfield(){
    alpha:rand(profile.alphaMax,profile.alphaMin),
    twMin:rand(Math.min(1,profile.twinkleMin+.04),Math.max(.18,profile.twinkleMin-.04)),
    twAmp:rand(Math.min(.4,profile.twinkleAmp+.04),Math.max(.04,profile.twinkleAmp-.04)),
-   vy:rand(profile.speedMax,profile.speedMin)
+   vy:rand(profile.speedMax,profile.speedMin),
+   vx:rand(profile.driftMax||0,profile.driftMin||0),
+   depth:rand(.92,1.24)
   });
  }
  return profile;
@@ -116,10 +120,14 @@ function advanceGalaxyGuardiansPreviewStarfield(dt){
  for(const s of S.st){
   if(!s)continue;
   s.tw=(+s.tw||0)+dt*1.9;
-  s.y+=(+s.vy||12)*dt*.62;
+  const depth=+s.depth||1;
+  s.y+=(+s.vy||12)*dt*.62*depth;
+  s.x+=(+s.vx||0)*dt*.34*depth;
+  if(s.x>PLAY_W+(+s.s||1))s.x=-((+s.s||1)+((s.vx||0)%5));
+  else if(s.x<-(+s.s||1))s.x=PLAY_W+((+s.s||1)+Math.abs((s.vx||0)%5));
   if(s.y>PLAY_H+(+s.s||1)){
    s.y=-((+s.s||1)+((s.vy||12)%9));
-   s.x=(s.x+37+((s.vy||12)*.45))%PLAY_W;
+   s.x=(s.x+37+((s.vy||12)*.45)+((s.vx||0)*1.8))%PLAY_W;
   }
  }
 }

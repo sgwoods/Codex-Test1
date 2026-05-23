@@ -95,14 +95,21 @@ function buildStartMissionHtml(mission=null){
  return `<span class="startMissionWrap"><span class="startMissionTitle">${escapeMessageHtml(title)}</span>${lines.map(line=>`<span class="startMissionLine">${escapeMessageHtml(line)}</span>`).join('')}</span>`;
 }
 
-function buildStartScoreAdvanceHtml(rows=[]){
+function buildStartScoreAdvanceHtml(rows=[],presentation=null){
  const scoreRows=Array.isArray(rows)?rows.filter(row=>row&&row.role!=='player'):[];
  if(!scoreRows.length)return '';
+ const headers=presentation&&typeof presentation==='object'?presentation:{};
  const value=valueIn=>{
   const number=+valueIn;
   return Number.isFinite(number)?String(number):'-';
  };
- return `<span class="startScoreAdvance"><span class="scoreTitle">SCORE ADVANCE TABLE</span><span class="scoreHead scoreLabel">Alien</span><span class="scoreHead">Rack</span><span class="scoreHead">Dive</span><span class="scoreHead">+1</span><span class="scoreHead">+2</span>${scoreRows.map(row=>[
+ const title=headers.title||'SCORE ADVANCE TABLE';
+ const labelHeader=headers.labelHeader||'Alien';
+ const formationHeader=headers.formationHeader||'Rack';
+ const diveHeader=headers.diveHeader||'Dive';
+ const oneEscortHeader=headers.oneEscortHeader||'+1';
+ const twoEscortHeader=headers.twoEscortHeader||'+2';
+ return `<span class="startScoreAdvance"><span class="scoreTitle">${escapeMessageHtml(title)}</span><span class="scoreHead scoreLabel">${escapeMessageHtml(labelHeader)}</span><span class="scoreHead">${escapeMessageHtml(formationHeader)}</span><span class="scoreHead">${escapeMessageHtml(diveHeader)}</span><span class="scoreHead">${escapeMessageHtml(oneEscortHeader)}</span><span class="scoreHead">${escapeMessageHtml(twoEscortHeader)}</span>${scoreRows.map(row=>[
   `<span class="scoreLabel">${escapeMessageHtml(row.label||row.role||'Signal')}</span>`,
   `<span>${escapeMessageHtml(value(row.formationPoints))}</span>`,
   `<span>${escapeMessageHtml(value(row.divePoints))}</span>`,
@@ -400,7 +407,7 @@ function syncHudAndShellMessages({ox,oy,viewW,viewH}){
     ? `<span class="startQuoteWrap"><span class="startQuoteKicker">${frontDoor.quotePlaceholder.kicker||'SIGNAL'}</span><span class="startQuoteText">${frontDoor.quotePlaceholder.text}</span>${frontDoor.quotePlaceholder.attribution?`<span class="startQuoteAttribution">${frontDoor.quotePlaceholder.attribution}</span>`:''}</span>`
     : '';
    const missionBlock=showcaseMode?buildStartMissionHtml(frontDoor.attractMission):'';
-   const scoreAdvanceBlock=buildStartScoreAdvanceHtml(frontDoor.scoreAdvanceTable);
+	  const scoreAdvanceBlock=buildStartScoreAdvanceHtml(frontDoor.scoreAdvanceTable,frontDoor.scoreAdvancePresentation);
    const playerModeLine=typeof buildPlayerTwoStartHtml==='function'?buildPlayerTwoStartHtml():'';
    const accountLine=showcaseMode?`<span class="startMeta">${typeof buildStartAccountPrompt==='function'?buildStartAccountPrompt():'SIGN IN FOR VALIDATED SCORES'}</span>`:'';
    const utilityLine=showcaseMode?`<span class="startMeta">${frontDoor.utilityLine}</span>`:'';

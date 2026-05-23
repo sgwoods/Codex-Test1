@@ -103,10 +103,10 @@ const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
   enemyShotStartYOffset:8,
   enemyShotPlayerHitbox:7,
   enemyShotBottomPadding:10,
-  topReentryVy:82,
-  topReentryAccel:10.5,
-  topReentrySwayAmplitude:9,
-  topReentrySwayHz:2.8,
+  topReentryVy:70,
+  topReentryAccel:8.4,
+  topReentrySwayAmplitude:12,
+  topReentrySwayHz:2.35,
   playerRespawnDelay:1.35,
   playerInvulnerability:.95,
   waveClearDelay:1.2,
@@ -193,8 +193,9 @@ function guardiansBeginTopReentry(state,alien){
  alien.mode='wrapping';
  alien.diveT=0;
  alien.wrapStartX=Math.max(16,Math.min(rules.playfieldWidth-16,alien.x));
- alien.wrapStartY=-Math.max(12,rules.bottomExitPadding+alien.row*2.5);
- alien.wrapTargetX=alien.rackX+alien.diveSide*4;
+ alien.wrapStartY=-Math.max(20,rules.bottomExitPadding+alien.row*3.6);
+ alien.wrapTargetX=alien.rackX+alien.diveSide*7;
+ alien.wrapSweepX=alien.wrapStartX+alien.diveSide*13;
  alien.wrapTargetY=alien.rackY;
  alien.x=alien.wrapStartX;
  alien.y=alien.wrapStartY;
@@ -613,24 +614,27 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
    alien.y=alien.rackY+bob;
    continue;
   }
-  if(alien.mode==='wrapping'){
-   alien.diveT+=dt;
-   const q=Math.max(0,alien.diveT);
-   const blend=Math.min(1,q/1.18);
-   const sway=Math.sin(q*rules.topReentrySwayHz)*rules.topReentrySwayAmplitude*alien.diveSide*(1-blend*.35);
-   alien.x=alien.wrapStartX+(alien.wrapTargetX-alien.wrapStartX)*blend+sway;
-   alien.y=alien.wrapStartY+q*rules.topReentryVy+q*q*rules.topReentryAccel;
-   if(alien.y>=alien.rackY){
-    alien.mode='formation';
-    alien.diveT=0;
-    alien.linkedTo='';
-    alien.escortSlot=0;
-    alien.escorts=0;
-    alien.x=alien.rackX;
-    alien.y=alien.rackY;
-   }
-   continue;
+ if(alien.mode==='wrapping'){
+  alien.diveT+=dt;
+  const q=Math.max(0,alien.diveT);
+  const blend=Math.min(1,q/1.34);
+  const eased=1-Math.pow(1-blend,2.15);
+  const sway=Math.sin(q*rules.topReentrySwayHz)*rules.topReentrySwayAmplitude*alien.diveSide*(1-blend*.28);
+  const sweep=Math.sin(blend*Math.PI)*(Math.max(-18,Math.min(18,(alien.wrapSweepX||alien.wrapStartX)-alien.wrapStartX)));
+  alien.x=alien.wrapStartX+(alien.wrapTargetX-alien.wrapStartX)*eased+sway+sweep;
+  alien.y=alien.wrapStartY+q*rules.topReentryVy+q*q*rules.topReentryAccel;
+  if(alien.y>=alien.rackY){
+   alien.mode='formation';
+   alien.diveT=0;
+   alien.linkedTo='';
+   alien.escortSlot=0;
+   alien.escorts=0;
+   alien.wrapSweepX=0;
+   alien.x=alien.rackX;
+   alien.y=alien.rackY;
   }
+  continue;
+ }
   alien.diveT+=dt;
   const leader=alien.linkedTo?state.aliens.find(candidate=>candidate.id===alien.linkedTo&&candidate.hp>0):null;
   if(leader&&leader.mode==='diving'){

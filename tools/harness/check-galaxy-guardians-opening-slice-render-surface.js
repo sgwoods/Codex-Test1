@@ -114,11 +114,15 @@ async function main(){
 
   const firstStars = Array.isArray(result.first.starfieldLeadSample) ? result.first.starfieldLeadSample : [];
   const secondStars = Array.isArray(result.second.starfieldLeadSample) ? result.second.starfieldLeadSample : [];
-  const starfieldMoved = firstStars.length === secondStars.length && firstStars.some((star, index) => {
+  const starfieldTravel = firstStars.length === secondStars.length ? firstStars.map((star, index) => {
     const later = secondStars[index] || {};
-    return Math.abs((+later.y || 0) - (+star.y || 0)) > 0.5;
-  });
-  if(!starfieldMoved){
+    return Math.max(
+      Math.abs((+later.y || 0) - (+star.y || 0)),
+      Math.abs((+later.x || 0) - (+star.x || 0))
+    );
+  }) : [];
+  const requiredTravel = +cfg.minimumStarfieldLeadTravelPxBetweenSamples || 0.5;
+  if(!starfieldTravel.some(distance => distance >= requiredTravel)){
     fail('Opening-slice board starfield did not visibly move between samples', result);
   }
   const marchOffsets = [result.first, result.second, result.third]
@@ -133,6 +137,10 @@ async function main(){
 
   if(!result.runtimeWrap.firstWrappingSample || !result.runtimeWrap.firstWrappingSample.wrapping.length){
     fail('Runtime did not produce a visible top re-entry sample after bottom pass-through', result);
+  }
+  const maximumTopReentryLeadY = Number.isFinite(+cfg.maximumTopReentryLeadY) ? +cfg.maximumTopReentryLeadY : -1;
+  if(!(result.runtimeWrap.firstWrappingSample.wrapping.some(alien => +alien.y <= maximumTopReentryLeadY))){
+    fail('Top re-entry sample did not begin far enough above the board to read as a continuous return', result);
   }
   if(!result.runtimeWrap.firstWrappingSample.wrapping.some(alien => +alien.y < 0)){
     fail('Top re-entry sample did not place a wrapping alien back above the top of the board', result);

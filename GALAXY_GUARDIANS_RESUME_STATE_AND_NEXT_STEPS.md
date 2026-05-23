@@ -1,6 +1,6 @@
 # Galaxy Guardians Resume State And Next Steps
 
-Updated: May 17, 2026
+Updated: May 23, 2026
 
 ## Purpose
 
@@ -29,9 +29,11 @@ Use this together with:
 
 ### Hosted dev state
 
-- Hosted `/dev` currently carries the checked build
-  `1.4.0.1+build.780.sha.6d76050d`.
-- That lane includes the updated Guardians docs plus the new rack-motion pass.
+- Hosted `/dev` may still lag the latest local opening-slice source changes if
+  this note is being read before the next dev publish.
+- Treat this note and the repo artifacts as the durable current state for the
+  Guardians conformance program rather than assuming every local pass has
+  already been pushed to the lane.
 
 ### What the public game truth still is
 
@@ -75,30 +77,43 @@ The opening rack now has a dedicated measured contract:
 The practical meaning is: the runtime is now broad and unified enough to read
 much more like a real opening sweep.
 
+### 4. Starfield and top-reentry motion are stronger now
+
+The current source now also carries:
+
+- a denser `104`-star opening field with directional drift instead of the older
+  lighter scatter
+- a stronger render contract that requires visible star travel between samples
+- a top-reentry path that now begins at `y <= -20` and settles back in more
+  gradually instead of reading like a shallow snap-back
+
+The practical meaning is: the opening board feels more alive, and wrap return
+is easier to read as a continuous threat loop.
+
 ## What Is Still Obviously Missing
 
 These are the most important remaining misses in the visible public slice.
 
-### 1. Starfield motion still needs its own tighter evidence pass
-
-The starfield is now present and alive, but it does not yet have the same level
-of measured authority as the rack motion.
-
-### 2. Top-reentry continuity still needs a stronger visible timing target
-
-The runtime does re-enter from the top now, and the harness proves that path is
-real, but the visible timing and continuity still need to be tightened against
-the long-session source.
-
-### 3. `WAIT` and score-table layout still need frame-extracted tightening
+### 1. `WAIT` and score-table layout still need frame-extracted tightening
 
 The copy and structure are closer than they were, but they are still adapted
 runtime surfaces rather than a fully frame-matched cabinet read.
 
-### 4. Explosion and hit states are still under-authoritative
+### 2. Starfield motion and top-reentry still need stronger measured targets
+
+The runtime now has visibly better motion in both areas, but they still do not
+have the same evidence weight as the rack-motion contract.
+
+### 3. Explosion and hit states are still under-authoritative
 
 Combat now reads better than before, but hit/destruction states still lag the
 source in clarity and feel.
+
+### 4. Palette progression and swarm color authority are still partial
+
+The opening palette family is closer than before, but it still needs a more
+deliberate stage-appropriate color read instead of a mostly runtime-tuned
+approximation.
 
 ### 5. Platform-frame parity is still incomplete
 
@@ -116,12 +131,12 @@ Guardians still needs to sit in Platinum as naturally as Aurora across:
 This is the best next sequence if we want the highest conformance return for
 time and compute.
 
-1. Tighten moving starfield motion and top-reentry timing against the committed
-   intro and long-session windows.
-2. Tighten `WAIT`, headline, and score-table layout/copy against frame-extracted
+1. Tighten `WAIT`, headline, and score-table layout/copy against frame-extracted
    intro evidence.
-3. Improve explosion, hit, and destruction-state readability.
-4. Tighten opening palette progression and swarm color-family authority.
+2. Improve explosion, hit, and destruction-state readability.
+3. Tighten opening palette progression and swarm color-family authority.
+4. Promote stronger measured starfield-motion and top-reentry windows so those
+   surfaces have evidence parity with the rack-motion contract.
 5. Add real Aurora-versus-Guardians platform-frame parity scoring and finish the
    shared frame work.
 6. After the visible opening slice is credible, continue into stage `3-5`

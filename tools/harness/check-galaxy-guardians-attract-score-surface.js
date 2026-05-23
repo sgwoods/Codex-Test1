@@ -68,15 +68,17 @@ async function main(){
     return { waitShowcase, previewModal };
   });
 
-  for(const phrase of [
-    'WE ARE THE GALAXY GUARDIANS',
-    'MISSION: BREAK THE SIGNAL RACK',
-    'WATCH FOR FLAGSHIP ESCORT DIVES',
-    'SINGLE SHOT ONLY - MAKE IT COUNT',
-    'SCORE ADVANCE TABLE',
-    'Signal Scout',
-    'Signal Escort',
-    'Signal Flagship',
+	  for(const phrase of [
+	    'WE ARE THE GALAXY GUARDIANS',
+	    'MISSION: DESTROY ALIENS',
+	    'WATCH FOR FLAGSHIP CHARGER DIVES',
+	    'SINGLE SHOT ONLY - MAKE IT COUNT',
+	    'SCORE ADVANCE TABLE',
+	    'CONVOY',
+	    'CHARGER',
+	    'Signal Scout',
+	    'Signal Escort',
+	    'Signal Flagship',
     '800'
   ]){
     if(!result.waitShowcase.text.includes(phrase)){

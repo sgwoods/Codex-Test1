@@ -2187,19 +2187,26 @@ function syncGamePreviewUi(){
    : '';
   gamePreviewMission.hidden=!mission;
  }
- if(gamePreviewScoreTable){
-  const rows=Array.isArray(preview.scoreAdvanceTable)?preview.scoreAdvanceTable.filter(row=>row&&row.role!=='player'):[];
-  gamePreviewScoreTable.innerHTML=rows.length
-   ? [
-    '<span class="gamePreviewScoreTitle">SCORE ADVANCE TABLE</span>',
-    '<span class="gamePreviewScoreHead">Alien</span>',
-    '<span class="gamePreviewScoreHead gamePreviewScoreCell">Rack</span>',
-    '<span class="gamePreviewScoreHead gamePreviewScoreCell">Dive</span>',
-    '<span class="gamePreviewScoreHead gamePreviewScoreCell gamePreviewScoreEscort">+1</span>',
-    '<span class="gamePreviewScoreHead gamePreviewScoreCell">+2</span>',
-    ...rows.flatMap(row=>[
-     `<span class="gamePreviewScoreLabel">${escapeGamePreviewHtml(row.label||row.role||'Signal')}</span>`,
-     `<span class="gamePreviewScoreCell">${escapeGamePreviewHtml(previewScoreValue(row.formationPoints))}</span>`,
+	if(gamePreviewScoreTable){
+	 const rows=Array.isArray(preview.scoreAdvanceTable)?preview.scoreAdvanceTable.filter(row=>row&&row.role!=='player'):[];
+	 const presentation=preview.scoreAdvancePresentation&&typeof preview.scoreAdvancePresentation==='object'?preview.scoreAdvancePresentation:{};
+	 const title=escapeGamePreviewHtml(presentation.title||'SCORE ADVANCE TABLE');
+	 const labelHeader=escapeGamePreviewHtml(presentation.labelHeader||'Alien');
+	 const formationHeader=escapeGamePreviewHtml(presentation.formationHeader||'Rack');
+	 const diveHeader=escapeGamePreviewHtml(presentation.diveHeader||'Dive');
+	 const oneEscortHeader=escapeGamePreviewHtml(presentation.oneEscortHeader||'+1');
+	 const twoEscortHeader=escapeGamePreviewHtml(presentation.twoEscortHeader||'+2');
+	 gamePreviewScoreTable.innerHTML=rows.length
+	  ? [
+	   `<span class="gamePreviewScoreTitle">${title}</span>`,
+	   `<span class="gamePreviewScoreHead">${labelHeader}</span>`,
+	   `<span class="gamePreviewScoreHead gamePreviewScoreCell">${formationHeader}</span>`,
+	   `<span class="gamePreviewScoreHead gamePreviewScoreCell">${diveHeader}</span>`,
+	   `<span class="gamePreviewScoreHead gamePreviewScoreCell gamePreviewScoreEscort">${oneEscortHeader}</span>`,
+	   `<span class="gamePreviewScoreHead gamePreviewScoreCell">${twoEscortHeader}</span>`,
+	   ...rows.flatMap(row=>[
+	    `<span class="gamePreviewScoreLabel">${escapeGamePreviewHtml(row.label||row.role||'Signal')}</span>`,
+	    `<span class="gamePreviewScoreCell">${escapeGamePreviewHtml(previewScoreValue(row.formationPoints))}</span>`,
      `<span class="gamePreviewScoreCell">${escapeGamePreviewHtml(previewScoreValue(row.divePoints))}</span>`,
      `<span class="gamePreviewScoreCell gamePreviewScoreEscort">${escapeGamePreviewHtml(previewScoreValue(row.oneEscortDivePoints)||'-')}</span>`,
      `<span class="gamePreviewScoreCell">${escapeGamePreviewHtml(previewScoreValue(row.twoEscortDivePoints)||'-')}</span>`

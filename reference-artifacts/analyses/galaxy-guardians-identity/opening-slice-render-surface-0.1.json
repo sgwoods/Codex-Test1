@@ -2,7 +2,7 @@
   "gameKey": "galaxy-guardians-preview",
   "artifactType": "opening-slice-render-surface",
   "version": "0.1-dev-preview",
-  "createdOn": "2026-05-15",
+  "createdOn": "2026-05-23",
   "status": "opening-slice-render-contract-not-frame-extracted",
   "sourceEvidence": {
     "introManifest": "reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/source-manifest.json",
@@ -25,9 +25,11 @@
     "stage": 1,
     "ships": 3,
     "seed": 1979,
-    "minimumStarfieldCount": 96,
+    "minimumStarfieldCount": 100,
+    "minimumStarfieldLeadTravelPxBetweenSamples": 4,
     "reserveShipCount": 2,
     "minimumStageFlagCount": 1,
+    "maximumTopReentryLeadY": -20,
     "requiredHudLabels": [
       "1UP",
       "HIGH SCORE"

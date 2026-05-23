@@ -13,17 +13,19 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
   id:'signal-rack',
   label:'Signal Rack',
   group:'guardians-preview',
-  starfield:Object.freeze({
+ starfield:Object.freeze({
    id:'guardians-signal-stars',
-   count:96,
-   sizeMin:.82,
-   sizeMax:1.42,
+   count:104,
+   sizeMin:.78,
+   sizeMax:1.48,
    alphaMin:.38,
    alphaMax:.92,
-   twinkleMin:.82,
-   twinkleAmp:.18,
-   speedMin:9,
-   speedMax:24,
+   twinkleMin:.8,
+   twinkleAmp:.2,
+   speedMin:14,
+   speedMax:32,
+   driftMin:-6,
+   driftMax:6,
    palette:Object.freeze(['#fffdf0','#ffe26a','#ff5b5b','#7bd6ff','#4af26d','#f6f0ff'])
   }),
   backgrounds:Object.freeze({
@@ -39,17 +41,19 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
   id:'escort-pursuit',
   label:'Escort Pursuit',
   group:'guardians-preview',
-  starfield:Object.freeze({
+ starfield:Object.freeze({
    id:'guardians-escort-pursuit',
-   count:108,
+    count:108,
    sizeMin:.8,
    sizeMax:1.5,
    alphaMin:.34,
    alphaMax:.9,
    twinkleMin:.78,
    twinkleAmp:.2,
-   speedMin:12,
-   speedMax:30,
+   speedMin:16,
+   speedMax:34,
+   driftMin:-7,
+   driftMax:7,
    palette:Object.freeze(['#fff4dc','#ffd86d','#ff8c5a','#7bd6ff','#59f6c2','#d8f0ff'])
   }),
   backgrounds:Object.freeze({
@@ -65,7 +69,7 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
   id:'deep-radar',
   label:'Deep Radar',
   group:'guardians-preview',
-  starfield:Object.freeze({
+ starfield:Object.freeze({
    id:'guardians-deep-radar',
    count:118,
    sizeMin:.74,
@@ -74,8 +78,10 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
    alphaMax:.88,
    twinkleMin:.76,
    twinkleAmp:.22,
-   speedMin:15,
-   speedMax:34,
+   speedMin:18,
+   speedMax:38,
+   driftMin:-8,
+   driftMax:8,
    palette:Object.freeze(['#f8fbff','#7bd6ff','#4b7dff','#58f2a3','#ffd86d','#ff7b76'])
   }),
   backgrounds:Object.freeze({
@@ -91,7 +97,7 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
   id:'signal-overload',
   label:'Signal Overload',
   group:'guardians-preview',
-  starfield:Object.freeze({
+ starfield:Object.freeze({
    id:'guardians-signal-overload',
    count:128,
    sizeMin:.72,
@@ -100,8 +106,10 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
    alphaMax:.96,
    twinkleMin:.72,
    twinkleAmp:.24,
-   speedMin:18,
-   speedMax:38,
+   speedMin:22,
+   speedMax:42,
+   driftMin:-9,
+   driftMax:9,
    palette:Object.freeze(['#fff8d9','#ffd86d','#ff5b5b','#ff9b54','#7bd6ff','#4af26d'])
   }),
   backgrounds:Object.freeze({
@@ -366,16 +374,26 @@ const GUARDIANS_SCORE_ADVANCE_TABLE=Object.freeze([
  })
 ]);
 
+const GUARDIANS_SCORE_ADVANCE_PRESENTATION=Object.freeze({
+ title:'SCORE ADVANCE TABLE',
+ labelHeader:'RANK',
+ formationHeader:'CONVOY',
+ diveHeader:'CHARGER',
+ oneEscortHeader:'+1',
+ twoEscortHeader:'+2',
+ referenceIntent:'Use canonical CONVOY / CHARGER score-table framing while preserving Guardians-specific escorted-dive columns and live scoring values.'
+});
+
 const GUARDIANS_ATTRACT_MISSION=Object.freeze({
  id:'guardians-attract-mission-0.1',
  title:'WE ARE THE GALAXY GUARDIANS',
  lines:Object.freeze([
-  'MISSION: BREAK THE SIGNAL RACK',
-  'WATCH FOR FLAGSHIP ESCORT DIVES',
+  'MISSION: DESTROY ALIENS',
+  'WATCH FOR FLAGSHIP CHARGER DIVES',
   'SINGLE SHOT ONLY - MAKE IT COUNT'
  ]),
  scoreAdvanceTableId:'guardians-score-advance-table-0.1',
- referenceIntent:'Guardians-owned mission and score-table language derived from Galaxian attract/score-table promoted windows, not Aurora wait-mode copy.'
+ referenceIntent:'Preserve the canonical mission phrase and CONVOY / CHARGER scoring language from the promoted Galaxian reference while keeping the Guardians title and single-shot runtime identity.'
 });
 
 const GALAXY_GUARDIANS_APPLICATION_RELEASE=Object.freeze(applicationReleaseRecord('galaxy-guardians-preview',{
@@ -463,6 +481,7 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
  audioCueCatalog:GUARDIANS_AUDIO_CUE_CATALOG,
  attractMission:GUARDIANS_ATTRACT_MISSION,
  scoreAdvanceTable:GUARDIANS_SCORE_ADVANCE_TABLE,
+ scoreAdvancePresentation:GUARDIANS_SCORE_ADVANCE_PRESENTATION,
  referenceTimings:GUARDIANS_REFERENCE_TIMINGS,
  stageCadence:GUARDIANS_STAGE_CADENCE,
  stageBandProfiles:GUARDIANS_STAGE_BAND_PROFILES,

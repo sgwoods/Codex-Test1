@@ -1,6 +1,6 @@
 # Galaxy Guardians Opening-Slice Baseline
 
-Updated: May 17, 2026
+Updated: May 23, 2026
 
 ## Purpose
 
@@ -110,27 +110,32 @@ threat model:
 ### Already present
 
 - moving starfield is now visible in the Guardians preview board
+- starfield motion is now denser and more directional instead of reading like a
+  near-static decorative scatter
 - reserve ships and stage flags are visible
 - a ready-to-fire missile cue is visible
-- top re-entry exists as an explicit runtime path
+- top re-entry now begins higher above the board and sweeps back in more
+  continuously instead of reading like a shallow pop-in
 - the hosted docs now expose a stage assessment, a top-10 queue, and the full
   deeper Guardians planning stack
 
 ### Still partial
 
-- `WAIT` / attract copy is still more adapted than source-faithful
-- score-table structure is still an application-owned approximation rather than
-  a true four-row `CONVOY` / `CHARGER` cabinet match
+- the title line remains a Guardians-owned adaptation even though the primary
+  mission line now preserves the canonical `MISSION: DESTROY ALIENS` phrase
+- score-table framing now uses `CONVOY` / `CHARGER`, but the current runtime
+  still presents a three-row application-owned adaptation rather than a true
+  four-row cabinet match
 - rack march cadence now has its own object-track-derived opening contract, but
-  the runtime still needs the next starfield and re-entry pass to make the
-  whole opening board feel equally source-faithful
+  the starfield and re-entry surfaces still need measured target windows of the
+  same quality before the whole opening board feels equally source-faithful
 - explosions and hit states still need stronger baseline authority
 
 ### Still next
 
 - frame-extracted intro crops for title, mission, and score-table layout
-- stronger measured starfield-motion and top-reentry windows to pair with the
-  new opening-rack motion contract
+- stronger measured starfield-motion and top-reentry windows so those surfaces
+  have the same evidence quality as the opening-rack motion contract
 - tighter palette progression and readiness-surface comparison
 
 ## Why This Matters Before Deeper Stages
@@ -149,11 +154,11 @@ This opening baseline exists to keep the work honest:
 
 1. Preserve the opening-source baseline as a committed artifact and hosted
    readable doc, not only as raw source manifests.
-2. Tighten `WAIT` / mission and score-table fidelity against the Matt Hawkins
+2. Tighten `WAIT`, headline, and score-table fidelity against the Matt Hawkins
    intro.
-3. Tighten rack march cadence, starfield motion, and top re-entry against the
-   Nenriki session.
-4. Only after those land, spend heavier effort on stage `3-5` and `6-9`
+3. Improve explosion, hit, and destruction-state readability.
+4. Tighten opening palette progression and readiness-surface comparison.
+5. Only after those land, spend heavier effort on stage `3-5` and `6-9`
    pressure tuning.
 
 ## Practical Conformance Meaning
