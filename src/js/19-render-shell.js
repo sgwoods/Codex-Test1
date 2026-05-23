@@ -77,6 +77,15 @@ function collectMessageLines(...parts){
  return lines;
 }
 
+function messageClassSuffix(value=''){
+ return String(value||'')
+  .trim()
+  .replace(/[^a-zA-Z0-9_-]+/g,' ')
+  .split(/\s+/)
+  .filter(Boolean)
+  .join(' ');
+}
+
 function buildBoardMessageHtml({title='',accent='',score='',lines=[]}={}){
  const body=[];
  if(title)body.push(`<span class="boardTitle">${escapeMessageHtml(title)}</span>`);
@@ -92,13 +101,15 @@ function buildStartMissionHtml(mission=null){
  if(!mission)return '';
  const lines=Array.isArray(mission.lines)?mission.lines:[];
  const title=mission.title||'MISSION';
- return `<span class="startMissionWrap"><span class="startMissionTitle">${escapeMessageHtml(title)}</span>${lines.map(line=>`<span class="startMissionLine">${escapeMessageHtml(line)}</span>`).join('')}</span>`;
+ const className=messageClassSuffix(mission.layoutClass||mission.className||'');
+ return `<span class="startMissionWrap${className?` ${className}`:''}"><span class="startMissionTitle">${escapeMessageHtml(title)}</span>${lines.map(line=>`<span class="startMissionLine">${escapeMessageHtml(line)}</span>`).join('')}</span>`;
 }
 
 function buildStartScoreAdvanceHtml(rows=[],presentation=null){
  const scoreRows=Array.isArray(rows)?rows.filter(row=>row&&row.role!=='player'):[];
  if(!scoreRows.length)return '';
  const headers=presentation&&typeof presentation==='object'?presentation:{};
+ const className=messageClassSuffix(headers.layoutClass||headers.className||'');
  const value=valueIn=>{
   const number=+valueIn;
   return Number.isFinite(number)?String(number):'-';
@@ -109,12 +120,12 @@ function buildStartScoreAdvanceHtml(rows=[],presentation=null){
  const diveHeader=headers.diveHeader||'Dive';
  const oneEscortHeader=headers.oneEscortHeader||'+1';
  const twoEscortHeader=headers.twoEscortHeader||'+2';
- return `<span class="startScoreAdvance"><span class="scoreTitle">${escapeMessageHtml(title)}</span><span class="scoreHead scoreLabel">${escapeMessageHtml(labelHeader)}</span><span class="scoreHead">${escapeMessageHtml(formationHeader)}</span><span class="scoreHead">${escapeMessageHtml(diveHeader)}</span><span class="scoreHead">${escapeMessageHtml(oneEscortHeader)}</span><span class="scoreHead">${escapeMessageHtml(twoEscortHeader)}</span>${scoreRows.map(row=>[
-  `<span class="scoreLabel">${escapeMessageHtml(row.label||row.role||'Signal')}</span>`,
-  `<span>${escapeMessageHtml(value(row.formationPoints))}</span>`,
-  `<span>${escapeMessageHtml(value(row.divePoints))}</span>`,
-  `<span class="${row.oneEscortDivePoints?'':'scoreMuted'}">${escapeMessageHtml(value(row.oneEscortDivePoints))}</span>`,
-  `<span class="${row.twoEscortDivePoints?'':'scoreMuted'}">${escapeMessageHtml(value(row.twoEscortDivePoints))}</span>`
+ return `<span class="startScoreAdvance${className?` ${className}`:''}"><span class="scoreTitle">${escapeMessageHtml(title)}</span><span class="scoreHead scoreLabel">${escapeMessageHtml(labelHeader)}</span><span class="scoreHead scoreValueFormation">${escapeMessageHtml(formationHeader)}</span><span class="scoreHead scoreValueDive">${escapeMessageHtml(diveHeader)}</span><span class="scoreHead scoreValueEscort scoreValueEscortOne">${escapeMessageHtml(oneEscortHeader)}</span><span class="scoreHead scoreValueEscort scoreValueEscortTwo">${escapeMessageHtml(twoEscortHeader)}</span>${scoreRows.map(row=>[
+  `<span class="scoreLabel"><span class="scoreLabelText">${escapeMessageHtml(row.scoreLabel||row.label||row.role||'Signal')}</span></span>`,
+  `<span class="scoreValue scoreValueFormation">${escapeMessageHtml(value(row.formationPoints))}</span>`,
+  `<span class="scoreValue scoreValueDive">${escapeMessageHtml(value(row.divePoints))}</span>`,
+  `<span class="scoreValue scoreValueEscort scoreValueEscortOne ${row.oneEscortDivePoints?'':'scoreMuted'}">${escapeMessageHtml(value(row.oneEscortDivePoints))}</span>`,
+  `<span class="scoreValue scoreValueEscort scoreValueEscortTwo ${row.twoEscortDivePoints?'':'scoreMuted'}">${escapeMessageHtml(value(row.twoEscortDivePoints))}</span>`
  ].join('')).join('')}</span>`;
 }
 

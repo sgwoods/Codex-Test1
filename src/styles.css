@@ -138,8 +138,24 @@ mask:
 #msg .startScoreAdvance span{text-align:right;white-space:nowrap}
 #msg .startScoreAdvance .scoreTitle{grid-column:1/-1;text-align:center;color:#f4fbff;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.06em}
 #msg .startScoreAdvance .scoreLabel{text-align:left;color:#f4fbff;font-weight:700}
+#msg .startScoreAdvance .scoreLabelText{display:inline-block}
 #msg .startScoreAdvance .scoreHead{color:#ffe39a;font-weight:700;text-transform:uppercase}
+#msg .startScoreAdvance .scoreValue{text-align:right}
 #msg .startScoreAdvance .scoreMuted{color:rgba(223,247,255,.68)}
+#msg .startMissionWrap.guardiansMission{gap:.1em;margin:.16em auto 0;max-width:min(100%,23em)}
+#msg .startMissionWrap.guardiansMission .startMissionTitle{color:#ff5b5b;font-size:.56em;line-height:1.08;letter-spacing:.12em}
+#msg .startMissionWrap.guardiansMission .startMissionLine{font-size:.39em;line-height:1.12;letter-spacing:.06em}
+#msg .startMissionWrap.guardiansMission .startMissionLine:nth-of-type(1){color:#ffd4a8}
+#msg .startMissionWrap.guardiansMission .startMissionLine:nth-of-type(2){color:#ffb997}
+#msg .startMissionWrap.guardiansMission .startMissionLine:nth-of-type(3){color:#ffe39a}
+#msg .startScoreAdvance.guardiansScoreAdvance{grid-template-columns:minmax(7.35em,auto) repeat(4,minmax(2.85em,auto));gap:.04em .34em;width:min(100%,24.2em);margin:.16em auto 0;font-size:.34em;line-height:1.12}
+#msg .startScoreAdvance.guardiansScoreAdvance .scoreTitle{color:#ffe39a;letter-spacing:.18em;margin-bottom:.04em}
+#msg .startScoreAdvance.guardiansScoreAdvance .scoreLabel{color:#f7fbff}
+#msg .startScoreAdvance.guardiansScoreAdvance .scoreLabelText{max-width:7.35em;overflow:hidden;text-overflow:ellipsis}
+#msg .startScoreAdvance.guardiansScoreAdvance .scoreHead{color:#ffb765}
+#msg .startScoreAdvance.guardiansScoreAdvance .scoreValueDive{color:#ffe39a}
+#msg .startScoreAdvance.guardiansScoreAdvance .scoreValueEscortOne{color:#7bd6ff}
+#msg .startScoreAdvance.guardiansScoreAdvance .scoreValueEscortTwo{color:#ff9f64}
 #msg .resultsTable{display:grid;grid-template-columns:auto auto;gap:.16em 1.2em;justify-content:center;font-size:.82em;line-height:1.18;text-align:right}
 #msg .resultsLabel{color:#ff6f66;text-align:left}
 #msg .resultsValue{color:#f4f7ff;min-width:4.5em}
@@ -310,6 +326,17 @@ mask:
 .gamePreviewScoreHead{color:#ffe39a;font-weight:700;text-transform:uppercase}
 .gamePreviewScoreLabel{color:#f4fbff;font-weight:700}
 .gamePreviewScoreCell{text-align:right;white-space:nowrap}
+#gamePreviewMission.guardiansMission{gap:4px;padding:7px 10px}
+#gamePreviewMission.guardiansMission .gamePreviewMissionTitle{color:#ff5b5b;letter-spacing:.12em}
+#gamePreviewMission.guardiansMission .gamePreviewMissionLine:nth-of-type(2){color:#ffd4a8}
+#gamePreviewMission.guardiansMission .gamePreviewMissionLine:nth-of-type(3){color:#ffb997}
+#gamePreviewMission.guardiansMission .gamePreviewMissionLine:nth-of-type(4){color:#ffe39a}
+#gamePreviewScoreTable.guardiansScoreAdvance{grid-template-columns:minmax(82px,1fr) repeat(4,minmax(38px,auto));gap:3px 6px;padding:7px 9px;font-size:9px;line-height:1.14}
+#gamePreviewScoreTable.guardiansScoreAdvance .gamePreviewScoreTitle{color:#ffe39a;letter-spacing:.18em}
+#gamePreviewScoreTable.guardiansScoreAdvance .gamePreviewScoreHead{color:#ffb765}
+#gamePreviewScoreTable.guardiansScoreAdvance .gamePreviewScoreCell:nth-child(6n+4){color:#ffe39a}
+#gamePreviewScoreTable.guardiansScoreAdvance .gamePreviewScoreCell.gamePreviewScoreEscort{color:#7bd6ff}
+#gamePreviewScoreTable.guardiansScoreAdvance .gamePreviewScoreCell:last-child{color:#ff9f64}
 #gamePreviewMilestones{display:grid;gap:6px;margin-top:2px}
 .gamePreviewMilestone{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid rgba(136,245,255,.14);background:rgba(8,18,35,.62);padding:7px 9px;font:400 11px/1.25 "Courier New",Consolas,monospace;color:#dff7ff}
 .gamePreviewMilestone b{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#ffe39a}
@@ -330,6 +357,8 @@ mask:
  #gamePreviewMission{gap:2px;padding:4px 6px;font-size:8px;line-height:1.08}
  #gamePreviewScoreTable{grid-template-columns:minmax(68px,1fr) repeat(3,minmax(32px,auto));gap:1px 4px;padding:4px 6px;font-size:7px;line-height:1.06}
  .gamePreviewScoreEscort{display:none}
+ #gamePreviewMission.guardiansMission{padding:4px 6px}
+ #gamePreviewScoreTable.guardiansScoreAdvance{grid-template-columns:minmax(68px,1fr) repeat(3,minmax(32px,auto));gap:1px 4px;padding:4px 6px;font-size:7px;line-height:1.06}
  #gamePreviewMilestones{gap:4px}
  .gamePreviewMilestone{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:5px;padding:2px 5px;font-size:8px;line-height:1.06}
  .gamePreviewMilestone span{min-width:0;overflow-wrap:anywhere}

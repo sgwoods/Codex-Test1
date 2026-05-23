@@ -26,7 +26,13 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
    speedMax:32,
    driftMin:-6,
    driftMax:6,
-   palette:Object.freeze(['#fffdf0','#ffe26a','#ff5b5b','#7bd6ff','#4af26d','#f6f0ff'])
+   palette:Object.freeze(['#fffdf0','#ffe26a','#ff5b5b','#7bd6ff','#5a6dff','#f6f0ff'])
+  }),
+  previewPalettes:Object.freeze({
+   'signal-flagship':Object.freeze({core:'#ffd86d',wing:'#ff5b5b',accent:'#5ea8ff',eye:'#fff7c2',flare:'#fff2a4'}),
+   'signal-escort':Object.freeze({core:'#ff6660',wing:'#dff7ff',accent:'#5ea8ff',eye:'#ffffff',flare:'#ffe06d'}),
+   'signal-scout':Object.freeze({core:'#72baff',wing:'#4b7dff',accent:'#ffdf6f',eye:'#f8fbff',flare:'#ff5b5b'}),
+   'player-interceptor':Object.freeze({core:'#dff7ff',wing:'#7bd6ff',accent:'#ffdf6f',eye:'#ffffff',flare:'#ff5b5b'})
   }),
   backgrounds:Object.freeze({
    frontDoor:'classic-stars',
@@ -54,7 +60,13 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
    speedMax:34,
    driftMin:-7,
    driftMax:7,
-   palette:Object.freeze(['#fff4dc','#ffd86d','#ff8c5a','#7bd6ff','#59f6c2','#d8f0ff'])
+   palette:Object.freeze(['#fff4dc','#ffd86d','#ff8c5a','#7bd6ff','#59a8ff','#d8f0ff'])
+  }),
+  previewPalettes:Object.freeze({
+   'signal-flagship':Object.freeze({core:'#ffe49c',wing:'#ff8c5a',accent:'#7bd6ff',eye:'#fff7c2',flare:'#ffdf6f'}),
+   'signal-escort':Object.freeze({core:'#ff846d',wing:'#fff0d8',accent:'#7bd6ff',eye:'#ffffff',flare:'#ffe06d'}),
+   'signal-scout':Object.freeze({core:'#82c2ff',wing:'#5f83ff',accent:'#ffd86d',eye:'#f8fbff',flare:'#ff8c5a'}),
+   'player-interceptor':Object.freeze({core:'#e9fbff',wing:'#7bd6ff',accent:'#ffd86d',eye:'#ffffff',flare:'#ff8c5a'})
   }),
   backgrounds:Object.freeze({
    frontDoor:'classic-stars',
@@ -82,7 +94,13 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
    speedMax:38,
    driftMin:-8,
    driftMax:8,
-   palette:Object.freeze(['#f8fbff','#7bd6ff','#4b7dff','#58f2a3','#ffd86d','#ff7b76'])
+   palette:Object.freeze(['#f8fbff','#7bd6ff','#4b7dff','#7a6dff','#ffd86d','#ff7b76'])
+  }),
+  previewPalettes:Object.freeze({
+   'signal-flagship':Object.freeze({core:'#ffe39a',wing:'#ff7b76',accent:'#7bd6ff',eye:'#fff7c2',flare:'#5f83ff'}),
+   'signal-escort':Object.freeze({core:'#ff7b76',wing:'#d8f0ff',accent:'#7a6dff',eye:'#ffffff',flare:'#ffd86d'}),
+   'signal-scout':Object.freeze({core:'#7bd6ff',wing:'#5f83ff',accent:'#ffd86d',eye:'#f8fbff',flare:'#7a6dff'}),
+   'player-interceptor':Object.freeze({core:'#e9fbff',wing:'#7bd6ff',accent:'#ffd86d',eye:'#ffffff',flare:'#ff7b76'})
   }),
   backgrounds:Object.freeze({
    frontDoor:'classic-stars',
@@ -110,7 +128,13 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
    speedMax:42,
    driftMin:-9,
    driftMax:9,
-   palette:Object.freeze(['#fff8d9','#ffd86d','#ff5b5b','#ff9b54','#7bd6ff','#4af26d'])
+   palette:Object.freeze(['#fff8d9','#ffd86d','#ff5b5b','#ff9b54','#7bd6ff','#6a7dff'])
+  }),
+  previewPalettes:Object.freeze({
+   'signal-flagship':Object.freeze({core:'#fff0a5',wing:'#ff9b54',accent:'#7bd6ff',eye:'#fff7c2',flare:'#ff5b5b'}),
+   'signal-escort':Object.freeze({core:'#ff8d63',wing:'#ffe7cf',accent:'#7bd6ff',eye:'#ffffff',flare:'#ffd86d'}),
+   'signal-scout':Object.freeze({core:'#92cbff',wing:'#6a7dff',accent:'#ffd86d',eye:'#f8fbff',flare:'#ff5b5b'}),
+   'player-interceptor':Object.freeze({core:'#f1fdff',wing:'#7bd6ff',accent:'#ffd86d',eye:'#ffffff',flare:'#ff5b5b'})
   }),
   backgrounds:Object.freeze({
    frontDoor:'classic-stars',
@@ -137,7 +161,7 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   label:'Signal Flagship',
   role:'flagship',
   silhouette:'crowned-command-ship',
-  palette:Object.freeze({core:'#ffdf6f',wing:'#ff5b5b',accent:'#7bd6ff',eye:'#fff7c2',flare:'#ff9f43'}),
+  palette:Object.freeze({core:'#ffd86d',wing:'#ff5b5b',accent:'#5ea8ff',eye:'#fff7c2',flare:'#fff2a4'}),
   pixelRows:Object.freeze([
    '...A.A...',
    '...CCC...',
@@ -155,7 +179,7 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   label:'Signal Escort',
   role:'escort',
   silhouette:'red-arrow-escort',
-  palette:Object.freeze({core:'#ff5b5b',wing:'#35b9ff',accent:'#ffe06d',eye:'#ffffff',flare:'#ff9f43'}),
+  palette:Object.freeze({core:'#ff6660',wing:'#dff7ff',accent:'#5ea8ff',eye:'#ffffff',flare:'#ffe06d'}),
   pixelRows:Object.freeze([
    '..ACC..',
    'WWCCCCC',
@@ -171,7 +195,7 @@ const GUARDIANS_ALIEN_VISUAL_CATALOG=Object.freeze({
   label:'Signal Scout',
   role:'scout',
   silhouette:'cyan-wing-scout',
-  palette:Object.freeze({core:'#42f285',wing:'#4b7dff',accent:'#ffdf6f',eye:'#f8fbff',flare:'#ff5b5b'}),
+  palette:Object.freeze({core:'#72baff',wing:'#4b7dff',accent:'#ffdf6f',eye:'#f8fbff',flare:'#ff5b5b'}),
   pixelRows:Object.freeze([
    '.CCCCC.',
    'ACCCACA',
@@ -381,12 +405,14 @@ const GUARDIANS_SCORE_ADVANCE_PRESENTATION=Object.freeze({
  diveHeader:'CHARGER',
  oneEscortHeader:'+1',
  twoEscortHeader:'+2',
+ layoutClass:'guardiansScoreAdvance',
  referenceIntent:'Use canonical CONVOY / CHARGER score-table framing while preserving Guardians-specific escorted-dive columns and live scoring values.'
 });
 
 const GUARDIANS_ATTRACT_MISSION=Object.freeze({
  id:'guardians-attract-mission-0.1',
  title:'WE ARE THE GALAXY GUARDIANS',
+ layoutClass:'guardiansMission',
  lines:Object.freeze([
   'MISSION: DESTROY ALIENS',
   'WATCH FOR FLAGSHIP CHARGER DIVES',

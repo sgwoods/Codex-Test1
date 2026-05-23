@@ -90,14 +90,30 @@ The current source now also carries:
 The practical meaning is: the opening board feels more alive, and wrap return
 is easier to read as a continuous threat loop.
 
+### 5. The opening mission, score table, hit feedback, and palettes are tighter
+
+The current source now also carries:
+
+- a tighter `WAIT` / preview mission layout that preserves the canonical
+  `MISSION: DESTROY ALIENS` phrase
+- a compact `CONVOY` / `CHARGER` score-table layout on both the wait showcase
+  and the preview modal
+- sprite-like pixel-burst hit and destruction feedback instead of only the
+  earlier line-burst flashes
+- theme-owned preview palettes so the opening swarm no longer depends on one
+  mostly static green-heavy family
+
+The practical meaning is: the first visible slice now reads more like a real
+cabinet adaptation and less like a placeholder preview shell.
+
 ## What Is Still Obviously Missing
 
 These are the most important remaining misses in the visible public slice.
 
-### 1. `WAIT` and score-table layout still need frame-extracted tightening
+### 1. `WAIT` and score-table layout still need frame-extracted authority
 
-The copy and structure are closer than they were, but they are still adapted
-runtime surfaces rather than a fully frame-matched cabinet read.
+The copy, structure, and compact layout are closer than they were, but they are
+still adapted runtime surfaces rather than a fully frame-matched cabinet read.
 
 ### 2. Starfield motion and top-reentry still need stronger measured targets
 
@@ -106,13 +122,13 @@ have the same evidence weight as the rack-motion contract.
 
 ### 3. Explosion and hit states are still under-authoritative
 
-Combat now reads better than before, but hit/destruction states still lag the
-source in clarity and feel.
+Combat now reads better than before, but hit/destruction states still need
+frame-backed source authority.
 
 ### 4. Palette progression and swarm color authority are still partial
 
 The opening palette family is closer than before, but it still needs a more
-deliberate stage-appropriate color read instead of a mostly runtime-tuned
+deliberate stage-owned color read instead of a mostly runtime-tuned
 approximation.
 
 ### 5. Platform-frame parity is still incomplete
@@ -131,12 +147,13 @@ Guardians still needs to sit in Platinum as naturally as Aurora across:
 This is the best next sequence if we want the highest conformance return for
 time and compute.
 
-1. Tighten `WAIT`, headline, and score-table layout/copy against frame-extracted
-   intro evidence.
-2. Improve explosion, hit, and destruction-state readability.
-3. Tighten opening palette progression and swarm color-family authority.
-4. Promote stronger measured starfield-motion and top-reentry windows so those
+1. Promote frame-extracted `WAIT`, headline, and score-table layout/copy
+   evidence.
+2. Promote stronger measured starfield-motion and top-reentry windows so those
    surfaces have evidence parity with the rack-motion contract.
+3. Promote frame-backed explosion, hit, and destruction-state reference crops.
+4. Tighten opening palette progression and swarm color-family authority beyond
+   the first improved slice.
 5. Add real Aurora-versus-Guardians platform-frame parity scoring and finish the
    shared frame work.
 6. After the visible opening slice is credible, continue into stage `3-5`

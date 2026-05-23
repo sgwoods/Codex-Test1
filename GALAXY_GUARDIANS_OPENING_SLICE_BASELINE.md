@@ -112,10 +112,19 @@ threat model:
 - moving starfield is now visible in the Guardians preview board
 - starfield motion is now denser and more directional instead of reading like a
   near-static decorative scatter
+- the `WAIT` / preview mission block now preserves the canonical
+  `MISSION: DESTROY ALIENS` phrase inside a tighter Guardians-owned cabinet
+  layout instead of a looser generic copy block
+- score-table framing now uses `CONVOY` / `CHARGER` inside a compact aligned
+  wait-surface and preview-modal layout rather than a plain generic table
 - reserve ships and stage flags are visible
 - a ready-to-fire missile cue is visible
 - top re-entry now begins higher above the board and sweeps back in more
   continuously instead of reading like a shallow pop-in
+- hit and destruction feedback now uses a more sprite-like pixel-burst flash
+  rather than only line-burst rings
+- preview palette ownership is now theme-driven instead of relying almost
+  entirely on one static alien color family
 - the hosted docs now expose a stage assessment, a top-10 queue, and the full
   deeper Guardians planning stack
 
@@ -123,20 +132,26 @@ threat model:
 
 - the title line remains a Guardians-owned adaptation even though the primary
   mission line now preserves the canonical `MISSION: DESTROY ALIENS` phrase
-- score-table framing now uses `CONVOY` / `CHARGER`, but the current runtime
-  still presents a three-row application-owned adaptation rather than a true
-  four-row cabinet match
+- score-table framing and layout now read more convincingly, but the current
+  runtime still presents a three-row application-owned adaptation rather than a
+  true four-row cabinet match
 - rack march cadence now has its own object-track-derived opening contract, but
   the starfield and re-entry surfaces still need measured target windows of the
   same quality before the whole opening board feels equally source-faithful
-- explosions and hit states still need stronger baseline authority
+- explosions and hit states now read better, but they still need frame-backed
+  source authority rather than only runtime improvement
+- palette progression is now more source-aligned in the opening slice, but the
+  stage-owned color story is still partial rather than fully measured
 
 ### Still next
 
 - frame-extracted intro crops for title, mission, and score-table layout
 - stronger measured starfield-motion and top-reentry windows so those surfaces
   have the same evidence quality as the opening-rack motion contract
-- tighter palette progression and readiness-surface comparison
+- frame-backed explosion and hit reference crops so the new runtime feedback is
+  judged against committed source windows
+- tighter palette progression and readiness-surface comparison beyond the
+  opening family
 
 ## Why This Matters Before Deeper Stages
 
@@ -154,10 +169,11 @@ This opening baseline exists to keep the work honest:
 
 1. Preserve the opening-source baseline as a committed artifact and hosted
    readable doc, not only as raw source manifests.
-2. Tighten `WAIT`, headline, and score-table fidelity against the Matt Hawkins
-   intro.
-3. Improve explosion, hit, and destruction-state readability.
-4. Tighten opening palette progression and readiness-surface comparison.
+2. Promote frame-extracted title, mission, and score-table layout authority
+   against the Matt Hawkins intro.
+3. Promote measured starfield-motion and top-reentry windows to the same
+   evidence class as the rack-motion contract.
+4. Promote frame-backed explosion and hit-state authority.
 5. Only after those land, spend heavier effort on stage `3-5` and `6-9`
    pressure tuning.
 
