@@ -851,6 +851,18 @@ function candidateDefinitions(){
     const spawnValues = [68, 74, 82];
     const waveValues = [1.06, 1.22];
     const slotValues = [0.08, 0.1];
+    const lowerBiasSets = [
+      [],
+      [96,112,40,36,128],
+      [136,152,68,56,164],
+      [176,196,96,82,208]
+    ];
+    const yOffsetSets = [
+      [],
+      [78,86,8,8,118],
+      [104,112,14,18,142],
+      [128,136,24,28,168]
+    ];
     const pathSets = [
       ['pink-serpentine','pink-serpentine','green-ladder-split','pink-serpentine','pink-green-cascade'],
       ['pink-serpentine','green-ladder-split','pink-serpentine','pink-green-cascade','pink-serpentine'],
@@ -864,26 +876,34 @@ function candidateDefinitions(){
     for(const arcAmp of arcValues){
       for(const dropAmp of dropValues){
         for(const spawnOffsetX of spawnValues){
-          for(const waveDelay of waveValues){
-            for(const slotDelay of slotValues){
-              for(let pathIndex = 0; pathIndex < pathSets.length; pathIndex += 1){
-                candidates.push({
-                  id: `stage${STAGE}-a${String(arcAmp).replace('.','')}-d${String(dropAmp).replace('.','')}-x${spawnOffsetX}-w${String(waveDelay).replace('.','')}-s${String(slotDelay).replace('.','')}-p${pathIndex}`,
-                  description: `Stage ${STAGE} sweep: arc ${arcAmp}, drop ${dropAmp}, spawn ${spawnOffsetX}, wave ${waveDelay}, slot ${slotDelay}, path set ${pathIndex}.`,
-                  layoutOverride: Object.assign({}, base, {
-                    arcAmp,
-                    dropAmp,
-                    spawnOffsetX,
-                    waveDelay,
-                    slotDelay,
-                    groupPathFamilies: pathSets[pathIndex]
-                  })
-                });
+            for(const waveDelay of waveValues){
+              for(const slotDelay of slotValues){
+                for(let lowerIndex = 0; lowerIndex < lowerBiasSets.length; lowerIndex += 1){
+                  for(let yOffsetIndex = 0; yOffsetIndex < yOffsetSets.length; yOffsetIndex += 1){
+                    for(let pathIndex = 0; pathIndex < pathSets.length; pathIndex += 1){
+                      const groupLowerFieldBiases = lowerBiasSets[lowerIndex];
+                      const groupYOffsets = yOffsetSets[yOffsetIndex];
+                      candidates.push({
+                        id: `stage${STAGE}-a${String(arcAmp).replace('.','')}-d${String(dropAmp).replace('.','')}-x${spawnOffsetX}-w${String(waveDelay).replace('.','')}-s${String(slotDelay).replace('.','')}-lb${lowerIndex}-y${yOffsetIndex}-p${pathIndex}`,
+                        description: `Stage ${STAGE} sweep: arc ${arcAmp}, drop ${dropAmp}, spawn ${spawnOffsetX}, wave ${waveDelay}, slot ${slotDelay}, lower-bias set ${lowerIndex}, y-offset set ${yOffsetIndex}, path set ${pathIndex}.`,
+                        layoutOverride: Object.assign({}, base, {
+                          arcAmp,
+                          dropAmp,
+                          spawnOffsetX,
+                          waveDelay,
+                          slotDelay,
+                          groupPathFamilies: pathSets[pathIndex],
+                          groupLowerFieldBiases,
+                          groupYOffsets
+                        })
+                      });
+                    }
+                  }
+                }
               }
             }
           }
         }
-      }
     }
     candidates.push(...targetTimingCandidates(base, pathSets));
     return candidates;
@@ -1193,6 +1213,11 @@ async function main(){
     && targetVideoLift >= 0.8;
   const intendedStageSupported = best.expectedReferenceHit || strongExpectedLift;
   const keeper = best.noSafetyRegression && noTargetVideoRegression && noExpectedRegression && intendedStageSupported && (expectedLift >= 0.35 || targetVideoLift >= 0.35 || (expectedLift >= 0.25 && targetVideoLift >= 0.25));
+  const retainedCandidateLimit = 120;
+  const retainedCandidates = scored.slice(0, retainedCandidateLimit);
+  if(!retainedCandidates.some(row => row.candidateId === baseline.candidateId)){
+    retainedCandidates.push(baseline);
+  }
   const report = {
     schemaVersion: 1,
     artifactType: 'challenge-stage-candidate-sweep',
@@ -1231,7 +1256,7 @@ async function main(){
         ? `Apply the best candidate temporarily, rerun full challenge-stage conformance plus guardrails, and accept it only if the full analyzer confirms the expected lift.`
         : `Broaden the candidate strategy to include path-shape constants or richer reference labels before changing runtime stage-${STAGE} gameplay.`
     },
-    candidates: scored.map(row => ({
+    candidates: retainedCandidates.map(row => ({
       candidateId: row.candidateId,
       description: row.description,
       layout: row.layout,
@@ -1245,6 +1270,11 @@ async function main(){
       targetVideoObjectFit: row.targetVideoObjectFit,
       selectionScore10: row.selectionScore10
     })),
+    candidateRetention: {
+      totalMeasured: scored.length,
+      retained: retainedCandidates.length,
+      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score plus the baseline row; use candidateCount for the full measured search size.`
+    },
     measurementPolicy: {
       scope: `harness-only stage-${STAGE} challenge layout candidates`,
       reference: 'media-backed Galaga challenge labels with comparison vectors',

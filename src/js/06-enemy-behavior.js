@@ -110,7 +110,8 @@ function updateChallengeEnemy(e,dt){
 		 const u=e.tm,p=e.ph,wave=e.wave||0,side=e.side||1,slot=e.slot||0,row=e.row||0,sweep=e.sweep||1;
 		 const arcAmp=e.arcAmp||1,dropAmp=e.dropAmp||1;
 	 const laneX=PLAY_W/2+side*(48+slot*16);
-	 const topY=38+wave*14+row*8;
+	 const yOffset=Number.isFinite(+e.yOffset)?+e.yOffset:0;
+	 const topY=38+wave*14+row*8+yOffset;
 	 const entryDuration=pathFamily==='first-challenge-peel'?3.35:3.15;
 	 if(u<entryDuration){
 	  const q=u/entryDuration,startX=side>0?PLAY_W+44:-44,curve=1-Math.pow(1-q,2);
