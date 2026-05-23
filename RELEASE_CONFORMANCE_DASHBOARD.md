@@ -1,6 +1,6 @@
 # Release Conformance Dashboard
 
-Generated: `2026-05-23T14:56:43.776Z`
+Generated: `2026-05-23T15:26:57.678Z`
 
 This is the primary at-a-glance planning artifact for Aurora conformance work. It answers what we are trying to improve, why it matters, how close it is to a significant user-facing release gate, and what the next investment should be.
 
@@ -197,19 +197,19 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 
 ### Charts
 
-![score-trends](reference-artifacts/analyses/conformance-economics/2026-05-23-97e91409/score-trends.svg)
+![score-trends](reference-artifacts/analyses/conformance-economics/2026-05-23-8d5aff6c/score-trends.svg)
 
-![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-05-23-97e91409/largest-score-deltas.svg)
+![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-05-23-8d5aff6c/largest-score-deltas.svg)
 
-![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-05-23-97e91409/compute-minutes-by-resource.svg)
+![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-05-23-8d5aff6c/compute-minutes-by-resource.svg)
 
-![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-05-23-97e91409/cost-per-positive-score-point.svg)
+![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-05-23-8d5aff6c/cost-per-positive-score-point.svg)
 
-![gpu-equivalent-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-05-23-97e91409/gpu-equivalent-use-by-purpose.svg)
+![gpu-equivalent-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-05-23-8d5aff6c/gpu-equivalent-use-by-purpose.svg)
 
-![cpu-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-05-23-97e91409/cpu-use-by-purpose.svg)
+![cpu-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-05-23-8d5aff6c/cpu-use-by-purpose.svg)
 
-![gameplay-improvement-by-project-part](reference-artifacts/analyses/conformance-economics/2026-05-23-97e91409/gameplay-improvement-by-project-part.svg)
+![gameplay-improvement-by-project-part](reference-artifacts/analyses/conformance-economics/2026-05-23-8d5aff6c/gameplay-improvement-by-project-part.svg)
 
 ## New First-Class Axes Added
 
@@ -235,5 +235,5 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 - Quality report: `reference-artifacts/analyses/quality-conformance/2026-05-16-08c327dd/report.json`
 - Investment priority report: `reference-artifacts/analyses/conformance-investment-priorities/2026-05-19-fba7f625/report.json`
 - Level-arc report: `reference-artifacts/analyses/level-arc-conformance/2026-05-16-08c327dd/report.json`
-- Economics report: `reference-artifacts/analyses/conformance-economics/2026-05-23-97e91409/report.json`
+- Economics report: `reference-artifacts/analyses/conformance-economics/2026-05-23-8d5aff6c/report.json`
 - Equal current quality-category weight: `0.083`
