@@ -915,6 +915,22 @@ function candidateDefinitions(){
     const waveValues = STAGE === 19 ? [0.96, 1.1] : [0.86, 0.96, 1.08];
     const slotValues = STAGE === 19 ? [0.07, 0.085] : [0.055, 0.07];
     const lowerBiasValues = STAGE === 19 ? [0, 28, 52, 76] : [0, 24, 48, 72];
+    const lowerBiasSets = STAGE === 31
+      ? [
+        [],
+        [48,32,48,36,60],
+        [72,54,72,48,84],
+        [96,72,96,60,108]
+      ]
+      : [];
+    const yOffsetSets = STAGE === 31
+      ? [
+        [],
+        [24,8,28,10,34],
+        [44,18,52,22,62],
+        [64,30,78,36,88]
+      ]
+      : [];
     const pathSets = STAGE === 19
       ? [
         ['pink-green-cascade','green-ladder-split','pink-green-cascade','pink-serpentine','pink-green-cascade'],
@@ -924,7 +940,8 @@ function candidateDefinitions(){
       : [
         ['blue-purple-finale','green-ladder-split','blue-purple-finale','yellow-diagonal-fan','blue-purple-finale'],
         ['blue-purple-finale','blue-purple-finale','green-ladder-split','blue-purple-finale','yellow-diagonal-fan'],
-        ['yellow-diagonal-fan','blue-purple-finale','green-ladder-split','blue-purple-finale','blue-purple-finale']
+        ['yellow-diagonal-fan','blue-purple-finale','green-ladder-split','blue-purple-finale','blue-purple-finale'],
+        ['blue-purple-finale','yellow-diagonal-fan','blue-purple-finale','green-ladder-split','blue-purple-finale']
       ];
     const candidates = [{
       id: 'baseline-current',
@@ -951,6 +968,36 @@ function candidateDefinitions(){
                       groupPathFamilies: pathSets[pathIndex]
                     })
                   });
+                }
+                if(
+                  STAGE === 31
+                  && lowerFieldBias === 0
+                  && dropAmp === 1.08
+                  && [1.62, 1.8].includes(arcAmp)
+                  && [86, 94].includes(spawnOffsetX)
+                  && [0.96, 1.08].includes(waveDelay)
+                ){
+                  for(let lowerSetIndex = 0; lowerSetIndex < lowerBiasSets.length; lowerSetIndex += 1){
+                    for(let yOffsetIndex = 0; yOffsetIndex < yOffsetSets.length; yOffsetIndex += 1){
+                      if(!lowerSetIndex && !yOffsetIndex) continue;
+                      for(let pathIndex = 0; pathIndex < pathSets.length; pathIndex += 1){
+                        candidates.push({
+                          id: `stage${STAGE}-a${String(arcAmp).replace('.','')}-d${String(dropAmp).replace('.','')}-x${spawnOffsetX}-w${String(waveDelay).replace('.','')}-s${String(slotDelay).replace('.','')}-lbs${lowerSetIndex}-y${yOffsetIndex}-p${pathIndex}`,
+                          description: `Stage ${STAGE} per-group sweep: arc ${arcAmp}, drop ${dropAmp}, spawn ${spawnOffsetX}, wave ${waveDelay}, slot ${slotDelay}, lower-bias set ${lowerSetIndex}, y-offset set ${yOffsetIndex}, path set ${pathIndex}.`,
+                          layoutOverride: Object.assign({}, base, {
+                            arcAmp,
+                            dropAmp,
+                            spawnOffsetX,
+                            waveDelay,
+                            slotDelay,
+                            groupPathFamilies: pathSets[pathIndex],
+                            groupLowerFieldBiases: lowerBiasSets[lowerSetIndex],
+                            groupYOffsets: yOffsetSets[yOffsetIndex]
+                          })
+                        });
+                      }
+                    }
+                  }
                 }
               }
             }
