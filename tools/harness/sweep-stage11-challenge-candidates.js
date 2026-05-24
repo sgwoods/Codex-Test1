@@ -922,7 +922,12 @@ function candidateDefinitions(){
         [72,54,72,48,84],
         [96,72,96,60,108]
       ]
-      : [];
+      : [
+        [],
+        [52,36,52,40,64],
+        [64,44,68,52,76],
+        [76,52,84,60,92]
+      ];
     const yOffsetSets = STAGE === 31
       ? [
         [],
@@ -930,7 +935,12 @@ function candidateDefinitions(){
         [44,18,52,22,62],
         [64,30,78,36,88]
       ]
-      : [];
+      : [
+        [],
+        [16,8,18,10,24],
+        [28,12,32,16,38],
+        [40,18,48,22,56]
+      ];
     const pathSets = STAGE === 19
       ? [
         ['pink-green-cascade','green-ladder-split','pink-green-cascade','pink-serpentine','pink-green-cascade'],
@@ -969,14 +979,19 @@ function candidateDefinitions(){
                     })
                   });
                 }
-                if(
-                  STAGE === 31
-                  && lowerFieldBias === 0
-                  && dropAmp === 1.08
-                  && [1.62, 1.8].includes(arcAmp)
-                  && [86, 94].includes(spawnOffsetX)
-                  && [0.96, 1.08].includes(waveDelay)
-                ){
+                const shouldExpandPerGroup = STAGE === 31
+                  ? lowerFieldBias === 0
+                    && dropAmp === 1.08
+                    && [1.62, 1.8].includes(arcAmp)
+                    && [86, 94].includes(spawnOffsetX)
+                    && [0.96, 1.08].includes(waveDelay)
+                  : lowerFieldBias === 0
+                    && [1.06, 1.22].includes(dropAmp)
+                    && [1.62, 1.86, 2.08].includes(arcAmp)
+                    && [68, 76, 84].includes(spawnOffsetX)
+                    && waveDelay === 0.96
+                    && slotDelay === 0.07;
+                if(shouldExpandPerGroup){
                   for(let lowerSetIndex = 0; lowerSetIndex < lowerBiasSets.length; lowerSetIndex += 1){
                     for(let yOffsetIndex = 0; yOffsetIndex < yOffsetSets.length; yOffsetIndex += 1){
                       if(!lowerSetIndex && !yOffsetIndex) continue;
