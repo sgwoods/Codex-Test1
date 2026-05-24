@@ -945,7 +945,9 @@ function candidateDefinitions(){
       ? [
         ['pink-green-cascade','green-ladder-split','pink-green-cascade','pink-serpentine','pink-green-cascade'],
         ['pink-green-cascade','pink-green-cascade','green-ladder-split','pink-green-cascade','pink-serpentine'],
-        ['green-ladder-split','pink-green-cascade','pink-serpentine','pink-green-cascade','pink-green-cascade']
+        ['green-ladder-split','pink-green-cascade','pink-serpentine','pink-green-cascade','pink-green-cascade'],
+        ['pink-green-low-sweep','pink-green-low-sweep','pink-green-tall-drift','pink-green-tall-drift','pink-green-compact-exit'],
+        ['pink-green-low-sweep','pink-green-low-sweep','pink-green-tall-drift','pink-green-compact-exit','pink-green-low-sweep']
       ]
       : [
         ['blue-purple-finale','green-ladder-split','blue-purple-finale','yellow-diagonal-fan','blue-purple-finale'],
@@ -1100,6 +1102,8 @@ async function measureCandidates(candidates){
       const measured = await page.evaluate(({ stage, sampleTimes, candidate }) => {
         const h = window.__galagaHarness__;
         h.setupChallengeMotionProfileTest({ stage, layoutOverride: candidate.layoutOverride || null });
+        const setupEvents = h.recentEvents({ count: 200 }) || [];
+        const eventWindowStartT = setupEvents.reduce((max, event) => Math.max(max, Number.isFinite(+event.t) ? +event.t : max), -Infinity);
         const layout = h.challengeFormationState().layout;
         const tracks = {};
         const record = t => {
@@ -1131,7 +1135,10 @@ async function measureCandidates(candidates){
           record(t);
         }
         const finalState = h.state();
-        const recent = h.recentEvents({ count: 200 }) || [];
+        const recent = (h.recentEvents({ count: 200 }) || []).filter(event => {
+          const t = Number.isFinite(+event.t) ? +event.t : null;
+          return t !== null && t > eventWindowStartT + 0.0001;
+        });
         return {
           candidateId: candidate.id,
           description: candidate.description,
@@ -1147,6 +1154,10 @@ async function measureCandidates(candidates){
             enemyShots: recent.filter(e => e.type === 'enemy_shot' || e.type === 'enemy_bullet').length,
             enemyAttackStarts: recent.filter(e => e.type === 'enemy_attack_start').length,
             shipLosses: recent.filter(e => e.type === 'ship_loss' || e.type === 'player_loss').length
+          },
+          eventWindow: {
+            startT: Number.isFinite(eventWindowStartT) ? +eventWindowStartT.toFixed(3) : null,
+            sampledEvents: recent.length
           }
         };
       }, { stage: STAGE, sampleTimes: SAMPLE_TIMES, candidate });
@@ -1182,25 +1193,77 @@ function scoreMeasuredCandidate(measured, labels){
   const noSafetyRegression = measured.eventCounts.enemyShots === 0
     && measured.eventCounts.enemyAttackStarts === 0
     && measured.eventCounts.shipLosses === 0;
+  const bestMatch = matches[0] || null;
+  const expectedScore10 = expected?.score10 || 0;
+  const bestScore10 = bestMatch?.score10 || 0;
+  const expectedReferenceHit = EXPECTED_LABELS.includes(bestMatch?.labelId);
+  const identityMargin10 = round(expectedScore10 - bestScore10, 2);
+  const wrongReferencePenalty10 = expectedReferenceHit ? 0 : round(Math.max(0, bestScore10 - expectedScore10), 2);
+  const identityConfidence = expectedReferenceHit
+    ? 1
+    : round(clamp((identityMargin10 + 1.15) / 1.35) * clamp(expectedScore10 / 6.2), 3);
+  const targetVideoScore10 = targetVideoFit.score10 || 0;
   return Object.assign({}, measured, {
     trackCount: classifications.length,
     runtimeVector: vector,
     runtimeSemantic: semantic,
-    bestMatch: matches[0] || null,
+    bestMatch,
     expectedMatch: expected,
-    expectedReferenceHit: EXPECTED_LABELS.includes(matches[0]?.labelId),
+    expectedReferenceHit,
+    stageIdentity: {
+      expectedLabels: EXPECTED_LABELS,
+      expectedScore10,
+      bestScore10,
+      identityMargin10,
+      wrongReferencePenalty10,
+      confidence: identityConfidence,
+      read: expectedReferenceHit
+        ? 'Best measured label is one of the expected labels for this challenge stage.'
+        : `Best measured label is ${bestMatch?.labelId || 'none'}; expected-stage score trails by ${Math.abs(identityMargin10)}/10.`
+    },
     targetVideoObjectFit: targetVideoFit,
     noSafetyRegression,
-    selectionScore10: round((expected?.score10 || 0) + ((targetVideoFit.score10 || 0) * 0.22) + (matches[0]?.labelId === EXPECTED_LABEL ? 0.75 : 0) + (noSafetyRegression ? 0.2 : -3), 2)
+    selectionScore10: round(
+      (expectedScore10 * 0.62)
+      + (targetVideoScore10 * 0.24)
+      + (identityConfidence * 1.1)
+      + (noSafetyRegression ? 0.3 : -2.75)
+      - (wrongReferencePenalty10 * 0.65),
+      2
+    )
   });
+}
+
+function summarizeCandidate(row){
+  if(!row) return null;
+  return {
+    candidateId: row.candidateId,
+    expectedScore10: row.expectedMatch?.score10 || 0,
+    targetVideoObjectFitScore10: row.targetVideoObjectFit?.score10 || null,
+    selectionScore10: row.selectionScore10,
+    expectedReferenceHit: !!row.expectedReferenceHit,
+    stageIdentityMargin10: row.stageIdentity?.identityMargin10 ?? null,
+    wrongReferencePenalty10: row.stageIdentity?.wrongReferencePenalty10 ?? 0,
+    noSafetyRegression: !!row.noSafetyRegression,
+    bestMatchLabelId: row.bestMatch?.labelId || null,
+    bestMatchScore10: row.bestMatch?.score10 || 0,
+    expectedMatchLabelId: row.expectedMatch?.labelId || null,
+    groupPathFamilies: row.layout?.groupPathFamilies || [],
+    groupSpawnOffsets: row.layout?.groupSpawnOffsets || [],
+    groupLowerFieldBiases: row.layout?.groupLowerFieldBiases || [],
+    groupYOffsets: row.layout?.groupYOffsets || []
+  };
 }
 
 function buildMarkdown(report){
   const topRows = report.candidates.slice(0, 12).map((row, index) => {
     const hit = row.expectedReferenceHit ? 'yes' : 'no';
     const eventRead = row.noSafetyRegression ? 'pass' : `risk ${JSON.stringify(row.eventCounts)}`;
-    return `| ${index + 1} | ${row.candidateId} | ${row.selectionScore10}/10 | ${row.expectedMatch?.score10 ?? 0}/10 | ${row.targetVideoObjectFit?.score10 ?? 'n/a'}/10 | ${row.bestMatch?.labelId || 'none'} (${row.bestMatch?.score10 ?? 0}/10) | ${hit} | ${eventRead} |`;
+    return `| ${index + 1} | ${row.candidateId} | ${row.selectionScore10}/10 | ${row.expectedMatch?.score10 ?? 0}/10 | ${row.targetVideoObjectFit?.score10 ?? 'n/a'}/10 | ${row.stageIdentity?.identityMargin10 ?? 'n/a'} | ${row.bestMatch?.labelId || 'none'} (${row.bestMatch?.score10 ?? 0}/10) | ${hit} | ${eventRead} |`;
   }).join('\n');
+  const diagnosticRow = row => `| ${row.candidateId} | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.stageIdentityMargin10 ?? 'n/a'} | ${row.bestMatchLabelId || 'none'} (${row.bestMatchScore10}/10) | ${row.expectedReferenceHit ? 'yes' : 'no'} | ${row.noSafetyRegression ? 'pass' : 'risk'} | ${(row.groupPathFamilies || []).join(', ') || 'default'} |`;
+  const targetTimingRows = (report.diagnostics?.targetTimingTop || []).map(diagnosticRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const pathShapeRows = (report.diagnostics?.pathShapeTop || []).map(diagnosticRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
   return `# Stage ${report.stage} Challenge Candidate Sweep
 
 Generated: ${report.generatedAt}
@@ -1219,12 +1282,29 @@ Stage ${report.stage} currently has safe challenge behavior but still does not c
 - Keeper decision: ${report.summary.keeperDecision}.
 - Player-facing meaning: ${report.summary.playerMeaning}
 - Process meaning: ${report.summary.processMeaning}
+- Candidate retention: ${report.candidateRetention?.retained ?? report.candidates.length}/${report.candidateRetention?.totalMeasured ?? report.candidateCount} retained; ${report.candidateRetention?.targetTimingDiagnostics ?? 0} target-timing diagnostics and ${report.candidateRetention?.pathShapeDiagnostics ?? 0} path-shape diagnostics preserved.
 
 ## Top Candidates
 
-| Rank | Candidate | Selection | Expected Labels | Target-Video Fit | Best Match | Expected Hit | Safety |
-| ---: | --- | ---: | ---: | ---: | --- | --- | --- |
+| Rank | Candidate | Selection | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Safety |
+| ---: | --- | ---: | ---: | ---: | ---: | --- | --- | --- |
 ${topRows}
+
+## Diagnostic Candidates
+
+These rows are intentionally retained even when they are not promotion candidates. They show whether target-timed schedules or new path-shape primitives improve one measurement while failing expected-reference identity or safety.
+
+### Target-Timing Diagnostics
+
+| Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Safety | Paths |
+| --- | ---: | ---: | ---: | --- | --- | --- | --- |
+${targetTimingRows}
+
+### Path-Shape Diagnostics
+
+| Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Safety | Paths |
+| --- | ---: | ---: | ---: | --- | --- | --- | --- |
+${pathShapeRows}
 
 ## Next Step
 
@@ -1250,9 +1330,11 @@ async function main(){
     const candidateTargetVideoComparable = Number.isFinite(+(baseline.targetVideoObjectFit?.score10)) && Number.isFinite(+(candidate.targetVideoObjectFit?.score10));
     const candidateNoTargetRegression = !candidateTargetVideoComparable || candidateTargetVideoLift >= -0.05;
     const candidateNoExpectedRegression = candidateExpectedLift >= -0.05;
+    const candidateIdentityClose = (candidate.stageIdentity?.identityMargin10 ?? -10) >= -0.35;
     const strongExpectedLift = (candidate.expectedMatch?.score10 || 0) >= 7
       && candidateExpectedLift >= 0.5
-      && candidateTargetVideoLift >= 0.8;
+      && candidateTargetVideoLift >= 0.8
+      && candidateIdentityClose;
     const intendedStageSupported = candidate.expectedReferenceHit || strongExpectedLift;
     return candidate.noSafetyRegression
       && candidateNoTargetRegression
@@ -1270,13 +1352,28 @@ async function main(){
   const targetVideoComparable = Number.isFinite(+(baseline.targetVideoObjectFit?.score10)) && Number.isFinite(+(best.targetVideoObjectFit?.score10));
   const noTargetVideoRegression = !targetVideoComparable || targetVideoLift >= -0.05;
   const noExpectedRegression = expectedLift >= -0.05;
+  const identityClose = (best.stageIdentity?.identityMargin10 ?? -10) >= -0.35;
   const strongExpectedLift = (best.expectedMatch?.score10 || 0) >= 7
     && expectedLift >= 0.5
-    && targetVideoLift >= 0.8;
+    && targetVideoLift >= 0.8
+    && identityClose;
   const intendedStageSupported = best.expectedReferenceHit || strongExpectedLift;
   const keeper = best.noSafetyRegression && noTargetVideoRegression && noExpectedRegression && intendedStageSupported && (expectedLift >= 0.35 || targetVideoLift >= 0.35 || (expectedLift >= 0.25 && targetVideoLift >= 0.25));
   const retainedCandidateLimit = 120;
-  const retainedCandidates = scored.slice(0, retainedCandidateLimit);
+  const pathShapeMarkers = ['pink-green-low-sweep','pink-green-tall-drift','pink-green-compact-exit'];
+  const targetTimingDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('target-'))
+    .sort((a, b) => (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0) || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 8);
+  const pathShapeDiagnostics = scored
+    .filter(row => pathShapeMarkers.some(marker => (row.layout?.groupPathFamilies || []).includes(marker)))
+    .sort((a, b) => (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0) || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 8);
+  const retainedById = new Map();
+  for(const row of scored.slice(0, retainedCandidateLimit)) retainedById.set(row.candidateId, row);
+  for(const row of targetTimingDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of pathShapeDiagnostics) retainedById.set(row.candidateId, row);
+  const retainedCandidates = Array.from(retainedById.values());
   if(!retainedCandidates.some(row => row.candidateId === baseline.candidateId)){
     retainedCandidates.push(baseline);
   }
@@ -1308,7 +1405,7 @@ async function main(){
       noExpectedRegression,
       intendedStageSupported,
       strongExpectedLift,
-      intendedStageSupportPolicy: 'runtime promotion requires no expected-label regression, and either the best trajectory match to be one of the expected stage labels or a strong expected-label score >=7 with >=0.5 expected lift and >=0.8 target-video lift',
+      intendedStageSupportPolicy: 'runtime promotion requires no expected-label regression, and either the best trajectory match to be one of the expected stage labels or a strong expected-label score >=7 with >=0.5 expected lift, >=0.8 target-video lift, and an identity margin no worse than -0.35/10',
       keeperDecision: keeper ? 'candidate-ready-for-full-analyzer-review' : 'no-runtime-keeper-yet',
       playerMeaning: keeper
         ? `A measured stage-${STAGE} layout candidate is worth a temporary runtime review, but it must be confirmed by the full challenge-stage analyzer and persona guardrails before promotion.`
@@ -1323,24 +1420,32 @@ async function main(){
       description: row.description,
       layout: row.layout,
       eventCounts: row.eventCounts,
+      eventWindow: row.eventWindow,
       noSafetyRegression: row.noSafetyRegression,
       runtimeVector: row.runtimeVector,
       runtimeSemantic: row.runtimeSemantic,
       bestMatch: row.bestMatch,
       expectedMatch: row.expectedMatch,
       expectedReferenceHit: row.expectedReferenceHit,
+      stageIdentity: row.stageIdentity,
       targetVideoObjectFit: row.targetVideoObjectFit,
       selectionScore10: row.selectionScore10
     })),
     candidateRetention: {
       totalMeasured: scored.length,
       retained: retainedCandidates.length,
-      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score plus the baseline row; use candidateCount for the full measured search size.`
+      targetTimingDiagnostics: targetTimingDiagnostics.length,
+      pathShapeDiagnostics: pathShapeDiagnostics.length,
+      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score, the baseline row, and top target-timing/path-shape diagnostic candidates; use candidateCount for the full measured search size.`
+    },
+    diagnostics: {
+      targetTimingTop: targetTimingDiagnostics.map(summarizeCandidate),
+      pathShapeTop: pathShapeDiagnostics.map(summarizeCandidate)
     },
     measurementPolicy: {
       scope: `harness-only stage-${STAGE} challenge layout candidates`,
       reference: 'media-backed Galaga challenge labels with comparison vectors',
-      promotionRule: 'Require an expected challenge-label best match, no safety regression, and at least +0.35/10 expected-label lift over baseline before runtime promotion.',
+      promotionRule: 'Require the expected challenge-label identity to be the best match, no safety regression, and at least +0.35/10 expected-label or target-video lift over baseline before runtime promotion. Strong non-best candidates must be very close on identity margin and improve both expected and target-video scores.',
       safety: 'Reject candidates with enemy shots, enemy attack starts, or ship losses in the challenge window.'
     }
   };

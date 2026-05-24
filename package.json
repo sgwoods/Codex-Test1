@@ -90,6 +90,7 @@
     "harness:sweep:stage11-challenge-candidates": "node tools/harness/sweep-stage11-challenge-candidates.js",
     "harness:sweep:stage23-challenge-candidates": "node tools/harness/sweep-stage11-challenge-candidates.js --stage=23",
     "harness:sweep:stage27-challenge-candidates": "node tools/harness/sweep-stage11-challenge-candidates.js --stage=27",
+    "harness:analyze:challenge-stage-candidate-sweep-index": "node tools/harness/analyze-challenge-stage-candidate-sweep-index.js",
     "harness:check:stage4-lane7-pressure-regression": "node tools/harness/check-stage4-lane7-pressure-regression.js",
     "harness:check:controlled-clock-exact-advance": "node tools/harness/check-controlled-clock-exact-advance.js",
     "harness:check:video-artifact": "node tools/harness/check-video-artifact.js",

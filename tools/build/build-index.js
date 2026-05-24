@@ -69,6 +69,8 @@ const GALAGA_REFERENCE_SPRITE_TARGETS = path.join(ROOT, 'reference-artifacts', '
 const GALAGA_REFERENCE_SPRITE_MODEL = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-reference-sprites', 'model-0.1.json');
 const APPLICATION_ARTIFACT_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'application-artifact-conformance', 'latest.json');
 const CHALLENGE_STAGE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
+const CHALLENGE_STAGE_CANDIDATE_SWEEP = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep', 'latest.json');
+const CHALLENGE_STAGE_CANDIDATE_SWEEP_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep-index', 'latest.json');
 const LEVEL_VISUAL_CONFORMANCE_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'level-visual-conformance-index', 'latest.json');
 const GALAGA_TARGET_ARTIFACT_COVERAGE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-artifact-coverage', 'latest.json');
 const GALAGA_ALIEN_VISUAL_REFERENCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-visual-reference', 'latest.json');
@@ -2858,7 +2860,16 @@ function buildDocumentationProvenanceGuideSection(provenance){
 
 function buildChallengeStageEffortGuideSection(){
   const artifact = loadChallengeStageConformance();
+  const sweep = loadChallengeStageCandidateSweep();
+  const sweepIndex = loadChallengeStageCandidateSweepIndex();
   const summary = artifact.summary || {};
+  const sweepSummary = sweep.summary || {};
+  const sweepRetention = sweep.candidateRetention || {};
+  const sweepIndexSummary = sweepIndex.summary || {};
+  const sweepRows = Array.isArray(sweepIndex.rows) ? sweepIndex.rows : [];
+  const sweepIndexRead = sweepRows.length
+    ? sweepRows.map(row => `Stage ${row.stage}: ${row.keeperDecision || 'pending'} (${row.bestExpectedScore10 ?? 'n/a'}/10 expected, ${row.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10 target-video, identity margin ${row.stageIdentityMargin10 ?? 'n/a'}).`).join(' ')
+    : 'Run the candidate sweep index analyzer to preserve latest per-stage candidate evidence.';
   const rows = (artifact.stageRows || []).map(row => [
     `Stage ${row.stage || ''} / Challenge ${row.challengeNumber || ''}`,
     `Interest: **${row.interestingFactor10 ?? 'n/a'}/10**\n\nConformance: **${row.conformanceScore10 ?? 'n/a'}/10**\n\nBest ref: \`${row.bestReferenceMatch?.labelId || 'pending'}\` (${row.referenceMatchScore10 ?? 'n/a'}/10)`,
@@ -2880,8 +2891,16 @@ function buildChallengeStageEffortGuideSection(){
         body: 'Generated from `reference-artifacts/analyses/challenge-stage-conformance/latest.json`, Galaga path-reference labels, Aurora browser runtime probes, and challenge timing/collision guardrails. Safety is a guardrail; broad legacy coverage is diagnostic only.'
       },
       {
+        title: 'Latest Candidate Sweep',
+        body: `Stage ${sweep.stage || 'n/a'} sweep measured ${sweep.candidateCount || sweepRetention.totalMeasured || 'n/a'} candidates and retained ${sweepRetention.retained || 'n/a'} review rows. Decision: ${sweepSummary.keeperDecision || 'pending'}. Best candidate ${sweepSummary.bestCandidateId || 'pending'} scored ${sweepSummary.bestExpectedScore10 ?? 'n/a'}/10 expected-reference and ${sweepSummary.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10 target-video fit.`
+      },
+      {
+        title: 'Sweep Matrix',
+        body: `${sweepIndexSummary.stagesCovered || 0} stage(s) indexed, ${sweepIndexSummary.totalCandidateCount || 0} candidates represented, ${sweepIndexSummary.runtimeReadyCount || 0} runtime-ready. ${sweepIndexRead}`
+      },
+      {
         title: 'Next Best Step',
-        body: (artifact.improvementPlan || [])[2] || 'Attack Stage 3 first: rebuild it against the Galaga challenge-1 arrival and late-wave references while preserving 0 enemy shots, 0 attack starts, and 0 ship losses.'
+        body: sweepIndexSummary.read || sweepSummary.nextStep || (artifact.improvementPlan || [])[2] || 'Attack Stage 3 first: rebuild it against the Galaga challenge-1 arrival and late-wave references while preserving 0 enemy shots, 0 attack starts, and 0 ship losses.'
       }
     ],
     links: [
@@ -2899,6 +2918,16 @@ function buildChallengeStageEffortGuideSection(){
         label: 'Open Conformance Dashboard',
         href: 'conformance-dashboard.html?game=aurora-galactica#conformance',
         detail: 'Dashboard context for comparing this sub-effort against other conformance priorities and costs.'
+      },
+      {
+        label: 'Open Candidate Sweep Artifact',
+        href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json`,
+        detail: 'Machine-readable sweep with target-timing/path-shape diagnostics and promotion decision evidence.'
+      },
+      {
+        label: 'Open Candidate Sweep Index',
+        href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json`,
+        detail: 'Latest per-stage sweep matrix so one stage run does not hide prior candidate evidence.'
       }
     ],
     table: {
@@ -3201,6 +3230,8 @@ let galagaReferenceSpriteTargetsCache = null;
 let galagaReferenceSpriteModelCache = null;
 let applicationArtifactConformanceCache = null;
 let challengeStageConformanceCache = null;
+let challengeStageCandidateSweepCache = null;
+let challengeStageCandidateSweepIndexCache = null;
 let levelVisualConformanceIndexCache = null;
 let galagaTargetArtifactCoverageCache = null;
 let galagaAlienVisualReferenceCache = null;
@@ -3505,6 +3536,43 @@ function loadChallengeStageConformance(){
     challengeStageConformanceCache = { stageRows: [], summary: {} };
   }
   return challengeStageConformanceCache;
+}
+
+function loadChallengeStageCandidateSweep(){
+  if(challengeStageCandidateSweepCache) return challengeStageCandidateSweepCache;
+  if(!fs.existsSync(CHALLENGE_STAGE_CANDIDATE_SWEEP)){
+    challengeStageCandidateSweepCache = { summary: {}, candidateRetention: {}, diagnostics: {} };
+    return challengeStageCandidateSweepCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_STAGE_CANDIDATE_SWEEP);
+    challengeStageCandidateSweepCache = Object.assign({}, artifact, {
+      summary: artifact.summary || {},
+      candidateRetention: artifact.candidateRetention || {},
+      diagnostics: artifact.diagnostics || {}
+    });
+  } catch (err) {
+    challengeStageCandidateSweepCache = { summary: {}, candidateRetention: {}, diagnostics: {} };
+  }
+  return challengeStageCandidateSweepCache;
+}
+
+function loadChallengeStageCandidateSweepIndex(){
+  if(challengeStageCandidateSweepIndexCache) return challengeStageCandidateSweepIndexCache;
+  if(!fs.existsSync(CHALLENGE_STAGE_CANDIDATE_SWEEP_INDEX)){
+    challengeStageCandidateSweepIndexCache = { summary: {}, rows: [] };
+    return challengeStageCandidateSweepIndexCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_STAGE_CANDIDATE_SWEEP_INDEX);
+    challengeStageCandidateSweepIndexCache = Object.assign({}, artifact, {
+      summary: artifact.summary || {},
+      rows: Array.isArray(artifact.rows) ? artifact.rows : []
+    });
+  } catch (err) {
+    challengeStageCandidateSweepIndexCache = { summary: {}, rows: [] };
+  }
+  return challengeStageCandidateSweepIndexCache;
 }
 
 function loadLevelVisualConformanceIndex(){
@@ -5005,6 +5073,15 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   `).join('\n');
   const challengeStageConformance = loadChallengeStageConformance();
   const challengeSummary = challengeStageConformance.summary || {};
+  const challengeCandidateSweep = loadChallengeStageCandidateSweep();
+  const challengeCandidateSweepIndex = loadChallengeStageCandidateSweepIndex();
+  const challengeSweepSummary = challengeCandidateSweep.summary || {};
+  const challengeSweepRetention = challengeCandidateSweep.candidateRetention || {};
+  const challengeSweepIndexSummary = challengeCandidateSweepIndex.summary || {};
+  const challengeSweepIndexRows = Array.isArray(challengeCandidateSweepIndex.rows) ? challengeCandidateSweepIndex.rows : [];
+  const challengeSweepIndexRead = challengeSweepIndexRows.length
+    ? challengeSweepIndexRows.map(row => `Stage ${row.stage}: ${row.keeperDecision || 'pending'}, expected ${row.bestExpectedScore10 ?? 'n/a'}/10, target-video ${row.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10, identity margin ${row.stageIdentityMargin10 ?? 'n/a'}.`).join(' ')
+    : 'No indexed candidate sweeps yet.';
   const challengeStageRows = (challengeStageConformance.stageRows || []).map(renderChallengeStageDetail).join('\n') || `
     <div class="docWrap"><span class="docMeta">Challenge-stage conformance analysis pending. Run <code>npm run harness:analyze:challenge-stage-conformance</code>.</span></div>
   `;
@@ -5850,6 +5927,8 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <p><strong>Current strict read:</strong> ${esc(challengeSummary.interestingFactorScore10 || 'n/a')}/10 interesting factor; ${esc(challengeSummary.movementConformanceScore10 || 'n/a')}/10 movement; ${esc(challengeSummary.graphicalConformanceScore10 || 'n/a')}/10 graphics; ${esc(challengeSummary.alienNoveltyScore10 || 'n/a')}/10 alien novelty; ${esc(challengeSummary.playerShotOpportunityScore10 || 'n/a')}/10 shot opportunity; ${esc(challengeSummary.score10 || 'n/a')}/10 challenge-stage conformance.</p>
             <p>${esc(challengeSummary.weakestFinding || 'Run the challenge-stage conformance analyzer to refresh this readout.')}</p>
             <p class="docMeta"><strong>Scoring model:</strong> ${esc(challengeSummary.scoringModel || 'strict-v2')}. Each challenge starts at 1/10 for interest, movement, and graphics; no-shot/no-kill safety is a required guardrail, not a score booster. Legacy broad coverage is diagnostic only.</p>
+            <p class="docMeta"><strong>Latest candidate sweep:</strong> Stage ${esc(challengeCandidateSweep.stage || 'n/a')} measured ${esc(challengeCandidateSweep.candidateCount || challengeSweepRetention.totalMeasured || 'n/a')} candidates and retained ${esc(challengeSweepRetention.retained || 'n/a')} review rows. Decision: <strong>${esc(challengeSweepSummary.keeperDecision || 'pending')}</strong>. Best candidate ${esc(challengeSweepSummary.bestCandidateId || 'pending')} scored ${esc(challengeSweepSummary.bestExpectedScore10 ?? 'n/a')}/10 expected-reference and ${esc(challengeSweepSummary.bestTargetVideoObjectFitScore10 ?? 'n/a')}/10 target-video fit. This is process evidence unless the full analyzer and guardrails confirm a runtime promotion.</p>
+            <p class="docMeta"><strong>Candidate sweep matrix:</strong> ${esc(challengeSweepIndexSummary.stagesCovered || 0)} stage(s), ${esc(challengeSweepIndexSummary.totalCandidateCount || 0)} latest per-stage candidates represented, ${esc(challengeSweepIndexSummary.runtimeReadyCount || 0)} runtime-ready. ${esc(challengeSweepIndexRead)}</p>
             <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/challenge-stage-conformance/latest.json</code>. <strong>Report:</strong> <code>CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md</code>.</p>
             <p class="docMeta"><strong>Naming rule:</strong> normal Levels and Challenging Stages are separate. The challenge rows below use labels like <strong>Challenging Stage 1 (Levels 3-4)</strong> instead of calling that set piece Level 4.</p>
             <p class="docMeta"><strong>Evidence-image rule:</strong> contact sheets are supporting artifacts for visual inspection, not the main human-readable conformance explanation. Use each row's target/current/conformance text for the judgment; open the evidence panel only when you need to inspect the underlying frames at native scale.</p>
