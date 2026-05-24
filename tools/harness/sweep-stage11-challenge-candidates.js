@@ -1031,6 +1031,19 @@ function candidateDefinitions(){
     const spawnValues = STAGE === 23 ? [72, 80, 88] : [76, 84, 92];
     const waveValues = STAGE === 23 ? [0.98, 1.1] : [0.94, 1.06];
     const slotValues = STAGE === 23 ? [0.07, 0.09] : [0.065, 0.085];
+    const pathSets = STAGE === 23
+      ? [
+        ['green-ladder-split','green-ladder-split','green-ladder-split','green-ladder-split','green-ladder-split'],
+        ['green-ladder-deep-drop','green-ladder-deep-drop','green-ladder-center-fork','green-ladder-center-fork','green-ladder-high-exit'],
+        ['green-ladder-deep-drop','green-ladder-center-fork','green-ladder-center-fork','green-ladder-high-exit','green-ladder-high-exit'],
+        ['green-ladder-center-fork','green-ladder-deep-drop','green-ladder-deep-drop','green-ladder-center-fork','green-ladder-high-exit']
+      ]
+      : [
+        ['yellow-diagonal-fan','yellow-diagonal-fan','yellow-diagonal-fan','yellow-diagonal-fan','yellow-diagonal-fan'],
+        ['yellow-fan-low-drift','yellow-fan-cross-cut','yellow-fan-cross-cut','yellow-fan-high-pop','yellow-fan-low-drift'],
+        ['yellow-fan-low-drift','yellow-fan-low-drift','yellow-fan-cross-cut','yellow-fan-high-pop','yellow-fan-high-pop'],
+        ['yellow-fan-cross-cut','yellow-fan-cross-cut','yellow-fan-low-drift','yellow-fan-high-pop','yellow-fan-low-drift']
+      ];
     const candidates = [{
       id: 'baseline-current',
       description: `Current stage-${STAGE} layout, used as the measured baseline.`,
@@ -1041,23 +1054,26 @@ function candidateDefinitions(){
         for(const spawnOffsetX of spawnValues){
           for(const waveDelay of waveValues){
             for(const slotDelay of slotValues){
-              candidates.push({
-                id: `stage${STAGE}-a${String(arcAmp).replace('.','')}-d${String(dropAmp).replace('.','')}-x${spawnOffsetX}-w${String(waveDelay).replace('.','')}-s${String(slotDelay).replace('.','')}`,
-                description: `Stage ${STAGE} sweep: arc ${arcAmp}, drop ${dropAmp}, spawn ${spawnOffsetX}, wave ${waveDelay}, slot ${slotDelay}.`,
-                layoutOverride: Object.assign({}, base, {
-                  arcAmp,
-                  dropAmp,
-                  spawnOffsetX,
-                  waveDelay,
-                  slotDelay
-                })
-              });
+              for(let pathIndex = 0; pathIndex < pathSets.length; pathIndex += 1){
+                candidates.push({
+                  id: `stage${STAGE}-a${String(arcAmp).replace('.','')}-d${String(dropAmp).replace('.','')}-x${spawnOffsetX}-w${String(waveDelay).replace('.','')}-s${String(slotDelay).replace('.','')}-p${pathIndex}`,
+                  description: `Stage ${STAGE} sweep: arc ${arcAmp}, drop ${dropAmp}, spawn ${spawnOffsetX}, wave ${waveDelay}, slot ${slotDelay}, path set ${pathIndex}.`,
+                  layoutOverride: Object.assign({}, base, {
+                    arcAmp,
+                    dropAmp,
+                    spawnOffsetX,
+                    waveDelay,
+                    slotDelay,
+                    groupPathFamilies: pathSets[pathIndex]
+                  })
+                });
+              }
             }
           }
         }
       }
     }
-    candidates.push(...targetTimingCandidates(base, [base.groupPathFamilies || []]));
+    candidates.push(...targetTimingCandidates(base, pathSets));
     return candidates;
   }
   const pathSets = [
@@ -1360,7 +1376,17 @@ async function main(){
   const intendedStageSupported = best.expectedReferenceHit || strongExpectedLift;
   const keeper = best.noSafetyRegression && noTargetVideoRegression && noExpectedRegression && intendedStageSupported && (expectedLift >= 0.35 || targetVideoLift >= 0.35 || (expectedLift >= 0.25 && targetVideoLift >= 0.25));
   const retainedCandidateLimit = 120;
-  const pathShapeMarkers = ['pink-green-low-sweep','pink-green-tall-drift','pink-green-compact-exit'];
+  const pathShapeMarkers = [
+    'pink-green-low-sweep',
+    'pink-green-tall-drift',
+    'pink-green-compact-exit',
+    'green-ladder-deep-drop',
+    'green-ladder-center-fork',
+    'green-ladder-high-exit',
+    'yellow-fan-low-drift',
+    'yellow-fan-cross-cut',
+    'yellow-fan-high-pop'
+  ];
   const targetTimingDiagnostics = scored
     .filter(row => String(row.candidateId || '').includes('target-'))
     .sort((a, b) => (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0) || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))

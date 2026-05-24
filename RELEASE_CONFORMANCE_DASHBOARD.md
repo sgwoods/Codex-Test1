@@ -1,6 +1,6 @@
 # Release Conformance Dashboard
 
-Generated: `2026-05-24T18:03:14.714Z`
+Generated: `2026-05-24T20:28:18.466Z`
 
 This is the primary at-a-glance planning artifact for Aurora conformance work. It answers what we are trying to improve, why it matters, how close it is to a significant user-facing release gate, and what the next investment should be.
 
@@ -16,7 +16,7 @@ Aurora remains the active investment target, but Galaxy Guardians is also repres
 
 | Gate | Current | Target | Notes |
 | --- | --- | --- | --- |
-| Overall quality | 8.5/10 | >=9.3 | Full score refresh after all major cycles |
+| Overall quality | 8.8/10 | >=9.3 | Full score refresh after all major cycles |
 | Audio identity | 7.3/10 | >=7.5 | Primary user-experience gap |
 | Challenge-stage set-piece conformance | 4.3/10 | >=5.0 before next beta claim; >=6.0 next major gate; >=9.0 mature | Strict movement/graphics/alien-novelty gate; safety does not inflate this score |
 | Direct target sprite conformance | 5.5/10 | >=5.5 before next beta claim; >=7.5 mature preview | Strict runtime-vs-promoted-target-crop row; static proxy scores do not satisfy this gate |
@@ -61,7 +61,7 @@ An `x/10` score is a measured roll-up at the current scorer resolution, not a cl
 | 12 | Arcade console frame UI style | 9.2/10 | medium | UI shell proxy; dedicated visual/modal rubric still needed | medium; cpu, browser, gpu | 16 runs; 17.6 min wall; 20.4 min CPU | 9.4-9.6 | Measured as UI shell; needs separate arcade-frame style rubric | The cabinet frame is the constant product surface around every game. | Medium; 1-3 hrs visual QA | Defer unless new ingestion evidence reveals a larger graphics-conformance gap. | reference-artifacts/analyses/quality-conformance/2026-05-24-47f2c7e1d/report.json |
 | 13 | Popup/help/scoring/leaderboard surface formatting | 9.2/10 | medium | UI shell proxy; dedicated visual/modal rubric still needed | medium; cpu, browser | 16 runs; 17.6 min wall; 20.4 min CPU | 9.4-9.6 | Measured through UI shell suite; needs modal-specific scoring | Popup surfaces carry learning, scoring trust, feedback, and player records. | Low-medium; 1-2 hrs | Defer unless new ingestion evidence reveals a larger graphics-conformance gap. | reference-artifacts/analyses/quality-conformance/2026-05-24-47f2c7e1d/report.json |
 | 14 | Dive fairness and safety | 9.1/10 | medium-high | seed/persona safety guardrails and pressure-sensitive collision checks | guardrail; cpu | 44 runs; 30.5 min wall; 38.9 min CPU | 9.3+ | Measured release category | Protects user trust while pressure is increased. | Guardrail; 30-90 min per risky gameplay cycle | Keep as required guardrail for pressure/reward changes. | reference-artifacts/analyses/quality-conformance/2026-05-24-47f2c7e1d/report.json |
-| 15 | Player movement conformance | 6.1/10 | high-current-pass | reference trace plus controlled movement harness checks; expert micro-feel can still exceed scorer resolution | guardrail; cpu, browser | 16 runs; 17.6 min wall; 20.4 min CPU | Maintain 10 | Measured release category | Core control feel is already excellent. | Guardrail only | Do not tune unless a new reference metric proves a gap. | reference-artifacts/analyses/quality-conformance/2026-05-24-47f2c7e1d/report.json |
+| 15 | Player movement conformance | 10/10 | high-current-pass | reference trace plus controlled movement harness checks; expert micro-feel can still exceed scorer resolution | guardrail; cpu, browser | 16 runs; 17.6 min wall; 20.4 min CPU | Maintain 10 | Measured release category | Core control feel is already excellent. | Guardrail only | Do not tune unless a new reference metric proves a gap. | reference-artifacts/analyses/quality-conformance/2026-05-24-47f2c7e1d/report.json |
 | 16 | Shot and hit responsiveness | 10/10 | high-current-pass | functional combat-response guardrails; audiovisual semantics are scored separately | guardrail; cpu | 16 runs; 17.6 min wall; 20.4 min CPU | Maintain 10 | Measured release category | Core combat response is already excellent. | Guardrail only | Protect during explosion/audio/event feedback work. | reference-artifacts/analyses/quality-conformance/2026-05-24-47f2c7e1d/report.json |
 | 17 | Stage 1 opening geometry fidelity | 10/10 | high-current-pass | opening formation geometry checks; later-stage entry variation is separate | guardrail; cpu, browser | 16 runs; 17.6 min wall; 20.4 min CPU | Maintain 10 | Measured release category | Formation geometry is already locked. | Guardrail only | Protect during alien-entry visual work. | reference-artifacts/analyses/quality-conformance/2026-05-24-47f2c7e1d/report.json |
 | 18 | Capture and rescue rule fidelity | 10/10 | high-current-pass | rule/state harness checks; feedback clarity and reward feel are separate | guardrail; cpu | 16 runs; 17.6 min wall; 20.4 min CPU | Maintain 10 | Measured release category | Strong Galaga identity mechanic; should not regress while feedback improves. | Guardrail only | Use as release blocker for capture/rescue-adjacent audio or explosion changes. | reference-artifacts/analyses/quality-conformance/2026-05-24-47f2c7e1d/report.json |
@@ -73,14 +73,14 @@ Every release candidate should include both a conformance read and a resource/ti
 
 | Measure | Current read | Release-documentation use |
 | --- | --- | --- |
-| Latest overall conformance | 8.5/10 | Primary quality roll-up for release notes and scorecards |
+| Latest overall conformance | 8.8/10 | Primary quality roll-up for release notes and scorecards |
 | Latest level-arc conformance | 8.8/10 | Long-play gameplay-shape gate |
 | Metric points scanned | 2269 | History depth behind score trends |
-| Score deltas found | 167 | Past-goal movement available for review |
-| Measured runs | 876 | Tracked harness/model/local compute work |
-| Tracked wall time | 962.3 min | Human clock-time planning input |
-| Tracked CPU time | 961.6 min | Local compute-cost planning input |
-| Tracked artifact growth | 1450.9 MB | Evidence volume and storage/review-cost proxy |
+| Score deltas found | 165 | Past-goal movement available for review |
+| Measured runs | 880 | Tracked harness/model/local compute work |
+| Tracked wall time | 963.4 min | Human clock-time planning input |
+| Tracked CPU time | 963 min | Local compute-cost planning input |
+| Tracked artifact growth | 1457.2 MB | Evidence volume and storage/review-cost proxy |
 
 ### Latest Self-Critical Work-Block Read
 
@@ -112,8 +112,8 @@ The economics view now separates _how_ resources were applied from _what_ improv
 
 | Local CPU/browser purpose | Runs | Wall time | Share | Meaning |
 | --- | --- | --- | --- | --- |
-| Audio conformance and cue feedback | 510 | 504.2 min | 84.4% | Moves the moment-to-moment arcade feel: impact clarity, ambience identity, reward/loss feedback, and player understanding. |
-| Gameplay behavior and level complexity | 329 | 82.6 min | 13.8% | Moves player-facing pressure, stage shape, alien entry novelty, challenge-stage learning value, and long-play texture. |
+| Audio conformance and cue feedback | 510 | 504.2 min | 84.2% | Moves the moment-to-moment arcade feel: impact clarity, ambience identity, reward/loss feedback, and player understanding. |
+| Gameplay behavior and level complexity | 333 | 83.7 min | 14% | Moves player-facing pressure, stage shape, alien entry novelty, challenge-stage learning value, and long-play texture. |
 | Harness, ingestion, and assessment logic | 9 | 10.2 min | 1.7% | Moves reusable automation: scorers, artifact extraction, candidate loops, measurement confidence, and future game ingestion. |
 | Visual and video reference analysis | 15 | 0.4 min | 0.1% | Moves graphical identity, reference inspection, contact-sheet review, sprite/surface comparison, and readability. |
 | Dashboard, docs, and release planning | 6 | 0 min | 0% | Moves decision quality: what to invest in next, how to explain releases, and how to keep dev/beta/prod evidence aligned. |
@@ -130,8 +130,8 @@ The economics view now separates _how_ resources were applied from _what_ improv
 | Resource | Measured runs | Wall time | CPU time |
 | --- | --- | --- | --- |
 | gpu-equivalent | 18 | 630.8 min | 1.2 min |
-| cpu | 837 | 567.5 min | 909 min |
-| browser | 322 | 420.7 min | 647.5 min |
+| cpu | 841 | 568.6 min | 910.4 min |
+| browser | 326 | 421.8 min | 649 min |
 | codex | 13 | 365.7 min | 1.2 min |
 | openai-gpu-equivalent | 1 | 75 min | 0 min |
 | model-api | 2 | 25 min | 0 min |
@@ -147,7 +147,7 @@ The economics view now separates _how_ resources were applied from _what_ improv
 | challenge-perfect | 71 | 180.7 min | 180.1 min |
 | audio-runtime-trial | 27 | 162.1 min | 31.9 min |
 | audio-activity-profile | 10 | 127.2 min | 14 min |
-| challenge-stage | 113 | 94.9 min | 30.5 min |
+| challenge-stage | 117 | 96 min | 32 min |
 | audio-risk-stability | 8 | 91.4 min | 2.7 min |
 | release-hardening | 1 | 90 min | 0 min |
 
@@ -179,7 +179,7 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 | Priority | Source / evidence family | Axis | Artifact type | Coverage | Annotation status | Confidence | Linked metric | Anchor | Missing next |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Galaga-family reference audio clips | audio identity / event feedback | reference m4a cue clips | 50 clips | clipped, mapped, partially scored | medium-high | Audio identity, event feedback, and cue alignment | src/assets/reference-audio | Add finer event labels for explosion, impact, boss damage, immunity/entry, capture, and rescue semantics. |
-| 2 | Aurora audio cue comparison and event-gap reports | audio cue scoring | waveform/spectral/alignment/semantic reports | 21 compared cues; semantic 9.78/10; 0 attention rows | semantic-scored | medium-high | Audio identity, event feedback, and cue alignment | reference-artifacts/analyses/aurora-audio-event-gap/2026-05-24-47f2c7e1d-dirty-173139/report.json | Tune the highest segment-level gap next: challengePerfect onset. Rerun audio comparison and event-gap analysis after the change. |
+| 2 | Aurora audio cue comparison and event-gap reports | audio cue scoring | waveform/spectral/alignment/semantic reports | 21 compared cues; semantic 9.78/10; 0 attention rows | semantic-scored | medium-high | Audio identity, event feedback, and cue alignment | reference-artifacts/analyses/aurora-audio-event-gap/2026-05-24-47f2c7e1d-dirty-180459/report.json | Tune the highest segment-level gap next: challengePerfect onset. Rerun audio comparison and event-gap analysis after the change. |
 | 3 | Aurora Audio Conformance Lab v2 | audio candidate loop / family promotion decisions | cue-family risk, candidate history, keeper decision, promotion gate | 8/8 target cues swept; 2 keeper candidates tracked; runtime promotions 0; rejected runtime trials 3 | family-scored | medium-high | Audio identity, event feedback, and cue alignment | reference-artifacts/analyses/aurora-audio-conformance-lab-v2/2026-05-17-f9e7374c-dirty/report.json | challengePerfect: Do not promote Challenge Perfect from isolated onset/body candidates. Replace the next audio strategy with full-phrase/segment-boundary work: stabilize the scorer on canonical reference-vs-reference capture, then generate candidates that optimize onset, body, tail, and live capture segmentation together. |
 | 4 | Aurora audio cue contracts | audio semantic contract / theme latitude / promotion safety | cue contract readiness, theme lanes, runtime-trial blockers | 8 contracts; readiness 9.3/10; blocked 5; rejected trials 3 | contract-scored | medium-high | Audio identity, event feedback, and cue alignment | reference-artifacts/analyses/aurora-audio-cue-contracts/2026-05-17-f9e7374c-dirty-125733/report.json | Do not promote Challenge Perfect from isolated onset/body candidates. Replace the next audio strategy with full-phrase/segment-boundary work: stabilize the scorer on canonical reference-vs-reference capture, then generate candidates that optimize onset, body, tail, and live capture segmentation together. |
 | 5 | Aurora audio runtime trial decisions | audio promotion evidence / release guardrails | accepted, rejected, and inconclusive live runtime-trial outcomes | challengePerfect runtime-trial-rejected; candidate perfect-clean-onset-soft-tail | trial-recorded | medium-high | Audio identity, event feedback, and cue alignment | reference-artifacts/analyses/aurora-audio-runtime-trials/2026-05-17-f9e7374c-dirty-123945-challenge-perfect-rejected/report.json | Do not promote Challenge Perfect from isolated onset/body candidates. Replace the next audio strategy with full-phrase/segment-boundary work: stabilize the scorer on canonical reference-vs-reference capture, then generate candidates that optimize onset, body, tail, and live capture segmentation together. |
@@ -197,19 +197,19 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 
 ### Charts
 
-![score-trends](reference-artifacts/analyses/conformance-economics/2026-05-24-47f2c7e1d/score-trends.svg)
+![score-trends](reference-artifacts/analyses/conformance-economics/2026-05-24-a228db722/score-trends.svg)
 
-![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-05-24-47f2c7e1d/largest-score-deltas.svg)
+![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-05-24-a228db722/largest-score-deltas.svg)
 
-![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-05-24-47f2c7e1d/compute-minutes-by-resource.svg)
+![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-05-24-a228db722/compute-minutes-by-resource.svg)
 
-![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-05-24-47f2c7e1d/cost-per-positive-score-point.svg)
+![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-05-24-a228db722/cost-per-positive-score-point.svg)
 
-![gpu-equivalent-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-05-24-47f2c7e1d/gpu-equivalent-use-by-purpose.svg)
+![gpu-equivalent-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-05-24-a228db722/gpu-equivalent-use-by-purpose.svg)
 
-![cpu-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-05-24-47f2c7e1d/cpu-use-by-purpose.svg)
+![cpu-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-05-24-a228db722/cpu-use-by-purpose.svg)
 
-![gameplay-improvement-by-project-part](reference-artifacts/analyses/conformance-economics/2026-05-24-47f2c7e1d/gameplay-improvement-by-project-part.svg)
+![gameplay-improvement-by-project-part](reference-artifacts/analyses/conformance-economics/2026-05-24-a228db722/gameplay-improvement-by-project-part.svg)
 
 ## New First-Class Axes Added
 
@@ -235,5 +235,5 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 - Quality report: `reference-artifacts/analyses/quality-conformance/2026-05-24-47f2c7e1d/report.json`
 - Investment priority report: `reference-artifacts/analyses/conformance-investment-priorities/2026-05-19-fba7f625/report.json`
 - Level-arc report: `reference-artifacts/analyses/level-arc-conformance/2026-05-24-47f2c7e1d/report.json`
-- Economics report: `reference-artifacts/analyses/conformance-economics/2026-05-24-47f2c7e1d/report.json`
+- Economics report: `reference-artifacts/analyses/conformance-economics/2026-05-24-a228db722/report.json`
 - Equal current quality-category weight: `0.077`
