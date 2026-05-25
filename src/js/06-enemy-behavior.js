@@ -103,6 +103,50 @@ function challengePathSpeed(pathFamily,stage,classicStage3){
  }
 }
 
+function applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp){
+ const ref=e.referencePath;
+ const pts=Array.isArray(ref?.points)?ref.points:null;
+ if(!pts||pts.length<2)return false;
+ const first=pts[0],last=pts[pts.length-1];
+ const duration=Math.max(.75,+ref.durationS||+last.t||8);
+ const sourceCenterX=Number.isFinite(+ref.sourceCenterX)?+ref.sourceCenterX:.5;
+ const sourceCenterY=Number.isFinite(+ref.sourceCenterY)?+ref.sourceCenterY:.5;
+ const pathScaleX=Number.isFinite(+ref.pathScaleX)?+ref.pathScaleX:1;
+ const pathScaleY=Number.isFinite(+ref.pathScaleY)?+ref.pathScaleY:1;
+ const laneSpread=Number.isFinite(+ref.laneSpreadX)?+ref.laneSpreadX:9;
+ const rowSpread=Number.isFinite(+ref.rowSpreadY)?+ref.rowSpreadY:7;
+ const laneOffset=((slot-1.5)*laneSpread+(row ? .34 : -.24)*laneSpread)*arcAmp;
+ const rowOffset=row*rowSpread*dropAmp;
+ let point=last,prev=pts[Math.max(0,pts.length-2)];
+ if(u<=first.t){
+  point=first;prev=first;
+ }else if(u<last.t){
+  for(let i=1;i<pts.length;i++){
+   if(u<=pts[i].t){
+    const a=pts[i-1],b=pts[i],span=Math.max(.001,(+b.t||0)-(+a.t||0)),q=cl((u-(+a.t||0))/span,0,1);
+    point={
+     x:(+a.x||0)+((+b.x||0)-(+a.x||0))*q,
+     y:(+a.y||0)+((+b.y||0)-(+a.y||0))*q,
+     t:u
+    };
+    prev=a;
+    break;
+   }
+  }
+ }
+ const over=Math.max(0,u-duration);
+ const px=cl(sourceCenterX+((+point.x||sourceCenterX)-sourceCenterX)*pathScaleX,0,1);
+ const py=cl(sourceCenterY+((+point.y||sourceCenterY)-sourceCenterY)*pathScaleY,0,1);
+ const prevX=cl(sourceCenterX+((+prev.x||sourceCenterX)-sourceCenterX)*pathScaleX,0,1);
+ const dx=point&&prev?cl((px-prevX)*PLAY_W,-42,42):0;
+ const exitVy=Number.isFinite(+ref.exitVy)?+ref.exitVy:176;
+ const exitSide=side||sweep||1;
+ e.x=px*PLAY_W+laneOffset+Math.sin((u+slot*.21+wave*.37)*4.4)*2.2*arcAmp+over*(dx*.28+exitSide*18);
+ e.y=py*PLAY_H+rowOffset+over*exitVy*dropAmp;
+ if(over>.2)e.x+=sweep*Math.min(82,over*34)*arcAmp;
+ return true;
+}
+
 function updateChallengeEnemy(e,dt){
  if(e.spawn>0){
   e.spawn-=dt;
@@ -122,6 +166,7 @@ function updateChallengeEnemy(e,dt){
 	 const yOffset=Number.isFinite(+e.yOffset)?+e.yOffset:0;
 	 const topY=38+wave*14+row*8+yOffset;
 	 const entryDuration=pathFamily==='first-challenge-peel'?3.35:3.15;
+	 if(!applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)){
 	 if(u<entryDuration){
 	  const q=u/entryDuration,startX=side>0?PLAY_W+44:-44,curve=1-Math.pow(1-q,2);
 	  if(pathFamily==='hook-arc'){
@@ -368,6 +413,7 @@ function updateChallengeEnemy(e,dt){
 	   e.x=laneX-sweep*(4+q*34*fm.challengeSweep)+Math.sin(q*5.1+p)*1.2;
 	   e.y=topY+8+q*(classicStage3?188:198)*fm.challengeDrop;
 	  }
+	 }
 	 }
  const lowerFieldBias=Number.isFinite(+e.lowerFieldBias)?+e.lowerFieldBias:0;
  if(lowerFieldBias&&u>2.4){

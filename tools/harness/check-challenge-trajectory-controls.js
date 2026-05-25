@@ -37,7 +37,7 @@ for(const stage of REQUIRED_STAGES){
     fail(`Challenge stage ${stage} has too few group controls.`, row);
   }
   const seed = row.runtimeLayoutSeed || {};
-  for(const field of ['groupSpawnOffsets', 'groupSpeedScales', 'groupSoftSpeedScales', 'groupArcAmps', 'groupDropAmps', 'groupLowerFieldBiases', 'groupYOffsets', 'groupPathFamilies']){
+  for(const field of ['groupSpawnOffsets', 'groupSpeedScales', 'groupSoftSpeedScales', 'groupArcAmps', 'groupDropAmps', 'groupLowerFieldBiases', 'groupYOffsets', 'groupPathFamilies', 'groupReferencePaths']){
     if(!Array.isArray(seed[field]) || seed[field].length !== row.groups.length){
       fail(`Challenge stage ${stage} runtime seed field ${field} is invalid.`, seed);
     }
@@ -55,6 +55,13 @@ for(const stage of REQUIRED_STAGES){
     if(+control.durationS <= 0){
       fail(`Challenge stage ${stage} group ${group.groupIndex} has invalid duration.`, group);
     }
+    const referencePath = group.referencePath;
+    if(!referencePath || !Array.isArray(referencePath.points) || referencePath.points.length < 3){
+      fail(`Challenge stage ${stage} group ${group.groupIndex} is missing representative reference-path samples.`, group);
+    }
+    if(!Number.isFinite(+referencePath.durationS) || +referencePath.durationS <= 0){
+      fail(`Challenge stage ${stage} group ${group.groupIndex} reference path has invalid duration.`, group);
+    }
   }
 }
 
@@ -67,5 +74,6 @@ console.log(JSON.stringify({
   artifact: rel(REPORT),
   challengeCount: report.summary.challengeCount,
   groupCount: report.summary.groupCount,
+  referencePathGroupCount: report.summary.referencePathGroupCount,
   controlReadinessScore10: report.summary.controlReadinessScore10
 }, null, 2));

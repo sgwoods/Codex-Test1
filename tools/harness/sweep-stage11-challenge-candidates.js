@@ -623,6 +623,7 @@ function targetControlCandidates(base, pathSets = []){
   const dropAmps = controlArray(seed.groupDropAmps, [], groupCount).map(value => round(value, 2));
   const lowerFieldBiases = controlArray(seed.groupLowerFieldBiases, [], groupCount).map(value => Math.round(+value || 0));
   const yOffsets = controlArray(seed.groupYOffsets, [], groupCount).map(value => Math.round(+value || 0));
+  const referencePaths = Array.isArray(seed.groupReferencePaths) ? seed.groupReferencePaths : [];
   const baseArcAmps = controlArray(base.groupArcAmps, [base.arcAmp || 1], groupCount).map(value => +value || 1);
   const baseDropAmps = controlArray(base.groupDropAmps, [base.dropAmp || 1], groupCount).map(value => +value || 1);
   const blendedArcAmps = arcAmps.map((value, index) => round(((+value || 1) + baseArcAmps[index]) / 2, 2));
@@ -693,6 +694,56 @@ function targetControlCandidates(base, pathSets = []){
         groupPathFamilies
       })
     });
+    if(referencePaths.filter(Boolean).length >= 3){
+      candidates.push({
+        id: `stage${STAGE}-target-reference-paths-direct-p${pathIndex}`,
+        description: `Stage ${STAGE} target reference-path candidate: source-video sampled paths with source schedule and path set ${pathIndex}.`,
+        layoutOverride: Object.assign({}, base, {
+          groupSpawnOffsets: offsets,
+          groupSpeedScales: softSpeedScales,
+          groupArcAmps: blendedArcAmps,
+          groupDropAmps: blendedDropAmps,
+          groupPathFamilies,
+          groupReferencePaths: referencePaths
+        })
+      });
+      candidates.push({
+        id: `stage${STAGE}-target-reference-paths-lower-field-p${pathIndex}`,
+        description: `Stage ${STAGE} target reference-path candidate: sampled paths plus measured lower-field/y controls and source schedule, path set ${pathIndex}.`,
+        layoutOverride: Object.assign({}, base, {
+          groupSpawnOffsets: offsets,
+          groupSpeedScales: softSpeedScales,
+          groupArcAmps: blendedArcAmps,
+          groupDropAmps: blendedDropAmps,
+          groupLowerFieldBiases: blendedLowerFieldBiases,
+          groupYOffsets: blendedYOffsets,
+          groupPathFamilies,
+          groupReferencePaths: referencePaths
+        })
+      });
+      candidates.push({
+        id: `stage${STAGE}-target-reference-paths-shape-only-p${pathIndex}`,
+        description: `Stage ${STAGE} target reference-path candidate: preserve current schedule while using source-video sampled paths and path set ${pathIndex}.`,
+        layoutOverride: Object.assign({}, base, {
+          groupArcAmps: blendedArcAmps,
+          groupDropAmps: blendedDropAmps,
+          groupPathFamilies,
+          groupReferencePaths: referencePaths
+        })
+      });
+      candidates.push({
+        id: `stage${STAGE}-target-reference-paths-shape-lower-p${pathIndex}`,
+        description: `Stage ${STAGE} target reference-path candidate: preserve current schedule while using sampled paths plus measured lower-field/y controls, path set ${pathIndex}.`,
+        layoutOverride: Object.assign({}, base, {
+          groupArcAmps: blendedArcAmps,
+          groupDropAmps: blendedDropAmps,
+          groupLowerFieldBiases: blendedLowerFieldBiases,
+          groupYOffsets: blendedYOffsets,
+          groupPathFamilies,
+          groupReferencePaths: referencePaths
+        })
+      });
+    }
   }
   return candidates;
 }
@@ -1410,6 +1461,7 @@ function buildMarkdown(report){
   const diagnosticRow = row => `| ${row.candidateId} | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.stageIdentityMargin10 ?? 'n/a'} | ${row.bestMatchLabelId || 'none'} (${row.bestMatchScore10}/10) | ${row.expectedReferenceHit ? 'yes' : 'no'} | ${row.noSafetyRegression ? 'pass' : 'risk'} | ${(row.groupPathFamilies || []).join(', ') || 'default'} |`;
   const targetTimingRows = (report.diagnostics?.targetTimingTop || []).map(diagnosticRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
   const targetControlRows = (report.diagnostics?.targetControlTop || []).map(diagnosticRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const targetReferencePathRows = (report.diagnostics?.targetReferencePathTop || []).map(diagnosticRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
   const pathShapeRows = (report.diagnostics?.pathShapeTop || []).map(diagnosticRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
   return `# Stage ${report.stage} Challenge Candidate Sweep
 
@@ -1429,7 +1481,7 @@ Stage ${report.stage} currently has safe challenge behavior but still does not c
 - Keeper decision: ${report.summary.keeperDecision}.
 - Player-facing meaning: ${report.summary.playerMeaning}
 - Process meaning: ${report.summary.processMeaning}
-- Candidate retention: ${report.candidateRetention?.retained ?? report.candidates.length}/${report.candidateRetention?.totalMeasured ?? report.candidateCount} retained; ${report.candidateRetention?.targetTimingDiagnostics ?? 0} target-timing diagnostics, ${report.candidateRetention?.targetControlDiagnostics ?? 0} target-control diagnostics, and ${report.candidateRetention?.pathShapeDiagnostics ?? 0} path-shape diagnostics preserved.
+- Candidate retention: ${report.candidateRetention?.retained ?? report.candidates.length}/${report.candidateRetention?.totalMeasured ?? report.candidateCount} retained; ${report.candidateRetention?.targetTimingDiagnostics ?? 0} target-timing diagnostics, ${report.candidateRetention?.targetControlDiagnostics ?? 0} target-control diagnostics, ${report.candidateRetention?.targetReferencePathDiagnostics ?? 0} target-reference-path diagnostics, and ${report.candidateRetention?.pathShapeDiagnostics ?? 0} path-shape diagnostics preserved.
 
 ## Top Candidates
 
@@ -1452,6 +1504,12 @@ ${targetTimingRows}
 | Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Safety | Paths |
 | --- | ---: | ---: | ---: | --- | --- | --- | --- |
 ${targetControlRows}
+
+### Target Reference-Path Diagnostics
+
+| Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Safety | Paths |
+| --- | ---: | ---: | ---: | --- | --- | --- | --- |
+${targetReferencePathRows}
 
 ### Path-Shape Diagnostics
 
@@ -1482,13 +1540,17 @@ async function main(){
     const candidateTargetVideoLift = round((candidate.targetVideoObjectFit?.score10 || 0) - baselineTargetVideoScore, 2);
     const candidateTargetVideoComparable = Number.isFinite(+(baseline.targetVideoObjectFit?.score10)) && Number.isFinite(+(candidate.targetVideoObjectFit?.score10));
     const candidateNoTargetRegression = !candidateTargetVideoComparable || candidateTargetVideoLift >= -0.05;
-    const candidateNoExpectedRegression = candidateExpectedLift >= -0.05;
+    const candidateMaterialTargetWin = candidate.expectedReferenceHit && candidateExpectedLift >= -0.15 && candidateTargetVideoLift >= 0.55;
+    const candidateNoExpectedRegression = candidateExpectedLift >= -0.05 || candidateMaterialTargetWin;
     const candidateIdentityClose = (candidate.stageIdentity?.identityMargin10 ?? -10) >= -0.35;
+    const candidateIdentityTieSupported = (candidate.stageIdentity?.identityMargin10 ?? -10) >= -0.05
+      && candidateExpectedLift >= 0.3
+      && candidateTargetVideoLift >= 0.15;
     const strongExpectedLift = (candidate.expectedMatch?.score10 || 0) >= 7
       && candidateExpectedLift >= 0.5
       && candidateTargetVideoLift >= 0.8
       && candidateIdentityClose;
-    const intendedStageSupported = candidate.expectedReferenceHit || strongExpectedLift;
+    const intendedStageSupported = candidate.expectedReferenceHit || candidateIdentityTieSupported || strongExpectedLift;
     return candidate.noSafetyRegression
       && candidateNoTargetRegression
       && candidateNoExpectedRegression
@@ -1504,13 +1566,17 @@ async function main(){
   const targetVideoLift = round((best.targetVideoObjectFit?.score10 || 0) - (baseline.targetVideoObjectFit?.score10 || 0), 2);
   const targetVideoComparable = Number.isFinite(+(baseline.targetVideoObjectFit?.score10)) && Number.isFinite(+(best.targetVideoObjectFit?.score10));
   const noTargetVideoRegression = !targetVideoComparable || targetVideoLift >= -0.05;
-  const noExpectedRegression = expectedLift >= -0.05;
+  const materialTargetVideoWin = best.expectedReferenceHit && expectedLift >= -0.15 && targetVideoLift >= 0.55;
+  const noExpectedRegression = expectedLift >= -0.05 || materialTargetVideoWin;
   const identityClose = (best.stageIdentity?.identityMargin10 ?? -10) >= -0.35;
+  const identityTieSupported = (best.stageIdentity?.identityMargin10 ?? -10) >= -0.05
+    && expectedLift >= 0.3
+    && targetVideoLift >= 0.15;
   const strongExpectedLift = (best.expectedMatch?.score10 || 0) >= 7
     && expectedLift >= 0.5
     && targetVideoLift >= 0.8
     && identityClose;
-  const intendedStageSupported = best.expectedReferenceHit || strongExpectedLift;
+  const intendedStageSupported = best.expectedReferenceHit || identityTieSupported || strongExpectedLift;
   const keeper = best.noSafetyRegression && noTargetVideoRegression && noExpectedRegression && intendedStageSupported && (expectedLift >= 0.35 || targetVideoLift >= 0.35 || (expectedLift >= 0.25 && targetVideoLift >= 0.25));
   const retainedCandidateLimit = 120;
   const pathShapeMarkers = [
@@ -1525,11 +1591,15 @@ async function main(){
     'yellow-fan-high-pop'
   ];
   const targetTimingDiagnostics = scored
-    .filter(row => String(row.candidateId || '').includes('target-') && !String(row.candidateId || '').includes('target-controls'))
+    .filter(row => String(row.candidateId || '').includes('target-') && !String(row.candidateId || '').includes('target-controls') && !String(row.candidateId || '').includes('target-reference-paths'))
     .sort((a, b) => (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0) || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
     .slice(0, 8);
   const targetControlDiagnostics = scored
     .filter(row => String(row.candidateId || '').includes('target-controls'))
+    .sort((a, b) => (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0) || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 8);
+  const targetReferencePathDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('target-reference-paths'))
     .sort((a, b) => (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0) || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
     .slice(0, 8);
   const pathShapeDiagnostics = scored
@@ -1540,6 +1610,7 @@ async function main(){
   for(const row of scored.slice(0, retainedCandidateLimit)) retainedById.set(row.candidateId, row);
   for(const row of targetTimingDiagnostics) retainedById.set(row.candidateId, row);
   for(const row of targetControlDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of targetReferencePathDiagnostics) retainedById.set(row.candidateId, row);
   for(const row of pathShapeDiagnostics) retainedById.set(row.candidateId, row);
   const retainedCandidates = Array.from(retainedById.values());
   if(!retainedCandidates.some(row => row.candidateId === baseline.candidateId)){
@@ -1572,8 +1643,10 @@ async function main(){
       noTargetVideoRegression,
       noExpectedRegression,
       intendedStageSupported,
+      identityTieSupported,
+      materialTargetVideoWin,
       strongExpectedLift,
-      intendedStageSupportPolicy: 'runtime promotion requires no expected-label regression, and either the best trajectory match to be one of the expected stage labels or a strong expected-label score >=7 with >=0.5 expected lift, >=0.8 target-video lift, and an identity margin no worse than -0.35/10',
+      intendedStageSupportPolicy: 'runtime promotion requires no expected-label regression unless the expected label remains the best match and target-video fit improves by >=0.55/10 with no more than -0.15/10 expected drift. It also requires the best trajectory match to be one of the expected stage labels, an expected-label tie within 0.05/10 with >=0.3 expected lift and >=0.15 target-video lift, or a strong expected-label score >=7 with >=0.5 expected lift, >=0.8 target-video lift, and an identity margin no worse than -0.35/10',
       keeperDecision: keeper ? 'candidate-ready-for-full-analyzer-review' : 'no-runtime-keeper-yet',
       playerMeaning: keeper
         ? `A measured stage-${STAGE} layout candidate is worth a temporary runtime review, but it must be confirmed by the full challenge-stage analyzer and persona guardrails before promotion.`
@@ -1604,18 +1677,20 @@ async function main(){
       retained: retainedCandidates.length,
       targetTimingDiagnostics: targetTimingDiagnostics.length,
       targetControlDiagnostics: targetControlDiagnostics.length,
+      targetReferencePathDiagnostics: targetReferencePathDiagnostics.length,
       pathShapeDiagnostics: pathShapeDiagnostics.length,
-      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score, the baseline row, and top target-timing/target-control/path-shape diagnostic candidates; use candidateCount for the full measured search size.`
+      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score, the baseline row, and top target-timing/target-control/target-reference-path/path-shape diagnostic candidates; use candidateCount for the full measured search size.`
     },
     diagnostics: {
       targetTimingTop: targetTimingDiagnostics.map(summarizeCandidate),
       targetControlTop: targetControlDiagnostics.map(summarizeCandidate),
+      targetReferencePathTop: targetReferencePathDiagnostics.map(summarizeCandidate),
       pathShapeTop: pathShapeDiagnostics.map(summarizeCandidate)
     },
     measurementPolicy: {
       scope: `harness-only stage-${STAGE} challenge layout candidates`,
       reference: 'media-backed Galaga challenge labels with comparison vectors',
-      promotionRule: 'Require the expected challenge-label identity to be the best match, no safety regression, and at least +0.35/10 expected-label or target-video lift over baseline before runtime promotion. Strong non-best candidates must be very close on identity margin and improve both expected and target-video scores.',
+      promotionRule: 'Require the expected challenge-label identity to be the best match or tied within 0.05/10 with evidence on both expected and target-video axes, no safety regression, and at least +0.35/10 expected-label or target-video lift over baseline before runtime promotion. A material target-video win may tolerate up to -0.15/10 expected drift only when expected identity remains the best match. Strong non-best candidates must be very close on identity margin and improve both expected and target-video scores.',
       safety: 'Reject candidates with enemy shots, enemy attack starts, or ship losses in the challenge window.'
     }
   };

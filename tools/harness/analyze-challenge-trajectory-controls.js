@@ -120,11 +120,69 @@ function pathFamilyForIntent(challengeNumber, intent, target = {}){
   return 'hook-arc';
 }
 
-function controlForGroup(challengeNumber, group){
+function referencePathForGroup(challenge, group){
+  const target = group.objectTrackTarget || {};
+  const tracks = Array.isArray(challenge.candidateTracks) ? challenge.candidateTracks : [];
+  const groupTrackIds = new Set(Array.isArray(group.trackIds) ? group.trackIds : []);
+  const candidates = tracks
+    .filter(track => groupTrackIds.has(track.id) && Array.isArray(track.sampledPoints) && track.sampledPoints.length >= 3)
+    .sort((a, b) => {
+      const aScore = (+a.sampleCount || 0) + (+a.pathLength || 0) * 14 + (+a.durationSeconds || 0) * 2;
+      const bScore = (+b.sampleCount || 0) + (+b.pathLength || 0) * 14 + (+b.durationSeconds || 0) * 2;
+      return bScore - aScore;
+    });
+  const source = candidates[0] || null;
+  if(!source) return null;
+  const rawPoints = source.sampledPoints
+    .map(point => ({
+      t: +point.t || 0,
+      x: round(clamp(point.x), 4),
+      y: round(clamp(point.y), 4)
+    }))
+    .filter(point => Number.isFinite(point.t) && Number.isFinite(point.x) && Number.isFinite(point.y))
+    .sort((a, b) => a.t - b.t);
+  if(rawPoints.length < 3) return null;
+  const originT = rawPoints[0].t;
+  const points = rawPoints.map(point => Object.assign({}, point, {
+    t: round(point.t - originT, 3)
+  }));
+  const deduped = [];
+  for(const point of points){
+    if(!deduped.length || Math.abs(point.t - deduped[deduped.length - 1].t) >= 0.08){
+      deduped.push(point);
+    }
+  }
+  if(deduped.length < 3) return null;
+  const xs = deduped.map(point => point.x);
+  const ys = deduped.map(point => point.y);
+  const sourceXRange = Math.max(0.001, Math.max(...xs) - Math.min(...xs));
+  const sourceYRange = Math.max(0.001, Math.max(...ys) - Math.min(...ys));
+  const sourceCenterX = average(xs);
+  const sourceCenterY = average(ys);
+  const targetXRange = Math.max(0.001, +target.xRange || sourceXRange);
+  const targetYRange = Math.max(0.001, +target.yRange || sourceYRange);
+  return {
+    sourceTrackId: source.id,
+    sourceSampleCount: source.sampleCount || deduped.length,
+    durationS: round(Math.max(0.75, deduped[deduped.length - 1].t), 3),
+    laneSpreadX: round(7.5 + Math.min(6, (+target.xRange || 0.2) * 10), 2),
+    rowSpreadY: round(5.5 + Math.min(5.5, (+target.yRange || 0.2) * 6), 2),
+    pathScaleX: round(clamp(targetXRange / sourceXRange, 0.72, 5.6), 3),
+    pathScaleY: round(clamp(targetYRange / sourceYRange, 0.72, 5.6), 3),
+    sourceCenterX: round(sourceCenterX, 4),
+    sourceCenterY: round(sourceCenterY, 4),
+    exitVy: round(142 + clamp(+target.lowerFieldShare || 0, 0, 1) * 74, 1),
+    points: deduped,
+    read: `Representative target path ${source.id} with ${deduped.length} sampled point(s), normalized to track-visible time and scaled toward group x/y envelope.`
+  };
+}
+
+function controlForGroup(challengeNumber, group, challenge){
   const target = group.objectTrackTarget || {};
   const durationS = Math.max(0.75, (+target.visibleEndS || 0) - (+target.visibleStartS || 0));
   const intent = intentForTarget(challengeNumber, target);
   const pathFamily = pathFamilyForIntent(challengeNumber, intent, target);
+  const referencePath = referencePathForGroup(challenge, group);
   const xRange = +target.xRange || 0;
   const yRange = +target.yRange || 0;
   const lower = +target.lowerFieldShare || 0;
@@ -153,6 +211,7 @@ function controlForGroup(challengeNumber, group){
       lowerFieldBias,
       yOffset
     },
+    referencePath,
     comparisonTargets: {
       xRange: round(xRange, 4),
       yRange: round(yRange, 4),
@@ -169,7 +228,7 @@ function controlForGroup(challengeNumber, group){
 function challengeControlRow(challenge, sweepRow){
   const challengeNumber = +challenge.challengeNumber;
   const stage = stageForChallenge(challengeNumber);
-  const groups = (challenge.targetGroups || []).map(group => controlForGroup(challengeNumber, group));
+  const groups = (challenge.targetGroups || []).map(group => controlForGroup(challengeNumber, group, challenge));
   const runtimeLayoutSeed = {
     groupSpawnOffsets: groups.map(group => group.runtimeControl.spawnOffsetS),
     groupSpeedScales: groups.map(group => group.runtimeControl.speedScale),
@@ -178,7 +237,8 @@ function challengeControlRow(challenge, sweepRow){
     groupDropAmps: groups.map(group => group.runtimeControl.dropAmp),
     groupLowerFieldBiases: groups.map(group => group.runtimeControl.lowerFieldBias),
     groupYOffsets: groups.map(group => group.runtimeControl.yOffset),
-    groupPathFamilies: groups.map(group => group.runtimePathFamilyHint)
+    groupPathFamilies: groups.map(group => group.runtimePathFamilyHint),
+    groupReferencePaths: groups.map(group => group.referencePath)
   };
   const averageConfidence = average(groups.map(group => group.confidence));
   const targetYRange = average(groups.map(group => group.comparisonTargets.yRange));
@@ -275,8 +335,9 @@ function main(){
       averageLowerFieldShare: round(average(challenges.map(row => row.averageLowerFieldShare)), 4),
       controlReadinessScore10: round(average(challenges.map(row => row.controlReadiness10)), 1),
       runtimeReadyCount: sweepIndex.summary?.runtimeReadyCount || 0,
+      referencePathGroupCount: challenges.reduce((sum, row) => sum + row.groups.filter(group => group.referencePath).length, 0),
       weakestStage: challenges.slice().sort((a, b) => (a.controlReadiness10 || 0) - (b.controlReadiness10 || 0))[0]?.stage || null,
-      read: 'Reference video object tracks now produce explicit candidate controls for challenge-stage group timing, speed, arc/drop scale, lower-field travel, y-offset, and path-family hints. This should reduce blind CPU sweeps and make failed candidates easier to diagnose.'
+      read: 'Reference video object tracks now produce explicit candidate controls for challenge-stage group timing, speed, arc/drop scale, lower-field travel, y-offset, path-family hints, and representative sampled paths. This should reduce blind CPU sweeps and make failed candidates easier to diagnose.'
     },
     measurementLimits: [
       'Controls are derived from object-track summary vectors, not frame-perfect spline paths.',

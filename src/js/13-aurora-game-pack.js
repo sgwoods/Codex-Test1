@@ -683,6 +683,14 @@ const AURORA_STAGE_CADENCE=Object.freeze({
  challengeEvery:4
 });
 
+const AURORA_CHALLENGE_STAGE7_REFERENCE_PATHS=Object.freeze([
+ Object.freeze({sourceTrackId:'target-track-10',sourceSampleCount:14,durationS:1.88,laneSpreadX:13.5,rowSpreadY:6.56,pathScaleX:3.227,pathScaleY:5.6,sourceCenterX:.5702,sourceCenterY:.5311,exitVy:214.6,points:Object.freeze([{t:0,x:.4436,y:.5299},{t:.13,x:.4347,y:.5325},{t:.63,x:.5163,y:.5305},{t:.75,x:.5537,y:.5305},{t:1,x:.6251,y:.5317},{t:1.13,x:.6258,y:.5312},{t:1.38,x:.6258,y:.5312},{t:1.5,x:.6258,y:.5312},{t:1.75,x:.6258,y:.5312},{t:1.88,x:.6258,y:.5312}])}),
+ Object.freeze({sourceTrackId:'target-track-66',sourceSampleCount:21,durationS:2.63,laneSpreadX:9.36,rowSpreadY:9.56,pathScaleX:2.158,pathScaleY:5.349,sourceCenterX:.4753,sourceCenterY:.5734,exitVy:165.1,points:Object.freeze([{t:0,x:.4315,y:.5016},{t:.38,x:.5176,y:.4881},{t:.63,x:.5173,y:.4881},{t:1,x:.4756,y:.5754},{t:1.25,x:.4715,y:.6146},{t:1.5,x:.4683,y:.6134},{t:1.75,x:.4681,y:.6134},{t:2.13,x:.4681,y:.6131},{t:2.38,x:.4673,y:.6133},{t:2.63,x:.4675,y:.6132}])}),
+ Object.freeze({sourceTrackId:'target-track-71',sourceSampleCount:7,durationS:.75,laneSpreadX:8.04,rowSpreadY:6.01,pathScaleX:1.178,pathScaleY:1.268,sourceCenterX:.4866,sourceCenterY:.5839,exitVy:216,points:Object.freeze([{t:0,x:.4952,y:.5488},{t:.13,x:.4955,y:.5489},{t:.25,x:.4762,y:.5966},{t:.38,x:.4746,y:.6026},{t:.5,x:.4741,y:.6121},{t:.63,x:.5181,y:.6157},{t:.75,x:.4727,y:.5629}])}),
+ Object.freeze({sourceTrackId:'target-track-110',sourceSampleCount:13,durationS:2,laneSpreadX:13.5,rowSpreadY:9.58,pathScaleX:5.288,pathScaleY:5.6,sourceCenterX:.456,sourceCenterY:.2218,exitVy:180.2,points:Object.freeze([{t:0,x:.3424,y:.2444},{t:.12,x:.3286,y:.2484},{t:.75,x:.4161,y:.226},{t:1,x:.4962,y:.2142},{t:1.12,x:.4962,y:.2142},{t:1.37,x:.4962,y:.2142},{t:1.5,x:.4961,y:.2141},{t:1.62,x:.4962,y:.2143},{t:1.87,x:.496,y:.2142},{t:2,x:.4957,y:.214}])}),
+ Object.freeze({sourceTrackId:'target-track-142',sourceSampleCount:16,durationS:2.5,laneSpreadX:8.95,rowSpreadY:9.58,pathScaleX:1.856,pathScaleY:1.721,sourceCenterX:.5503,sourceCenterY:.2624,exitVy:174.3,points:Object.freeze([{t:0,x:.5003,y:.2186},{t:.62,x:.5683,y:.1825},{t:.75,x:.5633,y:.1909},{t:1,x:.5681,y:.1826},{t:1.25,x:.5681,y:.1648},{t:1.37,x:.5681,y:.1648},{t:1.62,x:.5728,y:.2007},{t:1.87,x:.5585,y:.3449},{t:2,x:.5403,y:.4148},{t:2.5,x:.4948,y:.5596}])})
+]);
+
 const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
  Object.freeze({
   fromStage:3,
@@ -722,11 +730,12 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   rowSpacingY:9,
   waveDelay:1.28,
   slotDelay:.14,
+  groupSpawnOffsets:Object.freeze([0,2.88,4.25,7.13,13.38]),
   arcAmp:1.28,
   dropAmp:1.14,
-  groupArcAmps:Object.freeze([1.34,1.28,1.46,1.38,1.18]),
-  groupDropAmps:Object.freeze([.86,.94,1.08,1.12,1.02]),
-  groupSpeedScales:Object.freeze([1.34,1.28,1.22,1.18,1.16]),
+  groupArcAmps:Object.freeze([1.63,1.26,1.27,1.79,1.21]),
+  groupDropAmps:Object.freeze([1.01,1.25,1.08,1.37,1.31]),
+  groupSpeedScales:Object.freeze([2.65,1.97,2.65,2.12,2.65]),
   laneTypes:Object.freeze(['but','boss','rogue','bee','bee','rogue','boss','but']),
   groupLaneTypes:Object.freeze([
    Object.freeze(['but','boss','rogue','bee','bee','rogue','boss','but']),
@@ -736,7 +745,8 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
    Object.freeze(['but','rogue','boss','bee','bee','boss','rogue','but'])
   ]),
   groupVisualFamilies:Object.freeze(['classic','scorpion','scorpion','stingray','stingray']),
-  groupPathFamilies:Object.freeze(['hook-arc','cross-sweep','hook-arc','cross-sweep','boss-led-loop'])
+  groupPathFamilies:Object.freeze(['hook-arc','cross-sweep','hook-arc','cross-sweep','boss-led-loop']),
+  groupReferencePaths:AURORA_CHALLENGE_STAGE7_REFERENCE_PATHS
  }),
  Object.freeze({
   fromStage:11,

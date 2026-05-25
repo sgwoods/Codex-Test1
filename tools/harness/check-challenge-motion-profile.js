@@ -47,6 +47,33 @@ async function sampleChallengeMotion(page){
   return samples;
 }
 
+function validateStage7ReferencePathSetup(state){
+  const layout = state?.layout || {};
+  const referencePaths = Array.isArray(layout.groupReferencePaths) ? layout.groupReferencePaths : [];
+  if(layout.id !== 'scorpion-cross-sweep'){
+    fail('stage 7 challenge layout no longer resolves to the expected promoted layout', {
+      layoutId: layout.id,
+      stage: state?.stage
+    });
+  }
+  if(referencePaths.length < 5){
+    fail('stage 7 challenge layout lost its promoted reference path groups', {
+      layoutId: layout.id,
+      referencePathGroups: referencePaths.length
+    });
+  }
+  const enemies = Array.isArray(state?.enemies) ? state.enemies : [];
+  const tracked = enemies.filter(e => e?.referencePath && e.referencePath.pointCount >= 3 && e.referencePath.durationS > 0);
+  const trackIds = [...new Set(tracked.map(e => e.referencePath.sourceTrackId).filter(Boolean))];
+  if(enemies.length < 30 || tracked.length !== enemies.length || trackIds.length < 5){
+    fail('stage 7 challenge enemies are not all carrying valid reference path metadata', {
+      enemyCount: enemies.length,
+      referenceTrackedCount: tracked.length,
+      trackIds
+    });
+  }
+}
+
 async function main(){
   const result = await withHarnessPage({ stage: 3, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
     await page.evaluate(() => window.__galagaHarness__.setupChallengeMotionProfileTest({ stage: 3 }));
@@ -75,7 +102,20 @@ async function main(){
     }
   }
 
-  console.log(JSON.stringify({ ok: true, samples: result }, null, 2));
+  const stage7 = await withHarnessPage({ stage: 7, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
+    const initial = await page.evaluate(() => window.__galagaHarness__.setupChallengeMotionProfileTest({ stage: 7 }));
+    await sleep(700);
+    const underway = await page.evaluate(() => window.__galagaHarness__.challengeFormationState());
+    return { initial, underway };
+  });
+  validateStage7ReferencePathSetup(stage7.initial);
+  validateStage7ReferencePathSetup(stage7.underway);
+
+  console.log(JSON.stringify({ ok: true, samples: result, stage7ReferencePath: {
+    enemyCount: stage7.initial.enemies.length,
+    referencePathGroups: stage7.initial.layout.groupReferencePaths.length,
+    sourceTrackIds: [...new Set(stage7.initial.enemies.map(e => e.referencePath?.sourceTrackId).filter(Boolean))]
+  } }, null, 2));
 }
 
 main().catch(err => fail(err && err.stack || String(err)));
