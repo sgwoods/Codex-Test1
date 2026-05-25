@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-24T20-27-01-611Z-92153",
-  "startedAt": "2026-05-24T20:27:01.611Z",
-  "endedAt": "2026-05-24T20:27:12.911Z",
+  "id": "2026-05-25T05-13-54-288Z-10711",
+  "startedAt": "2026-05-25T05:13:54.288Z",
+  "endedAt": "2026-05-25T05:14:02.636Z",
   "branch": "codex/macbook-challenge-stage-conformance-cycle",
-  "commit": "a228db722",
+  "commit": "abb6ccaef",
   "command": [
     "node",
     "tools/harness/sweep-stage11-challenge-candidates.js",
@@ -13,6 +13,7 @@
   ],
   "axes": [
     "challenge-stage",
+    "challenge-trajectory-controls",
     "challenge-candidate-sweep"
   ],
   "resources": [
@@ -21,11 +22,11 @@
   ],
   "notes": "",
   "measurement": {
-    "wallSeconds": 11.3,
-    "timeRealSeconds": 11.29,
-    "timeUserSeconds": 13.63,
-    "timeSystemSeconds": 1.23,
-    "cpuSeconds": 14.86,
+    "wallSeconds": 8.348,
+    "timeRealSeconds": 8.34,
+    "timeUserSeconds": 10.26,
+    "timeSystemSeconds": 1.2,
+    "cpuSeconds": 11.46,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -47,8 +48,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 1842036015,
-    "artifactBytesAfter": 1843100849,
-    "artifactBytesDelta": 1064834
+    "artifactBytesBefore": 1849508046,
+    "artifactBytesAfter": 1850909917,
+    "artifactBytesDelta": 1401871
   }
 }

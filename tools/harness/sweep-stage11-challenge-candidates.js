@@ -8,6 +8,7 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep');
 const LABELS_PATH = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-path-reference-labels', 'latest.json');
 const TARGET_TRACKS_PATH = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-challenge-object-tracks', 'latest.json');
+const TARGET_CONTROLS_PATH = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-trajectory-controls', 'latest.json');
 function argValue(name, fallback = ''){
   const prefix = `--${name}=`;
   const direct = process.argv.find(arg => arg.startsWith(prefix));
@@ -513,6 +514,35 @@ function targetGroupsForStage(stage){
   return Array.isArray(challenge?.targetGroups) ? challenge.targetGroups : [];
 }
 
+function targetControlsForStage(stage){
+  const artifact = readJson(TARGET_CONTROLS_PATH, {});
+  const challengeNumber = challengeNumberForStage(stage);
+  return (artifact.challenges || []).find(item => +item.challengeNumber === +challengeNumber || +item.stage === +stage) || null;
+}
+
+function dedupePathSets(pathSets){
+  const seen = new Set();
+  const out = [];
+  for(const set of pathSets){
+    const clean = Array.isArray(set) ? set.filter(Boolean) : [];
+    if(!clean.length) continue;
+    const key = clean.join('|');
+    if(seen.has(key)) continue;
+    seen.add(key);
+    out.push(clean);
+  }
+  return out;
+}
+
+function controlArray(values, fallback, length){
+  const source = Array.isArray(values) && values.length ? values : fallback;
+  const out = [];
+  for(let index = 0; index < length; index += 1){
+    out.push(source?.[index] ?? fallback?.[index] ?? fallback?.[0] ?? 1);
+  }
+  return out;
+}
+
 function targetTimingCandidates(base, pathSets = []){
   const groups = targetGroupsForStage(STAGE);
   if(groups.length < 3) return [];
@@ -568,6 +598,101 @@ function targetTimingCandidates(base, pathSets = []){
         });
       }
     }
+  }
+  return candidates;
+}
+
+function targetControlCandidates(base, pathSets = []){
+  const controls = targetControlsForStage(STAGE);
+  const seed = controls?.runtimeLayoutSeed || null;
+  const groups = Array.isArray(controls?.groups) ? controls.groups : [];
+  if(!seed || groups.length < 3) return [];
+  const groupCount = groups.length;
+  const baseSpeeds = Array.isArray(base.groupSpeedScales) && base.groupSpeedScales.length
+    ? base.groupSpeedScales
+    : Array.from({ length: groupCount }, () => 1);
+  const pathVariants = dedupePathSets([
+    seed.groupPathFamilies,
+    base.groupPathFamilies,
+    ...pathSets
+  ]);
+  const offsets = controlArray(seed.groupSpawnOffsets, [], groupCount).map(value => round(value, 2));
+  const speedScales = controlArray(seed.groupSpeedScales, baseSpeeds, groupCount).map(value => round(value, 2));
+  const softSpeedScales = controlArray(seed.groupSoftSpeedScales, baseSpeeds, groupCount).map(value => round(value, 2));
+  const arcAmps = controlArray(seed.groupArcAmps, [], groupCount).map(value => round(value, 2));
+  const dropAmps = controlArray(seed.groupDropAmps, [], groupCount).map(value => round(value, 2));
+  const lowerFieldBiases = controlArray(seed.groupLowerFieldBiases, [], groupCount).map(value => Math.round(+value || 0));
+  const yOffsets = controlArray(seed.groupYOffsets, [], groupCount).map(value => Math.round(+value || 0));
+  const baseArcAmps = controlArray(base.groupArcAmps, [base.arcAmp || 1], groupCount).map(value => +value || 1);
+  const baseDropAmps = controlArray(base.groupDropAmps, [base.dropAmp || 1], groupCount).map(value => +value || 1);
+  const blendedArcAmps = arcAmps.map((value, index) => round(((+value || 1) + baseArcAmps[index]) / 2, 2));
+  const blendedDropAmps = dropAmps.map((value, index) => round(((+value || 1) + baseDropAmps[index]) / 2, 2));
+  const blendedLowerFieldBiases = lowerFieldBiases.map(value => Math.round((+value || 0) * 0.5));
+  const blendedYOffsets = yOffsets.map(value => Math.round((+value || 0) * 0.5));
+  const candidates = [];
+  for(let pathIndex = 0; pathIndex < pathVariants.length; pathIndex += 1){
+    const groupPathFamilies = pathVariants[pathIndex];
+    candidates.push({
+      id: `stage${STAGE}-target-controls-direct-p${pathIndex}`,
+      description: `Stage ${STAGE} target-trajectory controls: source-video schedule, direct duration speed, arc/drop, lower-field, y-offset, path set ${pathIndex}.`,
+      layoutOverride: Object.assign({}, base, {
+        groupSpawnOffsets: offsets,
+        groupSpeedScales: speedScales,
+        groupArcAmps: arcAmps,
+        groupDropAmps: dropAmps,
+        groupLowerFieldBiases: lowerFieldBiases,
+        groupYOffsets: yOffsets,
+        groupPathFamilies
+      })
+    });
+    candidates.push({
+      id: `stage${STAGE}-target-controls-soft-p${pathIndex}`,
+      description: `Stage ${STAGE} target-trajectory controls: source-video schedule with softer duration speed and full shape controls, path set ${pathIndex}.`,
+      layoutOverride: Object.assign({}, base, {
+        groupSpawnOffsets: offsets,
+        groupSpeedScales: softSpeedScales,
+        groupArcAmps: arcAmps,
+        groupDropAmps: dropAmps,
+        groupLowerFieldBiases: lowerFieldBiases,
+        groupYOffsets: yOffsets,
+        groupPathFamilies
+      })
+    });
+    candidates.push({
+      id: `stage${STAGE}-target-controls-shape-only-p${pathIndex}`,
+      description: `Stage ${STAGE} target-trajectory controls: preserve current schedule/speed but apply source-video arc/drop/lower-field/y-offset shape, path set ${pathIndex}.`,
+      layoutOverride: Object.assign({}, base, {
+        groupArcAmps: arcAmps,
+        groupDropAmps: dropAmps,
+        groupLowerFieldBiases: lowerFieldBiases,
+        groupYOffsets: yOffsets,
+        groupPathFamilies
+      })
+    });
+    candidates.push({
+      id: `stage${STAGE}-target-controls-shape-blend-p${pathIndex}`,
+      description: `Stage ${STAGE} target-trajectory controls: preserve current schedule/speed and apply half-strength source-video shape controls, path set ${pathIndex}.`,
+      layoutOverride: Object.assign({}, base, {
+        groupArcAmps: blendedArcAmps,
+        groupDropAmps: blendedDropAmps,
+        groupLowerFieldBiases: blendedLowerFieldBiases,
+        groupYOffsets: blendedYOffsets,
+        groupPathFamilies
+      })
+    });
+    candidates.push({
+      id: `stage${STAGE}-target-controls-soft-blend-p${pathIndex}`,
+      description: `Stage ${STAGE} target-trajectory controls: source-video schedule with softer duration speed and half-strength shape controls, path set ${pathIndex}.`,
+      layoutOverride: Object.assign({}, base, {
+        groupSpawnOffsets: offsets,
+        groupSpeedScales: softSpeedScales,
+        groupArcAmps: blendedArcAmps,
+        groupDropAmps: blendedDropAmps,
+        groupLowerFieldBiases: blendedLowerFieldBiases,
+        groupYOffsets: blendedYOffsets,
+        groupPathFamilies
+      })
+    });
   }
   return candidates;
 }
@@ -843,6 +968,7 @@ function candidateDefinitions(){
       }
     }
     candidates.push(...targetTimingCandidates(base, pathSets));
+    candidates.push(...targetControlCandidates(base, pathSets));
     return candidates;
   }
   if(STAGE === 15){
@@ -906,6 +1032,7 @@ function candidateDefinitions(){
         }
     }
     candidates.push(...targetTimingCandidates(base, pathSets));
+    candidates.push(...targetControlCandidates(base, pathSets));
     return candidates;
   }
   if(STAGE === 19 || STAGE === 31){
@@ -1023,6 +1150,7 @@ function candidateDefinitions(){
       }
     }
     candidates.push(...targetTimingCandidates(base, pathSets));
+    candidates.push(...targetControlCandidates(base, pathSets));
     return candidates;
   }
   if(STAGE === 23 || STAGE === 27){
@@ -1074,6 +1202,7 @@ function candidateDefinitions(){
       }
     }
     candidates.push(...targetTimingCandidates(base, pathSets));
+    candidates.push(...targetControlCandidates(base, pathSets));
     return candidates;
   }
   const pathSets = [
@@ -1108,6 +1237,7 @@ function candidateDefinitions(){
     }
   }
   candidates.push(...targetTimingCandidates(base, pathSets));
+  candidates.push(...targetControlCandidates(base, pathSets));
   return candidates;
 }
 
@@ -1279,6 +1409,7 @@ function buildMarkdown(report){
   }).join('\n');
   const diagnosticRow = row => `| ${row.candidateId} | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.stageIdentityMargin10 ?? 'n/a'} | ${row.bestMatchLabelId || 'none'} (${row.bestMatchScore10}/10) | ${row.expectedReferenceHit ? 'yes' : 'no'} | ${row.noSafetyRegression ? 'pass' : 'risk'} | ${(row.groupPathFamilies || []).join(', ') || 'default'} |`;
   const targetTimingRows = (report.diagnostics?.targetTimingTop || []).map(diagnosticRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const targetControlRows = (report.diagnostics?.targetControlTop || []).map(diagnosticRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
   const pathShapeRows = (report.diagnostics?.pathShapeTop || []).map(diagnosticRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
   return `# Stage ${report.stage} Challenge Candidate Sweep
 
@@ -1298,7 +1429,7 @@ Stage ${report.stage} currently has safe challenge behavior but still does not c
 - Keeper decision: ${report.summary.keeperDecision}.
 - Player-facing meaning: ${report.summary.playerMeaning}
 - Process meaning: ${report.summary.processMeaning}
-- Candidate retention: ${report.candidateRetention?.retained ?? report.candidates.length}/${report.candidateRetention?.totalMeasured ?? report.candidateCount} retained; ${report.candidateRetention?.targetTimingDiagnostics ?? 0} target-timing diagnostics and ${report.candidateRetention?.pathShapeDiagnostics ?? 0} path-shape diagnostics preserved.
+- Candidate retention: ${report.candidateRetention?.retained ?? report.candidates.length}/${report.candidateRetention?.totalMeasured ?? report.candidateCount} retained; ${report.candidateRetention?.targetTimingDiagnostics ?? 0} target-timing diagnostics, ${report.candidateRetention?.targetControlDiagnostics ?? 0} target-control diagnostics, and ${report.candidateRetention?.pathShapeDiagnostics ?? 0} path-shape diagnostics preserved.
 
 ## Top Candidates
 
@@ -1315,6 +1446,12 @@ These rows are intentionally retained even when they are not promotion candidate
 | Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Safety | Paths |
 | --- | ---: | ---: | ---: | --- | --- | --- | --- |
 ${targetTimingRows}
+
+### Target-Control Diagnostics
+
+| Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Safety | Paths |
+| --- | ---: | ---: | ---: | --- | --- | --- | --- |
+${targetControlRows}
 
 ### Path-Shape Diagnostics
 
@@ -1388,7 +1525,11 @@ async function main(){
     'yellow-fan-high-pop'
   ];
   const targetTimingDiagnostics = scored
-    .filter(row => String(row.candidateId || '').includes('target-'))
+    .filter(row => String(row.candidateId || '').includes('target-') && !String(row.candidateId || '').includes('target-controls'))
+    .sort((a, b) => (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0) || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 8);
+  const targetControlDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('target-controls'))
     .sort((a, b) => (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0) || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
     .slice(0, 8);
   const pathShapeDiagnostics = scored
@@ -1398,6 +1539,7 @@ async function main(){
   const retainedById = new Map();
   for(const row of scored.slice(0, retainedCandidateLimit)) retainedById.set(row.candidateId, row);
   for(const row of targetTimingDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of targetControlDiagnostics) retainedById.set(row.candidateId, row);
   for(const row of pathShapeDiagnostics) retainedById.set(row.candidateId, row);
   const retainedCandidates = Array.from(retainedById.values());
   if(!retainedCandidates.some(row => row.candidateId === baseline.candidateId)){
@@ -1439,7 +1581,7 @@ async function main(){
       processMeaning: 'Future challenge tuning can now compare many runtime candidates against Galaga labels before editing game constants.',
       nextStep: keeper
         ? `Apply the best candidate temporarily, rerun full challenge-stage conformance plus guardrails, and accept it only if the full analyzer confirms the expected lift.`
-        : `Broaden the candidate strategy to include path-shape constants or richer reference labels before changing runtime stage-${STAGE} gameplay.`
+        : `Use target-trajectory controls and richer reference labels before changing runtime stage-${STAGE} gameplay.`
     },
     candidates: retainedCandidates.map(row => ({
       candidateId: row.candidateId,
@@ -1461,11 +1603,13 @@ async function main(){
       totalMeasured: scored.length,
       retained: retainedCandidates.length,
       targetTimingDiagnostics: targetTimingDiagnostics.length,
+      targetControlDiagnostics: targetControlDiagnostics.length,
       pathShapeDiagnostics: pathShapeDiagnostics.length,
-      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score, the baseline row, and top target-timing/path-shape diagnostic candidates; use candidateCount for the full measured search size.`
+      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score, the baseline row, and top target-timing/target-control/path-shape diagnostic candidates; use candidateCount for the full measured search size.`
     },
     diagnostics: {
       targetTimingTop: targetTimingDiagnostics.map(summarizeCandidate),
+      targetControlTop: targetControlDiagnostics.map(summarizeCandidate),
       pathShapeTop: pathShapeDiagnostics.map(summarizeCandidate)
     },
     measurementPolicy: {

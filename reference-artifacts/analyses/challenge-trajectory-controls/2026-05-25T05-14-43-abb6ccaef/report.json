@@ -1,0 +1,2297 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "challenge-trajectory-controls",
+  "generatedAt": "2026-05-25T05:14:43.499Z",
+  "commit": "abb6ccaef",
+  "branch": "codex/macbook-challenge-stage-conformance-cycle",
+  "sourceArtifacts": {
+    "galagaChallengeObjectTracks": "reference-artifacts/analyses/galaga-challenge-object-tracks/latest.json",
+    "challengeStageCandidateSweepIndex": "reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json"
+  },
+  "summary": {
+    "challengeCount": 8,
+    "stages": [
+      3,
+      7,
+      11,
+      15,
+      19,
+      23,
+      27,
+      31
+    ],
+    "groupCount": 40,
+    "averageConfidence": 0.685,
+    "averageTargetXRange": 0.4025,
+    "averageTargetYRange": 0.4892,
+    "averageLowerFieldShare": 0.5683,
+    "controlReadinessScore10": 8.6,
+    "runtimeReadyCount": 0,
+    "weakestStage": 27,
+    "read": "Reference video object tracks now produce explicit candidate controls for challenge-stage group timing, speed, arc/drop scale, lower-field travel, y-offset, and path-family hints. This should reduce blind CPU sweeps and make failed candidates easier to diagnose."
+  },
+  "measurementLimits": [
+    "Controls are derived from object-track summary vectors, not frame-perfect spline paths.",
+    "Path-family hints map target motion intent onto Aurora runtime primitives and must be swept before promotion.",
+    "Current object tracking does not yet assign exact Galaga alien identity to every target group.",
+    "No player-visible runtime behavior changes from this artifact alone."
+  ],
+  "challenges": [
+    {
+      "challengeNumber": 1,
+      "stage": 3,
+      "label": "Challenging Stage 1 (Levels 3-4)",
+      "sourceVideo": "challenge-all2.mp4",
+      "sourceWindow": {
+        "id": "challenge-01-classic-column-lesson",
+        "sourceId": "challenge-all2-single-ship-all-perfects",
+        "stageMarker": 3,
+        "family": "classic-column-and-side-arc",
+        "motionRead": "Introductory challenge teaches vertical columns, simple side hooks, upper-band score windows, and the perfect-result loop.",
+        "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-1fps.jpg",
+        "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-2fps.jpg",
+        "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/motion-review-4fps.jpg",
+        "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/frame-index.json"
+      },
+      "groupCount": 5,
+      "averageConfidence": 0.714,
+      "averageTargetXRange": 0.337,
+      "averageTargetYRange": 0.4528,
+      "averageLowerFieldShare": 0.5833,
+      "controlReadiness10": 8.7,
+      "currentSweepDecision": "no-runtime-keeper-yet",
+      "currentSweepBestExpectedScore10": 6.2,
+      "currentSweepBestTargetVideoObjectFitScore10": 2.9,
+      "runtimeLayoutSeed": {
+        "groupSpawnOffsets": [
+          0,
+          4.38,
+          7.75,
+          11.25,
+          15.25
+        ],
+        "groupSpeedScales": [
+          2.52,
+          1.34,
+          1.99,
+          1.77,
+          3.4
+        ],
+        "groupSoftSpeedScales": [
+          2.12,
+          1.13,
+          1.67,
+          1.49,
+          2.65
+        ],
+        "groupArcAmps": [
+          1.72,
+          1.31,
+          1.72,
+          1.68,
+          1.03
+        ],
+        "groupDropAmps": [
+          1.16,
+          1.6,
+          1.5,
+          1.51,
+          1.12
+        ],
+        "groupLowerFieldBiases": [
+          188,
+          38,
+          119,
+          134,
+          0
+        ],
+        "groupYOffsets": [
+          86,
+          1,
+          40,
+          47,
+          0
+        ],
+        "groupPathFamilies": [
+          "first-challenge-peel",
+          "classic-column-drop",
+          "first-challenge-peel",
+          "side-hook-return",
+          "side-hook-return"
+        ]
+      },
+      "groups": [
+        {
+          "groupIndex": 1,
+          "confidence": 0.737,
+          "trackCount": 14,
+          "target": {
+            "visibleStartS": 0,
+            "visibleEndS": 3.25,
+            "entrySide": "left",
+            "exitSide": "center",
+            "xRange": 0.5437,
+            "yRange": 0.1652,
+            "pathLength": 0.0221,
+            "turnCount": 2.64,
+            "reversalCount": 1.57,
+            "lowerFieldShare": 1
+          },
+          "controlIntent": "first-challenge-peel-or-hook",
+          "runtimePathFamilyHint": "first-challenge-peel",
+          "runtimeControl": {
+            "spawnOffsetS": 0,
+            "durationS": 3.25,
+            "speedScale": 2.52,
+            "softSpeedScale": 2.12,
+            "arcAmp": 1.72,
+            "dropAmp": 1.16,
+            "lowerFieldBias": 188,
+            "yOffset": 86
+          },
+          "comparisonTargets": {
+            "xRange": 0.5437,
+            "yRange": 0.1652,
+            "pathLength": 0.0221,
+            "turnCount": 2.64,
+            "reversalCount": 1.57,
+            "lowerFieldShare": 1,
+            "entrySide": "left",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 2,
+          "confidence": 0.754,
+          "trackCount": 12,
+          "target": {
+            "visibleStartS": 4.38,
+            "visibleEndS": 10.5,
+            "entrySide": "center",
+            "exitSide": "center",
+            "xRange": 0.2073,
+            "yRange": 0.6865,
+            "pathLength": 0.254,
+            "turnCount": 4.25,
+            "reversalCount": 2.92,
+            "lowerFieldShare": 0.456
+          },
+          "controlIntent": "classic-tall-bonus-column",
+          "runtimePathFamilyHint": "classic-column-drop",
+          "runtimeControl": {
+            "spawnOffsetS": 4.38,
+            "durationS": 6.12,
+            "speedScale": 1.34,
+            "softSpeedScale": 1.13,
+            "arcAmp": 1.31,
+            "dropAmp": 1.6,
+            "lowerFieldBias": 38,
+            "yOffset": 1
+          },
+          "comparisonTargets": {
+            "xRange": 0.2073,
+            "yRange": 0.6865,
+            "pathLength": 0.254,
+            "turnCount": 4.25,
+            "reversalCount": 2.92,
+            "lowerFieldShare": 0.456,
+            "entrySide": "center",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 3,
+          "confidence": 0.762,
+          "trackCount": 10,
+          "target": {
+            "visibleStartS": 7.75,
+            "visibleEndS": 11.88,
+            "entrySide": "left",
+            "exitSide": "center",
+            "xRange": 0.4352,
+            "yRange": 0.5399,
+            "pathLength": 0.2846,
+            "turnCount": 6,
+            "reversalCount": 5,
+            "lowerFieldShare": 0.7069
+          },
+          "controlIntent": "first-challenge-peel-or-hook",
+          "runtimePathFamilyHint": "first-challenge-peel",
+          "runtimeControl": {
+            "spawnOffsetS": 7.75,
+            "durationS": 4.13,
+            "speedScale": 1.99,
+            "softSpeedScale": 1.67,
+            "arcAmp": 1.72,
+            "dropAmp": 1.5,
+            "lowerFieldBias": 119,
+            "yOffset": 40
+          },
+          "comparisonTargets": {
+            "xRange": 0.4352,
+            "yRange": 0.5399,
+            "pathLength": 0.2846,
+            "turnCount": 6,
+            "reversalCount": 5,
+            "lowerFieldShare": 0.7069,
+            "entrySide": "left",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 4,
+          "confidence": 0.773,
+          "trackCount": 14,
+          "target": {
+            "visibleStartS": 11.25,
+            "visibleEndS": 15.88,
+            "entrySide": "center",
+            "exitSide": "center",
+            "xRange": 0.4319,
+            "yRange": 0.5387,
+            "pathLength": 0.3166,
+            "turnCount": 6.14,
+            "reversalCount": 4.21,
+            "lowerFieldShare": 0.7534
+          },
+          "controlIntent": "upper-band-bonus-line",
+          "runtimePathFamilyHint": "side-hook-return",
+          "runtimeControl": {
+            "spawnOffsetS": 11.25,
+            "durationS": 4.63,
+            "speedScale": 1.77,
+            "softSpeedScale": 1.49,
+            "arcAmp": 1.68,
+            "dropAmp": 1.51,
+            "lowerFieldBias": 134,
+            "yOffset": 47
+          },
+          "comparisonTargets": {
+            "xRange": 0.4319,
+            "yRange": 0.5387,
+            "pathLength": 0.3166,
+            "turnCount": 6.14,
+            "reversalCount": 4.21,
+            "lowerFieldShare": 0.7534,
+            "entrySide": "center",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 5,
+          "confidence": 0.542,
+          "trackCount": 5,
+          "target": {
+            "visibleStartS": 15.25,
+            "visibleEndS": 15.88,
+            "entrySide": "center",
+            "exitSide": "center",
+            "xRange": 0.0669,
+            "yRange": 0.3339,
+            "pathLength": 0.0867,
+            "turnCount": 1.6,
+            "reversalCount": 1.2,
+            "lowerFieldShare": 0
+          },
+          "controlIntent": "upper-band-bonus-line",
+          "runtimePathFamilyHint": "side-hook-return",
+          "runtimeControl": {
+            "spawnOffsetS": 15.25,
+            "durationS": 0.75,
+            "speedScale": 3.4,
+            "softSpeedScale": 2.65,
+            "arcAmp": 1.03,
+            "dropAmp": 1.12,
+            "lowerFieldBias": 0,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.0669,
+            "yRange": 0.3339,
+            "pathLength": 0.0867,
+            "turnCount": 1.6,
+            "reversalCount": 1.2,
+            "lowerFieldShare": 0,
+            "entrySide": "center",
+            "exitSide": "center"
+          }
+        }
+      ],
+      "read": "Target-derived controls preserve 5 group schedule(s), path-family hint(s), speed scale(s), arc/drop scale(s), and lower-field bias(es) for stage 3. These are candidate inputs only until a sweep and full analyzer promote them."
+    },
+    {
+      "challengeNumber": 2,
+      "stage": 7,
+      "label": "Challenging Stage 2 (Levels 7-8)",
+      "sourceVideo": "challenge-all2.mp4",
+      "sourceWindow": {
+        "id": "challenge-02-cross-and-column",
+        "sourceId": "challenge-all2-single-ship-all-perfects",
+        "stageMarker": 7,
+        "family": "red-column-blue-side-cross",
+        "motionRead": "Adds side-crossing and vertical red-column trains; groups arrive through visible route commitments rather than appearing in place.",
+        "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/contact-sheet-1fps.jpg",
+        "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/contact-sheet-2fps.jpg",
+        "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/motion-review-4fps.jpg",
+        "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/frame-index.json"
+      },
+      "groupCount": 5,
+      "averageConfidence": 0.67,
+      "averageTargetXRange": 0.3774,
+      "averageTargetYRange": 0.4596,
+      "averageLowerFieldShare": 0.6491,
+      "controlReadiness10": 8.5,
+      "currentSweepDecision": "no-runtime-keeper-yet",
+      "currentSweepBestExpectedScore10": 6,
+      "currentSweepBestTargetVideoObjectFitScore10": 3.4,
+      "runtimeLayoutSeed": {
+        "groupSpawnOffsets": [
+          0,
+          2.88,
+          4.25,
+          7.13,
+          13.38
+        ],
+        "groupSpeedScales": [
+          3.4,
+          2.34,
+          3.4,
+          2.52,
+          3.28
+        ],
+        "groupSoftSpeedScales": [
+          2.65,
+          1.97,
+          2.65,
+          2.12,
+          2.65
+        ],
+        "groupArcAmps": [
+          1.91,
+          1.24,
+          1.07,
+          2.21,
+          1.25
+        ],
+        "groupDropAmps": [
+          1.17,
+          1.56,
+          1.07,
+          1.61,
+          1.59
+        ],
+        "groupLowerFieldBiases": [
+          188,
+          0,
+          188,
+          57,
+          31
+        ],
+        "groupYOffsets": [
+          83,
+          0,
+          86,
+          10,
+          0
+        ],
+        "groupPathFamilies": [
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "cross-sweep",
+          "hook-arc"
+        ]
+      },
+      "groups": [
+        {
+          "groupIndex": 1,
+          "confidence": 0.752,
+          "trackCount": 16,
+          "target": {
+            "visibleStartS": 0,
+            "visibleEndS": 1.88,
+            "entrySide": "center",
+            "exitSide": "left",
+            "xRange": 0.6166,
+            "yRange": 0.177,
+            "pathLength": 0.1176,
+            "turnCount": 5.31,
+            "reversalCount": 3.44,
+            "lowerFieldShare": 0.9815
+          },
+          "controlIntent": "mixed-crossing-sweep",
+          "runtimePathFamilyHint": "cross-sweep",
+          "runtimeControl": {
+            "spawnOffsetS": 0,
+            "durationS": 1.88,
+            "speedScale": 3.4,
+            "softSpeedScale": 2.65,
+            "arcAmp": 1.91,
+            "dropAmp": 1.17,
+            "lowerFieldBias": 188,
+            "yOffset": 83
+          },
+          "comparisonTargets": {
+            "xRange": 0.6166,
+            "yRange": 0.177,
+            "pathLength": 0.1176,
+            "turnCount": 5.31,
+            "reversalCount": 3.44,
+            "lowerFieldShare": 0.9815,
+            "entrySide": "center",
+            "exitSide": "left"
+          }
+        },
+        {
+          "groupIndex": 2,
+          "confidence": 0.706,
+          "trackCount": 9,
+          "target": {
+            "visibleStartS": 2.88,
+            "visibleEndS": 6.38,
+            "entrySide": "center",
+            "exitSide": "center",
+            "xRange": 0.1858,
+            "yRange": 0.6766,
+            "pathLength": 0.1686,
+            "turnCount": 3,
+            "reversalCount": 2.22,
+            "lowerFieldShare": 0.3122
+          },
+          "controlIntent": "mixed-hook-arrival",
+          "runtimePathFamilyHint": "hook-arc",
+          "runtimeControl": {
+            "spawnOffsetS": 2.88,
+            "durationS": 3.5,
+            "speedScale": 2.34,
+            "softSpeedScale": 1.97,
+            "arcAmp": 1.24,
+            "dropAmp": 1.56,
+            "lowerFieldBias": 0,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.1858,
+            "yRange": 0.6766,
+            "pathLength": 0.1686,
+            "turnCount": 3,
+            "reversalCount": 2.22,
+            "lowerFieldShare": 0.3122,
+            "entrySide": "center",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 3,
+          "confidence": 0.447,
+          "trackCount": 2,
+          "target": {
+            "visibleStartS": 4.25,
+            "visibleEndS": 5,
+            "entrySide": "center",
+            "exitSide": "center",
+            "xRange": 0.0535,
+            "yRange": 0.0848,
+            "pathLength": 0.154,
+            "turnCount": 2.5,
+            "reversalCount": 2.5,
+            "lowerFieldShare": 1
+          },
+          "controlIntent": "mixed-hook-arrival",
+          "runtimePathFamilyHint": "hook-arc",
+          "runtimeControl": {
+            "spawnOffsetS": 4.25,
+            "durationS": 0.75,
+            "speedScale": 3.4,
+            "softSpeedScale": 2.65,
+            "arcAmp": 1.07,
+            "dropAmp": 1.07,
+            "lowerFieldBias": 188,
+            "yOffset": 86
+          },
+          "comparisonTargets": {
+            "xRange": 0.0535,
+            "yRange": 0.0848,
+            "pathLength": 0.154,
+            "turnCount": 2.5,
+            "reversalCount": 2.5,
+            "lowerFieldShare": 1,
+            "entrySide": "center",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 4,
+          "confidence": 0.719,
+          "trackCount": 25,
+          "target": {
+            "visibleStartS": 7.13,
+            "visibleEndS": 10.38,
+            "entrySide": "left",
+            "exitSide": "center",
+            "xRange": 0.8862,
+            "yRange": 0.6802,
+            "pathLength": 0.1472,
+            "turnCount": 2.12,
+            "reversalCount": 1.6,
+            "lowerFieldShare": 0.5156
+          },
+          "controlIntent": "mixed-crossing-sweep",
+          "runtimePathFamilyHint": "cross-sweep",
+          "runtimeControl": {
+            "spawnOffsetS": 7.13,
+            "durationS": 3.25,
+            "speedScale": 2.52,
+            "softSpeedScale": 2.12,
+            "arcAmp": 2.21,
+            "dropAmp": 1.61,
+            "lowerFieldBias": 57,
+            "yOffset": 10
+          },
+          "comparisonTargets": {
+            "xRange": 0.8862,
+            "yRange": 0.6802,
+            "pathLength": 0.1472,
+            "turnCount": 2.12,
+            "reversalCount": 1.6,
+            "lowerFieldShare": 0.5156,
+            "entrySide": "left",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 5,
+          "confidence": 0.728,
+          "trackCount": 9,
+          "target": {
+            "visibleStartS": 13.38,
+            "visibleEndS": 15.88,
+            "entrySide": "center",
+            "exitSide": "center",
+            "xRange": 0.1448,
+            "yRange": 0.6796,
+            "pathLength": 0.2417,
+            "turnCount": 4.89,
+            "reversalCount": 3.67,
+            "lowerFieldShare": 0.4362
+          },
+          "controlIntent": "mixed-hook-arrival",
+          "runtimePathFamilyHint": "hook-arc",
+          "runtimeControl": {
+            "spawnOffsetS": 13.38,
+            "durationS": 2.5,
+            "speedScale": 3.28,
+            "softSpeedScale": 2.65,
+            "arcAmp": 1.25,
+            "dropAmp": 1.59,
+            "lowerFieldBias": 31,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.1448,
+            "yRange": 0.6796,
+            "pathLength": 0.2417,
+            "turnCount": 4.89,
+            "reversalCount": 3.67,
+            "lowerFieldShare": 0.4362,
+            "entrySide": "center",
+            "exitSide": "center"
+          }
+        }
+      ],
+      "read": "Target-derived controls preserve 5 group schedule(s), path-family hint(s), speed scale(s), arc/drop scale(s), and lower-field bias(es) for stage 7. These are candidate inputs only until a sweep and full analyzer promote them."
+    },
+    {
+      "challengeNumber": 3,
+      "stage": 11,
+      "label": "Challenging Stage 3 (Levels 11-12)",
+      "sourceVideo": "challenge-all2.mp4",
+      "sourceWindow": {
+        "id": "challenge-03-blue-hook-and-green-novelty",
+        "sourceId": "challenge-all2-single-ship-all-perfects",
+        "stageMarker": 11,
+        "family": "blue-hook-green-novelty",
+        "motionRead": "Blue side hooks and green novelty shapes make the third challenge visually distinct and less column-like.",
+        "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/contact-sheet-1fps.jpg",
+        "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/contact-sheet-2fps.jpg",
+        "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/motion-review-4fps.jpg",
+        "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/frame-index.json"
+      },
+      "groupCount": 5,
+      "averageConfidence": 0.686,
+      "averageTargetXRange": 0.3245,
+      "averageTargetYRange": 0.6346,
+      "averageLowerFieldShare": 0.4101,
+      "controlReadiness10": 8.6,
+      "currentSweepDecision": "no-runtime-keeper-yet",
+      "currentSweepBestExpectedScore10": 7.6,
+      "currentSweepBestTargetVideoObjectFitScore10": null,
+      "runtimeLayoutSeed": {
+        "groupSpawnOffsets": [
+          0,
+          0.88,
+          4.38,
+          7.88,
+          12.13
+        ],
+        "groupSpeedScales": [
+          3.4,
+          2.73,
+          2.05,
+          1.64,
+          2.19
+        ],
+        "groupSoftSpeedScales": [
+          2.65,
+          2.3,
+          1.72,
+          1.38,
+          1.84
+        ],
+        "groupArcAmps": [
+          1.1,
+          1.46,
+          1.7,
+          1.69,
+          1.22
+        ],
+        "groupDropAmps": [
+          1.54,
+          1.42,
+          1.54,
+          1.58,
+          1.6
+        ],
+        "groupLowerFieldBiases": [
+          135,
+          0,
+          19,
+          29,
+          0
+        ],
+        "groupYOffsets": [
+          48,
+          0,
+          0,
+          0,
+          0
+        ],
+        "groupPathFamilies": [
+          "hook-arc",
+          "hook-arc",
+          "hook-arc",
+          "hook-arc",
+          "hook-arc"
+        ]
+      },
+      "groups": [
+        {
+          "groupIndex": 1,
+          "confidence": 0.564,
+          "trackCount": 5,
+          "target": {
+            "visibleStartS": 0,
+            "visibleEndS": 1.5,
+            "entrySide": "right",
+            "exitSide": "right",
+            "xRange": 0.1432,
+            "yRange": 0.5704,
+            "pathLength": 0.2349,
+            "turnCount": 1.4,
+            "reversalCount": 0.4,
+            "lowerFieldShare": 0.7559
+          },
+          "controlIntent": "boss-led-tall-hook",
+          "runtimePathFamilyHint": "hook-arc",
+          "runtimeControl": {
+            "spawnOffsetS": 0,
+            "durationS": 1.5,
+            "speedScale": 3.4,
+            "softSpeedScale": 2.65,
+            "arcAmp": 1.1,
+            "dropAmp": 1.54,
+            "lowerFieldBias": 135,
+            "yOffset": 48
+          },
+          "comparisonTargets": {
+            "xRange": 0.1432,
+            "yRange": 0.5704,
+            "pathLength": 0.2349,
+            "turnCount": 1.4,
+            "reversalCount": 0.4,
+            "lowerFieldShare": 0.7559,
+            "entrySide": "right",
+            "exitSide": "right"
+          }
+        },
+        {
+          "groupIndex": 2,
+          "confidence": 0.674,
+          "trackCount": 8,
+          "target": {
+            "visibleStartS": 0.88,
+            "visibleEndS": 3.88,
+            "entrySide": "right",
+            "exitSide": "center",
+            "xRange": 0.3636,
+            "yRange": 0.5826,
+            "pathLength": 0.183,
+            "turnCount": 2.88,
+            "reversalCount": 1.5,
+            "lowerFieldShare": 0.1563
+          },
+          "controlIntent": "boss-led-tall-hook",
+          "runtimePathFamilyHint": "hook-arc",
+          "runtimeControl": {
+            "spawnOffsetS": 0.88,
+            "durationS": 3,
+            "speedScale": 2.73,
+            "softSpeedScale": 2.3,
+            "arcAmp": 1.46,
+            "dropAmp": 1.42,
+            "lowerFieldBias": 0,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.3636,
+            "yRange": 0.5826,
+            "pathLength": 0.183,
+            "turnCount": 2.88,
+            "reversalCount": 1.5,
+            "lowerFieldShare": 0.1563,
+            "entrySide": "right",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 3,
+          "confidence": 0.739,
+          "trackCount": 12,
+          "target": {
+            "visibleStartS": 4.38,
+            "visibleEndS": 8.38,
+            "entrySide": "right",
+            "exitSide": "center",
+            "xRange": 0.5149,
+            "yRange": 0.6385,
+            "pathLength": 0.2499,
+            "turnCount": 3,
+            "reversalCount": 2.08,
+            "lowerFieldShare": 0.3979
+          },
+          "controlIntent": "boss-led-tall-hook",
+          "runtimePathFamilyHint": "hook-arc",
+          "runtimeControl": {
+            "spawnOffsetS": 4.38,
+            "durationS": 4,
+            "speedScale": 2.05,
+            "softSpeedScale": 1.72,
+            "arcAmp": 1.7,
+            "dropAmp": 1.54,
+            "lowerFieldBias": 19,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.5149,
+            "yRange": 0.6385,
+            "pathLength": 0.2499,
+            "turnCount": 3,
+            "reversalCount": 2.08,
+            "lowerFieldShare": 0.3979,
+            "entrySide": "right",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 4,
+          "confidence": 0.739,
+          "trackCount": 12,
+          "target": {
+            "visibleStartS": 7.88,
+            "visibleEndS": 12.88,
+            "entrySide": "center",
+            "exitSide": "center",
+            "xRange": 0.4596,
+            "yRange": 0.6683,
+            "pathLength": 0.2167,
+            "turnCount": 3.42,
+            "reversalCount": 3.42,
+            "lowerFieldShare": 0.4306
+          },
+          "controlIntent": "boss-led-tall-hook",
+          "runtimePathFamilyHint": "hook-arc",
+          "runtimeControl": {
+            "spawnOffsetS": 7.88,
+            "durationS": 5,
+            "speedScale": 1.64,
+            "softSpeedScale": 1.38,
+            "arcAmp": 1.69,
+            "dropAmp": 1.58,
+            "lowerFieldBias": 29,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.4596,
+            "yRange": 0.6683,
+            "pathLength": 0.2167,
+            "turnCount": 3.42,
+            "reversalCount": 3.42,
+            "lowerFieldShare": 0.4306,
+            "entrySide": "center",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 5,
+          "confidence": 0.713,
+          "trackCount": 9,
+          "target": {
+            "visibleStartS": 12.13,
+            "visibleEndS": 15.88,
+            "entrySide": "center",
+            "exitSide": "center",
+            "xRange": 0.1413,
+            "yRange": 0.713,
+            "pathLength": 0.2128,
+            "turnCount": 3,
+            "reversalCount": 3.11,
+            "lowerFieldShare": 0.31
+          },
+          "controlIntent": "boss-led-tall-hook",
+          "runtimePathFamilyHint": "hook-arc",
+          "runtimeControl": {
+            "spawnOffsetS": 12.13,
+            "durationS": 3.75,
+            "speedScale": 2.19,
+            "softSpeedScale": 1.84,
+            "arcAmp": 1.22,
+            "dropAmp": 1.6,
+            "lowerFieldBias": 0,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.1413,
+            "yRange": 0.713,
+            "pathLength": 0.2128,
+            "turnCount": 3,
+            "reversalCount": 3.11,
+            "lowerFieldShare": 0.31,
+            "entrySide": "center",
+            "exitSide": "center"
+          }
+        }
+      ],
+      "read": "Target-derived controls preserve 5 group schedule(s), path-family hint(s), speed scale(s), arc/drop scale(s), and lower-field bias(es) for stage 11. These are candidate inputs only until a sweep and full analyzer promote them."
+    },
+    {
+      "challengeNumber": 4,
+      "stage": 15,
+      "label": "Challenging Stage 4 (Levels 15-16)",
+      "sourceVideo": "challenge-all2.mp4",
+      "sourceWindow": {
+        "id": "challenge-04-pink-serpentine",
+        "sourceId": "challenge-all2-single-ship-all-perfects",
+        "stageMarker": 15,
+        "family": "pink-serpentine-and-green-entry",
+        "motionRead": "Late challenge starts showing long pink serpentine arcs and separate green specialty entries.",
+        "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-1fps.jpg",
+        "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-2fps.jpg",
+        "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/motion-review-4fps.jpg",
+        "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/frame-index.json"
+      },
+      "groupCount": 5,
+      "averageConfidence": 0.691,
+      "averageTargetXRange": 0.3374,
+      "averageTargetYRange": 0.3881,
+      "averageLowerFieldShare": 0.729,
+      "controlReadiness10": 8.6,
+      "currentSweepDecision": "no-runtime-keeper-yet",
+      "currentSweepBestExpectedScore10": 6.3,
+      "currentSweepBestTargetVideoObjectFitScore10": 3.3,
+      "runtimeLayoutSeed": {
+        "groupSpawnOffsets": [
+          0,
+          0.5,
+          2.88,
+          6.38,
+          13.13
+        ],
+        "groupSpeedScales": [
+          2.52,
+          2.98,
+          2.19,
+          2.34,
+          2.98
+        ],
+        "groupSoftSpeedScales": [
+          2.12,
+          2.51,
+          1.84,
+          1.97,
+          2.51
+        ],
+        "groupArcAmps": [
+          1.54,
+          1.3,
+          1.31,
+          1.31,
+          1.83
+        ],
+        "groupDropAmps": [
+          1.33,
+          1.21,
+          1.59,
+          1.59,
+          0.98
+        ],
+        "groupLowerFieldBiases": [
+          158,
+          188,
+          41,
+          14,
+          188
+        ],
+        "groupYOffsets": [
+          59,
+          80,
+          3,
+          0,
+          86
+        ],
+        "groupPathFamilies": [
+          "pink-serpentine",
+          "pink-serpentine",
+          "pink-serpentine",
+          "pink-serpentine",
+          "pink-serpentine"
+        ]
+      },
+      "groups": [
+        {
+          "groupIndex": 1,
+          "confidence": 0.678,
+          "trackCount": 8,
+          "target": {
+            "visibleStartS": 0,
+            "visibleEndS": 3.25,
+            "entrySide": "center",
+            "exitSide": "center",
+            "xRange": 0.3711,
+            "yRange": 0.355,
+            "pathLength": 0.1338,
+            "turnCount": 4.63,
+            "reversalCount": 2.88,
+            "lowerFieldShare": 0.8281
+          },
+          "controlIntent": "pink-serpentine-lower-sweep",
+          "runtimePathFamilyHint": "pink-serpentine",
+          "runtimeControl": {
+            "spawnOffsetS": 0,
+            "durationS": 3.25,
+            "speedScale": 2.52,
+            "softSpeedScale": 2.12,
+            "arcAmp": 1.54,
+            "dropAmp": 1.33,
+            "lowerFieldBias": 158,
+            "yOffset": 59
+          },
+          "comparisonTargets": {
+            "xRange": 0.3711,
+            "yRange": 0.355,
+            "pathLength": 0.1338,
+            "turnCount": 4.63,
+            "reversalCount": 2.88,
+            "lowerFieldShare": 0.8281,
+            "entrySide": "center",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 2,
+          "confidence": 0.597,
+          "trackCount": 5,
+          "target": {
+            "visibleStartS": 0.5,
+            "visibleEndS": 3.25,
+            "entrySide": "center",
+            "exitSide": "center",
+            "xRange": 0.2038,
+            "yRange": 0.2185,
+            "pathLength": 0.2516,
+            "turnCount": 5,
+            "reversalCount": 3,
+            "lowerFieldShare": 0.9655
+          },
+          "controlIntent": "pink-serpentine-lower-sweep",
+          "runtimePathFamilyHint": "pink-serpentine",
+          "runtimeControl": {
+            "spawnOffsetS": 0.5,
+            "durationS": 2.75,
+            "speedScale": 2.98,
+            "softSpeedScale": 2.51,
+            "arcAmp": 1.3,
+            "dropAmp": 1.21,
+            "lowerFieldBias": 188,
+            "yOffset": 80
+          },
+          "comparisonTargets": {
+            "xRange": 0.2038,
+            "yRange": 0.2185,
+            "pathLength": 0.2516,
+            "turnCount": 5,
+            "reversalCount": 3,
+            "lowerFieldShare": 0.9655,
+            "entrySide": "center",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 3,
+          "confidence": 0.717,
+          "trackCount": 10,
+          "target": {
+            "visibleStartS": 2.88,
+            "visibleEndS": 6.63,
+            "entrySide": "center",
+            "exitSide": "center",
+            "xRange": 0.2777,
+            "yRange": 0.6726,
+            "pathLength": 0.1458,
+            "turnCount": 2,
+            "reversalCount": 0.9,
+            "lowerFieldShare": 0.4667
+          },
+          "controlIntent": "pink-serpentine-compact",
+          "runtimePathFamilyHint": "pink-serpentine",
+          "runtimeControl": {
+            "spawnOffsetS": 2.88,
+            "durationS": 3.75,
+            "speedScale": 2.19,
+            "softSpeedScale": 1.84,
+            "arcAmp": 1.31,
+            "dropAmp": 1.59,
+            "lowerFieldBias": 41,
+            "yOffset": 3
+          },
+          "comparisonTargets": {
+            "xRange": 0.2777,
+            "yRange": 0.6726,
+            "pathLength": 0.1458,
+            "turnCount": 2,
+            "reversalCount": 0.9,
+            "lowerFieldShare": 0.4667,
+            "entrySide": "center",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 4,
+          "confidence": 0.712,
+          "trackCount": 13,
+          "target": {
+            "visibleStartS": 6.38,
+            "visibleEndS": 9.88,
+            "entrySide": "center",
+            "exitSide": "center",
+            "xRange": 0.2693,
+            "yRange": 0.6902,
+            "pathLength": 0.1258,
+            "turnCount": 1.54,
+            "reversalCount": 1.15,
+            "lowerFieldShare": 0.3846
+          },
+          "controlIntent": "pink-serpentine-compact",
+          "runtimePathFamilyHint": "pink-serpentine",
+          "runtimeControl": {
+            "spawnOffsetS": 6.38,
+            "durationS": 3.5,
+            "speedScale": 2.34,
+            "softSpeedScale": 1.97,
+            "arcAmp": 1.31,
+            "dropAmp": 1.59,
+            "lowerFieldBias": 14,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.2693,
+            "yRange": 0.6902,
+            "pathLength": 0.1258,
+            "turnCount": 1.54,
+            "reversalCount": 1.15,
+            "lowerFieldShare": 0.3846,
+            "entrySide": "center",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 5,
+          "confidence": 0.752,
+          "trackCount": 9,
+          "target": {
+            "visibleStartS": 13.13,
+            "visibleEndS": 15.88,
+            "entrySide": "left",
+            "exitSide": "right",
+            "xRange": 0.565,
+            "yRange": 0.0041,
+            "pathLength": 0.0143,
+            "turnCount": 6.89,
+            "reversalCount": 3.22,
+            "lowerFieldShare": 1
+          },
+          "controlIntent": "pink-serpentine-lower-sweep",
+          "runtimePathFamilyHint": "pink-serpentine",
+          "runtimeControl": {
+            "spawnOffsetS": 13.13,
+            "durationS": 2.75,
+            "speedScale": 2.98,
+            "softSpeedScale": 2.51,
+            "arcAmp": 1.83,
+            "dropAmp": 0.98,
+            "lowerFieldBias": 188,
+            "yOffset": 86
+          },
+          "comparisonTargets": {
+            "xRange": 0.565,
+            "yRange": 0.0041,
+            "pathLength": 0.0143,
+            "turnCount": 6.89,
+            "reversalCount": 3.22,
+            "lowerFieldShare": 1,
+            "entrySide": "left",
+            "exitSide": "right"
+          }
+        }
+      ],
+      "read": "Target-derived controls preserve 5 group schedule(s), path-family hint(s), speed scale(s), arc/drop scale(s), and lower-field bias(es) for stage 15. These are candidate inputs only until a sweep and full analyzer promote them."
+    },
+    {
+      "challengeNumber": 5,
+      "stage": 19,
+      "label": "Challenging Stage 5 (Levels 19-20)",
+      "sourceVideo": "challenge-all2.mp4",
+      "sourceWindow": {
+        "id": "challenge-05-pink-and-green-cascade",
+        "sourceId": "challenge-all2-single-ship-all-perfects",
+        "stageMarker": 19,
+        "family": "pink-green-cascade",
+        "motionRead": "Continues specialty novelty with pink arcs, green lower-field entries, and a clearer split between group identities.",
+        "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/contact-sheet-1fps.jpg",
+        "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/contact-sheet-2fps.jpg",
+        "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/motion-review-4fps.jpg",
+        "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/frame-index.json"
+      },
+      "groupCount": 5,
+      "averageConfidence": 0.681,
+      "averageTargetXRange": 0.5082,
+      "averageTargetYRange": 0.4859,
+      "averageLowerFieldShare": 0.6287,
+      "controlReadiness10": 8.5,
+      "currentSweepDecision": "no-runtime-keeper-yet",
+      "currentSweepBestExpectedScore10": 5.2,
+      "currentSweepBestTargetVideoObjectFitScore10": 3.9,
+      "runtimeLayoutSeed": {
+        "groupSpawnOffsets": [
+          0,
+          3.13,
+          7.38,
+          10.63,
+          12.88
+        ],
+        "groupSpeedScales": [
+          2.52,
+          1.88,
+          2.34,
+          3.4,
+          2.73
+        ],
+        "groupSoftSpeedScales": [
+          2.12,
+          1.58,
+          1.97,
+          2.65,
+          2.3
+        ],
+        "groupArcAmps": [
+          1.93,
+          1.83,
+          1.41,
+          1.72,
+          1.62
+        ],
+        "groupDropAmps": [
+          1.31,
+          1.34,
+          1.62,
+          1.59,
+          1.26
+        ],
+        "groupLowerFieldBiases": [
+          188,
+          188,
+          33,
+          37,
+          1
+        ],
+        "groupYOffsets": [
+          76,
+          81,
+          0,
+          1,
+          0
+        ],
+        "groupPathFamilies": [
+          "pink-green-low-sweep",
+          "pink-green-low-sweep",
+          "pink-green-cascade",
+          "pink-green-cascade",
+          "pink-green-cascade"
+        ]
+      },
+      "groups": [
+        {
+          "groupIndex": 1,
+          "confidence": 0.742,
+          "trackCount": 12,
+          "target": {
+            "visibleStartS": 0,
+            "visibleEndS": 3.25,
+            "entrySide": "left",
+            "exitSide": "left",
+            "xRange": 0.6598,
+            "yRange": 0.3146,
+            "pathLength": 0.1804,
+            "turnCount": 4.58,
+            "reversalCount": 2.58,
+            "lowerFieldShare": 0.9389
+          },
+          "controlIntent": "pink-green-low-cascade",
+          "runtimePathFamilyHint": "pink-green-low-sweep",
+          "runtimeControl": {
+            "spawnOffsetS": 0,
+            "durationS": 3.25,
+            "speedScale": 2.52,
+            "softSpeedScale": 2.12,
+            "arcAmp": 1.93,
+            "dropAmp": 1.31,
+            "lowerFieldBias": 188,
+            "yOffset": 76
+          },
+          "comparisonTargets": {
+            "xRange": 0.6598,
+            "yRange": 0.3146,
+            "pathLength": 0.1804,
+            "turnCount": 4.58,
+            "reversalCount": 2.58,
+            "lowerFieldShare": 0.9389,
+            "entrySide": "left",
+            "exitSide": "left"
+          }
+        },
+        {
+          "groupIndex": 2,
+          "confidence": 0.601,
+          "trackCount": 6,
+          "target": {
+            "visibleStartS": 3.13,
+            "visibleEndS": 7.5,
+            "entrySide": "right",
+            "exitSide": "right",
+            "xRange": 0.6127,
+            "yRange": 0.3418,
+            "pathLength": 0.1272,
+            "turnCount": 3.67,
+            "reversalCount": 1.83,
+            "lowerFieldShare": 0.9673
+          },
+          "controlIntent": "pink-green-low-cascade",
+          "runtimePathFamilyHint": "pink-green-low-sweep",
+          "runtimeControl": {
+            "spawnOffsetS": 3.13,
+            "durationS": 4.37,
+            "speedScale": 1.88,
+            "softSpeedScale": 1.58,
+            "arcAmp": 1.83,
+            "dropAmp": 1.34,
+            "lowerFieldBias": 188,
+            "yOffset": 81
+          },
+          "comparisonTargets": {
+            "xRange": 0.6127,
+            "yRange": 0.3418,
+            "pathLength": 0.1272,
+            "turnCount": 3.67,
+            "reversalCount": 1.83,
+            "lowerFieldShare": 0.9673,
+            "entrySide": "right",
+            "exitSide": "right"
+          }
+        },
+        {
+          "groupIndex": 3,
+          "confidence": 0.737,
+          "trackCount": 10,
+          "target": {
+            "visibleStartS": 7.38,
+            "visibleEndS": 10.88,
+            "entrySide": "left",
+            "exitSide": "left",
+            "xRange": 0.2698,
+            "yRange": 0.7019,
+            "pathLength": 0.135,
+            "turnCount": 5.3,
+            "reversalCount": 3.2,
+            "lowerFieldShare": 0.4417
+          },
+          "controlIntent": "pink-green-tall-cascade",
+          "runtimePathFamilyHint": "pink-green-cascade",
+          "runtimeControl": {
+            "spawnOffsetS": 7.38,
+            "durationS": 3.5,
+            "speedScale": 2.34,
+            "softSpeedScale": 1.97,
+            "arcAmp": 1.41,
+            "dropAmp": 1.62,
+            "lowerFieldBias": 33,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.2698,
+            "yRange": 0.7019,
+            "pathLength": 0.135,
+            "turnCount": 5.3,
+            "reversalCount": 3.2,
+            "lowerFieldShare": 0.4417,
+            "entrySide": "left",
+            "exitSide": "left"
+          }
+        },
+        {
+          "groupIndex": 4,
+          "confidence": 0.735,
+          "trackCount": 12,
+          "target": {
+            "visibleStartS": 10.63,
+            "visibleEndS": 13,
+            "entrySide": "right",
+            "exitSide": "center",
+            "xRange": 0.5202,
+            "yRange": 0.679,
+            "pathLength": 0.1993,
+            "turnCount": 3.33,
+            "reversalCount": 2.33,
+            "lowerFieldShare": 0.4537
+          },
+          "controlIntent": "pink-green-tall-cascade",
+          "runtimePathFamilyHint": "pink-green-cascade",
+          "runtimeControl": {
+            "spawnOffsetS": 10.63,
+            "durationS": 2.37,
+            "speedScale": 3.4,
+            "softSpeedScale": 2.65,
+            "arcAmp": 1.72,
+            "dropAmp": 1.59,
+            "lowerFieldBias": 37,
+            "yOffset": 1
+          },
+          "comparisonTargets": {
+            "xRange": 0.5202,
+            "yRange": 0.679,
+            "pathLength": 0.1993,
+            "turnCount": 3.33,
+            "reversalCount": 2.33,
+            "lowerFieldShare": 0.4537,
+            "entrySide": "right",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 5,
+          "confidence": 0.59,
+          "trackCount": 6,
+          "target": {
+            "visibleStartS": 12.88,
+            "visibleEndS": 15.88,
+            "entrySide": "left",
+            "exitSide": "center",
+            "xRange": 0.4784,
+            "yRange": 0.3922,
+            "pathLength": 0.1615,
+            "turnCount": 1.33,
+            "reversalCount": 1.33,
+            "lowerFieldShare": 0.3417
+          },
+          "controlIntent": "pink-green-tall-cascade",
+          "runtimePathFamilyHint": "pink-green-cascade",
+          "runtimeControl": {
+            "spawnOffsetS": 12.88,
+            "durationS": 3,
+            "speedScale": 2.73,
+            "softSpeedScale": 2.3,
+            "arcAmp": 1.62,
+            "dropAmp": 1.26,
+            "lowerFieldBias": 1,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.4784,
+            "yRange": 0.3922,
+            "pathLength": 0.1615,
+            "turnCount": 1.33,
+            "reversalCount": 1.33,
+            "lowerFieldShare": 0.3417,
+            "entrySide": "left",
+            "exitSide": "center"
+          }
+        }
+      ],
+      "read": "Target-derived controls preserve 5 group schedule(s), path-family hint(s), speed scale(s), arc/drop scale(s), and lower-field bias(es) for stage 19. These are candidate inputs only until a sweep and full analyzer promote them."
+    },
+    {
+      "challengeNumber": 6,
+      "stage": 23,
+      "label": "Challenging Stage 6 (Levels 23-24)",
+      "sourceVideo": "challenge-all2.mp4",
+      "sourceWindow": {
+        "id": "challenge-06-green-ladder-split",
+        "sourceId": "challenge-all2-single-ship-all-perfects",
+        "stageMarker": 23,
+        "family": "green-ladder-and-split",
+        "motionRead": "Green ladder and split entries emphasize staggered group timing and route separation.",
+        "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/contact-sheet-1fps.jpg",
+        "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/contact-sheet-2fps.jpg",
+        "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/motion-review-4fps.jpg",
+        "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/frame-index.json"
+      },
+      "groupCount": 5,
+      "averageConfidence": 0.678,
+      "averageTargetXRange": 0.4081,
+      "averageTargetYRange": 0.5718,
+      "averageLowerFieldShare": 0.519,
+      "controlReadiness10": 8.5,
+      "currentSweepDecision": "no-runtime-keeper-yet",
+      "currentSweepBestExpectedScore10": 5.4,
+      "currentSweepBestTargetVideoObjectFitScore10": 4.1,
+      "runtimeLayoutSeed": {
+        "groupSpawnOffsets": [
+          0,
+          2.63,
+          5.75,
+          9.63,
+          14
+        ],
+        "groupSpeedScales": [
+          3.12,
+          1.99,
+          1.93,
+          1.82,
+          3.4
+        ],
+        "groupSoftSpeedScales": [
+          2.62,
+          1.67,
+          1.62,
+          1.53,
+          2.65
+        ],
+        "groupArcAmps": [
+          1.38,
+          1.79,
+          1.52,
+          1.63,
+          1.6
+        ],
+        "groupDropAmps": [
+          1.33,
+          1.65,
+          1.72,
+          1.56,
+          1.2
+        ],
+        "groupLowerFieldBiases": [
+          101,
+          149,
+          149,
+          0,
+          0
+        ],
+        "groupYOffsets": [
+          31,
+          55,
+          55,
+          0,
+          0
+        ],
+        "groupPathFamilies": [
+          "green-ladder-high-exit",
+          "green-ladder-deep-drop",
+          "green-ladder-deep-drop",
+          "green-ladder-deep-drop",
+          "green-ladder-high-exit"
+        ]
+      },
+      "groups": [
+        {
+          "groupIndex": 1,
+          "confidence": 0.68,
+          "trackCount": 8,
+          "target": {
+            "visibleStartS": 0,
+            "visibleEndS": 2.63,
+            "entrySide": "right",
+            "exitSide": "right",
+            "xRange": 0.2581,
+            "yRange": 0.3945,
+            "pathLength": 0.1656,
+            "turnCount": 4,
+            "reversalCount": 2.88,
+            "lowerFieldShare": 0.6506
+          },
+          "controlIntent": "green-ladder-upper-fork",
+          "runtimePathFamilyHint": "green-ladder-high-exit",
+          "runtimeControl": {
+            "spawnOffsetS": 0,
+            "durationS": 2.63,
+            "speedScale": 3.12,
+            "softSpeedScale": 2.62,
+            "arcAmp": 1.38,
+            "dropAmp": 1.33,
+            "lowerFieldBias": 101,
+            "yOffset": 31
+          },
+          "comparisonTargets": {
+            "xRange": 0.2581,
+            "yRange": 0.3945,
+            "pathLength": 0.1656,
+            "turnCount": 4,
+            "reversalCount": 2.88,
+            "lowerFieldShare": 0.6506,
+            "entrySide": "right",
+            "exitSide": "right"
+          }
+        },
+        {
+          "groupIndex": 2,
+          "confidence": 0.731,
+          "trackCount": 15,
+          "target": {
+            "visibleStartS": 2.63,
+            "visibleEndS": 6.75,
+            "entrySide": "left",
+            "exitSide": "center",
+            "xRange": 0.5614,
+            "yRange": 0.6626,
+            "pathLength": 0.1351,
+            "turnCount": 3.4,
+            "reversalCount": 2.4,
+            "lowerFieldShare": 0.8
+          },
+          "controlIntent": "green-ladder-deep-split",
+          "runtimePathFamilyHint": "green-ladder-deep-drop",
+          "runtimeControl": {
+            "spawnOffsetS": 2.63,
+            "durationS": 4.12,
+            "speedScale": 1.99,
+            "softSpeedScale": 1.67,
+            "arcAmp": 1.79,
+            "dropAmp": 1.65,
+            "lowerFieldBias": 149,
+            "yOffset": 55
+          },
+          "comparisonTargets": {
+            "xRange": 0.5614,
+            "yRange": 0.6626,
+            "pathLength": 0.1351,
+            "turnCount": 3.4,
+            "reversalCount": 2.4,
+            "lowerFieldShare": 0.8,
+            "entrySide": "left",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 3,
+          "confidence": 0.558,
+          "trackCount": 5,
+          "target": {
+            "visibleStartS": 5.75,
+            "visibleEndS": 10,
+            "entrySide": "center",
+            "exitSide": "center",
+            "xRange": 0.3822,
+            "yRange": 0.7277,
+            "pathLength": 0.1207,
+            "turnCount": 3.6,
+            "reversalCount": 2.2,
+            "lowerFieldShare": 0.8
+          },
+          "controlIntent": "green-ladder-deep-split",
+          "runtimePathFamilyHint": "green-ladder-deep-drop",
+          "runtimeControl": {
+            "spawnOffsetS": 5.75,
+            "durationS": 4.25,
+            "speedScale": 1.93,
+            "softSpeedScale": 1.62,
+            "arcAmp": 1.52,
+            "dropAmp": 1.72,
+            "lowerFieldBias": 149,
+            "yOffset": 55
+          },
+          "comparisonTargets": {
+            "xRange": 0.3822,
+            "yRange": 0.7277,
+            "pathLength": 0.1207,
+            "turnCount": 3.6,
+            "reversalCount": 2.2,
+            "lowerFieldShare": 0.8,
+            "entrySide": "center",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 4,
+          "confidence": 0.748,
+          "trackCount": 12,
+          "target": {
+            "visibleStartS": 9.63,
+            "visibleEndS": 14.13,
+            "entrySide": "center",
+            "exitSide": "left",
+            "xRange": 0.4388,
+            "yRange": 0.6775,
+            "pathLength": 0.1843,
+            "turnCount": 5.92,
+            "reversalCount": 2.92,
+            "lowerFieldShare": 0.3132
+          },
+          "controlIntent": "green-ladder-deep-split",
+          "runtimePathFamilyHint": "green-ladder-deep-drop",
+          "runtimeControl": {
+            "spawnOffsetS": 9.63,
+            "durationS": 4.5,
+            "speedScale": 1.82,
+            "softSpeedScale": 1.53,
+            "arcAmp": 1.63,
+            "dropAmp": 1.56,
+            "lowerFieldBias": 0,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.4388,
+            "yRange": 0.6775,
+            "pathLength": 0.1843,
+            "turnCount": 5.92,
+            "reversalCount": 2.92,
+            "lowerFieldShare": 0.3132,
+            "entrySide": "center",
+            "exitSide": "left"
+          }
+        },
+        {
+          "groupIndex": 5,
+          "confidence": 0.672,
+          "trackCount": 8,
+          "target": {
+            "visibleStartS": 14,
+            "visibleEndS": 15.88,
+            "entrySide": "center",
+            "exitSide": "right",
+            "xRange": 0.4001,
+            "yRange": 0.3967,
+            "pathLength": 0.1693,
+            "turnCount": 4,
+            "reversalCount": 3.38,
+            "lowerFieldShare": 0.0313
+          },
+          "controlIntent": "green-ladder-upper-fork",
+          "runtimePathFamilyHint": "green-ladder-high-exit",
+          "runtimeControl": {
+            "spawnOffsetS": 14,
+            "durationS": 1.88,
+            "speedScale": 3.4,
+            "softSpeedScale": 2.65,
+            "arcAmp": 1.6,
+            "dropAmp": 1.2,
+            "lowerFieldBias": 0,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.4001,
+            "yRange": 0.3967,
+            "pathLength": 0.1693,
+            "turnCount": 4,
+            "reversalCount": 3.38,
+            "lowerFieldShare": 0.0313,
+            "entrySide": "center",
+            "exitSide": "right"
+          }
+        }
+      ],
+      "read": "Target-derived controls preserve 5 group schedule(s), path-family hint(s), speed scale(s), arc/drop scale(s), and lower-field bias(es) for stage 23. These are candidate inputs only until a sweep and full analyzer promote them."
+    },
+    {
+      "challengeNumber": 7,
+      "stage": 27,
+      "label": "Challenging Stage 7 (Levels 27-28)",
+      "sourceVideo": "challenge-all2.mp4",
+      "sourceWindow": {
+        "id": "challenge-07-yellow-diagonal-fan",
+        "sourceId": "challenge-all2-single-ship-all-perfects",
+        "stageMarker": 27,
+        "family": "yellow-diagonal-fan",
+        "motionRead": "Yellow diagonal trains create a memorable late-stage fan/diagonal score lane.",
+        "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/contact-sheet-1fps.jpg",
+        "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/contact-sheet-2fps.jpg",
+        "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/motion-review-4fps.jpg",
+        "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/frame-index.json"
+      },
+      "groupCount": 5,
+      "averageConfidence": 0.651,
+      "averageTargetXRange": 0.4842,
+      "averageTargetYRange": 0.3584,
+      "averageLowerFieldShare": 0.5414,
+      "controlReadiness10": 8.4,
+      "currentSweepDecision": "no-runtime-keeper-yet",
+      "currentSweepBestExpectedScore10": 5.1,
+      "currentSweepBestTargetVideoObjectFitScore10": 3,
+      "runtimeLayoutSeed": {
+        "groupSpawnOffsets": [
+          0,
+          1.25,
+          4.75,
+          9.13,
+          10.38
+        ],
+        "groupSpeedScales": [
+          3.4,
+          1.93,
+          2.85,
+          3.4,
+          3.4
+        ],
+        "groupSoftSpeedScales": [
+          2.65,
+          1.62,
+          2.4,
+          2.65,
+          2.65
+        ],
+        "groupArcAmps": [
+          1.11,
+          1.97,
+          2.19,
+          1.56,
+          1.67
+        ],
+        "groupDropAmps": [
+          1.1,
+          1.3,
+          1.56,
+          1.05,
+          1.32
+        ],
+        "groupLowerFieldBiases": [
+          188,
+          101,
+          0,
+          0,
+          126
+        ],
+        "groupYOffsets": [
+          86,
+          32,
+          0,
+          0,
+          44
+        ],
+        "groupPathFamilies": [
+          "yellow-fan-low-drift",
+          "yellow-fan-cross-cut",
+          "yellow-fan-cross-cut",
+          "yellow-fan-cross-cut",
+          "yellow-fan-cross-cut"
+        ]
+      },
+      "groups": [
+        {
+          "groupIndex": 1,
+          "confidence": 0.505,
+          "trackCount": 3,
+          "target": {
+            "visibleStartS": 0,
+            "visibleEndS": 2,
+            "entrySide": "right",
+            "exitSide": "right",
+            "xRange": 0.0772,
+            "yRange": 0.1111,
+            "pathLength": 0.1037,
+            "turnCount": 6,
+            "reversalCount": 2.67,
+            "lowerFieldShare": 1
+          },
+          "controlIntent": "yellow-fan-pop",
+          "runtimePathFamilyHint": "yellow-fan-low-drift",
+          "runtimeControl": {
+            "spawnOffsetS": 0,
+            "durationS": 2,
+            "speedScale": 3.4,
+            "softSpeedScale": 2.65,
+            "arcAmp": 1.11,
+            "dropAmp": 1.1,
+            "lowerFieldBias": 188,
+            "yOffset": 86
+          },
+          "comparisonTargets": {
+            "xRange": 0.0772,
+            "yRange": 0.1111,
+            "pathLength": 0.1037,
+            "turnCount": 6,
+            "reversalCount": 2.67,
+            "lowerFieldShare": 1,
+            "entrySide": "right",
+            "exitSide": "right"
+          }
+        },
+        {
+          "groupIndex": 2,
+          "confidence": 0.754,
+          "trackCount": 16,
+          "target": {
+            "visibleStartS": 1.25,
+            "visibleEndS": 5.5,
+            "entrySide": "right",
+            "exitSide": "left",
+            "xRange": 0.6503,
+            "yRange": 0.3634,
+            "pathLength": 0.194,
+            "turnCount": 5.19,
+            "reversalCount": 3.69,
+            "lowerFieldShare": 0.6529
+          },
+          "controlIntent": "yellow-fan-cross-cut",
+          "runtimePathFamilyHint": "yellow-fan-cross-cut",
+          "runtimeControl": {
+            "spawnOffsetS": 1.25,
+            "durationS": 4.25,
+            "speedScale": 1.93,
+            "softSpeedScale": 1.62,
+            "arcAmp": 1.97,
+            "dropAmp": 1.3,
+            "lowerFieldBias": 101,
+            "yOffset": 32
+          },
+          "comparisonTargets": {
+            "xRange": 0.6503,
+            "yRange": 0.3634,
+            "pathLength": 0.194,
+            "turnCount": 5.19,
+            "reversalCount": 3.69,
+            "lowerFieldShare": 0.6529,
+            "entrySide": "right",
+            "exitSide": "left"
+          }
+        },
+        {
+          "groupIndex": 3,
+          "confidence": 0.73,
+          "trackCount": 15,
+          "target": {
+            "visibleStartS": 4.75,
+            "visibleEndS": 7.63,
+            "entrySide": "center",
+            "exitSide": "left",
+            "xRange": 0.8317,
+            "yRange": 0.6788,
+            "pathLength": 0.136,
+            "turnCount": 4.13,
+            "reversalCount": 2.8,
+            "lowerFieldShare": 0.325
+          },
+          "controlIntent": "yellow-fan-cross-cut",
+          "runtimePathFamilyHint": "yellow-fan-cross-cut",
+          "runtimeControl": {
+            "spawnOffsetS": 4.75,
+            "durationS": 2.88,
+            "speedScale": 2.85,
+            "softSpeedScale": 2.4,
+            "arcAmp": 2.19,
+            "dropAmp": 1.56,
+            "lowerFieldBias": 0,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.8317,
+            "yRange": 0.6788,
+            "pathLength": 0.136,
+            "turnCount": 4.13,
+            "reversalCount": 2.8,
+            "lowerFieldShare": 0.325,
+            "entrySide": "center",
+            "exitSide": "left"
+          }
+        },
+        {
+          "groupIndex": 4,
+          "confidence": 0.672,
+          "trackCount": 8,
+          "target": {
+            "visibleStartS": 9.13,
+            "visibleEndS": 11.25,
+            "entrySide": "center",
+            "exitSide": "left",
+            "xRange": 0.3822,
+            "yRange": 0.2643,
+            "pathLength": 0.1368,
+            "turnCount": 4.63,
+            "reversalCount": 3.13,
+            "lowerFieldShare": 0
+          },
+          "controlIntent": "yellow-fan-cross-cut",
+          "runtimePathFamilyHint": "yellow-fan-cross-cut",
+          "runtimeControl": {
+            "spawnOffsetS": 9.13,
+            "durationS": 2.12,
+            "speedScale": 3.4,
+            "softSpeedScale": 2.65,
+            "arcAmp": 1.56,
+            "dropAmp": 1.05,
+            "lowerFieldBias": 0,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.3822,
+            "yRange": 0.2643,
+            "pathLength": 0.1368,
+            "turnCount": 4.63,
+            "reversalCount": 3.13,
+            "lowerFieldShare": 0,
+            "entrySide": "center",
+            "exitSide": "left"
+          }
+        },
+        {
+          "groupIndex": 5,
+          "confidence": 0.593,
+          "trackCount": 6,
+          "target": {
+            "visibleStartS": 10.38,
+            "visibleEndS": 12,
+            "entrySide": "center",
+            "exitSide": "right",
+            "xRange": 0.4798,
+            "yRange": 0.3742,
+            "pathLength": 0.0893,
+            "turnCount": 3.83,
+            "reversalCount": 2.33,
+            "lowerFieldShare": 0.7292
+          },
+          "controlIntent": "yellow-fan-cross-cut",
+          "runtimePathFamilyHint": "yellow-fan-cross-cut",
+          "runtimeControl": {
+            "spawnOffsetS": 10.38,
+            "durationS": 1.62,
+            "speedScale": 3.4,
+            "softSpeedScale": 2.65,
+            "arcAmp": 1.67,
+            "dropAmp": 1.32,
+            "lowerFieldBias": 126,
+            "yOffset": 44
+          },
+          "comparisonTargets": {
+            "xRange": 0.4798,
+            "yRange": 0.3742,
+            "pathLength": 0.0893,
+            "turnCount": 3.83,
+            "reversalCount": 2.33,
+            "lowerFieldShare": 0.7292,
+            "entrySide": "center",
+            "exitSide": "right"
+          }
+        }
+      ],
+      "read": "Target-derived controls preserve 5 group schedule(s), path-family hint(s), speed scale(s), arc/drop scale(s), and lower-field bias(es) for stage 27. These are candidate inputs only until a sweep and full analyzer promote them."
+    },
+    {
+      "challengeNumber": 8,
+      "stage": 31,
+      "label": "Challenging Stage 8 (Levels 31-32)",
+      "sourceVideo": "challenge-all2.mp4",
+      "sourceWindow": {
+        "id": "challenge-08-blue-purple-finale",
+        "sourceId": "challenge-all2-single-ship-all-perfects",
+        "stageMarker": 31,
+        "family": "blue-purple-finale",
+        "motionRead": "Final visible challenge window emphasizes blue/purple clustered arcs and a compact all-perfect finish.",
+        "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-1fps.jpg",
+        "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-2fps.jpg",
+        "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/motion-review-4fps.jpg",
+        "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/frame-index.json"
+      },
+      "groupCount": 5,
+      "averageConfidence": 0.711,
+      "averageTargetXRange": 0.4429,
+      "averageTargetYRange": 0.5622,
+      "averageLowerFieldShare": 0.4854,
+      "controlReadiness10": 8.7,
+      "currentSweepDecision": "no-runtime-keeper-yet",
+      "currentSweepBestExpectedScore10": 6,
+      "currentSweepBestTargetVideoObjectFitScore10": 2.9,
+      "runtimeLayoutSeed": {
+        "groupSpawnOffsets": [
+          1,
+          2.38,
+          5.38,
+          10.75,
+          13.5
+        ],
+        "groupSpeedScales": [
+          3.4,
+          2.86,
+          1.73,
+          1.77,
+          3.4
+        ],
+        "groupSoftSpeedScales": [
+          2.65,
+          2.4,
+          1.45,
+          1.49,
+          2.65
+        ],
+        "groupArcAmps": [
+          1.59,
+          1.67,
+          1.84,
+          1.6,
+          1.37
+        ],
+        "groupDropAmps": [
+          1.22,
+          1.57,
+          1.4,
+          1.57,
+          1.6
+        ],
+        "groupLowerFieldBiases": [
+          0,
+          106,
+          177,
+          17,
+          28
+        ],
+        "groupYOffsets": [
+          0,
+          34,
+          68,
+          0,
+          0
+        ],
+        "groupPathFamilies": [
+          "blue-purple-finale",
+          "blue-purple-finale",
+          "blue-purple-finale",
+          "blue-purple-finale",
+          "blue-purple-finale"
+        ]
+      },
+      "groups": [
+        {
+          "groupIndex": 1,
+          "confidence": 0.697,
+          "trackCount": 9,
+          "target": {
+            "visibleStartS": 1,
+            "visibleEndS": 3,
+            "entrySide": "center",
+            "exitSide": "center",
+            "xRange": 0.4307,
+            "yRange": 0.4104,
+            "pathLength": 0.1636,
+            "turnCount": 1.89,
+            "reversalCount": 2.11,
+            "lowerFieldShare": 0.0556
+          },
+          "controlIntent": "blue-purple-compact-capstone",
+          "runtimePathFamilyHint": "blue-purple-finale",
+          "runtimeControl": {
+            "spawnOffsetS": 1,
+            "durationS": 2,
+            "speedScale": 3.4,
+            "softSpeedScale": 2.65,
+            "arcAmp": 1.59,
+            "dropAmp": 1.22,
+            "lowerFieldBias": 0,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.4307,
+            "yRange": 0.4104,
+            "pathLength": 0.1636,
+            "turnCount": 1.89,
+            "reversalCount": 2.11,
+            "lowerFieldShare": 0.0556,
+            "entrySide": "center",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 2,
+          "confidence": 0.655,
+          "trackCount": 7,
+          "target": {
+            "visibleStartS": 2.38,
+            "visibleEndS": 5.25,
+            "entrySide": "right",
+            "exitSide": "center",
+            "xRange": 0.4679,
+            "yRange": 0.6175,
+            "pathLength": 0.1554,
+            "turnCount": 4.86,
+            "reversalCount": 2.71,
+            "lowerFieldShare": 0.6667
+          },
+          "controlIntent": "blue-purple-finale-weave",
+          "runtimePathFamilyHint": "blue-purple-finale",
+          "runtimeControl": {
+            "spawnOffsetS": 2.38,
+            "durationS": 2.87,
+            "speedScale": 2.86,
+            "softSpeedScale": 2.4,
+            "arcAmp": 1.67,
+            "dropAmp": 1.57,
+            "lowerFieldBias": 106,
+            "yOffset": 34
+          },
+          "comparisonTargets": {
+            "xRange": 0.4679,
+            "yRange": 0.6175,
+            "pathLength": 0.1554,
+            "turnCount": 4.86,
+            "reversalCount": 2.71,
+            "lowerFieldShare": 0.6667,
+            "entrySide": "right",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 3,
+          "confidence": 0.75,
+          "trackCount": 17,
+          "target": {
+            "visibleStartS": 5.38,
+            "visibleEndS": 10.13,
+            "entrySide": "left",
+            "exitSide": "center",
+            "xRange": 0.5754,
+            "yRange": 0.4165,
+            "pathLength": 0.2085,
+            "turnCount": 5.18,
+            "reversalCount": 3.24,
+            "lowerFieldShare": 0.8867
+          },
+          "controlIntent": "blue-purple-finale-weave",
+          "runtimePathFamilyHint": "blue-purple-finale",
+          "runtimeControl": {
+            "spawnOffsetS": 5.38,
+            "durationS": 4.75,
+            "speedScale": 1.73,
+            "softSpeedScale": 1.45,
+            "arcAmp": 1.84,
+            "dropAmp": 1.4,
+            "lowerFieldBias": 177,
+            "yOffset": 68
+          },
+          "comparisonTargets": {
+            "xRange": 0.5754,
+            "yRange": 0.4165,
+            "pathLength": 0.2085,
+            "turnCount": 5.18,
+            "reversalCount": 3.24,
+            "lowerFieldShare": 0.8867,
+            "entrySide": "left",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 4,
+          "confidence": 0.73,
+          "trackCount": 17,
+          "target": {
+            "visibleStartS": 10.75,
+            "visibleEndS": 15.38,
+            "entrySide": "center",
+            "exitSide": "center",
+            "xRange": 0.4372,
+            "yRange": 0.6713,
+            "pathLength": 0.1542,
+            "turnCount": 2.76,
+            "reversalCount": 2.24,
+            "lowerFieldShare": 0.393
+          },
+          "controlIntent": "blue-purple-finale-weave",
+          "runtimePathFamilyHint": "blue-purple-finale",
+          "runtimeControl": {
+            "spawnOffsetS": 10.75,
+            "durationS": 4.63,
+            "speedScale": 1.77,
+            "softSpeedScale": 1.49,
+            "arcAmp": 1.6,
+            "dropAmp": 1.57,
+            "lowerFieldBias": 17,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.4372,
+            "yRange": 0.6713,
+            "pathLength": 0.1542,
+            "turnCount": 2.76,
+            "reversalCount": 2.24,
+            "lowerFieldShare": 0.393,
+            "entrySide": "center",
+            "exitSide": "center"
+          }
+        },
+        {
+          "groupIndex": 5,
+          "confidence": 0.722,
+          "trackCount": 10,
+          "target": {
+            "visibleStartS": 13.5,
+            "visibleEndS": 15.88,
+            "entrySide": "center",
+            "exitSide": "center",
+            "xRange": 0.3034,
+            "yRange": 0.6951,
+            "pathLength": 0.1095,
+            "turnCount": 1.8,
+            "reversalCount": 1.4,
+            "lowerFieldShare": 0.425
+          },
+          "controlIntent": "blue-purple-finale-weave",
+          "runtimePathFamilyHint": "blue-purple-finale",
+          "runtimeControl": {
+            "spawnOffsetS": 13.5,
+            "durationS": 2.38,
+            "speedScale": 3.4,
+            "softSpeedScale": 2.65,
+            "arcAmp": 1.37,
+            "dropAmp": 1.6,
+            "lowerFieldBias": 28,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.3034,
+            "yRange": 0.6951,
+            "pathLength": 0.1095,
+            "turnCount": 1.8,
+            "reversalCount": 1.4,
+            "lowerFieldShare": 0.425,
+            "entrySide": "center",
+            "exitSide": "center"
+          }
+        }
+      ],
+      "read": "Target-derived controls preserve 5 group schedule(s), path-family hint(s), speed scale(s), arc/drop scale(s), and lower-field bias(es) for stage 31. These are candidate inputs only until a sweep and full analyzer promote them."
+    }
+  ]
+}
