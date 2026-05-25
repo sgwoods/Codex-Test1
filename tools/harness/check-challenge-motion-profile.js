@@ -6,11 +6,11 @@ const { withHarnessPage, sleep } = require('./browser-check-util');
 // reference-backed first-challenge peel lanes are visibly underway.
 const SAMPLE_TIMES = [0.7, 1.05, 1.4, 1.75, 2.1];
 const BASELINE = Object.freeze({
-  0.7: Object.freeze({ avgX: 140, minY: 39.8, maxY: 47.65, lane0X: 30.37, lane7X: 286.31 }),
-  1.05: Object.freeze({ avgX: 140, minY: 40.74, maxY: 48.59, lane0X: 58.93, lane7X: 265.81 }),
-  1.4: Object.freeze({ avgX: 140, minY: 41.66, maxY: 49.51, lane0X: 78.99, lane7X: 250.24 }),
-  1.75: Object.freeze({ avgX: 140, minY: 42.6, maxY: 50.46, lane0X: 90.26, lane7X: 239.83 }),
-  2.1: Object.freeze({ avgX: 140, minY: 38.22, maxY: 51.25, lane0X: 92.8, lane7X: 236.01 })
+  0.7: Object.freeze({ avgX: 140, minY: 39.64, maxY: 47.51, lane0X: 25.04, lane7X: 289.56 }),
+  1.05: Object.freeze({ avgX: 140, minY: 40.51, maxY: 48.37, lane0X: 52.53, lane7X: 270.13 }),
+  1.4: Object.freeze({ avgX: 140, minY: 41.37, maxY: 49.24, lane0X: 73.69, lane7X: 254.22 }),
+  1.75: Object.freeze({ avgX: 140, minY: 42.24, maxY: 50.11, lane0X: 87.14, lane7X: 242.89 }),
+  2.1: Object.freeze({ avgX: 140, minY: 43.11, maxY: 50.97, lane0X: 91.99, lane7X: 236.88 })
 });
 
 function fail(message, payload){
@@ -27,7 +27,10 @@ async function sampleChallengeMotion(page){
   const samples = [];
   for(const t of SAMPLE_TIMES){
     const previous = samples[samples.length - 1]?.t || 0;
-    await sleep(Math.round((t - previous) * 1000));
+    await page.evaluate(seconds => window.__galagaHarness__.advanceFor(seconds, {
+      step: 1 / 60,
+      stopOnGameOver: false
+    }), Math.max(0, t - previous));
     const formation = await page.evaluate(() => window.__galagaHarness__.challengeFormationState());
     const firstWave = (formation.enemies || []).filter(e => e.wave === 0).sort((a, b) => a.lane - b.lane);
     const xs = firstWave.map(e => e.x);

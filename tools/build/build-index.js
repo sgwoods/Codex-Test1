@@ -72,6 +72,7 @@ const CHALLENGE_STAGE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'anal
 const CHALLENGE_STAGE_CANDIDATE_SWEEP = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_SWEEP_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep-index', 'latest.json');
 const CHALLENGE_TRAJECTORY_CONTROLS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-trajectory-controls', 'latest.json');
+const STAGE7_REFERENCE_PATH_BEFORE_AFTER = path.join(ROOT, 'reference-artifacts', 'analyses', 'stage7-reference-path-before-after', 'latest.json');
 const LEVEL_VISUAL_CONFORMANCE_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'level-visual-conformance-index', 'latest.json');
 const GALAGA_TARGET_ARTIFACT_COVERAGE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-artifact-coverage', 'latest.json');
 const GALAGA_ALIEN_VISUAL_REFERENCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-visual-reference', 'latest.json');
@@ -3245,6 +3246,7 @@ let challengeStageConformanceCache = null;
 let challengeStageCandidateSweepCache = null;
 let challengeStageCandidateSweepIndexCache = null;
 let challengeTrajectoryControlsCache = null;
+let stage7ReferencePathBeforeAfterCache = null;
 let levelVisualConformanceIndexCache = null;
 let galagaTargetArtifactCoverageCache = null;
 let galagaAlienVisualReferenceCache = null;
@@ -3606,6 +3608,26 @@ function loadChallengeTrajectoryControls(){
   return challengeTrajectoryControlsCache;
 }
 
+function loadStage7ReferencePathBeforeAfter(){
+  if(stage7ReferencePathBeforeAfterCache) return stage7ReferencePathBeforeAfterCache;
+  if(!fs.existsSync(STAGE7_REFERENCE_PATH_BEFORE_AFTER)){
+    stage7ReferencePathBeforeAfterCache = { summary: {}, media: {}, before: {}, after: {} };
+    return stage7ReferencePathBeforeAfterCache;
+  }
+  try {
+    const artifact = readJson(STAGE7_REFERENCE_PATH_BEFORE_AFTER);
+    stage7ReferencePathBeforeAfterCache = Object.assign({}, artifact, {
+      summary: artifact.summary || {},
+      media: artifact.media || {},
+      before: artifact.before || {},
+      after: artifact.after || {}
+    });
+  } catch (err) {
+    stage7ReferencePathBeforeAfterCache = { summary: {}, media: {}, before: {}, after: {} };
+  }
+  return stage7ReferencePathBeforeAfterCache;
+}
+
 function loadLevelVisualConformanceIndex(){
   if(levelVisualConformanceIndexCache) return levelVisualConformanceIndexCache;
   if(!fs.existsSync(LEVEL_VISUAL_CONFORMANCE_INDEX)){
@@ -3756,6 +3778,53 @@ function challengeObjectTrackDiagramMedia(row = {}){
     alt: `${challengeStageDisplayLabel(row)} object-track and shot-opportunity sketch`,
     note: 'Generated from runtime challenge sprite silhouettes and sampled player shot lanes. This is a readable probe of visible motion and scoreability, not yet Galaga target-crop optical matching.'
   });
+}
+
+function renderStage7ReferencePathEvidence(artifact = {}){
+  const media = artifact.media || {};
+  const summary = artifact.summary || {};
+  const sheet = media.comparisonSheet || '';
+  const hasSheet = sheet && fs.existsSync(path.join(ROOT, normalizeAssetSourcePath(sheet)));
+  const beforePct = Number.isFinite(+summary.beforeReferenceCoverage)
+    ? `${Math.round(+summary.beforeReferenceCoverage * 100)}%`
+    : 'pending';
+  const afterPct = Number.isFinite(+summary.afterReferenceCoverage)
+    ? `${Math.round(+summary.afterReferenceCoverage * 100)}%`
+    : 'pending';
+  const trackIds = Array.isArray(summary.afterReferenceTrackIds) && summary.afterReferenceTrackIds.length
+    ? summary.afterReferenceTrackIds.join(', ')
+    : 'pending';
+  return `
+    <div class="challengeCompareGrid">
+      <div class="challengeEvidenceCard">
+        <h3>Stage 7 Before/After Evidence</h3>
+        <p>${esc(summary.read || 'Stage 7 before/after visual evidence pending. Run npm run harness:analyze:stage7-reference-path-before-after.')}</p>
+        <ul>
+          <li>Before reference-path coverage: <strong>${esc(beforePct)}</strong></li>
+          <li>After reference-path coverage: <strong>${esc(afterPct)}</strong></li>
+          <li>After target tracks: <code>${esc(trackIds)}</code></li>
+        </ul>
+      </div>
+      <div class="challengeEvidenceCard">
+        <h3>Player-Facing Read</h3>
+        <p>${esc(summary.playerMeaning || 'The promoted challenge should read as authored motion, not only a metric bump.')}</p>
+        <p class="docMeta"><strong>Artifact:</strong> <code>reference-artifacts/analyses/stage7-reference-path-before-after/latest.json</code></p>
+      </div>
+      <div class="challengeEvidenceCard">
+        <h3>Process Read</h3>
+        <p>${esc(summary.processMeaning || 'Before/after evidence should stay attached to the challenge-stage promotion workflow.')}</p>
+        <p class="docMeta"><strong>Next:</strong> use this pattern before promoting another challenge-stage runtime change.</p>
+      </div>
+    </div>
+    <div class="levelRoleImages">
+      ${hasSheet ? renderMediaImage({
+        src: sheet,
+        label: 'Stage 7 before/after contact sheet',
+        alt: 'Stage 7 challenge before and after reference-path promotion contact sheet',
+        note: 'Ten deterministic time samples. Open the evidence panel for a wider native-scale review.'
+      }) : '<div class="mediaPlaceholder">Stage 7 before/after contact sheet pending.</div>'}
+    </div>
+  `;
 }
 
 function levelVisualScore(value, label = ''){
@@ -5118,6 +5187,8 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const challengeTrajectoryRead = challengeTrajectorySummary.challengeCount
     ? `${challengeTrajectorySummary.challengeCount} challenge(s), ${challengeTrajectorySummary.groupCount || 0} target group controls, ${challengeTrajectorySummary.controlReadinessScore10 ?? 'n/a'}/10 control readiness. ${challengeTrajectorySummary.read || ''}`
     : 'Target-derived trajectory controls pending. Run npm run harness:analyze:challenge-trajectory-controls.';
+  const stage7ReferencePathBeforeAfter = loadStage7ReferencePathBeforeAfter();
+  const stage7ReferencePathEvidence = renderStage7ReferencePathEvidence(stage7ReferencePathBeforeAfter);
   const challengeStageRows = (challengeStageConformance.stageRows || []).map(renderChallengeStageDetail).join('\n') || `
     <div class="docWrap"><span class="docMeta">Challenge-stage conformance analysis pending. Run <code>npm run harness:analyze:challenge-stage-conformance</code>.</span></div>
   `;
@@ -5969,6 +6040,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/challenge-stage-conformance/latest.json</code>. <strong>Report:</strong> <code>CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md</code>.</p>
             <p class="docMeta"><strong>Naming rule:</strong> normal Levels and Challenging Stages are separate. The challenge rows below use labels like <strong>Challenging Stage 1 (Levels 3-4)</strong> instead of calling that set piece Level 4.</p>
             <p class="docMeta"><strong>Evidence-image rule:</strong> contact sheets are supporting artifacts for visual inspection, not the main human-readable conformance explanation. Use each row's target/current/conformance text for the judgment; open the evidence panel only when you need to inspect the underlying frames at native scale.</p>
+            ${stage7ReferencePathEvidence}
             <div class="inlineDocShelf">
               <details class="inlineDocPreview">
                 <summary>Peek at the living effort summary</summary>

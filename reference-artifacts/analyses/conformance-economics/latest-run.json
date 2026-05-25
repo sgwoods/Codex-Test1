@@ -1,31 +1,31 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-25T07-07-05-743Z-22628",
-  "startedAt": "2026-05-25T07:07:05.743Z",
-  "endedAt": "2026-05-25T07:07:10.958Z",
+  "id": "2026-05-25T15-37-22-125Z-37141",
+  "startedAt": "2026-05-25T15:37:22.125Z",
+  "endedAt": "2026-05-25T15:37:26.231Z",
   "branch": "codex/macbook-challenge-stage-conformance-cycle",
-  "commit": "9001395d8",
+  "commit": "412ff2860",
   "command": [
     "npm",
     "run",
-    "harness:check:challenge-motion-profile"
+    "harness:analyze:stage7-reference-path-before-after"
   ],
   "axes": [
-    "challenge-reference-path",
-    "challenge-stage"
+    "challenge-stage",
+    "level-arc"
   ],
   "resources": [
-    "browser",
-    "cpu"
+    "cpu",
+    "browser"
   ],
-  "notes": "",
+  "notes": "Stage 7 before-after reference-path visual evidence capture",
   "measurement": {
-    "wallSeconds": 5.215,
-    "timeRealSeconds": 5.21,
-    "timeUserSeconds": 4.65,
-    "timeSystemSeconds": 1.32,
-    "cpuSeconds": 5.97,
+    "wallSeconds": 4.106,
+    "timeRealSeconds": 4.1,
+    "timeUserSeconds": 4.75,
+    "timeSystemSeconds": 1.56,
+    "cpuSeconds": 6.31,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -47,8 +47,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 1875210411,
-    "artifactBytesAfter": 1875210411,
-    "artifactBytesDelta": 0
+    "artifactBytesBefore": 1879145733,
+    "artifactBytesAfter": 1879139886,
+    "artifactBytesDelta": -5847
   }
 }
