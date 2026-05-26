@@ -507,6 +507,18 @@ function challengeNumberForStage(stage){
   return stage >= 3 ? Math.floor((stage - 3) / 4) + 1 : null;
 }
 
+function challengeNumberForLabel(labelId){
+  const match = /^challenge-(\d+)-/.exec(String(labelId || ''));
+  return match ? +match[1] : null;
+}
+
+function expectedFamiliesForMatches(matches){
+  return [...new Set(matches
+    .filter(match => EXPECTED_LABELS.includes(match.labelId))
+    .map(match => match.entityFamily)
+    .filter(Boolean))];
+}
+
 function targetGroupsForStage(stage){
   const artifact = readJson(TARGET_TRACKS_PATH, {});
   const challengeNumber = challengeNumberForStage(stage);
@@ -1396,9 +1408,29 @@ function scoreMeasuredCandidate(measured, labels){
   const expectedReferenceHit = EXPECTED_LABELS.includes(bestMatch?.labelId);
   const identityMargin10 = round(expectedScore10 - bestScore10, 2);
   const wrongReferencePenalty10 = expectedReferenceHit ? 0 : round(Math.max(0, bestScore10 - expectedScore10), 2);
+  const expectedChallengeNumber = challengeNumberForStage(STAGE);
+  const bestMatchChallengeNumber = challengeNumberForLabel(bestMatch?.labelId);
+  const bestMatchChallengeDelta = Number.isFinite(+expectedChallengeNumber) && Number.isFinite(+bestMatchChallengeNumber)
+    ? Math.abs(+expectedChallengeNumber - +bestMatchChallengeNumber)
+    : null;
+  const expectedFamilies = expectedFamiliesForMatches(matches);
+  const bestFamilyIsExpected = !!(bestMatch?.entityFamily && expectedFamilies.includes(bestMatch.entityFamily));
+  const isLateStageChallenge = STAGE >= 19;
+  const wrongChallengeNumber = !!(isLateStageChallenge && Number.isFinite(+bestMatchChallengeDelta) && bestMatchChallengeDelta > 0);
+  const lateWrongChallengePenalty10 = wrongChallengeNumber
+    ? round(Math.min(2.75,
+      0.55
+      + (bestMatchChallengeDelta * 0.22)
+      + (Math.max(0, bestScore10 - expectedScore10) * 0.45)
+      + (bestFamilyIsExpected ? 0 : 0.35)), 2)
+    : 0;
+  const lateStageIdentityPass = !isLateStageChallenge
+    || expectedReferenceHit
+    || (!wrongChallengeNumber && bestFamilyIsExpected && identityMargin10 >= -0.08);
   const identityConfidence = expectedReferenceHit
     ? 1
     : round(clamp((identityMargin10 + 1.15) / 1.35) * clamp(expectedScore10 / 6.2), 3);
+  const adjustedIdentityConfidence = lateStageIdentityPass ? identityConfidence : round(identityConfidence * 0.35, 3);
   const targetVideoScore10 = targetVideoFit.score10 || 0;
   return Object.assign({}, measured, {
     trackCount: classifications.length,
@@ -1409,13 +1441,23 @@ function scoreMeasuredCandidate(measured, labels){
     expectedReferenceHit,
     stageIdentity: {
       expectedLabels: EXPECTED_LABELS,
+      expectedChallengeNumber,
+      bestMatchChallengeNumber,
+      bestMatchChallengeDelta,
+      expectedFamilies,
+      bestFamilyIsExpected,
       expectedScore10,
       bestScore10,
       identityMargin10,
       wrongReferencePenalty10,
-      confidence: identityConfidence,
+      lateStageIdentityPass,
+      lateWrongChallengePenalty10,
+      confidence: adjustedIdentityConfidence,
+      rawConfidence: identityConfidence,
       read: expectedReferenceHit
         ? 'Best measured label is one of the expected labels for this challenge stage.'
+        : !lateStageIdentityPass
+          ? `Late-stage identity blocked: best measured label is ${bestMatch?.labelId || 'none'}, not challenge ${expectedChallengeNumber}; expected-stage score trails by ${Math.abs(identityMargin10)}/10.`
         : `Best measured label is ${bestMatch?.labelId || 'none'}; expected-stage score trails by ${Math.abs(identityMargin10)}/10.`
     },
     targetVideoObjectFit: targetVideoFit,
@@ -1423,9 +1465,10 @@ function scoreMeasuredCandidate(measured, labels){
     selectionScore10: round(
       (expectedScore10 * 0.62)
       + (targetVideoScore10 * 0.24)
-      + (identityConfidence * 1.1)
+      + (adjustedIdentityConfidence * 1.1)
       + (noSafetyRegression ? 0.3 : -2.75)
-      - (wrongReferencePenalty10 * 0.65),
+      - (wrongReferencePenalty10 * 0.65)
+      - (lateWrongChallengePenalty10 * 0.85),
       2
     )
   });
@@ -1441,6 +1484,11 @@ function summarizeCandidate(row){
     expectedReferenceHit: !!row.expectedReferenceHit,
     stageIdentityMargin10: row.stageIdentity?.identityMargin10 ?? null,
     wrongReferencePenalty10: row.stageIdentity?.wrongReferencePenalty10 ?? 0,
+    lateStageIdentityPass: row.stageIdentity?.lateStageIdentityPass ?? null,
+    lateWrongChallengePenalty10: row.stageIdentity?.lateWrongChallengePenalty10 ?? 0,
+    expectedChallengeNumber: row.stageIdentity?.expectedChallengeNumber ?? null,
+    bestMatchChallengeNumber: row.stageIdentity?.bestMatchChallengeNumber ?? null,
+    bestFamilyIsExpected: row.stageIdentity?.bestFamilyIsExpected ?? null,
     noSafetyRegression: !!row.noSafetyRegression,
     bestMatchLabelId: row.bestMatch?.labelId || null,
     bestMatchScore10: row.bestMatch?.score10 || 0,
@@ -1458,11 +1506,12 @@ function buildMarkdown(report){
     const eventRead = row.noSafetyRegression ? 'pass' : `risk ${JSON.stringify(row.eventCounts)}`;
     return `| ${index + 1} | ${row.candidateId} | ${row.selectionScore10}/10 | ${row.expectedMatch?.score10 ?? 0}/10 | ${row.targetVideoObjectFit?.score10 ?? 'n/a'}/10 | ${row.stageIdentity?.identityMargin10 ?? 'n/a'} | ${row.bestMatch?.labelId || 'none'} (${row.bestMatch?.score10 ?? 0}/10) | ${hit} | ${eventRead} |`;
   }).join('\n');
-  const diagnosticRow = row => `| ${row.candidateId} | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.stageIdentityMargin10 ?? 'n/a'} | ${row.bestMatchLabelId || 'none'} (${row.bestMatchScore10}/10) | ${row.expectedReferenceHit ? 'yes' : 'no'} | ${row.noSafetyRegression ? 'pass' : 'risk'} | ${(row.groupPathFamilies || []).join(', ') || 'default'} |`;
-  const targetTimingRows = (report.diagnostics?.targetTimingTop || []).map(diagnosticRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
-  const targetControlRows = (report.diagnostics?.targetControlTop || []).map(diagnosticRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
-  const targetReferencePathRows = (report.diagnostics?.targetReferencePathTop || []).map(diagnosticRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
-  const pathShapeRows = (report.diagnostics?.pathShapeTop || []).map(diagnosticRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const diagnosticRow = row => `| ${row.candidateId} | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.stageIdentityMargin10 ?? 'n/a'} | ${row.bestMatchLabelId || 'none'} (${row.bestMatchScore10}/10) | ${row.expectedReferenceHit ? 'yes' : 'no'} | ${row.lateStageIdentityPass === false ? `blocked (${row.bestMatchChallengeNumber || 'n/a'} vs ${row.expectedChallengeNumber || 'n/a'})` : 'pass'} | ${row.noSafetyRegression ? 'pass' : 'risk'} | ${(row.groupPathFamilies || []).join(', ') || 'default'} |`;
+  const emptyDiagnosticRow = '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const targetTimingRows = (report.diagnostics?.targetTimingTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
+  const targetControlRows = (report.diagnostics?.targetControlTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
+  const targetReferencePathRows = (report.diagnostics?.targetReferencePathTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
+  const pathShapeRows = (report.diagnostics?.pathShapeTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
   return `# Stage ${report.stage} Challenge Candidate Sweep
 
 Generated: ${report.generatedAt}
@@ -1495,26 +1544,26 @@ These rows are intentionally retained even when they are not promotion candidate
 
 ### Target-Timing Diagnostics
 
-| Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Safety | Paths |
-| --- | ---: | ---: | ---: | --- | --- | --- | --- |
+| Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Late Identity | Safety | Paths |
+| --- | ---: | ---: | ---: | --- | --- | --- | --- | --- |
 ${targetTimingRows}
 
 ### Target-Control Diagnostics
 
-| Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Safety | Paths |
-| --- | ---: | ---: | ---: | --- | --- | --- | --- |
+| Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Late Identity | Safety | Paths |
+| --- | ---: | ---: | ---: | --- | --- | --- | --- | --- |
 ${targetControlRows}
 
 ### Target Reference-Path Diagnostics
 
-| Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Safety | Paths |
-| --- | ---: | ---: | ---: | --- | --- | --- | --- |
+| Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Late Identity | Safety | Paths |
+| --- | ---: | ---: | ---: | --- | --- | --- | --- | --- |
 ${targetReferencePathRows}
 
 ### Path-Shape Diagnostics
 
-| Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Safety | Paths |
-| --- | ---: | ---: | ---: | --- | --- | --- | --- |
+| Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Late Identity | Safety | Paths |
+| --- | ---: | ---: | ---: | --- | --- | --- | --- | --- |
 ${pathShapeRows}
 
 ## Next Step
@@ -1550,7 +1599,8 @@ async function main(){
       && candidateExpectedLift >= 0.5
       && candidateTargetVideoLift >= 0.8
       && candidateIdentityClose;
-    const intendedStageSupported = candidate.expectedReferenceHit || candidateIdentityTieSupported || strongExpectedLift;
+    const lateStageIdentityPass = candidate.stageIdentity?.lateStageIdentityPass !== false;
+    const intendedStageSupported = lateStageIdentityPass && (candidate.expectedReferenceHit || candidateIdentityTieSupported || strongExpectedLift);
     return candidate.noSafetyRegression
       && candidateNoTargetRegression
       && candidateNoExpectedRegression
@@ -1576,7 +1626,8 @@ async function main(){
     && expectedLift >= 0.5
     && targetVideoLift >= 0.8
     && identityClose;
-  const intendedStageSupported = best.expectedReferenceHit || identityTieSupported || strongExpectedLift;
+  const lateStageIdentityPass = best.stageIdentity?.lateStageIdentityPass !== false;
+  const intendedStageSupported = lateStageIdentityPass && (best.expectedReferenceHit || identityTieSupported || strongExpectedLift);
   const keeper = best.noSafetyRegression && noTargetVideoRegression && noExpectedRegression && intendedStageSupported && (expectedLift >= 0.35 || targetVideoLift >= 0.35 || (expectedLift >= 0.25 && targetVideoLift >= 0.25));
   const retainedCandidateLimit = 120;
   const pathShapeMarkers = [
@@ -1643,10 +1694,11 @@ async function main(){
       noTargetVideoRegression,
       noExpectedRegression,
       intendedStageSupported,
+      lateStageIdentityPass,
       identityTieSupported,
       materialTargetVideoWin,
       strongExpectedLift,
-      intendedStageSupportPolicy: 'runtime promotion requires no expected-label regression unless the expected label remains the best match and target-video fit improves by >=0.55/10 with no more than -0.15/10 expected drift. It also requires the best trajectory match to be one of the expected stage labels, an expected-label tie within 0.05/10 with >=0.3 expected lift and >=0.15 target-video lift, or a strong expected-label score >=7 with >=0.5 expected lift, >=0.8 target-video lift, and an identity margin no worse than -0.35/10',
+      intendedStageSupportPolicy: 'runtime promotion requires no expected-label regression unless the expected label remains the best match and target-video fit improves by >=0.55/10 with no more than -0.15/10 expected drift. It also requires the best trajectory match to be one of the expected stage labels, an expected-label tie within 0.05/10 with >=0.3 expected lift and >=0.15 target-video lift, or a strong expected-label score >=7 with >=0.5 expected lift, >=0.8 target-video lift, and an identity margin no worse than -0.35/10. For late challenge stages, candidates whose best match belongs to the wrong Galaga challenge number are explicitly penalized and blocked from promotion.',
       keeperDecision: keeper ? 'candidate-ready-for-full-analyzer-review' : 'no-runtime-keeper-yet',
       playerMeaning: keeper
         ? `A measured stage-${STAGE} layout candidate is worth a temporary runtime review, but it must be confirmed by the full challenge-stage analyzer and persona guardrails before promotion.`

@@ -95,11 +95,18 @@ function summarizeReport(file, report){
     noTargetVideoRegression: !!summary.noTargetVideoRegression,
     stageIdentityMargin10: round(identity.identityMargin10, 2),
     wrongReferencePenalty10: round(identity.wrongReferencePenalty10, 2),
+    lateStageIdentityPass: Object.prototype.hasOwnProperty.call(identity, 'lateStageIdentityPass') ? !!identity.lateStageIdentityPass : null,
+    lateWrongChallengePenalty10: round(identity.lateWrongChallengePenalty10, 2),
+    expectedChallengeNumber: identity.expectedChallengeNumber ?? null,
+    bestMatchChallengeNumber: identity.bestMatchChallengeNumber ?? null,
+    bestFamilyIsExpected: Object.prototype.hasOwnProperty.call(identity, 'bestFamilyIsExpected') ? !!identity.bestFamilyIsExpected : null,
     bestMatchLabelId: summary.bestMatch?.labelId || best.bestMatch?.labelId || null,
     expectedReferenceHit: !!best.expectedReferenceHit,
     noSafetyRegression: !!best.noSafetyRegression,
     nextStep: summary.nextStep || `Rerun a focused candidate sweep for stage ${report.stage}.`,
-    read: readyDecision && strictIdentityScored
+    read: identity.lateStageIdentityPass === false
+      ? `No runtime keeper: late-stage identity blocked because best match ${summary.bestMatch?.labelId || best.bestMatch?.labelId || 'none'} does not represent challenge ${identity.expectedChallengeNumber || 'n/a'}.`
+      : readyDecision && strictIdentityScored
       ? 'Candidate is ready for temporary full-analyzer review before runtime promotion.'
       : readyDecision
         ? 'Legacy ready decision predates current identity-margin scoring; rerun before promotion.'
@@ -108,7 +115,14 @@ function summarizeReport(file, report){
 }
 
 function buildMarkdown(report){
-  const rows = report.rows.map(row => `| ${row.stage} | ${row.candidateCount} | ${row.keeperDecision} | ${row.runtimeReadyUnderCurrentPolicy ? 'yes' : 'no'} | ${row.legacyReadyNeedsResweep ? 'yes' : 'no'} | ${row.bestExpectedScore10 ?? 'n/a'}/10 | ${row.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.stageIdentityMargin10 ?? 'n/a'} | ${row.bestMatchLabelId || 'none'} | ${row.nextStep} |`).join('\n');
+  const lateIdentityRead = row => {
+    if(row.lateStageIdentityPass === false){
+      return `blocked (${row.bestMatchChallengeNumber ?? 'n/a'} vs ${row.expectedChallengeNumber ?? 'n/a'}; penalty ${row.lateWrongChallengePenalty10 ?? 'n/a'})`;
+    }
+    if(row.lateStageIdentityPass === true) return 'pass';
+    return 'n/a';
+  };
+  const rows = report.rows.map(row => `| ${row.stage} | ${row.candidateCount} | ${row.keeperDecision} | ${row.runtimeReadyUnderCurrentPolicy ? 'yes' : 'no'} | ${row.legacyReadyNeedsResweep ? 'yes' : 'no'} | ${row.bestExpectedScore10 ?? 'n/a'}/10 | ${row.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.stageIdentityMargin10 ?? 'n/a'} | ${row.bestMatchLabelId || 'none'} | ${lateIdentityRead(row)} | ${row.nextStep} |`).join('\n');
   return `# Challenge Stage Candidate Sweep Index
 
 Generated: ${report.generatedAt}
@@ -130,8 +144,8 @@ This index preserves the latest candidate-sweep result for each challenged Auror
 
 ## Latest Per-Stage Rows
 
-| Stage | Candidates | Decision | Current Ready | Legacy Resweep | Expected | Target Video | Identity Margin | Best Match | Next Step |
-| ---: | ---: | --- | --- | --- | ---: | ---: | ---: | --- | --- |
+| Stage | Candidates | Decision | Current Ready | Legacy Resweep | Expected | Target Video | Identity Margin | Best Match | Late Identity | Next Step |
+| ---: | ---: | --- | --- | --- | ---: | ---: | ---: | --- | --- | --- |
 ${rows}
 `;
 }

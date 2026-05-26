@@ -1,31 +1,30 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-25T15-37-22-125Z-37141",
-  "startedAt": "2026-05-25T15:37:22.125Z",
-  "endedAt": "2026-05-25T15:37:26.231Z",
+  "id": "2026-05-25T18-07-07-425Z-54256",
+  "startedAt": "2026-05-25T18:07:07.425Z",
+  "endedAt": "2026-05-25T18:07:07.627Z",
   "branch": "codex/macbook-challenge-stage-conformance-cycle",
-  "commit": "412ff2860",
+  "commit": "abc27c36c",
   "command": [
     "npm",
     "run",
-    "harness:analyze:stage7-reference-path-before-after"
+    "harness:analyze:application-artifact-conformance"
   ],
   "axes": [
-    "challenge-stage",
-    "level-arc"
+    "application-artifact",
+    "sprite-conformance"
   ],
   "resources": [
-    "cpu",
-    "browser"
+    "cpu"
   ],
-  "notes": "Stage 7 before-after reference-path visual evidence capture",
+  "notes": "Aggregate artifact conformance after late identity and sprite target-lane updates",
   "measurement": {
-    "wallSeconds": 4.106,
-    "timeRealSeconds": 4.1,
-    "timeUserSeconds": 4.75,
-    "timeSystemSeconds": 1.56,
-    "cpuSeconds": 6.31,
+    "wallSeconds": 0.202,
+    "timeRealSeconds": 0.19,
+    "timeUserSeconds": 0.14,
+    "timeSystemSeconds": 0.14,
+    "cpuSeconds": 0.28,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -47,8 +46,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 1879145733,
-    "artifactBytesAfter": 1879139886,
-    "artifactBytesDelta": -5847
+    "artifactBytesBefore": 1884511526,
+    "artifactBytesAfter": 1884511482,
+    "artifactBytesDelta": -44
   }
 }

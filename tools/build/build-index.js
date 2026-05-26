@@ -5180,7 +5180,14 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const challengeSweepIndexSummary = challengeCandidateSweepIndex.summary || {};
   const challengeSweepIndexRows = Array.isArray(challengeCandidateSweepIndex.rows) ? challengeCandidateSweepIndex.rows : [];
   const challengeSweepIndexRead = challengeSweepIndexRows.length
-    ? challengeSweepIndexRows.map(row => `Stage ${row.stage}: ${row.keeperDecision || 'pending'}, expected ${row.bestExpectedScore10 ?? 'n/a'}/10, target-video ${row.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10, identity margin ${row.stageIdentityMargin10 ?? 'n/a'}.`).join(' ')
+    ? challengeSweepIndexRows.map(row => {
+      const lateIdentity = row.lateStageIdentityPass === false
+        ? ` late identity blocked (${row.bestMatchLabelId || 'none'} vs challenge ${row.expectedChallengeNumber ?? 'n/a'}).`
+        : row.lateStageIdentityPass === true
+          ? ' late identity pass.'
+          : '';
+      return `Stage ${row.stage}: ${row.keeperDecision || 'pending'}, expected ${row.bestExpectedScore10 ?? 'n/a'}/10, target-video ${row.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10, identity margin ${row.stageIdentityMargin10 ?? 'n/a'}.${lateIdentity}`;
+    }).join(' ')
     : 'No indexed candidate sweeps yet.';
   const challengeTrajectoryControls = loadChallengeTrajectoryControls();
   const challengeTrajectorySummary = challengeTrajectoryControls.summary || {};
