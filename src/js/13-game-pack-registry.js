@@ -233,7 +233,9 @@ function currentGamePackChallengeLayout(stage){
    groupArcAmps:Array.isArray(overrideLayout.groupArcAmps)?overrideLayout.groupArcAmps:(layout?.groupArcAmps||[]),
    groupDropAmps:Array.isArray(overrideLayout.groupDropAmps)?overrideLayout.groupDropAmps:(layout?.groupDropAmps||[]),
    groupLowerFieldBiases:Array.isArray(overrideLayout.groupLowerFieldBiases)?overrideLayout.groupLowerFieldBiases:(layout?.groupLowerFieldBiases||[]),
-   groupSpeedScales:Array.isArray(overrideLayout.groupSpeedScales)?overrideLayout.groupSpeedScales:(layout?.groupSpeedScales||[])
+   groupYOffsets:Array.isArray(overrideLayout.groupYOffsets)?overrideLayout.groupYOffsets:(layout?.groupYOffsets||[]),
+   groupSpeedScales:Array.isArray(overrideLayout.groupSpeedScales)?overrideLayout.groupSpeedScales:(layout?.groupSpeedScales||[]),
+   groupReferencePaths:Array.isArray(overrideLayout.groupReferencePaths)?overrideLayout.groupReferencePaths:(layout?.groupReferencePaths||[])
   });
  }
  return layout;

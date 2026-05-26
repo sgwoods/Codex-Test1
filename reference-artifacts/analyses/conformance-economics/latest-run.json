@@ -1,29 +1,30 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-05-19T22-28-16-277Z-7818",
-  "startedAt": "2026-05-19T22:28:16.277Z",
-  "endedAt": "2026-05-19T22:28:16.498Z",
-  "branch": "codex/macbook-challenge-sprite-motion-conformance",
-  "commit": "a2cfb8b5",
+  "id": "2026-05-25T18-07-07-425Z-54256",
+  "startedAt": "2026-05-25T18:07:07.425Z",
+  "endedAt": "2026-05-25T18:07:07.627Z",
+  "branch": "codex/macbook-challenge-stage-conformance-cycle",
+  "commit": "abc27c36c",
   "command": [
     "npm",
     "run",
-    "harness:analyze:aurora-sprite-motion-correspondence"
+    "harness:analyze:application-artifact-conformance"
   ],
   "axes": [
-    "sprite-motion"
+    "application-artifact",
+    "sprite-conformance"
   ],
   "resources": [
     "cpu"
   ],
-  "notes": "",
+  "notes": "Aggregate artifact conformance after late identity and sprite target-lane updates",
   "measurement": {
-    "wallSeconds": 0.221,
-    "timeRealSeconds": 0.21,
+    "wallSeconds": 0.202,
+    "timeRealSeconds": 0.19,
     "timeUserSeconds": 0.14,
-    "timeSystemSeconds": 0.13,
-    "cpuSeconds": 0.27,
+    "timeSystemSeconds": 0.14,
+    "cpuSeconds": 0.28,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -45,8 +46,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 1650142748,
-    "artifactBytesAfter": 1650142748,
-    "artifactBytesDelta": 0
+    "artifactBytesBefore": 1884511526,
+    "artifactBytesAfter": 1884511482,
+    "artifactBytesDelta": -44
   }
 }

@@ -155,6 +155,7 @@ async function captureRuntimeSprite(page, spec, model){
       ships: 3,
       challenge: !!captureSpec.challenge,
       graphicsTheme: 'classic-arcade',
+      spriteRenderMode: 'reference-pixel-lab',
       starfieldIntensity: 0,
       starfieldSpeed: 0
     });
@@ -456,6 +457,7 @@ async function main(){
       weakestSpriteKey: weakest?.spriteKey || null,
       weakestScore10: weakest?.score10 || null,
       captureMode: 'isolated-live-canvas-sprite-crops',
+      renderMode: 'reference-pixel-lab',
       measuredKeys: samples.map(item => item.spriteKey),
       staticPoseOnly: false,
       motionCoverageAxesCovered: [
@@ -479,7 +481,8 @@ async function main(){
       ]
     },
     measurementLimits: [
-      'Runtime captures isolate static sprite poses through the harness with starfield, reserve ships, stage badges, bullets, and effects suppressed.',
+      'Runtime captures isolate static sprite poses through the harness in reference-pixel-lab render mode with starfield, reserve ships, stage badges, bullets, and effects suppressed.',
+      'This artifact measures the target-conformance sprite lane, not the default Aurora themed sprite lane; the two lanes should remain intentionally separate so theme variants can differ after the reference lane is trustworthy.',
       'The first temporal windows capture closed/open flap phases, full cadence windows, forced dive/rotation poses, and capture/dual-fighter transition seed poses; they do not yet score damage pulsing, complete capture/rescue timelines, or formation context.',
       'Cadence windows are runtime-visible motion probes; they are not yet matched against frame-labeled Galaga target cadence windows.',
       'The current score compares visible rendered Aurora pixels to inferred source-frame Galaga models, not to a direct Galaga ROM sprite sheet.'

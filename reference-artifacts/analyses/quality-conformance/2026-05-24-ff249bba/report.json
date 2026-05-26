@@ -1,0 +1,1617 @@
+{
+  "generatedAt": "2026-05-24T07:35:45.976Z",
+  "movementRun": {
+    "ok": true,
+    "outDir": "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/correspondence/player-movement/2026-05-24-ff249bba",
+    "baselineScore10": 10,
+    "currentScore10": 10
+  },
+  "closeShotRun": {
+    "ok": true,
+    "files": [
+      "/Users/sgwoods/Development/Codex/Codex-test1/harness-artifacts/checks/close-shot-hit/close-shot-hit-seed9048-2026-05-24T07-34-46-739Z-59924-x8wct8/neo-galaga-session-ngt-1779608088064-3.json",
+      "/Users/sgwoods/Development/Codex/Codex-test1/harness-artifacts/checks/close-shot-hit/close-shot-hit-seed9048-2026-05-24T07-34-46-739Z-59924-x8wct8/neo-galaga-session-ngt-1779608088064-3-system-status.json"
+    ],
+    "shotAt": 0.077,
+    "killAt": 0.077,
+    "delay": 0,
+    "enemy": {
+      "id": 799329204,
+      "type": "but",
+      "lane": 4
+    }
+  },
+  "stage2SafetyRun": {
+    "ok": true,
+    "warningCount": 2,
+    "warnings": [
+      {
+        "seed": 51101,
+        "kind": "expert-score-below-advanced-safety-warning",
+        "advanced": {
+          "score": 3120,
+          "lives": 1,
+          "shipLosses": 2,
+          "collisionDeaths": 2,
+          "stage": 2,
+          "files": [
+            "/Users/sgwoods/Development/Codex/Codex-test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-advanced-seed51101-2026-05-24T07-35-03-377Z-59970-3anygo/neo-galaga-session-ngt-1779608104573-3.json",
+            "/Users/sgwoods/Development/Codex/Codex-test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-advanced-seed51101-2026-05-24T07-35-03-377Z-59970-3anygo/neo-galaga-session-ngt-1779608104573-3-system-status.json"
+          ]
+        },
+        "expert": {
+          "score": 2930,
+          "lives": 2,
+          "shipLosses": 1,
+          "collisionDeaths": 0,
+          "stage": 2,
+          "files": [
+            "/Users/sgwoods/Development/Codex/Codex-test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-expert-seed51101-2026-05-24T07-35-04-729Z-59987-t9cfe6/neo-galaga-session-ngt-1779608105961-3.json",
+            "/Users/sgwoods/Development/Codex/Codex-test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-expert-seed51101-2026-05-24T07-35-04-729Z-59987-t9cfe6/neo-galaga-session-ngt-1779608105961-3-system-status.json"
+          ]
+        },
+        "note": "Expert survived at least as safely as advanced but scored lower; keep as persona scoring calibration debt, not a safety failure."
+      },
+      {
+        "seed": 51201,
+        "kind": "expert-score-below-advanced-safety-warning",
+        "advanced": {
+          "score": 5010,
+          "lives": 1,
+          "shipLosses": 2,
+          "collisionDeaths": 2,
+          "stage": 2,
+          "files": [
+            "/Users/sgwoods/Development/Codex/Codex-test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-advanced-seed51201-2026-05-24T07-35-06-102Z-60004-iqqv0m/neo-galaga-session-ngt-1779608107330-3.json",
+            "/Users/sgwoods/Development/Codex/Codex-test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-advanced-seed51201-2026-05-24T07-35-06-102Z-60004-iqqv0m/neo-galaga-session-ngt-1779608107330-3-system-status.json"
+          ]
+        },
+        "expert": {
+          "score": 4250,
+          "lives": 3,
+          "shipLosses": 0,
+          "collisionDeaths": 0,
+          "stage": 2,
+          "files": [
+            "/Users/sgwoods/Development/Codex/Codex-test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-expert-seed51201-2026-05-24T07-35-07-475Z-60021-2waqkx/neo-galaga-session-ngt-1779608108670-3.json",
+            "/Users/sgwoods/Development/Codex/Codex-test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-expert-seed51201-2026-05-24T07-35-07-475Z-60021-2waqkx/neo-galaga-session-ngt-1779608108670-3-system-status.json"
+          ]
+        },
+        "note": "Expert survived at least as safely as advanced but scored lower; keep as persona scoring calibration debt, not a safety failure."
+      }
+    ],
+    "seeds": {
+      "51101": {
+        "advanced": {
+          "score": 3120,
+          "lives": 1,
+          "shipLosses": 2,
+          "collisionDeaths": 2,
+          "stage": 2,
+          "files": [
+            "/Users/sgwoods/Development/Codex/Codex-test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-advanced-seed51101-2026-05-24T07-35-03-377Z-59970-3anygo/neo-galaga-session-ngt-1779608104573-3.json",
+            "/Users/sgwoods/Development/Codex/Codex-test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-advanced-seed51101-2026-05-24T07-35-03-377Z-59970-3anygo/neo-galaga-session-ngt-1779608104573-3-system-status.json"
+          ]
+        },
+        "expert": {
+          "score": 2930,
+          "lives": 2,
+          "shipLosses": 1,
+          "collisionDeaths": 0,
+          "stage": 2,
+          "files": [
+            "/Users/sgwoods/Development/Codex/Codex-test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-expert-seed51101-2026-05-24T07-35-04-729Z-59987-t9cfe6/neo-galaga-session-ngt-1779608105961-3.json",
+            "/Users/sgwoods/Development/Codex/Codex-test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-expert-seed51101-2026-05-24T07-35-04-729Z-59987-t9cfe6/neo-galaga-session-ngt-1779608105961-3-system-status.json"
+          ]
+        }
+      },
+      "51201": {
+        "advanced": {
+          "score": 5010,
+          "lives": 1,
+          "shipLosses": 2,
+          "collisionDeaths": 2,
+          "stage": 2,
+          "files": [
+            "/Users/sgwoods/Development/Codex/Codex-test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-advanced-seed51201-2026-05-24T07-35-06-102Z-60004-iqqv0m/neo-galaga-session-ngt-1779608107330-3.json",
+            "/Users/sgwoods/Development/Codex/Codex-test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-advanced-seed51201-2026-05-24T07-35-06-102Z-60004-iqqv0m/neo-galaga-session-ngt-1779608107330-3-system-status.json"
+          ]
+        },
+        "expert": {
+          "score": 4250,
+          "lives": 3,
+          "shipLosses": 0,
+          "collisionDeaths": 0,
+          "stage": 2,
+          "files": [
+            "/Users/sgwoods/Development/Codex/Codex-test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-expert-seed51201-2026-05-24T07-35-07-475Z-60021-2waqkx/neo-galaga-session-ngt-1779608108670-3.json",
+            "/Users/sgwoods/Development/Codex/Codex-test1/harness-artifacts/checks/persona-stage2-safety/stage2-opening-expert-seed51201-2026-05-24T07-35-07-475Z-60021-2waqkx/neo-galaga-session-ngt-1779608108670-3-system-status.json"
+          ]
+        }
+      }
+    }
+  },
+  "surfaceRun": {
+    "ok": true,
+    "checks": [
+      {
+        "id": "front-door-copy",
+        "description": "Front-door shell copy and startup framing",
+        "script": "check-front-door-copy-surface.js"
+      },
+      {
+        "id": "popup-surfaces",
+        "description": "Help, settings, leaderboard, account, and feedback panels",
+        "script": "check-popup-surfaces.js"
+      },
+      {
+        "id": "framed-popout-bounds",
+        "description": "Frame-sized popout bounds and one-open-overlay switching",
+        "script": "check-framed-popout-bounds.js"
+      },
+      {
+        "id": "dock-buttons",
+        "description": "Dock buttons and toggle actions",
+        "script": "check-dock-button-actions.js"
+      },
+      {
+        "id": "pilot-records-panel",
+        "description": "Pilot records and account replay panel surface",
+        "script": "check-pilot-records-panel.js"
+      },
+      {
+        "id": "wait-score-overlay",
+        "description": "Wait-mode score overlay surface",
+        "script": "check-wait-score-overlay.js"
+      },
+      {
+        "id": "leaderboard-build-date-filter",
+        "description": "Leaderboard build/date trust context and filtering",
+        "script": "check-leaderboard-build-date-filter.js"
+      },
+      {
+        "id": "dev-graphics-options",
+        "description": "Graphics options and visible rendering controls",
+        "script": "check-dev-graphics-options.js"
+      },
+      {
+        "id": "production-developer-lock",
+        "description": "Production developer lock and Root backdoor",
+        "script": "check-production-developer-lock.js"
+      },
+      {
+        "id": "attract-score-cycle",
+        "description": "Attract/wait score cycling surface",
+        "script": "check-attract-score-cycle.js"
+      },
+      {
+        "id": "audio-theme-phases",
+        "description": "Audio theme selection by phase",
+        "script": "check-audio-theme-phases.js"
+      },
+      {
+        "id": "audio-cue-slots",
+        "description": "Audio cue slot consistency",
+        "script": "check-audio-cue-slots.js"
+      }
+    ]
+  },
+  "audioAlignmentRun": {
+    "generatedAt": "2026-05-24T07:35:45.587Z",
+    "commit": "ff249bba",
+    "profile": {
+      "id": "audio-cue-alignment",
+      "title": "Audio Cue Alignment Correspondence",
+      "purpose": "Compare the most timing-sensitive Aurora gameplay audio cues against the shipped local baseline and the preserved Galaga-aligned timing targets.",
+      "candidateRoots": {
+        "baseline": "dist/production",
+        "current": "dist/dev"
+      },
+      "referenceSource": {
+        "timingLibrary": "reference-artifacts/analyses/galaga-reference-timing-library/event-families.json"
+      },
+      "historicalAuroraBaselines": {
+        "stage1": "formation-arrival-and-convoy",
+        "challenge": "challenge-entry-results-perfect"
+      },
+      "scenarios": {
+        "stage1": "tools/harness/scenarios/stage1-descent.json",
+        "challengeEntry": "tools/harness/scenarios/challenge-entry-probe.json",
+        "challengePerfect": "tools/harness/scenarios/stage3-perfect-transition.json"
+      },
+      "metrics": [
+        {
+          "id": "gameStartCueAfterSpawn",
+          "label": "Game Start Cue After Spawn",
+          "source": "stage1",
+          "runtimePath": [
+            "stage1",
+            "gameStartCueAfterSpawn"
+          ],
+          "mode": "target",
+          "target": 0,
+          "tolerance": 0.05,
+          "severity": "strict"
+        },
+        {
+          "id": "firstStagePulseAfterFormationArrival",
+          "label": "First Stage Pulse After Formation Arrival",
+          "source": "stage1",
+          "runtimePath": [
+            "stage1",
+            "firstStagePulseAfterFormationArrival"
+          ],
+          "mode": "target",
+          "target": 1.97,
+          "tolerance": 0.35,
+          "severity": "high"
+        },
+        {
+          "id": "gameStartTailPastFirstPulse",
+          "label": "Game Start Tail Past First Pulse",
+          "source": "stage1",
+          "runtimePath": [
+            "stage1",
+            "gameStartTailPastFirstPulse"
+          ],
+          "mode": "max",
+          "maxAllowed": 0,
+          "tolerance": 0.15,
+          "severity": "medium"
+        },
+        {
+          "id": "challengeCueAfterProbe",
+          "label": "Challenge Cue After Probe",
+          "source": "challengeEntry",
+          "runtimePath": [
+            "challengeEntry",
+            "challengeCueAfterProbe"
+          ],
+          "mode": "familyTarget",
+          "family": "challenge",
+          "targetPath": [
+            "auroraCurrent",
+            "challengeEntry",
+            "cueAfterProbe"
+          ],
+          "tolerance": 0.5,
+          "severity": "high"
+        },
+        {
+          "id": "challengeSpawnAfterCue",
+          "label": "Challenge Spawn After Cue",
+          "source": "challengeEntry",
+          "runtimePath": [
+            "challengeEntry",
+            "challengeSpawnAfterCue"
+          ],
+          "mode": "familyTarget",
+          "family": "challenge",
+          "targetPath": [
+            "auroraCurrent",
+            "challengeEntry",
+            "spawnAfterCue"
+          ],
+          "tolerance": 0.4,
+          "severity": "high"
+        },
+        {
+          "id": "challengeTransitionTailPastSpawn",
+          "label": "Challenge Transition Tail Past Spawn",
+          "source": "challengeEntry",
+          "runtimePath": [
+            "challengeEntry",
+            "transitionCueTailPastSpawn"
+          ],
+          "mode": "target",
+          "target": 0.467,
+          "tolerance": 0.15,
+          "severity": "medium"
+        },
+        {
+          "id": "challengePerfectCueAfterClear",
+          "label": "Challenge Perfect Cue After Clear",
+          "source": "challengePerfect",
+          "runtimePath": [
+            "challengePerfect",
+            "challengePerfectCueAfterClear"
+          ],
+          "mode": "familyTarget",
+          "family": "challenge",
+          "targetPath": [
+            "auroraCurrent",
+            "challengePerfect",
+            "resultCueAfterClear"
+          ],
+          "tolerance": 0.35,
+          "severity": "high"
+        },
+        {
+          "id": "nextStageCueAfterClear",
+          "label": "Next Stage Cue After Clear",
+          "source": "challengePerfect",
+          "runtimePath": [
+            "challengePerfect",
+            "nextStageCueAfterClear"
+          ],
+          "mode": "familyTarget",
+          "family": "challenge",
+          "targetPath": [
+            "auroraCurrent",
+            "challengePerfect",
+            "nextCueAfterClear"
+          ],
+          "tolerance": 0.55,
+          "severity": "medium"
+        },
+        {
+          "id": "resultTailPastNextCue",
+          "label": "Result Cue Tail Past Next Cue",
+          "source": "challengePerfect",
+          "runtimePath": [
+            "challengePerfect",
+            "resultTailPastNextCue"
+          ],
+          "mode": "max",
+          "maxAllowed": 0,
+          "tolerance": 0.2,
+          "severity": "medium"
+        }
+      ]
+    },
+    "baselineRoot": "dist/production",
+    "currentRoot": "dist/dev",
+    "historicalFamilies": {
+      "stage1": "formation-arrival-and-convoy",
+      "challenge": "challenge-entry-results-perfect"
+    },
+    "runs": {
+      "baseline": {
+        "stage1": null,
+        "challengeEntry": null,
+        "challengePerfect": null,
+        "challengeEntryError": null
+      },
+      "current": {
+        "stage1": null,
+        "challengeEntry": null,
+        "challengePerfect": null,
+        "challengeEntryError": null
+      }
+    },
+    "baselineMetrics": {
+      "stage1": {
+        "gameStartCueAfterSpawn": 0,
+        "firstStagePulseAfterFormationArrival": 2.143,
+        "gameStartTailPastFirstPulse": -6.31
+      },
+      "challengeEntry": {
+        "challengeCueAfterProbe": 2.217,
+        "challengeSpawnAfterCue": 1.133,
+        "transitionCueTailPastSpawn": 0.467
+      },
+      "challengePerfect": {
+        "challengePerfectCueAfterClear": null,
+        "nextStageCueAfterClear": null,
+        "resultTailPastNextCue": null
+      }
+    },
+    "currentMetrics": {
+      "stage1": {
+        "gameStartCueAfterSpawn": 0,
+        "firstStagePulseAfterFormationArrival": 2.143,
+        "gameStartTailPastFirstPulse": -6.31
+      },
+      "challengeEntry": {
+        "challengeCueAfterProbe": 2.217,
+        "challengeSpawnAfterCue": 1.133,
+        "transitionCueTailPastSpawn": 0.467
+      },
+      "challengePerfect": {
+        "challengePerfectCueAfterClear": 0.333,
+        "nextStageCueAfterClear": 2.866,
+        "resultTailPastNextCue": -0.383
+      }
+    },
+    "metrics": [
+      {
+        "id": "gameStartCueAfterSpawn",
+        "label": "Game Start Cue After Spawn",
+        "source": "stage1",
+        "mode": "target",
+        "severity": "strict",
+        "target": 0,
+        "tolerance": 0.05,
+        "baseline": 0,
+        "current": 0,
+        "baselineDelta": 0,
+        "currentDelta": 0,
+        "driftFromBaseline": 0,
+        "withinTolerance": true
+      },
+      {
+        "id": "firstStagePulseAfterFormationArrival",
+        "label": "First Stage Pulse After Formation Arrival",
+        "source": "stage1",
+        "mode": "target",
+        "severity": "high",
+        "target": 1.97,
+        "tolerance": 0.35,
+        "baseline": 2.143,
+        "current": 2.143,
+        "baselineDelta": 0.173,
+        "currentDelta": 0.173,
+        "driftFromBaseline": 0,
+        "withinTolerance": true
+      },
+      {
+        "id": "gameStartTailPastFirstPulse",
+        "label": "Game Start Tail Past First Pulse",
+        "source": "stage1",
+        "mode": "max",
+        "severity": "medium",
+        "target": 0,
+        "tolerance": 0.15,
+        "baseline": -6.31,
+        "current": -6.31,
+        "baselineDelta": -6.31,
+        "currentDelta": -6.31,
+        "driftFromBaseline": 0,
+        "withinTolerance": true
+      },
+      {
+        "id": "challengeCueAfterProbe",
+        "label": "Challenge Cue After Probe",
+        "source": "challengeEntry",
+        "mode": "familyTarget",
+        "severity": "high",
+        "target": 2.224,
+        "tolerance": 0.5,
+        "baseline": 2.217,
+        "current": 2.217,
+        "baselineDelta": -0.007,
+        "currentDelta": -0.007,
+        "driftFromBaseline": 0,
+        "withinTolerance": true
+      },
+      {
+        "id": "challengeSpawnAfterCue",
+        "label": "Challenge Spawn After Cue",
+        "source": "challengeEntry",
+        "mode": "familyTarget",
+        "severity": "high",
+        "target": 1.133,
+        "tolerance": 0.4,
+        "baseline": 1.133,
+        "current": 1.133,
+        "baselineDelta": 0,
+        "currentDelta": 0,
+        "driftFromBaseline": 0,
+        "withinTolerance": true
+      },
+      {
+        "id": "challengeTransitionTailPastSpawn",
+        "label": "Challenge Transition Tail Past Spawn",
+        "source": "challengeEntry",
+        "mode": "target",
+        "severity": "medium",
+        "target": 0.467,
+        "tolerance": 0.15,
+        "baseline": 0.467,
+        "current": 0.467,
+        "baselineDelta": 0,
+        "currentDelta": 0,
+        "driftFromBaseline": 0,
+        "withinTolerance": true
+      },
+      {
+        "id": "challengePerfectCueAfterClear",
+        "label": "Challenge Perfect Cue After Clear",
+        "source": "challengePerfect",
+        "mode": "familyTarget",
+        "severity": "high",
+        "target": 0.342,
+        "tolerance": 0.35,
+        "baseline": null,
+        "current": 0.333,
+        "baselineDelta": null,
+        "currentDelta": -0.009,
+        "driftFromBaseline": null,
+        "withinTolerance": true
+      },
+      {
+        "id": "nextStageCueAfterClear",
+        "label": "Next Stage Cue After Clear",
+        "source": "challengePerfect",
+        "mode": "familyTarget",
+        "severity": "medium",
+        "target": 2.851,
+        "tolerance": 0.55,
+        "baseline": null,
+        "current": 2.866,
+        "baselineDelta": null,
+        "currentDelta": 0.015,
+        "driftFromBaseline": null,
+        "withinTolerance": true
+      },
+      {
+        "id": "resultTailPastNextCue",
+        "label": "Result Cue Tail Past Next Cue",
+        "source": "challengePerfect",
+        "mode": "max",
+        "severity": "medium",
+        "target": 0,
+        "tolerance": 0.2,
+        "baseline": null,
+        "current": -0.383,
+        "baselineDelta": null,
+        "currentDelta": -0.383,
+        "driftFromBaseline": null,
+        "withinTolerance": true
+      }
+    ],
+    "summary": {
+      "passed": 9,
+      "total": 9,
+      "worstCurrentDelta": 6.31,
+      "worstCurrentRiskDelta": 0,
+      "worstDriftFromBaseline": 0
+    }
+  },
+  "audioEventGapRun": {
+    "ok": true,
+    "report": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-24-ff249bba-dirty-073545/report.json",
+    "readme": "reference-artifacts/analyses/aurora-audio-event-gap/2026-05-24-ff249bba-dirty-073545/README.md",
+    "latest": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
+    "summary": {
+      "comparedCueCount": 21,
+      "criticalComparedCueCount": 15,
+      "missingCriticalComparisonCueCount": 0,
+      "broadReferenceWindowCount": 0,
+      "segmentRoleComparisonCount": 31,
+      "averageWorstSegmentRisk10": 3.47,
+      "highestSegmentRiskCue": "challengePerfect",
+      "highestSegmentRiskRole": "onset",
+      "semanticAverageScore10": 9.78,
+      "lowSemanticCueCount": 0,
+      "semanticAttentionCueCount": 0,
+      "distinctReferenceWindowCueCount": 20,
+      "lowestSemanticCue": "",
+      "lowestSemanticLabel": "",
+      "lowestSemanticScore10": null,
+      "sharedReferenceClipRiskCount": 0,
+      "sharedSourceClipCueCount": 7,
+      "highestRiskCue": "challengePerfect",
+      "highestRiskLabel": "Challenge Perfect",
+      "highestRisk10": 6.95
+    },
+    "nextStep": "Tune the highest segment-level gap next: challengePerfect onset. Rerun audio comparison and event-gap analysis after the change."
+  },
+  "formationBossRun": {
+    "ok": true,
+    "outDir": "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/formation-boss-grammar-conformance/2026-05-24-ff249bba",
+    "score10": 9.4,
+    "weakestMetric": "path-shape-precision"
+  },
+  "levelArcRun": {
+    "ok": true,
+    "outDir": "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/level-arc-conformance/2026-05-24-ff249bba",
+    "score10": 8.8
+  },
+  "categories": [
+    {
+      "id": "movement",
+      "label": "Player movement conformance",
+      "score10": 10,
+      "evidence": [
+        "player-movement report"
+      ],
+      "read": "Current movement scored 10/10 against the control-principles profile, versus 10/10 for the shipped local baseline."
+    },
+    {
+      "id": "combat-responsiveness",
+      "label": "Shot and hit responsiveness",
+      "score10": 10,
+      "evidence": [
+        "close-shot-hit",
+        "movement fire window"
+      ],
+      "read": "Close-shot responsiveness passed, and movement-fire post-shot travel was 44.39, with shot delay -5ms."
+    },
+    {
+      "id": "stage1-timing",
+      "label": "Stage-1 opening timing fidelity",
+      "score10": 8.5,
+      "evidence": [
+        "stage1-opening-first-dive report"
+      ],
+      "read": "4/4 metrics were within tolerance; worst current delta was 0.18."
+    },
+    {
+      "id": "stage1-geometry",
+      "label": "Stage-1 opening geometry fidelity",
+      "score10": 10,
+      "evidence": [
+        "stage1-opening-spacing report"
+      ],
+      "read": "Geometry held steady with 0 changed targets and max drift 0."
+    },
+    {
+      "id": "dive-safety",
+      "label": "Dive fairness and safety",
+      "score10": 9.1,
+      "evidence": [
+        "persona-stage2-safety"
+      ],
+      "read": "Shared stage-2 safety seeds passed, which keeps the early dive/collision windows within the intended persona guardrail."
+    },
+    {
+      "id": "capture-rescue",
+      "label": "Capture and rescue rule fidelity",
+      "score10": 10,
+      "evidence": [
+        "capture-rescue correspondence"
+      ],
+      "read": "3/3 capture scenarios matched, with worst tracked-time drift 0.004."
+    },
+    {
+      "id": "challenge-timing",
+      "label": "Challenge-stage timing fidelity",
+      "score10": 10,
+      "evidence": [
+        "challenge-stage correspondence"
+      ],
+      "read": "5/5 challenge timing metrics were within tolerance; worst current delta was 0.032."
+    },
+    {
+      "id": "challenge-set-piece",
+      "label": "Challenge-stage set-piece conformance",
+      "score10": 4.3,
+      "evidence": [
+        "challenge-stage-conformance strict scorer"
+      ],
+      "details": {
+        "score10": 4.3,
+        "interestingFactorScore10": 4.3,
+        "movementConformanceScore10": 4.3,
+        "graphicalConformanceScore10": 4.6,
+        "alienNoveltyScore10": 3.9,
+        "progressionConformanceScore10": 3,
+        "playerShotOpportunityScore10": 5.6,
+        "targetContractFitScore10": 5.4,
+        "targetVideoObjectTrackFitScore10": 3.6,
+        "targetTrackReadinessScore10": 8.6,
+        "spriteMotionCorrespondenceScore10": 7.83,
+        "spriteMotionCorrespondenceTimingStatus": "frame-labeled-segmented-reference-windows",
+        "safetyRuleScore10": 10,
+        "legacyCoverageScore10": 6.8,
+        "confidence": "medium-high for the gap; medium-low for exact remediation size",
+        "resolution": "strict stage-by-stage browser runtime probe plus media-backed Galaga challenge labels; broad legacy path/type coverage is retained as diagnostic evidence only",
+        "scoringModel": "strict-v2-user-baseline",
+        "startingAssumption": "Each challenge stage starts at 1.0/10 for interesting factor, movement conformance, and graphical conformance. Safety is a pass/fail guardrail and no longer inflates player-facing conformance.",
+        "strongestFinding": "Sampled challenge windows preserve the Galaga-like no-shot/no-ship-loss rule.",
+        "stage3ExpectedReferenceHit": true,
+        "challenge2BestMatchCount": 1,
+        "weakestFinding": "current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.3/10, strict graphics is 4.6/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.6/10, target-video object-track fit is 3.6/10, and sprite-motion correspondence is 7.83/10 with target timing status frame-labeled-segmented-reference-windows. Diagnostic legacy coverage was 6.8/10, which is why the old read was too generous.",
+        "playerMeaning": "A player should experience challenging stages as safe but tense score exhibitions with memorable entry routes, fresh alien types, readable trajectories, and a learnable perfect-bonus opportunity. Aurora currently preserves the safety rule, but the actual spectacle, motion, and visual novelty are still early.",
+        "designerMeaning": "Design work should move from broad path-family labels to explicit per-challenge contracts: group order, first-visible frame, entry side, exit side, path length, turn count, alien family, animation phases, bonus opportunity, and result feedback.",
+        "sourceScores": {
+          "alienEntryChallengeVariation": 8.3,
+          "challengeArrivalVsAppearance": 8.1,
+          "challengePatternNoveltyDepth": 7.8
+        }
+      },
+      "read": "Strict challenge-stage score is 4.3/10 with movement 4.3/10, graphics 4.6/10, alien novelty 3.9/10, and safety 10/10. current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.3/10, strict graphics is 4.6/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.6/10, target-video object-track fit is 3.6/10, and sprite-motion correspondence is 7.83/10 with target timing status frame-labeled-segmented-reference-windows. Diagnostic legacy coverage was 6.8/10, which is why the old read was too generous."
+    },
+    {
+      "id": "progression",
+      "label": "Progression and persona depth",
+      "score10": 8.4,
+      "evidence": [
+        "persona-progression correspondence"
+      ],
+      "read": "19/20 persona checks passed; progression ordering is still missing one ordering edge case."
+    },
+    {
+      "id": "formation-boss-grammar",
+      "label": "Boss entry and formation grammar",
+      "score10": 9.4,
+      "evidence": [
+        "formation-boss-grammar-conformance report",
+        "stage-signature-distance report",
+        "level-expansion cycle evidence"
+      ],
+      "details": {
+        "score10": 9.4,
+        "windowCount": 11,
+        "regularWindowCount": 7,
+        "challengeWindowCount": 4,
+        "bossRegularWindowCount": 7,
+        "bossEscortWindowCount": 5,
+        "formationSettleProxyWindowCount": 7,
+        "pathHintCount": 0,
+        "formationSlotHintCount": 0,
+        "pathSlotExtractionScore10": 9.8,
+        "cappedPathSlotScore10": 5.5,
+        "runtimePathTrackCount": 592,
+        "runtimeSlotTrackCount": 600,
+        "runtimeBossMovingTrackCount": 77,
+        "pathFamilyScore10": 8.2,
+        "pathFamilyComparisonConfidence": 0.8,
+        "pathFamilyReferenceCapReason": "media-backed-reference-label-cap",
+        "pathFamilyReferenceLabelSupport": {
+          "status": "media-backed-reference-label-gate-passed",
+          "report": "reference-artifacts/analyses/galaga-path-reference-labels/2026-05-15-c8c7246f/report.json",
+          "acceptedRegularEntryCount": 6,
+          "acceptedChallengeEntryCount": 4,
+          "acceptedLabelCount": 10,
+          "requiredRegularEntryCount": 6,
+          "requiredChallengeEntryCount": 4,
+          "confidenceScore": 0.747,
+          "minimumMeanConfidence": 0.72,
+          "coverageScore10": 10,
+          "mediaEvidenceCount": 10,
+          "mediaEvidenceReady": true,
+          "vectorLabelCount": 10,
+          "regularVectorLabelCount": 6,
+          "challengeVectorLabelCount": 4,
+          "labelGateReady": true,
+          "labelBackedComparisonReady": true,
+          "cap10": 8.2,
+          "capReason": "media-backed-reference-label-cap",
+          "futureCap10": 9.2,
+          "playerMeaning": "Aurora path families can now be judged against committed Galaga contact-sheet labels, but not yet against tracked reference trajectories or rack-slot coordinates."
+        },
+        "pathFamilyReferenceTrajectoryComparison": {
+          "status": "reference-trajectory-vector-comparison-active-no-cap-lift",
+          "ready": true,
+          "report": "reference-artifacts/analyses/galaga-path-reference-labels/2026-05-15-c8c7246f/report.json",
+          "regularVectorLabelCount": 6,
+          "challengeVectorLabelCount": 4,
+          "runtimeWindowCount": 11,
+          "referenceCoverage": 0.4,
+          "slotCoverage": 1,
+          "meanBestScore10": 5.2,
+          "minBestScore10": 4.2,
+          "score10": 5.5,
+          "minimumTrajectoryScore10": 7.4,
+          "capLiftReady": false,
+          "capReason": "media-backed-reference-label-cap",
+          "playerMeaning": "Aurora now has an active vector/rack comparison, but the paths are not yet close enough to Galaga reference vectors to lift the broad label-backed cap.",
+          "matches": [
+            {
+              "windowId": "stage-1-baseline",
+              "stage": 1,
+              "challenge": false,
+              "runtimeVector": {
+                "xRange": 0.6111,
+                "yRange": 0.4976,
+                "pathLength": 0.6643,
+                "turnCount": 1,
+                "reversalCount": 1,
+                "lowerFieldShare": 0.0062,
+                "rackSlotError": 0.5369
+              },
+              "slotCoverage": 1,
+              "bestMatch": {
+                "labelId": "regular-stage-5-opening-entry",
+                "kind": "regularEntry",
+                "entityFamily": "mixed-late-rack",
+                "entryCurveFamily": "late-stage-arc-to-rack",
+                "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-5-opening-entry/contact-sheet.jpg",
+                "distance": 0.265,
+                "score10": 5.6
+              },
+              "alternatives": [
+                {
+                  "labelId": "regular-stage-10-opening-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "mixed-late-rack",
+                  "entryCurveFamily": "late-stage-mirrored-rack-entry",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-10-opening-entry/contact-sheet.jpg",
+                  "distance": 0.267,
+                  "score10": 5.5
+                },
+                {
+                  "labelId": "regular-stage-4-post-challenge-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "mixed-boss-escort",
+                  "entryCurveFamily": "boss-led-escort-loop",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-4-post-challenge-entry/contact-sheet.jpg",
+                  "distance": 0.27,
+                  "score10": 5.5
+                },
+                {
+                  "labelId": "regular-stage-1-opening-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "zako-bee",
+                  "entryCurveFamily": "sweep-arc-to-rack",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-1-opening-entry/contact-sheet.jpg",
+                  "distance": 0.438,
+                  "score10": 2.7
+                }
+              ]
+            },
+            {
+              "windowId": "challenge-stage-candidate",
+              "stage": 3,
+              "challenge": true,
+              "runtimeVector": {
+                "xRange": 0.4685,
+                "yRange": 0.2039,
+                "pathLength": 0.2711,
+                "turnCount": 0.655,
+                "reversalCount": 0.4875,
+                "lowerFieldShare": 0,
+                "rackSlotError": 0.7561
+              },
+              "slotCoverage": 1,
+              "bestMatch": {
+                "labelId": "challenge-1-arrival-group-1",
+                "kind": "challengeEntry",
+                "entityFamily": "bee-line",
+                "entryCurveFamily": null,
+                "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg",
+                "distance": 0.35,
+                "score10": 4.2
+              },
+              "alternatives": [
+                {
+                  "labelId": "challenge-2-arrival-group-1",
+                  "kind": "challengeEntry",
+                  "entityFamily": "mixed-novelty-line",
+                  "entryCurveFamily": null,
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg",
+                  "distance": 0.35,
+                  "score10": 4.2
+                },
+                {
+                  "labelId": "challenge-1-late-wave-group-4",
+                  "kind": "challengeEntry",
+                  "entityFamily": "butterfly-line",
+                  "entryCurveFamily": null,
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/contact-sheet.jpg",
+                  "distance": 0.365,
+                  "score10": 3.9
+                },
+                {
+                  "labelId": "challenge-3-arrival-group-1",
+                  "kind": "challengeEntry",
+                  "entityFamily": "boss-led-novelty-line",
+                  "entryCurveFamily": null,
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-3-arrival/contact-sheet.jpg",
+                  "distance": 0.368,
+                  "score10": 3.9
+                }
+              ]
+            },
+            {
+              "windowId": "challenge-stage-scorpion-cross",
+              "stage": 7,
+              "challenge": true,
+              "runtimeVector": {
+                "xRange": 0.5333,
+                "yRange": 0.2388,
+                "pathLength": 0.3567,
+                "turnCount": 0.63,
+                "reversalCount": 0.5625,
+                "lowerFieldShare": 0.0063,
+                "rackSlotError": 0.75
+              },
+              "slotCoverage": 1,
+              "bestMatch": {
+                "labelId": "challenge-2-arrival-group-1",
+                "kind": "challengeEntry",
+                "entityFamily": "mixed-novelty-line",
+                "entryCurveFamily": null,
+                "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg",
+                "distance": 0.313,
+                "score10": 4.8
+              },
+              "alternatives": [
+                {
+                  "labelId": "challenge-3-arrival-group-1",
+                  "kind": "challengeEntry",
+                  "entityFamily": "boss-led-novelty-line",
+                  "entryCurveFamily": null,
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-3-arrival/contact-sheet.jpg",
+                  "distance": 0.329,
+                  "score10": 4.5
+                },
+                {
+                  "labelId": "challenge-1-arrival-group-1",
+                  "kind": "challengeEntry",
+                  "entityFamily": "bee-line",
+                  "entryCurveFamily": null,
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg",
+                  "distance": 0.335,
+                  "score10": 4.4
+                },
+                {
+                  "labelId": "challenge-1-late-wave-group-4",
+                  "kind": "challengeEntry",
+                  "entityFamily": "butterfly-line",
+                  "entryCurveFamily": null,
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/contact-sheet.jpg",
+                  "distance": 0.346,
+                  "score10": 4.2
+                }
+              ]
+            },
+            {
+              "windowId": "challenge-stage-stingray-hook",
+              "stage": 11,
+              "challenge": true,
+              "runtimeVector": {
+                "xRange": 0.4777,
+                "yRange": 0.2792,
+                "pathLength": 0.3448,
+                "turnCount": 0.64,
+                "reversalCount": 0.525,
+                "lowerFieldShare": 0.0065,
+                "rackSlotError": 0.8812
+              },
+              "slotCoverage": 1,
+              "bestMatch": {
+                "labelId": "challenge-2-arrival-group-1",
+                "kind": "challengeEntry",
+                "entityFamily": "mixed-novelty-line",
+                "entryCurveFamily": null,
+                "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg",
+                "distance": 0.345,
+                "score10": 4.3
+              },
+              "alternatives": [
+                {
+                  "labelId": "challenge-1-arrival-group-1",
+                  "kind": "challengeEntry",
+                  "entityFamily": "bee-line",
+                  "entryCurveFamily": null,
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg",
+                  "distance": 0.358,
+                  "score10": 4
+                },
+                {
+                  "labelId": "challenge-3-arrival-group-1",
+                  "kind": "challengeEntry",
+                  "entityFamily": "boss-led-novelty-line",
+                  "entryCurveFamily": null,
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-3-arrival/contact-sheet.jpg",
+                  "distance": 0.36,
+                  "score10": 4
+                },
+                {
+                  "labelId": "challenge-1-late-wave-group-4",
+                  "kind": "challengeEntry",
+                  "entityFamily": "butterfly-line",
+                  "entryCurveFamily": null,
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/contact-sheet.jpg",
+                  "distance": 0.369,
+                  "score10": 3.8
+                }
+              ]
+            },
+            {
+              "windowId": "challenge-stage-boss-led-loop",
+              "stage": 15,
+              "challenge": true,
+              "runtimeVector": {
+                "xRange": 0.6365,
+                "yRange": 0.3097,
+                "pathLength": 0.4838,
+                "turnCount": 0.7375,
+                "reversalCount": 0.6469,
+                "lowerFieldShare": 0.0112,
+                "rackSlotError": 0.896
+              },
+              "slotCoverage": 1,
+              "bestMatch": {
+                "labelId": "challenge-2-arrival-group-1",
+                "kind": "challengeEntry",
+                "entityFamily": "mixed-novelty-line",
+                "entryCurveFamily": null,
+                "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg",
+                "distance": 0.304,
+                "score10": 4.9
+              },
+              "alternatives": [
+                {
+                  "labelId": "challenge-3-arrival-group-1",
+                  "kind": "challengeEntry",
+                  "entityFamily": "boss-led-novelty-line",
+                  "entryCurveFamily": null,
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-3-arrival/contact-sheet.jpg",
+                  "distance": 0.315,
+                  "score10": 4.7
+                },
+                {
+                  "labelId": "challenge-1-arrival-group-1",
+                  "kind": "challengeEntry",
+                  "entityFamily": "bee-line",
+                  "entryCurveFamily": null,
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg",
+                  "distance": 0.374,
+                  "score10": 3.8
+                },
+                {
+                  "labelId": "challenge-1-late-wave-group-4",
+                  "kind": "challengeEntry",
+                  "entityFamily": "butterfly-line",
+                  "entryCurveFamily": null,
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/contact-sheet.jpg",
+                  "distance": 0.377,
+                  "score10": 3.7
+                }
+              ]
+            },
+            {
+              "windowId": "mid-run-pressure",
+              "stage": 6,
+              "challenge": false,
+              "runtimeVector": {
+                "xRange": 0.4811,
+                "yRange": 0.4732,
+                "pathLength": 0.4753,
+                "turnCount": 0.94,
+                "reversalCount": 0.9063,
+                "lowerFieldShare": 0.0189,
+                "rackSlotError": 0.5006
+              },
+              "slotCoverage": 1,
+              "bestMatch": {
+                "labelId": "regular-stage-5-opening-entry",
+                "kind": "regularEntry",
+                "entityFamily": "mixed-late-rack",
+                "entryCurveFamily": "late-stage-arc-to-rack",
+                "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-5-opening-entry/contact-sheet.jpg",
+                "distance": 0.268,
+                "score10": 5.5
+              },
+              "alternatives": [
+                {
+                  "labelId": "regular-stage-10-opening-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "mixed-late-rack",
+                  "entryCurveFamily": "late-stage-mirrored-rack-entry",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-10-opening-entry/contact-sheet.jpg",
+                  "distance": 0.276,
+                  "score10": 5.4
+                },
+                {
+                  "labelId": "regular-stage-4-post-challenge-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "mixed-boss-escort",
+                  "entryCurveFamily": "boss-led-escort-loop",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-4-post-challenge-entry/contact-sheet.jpg",
+                  "distance": 0.287,
+                  "score10": 5.2
+                },
+                {
+                  "labelId": "regular-stage-1-opening-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "zako-bee",
+                  "entryCurveFamily": "sweep-arc-to-rack",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-1-opening-entry/contact-sheet.jpg",
+                  "distance": 0.414,
+                  "score10": 3.1
+                }
+              ]
+            },
+            {
+              "windowId": "mid-run-entry-variant",
+              "stage": 8,
+              "challenge": false,
+              "runtimeVector": {
+                "xRange": 0.5731,
+                "yRange": 0.5661,
+                "pathLength": 0.6222,
+                "turnCount": 0.925,
+                "reversalCount": 0.8688,
+                "lowerFieldShare": 0.0199,
+                "rackSlotError": 0.4685
+              },
+              "slotCoverage": 1,
+              "bestMatch": {
+                "labelId": "regular-stage-5-opening-entry",
+                "kind": "regularEntry",
+                "entityFamily": "mixed-late-rack",
+                "entryCurveFamily": "late-stage-arc-to-rack",
+                "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-5-opening-entry/contact-sheet.jpg",
+                "distance": 0.228,
+                "score10": 6.2
+              },
+              "alternatives": [
+                {
+                  "labelId": "regular-stage-10-opening-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "mixed-late-rack",
+                  "entryCurveFamily": "late-stage-mirrored-rack-entry",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-10-opening-entry/contact-sheet.jpg",
+                  "distance": 0.235,
+                  "score10": 6.1
+                },
+                {
+                  "labelId": "regular-stage-4-post-challenge-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "mixed-boss-escort",
+                  "entryCurveFamily": "boss-led-escort-loop",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-4-post-challenge-entry/contact-sheet.jpg",
+                  "distance": 0.237,
+                  "score10": 6.1
+                },
+                {
+                  "labelId": "regular-stage-1-opening-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "zako-bee",
+                  "entryCurveFamily": "sweep-arc-to-rack",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-1-opening-entry/contact-sheet.jpg",
+                  "distance": 0.392,
+                  "score10": 3.5
+                }
+              ]
+            },
+            {
+              "windowId": "mid-run-pincer-variant",
+              "stage": 10,
+              "challenge": false,
+              "runtimeVector": {
+                "xRange": 0.7475,
+                "yRange": 0.5591,
+                "pathLength": 0.6394,
+                "turnCount": 0.845,
+                "reversalCount": 0.6375,
+                "lowerFieldShare": 0.015,
+                "rackSlotError": 0.6741
+              },
+              "slotCoverage": 1,
+              "bestMatch": {
+                "labelId": "regular-stage-4-post-challenge-entry",
+                "kind": "regularEntry",
+                "entityFamily": "mixed-boss-escort",
+                "entryCurveFamily": "boss-led-escort-loop",
+                "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-4-post-challenge-entry/contact-sheet.jpg",
+                "distance": 0.24,
+                "score10": 6
+              },
+              "alternatives": [
+                {
+                  "labelId": "regular-stage-5-opening-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "mixed-late-rack",
+                  "entryCurveFamily": "late-stage-arc-to-rack",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-5-opening-entry/contact-sheet.jpg",
+                  "distance": 0.24,
+                  "score10": 6
+                },
+                {
+                  "labelId": "regular-stage-10-opening-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "mixed-late-rack",
+                  "entryCurveFamily": "late-stage-mirrored-rack-entry",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-10-opening-entry/contact-sheet.jpg",
+                  "distance": 0.241,
+                  "score10": 6
+                },
+                {
+                  "labelId": "regular-stage-1-opening-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "zako-bee",
+                  "entryCurveFamily": "sweep-arc-to-rack",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-1-opening-entry/contact-sheet.jpg",
+                  "distance": 0.361,
+                  "score10": 4
+                }
+              ]
+            },
+            {
+              "windowId": "late-run-cleanup-or-failure",
+              "stage": 12,
+              "challenge": false,
+              "runtimeVector": {
+                "xRange": 0.5394,
+                "yRange": 0.7052,
+                "pathLength": 0.6412,
+                "turnCount": 0.87,
+                "reversalCount": 0.7,
+                "lowerFieldShare": 0.0215,
+                "rackSlotError": 0.6862
+              },
+              "slotCoverage": 1,
+              "bestMatch": {
+                "labelId": "regular-stage-5-opening-entry",
+                "kind": "regularEntry",
+                "entityFamily": "mixed-late-rack",
+                "entryCurveFamily": "late-stage-arc-to-rack",
+                "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-5-opening-entry/contact-sheet.jpg",
+                "distance": 0.262,
+                "score10": 5.6
+              },
+              "alternatives": [
+                {
+                  "labelId": "regular-stage-4-post-challenge-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "mixed-boss-escort",
+                  "entryCurveFamily": "boss-led-escort-loop",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-4-post-challenge-entry/contact-sheet.jpg",
+                  "distance": 0.268,
+                  "score10": 5.5
+                },
+                {
+                  "labelId": "regular-stage-10-opening-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "mixed-late-rack",
+                  "entryCurveFamily": "late-stage-mirrored-rack-entry",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-10-opening-entry/contact-sheet.jpg",
+                  "distance": 0.272,
+                  "score10": 5.5
+                },
+                {
+                  "labelId": "regular-stage-1-opening-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "zako-bee",
+                  "entryCurveFamily": "sweep-arc-to-rack",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-1-opening-entry/contact-sheet.jpg",
+                  "distance": 0.391,
+                  "score10": 3.5
+                }
+              ]
+            },
+            {
+              "windowId": "late-run-escort-variant",
+              "stage": 14,
+              "challenge": false,
+              "runtimeVector": {
+                "xRange": 0.4565,
+                "yRange": 0.6447,
+                "pathLength": 0.5931,
+                "turnCount": 0.89,
+                "reversalCount": 0.775,
+                "lowerFieldShare": 0.0224,
+                "rackSlotError": 0.7988
+              },
+              "slotCoverage": 1,
+              "bestMatch": {
+                "labelId": "regular-stage-5-opening-entry",
+                "kind": "regularEntry",
+                "entityFamily": "mixed-late-rack",
+                "entryCurveFamily": "late-stage-arc-to-rack",
+                "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-5-opening-entry/contact-sheet.jpg",
+                "distance": 0.295,
+                "score10": 5.1
+              },
+              "alternatives": [
+                {
+                  "labelId": "regular-stage-10-opening-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "mixed-late-rack",
+                  "entryCurveFamily": "late-stage-mirrored-rack-entry",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-10-opening-entry/contact-sheet.jpg",
+                  "distance": 0.306,
+                  "score10": 4.9
+                },
+                {
+                  "labelId": "regular-stage-4-post-challenge-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "mixed-boss-escort",
+                  "entryCurveFamily": "boss-led-escort-loop",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-4-post-challenge-entry/contact-sheet.jpg",
+                  "distance": 0.307,
+                  "score10": 4.9
+                },
+                {
+                  "labelId": "regular-stage-1-opening-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "zako-bee",
+                  "entryCurveFamily": "sweep-arc-to-rack",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-1-opening-entry/contact-sheet.jpg",
+                  "distance": 0.421,
+                  "score10": 3
+                }
+              ]
+            },
+            {
+              "windowId": "late-run-crown-entry",
+              "stage": 16,
+              "challenge": false,
+              "runtimeVector": {
+                "xRange": 0.7416,
+                "yRange": 0.5501,
+                "pathLength": 0.676,
+                "turnCount": 0.915,
+                "reversalCount": 0.875,
+                "lowerFieldShare": 0.0163,
+                "rackSlotError": 0.7395
+              },
+              "slotCoverage": 1,
+              "bestMatch": {
+                "labelId": "regular-stage-4-post-challenge-entry",
+                "kind": "regularEntry",
+                "entityFamily": "mixed-boss-escort",
+                "entryCurveFamily": "boss-led-escort-loop",
+                "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-4-post-challenge-entry/contact-sheet.jpg",
+                "distance": 0.279,
+                "score10": 5.3
+              },
+              "alternatives": [
+                {
+                  "labelId": "regular-stage-5-opening-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "mixed-late-rack",
+                  "entryCurveFamily": "late-stage-arc-to-rack",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-5-opening-entry/contact-sheet.jpg",
+                  "distance": 0.28,
+                  "score10": 5.3
+                },
+                {
+                  "labelId": "regular-stage-10-opening-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "mixed-late-rack",
+                  "entryCurveFamily": "late-stage-mirrored-rack-entry",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-10-opening-entry/contact-sheet.jpg",
+                  "distance": 0.281,
+                  "score10": 5.3
+                },
+                {
+                  "labelId": "regular-stage-1-opening-entry",
+                  "kind": "regularEntry",
+                  "entityFamily": "zako-bee",
+                  "entryCurveFamily": "sweep-arc-to-rack",
+                  "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/stage-1-opening-entry/contact-sheet.jpg",
+                  "distance": 0.427,
+                  "score10": 2.9
+                }
+              ]
+            }
+          ]
+        },
+        "classifiedPathFamilyCount": 600,
+        "expectedPathFamilyCoverage": 1,
+        "weakestMetric": {
+          "id": "path-shape-precision",
+          "label": "Path shape and set-formation precision",
+          "score10": 8.2,
+          "calculation": "Media-backed path-family comparison score from extracted runtime trajectories and accepted Galaga contact-sheet labels, capped below future tracked reference-trajectory comparison.",
+          "currentRead": "600 tracks classified into path families; expected family coverage 1; accepted Galaga labels 6 regular / 4 challenge; trajectory-vector/rack score 5.5/10 (reference-trajectory-vector-comparison-active-no-cap-lift); cap 8.2/10 (media-backed-reference-label-cap).",
+          "success": "Runtime boss/escort/challenge path traces and formation slot positions are available first, then promoted to direct reference comparison against Galaga path families."
+        },
+        "strongestMetric": {
+          "id": "formation-settle-evidence",
+          "label": "Formation settle evidence",
+          "score10": 10,
+          "calculation": "55% regular-window formation-active settle proxy plus 45% runtime rack/challenge slot-coordinate extraction coverage.",
+          "currentRead": "7/7 regular windows expose formation-active counts; path-slot extraction found 600 slot tracks.",
+          "success": "Evidence captures formation-active counts and, in the next scorer version, target rack slot geometry by stage."
+        },
+        "topProblem": "Boss/escort path-shape precision now has media-backed Galaga path-family labels; the next cap is tracked reference trajectory and rack-slot comparison.",
+        "strategy": "Promote boss/escort/challenge path traces, formation slot coordinates, and stage-family entry labels into the ingestion corpus, then use this scorer to rank stage scripts and runtime changes.",
+        "successMeasure": "Raise this family above 8.0/10 with path-shape precision above 5.0/10, minimum regular-stage signature distance above 0.16, and at least two challenge windows with distinct pattern identity."
+      },
+      "read": "Boss/formation grammar scores 9.4/10 across 11 evidence windows; weakest metric is Path shape and set-formation precision (8.2/10)."
+    },
+    {
+      "id": "level-arc",
+      "label": "Level arc and encounter shape",
+      "score10": 8.8,
+      "evidence": [
+        "level-arc-conformance report",
+        "stage-signature-distance report",
+        "level-expansion cycle evidence"
+      ],
+      "details": {
+        "score10": 8.8,
+        "stageFamilyBlueprintCount": 6,
+        "challengeLayerBlueprintCount": 3,
+        "evidenceWindowCount": 11,
+        "pressureReplayCoverage": 0,
+        "pressureCollisionReplayCoverage": 0,
+        "formationBossGrammarScore10": 9.4,
+        "formationBossGrammarWindowCount": 11,
+        "priority": "high",
+        "strongestSubmetric": {
+          "id": "stage-distinctiveness",
+          "label": "Stage distinctiveness",
+          "score10": 10,
+          "read": "6/6 stage families are blueprinted and 11/6 target evidence windows are present; stage-signature distinct pair ratio is 1."
+        },
+        "weakestSubmetric": {
+          "id": "long-run-non-repetition",
+          "label": "Long-run non-repetition",
+          "score10": 6,
+          "read": "Stage-signature repetition risk is 0; closest pair is late-run-crown-entry / late-run-escort-variant."
+        },
+        "nextRecommendedWork": [
+          "improve Stage 4 pressure replay precision so source loss windows reproduce as exact deterministic windows",
+          "preserve stage-8 flank and stage-14 escort grammar while adding the next measured challenge/reward slice",
+          "advance boss/formation grammar by targeting Path shape and set-formation precision: 600 tracks classified into path families; expected family coverage 1; accepted Galaga labels 6 regular / 4 challenge; trajectory-vector/rack score 5.5/10 (reference-trajectory-vector-comparison-active-no-cap-lift); cap 8.2/10 (media-backed-reference-label-cap).",
+          "mid-run-entry-variant and mid-run-pressure are too similar by computed gameplay signature distance (0.106). Strategy: Use the feature trace to add one distinct movement/reward grammar to the weaker window, then rerun stage-signature distance.",
+          "implement one challenge-stage movement and reward slice with clear perfect/near-perfect feedback"
+        ]
+      },
+      "read": "Level arc score is 8.8/10 with 6/6 stage families blueprinted and 11/6 evidence windows present; weakest submetric is Long-run non-repetition (6/10)."
+    },
+    {
+      "id": "audio",
+      "label": "Audio identity and cue alignment",
+      "score10": 7.3,
+      "evidence": [
+        "audio-cue-alignment correspondence",
+        "aurora-audio-theme-comparison",
+        "galaga-audio-overlap",
+        "aurora-audio-event-gap semantic read"
+      ],
+      "details": {
+        "score10": 7.3,
+        "cueIdentityAverage": 0.577,
+        "referenceSimilarityAverage": 0.784,
+        "referencePrecisionAverage": 1,
+        "overlapAverage": 0.406,
+        "alignmentAverage": 1,
+        "semanticEventAverage": 0.978,
+        "acousticEventAverage": 0.653,
+        "semanticEventScore10": 9.78,
+        "acousticEventScore10": 6.53,
+        "averageWorstSegmentRisk10": 3.47,
+        "highestSegmentRiskCue": "challengePerfect",
+        "highestSegmentRiskRole": "onset",
+        "semanticLowCueCount": 0,
+        "semanticAttentionCueCount": 0,
+        "semanticLowestCue": null,
+        "semanticSharedReferenceClipRiskCount": 0,
+        "broadReferenceWindowCount": 0,
+        "totalReferenceItems": 21,
+        "referenceSegmentCandidateCount": 25,
+        "averageReferenceDurationDeltaS": 0.065,
+        "averageReferenceCentroidDeltaHz": 211.862
+      },
+      "read": "Audio score blends cue identity, active reference similarity, reference-window precision, overlap timing, cue alignment, semantic event mapping, and acoustic event-gap severity. 0/21 reference windows still need tighter segmentation; 25 candidate subwindows were found; semantic event score is 9.78/10, acoustic event score is 6.53/10, and highest segment risk is challengePerfect onset."
+    },
+    {
+      "id": "ui-shell",
+      "label": "UI, shell, and graphics integrity",
+      "score10": 9.2,
+      "evidence": [
+        "dev candidate surface suite"
+      ],
+      "read": "The bundled front-door, panel, dock, graphics, attract, leaderboard, and audio shell surface suite passed."
+    }
+  ],
+  "summary": {
+    "overallScore10": 8.8,
+    "strongestCategory": {
+      "id": "movement",
+      "label": "Player movement conformance",
+      "score10": 10,
+      "evidence": [
+        "player-movement report"
+      ],
+      "read": "Current movement scored 10/10 against the control-principles profile, versus 10/10 for the shipped local baseline."
+    },
+    "weakestCategory": {
+      "id": "challenge-set-piece",
+      "label": "Challenge-stage set-piece conformance",
+      "score10": 4.3,
+      "evidence": [
+        "challenge-stage-conformance strict scorer"
+      ],
+      "details": {
+        "score10": 4.3,
+        "interestingFactorScore10": 4.3,
+        "movementConformanceScore10": 4.3,
+        "graphicalConformanceScore10": 4.6,
+        "alienNoveltyScore10": 3.9,
+        "progressionConformanceScore10": 3,
+        "playerShotOpportunityScore10": 5.6,
+        "targetContractFitScore10": 5.4,
+        "targetVideoObjectTrackFitScore10": 3.6,
+        "targetTrackReadinessScore10": 8.6,
+        "spriteMotionCorrespondenceScore10": 7.83,
+        "spriteMotionCorrespondenceTimingStatus": "frame-labeled-segmented-reference-windows",
+        "safetyRuleScore10": 10,
+        "legacyCoverageScore10": 6.8,
+        "confidence": "medium-high for the gap; medium-low for exact remediation size",
+        "resolution": "strict stage-by-stage browser runtime probe plus media-backed Galaga challenge labels; broad legacy path/type coverage is retained as diagnostic evidence only",
+        "scoringModel": "strict-v2-user-baseline",
+        "startingAssumption": "Each challenge stage starts at 1.0/10 for interesting factor, movement conformance, and graphical conformance. Safety is a pass/fail guardrail and no longer inflates player-facing conformance.",
+        "strongestFinding": "Sampled challenge windows preserve the Galaga-like no-shot/no-ship-loss rule.",
+        "stage3ExpectedReferenceHit": true,
+        "challenge2BestMatchCount": 1,
+        "weakestFinding": "current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.3/10, strict graphics is 4.6/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.6/10, target-video object-track fit is 3.6/10, and sprite-motion correspondence is 7.83/10 with target timing status frame-labeled-segmented-reference-windows. Diagnostic legacy coverage was 6.8/10, which is why the old read was too generous.",
+        "playerMeaning": "A player should experience challenging stages as safe but tense score exhibitions with memorable entry routes, fresh alien types, readable trajectories, and a learnable perfect-bonus opportunity. Aurora currently preserves the safety rule, but the actual spectacle, motion, and visual novelty are still early.",
+        "designerMeaning": "Design work should move from broad path-family labels to explicit per-challenge contracts: group order, first-visible frame, entry side, exit side, path length, turn count, alien family, animation phases, bonus opportunity, and result feedback.",
+        "sourceScores": {
+          "alienEntryChallengeVariation": 8.3,
+          "challengeArrivalVsAppearance": 8.1,
+          "challengePatternNoveltyDepth": 7.8
+        }
+      },
+      "read": "Strict challenge-stage score is 4.3/10 with movement 4.3/10, graphics 4.6/10, alien novelty 3.9/10, and safety 10/10. current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.3/10, strict graphics is 4.6/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.6/10, target-video object-track fit is 3.6/10, and sprite-motion correspondence is 7.83/10 with target timing status frame-labeled-segmented-reference-windows. Diagnostic legacy coverage was 6.8/10, which is why the old read was too generous."
+    },
+    "priorityGaps": [
+      {
+        "id": "challenge-set-piece",
+        "label": "Challenge-stage set-piece conformance",
+        "score10": 4.3,
+        "evidence": [
+          "challenge-stage-conformance strict scorer"
+        ],
+        "details": {
+          "score10": 4.3,
+          "interestingFactorScore10": 4.3,
+          "movementConformanceScore10": 4.3,
+          "graphicalConformanceScore10": 4.6,
+          "alienNoveltyScore10": 3.9,
+          "progressionConformanceScore10": 3,
+          "playerShotOpportunityScore10": 5.6,
+          "targetContractFitScore10": 5.4,
+          "targetVideoObjectTrackFitScore10": 3.6,
+          "targetTrackReadinessScore10": 8.6,
+          "spriteMotionCorrespondenceScore10": 7.83,
+          "spriteMotionCorrespondenceTimingStatus": "frame-labeled-segmented-reference-windows",
+          "safetyRuleScore10": 10,
+          "legacyCoverageScore10": 6.8,
+          "confidence": "medium-high for the gap; medium-low for exact remediation size",
+          "resolution": "strict stage-by-stage browser runtime probe plus media-backed Galaga challenge labels; broad legacy path/type coverage is retained as diagnostic evidence only",
+          "scoringModel": "strict-v2-user-baseline",
+          "startingAssumption": "Each challenge stage starts at 1.0/10 for interesting factor, movement conformance, and graphical conformance. Safety is a pass/fail guardrail and no longer inflates player-facing conformance.",
+          "strongestFinding": "Sampled challenge windows preserve the Galaga-like no-shot/no-ship-loss rule.",
+          "stage3ExpectedReferenceHit": true,
+          "challenge2BestMatchCount": 1,
+          "weakestFinding": "current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.3/10, strict graphics is 4.6/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.6/10, target-video object-track fit is 3.6/10, and sprite-motion correspondence is 7.83/10 with target timing status frame-labeled-segmented-reference-windows. Diagnostic legacy coverage was 6.8/10, which is why the old read was too generous.",
+          "playerMeaning": "A player should experience challenging stages as safe but tense score exhibitions with memorable entry routes, fresh alien types, readable trajectories, and a learnable perfect-bonus opportunity. Aurora currently preserves the safety rule, but the actual spectacle, motion, and visual novelty are still early.",
+          "designerMeaning": "Design work should move from broad path-family labels to explicit per-challenge contracts: group order, first-visible frame, entry side, exit side, path length, turn count, alien family, animation phases, bonus opportunity, and result feedback.",
+          "sourceScores": {
+            "alienEntryChallengeVariation": 8.3,
+            "challengeArrivalVsAppearance": 8.1,
+            "challengePatternNoveltyDepth": 7.8
+          }
+        },
+        "read": "Strict challenge-stage score is 4.3/10 with movement 4.3/10, graphics 4.6/10, alien novelty 3.9/10, and safety 10/10. current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.3/10, strict graphics is 4.6/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.6/10, target-video object-track fit is 3.6/10, and sprite-motion correspondence is 7.83/10 with target timing status frame-labeled-segmented-reference-windows. Diagnostic legacy coverage was 6.8/10, which is why the old read was too generous."
+      },
+      {
+        "id": "audio",
+        "label": "Audio identity and cue alignment",
+        "score10": 7.3,
+        "evidence": [
+          "audio-cue-alignment correspondence",
+          "aurora-audio-theme-comparison",
+          "galaga-audio-overlap",
+          "aurora-audio-event-gap semantic read"
+        ],
+        "details": {
+          "score10": 7.3,
+          "cueIdentityAverage": 0.577,
+          "referenceSimilarityAverage": 0.784,
+          "referencePrecisionAverage": 1,
+          "overlapAverage": 0.406,
+          "alignmentAverage": 1,
+          "semanticEventAverage": 0.978,
+          "acousticEventAverage": 0.653,
+          "semanticEventScore10": 9.78,
+          "acousticEventScore10": 6.53,
+          "averageWorstSegmentRisk10": 3.47,
+          "highestSegmentRiskCue": "challengePerfect",
+          "highestSegmentRiskRole": "onset",
+          "semanticLowCueCount": 0,
+          "semanticAttentionCueCount": 0,
+          "semanticLowestCue": null,
+          "semanticSharedReferenceClipRiskCount": 0,
+          "broadReferenceWindowCount": 0,
+          "totalReferenceItems": 21,
+          "referenceSegmentCandidateCount": 25,
+          "averageReferenceDurationDeltaS": 0.065,
+          "averageReferenceCentroidDeltaHz": 211.862
+        },
+        "read": "Audio score blends cue identity, active reference similarity, reference-window precision, overlap timing, cue alignment, semantic event mapping, and acoustic event-gap severity. 0/21 reference windows still need tighter segmentation; 25 candidate subwindows were found; semantic event score is 9.78/10, acoustic event score is 6.53/10, and highest segment risk is challengePerfect onset."
+      },
+      {
+        "id": "progression",
+        "label": "Progression and persona depth",
+        "score10": 8.4,
+        "evidence": [
+          "persona-progression correspondence"
+        ],
+        "read": "19/20 persona checks passed; progression ordering is still missing one ordering edge case."
+      }
+    ]
+  }
+}

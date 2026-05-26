@@ -8,6 +8,7 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep');
 const LABELS_PATH = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-path-reference-labels', 'latest.json');
 const TARGET_TRACKS_PATH = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-challenge-object-tracks', 'latest.json');
+const TARGET_CONTROLS_PATH = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-trajectory-controls', 'latest.json');
 function argValue(name, fallback = ''){
   const prefix = `--${name}=`;
   const direct = process.argv.find(arg => arg.startsWith(prefix));
@@ -506,11 +507,52 @@ function challengeNumberForStage(stage){
   return stage >= 3 ? Math.floor((stage - 3) / 4) + 1 : null;
 }
 
+function challengeNumberForLabel(labelId){
+  const match = /^challenge-(\d+)-/.exec(String(labelId || ''));
+  return match ? +match[1] : null;
+}
+
+function expectedFamiliesForMatches(matches){
+  return [...new Set(matches
+    .filter(match => EXPECTED_LABELS.includes(match.labelId))
+    .map(match => match.entityFamily)
+    .filter(Boolean))];
+}
+
 function targetGroupsForStage(stage){
   const artifact = readJson(TARGET_TRACKS_PATH, {});
   const challengeNumber = challengeNumberForStage(stage);
   const challenge = (artifact.challenges || []).find(item => +item.challengeNumber === +challengeNumber);
   return Array.isArray(challenge?.targetGroups) ? challenge.targetGroups : [];
+}
+
+function targetControlsForStage(stage){
+  const artifact = readJson(TARGET_CONTROLS_PATH, {});
+  const challengeNumber = challengeNumberForStage(stage);
+  return (artifact.challenges || []).find(item => +item.challengeNumber === +challengeNumber || +item.stage === +stage) || null;
+}
+
+function dedupePathSets(pathSets){
+  const seen = new Set();
+  const out = [];
+  for(const set of pathSets){
+    const clean = Array.isArray(set) ? set.filter(Boolean) : [];
+    if(!clean.length) continue;
+    const key = clean.join('|');
+    if(seen.has(key)) continue;
+    seen.add(key);
+    out.push(clean);
+  }
+  return out;
+}
+
+function controlArray(values, fallback, length){
+  const source = Array.isArray(values) && values.length ? values : fallback;
+  const out = [];
+  for(let index = 0; index < length; index += 1){
+    out.push(source?.[index] ?? fallback?.[index] ?? fallback?.[0] ?? 1);
+  }
+  return out;
 }
 
 function targetTimingCandidates(base, pathSets = []){
@@ -567,6 +609,152 @@ function targetTimingCandidates(base, pathSets = []){
           })
         });
       }
+    }
+  }
+  return candidates;
+}
+
+function targetControlCandidates(base, pathSets = []){
+  const controls = targetControlsForStage(STAGE);
+  const seed = controls?.runtimeLayoutSeed || null;
+  const groups = Array.isArray(controls?.groups) ? controls.groups : [];
+  if(!seed || groups.length < 3) return [];
+  const groupCount = groups.length;
+  const baseSpeeds = Array.isArray(base.groupSpeedScales) && base.groupSpeedScales.length
+    ? base.groupSpeedScales
+    : Array.from({ length: groupCount }, () => 1);
+  const pathVariants = dedupePathSets([
+    seed.groupPathFamilies,
+    base.groupPathFamilies,
+    ...pathSets
+  ]);
+  const offsets = controlArray(seed.groupSpawnOffsets, [], groupCount).map(value => round(value, 2));
+  const speedScales = controlArray(seed.groupSpeedScales, baseSpeeds, groupCount).map(value => round(value, 2));
+  const softSpeedScales = controlArray(seed.groupSoftSpeedScales, baseSpeeds, groupCount).map(value => round(value, 2));
+  const arcAmps = controlArray(seed.groupArcAmps, [], groupCount).map(value => round(value, 2));
+  const dropAmps = controlArray(seed.groupDropAmps, [], groupCount).map(value => round(value, 2));
+  const lowerFieldBiases = controlArray(seed.groupLowerFieldBiases, [], groupCount).map(value => Math.round(+value || 0));
+  const yOffsets = controlArray(seed.groupYOffsets, [], groupCount).map(value => Math.round(+value || 0));
+  const referencePaths = Array.isArray(seed.groupReferencePaths) ? seed.groupReferencePaths : [];
+  const baseArcAmps = controlArray(base.groupArcAmps, [base.arcAmp || 1], groupCount).map(value => +value || 1);
+  const baseDropAmps = controlArray(base.groupDropAmps, [base.dropAmp || 1], groupCount).map(value => +value || 1);
+  const blendedArcAmps = arcAmps.map((value, index) => round(((+value || 1) + baseArcAmps[index]) / 2, 2));
+  const blendedDropAmps = dropAmps.map((value, index) => round(((+value || 1) + baseDropAmps[index]) / 2, 2));
+  const blendedLowerFieldBiases = lowerFieldBiases.map(value => Math.round((+value || 0) * 0.5));
+  const blendedYOffsets = yOffsets.map(value => Math.round((+value || 0) * 0.5));
+  const candidates = [];
+  for(let pathIndex = 0; pathIndex < pathVariants.length; pathIndex += 1){
+    const groupPathFamilies = pathVariants[pathIndex];
+    candidates.push({
+      id: `stage${STAGE}-target-controls-direct-p${pathIndex}`,
+      description: `Stage ${STAGE} target-trajectory controls: source-video schedule, direct duration speed, arc/drop, lower-field, y-offset, path set ${pathIndex}.`,
+      layoutOverride: Object.assign({}, base, {
+        groupSpawnOffsets: offsets,
+        groupSpeedScales: speedScales,
+        groupArcAmps: arcAmps,
+        groupDropAmps: dropAmps,
+        groupLowerFieldBiases: lowerFieldBiases,
+        groupYOffsets: yOffsets,
+        groupPathFamilies
+      })
+    });
+    candidates.push({
+      id: `stage${STAGE}-target-controls-soft-p${pathIndex}`,
+      description: `Stage ${STAGE} target-trajectory controls: source-video schedule with softer duration speed and full shape controls, path set ${pathIndex}.`,
+      layoutOverride: Object.assign({}, base, {
+        groupSpawnOffsets: offsets,
+        groupSpeedScales: softSpeedScales,
+        groupArcAmps: arcAmps,
+        groupDropAmps: dropAmps,
+        groupLowerFieldBiases: lowerFieldBiases,
+        groupYOffsets: yOffsets,
+        groupPathFamilies
+      })
+    });
+    candidates.push({
+      id: `stage${STAGE}-target-controls-shape-only-p${pathIndex}`,
+      description: `Stage ${STAGE} target-trajectory controls: preserve current schedule/speed but apply source-video arc/drop/lower-field/y-offset shape, path set ${pathIndex}.`,
+      layoutOverride: Object.assign({}, base, {
+        groupArcAmps: arcAmps,
+        groupDropAmps: dropAmps,
+        groupLowerFieldBiases: lowerFieldBiases,
+        groupYOffsets: yOffsets,
+        groupPathFamilies
+      })
+    });
+    candidates.push({
+      id: `stage${STAGE}-target-controls-shape-blend-p${pathIndex}`,
+      description: `Stage ${STAGE} target-trajectory controls: preserve current schedule/speed and apply half-strength source-video shape controls, path set ${pathIndex}.`,
+      layoutOverride: Object.assign({}, base, {
+        groupArcAmps: blendedArcAmps,
+        groupDropAmps: blendedDropAmps,
+        groupLowerFieldBiases: blendedLowerFieldBiases,
+        groupYOffsets: blendedYOffsets,
+        groupPathFamilies
+      })
+    });
+    candidates.push({
+      id: `stage${STAGE}-target-controls-soft-blend-p${pathIndex}`,
+      description: `Stage ${STAGE} target-trajectory controls: source-video schedule with softer duration speed and half-strength shape controls, path set ${pathIndex}.`,
+      layoutOverride: Object.assign({}, base, {
+        groupSpawnOffsets: offsets,
+        groupSpeedScales: softSpeedScales,
+        groupArcAmps: blendedArcAmps,
+        groupDropAmps: blendedDropAmps,
+        groupLowerFieldBiases: blendedLowerFieldBiases,
+        groupYOffsets: blendedYOffsets,
+        groupPathFamilies
+      })
+    });
+    if(referencePaths.filter(Boolean).length >= 3){
+      candidates.push({
+        id: `stage${STAGE}-target-reference-paths-direct-p${pathIndex}`,
+        description: `Stage ${STAGE} target reference-path candidate: source-video sampled paths with source schedule and path set ${pathIndex}.`,
+        layoutOverride: Object.assign({}, base, {
+          groupSpawnOffsets: offsets,
+          groupSpeedScales: softSpeedScales,
+          groupArcAmps: blendedArcAmps,
+          groupDropAmps: blendedDropAmps,
+          groupPathFamilies,
+          groupReferencePaths: referencePaths
+        })
+      });
+      candidates.push({
+        id: `stage${STAGE}-target-reference-paths-lower-field-p${pathIndex}`,
+        description: `Stage ${STAGE} target reference-path candidate: sampled paths plus measured lower-field/y controls and source schedule, path set ${pathIndex}.`,
+        layoutOverride: Object.assign({}, base, {
+          groupSpawnOffsets: offsets,
+          groupSpeedScales: softSpeedScales,
+          groupArcAmps: blendedArcAmps,
+          groupDropAmps: blendedDropAmps,
+          groupLowerFieldBiases: blendedLowerFieldBiases,
+          groupYOffsets: blendedYOffsets,
+          groupPathFamilies,
+          groupReferencePaths: referencePaths
+        })
+      });
+      candidates.push({
+        id: `stage${STAGE}-target-reference-paths-shape-only-p${pathIndex}`,
+        description: `Stage ${STAGE} target reference-path candidate: preserve current schedule while using source-video sampled paths and path set ${pathIndex}.`,
+        layoutOverride: Object.assign({}, base, {
+          groupArcAmps: blendedArcAmps,
+          groupDropAmps: blendedDropAmps,
+          groupPathFamilies,
+          groupReferencePaths: referencePaths
+        })
+      });
+      candidates.push({
+        id: `stage${STAGE}-target-reference-paths-shape-lower-p${pathIndex}`,
+        description: `Stage ${STAGE} target reference-path candidate: preserve current schedule while using sampled paths plus measured lower-field/y controls, path set ${pathIndex}.`,
+        layoutOverride: Object.assign({}, base, {
+          groupArcAmps: blendedArcAmps,
+          groupDropAmps: blendedDropAmps,
+          groupLowerFieldBiases: blendedLowerFieldBiases,
+          groupYOffsets: blendedYOffsets,
+          groupPathFamilies,
+          groupReferencePaths: referencePaths
+        })
+      });
     }
   }
   return candidates;
@@ -843,6 +1031,7 @@ function candidateDefinitions(){
       }
     }
     candidates.push(...targetTimingCandidates(base, pathSets));
+    candidates.push(...targetControlCandidates(base, pathSets));
     return candidates;
   }
   if(STAGE === 15){
@@ -851,11 +1040,201 @@ function candidateDefinitions(){
     const spawnValues = [68, 74, 82];
     const waveValues = [1.06, 1.22];
     const slotValues = [0.08, 0.1];
+    const lowerBiasSets = [
+      [],
+      [96,112,40,36,128],
+      [136,152,68,56,164],
+      [176,196,96,82,208]
+    ];
+    const yOffsetSets = [
+      [],
+      [78,86,8,8,118],
+      [104,112,14,18,142],
+      [128,136,24,28,168]
+    ];
     const pathSets = [
       ['pink-serpentine','pink-serpentine','green-ladder-split','pink-serpentine','pink-green-cascade'],
       ['pink-serpentine','green-ladder-split','pink-serpentine','pink-green-cascade','pink-serpentine'],
       ['green-ladder-split','pink-serpentine','pink-green-cascade','pink-serpentine','pink-green-cascade']
     ];
+    const candidates = [{
+      id: 'baseline-current',
+      description: `Current stage-${STAGE} layout, used as the measured baseline.`,
+      layoutOverride: {}
+    }];
+    for(const arcAmp of arcValues){
+      for(const dropAmp of dropValues){
+        for(const spawnOffsetX of spawnValues){
+            for(const waveDelay of waveValues){
+              for(const slotDelay of slotValues){
+                for(let lowerIndex = 0; lowerIndex < lowerBiasSets.length; lowerIndex += 1){
+                  for(let yOffsetIndex = 0; yOffsetIndex < yOffsetSets.length; yOffsetIndex += 1){
+                    for(let pathIndex = 0; pathIndex < pathSets.length; pathIndex += 1){
+                      const groupLowerFieldBiases = lowerBiasSets[lowerIndex];
+                      const groupYOffsets = yOffsetSets[yOffsetIndex];
+                      candidates.push({
+                        id: `stage${STAGE}-a${String(arcAmp).replace('.','')}-d${String(dropAmp).replace('.','')}-x${spawnOffsetX}-w${String(waveDelay).replace('.','')}-s${String(slotDelay).replace('.','')}-lb${lowerIndex}-y${yOffsetIndex}-p${pathIndex}`,
+                        description: `Stage ${STAGE} sweep: arc ${arcAmp}, drop ${dropAmp}, spawn ${spawnOffsetX}, wave ${waveDelay}, slot ${slotDelay}, lower-bias set ${lowerIndex}, y-offset set ${yOffsetIndex}, path set ${pathIndex}.`,
+                        layoutOverride: Object.assign({}, base, {
+                          arcAmp,
+                          dropAmp,
+                          spawnOffsetX,
+                          waveDelay,
+                          slotDelay,
+                          groupPathFamilies: pathSets[pathIndex],
+                          groupLowerFieldBiases,
+                          groupYOffsets
+                        })
+                      });
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+    }
+    candidates.push(...targetTimingCandidates(base, pathSets));
+    candidates.push(...targetControlCandidates(base, pathSets));
+    return candidates;
+  }
+  if(STAGE === 19 || STAGE === 31){
+    const arcValues = STAGE === 19 ? [1.62, 1.86, 2.08] : [1.62, 1.8, 2.02];
+    const dropValues = STAGE === 19 ? [1.06, 1.22, 1.4] : [1.08, 1.26, 1.44];
+    const spawnValues = STAGE === 19 ? [68, 76, 84] : [78, 86, 94];
+    const waveValues = STAGE === 19 ? [0.96, 1.1] : [0.86, 0.96, 1.08];
+    const slotValues = STAGE === 19 ? [0.07, 0.085] : [0.055, 0.07];
+    const lowerBiasValues = STAGE === 19 ? [0, 28, 52, 76] : [0, 24, 48, 72];
+    const lowerBiasSets = STAGE === 31
+      ? [
+        [],
+        [48,32,48,36,60],
+        [72,54,72,48,84],
+        [96,72,96,60,108]
+      ]
+      : [
+        [],
+        [52,36,52,40,64],
+        [64,44,68,52,76],
+        [76,52,84,60,92]
+      ];
+    const yOffsetSets = STAGE === 31
+      ? [
+        [],
+        [24,8,28,10,34],
+        [44,18,52,22,62],
+        [64,30,78,36,88]
+      ]
+      : [
+        [],
+        [16,8,18,10,24],
+        [28,12,32,16,38],
+        [40,18,48,22,56]
+      ];
+    const pathSets = STAGE === 19
+      ? [
+        ['pink-green-cascade','green-ladder-split','pink-green-cascade','pink-serpentine','pink-green-cascade'],
+        ['pink-green-cascade','pink-green-cascade','green-ladder-split','pink-green-cascade','pink-serpentine'],
+        ['green-ladder-split','pink-green-cascade','pink-serpentine','pink-green-cascade','pink-green-cascade'],
+        ['pink-green-low-sweep','pink-green-low-sweep','pink-green-tall-drift','pink-green-tall-drift','pink-green-compact-exit'],
+        ['pink-green-low-sweep','pink-green-low-sweep','pink-green-tall-drift','pink-green-compact-exit','pink-green-low-sweep']
+      ]
+      : [
+        ['blue-purple-finale','green-ladder-split','blue-purple-finale','yellow-diagonal-fan','blue-purple-finale'],
+        ['blue-purple-finale','blue-purple-finale','green-ladder-split','blue-purple-finale','yellow-diagonal-fan'],
+        ['yellow-diagonal-fan','blue-purple-finale','green-ladder-split','blue-purple-finale','blue-purple-finale'],
+        ['blue-purple-finale','yellow-diagonal-fan','blue-purple-finale','green-ladder-split','blue-purple-finale']
+      ];
+    const candidates = [{
+      id: 'baseline-current',
+      description: `Current stage-${STAGE} layout, used as the measured baseline.`,
+      layoutOverride: {}
+    }];
+    for(const arcAmp of arcValues){
+      for(const dropAmp of dropValues){
+        for(const spawnOffsetX of spawnValues){
+          for(const waveDelay of waveValues){
+            for(const slotDelay of slotValues){
+              for(const lowerFieldBias of lowerBiasValues){
+                for(let pathIndex = 0; pathIndex < pathSets.length; pathIndex += 1){
+                  candidates.push({
+                    id: `stage${STAGE}-a${String(arcAmp).replace('.','')}-d${String(dropAmp).replace('.','')}-x${spawnOffsetX}-w${String(waveDelay).replace('.','')}-s${String(slotDelay).replace('.','')}-lb${lowerFieldBias}-p${pathIndex}`,
+                    description: `Stage ${STAGE} sweep: arc ${arcAmp}, drop ${dropAmp}, spawn ${spawnOffsetX}, wave ${waveDelay}, slot ${slotDelay}, lower-field bias ${lowerFieldBias}, path set ${pathIndex}.`,
+                    layoutOverride: Object.assign({}, base, {
+                      arcAmp,
+                      dropAmp,
+                      spawnOffsetX,
+                      waveDelay,
+                      slotDelay,
+                      lowerFieldBias,
+                      groupPathFamilies: pathSets[pathIndex]
+                    })
+                  });
+                }
+                const shouldExpandPerGroup = STAGE === 31
+                  ? lowerFieldBias === 0
+                    && dropAmp === 1.08
+                    && [1.62, 1.8].includes(arcAmp)
+                    && [86, 94].includes(spawnOffsetX)
+                    && [0.96, 1.08].includes(waveDelay)
+                  : lowerFieldBias === 0
+                    && [1.06, 1.22].includes(dropAmp)
+                    && [1.62, 1.86, 2.08].includes(arcAmp)
+                    && [68, 76, 84].includes(spawnOffsetX)
+                    && waveDelay === 0.96
+                    && slotDelay === 0.07;
+                if(shouldExpandPerGroup){
+                  for(let lowerSetIndex = 0; lowerSetIndex < lowerBiasSets.length; lowerSetIndex += 1){
+                    for(let yOffsetIndex = 0; yOffsetIndex < yOffsetSets.length; yOffsetIndex += 1){
+                      if(!lowerSetIndex && !yOffsetIndex) continue;
+                      for(let pathIndex = 0; pathIndex < pathSets.length; pathIndex += 1){
+                        candidates.push({
+                          id: `stage${STAGE}-a${String(arcAmp).replace('.','')}-d${String(dropAmp).replace('.','')}-x${spawnOffsetX}-w${String(waveDelay).replace('.','')}-s${String(slotDelay).replace('.','')}-lbs${lowerSetIndex}-y${yOffsetIndex}-p${pathIndex}`,
+                          description: `Stage ${STAGE} per-group sweep: arc ${arcAmp}, drop ${dropAmp}, spawn ${spawnOffsetX}, wave ${waveDelay}, slot ${slotDelay}, lower-bias set ${lowerSetIndex}, y-offset set ${yOffsetIndex}, path set ${pathIndex}.`,
+                          layoutOverride: Object.assign({}, base, {
+                            arcAmp,
+                            dropAmp,
+                            spawnOffsetX,
+                            waveDelay,
+                            slotDelay,
+                            groupPathFamilies: pathSets[pathIndex],
+                            groupLowerFieldBiases: lowerBiasSets[lowerSetIndex],
+                            groupYOffsets: yOffsetSets[yOffsetIndex]
+                          })
+                        });
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    candidates.push(...targetTimingCandidates(base, pathSets));
+    candidates.push(...targetControlCandidates(base, pathSets));
+    return candidates;
+  }
+  if(STAGE === 23 || STAGE === 27){
+    const arcValues = STAGE === 23 ? [1.42, 1.58, 1.78] : [1.68, 1.88, 2.12];
+    const dropValues = STAGE === 23 ? [1.18, 1.34, 1.5] : [1.42, 1.6, 1.78];
+    const spawnValues = STAGE === 23 ? [72, 80, 88] : [76, 84, 92];
+    const waveValues = STAGE === 23 ? [0.98, 1.1] : [0.94, 1.06];
+    const slotValues = STAGE === 23 ? [0.07, 0.09] : [0.065, 0.085];
+    const pathSets = STAGE === 23
+      ? [
+        ['green-ladder-split','green-ladder-split','green-ladder-split','green-ladder-split','green-ladder-split'],
+        ['green-ladder-deep-drop','green-ladder-deep-drop','green-ladder-center-fork','green-ladder-center-fork','green-ladder-high-exit'],
+        ['green-ladder-deep-drop','green-ladder-center-fork','green-ladder-center-fork','green-ladder-high-exit','green-ladder-high-exit'],
+        ['green-ladder-center-fork','green-ladder-deep-drop','green-ladder-deep-drop','green-ladder-center-fork','green-ladder-high-exit']
+      ]
+      : [
+        ['yellow-diagonal-fan','yellow-diagonal-fan','yellow-diagonal-fan','yellow-diagonal-fan','yellow-diagonal-fan'],
+        ['yellow-fan-low-drift','yellow-fan-cross-cut','yellow-fan-cross-cut','yellow-fan-high-pop','yellow-fan-low-drift'],
+        ['yellow-fan-low-drift','yellow-fan-low-drift','yellow-fan-cross-cut','yellow-fan-high-pop','yellow-fan-high-pop'],
+        ['yellow-fan-cross-cut','yellow-fan-cross-cut','yellow-fan-low-drift','yellow-fan-high-pop','yellow-fan-low-drift']
+      ];
     const candidates = [{
       id: 'baseline-current',
       description: `Current stage-${STAGE} layout, used as the measured baseline.`,
@@ -886,94 +1265,7 @@ function candidateDefinitions(){
       }
     }
     candidates.push(...targetTimingCandidates(base, pathSets));
-    return candidates;
-  }
-  if(STAGE === 19 || STAGE === 31){
-    const arcValues = STAGE === 19 ? [1.62, 1.86, 2.08] : [1.62, 1.8, 2.02];
-    const dropValues = STAGE === 19 ? [1.06, 1.22, 1.4] : [1.08, 1.26, 1.44];
-    const spawnValues = STAGE === 19 ? [68, 76, 84] : [78, 86, 94];
-    const waveValues = STAGE === 19 ? [0.96, 1.1] : [0.86, 0.96, 1.08];
-    const slotValues = STAGE === 19 ? [0.07, 0.085] : [0.055, 0.07];
-    const lowerBiasValues = STAGE === 19 ? [0, 28, 52, 76] : [0, 24, 48, 72];
-    const pathSets = STAGE === 19
-      ? [
-        ['pink-green-cascade','green-ladder-split','pink-green-cascade','pink-serpentine','pink-green-cascade'],
-        ['pink-green-cascade','pink-green-cascade','green-ladder-split','pink-green-cascade','pink-serpentine'],
-        ['green-ladder-split','pink-green-cascade','pink-serpentine','pink-green-cascade','pink-green-cascade']
-      ]
-      : [
-        ['blue-purple-finale','green-ladder-split','blue-purple-finale','yellow-diagonal-fan','blue-purple-finale'],
-        ['blue-purple-finale','blue-purple-finale','green-ladder-split','blue-purple-finale','yellow-diagonal-fan'],
-        ['yellow-diagonal-fan','blue-purple-finale','green-ladder-split','blue-purple-finale','blue-purple-finale']
-      ];
-    const candidates = [{
-      id: 'baseline-current',
-      description: `Current stage-${STAGE} layout, used as the measured baseline.`,
-      layoutOverride: {}
-    }];
-    for(const arcAmp of arcValues){
-      for(const dropAmp of dropValues){
-        for(const spawnOffsetX of spawnValues){
-          for(const waveDelay of waveValues){
-            for(const slotDelay of slotValues){
-              for(const lowerFieldBias of lowerBiasValues){
-                for(let pathIndex = 0; pathIndex < pathSets.length; pathIndex += 1){
-                  candidates.push({
-                    id: `stage${STAGE}-a${String(arcAmp).replace('.','')}-d${String(dropAmp).replace('.','')}-x${spawnOffsetX}-w${String(waveDelay).replace('.','')}-s${String(slotDelay).replace('.','')}-lb${lowerFieldBias}-p${pathIndex}`,
-                    description: `Stage ${STAGE} sweep: arc ${arcAmp}, drop ${dropAmp}, spawn ${spawnOffsetX}, wave ${waveDelay}, slot ${slotDelay}, lower-field bias ${lowerFieldBias}, path set ${pathIndex}.`,
-                    layoutOverride: Object.assign({}, base, {
-                      arcAmp,
-                      dropAmp,
-                      spawnOffsetX,
-                      waveDelay,
-                      slotDelay,
-                      lowerFieldBias,
-                      groupPathFamilies: pathSets[pathIndex]
-                    })
-                  });
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    candidates.push(...targetTimingCandidates(base, pathSets));
-    return candidates;
-  }
-  if(STAGE === 23 || STAGE === 27){
-    const arcValues = STAGE === 23 ? [1.42, 1.58, 1.78] : [1.68, 1.88, 2.12];
-    const dropValues = STAGE === 23 ? [1.18, 1.34, 1.5] : [1.42, 1.6, 1.78];
-    const spawnValues = STAGE === 23 ? [72, 80, 88] : [76, 84, 92];
-    const waveValues = STAGE === 23 ? [0.98, 1.1] : [0.94, 1.06];
-    const slotValues = STAGE === 23 ? [0.07, 0.09] : [0.065, 0.085];
-    const candidates = [{
-      id: 'baseline-current',
-      description: `Current stage-${STAGE} layout, used as the measured baseline.`,
-      layoutOverride: {}
-    }];
-    for(const arcAmp of arcValues){
-      for(const dropAmp of dropValues){
-        for(const spawnOffsetX of spawnValues){
-          for(const waveDelay of waveValues){
-            for(const slotDelay of slotValues){
-              candidates.push({
-                id: `stage${STAGE}-a${String(arcAmp).replace('.','')}-d${String(dropAmp).replace('.','')}-x${spawnOffsetX}-w${String(waveDelay).replace('.','')}-s${String(slotDelay).replace('.','')}`,
-                description: `Stage ${STAGE} sweep: arc ${arcAmp}, drop ${dropAmp}, spawn ${spawnOffsetX}, wave ${waveDelay}, slot ${slotDelay}.`,
-                layoutOverride: Object.assign({}, base, {
-                  arcAmp,
-                  dropAmp,
-                  spawnOffsetX,
-                  waveDelay,
-                  slotDelay
-                })
-              });
-            }
-          }
-        }
-      }
-    }
-    candidates.push(...targetTimingCandidates(base, [base.groupPathFamilies || []]));
+    candidates.push(...targetControlCandidates(base, pathSets));
     return candidates;
   }
   const pathSets = [
@@ -1008,6 +1300,7 @@ function candidateDefinitions(){
     }
   }
   candidates.push(...targetTimingCandidates(base, pathSets));
+  candidates.push(...targetControlCandidates(base, pathSets));
   return candidates;
 }
 
@@ -1018,6 +1311,8 @@ async function measureCandidates(candidates){
       const measured = await page.evaluate(({ stage, sampleTimes, candidate }) => {
         const h = window.__galagaHarness__;
         h.setupChallengeMotionProfileTest({ stage, layoutOverride: candidate.layoutOverride || null });
+        const setupEvents = h.recentEvents({ count: 200 }) || [];
+        const eventWindowStartT = setupEvents.reduce((max, event) => Math.max(max, Number.isFinite(+event.t) ? +event.t : max), -Infinity);
         const layout = h.challengeFormationState().layout;
         const tracks = {};
         const record = t => {
@@ -1049,7 +1344,10 @@ async function measureCandidates(candidates){
           record(t);
         }
         const finalState = h.state();
-        const recent = h.recentEvents({ count: 200 }) || [];
+        const recent = (h.recentEvents({ count: 200 }) || []).filter(event => {
+          const t = Number.isFinite(+event.t) ? +event.t : null;
+          return t !== null && t > eventWindowStartT + 0.0001;
+        });
         return {
           candidateId: candidate.id,
           description: candidate.description,
@@ -1065,6 +1363,10 @@ async function measureCandidates(candidates){
             enemyShots: recent.filter(e => e.type === 'enemy_shot' || e.type === 'enemy_bullet').length,
             enemyAttackStarts: recent.filter(e => e.type === 'enemy_attack_start').length,
             shipLosses: recent.filter(e => e.type === 'ship_loss' || e.type === 'player_loss').length
+          },
+          eventWindow: {
+            startT: Number.isFinite(eventWindowStartT) ? +eventWindowStartT.toFixed(3) : null,
+            sampledEvents: recent.length
           }
         };
       }, { stage: STAGE, sampleTimes: SAMPLE_TIMES, candidate });
@@ -1100,25 +1402,116 @@ function scoreMeasuredCandidate(measured, labels){
   const noSafetyRegression = measured.eventCounts.enemyShots === 0
     && measured.eventCounts.enemyAttackStarts === 0
     && measured.eventCounts.shipLosses === 0;
+  const bestMatch = matches[0] || null;
+  const expectedScore10 = expected?.score10 || 0;
+  const bestScore10 = bestMatch?.score10 || 0;
+  const expectedReferenceHit = EXPECTED_LABELS.includes(bestMatch?.labelId);
+  const identityMargin10 = round(expectedScore10 - bestScore10, 2);
+  const wrongReferencePenalty10 = expectedReferenceHit ? 0 : round(Math.max(0, bestScore10 - expectedScore10), 2);
+  const expectedChallengeNumber = challengeNumberForStage(STAGE);
+  const bestMatchChallengeNumber = challengeNumberForLabel(bestMatch?.labelId);
+  const bestMatchChallengeDelta = Number.isFinite(+expectedChallengeNumber) && Number.isFinite(+bestMatchChallengeNumber)
+    ? Math.abs(+expectedChallengeNumber - +bestMatchChallengeNumber)
+    : null;
+  const expectedFamilies = expectedFamiliesForMatches(matches);
+  const bestFamilyIsExpected = !!(bestMatch?.entityFamily && expectedFamilies.includes(bestMatch.entityFamily));
+  const isLateStageChallenge = STAGE >= 19;
+  const wrongChallengeNumber = !!(isLateStageChallenge && Number.isFinite(+bestMatchChallengeDelta) && bestMatchChallengeDelta > 0);
+  const lateWrongChallengePenalty10 = wrongChallengeNumber
+    ? round(Math.min(2.75,
+      0.55
+      + (bestMatchChallengeDelta * 0.22)
+      + (Math.max(0, bestScore10 - expectedScore10) * 0.45)
+      + (bestFamilyIsExpected ? 0 : 0.35)), 2)
+    : 0;
+  const lateStageIdentityPass = !isLateStageChallenge
+    || expectedReferenceHit
+    || (!wrongChallengeNumber && bestFamilyIsExpected && identityMargin10 >= -0.08);
+  const identityConfidence = expectedReferenceHit
+    ? 1
+    : round(clamp((identityMargin10 + 1.15) / 1.35) * clamp(expectedScore10 / 6.2), 3);
+  const adjustedIdentityConfidence = lateStageIdentityPass ? identityConfidence : round(identityConfidence * 0.35, 3);
+  const targetVideoScore10 = targetVideoFit.score10 || 0;
   return Object.assign({}, measured, {
     trackCount: classifications.length,
     runtimeVector: vector,
     runtimeSemantic: semantic,
-    bestMatch: matches[0] || null,
+    bestMatch,
     expectedMatch: expected,
-    expectedReferenceHit: EXPECTED_LABELS.includes(matches[0]?.labelId),
+    expectedReferenceHit,
+    stageIdentity: {
+      expectedLabels: EXPECTED_LABELS,
+      expectedChallengeNumber,
+      bestMatchChallengeNumber,
+      bestMatchChallengeDelta,
+      expectedFamilies,
+      bestFamilyIsExpected,
+      expectedScore10,
+      bestScore10,
+      identityMargin10,
+      wrongReferencePenalty10,
+      lateStageIdentityPass,
+      lateWrongChallengePenalty10,
+      confidence: adjustedIdentityConfidence,
+      rawConfidence: identityConfidence,
+      read: expectedReferenceHit
+        ? 'Best measured label is one of the expected labels for this challenge stage.'
+        : !lateStageIdentityPass
+          ? `Late-stage identity blocked: best measured label is ${bestMatch?.labelId || 'none'}, not challenge ${expectedChallengeNumber}; expected-stage score trails by ${Math.abs(identityMargin10)}/10.`
+        : `Best measured label is ${bestMatch?.labelId || 'none'}; expected-stage score trails by ${Math.abs(identityMargin10)}/10.`
+    },
     targetVideoObjectFit: targetVideoFit,
     noSafetyRegression,
-    selectionScore10: round((expected?.score10 || 0) + ((targetVideoFit.score10 || 0) * 0.22) + (matches[0]?.labelId === EXPECTED_LABEL ? 0.75 : 0) + (noSafetyRegression ? 0.2 : -3), 2)
+    selectionScore10: round(
+      (expectedScore10 * 0.62)
+      + (targetVideoScore10 * 0.24)
+      + (adjustedIdentityConfidence * 1.1)
+      + (noSafetyRegression ? 0.3 : -2.75)
+      - (wrongReferencePenalty10 * 0.65)
+      - (lateWrongChallengePenalty10 * 0.85),
+      2
+    )
   });
+}
+
+function summarizeCandidate(row){
+  if(!row) return null;
+  return {
+    candidateId: row.candidateId,
+    expectedScore10: row.expectedMatch?.score10 || 0,
+    targetVideoObjectFitScore10: row.targetVideoObjectFit?.score10 || null,
+    selectionScore10: row.selectionScore10,
+    expectedReferenceHit: !!row.expectedReferenceHit,
+    stageIdentityMargin10: row.stageIdentity?.identityMargin10 ?? null,
+    wrongReferencePenalty10: row.stageIdentity?.wrongReferencePenalty10 ?? 0,
+    lateStageIdentityPass: row.stageIdentity?.lateStageIdentityPass ?? null,
+    lateWrongChallengePenalty10: row.stageIdentity?.lateWrongChallengePenalty10 ?? 0,
+    expectedChallengeNumber: row.stageIdentity?.expectedChallengeNumber ?? null,
+    bestMatchChallengeNumber: row.stageIdentity?.bestMatchChallengeNumber ?? null,
+    bestFamilyIsExpected: row.stageIdentity?.bestFamilyIsExpected ?? null,
+    noSafetyRegression: !!row.noSafetyRegression,
+    bestMatchLabelId: row.bestMatch?.labelId || null,
+    bestMatchScore10: row.bestMatch?.score10 || 0,
+    expectedMatchLabelId: row.expectedMatch?.labelId || null,
+    groupPathFamilies: row.layout?.groupPathFamilies || [],
+    groupSpawnOffsets: row.layout?.groupSpawnOffsets || [],
+    groupLowerFieldBiases: row.layout?.groupLowerFieldBiases || [],
+    groupYOffsets: row.layout?.groupYOffsets || []
+  };
 }
 
 function buildMarkdown(report){
   const topRows = report.candidates.slice(0, 12).map((row, index) => {
     const hit = row.expectedReferenceHit ? 'yes' : 'no';
     const eventRead = row.noSafetyRegression ? 'pass' : `risk ${JSON.stringify(row.eventCounts)}`;
-    return `| ${index + 1} | ${row.candidateId} | ${row.selectionScore10}/10 | ${row.expectedMatch?.score10 ?? 0}/10 | ${row.targetVideoObjectFit?.score10 ?? 'n/a'}/10 | ${row.bestMatch?.labelId || 'none'} (${row.bestMatch?.score10 ?? 0}/10) | ${hit} | ${eventRead} |`;
+    return `| ${index + 1} | ${row.candidateId} | ${row.selectionScore10}/10 | ${row.expectedMatch?.score10 ?? 0}/10 | ${row.targetVideoObjectFit?.score10 ?? 'n/a'}/10 | ${row.stageIdentity?.identityMargin10 ?? 'n/a'} | ${row.bestMatch?.labelId || 'none'} (${row.bestMatch?.score10 ?? 0}/10) | ${hit} | ${eventRead} |`;
   }).join('\n');
+  const diagnosticRow = row => `| ${row.candidateId} | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.stageIdentityMargin10 ?? 'n/a'} | ${row.bestMatchLabelId || 'none'} (${row.bestMatchScore10}/10) | ${row.expectedReferenceHit ? 'yes' : 'no'} | ${row.lateStageIdentityPass === false ? `blocked (${row.bestMatchChallengeNumber || 'n/a'} vs ${row.expectedChallengeNumber || 'n/a'})` : 'pass'} | ${row.noSafetyRegression ? 'pass' : 'risk'} | ${(row.groupPathFamilies || []).join(', ') || 'default'} |`;
+  const emptyDiagnosticRow = '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const targetTimingRows = (report.diagnostics?.targetTimingTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
+  const targetControlRows = (report.diagnostics?.targetControlTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
+  const targetReferencePathRows = (report.diagnostics?.targetReferencePathTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
+  const pathShapeRows = (report.diagnostics?.pathShapeTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
   return `# Stage ${report.stage} Challenge Candidate Sweep
 
 Generated: ${report.generatedAt}
@@ -1137,12 +1530,41 @@ Stage ${report.stage} currently has safe challenge behavior but still does not c
 - Keeper decision: ${report.summary.keeperDecision}.
 - Player-facing meaning: ${report.summary.playerMeaning}
 - Process meaning: ${report.summary.processMeaning}
+- Candidate retention: ${report.candidateRetention?.retained ?? report.candidates.length}/${report.candidateRetention?.totalMeasured ?? report.candidateCount} retained; ${report.candidateRetention?.targetTimingDiagnostics ?? 0} target-timing diagnostics, ${report.candidateRetention?.targetControlDiagnostics ?? 0} target-control diagnostics, ${report.candidateRetention?.targetReferencePathDiagnostics ?? 0} target-reference-path diagnostics, and ${report.candidateRetention?.pathShapeDiagnostics ?? 0} path-shape diagnostics preserved.
 
 ## Top Candidates
 
-| Rank | Candidate | Selection | Expected Labels | Target-Video Fit | Best Match | Expected Hit | Safety |
-| ---: | --- | ---: | ---: | ---: | --- | --- | --- |
+| Rank | Candidate | Selection | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Safety |
+| ---: | --- | ---: | ---: | ---: | ---: | --- | --- | --- |
 ${topRows}
+
+## Diagnostic Candidates
+
+These rows are intentionally retained even when they are not promotion candidates. They show whether target-timed schedules or new path-shape primitives improve one measurement while failing expected-reference identity or safety.
+
+### Target-Timing Diagnostics
+
+| Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Late Identity | Safety | Paths |
+| --- | ---: | ---: | ---: | --- | --- | --- | --- | --- |
+${targetTimingRows}
+
+### Target-Control Diagnostics
+
+| Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Late Identity | Safety | Paths |
+| --- | ---: | ---: | ---: | --- | --- | --- | --- | --- |
+${targetControlRows}
+
+### Target Reference-Path Diagnostics
+
+| Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Late Identity | Safety | Paths |
+| --- | ---: | ---: | ---: | --- | --- | --- | --- | --- |
+${targetReferencePathRows}
+
+### Path-Shape Diagnostics
+
+| Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Late Identity | Safety | Paths |
+| --- | ---: | ---: | ---: | --- | --- | --- | --- | --- |
+${pathShapeRows}
 
 ## Next Step
 
@@ -1167,11 +1589,18 @@ async function main(){
     const candidateTargetVideoLift = round((candidate.targetVideoObjectFit?.score10 || 0) - baselineTargetVideoScore, 2);
     const candidateTargetVideoComparable = Number.isFinite(+(baseline.targetVideoObjectFit?.score10)) && Number.isFinite(+(candidate.targetVideoObjectFit?.score10));
     const candidateNoTargetRegression = !candidateTargetVideoComparable || candidateTargetVideoLift >= -0.05;
-    const candidateNoExpectedRegression = candidateExpectedLift >= -0.05;
+    const candidateMaterialTargetWin = candidate.expectedReferenceHit && candidateExpectedLift >= -0.15 && candidateTargetVideoLift >= 0.55;
+    const candidateNoExpectedRegression = candidateExpectedLift >= -0.05 || candidateMaterialTargetWin;
+    const candidateIdentityClose = (candidate.stageIdentity?.identityMargin10 ?? -10) >= -0.35;
+    const candidateIdentityTieSupported = (candidate.stageIdentity?.identityMargin10 ?? -10) >= -0.05
+      && candidateExpectedLift >= 0.3
+      && candidateTargetVideoLift >= 0.15;
     const strongExpectedLift = (candidate.expectedMatch?.score10 || 0) >= 7
       && candidateExpectedLift >= 0.5
-      && candidateTargetVideoLift >= 0.8;
-    const intendedStageSupported = candidate.expectedReferenceHit || strongExpectedLift;
+      && candidateTargetVideoLift >= 0.8
+      && candidateIdentityClose;
+    const lateStageIdentityPass = candidate.stageIdentity?.lateStageIdentityPass !== false;
+    const intendedStageSupported = lateStageIdentityPass && (candidate.expectedReferenceHit || candidateIdentityTieSupported || strongExpectedLift);
     return candidate.noSafetyRegression
       && candidateNoTargetRegression
       && candidateNoExpectedRegression
@@ -1187,12 +1616,57 @@ async function main(){
   const targetVideoLift = round((best.targetVideoObjectFit?.score10 || 0) - (baseline.targetVideoObjectFit?.score10 || 0), 2);
   const targetVideoComparable = Number.isFinite(+(baseline.targetVideoObjectFit?.score10)) && Number.isFinite(+(best.targetVideoObjectFit?.score10));
   const noTargetVideoRegression = !targetVideoComparable || targetVideoLift >= -0.05;
-  const noExpectedRegression = expectedLift >= -0.05;
+  const materialTargetVideoWin = best.expectedReferenceHit && expectedLift >= -0.15 && targetVideoLift >= 0.55;
+  const noExpectedRegression = expectedLift >= -0.05 || materialTargetVideoWin;
+  const identityClose = (best.stageIdentity?.identityMargin10 ?? -10) >= -0.35;
+  const identityTieSupported = (best.stageIdentity?.identityMargin10 ?? -10) >= -0.05
+    && expectedLift >= 0.3
+    && targetVideoLift >= 0.15;
   const strongExpectedLift = (best.expectedMatch?.score10 || 0) >= 7
     && expectedLift >= 0.5
-    && targetVideoLift >= 0.8;
-  const intendedStageSupported = best.expectedReferenceHit || strongExpectedLift;
+    && targetVideoLift >= 0.8
+    && identityClose;
+  const lateStageIdentityPass = best.stageIdentity?.lateStageIdentityPass !== false;
+  const intendedStageSupported = lateStageIdentityPass && (best.expectedReferenceHit || identityTieSupported || strongExpectedLift);
   const keeper = best.noSafetyRegression && noTargetVideoRegression && noExpectedRegression && intendedStageSupported && (expectedLift >= 0.35 || targetVideoLift >= 0.35 || (expectedLift >= 0.25 && targetVideoLift >= 0.25));
+  const retainedCandidateLimit = 120;
+  const pathShapeMarkers = [
+    'pink-green-low-sweep',
+    'pink-green-tall-drift',
+    'pink-green-compact-exit',
+    'green-ladder-deep-drop',
+    'green-ladder-center-fork',
+    'green-ladder-high-exit',
+    'yellow-fan-low-drift',
+    'yellow-fan-cross-cut',
+    'yellow-fan-high-pop'
+  ];
+  const targetTimingDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('target-') && !String(row.candidateId || '').includes('target-controls') && !String(row.candidateId || '').includes('target-reference-paths'))
+    .sort((a, b) => (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0) || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 8);
+  const targetControlDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('target-controls'))
+    .sort((a, b) => (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0) || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 8);
+  const targetReferencePathDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('target-reference-paths'))
+    .sort((a, b) => (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0) || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 8);
+  const pathShapeDiagnostics = scored
+    .filter(row => pathShapeMarkers.some(marker => (row.layout?.groupPathFamilies || []).includes(marker)))
+    .sort((a, b) => (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0) || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 8);
+  const retainedById = new Map();
+  for(const row of scored.slice(0, retainedCandidateLimit)) retainedById.set(row.candidateId, row);
+  for(const row of targetTimingDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of targetControlDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of targetReferencePathDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of pathShapeDiagnostics) retainedById.set(row.candidateId, row);
+  const retainedCandidates = Array.from(retainedById.values());
+  if(!retainedCandidates.some(row => row.candidateId === baseline.candidateId)){
+    retainedCandidates.push(baseline);
+  }
   const report = {
     schemaVersion: 1,
     artifactType: 'challenge-stage-candidate-sweep',
@@ -1220,8 +1694,11 @@ async function main(){
       noTargetVideoRegression,
       noExpectedRegression,
       intendedStageSupported,
+      lateStageIdentityPass,
+      identityTieSupported,
+      materialTargetVideoWin,
       strongExpectedLift,
-      intendedStageSupportPolicy: 'runtime promotion requires no expected-label regression, and either the best trajectory match to be one of the expected stage labels or a strong expected-label score >=7 with >=0.5 expected lift and >=0.8 target-video lift',
+      intendedStageSupportPolicy: 'runtime promotion requires no expected-label regression unless the expected label remains the best match and target-video fit improves by >=0.55/10 with no more than -0.15/10 expected drift. It also requires the best trajectory match to be one of the expected stage labels, an expected-label tie within 0.05/10 with >=0.3 expected lift and >=0.15 target-video lift, or a strong expected-label score >=7 with >=0.5 expected lift, >=0.8 target-video lift, and an identity margin no worse than -0.35/10. For late challenge stages, candidates whose best match belongs to the wrong Galaga challenge number are explicitly penalized and blocked from promotion.',
       keeperDecision: keeper ? 'candidate-ready-for-full-analyzer-review' : 'no-runtime-keeper-yet',
       playerMeaning: keeper
         ? `A measured stage-${STAGE} layout candidate is worth a temporary runtime review, but it must be confirmed by the full challenge-stage analyzer and persona guardrails before promotion.`
@@ -1229,26 +1706,43 @@ async function main(){
       processMeaning: 'Future challenge tuning can now compare many runtime candidates against Galaga labels before editing game constants.',
       nextStep: keeper
         ? `Apply the best candidate temporarily, rerun full challenge-stage conformance plus guardrails, and accept it only if the full analyzer confirms the expected lift.`
-        : `Broaden the candidate strategy to include path-shape constants or richer reference labels before changing runtime stage-${STAGE} gameplay.`
+        : `Use target-trajectory controls and richer reference labels before changing runtime stage-${STAGE} gameplay.`
     },
-    candidates: scored.map(row => ({
+    candidates: retainedCandidates.map(row => ({
       candidateId: row.candidateId,
       description: row.description,
       layout: row.layout,
       eventCounts: row.eventCounts,
+      eventWindow: row.eventWindow,
       noSafetyRegression: row.noSafetyRegression,
       runtimeVector: row.runtimeVector,
       runtimeSemantic: row.runtimeSemantic,
       bestMatch: row.bestMatch,
       expectedMatch: row.expectedMatch,
       expectedReferenceHit: row.expectedReferenceHit,
+      stageIdentity: row.stageIdentity,
       targetVideoObjectFit: row.targetVideoObjectFit,
       selectionScore10: row.selectionScore10
     })),
+    candidateRetention: {
+      totalMeasured: scored.length,
+      retained: retainedCandidates.length,
+      targetTimingDiagnostics: targetTimingDiagnostics.length,
+      targetControlDiagnostics: targetControlDiagnostics.length,
+      targetReferencePathDiagnostics: targetReferencePathDiagnostics.length,
+      pathShapeDiagnostics: pathShapeDiagnostics.length,
+      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score, the baseline row, and top target-timing/target-control/target-reference-path/path-shape diagnostic candidates; use candidateCount for the full measured search size.`
+    },
+    diagnostics: {
+      targetTimingTop: targetTimingDiagnostics.map(summarizeCandidate),
+      targetControlTop: targetControlDiagnostics.map(summarizeCandidate),
+      targetReferencePathTop: targetReferencePathDiagnostics.map(summarizeCandidate),
+      pathShapeTop: pathShapeDiagnostics.map(summarizeCandidate)
+    },
     measurementPolicy: {
       scope: `harness-only stage-${STAGE} challenge layout candidates`,
       reference: 'media-backed Galaga challenge labels with comparison vectors',
-      promotionRule: 'Require an expected challenge-label best match, no safety regression, and at least +0.35/10 expected-label lift over baseline before runtime promotion.',
+      promotionRule: 'Require the expected challenge-label identity to be the best match or tied within 0.05/10 with evidence on both expected and target-video axes, no safety regression, and at least +0.35/10 expected-label or target-video lift over baseline before runtime promotion. A material target-video win may tolerate up to -0.15/10 expected drift only when expected identity remains the best match. Strong non-best candidates must be very close on identity margin and improve both expected and target-video scores.',
       safety: 'Reject candidates with enemy shots, enemy attack starts, or ship losses in the challenge window.'
     }
   };
