@@ -1,0 +1,136 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "opening-slice-frame-reference",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-24",
+  "status": "promoted-frame-window-opening-authority",
+  "purpose": "Promote the already extracted Galaxian frame-reference windows into a Guardians-owned opening-slice authority artifact so wait-surface, score-table, and wrap-return work cite durable frame windows instead of plan text alone.",
+  "frameReferenceSummary": "reference-artifacts/analyses/galaxian-frame-reference/frame-reference-summary.json",
+  "sourceWindows": {
+    "attractMissionText": {
+      "sourceId": "matt-hawkins-arcade-intro",
+      "windowId": "attract-mission-text",
+      "label": "Attract mission text",
+      "frameIndex": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/attract-mission-text/frame-index.json",
+      "contactSheet": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/attract-mission-text/contact-sheet.jpg",
+      "motionDifferenceSheet": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/attract-mission-text/motion-difference-sheet.jpg",
+      "waveform": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/attract-mission-text/audio-waveform.png",
+      "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/attract-mission-text/audio-spectrogram.png",
+      "sampledFps": 4,
+      "sampleReadPoints": [
+        {
+          "label": "headline and mission established",
+          "tSourceSeconds": 1.5
+        },
+        {
+          "label": "stable title, mission, player, and rack read",
+          "tSourceSeconds": 6
+        },
+        {
+          "label": "late-window hold before score-table handoff",
+          "tSourceSeconds": 9.5
+        }
+      ],
+      "canonicalPhrases": [
+        "WE ARE THE GALAXIANS",
+        "MISSION: DESTROY ALIENS"
+      ]
+    },
+    "scoreAdvanceTable": {
+      "sourceId": "matt-hawkins-arcade-intro",
+      "windowId": "score-advance-table",
+      "label": "Score advance table",
+      "frameIndex": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/score-advance-table/frame-index.json",
+      "contactSheet": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/score-advance-table/contact-sheet.jpg",
+      "motionDifferenceSheet": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/score-advance-table/motion-difference-sheet.jpg",
+      "waveform": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/score-advance-table/audio-waveform.png",
+      "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/score-advance-table/audio-spectrogram.png",
+      "sampledFps": 4,
+      "sampleReadPoints": [
+        {
+          "label": "early score-table reveal",
+          "tSourceSeconds": 12
+        },
+        {
+          "label": "stable score-table middle read",
+          "tSourceSeconds": 22.5
+        },
+        {
+          "label": "late score-table hold before gameplay transition",
+          "tSourceSeconds": 33
+        }
+      ],
+      "canonicalPhrases": [
+        "SCORE ADVANCE TABLE",
+        "CONVOY",
+        "CHARGER"
+      ],
+      "canonicalScoreRows": [
+        {
+          "rank": 1,
+          "convoyPoints": 60,
+          "chargerPoints": 150
+        },
+        {
+          "rank": 2,
+          "convoyPoints": 50,
+          "chargerPoints": 100
+        },
+        {
+          "rank": 3,
+          "convoyPoints": 40,
+          "chargerPoints": 80
+        },
+        {
+          "rank": 4,
+          "convoyPoints": 30,
+          "chargerPoints": 60
+        }
+      ]
+    },
+    "wrapReturnPressure": {
+      "sourceId": "nenriki-15-wave-session",
+      "windowId": "wrap-return-pressure",
+      "label": "Wrap or return pressure",
+      "frameIndex": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/frame-index.json",
+      "contactSheet": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/contact-sheet.jpg",
+      "motionDifferenceSheet": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/motion-difference-sheet.jpg",
+      "waveform": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/audio-waveform.png",
+      "spectrogram": "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/audio-spectrogram.png",
+      "sampledFps": 6,
+      "sampleReadPoints": [
+        {
+          "label": "bottom-exit continuity onset",
+          "tSourceSeconds": 109
+        },
+        {
+          "label": "clear wrap-return pressure read",
+          "tSourceSeconds": 118.5
+        },
+        {
+          "label": "late-window repeated re-entry pressure",
+          "tSourceSeconds": 132.5
+        }
+      ],
+      "expectedRuntimeRead": [
+        "bottom-pass-through continues off the board",
+        "top re-entry begins visibly above the playfield",
+        "re-entry remains part of the same threat loop rather than a snap-back reset"
+      ]
+    }
+  },
+  "runtimeAlignment": {
+    "waitMissionAndScoreSurface": "frame-window-backed-copy-and-layout-authority-now-promoted-but-runtime-still-needs-tighter-four-row-cabinet-shape",
+    "starfieldAndTopReentry": "runtime-improved-and-visible-but-still-awaiting-dedicated-measured-target-window-promotion",
+    "explosionAndHitStates": "runtime-improved-but-still-awaiting-frame-backed-reference-crops"
+  },
+  "nextPromotionWork": [
+    "Tighten the runtime WAIT and score-table layout against the promoted Matt Hawkins frame windows instead of relying only on contact-sheet-level prose.",
+    "Promote measured starfield-motion and top-reentry target windows so lower-field continuity has the same evidence weight as rack-motion.",
+    "Promote frame-backed explosion and hit-state reference crops from the committed Galaxian windows."
+  ],
+  "harness": {
+    "script": "tools/harness/check-galaxy-guardians-opening-slice-frame-reference.js",
+    "npmScript": "npm run harness:check:galaxy-guardians-opening-slice-frame-reference"
+  }
+}

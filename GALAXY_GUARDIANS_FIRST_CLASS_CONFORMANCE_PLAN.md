@@ -193,6 +193,7 @@ The first-class Galaxy process should always be reviewable through this spine:
 - opening-slice baseline
   - `npm run harness:check:galaxy-guardians-opening-slice-baseline`
   - `npm run harness:check:galaxy-guardians-opening-slice-source-baseline`
+  - `npm run harness:check:galaxy-guardians-opening-slice-frame-reference`
   - `npm run harness:check:galaxy-guardians-opening-slice-render-surface`
   - `npm run harness:check:galaxy-guardians-attract-score-surface`
 - longer-surface and persona review
@@ -262,8 +263,10 @@ swarm feel.
 
 The current human-readable opening-baseline summary lives in
 [GALAXY_GUARDIANS_OPENING_SLICE_BASELINE.md](GALAXY_GUARDIANS_OPENING_SLICE_BASELINE.md),
-and the current machine-readable source baseline lives in
-`reference-artifacts/analyses/galaxy-guardians-identity/opening-slice-source-baseline-0.1.json`.
+and the current machine-readable opening baseline now lives in:
+
+- `reference-artifacts/analyses/galaxy-guardians-identity/opening-slice-source-baseline-0.1.json`
+- `reference-artifacts/analyses/galaxy-guardians-identity/opening-slice-frame-reference-0.1.json`
 
 ## Immediate Work To Start Now
 

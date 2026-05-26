@@ -3,7 +3,7 @@
   "artifactType": "opening-slice-source-baseline",
   "version": "0.1-dev-preview",
   "createdOn": "2026-05-23",
-  "status": "contact-sheet-promoted-opening-baseline-awaiting-frame-extracted-crops",
+  "status": "contact-sheet-baseline-backed-by-promoted-frame-windows",
   "purpose": "Describe the current source-backed baseline for the first visible Guardians slice so opening-surface tuning stays grounded in committed Galaxian evidence before broader runtime changes.",
   "sourceEvidence": {
     "introSource": {
@@ -28,7 +28,7 @@
       }
     },
     "promotedEventLog": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
-    "notes": "This baseline uses the already committed intro and long-session sources plus the promoted event log. It is still contact-sheet promoted, not frame-extracted crop authority."
+    "notes": "This baseline uses the already committed intro and long-session sources plus the promoted event log. It is now paired with opening-slice-frame-reference-0.1.json, which promotes extracted frame windows for the mission text, score-table, and wrap-return review path."
   },
   "canonicalOpeningSurface": {
     "titleLine": "WE ARE THE GALAXIANS",
@@ -88,7 +88,7 @@
     "paletteProgression": "improved-via-theme-owned-preview-palettes-but-still-partial"
   },
   "nextPromotionWork": [
-    "Extract frame-level crops for the title line, mission line, and score-advance layout when the intro source video is locally available.",
+    "Tighten the runtime WAIT/title/mission/score-table layout against the now-promoted Matt Hawkins frame windows.",
     "Promote measured starfield and top-reentry windows from the Nenriki session into opening-slice motion targets with the same evidence quality as the rack-motion contract.",
     "Promote frame-backed explosion and hit reference crops so the new pixel-burst runtime feedback can be judged against source windows instead of only against plan text.",
     "Use this opening baseline as the top slice of the broader stage-arc and homage plan rather than as an isolated UI polish note."

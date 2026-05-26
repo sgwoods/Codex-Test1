@@ -41,7 +41,7 @@ function main(){
   if(artifact.gameKey !== 'galaxy-guardians-preview'){
     fail('Opening-slice source baseline is attached to the wrong game.', { gameKey: artifact.gameKey });
   }
-  if(artifact.status !== 'contact-sheet-promoted-opening-baseline-awaiting-frame-extracted-crops'){
+  if(artifact.status !== 'contact-sheet-baseline-backed-by-promoted-frame-windows'){
     fail('Opening-slice source baseline has an unexpected status.', { status: artifact.status });
   }
 

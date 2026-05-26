@@ -164,15 +164,15 @@
       "cards": [
         {
           "title": "Current checked truth",
-          "body": "Hosted `dev` still exposes a one-level visible public slice ending in `mission_complete`, but that slice now includes the opening baseline docs and the new measured opening-rack motion pass."
+          "body": "Hosted `dev` still exposes a one-level visible public slice ending in `mission_complete`, but that slice now includes the opening baseline docs, the measured opening-rack motion pass, and promoted frame-window authority for the opening mission, score-table, and wrap-return review."
         },
         {
           "title": "What just landed",
-          "body": "The rack now moves as a broad shared stepped sweep instead of a small per-alien wobble. That pass is grounded in the `matt-hawkins-arcade-intro/opening-rack-entry` evidence window and is preserved as a dedicated `opening-rack-motion-0.1.json` contract."
+          "body": "The rack now moves as a broad shared stepped sweep instead of a small per-alien wobble, and the opening review now has a Guardians-owned `opening-slice-frame-reference-0.1.json` artifact grounded in the Matt Hawkins mission/score-table windows plus the Nenriki wrap-return window."
         },
         {
           "title": "Best next work",
-          "body": "Next highest-value work is: tighten moving starfield motion and top-reentry timing, tighten `WAIT` and score-table layout from frame-extracted intro evidence, improve explosion and hit readability, then finish platform-frame parity before spending heavier effort on deeper stage bands."
+          "body": "Next highest-value work is: promote measured starfield motion and top-reentry windows, tighten the live `WAIT` and score-table layout against the promoted frame windows, improve explosion and hit readability, then finish platform-frame parity before spending heavier effort on deeper stage bands."
         },
         {
           "title": "Why this note exists",
@@ -212,13 +212,13 @@
           [
             "1",
             "Moving starfield motion and top-reentry timing/visibility",
-            "The rack now has a measured shared sweep, so the next most obvious visible motion gap is the rest of the opening board: starfield life and continuous bottom-exit/top-reentry threat.",
+            "The rack now has a measured shared sweep and the opening mission/score-table surfaces now have promoted frame-window authority, so the next most obvious visible motion gap is the rest of the opening board: starfield life and continuous bottom-exit/top-reentry threat.",
             "[Resume state](project-guide.html#guardians-resume-state), [opening-slice baseline](project-guide.html#guardians-opening-slice-doc), and [Guardians conformance](conformance-dashboard.html?game=galaxy-guardians#conformance)"
           ],
           [
             "2",
-            "`WAIT`, headline, and score-table layout/copy tightening",
-            "The copy and structure are closer than before, but they still need frame-extracted intro authority before the first seconds feel truly source-faithful.",
+            "`WAIT`, headline, and score-table runtime tightening against promoted frame windows",
+            "The opening now has promoted frame-window authority, but the live runtime still needs a closer four-row cabinet read before the first seconds feel truly source-faithful.",
             "[Opening-slice baseline](project-guide.html#guardians-opening-slice-doc)"
           ],
           [
@@ -622,7 +622,7 @@
     {
       "id": "guardians-opening-slice-doc",
       "title": "Galaxy Guardians Opening-Slice Baseline",
-      "summary": "Maintained human-readable baseline for the current visible Guardians slice, grounded in committed intro and long-session Galaxian source evidence.",
+      "summary": "Maintained human-readable baseline for the current visible Guardians slice, grounded in committed intro and long-session Galaxian source evidence plus promoted opening frame windows.",
       "file": "GALAXY_GUARDIANS_OPENING_SLICE_BASELINE.md"
     },
     {
@@ -652,7 +652,7 @@
     {
       "id": "guardians-resume-doc",
       "title": "Galaxy Guardians Resume State And Next Steps",
-      "summary": "Short restart note capturing the current checked state, the opening-rack motion progress just landed, and the exact next work order.",
+      "summary": "Short restart note capturing the current checked state, the promoted opening-rack and frame-window progress, and the exact next work order.",
       "file": "GALAXY_GUARDIANS_RESUME_STATE_AND_NEXT_STEPS.md"
     },
     {

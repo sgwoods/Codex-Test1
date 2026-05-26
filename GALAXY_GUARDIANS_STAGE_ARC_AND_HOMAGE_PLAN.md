@@ -222,6 +222,7 @@ Primary artifacts:
 - attract/readiness crops
 - contact sheets from `matt-hawkins-arcade-intro`
 - long-session motion windows from `nenriki-15-wave-session`
+- `reference-artifacts/analyses/galaxy-guardians-identity/opening-slice-frame-reference-0.1.json`
 - `reference-artifacts/analyses/galaxy-guardians-identity/opening-slice-source-baseline-0.1.json`
 - opening-slice render surface and attract-score surface artifacts already in
   `reference-artifacts/analyses/galaxy-guardians-identity/`

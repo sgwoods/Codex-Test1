@@ -44,6 +44,7 @@ function main(){
   const requiredScripts = [
     'harness:check:galaxy-guardians-opening-slice-baseline',
     'harness:check:galaxy-guardians-opening-slice-source-baseline',
+    'harness:check:galaxy-guardians-opening-slice-frame-reference',
     'harness:check:galaxy-guardians-opening-slice-render-surface',
     'harness:check:galaxy-guardians-opening-rack-motion',
     'harness:check:galaxy-guardians-attract-score-surface',
@@ -138,7 +139,7 @@ function main(){
   }
 
   const gaps = quickPeek.remainingGaps || [];
-  const expectsGap = 'Attract mission text and score advance table now exist as runtime surfaces, but they still need frame-extracted layout and copy tightening against the committed intro reference.';
+  const expectsGap = 'Attract mission text and score advance table now have promoted frame-window authority, but the live runtime still needs tighter layout and copy matching against the committed intro reference.';
   if(!gaps.includes(expectsGap)){
     fail('Quick-peek source fidelity artifact no longer preserves the attract/score-table remaining gap.', {
       remainingGaps: gaps

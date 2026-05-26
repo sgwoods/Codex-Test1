@@ -16,6 +16,7 @@ Use this together with:
 - [GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md](GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md)
 - [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md)
 - [GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md](GALAXY_GUARDIANS_LONG_SURFACE_AND_PERSONA_PLAN.md)
+- [GALAXY_GUARDIANS_OTHER_MACHINE_BETA_INTEGRATION_PLAN.md](GALAXY_GUARDIANS_OTHER_MACHINE_BETA_INTEGRATION_PLAN.md)
 
 ## Current Checked State
 
@@ -106,19 +107,47 @@ The current source now also carries:
 The practical meaning is: the first visible slice now reads more like a real
 cabinet adaptation and less like a placeholder preview shell.
 
+### 6. Promoted frame windows now back the opening read
+
+The current source now also carries a dedicated Guardians-owned frame-reference
+artifact for the opening:
+
+- `opening-slice-frame-reference-0.1.json`
+
+That artifact promotes concrete extracted windows for:
+
+- Matt Hawkins attract mission text
+- Matt Hawkins score advance table
+- Nenriki wrap-return pressure
+
+The practical meaning is: `WAIT`, score-table, and top-reentry work now cite
+real promoted frame windows instead of only broader source manifests and plan
+text.
+
+### 7. The other-machine merge path is now explicitly captured
+
+The repo now also carries a dedicated integration note for taking the current
+opening authority work, merging in the other machine's Galaxy tranche, and
+turning the combined result into the next coherent `/dev` then `/beta` review
+bundle:
+
+- `GALAXY_GUARDIANS_OTHER_MACHINE_BETA_INTEGRATION_PLAN.md`
+
 ## What Is Still Obviously Missing
 
 These are the most important remaining misses in the visible public slice.
 
-### 1. `WAIT` and score-table layout still need frame-extracted authority
+### 1. `WAIT` and score-table layout still need tighter runtime matching
 
-The copy, structure, and compact layout are closer than they were, but they are
-still adapted runtime surfaces rather than a fully frame-matched cabinet read.
+The promoted frame windows now give these surfaces real opening authority, but
+the live runtime is still a tighter Guardians-owned adaptation rather than a
+closer four-row cabinet-matched score-table read.
 
 ### 2. Starfield motion and top-reentry still need stronger measured targets
 
 The runtime now has visibly better motion in both areas, but they still do not
-have the same evidence weight as the rack-motion contract.
+have the same evidence weight as the rack-motion contract or the newly
+promoted opening frame windows.
 
 ### 3. Explosion and hit states are still under-authoritative
 
@@ -147,8 +176,8 @@ Guardians still needs to sit in Platinum as naturally as Aurora across:
 This is the best next sequence if we want the highest conformance return for
 time and compute.
 
-1. Promote frame-extracted `WAIT`, headline, and score-table layout/copy
-   evidence.
+1. Tighten the runtime `WAIT`, headline, mission, and score-table layout
+   against the now-promoted opening frame windows.
 2. Promote stronger measured starfield-motion and top-reentry windows so those
    surfaces have evidence parity with the rack-motion contract.
 3. Promote frame-backed explosion, hit, and destruction-state reference crops.

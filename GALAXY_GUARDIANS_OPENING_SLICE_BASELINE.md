@@ -13,6 +13,7 @@ opening needs to read correctly.
 
 This is the human-readable companion to:
 
+- `reference-artifacts/analyses/galaxy-guardians-identity/opening-slice-frame-reference-0.1.json`
 - `reference-artifacts/analyses/galaxy-guardians-identity/opening-slice-source-baseline-0.1.json`
 - `reference-artifacts/analyses/galaxy-guardians-identity/opening-slice-render-surface-0.1.json`
 - `reference-artifacts/analyses/galaxy-guardians-identity/opening-rack-motion-0.1.json`
@@ -73,6 +74,26 @@ The promoted windows already in the repo are:
 - flagship / escort pressure: `90-135s`
 - enemy wrap or return: `105-150s`
 
+## Promoted Frame Windows
+
+The opening no longer depends only on broad contact-sheet summaries.
+
+The repo now carries a Guardians-owned promoted frame-window authority artifact:
+
+- `reference-artifacts/analyses/galaxy-guardians-identity/opening-slice-frame-reference-0.1.json`
+
+That artifact binds three concrete extracted windows into the current opening
+review path:
+
+- `matt-hawkins-arcade-intro/attract-mission-text`
+- `matt-hawkins-arcade-intro/score-advance-table`
+- `nenriki-15-wave-session/wrap-return-pressure`
+
+Each window already has a committed frame index, contact sheet, motion
+difference sheet, waveform, and spectrogram. The promoted Guardians artifact
+now also records representative sample-read timestamps so runtime layout and
+wrap-return work can cite specific frame windows instead of only plan prose.
+
 ## What The Opening Should Read Like
 
 ### Attract / ready surface
@@ -125,6 +146,9 @@ threat model:
   rather than only line-burst rings
 - preview palette ownership is now theme-driven instead of relying almost
   entirely on one static alien color family
+- promoted frame windows now explicitly anchor the opening mission text,
+  score-table read, and wrap-return pressure instead of leaving those surfaces
+  only at the level of broad source manifests
 - the hosted docs now expose a stage assessment, a top-10 queue, and the full
   deeper Guardians planning stack
 
@@ -132,12 +156,13 @@ threat model:
 
 - the title line remains a Guardians-owned adaptation even though the primary
   mission line now preserves the canonical `MISSION: DESTROY ALIENS` phrase
-- score-table framing and layout now read more convincingly, but the current
-  runtime still presents a three-row application-owned adaptation rather than a
-  true four-row cabinet match
+- the promoted frame windows now give the `WAIT` and score-table surfaces real
+  opening authority, but the current runtime still presents a three-row
+  application-owned adaptation rather than a tighter four-row cabinet match
 - rack march cadence now has its own object-track-derived opening contract, but
   the starfield and re-entry surfaces still need measured target windows of the
-  same quality before the whole opening board feels equally source-faithful
+  same evidence quality before the whole opening board feels equally
+  source-faithful
 - explosions and hit states now read better, but they still need frame-backed
   source authority rather than only runtime improvement
 - palette progression is now more source-aligned in the opening slice, but the
@@ -145,9 +170,10 @@ threat model:
 
 ### Still next
 
-- frame-extracted intro crops for title, mission, and score-table layout
 - stronger measured starfield-motion and top-reentry windows so those surfaces
   have the same evidence quality as the opening-rack motion contract
+- tighter runtime `WAIT`, title, mission, and score-table layout against the
+  promoted Matt Hawkins frame windows
 - frame-backed explosion and hit reference crops so the new runtime feedback is
   judged against committed source windows
 - tighter palette progression and readiness-surface comparison beyond the
@@ -169,10 +195,10 @@ This opening baseline exists to keep the work honest:
 
 1. Preserve the opening-source baseline as a committed artifact and hosted
    readable doc, not only as raw source manifests.
-2. Promote frame-extracted title, mission, and score-table layout authority
-   against the Matt Hawkins intro.
-3. Promote measured starfield-motion and top-reentry windows to the same
+2. Promote measured starfield-motion and top-reentry windows to the same
    evidence class as the rack-motion contract.
+3. Tighten runtime `WAIT`, title, mission, and score-table layout against the
+   now-promoted Matt Hawkins frame windows.
 4. Promote frame-backed explosion and hit-state authority.
 5. Only after those land, spend heavier effort on stage `3-5` and `6-9`
    pressure tuning.
