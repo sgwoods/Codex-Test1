@@ -165,6 +165,37 @@ The publish preflight and documentation-freshness checks should now fail if
 those release-owned conformance artifacts are obviously stale against the
 current release-prep head.
 
+## Hosted Pages Workflow Self-Heal
+
+The hosted Aurora Pages repo currently runs in GitHub Pages `workflow` mode
+rather than direct branch-serving mode.
+
+That means a lane publish can be correct in the hosted repo itself while the
+live `sgwoods.github.io` lane stays stale if GitHub misses the expected
+`Deploy Pages` workflow trigger.
+
+The release-authority verification path now treats that as a recoverable host
+issue instead of only as a generic timeout:
+
+- `node tools/build/verify-live-lane.js --lane dev`
+- `node tools/build/verify-live-lane.js --lane beta`
+- `node tools/build/verify-live-lane.js --lane production`
+
+If live lane build info does not match the expected local artifact, the
+verifier now checks whether:
+
+- the hosted repo's raw lane build-info already matches the expected artifact
+- the Pages site is configured with `build_type: workflow`
+- a `Deploy Pages` run exists for the current hosted repo head
+
+If the repo is already correct but no current Pages deploy run exists, the
+verifier dispatches `Deploy Pages` automatically and keeps polling the live
+site.
+
+This should reduce manual release-authority rescue work when a publish push
+lands in `sgwoods/Aurora-Galactica` but GitHub Pages does not start the deploy
+workflow on its own.
+
 ## Front-Door Copy Gate
 
 Startup, initiation, and wait-mode copy is part of the release surface.

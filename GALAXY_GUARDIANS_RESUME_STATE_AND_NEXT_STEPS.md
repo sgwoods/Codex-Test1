@@ -1,6 +1,6 @@
 # Galaxy Guardians Resume State And Next Steps
 
-Updated: May 23, 2026
+Updated: May 26, 2026
 
 ## Purpose
 
@@ -30,11 +30,14 @@ Use this together with:
 
 ### Hosted dev state
 
-- Hosted `/dev` may still lag the latest local opening-slice source changes if
-  this note is being read before the next dev publish.
+- Hosted `/dev` is now live and verified on
+  `1.4.0.1+build.924.sha.9e779c05`.
+- The release-authority verifier now also has a Pages workflow self-heal path,
+  so a correct hosted repo push is less likely to stall behind a missed GitHub
+  Pages deploy trigger.
 - Treat this note and the repo artifacts as the durable current state for the
-  Guardians conformance program rather than assuming every local pass has
-  already been pushed to the lane.
+  Guardians conformance program, with hosted `/dev` now close enough to use as
+  a real review lane instead of only a best-effort mirror.
 
 ### What the public game truth still is
 
@@ -133,6 +136,26 @@ bundle:
 
 - `GALAXY_GUARDIANS_OTHER_MACHINE_BETA_INTEGRATION_PLAN.md`
 
+### 8. The current measured program is stable enough to focus on visible quality
+
+The maintained Guardians spine is still passing:
+
+- opening-slice source baseline
+- opening-slice frame-reference authority
+- opening-slice baseline gate
+- first-class conformance aggregate gate
+
+The current aggregate read remains:
+
+- reference conformance: `7.6/10`
+- playtest-weighted conformance: `6.9/10`
+- public release readiness: `4.2/10`
+- implementation gate coverage: `9.6/10`
+
+The practical meaning is: the main remaining work is no longer “do we have a
+serious conformance program?” The main remaining work is “does the visible game
+slice feel authoritative enough to justify a stronger hosted review story?”
+
 ## What Is Still Obviously Missing
 
 These are the most important remaining misses in the visible public slice.
@@ -187,6 +210,37 @@ time and compute.
    shared frame work.
 6. After the visible opening slice is credible, continue into stage `3-5`
    pressure traces and stage `6-9` survivability/fairness.
+
+## Best Quality Work On This Machine Now
+
+This machine should stay focused on the work that most directly improves review
+quality, hosted readability, and beta honesty.
+
+1. Tighten the runtime `WAIT`, headline, mission, and score-table layout
+   against the promoted Matt Hawkins frame windows.
+2. Promote measured starfield-motion and top-reentry windows so those surfaces
+   stop depending mainly on prose and human review.
+3. Promote frame-backed explosion, hit, and destruction-state crops so combat
+   readability has the same authority as the opening copy surfaces.
+4. Tighten opening palette progression and swarm color-family authority so the
+   first seconds of play read as intentional rather than broadly “Galaxian-ish.”
+5. Finish Platinum-frame parity for Guardians across sign-in, scores, pilot
+   card, replay/video capture, bug reports, and music/sound controls.
+6. Use hosted `/dev` as the real review lane after each meaningful pass instead
+   of waiting to batch too many local-only improvements together.
+
+## Recommended Machine Split
+
+If the other machine continues moving in parallel, the cleanest split is:
+
+- this machine: release authority, hosted lane verification, Guardians
+  opening-slice quality, platform-frame fit, and beta-readiness review
+- other machine: deeper Aurora challenge-stage design, late-stage conformance
+  experimentation, and any heavier exploratory runtime work that does not need
+  to block hosted review discipline here
+
+That split keeps this machine anchored to high-confidence visible quality work
+while the other machine keeps advancing the riskier deeper conformance goals.
 
 ## What We Should Not Re-Litigate First
 
