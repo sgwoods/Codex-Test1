@@ -5,7 +5,7 @@ const { spawnSync } = require('child_process');
 const { assessVideoArtifact } = require('./video-artifact-util');
 
 const ROOT = path.resolve(__dirname, '..', '..');
-const RUN = path.join(__dirname, 'run-gameplay.js');
+const CAPTURE = path.join(__dirname, 'capture-gameplay-segment.js');
 const OUT = path.join(ROOT, 'harness-artifacts', 'checks', 'video-artifact');
 
 function fail(message, payload){
@@ -16,11 +16,20 @@ function fail(message, payload){
 
 function runScenario(){
   const res = spawnSync(process.execPath, [
-    RUN,
-    '--scenario', 'stage4-five-ships',
+    CAPTURE,
+    '--start-kind', 'level',
+    '--stage', '4',
     '--seed', '4201',
-    '--persona', 'advanced',
-    '--out', OUT
+    '--seconds', '8',
+    '--warmup', '0.1',
+    '--pre-roll', '0',
+    '--wait-for-active', '0',
+    '--audio', '0',
+    '--fps', '30',
+    '--width', '640',
+    '--height', '900',
+    '--label', 'video-artifact-check',
+    '--out-dir', OUT
   ], {
     cwd: ROOT,
     encoding: 'utf8',
@@ -46,13 +55,13 @@ function runScenario(){
 
 function main(){
   const result = runScenario();
-  const videoFile = (result.files || []).find(f => f.includes('.review.')) || (result.files || []).find(f => f.endsWith('.webm'));
+  const videoFile = path.resolve(ROOT, result.video || result.latestVideo || '');
   if(!videoFile || !fs.existsSync(videoFile)){
     fail('recorded video file was not produced', result);
   }
-  const assessed = assessVideoArtifact(videoFile, +(result.analysis?.duration || 0));
+  const assessed = assessVideoArtifact(videoFile, +(result.capture?.seconds || 0));
   const formatDuration = assessed.formatDuration;
-  const summaryDuration = +(result.analysis?.duration || 0);
+  const summaryDuration = +(result.capture?.seconds || 0);
   if(!assessed.ok){
     fail('recorded video artifact quality deviated from expected; file an immediate bug and repair by remuxing the raw .webm to a .review.webm', {
       videoFile,
@@ -66,7 +75,9 @@ function main(){
     videoFile,
     formatDuration,
     summaryDuration,
-    assessed
+    assessed,
+    latestVideo: result.latestVideo || null,
+    poster: result.latestPoster || result.poster || null
   }, null, 2));
 }
 

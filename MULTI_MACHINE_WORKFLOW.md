@@ -89,6 +89,22 @@ Default rule:
 - do not leave meaningful unpushed work on both machines at once without
   documenting it
 - do not use one shared working tree through iCloud or another sync layer
+- before any multi-hour Codex run or when a chat is getting long, write a
+  durable context checkpoint:
+
+```bash
+npm run codex:checkpoint -- --label <short-topic> --plan "<current goal>" --next "<next concrete step>"
+```
+
+This writes:
+
+- `CODEX_CONTEXT_CHECKPOINT.md`
+- `reference-artifacts/analyses/codex-context-checkpoint/latest.json`
+
+Codex Desktop does not expose a repository command that forces internal chat
+compaction. The recovery-safe replacement is to write this checkpoint, commit
+it when it captures meaningful state, then start a fresh Codex session from the
+restart prompt in `CODEX_CONTEXT_CHECKPOINT.md`.
 
 Normal workflow:
 

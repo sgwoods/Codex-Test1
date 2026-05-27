@@ -1,0 +1,325 @@
+{
+  "ok": true,
+  "artifactType": "gameplay-segment-capture",
+  "generatedAt": "2026-05-27T09:16:58.992Z",
+  "label": "stage11-challenge-improvement-professional",
+  "comparisonId": null,
+  "variant": null,
+  "notes": "Stage-11-dense-active-gameplay-review",
+  "capture": {
+    "stage": 11,
+    "stageMode": "display",
+    "startKind": "challenge",
+    "challenge": true,
+    "challengeStage": 3,
+    "ships": 3,
+    "persona": "professional",
+    "watchPersona": "professional",
+    "expertPlays": "professional",
+    "playerTwo": false,
+    "playerTwoPersona": null,
+    "seed": 9052,
+    "seconds": 30,
+    "preRoll": 0.15,
+    "warmup": 0.12,
+    "waitForActive": true,
+    "activeMinEnemies": 16,
+    "maxWaitActive": 35,
+    "activePollMs": 150,
+    "fps": 60,
+    "viewport": {
+      "width": 960,
+      "height": 1280
+    },
+    "includeAudio": true,
+    "audioTrackCount": 1,
+    "audioDiagnostics": {
+      "requested": 1,
+      "contextStateBefore": "running",
+      "contextStateAfter": "running",
+      "tapAvailableBefore": true,
+      "tapAvailableAfter": true,
+      "trackStates": [
+        {
+          "kind": "audio",
+          "enabled": true,
+          "muted": false,
+          "readyState": "live"
+        }
+      ],
+      "warning": ""
+    },
+    "setup": "start"
+  },
+  "video": "reference-artifacts/analyses/gameplay-segment-captures/stage11-challenge-improvement-professional-2026-05-27T09-16-07-042Z.review.webm",
+  "rawVideo": "reference-artifacts/analyses/gameplay-segment-captures/stage11-challenge-improvement-professional-2026-05-27T09-16-07-042Z.webm",
+  "latestVideo": "reference-artifacts/analyses/gameplay-segment-captures/latest-stage11-challenge-improvement-professional.webm",
+  "poster": "reference-artifacts/analyses/gameplay-segment-captures/stage11-challenge-improvement-professional-2026-05-27T09-16-07-042Z.png",
+  "latestPoster": "reference-artifacts/analyses/gameplay-segment-captures/latest-stage11-challenge-improvement-professional.png",
+  "byteLength": 6789242,
+  "mime": "video/webm;codecs=vp9,opus",
+  "videoAssessment": {
+    "file": "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/gameplay-segment-captures/stage11-challenge-improvement-professional-2026-05-27T09-16-07-042Z.review.webm",
+    "size": 6789242,
+    "expectedDuration": 30,
+    "formatDuration": 30.038,
+    "drift": 0.038000000000000256,
+    "videoStreams": [
+      {
+        "index": 0,
+        "codec_name": "vp9",
+        "codec_type": "video",
+        "start_time": "0.000000"
+      }
+    ],
+    "audioStreams": [
+      {
+        "index": 1,
+        "codec_name": "opus",
+        "codec_type": "audio",
+        "start_time": "0.035000"
+      }
+    ],
+    "stderr": "",
+    "issues": [],
+    "ok": true,
+    "sourceFile": "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/gameplay-segment-captures/stage11-challenge-improvement-professional-2026-05-27T09-16-07-042Z.webm",
+    "repaired": true,
+    "initialIssues": [
+      "missing_duration"
+    ],
+    "initialSize": 6791916,
+    "initialFormatDuration": 0
+  },
+  "startState": null,
+  "captureStartActivity": {
+    "waitedMs": 19649,
+    "timedOut": false,
+    "state": {
+      "started": 1,
+      "paused": 0,
+      "stage": 12,
+      "score": 760,
+      "lives": 3,
+      "challenge": false,
+      "recording": false,
+      "seed": 9052,
+      "simT": 19.767,
+      "stageClock": 1.85,
+      "persona": "professional",
+      "harnessPersona": "professional",
+      "watchMode": true,
+      "watchPersona": "professional",
+      "playerTwo": {
+        "enabled": false
+      },
+      "atmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "stage",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "stage",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "stagePresentation": {
+        "id": "galboss-veil",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "audioCue": {
+        "cue": "playerShot",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0.08,
+        "referenceClipDuration": 0.24,
+        "stage": 12,
+        "challenge": false,
+        "at": 20.257
+      },
+      "renderDebug": {
+        "backgroundMode": "aurora-borealis",
+        "starfieldProfile": "aurora-borealis-stars",
+        "starfieldCount": 88,
+        "starfieldIntensityScale": 1.25,
+        "starfieldSpeedScale": 1,
+        "spriteRenderMode": "auto",
+        "referencePixelSprites": false,
+        "playerBounds": {
+          "left": 117.16,
+          "right": 133.16,
+          "top": 328,
+          "bottom": 342
+        },
+        "reserveShipBounds": [
+          {
+            "left": 5.44,
+            "right": 18.56,
+            "top": 346.26,
+            "bottom": 357.74
+          },
+          {
+            "left": 23.44,
+            "right": 36.56,
+            "top": 346.26,
+            "bottom": 357.74
+          }
+        ]
+      },
+      "graphics": {
+        "graphicsTheme": "aurora-borealis",
+        "spriteRenderMode": "auto",
+        "starfieldIntensity": 1.25,
+        "starfieldSpeed": 1
+      },
+      "audio": {
+        "audioTheme": "galaga-reference-assets"
+      },
+      "extend": {
+        "first": 20000,
+        "recurring": 70000,
+        "next": 20000,
+        "awards": 0,
+        "flashT": 0,
+        "flashShips": 0
+      }
+    },
+    "challenge": false,
+    "stage": 12,
+    "stageClock": 1.85,
+    "score": 760,
+    "visibleEnemyCount": 16,
+    "challengeVisibleEnemyCount": 0,
+    "formationVisibleEnemyCount": 16,
+    "active": true
+  },
+  "finalState": {
+    "started": 0,
+    "paused": 0,
+    "stage": 13,
+    "score": 7330,
+    "lives": 0,
+    "challenge": false,
+    "recording": false,
+    "seed": 9052,
+    "simT": 45.667,
+    "stageClock": 4.583,
+    "persona": "professional",
+    "harnessPersona": "professional",
+    "watchMode": true,
+    "watchPersona": "professional",
+    "playerTwo": {
+      "enabled": false
+    },
+    "atmosphere": {
+      "id": "aurora-crown",
+      "group": "aurora",
+      "phase": "frontDoor",
+      "backgroundMode": "aurora-borealis",
+      "audioTheme": "aurora-crown",
+      "starfield": {
+        "id": "aurora-crown-stars",
+        "count": 84,
+        "alphaMin": 0.3,
+        "alphaMax": 0.68
+      }
+    },
+    "visualAtmosphere": {
+      "id": "aurora-borealis",
+      "group": "aurora",
+      "phase": "frontDoor",
+      "backgroundMode": "aurora-borealis",
+      "audioTheme": "aurora-crown",
+      "overrideThemeId": "aurora-borealis",
+      "starfield": {
+        "id": "aurora-borealis-stars",
+        "count": 88,
+        "alphaMin": 0.28,
+        "alphaMax": 0.64
+      }
+    },
+    "stagePresentation": {
+      "id": "galboss-veil",
+      "atmosphereTheme": "aurora-borealis",
+      "backgroundMode": "aurora-borealis"
+    },
+    "audioCue": {
+      "cue": "gameOver",
+      "atmosphereId": "aurora-crown",
+      "audioTheme": "galaga-reference-assets",
+      "phase": "results",
+      "variant": 0,
+      "referenceClip": "assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a",
+      "referenceClipStart": 2.3,
+      "referenceClipDuration": 4.2,
+      "stage": 13,
+      "challenge": false,
+      "at": 46.324
+    },
+    "renderDebug": {
+      "backgroundMode": "aurora-borealis",
+      "starfieldProfile": "aurora-borealis-stars",
+      "starfieldCount": 88,
+      "starfieldIntensityScale": 1.25,
+      "starfieldSpeedScale": 1,
+      "spriteRenderMode": "auto",
+      "referencePixelSprites": false,
+      "playerBounds": null,
+      "reserveShipBounds": []
+    },
+    "graphics": {
+      "graphicsTheme": "aurora-borealis",
+      "spriteRenderMode": "auto",
+      "starfieldIntensity": 1.25,
+      "starfieldSpeed": 1
+    },
+    "audio": {
+      "audioTheme": "galaga-reference-assets"
+    },
+    "extend": {
+      "first": 20000,
+      "recurring": 70000,
+      "next": 20000,
+      "awards": 0,
+      "flashT": 0,
+      "flashShips": 0
+    }
+  },
+  "formationState": {
+    "stage": 13,
+    "challenge": false,
+    "layoutId": "stingray-crown-hook-hybrid",
+    "enemyCount": 0,
+    "referencePathGroups": 5,
+    "activeReferenceTrackedEnemies": 0,
+    "referenceTrackIds": []
+  },
+  "reviewFocus": [
+    "Use these clips for human-visible before/after review of movement, graphics, stage pacing, persona behavior, and audio feel.",
+    "Pair captures with the same seed/start/persona settings when comparing candidates.",
+    "For challenge-stage conformance, prefer startKind=challenge plus challengeStage=N so the public display label stays aligned with the internal stage marker.",
+    "By default, recording waits until player-visible enemies are active; pass --wait-for-active=0 when the transition or blank/setup time is the intended evidence window."
+  ],
+  "warnings": []
+}

@@ -320,11 +320,17 @@ function compareSample(sample, targetCrops, targetGrids){
         targetCropId: target.id,
         targetRoleKey: target.roleKey,
         targetPoseKey: target.poseKey,
-        targetCrop: target.targetCrop
+        targetCrop: target.targetCrop,
+        targetAuthorityScore10: target.authorityScore10 ?? null,
+        targetAuthorityStatus: target.authorityStatus || '',
+        targetScoringUse: target.scoringUse || ''
       }, comparison);
     })
     .sort((a, b) => b.score10 - a.score10);
   const best = candidateResults[0] || null;
+  const authorityMultiplier = best && Number.isFinite(+best.targetAuthorityScore10)
+    ? Math.max(.1, Math.min(1, +best.targetAuthorityScore10 / 10))
+    : .2;
   return {
     spriteKey: sample.spriteKey,
     runtimeCrop: sample.cropImage,
@@ -336,7 +342,11 @@ function compareSample(sample, targetCrops, targetGrids){
     bestTargetRoleKey: best?.targetRoleKey || null,
     bestTargetPoseKey: best?.targetPoseKey || null,
     bestTargetCrop: best?.targetCrop || null,
+    bestTargetAuthorityScore10: best?.targetAuthorityScore10 ?? null,
+    bestTargetAuthorityStatus: best?.targetAuthorityStatus || null,
+    bestTargetScoringUse: best?.targetScoringUse || null,
     bestScore10: best?.score10 || null,
+    authorityAdjustedScore10: best ? rounded(best.score10 * authorityMultiplier, 2) : null,
     bestComponents: best ? {
       jaccard: best.jaccard,
       silhouetteAgreement: best.silhouetteAgreement,
@@ -359,7 +369,10 @@ function bestFrameTargetComparison(frame, spriteKey, poseKey, targetCrops, targe
         targetCropId: target.id,
         targetRoleKey: target.roleKey,
         targetPoseKey: target.poseKey,
-        targetCrop: target.targetCrop
+        targetCrop: target.targetCrop,
+        targetAuthorityScore10: target.authorityScore10 ?? null,
+        targetAuthorityStatus: target.authorityStatus || '',
+        targetScoringUse: target.scoringUse || ''
       }, compareGrids(runtimeGrid, targetGrid));
     })
     .sort((a, b) => b.score10 - a.score10);
@@ -372,7 +385,12 @@ function bestFrameTargetComparison(frame, spriteKey, poseKey, targetCrops, targe
     bestTargetCropId: best?.targetCropId || null,
     bestTargetPoseKey: best?.targetPoseKey || null,
     bestTargetCrop: best?.targetCrop || null,
+    bestTargetAuthorityScore10: best?.targetAuthorityScore10 ?? null,
+    bestTargetAuthorityStatus: best?.targetAuthorityStatus || null,
     bestScore10: best?.score10 || null,
+    authorityAdjustedScore10: best && Number.isFinite(+best.targetAuthorityScore10)
+      ? rounded(best.score10 * Math.max(.1, Math.min(1, +best.targetAuthorityScore10 / 10)), 2)
+      : null,
     bestComponents: best ? {
       jaccard: best.jaccard,
       silhouetteAgreement: best.silhouetteAgreement,
@@ -457,6 +475,10 @@ function main(){
   const averageScore10 = scored.length
     ? rounded(scored.reduce((sum, item) => sum + item.bestScore10, 0) / scored.length, 2)
     : null;
+  const authorityAdjusted = comparisons.filter(item => Number.isFinite(+item.authorityAdjustedScore10));
+  const authorityAdjustedAverageScore10 = authorityAdjusted.length
+    ? rounded(authorityAdjusted.reduce((sum, item) => sum + item.authorityAdjustedScore10, 0) / authorityAdjusted.length, 2)
+    : null;
   const averageTemporalSequenceScore10 = temporalScored.length
     ? rounded(temporalScored.reduce((sum, item) => sum + item.sequenceScore10, 0) / temporalScored.length, 2)
     : null;
@@ -481,6 +503,8 @@ function main(){
       targetCropCount: targetCrops.length,
       roleSetCount: target.summary?.roleSetCount || 0,
       averageScore10,
+      authorityAdjustedAverageScore10,
+      lowAuthorityComparisonCount: comparisons.filter(item => Number.isFinite(+item.bestTargetAuthorityScore10) && +item.bestTargetAuthorityScore10 < 5).length,
       weakestSpriteKey: weakest?.spriteKey || null,
       weakestScore10: weakest?.bestScore10 || null,
       weakestBestTarget: weakest?.bestTargetCropId || null,
@@ -496,6 +520,7 @@ function main(){
       'This is a first-pass static-image comparator using already-captured Aurora runtime crop PNGs and promoted source-sheet target crop PNGs.',
       'Images are normalized to a shared grid, so this is useful for role/pose target triage but not yet a final pixel-perfect conformance score.',
       'Static sprite comparisons do not by themselves score gameplay timing, dive rotation, formation context, capture/rescue transitions, or target-crop authority disputes.',
+      'Authority-adjusted scores are planning signals: they prevent provisional challenge-specialty cells from looking as release-trustworthy as cleaned motion-reference targets.',
       'Temporal sequence comparisons now score full flap-cadence runtime frames against expected Galaga target pose sequences, but do not yet assert exact frame timing against target video.',
       'Images are trimmed to their lit sprite bounds before scoring so large runtime crop padding does not dominate the comparison.',
       'Promoted target crops now prefer their accepted artifact litBox and ignore low-saturation source-sheet guide pixels, so gray sheet borders do not masquerade as sprite mass.',

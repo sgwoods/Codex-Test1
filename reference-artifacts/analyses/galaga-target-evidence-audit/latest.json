@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "galaga-target-evidence-audit",
-  "generatedAt": "2026-05-19T18:24:11.146Z",
-  "commit": "591cd98a",
-  "branch": "codex/macbook-conformance-investment-review",
+  "generatedAt": "2026-05-27T06:58:28.054Z",
+  "commit": "6280d4a64",
+  "branch": "codex/challenge-target-authority-setpiece-upgrade",
   "dirty": true,
   "status": "trusted-target-manifest-active",
   "sourceArtifacts": {
@@ -12,11 +12,12 @@
     "motionReferenceVideo": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4"
   },
   "summary": {
-    "auditedRoleCount": 4,
+    "auditedRoleCount": 5,
     "trustedPrimaryRoleCount": 4,
-    "provisionalOnlyRoleCount": 0,
+    "provisionalOnlyRoleCount": 1,
     "trustedMotionReferenceCount": 6,
-    "provisionalSourceSheetCount": 18
+    "provisionalSourceSheetCount": 18,
+    "challengeSpecialtyAuthorityScore10": 3.2
   },
   "rows": [
     {
@@ -44,7 +45,10 @@
           "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
           "sourceFrameSeconds": 10,
           "videoDerivedCleanCrop": true,
-          "sourcePixelExact": false
+          "sourcePixelExact": false,
+          "authorityStatus": "trusted-cleaned-motion-reference",
+          "authorityScore10": 7.5,
+          "scoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth."
         },
         {
           "id": "boss-galaga-flap-a",
@@ -54,7 +58,10 @@
           "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
           "sourceFrameSeconds": 10,
           "videoDerivedCleanCrop": true,
-          "sourcePixelExact": false
+          "sourcePixelExact": false,
+          "authorityStatus": "trusted-cleaned-motion-reference",
+          "authorityScore10": 7.5,
+          "scoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth."
         },
         {
           "id": "boss-galaga-flap-b",
@@ -64,9 +71,13 @@
           "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
           "sourceFrameSeconds": 10,
           "videoDerivedCleanCrop": true,
-          "sourcePixelExact": false
+          "sourcePixelExact": false,
+          "authorityStatus": "trusted-cleaned-motion-reference",
+          "authorityScore10": 7.5,
+          "scoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth."
         }
       ],
+      "averageAuthorityScore10": 7.5,
       "status": "trusted-primary-target-available"
     },
     {
@@ -92,9 +103,13 @@
           "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
           "sourceFrameSeconds": 10,
           "videoDerivedCleanCrop": true,
-          "sourcePixelExact": false
+          "sourcePixelExact": false,
+          "authorityStatus": "trusted-cleaned-motion-reference",
+          "authorityScore10": 7.5,
+          "scoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth."
         }
       ],
+      "averageAuthorityScore10": 7.5,
       "status": "trusted-primary-target-available"
     },
     {
@@ -120,9 +135,13 @@
           "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
           "sourceFrameSeconds": 10,
           "videoDerivedCleanCrop": true,
-          "sourcePixelExact": false
+          "sourcePixelExact": false,
+          "authorityStatus": "trusted-cleaned-motion-reference",
+          "authorityScore10": 7.5,
+          "scoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth."
         }
       ],
+      "averageAuthorityScore10": 7.5,
       "status": "trusted-primary-target-available"
     },
     {
@@ -149,7 +168,10 @@
           "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
           "sourceFrameSeconds": 10,
           "videoDerivedCleanCrop": true,
-          "sourcePixelExact": false
+          "sourcePixelExact": false,
+          "authorityStatus": "trusted-cleaned-motion-reference",
+          "authorityScore10": 7.5,
+          "scoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth."
         },
         {
           "id": "player-fighter-dual-front",
@@ -157,11 +179,111 @@
           "reviewStatus": "accepted-trusted-motion-reference-composite",
           "sourceImage": "reference-artifacts/ingestion/galaga-alien-motion-reference/source-video/galaga-alien-pulse-reference.mp4",
           "videoDerivedCleanCrop": false,
-          "sourcePixelExact": false
+          "sourcePixelExact": false,
+          "authorityStatus": "trusted-derived-composite",
+          "authorityScore10": 7.2,
+          "scoringUse": "May anchor runtime scoring for the exact composite state while separate source-frame evidence is still being promoted."
         }
       ],
+      "averageAuthorityScore10": 7.4,
       "status": "trusted-primary-target-available"
+    },
+    {
+      "roleKey": "challenge-specialty-aliens",
+      "label": "Challenge Specialty Aliens",
+      "previousRisk": "The current challenge-only target crops are small source-sheet cells. They are helpful taxonomy hints, but human review has not promoted them to canonical scoring truth.",
+      "trustedUse": "Keep these as planning evidence only until clean challenge-stage motion or gameplay windows provide source crops for dragonfly, scorpion, satellite/starship, and late blue/purple families.",
+      "cropIds": [
+        "challenge-green-family-front",
+        "challenge-green-family-dive",
+        "challenge-yellow-family-front",
+        "challenge-yellow-family-dive",
+        "challenge-magenta-family-front",
+        "challenge-blue-yellow-family-front"
+      ],
+      "confidence": "low-medium",
+      "scoringUse": "Do not use these cells as release-facing proof of challenge alien graphical conformance. Use them to plan runtime families and to prioritize better ingestion.",
+      "playerMeaning": "Late challenging stages should introduce memorable bonus-stage aliens. The current evidence is enough to say we need novelty, not enough to claim the novelty is visually conformant.",
+      "nextGap": "Extract clean challenge-specialty alien frames from segmented motion clips or target gameplay windows, then split the generic role into named target families.",
+      "trustedCropCount": 0,
+      "provisionalCropCount": 6,
+      "linkedCrops": [
+        {
+          "id": "challenge-green-family-front",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-green-family-front.png",
+          "reviewStatus": "provisional-source-sheet-cell",
+          "sourceKind": "sheet-cell",
+          "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+          "videoDerivedCleanCrop": false,
+          "sourcePixelExact": true,
+          "authorityStatus": "planning-only-challenge-specialty-cell",
+          "authorityScore10": 3.2,
+          "scoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it."
+        },
+        {
+          "id": "challenge-green-family-dive",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-green-family-dive.png",
+          "reviewStatus": "provisional-source-sheet-cell",
+          "sourceKind": "sheet-cell",
+          "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+          "videoDerivedCleanCrop": false,
+          "sourcePixelExact": true,
+          "authorityStatus": "planning-only-challenge-specialty-cell",
+          "authorityScore10": 3.2,
+          "scoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it."
+        },
+        {
+          "id": "challenge-yellow-family-front",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-yellow-family-front.png",
+          "reviewStatus": "provisional-source-sheet-cell",
+          "sourceKind": "sheet-cell",
+          "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+          "videoDerivedCleanCrop": false,
+          "sourcePixelExact": true,
+          "authorityStatus": "planning-only-challenge-specialty-cell",
+          "authorityScore10": 3.2,
+          "scoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it."
+        },
+        {
+          "id": "challenge-yellow-family-dive",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-yellow-family-dive.png",
+          "reviewStatus": "provisional-source-sheet-cell",
+          "sourceKind": "sheet-cell",
+          "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+          "videoDerivedCleanCrop": false,
+          "sourcePixelExact": true,
+          "authorityStatus": "planning-only-challenge-specialty-cell",
+          "authorityScore10": 3.2,
+          "scoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it."
+        },
+        {
+          "id": "challenge-magenta-family-front",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-magenta-family-front.png",
+          "reviewStatus": "provisional-source-sheet-cell",
+          "sourceKind": "sheet-cell",
+          "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+          "videoDerivedCleanCrop": false,
+          "sourcePixelExact": true,
+          "authorityStatus": "planning-only-challenge-specialty-cell",
+          "authorityScore10": 3.2,
+          "scoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it."
+        },
+        {
+          "id": "challenge-blue-yellow-family-front",
+          "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-blue-yellow-family-front.png",
+          "reviewStatus": "provisional-source-sheet-cell",
+          "sourceKind": "sheet-cell",
+          "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
+          "videoDerivedCleanCrop": false,
+          "sourcePixelExact": true,
+          "authorityStatus": "planning-only-challenge-specialty-cell",
+          "authorityScore10": 3.2,
+          "scoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it."
+        }
+      ],
+      "averageAuthorityScore10": 3.2,
+      "status": "provisional-target-only"
     }
   ],
-  "nextBestStep": "Regenerate runtime-vs-target scoring against the trusted Boss, Bee, and Butterfly primary targets, then promote player-fighter and temporal pulse-pair targets."
+  "nextBestStep": "Promote clean challenge-specialty target windows before treating late challenge alien graphics as release-facing conformance truth."
 }

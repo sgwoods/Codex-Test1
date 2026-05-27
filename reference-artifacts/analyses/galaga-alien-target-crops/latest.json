@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "artifactType": "galaga-alien-target-crops",
-  "generatedAt": "2026-05-19T18:23:33.733Z",
-  "commit": "591cd98a",
-  "branch": "codex/macbook-conformance-investment-review",
+  "generatedAt": "2026-05-27T06:57:46.883Z",
+  "commit": "6280d4a64",
+  "branch": "codex/challenge-target-authority-setpiece-upgrade",
   "dirty": true,
-  "status": "trusted-motion-overrides-plus-provisional-sheet-crops",
+  "status": "trusted-motion-authority-tiered-target-crops",
   "sourceManifest": "reference-artifacts/ingestion/galaga-alien-visual-reference/crop-box-manifest-0.1.json",
   "sourceImage": "reference-artifacts/ingestion/galaga-alien-visual-reference/source-images/general-sprites-sheet.png",
   "sourceDimensions": {
@@ -29,11 +29,16 @@
     "trustedMotionReferenceCount": 6,
     "provisionalSourceSheetCount": 18,
     "compositeTargetCount": 1,
+    "trustedScoringTargetCount": 7,
+    "provisionalPlanningTargetCount": 18,
+    "averageAuthorityScore10": 5.1,
+    "challengeSpecialtyAuthorityScore10": 3.2,
     "scoringStatus": "trusted-core-formation-targets-ready-runtime-comparison-pending"
   },
   "measurementLimits": [
     "Trusted motion-reference crops are cleaned from a compressed segmented reference video; they are better human-readable targets than polluted sheet cells, but not ROM-perfect final truth.",
     "Remaining source-sheet cell crops are useful provisional pose evidence and should not be treated as final canonical target pixels without human review.",
+    "Challenge-only specialty alien sheet cells are explicitly planning evidence only; scoring and docs must not present them as high-authority target truth.",
     "The crops improve role, pose, projectile, explosion, and tractor-beam grounding but do not yet score temporal animation cadence.",
     "Dual-fighter, carried-fighter, boss damage, and capture/rescue transition targets still need composite or temporal promotion."
   ],
@@ -63,6 +68,9 @@
         "bee-zako-dive-right"
       ],
       "status": "accepted-first-pass",
+      "averageAuthorityScore10": 5,
+      "trustedScoringTargetCount": 1,
+      "provisionalPlanningCount": 4,
       "coverageRead": "5 promoted crop(s); required pose contract: formation-front, flap-a, flap-b, dive-or-rotation"
     },
     {
@@ -91,6 +99,9 @@
         "boss-galaga-dive-right"
       ],
       "status": "accepted-first-pass",
+      "averageAuthorityScore10": 6.3,
+      "trustedScoringTargetCount": 3,
+      "provisionalPlanningCount": 2,
       "coverageRead": "5 promoted crop(s); required pose contract: formation-front, flap-a, flap-b, damage-state, capture-beam-host"
     },
     {
@@ -118,6 +129,9 @@
         "butterfly-escort-dive-right"
       ],
       "status": "accepted-first-pass",
+      "averageAuthorityScore10": 5,
+      "trustedScoringTargetCount": 1,
+      "provisionalPlanningCount": 4,
       "coverageRead": "5 promoted crop(s); required pose contract: formation-front, flap-a, flap-b, escort-dive"
     },
     {
@@ -147,6 +161,9 @@
         "challenge-blue-yellow-family-front"
       ],
       "status": "accepted-first-pass",
+      "averageAuthorityScore10": 3.2,
+      "trustedScoringTargetCount": 0,
+      "provisionalPlanningCount": 6,
       "coverageRead": "6 promoted crop(s); required pose contract: dragonfly-or-scorpion-family, mosquito-or-serpentine-family, late-blue-purple-family, flap-cycle"
     },
     {
@@ -172,6 +189,9 @@
         "player-fighter-dual-front"
       ],
       "status": "accepted-first-pass",
+      "averageAuthorityScore10": 5.9,
+      "trustedScoringTargetCount": 2,
+      "provisionalPlanningCount": 2,
       "coverageRead": "4 promoted crop(s); required pose contract: single-ship-front, dual-fighter, captured-or-carried-fighter, ship-loss-fragment-or-explosion-context"
     },
     {
@@ -200,6 +220,9 @@
         "projectile-diagonal-shot"
       ],
       "status": "accepted-first-pass",
+      "averageAuthorityScore10": 5.6,
+      "trustedScoringTargetCount": 0,
+      "provisionalPlanningCount": 0,
       "coverageRead": "5 promoted crop(s); required pose contract: player-shot, enemy-shot, first-hit-impact, enemy-explosion, boss-explosion"
     },
     {
@@ -223,6 +246,9 @@
         "tractor-beam-narrow"
       ],
       "status": "accepted-first-pass",
+      "averageAuthorityScore10": 5.6,
+      "trustedScoringTargetCount": 0,
+      "provisionalPlanningCount": 0,
       "coverageRead": "3 promoted crop(s); required pose contract: beam-start, beam-mid, beam-wide, beam-collapse"
     }
   ],
@@ -282,7 +308,10 @@
           "width": 49,
           "height": 43
         }
-      }
+      },
+      "authorityStatus": "trusted-cleaned-motion-reference",
+      "authorityScore10": 7.5,
+      "scoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth."
     },
     {
       "id": "player-fighter-turn-left",
@@ -325,7 +354,10 @@
           "width": 16,
           "height": 11
         }
-      }
+      },
+      "authorityStatus": "provisional-pose-cell",
+      "authorityScore10": 4.4,
+      "scoringUse": "Pose-planning evidence only; useful for candidate ranking but not strong enough for a release-facing score claim."
     },
     {
       "id": "player-fighter-turn-right",
@@ -368,7 +400,10 @@
           "width": 16,
           "height": 15
         }
-      }
+      },
+      "authorityStatus": "provisional-pose-cell",
+      "authorityScore10": 4.4,
+      "scoringUse": "Pose-planning evidence only; useful for candidate ranking but not strong enough for a release-facing score claim."
     },
     {
       "id": "bee-zako-formation-front",
@@ -426,7 +461,10 @@
           "width": 42,
           "height": 32
         }
-      }
+      },
+      "authorityStatus": "trusted-cleaned-motion-reference",
+      "authorityScore10": 7.5,
+      "scoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth."
     },
     {
       "id": "bee-zako-flap-a",
@@ -470,7 +508,10 @@
           "width": 16,
           "height": 16
         }
-      }
+      },
+      "authorityStatus": "provisional-pose-cell",
+      "authorityScore10": 4.4,
+      "scoringUse": "Pose-planning evidence only; useful for candidate ranking but not strong enough for a release-facing score claim."
     },
     {
       "id": "bee-zako-flap-b",
@@ -514,7 +555,10 @@
           "width": 16,
           "height": 16
         }
-      }
+      },
+      "authorityStatus": "provisional-pose-cell",
+      "authorityScore10": 4.4,
+      "scoringUse": "Pose-planning evidence only; useful for candidate ranking but not strong enough for a release-facing score claim."
     },
     {
       "id": "bee-zako-dive-left",
@@ -557,7 +601,10 @@
           "width": 10,
           "height": 16
         }
-      }
+      },
+      "authorityStatus": "provisional-pose-cell",
+      "authorityScore10": 4.4,
+      "scoringUse": "Pose-planning evidence only; useful for candidate ranking but not strong enough for a release-facing score claim."
     },
     {
       "id": "bee-zako-dive-right",
@@ -600,7 +647,10 @@
           "width": 11,
           "height": 16
         }
-      }
+      },
+      "authorityStatus": "provisional-pose-cell",
+      "authorityScore10": 4.4,
+      "scoringUse": "Pose-planning evidence only; useful for candidate ranking but not strong enough for a release-facing score claim."
     },
     {
       "id": "butterfly-escort-formation-front",
@@ -657,7 +707,10 @@
           "width": 30,
           "height": 32
         }
-      }
+      },
+      "authorityStatus": "trusted-cleaned-motion-reference",
+      "authorityScore10": 7.5,
+      "scoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth."
     },
     {
       "id": "butterfly-escort-flap-a",
@@ -700,7 +753,10 @@
           "width": 16,
           "height": 16
         }
-      }
+      },
+      "authorityStatus": "provisional-pose-cell",
+      "authorityScore10": 4.4,
+      "scoringUse": "Pose-planning evidence only; useful for candidate ranking but not strong enough for a release-facing score claim."
     },
     {
       "id": "butterfly-escort-flap-b",
@@ -744,7 +800,10 @@
           "width": 16,
           "height": 16
         }
-      }
+      },
+      "authorityStatus": "provisional-pose-cell",
+      "authorityScore10": 4.4,
+      "scoringUse": "Pose-planning evidence only; useful for candidate ranking but not strong enough for a release-facing score claim."
     },
     {
       "id": "butterfly-escort-dive-left",
@@ -788,7 +847,10 @@
           "width": 15,
           "height": 16
         }
-      }
+      },
+      "authorityStatus": "provisional-pose-cell",
+      "authorityScore10": 4.4,
+      "scoringUse": "Pose-planning evidence only; useful for candidate ranking but not strong enough for a release-facing score claim."
     },
     {
       "id": "butterfly-escort-dive-right",
@@ -832,7 +894,10 @@
           "width": 16,
           "height": 16
         }
-      }
+      },
+      "authorityStatus": "provisional-pose-cell",
+      "authorityScore10": 4.4,
+      "scoringUse": "Pose-planning evidence only; useful for candidate ranking but not strong enough for a release-facing score claim."
     },
     {
       "id": "boss-galaga-formation-front",
@@ -889,7 +954,10 @@
           "width": 48,
           "height": 52
         }
-      }
+      },
+      "authorityStatus": "trusted-cleaned-motion-reference",
+      "authorityScore10": 7.5,
+      "scoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth."
     },
     {
       "id": "boss-galaga-flap-a",
@@ -946,7 +1014,10 @@
           "width": 48,
           "height": 52
         }
-      }
+      },
+      "authorityStatus": "trusted-cleaned-motion-reference",
+      "authorityScore10": 7.5,
+      "scoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth."
     },
     {
       "id": "boss-galaga-flap-b",
@@ -1000,7 +1071,10 @@
           "width": 48,
           "height": 52
         }
-      }
+      },
+      "authorityStatus": "trusted-cleaned-motion-reference",
+      "authorityScore10": 7.5,
+      "scoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth."
     },
     {
       "id": "boss-galaga-dive-left",
@@ -1044,7 +1118,10 @@
           "width": 15,
           "height": 16
         }
-      }
+      },
+      "authorityStatus": "provisional-pose-cell",
+      "authorityScore10": 4.4,
+      "scoringUse": "Pose-planning evidence only; useful for candidate ranking but not strong enough for a release-facing score claim."
     },
     {
       "id": "boss-galaga-dive-right",
@@ -1088,7 +1165,10 @@
           "width": 16,
           "height": 16
         }
-      }
+      },
+      "authorityStatus": "provisional-pose-cell",
+      "authorityScore10": 4.4,
+      "scoringUse": "Pose-planning evidence only; useful for candidate ranking but not strong enough for a release-facing score claim."
     },
     {
       "id": "challenge-green-family-front",
@@ -1131,7 +1211,10 @@
           "width": 16,
           "height": 11
         }
-      }
+      },
+      "authorityStatus": "planning-only-challenge-specialty-cell",
+      "authorityScore10": 3.2,
+      "scoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it."
     },
     {
       "id": "challenge-green-family-dive",
@@ -1174,7 +1257,10 @@
           "width": 11,
           "height": 10
         }
-      }
+      },
+      "authorityStatus": "planning-only-challenge-specialty-cell",
+      "authorityScore10": 3.2,
+      "scoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it."
     },
     {
       "id": "challenge-yellow-family-front",
@@ -1217,7 +1303,10 @@
           "width": 16,
           "height": 12
         }
-      }
+      },
+      "authorityStatus": "planning-only-challenge-specialty-cell",
+      "authorityScore10": 3.2,
+      "scoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it."
     },
     {
       "id": "challenge-yellow-family-dive",
@@ -1260,7 +1349,10 @@
           "width": 12,
           "height": 11
         }
-      }
+      },
+      "authorityStatus": "planning-only-challenge-specialty-cell",
+      "authorityScore10": 3.2,
+      "scoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it."
     },
     {
       "id": "challenge-magenta-family-front",
@@ -1303,7 +1395,10 @@
           "width": 10,
           "height": 16
         }
-      }
+      },
+      "authorityStatus": "planning-only-challenge-specialty-cell",
+      "authorityScore10": 3.2,
+      "scoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it."
     },
     {
       "id": "challenge-blue-yellow-family-front",
@@ -1345,7 +1440,10 @@
           "width": 16,
           "height": 16
         }
-      }
+      },
+      "authorityStatus": "planning-only-challenge-specialty-cell",
+      "authorityScore10": 3.2,
+      "scoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it."
     },
     {
       "id": "impact-explosion-small",
@@ -1384,7 +1482,10 @@
           "width": 29,
           "height": 29
         }
-      }
+      },
+      "authorityStatus": "accepted-static-sheet-support",
+      "authorityScore10": 5.6,
+      "scoringUse": "Useful supporting target evidence, but should be cross-checked against gameplay or motion windows before major tuning."
     },
     {
       "id": "impact-explosion-large",
@@ -1423,7 +1524,10 @@
           "width": 27,
           "height": 31
         }
-      }
+      },
+      "authorityStatus": "accepted-static-sheet-support",
+      "authorityScore10": 5.6,
+      "scoringUse": "Useful supporting target evidence, but should be cross-checked against gameplay or motion windows before major tuning."
     },
     {
       "id": "projectile-player-shot",
@@ -1462,7 +1566,10 @@
           "width": 3,
           "height": 8
         }
-      }
+      },
+      "authorityStatus": "accepted-static-sheet-support",
+      "authorityScore10": 5.6,
+      "scoringUse": "Useful supporting target evidence, but should be cross-checked against gameplay or motion windows before major tuning."
     },
     {
       "id": "projectile-enemy-shot",
@@ -1501,7 +1608,10 @@
           "width": 3,
           "height": 8
         }
-      }
+      },
+      "authorityStatus": "accepted-static-sheet-support",
+      "authorityScore10": 5.6,
+      "scoringUse": "Useful supporting target evidence, but should be cross-checked against gameplay or motion windows before major tuning."
     },
     {
       "id": "projectile-diagonal-shot",
@@ -1540,7 +1650,10 @@
           "width": 7,
           "height": 7
         }
-      }
+      },
+      "authorityStatus": "accepted-static-sheet-support",
+      "authorityScore10": 5.6,
+      "scoringUse": "Useful supporting target evidence, but should be cross-checked against gameplay or motion windows before major tuning."
     },
     {
       "id": "tractor-beam-wide",
@@ -1578,7 +1691,10 @@
           "width": 46,
           "height": 80
         }
-      }
+      },
+      "authorityStatus": "accepted-static-sheet-support",
+      "authorityScore10": 5.6,
+      "scoringUse": "Useful supporting target evidence, but should be cross-checked against gameplay or motion windows before major tuning."
     },
     {
       "id": "tractor-beam-mid",
@@ -1616,7 +1732,10 @@
           "width": 50,
           "height": 80
         }
-      }
+      },
+      "authorityStatus": "accepted-static-sheet-support",
+      "authorityScore10": 5.6,
+      "scoringUse": "Useful supporting target evidence, but should be cross-checked against gameplay or motion windows before major tuning."
     },
     {
       "id": "tractor-beam-narrow",
@@ -1654,7 +1773,10 @@
           "width": 40,
           "height": 80
         }
-      }
+      },
+      "authorityStatus": "accepted-static-sheet-support",
+      "authorityScore10": 5.6,
+      "scoringUse": "Useful supporting target evidence, but should be cross-checked against gameplay or motion windows before major tuning."
     },
     {
       "id": "player-fighter-dual-front",
@@ -1708,8 +1830,11 @@
           "width": 109,
           "height": 43
         }
-      }
+      },
+      "authorityStatus": "trusted-derived-composite",
+      "authorityScore10": 7.2,
+      "scoringUse": "May anchor runtime scoring for the exact composite state while separate source-frame evidence is still being promoted."
     }
   ],
-  "nextBestStep": "Regenerate Aurora live runtime comparisons against the corrected Boss, Bee, and Butterfly targets, then promote clean player-fighter and temporal pulse/cadence targets before tuning more runtime sprites."
+  "nextBestStep": "Replace challenge-only specialty alien provisional cells with clean target motion/gameplay windows, then regenerate Aurora live runtime comparisons with authority-adjusted scoring."
 }

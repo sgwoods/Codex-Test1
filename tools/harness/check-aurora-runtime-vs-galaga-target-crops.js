@@ -57,12 +57,21 @@ function main(){
     if(!Number.isFinite(+comparison.bestScore10) || comparison.bestScore10 <= 0 || comparison.bestScore10 > 10){
       fail('Runtime-vs-target crop comparison has an invalid score.', { comparison, payload });
     }
+    if(!Number.isFinite(+comparison.bestTargetAuthorityScore10) || +comparison.bestTargetAuthorityScore10 < 1 || +comparison.bestTargetAuthorityScore10 > 10 || !comparison.bestTargetAuthorityStatus){
+      fail('Runtime-vs-target crop comparison is missing target authority metadata.', { comparison, payload });
+    }
+    if(!Number.isFinite(+comparison.authorityAdjustedScore10) || +comparison.authorityAdjustedScore10 <= 0 || +comparison.authorityAdjustedScore10 > 10){
+      fail('Runtime-vs-target crop comparison has an invalid authority-adjusted score.', { comparison, payload });
+    }
     if(!Array.isArray(comparison.topCandidates) || !comparison.topCandidates.length){
       fail('Runtime-vs-target crop comparison should expose top candidates for review.', { comparison, payload });
     }
   }
   if(!Number.isFinite(+artifact.summary?.averageScore10) || artifact.summary.averageScore10 <= 0 || artifact.summary.averageScore10 > 10){
     fail('Runtime-vs-target crop summary has an invalid average score.', payload);
+  }
+  if(!Number.isFinite(+artifact.summary?.authorityAdjustedAverageScore10) || artifact.summary.authorityAdjustedAverageScore10 <= 0 || artifact.summary.authorityAdjustedAverageScore10 > 10){
+    fail('Runtime-vs-target crop summary has an invalid authority-adjusted average score.', payload);
   }
   if(temporalSequences.length){
     for(const sequence of temporalSequences){
@@ -76,6 +85,9 @@ function main(){
         if(!exists(frame.runtimeCrop) || !exists(frame.bestTargetCrop)){
           fail('Runtime-vs-target temporal sequence frame is missing image evidence.', { frame, sequence, payload });
         }
+        if(!Number.isFinite(+frame.bestTargetAuthorityScore10) || !frame.bestTargetAuthorityStatus){
+          fail('Runtime-vs-target temporal sequence frame is missing target authority metadata.', { frame, sequence, payload });
+        }
       }
     }
   }
@@ -85,6 +97,7 @@ function main(){
     sampleCount: comparisons.length,
     targetCropCount: artifact.summary?.targetCropCount,
     averageScore10: artifact.summary?.averageScore10,
+    authorityAdjustedAverageScore10: artifact.summary?.authorityAdjustedAverageScore10,
     averageTemporalSequenceScore10: artifact.summary?.averageTemporalSequenceScore10,
     weakestSpriteKey: artifact.summary?.weakestSpriteKey,
     weakestScore10: artifact.summary?.weakestScore10

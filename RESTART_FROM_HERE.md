@@ -1,5 +1,21 @@
 # Restart From Here
 
+## Long-Session Recovery Rule
+
+Before a multi-hour Codex run, before switching machines, or when the chat has
+grown long enough that automatic compaction could drop important context, run:
+
+```bash
+npm run codex:checkpoint -- --label <short-topic> --plan "<current goal>" --next "<next concrete step>"
+```
+
+Then commit the checkpoint if it records meaningful state. The generated
+`CODEX_CONTEXT_CHECKPOINT.md` contains the exact restart prompt for a fresh
+Codex session. Codex Desktop does not expose a repo command to force its
+internal compaction, so the safe operational equivalent is: checkpoint, commit
+or push if appropriate, and restart from the generated prompt before context is
+fragile.
+
 ## Current Checkpoint: May 12, 2026 Production Conformance Refresh / 1.4.0 Pickup
 
 Active local workspace:

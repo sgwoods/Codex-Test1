@@ -1,0 +1,178 @@
+{
+  "ok": true,
+  "artifactType": "codex-context-checkpoint",
+  "generatedAt": "2026-05-27T16:51:32.636Z",
+  "label": "stable-challenge-setpiece-capture-checkpoint",
+  "root": "/Users/sgwoods/Development/Codex/Codex-test1",
+  "branch": "codex/challenge-target-authority-setpiece-upgrade",
+  "commit": "6280d4a64",
+  "commitSubject": "Improve challenge identity gates and sprite conformance lane",
+  "dirtyFileCountExcludingCheckpoint": 46,
+  "statusLinesExcludingCheckpoint": [
+    "M CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md",
+    " M GALAGA_ALIEN_TARGET_CROPS.md",
+    " M GALAGA_TARGET_EVIDENCE_AUDIT.md",
+    " M MULTI_MACHINE_WORKFLOW.md",
+    " M QUALITY_CONFORMANCE_MODEL.md",
+    " M RESTART_FROM_HERE.md",
+    " M package.json",
+    " M reference-artifacts/analyses/application-artifact-conformance/latest.json",
+    " M reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json",
+    " M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-01-object-track.svg",
+    " M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-01-trajectory.svg",
+    " M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-02-object-track.svg",
+    " M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-02-trajectory.svg",
+    " M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-03-object-track.svg",
+    " M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-03-trajectory.svg",
+    " M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-04-object-track.svg",
+    " M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-04-trajectory.svg",
+    " M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-05-object-track.svg",
+    " M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-07-object-track.svg",
+    " M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-08-object-track.svg",
+    " M reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+    " M reference-artifacts/analyses/galaga-alien-target-crops/latest.json",
+    " M reference-artifacts/analyses/galaga-target-evidence-audit/latest.json",
+    " M src/js/02-replay-telemetry.js",
+    " M src/js/13-aurora-game-pack.js",
+    " M src/js/90-harness.js",
+    " M tools/build/build-index.js",
+    " M tools/harness/analyze-aurora-runtime-vs-galaga-target-crops.js",
+    " M tools/harness/analyze-galaga-target-evidence-audit.js",
+    " M tools/harness/check-aurora-runtime-vs-galaga-target-crops.js",
+    " M tools/harness/check-challenge-motion-profile.js",
+    " M tools/harness/check-galaga-alien-target-crops.js",
+    " M tools/harness/check-galaga-target-evidence-audit.js",
+    " M tools/harness/check-video-artifact.js",
+    " M tools/harness/promote-galaga-alien-target-crops.js",
+    " M tools/harness/video-artifact-util.js",
+    "?? CHALLENGE_SETPIECE_CONTRACTS.md",
+    "?? reference-artifacts/analyses/challenge-setpiece-contracts/",
+    "?? reference-artifacts/analyses/challenge-stage-conformance/2026-05-27-6280d4a64/",
+    "?? reference-artifacts/analyses/codex-context-checkpoint/",
+    "?? reference-artifacts/analyses/gameplay-segment-captures/",
+    "?? reference-artifacts/analyses/level-visual-conformance-index/review-pairs/",
+    "?? tools/dev/write-context-checkpoint.js",
+    "?? tools/harness/analyze-challenge-setpiece-contracts.js",
+    "?? tools/harness/capture-gameplay-segment.js",
+    "?? tools/harness/check-challenge-setpiece-contracts.js"
+  ],
+  "diffStat": "CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md            |    99 +-\n GALAGA_ALIEN_TARGET_CROPS.md                       |    76 +-\n GALAGA_TARGET_EVIDENCE_AUDIT.md                    |    14 +-\n MULTI_MACHINE_WORKFLOW.md                          |    16 +\n QUALITY_CONFORMANCE_MODEL.md                       |    26 +\n RESTART_FROM_HERE.md                               |    16 +\n package.json                                       |     7 +-\n .../application-artifact-conformance/latest.json   |   139 +-\n .../latest.json                                    |   179 +-\n .../challenge-stage-01-object-track.svg            |     6 +-\n .../challenge-stage-01-trajectory.svg              |     2 +-\n .../challenge-stage-02-object-track.svg            |    28 +-\n .../challenge-stage-02-trajectory.svg              |    16 +-\n .../challenge-stage-03-object-track.svg            |    28 +-\n .../challenge-stage-03-trajectory.svg              |    12 +-\n .../challenge-stage-04-object-track.svg            |     2 +-\n .../challenge-stage-04-trajectory.svg              |     2 +-\n .../challenge-stage-05-object-track.svg            |     2 +-\n .../challenge-stage-07-object-track.svg            |     2 +-\n .../challenge-stage-08-object-track.svg            |     2 +-\n .../challenge-stage-conformance/latest.json        | 36036 ++++++-------------\n .../analyses/galaga-alien-target-crops/latest.json |   201 +-\n .../galaga-target-evidence-audit/latest.json       |   150 +-\n src/js/02-replay-telemetry.js                      |     3 +-\n src/js/13-aurora-game-pack.js                      |    20 +-\n src/js/90-harness.js                               |    61 +\n tools/build/build-index.js                         |   165 +-\n ...nalyze-aurora-runtime-vs-galaga-target-crops.js |    29 +-\n .../analyze-galaga-target-evidence-audit.js        |    34 +-\n .../check-aurora-runtime-vs-galaga-target-crops.js |    13 +\n tools/harness/check-challenge-motion-profile.js    |    36 +-\n tools/harness/check-galaga-alien-target-crops.js   |     8 +-\n .../harness/check-galaga-target-evidence-audit.js  |     9 +-\n tools/harness/check-video-artifact.js              |    29 +-\n tools/harness/promote-galaga-alien-target-crops.js |    86 +-\n tools/harness/video-artifact-util.js               |     4 +-\n 36 files changed, 12025 insertions(+), 25533 deletions(-)",
+  "recentLog": "6280d4a64 (HEAD -> codex/challenge-target-authority-setpiece-upgrade, origin/codex/macbook-challenge-stage-conformance-cycle, codex/macbook-challenge-stage-conformance-cycle) Improve challenge identity gates and sprite conformance lane\nabc27c36c Add Stage 7 before-after challenge evidence\n412ff2860 Promote Stage 7 reference-path challenge choreography\n9001395d8 Add target-derived challenge trajectory controls\nabb6ccaef Resweep challenge stage candidates under strict identity\na228db722 Tighten challenge stage sweep diagnostics\n47f2c7e1d Expand Stage 19 challenge sweep evidence\na423c8beb Refresh conformance dashboard metadata",
+  "machineStatus": {
+    "ok": true,
+    "mode": "status",
+    "machine": {
+      "machine_id": "macbook-pro",
+      "machine_label": "MacBook-Pro",
+      "hostname": "MacBook-Pro",
+      "repo_path": "/Users/sgwoods/Development/Codex/Codex-test1",
+      "profile_exists": true,
+      "profile_path": "/Users/sgwoods/Development/Codex/Codex-test1/.machine-profile.json",
+      "profile_preview": {
+        "machine_id": "macbook-pro",
+        "machine_label": "MacBook-Pro",
+        "hostname": "MacBook-Pro",
+        "repo_path": "/Users/sgwoods/Development/Codex/Codex-test1",
+        "tool_versions": {
+          "node": "v25.9.0",
+          "npm": "11.12.1",
+          "python3": "Python 3.9.6",
+          "gh": "gh version 2.91.0 (2026-04-22)",
+          "chrome": "Google Chrome 148.0.7778.179",
+          "harness_browser": "playwright-managed-chromium"
+        },
+        "gh_auth": true,
+        "last_successful_bootstrap_at": "2026-05-20T14:59:22.155Z"
+      }
+    },
+    "repo": {
+      "branch": "codex/challenge-target-authority-setpiece-upgrade",
+      "dirty": true,
+      "upstream": null,
+      "ahead": 0,
+      "behind": 0,
+      "remote_ok": true
+    },
+    "release_authority": {
+      "machine_id": "imacm1",
+      "machine_label": "iMacM1",
+      "claimed_by": "Steven Woods",
+      "claimed_at": "2026-04-25T13:16:57Z",
+      "notes": "Primary Aurora release-authority machine after the 1.2.3+build.532.sha.b959491 production refresh.",
+      "current_machine_matches": false
+    },
+    "local_services": {
+      "game": {
+        "ok": true,
+        "reachable": true,
+        "root_ok": true,
+        "url": "http://127.0.0.1:8000/",
+        "listeners": [
+          {
+            "pid": 25405,
+            "cwd": "/Users/sgwoods/Development/Codex/Codex-test1",
+            "root_ok": true
+          }
+        ]
+      },
+      "viewer": {
+        "ok": true,
+        "reachable": true,
+        "root_ok": true,
+        "url": "http://127.0.0.1:4311/api/runs",
+        "listeners": [
+          {
+            "pid": 25481,
+            "cwd": "/Users/sgwoods/Development/Codex/Codex-test1",
+            "root_ok": true
+          }
+        ]
+      },
+      "state_dir": "/Users/sgwoods/Development/Codex/Codex-test1/.local-services"
+    },
+    "live_lanes": {
+      "dev": {
+        "ok": true,
+        "version": "1.4.0",
+        "label": "1.4.0.1+build.924.sha.9e779c05",
+        "commit": "9e779c05",
+        "releaseChannel": "development"
+      },
+      "beta": {
+        "ok": true,
+        "version": "1.4.0-beta.1",
+        "label": "1.4.0-beta.1+build.894.sha.1dc23d8a.beta",
+        "commit": "1dc23d8a",
+        "releaseChannel": "production beta"
+      },
+      "production": {
+        "ok": true,
+        "version": "1.4.0",
+        "label": "1.4.0+build.894.sha.1dc23d8a",
+        "commit": "1dc23d8a",
+        "releaseChannel": "production"
+      }
+    },
+    "publish_permitted": false,
+    "next": [
+      "git switch -c codex/macbook-pro-your-topic",
+      "npm run release:show-authority",
+      "npm run release:claim-authority -- --machine-id macbook-pro --label \"MacBook-Pro\""
+    ]
+  },
+  "plan": [
+    "Challenge set-piece/capture work is validated and ready to commit"
+  ],
+  "next": [
+    "Stage intended files, commit stable branch state, then push or provide handoff"
+  ],
+  "notes": [
+    "Codex Desktop does not expose a repo command that forces internal chat compaction. The safe replacement is a manual checkpoint plus a deliberate fresh session from this file.",
+    "This checkpoint intentionally filters its own generated files out of the dirty-status read so it can be committed as the recovery point."
+  ],
+  "restartPrompt": "You are continuing Aurora Galactica / Platinum work from a durable Codex checkpoint.\n\nRepo path:\n/Users/sgwoods/Development/Codex/Codex-test1\n\nStart by running:\ngit branch --show-current\ngit status --short\ngit log -5 --oneline --decorate\nnpm run machine:status\n\nRead first:\n- CODEX_CONTEXT_CHECKPOINT.md\n- RESTART_FROM_HERE.md\n- MULTI_MACHINE_WORKFLOW.md\n\nCurrent checkpoint:\n- label: stable-challenge-setpiece-capture-checkpoint\n- generated: 2026-05-27T16:51:32.636Z\n- branch: codex/challenge-target-authority-setpiece-upgrade\n- commit: 6280d4a64 Improve challenge identity gates and sprite conformance lane\n- dirty files excluding checkpoint self-output: 46\n\nContinue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.",
+  "files": {
+    "markdown": "CODEX_CONTEXT_CHECKPOINT.md",
+    "json": "reference-artifacts/analyses/codex-context-checkpoint/latest.json"
+  }
+}
