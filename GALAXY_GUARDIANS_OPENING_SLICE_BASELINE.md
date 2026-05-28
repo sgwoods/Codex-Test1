@@ -159,23 +159,22 @@ threat model:
 - the promoted frame windows now give the `WAIT` and score-table surfaces real
   opening authority, but the current runtime still presents a three-row
   application-owned adaptation rather than a tighter four-row cabinet match
-- rack march cadence now has its own object-track-derived opening contract, but
-  the starfield and re-entry surfaces still need measured target windows of the
-  same evidence quality before the whole opening board feels equally
-  source-faithful
-- explosions and hit states now read better, but they still need frame-backed
-  source authority rather than only runtime improvement
+- rack march cadence now has its own object-track-derived opening contract, and
+  starfield/top-reentry now also have a promoted measured motion contract, but
+  the live `WAIT` board still needs a tighter cabinet read before the whole
+  opening surface feels equally source-faithful
+- explosions and hit states now read better, and they now have frame-backed
+  source authority rather than only runtime improvement, but the live board
+  still needs tighter matching against those windows
 - palette progression is now more source-aligned in the opening slice, but the
   stage-owned color story is still partial rather than fully measured
 
 ### Still next
 
-- stronger measured starfield-motion and top-reentry windows so those surfaces
-  have the same evidence quality as the opening-rack motion contract
 - tighter runtime `WAIT`, title, mission, and score-table layout against the
   promoted Matt Hawkins frame windows
-- frame-backed explosion and hit reference crops so the new runtime feedback is
-  judged against committed source windows
+- tighter live hit/destruction-state matching against the promoted combat
+  reference windows
 - tighter palette progression and readiness-surface comparison beyond the
   opening family
 
@@ -195,11 +194,12 @@ This opening baseline exists to keep the work honest:
 
 1. Preserve the opening-source baseline as a committed artifact and hosted
    readable doc, not only as raw source manifests.
-2. Promote measured starfield-motion and top-reentry windows to the same
-   evidence class as the rack-motion contract.
-3. Tighten runtime `WAIT`, title, mission, and score-table layout against the
+2. Tighten runtime `WAIT`, title, mission, and score-table layout against the
    now-promoted Matt Hawkins frame windows.
-4. Promote frame-backed explosion and hit-state authority.
+3. Tighten live explosion, hit, and destruction-state matching against the
+   promoted Arcade's Lounge frame windows.
+4. Strengthen palette progression and swarm color-family authority beyond the
+   first corrected slice.
 5. Only after those land, spend heavier effort on stage `3-5` and `6-9`
    pressure tuning.
 

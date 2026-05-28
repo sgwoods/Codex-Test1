@@ -1,0 +1,33 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "platform-frame-parity",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-28",
+  "status": "shared-platform-frame-parity-contract",
+  "purpose": "Track the shared Platinum support surfaces Guardians should inherit as naturally as Aurora: pilot sign-in, score save and failure reporting, replay and video-prep language, pilot-card identity, and game-owned arcade-music wiring.",
+  "requiredHarnessScripts": [
+    "harness:check:remote-score-submit",
+    "harness:check:pilot-records-panel",
+    "harness:check:documentation-freshness"
+  ],
+  "requiredSharedCopyHelpers": [
+    "platformGameTitle",
+    "topScoreSavedLocallyPromptText",
+    "topScoreSigninPromptText",
+    "remoteScoreFailureCopy"
+  ],
+  "requiredPackPhrases": [
+    "Galaxy Guardians arcade music",
+    "Shared Platinum sign-in, score, replay, bug-report, music, and release shell support"
+  ],
+  "capabilityTargets": [
+    "pilot sign-in and top-score claim language should be game-aware",
+    "online score failure prompts should be game-aware and bug-report ready",
+    "replay and future video-posting language should be framed as shared platform support, not Aurora-only behavior",
+    "the game should advertise its own arcade music override while still using Platinum controls"
+  ],
+  "harness": {
+    "script": "tools/harness/check-galaxy-guardians-platform-frame-parity.js",
+    "npmScript": "npm run harness:check:galaxy-guardians-platform-frame-parity"
+  }
+}

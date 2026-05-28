@@ -131,7 +131,7 @@ async function main(){
     if(!failedEntry){
       fail('failed remote score submit should be persisted in the local system log', failure);
     }
-    if(!/online score save failed/i.test(failure.prefill.summary || '')){
+    if(!/online(?: .+)? score save failed/i.test(failure.prefill.summary || '')){
       fail('failed remote score submit should prefill the bug-report summary', failure);
     }
     const payload = failure.feedbackPayload || {};

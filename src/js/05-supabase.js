@@ -324,7 +324,14 @@ if(msg)msg.addEventListener('click',e=>{
  if(!btn)return;
  e.preventDefault();
  e.stopPropagation();
- if(typeof setAccountNotice==='function')setAccountNotice('Sign in to claim this top-10 score, tie the replay to your pilot, and prepare it for future video posting.');
+ const gameTitle=typeof platformGameTitle==='function'
+  ? platformGameTitle(gameOverState?.gameKey||'',gameOverState?.gameTitle||'')
+  : String(gameOverState?.gameTitle||'').trim();
+ if(typeof setAccountNotice==='function')setAccountNotice(
+  typeof topScoreSigninPromptText==='function'
+   ? topScoreSigninPromptText(gameTitle)
+   : `Sign in to claim this ${gameTitle||'top-10'} score, tie the replay to your pilot, and prepare verified video posting.`
+ );
  if(typeof logEvent==='function')logEvent('top_score_signin_prompt_opened',{
   rank:+(gameOverState?.rank||0),
   score:+(gameOverState?.score||0),

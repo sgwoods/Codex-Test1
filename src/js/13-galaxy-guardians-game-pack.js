@@ -15,18 +15,18 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
   group:'guardians-preview',
  starfield:Object.freeze({
    id:'guardians-signal-stars',
-   count:104,
+   count:116,
    sizeMin:.78,
-   sizeMax:1.48,
-   alphaMin:.38,
+   sizeMax:1.58,
+   alphaMin:.34,
    alphaMax:.92,
-   twinkleMin:.8,
-   twinkleAmp:.2,
-   speedMin:14,
-   speedMax:32,
-   driftMin:-6,
-   driftMax:6,
-   palette:Object.freeze(['#fffdf0','#ffe26a','#ff5b5b','#7bd6ff','#5a6dff','#f6f0ff'])
+   twinkleMin:.78,
+   twinkleAmp:.22,
+   speedMin:18,
+   speedMax:38,
+   driftMin:-9,
+   driftMax:9,
+   palette:Object.freeze(['#fffdf0','#ffe26a','#ff5b5b','#7bd6ff','#5a6dff','#ffd4a8','#f6f0ff'])
   }),
   previewPalettes:Object.freeze({
    'signal-flagship':Object.freeze({core:'#ffd86d',wing:'#ff5b5b',accent:'#5ea8ff',eye:'#fff7c2',flare:'#fff2a4'}),
@@ -49,18 +49,18 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
   group:'guardians-preview',
  starfield:Object.freeze({
    id:'guardians-escort-pursuit',
-    count:108,
-   sizeMin:.8,
-   sizeMax:1.5,
+    count:120,
+   sizeMin:.78,
+   sizeMax:1.56,
    alphaMin:.34,
    alphaMax:.9,
    twinkleMin:.78,
-   twinkleAmp:.2,
-   speedMin:16,
-   speedMax:34,
-   driftMin:-7,
-   driftMax:7,
-   palette:Object.freeze(['#fff4dc','#ffd86d','#ff8c5a','#7bd6ff','#59a8ff','#d8f0ff'])
+   twinkleAmp:.22,
+   speedMin:19,
+   speedMax:40,
+   driftMin:-8,
+   driftMax:8,
+   palette:Object.freeze(['#fff4dc','#ffd86d','#ff8c5a','#7bd6ff','#59a8ff','#d8f0ff','#fff8d9'])
   }),
   previewPalettes:Object.freeze({
    'signal-flagship':Object.freeze({core:'#ffe49c',wing:'#ff8c5a',accent:'#7bd6ff',eye:'#fff7c2',flare:'#ffdf6f'}),
@@ -257,7 +257,7 @@ const GUARDIANS_AUDIO_THEMES=Object.freeze({
    stageAdvance:Object.freeze({seq:[494,659,784],step:.044,wave:'square',volume:.0105,slide:18,lpHz:3600}),
    wrapReturn:Object.freeze({tones:Object.freeze([{freq:150,duration:.18,wave:'triangle',volume:.0065,slide:210,lpHz:2100},{freq:360,duration:.10,wave:'square',volume:.0045,slide:120,lpHz:3000,delay:.08}])}),
    playerLoss:Object.freeze({tones:Object.freeze([{freq:2370,duration:.066,wave:'square',volume:.017,slide:-760,lpHz:5200},{freq:1680,duration:.11,wave:'square',volume:.014,slide:-540,detune:-.004,lpHz:3900,delay:.03},{freq:1100,duration:.095,wave:'square',volume:.009,slide:-320,lpHz:2800,delay:.13}]),noise:Object.freeze([{duration:.13,volume:.011,hp:1150,delay:.008}])}),
-   scoutHit:Object.freeze({tones:Object.freeze([{freq:1520,duration:.022,wave:'square',volume:.0142,slide:-620,detune:.004,lpHz:5600},{freq:1080,duration:.032,wave:'square',volume:.0078,slide:-430,detune:-.003,lpHz:4200,delay:.01}]),noise:Object.freeze([{duration:.024,volume:.0042,hp:2400,delay:.001}])}),
+   scoutHit:Object.freeze({tones:Object.freeze([{freq:1220,duration:.016,wave:'square',volume:.0142,slide:-540,detune:.004,lpHz:5200},{freq:880,duration:.024,wave:'square',volume:.0078,slide:-360,detune:-.003,lpHz:3900,delay:.008}]),noise:Object.freeze([{duration:.02,volume:.0042,hp:2200,delay:.001}])}),
    escortHit:Object.freeze({tones:Object.freeze([{freq:2080,duration:.042,wave:'square',volume:.015,slide:-660,detune:.004,lpHz:5400},{freq:1520,duration:.052,wave:'square',volume:.0075,slide:-420,detune:-.004,lpHz:3800,delay:.014}]),noise:Object.freeze([{duration:.032,volume:.0038,hp:1900,delay:.004}])}),
    flagshipHit:Object.freeze({tones:Object.freeze([{freq:2560,duration:.05,wave:'square',volume:.016,slide:-780,detune:.004,lpHz:6200},{freq:1900,duration:.072,wave:'square',volume:.009,slide:-520,detune:-.003,lpHz:4600,delay:.016},{freq:1450,duration:.062,wave:'square',volume:.0064,slide:-340,detune:.003,lpHz:3400,delay:.054}]),noise:Object.freeze([{duration:.05,volume:.0048,hp:1700,delay:.006}])}),
    enemyHit:Object.freeze({tones:Object.freeze([{freq:246,duration:.055,wave:'square',volume:.012,slide:-210,lpHz:3300}])}),
@@ -474,7 +474,7 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
   highlights:Object.freeze([
    'Scout-wave formation pressure with flagship escorts',
    'Single-shot arcade pacing and wrap-around threat planning',
-   'Shared Platinum controls, services, replay, and release shell'
+   'Shared Platinum sign-in, score, replay, bug-report, music, and release shell support'
   ]),
   milestones:Object.freeze([
    Object.freeze({label:'Pack identity and shell preview',state:'online'}),

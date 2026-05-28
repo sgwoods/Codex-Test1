@@ -28,10 +28,16 @@ Current artifacts:
   comparison between the Galaxian reference windows and Guardians cue shapes.
 - `attract-score-surface-0.1.json` - first visible wait-mode and preview-modal
   surface contract for Guardians mission language and score-table presentation.
+- `combat-feedback-frame-reference-0.1.json` - promoted frame-window authority
+  for player-shot, lower-field hit, and level-clear destruction readability
+  using the committed Arcade's Lounge level-5 windows.
 - `opening-slice-frame-reference-0.1.json` - Guardians-owned promoted
   frame-window authority for the opening mission text, score-advance table,
   and wrap-return pressure using the extracted Matt Hawkins and Nenriki
   reference windows.
+- `opening-slice-motion-targets-0.1.json` - measured starfield and top-reentry
+  contract that keeps the visible opening board motion tied to the promoted
+  Nenriki wrap-return window and the runtime-reference movement artifact.
 - `candidate-0.1.json` - aggregate 0.1 candidate gate tying the identity,
   movement, threat, visual, audio, runtime-event, and public-boundary
   requirements together.
@@ -53,6 +59,9 @@ Current artifacts:
 - `playtest-conformance-review-0.1.json` - playtest-weighted score layer that
   records the current audio, motion, and graphics gaps separately from
   evidence-coverage scoring so beta-facing preview decisions stay honest.
+- `platform-frame-parity-0.1.json` - shared-Platinum support contract for
+  Guardians sign-in, score failure/reporting copy, replay/video-prep framing,
+  and arcade-music ownership.
 - `long-surface-conformance-0.1.json` - longer-surface and persona review layer
   that scores stage-band pressure, stage-presentation progression, deterministic
   review personas, and the current midrun survivability gap.

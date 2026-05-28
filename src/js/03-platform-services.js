@@ -7,6 +7,35 @@ function nonProductionAccountSummary(){
  if(testAccountEnabled())return `Test pilot lane active for ${configuredTestPilotLabel()}. Shared scores stay read-only unless one of those pilots is signed in.`;
  return 'Pilot account is disabled in this lane. Shared scores are read-only; your runs save locally on this device.';
 }
+function platformGameTitle(gameKey='',fallback=''){
+ const normalizedFallback=String(fallback||'').trim();
+ const normalizedKey=String(gameKey||'').trim();
+ if(normalizedKey&&typeof scoreGameTitleForKey==='function'){
+  const resolved=String(scoreGameTitleForKey(normalizedKey,normalizedFallback)||'').trim();
+  if(resolved)return resolved;
+ }
+ if(typeof currentScoreStorageGameTitle==='function'){
+  const active=String(currentScoreStorageGameTitle()||'').trim();
+  if(active)return active;
+ }
+ return normalizedFallback||'this game';
+}
+function topScoreSavedLocallyPromptText(gameTitle=''){
+ const label=platformGameTitle('',gameTitle);
+ return `Top-10 ${label} run saved locally. Sign in to post the replay, claim a verified score, and prepare video posting.`;
+}
+function topScoreSigninPromptText(gameTitle=''){
+ const label=platformGameTitle('',gameTitle);
+ return `Sign in to claim this ${label} top-10 score, tie the replay to your pilot, and prepare verified video posting.`;
+}
+function remoteScoreFailureCopy(gameTitle=''){
+ const label=platformGameTitle('',gameTitle);
+ return{
+  summary:`Online ${label} score save failed`,
+  description:`A signed-in ${label} score was saved locally but could not be written to the shared leaderboard.`,
+  prompt:`Online ${label} score save failed. Submit a bug report with the replay and system log.`
+ };
+}
 function setAccountNotice(text=''){
  LEADERBOARD.accountNotice=String(text||'').trim();
 }

@@ -166,16 +166,17 @@ The promoted frame windows now give these surfaces real opening authority, but
 the live runtime is still a tighter Guardians-owned adaptation rather than a
 closer four-row cabinet-matched score-table read.
 
-### 2. Starfield motion and top-reentry still need stronger measured targets
+### 2. Starfield motion and top-reentry now have their own measured contract
 
-The runtime now has visibly better motion in both areas, but they still do not
-have the same evidence weight as the rack-motion contract or the newly
-promoted opening frame windows.
+The runtime now has visibly better motion in both areas, and those surfaces now
+have their own durable measured target contract tied to the promoted Nenriki
+wrap-return window and the runtime-reference movement artifact.
 
-### 3. Explosion and hit states are still under-authoritative
+### 3. Explosion and hit states now have frame authority but still need tighter live matching
 
-Combat now reads better than before, but hit/destruction states still need
-frame-backed source authority.
+Combat now reads better than before, and hit/destruction states now cite
+promoted Arcade's Lounge windows. The next step is tighter live matching, not
+inventing authority from scratch.
 
 ### 4. Palette progression and swarm color authority are still partial
 
@@ -201,14 +202,13 @@ time and compute.
 
 1. Tighten the runtime `WAIT`, headline, mission, and score-table layout
    against the now-promoted opening frame windows.
-2. Promote stronger measured starfield-motion and top-reentry windows so those
-   surfaces have evidence parity with the rack-motion contract.
-3. Promote frame-backed explosion, hit, and destruction-state reference crops.
-4. Tighten opening palette progression and swarm color-family authority beyond
+2. Tighten the live explosion, hit, and destruction-state matching against the
+   promoted combat-reference windows.
+3. Tighten opening palette progression and swarm color-family authority beyond
    the first improved slice.
-5. Add real Aurora-versus-Guardians platform-frame parity scoring and finish the
+4. Add real Aurora-versus-Guardians platform-frame parity scoring and finish the
    shared frame work.
-6. After the visible opening slice is credible, continue into stage `3-5`
+5. After the visible opening slice is credible, continue into stage `3-5`
    pressure traces and stage `6-9` survivability/fairness.
 
 ## Best Quality Work On This Machine Now
@@ -218,15 +218,13 @@ quality, hosted readability, and beta honesty.
 
 1. Tighten the runtime `WAIT`, headline, mission, and score-table layout
    against the promoted Matt Hawkins frame windows.
-2. Promote measured starfield-motion and top-reentry windows so those surfaces
-   stop depending mainly on prose and human review.
-3. Promote frame-backed explosion, hit, and destruction-state crops so combat
-   readability has the same authority as the opening copy surfaces.
-4. Tighten opening palette progression and swarm color-family authority so the
+2. Tighten live explosion, hit, and destruction-state matching so combat
+   readability fully earns the new frame-backed authority.
+3. Tighten opening palette progression and swarm color-family authority so the
    first seconds of play read as intentional rather than broadly “Galaxian-ish.”
-5. Finish Platinum-frame parity for Guardians across sign-in, scores, pilot
+4. Finish Platinum-frame parity for Guardians across sign-in, scores, pilot
    card, replay/video capture, bug reports, and music/sound controls.
-6. Use hosted `/dev` as the real review lane after each meaningful pass instead
+5. Use hosted `/dev` as the real review lane after each meaningful pass instead
    of waiting to batch too many local-only improvements together.
 
 ## Recommended Machine Split

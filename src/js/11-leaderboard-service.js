@@ -182,6 +182,13 @@ async function submitScoreRemote(entry){
  try{
   const {error}=await LEADERBOARD.client.from('scores').insert(payload);
   if(error){
+   const failureCopy=typeof remoteScoreFailureCopy==='function'
+    ? remoteScoreFailureCopy(gameTitle)
+    : {
+      summary:'Online score save failed',
+      description:'A signed-in score was saved locally but could not be written to the online leaderboard.',
+      prompt:'Online score save failed. Please submit a bug report.'
+     };
    if(typeof recordSystemIssue==='function'){
     recordSystemIssue('score_submit_failed',String(error.message||error)||'Remote score insert failed',{
      score:payload.score,
@@ -194,9 +201,9 @@ async function submitScoreRemote(entry){
     },{
      level:'error',
      suggestBugReport:1,
-     summary:'Online score save failed',
-     description:'A signed-in score was saved locally but could not be written to the online leaderboard.',
-     prompt:'Online score save failed. Please submit a bug report.'
+     summary:failureCopy.summary,
+     description:failureCopy.description,
+     prompt:failureCopy.prompt
     });
    }
    setLeaderboardStatus('Saved locally only · online submit failed');
@@ -213,8 +220,15 @@ async function submitScoreRemote(entry){
     gameKey,
     gameTitle
    },{level:'info'});
-  }
- }catch(err){
+ }
+}catch(err){
+  const failureCopy=typeof remoteScoreFailureCopy==='function'
+   ? remoteScoreFailureCopy(gameTitle)
+   : {
+     summary:'Online score save failed',
+     description:'A signed-in score was saved locally but could not be written to the online leaderboard.',
+     prompt:'Online score save failed. Please submit a bug report.'
+    };
   if(typeof recordSystemIssue==='function'){
     recordSystemIssue('score_submit_failed',String(err?.message||err||'Remote score submit threw unexpectedly'),{
      score:payload.score,
@@ -227,9 +241,9 @@ async function submitScoreRemote(entry){
     },{
     level:'error',
     suggestBugReport:1,
-    summary:'Online score save failed',
-    description:'A signed-in score was saved locally but could not be written to the online leaderboard.',
-    prompt:'Online score save failed. Please submit a bug report.'
+    summary:failureCopy.summary,
+    description:failureCopy.description,
+    prompt:failureCopy.prompt
    });
   }
   setLeaderboardStatus('Saved locally only · online submit failed');
@@ -266,20 +280,32 @@ function submitGameOverScore(){
   .then(ok=>{targetState.remoteSubmitted=ok?1:0;})
   .catch(err=>{
    targetState.remoteSubmitted=0;
+   const gameKey=typeof normalizeScoreRecordGameKey==='function'
+    ? normalizeScoreRecordGameKey(entry.gameKey||currentScoreStorageGameKey())
+    : String(entry.gameKey||'aurora-galactica').trim()||'aurora-galactica';
+   const gameTitle=typeof scoreGameTitleForKey==='function'
+    ? scoreGameTitleForKey(gameKey,entry.gameTitle||'')
+    : String(entry.gameTitle||'').trim();
+   const failureCopy=typeof remoteScoreFailureCopy==='function'
+    ? remoteScoreFailureCopy(gameTitle)
+    : {
+      summary:'Online score save failed',
+      description:'A signed-in score was saved locally but the online leaderboard submit rejected unexpectedly.',
+      prompt:'Online score save failed. Please submit a bug report.'
+     };
    if(typeof recordSystemIssue==='function'){
     recordSystemIssue('score_submit_failed',String(err?.message||err||'Remote score submit promise rejected'),{
      score:+entry.score|0,
      stage:+entry.stage|0,
      initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3),
-     gameKey:typeof normalizeScoreRecordGameKey==='function'
-      ? normalizeScoreRecordGameKey(entry.gameKey||currentScoreStorageGameKey())
-      : String(entry.gameKey||'aurora-galactica').trim()||'aurora-galactica'
+     gameKey,
+     gameTitle
     },{
      level:'error',
      suggestBugReport:1,
-     summary:'Online score save failed',
-     description:'A signed-in score was saved locally but the online leaderboard submit rejected unexpectedly.',
-     prompt:'Online score save failed. Please submit a bug report.'
+     summary:failureCopy.summary,
+     description:failureCopy.description,
+     prompt:failureCopy.prompt
     });
    }
   })

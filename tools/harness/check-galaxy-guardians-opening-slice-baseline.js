@@ -45,9 +45,11 @@ function main(){
     'harness:check:galaxy-guardians-opening-slice-baseline',
     'harness:check:galaxy-guardians-opening-slice-source-baseline',
     'harness:check:galaxy-guardians-opening-slice-frame-reference',
+    'harness:check:galaxy-guardians-opening-slice-motion-targets',
     'harness:check:galaxy-guardians-opening-slice-render-surface',
     'harness:check:galaxy-guardians-opening-rack-motion',
     'harness:check:galaxy-guardians-attract-score-surface',
+    'harness:check:galaxy-guardians-combat-feedback-frame-reference',
     'harness:check:galaxy-guardians-formation-entry',
     'harness:check:galaxy-guardians-movement-pacing',
     'harness:check:galaxy-guardians-runtime-reference-movement',
@@ -126,9 +128,9 @@ function main(){
 
   const referencePromotions = reference.nextMetricPromotions || [];
   const requiredPromotions = [
-    'Opening-slice baseline artifact package and scored gate for WAIT, score table, rack march cadence, explosions, palettes, starfield, reserve ships, missile-ready state, flags, and top re-entry.',
-    'Measured opening-slice motion pass for rack march cadence, starfield motion, and bottom-pass-through top re-entry against Matt Hawkins and Nenriki sources.',
-    'Platform-frame parity pass for sign-in, high scores, pilot card, replay/video capture, bug reports, and music/sound controls.'
+    'Tighten the live WAIT/title/mission/score-table layout against the promoted Matt Hawkins frame windows.',
+    "Promote frame-backed explosion and hit-state authority from the committed Arcade's Lounge windows so combat flashes stop reading as proxy-only.",
+    'Strengthen palette progression and swarm color-family authority beyond the opening slice so later stage bands read as deliberate Guardians presentation.'
   ];
   const missingPromotions = requiredPromotions.filter(item => !referencePromotions.includes(item));
   if(missingPromotions.length){

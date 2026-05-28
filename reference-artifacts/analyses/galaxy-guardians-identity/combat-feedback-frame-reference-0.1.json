@@ -1,0 +1,70 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "combat-feedback-frame-reference",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-28",
+  "status": "promoted-frame-window-combat-feedback-authority",
+  "purpose": "Promote frame-window authority for the current Guardians hit, shot, dive, and destruction readability work so combat feedback is grounded in source windows rather than only judged from the live runtime board.",
+  "sourceWindows": {
+    "playerSingleShotPressure": {
+      "sourceId": "arcades-lounge-level-5",
+      "windowId": "player-single-shot-pressure",
+      "frameIndex": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/player-single-shot-pressure/frame-index.json",
+      "contactSheet": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/player-single-shot-pressure/contact-sheet.jpg",
+      "motionDifferenceSheet": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/player-single-shot-pressure/motion-difference-sheet.jpg",
+      "sampleReadPoints": [
+        {
+          "label": "single-shot and thin player-missile readability",
+          "tSourceSeconds": 21.1
+        },
+        {
+          "label": "player-shot and hit timing under live rack pressure",
+          "tSourceSeconds": 24.4
+        }
+      ]
+    },
+    "lowerFieldDiveCurves": {
+      "sourceId": "arcades-lounge-level-5",
+      "windowId": "lower-field-dive-curves",
+      "frameIndex": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/frame-index.json",
+      "contactSheet": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/contact-sheet.jpg",
+      "motionDifferenceSheet": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/motion-difference-sheet.jpg",
+      "sampleReadPoints": [
+        {
+          "label": "lower-field dive visibility with readable impact windows",
+          "tSourceSeconds": 21.2
+        },
+        {
+          "label": "flagship or escort hit break under dive pressure",
+          "tSourceSeconds": 34.6
+        }
+      ]
+    },
+    "levelClearTransition": {
+      "sourceId": "arcades-lounge-level-5",
+      "windowId": "level-clear-transition",
+      "frameIndex": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/level-clear-transition/frame-index.json",
+      "contactSheet": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/level-clear-transition/contact-sheet.jpg",
+      "motionDifferenceSheet": "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/level-clear-transition/motion-difference-sheet.jpg",
+      "sampleReadPoints": [
+        {
+          "label": "destroy-state and rack-clear breakup readability",
+          "tSourceSeconds": 47.3
+        },
+        {
+          "label": "late clear-transition hold before the next rack",
+          "tSourceSeconds": 50.1
+        }
+      ]
+    }
+  },
+  "expectedRuntimeRead": [
+    "player single shot stays thin and dry while the hit break remains readable",
+    "lower-field dive and impact moments stay legible at live board scale",
+    "destroy-state and rack-clear breakups should read as source-family flashes, not generic particles"
+  ],
+  "harness": {
+    "script": "tools/harness/check-galaxy-guardians-combat-feedback-frame-reference.js",
+    "npmScript": "npm run harness:check:galaxy-guardians-combat-feedback-frame-reference"
+  }
+}

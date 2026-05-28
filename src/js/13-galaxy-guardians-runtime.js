@@ -193,9 +193,9 @@ function guardiansBeginTopReentry(state,alien){
  alien.mode='wrapping';
  alien.diveT=0;
  alien.wrapStartX=Math.max(16,Math.min(rules.playfieldWidth-16,alien.x));
- alien.wrapStartY=-Math.max(20,rules.bottomExitPadding+alien.row*3.6);
+ alien.wrapStartY=-Math.max(26,rules.bottomExitPadding+alien.row*4.4);
  alien.wrapTargetX=alien.rackX+alien.diveSide*7;
- alien.wrapSweepX=alien.wrapStartX+alien.diveSide*13;
+ alien.wrapSweepX=alien.wrapStartX+alien.diveSide*16;
  alien.wrapTargetY=alien.rackY;
  alien.x=alien.wrapStartX;
  alien.y=alien.wrapStartY;

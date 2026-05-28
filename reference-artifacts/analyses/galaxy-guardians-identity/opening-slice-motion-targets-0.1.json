@@ -1,0 +1,45 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "opening-slice-motion-targets",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-28",
+  "status": "source-window-backed-opening-motion-targets",
+  "purpose": "Promote measured opening-board motion targets for the live starfield and the visible bottom-pass-through to top-reentry threat so those surfaces are guarded with the same durability as the rack-march pass.",
+  "sourceEvidence": {
+    "frameReferenceArtifact": "reference-artifacts/analyses/galaxy-guardians-identity/opening-slice-frame-reference-0.1.json",
+    "renderSurfaceArtifact": "reference-artifacts/analyses/galaxy-guardians-identity/opening-slice-render-surface-0.1.json",
+    "runtimeReferenceMovementArtifact": "reference-artifacts/analyses/galaxy-guardians-identity/runtime-reference-movement-0.1.json",
+    "primarySourceWindow": {
+      "sourceId": "nenriki-15-wave-session",
+      "windowId": "wrap-return-pressure",
+      "summary": "Use the promoted Nenriki wrap-return window as the baseline for continuous lower-field threat, visible bottom exit, and top re-entry that reads as part of the same pressure loop."
+    }
+  },
+  "renderContract": {
+    "minimumStarfieldCount": 112,
+    "minimumStarfieldLeadTravelPxBetweenSamples": 6,
+    "maximumTopReentryLeadY": -26
+  },
+  "runtimeMovementContract": {
+    "minimumRuntimeReferenceMovementScore10": 8,
+    "maximumFirstWrapTSeconds": 7.2,
+    "minimumWrapCountByFourteenSeconds": 7,
+    "medianCandidateXSpanBand": [
+      0.32,
+      0.36
+    ],
+    "medianCandidateYSpanBand": [
+      0.44,
+      0.48
+    ]
+  },
+  "expectedRuntimeRead": [
+    "the starfield should look alive before the first dive pressure arrives",
+    "bottom-pass-through threat should reappear clearly from above the board instead of snapping back in place",
+    "wrap-return pressure should stay part of the same opening board grammar as the shared rack march"
+  ],
+  "harness": {
+    "script": "tools/harness/check-galaxy-guardians-opening-slice-motion-targets.js",
+    "npmScript": "npm run harness:check:galaxy-guardians-opening-slice-motion-targets"
+  }
+}

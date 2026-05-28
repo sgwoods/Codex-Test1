@@ -103,9 +103,11 @@ const REQUIRED_SCRIPT_GROUPS = {
     'harness:check:galaxy-guardians-opening-slice-baseline',
     'harness:check:galaxy-guardians-opening-slice-source-baseline',
     'harness:check:galaxy-guardians-opening-slice-frame-reference',
+    'harness:check:galaxy-guardians-opening-slice-motion-targets',
     'harness:check:galaxy-guardians-opening-slice-render-surface',
     'harness:check:galaxy-guardians-opening-rack-motion',
-    'harness:check:galaxy-guardians-attract-score-surface'
+    'harness:check:galaxy-guardians-attract-score-surface',
+    'harness:check:galaxy-guardians-combat-feedback-frame-reference'
   ],
   visual: [
     'harness:check:galaxy-guardians-visual-readability',
@@ -127,6 +129,11 @@ const REQUIRED_SCRIPT_GROUPS = {
     'harness:analyze:galaxy-guardians-long-surface-conformance',
     'harness:check:galaxy-guardians-long-surface-conformance'
   ],
+  platformFrame: [
+    'harness:check:galaxy-guardians-platform-frame-parity',
+    'harness:check:remote-score-submit',
+    'harness:check:pilot-records-panel'
+  ],
   boundary: [
     'harness:check:gameplay-adapter-boundaries',
     'harness:check:platinum-pack-boot',
@@ -135,9 +142,9 @@ const REQUIRED_SCRIPT_GROUPS = {
 };
 
 const REQUIRED_PROMOTIONS = [
-  'Opening-slice baseline artifact package and scored gate for WAIT, score table, rack march cadence, explosions, palettes, starfield, reserve ships, missile-ready state, flags, and top re-entry.',
-  'Measured opening-slice motion pass for rack march cadence, starfield motion, and bottom-pass-through top re-entry against Matt Hawkins and Nenriki sources.',
-  'Platform-frame parity pass for sign-in, high scores, pilot card, replay/video capture, bug reports, and music/sound controls.',
+  'Tighten the live WAIT/title/mission/score-table layout against the promoted Matt Hawkins frame windows.',
+  'Promote frame-backed explosion and hit-state authority from the committed Arcade\'s Lounge windows so combat flashes stop reading as proxy-only.',
+  'Strengthen palette progression and swarm color-family authority beyond the opening slice so later stage bands read as deliberate Guardians presentation.',
   'Measured later-band fairness pass for stage-five-and-beyond collision stability and clear consistency.',
   'Selective audio cue cleanup only after the opening-slice and motion passes expose the next highest-value audible miss.'
 ];
@@ -301,6 +308,9 @@ function main(){
   for(const relPath of [
     'reference-artifacts/analyses/galaxy-guardians-identity/attract-score-surface-0.1.json',
     'reference-artifacts/analyses/galaxy-guardians-identity/audio-character-0.1.json',
+    'reference-artifacts/analyses/galaxy-guardians-identity/combat-feedback-frame-reference-0.1.json',
+    'reference-artifacts/analyses/galaxy-guardians-identity/opening-slice-motion-targets-0.1.json',
+    'reference-artifacts/analyses/galaxy-guardians-identity/platform-frame-parity-0.1.json',
     'reference-artifacts/analyses/galaxy-guardians-identity/score-progression-0.1.json',
     'reference-artifacts/analyses/galaxy-guardians-identity/visual-readability-0.1.json'
   ]){

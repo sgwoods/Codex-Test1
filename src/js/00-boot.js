@@ -1428,13 +1428,22 @@ function hitMissRatio(stats){
  if(!stats?.shots)return 0;
  return Math.round((stats.hits/stats.shots)*100);
 }
+function formatGameResultContextLine(opts={}){
+ const gameTitle=String(opts.gameTitle||'').trim();
+ if(!gameTitle)return '';
+ const outcome=String(opts.outcome||'').trim();
+ if(outcome==='mission_complete')return `${gameTitle.toUpperCase()} SCOUT-WAVE SUMMARY`;
+ if(outcome==='game_over')return `${gameTitle.toUpperCase()} RUN SUMMARY`;
+ return `${gameTitle.toUpperCase()} RESULTS`;
+}
 function buildResultsHtml(stats,score,stage,challenge=isChallengeStage(stage),opts={}){
  const shots=Math.max(0,stats?.shots|0),hits=Math.max(0,stats?.hits|0),ratio=hitMissRatio(stats);
  const title=String(opts.title||'GAME OVER').trim()||'GAME OVER';
  const sub=String(opts.sub||'RESULTS').trim()||'RESULTS';
+ const contextLine=String(opts.contextLine||'').trim();
  const playerTwo=typeof buildPlayerTwoResultsHtml==='function'?buildPlayerTwoResultsHtml():'';
  const watch=S.watchMode?`<span class="playerTwoResult"><span>WATCH MODE   ${S.watchPersona?`${watchModePersonaLabel(S.watchPersona)} PILOT`:''}</span><span>SCORE NOT RECORDED</span></span>`:'';
- return `<span class="gameOverTitle">${title}</span><span class="gameOverSub">${sub}</span><span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">STAGE</span><span class="resultsValue">${formatDisplayedStage(stage,challenge)}</span></span>${watch}${playerTwo}<span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
+ return `<span class="gameOverTitle">${title}</span><span class="gameOverSub">${sub}</span>${contextLine?`<span class="gameOverMeta">${contextLine}</span>`:''}<span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">STAGE</span><span class="resultsValue">${formatDisplayedStage(stage,challenge)}</span></span>${watch}${playerTwo}<span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
 }
 function recordScore(score,stage,initials='YOU'){
  const gameKey=currentScoreStorageGameKey();
@@ -1482,9 +1491,13 @@ function saveGameOverInitials(){
 function buildGameOverHtmlFromState(){
  if(!gameOverState)return '';
  if(gameOverState.phase==='results'){
-  return buildResultsHtml(gameOverState.stats,gameOverState.score,gameOverState.stage,gameOverState.challenge,{
+ return buildResultsHtml(gameOverState.stats,gameOverState.score,gameOverState.stage,gameOverState.challenge,{
    title:gameOverState.resultTitle||'GAME OVER',
-   sub:gameOverState.resultSub||'RESULTS'
+   sub:gameOverState.resultSub||'RESULTS',
+   contextLine:formatGameResultContextLine({
+    gameTitle:gameOverState.gameTitle||'',
+    outcome:gameOverState.outcome||''
+   })
   });
  }
  const board=leaderboardRowsForView();
@@ -1493,7 +1506,10 @@ function buildGameOverHtmlFromState(){
  const rankTxt=gameOverState.rank?`YOUR RANK ${String(gameOverState.rank).padStart(2,'0')}`:'SCORE NOT IN TOP 10';
  const boardTitle=currentLeaderboardTitle();
  let entryHtml='';
- const authPromptHtml=gameOverState.topScoreSigninPrompt?'<span class="gameOverAuthPrompt">Top-10 run saved locally. Sign in to post your replay, claim a verified score, and prepare future video posting. <button type="button" class="gameOverAuthBtn">Pilot Sign In</button></span>':'';
+ const authPromptText=typeof topScoreSavedLocallyPromptText==='function'
+  ? topScoreSavedLocallyPromptText(gameOverState.gameTitle||'')
+  : 'Top-10 run saved locally. Sign in to post the replay, claim a verified score, and prepare video posting.';
+ const authPromptHtml=gameOverState.topScoreSigninPrompt?`<span class="gameOverAuthPrompt">${authPromptText} <button type="button" class="gameOverAuthBtn">Pilot Sign In</button></span>`:'';
  let footHtml='<span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to play again</span>';
  if(gameOverState.editing){
   const shown=gameOverState.initials.map((ch,i)=>`<span class="entrySlot${i===gameOverState.cursor?' entryCursor':''}">${ch||'_'}</span>`).join('');
@@ -1524,12 +1540,15 @@ function buildGameOverState(score,stage,challenge=0,opts={}){
    stage:stage|0,
    challenge:!!challenge,
    shownStage,
+   gameKey:currentScoreStorageGameKey(),
+   gameTitle:currentScoreStorageGameTitle(),
    stats:{shots:S.stats.shots|0,hits:S.stats.hits|0},
    initials:['-','-','-'],
    cursor:0,
    editing:false,
    watchMode:!!S.watchMode,
    playerTwoMode,
+   outcome,
    resultTitle,
    resultSub,
    topScoreSigninPrompt:false,
