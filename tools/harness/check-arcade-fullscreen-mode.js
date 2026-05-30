@@ -8,7 +8,6 @@ function fail(message, details = {}){
 
 (async () => {
   const result = await withHarnessPage({
-    skipStart: true,
     seed: 73101,
     viewport: { width: 1280, height: 900 }
   }, async ({ page }) => {
@@ -25,6 +24,10 @@ function fail(message, details = {}){
         shellDisplay: getComputedStyle(document.getElementById('cabinetShell')).display,
         leftRailDisplay: getComputedStyle(document.getElementById('cabinetLeftFrame')).display,
         rightRailDisplay: getComputedStyle(document.getElementById('cabinetRightFrame')).display,
+        frameBackground: getComputedStyle(document.getElementById('playfieldFrame')).backgroundColor,
+        framePointerEvents: getComputedStyle(document.getElementById('playfieldFrame')).pointerEvents,
+        playerBounds: window.__platinumRenderDebug?.playerBounds || null,
+        reserveShipBounds: window.__platinumRenderDebug?.reserveShipBounds || [],
         frameRect: document.getElementById('playfieldFrame').getBoundingClientRect()
       };
       api.setMode(false, { source: 'harness', exitBrowser: false });
@@ -46,6 +49,15 @@ function fail(message, details = {}){
   if(!result.active.state.active || !result.active.bodyClass) fail('Arcade fullscreen active mode did not set layout state.', result);
   if(result.active.shellDisplay !== 'none' || result.active.leftRailDisplay !== 'none' || result.active.rightRailDisplay !== 'none'){
     fail('Arcade fullscreen active mode should hide cabinet shell and rails.', result);
+  }
+  if(result.active.frameBackground !== 'rgba(0, 0, 0, 0)'){
+    fail('Arcade fullscreen frame must stay transparent so it does not cover gameplay.', result);
+  }
+  if(result.active.framePointerEvents !== 'none'){
+    fail('Arcade fullscreen frame must not intercept playfield input.', result);
+  }
+  if(!result.active.playerBounds || !Number.isFinite(+result.active.playerBounds.left)){
+    fail('Arcade fullscreen did not render a measurable player fighter.', result);
   }
   if(result.active.frameRect.width < 680 || result.active.frameRect.height < 860){
     fail('Arcade fullscreen active mode did not expand the playfield enough for review.', result);
