@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "challenge-stage-candidate-sweep",
-  "generatedAt": "2026-05-30T21:51:53.597Z",
-  "commit": "56e319f29",
+  "generatedAt": "2026-05-30T22:07:13.251Z",
+  "commit": "46f19bc04",
   "branch": "codex/macbook-fullscreen-timing-alignment-wip",
   "stage": 7,
   "expectedLabel": "challenge-2-arrival-group-1",
@@ -109,15 +109,33 @@
     "noTargetVideoRegression": true,
     "noExpectedRegression": true,
     "intendedStageSupported": true,
+    "fullAnalyzerRisk": {
+      "pass": false,
+      "reason": "prior-full-analyzer-rejection",
+      "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+      "decision": "rejected-full-analyzer-regression",
+      "expectedLift10": 0.4,
+      "targetVideoObjectFitLift10": 1.5,
+      "trialDeltas": {
+        "summaryScore10": 0,
+        "summaryMovementScore10": -0.1,
+        "summaryTargetVideoObjectTrackFitScore10": -0.1,
+        "stageMovementScore10": 0,
+        "stageObjectScore10": -0.1,
+        "stageTargetFitScore10": -0.2
+      },
+      "read": "Rejected stage7-target-controls-shape-only-p3: the focused sweep found a narrow shape win, but the full analyzer did not confirm a player-facing improvement. Summary movement delta -0.1, target-video object-track delta -0.1, and Stage 7 target-fit delta -0.2 are not acceptable for runtime promotion."
+    },
+    "fullAnalyzerRejectionCount": 1,
     "lateStageIdentityPass": true,
     "identityTieSupported": true,
     "materialTargetVideoWin": true,
     "strongExpectedLift": false,
     "intendedStageSupportPolicy": "runtime promotion requires no expected-label regression unless the expected label remains the best match and target-video fit improves by >=0.55/10 with no more than -0.15/10 expected drift. It also requires the best trajectory match to be one of the expected stage labels, an expected-label tie within 0.05/10 with >=0.3 expected lift and >=0.15 target-video lift, or a strong expected-label score >=7 with >=0.5 expected lift, >=0.8 target-video lift, and an identity margin no worse than -0.35/10. For late challenge stages, candidates whose best match belongs to the wrong Galaga challenge number are explicitly penalized and blocked from promotion.",
-    "keeperDecision": "candidate-ready-for-full-analyzer-review",
-    "playerMeaning": "A measured stage-7 layout candidate is worth a temporary runtime review, but it must be confirmed by the full challenge-stage analyzer and persona guardrails before promotion.",
-    "processMeaning": "Future challenge tuning can now compare many runtime candidates against Galaga labels before editing game constants.",
-    "nextStep": "Apply the best candidate temporarily, rerun full challenge-stage conformance plus guardrails, and accept it only if the full analyzer confirms the expected lift."
+    "keeperDecision": "no-runtime-keeper-yet",
+    "playerMeaning": "This pass improved the search process more than the shipped game: no candidate earned enough measured lift to promote safely.",
+    "processMeaning": "Future challenge tuning can now reject candidates that look promising in a focused sweep but fail our recorded full-analyzer calibration: Rejected stage7-target-controls-shape-only-p3: the focused sweep found a narrow shape win, but the full analyzer did not confirm a player-facing improvement. Summary movement delta -0.1, target-video object-track delta -0.1, and Stage 7 target-fit delta -0.2 are not acceptable for runtime promotion.",
+    "nextStep": "Do not promote stage7-target-controls-shape-only-p3; strengthen the full-stage scorer or author a richer Stage 7 contract before another runtime trial."
   },
   "candidates": [
     {
@@ -701,6 +719,23 @@
           }
         ],
         "read": "Candidate target-video object-track fit 4.7/10 across 1/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "prior-full-analyzer-rejection",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": 1.5,
+        "trialDeltas": {
+          "summaryScore10": 0,
+          "summaryMovementScore10": -0.1,
+          "summaryTargetVideoObjectTrackFitScore10": -0.1,
+          "stageMovementScore10": 0,
+          "stageObjectScore10": -0.1,
+          "stageTargetFitScore10": -0.2
+        },
+        "read": "Rejected stage7-target-controls-shape-only-p3: the focused sweep found a narrow shape win, but the full analyzer did not confirm a player-facing improvement. Summary movement delta -0.1, target-video object-track delta -0.1, and Stage 7 target-fit delta -0.2 are not acceptable for runtime promotion."
       },
       "selectionScore10": 5.32
     },
@@ -1286,6 +1321,17 @@
         ],
         "read": "Candidate target-video object-track fit 4.6/10 across 1/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": 1.4,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift 1.4/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 5.29
     },
     {
@@ -1869,6 +1915,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 4.6/10 across 1/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": 1.4,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift 1.4/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 5.29
     },
@@ -2454,6 +2511,17 @@
         ],
         "read": "Candidate target-video object-track fit 4.6/10 across 1/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": 1.4,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift 1.4/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 5.29
     },
     {
@@ -3037,6 +3105,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 3.5/10 across 1/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0,
+        "targetVideoObjectFitLift10": 0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0/10 and target-video lift 0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.78
     },
@@ -3622,6 +3701,17 @@
         ],
         "read": "Candidate target-video object-track fit 3.5/10 across 1/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0,
+        "targetVideoObjectFitLift10": 0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0/10 and target-video lift 0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.78
     },
     {
@@ -4206,6 +4296,17 @@
         ],
         "read": "Candidate target-video object-track fit 3.5/10 across 1/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0,
+        "targetVideoObjectFitLift10": 0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0/10 and target-video lift 0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.78
     },
     {
@@ -4782,6 +4883,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 3.5/10 across 1/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0,
+        "targetVideoObjectFitLift10": 0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0/10 and target-video lift 0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.78
     },
@@ -5360,6 +5472,17 @@
         ],
         "read": "Candidate target-video object-track fit 3.5/10 across 1/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0,
+        "targetVideoObjectFitLift10": 0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0/10 and target-video lift 0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.78
     },
     {
@@ -5936,6 +6059,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 3.5/10 across 1/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0,
+        "targetVideoObjectFitLift10": 0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0/10 and target-video lift 0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.78
     },
@@ -6526,6 +6660,17 @@
         ],
         "read": "Candidate target-video object-track fit 3.5/10 across 1/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0,
+        "targetVideoObjectFitLift10": 0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0/10 and target-video lift 0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.78
     },
     {
@@ -7114,6 +7259,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 3.5/10 across 1/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0,
+        "targetVideoObjectFitLift10": 0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0/10 and target-video lift 0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.78
     },
@@ -7704,6 +7860,17 @@
         ],
         "read": "Candidate target-video object-track fit 3.5/10 across 1/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0,
+        "targetVideoObjectFitLift10": 0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0/10 and target-video lift 0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.78
     },
     {
@@ -8288,6 +8455,17 @@
         ],
         "read": "Candidate target-video object-track fit 3.4/10 across 1/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0,
+        "targetVideoObjectFitLift10": 0.2,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0/10 and target-video lift 0.2/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.76
     },
     {
@@ -8864,6 +9042,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 3.4/10 across 1/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0,
+        "targetVideoObjectFitLift10": 0.2,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0/10 and target-video lift 0.2/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.76
     },
@@ -9454,6 +9643,17 @@
         ],
         "read": "Candidate target-video object-track fit 3.4/10 across 1/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0,
+        "targetVideoObjectFitLift10": 0.2,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0/10 and target-video lift 0.2/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.76
     },
     {
@@ -9893,7 +10093,7 @@
         "shipLosses": 0
       },
       "eventWindow": {
-        "startT": 0.006,
+        "startT": 0.007,
         "sampledEvents": 4
       },
       "noSafetyRegression": true,
@@ -10025,6 +10225,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 3.2/10 across 1/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0,
+        "targetVideoObjectFitLift10": 0,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0/10 and target-video lift 0/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.71
     },
@@ -10609,6 +10820,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 3.8/10 across 1/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": -0.5,
+        "targetVideoObjectFitLift10": 0.6,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift -0.5/10 and target-video lift 0.6/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.54
     },
@@ -11231,6 +11453,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -11855,6 +12088,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -12478,6 +12722,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -13099,6 +13354,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -13723,6 +13989,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -14346,6 +14623,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -14967,6 +15255,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -15591,6 +15890,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -16214,6 +16524,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -16835,6 +17156,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -17459,6 +17791,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -18082,6 +18425,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -18703,6 +19057,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -19327,6 +19692,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -19950,6 +20326,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -20571,6 +20958,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -21195,6 +21593,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -21818,6 +22227,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -22439,6 +22859,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -23063,6 +23494,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -23686,6 +24128,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -24307,6 +24760,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -24931,6 +25395,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -25554,6 +26029,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -26175,6 +26661,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -26799,6 +27296,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -27422,6 +27930,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -28043,6 +28562,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -28667,6 +29197,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -29290,6 +29831,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -29911,6 +30463,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -30535,6 +31098,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -31158,6 +31732,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -31779,6 +32364,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -32403,6 +32999,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -33026,6 +33633,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -33647,6 +34265,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -34271,6 +34900,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -34894,6 +35534,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -35515,6 +36166,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -36139,6 +36801,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -36762,6 +37435,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -37383,6 +38067,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -38007,6 +38702,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -38630,6 +39336,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -39251,6 +39968,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -39875,6 +40603,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -40498,6 +41237,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -41119,6 +41869,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -41743,6 +42504,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -42366,6 +43138,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -42987,6 +43770,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -43611,6 +44405,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -44234,6 +45039,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -44855,6 +45671,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -45479,6 +46306,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -46102,6 +46940,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -46723,6 +47572,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -47347,6 +48207,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -47970,6 +48841,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -48591,6 +49473,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -49215,6 +50108,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -49838,6 +50742,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -50459,6 +51374,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -51083,6 +52009,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -51706,6 +52643,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -52327,6 +53275,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -52951,6 +53910,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -53574,6 +54544,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -54195,6 +55176,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -54819,6 +55811,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -55442,6 +56445,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -56063,6 +57077,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -56687,6 +57712,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -57310,6 +58346,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -57931,6 +58978,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -58555,6 +59613,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -59178,6 +60247,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -59799,6 +60879,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -60423,6 +61514,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -61046,6 +62148,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -61667,6 +62780,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -62291,6 +63415,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -62914,6 +64049,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -63535,6 +64681,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -64159,6 +65316,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -64782,6 +65950,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -65403,6 +66582,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -66027,6 +67217,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -66650,6 +67851,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -67271,6 +68483,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -67895,6 +69118,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -68518,6 +69752,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -69139,6 +70384,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -69763,6 +71019,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -70386,6 +71653,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -71007,6 +72285,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -71631,6 +72920,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -72254,6 +73554,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -72875,6 +74186,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.34
     },
@@ -73499,6 +74821,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -74122,6 +75455,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.4,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.4/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.34
     },
     {
@@ -74742,6 +76086,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.3,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.3/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.14
     },
@@ -75365,6 +76720,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.3,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.3/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.14
     },
     {
@@ -75987,6 +77353,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.3,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.3/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.14
     },
     {
@@ -76607,6 +77984,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.3,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.3/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.14
     },
@@ -77230,6 +78618,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.3,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.3/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.14
     },
     {
@@ -77852,6 +79251,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.3,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.3/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.14
     },
     {
@@ -78472,6 +79882,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.3,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.3/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 4.14
     },
@@ -79095,6 +80516,17 @@
         ],
         "read": "Candidate target-video object-track fit 2.9/10 across 2/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": 0.3,
+        "targetVideoObjectFitLift10": -0.3,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0.3/10 and target-video lift -0.3/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 4.14
     },
     {
@@ -79678,6 +81110,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 3.6/10 across 1/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": -0.6,
+        "targetVideoObjectFitLift10": 0.4,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift -0.6/10 and target-video lift 0.4/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 3.86
     },
@@ -80263,6 +81706,17 @@
         ],
         "read": "Candidate target-video object-track fit 3.6/10 across 1/5 group(s)."
       },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": -0.6,
+        "targetVideoObjectFitLift10": 0.4,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift -0.6/10 and target-video lift 0.4/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
+      },
       "selectionScore10": 3.86
     },
     {
@@ -80846,6 +82300,17 @@
           }
         ],
         "read": "Candidate target-video object-track fit 3.6/10 across 1/5 group(s)."
+      },
+      "fullAnalyzerRisk": {
+        "pass": false,
+        "reason": "below-calibrated-full-analyzer-threshold",
+        "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+        "decision": "rejected-full-analyzer-regression",
+        "expectedLift10": -0.6,
+        "targetVideoObjectFitLift10": 0.4,
+        "rejectedExpectedLift10": 0.4,
+        "rejectedTargetVideoObjectFitLift10": 1.5,
+        "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift -0.6/10 and target-video lift 0.4/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
       },
       "selectionScore10": 3.86
     }
@@ -81831,7 +83296,7 @@
   "measurementPolicy": {
     "scope": "harness-only stage-7 challenge layout candidates",
     "reference": "media-backed Galaga challenge labels with comparison vectors",
-    "promotionRule": "Require the expected challenge-label identity to be the best match or tied within 0.05/10 with evidence on both expected and target-video axes, no safety regression, and at least +0.35/10 expected-label or target-video lift over baseline before runtime promotion. A material target-video win may tolerate up to -0.15/10 expected drift only when expected identity remains the best match. Strong non-best candidates must be very close on identity margin and improve both expected and target-video scores.",
+    "promotionRule": "Require the expected challenge-label identity to be the best match or tied within 0.05/10 with evidence on both expected and target-video axes, no safety regression, no matching full-analyzer rejection, and at least +0.35/10 expected-label or target-video lift over baseline before runtime promotion. A material target-video win may tolerate up to -0.15/10 expected drift only when expected identity remains the best match. Strong non-best candidates must be very close on identity margin and improve both expected and target-video scores. If a prior full-analyzer review rejected a similar or identical candidate, the sweep must clear that calibration by a material margin before it can be marked ready again.",
     "safety": "Reject candidates with enemy shots, enemy attack starts, or ship losses in the challenge window."
   }
 }

@@ -1,7 +1,7 @@
 # Codex Context Checkpoint
 
-Generated: 2026-05-30T21:58:13.920Z
-Label: stage7-candidate-gate-rejection
+Generated: 2026-05-30T22:10:31.486Z
+Label: stage7-calibrated-full-analyzer-gate
 
 This is the durable recovery point for long Aurora / Platinum Codex sessions.
 Use it before switching machines, before starting a multi-hour run, and whenever
@@ -12,16 +12,16 @@ important working context.
 
 - Repo path: `/Users/sgwoods/Development/Codex/Codex-test1`
 - Branch: `codex/macbook-fullscreen-timing-alignment-wip`
-- HEAD: `56e319f29` Ground challenge timing in target motion tracks
-- Dirty files excluding checkpoint self-output: `16`
+- HEAD: `46f19bc04` Gate Stage 7 challenge candidates with full analyzer review
+- Dirty files excluding checkpoint self-output: `6`
 
 ## Active Plan
 
-- Preserve Stage 7 candidate sweep, full-analyzer rejection evidence, and docs wiring; next work should improve full-stage candidate scoring before runtime tuning.
+- Continue challenge-stage conformance by requiring candidate sweeps to honor recorded full-analyzer rejections before runtime promotion
 
 ## Recommended Next Steps
 
-- Build full-stage vector scorer or authored Stage 7 contract before the next runtime promotion attempt.
+- Build stronger full-stage candidates or richer Stage 7 contracts before another gameplay edit; add a short visual-fidelity goal to refine the player fighter silhouette and scale so it feels less blocky versus the Galaga reference
 
 ## Notes
 
@@ -31,52 +31,31 @@ important working context.
 ## Git Status
 
 ```
-M CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md
- M package.json
- M reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json
- M reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json
- M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-01-object-track.svg
- M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-03-object-track.svg
- M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-04-object-track.svg
- M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-05-object-track.svg
- M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-07-object-track.svg
- M reference-artifacts/analyses/challenge-stage-conformance/latest.json
- M tools/build/build-index.js
-?? reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/
-?? reference-artifacts/analyses/challenge-stage-candidate-sweep-index/2026-05-30T21-52-11-56e319f29/
-?? reference-artifacts/analyses/challenge-stage-conformance/2026-05-30-56e319f29/
-?? tools/harness/check-challenge-stage-candidate-sweep.js
-?? tools/harness/record-challenge-candidate-full-analyzer-review.js
+A  reference-artifacts/analyses/challenge-stage-candidate-sweep-index/2026-05-30T22-07-25-46f19bc04/README.md
+A  reference-artifacts/analyses/challenge-stage-candidate-sweep-index/2026-05-30T22-07-25-46f19bc04/report.json
+M  reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json
+M  reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json
+M  tools/harness/check-challenge-stage-candidate-sweep.js
+M  tools/harness/sweep-stage11-challenge-candidates.js
 ```
 
 ## Diff Stat
 
 ```
-CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md            |     26 +-
- package.json                                       |      2 +
- .../latest.json                                    |     36 +-
- .../challenge-stage-candidate-sweep/latest.json    | 102084 +++++++++++-------
- .../challenge-stage-01-object-track.svg            |      6 +-
- .../challenge-stage-03-object-track.svg            |      8 +-
- .../challenge-stage-04-object-track.svg            |      2 +-
- .../challenge-stage-05-object-track.svg            |      2 +-
- .../challenge-stage-07-object-track.svg            |      2 +-
- .../challenge-stage-conformance/latest.json        |  13052 +--
- tools/build/build-index.js                         |     38 +
- 11 files changed, 71122 insertions(+), 44136 deletions(-)
+(none)
 ```
 
 ## Recent Log
 
 ```
-56e319f29 (HEAD -> codex/macbook-fullscreen-timing-alignment-wip, origin/codex/macbook-fullscreen-timing-alignment-wip) Ground challenge timing in target motion tracks
+46f19bc04 (HEAD -> codex/macbook-fullscreen-timing-alignment-wip, origin/codex/macbook-fullscreen-timing-alignment-wip) Gate Stage 7 challenge candidates with full analyzer review
+56e319f29 Ground challenge timing in target motion tracks
 9a9ede246 Measure challenge visible-motion timing
 fac514254 Refresh challenge ceremony checkpoint
 b31ffb402 Widen challenge result ceremony timing
 768a709b4 Refresh fullscreen timing checkpoint
 5d355d8e6 Fix checkpoint self status parsing
 04a9d7954 Stabilize challenge timing alignment artifacts
-2023015f6 Refresh fullscreen timing checkpoint
 ```
 
 ## Machine Status Snapshot
@@ -206,11 +185,11 @@ Read first:
 - MULTI_MACHINE_WORKFLOW.md
 
 Current checkpoint:
-- label: stage7-candidate-gate-rejection
-- generated: 2026-05-30T21:58:13.920Z
+- label: stage7-calibrated-full-analyzer-gate
+- generated: 2026-05-30T22:10:31.486Z
 - branch: codex/macbook-fullscreen-timing-alignment-wip
-- commit: 56e319f29 Ground challenge timing in target motion tracks
-- dirty files excluding checkpoint self-output: 16
+- commit: 46f19bc04 Gate Stage 7 challenge candidates with full analyzer review
+- dirty files excluding checkpoint self-output: 6
 
 Continue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.
 ```

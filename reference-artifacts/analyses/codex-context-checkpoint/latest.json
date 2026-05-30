@@ -1,33 +1,23 @@
 {
   "ok": true,
   "artifactType": "codex-context-checkpoint",
-  "generatedAt": "2026-05-30T21:58:13.920Z",
-  "label": "stage7-candidate-gate-rejection",
+  "generatedAt": "2026-05-30T22:10:31.486Z",
+  "label": "stage7-calibrated-full-analyzer-gate",
   "root": "/Users/sgwoods/Development/Codex/Codex-test1",
   "branch": "codex/macbook-fullscreen-timing-alignment-wip",
-  "commit": "56e319f29",
-  "commitSubject": "Ground challenge timing in target motion tracks",
-  "dirtyFileCountExcludingCheckpoint": 16,
+  "commit": "46f19bc04",
+  "commitSubject": "Gate Stage 7 challenge candidates with full analyzer review",
+  "dirtyFileCountExcludingCheckpoint": 6,
   "statusLinesExcludingCheckpoint": [
-    "M CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md",
-    " M package.json",
-    " M reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json",
-    " M reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json",
-    " M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-01-object-track.svg",
-    " M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-03-object-track.svg",
-    " M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-04-object-track.svg",
-    " M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-05-object-track.svg",
-    " M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-07-object-track.svg",
-    " M reference-artifacts/analyses/challenge-stage-conformance/latest.json",
-    " M tools/build/build-index.js",
-    "?? reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/",
-    "?? reference-artifacts/analyses/challenge-stage-candidate-sweep-index/2026-05-30T21-52-11-56e319f29/",
-    "?? reference-artifacts/analyses/challenge-stage-conformance/2026-05-30-56e319f29/",
-    "?? tools/harness/check-challenge-stage-candidate-sweep.js",
-    "?? tools/harness/record-challenge-candidate-full-analyzer-review.js"
+    "A  reference-artifacts/analyses/challenge-stage-candidate-sweep-index/2026-05-30T22-07-25-46f19bc04/README.md",
+    "A  reference-artifacts/analyses/challenge-stage-candidate-sweep-index/2026-05-30T22-07-25-46f19bc04/report.json",
+    "M  reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json",
+    "M  reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json",
+    "M  tools/harness/check-challenge-stage-candidate-sweep.js",
+    "M  tools/harness/sweep-stage11-challenge-candidates.js"
   ],
-  "diffStat": "CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md            |     26 +-\n package.json                                       |      2 +\n .../latest.json                                    |     36 +-\n .../challenge-stage-candidate-sweep/latest.json    | 102084 +++++++++++-------\n .../challenge-stage-01-object-track.svg            |      6 +-\n .../challenge-stage-03-object-track.svg            |      8 +-\n .../challenge-stage-04-object-track.svg            |      2 +-\n .../challenge-stage-05-object-track.svg            |      2 +-\n .../challenge-stage-07-object-track.svg            |      2 +-\n .../challenge-stage-conformance/latest.json        |  13052 +--\n tools/build/build-index.js                         |     38 +\n 11 files changed, 71122 insertions(+), 44136 deletions(-)",
-  "recentLog": "56e319f29 (HEAD -> codex/macbook-fullscreen-timing-alignment-wip, origin/codex/macbook-fullscreen-timing-alignment-wip) Ground challenge timing in target motion tracks\n9a9ede246 Measure challenge visible-motion timing\nfac514254 Refresh challenge ceremony checkpoint\nb31ffb402 Widen challenge result ceremony timing\n768a709b4 Refresh fullscreen timing checkpoint\n5d355d8e6 Fix checkpoint self status parsing\n04a9d7954 Stabilize challenge timing alignment artifacts\n2023015f6 Refresh fullscreen timing checkpoint",
+  "diffStat": "",
+  "recentLog": "46f19bc04 (HEAD -> codex/macbook-fullscreen-timing-alignment-wip, origin/codex/macbook-fullscreen-timing-alignment-wip) Gate Stage 7 challenge candidates with full analyzer review\n56e319f29 Ground challenge timing in target motion tracks\n9a9ede246 Measure challenge visible-motion timing\nfac514254 Refresh challenge ceremony checkpoint\nb31ffb402 Widen challenge result ceremony timing\n768a709b4 Refresh fullscreen timing checkpoint\n5d355d8e6 Fix checkpoint self status parsing\n04a9d7954 Stabilize challenge timing alignment artifacts",
   "machineStatus": {
     "ok": true,
     "mode": "status",
@@ -131,16 +121,16 @@
     ]
   },
   "plan": [
-    "Preserve Stage 7 candidate sweep, full-analyzer rejection evidence, and docs wiring; next work should improve full-stage candidate scoring before runtime tuning."
+    "Continue challenge-stage conformance by requiring candidate sweeps to honor recorded full-analyzer rejections before runtime promotion"
   ],
   "next": [
-    "Build full-stage vector scorer or authored Stage 7 contract before the next runtime promotion attempt."
+    "Build stronger full-stage candidates or richer Stage 7 contracts before another gameplay edit; add a short visual-fidelity goal to refine the player fighter silhouette and scale so it feels less blocky versus the Galaga reference"
   ],
   "notes": [
     "Codex Desktop does not expose a repo command that forces internal chat compaction. The safe replacement is a manual checkpoint plus a deliberate fresh session from this file.",
     "This checkpoint intentionally filters its own generated files out of the dirty-status read so it can be committed as the recovery point."
   ],
-  "restartPrompt": "You are continuing Aurora Galactica / Platinum work from a durable Codex checkpoint.\n\nRepo path:\n/Users/sgwoods/Development/Codex/Codex-test1\n\nStart by running:\ngit branch --show-current\ngit status --short\ngit log -5 --oneline --decorate\nnpm run machine:status\n\nRead first:\n- CODEX_CONTEXT_CHECKPOINT.md\n- RESTART_FROM_HERE.md\n- MULTI_MACHINE_WORKFLOW.md\n\nCurrent checkpoint:\n- label: stage7-candidate-gate-rejection\n- generated: 2026-05-30T21:58:13.920Z\n- branch: codex/macbook-fullscreen-timing-alignment-wip\n- commit: 56e319f29 Ground challenge timing in target motion tracks\n- dirty files excluding checkpoint self-output: 16\n\nContinue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.",
+  "restartPrompt": "You are continuing Aurora Galactica / Platinum work from a durable Codex checkpoint.\n\nRepo path:\n/Users/sgwoods/Development/Codex/Codex-test1\n\nStart by running:\ngit branch --show-current\ngit status --short\ngit log -5 --oneline --decorate\nnpm run machine:status\n\nRead first:\n- CODEX_CONTEXT_CHECKPOINT.md\n- RESTART_FROM_HERE.md\n- MULTI_MACHINE_WORKFLOW.md\n\nCurrent checkpoint:\n- label: stage7-calibrated-full-analyzer-gate\n- generated: 2026-05-30T22:10:31.486Z\n- branch: codex/macbook-fullscreen-timing-alignment-wip\n- commit: 46f19bc04 Gate Stage 7 challenge candidates with full analyzer review\n- dirty files excluding checkpoint self-output: 6\n\nContinue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.",
   "files": {
     "markdown": "CODEX_CONTEXT_CHECKPOINT.md",
     "json": "reference-artifacts/analyses/codex-context-checkpoint/latest.json"

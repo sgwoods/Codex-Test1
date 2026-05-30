@@ -94,6 +94,9 @@ for(const row of [baseline, best]){
   if(!isFiniteNumber(row.selectionScore10)){
     fail('Candidate sweep row is missing a selection score.', row);
   }
+  if(!row.fullAnalyzerRisk || typeof row.fullAnalyzerRisk.pass !== 'boolean' || !row.fullAnalyzerRisk.reason){
+    fail('Candidate sweep row is missing calibrated full-analyzer risk data.', row);
+  }
 }
 
 const summary = report.summary || {};
@@ -124,6 +127,12 @@ const promotionLikeDecision = summary.keeperDecision !== 'no-runtime-keeper-yet'
 if(promotionLikeDecision){
   if(best.noSafetyRegression !== true){
     fail('Candidate is marked promotion-like but has safety regression.', best);
+  }
+  if(best.fullAnalyzerRisk?.pass !== true || summary.fullAnalyzerRisk?.pass !== true){
+    fail('Candidate is marked promotion-like but does not pass the calibrated full-analyzer risk gate.', {
+      summaryRisk: summary.fullAnalyzerRisk,
+      bestRisk: best.fullAnalyzerRisk
+    });
   }
   if(summary.noTargetVideoRegression !== true || summary.noExpectedRegression !== true || summary.intendedStageSupported !== true){
     fail('Candidate is marked promotion-like but does not satisfy the promotion policy booleans.', summary);
