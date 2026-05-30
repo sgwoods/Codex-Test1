@@ -71,6 +71,7 @@ const APPLICATION_ARTIFACT_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 
 const CHALLENGE_STAGE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_SWEEP = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_SWEEP_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep-index', 'latest.json');
+const CHALLENGE_STAGE_CANDIDATE_FULL_ANALYZER_REVIEW = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-full-analyzer-review', 'latest.json');
 const CHALLENGE_TRAJECTORY_CONTROLS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-trajectory-controls', 'latest.json');
 const CHALLENGE_SETPIECE_CONTRACTS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-setpiece-contracts', 'latest.json');
 const GAMEPLAY_SEGMENT_CAPTURE = path.join(ROOT, 'reference-artifacts', 'analyses', 'gameplay-segment-captures', 'latest.json');
@@ -2867,6 +2868,7 @@ function buildChallengeStageEffortGuideSection(){
   const artifact = loadChallengeStageConformance();
   const sweep = loadChallengeStageCandidateSweep();
   const sweepIndex = loadChallengeStageCandidateSweepIndex();
+  const fullAnalyzerReview = loadChallengeStageCandidateFullAnalyzerReview();
   const trajectoryControls = loadChallengeTrajectoryControls();
   const setpieceContracts = loadChallengeSetpieceContracts();
   const summary = artifact.summary || {};
@@ -2875,6 +2877,7 @@ function buildChallengeStageEffortGuideSection(){
   const sweepIndexSummary = sweepIndex.summary || {};
   const trajectorySummary = trajectoryControls.summary || {};
   const setpieceSummary = setpieceContracts.summary || {};
+  const reviewRead = fullAnalyzerReview.read || 'No candidate has been recorded through the full-analyzer review loop yet.';
   const sweepRows = Array.isArray(sweepIndex.rows) ? sweepIndex.rows : [];
   const sweepIndexRead = sweepRows.length
     ? sweepRows.map(row => `Stage ${row.stage}: ${row.keeperDecision || 'pending'} (${row.bestExpectedScore10 ?? 'n/a'}/10 expected, ${row.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10 target-video, identity margin ${row.stageIdentityMargin10 ?? 'n/a'}).`).join(' ')
@@ -2906,6 +2909,10 @@ function buildChallengeStageEffortGuideSection(){
       {
         title: 'Sweep Matrix',
         body: `${sweepIndexSummary.stagesCovered || 0} stage(s) indexed, ${sweepIndexSummary.totalCandidateCount || 0} candidates represented, ${sweepIndexSummary.runtimeReadyCount || 0} runtime-ready. ${sweepIndexRead}`
+      },
+      {
+        title: 'Full Analyzer Review',
+        body: `Latest recorded candidate review: ${fullAnalyzerReview.candidateId || 'pending'} on Stage ${fullAnalyzerReview.stage || 'n/a'}; decision ${fullAnalyzerReview.decision || 'pending'}. ${reviewRead}`
       },
       {
         title: 'Target Trajectory Controls',
@@ -2945,6 +2952,11 @@ function buildChallengeStageEffortGuideSection(){
         label: 'Open Candidate Sweep Index',
         href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json`,
         detail: 'Latest per-stage sweep matrix so one stage run does not hide prior candidate evidence.'
+      },
+      {
+        label: 'Open Full Analyzer Review Artifact',
+        href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json`,
+        detail: 'Records whether a sweep candidate survived the full strict analyzer after a temporary runtime trial.'
       },
       {
         label: 'Open Target Trajectory Controls',
@@ -3259,6 +3271,7 @@ let applicationArtifactConformanceCache = null;
 let challengeStageConformanceCache = null;
 let challengeStageCandidateSweepCache = null;
 let challengeStageCandidateSweepIndexCache = null;
+let challengeStageCandidateFullAnalyzerReviewCache = null;
 let challengeTrajectoryControlsCache = null;
 let challengeSetpieceContractsCache = null;
 let gameplaySegmentCaptureCache = null;
@@ -3605,6 +3618,26 @@ function loadChallengeStageCandidateSweepIndex(){
     challengeStageCandidateSweepIndexCache = { summary: {}, rows: [] };
   }
   return challengeStageCandidateSweepIndexCache;
+}
+
+function loadChallengeStageCandidateFullAnalyzerReview(){
+  if(challengeStageCandidateFullAnalyzerReviewCache) return challengeStageCandidateFullAnalyzerReviewCache;
+  if(!fs.existsSync(CHALLENGE_STAGE_CANDIDATE_FULL_ANALYZER_REVIEW)){
+    challengeStageCandidateFullAnalyzerReviewCache = { summary: {}, restoredBaseline: {}, trial: {}, deltas: {} };
+    return challengeStageCandidateFullAnalyzerReviewCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_STAGE_CANDIDATE_FULL_ANALYZER_REVIEW);
+    challengeStageCandidateFullAnalyzerReviewCache = Object.assign({}, artifact, {
+      summary: artifact.summary || {},
+      restoredBaseline: artifact.restoredBaseline || {},
+      trial: artifact.trial || {},
+      deltas: artifact.deltas || {}
+    });
+  } catch (err) {
+    challengeStageCandidateFullAnalyzerReviewCache = { summary: {}, restoredBaseline: {}, trial: {}, deltas: {} };
+  }
+  return challengeStageCandidateFullAnalyzerReviewCache;
 }
 
 function loadChallengeTrajectoryControls(){
@@ -5402,6 +5435,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const challengeSummary = challengeStageConformance.summary || {};
   const challengeCandidateSweep = loadChallengeStageCandidateSweep();
   const challengeCandidateSweepIndex = loadChallengeStageCandidateSweepIndex();
+  const challengeCandidateFullAnalyzerReview = loadChallengeStageCandidateFullAnalyzerReview();
   const challengeSweepSummary = challengeCandidateSweep.summary || {};
   const challengeSweepRetention = challengeCandidateSweep.candidateRetention || {};
   const challengeSweepIndexSummary = challengeCandidateSweepIndex.summary || {};
@@ -5416,6 +5450,9 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
       return `Stage ${row.stage}: ${row.keeperDecision || 'pending'}, expected ${row.bestExpectedScore10 ?? 'n/a'}/10, target-video ${row.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10, identity margin ${row.stageIdentityMargin10 ?? 'n/a'}.${lateIdentity}`;
     }).join(' ')
     : 'No indexed candidate sweeps yet.';
+  const challengeCandidateFullAnalyzerRead = challengeCandidateFullAnalyzerReview.read
+    ? `Latest full-analyzer candidate review: Stage ${challengeCandidateFullAnalyzerReview.stage || 'n/a'} candidate ${challengeCandidateFullAnalyzerReview.candidateId || 'pending'} was ${challengeCandidateFullAnalyzerReview.decision || 'pending'}. ${challengeCandidateFullAnalyzerReview.read}`
+    : 'No full-analyzer candidate review has been recorded yet.';
   const challengeTrajectoryControls = loadChallengeTrajectoryControls();
   const challengeTrajectorySummary = challengeTrajectoryControls.summary || {};
   const challengeTrajectoryRead = challengeTrajectorySummary.challengeCount
@@ -6293,6 +6330,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <p>${esc(challengeSummary.weakestFinding || 'Run the challenge-stage conformance analyzer to refresh this readout.')}</p>
             <p class="docMeta"><strong>Scoring model:</strong> ${esc(challengeSummary.scoringModel || 'strict-v2')}. Each challenge starts at 1/10 for interest, movement, and graphics; no-shot/no-kill safety is a required guardrail, not a score booster. Legacy broad coverage is diagnostic only.</p>
             <p class="docMeta"><strong>Latest candidate sweep:</strong> Stage ${esc(challengeCandidateSweep.stage || 'n/a')} measured ${esc(challengeCandidateSweep.candidateCount || challengeSweepRetention.totalMeasured || 'n/a')} candidates and retained ${esc(challengeSweepRetention.retained || 'n/a')} review rows. Decision: <strong>${esc(challengeSweepSummary.keeperDecision || 'pending')}</strong>. Best candidate ${esc(challengeSweepSummary.bestCandidateId || 'pending')} scored ${esc(challengeSweepSummary.bestExpectedScore10 ?? 'n/a')}/10 expected-reference and ${esc(challengeSweepSummary.bestTargetVideoObjectFitScore10 ?? 'n/a')}/10 target-video fit. This is process evidence unless the full analyzer and guardrails confirm a runtime promotion.</p>
+            <p class="docMeta"><strong>Full-analyzer candidate review:</strong> ${esc(challengeCandidateFullAnalyzerRead)} Source artifact: <code>reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json</code>.</p>
             <p class="docMeta"><strong>Candidate sweep matrix:</strong> ${esc(challengeSweepIndexSummary.stagesCovered || 0)} stage(s), ${esc(challengeSweepIndexSummary.totalCandidateCount || 0)} latest per-stage candidates represented, ${esc(challengeSweepIndexSummary.runtimeReadyCount || 0)} runtime-ready. ${esc(challengeSweepIndexRead)}</p>
             <p class="docMeta"><strong>Target trajectory controls:</strong> ${esc(challengeTrajectoryRead)} Source artifact: <code>reference-artifacts/analyses/challenge-trajectory-controls/latest.json</code>.</p>
             <p class="docMeta"><strong>Set-piece contracts:</strong> ${esc(challengeSetpieceSummary.contractCount || 0)} challenge contract(s), ${esc(challengeSetpieceSummary.referenceBackedGroupCount || 0)}/${esc(challengeSetpieceSummary.expectedGroupCount || 0)} reference-backed groups, current average ${esc(challengeSetpieceSummary.averageCurrentScore10 ?? 'n/a')}/10, target-contract fit ${esc(challengeSetpieceSummary.averageTargetContractFitScore10 ?? 'n/a')}/10. Source artifact: <code>reference-artifacts/analyses/challenge-setpiece-contracts/latest.json</code>.</p>

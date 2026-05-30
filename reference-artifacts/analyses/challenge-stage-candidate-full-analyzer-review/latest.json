@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "challenge-stage-candidate-full-analyzer-review",
+  "generatedAt": "2026-05-30T21:56:13.230Z",
+  "commit": "56e319f29",
+  "branch": "codex/macbook-fullscreen-timing-alignment-wip",
+  "stage": 7,
+  "candidateId": "stage7-target-controls-shape-only-p3",
+  "decision": "rejected-full-analyzer-regression",
+  "summary": {
+    "sweepDecision": "candidate-ready-for-full-analyzer-review",
+    "sweepExpectedLift10": 0.4,
+    "sweepTargetVideoObjectFitLift10": 1.5,
+    "sweepBestExpectedScore10": 4.5,
+    "sweepBestTargetVideoObjectFitScore10": 4.7
+  },
+  "restoredBaseline": {
+    "summaryScore10": 4.2,
+    "summaryMovementScore10": 4.2,
+    "summaryTargetVideoObjectTrackFitScore10": 3.7,
+    "stageMovementScore10": 3,
+    "stageConformanceScore10": 3.6,
+    "stageObjectScore10": 4.7,
+    "stageTargetFitScore10": 3.7,
+    "bestReferenceMatch": "challenge-1-arrival-group-1"
+  },
+  "trial": {
+    "summaryScore10": 4.2,
+    "summaryMovementScore10": 4.1,
+    "summaryTargetVideoObjectTrackFitScore10": 3.6,
+    "stageMovementScore10": 3,
+    "stageConformanceScore10": 3.6,
+    "stageObjectScore10": 4.6,
+    "stageTargetFitScore10": 3.5,
+    "notes": "Temporary runtime edit was backed out after full challenge-stage analyzer failed to confirm the narrow candidate-sweep lift."
+  },
+  "deltas": {
+    "summaryScore10": 0,
+    "summaryMovementScore10": -0.1,
+    "summaryTargetVideoObjectTrackFitScore10": -0.1,
+    "stageMovementScore10": 0,
+    "stageObjectScore10": -0.1,
+    "stageTargetFitScore10": -0.2
+  },
+  "read": "Rejected stage7-target-controls-shape-only-p3: the focused sweep found a narrow shape win, but the full analyzer did not confirm a player-facing improvement. Summary movement delta -0.1, target-video object-track delta -0.1, and Stage 7 target-fit delta -0.2 are not acceptable for runtime promotion.",
+  "nextStep": "Do not promote this candidate. Extend the scorer to compare full-stage vectors or author a stronger reference-path contract before the next runtime trial.",
+  "sources": {
+    "candidateSweep": "reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json",
+    "challengeStageConformance": "reference-artifacts/analyses/challenge-stage-conformance/latest.json"
+  }
+}
