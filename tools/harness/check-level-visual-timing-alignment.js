@@ -64,6 +64,21 @@ for(const row of rows){
   if(!Array.isArray(row.currentTimelineSamples) || row.currentTimelineSamples.length < 3){
     fail('Timing row needs sampled current timeline data.', { challengeNumber: row.challengeNumber });
   }
+  if(!Number.isFinite(+row.currentLastVisibleEnemySecond)){
+    fail('Timing row missing last visible challenge enemy timing.', { challengeNumber: row.challengeNumber });
+  }
+  if(!Number.isFinite(+row.currentVisibleMotionEndDriftSeconds)){
+    fail('Timing row missing visible-motion end drift.', { challengeNumber: row.challengeNumber });
+  }
+  if(!Number.isFinite(+row.currentLastChallengeEnemySecond)){
+    fail('Timing row missing last challenge enemy presence timing.', { challengeNumber: row.challengeNumber });
+  }
+  if(!Number.isFinite(+row.currentChallengeEnemyEndDriftSeconds)){
+    fail('Timing row missing challenge enemy-presence end drift.', { challengeNumber: row.challengeNumber });
+  }
+  if(!Number.isFinite(+row.currentResultCeremonyHoldSeconds)){
+    fail('Timing row missing result ceremony hold measurement.', { challengeNumber: row.challengeNumber });
+  }
 }
 
 console.log(JSON.stringify({
@@ -73,5 +88,8 @@ console.log(JSON.stringify({
   completedChallengeNumbers,
   pairedVideoCount: rows.filter(row => row.pairedVideo).length,
   averageAbsEndDriftSeconds: report.summary?.averageAbsEndDriftSeconds ?? null,
+  averageAbsVisibleMotionEndDriftSeconds: report.summary?.averageAbsVisibleMotionEndDriftSeconds ?? null,
+  averageAbsChallengeEnemyEndDriftSeconds: report.summary?.averageAbsChallengeEnemyEndDriftSeconds ?? null,
+  averageResultCeremonyHoldSeconds: report.summary?.averageResultCeremonyHoldSeconds ?? null,
   report: rel(REPORT)
 }, null, 2));

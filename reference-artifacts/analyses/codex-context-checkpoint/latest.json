@@ -1,16 +1,39 @@
 {
   "ok": true,
   "artifactType": "codex-context-checkpoint",
-  "generatedAt": "2026-05-30T16:14:18.523Z",
-  "label": "challenge-result-ceremony-timing-clean",
+  "generatedAt": "2026-05-30T18:36:49.238Z",
+  "label": "challenge-timing-safe-keeper",
   "root": "/Users/sgwoods/Development/Codex/Codex-test1",
   "branch": "codex/macbook-fullscreen-timing-alignment-wip",
-  "commit": "b31ffb402",
-  "commitSubject": "Widen challenge result ceremony timing",
-  "dirtyFileCountExcludingCheckpoint": 0,
-  "statusLinesExcludingCheckpoint": [],
-  "diffStat": "CODEX_CONTEXT_CHECKPOINT.md                        | 86 +++++++++++++++++-----\n .../analyses/codex-context-checkpoint/latest.json  | 52 ++++++++++---\n 2 files changed, 108 insertions(+), 30 deletions(-)",
-  "recentLog": "b31ffb402 (HEAD -> codex/macbook-fullscreen-timing-alignment-wip) Widen challenge result ceremony timing\n768a709b4 (origin/codex/macbook-fullscreen-timing-alignment-wip) Refresh fullscreen timing checkpoint\n5d355d8e6 Fix checkpoint self status parsing\n04a9d7954 Stabilize challenge timing alignment artifacts\n2023015f6 Refresh fullscreen timing checkpoint\n77a7396fb Preserve fullscreen timing alignment WIP\ne397c2c75 (origin/codex/challenge-target-authority-setpiece-upgrade, codex/challenge-target-authority-setpiece-upgrade) Stabilize challenge set-piece capture workflow\n19db4fa4c Refresh review packet for Guardians publish head",
+  "commit": "fac514254",
+  "commitSubject": "Refresh challenge ceremony checkpoint",
+  "dirtyFileCountExcludingCheckpoint": 22,
+  "statusLinesExcludingCheckpoint": [
+    "M LEVEL_VISUAL_TIMING_ALIGNMENT.md",
+    " M reference-artifacts/analyses/level-visual-timing-alignment/latest-contact-sheets/challenge-01-target-vs-current-aligned-contact.jpg",
+    " M reference-artifacts/analyses/level-visual-timing-alignment/latest-contact-sheets/challenge-02-target-vs-current-aligned-contact.jpg",
+    " M reference-artifacts/analyses/level-visual-timing-alignment/latest-contact-sheets/challenge-03-target-vs-current-aligned-contact.jpg",
+    " M reference-artifacts/analyses/level-visual-timing-alignment/latest-contact-sheets/challenge-04-target-vs-current-aligned-contact.jpg",
+    " M reference-artifacts/analyses/level-visual-timing-alignment/latest-current-videos/challenge-01.webm",
+    " M reference-artifacts/analyses/level-visual-timing-alignment/latest-current-videos/challenge-02.webm",
+    " M reference-artifacts/analyses/level-visual-timing-alignment/latest-current-videos/challenge-03.webm",
+    " M reference-artifacts/analyses/level-visual-timing-alignment/latest-current-videos/challenge-04.webm",
+    " M reference-artifacts/analyses/level-visual-timing-alignment/latest-paired-videos/challenge-01-target-vs-current-aligned.webm",
+    " M reference-artifacts/analyses/level-visual-timing-alignment/latest-paired-videos/challenge-02-target-vs-current-aligned.webm",
+    " M reference-artifacts/analyses/level-visual-timing-alignment/latest-paired-videos/challenge-03-target-vs-current-aligned.webm",
+    " M reference-artifacts/analyses/level-visual-timing-alignment/latest-paired-videos/challenge-04-target-vs-current-aligned.webm",
+    " M reference-artifacts/analyses/level-visual-timing-alignment/latest-target-videos/challenge-01.webm",
+    " M reference-artifacts/analyses/level-visual-timing-alignment/latest-target-videos/challenge-02.webm",
+    " M reference-artifacts/analyses/level-visual-timing-alignment/latest-target-videos/challenge-03.webm",
+    " M reference-artifacts/analyses/level-visual-timing-alignment/latest-target-videos/challenge-04.webm",
+    " M reference-artifacts/analyses/level-visual-timing-alignment/latest.json",
+    " M src/js/13-aurora-game-pack.js",
+    " M tools/harness/analyze-level-visual-timing-alignment.js",
+    " M tools/harness/check-level-visual-timing-alignment.js",
+    "?? reference-artifacts/analyses/level-visual-timing-alignment/2026-05-30-fac514254/"
+  ],
+  "diffStat": "LEVEL_VISUAL_TIMING_ALIGNMENT.md                   |  24 +-\n ...llenge-01-target-vs-current-aligned-contact.jpg | Bin 90445 -> 90108 bytes\n ...llenge-02-target-vs-current-aligned-contact.jpg | Bin 114601 -> 114540 bytes\n ...llenge-03-target-vs-current-aligned-contact.jpg | Bin 112442 -> 112527 bytes\n ...llenge-04-target-vs-current-aligned-contact.jpg | Bin 105315 -> 105491 bytes\n .../latest-current-videos/challenge-01.webm        | Bin 599194 -> 581783 bytes\n .../latest-current-videos/challenge-02.webm        | Bin 554342 -> 551286 bytes\n .../latest-current-videos/challenge-03.webm        | Bin 699367 -> 680898 bytes\n .../latest-current-videos/challenge-04.webm        | Bin 625113 -> 615286 bytes\n .../challenge-01-target-vs-current-aligned.webm    | Bin 983677 -> 974188 bytes\n .../challenge-02-target-vs-current-aligned.webm    | Bin 1230298 -> 1228339 bytes\n .../challenge-03-target-vs-current-aligned.webm    | Bin 1247475 -> 1244908 bytes\n .../challenge-04-target-vs-current-aligned.webm    | Bin 1205424 -> 1202442 bytes\n .../latest-target-videos/challenge-01.webm         | Bin 703934 -> 703934 bytes\n .../latest-target-videos/challenge-02.webm         | Bin 927745 -> 927745 bytes\n .../latest-target-videos/challenge-03.webm         | Bin 926144 -> 926144 bytes\n .../latest-target-videos/challenge-04.webm         | Bin 883400 -> 883400 bytes\n .../level-visual-timing-alignment/latest.json      | 242 +++++++++++++++++----\n src/js/13-aurora-game-pack.js                      |   5 +-\n .../analyze-level-visual-timing-alignment.js       | 107 ++++++---\n .../harness/check-level-visual-timing-alignment.js |  18 ++\n 21 files changed, 318 insertions(+), 78 deletions(-)",
+  "recentLog": "fac514254 (HEAD -> codex/macbook-fullscreen-timing-alignment-wip, origin/codex/macbook-fullscreen-timing-alignment-wip) Refresh challenge ceremony checkpoint\nb31ffb402 Widen challenge result ceremony timing\n768a709b4 Refresh fullscreen timing checkpoint\n5d355d8e6 Fix checkpoint self status parsing\n04a9d7954 Stabilize challenge timing alignment artifacts\n2023015f6 Refresh fullscreen timing checkpoint\n77a7396fb Preserve fullscreen timing alignment WIP\ne397c2c75 (origin/codex/challenge-target-authority-setpiece-upgrade, codex/challenge-target-authority-setpiece-upgrade) Stabilize challenge set-piece capture workflow",
   "machineStatus": {
     "ok": true,
     "mode": "status",
@@ -42,7 +65,7 @@
       "branch": "codex/macbook-fullscreen-timing-alignment-wip",
       "dirty": true,
       "upstream": "origin/codex/macbook-fullscreen-timing-alignment-wip",
-      "ahead": 1,
+      "ahead": 0,
       "behind": 0,
       "remote_ok": true
     },
@@ -114,16 +137,16 @@
     ]
   },
   "plan": [
-    "Continue Aurora challenge conformance after committed result ceremony timing improvement"
+    "Continue Aurora challenge-stage conformance with measured visible-motion timing and gameplay outcome gates"
   ],
   "next": [
-    "Use the paired timing clips to improve actual challenge group choreography, alien variety, and movement duration"
+    "Tune Challenge 2 path shape and hit windows before attempting larger timing changes"
   ],
   "notes": [
     "Codex Desktop does not expose a repo command that forces internal chat compaction. The safe replacement is a manual checkpoint plus a deliberate fresh session from this file.",
     "This checkpoint intentionally filters its own generated files out of the dirty-status read so it can be committed as the recovery point."
   ],
-  "restartPrompt": "You are continuing Aurora Galactica / Platinum work from a durable Codex checkpoint.\n\nRepo path:\n/Users/sgwoods/Development/Codex/Codex-test1\n\nStart by running:\ngit branch --show-current\ngit status --short\ngit log -5 --oneline --decorate\nnpm run machine:status\n\nRead first:\n- CODEX_CONTEXT_CHECKPOINT.md\n- RESTART_FROM_HERE.md\n- MULTI_MACHINE_WORKFLOW.md\n\nCurrent checkpoint:\n- label: challenge-result-ceremony-timing-clean\n- generated: 2026-05-30T16:14:18.523Z\n- branch: codex/macbook-fullscreen-timing-alignment-wip\n- commit: b31ffb402 Widen challenge result ceremony timing\n- dirty files excluding checkpoint self-output: 0\n\nContinue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.",
+  "restartPrompt": "You are continuing Aurora Galactica / Platinum work from a durable Codex checkpoint.\n\nRepo path:\n/Users/sgwoods/Development/Codex/Codex-test1\n\nStart by running:\ngit branch --show-current\ngit status --short\ngit log -5 --oneline --decorate\nnpm run machine:status\n\nRead first:\n- CODEX_CONTEXT_CHECKPOINT.md\n- RESTART_FROM_HERE.md\n- MULTI_MACHINE_WORKFLOW.md\n\nCurrent checkpoint:\n- label: challenge-timing-safe-keeper\n- generated: 2026-05-30T18:36:49.238Z\n- branch: codex/macbook-fullscreen-timing-alignment-wip\n- commit: fac514254 Refresh challenge ceremony checkpoint\n- dirty files excluding checkpoint self-output: 22\n\nContinue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.",
   "files": {
     "markdown": "CODEX_CONTEXT_CHECKPOINT.md",
     "json": "reference-artifacts/analyses/codex-context-checkpoint/latest.json"
