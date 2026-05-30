@@ -1,7 +1,7 @@
 # Codex Context Checkpoint
 
-Generated: 2026-05-30T15:23:08.991Z
-Label: fullscreen-timing-alignment-next
+Generated: 2026-05-30T16:14:18.523Z
+Label: challenge-result-ceremony-timing-clean
 
 This is the durable recovery point for long Aurora / Platinum Codex sessions.
 Use it before switching machines, before starting a multi-hour run, and whenever
@@ -12,16 +12,16 @@ important working context.
 
 - Repo path: `/Users/sgwoods/Development/Codex/Codex-test1`
 - Branch: `codex/macbook-fullscreen-timing-alignment-wip`
-- HEAD: `5d355d8e6` Fix checkpoint self status parsing
+- HEAD: `b31ffb402` Widen challenge result ceremony timing
 - Dirty files excluding checkpoint self-output: `0`
 
 ## Active Plan
 
-- Continue fullscreen and level visual timing alignment safely in one active editing session. Timing analyzer targets explicit challenge sets, cleans failed per-stage outputs, reports requested/completed/failed challenge numbers, and blocks failed latest artifacts through the checker. Fullscreen remains a local/dev review feature pending broader release validation.
+- Continue Aurora challenge conformance after committed result ceremony timing improvement
 
 ## Recommended Next Steps
 
-- Use the Challenge 1 timing-alignment clip to retune group release cadence, duration, and first-visible timing; then regenerate the timing artifact and expand the same approach to Challenges 2-4.
+- Use the paired timing clips to improve actual challenge group choreography, alien variety, and movement duration
 
 ## Notes
 
@@ -37,22 +37,22 @@ important working context.
 ## Diff Stat
 
 ```
-CODEX_CONTEXT_CHECKPOINT.md                        | 39 ++++++++++++----------
- .../analyses/codex-context-checkpoint/latest.json  | 28 ++++++++--------
- 2 files changed, 36 insertions(+), 31 deletions(-)
+CODEX_CONTEXT_CHECKPOINT.md                        | 86 +++++++++++++++++-----
+ .../analyses/codex-context-checkpoint/latest.json  | 52 ++++++++++---
+ 2 files changed, 108 insertions(+), 30 deletions(-)
 ```
 
 ## Recent Log
 
 ```
-5d355d8e6 (HEAD -> codex/macbook-fullscreen-timing-alignment-wip) Fix checkpoint self status parsing
+b31ffb402 (HEAD -> codex/macbook-fullscreen-timing-alignment-wip) Widen challenge result ceremony timing
+768a709b4 (origin/codex/macbook-fullscreen-timing-alignment-wip) Refresh fullscreen timing checkpoint
+5d355d8e6 Fix checkpoint self status parsing
 04a9d7954 Stabilize challenge timing alignment artifacts
-2023015f6 (origin/codex/macbook-fullscreen-timing-alignment-wip) Refresh fullscreen timing checkpoint
+2023015f6 Refresh fullscreen timing checkpoint
 77a7396fb Preserve fullscreen timing alignment WIP
 e397c2c75 (origin/codex/challenge-target-authority-setpiece-upgrade, codex/challenge-target-authority-setpiece-upgrade) Stabilize challenge set-piece capture workflow
 19db4fa4c Refresh review packet for Guardians publish head
-ed9042cd9 Refresh release conformance docs for Guardians publish
-f5548699f Advance Guardians opening-slice motion and parity
 ```
 
 ## Machine Status Snapshot
@@ -89,7 +89,7 @@ f5548699f Advance Guardians opening-slice motion and parity
     "branch": "codex/macbook-fullscreen-timing-alignment-wip",
     "dirty": true,
     "upstream": "origin/codex/macbook-fullscreen-timing-alignment-wip",
-    "ahead": 2,
+    "ahead": 1,
     "behind": 0,
     "remote_ok": true
   },
@@ -182,10 +182,10 @@ Read first:
 - MULTI_MACHINE_WORKFLOW.md
 
 Current checkpoint:
-- label: fullscreen-timing-alignment-next
-- generated: 2026-05-30T15:23:08.991Z
+- label: challenge-result-ceremony-timing-clean
+- generated: 2026-05-30T16:14:18.523Z
 - branch: codex/macbook-fullscreen-timing-alignment-wip
-- commit: 5d355d8e6 Fix checkpoint self status parsing
+- commit: b31ffb402 Widen challenge result ceremony timing
 - dirty files excluding checkpoint self-output: 0
 
 Continue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.
