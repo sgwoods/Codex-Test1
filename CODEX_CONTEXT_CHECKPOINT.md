@@ -1,7 +1,7 @@
 # Codex Context Checkpoint
 
-Generated: 2026-05-30T15:00:28.874Z
-Label: fullscreen-timing-alignment-clean-handoff
+Generated: 2026-05-30T15:23:08.991Z
+Label: fullscreen-timing-alignment-next
 
 This is the durable recovery point for long Aurora / Platinum Codex sessions.
 Use it before switching machines, before starting a multi-hour run, and whenever
@@ -12,16 +12,16 @@ important working context.
 
 - Repo path: `/Users/sgwoods/Development/Codex/Codex-test1`
 - Branch: `codex/macbook-fullscreen-timing-alignment-wip`
-- HEAD: `77a7396fb` Preserve fullscreen timing alignment WIP
+- HEAD: `5d355d8e6` Fix checkpoint self status parsing
 - Dirty files excluding checkpoint self-output: `0`
 
 ## Active Plan
 
-- Current phase is cleanly committed: stage-start synchronized challenge timing alignment artifacts plus arcade/fullscreen play mode. Awaiting external stability command before continuing challenge-stage conformance work on this MacBook.
+- Continue fullscreen and level visual timing alignment safely in one active editing session. Timing analyzer targets explicit challenge sets, cleans failed per-stage outputs, reports requested/completed/failed challenge numbers, and blocks failed latest artifacts through the checker. Fullscreen remains a local/dev review feature pending broader release validation.
 
 ## Recommended Next Steps
 
-- After the other session confirms stable state, sync/review branch status, then use the timing-alignment clips to retune Challenge 1 group release cadence, duration, and first-visible timing before expanding to all challenge stages.
+- Use the Challenge 1 timing-alignment clip to retune group release cadence, duration, and first-visible timing; then regenerate the timing artifact and expand the same approach to Challenges 2-4.
 
 ## Notes
 
@@ -37,20 +37,22 @@ important working context.
 ## Diff Stat
 
 ```
-(none)
+CODEX_CONTEXT_CHECKPOINT.md                        | 39 ++++++++++++----------
+ .../analyses/codex-context-checkpoint/latest.json  | 28 ++++++++--------
+ 2 files changed, 36 insertions(+), 31 deletions(-)
 ```
 
 ## Recent Log
 
 ```
-77a7396fb (HEAD -> codex/macbook-fullscreen-timing-alignment-wip, origin/codex/macbook-fullscreen-timing-alignment-wip) Preserve fullscreen timing alignment WIP
+5d355d8e6 (HEAD -> codex/macbook-fullscreen-timing-alignment-wip) Fix checkpoint self status parsing
+04a9d7954 Stabilize challenge timing alignment artifacts
+2023015f6 (origin/codex/macbook-fullscreen-timing-alignment-wip) Refresh fullscreen timing checkpoint
+77a7396fb Preserve fullscreen timing alignment WIP
 e397c2c75 (origin/codex/challenge-target-authority-setpiece-upgrade, codex/challenge-target-authority-setpiece-upgrade) Stabilize challenge set-piece capture workflow
-19db4fa4c (origin/main, origin/HEAD) Refresh review packet for Guardians publish head
+19db4fa4c Refresh review packet for Guardians publish head
 ed9042cd9 Refresh release conformance docs for Guardians publish
 f5548699f Advance Guardians opening-slice motion and parity
-2fca9f76f Refresh review packet after release doc refresh
-9c0dc106b Refresh review packet for Guardians publish head
-d3d8c35f8 Refresh release conformance docs for Guardians head
 ```
 
 ## Machine Status Snapshot
@@ -85,9 +87,9 @@ d3d8c35f8 Refresh release conformance docs for Guardians head
   },
   "repo": {
     "branch": "codex/macbook-fullscreen-timing-alignment-wip",
-    "dirty": false,
+    "dirty": true,
     "upstream": "origin/codex/macbook-fullscreen-timing-alignment-wip",
-    "ahead": 0,
+    "ahead": 2,
     "behind": 0,
     "remote_ok": true
   },
@@ -180,10 +182,10 @@ Read first:
 - MULTI_MACHINE_WORKFLOW.md
 
 Current checkpoint:
-- label: fullscreen-timing-alignment-clean-handoff
-- generated: 2026-05-30T15:00:28.874Z
+- label: fullscreen-timing-alignment-next
+- generated: 2026-05-30T15:23:08.991Z
 - branch: codex/macbook-fullscreen-timing-alignment-wip
-- commit: 77a7396fb Preserve fullscreen timing alignment WIP
+- commit: 5d355d8e6 Fix checkpoint self status parsing
 - dirty files excluding checkpoint self-output: 0
 
 Continue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.
