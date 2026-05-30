@@ -7,8 +7,38 @@ function fail(message, payload){
   process.exit(1);
 }
 
+const MAX_SINGLE_PLAYER_SIZE = { width: 16, height: 15 };
+const MAX_DUAL_PLAYER_SIZE = { width: 37, height: 15 };
+const MAX_RESERVE_SHIP_SIZE = { width: 13, height: 12 };
+
+function sizeOf(box){
+  return {
+    width: +(box.right - box.left).toFixed(2),
+    height: +(box.bottom - box.top).toFixed(2)
+  };
+}
+
 function assertLayout(label, row){
   if(!row?.ok) fail(`${label}: player visual bounds were not reported`, row);
+  const playerSize = sizeOf(row.player);
+  const maxPlayer = label.toLowerCase().includes('dual') ? MAX_DUAL_PLAYER_SIZE : MAX_SINGLE_PLAYER_SIZE;
+  if(playerSize.width > maxPlayer.width || playerSize.height > maxPlayer.height){
+    fail(`${label}: player fighter visual is too large for Galaga-style playfield proportions`, {
+      playerSize,
+      maxPlayer,
+      row
+    });
+  }
+  for(const reserve of row.reserve || []){
+    const reserveSize = sizeOf(reserve);
+    if(reserveSize.width > MAX_RESERVE_SHIP_SIZE.width || reserveSize.height > MAX_RESERVE_SHIP_SIZE.height){
+      fail(`${label}: reserve ship icon visual is too large and risks crowding the player field`, {
+        reserveSize,
+        maxReserve: MAX_RESERVE_SHIP_SIZE,
+        row
+      });
+    }
+  }
   if(row.leftClearance < 0) fail(`${label}: player fighter bleeds past the left playfield edge`, row);
   if(row.rightClearance < 0) fail(`${label}: player fighter bleeds past the right playfield edge`, row);
   if(row.minReserveGap != null && row.minReserveGap < 2){

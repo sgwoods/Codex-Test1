@@ -311,6 +311,7 @@ const AURORA_CONFORMANCE_PIXELS=Object.freeze({
 const TARGET_PIXEL_ASPECT_X=1.14;
 const TARGET_REFERENCE_ENEMY_SCALE=0.84;
 const TARGET_REFERENCE_BOSS_SCALE=0.88;
+const PLAYER_FIGHTER_VISUAL_SCALE=0.94;
 
 function drawTargetSpriteRows(rows,palette,scale=1,offsetX=0,offsetY=0,opts={}){
  if(!Array.isArray(rows)||!rows.length)return false;
@@ -424,6 +425,10 @@ function shipGlyphBoundsAt(x,y,s=1){
  };
 }
 
+function playerFighterVisualScale(s=1){
+ return Math.max(.42,s*PLAYER_FIGHTER_VISUAL_SCALE);
+}
+
 function mergeBounds(a,b){
  if(!a)return b;
  if(!b)return a;
@@ -435,18 +440,19 @@ function mergeBounds(a,b){
  };
 }
 
-function drawMiniShip(s=1,colA='#9adfff',colB='#72c8ff'){
+function drawFighterSprite(x=0,y=0,s=1,colA='#eaf7ff',colB='#78d8ff'){
  const palette=Object.assign({},TARGET_SPRITE_PALETTES.ship,{W:colA,B:colB});
- if(referencePixelSpritesEnabled()){
-  drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,palette,Math.max(1,Math.round(s)));
-  return;
- }
- drawAuroraShipGlyph(0,0,Math.max(.5,s),colA,colB);
+ const visualScale=playerFighterVisualScale(s);
+ drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,palette,visualScale,x,y,{xScale:1.08});
+ return visualScale;
+}
+
+function drawMiniShip(s=1,colA='#9adfff',colB='#72c8ff'){
+ return drawFighterSprite(0,0,Math.max(.5,s),colA,colB);
 }
 
 function drawAuroraShipGlyph(x=0,y=0,s=1,colA='#eaf7ff',colB='#78d8ff'){
- const ps=2*s;
- drawPix(x-ps*4,y-ps*3.5,ps,P.ship.a,colA,colB,P.ship.b,'#ff3448',P.ship.c);
+ return drawFighterSprite(x,y,Math.max(.5,s),colA,colB);
 }
 
 function endOfRunOverlayActive(){
@@ -563,20 +569,20 @@ function drawPlayerBody(x,y,dual=0,ghost=0){
  let bounds=null;
  if(!referencePixelSpritesEnabled()){
   if(dual){
-   drawAuroraShipGlyph(-9.5,0,1,'#eaf7ff','#ff4a5c');
-   drawAuroraShipGlyph(9.5,0,1,'#eaf7ff','#78d8ff');
-   bounds=mergeBounds(shipGlyphBoundsAt(x-9.5,y,1),shipGlyphBoundsAt(x+9.5,y,1));
+   const leftScale=drawAuroraShipGlyph(-9.5,0,1,'#eaf7ff','#ff4a5c');
+   const rightScale=drawAuroraShipGlyph(9.5,0,1,'#eaf7ff','#78d8ff');
+   bounds=mergeBounds(shipGlyphBoundsAt(x-9.5,y,leftScale),shipGlyphBoundsAt(x+9.5,y,rightScale));
   }else{
-   drawAuroraShipGlyph(0,0,1);
-   bounds=shipGlyphBoundsAt(x,y,1);
+   const visualScale=drawAuroraShipGlyph(0,0,1);
+   bounds=shipGlyphBoundsAt(x,y,visualScale);
   }
  }else if(dual){
-  drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1,-10.5,0);
-  drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1,10.5,0);
-  bounds=mergeBounds(shipGlyphBoundsAt(x-10.5,y,1),shipGlyphBoundsAt(x+10.5,y,1));
+  const leftScale=drawFighterSprite(-10.5,0,1,'#f4f8ff','#5ca8ff');
+  const rightScale=drawFighterSprite(10.5,0,1,'#f4f8ff','#5ca8ff');
+  bounds=mergeBounds(shipGlyphBoundsAt(x-10.5,y,leftScale),shipGlyphBoundsAt(x+10.5,y,rightScale));
  }else{
-  drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1);
-  bounds=shipGlyphBoundsAt(x,y,1);
+  const visualScale=drawFighterSprite(0,0,1,'#f4f8ff','#5ca8ff');
+  bounds=shipGlyphBoundsAt(x,y,visualScale);
  }
  if(!ghost)window.__platinumRenderDebug.playerBounds=bounds;
  ctx.restore();
@@ -737,11 +743,11 @@ function drawReserveShips(lives){
    ctx.beginPath();
    ctx.ellipse(0,-1,10.5+2.5*pulse,7.5+1.6*pulse,0,0,7);
    ctx.fill();
-   drawMiniShip(.88,'#fff6d2','#ffd34d');
-   window.__platinumRenderDebug.reserveShipBounds.push(shipGlyphBoundsAt(x,y,.88));
+   const visualScale=drawMiniShip(.88,'#fff6d2','#ffd34d');
+   window.__platinumRenderDebug.reserveShipBounds.push(shipGlyphBoundsAt(x,y,visualScale));
   }else{
-   drawMiniShip(.82,'#f4f8ff','#ff3347');
-   window.__platinumRenderDebug.reserveShipBounds.push(shipGlyphBoundsAt(x,y,.82));
+   const visualScale=drawMiniShip(.82,'#f4f8ff','#ff3347');
+   window.__platinumRenderDebug.reserveShipBounds.push(shipGlyphBoundsAt(x,y,visualScale));
   }
   ctx.restore();
   reserve--;

@@ -1,7 +1,7 @@
 # Codex Context Checkpoint
 
-Generated: 2026-05-30T22:10:31.486Z
-Label: stage7-calibrated-full-analyzer-gate
+Generated: 2026-05-30T22:28:35.033Z
+Label: player-fighter-visual-fidelity
 
 This is the durable recovery point for long Aurora / Platinum Codex sessions.
 Use it before switching machines, before starting a multi-hour run, and whenever
@@ -12,16 +12,16 @@ important working context.
 
 - Repo path: `/Users/sgwoods/Development/Codex/Codex-test1`
 - Branch: `codex/macbook-fullscreen-timing-alignment-wip`
-- HEAD: `46f19bc04` Gate Stage 7 challenge candidates with full analyzer review
-- Dirty files excluding checkpoint self-output: `6`
+- HEAD: `f22f00d51` Calibrate challenge sweeps against full analyzer rejections
+- Dirty files excluding checkpoint self-output: `9`
 
 ## Active Plan
 
-- Continue challenge-stage conformance by requiring candidate sweeps to honor recorded full-analyzer rejections before runtime promotion
+- Improve Aurora player fighter graphical fidelity while keeping reference/palette lanes and reserve layout stable
 
 ## Recommended Next Steps
 
-- Build stronger full-stage candidates or richer Stage 7 contracts before another gameplay edit; add a short visual-fidelity goal to refine the player fighter silhouette and scale so it feels less blocky versus the Galaga reference
+- Review localhost player ship visually, then continue challenge-stage full-stage candidate scoring or ship/alien proportion guardrails
 
 ## Notes
 
@@ -31,31 +31,43 @@ important working context.
 ## Git Status
 
 ```
-A  reference-artifacts/analyses/challenge-stage-candidate-sweep-index/2026-05-30T22-07-25-46f19bc04/README.md
-A  reference-artifacts/analyses/challenge-stage-candidate-sweep-index/2026-05-30T22-07-25-46f19bc04/report.json
-M  reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json
-M  reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json
-M  tools/harness/check-challenge-stage-candidate-sweep.js
-M  tools/harness/sweep-stage11-challenge-candidates.js
+M reference-artifacts/analyses/application-artifact-conformance/latest.json
+ M reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-carrying-fighter.png
+ M reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/dual-fighter-transition.png
+ M reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/dual-fighter.png
+ M reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/player-fighter.png
+ M reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json
+ M src/js/21-render-board.js
+ M tools/harness/check-player-reserve-visual-layout.js
+ M tools/harness/check-sprite-render-mode-guard.js
 ```
 
 ## Diff Stat
 
 ```
-(none)
+.../application-artifact-conformance/latest.json   |  42 ++++++-------
+ .../latest-crops/boss-carrying-fighter.png         | Bin 998 -> 1015 bytes
+ .../latest-crops/dual-fighter-transition.png       | Bin 918 -> 868 bytes
+ .../latest-crops/dual-fighter.png                  | Bin 918 -> 868 bytes
+ .../latest-crops/player-fighter.png                | Bin 503 -> 461 bytes
+ .../aurora-runtime-sprite-conformance/latest.json  |  66 ++++++++++-----------
+ src/js/21-render-board.js                          |  50 +++++++++-------
+ .../harness/check-player-reserve-visual-layout.js  |  30 ++++++++++
+ tools/harness/check-sprite-render-mode-guard.js    |   8 ++-
+ 9 files changed, 118 insertions(+), 78 deletions(-)
 ```
 
 ## Recent Log
 
 ```
-46f19bc04 (HEAD -> codex/macbook-fullscreen-timing-alignment-wip, origin/codex/macbook-fullscreen-timing-alignment-wip) Gate Stage 7 challenge candidates with full analyzer review
+f22f00d51 (HEAD -> codex/macbook-fullscreen-timing-alignment-wip, origin/codex/macbook-fullscreen-timing-alignment-wip) Calibrate challenge sweeps against full analyzer rejections
+46f19bc04 Gate Stage 7 challenge candidates with full analyzer review
 56e319f29 Ground challenge timing in target motion tracks
 9a9ede246 Measure challenge visible-motion timing
 fac514254 Refresh challenge ceremony checkpoint
 b31ffb402 Widen challenge result ceremony timing
 768a709b4 Refresh fullscreen timing checkpoint
 5d355d8e6 Fix checkpoint self status parsing
-04a9d7954 Stabilize challenge timing alignment artifacts
 ```
 
 ## Machine Status Snapshot
@@ -185,11 +197,11 @@ Read first:
 - MULTI_MACHINE_WORKFLOW.md
 
 Current checkpoint:
-- label: stage7-calibrated-full-analyzer-gate
-- generated: 2026-05-30T22:10:31.486Z
+- label: player-fighter-visual-fidelity
+- generated: 2026-05-30T22:28:35.033Z
 - branch: codex/macbook-fullscreen-timing-alignment-wip
-- commit: 46f19bc04 Gate Stage 7 challenge candidates with full analyzer review
-- dirty files excluding checkpoint self-output: 6
+- commit: f22f00d51 Calibrate challenge sweeps against full analyzer rejections
+- dirty files excluding checkpoint self-output: 9
 
 Continue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.
 ```
