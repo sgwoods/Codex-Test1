@@ -76,6 +76,7 @@ const CHALLENGE_SETPIECE_CONTRACTS = path.join(ROOT, 'reference-artifacts', 'ana
 const GAMEPLAY_SEGMENT_CAPTURE = path.join(ROOT, 'reference-artifacts', 'analyses', 'gameplay-segment-captures', 'latest.json');
 const STAGE7_REFERENCE_PATH_BEFORE_AFTER = path.join(ROOT, 'reference-artifacts', 'analyses', 'stage7-reference-path-before-after', 'latest.json');
 const LEVEL_VISUAL_CONFORMANCE_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'level-visual-conformance-index', 'latest.json');
+const LEVEL_VISUAL_TIMING_ALIGNMENT = path.join(ROOT, 'reference-artifacts', 'analyses', 'level-visual-timing-alignment', 'latest.json');
 const GALAGA_TARGET_ARTIFACT_COVERAGE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-artifact-coverage', 'latest.json');
 const GALAGA_ALIEN_VISUAL_REFERENCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-visual-reference', 'latest.json');
 const GALAGA_ALIEN_MOTION_REFERENCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-motion-reference', 'latest.json');
@@ -3263,6 +3264,7 @@ let challengeSetpieceContractsCache = null;
 let gameplaySegmentCaptureCache = null;
 let stage7ReferencePathBeforeAfterCache = null;
 let levelVisualConformanceIndexCache = null;
+let levelVisualTimingAlignmentCache = null;
 let galagaTargetArtifactCoverageCache = null;
 let galagaAlienVisualReferenceCache = null;
 let galagaAlienMotionReferenceCache = null;
@@ -3698,6 +3700,24 @@ function loadLevelVisualConformanceIndex(){
   return levelVisualConformanceIndexCache;
 }
 
+function loadLevelVisualTimingAlignment(){
+  if(levelVisualTimingAlignmentCache) return levelVisualTimingAlignmentCache;
+  if(!fs.existsSync(LEVEL_VISUAL_TIMING_ALIGNMENT)){
+    levelVisualTimingAlignmentCache = { rows: [], summary: {} };
+    return levelVisualTimingAlignmentCache;
+  }
+  try {
+    const artifact = readJson(LEVEL_VISUAL_TIMING_ALIGNMENT);
+    levelVisualTimingAlignmentCache = Object.assign({}, artifact, {
+      rows: Array.isArray(artifact.rows) ? artifact.rows : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    levelVisualTimingAlignmentCache = { rows: [], summary: {} };
+  }
+  return levelVisualTimingAlignmentCache;
+}
+
 function loadGalagaTargetArtifactCoverage(){
   if(galagaTargetArtifactCoverageCache) return galagaTargetArtifactCoverageCache;
   if(!fs.existsSync(GALAGA_TARGET_ARTIFACT_COVERAGE)){
@@ -3927,6 +3947,71 @@ function levelVisualVideo(row = {}, side = 'current'){
       ? `${row.targetVideoStatus || 'target clip'}; starts at ${row.targetSourceTimeSeconds ?? 'n/a'}s in the source video.`
       : `${row.currentVideoStatus || 'current clip'}; starts at the row's ${row.sampleSeconds ?? 'n/a'}s Aurora sample point.`
   });
+}
+
+function renderChallengeTimingAlignmentReview(alignment = {}){
+  const rows = Array.isArray(alignment.rows) ? alignment.rows : [];
+  if(!rows.length){
+    return `
+      <div class="docWrap">
+        <span class="docMeta">Challenge timing-alignment clips pending. Run <code>npm run harness:analyze:level-visual-timing-alignment</code>.</span>
+      </div>
+    `;
+  }
+  return rows.map(row => {
+    const pairExists = row.pairedVideo && fs.existsSync(path.join(ROOT, normalizeAssetSourcePath(row.pairedVideo)));
+    const sheetExists = row.contactSheet && fs.existsSync(path.join(ROOT, normalizeAssetSourcePath(row.contactSheet)));
+    const drift = row.currentVsTargetEndDriftSeconds === null || row.currentVsTargetEndDriftSeconds === undefined
+      ? 'pending'
+      : `${Number(row.currentVsTargetEndDriftSeconds).toFixed(2)}s`;
+    return `
+      <details class="levelVisualDetail" id="timing-alignment-${esc(row.id || row.challengeNumber || '')}">
+        <summary class="levelVisualSummary">
+          <span class="levelVisualTitle">
+            <span>${esc(row.label || `Challenging Stage ${row.challengeNumber || ''}`)}</span>
+            <small>Stage-start synchronized target/current review</small>
+          </span>
+          <span class="levelVisualSummaryCell"><strong>${esc(row.durationSeconds || 'n/a')}s window</strong>target left; Aurora right</span>
+          <span class="levelVisualSummaryCell"><strong>${esc(drift)} end drift</strong>first active ${esc(row.currentFirstActiveEnemySecond ?? 'n/a')}s</span>
+          <span class="scorePill">time aligned</span>
+        </summary>
+        <div class="levelVisualDetailBody">
+          <div class="challengeEvidenceCard">
+            <h3>Stage-Start Aligned Motion Review</h3>
+            <p class="docMeta">The video starts both sides at t=0 for the challenging stage: Galaga target footage on the left, current Aurora controlled-clock runtime on the right. This is the review layer for pacing drift, group count, visible arrival versus appearance, route complexity, and whether the score window arrives at the right relative time.</p>
+            ${pairExists ? renderMediaVideo({
+              src: row.pairedVideo,
+              poster: sheetExists ? row.contactSheet : '',
+              label: `${row.label || 'Challenge'} target/current aligned clip`,
+              alt: `${row.label || 'Challenge'} target and Aurora current timing-aligned clip`,
+              note: row.syncRead || 'Timing read pending.'
+            }) : '<div class="mediaPlaceholder">Paired timing-alignment video pending.</div>'}
+          </div>
+          <div class="challengeCompareGrid">
+            <article class="challengeEvidenceCard">
+              <h3>Timing Read</h3>
+              <p>${esc(row.syncRead || 'Timing read pending.')}</p>
+              <p class="docMeta"><strong>Target:</strong> ${esc(row.targetWindow?.id || 'pending')} starts at ${esc(row.targetWindow?.startSeconds ?? 'n/a')}s for ${esc(row.targetWindow?.durationSeconds ?? 'n/a')}s.</p>
+            </article>
+            <article class="challengeEvidenceCard">
+              <h3>Contact Sheet</h3>
+              ${sheetExists ? renderMediaImage({
+                src: row.contactSheet,
+                label: 'Aligned stage-start contact sheet',
+                alt: `${row.label || 'Challenge'} aligned target current contact sheet`,
+                note: 'One frame per second from the paired review clip.'
+              }) : '<div class="mediaPlaceholder">Aligned contact sheet pending.</div>'}
+            </article>
+            <article class="challengeEvidenceCard">
+              <h3>Known Limit</h3>
+              <p>${esc(row.knownLimit || 'Object-track time-warp scoring is not yet implemented.')}</p>
+              <p class="docMeta"><strong>Next:</strong> promote target/current group first-visible times into set-piece contracts.</p>
+            </article>
+          </div>
+        </div>
+      </details>
+    `;
+  }).join('\n');
 }
 
 function levelVisualReferenceEvidence(row = {}){
@@ -5102,6 +5187,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'conformance-audio-index', title: 'Audio Conformance Index' },
     { id: 'stage-conformance-summary', title: 'Stage Conformance Summary' },
     { id: 'level-visual-conformance-index', title: 'Level Visual Index' },
+    { id: 'challenge-timing-alignment-review', title: 'Timing Alignment Review' },
     { id: 'challenge-stage-conformance', title: 'Challenge Stage Deep Dive' },
     { id: 'persona-catalog', title: 'Testing Personas' },
     { id: 'persona-performance-distribution', title: 'Persona Performance Distribution' },
@@ -5342,6 +5428,9 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const levelVisualRows = (levelVisualIndex.rows || []).map(renderLevelVisualDetail).join('\n') || `
     <div class="docWrap"><span class="docMeta">Level visual conformance index pending. Run <code>npm run harness:analyze:level-visual-conformance-index</code>.</span></div>
   `;
+  const levelVisualTimingAlignment = loadLevelVisualTimingAlignment();
+  const levelVisualTimingSummary = levelVisualTimingAlignment.summary || {};
+  const challengeTimingAlignmentRows = renderChallengeTimingAlignmentReview(levelVisualTimingAlignment);
   const personaRows = (guide.personaRows || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.label || '')}</strong><br><span class="docMeta">${esc(entry.harnessId || '')}</span></td>
@@ -6168,6 +6257,21 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           </div>
           <div class="levelVisualList">
             ${levelVisualRows}
+          </div>
+        </section>
+
+        <section class="section" id="challenge-timing-alignment-review">
+          <div class="sectionHeader">
+            <h2>Challenge Timing Alignment Review</h2>
+            <p>Stage-start synchronized Galaga target versus Aurora current videos for challenging stages. These clips make pace drift, visible arrival timing, score-window timing, and complexity mismatches reviewable without guessing which mid-stage moment is being compared.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Current read:</strong> ${esc(levelVisualTimingSummary.challengeCount || 0)} challenging-stage row(s), ${esc(levelVisualTimingSummary.pairedVideoCount || 0)} paired timing clips, ${esc(levelVisualTimingSummary.contactSheetCount || 0)} contact sheets, average absolute end drift ${esc(levelVisualTimingSummary.averageAbsEndDriftSeconds ?? 'n/a')}s.</p>
+            <p>${esc(levelVisualTimingSummary.read || 'Run the timing-alignment analyzer to produce start-aligned challenge clips.')}</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/level-visual-timing-alignment/latest.json</code>. <strong>Report:</strong> <code>LEVEL_VISUAL_TIMING_ALIGNMENT.md</code>.</p>
+          </div>
+          <div class="levelVisualList">
+            ${challengeTimingAlignmentRows}
           </div>
         </section>
 

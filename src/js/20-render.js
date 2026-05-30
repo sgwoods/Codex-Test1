@@ -34,6 +34,35 @@ function currentGameBoardRenderer(){
 
 function draw(){
  const sh=S.shake*8,dx=auxRnd(sh,-sh),dy=auxRnd(sh,-sh);
+ const arcadeFullscreenActive=typeof isArcadeFullscreenLayout==='function'&&isArcadeFullscreenLayout();
+ if(arcadeFullscreenActive){
+  const pad=Math.max(4,Math.floor(Math.min(innerWidth,innerHeight)*.008));
+  const availW=Math.max(PLAY_W,innerWidth-pad*2);
+  const availH=Math.max(PLAY_H,innerHeight-pad*2);
+  const fit=Math.max(1,Math.min(availW/PLAY_W,availH/PLAY_H));
+  const scale=Math.max(1,fit);
+  const viewW=PLAY_W*scale,viewH=PLAY_H*scale;
+  const ox=Math.floor((innerWidth-viewW)/2);
+  const oy=Math.floor((innerHeight-viewH)/2);
+  syncCabinetShellLayout({
+   ox,oy,viewW,viewH,scale,
+   shellX:0,shellY:0,shellW:innerWidth,shellH:innerHeight,
+   shellPadL:0,shellPadT:0,shellPadR:0,shellPadB:0,
+   railLeft:0,railTop:0,railW:0,railH:0,
+   waitScoreOverlay:0,
+   framedOverlayOpen:!!((typeof LEADERBOARD!=='undefined'&&(LEADERBOARD.accountPanelOpen||LEADERBOARD.panelOpen))||(typeof platformMessagePanelOpen!=='undefined'&&!!platformMessagePanelOpen)),
+   arcadeFullscreenActive:1
+  });
+  const boardRenderer=currentGameBoardRenderer();
+  if(boardRenderer){
+   if(window.__platinumRenderDebug)window.__platinumRenderDebug.boardRendererKey=boardRenderer.gameKey;
+   boardRenderer.draw({ox,oy,scale,dx,dy});
+  }else{
+   throw new Error('No Platinum game board renderer is registered.');
+  }
+  syncHudAndShellMessages({ox,oy,viewW,viewH});
+  return;
+ }
  const compactCabinet=innerWidth<1500||innerHeight<980;
  const outerPadX=Math.max(10,Math.floor(innerWidth*(compactCabinet?.012:.016)));
  const outerPadTop=Math.max(10,Math.floor(innerHeight*(compactCabinet?.01:.014)));
@@ -66,7 +95,7 @@ function draw(){
  syncCabinetShellLayout({
   ox,oy,viewW,viewH,scale,shellX,shellY,shellW,shellH,
  shellPadL,shellPadT,shellPadR,shellPadB,railLeft,railTop,railW,railH,
-  waitScoreOverlay,framedOverlayOpen
+  waitScoreOverlay,framedOverlayOpen,arcadeFullscreenActive:0
  });
  const boardRenderer=currentGameBoardRenderer();
  if(boardRenderer){

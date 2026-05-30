@@ -62,6 +62,12 @@ mask:
 #playfieldFrame::after{inset:0;background:linear-gradient(180deg,rgba(7,14,30,.18),transparent 12%,transparent 88%,rgba(7,14,30,.14));box-shadow:inset 0 0 28px rgba(5,10,24,.54)}
 #cabinetRightFrame,#cabinetLeftFrame{position:fixed;display:none;pointer-events:none;z-index:5;border:0;background:transparent;box-shadow:none}
 #cabinetRightFrame::before,#cabinetRightFrame::after,#cabinetLeftFrame::before,#cabinetLeftFrame::after{display:none}
+body.arcadeFullscreenActive #cabinetShell,
+body.arcadeFullscreenActive #cabinetRightFrame,
+body.arcadeFullscreenActive #cabinetLeftFrame,
+body.arcadeFullscreenActive #buildStamp{display:none!important}
+body.arcadeFullscreenActive #playfieldFrame{box-shadow:0 0 0 1px rgba(122,215,255,.22),0 0 36px rgba(10,32,54,.28);background:#000}
+body.arcadeFullscreenActive #msg{bottom:10px}
 #hud{position:fixed;left:0;top:0;z-index:12;pointer-events:none;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:start;gap:14px;padding:4px 10px 0;min-height:var(--hud-band-height,30px);font-size:clamp(14px,.96vw,21px);font-weight:700;letter-spacing:.03em;text-shadow:0 0 6px #000}
 #hud::before{content:"";position:absolute;left:0;right:0;top:0;height:calc(var(--hud-band-height,30px) + var(--hud-band-fade,30px));background:linear-gradient(180deg,rgba(0,0,0,.82),rgba(0,0,0,.48) 58%,rgba(0,0,0,0));z-index:-1}
 #left,#center,#right{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

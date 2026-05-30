@@ -1,7 +1,7 @@
 # Codex Context Checkpoint
 
-Generated: 2026-05-27T16:51:32.636Z
-Label: stable-challenge-setpiece-capture-checkpoint
+Generated: 2026-05-30T14:52:20.370Z
+Label: fullscreen-timing-alignment-wip-handoff
 
 This is the durable recovery point for long Aurora / Platinum Codex sessions.
 Use it before switching machines, before starting a multi-hour run, and whenever
@@ -11,17 +11,17 @@ important working context.
 ## Current Repo State
 
 - Repo path: `/Users/sgwoods/Development/Codex/Codex-test1`
-- Branch: `codex/challenge-target-authority-setpiece-upgrade`
-- HEAD: `6280d4a64` Improve challenge identity gates and sprite conformance lane
-- Dirty files excluding checkpoint self-output: `46`
+- Branch: `codex/macbook-fullscreen-timing-alignment-wip`
+- HEAD: `e397c2c75` Stabilize challenge set-piece capture workflow
+- Dirty files excluding checkpoint self-output: `12`
 
 ## Active Plan
 
-- Challenge set-piece/capture work is validated and ready to commit
+- Preserve fullscreen mode and level visual timing alignment work from the second session on a dedicated branch
 
 ## Recommended Next Steps
 
-- Stage intended files, commit stable branch state, then push or provide handoff
+- Continue only in one Codex chat: inspect WIP branch, fix timing analyzer challenge coverage, then decide whether to merge after the stable challenge set-piece branch lands
 
 ## Notes
 
@@ -31,107 +31,44 @@ important working context.
 ## Git Status
 
 ```
-M CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md
- M GALAGA_ALIEN_TARGET_CROPS.md
- M GALAGA_TARGET_EVIDENCE_AUDIT.md
- M MULTI_MACHINE_WORKFLOW.md
- M QUALITY_CONFORMANCE_MODEL.md
- M RESTART_FROM_HERE.md
- M package.json
- M reference-artifacts/analyses/application-artifact-conformance/latest.json
- M reference-artifacts/analyses/aurora-runtime-vs-galaga-target-crops/latest.json
- M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-01-object-track.svg
- M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-01-trajectory.svg
- M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-02-object-track.svg
- M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-02-trajectory.svg
- M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-03-object-track.svg
- M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-03-trajectory.svg
- M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-04-object-track.svg
- M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-04-trajectory.svg
- M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-05-object-track.svg
- M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-07-object-track.svg
- M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-08-object-track.svg
- M reference-artifacts/analyses/challenge-stage-conformance/latest.json
- M reference-artifacts/analyses/galaga-alien-target-crops/latest.json
- M reference-artifacts/analyses/galaga-target-evidence-audit/latest.json
- M src/js/02-replay-telemetry.js
- M src/js/13-aurora-game-pack.js
- M src/js/90-harness.js
+M package.json
+ M src/index.template.html
+ M src/js/00-boot.js
+ M src/js/19-render-shell.js
+ M src/js/20-render.js
+ M src/styles.css
  M tools/build/build-index.js
- M tools/harness/analyze-aurora-runtime-vs-galaga-target-crops.js
- M tools/harness/analyze-galaga-target-evidence-audit.js
- M tools/harness/check-aurora-runtime-vs-galaga-target-crops.js
- M tools/harness/check-challenge-motion-profile.js
- M tools/harness/check-galaga-alien-target-crops.js
- M tools/harness/check-galaga-target-evidence-audit.js
- M tools/harness/check-video-artifact.js
- M tools/harness/promote-galaga-alien-target-crops.js
- M tools/harness/video-artifact-util.js
-?? CHALLENGE_SETPIECE_CONTRACTS.md
-?? reference-artifacts/analyses/challenge-setpiece-contracts/
-?? reference-artifacts/analyses/challenge-stage-conformance/2026-05-27-6280d4a64/
-?? reference-artifacts/analyses/codex-context-checkpoint/
-?? reference-artifacts/analyses/gameplay-segment-captures/
-?? reference-artifacts/analyses/level-visual-conformance-index/review-pairs/
-?? tools/dev/write-context-checkpoint.js
-?? tools/harness/analyze-challenge-setpiece-contracts.js
-?? tools/harness/capture-gameplay-segment.js
-?? tools/harness/check-challenge-setpiece-contracts.js
+?? LEVEL_VISUAL_TIMING_ALIGNMENT.md
+?? reference-artifacts/analyses/level-visual-timing-alignment/
+?? tools/harness/analyze-level-visual-timing-alignment.js
+?? tools/harness/check-arcade-fullscreen-mode.js
+?? tools/harness/check-level-visual-timing-alignment.js
 ```
 
 ## Diff Stat
 
 ```
-CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md            |    99 +-
- GALAGA_ALIEN_TARGET_CROPS.md                       |    76 +-
- GALAGA_TARGET_EVIDENCE_AUDIT.md                    |    14 +-
- MULTI_MACHINE_WORKFLOW.md                          |    16 +
- QUALITY_CONFORMANCE_MODEL.md                       |    26 +
- RESTART_FROM_HERE.md                               |    16 +
- package.json                                       |     7 +-
- .../application-artifact-conformance/latest.json   |   139 +-
- .../latest.json                                    |   179 +-
- .../challenge-stage-01-object-track.svg            |     6 +-
- .../challenge-stage-01-trajectory.svg              |     2 +-
- .../challenge-stage-02-object-track.svg            |    28 +-
- .../challenge-stage-02-trajectory.svg              |    16 +-
- .../challenge-stage-03-object-track.svg            |    28 +-
- .../challenge-stage-03-trajectory.svg              |    12 +-
- .../challenge-stage-04-object-track.svg            |     2 +-
- .../challenge-stage-04-trajectory.svg              |     2 +-
- .../challenge-stage-05-object-track.svg            |     2 +-
- .../challenge-stage-07-object-track.svg            |     2 +-
- .../challenge-stage-08-object-track.svg            |     2 +-
- .../challenge-stage-conformance/latest.json        | 36036 ++++++-------------
- .../analyses/galaga-alien-target-crops/latest.json |   201 +-
- .../galaga-target-evidence-audit/latest.json       |   150 +-
- src/js/02-replay-telemetry.js                      |     3 +-
- src/js/13-aurora-game-pack.js                      |    20 +-
- src/js/90-harness.js                               |    61 +
- tools/build/build-index.js                         |   165 +-
- ...nalyze-aurora-runtime-vs-galaga-target-crops.js |    29 +-
- .../analyze-galaga-target-evidence-audit.js        |    34 +-
- .../check-aurora-runtime-vs-galaga-target-crops.js |    13 +
- tools/harness/check-challenge-motion-profile.js    |    36 +-
- tools/harness/check-galaga-alien-target-crops.js   |     8 +-
- .../harness/check-galaga-target-evidence-audit.js  |     9 +-
- tools/harness/check-video-artifact.js              |    29 +-
- tools/harness/promote-galaga-alien-target-crops.js |    86 +-
- tools/harness/video-artifact-util.js               |     4 +-
- 36 files changed, 12025 insertions(+), 25533 deletions(-)
+package.json               |   3 ++
+ src/index.template.html    |   9 ++++
+ src/js/00-boot.js          |  81 +++++++++++++++++++++++++++++++++--
+ src/js/19-render-shell.js  |  10 +++--
+ src/js/20-render.js        |  31 +++++++++++++-
+ src/styles.css             |   6 +++
+ tools/build/build-index.js | 104 +++++++++++++++++++++++++++++++++++++++++++++
+ 7 files changed, 236 insertions(+), 8 deletions(-)
 ```
 
 ## Recent Log
 
 ```
-6280d4a64 (HEAD -> codex/challenge-target-authority-setpiece-upgrade, origin/codex/macbook-challenge-stage-conformance-cycle, codex/macbook-challenge-stage-conformance-cycle) Improve challenge identity gates and sprite conformance lane
-abc27c36c Add Stage 7 before-after challenge evidence
-412ff2860 Promote Stage 7 reference-path challenge choreography
-9001395d8 Add target-derived challenge trajectory controls
-abb6ccaef Resweep challenge stage candidates under strict identity
-a228db722 Tighten challenge stage sweep diagnostics
-47f2c7e1d Expand Stage 19 challenge sweep evidence
-a423c8beb Refresh conformance dashboard metadata
+e397c2c75 (HEAD -> codex/macbook-fullscreen-timing-alignment-wip, origin/codex/challenge-target-authority-setpiece-upgrade, codex/challenge-target-authority-setpiece-upgrade) Stabilize challenge set-piece capture workflow
+19db4fa4c (origin/main, origin/HEAD) Refresh review packet for Guardians publish head
+ed9042cd9 Refresh release conformance docs for Guardians publish
+f5548699f Advance Guardians opening-slice motion and parity
+2fca9f76f Refresh review packet after release doc refresh
+9c0dc106b Refresh review packet for Guardians publish head
+d3d8c35f8 Refresh release conformance docs for Guardians head
+23e25e286 Refresh code review packet for Guardians opening authority
 ```
 
 ## Machine Status Snapshot
@@ -165,7 +102,7 @@ a423c8beb Refresh conformance dashboard metadata
     }
   },
   "repo": {
-    "branch": "codex/challenge-target-authority-setpiece-upgrade",
+    "branch": "codex/macbook-fullscreen-timing-alignment-wip",
     "dirty": true,
     "upstream": null,
     "ahead": 0,
@@ -213,8 +150,8 @@ a423c8beb Refresh conformance dashboard metadata
     "dev": {
       "ok": true,
       "version": "1.4.0",
-      "label": "1.4.0.1+build.924.sha.9e779c05",
-      "commit": "9e779c05",
+      "label": "1.4.0.1+build.932.sha.19db4fa4",
+      "commit": "19db4fa4",
       "releaseChannel": "development"
     },
     "beta": {
@@ -261,11 +198,11 @@ Read first:
 - MULTI_MACHINE_WORKFLOW.md
 
 Current checkpoint:
-- label: stable-challenge-setpiece-capture-checkpoint
-- generated: 2026-05-27T16:51:32.636Z
-- branch: codex/challenge-target-authority-setpiece-upgrade
-- commit: 6280d4a64 Improve challenge identity gates and sprite conformance lane
-- dirty files excluding checkpoint self-output: 46
+- label: fullscreen-timing-alignment-wip-handoff
+- generated: 2026-05-30T14:52:20.370Z
+- branch: codex/macbook-fullscreen-timing-alignment-wip
+- commit: e397c2c75 Stabilize challenge set-piece capture workflow
+- dirty files excluding checkpoint self-output: 12
 
 Continue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.
 ```

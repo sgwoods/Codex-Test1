@@ -1,0 +1,1111 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "level-visual-timing-alignment",
+  "generatedAt": "2026-05-30T14:47:48.335Z",
+  "branch": "codex/macbook-fullscreen-timing-alignment-wip",
+  "commit": "e397c2c75",
+  "summary": {
+    "challengeCount": 3,
+    "pairedVideoCount": 3,
+    "contactSheetCount": 3,
+    "averageAbsEndDriftSeconds": 16,
+    "maxAbsEndDriftSeconds": 20,
+    "read": "Generated 3 stage-start aligned challenge comparison row(s). These videos put Galaga target footage on the left and Aurora current controlled-clock footage on the right from t=0, so pace and complexity drift can be reviewed without guessing which mid-stage moment was sampled."
+  },
+  "rows": [
+    {
+      "challengeNumber": 1,
+      "stageMarker": 3,
+      "id": "challenge-01",
+      "label": "Challenging Stage 1 (Levels 3-4)",
+      "durationSeconds": 31,
+      "targetVideo": "reference-artifacts/analyses/level-visual-timing-alignment/latest-target-videos/challenge-01.webm",
+      "currentVideo": "reference-artifacts/analyses/level-visual-timing-alignment/latest-current-videos/challenge-01.webm",
+      "pairedVideo": "reference-artifacts/analyses/level-visual-timing-alignment/latest-paired-videos/challenge-01-target-vs-current-aligned.webm",
+      "contactSheet": "reference-artifacts/analyses/level-visual-timing-alignment/latest-contact-sheets/challenge-01-target-vs-current-aligned-contact.jpg",
+      "currentFirstActiveEnemySecond": 0,
+      "currentChallengeEndedSecond": 19,
+      "currentVsTargetEndDriftSeconds": -12,
+      "syncRead": "Aurora first visible active enemies appear around 0s after challenge start. Aurora exits challenge state around 19s, versus target window 31s; drift -12s.",
+      "targetWindow": {
+        "id": "challenge-01-classic-column-lesson",
+        "sourceId": "challenge-all2-single-ship-all-perfects",
+        "startSeconds": 5,
+        "durationSeconds": 31,
+        "family": "classic-column-and-side-arc",
+        "motionRead": "Introductory challenge teaches vertical columns, simple side hooks, upper-band score windows, and the perfect-result loop.",
+        "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-1fps.jpg",
+        "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-2fps.jpg",
+        "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/motion-review-4fps.jpg"
+      },
+      "currentTimelineSamples": [
+        {
+          "t": 0,
+          "stage": 3,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 40,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 1,
+          "stage": 3,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 40,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 2,
+          "stage": 3,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 40,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 3,
+          "stage": 3,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 40,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 4,
+          "stage": 3,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 40,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 5,
+          "stage": 3,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 40,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 6,
+          "stage": 3,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 40,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 7,
+          "stage": 3,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 40,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 8,
+          "stage": 3,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 40,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 9,
+          "stage": 3,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 40,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 10,
+          "stage": 3,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 32,
+          "challengeEnemyCount": 32,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 11,
+          "stage": 3,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 24,
+          "challengeEnemyCount": 24,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 12,
+          "stage": 3,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 14,
+          "challengeEnemyCount": 14,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 13,
+          "stage": 3,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 8,
+          "challengeEnemyCount": 8,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 14,
+          "stage": 3,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 8,
+          "challengeEnemyCount": 8,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 15,
+          "stage": 3,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 0,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 16,
+          "stage": 3,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 0,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 17,
+          "stage": 3,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 0,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 18,
+          "stage": 3,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 0,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 19,
+          "stage": 4,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 20,
+          "stage": 4,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 21,
+          "stage": 4,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 22,
+          "stage": 4,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 23,
+          "stage": 4,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 24,
+          "stage": 4,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 25,
+          "stage": 4,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 26,
+          "stage": 4,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 27,
+          "stage": 4,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 28,
+          "stage": 4,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 29,
+          "stage": 4,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 30,
+          "stage": 4,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        }
+      ],
+      "knownLimit": "This aligns clips from stage start, but target object tracks and current object tracks are not yet time-warped. Human review should look for pace drift, group-count drift, visible arrival-vs-appearance drift, and whether the scoring window arrives at the same relative time."
+    },
+    {
+      "challengeNumber": 3,
+      "stageMarker": 11,
+      "id": "challenge-03",
+      "label": "Challenging Stage 3 (Levels 11-12)",
+      "durationSeconds": 38,
+      "targetVideo": "reference-artifacts/analyses/level-visual-timing-alignment/latest-target-videos/challenge-03.webm",
+      "currentVideo": "reference-artifacts/analyses/level-visual-timing-alignment/latest-current-videos/challenge-03.webm",
+      "pairedVideo": "reference-artifacts/analyses/level-visual-timing-alignment/latest-paired-videos/challenge-03-target-vs-current-aligned.webm",
+      "contactSheet": "reference-artifacts/analyses/level-visual-timing-alignment/latest-contact-sheets/challenge-03-target-vs-current-aligned-contact.jpg",
+      "currentFirstActiveEnemySecond": 0,
+      "currentChallengeEndedSecond": 18,
+      "currentVsTargetEndDriftSeconds": -20,
+      "syncRead": "Aurora first visible active enemies appear around 0s after challenge start. Aurora exits challenge state around 18s, versus target window 38s; drift -20s.",
+      "targetWindow": {
+        "id": "challenge-03-blue-hook-and-green-novelty",
+        "sourceId": "challenge-all2-single-ship-all-perfects",
+        "startSeconds": 75,
+        "durationSeconds": 38,
+        "family": "blue-hook-green-novelty",
+        "motionRead": "Blue side hooks and green novelty shapes make the third challenge visually distinct and less column-like.",
+        "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/contact-sheet-1fps.jpg",
+        "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/contact-sheet-2fps.jpg",
+        "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/motion-review-4fps.jpg"
+      },
+      "currentTimelineSamples": [
+        {
+          "t": 0,
+          "stage": 11,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 40,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 1,
+          "stage": 11,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 40,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 2,
+          "stage": 11,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 32,
+          "challengeEnemyCount": 32,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 3,
+          "stage": 11,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 24,
+          "challengeEnemyCount": 24,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 4,
+          "stage": 11,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 24,
+          "challengeEnemyCount": 24,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 5,
+          "stage": 11,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 24,
+          "challengeEnemyCount": 24,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 6,
+          "stage": 11,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 16,
+          "challengeEnemyCount": 16,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 7,
+          "stage": 11,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 16,
+          "challengeEnemyCount": 16,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 8,
+          "stage": 11,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 16,
+          "challengeEnemyCount": 16,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 9,
+          "stage": 11,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 12,
+          "challengeEnemyCount": 12,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 10,
+          "stage": 11,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 8,
+          "challengeEnemyCount": 8,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 11,
+          "stage": 11,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 8,
+          "challengeEnemyCount": 8,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 12,
+          "stage": 11,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 8,
+          "challengeEnemyCount": 8,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 13,
+          "stage": 11,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 8,
+          "challengeEnemyCount": 8,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 14,
+          "stage": 11,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 0,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 15,
+          "stage": 11,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 0,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 16,
+          "stage": 11,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 0,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 17,
+          "stage": 11,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 0,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 18,
+          "stage": 12,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 19,
+          "stage": 12,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 20,
+          "stage": 12,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 21,
+          "stage": 12,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 22,
+          "stage": 12,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 23,
+          "stage": 12,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 24,
+          "stage": 12,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 25,
+          "stage": 12,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 26,
+          "stage": 12,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 27,
+          "stage": 12,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 28,
+          "stage": 12,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 29,
+          "stage": 12,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 30,
+          "stage": 12,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 31,
+          "stage": 12,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 32,
+          "stage": 12,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 33,
+          "stage": 12,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 34,
+          "stage": 12,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 35,
+          "stage": 12,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 38,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 36,
+          "stage": 12,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 38,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 37,
+          "stage": 12,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 38,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        }
+      ],
+      "knownLimit": "This aligns clips from stage start, but target object tracks and current object tracks are not yet time-warped. Human review should look for pace drift, group-count drift, visible arrival-vs-appearance drift, and whether the scoring window arrives at the same relative time."
+    },
+    {
+      "challengeNumber": 8,
+      "stageMarker": 31,
+      "id": "challenge-08",
+      "label": "Challenging Stage 8 (Levels 31-32)",
+      "durationSeconds": 30,
+      "targetVideo": "reference-artifacts/analyses/level-visual-timing-alignment/latest-target-videos/challenge-08.webm",
+      "currentVideo": "reference-artifacts/analyses/level-visual-timing-alignment/latest-current-videos/challenge-08.webm",
+      "pairedVideo": "reference-artifacts/analyses/level-visual-timing-alignment/latest-paired-videos/challenge-08-target-vs-current-aligned.webm",
+      "contactSheet": "reference-artifacts/analyses/level-visual-timing-alignment/latest-contact-sheets/challenge-08-target-vs-current-aligned-contact.jpg",
+      "currentFirstActiveEnemySecond": 0,
+      "currentChallengeEndedSecond": 14,
+      "currentVsTargetEndDriftSeconds": -16,
+      "syncRead": "Aurora first visible active enemies appear around 0s after challenge start. Aurora exits challenge state around 14s, versus target window 30s; drift -16s.",
+      "targetWindow": {
+        "id": "challenge-08-blue-purple-finale",
+        "sourceId": "challenge-all2-single-ship-all-perfects",
+        "startSeconds": 241,
+        "durationSeconds": 30,
+        "family": "blue-purple-finale",
+        "motionRead": "Final visible challenge window emphasizes blue/purple clustered arcs and a compact all-perfect finish.",
+        "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-1fps.jpg",
+        "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-2fps.jpg",
+        "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/motion-review-4fps.jpg"
+      },
+      "currentTimelineSamples": [
+        {
+          "t": 0,
+          "stage": 31,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 40,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 1,
+          "stage": 31,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 40,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 2,
+          "stage": 31,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 40,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 3,
+          "stage": 31,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 39,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 4,
+          "stage": 31,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 36,
+          "challengeEnemyCount": 36,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 5,
+          "stage": 31,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 33,
+          "challengeEnemyCount": 33,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 6,
+          "stage": 31,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 29,
+          "challengeEnemyCount": 29,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 7,
+          "stage": 31,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 21,
+          "challengeEnemyCount": 21,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 8,
+          "stage": 31,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 12,
+          "challengeEnemyCount": 12,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 9,
+          "stage": 31,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 7,
+          "challengeEnemyCount": 7,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 10,
+          "stage": 31,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 0,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 11,
+          "stage": 31,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 0,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 12,
+          "stage": 31,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 0,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 13,
+          "stage": 31,
+          "challenge": true,
+          "score": 0,
+          "activeEnemyCount": 0,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 14,
+          "stage": 32,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 15,
+          "stage": 32,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 16,
+          "stage": 32,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 17,
+          "stage": 32,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 18,
+          "stage": 32,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 40,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 19,
+          "stage": 32,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 20,
+          "stage": 32,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 21,
+          "stage": 32,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 22,
+          "stage": 32,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 23,
+          "stage": 32,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 24,
+          "stage": 32,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 25,
+          "stage": 32,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 26,
+          "stage": 32,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 27,
+          "stage": 32,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 28,
+          "stage": 32,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        },
+        {
+          "t": 29,
+          "stage": 32,
+          "challenge": false,
+          "score": 0,
+          "activeEnemyCount": 39,
+          "challengeEnemyCount": 0,
+          "banner": "",
+          "bannerMode": ""
+        }
+      ],
+      "knownLimit": "This aligns clips from stage start, but target object tracks and current object tracks are not yet time-warped. Human review should look for pace drift, group-count drift, visible arrival-vs-appearance drift, and whether the scoring window arrives at the same relative time."
+    }
+  ],
+  "failures": [],
+  "sourceArtifacts": {
+    "galagaChallengeVideoReference": "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
+    "levelVisualConformanceIndex": "reference-artifacts/analyses/level-visual-conformance-index/latest.json",
+    "challengeStageConformance": "reference-artifacts/analyses/challenge-stage-conformance/latest.json"
+  },
+  "measurementLimits": [
+    "This artifact is challenge-stage only; regular levels need separate stage-start target segmentation.",
+    "Aurora current clips are controlled-clock browser renders without live audio.",
+    "The paired video aligns t=0 and duration, but does not yet time-warp individual target/current object tracks.",
+    "Use this as a before/after human review aid and as a source for future stage-duration and group-timing metrics."
+  ],
+  "nextBestSteps": [
+    "Promote target object-track first-visible and last-visible times into each challenge set-piece contract.",
+    "Score current challenge group timing against the stage-start aligned target windows.",
+    "Use paired clips as before/after release artifacts whenever a challenge-stage implementation changes."
+  ]
+}
