@@ -45,6 +45,7 @@ function main(){
     'harness:check:galaxy-guardians-opening-slice-baseline',
     'harness:check:galaxy-guardians-opening-slice-source-baseline',
     'harness:check:galaxy-guardians-opening-slice-frame-reference',
+    'harness:check:galaxy-guardians-wait-launch-audio',
     'harness:check:galaxy-guardians-opening-slice-motion-targets',
     'harness:check:galaxy-guardians-opening-slice-render-surface',
     'harness:check:galaxy-guardians-opening-rack-motion',
@@ -128,9 +129,9 @@ function main(){
 
   const referencePromotions = reference.nextMetricPromotions || [];
   const requiredPromotions = [
-    'Tighten the live WAIT/title/mission/score-table layout against the promoted Matt Hawkins frame windows.',
-    "Promote frame-backed explosion and hit-state authority from the committed Arcade's Lounge windows so combat flashes stop reading as proxy-only.",
-    'Strengthen palette progression and swarm color-family authority beyond the opening slice so later stage bands read as deliberate Guardians presentation.'
+    'Measured later-band fairness pass for stage-five-and-beyond collision stability and clear consistency.',
+    'Selective audio cue cleanup and browser listening review now that the visible combat, palette, and shell-fit gaps are materially stronger.',
+    'Do a second WAIT / title / mission / score-table refinement pass only if the next hosted side-by-side review still shows cabinet drift.'
   ];
   const missingPromotions = requiredPromotions.filter(item => !referencePromotions.includes(item));
   if(missingPromotions.length){
@@ -141,7 +142,7 @@ function main(){
   }
 
   const gaps = quickPeek.remainingGaps || [];
-  const expectsGap = 'Attract mission text and score advance table now have promoted frame-window authority, but the live runtime still needs tighter layout and copy matching against the committed intro reference.';
+  const expectsGap = 'Attract mission text and score advance table now have promoted frame-window authority, and the live runtime read is stronger, but a later hosted side-by-side review may still justify tighter cabinet-window matching.';
   if(!gaps.includes(expectsGap)){
     fail('Quick-peek source fidelity artifact no longer preserves the attract/score-table remaining gap.', {
       remainingGaps: gaps

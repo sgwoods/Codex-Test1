@@ -468,6 +468,10 @@ function currentPilotCardState(){
  const signedIn=typeof LEADERBOARD!=='undefined'&&!!LEADERBOARD?.user;
  const verified=!!(typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user?.email_confirmed_at);
  const humanId=typeof pilotDisplayId==='function'?pilotDisplayId():(signedIn?'PILOT':'GUEST');
+ const gameTitle=typeof currentScoreStorageGameTitle==='function'
+  ? String(currentScoreStorageGameTitle()||'Current Cabinet').trim()
+  : 'Current Cabinet';
+ const gameHudLabel=gameTitle.toUpperCase();
  const p2=S.playerTwo;
  if(S.watchMode){
   const persona=playerPersonaCardSummary(S.watchPersona||selectedWatchPersona());
@@ -476,14 +480,14 @@ function currentPilotCardState(){
    icon:'🛰',
    dockLabel:'WATCH',
    dockStatus:persona.label,
-   dockTitle:`Watch Mode: ${persona.label} pilot onboard`,
-   panelTitle:'PILOT ONBOARD',
+   dockTitle:`Watch Mode: ${persona.label} pilot onboard for ${gameTitle}`,
+   panelTitle:`${gameHudLabel} WATCH`,
    panelSub:'WATCH MODE PERSONA',
    callsign:`${persona.label} IS FLYING`,
-   status:`${persona.description} Score not recorded.`,
-   summary:'Watch Mode is a persona-controlled demonstration run. Scores and videos are not eligible for posting.',
+   status:`${persona.description} ${gameTitle} score not recorded.`,
+   summary:`Watch Mode is a persona-controlled ${gameTitle} demonstration run. Scores and videos are not eligible for posting.`,
    email:'Controller: Persona pilot',
-   userId:`Role: ${persona.initials} watch pilot`,
+   userId:`Role: ${persona.initials} ${gameTitle} watch pilot`,
    hudHtml:`<span class="hudLabel">WATCH</span> <span class="hudValue">${persona.initials}</span>`,
    signedIn
   };
@@ -497,14 +501,14 @@ function currentPilotCardState(){
    icon:'🧑‍🚀',
    dockLabel:active?'2UP PLAY':ready?'2UP READY':'2UP DONE',
    dockStatus:persona.label,
-   dockTitle:`2UP ${persona.label} rival pilot ${active?'flying':ready?'ready':'complete'}`,
-   panelTitle:active?'2UP RIVAL ONBOARD':ready?'2UP RIVAL READY':'2UP RIVAL RESULTS',
+   dockTitle:`2UP ${persona.label} rival ${active?'flying':ready?'ready':'complete'} in ${gameTitle}`,
+   panelTitle:active?`${gameHudLabel} 2UP LIVE`:ready?`${gameHudLabel} 2UP READY`:`${gameHudLabel} 2UP RESULTS`,
    panelSub:'PERSONA RIVAL PILOT',
    callsign:`2UP ${persona.label}`,
-   status:`${persona.description} Human 1UP score is the only scoreboard entry.`,
-   summary:active?'Persona rival is flying now. This turn is comparison-only and will not post a score.':ready?'Persona rival is queued for the next turn. Press 2 from results to start it.':'Persona rival turn is complete. Only the human 1UP score remains eligible.',
+   status:`${persona.description} Human 1UP ${gameTitle} score is the only scoreboard entry.`,
+   summary:active?`Persona rival is flying ${gameTitle} now. This turn is comparison-only and will not post a score.`:ready?`Persona rival is queued for the next ${gameTitle} turn. Press 2 from results to start it.`:`Persona rival ${gameTitle} turn is complete. Only the human 1UP score remains eligible.`,
    email:'Controller: Persona rival',
-   userId:`Role: ${persona.initials} 2UP rival`,
+   userId:`Role: ${persona.initials} ${gameTitle} 2UP rival`,
    hudHtml:`<span class="playerTwoHud${active?' playerTwoHudActive':' playerTwoHudReady'}"><span class="hudLabel">${active?'2UP PLAY':ready?'2UP READY':'2UP DONE'}</span> <span class="hudValue">${formatScore(p2.score||0)}</span></span>`,
    signedIn
   };
@@ -516,14 +520,14 @@ function currentPilotCardState(){
    icon:'🧑‍🚀',
    dockLabel:signedIn?'1UP PILOT':'1UP',
    dockStatus:signedIn?humanId:'LOCAL',
-   dockTitle:signedIn?`${humanId} onboard; ${persona.label} 2UP queued`:`Local 1UP pilot; ${persona.label} 2UP queued`,
-   panelTitle:'1UP PILOT',
+   dockTitle:signedIn?`${humanId} onboard for ${gameTitle}; ${persona.label} 2UP queued`:`Local 1UP ${gameTitle} pilot; ${persona.label} 2UP queued`,
+   panelTitle:`${gameHudLabel} 1UP`,
    panelSub:'HUMAN TURN ACTIVE',
    callsign:signedIn?`${humanId} IS ONBOARD`:'LOCAL PILOT',
-   status:`2UP ${persona.label} rival is queued after the human turn. Human score only.`,
-   summary:signedIn?`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':''}. 2UP rival scores do not post.`:'Local score path active. Sign in to post verified human scores.',
+   status:`2UP ${persona.label} rival is queued after the human ${gameTitle} turn. Human score only.`,
+   summary:signedIn?`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':''}. ${gameTitle} 2UP rival scores do not post.`:`Local ${gameTitle} score path active. Sign in to post verified human scores.`,
    email:`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):'--'}`,
-   userId:`Queued rival: ${persona.label}`,
+   userId:`Queued rival: ${persona.label} for ${gameTitle}`,
    hudHtml:`<span class="hudLabel">PILOT</span> <span class="hudValue">${signedIn?humanId:'---'}</span>`,
    signedIn
   };
@@ -531,14 +535,14 @@ function currentPilotCardState(){
  return{
   mode:signedIn?'human-signed-in':'human-local',
   icon:'🧑‍🚀',
-  dockLabel:signedIn?'ONBOARD':'SIGN IN',
+   dockLabel:signedIn?'ONBOARD':'SIGN IN',
   dockStatus:signedIn?humanId:'Pilot offline',
-  dockTitle:signedIn?`${humanId} onboard`:'Pilot Sign In',
-  panelTitle:'PILOT INFORMATION',
+  dockTitle:signedIn?`${humanId} onboard for ${gameTitle}`:`${gameTitle} Pilot Sign In`,
+  panelTitle:`${gameHudLabel} PILOT`,
   panelSub:'QUICK PILOT REFERENCE',
   callsign:signedIn?`${humanId} IS ONBOARD`:'PILOT OFFLINE',
-  status:signedIn?'Pilot identity active. Scores and records are summarized below.':'Sign in for synced records, or keep flying locally.',
-  summary:'',
+  status:signedIn?`${gameTitle} pilot identity active. Scores and records are summarized below.`:`Sign in for synced ${gameTitle} records, or keep flying locally.`,
+  summary:signedIn?`This pilot card summarizes your current ${gameTitle} identity, records, and posting state.`:`Local ${gameTitle} score path is available now. Sign in when you want synced records and verified posting.`,
   email:`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):'--'}`,
   userId:`User ID: ${signedIn?(LEADERBOARD.user?.id||'--'):'--'}`,
   hudHtml:`<span class="hudLabel">PILOT</span> <span class="hudValue">${signedIn?humanId:'---'}</span>`,

@@ -105,6 +105,7 @@ const REQUIRED_SCRIPT_GROUPS = {
     'harness:check:galaxy-guardians-opening-slice-frame-reference',
     'harness:check:galaxy-guardians-opening-slice-motion-targets',
     'harness:check:galaxy-guardians-opening-slice-render-surface',
+    'harness:check:galaxy-guardians-wait-launch-audio',
     'harness:check:galaxy-guardians-opening-rack-motion',
     'harness:check:galaxy-guardians-attract-score-surface',
     'harness:check:galaxy-guardians-combat-feedback-frame-reference'
@@ -131,6 +132,7 @@ const REQUIRED_SCRIPT_GROUPS = {
   ],
   platformFrame: [
     'harness:check:galaxy-guardians-platform-frame-parity',
+    'harness:check:galaxy-guardians-replay-capture',
     'harness:check:remote-score-submit',
     'harness:check:pilot-records-panel'
   ],
@@ -142,11 +144,11 @@ const REQUIRED_SCRIPT_GROUPS = {
 };
 
 const REQUIRED_PROMOTIONS = [
-  'Tighten the live WAIT/title/mission/score-table layout against the promoted Matt Hawkins frame windows.',
-  'Promote frame-backed explosion and hit-state authority from the committed Arcade\'s Lounge windows so combat flashes stop reading as proxy-only.',
-  'Strengthen palette progression and swarm color-family authority beyond the opening slice so later stage bands read as deliberate Guardians presentation.',
   'Measured later-band fairness pass for stage-five-and-beyond collision stability and clear consistency.',
-  'Selective audio cue cleanup only after the opening-slice and motion passes expose the next highest-value audible miss.'
+  'Selective audio cue cleanup and browser listening review now that the visible combat, palette, and shell-fit gaps are materially stronger.',
+  'Do a second WAIT / title / mission / score-table refinement pass only if the next hosted side-by-side review still shows cabinet drift.',
+  'Push public release readiness beyond the current one-level mission_complete slice only after the stronger opening holds up in hosted review.',
+  'Carry the improved Platinum-frame parity through replay, capture, bug-report, and shell review so Guardians stays first-class as it grows.'
 ];
 
 function fail(message, payload){

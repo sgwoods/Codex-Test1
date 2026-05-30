@@ -1,6 +1,6 @@
 # Galaxy Guardians Resume State And Next Steps
 
-Updated: May 26, 2026
+Updated: May 29, 2026
 
 ## Purpose
 
@@ -110,6 +110,19 @@ The current source now also carries:
 The practical meaning is: the first visible slice now reads more like a real
 cabinet adaptation and less like a placeholder preview shell.
 
+### 5a. Platinum-frame fit is materially stronger now
+
+The current source now also carries:
+
+- game-aware pilot-card copy for `Galaxy Guardians` across signed-in, local,
+  watch, and 2UP rivalry states
+- a compact-cabinet browser proof that the preview still fits the shared shell
+  rails while surfacing both the formation pulse and single-shot combat cue
+
+The practical meaning is: Guardians now reads much less like a special-case
+ preview inside Platinum, even though broader public-release readiness is still
+ limited by the one-level slice and deeper fairness work.
+
 ### 6. Promoted frame windows now back the opening read
 
 The current source now also carries a dedicated Guardians-owned frame-reference
@@ -156,76 +169,173 @@ The practical meaning is: the main remaining work is no longer “do we have a
 serious conformance program?” The main remaining work is “does the visible game
 slice feel authoritative enough to justify a stronger hosted review story?”
 
+### 9. Audio and starfield are now a sharper live-priority issue
+
+The current artifact and harness layer does already carry both categories:
+
+- Guardians audio cue, audio-character, and audio-lab checks remain green
+- opening-slice render and motion artifacts already require a live moving
+  starfield and visible top re-entry
+
+The practical meaning is no longer “sound and motion feel missing.” The current
+source now also makes launch audio explicit, strengthens the first-seconds cue
+presence, and gives the moving starfield a brighter, more forceful live read.
+
+The practical meaning now is: the opening is more believable, so the next best
+quality work has shifted back to combat feedback, palette authority, and
+platform fit.
+
+### 10. The opening launch/audio/starfield/layout pass is now in source
+
+The current source now also carries:
+
+- explicit wait-launch audio confirmation plus a dedicated launch-audio guard
+- a stronger opening `gameStart`, formation pulse, and idle/wait audio read
+- a brighter `126`-star stage-one field with stronger drift, trails, and lead
+  stars
+- a clearer runtime headline stack and stronger `WAIT` / mission / score-table
+  presentation on both the wait showcase and the preview modal
+
+The practical meaning is: items `2`, `3`, and `4` from the previous priority
+order are no longer just plan text. They are implemented, measured, and green
+through the maintained Guardians spine.
+
+## What The Last 5-10 Passes Actually Bought Us
+
+### 1. The gameplay improvement is real, but it is mostly first-impression quality
+
+Across the last cluster of Guardians passes, we materially improved:
+
+- opening rack motion from a loose wobble to a broad shared sweep
+- moving starfield density, drift, trails, and visible motion salience
+- top re-entry continuity so threats read as a loop rather than a pop-in
+- the opening `WAIT` / mission / score-table read
+- launch audio clarity and first-seconds cue presence
+- hit, explosion, and destruction readability
+- opening palette ownership and swarm color-family variety
+- pilot-card and shell framing so Guardians reads more like a true Platinum
+  second game
+- compact-cabinet preview proof so the browser-visible surface still fits the
+  shared frame while showing both formation and combat identity
+
+The important honest read is: this was a meaningful visible-quality lift, not
+yet a score-moving breakthrough. The aggregate numbers are still:
+
+- reference conformance: `7.6/10`
+- playtest-weighted conformance: `6.9/10`
+- public release readiness: `4.2/10`
+- implementation gate coverage: `9.6/10`
+
+So the last passes clearly made the game feel less unfinished, but they did
+not yet solve later-band fairness or broaden the public slice enough to change
+the readiness story.
+
+### 2. The testing and experiment structure is much more mature than it was
+
+Over the same passes, we expanded or hardened:
+
+- promoted opening-slice source, frame, render, and motion contracts
+- dedicated opening rack motion measurement
+- explicit wait-launch audio verification
+- combat-feedback frame-reference authority
+- platform-frame parity contracts
+- compact-cabinet browser-fit verification
+- runtime-vs-reference movement comparison
+- stronger reference-conformance and opening-baseline aggregate gates
+- hosted `/dev` verification plus Pages self-heal for release-authority review
+
+The practical meaning is: we are no longer guessing at the opening slice.
+We now have a much better evidence loop for motion, audio presence, shell fit,
+combat read, and public-facing review.
+
+Three player-facing fixes are now part of that maintained loop too:
+
+- Guardians replay/video capture now persists again, with a dedicated
+  browser-backed replay-capture check instead of only manual observation.
+- Dive threats are now explicitly bounded so they no longer disappear off the
+  left/right edges before the intended bottom-exit/top-reentry cycle.
+- The live board now emits a recurring rack pulse, so representative gameplay
+  audio is less empty between isolated shot/hit/loss cues.
+
+### 3. The right next phase is no longer generic polish
+
+Because the best gameplay examples now give us strong evidence for audio,
+timing, motion, graphics, and behavior, the best next phase is to promote more
+of that gameplay authority directly into the measured runtime contracts.
+
+The next gain should come from better behavior authority, not more surface-only
+cleanup.
+
 ## What Is Still Obviously Missing
 
 These are the most important remaining misses in the visible public slice.
 
-### 1. `WAIT` and score-table layout still need tighter runtime matching
+### 1. Later-band fairness is now the clearest gameplay gap
 
-The promoted frame windows now give these surfaces real opening authority, but
-the live runtime is still a tighter Guardians-owned adaptation rather than a
-closer four-row cabinet-matched score-table read.
+The opening slice is materially stronger than it was before this pass, so the
+next largest gameplay-quality miss is no longer “obvious missing shell work.”
+It is the still-limited confidence around stage `3-5` pressure and stage `6-9`
+survivability/clear consistency.
 
-### 2. Starfield motion and top-reentry now have their own measured contract
+### 2. Audio is stronger and now more continuously present, but still needs a browser/listening pass
 
-The runtime now has visibly better motion in both areas, and those surfaces now
-have their own durable measured target contract tied to the promoted Nenriki
-wrap-return window and the runtime-reference movement artifact.
+Launch audio, first-seconds cue presence, and the live opening feel are all
+better now, and the recurring rack pulse makes the stage sound less empty
+between action cues. The preview still needs one deliberate browser-side
+listening review plus selective cue cleanup before it can claim stronger
+public sound readiness.
 
-### 3. Explosion and hit states now have frame authority but still need tighter live matching
+### 3. Public-release honesty is still limited by the one-level slice
 
-Combat now reads better than before, and hit/destruction states now cite
-promoted Arcade's Lounge windows. The next step is tighter live matching, not
-inventing authority from scratch.
+The visible first level now reads more convincingly, but the maintained
+readiness score is still `4.2/10` because Guardians still presents only a
+bounded one-level `mission_complete` slice instead of a broader publicly
+reviewable game.
 
-### 4. Palette progression and swarm color authority are still partial
+### 4. A second `WAIT` / mission / score-table pass is now conditional, not primary
 
-The opening palette family is closer than before, but it still needs a more
-deliberate stage-owned color read instead of a mostly runtime-tuned
-approximation.
-
-### 5. Platform-frame parity is still incomplete
-
-Guardians still needs to sit in Platinum as naturally as Aurora across:
-
-- sign-in
-- scores
-- pilot card
-- replay and video capture
-- bug reports
-- music and sound controls
+The opening surface is much closer. Another frame-window refinement pass now
+only makes sense if the next hosted side-by-side review still shows visible
+cabinet drift after this stronger combat/palette/shell-fit baseline.
 
 ## Immediate Next Work Order
 
 This is the best next sequence if we want the highest conformance return for
 time and compute.
 
-1. Tighten the runtime `WAIT`, headline, mission, and score-table layout
-   against the now-promoted opening frame windows.
-2. Tighten the live explosion, hit, and destruction-state matching against the
-   promoted combat-reference windows.
-3. Tighten opening palette progression and swarm color-family authority beyond
-   the first improved slice.
-4. Add real Aurora-versus-Guardians platform-frame parity scoring and finish the
-   shared frame work.
-5. After the visible opening slice is credible, continue into stage `3-5`
-   pressure traces and stage `6-9` survivability/fairness.
+1. Promote stage `3-5` and `6-9` gameplay-video authority into measured
+   pressure, fairness, and survivability contracts instead of continuing
+   generic shell polish.
+2. Use the best gameplay videos plus the new long-surface stage-band authority
+   to keep richer behavior windows for dive timing, lower-field occupancy,
+   enemy-shot density, clear timing, and top-reentry continuity inside one
+   maintained review artifact.
+3. Do a deliberate browser/listening pass and selective audio cue cleanup so
+   the improved opening sound, recurring rack pulse, and restored replay
+   capture can all be judged against actual gameplay footage instead of only
+   internal cue checks.
+4. Push public-readiness honesty past the current one-level `mission_complete`
+   slice only after the stronger opening and deeper behavior contracts survive
+   hosted review.
+5. Do a second frame-window refinement pass on the `WAIT` / title / mission /
+   score-table read only if the next hosted side-by-side review still shows
+   obvious cabinet drift.
 
 ## Best Quality Work On This Machine Now
 
 This machine should stay focused on the work that most directly improves review
 quality, hosted readability, and beta honesty.
 
-1. Tighten the runtime `WAIT`, headline, mission, and score-table layout
-   against the promoted Matt Hawkins frame windows.
-2. Tighten live explosion, hit, and destruction-state matching so combat
-   readability fully earns the new frame-backed authority.
-3. Tighten opening palette progression and swarm color-family authority so the
-   first seconds of play read as intentional rather than broadly “Galaxian-ish.”
-4. Finish Platinum-frame parity for Guardians across sign-in, scores, pilot
-   card, replay/video capture, bug reports, and music/sound controls.
-5. Use hosted `/dev` as the real review lane after each meaningful pass instead
+1. Use the new stage-band authority inside the long-surface artifact to tune
+   later-band fairness and clear consistency for stage `3-5` and `6-9`.
+2. Do one deliberate browser/listening pass plus targeted cue cleanup so the
+   improved opening sound is judged by the same standard as the visuals.
+3. Use hosted `/dev` as the real review lane after each meaningful pass instead
    of waiting to batch too many local-only improvements together.
+4. Push public-release honesty beyond the current one-level slice only after
+   the stronger opening and deeper behavior contracts survive hosted review.
+5. Use a second `WAIT` / title / mission / score-table polish pass only if the
+   next hosted side-by-side review still shows obvious cabinet drift.
 
 ## Recommended Machine Split
 

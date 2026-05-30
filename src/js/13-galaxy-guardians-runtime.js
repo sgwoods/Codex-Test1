@@ -59,6 +59,7 @@ const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
   'player_shot_fired',
   'player_shot_resolved',
   'enemy_shot',
+  'rack_pulse',
   'enemy_wrap_or_return',
  'player_lost',
  'game_over',
@@ -103,6 +104,7 @@ const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
   enemyShotStartYOffset:8,
   enemyShotPlayerHitbox:7,
   enemyShotBottomPadding:10,
+  rackPulseIntervalBase:2.24,
   topReentryVy:70,
   topReentryAccel:8.4,
   topReentrySwayAmplitude:12,
@@ -168,6 +170,7 @@ function guardiansRuntimeRules(stateOrStage=1){
   enemyShotIntervalJitter:+(base.enemyShotIntervalJitter*Math.max(.66,1-rank*.055)).toFixed(3),
   enemyShotVy:+(base.enemyShotVy*shotScale).toFixed(3),
   enemyShotMaxLive:Math.min(6,base.enemyShotMaxLive+Math.ceil(rank/2)),
+  rackPulseIntervalBase:+(base.rackPulseIntervalBase*Math.max(.64,1-rank*.055)).toFixed(3),
   formationDriftHz:+(base.formationDriftHz*(1+rank*.038)).toFixed(3),
   topReentryVy:+(base.topReentryVy*(1+rank*.042)).toFixed(3),
   topReentryAccel:+(base.topReentryAccel*(1+rank*.05)).toFixed(3)
@@ -186,6 +189,21 @@ function guardiansMarchOffset(state,alien){
  const next=sequence[(index+1)%sequence.length];
  const blend=frac<.76?0:Math.min(1,(frac-.76)/.24);
  return (current+(next-current)*blend)*amp;
+}
+
+function guardiansBoundThreatX(rules,x=0){
+ const visibleInset=12;
+ const softBleed=4;
+ const min=visibleInset;
+ const max=Math.max(min,rules.playfieldWidth-visibleInset);
+ const value=+x||0;
+ if(value<min){
+  return min-Math.min(softBleed,(min-value)*.18);
+ }
+ if(value>max){
+  return max+Math.min(softBleed,(value-max)*.18);
+ }
+ return value;
 }
 
 function guardiansBeginTopReentry(state,alien){
@@ -284,6 +302,7 @@ function createGalaxyGuardiansRuntimeState(opts={}){
   nextDiveAt:0,
   nextFlagshipAt:0,
   nextEnemyShotAt:0,
+  nextRackPulseAt:0,
   player:{
    x:GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.playfieldWidth/2,
    y:GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.playfieldHeight-40,
@@ -295,6 +314,7 @@ function createGalaxyGuardiansRuntimeState(opts={}){
   aliens:createGalaxyGuardiansFormation(),
   enemyShots:[],
   hitFlashes:[],
+  clearFlashT:0,
   events:[],
   forbiddenAuroraCapabilities:GALAXY_GUARDIANS_RUNTIME_PROFILE.forbiddenAuroraCapabilities,
   evidenceProfile:GALAXY_GUARDIANS_RUNTIME_PROFILE.evidenceProfile,
@@ -306,6 +326,7 @@ function createGalaxyGuardiansRuntimeState(opts={}){
  state.nextDiveAt=rules.firstScoutDiveDelay;
  state.nextFlagshipAt=rules.flagshipEscortDelay;
  state.nextEnemyShotAt=rules.firstEnemyShotDelay;
+ state.nextRackPulseAt=rules.formationEntryCompleteAt+.34;
  guardiansRuntimeEvent(state,'formation_entry_start',{source:'dev-runtime',audioCue:GALAXY_GUARDIANS_PACK.audioCueCatalog.formationPulse.id});
  return state;
 }
@@ -402,6 +423,7 @@ function resetGalaxyGuardiansWave(state,reason='wave_reset',opts={}){
  }
  state.enemyShots.length=0;
  state.hitFlashes.length=0;
+ state.clearFlashT=0;
  state.waveClearT=0;
  state.waveClearStage=0;
  state.player.shot=null;
@@ -417,6 +439,7 @@ function resetGalaxyGuardiansWave(state,reason='wave_reset',opts={}){
  state.nextDiveAt=state.t+(preserveAliens?Math.max(.85,rules.firstScoutDiveDelay*.52):rules.firstScoutDiveDelay);
  state.nextFlagshipAt=state.t+(preserveAliens?Math.max(2.2,rules.flagshipEscortDelay*.6):rules.flagshipEscortDelay);
  state.nextEnemyShotAt=state.t+(preserveAliens?Math.max(1.1,rules.firstEnemyShotDelay*.6):rules.firstEnemyShotDelay);
+ state.nextRackPulseAt=state.t+(preserveAliens?Math.max(.92,rules.rackPulseIntervalBase*.58):rules.formationEntryCompleteAt+.34);
  guardiansRuntimeEvent(state,'wave_reset',{reason,aliens:state.aliens.filter(alien=>alien.hp>0).length,preserveAliens:preserveAliens?1:0});
  if(!preserveAliens)guardiansRuntimeEvent(state,'formation_entry_start',{source:'dev-runtime',reason,audioCue:GALAXY_GUARDIANS_PACK.audioCueCatalog.formationPulse.id});
 }
@@ -425,6 +448,7 @@ function clearGalaxyGuardiansWave(state){
  if(state.gameOver||state.waveClearT>0)return false;
  if(liveGuardiansAliens(state).length>0)return false;
  state.waveClearT=GALAXY_GUARDIANS_RUNTIME_PROFILE.rules.waveClearDelay;
+ state.clearFlashT=.42;
  state.waveClearStage=state.stage;
  state.player.shot=null;
  state.enemyShots.length=0;
@@ -558,6 +582,7 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
  state.t+=dt;
  p.cooldown=Math.max(0,p.cooldown-dt);
  p.inv=Math.max(0,(+p.inv||0)-dt);
+ state.clearFlashT=Math.max(0,(+state.clearFlashT||0)-dt);
  if(Array.isArray(state.hitFlashes)&&state.hitFlashes.length){
   state.hitFlashes=state.hitFlashes
    .map(flash=>Object.assign({},flash,{t:Math.max(0,(+flash.t||0)-dt)}))
@@ -594,6 +619,14 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
  if(state.t>=state.nextEnemyShotAt){
   fireGuardiansEnemyShot(state);
   state.nextEnemyShotAt=state.t+rules.enemyShotIntervalBase+state.rng()*rules.enemyShotIntervalJitter;
+ }
+ if(entry.complete&&state.t>=state.nextRackPulseAt){
+  guardiansRuntimeEvent(state,'rack_pulse',{
+   stage:state.stage,
+   liveAliens:state.aliens.filter(alien=>alien.hp>0).length,
+   audioCue:GALAXY_GUARDIANS_PACK.audioCueCatalog.formationPulse.id
+  });
+  state.nextRackPulseAt=state.t+rules.rackPulseIntervalBase;
  }
  for(const alien of state.aliens){
   if(alien.hp<=0)continue;
@@ -643,7 +676,10 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
    alien.y=leader.y+rules.escortYOffset+Math.max(0,alien.diveT)*4;
   }else{
    const q=Math.max(0,alien.diveT);
-   alien.x=alien.diveStartX+Math.sin(q*rules.diveSwayHz)*rules.diveSwayAmplitude*alien.diveSide+alien.diveSide*q*rules.diveSideDrift;
+   alien.x=guardiansBoundThreatX(
+    rules,
+    alien.diveStartX+Math.sin(q*rules.diveSwayHz)*rules.diveSwayAmplitude*alien.diveSide+alien.diveSide*q*rules.diveSideDrift
+   );
    alien.y=alien.diveStartY+q*rules.diveBaseVy+q*q*rules.diveAccel;
   }
   if(alien.y>rules.playfieldHeight+rules.bottomExitPadding){
@@ -674,11 +710,11 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
   for(const alien of state.aliens){
    if(alien.hp<=0)continue;
    if(Math.abs(alien.x-p.shot.x)<=8&&Math.abs(alien.y-p.shot.y)<=7){
-    alien.hp=0;
-    const points=guardiansAlienPoints(alien);
-    state.score+=points;
-    state.stats.hits=(+state.stats.hits||0)+1;
-    const hitDuration=alien.role==='flagship' ? .34 : (alien.role==='escort' ? .24 : .18);
+   alien.hp=0;
+   const points=guardiansAlienPoints(alien);
+   state.score+=points;
+   state.stats.hits=(+state.stats.hits||0)+1;
+    const hitDuration=alien.role==='flagship' ? .4 : (alien.role==='escort' ? .28 : .2);
     state.hitFlashes.push({
      role:alien.role,
      visualId:alien.visualId,
@@ -686,7 +722,13 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
      y:alien.y,
      t:hitDuration,
      duration:hitDuration,
-     color:alien.role==='flagship'?'#ffdf6f':alien.role==='escort'?'#ff5b5b':'#42f285'
+     color:alien.role==='flagship'?'#fff2a4':alien.role==='escort'?'#ff7b70':'#7bd6ff',
+     accentColor:alien.role==='flagship'?'#7bd6ff':alien.role==='escort'?'#ffe39a':'#42f285',
+     flareColor:alien.role==='flagship'?'#ff9b54':alien.role==='escort'?'#7bd6ff':'#ffdf6f',
+     burstScale:alien.role==='flagship'?1.46:(alien.role==='escort'?1.18:1),
+     streaks:alien.role==='flagship'?12:(alien.role==='escort'?10:8),
+     ringRadius:alien.role==='flagship'?11:(alien.role==='escort'?8.5:6.5),
+     sparkInset:alien.role==='flagship'?1.6:(alien.role==='escort'?1.3:1.1)
     });
     guardiansRuntimeEvent(state,'player_shot_resolved',{result:'hit',id:alien.id,role:alien.role,visualId:alien.visualId,audioCue:GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG[alien.type]?.hitAudioCue||'',points,score:state.score});
     resolved=1;
@@ -730,6 +772,7 @@ function summarizeGalaxyGuardiansRuntime(state){
   enemyShotCount:state.enemyShots.filter(shot=>shot&&shot.active!==0).length,
   waveClearPending:state.waveClearT>0,
   waveClearT:+(+state.waveClearT||0).toFixed(3),
+  clearFlashT:+(+state.clearFlashT||0).toFixed(3),
   wrappingCount:state.aliens.filter(alien=>alien.hp>0&&alien.mode==='wrapping').length,
   stats:{
    shots:+(state.stats?.shots||0),

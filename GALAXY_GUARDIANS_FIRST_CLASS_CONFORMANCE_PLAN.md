@@ -1,6 +1,6 @@
 # Galaxy Guardians First-Class Conformance Plan
 
-Updated: May 19, 2026
+Updated: May 29, 2026
 
 Short restart note:
 
@@ -92,6 +92,15 @@ ones a player feels immediately:
 - platform-frame parity across sign-in, scores, replay/video capture, bug
   reports, music, and shared overlays
 
+Three recent player-facing fixes are now in the maintained source:
+
+- Guardians replay/video capture now persists into the local replay store with
+  game-owned metadata instead of being rejected as a preview-only start.
+- Dive threats no longer drift visibly off the side of the board before the
+  intended bottom-exit/top-reentry loop.
+- The live board now emits a recurring rack pulse, so representative gameplay
+  audio is less empty between shots, hits, and loss cues.
+
 ## Public Slice vs. Deeper-Run Review
 
 The hosted `dev` and `beta` lanes still expose a one-level visible public slice
@@ -122,9 +131,9 @@ resume in this order:
 2. preserve Aurora-built graphics and audio conformance machinery as shared
    infrastructure, then swap in Guardians-owned evidence, targets, and runtime
    windows where needed instead of creating bespoke second-game pipelines
-3. tighten the visible one-level slice first: `WAIT`, score table, rack march,
-   starfield, reserve ships, ready-state cue, flags, explosions, and top
-   re-entry
+3. keep the now-improved visible one-level slice under guard, then move the
+   next polish pass to explosions, hit/destruction read, palette progression,
+   and platform-frame fit
 4. only after the opening slice looks and sounds authoritative, expand the
    public playable depth beyond the current one-level `mission_complete` slice
 5. use every resulting improvement as both a Guardians lift and a two-game
@@ -161,7 +170,7 @@ following are true:
 | --- | --- | --- | --- |
 | Source coverage and provenance | `9.6/10` | keep `>=9.6/10` while promoting stronger artifact-backed evidence | Preserve the three-source Galaxian profile, then convert proxy sprite/cue work into promoted targets rather than replacing provenance with tuning; use human spot-checks only when the artifacts stay ambiguous. |
 | Promoted semantic event coverage | `7.8/10` | `>=8.5/10` | Keep the event log central, then add score-table, attract-surface, result-state, and completion-state evidence that can be reviewed against source windows. |
-| Opening-stage presentation and HUD fidelity | partial | first visible slice should read as unmistakably Galaxian-family before deeper-run claims expand | Build baseline artifacts for `WAIT`/headline typography, score advance table, reserve ships, missile-ready player state, level flags, moving starfield/background motion, and score/HUD presentation from gameplay-video crops, contact sheets, palette extraction, and other primary sources. Keep the human-readable baseline surfaced through [GALAXY_GUARDIANS_OPENING_SLICE_BASELINE.md](GALAXY_GUARDIANS_OPENING_SLICE_BASELINE.md), not only raw artifacts. |
+| Opening-stage presentation and HUD fidelity | partial | first visible slice should read as unmistakably Galaxian-family before deeper-run claims expand | Build baseline artifacts for `WAIT`/headline typography, the score-advance table, reserve ships, missile-ready player state, level flags, moving starfield/background motion, and score/HUD presentation from gameplay-video crops, contact sheets, palette extraction, and other primary sources. Keep the human-readable baseline surfaced through [GALAXY_GUARDIANS_OPENING_SLICE_BASELINE.md](GALAXY_GUARDIANS_OPENING_SLICE_BASELINE.md), not only raw artifacts. |
 | Formation and rack timing | `6.2/10` | `>=7.2/10` | Move from connected-component/object proxy timing toward sprite-recognized rack timing plus browser-captured side-by-side traces. |
 | Motion and lower-field pressure | `6.2/10` reference and playtest | `>=7.2/10` playtest | Use runtime/reference track comparison first, then promote faster march-like rack cadence, bottom-pass-through top re-entry, dive-path targets, wrap cadence, and later-wave pressure with captured trace review. |
 | Single-shot threat, scoring, and progression | `7.5/10` | `>=8.2/10` | Keep the score table game-owned, then add score isolation, proper completion/loss endings, replay identity, and clearer one-level mission closure. |
@@ -194,6 +203,7 @@ The first-class Galaxy process should always be reviewable through this spine:
   - `npm run harness:check:galaxy-guardians-opening-slice-baseline`
   - `npm run harness:check:galaxy-guardians-opening-slice-source-baseline`
   - `npm run harness:check:galaxy-guardians-opening-slice-frame-reference`
+  - `npm run harness:check:galaxy-guardians-wait-launch-audio`
   - `npm run harness:check:galaxy-guardians-opening-slice-render-surface`
   - `npm run harness:check:galaxy-guardians-attract-score-surface`
 - longer-surface and persona review
@@ -213,6 +223,7 @@ The first-class Galaxy process should always be reviewable through this spine:
   - `npm run harness:check:galaxy-guardians-audio-character`
   - `npm run harness:check:galaxy-guardians-audio-conformance-lab`
 - platform and multi-game boundaries
+  - `npm run harness:check:galaxy-guardians-replay-capture`
   - `npm run harness:check:gameplay-adapter-boundaries`
   - `npm run harness:check:platinum-pack-boot`
   - `npm run harness:check:compact-cabinet-rails`
@@ -239,20 +250,37 @@ rather than the primary baseline.
 ## Opening-Slice Baseline Program
 
 Because the current live public slice is only one visible level, the most
-important immediate misses are the first ones a player sees. The next Guardians
-baseline program should explicitly include:
+important immediate misses are the first ones a player sees. The opening
+baseline program now already carries:
 
-1. `WAIT` / start-stage headline treatment
-2. score-advance table and attract/readiness surfaces
-3. faster, more march-like left-right swarm cadence
-4. explosion and alien-hit visual states
-5. opening swarm color families and early stage palette progression
-6. moving starfield / scrolling background motion
-7. missile-ready player-ship graphic/state
-8. reserve-ship / ships-remaining icons
-9. level/stage flag markers
-10. bottom-exit ships visibly continuing through and re-entering from the top
+1. explicit opening audio-readiness and launch-audio confirmation
+2. stronger first-seconds audible presence
+3. tighter `WAIT` / start-stage headline and score-advance treatment
+4. faster, more march-like left-right swarm cadence
+5. moving starfield / scrolling background motion
+6. missile-ready player-ship graphic/state
+7. reserve-ship / ships-remaining icons
+8. level/stage flag markers
+9. bottom-exit ships visibly continuing through and re-entering from the top
    rather than simply popping back in
+
+The next phase after the opening-slice pass should therefore focus on:
+
+1. using the new maintained stage-band authority inside the long-surface
+   review artifact to tune stage `3-5` pressure and stage `6-9`
+   survivability/fairness instead of inventing fresh targets from plan prose
+2. extracting richer behavior windows for dive timing, lower-field occupancy,
+   enemy-shot density, clear timing, and top-reentry continuity from those
+   gameplay examples
+3. browser-side listening review plus selective cue cleanup so the stronger
+   launch audio, recurring rack pulse, and combat presence become trustworthy
+   public sound
+4. a second `WAIT` / mission / score-table refinement pass only if hosted
+   review still shows obvious cabinet drift after the stronger combat, palette,
+   and shell-fit pass
+5. public-slice readiness work beyond the current one-level `mission_complete`
+   contract only after the improved opening and deeper behavior work survive
+   hosted review
 
 Each of these should be grounded in committed baseline artifacts from gameplay
 video, frame crops, contact sheets, palette extraction, timing traces, and

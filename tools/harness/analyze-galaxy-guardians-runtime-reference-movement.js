@@ -91,14 +91,36 @@ function summarizeTrack(points){
   };
 }
 
+function horizontalOvershootPx(x,width){
+  if(x < 0) return Math.abs(x);
+  if(x > width) return x - width;
+  return 0;
+}
+
 function simulateRuntime(runtime, seconds = 14){
   const state = runtime.createGalaxyGuardiansRuntimeState({ stage: 1, ships: 3, seed: 42719 });
   state.player.inv = 999;
   const rules = runtime.GALAXY_GUARDIANS_RUNTIME_PROFILE.rules;
   const tracks = new Map();
+  let maxHorizontalOvershootPx = 0;
+  let maxWrapHorizontalOvershootPx = 0;
+  let lowerFieldActiveFrames = 0;
+  let lowerFieldThreatFrames = 0;
   for(let frame = 0; frame < Math.ceil(seconds * 60); frame++){
     runtime.stepGalaxyGuardiansRuntime(state, 1 / 60, {});
     const summary = runtime.summarizeGalaxyGuardiansRuntime(state);
+    const activeDives = summary.activeDives || [];
+    if(activeDives.some(dive => dive.mode === 'diving' || dive.mode === 'wrapping')){
+      lowerFieldActiveFrames++;
+    }
+    if(activeDives.some(dive => (dive.mode === 'diving' || dive.mode === 'wrapping') && dive.y >= rules.playfieldHeight * 0.42)){
+      lowerFieldThreatFrames++;
+    }
+    for(const dive of activeDives){
+      const overshoot = horizontalOvershootPx(+dive.x || 0, rules.playfieldWidth);
+      if(overshoot > maxHorizontalOvershootPx) maxHorizontalOvershootPx = overshoot;
+      if(dive.mode === 'wrapping' && overshoot > maxWrapHorizontalOvershootPx) maxWrapHorizontalOvershootPx = overshoot;
+    }
     for(const dive of summary.activeDives || []){
       const nx = dive.x / rules.playfieldWidth;
       const ny = dive.y / rules.playfieldHeight;
@@ -124,7 +146,11 @@ function simulateRuntime(runtime, seconds = 14){
     events,
     summary: runtime.summarizeGalaxyGuardiansRuntime(state),
     tracklets,
-    descending
+    descending,
+    maxHorizontalOvershootPx: rounded(maxHorizontalOvershootPx, 2),
+    maxWrapHorizontalOvershootPx: rounded(maxWrapHorizontalOvershootPx, 2),
+    lowerFieldThreatShare: rounded(lowerFieldThreatFrames / Math.max(1, Math.ceil(seconds * 60)), 3),
+    activeDiveShare: rounded(lowerFieldActiveFrames / Math.max(1, Math.ceil(seconds * 60)), 3)
   };
 }
 
@@ -143,7 +169,11 @@ function main(){
     firstScoutDiveT: sim.events.find(event => event.type === 'alien_dive_start')?.t ?? null,
     firstFlagshipDiveT: sim.events.find(event => event.type === 'flagship_dive_start')?.t ?? null,
     firstWrapT: sim.events.find(event => event.type === 'enemy_wrap_or_return')?.t ?? null,
-    wrapCountByFourteenSeconds: sim.events.filter(event => event.type === 'enemy_wrap_or_return').length
+    wrapCountByFourteenSeconds: sim.events.filter(event => event.type === 'enemy_wrap_or_return').length,
+    maxHorizontalOvershootPx: sim.maxHorizontalOvershootPx,
+    maxWrapHorizontalOvershootPx: sim.maxWrapHorizontalOvershootPx,
+    lowerFieldThreatShare: sim.lowerFieldThreatShare,
+    activeDiveShare: sim.activeDiveShare
   };
   const comparison = {
     referenceMedianDurationSeconds: target.medianCandidateDurationSeconds || 0,
@@ -194,7 +224,7 @@ function main(){
     runtimeReferenceMovementScore10: score10,
     tuningRead: {
       constantsTunedFromReferenceProxy: true,
-      remainingGap: 'Comparison uses connected-component target bands and runtime entity tracks. The next improvement should use final sprite recognition from extracted Galaxian assets.'
+      remainingGap: 'Comparison uses connected-component target bands and runtime entity tracks. The next improvement should use final sprite recognition from extracted Galaxian assets and browser-reviewed later-band traces.'
     },
     tracklets: sim.tracklets.slice(0, 18)
   };

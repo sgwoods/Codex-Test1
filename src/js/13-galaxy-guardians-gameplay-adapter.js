@@ -512,6 +512,7 @@ function galaxyGuardiansCueNameForRuntimeEvent(event){
  if(!event)return '';
  if(event.type==='player_shot_fired')return 'playerShot';
  if(event.type==='enemy_shot')return 'enemyShot';
+ if(event.type==='rack_pulse')return 'formationPulse';
  if(event.type==='alien_dive_start')return 'scoutDive';
  if(event.type==='flagship_dive_start')return 'flagshipDive';
  if(event.type==='escort_join')return 'escortJoin';

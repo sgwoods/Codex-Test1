@@ -142,16 +142,16 @@ mask:
 #msg .startScoreAdvance .scoreHead{color:#ffe39a;font-weight:700;text-transform:uppercase}
 #msg .startScoreAdvance .scoreValue{text-align:right}
 #msg .startScoreAdvance .scoreMuted{color:rgba(223,247,255,.68)}
-#msg .startMissionWrap.guardiansMission{gap:.08em;margin:.14em auto 0;max-width:min(100%,22.4em)}
-#msg .startMissionWrap.guardiansMission .startMissionTitle{color:#ff5b5b;font-size:.57em;line-height:1.06;letter-spacing:.135em}
-#msg .startMissionWrap.guardiansMission .startMissionLine{font-size:.385em;line-height:1.1;letter-spacing:.072em}
+#msg .startMissionWrap.guardiansMission{gap:.1em;margin:.16em auto 0;max-width:min(100%,23.2em)}
+#msg .startMissionWrap.guardiansMission .startMissionTitle{color:#ff5b5b;font-size:.585em;line-height:1.05;letter-spacing:.145em}
+#msg .startMissionWrap.guardiansMission .startMissionLine{font-size:.395em;line-height:1.12;letter-spacing:.076em}
 #msg .startMissionWrap.guardiansMission .startMissionLine:nth-of-type(1){color:#ffd4a8}
 #msg .startMissionWrap.guardiansMission .startMissionLine:nth-of-type(2){color:#ffb997}
 #msg .startMissionWrap.guardiansMission .startMissionLine:nth-of-type(3){color:#ffe39a}
-#msg .startScoreAdvance.guardiansScoreAdvance{grid-template-columns:minmax(7.4em,auto) repeat(4,minmax(2.78em,auto));gap:.03em .3em;width:min(100%,23.6em);margin:.14em auto 0;font-size:.335em;line-height:1.1}
-#msg .startScoreAdvance.guardiansScoreAdvance .scoreTitle{color:#ffe39a;letter-spacing:.195em;margin-bottom:.03em}
+#msg .startScoreAdvance.guardiansScoreAdvance{grid-template-columns:minmax(7.7em,auto) repeat(4,minmax(2.94em,auto));gap:.04em .34em;width:min(100%,24.2em);margin:.16em auto 0;font-size:.345em;line-height:1.12}
+#msg .startScoreAdvance.guardiansScoreAdvance .scoreTitle{color:#ffe39a;letter-spacing:.2em;margin-bottom:.04em}
 #msg .startScoreAdvance.guardiansScoreAdvance .scoreLabel{color:#f7fbff}
-#msg .startScoreAdvance.guardiansScoreAdvance .scoreLabelText{max-width:7.35em;overflow:hidden;text-overflow:ellipsis}
+#msg .startScoreAdvance.guardiansScoreAdvance .scoreLabelText{max-width:7.6em;overflow:hidden;text-overflow:ellipsis}
 #msg .startScoreAdvance.guardiansScoreAdvance .scoreHead{color:#ffb765}
 #msg .startScoreAdvance.guardiansScoreAdvance .scoreValueDive{color:#ffe39a}
 #msg .startScoreAdvance.guardiansScoreAdvance .scoreValueEscortOne{color:#7bd6ff}
@@ -253,6 +253,8 @@ mask:
 .settingsMusicSourceGame{font-size:12px;line-height:1.25;color:#dff7ff;overflow-wrap:anywhere}
 .settingsMusicSourceSource{font:700 11px/1.2 "Courier New",Consolas,monospace;color:#ffe39a;text-align:right;text-transform:uppercase}
 .settingsMusicSourceId{grid-column:1/-1;font:11px/1.25 "Courier New",Consolas,monospace;color:#9eefff;white-space:normal;overflow-wrap:anywhere;background:rgba(0,0,0,.18);padding:4px 6px;border-radius:3px}
+.settingsMusicSourceMetaLabel{font-size:10px;line-height:1.2;color:rgba(218,236,255,.62);letter-spacing:.08em;text-transform:uppercase}
+.settingsMusicSourceMetaValue{font:11px/1.25 "Courier New",Consolas,monospace;color:#dff7ff;white-space:normal;overflow-wrap:anywhere}
 .settingsToggleRow{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 8px;align-items:center;padding:8px 10px;border:1px solid rgba(255,216,109,.18);background:rgba(28,21,5,.42);cursor:pointer}
 .settingsToggleRow input{grid-row:1/3;accent-color:#ffd86d;cursor:pointer}
 .settingsToggleLabel{font-size:12px;line-height:1.2;color:#fff0b5}
@@ -326,13 +328,13 @@ mask:
 .gamePreviewScoreHead{color:#ffe39a;font-weight:700;text-transform:uppercase}
 .gamePreviewScoreLabel{color:#f4fbff;font-weight:700}
 .gamePreviewScoreCell{text-align:right;white-space:nowrap}
-#gamePreviewMission.guardiansMission{gap:3px;padding:7px 10px}
-#gamePreviewMission.guardiansMission .gamePreviewMissionTitle{color:#ff5b5b;letter-spacing:.14em}
+#gamePreviewMission.guardiansMission{gap:4px;padding:8px 11px}
+#gamePreviewMission.guardiansMission .gamePreviewMissionTitle{color:#ff5b5b;letter-spacing:.15em}
 #gamePreviewMission.guardiansMission .gamePreviewMissionLine:nth-of-type(2){color:#ffd4a8}
 #gamePreviewMission.guardiansMission .gamePreviewMissionLine:nth-of-type(3){color:#ffb997}
 #gamePreviewMission.guardiansMission .gamePreviewMissionLine:nth-of-type(4){color:#ffe39a}
-#gamePreviewScoreTable.guardiansScoreAdvance{grid-template-columns:minmax(82px,1fr) repeat(4,minmax(38px,auto));gap:2px 6px;padding:7px 9px;font-size:9px;line-height:1.12}
-#gamePreviewScoreTable.guardiansScoreAdvance .gamePreviewScoreTitle{color:#ffe39a;letter-spacing:.2em}
+#gamePreviewScoreTable.guardiansScoreAdvance{grid-template-columns:minmax(86px,1fr) repeat(4,minmax(40px,auto));gap:3px 7px;padding:8px 10px;font-size:9px;line-height:1.14}
+#gamePreviewScoreTable.guardiansScoreAdvance .gamePreviewScoreTitle{color:#ffe39a;letter-spacing:.22em}
 #gamePreviewScoreTable.guardiansScoreAdvance .gamePreviewScoreHead{color:#ffb765}
 #gamePreviewScoreTable.guardiansScoreAdvance .gamePreviewScoreCell:nth-child(6n+4){color:#ffe39a}
 #gamePreviewScoreTable.guardiansScoreAdvance .gamePreviewScoreCell.gamePreviewScoreEscort{color:#7bd6ff}
@@ -419,8 +421,18 @@ mask:
 #arcadeMusicToggleBtn[data-music-muted="true"] .dockIcon{animation:none;filter:grayscale(.8) drop-shadow(0 0 8px rgba(255,227,154,.18));opacity:.72}
 #arcadeMusicToggleBtn[data-music-state="unavailable"]{opacity:.72}
 @keyframes arcadeMusicPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
-#arcadeMusicFrameHost{position:fixed;right:8px;bottom:8px;width:200px;height:200px;overflow:hidden;opacity:.01;pointer-events:none;z-index:-1}
-#arcadeMusicFrameHost iframe{display:block;width:200px;height:200px;border:0}
+#arcadeMusicFrameHost{
+ position:fixed;
+ left:-9999px;
+ top:0;
+ width:240px;
+ height:240px;
+ overflow:hidden;
+ opacity:1;
+ pointer-events:none;
+ z-index:0
+}
+#arcadeMusicFrameHost iframe{display:block;width:240px;height:240px;border:0}
 #accountDockBtn{min-height:108px;flex-direction:column;gap:6px;padding:8px 6px;border-color:rgba(255,255,255,.16)}
 #accountDockBtn .dockPilotIcon{font-size:30px;filter:grayscale(1);opacity:.55;transform:none}
 #accountDockBtn[data-signed-in="true"]{border-color:rgba(255,216,109,.72);background:linear-gradient(180deg,rgba(19,43,84,.94),rgba(11,28,55,.92));color:#ffe39a}

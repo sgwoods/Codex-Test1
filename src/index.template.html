@@ -113,13 +113,17 @@
           <input id="gameSoundVolume" type="range" min="0" max="100" step="1" value="68" />
         </div>
       </div>
-      <div id="arcadeMusicPlaylistCard" class="settingsMusicSource" aria-live="polite">
-        <span class="settingsMusicSourceLabel">Active Game Playlist</span>
+      <div id="arcadeMusicPlaylistCard" class="settingsMusicSource" aria-live="polite" aria-readonly="true">
+        <span class="settingsMusicSourceLabel">Arcade Music Mapping (Read only)</span>
         <span id="arcadeMusicPlaylistGame" class="settingsMusicSourceGame">--</span>
         <span id="arcadeMusicPlaylistSource" class="settingsMusicSourceSource">--</span>
         <code id="arcadeMusicPlaylistId" class="settingsMusicSourceId">--</code>
+        <span class="settingsMusicSourceMetaLabel">Platform default</span>
+        <code id="arcadeMusicPlatformPlaylistId" class="settingsMusicSourceMetaValue">--</code>
+        <span class="settingsMusicSourceMetaLabel">Game override</span>
+        <span id="arcadeMusicGameOverride" class="settingsMusicSourceMetaValue">--</span>
       </div>
-      <div class="settingsHint">Audio mix changes apply live and are logged with the active session for production tuning.</div>
+      <div class="settingsHint">This playlist mapping is read only. The resolved music follows the packaged defaults for the active cabinet.</div>
     </div>
     <div id="commentatorPanel" class="settingsSection">
       <h4>Game Updates</h4>

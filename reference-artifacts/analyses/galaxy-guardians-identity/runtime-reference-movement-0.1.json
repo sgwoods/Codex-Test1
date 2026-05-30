@@ -36,7 +36,11 @@
     "firstScoutDiveT": 2.567,
     "firstFlagshipDiveT": 6.667,
     "firstWrapT": 6.9,
-    "wrapCountByFourteenSeconds": 7
+    "wrapCountByFourteenSeconds": 7,
+    "maxHorizontalOvershootPx": 0,
+    "maxWrapHorizontalOvershootPx": 0,
+    "lowerFieldThreatShare": 0.779,
+    "activeDiveShare": 0.818
   },
   "comparison": {
     "referenceMedianDurationSeconds": 5.5,
@@ -59,7 +63,7 @@
   "runtimeReferenceMovementScore10": 8.1,
   "tuningRead": {
     "constantsTunedFromReferenceProxy": true,
-    "remainingGap": "Comparison uses connected-component target bands and runtime entity tracks. The next improvement should use final sprite recognition from extracted Galaxian assets."
+    "remainingGap": "Comparison uses connected-component target bands and runtime entity tracks. The next improvement should use final sprite recognition from extracted Galaxian assets and browser-reviewed later-band traces."
   },
   "tracklets": [
     {

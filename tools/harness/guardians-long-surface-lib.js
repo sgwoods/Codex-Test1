@@ -16,6 +16,11 @@ function clamp01(value){
  return Math.max(0, Math.min(1, +value || 0));
 }
 
+function average(values = []){
+ const list = values.filter(Number.isFinite);
+ return list.length ? list.reduce((sum, value) => sum + value, 0) / list.length : 0;
+}
+
 function loadGuardiansVm(){
  const sandbox = {
   window: null,
@@ -143,6 +148,57 @@ function buildRuntimeBands(ctx){
  });
 }
 
+function stageBandPressureSample(ctx, {
+ stage = 1,
+ ships = 5,
+ seed = 1,
+ seconds = 14
+} = {}){
+ const state = ctx.createGalaxyGuardiansRuntimeState({
+  stage,
+  ships,
+  seed,
+  maxPlayableStage: Math.max(stage + 2, 6)
+ });
+ state.player.inv = 999;
+ const rules = ctx.guardiansRuntimeRules(stage);
+ const totalFrames = Math.max(1, Math.round(seconds * 60));
+ let lowerFieldThreatFrames = 0;
+ let lowerFieldMultiThreatFrames = 0;
+ let maxConcurrentThreats = 0;
+ let maxHorizontalOvershootPx = 0;
+ for(let i = 0; i < totalFrames && !state.gameOver; i++){
+  ctx.stepGalaxyGuardiansRuntime(state, 1 / 60, {});
+  const summary = ctx.summarizeGalaxyGuardiansRuntime(state);
+  const activeDives = (summary.activeDives || []).filter(dive => dive.mode === 'diving' || dive.mode === 'wrapping');
+  const lowerFieldThreats = activeDives.filter(dive => dive.y >= rules.playfieldHeight * 0.42);
+  const concurrentThreats = lowerFieldThreats.length + (summary.enemyShotCount || 0);
+  if(lowerFieldThreats.length > 0) lowerFieldThreatFrames++;
+  if(concurrentThreats >= 2) lowerFieldMultiThreatFrames++;
+  if(concurrentThreats > maxConcurrentThreats) maxConcurrentThreats = concurrentThreats;
+  for(const dive of activeDives){
+   const x = +dive.x || 0;
+   const overshoot = x < 0 ? Math.abs(x) : x > rules.playfieldWidth ? x - rules.playfieldWidth : 0;
+   if(overshoot > maxHorizontalOvershootPx) maxHorizontalOvershootPx = overshoot;
+  }
+ }
+ const events = state.events || [];
+ return {
+  stage,
+  stageRank: ctx.guardiansStageRank(stage),
+  seconds,
+  firstScoutDiveT: events.find(event => event.type === 'alien_dive_start')?.t ?? null,
+  firstFlagshipDiveT: events.find(event => event.type === 'flagship_dive_start')?.t ?? null,
+  firstWrapT: events.find(event => event.type === 'enemy_wrap_or_return')?.t ?? null,
+  enemyShotCountByWindow: events.filter(event => event.type === 'enemy_shot').length,
+  wrapCountByWindow: events.filter(event => event.type === 'enemy_wrap_or_return').length,
+  lowerFieldThreatShare: round(lowerFieldThreatFrames / totalFrames, 3),
+  lowerFieldMultiThreatShare: round(lowerFieldMultiThreatFrames / totalFrames, 3),
+  maxConcurrentThreats,
+  maxHorizontalOvershootPx: round(maxHorizontalOvershootPx, 2)
+ };
+}
+
 function monotonicPairs(values = [], fn = (a, b) => a > b){
  let ok = 0;
  for(let i = 1; i < values.length; i++){
@@ -185,6 +241,21 @@ function buildGuardiansLongSurfaceArtifact({ createdOn = new Date().toISOString(
    seed: 9101 + index * 43,
    maxPlayableStage: 9,
    durationSeconds: 120
+  })
+ );
+ const stageBandAuthoritySamples = {
+  stage3: stageBandPressureSample(ctx, { stage: 3, ships: 5, seed: 12031, seconds: 14 }),
+  stage5: stageBandPressureSample(ctx, { stage: 5, ships: 5, seed: 12053, seconds: 14 }),
+  stage7: stageBandPressureSample(ctx, { stage: 7, ships: 5, seed: 12071, seconds: 14 }),
+  stage9: stageBandPressureSample(ctx, { stage: 9, ships: 5, seed: 12091, seconds: 14 })
+ };
+ const stageBandPersonaRuns = [3, 5, 7, 9].map((stage, index) =>
+  simulatePersona(ctx, 'professional', {
+   stage,
+   ships: 5,
+   seed: 13001 + index * 29,
+   maxPlayableStage: Math.max(stage + 1, 6),
+   durationSeconds: 150
   })
  );
 
@@ -237,6 +308,48 @@ function buildGuardiansLongSurfaceArtifact({ createdOn = new Date().toISOString(
   + clamp01((longestMidrun?.simT || 0) / 120) * 0.7
   + clamp01((bestMidrun?.score || 0) / 2400) * 0.6
   + midrunAnyAdvance * 0.5
+ );
+ const stageBandSamples = Object.values(stageBandAuthoritySamples);
+ const earlyBands = [stageBandAuthoritySamples.stage3, stageBandAuthoritySamples.stage5];
+ const sustainedBands = [stageBandAuthoritySamples.stage7, stageBandAuthoritySamples.stage9];
+ const stageBandMonotonic = (
+  earlyBands[0].enemyShotCountByWindow < earlyBands[1].enemyShotCountByWindow
+  && sustainedBands[0].enemyShotCountByWindow <= sustainedBands[1].enemyShotCountByWindow
+  && earlyBands[0].lowerFieldThreatShare <= earlyBands[1].lowerFieldThreatShare
+  && sustainedBands[0].lowerFieldThreatShare <= sustainedBands[1].lowerFieldThreatShare
+ ) ? 1 : 0;
+ const earlyEscalationScore10 = round(
+  5
+  + clamp01((earlyBands[1].enemyShotCountByWindow - earlyBands[0].enemyShotCountByWindow) / 5) * 1.1
+  + clamp01((earlyBands[1].lowerFieldThreatShare - earlyBands[0].lowerFieldThreatShare) / .12) * 0.9
+  + clamp01((earlyBands[1].wrapCountByWindow - earlyBands[0].wrapCountByWindow) / 2) * 0.5
+  + stageBandMonotonic * 0.6
+ );
+ const sustainedPressureScore10 = round(
+  5.1
+  + clamp01((sustainedBands[1].enemyShotCountByWindow - sustainedBands[0].enemyShotCountByWindow) / 4) * 0.9
+  + clamp01((sustainedBands[1].maxConcurrentThreats - sustainedBands[0].maxConcurrentThreats) / 3) * 0.9
+  + clamp01((sustainedBands[1].lowerFieldMultiThreatShare - sustainedBands[0].lowerFieldMultiThreatShare) / .12) * 0.8
+  + clamp01(average(sustainedBands.map(band => band.wrapCountByWindow)) / 4) * 0.5
+ );
+ const wrapContinuityScore10 = round(
+  5.2
+  + clamp01(average(stageBandSamples.map(band => band.wrapCountByWindow)) / 4) * 1.2
+  + clamp01(1 - average(stageBandSamples.map(band => band.maxHorizontalOvershootPx)) / 8) * 1.3
+  + clamp01(average(stageBandSamples.map(band => band.lowerFieldThreatShare)) / .28) * 0.7
+ );
+ const laterBandAdvances = stageBandPersonaRuns.filter(run => run.stageAdvances > 0).length;
+ const clearPotentialScore10 = round(
+  4.9
+  + clamp01(laterBandAdvances / stageBandPersonaRuns.length) * 1.3
+  + clamp01(average(stageBandPersonaRuns.map(run => run.simT)) / 150) * 0.9
+  + clamp01(average(stageBandPersonaRuns.map(run => run.score)) / 3500) * 0.8
+ );
+ const stageBandAuthorityScore10 = round(
+  (earlyEscalationScore10 * 0.28)
+  + (sustainedPressureScore10 * 0.3)
+  + (wrapContinuityScore10 * 0.22)
+  + (clearPotentialScore10 * 0.2)
  );
 
  const categories = [
@@ -301,8 +414,9 @@ function buildGuardiansLongSurfaceArtifact({ createdOn = new Date().toISOString(
    stageArcPressureScore10,
    stagePresentationScore10,
    personaReviewUtilityScore10,
-   midrunSurvivabilityScore10,
-   releaseRead: 'Guardians now has a real longer-surface review contract: stage-band pressure continues into later bands, stage presentation changes across the run, and personas can stress the game in differentiated ways. The main remaining weakness is still stage-five-and-beyond survivability and clean-clear consistency.'
+    midrunSurvivabilityScore10,
+    stageBandAuthorityScore10,
+    releaseRead: 'Guardians now has a real longer-surface review contract: stage-band pressure continues into later bands, stage presentation changes across the run, and personas can stress the game in differentiated ways. The main remaining weakness is still stage-five-and-beyond survivability and clean-clear consistency.'
   },
   stageBandModel: [
    {
@@ -327,6 +441,28 @@ function buildGuardiansLongSurfaceArtifact({ createdOn = new Date().toISOString(
    }
   ],
   runtimeBands,
+  stageBandAuthority: {
+   sourceWindows: {
+    stages3to5: [
+     'reference-artifacts/analyses/galaxian-reference/arcades-lounge-level-5/frames/contact-sheet-reference-window.jpg',
+     'reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/contact-sheet.jpg'
+    ],
+    stages7to9: [
+     'reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/flagship-escort-pressure/contact-sheet.jpg',
+     'reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/contact-sheet.jpg'
+    ]
+   },
+   summary: {
+    earlyEscalationScore10,
+    sustainedPressureScore10,
+    wrapContinuityScore10,
+    clearPotentialScore10,
+    stageBandAuthorityScore10,
+    releaseRead: 'Stage 3-5 and 6-9 now have a saved runtime-review authority layer instead of only plan prose. The main remaining late-band weakness is no longer “unknown shape”; it is the still-limited ability of a strong persona to convert that pressure into reliable clears.'
+   },
+   runtimeReviewBands: stageBandAuthoritySamples,
+   personaBandRuns: stageBandPersonaRuns
+  },
   personaRuns: {
    competitiveThreeShip: competitiveRuns,
    reviewFiveShip: reviewRuns,
@@ -336,12 +472,13 @@ function buildGuardiansLongSurfaceArtifact({ createdOn = new Date().toISOString(
   resolvedInThisPass: [
    'Life loss no longer rebuilds the entire rack, so longer-surface review can preserve stage progress.',
    'Stage themes, accents, and atmosphere now progress across the Guardians run instead of staying visually flat.',
-   'The persona layer is now game-owned, deterministic, and differentiated enough to stress the game in repeatable longer-surface review runs.'
+   'The persona layer is now game-owned, deterministic, and differentiated enough to stress the game in repeatable longer-surface review runs.',
+   'Stage 3-5 and 6-9 behavior authority now lives in the maintained long-surface artifact instead of only in plan text.'
   ],
   remainingPriorityIssues: [
    'Stage-five-and-beyond dive collision fairness still needs the next motion-pressure pass.',
    'Professional/expert personas need more reliable later-band clear potential before they become authoritative tuning baselines.',
-   'Audio still needs another human-reviewed pass after scoutHit and stage-advance cleanup, especially around the remaining weakest live-play cues.'
+   'Audio still needs another human-reviewed pass after the stronger recurring rack pulse and combat-presence cleanup, especially around the remaining weakest live-play cues.'
   ]
  };
 }

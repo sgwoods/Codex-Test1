@@ -1,6 +1,6 @@
 # Galaxy Guardians Opening-Slice Baseline
 
-Updated: May 23, 2026
+Updated: May 29, 2026
 
 ## Purpose
 
@@ -131,13 +131,17 @@ threat model:
 ### Already present
 
 - moving starfield is now visible in the Guardians preview board
-- starfield motion is now denser and more directional instead of reading like a
-  near-static decorative scatter
+- starfield motion is now denser, brighter, and more directional instead of
+  reading like a near-static decorative scatter
 - the `WAIT` / preview mission block now preserves the canonical
   `MISSION: DESTROY ALIENS` phrase inside a tighter Guardians-owned cabinet
   layout instead of a looser generic copy block
 - score-table framing now uses `CONVOY` / `CHARGER` inside a compact aligned
   wait-surface and preview-modal layout rather than a plain generic table
+- launch from wait mode now explicitly confirms audio readiness instead of
+  silently depending on browser unlock behavior
+- opening `gameStart`, formation pulse, and idle/wait cues now have a stronger
+  first-seconds audible presence
 - reserve ships and stage flags are visible
 - a ready-to-fire missile cue is visible
 - top re-entry now begins higher above the board and sweeps back in more
@@ -158,11 +162,11 @@ threat model:
   mission line now preserves the canonical `MISSION: DESTROY ALIENS` phrase
 - the promoted frame windows now give the `WAIT` and score-table surfaces real
   opening authority, but the current runtime still presents a three-row
-  application-owned adaptation rather than a tighter four-row cabinet match
+  application-owned adaptation rather than a fully frame-matched cabinet copy
 - rack march cadence now has its own object-track-derived opening contract, and
   starfield/top-reentry now also have a promoted measured motion contract, but
-  the live `WAIT` board still needs a tighter cabinet read before the whole
-  opening surface feels equally source-faithful
+  later review may still justify one more cabinet-window refinement pass if the
+  live `WAIT` board keeps reading visibly looser than the promoted windows
 - explosions and hit states now read better, and they now have frame-backed
   source authority rather than only runtime improvement, but the live board
   still needs tighter matching against those windows
@@ -171,12 +175,15 @@ threat model:
 
 ### Still next
 
-- tighter runtime `WAIT`, title, mission, and score-table layout against the
-  promoted Matt Hawkins frame windows
-- tighter live hit/destruction-state matching against the promoted combat
-  reference windows
-- tighter palette progression and readiness-surface comparison beyond the
-  opening family
+- one hosted side-by-side review pass to confirm the stronger combat, palette,
+  and shell-fit slice still reads correctly outside local preview
+- browser-side listening review now that recurring rack pulse presence and
+  replay capture are both back in the live slice
+- a second runtime `WAIT`, title, mission, and score-table refinement pass only
+  if that hosted review still shows obvious cabinet drift
+- heavier stage `3-5` and `6-9` fairness work using the maintained long-surface
+  stage-band authority once the opening slice remains believable under hosted
+  review
 
 ## Why This Matters Before Deeper Stages
 
@@ -194,14 +201,14 @@ This opening baseline exists to keep the work honest:
 
 1. Preserve the opening-source baseline as a committed artifact and hosted
    readable doc, not only as raw source manifests.
-2. Tighten runtime `WAIT`, title, mission, and score-table layout against the
-   now-promoted Matt Hawkins frame windows.
-3. Tighten live explosion, hit, and destruction-state matching against the
-   promoted Arcade's Lounge frame windows.
-4. Strengthen palette progression and swarm color-family authority beyond the
-   first corrected slice.
-5. Only after those land, spend heavier effort on stage `3-5` and `6-9`
-   pressure tuning.
+2. Review the improved opening slice side by side on hosted `/dev`, not only
+   on localhost.
+3. Do the deliberate browser/listening pass now that the live slice has
+   stronger representative audio presence and working replay capture.
+4. Do a second `WAIT` / title / mission / score-table pass only if hosted
+   review still shows obvious opening-window drift.
+5. Once the opening slice holds, spend heavier effort on stage `3-5` and `6-9`
+   pressure tuning through the maintained stage-band authority artifact.
 
 ## Practical Conformance Meaning
 

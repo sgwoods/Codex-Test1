@@ -176,7 +176,9 @@ function currentReplayMeta(){
 }
 async function persistLocalReplay(blob,meta){
  if(!blob||!meta||!localReplaySupported())return;
- if(meta.attract||meta.reason!=='game_start'||meta.duration<3)return;
+ const replayReason=String(meta.reason||'').trim();
+ const playableStartReason=replayReason==='game_start'||replayReason==='guardians_dev_preview_start';
+ if(meta.attract||!playableStartReason||meta.duration<3)return;
  try{
   await window.AuroraReplayStore.saveReplay(Object.assign({},meta,{
    blob,

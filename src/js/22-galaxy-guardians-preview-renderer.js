@@ -27,7 +27,7 @@ function resetGalaxyGuardiansPreviewRenderState(seed=1979){
   ? createGalaxyGuardiansRuntimeState({stage:1,ships:3,seed})
   : null;
  galaxyGuardiansPreviewLastT=0;
- galaxyGuardiansPreviewFireT=.32;
+ galaxyGuardiansPreviewFireT=.38;
  return galaxyGuardiansPreviewState;
 }
 
@@ -58,36 +58,14 @@ function blendGalaxyGuardiansStagePalette(alien,palette,theme,stage=1){
  if(!alien||!theme||!Array.isArray(theme.palette)||!theme.palette.length)return palette;
  const source=theme.palette.filter(Boolean);
  if(!source.length)return palette;
- const idx=(alien.row*3+alien.col+Math.max(1,+stage||1))%source.length;
+ const roleOffset=alien.role==='flagship'?0:alien.role==='escort'?2:4;
+ const idx=(Math.max(1,+stage||1)-1+roleOffset)%source.length;
  const pick=offset=>source[(idx+offset+source.length)%source.length];
- if(alien.role==='scout'){
-  return Object.assign({},palette,{
-   core:pick(0),
-   wing:pick(1),
-   accent:pick(3),
-   flare:pick(4),
-   eye:palette.eye||'#ffffff'
-  });
- }
- if(alien.role==='escort'){
-  return Object.assign({},palette,{
-   core:pick(1),
-   wing:pick(2),
-   accent:pick(4),
-   flare:pick(0),
-   eye:palette.eye||'#ffffff'
-  });
- }
- if(alien.role==='flagship'){
-  return Object.assign({},palette,{
-   core:pick(0),
-   wing:pick(5),
-   accent:pick(2),
-   flare:pick(3),
-   eye:palette.eye||'#ffffff'
-  });
- }
- return palette;
+ return Object.assign({},palette,{
+  accent:pick(0),
+  flare:pick(1),
+  eye:palette.eye||'#ffffff'
+ });
 }
 
 function drawGalaxyGuardiansPixelRows(visual,x,y,cell=2,opts={}){
@@ -135,13 +113,13 @@ function syncGalaxyGuardiansPreviewStarfield(stage=1){
   id:'guardians-signal-stars',
   count:116,
   sizeMin:.78,
-  sizeMax:1.62,
+  sizeMax:1.58,
   alphaMin:.34,
   alphaMax:.92,
   twinkleMin:.78,
   twinkleAmp:.22,
   speedMin:18,
-  speedMax:40,
+  speedMax:38,
   driftMin:-9,
   driftMax:9,
   palette:['#fffdf0','#ffe26a','#ff5b5b','#7bd6ff','#4af26d','#f6f0ff','#ffd4a8','#59a8ff']
@@ -164,7 +142,10 @@ function syncGalaxyGuardiansPreviewStarfield(stage=1){
    twAmp:rand(Math.min(.4,profile.twinkleAmp+.04),Math.max(.04,profile.twinkleAmp-.04)),
    vy:rand(profile.speedMax,profile.speedMin),
    vx:rand(profile.driftMax||0,profile.driftMin||0),
-   depth:rand(.92,1.24)
+   depth:rand(.94,1.28),
+   glow:rand(1.2,.4),
+   lead:randUnit()<.18,
+   trailGain:rand(1.32,.9)
   });
  }
  return profile;
@@ -175,8 +156,8 @@ function advanceGalaxyGuardiansPreviewStarfield(dt){
   if(!s)continue;
   s.tw=(+s.tw||0)+dt*1.9;
   const depth=+s.depth||1;
-  s.y+=(+s.vy||12)*dt*.74*depth;
-  s.x+=(+s.vx||0)*dt*.42*depth;
+  s.y+=(+s.vy||12)*dt*.92*depth;
+  s.x+=(+s.vx||0)*dt*.58*depth;
   if(s.x>PLAY_W+(+s.s||1))s.x=-((+s.s||1)+((s.vx||0)%5));
   else if(s.x<-(+s.s||1))s.x=PLAY_W+((+s.s||1)+Math.abs((s.vx||0)%5));
   if(s.y>PLAY_H+(+s.s||1)){
@@ -186,18 +167,50 @@ function advanceGalaxyGuardiansPreviewStarfield(dt){
  }
 }
 
-function drawGalaxyGuardiansPreviewBackdrop(t){
+function drawGalaxyGuardiansPreviewBackdrop(t,theme){
+ theme=theme||resolveGalaxyGuardiansPreviewTheme(1)||{};
+ const backdrop=theme.backdrop||{};
+ const top=backdrop.top||'#0e1836';
+ const mid=backdrop.mid||'#030611';
+ const bottom=backdrop.bottom||'#000000';
+ const horizon=backdrop.horizon||'rgba(255,91,91,.16)';
+ const lowerGlow=backdrop.lowerGlow||'rgba(123,214,255,.12)';
+ const scan=backdrop.scan||'rgba(255,255,255,.05)';
  ctx.fillStyle='#000';
  ctx.fillRect(0,0,PLAY_W,PLAY_H);
+ const sky=ctx.createLinearGradient(0,0,0,PLAY_H);
+ sky.addColorStop(0,top);
+ sky.addColorStop(.52,mid);
+ sky.addColorStop(1,bottom);
+ ctx.fillStyle=sky;
+ ctx.fillRect(0,0,PLAY_W,PLAY_H);
+ ctx.globalAlpha=.36+.08*Math.sin(t*.24);
+ ctx.fillStyle=horizon;
+ ctx.fillRect(0,PLAY_H-108,PLAY_W,58);
+ ctx.globalAlpha=.24+.06*Math.cos(t*.31);
+ ctx.fillStyle=lowerGlow;
+ ctx.fillRect(0,PLAY_H-62,PLAY_W,26);
  for(const s of S.st){
   const pulse=(s.twMin||.88)+Math.sin(s.tw+t*.9)*(s.twAmp||.16);
-  ctx.globalAlpha=Math.max(.08,Math.min(1,(s.alpha||.62)*pulse));
+  const alpha=Math.max(.12,Math.min(1,(s.alpha||.62)*pulse));
+  const size=Math.max(1,Math.round(+s.s||1));
+  const trail=Math.max(size,Math.min(6,Math.round((((+s.vy||12)/13)-.4)*(+s.trailGain||1))));
+  const x=Math.round(s.x);
+  const y=Math.round(s.y);
+  const glowPad=size>1?1:0;
+  ctx.globalAlpha=alpha*.1*(1+Math.min(.7,+s.glow||0));
   ctx.fillStyle=s.c;
-  const trail=Math.max(0,Math.min(5,Math.round(((+s.vy||12)/14)-1)));
-  ctx.fillRect(s.x,Math.round(s.y-trail*.45),s.s,Math.max(s.s,trail+s.s*.72));
+  ctx.fillRect(x-glowPad,y-glowPad,size+glowPad*2,size+glowPad*2);
+  ctx.globalAlpha=alpha;
+  ctx.fillRect(x,y-trail,size,trail+size);
+  if(s.lead){
+   ctx.globalAlpha=Math.min(1,alpha*.82);
+   ctx.fillRect(x-size,y,size*2+1,size);
+   ctx.fillRect(x,y-size,size,size*2+1);
+  }
  }
  ctx.globalAlpha=1;
- ctx.fillStyle='rgba(255,255,255,.04)';
+ ctx.fillStyle=scan;
  ctx.fillRect(0,18,PLAY_W,1);
  ctx.fillRect(0,PLAY_H-38,PLAY_W,1);
 }
@@ -243,32 +256,80 @@ function drawGalaxyGuardiansHitFlashes(state,theme){
    flashPalettes[visualId]||{}
   );
   const points=burstVectors[flash.role]||burstVectors.scout;
-  const pixel=flash.role==='flagship'?3.25:(flash.role==='escort'?2.65:2.3);
-  ctx.shadowColor=palette.core;
-  ctx.shadowBlur=14*life;
-  ctx.globalAlpha=.12+.28*life;
-  ctx.fillStyle=palette.flare||flash.color||'#ffdf6f';
-  ctx.fillRect(Math.round(flash.x)-7,Math.round(flash.y)-7,14,14);
+  const pixel=(flash.role==='flagship'?3.25:(flash.role==='escort'?2.65:2.3))*(+flash.burstScale||1);
+  const ringRadius=(+flash.ringRadius||7)*(1-life*.25);
+  const coreColor=flash.color||palette.core||'#dff7ff';
+  const accentColor=flash.accentColor||palette.accent||'#7bd6ff';
+  const flareColor=flash.flareColor||palette.flare||'#ffdf6f';
+  const streaks=Math.max(6,+flash.streaks||8);
+  const sparkInset=+flash.sparkInset||1.1;
+  ctx.shadowColor=coreColor;
+  ctx.shadowBlur=18*life;
+  ctx.globalAlpha=.1+.18*life;
+  ctx.fillStyle=flareColor;
+  ctx.fillRect(Math.round(flash.x)-8,Math.round(flash.y)-8,16,16);
+  ctx.globalAlpha=.18+.34*life;
+  ctx.strokeStyle=accentColor;
+  ctx.lineWidth=1.2;
+  ctx.beginPath();
+  ctx.arc(flash.x,flash.y,ringRadius,0,Math.PI*2);
+  ctx.stroke();
+  ctx.globalAlpha=.36+.34*life;
+  ctx.fillStyle=flareColor;
+  ctx.fillRect(Math.round(flash.x)-1,Math.round(flash.y)-Math.round(ringRadius),2,Math.round(ringRadius*2));
+  ctx.fillRect(Math.round(flash.x)-Math.round(ringRadius),Math.round(flash.y)-1,Math.round(ringRadius*2),2);
   ctx.globalAlpha=.26+.4*life;
   for(let i=0;i<points.length;i++){
    const [dx,dy]=points[i];
    const drift=(1-life)*(flash.role==='flagship'?2.6:2.1);
    const px=Math.round(flash.x+dx*(.42+life*.74)+(dx===0?Math.sin(i+life)*drift:0));
    const py=Math.round(flash.y+dy*(.42+life*.74)+(dy===0?Math.cos(i+life)*drift:0));
-   ctx.fillStyle=i%3===0?(palette.flare||'#ffdf6f'):(i%2===0?(palette.accent||'#7bd6ff'):(palette.wing||'#dff7ff'));
+   ctx.fillStyle=i%3===0?flareColor:(i%2===0?accentColor:(palette.wing||'#dff7ff'));
    ctx.fillRect(px,py,Math.ceil(pixel),Math.ceil(pixel));
+  }
+  ctx.globalAlpha=.32+.3*life;
+  for(let i=0;i<streaks;i++){
+   const theta=(Math.PI*2*i)/streaks+life*.22;
+   const inner=ringRadius*sparkInset*.42;
+   const outer=ringRadius*(1.28+(i%2)*.24);
+   ctx.strokeStyle=i%2===0?accentColor:flareColor;
+   ctx.beginPath();
+   ctx.moveTo(flash.x+Math.cos(theta)*inner,flash.y+Math.sin(theta)*inner);
+   ctx.lineTo(flash.x+Math.cos(theta)*outer,flash.y+Math.sin(theta)*outer);
+   ctx.stroke();
   }
   ctx.globalAlpha=.44+.28*life;
   ctx.fillStyle=palette.eye||'#ffffff';
   ctx.fillRect(Math.round(flash.x)-2,Math.round(flash.y)-2,4,4);
   ctx.globalAlpha=.34+.22*life;
-  ctx.fillStyle=palette.core||flash.color||'#dff7ff';
+  ctx.fillStyle=palette.core||coreColor;
   ctx.fillRect(Math.round(flash.x)-1,Math.round(flash.y)-5,2,10);
   ctx.fillRect(Math.round(flash.x)-5,Math.round(flash.y)-1,10,2);
   ctx.globalAlpha=.18+.18*life;
-  ctx.strokeStyle=palette.accent||'#7bd6ff';
+  ctx.strokeStyle=accentColor;
   ctx.strokeRect(Math.round(flash.x)-4.5,Math.round(flash.y)-4.5,9,9);
  }
+ ctx.restore();
+}
+
+function drawGalaxyGuardiansClearTransition(state,theme){
+ const clearT=+state.waveClearT||0;
+ const flashT=+state.clearFlashT||0;
+ if(clearT<=0&&flashT<=0)return;
+ const backdrop=theme?.backdrop||{};
+ const horizon=backdrop.horizon||'rgba(255,91,91,.18)';
+ const lowerGlow=backdrop.lowerGlow||'rgba(123,214,255,.14)';
+ const sweep=Math.max(clearT,flashT);
+ ctx.save();
+ ctx.globalAlpha=Math.min(.42,.16+sweep*.34);
+ ctx.fillStyle=horizon;
+ ctx.fillRect(0,PLAY_H-132,PLAY_W,18);
+ ctx.globalAlpha=Math.min(.32,.08+sweep*.4);
+ ctx.fillStyle=lowerGlow;
+ ctx.fillRect(0,PLAY_H-86,PLAY_W,40);
+ ctx.globalAlpha=Math.min(.5,.16+sweep*.52);
+ ctx.fillStyle='rgba(255,242,164,.92)';
+ ctx.fillRect(0,PLAY_H-40,PLAY_W,3);
  ctx.restore();
 }
 
@@ -362,22 +423,37 @@ function drawGalaxyGuardiansPreviewHud(summary,state){
  ctx.save();
  ctx.font='7px "Courier New", Consolas, monospace';
  ctx.textBaseline='top';
+ ctx.shadowBlur=4;
  ctx.fillStyle='#ff5b73';
- ctx.fillText('1UP',18,16);
+ ctx.shadowColor='rgba(255,91,115,.45)';
+ ctx.fillText('1UP',18,12);
  ctx.fillStyle='#dff7ff';
- ctx.fillText(String(summary.score||0).padStart(6,'0'),48,16);
+ ctx.shadowColor='rgba(223,247,255,.28)';
+ ctx.fillText(String(summary.score||0).padStart(6,'0'),18,22);
  ctx.fillStyle='#dff7ff';
- ctx.fillText('HIGH SCORE',104,16);
+ ctx.fillText('HIGH SCORE',102,12);
  ctx.fillStyle='#ffdf6f';
- ctx.fillText(String(Math.max(summary.score||0,+S.best||0)).padStart(6,'0'),170,16);
+ ctx.shadowColor='rgba(255,223,111,.34)';
+ ctx.fillText(String(Math.max(summary.score||0,+S.best||0)).padStart(6,'0'),116,22);
  ctx.fillStyle='#7bd6ff';
- ctx.fillText(`STAGE ${(summary.stage||1).toString().padStart(2,'0')}`,232,16);
- ctx.fillStyle='rgba(216,236,255,.82)';
+ ctx.shadowColor='rgba(123,214,255,.34)';
+ ctx.fillText(`STAGE ${(summary.stage||1).toString().padStart(2,'0')}`,224,12);
+ ctx.shadowBlur=0;
+ ctx.fillStyle='rgba(216,236,255,.84)';
  ctx.fillText('CREDIT 0',12,PLAY_H-20);
+ ctx.textAlign='center';
  ctx.fillStyle='#ffdf6f';
- ctx.fillText(summary.gameOver?'GUARDIANS GAME OVER':'WE ARE THE GALAXY GUARDIANS',48,PLAY_H-28);
- ctx.fillStyle='#7bd6ff';
- ctx.fillText(summary.gameOver?'PRESS CHOOSE GAME FOR CABINET SELECT':'SINGLE SHOT  FLAGSHIP ESCORTS  TOP REENTRY',26,PLAY_H-17);
+ ctx.shadowBlur=6;
+ ctx.shadowColor='rgba(255,223,111,.32)';
+ ctx.fillText(summary.gameOver?'GUARDIANS GAME OVER':'WE ARE THE GALAXY GUARDIANS',PLAY_W*.5,PLAY_H-29);
+ ctx.font='6px "Courier New", Consolas, monospace';
+ ctx.fillStyle=summary.gameOver?'#dff7ff':'#ffb997';
+ ctx.shadowBlur=3;
+ ctx.shadowColor='rgba(255,185,151,.28)';
+ ctx.fillText(summary.gameOver?'PRESS CHOOSE GAME FOR CABINET SELECT':'SINGLE SHOT  FLAGSHIP ESCORTS  TOP REENTRY',PLAY_W*.5,PLAY_H-19);
+ ctx.fillStyle='rgba(123,214,255,.96)';
+ ctx.shadowColor='rgba(123,214,255,.26)';
+ ctx.fillText(summary.gameOver?'RETURN TO PLATINUM SELECT':'MOVING STARFIELD  LIVE FORMATION PRESSURE',PLAY_W*.5,PLAY_H-11);
  ctx.restore();
  return {
   reserveShipCount:drawGalaxyGuardiansPreviewReserveShips(state.lives||0),
@@ -423,9 +499,10 @@ function drawGalaxyGuardiansPreviewBoard({ox,oy,scale,dx,dy}){
  const t=state.t;
  const previewTheme=resolveGalaxyGuardiansPreviewTheme(summary.stage||state.stage||1);
  const starfield=syncGalaxyGuardiansPreviewStarfield(summary.stage||state.stage||1);
- drawGalaxyGuardiansPreviewBackdrop(t);
+ drawGalaxyGuardiansPreviewBackdrop(t,previewTheme);
  for(const alien of state.aliens)if(alien.hp>0)drawGalaxyGuardiansAlien(alien,t,previewTheme,summary.stage||state.stage||1);
  drawGalaxyGuardiansHitFlashes(state,previewTheme);
+ drawGalaxyGuardiansClearTransition(state,previewTheme);
  drawGalaxyGuardiansEnemyShots(state);
  const readyMissileVisible=state.player.visible!==false?drawGalaxyGuardiansPlayer(state.player,previewTheme):false;
  const hud=drawGalaxyGuardiansPreviewHud(summary,state);

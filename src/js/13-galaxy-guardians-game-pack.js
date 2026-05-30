@@ -28,6 +28,15 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
    driftMax:9,
    palette:Object.freeze(['#fffdf0','#ffe26a','#ff5b5b','#7bd6ff','#5a6dff','#ffd4a8','#f6f0ff'])
   }),
+  palette:Object.freeze(['#ffe39a','#ff7668','#7bd6ff','#5a6dff','#f6f0ff','#ffd4a8']),
+  backdrop:Object.freeze({
+   top:'#0c1330',
+   mid:'#080d1c',
+   bottom:'#000000',
+   horizon:'rgba(255,91,91,.18)',
+   lowerGlow:'rgba(123,214,255,.14)',
+   scan:'rgba(255,227,154,.1)'
+  }),
   previewPalettes:Object.freeze({
    'signal-flagship':Object.freeze({core:'#ffd86d',wing:'#ff5b5b',accent:'#5ea8ff',eye:'#fff7c2',flare:'#fff2a4'}),
    'signal-escort':Object.freeze({core:'#ff6660',wing:'#dff7ff',accent:'#5ea8ff',eye:'#ffffff',flare:'#ffe06d'}),
@@ -61,6 +70,15 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
    driftMin:-8,
    driftMax:8,
    palette:Object.freeze(['#fff4dc','#ffd86d','#ff8c5a','#7bd6ff','#59a8ff','#d8f0ff','#fff8d9'])
+  }),
+  palette:Object.freeze(['#fff2c8','#ffb060','#ff785a','#8bd7ff','#63a7ff','#fff7e1']),
+  backdrop:Object.freeze({
+   top:'#1a1024',
+   mid:'#100714',
+   bottom:'#020103',
+   horizon:'rgba(255,176,96,.18)',
+   lowerGlow:'rgba(123,214,255,.12)',
+   scan:'rgba(255,245,205,.08)'
   }),
   previewPalettes:Object.freeze({
    'signal-flagship':Object.freeze({core:'#ffe49c',wing:'#ff8c5a',accent:'#7bd6ff',eye:'#fff7c2',flare:'#ffdf6f'}),
@@ -96,6 +114,15 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
    driftMax:8,
    palette:Object.freeze(['#f8fbff','#7bd6ff','#4b7dff','#7a6dff','#ffd86d','#ff7b76'])
   }),
+  palette:Object.freeze(['#dff7ff','#72c8ff','#5b86ff','#8970ff','#ffd86d','#ff7f78']),
+  backdrop:Object.freeze({
+   top:'#08162b',
+   mid:'#060d1c',
+   bottom:'#010207',
+   horizon:'rgba(123,214,255,.16)',
+   lowerGlow:'rgba(137,112,255,.14)',
+   scan:'rgba(255,216,109,.08)'
+  }),
   previewPalettes:Object.freeze({
    'signal-flagship':Object.freeze({core:'#ffe39a',wing:'#ff7b76',accent:'#7bd6ff',eye:'#fff7c2',flare:'#5f83ff'}),
    'signal-escort':Object.freeze({core:'#ff7b76',wing:'#d8f0ff',accent:'#7a6dff',eye:'#ffffff',flare:'#ffd86d'}),
@@ -124,11 +151,20 @@ const GUARDIANS_ATMOSPHERE_THEMES=Object.freeze({
    alphaMax:.96,
    twinkleMin:.72,
    twinkleAmp:.24,
-   speedMin:22,
+   speedMin:20,
    speedMax:42,
    driftMin:-9,
    driftMax:9,
    palette:Object.freeze(['#fff8d9','#ffd86d','#ff5b5b','#ff9b54','#7bd6ff','#6a7dff'])
+  }),
+  palette:Object.freeze(['#fff2b0','#ffb55c','#ff6b59','#7bd6ff','#6a7dff','#ffd8a6']),
+  backdrop:Object.freeze({
+   top:'#1b0910',
+   mid:'#12060c',
+   bottom:'#020102',
+   horizon:'rgba(255,107,89,.2)',
+   lowerGlow:'rgba(255,216,109,.12)',
+   scan:'rgba(123,214,255,.08)'
   }),
   previewPalettes:Object.freeze({
    'signal-flagship':Object.freeze({core:'#fff0a5',wing:'#ff9b54',accent:'#7bd6ff',eye:'#fff7c2',flare:'#ff5b5b'}),
@@ -247,8 +283,8 @@ const GUARDIANS_AUDIO_THEMES=Object.freeze({
   id:'guardians-signal',
   label:'Guardians Signal',
   cues:Object.freeze({
-   gameStart:Object.freeze({seq:[520,420,320,240],step:.035,wave:'square',volume:.011,slide:-42,lpHz:2500}),
-   formationPulse:Object.freeze({tones:Object.freeze([{freq:122,duration:.08,wave:'square',volume:.006,slide:18,lpHz:1400},{freq:244,duration:.05,wave:'square',volume:.007,slide:-28,lpHz:2200,delay:.018},{freq:366,duration:.032,wave:'square',volume:.0045,slide:-44,lpHz:2800,delay:.05}])}),
+   gameStart:Object.freeze({seq:[294,392,494,659,784],step:.038,wave:'square',volume:.0132,slide:24,lpHz:3200}),
+   formationPulse:Object.freeze({tones:Object.freeze([{freq:118,duration:.088,wave:'square',volume:.0072,slide:20,lpHz:1500},{freq:236,duration:.058,wave:'square',volume:.0082,slide:-26,lpHz:2350,delay:.014},{freq:354,duration:.04,wave:'square',volume:.0058,slide:-42,lpHz:2950,delay:.046},{freq:472,duration:.026,wave:'square',volume:.0039,slide:-58,lpHz:3600,delay:.07}])}),
    playerShot:Object.freeze({tones:Object.freeze([{freq:2660,duration:.032,wave:'square',volume:.014,slide:-780,detune:.004,lpHz:7600},{freq:2050,duration:.058,wave:'square',volume:.0135,slide:-620,detune:-.004,lpHz:6400,delay:.006}]),noise:Object.freeze([{duration:.028,volume:.0048,hp:4600,delay:0}])}),
    enemyShot:Object.freeze({tones:Object.freeze([{freq:960,duration:.04,wave:'square',volume:.012,slide:-280,detune:.004,lpHz:3600},{freq:620,duration:.08,wave:'square',volume:.0092,slide:-180,detune:-.004,lpHz:2500,delay:.008}]),noise:Object.freeze([{duration:.024,volume:.0024,hp:1500,delay:.01}])}),
    scoutDive:Object.freeze({tones:Object.freeze([{freq:1520,duration:.07,wave:'square',volume:.0105,slide:-520,detune:.006,lpHz:4300},{freq:1180,duration:.12,wave:'square',volume:.0082,slide:-420,detune:-.005,lpHz:3400,delay:.035},{freq:860,duration:.1,wave:'square',volume:.0055,slide:-300,detune:.003,lpHz:2600,delay:.12}]),noise:Object.freeze([{duration:.06,volume:.004,hp:1250,delay:.02}])}),
@@ -264,12 +300,12 @@ const GUARDIANS_AUDIO_THEMES=Object.freeze({
    bossHit:Object.freeze({tones:Object.freeze([{freq:320,duration:.068,wave:'square',volume:.013,slide:-120,lpHz:3600}])}),
    enemyBoom:Object.freeze({tones:Object.freeze([{freq:420,duration:.04,wave:'square',volume:.009,slide:-320,lpHz:3900},{freq:220,duration:.08,wave:'triangle',volume:.006,slide:-110,lpHz:2100,delay:.014}])}),
    bossBoom:Object.freeze({tones:Object.freeze([{freq:360,duration:.05,wave:'square',volume:.011,slide:-300,lpHz:3900},{freq:180,duration:.12,wave:'triangle',volume:.009,slide:-90,lpHz:2000,delay:.018}])}),
-   stagePulse:Object.freeze({variants:Object.freeze([Object.freeze({tones:Object.freeze([{freq:196,duration:.08,wave:'square',volume:.003,slide:4,lpHz:1700},{freq:392,duration:.058,wave:'square',volume:.008,slide:-10,lpHz:3000,delay:.012}])})])}),
+   stagePulse:Object.freeze({variants:Object.freeze([Object.freeze({tones:Object.freeze([{freq:196,duration:.08,wave:'square',volume:.0036,slide:4,lpHz:1700},{freq:392,duration:.058,wave:'square',volume:.0084,slide:-10,lpHz:3000,delay:.012}])})])}),
    stageTransition:Object.freeze({seq:[294,392,523,784],step:.052,wave:'square',volume:.012,slide:22,lpHz:3600}),
-   attractEnter:Object.freeze({byPhase:Object.freeze({wait:Object.freeze({seq:[294,392,494,659],step:.06,wave:'square',volume:.009,slide:12,lpHz:3100,allowIdle:1}),demo:Object.freeze({seq:[247,330,440,587],step:.066,wave:'square',volume:.008,slide:10,lpHz:2900,allowIdle:1})})}),
-   attractPulse:Object.freeze({byPhase:Object.freeze({wait:Object.freeze({allowIdle:1,variants:Object.freeze([Object.freeze({tones:Object.freeze([{freq:330,duration:.06,wave:'square',volume:.005,slide:6,lpHz:2500}])})])}),demo:Object.freeze({allowIdle:1,variants:Object.freeze([Object.freeze({tones:Object.freeze([{freq:294,duration:.065,wave:'square',volume:.0048,slide:5,lpHz:2300}])})])})})}),
+   attractEnter:Object.freeze({byPhase:Object.freeze({wait:Object.freeze({seq:[247,330,440,587,659],step:.056,wave:'square',volume:.0115,slide:18,lpHz:3300,allowIdle:1}),demo:Object.freeze({seq:[220,294,392,523],step:.064,wave:'square',volume:.0092,slide:14,lpHz:3000,allowIdle:1})})}),
+   attractPulse:Object.freeze({byPhase:Object.freeze({wait:Object.freeze({allowIdle:1,variants:Object.freeze([Object.freeze({tones:Object.freeze([{freq:294,duration:.05,wave:'square',volume:.0062,slide:10,lpHz:2400},{freq:440,duration:.028,wave:'square',volume:.0042,slide:-18,lpHz:3200,delay:.02}])})])}),demo:Object.freeze({allowIdle:1,variants:Object.freeze([Object.freeze({tones:Object.freeze([{freq:262,duration:.055,wave:'square',volume:.0054,slide:8,lpHz:2200},{freq:392,duration:.026,wave:'square',volume:.0038,slide:-15,lpHz:2900,delay:.018}])})])})})}),
    uiTick:Object.freeze({tones:Object.freeze([{freq:920,duration:.024,wave:'square',volume:.004,slide:-110,lpHz:5400}])}),
-   uiConfirm:Object.freeze({seq:[660,880],step:.04,wave:'square',volume:.008,slide:30,lpHz:4200}),
+   uiConfirm:Object.freeze({seq:[740,988,1318],step:.032,wave:'square',volume:.0096,slide:26,lpHz:4600}),
    playerHit:Object.freeze({tones:Object.freeze([{freq:210,duration:.13,wave:'square',volume:.018,slide:-220,lpHz:2200}])}),
    gameOver:Object.freeze({seq:[392,294,247,196,147],step:.086,wave:'square',volume:.014,slide:-72,lpHz:2200})
   })
@@ -453,7 +489,7 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
  frontDoor:Object.freeze({
   marqueeTitle:'Galaxy Guardians',
   title:'GALAXY GUARDIANS',
-  featureLine:'FORMATION DIVES   FLAGSHIP ESCORTS   ARCADE PRESSURE',
+  featureLine:'SINGLE SHOT   FLAGSHIP ESCORTS   TOP REENTRY',
   shellFrameTheme:'guardians-preview',
   frameAccent:'signal-crimson',
   atmosphereTheme:'signal-rack'
@@ -465,7 +501,7 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
  preview:Object.freeze({
   banner:'SNEAK PEEK',
   title:'Galaxy Guardians',
-  subtitle:'SECOND GAME PREVIEW ON PLATINUM',
+  subtitle:'SECOND GAME CABINET PREVIEW ON PLATINUM',
   image:'assets/galaxy-guardians-coming-soon.svg',
   imageAlt:'Galaxy Guardians sneak peek splash art',
   cardLine:'Sneak peek shell with pack-owned preview identity and a playable scout-wave slice on the hosted release lanes.',

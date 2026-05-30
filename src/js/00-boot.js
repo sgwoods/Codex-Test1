@@ -343,7 +343,8 @@ let arcadeMusicMuted=readPref(ARCADE_MUSIC_MUTED_PREF_KEY)==='1';
 let gameSoundVolume=readVolumePref(GAME_SOUND_VOLUME_PREF_KEY,DEFAULT_GAME_SOUND_VOLUME);
 let arcadeMusicVolume=readVolumePref(ARCADE_MUSIC_VOLUME_PREF_KEY,DEFAULT_ARCADE_MUSIC_VOLUME);
 const ARCADE_MUSIC_PLAYLIST_ID={{ARCADE_MUSIC_PLAYLIST_ID_JSON}};
-const ARCADE_MUSIC={state:'off',requested:readPref(ARCADE_MUSIC_PREF_KEY)==='1',playlistOverride:'',iframe:null,activePlaylistId:'',activePlaylistSource:'',lastTrackSignature:'',lastTrack:null};
+const arcadeMusicRequestedPref=readPref(ARCADE_MUSIC_PREF_KEY);
+const ARCADE_MUSIC={state:'off',requested:arcadeMusicRequestedPref==='1',playlistOverride:'',iframe:null,activePlaylistId:'',activePlaylistSource:'',lastTrackSignature:'',lastTrack:null};
 function readPref(key){
  try{
   const current=localStorage.getItem(key);
@@ -573,6 +574,7 @@ const MODEM_FEATURE_EMAIL='default-dimiglyd88@inbox.modem.dev';
 const WEB3FORMS_ENDPOINT='https://api.web3forms.com/submit';
 const WEB3FORMS_ACCESS_KEY='{{WEB3FORMS_ACCESS_KEY}}';
 let feedbackOpen=0,feedbackBusy=0,feedbackPrevPaused=0,feedbackLastSubmit=0,toastTimer=0,platformTrackToastTimer=0;
+let openingAudioReadyAnnounced=0;
 let gamePickerOpen=0,gamePickerPrevPaused=0;
 let platformSplashOpen=0,platformSplashPrevPaused=0;
 let gamePreviewOpen=0,gamePreviewPrevPaused=0;
@@ -622,6 +624,7 @@ const AC=()=>{
  sfx.keep.start();
  sfx.bus.connect(A.destination);
  sfx.bus.connect(sfx.tap);
+ syncAudioDebugState();
  return A;
 };
 window.__platinumAudioDebug=window.__platinumAudioDebug||window.__auroraAudioDebug||{lastCue:null,history:[]};
@@ -629,6 +632,13 @@ if(!Array.isArray(window.__platinumAudioDebug.history))window.__platinumAudioDeb
 if(!window.__platinumAudioDebug.reference)window.__platinumAudioDebug.reference={lastRequested:'',lastLoaded:'',lastStarted:'',lastError:'',activeCount:0,startedHistory:[],blockedHistory:[]};
 if(!Array.isArray(window.__platinumAudioDebug.reference.startedHistory))window.__platinumAudioDebug.reference.startedHistory=[];
 if(!Array.isArray(window.__platinumAudioDebug.reference.blockedHistory))window.__platinumAudioDebug.reference.blockedHistory=[];
+function syncAudioDebugState(){
+ const debug=window.__platinumAudioDebug||window.__auroraAudioDebug;
+ if(!debug)return;
+ debug.interactionUnlocked=!!aud;
+ debug.audioContextState=String(sfx?.a?.state||'');
+ debug.soundEffectsMuted=!!audioMuted;
+}
 window.__auroraAudioDebug=window.__platinumAudioDebug;
 const sfx={
  a:null,n:null,bus:null,tap:null,keep:null,recOsc:null,recGain:null,referenceActive:[],referenceCooldowns:Object.create(null),referenceBuffers:Object.create(null),
@@ -995,13 +1005,35 @@ const sfx={
  },
  attractPulse(phase='demo',variant=0){this.playCue('attractPulse',{phase,variant,allowIdle:1})}
 };
+syncAudioDebugState();
 
-function unlockAudioFromInteraction(){
+function announceOpeningAudioReady(opts={}){
+ const source=String(opts.source||'interaction').trim()||'interaction';
+ if(openingAudioReadyAnnounced&&!opts.force)return;
+ openingAudioReadyAnnounced=1;
+ const prompt=audioMuted
+  ? 'Sound effects muted. Use the speaker control to unmute.'
+  : 'Sound effects on. Launching game audio.';
+ showToast(prompt);
+ if(typeof logEvent==='function')logEvent('opening_audio_ready',{
+  source,
+  muted:!!audioMuted,
+  soundEffectsMuted:!!audioMuted,
+  started:!!started
+ });
+}
+function unlockAudioFromInteraction(opts={}){
+ const wasAud=!!aud;
+ const wasSuspended=!!(sfx.a&&sfx.a.state==='suspended');
  aud=1;
  try{
   AC();
   if(sfx.a&&typeof sfx.a.resume==='function'&&sfx.a.state==='suspended')sfx.a.resume().catch(()=>{});
  }catch{}
+ if(typeof maybeResumeRequestedArcadeMusic==='function')maybeResumeRequestedArcadeMusic({silent:true,source:String(opts.source||'interaction')});
+ syncAudioDebugState();
+ setTimeout(syncAudioDebugState,0);
+ if(opts.announce&&(!wasAud||wasSuspended||opts.force))announceOpeningAudioReady(opts);
 }
 
 window.__auroraDocsPreview=window.__platinumDocsPreview={
@@ -1801,9 +1833,13 @@ function syncAudioMixControls(){
  const playlistGameEl=document.getElementById('arcadeMusicPlaylistGame');
  const playlistSourceEl=document.getElementById('arcadeMusicPlaylistSource');
  const playlistIdEl=document.getElementById('arcadeMusicPlaylistId');
+ const playlistPlatformEl=document.getElementById('arcadeMusicPlatformPlaylistId');
+ const playlistOverrideEl=document.getElementById('arcadeMusicGameOverride');
  if(playlistGameEl)playlistGameEl.textContent=playlistConfig?.gameTitle||'Current game';
  if(playlistSourceEl)playlistSourceEl.textContent=playlistConfig?.playlistSource==='game'?'Game override':playlistConfig?.playlistSource==='harness'?'Harness':'Platform default';
  if(playlistIdEl)playlistIdEl.textContent=playlistConfig?.playlistId||'No playlist configured';
+ if(playlistPlatformEl)playlistPlatformEl.textContent=playlistConfig?.platformPlaylistId||'No platform default configured';
+ if(playlistOverrideEl)playlistOverrideEl.textContent=playlistConfig?.gamePlaylistId||'Inherits platform default';
  const debug=window.__platinumAudioDebug||window.__auroraAudioDebug;
  if(debug)debug.mix={
   gameSoundVolume:+gameSoundVolume.toFixed(3),
@@ -2741,13 +2777,17 @@ addEventListener('keydown',e=>{
   }
  }
  if(!started&&typeof handlePlayerTwoWaitKey==='function'&&handlePlayerTwoWaitKey(e))return;
- if(!started&&e.code==='Enter')launchCurrentGameFromWaitMode(e);
+if(!started&&e.code==='Enter'){
+ launchCurrentGameFromWaitMode(e);
+ return;
+}
  if(started&&e.code==='KeyP'){
   toggleGameplayPause();
  }
  if((!aud||sfx.a?.state==='suspended')&&['Enter','Space'].includes(e.code))unlockAudioFromInteraction();
 });
 function launchCurrentGameFromWaitMode(e=null){
+ unlockAudioFromInteraction({announce:1,source:'wait_launch'});
  const packCanStart=typeof currentGamePackCanStart==='function'
   ? currentGamePackCanStart()
   : typeof currentGamePackHasPlayableAdapter==='function'
@@ -2798,6 +2838,7 @@ window.__platinumArcadeMusic={
  setPlaylistForHarness(id=''){
   ARCADE_MUSIC.playlistOverride=sanitizeArcadeMusicPlaylistId(id);
   syncArcadeMusicUi();
+  if(typeof syncAudioMixControls==='function')syncAudioMixControls();
   return arcadeMusicState();
  },
  noteTrackForHarness(title='Harness Track',artist='Harness Band'){

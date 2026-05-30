@@ -59,6 +59,9 @@ function main(){
  if((artifact.summary?.midrunSurvivabilityScore10 || 0) < 5.5){
   fail('Galaxy Guardians midrun survivability read regressed below the maintained floor.', payload);
  }
+ if((artifact.summary?.stageBandAuthorityScore10 || 0) < 6.5){
+  fail('Galaxy Guardians stage-band authority regressed below the maintained floor.', payload);
+ }
  const competitive = artifact.personaRuns?.competitiveThreeShip || [];
  const review = artifact.personaRuns?.reviewFiveShip || [];
  if(competitive.length !== 4 || review.length < 3){
@@ -80,6 +83,7 @@ function main(){
   stagePresentationScore10: artifact.summary.stagePresentationScore10,
   personaReviewUtilityScore10: artifact.summary.personaReviewUtilityScore10,
   midrunSurvivabilityScore10: artifact.summary.midrunSurvivabilityScore10,
+  stageBandAuthorityScore10: artifact.summary.stageBandAuthorityScore10,
   reviewSurvivorPersonas: review.filter(run => !run.gameOver || run.simT >= 180).map(run => run.persona)
  }, null, 2));
 }

@@ -42,6 +42,9 @@ function main(){
   if((artifact.runtimeStats?.wrapCountByFourteenSeconds || 0) < 1){
     fail('Runtime-reference movement comparison needs wrap/return pressure by fourteen seconds', payload);
   }
+  if((artifact.runtimeStats?.maxHorizontalOvershootPx || 0) > 8){
+    fail('Runtime-reference movement allows too much sideways off-screen overshoot during dive pressure', payload);
+  }
   if((artifact.runtimeReferenceMovementScore10 || 0) < 7.2){
     fail('Runtime-reference movement score is below the 0.1 tuning floor', payload);
   }
