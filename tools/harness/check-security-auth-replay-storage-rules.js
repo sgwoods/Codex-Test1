@@ -116,7 +116,7 @@ function checkRuntimePolicySource(){
     },
     {
       file: 'src/js/01-runtime-shell.js',
-      text: 'youtube-nocookie.com/embed/videoseries'
+      text: 'youtube.com/embed/videoseries'
     }
   ];
   const sourceByFile = {
