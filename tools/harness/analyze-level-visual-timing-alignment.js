@@ -211,21 +211,22 @@ async function captureCurrentClip(windowRow, output, durationSeconds){
             const state = h.state();
             const runtime = h.spriteRuntimeState();
             const challenge = h.challengeFormationState();
-            const enemies = Array.isArray(runtime?.enemies) ? runtime.enemies : [];
             const challengeEnemies = Array.isArray(challenge?.enemies) ? challenge.enemies : [];
+            const enteredChallengeEnemies = challengeEnemies.filter(enemy => +enemy.spawn <= 0);
             return {
               t: +t.toFixed(2),
               stage: state.stage,
               challenge: !!state.challenge,
               score: state.score,
-              activeEnemyCount: enemies.length,
+              activeEnemyCount: Array.isArray(runtime?.enemies) ? runtime.enemies.length : 0,
               challengeEnemyCount: challengeEnemies.length,
+              enteredChallengeEnemyCount: enteredChallengeEnemies.length,
               banner: state.bannerTxt || '',
               bannerMode: state.bannerMode || ''
             };
           }, second);
           samples.push(sample);
-          if(firstActiveEnemySecond === null && sample.activeEnemyCount > 0) firstActiveEnemySecond = round(second, 2);
+          if(firstActiveEnemySecond === null && sample.enteredChallengeEnemyCount > 0) firstActiveEnemySecond = round(second, 2);
           if(challengeEndedSecond === null && sample.challenge === false && second > 2) challengeEndedSecond = round(second, 2);
         }
         await page.locator('#c').screenshot({ path: framePath });

@@ -82,6 +82,7 @@ function runScenario(persona, seed){
 
 function summarizeRun(run){
   const challengeClear = run.analysis?.challengeClears?.[0] || null;
+  const transition = run.analysis?.transition || {};
   return {
     endingStage: run.state?.stage || 0,
     lives: run.state?.lives || 0,
@@ -89,7 +90,10 @@ function summarizeRun(run){
     challengeShipLosses: run.analysis?.challengeRules?.shipLossesDuringChallenge ?? 0,
     challengeHitRate: challengeClear?.total ? +(challengeClear.hits / challengeClear.total).toFixed(3) : 0,
     challengeDuration: challengeClear ? +challengeClear.t.toFixed(3) : null,
-    challengeCleared: !!challengeClear
+    challengeCleared: !!challengeClear,
+    challengeToSpawn: transition.challengeToSpawn ?? null,
+    stageVisibleAfterSpawn: !!transition.stageVisibleAfterSpawn,
+    prematureNextStageSnapshot: !!transition.prematureNextStageSnapshot
   };
 }
 
@@ -120,6 +124,22 @@ for(const persona of PERSONAS){
   }
   if(current.endingStage < baseline.endingStage){
     fail(`${persona} persona no longer reaches stage ${baseline.endingStage} after the first challenge baseline seed`, {
+      persona,
+      baseline,
+      current,
+      results
+    });
+  }
+  if(current.prematureNextStageSnapshot){
+    fail(`${persona} persona exposes the next stage before the challenge result handoff commits`, {
+      persona,
+      baseline,
+      current,
+      results
+    });
+  }
+  if(!current.stageVisibleAfterSpawn){
+    fail(`${persona} persona clears the first challenge but does not show the next stage formation after the result handoff`, {
       persona,
       baseline,
       current,

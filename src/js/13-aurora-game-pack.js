@@ -138,9 +138,11 @@ const AURORA_REFERENCE_TIMINGS=Object.freeze({
  }),
  challengeResults:Object.freeze({
   resultCueDelay:.34,
-  nextStageWindow:2.95,
-  nextCueLeadBeforeSpawn:1.55,
-  cadenceHoldAfterSpawn:1.24
+  resultHoldWindow:4.25,
+  resultBannerWindow:4.25,
+  nextStageWindow:7.35,
+  nextCueLeadBeforeSpawn:3.15,
+  cadenceHoldAfterSpawn:1.45
  }),
  enemyDiveCharge:Object.freeze({
   cueDelay:.12,
@@ -225,16 +227,16 @@ enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs
   clipDuration:1.6,
   stopCueNames:Object.freeze(['stagePulse','challengeResults','challengePerfect','stageTransition'])
  }),
- challengeResults:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-results.m4a',{
-  cooldownMs:2400,
+challengeResults:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-results.m4a',{
+  cooldownMs:4300,
   clipStart:0,
-  clipDuration:1.95,
+  clipDuration:4,
   stopCueNames:Object.freeze(['stagePulse','stageTransition','challengeTransition'])
  }),
  challengePerfect:referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-perfect.m4a',{
-  cooldownMs:2400,
+  cooldownMs:4300,
   clipStart:0,
-  clipDuration:2.15,
+  clipDuration:4,
   stopCueNames:Object.freeze(['stagePulse','stageTransition','challengeTransition'])
  }),
  stageTransition:referenceAudioCue('assets/reference-audio/galaga-level-flag-v1.m4a',{

@@ -250,8 +250,8 @@ const requiredCatalogText = [
   `audio identity category is now ${audioCurrent}`,
   'stageTransition` was too abbreviated, so the reference-backed phrase was widened to 3.35s',
   '`challengeTransition` now uses a 1.6s measured phrase',
-  '`challengeResults` uses 1.95s',
-  '`challengePerfect` uses 2.15s'
+  '`challengeResults` uses the full 4.0s reference phrase',
+  '`challengePerfect` uses the full 4.0s reference phrase'
 ].filter(Boolean);
 const missingCatalogText = requiredCatalogText.filter(text => !catalog.includes(text));
 if(missingCatalogText.length){

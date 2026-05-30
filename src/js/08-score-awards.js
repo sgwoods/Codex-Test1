@@ -201,15 +201,15 @@ function finalizeChallengeClear(){
  if(bonusTotal)S.bannerSub+=`\nBONUS ${bonusTotal}`;
  if(typeof commentatorEvent==='function')commentatorEvent(perfect?'challenge_perfect':'challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total,bonusTotal});
  S.bannerMode='challengeResult';
- S.banner=1.15;
+ const challengeResultsTiming=usesReferenceTimingModel()
+  ? currentGamePackReferenceTiming('challengeResults')
+  : null;
+ S.banner=challengeResultsTiming?.resultBannerWindow??1.15;
  S.pendingStage=S.stage+1;
  S.lastChallengeClearT=S.stageClock;
  S.challengeTransitionStallLogged=0;
- S.postChallengeT=1.45;
+ S.postChallengeT=challengeResultsTiming?.resultHoldWindow??1.45;
  if(usesReferenceTimingModel()){
-  const challengeResultsTiming=usesReferenceTimingModel()
-   ? currentGamePackReferenceTiming('challengeResults')
-   : null;
   clearReferenceTransitionCueWindow();
   S.challengeResultPerfect=perfect>0?1:0;
   S.challengeResultCueT=challengeResultsTiming?.resultCueDelay??0.34;
