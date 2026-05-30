@@ -66,7 +66,9 @@ function filterSelfStatus(statusText){
     .split(/\r?\n/)
     .filter(Boolean)
     .filter(line => {
-      const file = line.slice(3).trim();
+      const file = /^.. /.test(line)
+        ? line.slice(3).trim()
+        : line.replace(/^[ MADRCU?!]{1,2}\s+/, '').trim();
       return !SELF_PATHS.has(file);
     });
 }
