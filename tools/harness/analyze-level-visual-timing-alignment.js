@@ -16,6 +16,7 @@ const LATEST_JSON = path.join(OUT_ROOT, 'latest.json');
 const TOP_LEVEL_MD = path.join(ROOT, 'LEVEL_VISUAL_TIMING_ALIGNMENT.md');
 
 const CHALLENGE_REF = path.join(ANALYSES, 'galaga-challenge-video-reference', 'latest.json');
+const CHALLENGE_TRAJECTORY_CONTROLS = path.join(ANALYSES, 'challenge-trajectory-controls', 'latest.json');
 const CHALLENGE_MARKERS = [3, 7, 11, 15, 19, 23, 27, 31];
 const CHALLENGE_ALL_SOURCE = '/Users/sgwoods/Downloads/challenge-all2.mp4';
 const DEFAULT_CHALLENGE_SET = Object.freeze([1, 2, 3, 4]);
@@ -122,6 +123,28 @@ function loadChallengeWindows(){
   return rows
     .filter(row => Number.isFinite(+row.challengeNumber))
     .sort((a, b) => +a.challengeNumber - +b.challengeNumber);
+}
+
+function loadTargetMotionTiming(challengeNumber){
+  const controls = readJson(CHALLENGE_TRAJECTORY_CONTROLS, {});
+  const challenge = (Array.isArray(controls.challenges) ? controls.challenges : [])
+    .find(row => +row.challengeNumber === +challengeNumber);
+  const groups = Array.isArray(challenge?.groups) ? challenge.groups : [];
+  const starts = groups
+    .map(group => +group.target?.visibleStartS)
+    .filter(Number.isFinite);
+  const ends = groups
+    .map(group => +group.target?.visibleEndS)
+    .filter(Number.isFinite);
+  if(!starts.length || !ends.length) return null;
+  return {
+    source: rel(CHALLENGE_TRAJECTORY_CONTROLS),
+    groupCount: groups.length,
+    firstVisibleSecond: round(Math.min(...starts), 2),
+    lastVisibleSecond: round(Math.max(...ends), 2),
+    averageConfidence: round(challenge.averageConfidence, 3),
+    controlReadiness10: round(challenge.controlReadiness10, 1)
+  };
 }
 
 function sourceForWindow(windowRow){
@@ -337,19 +360,28 @@ function buildContactSheet(row, pairedVideo, output, durationSeconds){
 
 function syncRead(windowRow, current){
   const targetDuration = +windowRow.duration || 0;
+  const targetMotion = loadTargetMotionTiming(windowRow.challengeNumber);
+  const targetLastVisible = targetMotion?.lastVisibleSecond;
   const currentEnd = current.challengeEndedSecond;
   const activeStart = current.firstActiveEnemySecond;
   const visibleMotionEnd = current.lastActiveEnemySecond;
   const challengeEnemyEnd = current.lastChallengeEnemySecond;
   const drift = Number.isFinite(+currentEnd) ? round(currentEnd - targetDuration, 2) : null;
   const visibleMotionDrift = Number.isFinite(+visibleMotionEnd) ? round(visibleMotionEnd - targetDuration, 2) : null;
+  const targetVisibleMotionDrift = Number.isFinite(+visibleMotionEnd) && Number.isFinite(+targetLastVisible)
+    ? round(visibleMotionEnd - targetLastVisible, 2)
+    : null;
   const challengeEnemyDrift = Number.isFinite(+challengeEnemyEnd) ? round(challengeEnemyEnd - targetDuration, 2) : null;
   const resultHold = Number.isFinite(+currentEnd) && Number.isFinite(+challengeEnemyEnd) ? round(currentEnd - challengeEnemyEnd, 2) : null;
+  const targetResultHold = Number.isFinite(+targetLastVisible) ? round(targetDuration - targetLastVisible, 2) : null;
+  const resultHoldDrift = Number.isFinite(+resultHold) && Number.isFinite(+targetResultHold)
+    ? round(resultHold - targetResultHold, 2)
+    : null;
   const activity = Number.isFinite(+activeStart)
     ? `Aurora first visible active enemies appear around ${activeStart}s after challenge start.`
     : 'Aurora first active enemy timing was not detected in the sampled timeline.';
   const visibleEnding = Number.isFinite(+visibleMotionEnd)
-    ? `Last visible challenge enemy is sampled around ${visibleMotionEnd}s; visible-motion drift versus target window is ${visibleMotionDrift}s.`
+    ? `Last visible challenge enemy is sampled around ${visibleMotionEnd}s; target visible-motion drift is ${Number.isFinite(+targetVisibleMotionDrift) ? `${targetVisibleMotionDrift}s` : 'pending'}, while full-window drift is ${visibleMotionDrift}s.`
     : 'Aurora last visible challenge enemy timing was not detected in the sampled timeline.';
   const enemyEnding = Number.isFinite(+challengeEnemyEnd)
     ? `Last challenge enemy present is sampled around ${challengeEnemyEnd}s; enemy-presence drift versus target window is ${challengeEnemyDrift}s.`
@@ -358,7 +390,7 @@ function syncRead(windowRow, current){
     ? `Aurora exits challenge state around ${currentEnd}s, versus target window ${targetDuration}s; drift ${drift}s.`
     : `Aurora did not exit challenge state inside the ${targetDuration}s aligned window.`;
   const ceremony = Number.isFinite(+resultHold)
-    ? `Result-ceremony/empty-challenge hold after the last challenge enemy is about ${resultHold}s.`
+    ? `Result-ceremony/empty-challenge hold after the last challenge enemy is about ${resultHold}s${Number.isFinite(+resultHoldDrift) ? `; target-result-hold drift is ${resultHoldDrift}s` : ''}.`
     : 'Result-ceremony/empty-challenge hold could not be measured.';
   return `${activity} ${visibleEnding} ${enemyEnding} ${ending} ${ceremony}`;
 }
@@ -369,7 +401,7 @@ function buildMarkdown(report){
   const requested = report.summary?.requestedChallengeNumbers || [];
   const completed = report.summary?.completedChallengeNumbers || rows.map(row => row.challengeNumber);
   const failed = report.summary?.failedChallengeNumbers || failures.map(row => row.challengeNumber);
-  const table = rows.map(row => `| ${row.challengeNumber} | ${row.label} | ${row.durationSeconds}s | ${row.currentFirstActiveEnemySecond ?? 'n/a'}s | ${row.currentLastVisibleEnemySecond ?? 'n/a'}s | ${row.currentLastChallengeEnemySecond ?? 'n/a'}s | ${row.currentChallengeEnemyEndDriftSeconds ?? 'n/a'}s | ${row.currentResultCeremonyHoldSeconds ?? 'n/a'}s | ${row.currentChallengeEndedSecond ?? 'n/a'}s | ${row.currentVsTargetEndDriftSeconds ?? 'n/a'}s | \`${row.pairedVideo || 'pending'}\` |`).join('\n');
+  const table = rows.map(row => `| ${row.challengeNumber} | ${row.label} | ${row.durationSeconds}s | ${row.targetLastVisibleEnemySecond ?? 'n/a'}s | ${row.currentLastVisibleEnemySecond ?? 'n/a'}s | ${row.currentVsTargetVisibleMotionEndDriftSeconds ?? 'n/a'}s | ${row.targetResultCeremonyHoldSeconds ?? 'n/a'}s | ${row.currentResultCeremonyHoldSeconds ?? 'n/a'}s | ${row.currentResultCeremonyHoldDriftSeconds ?? 'n/a'}s | ${row.currentChallengeEndedSecond ?? 'n/a'}s | ${row.currentVsTargetEndDriftSeconds ?? 'n/a'}s | \`${row.pairedVideo || 'pending'}\` |`).join('\n');
   const sections = rows.map(row => `## ${row.label}
 
 **Aligned clip:** ${row.pairedVideo ? `\`${row.pairedVideo}\`` : 'pending'}
@@ -406,8 +438,8 @@ Completed challenges: ${completed.join(', ') || 'none'}.
 Failed challenges: ${failed.join(', ') || 'none'}.
 Selection mode: ${report.summary.selectionMode || 'unknown'}.
 
-| Challenge | Label | Aligned Duration | Aurora First Visible | Last Visible | Last Enemy Present | Enemy-Presence Drift | Empty Result Hold | Aurora Challenge End | End Drift | Paired Clip |
-| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| Challenge | Label | Window Duration | Target Last Visible | Aurora Last Visible | Visible Drift | Target Result Hold | Aurora Result Hold | Result Hold Drift | Aurora Challenge End | End Drift | Paired Clip |
+| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
 ${table}
 
 ${failureSection}
@@ -456,11 +488,20 @@ async function buildReport(){
       const contact = buildContactSheet(windowRow, paired.video, contactOut, durationSeconds);
       if(!contact.ok) throw new Error(`Contact sheet unavailable for challenge ${challengeNumber}: ${contact.status}`);
       const targetDuration = +windowRow.duration || durationSeconds;
+      const targetMotion = loadTargetMotionTiming(challengeNumber);
+      const targetLastVisible = targetMotion?.lastVisibleSecond;
       const drift = Number.isFinite(+current.challengeEndedSecond) ? round(+current.challengeEndedSecond - targetDuration, 2) : null;
       const visibleMotionDrift = Number.isFinite(+current.lastActiveEnemySecond) ? round(+current.lastActiveEnemySecond - targetDuration, 2) : null;
+      const targetVisibleMotionDrift = Number.isFinite(+current.lastActiveEnemySecond) && Number.isFinite(+targetLastVisible)
+        ? round(+current.lastActiveEnemySecond - +targetLastVisible, 2)
+        : null;
       const challengeEnemyDrift = Number.isFinite(+current.lastChallengeEnemySecond) ? round(+current.lastChallengeEnemySecond - targetDuration, 2) : null;
       const resultCeremonyHold = Number.isFinite(+current.challengeEndedSecond) && Number.isFinite(+current.lastChallengeEnemySecond)
         ? round(+current.challengeEndedSecond - +current.lastChallengeEnemySecond, 2)
+        : null;
+      const targetResultCeremonyHold = Number.isFinite(+targetLastVisible) ? round(targetDuration - +targetLastVisible, 2) : null;
+      const resultCeremonyHoldDrift = Number.isFinite(+resultCeremonyHold) && Number.isFinite(+targetResultCeremonyHold)
+        ? round(resultCeremonyHold - targetResultCeremonyHold, 2)
         : null;
       rows.push({
         challengeNumber,
@@ -473,11 +514,20 @@ async function buildReport(){
         pairedVideo: paired.video,
         contactSheet: contact.contactSheet,
         currentFirstActiveEnemySecond: current.firstActiveEnemySecond,
+        targetFirstVisibleEnemySecond: targetMotion?.firstVisibleSecond ?? null,
+        targetLastVisibleEnemySecond: targetLastVisible ?? null,
+        targetMotionGroupCount: targetMotion?.groupCount ?? null,
+        targetMotionAverageConfidence: targetMotion?.averageConfidence ?? null,
+        targetMotionControlReadiness10: targetMotion?.controlReadiness10 ?? null,
+        targetMotionSource: targetMotion?.source ?? null,
         currentLastVisibleEnemySecond: current.lastActiveEnemySecond,
         currentVisibleMotionEndDriftSeconds: visibleMotionDrift,
+        currentVsTargetVisibleMotionEndDriftSeconds: targetVisibleMotionDrift,
         currentLastChallengeEnemySecond: current.lastChallengeEnemySecond,
         currentChallengeEnemyEndDriftSeconds: challengeEnemyDrift,
+        targetResultCeremonyHoldSeconds: targetResultCeremonyHold,
         currentResultCeremonyHoldSeconds: resultCeremonyHold,
+        currentResultCeremonyHoldDriftSeconds: resultCeremonyHoldDrift,
         currentChallengeEndedSecond: current.challengeEndedSecond,
         currentVsTargetEndDriftSeconds: drift,
         syncRead: syncRead(windowRow, current),
@@ -517,8 +567,10 @@ async function buildReport(){
 
   const driftValues = rows.map(row => Math.abs(row.currentVsTargetEndDriftSeconds)).filter(Number.isFinite);
   const visibleMotionDriftValues = rows.map(row => Math.abs(row.currentVisibleMotionEndDriftSeconds)).filter(Number.isFinite);
+  const targetVisibleMotionDriftValues = rows.map(row => Math.abs(row.currentVsTargetVisibleMotionEndDriftSeconds)).filter(Number.isFinite);
   const challengeEnemyDriftValues = rows.map(row => Math.abs(row.currentChallengeEnemyEndDriftSeconds)).filter(Number.isFinite);
   const resultHoldValues = rows.map(row => row.currentResultCeremonyHoldSeconds).filter(Number.isFinite);
+  const resultHoldDriftValues = rows.map(row => Math.abs(row.currentResultCeremonyHoldDriftSeconds)).filter(Number.isFinite);
   const requestedChallengeNumbers = windows.map(row => +row.challengeNumber).filter(Number.isFinite);
   const completedChallengeNumbers = rows.map(row => +row.challengeNumber).filter(Number.isFinite);
   const failedChallengeNumbers = failures.map(row => +row.challengeNumber).filter(Number.isFinite);
@@ -537,9 +589,12 @@ async function buildReport(){
     maxAbsEndDriftSeconds: driftValues.length ? round(Math.max(...driftValues), 2) : null,
     averageAbsVisibleMotionEndDriftSeconds: visibleMotionDriftValues.length ? round(visibleMotionDriftValues.reduce((sum, value) => sum + value, 0) / visibleMotionDriftValues.length, 2) : null,
     maxAbsVisibleMotionEndDriftSeconds: visibleMotionDriftValues.length ? round(Math.max(...visibleMotionDriftValues), 2) : null,
+    averageAbsTargetVisibleMotionEndDriftSeconds: targetVisibleMotionDriftValues.length ? round(targetVisibleMotionDriftValues.reduce((sum, value) => sum + value, 0) / targetVisibleMotionDriftValues.length, 2) : null,
+    maxAbsTargetVisibleMotionEndDriftSeconds: targetVisibleMotionDriftValues.length ? round(Math.max(...targetVisibleMotionDriftValues), 2) : null,
     averageAbsChallengeEnemyEndDriftSeconds: challengeEnemyDriftValues.length ? round(challengeEnemyDriftValues.reduce((sum, value) => sum + value, 0) / challengeEnemyDriftValues.length, 2) : null,
     maxAbsChallengeEnemyEndDriftSeconds: challengeEnemyDriftValues.length ? round(Math.max(...challengeEnemyDriftValues), 2) : null,
     averageResultCeremonyHoldSeconds: resultHoldValues.length ? round(resultHoldValues.reduce((sum, value) => sum + value, 0) / resultHoldValues.length, 2) : null,
+    averageAbsResultCeremonyHoldDriftSeconds: resultHoldDriftValues.length ? round(resultHoldDriftValues.reduce((sum, value) => sum + value, 0) / resultHoldDriftValues.length, 2) : null,
     read: `Requested challenges ${requestedChallengeNumbers.join(', ') || 'none'}; completed ${completedChallengeNumbers.join(', ') || 'none'}${failedChallengeNumbers.length ? `; failed ${failedChallengeNumbers.join(', ')}` : '; no capture failures'}. These videos put Galaga target footage on the left and Aurora current controlled-clock footage on the right from t=0, so pace and complexity drift can be reviewed without guessing which mid-stage moment was sampled.`
   };
   const report = {
@@ -588,8 +643,10 @@ buildReport().then(report => {
     contactSheetCount: report.summary.contactSheetCount,
     averageAbsEndDriftSeconds: report.summary.averageAbsEndDriftSeconds,
     averageAbsVisibleMotionEndDriftSeconds: report.summary.averageAbsVisibleMotionEndDriftSeconds,
+    averageAbsTargetVisibleMotionEndDriftSeconds: report.summary.averageAbsTargetVisibleMotionEndDriftSeconds,
     averageAbsChallengeEnemyEndDriftSeconds: report.summary.averageAbsChallengeEnemyEndDriftSeconds,
     averageResultCeremonyHoldSeconds: report.summary.averageResultCeremonyHoldSeconds,
+    averageAbsResultCeremonyHoldDriftSeconds: report.summary.averageAbsResultCeremonyHoldDriftSeconds,
     latest: rel(LATEST_JSON),
     markdown: rel(TOP_LEVEL_MD)
   }, null, 2));

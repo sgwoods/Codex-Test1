@@ -70,6 +70,12 @@ for(const row of rows){
   if(!Number.isFinite(+row.currentVisibleMotionEndDriftSeconds)){
     fail('Timing row missing visible-motion end drift.', { challengeNumber: row.challengeNumber });
   }
+  if(!Number.isFinite(+row.targetLastVisibleEnemySecond)){
+    fail('Timing row missing target last-visible enemy timing.', { challengeNumber: row.challengeNumber });
+  }
+  if(!Number.isFinite(+row.currentVsTargetVisibleMotionEndDriftSeconds)){
+    fail('Timing row missing current-vs-target visible-motion end drift.', { challengeNumber: row.challengeNumber });
+  }
   if(!Number.isFinite(+row.currentLastChallengeEnemySecond)){
     fail('Timing row missing last challenge enemy presence timing.', { challengeNumber: row.challengeNumber });
   }
@@ -78,6 +84,12 @@ for(const row of rows){
   }
   if(!Number.isFinite(+row.currentResultCeremonyHoldSeconds)){
     fail('Timing row missing result ceremony hold measurement.', { challengeNumber: row.challengeNumber });
+  }
+  if(!Number.isFinite(+row.targetResultCeremonyHoldSeconds)){
+    fail('Timing row missing target result ceremony hold measurement.', { challengeNumber: row.challengeNumber });
+  }
+  if(!Number.isFinite(+row.currentResultCeremonyHoldDriftSeconds)){
+    fail('Timing row missing result ceremony hold drift measurement.', { challengeNumber: row.challengeNumber });
   }
 }
 
@@ -89,7 +101,9 @@ console.log(JSON.stringify({
   pairedVideoCount: rows.filter(row => row.pairedVideo).length,
   averageAbsEndDriftSeconds: report.summary?.averageAbsEndDriftSeconds ?? null,
   averageAbsVisibleMotionEndDriftSeconds: report.summary?.averageAbsVisibleMotionEndDriftSeconds ?? null,
+  averageAbsTargetVisibleMotionEndDriftSeconds: report.summary?.averageAbsTargetVisibleMotionEndDriftSeconds ?? null,
   averageAbsChallengeEnemyEndDriftSeconds: report.summary?.averageAbsChallengeEnemyEndDriftSeconds ?? null,
   averageResultCeremonyHoldSeconds: report.summary?.averageResultCeremonyHoldSeconds ?? null,
+  averageAbsResultCeremonyHoldDriftSeconds: report.summary?.averageAbsResultCeremonyHoldDriftSeconds ?? null,
   report: rel(REPORT)
 }, null, 2));
