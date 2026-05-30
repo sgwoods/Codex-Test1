@@ -3951,6 +3951,8 @@ function levelVisualVideo(row = {}, side = 'current'){
 
 function renderChallengeTimingAlignmentReview(alignment = {}){
   const rows = Array.isArray(alignment.rows) ? alignment.rows : [];
+  const failures = Array.isArray(alignment.failures) ? alignment.failures : [];
+  const summary = alignment.summary || {};
   if(!rows.length){
     return `
       <div class="docWrap">
@@ -3958,7 +3960,12 @@ function renderChallengeTimingAlignmentReview(alignment = {}){
       </div>
     `;
   }
-  return rows.map(row => {
+  const failureMarkup = failures.length ? `
+    <div class="docWrap">
+      <p class="docMeta"><strong>Capture failures:</strong> ${esc(failures.map(row => `Challenge ${row.challengeNumber}`).join(', '))}. The checker blocks this artifact until these captures are regenerated successfully.</p>
+    </div>
+  ` : '';
+  return `${failureMarkup}${rows.map(row => {
     const pairExists = row.pairedVideo && fs.existsSync(path.join(ROOT, normalizeAssetSourcePath(row.pairedVideo)));
     const sheetExists = row.contactSheet && fs.existsSync(path.join(ROOT, normalizeAssetSourcePath(row.contactSheet)));
     const drift = row.currentVsTargetEndDriftSeconds === null || row.currentVsTargetEndDriftSeconds === undefined
@@ -3979,6 +3986,7 @@ function renderChallengeTimingAlignmentReview(alignment = {}){
           <div class="challengeEvidenceCard">
             <h3>Stage-Start Aligned Motion Review</h3>
             <p class="docMeta">The video starts both sides at t=0 for the challenging stage: Galaga target footage on the left, current Aurora controlled-clock runtime on the right. This is the review layer for pacing drift, group count, visible arrival versus appearance, route complexity, and whether the score window arrives at the right relative time.</p>
+            <p class="docMeta">Selection ${esc(summary.selectionMode || 'unknown')}; requested ${esc((summary.requestedChallengeNumbers || []).join(', ') || 'n/a')}; completed ${esc((summary.completedChallengeNumbers || []).join(', ') || 'n/a')}.</p>
             ${pairExists ? renderMediaVideo({
               src: row.pairedVideo,
               poster: sheetExists ? row.contactSheet : '',
@@ -4011,7 +4019,7 @@ function renderChallengeTimingAlignmentReview(alignment = {}){
         </div>
       </details>
     `;
-  }).join('\n');
+  }).join('\n')}`;
 }
 
 function levelVisualReferenceEvidence(row = {}){

@@ -32,6 +32,27 @@ if(report.artifactType !== 'level-visual-timing-alignment'){
 const rows = Array.isArray(report.rows) ? report.rows : [];
 if(rows.length < 1) fail('Timing alignment artifact has no rows.');
 
+const failures = Array.isArray(report.failures) ? report.failures : [];
+if(failures.length){
+  fail('Timing alignment artifact contains failed challenge captures.', {
+    failedChallengeNumbers: failures.map(row => row.challengeNumber),
+    failures
+  });
+}
+
+const requestedChallengeNumbers = Array.isArray(report.summary?.requestedChallengeNumbers)
+  ? report.summary.requestedChallengeNumbers.map(Number).filter(Number.isFinite)
+  : [];
+const completedChallengeNumbers = Array.isArray(report.summary?.completedChallengeNumbers)
+  ? report.summary.completedChallengeNumbers.map(Number).filter(Number.isFinite)
+  : rows.map(row => +row.challengeNumber).filter(Number.isFinite);
+if(requestedChallengeNumbers.length && completedChallengeNumbers.length !== requestedChallengeNumbers.length){
+  fail('Timing alignment artifact completed challenge count does not match requested count.', {
+    requestedChallengeNumbers,
+    completedChallengeNumbers
+  });
+}
+
 for(const row of rows){
   if(!Number.isFinite(+row.challengeNumber)) fail('Timing row missing challenge number.', { row });
   if(!row.pairedVideo) fail('Timing row missing paired target/current video.', { challengeNumber: row.challengeNumber });
@@ -48,6 +69,8 @@ for(const row of rows){
 console.log(JSON.stringify({
   ok: true,
   rows: rows.length,
+  requestedChallengeNumbers,
+  completedChallengeNumbers,
   pairedVideoCount: rows.filter(row => row.pairedVideo).length,
   averageAbsEndDriftSeconds: report.summary?.averageAbsEndDriftSeconds ?? null,
   report: rel(REPORT)

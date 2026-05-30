@@ -1,6 +1,6 @@
 # Immersive Full-Window Gameplay Mode Plan
 
-Updated: May 20, 2026
+Updated: May 30, 2026
 
 ## Goal
 
@@ -15,7 +15,7 @@ screen.
 ## Product Shape
 
 - hidden keyboard toggle: `F`
-- optional Developer Tools toggle while the feature is still experimental
+- Developer Tools toggle while the feature is still experimental
 - use browser Fullscreen API when permitted by the browser and user gesture
 - fall back to a full-window in-browser layout when native fullscreen is not
   available
@@ -26,6 +26,28 @@ screen.
 - keep game pack ownership intact: Platinum owns the shell/full-window layout;
   each game owns its board aspect, logical coordinate system, and gameplay
   rules
+
+## Current Implementation Checkpoint
+
+The first implementation now exists on branch
+`codex/macbook-fullscreen-timing-alignment-wip`.
+
+- Developer Tools exposes `Arcade Fullscreen On Play`.
+- The setting currently defaults on for local/dev review so `Enter/Play` moves
+  into the larger arcade playfield path.
+- `F` toggles between console view and arcade fullscreen layout during play.
+- `Escape` exits the active fullscreen layout.
+- The runtime asks for native browser fullscreen only from a user gesture and
+  falls back to the in-browser full-window layout when the browser denies or
+  cannot honor that request.
+- The harness `npm run harness:check:arcade-fullscreen-mode` verifies the
+  shell/rail hiding behavior and playfield expansion.
+
+Release decision: keep this as a user-visible review feature in local/dev WIP,
+but do not treat it as production-polished until overlay reachability, input
+mapping, replay/video metadata, and manual browser behavior have been checked
+across Aurora and Galaxy Guardians. The feature should remain a Platinum shell
+capability, not an Aurora-only game rule.
 
 ## Design Rules
 
@@ -78,10 +100,12 @@ Add targeted checks before exposing this broadly:
 
 ### Phase 3: Developer Exposure
 
-- add a Developer Tools toggle after the hidden shortcut is stable
+- keep the Developer Tools toggle visible while the shortcut and auto-play path
+  are being validated
 - display active mode, viewport, scale factor, and board bounds in diagnostics
 - let reviewers start watch/persona runs directly in the full-window mode
-- keep the feature default-off until it has enough manual and harness coverage
+- keep the feature default-on only for local/dev review until it has enough
+  manual and harness coverage for broader release
 
 ### Phase 4: Product Decision
 
@@ -91,6 +115,8 @@ After testing:
   keyboard shortcut, or becomes a first-class cabinet display option
 - document whether native browser fullscreen is enabled in production or
   whether production uses only the full-window fallback
+- decide whether production should default this on, default it off but expose it
+  as a display setting, or keep it behind developer tools for one more release
 - update player guide, developer guide, release notes, and dashboard readouts
   only after the interaction is stable
 
@@ -124,4 +150,3 @@ After testing:
 This belongs in the `1.6.0` cabinet-surface polish family, with a hidden
 prototype allowed earlier if it stays behind a developer/shortcut gate and does
 not displace higher-priority conformance and safety work.
-

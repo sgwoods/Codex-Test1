@@ -18,6 +18,8 @@ const TOP_LEVEL_MD = path.join(ROOT, 'LEVEL_VISUAL_TIMING_ALIGNMENT.md');
 const CHALLENGE_REF = path.join(ANALYSES, 'galaga-challenge-video-reference', 'latest.json');
 const CHALLENGE_MARKERS = [3, 7, 11, 15, 19, 23, 27, 31];
 const CHALLENGE_ALL_SOURCE = '/Users/sgwoods/Downloads/challenge-all2.mp4';
+const DEFAULT_CHALLENGE_SET = Object.freeze([1, 2, 3, 4]);
+const REPRESENTATIVE_CHALLENGE_SET = Object.freeze([1, 3, 8]);
 const CURRENT_FPS = 10;
 const TARGET_FPS = 24;
 const MAX_CAPTURE_SECONDS = 42;
@@ -53,6 +55,15 @@ function safeRemove(dir){
   fs.rmSync(dir, { recursive: true, force: true });
 }
 
+function safeRemoveFile(file){
+  if(!file || !file.startsWith(OUT_ROOT)) return;
+  fs.rmSync(file, { force: true });
+}
+
+function cleanupStageOutputs(files = []){
+  for(const file of files) safeRemoveFile(file);
+}
+
 function git(args, fallback = ''){
   try {
     return execFileSync('git', ['-C', ROOT, ...args], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
@@ -66,20 +77,35 @@ function round(value, digits = 2){
 }
 
 function parseArgs(){
-  const out = { stages: [1, 3, 8] };
+  const out = {
+    stages: [...DEFAULT_CHALLENGE_SET],
+    selectionMode: 'default-first-four-challenges'
+  };
   for(const arg of process.argv.slice(2)){
     if(arg === '--all'){
       out.stages = null;
+      out.selectionMode = 'all-challenges';
+      continue;
+    }
+    if(arg === '--representative'){
+      out.stages = [...REPRESENTATIVE_CHALLENGE_SET];
+      out.selectionMode = 'representative-challenges';
       continue;
     }
     const [key, raw = ''] = arg.split('=');
     if(key === '--stage' || key === '--challenge-stage'){
       const stage = Math.max(1, Math.min(8, +raw || 0));
-      if(stage) out.stages = [stage];
+      if(stage){
+        out.stages = [stage];
+        out.selectionMode = 'single-challenge';
+      }
     }
     if(key === '--stages'){
       const stages = raw.split(',').map(value => +value).filter(value => value >= 1 && value <= 8);
-      if(stages.length) out.stages = Array.from(new Set(stages));
+      if(stages.length){
+        out.stages = Array.from(new Set(stages));
+        out.selectionMode = 'explicit-challenge-list';
+      }
     }
   }
   return out;
@@ -209,6 +235,18 @@ async function captureCurrentClip(windowRow, output, durationSeconds){
           h.redraw();
         }, 1 / CURRENT_FPS);
       }
+      const frameFiles = fs.readdirSync(frameDir).filter(name => /^frame-\d+\.png$/.test(name));
+      if(!frameFiles.length){
+        return {
+          ok: false,
+          status: 'current-frame-sequence-missing',
+          video: null,
+          firstActiveEnemySecond,
+          challengeEndedSecond,
+          samples,
+          error: `No current frame sequence was captured for challenge ${challengeNumber} at ${frameDir}.`
+        };
+      }
       runFfmpeg([
         '-framerate', String(CURRENT_FPS),
         '-i', path.join(frameDir, 'frame-%04d.png'),
@@ -223,11 +261,12 @@ async function captureCurrentClip(windowRow, output, durationSeconds){
       ], `current clip ${challengeNumber}`);
       return {
         ok: fs.existsSync(output),
-        status: 'current-stage-start-controlled-clock-window',
+        status: fs.existsSync(output) ? 'current-stage-start-controlled-clock-window' : 'current-video-missing-after-encode',
         video: fs.existsSync(output) ? rel(output) : null,
         firstActiveEnemySecond,
         challengeEndedSecond,
-        samples
+        samples,
+        error: fs.existsSync(output) ? null : `Current clip encode completed without producing ${output}.`
       };
     } finally {
       safeRemove(frameDir);
@@ -293,6 +332,10 @@ function syncRead(windowRow, current){
 
 function buildMarkdown(report){
   const rows = report.rows || [];
+  const failures = Array.isArray(report.failures) ? report.failures : [];
+  const requested = report.summary?.requestedChallengeNumbers || [];
+  const completed = report.summary?.completedChallengeNumbers || rows.map(row => row.challengeNumber);
+  const failed = report.summary?.failedChallengeNumbers || failures.map(row => row.challengeNumber);
   const table = rows.map(row => `| ${row.challengeNumber} | ${row.label} | ${row.durationSeconds}s | ${row.currentFirstActiveEnemySecond ?? 'n/a'}s | ${row.currentChallengeEndedSecond ?? 'n/a'}s | ${row.currentVsTargetEndDriftSeconds ?? 'n/a'}s | \`${row.pairedVideo || 'pending'}\` |`).join('\n');
   const sections = rows.map(row => `## ${row.label}
 
@@ -306,6 +349,15 @@ function buildMarkdown(report){
 
 **Known limit:** ${row.knownLimit}
 `).join('\n');
+  const failureSection = failures.length ? `
+## Capture Failures
+
+These requested challenges did not produce complete target/current paired evidence. The checker treats any failure here as a blocked artifact so partial latest artifacts are not accidentally promoted.
+
+| Challenge | Label | Target Window | Error |
+| ---: | --- | --- | --- |
+${failures.map(row => `| ${row.challengeNumber} | ${row.label} | ${row.targetWindow?.id || 'pending'} | ${String(row.error || 'unknown').replace(/\|/g, '\\|')} |`).join('\n')}
+` : '';
   return `# Level Visual Timing Alignment
 
 Generated: ${report.generatedAt}
@@ -316,9 +368,16 @@ Branch: ${report.branch}
 
 ${report.summary.read}
 
+Requested challenges: ${requested.join(', ') || 'n/a'}.
+Completed challenges: ${completed.join(', ') || 'none'}.
+Failed challenges: ${failed.join(', ') || 'none'}.
+Selection mode: ${report.summary.selectionMode || 'unknown'}.
+
 | Challenge | Label | Aligned Duration | Aurora First Active | Aurora Challenge End | End Drift | Paired Clip |
 | ---: | --- | ---: | ---: | ---: | ---: | --- |
 ${table}
+
+${failureSection}
 
 ${sections}
 `;
@@ -356,9 +415,13 @@ async function buildReport(){
     const contactOut = path.join(CONTACT_DIR, `${id}-target-vs-current-aligned-contact.jpg`);
     try {
       const target = extractTargetClip(windowRow, targetOut, durationSeconds);
+      if(!target.ok) throw new Error(`Target clip unavailable for challenge ${challengeNumber}: ${target.status}`);
       const current = await captureCurrentClip(windowRow, currentOut, durationSeconds);
+      if(!current.ok) throw new Error(current.error || `Current clip unavailable for challenge ${challengeNumber}: ${current.status}`);
       const paired = buildPairedClip(windowRow, target.video, current.video, pairedOut);
+      if(!paired.ok) throw new Error(`Paired clip unavailable for challenge ${challengeNumber}: ${paired.status}`);
       const contact = buildContactSheet(windowRow, paired.video, contactOut, durationSeconds);
+      if(!contact.ok) throw new Error(`Contact sheet unavailable for challenge ${challengeNumber}: ${contact.status}`);
       const targetDuration = +windowRow.duration || durationSeconds;
       const drift = Number.isFinite(+current.challengeEndedSecond) ? round(+current.challengeEndedSecond - targetDuration, 2) : null;
       rows.push({
@@ -390,10 +453,19 @@ async function buildReport(){
         knownLimit: 'This aligns clips from stage start, but target object tracks and current object tracks are not yet time-warped. Human review should look for pace drift, group-count drift, visible arrival-vs-appearance drift, and whether the scoring window arrives at the same relative time.'
       });
     } catch (err) {
+      cleanupStageOutputs([targetOut, currentOut, pairedOut, contactOut]);
       failures.push({
         challengeNumber,
+        stageMarker: CHALLENGE_MARKERS[challengeNumber - 1] || null,
         id,
         label: challengeLabel(challengeNumber),
+        targetWindow: {
+          id: windowRow.id || id,
+          sourceId: windowRow.sourceId || '',
+          startSeconds: round(windowRow.start || 0, 3),
+          durationSeconds: round(windowRow.duration || durationSeconds, 2),
+          family: windowRow.family || ''
+        },
         error: String(err?.message || err)
       });
     }
@@ -401,13 +473,23 @@ async function buildReport(){
   if(!rows.length) throw new Error(`No timing alignment rows completed. Failures: ${JSON.stringify(failures)}`);
 
   const driftValues = rows.map(row => Math.abs(row.currentVsTargetEndDriftSeconds)).filter(Number.isFinite);
+  const requestedChallengeNumbers = windows.map(row => +row.challengeNumber).filter(Number.isFinite);
+  const completedChallengeNumbers = rows.map(row => +row.challengeNumber).filter(Number.isFinite);
+  const failedChallengeNumbers = failures.map(row => +row.challengeNumber).filter(Number.isFinite);
   const summary = {
+    selectionMode: args.selectionMode,
+    requestedChallengeNumbers,
+    completedChallengeNumbers,
+    failedChallengeNumbers,
+    requestedChallengeCount: requestedChallengeNumbers.length,
     challengeCount: rows.length,
+    completedChallengeCount: rows.length,
+    failedChallengeCount: failures.length,
     pairedVideoCount: rows.filter(row => row.pairedVideo && fs.existsSync(path.join(ROOT, row.pairedVideo))).length,
     contactSheetCount: rows.filter(row => row.contactSheet && fs.existsSync(path.join(ROOT, row.contactSheet))).length,
     averageAbsEndDriftSeconds: driftValues.length ? round(driftValues.reduce((sum, value) => sum + value, 0) / driftValues.length, 2) : null,
     maxAbsEndDriftSeconds: driftValues.length ? round(Math.max(...driftValues), 2) : null,
-    read: `Generated ${rows.length} stage-start aligned challenge comparison row(s). These videos put Galaga target footage on the left and Aurora current controlled-clock footage on the right from t=0, so pace and complexity drift can be reviewed without guessing which mid-stage moment was sampled.`
+    read: `Requested challenges ${requestedChallengeNumbers.join(', ') || 'none'}; completed ${completedChallengeNumbers.join(', ') || 'none'}${failedChallengeNumbers.length ? `; failed ${failedChallengeNumbers.join(', ')}` : '; no capture failures'}. These videos put Galaga target footage on the left and Aurora current controlled-clock footage on the right from t=0, so pace and complexity drift can be reviewed without guessing which mid-stage moment was sampled.`
   };
   const report = {
     schemaVersion: 1,
@@ -446,6 +528,10 @@ async function buildReport(){
 buildReport().then(report => {
   console.log(JSON.stringify({
     ok: true,
+    selectionMode: report.summary.selectionMode,
+    requestedChallengeNumbers: report.summary.requestedChallengeNumbers,
+    completedChallengeNumbers: report.summary.completedChallengeNumbers,
+    failedChallengeNumbers: report.summary.failedChallengeNumbers,
     challengeCount: report.summary.challengeCount,
     pairedVideoCount: report.summary.pairedVideoCount,
     contactSheetCount: report.summary.contactSheetCount,
