@@ -5,6 +5,7 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 const { launchHarnessBrowser } = require('./browser-launch');
 const { DIST_DEV } = require('../build/paths');
+const { LOCAL_BIND_HOST, localUrl } = require('../dev/local-host-config');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const APP_ROOT = DIST_DEV;
@@ -85,7 +86,7 @@ function serve(root){
     });
   });
   return new Promise(resolve => {
-    server.listen(0, '127.0.0.1', () => resolve({ server, port: server.address().port }));
+    server.listen(0, LOCAL_BIND_HOST, () => resolve({ server, port: server.address().port }));
   });
 }
 
@@ -356,7 +357,7 @@ async function runWindow({ browser, serverPort, plan, win, scenarioName }){
     localStorage.setItem('platinumTestCfg', JSON.stringify(cfg));
     localStorage.setItem('platinumHarnessSeed', String(cfg.seed >>> 0));
   }, Object.assign({}, scenario.config, { seed: scenario.seed }));
-  await page.goto(`http://127.0.0.1:${serverPort}/index.html`, { waitUntil: 'networkidle' });
+  await page.goto(localUrl(serverPort, '/index.html', { browser: true }), { waitUntil: 'networkidle' });
   await page.waitForFunction(() => !!window.__galagaHarness__);
   await page.evaluate(cfg => window.__galagaHarness__.start(Object.assign({}, cfg.config, {
     seed: cfg.seed,

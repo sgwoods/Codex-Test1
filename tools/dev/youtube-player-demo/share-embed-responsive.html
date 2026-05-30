@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>YouTube Responsive Share Embed Test</title>
+<style>
+  html,body{
+    margin:0;
+    min-height:100%;
+    background:#0a0f1a;
+    color:#eef6ff;
+    font:400 14px/1.45 "Courier New",Consolas,monospace;
+  }
+  body{
+    display:grid;
+    place-items:center;
+    padding:24px;
+  }
+  .shell{
+    width:min(100%,980px);
+    display:grid;
+    gap:16px;
+  }
+  .panel{
+    border:1px solid rgba(126,242,255,.26);
+    background:linear-gradient(180deg,rgba(16,24,42,.95),rgba(10,16,30,.94));
+    box-shadow:0 18px 40px rgba(0,0,0,.3);
+    padding:18px;
+  }
+  h1{
+    margin:0 0 8px;
+    font-size:24px;
+    letter-spacing:.08em;
+    color:#7ef2ff;
+  }
+  p{
+    margin:0;
+    color:#b5d2e7;
+  }
+  .meta{
+    display:grid;
+    gap:6px;
+    margin-bottom:14px;
+    font-size:12px;
+    color:#b5d2e7;
+  }
+  code{color:#ffe39a;word-break:break-all}
+  .embed-container{
+    position:relative;
+    padding-bottom:56.25%;
+    height:0;
+    overflow:hidden;
+    max-width:100%;
+    background:#000;
+  }
+  .embed-container iframe,
+  .embed-container object,
+  .embed-container embed{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    border:0;
+  }
+</style>
+</head>
+<body>
+  <div class="shell">
+    <div class="panel">
+      <h1>YouTube Responsive Share Embed Test</h1>
+      <p>Plain responsive iframe wrapper using the exact share-embed playlist pattern, with no API and no scripted playback.</p>
+    </div>
+
+    <div class="panel">
+      <div class="meta">
+        <span>Playlist ID: <code id="playlistIdValue"></code></span>
+        <span>Embed URL: <code id="embedUrlValue"></code></span>
+      </div>
+      <div class="embed-container">
+        <iframe
+          id="shareEmbedResponsiveFrame"
+          frameborder="0"
+          allowfullscreen
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          title="YouTube playlist player"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const playlistId = (params.get('list') || 'PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH').trim();
+    const si = (params.get('si') || '2EVKnsRK37Kbwx3H').trim();
+    const embedUrl = new URL('https://www.youtube.com/embed/videoseries');
+    embedUrl.searchParams.set('list', playlistId);
+    if(si) embedUrl.searchParams.set('si', si);
+
+    document.getElementById('playlistIdValue').textContent = playlistId;
+    document.getElementById('embedUrlValue').textContent = embedUrl.toString();
+    document.getElementById('shareEmbedResponsiveFrame').src = embedUrl.toString();
+  </script>
+</body>
+</html>

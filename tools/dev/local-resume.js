@@ -3,6 +3,7 @@ const fs = require('fs');
 const http = require('http');
 const path = require('path');
 const { execFileSync, spawn } = require('child_process');
+const { localUrl } = require('./local-host-config');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const STATE_DIR = path.join(ROOT, '.local-services');
@@ -11,7 +12,7 @@ const NODE = process.execPath;
 const SERVICES = [
   {
     name: 'game',
-    url: 'http://127.0.0.1:8000/',
+    url: localUrl(8000, '/', { browser: true }),
     expect: 'Aurora Galactica',
     port: 8000,
     log: path.join(STATE_DIR, 'game.log'),
@@ -20,7 +21,7 @@ const SERVICES = [
   },
   {
     name: 'viewer',
-    url: 'http://127.0.0.1:4311/api/runs',
+    url: localUrl(4311, '/api/runs', { browser: true }),
     port: 4311,
     log: path.join(STATE_DIR, 'viewer.log'),
     pid: path.join(STATE_DIR, 'viewer.pid'),
@@ -28,7 +29,7 @@ const SERVICES = [
   },
   {
     name: 'conformance-dashboard',
-    url: 'http://127.0.0.1:4312/local-dev/conformance-dashboard.html',
+    url: localUrl(4312, '/local-dev/conformance-dashboard.html', { browser: true }),
     expect: 'Aurora Conformance Dashboard',
     port: 4312,
     log: path.join(STATE_DIR, 'conformance-dashboard.log'),

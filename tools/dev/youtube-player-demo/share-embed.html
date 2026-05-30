@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>YouTube Share Embed Test</title>
+<style>
+  html,body{
+    margin:0;
+    min-height:100%;
+    background:#0a0f1a;
+    color:#eef6ff;
+    font:400 14px/1.45 "Courier New",Consolas,monospace;
+  }
+  body{
+    display:grid;
+    place-items:center;
+    padding:24px;
+  }
+  .shell{
+    width:min(100%,900px);
+    display:grid;
+    gap:16px;
+  }
+  .panel{
+    border:1px solid rgba(126,242,255,.26);
+    background:linear-gradient(180deg,rgba(16,24,42,.95),rgba(10,16,30,.94));
+    box-shadow:0 18px 40px rgba(0,0,0,.3);
+    padding:18px;
+  }
+  h1{
+    margin:0 0 8px;
+    font-size:24px;
+    letter-spacing:.08em;
+    color:#7ef2ff;
+  }
+  p{
+    margin:0;
+    color:#b5d2e7;
+  }
+  .meta{
+    display:grid;
+    gap:6px;
+    margin-bottom:14px;
+    font-size:12px;
+    color:#b5d2e7;
+  }
+  code{color:#ffe39a;word-break:break-all}
+  iframe{
+    display:block;
+    width:min(100%,560px);
+    aspect-ratio:560 / 315;
+    border:0;
+    margin:0 auto;
+    background:#000;
+  }
+</style>
+</head>
+<body>
+  <div class="shell">
+    <div class="panel">
+      <h1>YouTube Share Embed Test</h1>
+      <p>Plain visible iframe using the normal YouTube share-embed pattern. No IFrame API, no scripted playback, no playlist logic.</p>
+    </div>
+
+    <div class="panel">
+      <div class="meta">
+        <span>Video ID: <code id="videoIdValue"></code></span>
+        <span>Embed URL: <code id="embedUrlValue"></code></span>
+      </div>
+      <iframe
+        id="shareEmbedFrame"
+        width="560"
+        height="315"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const videoId = (params.get('video') || 'OZGRW-T2Vgk').trim();
+    const si = (params.get('si') || '').trim();
+    const embedUrl = new URL(`https://www.youtube.com/embed/${encodeURIComponent(videoId)}`);
+    if(si) embedUrl.searchParams.set('si', si);
+
+    document.getElementById('videoIdValue').textContent = videoId;
+    document.getElementById('embedUrlValue').textContent = embedUrl.toString();
+    document.getElementById('shareEmbedFrame').src = embedUrl.toString();
+  </script>
+</body>
+</html>

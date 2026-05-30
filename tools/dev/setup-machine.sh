@@ -278,8 +278,8 @@ echo "Local repo:"
 echo "  $TARGET_DIR"
 echo
 echo "Local development URLs:"
-echo "  Game:   http://127.0.0.1:8000/"
-echo "  Viewer: http://127.0.0.1:4311/"
+echo "  Game:   http://localhost:8000/"
+echo "  Viewer: http://localhost:4311/"
 echo
 echo "For future sessions, the one-step refresh command is:"
 echo "  cd \"$TARGET_DIR\""

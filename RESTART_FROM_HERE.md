@@ -80,10 +80,10 @@ Deployment posture:
 
 Useful local URLs:
 
-- Game: <http://127.0.0.1:8000/>
-- Local viewer/dashboard server: <http://127.0.0.1:4311/>
-- Conformance dashboard: <http://127.0.0.1:4311/local-dev/conformance-dashboard.html>
-- Public project preview: <http://127.0.0.1:4311/local-dev/public-aurora-galactica-preview.html>
+- Game: <http://localhost:8000/>
+- Local viewer/dashboard server: <http://localhost:4311/>
+- Conformance dashboard: <http://localhost:4312/local-dev/conformance-dashboard.html>
+- Public project preview: <http://localhost:4311/local-dev/public-aurora-galactica-preview.html>
 
 Useful current commands:
 

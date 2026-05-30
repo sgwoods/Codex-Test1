@@ -103,18 +103,26 @@
             <label for="musicVolume">Music Volume</label>
             <span id="musicVolumeValue" class="settingsRangeValue">--</span>
           </div>
-          <input id="musicVolume" type="range" min="0" max="100" step="1" value="72" />
+          <input id="musicVolume" type="range" min="0" max="100" step="1" value="80" />
         </div>
         <div class="settingsRangeRow">
           <div class="settingsRangeHeader">
             <label for="gameSoundVolume">Game Sound</label>
             <span id="gameSoundVolumeValue" class="settingsRangeValue">--</span>
           </div>
-          <input id="gameSoundVolume" type="range" min="0" max="100" step="1" value="68" />
+          <input id="gameSoundVolume" type="range" min="0" max="100" step="1" value="20" />
         </div>
       </div>
-      <div id="arcadeMusicPlaylistCard" class="settingsMusicSource" aria-live="polite" aria-readonly="true">
-        <span class="settingsMusicSourceLabel">Arcade Music Mapping (Read only)</span>
+      <div class="settingsField settingsFieldCompact">
+        <label for="arcadeMusicPlaylistSelect">Playlist For This Game</label>
+        <select id="arcadeMusicPlaylistSelect">
+          <option value="__DEFAULT__">{{ARCADE_MUSIC_PLAYLIST_LABEL}} (Default)</option>
+          <option value="PLeDzKA-Cr6s-8b_YaTTleSX-h3X2QdQCo">Embeddable Arcade Jukebox</option>
+          <option value="PLWDxjyS0X-zm5GrG4zytIyqRPQ8Jv4TA-">Galaxy Guardians Original Playlist</option>
+        </select>
+      </div>
+      <div id="arcadeMusicPlaylistCard" class="settingsMusicSource" aria-live="polite">
+        <span class="settingsMusicSourceLabel">Arcade Music Mapping</span>
         <span id="arcadeMusicPlaylistGame" class="settingsMusicSourceGame">--</span>
         <span id="arcadeMusicPlaylistSource" class="settingsMusicSourceSource">--</span>
         <code id="arcadeMusicPlaylistId" class="settingsMusicSourceId">--</code>
@@ -123,7 +131,7 @@
         <span class="settingsMusicSourceMetaLabel">Game override</span>
         <span id="arcadeMusicGameOverride" class="settingsMusicSourceMetaValue">--</span>
       </div>
-      <div class="settingsHint">This playlist mapping is read only. The resolved music follows the packaged defaults for the active cabinet.</div>
+      <div class="settingsHint">Saved separately for the active game. If YouTube blocks a track, the player will skip ahead automatically.</div>
     </div>
     <div id="commentatorPanel" class="settingsSection">
       <h4>Game Updates</h4>

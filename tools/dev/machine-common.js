@@ -6,6 +6,7 @@ const http = require('http');
 const https = require('https');
 const { execFileSync, spawnSync } = require('child_process');
 const { ROOT } = require('../build/paths');
+const { localUrl } = require('./local-host-config');
 
 const MACHINE_PROFILE_FILE = path.join(ROOT, '.machine-profile.json');
 const RELEASE_AUTHORITY_FILE = path.join(ROOT, 'release-authority.json');
@@ -281,11 +282,11 @@ async function localServiceDetail({ url, port }){
 async function localServiceStatus(){
   return {
     game: await localServiceDetail({
-      url: 'http://127.0.0.1:8000/',
+      url: localUrl(8000, '/', { browser: true }),
       port: 8000
     }),
     viewer: await localServiceDetail({
-      url: 'http://127.0.0.1:4311/api/runs',
+      url: localUrl(4311, '/api/runs', { browser: true }),
       port: 4311
     }),
     state_dir: LOCAL_SERVICES_DIR

@@ -311,8 +311,8 @@ function buildDashboardModel(){
     purpose: 'Give Aurora level expansion, Galaxy Guardians preview work, and future Platinum game ingestion one inspectable evidence surface.',
     local_inspection: {
       serve_from_repo_root: 'python3 -m http.server 8000 --bind 127.0.0.1',
-      dashboard_url: 'http://127.0.0.1:8000/dist/dev/evidence-dashboard.html',
-      game_url: 'http://127.0.0.1:8000/dist/dev/index.html'
+      dashboard_url: 'http://localhost:8000/dist/dev/evidence-dashboard.html',
+      game_url: 'http://localhost:8000/dist/dev/index.html'
     },
     aurora_level_expansion: {
       plan_path: repoPath(AURORA_PLAN_PATH),

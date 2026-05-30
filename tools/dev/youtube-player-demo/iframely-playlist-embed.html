@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="referrer" content="no-referrer-when-downgrade" />
+<title>Iframely Playlist Embed Test</title>
+<style>
+  html,body{
+    margin:0;
+    min-height:100%;
+    background:#0a0f1a;
+    color:#eef6ff;
+    font:400 14px/1.45 "Courier New",Consolas,monospace;
+  }
+  body{
+    display:grid;
+    place-items:center;
+    padding:24px;
+  }
+  .shell{
+    width:min(100%,980px);
+    display:grid;
+    gap:16px;
+  }
+  .panel{
+    border:1px solid rgba(126,242,255,.26);
+    background:linear-gradient(180deg,rgba(16,24,42,.95),rgba(10,16,30,.94));
+    box-shadow:0 18px 40px rgba(0,0,0,.3);
+    padding:18px;
+  }
+  h1{
+    margin:0 0 8px;
+    font-size:24px;
+    letter-spacing:.08em;
+    color:#7ef2ff;
+  }
+  p{
+    margin:0;
+    color:#b5d2e7;
+  }
+  .meta{
+    display:grid;
+    gap:6px;
+    margin-bottom:14px;
+    font-size:12px;
+    color:#b5d2e7;
+  }
+  code{color:#ffe39a;word-break:break-all}
+</style>
+</head>
+<body>
+  <div class="shell">
+    <div class="panel">
+      <h1>Iframely Playlist Embed Test</h1>
+      <p>Exact responsive iframe style from the Iframely example, with the PlatinumArcade1981 playlist.</p>
+    </div>
+
+    <div class="panel">
+      <div class="meta">
+        <span>Playlist ID: <code id="playlistIdValue"></code></span>
+        <span>Embed URL: <code id="embedUrlValue"></code></span>
+      </div>
+      <div id="embedMount"></div>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const playlistId = (params.get('list') || 'PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH').trim();
+    const si = (params.get('si') || 'X6srHue0rQA7rfFE').trim();
+    const origin = (params.get('origin') || '').trim();
+    const embedUrl = new URL('https://www.youtube.com/embed/videoseries');
+    embedUrl.searchParams.set('list', playlistId);
+    if(si) embedUrl.searchParams.set('si', si);
+    if(origin) embedUrl.searchParams.set('origin', origin);
+
+    document.getElementById('playlistIdValue').textContent = playlistId;
+    document.getElementById('embedUrlValue').textContent = embedUrl.toString();
+    document.getElementById('embedMount').innerHTML =
+      `<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.5%;">`
+      + `<iframe src="${embedUrl.toString()}" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0;" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen scrolling="no" referrerpolicy="strict-origin"></iframe>`
+      + `</div>`;
+  </script>
+</body>
+</html>

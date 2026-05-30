@@ -5,6 +5,7 @@ const path = require('path');
 const { withHarnessPage } = require('./browser-check-util');
 const { ROOT } = require('./browser-check-util');
 const { launchHarnessBrowser } = require('./browser-launch');
+const { LOCAL_BIND_HOST, localOrigin, localUrl } = require('../dev/local-host-config');
 
 function fail(message, details = {}){
   console.error(JSON.stringify({ ok: false, message, details }, null, 2));
@@ -26,12 +27,12 @@ function checkGeneratedDashboardPage(){
     'Page Updated',
     'Source Data Updated',
     'Source Commit',
-    'local-dev/conformance-dashboard.html via http://127.0.0.1:4312',
+    `local-dev/conformance-dashboard.html via ${localUrl(4312, '/local-dev/conformance-dashboard.html', { browser: true })}`,
     'Selected Game',
     'data-tab="cost"',
     'Cost / Value',
-    'href="http://127.0.0.1:8000/"',
-    'href="http://127.0.0.1:8000/release-dashboard.html"',
+    `href="${localUrl(8000, '/', { browser: true })}"`,
+    `href="${localUrl(8000, '/release-dashboard.html', { browser: true })}"`,
     'href="/RELEASE_CONFORMANCE_DASHBOARD.md"',
     'class="metricDetails"',
     'Grounding best case',
@@ -102,7 +103,7 @@ function serveLocalDev(){
     });
   });
   return new Promise(resolve => {
-    server.listen(0, '127.0.0.1', () => resolve({ server, port: server.address().port }));
+    server.listen(0, LOCAL_BIND_HOST, () => resolve({ server, port: server.address().port }));
   });
 }
 
@@ -113,7 +114,7 @@ async function checkDashboardViewportFit(){
     for(const viewport of [{ width: 1280, height: 820 }, { width: 1024, height: 760 }, { width: 390, height: 820 }]){
       const context = await browser.newContext({ viewport });
       const page = await context.newPage();
-      await page.goto(`http://127.0.0.1:${port}/conformance-dashboard.html`, { waitUntil: 'networkidle' });
+      await page.goto(localUrl(port, '/conformance-dashboard.html', { browser: true }), { waitUntil: 'networkidle' });
       const before = await page.evaluate(() => ({
         scrollWidth: document.documentElement.scrollWidth,
         clientWidth: document.documentElement.clientWidth,
@@ -190,7 +191,7 @@ async function checkDashboardViewportFit(){
     if(local.panelDisabled) fail('localhost conformance dashboard panel is greyed out', local);
     if(!/\d/.test(local.score)) fail('conformance rollup score is not populated', local);
     if(!/Weakest:/.test(local.body)) fail('conformance rollup body does not summarize weakest metric', local);
-    if(!/port 4312/.test(local.hint)) fail('conformance dashboard hint does not name the local dashboard service', local);
+    if(!/localhost:4312/.test(local.hint)) fail('conformance dashboard hint does not name the local dashboard service', local);
     if(!/Conformance Dashboard/.test(local.buttonText)) fail('conformance dashboard launcher label missing', local);
     const popupPromise = page.waitForEvent('popup');
     await page.click('#openConformanceDashboardBtn');
@@ -199,7 +200,7 @@ async function checkDashboardViewportFit(){
     await popup.close();
     const popupParsed = new URL(popupUrl);
     const expectedPath = '/local-dev/conformance-dashboard.html';
-    if(popupParsed.origin !== 'http://127.0.0.1:4312' || popupParsed.pathname !== expectedPath){
+    if(popupParsed.origin !== localOrigin(4312, { browser: true }) || popupParsed.pathname !== expectedPath){
       fail('conformance dashboard launcher opened unexpected URL', { popupUrl });
     }
     const selectedGame = popupParsed.searchParams.get('game');

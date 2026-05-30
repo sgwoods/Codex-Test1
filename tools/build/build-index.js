@@ -39,6 +39,7 @@ const {
 const { html: buildConformanceDashboardHtml } = require('../harness/build-dev-conformance-dashboard-page');
 const { buildPublicProjectSections } = require('./public-project-page-sections');
 const { selectReleaseNoteForBuild } = require('./release-note-selection');
+const { localUrl } = require('../dev/local-host-config');
 const pkg = require(path.resolve(ROOT, 'package.json'));
 
 const SRC = path.join(ROOT, 'src');
@@ -328,7 +329,7 @@ function loadConformanceDashboardSummary(){
       visualCurrent: row(/visual look/i)?.current || '',
       weakestMetric: weakest?.metric || '',
       weakestCurrent: weakest?.current || '',
-      dashboardUrl: 'http://127.0.0.1:4312/local-dev/conformance-dashboard.html'
+      dashboardUrl: localUrl(4312, '/local-dev/conformance-dashboard.html', { browser: true })
     };
   }catch{
     return {
@@ -342,7 +343,7 @@ function loadConformanceDashboardSummary(){
       visualCurrent: '',
       weakestMetric: '',
       weakestCurrent: '',
-      dashboardUrl: 'http://127.0.0.1:4312/local-dev/conformance-dashboard.html'
+      dashboardUrl: localUrl(4312, '/local-dev/conformance-dashboard.html', { browser: true })
     };
   }
 }
@@ -6702,6 +6703,7 @@ function build(options = {}){
     SUPABASE_ANON_KEY: supabaseAnonKey,
     WEB3FORMS_ACCESS_KEY: web3FormsAccessKey,
     ARCADE_MUSIC_PLAYLIST_ID_JSON: JSON.stringify(arcadeMusicPlaylistId),
+    ARCADE_MUSIC_PLAYLIST_LABEL: String(releaseManifest.platform?.media?.arcadeMusicPlaylistLabel || 'Platform default'),
     TEST_ACCOUNT_EMAIL: testAccountEmail,
     TEST_ACCOUNT_USER_ID: testAccountUserId,
     TEST_ACCOUNT_EMAILS_JSON: JSON.stringify(testAccountEmails),

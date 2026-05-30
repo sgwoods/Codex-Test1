@@ -3,6 +3,7 @@ const http = require('http');
 const path = require('path');
 const { DIST_DEV } = require('../build/paths');
 const { SYSTEM_CHROME, launchHarnessBrowser } = require('./browser-launch');
+const { LOCAL_BIND_HOST, localUrl } = require('../dev/local-host-config');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const APP_ROOT = DIST_DEV;
@@ -31,7 +32,7 @@ function serve(root = APP_ROOT){
     });
   });
   return new Promise(resolve => {
-    server.listen(0, '127.0.0.1', () => resolve({ server, port: server.address().port }));
+    server.listen(0, LOCAL_BIND_HOST, () => resolve({ server, port: server.address().port }));
   });
 }
 
@@ -78,7 +79,7 @@ async function withHarnessPage(cfg, fn){
       localStorage.setItem('platinumTestCfg', JSON.stringify(local.testCfg));
       localStorage.setItem('platinumHarnessSeed', String(local.seed >>> 0));
     }, { testCfg, seed });
-    await page.goto(`http://127.0.0.1:${port}/index.html`, { waitUntil: 'networkidle' });
+    await page.goto(localUrl(port, '/index.html', { browser: true }), { waitUntil: 'networkidle' });
     try{
       await page.waitForFunction(() => !!window.__galagaHarness__);
     }catch(err){

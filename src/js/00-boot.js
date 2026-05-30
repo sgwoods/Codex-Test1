@@ -41,7 +41,7 @@ const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=docume
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),platformTrackToast=document.getElementById('platformTrackToast'),platformTrackTitle=document.getElementById('platformTrackTitle'),platformTrackArtist=document.getElementById('platformTrackArtist'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn'),resetTestPilotScoresControl=document.getElementById('resetTestPilotScoresBtn');
-const testPanel=document.getElementById('testPanel'),testStartKind=document.getElementById('testStartKind'),testExpertPlays=document.getElementById('testExpertPlays'),testExpertPlaysHint=document.getElementById('testExpertPlaysHint'),testStage=document.getElementById('testStage'),testChallengeStage=document.getElementById('testChallengeStage'),testChallengeStageField=document.getElementById('testChallengeStageField'),testChallengeStageHint=document.getElementById('testChallengeStageHint'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),commentatorToggle=document.getElementById('commentatorToggle'),graphicsTheme=document.getElementById('graphicsTheme'),spriteRenderMode=document.getElementById('spriteRenderMode'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
+const testPanel=document.getElementById('testPanel'),testStartKind=document.getElementById('testStartKind'),testExpertPlays=document.getElementById('testExpertPlays'),testExpertPlaysHint=document.getElementById('testExpertPlaysHint'),testStage=document.getElementById('testStage'),testChallengeStage=document.getElementById('testChallengeStage'),testChallengeStageField=document.getElementById('testChallengeStageField'),testChallengeStageHint=document.getElementById('testChallengeStageHint'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),arcadeMusicPlaylistSelect=document.getElementById('arcadeMusicPlaylistSelect'),commentatorToggle=document.getElementById('commentatorToggle'),graphicsTheme=document.getElementById('graphicsTheme'),spriteRenderMode=document.getElementById('spriteRenderMode'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
 const arcadeMusicToggleBtn=document.getElementById('arcadeMusicToggleBtn');
 const arcadeMusicFrameHost=document.getElementById('arcadeMusicFrameHost');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
@@ -271,6 +271,7 @@ const LEADERBOARD_DATE_FILTER_KEY=`${STORAGE_PREFIX}LeaderboardAfterDate`;
 const AUDIO_MUTED_PREF_KEY=`${STORAGE_PREFIX}AudioMuted`;
 const ARCADE_MUSIC_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusic`;
 const ARCADE_MUSIC_MUTED_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusicMuted`;
+const ARCADE_MUSIC_PLAYLIST_OVERRIDES_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusicPlaylistOverrides`;
 const GAME_SOUND_VOLUME_PREF_KEY=`${STORAGE_PREFIX}GameSoundVolume`;
 const ARCADE_MUSIC_VOLUME_PREF_KEY=`${STORAGE_PREFIX}ArcadeMusicVolume`;
 const PLAYER_TWO_MODE_PREF_KEY=`${STORAGE_PREFIX}PlayerTwoMode`;
@@ -319,8 +320,12 @@ const PLATFORM_STORAGE_KEYS={
  [SYSTEM_LOG_KEY]:`${PLATFORM_STORAGE_PREFIX}SystemLog`
 };
 const SYSTEM_LOG_LIMIT=80;
-const DEFAULT_GAME_SOUND_VOLUME=.68;
-const DEFAULT_ARCADE_MUSIC_VOLUME=.72;
+const DEFAULT_GAME_SOUND_VOLUME=.20;
+const DEFAULT_ARCADE_MUSIC_VOLUME=.80;
+const ARCADE_MUSIC_BACKUP_PLAYLIST_ID='PLeDzKA-Cr6s-8b_YaTTleSX-h3X2QdQCo';
+const ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID='PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH';
+const ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID='PLWDxjyS0X-zm5GrG4zytIyqRPQ8Jv4TA-';
+const ARCADE_MUSIC_SELECTOR_DEFAULT='__DEFAULT__';
 function clampVolumeValue(value,fallback=1){
  const n=+value;
  return Number.isFinite(n)?Math.max(0,Math.min(1,n)):fallback;
@@ -375,6 +380,57 @@ function removePref(key){
   const platformKey=PLATFORM_STORAGE_KEYS[key];
   if(platformKey)localStorage.removeItem(platformKey);
  }catch{}
+}
+function readJsonPref(key,fallback){
+ const raw=readPref(key);
+ if(!raw)return fallback;
+ try{
+  const parsed=JSON.parse(raw);
+  return parsed&&typeof parsed==='object'?parsed:fallback;
+ }catch{
+  return fallback;
+ }
+}
+let arcadeMusicPlaylistOverrides=readJsonPref(ARCADE_MUSIC_PLAYLIST_OVERRIDES_PREF_KEY,{});
+function arcadeMusicPlaylistOptions(){
+ const defaultLabel=String(BUILD_INFO?.platform?.media?.arcadeMusicPlaylistLabel||'Platform default').trim()||'Platform default';
+ const defaultPlaylistId=sanitizeArcadeMusicPlaylistId(ARCADE_MUSIC_PLAYLIST_ID);
+ const options=[
+  { value:ARCADE_MUSIC_SELECTOR_DEFAULT, playlistId:defaultPlaylistId, label:`${defaultLabel} (Default)` }
+ ];
+ if(ARCADE_MUSIC_BACKUP_PLAYLIST_ID&&ARCADE_MUSIC_BACKUP_PLAYLIST_ID!==defaultPlaylistId){
+  options.push({ value:ARCADE_MUSIC_BACKUP_PLAYLIST_ID, playlistId:ARCADE_MUSIC_BACKUP_PLAYLIST_ID, label:'Embeddable Arcade Jukebox' });
+ }
+ if(ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID&&ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID!==defaultPlaylistId&&ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID!==ARCADE_MUSIC_BACKUP_PLAYLIST_ID){
+  options.push({ value:ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID, playlistId:ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID, label:'Aurora Original Playlist' });
+ }
+ if(ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID&&ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID!==defaultPlaylistId&&ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID!==ARCADE_MUSIC_BACKUP_PLAYLIST_ID){
+  options.push({ value:ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID, playlistId:ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID, label:'Galaxy Guardians Original Playlist' });
+ }
+ return options.map(option=>Object.freeze(option));
+}
+function arcadeMusicPlaylistOverrideForGame(gameKey=''){
+ const key=String(gameKey||'').trim();
+ if(!key)return '';
+ const value=sanitizeArcadeMusicPlaylistId(arcadeMusicPlaylistOverrides?.[key]||'');
+ return value||'';
+}
+function currentArcadeMusicPlaylistSelectValue(gameKey=''){
+ const override=arcadeMusicPlaylistOverrideForGame(gameKey);
+ return override||ARCADE_MUSIC_SELECTOR_DEFAULT;
+}
+function setArcadeMusicPlaylistOverrideForGame(gameKey='',value=''){
+ const key=String(gameKey||'').trim();
+ if(!key)return;
+ const nextValue=value===ARCADE_MUSIC_SELECTOR_DEFAULT?'':sanitizeArcadeMusicPlaylistId(value);
+ const nextOverrides=Object.assign({},arcadeMusicPlaylistOverrides||{});
+ if(nextValue)nextOverrides[key]=nextValue;
+ else delete nextOverrides[key];
+ arcadeMusicPlaylistOverrides=nextOverrides;
+ if(Object.keys(nextOverrides).length)writePref(ARCADE_MUSIC_PLAYLIST_OVERRIDES_PREF_KEY,JSON.stringify(nextOverrides));
+ else removePref(ARCADE_MUSIC_PLAYLIST_OVERRIDES_PREF_KEY);
+ if(typeof syncAudioMixControls==='function')syncAudioMixControls();
+ if(typeof syncArcadeMusicForGamePackChange==='function')syncArcadeMusicForGamePackChange();
 }
 function loadSystemLog(){
  try{
@@ -1835,11 +1891,20 @@ function syncAudioMixControls(){
  const playlistIdEl=document.getElementById('arcadeMusicPlaylistId');
  const playlistPlatformEl=document.getElementById('arcadeMusicPlatformPlaylistId');
  const playlistOverrideEl=document.getElementById('arcadeMusicGameOverride');
+ if(arcadeMusicPlaylistSelect){
+  const desiredOptions=arcadeMusicPlaylistOptions();
+  const currentMarkup=Array.from(arcadeMusicPlaylistSelect.options).map(option=>`${option.value}:${option.textContent}`).join('|');
+  const desiredMarkup=desiredOptions.map(option=>`${option.value}:${option.label}`).join('|');
+  if(currentMarkup!==desiredMarkup){
+   arcadeMusicPlaylistSelect.innerHTML=desiredOptions.map(option=>`<option value="${option.value}">${option.label}</option>`).join('');
+  }
+  arcadeMusicPlaylistSelect.value=currentArcadeMusicPlaylistSelectValue(playlistConfig?.gameKey||'');
+ }
  if(playlistGameEl)playlistGameEl.textContent=playlistConfig?.gameTitle||'Current game';
- if(playlistSourceEl)playlistSourceEl.textContent=playlistConfig?.playlistSource==='game'?'Game override':playlistConfig?.playlistSource==='harness'?'Harness':'Platform default';
+ if(playlistSourceEl)playlistSourceEl.textContent=playlistConfig?.playlistSource==='selection'?'Developer override':playlistConfig?.playlistSource==='game'?'Game override':playlistConfig?.playlistSource==='harness'?'Harness':'Platform default';
  if(playlistIdEl)playlistIdEl.textContent=playlistConfig?.playlistId||'No playlist configured';
  if(playlistPlatformEl)playlistPlatformEl.textContent=playlistConfig?.platformPlaylistId||'No platform default configured';
- if(playlistOverrideEl)playlistOverrideEl.textContent=playlistConfig?.gamePlaylistId||'Inherits platform default';
+ if(playlistOverrideEl)playlistOverrideEl.textContent=playlistConfig?.selectionPlaylistId||playlistConfig?.gamePlaylistId||'Inherits platform default';
  const debug=window.__platinumAudioDebug||window.__auroraAudioDebug;
  if(debug)debug.mix={
   gameSoundVolume:+gameSoundVolume.toFixed(3),
@@ -2085,7 +2150,7 @@ function isLocalDashboardHost(){
  return location.protocol==='file:'||host==='localhost'||host==='127.0.0.1'||host==='::1'||host==='[::1]';
 }
 function conformanceDashboardUrl(){
- if(isLocalDashboardHost())return 'http://127.0.0.1:4312/local-dev/conformance-dashboard.html';
+ if(isLocalDashboardHost())return 'http://localhost:4312/local-dev/conformance-dashboard.html';
  return `${location.origin}${location.pathname.replace(/[^/]*$/,'')}conformance-dashboard.html`;
 }
 function syncConformanceDashboardUi(){
@@ -2113,7 +2178,7 @@ function syncConformanceDashboardUi(){
  }
  if(conformanceDashboardHint){
   conformanceDashboardHint.textContent=local
-   ? 'Open the full live dashboard on port 4312. Refresh it with npm run dev:conformance-dashboard during long cycles.'
+   ? 'Open the full live dashboard at http://localhost:4312/local-dev/conformance-dashboard.html. Refresh it with npm run dev:conformance-dashboard during long cycles.'
    : 'Open the bundled read-only dashboard for this release lane. Raw ingestion workspaces remain engineering-owned.';
  }
 }
@@ -2322,7 +2387,7 @@ function openSettings(){
  syncPauseUi();
 }
 function logViewerUrl(){
- return 'http://127.0.0.1:4311/';
+ return 'http://localhost:4311/';
 }
 function projectGuideUrl(){
  return `${location.origin}${location.pathname.replace(/[^/]*$/,'')}project-guide.html`;
@@ -2637,6 +2702,14 @@ if(musicVolume){
  musicVolume.addEventListener('input',()=>setArcadeMusicVolume((+musicVolume.value||0)/100,{log:0,source:'developer_panel'}));
  musicVolume.addEventListener('change',()=>setArcadeMusicVolume((+musicVolume.value||0)/100,{log:1,source:'developer_panel'}));
 }
+if(arcadeMusicPlaylistSelect){
+ arcadeMusicPlaylistSelect.addEventListener('change',()=>{
+  const pack=typeof currentGamePack==='function'?currentGamePack():null;
+  const gameKey=String(pack?.metadata?.gameKey||'').trim();
+  if(!gameKey)return;
+  setArcadeMusicPlaylistOverrideForGame(gameKey,arcadeMusicPlaylistSelect.value||ARCADE_MUSIC_SELECTOR_DEFAULT);
+ });
+}
 if(gameSoundVolumeControl){
  gameSoundVolumeControl.addEventListener('input',()=>setGameSoundVolume((+gameSoundVolumeControl.value||0)/100,{log:0,source:'developer_panel'}));
  gameSoundVolumeControl.addEventListener('change',()=>setGameSoundVolume((+gameSoundVolumeControl.value||0)/100,{log:1,source:'developer_panel'}));
@@ -2826,6 +2899,7 @@ addEventListener('pointerdown',e=>{
 });
 syncTestUi();
 syncBuildStampUi();
+if(typeof loadArcadeMusicApi==='function')setTimeout(()=>loadArcadeMusicApi().catch(()=>{}),0);
 startHostedBuildUpdateChecks();
 window.openPlatformSplash=openPlatformSplash;
 window.closePlatformSplash=closePlatformSplash;

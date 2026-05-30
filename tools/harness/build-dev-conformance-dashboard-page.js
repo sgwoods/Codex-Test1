@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const { localUrl } = require('../dev/local-host-config');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const SOURCE_DATA = path.join(ROOT, 'reference-artifacts', 'analyses', 'release-conformance-dashboard', 'latest.json');
@@ -59,8 +60,8 @@ function isoNow(){
 function html(data, options = {}){
   const title = options.title || 'Aurora Conformance Dashboard';
   const subtitle = options.subtitle || 'Internal localhost view of the current conformance plan, release gates, measurement debt, and highest-value next investments. This page reads generated artifacts and refreshes without exposing anything publicly.';
-  const gameHref = options.gameHref || 'http://127.0.0.1:8000/';
-  const releaseHref = options.releaseHref || 'http://127.0.0.1:8000/release-dashboard.html';
+  const gameHref = options.gameHref || localUrl(8000, '/', { browser: true });
+  const releaseHref = options.releaseHref || localUrl(8000, '/release-dashboard.html', { browser: true });
   const markdownHref = options.markdownHref || '/RELEASE_CONFORMANCE_DASHBOARD.md';
   const markdownLabel = options.markdownLabel || 'Markdown';
   const dataHref = options.dataHref || 'conformance-dashboard-data.json';
@@ -69,7 +70,7 @@ function html(data, options = {}){
   const pageMeta = {
     artifactName: title,
     releasePathLabel: options.releasePathLabel || 'Local development dashboard',
-    releasePath: options.releasePath || 'local-dev/conformance-dashboard.html via http://127.0.0.1:4312',
+    releasePath: options.releasePath || `local-dev/conformance-dashboard.html via ${localUrl(4312, '/local-dev/conformance-dashboard.html', { browser: true })}`,
     releaseLane: options.releaseLane || 'local-dev',
     buildLabel: options.buildLabel || 'local generated dashboard',
     pageBuiltAt: options.pageBuiltAt || isoNow(),

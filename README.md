@@ -51,7 +51,7 @@ If you are looking for the active issue tracker, use:
 ## Live Lanes
 
 - local `localhost`:
-  - `http://127.0.0.1:8000/`
+  - `http://localhost:8000/`
 - hosted `/dev`:
   - `https://sgwoods.github.io/Aurora-Galactica/dev/`
 - hosted `/beta`:
@@ -59,7 +59,7 @@ If you are looking for the active issue tracker, use:
 - hosted `/production`:
   - `https://sgwoods.github.io/Aurora-Galactica/`
 - local log viewer:
-  - `http://127.0.0.1:4311/`
+  - `http://localhost:4311/`
 
 ## First-Class Hosted Documentation
 
@@ -204,8 +204,8 @@ npm run local:resume
 
 3. Open:
 
-- `http://127.0.0.1:8000/`
-- `http://127.0.0.1:4311/`
+- `http://localhost:8000/`
+- `http://localhost:4311/`
 
 To stop the tracked local services cleanly:
 

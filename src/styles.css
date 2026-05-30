@@ -240,8 +240,8 @@ mask:
 #audioMixPanel label{color:#bff6ff}
 #commentatorPanel label{color:#ffe39a}
 #testPanel label{color:#b7efd0}
-#graphicsPanel select,#testPanel input,#testPanel select{width:100%;box-sizing:border-box;padding:8px 9px;font:13px/1.2 "Courier New",Consolas,monospace}
-#graphicsPanel select{border:1px solid rgba(255,216,109,.3);background:#111220;color:#fff5d8}
+#graphicsPanel select,#audioMixPanel select,#testPanel input,#testPanel select{width:100%;box-sizing:border-box;padding:8px 9px;font:13px/1.2 "Courier New",Consolas,monospace}
+#graphicsPanel select,#audioMixPanel select{border:1px solid rgba(255,216,109,.3);background:#111220;color:#fff5d8}
 #testPanel input,#testPanel select{border:1px solid rgba(145,255,179,.28);background:#07120a;color:#f3fff7}
 .settingsRangeStack{display:flex;flex-direction:column;gap:10px;padding:8px 10px;border:1px solid rgba(136,245,255,.16);background:rgba(5,14,26,.52)}
 .settingsRangeRow{display:grid;grid-template-columns:1fr;gap:5px;min-width:0}

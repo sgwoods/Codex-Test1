@@ -4,6 +4,7 @@ const http = require('http');
 const path = require('path');
 const { launchHarnessBrowser } = require('./browser-launch');
 const { DIST_DEV } = require('../build/paths');
+const { LOCAL_BIND_HOST, localUrl } = require('../dev/local-host-config');
 
 const APP_ROOT = DIST_DEV;
 
@@ -36,12 +37,12 @@ function serve(root = APP_ROOT){
     });
   });
   return new Promise(resolve => {
-    server.listen(0, '127.0.0.1', () => resolve({ server, port: server.address().port }));
+    server.listen(0, LOCAL_BIND_HOST, () => resolve({ server, port: server.address().port }));
   });
 }
 
 async function open(page, port){
-  await page.goto(`http://127.0.0.1:${port}/index.html`, { waitUntil: 'networkidle' });
+  await page.goto(localUrl(port, '/index.html', { browser: true }), { waitUntil: 'networkidle' });
   await page.waitForTimeout(200);
 }
 

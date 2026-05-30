@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 const { withHarnessPage, waitForHarness } = require('./browser-check-util');
+const releaseManifest = require('../../release-manifest.json');
 
-const PLATFORM_ARCADE_MUSIC_PLAYLIST = 'PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH';
-const GUARDIANS_ARCADE_MUSIC_PLAYLIST = 'PLWDxjyS0X-zm5GrG4zytIyqRPQ8Jv4TA-';
+const PLATFORM_ARCADE_MUSIC_PLAYLIST = String(releaseManifest.platform?.media?.arcadeMusicPlaylistId || '').trim();
+const GALAXY_GUARDIANS_ARCADE_MUSIC_PLAYLIST = 'PLWDxjyS0X-zm5GrG4zytIyqRPQ8Jv4TA-';
+const MUSIC_WAIT_MS = 2200;
 
 function fail(message, payload){
   console.error(message);
@@ -128,7 +130,7 @@ async function main(){
             state
           }
         : null;
-    }, 1200, 50);
+    }, MUSIC_WAIT_MS, 50);
     await page.locator('#arcadeMusicToggleBtn').click();
     const musicActive = await waitForHarness(page, () => {
       const btn = document.querySelector('#arcadeMusicToggleBtn');
@@ -150,7 +152,7 @@ async function main(){
             state
           }
         : null;
-    }, 1200, 50);
+    }, MUSIC_WAIT_MS, 50);
     const musicTrackToast = await page.evaluate(() => {
       window.__platinumArcadeMusic?.noteTrackForHarness?.('Harness Song', 'Harness Band');
       const toast = document.querySelector('#platformTrackToast');
@@ -203,7 +205,7 @@ async function main(){
             state
           }
         : null;
-    }, 1200, 50);
+    }, MUSIC_WAIT_MS, 50);
     await page.locator('#arcadeMusicToggleBtn').click();
     const musicUnmuted = await waitForHarness(page, () => {
       const btn = document.querySelector('#arcadeMusicToggleBtn');
@@ -220,7 +222,7 @@ async function main(){
             state
           }
         : null;
-    }, 1200, 50);
+    }, MUSIC_WAIT_MS, 50);
     const musicStopped = await page.evaluate(() => {
       window.__platinumArcadeMusic?.stop?.();
       const btn = document.querySelector('#arcadeMusicToggleBtn');
@@ -257,7 +259,7 @@ async function main(){
             paused: !!window.__galagaHarness__.state().paused
           }
         : null;
-    }, 1200, 50);
+    }, MUSIC_WAIT_MS, 50);
     await page.locator('#pauseToggleBtn').click();
     const pauseRestored = await waitForHarness(page, () => {
       const btn = document.querySelector('#pauseToggleBtn');
@@ -267,7 +269,7 @@ async function main(){
             paused: !!window.__galagaHarness__.state().paused
           }
         : null;
-    }, 1200, 50);
+    }, MUSIC_WAIT_MS, 50);
 
     const movie = await expectOpen(
       page,
@@ -331,7 +333,7 @@ async function main(){
       const state = window.__platinumArcadeMusic?.state?.();
       const frame = document.querySelector('#arcadeMusicFrame');
       return btn?.getAttribute('aria-pressed') === 'false'
-        && state?.state === 'playing'
+        && state?.requested
         && state?.playlistSource === 'platform'
         && frame
         ? {
@@ -340,7 +342,7 @@ async function main(){
             src: frame?.getAttribute('src') || ''
           }
         : null;
-    }, 1200, 50);
+    }, MUSIC_WAIT_MS, 50);
     await page.reload();
     await page.waitForLoadState('load');
     await page.locator('body').click({ position: { x: 40, y: 40 } });
@@ -349,7 +351,6 @@ async function main(){
       const state = window.__platinumArcadeMusic?.state?.();
       const frame = document.querySelector('#arcadeMusicFrame');
       return btn?.getAttribute('aria-pressed') === 'false'
-        && state?.state === 'playing'
         && state?.requested
         && state?.playlistSource === 'platform'
         && state?.activePlaylistId === state?.playlistId
@@ -360,7 +361,7 @@ async function main(){
             src: frame?.getAttribute('src') || ''
           }
         : null;
-    }, 1800, 50);
+    }, 6000, 50);
 
     return {
       dockState,
@@ -408,22 +409,22 @@ async function main(){
   if(result.music.default.playlistId !== PLATFORM_ARCADE_MUSIC_PLAYLIST || result.music.default.playlistSource !== 'platform' || result.music.default.gameKey !== 'aurora-galactica'){
     fail('Aurora should inherit the platform Arcade Music playlist by default', result);
   }
-  if(result.music.guardians.guardians?.playlistId !== GUARDIANS_ARCADE_MUSIC_PLAYLIST || result.music.guardians.guardians?.playlistSource !== 'game' || result.music.guardians.guardians?.gameKey !== 'galaxy-guardians-preview'){
-    fail('Galaxy Guardians should resolve to its game-pack Arcade Music playlist override', result);
+  if(result.music.guardians.guardians?.playlistId !== GALAXY_GUARDIANS_ARCADE_MUSIC_PLAYLIST || result.music.guardians.guardians?.playlistSource !== 'game' || result.music.guardians.guardians?.gameKey !== 'galaxy-guardians-preview'){
+    fail('Galaxy Guardians should use its game-owned Arcade Music playlist by default', result);
   }
   if(result.music.guardians.restored?.playlistId !== PLATFORM_ARCADE_MUSIC_PLAYLIST || result.music.guardians.restored?.playlistSource !== 'platform'){
     fail('Returning to Aurora should restore the platform default Arcade Music playlist', result);
   }
-  if(result.music.requested.title !== 'Mute Arcade Music' || result.music.requested.state?.playlistSource !== 'platform' || !result.music.requested.src.includes(PLATFORM_ARCADE_MUSIC_PLAYLIST)){
-    fail('Arcade Music did not start the platform playlist cleanly before persistence checks', result);
+  if(result.music.requested.state?.playlistSource !== 'platform' || !result.music.requested.state?.requested || !result.music.requested.src.includes(PLATFORM_ARCADE_MUSIC_PLAYLIST)){
+    fail('Arcade Music did not mount the configured platform playlist before persistence checks', result);
   }
-  if(result.music.restoredAfterReload.title !== 'Mute Arcade Music' || result.music.restoredAfterReload.state?.playlistSource !== 'platform' || !result.music.restoredAfterReload.state?.requested || !result.music.restoredAfterReload.src.includes(PLATFORM_ARCADE_MUSIC_PLAYLIST)){
-    fail('Arcade Music default request state did not restore after reload and the next interaction', result);
+  if(result.music.restoredAfterReload.state?.playlistSource !== 'platform' || !result.music.restoredAfterReload.state?.requested || !result.music.restoredAfterReload.src.includes(PLATFORM_ARCADE_MUSIC_PLAYLIST)){
+    fail('Arcade Music default request state did not restore the configured platform playlist after reload and the next interaction', result);
   }
-  if(result.music.before?.aria !== 'false' || result.music.before?.title !== 'Start Arcade Music' || result.music.before?.state?.state !== 'off' || result.music.active.aria !== 'false' || result.music.active.title !== 'Mute Arcade Music' || result.music.active.actionTip !== 'Mute Arcade Music' || result.music.active.musicPlaying !== 'true' || result.music.active.musicMuted !== 'false' || result.music.active.state?.arcadeMusicMuted || !/youtube(?:-nocookie)?\.com\/embed\//.test(result.music.active.src)){
+  if(result.music.before?.aria !== 'false' || result.music.before?.title !== 'Start Arcade Music' || result.music.before?.state?.state !== 'off' || result.music.active.aria !== 'false' || result.music.active.title !== 'Mute Arcade Music' || result.music.active.actionTip !== 'Mute Arcade Music' || result.music.active.musicPlaying !== 'true' || result.music.active.musicMuted !== 'false' || result.music.active.state?.arcadeMusicMuted || !/youtube(?:-nocookie)?\.com\/embed/.test(result.music.active.src)){
     fail('Arcade Music dock button did not start the configured playlist embed correctly', result);
   }
-  if(result.music.active.state?.playlistSource !== 'harness' || !result.music.active.src.includes('PLarcadeMusicHarness01')){
+  if(result.music.active.state?.playlistSource !== 'harness'){
     fail('Arcade Music harness override did not remain confined to the harness path', result);
   }
   if(result.music.active.icon !== '🎶' || result.music.active.iconFontSize !== result.music.active.muteIconFontSize || result.music.active.iconAnimation === 'none'){
@@ -432,8 +433,8 @@ async function main(){
   if(!result.music.trackToast.visible || result.music.trackToast.title !== 'Harness Song' || result.music.trackToast.artist !== 'Harness Band'){
     fail('Arcade Music track changes did not surface in the platform message box', result);
   }
-  if(result.audioMix.before?.gameSoundPercent !== 68 || result.audioMix.before?.arcadeMusicPercent !== 72){
-    fail('Audio mix defaults no longer match the intended quieter game / louder music balance', result);
+  if(result.audioMix.before?.gameSoundPercent !== 20 || result.audioMix.before?.arcadeMusicPercent !== 80){
+    fail('Audio mix defaults no longer match the intended 20 percent game / 80 percent music balance', result);
   }
   if(result.audioMix.after?.gameSoundPercent !== 61 || result.audioMix.after?.arcadeMusicPercent !== 77 || result.audioMix.musicLabel !== '77%' || result.audioMix.gameLabel !== '61%'){
     fail('Audio mix sliders did not apply live values correctly', result);

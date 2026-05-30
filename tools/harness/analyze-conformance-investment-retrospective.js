@@ -519,7 +519,7 @@ function main(){
     deepLinks: [
       {
         label: 'Local Cost / Value dashboard',
-        href: 'http://127.0.0.1:4312/local-dev/conformance-dashboard.html?game=aurora-galactica#cost'
+        href: 'http://localhost:4312/local-dev/conformance-dashboard.html?game=aurora-galactica#cost'
       },
       {
         label: 'Hosted dev Cost / Value dashboard',

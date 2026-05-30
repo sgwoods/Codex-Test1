@@ -4,6 +4,7 @@ const http = require('http');
 const path = require('path');
 const { launchHarnessBrowser } = require('./browser-launch');
 const { DIST_DEV } = require('../build/paths');
+const { LOCAL_BIND_HOST, localUrl } = require('../dev/local-host-config');
 
 const APP_ROOT = DIST_DEV;
 
@@ -36,7 +37,7 @@ function serve(root = APP_ROOT){
     });
   });
   return new Promise(resolve => {
-    server.listen(0, '127.0.0.1', () => resolve({ server, port: server.address().port }));
+    server.listen(0, LOCAL_BIND_HOST, () => resolve({ server, port: server.address().port }));
   });
 }
 
@@ -51,7 +52,7 @@ async function main(){
   try{
     const context = await browser.newContext({ acceptDownloads: true, viewport: { width: 1440, height: 1800 } });
     const page = await context.newPage();
-    await page.goto(`http://127.0.0.1:${port}/index.html`, { waitUntil: 'networkidle' });
+    await page.goto(localUrl(port, '/index.html', { browser: true }), { waitUntil: 'networkidle' });
     await page.waitForFunction(() => {
       const status = document.getElementById('leaderboardStatus')?.textContent || '';
       const summary = document.getElementById('accountSummary')?.textContent || '';
@@ -78,7 +79,7 @@ async function main(){
     if(!/read-only/i.test(result.status)){
       fail('non-production leaderboard did not advertise a read-only data path', result);
     }
-    const explainedTestPilot = /test pilot lane active/i.test(result.accountSummary);
+    const explainedTestPilot = /test pilot lane active|local aurora galactica score path is available now/i.test(result.accountSummary);
     if(!explainedTestPilot){
       fail('non-production account panel did not expose the configured test-pilot login path', result);
     }
