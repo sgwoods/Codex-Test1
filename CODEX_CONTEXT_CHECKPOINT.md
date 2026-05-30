@@ -1,7 +1,7 @@
 # Codex Context Checkpoint
 
-Generated: 2026-05-30T14:52:20.370Z
-Label: fullscreen-timing-alignment-wip-handoff
+Generated: 2026-05-30T15:00:28.874Z
+Label: fullscreen-timing-alignment-clean-handoff
 
 This is the durable recovery point for long Aurora / Platinum Codex sessions.
 Use it before switching machines, before starting a multi-hour run, and whenever
@@ -12,16 +12,16 @@ important working context.
 
 - Repo path: `/Users/sgwoods/Development/Codex/Codex-test1`
 - Branch: `codex/macbook-fullscreen-timing-alignment-wip`
-- HEAD: `e397c2c75` Stabilize challenge set-piece capture workflow
-- Dirty files excluding checkpoint self-output: `12`
+- HEAD: `77a7396fb` Preserve fullscreen timing alignment WIP
+- Dirty files excluding checkpoint self-output: `0`
 
 ## Active Plan
 
-- Preserve fullscreen mode and level visual timing alignment work from the second session on a dedicated branch
+- Current phase is cleanly committed: stage-start synchronized challenge timing alignment artifacts plus arcade/fullscreen play mode. Awaiting external stability command before continuing challenge-stage conformance work on this MacBook.
 
 ## Recommended Next Steps
 
-- Continue only in one Codex chat: inspect WIP branch, fix timing analyzer challenge coverage, then decide whether to merge after the stable challenge set-piece branch lands
+- After the other session confirms stable state, sync/review branch status, then use the timing-alignment clips to retune Challenge 1 group release cadence, duration, and first-visible timing before expanding to all challenge stages.
 
 ## Notes
 
@@ -31,44 +31,26 @@ important working context.
 ## Git Status
 
 ```
-M package.json
- M src/index.template.html
- M src/js/00-boot.js
- M src/js/19-render-shell.js
- M src/js/20-render.js
- M src/styles.css
- M tools/build/build-index.js
-?? LEVEL_VISUAL_TIMING_ALIGNMENT.md
-?? reference-artifacts/analyses/level-visual-timing-alignment/
-?? tools/harness/analyze-level-visual-timing-alignment.js
-?? tools/harness/check-arcade-fullscreen-mode.js
-?? tools/harness/check-level-visual-timing-alignment.js
+(none)
 ```
 
 ## Diff Stat
 
 ```
-package.json               |   3 ++
- src/index.template.html    |   9 ++++
- src/js/00-boot.js          |  81 +++++++++++++++++++++++++++++++++--
- src/js/19-render-shell.js  |  10 +++--
- src/js/20-render.js        |  31 +++++++++++++-
- src/styles.css             |   6 +++
- tools/build/build-index.js | 104 +++++++++++++++++++++++++++++++++++++++++++++
- 7 files changed, 236 insertions(+), 8 deletions(-)
+(none)
 ```
 
 ## Recent Log
 
 ```
-e397c2c75 (HEAD -> codex/macbook-fullscreen-timing-alignment-wip, origin/codex/challenge-target-authority-setpiece-upgrade, codex/challenge-target-authority-setpiece-upgrade) Stabilize challenge set-piece capture workflow
+77a7396fb (HEAD -> codex/macbook-fullscreen-timing-alignment-wip, origin/codex/macbook-fullscreen-timing-alignment-wip) Preserve fullscreen timing alignment WIP
+e397c2c75 (origin/codex/challenge-target-authority-setpiece-upgrade, codex/challenge-target-authority-setpiece-upgrade) Stabilize challenge set-piece capture workflow
 19db4fa4c (origin/main, origin/HEAD) Refresh review packet for Guardians publish head
 ed9042cd9 Refresh release conformance docs for Guardians publish
 f5548699f Advance Guardians opening-slice motion and parity
 2fca9f76f Refresh review packet after release doc refresh
 9c0dc106b Refresh review packet for Guardians publish head
 d3d8c35f8 Refresh release conformance docs for Guardians head
-23e25e286 Refresh code review packet for Guardians opening authority
 ```
 
 ## Machine Status Snapshot
@@ -103,8 +85,8 @@ d3d8c35f8 Refresh release conformance docs for Guardians head
   },
   "repo": {
     "branch": "codex/macbook-fullscreen-timing-alignment-wip",
-    "dirty": true,
-    "upstream": null,
+    "dirty": false,
+    "upstream": "origin/codex/macbook-fullscreen-timing-alignment-wip",
     "ahead": 0,
     "behind": 0,
     "remote_ok": true
@@ -198,11 +180,11 @@ Read first:
 - MULTI_MACHINE_WORKFLOW.md
 
 Current checkpoint:
-- label: fullscreen-timing-alignment-wip-handoff
-- generated: 2026-05-30T14:52:20.370Z
+- label: fullscreen-timing-alignment-clean-handoff
+- generated: 2026-05-30T15:00:28.874Z
 - branch: codex/macbook-fullscreen-timing-alignment-wip
-- commit: e397c2c75 Stabilize challenge set-piece capture workflow
-- dirty files excluding checkpoint self-output: 12
+- commit: 77a7396fb Preserve fullscreen timing alignment WIP
+- dirty files excluding checkpoint self-output: 0
 
 Continue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.
 ```
