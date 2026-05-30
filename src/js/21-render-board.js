@@ -309,8 +309,15 @@ const AURORA_CONFORMANCE_PIXELS=Object.freeze({
 });
 
 const TARGET_PIXEL_ASPECT_X=1.14;
-const TARGET_REFERENCE_ENEMY_SCALE=0.84;
-const TARGET_REFERENCE_BOSS_SCALE=0.88;
+const TARGET_REFERENCE_BEE_SCALE=0.90;
+const TARGET_REFERENCE_BUTTERFLY_SCALE=0.76;
+const TARGET_REFERENCE_CHALLENGE_SCALE=0.90;
+const TARGET_REFERENCE_BOSS_SCALE=0.78;
+const TARGET_REFERENCE_ROGUE_SCALE=0.94;
+const TARGET_REFERENCE_BEE_X_SCALE=0.68;
+const TARGET_REFERENCE_BUTTERFLY_X_SCALE=0.82;
+const TARGET_REFERENCE_CHALLENGE_X_SCALE=0.70;
+const TARGET_REFERENCE_BOSS_X_SCALE=1.10;
 const PLAYER_FIGHTER_VISUAL_SCALE=0.94;
 
 function drawTargetSpriteRows(rows,palette,scale=1,offsetX=0,offsetY=0,opts={}){
@@ -346,14 +353,14 @@ function referencePixelSpritesEnabled(){
 
 function drawTargetEnemySprite(e,flap){
  if(!referencePixelSpritesEnabled())return false;
- if(e?.fam==='dragonfly')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeGreen,TARGET_SPRITE_PALETTES.challengeGreen,TARGET_REFERENCE_ENEMY_SCALE);
- if(e?.fam==='mosquito')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeYellow,TARGET_SPRITE_PALETTES.challengeYellow,TARGET_REFERENCE_ENEMY_SCALE);
- if(e?.fam==='scorpion')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeMagenta,TARGET_SPRITE_PALETTES.challengeMagenta,TARGET_REFERENCE_ENEMY_SCALE);
- if(e?.fam==='stingray'||e?.fam==='crown')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeBlueYellow,TARGET_SPRITE_PALETTES.challengeBlueYellow,TARGET_REFERENCE_ENEMY_SCALE);
- if(e?.t==='bee')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.beeOpen:TARGET_SPRITE_ROWS.bee,TARGET_SPRITE_PALETTES.bee,TARGET_REFERENCE_ENEMY_SCALE);
- if(e?.t==='but')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.butOpen:TARGET_SPRITE_ROWS.but,TARGET_SPRITE_PALETTES.but,TARGET_REFERENCE_ENEMY_SCALE);
- if(e?.t==='boss')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.bossOpen:TARGET_SPRITE_ROWS.boss,TARGET_SPRITE_PALETTES.boss,TARGET_REFERENCE_BOSS_SCALE);
- if(e?.t==='rogue')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,TARGET_REFERENCE_ENEMY_SCALE);
+ if(e?.fam==='dragonfly')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeGreen,TARGET_SPRITE_PALETTES.challengeGreen,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
+ if(e?.fam==='mosquito')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeYellow,TARGET_SPRITE_PALETTES.challengeYellow,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
+ if(e?.fam==='scorpion')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeMagenta,TARGET_SPRITE_PALETTES.challengeMagenta,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
+ if(e?.fam==='stingray'||e?.fam==='crown')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeBlueYellow,TARGET_SPRITE_PALETTES.challengeBlueYellow,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
+ if(e?.t==='bee')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.beeOpen:TARGET_SPRITE_ROWS.bee,TARGET_SPRITE_PALETTES.bee,TARGET_REFERENCE_BEE_SCALE,0,0,{xScale:TARGET_REFERENCE_BEE_X_SCALE});
+ if(e?.t==='but')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.butOpen:TARGET_SPRITE_ROWS.but,TARGET_SPRITE_PALETTES.but,TARGET_REFERENCE_BUTTERFLY_SCALE,0,0,{xScale:TARGET_REFERENCE_BUTTERFLY_X_SCALE});
+ if(e?.t==='boss')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.bossOpen:TARGET_SPRITE_ROWS.boss,TARGET_SPRITE_PALETTES.boss,TARGET_REFERENCE_BOSS_SCALE,0,0,{xScale:TARGET_REFERENCE_BOSS_X_SCALE});
+ if(e?.t==='rogue')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,TARGET_REFERENCE_ROGUE_SCALE,0,0,{xScale:1.08});
  return false;
 }
 

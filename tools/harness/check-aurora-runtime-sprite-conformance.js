@@ -4,6 +4,8 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const ARTIFACT = 'reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json';
+const PIXEL_TARGET_ARTIFACT = 'reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1.json';
+const MODEL_ARTIFACT = 'reference-artifacts/analyses/galaga-reference-sprites/model-0.1.json';
 const REQUIRED_KEYS = [
   'player-fighter',
   'dual-fighter',
@@ -14,6 +16,16 @@ const REQUIRED_KEYS = [
   'challenge-dragonfly',
   'challenge-mosquito'
 ];
+const CAPTURE_PLAYFIELD = {
+  'player-fighter': { width: 42, height: 38 },
+  'dual-fighter': { width: 74, height: 38 },
+  'bee-line': { width: 50, height: 44 },
+  'but-line': { width: 54, height: 46 },
+  'boss-line': { width: 62, height: 52 },
+  'rogue-fighter': { width: 56, height: 48 },
+  'challenge-dragonfly': { width: 50, height: 44 },
+  'challenge-mosquito': { width: 50, height: 44 }
+};
 const SINGLE_ENEMY_KEYS = [
   'bee-line',
   'but-line',
@@ -22,6 +34,8 @@ const SINGLE_ENEMY_KEYS = [
   'challenge-mosquito'
 ];
 const MAX_SINGLE_ENEMY_BBOX = { width: 84, height: 72 };
+const MAX_PROPORTION_OVERSHOOT = { width: .35, height: .40 };
+const MIN_PROPORTION_UNDERSHOOT = { width: .28, height: .34 };
 
 function fail(message, payload){
   console.error(message);
@@ -37,9 +51,58 @@ function exists(relPath){
   return !!relPath && fs.existsSync(path.join(ROOT, relPath));
 }
 
+function runtimeUnitBox(sample){
+  const clip = sample?.canvasClip;
+  const bbox = clip?.bbox;
+  const spec = CAPTURE_PLAYFIELD[sample?.spriteKey];
+  if(!clip || !bbox || !spec) return null;
+  return {
+    width: bbox.width / (clip.width / spec.width),
+    height: bbox.height / (clip.height / spec.height)
+  };
+}
+
+function pixelTargetForKey(pixelTargets, key){
+  const targets = Array.isArray(pixelTargets?.targets) ? pixelTargets.targets : [];
+  return targets.find(target => Array.isArray(target.catalogKeys) && target.catalogKeys.includes(key)) || null;
+}
+
+function modelTargetForKey(modelArtifact, key){
+  const targets = Array.isArray(modelArtifact?.targets) ? modelArtifact.targets : [];
+  return targets.find(target => Array.isArray(target.catalogKeys) && target.catalogKeys.includes(key)) || null;
+}
+
+function litBoxFromRows(rows){
+  if(!Array.isArray(rows) || !rows.length) return null;
+  let minX = Infinity;
+  let minY = Infinity;
+  let maxX = -1;
+  let maxY = -1;
+  for(let y = 0; y < rows.length; y++){
+    const row = String(rows[y] || '');
+    for(let x = 0; x < row.length; x++){
+      const token = row[x];
+      if(token === '.' || token === ' ') continue;
+      minX = Math.min(minX, x);
+      minY = Math.min(minY, y);
+      maxX = Math.max(maxX, x);
+      maxY = Math.max(maxY, y);
+    }
+  }
+  if(maxX < 0) return null;
+  return {
+    x: minX,
+    y: minY,
+    width: maxX - minX + 1,
+    height: maxY - minY + 1
+  };
+}
+
 function main(){
   if(!exists(ARTIFACT)) fail(`Missing Aurora runtime sprite conformance artifact: ${ARTIFACT}`);
   const artifact = readJson(ARTIFACT);
+  const pixelTargets = exists(PIXEL_TARGET_ARTIFACT) ? readJson(PIXEL_TARGET_ARTIFACT) : null;
+  const modelArtifact = exists(MODEL_ARTIFACT) ? readJson(MODEL_ARTIFACT) : null;
   const samples = Array.isArray(artifact.samples) ? artifact.samples : [];
   const payload = {
     artifact: ARTIFACT,
@@ -84,6 +147,61 @@ function main(){
       });
     }
   }
+  const playerSample = samples.find(item => item.spriteKey === 'player-fighter');
+  const playerBox = runtimeUnitBox(playerSample);
+  const playerTarget = pixelTargetForKey(pixelTargets, 'player-fighter');
+  const playerTargetBox = playerTarget?.metrics?.litBox;
+  const playerModelTarget = modelTargetForKey(modelArtifact, 'player-fighter');
+  const playerModelBox = litBoxFromRows(playerModelTarget?.rows);
+  if(!playerBox || !playerTargetBox || !playerModelBox){
+    fail('Aurora runtime sprite conformance cannot evaluate player-to-alien proportions', { playerSample, playerTarget, playerModelTarget, payload });
+  }
+  const proportionReads = [];
+  for(const key of SINGLE_ENEMY_KEYS){
+    const sample = samples.find(item => item.spriteKey === key);
+    const target = pixelTargetForKey(pixelTargets, key);
+    const modelTarget = modelTargetForKey(modelArtifact, key);
+    const box = runtimeUnitBox(sample);
+    const targetBox = target?.metrics?.litBox;
+    const modelBox = litBoxFromRows(modelTarget?.rows);
+    if(!box || !targetBox || !modelBox) continue;
+    const sourceWidthVsPlayer = targetBox.width / playerTargetBox.width;
+    const sourceHeightVsPlayer = targetBox.height / playerTargetBox.height;
+    const modelWidthVsPlayer = modelBox.width / playerModelBox.width;
+    const modelHeightVsPlayer = modelBox.height / playerModelBox.height;
+    const read = {
+      key,
+      runtimeWidthVsPlayer: +(box.width / playerBox.width).toFixed(3),
+      runtimeHeightVsPlayer: +(box.height / playerBox.height).toFixed(3),
+      sourceWidthVsPlayer: +sourceWidthVsPlayer.toFixed(3),
+      sourceHeightVsPlayer: +sourceHeightVsPlayer.toFixed(3),
+      modelWidthVsPlayer: +modelWidthVsPlayer.toFixed(3),
+      modelHeightVsPlayer: +modelHeightVsPlayer.toFixed(3),
+      targetWidthVsPlayer: +Math.max(sourceWidthVsPlayer, modelWidthVsPlayer).toFixed(3),
+      targetHeightVsPlayer: +Math.max(sourceHeightVsPlayer, modelHeightVsPlayer).toFixed(3)
+    };
+    read.maxWidthVsPlayer = +(read.targetWidthVsPlayer + MAX_PROPORTION_OVERSHOOT.width).toFixed(3);
+    read.maxHeightVsPlayer = +(read.targetHeightVsPlayer + MAX_PROPORTION_OVERSHOOT.height).toFixed(3);
+    read.minWidthVsPlayer = +Math.max(.35, read.targetWidthVsPlayer - MIN_PROPORTION_UNDERSHOOT.width).toFixed(3);
+    read.minHeightVsPlayer = +Math.max(.35, read.targetHeightVsPlayer - MIN_PROPORTION_UNDERSHOOT.height).toFixed(3);
+    proportionReads.push(read);
+    if(read.runtimeWidthVsPlayer > read.maxWidthVsPlayer || read.runtimeHeightVsPlayer > read.maxHeightVsPlayer){
+      fail(`Aurora runtime sprite sample ${key} is too large relative to the player fighter and Galaga source target`, {
+        read,
+        source: PIXEL_TARGET_ARTIFACT,
+        note: 'This guard compares live rendered bounding boxes against source-frame Galaga target lit-box proportions so local sprite tuning cannot make aliens look oversized versus the fighter.',
+        payload
+      });
+    }
+    if(read.runtimeWidthVsPlayer < read.minWidthVsPlayer || read.runtimeHeightVsPlayer < read.minHeightVsPlayer){
+      fail(`Aurora runtime sprite sample ${key} is too small relative to the player fighter and Galaga source target`, {
+        read,
+        source: PIXEL_TARGET_ARTIFACT,
+        note: 'This guard keeps proportion fixes from shrinking arcade targets below readable Galaga-style playfield proportions.',
+        payload
+      });
+    }
+  }
   if(!Number.isFinite(+artifact.summary?.averageScore10)){
     fail('Aurora runtime sprite conformance artifact is missing an average score', payload);
   }
@@ -107,7 +225,8 @@ function main(){
     sampleCount: samples.length,
     averageScore10: artifact.summary.averageScore10,
     weakestSpriteKey: artifact.summary.weakestSpriteKey,
-    weakestScore10: artifact.summary.weakestScore10
+    weakestScore10: artifact.summary.weakestScore10,
+    proportionReads
   }, null, 2));
 }
 
