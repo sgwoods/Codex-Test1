@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "artifactType": "stage7-reference-path-before-after",
-  "generatedAt": "2026-05-25T15:37:26.191Z",
+  "generatedAt": "2026-05-30T21:09:46.250Z",
   "generatedBy": "tools/harness/analyze-stage7-reference-path-before-after.js",
-  "commit": "412ff2860",
-  "branch": "codex/macbook-challenge-stage-conformance-cycle",
+  "commit": "9a9ede246",
+  "branch": "codex/macbook-fullscreen-timing-alignment-wip",
   "stage": 7,
   "challengeNumber": 2,
   "sampleTimes": [
@@ -36,7 +36,6 @@
       "hook-arc"
     ],
     "afterPathFamilies": [
-      "boss-led-loop",
       "cross-sweep",
       "hook-arc"
     ],
@@ -80,11 +79,11 @@
     },
     "aggregate": {
       "sampleCount": 10,
-      "averageEnemyCount": 20.9,
+      "averageEnemyCount": 20,
       "averageReferenceTrackedCount": 0,
       "referenceCoverage": 0,
       "maxXRange": 436,
-      "maxYRange": 205.45,
+      "maxYRange": 260.12,
       "typeKeys": [
         "bee",
         "boss",
@@ -128,9 +127,9 @@
           ],
           "referenceTrackIds": [],
           "xRange": 436,
-          "yRange": 61.28,
-          "minY": 29.72,
-          "maxY": 91
+          "yRange": 50.03,
+          "minY": 46,
+          "maxY": 96.03
         }
       },
       {
@@ -157,9 +156,9 @@
           ],
           "referenceTrackIds": [],
           "xRange": 436,
-          "yRange": 52.55,
-          "minY": 38.45,
-          "maxY": 91
+          "yRange": 42.39,
+          "minY": 53.16,
+          "maxY": 95.55
         }
       },
       {
@@ -186,9 +185,9 @@
           ],
           "referenceTrackIds": [],
           "xRange": 436,
-          "yRange": 47.49,
-          "minY": 43.51,
-          "maxY": 91
+          "yRange": 79.84,
+          "minY": 54.34,
+          "maxY": 134.18
         }
       },
       {
@@ -214,17 +213,17 @@
             "hook-arc"
           ],
           "referenceTrackIds": [],
-          "xRange": 285.43,
-          "yRange": 68.98,
-          "minY": 65.4,
-          "maxY": 134.38
+          "xRange": 298.56,
+          "yRange": 206.46,
+          "minY": 68.11,
+          "maxY": 274.57
         }
       },
       {
         "t": 7.8,
         "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/before/before-05-078ds.png",
         "summary": {
-          "enemyCount": 40,
+          "enemyCount": 32,
           "referenceTrackedCount": 0,
           "typeKeys": [
             "bee",
@@ -233,7 +232,6 @@
             "rogue"
           ],
           "families": [
-            "classic",
             "scorpion",
             "stingray"
           ],
@@ -243,17 +241,17 @@
             "hook-arc"
           ],
           "referenceTrackIds": [],
-          "xRange": 344.68,
-          "yRange": 205.45,
-          "minY": 107.5,
-          "maxY": 312.95
+          "xRange": 271.22,
+          "yRange": 260.12,
+          "minY": 118.52,
+          "maxY": 378.64
         }
       },
       {
         "t": 9.6,
         "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/before/before-06-096ds.png",
         "summary": {
-          "enemyCount": 9,
+          "enemyCount": 8,
           "referenceTrackedCount": 0,
           "typeKeys": [
             "bee",
@@ -265,14 +263,13 @@
             "stingray"
           ],
           "pathFamilies": [
-            "boss-led-loop",
-            "cross-sweep"
+            "boss-led-loop"
           ],
           "referenceTrackIds": [],
-          "xRange": 194,
-          "yRange": 90.2,
-          "minY": 299.48,
-          "maxY": 389.68
+          "xRange": 191.61,
+          "yRange": 30.91,
+          "minY": 320.47,
+          "maxY": 351.38
         }
       },
       {
@@ -364,9 +361,9 @@
           ],
           "referenceTrackIds": [],
           "xRange": 436,
-          "yRange": 61.28,
-          "minY": 29.72,
-          "maxY": 91
+          "yRange": 50.03,
+          "minY": 46,
+          "maxY": 96.03
         }
       },
       {
@@ -392,9 +389,9 @@
           ],
           "referenceTrackIds": [],
           "xRange": 436,
-          "yRange": 52.55,
-          "minY": 38.45,
-          "maxY": 91
+          "yRange": 42.39,
+          "minY": 53.16,
+          "maxY": 95.55
         }
       },
       {
@@ -420,9 +417,9 @@
           ],
           "referenceTrackIds": [],
           "xRange": 436,
-          "yRange": 47.49,
-          "minY": 43.51,
-          "maxY": 91
+          "yRange": 79.84,
+          "minY": 54.34,
+          "maxY": 134.18
         }
       },
       {
@@ -447,16 +444,16 @@
             "hook-arc"
           ],
           "referenceTrackIds": [],
-          "xRange": 285.43,
-          "yRange": 68.98,
-          "minY": 65.4,
-          "maxY": 134.38
+          "xRange": 298.56,
+          "yRange": 206.46,
+          "minY": 68.11,
+          "maxY": 274.57
         }
       },
       {
         "t": 7.8,
         "summary": {
-          "enemyCount": 40,
+          "enemyCount": 32,
           "referenceTrackedCount": 0,
           "typeKeys": [
             "bee",
@@ -465,7 +462,6 @@
             "rogue"
           ],
           "families": [
-            "classic",
             "scorpion",
             "stingray"
           ],
@@ -475,16 +471,16 @@
             "hook-arc"
           ],
           "referenceTrackIds": [],
-          "xRange": 344.68,
-          "yRange": 205.45,
-          "minY": 107.5,
-          "maxY": 312.95
+          "xRange": 271.22,
+          "yRange": 260.12,
+          "minY": 118.52,
+          "maxY": 378.64
         }
       },
       {
         "t": 9.6,
         "summary": {
-          "enemyCount": 9,
+          "enemyCount": 8,
           "referenceTrackedCount": 0,
           "typeKeys": [
             "bee",
@@ -496,14 +492,13 @@
             "stingray"
           ],
           "pathFamilies": [
-            "boss-led-loop",
-            "cross-sweep"
+            "boss-led-loop"
           ],
           "referenceTrackIds": [],
-          "xRange": 194,
-          "yRange": 90.2,
-          "minY": 299.48,
-          "maxY": 389.68
+          "xRange": 191.61,
+          "yRange": 30.91,
+          "minY": 320.47,
+          "maxY": 351.38
         }
       },
       {
@@ -585,7 +580,6 @@
         "stingray"
       ],
       "pathFamilies": [
-        "boss-led-loop",
         "cross-sweep",
         "hook-arc"
       ],
@@ -607,7 +601,7 @@
       "averageReferenceTrackedCount": 14.4,
       "referenceCoverage": 0.8,
       "maxXRange": 436,
-      "maxYRange": 152.35,
+      "maxYRange": 173.81,
       "typeKeys": [
         "bee",
         "boss",
@@ -620,7 +614,6 @@
         "stingray"
       ],
       "pathFamilies": [
-        "boss-led-loop",
         "cross-sweep",
         "hook-arc"
       ],
@@ -651,7 +644,6 @@
             "stingray"
           ],
           "pathFamilies": [
-            "boss-led-loop",
             "cross-sweep",
             "hook-arc"
           ],
@@ -663,9 +655,9 @@
             "target-track-71"
           ],
           "xRange": 436,
-          "yRange": 152.35,
+          "yRange": 173.81,
           "minY": 46,
-          "maxY": 198.35
+          "maxY": 219.81
         }
       },
       {
@@ -685,7 +677,6 @@
             "stingray"
           ],
           "pathFamilies": [
-            "boss-led-loop",
             "cross-sweep",
             "hook-arc"
           ],
@@ -718,7 +709,6 @@
             "stingray"
           ],
           "pathFamilies": [
-            "boss-led-loop",
             "cross-sweep",
             "hook-arc"
           ],
@@ -749,8 +739,8 @@
             "stingray"
           ],
           "pathFamilies": [
-            "boss-led-loop",
-            "cross-sweep"
+            "cross-sweep",
+            "hook-arc"
           ],
           "referenceTrackIds": [
             "target-track-110",
@@ -778,7 +768,7 @@
             "stingray"
           ],
           "pathFamilies": [
-            "boss-led-loop"
+            "hook-arc"
           ],
           "referenceTrackIds": [
             "target-track-142"
@@ -805,7 +795,7 @@
             "stingray"
           ],
           "pathFamilies": [
-            "boss-led-loop"
+            "hook-arc"
           ],
           "referenceTrackIds": [
             "target-track-142"
@@ -832,7 +822,7 @@
             "stingray"
           ],
           "pathFamilies": [
-            "boss-led-loop"
+            "hook-arc"
           ],
           "referenceTrackIds": [
             "target-track-142"
@@ -859,7 +849,7 @@
             "stingray"
           ],
           "pathFamilies": [
-            "boss-led-loop"
+            "hook-arc"
           ],
           "referenceTrackIds": [
             "target-track-142"
@@ -921,7 +911,6 @@
             "stingray"
           ],
           "pathFamilies": [
-            "boss-led-loop",
             "cross-sweep",
             "hook-arc"
           ],
@@ -933,9 +922,9 @@
             "target-track-71"
           ],
           "xRange": 436,
-          "yRange": 152.35,
+          "yRange": 173.81,
           "minY": 46,
-          "maxY": 198.35
+          "maxY": 219.81
         }
       },
       {
@@ -954,7 +943,6 @@
             "stingray"
           ],
           "pathFamilies": [
-            "boss-led-loop",
             "cross-sweep",
             "hook-arc"
           ],
@@ -986,7 +974,6 @@
             "stingray"
           ],
           "pathFamilies": [
-            "boss-led-loop",
             "cross-sweep",
             "hook-arc"
           ],
@@ -1016,8 +1003,8 @@
             "stingray"
           ],
           "pathFamilies": [
-            "boss-led-loop",
-            "cross-sweep"
+            "cross-sweep",
+            "hook-arc"
           ],
           "referenceTrackIds": [
             "target-track-110",
@@ -1044,7 +1031,7 @@
             "stingray"
           ],
           "pathFamilies": [
-            "boss-led-loop"
+            "hook-arc"
           ],
           "referenceTrackIds": [
             "target-track-142"
@@ -1070,7 +1057,7 @@
             "stingray"
           ],
           "pathFamilies": [
-            "boss-led-loop"
+            "hook-arc"
           ],
           "referenceTrackIds": [
             "target-track-142"
@@ -1096,7 +1083,7 @@
             "stingray"
           ],
           "pathFamilies": [
-            "boss-led-loop"
+            "hook-arc"
           ],
           "referenceTrackIds": [
             "target-track-142"
@@ -1122,7 +1109,7 @@
             "stingray"
           ],
           "pathFamilies": [
-            "boss-led-loop"
+            "hook-arc"
           ],
           "referenceTrackIds": [
             "target-track-142"

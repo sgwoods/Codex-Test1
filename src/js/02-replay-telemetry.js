@@ -197,6 +197,7 @@ function stopRunRecording(){
  if(sfx.recGain){try{sfx.recGain.disconnect();}catch{}sfx.recGain=null}
  const rec=VIDEO_REC.rec;
  VIDEO_REC.rec=null;
+ try{if(rec.state==='recording'&&typeof rec.requestData==='function')rec.requestData();}catch{}
  try{rec.stop();}catch{}
  syncRecordUi();
 }
@@ -256,7 +257,7 @@ function startRunRecording(){
   VIDEO_REC.stopMeta=null;
   flushAfterRecordingStops();
  };
- rec.start(1000);
+ rec.start(250);
  VIDEO_REC.rec=rec;
  VIDEO_REC.active=1;
  syncRecordUi();

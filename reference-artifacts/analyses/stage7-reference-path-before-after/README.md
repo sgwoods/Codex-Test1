@@ -1,8 +1,8 @@
 # Stage 7 Reference-Path Before/After Evidence
 
-Generated: 2026-05-25T15:37:26.191Z
-Commit: 412ff2860
-Branch: codex/macbook-challenge-stage-conformance-cycle
+Generated: 2026-05-30T21:09:46.250Z
+Commit: 9a9ede246
+Branch: codex/macbook-fullscreen-timing-alignment-wip
 
 This artifact gives a human-visible before/after read for the Stage 7 / Challenging Stage 2 runtime promotion.
 

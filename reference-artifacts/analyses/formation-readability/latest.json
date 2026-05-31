@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "formation-readability",
-  "generatedAt": "2026-05-19T20:28:46.465Z",
-  "branch": "main",
-  "commit": "c5ed9301",
+  "generatedAt": "2026-05-30T23:26:23.768Z",
+  "branch": "codex/macbook-fullscreen-timing-alignment-wip",
+  "commit": "2d144d5c1",
   "dirty": true,
   "problem": "Galaga-style 40-enemy racks require enough air between sprites that formation rows and entry waves remain readable after moving toward more authentic pixel silhouettes.",
   "strategy": "Measure settled target rectangle gaps and active entry overlap windows in both normal Aurora rendering and Reference Pixel Lab mode.",
@@ -19,23 +19,17 @@
     "stageCount": 3,
     "modeCount": 2,
     "failureCount": 0,
-    "warningCount": 2,
+    "warningCount": 1,
     "worstSettledHorizontalGap": 2,
     "worstSettledVerticalGap": 4,
-    "worstActiveOverlapPairs": 12
+    "worstActiveOverlapPairs": 13
   },
   "warnings": [
     {
       "stage": 1,
       "mode": "auto",
       "kind": "stage1-active-entry-overlap-advisory",
-      "value": 12
-    },
-    {
-      "stage": 1,
-      "mode": "reference-pixel-lab",
-      "kind": "stage1-active-entry-overlap-advisory",
-      "value": 9
+      "value": 13
     }
   ],
   "failures": [],
@@ -58,8 +52,8 @@
         "compressedVertical": []
       },
       "activeWindow": {
-        "worstOverlapPairs": 12,
-        "worstOverlapArea": 153.69
+        "worstOverlapPairs": 13,
+        "worstOverlapArea": 111.97
       },
       "samples": [
         {
@@ -93,83 +87,27 @@
           },
           "active": {
             "visibleCount": 14,
-            "overlapPairs": 11,
-            "largestOverlapArea": 106.05,
+            "overlapPairs": 3,
+            "largestOverlapArea": 29.23,
             "overlaps": [
-              {
-                "a": 437497093,
-                "b": 845901754,
-                "area": 4.88,
-                "aType": "but",
-                "bType": "boss"
-              },
-              {
-                "a": 437497093,
-                "b": 946218514,
-                "area": 8.28,
-                "aType": "but",
-                "bType": "but"
-              },
-              {
-                "a": 437497093,
-                "b": 993198064,
-                "area": 106.05,
-                "aType": "but",
-                "bType": "but"
-              },
-              {
-                "a": 437497093,
-                "b": 413852713,
-                "area": 0.39,
-                "aType": "but",
-                "bType": "but"
-              },
               {
                 "a": 762088968,
                 "b": 468251597,
-                "area": 29.22,
+                "area": 24.62,
                 "aType": "boss",
                 "bType": "boss"
-              },
-              {
-                "a": 762088968,
-                "b": 678916565,
-                "area": 8.37,
-                "aType": "boss",
-                "bType": "but"
               },
               {
                 "a": 468251597,
                 "b": 678916565,
-                "area": 24.98,
+                "area": 21.71,
                 "aType": "boss",
-                "bType": "but"
-              },
-              {
-                "a": 294423463,
-                "b": 601246102,
-                "area": 77.61,
-                "aType": "but",
-                "bType": "bee"
-              },
-              {
-                "a": 272994902,
-                "b": 993198064,
-                "area": 14.18,
-                "aType": "but",
-                "bType": "but"
-              },
-              {
-                "a": 272994902,
-                "b": 413852713,
-                "area": 17.94,
-                "aType": "but",
                 "bType": "but"
               },
               {
                 "a": 946218514,
                 "b": 993198064,
-                "area": 60.14,
+                "area": 29.23,
                 "aType": "but",
                 "bType": "but"
               }
@@ -189,85 +127,92 @@
           },
           "active": {
             "visibleCount": 21,
-            "overlapPairs": 11,
-            "largestOverlapArea": 121.62,
+            "overlapPairs": 13,
+            "largestOverlapArea": 110.98,
             "overlaps": [
               {
                 "a": 334882525,
                 "b": 437497093,
-                "area": 23.96,
+                "area": 30.48,
                 "aType": "but",
                 "bType": "but"
               },
               {
                 "a": 334882525,
                 "b": 371922646,
-                "area": 8.78,
+                "area": 6.64,
                 "aType": "but",
                 "bType": "but"
               },
               {
                 "a": 334882525,
-                "b": 272994902,
-                "area": 15.61,
-                "aType": "but",
-                "bType": "but"
-              },
-              {
-                "a": 334882525,
-                "b": 946218514,
-                "area": 87.91,
-                "aType": "but",
-                "bType": "but"
-              },
-              {
-                "a": 437497093,
-                "b": 371922646,
-                "area": 29.26,
-                "aType": "but",
-                "bType": "but"
-              },
-              {
-                "a": 437497093,
                 "b": 261830439,
-                "area": 121.62,
+                "area": 49.26,
                 "aType": "but",
                 "bType": "but"
               },
               {
-                "a": 678916565,
+                "a": 437497093,
+                "b": 371922646,
+                "area": 25.39,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 371922646,
+                "b": 261830439,
+                "area": 63.72,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 482739962,
+                "b": 261830439,
+                "area": 24.29,
+                "aType": "boss",
+                "bType": "but"
+              },
+              {
+                "a": 762088968,
+                "b": 931862929,
+                "area": 4.2,
+                "aType": "boss",
+                "bType": "but"
+              },
+              {
+                "a": 294423463,
                 "b": 153254022,
-                "area": 31.98,
+                "area": 50.49,
                 "aType": "but",
                 "bType": "bee"
               },
               {
                 "a": 272994902,
                 "b": 946218514,
-                "area": 11.6,
+                "area": 7.38,
                 "aType": "but",
                 "bType": "but"
-              },
-              {
-                "a": 272994902,
-                "b": 601246102,
-                "area": 72.02,
-                "aType": "but",
-                "bType": "bee"
               },
               {
                 "a": 946218514,
                 "b": 601246102,
-                "area": 35.95,
+                "area": 25.38,
                 "aType": "but",
                 "bType": "bee"
               },
               {
-                "a": 202787811,
-                "b": 989024619,
-                "area": 110.8,
+                "a": 993198064,
+                "b": 601246102,
+                "area": 48.25,
                 "aType": "but",
-                "bType": "but"
+                "bType": "bee"
+              },
+              {
+                "a": 993198064,
+                "b": 853345139,
+                "area": 4.89,
+                "aType": "but",
+                "bType": "bee"
               }
             ]
           }
@@ -285,90 +230,90 @@
           },
           "active": {
             "visibleCount": 28,
-            "overlapPairs": 12,
-            "largestOverlapArea": 82.61,
+            "overlapPairs": 13,
+            "largestOverlapArea": 79.62,
             "overlaps": [
               {
                 "a": 334882525,
                 "b": 437497093,
-                "area": 32.23,
+                "area": 34.23,
                 "aType": "but",
                 "bType": "but"
               },
               {
-                "a": 482739962,
-                "b": 945437629,
-                "area": 57.77,
-                "aType": "boss",
-                "bType": "bee"
-              },
-              {
-                "a": 845901754,
-                "b": 945437629,
-                "area": 81.72,
-                "aType": "boss",
-                "bType": "bee"
+                "a": 334882525,
+                "b": 407282108,
+                "area": 12.39,
+                "aType": "but",
+                "bType": "but"
               },
               {
                 "a": 762088968,
-                "b": 45274092,
-                "area": 24.93,
+                "b": 945437629,
+                "area": 27.76,
                 "aType": "boss",
-                "bType": "but"
+                "bType": "bee"
               },
               {
                 "a": 468251597,
-                "b": 45274092,
-                "area": 68.9,
+                "b": 945437629,
+                "area": 43.57,
                 "aType": "boss",
-                "bType": "but"
+                "bType": "bee"
               },
               {
                 "a": 678916565,
-                "b": 77479460,
-                "area": 17.22,
+                "b": 45274092,
+                "area": 79.62,
                 "aType": "but",
                 "bType": "but"
               },
               {
-                "a": 294423463,
-                "b": 77479460,
-                "area": 1.77,
+                "a": 272994902,
+                "b": 25548820,
+                "area": 26.44,
                 "aType": "but",
-                "bType": "but"
+                "bType": "bee"
+              },
+              {
+                "a": 946218514,
+                "b": 25548820,
+                "area": 56.11,
+                "aType": "but",
+                "bType": "bee"
+              },
+              {
+                "a": 413852713,
+                "b": 945437629,
+                "area": 59.65,
+                "aType": "but",
+                "bType": "bee"
               },
               {
                 "a": 202787811,
                 "b": 45274092,
-                "area": 18.73,
+                "area": 28.36,
                 "aType": "but",
                 "bType": "but"
               },
               {
                 "a": 989024619,
                 "b": 45274092,
-                "area": 14.14,
+                "area": 22.7,
                 "aType": "but",
                 "bType": "but"
               },
               {
-                "a": 575657146,
-                "b": 25548820,
-                "area": 53.44,
-                "aType": "bee",
-                "bType": "bee"
+                "a": 989024619,
+                "b": 77479460,
+                "area": 4.49,
+                "aType": "but",
+                "bType": "but"
               },
               {
                 "a": 43393095,
                 "b": 601246102,
-                "area": 82.61,
-                "aType": "bee",
-                "bType": "bee"
-              },
-              {
-                "a": 43393095,
-                "b": 153254022,
-                "area": 2.13,
+                "area": 33.05,
                 "aType": "bee",
                 "bType": "bee"
               }
@@ -387,49 +332,63 @@
             "compressedVertical": []
           },
           "active": {
-            "visibleCount": 32,
-            "overlapPairs": 6,
-            "largestOverlapArea": 153.69,
+            "visibleCount": 31,
+            "overlapPairs": 8,
+            "largestOverlapArea": 111.97,
             "overlaps": [
+              {
+                "a": 334882525,
+                "b": 720483150,
+                "area": 14.42,
+                "aType": "but",
+                "bType": "bee"
+              },
               {
                 "a": 407282108,
                 "b": 261830439,
-                "area": 50.62,
+                "area": 46.66,
                 "aType": "but",
                 "bType": "but"
               },
               {
                 "a": 575657146,
                 "b": 43393095,
-                "area": 153.69,
+                "area": 111.97,
+                "aType": "bee",
+                "bType": "bee"
+              },
+              {
+                "a": 601246102,
+                "b": 25548820,
+                "area": 4.76,
                 "aType": "bee",
                 "bType": "bee"
               },
               {
                 "a": 601246102,
                 "b": 835411372,
-                "area": 123.07,
+                "area": 101.06,
                 "aType": "bee",
                 "bType": "bee"
               },
               {
                 "a": 853345139,
                 "b": 25548820,
-                "area": 0.72,
+                "area": 2.11,
                 "aType": "bee",
                 "bType": "bee"
               },
               {
-                "a": 153254022,
+                "a": 853345139,
                 "b": 835411372,
-                "area": 2.05,
+                "area": 56.85,
                 "aType": "bee",
                 "bType": "bee"
               },
               {
                 "a": 25548820,
                 "b": 835411372,
-                "area": 38.34,
+                "area": 13.69,
                 "aType": "bee",
                 "bType": "bee"
               }
@@ -456,8 +415,8 @@
         "compressedVertical": []
       },
       "activeWindow": {
-        "worstOverlapPairs": 9,
-        "worstOverlapArea": 72.26
+        "worstOverlapPairs": 8,
+        "worstOverlapArea": 76.18
       },
       "samples": [
         {
@@ -492,19 +451,19 @@
           "active": {
             "visibleCount": 14,
             "overlapPairs": 2,
-            "largestOverlapArea": 14.76,
+            "largestOverlapArea": 12,
             "overlaps": [
               {
                 "a": 468251597,
                 "b": 678916565,
-                "area": 14.76,
+                "area": 11.36,
                 "aType": "boss",
                 "bType": "but"
               },
               {
                 "a": 946218514,
                 "b": 993198064,
-                "area": 11.56,
+                "area": 12,
                 "aType": "but",
                 "bType": "but"
               }
@@ -524,69 +483,48 @@
           },
           "active": {
             "visibleCount": 21,
-            "overlapPairs": 9,
-            "largestOverlapArea": 57.98,
+            "overlapPairs": 6,
+            "largestOverlapArea": 55.06,
             "overlaps": [
               {
                 "a": 334882525,
                 "b": 437497093,
-                "area": 1.28,
+                "area": 0.67,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 334882525,
+                "b": 371922646,
+                "area": 7,
                 "aType": "but",
                 "bType": "but"
               },
               {
                 "a": 334882525,
                 "b": 261830439,
-                "area": 25.37,
+                "area": 7.17,
                 "aType": "but",
                 "bType": "but"
               },
               {
                 "a": 371922646,
                 "b": 261830439,
-                "area": 40.06,
+                "area": 22.69,
                 "aType": "but",
                 "bType": "but"
               },
               {
-                "a": 845901754,
-                "b": 931862929,
-                "area": 1.19,
-                "aType": "boss",
-                "bType": "but"
-              },
-              {
-                "a": 294423463,
-                "b": 153254022,
-                "area": 53.97,
-                "aType": "but",
-                "bType": "bee"
-              },
-              {
-                "a": 946218514,
-                "b": 601246102,
-                "area": 5.68,
-                "aType": "but",
-                "bType": "bee"
-              },
-              {
                 "a": 993198064,
                 "b": 601246102,
-                "area": 6.78,
-                "aType": "but",
-                "bType": "bee"
-              },
-              {
-                "a": 993198064,
-                "b": 853345139,
-                "area": 0.22,
+                "area": 25.53,
                 "aType": "but",
                 "bType": "bee"
               },
               {
                 "a": 202787811,
                 "b": 989024619,
-                "area": 57.98,
+                "area": 55.06,
                 "aType": "but",
                 "bType": "but"
               }
@@ -607,61 +545,61 @@
           "active": {
             "visibleCount": 28,
             "overlapPairs": 8,
-            "largestOverlapArea": 46.61,
+            "largestOverlapArea": 51.22,
             "overlaps": [
               {
-                "a": 762088968,
+                "a": 468251597,
                 "b": 945437629,
-                "area": 34.52,
+                "area": 32.25,
                 "aType": "boss",
                 "bType": "bee"
               },
               {
                 "a": 678916565,
                 "b": 45274092,
-                "area": 46.61,
+                "area": 51.22,
                 "aType": "but",
                 "bType": "but"
               },
               {
-                "a": 272994902,
+                "a": 946218514,
                 "b": 25548820,
-                "area": 23.85,
+                "area": 36.62,
                 "aType": "but",
                 "bType": "bee"
               },
               {
                 "a": 413852713,
                 "b": 945437629,
-                "area": 33.54,
+                "area": 31.07,
                 "aType": "but",
                 "bType": "bee"
               },
               {
                 "a": 202787811,
                 "b": 45274092,
-                "area": 6.93,
+                "area": 5.49,
                 "aType": "but",
                 "bType": "but"
               },
               {
                 "a": 989024619,
                 "b": 45274092,
-                "area": 1.3,
+                "area": 1.2,
                 "aType": "but",
                 "bType": "but"
               },
               {
                 "a": 43393095,
                 "b": 601246102,
-                "area": 20.21,
+                "area": 21.28,
                 "aType": "bee",
                 "bType": "bee"
               },
               {
                 "a": 43393095,
                 "b": 153254022,
-                "area": 33.35,
+                "area": 38.32,
                 "aType": "bee",
                 "bType": "bee"
               }
@@ -681,34 +619,41 @@
           },
           "active": {
             "visibleCount": 31,
-            "overlapPairs": 4,
-            "largestOverlapArea": 72.26,
+            "overlapPairs": 5,
+            "largestOverlapArea": 76.18,
             "overlaps": [
               {
                 "a": 575657146,
                 "b": 43393095,
-                "area": 72.26,
+                "area": 76.18,
                 "aType": "bee",
                 "bType": "bee"
               },
               {
                 "a": 601246102,
                 "b": 835411372,
-                "area": 68.06,
+                "area": 20.58,
                 "aType": "bee",
                 "bType": "bee"
               },
               {
                 "a": 853345139,
                 "b": 25548820,
-                "area": 0.49,
+                "area": 1.25,
+                "aType": "bee",
+                "bType": "bee"
+              },
+              {
+                "a": 853345139,
+                "b": 835411372,
+                "area": 5.62,
                 "aType": "bee",
                 "bType": "bee"
               },
               {
                 "a": 25548820,
                 "b": 835411372,
-                "area": 9.25,
+                "area": 6.58,
                 "aType": "bee",
                 "bType": "bee"
               }
@@ -736,7 +681,7 @@
       },
       "activeWindow": {
         "worstOverlapPairs": 4,
-        "worstOverlapArea": 79.47
+        "worstOverlapArea": 89.09
       },
       "samples": [
         {
@@ -771,33 +716,33 @@
           "active": {
             "visibleCount": 39,
             "overlapPairs": 4,
-            "largestOverlapArea": 79.47,
+            "largestOverlapArea": 89.09,
             "overlaps": [
               {
                 "a": 756507061,
                 "b": 69412359,
-                "area": 2.61,
+                "area": 2.64,
                 "aType": "bee",
                 "bType": "bee"
               },
               {
                 "a": 756507061,
                 "b": 572141529,
-                "area": 49.96,
+                "area": 35.66,
                 "aType": "bee",
                 "bType": "bee"
               },
               {
                 "a": 69412359,
                 "b": 572141529,
-                "area": 73.1,
+                "area": 89.09,
                 "aType": "bee",
                 "bType": "bee"
               },
               {
                 "a": 92381457,
                 "b": 884425433,
-                "area": 79.47,
+                "area": 78.67,
                 "aType": "bee",
                 "bType": "bee"
               }
@@ -818,12 +763,12 @@
           "active": {
             "visibleCount": 37,
             "overlapPairs": 1,
-            "largestOverlapArea": 9.37,
+            "largestOverlapArea": 8.72,
             "overlaps": [
               {
                 "a": 425192733,
                 "b": 12039280,
-                "area": 9.37,
+                "area": 8.72,
                 "aType": "boss",
                 "bType": "but"
               }
@@ -844,19 +789,19 @@
           "active": {
             "visibleCount": 39,
             "overlapPairs": 2,
-            "largestOverlapArea": 56.46,
+            "largestOverlapArea": 70.25,
             "overlaps": [
               {
                 "a": 414824467,
                 "b": 117434602,
-                "area": 56.46,
+                "area": 47.35,
                 "aType": "boss",
                 "bType": "but"
               },
               {
                 "a": 425192733,
                 "b": 117434602,
-                "area": 50.38,
+                "area": 70.25,
                 "aType": "boss",
                 "bType": "but"
               }
@@ -901,8 +846,8 @@
         "compressedVertical": []
       },
       "activeWindow": {
-        "worstOverlapPairs": 3,
-        "worstOverlapArea": 40.98
+        "worstOverlapPairs": 2,
+        "worstOverlapArea": 50.3
       },
       "samples": [
         {
@@ -936,27 +881,20 @@
           },
           "active": {
             "visibleCount": 39,
-            "overlapPairs": 3,
-            "largestOverlapArea": 40.98,
+            "overlapPairs": 2,
+            "largestOverlapArea": 50.3,
             "overlaps": [
-              {
-                "a": 756507061,
-                "b": 572141529,
-                "area": 5.98,
-                "aType": "bee",
-                "bType": "bee"
-              },
               {
                 "a": 69412359,
                 "b": 572141529,
-                "area": 40.98,
+                "area": 50.3,
                 "aType": "bee",
                 "bType": "bee"
               },
               {
                 "a": 92381457,
                 "b": 884425433,
-                "area": 15.26,
+                "area": 15.15,
                 "aType": "bee",
                 "bType": "bee"
               }
@@ -977,12 +915,12 @@
           "active": {
             "visibleCount": 37,
             "overlapPairs": 1,
-            "largestOverlapArea": 3.93,
+            "largestOverlapArea": 3.1,
             "overlaps": [
               {
                 "a": 425192733,
                 "b": 12039280,
-                "area": 3.93,
+                "area": 3.1,
                 "aType": "boss",
                 "bType": "but"
               }
@@ -1003,19 +941,19 @@
           "active": {
             "visibleCount": 39,
             "overlapPairs": 2,
-            "largestOverlapArea": 23.5,
+            "largestOverlapArea": 17.05,
             "overlaps": [
               {
                 "a": 414824467,
                 "b": 117434602,
-                "area": 23.5,
+                "area": 17.05,
                 "aType": "boss",
                 "bType": "but"
               },
               {
                 "a": 425192733,
                 "b": 117434602,
-                "area": 1.11,
+                "area": 13.48,
                 "aType": "boss",
                 "bType": "but"
               }
@@ -1060,8 +998,8 @@
         "compressedVertical": []
       },
       "activeWindow": {
-        "worstOverlapPairs": 5,
-        "worstOverlapArea": 207.45
+        "worstOverlapPairs": 2,
+        "worstOverlapArea": 125.77
       },
       "samples": [
         {
@@ -1094,42 +1032,21 @@
             "compressedVertical": []
           },
           "active": {
-            "visibleCount": 39,
-            "overlapPairs": 5,
-            "largestOverlapArea": 117.1,
+            "visibleCount": 40,
+            "overlapPairs": 2,
+            "largestOverlapArea": 115.93,
             "overlaps": [
-              {
-                "a": 677648034,
-                "b": 283544293,
-                "area": 23.2,
-                "aType": "but",
-                "bType": "bee"
-              },
-              {
-                "a": 677648034,
-                "b": 663070336,
-                "area": 66.27,
-                "aType": "but",
-                "bType": "bee"
-              },
-              {
-                "a": 677648034,
-                "b": 258980972,
-                "area": 27.15,
-                "aType": "but",
-                "bType": "bee"
-              },
               {
                 "a": 649219642,
                 "b": 486911426,
-                "area": 117.1,
+                "area": 115.93,
                 "aType": "bee",
                 "bType": "bee"
               },
               {
                 "a": 225602474,
                 "b": 486911426,
-                "area": 22.13,
+                "area": 18.95,
                 "aType": "bee",
                 "bType": "bee"
               }
@@ -1148,7 +1065,7 @@
             "compressedVertical": []
           },
           "active": {
-            "visibleCount": 39,
+            "visibleCount": 40,
             "overlapPairs": 0,
             "largestOverlapArea": 0,
             "overlaps": []
@@ -1166,28 +1083,21 @@
             "compressedVertical": []
           },
           "active": {
-            "visibleCount": 37,
-            "overlapPairs": 3,
-            "largestOverlapArea": 207.45,
+            "visibleCount": 39,
+            "overlapPairs": 2,
+            "largestOverlapArea": 125.77,
             "overlaps": [
               {
                 "a": 880340206,
-                "b": 180875244,
-                "area": 31.01,
+                "b": 94502629,
+                "area": 125.77,
                 "aType": "but",
-                "bType": "but"
+                "bType": "bee"
               },
               {
-                "a": 817767118,
-                "b": 180875244,
-                "area": 17.3,
-                "aType": "boss",
-                "bType": "but"
-              },
-              {
-                "a": 524519122,
-                "b": 996218509,
-                "area": 207.45,
+                "a": 880340206,
+                "b": 258980972,
+                "area": 9.65,
                 "aType": "but",
                 "bType": "bee"
               }
@@ -1207,9 +1117,24 @@
           },
           "active": {
             "visibleCount": 39,
-            "overlapPairs": 0,
-            "largestOverlapArea": 0,
-            "overlaps": []
+            "overlapPairs": 2,
+            "largestOverlapArea": 25.6,
+            "overlaps": [
+              {
+                "a": 718241739,
+                "b": 289049444,
+                "area": 25.6,
+                "aType": "but",
+                "bType": "but"
+              },
+              {
+                "a": 289049444,
+                "b": 82720687,
+                "area": 4.89,
+                "aType": "but",
+                "bType": "bee"
+              }
+            ]
           }
         }
       ]
@@ -1232,8 +1157,8 @@
         "compressedVertical": []
       },
       "activeWindow": {
-        "worstOverlapPairs": 4,
-        "worstOverlapArea": 139.75
+        "worstOverlapPairs": 2,
+        "worstOverlapArea": 76.98
       },
       "samples": [
         {
@@ -1266,35 +1191,21 @@
             "compressedVertical": []
           },
           "active": {
-            "visibleCount": 39,
-            "overlapPairs": 4,
-            "largestOverlapArea": 77.05,
+            "visibleCount": 40,
+            "overlapPairs": 2,
+            "largestOverlapArea": 76.98,
             "overlaps": [
-              {
-                "a": 677648034,
-                "b": 663070336,
-                "area": 31.78,
-                "aType": "but",
-                "bType": "bee"
-              },
-              {
-                "a": 677648034,
-                "b": 258980972,
-                "area": 15.23,
-                "aType": "but",
-                "bType": "bee"
-              },
               {
                 "a": 649219642,
                 "b": 486911426,
-                "area": 77.05,
+                "area": 76.98,
                 "aType": "bee",
                 "bType": "bee"
               },
               {
                 "a": 225602474,
                 "b": 486911426,
-                "area": 14.9,
+                "area": 12.45,
                 "aType": "bee",
                 "bType": "bee"
               }
@@ -1313,7 +1224,7 @@
             "compressedVertical": []
           },
           "active": {
-            "visibleCount": 39,
+            "visibleCount": 40,
             "overlapPairs": 0,
             "largestOverlapArea": 0,
             "overlaps": []
@@ -1331,21 +1242,14 @@
             "compressedVertical": []
           },
           "active": {
-            "visibleCount": 37,
-            "overlapPairs": 2,
-            "largestOverlapArea": 139.75,
+            "visibleCount": 39,
+            "overlapPairs": 1,
+            "largestOverlapArea": 69.82,
             "overlaps": [
               {
                 "a": 880340206,
-                "b": 180875244,
-                "area": 11.8,
-                "aType": "but",
-                "bType": "but"
-              },
-              {
-                "a": 524519122,
-                "b": 996218509,
-                "area": 139.75,
+                "b": 94502629,
+                "area": 69.82,
                 "aType": "but",
                 "bType": "bee"
               }
@@ -1365,9 +1269,17 @@
           },
           "active": {
             "visibleCount": 39,
-            "overlapPairs": 0,
-            "largestOverlapArea": 0,
-            "overlaps": []
+            "overlapPairs": 1,
+            "largestOverlapArea": 1.48,
+            "overlaps": [
+              {
+                "a": 289049444,
+                "b": 82720687,
+                "area": 1.48,
+                "aType": "but",
+                "bType": "bee"
+              }
+            ]
           }
         }
       ]

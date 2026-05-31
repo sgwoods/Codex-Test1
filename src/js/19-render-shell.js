@@ -195,9 +195,11 @@ function syncCabinetShellLayout({
  railW,
  railH,
  waitScoreOverlay,
- framedOverlayOpen
+ framedOverlayOpen,
+ arcadeFullscreenActive=0
 }){
  applyStageChromeTheme();
+ if(document.body)document.body.classList.toggle('arcadeFullscreenActive',!!arcadeFullscreenActive);
  if(hud){
   const hudLeft=ox+DISPLAY_SHELL.hudInsetX;
   const hudTop=oy+DISPLAY_SHELL.hudInsetTop;
@@ -228,7 +230,7 @@ function syncCabinetShellLayout({
   movieOverlayPanel.style.height=`${viewH}px`;
  }
  if(cabinetShell){
-  cabinetShell.style.display='block';
+  cabinetShell.style.display=arcadeFullscreenActive?'none':'block';
   cabinetShell.style.left=`${shellX}px`;
   cabinetShell.style.top=`${shellY}px`;
   cabinetShell.style.width=`${shellW}px`;
@@ -239,7 +241,7 @@ function syncCabinetShellLayout({
   cabinetShell.style.setProperty('--shell-bottom',`${shellPadB}px`);
  }
  if(cabinetRightFrame){
-  if(railW>0){
+  if(!arcadeFullscreenActive&&railW>0){
    cabinetRightFrame.style.display='block';
    cabinetRightFrame.style.left=`${railLeft}px`;
    cabinetRightFrame.style.top=`${railTop}px`;
@@ -248,7 +250,7 @@ function syncCabinetShellLayout({
   }else cabinetRightFrame.style.display='none';
  }
  if(cabinetLeftFrame){
-  if(railW>0){
+  if(!arcadeFullscreenActive&&railW>0){
    const leftRail=Math.floor(shellX+Math.max(0,(shellPadL-railW)/2));
    cabinetLeftFrame.style.display='block';
    cabinetLeftFrame.style.left=`${leftRail}px`;

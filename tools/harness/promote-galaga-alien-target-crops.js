@@ -93,6 +93,51 @@ function motionSpec(id, roleKey, poseKey, timeSeconds, frameCrop, note){
   };
 }
 
+function targetAuthorityForCrop(crop){
+  const reviewStatus = String(crop.reviewStatus || '');
+  const roleKey = String(crop.roleKey || '');
+  if(crop.compositeTarget){
+    return {
+      authorityStatus: 'trusted-derived-composite',
+      authorityScore10: 7.2,
+      scoringUse: 'May anchor runtime scoring for the exact composite state while separate source-frame evidence is still being promoted.'
+    };
+  }
+  if(crop.videoDerivedCleanCrop || crop.sourceKind === 'motion-reference-video'){
+    return {
+      authorityStatus: 'trusted-cleaned-motion-reference',
+      authorityScore10: 7.5,
+      scoringUse: 'Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth.'
+    };
+  }
+  if(reviewStatus === 'accepted-source-sheet-crop'){
+    return {
+      authorityStatus: 'accepted-static-sheet-support',
+      authorityScore10: 5.6,
+      scoringUse: 'Useful supporting target evidence, but should be cross-checked against gameplay or motion windows before major tuning.'
+    };
+  }
+  if(reviewStatus === 'provisional-source-sheet-cell' && roleKey === 'challenge-specialty-aliens'){
+    return {
+      authorityStatus: 'planning-only-challenge-specialty-cell',
+      authorityScore10: 3.2,
+      scoringUse: 'Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it.'
+    };
+  }
+  if(reviewStatus === 'provisional-source-sheet-cell'){
+    return {
+      authorityStatus: 'provisional-pose-cell',
+      authorityScore10: 4.4,
+      scoringUse: 'Pose-planning evidence only; useful for candidate ranking but not strong enough for a release-facing score claim.'
+    };
+  }
+  return {
+    authorityStatus: 'unknown-authority',
+    authorityScore10: 2,
+    scoringUse: 'Authority not established; exclude from release-facing scoring claims.'
+  };
+}
+
 function fail(message, payload){
   console.error(message);
   if(payload) console.error(JSON.stringify(payload, null, 2));
@@ -364,7 +409,7 @@ function promoteCrop(spec, source, sourceDimensions, regions){
   ]);
   const metrics = imageMetrics(outFile);
   if(metrics.litPixels < 3) fail('Target crop has too few visible pixels.', { spec, crop, metrics });
-  return Object.assign({}, spec, {
+  const promoted = Object.assign({}, spec, {
     label: `${roleLabel(spec.roleKey)} ${spec.poseKey}`,
     sourceImage: rel(source),
     crop: Object.assign({ sourceWidth: sourceDimensions.width, sourceHeight: sourceDimensions.height }, crop),
@@ -373,6 +418,7 @@ function promoteCrop(spec, source, sourceDimensions, regions){
     pixelScale: 1,
     metrics
   });
+  return Object.assign(promoted, targetAuthorityForCrop(promoted));
 }
 
 function promoteMotionCrop(spec){
@@ -389,7 +435,7 @@ function promoteMotionCrop(spec){
   encodeRawPng(cleaned.raw, cleaned.width, cleaned.height, outFile);
   const metrics = imageMetrics(outFile);
   if(metrics.litPixels < 3) fail('Motion-reference target crop has too few visible pixels.', { spec, crop, metrics });
-  return Object.assign({}, spec, {
+  const promoted = Object.assign({}, spec, {
     label: `${roleLabel(spec.roleKey)} ${spec.poseKey}`,
     sourceImage: rel(MOTION_REFERENCE_VIDEO),
     sourceVideo: rel(MOTION_REFERENCE_VIDEO),
@@ -402,6 +448,7 @@ function promoteMotionCrop(spec){
     pixelScale: 1,
     metrics
   });
+  return Object.assign(promoted, targetAuthorityForCrop(promoted));
 }
 
 function promoteDualFighterComposite(targetCrops){
@@ -426,7 +473,7 @@ function promoteDualFighterComposite(targetCrops){
     outFile
   ]);
   const metrics = imageMetrics(outFile);
-  return {
+  const promoted = {
     id: 'player-fighter-dual-front',
     roleKey: 'player-fighter',
     poseKey: 'dual-fighter-front',
@@ -448,6 +495,7 @@ function promoteDualFighterComposite(targetCrops){
     note: 'Derived dual-fighter target composed from two trusted cleaned player-fighter crops. This prevents the dual runtime state from being scored against a single fighter while preserving the accepted target proportions.',
     metrics
   };
+  return Object.assign(promoted, targetAuthorityForCrop(promoted));
 }
 
 function roleLabel(roleKey){
@@ -476,8 +524,22 @@ function roleSets(targetCrops, manifest){
     map.set(crop.roleKey, current);
   }
   return Array.from(map.values()).map(role => Object.assign(role, {
+    averageAuthorityScore10: rounded(average(role.targetCrops
+      .map(id => targetCrops.find(crop => crop.id === id)?.authorityScore10)
+      .filter(value => Number.isFinite(+value))), 1),
+    trustedScoringTargetCount: role.targetCrops
+      .map(id => targetCrops.find(crop => crop.id === id))
+      .filter(crop => (crop?.authorityScore10 || 0) >= 6.5).length,
+    provisionalPlanningCount: role.targetCrops
+      .map(id => targetCrops.find(crop => crop.id === id))
+      .filter(crop => (crop?.authorityScore10 || 0) < 5).length,
     coverageRead: `${role.promotedPoseCount} promoted crop(s); required pose contract: ${role.requiredPoses.join(', ') || 'none recorded'}`
   })).sort((a, b) => a.roleKey.localeCompare(b.roleKey));
+}
+
+function average(values){
+  const finite = values.filter(value => Number.isFinite(+value)).map(Number);
+  return finite.length ? finite.reduce((sum, value) => sum + value, 0) / finite.length : null;
 }
 
 function markdownReport(artifact){
@@ -503,10 +565,10 @@ function markdownReport(artifact){
   for(const role of artifact.roleSets){
     lines.push(`| \`${role.roleKey}\` | ${role.promotedPoses.map(pose => `\`${pose}\``).join(', ')} | ${role.coverageRead} |`);
   }
-  lines.push('', '## Target Crops', '', '| Role | Pose | Crop | Source | Metrics | Note |', '| --- | --- | --- | --- | --- | --- |');
+  lines.push('', '## Target Crops', '', '| Role | Pose | Crop | Source | Authority | Metrics | Note |', '| --- | --- | --- | --- | --- | --- | --- |');
   for(const crop of artifact.targetCrops){
     const cell = crop.sourceCell ? `${crop.sourceRegion} r${crop.sourceCell.row} c${crop.sourceCell.column}` : crop.sourceRegion;
-    lines.push(`| \`${crop.roleKey}\` | \`${crop.poseKey}\` | ![](${crop.targetCrop}) | ${cell}<br>\`${crop.crop.x},${crop.crop.y} ${crop.crop.width}x${crop.crop.height}\` | ${crop.metrics.litPixels} lit px; channels ${(crop.metrics.tokenChannels || []).join(', ') || 'none'} | ${crop.note || ''} |`);
+    lines.push(`| \`${crop.roleKey}\` | \`${crop.poseKey}\` | ![](${crop.targetCrop}) | ${cell}<br>\`${crop.crop.x},${crop.crop.y} ${crop.crop.width}x${crop.crop.height}\` | ${crop.authorityScore10}/10<br>\`${crop.authorityStatus}\`<br>${crop.scoringUse || ''} | ${crop.metrics.litPixels} lit px; channels ${(crop.metrics.tokenChannels || []).join(', ') || 'none'} | ${crop.note || ''} |`);
   }
   lines.push('', `Next best step: ${artifact.nextBestStep}`, '');
   return `${lines.join('\n')}\n`;
@@ -528,6 +590,11 @@ function main(){
   const roleSetRows = roleSets(targetCrops, manifest);
   const trustedMotionCount = targetCrops.filter(crop => crop.videoDerivedCleanCrop).length;
   const provisionalSheetCount = targetCrops.filter(crop => crop.reviewStatus === 'provisional-source-sheet-cell').length;
+  const trustedScoringTargetCount = targetCrops.filter(crop => (crop.authorityScore10 || 0) >= 6.5).length;
+  const provisionalPlanningTargetCount = targetCrops.filter(crop => (crop.authorityScore10 || 0) < 5).length;
+  const challengeSpecialtyAuthorityScore10 = rounded(average(targetCrops
+    .filter(crop => crop.roleKey === 'challenge-specialty-aliens')
+    .map(crop => crop.authorityScore10)), 1);
   const artifact = {
     schemaVersion: 1,
     artifactType: 'galaga-alien-target-crops',
@@ -535,7 +602,7 @@ function main(){
     commit: git(['rev-parse', '--short', 'HEAD'], 'unknown'),
     branch: git(['branch', '--show-current'], 'unknown'),
     dirty: !!git(['status', '--porcelain'], ''),
-    status: 'trusted-motion-overrides-plus-provisional-sheet-crops',
+    status: 'trusted-motion-authority-tiered-target-crops',
     sourceManifest: rel(MANIFEST),
     sourceImage: manifest.sourceImage,
     sourceDimensions,
@@ -548,17 +615,22 @@ function main(){
       trustedMotionReferenceCount: trustedMotionCount,
       provisionalSourceSheetCount: provisionalSheetCount,
       compositeTargetCount: targetCrops.filter(crop => crop.compositeTarget).length,
+      trustedScoringTargetCount,
+      provisionalPlanningTargetCount,
+      averageAuthorityScore10: rounded(average(targetCrops.map(crop => crop.authorityScore10)), 1),
+      challengeSpecialtyAuthorityScore10,
       scoringStatus: 'trusted-core-formation-targets-ready-runtime-comparison-pending'
     },
     measurementLimits: [
       'Trusted motion-reference crops are cleaned from a compressed segmented reference video; they are better human-readable targets than polluted sheet cells, but not ROM-perfect final truth.',
       'Remaining source-sheet cell crops are useful provisional pose evidence and should not be treated as final canonical target pixels without human review.',
+      'Challenge-only specialty alien sheet cells are explicitly planning evidence only; scoring and docs must not present them as high-authority target truth.',
       'The crops improve role, pose, projectile, explosion, and tractor-beam grounding but do not yet score temporal animation cadence.',
       'Dual-fighter, carried-fighter, boss damage, and capture/rescue transition targets still need composite or temporal promotion.'
     ],
     roleSets: roleSetRows,
     targetCrops,
-    nextBestStep: 'Regenerate Aurora live runtime comparisons against the corrected Boss, Bee, and Butterfly targets, then promote clean player-fighter and temporal pulse/cadence targets before tuning more runtime sprites.'
+    nextBestStep: 'Replace challenge-only specialty alien provisional cells with clean target motion/gameplay windows, then regenerate Aurora live runtime comparisons with authority-adjusted scoring.'
   };
   writeJson(OUT, artifact);
   writeText(MARKDOWN, markdownReport(artifact));

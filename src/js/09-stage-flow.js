@@ -179,8 +179,14 @@ function queueStageTransition(mode='normal'){
   : null;
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;
  S.transitionMode=mode;
+ const nextChallengeWindow=usesReferenceTimingModel()&&typeof currentGamePackReferenceTimingField==='function'
+  ? currentGamePackReferenceTimingField('challengeResults','nextChallengeWindow',S.stage,3.05)
+  : (challengeResultsTiming?.nextChallengeWindow||3.05);
+ const nextStageWindow=usesReferenceTimingModel()&&typeof currentGamePackReferenceTimingField==='function'
+  ? currentGamePackReferenceTimingField('challengeResults','nextStageWindow',S.stage,2.5)
+  : (challengeResultsTiming?.nextStageWindow||2.5);
  S.nextStageT=mode==='challengeResult'
-  ? (nextIsChallenge?(challengeResultsTiming?.nextChallengeWindow||3.05):(challengeResultsTiming?.nextStageWindow||2.5))
+  ? (nextIsChallenge?nextChallengeWindow:nextStageWindow)
   : (nextIsChallenge?(challengeEntryTiming?.transitionWindow||3.75):3.2);
  S.bannerTxt=nextStagePresentation.transitionTitle;
  S.bannerSub=nextStagePresentation.transitionSub;

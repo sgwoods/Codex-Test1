@@ -16,13 +16,17 @@ async function sample(mode){
     skipStart: true
   }, async ({ page }) => {
     await page.evaluate(spriteRenderMode => {
-      window.__galagaHarness__.start({
+      window.__galagaHarness__.setTest({
         stage: 1,
         ships: 3,
         challenge: false,
         seed: 514223,
-        autoVideo: false,
+        graphicsTheme: 'classic-arcade',
         spriteRenderMode
+      });
+      window.__galagaHarness__.start({
+        seed: 514223,
+        autoVideo: false
       });
     }, mode);
     return waitForHarness(page, () => {

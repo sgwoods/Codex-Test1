@@ -196,6 +196,20 @@ function currentGamePackReferenceTiming(key=''){
  return timings[String(key||'').trim()]||null;
 }
 
+function currentGamePackReferenceTimingField(key,field,stage,fallback=null){
+ const timing=currentGamePackReferenceTiming(key)||{};
+ const challengeNumber=typeof challengeStageNumberForInternalStage==='function'
+  ? challengeStageNumberForInternalStage(Number.isFinite(+stage)?+stage:(typeof S!=='undefined'?S.stage:1))
+  : 0;
+ const byChallenge=Array.isArray(timing[`${field}ByChallenge`])?timing[`${field}ByChallenge`]:null;
+ if(byChallenge&&challengeNumber>0&&Number.isFinite(+byChallenge[challengeNumber-1]))return +byChallenge[challengeNumber-1];
+ const nested=timing.byChallenge&&challengeNumber>0?timing.byChallenge[challengeNumber]:null;
+ if(nested&&Number.isFinite(+nested[field]))return +nested[field];
+ const value=timing[field];
+ if(Number.isFinite(+value))return +value;
+ return fallback;
+}
+
 function currentGamePackFormationLayout(stage){
  const layouts=currentGamePack().formationLayouts;
  let layout=layouts[0];

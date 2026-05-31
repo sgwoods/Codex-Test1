@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "aurora-runtime-vs-galaga-target-crops",
-  "generatedAt": "2026-05-25T18:05:47.885Z",
-  "commit": "abc27c36c",
-  "branch": "codex/macbook-challenge-stage-conformance-cycle",
+  "generatedAt": "2026-05-30T23:27:53.558Z",
+  "commit": "2d144d5c1",
+  "branch": "codex/macbook-fullscreen-timing-alignment-wip",
   "dirty": true,
   "gameKey": "aurora-galactica",
   "sources": {
@@ -15,22 +15,25 @@
     "sampleCount": 8,
     "targetCropCount": 33,
     "roleSetCount": 7,
-    "averageScore10": 6.18,
+    "averageScore10": 5.97,
+    "authorityAdjustedAverageScore10": 4.04,
+    "lowAuthorityComparisonCount": 2,
     "weakestSpriteKey": "challenge-mosquito",
-    "weakestScore10": 4.04,
+    "weakestScore10": 3.68,
     "weakestBestTarget": "challenge-yellow-family-front",
     "strongestSpriteKey": "but-line",
-    "strongestScore10": 8.16,
+    "strongestScore10": 7.88,
     "temporalSequenceSampleCount": 3,
-    "averageTemporalSequenceScore10": 5.65,
-    "weakestTemporalSpriteKey": "bee-line",
-    "weakestTemporalSequenceScore10": 5.35,
+    "averageTemporalSequenceScore10": 5.7,
+    "weakestTemporalSpriteKey": "but-line",
+    "weakestTemporalSequenceScore10": 5.33,
     "scoringMode": "first-pass-normalized-image-grid-comparison"
   },
   "measurementLimits": [
     "This is a first-pass static-image comparator using already-captured Aurora runtime crop PNGs and promoted source-sheet target crop PNGs.",
     "Images are normalized to a shared grid, so this is useful for role/pose target triage but not yet a final pixel-perfect conformance score.",
     "Static sprite comparisons do not by themselves score gameplay timing, dive rotation, formation context, capture/rescue transitions, or target-crop authority disputes.",
+    "Authority-adjusted scores are planning signals: they prevent provisional challenge-specialty cells from looking as release-trustworthy as cleaned motion-reference targets.",
     "Temporal sequence comparisons now score full flap-cadence runtime frames against expected Galaga target pose sequences, but do not yet assert exact frame timing against target video.",
     "Images are trimmed to their lit sprite bounds before scoring so large runtime crop padding does not dominate the comparison.",
     "Promoted target crops now prefer their accepted artifact litBox and ignore low-saturation source-sheet guide pixels, so gray sheet borders do not masquerade as sprite mass.",
@@ -41,7 +44,7 @@
     {
       "spriteKey": "player-fighter",
       "runtimeCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/player-fighter.png",
-      "runtimeModelScore10": 7.68,
+      "runtimeModelScore10": 7.7,
       "candidateRoleKeys": [
         "player-fighter"
       ],
@@ -53,13 +56,17 @@
       "bestTargetRoleKey": "player-fighter",
       "bestTargetPoseKey": "single-ship-front",
       "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-single-front.png",
-      "bestScore10": 6.49,
+      "bestTargetAuthorityScore10": 7.5,
+      "bestTargetAuthorityStatus": "trusted-cleaned-motion-reference",
+      "bestTargetScoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth.",
+      "bestScore10": 6.58,
+      "authorityAdjustedScore10": 4.94,
       "bestComponents": {
-        "jaccard": 0.5947,
-        "silhouetteAgreement": 0.7617,
-        "colorSimilarity": 0.8158,
-        "fillRatioDelta": 0.0771,
-        "aspectDelta": 0.3976
+        "jaccard": 0.6248,
+        "silhouetteAgreement": 0.7754,
+        "colorSimilarity": 0.7663,
+        "fillRatioDelta": 0.1123,
+        "aspectDelta": 0.4154
       },
       "topCandidates": [
         {
@@ -67,12 +74,15 @@
           "targetRoleKey": "player-fighter",
           "targetPoseKey": "single-ship-front",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-single-front.png",
-          "score10": 6.49,
-          "jaccard": 0.5947,
-          "silhouetteAgreement": 0.7617,
-          "colorSimilarity": 0.8158,
-          "fillRatioDelta": 0.0771,
-          "aspectDelta": 0.3976,
+          "targetAuthorityScore10": 7.5,
+          "targetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "targetScoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth.",
+          "score10": 6.58,
+          "jaccard": 0.6248,
+          "silhouetteAgreement": 0.7754,
+          "colorSimilarity": 0.7663,
+          "fillRatioDelta": 0.1123,
+          "aspectDelta": 0.4154,
           "alignmentShift": {
             "x": 1,
             "y": -2
@@ -83,7 +93,7 @@
     {
       "spriteKey": "dual-fighter",
       "runtimeCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/dual-fighter.png",
-      "runtimeModelScore10": 6.62,
+      "runtimeModelScore10": 6.75,
       "candidateRoleKeys": [
         "player-fighter"
       ],
@@ -95,13 +105,17 @@
       "bestTargetRoleKey": "player-fighter",
       "bestTargetPoseKey": "dual-fighter-front",
       "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-dual-front.png",
-      "bestScore10": 6.04,
+      "bestTargetAuthorityScore10": 7.2,
+      "bestTargetAuthorityStatus": "trusted-derived-composite",
+      "bestTargetScoringUse": "May anchor runtime scoring for the exact composite state while separate source-frame evidence is still being promoted.",
+      "bestScore10": 6.1,
+      "authorityAdjustedScore10": 4.39,
       "bestComponents": {
-        "jaccard": 0.5469,
-        "silhouetteAgreement": 0.7451,
-        "colorSimilarity": 0.7624,
-        "fillRatioDelta": 0.0635,
-        "aspectDelta": 0.4381
+        "jaccard": 0.542,
+        "silhouetteAgreement": 0.7441,
+        "colorSimilarity": 0.7473,
+        "fillRatioDelta": 0.0723,
+        "aspectDelta": 0.2935
       },
       "topCandidates": [
         {
@@ -109,12 +123,15 @@
           "targetRoleKey": "player-fighter",
           "targetPoseKey": "dual-fighter-front",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-dual-front.png",
-          "score10": 6.04,
-          "jaccard": 0.5469,
-          "silhouetteAgreement": 0.7451,
-          "colorSimilarity": 0.7624,
-          "fillRatioDelta": 0.0635,
-          "aspectDelta": 0.4381,
+          "targetAuthorityScore10": 7.2,
+          "targetAuthorityStatus": "trusted-derived-composite",
+          "targetScoringUse": "May anchor runtime scoring for the exact composite state while separate source-frame evidence is still being promoted.",
+          "score10": 6.1,
+          "jaccard": 0.542,
+          "silhouetteAgreement": 0.7441,
+          "colorSimilarity": 0.7473,
+          "fillRatioDelta": 0.0723,
+          "aspectDelta": 0.2935,
           "alignmentShift": {
             "x": -2,
             "y": -1
@@ -125,7 +142,7 @@
     {
       "spriteKey": "bee-line",
       "runtimeCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line.png",
-      "runtimeModelScore10": 5.87,
+      "runtimeModelScore10": 5.55,
       "candidateRoleKeys": [
         "bee-zako"
       ],
@@ -139,13 +156,17 @@
       "bestTargetRoleKey": "bee-zako",
       "bestTargetPoseKey": "formation-front",
       "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-formation-front.png",
-      "bestScore10": 7.75,
+      "bestTargetAuthorityScore10": 7.5,
+      "bestTargetAuthorityStatus": "trusted-cleaned-motion-reference",
+      "bestTargetScoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth.",
+      "bestScore10": 7.61,
+      "authorityAdjustedScore10": 5.71,
       "bestComponents": {
-        "jaccard": 0.7407,
-        "silhouetteAgreement": 0.8232,
-        "colorSimilarity": 0.8371,
-        "fillRatioDelta": 0.0381,
-        "aspectDelta": 0.0685
+        "jaccard": 0.7534,
+        "silhouetteAgreement": 0.8252,
+        "colorSimilarity": 0.8603,
+        "fillRatioDelta": 0.0693,
+        "aspectDelta": 0.3995
       },
       "topCandidates": [
         {
@@ -153,15 +174,18 @@
           "targetRoleKey": "bee-zako",
           "targetPoseKey": "formation-front",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-formation-front.png",
-          "score10": 7.75,
-          "jaccard": 0.7407,
-          "silhouetteAgreement": 0.8232,
-          "colorSimilarity": 0.8371,
-          "fillRatioDelta": 0.0381,
-          "aspectDelta": 0.0685,
+          "targetAuthorityScore10": 7.5,
+          "targetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "targetScoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth.",
+          "score10": 7.61,
+          "jaccard": 0.7534,
+          "silhouetteAgreement": 0.8252,
+          "colorSimilarity": 0.8603,
+          "fillRatioDelta": 0.0693,
+          "aspectDelta": 0.3995,
           "alignmentShift": {
-            "x": -1,
-            "y": 1
+            "x": 0,
+            "y": 0
           }
         },
         {
@@ -169,15 +193,18 @@
           "targetRoleKey": "bee-zako",
           "targetPoseKey": "flap-b",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-flap-b.png",
-          "score10": 2.16,
-          "jaccard": 0.0452,
-          "silhouetteAgreement": 0.3818,
-          "colorSimilarity": 0.6322,
-          "fillRatioDelta": 0.5674,
-          "aspectDelta": 0.381,
+          "targetAuthorityScore10": 4.4,
+          "targetAuthorityStatus": "provisional-pose-cell",
+          "targetScoringUse": "Pose-planning evidence only; useful for candidate ranking but not strong enough for a release-facing score claim.",
+          "score10": 2.38,
+          "jaccard": 0.0432,
+          "silhouetteAgreement": 0.3506,
+          "colorSimilarity": 0.6698,
+          "fillRatioDelta": 0.5986,
+          "aspectDelta": 0.087,
           "alignmentShift": {
             "x": 2,
-            "y": 2
+            "y": 1
           }
         },
         {
@@ -185,15 +212,18 @@
           "targetRoleKey": "bee-zako",
           "targetPoseKey": "flap-a",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-flap-a.png",
-          "score10": 2.08,
-          "jaccard": 0.0195,
-          "silhouetteAgreement": 0.3604,
-          "colorSimilarity": 0.69,
-          "fillRatioDelta": 0.5566,
-          "aspectDelta": 0.381,
+          "targetAuthorityScore10": 4.4,
+          "targetAuthorityStatus": "provisional-pose-cell",
+          "targetScoringUse": "Pose-planning evidence only; useful for candidate ranking but not strong enough for a release-facing score claim.",
+          "score10": 2.23,
+          "jaccard": 0.0456,
+          "silhouetteAgreement": 0.3467,
+          "colorSimilarity": 0.5899,
+          "fillRatioDelta": 0.5879,
+          "aspectDelta": 0.087,
           "alignmentShift": {
-            "x": -1,
-            "y": -2
+            "x": 2,
+            "y": 1
           }
         }
       ]
@@ -201,7 +231,7 @@
     {
       "spriteKey": "but-line",
       "runtimeCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line.png",
-      "runtimeModelScore10": 7.75,
+      "runtimeModelScore10": 7.64,
       "candidateRoleKeys": [
         "butterfly-escort"
       ],
@@ -215,13 +245,17 @@
       "bestTargetRoleKey": "butterfly-escort",
       "bestTargetPoseKey": "formation-front",
       "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-formation-front.png",
-      "bestScore10": 8.16,
+      "bestTargetAuthorityScore10": 7.5,
+      "bestTargetAuthorityStatus": "trusted-cleaned-motion-reference",
+      "bestTargetScoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth.",
+      "bestScore10": 7.88,
+      "authorityAdjustedScore10": 5.91,
       "bestComponents": {
-        "jaccard": 0.7912,
-        "silhouetteAgreement": 0.833,
-        "colorSimilarity": 0.887,
-        "fillRatioDelta": 0.0723,
-        "aspectDelta": 0.0625
+        "jaccard": 0.769,
+        "silhouetteAgreement": 0.8008,
+        "colorSimilarity": 0.8638,
+        "fillRatioDelta": 0.165,
+        "aspectDelta": 0.0975
       },
       "topCandidates": [
         {
@@ -229,12 +263,15 @@
           "targetRoleKey": "butterfly-escort",
           "targetPoseKey": "formation-front",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-formation-front.png",
-          "score10": 8.16,
-          "jaccard": 0.7912,
-          "silhouetteAgreement": 0.833,
-          "colorSimilarity": 0.887,
-          "fillRatioDelta": 0.0723,
-          "aspectDelta": 0.0625,
+          "targetAuthorityScore10": 7.5,
+          "targetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "targetScoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth.",
+          "score10": 7.88,
+          "jaccard": 0.769,
+          "silhouetteAgreement": 0.8008,
+          "colorSimilarity": 0.8638,
+          "fillRatioDelta": 0.165,
+          "aspectDelta": 0.0975,
           "alignmentShift": {
             "x": 1,
             "y": 0
@@ -245,12 +282,15 @@
           "targetRoleKey": "butterfly-escort",
           "targetPoseKey": "flap-a",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-flap-a.png",
-          "score10": 2.19,
-          "jaccard": 0.0345,
-          "silhouetteAgreement": 0.2617,
-          "colorSimilarity": 0.6719,
-          "fillRatioDelta": 0.7109,
-          "aspectDelta": 0,
+          "targetAuthorityScore10": 4.4,
+          "targetAuthorityStatus": "provisional-pose-cell",
+          "targetScoringUse": "Pose-planning evidence only; useful for candidate ranking but not strong enough for a release-facing score claim.",
+          "score10": 1.79,
+          "jaccard": 0.0319,
+          "silhouetteAgreement": 0.1709,
+          "colorSimilarity": 0.6586,
+          "fillRatioDelta": 0.8037,
+          "aspectDelta": 0.16,
           "alignmentShift": {
             "x": -2,
             "y": -2
@@ -261,15 +301,18 @@
           "targetRoleKey": "butterfly-escort",
           "targetPoseKey": "flap-b",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-flap-b.png",
-          "score10": 2.01,
-          "jaccard": 0.056,
-          "silhouetteAgreement": 0.2754,
-          "colorSimilarity": 0.5054,
-          "fillRatioDelta": 0.6963,
-          "aspectDelta": 0,
+          "targetAuthorityScore10": 4.4,
+          "targetAuthorityStatus": "provisional-pose-cell",
+          "targetScoringUse": "Pose-planning evidence only; useful for candidate ranking but not strong enough for a release-facing score claim.",
+          "score10": 1.61,
+          "jaccard": 0.0543,
+          "silhouetteAgreement": 0.1836,
+          "colorSimilarity": 0.4879,
+          "fillRatioDelta": 0.7891,
+          "aspectDelta": 0.16,
           "alignmentShift": {
             "x": -2,
-            "y": 2
+            "y": 0
           }
         }
       ]
@@ -277,7 +320,7 @@
     {
       "spriteKey": "boss-line",
       "runtimeCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line.png",
-      "runtimeModelScore10": 4.98,
+      "runtimeModelScore10": 4.95,
       "candidateRoleKeys": [
         "boss-galaga"
       ],
@@ -291,13 +334,17 @@
       "bestTargetRoleKey": "boss-galaga",
       "bestTargetPoseKey": "flap-b",
       "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-flap-b.png",
-      "bestScore10": 5.66,
+      "bestTargetAuthorityScore10": 7.5,
+      "bestTargetAuthorityStatus": "trusted-cleaned-motion-reference",
+      "bestTargetScoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth.",
+      "bestScore10": 5.3,
+      "authorityAdjustedScore10": 3.97,
       "bestComponents": {
-        "jaccard": 0.478,
-        "silhouetteAgreement": 0.6416,
-        "colorSimilarity": 0.7167,
-        "fillRatioDelta": 0.0518,
-        "aspectDelta": 0.008
+        "jaccard": 0.4367,
+        "silhouetteAgreement": 0.583,
+        "colorSimilarity": 0.724,
+        "fillRatioDelta": 0.0146,
+        "aspectDelta": 0.0031
       },
       "topCandidates": [
         {
@@ -305,14 +352,17 @@
           "targetRoleKey": "boss-galaga",
           "targetPoseKey": "flap-b",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-flap-b.png",
-          "score10": 5.66,
-          "jaccard": 0.478,
-          "silhouetteAgreement": 0.6416,
-          "colorSimilarity": 0.7167,
-          "fillRatioDelta": 0.0518,
-          "aspectDelta": 0.008,
+          "targetAuthorityScore10": 7.5,
+          "targetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "targetScoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth.",
+          "score10": 5.3,
+          "jaccard": 0.4367,
+          "silhouetteAgreement": 0.583,
+          "colorSimilarity": 0.724,
+          "fillRatioDelta": 0.0146,
+          "aspectDelta": 0.0031,
           "alignmentShift": {
-            "x": -2,
+            "x": -1,
             "y": 2
           }
         },
@@ -321,14 +371,17 @@
           "targetRoleKey": "boss-galaga",
           "targetPoseKey": "formation-front",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-formation-front.png",
-          "score10": 5.32,
-          "jaccard": 0.4718,
-          "silhouetteAgreement": 0.6436,
-          "colorSimilarity": 0.5594,
-          "fillRatioDelta": 0.0234,
-          "aspectDelta": 0.008,
+          "targetAuthorityScore10": 7.5,
+          "targetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "targetScoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth.",
+          "score10": 4.92,
+          "jaccard": 0.4303,
+          "silhouetteAgreement": 0.585,
+          "colorSimilarity": 0.5448,
+          "fillRatioDelta": 0.0137,
+          "aspectDelta": 0.0031,
           "alignmentShift": {
-            "x": -2,
+            "x": -1,
             "y": 2
           }
         },
@@ -337,14 +390,17 @@
           "targetRoleKey": "boss-galaga",
           "targetPoseKey": "flap-a",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-flap-a.png",
-          "score10": 5.32,
-          "jaccard": 0.4718,
-          "silhouetteAgreement": 0.6436,
-          "colorSimilarity": 0.5594,
-          "fillRatioDelta": 0.0234,
-          "aspectDelta": 0.008,
+          "targetAuthorityScore10": 7.5,
+          "targetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "targetScoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth.",
+          "score10": 4.92,
+          "jaccard": 0.4303,
+          "silhouetteAgreement": 0.585,
+          "colorSimilarity": 0.5448,
+          "fillRatioDelta": 0.0137,
+          "aspectDelta": 0.0031,
           "alignmentShift": {
-            "x": -2,
+            "x": -1,
             "y": 2
           }
         }
@@ -353,7 +409,7 @@
     {
       "spriteKey": "rogue-fighter",
       "runtimeCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/rogue-fighter.png",
-      "runtimeModelScore10": 6.41,
+      "runtimeModelScore10": 6.65,
       "candidateRoleKeys": [
         "player-fighter",
         "boss-galaga"
@@ -368,13 +424,17 @@
       "bestTargetRoleKey": "player-fighter",
       "bestTargetPoseKey": "single-ship-front",
       "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-single-front.png",
-      "bestScore10": 6.72,
+      "bestTargetAuthorityScore10": 7.5,
+      "bestTargetAuthorityStatus": "trusted-cleaned-motion-reference",
+      "bestTargetScoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth.",
+      "bestScore10": 6.58,
+      "authorityAdjustedScore10": 4.94,
       "bestComponents": {
-        "jaccard": 0.6266,
-        "silhouetteAgreement": 0.7695,
-        "colorSimilarity": 0.7968,
-        "fillRatioDelta": 0.1436,
-        "aspectDelta": 0.2995
+        "jaccard": 0.6248,
+        "silhouetteAgreement": 0.7754,
+        "colorSimilarity": 0.7663,
+        "fillRatioDelta": 0.1123,
+        "aspectDelta": 0.4154
       },
       "topCandidates": [
         {
@@ -382,12 +442,15 @@
           "targetRoleKey": "player-fighter",
           "targetPoseKey": "single-ship-front",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-single-front.png",
-          "score10": 6.72,
-          "jaccard": 0.6266,
-          "silhouetteAgreement": 0.7695,
-          "colorSimilarity": 0.7968,
-          "fillRatioDelta": 0.1436,
-          "aspectDelta": 0.2995,
+          "targetAuthorityScore10": 7.5,
+          "targetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "targetScoringUse": "Primary runtime scoring target with medium-high confidence; still not ROM-perfect source truth.",
+          "score10": 6.58,
+          "jaccard": 0.6248,
+          "silhouetteAgreement": 0.7754,
+          "colorSimilarity": 0.7663,
+          "fillRatioDelta": 0.1123,
+          "aspectDelta": 0.4154,
           "alignmentShift": {
             "x": 1,
             "y": -2
@@ -398,15 +461,18 @@
           "targetRoleKey": "player-fighter",
           "targetPoseKey": "turn-right",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-turn-right.png",
-          "score10": 2.96,
+          "targetAuthorityScore10": 4.4,
+          "targetAuthorityStatus": "provisional-pose-cell",
+          "targetScoringUse": "Pose-planning evidence only; useful for candidate ranking but not strong enough for a release-facing score claim.",
+          "score10": 2.94,
           "jaccard": 0.1122,
-          "silhouetteAgreement": 0.4668,
-          "colorSimilarity": 0.679,
-          "fillRatioDelta": 0.4893,
-          "aspectDelta": 0.2267,
+          "silhouetteAgreement": 0.4902,
+          "colorSimilarity": 0.6863,
+          "fillRatioDelta": 0.458,
+          "aspectDelta": 0.3425,
           "alignmentShift": {
             "x": 2,
-            "y": 2
+            "y": 0
           }
         },
         {
@@ -414,14 +480,17 @@
           "targetRoleKey": "player-fighter",
           "targetPoseKey": "turn-left",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/player-fighter-turn-left.png",
-          "score10": 2.42,
-          "jaccard": 0.071,
-          "silhouetteAgreement": 0.4375,
-          "colorSimilarity": 0.7116,
-          "fillRatioDelta": 0.5059,
-          "aspectDelta": 0.6145,
+          "targetAuthorityScore10": 4.4,
+          "targetAuthorityStatus": "provisional-pose-cell",
+          "targetScoringUse": "Pose-planning evidence only; useful for candidate ranking but not strong enough for a release-facing score claim.",
+          "score10": 2.39,
+          "jaccard": 0.0694,
+          "silhouetteAgreement": 0.4629,
+          "colorSimilarity": 0.7175,
+          "fillRatioDelta": 0.4746,
+          "aspectDelta": 0.7304,
           "alignmentShift": {
-            "x": 2,
+            "x": 1,
             "y": 2
           }
         }
@@ -430,7 +499,7 @@
     {
       "spriteKey": "challenge-dragonfly",
       "runtimeCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly.png",
-      "runtimeModelScore10": 4.89,
+      "runtimeModelScore10": 4.98,
       "candidateRoleKeys": [
         "challenge-specialty-aliens"
       ],
@@ -445,13 +514,17 @@
       "bestTargetRoleKey": "challenge-specialty-aliens",
       "bestTargetPoseKey": "green-family-front",
       "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-green-family-front.png",
-      "bestScore10": 4.58,
+      "bestTargetAuthorityScore10": 3.2,
+      "bestTargetAuthorityStatus": "planning-only-challenge-specialty-cell",
+      "bestTargetScoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it.",
+      "bestScore10": 4.03,
+      "authorityAdjustedScore10": 1.29,
       "bestComponents": {
-        "jaccard": 0.1566,
-        "silhouetteAgreement": 0.7686,
-        "colorSimilarity": 0.9456,
-        "fillRatioDelta": 0.2197,
-        "aspectDelta": 0.1169
+        "jaccard": 0.1237,
+        "silhouetteAgreement": 0.7441,
+        "colorSimilarity": 0.9247,
+        "fillRatioDelta": 0.2305,
+        "aspectDelta": 0.4545
       },
       "topCandidates": [
         {
@@ -459,12 +532,15 @@
           "targetRoleKey": "challenge-specialty-aliens",
           "targetPoseKey": "green-family-front",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-green-family-front.png",
-          "score10": 4.58,
-          "jaccard": 0.1566,
-          "silhouetteAgreement": 0.7686,
-          "colorSimilarity": 0.9456,
-          "fillRatioDelta": 0.2197,
-          "aspectDelta": 0.1169,
+          "targetAuthorityScore10": 3.2,
+          "targetAuthorityStatus": "planning-only-challenge-specialty-cell",
+          "targetScoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it.",
+          "score10": 4.03,
+          "jaccard": 0.1237,
+          "silhouetteAgreement": 0.7441,
+          "colorSimilarity": 0.9247,
+          "fillRatioDelta": 0.2305,
+          "aspectDelta": 0.4545,
           "alignmentShift": {
             "x": 1,
             "y": 1
@@ -475,14 +551,17 @@
           "targetRoleKey": "challenge-specialty-aliens",
           "targetPoseKey": "blue-yellow-family-front",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-blue-yellow-family-front.png",
-          "score10": 3.26,
-          "jaccard": 0.093,
-          "silhouetteAgreement": 0.7334,
-          "colorSimilarity": 0.688,
-          "fillRatioDelta": 0.21,
-          "aspectDelta": 0.5714,
+          "targetAuthorityScore10": 3.2,
+          "targetAuthorityStatus": "planning-only-challenge-specialty-cell",
+          "targetScoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it.",
+          "score10": 3.66,
+          "jaccard": 0.0828,
+          "silhouetteAgreement": 0.7188,
+          "colorSimilarity": 0.7044,
+          "fillRatioDelta": 0.2207,
+          "aspectDelta": 0,
           "alignmentShift": {
-            "x": 1,
+            "x": 2,
             "y": 2
           }
         },
@@ -491,15 +570,18 @@
           "targetRoleKey": "challenge-specialty-aliens",
           "targetPoseKey": "yellow-family-front",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-yellow-family-front.png",
-          "score10": 3.24,
-          "jaccard": 0.1275,
-          "silhouetteAgreement": 0.7461,
-          "colorSimilarity": 0.4324,
-          "fillRatioDelta": 0.207,
-          "aspectDelta": 0.2381,
+          "targetAuthorityScore10": 3.2,
+          "targetAuthorityStatus": "planning-only-challenge-specialty-cell",
+          "targetScoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it.",
+          "score10": 2.99,
+          "jaccard": 0.1083,
+          "silhouetteAgreement": 0.7266,
+          "colorSimilarity": 0.4237,
+          "fillRatioDelta": 0.2178,
+          "aspectDelta": 0.3333,
           "alignmentShift": {
             "x": 1,
-            "y": -2
+            "y": -1
           }
         },
         {
@@ -507,15 +589,18 @@
           "targetRoleKey": "challenge-specialty-aliens",
           "targetPoseKey": "magenta-family-front",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-magenta-family-front.png",
-          "score10": 2.57,
-          "jaccard": 0.044,
-          "silhouetteAgreement": 0.7031,
-          "colorSimilarity": 0.6633,
-          "fillRatioDelta": 0.1973,
-          "aspectDelta": 0.9464,
+          "targetAuthorityScore10": 3.2,
+          "targetAuthorityStatus": "planning-only-challenge-specialty-cell",
+          "targetScoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it.",
+          "score10": 2.96,
+          "jaccard": 0.0693,
+          "silhouetteAgreement": 0.6982,
+          "colorSimilarity": 0.5654,
+          "fillRatioDelta": 0.208,
+          "aspectDelta": 0.375,
           "alignmentShift": {
-            "x": -2,
-            "y": 2
+            "x": 0,
+            "y": 1
           }
         }
       ]
@@ -523,7 +608,7 @@
     {
       "spriteKey": "challenge-mosquito",
       "runtimeCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-mosquito.png",
-      "runtimeModelScore10": 5.16,
+      "runtimeModelScore10": 5.44,
       "candidateRoleKeys": [
         "challenge-specialty-aliens"
       ],
@@ -538,13 +623,17 @@
       "bestTargetRoleKey": "challenge-specialty-aliens",
       "bestTargetPoseKey": "yellow-family-front",
       "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-yellow-family-front.png",
-      "bestScore10": 4.04,
+      "bestTargetAuthorityScore10": 3.2,
+      "bestTargetAuthorityStatus": "planning-only-challenge-specialty-cell",
+      "bestTargetScoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it.",
+      "bestScore10": 3.68,
+      "authorityAdjustedScore10": 1.18,
       "bestComponents": {
-        "jaccard": 0.1871,
-        "silhouetteAgreement": 0.7285,
-        "colorSimilarity": 0.6912,
-        "fillRatioDelta": 0.2695,
-        "aspectDelta": 0.2381
+        "jaccard": 0.1614,
+        "silhouetteAgreement": 0.7158,
+        "colorSimilarity": 0.6711,
+        "fillRatioDelta": 0.2715,
+        "aspectDelta": 0.4203
       },
       "topCandidates": [
         {
@@ -552,15 +641,18 @@
           "targetRoleKey": "challenge-specialty-aliens",
           "targetPoseKey": "yellow-family-front",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-yellow-family-front.png",
-          "score10": 4.04,
-          "jaccard": 0.1871,
-          "silhouetteAgreement": 0.7285,
-          "colorSimilarity": 0.6912,
-          "fillRatioDelta": 0.2695,
-          "aspectDelta": 0.2381,
+          "targetAuthorityScore10": 3.2,
+          "targetAuthorityStatus": "planning-only-challenge-specialty-cell",
+          "targetScoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it.",
+          "score10": 3.68,
+          "jaccard": 0.1614,
+          "silhouetteAgreement": 0.7158,
+          "colorSimilarity": 0.6711,
+          "fillRatioDelta": 0.2715,
+          "aspectDelta": 0.4203,
           "alignmentShift": {
-            "x": 0,
-            "y": 0
+            "x": 1,
+            "y": -1
           }
         },
         {
@@ -568,15 +660,18 @@
           "targetRoleKey": "challenge-specialty-aliens",
           "targetPoseKey": "green-family-front",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-green-family-front.png",
-          "score10": 3.25,
-          "jaccard": 0.0927,
-          "silhouetteAgreement": 0.6846,
-          "colorSimilarity": 0.5626,
-          "fillRatioDelta": 0.2822,
-          "aspectDelta": 0.1169,
+          "targetAuthorityScore10": 3.2,
+          "targetAuthorityStatus": "planning-only-challenge-specialty-cell",
+          "targetScoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it.",
+          "score10": 2.8,
+          "jaccard": 0.0771,
+          "silhouetteAgreement": 0.6729,
+          "colorSimilarity": 0.5613,
+          "fillRatioDelta": 0.2842,
+          "aspectDelta": 0.5415,
           "alignmentShift": {
-            "x": 1,
-            "y": 2
+            "x": 2,
+            "y": 1
           }
         },
         {
@@ -584,14 +679,17 @@
           "targetRoleKey": "challenge-specialty-aliens",
           "targetPoseKey": "blue-yellow-family-front",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-blue-yellow-family-front.png",
-          "score10": 2.56,
-          "jaccard": 0.0694,
-          "silhouetteAgreement": 0.6729,
-          "colorSimilarity": 0.4749,
-          "fillRatioDelta": 0.2725,
-          "aspectDelta": 0.5714,
+          "targetAuthorityScore10": 3.2,
+          "targetAuthorityStatus": "planning-only-challenge-specialty-cell",
+          "targetScoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it.",
+          "score10": 2.77,
+          "jaccard": 0.0429,
+          "silhouetteAgreement": 0.6514,
+          "colorSimilarity": 0.4892,
+          "fillRatioDelta": 0.2744,
+          "aspectDelta": 0.087,
           "alignmentShift": {
-            "x": 1,
+            "x": 0,
             "y": -2
           }
         },
@@ -600,14 +698,17 @@
           "targetRoleKey": "challenge-specialty-aliens",
           "targetPoseKey": "magenta-family-front",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/challenge-magenta-family-front.png",
-          "score10": 1.95,
-          "jaccard": 0.0645,
-          "silhouetteAgreement": 0.6602,
-          "colorSimilarity": 0.3533,
-          "fillRatioDelta": 0.2598,
-          "aspectDelta": 0.9464,
+          "targetAuthorityScore10": 3.2,
+          "targetAuthorityStatus": "planning-only-challenge-specialty-cell",
+          "targetScoringUse": "Planning and taxonomy evidence only; do not treat as canonical challenge alien truth until clean target windows replace it.",
+          "score10": 2.29,
+          "jaccard": 0.0444,
+          "silhouetteAgreement": 0.6426,
+          "colorSimilarity": 0.3328,
+          "fillRatioDelta": 0.2617,
+          "aspectDelta": 0.288,
           "alignmentShift": {
-            "x": 2,
+            "x": 0,
             "y": -2
           }
         }
@@ -629,10 +730,10 @@
       ],
       "expectedPoseCoverage": 1,
       "observedTargetPoseTransitions": 4,
-      "averageFrameScore10": 4.04,
-      "sequenceScore10": 5.35,
-      "weakestFrameScore10": 2.08,
-      "strongestFrameScore10": 7.75,
+      "averageFrameScore10": 4.3,
+      "sequenceScore10": 5.55,
+      "weakestFrameScore10": 2.23,
+      "strongestFrameScore10": 7.61,
       "read": "bee-line cadence now scores each runtime frame against an expected Galaga pose sequence; this is a target-relative animation read, not merely local motion delta.",
       "frames": [
         {
@@ -643,13 +744,16 @@
           "bestTargetCropId": "bee-zako-formation-front",
           "bestTargetPoseKey": "formation-front",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-formation-front.png",
-          "bestScore10": 7.75,
+          "bestTargetAuthorityScore10": 7.5,
+          "bestTargetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "bestScore10": 7.61,
+          "authorityAdjustedScore10": 5.71,
           "bestComponents": {
-            "jaccard": 0.7407,
-            "silhouetteAgreement": 0.8232,
-            "colorSimilarity": 0.8371,
-            "fillRatioDelta": 0.0381,
-            "aspectDelta": 0.0685
+            "jaccard": 0.7534,
+            "silhouetteAgreement": 0.8252,
+            "colorSimilarity": 0.8603,
+            "fillRatioDelta": 0.0693,
+            "aspectDelta": 0.3995
           }
         },
         {
@@ -660,13 +764,16 @@
           "bestTargetCropId": "bee-zako-formation-front",
           "bestTargetPoseKey": "formation-front",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-formation-front.png",
-          "bestScore10": 2.96,
+          "bestTargetAuthorityScore10": 7.5,
+          "bestTargetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "bestScore10": 7.61,
+          "authorityAdjustedScore10": 5.71,
           "bestComponents": {
-            "jaccard": 0.2576,
-            "silhouetteAgreement": 0.4512,
-            "colorSimilarity": 0.4983,
-            "fillRatioDelta": 0.21,
-            "aspectDelta": 0.7263
+            "jaccard": 0.7534,
+            "silhouetteAgreement": 0.8252,
+            "colorSimilarity": 0.8603,
+            "fillRatioDelta": 0.0693,
+            "aspectDelta": 0.3995
           }
         },
         {
@@ -677,13 +784,16 @@
           "bestTargetCropId": "bee-zako-flap-a",
           "bestTargetPoseKey": "flap-a",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-flap-a.png",
-          "bestScore10": 2.93,
+          "bestTargetAuthorityScore10": 4.4,
+          "bestTargetAuthorityStatus": "provisional-pose-cell",
+          "bestScore10": 2.23,
+          "authorityAdjustedScore10": 0.98,
           "bestComponents": {
-            "jaccard": 0.0884,
-            "silhouetteAgreement": 0.6475,
-            "colorSimilarity": 0.5771,
-            "fillRatioDelta": 0.3086,
-            "aspectDelta": 0.4138
+            "jaccard": 0.0456,
+            "silhouetteAgreement": 0.3467,
+            "colorSimilarity": 0.5899,
+            "fillRatioDelta": 0.5879,
+            "aspectDelta": 0.087
           }
         },
         {
@@ -694,13 +804,16 @@
           "bestTargetCropId": "bee-zako-flap-b",
           "bestTargetPoseKey": "flap-b",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-flap-b.png",
-          "bestScore10": 3.34,
+          "bestTargetAuthorityScore10": 4.4,
+          "bestTargetAuthorityStatus": "provisional-pose-cell",
+          "bestScore10": 2.38,
+          "authorityAdjustedScore10": 1.05,
           "bestComponents": {
-            "jaccard": 0.1256,
-            "silhouetteAgreement": 0.667,
-            "colorSimilarity": 0.6587,
-            "fillRatioDelta": 0.3193,
-            "aspectDelta": 0.4138
+            "jaccard": 0.0432,
+            "silhouetteAgreement": 0.3506,
+            "colorSimilarity": 0.6698,
+            "fillRatioDelta": 0.5986,
+            "aspectDelta": 0.087
           }
         },
         {
@@ -711,13 +824,16 @@
           "bestTargetCropId": "bee-zako-flap-b",
           "bestTargetPoseKey": "flap-b",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-flap-b.png",
-          "bestScore10": 3.34,
+          "bestTargetAuthorityScore10": 4.4,
+          "bestTargetAuthorityStatus": "provisional-pose-cell",
+          "bestScore10": 2.38,
+          "authorityAdjustedScore10": 1.05,
           "bestComponents": {
-            "jaccard": 0.1256,
-            "silhouetteAgreement": 0.667,
-            "colorSimilarity": 0.6587,
-            "fillRatioDelta": 0.3193,
-            "aspectDelta": 0.4138
+            "jaccard": 0.0432,
+            "silhouetteAgreement": 0.3506,
+            "colorSimilarity": 0.6698,
+            "fillRatioDelta": 0.5986,
+            "aspectDelta": 0.087
           }
         },
         {
@@ -728,13 +844,16 @@
           "bestTargetCropId": "bee-zako-flap-b",
           "bestTargetPoseKey": "flap-b",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-flap-b.png",
-          "bestScore10": 2.16,
+          "bestTargetAuthorityScore10": 4.4,
+          "bestTargetAuthorityStatus": "provisional-pose-cell",
+          "bestScore10": 2.38,
+          "authorityAdjustedScore10": 1.05,
           "bestComponents": {
-            "jaccard": 0.0452,
-            "silhouetteAgreement": 0.3818,
-            "colorSimilarity": 0.6322,
-            "fillRatioDelta": 0.5674,
-            "aspectDelta": 0.381
+            "jaccard": 0.0432,
+            "silhouetteAgreement": 0.3506,
+            "colorSimilarity": 0.6698,
+            "fillRatioDelta": 0.5986,
+            "aspectDelta": 0.087
           }
         },
         {
@@ -745,13 +864,16 @@
           "bestTargetCropId": "bee-zako-flap-a",
           "bestTargetPoseKey": "flap-a",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-flap-a.png",
-          "bestScore10": 2.08,
+          "bestTargetAuthorityScore10": 4.4,
+          "bestTargetAuthorityStatus": "provisional-pose-cell",
+          "bestScore10": 2.23,
+          "authorityAdjustedScore10": 0.98,
           "bestComponents": {
-            "jaccard": 0.0195,
-            "silhouetteAgreement": 0.3604,
-            "colorSimilarity": 0.69,
-            "fillRatioDelta": 0.5566,
-            "aspectDelta": 0.381
+            "jaccard": 0.0456,
+            "silhouetteAgreement": 0.3467,
+            "colorSimilarity": 0.5899,
+            "fillRatioDelta": 0.5879,
+            "aspectDelta": 0.087
           }
         },
         {
@@ -762,13 +884,16 @@
           "bestTargetCropId": "bee-zako-formation-front",
           "bestTargetPoseKey": "formation-front",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/bee-zako-formation-front.png",
-          "bestScore10": 7.75,
+          "bestTargetAuthorityScore10": 7.5,
+          "bestTargetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "bestScore10": 7.61,
+          "authorityAdjustedScore10": 5.71,
           "bestComponents": {
-            "jaccard": 0.7407,
-            "silhouetteAgreement": 0.8232,
-            "colorSimilarity": 0.8371,
-            "fillRatioDelta": 0.0381,
-            "aspectDelta": 0.0685
+            "jaccard": 0.7534,
+            "silhouetteAgreement": 0.8252,
+            "colorSimilarity": 0.8603,
+            "fillRatioDelta": 0.0693,
+            "aspectDelta": 0.3995
           }
         }
       ]
@@ -787,10 +912,10 @@
       ],
       "expectedPoseCoverage": 1,
       "observedTargetPoseTransitions": 4,
-      "averageFrameScore10": 4.62,
-      "sequenceScore10": 5.8,
-      "weakestFrameScore10": 2.01,
-      "strongestFrameScore10": 8.16,
+      "averageFrameScore10": 4.01,
+      "sequenceScore10": 5.33,
+      "weakestFrameScore10": 1.61,
+      "strongestFrameScore10": 7.88,
       "read": "but-line cadence now scores each runtime frame against an expected Galaga pose sequence; this is a target-relative animation read, not merely local motion delta.",
       "frames": [
         {
@@ -801,13 +926,16 @@
           "bestTargetCropId": "butterfly-escort-formation-front",
           "bestTargetPoseKey": "formation-front",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-formation-front.png",
-          "bestScore10": 8.16,
+          "bestTargetAuthorityScore10": 7.5,
+          "bestTargetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "bestScore10": 7.88,
+          "authorityAdjustedScore10": 5.91,
           "bestComponents": {
-            "jaccard": 0.7912,
-            "silhouetteAgreement": 0.833,
-            "colorSimilarity": 0.887,
-            "fillRatioDelta": 0.0723,
-            "aspectDelta": 0.0625
+            "jaccard": 0.769,
+            "silhouetteAgreement": 0.8008,
+            "colorSimilarity": 0.8638,
+            "fillRatioDelta": 0.165,
+            "aspectDelta": 0.0975
           }
         },
         {
@@ -818,13 +946,16 @@
           "bestTargetCropId": "butterfly-escort-formation-front",
           "bestTargetPoseKey": "formation-front",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-formation-front.png",
-          "bestScore10": 3.2,
+          "bestTargetAuthorityScore10": 7.5,
+          "bestTargetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "bestScore10": 7.88,
+          "authorityAdjustedScore10": 5.91,
           "bestComponents": {
-            "jaccard": 0.2328,
-            "silhouetteAgreement": 0.4434,
-            "colorSimilarity": 0.4879,
-            "fillRatioDelta": 0.4229,
-            "aspectDelta": 0.2004
+            "jaccard": 0.769,
+            "silhouetteAgreement": 0.8008,
+            "colorSimilarity": 0.8638,
+            "fillRatioDelta": 0.165,
+            "aspectDelta": 0.0975
           }
         },
         {
@@ -835,13 +966,16 @@
           "bestTargetCropId": "butterfly-escort-flap-a",
           "bestTargetPoseKey": "flap-a",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-flap-a.png",
-          "bestScore10": 3.75,
+          "bestTargetAuthorityScore10": 4.4,
+          "bestTargetAuthorityStatus": "provisional-pose-cell",
+          "bestScore10": 1.79,
+          "authorityAdjustedScore10": 0.79,
           "bestComponents": {
-            "jaccard": 0.1075,
-            "silhouetteAgreement": 0.7568,
-            "colorSimilarity": 0.6879,
-            "fillRatioDelta": 0.2158,
-            "aspectDelta": 0.1379
+            "jaccard": 0.0319,
+            "silhouetteAgreement": 0.1709,
+            "colorSimilarity": 0.6586,
+            "fillRatioDelta": 0.8037,
+            "aspectDelta": 0.16
           }
         },
         {
@@ -852,13 +986,16 @@
           "bestTargetCropId": "butterfly-escort-flap-b",
           "bestTargetPoseKey": "flap-b",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-flap-b.png",
-          "bestScore10": 4.73,
+          "bestTargetAuthorityScore10": 4.4,
+          "bestTargetAuthorityStatus": "provisional-pose-cell",
+          "bestScore10": 1.61,
+          "authorityAdjustedScore10": 0.71,
           "bestComponents": {
-            "jaccard": 0.2158,
-            "silhouetteAgreement": 0.7871,
-            "colorSimilarity": 0.8409,
-            "fillRatioDelta": 0.2012,
-            "aspectDelta": 0.1379
+            "jaccard": 0.0543,
+            "silhouetteAgreement": 0.1836,
+            "colorSimilarity": 0.4879,
+            "fillRatioDelta": 0.7891,
+            "aspectDelta": 0.16
           }
         },
         {
@@ -869,13 +1006,16 @@
           "bestTargetCropId": "butterfly-escort-flap-b",
           "bestTargetPoseKey": "flap-b",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-flap-b.png",
-          "bestScore10": 4.73,
+          "bestTargetAuthorityScore10": 4.4,
+          "bestTargetAuthorityStatus": "provisional-pose-cell",
+          "bestScore10": 1.61,
+          "authorityAdjustedScore10": 0.71,
           "bestComponents": {
-            "jaccard": 0.2158,
-            "silhouetteAgreement": 0.7871,
-            "colorSimilarity": 0.8409,
-            "fillRatioDelta": 0.2012,
-            "aspectDelta": 0.1379
+            "jaccard": 0.0543,
+            "silhouetteAgreement": 0.1836,
+            "colorSimilarity": 0.4879,
+            "fillRatioDelta": 0.7891,
+            "aspectDelta": 0.16
           }
         },
         {
@@ -886,13 +1026,16 @@
           "bestTargetCropId": "butterfly-escort-flap-b",
           "bestTargetPoseKey": "flap-b",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-flap-b.png",
-          "bestScore10": 2.01,
+          "bestTargetAuthorityScore10": 4.4,
+          "bestTargetAuthorityStatus": "provisional-pose-cell",
+          "bestScore10": 1.61,
+          "authorityAdjustedScore10": 0.71,
           "bestComponents": {
-            "jaccard": 0.056,
-            "silhouetteAgreement": 0.2754,
-            "colorSimilarity": 0.5054,
-            "fillRatioDelta": 0.6963,
-            "aspectDelta": 0
+            "jaccard": 0.0543,
+            "silhouetteAgreement": 0.1836,
+            "colorSimilarity": 0.4879,
+            "fillRatioDelta": 0.7891,
+            "aspectDelta": 0.16
           }
         },
         {
@@ -903,13 +1046,16 @@
           "bestTargetCropId": "butterfly-escort-flap-a",
           "bestTargetPoseKey": "flap-a",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-flap-a.png",
-          "bestScore10": 2.19,
+          "bestTargetAuthorityScore10": 4.4,
+          "bestTargetAuthorityStatus": "provisional-pose-cell",
+          "bestScore10": 1.79,
+          "authorityAdjustedScore10": 0.79,
           "bestComponents": {
-            "jaccard": 0.0345,
-            "silhouetteAgreement": 0.2617,
-            "colorSimilarity": 0.6719,
-            "fillRatioDelta": 0.7109,
-            "aspectDelta": 0
+            "jaccard": 0.0319,
+            "silhouetteAgreement": 0.1709,
+            "colorSimilarity": 0.6586,
+            "fillRatioDelta": 0.8037,
+            "aspectDelta": 0.16
           }
         },
         {
@@ -920,13 +1066,16 @@
           "bestTargetCropId": "butterfly-escort-formation-front",
           "bestTargetPoseKey": "formation-front",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/butterfly-escort-formation-front.png",
-          "bestScore10": 8.16,
+          "bestTargetAuthorityScore10": 7.5,
+          "bestTargetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "bestScore10": 7.88,
+          "authorityAdjustedScore10": 5.91,
           "bestComponents": {
-            "jaccard": 0.7912,
-            "silhouetteAgreement": 0.833,
-            "colorSimilarity": 0.887,
-            "fillRatioDelta": 0.0723,
-            "aspectDelta": 0.0625
+            "jaccard": 0.769,
+            "silhouetteAgreement": 0.8008,
+            "colorSimilarity": 0.8638,
+            "fillRatioDelta": 0.165,
+            "aspectDelta": 0.0975
           }
         }
       ]
@@ -945,10 +1094,10 @@
       ],
       "expectedPoseCoverage": 1,
       "observedTargetPoseTransitions": 4,
-      "averageFrameScore10": 4.63,
-      "sequenceScore10": 5.81,
-      "weakestFrameScore10": 3.73,
-      "strongestFrameScore10": 5.66,
+      "averageFrameScore10": 5.16,
+      "sequenceScore10": 6.22,
+      "weakestFrameScore10": 4.92,
+      "strongestFrameScore10": 5.4,
       "read": "boss-line cadence now scores each runtime frame against an expected Galaga pose sequence; this is a target-relative animation read, not merely local motion delta.",
       "frames": [
         {
@@ -959,13 +1108,16 @@
           "bestTargetCropId": "boss-galaga-formation-front",
           "bestTargetPoseKey": "formation-front",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-formation-front.png",
-          "bestScore10": 5.32,
+          "bestTargetAuthorityScore10": 7.5,
+          "bestTargetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "bestScore10": 4.92,
+          "authorityAdjustedScore10": 3.69,
           "bestComponents": {
-            "jaccard": 0.4718,
-            "silhouetteAgreement": 0.6436,
-            "colorSimilarity": 0.5594,
-            "fillRatioDelta": 0.0234,
-            "aspectDelta": 0.008
+            "jaccard": 0.4303,
+            "silhouetteAgreement": 0.585,
+            "colorSimilarity": 0.5448,
+            "fillRatioDelta": 0.0137,
+            "aspectDelta": 0.0031
           }
         },
         {
@@ -976,13 +1128,16 @@
           "bestTargetCropId": "boss-galaga-formation-front",
           "bestTargetPoseKey": "formation-front",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-formation-front.png",
-          "bestScore10": 3.73,
+          "bestTargetAuthorityScore10": 7.5,
+          "bestTargetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "bestScore10": 5.2,
+          "authorityAdjustedScore10": 3.9,
           "bestComponents": {
-            "jaccard": 0.291,
-            "silhouetteAgreement": 0.5479,
-            "colorSimilarity": 0.4646,
-            "fillRatioDelta": 0.1934,
-            "aspectDelta": 0.2149
+            "jaccard": 0.471,
+            "silhouetteAgreement": 0.5986,
+            "colorSimilarity": 0.5877,
+            "fillRatioDelta": 0.0723,
+            "aspectDelta": 0.0769
           }
         },
         {
@@ -993,13 +1148,16 @@
           "bestTargetCropId": "boss-galaga-flap-a",
           "bestTargetPoseKey": "flap-a",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-flap-a.png",
-          "bestScore10": 3.73,
+          "bestTargetAuthorityScore10": 7.5,
+          "bestTargetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "bestScore10": 5.2,
+          "authorityAdjustedScore10": 3.9,
           "bestComponents": {
-            "jaccard": 0.291,
-            "silhouetteAgreement": 0.5479,
-            "colorSimilarity": 0.4646,
-            "fillRatioDelta": 0.1934,
-            "aspectDelta": 0.2149
+            "jaccard": 0.471,
+            "silhouetteAgreement": 0.5986,
+            "colorSimilarity": 0.5877,
+            "fillRatioDelta": 0.0723,
+            "aspectDelta": 0.0769
           }
         },
         {
@@ -1010,13 +1168,16 @@
           "bestTargetCropId": "boss-galaga-flap-b",
           "bestTargetPoseKey": "flap-b",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-flap-b.png",
-          "bestScore10": 3.99,
+          "bestTargetAuthorityScore10": 7.5,
+          "bestTargetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "bestScore10": 5.4,
+          "authorityAdjustedScore10": 4.05,
           "bestComponents": {
-            "jaccard": 0.293,
-            "silhouetteAgreement": 0.5381,
-            "colorSimilarity": 0.6046,
-            "fillRatioDelta": 0.2217,
-            "aspectDelta": 0.2149
+            "jaccard": 0.4828,
+            "silhouetteAgreement": 0.6035,
+            "colorSimilarity": 0.6469,
+            "fillRatioDelta": 0.0439,
+            "aspectDelta": 0.0769
           }
         },
         {
@@ -1027,13 +1188,16 @@
           "bestTargetCropId": "boss-galaga-flap-b",
           "bestTargetPoseKey": "flap-b",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-flap-b.png",
-          "bestScore10": 3.99,
+          "bestTargetAuthorityScore10": 7.5,
+          "bestTargetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "bestScore10": 5.4,
+          "authorityAdjustedScore10": 4.05,
           "bestComponents": {
-            "jaccard": 0.293,
-            "silhouetteAgreement": 0.5381,
-            "colorSimilarity": 0.6046,
-            "fillRatioDelta": 0.2217,
-            "aspectDelta": 0.2149
+            "jaccard": 0.4828,
+            "silhouetteAgreement": 0.6035,
+            "colorSimilarity": 0.6469,
+            "fillRatioDelta": 0.0439,
+            "aspectDelta": 0.0769
           }
         },
         {
@@ -1044,13 +1208,16 @@
           "bestTargetCropId": "boss-galaga-flap-b",
           "bestTargetPoseKey": "flap-b",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-flap-b.png",
-          "bestScore10": 5.66,
+          "bestTargetAuthorityScore10": 7.5,
+          "bestTargetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "bestScore10": 5.3,
+          "authorityAdjustedScore10": 3.97,
           "bestComponents": {
-            "jaccard": 0.478,
-            "silhouetteAgreement": 0.6416,
-            "colorSimilarity": 0.7167,
-            "fillRatioDelta": 0.0518,
-            "aspectDelta": 0.008
+            "jaccard": 0.4367,
+            "silhouetteAgreement": 0.583,
+            "colorSimilarity": 0.724,
+            "fillRatioDelta": 0.0146,
+            "aspectDelta": 0.0031
           }
         },
         {
@@ -1061,13 +1228,16 @@
           "bestTargetCropId": "boss-galaga-flap-a",
           "bestTargetPoseKey": "flap-a",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-flap-a.png",
-          "bestScore10": 5.32,
+          "bestTargetAuthorityScore10": 7.5,
+          "bestTargetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "bestScore10": 4.92,
+          "authorityAdjustedScore10": 3.69,
           "bestComponents": {
-            "jaccard": 0.4718,
-            "silhouetteAgreement": 0.6436,
-            "colorSimilarity": 0.5594,
-            "fillRatioDelta": 0.0234,
-            "aspectDelta": 0.008
+            "jaccard": 0.4303,
+            "silhouetteAgreement": 0.585,
+            "colorSimilarity": 0.5448,
+            "fillRatioDelta": 0.0137,
+            "aspectDelta": 0.0031
           }
         },
         {
@@ -1078,13 +1248,16 @@
           "bestTargetCropId": "boss-galaga-formation-front",
           "bestTargetPoseKey": "formation-front",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/boss-galaga-formation-front.png",
-          "bestScore10": 5.32,
+          "bestTargetAuthorityScore10": 7.5,
+          "bestTargetAuthorityStatus": "trusted-cleaned-motion-reference",
+          "bestScore10": 4.92,
+          "authorityAdjustedScore10": 3.69,
           "bestComponents": {
-            "jaccard": 0.4718,
-            "silhouetteAgreement": 0.6436,
-            "colorSimilarity": 0.5594,
-            "fillRatioDelta": 0.0234,
-            "aspectDelta": 0.008
+            "jaccard": 0.4303,
+            "silhouetteAgreement": 0.585,
+            "colorSimilarity": 0.5448,
+            "fillRatioDelta": 0.0137,
+            "aspectDelta": 0.0031
           }
         }
       ]

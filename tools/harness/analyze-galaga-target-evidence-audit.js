@@ -53,6 +53,24 @@ const ROLE_AUDIT = [
     scoringUse: 'Primary target for player-fighter runtime comparison and the derived dual-fighter composite; turn/capture poses remain provisional.',
     playerMeaning: 'The fighter must feel smaller, crisp, and separate from reserve icons while preserving shot alignment and dual-fighter readability.',
     nextGap: 'Promote clean turn, captured, carried, rescue, and dual-fighter spacing evidence from true target gameplay windows.'
+  },
+  {
+    roleKey: 'challenge-specialty-aliens',
+    label: 'Challenge Specialty Aliens',
+    previousRisk: 'The current challenge-only target crops are small source-sheet cells. They are helpful taxonomy hints, but human review has not promoted them to canonical scoring truth.',
+    trustedUse: 'Keep these as planning evidence only until clean challenge-stage motion or gameplay windows provide source crops for dragonfly, scorpion, satellite/starship, and late blue/purple families.',
+    cropIds: [
+      'challenge-green-family-front',
+      'challenge-green-family-dive',
+      'challenge-yellow-family-front',
+      'challenge-yellow-family-dive',
+      'challenge-magenta-family-front',
+      'challenge-blue-yellow-family-front'
+    ],
+    confidence: 'low-medium',
+    scoringUse: 'Do not use these cells as release-facing proof of challenge alien graphical conformance. Use them to plan runtime families and to prioritize better ingestion.',
+    playerMeaning: 'Late challenging stages should introduce memorable bonus-stage aliens. The current evidence is enough to say we need novelty, not enough to claim the novelty is visually conformant.',
+    nextGap: 'Extract clean challenge-specialty alien frames from segmented motion clips or target gameplay windows, then split the generic role into named target families.'
   }
 ];
 
@@ -111,7 +129,10 @@ function rows(targetCrops){
         sourceImage: crop.sourceImage,
         sourceFrameSeconds: crop.sourceFrameSeconds,
         videoDerivedCleanCrop: !!crop.videoDerivedCleanCrop,
-        sourcePixelExact: !!crop.sourcePixelExact
+        sourcePixelExact: !!crop.sourcePixelExact,
+        authorityStatus: crop.authorityStatus || '',
+        authorityScore10: crop.authorityScore10 ?? null,
+        scoringUse: crop.scoringUse || ''
       }));
     const trustedCount = linked.filter(crop => crop.videoDerivedCleanCrop).length;
     const provisionalCount = linked.filter(crop => crop.reviewStatus && String(crop.reviewStatus).includes('provisional')).length;
@@ -119,6 +140,9 @@ function rows(targetCrops){
       trustedCropCount: trustedCount,
       provisionalCropCount: provisionalCount,
       linkedCrops: linked,
+      averageAuthorityScore10: linked.length
+        ? Math.round((linked.reduce((sum, crop) => sum + (+crop.authorityScore10 || 0), 0) / linked.length) * 10) / 10
+        : null,
       status: trustedCount > 0 ? 'trusted-primary-target-available' : 'provisional-target-only'
     });
   });
@@ -137,6 +161,7 @@ function markdownReport(artifact){
     `- Status: ${artifact.status}`,
     `- Trusted motion-reference crops: ${artifact.summary.trustedMotionReferenceCount}`,
     `- Provisional source-sheet crops: ${artifact.summary.provisionalSourceSheetCount}`,
+    `- Provisional-only roles: ${artifact.summary.provisionalOnlyRoleCount}`,
     `- Next best step: ${artifact.nextBestStep}`,
     '',
     '## Role Evidence',
@@ -145,7 +170,7 @@ function markdownReport(artifact){
     '| --- | --- | --- | --- | --- |'
   ];
   for(const row of artifact.rows){
-    const cropRead = row.linkedCrops.map(crop => `\`${crop.id}\` (${crop.reviewStatus})`).join('<br>') || 'none';
+    const cropRead = row.linkedCrops.map(crop => `\`${crop.id}\` (${crop.reviewStatus}; authority ${crop.authorityScore10 ?? 'n/a'}/10 ${crop.authorityStatus || ''})`).join('<br>') || 'none';
     lines.push(`| ${row.label} | ${row.status}<br>${row.previousRisk} | ${cropRead} | ${row.scoringUse}<br><br>${row.playerMeaning} | ${row.nextGap} |`);
   }
   lines.push('', '## Measurement Rule', '', 'Runtime sprite scores may use trusted motion-reference crops as primary formation targets. Provisional source-sheet cells remain useful evidence, but their scores must be interpreted as planning signals until a clean crop or temporal target window supersedes them.', '');
@@ -175,10 +200,11 @@ function main(){
       trustedPrimaryRoleCount: auditRows.filter(row => row.status === 'trusted-primary-target-available').length,
       provisionalOnlyRoleCount: auditRows.filter(row => row.status === 'provisional-target-only').length,
       trustedMotionReferenceCount: targetCrops.summary?.trustedMotionReferenceCount || 0,
-      provisionalSourceSheetCount: targetCrops.summary?.provisionalSourceSheetCount || 0
+      provisionalSourceSheetCount: targetCrops.summary?.provisionalSourceSheetCount || 0,
+      challengeSpecialtyAuthorityScore10: targetCrops.summary?.challengeSpecialtyAuthorityScore10 ?? null
     },
     rows: auditRows,
-    nextBestStep: 'Regenerate runtime-vs-target scoring against the trusted Boss, Bee, and Butterfly primary targets, then promote player-fighter and temporal pulse-pair targets.'
+    nextBestStep: 'Promote clean challenge-specialty target windows before treating late challenge alien graphics as release-facing conformance truth.'
   };
   writeJson(OUT, artifact);
   writeText(MARKDOWN, markdownReport(artifact));

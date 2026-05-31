@@ -38,6 +38,7 @@ function assessVideoArtifact(file, expectedDuration=0){
   const { data, stderr } = ffprobeJson(file);
   const streams = Array.isArray(data.streams) ? data.streams : [];
   const videoStreams = streams.filter(s => s.codec_type === 'video');
+  const audioStreams = streams.filter(s => s.codec_type === 'audio');
   const formatDuration = +(data.format?.duration || 0);
   const drift = expectedDuration > 0 && formatDuration > 0 ? Math.abs(formatDuration - expectedDuration) : 0;
   const issues = [];
@@ -53,6 +54,7 @@ function assessVideoArtifact(file, expectedDuration=0){
     formatDuration,
     drift,
     videoStreams,
+    audioStreams,
     stderr,
     issues,
     ok: !issues.length
@@ -72,7 +74,7 @@ function repairVideoArtifact(file){
     '-v', 'error',
     '-fflags', '+genpts',
     '-i', file,
-    '-map', '0:v:0',
+    '-map', '0',
     '-c', 'copy',
     out
   ], {

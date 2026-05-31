@@ -201,15 +201,21 @@ function finalizeChallengeClear(){
  if(bonusTotal)S.bannerSub+=`\nBONUS ${bonusTotal}`;
  if(typeof commentatorEvent==='function')commentatorEvent(perfect?'challenge_perfect':'challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total,bonusTotal});
  S.bannerMode='challengeResult';
- S.banner=1.15;
+ const challengeResultsTiming=usesReferenceTimingModel()
+  ? currentGamePackReferenceTiming('challengeResults')
+  : null;
+ const resultBannerWindow=usesReferenceTimingModel()&&typeof currentGamePackReferenceTimingField==='function'
+  ? currentGamePackReferenceTimingField('challengeResults','resultBannerWindow',S.stage,1.15)
+  : (challengeResultsTiming?.resultBannerWindow??1.15);
+ const resultHoldWindow=usesReferenceTimingModel()&&typeof currentGamePackReferenceTimingField==='function'
+  ? currentGamePackReferenceTimingField('challengeResults','resultHoldWindow',S.stage,1.45)
+  : (challengeResultsTiming?.resultHoldWindow??1.45);
+ S.banner=resultBannerWindow;
  S.pendingStage=S.stage+1;
  S.lastChallengeClearT=S.stageClock;
  S.challengeTransitionStallLogged=0;
- S.postChallengeT=1.45;
+ S.postChallengeT=resultHoldWindow;
  if(usesReferenceTimingModel()){
-  const challengeResultsTiming=usesReferenceTimingModel()
-   ? currentGamePackReferenceTiming('challengeResults')
-   : null;
   clearReferenceTransitionCueWindow();
   S.challengeResultPerfect=perfect>0?1:0;
   S.challengeResultCueT=challengeResultsTiming?.resultCueDelay??0.34;

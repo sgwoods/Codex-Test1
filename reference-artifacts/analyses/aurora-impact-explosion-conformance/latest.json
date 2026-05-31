@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "aurora-impact-explosion-conformance",
-  "generatedAt": "2026-05-18T21:49:58.819Z",
-  "commit": "65842f55",
-  "branch": "codex/macbook-conformance-investment-review",
+  "generatedAt": "2026-05-31T01:11:59.216Z",
+  "commit": "2d144d5c1",
+  "branch": "codex/macbook-fullscreen-timing-alignment-wip",
   "dirty": true,
   "gameKey": "aurora-galactica",
   "sources": {
@@ -14,15 +14,15 @@
   "summary": {
     "sampleCount": 4,
     "targetCropCount": 33,
-    "averageScore10": 5.86,
-    "averageLifecycleScore10": 3.81,
+    "averageScore10": 5.85,
+    "averageLifecycleScore10": 3.95,
     "averageAudioCouplingScore10": 8.08,
     "weakestKey": "boss-first-hit",
     "weakestScore10": 5.6,
     "weakestLifecycleKey": "boss-first-hit",
-    "weakestLifecycleScore10": 3.67,
+    "weakestLifecycleScore10": 3.7,
     "scoringMode": "static-runtime-effect-crop-plus-lifecycle-and-audio-coupling",
-    "userFacingRead": "Impact/explosion visual feedback is measurable but still immature. Weakest static event is boss-first-hit at 5.6/10; weakest lifecycle event is boss-first-hit at 3.67/10. The scorer now checks onset/expansion/decay and expected audio cue presence."
+    "userFacingRead": "Impact/explosion visual feedback is measurable but still immature. Weakest static event is boss-first-hit at 5.6/10; weakest lifecycle event is boss-first-hit at 3.7/10. The scorer now checks onset/expansion/decay and expected audio cue presence."
   },
   "measurementLimits": [
     "This compares runtime effect crops against promoted Galaga target explosion crops and now captures a short lifecycle window for each event.",
@@ -68,8 +68,8 @@
             "height": 216
           },
           "playerMeaning": "A missile contact should visibly tell the player that a small enemy was hit.",
-          "filledCells": 679,
-          "fillRatio": 0.6631,
+          "filledCells": 675,
+          "fillRatio": 0.6592,
           "trimBounds": {
             "x": 83,
             "y": 83,
@@ -82,12 +82,12 @@
           ],
           "bestTargetCropId": "impact-explosion-small",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
-          "score10": 5.66,
+          "score10": 5.67,
           "bestComponents": {
-            "jaccard": 0.4863,
-            "silhouetteAgreement": 0.6328,
-            "colorSimilarity": 0.7028,
-            "fillRatioDelta": 0.2637,
+            "jaccard": 0.487,
+            "silhouetteAgreement": 0.6348,
+            "colorSimilarity": 0.7016,
+            "fillRatioDelta": 0.2598,
             "aspectDelta": 0
           },
           "topCandidates": [
@@ -96,11 +96,11 @@
               "targetRoleKey": "projectiles-and-impacts",
               "targetPoseKey": "enemy-explosion-small",
               "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
-              "score10": 5.66,
-              "jaccard": 0.4863,
-              "silhouetteAgreement": 0.6328,
-              "colorSimilarity": 0.7028,
-              "fillRatioDelta": 0.2637,
+              "score10": 5.67,
+              "jaccard": 0.487,
+              "silhouetteAgreement": 0.6348,
+              "colorSimilarity": 0.7016,
+              "fillRatioDelta": 0.2598,
               "aspectDelta": 0
             }
           ],
@@ -124,8 +124,8 @@
             "height": 216
           },
           "playerMeaning": "A missile contact should visibly tell the player that a small enemy was hit.",
-          "filledCells": 675,
-          "fillRatio": 0.6592,
+          "filledCells": 676,
+          "fillRatio": 0.6602,
           "trimBounds": {
             "x": 83,
             "y": 83,
@@ -138,12 +138,12 @@
           ],
           "bestTargetCropId": "impact-explosion-small",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
-          "score10": 5.67,
+          "score10": 5.66,
           "bestComponents": {
-            "jaccard": 0.487,
-            "silhouetteAgreement": 0.6348,
-            "colorSimilarity": 0.7019,
-            "fillRatioDelta": 0.2598,
+            "jaccard": 0.4863,
+            "silhouetteAgreement": 0.6338,
+            "colorSimilarity": 0.702,
+            "fillRatioDelta": 0.2607,
             "aspectDelta": 0
           },
           "topCandidates": [
@@ -152,11 +152,11 @@
               "targetRoleKey": "projectiles-and-impacts",
               "targetPoseKey": "enemy-explosion-small",
               "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
-              "score10": 5.67,
-              "jaccard": 0.487,
-              "silhouetteAgreement": 0.6348,
-              "colorSimilarity": 0.7019,
-              "fillRatioDelta": 0.2598,
+              "score10": 5.66,
+              "jaccard": 0.4863,
+              "silhouetteAgreement": 0.6338,
+              "colorSimilarity": 0.702,
+              "fillRatioDelta": 0.2607,
               "aspectDelta": 0
             }
           ],
@@ -180,8 +180,8 @@
             "height": 216
           },
           "playerMeaning": "A missile contact should visibly tell the player that a small enemy was hit.",
-          "filledCells": 675,
-          "fillRatio": 0.6592,
+          "filledCells": 679,
+          "fillRatio": 0.6631,
           "trimBounds": {
             "x": 83,
             "y": 83,
@@ -194,12 +194,12 @@
           ],
           "bestTargetCropId": "impact-explosion-small",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
-          "score10": 5.67,
+          "score10": 5.66,
           "bestComponents": {
-            "jaccard": 0.487,
-            "silhouetteAgreement": 0.6348,
-            "colorSimilarity": 0.7015,
-            "fillRatioDelta": 0.2598,
+            "jaccard": 0.4863,
+            "silhouetteAgreement": 0.6328,
+            "colorSimilarity": 0.7021,
+            "fillRatioDelta": 0.2637,
             "aspectDelta": 0
           },
           "topCandidates": [
@@ -208,11 +208,11 @@
               "targetRoleKey": "projectiles-and-impacts",
               "targetPoseKey": "enemy-explosion-small",
               "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
-              "score10": 5.67,
-              "jaccard": 0.487,
-              "silhouetteAgreement": 0.6348,
-              "colorSimilarity": 0.7015,
-              "fillRatioDelta": 0.2598,
+              "score10": 5.66,
+              "jaccard": 0.4863,
+              "silhouetteAgreement": 0.6328,
+              "colorSimilarity": 0.7021,
+              "fillRatioDelta": 0.2637,
               "aspectDelta": 0
             }
           ],
@@ -236,8 +236,8 @@
             "height": 216
           },
           "playerMeaning": "A missile contact should visibly tell the player that a small enemy was hit.",
-          "filledCells": 675,
-          "fillRatio": 0.6592,
+          "filledCells": 677,
+          "fillRatio": 0.6611,
           "trimBounds": {
             "x": 83,
             "y": 83,
@@ -250,12 +250,12 @@
           ],
           "bestTargetCropId": "impact-explosion-small",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
-          "score10": 5.67,
+          "score10": 5.66,
           "bestComponents": {
-            "jaccard": 0.487,
-            "silhouetteAgreement": 0.6348,
-            "colorSimilarity": 0.7019,
-            "fillRatioDelta": 0.2598,
+            "jaccard": 0.4856,
+            "silhouetteAgreement": 0.6328,
+            "colorSimilarity": 0.7022,
+            "fillRatioDelta": 0.2617,
             "aspectDelta": 0
           },
           "topCandidates": [
@@ -264,19 +264,19 @@
               "targetRoleKey": "projectiles-and-impacts",
               "targetPoseKey": "enemy-explosion-small",
               "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
-              "score10": 5.67,
-              "jaccard": 0.487,
-              "silhouetteAgreement": 0.6348,
-              "colorSimilarity": 0.7019,
-              "fillRatioDelta": 0.2598,
+              "score10": 5.66,
+              "jaccard": 0.4856,
+              "silhouetteAgreement": 0.6328,
+              "colorSimilarity": 0.7022,
+              "fillRatioDelta": 0.2617,
               "aspectDelta": 0
             }
           ],
           "decision": "usable-static-keeper-candidate"
         }
       ],
-      "filledCells": 675,
-      "fillRatio": 0.6592,
+      "filledCells": 679,
+      "fillRatio": 0.6631,
       "trimBounds": {
         "x": 83,
         "y": 83,
@@ -289,12 +289,12 @@
       ],
       "bestTargetCropId": "impact-explosion-small",
       "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
-      "score10": 5.67,
+      "score10": 5.66,
       "bestComponents": {
-        "jaccard": 0.487,
-        "silhouetteAgreement": 0.6348,
-        "colorSimilarity": 0.7023,
-        "fillRatioDelta": 0.2598,
+        "jaccard": 0.4863,
+        "silhouetteAgreement": 0.6328,
+        "colorSimilarity": 0.7027,
+        "fillRatioDelta": 0.2637,
         "aspectDelta": 0
       },
       "topCandidates": [
@@ -303,11 +303,11 @@
           "targetRoleKey": "projectiles-and-impacts",
           "targetPoseKey": "enemy-explosion-small",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
-          "score10": 5.67,
-          "jaccard": 0.487,
-          "silhouetteAgreement": 0.6348,
-          "colorSimilarity": 0.7023,
-          "fillRatioDelta": 0.2598,
+          "score10": 5.66,
+          "jaccard": 0.4863,
+          "silhouetteAgreement": 0.6328,
+          "colorSimilarity": 0.7027,
+          "fillRatioDelta": 0.2637,
           "aspectDelta": 0
         }
       ],
@@ -318,14 +318,14 @@
       "audioCouplingRead": "enemyHit audio mapping exists; worst audio segment risk 2.17/10, semantic score 9.8/10.",
       "lifecycle": {
         "frameCount": 4,
-        "averageFrameScore10": 5.67,
-        "lifecycleScore10": 3.71,
+        "averageFrameScore10": 5.66,
+        "lifecycleScore10": 4.23,
         "fillRatioRange": 0.0039,
-        "peakFrameKey": "life-01",
-        "expansionScore": 0,
-        "decayScore": 0.014,
-        "peakTimingScore": 0.45,
-        "read": "enemy-hit lifecycle score 3.71/10 from onset/expansion/decay frames; this starts measuring whether the event unfolds clearly instead of being one generic flash."
+        "peakFrameKey": "life-03",
+        "expansionScore": 0.016,
+        "decayScore": 0.007,
+        "peakTimingScore": 1,
+        "read": "enemy-hit lifecycle score 4.23/10 from onset/expansion/decay frames; this starts measuring whether the event unfolds clearly instead of being one generic flash."
       }
     },
     {
@@ -365,8 +365,8 @@
             "height": 248
           },
           "playerMeaning": "A destroyed enemy should have a short, readable arcade burst that pairs with the boom cue.",
-          "filledCells": 678,
-          "fillRatio": 0.6621,
+          "filledCells": 679,
+          "fillRatio": 0.6631,
           "trimBounds": {
             "x": 99,
             "y": 99,
@@ -381,10 +381,10 @@
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
           "score10": 5.66,
           "bestComponents": {
-            "jaccard": 0.487,
-            "silhouetteAgreement": 0.6338,
-            "colorSimilarity": 0.7003,
-            "fillRatioDelta": 0.2627,
+            "jaccard": 0.4863,
+            "silhouetteAgreement": 0.6328,
+            "colorSimilarity": 0.7005,
+            "fillRatioDelta": 0.2637,
             "aspectDelta": 0
           },
           "topCandidates": [
@@ -394,10 +394,10 @@
               "targetPoseKey": "enemy-explosion-small",
               "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
               "score10": 5.66,
-              "jaccard": 0.487,
-              "silhouetteAgreement": 0.6338,
-              "colorSimilarity": 0.7003,
-              "fillRatioDelta": 0.2627,
+              "jaccard": 0.4863,
+              "silhouetteAgreement": 0.6328,
+              "colorSimilarity": 0.7005,
+              "fillRatioDelta": 0.2637,
               "aspectDelta": 0
             }
           ],
@@ -421,8 +421,8 @@
             "height": 248
           },
           "playerMeaning": "A destroyed enemy should have a short, readable arcade burst that pairs with the boom cue.",
-          "filledCells": 676,
-          "fillRatio": 0.6602,
+          "filledCells": 679,
+          "fillRatio": 0.6631,
           "trimBounds": {
             "x": 99,
             "y": 99,
@@ -438,9 +438,9 @@
           "score10": 5.66,
           "bestComponents": {
             "jaccard": 0.4863,
-            "silhouetteAgreement": 0.6338,
-            "colorSimilarity": 0.7002,
-            "fillRatioDelta": 0.2607,
+            "silhouetteAgreement": 0.6328,
+            "colorSimilarity": 0.7004,
+            "fillRatioDelta": 0.2637,
             "aspectDelta": 0
           },
           "topCandidates": [
@@ -451,9 +451,9 @@
               "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
               "score10": 5.66,
               "jaccard": 0.4863,
-              "silhouetteAgreement": 0.6338,
-              "colorSimilarity": 0.7002,
-              "fillRatioDelta": 0.2607,
+              "silhouetteAgreement": 0.6328,
+              "colorSimilarity": 0.7004,
+              "fillRatioDelta": 0.2637,
               "aspectDelta": 0
             }
           ],
@@ -477,8 +477,8 @@
             "height": 248
           },
           "playerMeaning": "A destroyed enemy should have a short, readable arcade burst that pairs with the boom cue.",
-          "filledCells": 677,
-          "fillRatio": 0.6611,
+          "filledCells": 679,
+          "fillRatio": 0.6631,
           "trimBounds": {
             "x": 99,
             "y": 99,
@@ -491,12 +491,12 @@
           ],
           "bestTargetCropId": "impact-explosion-small",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
-          "score10": 5.65,
+          "score10": 5.66,
           "bestComponents": {
-            "jaccard": 0.4856,
+            "jaccard": 0.4863,
             "silhouetteAgreement": 0.6328,
-            "colorSimilarity": 0.7001,
-            "fillRatioDelta": 0.2617,
+            "colorSimilarity": 0.6998,
+            "fillRatioDelta": 0.2637,
             "aspectDelta": 0
           },
           "topCandidates": [
@@ -505,11 +505,11 @@
               "targetRoleKey": "projectiles-and-impacts",
               "targetPoseKey": "enemy-explosion-small",
               "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
-              "score10": 5.65,
-              "jaccard": 0.4856,
+              "score10": 5.66,
+              "jaccard": 0.4863,
               "silhouetteAgreement": 0.6328,
-              "colorSimilarity": 0.7001,
-              "fillRatioDelta": 0.2617,
+              "colorSimilarity": 0.6998,
+              "fillRatioDelta": 0.2637,
               "aspectDelta": 0
             }
           ],
@@ -533,8 +533,8 @@
             "height": 248
           },
           "playerMeaning": "A destroyed enemy should have a short, readable arcade burst that pairs with the boom cue.",
-          "filledCells": 677,
-          "fillRatio": 0.6611,
+          "filledCells": 675,
+          "fillRatio": 0.6592,
           "trimBounds": {
             "x": 99,
             "y": 99,
@@ -547,12 +547,12 @@
           ],
           "bestTargetCropId": "impact-explosion-small",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
-          "score10": 5.65,
+          "score10": 5.67,
           "bestComponents": {
-            "jaccard": 0.4856,
-            "silhouetteAgreement": 0.6328,
-            "colorSimilarity": 0.7,
-            "fillRatioDelta": 0.2617,
+            "jaccard": 0.487,
+            "silhouetteAgreement": 0.6348,
+            "colorSimilarity": 0.7002,
+            "fillRatioDelta": 0.2598,
             "aspectDelta": 0
           },
           "topCandidates": [
@@ -561,11 +561,11 @@
               "targetRoleKey": "projectiles-and-impacts",
               "targetPoseKey": "enemy-explosion-small",
               "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
-              "score10": 5.65,
-              "jaccard": 0.4856,
-              "silhouetteAgreement": 0.6328,
-              "colorSimilarity": 0.7,
-              "fillRatioDelta": 0.2617,
+              "score10": 5.67,
+              "jaccard": 0.487,
+              "silhouetteAgreement": 0.6348,
+              "colorSimilarity": 0.7002,
+              "fillRatioDelta": 0.2598,
               "aspectDelta": 0
             }
           ],
@@ -590,7 +590,7 @@
       "bestComponents": {
         "jaccard": 0.4863,
         "silhouetteAgreement": 0.6328,
-        "colorSimilarity": 0.6996,
+        "colorSimilarity": 0.7002,
         "fillRatioDelta": 0.2637,
         "aspectDelta": 0
       },
@@ -603,7 +603,7 @@
           "score10": 5.66,
           "jaccard": 0.4863,
           "silhouetteAgreement": 0.6328,
-          "colorSimilarity": 0.6996,
+          "colorSimilarity": 0.7002,
           "fillRatioDelta": 0.2637,
           "aspectDelta": 0
         }
@@ -615,14 +615,14 @@
       "audioCouplingRead": "enemyBoom audio mapping exists; worst audio segment risk 0.86/10, semantic score 10/10.",
       "lifecycle": {
         "frameCount": 4,
-        "averageFrameScore10": 5.65,
-        "lifecycleScore10": 3.69,
-        "fillRatioRange": 0.0019,
+        "averageFrameScore10": 5.66,
+        "lifecycleScore10": 3.71,
+        "fillRatioRange": 0.0039,
         "peakFrameKey": "life-01",
         "expansionScore": 0,
-        "decayScore": 0.004,
+        "decayScore": 0.014,
         "peakTimingScore": 0.45,
-        "read": "enemy-boom lifecycle score 3.69/10 from onset/expansion/decay frames; this starts measuring whether the event unfolds clearly instead of being one generic flash."
+        "read": "enemy-boom lifecycle score 3.71/10 from onset/expansion/decay frames; this starts measuring whether the event unfolds clearly instead of being one generic flash."
       }
     },
     {
@@ -662,8 +662,8 @@
             "height": 296
           },
           "playerMeaning": "The first boss hit should read as damage, not as a confusing full death explosion.",
-          "filledCells": 660,
-          "fillRatio": 0.6445,
+          "filledCells": 665,
+          "fillRatio": 0.6494,
           "trimBounds": {
             "x": 113,
             "y": 113,
@@ -679,10 +679,10 @@
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
           "score10": 5.58,
           "bestComponents": {
-            "jaccard": 0.4725,
-            "silhouetteAgreement": 0.626,
-            "colorSimilarity": 0.7108,
-            "fillRatioDelta": 0.2451,
+            "jaccard": 0.4733,
+            "silhouetteAgreement": 0.625,
+            "colorSimilarity": 0.7089,
+            "fillRatioDelta": 0.25,
             "aspectDelta": 0
           },
           "topCandidates": [
@@ -692,10 +692,10 @@
               "targetPoseKey": "enemy-explosion-small",
               "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
               "score10": 5.58,
-              "jaccard": 0.4725,
-              "silhouetteAgreement": 0.626,
-              "colorSimilarity": 0.7108,
-              "fillRatioDelta": 0.2451,
+              "jaccard": 0.4733,
+              "silhouetteAgreement": 0.625,
+              "colorSimilarity": 0.7089,
+              "fillRatioDelta": 0.25,
               "aspectDelta": 0
             },
             {
@@ -703,11 +703,11 @@
               "targetRoleKey": "projectiles-and-impacts",
               "targetPoseKey": "boss-explosion-large",
               "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-large.png",
-              "score10": 5.46,
-              "jaccard": 0.5042,
-              "silhouetteAgreement": 0.5977,
-              "colorSimilarity": 0.6497,
-              "fillRatioDelta": 0.0684,
+              "score10": 5.45,
+              "jaccard": 0.503,
+              "silhouetteAgreement": 0.5947,
+              "colorSimilarity": 0.6486,
+              "fillRatioDelta": 0.0732,
               "aspectDelta": 0.129
             }
           ],
@@ -731,8 +731,8 @@
             "height": 296
           },
           "playerMeaning": "The first boss hit should read as damage, not as a confusing full death explosion.",
-          "filledCells": 656,
-          "fillRatio": 0.6406,
+          "filledCells": 662,
+          "fillRatio": 0.6465,
           "trimBounds": {
             "x": 113,
             "y": 113,
@@ -746,12 +746,12 @@
           ],
           "bestTargetCropId": "impact-explosion-small",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
-          "score10": 5.59,
+          "score10": 5.6,
           "bestComponents": {
-            "jaccard": 0.473,
+            "jaccard": 0.4752,
             "silhouetteAgreement": 0.6279,
-            "colorSimilarity": 0.7114,
-            "fillRatioDelta": 0.2412,
+            "colorSimilarity": 0.7087,
+            "fillRatioDelta": 0.2471,
             "aspectDelta": 0
           },
           "topCandidates": [
@@ -760,11 +760,11 @@
               "targetRoleKey": "projectiles-and-impacts",
               "targetPoseKey": "enemy-explosion-small",
               "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
-              "score10": 5.59,
-              "jaccard": 0.473,
+              "score10": 5.6,
+              "jaccard": 0.4752,
               "silhouetteAgreement": 0.6279,
-              "colorSimilarity": 0.7114,
-              "fillRatioDelta": 0.2412,
+              "colorSimilarity": 0.7087,
+              "fillRatioDelta": 0.2471,
               "aspectDelta": 0
             },
             {
@@ -772,11 +772,11 @@
               "targetRoleKey": "projectiles-and-impacts",
               "targetPoseKey": "boss-explosion-large",
               "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-large.png",
-              "score10": 5.44,
-              "jaccard": 0.5012,
-              "silhouetteAgreement": 0.5957,
-              "colorSimilarity": 0.6511,
-              "fillRatioDelta": 0.0645,
+              "score10": 5.51,
+              "jaccard": 0.5103,
+              "silhouetteAgreement": 0.6035,
+              "colorSimilarity": 0.6484,
+              "fillRatioDelta": 0.0703,
               "aspectDelta": 0.129
             }
           ],
@@ -800,8 +800,8 @@
             "height": 296
           },
           "playerMeaning": "The first boss hit should read as damage, not as a confusing full death explosion.",
-          "filledCells": 656,
-          "fillRatio": 0.6406,
+          "filledCells": 660,
+          "fillRatio": 0.6445,
           "trimBounds": {
             "x": 113,
             "y": 113,
@@ -815,12 +815,12 @@
           ],
           "bestTargetCropId": "impact-explosion-small",
           "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
-          "score10": 5.61,
+          "score10": 5.65,
           "bestComponents": {
-            "jaccard": 0.4751,
-            "silhouetteAgreement": 0.6299,
-            "colorSimilarity": 0.7098,
-            "fillRatioDelta": 0.2412,
+            "jaccard": 0.4806,
+            "silhouetteAgreement": 0.6338,
+            "colorSimilarity": 0.7089,
+            "fillRatioDelta": 0.2451,
             "aspectDelta": 0
           },
           "topCandidates": [
@@ -829,11 +829,11 @@
               "targetRoleKey": "projectiles-and-impacts",
               "targetPoseKey": "enemy-explosion-small",
               "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
-              "score10": 5.61,
-              "jaccard": 0.4751,
-              "silhouetteAgreement": 0.6299,
-              "colorSimilarity": 0.7098,
-              "fillRatioDelta": 0.2412,
+              "score10": 5.65,
+              "jaccard": 0.4806,
+              "silhouetteAgreement": 0.6338,
+              "colorSimilarity": 0.7089,
+              "fillRatioDelta": 0.2451,
               "aspectDelta": 0
             },
             {
@@ -841,11 +841,11 @@
               "targetRoleKey": "projectiles-and-impacts",
               "targetPoseKey": "boss-explosion-large",
               "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-large.png",
-              "score10": 5.46,
-              "jaccard": 0.503,
-              "silhouetteAgreement": 0.5977,
-              "colorSimilarity": 0.6513,
-              "fillRatioDelta": 0.0645,
+              "score10": 5.48,
+              "jaccard": 0.506,
+              "silhouetteAgreement": 0.5996,
+              "colorSimilarity": 0.6498,
+              "fillRatioDelta": 0.0684,
               "aspectDelta": 0.129
             }
           ],
@@ -888,7 +888,7 @@
           "bestComponents": {
             "jaccard": 0.4765,
             "silhouetteAgreement": 0.6309,
-            "colorSimilarity": 0.709,
+            "colorSimilarity": 0.7093,
             "fillRatioDelta": 0.2422,
             "aspectDelta": 0
           },
@@ -901,7 +901,7 @@
               "score10": 5.62,
               "jaccard": 0.4765,
               "silhouetteAgreement": 0.6309,
-              "colorSimilarity": 0.709,
+              "colorSimilarity": 0.7093,
               "fillRatioDelta": 0.2422,
               "aspectDelta": 0
             },
@@ -913,7 +913,7 @@
               "score10": 5.47,
               "jaccard": 0.5042,
               "silhouetteAgreement": 0.5986,
-              "colorSimilarity": 0.6501,
+              "colorSimilarity": 0.6503,
               "fillRatioDelta": 0.0654,
               "aspectDelta": 0.129
             }
@@ -921,8 +921,8 @@
           "decision": "usable-static-keeper-candidate"
         }
       ],
-      "filledCells": 659,
-      "fillRatio": 0.6436,
+      "filledCells": 657,
+      "fillRatio": 0.6416,
       "trimBounds": {
         "x": 113,
         "y": 113,
@@ -938,10 +938,10 @@
       "bestTargetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
       "score10": 5.6,
       "bestComponents": {
-        "jaccard": 0.4751,
+        "jaccard": 0.4744,
         "silhouetteAgreement": 0.6289,
-        "colorSimilarity": 0.7082,
-        "fillRatioDelta": 0.2441,
+        "colorSimilarity": 0.7114,
+        "fillRatioDelta": 0.2422,
         "aspectDelta": 0
       },
       "topCandidates": [
@@ -951,10 +951,10 @@
           "targetPoseKey": "enemy-explosion-small",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-small.png",
           "score10": 5.6,
-          "jaccard": 0.4751,
+          "jaccard": 0.4744,
           "silhouetteAgreement": 0.6289,
-          "colorSimilarity": 0.7082,
-          "fillRatioDelta": 0.2441,
+          "colorSimilarity": 0.7114,
+          "fillRatioDelta": 0.2422,
           "aspectDelta": 0
         },
         {
@@ -962,11 +962,11 @@
           "targetRoleKey": "projectiles-and-impacts",
           "targetPoseKey": "boss-explosion-large",
           "targetCrop": "reference-artifacts/analyses/galaga-alien-target-crops/latest-crops/impact-explosion-large.png",
-          "score10": 5.44,
-          "jaccard": 0.5012,
-          "silhouetteAgreement": 0.5947,
-          "colorSimilarity": 0.6511,
-          "fillRatioDelta": 0.0674,
+          "score10": 5.47,
+          "jaccard": 0.5042,
+          "silhouetteAgreement": 0.5986,
+          "colorSimilarity": 0.6497,
+          "fillRatioDelta": 0.0654,
           "aspectDelta": 0.129
         }
       ],
@@ -977,14 +977,14 @@
       "audioCouplingRead": "bossHit audio mapping exists; worst audio segment risk 0.92/10, semantic score 9.8/10.",
       "lifecycle": {
         "frameCount": 4,
-        "averageFrameScore10": 5.6,
-        "lifecycleScore10": 3.67,
-        "fillRatioRange": 0.0039,
+        "averageFrameScore10": 5.61,
+        "lifecycleScore10": 3.7,
+        "fillRatioRange": 0.0078,
         "peakFrameKey": "life-01",
         "expansionScore": 0,
-        "decayScore": 0.011,
+        "decayScore": 0.029,
         "peakTimingScore": 0.45,
-        "read": "boss-first-hit lifecycle score 3.67/10 from onset/expansion/decay frames; this starts measuring whether the event unfolds clearly instead of being one generic flash."
+        "read": "boss-first-hit lifecycle score 3.7/10 from onset/expansion/decay frames; this starts measuring whether the event unfolds clearly instead of being one generic flash."
       }
     },
     {
@@ -1043,7 +1043,7 @@
           "bestComponents": {
             "jaccard": 0.614,
             "silhouetteAgreement": 0.666,
-            "colorSimilarity": 0.7293,
+            "colorSimilarity": 0.7292,
             "fillRatioDelta": 0.2441,
             "aspectDelta": 0.0114
           },
@@ -1056,7 +1056,7 @@
               "score10": 6.49,
               "jaccard": 0.614,
               "silhouetteAgreement": 0.666,
-              "colorSimilarity": 0.7293,
+              "colorSimilarity": 0.7292,
               "fillRatioDelta": 0.2441,
               "aspectDelta": 0.0114
             },
@@ -1068,7 +1068,7 @@
               "score10": 4.81,
               "jaccard": 0.4081,
               "silhouetteAgreement": 0.4873,
-              "colorSimilarity": 0.7185,
+              "colorSimilarity": 0.7183,
               "fillRatioDelta": 0.4209,
               "aspectDelta": 0.1176
             }
@@ -1112,7 +1112,7 @@
           "bestComponents": {
             "jaccard": 0.614,
             "silhouetteAgreement": 0.666,
-            "colorSimilarity": 0.7292,
+            "colorSimilarity": 0.7293,
             "fillRatioDelta": 0.2441,
             "aspectDelta": 0.0114
           },
@@ -1125,7 +1125,7 @@
               "score10": 6.49,
               "jaccard": 0.614,
               "silhouetteAgreement": 0.666,
-              "colorSimilarity": 0.7292,
+              "colorSimilarity": 0.7293,
               "fillRatioDelta": 0.2441,
               "aspectDelta": 0.0114
             },
@@ -1137,7 +1137,7 @@
               "score10": 4.81,
               "jaccard": 0.4081,
               "silhouetteAgreement": 0.4873,
-              "colorSimilarity": 0.7183,
+              "colorSimilarity": 0.7185,
               "fillRatioDelta": 0.4209,
               "aspectDelta": 0.1176
             }
@@ -1206,7 +1206,7 @@
               "score10": 4.81,
               "jaccard": 0.4081,
               "silhouetteAgreement": 0.4873,
-              "colorSimilarity": 0.7185,
+              "colorSimilarity": 0.7184,
               "fillRatioDelta": 0.4209,
               "aspectDelta": 0.1176
             }
@@ -1250,7 +1250,7 @@
           "bestComponents": {
             "jaccard": 0.614,
             "silhouetteAgreement": 0.666,
-            "colorSimilarity": 0.7292,
+            "colorSimilarity": 0.7293,
             "fillRatioDelta": 0.2441,
             "aspectDelta": 0.0114
           },
@@ -1263,7 +1263,7 @@
               "score10": 6.49,
               "jaccard": 0.614,
               "silhouetteAgreement": 0.666,
-              "colorSimilarity": 0.7292,
+              "colorSimilarity": 0.7293,
               "fillRatioDelta": 0.2441,
               "aspectDelta": 0.0114
             },
@@ -1302,7 +1302,7 @@
       "bestComponents": {
         "jaccard": 0.614,
         "silhouetteAgreement": 0.666,
-        "colorSimilarity": 0.7293,
+        "colorSimilarity": 0.7291,
         "fillRatioDelta": 0.2441,
         "aspectDelta": 0.0114
       },
@@ -1315,7 +1315,7 @@
           "score10": 6.49,
           "jaccard": 0.614,
           "silhouetteAgreement": 0.666,
-          "colorSimilarity": 0.7293,
+          "colorSimilarity": 0.7291,
           "fillRatioDelta": 0.2441,
           "aspectDelta": 0.0114
         },

@@ -72,9 +72,13 @@ const APPLICATION_ARTIFACT_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 
 const CHALLENGE_STAGE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_SWEEP = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_SWEEP_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep-index', 'latest.json');
+const CHALLENGE_STAGE_CANDIDATE_FULL_ANALYZER_REVIEW = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-full-analyzer-review', 'latest.json');
 const CHALLENGE_TRAJECTORY_CONTROLS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-trajectory-controls', 'latest.json');
+const CHALLENGE_SETPIECE_CONTRACTS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-setpiece-contracts', 'latest.json');
+const GAMEPLAY_SEGMENT_CAPTURE = path.join(ROOT, 'reference-artifacts', 'analyses', 'gameplay-segment-captures', 'latest.json');
 const STAGE7_REFERENCE_PATH_BEFORE_AFTER = path.join(ROOT, 'reference-artifacts', 'analyses', 'stage7-reference-path-before-after', 'latest.json');
 const LEVEL_VISUAL_CONFORMANCE_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'level-visual-conformance-index', 'latest.json');
+const LEVEL_VISUAL_TIMING_ALIGNMENT = path.join(ROOT, 'reference-artifacts', 'analyses', 'level-visual-timing-alignment', 'latest.json');
 const GALAGA_TARGET_ARTIFACT_COVERAGE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-artifact-coverage', 'latest.json');
 const GALAGA_ALIEN_VISUAL_REFERENCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-visual-reference', 'latest.json');
 const GALAGA_ALIEN_MOTION_REFERENCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-alien-motion-reference', 'latest.json');
@@ -2865,12 +2869,16 @@ function buildChallengeStageEffortGuideSection(){
   const artifact = loadChallengeStageConformance();
   const sweep = loadChallengeStageCandidateSweep();
   const sweepIndex = loadChallengeStageCandidateSweepIndex();
+  const fullAnalyzerReview = loadChallengeStageCandidateFullAnalyzerReview();
   const trajectoryControls = loadChallengeTrajectoryControls();
+  const setpieceContracts = loadChallengeSetpieceContracts();
   const summary = artifact.summary || {};
   const sweepSummary = sweep.summary || {};
   const sweepRetention = sweep.candidateRetention || {};
   const sweepIndexSummary = sweepIndex.summary || {};
   const trajectorySummary = trajectoryControls.summary || {};
+  const setpieceSummary = setpieceContracts.summary || {};
+  const reviewRead = fullAnalyzerReview.read || 'No candidate has been recorded through the full-analyzer review loop yet.';
   const sweepRows = Array.isArray(sweepIndex.rows) ? sweepIndex.rows : [];
   const sweepIndexRead = sweepRows.length
     ? sweepRows.map(row => `Stage ${row.stage}: ${row.keeperDecision || 'pending'} (${row.bestExpectedScore10 ?? 'n/a'}/10 expected, ${row.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10 target-video, identity margin ${row.stageIdentityMargin10 ?? 'n/a'}).`).join(' ')
@@ -2904,8 +2912,16 @@ function buildChallengeStageEffortGuideSection(){
         body: `${sweepIndexSummary.stagesCovered || 0} stage(s) indexed, ${sweepIndexSummary.totalCandidateCount || 0} candidates represented, ${sweepIndexSummary.runtimeReadyCount || 0} runtime-ready. ${sweepIndexRead}`
       },
       {
+        title: 'Full Analyzer Review',
+        body: `Latest recorded candidate review: ${fullAnalyzerReview.candidateId || 'pending'} on Stage ${fullAnalyzerReview.stage || 'n/a'}; decision ${fullAnalyzerReview.decision || 'pending'}. ${reviewRead}`
+      },
+      {
         title: 'Target Trajectory Controls',
         body: `${trajectorySummary.challengeCount || 0} challenge(s), ${trajectorySummary.groupCount || 0} target group controls, ${trajectorySummary.controlReadinessScore10 ?? 'n/a'}/10 readiness. ${trajectorySummary.read || 'Run the trajectory controls analyzer to convert target object tracks into reusable candidate inputs.'}`
+      },
+      {
+        title: 'Set-Piece Contracts',
+        body: `${setpieceSummary.contractCount || 0} contract(s), ${setpieceSummary.referenceBackedGroupCount || 0}/${setpieceSummary.expectedGroupCount || 0} reference-backed groups, ${setpieceSummary.averageCurrentScore10 ?? 'n/a'}/10 current strict average, ${setpieceSummary.averageTargetContractFitScore10 ?? 'n/a'}/10 target-contract fit. ${setpieceSummary.read || 'Run the set-piece contract analyzer to turn target tracks into implementation gates.'}`
       },
       {
         title: 'Next Best Step',
@@ -2939,9 +2955,19 @@ function buildChallengeStageEffortGuideSection(){
         detail: 'Latest per-stage sweep matrix so one stage run does not hide prior candidate evidence.'
       },
       {
+        label: 'Open Full Analyzer Review Artifact',
+        href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json`,
+        detail: 'Records whether a sweep candidate survived the full strict analyzer after a temporary runtime trial.'
+      },
+      {
         label: 'Open Target Trajectory Controls',
         href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-trajectory-controls/latest.json`,
         detail: 'Target-derived group schedule, path-family hints, arc/drop scale, and lower-field controls for future sweeps.'
+      },
+      {
+        label: 'Open Challenge Set-Piece Contracts',
+        href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-setpiece-contracts/latest.json`,
+        detail: 'Contract-backed target shape, runtime gap, target authority, and next implementation step for each challenging stage.'
       }
     ],
     table: {
@@ -3246,9 +3272,13 @@ let applicationArtifactConformanceCache = null;
 let challengeStageConformanceCache = null;
 let challengeStageCandidateSweepCache = null;
 let challengeStageCandidateSweepIndexCache = null;
+let challengeStageCandidateFullAnalyzerReviewCache = null;
 let challengeTrajectoryControlsCache = null;
+let challengeSetpieceContractsCache = null;
+let gameplaySegmentCaptureCache = null;
 let stage7ReferencePathBeforeAfterCache = null;
 let levelVisualConformanceIndexCache = null;
+let levelVisualTimingAlignmentCache = null;
 let galagaTargetArtifactCoverageCache = null;
 let galagaAlienVisualReferenceCache = null;
 let galagaAlienMotionReferenceCache = null;
@@ -3591,6 +3621,26 @@ function loadChallengeStageCandidateSweepIndex(){
   return challengeStageCandidateSweepIndexCache;
 }
 
+function loadChallengeStageCandidateFullAnalyzerReview(){
+  if(challengeStageCandidateFullAnalyzerReviewCache) return challengeStageCandidateFullAnalyzerReviewCache;
+  if(!fs.existsSync(CHALLENGE_STAGE_CANDIDATE_FULL_ANALYZER_REVIEW)){
+    challengeStageCandidateFullAnalyzerReviewCache = { summary: {}, restoredBaseline: {}, trial: {}, deltas: {} };
+    return challengeStageCandidateFullAnalyzerReviewCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_STAGE_CANDIDATE_FULL_ANALYZER_REVIEW);
+    challengeStageCandidateFullAnalyzerReviewCache = Object.assign({}, artifact, {
+      summary: artifact.summary || {},
+      restoredBaseline: artifact.restoredBaseline || {},
+      trial: artifact.trial || {},
+      deltas: artifact.deltas || {}
+    });
+  } catch (err) {
+    challengeStageCandidateFullAnalyzerReviewCache = { summary: {}, restoredBaseline: {}, trial: {}, deltas: {} };
+  }
+  return challengeStageCandidateFullAnalyzerReviewCache;
+}
+
 function loadChallengeTrajectoryControls(){
   if(challengeTrajectoryControlsCache) return challengeTrajectoryControlsCache;
   if(!fs.existsSync(CHALLENGE_TRAJECTORY_CONTROLS)){
@@ -3607,6 +3657,43 @@ function loadChallengeTrajectoryControls(){
     challengeTrajectoryControlsCache = { summary: {}, challenges: [] };
   }
   return challengeTrajectoryControlsCache;
+}
+
+function loadChallengeSetpieceContracts(){
+  if(challengeSetpieceContractsCache) return challengeSetpieceContractsCache;
+  if(!fs.existsSync(CHALLENGE_SETPIECE_CONTRACTS)){
+    challengeSetpieceContractsCache = { summary: {}, contracts: [] };
+    return challengeSetpieceContractsCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_SETPIECE_CONTRACTS);
+    challengeSetpieceContractsCache = Object.assign({}, artifact, {
+      summary: artifact.summary || {},
+      contracts: Array.isArray(artifact.contracts) ? artifact.contracts : []
+    });
+  } catch (err) {
+    challengeSetpieceContractsCache = { summary: {}, contracts: [] };
+  }
+  return challengeSetpieceContractsCache;
+}
+
+function loadGameplaySegmentCapture(){
+  if(gameplaySegmentCaptureCache) return gameplaySegmentCaptureCache;
+  if(!fs.existsSync(GAMEPLAY_SEGMENT_CAPTURE)){
+    gameplaySegmentCaptureCache = { ok: false, capture: {}, video: '', poster: '' };
+    return gameplaySegmentCaptureCache;
+  }
+  try {
+    const artifact = readJson(GAMEPLAY_SEGMENT_CAPTURE);
+    gameplaySegmentCaptureCache = Object.assign({}, artifact, {
+      capture: artifact.capture || {},
+      videoAssessment: artifact.videoAssessment || {},
+      warnings: Array.isArray(artifact.warnings) ? artifact.warnings : []
+    });
+  } catch (err) {
+    gameplaySegmentCaptureCache = { ok: false, capture: {}, video: '', poster: '' };
+  }
+  return gameplaySegmentCaptureCache;
 }
 
 function loadStage7ReferencePathBeforeAfter(){
@@ -3645,6 +3732,24 @@ function loadLevelVisualConformanceIndex(){
     levelVisualConformanceIndexCache = { rows: [], summary: {} };
   }
   return levelVisualConformanceIndexCache;
+}
+
+function loadLevelVisualTimingAlignment(){
+  if(levelVisualTimingAlignmentCache) return levelVisualTimingAlignmentCache;
+  if(!fs.existsSync(LEVEL_VISUAL_TIMING_ALIGNMENT)){
+    levelVisualTimingAlignmentCache = { rows: [], summary: {} };
+    return levelVisualTimingAlignmentCache;
+  }
+  try {
+    const artifact = readJson(LEVEL_VISUAL_TIMING_ALIGNMENT);
+    levelVisualTimingAlignmentCache = Object.assign({}, artifact, {
+      rows: Array.isArray(artifact.rows) ? artifact.rows : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    levelVisualTimingAlignmentCache = { rows: [], summary: {} };
+  }
+  return levelVisualTimingAlignmentCache;
 }
 
 function loadGalagaTargetArtifactCoverage(){
@@ -3876,6 +3981,79 @@ function levelVisualVideo(row = {}, side = 'current'){
       ? `${row.targetVideoStatus || 'target clip'}; starts at ${row.targetSourceTimeSeconds ?? 'n/a'}s in the source video.`
       : `${row.currentVideoStatus || 'current clip'}; starts at the row's ${row.sampleSeconds ?? 'n/a'}s Aurora sample point.`
   });
+}
+
+function renderChallengeTimingAlignmentReview(alignment = {}){
+  const rows = Array.isArray(alignment.rows) ? alignment.rows : [];
+  const failures = Array.isArray(alignment.failures) ? alignment.failures : [];
+  const summary = alignment.summary || {};
+  if(!rows.length){
+    return `
+      <div class="docWrap">
+        <span class="docMeta">Challenge timing-alignment clips pending. Run <code>npm run harness:analyze:level-visual-timing-alignment</code>.</span>
+      </div>
+    `;
+  }
+  const failureMarkup = failures.length ? `
+    <div class="docWrap">
+      <p class="docMeta"><strong>Capture failures:</strong> ${esc(failures.map(row => `Challenge ${row.challengeNumber}`).join(', '))}. The checker blocks this artifact until these captures are regenerated successfully.</p>
+    </div>
+  ` : '';
+  return `${failureMarkup}${rows.map(row => {
+    const pairExists = row.pairedVideo && fs.existsSync(path.join(ROOT, normalizeAssetSourcePath(row.pairedVideo)));
+    const sheetExists = row.contactSheet && fs.existsSync(path.join(ROOT, normalizeAssetSourcePath(row.contactSheet)));
+    const drift = row.currentVsTargetEndDriftSeconds === null || row.currentVsTargetEndDriftSeconds === undefined
+      ? 'pending'
+      : `${Number(row.currentVsTargetEndDriftSeconds).toFixed(2)}s`;
+    return `
+      <details class="levelVisualDetail" id="timing-alignment-${esc(row.id || row.challengeNumber || '')}">
+        <summary class="levelVisualSummary">
+          <span class="levelVisualTitle">
+            <span>${esc(row.label || `Challenging Stage ${row.challengeNumber || ''}`)}</span>
+            <small>Stage-start synchronized target/current review</small>
+          </span>
+          <span class="levelVisualSummaryCell"><strong>${esc(row.durationSeconds || 'n/a')}s window</strong>target left; Aurora right</span>
+          <span class="levelVisualSummaryCell"><strong>${esc(drift)} end drift</strong>first active ${esc(row.currentFirstActiveEnemySecond ?? 'n/a')}s</span>
+          <span class="scorePill">time aligned</span>
+        </summary>
+        <div class="levelVisualDetailBody">
+          <div class="challengeEvidenceCard">
+            <h3>Stage-Start Aligned Motion Review</h3>
+            <p class="docMeta">The video starts both sides at t=0 for the challenging stage: Galaga target footage on the left, current Aurora controlled-clock runtime on the right. This is the review layer for pacing drift, group count, visible arrival versus appearance, route complexity, and whether the score window arrives at the right relative time.</p>
+            <p class="docMeta">Selection ${esc(summary.selectionMode || 'unknown')}; requested ${esc((summary.requestedChallengeNumbers || []).join(', ') || 'n/a')}; completed ${esc((summary.completedChallengeNumbers || []).join(', ') || 'n/a')}.</p>
+            ${pairExists ? renderMediaVideo({
+              src: row.pairedVideo,
+              poster: sheetExists ? row.contactSheet : '',
+              label: `${row.label || 'Challenge'} target/current aligned clip`,
+              alt: `${row.label || 'Challenge'} target and Aurora current timing-aligned clip`,
+              note: row.syncRead || 'Timing read pending.'
+            }) : '<div class="mediaPlaceholder">Paired timing-alignment video pending.</div>'}
+          </div>
+          <div class="challengeCompareGrid">
+            <article class="challengeEvidenceCard">
+              <h3>Timing Read</h3>
+              <p>${esc(row.syncRead || 'Timing read pending.')}</p>
+              <p class="docMeta"><strong>Target:</strong> ${esc(row.targetWindow?.id || 'pending')} starts at ${esc(row.targetWindow?.startSeconds ?? 'n/a')}s for ${esc(row.targetWindow?.durationSeconds ?? 'n/a')}s.</p>
+            </article>
+            <article class="challengeEvidenceCard">
+              <h3>Contact Sheet</h3>
+              ${sheetExists ? renderMediaImage({
+                src: row.contactSheet,
+                label: 'Aligned stage-start contact sheet',
+                alt: `${row.label || 'Challenge'} aligned target current contact sheet`,
+                note: 'One frame per second from the paired review clip.'
+              }) : '<div class="mediaPlaceholder">Aligned contact sheet pending.</div>'}
+            </article>
+            <article class="challengeEvidenceCard">
+              <h3>Known Limit</h3>
+              <p>${esc(row.knownLimit || 'Object-track time-warp scoring is not yet implemented.')}</p>
+              <p class="docMeta"><strong>Next:</strong> promote target/current group first-visible times into set-piece contracts.</p>
+            </article>
+          </div>
+        </div>
+      </details>
+    `;
+  }).join('\n')}`;
 }
 
 function levelVisualReferenceEvidence(row = {}){
@@ -4308,6 +4486,66 @@ function renderMediaVideo(item){
   `;
 }
 
+function renderGameplaySegmentCaptureEvidence(artifact){
+  const capture = artifact?.capture || {};
+  const src = artifact?.latestVideo || artifact?.video || '';
+  const poster = artifact?.latestContactSheet || artifact?.contactSheet || artifact?.latestPoster || artifact?.poster || '';
+  if(!artifact?.ok || !src){
+    return `
+      <div class="docWrap">
+        <p class="docMeta"><strong>Gameplay segment review clip:</strong> pending. Run <code>npm run harness:capture:gameplay-segment</code> with a stage, challenge, persona, and duration to generate before/after review media.</p>
+      </div>
+    `;
+  }
+  const audioCount = Number.isFinite(+capture.audioTrackCount) ? +capture.audioTrackCount : 0;
+  const duration = Number.isFinite(+capture.seconds) ? `${(+capture.seconds).toFixed(0)}s` : 'segment';
+  const challengeLabel = capture.startKind === 'challenge'
+    ? `Challenging Stage ${capture.challengeStage || 'n/a'}`
+    : `Level ${capture.stage || 'n/a'}`;
+  const audioRead = audioCount > 0
+    ? `${audioCount} audio track${audioCount === 1 ? '' : 's'} captured`
+    : 'video-only capture';
+  const warnings = Array.isArray(artifact.warnings) && artifact.warnings.length
+    ? `<p class="docMeta"><strong>Warnings:</strong> ${esc(artifact.warnings.join(' '))}</p>`
+    : '';
+  const videoHref = catalogMediaHref(src);
+  const posterHref = poster ? catalogMediaHref(poster) : '';
+  const contactHref = artifact?.latestContactSheet || artifact?.contactSheet
+    ? catalogMediaHref(artifact.latestContactSheet || artifact.contactSheet)
+    : '';
+  const directLinks = `
+    <p class="docMeta"><strong>Direct artifact links:</strong> <a href="${esc(videoHref)}">open video</a>${posterHref ? `; <a href="${esc(posterHref)}">${contactHref ? 'open contact sheet' : 'open poster'}</a>` : ''}. These are relative build-lane links, so they resolve on localhost, hosted dev, beta, and production when the artifact is included in that lane.</p>
+  `;
+  const posterLink = posterHref
+    ? `
+      <div class="catalogMediaItem">
+        <span class="catalogMediaLabel">Click evidence image to open review clip</span>
+        <a class="catalogMediaExpand" href="${esc(videoHref)}" aria-label="Open latest gameplay segment review clip">
+          <img class="catalogMediaImg isPixelated" src="${esc(posterHref)}" alt="Evidence contact sheet for latest gameplay segment review clip">
+        </a>
+        <span class="catalogMediaNote">Use this as a lightweight localhost/hosted link when sharing the conformance artifact.</span>
+      </div>
+    `
+    : '';
+  return `
+    <div class="docWrap">
+      <p><strong>Latest gameplay segment evidence:</strong> ${esc(duration)} ${esc(challengeLabel)} capture for ${esc(capture.watchPersona || capture.persona || 'human')} review; ${esc(audioRead)}; seed ${esc(capture.seed ?? 'n/a')}; generated ${esc(artifact.generatedAt || 'n/a')}.</p>
+      <p class="docMeta"><strong>Harness:</strong> <code>npm run harness:capture:gameplay-segment -- --start-kind=challenge --challenge-stage=N --mode=watch --persona=professional --seconds=30 --label=...</code>. Use the same seed/persona/start options for before-after candidate comparisons.</p>
+      ${directLinks}
+      ${warnings}
+    </div>
+    <div class="levelVisualVideoGrid" style="margin-top:12px;">
+      ${posterLink}
+      ${renderMediaVideo({
+        src,
+        poster,
+        label: 'Latest gameplay segment review clip',
+        note: 'Durable before/after evidence clip for movement, graphics, persona behavior, stage pacing, and audio review.'
+      })}
+    </div>
+  `;
+}
+
 function renderCatalogVisualMedia(entry, options = {}){
   const sprite = catalogSpriteForEntry(entry);
   const spriteKey = spriteKeyForEntry(entry);
@@ -4658,8 +4896,8 @@ function renderGalagaAlienTargetCropRows(report){
         note: crop.videoDerivedCleanCrop ? 'Trusted cleaned target crop promoted from the segmented Galaga alien motion reference.' : 'Target crop promoted from the supplied Galaga general sprite sheet.'
       })}</td>
       <td>${esc(source)}<br><span class="docMeta"><code>${esc(`${box.x ?? '?'}:${box.y ?? '?'} ${box.width ?? '?'}x${box.height ?? '?'}`)}</code></span></td>
-      <td>${metricText}</td>
-      <td>${esc(crop.note || '')}</td>
+      <td>${metricText}<br><span class="docMeta">authority: ${Number.isFinite(+crop.authorityScore10) ? `${Number(crop.authorityScore10).toFixed(1)}/10` : 'pending'}<br>${esc(crop.authorityStatus || '')}</span></td>
+      <td>${esc(crop.note || '')}<br><span class="docMeta">${esc(crop.scoringUse || '')}</span></td>
     </tr>
   `;
   }).join('\n');
@@ -4929,6 +5167,27 @@ function renderAuroraImpactExplosionRows(report){
   `).join('\n');
 }
 
+function renderChallengeSetpieceContractRows(report){
+  const rows = Array.isArray(report?.contracts) ? report.contracts : [];
+  if(!rows.length){
+    return `
+    <tr>
+      <td colspan="7"><span class="docMeta">Challenge set-piece contracts pending. Run <code>npm run harness:analyze:challenge-setpiece-contracts</code>.</span></td>
+    </tr>`;
+  }
+  return rows.map((row) => `
+    <tr>
+      <td><strong>${esc(row.displayLabel || '')}</strong><br><span class="docMeta">priority: ${esc(row.priority || 'pending')}<br>stage ${esc(row.stage || '')}</span></td>
+      <td><strong>${Number.isFinite(+row.runtimeRead?.currentScore10) ? `${Number(row.runtimeRead.currentScore10).toFixed(1)}/10` : 'pending'}</strong><br><span class="docMeta">move ${esc(row.runtimeRead?.movementScore10 ?? 'n/a')}; graphics ${esc(row.runtimeRead?.graphicsScore10 ?? 'n/a')}; novelty ${esc(row.runtimeRead?.alienNoveltyScore10 ?? 'n/a')}</span></td>
+      <td>${esc(row.targetContract?.expectedGroupCount ?? 0)} groups / ${esc(row.targetContract?.expectedEnemyCount ?? 0)} targets<br><span class="docMeta">${esc((row.targetContract?.pathFamilies || []).join(', ') || 'path families pending')}</span></td>
+      <td>${esc(row.targetContract?.referencePathCount ?? 0)}/5 reference paths<br><span class="docMeta">avg confidence ${esc(row.targetContract?.averageTargetConfidence ?? 'n/a')}</span></td>
+      <td>contract ${Number.isFinite(+row.runtimeRead?.targetContractFitScore10) ? `${Number(row.runtimeRead.targetContractFitScore10).toFixed(1)}/10` : 'pending'}<br>target-video ${Number.isFinite(+row.runtimeRead?.targetVideoObjectTrackFitScore10) ? `${Number(row.runtimeRead.targetVideoObjectTrackFitScore10).toFixed(1)}/10` : 'pending'}<br><span class="docMeta">safety ${row.runtimeRead?.safetyPass ? 'pass' : 'pending/fail'}</span></td>
+      <td>${Number.isFinite(+row.targetAuthority?.averageAuthorityScore10) ? `${Number(row.targetAuthority.averageAuthorityScore10).toFixed(1)}/10` : 'pending'}<br><span class="docMeta">${esc(row.targetAuthority?.status || '')}</span></td>
+      <td>${esc(row.nextImplementationStep || '')}</td>
+    </tr>
+  `).join('\n');
+}
+
 function renderChallengeTargetCoverageRows(report){
   const rows = Array.isArray(report?.challengeStageCoverage) ? report.challengeStageCoverage : [];
   if(!rows.length){
@@ -4970,6 +5229,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'conformance-audio-index', title: 'Audio Conformance Index' },
     { id: 'stage-conformance-summary', title: 'Stage Conformance Summary' },
     { id: 'level-visual-conformance-index', title: 'Level Visual Index' },
+    { id: 'challenge-timing-alignment-review', title: 'Timing Alignment Review' },
     { id: 'challenge-stage-conformance', title: 'Challenge Stage Deep Dive' },
     { id: 'persona-catalog', title: 'Testing Personas' },
     { id: 'persona-performance-distribution', title: 'Persona Performance Distribution' },
@@ -5176,6 +5436,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const challengeSummary = challengeStageConformance.summary || {};
   const challengeCandidateSweep = loadChallengeStageCandidateSweep();
   const challengeCandidateSweepIndex = loadChallengeStageCandidateSweepIndex();
+  const challengeCandidateFullAnalyzerReview = loadChallengeStageCandidateFullAnalyzerReview();
   const challengeSweepSummary = challengeCandidateSweep.summary || {};
   const challengeSweepRetention = challengeCandidateSweep.candidateRetention || {};
   const challengeSweepIndexSummary = challengeCandidateSweepIndex.summary || {};
@@ -5190,11 +5451,19 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
       return `Stage ${row.stage}: ${row.keeperDecision || 'pending'}, expected ${row.bestExpectedScore10 ?? 'n/a'}/10, target-video ${row.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10, identity margin ${row.stageIdentityMargin10 ?? 'n/a'}.${lateIdentity}`;
     }).join(' ')
     : 'No indexed candidate sweeps yet.';
+  const challengeCandidateFullAnalyzerRead = challengeCandidateFullAnalyzerReview.read
+    ? `Latest full-analyzer candidate review: Stage ${challengeCandidateFullAnalyzerReview.stage || 'n/a'} candidate ${challengeCandidateFullAnalyzerReview.candidateId || 'pending'} was ${challengeCandidateFullAnalyzerReview.decision || 'pending'}. ${challengeCandidateFullAnalyzerReview.read}`
+    : 'No full-analyzer candidate review has been recorded yet.';
   const challengeTrajectoryControls = loadChallengeTrajectoryControls();
   const challengeTrajectorySummary = challengeTrajectoryControls.summary || {};
   const challengeTrajectoryRead = challengeTrajectorySummary.challengeCount
     ? `${challengeTrajectorySummary.challengeCount} challenge(s), ${challengeTrajectorySummary.groupCount || 0} target group controls, ${challengeTrajectorySummary.controlReadinessScore10 ?? 'n/a'}/10 control readiness. ${challengeTrajectorySummary.read || ''}`
     : 'Target-derived trajectory controls pending. Run npm run harness:analyze:challenge-trajectory-controls.';
+  const challengeSetpieceContracts = loadChallengeSetpieceContracts();
+  const challengeSetpieceSummary = challengeSetpieceContracts.summary || {};
+  const challengeSetpieceRows = renderChallengeSetpieceContractRows(challengeSetpieceContracts);
+  const gameplaySegmentCapture = loadGameplaySegmentCapture();
+  const gameplaySegmentEvidence = renderGameplaySegmentCaptureEvidence(gameplaySegmentCapture);
   const stage7ReferencePathBeforeAfter = loadStage7ReferencePathBeforeAfter();
   const stage7ReferencePathEvidence = renderStage7ReferencePathEvidence(stage7ReferencePathBeforeAfter);
   const challengeStageRows = (challengeStageConformance.stageRows || []).map(renderChallengeStageDetail).join('\n') || `
@@ -5205,6 +5474,9 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const levelVisualRows = (levelVisualIndex.rows || []).map(renderLevelVisualDetail).join('\n') || `
     <div class="docWrap"><span class="docMeta">Level visual conformance index pending. Run <code>npm run harness:analyze:level-visual-conformance-index</code>.</span></div>
   `;
+  const levelVisualTimingAlignment = loadLevelVisualTimingAlignment();
+  const levelVisualTimingSummary = levelVisualTimingAlignment.summary || {};
+  const challengeTimingAlignmentRows = renderChallengeTimingAlignmentReview(levelVisualTimingAlignment);
   const personaRows = (guide.personaRows || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.label || '')}</strong><br><span class="docMeta">${esc(entry.harnessId || '')}</span></td>
@@ -5595,10 +5867,11 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <p><strong>Current read:</strong> ${esc(galagaTargetEvidenceAudit.status || 'pending')}. <strong>Next best step:</strong> ${esc(galagaTargetEvidenceAudit.nextBestStep || 'Regenerate target evidence audit after crop promotion.')}</p>
             <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/galaga-target-evidence-audit/latest.json</code>. <strong>Readable report:</strong> <code>GALAGA_TARGET_EVIDENCE_AUDIT.md</code>. <strong>Generated:</strong> ${esc(galagaTargetEvidenceAudit.generatedAt || 'pending')}.</p>
             <div class="metricGrid">
-              <div class="metricCard"><span class="metricLabel">Audited Roles</span><strong>${esc(galagaTargetEvidenceAuditSummary.auditedRoleCount ?? 0)}</strong><span>Boss, Bee, Butterfly, Fighter first</span></div>
+              <div class="metricCard"><span class="metricLabel">Audited Roles</span><strong>${esc(galagaTargetEvidenceAuditSummary.auditedRoleCount ?? 0)}</strong><span>includes challenge specialty</span></div>
               <div class="metricCard"><span class="metricLabel">Trusted Primaries</span><strong>${esc(galagaTargetEvidenceAuditSummary.trustedPrimaryRoleCount ?? 0)}</strong><span>usable for scoring now</span></div>
               <div class="metricCard"><span class="metricLabel">Motion Crops</span><strong>${esc(galagaTargetEvidenceAuditSummary.trustedMotionReferenceCount ?? 0)}</strong><span>cleaned from segmented video</span></div>
               <div class="metricCard"><span class="metricLabel">Provisional Cells</span><strong>${esc(galagaTargetEvidenceAuditSummary.provisionalSourceSheetCount ?? 0)}</strong><span>do not overclaim</span></div>
+              <div class="metricCard"><span class="metricLabel">Challenge Authority</span><strong>${Number.isFinite(+galagaTargetEvidenceAuditSummary.challengeSpecialtyAuthorityScore10) ? `${Number(galagaTargetEvidenceAuditSummary.challengeSpecialtyAuthorityScore10).toFixed(1)}/10` : 'pending'}</strong><span>planning evidence only</span></div>
             </div>
           </div>
           <div class="tableWrap" style="margin-top:16px;">
@@ -6033,6 +6306,21 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           </div>
         </section>
 
+        <section class="section" id="challenge-timing-alignment-review">
+          <div class="sectionHeader">
+            <h2>Challenge Timing Alignment Review</h2>
+            <p>Stage-start synchronized Galaga target versus Aurora current videos for challenging stages. These clips make pace drift, visible arrival timing, score-window timing, and complexity mismatches reviewable without guessing which mid-stage moment is being compared.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Current read:</strong> ${esc(levelVisualTimingSummary.challengeCount || 0)} challenging-stage row(s), ${esc(levelVisualTimingSummary.pairedVideoCount || 0)} paired timing clips, ${esc(levelVisualTimingSummary.contactSheetCount || 0)} contact sheets, average absolute end drift ${esc(levelVisualTimingSummary.averageAbsEndDriftSeconds ?? 'n/a')}s.</p>
+            <p>${esc(levelVisualTimingSummary.read || 'Run the timing-alignment analyzer to produce start-aligned challenge clips.')}</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/level-visual-timing-alignment/latest.json</code>. <strong>Report:</strong> <code>LEVEL_VISUAL_TIMING_ALIGNMENT.md</code>.</p>
+          </div>
+          <div class="levelVisualList">
+            ${challengeTimingAlignmentRows}
+          </div>
+        </section>
+
         <section class="section" id="challenge-stage-conformance">
           <div class="sectionHeader">
             <h2>Challenge Stage Deep Dive</h2>
@@ -6043,9 +6331,12 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <p>${esc(challengeSummary.weakestFinding || 'Run the challenge-stage conformance analyzer to refresh this readout.')}</p>
             <p class="docMeta"><strong>Scoring model:</strong> ${esc(challengeSummary.scoringModel || 'strict-v2')}. Each challenge starts at 1/10 for interest, movement, and graphics; no-shot/no-kill safety is a required guardrail, not a score booster. Legacy broad coverage is diagnostic only.</p>
             <p class="docMeta"><strong>Latest candidate sweep:</strong> Stage ${esc(challengeCandidateSweep.stage || 'n/a')} measured ${esc(challengeCandidateSweep.candidateCount || challengeSweepRetention.totalMeasured || 'n/a')} candidates and retained ${esc(challengeSweepRetention.retained || 'n/a')} review rows. Decision: <strong>${esc(challengeSweepSummary.keeperDecision || 'pending')}</strong>. Best candidate ${esc(challengeSweepSummary.bestCandidateId || 'pending')} scored ${esc(challengeSweepSummary.bestExpectedScore10 ?? 'n/a')}/10 expected-reference and ${esc(challengeSweepSummary.bestTargetVideoObjectFitScore10 ?? 'n/a')}/10 target-video fit. This is process evidence unless the full analyzer and guardrails confirm a runtime promotion.</p>
+            <p class="docMeta"><strong>Full-analyzer candidate review:</strong> ${esc(challengeCandidateFullAnalyzerRead)} Source artifact: <code>reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json</code>.</p>
             <p class="docMeta"><strong>Candidate sweep matrix:</strong> ${esc(challengeSweepIndexSummary.stagesCovered || 0)} stage(s), ${esc(challengeSweepIndexSummary.totalCandidateCount || 0)} latest per-stage candidates represented, ${esc(challengeSweepIndexSummary.runtimeReadyCount || 0)} runtime-ready. ${esc(challengeSweepIndexRead)}</p>
             <p class="docMeta"><strong>Target trajectory controls:</strong> ${esc(challengeTrajectoryRead)} Source artifact: <code>reference-artifacts/analyses/challenge-trajectory-controls/latest.json</code>.</p>
+            <p class="docMeta"><strong>Set-piece contracts:</strong> ${esc(challengeSetpieceSummary.contractCount || 0)} challenge contract(s), ${esc(challengeSetpieceSummary.referenceBackedGroupCount || 0)}/${esc(challengeSetpieceSummary.expectedGroupCount || 0)} reference-backed groups, current average ${esc(challengeSetpieceSummary.averageCurrentScore10 ?? 'n/a')}/10, target-contract fit ${esc(challengeSetpieceSummary.averageTargetContractFitScore10 ?? 'n/a')}/10. Source artifact: <code>reference-artifacts/analyses/challenge-setpiece-contracts/latest.json</code>.</p>
             <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/challenge-stage-conformance/latest.json</code>. <strong>Report:</strong> <code>CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md</code>.</p>
+            ${gameplaySegmentEvidence}
             <p class="docMeta"><strong>Naming rule:</strong> normal Levels and Challenging Stages are separate. The challenge rows below use labels like <strong>Challenging Stage 1 (Levels 3-4)</strong> instead of calling that set piece Level 4.</p>
             <p class="docMeta"><strong>Evidence-image rule:</strong> contact sheets are supporting artifacts for visual inspection, not the main human-readable conformance explanation. Use each row's target/current/conformance text for the judgment; open the evidence panel only when you need to inspect the underlying frames at native scale.</p>
             ${stage7ReferencePathEvidence}
@@ -6067,6 +6358,24 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
                 </div>
               </details>
             </div>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Challenge Contract</th>
+                  <th>Strict Score</th>
+                  <th>Target Shape</th>
+                  <th>Reference Tracks</th>
+                  <th>Fit / Safety</th>
+                  <th>Target Authority</th>
+                  <th>Next Implementation</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${challengeSetpieceRows}
+              </tbody>
+            </table>
           </div>
           <div class="challengeStageList">
             ${challengeStageRows}

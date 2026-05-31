@@ -43,22 +43,18 @@ const TARGET_SPRITE_ROWS=Object.freeze({
   'BBBB...R...BBB.'
  ]),
  beeOpen:Object.freeze([
-  'BBBBR...........',
-  'RWWWRRR.........',
-  'RWWWWRR.........',
-  'RRBBBRRR........',
-  'RRBBB.RR........',
-  'R..B............',
-  'R...............',
-  '................',
-  '................',
-  '................',
-  '................',
-  '................',
-  '................',
-  '......B.........',
-  '..Y...B.........',
-  '.RYRYB..........'
+  '.BB....Y....B..',
+  '.BB..YYYRY.BB..',
+  '..BBRRRYRYBB...',
+  '...BBRRYRRB....',
+  '....YYYYYY.....',
+  '...BBBYYYBB....',
+  '..BBBBRRRBBB...',
+  '.BBBBRRRR.BBBB.',
+  'BBBBBYYYY.BBBBB',
+  'BBBBBRRRR.BBBBB',
+  'BBBB..RRR..BBBB',
+  'BBBB...R...BBB.'
  ]),
  but:Object.freeze([
   '.................',
@@ -81,22 +77,24 @@ const TARGET_SPRITE_ROWS=Object.freeze({
   '.................'
  ]),
  butOpen:Object.freeze([
-  '.MM.M..BB......B',
-  '..M.M.BBB.....BB',
-  '.......BB.....BM',
-  'BB....BB......BM',
-  'BBB...B.......BM',
-  '.BBB.B........BB',
-  '...B...........B',
-  '................',
-  '................',
-  '................',
-  '................',
-  '.....R..........',
-  '.....R..........',
-  '..B..R.........R',
-  'BWRW..R........R',
-  'RBBBBRR........R'
+  '.................',
+  '.RR...........RR.',
+  '.RR...BB.BB...RR.',
+  '.RR...BB.BB...RR.',
+  '.RR.WWRRWRRWW.RR.',
+  '.RR.WWRRWRRWW.RR.',
+  '.RR.WWWWWWWWW.RR.',
+  '.RRRRRWWWWWRRRRR.',
+  '.RRRRRWWWWWRRRRR.',
+  '....RRBBBBBRR....',
+  '.RRRRRBBBBBRRRRR.',
+  '.RRRRRBBBBBRRRRR.',
+  '.RRRRRWWWWWRRRRR.',
+  '.RRRRRWWWWWRRRRR.',
+  '.RRRR.BBBBB.RRRR.',
+  '.RRRR.BBBBB.RRRR.',
+  '.RRRR...B...RRRR.',
+  '.................'
  ]),
  boss:Object.freeze([
   '.GGRRRGG.RRR.',
@@ -117,22 +115,22 @@ const TARGET_SPRITE_ROWS=Object.freeze({
   'RB..R.R..BR..'
  ]),
  bossOpen:Object.freeze([
-  '.GG.R........RRR',
-  '.............RR.',
-  '.............R..',
-  '................',
-  '................',
-  '................',
-  '..B..B..........',
-  'BBRRB...........',
-  'RBRR............',
-  'RBBBBBB.........',
-  'BYBYYBBB.B......',
-  'YYYYYBBBB.......',
-  'YYYYYY.BB....BB.',
-  'BYYYY..BB....B..',
-  '.YR.R..BB....B..',
-  '..R.R.BBB....BB.'
+  '..GG.R.R.GG.....',
+  '.GGG.R.R.GGG....',
+  '.GGRR...RRGG....',
+  'GG.R.....R.GG...',
+  'GG.........GG...',
+  '.GG..B.B..GG....',
+  '..GBRB.RBRG.....',
+  '..BBRRBRRBB.....',
+  '.BBBYYBYYBBB....',
+  'BBYYYYYYYYYBB...',
+  'BBYYYYYYYYYBBB..',
+  'BBYYYYYYYYYBB...',
+  '.BB.R...R.BB....',
+  '.B..R...R..B....',
+  '....R...R.......',
+  '...RR...RR......'
  ]),
  challengeGreen:Object.freeze([
   'R.R.C.C.........',
@@ -309,8 +307,16 @@ const AURORA_CONFORMANCE_PIXELS=Object.freeze({
 });
 
 const TARGET_PIXEL_ASPECT_X=1.14;
-const TARGET_REFERENCE_ENEMY_SCALE=0.84;
-const TARGET_REFERENCE_BOSS_SCALE=0.88;
+const TARGET_REFERENCE_BEE_SCALE=0.90;
+const TARGET_REFERENCE_BUTTERFLY_SCALE=0.76;
+const TARGET_REFERENCE_CHALLENGE_SCALE=0.90;
+const TARGET_REFERENCE_BOSS_SCALE=0.78;
+const TARGET_REFERENCE_ROGUE_SCALE=0.94;
+const TARGET_REFERENCE_BEE_X_SCALE=0.68;
+const TARGET_REFERENCE_BUTTERFLY_X_SCALE=0.82;
+const TARGET_REFERENCE_CHALLENGE_X_SCALE=0.70;
+const TARGET_REFERENCE_BOSS_X_SCALE=1.10;
+const PLAYER_FIGHTER_VISUAL_SCALE=0.94;
 
 function drawTargetSpriteRows(rows,palette,scale=1,offsetX=0,offsetY=0,opts={}){
  if(!Array.isArray(rows)||!rows.length)return false;
@@ -345,14 +351,14 @@ function referencePixelSpritesEnabled(){
 
 function drawTargetEnemySprite(e,flap){
  if(!referencePixelSpritesEnabled())return false;
- if(e?.fam==='dragonfly')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeGreen,TARGET_SPRITE_PALETTES.challengeGreen,TARGET_REFERENCE_ENEMY_SCALE);
- if(e?.fam==='mosquito')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeYellow,TARGET_SPRITE_PALETTES.challengeYellow,TARGET_REFERENCE_ENEMY_SCALE);
- if(e?.fam==='scorpion')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeMagenta,TARGET_SPRITE_PALETTES.challengeMagenta,TARGET_REFERENCE_ENEMY_SCALE);
- if(e?.fam==='stingray'||e?.fam==='crown')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeBlueYellow,TARGET_SPRITE_PALETTES.challengeBlueYellow,TARGET_REFERENCE_ENEMY_SCALE);
- if(e?.t==='bee')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.beeOpen:TARGET_SPRITE_ROWS.bee,TARGET_SPRITE_PALETTES.bee,TARGET_REFERENCE_ENEMY_SCALE);
- if(e?.t==='but')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.butOpen:TARGET_SPRITE_ROWS.but,TARGET_SPRITE_PALETTES.but,TARGET_REFERENCE_ENEMY_SCALE);
- if(e?.t==='boss')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.bossOpen:TARGET_SPRITE_ROWS.boss,TARGET_SPRITE_PALETTES.boss,TARGET_REFERENCE_BOSS_SCALE);
- if(e?.t==='rogue')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,TARGET_REFERENCE_ENEMY_SCALE);
+ if(e?.fam==='dragonfly')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeGreen,TARGET_SPRITE_PALETTES.challengeGreen,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
+ if(e?.fam==='mosquito')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeYellow,TARGET_SPRITE_PALETTES.challengeYellow,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
+ if(e?.fam==='scorpion')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeMagenta,TARGET_SPRITE_PALETTES.challengeMagenta,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
+ if(e?.fam==='stingray'||e?.fam==='crown')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeBlueYellow,TARGET_SPRITE_PALETTES.challengeBlueYellow,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
+ if(e?.t==='bee')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.beeOpen:TARGET_SPRITE_ROWS.bee,TARGET_SPRITE_PALETTES.bee,TARGET_REFERENCE_BEE_SCALE,0,0,{xScale:TARGET_REFERENCE_BEE_X_SCALE});
+ if(e?.t==='but')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.butOpen:TARGET_SPRITE_ROWS.but,TARGET_SPRITE_PALETTES.but,TARGET_REFERENCE_BUTTERFLY_SCALE,0,0,{xScale:TARGET_REFERENCE_BUTTERFLY_X_SCALE});
+ if(e?.t==='boss')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.bossOpen:TARGET_SPRITE_ROWS.boss,TARGET_SPRITE_PALETTES.boss,TARGET_REFERENCE_BOSS_SCALE,0,0,{xScale:TARGET_REFERENCE_BOSS_X_SCALE});
+ if(e?.t==='rogue')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,TARGET_REFERENCE_ROGUE_SCALE,0,0,{xScale:1.08});
  return false;
 }
 
@@ -424,6 +430,10 @@ function shipGlyphBoundsAt(x,y,s=1){
  };
 }
 
+function playerFighterVisualScale(s=1){
+ return Math.max(.42,s*PLAYER_FIGHTER_VISUAL_SCALE);
+}
+
 function mergeBounds(a,b){
  if(!a)return b;
  if(!b)return a;
@@ -435,18 +445,19 @@ function mergeBounds(a,b){
  };
 }
 
-function drawMiniShip(s=1,colA='#9adfff',colB='#72c8ff'){
+function drawFighterSprite(x=0,y=0,s=1,colA='#eaf7ff',colB='#78d8ff'){
  const palette=Object.assign({},TARGET_SPRITE_PALETTES.ship,{W:colA,B:colB});
- if(referencePixelSpritesEnabled()){
-  drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,palette,Math.max(1,Math.round(s)));
-  return;
- }
- drawAuroraShipGlyph(0,0,Math.max(.5,s),colA,colB);
+ const visualScale=playerFighterVisualScale(s);
+ drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,palette,visualScale,x,y,{xScale:1.08});
+ return visualScale;
+}
+
+function drawMiniShip(s=1,colA='#9adfff',colB='#72c8ff'){
+ return drawFighterSprite(0,0,Math.max(.5,s),colA,colB);
 }
 
 function drawAuroraShipGlyph(x=0,y=0,s=1,colA='#eaf7ff',colB='#78d8ff'){
- const ps=2*s;
- drawPix(x-ps*4,y-ps*3.5,ps,P.ship.a,colA,colB,P.ship.b,'#ff3448',P.ship.c);
+ return drawFighterSprite(x,y,Math.max(.5,s),colA,colB);
 }
 
 function endOfRunOverlayActive(){
@@ -499,17 +510,30 @@ function drawEnemy(e){
   const hitAlpha=Math.min(.96,e.hitT/(e.t==='boss'?.46:.34));
   ctx.globalAlpha=e.t==='boss'?Math.max(.82,hitAlpha):hitAlpha;
   if(e.t==='boss'){
+   const sparkScale=.28+Math.min(.18,e.hitT*.28);
+   drawTargetExplosionSprite('explosionSmall',sparkScale);
+   ctx.globalAlpha=Math.min(.78,hitAlpha*.72);
    ctx.fillStyle='#fff8c4';
-   ctx.fillRect(-17,-13,34,26);
-   ctx.fillStyle='#ffffff';
-   ctx.fillRect(-12,-3,24,6);
-   ctx.fillRect(-3,-10,6,20);
+   ctx.fillRect(-12,-2,24,4);
+   ctx.fillRect(-2,-10,4,20);
    ctx.fillStyle='#ff92d8';
-   ctx.fillRect(-9,-1,18,2);
+   ctx.fillRect(-8,-1,16,2);
    ctx.fillRect(-1,-7,2,14);
+   ctx.globalAlpha=Math.min(.86,hitAlpha*.8);
    ctx.strokeStyle='#e2f7ff';
    ctx.lineWidth=1;
-   ctx.strokeRect(-18.5,-14.5,37,29);
+   ctx.beginPath();
+   ctx.moveTo(-15,-9);
+   ctx.lineTo(-9,-13);
+   ctx.lineTo(-4,-9);
+   ctx.moveTo(15,-9);
+   ctx.lineTo(9,-13);
+   ctx.lineTo(4,-9);
+   ctx.moveTo(-14,10);
+   ctx.lineTo(-7,13);
+   ctx.moveTo(14,10);
+   ctx.lineTo(7,13);
+   ctx.stroke();
   }else{
    ctx.fillStyle='rgba(255,255,255,.72)';
    ctx.fillRect(-12,-10,24,20);
@@ -563,20 +587,20 @@ function drawPlayerBody(x,y,dual=0,ghost=0){
  let bounds=null;
  if(!referencePixelSpritesEnabled()){
   if(dual){
-   drawAuroraShipGlyph(-9.5,0,1,'#eaf7ff','#ff4a5c');
-   drawAuroraShipGlyph(9.5,0,1,'#eaf7ff','#78d8ff');
-   bounds=mergeBounds(shipGlyphBoundsAt(x-9.5,y,1),shipGlyphBoundsAt(x+9.5,y,1));
+   const leftScale=drawAuroraShipGlyph(-9.5,0,1,'#eaf7ff','#ff4a5c');
+   const rightScale=drawAuroraShipGlyph(9.5,0,1,'#eaf7ff','#78d8ff');
+   bounds=mergeBounds(shipGlyphBoundsAt(x-9.5,y,leftScale),shipGlyphBoundsAt(x+9.5,y,rightScale));
   }else{
-   drawAuroraShipGlyph(0,0,1);
-   bounds=shipGlyphBoundsAt(x,y,1);
+   const visualScale=drawAuroraShipGlyph(0,0,1);
+   bounds=shipGlyphBoundsAt(x,y,visualScale);
   }
  }else if(dual){
-  drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1,-10.5,0);
-  drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1,10.5,0);
-  bounds=mergeBounds(shipGlyphBoundsAt(x-10.5,y,1),shipGlyphBoundsAt(x+10.5,y,1));
+  const leftScale=drawFighterSprite(-10.5,0,1,'#f4f8ff','#5ca8ff');
+  const rightScale=drawFighterSprite(10.5,0,1,'#f4f8ff','#5ca8ff');
+  bounds=mergeBounds(shipGlyphBoundsAt(x-10.5,y,leftScale),shipGlyphBoundsAt(x+10.5,y,rightScale));
  }else{
-  drawTargetSpriteRows(TARGET_SPRITE_ROWS.ship,TARGET_SPRITE_PALETTES.ship,1);
-  bounds=shipGlyphBoundsAt(x,y,1);
+  const visualScale=drawFighterSprite(0,0,1,'#f4f8ff','#5ca8ff');
+  bounds=shipGlyphBoundsAt(x,y,visualScale);
  }
  if(!ghost)window.__platinumRenderDebug.playerBounds=bounds;
  ctx.restore();
@@ -737,11 +761,11 @@ function drawReserveShips(lives){
    ctx.beginPath();
    ctx.ellipse(0,-1,10.5+2.5*pulse,7.5+1.6*pulse,0,0,7);
    ctx.fill();
-   drawMiniShip(.88,'#fff6d2','#ffd34d');
-   window.__platinumRenderDebug.reserveShipBounds.push(shipGlyphBoundsAt(x,y,.88));
+   const visualScale=drawMiniShip(.88,'#fff6d2','#ffd34d');
+   window.__platinumRenderDebug.reserveShipBounds.push(shipGlyphBoundsAt(x,y,visualScale));
   }else{
-   drawMiniShip(.82,'#f4f8ff','#ff3347');
-   window.__platinumRenderDebug.reserveShipBounds.push(shipGlyphBoundsAt(x,y,.82));
+   const visualScale=drawMiniShip(.82,'#f4f8ff','#ff3347');
+   window.__platinumRenderDebug.reserveShipBounds.push(shipGlyphBoundsAt(x,y,visualScale));
   }
   ctx.restore();
   reserve--;

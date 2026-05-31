@@ -41,7 +41,7 @@ function main(){
     targetCropIds: targetCrops.map(crop => crop.id),
     roleKeys: roleSets.map(role => role.roleKey)
   };
-  if(artifact.artifactType !== 'galaga-alien-target-crops' || !['accepted-first-pass-target-crops', 'trusted-motion-overrides-plus-provisional-sheet-crops'].includes(artifact.status)){
+  if(artifact.artifactType !== 'galaga-alien-target-crops' || !['accepted-first-pass-target-crops', 'trusted-motion-overrides-plus-provisional-sheet-crops', 'trusted-motion-authority-tiered-target-crops'].includes(artifact.status)){
     fail('Galaga alien target crop artifact has the wrong type or status.', payload);
   }
   if(!artifact.summary?.sourcePixelExact && (artifact.summary?.trustedMotionReferenceCount || 0) < 3){
@@ -75,6 +75,12 @@ function main(){
     }
     if((crop.metrics?.litPixels || 0) < 3 || !Array.isArray(crop.metrics?.tokenChannels) || !crop.metrics.tokenChannels.length){
       fail(`Promoted target crop ${crop.id} does not contain enough visible sprite pixels`, { crop, payload });
+    }
+    if(!Number.isFinite(+crop.authorityScore10) || +crop.authorityScore10 < 1 || +crop.authorityScore10 > 10 || !crop.authorityStatus || !crop.scoringUse){
+      fail(`Promoted target crop ${crop.id} is missing target-authority metadata`, { crop, payload });
+    }
+    if(crop.roleKey === 'challenge-specialty-aliens' && +crop.authorityScore10 > 4){
+      fail(`Challenge specialty target crop ${crop.id} should remain planning-only until clean reference windows replace sheet cells`, { crop, payload });
     }
   }
   console.log(JSON.stringify({

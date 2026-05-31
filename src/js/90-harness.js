@@ -54,6 +54,67 @@ window.__galagaHarness__={
   }
  }
 },
+ async prepareSegmentCaptureAudio(cfg={}){
+  const diagnostics={
+   requested:1,
+   contextStateBefore:null,
+   contextStateAfter:null,
+   tapAvailableBefore:!!sfx.tap,
+   tapAvailableAfter:false,
+   trackStates:[],
+   warning:''
+  };
+  let cleanupId='';
+  try{
+   const A=AC();
+   diagnostics.contextStateBefore=String(A.state||'');
+   if(typeof unlockAudioFromInteraction==='function')unlockAudioFromInteraction();
+   if(A&&typeof A.resume==='function')await A.resume().catch(()=>{});
+   diagnostics.contextStateAfter=String(A.state||'');
+   diagnostics.tapAvailableAfter=!!sfx.tap;
+   const gain=A.createGain();
+   const osc=A.createOscillator();
+   gain.gain.value=Number.isFinite(+cfg.keepAliveGain)?Math.max(0,Math.min(.01,+cfg.keepAliveGain)):.00035;
+   osc.type='sine';
+   osc.frequency.value=Number.isFinite(+cfg.keepAliveHz)?Math.max(1,Math.min(80,+cfg.keepAliveHz)):23;
+   osc.connect(gain);
+   gain.connect(sfx.tap);
+   osc.start();
+   cleanupId=`segment-audio-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+   window.__platinumHarnessAudioCaptureCleanups=window.__platinumHarnessAudioCaptureCleanups||Object.create(null);
+   window.__platinumHarnessAudioCaptureCleanups[cleanupId]=()=>{
+    try{osc.stop();}catch{}
+    try{osc.disconnect();}catch{}
+    try{gain.disconnect();}catch{}
+   };
+   const tracks=Array.from(sfx.tap?.stream?.getAudioTracks?.()||[]);
+   diagnostics.trackStates=tracks.map(track=>({
+    kind:String(track.kind||''),
+    enabled:!!track.enabled,
+    muted:!!track.muted,
+    readyState:String(track.readyState||'')
+   }));
+   if(!tracks.length)diagnostics.warning='Audio graph was initialized, but the MediaStreamDestination exposed no audio tracks.';
+   return {ok:!!tracks.length,cleanupId,trackCount:tracks.length,tracks,diagnostics};
+  }catch(err){
+   if(cleanupId&&window.__platinumHarnessAudioCaptureCleanups?.[cleanupId]){
+    try{window.__platinumHarnessAudioCaptureCleanups[cleanupId]();}catch{}
+    delete window.__platinumHarnessAudioCaptureCleanups[cleanupId];
+   }
+   diagnostics.warning=String(err?.message||err||'Audio capture preparation failed.');
+   return {ok:false,cleanupId:'',trackCount:0,tracks:[],diagnostics};
+  }
+ },
+ finishSegmentCaptureAudio(cleanupId=''){
+  const id=String(cleanupId||'');
+  const cleanups=window.__platinumHarnessAudioCaptureCleanups;
+  if(id&&cleanups?.[id]){
+   try{cleanups[id]();}catch{}
+   delete cleanups[id];
+   return true;
+  }
+  return false;
+ },
  setControlledClock(enabled=1){
   if(typeof setHarnessClockControlled==='function')setHarnessClockControlled(!!enabled);
   return !!enabled;
@@ -1546,6 +1607,7 @@ window.__galagaHarness__={
   return true;
  },
  setupChallengeMotionProfileTest(cfg={}){
+  if(typeof setHarnessClockControlled==='function')setHarnessClockControlled(1);
   started=1;
   paused=0;
   ATTRACT.active=0;

@@ -9,6 +9,7 @@ const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-s
 const LABELS_PATH = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-path-reference-labels', 'latest.json');
 const TARGET_TRACKS_PATH = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-challenge-object-tracks', 'latest.json');
 const TARGET_CONTROLS_PATH = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-trajectory-controls', 'latest.json');
+const FULL_ANALYZER_REVIEW_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-full-analyzer-review');
 function argValue(name, fallback = ''){
   const prefix = `--${name}=`;
   const direct = process.argv.find(arg => arg.startsWith(prefix));
@@ -85,6 +86,35 @@ function readJson(file, fallback = null){
   }catch{
     return fallback;
   }
+}
+
+function findFullAnalyzerReviews(){
+  if(!fs.existsSync(FULL_ANALYZER_REVIEW_ROOT)) return [];
+  const files = [];
+  const latest = path.join(FULL_ANALYZER_REVIEW_ROOT, 'latest.json');
+  if(fs.existsSync(latest)) files.push(latest);
+  for(const entry of fs.readdirSync(FULL_ANALYZER_REVIEW_ROOT, { withFileTypes: true })){
+    if(!entry.isDirectory()) continue;
+    const report = path.join(FULL_ANALYZER_REVIEW_ROOT, entry.name, 'report.json');
+    if(fs.existsSync(report)) files.push(report);
+  }
+  const seen = new Set();
+  return files
+    .map(file => ({ file, review: readJson(file, null) }))
+    .filter(item => item.review && Number.isFinite(+item.review.stage) && item.review.candidateId)
+    .filter(item => {
+      const key = `${item.review.stage}:${item.review.candidateId}:${item.review.decision}:${item.review.generatedAt || item.file}`;
+      if(seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .map(item => Object.assign({ sourceFile: rel(item.file) }, item.review));
+}
+
+function rejectedFullAnalyzerReviewsForStage(stage){
+  return findFullAnalyzerReviews()
+    .filter(review => +review.stage === +stage && String(review.decision || '').includes('reject'))
+    .sort((a, b) => String(b.generatedAt || '').localeCompare(String(a.generatedAt || '')));
 }
 
 function writeJson(file, value){
@@ -1500,11 +1530,64 @@ function summarizeCandidate(row){
   };
 }
 
+function fullAnalyzerRiskForCandidate(candidate, context){
+  const expectedLift = round((candidate.expectedMatch?.score10 || 0) - context.baselineExpectedScore, 2);
+  const targetVideoLift = round((candidate.targetVideoObjectFit?.score10 || 0) - context.baselineTargetVideoScore, 2);
+  const rejectedReviews = Array.isArray(context.rejectedReviews) ? context.rejectedReviews : [];
+  const exactRejection = rejectedReviews.find(review => review.candidateId === candidate.candidateId);
+  if(exactRejection){
+    return {
+      pass: false,
+      reason: 'prior-full-analyzer-rejection',
+      source: exactRejection.sourceFile || null,
+      decision: exactRejection.decision || null,
+      expectedLift10: expectedLift,
+      targetVideoObjectFitLift10: targetVideoLift,
+      trialDeltas: exactRejection.deltas || {},
+      read: exactRejection.read || `Candidate ${candidate.candidateId} was already rejected by a full challenge-stage analyzer trial.`
+    };
+  }
+  const relevantRejection = rejectedReviews
+    .filter(review => Number.isFinite(+(review.summary?.sweepExpectedLift10)) || Number.isFinite(+(review.summary?.sweepTargetVideoObjectFitLift10)))
+    .sort((a, b) => {
+      const aLift = (+(a.summary?.sweepExpectedLift10) || 0) + (+(a.summary?.sweepTargetVideoObjectFitLift10) || 0);
+      const bLift = (+(b.summary?.sweepExpectedLift10) || 0) + (+(b.summary?.sweepTargetVideoObjectFitLift10) || 0);
+      return bLift - aLift;
+    })[0] || null;
+  if(relevantRejection){
+    const rejectedExpectedLift = +(relevantRejection.summary?.sweepExpectedLift10) || 0;
+    const rejectedTargetLift = +(relevantRejection.summary?.sweepTargetVideoObjectFitLift10) || 0;
+    const clearsExpected = expectedLift >= rejectedExpectedLift + 0.2;
+    const clearsTarget = targetVideoLift >= rejectedTargetLift + 0.4 && expectedLift >= rejectedExpectedLift;
+    if(!clearsExpected && !clearsTarget){
+      return {
+        pass: false,
+        reason: 'below-calibrated-full-analyzer-threshold',
+        source: relevantRejection.sourceFile || null,
+        decision: relevantRejection.decision || null,
+        expectedLift10: expectedLift,
+        targetVideoObjectFitLift10: targetVideoLift,
+        rejectedExpectedLift10: round(rejectedExpectedLift, 2),
+        rejectedTargetVideoObjectFitLift10: round(rejectedTargetLift, 2),
+        read: `Candidate lift does not clear the latest rejected full-analyzer calibration for stage ${STAGE}: expected lift ${expectedLift}/10 and target-video lift ${targetVideoLift}/10 are not materially stronger than rejected lift ${round(rejectedExpectedLift, 2)}/10 and ${round(rejectedTargetLift, 2)}/10.`
+      };
+    }
+  }
+  return {
+    pass: true,
+    reason: 'no-recorded-full-analyzer-block',
+    expectedLift10: expectedLift,
+    targetVideoObjectFitLift10: targetVideoLift,
+    read: 'No recorded full-analyzer rejection blocks this candidate.'
+  };
+}
+
 function buildMarkdown(report){
   const topRows = report.candidates.slice(0, 12).map((row, index) => {
     const hit = row.expectedReferenceHit ? 'yes' : 'no';
     const eventRead = row.noSafetyRegression ? 'pass' : `risk ${JSON.stringify(row.eventCounts)}`;
-    return `| ${index + 1} | ${row.candidateId} | ${row.selectionScore10}/10 | ${row.expectedMatch?.score10 ?? 0}/10 | ${row.targetVideoObjectFit?.score10 ?? 'n/a'}/10 | ${row.stageIdentity?.identityMargin10 ?? 'n/a'} | ${row.bestMatch?.labelId || 'none'} (${row.bestMatch?.score10 ?? 0}/10) | ${hit} | ${eventRead} |`;
+    const fullAnalyzerRead = row.fullAnalyzerRisk?.pass === false ? `blocked: ${row.fullAnalyzerRisk.reason}` : 'pass';
+    return `| ${index + 1} | ${row.candidateId} | ${row.selectionScore10}/10 | ${row.expectedMatch?.score10 ?? 0}/10 | ${row.targetVideoObjectFit?.score10 ?? 'n/a'}/10 | ${row.stageIdentity?.identityMargin10 ?? 'n/a'} | ${row.bestMatch?.labelId || 'none'} (${row.bestMatch?.score10 ?? 0}/10) | ${hit} | ${eventRead} | ${fullAnalyzerRead} |`;
   }).join('\n');
   const diagnosticRow = row => `| ${row.candidateId} | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.stageIdentityMargin10 ?? 'n/a'} | ${row.bestMatchLabelId || 'none'} (${row.bestMatchScore10}/10) | ${row.expectedReferenceHit ? 'yes' : 'no'} | ${row.lateStageIdentityPass === false ? `blocked (${row.bestMatchChallengeNumber || 'n/a'} vs ${row.expectedChallengeNumber || 'n/a'})` : 'pass'} | ${row.noSafetyRegression ? 'pass' : 'risk'} | ${(row.groupPathFamilies || []).join(', ') || 'default'} |`;
   const emptyDiagnosticRow = '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
@@ -1534,8 +1617,8 @@ Stage ${report.stage} currently has safe challenge behavior but still does not c
 
 ## Top Candidates
 
-| Rank | Candidate | Selection | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Safety |
-| ---: | --- | ---: | ---: | ---: | ---: | --- | --- | --- |
+| Rank | Candidate | Selection | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Safety | Full Analyzer Gate |
+| ---: | --- | ---: | ---: | ---: | ---: | --- | --- | --- | --- |
 ${topRows}
 
 ## Diagnostic Candidates
@@ -1584,6 +1667,14 @@ async function main(){
   const baseline = scored.find(row => row.candidateId === 'baseline-current') || scored.at(-1);
   const baselineExpectedScore = baseline.expectedMatch?.score10 || 0;
   const baselineTargetVideoScore = baseline.targetVideoObjectFit?.score10 || 0;
+  const rejectedFullAnalyzerReviews = rejectedFullAnalyzerReviewsForStage(STAGE);
+  for(const row of scored){
+    row.fullAnalyzerRisk = fullAnalyzerRiskForCandidate(row, {
+      baselineExpectedScore,
+      baselineTargetVideoScore,
+      rejectedReviews: rejectedFullAnalyzerReviews
+    });
+  }
   const promotionCandidates = scored.filter(candidate => {
     const candidateExpectedLift = round((candidate.expectedMatch?.score10 || 0) - baselineExpectedScore, 2);
     const candidateTargetVideoLift = round((candidate.targetVideoObjectFit?.score10 || 0) - baselineTargetVideoScore, 2);
@@ -1605,6 +1696,7 @@ async function main(){
       && candidateNoTargetRegression
       && candidateNoExpectedRegression
       && intendedStageSupported
+      && candidate.fullAnalyzerRisk?.pass !== false
       && (candidateExpectedLift >= 0.35 || candidateTargetVideoLift >= 0.35 || (candidateExpectedLift >= 0.25 && candidateTargetVideoLift >= 0.25));
   }).sort((a, b) => {
     const aLift = ((a.expectedMatch?.score10 || 0) - baselineExpectedScore) + ((a.targetVideoObjectFit?.score10 || 0) - baselineTargetVideoScore);
@@ -1628,7 +1720,12 @@ async function main(){
     && identityClose;
   const lateStageIdentityPass = best.stageIdentity?.lateStageIdentityPass !== false;
   const intendedStageSupported = lateStageIdentityPass && (best.expectedReferenceHit || identityTieSupported || strongExpectedLift);
-  const keeper = best.noSafetyRegression && noTargetVideoRegression && noExpectedRegression && intendedStageSupported && (expectedLift >= 0.35 || targetVideoLift >= 0.35 || (expectedLift >= 0.25 && targetVideoLift >= 0.25));
+  const fullAnalyzerRisk = best.fullAnalyzerRisk || fullAnalyzerRiskForCandidate(best, {
+    baselineExpectedScore,
+    baselineTargetVideoScore,
+    rejectedReviews: rejectedFullAnalyzerReviews
+  });
+  const keeper = best.noSafetyRegression && noTargetVideoRegression && noExpectedRegression && intendedStageSupported && fullAnalyzerRisk.pass !== false && (expectedLift >= 0.35 || targetVideoLift >= 0.35 || (expectedLift >= 0.25 && targetVideoLift >= 0.25));
   const retainedCandidateLimit = 120;
   const pathShapeMarkers = [
     'pink-green-low-sweep',
@@ -1694,6 +1791,8 @@ async function main(){
       noTargetVideoRegression,
       noExpectedRegression,
       intendedStageSupported,
+      fullAnalyzerRisk,
+      fullAnalyzerRejectionCount: rejectedFullAnalyzerReviews.length,
       lateStageIdentityPass,
       identityTieSupported,
       materialTargetVideoWin,
@@ -1703,10 +1802,14 @@ async function main(){
       playerMeaning: keeper
         ? `A measured stage-${STAGE} layout candidate is worth a temporary runtime review, but it must be confirmed by the full challenge-stage analyzer and persona guardrails before promotion.`
         : 'This pass improved the search process more than the shipped game: no candidate earned enough measured lift to promote safely.',
-      processMeaning: 'Future challenge tuning can now compare many runtime candidates against Galaga labels before editing game constants.',
+      processMeaning: fullAnalyzerRisk.pass === false
+        ? `Future challenge tuning can now reject candidates that look promising in a focused sweep but fail our recorded full-analyzer calibration: ${fullAnalyzerRisk.read}`
+        : 'Future challenge tuning can now compare many runtime candidates against Galaga labels before editing game constants.',
       nextStep: keeper
         ? `Apply the best candidate temporarily, rerun full challenge-stage conformance plus guardrails, and accept it only if the full analyzer confirms the expected lift.`
-        : `Use target-trajectory controls and richer reference labels before changing runtime stage-${STAGE} gameplay.`
+        : fullAnalyzerRisk.pass === false
+          ? `Do not promote ${best.candidateId}; strengthen the full-stage scorer or author a richer Stage ${STAGE} contract before another runtime trial.`
+          : `Use target-trajectory controls and richer reference labels before changing runtime stage-${STAGE} gameplay.`
     },
     candidates: retainedCandidates.map(row => ({
       candidateId: row.candidateId,
@@ -1722,6 +1825,7 @@ async function main(){
       expectedReferenceHit: row.expectedReferenceHit,
       stageIdentity: row.stageIdentity,
       targetVideoObjectFit: row.targetVideoObjectFit,
+      fullAnalyzerRisk: row.fullAnalyzerRisk,
       selectionScore10: row.selectionScore10
     })),
     candidateRetention: {
@@ -1742,7 +1846,7 @@ async function main(){
     measurementPolicy: {
       scope: `harness-only stage-${STAGE} challenge layout candidates`,
       reference: 'media-backed Galaga challenge labels with comparison vectors',
-      promotionRule: 'Require the expected challenge-label identity to be the best match or tied within 0.05/10 with evidence on both expected and target-video axes, no safety regression, and at least +0.35/10 expected-label or target-video lift over baseline before runtime promotion. A material target-video win may tolerate up to -0.15/10 expected drift only when expected identity remains the best match. Strong non-best candidates must be very close on identity margin and improve both expected and target-video scores.',
+      promotionRule: 'Require the expected challenge-label identity to be the best match or tied within 0.05/10 with evidence on both expected and target-video axes, no safety regression, no matching full-analyzer rejection, and at least +0.35/10 expected-label or target-video lift over baseline before runtime promotion. A material target-video win may tolerate up to -0.15/10 expected drift only when expected identity remains the best match. Strong non-best candidates must be very close on identity margin and improve both expected and target-video scores. If a prior full-analyzer review rejected a similar or identical candidate, the sweep must clear that calibration by a material margin before it can be marked ready again.',
       safety: 'Reject candidates with enemy shots, enemy attack starts, or ship losses in the challenge window.'
     }
   };

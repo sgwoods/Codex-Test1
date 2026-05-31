@@ -4,7 +4,7 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const ARTIFACT = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-target-evidence-audit', 'latest.json');
-const REQUIRED = ['boss-galaga', 'bee-zako', 'butterfly-escort', 'player-fighter'];
+const REQUIRED = ['boss-galaga', 'bee-zako', 'butterfly-escort', 'player-fighter', 'challenge-specialty-aliens'];
 
 function fail(message, payload){
   console.error(message);
@@ -28,12 +28,19 @@ function main(){
     const row = rows.find(item => item.roleKey === roleKey);
     if(!row) fail(`Missing audited role ${roleKey}`, { roles: rows.map(item => item.roleKey) });
     if(!Array.isArray(row.linkedCrops) || !row.linkedCrops.length) fail(`Audited role ${roleKey} has no linked target crops.`, row);
+    if(!Number.isFinite(+row.averageAuthorityScore10) || +row.averageAuthorityScore10 < 1 || +row.averageAuthorityScore10 > 10){
+      fail(`Audited role ${roleKey} is missing average authority metadata.`, row);
+    }
   }
   for(const roleKey of ['boss-galaga', 'bee-zako', 'butterfly-escort']){
     const row = rows.find(item => item.roleKey === roleKey);
     if(!row || row.status !== 'trusted-primary-target-available' || (row.trustedCropCount || 0) < 1){
       fail(`Audited role ${roleKey} does not have a trusted primary target.`, row);
     }
+  }
+  const challenge = rows.find(item => item.roleKey === 'challenge-specialty-aliens');
+  if(!challenge || challenge.status !== 'provisional-target-only' || +challenge.averageAuthorityScore10 > 4){
+    fail('Challenge specialty aliens must remain explicitly provisional until better reference windows are ingested.', challenge);
   }
   console.log(JSON.stringify({
     ok: true,

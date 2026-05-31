@@ -40,6 +40,32 @@ before it becomes a release claim. Platinum may present the resulting scorecard
 and dashboard, but the game owns the reference truth, metric definitions, and
 runtime correspondence evidence.
 
+## Gameplay Segment Capture Evidence
+
+Human review now has a reusable video-capture harness instead of one-off
+snippets. Use it whenever a candidate needs before/after evidence for graphics,
+movement, persona behavior, pacing, or audio feel:
+
+```bash
+npm run harness:capture:gameplay-segment -- --start-kind=challenge --challenge-stage=3 --mode=watch --persona=professional --seconds=30 --label=stage11-challenge-review
+```
+
+The harness writes durable artifacts under
+`reference-artifacts/analyses/gameplay-segment-captures/`:
+
+- playable `.webm` review video, repaired when MediaRecorder omits duration
+  metadata
+- poster frame
+- JSON report with stage/challenge/persona/seed/duration/audio-track metadata
+- `latest.json` and `latest-<label>.*` aliases for documentation and release
+  review
+
+For before/after comparisons, keep the same seed, start kind, stage or
+challenge-stage marker, persona, viewport, and duration. The report explicitly
+states whether an audio stream was captured; video-only artifacts can still be
+used for visual and movement review, but they should not be used as audio
+evidence.
+
 ## Current Categories
 
 Each category scores from `1` to `10`.
