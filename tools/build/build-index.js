@@ -69,6 +69,7 @@ const GALAGA_REFERENCE_SPRITE_TARGETS = path.join(ROOT, 'reference-artifacts', '
 const GALAGA_REFERENCE_SPRITE_MODEL = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-reference-sprites', 'model-0.1.json');
 const APPLICATION_ARTIFACT_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'application-artifact-conformance', 'latest.json');
 const CHALLENGE_STAGE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
+const CHALLENGE_STAGE_HUMAN_PLAYABILITY = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-human-playability', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_SWEEP = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_SWEEP_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep-index', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_FULL_ANALYZER_REVIEW = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-full-analyzer-review', 'latest.json');
@@ -3273,6 +3274,7 @@ let galagaReferenceSpriteTargetsCache = null;
 let galagaReferenceSpriteModelCache = null;
 let applicationArtifactConformanceCache = null;
 let challengeStageConformanceCache = null;
+let challengeStageHumanPlayabilityCache = null;
 let challengeStageCandidateSweepCache = null;
 let challengeStageCandidateSweepIndexCache = null;
 let challengeStageCandidateFullAnalyzerReviewCache = null;
@@ -3668,6 +3670,25 @@ function loadChallengeStageConformance(){
   return challengeStageConformanceCache;
 }
 
+function loadChallengeStageHumanPlayability(){
+  if(challengeStageHumanPlayabilityCache) return challengeStageHumanPlayabilityCache;
+  if(!fs.existsSync(CHALLENGE_STAGE_HUMAN_PLAYABILITY)){
+    challengeStageHumanPlayabilityCache = { summary: {}, focusRows: [], laterRows: [] };
+    return challengeStageHumanPlayabilityCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_STAGE_HUMAN_PLAYABILITY);
+    challengeStageHumanPlayabilityCache = Object.assign({}, artifact, {
+      summary: artifact.summary || {},
+      focusRows: Array.isArray(artifact.focusRows) ? artifact.focusRows : [],
+      laterRows: Array.isArray(artifact.laterRows) ? artifact.laterRows : []
+    });
+  } catch (err) {
+    challengeStageHumanPlayabilityCache = { summary: {}, focusRows: [], laterRows: [] };
+  }
+  return challengeStageHumanPlayabilityCache;
+}
+
 function loadChallengeStageCandidateSweep(){
   if(challengeStageCandidateSweepCache) return challengeStageCandidateSweepCache;
   if(!fs.existsSync(CHALLENGE_STAGE_CANDIDATE_SWEEP)){
@@ -3914,6 +3935,59 @@ function challengeList(items = []){
   const rows = Array.isArray(items) ? items.filter(Boolean) : [];
   if(!rows.length) return '<span class="docMeta">No items recorded.</span>';
   return `<ul>${rows.map(item => `<li>${esc(item)}</li>`).join('')}</ul>`;
+}
+
+function renderChallengeHumanPlayabilityRow(row = {}){
+  const m = row.metrics || {};
+  const route = row.route || {};
+  return `
+    <tr>
+      <td><strong>${esc(row.label || 'Challenge pending')}</strong><br><span class="docMeta">${esc(row.layoutId || '')}</span></td>
+      <td><strong>${esc(m.strictScore10 ?? 'n/a')}/10</strong></td>
+      <td>${esc(m.humanPerfectPotential10 ?? 'n/a')}/10<br><span class="docMeta">${esc(route.routeKills ?? 'n/a')}/${esc(route.expectedTargetCount ?? 'n/a')} route</span></td>
+      <td>${esc(m.targetVideoObjectTrackFit10 ?? 'n/a')}/10</td>
+      <td>${esc(m.alienNovelty10 ?? 'n/a')}/10</td>
+      <td>${esc(row.humanProblem || '')}</td>
+    </tr>
+  `;
+}
+
+function renderChallengeHumanPlayabilityDetail(row = {}){
+  const m = row.metrics || {};
+  const route = row.route || {};
+  const weak = Array.isArray(route.weakestReasons) ? route.weakestReasons.slice(0, 3) : [];
+  return `
+    <details class="challengeStageDetail">
+      <summary class="challengeStageSummary">
+        <span class="challengeStageTitle">
+          <span>${esc(row.label || 'Challenge pending')}</span>
+          <small>${esc(row.layoutId || '')}</small>
+        </span>
+        <span class="scorePill">${esc(m.humanPerfectPotential10 ?? 'n/a')}/10 human-perfect</span>
+        <span class="scorePill">${esc(route.routeKills ?? 'n/a')}/${esc(route.expectedTargetCount ?? 'n/a')} route</span>
+        <span class="scorePill">${esc(m.targetVideoObjectTrackFit10 ?? 'n/a')}/10 object track</span>
+      </summary>
+      <div class="challengeStageDetailBody">
+        <div class="challengeCompareGrid">
+          <article class="challengeEvidenceCard">
+            <h3>Target</h3>
+            <p>${esc(row.targetRead || 'Target read pending.')}</p>
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>Current</h3>
+            <p>${esc(row.currentRead || 'Current read pending.')}</p>
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>Radical Fix Direction</h3>
+            <p><strong>Problem:</strong> ${esc(row.humanProblem || '')}</p>
+            <p>${esc(row.recommendation || '')}</p>
+            <p class="docMeta">Route timing ${esc(route.firstRouteT ?? 'n/a')}s-${esc(route.lastRouteT ?? 'n/a')}s; any exposure ${esc(route.targetExposureShare ?? 'n/a')}; repeated exposure ${esc(route.sustainedExposureShare ?? 'n/a')}; top crowd ${esc(route.topCrowdShare ?? 'n/a')}.</p>
+            ${challengeList(weak.length ? weak : ['No weakest-route reason recorded.'])}
+          </article>
+        </div>
+      </div>
+    </details>
+  `;
 }
 
 function challengeScoreComponents(row = {}){
@@ -5458,6 +5532,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'level-visual-conformance-index', title: 'Level Visual Index' },
     { id: 'challenge-timing-alignment-review', title: 'Timing Alignment Review' },
     { id: 'alien-motion-atlas', title: 'Alien Motion Atlas' },
+    { id: 'challenge-stage-human-playability', title: 'Challenge Human Playability' },
     { id: 'challenge-stage-conformance', title: 'Challenge Stage Deep Dive' },
     { id: 'movement-grammar-plan', title: 'Movement Grammar Plan' },
     { id: 'persona-catalog', title: 'Testing Personas' },
@@ -5712,6 +5787,14 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   `).join('\n');
   const challengeStageConformance = loadChallengeStageConformance();
   const challengeSummary = challengeStageConformance.summary || {};
+  const challengeHumanPlayability = loadChallengeStageHumanPlayability();
+  const challengeHumanSummary = challengeHumanPlayability.summary || {};
+  const challengeHumanRows = (challengeHumanPlayability.focusRows || []).map(renderChallengeHumanPlayabilityRow).join('\n') || `
+    <tr><td colspan="6">Human-playability review pending. Run <code>npm run harness:analyze:challenge-stage-human-playability</code>.</td></tr>
+  `;
+  const challengeHumanDetails = (challengeHumanPlayability.focusRows || []).map(renderChallengeHumanPlayabilityDetail).join('\n') || `
+    <div class="docWrap"><span class="docMeta">Human-playability stage details pending.</span></div>
+  `;
   const challengeCandidateSweep = loadChallengeStageCandidateSweep();
   const challengeCandidateSweepIndex = loadChallengeStageCandidateSweepIndex();
   const challengeCandidateFullAnalyzerReview = loadChallengeStageCandidateFullAnalyzerReview();
@@ -6636,6 +6719,23 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             ${gameplaySegmentEvidence}
             <p class="docMeta"><strong>Naming rule:</strong> normal Stages and Challenging Stages are separate. The challenge rows below use interval labels like <strong>Challenging Stage 2-3</strong> instead of calling that set piece Stage 3.</p>
             <p class="docMeta"><strong>Evidence-image rule:</strong> contact sheets are supporting artifacts for visual inspection, not the main human-readable conformance explanation. Use each row's target/current/conformance text for the judgment; open the evidence panel only when you need to inspect the underlying frames at native scale.</p>
+            <div id="challenge-stage-human-playability" class="inlineDocShelf" style="display:block;">
+              <h3>First Five Human Playability Review</h3>
+              <p><strong>Focus read:</strong> first five challenging stages average ${esc(challengeHumanSummary.focusAverageStrictScore10 ?? 'n/a')}/10 strict conformance, ${esc(challengeHumanSummary.focusAverageHumanPerfectPotential10 ?? 'n/a')}/10 human-perfect potential, ${esc(challengeHumanSummary.focusAverageTargetVideoObjectTrackFit10 ?? 'n/a')}/10 target-video object-track fit, and ${esc(challengeHumanSummary.focusAverageAlienNovelty10 ?? 'n/a')}/10 alien novelty.</p>
+              <p>${esc(challengeHumanSummary.nextBestEffort || 'Generate the human-playability review to prioritize challenge-stage gameplay work.')}</p>
+              <p class="docMeta"><strong>Generated artifact:</strong> <code>reference-artifacts/analyses/challenge-stage-human-playability/latest.json</code>. <strong>Markdown report:</strong> <code>CHALLENGE_STAGE_HUMAN_PLAYABILITY_REVIEW.md</code>.</p>
+              <div class="tableWrap">
+                <table class="dataTable">
+                  <thead>
+                    <tr><th>Stage</th><th>Strict</th><th>Human Perfect</th><th>Object Track</th><th>Novelty</th><th>Main Human Problem</th></tr>
+                  </thead>
+                  <tbody>${challengeHumanRows}</tbody>
+                </table>
+              </div>
+              <div class="challengeStageList" style="margin-top:16px;">
+                ${challengeHumanDetails}
+              </div>
+            </div>
             ${stage7ReferencePathEvidence}
             <div class="inlineDocShelf">
               <details class="inlineDocPreview">

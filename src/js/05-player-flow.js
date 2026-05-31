@@ -4,6 +4,10 @@ function resolveDeveloperStartWatchPersona(cfg={}){
  const raw=typeof sanitizeExpertPlayPersona==='function'
   ? sanitizeExpertPlayPersona(cfg.expertPlays)
   : String(cfg.expertPlays||'human').trim().toLowerCase();
+ const startKind=typeof sanitizeStartKind==='function'
+  ? sanitizeStartKind(cfg.startKind)
+  : String(cfg.startKind||'level').trim().toLowerCase();
+ if(startKind==='challenge-tour'&&raw==='human')return 'professional';
  return raw&&raw!=='human'?normalizePlayerTwoPersona(raw):'';
 }
 
@@ -32,15 +36,18 @@ function startAuroraGameplay(){
  const developerWatchPersona=resolveDeveloperStartWatchPersona(cfg);
  const watchPersona=pendingPlayerTwoTurn?'':(armedWatchPersona||developerWatchPersona);
  const playerTwoRun=pendingPlayerTwoTurn||resolvePlayerTwoStartState();
+ const challengeTourActive=startStage.startKind==='challenge-tour';
+ const challengeTourTotal=challengeTourActive&&typeof challengeTourStageCount==='function'?challengeTourStageCount():0;
  aud=1;AC().resume?.();
  gameOverHtml='';gameOverState=null;
-started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:startStage.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,forceChallenge:startStage.forceChallenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:0,simT:0,extendFirst,extendRecurring,nextExtendScore,extendAwards:0,extendFlashT:0,extendFlashShips:0,playerTwo:playerTwoRun,watchMode:watchPersona?1:0,watchPersona:watchPersona||'',commentaryT:0,commentaryCooldown:0,commentaryTitle:'',commentaryLines:[]});
+started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:startStage.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,forceChallenge:startStage.forceChallenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:0,simT:0,extendFirst,extendRecurring,nextExtendScore,extendAwards:0,extendFlashT:0,extendFlashShips:0,playerTwo:playerTwoRun,watchMode:watchPersona?1:0,watchPersona:watchPersona||'',challengeTour:challengeTourActive?{active:1,index:1,total:challengeTourTotal||1,persona:watchPersona||'professional',results:[],done:0}:null,commentaryT:0,commentaryCooldown:0,commentaryTitle:'',commentaryLines:[]});
  if(typeof resetHarnessFrameClock==='function')resetHarnessFrameClock();
  if(typeof syncPauseUi==='function')syncPauseUi();
  S.harnessPersona=(watchPersona||(playerTwoRun?.activeTurn==='p2'?playerTwoRun.personaKey:'')||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inputResetHoldT:0,vx:0});
- logEvent('game_start',{persona:S.harnessPersona||null,watchMode:!!S.watchMode,developerExpertPlay:developerWatchPersona||'',requestedStage:startStage.requestedStage,stage:startStage.stage,startStageMode:startStage.stageMode,startKind:startStage.startKind||'level',challengeStage:startStage.challengeStage||null,displayLabel:startStage.displayLabel||'',forceChallenge:startStage.forceChallenge,playerTwo:playerTwoRun?.enabled?playerTwoSnapshot(playerTwoRun):null});
+ logEvent('game_start',{persona:S.harnessPersona||null,watchMode:!!S.watchMode,developerExpertPlay:developerWatchPersona||'',requestedStage:startStage.requestedStage,stage:startStage.stage,startStageMode:startStage.stageMode,startKind:startStage.startKind||'level',challengeStage:startStage.challengeStage||null,displayLabel:startStage.displayLabel||'',forceChallenge:startStage.forceChallenge,challengeTour:S.challengeTour?{index:S.challengeTour.index,total:S.challengeTour.total,persona:S.challengeTour.persona}:null,playerTwo:playerTwoRun?.enabled?playerTwoSnapshot(playerTwoRun):null});
+ if(S.challengeTour)logEvent('challenge_tour_start',{persona:S.challengeTour.persona,total:S.challengeTour.total,stage:S.stage,displayLabel:startStage.displayLabel||''});
  startRunRecording();
  spawnStage();msg.textContent='';
  const openingTiming=(!startStage.forceChallenge&&startStage.stage===1&&usesReferenceTimingModel())
@@ -50,7 +57,11 @@ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:
   sfx.stopCueNames(['attractEnter','attractPulse','stagePulse','stageTransition','challengeTransition','challengeResults','challengePerfect','gameOver']);
  }
  sfx.start();
- if(S.watchMode){
+ if(S.challengeTour){
+  S.alertTxt=`CHALLENGE TOUR\n${watchModePersonaLabel(S.watchPersona)} PILOT`;
+  S.alertT=Math.max(S.alertT,2.2);
+  if(typeof commentatorEvent==='function')commentatorEvent('challenge_tour_start',{persona:S.watchPersona,label:watchModePersonaLabel(S.watchPersona),total:S.challengeTour.total});
+ }else if(S.watchMode){
   S.alertTxt=`WATCH MODE\n${watchModePersonaLabel(S.watchPersona)} PILOT`;
   S.alertT=Math.max(S.alertT,1.8);
   if(typeof commentatorEvent==='function')commentatorEvent('watch_mode',{persona:S.watchPersona,label:watchModePersonaLabel(S.watchPersona)});
@@ -71,6 +82,30 @@ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:
   S.audioPulseHoldT=Math.max(+S.audioPulseHoldT||0,3.15);
  }
  c?.focus?.();
+}
+
+function finishChallengeTour(){
+ const tour=S.challengeTour||{results:[],total:0,persona:S.watchPersona||''};
+ const completed=Array.isArray(tour.results)?tour.results.length:0;
+ logEvent('challenge_tour_complete',{persona:tour.persona||S.watchPersona||'',completed,total:tour.total||completed,score:S.score,stage:S.stage});
+ started=0;
+ paused=0;
+ if(typeof syncPauseUi==='function')syncPauseUi();
+ gameOverState=buildGameOverState(S.score,S.stage,1,{
+  outcome:'mission_complete',
+  resultTitle:'CHALLENGE TOUR COMPLETE',
+  resultSub:`${completed}/${tour.total||completed} CHALLENGES WATCHED`
+ });
+ gameOverState.resultStageMetric='CHALLENGES';
+ gameOverState.resultStageValue=`${completed}/${tour.total||completed}`;
+ gameOverHtml=buildGameOverHtmlFromState();
+ if(usesRuntimeGalagaReferenceAudio()&&typeof sfx.stopCueNames==='function'){
+  sfx.stopCueNames(['stagePulse','stageTransition','challengeTransition','challengeResults','challengePerfect']);
+ }
+ if(typeof sfx.challengeResult==='function')sfx.challengeResult(1);
+ if(VIDEO_REC.enabled)exportSession({auto:1,silent:1});
+ if(typeof stopRunRecordingAfterAudioTail==='function')stopRunRecordingAfterAudioTail(2500,VIDEO_REC.sessionId);
+ else stopRunRecording();
 }
 
 function loseShip(cause={}){

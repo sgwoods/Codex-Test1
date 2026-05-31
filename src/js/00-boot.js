@@ -1189,7 +1189,7 @@ function scoreGameSupportsSharedRemote(gameKey=currentScoreStorageGameKey()){
 
 const S={score:0,best:+readPref(scoreBestKey())||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0,
  p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,inputResetHoldT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,startCueT:0,formationCueT:0,audioPulseHoldT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,profile:{name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic'},stagePresentation:null,
- scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,simT:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0},playerTwo:null,watchMode:0,watchPersona:'',commentaryT:0,commentaryCooldown:0,commentaryTitle:'',commentaryLines:[]};
+ scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,simT:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0},playerTwo:null,watchMode:0,watchPersona:'',challengeTour:null,commentaryT:0,commentaryCooldown:0,commentaryTitle:'',commentaryLines:[]};
 
 const DEFAULT_STARFIELD_PROFILE=Object.freeze({
  id:'classic-arcade-stars',
@@ -1354,13 +1354,37 @@ function currentStartStageMode(){
 }
 function sanitizeStartKind(value=''){
  const next=String(value||'level').trim().toLowerCase();
- return next==='challenge'?'challenge':'level';
+ return next==='challenge'||next==='challenge-tour'?next:'level';
+}
+function isChallengeStartKind(kind=''){
+ const next=sanitizeStartKind(kind);
+ return next==='challenge'||next==='challenge-tour';
+}
+function challengeTourStages(){
+ const pack=typeof currentGamePack==='function'?currentGamePack():null;
+ const layouts=Array.isArray(pack?.challengeLayouts)?pack.challengeLayouts:[];
+ const stages=layouts.map(layout=>+layout.fromStage).filter(stage=>Number.isFinite(stage)&&stage>0).sort((a,b)=>a-b);
+ if(stages.length)return stages;
+ const count=Math.max(1,Math.min(24,+(pack?.stageCadence?.challengeTourCount||8)|0));
+ return Array.from({length:count},(_,index)=>internalStageForChallengeStageNumber(index+1));
+}
+function challengeTourStageCount(){
+ return challengeTourStages().length;
+}
+function challengeTourStageForIndex(index){
+ const stages=challengeTourStages();
+ const i=cl(+index||1,1,Math.max(1,stages.length))|0;
+ return stages[i-1]||internalStageForChallengeStageNumber(i);
 }
 function resolveGameplayStartStage(cfg={}){
  const requestedStage=cl(+cfg.stage||DEFAULT_TEST_CFG.stage,1,99)|0;
  const challengeStage=cl(+cfg.challengeStage||DEFAULT_TEST_CFG.challengeStage||1,1,99)|0;
  const stageMode=currentStartStageMode();
  const startKind=sanitizeStartKind(cfg.startKind||(cfg.challenge?'challenge':'level'));
+ if(startKind==='challenge-tour'){
+  const stage=challengeTourStageForIndex(1);
+  return {requestedStage:1,stage,stageMode,forceChallenge:1,startKind,challengeStage:1,displayLabel:`Challenge Tour: ${challengeStageDisplayLabel(stage)}`};
+ }
  if(stageMode==='display'&&startKind==='challenge'){
   const stage=internalStageForChallengeStageNumber(challengeStage);
   return {requestedStage:challengeStage,stage,stageMode,forceChallenge:1,startKind,challengeStage,displayLabel:challengeStageDisplayLabel(challengeStage,{challengeNumber:1})};
@@ -1398,7 +1422,7 @@ function isHarnessClockControlled(){
  return !!harnessClockControlled;
 }
 const playLane=x=>cl(Math.round((cl(+x||0,0,PLAY_W)/(PLAY_W||1))*9),0,9);
-const snapshot=()=>({gameKey:typeof currentGamePack==='function'?currentGamePack()?.metadata?.gameKey||'aurora-galactica':'aurora-galactica',started:!!started,paused:!!paused,attract:{active:!!ATTRACT.active,phase:ATTRACT.phase||''},stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,scriptMode:!!S.scriptMode,watchMode:!!S.watchMode,watchPersona:S.watchPersona||'',profile:S.profile?.name||'classic',theme:S.stagePresentation?.id||'classic',simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),rngState:RNG_SEED?(RNG_STATE>>>0):0,playerTwo:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,player:{x:+S.p.x.toFixed(2),y:+S.p.y.toFixed(2),vx:+(+S.p.vx||0).toFixed(2),cd:+(+S.p.cd||0).toFixed(3),inv:+(+S.p.inv||0).toFixed(3),spawn:+(+S.p.spawn||0).toFixed(3),dual:!!S.p.dual,captured:!!S.p.captured,pending:!!S.p.pending,hNoShotT:+(+S.p.hNoShotT||0).toFixed(3),hDebugT:+(+S.p.hDebugT||0).toFixed(3),demoTargetId:S.p.demoTargetId??null,demoTargetT:+(+S.p.demoTargetT||0).toFixed(3)},timers:{fireCD:+(+S.fireCD||0).toFixed(3),recoverT:+(+S.recoverT||0).toFixed(3),attackGapT:+(+S.attackGapT||0).toFixed(3),nextStageT:+(+S.nextStageT||0).toFixed(3),postChallengeT:+(+S.postChallengeT||0).toFixed(3),sequenceT:+(+S.sequenceT||0).toFixed(3)},counts:{enemies:S.e.filter(e=>e.hp>0).length,playerBullets:S.pb.length,enemyBullets:S.eb.length,effects:S.fx.length,attackers:S.att}});
+const snapshot=()=>({gameKey:typeof currentGamePack==='function'?currentGamePack()?.metadata?.gameKey||'aurora-galactica':'aurora-galactica',started:!!started,paused:!!paused,attract:{active:!!ATTRACT.active,phase:ATTRACT.phase||''},stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,scriptMode:!!S.scriptMode,watchMode:!!S.watchMode,watchPersona:S.watchPersona||'',challengeTour:S.challengeTour?Object.assign({},S.challengeTour,{results:[...(S.challengeTour.results||[])]}):null,profile:S.profile?.name||'classic',theme:S.stagePresentation?.id||'classic',simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),rngState:RNG_SEED?(RNG_STATE>>>0):0,playerTwo:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,player:{x:+S.p.x.toFixed(2),y:+S.p.y.toFixed(2),vx:+(+S.p.vx||0).toFixed(2),cd:+(+S.p.cd||0).toFixed(3),inv:+(+S.p.inv||0).toFixed(3),spawn:+(+S.p.spawn||0).toFixed(3),dual:!!S.p.dual,captured:!!S.p.captured,pending:!!S.p.pending,hNoShotT:+(+S.p.hNoShotT||0).toFixed(3),hDebugT:+(+S.p.hDebugT||0).toFixed(3),demoTargetId:S.p.demoTargetId??null,demoTargetT:+(+S.p.demoTargetT||0).toFixed(3)},timers:{fireCD:+(+S.fireCD||0).toFixed(3),recoverT:+(+S.recoverT||0).toFixed(3),attackGapT:+(+S.attackGapT||0).toFixed(3),nextStageT:+(+S.nextStageT||0).toFixed(3),postChallengeT:+(+S.postChallengeT||0).toFixed(3),sequenceT:+(+S.sequenceT||0).toFixed(3)},counts:{enemies:S.e.filter(e=>e.hp>0).length,playerBullets:S.pb.length,enemyBullets:S.eb.length,effects:S.fx.length,attackers:S.att}});
 const enemyRef=e=>e?{id:e.id,enemyType:e.t,enemyFamily:e.fam||'classic',column:e.c,row:e.r,lane:playLane(e.x),dive:e.dive,carry:!!e.carry}:null;
 function loadScoreboard(gameKey=currentScoreStorageGameKey()){
  try{
@@ -1447,9 +1471,11 @@ function buildResultsHtml(stats,score,stage,challenge=isChallengeStage(stage),op
  const title=String(opts.title||'GAME OVER').trim()||'GAME OVER';
  const sub=String(opts.sub||'RESULTS').trim()||'RESULTS';
  const contextLine=String(opts.contextLine||'').trim();
+ const stageMetric=String(opts.stageMetric||'STAGE').trim()||'STAGE';
+ const stageValue=String(opts.stageValue||formatDisplayedStage(stage,challenge)).trim()||formatDisplayedStage(stage,challenge);
  const playerTwo=typeof buildPlayerTwoResultsHtml==='function'?buildPlayerTwoResultsHtml():'';
  const watch=S.watchMode?`<span class="playerTwoResult"><span>WATCH MODE   ${S.watchPersona?`${watchModePersonaLabel(S.watchPersona)} PILOT`:''}</span><span>SCORE NOT RECORDED</span></span>`:'';
- return `<span class="gameOverTitle">${title}</span><span class="gameOverSub">${sub}</span>${contextLine?`<span class="gameOverMeta">${contextLine}</span>`:''}<span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">STAGE</span><span class="resultsValue">${formatDisplayedStage(stage,challenge)}</span></span>${watch}${playerTwo}<span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
+ return `<span class="gameOverTitle">${title}</span><span class="gameOverSub">${sub}</span>${contextLine?`<span class="gameOverMeta">${contextLine}</span>`:''}<span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">${stageMetric}</span><span class="resultsValue">${stageValue}</span></span>${watch}${playerTwo}<span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
 }
 function recordScore(score,stage,initials='YOU'){
  const gameKey=currentScoreStorageGameKey();
@@ -1500,6 +1526,8 @@ function buildGameOverHtmlFromState(){
  return buildResultsHtml(gameOverState.stats,gameOverState.score,gameOverState.stage,gameOverState.challenge,{
    title:gameOverState.resultTitle||'GAME OVER',
    sub:gameOverState.resultSub||'RESULTS',
+   stageMetric:gameOverState.resultStageMetric||'',
+   stageValue:gameOverState.resultStageValue||'',
    contextLine:formatGameResultContextLine({
     gameTitle:gameOverState.gameTitle||'',
     outcome:gameOverState.outcome||''
@@ -1709,6 +1737,12 @@ function expertPlayHintText(value=''){
  const labels={novice:'Beginner',advanced:'Intermediate',expert:'Expert',professional:'Professional'};
  return `${labels[key]||'Selected'} persona will fly this start in Watch Mode.`;
 }
+function challengeTourHintText(){
+ const total=challengeTourStageCount();
+ const first=challengeStageDisplayLabel(challengeTourStageForIndex(1));
+ const last=challengeStageDisplayLabel(challengeTourStageForIndex(total));
+ return `Challenge Tour watches one persona play ${first} through ${last} in order.`;
+}
 function effectiveStartStateCfg(cfg){
  const base=Object.assign({},cfg||DEFAULT_TEST_CFG);
  if(!productionStartStateLocked())return base;
@@ -1786,9 +1820,14 @@ function syncChallengeStartControls(){
   testChallengeStage.disabled=productionStartStateLocked()||startKind!=='challenge';
   testChallengeStage.setAttribute('aria-disabled',testChallengeStage.disabled?'true':'false');
  }
- if(testChallengeStageHint)testChallengeStageHint.textContent=challengeStageDisplayLabel(challengeStage,{challengeNumber:true});
- if(testExpertPlaysHint)testExpertPlaysHint.textContent=expertPlayHintText(testExpertPlays?.value||cfg.expertPlays||DEFAULT_TEST_CFG.expertPlays);
- if(testChallenge)testChallenge.checked=startKind==='challenge';
+ if(testChallengeStageHint)testChallengeStageHint.textContent=startKind==='challenge-tour'?challengeTourHintText():challengeStageDisplayLabel(challengeStage,{challengeNumber:true});
+ if(testExpertPlaysHint){
+  const persona=testExpertPlays?.value||cfg.expertPlays||DEFAULT_TEST_CFG.expertPlays;
+  testExpertPlaysHint.textContent=startKind==='challenge-tour'&&sanitizeExpertPlayPersona(persona)==='human'
+   ? 'Challenge Tour defaults to Professional Plays so you can watch the full sequence.'
+   : expertPlayHintText(persona);
+ }
+ if(testChallenge)testChallenge.checked=isChallengeStartKind(startKind);
 }
 function syncAudioMixControls(){
  const gamePct=volumePercent(gameSoundVolume);
@@ -2041,7 +2080,7 @@ function loadTestCfg(){
    ships:cl(+raw.ships||DEFAULT_TEST_CFG.ships,1,9)|0,
    extendFirst,
    extendRecurring,
-   challenge:startKind==='challenge'||!!raw.challenge,
+   challenge:isChallengeStartKind(startKind)||!!raw.challenge,
    audioTheme:sanitizeAudioThemeValue(raw.audioTheme||DEFAULT_TEST_CFG.audioTheme),
    graphicsTheme:sanitizeGraphicsThemeValue(raw.graphicsTheme||DEFAULT_TEST_CFG.graphicsTheme),
    spriteRenderMode:sanitizeSpriteRenderModeValue(raw.spriteRenderMode||DEFAULT_TEST_CFG.spriteRenderMode),
@@ -2064,7 +2103,7 @@ function saveTestCfg(){
     ships:cl(+currentCfg.ships||DEFAULT_TEST_CFG.ships,1,9)|0,
     extendFirst:cl(Math.max(0,+currentCfg.extendFirst||0),0,999999)|0,
     extendRecurring:cl(Math.max(0,+currentCfg.extendRecurring||0),0,999999)|0,
-    challenge:sanitizeStartKind(currentCfg.startKind||(currentCfg.challenge?'challenge':'level'))==='challenge'||!!currentCfg.challenge
+    challenge:isChallengeStartKind(sanitizeStartKind(currentCfg.startKind||(currentCfg.challenge?'challenge':'level')))||!!currentCfg.challenge
    }
   : {
     startKind:sanitizeStartKind(testStartKind?.value||(testChallenge?.checked?'challenge':'level')),
@@ -2074,7 +2113,7 @@ function saveTestCfg(){
     ships:cl(+testShips.value||DEFAULT_TEST_CFG.ships,1,9)|0,
     extendFirst:cl(Math.max(0,+testExtendFirst.value||0),0,999999)|0,
     extendRecurring:cl(Math.max(0,+testExtendRecurring.value||0),0,999999)|0,
-    challenge:sanitizeStartKind(testStartKind?.value||(testChallenge?.checked?'challenge':'level'))==='challenge'
+    challenge:isChallengeStartKind(sanitizeStartKind(testStartKind?.value||(testChallenge?.checked?'challenge':'level')))
    };
  const cfg={
   startKind:startCfg.startKind,

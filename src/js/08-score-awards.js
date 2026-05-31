@@ -211,7 +211,40 @@ function finalizeChallengeClear(){
   ? currentGamePackReferenceTimingField('challengeResults','resultHoldWindow',S.stage,1.45)
   : (challengeResultsTiming?.resultHoldWindow??1.45);
  S.banner=resultBannerWindow;
- S.pendingStage=S.stage+1;
+ let nextPendingStage=S.stage+1;
+ const tour=S.challengeTour&&S.challengeTour.active?S.challengeTour:null;
+ if(tour){
+  const challengeNumber=challengeStageNumberForInternalStage(S.stage)||tour.index||1;
+  const tourCount=typeof challengeTourStageCount==='function'?challengeTourStageCount():0;
+  const total=Math.max(1,tour.total||tourCount||challengeNumber);
+  const result={
+   challengeNumber,
+   stage:S.stage,
+   label:challengeStageDisplayLabel(S.stage),
+   hits:S.ch.hits,
+   total:S.ch.total,
+   perfect:perfect>0,
+   score:S.score
+  };
+  if(!Array.isArray(tour.results))tour.results=[];
+  tour.results.push(result);
+  if(challengeNumber<total){
+   tour.index=challengeNumber+1;
+   nextPendingStage=challengeTourStageForIndex(tour.index);
+   S.forceChallenge=1;
+  }else{
+   tour.index=total;
+   tour.done=1;
+   nextPendingStage=0;
+   S.forceChallenge=0;
+  }
+  logEvent('challenge_tour_stage_result',Object.assign({},result,{
+   nextChallengeNumber:tour.done?null:tour.index,
+   nextStage:nextPendingStage||null,
+   done:!!tour.done
+  }));
+ }
+ S.pendingStage=nextPendingStage;
  S.lastChallengeClearT=S.stageClock;
  S.challengeTransitionStallLogged=0;
  S.postChallengeT=resultHoldWindow;
@@ -225,6 +258,7 @@ function finalizeChallengeClear(){
  logEvent('challenge_transition_queued',{
   stage:S.stage,
   pendingStage:S.pendingStage,
+  challengeTour:S.challengeTour?{index:S.challengeTour.index,total:S.challengeTour.total,done:!!S.challengeTour.done}:null,
   hits:S.ch.hits,
   total:S.ch.total,
   postChallengeT:+S.postChallengeT.toFixed(3),

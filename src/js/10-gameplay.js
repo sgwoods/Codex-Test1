@@ -124,6 +124,10 @@ function updateAuroraGameplay(dt){
     enemies:S.e.filter(e=>e.hp>0).length
    });
    S.postChallengeT=0;
+   if(S.challengeTour?.done&&typeof finishChallengeTour==='function'){
+    finishChallengeTour();
+    return;
+   }
    queueStageTransition('challengeResult');
   }else S.postChallengeT-=dt;
   return;
