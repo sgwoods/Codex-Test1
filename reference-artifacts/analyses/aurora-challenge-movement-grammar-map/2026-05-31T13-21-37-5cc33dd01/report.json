@@ -1,0 +1,4244 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-challenge-movement-grammar-map",
+  "generatedAt": "2026-05-31T13:21:37.425Z",
+  "commit": "5cc33dd01",
+  "branch": "codex/macbook-challenge-stage-gameplay-spectacle",
+  "gameKey": "aurora-galactica",
+  "summary": {
+    "layoutCount": 8,
+    "expectedGroupCount": 40,
+    "referenceBackedGroupCount": 40,
+    "targetContractRows": 3,
+    "trajectoryControlRows": 8,
+    "averagePathContractMatchScore10": 3.8,
+    "compilerBridgeReady": false,
+    "nextStep": "compiler-bridge-proof",
+    "read": "Aurora challenge layouts are now normalized into a movement-grammar map. This exposes authored path order, visual family novelty, timing offsets, target-contract fit, and analyzer seed drift before more gameplay changes are promoted."
+  },
+  "measurementLimits": [
+    "This artifact is a source/layout map, not a browser-backed runtime capture.",
+    "Path-contract match checks group-family order only; exact path geometry still belongs to challenge-stage conformance and target object-track analyzers.",
+    "Analyzer seed drift is informational because runtime code may intentionally be ahead of the latest trajectory-control seed."
+  ],
+  "sourceArtifacts": {
+    "gamePack": "src/js/13-aurora-game-pack.js",
+    "movementGrammar": "reference-artifacts/ingestion/movement-grammar/movement-grammar-0.1.json",
+    "targetContracts": "reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json",
+    "trajectoryControls": "reference-artifacts/analyses/challenge-trajectory-controls/latest.json"
+  },
+  "patterns": [
+    {
+      "id": "aurora-challenge-01-first-challenge-peel",
+      "appliesTo": "challenge-stage-set-piece",
+      "gameScope": {
+        "gameKey": "aurora-galactica",
+        "stage": 3,
+        "challengeNumber": 1,
+        "stageLabel": "Challenging Stage 1 (Levels 3-4)"
+      },
+      "runtimeLayout": {
+        "index": 0,
+        "challengeNumber": 1,
+        "fromStage": 3,
+        "id": "first-challenge-peel",
+        "pathFamily": "first-challenge-peel",
+        "groups": 5,
+        "enemiesPerGroup": 8,
+        "upperBandRatio": 0.5,
+        "spawnOffsetX": 64,
+        "waveSpacingY": 15,
+        "rowSpacingY": 9,
+        "waveDelay": 2.2,
+        "slotDelay": 0.18,
+        "arcAmp": 1.12,
+        "dropAmp": 1.02,
+        "lowerFieldBias": null,
+        "groupSpawnOffsets": [
+          0,
+          3.4,
+          6.25,
+          9.1,
+          12.1
+        ],
+        "groupSpeedScales": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "groupArcAmps": [],
+        "groupDropAmps": [],
+        "groupLowerFieldBiases": [],
+        "groupYOffsets": [],
+        "laneTypes": [
+          "bee",
+          "bee",
+          "bee",
+          "bee",
+          "but",
+          "but",
+          "but",
+          "but"
+        ],
+        "groupLaneTypes": [
+          [
+            "bee",
+            "bee",
+            "bee",
+            "bee",
+            "but",
+            "but",
+            "but",
+            "but"
+          ],
+          [
+            "bee",
+            "bee",
+            "bee",
+            "bee",
+            "bee",
+            "bee",
+            "bee",
+            "bee"
+          ],
+          [
+            "but",
+            "but",
+            "but",
+            "but",
+            "but",
+            "but",
+            "but",
+            "but"
+          ],
+          [
+            "bee",
+            "but",
+            "bee",
+            "but",
+            "but",
+            "bee",
+            "but",
+            "bee"
+          ],
+          [
+            "but",
+            "bee",
+            "bee",
+            "but",
+            "but",
+            "bee",
+            "bee",
+            "but"
+          ]
+        ],
+        "groupVisualFamilies": [
+          "classic",
+          "classic",
+          "classic",
+          "classic",
+          "classic"
+        ],
+        "groupPathFamilies": [
+          "first-challenge-peel",
+          "classic-column-drop",
+          "classic-column-drop",
+          "side-hook-return",
+          "first-challenge-peel"
+        ],
+        "groupReferencePathsIdentifier": null
+      },
+      "roleBindings": [
+        {
+          "groupIndex": 1,
+          "pathIntent": "first-challenge-peel",
+          "targetPathFamily": "first-challenge-peel",
+          "visualFamily": "classic",
+          "targetVisualFamily": "classic",
+          "laneTypes": [
+            "bee",
+            "bee",
+            "bee",
+            "bee",
+            "but",
+            "but",
+            "but",
+            "but"
+          ],
+          "role": "mixed opener",
+          "targetEntrySide": "both-sides",
+          "targetExitSide": "lower-sides"
+        },
+        {
+          "groupIndex": 2,
+          "pathIntent": "classic-column-drop",
+          "targetPathFamily": "classic-column-drop",
+          "visualFamily": "classic",
+          "targetVisualFamily": "classic",
+          "laneTypes": [
+            "bee",
+            "bee",
+            "bee",
+            "bee",
+            "bee",
+            "bee",
+            "bee",
+            "bee"
+          ],
+          "role": "bee column lesson",
+          "targetEntrySide": "top",
+          "targetExitSide": "lower"
+        },
+        {
+          "groupIndex": 3,
+          "pathIntent": "classic-column-drop",
+          "targetPathFamily": "classic-column-drop",
+          "visualFamily": "classic",
+          "targetVisualFamily": "classic",
+          "laneTypes": [
+            "but",
+            "but",
+            "but",
+            "but",
+            "but",
+            "but",
+            "but",
+            "but"
+          ],
+          "role": "butterfly column lesson",
+          "targetEntrySide": "top",
+          "targetExitSide": "lower"
+        },
+        {
+          "groupIndex": 4,
+          "pathIntent": "side-hook-return",
+          "targetPathFamily": "side-hook-return",
+          "visualFamily": "classic",
+          "targetVisualFamily": "classic",
+          "laneTypes": [
+            "bee",
+            "but",
+            "bee",
+            "but",
+            "but",
+            "bee",
+            "but",
+            "bee"
+          ],
+          "role": "side hook return",
+          "targetEntrySide": "sides",
+          "targetExitSide": "lower-sides"
+        },
+        {
+          "groupIndex": 5,
+          "pathIntent": "first-challenge-peel",
+          "targetPathFamily": "first-challenge-peel",
+          "visualFamily": "classic",
+          "targetVisualFamily": "classic",
+          "laneTypes": [
+            "but",
+            "bee",
+            "bee",
+            "but",
+            "but",
+            "bee",
+            "bee",
+            "but"
+          ],
+          "role": "closing peel",
+          "targetEntrySide": "both-sides",
+          "targetExitSide": "lower-sides"
+        }
+      ],
+      "phaseTimeline": [
+        {
+          "groupIndex": 1,
+          "authoredSpawnOffsetS": 0,
+          "targetVisibleStartS": 0.9,
+          "targetVisibleEndS": 6.4,
+          "targetDurationS": 3.25
+        },
+        {
+          "groupIndex": 2,
+          "authoredSpawnOffsetS": 3.4,
+          "targetVisibleStartS": 2.2,
+          "targetVisibleEndS": 8.2,
+          "targetDurationS": 6.12
+        },
+        {
+          "groupIndex": 3,
+          "authoredSpawnOffsetS": 6.25,
+          "targetVisibleStartS": 3.7,
+          "targetVisibleEndS": 9.6,
+          "targetDurationS": 4.13
+        },
+        {
+          "groupIndex": 4,
+          "authoredSpawnOffsetS": 9.1,
+          "targetVisibleStartS": 5.1,
+          "targetVisibleEndS": 11.1,
+          "targetDurationS": 4.63
+        },
+        {
+          "groupIndex": 5,
+          "authoredSpawnOffsetS": 12.1,
+          "targetVisibleStartS": 6.8,
+          "targetVisibleEndS": 13.2,
+          "targetDurationS": 0.75
+        }
+      ],
+      "controlPoints": [
+        {
+          "groupIndex": 1,
+          "t": 0,
+          "x": 0.3197,
+          "y": 0.6462,
+          "sourceTrackId": "target-track-33"
+        },
+        {
+          "groupIndex": 1,
+          "t": 0.13,
+          "x": 0.3205,
+          "y": 0.6454,
+          "sourceTrackId": "target-track-33"
+        },
+        {
+          "groupIndex": 1,
+          "t": 0.63,
+          "x": 0.4166,
+          "y": 0.6859,
+          "sourceTrackId": "target-track-33"
+        },
+        {
+          "groupIndex": 2,
+          "t": 0,
+          "x": 0.5675,
+          "y": 0.2171,
+          "sourceTrackId": "target-track-84"
+        },
+        {
+          "groupIndex": 2,
+          "t": 2.87,
+          "x": 0.4239,
+          "y": 0.7141,
+          "sourceTrackId": "target-track-84"
+        },
+        {
+          "groupIndex": 2,
+          "t": 5.62,
+          "x": 0.5452,
+          "y": 0.759,
+          "sourceTrackId": "target-track-84"
+        },
+        {
+          "groupIndex": 3,
+          "t": 0,
+          "x": 0.5211,
+          "y": 0.3757,
+          "sourceTrackId": "target-track-109"
+        },
+        {
+          "groupIndex": 3,
+          "t": 1.62,
+          "x": 0.5292,
+          "y": 0.5431,
+          "sourceTrackId": "target-track-109"
+        },
+        {
+          "groupIndex": 3,
+          "t": 2.75,
+          "x": 0.4937,
+          "y": 0.5487,
+          "sourceTrackId": "target-track-109"
+        },
+        {
+          "groupIndex": 4,
+          "t": 0,
+          "x": 0.539,
+          "y": 0.776,
+          "sourceTrackId": "target-track-133"
+        },
+        {
+          "groupIndex": 4,
+          "t": 2.5,
+          "x": 0.46,
+          "y": 0.5424,
+          "sourceTrackId": "target-track-133"
+        },
+        {
+          "groupIndex": 4,
+          "t": 3.87,
+          "x": 0.4488,
+          "y": 0.563,
+          "sourceTrackId": "target-track-133"
+        },
+        {
+          "groupIndex": 5,
+          "t": 0,
+          "x": 0.5683,
+          "y": 0.4778,
+          "sourceTrackId": "target-track-165"
+        },
+        {
+          "groupIndex": 5,
+          "t": 0.13,
+          "x": 0.5678,
+          "y": 0.4344,
+          "sourceTrackId": "target-track-165"
+        },
+        {
+          "groupIndex": 5,
+          "t": 0.63,
+          "x": 0.554,
+          "y": 0.3617,
+          "sourceTrackId": "target-track-165"
+        }
+      ],
+      "scoreWindows": [
+        {
+          "groupIndex": 1,
+          "expected": "upper-band mirrored targets",
+          "shotOpportunity": 0.02
+        },
+        {
+          "groupIndex": 2,
+          "expected": "center columns",
+          "shotOpportunity": 0.06
+        },
+        {
+          "groupIndex": 3,
+          "expected": "center columns",
+          "shotOpportunity": 0.07
+        },
+        {
+          "groupIndex": 4,
+          "expected": "hook crossing lanes",
+          "shotOpportunity": 0.06
+        },
+        {
+          "groupIndex": 5,
+          "expected": "late upper-band cleanup",
+          "shotOpportunity": 0.08
+        }
+      ],
+      "eventAnchors": [
+        {
+          "groupIndex": 1,
+          "spawnOffsetS": 0,
+          "referenceTrackId": "target-track-33",
+          "targetTrackConfidence": 0.737,
+          "targetPathLength": 0.0221
+        },
+        {
+          "groupIndex": 2,
+          "spawnOffsetS": 3.4,
+          "referenceTrackId": "target-track-84",
+          "targetTrackConfidence": 0.754,
+          "targetPathLength": 0.254
+        },
+        {
+          "groupIndex": 3,
+          "spawnOffsetS": 6.25,
+          "referenceTrackId": "target-track-109",
+          "targetTrackConfidence": 0.762,
+          "targetPathLength": 0.2846
+        },
+        {
+          "groupIndex": 4,
+          "spawnOffsetS": 9.1,
+          "referenceTrackId": "target-track-133",
+          "targetTrackConfidence": 0.773,
+          "targetPathLength": 0.3166
+        },
+        {
+          "groupIndex": 5,
+          "spawnOffsetS": 12.1,
+          "referenceTrackId": "target-track-165",
+          "targetTrackConfidence": 0.542,
+          "targetPathLength": 0.0867
+        }
+      ],
+      "variationControls": [
+        {
+          "groupIndex": 1,
+          "pathFamily": "first-challenge-peel",
+          "speedScale": 1,
+          "arcAmp": 1.12,
+          "dropAmp": 1.02,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "classic"
+        },
+        {
+          "groupIndex": 2,
+          "pathFamily": "classic-column-drop",
+          "speedScale": 1,
+          "arcAmp": 1.12,
+          "dropAmp": 1.02,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "classic"
+        },
+        {
+          "groupIndex": 3,
+          "pathFamily": "classic-column-drop",
+          "speedScale": 1,
+          "arcAmp": 1.12,
+          "dropAmp": 1.02,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "classic"
+        },
+        {
+          "groupIndex": 4,
+          "pathFamily": "side-hook-return",
+          "speedScale": 1,
+          "arcAmp": 1.12,
+          "dropAmp": 1.02,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "classic"
+        },
+        {
+          "groupIndex": 5,
+          "pathFamily": "first-challenge-peel",
+          "speedScale": 1,
+          "arcAmp": 1.12,
+          "dropAmp": 1.02,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "classic"
+        }
+      ],
+      "measurement": {
+        "sourceArtifacts": [
+          "src/js/13-aurora-game-pack.js",
+          "reference-artifacts/ingestion/movement-grammar/movement-grammar-0.1.json",
+          "reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json",
+          "reference-artifacts/analyses/challenge-trajectory-controls/latest.json"
+        ],
+        "targetContractPresent": true,
+        "trajectoryControlsPresent": true,
+        "pathContractMatchScore10": 10,
+        "referenceBackedGroupCount": 5,
+        "targetVideoObjectTrackFitScore10": 2.9,
+        "expectedScore10": 6.2,
+        "controlReadiness10": 8.7,
+        "seedDrift": [
+          {
+            "groupIndex": 3,
+            "authoredPathFamily": "classic-column-drop",
+            "trajectorySeedPathFamily": "first-challenge-peel",
+            "differs": true
+          },
+          {
+            "groupIndex": 5,
+            "authoredPathFamily": "first-challenge-peel",
+            "trajectorySeedPathFamily": "side-hook-return",
+            "differs": true
+          }
+        ],
+        "gaps": [
+          "Authored runtime layout differs from trajectory-control seed on 2 group(s); analyzer seed should be refreshed after gameplay promotion."
+        ]
+      },
+      "designerRead": "Introductory no-combat bonus lesson: clean bee and butterfly groups, top/side entries, learnable upper-band firing lanes, and visible peel/drop exits.",
+      "nextImplementationStep": "Authored runtime layout differs from trajectory-control seed on 2 group(s); analyzer seed should be refreshed after gameplay promotion."
+    },
+    {
+      "id": "aurora-challenge-02-scorpion-cross-sweep",
+      "appliesTo": "challenge-stage-set-piece",
+      "gameScope": {
+        "gameKey": "aurora-galactica",
+        "stage": 7,
+        "challengeNumber": 2,
+        "stageLabel": "Challenging Stage 2 (Levels 7-8)"
+      },
+      "runtimeLayout": {
+        "index": 1,
+        "challengeNumber": 2,
+        "fromStage": 7,
+        "id": "scorpion-cross-sweep",
+        "pathFamily": "cross-sweep",
+        "groups": 5,
+        "enemiesPerGroup": 8,
+        "upperBandRatio": 0.5,
+        "spawnOffsetX": 78,
+        "waveSpacingY": 12,
+        "rowSpacingY": 9,
+        "waveDelay": 1.28,
+        "slotDelay": 0.14,
+        "arcAmp": 1.28,
+        "dropAmp": 1.14,
+        "lowerFieldBias": null,
+        "groupSpawnOffsets": [
+          0,
+          2,
+          3.5,
+          5.1,
+          6.8
+        ],
+        "groupSpeedScales": [
+          2.65,
+          1.97,
+          2.65,
+          2.12,
+          2.65
+        ],
+        "groupArcAmps": [
+          1.63,
+          1.26,
+          1.27,
+          1.79,
+          1.21
+        ],
+        "groupDropAmps": [
+          1.01,
+          1.25,
+          1.08,
+          1.37,
+          1.31
+        ],
+        "groupLowerFieldBiases": [],
+        "groupYOffsets": [],
+        "laneTypes": [
+          "but",
+          "boss",
+          "rogue",
+          "bee",
+          "bee",
+          "rogue",
+          "boss",
+          "but"
+        ],
+        "groupLaneTypes": [
+          [
+            "but",
+            "boss",
+            "rogue",
+            "bee",
+            "bee",
+            "rogue",
+            "boss",
+            "but"
+          ],
+          [
+            "bee",
+            "rogue",
+            "but",
+            "boss",
+            "boss",
+            "but",
+            "rogue",
+            "bee"
+          ],
+          [
+            "boss",
+            "but",
+            "bee",
+            "rogue",
+            "rogue",
+            "bee",
+            "but",
+            "boss"
+          ],
+          [
+            "rogue",
+            "bee",
+            "boss",
+            "but",
+            "but",
+            "boss",
+            "bee",
+            "rogue"
+          ],
+          [
+            "but",
+            "rogue",
+            "boss",
+            "bee",
+            "bee",
+            "boss",
+            "rogue",
+            "but"
+          ]
+        ],
+        "groupVisualFamilies": [
+          "classic",
+          "scorpion",
+          "scorpion",
+          "stingray",
+          "stingray"
+        ],
+        "groupPathFamilies": [
+          "cross-sweep",
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "boss-led-loop"
+        ],
+        "groupReferencePathsIdentifier": "AURORA_CHALLENGE_STAGE7_REFERENCE_PATHS"
+      },
+      "roleBindings": [
+        {
+          "groupIndex": 1,
+          "pathIntent": "cross-sweep",
+          "targetPathFamily": "cross-sweep",
+          "visualFamily": "classic",
+          "targetVisualFamily": "classic",
+          "laneTypes": [
+            "but",
+            "boss",
+            "rogue",
+            "bee",
+            "bee",
+            "rogue",
+            "boss",
+            "but"
+          ],
+          "role": "classic cross-field opener",
+          "targetEntrySide": "both-sides",
+          "targetExitSide": "opposite-lower-sides"
+        },
+        {
+          "groupIndex": 2,
+          "pathIntent": "cross-sweep",
+          "targetPathFamily": "cross-sweep",
+          "visualFamily": "scorpion",
+          "targetVisualFamily": "scorpion",
+          "laneTypes": [
+            "bee",
+            "rogue",
+            "but",
+            "boss",
+            "boss",
+            "but",
+            "rogue",
+            "bee"
+          ],
+          "role": "scorpion introduction",
+          "targetEntrySide": "both-sides",
+          "targetExitSide": "opposite-lower-sides"
+        },
+        {
+          "groupIndex": 3,
+          "pathIntent": "hook-arc",
+          "targetPathFamily": "hook-arc",
+          "visualFamily": "scorpion",
+          "targetVisualFamily": "scorpion",
+          "laneTypes": [
+            "boss",
+            "but",
+            "bee",
+            "rogue",
+            "rogue",
+            "bee",
+            "but",
+            "boss"
+          ],
+          "role": "scorpion hook return",
+          "targetEntrySide": "side",
+          "targetExitSide": "lower-hook"
+        },
+        {
+          "groupIndex": 4,
+          "pathIntent": "hook-arc",
+          "targetPathFamily": "hook-arc",
+          "visualFamily": "stingray",
+          "targetVisualFamily": "stingray",
+          "laneTypes": [
+            "rogue",
+            "bee",
+            "boss",
+            "but",
+            "but",
+            "boss",
+            "bee",
+            "rogue"
+          ],
+          "role": "stingray hook return",
+          "targetEntrySide": "side",
+          "targetExitSide": "lower-hook"
+        },
+        {
+          "groupIndex": 5,
+          "pathIntent": "boss-led-loop",
+          "targetPathFamily": "boss-led-loop",
+          "visualFamily": "stingray",
+          "targetVisualFamily": "stingray",
+          "laneTypes": [
+            "but",
+            "rogue",
+            "boss",
+            "bee",
+            "bee",
+            "boss",
+            "rogue",
+            "but"
+          ],
+          "role": "boss-led closing loop",
+          "targetEntrySide": "upper-side",
+          "targetExitSide": "lower-sides"
+        }
+      ],
+      "phaseTimeline": [
+        {
+          "groupIndex": 1,
+          "authoredSpawnOffsetS": 0,
+          "targetVisibleStartS": 0.8,
+          "targetVisibleEndS": 6,
+          "targetDurationS": 1.88
+        },
+        {
+          "groupIndex": 2,
+          "authoredSpawnOffsetS": 2,
+          "targetVisibleStartS": 2,
+          "targetVisibleEndS": 7.4,
+          "targetDurationS": 3.5
+        },
+        {
+          "groupIndex": 3,
+          "authoredSpawnOffsetS": 3.5,
+          "targetVisibleStartS": 3.5,
+          "targetVisibleEndS": 9.3,
+          "targetDurationS": 0.75
+        },
+        {
+          "groupIndex": 4,
+          "authoredSpawnOffsetS": 5.1,
+          "targetVisibleStartS": 5.1,
+          "targetVisibleEndS": 11,
+          "targetDurationS": 3.25
+        },
+        {
+          "groupIndex": 5,
+          "authoredSpawnOffsetS": 6.8,
+          "targetVisibleStartS": 6.8,
+          "targetVisibleEndS": 13,
+          "targetDurationS": 2.5
+        }
+      ],
+      "controlPoints": [
+        {
+          "groupIndex": 1,
+          "t": 0,
+          "x": 0.4436,
+          "y": 0.5299,
+          "sourceTrackId": "target-track-10"
+        },
+        {
+          "groupIndex": 1,
+          "t": 1.13,
+          "x": 0.6258,
+          "y": 0.5312,
+          "sourceTrackId": "target-track-10"
+        },
+        {
+          "groupIndex": 1,
+          "t": 1.88,
+          "x": 0.6258,
+          "y": 0.5312,
+          "sourceTrackId": "target-track-10"
+        },
+        {
+          "groupIndex": 2,
+          "t": 0,
+          "x": 0.4315,
+          "y": 0.5016,
+          "sourceTrackId": "target-track-66"
+        },
+        {
+          "groupIndex": 2,
+          "t": 1.5,
+          "x": 0.4683,
+          "y": 0.6134,
+          "sourceTrackId": "target-track-66"
+        },
+        {
+          "groupIndex": 2,
+          "t": 2.63,
+          "x": 0.4675,
+          "y": 0.6132,
+          "sourceTrackId": "target-track-66"
+        },
+        {
+          "groupIndex": 3,
+          "t": 0,
+          "x": 0.4952,
+          "y": 0.5488,
+          "sourceTrackId": "target-track-71"
+        },
+        {
+          "groupIndex": 3,
+          "t": 0.38,
+          "x": 0.4746,
+          "y": 0.6026,
+          "sourceTrackId": "target-track-71"
+        },
+        {
+          "groupIndex": 3,
+          "t": 0.75,
+          "x": 0.4727,
+          "y": 0.5629,
+          "sourceTrackId": "target-track-71"
+        },
+        {
+          "groupIndex": 4,
+          "t": 0,
+          "x": 0.3424,
+          "y": 0.2444,
+          "sourceTrackId": "target-track-110"
+        },
+        {
+          "groupIndex": 4,
+          "t": 1.37,
+          "x": 0.4962,
+          "y": 0.2142,
+          "sourceTrackId": "target-track-110"
+        },
+        {
+          "groupIndex": 4,
+          "t": 2,
+          "x": 0.4957,
+          "y": 0.214,
+          "sourceTrackId": "target-track-110"
+        },
+        {
+          "groupIndex": 5,
+          "t": 0,
+          "x": 0.5003,
+          "y": 0.2186,
+          "sourceTrackId": "target-track-142"
+        },
+        {
+          "groupIndex": 5,
+          "t": 1.37,
+          "x": 0.5681,
+          "y": 0.1648,
+          "sourceTrackId": "target-track-142"
+        },
+        {
+          "groupIndex": 5,
+          "t": 2.5,
+          "x": 0.4948,
+          "y": 0.5596,
+          "sourceTrackId": "target-track-142"
+        }
+      ],
+      "scoreWindows": [
+        {
+          "groupIndex": 1,
+          "expected": "wide crossing lanes",
+          "shotOpportunity": 0.07
+        },
+        {
+          "groupIndex": 2,
+          "expected": "new-family crossing lanes",
+          "shotOpportunity": 0.09
+        },
+        {
+          "groupIndex": 3,
+          "expected": "turning hook lanes",
+          "shotOpportunity": 0.12
+        },
+        {
+          "groupIndex": 4,
+          "expected": "late specialty hook lanes",
+          "shotOpportunity": 0.13
+        },
+        {
+          "groupIndex": 5,
+          "expected": "boss-led loop cleanup",
+          "shotOpportunity": 0.1
+        }
+      ],
+      "eventAnchors": [
+        {
+          "groupIndex": 1,
+          "spawnOffsetS": 0,
+          "referenceTrackId": "target-track-10",
+          "targetTrackConfidence": 0.752,
+          "targetPathLength": 0.1176
+        },
+        {
+          "groupIndex": 2,
+          "spawnOffsetS": 2,
+          "referenceTrackId": "target-track-66",
+          "targetTrackConfidence": 0.706,
+          "targetPathLength": 0.1686
+        },
+        {
+          "groupIndex": 3,
+          "spawnOffsetS": 3.5,
+          "referenceTrackId": "target-track-71",
+          "targetTrackConfidence": 0.447,
+          "targetPathLength": 0.154
+        },
+        {
+          "groupIndex": 4,
+          "spawnOffsetS": 5.1,
+          "referenceTrackId": "target-track-110",
+          "targetTrackConfidence": 0.719,
+          "targetPathLength": 0.1472
+        },
+        {
+          "groupIndex": 5,
+          "spawnOffsetS": 6.8,
+          "referenceTrackId": "target-track-142",
+          "targetTrackConfidence": 0.728,
+          "targetPathLength": 0.2417
+        }
+      ],
+      "variationControls": [
+        {
+          "groupIndex": 1,
+          "pathFamily": "cross-sweep",
+          "speedScale": 2.65,
+          "arcAmp": 1.63,
+          "dropAmp": 1.01,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "classic"
+        },
+        {
+          "groupIndex": 2,
+          "pathFamily": "cross-sweep",
+          "speedScale": 1.97,
+          "arcAmp": 1.26,
+          "dropAmp": 1.25,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "scorpion"
+        },
+        {
+          "groupIndex": 3,
+          "pathFamily": "hook-arc",
+          "speedScale": 2.65,
+          "arcAmp": 1.27,
+          "dropAmp": 1.08,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "scorpion"
+        },
+        {
+          "groupIndex": 4,
+          "pathFamily": "hook-arc",
+          "speedScale": 2.12,
+          "arcAmp": 1.79,
+          "dropAmp": 1.37,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "stingray"
+        },
+        {
+          "groupIndex": 5,
+          "pathFamily": "boss-led-loop",
+          "speedScale": 2.65,
+          "arcAmp": 1.21,
+          "dropAmp": 1.31,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "stingray"
+        }
+      ],
+      "measurement": {
+        "sourceArtifacts": [
+          "src/js/13-aurora-game-pack.js",
+          "reference-artifacts/ingestion/movement-grammar/movement-grammar-0.1.json",
+          "reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json",
+          "reference-artifacts/analyses/challenge-trajectory-controls/latest.json"
+        ],
+        "targetContractPresent": true,
+        "trajectoryControlsPresent": true,
+        "pathContractMatchScore10": 10,
+        "referenceBackedGroupCount": 5,
+        "targetVideoObjectTrackFitScore10": 3.9,
+        "expectedScore10": 5.9,
+        "controlReadiness10": 9.8,
+        "seedDrift": [
+          {
+            "groupIndex": 2,
+            "authoredPathFamily": "cross-sweep",
+            "trajectorySeedPathFamily": "hook-arc",
+            "differs": true
+          },
+          {
+            "groupIndex": 4,
+            "authoredPathFamily": "hook-arc",
+            "trajectorySeedPathFamily": "cross-sweep",
+            "differs": true
+          },
+          {
+            "groupIndex": 5,
+            "authoredPathFamily": "boss-led-loop",
+            "trajectorySeedPathFamily": "hook-arc",
+            "differs": true
+          }
+        ],
+        "gaps": [
+          "Authored runtime layout differs from trajectory-control seed on 3 group(s); analyzer seed should be refreshed after gameplay promotion."
+        ]
+      },
+      "designerRead": "Second no-combat bonus lesson: keep the safe score exhibition, but introduce more memorable cross-field sweeps, specialty alien color families, and hook/return motion that feels visually new rather than a faster repeat of Challenge 1.",
+      "nextImplementationStep": "Authored runtime layout differs from trajectory-control seed on 3 group(s); analyzer seed should be refreshed after gameplay promotion."
+    },
+    {
+      "id": "aurora-challenge-03-stingray-crown-hook-hybrid",
+      "appliesTo": "challenge-stage-set-piece",
+      "gameScope": {
+        "gameKey": "aurora-galactica",
+        "stage": 11,
+        "challengeNumber": 3,
+        "stageLabel": "Challenging Stage 3 (Levels 11-12)"
+      },
+      "runtimeLayout": {
+        "index": 2,
+        "challengeNumber": 3,
+        "fromStage": 11,
+        "id": "stingray-crown-hook-hybrid",
+        "pathFamily": "hook-arc",
+        "groups": 5,
+        "enemiesPerGroup": 8,
+        "upperBandRatio": 0.46,
+        "spawnOffsetX": 72,
+        "waveSpacingY": 11,
+        "rowSpacingY": 8,
+        "waveDelay": 1.28,
+        "slotDelay": 0.12,
+        "arcAmp": 2.08,
+        "dropAmp": 1.02,
+        "lowerFieldBias": null,
+        "groupSpawnOffsets": [
+          0,
+          0.88,
+          4.38,
+          7.88,
+          12.13
+        ],
+        "groupSpeedScales": [
+          2.65,
+          2.3,
+          1.72,
+          1.38,
+          1.84
+        ],
+        "groupArcAmps": [
+          1.1,
+          1.46,
+          1.7,
+          1.69,
+          1.22
+        ],
+        "groupDropAmps": [
+          1.54,
+          1.42,
+          1.54,
+          1.58,
+          1.6
+        ],
+        "groupLowerFieldBiases": [
+          135,
+          0,
+          19,
+          29,
+          0
+        ],
+        "groupYOffsets": [
+          48,
+          0,
+          0,
+          0,
+          0
+        ],
+        "laneTypes": [
+          "boss",
+          "rogue",
+          "but",
+          "bee",
+          "boss",
+          "bee",
+          "but",
+          "rogue"
+        ],
+        "groupLaneTypes": [
+          [
+            "boss",
+            "rogue",
+            "but",
+            "bee",
+            "boss",
+            "bee",
+            "but",
+            "rogue"
+          ],
+          [
+            "boss",
+            "boss",
+            "but",
+            "rogue",
+            "bee",
+            "but",
+            "rogue",
+            "boss"
+          ],
+          [
+            "rogue",
+            "boss",
+            "bee",
+            "but",
+            "boss",
+            "but",
+            "bee",
+            "rogue"
+          ],
+          [
+            "but",
+            "rogue",
+            "boss",
+            "boss",
+            "boss",
+            "boss",
+            "rogue",
+            "but"
+          ],
+          [
+            "boss",
+            "bee",
+            "rogue",
+            "but",
+            "but",
+            "rogue",
+            "bee",
+            "boss"
+          ]
+        ],
+        "groupVisualFamilies": [
+          "dragonfly",
+          "dragonfly",
+          "stingray",
+          "galboss",
+          "dragonfly"
+        ],
+        "groupPathFamilies": [
+          "crown-split-cascade",
+          "boss-led-loop",
+          "hook-arc",
+          "boss-led-loop",
+          "hook-arc"
+        ],
+        "groupReferencePathsIdentifier": "AURORA_CHALLENGE_STAGE11_REFERENCE_PATHS"
+      },
+      "roleBindings": [
+        {
+          "groupIndex": 1,
+          "pathIntent": "crown-split-cascade",
+          "targetPathFamily": "crown-split-cascade",
+          "visualFamily": "dragonfly",
+          "targetVisualFamily": "dragonfly",
+          "laneTypes": [
+            "boss",
+            "rogue",
+            "but",
+            "bee",
+            "boss",
+            "bee",
+            "but",
+            "rogue"
+          ],
+          "role": "dragonfly crown split",
+          "targetEntrySide": "top-and-sides",
+          "targetExitSide": "lower-sides"
+        },
+        {
+          "groupIndex": 2,
+          "pathIntent": "boss-led-loop",
+          "targetPathFamily": "boss-led-loop",
+          "visualFamily": "dragonfly",
+          "targetVisualFamily": "dragonfly",
+          "laneTypes": [
+            "boss",
+            "boss",
+            "but",
+            "rogue",
+            "bee",
+            "but",
+            "rogue",
+            "boss"
+          ],
+          "role": "dragonfly boss-led loop",
+          "targetEntrySide": "upper-side",
+          "targetExitSide": "lower-sides"
+        },
+        {
+          "groupIndex": 3,
+          "pathIntent": "hook-arc",
+          "targetPathFamily": "hook-arc",
+          "visualFamily": "stingray",
+          "targetVisualFamily": "stingray",
+          "laneTypes": [
+            "rogue",
+            "boss",
+            "bee",
+            "but",
+            "boss",
+            "but",
+            "bee",
+            "rogue"
+          ],
+          "role": "stingray hook arc",
+          "targetEntrySide": "side",
+          "targetExitSide": "lower-hook"
+        },
+        {
+          "groupIndex": 4,
+          "pathIntent": "boss-led-loop",
+          "targetPathFamily": "boss-led-loop",
+          "visualFamily": "galboss",
+          "targetVisualFamily": "galboss",
+          "laneTypes": [
+            "but",
+            "rogue",
+            "boss",
+            "boss",
+            "boss",
+            "boss",
+            "rogue",
+            "but"
+          ],
+          "role": "galboss boss-led loop",
+          "targetEntrySide": "upper-side",
+          "targetExitSide": "lower-sides"
+        },
+        {
+          "groupIndex": 5,
+          "pathIntent": "hook-arc",
+          "targetPathFamily": "hook-arc",
+          "visualFamily": "dragonfly",
+          "targetVisualFamily": "dragonfly",
+          "laneTypes": [
+            "boss",
+            "bee",
+            "rogue",
+            "but",
+            "but",
+            "rogue",
+            "bee",
+            "boss"
+          ],
+          "role": "dragonfly hook finale",
+          "targetEntrySide": "side",
+          "targetExitSide": "lower-hook"
+        }
+      ],
+      "phaseTimeline": [
+        {
+          "groupIndex": 1,
+          "authoredSpawnOffsetS": 0,
+          "targetVisibleStartS": 0.8,
+          "targetVisibleEndS": 6.6,
+          "targetDurationS": 1.5
+        },
+        {
+          "groupIndex": 2,
+          "authoredSpawnOffsetS": 0.88,
+          "targetVisibleStartS": 2.2,
+          "targetVisibleEndS": 8.2,
+          "targetDurationS": 3
+        },
+        {
+          "groupIndex": 3,
+          "authoredSpawnOffsetS": 4.38,
+          "targetVisibleStartS": 3.8,
+          "targetVisibleEndS": 9.9,
+          "targetDurationS": 4
+        },
+        {
+          "groupIndex": 4,
+          "authoredSpawnOffsetS": 7.88,
+          "targetVisibleStartS": 5.3,
+          "targetVisibleEndS": 11.6,
+          "targetDurationS": 5
+        },
+        {
+          "groupIndex": 5,
+          "authoredSpawnOffsetS": 12.13,
+          "targetVisibleStartS": 7,
+          "targetVisibleEndS": 13.7,
+          "targetDurationS": 3.75
+        }
+      ],
+      "controlPoints": [
+        {
+          "groupIndex": 1,
+          "t": 0,
+          "x": 0.9443,
+          "y": 0.7338,
+          "sourceTrackId": "target-track-3"
+        },
+        {
+          "groupIndex": 1,
+          "t": 0.75,
+          "x": 0.931,
+          "y": 0.5524,
+          "sourceTrackId": "target-track-3"
+        },
+        {
+          "groupIndex": 1,
+          "t": 1.25,
+          "x": 0.8251,
+          "y": 0.3034,
+          "sourceTrackId": "target-track-3"
+        },
+        {
+          "groupIndex": 2,
+          "t": 0,
+          "x": 0.5376,
+          "y": 0.6506,
+          "sourceTrackId": "target-track-16"
+        },
+        {
+          "groupIndex": 2,
+          "t": 1.5,
+          "x": 0.5423,
+          "y": 0.4943,
+          "sourceTrackId": "target-track-16"
+        },
+        {
+          "groupIndex": 2,
+          "t": 2.38,
+          "x": 0.5423,
+          "y": 0.4943,
+          "sourceTrackId": "target-track-16"
+        },
+        {
+          "groupIndex": 3,
+          "t": 0,
+          "x": 0.5594,
+          "y": 0.2678,
+          "sourceTrackId": "target-track-37"
+        },
+        {
+          "groupIndex": 3,
+          "t": 1.5,
+          "x": 0.5426,
+          "y": 0.5227,
+          "sourceTrackId": "target-track-37"
+        },
+        {
+          "groupIndex": 3,
+          "t": 2.5,
+          "x": 0.5425,
+          "y": 0.5227,
+          "sourceTrackId": "target-track-37"
+        },
+        {
+          "groupIndex": 4,
+          "t": 0,
+          "x": 0.4092,
+          "y": 0.4859,
+          "sourceTrackId": "target-track-77"
+        },
+        {
+          "groupIndex": 4,
+          "t": 1.37,
+          "x": 0.4374,
+          "y": 0.285,
+          "sourceTrackId": "target-track-77"
+        },
+        {
+          "groupIndex": 4,
+          "t": 2.25,
+          "x": 0.4379,
+          "y": 0.2855,
+          "sourceTrackId": "target-track-77"
+        },
+        {
+          "groupIndex": 5,
+          "t": 0,
+          "x": 0.5601,
+          "y": 0.2402,
+          "sourceTrackId": "target-track-85"
+        },
+        {
+          "groupIndex": 5,
+          "t": 1.37,
+          "x": 0.5742,
+          "y": 0.2602,
+          "sourceTrackId": "target-track-85"
+        },
+        {
+          "groupIndex": 5,
+          "t": 2.12,
+          "x": 0.5324,
+          "y": 0.4269,
+          "sourceTrackId": "target-track-85"
+        }
+      ],
+      "scoreWindows": [
+        {
+          "groupIndex": 1,
+          "expected": "split crown lanes",
+          "shotOpportunity": 0.14
+        },
+        {
+          "groupIndex": 2,
+          "expected": "early boss-led loop",
+          "shotOpportunity": 0.12
+        },
+        {
+          "groupIndex": 3,
+          "expected": "turning specialty lanes",
+          "shotOpportunity": 0.14
+        },
+        {
+          "groupIndex": 4,
+          "expected": "dense boss-led bonus lane",
+          "shotOpportunity": 0.14
+        },
+        {
+          "groupIndex": 5,
+          "expected": "late hook cleanup",
+          "shotOpportunity": 0.16
+        }
+      ],
+      "eventAnchors": [
+        {
+          "groupIndex": 1,
+          "spawnOffsetS": 0,
+          "referenceTrackId": "target-track-3",
+          "targetTrackConfidence": 0.564,
+          "targetPathLength": 0.2349
+        },
+        {
+          "groupIndex": 2,
+          "spawnOffsetS": 0.88,
+          "referenceTrackId": "target-track-16",
+          "targetTrackConfidence": 0.674,
+          "targetPathLength": 0.183
+        },
+        {
+          "groupIndex": 3,
+          "spawnOffsetS": 4.38,
+          "referenceTrackId": "target-track-37",
+          "targetTrackConfidence": 0.739,
+          "targetPathLength": 0.2499
+        },
+        {
+          "groupIndex": 4,
+          "spawnOffsetS": 7.88,
+          "referenceTrackId": "target-track-77",
+          "targetTrackConfidence": 0.739,
+          "targetPathLength": 0.2167
+        },
+        {
+          "groupIndex": 5,
+          "spawnOffsetS": 12.13,
+          "referenceTrackId": "target-track-85",
+          "targetTrackConfidence": 0.713,
+          "targetPathLength": 0.2128
+        }
+      ],
+      "variationControls": [
+        {
+          "groupIndex": 1,
+          "pathFamily": "crown-split-cascade",
+          "speedScale": 2.65,
+          "arcAmp": 1.1,
+          "dropAmp": 1.54,
+          "lowerFieldBias": 135,
+          "yOffset": 48,
+          "visualFamily": "dragonfly"
+        },
+        {
+          "groupIndex": 2,
+          "pathFamily": "boss-led-loop",
+          "speedScale": 2.3,
+          "arcAmp": 1.46,
+          "dropAmp": 1.42,
+          "lowerFieldBias": 0,
+          "yOffset": 0,
+          "visualFamily": "dragonfly"
+        },
+        {
+          "groupIndex": 3,
+          "pathFamily": "hook-arc",
+          "speedScale": 1.72,
+          "arcAmp": 1.7,
+          "dropAmp": 1.54,
+          "lowerFieldBias": 19,
+          "yOffset": 0,
+          "visualFamily": "stingray"
+        },
+        {
+          "groupIndex": 4,
+          "pathFamily": "boss-led-loop",
+          "speedScale": 1.38,
+          "arcAmp": 1.69,
+          "dropAmp": 1.58,
+          "lowerFieldBias": 29,
+          "yOffset": 0,
+          "visualFamily": "galboss"
+        },
+        {
+          "groupIndex": 5,
+          "pathFamily": "hook-arc",
+          "speedScale": 1.84,
+          "arcAmp": 1.22,
+          "dropAmp": 1.6,
+          "lowerFieldBias": 0,
+          "yOffset": 0,
+          "visualFamily": "dragonfly"
+        }
+      ],
+      "measurement": {
+        "sourceArtifacts": [
+          "src/js/13-aurora-game-pack.js",
+          "reference-artifacts/ingestion/movement-grammar/movement-grammar-0.1.json",
+          "reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json",
+          "reference-artifacts/analyses/challenge-trajectory-controls/latest.json"
+        ],
+        "targetContractPresent": true,
+        "trajectoryControlsPresent": true,
+        "pathContractMatchScore10": 10,
+        "referenceBackedGroupCount": 5,
+        "targetVideoObjectTrackFitScore10": null,
+        "expectedScore10": 7.6,
+        "controlReadiness10": 8.6,
+        "seedDrift": [
+          {
+            "groupIndex": 1,
+            "authoredPathFamily": "crown-split-cascade",
+            "trajectorySeedPathFamily": "hook-arc",
+            "differs": true
+          },
+          {
+            "groupIndex": 2,
+            "authoredPathFamily": "boss-led-loop",
+            "trajectorySeedPathFamily": "hook-arc",
+            "differs": true
+          },
+          {
+            "groupIndex": 4,
+            "authoredPathFamily": "boss-led-loop",
+            "trajectorySeedPathFamily": "hook-arc",
+            "differs": true
+          }
+        ],
+        "gaps": [
+          "Authored runtime layout differs from trajectory-control seed on 3 group(s); analyzer seed should be refreshed after gameplay promotion."
+        ]
+      },
+      "designerRead": "Third no-combat bonus lesson: larger boss-led and crown/split shapes, late-specialty aliens, and longer hook routes that make the stage feel like a distinct set piece rather than a palette swap.",
+      "nextImplementationStep": "Authored runtime layout differs from trajectory-control seed on 3 group(s); analyzer seed should be refreshed after gameplay promotion."
+    },
+    {
+      "id": "aurora-challenge-04-pink-serpentine-late",
+      "appliesTo": "challenge-stage-set-piece",
+      "gameScope": {
+        "gameKey": "aurora-galactica",
+        "stage": 15,
+        "challengeNumber": 4,
+        "stageLabel": "Challenging Stage 4"
+      },
+      "runtimeLayout": {
+        "index": 3,
+        "challengeNumber": 4,
+        "fromStage": 15,
+        "id": "pink-serpentine-late",
+        "pathFamily": "pink-serpentine",
+        "groups": 5,
+        "enemiesPerGroup": 8,
+        "upperBandRatio": 0.43,
+        "spawnOffsetX": 74,
+        "waveSpacingY": 10,
+        "rowSpacingY": 9,
+        "waveDelay": 1.06,
+        "slotDelay": 0.08,
+        "arcAmp": 1.94,
+        "dropAmp": 0.92,
+        "lowerFieldBias": null,
+        "groupSpawnOffsets": [
+          0,
+          0.45,
+          2.85,
+          6.25,
+          12.85
+        ],
+        "groupSpeedScales": [
+          2.1,
+          1.85,
+          1.5,
+          1.3,
+          1.05
+        ],
+        "groupArcAmps": [],
+        "groupDropAmps": [],
+        "groupLowerFieldBiases": [
+          176,
+          196,
+          96,
+          82,
+          208
+        ],
+        "groupYOffsets": [
+          128,
+          136,
+          24,
+          28,
+          168
+        ],
+        "laneTypes": [
+          "boss",
+          "rogue",
+          "but",
+          "bee",
+          "bee",
+          "but",
+          "rogue",
+          "boss"
+        ],
+        "groupLaneTypes": [
+          [
+            "boss",
+            "rogue",
+            "but",
+            "bee",
+            "bee",
+            "but",
+            "rogue",
+            "boss"
+          ],
+          [
+            "but",
+            "boss",
+            "rogue",
+            "bee",
+            "bee",
+            "rogue",
+            "boss",
+            "but"
+          ],
+          [
+            "bee",
+            "but",
+            "boss",
+            "rogue",
+            "rogue",
+            "boss",
+            "but",
+            "bee"
+          ],
+          [
+            "rogue",
+            "bee",
+            "but",
+            "boss",
+            "boss",
+            "but",
+            "bee",
+            "rogue"
+          ],
+          [
+            "boss",
+            "but",
+            "bee",
+            "rogue",
+            "rogue",
+            "bee",
+            "but",
+            "boss"
+          ]
+        ],
+        "groupVisualFamilies": [
+          "galboss",
+          "galboss",
+          "dragonfly",
+          "galboss",
+          "dragonfly"
+        ],
+        "groupPathFamilies": [
+          "pink-serpentine",
+          "pink-serpentine",
+          "green-ladder-split",
+          "pink-serpentine",
+          "pink-green-cascade"
+        ],
+        "groupReferencePathsIdentifier": null
+      },
+      "roleBindings": [
+        {
+          "groupIndex": 1,
+          "pathIntent": "pink-serpentine",
+          "targetPathFamily": "pink-serpentine",
+          "visualFamily": "galboss",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "boss",
+            "rogue",
+            "but",
+            "bee",
+            "bee",
+            "but",
+            "rogue",
+            "boss"
+          ],
+          "role": "runtime group 1",
+          "targetEntrySide": "center",
+          "targetExitSide": "center"
+        },
+        {
+          "groupIndex": 2,
+          "pathIntent": "pink-serpentine",
+          "targetPathFamily": "pink-serpentine",
+          "visualFamily": "galboss",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "but",
+            "boss",
+            "rogue",
+            "bee",
+            "bee",
+            "rogue",
+            "boss",
+            "but"
+          ],
+          "role": "runtime group 2",
+          "targetEntrySide": "center",
+          "targetExitSide": "center"
+        },
+        {
+          "groupIndex": 3,
+          "pathIntent": "green-ladder-split",
+          "targetPathFamily": "pink-serpentine",
+          "visualFamily": "dragonfly",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "bee",
+            "but",
+            "boss",
+            "rogue",
+            "rogue",
+            "boss",
+            "but",
+            "bee"
+          ],
+          "role": "runtime group 3",
+          "targetEntrySide": "center",
+          "targetExitSide": "center"
+        },
+        {
+          "groupIndex": 4,
+          "pathIntent": "pink-serpentine",
+          "targetPathFamily": "pink-serpentine",
+          "visualFamily": "galboss",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "rogue",
+            "bee",
+            "but",
+            "boss",
+            "boss",
+            "but",
+            "bee",
+            "rogue"
+          ],
+          "role": "runtime group 4",
+          "targetEntrySide": "center",
+          "targetExitSide": "center"
+        },
+        {
+          "groupIndex": 5,
+          "pathIntent": "pink-green-cascade",
+          "targetPathFamily": "pink-serpentine",
+          "visualFamily": "dragonfly",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "boss",
+            "but",
+            "bee",
+            "rogue",
+            "rogue",
+            "bee",
+            "but",
+            "boss"
+          ],
+          "role": "runtime group 5",
+          "targetEntrySide": "left",
+          "targetExitSide": "right"
+        }
+      ],
+      "phaseTimeline": [
+        {
+          "groupIndex": 1,
+          "authoredSpawnOffsetS": 0,
+          "targetVisibleStartS": 0,
+          "targetVisibleEndS": 3.25,
+          "targetDurationS": 3.25
+        },
+        {
+          "groupIndex": 2,
+          "authoredSpawnOffsetS": 0.45,
+          "targetVisibleStartS": 0.5,
+          "targetVisibleEndS": 3.25,
+          "targetDurationS": 2.75
+        },
+        {
+          "groupIndex": 3,
+          "authoredSpawnOffsetS": 2.85,
+          "targetVisibleStartS": 2.88,
+          "targetVisibleEndS": 6.63,
+          "targetDurationS": 3.75
+        },
+        {
+          "groupIndex": 4,
+          "authoredSpawnOffsetS": 6.25,
+          "targetVisibleStartS": 6.38,
+          "targetVisibleEndS": 9.88,
+          "targetDurationS": 3.5
+        },
+        {
+          "groupIndex": 5,
+          "authoredSpawnOffsetS": 12.85,
+          "targetVisibleStartS": 13.13,
+          "targetVisibleEndS": 15.88,
+          "targetDurationS": 2.75
+        }
+      ],
+      "controlPoints": [
+        {
+          "groupIndex": 1,
+          "t": 0,
+          "x": 0.5855,
+          "y": 0.609,
+          "sourceTrackId": "target-track-1"
+        },
+        {
+          "groupIndex": 1,
+          "t": 1.75,
+          "x": 0.5259,
+          "y": 0.6119,
+          "sourceTrackId": "target-track-1"
+        },
+        {
+          "groupIndex": 1,
+          "t": 3.25,
+          "x": 0.5275,
+          "y": 0.639,
+          "sourceTrackId": "target-track-1"
+        },
+        {
+          "groupIndex": 2,
+          "t": 0,
+          "x": 0.563,
+          "y": 0.542,
+          "sourceTrackId": "target-track-9"
+        },
+        {
+          "groupIndex": 2,
+          "t": 1.63,
+          "x": 0.5678,
+          "y": 0.6383,
+          "sourceTrackId": "target-track-9"
+        },
+        {
+          "groupIndex": 2,
+          "t": 2.75,
+          "x": 0.5672,
+          "y": 0.6382,
+          "sourceTrackId": "target-track-9"
+        },
+        {
+          "groupIndex": 3,
+          "t": 0,
+          "x": 0.5644,
+          "y": 0.6239,
+          "sourceTrackId": "target-track-34"
+        },
+        {
+          "groupIndex": 3,
+          "t": 1.25,
+          "x": 0.4369,
+          "y": 0.7569,
+          "sourceTrackId": "target-track-34"
+        },
+        {
+          "groupIndex": 3,
+          "t": 2,
+          "x": 0.4369,
+          "y": 0.7569,
+          "sourceTrackId": "target-track-34"
+        },
+        {
+          "groupIndex": 4,
+          "t": 0,
+          "x": 0.7019,
+          "y": 0.6126,
+          "sourceTrackId": "target-track-61"
+        },
+        {
+          "groupIndex": 4,
+          "t": 0.37,
+          "x": 0.6543,
+          "y": 0.7342,
+          "sourceTrackId": "target-track-61"
+        },
+        {
+          "groupIndex": 4,
+          "t": 0.75,
+          "x": 0.6186,
+          "y": 0.7587,
+          "sourceTrackId": "target-track-61"
+        },
+        {
+          "groupIndex": 5,
+          "t": 0,
+          "x": 0.2468,
+          "y": 0.5311,
+          "sourceTrackId": "target-track-83"
+        },
+        {
+          "groupIndex": 5,
+          "t": 1.5,
+          "x": 0.2466,
+          "y": 0.5312,
+          "sourceTrackId": "target-track-83"
+        },
+        {
+          "groupIndex": 5,
+          "t": 2.75,
+          "x": 0.2466,
+          "y": 0.5311,
+          "sourceTrackId": "target-track-83"
+        }
+      ],
+      "scoreWindows": [
+        {
+          "groupIndex": 1,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.8281
+        },
+        {
+          "groupIndex": 2,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.9655
+        },
+        {
+          "groupIndex": 3,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.4667
+        },
+        {
+          "groupIndex": 4,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.3846
+        },
+        {
+          "groupIndex": 5,
+          "expected": "score-window pending",
+          "shotOpportunity": 1
+        }
+      ],
+      "eventAnchors": [
+        {
+          "groupIndex": 1,
+          "spawnOffsetS": 0,
+          "referenceTrackId": "target-track-1",
+          "targetTrackConfidence": 0.678,
+          "targetPathLength": 0.1338
+        },
+        {
+          "groupIndex": 2,
+          "spawnOffsetS": 0.45,
+          "referenceTrackId": "target-track-9",
+          "targetTrackConfidence": 0.597,
+          "targetPathLength": 0.2516
+        },
+        {
+          "groupIndex": 3,
+          "spawnOffsetS": 2.85,
+          "referenceTrackId": "target-track-34",
+          "targetTrackConfidence": 0.717,
+          "targetPathLength": 0.1458
+        },
+        {
+          "groupIndex": 4,
+          "spawnOffsetS": 6.25,
+          "referenceTrackId": "target-track-61",
+          "targetTrackConfidence": 0.712,
+          "targetPathLength": 0.1258
+        },
+        {
+          "groupIndex": 5,
+          "spawnOffsetS": 12.85,
+          "referenceTrackId": "target-track-83",
+          "targetTrackConfidence": 0.752,
+          "targetPathLength": 0.0143
+        }
+      ],
+      "variationControls": [
+        {
+          "groupIndex": 1,
+          "pathFamily": "pink-serpentine",
+          "speedScale": 2.1,
+          "arcAmp": 1.94,
+          "dropAmp": 0.92,
+          "lowerFieldBias": 176,
+          "yOffset": 128,
+          "visualFamily": "galboss"
+        },
+        {
+          "groupIndex": 2,
+          "pathFamily": "pink-serpentine",
+          "speedScale": 1.85,
+          "arcAmp": 1.94,
+          "dropAmp": 0.92,
+          "lowerFieldBias": 196,
+          "yOffset": 136,
+          "visualFamily": "galboss"
+        },
+        {
+          "groupIndex": 3,
+          "pathFamily": "green-ladder-split",
+          "speedScale": 1.5,
+          "arcAmp": 1.94,
+          "dropAmp": 0.92,
+          "lowerFieldBias": 96,
+          "yOffset": 24,
+          "visualFamily": "dragonfly"
+        },
+        {
+          "groupIndex": 4,
+          "pathFamily": "pink-serpentine",
+          "speedScale": 1.3,
+          "arcAmp": 1.94,
+          "dropAmp": 0.92,
+          "lowerFieldBias": 82,
+          "yOffset": 28,
+          "visualFamily": "galboss"
+        },
+        {
+          "groupIndex": 5,
+          "pathFamily": "pink-green-cascade",
+          "speedScale": 1.05,
+          "arcAmp": 1.94,
+          "dropAmp": 0.92,
+          "lowerFieldBias": 208,
+          "yOffset": 168,
+          "visualFamily": "dragonfly"
+        }
+      ],
+      "measurement": {
+        "sourceArtifacts": [
+          "src/js/13-aurora-game-pack.js",
+          "reference-artifacts/ingestion/movement-grammar/movement-grammar-0.1.json",
+          "reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json",
+          "reference-artifacts/analyses/challenge-trajectory-controls/latest.json"
+        ],
+        "targetContractPresent": false,
+        "trajectoryControlsPresent": true,
+        "pathContractMatchScore10": null,
+        "referenceBackedGroupCount": 5,
+        "targetVideoObjectTrackFitScore10": 3.8,
+        "expectedScore10": 5.9,
+        "controlReadiness10": 8.6,
+        "seedDrift": [
+          {
+            "groupIndex": 3,
+            "authoredPathFamily": "green-ladder-split",
+            "trajectorySeedPathFamily": "pink-serpentine",
+            "differs": true
+          },
+          {
+            "groupIndex": 5,
+            "authoredPathFamily": "pink-green-cascade",
+            "trajectorySeedPathFamily": "pink-serpentine",
+            "differs": true
+          }
+        ],
+        "gaps": [
+          "No hand-authored target contract attached for this stage.",
+          "Authored runtime layout differs from trajectory-control seed on 2 group(s); analyzer seed should be refreshed after gameplay promotion."
+        ]
+      },
+      "designerRead": "Target-derived controls preserve 5 group schedule(s), path-family hint(s), speed scale(s), arc/drop scale(s), and lower-field bias(es) for stage 15. These are candidate inputs only until a sweep and full analyzer promote them.",
+      "nextImplementationStep": "No hand-authored target contract attached for this stage."
+    },
+    {
+      "id": "aurora-challenge-05-pink-green-cascade",
+      "appliesTo": "challenge-stage-set-piece",
+      "gameScope": {
+        "gameKey": "aurora-galactica",
+        "stage": 19,
+        "challengeNumber": 5,
+        "stageLabel": "Challenging Stage 5"
+      },
+      "runtimeLayout": {
+        "index": 4,
+        "challengeNumber": 5,
+        "fromStage": 19,
+        "id": "pink-green-cascade",
+        "pathFamily": "pink-green-cascade",
+        "groups": 5,
+        "enemiesPerGroup": 8,
+        "upperBandRatio": 0.42,
+        "spawnOffsetX": 76,
+        "waveSpacingY": 9,
+        "rowSpacingY": 8,
+        "waveDelay": 1.1,
+        "slotDelay": 0.085,
+        "arcAmp": 1.86,
+        "dropAmp": 1.22,
+        "lowerFieldBias": null,
+        "groupSpawnOffsets": [],
+        "groupSpeedScales": [],
+        "groupArcAmps": [],
+        "groupDropAmps": [],
+        "groupLowerFieldBiases": [],
+        "groupYOffsets": [],
+        "laneTypes": [
+          "rogue",
+          "boss",
+          "but",
+          "bee",
+          "boss",
+          "but",
+          "bee",
+          "rogue"
+        ],
+        "groupLaneTypes": [
+          [
+            "rogue",
+            "boss",
+            "but",
+            "bee",
+            "boss",
+            "but",
+            "bee",
+            "rogue"
+          ],
+          [
+            "boss",
+            "but",
+            "bee",
+            "rogue",
+            "rogue",
+            "bee",
+            "but",
+            "boss"
+          ],
+          [
+            "bee",
+            "rogue",
+            "boss",
+            "but",
+            "but",
+            "boss",
+            "rogue",
+            "bee"
+          ],
+          [
+            "but",
+            "bee",
+            "rogue",
+            "boss",
+            "boss",
+            "rogue",
+            "bee",
+            "but"
+          ],
+          [
+            "boss",
+            "rogue",
+            "bee",
+            "but",
+            "but",
+            "bee",
+            "rogue",
+            "boss"
+          ]
+        ],
+        "groupVisualFamilies": [
+          "galboss",
+          "dragonfly",
+          "crown",
+          "dragonfly",
+          "galboss"
+        ],
+        "groupPathFamilies": [
+          "pink-green-cascade",
+          "green-ladder-split",
+          "pink-green-cascade",
+          "pink-serpentine",
+          "pink-green-cascade"
+        ],
+        "groupReferencePathsIdentifier": null
+      },
+      "roleBindings": [
+        {
+          "groupIndex": 1,
+          "pathIntent": "pink-green-cascade",
+          "targetPathFamily": "pink-green-low-sweep",
+          "visualFamily": "galboss",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "rogue",
+            "boss",
+            "but",
+            "bee",
+            "boss",
+            "but",
+            "bee",
+            "rogue"
+          ],
+          "role": "runtime group 1",
+          "targetEntrySide": "left",
+          "targetExitSide": "left"
+        },
+        {
+          "groupIndex": 2,
+          "pathIntent": "green-ladder-split",
+          "targetPathFamily": "pink-green-low-sweep",
+          "visualFamily": "dragonfly",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "boss",
+            "but",
+            "bee",
+            "rogue",
+            "rogue",
+            "bee",
+            "but",
+            "boss"
+          ],
+          "role": "runtime group 2",
+          "targetEntrySide": "right",
+          "targetExitSide": "right"
+        },
+        {
+          "groupIndex": 3,
+          "pathIntent": "pink-green-cascade",
+          "targetPathFamily": "pink-green-cascade",
+          "visualFamily": "crown",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "bee",
+            "rogue",
+            "boss",
+            "but",
+            "but",
+            "boss",
+            "rogue",
+            "bee"
+          ],
+          "role": "runtime group 3",
+          "targetEntrySide": "left",
+          "targetExitSide": "left"
+        },
+        {
+          "groupIndex": 4,
+          "pathIntent": "pink-serpentine",
+          "targetPathFamily": "pink-green-cascade",
+          "visualFamily": "dragonfly",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "but",
+            "bee",
+            "rogue",
+            "boss",
+            "boss",
+            "rogue",
+            "bee",
+            "but"
+          ],
+          "role": "runtime group 4",
+          "targetEntrySide": "right",
+          "targetExitSide": "center"
+        },
+        {
+          "groupIndex": 5,
+          "pathIntent": "pink-green-cascade",
+          "targetPathFamily": "pink-green-cascade",
+          "visualFamily": "galboss",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "boss",
+            "rogue",
+            "bee",
+            "but",
+            "but",
+            "bee",
+            "rogue",
+            "boss"
+          ],
+          "role": "runtime group 5",
+          "targetEntrySide": "left",
+          "targetExitSide": "center"
+        }
+      ],
+      "phaseTimeline": [
+        {
+          "groupIndex": 1,
+          "authoredSpawnOffsetS": 0,
+          "targetVisibleStartS": 0,
+          "targetVisibleEndS": 3.25,
+          "targetDurationS": 3.25
+        },
+        {
+          "groupIndex": 2,
+          "authoredSpawnOffsetS": 1.1,
+          "targetVisibleStartS": 3.13,
+          "targetVisibleEndS": 7.5,
+          "targetDurationS": 4.37
+        },
+        {
+          "groupIndex": 3,
+          "authoredSpawnOffsetS": 2.2,
+          "targetVisibleStartS": 7.38,
+          "targetVisibleEndS": 10.88,
+          "targetDurationS": 3.5
+        },
+        {
+          "groupIndex": 4,
+          "authoredSpawnOffsetS": 3.3000000000000003,
+          "targetVisibleStartS": 10.63,
+          "targetVisibleEndS": 13,
+          "targetDurationS": 2.37
+        },
+        {
+          "groupIndex": 5,
+          "authoredSpawnOffsetS": 4.4,
+          "targetVisibleStartS": 12.88,
+          "targetVisibleEndS": 15.88,
+          "targetDurationS": 3
+        }
+      ],
+      "controlPoints": [
+        {
+          "groupIndex": 1,
+          "t": 0,
+          "x": 0.1495,
+          "y": 0.7563,
+          "sourceTrackId": "target-track-12"
+        },
+        {
+          "groupIndex": 1,
+          "t": 1.75,
+          "x": 0.1425,
+          "y": 0.6024,
+          "sourceTrackId": "target-track-12"
+        },
+        {
+          "groupIndex": 1,
+          "t": 2.75,
+          "x": 0.1425,
+          "y": 0.602,
+          "sourceTrackId": "target-track-12"
+        },
+        {
+          "groupIndex": 2,
+          "t": 0,
+          "x": 0.7322,
+          "y": 0.5127,
+          "sourceTrackId": "target-track-43"
+        },
+        {
+          "groupIndex": 2,
+          "t": 1,
+          "x": 0.8291,
+          "y": 0.5409,
+          "sourceTrackId": "target-track-43"
+        },
+        {
+          "groupIndex": 2,
+          "t": 1.87,
+          "x": 0.8291,
+          "y": 0.5409,
+          "sourceTrackId": "target-track-43"
+        },
+        {
+          "groupIndex": 3,
+          "t": 0,
+          "x": 0.0888,
+          "y": 0.4981,
+          "sourceTrackId": "target-track-56"
+        },
+        {
+          "groupIndex": 3,
+          "t": 1.63,
+          "x": 0.1765,
+          "y": 0.6485,
+          "sourceTrackId": "target-track-56"
+        },
+        {
+          "groupIndex": 3,
+          "t": 2.88,
+          "x": 0.1764,
+          "y": 0.6486,
+          "sourceTrackId": "target-track-56"
+        },
+        {
+          "groupIndex": 4,
+          "t": 0,
+          "x": 0.9027,
+          "y": 0.6092,
+          "sourceTrackId": "target-track-80"
+        },
+        {
+          "groupIndex": 4,
+          "t": 0.63,
+          "x": 0.9012,
+          "y": 0.5433,
+          "sourceTrackId": "target-track-80"
+        },
+        {
+          "groupIndex": 4,
+          "t": 1.38,
+          "x": 0.7717,
+          "y": 0.7173,
+          "sourceTrackId": "target-track-80"
+        },
+        {
+          "groupIndex": 5,
+          "t": 0,
+          "x": 0.2428,
+          "y": 0.6552,
+          "sourceTrackId": "target-track-94"
+        },
+        {
+          "groupIndex": 5,
+          "t": 0.25,
+          "x": 0.2175,
+          "y": 0.5412,
+          "sourceTrackId": "target-track-94"
+        },
+        {
+          "groupIndex": 5,
+          "t": 0.62,
+          "x": 0.211,
+          "y": 0.5659,
+          "sourceTrackId": "target-track-94"
+        }
+      ],
+      "scoreWindows": [
+        {
+          "groupIndex": 1,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.9389
+        },
+        {
+          "groupIndex": 2,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.9673
+        },
+        {
+          "groupIndex": 3,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.4417
+        },
+        {
+          "groupIndex": 4,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.4537
+        },
+        {
+          "groupIndex": 5,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.3417
+        }
+      ],
+      "eventAnchors": [
+        {
+          "groupIndex": 1,
+          "spawnOffsetS": 0,
+          "referenceTrackId": "target-track-12",
+          "targetTrackConfidence": 0.742,
+          "targetPathLength": 0.1804
+        },
+        {
+          "groupIndex": 2,
+          "spawnOffsetS": 1.1,
+          "referenceTrackId": "target-track-43",
+          "targetTrackConfidence": 0.601,
+          "targetPathLength": 0.1272
+        },
+        {
+          "groupIndex": 3,
+          "spawnOffsetS": 2.2,
+          "referenceTrackId": "target-track-56",
+          "targetTrackConfidence": 0.737,
+          "targetPathLength": 0.135
+        },
+        {
+          "groupIndex": 4,
+          "spawnOffsetS": 3.3000000000000003,
+          "referenceTrackId": "target-track-80",
+          "targetTrackConfidence": 0.735,
+          "targetPathLength": 0.1993
+        },
+        {
+          "groupIndex": 5,
+          "spawnOffsetS": 4.4,
+          "referenceTrackId": "target-track-94",
+          "targetTrackConfidence": 0.59,
+          "targetPathLength": 0.1615
+        }
+      ],
+      "variationControls": [
+        {
+          "groupIndex": 1,
+          "pathFamily": "pink-green-cascade",
+          "speedScale": 2.12,
+          "arcAmp": 1.86,
+          "dropAmp": 1.22,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "galboss"
+        },
+        {
+          "groupIndex": 2,
+          "pathFamily": "green-ladder-split",
+          "speedScale": 1.58,
+          "arcAmp": 1.86,
+          "dropAmp": 1.22,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "dragonfly"
+        },
+        {
+          "groupIndex": 3,
+          "pathFamily": "pink-green-cascade",
+          "speedScale": 1.97,
+          "arcAmp": 1.86,
+          "dropAmp": 1.22,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "crown"
+        },
+        {
+          "groupIndex": 4,
+          "pathFamily": "pink-serpentine",
+          "speedScale": 2.65,
+          "arcAmp": 1.86,
+          "dropAmp": 1.22,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "dragonfly"
+        },
+        {
+          "groupIndex": 5,
+          "pathFamily": "pink-green-cascade",
+          "speedScale": 2.3,
+          "arcAmp": 1.86,
+          "dropAmp": 1.22,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "galboss"
+        }
+      ],
+      "measurement": {
+        "sourceArtifacts": [
+          "src/js/13-aurora-game-pack.js",
+          "reference-artifacts/ingestion/movement-grammar/movement-grammar-0.1.json",
+          "reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json",
+          "reference-artifacts/analyses/challenge-trajectory-controls/latest.json"
+        ],
+        "targetContractPresent": false,
+        "trajectoryControlsPresent": true,
+        "pathContractMatchScore10": null,
+        "referenceBackedGroupCount": 5,
+        "targetVideoObjectTrackFitScore10": 3.4,
+        "expectedScore10": 4.8,
+        "controlReadiness10": 8.5,
+        "seedDrift": [
+          {
+            "groupIndex": 1,
+            "authoredPathFamily": "pink-green-cascade",
+            "trajectorySeedPathFamily": "pink-green-low-sweep",
+            "differs": true
+          },
+          {
+            "groupIndex": 2,
+            "authoredPathFamily": "green-ladder-split",
+            "trajectorySeedPathFamily": "pink-green-low-sweep",
+            "differs": true
+          },
+          {
+            "groupIndex": 4,
+            "authoredPathFamily": "pink-serpentine",
+            "trajectorySeedPathFamily": "pink-green-cascade",
+            "differs": true
+          }
+        ],
+        "gaps": [
+          "No hand-authored target contract attached for this stage.",
+          "Authored runtime layout differs from trajectory-control seed on 3 group(s); analyzer seed should be refreshed after gameplay promotion."
+        ]
+      },
+      "designerRead": "Target-derived controls preserve 5 group schedule(s), path-family hint(s), speed scale(s), arc/drop scale(s), and lower-field bias(es) for stage 19. These are candidate inputs only until a sweep and full analyzer promote them.",
+      "nextImplementationStep": "No hand-authored target contract attached for this stage."
+    },
+    {
+      "id": "aurora-challenge-06-green-ladder-split",
+      "appliesTo": "challenge-stage-set-piece",
+      "gameScope": {
+        "gameKey": "aurora-galactica",
+        "stage": 23,
+        "challengeNumber": 6,
+        "stageLabel": "Challenging Stage 6"
+      },
+      "runtimeLayout": {
+        "index": 5,
+        "challengeNumber": 6,
+        "fromStage": 23,
+        "id": "green-ladder-split",
+        "pathFamily": "green-ladder-split",
+        "groups": 5,
+        "enemiesPerGroup": 8,
+        "upperBandRatio": 0.41,
+        "spawnOffsetX": 80,
+        "waveSpacingY": 9,
+        "rowSpacingY": 8,
+        "waveDelay": 1.04,
+        "slotDelay": 0.08,
+        "arcAmp": 1.58,
+        "dropAmp": 1.34,
+        "lowerFieldBias": null,
+        "groupSpawnOffsets": [],
+        "groupSpeedScales": [],
+        "groupArcAmps": [],
+        "groupDropAmps": [],
+        "groupLowerFieldBiases": [],
+        "groupYOffsets": [],
+        "laneTypes": [
+          "bee",
+          "but",
+          "rogue",
+          "boss",
+          "boss",
+          "rogue",
+          "but",
+          "bee"
+        ],
+        "groupLaneTypes": [
+          [
+            "bee",
+            "but",
+            "rogue",
+            "boss",
+            "boss",
+            "rogue",
+            "but",
+            "bee"
+          ],
+          [
+            "but",
+            "bee",
+            "boss",
+            "rogue",
+            "rogue",
+            "boss",
+            "bee",
+            "but"
+          ],
+          [
+            "rogue",
+            "boss",
+            "bee",
+            "but",
+            "but",
+            "bee",
+            "boss",
+            "rogue"
+          ],
+          [
+            "boss",
+            "rogue",
+            "but",
+            "bee",
+            "bee",
+            "but",
+            "rogue",
+            "boss"
+          ],
+          [
+            "bee",
+            "rogue",
+            "boss",
+            "but",
+            "but",
+            "boss",
+            "rogue",
+            "bee"
+          ]
+        ],
+        "groupVisualFamilies": [
+          "dragonfly",
+          "dragonfly",
+          "dragonfly",
+          "mosquito",
+          "dragonfly"
+        ],
+        "groupPathFamilies": [
+          "green-ladder-split",
+          "green-ladder-split",
+          "green-ladder-split",
+          "green-ladder-split",
+          "green-ladder-split"
+        ],
+        "groupReferencePathsIdentifier": null
+      },
+      "roleBindings": [
+        {
+          "groupIndex": 1,
+          "pathIntent": "green-ladder-split",
+          "targetPathFamily": "green-ladder-high-exit",
+          "visualFamily": "dragonfly",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "bee",
+            "but",
+            "rogue",
+            "boss",
+            "boss",
+            "rogue",
+            "but",
+            "bee"
+          ],
+          "role": "runtime group 1",
+          "targetEntrySide": "right",
+          "targetExitSide": "right"
+        },
+        {
+          "groupIndex": 2,
+          "pathIntent": "green-ladder-split",
+          "targetPathFamily": "green-ladder-deep-drop",
+          "visualFamily": "dragonfly",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "but",
+            "bee",
+            "boss",
+            "rogue",
+            "rogue",
+            "boss",
+            "bee",
+            "but"
+          ],
+          "role": "runtime group 2",
+          "targetEntrySide": "left",
+          "targetExitSide": "center"
+        },
+        {
+          "groupIndex": 3,
+          "pathIntent": "green-ladder-split",
+          "targetPathFamily": "green-ladder-deep-drop",
+          "visualFamily": "dragonfly",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "rogue",
+            "boss",
+            "bee",
+            "but",
+            "but",
+            "bee",
+            "boss",
+            "rogue"
+          ],
+          "role": "runtime group 3",
+          "targetEntrySide": "center",
+          "targetExitSide": "center"
+        },
+        {
+          "groupIndex": 4,
+          "pathIntent": "green-ladder-split",
+          "targetPathFamily": "green-ladder-deep-drop",
+          "visualFamily": "mosquito",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "boss",
+            "rogue",
+            "but",
+            "bee",
+            "bee",
+            "but",
+            "rogue",
+            "boss"
+          ],
+          "role": "runtime group 4",
+          "targetEntrySide": "center",
+          "targetExitSide": "left"
+        },
+        {
+          "groupIndex": 5,
+          "pathIntent": "green-ladder-split",
+          "targetPathFamily": "green-ladder-high-exit",
+          "visualFamily": "dragonfly",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "bee",
+            "rogue",
+            "boss",
+            "but",
+            "but",
+            "boss",
+            "rogue",
+            "bee"
+          ],
+          "role": "runtime group 5",
+          "targetEntrySide": "center",
+          "targetExitSide": "right"
+        }
+      ],
+      "phaseTimeline": [
+        {
+          "groupIndex": 1,
+          "authoredSpawnOffsetS": 0,
+          "targetVisibleStartS": 0,
+          "targetVisibleEndS": 2.63,
+          "targetDurationS": 2.63
+        },
+        {
+          "groupIndex": 2,
+          "authoredSpawnOffsetS": 1.04,
+          "targetVisibleStartS": 2.63,
+          "targetVisibleEndS": 6.75,
+          "targetDurationS": 4.12
+        },
+        {
+          "groupIndex": 3,
+          "authoredSpawnOffsetS": 2.08,
+          "targetVisibleStartS": 5.75,
+          "targetVisibleEndS": 10,
+          "targetDurationS": 4.25
+        },
+        {
+          "groupIndex": 4,
+          "authoredSpawnOffsetS": 3.12,
+          "targetVisibleStartS": 9.63,
+          "targetVisibleEndS": 14.13,
+          "targetDurationS": 4.5
+        },
+        {
+          "groupIndex": 5,
+          "authoredSpawnOffsetS": 4.16,
+          "targetVisibleStartS": 14,
+          "targetVisibleEndS": 15.88,
+          "targetDurationS": 1.88
+        }
+      ],
+      "controlPoints": [
+        {
+          "groupIndex": 1,
+          "t": 0,
+          "x": 0.7594,
+          "y": 0.4409,
+          "sourceTrackId": "target-track-3"
+        },
+        {
+          "groupIndex": 1,
+          "t": 1.63,
+          "x": 0.8415,
+          "y": 0.6383,
+          "sourceTrackId": "target-track-3"
+        },
+        {
+          "groupIndex": 1,
+          "t": 2.63,
+          "x": 0.8415,
+          "y": 0.6383,
+          "sourceTrackId": "target-track-3"
+        },
+        {
+          "groupIndex": 2,
+          "t": 0,
+          "x": 0.3095,
+          "y": 0.509,
+          "sourceTrackId": "target-track-31"
+        },
+        {
+          "groupIndex": 2,
+          "t": 1.25,
+          "x": 0.4889,
+          "y": 0.3899,
+          "sourceTrackId": "target-track-31"
+        },
+        {
+          "groupIndex": 2,
+          "t": 2.12,
+          "x": 0.4889,
+          "y": 0.3899,
+          "sourceTrackId": "target-track-31"
+        },
+        {
+          "groupIndex": 3,
+          "t": 0,
+          "x": 0.3738,
+          "y": 0.8447,
+          "sourceTrackId": "target-track-46"
+        },
+        {
+          "groupIndex": 3,
+          "t": 1.25,
+          "x": 0.5031,
+          "y": 0.8258,
+          "sourceTrackId": "target-track-46"
+        },
+        {
+          "groupIndex": 3,
+          "t": 2.25,
+          "x": 0.5034,
+          "y": 0.8259,
+          "sourceTrackId": "target-track-46"
+        },
+        {
+          "groupIndex": 4,
+          "t": 0,
+          "x": 0.3834,
+          "y": 0.3467,
+          "sourceTrackId": "target-track-61"
+        },
+        {
+          "groupIndex": 4,
+          "t": 2.25,
+          "x": 0.1599,
+          "y": 0.5716,
+          "sourceTrackId": "target-track-61"
+        },
+        {
+          "groupIndex": 4,
+          "t": 3.63,
+          "x": 0.1657,
+          "y": 0.5951,
+          "sourceTrackId": "target-track-61"
+        },
+        {
+          "groupIndex": 5,
+          "t": 0,
+          "x": 0.5247,
+          "y": 0.2273,
+          "sourceTrackId": "target-track-79"
+        },
+        {
+          "groupIndex": 5,
+          "t": 0.87,
+          "x": 0.6063,
+          "y": 0.2377,
+          "sourceTrackId": "target-track-79"
+        },
+        {
+          "groupIndex": 5,
+          "t": 1.5,
+          "x": 0.6244,
+          "y": 0.3687,
+          "sourceTrackId": "target-track-79"
+        }
+      ],
+      "scoreWindows": [
+        {
+          "groupIndex": 1,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.6506
+        },
+        {
+          "groupIndex": 2,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.8
+        },
+        {
+          "groupIndex": 3,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.8
+        },
+        {
+          "groupIndex": 4,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.3132
+        },
+        {
+          "groupIndex": 5,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.0313
+        }
+      ],
+      "eventAnchors": [
+        {
+          "groupIndex": 1,
+          "spawnOffsetS": 0,
+          "referenceTrackId": "target-track-3",
+          "targetTrackConfidence": 0.68,
+          "targetPathLength": 0.1656
+        },
+        {
+          "groupIndex": 2,
+          "spawnOffsetS": 1.04,
+          "referenceTrackId": "target-track-31",
+          "targetTrackConfidence": 0.731,
+          "targetPathLength": 0.1351
+        },
+        {
+          "groupIndex": 3,
+          "spawnOffsetS": 2.08,
+          "referenceTrackId": "target-track-46",
+          "targetTrackConfidence": 0.558,
+          "targetPathLength": 0.1207
+        },
+        {
+          "groupIndex": 4,
+          "spawnOffsetS": 3.12,
+          "referenceTrackId": "target-track-61",
+          "targetTrackConfidence": 0.748,
+          "targetPathLength": 0.1843
+        },
+        {
+          "groupIndex": 5,
+          "spawnOffsetS": 4.16,
+          "referenceTrackId": "target-track-79",
+          "targetTrackConfidence": 0.672,
+          "targetPathLength": 0.1693
+        }
+      ],
+      "variationControls": [
+        {
+          "groupIndex": 1,
+          "pathFamily": "green-ladder-split",
+          "speedScale": 2.62,
+          "arcAmp": 1.58,
+          "dropAmp": 1.34,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "dragonfly"
+        },
+        {
+          "groupIndex": 2,
+          "pathFamily": "green-ladder-split",
+          "speedScale": 1.67,
+          "arcAmp": 1.58,
+          "dropAmp": 1.34,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "dragonfly"
+        },
+        {
+          "groupIndex": 3,
+          "pathFamily": "green-ladder-split",
+          "speedScale": 1.62,
+          "arcAmp": 1.58,
+          "dropAmp": 1.34,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "dragonfly"
+        },
+        {
+          "groupIndex": 4,
+          "pathFamily": "green-ladder-split",
+          "speedScale": 1.53,
+          "arcAmp": 1.58,
+          "dropAmp": 1.34,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "mosquito"
+        },
+        {
+          "groupIndex": 5,
+          "pathFamily": "green-ladder-split",
+          "speedScale": 2.65,
+          "arcAmp": 1.58,
+          "dropAmp": 1.34,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "dragonfly"
+        }
+      ],
+      "measurement": {
+        "sourceArtifacts": [
+          "src/js/13-aurora-game-pack.js",
+          "reference-artifacts/ingestion/movement-grammar/movement-grammar-0.1.json",
+          "reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json",
+          "reference-artifacts/analyses/challenge-trajectory-controls/latest.json"
+        ],
+        "targetContractPresent": false,
+        "trajectoryControlsPresent": true,
+        "pathContractMatchScore10": null,
+        "referenceBackedGroupCount": 5,
+        "targetVideoObjectTrackFitScore10": 4.1,
+        "expectedScore10": 5.4,
+        "controlReadiness10": 8.5,
+        "seedDrift": [
+          {
+            "groupIndex": 1,
+            "authoredPathFamily": "green-ladder-split",
+            "trajectorySeedPathFamily": "green-ladder-high-exit",
+            "differs": true
+          },
+          {
+            "groupIndex": 2,
+            "authoredPathFamily": "green-ladder-split",
+            "trajectorySeedPathFamily": "green-ladder-deep-drop",
+            "differs": true
+          },
+          {
+            "groupIndex": 3,
+            "authoredPathFamily": "green-ladder-split",
+            "trajectorySeedPathFamily": "green-ladder-deep-drop",
+            "differs": true
+          },
+          {
+            "groupIndex": 4,
+            "authoredPathFamily": "green-ladder-split",
+            "trajectorySeedPathFamily": "green-ladder-deep-drop",
+            "differs": true
+          },
+          {
+            "groupIndex": 5,
+            "authoredPathFamily": "green-ladder-split",
+            "trajectorySeedPathFamily": "green-ladder-high-exit",
+            "differs": true
+          }
+        ],
+        "gaps": [
+          "No hand-authored target contract attached for this stage.",
+          "Authored runtime layout differs from trajectory-control seed on 5 group(s); analyzer seed should be refreshed after gameplay promotion."
+        ]
+      },
+      "designerRead": "Target-derived controls preserve 5 group schedule(s), path-family hint(s), speed scale(s), arc/drop scale(s), and lower-field bias(es) for stage 23. These are candidate inputs only until a sweep and full analyzer promote them.",
+      "nextImplementationStep": "No hand-authored target contract attached for this stage."
+    },
+    {
+      "id": "aurora-challenge-07-yellow-diagonal-fan",
+      "appliesTo": "challenge-stage-set-piece",
+      "gameScope": {
+        "gameKey": "aurora-galactica",
+        "stage": 27,
+        "challengeNumber": 7,
+        "stageLabel": "Challenging Stage 7"
+      },
+      "runtimeLayout": {
+        "index": 6,
+        "challengeNumber": 7,
+        "fromStage": 27,
+        "id": "yellow-diagonal-fan",
+        "pathFamily": "yellow-diagonal-fan",
+        "groups": 5,
+        "enemiesPerGroup": 8,
+        "upperBandRatio": 0.4,
+        "spawnOffsetX": 84,
+        "waveSpacingY": 8,
+        "rowSpacingY": 8,
+        "waveDelay": 1,
+        "slotDelay": 0.075,
+        "arcAmp": 1.88,
+        "dropAmp": 1.6,
+        "lowerFieldBias": null,
+        "groupSpawnOffsets": [],
+        "groupSpeedScales": [],
+        "groupArcAmps": [],
+        "groupDropAmps": [],
+        "groupLowerFieldBiases": [],
+        "groupYOffsets": [],
+        "laneTypes": [
+          "boss",
+          "bee",
+          "but",
+          "rogue",
+          "rogue",
+          "but",
+          "bee",
+          "boss"
+        ],
+        "groupLaneTypes": [
+          [
+            "boss",
+            "bee",
+            "but",
+            "rogue",
+            "rogue",
+            "but",
+            "bee",
+            "boss"
+          ],
+          [
+            "bee",
+            "boss",
+            "rogue",
+            "but",
+            "but",
+            "rogue",
+            "boss",
+            "bee"
+          ],
+          [
+            "but",
+            "rogue",
+            "boss",
+            "bee",
+            "bee",
+            "boss",
+            "rogue",
+            "but"
+          ],
+          [
+            "rogue",
+            "but",
+            "bee",
+            "boss",
+            "boss",
+            "bee",
+            "but",
+            "rogue"
+          ],
+          [
+            "boss",
+            "rogue",
+            "but",
+            "bee",
+            "bee",
+            "but",
+            "rogue",
+            "boss"
+          ]
+        ],
+        "groupVisualFamilies": [
+          "crown",
+          "crown",
+          "crown",
+          "crown",
+          "crown"
+        ],
+        "groupPathFamilies": [
+          "yellow-diagonal-fan",
+          "yellow-diagonal-fan",
+          "yellow-diagonal-fan",
+          "yellow-diagonal-fan",
+          "yellow-diagonal-fan"
+        ],
+        "groupReferencePathsIdentifier": null
+      },
+      "roleBindings": [
+        {
+          "groupIndex": 1,
+          "pathIntent": "yellow-diagonal-fan",
+          "targetPathFamily": "yellow-fan-low-drift",
+          "visualFamily": "crown",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "boss",
+            "bee",
+            "but",
+            "rogue",
+            "rogue",
+            "but",
+            "bee",
+            "boss"
+          ],
+          "role": "runtime group 1",
+          "targetEntrySide": "right",
+          "targetExitSide": "right"
+        },
+        {
+          "groupIndex": 2,
+          "pathIntent": "yellow-diagonal-fan",
+          "targetPathFamily": "yellow-fan-cross-cut",
+          "visualFamily": "crown",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "bee",
+            "boss",
+            "rogue",
+            "but",
+            "but",
+            "rogue",
+            "boss",
+            "bee"
+          ],
+          "role": "runtime group 2",
+          "targetEntrySide": "right",
+          "targetExitSide": "left"
+        },
+        {
+          "groupIndex": 3,
+          "pathIntent": "yellow-diagonal-fan",
+          "targetPathFamily": "yellow-fan-cross-cut",
+          "visualFamily": "crown",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "but",
+            "rogue",
+            "boss",
+            "bee",
+            "bee",
+            "boss",
+            "rogue",
+            "but"
+          ],
+          "role": "runtime group 3",
+          "targetEntrySide": "center",
+          "targetExitSide": "left"
+        },
+        {
+          "groupIndex": 4,
+          "pathIntent": "yellow-diagonal-fan",
+          "targetPathFamily": "yellow-fan-cross-cut",
+          "visualFamily": "crown",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "rogue",
+            "but",
+            "bee",
+            "boss",
+            "boss",
+            "bee",
+            "but",
+            "rogue"
+          ],
+          "role": "runtime group 4",
+          "targetEntrySide": "center",
+          "targetExitSide": "left"
+        },
+        {
+          "groupIndex": 5,
+          "pathIntent": "yellow-diagonal-fan",
+          "targetPathFamily": "yellow-fan-cross-cut",
+          "visualFamily": "crown",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "boss",
+            "rogue",
+            "but",
+            "bee",
+            "bee",
+            "but",
+            "rogue",
+            "boss"
+          ],
+          "role": "runtime group 5",
+          "targetEntrySide": "center",
+          "targetExitSide": "right"
+        }
+      ],
+      "phaseTimeline": [
+        {
+          "groupIndex": 1,
+          "authoredSpawnOffsetS": 0,
+          "targetVisibleStartS": 0,
+          "targetVisibleEndS": 2,
+          "targetDurationS": 2
+        },
+        {
+          "groupIndex": 2,
+          "authoredSpawnOffsetS": 1,
+          "targetVisibleStartS": 1.25,
+          "targetVisibleEndS": 5.5,
+          "targetDurationS": 4.25
+        },
+        {
+          "groupIndex": 3,
+          "authoredSpawnOffsetS": 2,
+          "targetVisibleStartS": 4.75,
+          "targetVisibleEndS": 7.63,
+          "targetDurationS": 2.88
+        },
+        {
+          "groupIndex": 4,
+          "authoredSpawnOffsetS": 3,
+          "targetVisibleStartS": 9.13,
+          "targetVisibleEndS": 11.25,
+          "targetDurationS": 2.12
+        },
+        {
+          "groupIndex": 5,
+          "authoredSpawnOffsetS": 4,
+          "targetVisibleStartS": 10.38,
+          "targetVisibleEndS": 12,
+          "targetDurationS": 1.62
+        }
+      ],
+      "controlPoints": [
+        {
+          "groupIndex": 1,
+          "t": 0,
+          "x": 0.8254,
+          "y": 0.7389,
+          "sourceTrackId": "target-track-1"
+        },
+        {
+          "groupIndex": 1,
+          "t": 1.13,
+          "x": 0.8262,
+          "y": 0.7681,
+          "sourceTrackId": "target-track-1"
+        },
+        {
+          "groupIndex": 1,
+          "t": 2,
+          "x": 0.8171,
+          "y": 0.7964,
+          "sourceTrackId": "target-track-1"
+        },
+        {
+          "groupIndex": 2,
+          "t": 0,
+          "x": 0.1541,
+          "y": 0.5148,
+          "sourceTrackId": "target-track-19"
+        },
+        {
+          "groupIndex": 2,
+          "t": 1.62,
+          "x": 0.1606,
+          "y": 0.6468,
+          "sourceTrackId": "target-track-19"
+        },
+        {
+          "groupIndex": 2,
+          "t": 2.87,
+          "x": 0.1606,
+          "y": 0.6468,
+          "sourceTrackId": "target-track-19"
+        },
+        {
+          "groupIndex": 3,
+          "t": 0,
+          "x": 0.7633,
+          "y": 0.1558,
+          "sourceTrackId": "target-track-31"
+        },
+        {
+          "groupIndex": 3,
+          "t": 0.75,
+          "x": 0.7323,
+          "y": 0.1518,
+          "sourceTrackId": "target-track-31"
+        },
+        {
+          "groupIndex": 3,
+          "t": 1.5,
+          "x": 0.8382,
+          "y": 0.2431,
+          "sourceTrackId": "target-track-31"
+        },
+        {
+          "groupIndex": 4,
+          "t": 0,
+          "x": 0.164,
+          "y": 0.1587,
+          "sourceTrackId": "target-track-51"
+        },
+        {
+          "groupIndex": 4,
+          "t": 0.75,
+          "x": 0.183,
+          "y": 0.1558,
+          "sourceTrackId": "target-track-51"
+        },
+        {
+          "groupIndex": 4,
+          "t": 1.25,
+          "x": 0.067,
+          "y": 0.1707,
+          "sourceTrackId": "target-track-51"
+        },
+        {
+          "groupIndex": 5,
+          "t": 0,
+          "x": 0.3822,
+          "y": 0.42,
+          "sourceTrackId": "target-track-57"
+        },
+        {
+          "groupIndex": 5,
+          "t": 0.5,
+          "x": 0.4303,
+          "y": 0.4588,
+          "sourceTrackId": "target-track-57"
+        },
+        {
+          "groupIndex": 5,
+          "t": 1,
+          "x": 0.4089,
+          "y": 0.4409,
+          "sourceTrackId": "target-track-57"
+        }
+      ],
+      "scoreWindows": [
+        {
+          "groupIndex": 1,
+          "expected": "score-window pending",
+          "shotOpportunity": 1
+        },
+        {
+          "groupIndex": 2,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.6529
+        },
+        {
+          "groupIndex": 3,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.325
+        },
+        {
+          "groupIndex": 4,
+          "expected": "score-window pending",
+          "shotOpportunity": 0
+        },
+        {
+          "groupIndex": 5,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.7292
+        }
+      ],
+      "eventAnchors": [
+        {
+          "groupIndex": 1,
+          "spawnOffsetS": 0,
+          "referenceTrackId": "target-track-1",
+          "targetTrackConfidence": 0.505,
+          "targetPathLength": 0.1037
+        },
+        {
+          "groupIndex": 2,
+          "spawnOffsetS": 1,
+          "referenceTrackId": "target-track-19",
+          "targetTrackConfidence": 0.754,
+          "targetPathLength": 0.194
+        },
+        {
+          "groupIndex": 3,
+          "spawnOffsetS": 2,
+          "referenceTrackId": "target-track-31",
+          "targetTrackConfidence": 0.73,
+          "targetPathLength": 0.136
+        },
+        {
+          "groupIndex": 4,
+          "spawnOffsetS": 3,
+          "referenceTrackId": "target-track-51",
+          "targetTrackConfidence": 0.672,
+          "targetPathLength": 0.1368
+        },
+        {
+          "groupIndex": 5,
+          "spawnOffsetS": 4,
+          "referenceTrackId": "target-track-57",
+          "targetTrackConfidence": 0.593,
+          "targetPathLength": 0.0893
+        }
+      ],
+      "variationControls": [
+        {
+          "groupIndex": 1,
+          "pathFamily": "yellow-diagonal-fan",
+          "speedScale": 2.65,
+          "arcAmp": 1.88,
+          "dropAmp": 1.6,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "crown"
+        },
+        {
+          "groupIndex": 2,
+          "pathFamily": "yellow-diagonal-fan",
+          "speedScale": 1.62,
+          "arcAmp": 1.88,
+          "dropAmp": 1.6,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "crown"
+        },
+        {
+          "groupIndex": 3,
+          "pathFamily": "yellow-diagonal-fan",
+          "speedScale": 2.4,
+          "arcAmp": 1.88,
+          "dropAmp": 1.6,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "crown"
+        },
+        {
+          "groupIndex": 4,
+          "pathFamily": "yellow-diagonal-fan",
+          "speedScale": 2.65,
+          "arcAmp": 1.88,
+          "dropAmp": 1.6,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "crown"
+        },
+        {
+          "groupIndex": 5,
+          "pathFamily": "yellow-diagonal-fan",
+          "speedScale": 2.65,
+          "arcAmp": 1.88,
+          "dropAmp": 1.6,
+          "lowerFieldBias": null,
+          "yOffset": 0,
+          "visualFamily": "crown"
+        }
+      ],
+      "measurement": {
+        "sourceArtifacts": [
+          "src/js/13-aurora-game-pack.js",
+          "reference-artifacts/ingestion/movement-grammar/movement-grammar-0.1.json",
+          "reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json",
+          "reference-artifacts/analyses/challenge-trajectory-controls/latest.json"
+        ],
+        "targetContractPresent": false,
+        "trajectoryControlsPresent": true,
+        "pathContractMatchScore10": null,
+        "referenceBackedGroupCount": 5,
+        "targetVideoObjectTrackFitScore10": 3,
+        "expectedScore10": 5.1,
+        "controlReadiness10": 8.4,
+        "seedDrift": [
+          {
+            "groupIndex": 1,
+            "authoredPathFamily": "yellow-diagonal-fan",
+            "trajectorySeedPathFamily": "yellow-fan-low-drift",
+            "differs": true
+          },
+          {
+            "groupIndex": 2,
+            "authoredPathFamily": "yellow-diagonal-fan",
+            "trajectorySeedPathFamily": "yellow-fan-cross-cut",
+            "differs": true
+          },
+          {
+            "groupIndex": 3,
+            "authoredPathFamily": "yellow-diagonal-fan",
+            "trajectorySeedPathFamily": "yellow-fan-cross-cut",
+            "differs": true
+          },
+          {
+            "groupIndex": 4,
+            "authoredPathFamily": "yellow-diagonal-fan",
+            "trajectorySeedPathFamily": "yellow-fan-cross-cut",
+            "differs": true
+          },
+          {
+            "groupIndex": 5,
+            "authoredPathFamily": "yellow-diagonal-fan",
+            "trajectorySeedPathFamily": "yellow-fan-cross-cut",
+            "differs": true
+          }
+        ],
+        "gaps": [
+          "No hand-authored target contract attached for this stage.",
+          "Authored runtime layout differs from trajectory-control seed on 5 group(s); analyzer seed should be refreshed after gameplay promotion."
+        ]
+      },
+      "designerRead": "Target-derived controls preserve 5 group schedule(s), path-family hint(s), speed scale(s), arc/drop scale(s), and lower-field bias(es) for stage 27. These are candidate inputs only until a sweep and full analyzer promote them.",
+      "nextImplementationStep": "No hand-authored target contract attached for this stage."
+    },
+    {
+      "id": "aurora-challenge-08-blue-purple-finale",
+      "appliesTo": "challenge-stage-set-piece",
+      "gameScope": {
+        "gameKey": "aurora-galactica",
+        "stage": 31,
+        "challengeNumber": 8,
+        "stageLabel": "Challenging Stage 8"
+      },
+      "runtimeLayout": {
+        "index": 7,
+        "challengeNumber": 8,
+        "fromStage": 31,
+        "id": "blue-purple-finale",
+        "pathFamily": "blue-purple-finale",
+        "groups": 5,
+        "enemiesPerGroup": 8,
+        "upperBandRatio": 0.4,
+        "spawnOffsetX": 86,
+        "waveSpacingY": 8,
+        "rowSpacingY": 7,
+        "waveDelay": 0.86,
+        "slotDelay": 0.07,
+        "arcAmp": 1.62,
+        "dropAmp": 1.26,
+        "lowerFieldBias": 48,
+        "groupSpawnOffsets": [],
+        "groupSpeedScales": [],
+        "groupArcAmps": [],
+        "groupDropAmps": [],
+        "groupLowerFieldBiases": [],
+        "groupYOffsets": [],
+        "laneTypes": [
+          "rogue",
+          "boss",
+          "bee",
+          "but",
+          "but",
+          "bee",
+          "boss",
+          "rogue"
+        ],
+        "groupLaneTypes": [
+          [
+            "rogue",
+            "boss",
+            "bee",
+            "but",
+            "but",
+            "bee",
+            "boss",
+            "rogue"
+          ],
+          [
+            "boss",
+            "rogue",
+            "but",
+            "bee",
+            "bee",
+            "but",
+            "rogue",
+            "boss"
+          ],
+          [
+            "bee",
+            "but",
+            "boss",
+            "rogue",
+            "rogue",
+            "boss",
+            "but",
+            "bee"
+          ],
+          [
+            "but",
+            "bee",
+            "rogue",
+            "boss",
+            "boss",
+            "rogue",
+            "bee",
+            "but"
+          ],
+          [
+            "boss",
+            "but",
+            "rogue",
+            "bee",
+            "bee",
+            "rogue",
+            "but",
+            "boss"
+          ]
+        ],
+        "groupVisualFamilies": [
+          "stingray",
+          "mosquito",
+          "stingray",
+          "mosquito",
+          "galboss"
+        ],
+        "groupPathFamilies": [
+          "blue-purple-finale",
+          "green-ladder-split",
+          "blue-purple-finale",
+          "yellow-diagonal-fan",
+          "blue-purple-finale"
+        ],
+        "groupReferencePathsIdentifier": null
+      },
+      "roleBindings": [
+        {
+          "groupIndex": 1,
+          "pathIntent": "blue-purple-finale",
+          "targetPathFamily": "blue-purple-finale",
+          "visualFamily": "stingray",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "rogue",
+            "boss",
+            "bee",
+            "but",
+            "but",
+            "bee",
+            "boss",
+            "rogue"
+          ],
+          "role": "runtime group 1",
+          "targetEntrySide": "center",
+          "targetExitSide": "center"
+        },
+        {
+          "groupIndex": 2,
+          "pathIntent": "green-ladder-split",
+          "targetPathFamily": "blue-purple-finale",
+          "visualFamily": "mosquito",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "boss",
+            "rogue",
+            "but",
+            "bee",
+            "bee",
+            "but",
+            "rogue",
+            "boss"
+          ],
+          "role": "runtime group 2",
+          "targetEntrySide": "right",
+          "targetExitSide": "center"
+        },
+        {
+          "groupIndex": 3,
+          "pathIntent": "blue-purple-finale",
+          "targetPathFamily": "blue-purple-finale",
+          "visualFamily": "stingray",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "bee",
+            "but",
+            "boss",
+            "rogue",
+            "rogue",
+            "boss",
+            "but",
+            "bee"
+          ],
+          "role": "runtime group 3",
+          "targetEntrySide": "left",
+          "targetExitSide": "center"
+        },
+        {
+          "groupIndex": 4,
+          "pathIntent": "yellow-diagonal-fan",
+          "targetPathFamily": "blue-purple-finale",
+          "visualFamily": "mosquito",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "but",
+            "bee",
+            "rogue",
+            "boss",
+            "boss",
+            "rogue",
+            "bee",
+            "but"
+          ],
+          "role": "runtime group 4",
+          "targetEntrySide": "center",
+          "targetExitSide": "center"
+        },
+        {
+          "groupIndex": 5,
+          "pathIntent": "blue-purple-finale",
+          "targetPathFamily": "blue-purple-finale",
+          "visualFamily": "galboss",
+          "targetVisualFamily": null,
+          "laneTypes": [
+            "boss",
+            "but",
+            "rogue",
+            "bee",
+            "bee",
+            "rogue",
+            "but",
+            "boss"
+          ],
+          "role": "runtime group 5",
+          "targetEntrySide": "center",
+          "targetExitSide": "center"
+        }
+      ],
+      "phaseTimeline": [
+        {
+          "groupIndex": 1,
+          "authoredSpawnOffsetS": 0,
+          "targetVisibleStartS": 1,
+          "targetVisibleEndS": 3,
+          "targetDurationS": 2
+        },
+        {
+          "groupIndex": 2,
+          "authoredSpawnOffsetS": 0.86,
+          "targetVisibleStartS": 2.38,
+          "targetVisibleEndS": 5.25,
+          "targetDurationS": 2.87
+        },
+        {
+          "groupIndex": 3,
+          "authoredSpawnOffsetS": 1.72,
+          "targetVisibleStartS": 5.38,
+          "targetVisibleEndS": 10.13,
+          "targetDurationS": 4.75
+        },
+        {
+          "groupIndex": 4,
+          "authoredSpawnOffsetS": 2.58,
+          "targetVisibleStartS": 10.75,
+          "targetVisibleEndS": 15.38,
+          "targetDurationS": 4.63
+        },
+        {
+          "groupIndex": 5,
+          "authoredSpawnOffsetS": 3.44,
+          "targetVisibleStartS": 13.5,
+          "targetVisibleEndS": 15.88,
+          "targetDurationS": 2.38
+        }
+      ],
+      "controlPoints": [
+        {
+          "groupIndex": 1,
+          "t": 0,
+          "x": 0.5738,
+          "y": 0.1605,
+          "sourceTrackId": "target-track-7"
+        },
+        {
+          "groupIndex": 1,
+          "t": 0.87,
+          "x": 0.4732,
+          "y": 0.2836,
+          "sourceTrackId": "target-track-7"
+        },
+        {
+          "groupIndex": 1,
+          "t": 1.62,
+          "x": 0.5779,
+          "y": 0.2474,
+          "sourceTrackId": "target-track-7"
+        },
+        {
+          "groupIndex": 2,
+          "t": 0,
+          "x": 0.5697,
+          "y": 0.3753,
+          "sourceTrackId": "target-track-23"
+        },
+        {
+          "groupIndex": 2,
+          "t": 1.37,
+          "x": 0.4382,
+          "y": 0.6259,
+          "sourceTrackId": "target-track-23"
+        },
+        {
+          "groupIndex": 2,
+          "t": 2.37,
+          "x": 0.438,
+          "y": 0.6248,
+          "sourceTrackId": "target-track-23"
+        },
+        {
+          "groupIndex": 3,
+          "t": 0,
+          "x": 0.4131,
+          "y": 0.523,
+          "sourceTrackId": "target-track-45"
+        },
+        {
+          "groupIndex": 3,
+          "t": 1.37,
+          "x": 0.4441,
+          "y": 0.6174,
+          "sourceTrackId": "target-track-45"
+        },
+        {
+          "groupIndex": 3,
+          "t": 2.5,
+          "x": 0.3834,
+          "y": 0.5276,
+          "sourceTrackId": "target-track-45"
+        },
+        {
+          "groupIndex": 4,
+          "t": 0,
+          "x": 0.556,
+          "y": 0.4221,
+          "sourceTrackId": "target-track-89"
+        },
+        {
+          "groupIndex": 4,
+          "t": 1.5,
+          "x": 0.4526,
+          "y": 0.6315,
+          "sourceTrackId": "target-track-89"
+        },
+        {
+          "groupIndex": 4,
+          "t": 2.5,
+          "x": 0.4147,
+          "y": 0.6509,
+          "sourceTrackId": "target-track-89"
+        },
+        {
+          "groupIndex": 5,
+          "t": 0,
+          "x": 0.4659,
+          "y": 0.6401,
+          "sourceTrackId": "target-track-93"
+        },
+        {
+          "groupIndex": 5,
+          "t": 1.13,
+          "x": 0.3796,
+          "y": 0.6409,
+          "sourceTrackId": "target-track-93"
+        },
+        {
+          "groupIndex": 5,
+          "t": 1.75,
+          "x": 0.3796,
+          "y": 0.6409,
+          "sourceTrackId": "target-track-93"
+        }
+      ],
+      "scoreWindows": [
+        {
+          "groupIndex": 1,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.0556
+        },
+        {
+          "groupIndex": 2,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.6667
+        },
+        {
+          "groupIndex": 3,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.8867
+        },
+        {
+          "groupIndex": 4,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.393
+        },
+        {
+          "groupIndex": 5,
+          "expected": "score-window pending",
+          "shotOpportunity": 0.425
+        }
+      ],
+      "eventAnchors": [
+        {
+          "groupIndex": 1,
+          "spawnOffsetS": 0,
+          "referenceTrackId": "target-track-7",
+          "targetTrackConfidence": 0.697,
+          "targetPathLength": 0.1636
+        },
+        {
+          "groupIndex": 2,
+          "spawnOffsetS": 0.86,
+          "referenceTrackId": "target-track-23",
+          "targetTrackConfidence": 0.655,
+          "targetPathLength": 0.1554
+        },
+        {
+          "groupIndex": 3,
+          "spawnOffsetS": 1.72,
+          "referenceTrackId": "target-track-45",
+          "targetTrackConfidence": 0.75,
+          "targetPathLength": 0.2085
+        },
+        {
+          "groupIndex": 4,
+          "spawnOffsetS": 2.58,
+          "referenceTrackId": "target-track-89",
+          "targetTrackConfidence": 0.73,
+          "targetPathLength": 0.1542
+        },
+        {
+          "groupIndex": 5,
+          "spawnOffsetS": 3.44,
+          "referenceTrackId": "target-track-93",
+          "targetTrackConfidence": 0.722,
+          "targetPathLength": 0.1095
+        }
+      ],
+      "variationControls": [
+        {
+          "groupIndex": 1,
+          "pathFamily": "blue-purple-finale",
+          "speedScale": 2.65,
+          "arcAmp": 1.62,
+          "dropAmp": 1.26,
+          "lowerFieldBias": 48,
+          "yOffset": 0,
+          "visualFamily": "stingray"
+        },
+        {
+          "groupIndex": 2,
+          "pathFamily": "green-ladder-split",
+          "speedScale": 2.4,
+          "arcAmp": 1.62,
+          "dropAmp": 1.26,
+          "lowerFieldBias": 48,
+          "yOffset": 0,
+          "visualFamily": "mosquito"
+        },
+        {
+          "groupIndex": 3,
+          "pathFamily": "blue-purple-finale",
+          "speedScale": 1.45,
+          "arcAmp": 1.62,
+          "dropAmp": 1.26,
+          "lowerFieldBias": 48,
+          "yOffset": 0,
+          "visualFamily": "stingray"
+        },
+        {
+          "groupIndex": 4,
+          "pathFamily": "yellow-diagonal-fan",
+          "speedScale": 1.49,
+          "arcAmp": 1.62,
+          "dropAmp": 1.26,
+          "lowerFieldBias": 48,
+          "yOffset": 0,
+          "visualFamily": "mosquito"
+        },
+        {
+          "groupIndex": 5,
+          "pathFamily": "blue-purple-finale",
+          "speedScale": 2.65,
+          "arcAmp": 1.62,
+          "dropAmp": 1.26,
+          "lowerFieldBias": 48,
+          "yOffset": 0,
+          "visualFamily": "galboss"
+        }
+      ],
+      "measurement": {
+        "sourceArtifacts": [
+          "src/js/13-aurora-game-pack.js",
+          "reference-artifacts/ingestion/movement-grammar/movement-grammar-0.1.json",
+          "reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json",
+          "reference-artifacts/analyses/challenge-trajectory-controls/latest.json"
+        ],
+        "targetContractPresent": false,
+        "trajectoryControlsPresent": true,
+        "pathContractMatchScore10": null,
+        "referenceBackedGroupCount": 5,
+        "targetVideoObjectTrackFitScore10": 2.9,
+        "expectedScore10": 6,
+        "controlReadiness10": 8.7,
+        "seedDrift": [
+          {
+            "groupIndex": 2,
+            "authoredPathFamily": "green-ladder-split",
+            "trajectorySeedPathFamily": "blue-purple-finale",
+            "differs": true
+          },
+          {
+            "groupIndex": 4,
+            "authoredPathFamily": "yellow-diagonal-fan",
+            "trajectorySeedPathFamily": "blue-purple-finale",
+            "differs": true
+          }
+        ],
+        "gaps": [
+          "No hand-authored target contract attached for this stage.",
+          "Authored runtime layout differs from trajectory-control seed on 2 group(s); analyzer seed should be refreshed after gameplay promotion."
+        ]
+      },
+      "designerRead": "Target-derived controls preserve 5 group schedule(s), path-family hint(s), speed scale(s), arc/drop scale(s), and lower-field bias(es) for stage 31. These are candidate inputs only until a sweep and full analyzer promote them.",
+      "nextImplementationStep": "No hand-authored target contract attached for this stage."
+    }
+  ],
+  "nextBestStep": "Build a compiler bridge for one challenge row, prove it round-trips to the current runtime fields, then use that bridge to make Stage 7 movement changes safer."
+}

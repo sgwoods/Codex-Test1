@@ -1,0 +1,729 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "platinum-movement-grammar-plan",
+  "generatedAt": "2026-05-31T00:00:00.000Z",
+  "status": "active-stage7-pilot",
+  "title": "Platinum Movement Grammar",
+  "summary": "Define one reusable movement grammar for inferred target motion, authored runtime choreography, conformance scoring, and creative variation across Aurora, Galaxy Guardians, and future games.",
+  "problem": "Movement conformance is currently split across Aurora challenge layouts, regular-stage entry helpers, dive logic, escort/capture code, Galaxy Guardians runtime rules, and ingestion analyzers. This makes single-stage tuning possible but makes source-derived variation and multi-game reuse unnecessarily hard.",
+  "principles": [
+    {
+      "id": "one-grammar-many-surfaces",
+      "label": "One grammar, many gameplay surfaces",
+      "meaning": "Challenge stages, normal entries, dives, escorts, capture/rescue, and wrap/return should share a movement vocabulary even when their gameplay rules differ."
+    },
+    {
+      "id": "reference-first-runtime-second",
+      "label": "Reference first, runtime second",
+      "meaning": "Ingested target video object tracks should become grammar candidates before runtime code is changed."
+    },
+    {
+      "id": "conforming-and-creative-lanes",
+      "label": "Conforming and creative lanes",
+      "meaning": "The same grammar should support a strict reference-conformance lane and Aurora-owned production theme variations."
+    },
+    {
+      "id": "compile-dont-copy",
+      "label": "Compile, do not copy",
+      "meaning": "Game packs should declare movement contracts. Runtime code should compile those contracts into actual positions, events, and animation phases."
+    },
+    {
+      "id": "score-meaning-and-motion",
+      "label": "Score meaning and motion",
+      "meaning": "A pattern is successful only if object tracks, player meaning, safety, score opportunity, sprite phase, and event cues all line up."
+    }
+  ],
+  "coordinateSystem": {
+    "space": "normalized-playfield",
+    "x": "0.0 left edge to 1.0 right edge",
+    "y": "0.0 top edge to 1.0 bottom edge",
+    "time": "seconds from pattern first-visible time",
+    "orientation": "degrees or named pose family; runtime compilers may quantize to sprite pose frames",
+    "scale": "relative to role default sprite scale"
+  },
+  "motionSurfaces": [
+    {
+      "id": "regular-formation-entry",
+      "label": "Regular Formation Entry",
+      "currentCodeAnchors": [
+        "src/js/09-stage-flow.js regularEntryPathFamily()",
+        "src/js/06-enemy-behavior.js updateEnemy() entryFamily branches"
+      ],
+      "playerMeaning": "The player reads stage identity, opening danger, rack settle timing, and first shot opportunities from the entry pattern.",
+      "mustSupport": [
+        "entry side",
+        "rack target",
+        "settle time",
+        "group order",
+        "path length",
+        "turn count",
+        "first attack timing"
+      ]
+    },
+    {
+      "id": "challenge-stage-set-piece",
+      "label": "Challenge Stage Set Piece",
+      "currentCodeAnchors": [
+        "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_LAYOUTS",
+        "src/js/09-stage-flow.js spawnChallenge()",
+        "src/js/06-enemy-behavior.js updateChallengeEnemy()"
+      ],
+      "playerMeaning": "The player should experience a safe, learnable, visually memorable bonus exhibition with fresh alien and path novelty.",
+      "mustSupport": [
+        "five group structure",
+        "group spawn offsets",
+        "scoreable upper-band window",
+        "entry side",
+        "exit side",
+        "group visual family",
+        "target object-track fit",
+        "perfect-bonus opportunity"
+      ]
+    },
+    {
+      "id": "dive-attack",
+      "label": "Dive Attack",
+      "currentCodeAnchors": [
+        "src/js/06-enemy-behavior.js updateEnemy() dive states",
+        "src/js/00-boot.js STAGE_RULES flight tuning"
+      ],
+      "playerMeaning": "The player reads pressure, aiming threat, shot risk, and lower-field danger from dive shape and timing.",
+      "mustSupport": [
+        "dive start state",
+        "aim target",
+        "side drift",
+        "acceleration",
+        "shot timing",
+        "bottom exit",
+        "return or wrap behavior"
+      ]
+    },
+    {
+      "id": "boss-escort-squadron",
+      "label": "Boss Escort Squadron",
+      "currentCodeAnchors": [
+        "src/js/07-capture-rescue.js assignEscorts()",
+        "src/js/06-enemy-behavior.js dive===5 escort tracking",
+        "src/js/13-galaxy-guardians-runtime.js startGuardiansDive()"
+      ],
+      "playerMeaning": "The player reads high-value reward windows and danger escalation from boss-led escort relationships.",
+      "mustSupport": [
+        "leader",
+        "escort count",
+        "escort offsets",
+        "escort lag",
+        "linked path",
+        "reward window",
+        "audio cue anchor"
+      ]
+    },
+    {
+      "id": "capture-rescue-return",
+      "label": "Capture, Rescue, And Return",
+      "currentCodeAnchors": [
+        "src/js/07-capture-rescue.js",
+        "src/js/05-player-combat.js capture and rescue hit handling"
+      ],
+      "playerMeaning": "The player must understand capture danger, rescue timing, carried-fighter state, and dual-fighter reward.",
+      "mustSupport": [
+        "tractor beam phase",
+        "capture retreat",
+        "carried fighter offset",
+        "rescue join path",
+        "dual-fighter transition",
+        "failure escape"
+      ]
+    },
+    {
+      "id": "theme-variant-motion",
+      "label": "Theme Variant Motion",
+      "currentCodeAnchors": [
+        "src/js/13-aurora-game-pack.js stage theme progression",
+        "src/js/13-galaxy-guardians-runtime.js runtime rules"
+      ],
+      "playerMeaning": "Creative variants should feel distinct while preserving era, readability, and gameplay role meaning.",
+      "mustSupport": [
+        "mirror",
+        "phase offset",
+        "speed scale",
+        "path exaggeration",
+        "group density",
+        "visual family override",
+        "background synchronization"
+      ]
+    }
+  ],
+  "patternSchema": {
+    "requiredFields": [
+      "id",
+      "appliesTo",
+      "gameScope",
+      "roleBindings",
+      "phaseTimeline",
+      "controlPoints",
+      "scoreWindows",
+      "eventAnchors",
+      "variationControls",
+      "measurement"
+    ],
+    "fields": [
+      {
+        "id": "id",
+        "type": "string",
+        "required": true,
+        "meaning": "Stable pattern identifier used by ingestion, game packs, runtime compiler, and conformance reports."
+      },
+      {
+        "id": "appliesTo",
+        "type": "enum",
+        "required": true,
+        "values": [
+          "regular-formation-entry",
+          "challenge-stage-set-piece",
+          "dive-attack",
+          "boss-escort-squadron",
+          "capture-rescue-return",
+          "theme-variant-motion"
+        ],
+        "meaning": "Gameplay surface this pattern controls."
+      },
+      {
+        "id": "gameScope",
+        "type": "object",
+        "required": true,
+        "meaning": "Game key, stage range, challenge number, theme lane, and release lane where this pattern is valid."
+      },
+      {
+        "id": "roleBindings",
+        "type": "array",
+        "required": true,
+        "meaning": "Maps lanes, groups, or entities to roles such as bee, butterfly, boss, specialty alien, escort, player, or projectile."
+      },
+      {
+        "id": "phaseTimeline",
+        "type": "array",
+        "required": true,
+        "meaning": "Named phases such as first-visible, path-commit, scoreable, dive, beam, exit, return, settle, and result."
+      },
+      {
+        "id": "controlPoints",
+        "type": "array",
+        "required": true,
+        "meaning": "Normalized keyframes or sampled path points. Compilers may preserve raw points or fit a spline."
+      },
+      {
+        "id": "scoreWindows",
+        "type": "array",
+        "required": true,
+        "meaning": "Player-facing opportunity windows such as upper-band scoring, boss reward, rescue shot, or safe evade interval."
+      },
+      {
+        "id": "eventAnchors",
+        "type": "array",
+        "required": true,
+        "meaning": "Semantic events tied to motion phases, including audio cues, commentator callouts, score events, and harness logs."
+      },
+      {
+        "id": "variationControls",
+        "type": "object",
+        "required": true,
+        "meaning": "Allowed safe transformations for theme variants and candidate sweeps."
+      },
+      {
+        "id": "measurement",
+        "type": "object",
+        "required": true,
+        "meaning": "Target object-track source, confidence, metrics, conformance gates, and known limitations."
+      }
+    ]
+  },
+  "compilerTargets": [
+    {
+      "id": "aurora-current-runtime",
+      "label": "Aurora Current Runtime Fields",
+      "outputs": [
+        "groupPathFamilies",
+        "groupReferencePaths",
+        "groupSpawnOffsets",
+        "groupSpeedScales",
+        "groupArcAmps",
+        "groupDropAmps",
+        "groupLowerFieldBiases",
+        "groupYOffsets",
+        "regular entry pathFamily",
+        "dive state tuning"
+      ],
+      "status": "bridge-proven"
+    },
+    {
+      "id": "future-pattern-runtime",
+      "label": "Future Direct Pattern Runtime",
+      "outputs": [
+        "sampled path evaluator",
+        "spline evaluator",
+        "phase event dispatcher",
+        "sprite pose clock",
+        "score-window detector",
+        "variant transformer"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "documentation-and-dashboard",
+      "label": "Documentation And Dashboard",
+      "outputs": [
+        "human-readable pattern table",
+        "target-vs-current trajectory diagram",
+        "compute cost per pattern improvement",
+        "release readiness gates"
+      ],
+      "status": "active"
+    }
+  ],
+  "samplePatterns": [
+    {
+      "id": "aurora-stage7-challenge2-cross-sweep-contract",
+      "appliesTo": "challenge-stage-set-piece",
+      "gameScope": {
+        "gameKey": "aurora-galactica",
+        "stage": 7,
+        "challengeNumber": 2,
+        "lane": "reference-conformance"
+      },
+      "roleBindings": [
+        {
+          "group": 1,
+          "roles": [
+            "bee",
+            "butterfly",
+            "boss",
+            "specialty"
+          ],
+          "visualFamily": "classic",
+          "pathIntent": "cross-sweep"
+        },
+        {
+          "group": 2,
+          "roles": [
+            "bee",
+            "butterfly",
+            "boss",
+            "specialty"
+          ],
+          "visualFamily": "scorpion",
+          "pathIntent": "cross-sweep"
+        },
+        {
+          "group": 3,
+          "roles": [
+            "bee",
+            "butterfly",
+            "boss",
+            "specialty"
+          ],
+          "visualFamily": "scorpion",
+          "pathIntent": "hook-arc"
+        },
+        {
+          "group": 4,
+          "roles": [
+            "bee",
+            "butterfly",
+            "boss",
+            "specialty"
+          ],
+          "visualFamily": "stingray",
+          "pathIntent": "hook-arc"
+        },
+        {
+          "group": 5,
+          "roles": [
+            "bee",
+            "butterfly",
+            "boss",
+            "specialty"
+          ],
+          "visualFamily": "stingray",
+          "pathIntent": "boss-led-loop"
+        }
+      ],
+      "phaseTimeline": [
+        {
+          "phase": "first-visible",
+          "timeS": 0.8
+        },
+        {
+          "phase": "path-commit",
+          "timeS": 1.6
+        },
+        {
+          "phase": "scoreable-upper-band",
+          "timeS": 2
+        },
+        {
+          "phase": "exit",
+          "timeS": 13
+        }
+      ],
+      "controlPoints": [
+        {
+          "t": 0,
+          "x": 0.08,
+          "y": 0.12,
+          "group": 1
+        },
+        {
+          "t": 2.4,
+          "x": 0.5,
+          "y": 0.22,
+          "group": 1
+        },
+        {
+          "t": 5.2,
+          "x": 0.92,
+          "y": 0.48,
+          "group": 1
+        }
+      ],
+      "scoreWindows": [
+        {
+          "id": "wide-crossing-lanes",
+          "startS": 2,
+          "endS": 7.4,
+          "meaning": "Player can learn the safe upper-band firing lane before the groups exit."
+        }
+      ],
+      "eventAnchors": [
+        {
+          "timeS": 0.8,
+          "event": "challenge_wave_start"
+        },
+        {
+          "timeS": 2,
+          "event": "score_window_open"
+        },
+        {
+          "timeS": 13,
+          "event": "challenge_group_exit"
+        }
+      ],
+      "variationControls": {
+        "mirror": true,
+        "phaseOffsetS": [
+          -0.4,
+          0.4
+        ],
+        "speedScale": [
+          0.85,
+          1.18
+        ],
+        "pathScale": [
+          0.9,
+          1.12
+        ],
+        "visualFamilyOverride": true
+      },
+      "measurement": {
+        "sourceArtifacts": [
+          "reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/latest.json",
+          "reference-artifacts/analyses/challenge-trajectory-controls/latest.json"
+        ],
+        "currentRuntimeAnchors": [
+          "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_LAYOUTS",
+          "src/js/06-enemy-behavior.js applyReferenceChallengePath()"
+        ],
+        "confidence": "medium",
+        "limitations": [
+          "Sample points are illustrative until the compiler maps full target object tracks.",
+          "Current runtime still applies per-lane offsets and fallback path-family logic."
+        ]
+      }
+    },
+    {
+      "id": "aurora-regular-stage8-flank-entry-contract",
+      "appliesTo": "regular-formation-entry",
+      "gameScope": {
+        "gameKey": "aurora-galactica",
+        "stageBand": "mid",
+        "fromStage": 8,
+        "lane": "reference-conformance"
+      },
+      "roleBindings": [
+        {
+          "rows": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "roles": [
+            "boss",
+            "butterfly",
+            "bee"
+          ],
+          "pathIntent": "wide-flank-entry"
+        }
+      ],
+      "phaseTimeline": [
+        {
+          "phase": "first-visible",
+          "timeS": 0
+        },
+        {
+          "phase": "rack-target-commit",
+          "timeS": 1.4
+        },
+        {
+          "phase": "formation-settle",
+          "timeS": 2.4
+        },
+        {
+          "phase": "first-attack-eligible",
+          "timeS": 3.8
+        }
+      ],
+      "controlPoints": [
+        {
+          "t": 0,
+          "x": 0.95,
+          "y": 0.1
+        },
+        {
+          "t": 1.2,
+          "x": 0.62,
+          "y": 0.22
+        },
+        {
+          "t": 2.4,
+          "x": 0.5,
+          "y": 0.18
+        }
+      ],
+      "scoreWindows": [
+        {
+          "id": "formation-entry-readability",
+          "startS": 0,
+          "endS": 2.8,
+          "meaning": "Player can see the rack forming instead of aliens appearing without authored motion."
+        }
+      ],
+      "eventAnchors": [
+        {
+          "timeS": 0,
+          "event": "formation_entry_start"
+        },
+        {
+          "timeS": 2.4,
+          "event": "formation_settle"
+        }
+      ],
+      "variationControls": {
+        "mirror": true,
+        "phaseOffsetS": [
+          -0.25,
+          0.25
+        ],
+        "speedScale": [
+          0.9,
+          1.1
+        ],
+        "pathScale": [
+          0.92,
+          1.08
+        ],
+        "visualFamilyOverride": true
+      },
+      "measurement": {
+        "sourceArtifacts": [
+          "reference-artifacts/analyses/galaga-path-reference-labels/latest.json",
+          "reference-artifacts/analyses/formation-boss-path-family-comparison/latest.json",
+          "reference-artifacts/analyses/stage-signature-distance/latest.json"
+        ],
+        "currentRuntimeAnchors": [
+          "src/js/09-stage-flow.js regularEntryPathFamily()",
+          "src/js/06-enemy-behavior.js updateEnemy() entryFamily branches"
+        ],
+        "confidence": "low-medium",
+        "limitations": [
+          "Regular-stage object-track targets are less complete than challenge-stage tracks.",
+          "This row is a pilot candidate, not a promoted runtime change."
+        ]
+      }
+    },
+    {
+      "id": "platform-boss-escort-dive-contract",
+      "appliesTo": "boss-escort-squadron",
+      "gameScope": {
+        "gameKey": "platform",
+        "stageBand": "mid-to-late",
+        "lane": "shared-runtime"
+      },
+      "roleBindings": [
+        {
+          "leader": "boss",
+          "escorts": [
+            "butterfly",
+            "butterfly"
+          ],
+          "pathIntent": "leader-linked-escort-dive"
+        }
+      ],
+      "phaseTimeline": [
+        {
+          "phase": "leader-dive-start",
+          "timeS": 0
+        },
+        {
+          "phase": "escort-join",
+          "timeS": 0.12
+        },
+        {
+          "phase": "reward-window",
+          "timeS": 1.2
+        },
+        {
+          "phase": "lower-field-pass",
+          "timeS": 2.4
+        }
+      ],
+      "controlPoints": [
+        {
+          "t": 0,
+          "x": 0.5,
+          "y": 0.2
+        },
+        {
+          "t": 1.2,
+          "x": 0.44,
+          "y": 0.54
+        },
+        {
+          "t": 2.4,
+          "x": 0.58,
+          "y": 1.06
+        }
+      ],
+      "scoreWindows": [
+        {
+          "id": "boss-escort-reward",
+          "startS": 0.9,
+          "endS": 2.2,
+          "meaning": "Skilled player can convert a recognizable high-value escort attack."
+        }
+      ],
+      "eventAnchors": [
+        {
+          "timeS": 0,
+          "event": "enemy_dive_start"
+        },
+        {
+          "timeS": 0.12,
+          "event": "escort_dive_start"
+        },
+        {
+          "timeS": 1.2,
+          "event": "reward_window_open"
+        }
+      ],
+      "variationControls": {
+        "mirror": true,
+        "phaseOffsetS": [
+          -0.18,
+          0.18
+        ],
+        "speedScale": [
+          0.88,
+          1.16
+        ],
+        "pathScale": [
+          0.9,
+          1.1
+        ],
+        "visualFamilyOverride": true
+      },
+      "measurement": {
+        "sourceArtifacts": [
+          "reference-artifacts/analyses/level-arc-outcome-windows/latest.json",
+          "reference-artifacts/analyses/formation-boss-grammar-conformance/latest.json"
+        ],
+        "currentRuntimeAnchors": [
+          "src/js/07-capture-rescue.js assignEscorts()",
+          "src/js/13-galaxy-guardians-runtime.js startGuardiansDive()"
+        ],
+        "confidence": "low",
+        "limitations": [
+          "This shared pattern still needs direct Galaga and Galaxian-family target windows.",
+          "Escort scoring and player route evidence must remain game-owned."
+        ]
+      }
+    }
+  ],
+  "migrationPlan": [
+    {
+      "step": 1,
+      "label": "Validated schema artifact",
+      "status": "complete",
+      "target": "Keep this artifact stable and checked by harness:check:movement-grammar."
+    },
+    {
+      "step": 2,
+      "label": "Aurora challenge layout mapping",
+      "status": "complete",
+      "target": "Generated 8 read-only Aurora challenge grammar map rows with 40/40 reference-backed groups."
+    },
+    {
+      "step": 3,
+      "label": "Compiler bridge",
+      "status": "complete",
+      "target": "Compiler bridge round-trips current Aurora challenge runtime fields at 10/10."
+    },
+    {
+      "step": 4,
+      "label": "Stage 7 pilot",
+      "status": "current",
+      "target": "Stage 7 now best-matches challenge-2-arrival-group-1 and measures 5/5 target groups after the challenge timer fix; score is 4.3/10 overall, movement 4.6/10, and target-video object-track fit 4.6/10."
+    },
+    {
+      "step": 5,
+      "label": "Regular entry pilot",
+      "status": "next",
+      "target": "Map and then improve one normal-stage entry so the same grammar helps main-level novelty."
+    },
+    {
+      "step": 6,
+      "label": "Ingestion compiler output",
+      "status": "planned",
+      "target": "Emit grammar candidates directly from object-track ingestion and candidate sweep loops."
+    },
+    {
+      "step": 7,
+      "label": "Variant lane",
+      "status": "planned",
+      "target": "Support conforming-lane and Aurora-theme variations from the same movement contract."
+    }
+  ],
+  "successCriteria": [
+    {
+      "id": "schema-check",
+      "target": "harness:check:movement-grammar passes and fails on missing required surfaces or fields."
+    },
+    {
+      "id": "challenge-stage-lift",
+      "target": "Challenge-stage movement and target-video object-track scores improve without reducing safety."
+    },
+    {
+      "id": "regular-entry-lift",
+      "target": "At least one normal-stage entry uses grammar mapping and improves stage distinctiveness."
+    },
+    {
+      "id": "ingestion-reuse",
+      "target": "Target object-track ingestion can emit grammar candidates used by Aurora and at least one second game."
+    },
+    {
+      "id": "theme-variation",
+      "target": "A conforming-lane pattern and creative-theme variant can be compared as different outputs from the same source grammar."
+    }
+  ],
+  "nextBestStep": "Use per-group target evidence to improve Stage 7 path-contract precision, then apply the same grammar loop to one regular formation-entry pilot."
+}

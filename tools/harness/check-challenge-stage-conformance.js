@@ -126,6 +126,15 @@ for(const stage of REQUIRED_STAGES){
   }
   const trackedReference = TRACKED_REFERENCE_TARGETS.get(stage);
   const trackedReferences = Array.isArray(trackedReference) ? trackedReference : (trackedReference ? [trackedReference] : []);
+  if(trackedReferences.length){
+    const perGroupRows = Array.isArray(row.perGroupMovementRows) ? row.perGroupMovementRows : [];
+    if(!perGroupRows.length){
+      fail(`stage ${stage} is missing per-group movement rows for its tracked reference target`, { trackedReference: trackedReferences, row });
+    }
+    if(!Number.isFinite(+row.measuredObjectTrackCount) || !Number.isFinite(+row.missingObjectTrackCount)){
+      fail(`stage ${stage} is missing measured/missing object-track counts`, { trackedReference: trackedReferences, row });
+    }
+  }
   if(trackedReferences.length && !trackedReferences.includes(row.bestReferenceMatch?.labelId)){
     if(!row.criticalGaps.some(gap => trackedReferences.some(ref => String(gap).includes(ref)) || String(gap).includes('Best reference match'))){
       fail(`stage ${stage} reference miss is not represented as a critical gap`, { trackedReference: trackedReferences, row });

@@ -91,6 +91,9 @@ const AURORA_SPRITE_MOTION_CORRESPONDENCE = path.join(ROOT, 'reference-artifacts
 const AURORA_RUNTIME_VS_GALAGA_TARGET_CROPS = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-runtime-vs-galaga-target-crops', 'latest.json');
 const AURORA_IMPACT_EXPLOSION_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-impact-explosion-conformance', 'latest.json');
 const SPRITE_CONFORMANCE_VARIATION_PLAN = path.join(ROOT, 'reference-artifacts', 'ingestion', 'sprite-conformance-variation-plan', 'plan-0.1.json');
+const MOVEMENT_GRAMMAR_PLAN = path.join(ROOT, 'reference-artifacts', 'ingestion', 'movement-grammar', 'movement-grammar-0.1.json');
+const AURORA_CHALLENGE_MOVEMENT_GRAMMAR_MAP = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-challenge-movement-grammar-map', 'latest.json');
+const MOVEMENT_GRAMMAR_COMPILER_BRIDGE = path.join(ROOT, 'reference-artifacts', 'analyses', 'movement-grammar-compiler-bridge', 'latest.json');
 const PERSONA_PERFORMANCE_DISTRIBUTION = path.join(ROOT, 'reference-artifacts', 'analyses', 'persona-performance-distribution', 'latest.json');
 const CATALOG_MEDIA_SOURCE_PATHS = new Set();
 let ACTIVE_SOURCE_BLOB_BASE = 'https://github.com/sgwoods/Codex-Test1/blob/main/';
@@ -3291,6 +3294,9 @@ let auroraSpriteMotionCorrespondenceCache = null;
 let auroraRuntimeVsGalagaTargetCropsCache = null;
 let auroraImpactExplosionConformanceCache = null;
 let spriteConformanceVariationPlanCache = null;
+let movementGrammarPlanCache = null;
+let auroraChallengeMovementGrammarMapCache = null;
+let movementGrammarCompilerBridgeCache = null;
 
 function loadGalagaReferenceSpriteTargets(){
   if(galagaReferenceSpriteTargetsCache) return galagaReferenceSpriteTargetsCache;
@@ -3546,6 +3552,64 @@ function loadSpriteConformanceVariationPlan(){
     spriteConformanceVariationPlanCache = { lanes: [], pipelineSteps: [], successCriteria: [], artifacts: [], principles: [] };
   }
   return spriteConformanceVariationPlanCache;
+}
+
+function loadMovementGrammarPlan(){
+  if(movementGrammarPlanCache) return movementGrammarPlanCache;
+  if(!fs.existsSync(MOVEMENT_GRAMMAR_PLAN)){
+    movementGrammarPlanCache = { motionSurfaces: [], compilerTargets: [], samplePatterns: [], migrationPlan: [], successCriteria: [], principles: [] };
+    return movementGrammarPlanCache;
+  }
+  try {
+    const artifact = readJson(MOVEMENT_GRAMMAR_PLAN);
+    movementGrammarPlanCache = Object.assign({}, artifact, {
+      motionSurfaces: Array.isArray(artifact.motionSurfaces) ? artifact.motionSurfaces : [],
+      compilerTargets: Array.isArray(artifact.compilerTargets) ? artifact.compilerTargets : [],
+      samplePatterns: Array.isArray(artifact.samplePatterns) ? artifact.samplePatterns : [],
+      migrationPlan: Array.isArray(artifact.migrationPlan) ? artifact.migrationPlan : [],
+      successCriteria: Array.isArray(artifact.successCriteria) ? artifact.successCriteria : [],
+      principles: Array.isArray(artifact.principles) ? artifact.principles : []
+    });
+  } catch (err) {
+    movementGrammarPlanCache = { motionSurfaces: [], compilerTargets: [], samplePatterns: [], migrationPlan: [], successCriteria: [], principles: [] };
+  }
+  return movementGrammarPlanCache;
+}
+
+function loadAuroraChallengeMovementGrammarMap(){
+  if(auroraChallengeMovementGrammarMapCache) return auroraChallengeMovementGrammarMapCache;
+  if(!fs.existsSync(AURORA_CHALLENGE_MOVEMENT_GRAMMAR_MAP)){
+    auroraChallengeMovementGrammarMapCache = { patterns: [], summary: {} };
+    return auroraChallengeMovementGrammarMapCache;
+  }
+  try {
+    const artifact = readJson(AURORA_CHALLENGE_MOVEMENT_GRAMMAR_MAP);
+    auroraChallengeMovementGrammarMapCache = Object.assign({}, artifact, {
+      patterns: Array.isArray(artifact.patterns) ? artifact.patterns : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    auroraChallengeMovementGrammarMapCache = { patterns: [], summary: {} };
+  }
+  return auroraChallengeMovementGrammarMapCache;
+}
+
+function loadMovementGrammarCompilerBridge(){
+  if(movementGrammarCompilerBridgeCache) return movementGrammarCompilerBridgeCache;
+  if(!fs.existsSync(MOVEMENT_GRAMMAR_COMPILER_BRIDGE)){
+    movementGrammarCompilerBridgeCache = { rows: [], summary: {} };
+    return movementGrammarCompilerBridgeCache;
+  }
+  try {
+    const artifact = readJson(MOVEMENT_GRAMMAR_COMPILER_BRIDGE);
+    movementGrammarCompilerBridgeCache = Object.assign({}, artifact, {
+      rows: Array.isArray(artifact.rows) ? artifact.rows : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    movementGrammarCompilerBridgeCache = { rows: [], summary: {} };
+  }
+  return movementGrammarCompilerBridgeCache;
 }
 
 function loadApplicationArtifactConformance(){
@@ -4175,6 +4239,39 @@ function renderLevelVisualDetail(row = {}){
   `;
 }
 
+function challengePerGroupMovementTable(row = {}){
+  const rows = Array.isArray(row.perGroupMovementRows) ? row.perGroupMovementRows : [];
+  if(!rows.length){
+    return '<p class="docMeta">Per-group target/runtime movement rows pending. Regenerate challenge-stage conformance to populate this table.</p>';
+  }
+  const body = rows.map((item) => {
+    const runtime = item.runtime || {};
+    const target = item.target || {};
+    const status = item.status === 'measured' ? 'measured' : 'missing';
+    const runtimeRead = runtime.sampleCount
+      ? `${esc(runtime.entrySide || 'n/a')} -> ${esc(runtime.exitSide || 'n/a')}<br><span class="docMeta">start ${esc(runtime.visibleStartS ?? 'n/a')}s; end ${esc(runtime.visibleEndS ?? 'n/a')}s; path ${esc(Number.isFinite(+runtime.pathLength) ? Number(runtime.pathLength).toFixed(2) : 'n/a')}</span>`
+      : '<span class="docMeta">no runtime track captured</span>';
+    const targetRead = target.visibleStartS !== undefined
+      ? `${esc(target.entrySide || 'n/a')} -> ${esc(target.exitSide || 'n/a')}<br><span class="docMeta">start ${esc(target.visibleStartS ?? 'n/a')}s; end ${esc(target.visibleEndS ?? 'n/a')}s; path ${esc(Number.isFinite(+target.pathLength) ? Number(target.pathLength).toFixed(2) : 'n/a')}</span>`
+      : '<span class="docMeta">target pending</span>';
+    return `
+      <tr>
+        <td>${esc(item.groupIndex ?? '')}</td>
+        <td>${esc(status)}</td>
+        <td><strong>${esc(item.score10 ?? 'n/a')}/10</strong></td>
+        <td>${runtimeRead}</td>
+        <td>${targetRead}</td>
+      </tr>`;
+  }).join('\n');
+  return `
+    <table class="compactEvidenceTable">
+      <thead>
+        <tr><th>Group</th><th>Status</th><th>Fit</th><th>Aurora Runtime</th><th>Galaga Target</th></tr>
+      </thead>
+      <tbody>${body}</tbody>
+    </table>`;
+}
+
 function renderChallengeStageDetail(row = {}){
   const label = challengeStageDisplayLabel(row);
   const score = row.conformanceScore10 ?? 'n/a';
@@ -4236,6 +4333,11 @@ function renderChallengeStageDetail(row = {}){
             <p>${esc(row.movementRead || 'Movement read pending.')}</p>
             <p class="docMeta">${esc(row.strictAxisReads?.movement?.read || '')}</p>
             ${challengeList(challengeMotionSummary(row))}
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>Per-Group Target Fit</h3>
+            <p class="docMeta">Each target group should have a visible Aurora runtime track. Missing rows mean the stage may be too sparse, too late, outside the measured window, or not player-readable yet.</p>
+            ${challengePerGroupMovementTable(row)}
           </article>
           <article class="challengeEvidenceCard">
             <h3>Sprite Motion / Shot Route</h3>
@@ -5230,6 +5332,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'level-visual-conformance-index', title: 'Level Visual Index' },
     { id: 'challenge-timing-alignment-review', title: 'Timing Alignment Review' },
     { id: 'challenge-stage-conformance', title: 'Challenge Stage Deep Dive' },
+    { id: 'movement-grammar-plan', title: 'Movement Grammar Plan' },
     { id: 'persona-catalog', title: 'Testing Personas' },
     { id: 'persona-performance-distribution', title: 'Persona Performance Distribution' },
     { id: 'graphics-controls', title: 'Presentation Controls' },
@@ -5370,6 +5473,55 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const spriteConformanceLaneRows = renderSpriteConformanceLaneRows(spriteConformanceVariationPlan);
   const spriteConformancePipelineRows = renderSpriteConformancePipelineRows(spriteConformanceVariationPlan);
   const spriteConformanceSuccessRows = renderSpriteConformanceSuccessRows(spriteConformanceVariationPlan);
+  const movementGrammarPlan = loadMovementGrammarPlan();
+  const movementGrammarSurfaceRows = (movementGrammarPlan.motionSurfaces || []).map(surface => `
+    <tr>
+      <td><strong>${esc(surface.label || surface.id || '')}</strong><br><span class="docMeta"><code>${esc(surface.id || '')}</code></span></td>
+      <td>${(surface.currentCodeAnchors || []).map(anchor => `<code>${esc(anchor)}</code>`).join('<br>') || '<span class="docMeta">runtime anchor pending</span>'}</td>
+      <td>${esc(surface.playerMeaning || '')}</td>
+      <td>${(surface.mustSupport || []).map(item => `<span class="pill">${esc(item)}</span>`).join(' ')}</td>
+    </tr>
+  `).join('\n') || `
+    <tr>
+      <td colspan="4"><span class="docMeta">Movement grammar surfaces pending. Add <code>reference-artifacts/ingestion/movement-grammar/movement-grammar-0.1.json</code>.</span></td>
+    </tr>
+  `;
+  const movementGrammarMigrationRows = (movementGrammarPlan.migrationPlan || []).map(step => `
+    <tr>
+      <td><strong>${esc(step.step || '')}. ${esc(step.label || '')}</strong></td>
+      <td><span class="pill">${esc(step.status || 'planned')}</span></td>
+      <td>${esc(step.target || '')}</td>
+    </tr>
+  `).join('\n');
+  const movementGrammarSampleRows = (movementGrammarPlan.samplePatterns || []).map(pattern => `
+    <tr>
+      <td><strong>${esc(pattern.id || '')}</strong><br><span class="docMeta">${esc(pattern.gameScope?.gameKey || '')} ${pattern.gameScope?.stage ? `stage ${esc(pattern.gameScope.stage)}` : esc(pattern.gameScope?.stageBand || '')}</span></td>
+      <td><code>${esc(pattern.appliesTo || '')}</code></td>
+      <td>${(pattern.roleBindings || []).slice(0, 3).map(binding => esc(binding.pathIntent || binding.leader || binding.visualFamily || 'role binding')).join('<br>')}</td>
+      <td>${(pattern.measurement?.sourceArtifacts || []).slice(0, 3).map(item => `<code>${esc(item)}</code>`).join('<br>')}</td>
+    </tr>
+  `).join('\n');
+  const auroraChallengeMovementGrammarMap = loadAuroraChallengeMovementGrammarMap();
+  const auroraChallengeMovementSummary = auroraChallengeMovementGrammarMap.summary || {};
+  const movementGrammarCompilerBridge = loadMovementGrammarCompilerBridge();
+  const movementGrammarCompilerSummary = movementGrammarCompilerBridge.summary || {};
+  const auroraChallengeMovementRows = (auroraChallengeMovementGrammarMap.patterns || []).map(pattern => {
+    const authoredPaths = pattern.runtimeLayout?.groupPathFamilies || [];
+    const visualFamilies = pattern.runtimeLayout?.groupVisualFamilies || [];
+    const gaps = pattern.measurement?.gaps || [];
+    return `
+    <tr>
+      <td><strong>${esc(pattern.gameScope?.stageLabel || pattern.id || '')}</strong><br><span class="docMeta">stage ${esc(pattern.gameScope?.stage ?? 'n/a')}; challenge ${esc(pattern.gameScope?.challengeNumber ?? 'n/a')}</span></td>
+      <td>${authoredPaths.map(item => `<code>${esc(item)}</code>`).join('<br>') || '<span class="docMeta">path map pending</span>'}</td>
+      <td>${visualFamilies.map(item => `<span class="pill">${esc(item)}</span>`).join(' ') || '<span class="docMeta">visual family map pending</span>'}</td>
+      <td><strong>${Number.isFinite(+pattern.measurement?.pathContractMatchScore10) ? `${Number(pattern.measurement.pathContractMatchScore10).toFixed(1)}/10` : 'partial'}</strong><br><span class="docMeta">refs ${esc(pattern.measurement?.referenceBackedGroupCount ?? 0)}/5; target contract ${pattern.measurement?.targetContractPresent ? 'yes' : 'gap'}</span></td>
+      <td>${esc(gaps[0] || pattern.nextImplementationStep || '')}</td>
+    </tr>`;
+  }).join('\n') || `
+    <tr>
+      <td colspan="5"><span class="docMeta">Aurora challenge movement grammar map pending. Run <code>npm run harness:analyze:aurora-challenge-movement-grammar-map</code>.</span></td>
+    </tr>
+  `;
   const galagaAlienCropPreviews = loadGalagaAlienCropPreviews();
   const galagaAlienCropPreviewSummary = galagaAlienCropPreviews.summary || {};
   const galagaAlienCropPreviewRows = renderGalagaAlienCropPreviewRows(galagaAlienCropPreviews);
@@ -6378,6 +6530,81 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           </div>
           <div class="challengeStageList">
             ${challengeStageRows}
+          </div>
+        </section>
+
+        <section class="section" id="movement-grammar-plan">
+          <div class="sectionHeader">
+            <h2>Movement Grammar Plan</h2>
+            <p>Platform-level movement strategy for turning reference video object tracks into reusable regular-entry, challenge-stage, dive, escort, capture, and theme-variant choreography.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Current read:</strong> ${esc(movementGrammarPlan.summary || 'Movement grammar artifact pending.')}</p>
+            <p><strong>Problem:</strong> ${esc(movementGrammarPlan.problem || 'Movement logic is currently split across game-specific runtime branches and analysis artifacts.')}</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/ingestion/movement-grammar/movement-grammar-0.1.json</code>. <strong>Plan:</strong> <code>MOVEMENT_GRAMMAR_CONFORMANCE_PLAN.md</code>. <strong>Check:</strong> <code>npm run harness:check:movement-grammar</code>.</p>
+            <p class="docMeta"><strong>Next best step:</strong> ${esc(movementGrammarPlan.nextBestStep || 'Generate a read-only Aurora layout-to-grammar mapping artifact.')}</p>
+            <p class="docMeta"><strong>Aurora challenge map:</strong> ${esc(auroraChallengeMovementSummary.layoutCount || 0)} layout(s), ${esc(auroraChallengeMovementSummary.referenceBackedGroupCount || 0)}/${esc(auroraChallengeMovementSummary.expectedGroupCount || 0)} reference-backed groups, average path-contract order ${esc(auroraChallengeMovementSummary.averagePathContractMatchScore10 ?? 'n/a')}/10. Source artifact: <code>reference-artifacts/analyses/aurora-challenge-movement-grammar-map/latest.json</code>.</p>
+            <p class="docMeta"><strong>Compiler bridge:</strong> required round-trip ${esc(movementGrammarCompilerSummary.requiredRoundTripScore10 ?? 'n/a')}/10; ready: <strong>${movementGrammarCompilerSummary.compilerBridgeReady ? 'yes' : 'pending'}</strong>. Source artifact: <code>reference-artifacts/analyses/movement-grammar-compiler-bridge/latest.json</code>. Check: <code>npm run harness:check:movement-grammar-compiler-bridge</code>.</p>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Movement Surface</th>
+                  <th>Current Runtime Anchors</th>
+                  <th>Player Meaning</th>
+                  <th>Must Support</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${movementGrammarSurfaceRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Migration Step</th>
+                  <th>Status</th>
+                  <th>Target</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${movementGrammarMigrationRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Seed Pattern</th>
+                  <th>Surface</th>
+                  <th>Motion Intent</th>
+                  <th>Measurement Inputs</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${movementGrammarSampleRows}
+              </tbody>
+            </table>
+          </div>
+          <div class="tableWrap" style="margin-top:16px;">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Aurora Challenge Map</th>
+                  <th>Authored Path Order</th>
+                  <th>Visual Families</th>
+                  <th>Measured Read</th>
+                  <th>Next Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${auroraChallengeMovementRows}
+              </tbody>
+            </table>
           </div>
         </section>
 

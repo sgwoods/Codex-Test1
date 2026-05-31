@@ -1,0 +1,2883 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "movement-grammar-compiler-bridge",
+  "generatedAt": "2026-05-31T13:16:27.287Z",
+  "commit": "5cc33dd01",
+  "branch": "codex/macbook-challenge-stage-gameplay-spectacle",
+  "gameKey": "aurora-galactica",
+  "sourceArtifacts": {
+    "movementGrammarMap": "reference-artifacts/analyses/aurora-challenge-movement-grammar-map/latest.json"
+  },
+  "summary": {
+    "patternCount": 8,
+    "exactRequiredCount": 8,
+    "requiredDriftCount": 0,
+    "requiredRoundTripScore10": 10,
+    "compilerBridgeReady": true,
+    "nextStep": "use-compiler-bridge-for-stage7-pilot",
+    "read": "The grammar compiler bridge can round-trip required Aurora challenge layout fields. Next gameplay edits can be made through grammar rows with a safer before/after proof."
+  },
+  "measurementLimits": [
+    "This bridge proves source-field round-tripping only; it does not prove browser-rendered movement conformance.",
+    "Optional fields may be absent in older runtime layouts, so only authored optional arrays count as drift.",
+    "After any compiler-driven gameplay change, run challenge-stage conformance and visual timing alignment before promotion."
+  ],
+  "requiredRoundTripFields": [
+    "fromStage",
+    "groups",
+    "enemiesPerGroup",
+    "groupPathFamilies",
+    "groupVisualFamilies",
+    "groupLaneTypes",
+    "groupSpawnOffsets"
+  ],
+  "optionalRoundTripFields": [
+    "groupSpeedScales",
+    "groupArcAmps",
+    "groupDropAmps",
+    "groupLowerFieldBiases",
+    "groupYOffsets"
+  ],
+  "rows": [
+    {
+      "id": "aurora-challenge-01-first-challenge-peel",
+      "stage": 3,
+      "challengeNumber": 1,
+      "status": "round-trip-exact",
+      "compiledRuntimeLayout": {
+        "fromStage": 3,
+        "id": "first-challenge-peel",
+        "pathFamily": "first-challenge-peel",
+        "groups": 5,
+        "enemiesPerGroup": 8,
+        "upperBandRatio": 0.5,
+        "spawnOffsetX": 64,
+        "waveSpacingY": 15,
+        "rowSpacingY": 9,
+        "waveDelay": 2.2,
+        "slotDelay": 0.18,
+        "arcAmp": 1.12,
+        "dropAmp": 1.02,
+        "lowerFieldBias": null,
+        "laneTypes": [
+          "bee",
+          "bee",
+          "bee",
+          "bee",
+          "but",
+          "but",
+          "but",
+          "but"
+        ],
+        "groupPathFamilies": [
+          "first-challenge-peel",
+          "classic-column-drop",
+          "classic-column-drop",
+          "side-hook-return",
+          "first-challenge-peel"
+        ],
+        "groupVisualFamilies": [
+          "classic",
+          "classic",
+          "classic",
+          "classic",
+          "classic"
+        ],
+        "groupLaneTypes": [
+          [
+            "bee",
+            "bee",
+            "bee",
+            "bee",
+            "but",
+            "but",
+            "but",
+            "but"
+          ],
+          [
+            "bee",
+            "bee",
+            "bee",
+            "bee",
+            "bee",
+            "bee",
+            "bee",
+            "bee"
+          ],
+          [
+            "but",
+            "but",
+            "but",
+            "but",
+            "but",
+            "but",
+            "but",
+            "but"
+          ],
+          [
+            "bee",
+            "but",
+            "bee",
+            "but",
+            "but",
+            "bee",
+            "but",
+            "bee"
+          ],
+          [
+            "but",
+            "bee",
+            "bee",
+            "but",
+            "but",
+            "bee",
+            "bee",
+            "but"
+          ]
+        ],
+        "groupSpawnOffsets": [
+          0,
+          3.4,
+          6.25,
+          9.1,
+          12.1
+        ],
+        "groupSpeedScales": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "groupArcAmps": [],
+        "groupDropAmps": [],
+        "groupLowerFieldBiases": [],
+        "groupYOffsets": []
+      },
+      "comparisons": [
+        {
+          "field": "fromStage",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 3,
+          "compiledValue": 3
+        },
+        {
+          "field": "groups",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 5,
+          "compiledValue": 5
+        },
+        {
+          "field": "enemiesPerGroup",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 8,
+          "compiledValue": 8
+        },
+        {
+          "field": "groupPathFamilies",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            "first-challenge-peel",
+            "classic-column-drop",
+            "classic-column-drop",
+            "side-hook-return",
+            "first-challenge-peel"
+          ],
+          "compiledValue": [
+            "first-challenge-peel",
+            "classic-column-drop",
+            "classic-column-drop",
+            "side-hook-return",
+            "first-challenge-peel"
+          ]
+        },
+        {
+          "field": "groupVisualFamilies",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            "classic",
+            "classic",
+            "classic",
+            "classic",
+            "classic"
+          ],
+          "compiledValue": [
+            "classic",
+            "classic",
+            "classic",
+            "classic",
+            "classic"
+          ]
+        },
+        {
+          "field": "groupLaneTypes",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            [
+              "bee",
+              "bee",
+              "bee",
+              "bee",
+              "but",
+              "but",
+              "but",
+              "but"
+            ],
+            [
+              "bee",
+              "bee",
+              "bee",
+              "bee",
+              "bee",
+              "bee",
+              "bee",
+              "bee"
+            ],
+            [
+              "but",
+              "but",
+              "but",
+              "but",
+              "but",
+              "but",
+              "but",
+              "but"
+            ],
+            [
+              "bee",
+              "but",
+              "bee",
+              "but",
+              "but",
+              "bee",
+              "but",
+              "bee"
+            ],
+            [
+              "but",
+              "bee",
+              "bee",
+              "but",
+              "but",
+              "bee",
+              "bee",
+              "but"
+            ]
+          ],
+          "compiledValue": [
+            [
+              "bee",
+              "bee",
+              "bee",
+              "bee",
+              "but",
+              "but",
+              "but",
+              "but"
+            ],
+            [
+              "bee",
+              "bee",
+              "bee",
+              "bee",
+              "bee",
+              "bee",
+              "bee",
+              "bee"
+            ],
+            [
+              "but",
+              "but",
+              "but",
+              "but",
+              "but",
+              "but",
+              "but",
+              "but"
+            ],
+            [
+              "bee",
+              "but",
+              "bee",
+              "but",
+              "but",
+              "bee",
+              "but",
+              "bee"
+            ],
+            [
+              "but",
+              "bee",
+              "bee",
+              "but",
+              "but",
+              "bee",
+              "bee",
+              "but"
+            ]
+          ]
+        },
+        {
+          "field": "groupSpawnOffsets",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            0,
+            3.4,
+            6.25,
+            9.1,
+            12.1
+          ],
+          "compiledValue": [
+            0,
+            3.4,
+            6.25,
+            9.1,
+            12.1
+          ]
+        },
+        {
+          "field": "groupSpeedScales",
+          "status": "exact",
+          "required": false,
+          "runtimeValue": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "compiledValue": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "field": "groupArcAmps",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupDropAmps",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupLowerFieldBiases",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupYOffsets",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        }
+      ],
+      "requiredDrift": [],
+      "optionalDrift": [],
+      "read": "Required grammar fields round-trip to current Aurora challenge layout fields."
+    },
+    {
+      "id": "aurora-challenge-02-scorpion-cross-sweep",
+      "stage": 7,
+      "challengeNumber": 2,
+      "status": "round-trip-exact",
+      "compiledRuntimeLayout": {
+        "fromStage": 7,
+        "id": "scorpion-cross-sweep",
+        "pathFamily": "cross-sweep",
+        "groups": 5,
+        "enemiesPerGroup": 8,
+        "upperBandRatio": 0.5,
+        "spawnOffsetX": 78,
+        "waveSpacingY": 12,
+        "rowSpacingY": 9,
+        "waveDelay": 1.28,
+        "slotDelay": 0.14,
+        "arcAmp": 1.28,
+        "dropAmp": 1.14,
+        "lowerFieldBias": null,
+        "laneTypes": [
+          "but",
+          "boss",
+          "rogue",
+          "bee",
+          "bee",
+          "rogue",
+          "boss",
+          "but"
+        ],
+        "groupPathFamilies": [
+          "cross-sweep",
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "boss-led-loop"
+        ],
+        "groupVisualFamilies": [
+          "classic",
+          "scorpion",
+          "scorpion",
+          "stingray",
+          "stingray"
+        ],
+        "groupLaneTypes": [
+          [
+            "but",
+            "boss",
+            "rogue",
+            "bee",
+            "bee",
+            "rogue",
+            "boss",
+            "but"
+          ],
+          [
+            "bee",
+            "rogue",
+            "but",
+            "boss",
+            "boss",
+            "but",
+            "rogue",
+            "bee"
+          ],
+          [
+            "boss",
+            "but",
+            "bee",
+            "rogue",
+            "rogue",
+            "bee",
+            "but",
+            "boss"
+          ],
+          [
+            "rogue",
+            "bee",
+            "boss",
+            "but",
+            "but",
+            "boss",
+            "bee",
+            "rogue"
+          ],
+          [
+            "but",
+            "rogue",
+            "boss",
+            "bee",
+            "bee",
+            "boss",
+            "rogue",
+            "but"
+          ]
+        ],
+        "groupSpawnOffsets": [
+          0,
+          2.88,
+          4.25,
+          7.13,
+          13.38
+        ],
+        "groupSpeedScales": [
+          2.65,
+          1.97,
+          2.65,
+          2.12,
+          2.65
+        ],
+        "groupArcAmps": [
+          1.63,
+          1.26,
+          1.27,
+          1.79,
+          1.21
+        ],
+        "groupDropAmps": [
+          1.01,
+          1.25,
+          1.08,
+          1.37,
+          1.31
+        ],
+        "groupLowerFieldBiases": [],
+        "groupYOffsets": []
+      },
+      "comparisons": [
+        {
+          "field": "fromStage",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 7,
+          "compiledValue": 7
+        },
+        {
+          "field": "groups",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 5,
+          "compiledValue": 5
+        },
+        {
+          "field": "enemiesPerGroup",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 8,
+          "compiledValue": 8
+        },
+        {
+          "field": "groupPathFamilies",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            "cross-sweep",
+            "cross-sweep",
+            "hook-arc",
+            "hook-arc",
+            "boss-led-loop"
+          ],
+          "compiledValue": [
+            "cross-sweep",
+            "cross-sweep",
+            "hook-arc",
+            "hook-arc",
+            "boss-led-loop"
+          ]
+        },
+        {
+          "field": "groupVisualFamilies",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            "classic",
+            "scorpion",
+            "scorpion",
+            "stingray",
+            "stingray"
+          ],
+          "compiledValue": [
+            "classic",
+            "scorpion",
+            "scorpion",
+            "stingray",
+            "stingray"
+          ]
+        },
+        {
+          "field": "groupLaneTypes",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            [
+              "but",
+              "boss",
+              "rogue",
+              "bee",
+              "bee",
+              "rogue",
+              "boss",
+              "but"
+            ],
+            [
+              "bee",
+              "rogue",
+              "but",
+              "boss",
+              "boss",
+              "but",
+              "rogue",
+              "bee"
+            ],
+            [
+              "boss",
+              "but",
+              "bee",
+              "rogue",
+              "rogue",
+              "bee",
+              "but",
+              "boss"
+            ],
+            [
+              "rogue",
+              "bee",
+              "boss",
+              "but",
+              "but",
+              "boss",
+              "bee",
+              "rogue"
+            ],
+            [
+              "but",
+              "rogue",
+              "boss",
+              "bee",
+              "bee",
+              "boss",
+              "rogue",
+              "but"
+            ]
+          ],
+          "compiledValue": [
+            [
+              "but",
+              "boss",
+              "rogue",
+              "bee",
+              "bee",
+              "rogue",
+              "boss",
+              "but"
+            ],
+            [
+              "bee",
+              "rogue",
+              "but",
+              "boss",
+              "boss",
+              "but",
+              "rogue",
+              "bee"
+            ],
+            [
+              "boss",
+              "but",
+              "bee",
+              "rogue",
+              "rogue",
+              "bee",
+              "but",
+              "boss"
+            ],
+            [
+              "rogue",
+              "bee",
+              "boss",
+              "but",
+              "but",
+              "boss",
+              "bee",
+              "rogue"
+            ],
+            [
+              "but",
+              "rogue",
+              "boss",
+              "bee",
+              "bee",
+              "boss",
+              "rogue",
+              "but"
+            ]
+          ]
+        },
+        {
+          "field": "groupSpawnOffsets",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            0,
+            2.88,
+            4.25,
+            7.13,
+            13.38
+          ],
+          "compiledValue": [
+            0,
+            2.88,
+            4.25,
+            7.13,
+            13.38
+          ]
+        },
+        {
+          "field": "groupSpeedScales",
+          "status": "exact",
+          "required": false,
+          "runtimeValue": [
+            2.65,
+            1.97,
+            2.65,
+            2.12,
+            2.65
+          ],
+          "compiledValue": [
+            2.65,
+            1.97,
+            2.65,
+            2.12,
+            2.65
+          ]
+        },
+        {
+          "field": "groupArcAmps",
+          "status": "exact",
+          "required": false,
+          "runtimeValue": [
+            1.63,
+            1.26,
+            1.27,
+            1.79,
+            1.21
+          ],
+          "compiledValue": [
+            1.63,
+            1.26,
+            1.27,
+            1.79,
+            1.21
+          ]
+        },
+        {
+          "field": "groupDropAmps",
+          "status": "exact",
+          "required": false,
+          "runtimeValue": [
+            1.01,
+            1.25,
+            1.08,
+            1.37,
+            1.31
+          ],
+          "compiledValue": [
+            1.01,
+            1.25,
+            1.08,
+            1.37,
+            1.31
+          ]
+        },
+        {
+          "field": "groupLowerFieldBiases",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupYOffsets",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        }
+      ],
+      "requiredDrift": [],
+      "optionalDrift": [],
+      "read": "Required grammar fields round-trip to current Aurora challenge layout fields."
+    },
+    {
+      "id": "aurora-challenge-03-stingray-crown-hook-hybrid",
+      "stage": 11,
+      "challengeNumber": 3,
+      "status": "round-trip-exact",
+      "compiledRuntimeLayout": {
+        "fromStage": 11,
+        "id": "stingray-crown-hook-hybrid",
+        "pathFamily": "hook-arc",
+        "groups": 5,
+        "enemiesPerGroup": 8,
+        "upperBandRatio": 0.46,
+        "spawnOffsetX": 72,
+        "waveSpacingY": 11,
+        "rowSpacingY": 8,
+        "waveDelay": 1.28,
+        "slotDelay": 0.12,
+        "arcAmp": 2.08,
+        "dropAmp": 1.02,
+        "lowerFieldBias": null,
+        "laneTypes": [
+          "boss",
+          "rogue",
+          "but",
+          "bee",
+          "boss",
+          "bee",
+          "but",
+          "rogue"
+        ],
+        "groupPathFamilies": [
+          "crown-split-cascade",
+          "boss-led-loop",
+          "hook-arc",
+          "boss-led-loop",
+          "hook-arc"
+        ],
+        "groupVisualFamilies": [
+          "dragonfly",
+          "dragonfly",
+          "stingray",
+          "galboss",
+          "dragonfly"
+        ],
+        "groupLaneTypes": [
+          [
+            "boss",
+            "rogue",
+            "but",
+            "bee",
+            "boss",
+            "bee",
+            "but",
+            "rogue"
+          ],
+          [
+            "boss",
+            "boss",
+            "but",
+            "rogue",
+            "bee",
+            "but",
+            "rogue",
+            "boss"
+          ],
+          [
+            "rogue",
+            "boss",
+            "bee",
+            "but",
+            "boss",
+            "but",
+            "bee",
+            "rogue"
+          ],
+          [
+            "but",
+            "rogue",
+            "boss",
+            "boss",
+            "boss",
+            "boss",
+            "rogue",
+            "but"
+          ],
+          [
+            "boss",
+            "bee",
+            "rogue",
+            "but",
+            "but",
+            "rogue",
+            "bee",
+            "boss"
+          ]
+        ],
+        "groupSpawnOffsets": [
+          0,
+          0.88,
+          4.38,
+          7.88,
+          12.13
+        ],
+        "groupSpeedScales": [
+          2.65,
+          2.3,
+          1.72,
+          1.38,
+          1.84
+        ],
+        "groupArcAmps": [
+          1.1,
+          1.46,
+          1.7,
+          1.69,
+          1.22
+        ],
+        "groupDropAmps": [
+          1.54,
+          1.42,
+          1.54,
+          1.58,
+          1.6
+        ],
+        "groupLowerFieldBiases": [
+          135,
+          0,
+          19,
+          29,
+          0
+        ],
+        "groupYOffsets": [
+          48,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "comparisons": [
+        {
+          "field": "fromStage",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 11,
+          "compiledValue": 11
+        },
+        {
+          "field": "groups",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 5,
+          "compiledValue": 5
+        },
+        {
+          "field": "enemiesPerGroup",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 8,
+          "compiledValue": 8
+        },
+        {
+          "field": "groupPathFamilies",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            "crown-split-cascade",
+            "boss-led-loop",
+            "hook-arc",
+            "boss-led-loop",
+            "hook-arc"
+          ],
+          "compiledValue": [
+            "crown-split-cascade",
+            "boss-led-loop",
+            "hook-arc",
+            "boss-led-loop",
+            "hook-arc"
+          ]
+        },
+        {
+          "field": "groupVisualFamilies",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            "dragonfly",
+            "dragonfly",
+            "stingray",
+            "galboss",
+            "dragonfly"
+          ],
+          "compiledValue": [
+            "dragonfly",
+            "dragonfly",
+            "stingray",
+            "galboss",
+            "dragonfly"
+          ]
+        },
+        {
+          "field": "groupLaneTypes",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            [
+              "boss",
+              "rogue",
+              "but",
+              "bee",
+              "boss",
+              "bee",
+              "but",
+              "rogue"
+            ],
+            [
+              "boss",
+              "boss",
+              "but",
+              "rogue",
+              "bee",
+              "but",
+              "rogue",
+              "boss"
+            ],
+            [
+              "rogue",
+              "boss",
+              "bee",
+              "but",
+              "boss",
+              "but",
+              "bee",
+              "rogue"
+            ],
+            [
+              "but",
+              "rogue",
+              "boss",
+              "boss",
+              "boss",
+              "boss",
+              "rogue",
+              "but"
+            ],
+            [
+              "boss",
+              "bee",
+              "rogue",
+              "but",
+              "but",
+              "rogue",
+              "bee",
+              "boss"
+            ]
+          ],
+          "compiledValue": [
+            [
+              "boss",
+              "rogue",
+              "but",
+              "bee",
+              "boss",
+              "bee",
+              "but",
+              "rogue"
+            ],
+            [
+              "boss",
+              "boss",
+              "but",
+              "rogue",
+              "bee",
+              "but",
+              "rogue",
+              "boss"
+            ],
+            [
+              "rogue",
+              "boss",
+              "bee",
+              "but",
+              "boss",
+              "but",
+              "bee",
+              "rogue"
+            ],
+            [
+              "but",
+              "rogue",
+              "boss",
+              "boss",
+              "boss",
+              "boss",
+              "rogue",
+              "but"
+            ],
+            [
+              "boss",
+              "bee",
+              "rogue",
+              "but",
+              "but",
+              "rogue",
+              "bee",
+              "boss"
+            ]
+          ]
+        },
+        {
+          "field": "groupSpawnOffsets",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            0,
+            0.88,
+            4.38,
+            7.88,
+            12.13
+          ],
+          "compiledValue": [
+            0,
+            0.88,
+            4.38,
+            7.88,
+            12.13
+          ]
+        },
+        {
+          "field": "groupSpeedScales",
+          "status": "exact",
+          "required": false,
+          "runtimeValue": [
+            2.65,
+            2.3,
+            1.72,
+            1.38,
+            1.84
+          ],
+          "compiledValue": [
+            2.65,
+            2.3,
+            1.72,
+            1.38,
+            1.84
+          ]
+        },
+        {
+          "field": "groupArcAmps",
+          "status": "exact",
+          "required": false,
+          "runtimeValue": [
+            1.1,
+            1.46,
+            1.7,
+            1.69,
+            1.22
+          ],
+          "compiledValue": [
+            1.1,
+            1.46,
+            1.7,
+            1.69,
+            1.22
+          ]
+        },
+        {
+          "field": "groupDropAmps",
+          "status": "exact",
+          "required": false,
+          "runtimeValue": [
+            1.54,
+            1.42,
+            1.54,
+            1.58,
+            1.6
+          ],
+          "compiledValue": [
+            1.54,
+            1.42,
+            1.54,
+            1.58,
+            1.6
+          ]
+        },
+        {
+          "field": "groupLowerFieldBiases",
+          "status": "exact",
+          "required": false,
+          "runtimeValue": [
+            135,
+            0,
+            19,
+            29,
+            0
+          ],
+          "compiledValue": [
+            135,
+            0,
+            19,
+            29,
+            0
+          ]
+        },
+        {
+          "field": "groupYOffsets",
+          "status": "exact",
+          "required": false,
+          "runtimeValue": [
+            48,
+            0,
+            0,
+            0,
+            0
+          ],
+          "compiledValue": [
+            48,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "requiredDrift": [],
+      "optionalDrift": [],
+      "read": "Required grammar fields round-trip to current Aurora challenge layout fields."
+    },
+    {
+      "id": "aurora-challenge-04-pink-serpentine-late",
+      "stage": 15,
+      "challengeNumber": 4,
+      "status": "round-trip-exact",
+      "compiledRuntimeLayout": {
+        "fromStage": 15,
+        "id": "pink-serpentine-late",
+        "pathFamily": "pink-serpentine",
+        "groups": 5,
+        "enemiesPerGroup": 8,
+        "upperBandRatio": 0.43,
+        "spawnOffsetX": 74,
+        "waveSpacingY": 10,
+        "rowSpacingY": 9,
+        "waveDelay": 1.06,
+        "slotDelay": 0.08,
+        "arcAmp": 1.94,
+        "dropAmp": 0.92,
+        "lowerFieldBias": null,
+        "laneTypes": [
+          "boss",
+          "rogue",
+          "but",
+          "bee",
+          "bee",
+          "but",
+          "rogue",
+          "boss"
+        ],
+        "groupPathFamilies": [
+          "pink-serpentine",
+          "pink-serpentine",
+          "green-ladder-split",
+          "pink-serpentine",
+          "pink-green-cascade"
+        ],
+        "groupVisualFamilies": [
+          "galboss",
+          "galboss",
+          "dragonfly",
+          "galboss",
+          "dragonfly"
+        ],
+        "groupLaneTypes": [
+          [
+            "boss",
+            "rogue",
+            "but",
+            "bee",
+            "bee",
+            "but",
+            "rogue",
+            "boss"
+          ],
+          [
+            "but",
+            "boss",
+            "rogue",
+            "bee",
+            "bee",
+            "rogue",
+            "boss",
+            "but"
+          ],
+          [
+            "bee",
+            "but",
+            "boss",
+            "rogue",
+            "rogue",
+            "boss",
+            "but",
+            "bee"
+          ],
+          [
+            "rogue",
+            "bee",
+            "but",
+            "boss",
+            "boss",
+            "but",
+            "bee",
+            "rogue"
+          ],
+          [
+            "boss",
+            "but",
+            "bee",
+            "rogue",
+            "rogue",
+            "bee",
+            "but",
+            "boss"
+          ]
+        ],
+        "groupSpawnOffsets": [
+          0,
+          0.45,
+          2.85,
+          6.25,
+          12.85
+        ],
+        "groupSpeedScales": [
+          2.1,
+          1.85,
+          1.5,
+          1.3,
+          1.05
+        ],
+        "groupArcAmps": [],
+        "groupDropAmps": [],
+        "groupLowerFieldBiases": [
+          176,
+          196,
+          96,
+          82,
+          208
+        ],
+        "groupYOffsets": [
+          128,
+          136,
+          24,
+          28,
+          168
+        ]
+      },
+      "comparisons": [
+        {
+          "field": "fromStage",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 15,
+          "compiledValue": 15
+        },
+        {
+          "field": "groups",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 5,
+          "compiledValue": 5
+        },
+        {
+          "field": "enemiesPerGroup",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 8,
+          "compiledValue": 8
+        },
+        {
+          "field": "groupPathFamilies",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            "pink-serpentine",
+            "pink-serpentine",
+            "green-ladder-split",
+            "pink-serpentine",
+            "pink-green-cascade"
+          ],
+          "compiledValue": [
+            "pink-serpentine",
+            "pink-serpentine",
+            "green-ladder-split",
+            "pink-serpentine",
+            "pink-green-cascade"
+          ]
+        },
+        {
+          "field": "groupVisualFamilies",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            "galboss",
+            "galboss",
+            "dragonfly",
+            "galboss",
+            "dragonfly"
+          ],
+          "compiledValue": [
+            "galboss",
+            "galboss",
+            "dragonfly",
+            "galboss",
+            "dragonfly"
+          ]
+        },
+        {
+          "field": "groupLaneTypes",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            [
+              "boss",
+              "rogue",
+              "but",
+              "bee",
+              "bee",
+              "but",
+              "rogue",
+              "boss"
+            ],
+            [
+              "but",
+              "boss",
+              "rogue",
+              "bee",
+              "bee",
+              "rogue",
+              "boss",
+              "but"
+            ],
+            [
+              "bee",
+              "but",
+              "boss",
+              "rogue",
+              "rogue",
+              "boss",
+              "but",
+              "bee"
+            ],
+            [
+              "rogue",
+              "bee",
+              "but",
+              "boss",
+              "boss",
+              "but",
+              "bee",
+              "rogue"
+            ],
+            [
+              "boss",
+              "but",
+              "bee",
+              "rogue",
+              "rogue",
+              "bee",
+              "but",
+              "boss"
+            ]
+          ],
+          "compiledValue": [
+            [
+              "boss",
+              "rogue",
+              "but",
+              "bee",
+              "bee",
+              "but",
+              "rogue",
+              "boss"
+            ],
+            [
+              "but",
+              "boss",
+              "rogue",
+              "bee",
+              "bee",
+              "rogue",
+              "boss",
+              "but"
+            ],
+            [
+              "bee",
+              "but",
+              "boss",
+              "rogue",
+              "rogue",
+              "boss",
+              "but",
+              "bee"
+            ],
+            [
+              "rogue",
+              "bee",
+              "but",
+              "boss",
+              "boss",
+              "but",
+              "bee",
+              "rogue"
+            ],
+            [
+              "boss",
+              "but",
+              "bee",
+              "rogue",
+              "rogue",
+              "bee",
+              "but",
+              "boss"
+            ]
+          ]
+        },
+        {
+          "field": "groupSpawnOffsets",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            0,
+            0.45,
+            2.85,
+            6.25,
+            12.85
+          ],
+          "compiledValue": [
+            0,
+            0.45,
+            2.85,
+            6.25,
+            12.85
+          ]
+        },
+        {
+          "field": "groupSpeedScales",
+          "status": "exact",
+          "required": false,
+          "runtimeValue": [
+            2.1,
+            1.85,
+            1.5,
+            1.3,
+            1.05
+          ],
+          "compiledValue": [
+            2.1,
+            1.85,
+            1.5,
+            1.3,
+            1.05
+          ]
+        },
+        {
+          "field": "groupArcAmps",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupDropAmps",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupLowerFieldBiases",
+          "status": "exact",
+          "required": false,
+          "runtimeValue": [
+            176,
+            196,
+            96,
+            82,
+            208
+          ],
+          "compiledValue": [
+            176,
+            196,
+            96,
+            82,
+            208
+          ]
+        },
+        {
+          "field": "groupYOffsets",
+          "status": "exact",
+          "required": false,
+          "runtimeValue": [
+            128,
+            136,
+            24,
+            28,
+            168
+          ],
+          "compiledValue": [
+            128,
+            136,
+            24,
+            28,
+            168
+          ]
+        }
+      ],
+      "requiredDrift": [],
+      "optionalDrift": [],
+      "read": "Required grammar fields round-trip to current Aurora challenge layout fields."
+    },
+    {
+      "id": "aurora-challenge-05-pink-green-cascade",
+      "stage": 19,
+      "challengeNumber": 5,
+      "status": "round-trip-exact",
+      "compiledRuntimeLayout": {
+        "fromStage": 19,
+        "id": "pink-green-cascade",
+        "pathFamily": "pink-green-cascade",
+        "groups": 5,
+        "enemiesPerGroup": 8,
+        "upperBandRatio": 0.42,
+        "spawnOffsetX": 76,
+        "waveSpacingY": 9,
+        "rowSpacingY": 8,
+        "waveDelay": 1.1,
+        "slotDelay": 0.085,
+        "arcAmp": 1.86,
+        "dropAmp": 1.22,
+        "lowerFieldBias": null,
+        "laneTypes": [
+          "rogue",
+          "boss",
+          "but",
+          "bee",
+          "boss",
+          "but",
+          "bee",
+          "rogue"
+        ],
+        "groupPathFamilies": [
+          "pink-green-cascade",
+          "green-ladder-split",
+          "pink-green-cascade",
+          "pink-serpentine",
+          "pink-green-cascade"
+        ],
+        "groupVisualFamilies": [
+          "galboss",
+          "dragonfly",
+          "crown",
+          "dragonfly",
+          "galboss"
+        ],
+        "groupLaneTypes": [
+          [
+            "rogue",
+            "boss",
+            "but",
+            "bee",
+            "boss",
+            "but",
+            "bee",
+            "rogue"
+          ],
+          [
+            "boss",
+            "but",
+            "bee",
+            "rogue",
+            "rogue",
+            "bee",
+            "but",
+            "boss"
+          ],
+          [
+            "bee",
+            "rogue",
+            "boss",
+            "but",
+            "but",
+            "boss",
+            "rogue",
+            "bee"
+          ],
+          [
+            "but",
+            "bee",
+            "rogue",
+            "boss",
+            "boss",
+            "rogue",
+            "bee",
+            "but"
+          ],
+          [
+            "boss",
+            "rogue",
+            "bee",
+            "but",
+            "but",
+            "bee",
+            "rogue",
+            "boss"
+          ]
+        ],
+        "groupSpawnOffsets": [],
+        "groupSpeedScales": [],
+        "groupArcAmps": [],
+        "groupDropAmps": [],
+        "groupLowerFieldBiases": [],
+        "groupYOffsets": []
+      },
+      "comparisons": [
+        {
+          "field": "fromStage",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 19,
+          "compiledValue": 19
+        },
+        {
+          "field": "groups",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 5,
+          "compiledValue": 5
+        },
+        {
+          "field": "enemiesPerGroup",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 8,
+          "compiledValue": 8
+        },
+        {
+          "field": "groupPathFamilies",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            "pink-green-cascade",
+            "green-ladder-split",
+            "pink-green-cascade",
+            "pink-serpentine",
+            "pink-green-cascade"
+          ],
+          "compiledValue": [
+            "pink-green-cascade",
+            "green-ladder-split",
+            "pink-green-cascade",
+            "pink-serpentine",
+            "pink-green-cascade"
+          ]
+        },
+        {
+          "field": "groupVisualFamilies",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            "galboss",
+            "dragonfly",
+            "crown",
+            "dragonfly",
+            "galboss"
+          ],
+          "compiledValue": [
+            "galboss",
+            "dragonfly",
+            "crown",
+            "dragonfly",
+            "galboss"
+          ]
+        },
+        {
+          "field": "groupLaneTypes",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            [
+              "rogue",
+              "boss",
+              "but",
+              "bee",
+              "boss",
+              "but",
+              "bee",
+              "rogue"
+            ],
+            [
+              "boss",
+              "but",
+              "bee",
+              "rogue",
+              "rogue",
+              "bee",
+              "but",
+              "boss"
+            ],
+            [
+              "bee",
+              "rogue",
+              "boss",
+              "but",
+              "but",
+              "boss",
+              "rogue",
+              "bee"
+            ],
+            [
+              "but",
+              "bee",
+              "rogue",
+              "boss",
+              "boss",
+              "rogue",
+              "bee",
+              "but"
+            ],
+            [
+              "boss",
+              "rogue",
+              "bee",
+              "but",
+              "but",
+              "bee",
+              "rogue",
+              "boss"
+            ]
+          ],
+          "compiledValue": [
+            [
+              "rogue",
+              "boss",
+              "but",
+              "bee",
+              "boss",
+              "but",
+              "bee",
+              "rogue"
+            ],
+            [
+              "boss",
+              "but",
+              "bee",
+              "rogue",
+              "rogue",
+              "bee",
+              "but",
+              "boss"
+            ],
+            [
+              "bee",
+              "rogue",
+              "boss",
+              "but",
+              "but",
+              "boss",
+              "rogue",
+              "bee"
+            ],
+            [
+              "but",
+              "bee",
+              "rogue",
+              "boss",
+              "boss",
+              "rogue",
+              "bee",
+              "but"
+            ],
+            [
+              "boss",
+              "rogue",
+              "bee",
+              "but",
+              "but",
+              "bee",
+              "rogue",
+              "boss"
+            ]
+          ]
+        },
+        {
+          "field": "groupSpawnOffsets",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupSpeedScales",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupArcAmps",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupDropAmps",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupLowerFieldBiases",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupYOffsets",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        }
+      ],
+      "requiredDrift": [],
+      "optionalDrift": [],
+      "read": "Required grammar fields round-trip to current Aurora challenge layout fields."
+    },
+    {
+      "id": "aurora-challenge-06-green-ladder-split",
+      "stage": 23,
+      "challengeNumber": 6,
+      "status": "round-trip-exact",
+      "compiledRuntimeLayout": {
+        "fromStage": 23,
+        "id": "green-ladder-split",
+        "pathFamily": "green-ladder-split",
+        "groups": 5,
+        "enemiesPerGroup": 8,
+        "upperBandRatio": 0.41,
+        "spawnOffsetX": 80,
+        "waveSpacingY": 9,
+        "rowSpacingY": 8,
+        "waveDelay": 1.04,
+        "slotDelay": 0.08,
+        "arcAmp": 1.58,
+        "dropAmp": 1.34,
+        "lowerFieldBias": null,
+        "laneTypes": [
+          "bee",
+          "but",
+          "rogue",
+          "boss",
+          "boss",
+          "rogue",
+          "but",
+          "bee"
+        ],
+        "groupPathFamilies": [
+          "green-ladder-split",
+          "green-ladder-split",
+          "green-ladder-split",
+          "green-ladder-split",
+          "green-ladder-split"
+        ],
+        "groupVisualFamilies": [
+          "dragonfly",
+          "dragonfly",
+          "dragonfly",
+          "mosquito",
+          "dragonfly"
+        ],
+        "groupLaneTypes": [
+          [
+            "bee",
+            "but",
+            "rogue",
+            "boss",
+            "boss",
+            "rogue",
+            "but",
+            "bee"
+          ],
+          [
+            "but",
+            "bee",
+            "boss",
+            "rogue",
+            "rogue",
+            "boss",
+            "bee",
+            "but"
+          ],
+          [
+            "rogue",
+            "boss",
+            "bee",
+            "but",
+            "but",
+            "bee",
+            "boss",
+            "rogue"
+          ],
+          [
+            "boss",
+            "rogue",
+            "but",
+            "bee",
+            "bee",
+            "but",
+            "rogue",
+            "boss"
+          ],
+          [
+            "bee",
+            "rogue",
+            "boss",
+            "but",
+            "but",
+            "boss",
+            "rogue",
+            "bee"
+          ]
+        ],
+        "groupSpawnOffsets": [],
+        "groupSpeedScales": [],
+        "groupArcAmps": [],
+        "groupDropAmps": [],
+        "groupLowerFieldBiases": [],
+        "groupYOffsets": []
+      },
+      "comparisons": [
+        {
+          "field": "fromStage",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 23,
+          "compiledValue": 23
+        },
+        {
+          "field": "groups",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 5,
+          "compiledValue": 5
+        },
+        {
+          "field": "enemiesPerGroup",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 8,
+          "compiledValue": 8
+        },
+        {
+          "field": "groupPathFamilies",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            "green-ladder-split",
+            "green-ladder-split",
+            "green-ladder-split",
+            "green-ladder-split",
+            "green-ladder-split"
+          ],
+          "compiledValue": [
+            "green-ladder-split",
+            "green-ladder-split",
+            "green-ladder-split",
+            "green-ladder-split",
+            "green-ladder-split"
+          ]
+        },
+        {
+          "field": "groupVisualFamilies",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            "dragonfly",
+            "dragonfly",
+            "dragonfly",
+            "mosquito",
+            "dragonfly"
+          ],
+          "compiledValue": [
+            "dragonfly",
+            "dragonfly",
+            "dragonfly",
+            "mosquito",
+            "dragonfly"
+          ]
+        },
+        {
+          "field": "groupLaneTypes",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            [
+              "bee",
+              "but",
+              "rogue",
+              "boss",
+              "boss",
+              "rogue",
+              "but",
+              "bee"
+            ],
+            [
+              "but",
+              "bee",
+              "boss",
+              "rogue",
+              "rogue",
+              "boss",
+              "bee",
+              "but"
+            ],
+            [
+              "rogue",
+              "boss",
+              "bee",
+              "but",
+              "but",
+              "bee",
+              "boss",
+              "rogue"
+            ],
+            [
+              "boss",
+              "rogue",
+              "but",
+              "bee",
+              "bee",
+              "but",
+              "rogue",
+              "boss"
+            ],
+            [
+              "bee",
+              "rogue",
+              "boss",
+              "but",
+              "but",
+              "boss",
+              "rogue",
+              "bee"
+            ]
+          ],
+          "compiledValue": [
+            [
+              "bee",
+              "but",
+              "rogue",
+              "boss",
+              "boss",
+              "rogue",
+              "but",
+              "bee"
+            ],
+            [
+              "but",
+              "bee",
+              "boss",
+              "rogue",
+              "rogue",
+              "boss",
+              "bee",
+              "but"
+            ],
+            [
+              "rogue",
+              "boss",
+              "bee",
+              "but",
+              "but",
+              "bee",
+              "boss",
+              "rogue"
+            ],
+            [
+              "boss",
+              "rogue",
+              "but",
+              "bee",
+              "bee",
+              "but",
+              "rogue",
+              "boss"
+            ],
+            [
+              "bee",
+              "rogue",
+              "boss",
+              "but",
+              "but",
+              "boss",
+              "rogue",
+              "bee"
+            ]
+          ]
+        },
+        {
+          "field": "groupSpawnOffsets",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupSpeedScales",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupArcAmps",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupDropAmps",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupLowerFieldBiases",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupYOffsets",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        }
+      ],
+      "requiredDrift": [],
+      "optionalDrift": [],
+      "read": "Required grammar fields round-trip to current Aurora challenge layout fields."
+    },
+    {
+      "id": "aurora-challenge-07-yellow-diagonal-fan",
+      "stage": 27,
+      "challengeNumber": 7,
+      "status": "round-trip-exact",
+      "compiledRuntimeLayout": {
+        "fromStage": 27,
+        "id": "yellow-diagonal-fan",
+        "pathFamily": "yellow-diagonal-fan",
+        "groups": 5,
+        "enemiesPerGroup": 8,
+        "upperBandRatio": 0.4,
+        "spawnOffsetX": 84,
+        "waveSpacingY": 8,
+        "rowSpacingY": 8,
+        "waveDelay": 1,
+        "slotDelay": 0.075,
+        "arcAmp": 1.88,
+        "dropAmp": 1.6,
+        "lowerFieldBias": null,
+        "laneTypes": [
+          "boss",
+          "bee",
+          "but",
+          "rogue",
+          "rogue",
+          "but",
+          "bee",
+          "boss"
+        ],
+        "groupPathFamilies": [
+          "yellow-diagonal-fan",
+          "yellow-diagonal-fan",
+          "yellow-diagonal-fan",
+          "yellow-diagonal-fan",
+          "yellow-diagonal-fan"
+        ],
+        "groupVisualFamilies": [
+          "crown",
+          "crown",
+          "crown",
+          "crown",
+          "crown"
+        ],
+        "groupLaneTypes": [
+          [
+            "boss",
+            "bee",
+            "but",
+            "rogue",
+            "rogue",
+            "but",
+            "bee",
+            "boss"
+          ],
+          [
+            "bee",
+            "boss",
+            "rogue",
+            "but",
+            "but",
+            "rogue",
+            "boss",
+            "bee"
+          ],
+          [
+            "but",
+            "rogue",
+            "boss",
+            "bee",
+            "bee",
+            "boss",
+            "rogue",
+            "but"
+          ],
+          [
+            "rogue",
+            "but",
+            "bee",
+            "boss",
+            "boss",
+            "bee",
+            "but",
+            "rogue"
+          ],
+          [
+            "boss",
+            "rogue",
+            "but",
+            "bee",
+            "bee",
+            "but",
+            "rogue",
+            "boss"
+          ]
+        ],
+        "groupSpawnOffsets": [],
+        "groupSpeedScales": [],
+        "groupArcAmps": [],
+        "groupDropAmps": [],
+        "groupLowerFieldBiases": [],
+        "groupYOffsets": []
+      },
+      "comparisons": [
+        {
+          "field": "fromStage",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 27,
+          "compiledValue": 27
+        },
+        {
+          "field": "groups",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 5,
+          "compiledValue": 5
+        },
+        {
+          "field": "enemiesPerGroup",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 8,
+          "compiledValue": 8
+        },
+        {
+          "field": "groupPathFamilies",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            "yellow-diagonal-fan",
+            "yellow-diagonal-fan",
+            "yellow-diagonal-fan",
+            "yellow-diagonal-fan",
+            "yellow-diagonal-fan"
+          ],
+          "compiledValue": [
+            "yellow-diagonal-fan",
+            "yellow-diagonal-fan",
+            "yellow-diagonal-fan",
+            "yellow-diagonal-fan",
+            "yellow-diagonal-fan"
+          ]
+        },
+        {
+          "field": "groupVisualFamilies",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            "crown",
+            "crown",
+            "crown",
+            "crown",
+            "crown"
+          ],
+          "compiledValue": [
+            "crown",
+            "crown",
+            "crown",
+            "crown",
+            "crown"
+          ]
+        },
+        {
+          "field": "groupLaneTypes",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            [
+              "boss",
+              "bee",
+              "but",
+              "rogue",
+              "rogue",
+              "but",
+              "bee",
+              "boss"
+            ],
+            [
+              "bee",
+              "boss",
+              "rogue",
+              "but",
+              "but",
+              "rogue",
+              "boss",
+              "bee"
+            ],
+            [
+              "but",
+              "rogue",
+              "boss",
+              "bee",
+              "bee",
+              "boss",
+              "rogue",
+              "but"
+            ],
+            [
+              "rogue",
+              "but",
+              "bee",
+              "boss",
+              "boss",
+              "bee",
+              "but",
+              "rogue"
+            ],
+            [
+              "boss",
+              "rogue",
+              "but",
+              "bee",
+              "bee",
+              "but",
+              "rogue",
+              "boss"
+            ]
+          ],
+          "compiledValue": [
+            [
+              "boss",
+              "bee",
+              "but",
+              "rogue",
+              "rogue",
+              "but",
+              "bee",
+              "boss"
+            ],
+            [
+              "bee",
+              "boss",
+              "rogue",
+              "but",
+              "but",
+              "rogue",
+              "boss",
+              "bee"
+            ],
+            [
+              "but",
+              "rogue",
+              "boss",
+              "bee",
+              "bee",
+              "boss",
+              "rogue",
+              "but"
+            ],
+            [
+              "rogue",
+              "but",
+              "bee",
+              "boss",
+              "boss",
+              "bee",
+              "but",
+              "rogue"
+            ],
+            [
+              "boss",
+              "rogue",
+              "but",
+              "bee",
+              "bee",
+              "but",
+              "rogue",
+              "boss"
+            ]
+          ]
+        },
+        {
+          "field": "groupSpawnOffsets",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupSpeedScales",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupArcAmps",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupDropAmps",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupLowerFieldBiases",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupYOffsets",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        }
+      ],
+      "requiredDrift": [],
+      "optionalDrift": [],
+      "read": "Required grammar fields round-trip to current Aurora challenge layout fields."
+    },
+    {
+      "id": "aurora-challenge-08-blue-purple-finale",
+      "stage": 31,
+      "challengeNumber": 8,
+      "status": "round-trip-exact",
+      "compiledRuntimeLayout": {
+        "fromStage": 31,
+        "id": "blue-purple-finale",
+        "pathFamily": "blue-purple-finale",
+        "groups": 5,
+        "enemiesPerGroup": 8,
+        "upperBandRatio": 0.4,
+        "spawnOffsetX": 86,
+        "waveSpacingY": 8,
+        "rowSpacingY": 7,
+        "waveDelay": 0.86,
+        "slotDelay": 0.07,
+        "arcAmp": 1.62,
+        "dropAmp": 1.26,
+        "lowerFieldBias": 48,
+        "laneTypes": [
+          "rogue",
+          "boss",
+          "bee",
+          "but",
+          "but",
+          "bee",
+          "boss",
+          "rogue"
+        ],
+        "groupPathFamilies": [
+          "blue-purple-finale",
+          "green-ladder-split",
+          "blue-purple-finale",
+          "yellow-diagonal-fan",
+          "blue-purple-finale"
+        ],
+        "groupVisualFamilies": [
+          "stingray",
+          "mosquito",
+          "stingray",
+          "mosquito",
+          "galboss"
+        ],
+        "groupLaneTypes": [
+          [
+            "rogue",
+            "boss",
+            "bee",
+            "but",
+            "but",
+            "bee",
+            "boss",
+            "rogue"
+          ],
+          [
+            "boss",
+            "rogue",
+            "but",
+            "bee",
+            "bee",
+            "but",
+            "rogue",
+            "boss"
+          ],
+          [
+            "bee",
+            "but",
+            "boss",
+            "rogue",
+            "rogue",
+            "boss",
+            "but",
+            "bee"
+          ],
+          [
+            "but",
+            "bee",
+            "rogue",
+            "boss",
+            "boss",
+            "rogue",
+            "bee",
+            "but"
+          ],
+          [
+            "boss",
+            "but",
+            "rogue",
+            "bee",
+            "bee",
+            "rogue",
+            "but",
+            "boss"
+          ]
+        ],
+        "groupSpawnOffsets": [],
+        "groupSpeedScales": [],
+        "groupArcAmps": [],
+        "groupDropAmps": [],
+        "groupLowerFieldBiases": [],
+        "groupYOffsets": []
+      },
+      "comparisons": [
+        {
+          "field": "fromStage",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 31,
+          "compiledValue": 31
+        },
+        {
+          "field": "groups",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 5,
+          "compiledValue": 5
+        },
+        {
+          "field": "enemiesPerGroup",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": 8,
+          "compiledValue": 8
+        },
+        {
+          "field": "groupPathFamilies",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            "blue-purple-finale",
+            "green-ladder-split",
+            "blue-purple-finale",
+            "yellow-diagonal-fan",
+            "blue-purple-finale"
+          ],
+          "compiledValue": [
+            "blue-purple-finale",
+            "green-ladder-split",
+            "blue-purple-finale",
+            "yellow-diagonal-fan",
+            "blue-purple-finale"
+          ]
+        },
+        {
+          "field": "groupVisualFamilies",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            "stingray",
+            "mosquito",
+            "stingray",
+            "mosquito",
+            "galboss"
+          ],
+          "compiledValue": [
+            "stingray",
+            "mosquito",
+            "stingray",
+            "mosquito",
+            "galboss"
+          ]
+        },
+        {
+          "field": "groupLaneTypes",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [
+            [
+              "rogue",
+              "boss",
+              "bee",
+              "but",
+              "but",
+              "bee",
+              "boss",
+              "rogue"
+            ],
+            [
+              "boss",
+              "rogue",
+              "but",
+              "bee",
+              "bee",
+              "but",
+              "rogue",
+              "boss"
+            ],
+            [
+              "bee",
+              "but",
+              "boss",
+              "rogue",
+              "rogue",
+              "boss",
+              "but",
+              "bee"
+            ],
+            [
+              "but",
+              "bee",
+              "rogue",
+              "boss",
+              "boss",
+              "rogue",
+              "bee",
+              "but"
+            ],
+            [
+              "boss",
+              "but",
+              "rogue",
+              "bee",
+              "bee",
+              "rogue",
+              "but",
+              "boss"
+            ]
+          ],
+          "compiledValue": [
+            [
+              "rogue",
+              "boss",
+              "bee",
+              "but",
+              "but",
+              "bee",
+              "boss",
+              "rogue"
+            ],
+            [
+              "boss",
+              "rogue",
+              "but",
+              "bee",
+              "bee",
+              "but",
+              "rogue",
+              "boss"
+            ],
+            [
+              "bee",
+              "but",
+              "boss",
+              "rogue",
+              "rogue",
+              "boss",
+              "but",
+              "bee"
+            ],
+            [
+              "but",
+              "bee",
+              "rogue",
+              "boss",
+              "boss",
+              "rogue",
+              "bee",
+              "but"
+            ],
+            [
+              "boss",
+              "but",
+              "rogue",
+              "bee",
+              "bee",
+              "rogue",
+              "but",
+              "boss"
+            ]
+          ]
+        },
+        {
+          "field": "groupSpawnOffsets",
+          "status": "exact",
+          "required": true,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupSpeedScales",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupArcAmps",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupDropAmps",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupLowerFieldBiases",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        },
+        {
+          "field": "groupYOffsets",
+          "status": "not-authored-in-runtime",
+          "required": false,
+          "runtimeValue": [],
+          "compiledValue": []
+        }
+      ],
+      "requiredDrift": [],
+      "optionalDrift": [],
+      "read": "Required grammar fields round-trip to current Aurora challenge layout fields."
+    }
+  ]
+}

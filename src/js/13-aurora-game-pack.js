@@ -758,7 +758,7 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
    Object.freeze(['but','rogue','boss','bee','bee','boss','rogue','but'])
   ]),
   groupVisualFamilies:Object.freeze(['classic','scorpion','scorpion','stingray','stingray']),
-  groupPathFamilies:Object.freeze(['hook-arc','cross-sweep','hook-arc','cross-sweep','boss-led-loop']),
+  groupPathFamilies:Object.freeze(['cross-sweep','cross-sweep','hook-arc','hook-arc','boss-led-loop']),
   groupReferencePaths:AURORA_CHALLENGE_STAGE7_REFERENCE_PATHS
  }),
  Object.freeze({

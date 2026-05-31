@@ -2,15 +2,15 @@
 const { withHarnessPage, sleep } = require('./browser-check-util');
 
 // The first 350ms sits directly on top of staggered spawn thresholds and is
-// too frame-sensitive to be a trustworthy regression gate. We sample once the
-// reference-backed first-challenge peel lanes are visibly underway.
+// too frame-sensitive to be a trustworthy regression gate. These samples cover
+// the first-challenge peel from offscreen approach into the visible playfield.
 const SAMPLE_TIMES = [0.7, 1.05, 1.4, 1.75, 2.1];
 const BASELINE = Object.freeze({
-  0.7: Object.freeze({ avgX: 140, minY: 39.64, maxY: 47.51, lane0X: 25.04, lane7X: 289.56 }),
-  1.05: Object.freeze({ avgX: 140, minY: 40.51, maxY: 48.37, lane0X: 52.53, lane7X: 270.13 }),
-  1.4: Object.freeze({ avgX: 140, minY: 41.37, maxY: 49.24, lane0X: 73.69, lane7X: 254.22 }),
-  1.75: Object.freeze({ avgX: 140, minY: 42.24, maxY: 50.11, lane0X: 87.14, lane7X: 242.89 }),
-  2.1: Object.freeze({ avgX: 140, minY: 43.11, maxY: 50.97, lane0X: 91.99, lane7X: 236.88 })
+  0.7: Object.freeze({ avgX: 140, minY: 38.46, maxY: 46.3, lane0X: -18.95, lane7X: 320.51 }),
+  1.05: Object.freeze({ avgX: 140, minY: 38.77, maxY: 46.61, lane0X: -6.69, lane7X: 312.39 }),
+  1.4: Object.freeze({ avgX: 140, minY: 39.09, maxY: 46.92, lane0X: 5.25, lane7X: 304.37 }),
+  1.75: Object.freeze({ avgX: 140, minY: 39.4, maxY: 47.24, lane0X: 16.77, lane7X: 296.52 }),
+  2.1: Object.freeze({ avgX: 140, minY: 39.71, maxY: 47.55, lane0X: 27.76, lane7X: 288.9 })
 });
 
 function fail(message, payload){

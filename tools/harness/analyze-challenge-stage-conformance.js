@@ -609,6 +609,32 @@ function objectTrackTargetFit(runtimeGroupVector, targetGroup, runtime, groupInd
   return compareTrackVectorToTarget(runtimeGroupVector, targetGroup, 'group-envelope-fallback');
 }
 
+function missingObjectTrackFit(targetGroup, index){
+  const groupIndex = targetGroup?.groupIndex || index + 1;
+  return {
+    groupIndex,
+    source: 'missing-runtime-track',
+    status: 'missing-runtime-track',
+    coverage: 0,
+    score10: 1,
+    runtime: null,
+    target: targetGroup?.objectTrackTarget || null,
+    components: {
+      xRange: 0,
+      yRange: 0,
+      pathLength: 0,
+      turnCount: 0,
+      reversalCount: 0,
+      lowerFieldShare: 0,
+      visibleStart: 0,
+      visibleEnd: 0,
+      entrySide: 0,
+      exitSide: 0
+    },
+    nextGap: `Target group ${groupIndex} has no measured runtime object track in this probe; improve runtime timing/sampling visibility before treating the stage as conformant.`
+  };
+}
+
 function trajectoryFit(runtimeVector, target){
   if(!runtimeVector || !target) return { rawFit: 0, trajectoryScore10: 0, distance: 1 };
   const yRange = ratioToTarget(runtimeVector.yRange, target.yRange);
@@ -1570,13 +1596,20 @@ function challengeContractFit(runtime, contract){
   const typeFit = average(typeMatches) || 0;
   const familyFit = average(familyMatches) || 0;
   const objectTargetGroups = directTargetGroups.length ? directTargetGroups : targetGroups;
-  const objectTrackFits = objectTargetGroups.map((target, index) => objectTrackTargetFit(runtime?.motionVector?.groupVectors?.[index], target, runtime, index)).filter(Boolean);
-  const objectTrackCoverage = objectTrackFits.length ? average(objectTrackFits.map(item => item.coverage)) : 0;
-  const objectTrackFit = objectTrackFits.length ? average(objectTrackFits.map(item => item.score10)) : null;
+  const perGroupMovementRows = objectTargetGroups.map((target, index) => {
+    const fit = objectTrackTargetFit(runtime?.motionVector?.groupVectors?.[index], target, runtime, index);
+    return fit
+      ? Object.assign({ status: 'measured' }, fit)
+      : missingObjectTrackFit(target, index);
+  });
+  const objectTrackFits = perGroupMovementRows.filter(item => item.status === 'measured');
+  const objectTrackCoverage = perGroupMovementRows.length ? average(perGroupMovementRows.map(item => item.coverage)) : 0;
+  const objectTrackFit = perGroupMovementRows.length ? average(perGroupMovementRows.map(item => item.score10)) : null;
+  const missingObjectTrackCount = perGroupMovementRows.filter(item => item.status !== 'measured').length;
   const hasObjectTrackTargets = objectTargetGroups.some(group => group.objectTrackTarget);
   const directTargetVideoObjectFitScore10 = directTargetGroups.length ? objectTrackFit : null;
   const directTargetVideoTrackCoverage = directTargetGroups.length
-    ? round((objectTrackFits.length / Math.max(1, directTargetGroups.length)) * objectTrackCoverage, 3)
+    ? round(objectTrackCoverage, 3)
     : null;
   const coverage = contract.targetVideoOnly
     ? clamp((0.24 * groupCountFit) + (0.76 * objectTrackCoverage))
@@ -1601,12 +1634,15 @@ function challengeContractFit(runtime, contract){
     directTargetVideoObjectFitScore10: round(directTargetVideoObjectFitScore10, 1),
     directTargetVideoTrackCoverage,
     directTargetVideoGroupCount: directTargetGroups.length || 0,
+    measuredObjectTrackCount: objectTrackFits.length,
+    missingObjectTrackCount,
     directTargetVideoEvidence: directTarget?.evidence || null,
     objectTrackFits,
+    perGroupMovementRows,
     targetGroupCount: targetGroups.length,
     runtimeGroupCount: runtimeGroups.length,
     objectTrackRead: objectTrackFits.length
-      ? `Group object-track target fit is ${round(objectTrackFit, 1)}/10 across ${objectTrackFits.length}/${objectTargetGroups.length} target group(s) using ${directTargetGroups.length || contract.targetVideoOnly ? 'direct Galaga target-video object tracks' : 'first-pass contract object tracks'}.`
+      ? `Group object-track target fit is ${round(objectTrackFit, 1)}/10 across ${objectTrackFits.length}/${objectTargetGroups.length} measured target group(s), with ${missingObjectTrackCount} missing group track(s), using ${directTargetGroups.length || contract.targetVideoOnly ? 'direct Galaga target-video object tracks' : 'first-pass contract object tracks'}.`
       : 'No group object-track targets were available in this contract.',
     read: `Target contract fit is ${round(1 + coverage * (hasObjectTrackTargets ? 7.0 : 6.2), 1)}/10 for ${contract.displayLabel || `stage ${contract.stage}`}: group count ${round(groupCountFit, 2)}, path-family order ${round(pathFamilyFit, 2)}, type order ${round(typeFit, 2)}, family order ${round(familyFit, 2)}, object-track ${round(objectTrackCoverage, 2)} via ${directTargetGroups.length || contract.targetVideoOnly ? 'direct target-video tracks' : 'first-pass contract vectors'}. This is a group/object-track read, not frame-perfect sprite identity recognition.`
   };
@@ -1638,6 +1674,11 @@ function criticalGaps(stage, runtime, match, score){
   const targetContractScore = score.strictAxisReads?.targetContractFit?.score10;
   if(targetContractScore !== null && targetContractScore !== undefined && Number.isFinite(+targetContractScore) && +targetContractScore < 5){
     gaps.push(`Target-contract fit is only ${score.strictAxisReads.targetContractFit.score10}/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.`);
+  }
+  const perGroupMovementRows = score.strictAxisReads?.targetContractFit?.perGroupMovementRows || [];
+  const missingMovementRows = perGroupMovementRows.filter(row => row.status !== 'measured');
+  if(perGroupMovementRows.length && missingMovementRows.length){
+    gaps.push(`Per-group movement tracking is incomplete: ${perGroupMovementRows.length - missingMovementRows.length}/${perGroupMovementRows.length} target group(s) have measured runtime object tracks, so missing groups may be appearing too late, too briefly, or outside the capture/readability window.`);
   }
   if(stage === 3){
     const types = typeSet(runtime?.firstWave || []);
@@ -1811,6 +1852,9 @@ function makeStageRow(stage, runtime, match, referenceLabels){
     targetVideoObjectTrackRead: score.strictAxisReads.targetContractFit?.objectTrackRead || 'Target-video object-track comparison pending.',
     targetVideoObjectTrackFitScore10: score.strictAxisReads.targetContractFit?.directTargetVideoObjectFitScore10 ?? null,
     targetVideoObjectTrackCoverage: score.strictAxisReads.targetContractFit?.directTargetVideoTrackCoverage ?? null,
+    perGroupMovementRows: score.strictAxisReads.targetContractFit?.perGroupMovementRows || [],
+    measuredObjectTrackCount: score.strictAxisReads.targetContractFit?.measuredObjectTrackCount ?? null,
+    missingObjectTrackCount: score.strictAxisReads.targetContractFit?.missingObjectTrackCount ?? null,
     targetVideoObjectTrackEvidence: score.strictAxisReads.targetContractFit?.directTargetVideoEvidence || null,
     criticalGaps: criticalGaps(stage, runtime, match, score),
     nextActions: nextActionsForStage(stage),
@@ -1836,6 +1880,26 @@ function makeStageRow(stage, runtime, match, referenceLabels){
       runtime?.layout ? 'browser-backed challengeFormationState runtime probe' : 'runtime probe pending'
     ].filter(Boolean)
   };
+}
+
+function perGroupMovementMarkdown(row){
+  const rows = Array.isArray(row.perGroupMovementRows) ? row.perGroupMovementRows : [];
+  if(!rows.length) return 'Per-group movement rows pending.';
+  const body = rows.map((item) => {
+    const runtime = item.runtime || {};
+    const target = item.target || {};
+    const status = item.status === 'measured' ? 'measured' : 'missing';
+    const runtimeRead = runtime.sampleCount
+      ? `${runtime.entrySide || 'n/a'} -> ${runtime.exitSide || 'n/a'}; start ${runtime.visibleStartS ?? 'n/a'}s; end ${runtime.visibleEndS ?? 'n/a'}s; path ${round(runtime.pathLength, 2)}`
+      : 'no runtime track captured';
+    const targetRead = target.visibleStartS !== undefined
+      ? `${target.entrySide || 'n/a'} -> ${target.exitSide || 'n/a'}; start ${target.visibleStartS ?? 'n/a'}s; end ${target.visibleEndS ?? 'n/a'}s; path ${round(target.pathLength, 2)}`
+      : 'target pending';
+    return `| ${item.groupIndex ?? ''} | ${status} | ${item.score10}/10 | ${runtimeRead} | ${targetRead} | ${item.nextGap || ''} |`;
+  }).join('\n');
+  return `| Group | Status | Fit | Aurora runtime | Galaga target | Gap |
+| --- | --- | ---: | --- | --- | --- |
+${body}`;
 }
 
 function buildMarkdown(report){
@@ -1886,6 +1950,9 @@ Target-artifact coverage has not been generated yet. Run \`npm run harness:analy
 **Group identity read:** ${row.groupIdentityRead || 'Group identity pending.'}
 
 **Target contract read:** ${row.targetContractRead || 'Target contract pending.'}
+
+**Per-group movement rows:**
+${perGroupMovementMarkdown(row)}
 
 **Shot-opportunity read:** ${row.shotOpportunityRead || 'Shot-opportunity probe pending.'}
 

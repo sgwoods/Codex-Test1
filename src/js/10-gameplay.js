@@ -190,7 +190,14 @@ function updateAuroraGameplay(dt){
  const sequenceLock=S.sequenceT>0&&(S.sequenceMode==='captureBeat'||S.sequenceMode==='rescueBeat');
  if(sequenceLock)return;
  S.att=0;
- for(const e of S.e){e.tm+=dt;if(e.hp<=0)continue;if(S.challenge)updateChallengeEnemy(e,dt);else updateEnemy(e,dt,t,T,p)}
+ for(const e of S.e){
+  if(e.hp<=0)continue;
+  if(S.challenge)updateChallengeEnemy(e,dt);
+  else{
+   e.tm+=dt;
+   updateEnemy(e,dt,t,T,p);
+  }
+ }
  runStage1Script(dt,p,T);
 
  const cleanup=!S.challenge&&S.stage===1&&alive.length<=6;
