@@ -118,7 +118,7 @@ async function main(){
   if(harnessStage7.state.stage !== 7 || !harnessStage7.state.challenge){
     fail('harness stage 7 should keep the historical internal-stage semantics used by conformance scenarios', harnessStage7);
   }
-  if(harnessStage7.banner?.bannerTxt !== 'CHALLENGING STAGE 2'){
+  if(harnessStage7.banner?.bannerTxt !== 'CHALLENGING STAGE 6-7'){
     fail('harness internal stage 7 should still present the second challenge window', harnessStage7);
   }
 
@@ -129,8 +129,8 @@ async function main(){
   if(developerChallenge2.state.stage !== 7 || developerChallenge2.requestedStartKind !== 'challenge' || developerChallenge2.requestedChallengeStage !== 2){
     fail('developer Challenging Stage 2 should map to Aurora internal challenge marker 7', developerChallenge2);
   }
-  if(developerChallenge2.banner?.bannerTxt !== 'CHALLENGING STAGE 2' || developerChallenge2.banner?.bannerSub !== 'LEVELS 7-8'){
-    fail('developer challenge-stage start should present challenge-stage numbering and level bracket separately', developerChallenge2);
+  if(developerChallenge2.banner?.bannerTxt !== 'CHALLENGING STAGE 6-7' || developerChallenge2.banner?.bannerSub !== 'STAGES 6-7'){
+    fail('developer challenge-stage start should present challenge-stage interval labels', developerChallenge2);
   }
 
   const developerProChallenge2 = await readDeveloperChallengeStart(2, 'professional');
@@ -140,7 +140,7 @@ async function main(){
   if(developerProChallenge2.state.harnessPersona !== 'professional' || developerProChallenge2.state.watchPersona !== 'professional'){
     fail('developer Professional Plays challenge start should assign the professional persona to the run', developerProChallenge2);
   }
-  if(developerProChallenge2.state.stage !== 7 || developerProChallenge2.banner?.bannerTxt !== 'CHALLENGING STAGE 2'){
+  if(developerProChallenge2.state.stage !== 7 || developerProChallenge2.banner?.bannerTxt !== 'CHALLENGING STAGE 6-7'){
     fail('developer Professional Plays challenge start should preserve challenge-stage mapping', developerProChallenge2);
   }
 

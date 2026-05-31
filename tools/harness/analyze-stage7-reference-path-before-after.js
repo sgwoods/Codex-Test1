@@ -127,7 +127,7 @@ function writeContactSheet({ before, after }){
   const sheetH = 112 + labelH + (thumbH * 2) + gutter + 62;
   const children = [
     `<rect width="100%" height="100%" fill="#06101a"/>`,
-    svgText('Stage 7 / Challenging Stage 2 before-after visual evidence', 26, 36, 22, '#f2fbff', 800),
+    svgText('Challenging Stage 6-7 before-after visual evidence', 26, 36, 22, '#f2fbff', 800),
     svgText('Before = heuristic path-family layout. After = current reference-path promoted runtime.', 26, 66, 15, '#9fc8e8', 500),
     svgText('Before', 26, 104, 18, '#ffb0a8', 800),
     svgText('After', 26, 104 + labelH + thumbH + gutter, 18, '#8effd2', 800)
@@ -203,7 +203,7 @@ Generated: ${report.generatedAt}
 Commit: ${report.commit}
 Branch: ${report.branch}
 
-This artifact gives a human-visible before/after read for the Stage 7 / Challenging Stage 2 runtime promotion.
+This artifact gives a human-visible before/after read for the Challenging Stage 6-7 runtime promotion.
 
 - Before: pre-promotion heuristic path-family layout.
 - After: current promoted reference-path layout.

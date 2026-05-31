@@ -85,6 +85,10 @@ function validateStage11ReferencePathSetup(state){
   validateReferencePathSetup(state, { stage: 11, layoutId: 'stingray-crown-hook-hybrid' });
 }
 
+function validateStage15ReferencePathSetup(state){
+  validateReferencePathSetup(state, { stage: 15, layoutId: 'pink-serpentine-late' });
+}
+
 async function main(){
   const result = await withHarnessPage({ stage: 3, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
     await page.evaluate(() => window.__galagaHarness__.setupChallengeMotionProfileTest({ stage: 3 }));
@@ -132,6 +136,15 @@ async function main(){
   validateStage11ReferencePathSetup(stage11.initial);
   validateStage11ReferencePathSetup(stage11.underway);
 
+  const stage15 = await withHarnessPage({ stage: 15, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
+    const initial = await page.evaluate(() => window.__galagaHarness__.setupChallengeMotionProfileTest({ stage: 15 }));
+    await sleep(700);
+    const underway = await page.evaluate(() => window.__galagaHarness__.challengeFormationState());
+    return { initial, underway };
+  });
+  validateStage15ReferencePathSetup(stage15.initial);
+  validateStage15ReferencePathSetup(stage15.underway);
+
   console.log(JSON.stringify({ ok: true, samples: result, stage7ReferencePath: {
     enemyCount: stage7.initial.enemies.length,
     referencePathGroups: stage7.initial.layout.groupReferencePaths.length,
@@ -140,6 +153,10 @@ async function main(){
     enemyCount: stage11.initial.enemies.length,
     referencePathGroups: stage11.initial.layout.groupReferencePaths.length,
     sourceTrackIds: [...new Set(stage11.initial.enemies.map(e => e.referencePath?.sourceTrackId).filter(Boolean))]
+  }, stage15ReferencePath: {
+    enemyCount: stage15.initial.enemies.length,
+    referencePathGroups: stage15.initial.layout.groupReferencePaths.length,
+    sourceTrackIds: [...new Set(stage15.initial.enemies.map(e => e.referencePath?.sourceTrackId).filter(Boolean))]
   } }, null, 2));
 }
 

@@ -1,6 +1,6 @@
 # challenge-08-blue-purple-finale
 
-Challenge: `8`
+Challenging stage: `Challenging Stage 30-31`
 
 Internal Aurora marker: `31`
 

@@ -1118,7 +1118,7 @@ function main(){
       why: 'The challenging stages should be spectacular safe Galaga-like bonus exhibitions. Current safety is good, but movement variation, alien novelty, and graphical conformance are not yet close.',
       effort: 'High; long-cycle CPU/browser extraction plus gameplay authoring and sprite-motion/reference labeling',
       next: challengeStage?.improvementPlan?.[2]
-        || 'Run strict challenge-stage scorer, then rebuild Challenging Stage 1 against Galaga challenge-1 arrival and late-wave references.',
+        || 'Run strict challenge-stage scorer, then rebuild Challenging Stage 2-3 against Galaga challenge-1 arrival and late-wave references.',
       evidence: challengeStagePath ? rel(challengeStagePath) : `${rel(qualityPath)}; ${levelArcPath ? rel(levelArcPath) : 'level-arc not found'}`
     }),
     row({

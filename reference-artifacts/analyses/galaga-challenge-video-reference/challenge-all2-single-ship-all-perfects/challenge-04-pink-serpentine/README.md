@@ -1,6 +1,6 @@
 # challenge-04-pink-serpentine
 
-Challenge: `4`
+Challenging stage: `Challenging Stage 14-15`
 
 Internal Aurora marker: `15`
 

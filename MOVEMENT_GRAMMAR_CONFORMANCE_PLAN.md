@@ -41,8 +41,8 @@ Steps 1-4 are now complete and verified enough to guide the next work cycle:
 `reference-artifacts/ingestion/movement-grammar/movement-grammar-0.1.json`
 
 The schema/checker, read-only Aurora challenge mapping, compiler bridge, and
-Stage 7 / Challenging Stage 2 gameplay pilot now exist. The pilot is a real
-gameplay readability win: Stage 7 now best-matches the expected Challenge 2
+Challenging Stage 6-7 gameplay pilot now exist. The pilot is a real
+gameplay readability win: the internal marker 7 set piece now best-matches the expected 6-7
 reference family (`challenge-2-arrival-group-1`) instead of reading like an
 earlier challenge, and a challenge timing fix means all five target groups are
 now visible and measured instead of later groups disappearing before they could
@@ -60,7 +60,7 @@ precision, active visual novelty, or stage-to-stage spectacle.
 2. Map existing Aurora challenge layouts into the schema without changing
    gameplay.
 3. Build a compiler that turns one schema pattern into current runtime fields.
-4. Pilot the compiler on Aurora Stage 7 / Challenging Stage 2.
+4. Pilot the compiler on Aurora Challenging Stage 6-7.
 5. Add one regular-stage entry pilot, likely Stage 4 or Stage 8.
 6. Extend ingestion so Galaga object tracks emit grammar candidates directly.
 7. Add a scorer that compares grammar intent, runtime object tracks, and target

@@ -1,6 +1,6 @@
 # challenge-05-pink-and-green-cascade
 
-Challenge: `5`
+Challenging stage: `Challenging Stage 18-19`
 
 Internal Aurora marker: `19`
 
@@ -14,7 +14,7 @@ Continues specialty novelty with pink arcs, green lower-field entries, and a cle
 
 ## Aurora Contract
 
-Build as a cascade stage: alternating specialty groups, lower-field pass risk, and stronger color/family novelty than Challenge 4.
+Build as a cascade stage: alternating specialty groups, lower-field pass risk, and stronger color/family novelty than Challenging Stage 14-15.
 
 ## Derived Sheets
 

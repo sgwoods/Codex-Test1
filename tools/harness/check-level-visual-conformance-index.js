@@ -74,7 +74,7 @@ if(!representativeRegular.length){
 
 if(!fs.existsSync(MARKDOWN)) fail('top-level markdown report missing', { markdown: 'LEVEL_VISUAL_CONFORMANCE_INDEX.md' });
 const md = fs.readFileSync(MARKDOWN, 'utf8');
-for(const required of ['Level Visual Conformance Index', 'Challenging Stage 1', 'Aurora current', 'Galaga target', 'Aurora 10s video', 'Galaga target 10s video', 'Critical gap']){
+for(const required of ['Level Visual Conformance Index', 'Challenging Stage 2-3', 'Aurora current', 'Galaga target', 'Aurora 10s video', 'Galaga target 10s video', 'Critical gap']){
   if(!md.includes(required)) fail('markdown report missing required text', { required });
 }
 

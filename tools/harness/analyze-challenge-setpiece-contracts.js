@@ -45,6 +45,12 @@ function rel(file){
   return path.relative(ROOT, file).split(path.sep).join('/');
 }
 
+function challengeStageDisplayLabel(stage){
+  const marker = Number(stage);
+  if(!Number.isFinite(marker)) return 'Challenging Stage interval pending';
+  return `Challenging Stage ${Math.max(1, marker - 1)}-${marker}`;
+}
+
 function git(args, fallback = ''){
   try{
     return execFileSync('git', ['-C', ROOT, ...args], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
@@ -102,7 +108,7 @@ function contractRow(control, stageRow, authority){
   return {
     stage: control.stage,
     challengeNumber: control.challengeNumber,
-    displayLabel: control.label || `Challenging Stage ${control.challengeNumber}`,
+    displayLabel: challengeStageDisplayLabel(control.stage),
     status: 'active-measured-setpiece-contract',
     priority,
     targetContract: {
@@ -158,7 +164,7 @@ function contractRow(control, stageRow, authority){
 }
 
 function buildMarkdown(report){
-  const rows = report.contracts.map(row => `| ${row.challengeNumber} | ${row.stage} | ${row.priority} | ${row.runtimeRead.currentScore10 ?? 'n/a'}/10 | ${row.runtimeRead.targetContractFitScore10 ?? 'n/a'}/10 | ${row.runtimeRead.targetVideoObjectTrackFitScore10 ?? 'n/a'}/10 | ${(row.targetContract.pathFamilies || []).join(', ')} | ${row.targetContract.referencePathCount}/5 | ${row.nextImplementationStep} |`).join('\n');
+  const rows = report.contracts.map(row => `| ${row.displayLabel} | ${row.stage} | ${row.priority} | ${row.runtimeRead.currentScore10 ?? 'n/a'}/10 | ${row.runtimeRead.targetContractFitScore10 ?? 'n/a'}/10 | ${row.runtimeRead.targetVideoObjectTrackFitScore10 ?? 'n/a'}/10 | ${(row.targetContract.pathFamilies || []).join(', ')} | ${row.targetContract.referencePathCount}/5 | ${row.nextImplementationStep} |`).join('\n');
   const details = report.contracts.map(row => `
 ## ${row.displayLabel}
 
@@ -195,8 +201,8 @@ This artifact turns Galaga challenge reference tracks into explicit Aurora set-p
 
 ${report.summary.read}
 
-| Challenge | Stage | Priority | Current | Contract Fit | Target-Video Fit | Path Families | Reference Paths | Next Step |
-| ---: | ---: | --- | ---: | ---: | ---: | --- | ---: | --- |
+| Challenging Stage | Internal Marker | Priority | Current | Contract Fit | Target-Video Fit | Path Families | Reference Paths | Next Step |
+| --- | ---: | --- | ---: | ---: | ---: | --- | ---: | --- |
 ${rows}
 
 ${details}

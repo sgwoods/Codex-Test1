@@ -260,7 +260,7 @@ Practical standard:
   event fit is roughly `6.3-6.5/10`, and the next audio pass should target the
   highest-risk cue family while preserving `9/9` cue alignment
 - the dedicated challenge-stage conformance score is now `4.1/10`, with
-  interesting factor at `4.2/10`; Challenge Stage 1 now has a separate
+  interesting factor at `4.2/10`; Challenging Stage 2-3 now has a separate
   first-pass group target-contract fit of `7.2/10`, but the beta-facing
   challenge gate remains `5.0/10` for the full strict score. The next pass
   should add Stage 7 and Stage 11 target contracts, high-bonus readability

@@ -85,7 +85,7 @@ const PRIMARY_WINDOWS = [
     family: 'pink-green-cascade',
     targetFamilies: ['pink specialty family', 'green ladder family', 'boss marker'],
     motionRead: 'Continues specialty novelty with pink arcs, green lower-field entries, and a clearer split between group identities.',
-    auroraContract: 'Build as a cascade stage: alternating specialty groups, lower-field pass risk, and stronger color/family novelty than Challenge 4.'
+    auroraContract: 'Build as a cascade stage: alternating specialty groups, lower-field pass risk, and stronger color/family novelty than Challenging Stage 14-15.'
   },
   {
     challengeNumber: 6,
@@ -128,6 +128,12 @@ function ensureDir(dir){
 
 function rel(file){
   return path.relative(ROOT, file).split(path.sep).join('/');
+}
+
+function challengeStageDisplayLabel(stageMarker){
+  const marker = Number(stageMarker);
+  if(!Number.isFinite(marker)) return 'Challenging Stage interval pending';
+  return `Challenging Stage ${Math.max(1, marker - 1)}-${marker}`;
 }
 
 function run(cmd, args, opts = {}){
@@ -283,7 +289,7 @@ function extractPrimaryWindow(source, window){
   writeJson(frameIndexPath, frameIndex);
   writeText(path.join(outDir, 'README.md'), `# ${window.id}
 
-Challenge: \`${window.challengeNumber}\`
+Challenging stage: \`${challengeStageDisplayLabel(window.stageMarker)}\`
 
 Internal Aurora marker: \`${window.stageMarker}\`
 
@@ -362,13 +368,15 @@ ${summary.whatTheVideosShow.map(item => `- ${item}`).join('\n')}
 
 ## Window Reads
 
-| Challenge | Stage Marker | Window | Family | Contact Sheet | Aurora Contract |
-| ---: | ---: | --- | --- | --- | --- |
-${report.primaryWindows.map(window => `| ${window.challengeNumber} | ${window.stageMarker} | ${window.start}s-${window.start + window.duration}s | ${window.family} | \`${window.contactSheet}\` | ${window.auroraContract} |`).join('\n')}
+| Challenging Stage | Internal Marker | Window | Family | Contact Sheet | Aurora Contract |
+| --- | ---: | --- | --- | --- | --- |
+${report.primaryWindows.map(window => `| ${challengeStageDisplayLabel(window.stageMarker)} | ${window.stageMarker} | ${window.start}s-${window.start + window.duration}s | ${window.family} | \`${window.contactSheet}\` | ${window.auroraContract} |`).join('\n')}
 
 ## Stage Improvement Plan
 
-${report.stageImprovementPlan.map(item => `### Challenge ${item.challengeNumber} / Stage Marker ${item.stageMarker}
+${report.stageImprovementPlan.map(item => `### ${challengeStageDisplayLabel(item.stageMarker)}
+
+Internal marker: \`${item.stageMarker}\`
 
 Priority: \`${item.priority}\`
 
@@ -431,9 +439,9 @@ function main(){
     primaryWindows,
     stageImprovementPlan: buildStageImprovementPlan(primaryWindows),
     nextBestSteps: [
-      'Promote challenge-all2 windows into accepted five-group reference labels for Challenges 1-8.',
-      'Rebuild Aurora Challenge 4 first with the pink-serpentine contract because it is the most visible current late-stage embarrassment.',
-      'Then rebuild Challenge 7 with the yellow-diagonal-fan contract because it creates a strong player-visible novelty jump.',
+      'Promote challenge-all2 windows into accepted five-group reference labels for Challenging Stages 2-3 through 30-31.',
+      'Rebuild Aurora Challenging Stage 14-15 first with the pink-serpentine contract because it is the most visible current late-stage embarrassment.',
+      'Then rebuild Challenging Stage 26-27 with the yellow-diagonal-fan contract because it creates a strong player-visible novelty jump.',
       'Add runtime probes that verify each Aurora challenge has five groups, no shots, no ship losses, distinct path families, and expected visual-family novelty.',
       'Only after labels exist, lift challenge-stage target readiness from partial media evidence to direct trajectory scoring.'
     ],

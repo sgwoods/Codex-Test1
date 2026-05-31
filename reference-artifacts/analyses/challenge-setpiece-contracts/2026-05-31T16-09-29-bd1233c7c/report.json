@@ -1,0 +1,1126 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "challenge-setpiece-contracts",
+  "generatedAt": "2026-05-31T16:09:29.700Z",
+  "commit": "bd1233c7c",
+  "branch": "codex/macbook-challenge-stage-gameplay-spectacle",
+  "gameKey": "aurora-galactica",
+  "sourceArtifacts": {
+    "challengeTrajectoryControls": "reference-artifacts/analyses/challenge-trajectory-controls/latest.json",
+    "challengeStageConformance": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+    "galagaTargetEvidenceAudit": "reference-artifacts/analyses/galaga-target-evidence-audit/latest.json"
+  },
+  "summary": {
+    "contractCount": 8,
+    "expectedGroupCount": 40,
+    "referenceBackedGroupCount": 40,
+    "averageCurrentScore10": 4.3,
+    "averageMovementScore10": 4.4,
+    "averageGraphicsScore10": 4.6,
+    "averageNoveltyScore10": 3.9,
+    "averageTargetContractFitScore10": 5.4,
+    "averageTargetVideoObjectTrackFitScore10": 3.7,
+    "challengeSpecialtyAuthorityScore10": 3.2,
+    "releaseReadyCount": 0,
+    "highestPriorityStages": [
+      3,
+      7,
+      15,
+      19,
+      23,
+      27,
+      31
+    ],
+    "read": "The bottleneck is now clear: movement and group contracts have enough reference structure to guide implementation, but target-video fit and challenge-specialty sprite authority remain too low for a mature conformance claim."
+  },
+  "measurementLimits": [
+    "This is a contract artifact, not a runtime promotion by itself.",
+    "Reference paths are object-track summaries from ingested video and should still be checked by browser-backed runtime probes after each gameplay edit.",
+    "Challenge specialty alien graphics are explicitly authority-limited until clean target windows replace provisional sheet cells."
+  ],
+  "contracts": [
+    {
+      "stage": 3,
+      "challengeNumber": 1,
+      "displayLabel": "Challenging Stage 2-3",
+      "status": "active-measured-setpiece-contract",
+      "priority": "highest",
+      "targetContract": {
+        "expectedGroupCount": 5,
+        "expectedEnemyCount": 40,
+        "safetyGuardrails": [
+          "no enemy shots",
+          "no enemy attack starts",
+          "no ship losses",
+          "40 targets presented as a bonus set piece",
+          "perfect-bonus feedback remains visible after clear"
+        ],
+        "pathFamilies": [
+          "first-challenge-peel",
+          "classic-column-drop",
+          "side-hook-return"
+        ],
+        "groupSchedule": [
+          {
+            "groupIndex": 1,
+            "pathFamily": "first-challenge-peel",
+            "spawnOffsetS": 0,
+            "durationS": 3.25,
+            "speedScale": 2.52,
+            "arcAmp": 1.72,
+            "dropAmp": 1.16,
+            "lowerFieldBias": 188,
+            "yOffset": 86,
+            "referencePathId": "target-track-33",
+            "targetTrackConfidence": 0.737,
+            "controlIntent": "first-challenge-peel-or-hook"
+          },
+          {
+            "groupIndex": 2,
+            "pathFamily": "classic-column-drop",
+            "spawnOffsetS": 4.38,
+            "durationS": 6.12,
+            "speedScale": 1.34,
+            "arcAmp": 1.31,
+            "dropAmp": 1.6,
+            "lowerFieldBias": 38,
+            "yOffset": 1,
+            "referencePathId": "target-track-84",
+            "targetTrackConfidence": 0.754,
+            "controlIntent": "classic-tall-bonus-column"
+          },
+          {
+            "groupIndex": 3,
+            "pathFamily": "first-challenge-peel",
+            "spawnOffsetS": 7.75,
+            "durationS": 4.13,
+            "speedScale": 1.99,
+            "arcAmp": 1.72,
+            "dropAmp": 1.5,
+            "lowerFieldBias": 119,
+            "yOffset": 40,
+            "referencePathId": "target-track-109",
+            "targetTrackConfidence": 0.762,
+            "controlIntent": "first-challenge-peel-or-hook"
+          },
+          {
+            "groupIndex": 4,
+            "pathFamily": "side-hook-return",
+            "spawnOffsetS": 11.25,
+            "durationS": 4.63,
+            "speedScale": 1.77,
+            "arcAmp": 1.68,
+            "dropAmp": 1.51,
+            "lowerFieldBias": 134,
+            "yOffset": 47,
+            "referencePathId": "target-track-133",
+            "targetTrackConfidence": 0.773,
+            "controlIntent": "upper-band-bonus-line"
+          },
+          {
+            "groupIndex": 5,
+            "pathFamily": "side-hook-return",
+            "spawnOffsetS": 15.25,
+            "durationS": 0.75,
+            "speedScale": 3.4,
+            "arcAmp": 1.03,
+            "dropAmp": 1.12,
+            "lowerFieldBias": 0,
+            "yOffset": 0,
+            "referencePathId": "target-track-165",
+            "targetTrackConfidence": 0.542,
+            "controlIntent": "upper-band-bonus-line"
+          }
+        ],
+        "referencePathCount": 5,
+        "averageTargetConfidence": 0.714,
+        "averageTargetXRange": 0.337,
+        "averageTargetYRange": 0.4528,
+        "averageLowerFieldShare": 0.5833
+      },
+      "runtimeRead": {
+        "currentScore10": 4,
+        "movementScore10": 3.7,
+        "graphicsScore10": 4.4,
+        "alienNoveltyScore10": 3.9,
+        "shotOpportunityScore10": 5,
+        "targetContractFitScore10": 6.9,
+        "targetVideoObjectTrackFitScore10": 3.3,
+        "safetyPass": true,
+        "bestReferenceMatch": "challenge-1-arrival-group-1",
+        "currentRead": "first-challenge-peel / first-challenge-peel; lanes bee, bee, bee, bee, but, but, but, but; first-wave types bee, bee, bee, bee, but, but, but, but; visual families classic; strict movement 3.7/10, graphics 4.4/10, alien novelty 3.9/10, shot opportunity 5/10, target-contract fit 6.9/10."
+      },
+      "targetAuthority": {
+        "roleKey": "challenge-specialty-aliens",
+        "status": "provisional-target-only",
+        "confidence": "low-medium",
+        "averageAuthorityScore10": 3.2,
+        "read": "Do not use these cells as release-facing proof of challenge alien graphical conformance. Use them to plan runtime families and to prioritize better ingestion.",
+        "nextGap": "Extract clean challenge-specialty alien frames from segmented motion clips or target gameplay windows, then split the generic role into named target families."
+      },
+      "releaseGate": {
+        "ready": false,
+        "reason": "Not ready for a strong challenge-stage conformance claim; needs more movement, graphics, novelty, or target-authority lift.",
+        "minimumNextBetaTarget": ">=5.0/10 strict challenge conformance with no safety regression and at least one visibly distinct authored challenge upgrade.",
+        "matureTarget": ">=8.5/10 with clean target sprite authority, five-group frame labels, and replay-visible novelty across all eight challenge stages."
+      },
+      "criticalGaps": [
+        "Movement conformance is only 3.7/10 under the strict scorer: current paths are too short/shallow and do not yet show the sweeping, turning, learnable Galaga challenge-stage trajectories.",
+        "Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.",
+        "Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns."
+      ],
+      "nextActions": [
+        "Protect the Challenging Stage 2-3 bee/butterfly line contract, then tune path length, turn count, and rack-slot precision against the 2-3 arrival and late-wave labels.",
+        "Add contact-sheet comparison for first-visible frame, entry side, exit side, lane occupancy, and group timing so the next tuning pass can improve trajectory precision without subjective guessing."
+      ],
+      "nextImplementationStep": "Protect the Challenging Stage 2-3 bee/butterfly line contract, then tune path length, turn count, and rack-slot precision against the 2-3 arrival and late-wave labels."
+    },
+    {
+      "stage": 7,
+      "challengeNumber": 2,
+      "displayLabel": "Challenging Stage 6-7",
+      "status": "active-measured-setpiece-contract",
+      "priority": "highest",
+      "targetContract": {
+        "expectedGroupCount": 5,
+        "expectedEnemyCount": 40,
+        "safetyGuardrails": [
+          "no enemy shots",
+          "no enemy attack starts",
+          "no ship losses",
+          "40 targets presented as a bonus set piece",
+          "perfect-bonus feedback remains visible after clear"
+        ],
+        "pathFamilies": [
+          "cross-sweep",
+          "hook-arc"
+        ],
+        "groupSchedule": [
+          {
+            "groupIndex": 1,
+            "pathFamily": "cross-sweep",
+            "spawnOffsetS": 0,
+            "durationS": 1.88,
+            "speedScale": 3.4,
+            "arcAmp": 1.91,
+            "dropAmp": 1.17,
+            "lowerFieldBias": 188,
+            "yOffset": 83,
+            "referencePathId": "target-track-10",
+            "targetTrackConfidence": 0.752,
+            "controlIntent": "mixed-crossing-sweep"
+          },
+          {
+            "groupIndex": 2,
+            "pathFamily": "hook-arc",
+            "spawnOffsetS": 2.88,
+            "durationS": 3.5,
+            "speedScale": 2.34,
+            "arcAmp": 1.24,
+            "dropAmp": 1.56,
+            "lowerFieldBias": 0,
+            "yOffset": 0,
+            "referencePathId": "target-track-66",
+            "targetTrackConfidence": 0.706,
+            "controlIntent": "mixed-hook-arrival"
+          },
+          {
+            "groupIndex": 3,
+            "pathFamily": "hook-arc",
+            "spawnOffsetS": 4.25,
+            "durationS": 0.75,
+            "speedScale": 3.4,
+            "arcAmp": 1.07,
+            "dropAmp": 1.07,
+            "lowerFieldBias": 188,
+            "yOffset": 86,
+            "referencePathId": "target-track-71",
+            "targetTrackConfidence": 0.447,
+            "controlIntent": "mixed-hook-arrival"
+          },
+          {
+            "groupIndex": 4,
+            "pathFamily": "cross-sweep",
+            "spawnOffsetS": 7.13,
+            "durationS": 3.25,
+            "speedScale": 2.52,
+            "arcAmp": 2.21,
+            "dropAmp": 1.61,
+            "lowerFieldBias": 57,
+            "yOffset": 10,
+            "referencePathId": "target-track-110",
+            "targetTrackConfidence": 0.719,
+            "controlIntent": "mixed-crossing-sweep"
+          },
+          {
+            "groupIndex": 5,
+            "pathFamily": "hook-arc",
+            "spawnOffsetS": 13.38,
+            "durationS": 2.5,
+            "speedScale": 3.28,
+            "arcAmp": 1.25,
+            "dropAmp": 1.59,
+            "lowerFieldBias": 31,
+            "yOffset": 0,
+            "referencePathId": "target-track-142",
+            "targetTrackConfidence": 0.728,
+            "controlIntent": "mixed-hook-arrival"
+          }
+        ],
+        "referencePathCount": 5,
+        "averageTargetConfidence": 0.67,
+        "averageTargetXRange": 0.3774,
+        "averageTargetYRange": 0.4596,
+        "averageLowerFieldShare": 0.6491
+      },
+      "runtimeRead": {
+        "currentScore10": 4.3,
+        "movementScore10": 4.6,
+        "graphicsScore10": 4.2,
+        "alienNoveltyScore10": 3.9,
+        "shotOpportunityScore10": 6,
+        "targetContractFitScore10": 7.2,
+        "targetVideoObjectTrackFitScore10": 4.5,
+        "safetyPass": true,
+        "bestReferenceMatch": "challenge-2-arrival-group-1",
+        "currentRead": "scorpion-cross-sweep / cross-sweep; lanes but, boss, rogue, bee, bee, rogue, boss, but; first-wave types but, boss, rogue, bee, bee, rogue, boss, but; visual families classic; strict movement 4.6/10, graphics 4.2/10, alien novelty 3.9/10, shot opportunity 6/10, target-contract fit 7.2/10."
+      },
+      "targetAuthority": {
+        "roleKey": "challenge-specialty-aliens",
+        "status": "provisional-target-only",
+        "confidence": "low-medium",
+        "averageAuthorityScore10": 3.2,
+        "read": "Do not use these cells as release-facing proof of challenge alien graphical conformance. Use them to plan runtime families and to prioritize better ingestion.",
+        "nextGap": "Extract clean challenge-specialty alien frames from segmented motion clips or target gameplay windows, then split the generic role into named target families."
+      },
+      "releaseGate": {
+        "ready": false,
+        "reason": "Not ready for a strong challenge-stage conformance claim; needs more movement, graphics, novelty, or target-authority lift.",
+        "minimumNextBetaTarget": ">=5.0/10 strict challenge conformance with no safety regression and at least one visibly distinct authored challenge upgrade.",
+        "matureTarget": ">=8.5/10 with clean target sprite authority, five-group frame labels, and replay-visible novelty across all eight challenge stages."
+      },
+      "criticalGaps": [
+        "Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.",
+        "Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
+        "Cross-sweep identity now lands on the expected Challenging Stage 6-7 reference family; next work is trajectory precision and active visual novelty, not basic identity."
+      ],
+      "nextActions": [
+        "Tune Challenging Stage 6-7 toward the denser mixed-novelty-line reference instead of relying on a generic cross-sweep.",
+        "Score separate group identities so Challenging Stage 6-7 is not just a slightly wider repeat of Challenging Stage 2-3."
+      ],
+      "nextImplementationStep": "Tune Challenging Stage 6-7 toward the denser mixed-novelty-line reference instead of relying on a generic cross-sweep."
+    },
+    {
+      "stage": 11,
+      "challengeNumber": 3,
+      "displayLabel": "Challenging Stage 10-11",
+      "status": "active-measured-setpiece-contract",
+      "priority": "high",
+      "targetContract": {
+        "expectedGroupCount": 5,
+        "expectedEnemyCount": 40,
+        "safetyGuardrails": [
+          "no enemy shots",
+          "no enemy attack starts",
+          "no ship losses",
+          "40 targets presented as a bonus set piece",
+          "perfect-bonus feedback remains visible after clear"
+        ],
+        "pathFamilies": [
+          "hook-arc"
+        ],
+        "groupSchedule": [
+          {
+            "groupIndex": 1,
+            "pathFamily": "hook-arc",
+            "spawnOffsetS": 0,
+            "durationS": 1.5,
+            "speedScale": 3.4,
+            "arcAmp": 1.1,
+            "dropAmp": 1.54,
+            "lowerFieldBias": 135,
+            "yOffset": 48,
+            "referencePathId": "target-track-3",
+            "targetTrackConfidence": 0.564,
+            "controlIntent": "boss-led-tall-hook"
+          },
+          {
+            "groupIndex": 2,
+            "pathFamily": "hook-arc",
+            "spawnOffsetS": 0.88,
+            "durationS": 3,
+            "speedScale": 2.73,
+            "arcAmp": 1.46,
+            "dropAmp": 1.42,
+            "lowerFieldBias": 0,
+            "yOffset": 0,
+            "referencePathId": "target-track-16",
+            "targetTrackConfidence": 0.674,
+            "controlIntent": "boss-led-tall-hook"
+          },
+          {
+            "groupIndex": 3,
+            "pathFamily": "hook-arc",
+            "spawnOffsetS": 4.38,
+            "durationS": 4,
+            "speedScale": 2.05,
+            "arcAmp": 1.7,
+            "dropAmp": 1.54,
+            "lowerFieldBias": 19,
+            "yOffset": 0,
+            "referencePathId": "target-track-37",
+            "targetTrackConfidence": 0.739,
+            "controlIntent": "boss-led-tall-hook"
+          },
+          {
+            "groupIndex": 4,
+            "pathFamily": "hook-arc",
+            "spawnOffsetS": 7.88,
+            "durationS": 5,
+            "speedScale": 1.64,
+            "arcAmp": 1.69,
+            "dropAmp": 1.58,
+            "lowerFieldBias": 29,
+            "yOffset": 0,
+            "referencePathId": "target-track-77",
+            "targetTrackConfidence": 0.739,
+            "controlIntent": "boss-led-tall-hook"
+          },
+          {
+            "groupIndex": 5,
+            "pathFamily": "hook-arc",
+            "spawnOffsetS": 12.13,
+            "durationS": 3.75,
+            "speedScale": 2.19,
+            "arcAmp": 1.22,
+            "dropAmp": 1.6,
+            "lowerFieldBias": 0,
+            "yOffset": 0,
+            "referencePathId": "target-track-85",
+            "targetTrackConfidence": 0.713,
+            "controlIntent": "boss-led-tall-hook"
+          }
+        ],
+        "referencePathCount": 5,
+        "averageTargetConfidence": 0.686,
+        "averageTargetXRange": 0.3245,
+        "averageTargetYRange": 0.6346,
+        "averageLowerFieldShare": 0.4101
+      },
+      "runtimeRead": {
+        "currentScore10": 4.4,
+        "movementScore10": 4.5,
+        "graphicsScore10": 4.6,
+        "alienNoveltyScore10": 3.9,
+        "shotOpportunityScore10": 6.1,
+        "targetContractFitScore10": 7.3,
+        "targetVideoObjectTrackFitScore10": 4.9,
+        "safetyPass": true,
+        "bestReferenceMatch": "challenge-3-arrival-group-1",
+        "currentRead": "stingray-crown-hook-hybrid / hook-arc; lanes boss, rogue, but, bee, boss, bee, but, rogue; first-wave types boss, rogue, but, bee, boss, bee, but, rogue; visual families dragonfly; strict movement 4.5/10, graphics 4.6/10, alien novelty 3.9/10, shot opportunity 6.1/10, target-contract fit 7.3/10."
+      },
+      "targetAuthority": {
+        "roleKey": "challenge-specialty-aliens",
+        "status": "provisional-target-only",
+        "confidence": "low-medium",
+        "averageAuthorityScore10": 3.2,
+        "read": "Do not use these cells as release-facing proof of challenge alien graphical conformance. Use them to plan runtime families and to prioritize better ingestion.",
+        "nextGap": "Extract clean challenge-specialty alien frames from segmented motion clips or target gameplay windows, then split the generic role into named target families."
+      },
+      "releaseGate": {
+        "ready": false,
+        "reason": "Not ready for a strong challenge-stage conformance claim; needs more movement, graphics, novelty, or target-authority lift.",
+        "minimumNextBetaTarget": ">=5.0/10 strict challenge conformance with no safety regression and at least one visibly distinct authored challenge upgrade.",
+        "matureTarget": ">=8.5/10 with clean target sprite authority, five-group frame labels, and replay-visible novelty across all eight challenge stages."
+      },
+      "criticalGaps": [
+        "Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.",
+        "Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
+        "Dragonfly/boss-led identity now lands on the expected Challenging Stage 10-11 reference family, but sprite-motion novelty and tracked Galaga 10-11 path phases are not yet scored."
+      ],
+      "nextActions": [
+        "Promote Challenging Stage 10-11 boss-led reference phases and score dragonfly visual novelty as animation, not only family label.",
+        "Add motion windows for wing flaps, pulsing, dive/rotation silhouette, and challenge-only nonlethal arrival."
+      ],
+      "nextImplementationStep": "Promote Challenging Stage 10-11 boss-led reference phases and score dragonfly visual novelty as animation, not only family label."
+    },
+    {
+      "stage": 15,
+      "challengeNumber": 4,
+      "displayLabel": "Challenging Stage 14-15",
+      "status": "active-measured-setpiece-contract",
+      "priority": "highest",
+      "targetContract": {
+        "expectedGroupCount": 5,
+        "expectedEnemyCount": 40,
+        "safetyGuardrails": [
+          "no enemy shots",
+          "no enemy attack starts",
+          "no ship losses",
+          "40 targets presented as a bonus set piece",
+          "perfect-bonus feedback remains visible after clear"
+        ],
+        "pathFamilies": [
+          "pink-serpentine"
+        ],
+        "groupSchedule": [
+          {
+            "groupIndex": 1,
+            "pathFamily": "pink-serpentine",
+            "spawnOffsetS": 0,
+            "durationS": 3.25,
+            "speedScale": 2.52,
+            "arcAmp": 1.54,
+            "dropAmp": 1.33,
+            "lowerFieldBias": 158,
+            "yOffset": 59,
+            "referencePathId": "target-track-1",
+            "targetTrackConfidence": 0.678,
+            "controlIntent": "pink-serpentine-lower-sweep"
+          },
+          {
+            "groupIndex": 2,
+            "pathFamily": "pink-serpentine",
+            "spawnOffsetS": 0.5,
+            "durationS": 2.75,
+            "speedScale": 2.98,
+            "arcAmp": 1.3,
+            "dropAmp": 1.21,
+            "lowerFieldBias": 188,
+            "yOffset": 80,
+            "referencePathId": "target-track-9",
+            "targetTrackConfidence": 0.597,
+            "controlIntent": "pink-serpentine-lower-sweep"
+          },
+          {
+            "groupIndex": 3,
+            "pathFamily": "pink-serpentine",
+            "spawnOffsetS": 2.88,
+            "durationS": 3.75,
+            "speedScale": 2.19,
+            "arcAmp": 1.31,
+            "dropAmp": 1.59,
+            "lowerFieldBias": 41,
+            "yOffset": 3,
+            "referencePathId": "target-track-34",
+            "targetTrackConfidence": 0.717,
+            "controlIntent": "pink-serpentine-compact"
+          },
+          {
+            "groupIndex": 4,
+            "pathFamily": "pink-serpentine",
+            "spawnOffsetS": 6.38,
+            "durationS": 3.5,
+            "speedScale": 2.34,
+            "arcAmp": 1.31,
+            "dropAmp": 1.59,
+            "lowerFieldBias": 14,
+            "yOffset": 0,
+            "referencePathId": "target-track-61",
+            "targetTrackConfidence": 0.712,
+            "controlIntent": "pink-serpentine-compact"
+          },
+          {
+            "groupIndex": 5,
+            "pathFamily": "pink-serpentine",
+            "spawnOffsetS": 13.13,
+            "durationS": 2.75,
+            "speedScale": 2.98,
+            "arcAmp": 1.83,
+            "dropAmp": 0.98,
+            "lowerFieldBias": 188,
+            "yOffset": 86,
+            "referencePathId": "target-track-83",
+            "targetTrackConfidence": 0.752,
+            "controlIntent": "pink-serpentine-lower-sweep"
+          }
+        ],
+        "referencePathCount": 5,
+        "averageTargetConfidence": 0.691,
+        "averageTargetXRange": 0.3374,
+        "averageTargetYRange": 0.3881,
+        "averageLowerFieldShare": 0.729
+      },
+      "runtimeRead": {
+        "currentScore10": 4.3,
+        "movementScore10": 4.3,
+        "graphicsScore10": 4.6,
+        "alienNoveltyScore10": 3.9,
+        "shotOpportunityScore10": 6.3,
+        "targetContractFitScore10": 5.1,
+        "targetVideoObjectTrackFitScore10": 4.4,
+        "safetyPass": true,
+        "bestReferenceMatch": "challenge-4-pink-serpentine-group-1",
+        "currentRead": "pink-serpentine-late / pink-serpentine; lanes boss, rogue, but, bee, bee, but, rogue, boss; first-wave types boss, rogue, but, bee, bee, but, rogue, boss; visual families galboss; strict movement 4.3/10, graphics 4.6/10, alien novelty 3.9/10, shot opportunity 6.3/10, target-contract fit 5.1/10."
+      },
+      "targetAuthority": {
+        "roleKey": "challenge-specialty-aliens",
+        "status": "provisional-target-only",
+        "confidence": "low-medium",
+        "averageAuthorityScore10": 3.2,
+        "read": "Do not use these cells as release-facing proof of challenge alien graphical conformance. Use them to plan runtime families and to prioritize better ingestion.",
+        "nextGap": "Extract clean challenge-specialty alien frames from segmented motion clips or target gameplay windows, then split the generic role into named target families."
+      },
+      "releaseGate": {
+        "ready": false,
+        "reason": "Not ready for a strong challenge-stage conformance claim; needs more movement, graphics, novelty, or target-authority lift.",
+        "minimumNextBetaTarget": ">=5.0/10 strict challenge conformance with no safety regression and at least one visibly distinct authored challenge upgrade.",
+        "matureTarget": ">=8.5/10 with clean target sprite authority, five-group frame labels, and replay-visible novelty across all eight challenge stages."
+      },
+      "criticalGaps": [
+        "Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.",
+        "Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
+        "Pink-serpentine identity now lands on its first-pass late reference, but it still needs five-group frame labels, target sprite-motion evidence, and stronger player-visible novelty before it can claim maturity."
+      ],
+      "nextActions": [
+        "Promote the Challenging Stage 14-15 pink-serpentine window into five group labels and tune the runtime path so all groups keep a readable serpentine score lane.",
+        "Add high-bonus readability probes so late-stage complexity stays learnable instead of becoming visual noise."
+      ],
+      "nextImplementationStep": "Promote the Challenging Stage 14-15 pink-serpentine window into five group labels and tune the runtime path so all groups keep a readable serpentine score lane."
+    },
+    {
+      "stage": 19,
+      "challengeNumber": 5,
+      "displayLabel": "Challenging Stage 18-19",
+      "status": "active-measured-setpiece-contract",
+      "priority": "highest",
+      "targetContract": {
+        "expectedGroupCount": 5,
+        "expectedEnemyCount": 40,
+        "safetyGuardrails": [
+          "no enemy shots",
+          "no enemy attack starts",
+          "no ship losses",
+          "40 targets presented as a bonus set piece",
+          "perfect-bonus feedback remains visible after clear"
+        ],
+        "pathFamilies": [
+          "pink-green-low-sweep",
+          "pink-green-cascade"
+        ],
+        "groupSchedule": [
+          {
+            "groupIndex": 1,
+            "pathFamily": "pink-green-low-sweep",
+            "spawnOffsetS": 0,
+            "durationS": 3.25,
+            "speedScale": 2.52,
+            "arcAmp": 1.93,
+            "dropAmp": 1.31,
+            "lowerFieldBias": 188,
+            "yOffset": 76,
+            "referencePathId": "target-track-12",
+            "targetTrackConfidence": 0.742,
+            "controlIntent": "pink-green-low-cascade"
+          },
+          {
+            "groupIndex": 2,
+            "pathFamily": "pink-green-low-sweep",
+            "spawnOffsetS": 3.13,
+            "durationS": 4.37,
+            "speedScale": 1.88,
+            "arcAmp": 1.83,
+            "dropAmp": 1.34,
+            "lowerFieldBias": 188,
+            "yOffset": 81,
+            "referencePathId": "target-track-43",
+            "targetTrackConfidence": 0.601,
+            "controlIntent": "pink-green-low-cascade"
+          },
+          {
+            "groupIndex": 3,
+            "pathFamily": "pink-green-cascade",
+            "spawnOffsetS": 7.38,
+            "durationS": 3.5,
+            "speedScale": 2.34,
+            "arcAmp": 1.41,
+            "dropAmp": 1.62,
+            "lowerFieldBias": 33,
+            "yOffset": 0,
+            "referencePathId": "target-track-56",
+            "targetTrackConfidence": 0.737,
+            "controlIntent": "pink-green-tall-cascade"
+          },
+          {
+            "groupIndex": 4,
+            "pathFamily": "pink-green-cascade",
+            "spawnOffsetS": 10.63,
+            "durationS": 2.37,
+            "speedScale": 3.4,
+            "arcAmp": 1.72,
+            "dropAmp": 1.59,
+            "lowerFieldBias": 37,
+            "yOffset": 1,
+            "referencePathId": "target-track-80",
+            "targetTrackConfidence": 0.735,
+            "controlIntent": "pink-green-tall-cascade"
+          },
+          {
+            "groupIndex": 5,
+            "pathFamily": "pink-green-cascade",
+            "spawnOffsetS": 12.88,
+            "durationS": 3,
+            "speedScale": 2.73,
+            "arcAmp": 1.62,
+            "dropAmp": 1.26,
+            "lowerFieldBias": 1,
+            "yOffset": 0,
+            "referencePathId": "target-track-94",
+            "targetTrackConfidence": 0.59,
+            "controlIntent": "pink-green-tall-cascade"
+          }
+        ],
+        "referencePathCount": 5,
+        "averageTargetConfidence": 0.681,
+        "averageTargetXRange": 0.5082,
+        "averageTargetYRange": 0.4859,
+        "averageLowerFieldShare": 0.6287
+      },
+      "runtimeRead": {
+        "currentScore10": 4.2,
+        "movementScore10": 4.1,
+        "graphicsScore10": 4.7,
+        "alienNoveltyScore10": 3.9,
+        "shotOpportunityScore10": 5.4,
+        "targetContractFitScore10": 3.8,
+        "targetVideoObjectTrackFitScore10": 2.5,
+        "safetyPass": true,
+        "bestReferenceMatch": "challenge-5-pink-green-cascade-group-1",
+        "currentRead": "pink-green-cascade / pink-green-cascade; lanes rogue, boss, but, bee, boss, but, bee, rogue; first-wave types rogue, boss, but, bee, boss, but, bee, rogue; visual families galboss; strict movement 4.1/10, graphics 4.7/10, alien novelty 3.9/10, shot opportunity 5.4/10, target-contract fit 3.8/10."
+      },
+      "targetAuthority": {
+        "roleKey": "challenge-specialty-aliens",
+        "status": "provisional-target-only",
+        "confidence": "low-medium",
+        "averageAuthorityScore10": 3.2,
+        "read": "Do not use these cells as release-facing proof of challenge alien graphical conformance. Use them to plan runtime families and to prioritize better ingestion.",
+        "nextGap": "Extract clean challenge-specialty alien frames from segmented motion clips or target gameplay windows, then split the generic role into named target families."
+      },
+      "releaseGate": {
+        "ready": false,
+        "reason": "Not ready for a strong challenge-stage conformance claim; needs more movement, graphics, novelty, or target-authority lift.",
+        "minimumNextBetaTarget": ">=5.0/10 strict challenge conformance with no safety regression and at least one visibly distinct authored challenge upgrade.",
+        "matureTarget": ">=8.5/10 with clean target sprite authority, five-group frame labels, and replay-visible novelty across all eight challenge stages."
+      },
+      "criticalGaps": [
+        "Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.",
+        "Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
+        "Target-contract fit is only 3.8/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.",
+        "Pink/green cascade identity now lands on its first-pass late reference, but the current window still needs five group labels and stronger lower-field route readability."
+      ],
+      "nextActions": [
+        "Promote the Challenging Stage 18-19 pink/green cascade window into five group labels and tune lower-field pass timing against those labels.",
+        "Score group-to-group alternation so cascade identity is not just a different path-family name."
+      ],
+      "nextImplementationStep": "Promote the Challenging Stage 18-19 pink/green cascade window into five group labels and tune lower-field pass timing against those labels."
+    },
+    {
+      "stage": 23,
+      "challengeNumber": 6,
+      "displayLabel": "Challenging Stage 22-23",
+      "status": "active-measured-setpiece-contract",
+      "priority": "highest",
+      "targetContract": {
+        "expectedGroupCount": 5,
+        "expectedEnemyCount": 40,
+        "safetyGuardrails": [
+          "no enemy shots",
+          "no enemy attack starts",
+          "no ship losses",
+          "40 targets presented as a bonus set piece",
+          "perfect-bonus feedback remains visible after clear"
+        ],
+        "pathFamilies": [
+          "green-ladder-high-exit",
+          "green-ladder-deep-drop"
+        ],
+        "groupSchedule": [
+          {
+            "groupIndex": 1,
+            "pathFamily": "green-ladder-high-exit",
+            "spawnOffsetS": 0,
+            "durationS": 2.63,
+            "speedScale": 3.12,
+            "arcAmp": 1.38,
+            "dropAmp": 1.33,
+            "lowerFieldBias": 101,
+            "yOffset": 31,
+            "referencePathId": "target-track-3",
+            "targetTrackConfidence": 0.68,
+            "controlIntent": "green-ladder-upper-fork"
+          },
+          {
+            "groupIndex": 2,
+            "pathFamily": "green-ladder-deep-drop",
+            "spawnOffsetS": 2.63,
+            "durationS": 4.12,
+            "speedScale": 1.99,
+            "arcAmp": 1.79,
+            "dropAmp": 1.65,
+            "lowerFieldBias": 149,
+            "yOffset": 55,
+            "referencePathId": "target-track-31",
+            "targetTrackConfidence": 0.731,
+            "controlIntent": "green-ladder-deep-split"
+          },
+          {
+            "groupIndex": 3,
+            "pathFamily": "green-ladder-deep-drop",
+            "spawnOffsetS": 5.75,
+            "durationS": 4.25,
+            "speedScale": 1.93,
+            "arcAmp": 1.52,
+            "dropAmp": 1.72,
+            "lowerFieldBias": 149,
+            "yOffset": 55,
+            "referencePathId": "target-track-46",
+            "targetTrackConfidence": 0.558,
+            "controlIntent": "green-ladder-deep-split"
+          },
+          {
+            "groupIndex": 4,
+            "pathFamily": "green-ladder-deep-drop",
+            "spawnOffsetS": 9.63,
+            "durationS": 4.5,
+            "speedScale": 1.82,
+            "arcAmp": 1.63,
+            "dropAmp": 1.56,
+            "lowerFieldBias": 0,
+            "yOffset": 0,
+            "referencePathId": "target-track-61",
+            "targetTrackConfidence": 0.748,
+            "controlIntent": "green-ladder-deep-split"
+          },
+          {
+            "groupIndex": 5,
+            "pathFamily": "green-ladder-high-exit",
+            "spawnOffsetS": 14,
+            "durationS": 1.88,
+            "speedScale": 3.4,
+            "arcAmp": 1.6,
+            "dropAmp": 1.2,
+            "lowerFieldBias": 0,
+            "yOffset": 0,
+            "referencePathId": "target-track-79",
+            "targetTrackConfidence": 0.672,
+            "controlIntent": "green-ladder-upper-fork"
+          }
+        ],
+        "referencePathCount": 5,
+        "averageTargetConfidence": 0.678,
+        "averageTargetXRange": 0.4081,
+        "averageTargetYRange": 0.5718,
+        "averageLowerFieldShare": 0.519
+      },
+      "runtimeRead": {
+        "currentScore10": 4.3,
+        "movementScore10": 4.4,
+        "graphicsScore10": 4.6,
+        "alienNoveltyScore10": 3.9,
+        "shotOpportunityScore10": 5.8,
+        "targetContractFitScore10": 4.5,
+        "targetVideoObjectTrackFitScore10": 3.6,
+        "safetyPass": true,
+        "bestReferenceMatch": "challenge-6-green-ladder-split-group-3",
+        "currentRead": "green-ladder-split / green-ladder-split; lanes bee, but, rogue, boss, boss, rogue, but, bee; first-wave types bee, but, rogue, boss, boss, rogue, but, bee; visual families dragonfly; strict movement 4.4/10, graphics 4.6/10, alien novelty 3.9/10, shot opportunity 5.8/10, target-contract fit 4.5/10."
+      },
+      "targetAuthority": {
+        "roleKey": "challenge-specialty-aliens",
+        "status": "provisional-target-only",
+        "confidence": "low-medium",
+        "averageAuthorityScore10": 3.2,
+        "read": "Do not use these cells as release-facing proof of challenge alien graphical conformance. Use them to plan runtime families and to prioritize better ingestion.",
+        "nextGap": "Extract clean challenge-specialty alien frames from segmented motion clips or target gameplay windows, then split the generic role into named target families."
+      },
+      "releaseGate": {
+        "ready": false,
+        "reason": "Not ready for a strong challenge-stage conformance claim; needs more movement, graphics, novelty, or target-authority lift.",
+        "minimumNextBetaTarget": ">=5.0/10 strict challenge conformance with no safety regression and at least one visibly distinct authored challenge upgrade.",
+        "matureTarget": ">=8.5/10 with clean target sprite authority, five-group frame labels, and replay-visible novelty across all eight challenge stages."
+      },
+      "criticalGaps": [
+        "Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.",
+        "Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
+        "Target-contract fit is only 4.5/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.",
+        "Green-ladder split now lands on a Challenging Stage 22-23 ladder/split reference; remaining work is fuller path length, lower reversal noise, and object-tracked group timing."
+      ],
+      "nextActions": [
+        "Rebuild Challenging Stage 22-23 around green ladder and split-exit timing until its measured vector hits challenge-6-green-ladder-split-group-1.",
+        "Add frame labels for staggered ladder rungs, split exit side, and upper-band scoreability."
+      ],
+      "nextImplementationStep": "Rebuild Challenging Stage 22-23 around green ladder and split-exit timing until its measured vector hits challenge-6-green-ladder-split-group-1."
+    },
+    {
+      "stage": 27,
+      "challengeNumber": 7,
+      "displayLabel": "Challenging Stage 26-27",
+      "status": "active-measured-setpiece-contract",
+      "priority": "highest",
+      "targetContract": {
+        "expectedGroupCount": 5,
+        "expectedEnemyCount": 40,
+        "safetyGuardrails": [
+          "no enemy shots",
+          "no enemy attack starts",
+          "no ship losses",
+          "40 targets presented as a bonus set piece",
+          "perfect-bonus feedback remains visible after clear"
+        ],
+        "pathFamilies": [
+          "yellow-fan-low-drift",
+          "yellow-fan-cross-cut"
+        ],
+        "groupSchedule": [
+          {
+            "groupIndex": 1,
+            "pathFamily": "yellow-fan-low-drift",
+            "spawnOffsetS": 0,
+            "durationS": 2,
+            "speedScale": 3.4,
+            "arcAmp": 1.11,
+            "dropAmp": 1.1,
+            "lowerFieldBias": 188,
+            "yOffset": 86,
+            "referencePathId": "target-track-1",
+            "targetTrackConfidence": 0.505,
+            "controlIntent": "yellow-fan-pop"
+          },
+          {
+            "groupIndex": 2,
+            "pathFamily": "yellow-fan-cross-cut",
+            "spawnOffsetS": 1.25,
+            "durationS": 4.25,
+            "speedScale": 1.93,
+            "arcAmp": 1.97,
+            "dropAmp": 1.3,
+            "lowerFieldBias": 101,
+            "yOffset": 32,
+            "referencePathId": "target-track-19",
+            "targetTrackConfidence": 0.754,
+            "controlIntent": "yellow-fan-cross-cut"
+          },
+          {
+            "groupIndex": 3,
+            "pathFamily": "yellow-fan-cross-cut",
+            "spawnOffsetS": 4.75,
+            "durationS": 2.88,
+            "speedScale": 2.85,
+            "arcAmp": 2.19,
+            "dropAmp": 1.56,
+            "lowerFieldBias": 0,
+            "yOffset": 0,
+            "referencePathId": "target-track-31",
+            "targetTrackConfidence": 0.73,
+            "controlIntent": "yellow-fan-cross-cut"
+          },
+          {
+            "groupIndex": 4,
+            "pathFamily": "yellow-fan-cross-cut",
+            "spawnOffsetS": 9.13,
+            "durationS": 2.12,
+            "speedScale": 3.4,
+            "arcAmp": 1.56,
+            "dropAmp": 1.05,
+            "lowerFieldBias": 0,
+            "yOffset": 0,
+            "referencePathId": "target-track-51",
+            "targetTrackConfidence": 0.672,
+            "controlIntent": "yellow-fan-cross-cut"
+          },
+          {
+            "groupIndex": 5,
+            "pathFamily": "yellow-fan-cross-cut",
+            "spawnOffsetS": 10.38,
+            "durationS": 1.62,
+            "speedScale": 3.4,
+            "arcAmp": 1.67,
+            "dropAmp": 1.32,
+            "lowerFieldBias": 126,
+            "yOffset": 44,
+            "referencePathId": "target-track-57",
+            "targetTrackConfidence": 0.593,
+            "controlIntent": "yellow-fan-cross-cut"
+          }
+        ],
+        "referencePathCount": 5,
+        "averageTargetConfidence": 0.651,
+        "averageTargetXRange": 0.4842,
+        "averageTargetYRange": 0.3584,
+        "averageLowerFieldShare": 0.5414
+      },
+      "runtimeRead": {
+        "currentScore10": 4.3,
+        "movementScore10": 4.6,
+        "graphicsScore10": 4.6,
+        "alienNoveltyScore10": 3.9,
+        "shotOpportunityScore10": 5.1,
+        "targetContractFitScore10": 4.2,
+        "targetVideoObjectTrackFitScore10": 3.2,
+        "safetyPass": true,
+        "bestReferenceMatch": "challenge-7-yellow-diagonal-fan-group-5",
+        "currentRead": "yellow-diagonal-fan / yellow-diagonal-fan; lanes boss, bee, but, rogue, rogue, but, bee, boss; first-wave types boss, bee, but, rogue, rogue, but, bee, boss; visual families crown; strict movement 4.6/10, graphics 4.6/10, alien novelty 3.9/10, shot opportunity 5.1/10, target-contract fit 4.2/10."
+      },
+      "targetAuthority": {
+        "roleKey": "challenge-specialty-aliens",
+        "status": "provisional-target-only",
+        "confidence": "low-medium",
+        "averageAuthorityScore10": 3.2,
+        "read": "Do not use these cells as release-facing proof of challenge alien graphical conformance. Use them to plan runtime families and to prioritize better ingestion.",
+        "nextGap": "Extract clean challenge-specialty alien frames from segmented motion clips or target gameplay windows, then split the generic role into named target families."
+      },
+      "releaseGate": {
+        "ready": false,
+        "reason": "Not ready for a strong challenge-stage conformance claim; needs more movement, graphics, novelty, or target-authority lift.",
+        "minimumNextBetaTarget": ">=5.0/10 strict challenge conformance with no safety regression and at least one visibly distinct authored challenge upgrade.",
+        "matureTarget": ">=8.5/10 with clean target sprite authority, five-group frame labels, and replay-visible novelty across all eight challenge stages."
+      },
+      "criticalGaps": [
+        "Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.",
+        "Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
+        "Target-contract fit is only 4.2/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.",
+        "Yellow diagonal fan now lands on a Challenging Stage 26-27 diagonal-fan reference; remaining work is stronger lower-field travel and object-tracked diagonal lane timing."
+      ],
+      "nextActions": [
+        "Rebuild Challenging Stage 26-27 around the yellow diagonal fan so the best match lands on challenge-7-yellow-diagonal-fan-group-1, not the finale label.",
+        "Add a player-hit opportunity probe that rewards firing along the diagonal band rather than center-lane waiting."
+      ],
+      "nextImplementationStep": "Rebuild Challenging Stage 26-27 around the yellow diagonal fan so the best match lands on challenge-7-yellow-diagonal-fan-group-1, not the finale label."
+    },
+    {
+      "stage": 31,
+      "challengeNumber": 8,
+      "displayLabel": "Challenging Stage 30-31",
+      "status": "active-measured-setpiece-contract",
+      "priority": "highest",
+      "targetContract": {
+        "expectedGroupCount": 5,
+        "expectedEnemyCount": 40,
+        "safetyGuardrails": [
+          "no enemy shots",
+          "no enemy attack starts",
+          "no ship losses",
+          "40 targets presented as a bonus set piece",
+          "perfect-bonus feedback remains visible after clear"
+        ],
+        "pathFamilies": [
+          "blue-purple-finale"
+        ],
+        "groupSchedule": [
+          {
+            "groupIndex": 1,
+            "pathFamily": "blue-purple-finale",
+            "spawnOffsetS": 1,
+            "durationS": 2,
+            "speedScale": 3.4,
+            "arcAmp": 1.59,
+            "dropAmp": 1.22,
+            "lowerFieldBias": 0,
+            "yOffset": 0,
+            "referencePathId": "target-track-7",
+            "targetTrackConfidence": 0.697,
+            "controlIntent": "blue-purple-compact-capstone"
+          },
+          {
+            "groupIndex": 2,
+            "pathFamily": "blue-purple-finale",
+            "spawnOffsetS": 2.38,
+            "durationS": 2.87,
+            "speedScale": 2.86,
+            "arcAmp": 1.67,
+            "dropAmp": 1.57,
+            "lowerFieldBias": 106,
+            "yOffset": 34,
+            "referencePathId": "target-track-23",
+            "targetTrackConfidence": 0.655,
+            "controlIntent": "blue-purple-finale-weave"
+          },
+          {
+            "groupIndex": 3,
+            "pathFamily": "blue-purple-finale",
+            "spawnOffsetS": 5.38,
+            "durationS": 4.75,
+            "speedScale": 1.73,
+            "arcAmp": 1.84,
+            "dropAmp": 1.4,
+            "lowerFieldBias": 177,
+            "yOffset": 68,
+            "referencePathId": "target-track-45",
+            "targetTrackConfidence": 0.75,
+            "controlIntent": "blue-purple-finale-weave"
+          },
+          {
+            "groupIndex": 4,
+            "pathFamily": "blue-purple-finale",
+            "spawnOffsetS": 10.75,
+            "durationS": 4.63,
+            "speedScale": 1.77,
+            "arcAmp": 1.6,
+            "dropAmp": 1.57,
+            "lowerFieldBias": 17,
+            "yOffset": 0,
+            "referencePathId": "target-track-89",
+            "targetTrackConfidence": 0.73,
+            "controlIntent": "blue-purple-finale-weave"
+          },
+          {
+            "groupIndex": 5,
+            "pathFamily": "blue-purple-finale",
+            "spawnOffsetS": 13.5,
+            "durationS": 2.38,
+            "speedScale": 3.4,
+            "arcAmp": 1.37,
+            "dropAmp": 1.6,
+            "lowerFieldBias": 28,
+            "yOffset": 0,
+            "referencePathId": "target-track-93",
+            "targetTrackConfidence": 0.722,
+            "controlIntent": "blue-purple-finale-weave"
+          }
+        ],
+        "referencePathCount": 5,
+        "averageTargetConfidence": 0.711,
+        "averageTargetXRange": 0.4429,
+        "averageTargetYRange": 0.5622,
+        "averageLowerFieldShare": 0.4854
+      },
+      "runtimeRead": {
+        "currentScore10": 4.4,
+        "movementScore10": 4.6,
+        "graphicsScore10": 4.7,
+        "alienNoveltyScore10": 3.9,
+        "shotOpportunityScore10": 5.7,
+        "targetContractFitScore10": 4.2,
+        "targetVideoObjectTrackFitScore10": 3.1,
+        "safetyPass": true,
+        "bestReferenceMatch": "challenge-8-blue-purple-finale-group-3",
+        "currentRead": "blue-purple-finale / blue-purple-finale; lanes rogue, boss, bee, but, but, bee, boss, rogue; first-wave types rogue, boss, bee, but, but, bee, boss, rogue; visual families stingray; strict movement 4.6/10, graphics 4.7/10, alien novelty 3.9/10, shot opportunity 5.7/10, target-contract fit 4.2/10."
+      },
+      "targetAuthority": {
+        "roleKey": "challenge-specialty-aliens",
+        "status": "provisional-target-only",
+        "confidence": "low-medium",
+        "averageAuthorityScore10": 3.2,
+        "read": "Do not use these cells as release-facing proof of challenge alien graphical conformance. Use them to plan runtime families and to prioritize better ingestion.",
+        "nextGap": "Extract clean challenge-specialty alien frames from segmented motion clips or target gameplay windows, then split the generic role into named target families."
+      },
+      "releaseGate": {
+        "ready": false,
+        "reason": "Not ready for a strong challenge-stage conformance claim; needs more movement, graphics, novelty, or target-authority lift.",
+        "minimumNextBetaTarget": ">=5.0/10 strict challenge conformance with no safety regression and at least one visibly distinct authored challenge upgrade.",
+        "matureTarget": ">=8.5/10 with clean target sprite authority, five-group frame labels, and replay-visible novelty across all eight challenge stages."
+      },
+      "criticalGaps": [
+        "Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.",
+        "Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
+        "Target-contract fit is only 4.2/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.",
+        "Blue/purple finale is now represented as its own runtime contract, but it still needs fuller path length and active sprite-motion evidence before it feels like a late-loop capstone."
+      ],
+      "nextActions": [
+        "Refine the Challenging Stage 30-31 blue/purple finale with fuller path length and compact late-loop timing.",
+        "Promote challenge enemy active-motion scoring so visual novelty is measured through animation, not only family labels."
+      ],
+      "nextImplementationStep": "Refine the Challenging Stage 30-31 blue/purple finale with fuller path length and compact late-loop timing."
+    }
+  ],
+  "nextBestStep": "Implement one high-confidence contract-backed challenge stage upgrade, then rerun strict challenge conformance and compare target-contract fit, object-track fit, and player shot opportunity."
+}

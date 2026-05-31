@@ -1,6 +1,6 @@
 # challenge-06-green-ladder-split
 
-Challenge: `6`
+Challenging stage: `Challenging Stage 22-23`
 
 Internal Aurora marker: `23`
 

@@ -91,7 +91,7 @@ function byStage(items = []){
 
 function challengeLabel(row){
   if(row?.challengeNumber && row?.stage){
-    return `Challenging Stage ${row.challengeNumber} (Levels ${row.stage}-${row.stage + 1})`;
+    return `Challenging Stage ${Math.max(1, row.stage - 1)}-${row.stage}`;
   }
   return row?.label || row?.id || 'Challenge stage';
 }

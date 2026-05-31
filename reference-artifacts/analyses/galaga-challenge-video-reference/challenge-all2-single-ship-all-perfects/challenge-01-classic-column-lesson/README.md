@@ -1,6 +1,6 @@
 # challenge-01-classic-column-lesson
 
-Challenge: `1`
+Challenging stage: `Challenging Stage 2-3`
 
 Internal Aurora marker: `3`
 

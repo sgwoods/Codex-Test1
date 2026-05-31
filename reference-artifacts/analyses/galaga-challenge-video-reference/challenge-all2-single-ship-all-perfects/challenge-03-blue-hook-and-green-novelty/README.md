@@ -1,6 +1,6 @@
 # challenge-03-blue-hook-and-green-novelty
 
-Challenge: `3`
+Challenging stage: `Challenging Stage 10-11`
 
 Internal Aurora marker: `11`
 

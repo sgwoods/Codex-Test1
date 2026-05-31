@@ -1,6 +1,6 @@
 # challenge-07-yellow-diagonal-fan
 
-Challenge: `7`
+Challenging stage: `Challenging Stage 26-27`
 
 Internal Aurora marker: `27`
 

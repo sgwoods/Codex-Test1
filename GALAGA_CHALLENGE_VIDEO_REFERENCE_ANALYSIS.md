@@ -1,6 +1,6 @@
 # Galaga Challenge Video Reference Analysis
 
-Generated: `2026-05-18T20:10:36.556Z`
+Generated: `2026-05-31T17:24:20.600Z`
 
 This analysis turns the two user-supplied Galaga challenge videos into durable
 derived evidence for Aurora challenging-stage conformance. The raw videos remain
@@ -25,20 +25,22 @@ manual reads, and implementation contracts.
 
 ## Window Reads
 
-| Challenge | Stage Marker | Window | Family | Contact Sheet | Aurora Contract |
-| ---: | ---: | --- | --- | --- | --- |
-| 1 | 3 | 5s-36s | classic-column-and-side-arc | `reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-1fps.jpg` | Use as the teaching stage: five readable groups, no combat, clear upper-band score lanes, and a result cadence that lets the player understand 40/40. |
-| 2 | 7 | 36s-75s | red-column-blue-side-cross | `reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/contact-sheet-1fps.jpg` | Add distinct side-entry crossing groups and a red-column vertical train; preserve no-shot/no-collision behavior while increasing route memory. |
-| 3 | 11 | 75s-113s | blue-hook-green-novelty | `reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/contact-sheet-1fps.jpg` | Introduce a clearly new visual family and hooked side trajectories; score should reward anticipation of the hook, not pure center firing. |
-| 4 | 15 | 113s-148s | pink-serpentine-and-green-entry | `reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-1fps.jpg` | Replace repeated boss-led loops with a long serpentine specialty arc; this is the first high-priority late-stage rebuild target. |
-| 5 | 19 | 142s-177s | pink-green-cascade | `reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/contact-sheet-1fps.jpg` | Build as a cascade stage: alternating specialty groups, lower-field pass risk, and stronger color/family novelty than Challenge 4. |
-| 6 | 23 | 175s-213s | green-ladder-and-split | `reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/contact-sheet-1fps.jpg` | Use staggered ladders and split exits; measure group spacing and route separation so the stage feels authored, not dense noise. |
-| 7 | 27 | 215s-249s | yellow-diagonal-fan | `reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/contact-sheet-1fps.jpg` | Add a yellow diagonal/fan stage with long path length, readable aim bands, and a visually obvious new family. |
-| 8 | 31 | 241s-271s | blue-purple-finale | `reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-1fps.jpg` | Use as the late-loop capstone: blue/purple clustered arcs, compact timing, and no repeated early-stage motion vocabulary. |
+| Challenging Stage | Internal Marker | Window | Family | Contact Sheet | Aurora Contract |
+| --- | ---: | --- | --- | --- | --- |
+| Challenging Stage 2-3 | 3 | 5s-36s | classic-column-and-side-arc | `reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-1fps.jpg` | Use as the teaching stage: five readable groups, no combat, clear upper-band score lanes, and a result cadence that lets the player understand 40/40. |
+| Challenging Stage 6-7 | 7 | 36s-75s | red-column-blue-side-cross | `reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/contact-sheet-1fps.jpg` | Add distinct side-entry crossing groups and a red-column vertical train; preserve no-shot/no-collision behavior while increasing route memory. |
+| Challenging Stage 10-11 | 11 | 75s-113s | blue-hook-green-novelty | `reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-03-blue-hook-and-green-novelty/contact-sheet-1fps.jpg` | Introduce a clearly new visual family and hooked side trajectories; score should reward anticipation of the hook, not pure center firing. |
+| Challenging Stage 14-15 | 15 | 113s-148s | pink-serpentine-and-green-entry | `reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-04-pink-serpentine/contact-sheet-1fps.jpg` | Replace repeated boss-led loops with a long serpentine specialty arc; this is the first high-priority late-stage rebuild target. |
+| Challenging Stage 18-19 | 19 | 142s-177s | pink-green-cascade | `reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-05-pink-and-green-cascade/contact-sheet-1fps.jpg` | Build as a cascade stage: alternating specialty groups, lower-field pass risk, and stronger color/family novelty than Challenging Stage 14-15. |
+| Challenging Stage 22-23 | 23 | 175s-213s | green-ladder-and-split | `reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-06-green-ladder-split/contact-sheet-1fps.jpg` | Use staggered ladders and split exits; measure group spacing and route separation so the stage feels authored, not dense noise. |
+| Challenging Stage 26-27 | 27 | 215s-249s | yellow-diagonal-fan | `reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-07-yellow-diagonal-fan/contact-sheet-1fps.jpg` | Add a yellow diagonal/fan stage with long path length, readable aim bands, and a visually obvious new family. |
+| Challenging Stage 30-31 | 31 | 241s-271s | blue-purple-finale | `reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-08-blue-purple-finale/contact-sheet-1fps.jpg` | Use as the late-loop capstone: blue/purple clustered arcs, compact timing, and no repeated early-stage motion vocabulary. |
 
 ## Stage Improvement Plan
 
-### Challenge 1 / Stage Marker 3
+### Challenging Stage 2-3
+
+Internal marker: `3`
 
 Priority: `high`
 
@@ -50,7 +52,9 @@ Strategy: Use as the teaching stage: five readable groups, no combat, clear uppe
 
 Player impact: Early challenge stages should become clearer learning experiences with stronger perfect-bonus readability.
 
-### Challenge 2 / Stage Marker 7
+### Challenging Stage 6-7
+
+Internal marker: `7`
 
 Priority: `high`
 
@@ -62,7 +66,9 @@ Strategy: Add distinct side-entry crossing groups and a red-column vertical trai
 
 Player impact: Early challenge stages should become clearer learning experiences with stronger perfect-bonus readability.
 
-### Challenge 3 / Stage Marker 11
+### Challenging Stage 10-11
+
+Internal marker: `11`
 
 Priority: `high`
 
@@ -74,7 +80,9 @@ Strategy: Introduce a clearly new visual family and hooked side trajectories; sc
 
 Player impact: Early challenge stages should become clearer learning experiences with stronger perfect-bonus readability.
 
-### Challenge 4 / Stage Marker 15
+### Challenging Stage 14-15
+
+Internal marker: `15`
 
 Priority: `highest`
 
@@ -86,7 +94,9 @@ Strategy: Replace repeated boss-led loops with a long serpentine specialty arc; 
 
 Player impact: Late challenge stages should start feeling like memorable Galaga score exhibitions instead of repeated waves.
 
-### Challenge 5 / Stage Marker 19
+### Challenging Stage 18-19
+
+Internal marker: `19`
 
 Priority: `highest`
 
@@ -94,11 +104,13 @@ Target family: `pink-green-cascade`
 
 Problem: Aurora late challenge stages are currently too repetitive and are not media-backed by distinct late-stage Galaga choreography.
 
-Strategy: Build as a cascade stage: alternating specialty groups, lower-field pass risk, and stronger color/family novelty than Challenge 4.
+Strategy: Build as a cascade stage: alternating specialty groups, lower-field pass risk, and stronger color/family novelty than Challenging Stage 14-15.
 
 Player impact: Late challenge stages should start feeling like memorable Galaga score exhibitions instead of repeated waves.
 
-### Challenge 6 / Stage Marker 23
+### Challenging Stage 22-23
+
+Internal marker: `23`
 
 Priority: `highest`
 
@@ -110,7 +122,9 @@ Strategy: Use staggered ladders and split exits; measure group spacing and route
 
 Player impact: Late challenge stages should start feeling like memorable Galaga score exhibitions instead of repeated waves.
 
-### Challenge 7 / Stage Marker 27
+### Challenging Stage 26-27
+
+Internal marker: `27`
 
 Priority: `highest`
 
@@ -122,7 +136,9 @@ Strategy: Add a yellow diagonal/fan stage with long path length, readable aim ba
 
 Player impact: Late challenge stages should start feeling like memorable Galaga score exhibitions instead of repeated waves.
 
-### Challenge 8 / Stage Marker 31
+### Challenging Stage 30-31
+
+Internal marker: `31`
 
 Priority: `highest`
 
@@ -137,8 +153,8 @@ Player impact: Late challenge stages should start feeling like memorable Galaga 
 
 ## Next Best Steps
 
-1. Promote challenge-all2 windows into accepted five-group reference labels for Challenges 1-8.
-2. Rebuild Aurora Challenge 4 first with the pink-serpentine contract because it is the most visible current late-stage embarrassment.
-3. Then rebuild Challenge 7 with the yellow-diagonal-fan contract because it creates a strong player-visible novelty jump.
+1. Promote challenge-all2 windows into accepted five-group reference labels for Challenging Stages 2-3 through 30-31.
+2. Rebuild Aurora Challenging Stage 14-15 first with the pink-serpentine contract because it is the most visible current late-stage embarrassment.
+3. Then rebuild Challenging Stage 26-27 with the yellow-diagonal-fan contract because it creates a strong player-visible novelty jump.
 4. Add runtime probes that verify each Aurora challenge has five groups, no shots, no ship losses, distinct path families, and expected visual-family novelty.
 5. Only after labels exist, lift challenge-stage target readiness from partial media evidence to direct trajectory scoring.

@@ -70,6 +70,12 @@ function unique(values){
   return [...new Set(values.filter(value => value !== undefined && value !== null && value !== ''))];
 }
 
+function challengeStageDisplayLabel(stage){
+  const marker = Number(stage);
+  if(!Number.isFinite(marker)) return 'Challenging Stage interval pending';
+  return `Challenging Stage ${Math.max(1, marker - 1)}-${marker}`;
+}
+
 function isWordChar(char){
   return /[A-Za-z0-9_$]/.test(char || '');
 }
@@ -343,7 +349,7 @@ function makePattern(layout, targetContract, trajectory){
       gameKey: 'aurora-galactica',
       stage: layout.fromStage,
       challengeNumber: layout.challengeNumber,
-      stageLabel: targetContract?.displayLabel || `Challenging Stage ${layout.challengeNumber}`
+      stageLabel: challengeStageDisplayLabel(layout.stage)
     },
     runtimeLayout: layout,
     roleBindings,

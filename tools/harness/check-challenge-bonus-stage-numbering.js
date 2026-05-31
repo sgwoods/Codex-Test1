@@ -31,11 +31,11 @@ async function main(){
   });
 
   if(!challengeStage.challenge) fail('expected stage 3 to resolve as a challenge stage for Aurora cadence', challengeStage);
-  if(challengeStage.banner?.bannerTxt !== 'CHALLENGING STAGE 1'){
+  if(challengeStage.banner?.bannerTxt !== 'CHALLENGING STAGE 2-3'){
     fail('challenge-stage banner title drifted away from the expected Galaga-style wording', challengeStage);
   }
-  if(challengeStage.banner?.bannerSub !== 'LEVELS 3-4'){
-    fail('challenge-stage banner sub-label should show the level bracket instead of treating the set piece as a normal level', challengeStage);
+  if(challengeStage.banner?.bannerSub !== 'STAGES 2-3'){
+    fail('challenge-stage banner sub-label should show the stage interval instead of treating the set piece as a normal stage', challengeStage);
   }
 
   if(challengeGameOver.loss?.started) fail('challenge-stage ship loss should end the single-ship harness run', challengeGameOver);

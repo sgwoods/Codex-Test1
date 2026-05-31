@@ -1,6 +1,6 @@
 # challenge-02-cross-and-column
 
-Challenge: `2`
+Challenging stage: `Challenging Stage 6-7`
 
 Internal Aurora marker: `7`
 

@@ -318,7 +318,7 @@ function main(){
       rationale: challengeStage
         ? `Strict challenge scoring now exposes the real user-experience gap: overall ${challengeStage.summary.score10}/10, movement ${challengeStage.summary.movementConformanceScore10}/10, graphics ${challengeStage.summary.graphicalConformanceScore10}/10, alien novelty ${challengeStage.summary.alienNoveltyScore10}/10, while safety is ${challengeStage.summary.safetyRuleScore10}/10. This is the highest gameplay-authenticity opportunity and the same target grammar will be reusable for future game ingestion.`
         : 'Strict challenge scoring is missing; run the analyzer, then rebuild the first challenge stage against a real target contract.',
-      nextAction: challengeStage?.improvementPlan?.[2] || 'Run strict challenge-stage conformance, then rebuild Stage 3 / Challenging Stage 1 against the Galaga challenge-1 arrival and late-wave references.'
+      nextAction: challengeStage?.improvementPlan?.[2] || 'Run strict challenge-stage conformance, then rebuild Challenging Stage 2-3 against the Galaga challenge-1 arrival and late-wave references.'
     }),
     buildCandidate({
       id: 'level-arc-opportunity-coverage',

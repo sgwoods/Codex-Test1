@@ -102,14 +102,16 @@ function currentGamePackStagePresentation(stage,challenge){
  const challengeNumber=typeof challengeStageNumberForInternalStage==='function'
   ? challengeStageNumberForInternalStage(stage)
   : '';
- const challengeBracket=challenge?`LEVELS ${stage}-${stage+1}`:'';
+ const challengeInterval=challenge?`${Math.max(1,stage-1)}-${stage}`:'';
+ const challengeTitle=challenge?`CHALLENGING STAGE ${challengeInterval||challengeNumber||''}`.trim():`STAGE ${shownStage}`;
+ const challengeBracket=challenge?`STAGES ${challengeInterval}`:'';
  const atmosphereTheme=theme?.atmosphereTheme||theme?.backgroundMode||pack.frontDoor?.atmosphereTheme||'classic-arcade';
  return Object.assign({},theme,{
   atmosphereTheme,
   backgroundMode:resolvePackAtmosphereBackground({pack,atmosphereTheme,phase:challenge?'challenge':'stage'}),
-  challengeTitle:challenge?`CHALLENGING STAGE ${challengeNumber||''}`.trim():`STAGE ${shownStage}`,
+  challengeTitle,
   stageLabel:challenge?challengeBracket:`STAGE ${shownStage}`,
-  transitionTitle:challenge?`CHALLENGING STAGE ${challengeNumber||''}`.trim():`STAGE ${shownStage}`,
+  transitionTitle:challengeTitle,
   transitionSub:challenge?challengeBracket:'NEXT PHASE'
  });
 }

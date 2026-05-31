@@ -2887,7 +2887,7 @@ function buildChallengeStageEffortGuideSection(){
     ? sweepRows.map(row => `Stage ${row.stage}: ${row.keeperDecision || 'pending'} (${row.bestExpectedScore10 ?? 'n/a'}/10 expected, ${row.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10 target-video, identity margin ${row.stageIdentityMargin10 ?? 'n/a'}).`).join(' ')
     : 'Run the candidate sweep index analyzer to preserve latest per-stage candidate evidence.';
   const rows = (artifact.stageRows || []).map(row => [
-    `Stage ${row.stage || ''} / Challenge ${row.challengeNumber || ''}`,
+    challengeStageDisplayLabel(row),
     `Interest: **${row.interestingFactor10 ?? 'n/a'}/10**\n\nConformance: **${row.conformanceScore10 ?? 'n/a'}/10**\n\nBest ref: \`${row.bestReferenceMatch?.labelId || 'pending'}\` (${row.referenceMatchScore10 ?? 'n/a'}/10)`,
     row.currentRead || 'Current read pending.',
     (row.criticalGaps || [])[0] || 'Critical gap pending.',
@@ -3856,10 +3856,10 @@ function loadGalagaTargetArtifactCoverage(){
 }
 
 function challengeStageDisplayLabel(row = {}){
-  const number = Number.isFinite(+row.challengeNumber) ? +row.challengeNumber : '';
-  const marker = Number.isFinite(+row.stage) ? +row.stage : '';
-  const between = marker ? `Levels ${marker}-${marker + 1}` : 'level bracket pending';
-  return `Challenging Stage ${number || ''} (${between})`.trim();
+  const rawMarker = row.stage ?? row.challengeMarker ?? row.stageMarker ?? row.runtimeInternalStage;
+  const marker = Number.isFinite(+rawMarker) ? +rawMarker : '';
+  if(!marker) return 'Challenging Stage interval pending';
+  return `Challenging Stage ${Math.max(1, marker - 1)}-${marker}`;
 }
 
 function challengeStageInternalLabel(row = {}){
@@ -4080,7 +4080,7 @@ function renderChallengeTimingAlignmentReview(alignment = {}){
   }
   const failureMarkup = failures.length ? `
     <div class="docWrap">
-      <p class="docMeta"><strong>Capture failures:</strong> ${esc(failures.map(row => `Challenge ${row.challengeNumber}`).join(', '))}. The checker blocks this artifact until these captures are regenerated successfully.</p>
+      <p class="docMeta"><strong>Capture failures:</strong> ${esc(failures.map(row => challengeStageDisplayLabel(row)).join(', '))}. The checker blocks this artifact until these captures are regenerated successfully.</p>
     </div>
   ` : '';
   return `${failureMarkup}${rows.map(row => {
@@ -4093,7 +4093,7 @@ function renderChallengeTimingAlignmentReview(alignment = {}){
       <details class="levelVisualDetail" id="timing-alignment-${esc(row.id || row.challengeNumber || '')}">
         <summary class="levelVisualSummary">
           <span class="levelVisualTitle">
-            <span>${esc(row.label || `Challenging Stage ${row.challengeNumber || ''}`)}</span>
+            <span>${esc(row.label || (row.stage ? `Challenging Stage ${Math.max(1, +row.stage - 1)}-${+row.stage}` : `Challenging Stage ${row.challengeNumber || ''}`))}</span>
             <small>Stage-start synchronized target/current review</small>
           </span>
           <span class="levelVisualSummaryCell"><strong>${esc(row.durationSeconds || 'n/a')}s window</strong>target left; Aurora right</span>
@@ -4294,7 +4294,7 @@ function renderLevelVisualDetail(row = {}){
   const graphics = metrics.graphicsScore10 ?? analysis.graphicsScore10;
   const novelty = metrics.noveltyScore10 ?? analysis.noveltyScore10;
   const orderLabel = row.kind === 'challenge'
-    ? `Challenge ${row.challengeNumber || ''}`
+    ? challengeStageDisplayLabel(row)
     : `Level ${row.displayLevel || ''}`;
   const targetStatus = levelVisualStatus(row);
   const scoreLabel = score !== null && score !== undefined && Number.isFinite(+score)
@@ -4727,7 +4727,7 @@ function renderGameplaySegmentCaptureEvidence(artifact){
   const audioCount = Number.isFinite(+capture.audioTrackCount) ? +capture.audioTrackCount : 0;
   const duration = Number.isFinite(+capture.seconds) ? `${(+capture.seconds).toFixed(0)}s` : 'segment';
   const challengeLabel = capture.startKind === 'challenge'
-    ? `Challenging Stage ${capture.challengeStage || 'n/a'}`
+    ? `Challenging Stage ${Number.isFinite(+capture.challengeStage) ? `${Math.max(1, +capture.challengeStage - 1)}-${+capture.challengeStage}` : 'n/a'}`
     : `Level ${capture.stage || 'n/a'}`;
   const audioRead = audioCount > 0
     ? `${audioCount} audio track${audioCount === 1 ? '' : 's'} captured`
@@ -5425,7 +5425,7 @@ function renderChallengeTargetCoverageRows(report){
   }
   return rows.map((entry) => `
     <tr>
-      <td><strong>Challenging Stage ${esc(entry.challengeNumber || '')}</strong><br><span class="docMeta">marker ${esc(entry.stageMarker || '')}</span></td>
+      <td><strong>${esc(entry.stageMarker ? `Challenging Stage ${Math.max(1, +entry.stageMarker - 1)}-${+entry.stageMarker}` : `Challenging Stage ${entry.challengeNumber || ''}`)}</strong><br><span class="docMeta">internal marker ${esc(entry.stageMarker || '')}</span></td>
       <td>${esc(entry.status || '')}</td>
       <td><strong>${esc(entry.coverage10 ?? 'n/a')}/10</strong></td>
       <td>${esc((entry.currentEvidence || []).join(', ') || 'No committed media-backed challenge window yet.')}</td>
@@ -5638,7 +5638,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     const gaps = pattern.measurement?.gaps || [];
     return `
     <tr>
-      <td><strong>${esc(pattern.gameScope?.stageLabel || pattern.id || '')}</strong><br><span class="docMeta">stage ${esc(pattern.gameScope?.stage ?? 'n/a')}; challenge ${esc(pattern.gameScope?.challengeNumber ?? 'n/a')}</span></td>
+      <td><strong>${esc(pattern.gameScope?.stage ? `Challenging Stage ${Math.max(1, +pattern.gameScope.stage - 1)}-${+pattern.gameScope.stage}` : pattern.gameScope?.stageLabel || pattern.id || '')}</strong><br><span class="docMeta">internal marker ${esc(pattern.gameScope?.stage ?? 'n/a')}</span></td>
       <td>${authoredPaths.map(item => `<code>${esc(item)}</code>`).join('<br>') || '<span class="docMeta">path map pending</span>'}</td>
       <td>${visualFamilies.map(item => `<span class="pill">${esc(item)}</span>`).join(' ') || '<span class="docMeta">visual family map pending</span>'}</td>
       <td><strong>${Number.isFinite(+pattern.measurement?.pathContractMatchScore10) ? `${Number(pattern.measurement.pathContractMatchScore10).toFixed(1)}/10` : 'partial'}</strong><br><span class="docMeta">refs ${esc(pattern.measurement?.referenceBackedGroupCount ?? 0)}/5; target contract ${pattern.measurement?.targetContractPresent ? 'yes' : 'gap'}</span></td>
@@ -6634,7 +6634,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <p class="docMeta"><strong>Set-piece contracts:</strong> ${esc(challengeSetpieceSummary.contractCount || 0)} challenge contract(s), ${esc(challengeSetpieceSummary.referenceBackedGroupCount || 0)}/${esc(challengeSetpieceSummary.expectedGroupCount || 0)} reference-backed groups, current average ${esc(challengeSetpieceSummary.averageCurrentScore10 ?? 'n/a')}/10, target-contract fit ${esc(challengeSetpieceSummary.averageTargetContractFitScore10 ?? 'n/a')}/10. Source artifact: <code>reference-artifacts/analyses/challenge-setpiece-contracts/latest.json</code>.</p>
             <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/challenge-stage-conformance/latest.json</code>. <strong>Report:</strong> <code>CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md</code>.</p>
             ${gameplaySegmentEvidence}
-            <p class="docMeta"><strong>Naming rule:</strong> normal Levels and Challenging Stages are separate. The challenge rows below use labels like <strong>Challenging Stage 1 (Levels 3-4)</strong> instead of calling that set piece Level 4.</p>
+            <p class="docMeta"><strong>Naming rule:</strong> normal Stages and Challenging Stages are separate. The challenge rows below use interval labels like <strong>Challenging Stage 2-3</strong> instead of calling that set piece Stage 3.</p>
             <p class="docMeta"><strong>Evidence-image rule:</strong> contact sheets are supporting artifacts for visual inspection, not the main human-readable conformance explanation. Use each row's target/current/conformance text for the judgment; open the evidence panel only when you need to inspect the underlying frames at native scale.</p>
             ${stage7ReferencePathEvidence}
             <div class="inlineDocShelf">

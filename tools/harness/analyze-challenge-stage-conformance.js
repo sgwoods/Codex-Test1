@@ -20,7 +20,7 @@ const STAGE_INTENT = {
     expectedReferenceLabels: ['challenge-1-arrival-group-1', 'challenge-1-late-wave-group-4'],
     expectedFirstWaveTypes: ['bee', 'but'],
     forbiddenFirstWaveTypes: ['boss', 'rogue'],
-    target: 'First Galaga-style challenging stage: readable bonus set piece, no fire, no ship loss, upper-band mirrored entries, bee/butterfly line waves, visible arrival/peel-off.',
+    target: 'Challenging Stage 2-3 should be a readable Galaga-style bonus set piece: no fire, no ship loss, upper-band mirrored entries, bee/butterfly line waves, visible arrival/peel-off.',
     criticalExpectation: 'Should teach the player that challenge stages are safe, scoreable pattern reads rather than combat waves.'
   },
   7: {
@@ -28,7 +28,7 @@ const STAGE_INTENT = {
     windowId: 'challenge-stage-scorpion-cross',
     expectedReferenceLabels: ['challenge-2-arrival-group-1'],
     expectedReferenceSemantics: ['mixed', 'novelty', 'cross'],
-    target: 'Second challenge should feel denser and more novel than challenge 1 while staying nonlethal and non-shooting.',
+    target: 'Challenging Stage 6-7 should feel denser and more novel than Challenging Stage 2-3 while staying nonlethal and non-shooting.',
     criticalExpectation: 'Should introduce a stronger mixed-family visual grammar and a learnable crossing pattern.'
   },
   11: {
@@ -36,7 +36,7 @@ const STAGE_INTENT = {
     windowId: 'challenge-stage-stingray-hook',
     expectedReferenceLabels: ['challenge-3-arrival-group-1'],
     expectedReferenceSemantics: ['boss-led', 'novelty', 'dragonfly', 'hook'],
-    target: 'Third challenge should make the new visual family and boss-led novelty obvious, with larger sweep vocabulary and no attacks.',
+    target: 'Challenging Stage 10-11 should make the new visual family and boss-led novelty obvious, with larger sweep vocabulary and no attacks.',
     criticalExpectation: 'Should read as a later Galaga challenge with alien novelty and a distinct high-bonus route.'
   },
   15: {
@@ -50,7 +50,7 @@ const STAGE_INTENT = {
       'challenge-4-pink-serpentine-group-5'
     ],
     expectedReferenceSemantics: ['pink', 'serpentine'],
-    target: 'Fourth challenge should shift into long specialty serpentine arcs with obvious new color/family identity while staying nonlethal.',
+    target: 'Challenging Stage 14-15 should shift into long specialty serpentine arcs with obvious new color/family identity while staying nonlethal.',
     criticalExpectation: 'Should feel like the first truly late-stage set piece, not a boss-led remix of earlier challenge stages.'
   },
   19: {
@@ -64,8 +64,8 @@ const STAGE_INTENT = {
       'challenge-5-pink-green-cascade-group-5'
     ],
     expectedReferenceSemantics: ['pink', 'green', 'cascade'],
-    target: 'Fifth challenge should distinguish itself with pink/green cascade motion, alternating group identity, and stronger lower-field pass readability.',
-    criticalExpectation: 'Should prove that late challenge progression is authored stage by stage, not repeated from Challenge 4.'
+    target: 'Challenging Stage 18-19 should distinguish itself with pink/green cascade motion, alternating group identity, and stronger lower-field pass readability.',
+    criticalExpectation: 'Should prove that late challenging-stage progression is authored interval by interval, not repeated from Challenging Stage 14-15.'
   },
   23: {
     challengeNumber: 6,
@@ -78,7 +78,7 @@ const STAGE_INTENT = {
       'challenge-6-green-ladder-split-group-5'
     ],
     expectedReferenceSemantics: ['green', 'ladder', 'split'],
-    target: 'Sixth challenge should emphasize green ladder rhythm and split exits.',
+    target: 'Challenging Stage 22-23 should emphasize green ladder rhythm and split exits.',
     criticalExpectation: 'Should make staggered group timing and split route separation visible enough for a player to learn.'
   },
   27: {
@@ -92,7 +92,7 @@ const STAGE_INTENT = {
       'challenge-7-yellow-diagonal-fan-group-5'
     ],
     expectedReferenceSemantics: ['yellow', 'diagonal', 'fan'],
-    target: 'Seventh challenge should introduce a yellow diagonal fan with a memorable scoring lane.',
+    target: 'Challenging Stage 26-27 should introduce a yellow diagonal fan with a memorable scoring lane.',
     criticalExpectation: 'Should be visually and tactically unlike the prior ladder/cascade stages.'
   },
   31: {
@@ -106,7 +106,7 @@ const STAGE_INTENT = {
       'challenge-8-blue-purple-finale-group-5'
     ],
     expectedReferenceSemantics: ['blue', 'purple', 'finale'],
-    target: 'Eighth visible challenge should act as a compact blue/purple late-loop capstone.',
+    target: 'Challenging Stage 30-31 should act as a compact blue/purple late-loop capstone.',
     criticalExpectation: 'Should avoid returning to early-stage column/cross vocabulary and make the late-loop identity obvious.'
   }
 };
@@ -131,6 +131,12 @@ function writeJson(file, value){
 function writeText(file, value){
   ensureDir(path.dirname(file));
   fs.writeFileSync(file, String(value).replace(/\r\n/g, '\n').trimEnd() + '\n');
+}
+
+function stageIntervalLabel(stage){
+  const marker = Number(stage);
+  if(!Number.isFinite(marker)) return 'Challenging Stage interval pending';
+  return `Challenging Stage ${Math.max(1, marker - 1)}-${marker}`;
 }
 
 function rel(file){
@@ -220,7 +226,7 @@ function challengeTargetContractForStage(stage){
   return {
     stage,
     challengeNumber: intent.challengeNumber,
-    displayLabel: `Challenging Stage ${intent.challengeNumber} target-video object tracks`,
+    displayLabel: `${stageIntervalLabel(stage)} target-video object tracks`,
     sourceWindowId: `challenge-${String(intent.challengeNumber).padStart(2, '0')}-target-video-object-tracks`,
     targetRead: intent.target,
     targetVideoOnly: true,
@@ -1644,7 +1650,7 @@ function challengeContractFit(runtime, contract){
     objectTrackRead: objectTrackFits.length
       ? `Group object-track target fit is ${round(objectTrackFit, 1)}/10 across ${objectTrackFits.length}/${objectTargetGroups.length} measured target group(s), with ${missingObjectTrackCount} missing group track(s), using ${directTargetGroups.length || contract.targetVideoOnly ? 'direct Galaga target-video object tracks' : 'first-pass contract object tracks'}.`
       : 'No group object-track targets were available in this contract.',
-    read: `Target contract fit is ${round(1 + coverage * (hasObjectTrackTargets ? 7.0 : 6.2), 1)}/10 for ${contract.displayLabel || `stage ${contract.stage}`}: group count ${round(groupCountFit, 2)}, path-family order ${round(pathFamilyFit, 2)}, type order ${round(typeFit, 2)}, family order ${round(familyFit, 2)}, object-track ${round(objectTrackCoverage, 2)} via ${directTargetGroups.length || contract.targetVideoOnly ? 'direct target-video tracks' : 'first-pass contract vectors'}. This is a group/object-track read, not frame-perfect sprite identity recognition.`
+    read: `Target contract fit is ${round(1 + coverage * (hasObjectTrackTargets ? 7.0 : 6.2), 1)}/10 for ${stageIntervalLabel(contract.stage)} target-video object tracks: group count ${round(groupCountFit, 2)}, path-family order ${round(pathFamilyFit, 2)}, type order ${round(typeFit, 2)}, family order ${round(familyFit, 2)}, object-track ${round(objectTrackCoverage, 2)} via ${directTargetGroups.length || contract.targetVideoOnly ? 'direct target-video tracks' : 'first-pass contract vectors'}. This is a group/object-track read, not frame-perfect sprite identity recognition.`
   };
 }
 
@@ -1687,12 +1693,12 @@ function criticalGaps(stage, runtime, match, score){
     }
   }
   if(stage === 7){
-    if(score.expectedReferenceHit) gaps.push('Cross-sweep identity now lands on the expected Challenge 2 reference family; next work is trajectory precision and active visual novelty, not basic identity.');
-    else gaps.push('Cross-sweep identity is visible in labels, but the measured vector still misses the expected Challenge 2 reference family.');
+    if(score.expectedReferenceHit) gaps.push('Cross-sweep identity now lands on the expected Challenging Stage 6-7 reference family; next work is trajectory precision and active visual novelty, not basic identity.');
+    else gaps.push('Cross-sweep identity is visible in labels, but the measured vector still misses the expected Challenging Stage 6-7 reference family.');
   }
   if(stage === 11){
-    if(score.expectedReferenceHit) gaps.push('Dragonfly/boss-led identity now lands on the expected Challenge 3 reference family, but sprite-motion novelty and tracked Galaga challenge-3 path phases are not yet scored.');
-    else gaps.push('Dragonfly family appears, but the measured vector still misses the expected Challenge 3 reference family and sprite-motion novelty is not yet scored.');
+    if(score.expectedReferenceHit) gaps.push('Dragonfly/boss-led identity now lands on the expected Challenging Stage 10-11 reference family, but sprite-motion novelty and tracked Galaga 10-11 path phases are not yet scored.');
+    else gaps.push('Dragonfly family appears, but the measured vector still misses the expected Challenging Stage 10-11 reference family and sprite-motion novelty is not yet scored.');
   }
   if(stage === 15){
     if(score.expectedReferenceHit) gaps.push('Pink-serpentine identity now lands on its first-pass late reference, but it still needs five-group frame labels, target sprite-motion evidence, and stronger player-visible novelty before it can claim maturity.');
@@ -1703,11 +1709,11 @@ function criticalGaps(stage, runtime, match, score){
     else gaps.push('Stage 19 has a pink/green cascade runtime contract, but its measured vector still misses the first-pass Galaga cascade label.');
   }
   if(stage === 23){
-    if(score.expectedReferenceHit) gaps.push('Green-ladder split now lands on a Challenge 6 ladder/split reference; remaining work is fuller path length, lower reversal noise, and object-tracked group timing.');
+    if(score.expectedReferenceHit) gaps.push('Green-ladder split now lands on a Challenging Stage 22-23 ladder/split reference; remaining work is fuller path length, lower reversal noise, and object-tracked group timing.');
     else gaps.push('Green-ladder split is now represented as its own runtime contract, but the measured vector still reads closer to an early challenge than the expected ladder/split reference.');
   }
   if(stage === 27){
-    if(score.expectedReferenceHit) gaps.push('Yellow diagonal fan now lands on a Challenge 7 diagonal-fan reference; remaining work is stronger lower-field travel and object-tracked diagonal lane timing.');
+    if(score.expectedReferenceHit) gaps.push('Yellow diagonal fan now lands on a Challenging Stage 26-27 diagonal-fan reference; remaining work is stronger lower-field travel and object-tracked diagonal lane timing.');
     else gaps.push('Yellow diagonal fan is now represented as its own runtime contract, but it still needs stronger diagonal lane identity and must not collapse into another reference signature.');
   }
   if(stage === 31){
@@ -1722,48 +1728,48 @@ function criticalGaps(stage, runtime, match, score){
 function nextActionsForStage(stage){
   if(stage === 3){
     return [
-      'Protect the first-challenge bee/butterfly line contract, then tune path length, turn count, and rack-slot precision against challenge-1 arrival and late-wave labels.',
+      'Protect the Challenging Stage 2-3 bee/butterfly line contract, then tune path length, turn count, and rack-slot precision against the 2-3 arrival and late-wave labels.',
       'Add contact-sheet comparison for first-visible frame, entry side, exit side, lane occupancy, and group timing so the next tuning pass can improve trajectory precision without subjective guessing.'
     ];
   }
   if(stage === 7){
     return [
-      'Tune challenge 2 toward the denser mixed-novelty-line reference instead of relying on a generic cross-sweep.',
-      'Score separate group identities so stage 7 is not just a slightly wider stage 3.'
+      'Tune Challenging Stage 6-7 toward the denser mixed-novelty-line reference instead of relying on a generic cross-sweep.',
+      'Score separate group identities so Challenging Stage 6-7 is not just a slightly wider repeat of Challenging Stage 2-3.'
     ];
   }
   if(stage === 11){
     return [
-      'Promote challenge-3 boss-led reference phases and score dragonfly visual novelty as animation, not only family label.',
+      'Promote Challenging Stage 10-11 boss-led reference phases and score dragonfly visual novelty as animation, not only family label.',
       'Add motion windows for wing flaps, pulsing, dive/rotation silhouette, and challenge-only nonlethal arrival.'
     ];
   }
   if(stage === 15){
     return [
-      'Promote the Challenge 4 pink-serpentine window into five group labels and tune the runtime path so all groups keep a readable serpentine score lane.',
+      'Promote the Challenging Stage 14-15 pink-serpentine window into five group labels and tune the runtime path so all groups keep a readable serpentine score lane.',
       'Add high-bonus readability probes so late-stage complexity stays learnable instead of becoming visual noise.'
     ];
   }
   if(stage === 19){
     return [
-      'Promote the Challenge 5 pink/green cascade window into five group labels and tune lower-field pass timing against those labels.',
+      'Promote the Challenging Stage 18-19 pink/green cascade window into five group labels and tune lower-field pass timing against those labels.',
       'Score group-to-group alternation so cascade identity is not just a different path-family name.'
     ];
   }
   if(stage === 23){
     return [
-      'Rebuild Challenge 6 around green ladder and split-exit timing until its measured vector hits challenge-6-green-ladder-split-group-1.',
+      'Rebuild Challenging Stage 22-23 around green ladder and split-exit timing until its measured vector hits challenge-6-green-ladder-split-group-1.',
       'Add frame labels for staggered ladder rungs, split exit side, and upper-band scoreability.'
     ];
   }
   if(stage === 27){
     return [
-      'Rebuild Challenge 7 around the yellow diagonal fan so the best match lands on challenge-7-yellow-diagonal-fan-group-1, not the finale label.',
+      'Rebuild Challenging Stage 26-27 around the yellow diagonal fan so the best match lands on challenge-7-yellow-diagonal-fan-group-1, not the finale label.',
       'Add a player-hit opportunity probe that rewards firing along the diagonal band rather than center-lane waiting.'
     ];
   }
   return [
-    'Refine the Challenge 8 blue/purple finale with fuller path length and compact late-loop timing.',
+    'Refine the Challenging Stage 30-31 blue/purple finale with fuller path length and compact late-loop timing.',
     'Promote challenge enemy active-motion scoring so visual novelty is measured through animation, not only family labels.'
   ];
 }
@@ -1914,9 +1920,9 @@ function buildMarkdown(report){
 
 The broader Galaga target-artifact coverage read is **${targetSummary.coverageScore10}/10** overall and **${targetSummary.challengeStageReadiness10}/10** for challenge-stage target readiness. The important implication is not that Aurora lacks all grounding; it is that the currently ingested challenge-stage corpus is still early-stage heavy. ${targetSummary.interpretation || ''}
 
-| Challenge | Stage Marker | Target Status | Coverage | Next Need |
-| ---: | ---: | --- | ---: | --- |
-${challengeTargetRows.map(row => `| ${row.challengeNumber} | ${row.stageMarker} | ${row.status} | ${row.coverage10}/10 | ${row.nextNeed} |`).join('\n')}
+| Challenging Stage | Internal Marker | Target Status | Coverage | Next Need |
+| --- | ---: | --- | ---: | --- |
+${challengeTargetRows.map(row => `| ${stageIntervalLabel(row.stageMarker)} | ${row.stageMarker} | ${row.status} | ${row.coverage10}/10 | ${row.nextNeed} |`).join('\n')}
 
 Full target-artifact report: \`GALAGA_TARGET_ARTIFACT_COVERAGE.md\` and \`reference-artifacts/analyses/galaga-target-artifact-coverage/latest.json\`.
 ` : `
@@ -1928,10 +1934,12 @@ Target-artifact coverage has not been generated yet. Run \`npm run harness:analy
     const gapCell = row.criticalGaps.length
       ? row.criticalGaps.join('<br>')
       : 'Reference target hit; remaining work is trajectory precision and active motion scoring.';
-    return `| ${row.stage} | ${row.challengeNumber} | ${row.interestingFactor10}/10 | ${row.movementConformanceScore10}/10 | ${row.graphicalConformanceScore10}/10 | ${row.alienNoveltyScore10}/10 | ${row.playerShotOpportunityScore10}/10 | ${row.conformanceScore10}/10 | ${row.bestReferenceMatch?.labelId || 'pending'} (${row.referenceMatchScore10 ?? 'n/a'}/10 legacy) | ${row.safetyProbe?.noEnemyShots && row.safetyProbe?.noAttackStarts && row.safetyProbe?.noShipLosses ? 'pass' : 'pending/fail'} | ${gapCell} |`;
+    return `| ${stageIntervalLabel(row.stage)} | ${row.stage} | ${row.interestingFactor10}/10 | ${row.movementConformanceScore10}/10 | ${row.graphicalConformanceScore10}/10 | ${row.alienNoveltyScore10}/10 | ${row.playerShotOpportunityScore10}/10 | ${row.conformanceScore10}/10 | ${row.bestReferenceMatch?.labelId || 'pending'} (${row.referenceMatchScore10 ?? 'n/a'}/10 legacy) | ${row.safetyProbe?.noEnemyShots && row.safetyProbe?.noAttackStarts && row.safetyProbe?.noShipLosses ? 'pass' : 'pending/fail'} | ${gapCell} |`;
   }).join('\n');
   const stageSections = rows.map(row => `
-## Stage ${row.stage} / Challenge ${row.challengeNumber}
+## ${stageIntervalLabel(row.stage)}
+
+Internal challenge marker: ${row.stage}.
 
 **Current score:** interesting factor ${row.interestingFactor10}/10; challenge conformance ${row.conformanceScore10}/10. Movement ${row.movementConformanceScore10}/10, graphics ${row.graphicalConformanceScore10}/10, alien novelty ${row.alienNoveltyScore10}/10, progression ${row.progressionConformanceScore10}/10, player shot opportunity ${row.playerShotOpportunityScore10}/10.
 
@@ -1994,8 +2002,8 @@ ${targetCoverageSection}
 
 ## Stage Summary
 
-| Stage | Challenge | Interest | Movement | Graphics | Alien Novelty | Shot Opportunity | Strict Score | Diagnostic Best Reference | No-Shot/No-Kill | Critical Gap |
-| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
+| Challenging Stage | Internal Marker | Interest | Movement | Graphics | Alien Novelty | Shot Opportunity | Strict Score | Diagnostic Best Reference | No-Shot/No-Kill | Critical Gap |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
 ${tableRows}
 
 ${stageSections}
@@ -2004,17 +2012,17 @@ ${stageSections}
 
 1. Treat the current strict scores as the release-facing truth: the broad coverage score is diagnostic only.
 2. Build the challenge-stage target grammar: per-challenge group order, first-visible frame, entry side, exit side, path length, turn count, featured alien family, scoring window, perfect-bonus expectation, and result feedback.
-3. Implement Stage 3 / Challenging Stage 1 first: top-right bee line, late top-left butterfly line, visibly longer upper-band sweep, clear peel-off exits, no combat grammar, and reference-matched duration/turn count.
-4. Implement Stage 7 / Challenging Stage 2 as a different authored set piece, not just wider Stage 3: denser mixed novelty, crossing pattern, different entry side and exit side, readable scoring route.
-5. Implement Stage 11 / Challenging Stage 3 with boss-led novelty and active animation evidence: featured alien role, flapping/pulsing/rotation windows, and a distinct reward read.
+3. Implement Challenging Stage 2-3 first: top-right bee line, late top-left butterfly line, visibly longer upper-band sweep, clear peel-off exits, no combat grammar, and reference-matched duration/turn count.
+4. Implement Challenging Stage 6-7 as a different authored set piece, not just a wider early challenge: denser mixed novelty, crossing pattern, different entry side and exit side, readable scoring route.
+5. Implement Challenging Stage 10-11 with boss-led novelty and active animation evidence: featured alien role, flapping/pulsing/rotation windows, and a distinct reward read.
 6. Continue the late-stage rebuild now that Challenges 4-8 have media-backed windows: preserve the new Stage 15, 19, 23, 27, and 31 contracts, then promote five group labels for each.
-7. Prioritize Challenge 6 green-ladder and Challenge 7 yellow-fan precision work, because they now hit the expected reference families but still need longer path length, cleaner lower-field travel, and lower reversal noise.
+7. Prioritize Challenging Stage 22-23 green-ladder and Challenging Stage 26-27 yellow-fan precision work, because they now hit the expected reference families but still need longer path length, cleaner lower-field travel, and lower reversal noise.
 8. Promote challenge-stage contact sheets, trajectory SVGs, active sprite-motion probes, and per-stage motion timelines into the Application Guide so the human review can see the actual delta, not only score text.
 
 ## Success Criteria
 
 - Raise challenge-stage interesting factor from ${report.summary.interestingFactorScore10}/10 to 5.0/10 as the first honest beta-facing gate by implementing one visibly reference-like challenge, then toward 6.0/10 after Stage 3, 7, and 11 each have distinct authored contracts.
-- Keep the separate target-contract read above 7.0/10 for Challenge Stage 1 while promoting contracts for Stages 7 and 11; group-contract success is useful but does not replace frame-level motion/graphics scoring.
+- Keep the separate target-contract read above 7.0/10 for Challenging Stage 2-3 while promoting contracts for Challenging Stage 6-7 and Challenging Stage 10-11; group-contract success is useful but does not replace frame-level motion/graphics scoring.
 - Raise movement conformance from ${report.summary.movementConformanceScore10}/10 by increasing y-range, path length, turn count, and exit-side match against the Galaga challenge references.
 - Raise graphical conformance from ${report.summary.graphicalConformanceScore10}/10 by extending the object-tracked silhouette hook into Galaga target-crop sequence comparisons; do not inflate it from type labels alone.
 - Raise player shot opportunity from ${report.summary.playerShotOpportunityScore10}/10 by creating lane-readable scoring windows for each challenge rather than incidental central-lane hits.
@@ -2065,7 +2073,7 @@ function metricBar(label, current, target, x, y, width){
 }
 
 function trajectoryDiagramSvg(row){
-  const label = `Challenging Stage ${row.challengeNumber} (${row.stage}-${row.stage + 1})`;
+  const label = `Challenging Stage ${Math.max(1, row.stage - 1)}-${row.stage}`;
   const target = row.galagaReferenceVector || {};
   const current = row.runtimeVector || {};
   const targetPath = vectorPath(target, 56, 62, 236, 170, -1);
@@ -2110,7 +2118,7 @@ function objectTrackPath(points = [], x0, y0, width, height){
 }
 
 function objectTrackDiagramSvg(row){
-  const label = `Challenging Stage ${row.challengeNumber} (${row.stage}-${row.stage + 1})`;
+  const label = `Challenging Stage ${Math.max(1, row.stage - 1)}-${row.stage}`;
   const objectProbe = row.objectTrackProbe || {};
   const shotProbe = row.shotOpportunityProbe || {};
   const tracks = Array.isArray(objectProbe.topTracks) ? objectProbe.topTracks.slice(0, 5) : [];
@@ -2304,9 +2312,9 @@ async function buildReport(){
     improvementPlan: [
       'Use strict challenge-stage scores as the release-facing truth; keep broad coverage scores only as diagnostics.',
       'Define a challenge-stage target grammar for group order, entry/exit side, path length, turn count, featured alien, scoring window, perfect bonus, animation phases, and result feedback.',
-      'Stage 3: rebuild Challenging Stage 1 against the Galaga challenge-1 arrival and late-wave references with visibly longer movement and readable exits.',
-      'Stage 7: rebuild Challenging Stage 2 as a separate mixed-novelty crossing set piece with different entry/exit and timing grammar.',
-      'Stage 11: rebuild Challenging Stage 3 around boss-led novelty plus active sprite-motion scoring.',
+      'Challenging Stage 2-3: rebuild the first challenge against the Galaga challenge-1 arrival and late-wave references with visibly longer movement and readable exits.',
+      'Challenging Stage 6-7: rebuild the second challenge as a separate mixed-novelty crossing set piece with different entry/exit and timing grammar.',
+      'Challenging Stage 10-11: rebuild the third challenge around boss-led novelty plus active sprite-motion scoring.',
       'Stage 15/19/23/27/31: continue replacing repeated late-stage patterns with first-pass media-backed contracts, then promote each to five-group frame labels.',
       'Publish contact sheets, trajectory SVGs, per-stage critical gaps, and strict axis scores in generated docs.'
     ]

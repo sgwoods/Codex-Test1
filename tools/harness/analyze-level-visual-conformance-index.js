@@ -211,7 +211,7 @@ function existingRel(pathName){
 
 function challengeLabel(challengeNumber){
   const marker = CHALLENGE_MARKERS[challengeNumber - 1] || (3 + (challengeNumber - 1) * 4);
-  return `Challenging Stage ${challengeNumber} (Levels ${marker}-${marker + 1})`;
+  return `Challenging Stage ${Math.max(1, marker - 1)}-${marker}`;
 }
 
 function levelRows(){

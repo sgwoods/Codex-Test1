@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="660" viewBox="0 0 1180 660" role="img" aria-labelledby="title desc">
+  <title id="title">Challenging Stage 14-15 motion atlas</title>
+  <desc id="desc">Human-readable target versus current alien motion atlas with target paths, Aurora runtime paths, overlay deltas, and timing bars.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 z" fill="#f6fbff"/>
+    </marker>
+  </defs>
+  <style>
+    .bg{fill:#06111d}.panel{fill:#0d1b2a;stroke:#2e5d78;stroke-width:2}.field{fill:#02070c;stroke:#2e5d78;stroke-width:2}.grid{stroke:#183247;stroke-width:1}.title{fill:#f2fbff;font:800 24px ui-monospace,Menlo,monospace}.small{fill:#d9f5ff;font:800 14px ui-monospace,Menlo,monospace}.tiny{fill:#a8d2ec;font:11px ui-monospace,Menlo,monospace}.muted{fill:#6f8da3}.targetPath,.currentPath{fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}.deltaLine{stroke:#f6fbff;stroke-width:2;stroke-dasharray:4 4}.pill{fill:#102a3b;stroke:#2e5d78;stroke-width:1}
+  </style>
+  <rect class="bg" x="0" y="0" width="1180" height="660"/>
+  <text class="title" x="32" y="42">Challenging Stage 14-15</text>
+  <rect class="pill" x="650" y="18" width="138" height="32" rx="16"/><text class="small" x="666" y="39">4.2/10 movement</text>
+  <rect class="pill" x="800" y="18" width="142" height="32" rx="16"/><text class="small" x="816" y="39">2.7/10 track fit</text>
+  <rect class="pill" x="954" y="18" width="172" height="32" rx="16"/><text class="small" x="970" y="39">2.7/10 group avg</text>
+  <rect class="panel" x="28" y="72" width="1140" height="570" rx="14"/>
+  <rect class="field" x="44" y="94" width="240" height="300" rx="10"/>
+  <line class="grid" x1="104" y1="94" x2="104" y2="394"/>
+<line class="grid" x1="164" y1="94" x2="164" y2="394"/>
+<line class="grid" x1="224" y1="94" x2="224" y2="394"/>
+  <line class="grid" x1="44" y1="169" x2="284" y2="169"/>
+<line class="grid" x1="44" y1="244" x2="284" y2="244"/>
+<line class="grid" x1="44" y1="319" x2="284" y2="319"/>
+  <text class="small" x="44" y="82">Ingested target motion</text>
+  <text class="tiny" x="44" y="412">cyan/green/pink lines: target group paths</text>
+  <rect class="field" x="332" y="94" width="240" height="300" rx="10"/>
+  <line class="grid" x1="392" y1="94" x2="392" y2="394"/>
+<line class="grid" x1="452" y1="94" x2="452" y2="394"/>
+<line class="grid" x1="512" y1="94" x2="512" y2="394"/>
+  <line class="grid" x1="332" y1="169" x2="572" y2="169"/>
+<line class="grid" x1="332" y1="244" x2="572" y2="244"/>
+<line class="grid" x1="332" y1="319" x2="572" y2="319"/>
+  <text class="small" x="332" y="82">Aurora current motion</text>
+  <text class="tiny" x="332" y="412">lines: current runtime/synthesized group paths</text>
+  <rect class="field" x="620" y="94" width="240" height="300" rx="10"/>
+  <line class="grid" x1="680" y1="94" x2="680" y2="394"/>
+<line class="grid" x1="740" y1="94" x2="740" y2="394"/>
+<line class="grid" x1="800" y1="94" x2="800" y2="394"/>
+  <line class="grid" x1="620" y1="169" x2="860" y2="169"/>
+<line class="grid" x1="620" y1="244" x2="860" y2="244"/>
+<line class="grid" x1="620" y1="319" x2="860" y2="319"/>
+  <text class="small" x="620" y="82">Overlay and deltas</text>
+  <text class="tiny" x="620" y="412">dashed target, amber current, white end-point delta</text>
+  <polyline class="targetPath" points="184.5,276.7 180.8,290.5 172.2,263.1 182.2,253.6 174.9,270.4 170.2,277.6 170.6,285.5 170.6,285.5 170.6,285.5 170.6,285.7" stroke="#78f7ff"/><circle cx="184.5" cy="276.7" r="4" fill="#78f7ff"/><text class="tiny" x="190.5" y="271.7" fill="#78f7ff">G1</text>
+  <polyline class="targetPath" points="179.1,256.6 180.3,255.4 176.1,275.1 178.4,285.3 178.5,285.8 180.3,285.5 180.3,285.5 180.3,285.5 180.3,285.5 180.1,285.5" stroke="#8cffb4"/><circle cx="179.1" cy="256.6" r="4" fill="#8cffb4"/><text class="tiny" x="185.1" y="251.60000000000002" fill="#8cffb4">G2</text>
+  <polyline class="targetPath" points="179.5,281.2 179.5,281.2 157.7,322.5 148.9,321.1 148.9,321.1 148.9,321.1 148.9,321.1 148.9,321.1 148.9,321.1 148.9,321.1" stroke="#b08cff"/><circle cx="179.5" cy="281.2" r="4" fill="#b08cff"/><text class="tiny" x="185.5" y="276.2" fill="#b08cff">G3</text>
+  <polyline class="targetPath" points="212.5,277.8 212.5,277.8 213.5,299.6 201,314.3 195.9,322 192.5,321.6" stroke="#ff7bd5"/><circle cx="212.5" cy="277.8" r="4" fill="#ff7bd5"/><text class="tiny" x="218.5" y="272.8" fill="#ff7bd5">G4</text>
+  <polyline class="targetPath" points="103.2,253.3 103.3,253.3 103.2,253.3 103.2,253.4 103.2,253.3 103.2,253.4 103.2,253.4 103.1,253.4 103.2,253.3 103.2,253.3" stroke="#ffd36a"/><circle cx="103.2" cy="253.3" r="4" fill="#ffd36a"/><text class="tiny" x="109.2" y="248.3" fill="#ffd36a">G5</text>
+  <polyline class="currentPath" points="351.2,160 332,252.7 351.2,291.5" stroke="#78f7ff"/><circle cx="351.2" cy="160" r="4" fill="#78f7ff"/><text class="tiny" x="357.2" y="155" fill="#78f7ff">G1</text>
+  <polyline class="currentPath" points="572,263.1 572,260.4 572,247.9 555.4,245.7 515.4,259.8 480.9,267.5 470.3,261.2 485.9,248.4 511.9,244.2 421.7,258.4 415.9,260.9 426.9,263 450.9,264.9 480.9,267.3 508.4,270.4 525.9,274.8 528.1,280.7 513.7,288.1 485.4,296.7 449.5,306.5 414.2,316.7 387.7,326.8 376.3,336.7 382.8,345.8 405.9,354.3 440.2,362.5 478.1,370.6 510.9,379.1 531.6,388.5 460,383" stroke="#8cffb4"/><circle cx="572" cy="263.1" r="4" fill="#8cffb4"/><text class="tiny" x="578" y="258.1" fill="#8cffb4">G2</text>
+  <polyline class="currentPath" points="572,172.8 566.4,175.7 558.3,178.6 550.2,181.5 542.1,184.4 534,187.3 525.9,190.2 517.8,193.2 509.7,196.2 501.6,199.2 431.1,169.6 433.6,175.4 436.1,181.3 438.5,187.3 441.1,193.6 443.6,200 446.1,206.6 448.7,213.3 451.1,220.2 453.6,227.3 456.1,234.4 458.7,241.8 461.2,249.3 463.7,257.1 466.2,264.9 468.7,272.9 471.2,281.1 473.7,289.4 476.3,297.9 478.7,306.6 481.2,315.4 483.8,324.4 486.3,333.6 488.8,342.9 543.6,256.3 549.7,277.2 555.9,298.3 562,319.6 568.1,341 572,361.4 572,377.9" stroke="#b08cff"/><circle cx="572" cy="172.8" r="4" fill="#b08cff"/><text class="tiny" x="578" y="167.8" fill="#b08cff">G3</text>
+  <polyline class="currentPath" points="332,195 352.9,199.2 384.4,195.8 410.3,187 423.9,178.3 422.7,175.1 410,179.4 392.9,189.1 380,198.8 377.7,203.1 468.4,180.6 474.7,183.6 472.5,187 461.4,190.8 442.4,194.5 417.5,198.3 389.3,201.8 360.9,204.8 335.4,207.5 343.5,216.6 367.5,218.3 391.6,220.4 412.8,223.2 428.4,226.6 436.5,230.7 436.1,235.3 427.2,240.4 411.3,245.9 390.4,251.6 367.3,257.2 345.2,262.6" stroke="#ff7bd5"/><circle cx="332" cy="195" r="4" fill="#ff7bd5"/><text class="tiny" x="338" y="190" fill="#ff7bd5">G4</text>
+  <polyline class="currentPath" points="351.2,160 424.6,174.6 543.2,180.6" stroke="#ffd36a"/><circle cx="351.2" cy="160" r="4" fill="#ffd36a"/><text class="tiny" x="357.2" y="155" fill="#ffd36a">G5</text>
+  <polyline class="targetPath" points="760.5,276.7 756.8,290.5 748.2,263.1 758.2,253.6 750.9,270.4 746.2,277.6 746.6,285.5 746.6,285.5 746.6,285.5 746.6,285.7" stroke="#78f7ff" stroke-dasharray="7 7"/><circle cx="760.5" cy="276.7" r="4" fill="#78f7ff"/><text class="tiny" x="766.5" y="271.7" fill="#78f7ff">G1</text>
+  <polyline class="targetPath" points="755.1,256.6 756.3,255.4 752.1,275.1 754.4,285.3 754.5,285.8 756.3,285.5 756.3,285.5 756.3,285.5 756.3,285.5 756.1,285.5" stroke="#8cffb4" stroke-dasharray="7 7"/><circle cx="755.1" cy="256.6" r="4" fill="#8cffb4"/><text class="tiny" x="761.1" y="251.60000000000002" fill="#8cffb4">G2</text>
+  <polyline class="targetPath" points="755.5,281.2 755.5,281.2 733.7,322.5 724.9,321.1 724.9,321.1 724.9,321.1 724.9,321.1 724.9,321.1 724.9,321.1 724.9,321.1" stroke="#b08cff" stroke-dasharray="7 7"/><circle cx="755.5" cy="281.2" r="4" fill="#b08cff"/><text class="tiny" x="761.5" y="276.2" fill="#b08cff">G3</text>
+  <polyline class="targetPath" points="788.5,277.8 788.5,277.8 789.5,299.6 777,314.3 771.9,322 768.5,321.6" stroke="#ff7bd5" stroke-dasharray="7 7"/><circle cx="788.5" cy="277.8" r="4" fill="#ff7bd5"/><text class="tiny" x="794.5" y="272.8" fill="#ff7bd5">G4</text>
+  <polyline class="targetPath" points="679.2,253.3 679.3,253.3 679.2,253.3 679.2,253.4 679.2,253.3 679.2,253.4 679.2,253.4 679.1,253.4 679.2,253.3 679.2,253.3" stroke="#ffd36a" stroke-dasharray="7 7"/><circle cx="679.2" cy="253.3" r="4" fill="#ffd36a"/><text class="tiny" x="685.2" y="248.3" fill="#ffd36a">G5</text>
+  <polyline class="currentPath" points="639.2,160 620,252.7 639.2,291.5" stroke="#ffd36a"/><circle cx="639.2" cy="160" r="4" fill="#ffd36a"/><text class="tiny" x="645.2" y="155" fill="#ffd36a">G1</text>
+  <polyline class="currentPath" points="860,263.1 860,260.4 860,247.9 843.4,245.7 803.4,259.8 768.9,267.5 758.3,261.2 773.9,248.4 799.9,244.2 709.7,258.4 703.9,260.9 714.9,263 738.9,264.9 768.9,267.3 796.4,270.4 813.9,274.8 816.1,280.7 801.7,288.1 773.4,296.7 737.5,306.5 702.2,316.7 675.7,326.8 664.3,336.7 670.8,345.8 693.9,354.3 728.2,362.5 766.1,370.6 798.9,379.1 819.6,388.5 748,383" stroke="#ffd36a"/><circle cx="860" cy="263.1" r="4" fill="#ffd36a"/><text class="tiny" x="866" y="258.1" fill="#ffd36a">G2</text>
+  <polyline class="currentPath" points="860,172.8 854.4,175.7 846.3,178.6 838.2,181.5 830.1,184.4 822,187.3 813.9,190.2 805.8,193.2 797.7,196.2 789.6,199.2 719.1,169.6 721.6,175.4 724.1,181.3 726.5,187.3 729.1,193.6 731.6,200 734.1,206.6 736.7,213.3 739.1,220.2 741.6,227.3 744.1,234.4 746.7,241.8 749.2,249.3 751.7,257.1 754.2,264.9 756.7,272.9 759.2,281.1 761.7,289.4 764.3,297.9 766.7,306.6 769.2,315.4 771.8,324.4 774.3,333.6 776.8,342.9 831.6,256.3 837.7,277.2 843.9,298.3 850,319.6 856.1,341 860,361.4 860,377.9" stroke="#ffd36a"/><circle cx="860" cy="172.8" r="4" fill="#ffd36a"/><text class="tiny" x="866" y="167.8" fill="#ffd36a">G3</text>
+  <polyline class="currentPath" points="620,195 640.9,199.2 672.4,195.8 698.3,187 711.9,178.3 710.7,175.1 698,179.4 680.9,189.1 668,198.8 665.7,203.1 756.4,180.6 762.7,183.6 760.5,187 749.4,190.8 730.4,194.5 705.5,198.3 677.3,201.8 648.9,204.8 623.4,207.5 631.5,216.6 655.5,218.3 679.6,220.4 700.8,223.2 716.4,226.6 724.5,230.7 724.1,235.3 715.2,240.4 699.3,245.9 678.4,251.6 655.3,257.2 633.2,262.6" stroke="#ffd36a"/><circle cx="620" cy="195" r="4" fill="#ffd36a"/><text class="tiny" x="626" y="190" fill="#ffd36a">G4</text>
+  <polyline class="currentPath" points="639.2,160 712.6,174.6 831.2,180.6" stroke="#ffd36a"/><circle cx="639.2" cy="160" r="4" fill="#ffd36a"/><text class="tiny" x="645.2" y="155" fill="#ffd36a">G5</text>
+  <line class="deltaLine" x1="746.6" y1="285.7" x2="639.2" y2="291.5" marker-end="url(#arrow)"/>
+  <line class="deltaLine" x1="756.1" y1="285.5" x2="748" y2="383" marker-end="url(#arrow)"/>
+  <line class="deltaLine" x1="724.9" y1="321.1" x2="860" y2="377.9" marker-end="url(#arrow)"/>
+  <line class="deltaLine" x1="768.5" y1="321.6" x2="633.2" y2="262.6" marker-end="url(#arrow)"/>
+  <line class="deltaLine" x1="679.2" y1="253.3" x2="831.2" y2="180.6" marker-end="url(#arrow)"/>
+  <text class="small" x="44" y="436">Stage-start timing strip</text>
+  <text class="tiny" x="230" y="436">0s</text><text class="tiny" x="740" y="436">16s</text>
+  <line class="grid" x1="230" y1="444" x2="750" y2="444"/>
+  <text class="tiny" x="44" y="470">G1 runtime group 1</text>
+      <rect x="230" y="462" width="105.6" height="8" rx="4" fill="#78f7ff"/><text class="tiny" x="230" y="459" fill="#78f7ff">target</text>
+      <rect x="238.1" y="474" width="227.5" height="8" rx="4" fill="#ffd36a"/><text class="tiny" x="238.1" y="471" fill="#ffd36a">current</text>
+      <text class="tiny" x="770" y="475">2/10 start aligned; 4s late end</text>
+  <text class="tiny" x="44" y="504">G2 runtime group 2</text>
+      <rect x="246.3" y="496" width="89.4" height="8" rx="4" fill="#78f7ff"/><text class="tiny" x="246.3" y="493" fill="#78f7ff">target</text>
+      <rect x="262.5" y="508" width="130" height="8" rx="4" fill="#ffd36a"/><text class="tiny" x="262.5" y="505" fill="#ffd36a">current</text>
+      <text class="tiny" x="770" y="509">2.6/10 0.5s late start; 1.75s late end</text>
+  <text class="tiny" x="44" y="538">G3 runtime group 3</text>
+      <rect x="323.6" y="530" width="121.9" height="8" rx="4" fill="#78f7ff"/><text class="tiny" x="323.6" y="527" fill="#78f7ff">target</text>
+      <rect x="335.6" y="542" width="325" height="8" rx="4" fill="#ffd36a"/><text class="tiny" x="335.6" y="539" fill="#ffd36a">current</text>
+      <text class="tiny" x="770" y="543">3.7/10 start aligned; 6.62s late end</text>
+  <text class="tiny" x="44" y="572">G4 runtime group 4</text>
+      <rect x="437.4" y="564" width="113.8" height="8" rx="4" fill="#78f7ff"/><text class="tiny" x="437.4" y="561" fill="#78f7ff">target</text>
+      <rect x="481.9" y="576" width="130" height="8" rx="4" fill="#ffd36a"/><text class="tiny" x="481.9" y="573" fill="#ffd36a">current</text>
+      <text class="tiny" x="770" y="577">1.1/10 1.37s late start; 1.87s late end</text>
+  <text class="tiny" x="44" y="606">G5 runtime group 5</text>
+      <rect x="656.7" y="598" width="89.4" height="8" rx="4" fill="#78f7ff"/><text class="tiny" x="656.7" y="595" fill="#78f7ff">target</text>
+      <rect x="652.5" y="610" width="97.5" height="8" rx="4" fill="#ffd36a"/><text class="tiny" x="652.5" y="607" fill="#ffd36a">current</text>
+      <text class="tiny" x="770" y="611">4/10 start aligned; end aligned</text>
+  <text class="small" x="914" y="436">Human delta read</text>
+  <text class="tiny" x="914" y="462">G1: entry left vs target center; exit left vs target center; low group trajectory fit</text>
+  <text class="tiny" x="914" y="496">G2: entry left vs target center; exit left vs target center; low group trajectory fit</text>
+  <text class="tiny" x="914" y="530">G3: path family green-ladder-split vs target pink-serpentine; entry right vs target center; exit right vs target center; low group trajectory fit</text>
+  <text class="tiny" x="914" y="564">G4: entry left vs target center; exit left vs target center; low group trajectory fit</text>
+  <text class="tiny" x="914" y="598">G5: path family pink-green-cascade vs target pink-serpentine; exit center vs target right</text>
+</svg>
