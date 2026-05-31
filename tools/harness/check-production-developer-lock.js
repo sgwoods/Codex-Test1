@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const { DIST_PRODUCTION } = require('../build/paths');
-const { withHarnessPage } = require('./browser-check-util');
+const { ensureLaneBuildFresh, withHarnessPage } = require('./browser-check-util');
 
 function fail(message, payload){
   console.error(message);
@@ -9,6 +9,7 @@ function fail(message, payload){
 }
 
 async function main(){
+  ensureLaneBuildFresh(DIST_PRODUCTION, { lane: 'production', releaseChannel: 'production' });
   const result = await withHarnessPage({ root: DIST_PRODUCTION, seed: 73125, skipStart: true }, async ({ page }) => {
     await page.locator('#settingsBtn').click();
     await page.waitForTimeout(200);

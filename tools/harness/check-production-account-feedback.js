@@ -5,6 +5,7 @@ const path = require('path');
 const { launchHarnessBrowser } = require('./browser-launch');
 const { DIST_PRODUCTION } = require('../build/paths');
 const { LOCAL_BIND_HOST, localUrl } = require('../dev/local-host-config');
+const { ensureLaneBuildFresh } = require('./browser-check-util');
 
 const APP_ROOT = DIST_PRODUCTION;
 
@@ -42,6 +43,7 @@ function serve(root = APP_ROOT){
 }
 
 async function main(){
+  ensureLaneBuildFresh(APP_ROOT, { lane: 'production', releaseChannel: 'production' });
   if(!fs.existsSync(path.join(APP_ROOT, 'index.html'))){
     throw new Error(`Built production app not found at ${APP_ROOT}. Run "npm run promote:production" first.`);
   }

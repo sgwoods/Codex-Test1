@@ -1,6 +1,7 @@
 const fs = require('fs');
 const http = require('http');
 const path = require('path');
+const { execFileSync } = require('child_process');
 const { DIST_DEV } = require('../build/paths');
 const { SYSTEM_CHROME, launchHarnessBrowser } = require('./browser-launch');
 const { LOCAL_BIND_HOST, localUrl } = require('../dev/local-host-config');
@@ -38,6 +39,63 @@ function serve(root = APP_ROOT){
 
 function sleep(ms){
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function gitHeadCommit(){
+  try{
+    return execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
+  }catch{
+    return '';
+  }
+}
+
+function readBuildInfo(root){
+  const file = path.join(root, 'build-info.json');
+  if(!fs.existsSync(file)) return null;
+  try{
+    return JSON.parse(fs.readFileSync(file, 'utf8'));
+  }catch{
+    return null;
+  }
+}
+
+function laneBuildDriftReason(root, expectedChannel){
+  if(!fs.existsSync(path.join(root, 'index.html'))) return 'missing index.html';
+  const buildInfo = readBuildInfo(root);
+  if(!buildInfo) return 'missing build-info.json';
+  const channel = String(buildInfo.releaseChannel || '').toLowerCase();
+  if(expectedChannel && channel !== String(expectedChannel).toLowerCase()){
+    return `release channel drift (${channel || 'unknown'} !== ${expectedChannel})`;
+  }
+  const headCommit = gitHeadCommit();
+  const buildCommit = String(buildInfo.commit || '').trim();
+  if(headCommit && buildCommit && buildCommit !== headCommit){
+    return `commit drift (${buildCommit.slice(0, 8)} !== ${headCommit.slice(0, 8)})`;
+  }
+  return '';
+}
+
+function ensureLaneBuildFresh(root, { lane = 'dev', releaseChannel = '' } = {}){
+  const drift = laneBuildDriftReason(root, releaseChannel);
+  if(!drift){
+    return { rebuilt: false, reason: '', buildInfo: readBuildInfo(root) };
+  }
+  const buildScript = path.join(ROOT, 'tools', 'build', 'build-index.js');
+  const args = lane === 'production'
+    ? [buildScript, '--lane', 'production']
+    : lane === 'beta'
+      ? [buildScript, '--lane', 'beta']
+      : [buildScript];
+  execFileSync(process.execPath, args, {
+    cwd: ROOT,
+    encoding: 'utf8',
+    stdio: 'pipe'
+  });
+  const after = laneBuildDriftReason(root, releaseChannel);
+  if(after){
+    throw new Error(`Failed to refresh ${lane} build at ${root}: ${after}`);
+  }
+  return { rebuilt: true, reason: drift, buildInfo: readBuildInfo(root) };
 }
 
 async function withHarnessPage(cfg, fn){
@@ -168,6 +226,7 @@ module.exports = {
   APP_ROOT,
   CHROME,
   sleep,
+  ensureLaneBuildFresh,
   withHarnessPage,
   waitForHarness,
   capturePlayfieldRegion
