@@ -43,22 +43,18 @@ const TARGET_SPRITE_ROWS=Object.freeze({
   'BBBB...R...BBB.'
  ]),
  beeOpen:Object.freeze([
-  'BBBBR...........',
-  'RWWWRRR.........',
-  'RWWWWRR.........',
-  'RRBBBRRR........',
-  'RRBBB.RR........',
-  'R..B............',
-  'R...............',
-  '................',
-  '................',
-  '................',
-  '................',
-  '................',
-  '................',
-  '......B.........',
-  '..Y...B.........',
-  '.RYRYB..........'
+  '.BB....Y....B..',
+  '.BB..YYYRY.BB..',
+  '..BBRRRYRYBB...',
+  '...BBRRYRRB....',
+  '....YYYYYY.....',
+  '...BBBYYYBB....',
+  '..BBBBRRRBBB...',
+  '.BBBBRRRR.BBBB.',
+  'BBBBBYYYY.BBBBB',
+  'BBBBBRRRR.BBBBB',
+  'BBBB..RRR..BBBB',
+  'BBBB...R...BBB.'
  ]),
  but:Object.freeze([
   '.................',
@@ -81,22 +77,24 @@ const TARGET_SPRITE_ROWS=Object.freeze({
   '.................'
  ]),
  butOpen:Object.freeze([
-  '.MM.M..BB......B',
-  '..M.M.BBB.....BB',
-  '.......BB.....BM',
-  'BB....BB......BM',
-  'BBB...B.......BM',
-  '.BBB.B........BB',
-  '...B...........B',
-  '................',
-  '................',
-  '................',
-  '................',
-  '.....R..........',
-  '.....R..........',
-  '..B..R.........R',
-  'BWRW..R........R',
-  'RBBBBRR........R'
+  '.................',
+  '.RR...........RR.',
+  '.RR...BB.BB...RR.',
+  '.RR...BB.BB...RR.',
+  '.RR.WWRRWRRWW.RR.',
+  '.RR.WWRRWRRWW.RR.',
+  '.RR.WWWWWWWWW.RR.',
+  '.RRRRRWWWWWRRRRR.',
+  '.RRRRRWWWWWRRRRR.',
+  '....RRBBBBBRR....',
+  '.RRRRRBBBBBRRRRR.',
+  '.RRRRRBBBBBRRRRR.',
+  '.RRRRRWWWWWRRRRR.',
+  '.RRRRRWWWWWRRRRR.',
+  '.RRRR.BBBBB.RRRR.',
+  '.RRRR.BBBBB.RRRR.',
+  '.RRRR...B...RRRR.',
+  '.................'
  ]),
  boss:Object.freeze([
   '.GGRRRGG.RRR.',
@@ -117,22 +115,22 @@ const TARGET_SPRITE_ROWS=Object.freeze({
   'RB..R.R..BR..'
  ]),
  bossOpen:Object.freeze([
-  '.GG.R........RRR',
-  '.............RR.',
-  '.............R..',
-  '................',
-  '................',
-  '................',
-  '..B..B..........',
-  'BBRRB...........',
-  'RBRR............',
-  'RBBBBBB.........',
-  'BYBYYBBB.B......',
-  'YYYYYBBBB.......',
-  'YYYYYY.BB....BB.',
-  'BYYYY..BB....B..',
-  '.YR.R..BB....B..',
-  '..R.R.BBB....BB.'
+  '..GG.R.R.GG.....',
+  '.GGG.R.R.GGG....',
+  '.GGRR...RRGG....',
+  'GG.R.....R.GG...',
+  'GG.........GG...',
+  '.GG..B.B..GG....',
+  '..GBRB.RBRG.....',
+  '..BBRRBRRBB.....',
+  '.BBBYYBYYBBB....',
+  'BBYYYYYYYYYBB...',
+  'BBYYYYYYYYYBBB..',
+  'BBYYYYYYYYYBB...',
+  '.BB.R...R.BB....',
+  '.B..R...R..B....',
+  '....R...R.......',
+  '...RR...RR......'
  ]),
  challengeGreen:Object.freeze([
   'R.R.C.C.........',
@@ -512,17 +510,30 @@ function drawEnemy(e){
   const hitAlpha=Math.min(.96,e.hitT/(e.t==='boss'?.46:.34));
   ctx.globalAlpha=e.t==='boss'?Math.max(.82,hitAlpha):hitAlpha;
   if(e.t==='boss'){
+   const sparkScale=.28+Math.min(.18,e.hitT*.28);
+   drawTargetExplosionSprite('explosionSmall',sparkScale);
+   ctx.globalAlpha=Math.min(.78,hitAlpha*.72);
    ctx.fillStyle='#fff8c4';
-   ctx.fillRect(-17,-13,34,26);
-   ctx.fillStyle='#ffffff';
-   ctx.fillRect(-12,-3,24,6);
-   ctx.fillRect(-3,-10,6,20);
+   ctx.fillRect(-12,-2,24,4);
+   ctx.fillRect(-2,-10,4,20);
    ctx.fillStyle='#ff92d8';
-   ctx.fillRect(-9,-1,18,2);
+   ctx.fillRect(-8,-1,16,2);
    ctx.fillRect(-1,-7,2,14);
+   ctx.globalAlpha=Math.min(.86,hitAlpha*.8);
    ctx.strokeStyle='#e2f7ff';
    ctx.lineWidth=1;
-   ctx.strokeRect(-18.5,-14.5,37,29);
+   ctx.beginPath();
+   ctx.moveTo(-15,-9);
+   ctx.lineTo(-9,-13);
+   ctx.lineTo(-4,-9);
+   ctx.moveTo(15,-9);
+   ctx.lineTo(9,-13);
+   ctx.lineTo(4,-9);
+   ctx.moveTo(-14,10);
+   ctx.lineTo(-7,13);
+   ctx.moveTo(14,10);
+   ctx.lineTo(7,13);
+   ctx.stroke();
   }else{
    ctx.fillStyle='rgba(255,255,255,.72)';
    ctx.fillRect(-12,-10,24,20);

@@ -139,7 +139,9 @@ const AURORA_REFERENCE_TIMINGS=Object.freeze({
  challengeResults:Object.freeze({
   resultCueDelay:.34,
   resultHoldWindow:4.25,
+  resultHoldWindowByChallenge:Object.freeze([7.77,15.77,14.77,11.77,10.65,10.65,10.65,10.65]),
   resultBannerWindow:4.25,
+  resultBannerWindowByChallenge:Object.freeze([7.77,15.77,14.77,11.77,10.65,10.65,10.65,10.65]),
   nextStageWindow:7.35,
   nextCueLeadBeforeSpawn:3.15,
   cadenceHoldAfterSpawn:1.45

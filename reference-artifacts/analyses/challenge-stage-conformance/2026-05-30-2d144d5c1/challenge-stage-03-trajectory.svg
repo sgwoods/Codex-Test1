@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300" role="img" aria-labelledby="title desc">
+  <title id="title">Challenging Stage 3 (11-12) trajectory comparison</title>
+  <desc id="desc">Large readable reference-versus-current vector sketch generated from challenge-stage conformance metrics. It is a human-review aid, not raw optical tracking.</desc>
+  <style>
+    .bg{fill:#06111d}.panel{fill:#0d1b2a;stroke:#2e5d78;stroke-width:2}.grid{stroke:#1b3344;stroke-width:1}.target{fill:none;stroke:#78f7ff;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.current{fill:none;stroke:#ffd36a;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.dotT{fill:#78f7ff}.dotC{fill:#ffd36a}.text{fill:#f2fbff;font:700 20px ui-monospace,Menlo,monospace}.small{fill:#b8d7ec;font:700 13px ui-monospace,Menlo,monospace}.tiny{fill:#9ec9e6;font:11px ui-monospace,Menlo,monospace}.barBg{fill:#14283a}.targetBar{fill:#78f7ff}.currentBar{fill:#ffd36a}.pill{fill:#102a3b;stroke:#2e5d78}
+  </style>
+  <rect class="bg" x="0" y="0" width="760" height="300"/>
+  <text class="text" x="24" y="34">Challenging Stage 3 (11-12)</text>
+  <rect class="pill" x="560" y="14" width="176" height="32" rx="16"/>
+  <text class="small" x="576" y="35">4.3/10 strict score</text>
+  <rect class="panel" x="40" y="56" width="268" height="190" rx="10"/>
+  <rect class="panel" x="328" y="56" width="268" height="190" rx="10"/>
+  <text class="small" x="58" y="82">Galaga target vector</text>
+  <text class="small" x="346" y="82">Aurora current vector</text>
+  <line class="grid" x1="64" y1="96" x2="64" y2="228"/><line class="grid" x1="352" y1="96" x2="352" y2="228"/><line class="grid" x1="120" y1="96" x2="120" y2="228"/><line class="grid" x1="408" y1="96" x2="408" y2="228"/><line class="grid" x1="176" y1="96" x2="176" y2="228"/><line class="grid" x1="464" y1="96" x2="464" y2="228"/><line class="grid" x1="232" y1="96" x2="232" y2="228"/><line class="grid" x1="520" y1="96" x2="520" y2="228"/>
+  <line class="grid" x1="64" y1="108" x2="284" y2="108"/><line class="grid" x1="352" y1="108" x2="572" y2="108"/><line class="grid" x1="64" y1="150" x2="284" y2="150"/><line class="grid" x1="352" y1="150" x2="572" y2="150"/><line class="grid" x1="64" y1="192" x2="284" y2="192"/><line class="grid" x1="352" y1="192" x2="572" y2="192"/>
+  <polyline class="target" points="204.5,80 179.8,95.3 187.4,110.6 149.3,125.9 143.5,141.2"/>
+  <polyline class="current" points="442,80 463,119.7 461,159.3 482,199"/>
+  <circle class="dotT" cx="204.5" cy="80" r="5"/>
+  <circle class="dotC" cx="442" cy="80" r="5"/>
+  <text class="tiny" x="58" y="264">target: y 0.36 path 0.86 turns 2</text>
+  <text class="tiny" x="346" y="264">current: y 0.7001 path 0.8128 turns 1</text>
+  <g>
+  <text x="620" y="82" class="tiny">y range target/current</text>
+  <rect x="620" y="88" width="108" height="8" rx="4" class="barBg"/>
+  <rect x="620" y="88" width="24.3" height="8" rx="4" class="targetBar"/>
+  <rect x="620" y="99" width="108" height="8" rx="4" class="barBg"/>
+  <rect x="620" y="99" width="47.3" height="8" rx="4" class="currentBar"/>
+  </g>
+  <g>
+  <text x="620" y="128" class="tiny">path length target/current</text>
+  <rect x="620" y="134" width="108" height="8" rx="4" class="barBg"/>
+  <rect x="620" y="134" width="58" height="8" rx="4" class="targetBar"/>
+  <rect x="620" y="145" width="108" height="8" rx="4" class="barBg"/>
+  <rect x="620" y="145" width="54.9" height="8" rx="4" class="currentBar"/>
+  </g>
+  <g>
+  <text x="620" y="174" class="tiny">lower field target/current</text>
+  <rect x="620" y="180" width="108" height="8" rx="4" class="barBg"/>
+  <rect x="620" y="180" width="5.4" height="8" rx="4" class="targetBar"/>
+  <rect x="620" y="191" width="108" height="8" rx="4" class="barBg"/>
+  <rect x="620" y="191" width="40.5" height="8" rx="4" class="currentBar"/>
+  </g>
+  <text class="tiny" x="620" y="242">Reference: challenge-3-arrival-group-1</text>
+</svg>

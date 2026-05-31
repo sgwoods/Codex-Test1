@@ -204,11 +204,17 @@ function finalizeChallengeClear(){
  const challengeResultsTiming=usesReferenceTimingModel()
   ? currentGamePackReferenceTiming('challengeResults')
   : null;
- S.banner=challengeResultsTiming?.resultBannerWindow??1.15;
+ const resultBannerWindow=usesReferenceTimingModel()&&typeof currentGamePackReferenceTimingField==='function'
+  ? currentGamePackReferenceTimingField('challengeResults','resultBannerWindow',S.stage,1.15)
+  : (challengeResultsTiming?.resultBannerWindow??1.15);
+ const resultHoldWindow=usesReferenceTimingModel()&&typeof currentGamePackReferenceTimingField==='function'
+  ? currentGamePackReferenceTimingField('challengeResults','resultHoldWindow',S.stage,1.45)
+  : (challengeResultsTiming?.resultHoldWindow??1.45);
+ S.banner=resultBannerWindow;
  S.pendingStage=S.stage+1;
  S.lastChallengeClearT=S.stageClock;
  S.challengeTransitionStallLogged=0;
- S.postChallengeT=challengeResultsTiming?.resultHoldWindow??1.45;
+ S.postChallengeT=resultHoldWindow;
  if(usesReferenceTimingModel()){
   clearReferenceTransitionCueWindow();
   S.challengeResultPerfect=perfect>0?1:0;

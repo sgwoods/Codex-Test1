@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "artifactType": "aurora-audio-event-gap",
-  "generatedAt": "2026-05-19T18:43:38.291Z",
-  "branch": "codex/macbook-conformance-investment-review",
-  "commit": "796835e1",
-  "dirty": false,
+  "generatedAt": "2026-05-31T12:20:00.216Z",
+  "branch": "codex/macbook-fullscreen-timing-alignment-wip",
+  "commit": "2d144d5c1",
+  "dirty": true,
   "problem": "Aurora audio conformance is the weakest current release axis, but the next work must distinguish true runtime cue gaps from broad or missing reference measurements.",
   "strategy": "Reuse the latest captured Aurora audio comparison metrics, rank event cues by active-duration/timbre/reference-window risk, and expose missing critical cue coverage before tuning.",
   "successMeasure": "The next audio cycle should reduce missing critical comparison coverage, narrow broad reference windows, and lower the highest-risk event cue gaps without regressing gameplay guardrails.",
@@ -1306,7 +1306,7 @@
   ],
   "previousComparison": {
     "baseline": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
-    "baselineGeneratedAt": "2026-05-19T10:56:46.411Z",
+    "baselineGeneratedAt": "2026-05-31T12:16:15.266Z",
     "cueDeltaCount": 21,
     "averageWorstSegmentRiskDelta10": 0,
     "highestRiskCueChanged": false,

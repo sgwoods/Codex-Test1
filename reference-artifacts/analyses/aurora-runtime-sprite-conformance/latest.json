@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "aurora-runtime-sprite-conformance",
-  "generatedAt": "2026-05-30T22:54:42.799Z",
-  "commit": "4650b755f",
+  "generatedAt": "2026-05-30T23:26:19.156Z",
+  "commit": "2d144d5c1",
   "branch": "codex/macbook-fullscreen-timing-alignment-wip",
   "dirty": true,
   "gameKey": "aurora-galactica",
@@ -386,11 +386,11 @@
       "phaseClosedCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-flap-closed.png",
       "phaseOpenCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-flap-open.png",
       "closedScore10": 5.55,
-      "openScore10": 5.49,
-      "scoreDelta": 0.06,
-      "litPixelDelta": 752,
-      "filledCellDelta": 327,
-      "read": "Captured closed/open flap phases for bee-line; lit-pixel delta 752, filled-cell delta 327."
+      "openScore10": 5.55,
+      "scoreDelta": 0,
+      "litPixelDelta": 0,
+      "filledCellDelta": 0,
+      "read": "Captured closed/open flap phases for bee-line; lit-pixel delta 0, filled-cell delta 0."
     },
     {
       "spriteKey": "but-line",
@@ -398,11 +398,11 @@
       "phaseClosedCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-flap-closed.png",
       "phaseOpenCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-flap-open.png",
       "closedScore10": 7.64,
-      "openScore10": 4.76,
-      "scoreDelta": 2.88,
-      "litPixelDelta": 1200,
-      "filledCellDelta": 599,
-      "read": "Captured closed/open flap phases for but-line; lit-pixel delta 1200, filled-cell delta 599."
+      "openScore10": 7.64,
+      "scoreDelta": 0,
+      "litPixelDelta": 0,
+      "filledCellDelta": 0,
+      "read": "Captured closed/open flap phases for but-line; lit-pixel delta 0, filled-cell delta 0."
     },
     {
       "spriteKey": "boss-line",
@@ -410,11 +410,11 @@
       "phaseClosedCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-flap-closed.png",
       "phaseOpenCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-flap-open.png",
       "closedScore10": 4.95,
-      "openScore10": 4.86,
-      "scoreDelta": 0.09,
-      "litPixelDelta": 288,
-      "filledCellDelta": 123,
-      "read": "Captured closed/open flap phases for boss-line; lit-pixel delta 288, filled-cell delta 123."
+      "openScore10": 5.56,
+      "scoreDelta": 0.61,
+      "litPixelDelta": 208,
+      "filledCellDelta": 37,
+      "read": "Captured closed/open flap phases for boss-line; lit-pixel delta 208, filled-cell delta 37."
     }
   ],
   "cadenceSamples": [
@@ -423,9 +423,9 @@
       "motionAxis": "full-flap-cadence-window",
       "frameCount": 8,
       "windowSecondsApprox": 0.385,
-      "scoreRange10": 0.06,
-      "averageAdjacentLitPixelDelta": 214.86,
-      "averageAdjacentFilledCellDelta": 93.43,
+      "scoreRange10": 0,
+      "averageAdjacentLitPixelDelta": 0,
+      "averageAdjacentFilledCellDelta": 0,
       "frames": [
         {
           "frameIndex": 0,
@@ -440,37 +440,37 @@
           "frameIndex": 1,
           "enemyTm": 0.055,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-cadence-01.png",
-          "score10": 5.49,
-          "litPixels": 416,
-          "filledCells": 414,
-          "fillRatio": 0.3194
+          "score10": 5.55,
+          "litPixels": 1168,
+          "filledCells": 741,
+          "fillRatio": 0.5718
         },
         {
           "frameIndex": 2,
           "enemyTm": 0.11,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-cadence-02.png",
-          "score10": 5.49,
-          "litPixels": 416,
-          "filledCells": 414,
-          "fillRatio": 0.3194
+          "score10": 5.55,
+          "litPixels": 1168,
+          "filledCells": 741,
+          "fillRatio": 0.5718
         },
         {
           "frameIndex": 3,
           "enemyTm": 0.165,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-cadence-03.png",
-          "score10": 5.49,
-          "litPixels": 416,
-          "filledCells": 414,
-          "fillRatio": 0.3194
+          "score10": 5.55,
+          "litPixels": 1168,
+          "filledCells": 741,
+          "fillRatio": 0.5718
         },
         {
           "frameIndex": 4,
           "enemyTm": 0.22,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-cadence-04.png",
-          "score10": 5.49,
-          "litPixels": 416,
-          "filledCells": 414,
-          "fillRatio": 0.3194
+          "score10": 5.55,
+          "litPixels": 1168,
+          "filledCells": 741,
+          "fillRatio": 0.5718
         },
         {
           "frameIndex": 5,
@@ -500,16 +500,16 @@
           "fillRatio": 0.5718
         }
       ],
-      "read": "Captured 8 cadence frames for bee-line; average adjacent lit-pixel delta 214.9, filled-cell delta 93.4. This measures visible runtime motion, but not yet Galaga target-frame cadence."
+      "read": "Captured 8 cadence frames for bee-line; average adjacent lit-pixel delta 0, filled-cell delta 0. This measures visible runtime motion, but not yet Galaga target-frame cadence."
     },
     {
       "spriteKey": "but-line",
       "motionAxis": "full-flap-cadence-window",
       "frameCount": 8,
       "windowSecondsApprox": 0.385,
-      "scoreRange10": 2.88,
-      "averageAdjacentLitPixelDelta": 342.86,
-      "averageAdjacentFilledCellDelta": 171.14,
+      "scoreRange10": 0,
+      "averageAdjacentLitPixelDelta": 0,
+      "averageAdjacentFilledCellDelta": 0,
       "frames": [
         {
           "frameIndex": 0,
@@ -524,37 +524,37 @@
           "frameIndex": 1,
           "enemyTm": 0.055,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-01.png",
-          "score10": 4.76,
-          "litPixels": 528,
-          "filledCells": 282,
-          "fillRatio": 0.2439
+          "score10": 7.64,
+          "litPixels": 1728,
+          "filledCells": 881,
+          "fillRatio": 0.7621
         },
         {
           "frameIndex": 2,
           "enemyTm": 0.11,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-02.png",
-          "score10": 4.76,
-          "litPixels": 528,
-          "filledCells": 282,
-          "fillRatio": 0.2439
+          "score10": 7.64,
+          "litPixels": 1728,
+          "filledCells": 881,
+          "fillRatio": 0.7621
         },
         {
           "frameIndex": 3,
           "enemyTm": 0.165,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-03.png",
-          "score10": 4.76,
-          "litPixels": 528,
-          "filledCells": 282,
-          "fillRatio": 0.2439
+          "score10": 7.64,
+          "litPixels": 1728,
+          "filledCells": 881,
+          "fillRatio": 0.7621
         },
         {
           "frameIndex": 4,
           "enemyTm": 0.22,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-cadence-04.png",
-          "score10": 4.76,
-          "litPixels": 528,
-          "filledCells": 282,
-          "fillRatio": 0.2439
+          "score10": 7.64,
+          "litPixels": 1728,
+          "filledCells": 881,
+          "fillRatio": 0.7621
         },
         {
           "frameIndex": 5,
@@ -584,16 +584,16 @@
           "fillRatio": 0.7621
         }
       ],
-      "read": "Captured 8 cadence frames for but-line; average adjacent lit-pixel delta 342.9, filled-cell delta 171.1. This measures visible runtime motion, but not yet Galaga target-frame cadence."
+      "read": "Captured 8 cadence frames for but-line; average adjacent lit-pixel delta 0, filled-cell delta 0. This measures visible runtime motion, but not yet Galaga target-frame cadence."
     },
     {
       "spriteKey": "boss-line",
       "motionAxis": "full-flap-cadence-window",
       "frameCount": 8,
       "windowSecondsApprox": 0.385,
-      "scoreRange10": 0.09,
-      "averageAdjacentLitPixelDelta": 82.29,
-      "averageAdjacentFilledCellDelta": 35.14,
+      "scoreRange10": 0.61,
+      "averageAdjacentLitPixelDelta": 59.43,
+      "averageAdjacentFilledCellDelta": 10.57,
       "frames": [
         {
           "frameIndex": 0,
@@ -608,37 +608,37 @@
           "frameIndex": 1,
           "enemyTm": 0.055,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-01.png",
-          "score10": 4.86,
-          "litPixels": 896,
-          "filledCells": 284,
-          "fillRatio": 0.3622
+          "score10": 5.56,
+          "litPixels": 1392,
+          "filledCells": 444,
+          "fillRatio": 0.5663
         },
         {
           "frameIndex": 2,
           "enemyTm": 0.11,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-02.png",
-          "score10": 4.86,
-          "litPixels": 896,
-          "filledCells": 284,
-          "fillRatio": 0.3622
+          "score10": 5.56,
+          "litPixels": 1392,
+          "filledCells": 444,
+          "fillRatio": 0.5663
         },
         {
           "frameIndex": 3,
           "enemyTm": 0.165,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-03.png",
-          "score10": 4.86,
-          "litPixels": 896,
-          "filledCells": 284,
-          "fillRatio": 0.3622
+          "score10": 5.56,
+          "litPixels": 1392,
+          "filledCells": 444,
+          "fillRatio": 0.5663
         },
         {
           "frameIndex": 4,
           "enemyTm": 0.22,
           "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-cadence-04.png",
-          "score10": 4.86,
-          "litPixels": 896,
-          "filledCells": 284,
-          "fillRatio": 0.3622
+          "score10": 5.56,
+          "litPixels": 1392,
+          "filledCells": 444,
+          "fillRatio": 0.5663
         },
         {
           "frameIndex": 5,
@@ -668,7 +668,7 @@
           "fillRatio": 0.5191
         }
       ],
-      "read": "Captured 8 cadence frames for boss-line; average adjacent lit-pixel delta 82.3, filled-cell delta 35.1. This measures visible runtime motion, but not yet Galaga target-frame cadence."
+      "read": "Captured 8 cadence frames for boss-line; average adjacent lit-pixel delta 59.4, filled-cell delta 10.6. This measures visible runtime motion, but not yet Galaga target-frame cadence."
     }
   ],
   "divePoseSamples": [

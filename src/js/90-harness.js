@@ -1607,6 +1607,7 @@ window.__galagaHarness__={
   return true;
  },
  setupChallengeMotionProfileTest(cfg={}){
+  if(typeof setHarnessClockControlled==='function')setHarnessClockControlled(1);
   started=1;
   paused=0;
   ATTRACT.active=0;
