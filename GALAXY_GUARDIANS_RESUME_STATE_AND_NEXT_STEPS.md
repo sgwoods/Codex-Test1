@@ -1,6 +1,6 @@
 # Galaxy Guardians Resume State And Next Steps
 
-Updated: May 29, 2026
+Updated: May 30, 2026
 
 ## Purpose
 
@@ -27,6 +27,10 @@ Use this together with:
 - The opening rack is no longer treated only as a generic movement artifact.
   It now has its own committed source-backed contract in
   `opening-rack-motion-0.1.json`.
+- The Galaxian reference set is now four-source rather than three-source, with
+  `galaxians-ex12mins` preserved and measured as a repeated-start early-session
+  corroboration lane for attract/logo, score-table, palette, and restart
+  cadence review.
 
 ### Hosted dev state
 
@@ -169,7 +173,7 @@ The practical meaning is: the main remaining work is no longer “do we have a
 serious conformance program?” The main remaining work is “does the visible game
 slice feel authoritative enough to justify a stronger hosted review story?”
 
-### 9. Audio and starfield are now a sharper live-priority issue
+### 9. Audio and starfield were the right live-priority issue
 
 The current artifact and harness layer does already carry both categories:
 
@@ -178,27 +182,54 @@ The current artifact and harness layer does already carry both categories:
   starfield and visible top re-entry
 
 The practical meaning is no longer “sound and motion feel missing.” The current
-source now also makes launch audio explicit, strengthens the first-seconds cue
-presence, and gives the moving starfield a brighter, more forceful live read.
+application now also makes launch audio explicit, strengthens the first-seconds
+cue presence, and advances the moving starfield on the actual playable preview
+board instead of only in source-side/shared-board paths.
 
 The practical meaning now is: the opening is more believable, so the next best
 quality work has shifted back to combat feedback, palette authority, and
 platform fit.
 
-### 10. The opening launch/audio/starfield/layout pass is now in source
+### 10. The opening launch/audio/starfield/layout pass now reaches the live board
 
-The current source now also carries:
+The current application now also carries:
 
 - explicit wait-launch audio confirmation plus a dedicated launch-audio guard
 - a stronger opening `gameStart`, formation pulse, and idle/wait audio read
-- a brighter `126`-star stage-one field with stronger drift, trails, and lead
-  stars
+- a brighter stage-one field with stronger drift, trails, and lead stars on
+  the live playable preview board
 - a clearer runtime headline stack and stronger `WAIT` / mission / score-table
   presentation on both the wait showcase and the preview modal
+- matching render-debug/starfield sampling between the playable preview board
+  and the maintained harness checks
 
 The practical meaning is: items `2`, `3`, and `4` from the previous priority
 order are no longer just plan text. They are implemented, measured, and green
 through the maintained Guardians spine.
+
+### 11. Live pulse, stage-one palette authority, and special-hit score popups are now back in the board
+
+The current application now also carries:
+
+- a real formation-start cue on `formation_entry_start` instead of only a
+  source-side cue id that never reached playback
+- recurring rack cadence on the ongoing `stagePulse` lane instead of reusing
+  the formation-entry cue for both jobs
+- a visible formation-mode alien pulse treatment on the live board instead of
+  only static sprite rows plus march motion
+- stage-one palette behavior that now preserves the base game-owned scout /
+  escort / flagship body colors more faithfully before later stage theming
+  begins to widen
+- a stronger stage-one row ladder on the live rack, so the opening swarm now
+  reads closer to a flagship-yellow / escort-red / upper-scout-violet /
+  lower-scout-blue source-family split instead of a flatter one-family board
+- score popups for special hit cases, especially diving and command-value hits,
+  so the board now surfaces more of the classic “why that hit mattered” read
+
+The practical meaning is: the current highest-value fidelity misses are no
+longer “there is no pulse” or “the score of a hit never appears.” They are now
+more about how strong and source-like those recovered behaviors feel under a
+real browser review.
 
 ## What The Last 5-10 Passes Actually Bought Us
 
@@ -207,7 +238,8 @@ through the maintained Guardians spine.
 Across the last cluster of Guardians passes, we materially improved:
 
 - opening rack motion from a loose wobble to a broad shared sweep
-- moving starfield density, drift, trails, and visible motion salience
+- moving starfield density, drift, trails, visible motion salience, and the
+  live playable-board update path itself
 - top re-entry continuity so threats read as a loop rather than a pop-in
 - the opening `WAIT` / mission / score-table read
 - launch audio clarity and first-seconds cue presence
@@ -256,6 +288,9 @@ Three player-facing fixes are now part of that maintained loop too:
   left/right edges before the intended bottom-exit/top-reentry cycle.
 - The live board now emits a recurring rack pulse, so representative gameplay
   audio is less empty between isolated shot/hit/loss cues.
+- The playable preview now advances and reports its own starfield movement
+  through the same render-debug surface the rest of the Guardians harness spine
+  reads, so “moving stars” is no longer only a source-side claim.
 
 ### 3. The right next phase is no longer generic polish
 
@@ -320,6 +355,32 @@ time and compute.
 5. Do a second frame-window refinement pass on the `WAIT` / title / mission /
    score-table read only if the next hosted side-by-side review still shows
    obvious cabinet drift.
+
+## Saved Top 10 Next Steps
+
+This is the preserved priority order for the next sustained Guardians quality
+pass after the current checkpoint is committed.
+
+1. Do one deliberate browser-side listening pass.
+   User-facing goal: the board sounds unmistakably alive during play, not just technically wired.
+2. Tune stage `3-5` pressure.
+   User-facing goal: the first real playable stretch feels tighter and more dangerous without becoming unfair.
+3. Tune stage `6-9` fairness and clear consistency.
+   User-facing goal: deeper runs feel learnable and winnable instead of swingy.
+4. Tighten live hit, explosion, and destruction feedback.
+   User-facing goal: each successful shot feels more crisp, readable, and satisfying.
+5. Refine score-popup conditions and styling.
+   User-facing goal: valuable hits read clearly without cluttering ordinary play.
+6. Review the stronger slice on hosted `/dev`.
+   User-facing goal: confirm the local gains still read correctly in the release-shaped lane.
+7. Do a second `WAIT` / title / score-table pass only if hosted drift remains.
+   User-facing goal: the first seconds instantly sell a believable cabinet identity.
+8. Promote more early-session evidence from `galaxians-ex12mins`.
+   User-facing goal: pulse, palette, and restart-cadence decisions depend less on judgment and more on repeatable source windows.
+9. Keep pushing Platinum-frame parity.
+   User-facing goal: scores, replay, music, bug-report, and shell behavior feel natural for Guardians, not preview-only.
+10. Expand the public slice only after the above holds.
+    User-facing goal: show more of Guardians without overstating maturity.
 
 ## Best Quality Work On This Machine Now
 

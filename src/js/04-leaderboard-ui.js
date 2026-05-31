@@ -255,7 +255,7 @@ function renderLeaderboardPanel(){
   body.push(`<span class="scoreCell rank">${String((row.idx||i+1)).padStart(2,'0')}</span>`);
   body.push(`<span class="scoreCell initials">${row.initials}${row.verified?'<span class="verifiedMark">🔒</span>':''}</span>`);
   const fullMeta=`${meta.buildRaw} ${meta.dateLabel}`.trim();
-  body.push(`<span class="scoreCell meta${replay?' hasReplay':''}" data-build="${escapeLeaderboardHtml(meta.buildRaw)}" data-date="${escapeLeaderboardHtml(meta.dateLabel)}" title="${escapeLeaderboardHtml(fullMeta)}" aria-label="${escapeLeaderboardHtml(fullMeta)}"><span class="scoreBuild">${meta.build}</span><span class="scoreMetaFooter"><span class="scoreDate">${meta.dateLabel}</span>${replayHtml}</span></span>`);
+  body.push(`<span class="scoreCell meta${replay?' hasReplay':''}" data-build="${escapeLeaderboardHtml(meta.buildRaw)}" data-date="${escapeLeaderboardHtml(meta.dateLabel)}"${replay?` data-replay-id="${escapeLeaderboardHtml(replay.id)}" tabindex="0" role="button"`:''} title="${escapeLeaderboardHtml(fullMeta)}" aria-label="${escapeLeaderboardHtml(replay?`${fullMeta} replay available`:fullMeta)}"><span class="scoreBuild">${meta.build}</span><span class="scoreMetaFooter"><span class="scoreDate">${meta.dateLabel}</span>${replayHtml}</span></span>`);
   body.push(`<span class="scoreCell score">${formatScore(row.score||0)}</span>`);
   body.push(`<span class="scoreCell stage">${String(row.stage||0).padStart(2,' ')}</span>`);
  }

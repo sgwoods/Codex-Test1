@@ -10,6 +10,7 @@ the future Galaxy Guardians scout-wave slice.
 - `matt-hawkins-arcade-intro`: Galaxian (Namco 1979) - Arcade Intro - Matt Hawkins
 - `arcades-lounge-level-5`: GALAXIAN (1979) - LEVEL 5 passed ! Video game - ARCADE'S LOUNGE
 - `nenriki-15-wave-session`: Galaxian (Arcade) original video game 15-wave session - Nenriki Gaming Channel
+- `galaxians-ex12mins`: Galaxians example 12-minute session
 
 ## Generated Files
 
@@ -32,3 +33,7 @@ Galaxy Guardians 0.1 scout-wave preview.
 The `nenriki-15-wave-session` source is also an important long-session visual
 baseline for moving starfield motion, sustained swarm cadence, and bottom-exit
 top-reentry pressure during deeper Guardians conformance work.
+
+The `galaxians-ex12mins` source now adds a repeated-start / early-session
+baseline for attract/logo persistence, score-advance-table confirmation, early
+rack presentation, and restart cadence review.

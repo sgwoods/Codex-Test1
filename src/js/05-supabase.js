@@ -281,6 +281,9 @@ async function openReplayFromPilotRecordsTarget(target){
 async function openReplayFromLeaderboardTarget(target){
  return openReplayFromScoreTarget(target,{closeLeaderboard:true,source:'leaderboard'});
 }
+function leaderboardReplayTargetForEvent(target){
+ return target?.closest?.('.leaderboardReplayBtn,.scoreCell.meta.hasReplay')||null;
+}
 if(accountRecordsTop5)accountRecordsTop5.addEventListener('click',e=>{
  const btn=e.target.closest('.accountRecordReplayBtn,.accountRecordRow.hasReplay');
  if(!btn)return;
@@ -305,15 +308,25 @@ if(accountRecordsTop5)accountRecordsTop5.addEventListener('keydown',e=>{
  openReplayFromPilotRecordsTarget(row);
 });
 if(leaderboardPanel)leaderboardPanel.addEventListener('click',e=>{
- const btn=e.target.closest('.leaderboardReplayBtn');
+ const btn=leaderboardReplayTargetForEvent(e.target);
  if(!btn)return;
+ if(btn.classList.contains('scoreCell')&&e.target.closest('.leaderboardReplayBtn'))return;
+ e.preventDefault();
+ e.stopPropagation();
+ openReplayFromLeaderboardTarget(btn);
+});
+if(leaderboardPanel)leaderboardPanel.addEventListener('pointerup',e=>{
+ const btn=leaderboardReplayTargetForEvent(e.target);
+ if(!btn)return;
+ if(typeof e.button==='number'&&e.button!==0)return;
+ if(btn.classList.contains('scoreCell')&&e.target.closest('.leaderboardReplayBtn'))return;
  e.preventDefault();
  e.stopPropagation();
  openReplayFromLeaderboardTarget(btn);
 });
 if(leaderboardPanel)leaderboardPanel.addEventListener('keydown',e=>{
  if(e.key!=='Enter'&&e.key!==' ')return;
- const btn=e.target.closest('.leaderboardReplayBtn');
+ const btn=leaderboardReplayTargetForEvent(e.target);
  if(!btn)return;
  e.preventDefault();
  e.stopPropagation();

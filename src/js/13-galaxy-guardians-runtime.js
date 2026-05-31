@@ -728,7 +728,10 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
      burstScale:alien.role==='flagship'?1.46:(alien.role==='escort'?1.18:1),
      streaks:alien.role==='flagship'?12:(alien.role==='escort'?10:8),
      ringRadius:alien.role==='flagship'?11:(alien.role==='escort'?8.5:6.5),
-     sparkInset:alien.role==='flagship'?1.6:(alien.role==='escort'?1.3:1.1)
+     sparkInset:alien.role==='flagship'?1.6:(alien.role==='escort'?1.3:1.1),
+     points,
+     mode:alien.mode,
+     showScore:alien.mode==='diving'||alien.role==='flagship'||alien.role==='escort'
     });
     guardiansRuntimeEvent(state,'player_shot_resolved',{result:'hit',id:alien.id,role:alien.role,visualId:alien.visualId,audioCue:GALAXY_GUARDIANS_RUNTIME_ALIEN_CATALOG[alien.type]?.hitAudioCue||'',points,score:state.score});
     resolved=1;

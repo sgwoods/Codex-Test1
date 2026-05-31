@@ -51,17 +51,105 @@ function resolveGalaxyGuardiansPreviewPalette(visual,theme){
  const overrides=(theme&&theme.previewPalettes&&typeof theme.previewPalettes==='object')
   ? (theme.previewPalettes[visual.id]||theme.previewPalettes[visual.role]||null)
   : null;
- return Object.assign({},visual.palette||{},overrides||{});
+ const base=Object.assign({},visual.palette||{});
+ if(!overrides)return base;
+ const merged=Object.assign({},base,overrides||{});
+ if(base.core)merged.core=base.core;
+ if(base.wing)merged.wing=base.wing;
+ return merged;
+}
+
+function applyGalaxyGuardiansStageOneRowPalette(alien,palette){
+ if(!alien||!palette)return palette;
+ const row=Math.max(0,+alien.row||0);
+ if(row===0){
+  return Object.assign({},palette,{
+   core:'#ffe26a',
+   wing:'#ff5b5b',
+   accent:'#7bd6ff',
+   flare:'#fff2a4'
+  });
+ }
+ if(row===1){
+  return Object.assign({},palette,{
+   core:'#ff7468',
+   wing:'#f6f0ff',
+   accent:'#ffd86d',
+   flare:'#ffb38a'
+  });
+ }
+ if(row===2){
+  return Object.assign({},palette,{
+   core:'#b68cff',
+   wing:'#f2e6ff',
+   accent:'#ffd86d',
+   flare:'#7bd6ff'
+  });
+ }
+ if(row===3){
+  return Object.assign({},palette,{
+   core:'#99beff',
+   wing:'#6f78ff',
+   accent:'#dff7ff',
+   flare:'#ffd86d'
+  });
+ }
+ return Object.assign({},palette,{
+  core:'#7bc6ff',
+  wing:'#4b7dff',
+  accent:'#f4f8ff',
+  flare:'#ff5b5b'
+ });
+}
+
+function resolveGalaxyGuardiansPreviewStarfieldProfile(stage=1){
+ const theme=resolveGalaxyGuardiansPreviewTheme(stage);
+ const graphics=typeof currentGraphicsOverrides==='function'
+  ? currentGraphicsOverrides()
+  : { starfieldIntensity:1, starfieldSpeed:1 };
+ const intensityScale=typeof sanitizeStarfieldMultiplier==='function'
+  ? sanitizeStarfieldMultiplier(graphics.starfieldIntensity,1)
+  : Math.max(.25,+graphics.starfieldIntensity||1);
+ const speedScale=typeof sanitizeStarfieldMultiplier==='function'
+  ? sanitizeStarfieldMultiplier(graphics.starfieldSpeed,1)
+  : Math.max(.25,+graphics.starfieldSpeed||1);
+ const profile=Object.assign({
+  id:'guardians-signal-stars',
+  count:116,
+  sizeMin:.78,
+  sizeMax:1.58,
+  alphaMin:.34,
+  alphaMax:.92,
+  twinkleMin:.78,
+  twinkleAmp:.22,
+  speedMin:18,
+  speedMax:38,
+  driftMin:-9,
+  driftMax:9,
+  palette:['#fffdf0','#ffe26a','#ff5b5b','#7bd6ff','#4af26d','#f6f0ff','#ffd4a8','#59a8ff']
+ }, theme?.starfield||{});
+ profile.alphaMin=Math.min(1,Math.max(.08,profile.alphaMin*intensityScale));
+ profile.alphaMax=Math.min(1,Math.max(profile.alphaMin,profile.alphaMax*intensityScale));
+ profile.speedMin=Math.max(2,profile.speedMin*speedScale);
+ profile.speedMax=Math.max(profile.speedMin,profile.speedMax*speedScale);
+ profile.intensityScale=intensityScale;
+ profile.speedScale=speedScale;
+ return profile;
 }
 
 function blendGalaxyGuardiansStagePalette(alien,palette,theme,stage=1){
  if(!alien||!theme||!Array.isArray(theme.palette)||!theme.palette.length)return palette;
+ const stageIndex=Math.max(1,+stage||1);
+ const basePalette=stageIndex<=1
+  ? applyGalaxyGuardiansStageOneRowPalette(alien,Object.assign({},palette))
+  : Object.assign({},palette);
+ if(stageIndex<=1)return basePalette;
  const source=theme.palette.filter(Boolean);
- if(!source.length)return palette;
+ if(!source.length)return basePalette;
  const roleOffset=alien.role==='flagship'?0:alien.role==='escort'?2:4;
- const idx=(Math.max(1,+stage||1)-1+roleOffset)%source.length;
+ const idx=(stageIndex-1+roleOffset)%source.length;
  const pick=offset=>source[(idx+offset+source.length)%source.length];
- return Object.assign({},palette,{
+ return Object.assign({},basePalette,{
   accent:pick(0),
   flare:pick(1),
   eye:palette.eye||'#ffffff'
@@ -79,6 +167,9 @@ function drawGalaxyGuardiansPixelRows(visual,x,y,cell=2,opts={}){
  const accent=opts.accent||palette.accent||core;
  const eye=opts.eye||palette.eye||'#ffffff';
  const flare=opts.flare||palette.flare||accent;
+ const pulseFrame=Math.max(0,Math.min(1,+opts.pulseFrame||0));
+ const pulseX=Math.max(.2,+opts.pulseX||1);
+ const pulseY=Math.max(.2,+opts.pulseY||1);
  const colorForPixel=(ch,edge,center)=>{
   if(ch==='C')return core;
   if(ch==='W')return wing;
@@ -104,26 +195,33 @@ function drawGalaxyGuardiansPixelRows(visual,x,y,cell=2,opts={}){
   ctx.fillRect(Math.floor(width*.33)*cell,Math.floor(height*.38)*cell,cell,cell);
   ctx.fillRect(Math.ceil(width*.58)*cell,Math.floor(height*.38)*cell,cell,cell);
  }
+ if(pulseFrame>.08){
+  const wingReach=Math.max(1,Math.round(pulseFrame*(1.8+pulseX*2.4)));
+  const glowHeight=Math.max(1,Math.round(pulseFrame*(1.4+pulseY*1.85)));
+  const midY=Math.round(height*.38)*cell;
+  const centerX=Math.round((width-1)*.5)*cell;
+  const outerPad=Math.max(1,Math.round(pulseFrame*1.6));
+  ctx.globalAlpha=.18+.24*pulseFrame;
+  ctx.fillStyle=flare;
+  ctx.fillRect(-wingReach,midY-cell,wingReach,Math.max(cell+1,glowHeight+1));
+  ctx.fillRect(width*cell,midY-cell,wingReach,Math.max(cell+1,glowHeight+1));
+  ctx.globalAlpha=.26+.28*pulseFrame;
+  ctx.fillStyle=accent;
+  ctx.fillRect(centerX,Math.max(0,midY-cell-glowHeight-outerPad),Math.max(1,cell),glowHeight+outerPad+1);
+  if(height>=6){
+   const lowerY=Math.min((height-1)*cell,midY+cell);
+   ctx.fillRect(centerX,lowerY,Math.max(1,cell),glowHeight+outerPad+1);
+  }
+  ctx.globalAlpha=.14+.12*pulseFrame;
+  ctx.fillStyle=core;
+  ctx.fillRect(Math.max(0,centerX-cell*2),Math.max(0,midY-glowHeight),Math.max(1,cell*4),Math.max(1,glowHeight*2));
+  ctx.globalAlpha=1;
+ }
  ctx.restore();
 }
 
 function syncGalaxyGuardiansPreviewStarfield(stage=1){
- const theme=resolveGalaxyGuardiansPreviewTheme(stage);
- const profile=Object.assign({
-  id:'guardians-signal-stars',
-  count:116,
-  sizeMin:.78,
-  sizeMax:1.58,
-  alphaMin:.34,
-  alphaMax:.92,
-  twinkleMin:.78,
-  twinkleAmp:.22,
-  speedMin:18,
-  speedMax:38,
-  driftMin:-9,
-  driftMax:9,
-  palette:['#fffdf0','#ffe26a','#ff5b5b','#7bd6ff','#4af26d','#f6f0ff','#ffd4a8','#59a8ff']
- }, theme?.starfield||{});
+ const profile=resolveGalaxyGuardiansPreviewStarfieldProfile(stage);
  const sig=JSON.stringify(profile);
  if(S.guardiansPreviewStarfieldSig===sig&&S.st.length===profile.count)return profile;
  S.guardiansPreviewStarfieldSig=sig;
@@ -308,6 +406,19 @@ function drawGalaxyGuardiansHitFlashes(state,theme){
   ctx.globalAlpha=.18+.18*life;
   ctx.strokeStyle=accentColor;
   ctx.strokeRect(Math.round(flash.x)-4.5,Math.round(flash.y)-4.5,9,9);
+  if(flash.showScore&&flash.points){
+   const progress=1-life;
+   ctx.globalAlpha=.24+.74*life;
+   ctx.font=`${flash.role==='flagship'?9:8}px "Courier New", Consolas, monospace`;
+   ctx.textAlign='center';
+   ctx.textBaseline='bottom';
+   ctx.fillStyle=flash.role==='flagship'?'#ffe39a':(flash.role==='escort'?'#ffd9a8':'#dff7ff');
+   ctx.shadowColor=flareColor;
+   ctx.shadowBlur=10*life;
+   ctx.fillText(String(flash.points),Math.round(flash.x),Math.round(flash.y)-10-progress*(flash.role==='flagship'?18:12));
+   ctx.textAlign='start';
+   ctx.textBaseline='alphabetic';
+  }
  }
  ctx.restore();
 }
@@ -360,17 +471,30 @@ function drawGalaxyGuardiansAlien(alien,t,theme,stage=1){
   theme,
   stage
  );
- const cell=alien.role==='flagship'?1.65:alien.role==='escort'?1.45:1.4;
+ const baseCell=alien.role==='flagship'?1.65:alien.role==='escort'?1.45:1.4;
+ const pulseProfile=typeof stageBandProfile==='function'?stageBandProfile(stage,0):null;
+ const pulsePhase=alien.mode==='formation'
+  ? (Math.sin((t*(6.1+((+pulseProfile?.pulseX||1)*.28)))+alien.row*.82+alien.col*.34)+1)*.5
+  : 0;
+ const pulseScale=alien.mode==='formation'
+  ? 1+(pulsePhase*(alien.role==='flagship'?.16:(alien.role==='escort'?.13:.11)))
+  : 1;
+ const cell=baseCell*pulseScale;
  ctx.save();
  ctx.translate(Math.round(alien.x),Math.round(alien.y));
  ctx.shadowColor=palette.flare||palette.accent||palette.core||'#7bd6ff';
- ctx.shadowBlur=alien.mode==='diving'?4:1.5;
+ ctx.shadowBlur=alien.mode==='diving'?4:(2.4+pulsePhase*5.2);
  if(alien.mode==='diving'){
   const lean=Math.sin(alien.diveT*5)*.18+alien.diveSide*.08;
   ctx.rotate(lean);
  }
  const bob=alien.mode==='formation'?Math.sin(t*3.4+alien.row)*1.15:0;
- drawGalaxyGuardiansPixelRows(visual,0,bob,cell,{ palette });
+ drawGalaxyGuardiansPixelRows(visual,0,bob,cell,{
+  palette,
+  pulseFrame:Math.min(1,pulsePhase*1.18),
+  pulseX:pulseProfile?.pulseX||1,
+  pulseY:pulseProfile?.pulseY||1
+ });
  ctx.restore();
  if(alien.mode==='diving'){
   ctx.save();
@@ -424,17 +548,6 @@ function drawGalaxyGuardiansPreviewHud(summary,state){
  ctx.font='7px "Courier New", Consolas, monospace';
  ctx.textBaseline='top';
  ctx.shadowBlur=4;
- ctx.fillStyle='#ff5b73';
- ctx.shadowColor='rgba(255,91,115,.45)';
- ctx.fillText('1UP',18,12);
- ctx.fillStyle='#dff7ff';
- ctx.shadowColor='rgba(223,247,255,.28)';
- ctx.fillText(String(summary.score||0).padStart(6,'0'),18,22);
- ctx.fillStyle='#dff7ff';
- ctx.fillText('HIGH SCORE',102,12);
- ctx.fillStyle='#ffdf6f';
- ctx.shadowColor='rgba(255,223,111,.34)';
- ctx.fillText(String(Math.max(summary.score||0,+S.best||0)).padStart(6,'0'),116,22);
  ctx.fillStyle='#7bd6ff';
  ctx.shadowColor='rgba(123,214,255,.34)';
  ctx.fillText(`STAGE ${(summary.stage||1).toString().padStart(2,'0')}`,224,12);
@@ -511,18 +624,29 @@ function drawGalaxyGuardiansPreviewBoard({ox,oy,scale,dx,dy}){
  window.__platinumRenderDebug.renderTick=(window.__platinumRenderDebug.renderTick||0)+1;
  window.__platinumRenderDebug.backgroundMode='guardians-dev-preview';
  window.__platinumRenderDebug.starfieldProfile=starfield?.id||'guardians-signal-stars';
+ window.__platinumRenderDebug.starfieldCount=S.st.length;
+ window.__platinumRenderDebug.starfieldIntensityScale=+(starfield?.intensityScale||1);
+ window.__platinumRenderDebug.starfieldSpeedScale=+(starfield?.speedScale||1);
+ window.__platinumRenderDebug.starfieldLeadSample=(S.st||[]).slice(0,4).map(star=>({
+  x:+(+star.x||0).toFixed(2),
+  y:+(+star.y||0).toFixed(2),
+  vy:+(+star.vy||0).toFixed(2),
+  vx:+(+star.vx||0).toFixed(2)
+ }));
  Object.assign(window.__galaxyGuardiansPreviewRenderDebug,{
-  renderTick:(window.__galaxyGuardiansPreviewRenderDebug.renderTick||0)+1,
-  renderMode:'galaxy-guardians-dev-preview',
+ renderTick:(window.__galaxyGuardiansPreviewRenderDebug.renderTick||0)+1,
+ renderMode:'galaxy-guardians-dev-preview',
   visualIds:summary.visualIds,
   audioCueIds:summary.audioCueIds,
   alienCount:summary.alienCount,
   enemyShotCount:summary.enemyShotCount,
   hitFlashCount:summary.hitFlashCount,
   score:summary.score,
+  bestScore:+(+S.best||0),
+  scoreStorageGameKey:typeof currentScoreStorageGameKey==='function'?currentScoreStorageGameKey():'',
   reserveShipCount:hud.reserveShipCount,
   stageFlagCount:hud.stageFlagCount,
-  hudLabels:['1UP','HIGH SCORE'],
+  hudLabels:['STAGE'],
   readyMissileVisible:!!readyMissileVisible,
   wrappingCount:+(summary.wrappingCount||0),
   stageThemeId:previewTheme?.id||'signal-rack',
@@ -534,12 +658,7 @@ function drawGalaxyGuardiansPreviewBoard({ox,oy,scale,dx,dy}){
   ).core)).size,
   marchOffset:+guardiansMarchOffset(state,state.aliens.find(alien=>alien.hp>0&&alien.mode==='formation')||{ row:0,col:0 }).toFixed(3),
   starfieldCount:S.st.length,
-  starfieldLeadSample:(S.st||[]).slice(0,4).map(star=>({
-   x:+(+star.x||0).toFixed(2),
-   y:+(+star.y||0).toFixed(2),
-   vy:+(+star.vy||0).toFixed(2),
-   vx:+(+star.vx||0).toFixed(2)
-  }))
+  starfieldLeadSample:[...(window.__platinumRenderDebug.starfieldLeadSample||[])]
  });
 }
 

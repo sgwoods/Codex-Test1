@@ -615,6 +615,13 @@ mask:
 #leaderboardPanelTable .scoreCell.initials{letter-spacing:.08em}
 #leaderboardPanelTable .scoreCell.meta{display:flex;flex-direction:column;gap:2px;color:#dff7ff}
 #statusPanels.framedOverlay #leaderboardPanelTable .scoreCell.meta{gap:1px}
+#leaderboardPanelTable .scoreCell.meta.hasReplay{cursor:pointer}
+#leaderboardPanelTable .scoreCell.meta.hasReplay:hover,
+#leaderboardPanelTable .scoreCell.meta.hasReplay:focus-visible{
+ outline:none;
+ color:#f9fcff;
+ text-shadow:0 0 8px rgba(255,216,109,.16);
+}
 #leaderboardPanelTable .scoreCell.meta .scoreBuild{color:#8defff}
 #leaderboardPanelTable .scoreCell.meta .scoreMetaFooter{display:flex;align-items:center;gap:6px;min-width:0}
 #leaderboardPanelTable .scoreCell.meta .scoreDate{color:rgba(223,247,255,.78);font-size:.88em}

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-05-30",
+  "status": "original-committed-and-source-manifested",
+  "source_root": "/Users/steven/Downloads",
+  "preserved_root": "reference-artifacts/preserved-sources/galaxians-ex12mins-2026-05-30",
+  "notes": [
+    "This source was accessioned from a local download and preserved in-repo because the original file size is small enough for durable Git storage.",
+    "External provenance beyond the local filename has not been widened yet; preserve the exact local source path, bytes, and hash first."
+  ],
+  "committed_artifacts": [
+    {
+      "id": "galaxians-ex12mins",
+      "title": "Galaxians example 12-minute session",
+      "status": "original-committed",
+      "repo_path": "reference-artifacts/preserved-sources/galaxians-ex12mins-2026-05-30/video/galaxians-ex12mins.mp4",
+      "bytes": 29043982,
+      "sha256": "4a53fbc05d7adbbda093c1999b3976ccb2ba8bd756a8581ecf55d6088623f869",
+      "source_path": "/Users/steven/Downloads/Galaxians-ex12mins.mp4",
+      "measured_media": {
+        "durationSeconds": 624.64,
+        "width": 480,
+        "height": 360,
+        "frameRate": "30/1",
+        "hasAudio": true
+      }
+    }
+  ],
+  "downstream_analysis": [
+    "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/source-manifest.json",
+    "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/README.md"
+  ]
+}

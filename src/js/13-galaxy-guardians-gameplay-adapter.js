@@ -497,6 +497,11 @@ function updateGalaxyGuardiansDevPreview(dt){
   ? galaxyGuardiansHarnessPersonaInput(GALAXY_GUARDIANS_ACTIVE_DEV_STATE)
   : null;
  stepGalaxyGuardiansRuntime(GALAXY_GUARDIANS_ACTIVE_DEV_STATE,dt,personaInput||manualInput);
+ if(typeof advanceGalaxyGuardiansPreviewStarfield==='function'){
+  advanceGalaxyGuardiansPreviewStarfield(dt);
+ }else if(typeof advanceSharedStarfield==='function'){
+  advanceSharedStarfield(dt,{ speedStageLift:(+S.stage||0)*.12 });
+ }
  playGalaxyGuardiansRuntimeCues(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
  syncGalaxyGuardiansShellState(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
  if(GALAXY_GUARDIANS_ACTIVE_DEV_STATE.gameOver){
@@ -510,9 +515,10 @@ function updateGalaxyGuardiansDevPreview(dt){
 
 function galaxyGuardiansCueNameForRuntimeEvent(event){
  if(!event)return '';
+ if(event.type==='formation_entry_start')return 'formationPulse';
  if(event.type==='player_shot_fired')return 'playerShot';
  if(event.type==='enemy_shot')return 'enemyShot';
- if(event.type==='rack_pulse')return 'formationPulse';
+ if(event.type==='rack_pulse')return 'stagePulse';
  if(event.type==='alien_dive_start')return 'scoutDive';
  if(event.type==='flagship_dive_start')return 'flagshipDive';
  if(event.type==='escort_join')return 'escortJoin';

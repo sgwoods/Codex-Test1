@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "generated_by": "manual-first-pass-source-ingest",
+  "generated_at": "2026-05-30T23:27:05Z",
+  "source_id": "galaxians-ex12mins",
+  "title": "Galaxians example 12-minute session",
+  "role": "repeat_intro_and_early_session_cycle",
+  "local_source_path": "reference-artifacts/preserved-sources/galaxians-ex12mins-2026-05-30/video/galaxians-ex12mins.mp4",
+  "measured_media": {
+    "durationSeconds": 624.64,
+    "width": 480,
+    "height": 360,
+    "frameRate": "30/1",
+    "hasAudio": true
+  },
+  "windows": {
+    "contact_sheet": {
+      "start_seconds": 0,
+      "duration_seconds": 180,
+      "sample_every_seconds": 15,
+      "artifact": "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-0-180.jpg"
+    },
+    "additional_contact_sheets": [
+      {
+        "start_seconds": 180,
+        "duration_seconds": 180,
+        "sample_every_seconds": 15,
+        "artifact": "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-180-360.jpg"
+      },
+      {
+        "start_seconds": 360,
+        "duration_seconds": 180,
+        "sample_every_seconds": 15,
+        "artifact": "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-360-540.jpg"
+      },
+      {
+        "start_seconds": 540,
+        "duration_seconds": 180,
+        "sample_every_seconds": 15,
+        "artifact": "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-540-720.jpg"
+      }
+    ],
+    "waveform": {
+      "start_seconds": 0,
+      "duration_seconds": 120,
+      "artifact": "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/audio/waveform-reference-window-0-120.png"
+    }
+  },
+  "analysis_roles": [
+    "attract_logo_and_score_advance_table_confirmation",
+    "early_rack_palette_and_layout_review",
+    "restart_cadence_and_early_score_read_review"
+  ],
+  "notes": [
+    "This source repeats attract and early-session states across a longer run, making it useful as corroborating evidence rather than as a single canonical event window.",
+    "The first-pass contact sheets emphasize repeated score-strip, rack, and restart views more than deep later-wave pressure."
+  ]
+}

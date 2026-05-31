@@ -27,8 +27,23 @@
         "enemyWrapOrReturn": [105, 150]
       }
     },
+    "repeatIntroCycleSource": {
+      "sourceId": "galaxians-ex12mins",
+      "manifest": "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/source-manifest.json",
+      "contactSheets": [
+        "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-0-180.jpg",
+        "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-180-360.jpg",
+        "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-360-540.jpg",
+        "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-540-720.jpg"
+      ],
+      "use": [
+        "repeated attract and score-advance-table confirmation",
+        "early rack palette and row-family corroboration",
+        "restart cadence and quick early-score review"
+      ]
+    },
     "promotedEventLog": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
-    "notes": "This baseline uses the already committed intro and long-session sources plus the promoted event log. It is now paired with opening-slice-frame-reference-0.1.json, which promotes extracted frame windows for the mission text, score-table, and wrap-return review path."
+    "notes": "This baseline uses the committed intro, long-session, and repeated-start Galaxian sources plus the promoted event log. It is now paired with opening-slice-frame-reference-0.1.json, which promotes extracted frame windows for the mission text, score-table, and wrap-return review path."
   },
   "canonicalOpeningSurface": {
     "titleLine": "WE ARE THE GALAXIANS",
@@ -85,11 +100,11 @@
     "marchCadence": "visible-but-still-runtime-tuned",
     "topReentry": "visible-and-now-backed-by-a-promoted-opening-motion-contract",
     "explosionReadability": "improved-via-pixel-burst-hit-feedback-and-now-backed-by-promoted-frame-window-authority",
-    "paletteProgression": "improved-via-theme-owned-preview-palettes-but-still-partial"
+    "paletteProgression": "improved-via-theme-owned-preview-palettes-and-now-backed-by-repeat-intro-row-family-corroboration-but-still-partial"
   },
   "nextPromotionWork": [
     "Tighten the runtime WAIT/title/mission/score-table layout against the now-promoted Matt Hawkins frame windows.",
-    "Strengthen the stage-owned starfield and swarm palette progression so the opening slice reads as a deliberate Guardians color story rather than a mostly runtime-tuned adaptation.",
+    "Strengthen the stage-owned starfield and swarm palette progression so the opening slice reads as a deliberate Guardians color story rather than a mostly runtime-tuned adaptation, using the repeated-start Galaxians example as corroborating row-family evidence.",
     "Carry the same source-backed discipline into stage 3-5 pressure traces and stage 6-9 fairness once the visible opening slice is no longer the weakest review surface.",
     "Use this opening baseline as the top slice of the broader stage-arc and homage plan rather than as an isolated UI polish note."
   ],

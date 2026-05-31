@@ -1,6 +1,6 @@
 # Galaxy Guardians First-Class Conformance Plan
 
-Updated: May 29, 2026
+Updated: May 30, 2026
 
 Short restart note:
 
@@ -101,6 +101,15 @@ Three recent player-facing fixes are now in the maintained source:
 - The live board now emits a recurring rack pulse, so representative gameplay
   audio is less empty between shots, hits, and loss cues.
 
+Three more high-value visible fixes are now in the maintained source:
+
+- The live board now plays the formation-entry cue at the real
+  `formation_entry_start` event instead of only carrying a source-side cue id.
+- Formation-mode aliens now have a visible pulse treatment rather than only
+  march motion plus static sprite rows.
+- Special-value hit cases now surface score popups on the board, which makes
+  command-value and diving hits read more like intentional score events.
+
 ## Public Slice vs. Deeper-Run Review
 
 The hosted `dev` and `beta` lanes still expose a one-level visible public slice
@@ -168,7 +177,7 @@ following are true:
 
 | Area | Current read | Near-term target | Strategy |
 | --- | --- | --- | --- |
-| Source coverage and provenance | `9.6/10` | keep `>=9.6/10` while promoting stronger artifact-backed evidence | Preserve the three-source Galaxian profile, then convert proxy sprite/cue work into promoted targets rather than replacing provenance with tuning; use human spot-checks only when the artifacts stay ambiguous. |
+| Source coverage and provenance | `9.6/10` | keep `>=9.6/10` while promoting stronger artifact-backed evidence | Preserve the four-source Galaxian profile, including the newer repeated-start early-session example, then convert proxy sprite/cue work into promoted targets rather than replacing provenance with tuning; use human spot-checks only when the artifacts stay ambiguous. |
 | Promoted semantic event coverage | `7.8/10` | `>=8.5/10` | Keep the event log central, then add score-table, attract-surface, result-state, and completion-state evidence that can be reviewed against source windows. |
 | Opening-stage presentation and HUD fidelity | partial | first visible slice should read as unmistakably Galaxian-family before deeper-run claims expand | Build baseline artifacts for `WAIT`/headline typography, the score-advance table, reserve ships, missile-ready player state, level flags, moving starfield/background motion, and score/HUD presentation from gameplay-video crops, contact sheets, palette extraction, and other primary sources. Keep the human-readable baseline surfaced through [GALAXY_GUARDIANS_OPENING_SLICE_BASELINE.md](GALAXY_GUARDIANS_OPENING_SLICE_BASELINE.md), not only raw artifacts. |
 | Formation and rack timing | `6.2/10` | `>=7.2/10` | Move from connected-component/object proxy timing toward sprite-recognized rack timing plus browser-captured side-by-side traces. |
@@ -195,6 +204,8 @@ The first-class Galaxy process should always be reviewable through this spine:
 - runtime completeness
 - `npm run harness:check:galaxy-guardians-runtime-slice`
 - `npm run harness:check:galaxy-guardians-playable-preview`
+- `npm run harness:check:galaxy-guardians-playable-preview` should continue to
+  prove live-board starfield travel rather than only pack start/loss flow
 - `npm run harness:check:galaxy-guardians-game-owned-identity`
 - `npm run harness:check:galaxy-guardians-one-level-completion`
 - `npm run harness:check:galaxy-guardians-score-progression`

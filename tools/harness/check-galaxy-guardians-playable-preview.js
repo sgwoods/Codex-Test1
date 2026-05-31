@@ -22,12 +22,17 @@ async function main(){
         state,
         guardians,
         packKey: currentGamePackKey(),
+        scoreStorageGameKey: currentScoreStorageGameKey(),
         publicAdapter: currentGamePackHasPlayableAdapter(),
         devAdapter: currentGamePackHasDevPreviewAdapter(),
         publicPlayable: currentGamePackPlayable(),
         snapshotGameKey: window.__platinumHarness__.snapshot().gameKey || ''
       };
     }, 1800, 40);
+
+    const firstRender = await page.evaluate(() => JSON.parse(JSON.stringify(window.__platinumRenderDebug || {})));
+    await page.evaluate(() => window.__platinumHarness__.advanceFor(.35, { step: 1 / 60, stopOnGameOver: false }));
+    const secondRender = await page.evaluate(() => JSON.parse(JSON.stringify(window.__platinumRenderDebug || {})));
 
     await page.keyboard.down('Space');
     await page.evaluate(() => window.__platinumHarness__.advanceFor(.12, { step: 1/60 }));
@@ -60,11 +65,14 @@ async function main(){
       };
     });
 
-    return { launched, afterShot, firstLoss, afterReset, secondLoss, final };
+    return { launched, firstRender, secondRender, afterShot, firstLoss, afterReset, secondLoss, final };
   });
 
   if(result.launched.packKey !== 'galaxy-guardians-preview' || result.launched.snapshotGameKey !== 'galaxy-guardians-preview'){
     fail('Galaxy Guardians playable preview did not launch as the active pack', result);
+  }
+  if(result.launched.scoreStorageGameKey !== 'galaxy-guardians-preview'){
+    fail('Galaxy Guardians playable preview did not bind score storage to the active Guardians lane', result);
   }
   if(result.launched.publicPlayable !== false || result.launched.publicAdapter !== false || result.launched.devAdapter !== true){
     fail('Galaxy Guardians playable preview crossed the public gameplay adapter boundary', result);
@@ -74,6 +82,18 @@ async function main(){
   }
   if(result.launched.guardians.alienCount !== 38 || result.launched.guardians.liveRoles.flagship !== 2){
     fail('Galaxy Guardians playable preview did not start from the expected scout-wave rack', result);
+  }
+  const firstStars = Array.isArray(result.firstRender.starfieldLeadSample) ? result.firstRender.starfieldLeadSample : [];
+  const secondStars = Array.isArray(result.secondRender.starfieldLeadSample) ? result.secondRender.starfieldLeadSample : [];
+  const starfieldTravel = firstStars.length === secondStars.length ? firstStars.map((star, index) => {
+    const later = secondStars[index] || {};
+    return Math.max(
+      Math.abs((+later.y || 0) - (+star.y || 0)),
+      Math.abs((+later.x || 0) - (+star.x || 0))
+    );
+  }) : [];
+  if(!starfieldTravel.some(distance => distance >= 0.5)){
+    fail('Galaxy Guardians playable preview starfield did not visibly move on the live gameplay board', result);
   }
   if(!result.afterShot.guardians.eventTypes.includes('player_shot_fired')){
     fail('Galaxy Guardians playable preview did not route player fire input into the runtime', result);
@@ -113,6 +133,7 @@ async function main(){
     score:result.final.guardians.score,
     lives:result.final.guardians.lives,
     gameOver:result.final.guardians.gameOver,
+    starfieldTravel,
     eventTypes:result.final.guardians.eventTypes,
     audioCueIds:result.final.guardians.audioCueIds
   }, null, 2));

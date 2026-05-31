@@ -42,11 +42,28 @@ async function main(){
 
     const replayButtonCount = await page.locator('#leaderboardPanelTable .leaderboardReplayBtn').count();
     const replayButtonText = replayButtonCount ? await page.locator('#leaderboardPanelTable .leaderboardReplayBtn').first().textContent() : '';
+    const replayMetaCount = await page.locator('#leaderboardPanelTable .scoreCell.meta.hasReplay').count();
     if(replayButtonCount) await page.locator('#leaderboardPanelTable .leaderboardReplayBtn').first().click();
     await page.waitForTimeout(350);
     const replayState = await page.evaluate(() => ({
       replayButtonCount: document.querySelectorAll('#leaderboardPanelTable .leaderboardReplayBtn').length,
       replayButtonText: (document.querySelector('#leaderboardPanelTable .leaderboardReplayBtn')?.textContent || '').trim(),
+      replayMetaCount: document.querySelectorAll('#leaderboardPanelTable .scoreCell.meta.hasReplay').length,
+      movieOpen: typeof window.isMoviePanelOpen === 'function' ? !!window.isMoviePanelOpen() : false,
+      movieReady: document.getElementById('moviePanel')?.classList.contains('ready') || false,
+      selectedReplay: document.getElementById('movieRunSelect')?.value || '',
+      leaderboardClosed: !!document.getElementById('leaderboardPanel')?.hidden,
+      playCalls: window.__auroraPlayCalls || 0
+    }));
+
+    await page.evaluate(() => {
+      if(typeof window.closeMoviePanel === 'function') window.closeMoviePanel(1);
+      window.__galagaHarness__.openWaitLeaderboard('local');
+    });
+    await page.waitForTimeout(120);
+    if(replayMetaCount) await page.locator('#leaderboardPanelTable .scoreCell.meta.hasReplay').first().click();
+    await page.waitForTimeout(350);
+    const replayMetaState = await page.evaluate(() => ({
       movieOpen: typeof window.isMoviePanelOpen === 'function' ? !!window.isMoviePanelOpen() : false,
       movieReady: document.getElementById('moviePanel')?.classList.contains('ready') || false,
       selectedReplay: document.getElementById('movieRunSelect')?.value || '',
@@ -84,11 +101,14 @@ async function main(){
       events: (window.__galagaHarness__.recentEvents({ count: 50 }) || []).filter(event => event.type === 'top_score_signin_prompt_opened')
     }));
 
-    return { replayButtonText, replayState, promptBefore, promptAfter };
+    return { replayButtonText, replayMetaCount, replayState, replayMetaState, promptBefore, promptAfter };
   });
 
   if(result.replayState.replayButtonCount < 1 || !/Replay/i.test(result.replayButtonText || result.replayState.replayButtonText || '')){
     fail('leaderboard trophy surface did not expose a Replay action for a matching local replay', result);
+  }
+  if(result.replayMetaCount < 1 || result.replayState.replayMetaCount < 1){
+    fail('leaderboard trophy surface did not expose a clickable replay metadata cell for a matching local replay', result);
   }
   if(!result.replayState.movieOpen || !result.replayState.leaderboardClosed){
     fail('clicking the leaderboard Replay action did not switch cleanly into the replay surface', result);
@@ -98,6 +118,12 @@ async function main(){
   }
   if(result.replayState.playCalls < 1){
     fail('leaderboard Replay action did not attempt autoplay', result);
+  }
+  if(!result.replayMetaState.movieOpen || !result.replayMetaState.leaderboardClosed){
+    fail('clicking the replay metadata surface did not switch cleanly into the replay surface', result);
+  }
+  if(result.replayMetaState.selectedReplay !== 'trophy-replay-local'){
+    fail('clicking the replay metadata surface did not open the exact matched replay', result);
   }
   if(!result.promptBefore.topScoreSigninPrompt || !/Pilot Sign In/i.test(result.promptBefore.buttonText)){
     fail('unsigned top-10 score did not render the actionable Pilot Sign In prompt', result);

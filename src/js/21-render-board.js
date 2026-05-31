@@ -836,6 +836,12 @@ function drawAuroraBoard({ox,oy,scale,dx,dy}){
  window.__platinumRenderDebug.starfieldCount=S.st.length;
  window.__platinumRenderDebug.starfieldIntensityScale=+(starfield?.intensityScale||1);
  window.__platinumRenderDebug.starfieldSpeedScale=+(starfield?.speedScale||1);
+ window.__platinumRenderDebug.starfieldLeadSample=(S.st||[]).slice(0,4).map(star=>({
+  x:+(+star.x||0).toFixed(2),
+  y:+(+star.y||0).toFixed(2),
+  vy:+(+star.vy||0).toFixed(2),
+  vx:+(+star.vx||0).toFixed(2)
+ }));
  for(const f of S.fx){
   ctx.globalAlpha=Math.max(0,f.t*2.9);
   if(f.sprite==='explosionSmall'||f.sprite==='explosionLarge'){

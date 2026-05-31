@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "generated_by": "tools/harness/build-galaxian-reference-profile.js",
-  "generated_at": "2026-04-27T23:28:45.422Z",
-  "source_count": 3,
+  "generated_at": "2026-05-30T23:27:05Z",
+  "source_count": 4,
   "sources": [
     {
       "source_id": "matt-hawkins-arcade-intro",
@@ -48,6 +48,26 @@
       "manifest": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/source-manifest.json",
       "contact_sheet": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/frames/contact-sheet-reference-window.jpg",
       "waveform": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/audio/waveform-reference-window.png"
+    },
+    {
+      "source_id": "galaxians-ex12mins",
+      "title": "Galaxians example 12-minute session",
+      "role": "repeat_intro_and_early_session_cycle",
+      "measured_media": {
+        "durationSeconds": 624.64,
+        "width": 480,
+        "height": 360,
+        "frameRate": "30/1",
+        "hasAudio": true
+      },
+      "manifest": "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/source-manifest.json",
+      "contact_sheet": "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-0-180.jpg",
+      "waveform": "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/audio/waveform-reference-window-0-120.png",
+      "supplemental_contact_sheets": [
+        "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-180-360.jpg",
+        "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-360-540.jpg",
+        "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-540-720.jpg"
+      ]
     }
   ]
 }

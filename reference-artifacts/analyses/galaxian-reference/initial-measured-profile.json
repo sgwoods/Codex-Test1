@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "generated_by": "tools/harness/build-galaxian-reference-profile.js",
-  "generated_at": "2026-04-27T23:28:45.422Z",
+  "generated_at": "2026-05-30T23:27:05Z",
   "status": "source-manifested-contact-sheets-and-waveforms",
   "lineage": "galaxian-reference",
   "application_target": "galaxy-guardians-preview",
-  "source_count": 3,
+  "source_count": 4,
   "sources": [
     {
       "source_id": "matt-hawkins-arcade-intro",
@@ -51,18 +51,39 @@
       "manifest": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/source-manifest.json",
       "contact_sheet": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/frames/contact-sheet-reference-window.jpg",
       "waveform": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/audio/waveform-reference-window.png"
+    },
+    {
+      "source_id": "galaxians-ex12mins",
+      "title": "Galaxians example 12-minute session",
+      "role": "repeat_intro_and_early_session_cycle",
+      "measured_media": {
+        "durationSeconds": 624.64,
+        "width": 480,
+        "height": 360,
+        "frameRate": "30/1",
+        "hasAudio": true
+      },
+      "manifest": "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/source-manifest.json",
+      "contact_sheet": "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-0-180.jpg",
+      "waveform": "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/audio/waveform-reference-window-0-120.png",
+      "supplemental_contact_sheets": [
+        "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-180-360.jpg",
+        "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-360-540.jpg",
+        "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-540-720.jpg"
+      ]
     }
   ],
   "promoted_event_log": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
   "measured_baseline": {
-    "source_count": 3,
-    "has_intro_source": true,
-    "has_mid_wave_source": true,
-    "has_long_session_source": true,
-    "first_slice": {
-      "player_fire_model": "single-shot",
-      "formation_model": "rack-with-independent-dives",
-      "flagship_model": "flagship-with-escort-pressure",
+      "source_count": 4,
+      "has_intro_source": true,
+      "has_mid_wave_source": true,
+      "has_long_session_source": true,
+      "has_repeat_intro_cycle_source": true,
+      "first_slice": {
+        "player_fire_model": "single-shot",
+        "formation_model": "rack-with-independent-dives",
+        "flagship_model": "flagship-with-escort-pressure",
       "wrap_threat_model": "bottom-exit-or-return-explicit-preview-rule",
       "evidence_state": "promoted-event-log-awaiting-runtime-implementation"
     }

@@ -1,6 +1,6 @@
 # Galaxy Guardians Opening-Slice Baseline
 
-Updated: May 29, 2026
+Updated: May 30, 2026
 
 ## Purpose
 
@@ -74,6 +74,18 @@ The promoted windows already in the repo are:
 - flagship / escort pressure: `90-135s`
 - enemy wrap or return: `105-150s`
 
+### 3. Galaxians example 12-minute session
+
+Use `galaxians-ex12mins` as a corroborating repeated-start source:
+
+- repeated attract/logo and score-advance-table confirmation across restarts
+- early rack color-family and row-read checks
+- restart cadence and quick early-score-strip review
+
+This source is especially useful when the runtime is close but still feels
+"runtime tuned" rather than clearly source-family in the first minute, because
+it gives several repeated looks at the exact early-session surfaces players see.
+
 ## Promoted Frame Windows
 
 The opening no longer depends only on broad contact-sheet summaries.
@@ -130,9 +142,12 @@ threat model:
 
 ### Already present
 
-- moving starfield is now visible in the Guardians preview board
+- moving starfield is now visibly advancing on the live Guardians playable
+  preview board, not only in source-side/shared-board code paths
 - starfield motion is now denser, brighter, and more directional instead of
   reading like a near-static decorative scatter
+- the Guardians-specific starfield renderer now honors the same intensity/speed
+  settings and render-debug reporting the rest of the platform expects
 - the `WAIT` / preview mission block now preserves the canonical
   `MISSION: DESTROY ALIENS` phrase inside a tighter Guardians-owned cabinet
   layout instead of a looser generic copy block
@@ -142,14 +157,25 @@ threat model:
   silently depending on browser unlock behavior
 - opening `gameStart`, formation pulse, and idle/wait cues now have a stronger
   first-seconds audible presence
+- the live board now actually plays the formation-start cue on
+  `formation_entry_start`, while recurring rack pressure uses the separate
+  cadence lane instead of reusing the same cue for both jobs
 - reserve ships and stage flags are visible
 - a ready-to-fire missile cue is visible
 - top re-entry now begins higher above the board and sweeps back in more
   continuously instead of reading like a shallow pop-in
 - hit and destruction feedback now uses a more sprite-like pixel-burst flash
   rather than only line-burst rings
-- preview palette ownership is now theme-driven instead of relying almost
-  entirely on one static alien color family
+- special hit cases now also surface score popups on the live board, so diving
+  and command-value hits read more like deliberate score events
+- preview palette ownership is still theme-aware, but stage one now preserves
+  the base game-owned scout / escort / flagship body colors more faithfully
+  before later stage theming begins to widen
+- formation-mode aliens now have a visible pulse treatment on the live board
+  instead of only static sprite rows plus rack motion
+- stage-one formation rows now read with a stronger source-family ladder:
+  flagship yellow, escort red, upper scout violet, and lower scout blue bands
+  instead of one flatter mostly role-owned opening swarm palette
 - promoted frame windows now explicitly anchor the opening mission text,
   score-table read, and wrap-return pressure instead of leaving those surfaces
   only at the level of broad source manifests
@@ -172,6 +198,9 @@ threat model:
   still needs tighter matching against those windows
 - palette progression is now more source-aligned in the opening slice, but the
   stage-owned color story is still partial rather than fully measured
+- the live pulse is now much easier to read, but it still needs one browser
+  side-by-side pass against the repeated early-session Galaxian sources before
+  we claim the pulse treatment is fully source-tight
 
 ### Still next
 

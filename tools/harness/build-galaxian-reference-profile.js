@@ -39,6 +39,35 @@ const SOURCES = [
     contactEvery: 15,
     waveformStart: 0,
     waveformDuration: 60
+  },
+  {
+    id: 'galaxians-ex12mins',
+    title: 'Galaxians example 12-minute session',
+    role: 'repeat_intro_and_early_session_cycle',
+    localPath: path.join(
+      ROOT,
+      'reference-artifacts',
+      'preserved-sources',
+      'galaxians-ex12mins-2026-05-30',
+      'video',
+      'galaxians-ex12mins.mp4'
+    ),
+    contactStart: 0,
+    contactDuration: 180,
+    contactEvery: 15,
+    contactArtifactName: 'contact-sheet-reference-window-0-180.jpg',
+    waveformStart: 0,
+    waveformDuration: 120,
+    waveformArtifactName: 'waveform-reference-window-0-120.png',
+    additionalContactWindows: [
+      { start: 180, duration: 180, every: 15, suffix: '180-360' },
+      { start: 360, duration: 180, every: 15, suffix: '360-540' },
+      { start: 540, duration: 180, every: 15, suffix: '540-720' }
+    ],
+    useNotes: [
+      'It is especially useful for repeated attract/logo and score-advance-table confirmation across restarts.',
+      'It also supports early formation/rack palette review and quick restart cadence checks.'
+    ]
   }
 ];
 
@@ -187,7 +216,11 @@ function probeSource(source){
 }
 
 function generateContactSheet(source, sourceDir){
-  const out = path.join(sourceDir, 'frames', 'contact-sheet-reference-window.jpg');
+  const out = path.join(
+    sourceDir,
+    'frames',
+    source.contactArtifactName || 'contact-sheet-reference-window.jpg'
+  );
   fs.mkdirSync(path.dirname(out), { recursive: true });
   const fps = `fps=1/${source.contactEvery}`;
   run('ffmpeg', [
@@ -203,8 +236,40 @@ function generateContactSheet(source, sourceDir){
   return out;
 }
 
+function generateAdditionalContactSheets(source, sourceDir){
+  return (source.additionalContactWindows || []).map(window => {
+    const out = path.join(
+      sourceDir,
+      'frames',
+      `contact-sheet-reference-window-${window.suffix}.jpg`
+    );
+    fs.mkdirSync(path.dirname(out), { recursive: true });
+    const fps = `fps=1/${window.every}`;
+    run('ffmpeg', [
+      '-y',
+      '-ss', String(window.start),
+      '-t', String(window.duration),
+      '-i', source.localPath,
+      '-vf', `${fps},scale=180:-1,tile=4x3:padding=6:margin=6`,
+      '-frames:v', '1',
+      '-q:v', '4',
+      out
+    ]);
+    return {
+      start_seconds: window.start,
+      duration_seconds: window.duration,
+      sample_every_seconds: window.every,
+      artifact: out
+    };
+  });
+}
+
 function generateWaveform(source, sourceDir){
-  const out = path.join(sourceDir, 'audio', 'waveform-reference-window.png');
+  const out = path.join(
+    sourceDir,
+    'audio',
+    source.waveformArtifactName || 'waveform-reference-window.png'
+  );
   fs.mkdirSync(path.dirname(out), { recursive: true });
   run('ffmpeg', [
     '-y',
@@ -274,7 +339,13 @@ ${events.map(event => `- \`${event.promotion_target}\` (${event.source_id}, ${ev
   return rel(out);
 }
 
-function writeSourceReadme(source, sourceDir, measured, contactSheet, waveform){
+function writeSourceReadme(source, sourceDir, measured, contactSheet, waveform, additionalContactSheets){
+  const additionalArtifacts = additionalContactSheets.length
+    ? `${additionalContactSheets.map(sheet => `- contact sheet: \`${rel(sheet.artifact)}\``).join('\n')}\n`
+    : '';
+  const currentUseNotes = source.useNotes?.length
+    ? `\n${source.useNotes.map(note => `- ${note}`).join('\n')}\n`
+    : '';
   const readme = `# ${source.title}
 
 Status: \`source-manifested-first-pass\`
@@ -292,13 +363,13 @@ Role: \`${source.role}\`
 
 - source manifest: \`${rel(path.join(sourceDir, 'source-manifest.json'))}\`
 - contact sheet: \`${rel(contactSheet)}\`
-- waveform: \`${rel(waveform)}\`
+${additionalArtifacts}- waveform: \`${rel(waveform)}\`
 
 ## Current Use
 
 This source is part of the first Galaxy Guardians / Galaxian reference profile.
 It is suitable for source presence, media shape, contact-sheet review, and
-initial scaffold decisions. It is not yet a manually promoted event log.
+initial scaffold decisions. It is not yet a manually promoted event log.${currentUseNotes}
 `;
   fs.writeFileSync(path.join(sourceDir, 'README.md'), readme);
 }
@@ -313,6 +384,7 @@ function main(){
     const sourceDir = path.join(OUT_ROOT, source.id);
     const measured = probeSource(source);
     const contactSheet = generateContactSheet(source, sourceDir);
+    const additionalContactSheets = generateAdditionalContactSheets(source, sourceDir);
     const waveform = measured.hasAudio ? generateWaveform(source, sourceDir) : '';
     const manifest = {
       schema_version: 1,
@@ -337,9 +409,17 @@ function main(){
         }
       }
     };
+    if(additionalContactSheets.length){
+      manifest.windows.additional_contact_sheets = additionalContactSheets.map(sheet => ({
+        start_seconds: sheet.start_seconds,
+        duration_seconds: sheet.duration_seconds,
+        sample_every_seconds: sheet.sample_every_seconds,
+        artifact: rel(sheet.artifact)
+      }));
+    }
     writeJson(path.join(sourceDir, 'source-manifest.json'), manifest);
-    writeSourceReadme(source, sourceDir, measured, contactSheet, waveform);
-    return {
+    writeSourceReadme(source, sourceDir, measured, contactSheet, waveform, additionalContactSheets);
+    const record = {
       source_id: source.id,
       title: source.title,
       role: source.role,
@@ -348,6 +428,10 @@ function main(){
       contact_sheet: rel(contactSheet),
       waveform: waveform ? rel(waveform) : ''
     };
+    if(additionalContactSheets.length){
+      record.supplemental_contact_sheets = additionalContactSheets.map(sheet => rel(sheet.artifact));
+    }
+    return record;
   });
 
   const promotedEventLog = writePromotedEventLog(sourceRecords, generatedAt);
@@ -366,6 +450,7 @@ function main(){
       has_intro_source: sourceRecords.some(source => source.role === 'arcade_intro_attract_and_opening'),
       has_mid_wave_source: sourceRecords.some(source => source.role === 'mid_wave_pressure_and_level_5_clear'),
       has_long_session_source: sourceRecords.some(source => source.role === 'long_session_wave_progression'),
+      has_repeat_intro_cycle_source: sourceRecords.some(source => source.role === 'repeat_intro_and_early_session_cycle'),
       first_slice: {
         player_fire_model: 'single-shot',
         formation_model: 'rack-with-independent-dives',
@@ -422,6 +507,14 @@ The current profile includes source manifests, contact sheets, waveforms, and
 the first promoted semantic event log. The next promotion step is frame-level
 timing extraction for the event windows that directly drive the playable
 Galaxy Guardians 0.1 scout-wave preview.
+
+The \`nenriki-15-wave-session\` source is also an important long-session visual
+baseline for moving starfield motion, sustained swarm cadence, and bottom-exit
+top-reentry pressure during deeper Guardians conformance work.
+
+The \`galaxians-ex12mins\` source adds a repeated-start / early-session
+baseline for attract/logo persistence, score-advance-table confirmation, early
+rack presentation, and restart cadence review.
 `);
   console.log(JSON.stringify({
     ok: true,

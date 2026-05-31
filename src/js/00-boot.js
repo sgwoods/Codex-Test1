@@ -1214,14 +1214,14 @@ function scoreGameTitleForKey(gameKey='',fallback=''){
 }
 
 function currentScoreStorageGameKey(){
- const saved=String(readPref(GAME_PACK_PREF_KEY)||'').trim();
- if(saved)return normalizeScoreRecordGameKey(saved);
  try{
   if(typeof currentGamePackKey==='function'){
    const active=String(currentGamePackKey()||'').trim();
    if(active)return normalizeScoreRecordGameKey(active);
   }
  }catch{}
+ const saved=String(readPref(GAME_PACK_PREF_KEY)||'').trim();
+ if(saved)return normalizeScoreRecordGameKey(saved);
  return DEFAULT_SCORE_GAME_KEY;
 }
 
@@ -1342,6 +1342,8 @@ function syncStarfieldProfile(opts={}){
  const twinkleAmp=Math.max(0,Math.min(.5,+profile.twinkleAmp||DEFAULT_STARFIELD_PROFILE.twinkleAmp));
  const speedMin=Math.max(2,+profile.speedMin||DEFAULT_STARFIELD_PROFILE.speedMin);
  const speedMax=Math.max(speedMin,+profile.speedMax||DEFAULT_STARFIELD_PROFILE.speedMax);
+ const driftMin=Math.min(+profile.driftMin||0,+profile.driftMax||0);
+ const driftMax=Math.max(+profile.driftMin||0,+profile.driftMax||0);
  for(let i=0;i<count;i++){
   S.st.push({
    x:auxRnd(PLAY_W),
@@ -1352,10 +1354,33 @@ function syncStarfieldProfile(opts={}){
    alpha:auxRnd(alphaMax,alphaMin),
    twMin:auxRnd(Math.min(1,twinkleMin+.04),Math.max(.18,twinkleMin-.04)),
    twAmp:auxRnd(Math.min(.4,twinkleAmp+.04),Math.max(.04,twinkleAmp-.04)),
-   vy:auxRnd(speedMax,speedMin)
+   vy:auxRnd(speedMax,speedMin),
+   vx:auxRnd(driftMax,driftMin),
+   depth:auxRnd(1.22,.88),
+   lead:auxRandUnit()<.14
   });
  }
  return profile;
+}
+
+function advanceSharedStarfield(dt,opts={}){
+ const width=+opts.width||PLAY_W;
+ const height=+opts.height||PLAY_H;
+ const speedStageLift=Number.isFinite(+opts.speedStageLift)?+opts.speedStageLift:((+S.stage||0)*.12);
+ for(const s of S.st){
+  if(!s)continue;
+  s.tw=(+s.tw||0)+dt*(1.2+(s.twAmp||.16)*4);
+  const depth=+s.depth||1;
+  s.y+=(((+s.vy||14)+speedStageLift)*dt)*depth;
+  s.x+=((+s.vx||0)*dt)*depth;
+  const size=+s.s||1;
+  if(s.x>width+size)s.x=-size;
+  else if(s.x<-size)s.x=width+size;
+  if(s.y>height+size){
+   s.y=-size;
+   s.x=auxRnd(width);
+  }
+ }
 }
 
 const isChallengeStage=s=>currentGamePackIsChallengeStage(s);
@@ -2901,6 +2926,8 @@ syncTestUi();
 syncBuildStampUi();
 if(typeof loadArcadeMusicApi==='function')setTimeout(()=>loadArcadeMusicApi().catch(()=>{}),0);
 startHostedBuildUpdateChecks();
+window.currentScoreStorageGameKey=currentScoreStorageGameKey;
+window.currentScoreStorageGameTitle=currentScoreStorageGameTitle;
 window.openPlatformSplash=openPlatformSplash;
 window.closePlatformSplash=closePlatformSplash;
 window.openGamePreview=openGamePreview;
