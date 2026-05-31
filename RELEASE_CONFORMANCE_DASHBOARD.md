@@ -1,6 +1,6 @@
 # Release Conformance Dashboard
 
-Generated: `2026-05-31T13:55:33.624Z`
+Generated: `2026-05-31T21:55:54.936Z`
 
 This is the primary at-a-glance planning artifact for Aurora conformance work. It answers what we are trying to improve, why it matters, how close it is to a significant user-facing release gate, and what the next investment should be.
 
@@ -192,24 +192,24 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 | 12 | Stage 4 pressure and loss-window diagnostics | pressure / fairness | loss windows, replay geometry, collision traces | 3 promoted windows | mined, replay-diagnostic | medium | Stage 4 pressure exact replay / pressure curve precision | reference-artifacts/analyses/aurora-stage4-loss-windows/2026-05-07-fb2f674/report.json | Improve exact replay matching and preserve per-frame attacker/player/shot geometry for candidate tuning. |
 | 13 | Aurora visual look screenshots | visual look / UI readability | browser screenshots plus DOM/canvas metrics | 4 surfaces | first-pass scored | medium-low | Overall visual look and feel | reference-artifacts/analyses/aurora-visual-look-conformance/2026-05-08-fee8820-dirty/report.json | Add Galaga-family visual contact-sheet comparison, sprite readability labels, and model-assisted visual critique. |
 | 14 | Aurora evidence-cycle windows | general ingestion framework | manifests, contact sheets, traces, event logs, audio timelines | 4 planned windows | seed-plan-only | medium | Level arc / challenge variation / visual look | reference-artifacts/analyses/evidence-cycle-dashboard/evidence-cycle-dashboard.json | Refresh evidence-cycle dashboard and promote window status into a canonical reference-corpus manifest. |
-| 15 | Reference manifests and event logs inventory | source provenance / annotation coverage | source-manifest.json and reference-events.json | 16 manifests; 11 event logs | mixed | mixed | All conformance metrics | reference-artifacts/analyses | Normalize provenance, duration, source confidence, and linked metric fields into a generated corpus manifest. |
-| 16 | Reference contact sheets and frame evidence | visual / motion / entry formation | contact sheets and still frames | 100 contact/frame evidence files | extracted, partially labeled | medium | Visual look, alien entry, challenge variation | reference-artifacts/analyses | Attach contact-sheet families to metric rows and add image-level comparison scores. |
+| 15 | Reference manifests and event logs inventory | source provenance / annotation coverage | source-manifest.json and reference-events.json | 18 manifests; 11 event logs | mixed | mixed | All conformance metrics | reference-artifacts/analyses | Normalize provenance, duration, source confidence, and linked metric fields into a generated corpus manifest. |
+| 16 | Reference contact sheets and frame evidence | visual / motion / entry formation | contact sheets and still frames | 111 contact/frame evidence files | extracted, partially labeled | medium | Visual look, alien entry, challenge variation | reference-artifacts/analyses | Attach contact-sheet families to metric rows and add image-level comparison scores. |
 
 ### Charts
 
-![score-trends](reference-artifacts/analyses/conformance-economics/2026-05-31-a9ef2321/score-trends.svg)
+![score-trends](reference-artifacts/analyses/conformance-economics/2026-05-31-448a3efd/score-trends.svg)
 
-![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-05-31-a9ef2321/largest-score-deltas.svg)
+![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-05-31-448a3efd/largest-score-deltas.svg)
 
-![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-05-31-a9ef2321/compute-minutes-by-resource.svg)
+![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-05-31-448a3efd/compute-minutes-by-resource.svg)
 
-![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-05-31-a9ef2321/cost-per-positive-score-point.svg)
+![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-05-31-448a3efd/cost-per-positive-score-point.svg)
 
-![gpu-equivalent-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-05-31-a9ef2321/gpu-equivalent-use-by-purpose.svg)
+![gpu-equivalent-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-05-31-448a3efd/gpu-equivalent-use-by-purpose.svg)
 
-![cpu-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-05-31-a9ef2321/cpu-use-by-purpose.svg)
+![cpu-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-05-31-448a3efd/cpu-use-by-purpose.svg)
 
-![gameplay-improvement-by-project-part](reference-artifacts/analyses/conformance-economics/2026-05-31-a9ef2321/gameplay-improvement-by-project-part.svg)
+![gameplay-improvement-by-project-part](reference-artifacts/analyses/conformance-economics/2026-05-31-448a3efd/gameplay-improvement-by-project-part.svg)
 
 ## New First-Class Axes Added
 
@@ -235,5 +235,5 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 - Quality report: `reference-artifacts/analyses/quality-conformance/2026-05-31-f54d3d9e/report.json`
 - Investment priority report: `reference-artifacts/analyses/conformance-investment-priorities/2026-05-19-fba7f625/report.json`
 - Level-arc report: `reference-artifacts/analyses/level-arc-conformance/2026-05-31-f54d3d9e/report.json`
-- Economics report: `reference-artifacts/analyses/conformance-economics/2026-05-31-a9ef2321/report.json`
+- Economics report: `reference-artifacts/analyses/conformance-economics/2026-05-31-448a3efd/report.json`
 - Equal current quality-category weight: `0.077`
