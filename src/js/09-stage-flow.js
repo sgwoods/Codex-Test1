@@ -152,6 +152,15 @@ function spawnChallenge(){
 
 function spawnStage(){
  const transitionMode=S.transitionMode||'';
+ if(S.challengeTour?.active&&!S.challengeTour.done&&typeof challengeTourStageForIndex==='function'){
+  const expectedStage=challengeTourStageForIndex(S.challengeTour.index||1);
+  if(expectedStage&&S.stage!==expectedStage){
+   logEvent('challenge_tour_stage_corrected',{stage:S.stage,expectedStage,index:S.challengeTour.index||1});
+   S.stage=expectedStage;
+   S.pendingStage=0;
+  }
+  S.forceChallenge=1;
+ }
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=!!S.forceChallenge||isChallengeStage(S.stage);S.forceChallenge=0;S.profile=stageBandProfile(S.stage,S.challenge);S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
  S.stagePresentation=currentGamePackStagePresentation(S.stage,S.challenge);
  const usesReference=usesReferenceTimingModel()&&!S.attract;
@@ -170,6 +179,13 @@ function spawnStage(){
 }
 
 function queueStageTransition(mode='normal'){
+ if(mode==='challengeResult'&&S.challengeTour?.active&&!S.challengeTour.done&&typeof challengeTourStageForIndex==='function'){
+  const target=challengeTourStageForIndex(S.challengeTour.index||1);
+  if(target){
+   S.pendingStage=target;
+   S.forceChallenge=1;
+  }
+ }
  const targetStage=S.pendingStage||S.stage;
  const nextIsChallenge=!!S.forceChallenge||isChallengeStage(targetStage);
  const nextStagePresentation=currentGamePackStagePresentation(targetStage,nextIsChallenge);

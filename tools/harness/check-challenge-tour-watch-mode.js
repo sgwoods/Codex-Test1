@@ -38,6 +38,20 @@ function advanceTourTransition(page){
   }));
 }
 
+async function advanceUntil(page, predicate, maxSeconds, label){
+  const steps = Math.ceil(maxSeconds);
+  let state = await page.evaluate(() => window.__galagaHarness__.state());
+  for(let i = 0; i < steps; i += 1){
+    if(predicate(state)) return state;
+    state = await page.evaluate(() => window.__galagaHarness__.advanceFor(1, {
+      step: 1 / 60,
+      stopOnGameOver: false
+    }));
+  }
+  if(predicate(state)) return state;
+  fail(`Timed out waiting for ${label}`, state);
+}
+
 async function main(){
   const result = await withHarnessPage({ skipStart: true, seed: 95131 }, async ({ page }) => {
     const started = await startChallengeTour(page, 'human');
@@ -51,17 +65,31 @@ async function main(){
       fail('Challenge Tour should expose ordered tour state', started);
     }
 
-    const afterClear = await clearCurrentChallenge(page);
-    if(!afterClear.challengeTour || afterClear.challengeTour.results.length !== 1 || !afterClear.challengeTour.results[0].perfect){
-      fail('Challenge Tour should record the first challenge result after clear', afterClear);
+    const naturalFirstResult = await advanceUntil(
+      page,
+      state => (state.challengeTour?.results || []).length >= 1,
+      42,
+      'the first natural Professional challenge result'
+    );
+    const firstResult = naturalFirstResult.challengeTour.results[0];
+    if(firstResult.stage !== 3 || firstResult.total !== 40 || firstResult.hits <= 0){
+      fail('Challenge Tour should record the first naturally played challenge result', naturalFirstResult);
     }
-    if(afterClear.challengeTour.index !== 2 || afterClear.challengeTour.done){
-      fail('Challenge Tour should queue the second challenging stage after the first clear', afterClear);
+    if(naturalFirstResult.challengeTour.index !== 2 || naturalFirstResult.challengeTour.done){
+      fail('Challenge Tour should queue the second challenging stage after the first clear', naturalFirstResult);
     }
 
-    const secondStage = await advanceTourTransition(page);
+    const secondStage = await advanceUntil(
+      page,
+      state => state.started && state.challenge && state.stage === 7 && (state.challengeTour?.results || []).length === 1,
+      24,
+      'natural transition to Challenging Stage 6-7'
+    );
     if(!secondStage.started || !secondStage.challenge || secondStage.stage !== 7){
       fail('Challenge Tour should advance from Challenging Stage 2-3 to Challenging Stage 6-7', secondStage);
+    }
+    if(secondStage.stage === 4 || !secondStage.challenge){
+      fail('Challenge Tour must not fall back into regular Stage 4 after Challenging Stage 2-3', secondStage);
     }
 
     let state = secondStage;
