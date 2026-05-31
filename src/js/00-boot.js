@@ -744,11 +744,12 @@ const sfx={
    referenceClipDuration,
    stage:+(S.stage||0),
    challenge:!!S.challenge,
-   at:+(performance.now()/1000).toFixed(3)
+   at:+(performance.now()/1000).toFixed(3),
+   recAt:typeof recTime==='function'?+recTime().toFixed(3):null
   });
   window.__platinumAudioDebug.lastCue=entry;
   window.__platinumAudioDebug.history.push(entry);
-  if(window.__platinumAudioDebug.history.length>24)window.__platinumAudioDebug.history.shift();
+  if(window.__platinumAudioDebug.history.length>256)window.__platinumAudioDebug.history.shift();
   return entry;
  },
  logCueEvent(entry=null){
@@ -1799,6 +1800,7 @@ const DEFAULT_TEST_CFG=Object.freeze({
  extendRecurring:70000,
   challenge:false,
   audioTheme:'galaga-reference-assets',
+  audioThemePinned:false,
   graphicsTheme:'aurora-borealis',
   spriteRenderMode:'auto',
   starfieldIntensity:1.25,
@@ -1866,7 +1868,7 @@ function applyTestCfgToControls(cfg){
  if(testExtendFirst)testExtendFirst.value=startCfg.extendFirst;
  if(testExtendRecurring)testExtendRecurring.value=startCfg.extendRecurring;
  if(testChallenge)testChallenge.checked=startKind==='challenge'||!!startCfg.challenge;
- if(audioTheme)audioTheme.value=cfg.audioTheme;
+ if(audioTheme)audioTheme.value=effectiveAudioThemeSelection(cfg);
  if(graphicsTheme)graphicsTheme.value=cfg.graphicsTheme;
  if(spriteRenderMode)spriteRenderMode.value=sanitizeSpriteRenderModeValue(cfg.spriteRenderMode);
  if(graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=String(cfg.starfieldIntensity);
@@ -2048,8 +2050,26 @@ window.__platinumFullscreen={
 function currentAudioOverrides(){
  const cfg=testCfgCache||loadTestCfg();
  return{
-  audioTheme:sanitizeAudioThemeValue(cfg.audioTheme)
+  audioTheme:effectiveAudioThemeSelection(cfg),
+  audioThemePinned:!!cfg.audioThemePinned
  };
+}
+function effectiveAudioThemeSelection(cfg=testCfgCache||loadTestCfg()){
+ const selected=sanitizeAudioThemeValue(cfg?.audioTheme||DEFAULT_TEST_CFG.audioTheme);
+ const pinned=!!cfg?.audioThemePinned;
+ let gameKey='';
+ try{
+  if(typeof currentGamePackKey==='function')gameKey=String(currentGamePackKey()||'').trim();
+ }catch{}
+ if(!gameKey){
+  try{
+   gameKey=String((typeof currentGamePack==='function'&&currentGamePack()?.metadata?.gameKey)||'').trim();
+  }catch{}
+ }
+ if(gameKey==='galaxy-guardians-preview'&&!pinned&&selected===DEFAULT_TEST_CFG.audioTheme){
+  return 'auto';
+ }
+ return selected;
 }
 function usesReferenceTimingModel(){
  return typeof currentGamePackReferenceTiming==='function';
@@ -2168,6 +2188,7 @@ function loadTestCfg(){
    extendRecurring,
    challenge:startKind==='challenge'||!!raw.challenge,
    audioTheme:sanitizeAudioThemeValue(raw.audioTheme||DEFAULT_TEST_CFG.audioTheme),
+   audioThemePinned:!!raw.audioThemePinned,
    graphicsTheme:sanitizeGraphicsThemeValue(raw.graphicsTheme||DEFAULT_TEST_CFG.graphicsTheme),
    spriteRenderMode:sanitizeSpriteRenderModeValue(raw.spriteRenderMode||DEFAULT_TEST_CFG.spriteRenderMode),
    starfieldIntensity:sanitizeStarfieldMultiplier(raw.starfieldIntensity,DEFAULT_TEST_CFG.starfieldIntensity),
@@ -2180,6 +2201,9 @@ function loadTestCfg(){
 }
 function saveTestCfg(){
  const currentCfg=testCfgCache||loadTestCfg();
+ const forceAudioThemePinned=!!window.__platinumForceAudioThemePinned||!!window.__auroraForceAudioThemePinned;
+ delete window.__platinumForceAudioThemePinned;
+ delete window.__auroraForceAudioThemePinned;
  const startCfg=productionStartStateLocked()
   ? {
     startKind:sanitizeStartKind(currentCfg.startKind||(currentCfg.challenge?'challenge':'level')),
@@ -2201,6 +2225,7 @@ function saveTestCfg(){
     extendRecurring:cl(Math.max(0,+testExtendRecurring.value||0),0,999999)|0,
     challenge:sanitizeStartKind(testStartKind?.value||(testChallenge?.checked?'challenge':'level'))==='challenge'
    };
+ const nextAudioTheme=sanitizeAudioThemeValue(audioTheme?.value||DEFAULT_TEST_CFG.audioTheme);
  const cfg={
   startKind:startCfg.startKind,
   expertPlays:startCfg.expertPlays,
@@ -2210,7 +2235,8 @@ function saveTestCfg(){
   extendFirst:startCfg.extendFirst,
   extendRecurring:startCfg.extendRecurring,
   challenge:startCfg.challenge,
-  audioTheme:sanitizeAudioThemeValue(audioTheme?.value||DEFAULT_TEST_CFG.audioTheme),
+  audioTheme:nextAudioTheme,
+  audioThemePinned:forceAudioThemePinned||!!currentCfg.audioThemePinned||nextAudioTheme!==effectiveAudioThemeSelection(currentCfg),
   graphicsTheme:sanitizeGraphicsThemeValue(graphicsTheme?.value||DEFAULT_TEST_CFG.graphicsTheme),
   spriteRenderMode:sanitizeSpriteRenderModeValue(spriteRenderMode?.value||DEFAULT_TEST_CFG.spriteRenderMode),
   starfieldIntensity:sanitizeStarfieldMultiplier(graphicsStarfieldIntensity?.value,DEFAULT_TEST_CFG.starfieldIntensity),
@@ -2811,7 +2837,12 @@ if(gameSoundVolumeControl){
  gameSoundVolumeControl.addEventListener('change',()=>setGameSoundVolume((+gameSoundVolumeControl.value||0)/100,{log:1,source:'developer_panel'}));
 }
 if(arcadeFullscreenAutoToggle)arcadeFullscreenAutoToggle.addEventListener('change',()=>setArcadeFullscreenAuto(arcadeFullscreenAutoToggle.checked,{log:1,source:'developer_panel'}));
-for(const el of [testStartKind,testExpertPlays,testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,audioTheme,graphicsTheme,spriteRenderMode,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
+if(audioTheme)audioTheme.addEventListener('change',()=>{
+ window.__platinumForceAudioThemePinned=1;
+ window.__auroraForceAudioThemePinned=1;
+ saveTestCfg();
+});
+for(const el of [testStartKind,testExpertPlays,testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,graphicsTheme,spriteRenderMode,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
 for(const el of [testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring])if(el)el.addEventListener('input',saveTestCfg);
 if(rootMode)rootMode.addEventListener('input',()=>{
  developerRootMode=String(rootMode.value||'').trim()===ROOT_UNLOCK_CODE;

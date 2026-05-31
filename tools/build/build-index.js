@@ -18,6 +18,8 @@ const {
   DEV_APPLICATION_GUIDE,
   DEV_PLATINUM_GUIDE,
   DEV_PLAYER_GUIDE,
+  DEV_INGESTION_DASHBOARD,
+  DEV_INGESTION_DASHBOARD_DATA,
   DEV_BUILD_INFO,
   DEV_RELEASE_NOTES,
   DEV_SCREENSHOT,
@@ -32,11 +34,14 @@ const {
   PRODUCTION_APPLICATION_GUIDE,
   PRODUCTION_PLATINUM_GUIDE,
   PRODUCTION_PLAYER_GUIDE,
+  PRODUCTION_INGESTION_DASHBOARD,
+  PRODUCTION_INGESTION_DASHBOARD_DATA,
   PRODUCTION_BUILD_INFO,
   PRODUCTION_RELEASE_NOTES,
   PRODUCTION_SCREENSHOT
 } = require('./paths');
 const { html: buildConformanceDashboardHtml } = require('../harness/build-dev-conformance-dashboard-page');
+const { buildIngestionDashboardHtml, decorateIngestionDashboardData } = require('./build-ingestion-dashboard-page');
 const { buildPublicProjectSections } = require('./public-project-page-sections');
 const { selectReleaseNoteForBuild } = require('./release-note-selection');
 const { localUrl } = require('../dev/local-host-config');
@@ -64,6 +69,7 @@ const WHITE_PAPER_GUIDE = path.join(ROOT, 'white-paper.json');
 const APPLICATION_GUIDE = path.join(ROOT, 'application-guide.json');
 const PLATINUM_GUIDE = path.join(ROOT, 'platinum-guide.json');
 const PLAYER_GUIDE = path.join(ROOT, 'player-guide.json');
+const INGESTION_DASHBOARD = path.join(ROOT, 'ingestion-dashboard.json');
 const DOCUMENTATION_PROVENANCE = path.join(ROOT, 'documentation-provenance.json');
 const LOCAL_DEV_PUBLIC_PROJECT_PREVIEW = path.join(ROOT, 'local-dev', 'public-aurora-galactica-preview.html');
 const GALAGA_REFERENCE_SPRITE_TARGETS = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-reference-sprites', 'pixel-targets-0.1.json');
@@ -108,6 +114,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/application-guide.html',
   'dist/dev/platinum-guide.html',
   'dist/dev/player-guide.html',
+  'dist/dev/ingestion-dashboard.html',
+  'dist/dev/ingestion-dashboard-data.json',
   'dist/dev/build-info.json',
   'dist/dev/release-notes.json',
   'dist/dev/export.mov.png',
@@ -126,6 +134,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/production/application-guide.html',
   'dist/production/platinum-guide.html',
   'dist/production/player-guide.html',
+  'dist/production/ingestion-dashboard.html',
+  'dist/production/ingestion-dashboard-data.json',
   'dist/production/build-info.json',
   'dist/production/export.mov.png',
   'dist/production/assets/platinum-platform-mark.png',
@@ -143,6 +153,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/beta/application-guide.html',
   'dist/beta/platinum-guide.html',
   'dist/beta/player-guide.html',
+  'dist/beta/ingestion-dashboard.html',
+  'dist/beta/ingestion-dashboard-data.json',
   'dist/beta/build-info.json',
   'dist/beta/export.mov.png',
   'dist/beta/assets/platinum-platform-mark.png',
@@ -162,6 +174,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'application-guide.html',
   'platinum-guide.html',
   'player-guide.html',
+  'ingestion-dashboard.html',
+  'ingestion-dashboard-data.json',
   'build-info.json',
   'dev/index.html',
   'dev/release-dashboard.html',
@@ -175,6 +189,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'dev/application-guide.html',
   'dev/platinum-guide.html',
   'dev/player-guide.html',
+  'dev/ingestion-dashboard.html',
+  'dev/ingestion-dashboard-data.json',
   'dev/build-info.json',
   'dev/README.txt',
   'beta/index.html',
@@ -189,6 +205,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'beta/application-guide.html',
   'beta/platinum-guide.html',
   'beta/player-guide.html',
+  'beta/ingestion-dashboard.html',
+  'beta/ingestion-dashboard-data.json',
   'beta/build-info.json',
   'beta/README.txt',
   'beta/README.md',
@@ -598,6 +616,37 @@ function loadPlayerGuide(){
       strapline: 'Add player-guide.json to restore the generated player guide.',
       currentGoal: '',
       sections: []
+    };
+  }
+}
+
+function loadIngestionDashboard(){
+  try{
+    const raw = JSON.parse(read(INGESTION_DASHBOARD));
+    return {
+      title: raw.title || 'Artifact Collection And Analysis Dashboard',
+      strapline: raw.strapline || '',
+      currentGoal: raw.currentGoal || '',
+      dashboardRead: raw.dashboardRead || '',
+      phaseDefinitions: Array.isArray(raw.phaseDefinitions) ? raw.phaseDefinitions : [],
+      artifactFamilies: Array.isArray(raw.artifactFamilies) ? raw.artifactFamilies : [],
+      globalDocs: Array.isArray(raw.globalDocs) ? raw.globalDocs : [],
+      globalHunts: Array.isArray(raw.globalHunts) ? raw.globalHunts : [],
+      platformExtensions: Array.isArray(raw.platformExtensions) ? raw.platformExtensions : [],
+      games: Array.isArray(raw.games) ? raw.games : []
+    };
+  }catch{
+    return {
+      title: 'Artifact Collection And Analysis Dashboard',
+      strapline: 'Add ingestion-dashboard.json to restore the generated intake and instantiation dashboard.',
+      currentGoal: '',
+      dashboardRead: '',
+      phaseDefinitions: [],
+      artifactFamilies: [],
+      globalDocs: [],
+      globalHunts: [],
+      platformExtensions: [],
+      games: []
     };
   }
 }
@@ -2494,6 +2543,7 @@ function buildReleaseDashboard(buildInfo, latestNote, dashboard, releaseNotes){
         </div>
         <div class="heroLinks">
           <a class="button" href="assets/conformance-dashboard.html">Open conformance dashboard</a>
+          <a class="button" href="ingestion-dashboard.html">Open ingestion dashboard</a>
           <a class="button" href="public-project-page.html">Open lane project page</a>
           <a class="button" href="${esc(releaseNotesLandingHref(buildInfo))}">Open release notes</a>
         </div>
@@ -3025,6 +3075,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
             <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="platinum-guide.html">Open Platinum guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
+            <a class="button" href="ingestion-dashboard.html">Open ingestion dashboard</a>
             <a class="button" href="${esc(releaseNotesLandingHref(buildInfo))}">Open release notes</a>
             <a class="button" href="release-dashboard.html">Open release dashboard</a>
             <a class="button" href="conformance-dashboard.html">Open conformance dashboard</a>
@@ -3112,6 +3163,7 @@ function buildWhitePaperGuide(buildInfo, latestNote, guide){
             <a class="button whitePaperDocAction" href="white-paper-pdf.json">Open PDF metadata</a>
             <a class="button" href="public-project-page.html">Open lane project page</a>
             <a class="button" href="project-guide.html">Open project guide</a>
+            <a class="button" href="ingestion-dashboard.html">Open ingestion dashboard</a>
             <a class="button" href="conformance-dashboard.html">Open conformance dashboard</a>
             <a class="button" href="#white-paper-related-work-doc">Open related work log</a>
             <a class="button" href="#white-paper-reviewer-checklist-doc">Open reviewer checklist</a>
@@ -5558,6 +5610,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <a class="button" href="white-paper.html">Open white paper</a>
             <a class="button" href="platinum-guide.html">Open Platinum guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
+            <a class="button" href="ingestion-dashboard.html">Open ingestion dashboard</a>
           </div>
         <div class="previewNote">
             Sound buttons use a hidden same-origin preview frame running the current lane build, so the page plays Aurora, Galaga synth, and Galaga reference-runtime cues through the real in-game audio engine instead of a separate mock player. Reference buttons play extracted Galaga clips from the curated artifact library. If a button seems silent, check browser audio permission and the game's mute preference in the current lane build.
@@ -6753,6 +6806,7 @@ function buildPlatinumGuide(buildInfo, latestNote, guide){
             <a class="button" href="white-paper.html">Open white paper</a>
             <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
+            <a class="button" href="ingestion-dashboard.html">Open ingestion dashboard</a>
             <a class="button" href="release-dashboard.html">Open release dashboard</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
           </div>
@@ -6822,6 +6876,7 @@ function buildPlayerGuide(buildInfo, latestNote, guide){
             <a class="button" href="white-paper.html">Open white paper</a>
             <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="platinum-guide.html">Open Platinum guide</a>
+            <a class="button" href="ingestion-dashboard.html">Open ingestion dashboard</a>
             <a class="button" href="https://github.com/sgwoods/Codex-Test1/issues">Report or track issues</a>
           </div>
         </section>
@@ -6893,6 +6948,8 @@ function lanePaths(lane){
       applicationGuide: PRODUCTION_APPLICATION_GUIDE,
       platinumGuide: PRODUCTION_PLATINUM_GUIDE,
       playerGuide: PRODUCTION_PLAYER_GUIDE,
+      ingestionDashboard: PRODUCTION_INGESTION_DASHBOARD,
+      ingestionDashboardData: PRODUCTION_INGESTION_DASHBOARD_DATA,
       buildInfo: PRODUCTION_BUILD_INFO,
       releaseNotes: PRODUCTION_RELEASE_NOTES,
       screenshot: PRODUCTION_SCREENSHOT
@@ -6912,6 +6969,8 @@ function lanePaths(lane){
     applicationGuide: DEV_APPLICATION_GUIDE,
     platinumGuide: DEV_PLATINUM_GUIDE,
     playerGuide: DEV_PLAYER_GUIDE,
+    ingestionDashboard: DEV_INGESTION_DASHBOARD,
+    ingestionDashboardData: DEV_INGESTION_DASHBOARD_DATA,
     buildInfo: DEV_BUILD_INFO,
     releaseNotes: DEV_RELEASE_NOTES,
     screenshot: DEV_SCREENSHOT
@@ -6962,6 +7021,7 @@ function build(options = {}){
   const applicationGuide = loadApplicationGuide();
   const platinumGuide = loadPlatinumGuide();
   const playerGuide = loadPlayerGuide();
+  const ingestionDashboard = loadIngestionDashboard();
   const latestNote = selectReleaseNoteForBuild(releaseNotes, {
     version: buildVersion,
     versionLine: buildVersionLine,
@@ -7062,6 +7122,14 @@ function build(options = {}){
     supabaseConfigured: !!(supabaseUrl && supabaseAnonKey),
     latestReleaseNote: latestNote
   };
+  const ingestionDashboardData = decorateIngestionDashboardData(ingestionDashboard, {
+    releaseLane: buildReleaseChannel,
+    buildLabel,
+    buildCommit,
+    pageBuiltAt: buildUtc,
+    artifactBase: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/`,
+    rawArtifactBase: `https://raw.githubusercontent.com/sgwoods/Codex-Test1/${buildCommit}/`
+  });
 
   fs.writeFileSync(out.index, html.endsWith('\n') ? html : `${html}\n`);
   fs.writeFileSync(out.dashboard, buildReleaseDashboard(buildInfo, latestNote, releaseDashboard, releaseNotes));
@@ -7100,6 +7168,15 @@ function build(options = {}){
   fs.writeFileSync(out.applicationGuide, buildApplicationGuide(buildInfo, latestNote, applicationGuide));
   fs.writeFileSync(out.platinumGuide, buildPlatinumGuide(buildInfo, latestNote, platinumGuide));
   fs.writeFileSync(out.playerGuide, buildPlayerGuide(buildInfo, latestNote, playerGuide));
+  fs.writeFileSync(out.ingestionDashboard, buildIngestionDashboardHtml(ingestionDashboard, {
+    releaseLane: buildReleaseChannel,
+    buildLabel,
+    buildCommit,
+    pageBuiltAt: buildUtc,
+    artifactBase: `https://github.com/sgwoods/Codex-Test1/blob/${buildCommit}/`,
+    rawArtifactBase: `https://raw.githubusercontent.com/sgwoods/Codex-Test1/${buildCommit}/`
+  }));
+  fs.writeFileSync(out.ingestionDashboardData, JSON.stringify(ingestionDashboardData, null, 2) + '\n');
   fs.writeFileSync(out.buildInfo, JSON.stringify(buildInfo, null, 2) + '\n');
   fs.writeFileSync(out.releaseNotes, JSON.stringify({
     product: releaseManifest.product,
@@ -7149,6 +7226,8 @@ function build(options = {}){
     out.applicationGuide,
     out.platinumGuide,
     out.playerGuide,
+    out.ingestionDashboard,
+    out.ingestionDashboardData,
     out.buildInfo,
     out.releaseNotes,
     out.screenshot,

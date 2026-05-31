@@ -93,6 +93,8 @@ function dataUrlToBuffer(dataUrl){
 }
 
 function captureConfig(args){
+  const gameKeyRaw = String(args.game || args['game-key'] || 'aurora-galactica').trim().toLowerCase();
+  const gameKey = gameKeyRaw === 'galaxy-guardians-preview' ? 'galaxy-guardians-preview' : 'aurora-galactica';
   const startKind = String(args['start-kind'] || args.startKind || (boolValue(args.challenge, false) ? 'challenge' : 'level')).toLowerCase() === 'challenge'
     ? 'challenge'
     : 'level';
@@ -114,11 +116,13 @@ function captureConfig(args){
   const maxWaitActive = numberValue(args['max-wait-active'] || args.maxWaitActive, startKind === 'challenge' ? 35 : 12, 0, 180);
   const activePollMs = Math.max(50, Math.min(1000, Math.floor(numberValue(args['active-poll-ms'] || args.activePollMs, 150, 50, 1000))));
   const seed = (+numberValue(args.seed, 9052, 1, 0xffffffff) >>> 0) || 9052;
+  const audioTheme = String(args['audio-theme'] || args.audioTheme || '').trim().toLowerCase();
   const fps = Math.max(12, Math.min(60, Math.floor(numberValue(args.fps, 60, 12, 60))));
   const width = Math.max(360, Math.min(1920, Math.floor(numberValue(args.width, 960, 360, 1920))));
   const height = Math.max(480, Math.min(2160, Math.floor(numberValue(args.height, 1280, 480, 2160))));
   const label = slug(args.label || `${startKind === 'challenge' ? `challenge-${challengeStage}` : `stage-${stage}`}${persona ? `-${persona}` : ''}`);
   return {
+    gameKey,
     stage,
     stageMode,
     startKind,
@@ -139,6 +143,7 @@ function captureConfig(args){
     maxWaitActive,
     activePollMs,
     seed,
+    audioTheme,
     fps,
     width,
     height,
@@ -255,6 +260,9 @@ async function main(){
       if(options.setup === 'challenge-profile'){
         return api.setupChallengeMotionProfileTest({ stage: options.stage });
       }
+      if(options.gameKey && typeof installGamePack === 'function'){
+        installGamePack(options.gameKey, { persist: false });
+      }
       if(options.playerTwoPersona && typeof api.setPlayerTwoMode === 'function'){
         api.setPlayerTwoMode({ enabled: !!options.playerTwo, persona: options.playerTwoPersona, silent: true });
       }
@@ -266,6 +274,7 @@ async function main(){
         challengeStage: options.challengeStage,
         ships: options.ships,
         seed: options.seed,
+        audioTheme: options.audioTheme || undefined,
         persona: options.persona || null,
         watchPersona: options.watchPersona || null,
         expertPlays: options.expertPlays || undefined,
@@ -328,6 +337,8 @@ async function main(){
     await delay(Math.round(options.seconds * 1000));
     const finalState = api.state ? api.state() : null;
     const formationState = api.challengeFormationState ? api.challengeFormationState() : null;
+    const sessionEvents = api.sessionEvents ? api.sessionEvents(768) : [];
+    const audioHistory = api.audioHistory ? api.audioHistory(256) : [];
     const posterDataUrl = canvas.toDataURL('image/png');
     const stopped = new Promise(resolve => { recorder.onstop = resolve; });
     recorder.stop();
@@ -349,6 +360,8 @@ async function main(){
       startResult,
       captureStartActivity,
       finalState,
+      sessionEvents,
+      audioHistory,
       formationState: formationState ? {
         stage: formationState.stage,
         challenge: !!formationState.challenge,
@@ -423,6 +436,7 @@ async function main(){
     notes: cfg.notes || null,
     capture: {
       stage: cfg.stage,
+      gameKey: cfg.gameKey,
       stageMode: cfg.stageMode,
       startKind: cfg.startKind,
       challenge: cfg.challenge,
@@ -463,6 +477,8 @@ async function main(){
     startState: pageResult.startResult || null,
     captureStartActivity: pageResult.captureStartActivity || null,
     finalState: pageResult.finalState || null,
+    sessionEvents: pageResult.sessionEvents || [],
+    audioHistory: pageResult.audioHistory || [],
     formationState: pageResult.formationState || null,
     reviewFocus: [
       'Use these clips for human-visible before/after review of movement, graphics, stage pacing, persona behavior, and audio feel.',

@@ -26,6 +26,12 @@ Current artifacts:
   previews and cue-level recommendations.
 - `audio-reference-comparison-0.1.json` - waveform/spectrogram and PCM proxy
   comparison between the Galaxian reference windows and Guardians cue shapes.
+- `audio-scene-review-0.1.json` - reusable gameplay-scene audio review layer
+  that anchors lived sound windows such as rack establish, first dive pressure,
+  hit payoff, player loss, and midrun pressure to durable capture labels.
+- `audio-live-mix-0.1.json` - reusable captured-gameplay soundscape layer that
+  measures quiet gaps, cue density, pulse cadence, pressure share, and
+  opening-to-midrun escalation from real persona review captures.
 - `attract-score-surface-0.1.json` - first visible wait-mode and preview-modal
   surface contract for Guardians mission language and score-table presentation.
 - `combat-feedback-frame-reference-0.1.json` - promoted frame-window authority

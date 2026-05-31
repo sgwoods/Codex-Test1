@@ -180,6 +180,8 @@ if(fs.existsSync(BETA_BUILD_INFO)){
   rewriteProductionText(path.join(DIST_PRODUCTION, 'application-guide.html'), sourceInfo, productionInfo, selectedReleaseNote);
   rewriteProductionText(path.join(DIST_PRODUCTION, 'platinum-guide.html'), sourceInfo, productionInfo, selectedReleaseNote);
   rewriteProductionText(path.join(DIST_PRODUCTION, 'player-guide.html'), sourceInfo, productionInfo, selectedReleaseNote);
+  rewriteProductionText(path.join(DIST_PRODUCTION, 'ingestion-dashboard.html'), sourceInfo, productionInfo, selectedReleaseNote);
+  rewriteProductionText(path.join(DIST_PRODUCTION, 'ingestion-dashboard-data.json'), sourceInfo, productionInfo, selectedReleaseNote);
   rewriteProductionText(path.join(DIST_PRODUCTION, 'release-dashboard.html'), sourceInfo, productionInfo, selectedReleaseNote);
   rewriteProductionText(path.join(DIST_PRODUCTION, 'conformance-dashboard.html'), sourceInfo, productionInfo, selectedReleaseNote);
   rewriteProductionText(path.join(DIST_PRODUCTION, 'conformance-dashboard-data.json'), sourceInfo, productionInfo, selectedReleaseNote);

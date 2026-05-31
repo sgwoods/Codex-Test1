@@ -104,7 +104,7 @@ const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
   enemyShotStartYOffset:8,
   enemyShotPlayerHitbox:7,
   enemyShotBottomPadding:10,
-  rackPulseIntervalBase:2.24,
+  rackPulseIntervalBase:1.96,
   topReentryVy:70,
   topReentryAccel:8.4,
   topReentrySwayAmplitude:12,
@@ -154,17 +154,20 @@ function guardiansRuntimeRules(stateOrStage=1){
  const diveScale=1+rank*.048;
  const shotScale=1+rank*.08;
  const intervalScale=Math.max(.58,1-rank*.07);
- const flagshipScale=Math.max(.64,1-rank*.058);
- const firstPressureScale=Math.max(.76,1-rank*.038);
- return Object.assign({},base,{
+  const flagshipScale=Math.max(.64,1-rank*.058);
+  const firstPressureScale=Math.max(.76,1-rank*.038);
+  return Object.assign({},base,{
   firstScoutDiveDelay:+(base.firstScoutDiveDelay*firstPressureScale).toFixed(3),
   flagshipEscortDelay:+(base.flagshipEscortDelay*Math.max(.78,1-rank*.032)).toFixed(3),
   scoutDiveIntervalBase:+(base.scoutDiveIntervalBase*intervalScale).toFixed(3),
   scoutDiveIntervalJitter:+(base.scoutDiveIntervalJitter*Math.max(.66,1-rank*.045)).toFixed(3),
   flagshipDiveIntervalBase:+(base.flagshipDiveIntervalBase*flagshipScale).toFixed(3),
   flagshipDiveIntervalJitter:+(base.flagshipDiveIntervalJitter*Math.max(.68,1-rank*.045)).toFixed(3),
+  formationDriftAmplitude:+(base.formationDriftAmplitude*(1+rank*.028)).toFixed(3),
   diveBaseVy:+(base.diveBaseVy*diveScale).toFixed(3),
   diveAccel:+(base.diveAccel*(1+rank*.078)).toFixed(3),
+  diveSwayAmplitude:+(base.diveSwayAmplitude*(1+rank*.045)).toFixed(3),
+  diveSideDrift:+(base.diveSideDrift*(1+rank*.055)).toFixed(3),
   firstEnemyShotDelay:+(base.firstEnemyShotDelay*Math.max(.46,1-rank*.115)).toFixed(3),
   enemyShotIntervalBase:+(base.enemyShotIntervalBase*Math.max(.6,1-rank*.078)).toFixed(3),
   enemyShotIntervalJitter:+(base.enemyShotIntervalJitter*Math.max(.66,1-rank*.055)).toFixed(3),
@@ -173,7 +176,8 @@ function guardiansRuntimeRules(stateOrStage=1){
   rackPulseIntervalBase:+(base.rackPulseIntervalBase*Math.max(.64,1-rank*.055)).toFixed(3),
   formationDriftHz:+(base.formationDriftHz*(1+rank*.038)).toFixed(3),
   topReentryVy:+(base.topReentryVy*(1+rank*.042)).toFixed(3),
-  topReentryAccel:+(base.topReentryAccel*(1+rank*.05)).toFixed(3)
+  topReentryAccel:+(base.topReentryAccel*(1+rank*.05)).toFixed(3),
+  topReentrySwayAmplitude:+(base.topReentrySwayAmplitude*(1+rank*.04)).toFixed(3)
  });
 }
 
@@ -339,11 +343,70 @@ function liveGuardiansAliens(state,role=''){
  return state.aliens.filter(alien=>alien.hp>0&&(!role||alien.role===role));
 }
 
-function pickGuardiansAlien(state,role=''){
- const candidates=liveGuardiansAliens(state,role);
+function pickGuardiansAlien(state,role='',predicate=null,ranker=null){
+ const candidates=liveGuardiansAliens(state,role).filter(alien=>{
+  if(alien.mode!=='formation')return false;
+  return typeof predicate==='function' ? predicate(alien) : true;
+ });
  if(!candidates.length)return null;
- const index=Math.floor(state.rng()*candidates.length)%candidates.length;
- return candidates[index];
+ const ranked=typeof ranker==='function'
+  ? candidates.slice().sort((a,b)=>{
+    const delta=(+ranker(a)||0)-(+ranker(b)||0);
+    if(Math.abs(delta)>1e-9)return delta;
+    return Math.abs((+a.rackX||0)-(+state.player?.x||0))-Math.abs((+b.rackX||0)-(+state.player?.x||0));
+   })
+  : candidates;
+ const pool=typeof ranker==='function'
+  ? ranked.slice(0,Math.min(4,ranked.length))
+  : ranked;
+ const index=Math.floor(state.rng()*pool.length)%pool.length;
+ return pool[index];
+}
+
+function guardiansLowerFieldDiveThreats(state,rules){
+ const thresholdY=(+rules.playfieldHeight||0)*0.42;
+ return state.aliens.filter(alien=>
+  alien.hp>0
+  && (alien.mode==='diving'||alien.mode==='wrapping')
+  && alien.y>=thresholdY
+ );
+}
+
+function guardiansPressureSnapshot(state,rules){
+ const playerX=+state.player?.x||0;
+ const playerY=+state.player?.y||0;
+ const lowerFieldDives=guardiansLowerFieldDiveThreats(state,rules);
+ const closeDives=lowerFieldDives.filter(alien=>Math.abs(alien.x-playerX)<=26);
+ const nearbyShots=(state.enemyShots||[]).filter(shot=>
+  shot
+  && shot.active!==0
+  && shot.y>=playerY-88
+  && Math.abs(shot.x-playerX)<=28
+ );
+ return {
+  lowerFieldDives,
+  closeDives,
+  nearbyShots,
+  deferScoutDive:lowerFieldDives.length>=3||closeDives.length>=2,
+  deferFlagshipDive:lowerFieldDives.length>=2||closeDives.length>=1,
+  crowdingPenalty:lowerFieldDives.length+nearbyShots.length
+ };
+}
+
+function guardiansFairDivePredicate(state,rules,pressure){
+ const lowerFieldDives=Array.isArray(pressure?.lowerFieldDives)?pressure.lowerFieldDives:[];
+ if(!lowerFieldDives.length)return ()=>true;
+ const minThreatSeparation=pressure?.crowdingPenalty>=3 ? 28 : 22;
+ return alien=>lowerFieldDives.every(threat=>Math.abs((+alien.rackX||0)-(+threat.x||0))>=minThreatSeparation);
+}
+
+function guardiansDiveLaneRank(state,pressure){
+ const lowerFieldDives=Array.isArray(pressure?.lowerFieldDives)?pressure.lowerFieldDives:[];
+ const playerX=+state.player?.x||0;
+ if(!lowerFieldDives.length){
+  return alien=>Math.abs((+alien.rackX||0)-playerX);
+ }
+ return alien=>lowerFieldDives.reduce((nearest,threat)=>Math.min(nearest,Math.abs((+alien.rackX||0)-(+threat.x||0))),Infinity);
 }
 
 function pickGuardiansEscortAliens(state,count=0,leader=null){
@@ -514,10 +577,32 @@ function guardiansAlienPoints(alien){
 }
 
 function pickGuardiansEnemyShotSource(state){
+ const rules=guardiansRuntimeRules(state);
+ const pressure=guardiansPressureSnapshot(state,rules);
  const live=liveGuardiansAliens(state).filter(alien=>alien.y<state.player.y-24);
  if(!live.length)return null;
- const active=live.filter(alien=>alien.mode==='diving');
- const candidates=active.length?active:live.sort((a,b)=>b.y-a.y);
+ const diving=live.filter(alien=>alien.mode==='diving'||alien.mode==='wrapping');
+  let candidates=diving.filter(alien=>{
+  if(alien.y>=state.player.y-(pressure.crowdingPenalty>=2 ? 88 : 64))return false;
+  if(pressure.crowdingPenalty>=3&&Math.abs(alien.x-state.player.x)<=14)return false;
+  return true;
+ });
+ if(!candidates.length){
+  candidates=live
+   .filter(alien=>alien.mode==='formation')
+   .sort((a,b)=>{
+    const yDelta=(b.y-a.y);
+    if(Math.abs(yDelta)>1e-9)return yDelta;
+    return Math.abs(a.x-state.player.x)-Math.abs(b.x-state.player.x);
+   })
+   .slice(0,6);
+ }
+ if(!candidates.length){
+  candidates=diving.length
+   ? diving.filter(alien=>alien.y<state.player.y-52)
+   : live.sort((a,b)=>b.y-a.y);
+ }
+ if(!candidates.length)candidates=live.sort((a,b)=>b.y-a.y);
  const index=Math.floor(state.rng()*candidates.length)%candidates.length;
  return candidates[index];
 }
@@ -606,19 +691,40 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
  const entry=updateGalaxyGuardiansFormationEntry(state);
  p.x=Math.max(12,Math.min(rules.playfieldWidth-12,p.x+move*rules.playerSpeed*dt));
  if(input.fire)fireGuardiansPlayerShot(state);
+ const pressure=guardiansPressureSnapshot(state,rules);
+ const fairnessGuardActive=state.t>=12;
  if(entry.complete&&state.t>=state.nextDiveAt){
-  const alien=pickGuardiansAlien(state,'scout')||pickGuardiansAlien(state);
-  startGuardiansDive(state,alien,0);
-  state.nextDiveAt=state.t+rules.scoutDiveIntervalBase+state.rng()*rules.scoutDiveIntervalJitter;
+  const diveRanker=guardiansDiveLaneRank(state,pressure);
+  if(fairnessGuardActive&&pressure.deferScoutDive){
+   state.nextDiveAt=state.t+Math.max(.12,rules.scoutDiveIntervalBase*.16);
+  }else{
+   const alien=pickGuardiansAlien(state,'scout',guardiansFairDivePredicate(state,rules,pressure),diveRanker)
+    || pickGuardiansAlien(state,'scout',null,diveRanker)
+    || pickGuardiansAlien(state,'escort',guardiansFairDivePredicate(state,rules,pressure),diveRanker)
+    || pickGuardiansAlien(state,'escort',null,diveRanker)
+    || pickGuardiansAlien(state,'flagship',guardiansFairDivePredicate(state,rules,pressure),diveRanker)
+    || pickGuardiansAlien(state,'flagship',null,diveRanker);
+   startGuardiansDive(state,alien,0);
+   state.nextDiveAt=state.t+rules.scoutDiveIntervalBase+state.rng()*rules.scoutDiveIntervalJitter;
+  }
  }
  if(entry.complete&&state.t>=state.nextFlagshipAt){
-  const flagship=pickGuardiansAlien(state,'flagship');
-  startGuardiansDive(state,flagship,Math.min(2,liveGuardiansAliens(state,'escort').length));
-  state.nextFlagshipAt=state.t+rules.flagshipDiveIntervalBase+state.rng()*rules.flagshipDiveIntervalJitter;
+  const diveRanker=guardiansDiveLaneRank(state,pressure);
+  if(fairnessGuardActive&&pressure.deferFlagshipDive){
+   state.nextFlagshipAt=state.t+Math.max(.2,rules.flagshipDiveIntervalBase*.12);
+  }else{
+   const flagship=pickGuardiansAlien(state,'flagship',guardiansFairDivePredicate(state,rules,pressure),diveRanker)
+    || pickGuardiansAlien(state,'flagship',null,diveRanker);
+   startGuardiansDive(state,flagship,Math.min(2,liveGuardiansAliens(state,'escort').filter(alien=>alien.mode==='formation').length));
+   state.nextFlagshipAt=state.t+rules.flagshipDiveIntervalBase+state.rng()*rules.flagshipDiveIntervalJitter;
+  }
  }
  if(state.t>=state.nextEnemyShotAt){
   fireGuardiansEnemyShot(state);
-  state.nextEnemyShotAt=state.t+rules.enemyShotIntervalBase+state.rng()*rules.enemyShotIntervalJitter;
+  state.nextEnemyShotAt=state.t
+   + rules.enemyShotIntervalBase
+   + state.rng()*rules.enemyShotIntervalJitter
+   + (fairnessGuardActive&&pressure.crowdingPenalty>=2 ? Math.max(.05,rules.enemyShotIntervalBase*.08) : 0);
  }
  if(entry.complete&&state.t>=state.nextRackPulseAt){
   guardiansRuntimeEvent(state,'rack_pulse',{

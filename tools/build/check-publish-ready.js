@@ -41,6 +41,8 @@ const REQUIRED_SOURCE_DOCS = [
   'REFERENCE_MEDIA_INVENTORY.md',
   'ARTIFACT_POLICY.md',
   'AUDIO_CONFORMANCE_LAB.md',
+  'PLATINUM_AUDIO_CONFORMANCE_FRAMEWORK.md',
+  'WINDIGO_INVADERS_PLATINUM_INSTANTIATION_PLAN.md',
   'QUALITY_RELEASE_SCORECARD.md',
   'PLATINUM_LAUNCH_ART_DIRECTION.md',
   'PLATINUM_LUECK_REVIEW.md',
@@ -57,6 +59,7 @@ const REQUIRED_SOURCE_DOCS = [
   'project-guide.json',
   'application-guide.json',
   'platinum-guide.json',
+  'ingestion-dashboard.json',
   'player-guide.json',
   'documentation-provenance.json',
   'release-dashboard.json',
@@ -72,6 +75,8 @@ const USER_VISIBLE_DOC_FILES = [
   'project-guide.html',
   'application-guide.html',
   'platinum-guide.html',
+  'ingestion-dashboard.html',
+  'ingestion-dashboard-data.json',
   'conformance-dashboard.html',
   'conformance-dashboard-data.json',
   'release-dashboard.html'
@@ -155,6 +160,18 @@ const USER_VISIBLE_SECTIONS = [
     ]
   },
   {
+    id: 'ingestion-dashboard-page',
+    file: 'ingestion-dashboard.html',
+    requiredText: [
+      'Artifact Collection And Analysis',
+      'Windigo Invaders',
+      'Platinum Instantiation Plan',
+      'Artifact Hunt',
+      'ingestion-dashboard.json',
+      'WINDIGO_INVADERS_PLATINUM_INSTANTIATION_PLAN.md'
+    ]
+  },
+  {
     id: 'platform-persona-contract',
     file: 'platinum-guide.html',
     requiredText: [
@@ -221,6 +238,11 @@ const REQUIRED_VISIBLE_ARTIFACT_FAMILIES = [
     id: 'galaxy-guardians-identity',
     path: 'reference-artifacts/analyses/galaxy-guardians-identity',
     meaning: 'second-game ingestion identity, sprite, audio, and movement evidence'
+  },
+  {
+    id: 'space-invaders-reference',
+    path: 'reference-artifacts/analyses/space-invaders-reference',
+    meaning: 'next-game intake evidence and analysis seed for Windigo Invaders'
   }
 ];
 

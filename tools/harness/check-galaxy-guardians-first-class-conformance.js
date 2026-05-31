@@ -118,7 +118,9 @@ const REQUIRED_SCRIPT_GROUPS = {
   audio: [
     'harness:check:galaxy-guardians-audio-cue-targets',
     'harness:check:galaxy-guardians-audio-character',
-    'harness:check:galaxy-guardians-audio-conformance-lab'
+    'harness:check:galaxy-guardians-audio-conformance-lab',
+    'harness:check:galaxy-guardians-audio-scene-review',
+    'harness:check:galaxy-guardians-audio-live-mix'
   ],
   motion: [
     'harness:check:galaxy-guardians-formation-entry',

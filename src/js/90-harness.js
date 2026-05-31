@@ -22,7 +22,11 @@ window.__galagaHarness__={
   testExtendFirst.value=cfg.extendFirst!==undefined?cl(Math.max(0,+cfg.extendFirst||0),0,999999)|0:currentCfg.extendFirst;
   testExtendRecurring.value=cfg.extendRecurring!==undefined?cl(Math.max(0,+cfg.extendRecurring||0),0,999999)|0:currentCfg.extendRecurring;
   testChallenge.checked=nextStartKind==='challenge'||!!cfg.challenge;
-  if(typeof audioTheme!=='undefined'&&audioTheme)audioTheme.value=cfg.audioTheme!==undefined?String(cfg.audioTheme||'auto'):currentCfg.audioTheme;
+  if(cfg.audioTheme!==undefined){
+   window.__platinumForceAudioThemePinned=1;
+   window.__auroraForceAudioThemePinned=1;
+  }
+  if(typeof audioTheme!=='undefined'&&audioTheme)audioTheme.value=cfg.audioTheme!==undefined?String(cfg.audioTheme||'auto'):currentAudioOverrides().audioTheme;
   if(typeof graphicsTheme!=='undefined'&&graphicsTheme)graphicsTheme.value=cfg.graphicsTheme!==undefined?String(cfg.graphicsTheme||'auto'):currentCfg.graphicsTheme;
   if(typeof spriteRenderMode!=='undefined'&&spriteRenderMode)spriteRenderMode.value=cfg.spriteRenderMode!==undefined?String(cfg.spriteRenderMode||'auto'):(currentCfg.spriteRenderMode||'auto');
   if(typeof graphicsStarfieldIntensity!=='undefined'&&graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=cfg.starfieldIntensity!==undefined?String(cfg.starfieldIntensity):String(currentCfg.starfieldIntensity);
@@ -822,6 +826,10 @@ window.__galagaHarness__={
  audioHistory(limit=12){
   const history=(window.__platinumAudioDebug||window.__auroraAudioDebug)?.history||[];
   return history.slice(Math.max(0,history.length-Math.max(1,+limit||12)));
+ },
+ sessionEvents(limit=256){
+  const events=(typeof REC!=='undefined'&&Array.isArray(REC?.events))?REC.events:[];
+  return events.slice(Math.max(0,events.length-Math.max(1,+limit||256)));
  },
  triggerAudioCue(name,opts={}){
   if(!name)return null;
@@ -1793,7 +1801,11 @@ window.__galagaHarness__={
  testExtendFirst.value=cfg.extendFirst!==undefined?cl(Math.max(0,+cfg.extendFirst||0),0,999999)|0:currentCfg.extendFirst;
  testExtendRecurring.value=cfg.extendRecurring!==undefined?cl(Math.max(0,+cfg.extendRecurring||0),0,999999)|0:currentCfg.extendRecurring;
  testChallenge.checked=nextStartKind==='challenge'||!!cfg.challenge;
-  if(typeof audioTheme!=='undefined'&&audioTheme)audioTheme.value=cfg.audioTheme!==undefined?String(cfg.audioTheme||'auto'):currentCfg.audioTheme;
+  if(cfg.audioTheme!==undefined){
+   window.__platinumForceAudioThemePinned=1;
+   window.__auroraForceAudioThemePinned=1;
+  }
+  if(typeof audioTheme!=='undefined'&&audioTheme)audioTheme.value=cfg.audioTheme!==undefined?String(cfg.audioTheme||'auto'):currentAudioOverrides().audioTheme;
   if(typeof graphicsTheme!=='undefined'&&graphicsTheme)graphicsTheme.value=cfg.graphicsTheme!==undefined?String(cfg.graphicsTheme||'auto'):currentCfg.graphicsTheme;
   if(typeof spriteRenderMode!=='undefined'&&spriteRenderMode)spriteRenderMode.value=cfg.spriteRenderMode!==undefined?String(cfg.spriteRenderMode||'auto'):(currentCfg.spriteRenderMode||'auto');
   if(typeof graphicsStarfieldIntensity!=='undefined'&&graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=cfg.starfieldIntensity!==undefined?String(cfg.starfieldIntensity):String(currentCfg.starfieldIntensity);

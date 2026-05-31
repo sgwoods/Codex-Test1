@@ -210,6 +210,33 @@ Standing aggregate parity gate:
 
 - `npm run harness:check:galaxy-guardians-first-class-conformance`
 
+## Windigo Invaders
+
+Windigo Invaders is the planned Space Invaders-derived sibling game. It is not
+yet a runtime conformance target; it is currently an ingestion and planning
+target.
+
+The important rule for this line is to avoid building an Aurora-shaped or
+Guardians-shaped shell from memory. The first meaningful output should be a
+strong source package and a Platinum-focused instantiation plan that separates
+host/platform ownership from game-owned truth.
+
+### Initial Intake And Planning Rows
+
+| Row | Current role | Required evidence before serious runtime work | Current gap / next action |
+| --- | --- | --- | --- |
+| Invader family index | Define row-by-row enemy role, march relationship, descent meaning, and score value. | Gameplay contact sheets, still-image references, score tables, and operator/manual notes. | Build a row inventory for top/middle/lower invader families and score-value mapping. |
+| Cannon / bunker / shot index | Define player ship, bunker, projectile, and hit-result semantics. | Clean stills, gameplay windows, and rules references for bunker erosion, player fire cadence, and enemy fire cadence. | Add labeled stills and gameplay windows for cannon lane, bunker wear, and projectile timing. |
+| March / descent timing index | Define the game's essential tempo and threat identity. | Event-labeled timing clips and preferably cleaner audio windows from preserved longplay sources. | Promote labeled timing windows for march cadence, descent start, hit, loss, and game-over. |
+| Audio cue index | Define recurring march, shot, hit, descent, failure, and game-over sound families. | Cleaner audio windows and future scene/live-mix review artifacts using the new generic audio framework. | Acquire cleaner source windows and do not begin runtime cue fitting until those windows exist. |
+| Stage / wave structure index | Define how entry, pacing, bunkers, score opportunity, and acceleration evolve. | Manual/rules pages plus longplay observation across early, middle, and late stages. | Build the first wave/stage summary only after score-table and progression evidence are added. |
+
+### Standing Planning Anchors
+
+- [WINDIGO_INVADERS_PLATINUM_INSTANTIATION_PLAN.md](WINDIGO_INVADERS_PLATINUM_INSTANTIATION_PLAN.md)
+- [reference-artifacts/analyses/space-invaders-reference/README.md](reference-artifacts/analyses/space-invaders-reference/README.md)
+- [CLASSIC_ARCADE_INGESTION_FRAMEWORK.md](CLASSIC_ARCADE_INGESTION_FRAMEWORK.md)
+
 ## Platform Persona Contract
 
 Platinum owns the persona harness substrate, not the game-specific truth behind

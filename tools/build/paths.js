@@ -25,6 +25,8 @@ module.exports = {
   DEV_APPLICATION_GUIDE: path.join(DIST_DEV, 'application-guide.html'),
   DEV_PLATINUM_GUIDE: path.join(DIST_DEV, 'platinum-guide.html'),
   DEV_PLAYER_GUIDE: path.join(DIST_DEV, 'player-guide.html'),
+  DEV_INGESTION_DASHBOARD: path.join(DIST_DEV, 'ingestion-dashboard.html'),
+  DEV_INGESTION_DASHBOARD_DATA: path.join(DIST_DEV, 'ingestion-dashboard-data.json'),
   DEV_BUILD_INFO: path.join(DIST_DEV, 'build-info.json'),
   DEV_RELEASE_NOTES: path.join(DIST_DEV, 'release-notes.json'),
   DEV_SCREENSHOT: path.join(DIST_DEV, 'export.mov.png'),
@@ -42,6 +44,8 @@ module.exports = {
   PRODUCTION_APPLICATION_GUIDE: path.join(DIST_PRODUCTION, 'application-guide.html'),
   PRODUCTION_PLATINUM_GUIDE: path.join(DIST_PRODUCTION, 'platinum-guide.html'),
   PRODUCTION_PLAYER_GUIDE: path.join(DIST_PRODUCTION, 'player-guide.html'),
+  PRODUCTION_INGESTION_DASHBOARD: path.join(DIST_PRODUCTION, 'ingestion-dashboard.html'),
+  PRODUCTION_INGESTION_DASHBOARD_DATA: path.join(DIST_PRODUCTION, 'ingestion-dashboard-data.json'),
   PRODUCTION_BUILD_INFO: path.join(DIST_PRODUCTION, 'build-info.json'),
   PRODUCTION_RELEASE_NOTES: path.join(DIST_PRODUCTION, 'release-notes.json'),
   PRODUCTION_SCREENSHOT: path.join(DIST_PRODUCTION, 'export.mov.png'),
@@ -58,6 +62,8 @@ module.exports = {
   BETA_APPLICATION_GUIDE: path.join(DIST_BETA, 'application-guide.html'),
   BETA_PLATINUM_GUIDE: path.join(DIST_BETA, 'platinum-guide.html'),
   BETA_PLAYER_GUIDE: path.join(DIST_BETA, 'player-guide.html'),
+  BETA_INGESTION_DASHBOARD: path.join(DIST_BETA, 'ingestion-dashboard.html'),
+  BETA_INGESTION_DASHBOARD_DATA: path.join(DIST_BETA, 'ingestion-dashboard-data.json'),
   BETA_BUILD_INFO: path.join(DIST_BETA, 'build-info.json'),
   BETA_APPROVED_BUILD_INFO: path.join(DIST_BETA, 'approved-build-info.json')
 };

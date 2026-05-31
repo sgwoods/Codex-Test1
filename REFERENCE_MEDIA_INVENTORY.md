@@ -1,8 +1,14 @@
 # Reference Media Inventory
 
-This inventory lists the preserved gameplay footage, reference media, and derived analysis packs that currently support Aurora fidelity work.
+This inventory lists the preserved gameplay footage, reference media, and derived
+analysis packs that currently support Aurora, Galaxy Guardians, and future-game
+ingestion work.
 
 It exists so future work does not depend on memory or chat history when deciding what evidence is already available.
+
+The primary hosted intake/status surface for this material now lives at
+`ingestion-dashboard.html`, but this file remains the durable repo-owned ledger
+for what is actually preserved and why it matters.
 
 For the repeatable source-to-game-pack process, pair this inventory with:
 
@@ -57,6 +63,12 @@ persona testing expectations.
 | Player movement correspondence | `reference-artifacts/analyses/correspondence/player-movement` | whether movement still matches current joystick-translation principles |
 | Quality conformance roll-up | `reference-artifacts/analyses/quality-conformance` | what the current weighted quality picture looks like across all major categories |
 | Galaxian reference profile | `reference-artifacts/analyses/galaxian-reference/README.md` | source manifests, contact sheets, waveforms, promoted event log, and first scout-wave profile for Galaxy Guardians |
+
+## Emerging Intake Lines
+
+| Lineage | Local anchor | Current role |
+| --- | --- | --- |
+| Space Invaders / Windigo Invaders | `reference-artifacts/analyses/space-invaders-reference/README.md` | first preserved intake lane for the next planned Platinum sibling game; currently used to drive artifact collection, source-gap identification, and the first game-owned instantiation plan before runtime work begins |
 
 ## Supporting Comparative Archives
 

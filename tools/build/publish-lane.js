@@ -78,6 +78,8 @@ function ensurePublicPagesWorkflowCopiesReleaseDocs(repoDir){
   const requiredCopies = [
     '          cp conformance-dashboard.html _site/',
     '          cp conformance-dashboard-data.json _site/',
+    '          cp ingestion-dashboard.html _site/',
+    '          cp ingestion-dashboard-data.json _site/',
     '          cp public-project-page.html _site/',
     '          cp application-guide.html _site/',
     '          cp white-paper.html _site/',

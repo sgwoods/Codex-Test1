@@ -16,6 +16,8 @@ const DEV_BASE_FILES = Object.freeze([
   'application-guide.html',
   'platinum-guide.html',
   'player-guide.html',
+  'ingestion-dashboard.html',
+  'ingestion-dashboard-data.json',
   'build-info.json',
   'release-notes.json',
   'export.mov.png'

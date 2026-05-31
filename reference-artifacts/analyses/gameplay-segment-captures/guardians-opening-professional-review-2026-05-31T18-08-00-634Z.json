@@ -1,0 +1,353 @@
+{
+  "ok": true,
+  "artifactType": "gameplay-segment-capture",
+  "generatedAt": "2026-05-31T18:08:40.823Z",
+  "label": "guardians-opening-professional-review",
+  "comparisonId": null,
+  "variant": null,
+  "notes": "Galaxy Guardians opening review preset for the professional persona.",
+  "capture": {
+    "stage": 1,
+    "gameKey": "galaxy-guardians-preview",
+    "stageMode": "internal",
+    "startKind": "level",
+    "challenge": false,
+    "challengeStage": 3,
+    "ships": 3,
+    "persona": "professional",
+    "watchPersona": null,
+    "expertPlays": null,
+    "playerTwo": false,
+    "playerTwoPersona": null,
+    "seed": 9052,
+    "seconds": 24,
+    "preRoll": 0.15,
+    "warmup": 0.12,
+    "waitForActive": true,
+    "activeMinEnemies": 1,
+    "minStageClock": 0,
+    "maxWaitActive": 12,
+    "activePollMs": 150,
+    "fps": 60,
+    "viewport": {
+      "width": 960,
+      "height": 1280
+    },
+    "includeAudio": true,
+    "audioTrackCount": 1,
+    "audioDiagnostics": {
+      "requested": 1,
+      "contextStateBefore": "running",
+      "contextStateAfter": "running",
+      "tapAvailableBefore": true,
+      "tapAvailableAfter": true,
+      "trackStates": [
+        {
+          "kind": "audio",
+          "enabled": true,
+          "muted": false,
+          "readyState": "live"
+        }
+      ],
+      "warning": ""
+    },
+    "setup": "start"
+  },
+  "video": "reference-artifacts/analyses/gameplay-segment-captures/guardians-opening-professional-review-2026-05-31T18-08-00-634Z.review.webm",
+  "rawVideo": "reference-artifacts/analyses/gameplay-segment-captures/guardians-opening-professional-review-2026-05-31T18-08-00-634Z.webm",
+  "latestVideo": "reference-artifacts/analyses/gameplay-segment-captures/latest-guardians-opening-professional-review.webm",
+  "poster": "reference-artifacts/analyses/gameplay-segment-captures/guardians-opening-professional-review-2026-05-31T18-08-00-634Z.png",
+  "latestPoster": "reference-artifacts/analyses/gameplay-segment-captures/latest-guardians-opening-professional-review.png",
+  "contactSheet": "reference-artifacts/analyses/gameplay-segment-captures/guardians-opening-professional-review-2026-05-31T18-08-00-634Z-contact-sheet.jpg",
+  "latestContactSheet": "reference-artifacts/analyses/gameplay-segment-captures/latest-guardians-opening-professional-review-contact-sheet.jpg",
+  "byteLength": 5514880,
+  "mime": "video/webm;codecs=vp9,opus",
+  "videoAssessment": {
+    "file": "/Users/steven/Projects-All/Codex-Test1/reference-artifacts/analyses/gameplay-segment-captures/guardians-opening-professional-review-2026-05-31T18-08-00-634Z.review.webm",
+    "size": 5514880,
+    "expectedDuration": 24,
+    "formatDuration": 24.025,
+    "drift": 0.02499999999999858,
+    "videoStreams": [
+      {
+        "index": 0,
+        "codec_name": "vp9",
+        "codec_type": "video",
+        "start_time": "0.000000"
+      }
+    ],
+    "audioStreams": [
+      {
+        "index": 1,
+        "codec_name": "opus",
+        "codec_type": "audio",
+        "start_time": "0.024000"
+      }
+    ],
+    "stderr": "",
+    "issues": [],
+    "ok": true,
+    "sourceFile": "/Users/steven/Projects-All/Codex-Test1/reference-artifacts/analyses/gameplay-segment-captures/guardians-opening-professional-review-2026-05-31T18-08-00-634Z.webm",
+    "repaired": true,
+    "initialIssues": [
+      "missing_duration"
+    ],
+    "initialSize": 5516709,
+    "initialFormatDuration": 0
+  },
+  "contactSheetAssessment": {
+    "ok": true,
+    "file": "/Users/steven/Projects-All/Codex-Test1/reference-artifacts/analyses/gameplay-segment-captures/guardians-opening-professional-review-2026-05-31T18-08-00-634Z-contact-sheet.jpg"
+  },
+  "startState": null,
+  "captureStartActivity": {
+    "waitedMs": 1,
+    "timedOut": false,
+    "state": {
+      "started": 1,
+      "paused": 0,
+      "stage": 1,
+      "score": 0,
+      "lives": 3,
+      "challenge": false,
+      "recording": false,
+      "seed": 9052,
+      "simT": 0.133,
+      "stageClock": 0.133,
+      "persona": "professional",
+      "harnessPersona": "professional",
+      "watchMode": false,
+      "watchPersona": "",
+      "playerTwo": {
+        "enabled": false
+      },
+      "atmosphere": {
+        "id": "signal-rack",
+        "group": "guardians-preview",
+        "phase": "stage",
+        "backgroundMode": "classic-stars",
+        "audioTheme": "guardians-signal",
+        "starfield": {
+          "id": "guardians-signal-stars",
+          "count": 116,
+          "alphaMin": 0.34,
+          "alphaMax": 0.92
+        }
+      },
+      "visualAtmosphere": {
+        "id": "signal-rack",
+        "group": "guardians-preview",
+        "phase": "stage",
+        "backgroundMode": "classic-stars",
+        "audioTheme": "guardians-signal",
+        "overrideThemeId": "signal-rack",
+        "starfield": {
+          "id": "guardians-signal-stars",
+          "count": 116,
+          "alphaMin": 0.34,
+          "alphaMax": 0.92
+        }
+      },
+      "stagePresentation": {
+        "id": "signal-rack",
+        "atmosphereTheme": "signal-rack",
+        "backgroundMode": "classic-stars"
+      },
+      "audioCue": {
+        "cue": "gameStart",
+        "atmosphereId": "signal-rack",
+        "audioTheme": "guardians-signal",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "stage": 1,
+        "challenge": false,
+        "at": 1.679
+      },
+      "renderDebug": {
+        "backgroundMode": "guardians-dev-preview",
+        "starfieldProfile": "guardians-signal-stars",
+        "starfieldCount": 116,
+        "starfieldIntensityScale": 1.25,
+        "starfieldSpeedScale": 1,
+        "spriteRenderMode": "auto",
+        "referencePixelSprites": false,
+        "playerBounds": {
+          "left": 5.48,
+          "right": 20.52,
+          "top": 328.42,
+          "bottom": 341.58
+        },
+        "reserveShipBounds": [
+          {
+            "left": 5.833600000000001,
+            "right": 18.1664,
+            "top": 346.6044,
+            "bottom": 357.3956
+          },
+          {
+            "left": 23.8336,
+            "right": 36.166399999999996,
+            "top": 346.6044,
+            "bottom": 357.3956
+          }
+        ]
+      },
+      "graphics": {
+        "graphicsTheme": "aurora-borealis",
+        "spriteRenderMode": "auto",
+        "starfieldIntensity": 1.25,
+        "starfieldSpeed": 1
+      },
+      "audio": {
+        "audioTheme": "auto"
+      },
+      "extend": {
+        "first": 0,
+        "recurring": 0,
+        "next": 0,
+        "awards": 0,
+        "flashT": 0,
+        "flashShips": 0
+      }
+    },
+    "challenge": false,
+    "stage": 1,
+    "stageClock": 0.133,
+    "score": 0,
+    "visibleEnemyCount": 1,
+    "challengeVisibleEnemyCount": 0,
+    "formationVisibleEnemyCount": 1,
+    "stageClockReady": true,
+    "stillCorrectWindow": true,
+    "active": true
+  },
+  "finalState": {
+    "started": 1,
+    "paused": 0,
+    "stage": 1,
+    "score": 460,
+    "lives": 2,
+    "challenge": false,
+    "recording": false,
+    "seed": 9052,
+    "simT": 24.217,
+    "stageClock": 24.217,
+    "persona": "professional",
+    "harnessPersona": "professional",
+    "watchMode": false,
+    "watchPersona": "",
+    "playerTwo": {
+      "enabled": false
+    },
+    "atmosphere": {
+      "id": "signal-rack",
+      "group": "guardians-preview",
+      "phase": "stage",
+      "backgroundMode": "classic-stars",
+      "audioTheme": "guardians-signal",
+      "starfield": {
+        "id": "guardians-signal-stars",
+        "count": 116,
+        "alphaMin": 0.34,
+        "alphaMax": 0.92
+      }
+    },
+    "visualAtmosphere": {
+      "id": "signal-rack",
+      "group": "guardians-preview",
+      "phase": "stage",
+      "backgroundMode": "classic-stars",
+      "audioTheme": "guardians-signal",
+      "overrideThemeId": "signal-rack",
+      "starfield": {
+        "id": "guardians-signal-stars",
+        "count": 116,
+        "alphaMin": 0.34,
+        "alphaMax": 0.92
+      }
+    },
+    "stagePresentation": {
+      "id": "signal-rack",
+      "atmosphereTheme": "signal-rack",
+      "backgroundMode": "classic-stars"
+    },
+    "audioCue": {
+      "cue": "stagePulse",
+      "atmosphereId": "signal-rack",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 1,
+      "challenge": false,
+      "at": 25.412
+    },
+    "renderDebug": {
+      "backgroundMode": "guardians-dev-preview",
+      "starfieldProfile": "guardians-signal-stars",
+      "starfieldCount": 116,
+      "starfieldIntensityScale": 1.25,
+      "starfieldSpeedScale": 1,
+      "spriteRenderMode": "auto",
+      "referencePixelSprites": false,
+      "playerBounds": {
+        "left": 5.48,
+        "right": 20.52,
+        "top": 328.42,
+        "bottom": 341.58
+      },
+      "reserveShipBounds": [
+        {
+          "left": 5.833600000000001,
+          "right": 18.1664,
+          "top": 346.6044,
+          "bottom": 357.3956
+        },
+        {
+          "left": 23.8336,
+          "right": 36.166399999999996,
+          "top": 346.6044,
+          "bottom": 357.3956
+        }
+      ]
+    },
+    "graphics": {
+      "graphicsTheme": "aurora-borealis",
+      "spriteRenderMode": "auto",
+      "starfieldIntensity": 1.25,
+      "starfieldSpeed": 1
+    },
+    "audio": {
+      "audioTheme": "auto"
+    },
+    "extend": {
+      "first": 0,
+      "recurring": 0,
+      "next": 0,
+      "awards": 0,
+      "flashT": 0,
+      "flashShips": 0
+    }
+  },
+  "formationState": {
+    "stage": 1,
+    "challenge": false,
+    "layoutId": "",
+    "enemyCount": 0,
+    "referencePathGroups": 0,
+    "activeReferenceTrackedEnemies": 0,
+    "referenceTrackIds": []
+  },
+  "reviewFocus": [
+    "Use these clips for human-visible before/after review of movement, graphics, stage pacing, persona behavior, and audio feel.",
+    "Pair captures with the same seed/start/persona settings when comparing candidates.",
+    "For challenge-stage conformance, prefer startKind=challenge plus challengeStage=N so the public display label stays aligned with the internal stage marker.",
+    "By default, recording waits until player-visible enemies are active; pass --wait-for-active=0 when the transition or blank/setup time is the intended evidence window."
+  ],
+  "warnings": []
+}

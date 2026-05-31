@@ -45,6 +45,8 @@ function laneConfig(lane){
       assetUrls: [
         'https://sgwoods.github.io/Aurora-Galactica/dev/conformance-dashboard.html',
         'https://sgwoods.github.io/Aurora-Galactica/dev/conformance-dashboard-data.json',
+        'https://sgwoods.github.io/Aurora-Galactica/dev/ingestion-dashboard.html',
+        'https://sgwoods.github.io/Aurora-Galactica/dev/ingestion-dashboard-data.json',
         'https://sgwoods.github.io/Aurora-Galactica/dev/application-guide.html',
         'https://sgwoods.github.io/Aurora-Galactica/dev/releases.html',
         'https://sgwoods.github.io/Aurora-Galactica/dev/white-paper.html',
@@ -70,6 +72,8 @@ function laneConfig(lane){
       assetUrls: [
         'https://sgwoods.github.io/Aurora-Galactica/beta/conformance-dashboard.html',
         'https://sgwoods.github.io/Aurora-Galactica/beta/conformance-dashboard-data.json',
+        'https://sgwoods.github.io/Aurora-Galactica/beta/ingestion-dashboard.html',
+        'https://sgwoods.github.io/Aurora-Galactica/beta/ingestion-dashboard-data.json',
         'https://sgwoods.github.io/Aurora-Galactica/beta/application-guide.html',
         'https://sgwoods.github.io/Aurora-Galactica/beta/releases.html',
         'https://sgwoods.github.io/Aurora-Galactica/beta/white-paper.html',
@@ -95,6 +99,8 @@ function laneConfig(lane){
       assetUrls: [
         'https://sgwoods.github.io/Aurora-Galactica/conformance-dashboard.html',
         'https://sgwoods.github.io/Aurora-Galactica/conformance-dashboard-data.json',
+        'https://sgwoods.github.io/Aurora-Galactica/ingestion-dashboard.html',
+        'https://sgwoods.github.io/Aurora-Galactica/ingestion-dashboard-data.json',
         'https://sgwoods.github.io/Aurora-Galactica/application-guide.html',
         'https://sgwoods.github.io/Aurora-Galactica/white-paper.html',
         'https://sgwoods.github.io/Aurora-Galactica/white-paper.pdf',

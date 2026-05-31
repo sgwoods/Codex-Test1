@@ -1,0 +1,725 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "gameLabel": "Galaxy Guardians 0.1 Preview",
+  "artifactType": "platinum-audio-scene-review",
+  "version": "0.1-dev-preview",
+  "createdOn": "2026-05-31",
+  "status": "runtime-scene-audio-review",
+  "generatedBy": "tools/harness/analyze-platinum-audio-scene-review.js",
+  "sourceEvidence": {
+    "gameplayCaptureDir": "reference-artifacts/analyses/gameplay-segment-captures",
+    "scenePlan": "GUARDIANS_AUDIO_CONFORMANCE_SPRINT_PLAN_2026-05-31.md",
+    "note": "This artifact persists target gameplay sound scenes so tuning and headed listening can compare lived windows instead of isolated cues only."
+  },
+  "summary": {
+    "sceneCount": 6,
+    "captureLabels": [
+      "guardians-opening-professional-review",
+      "guardians-stage5-professional-review"
+    ],
+    "weakestByCueDensity": "player-loss-read",
+    "strongestByCueDensity": "midrun-stage5-pressure",
+    "reusablePlatformRead": "The scene-review layer is game-configured and can be extended for a third Platinum game by registering capture labels and scene anchors."
+  },
+  "scenes": [
+    {
+      "id": "launch-rack-establish",
+      "title": "Launch / Rack Establish",
+      "captureLabel": "guardians-opening-professional-review",
+      "captureReport": "reference-artifacts/analyses/gameplay-segment-captures/latest-guardians-opening-professional-review.json",
+      "targetRead": "The start chirp should hand off quickly into a living rack cadence instead of dead air.",
+      "reference": {
+        "sourceId": "galaxians-ex12mins",
+        "windowLabel": "opening rack establish and restart cadence"
+      },
+      "runtime": {
+        "startSeconds": 0,
+        "endSeconds": 1.633,
+        "durationSeconds": 1.633,
+        "waveform": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/launch-rack-establish-runtime-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/launch-rack-establish-runtime-spectrogram.png",
+        "metrics": {
+          "durationSeconds": 1.604,
+          "rms": 0.00044,
+          "peak": 0.00751,
+          "zeroCrossingsPerSecond": 185.2,
+          "zeroCrossingFrequencyProxyHz": 92.6,
+          "burstFrameShare": 0.04,
+          "envelopeContrast": 10.069,
+          "decayRatio": 1.518,
+          "attackPeakPosition": 0.54,
+          "frameRmsP10": 0.00012,
+          "frameRmsP50": 0.00025,
+          "frameRmsP90": 0.00032
+        },
+        "eventSummary": {
+          "eventCount": 6,
+          "cueEventCount": 5,
+          "eventTypes": [
+            "audio_cue",
+            "game_start"
+          ],
+          "cues": [
+            "gameStart",
+            "playerShot",
+            "scoutHit",
+            "stagePulse"
+          ],
+          "firstEvents": [
+            {
+              "t": 0,
+              "type": "game_start",
+              "gameKey": "galaxy-guardians-preview",
+              "devPreview": 1,
+              "persona": "professional",
+              "maxPlayableStage": 1
+            },
+            {
+              "t": 0,
+              "type": "audio_cue",
+              "cue": "gameStart",
+              "atmosphereId": "signal-rack",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 1
+            },
+            {
+              "t": 0.133,
+              "type": "audio_cue",
+              "cue": "playerShot",
+              "atmosphereId": "signal-rack",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 1
+            },
+            {
+              "t": 1.083,
+              "type": "audio_cue",
+              "cue": "stagePulse",
+              "atmosphereId": "signal-rack",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 1
+            },
+            {
+              "t": 1.1,
+              "type": "audio_cue",
+              "cue": "scoutHit",
+              "atmosphereId": "signal-rack",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 1
+            },
+            {
+              "t": 1.117,
+              "type": "audio_cue",
+              "cue": "playerShot",
+              "atmosphereId": "signal-rack",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "first-independent-dive-pressure",
+      "title": "First Independent Dive Pressure",
+      "captureLabel": "guardians-opening-professional-review",
+      "captureReport": "reference-artifacts/analyses/gameplay-segment-captures/latest-guardians-opening-professional-review.json",
+      "targetRead": "The first real attack should sound like pressure arriving, not one isolated chirp over a quiet board.",
+      "reference": {
+        "sourceId": "arcades-lounge-level-5",
+        "windowLabel": "early dive and lower-field pressure arrival"
+      },
+      "runtime": {
+        "startSeconds": 2.43,
+        "endSeconds": 3.65,
+        "durationSeconds": 1.22,
+        "waveform": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/first-independent-dive-pressure-runtime-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/first-independent-dive-pressure-runtime-spectrogram.png",
+        "metrics": {
+          "durationSeconds": 1.218,
+          "rms": 0.0005,
+          "peak": 0.02136,
+          "zeroCrossingsPerSecond": 220.9,
+          "zeroCrossingFrequencyProxyHz": 110.4,
+          "burstFrameShare": 0.085,
+          "envelopeContrast": 6.381,
+          "decayRatio": 0.847,
+          "attackPeakPosition": 0.98,
+          "frameRmsP10": 0.00013,
+          "frameRmsP50": 0.00027,
+          "frameRmsP90": 0.00048
+        },
+        "eventSummary": {
+          "eventCount": 3,
+          "cueEventCount": 3,
+          "eventTypes": [
+            "audio_cue"
+          ],
+          "cues": [
+            "scoutDive",
+            "scoutHit",
+            "stagePulse"
+          ],
+          "firstEvents": [
+            {
+              "t": 2.55,
+              "type": "audio_cue",
+              "cue": "scoutDive",
+              "atmosphereId": "signal-rack",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 1
+            },
+            {
+              "t": 3.05,
+              "type": "audio_cue",
+              "cue": "stagePulse",
+              "atmosphereId": "signal-rack",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 1
+            },
+            {
+              "t": 3.183,
+              "type": "audio_cue",
+              "cue": "scoutHit",
+              "atmosphereId": "signal-rack",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "flagship-escort-warning",
+      "title": "Flagship / Escort Warning",
+      "captureLabel": "guardians-opening-professional-review",
+      "captureReport": "reference-artifacts/analyses/gameplay-segment-captures/latest-guardians-opening-professional-review.json",
+      "targetRead": "The command dive should feel larger than a scout dive and should clearly telegraph escort pressure.",
+      "reference": {
+        "sourceId": "nenriki-15-wave-session",
+        "windowLabel": "flagship-plus-escort warning pass"
+      },
+      "runtime": {
+        "startSeconds": 6.51,
+        "endSeconds": 7.2,
+        "durationSeconds": 0.69,
+        "waveform": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/flagship-escort-warning-runtime-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/flagship-escort-warning-runtime-spectrogram.png",
+        "metrics": {
+          "durationSeconds": 0.691,
+          "rms": 0.00084,
+          "peak": 0.00681,
+          "zeroCrossingsPerSecond": 739.5,
+          "zeroCrossingFrequencyProxyHz": 369.7,
+          "burstFrameShare": 0.172,
+          "envelopeContrast": 4.948,
+          "decayRatio": 0.473,
+          "attackPeakPosition": 0.163,
+          "frameRmsP10": 0.00016,
+          "frameRmsP50": 0.00032,
+          "frameRmsP90": 0.00135
+        },
+        "eventSummary": {
+          "eventCount": 6,
+          "cueEventCount": 6,
+          "eventTypes": [
+            "audio_cue"
+          ],
+          "cues": [
+            "escortJoin",
+            "flagshipDive",
+            "playerShot",
+            "scoutDive",
+            "stagePulse",
+            "wrapReturn"
+          ],
+          "firstEvents": [
+            {
+              "t": 6.517,
+              "type": "audio_cue",
+              "cue": "scoutDive",
+              "atmosphereId": "signal-rack",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 1
+            },
+            {
+              "t": 6.65,
+              "type": "audio_cue",
+              "cue": "flagshipDive",
+              "atmosphereId": "signal-rack",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 1
+            },
+            {
+              "t": 6.65,
+              "type": "audio_cue",
+              "cue": "escortJoin",
+              "atmosphereId": "signal-rack",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 1
+            },
+            {
+              "t": 6.85,
+              "type": "audio_cue",
+              "cue": "playerShot",
+              "atmosphereId": "signal-rack",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 1
+            },
+            {
+              "t": 6.883,
+              "type": "audio_cue",
+              "cue": "wrapReturn",
+              "atmosphereId": "signal-rack",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 1
+            },
+            {
+              "t": 6.983,
+              "type": "audio_cue",
+              "cue": "stagePulse",
+              "atmosphereId": "signal-rack",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "opening-hit-payoff",
+      "title": "Opening Hit / Score Payoff",
+      "captureLabel": "guardians-opening-professional-review",
+      "captureReport": "reference-artifacts/analyses/gameplay-segment-captures/latest-guardians-opening-professional-review.json",
+      "targetRead": "Successful shots should feel rewarding and final enough to read as real arcade feedback in live play.",
+      "reference": {
+        "sourceId": "arcades-lounge-level-5",
+        "windowLabel": "opening hit confirmation and payoff moment"
+      },
+      "runtime": {
+        "startSeconds": 1.02,
+        "endSeconds": 1.48,
+        "durationSeconds": 0.46,
+        "waveform": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/opening-hit-payoff-runtime-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/opening-hit-payoff-runtime-spectrogram.png",
+        "metrics": {
+          "durationSeconds": 0.46,
+          "rms": 0.00024,
+          "peak": 0.00034,
+          "zeroCrossingsPerSecond": 45.7,
+          "zeroCrossingFrequencyProxyHz": 22.8,
+          "burstFrameShare": 0.293,
+          "envelopeContrast": 1.425,
+          "decayRatio": 1.017,
+          "attackPeakPosition": 1,
+          "frameRmsP10": 0.00013,
+          "frameRmsP50": 0.00026,
+          "frameRmsP90": 0.00032
+        },
+        "eventSummary": {
+          "eventCount": 3,
+          "cueEventCount": 3,
+          "eventTypes": [
+            "audio_cue"
+          ],
+          "cues": [
+            "playerShot",
+            "scoutHit",
+            "stagePulse"
+          ],
+          "firstEvents": [
+            {
+              "t": 1.083,
+              "type": "audio_cue",
+              "cue": "stagePulse",
+              "atmosphereId": "signal-rack",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 1
+            },
+            {
+              "t": 1.1,
+              "type": "audio_cue",
+              "cue": "scoutHit",
+              "atmosphereId": "signal-rack",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 1
+            },
+            {
+              "t": 1.117,
+              "type": "audio_cue",
+              "cue": "playerShot",
+              "atmosphereId": "signal-rack",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "player-loss-read",
+      "title": "Player Loss Read",
+      "captureLabel": "guardians-opening-professional-review",
+      "captureReport": "reference-artifacts/analyses/gameplay-segment-captures/latest-guardians-opening-professional-review.json",
+      "targetRead": "A ship loss should be unmistakable and feel more emotionally final than normal hit feedback.",
+      "reference": {
+        "sourceId": "nenriki-15-wave-session",
+        "windowLabel": "player loss and failure punctuation"
+      },
+      "runtime": {
+        "startSeconds": 17.077,
+        "endSeconds": 17.967,
+        "durationSeconds": 0.89,
+        "waveform": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/player-loss-read-runtime-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/player-loss-read-runtime-spectrogram.png",
+        "metrics": {
+          "durationSeconds": 0.892,
+          "rms": 0.00038,
+          "peak": 0.00357,
+          "zeroCrossingsPerSecond": 193.9,
+          "zeroCrossingFrequencyProxyHz": 97,
+          "burstFrameShare": 0.045,
+          "envelopeContrast": 7.518,
+          "decayRatio": 0.695,
+          "attackPeakPosition": 0.045,
+          "frameRmsP10": 0.00012,
+          "frameRmsP50": 0.00026,
+          "frameRmsP90": 0.00032
+        },
+        "eventSummary": {
+          "eventCount": 2,
+          "cueEventCount": 2,
+          "eventTypes": [
+            "audio_cue"
+          ],
+          "cues": [
+            "escortHit",
+            "playerLoss"
+          ],
+          "firstEvents": [
+            {
+              "t": 17.117,
+              "type": "audio_cue",
+              "cue": "escortHit",
+              "atmosphereId": "signal-rack",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 1
+            },
+            {
+              "t": 17.217,
+              "type": "audio_cue",
+              "cue": "playerLoss",
+              "atmosphereId": "signal-rack",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "midrun-stage5-pressure",
+      "title": "Midrun Stage 5 Pressure",
+      "captureLabel": "guardians-stage5-professional-review",
+      "captureReport": "reference-artifacts/analyses/gameplay-segment-captures/latest-guardians-stage5-professional-review.json",
+      "targetRead": "Stage-five pressure should sound denser and more insistent than the opening board without collapsing into clutter.",
+      "reference": {
+        "sourceId": "arcades-lounge-level-5",
+        "windowLabel": "mid-wave pressure bed and shot/dive layering"
+      },
+      "runtime": {
+        "startSeconds": 2.15,
+        "endSeconds": 6.483,
+        "durationSeconds": 4.333,
+        "waveform": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/midrun-stage5-pressure-runtime-waveform.png",
+        "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/midrun-stage5-pressure-runtime-spectrogram.png",
+        "metrics": {
+          "durationSeconds": 4.333,
+          "rms": 0.00065,
+          "peak": 0.05701,
+          "zeroCrossingsPerSecond": 448.9,
+          "zeroCrossingFrequencyProxyHz": 224.4,
+          "burstFrameShare": 0.122,
+          "envelopeContrast": 13.214,
+          "decayRatio": 1.093,
+          "attackPeakPosition": 0.185,
+          "frameRmsP10": 0.00013,
+          "frameRmsP50": 0.00028,
+          "frameRmsP90": 0.00099
+        },
+        "eventSummary": {
+          "eventCount": 14,
+          "cueEventCount": 14,
+          "eventTypes": [
+            "audio_cue"
+          ],
+          "cues": [
+            "enemyShot",
+            "escortJoin",
+            "flagshipDive",
+            "scoutDive",
+            "scoutHit",
+            "stagePulse",
+            "wrapReturn"
+          ],
+          "firstEvents": [
+            {
+              "t": 2.25,
+              "type": "audio_cue",
+              "cue": "scoutDive",
+              "atmosphereId": "escort-pursuit",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 5
+            },
+            {
+              "t": 2.517,
+              "type": "audio_cue",
+              "cue": "enemyShot",
+              "atmosphereId": "escort-pursuit",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 5
+            },
+            {
+              "t": 2.733,
+              "type": "audio_cue",
+              "cue": "stagePulse",
+              "atmosphereId": "escort-pursuit",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 5
+            },
+            {
+              "t": 3.183,
+              "type": "audio_cue",
+              "cue": "scoutHit",
+              "atmosphereId": "escort-pursuit",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 5
+            },
+            {
+              "t": 3.667,
+              "type": "audio_cue",
+              "cue": "scoutDive",
+              "atmosphereId": "escort-pursuit",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 5
+            },
+            {
+              "t": 3.867,
+              "type": "audio_cue",
+              "cue": "enemyShot",
+              "atmosphereId": "escort-pursuit",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 5
+            },
+            {
+              "t": 4.383,
+              "type": "audio_cue",
+              "cue": "stagePulse",
+              "atmosphereId": "escort-pursuit",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 5
+            },
+            {
+              "t": 5.167,
+              "type": "audio_cue",
+              "cue": "enemyShot",
+              "atmosphereId": "escort-pursuit",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 5
+            },
+            {
+              "t": 5.45,
+              "type": "audio_cue",
+              "cue": "scoutDive",
+              "atmosphereId": "escort-pursuit",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 5
+            },
+            {
+              "t": 6,
+              "type": "audio_cue",
+              "cue": "flagshipDive",
+              "atmosphereId": "escort-pursuit",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 5
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "nextUse": "Listen scene by scene against the promoted reference windows, then retune only the cue families and cadence points that fail the lived-scene read."
+}
