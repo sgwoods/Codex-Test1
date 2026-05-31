@@ -394,7 +394,8 @@ function dashboardStyles(){
     .huntGrid,
     .docGrid,
     .familyGrid,
-    .previewGrid{
+    .previewGrid,
+    .checklistGrid{
       display:grid;
       gap:14px;
     }
@@ -409,7 +410,8 @@ function dashboardStyles(){
     .docCard,
     .familyCard,
     .huntCard,
-    .previewCard{
+    .previewCard,
+    .checklistCard{
       padding:16px 18px;
       border:1px solid var(--line);
       border-radius:18px;
@@ -422,7 +424,8 @@ function dashboardStyles(){
     .docCard strong,
     .familyCard strong,
     .huntCard strong,
-    .previewCard strong{
+    .previewCard strong,
+    .checklistCard strong{
       display:block;
       margin-bottom:8px;
     }
@@ -441,7 +444,8 @@ function dashboardStyles(){
     .planGrid,
     .docGrid,
     .familyGrid,
-    .previewGrid{
+    .previewGrid,
+    .checklistGrid{
       grid-template-columns:repeat(2, minmax(0,1fr));
       margin-top:18px;
     }
@@ -481,6 +485,22 @@ function dashboardStyles(){
       border:1px solid rgba(124,182,255,0.14);
       background:#07111f;
     }
+    .detailLabel{
+      display:inline-flex;
+      align-items:center;
+      margin-top:12px;
+      margin-bottom:8px;
+      color:var(--gold);
+      font-size:12px;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+    }
+    .microCopy{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:0.94rem;
+      line-height:1.55;
+    }
     .metaBar{
       display:flex;
       flex-wrap:wrap;
@@ -516,7 +536,8 @@ function dashboardStyles(){
       .planGrid,
       .docGrid,
       .familyGrid,
-      .previewGrid{
+      .previewGrid,
+      .checklistGrid{
         grid-template-columns:1fr 1fr;
       }
       .dashboardLayout{
@@ -540,7 +561,8 @@ function dashboardStyles(){
       .planGrid,
       .docGrid,
       .familyGrid,
-      .previewGrid{
+      .previewGrid,
+      .checklistGrid{
         grid-template-columns:1fr;
       }
       h1{
@@ -669,12 +691,30 @@ function dashboardScript(){
       }
 
       function renderGaps(game){
-        gapGrid.innerHTML = (game.nextArtifacts || []).map((item) => \`
-          <article class="huntCard">
-            <strong>Needed artifact</strong>
-            <span>\${escapeHtml(item)}</span>
-          </article>
-        \`).join('');
+        gapGrid.innerHTML = (game.nextArtifacts || []).map((item) => {
+          if(typeof item === 'string'){
+            return \`
+              <article class="huntCard">
+                <strong>Needed artifact</strong>
+                <span>\${escapeHtml(item)}</span>
+              </article>
+            \`;
+          }
+          return \`
+            <article class="huntCard">
+              <strong>\${escapeHtml(item.title || 'Needed artifact')}</strong>
+              \${item.priority ? \`<span class="detailLabel">Priority \${escapeHtml(item.priority)}</span>\` : ''}
+              <span>\${escapeHtml(item.why || '')}</span>
+              \${Array.isArray(item.find) && item.find.length ? \`
+                <span class="detailLabel">Go find</span>
+                <ul class="simpleList">
+                  \${item.find.map((entry) => \`<li>\${escapeHtml(entry)}</li>\`).join('')}
+                </ul>
+              \` : ''}
+              \${item.goodEnough ? \`<div class="microCopy"><strong>Good enough to proceed:</strong> \${escapeHtml(item.goodEnough)}</div>\` : ''}
+            </article>
+          \`;
+        }).join('');
       }
 
       function renderPreviews(game){
@@ -735,6 +775,21 @@ function dashboardScript(){
           <article class="familyCard">
             <strong>\${escapeHtml(item.label || '')}</strong>
             <span>\${escapeHtml(item.detail || '')}</span>
+            \${item.why ? \`<div class="microCopy"><strong>Why it matters:</strong> \${escapeHtml(item.why)}</div>\` : ''}
+            \${Array.isArray(item.examples) && item.examples.length ? \`
+              <span class="detailLabel">Examples to find</span>
+              <ul class="simpleList">
+                \${item.examples.map((entry) => \`<li>\${escapeHtml(entry)}</li>\`).join('')}
+              </ul>
+            \` : ''}
+            \${item.minimum ? \`<div class="microCopy"><strong>Good enough to start:</strong> \${escapeHtml(item.minimum)}</div>\` : ''}
+          </article>
+        \`).join('');
+        document.getElementById('minimumChecklist').innerHTML = (data.minimumIntakeChecklist || []).map((item) => \`
+          <article class="checklistCard">
+            <strong>\${escapeHtml(item.title || '')}</strong>
+            <span>\${escapeHtml(item.why || '')}</span>
+            \${item.goodEnough ? \`<div class="microCopy"><strong>Good enough to proceed:</strong> \${escapeHtml(item.goodEnough)}</div>\` : ''}
           </article>
         \`).join('');
         document.getElementById('platformExtensions').innerHTML = (data.platformExtensions || []).map((item) => \`
@@ -921,9 +976,16 @@ function buildIngestionDashboardHtml(data, options = {}){
         <section class="panel viewSection">
           <div class="panelHeader">
             <h2>Artifact Families To Seek</h2>
-            <p class="sectionIntro">The dashboard should help us notice what is missing before we build. These are the current artifact families that matter most for accurate game ingestion.</p>
+            <p class="sectionIntro">The dashboard should help us notice what is missing before we build. These cards tell us what to find, why it matters, and what counts as enough evidence to start responsibly.</p>
           </div>
           <div id="processFamilies" class="familyGrid"></div>
+        </section>
+        <section class="panel viewSection">
+          <div class="panelHeader">
+            <h2>Minimum Intake Checklist</h2>
+            <p class="sectionIntro">If we are starting a new game line, this is the smallest artifact bundle we should try to assemble before serious runtime design begins.</p>
+          </div>
+          <div id="minimumChecklist" class="checklistGrid"></div>
         </section>
         <section class="panel viewSection">
           <div class="panelHeader">

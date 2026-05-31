@@ -68,27 +68,98 @@
   "artifactFamilies": [
     {
       "label": "Gameplay video",
-      "detail": "Longplay, attract, operator, and targeted scenario windows with clear provenance and usable audio."
+      "detail": "Longplay, attract, operator, and targeted scenario windows with clear provenance and usable audio.",
+      "why": "This is the main source for enemy movement, player pacing, score behavior, wave progression, and audio-event timing.",
+      "examples": [
+        "One full or near-full longplay with original audio",
+        "One attract-mode or title/start sequence clip",
+        "One focused clip showing a single stage or scenario clearly"
+      ],
+      "minimum": "Enough to see the first 2-3 minutes clearly, hear real game audio, and study at least one representative stress window."
     },
     {
       "label": "Manuals and rule documents",
-      "detail": "Operator sheets, score tables, cabinet docs, and written descriptions of mechanics and progression."
+      "detail": "Operator sheets, score tables, cabinet docs, and written descriptions of mechanics and progression.",
+      "why": "These stop us from guessing scoring, bonus rules, player counts, lives, progression, and cabinet-facing messaging.",
+      "examples": [
+        "Operator manual PDF or scans",
+        "Scoring table page",
+        "Written gameplay overview from a reliable arcade reference"
+      ],
+      "minimum": "At least one trustworthy source for score values and one source for rules or operator-facing setup."
     },
     {
       "label": "Still-image references",
-      "detail": "Cabinet, bezel, title, score-table, sprite-family, cannon/ship, bunker, and HUD references."
+      "detail": "Cabinet, bezel, title, score-table, sprite-family, cannon/ship, bunker, and HUD references.",
+      "why": "Still images let us study visual identity without motion blur and are usually the fastest way to verify UI, sprite families, colors, and cabinet framing.",
+      "examples": [
+        "Title/start screen still",
+        "HUD or score-table still",
+        "Cabinet/bezel/marquee art",
+        "Clear sprite-family captures"
+      ],
+      "minimum": "At least one clear title/HUD image plus one image set covering the main player and enemy families."
     },
     {
       "label": "Audio references",
-      "detail": "Isolated or cleaner windows for cue identity, tempo, density, and game-event timing."
+      "detail": "Isolated or cleaner windows for cue identity, tempo, density, and game-event timing.",
+      "why": "Gameplay audio quality depends on hearing what happens between events, not just proving that a cue exists.",
+      "examples": [
+        "Clean start or game-over phrase",
+        "Repeated fire and hit windows",
+        "Pressure or march loop windows with minimal commentary"
+      ],
+      "minimum": "At least one usable start/end phrase and one representative live-play scene with real pressure and fire density."
     },
     {
       "label": "Semantic timing windows",
-      "detail": "Event-labeled clips for start, fire, hit, descent, failure, transition, and results moments."
+      "detail": "Event-labeled clips for start, fire, hit, descent, failure, transition, and results moments.",
+      "why": "These become the contract slices we tune against when timing, pacing, or transitions drift.",
+      "examples": [
+        "Game start-to-control handoff",
+        "First enemy descent or pressure moment",
+        "Player death or game-over sequence",
+        "Score/bonus reveal moment"
+      ],
+      "minimum": "At least 4-6 labeled clips covering start, pressure, hit, loss, and end-state behavior."
     },
     {
       "label": "Runtime correspondence captures",
-      "detail": "Persona-driven or manual recordings from Platinum that can be reviewed against the reference set."
+      "detail": "Persona-driven or manual recordings from Platinum that can be reviewed against the reference set.",
+      "why": "Without Platinum-side comparison captures, we can’t tell whether the implementation is getting closer or merely changing.",
+      "examples": [
+        "Manual headed review clip",
+        "Persona-driven opening slice capture",
+        "Stress-window capture from deeper play"
+      ],
+      "minimum": "At least one manual and one harness-driven capture once runtime work begins."
+    }
+  ],
+  "minimumIntakeChecklist": [
+    {
+      "title": "One authoritative longplay video",
+      "why": "Needed to anchor pacing, wave structure, scoring rhythm, and live soundscape.",
+      "goodEnough": "A preserved source package with checksum, manifest, contact sheet, and waveform."
+    },
+    {
+      "title": "One rules or operator source",
+      "why": "Needed to keep lives, scoring, player count, and progression from becoming guesswork.",
+      "goodEnough": "A manual page, operator sheet, or high-confidence rules page saved into the repo."
+    },
+    {
+      "title": "One score-table source",
+      "why": "Needed to define exact hit values, bonus structure, and any special scoring behavior.",
+      "goodEnough": "A still or document source with readable values and enough provenance to trust it."
+    },
+    {
+      "title": "One visual identity set",
+      "why": "Needed to establish title, HUD, sprite families, player ship/cannon, and cabinet-facing presentation.",
+      "goodEnough": "A small bundle of readable stills covering title, HUD, main enemies, and player object."
+    },
+    {
+      "title": "One event-labeled timing bundle",
+      "why": "Needed so the first runtime slice can target real start, pressure, hit, loss, and end-state windows.",
+      "goodEnough": "A short set of named clips or notes pointing to exact timestamps in preserved video."
     }
   ],
   "globalDocs": [
@@ -227,9 +298,36 @@
         }
       ],
       "nextArtifacts": [
-        "More exact challenge-stage set-piece windows",
-        "Stronger motion-reference windows for flap cadence and challenge novelty",
-        "Better boss and explosion lifecycle visual references"
+        {
+          "title": "More exact challenge-stage set-piece windows",
+          "priority": "High",
+          "why": "Challenge stages are still Aurora's clearest user-facing weakness and need better source windows before more tuning.",
+          "find": [
+            "Short clips showing full challenge open, enemy traversal, and result hold",
+            "Windows where novelty and spectacle are easy to compare"
+          ],
+          "goodEnough": "At least one clean labeled clip for each challenge family currently being tuned."
+        },
+        {
+          "title": "Stronger motion-reference windows for flap cadence and challenge novelty",
+          "priority": "High",
+          "why": "Aurora still needs better motion truth for bee/butterfly feel and challenge spectacle.",
+          "find": [
+            "Clear sprite-family motion windows",
+            "Reference slices with readable flap timing and spacing"
+          ],
+          "goodEnough": "Enough windows to compare cadence frame-to-frame without relying on memory."
+        },
+        {
+          "title": "Better boss and explosion lifecycle visual references",
+          "priority": "Medium",
+          "why": "Impact and explosion feedback remains the weakest broad artifact row.",
+          "find": [
+            "Boss-hit and destruction stills or clips",
+            "Explosion progression windows with visible onset and decay"
+          ],
+          "goodEnough": "At least one readable impact sequence and one full boss-destruction sequence."
+        }
       ],
       "previews": []
     },
@@ -350,10 +448,46 @@
         }
       ],
       "nextArtifacts": [
-        "Cleaner isolated Galaxian cabinet audio windows",
-        "More stage-five-and-beyond professional review captures",
-        "Direct alien pulse and flap reference windows",
-        "Additional score-popup and hit-value reference windows"
+        {
+          "title": "Cleaner isolated Galaxian cabinet audio windows",
+          "priority": "High",
+          "why": "Guardians now has decent cue coverage, but still needs more source-faithful acoustic match.",
+          "find": [
+            "Start, fire, hit, dive, loss, and game-over phrases with minimal commentary",
+            "Live-play scenes where recurring pressure is audible"
+          ],
+          "goodEnough": "One promoted window per major cue family plus one good live pressure scene."
+        },
+        {
+          "title": "More stage-five-and-beyond professional review captures",
+          "priority": "High",
+          "why": "The weakest remaining gameplay gap is deeper-play survivability and fairness.",
+          "find": [
+            "Persona-driven stage 5+ captures",
+            "Manual review runs showing lower-field pressure and recovery windows"
+          ],
+          "goodEnough": "At least two comparable deeper-play captures that show whether fairness changes help."
+        },
+        {
+          "title": "Direct alien pulse and flap reference windows",
+          "priority": "Medium",
+          "why": "Pulse and flap authority are still felt quality issues.",
+          "find": [
+            "Formation-rest windows with clear pulse behavior",
+            "Movement windows where flap cadence is easy to observe"
+          ],
+          "goodEnough": "A small bundle of reusable pulse/flap reference clips."
+        },
+        {
+          "title": "Additional score-popup and hit-value reference windows",
+          "priority": "Medium",
+          "why": "Score-pop behavior should be driven by visible source cases, not inferred.",
+          "find": [
+            "Special hit-value moments",
+            "Windows where score text appears or does not appear after hits"
+          ],
+          "goodEnough": "Enough labeled windows to define a policy for when score popups appear."
+        }
       ],
       "previews": []
     },
@@ -472,11 +606,62 @@
         }
       ],
       "nextArtifacts": [
-        "Operator manual or rules page",
-        "Score-table and bonus references",
-        "Higher-resolution gameplay with cleaner audio",
-        "Cabinet, bezel, and title stills",
-        "Event-labeled timing clips for fire, hit, descent, and game over"
+        {
+          "title": "Operator manual or rules page",
+          "priority": "Highest",
+          "why": "We need a trustworthy written source for lives, bonus behavior, credits, player count, and any rule variations before guessing at Windigo truth.",
+          "find": [
+            "Original operator manual scans",
+            "Reliable arcade-reference rules page",
+            "Setup or DIP-switch documentation if available"
+          ],
+          "goodEnough": "One preserved document or page with enough detail to anchor base rules."
+        },
+        {
+          "title": "Score-table and bonus references",
+          "priority": "Highest",
+          "why": "Scoring is one of the first visible contracts players will notice, and Space Invaders-family values should not be approximated from memory.",
+          "find": [
+            "Manual score-table page",
+            "Cabinet or attract still showing score values",
+            "Reliable written scoring breakdown"
+          ],
+          "goodEnough": "A readable score table with explicit point values for each invader/UFO or equivalent."
+        },
+        {
+          "title": "Higher-resolution gameplay with cleaner audio",
+          "priority": "High",
+          "why": "The current seed source is useful, but a clearer capture will help study bunker wear, movement pace, march tempo, and shot audio.",
+          "find": [
+            "Higher-resolution full gameplay video",
+            "Gameplay with less compression or cleaner original sound",
+            "Attract/start sequence footage"
+          ],
+          "goodEnough": "One second longplay or focused video that is visibly clearer than the first seed."
+        },
+        {
+          "title": "Cabinet, bezel, and title stills",
+          "priority": "High",
+          "why": "We need to separate classic Space Invaders presentation truth from future Windigo theming, and that starts with clear visual reference.",
+          "find": [
+            "Cabinet photos",
+            "Marquee or bezel art",
+            "Title/start or score strip stills"
+          ],
+          "goodEnough": "At least one clear image each for title/HUD and cabinet-facing presentation."
+        },
+        {
+          "title": "Event-labeled timing clips for fire, hit, descent, and game over",
+          "priority": "High",
+          "why": "These are the slices we will need for the first serious Platinum timing and audio conformance work.",
+          "find": [
+            "Game start and first control handoff",
+            "Projectile fire and hit moments",
+            "Alien descent or acceleration windows",
+            "Player loss and game-over windows"
+          ],
+          "goodEnough": "4-6 named windows with timestamps or preserved extracted clips."
+        }
       ],
       "previews": [
         {
