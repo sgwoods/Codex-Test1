@@ -94,6 +94,7 @@ const SPRITE_CONFORMANCE_VARIATION_PLAN = path.join(ROOT, 'reference-artifacts',
 const MOVEMENT_GRAMMAR_PLAN = path.join(ROOT, 'reference-artifacts', 'ingestion', 'movement-grammar', 'movement-grammar-0.1.json');
 const AURORA_CHALLENGE_MOVEMENT_GRAMMAR_MAP = path.join(ROOT, 'reference-artifacts', 'analyses', 'aurora-challenge-movement-grammar-map', 'latest.json');
 const MOVEMENT_GRAMMAR_COMPILER_BRIDGE = path.join(ROOT, 'reference-artifacts', 'analyses', 'movement-grammar-compiler-bridge', 'latest.json');
+const MOTION_ATLAS = path.join(ROOT, 'reference-artifacts', 'analyses', 'motion-atlas', 'latest.json');
 const PERSONA_PERFORMANCE_DISTRIBUTION = path.join(ROOT, 'reference-artifacts', 'analyses', 'persona-performance-distribution', 'latest.json');
 const CATALOG_MEDIA_SOURCE_PATHS = new Set();
 let ACTIVE_SOURCE_BLOB_BASE = 'https://github.com/sgwoods/Codex-Test1/blob/main/';
@@ -3297,6 +3298,7 @@ let spriteConformanceVariationPlanCache = null;
 let movementGrammarPlanCache = null;
 let auroraChallengeMovementGrammarMapCache = null;
 let movementGrammarCompilerBridgeCache = null;
+let motionAtlasCache = null;
 
 function loadGalagaReferenceSpriteTargets(){
   if(galagaReferenceSpriteTargetsCache) return galagaReferenceSpriteTargetsCache;
@@ -3610,6 +3612,25 @@ function loadMovementGrammarCompilerBridge(){
     movementGrammarCompilerBridgeCache = { rows: [], summary: {} };
   }
   return movementGrammarCompilerBridgeCache;
+}
+
+function loadMotionAtlas(){
+  if(motionAtlasCache) return motionAtlasCache;
+  if(!fs.existsSync(MOTION_ATLAS)){
+    motionAtlasCache = { rows: [], summary: {}, measurementLimits: [] };
+    return motionAtlasCache;
+  }
+  try {
+    const artifact = readJson(MOTION_ATLAS);
+    motionAtlasCache = Object.assign({}, artifact, {
+      rows: Array.isArray(artifact.rows) ? artifact.rows : [],
+      summary: artifact.summary || {},
+      measurementLimits: Array.isArray(artifact.measurementLimits) ? artifact.measurementLimits : []
+    });
+  } catch (err) {
+    motionAtlasCache = { rows: [], summary: {}, measurementLimits: [] };
+  }
+  return motionAtlasCache;
 }
 
 function loadApplicationArtifactConformance(){
@@ -4117,6 +4138,111 @@ function renderChallengeTimingAlignmentReview(alignment = {}){
       </details>
     `;
   }).join('\n')}`;
+}
+
+function scoreText(value){
+  return Number.isFinite(+value) ? `${Number(value).toFixed(1)}/10` : 'pending';
+}
+
+function motionAtlasDiagramMedia(row = {}){
+  const src = row.diagrams?.motionAtlasSvg || '';
+  if(!src || !fs.existsSync(path.join(ROOT, src))){
+    return '<div class="mediaPlaceholder">Motion Atlas diagram pending. Run <code>npm run harness:analyze:motion-atlas</code>.</div>';
+  }
+  const href = catalogMediaHref(src);
+  return `
+    <figure class="visualEvidenceFigure">
+      <img src="${esc(href)}" alt="${esc(row.label || 'Motion Atlas')} target versus Aurora current motion overlay" loading="lazy" style="width:100%;max-width:1180px;border-radius:8px;border:1px solid rgba(158,201,230,.25);background:#06111d;">
+      <figcaption class="docMeta">Target paths are ingested from Galaga reference object tracks; current paths are runtime object tracks where available and labeled summary estimates where object-track points are not retained.</figcaption>
+    </figure>
+  `;
+}
+
+function renderMotionAtlasGroupRows(row = {}){
+  const groups = Array.isArray(row.groupRows) ? row.groupRows : [];
+  if(!groups.length){
+    return `
+      <tr>
+        <td colspan="7"><span class="docMeta">Group-level motion rows pending.</span></td>
+      </tr>
+    `;
+  }
+  return groups.map(group => `
+    <tr>
+      <td><strong>G${esc(group.groupIndex || '')}</strong><br><span class="docMeta">${esc(group.role || '')}</span></td>
+      <td>${(group.laneTypes || []).map(type => `<span class="pill">${esc(type)}</span>`).join(' ') || '<span class="docMeta">pending</span>'}</td>
+      <td><code>${esc(group.targetPathFamily || 'pending')}</code><br><span class="docMeta">${esc(group.targetEntrySide || '?')} -> ${esc(group.targetExitSide || '?')}</span></td>
+      <td><code>${esc(group.currentPathFamily || 'pending')}</code><br><span class="docMeta">${esc(group.currentEntrySide || '?')} -> ${esc(group.currentExitSide || '?')}</span></td>
+      <td><strong>${scoreText(group.score10)}</strong><br><span class="docMeta">${esc(group.timingDelta || '')}</span></td>
+      <td>${esc(group.deltaRead || '')}</td>
+      <td><span class="docMeta">target ${esc((group.targetPoints || []).length)} point(s); current ${esc((group.currentPoints || []).length)} point(s)</span></td>
+    </tr>
+  `).join('\n');
+}
+
+function renderMotionAtlasRows(atlas = {}){
+  const rows = Array.isArray(atlas.rows) ? atlas.rows : [];
+  if(!rows.length){
+    return `
+      <div class="docWrap">
+        <p class="docMeta">Motion Atlas pending. Run <code>npm run harness:analyze:motion-atlas</code> and <code>npm run harness:check:motion-atlas</code> to generate the human-facing target/current motion comparison.</p>
+      </div>
+    `;
+  }
+  return rows.map(row => `
+    <details class="challengeStageDetail motionAtlasDetail" id="motion-atlas-stage-${esc(row.challengeNumber || row.stage || '')}">
+      <summary class="challengeStageSummary">
+        <span class="challengeStageTitle">
+          <span>${esc(row.label || '')}</span>
+          <small>${esc(row.current?.layoutId || row.current?.pathFamily || '')}</small>
+        </span>
+        <span class="scorePill">${scoreText(row.scores?.movementConformanceScore10)} movement</span>
+        <span class="scorePill">${scoreText(row.scores?.targetVideoObjectTrackFitScore10)} track fit</span>
+        <span class="scorePill">${scoreText(row.summary?.averageGroupScore10)} group avg</span>
+      </summary>
+      <div class="challengeStageDetailBody">
+        <div class="challengeEvidenceCard">
+          <h3>Visual Target / Current / Delta</h3>
+          ${motionAtlasDiagramMedia(row)}
+        </div>
+        <div class="challengeCompareGrid">
+          <article class="challengeEvidenceCard">
+            <h3>Ingested Target Meaning</h3>
+            <p>${esc(row.target?.meaning || 'Target motion meaning pending.')}</p>
+            <p class="docMeta">Best reference: <code>${esc(row.target?.bestReferenceMatch || 'pending')}</code>. Expected labels: ${esc((row.target?.expectedReferenceLabels || []).join(', ') || 'pending')}.</p>
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>Aurora Current Read</h3>
+            <p>${esc(row.current?.read || 'Runtime read pending.')}</p>
+            <p class="docMeta">Current layout: <code>${esc(row.current?.layoutId || 'pending')}</code>; current path family: <code>${esc(row.current?.pathFamily || 'pending')}</code>.</p>
+          </article>
+          <article class="challengeEvidenceCard">
+            <h3>How To Read This</h3>
+            <p>Use the diagram before tuning. The left panel is the ingested reference path model, the middle panel is Aurora as measured now, and the right panel overlays the two so entry side, path length, timing, and exit drift become visually obvious.</p>
+            <p class="docMeta">Rows with estimated current paths still have measured timing/range inputs, but they need retained runtime track points for higher-confidence visual review.</p>
+          </article>
+        </div>
+        <div class="tableWrap" style="margin-top:16px;">
+          <table class="dataTable">
+            <thead>
+              <tr>
+                <th>Group</th>
+                <th>Aliens</th>
+                <th>Target Path</th>
+                <th>Current Path</th>
+                <th>Fit / Timing</th>
+                <th>Human Delta</th>
+                <th>Evidence Density</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${renderMotionAtlasGroupRows(row)}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </details>
+  `).join('\n');
 }
 
 function levelVisualReferenceEvidence(row = {}){
@@ -5331,6 +5457,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     { id: 'stage-conformance-summary', title: 'Stage Conformance Summary' },
     { id: 'level-visual-conformance-index', title: 'Level Visual Index' },
     { id: 'challenge-timing-alignment-review', title: 'Timing Alignment Review' },
+    { id: 'alien-motion-atlas', title: 'Alien Motion Atlas' },
     { id: 'challenge-stage-conformance', title: 'Challenge Stage Deep Dive' },
     { id: 'movement-grammar-plan', title: 'Movement Grammar Plan' },
     { id: 'persona-catalog', title: 'Testing Personas' },
@@ -5628,6 +5755,9 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const levelVisualTimingAlignment = loadLevelVisualTimingAlignment();
   const levelVisualTimingSummary = levelVisualTimingAlignment.summary || {};
   const challengeTimingAlignmentRows = renderChallengeTimingAlignmentReview(levelVisualTimingAlignment);
+  const motionAtlas = loadMotionAtlas();
+  const motionAtlasSummary = motionAtlas.summary || {};
+  const motionAtlasRows = renderMotionAtlasRows(motionAtlas);
   const personaRows = (guide.personaRows || []).map((entry) => `
     <tr>
       <td><strong>${esc(entry.label || '')}</strong><br><span class="docMeta">${esc(entry.harnessId || '')}</span></td>
@@ -6469,6 +6599,22 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
           </div>
           <div class="levelVisualList">
             ${challengeTimingAlignmentRows}
+          </div>
+        </section>
+
+        <section class="section" id="alien-motion-atlas">
+          <div class="sectionHeader">
+            <h2>Alien Motion Atlas</h2>
+            <p>Human-facing motion maps that put the ingested target understanding, Aurora current runtime behavior, and the visual delta on the same normalized playfield. This is the bridge between raw object-track analysis and a designer deciding which gameplay group to fix next.</p>
+          </div>
+          <div class="docWrap">
+            <p><strong>Current read:</strong> ${esc(motionAtlasSummary.rowCount || 0)} motion row(s), ${esc(motionAtlasSummary.challengeStageCount || 0)} challenge-stage atlas row(s), average movement ${esc(motionAtlasSummary.averageMovementScore10 ?? 'n/a')}/10, average group fit ${esc(motionAtlasSummary.averageGroupScore10 ?? 'n/a')}/10, target-video object-track fit ${esc(motionAtlasSummary.averageTargetVideoObjectTrackFitScore10 ?? 'n/a')}/10.</p>
+            <p>${esc(motionAtlasSummary.read || 'Run the Motion Atlas analyzer to create target/current path overlays and timing strips.')}</p>
+            <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/motion-atlas/latest.json</code>. <strong>Checks:</strong> <code>npm run harness:analyze:motion-atlas</code> and <code>npm run harness:check:motion-atlas</code>.</p>
+            <p class="docMeta"><strong>Known limit:</strong> ${esc((motionAtlas.measurementLimits || [])[1] || 'Current paths use runtime object-track points where available; summary estimates fill gaps until retained runtime tracks cover every group.')}</p>
+          </div>
+          <div class="challengeStageList">
+            ${motionAtlasRows}
           </div>
         </section>
 
