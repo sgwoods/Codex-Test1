@@ -55,6 +55,7 @@ const STRICT_SCORE_FIELDS = [
   'alienNoveltyScore10',
   'progressionConformanceScore10',
   'playerShotOpportunityScore10',
+  'humanPerfectPotentialScore10',
   'safetyRuleScore10'
 ];
 
@@ -95,6 +96,9 @@ for(const stage of REQUIRED_STAGES){
   }
   if(!row.objectTrackProbe?.read || !row.shotOpportunityProbe?.read){
     fail(`stage ${stage} is missing object-track or shot-opportunity probes`, row);
+  }
+  if(!row.shotOpportunityProbe?.humanPerfectPotential?.read || !row.humanPerfectPotentialRead){
+    fail(`stage ${stage} is missing human-perfect route scoring`, row);
   }
   if(!Number.isFinite(+row.groupIdentityScore10) || !row.groupIdentityRead){
     fail(`stage ${stage} is missing measured challenge group identity`, row);
@@ -165,6 +169,7 @@ for(const field of [
   'alienNoveltyScore10',
   'progressionConformanceScore10',
   'playerShotOpportunityScore10',
+  'humanPerfectPotentialScore10',
   'safetyRuleScore10'
 ]){
   if(!Number.isFinite(+report.summary?.[field]) || +report.summary[field] < 1 || +report.summary[field] > 10){

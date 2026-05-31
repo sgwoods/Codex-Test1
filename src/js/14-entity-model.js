@@ -84,6 +84,7 @@ function enemyChallengeState({
   speedScale=1,
   lowerFieldBias=0,
   yOffset=0,
+  laneXScale=1,
   referencePath=null
 }={}){
  return {
@@ -102,6 +103,7 @@ function enemyChallengeState({
   speedScale,
   lowerFieldBias,
   yOffset,
+  laneXScale,
   referencePath
  };
 }
@@ -185,6 +187,7 @@ function makePackChallengeEnemyState({
  speedScale=1,
  lowerFieldBias=0,
  yOffset=0,
+ laneXScale=1,
  referencePath=null,
  spawn=0
 }){
@@ -227,5 +230,5 @@ function makePackChallengeEnemyState({
   miss:0,
   low:0,
   hitT:0
- }, enemyChallengeState({wave,side,slot,row,group,sweep,upperBandY,pathFamily,arcAmp,dropAmp,speedScale,lowerFieldBias,yOffset,referencePath}));
+ }, enemyChallengeState({wave,side,slot,row,group,sweep,upperBandY,pathFamily,arcAmp,dropAmp,speedScale,lowerFieldBias,yOffset,laneXScale,referencePath}));
 }

@@ -11,7 +11,7 @@ const CHALLENGE_CONTRACTS = path.join(ROOT, 'reference-artifacts', 'ingestion', 
 const GALAGA_CHALLENGE_OBJECT_TRACKS = path.join(ANALYSES, 'galaga-challenge-object-tracks', 'latest.json');
 const AURORA_SPRITE_MOTION_CORRESPONDENCE = path.join(ANALYSES, 'aurora-sprite-motion-correspondence', 'latest.json');
 const CHALLENGE_STAGES = [3, 7, 11, 15, 19, 23, 27, 31];
-const SAMPLE_TIMES = Array.from({ length: 65 }, (_, index) => +(index * 0.25).toFixed(2));
+const SAMPLE_TIMES = Array.from({ length: 97 }, (_, index) => +(index * 0.25).toFixed(2));
 
 const STAGE_INTENT = {
   3: {
@@ -1075,6 +1075,200 @@ function summarizeObjectTrackedSilhouettes(samples){
   };
 }
 
+const SHOT_ROUTE_PLAYER_X = 140;
+const SHOT_ROUTE_PLAYER_Y = 338;
+const SHOT_ROUTE_BULLET_SPEED = 560;
+const SHOT_ROUTE_PLAYER_SPEED = 440;
+const SHOT_ROUTE_COOLDOWN = 0.095;
+
+function interpolateTrackPosition(track, t){
+  if(!Array.isArray(track) || !track.length || !Number.isFinite(+t)) return null;
+  const targetT = +t;
+  let prev = null;
+  let next = null;
+  for(const pos of track){
+    const pt = +pos.t;
+    if(!Number.isFinite(pt)) continue;
+    if(pt <= targetT) prev = pos;
+    if(pt >= targetT){
+      next = pos;
+      break;
+    }
+  }
+  if(!prev || !next) return null;
+  const prevT = +prev.t;
+  const nextT = +next.t;
+  if(Math.abs(nextT - prevT) < 0.0001) return next;
+  const ratio = clamp((targetT - prevT) / (nextT - prevT));
+  return Object.assign({}, next, {
+    t: targetT,
+    x: (+prev.x || 0) + (((+next.x || 0) - (+prev.x || 0)) * ratio),
+    y: (+prev.y || 0) + (((+next.y || 0) - (+prev.y || 0)) * ratio)
+  });
+}
+
+function buildPerfectRoute(targets, opportunities){
+  const killed = new Set();
+  const route = [];
+  let playerX = SHOT_ROUTE_PLAYER_X;
+  let availableAt = 0;
+  const ordered = opportunities.slice().sort((a, b) => a.t - b.t || a.x - b.x);
+  let transitionFitSum = 0;
+  let transitionCount = 0;
+  for(const opportunity of ordered){
+    if(killed.has(opportunity.id)) continue;
+    const t = +opportunity.t;
+    const dt = Math.max(0, t - availableAt);
+    const reachableDx = (SHOT_ROUTE_PLAYER_SPEED * dt) + opportunity.tolerance + 8;
+    const dx = Math.abs((+opportunity.x || 0) - playerX);
+    if(dx > reachableDx) continue;
+    const fit = dx <= opportunity.tolerance ? 1 : clamp(1 - ((dx - opportunity.tolerance) / Math.max(1, SHOT_ROUTE_PLAYER_SPEED * Math.max(dt, 0.001))));
+    transitionFitSum += fit;
+    transitionCount += 1;
+    killed.add(opportunity.id);
+    route.push(opportunity);
+    playerX = +opportunity.x || playerX;
+    availableAt = Math.max(availableAt, t + SHOT_ROUTE_COOLDOWN);
+  }
+  return {
+    routeKills: killed.size,
+    routeCoverageShare: targets.length ? killed.size / targets.length : 0,
+    laneTransitionFit: transitionCount ? transitionFitSum / transitionCount : 0,
+    firstRouteT: route.length ? route[0].t : null,
+    lastRouteT: route.length ? route[route.length - 1].t : null,
+    route
+  };
+}
+
+function summarizeHumanPerfectPotential(samples){
+  const expectedTargetCount = 40;
+  const allPositions = [];
+  for(const sample of samples || []){
+    for(const pos of sample.positions || []){
+      if(!Number.isFinite(+pos.x) || !Number.isFinite(+pos.y) || pos.id === null || pos.id === undefined) continue;
+      allPositions.push(Object.assign({ t: +sample.t || 0 }, pos));
+    }
+  }
+  const targetMap = new Map();
+  for(const pos of allPositions){
+    const key = String(pos.id);
+    if(!targetMap.has(key)) targetMap.set(key, []);
+    targetMap.get(key).push(pos);
+  }
+  const targets = Array.from(targetMap.entries()).map(([id, track]) => ({
+    id,
+    track: track.sort((a, b) => (+a.t || 0) - (+b.t || 0))
+  })).filter(item => item.track.length);
+  if(!targets.length){
+    return {
+      score10: 1,
+      coverage: 0,
+      targetCount: 0,
+      read: 'Human-perfect route probe found no stable challenge targets.'
+    };
+  }
+
+  const opportunities = [];
+  const opportunityById = new Map();
+  const trackedByWave = {};
+  const trackedByLane = {};
+  for(const target of targets){
+    const wave = target.track.find(pos => pos.wave !== null && pos.wave !== undefined)?.wave ?? 'unknown';
+    const lane = target.track.find(pos => pos.lane !== null && pos.lane !== undefined)?.lane ?? 'unknown';
+    trackedByWave[wave] = (trackedByWave[wave] || 0) + 1;
+    trackedByLane[lane] = (trackedByLane[lane] || 0) + 1;
+  }
+  let topCrowdPositions = 0;
+  let activePositions = 0;
+  for(const { id, track } of targets){
+    const targetOpportunities = [];
+    for(const pos of track){
+      const y = +pos.y;
+      const x = +pos.x;
+      if(!Number.isFinite(x) || !Number.isFinite(y)) continue;
+      activePositions += 1;
+      if(y < 58) topCrowdPositions += 1;
+      if(y < 58 || y > 298) continue;
+      const travelT = Math.max(0.02, (SHOT_ROUTE_PLAYER_Y - y) / SHOT_ROUTE_BULLET_SPEED);
+      if(travelT > 0.62) continue;
+      const impact = interpolateTrackPosition(track, (+pos.t || 0) + travelT);
+      if(!impact || !Number.isFinite(+impact.x) || !Number.isFinite(+impact.y)) continue;
+      if(+impact.y < 42 || +impact.y > 310) continue;
+      const tolerance = pos.type === 'boss' ? 18 : 13;
+      const horizontalDrift = Math.abs((+impact.x || 0) - x);
+      if(horizontalDrift > tolerance + 7) continue;
+      const opportunity = {
+        id,
+        t: round(+pos.t || 0, 3),
+        x: round(x, 2),
+        y: round(y, 2),
+        impactT: round((+pos.t || 0) + travelT, 3),
+        travelT: round(travelT, 3),
+        tolerance,
+        readableAltitude: y >= 76 && y <= 270,
+        horizontalDrift: round(horizontalDrift, 2),
+        type: pos.type || '',
+        wave: pos.wave ?? null,
+        lane: pos.lane ?? null
+      };
+      targetOpportunities.push(opportunity);
+      opportunities.push(opportunity);
+    }
+    opportunityById.set(id, targetOpportunities);
+  }
+
+  const exposedTargets = targets.filter(target => (opportunityById.get(target.id) || []).length > 0);
+  const sustainedTargets = targets.filter(target => (opportunityById.get(target.id) || []).length >= 2);
+  const readableOpportunities = opportunities.filter(item => item.readableAltitude);
+  const route = buildPerfectRoute(targets, opportunities);
+  const denominator = Math.max(expectedTargetCount, targets.length);
+  const targetExposureShare = exposedTargets.length / denominator;
+  const sustainedExposureShare = sustainedTargets.length / denominator;
+  const readableAltitudeShare = opportunities.length ? readableOpportunities.length / opportunities.length : 0;
+  const topCrowdShare = activePositions ? topCrowdPositions / activePositions : 0;
+  const opportunityDensity = clamp(opportunities.length / Math.max(1, denominator * 2.2));
+  const targetCountFit = clamp(targets.length / expectedTargetCount);
+  const crowdPenalty = clamp(1 - (topCrowdShare / 0.62));
+  const routeCoverageShare = route.routeKills / denominator;
+  const coverage = clamp(
+    (0.3 * routeCoverageShare)
+    + (0.22 * targetExposureShare)
+    + (0.16 * sustainedExposureShare)
+    + (0.12 * readableAltitudeShare)
+    + (0.1 * route.laneTransitionFit)
+    + (0.06 * opportunityDensity)
+    + (0.04 * targetCountFit)
+  ) * (0.82 + (0.18 * crowdPenalty));
+  const weakest = [];
+  if(routeCoverageShare < 0.7) weakest.push(`${denominator - route.routeKills}/${denominator} expected targets lack a reachable greedy firing route`);
+  if(targetExposureShare < 0.82) weakest.push(`${targets.length - exposedTargets.length}/${targets.length} targets lack any ballistic firing window`);
+  if(sustainedExposureShare < 0.62) weakest.push(`${targets.length - sustainedTargets.length}/${targets.length} targets lack repeated aim windows`);
+  if(targets.length < expectedTargetCount) weakest.push(`runtime probe only tracked ${targets.length}/${expectedTargetCount} expected challenge targets`);
+  if(topCrowdShare > 0.34) weakest.push(`${round(topCrowdShare * 100, 0)}% of active target positions are crowded near the top edge`);
+  return {
+    score10: round(1 + coverage * 7.2, 1),
+    coverage: round(coverage, 3),
+    targetCount: targets.length,
+    expectedTargetCount,
+    routeKills: route.routeKills,
+    routeCoverageShare: round(routeCoverageShare, 3),
+    targetExposureShare: round(targetExposureShare, 3),
+    sustainedExposureShare: round(sustainedExposureShare, 3),
+    readableAltitudeShare: round(readableAltitudeShare, 3),
+    laneTransitionFit: round(route.laneTransitionFit, 3),
+    opportunityDensity: round(opportunityDensity, 3),
+    topCrowdShare: round(topCrowdShare, 3),
+    candidateWindowCount: opportunities.length,
+    trackedByWave,
+    trackedByLane,
+    firstRouteT: route.firstRouteT,
+    lastRouteT: route.lastRouteT,
+    weakestReasons: weakest,
+    routePreview: route.route.slice(0, 12),
+    read: `Human-perfect probe estimates ${route.routeKills}/${denominator} expected targets reachable by a greedy strong-player route, ${round(targetExposureShare * 100, 0)}% with any ballistic window, ${round(sustainedExposureShare * 100, 0)}% with repeated aim windows, and ${round(topCrowdShare * 100, 0)}% top-crowd pressure.`
+  };
+}
+
 function summarizeShotOpportunity(samples){
   const lanes = [32, 68, 104, 140, 176, 212, 248];
   const laneRows = lanes.map(x => ({ x, hits: 0, windows: 0, maxTargets: 0, lowerTargets: 0 }));
@@ -1113,16 +1307,19 @@ function summarizeShotOpportunity(samples){
   const lowerFieldRead = clamp(laneRows.reduce((sum, row) => sum + row.lowerTargets, 0) / Math.max(1, laneRows.reduce((sum, row) => sum + row.hits, 0)));
   const centerBias = laneRows[3].hits / Math.max(1, laneRows.reduce((sum, row) => sum + row.hits, 0));
   const laneSpreadCredit = clamp(1 - Math.max(0, centerBias - 0.42) / 0.58);
-  const coverage = clamp(
+  const laneCoverage = clamp(
     (0.3 * multiTargetWindowShare)
     + (0.24 * laneDiversity)
     + (0.2 * maxCluster)
     + (0.14 * lowerFieldRead)
     + (0.12 * laneSpreadCredit)
   );
+  const humanPerfectPotential = summarizeHumanPerfectPotential(samples);
+  const coverage = clamp((0.45 * laneCoverage) + (0.55 * humanPerfectPotential.coverage));
   return {
-    score10: round(1 + coverage * 5.4, 1),
+    score10: round(1 + coverage * 6.4, 1),
     coverage: round(coverage, 3),
+    laneCoverage: round(laneCoverage, 3),
     activeWindows,
     multiTargetWindowShare: round(multiTargetWindowShare, 3),
     laneDiversity: round(laneDiversity, 3),
@@ -1133,8 +1330,9 @@ function summarizeShotOpportunity(samples){
     laneRows: laneRows.map(row => Object.assign({}, row, {
       laneShare: round(row.hits / Math.max(1, laneRows.reduce((sum, item) => sum + item.hits, 0)), 3)
     })),
+    humanPerfectPotential,
     windowReads,
-    read: `Shot-opportunity probe found scoreable targets in ${activeWindows} sampled windows; ${round(multiTargetWindowShare * 100, 0)}% had a lane with 2+ targets, lane diversity was ${round(laneDiversity, 2)}, and center-lane bias was ${round(centerBias, 2)}.`
+    read: `Shot-opportunity probe found scoreable targets in ${activeWindows} sampled windows; ${round(multiTargetWindowShare * 100, 0)}% had a lane with 2+ targets, lane diversity was ${round(laneDiversity, 2)}, center-lane bias was ${round(centerBias, 2)}, and the human-perfect route read is ${humanPerfectPotential.score10}/10. ${humanPerfectPotential.read}`
   };
 }
 
@@ -1677,6 +1875,10 @@ function criticalGaps(stage, runtime, match, score){
   if((score.playerShotOpportunityScore10 || 1) < 4){
     gaps.push(`Player shot-opportunity read is only ${score.playerShotOpportunityScore10}/10: current sampled lanes do not yet prove the challenge has a clear learnable high-bonus firing route rather than incidental hits.`);
   }
+  const humanPerfect = score.strictAxisReads?.shotOpportunity?.humanPerfectPotential;
+  if(humanPerfect && ((humanPerfect.score10 || 1) < 7 || (humanPerfect.routeKills || 0) < 38 || (humanPerfect.targetCount || 0) < (humanPerfect.expectedTargetCount || 40))){
+    gaps.push(`Human-perfect route read is ${humanPerfect.score10}/10: ${humanPerfect.routeKills || 0}/${humanPerfect.expectedTargetCount || humanPerfect.targetCount || 40} expected targets are reachable in the current greedy strong-player route, tracked targets are ${humanPerfect.targetCount || 0}/${humanPerfect.expectedTargetCount || 40}, and remaining issues are ${Array.isArray(humanPerfect.weakestReasons) && humanPerfect.weakestReasons.length ? humanPerfect.weakestReasons.join('; ') : 'not yet isolated'}.`);
+  }
   const targetContractScore = score.strictAxisReads?.targetContractFit?.score10;
   if(targetContractScore !== null && targetContractScore !== undefined && Number.isFinite(+targetContractScore) && +targetContractScore < 5){
     gaps.push(`Target-contract fit is only ${score.strictAxisReads.targetContractFit.score10}/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.`);
@@ -1837,6 +2039,12 @@ function makeStageRow(stage, runtime, match, referenceLabels){
     shotOpportunityProbe: runtime
       ? score.strictAxisReads.shotOpportunity || null
       : null,
+    humanPerfectPotentialScore10: runtime
+      ? score.strictAxisReads.shotOpportunity?.humanPerfectPotential?.score10 ?? null
+      : null,
+    humanPerfectPotentialRead: runtime
+      ? score.strictAxisReads.shotOpportunity?.humanPerfectPotential?.read || 'Human-perfect route probe pending.'
+      : 'Human-perfect route probe pending.',
     movementRead: match
       ? `${score.strictAxisReads.movement.read} Legacy broad vector best-match was ${round(match.bestMatch?.score10, 1)}/10 against ${bestLabel || 'no label'}; xRange ${match.runtimeVector?.xRange}, yRange ${match.runtimeVector?.yRange}, pathLength ${match.runtimeVector?.pathLength}.`
       : 'No reference trajectory comparison row was found for this stage.',
@@ -1934,14 +2142,14 @@ Target-artifact coverage has not been generated yet. Run \`npm run harness:analy
     const gapCell = row.criticalGaps.length
       ? row.criticalGaps.join('<br>')
       : 'Reference target hit; remaining work is trajectory precision and active motion scoring.';
-    return `| ${stageIntervalLabel(row.stage)} | ${row.stage} | ${row.interestingFactor10}/10 | ${row.movementConformanceScore10}/10 | ${row.graphicalConformanceScore10}/10 | ${row.alienNoveltyScore10}/10 | ${row.playerShotOpportunityScore10}/10 | ${row.conformanceScore10}/10 | ${row.bestReferenceMatch?.labelId || 'pending'} (${row.referenceMatchScore10 ?? 'n/a'}/10 legacy) | ${row.safetyProbe?.noEnemyShots && row.safetyProbe?.noAttackStarts && row.safetyProbe?.noShipLosses ? 'pass' : 'pending/fail'} | ${gapCell} |`;
+    return `| ${stageIntervalLabel(row.stage)} | ${row.stage} | ${row.interestingFactor10}/10 | ${row.movementConformanceScore10}/10 | ${row.graphicalConformanceScore10}/10 | ${row.alienNoveltyScore10}/10 | ${row.playerShotOpportunityScore10}/10 | ${row.humanPerfectPotentialScore10 ?? 'n/a'}/10 | ${row.conformanceScore10}/10 | ${row.bestReferenceMatch?.labelId || 'pending'} (${row.referenceMatchScore10 ?? 'n/a'}/10 legacy) | ${row.safetyProbe?.noEnemyShots && row.safetyProbe?.noAttackStarts && row.safetyProbe?.noShipLosses ? 'pass' : 'pending/fail'} | ${gapCell} |`;
   }).join('\n');
   const stageSections = rows.map(row => `
 ## ${stageIntervalLabel(row.stage)}
 
 Internal challenge marker: ${row.stage}.
 
-**Current score:** interesting factor ${row.interestingFactor10}/10; challenge conformance ${row.conformanceScore10}/10. Movement ${row.movementConformanceScore10}/10, graphics ${row.graphicalConformanceScore10}/10, alien novelty ${row.alienNoveltyScore10}/10, progression ${row.progressionConformanceScore10}/10, player shot opportunity ${row.playerShotOpportunityScore10}/10.
+**Current score:** interesting factor ${row.interestingFactor10}/10; challenge conformance ${row.conformanceScore10}/10. Movement ${row.movementConformanceScore10}/10, graphics ${row.graphicalConformanceScore10}/10, alien novelty ${row.alienNoveltyScore10}/10, progression ${row.progressionConformanceScore10}/10, player shot opportunity ${row.playerShotOpportunityScore10}/10, human-perfect potential ${row.humanPerfectPotentialScore10 ?? 'n/a'}/10.
 
 **Legacy broad coverage score:** ${row.legacyCoverageScore10}/10. This is retained as diagnostic evidence only; it no longer counts as the player-facing conformance score.
 
@@ -1964,6 +2172,8 @@ ${perGroupMovementMarkdown(row)}
 
 **Shot-opportunity read:** ${row.shotOpportunityRead || 'Shot-opportunity probe pending.'}
 
+**Human-perfect route read:** ${row.humanPerfectPotentialRead || 'Human-perfect route probe pending.'}
+
 **Safety rule:** ${row.safetyProbe ? `enemy shots ${row.safetyProbe.eventCounts.enemyShots}, attack starts ${row.safetyProbe.eventCounts.enemyAttackStarts}, ship losses ${row.safetyProbe.eventCounts.shipLosses}` : 'runtime probe pending'}.
 
 **Critical gaps:**
@@ -1983,7 +2193,7 @@ Branch: ${report.branch}
 
 This is now a strict challenge-stage readout. The prior alien-entry score looked too healthy because it rewarded coverage, type labels, and broad stage signatures. That was useful harness progress, but it overstated the player-facing experience. This report follows the current project decision that challenging stages start at **1/10 interesting**, **1/10 movement**, and **1/10 graphical conformance** until they earn credit through reference-grounded movement, active visual evidence, alien/stage novelty, and durable bonus-stage contracts.
 
-Current result: **${report.summary.interestingFactorScore10}/10 interesting factor** and **${report.summary.score10}/10 challenge-stage conformance**. Movement is **${report.summary.movementConformanceScore10}/10**, graphical conformance is **${report.summary.graphicalConformanceScore10}/10**, alien/stage novelty is **${report.summary.alienNoveltyScore10}/10**, and player shot opportunity is **${report.summary.playerShotOpportunityScore10}/10**. The strongest rule finding is that current probes show no enemy shots, no attack starts, and no ship losses during sampled challenge windows. The weakest player-facing finding is that ${report.summary.weakestFinding}
+Current result: **${report.summary.interestingFactorScore10}/10 interesting factor** and **${report.summary.score10}/10 challenge-stage conformance**. Movement is **${report.summary.movementConformanceScore10}/10**, graphical conformance is **${report.summary.graphicalConformanceScore10}/10**, alien/stage novelty is **${report.summary.alienNoveltyScore10}/10**, player shot opportunity is **${report.summary.playerShotOpportunityScore10}/10**, and human-perfect potential is **${report.summary.humanPerfectPotentialScore10}/10**. The strongest rule finding is that current probes show no enemy shots, no attack starts, and no ship losses during sampled challenge windows. The weakest player-facing finding is that ${report.summary.weakestFinding}
 
 ## Method
 
@@ -1994,6 +2204,7 @@ Current result: **${report.summary.interestingFactorScore10}/10 interesting fact
 - Strict graphical scoring now includes active sprite-motion plus object-tracked runtime pixel/silhouette crops for flap state, phase coverage, visual family diversity, path-pose diversity, lit-pixel stability, and bounding-box variation. It remains capped until those object tracks are compared frame-by-frame to Galaga target crops, rotations, dive poses, capture/rescue transitions, and direct target crop sequences.
 - First-pass target contracts now score group count, group path-family order, expected type order, and expected family order for any challenge that has a persisted media-backed contract. This is deliberately reported as a separate contract-fit read until target-video object tracking exists.
 - Player shot-opportunity scoring samples plausible firing lanes through each challenge window so movement work can be judged by whether it creates learnable high-bonus routes, not only by broad movement shape.
+- Human-perfect route scoring estimates whether 40 expected challenge targets have ballistic shot windows, repeated aim windows, readable altitude, and a greedy strong-player route within the current player movement speed and shot cooldown.
 - Challenge path-slot extraction suppresses player fire for challenge windows, so trajectory comparison measures authored alien motion instead of bullet-truncated player-score fragments.
 - Safety is measured separately from interest: no shots/no kills is necessary, but it does not make a challenge visually conformant and contributes only as a guardrail.
 - Prior 24-second evidence windows can include post-challenge normal play, so enemy bullets/attackers in those older windows are not treated as challenge-rule failures here.
@@ -2002,8 +2213,8 @@ ${targetCoverageSection}
 
 ## Stage Summary
 
-| Challenging Stage | Internal Marker | Interest | Movement | Graphics | Alien Novelty | Shot Opportunity | Strict Score | Diagnostic Best Reference | No-Shot/No-Kill | Critical Gap |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
+| Challenging Stage | Internal Marker | Interest | Movement | Graphics | Alien Novelty | Shot Opportunity | Human Perfect | Strict Score | Diagnostic Best Reference | No-Shot/No-Kill | Critical Gap |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
 ${tableRows}
 
 ${stageSections}
@@ -2214,6 +2425,9 @@ async function buildReport(){
   const stage3ExpectedReferenceHit = !!stage3Row?.expectedReferenceHit;
   const challenge2BestMatchCount = rows.filter(row => row.bestReferenceMatch?.labelId === 'challenge-2-arrival-group-1').length;
   const spriteMotionCorrespondence = spriteMotionCorrespondenceRead();
+  const weakestHumanPerfectRow = rows
+    .slice()
+    .sort((a, b) => (+a.humanPerfectPotentialScore10 || 0) - (+b.humanPerfectPotentialScore10 || 0))[0] || null;
   const weakestFinding = stage3ExpectedReferenceHit
     ? `challenge stages are still not authored enough as memorable Galaga-like set pieces: ${challenge2BestMatchCount} sampled stage(s) still best-match the same Galaga challenge-2 reference, stage 3 now lands on the first-challenge bee-line reference but needs stronger trajectory precision, sprite-motion correspondence is ${spriteMotionCorrespondence.averageScore10 ?? 'n/a'}/10 and target-capped, and late stages need object-tracked group refinement.`
     : `challenge stages are still not authored enough as memorable Galaga-like set pieces: most measured runtime vectors best-match the same Galaga challenge-2 reference, stage 3 does not read as the original first challenge, sprite-motion correspondence is ${spriteMotionCorrespondence.averageScore10 ?? 'n/a'}/10 and target-capped, and late-stage labels need per-group refinement.`;
@@ -2225,6 +2439,7 @@ async function buildReport(){
     alienNoveltyScore10: round(average(rows.map(row => row.alienNoveltyScore10)), 1),
     progressionConformanceScore10: round(average(rows.map(row => row.progressionConformanceScore10)), 1),
     playerShotOpportunityScore10: round(average(rows.map(row => row.playerShotOpportunityScore10)), 1),
+    humanPerfectPotentialScore10: round(average(rows.map(row => row.humanPerfectPotentialScore10)), 1),
     targetContractFitScore10: round(average(rows.map(row => row.targetContractFitScore10)), 1),
     targetVideoObjectTrackFitScore10: round(average(rows.map(row => row.targetVideoObjectTrackFitScore10)), 1),
     targetTrackReadinessScore10: targetObjectTracks?.summary?.targetTrackReadinessScore10 ?? null,
@@ -2239,7 +2454,7 @@ async function buildReport(){
     strongestFinding: 'Sampled challenge windows preserve the Galaga-like no-shot/no-ship-loss rule.',
     stage3ExpectedReferenceHit,
     challenge2BestMatchCount,
-    weakestFinding: `current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is ${round(average(rows.map(row => row.movementConformanceScore10)), 1)}/10, strict graphics is ${round(average(rows.map(row => row.graphicalConformanceScore10)), 1)}/10, alien/stage novelty is ${round(average(rows.map(row => row.alienNoveltyScore10)), 1)}/10, player shot opportunity is ${round(average(rows.map(row => row.playerShotOpportunityScore10)), 1)}/10, target-video object-track fit is ${round(average(rows.map(row => row.targetVideoObjectTrackFitScore10)), 1)}/10, and sprite-motion correspondence is ${spriteMotionCorrespondence.averageScore10 ?? 'n/a'}/10 with target timing status ${spriteMotionCorrespondence.targetTimingStatus}. Diagnostic legacy coverage was ${round(average(rows.map(row => row.legacyCoverageScore10)), 1)}/10, which is why the old read was too generous.`,
+    weakestFinding: `current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is ${round(average(rows.map(row => row.movementConformanceScore10)), 1)}/10, strict graphics is ${round(average(rows.map(row => row.graphicalConformanceScore10)), 1)}/10, alien/stage novelty is ${round(average(rows.map(row => row.alienNoveltyScore10)), 1)}/10, player shot opportunity is ${round(average(rows.map(row => row.playerShotOpportunityScore10)), 1)}/10, human-perfect potential is ${round(average(rows.map(row => row.humanPerfectPotentialScore10)), 1)}/10 with weakest interval ${weakestHumanPerfectRow ? stageIntervalLabel(weakestHumanPerfectRow.stage) : 'pending'} at ${weakestHumanPerfectRow?.humanPerfectPotentialScore10 ?? 'n/a'}/10, target-video object-track fit is ${round(average(rows.map(row => row.targetVideoObjectTrackFitScore10)), 1)}/10, and sprite-motion correspondence is ${spriteMotionCorrespondence.averageScore10 ?? 'n/a'}/10 with target timing status ${spriteMotionCorrespondence.targetTimingStatus}. Diagnostic legacy coverage was ${round(average(rows.map(row => row.legacyCoverageScore10)), 1)}/10, which is why the old read was too generous.`,
     playerMeaning: 'A player should experience challenging stages as safe but tense score exhibitions with memorable entry routes, fresh alien types, readable trajectories, and a learnable perfect-bonus opportunity. Aurora currently preserves the safety rule, but the actual spectacle, motion, and visual novelty are still early.',
     designerMeaning: 'Design work should move from broad path-family labels to explicit per-challenge contracts: group order, first-visible frame, entry side, exit side, path length, turn count, alien family, animation phases, bonus opportunity, and result feedback.',
     sourceScores: {

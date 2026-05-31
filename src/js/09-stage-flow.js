@@ -115,6 +115,7 @@ function spawnChallenge(){
   const waveSpeedScales=Array.isArray(layout.groupSpeedScales)?layout.groupSpeedScales:null;
   const waveLowerFieldBiases=Array.isArray(layout.groupLowerFieldBiases)?layout.groupLowerFieldBiases:null;
   const waveYOffsets=Array.isArray(layout.groupYOffsets)?layout.groupYOffsets:null;
+  const waveLaneXScales=Array.isArray(layout.groupLaneXScales)?layout.groupLaneXScales:null;
   const waveReferencePaths=Array.isArray(layout.groupReferencePaths)?layout.groupReferencePaths:null;
   const t=waveLaneTypes[lane]||layout.laneTypes[lane]||'bee';
   const side=lane<layout.enemiesPerGroup/2?-1:1,slot=lane%(layout.enemiesPerGroup/2),row=slot<2?0:1;
@@ -141,6 +142,7 @@ function spawnChallenge(){
    speedScale:waveSpeedScales?.[wave]||layout.speedScale||1,
    lowerFieldBias:waveLowerFieldBiases?.[wave]??layout.lowerFieldBias??0,
    yOffset:waveYOffsets?.[wave]??layout.yOffset??0,
+   laneXScale:waveLaneXScales?.[wave]??layout.laneXScale??1,
    referencePath:waveReferencePaths?.[wave]||null,
    spawn:baseEntryDelay+(waveSpawnOffsets?.[wave]??wave*layout.waveDelay)+slot*layout.slotDelay
   }));
