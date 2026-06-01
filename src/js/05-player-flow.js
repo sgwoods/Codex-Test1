@@ -388,6 +388,110 @@ function playerTwoHashUnit(seed){
 function playerTwoStatsCopy(stats={}){
  return {shots:Math.max(0,+stats.shots||0)|0,hits:Math.max(0,+stats.hits||0)|0};
 }
+function playerTwoClonePojo(value,fallback=null){
+ if(value==null)return fallback;
+ try{return JSON.parse(JSON.stringify(value));}catch{return fallback;}
+}
+function playerTwoBoardSnapshot(){
+ return{
+  version:1,
+  stage:Math.max(1,+S.stage||1)|0,
+  challenge:!!S.challenge,
+  forceChallenge:+S.forceChallenge?1:0,
+  stageClock:+(+S.stageClock||0).toFixed(3),
+  simT:+(+S.simT||0).toFixed(3),
+  fireCD:+(+S.fireCD||0).toFixed(3),
+  recoverT:+(+S.recoverT||0).toFixed(3),
+  attackGapT:+(+S.attackGapT||0).toFixed(3),
+  nextStageT:+(+S.nextStageT||0).toFixed(3),
+  postChallengeT:+(+S.postChallengeT||0).toFixed(3),
+  pendingStage:Math.max(0,+S.pendingStage||0)|0,
+  transitionMode:String(S.transitionMode||''),
+  lastChallengeClearT:S.lastChallengeClearT==null?null:+(+S.lastChallengeClearT||0).toFixed(3),
+  challengeTransitionStallLogged:+S.challengeTransitionStallLogged?1:0,
+  transitionCueT:+(+S.transitionCueT||0).toFixed(3),
+  transitionCueKind:+S.transitionCueKind?1:0,
+  challengeResultCueT:+(+S.challengeResultCueT||0).toFixed(3),
+  challengeResultPerfect:+S.challengeResultPerfect?1:0,
+  sequenceT:+(+S.sequenceT||0).toFixed(3),
+  sequenceMode:String(S.sequenceMode||''),
+  scriptMode:+S.scriptMode?1:0,
+  scriptT:+(+S.scriptT||0).toFixed(3),
+  scriptI:Math.max(0,+S.scriptI||0)|0,
+  scriptShotI:Math.max(0,+S.scriptShotI||0)|0,
+  scriptShotT:+(+S.scriptShotT||0).toFixed(3),
+  startCueT:+(+S.startCueT||0).toFixed(3),
+  formationCueT:+(+S.formationCueT||0).toFixed(3),
+  audioPulseHoldT:+(+S.audioPulseHoldT||0).toFixed(3),
+  seq:Math.max(0,+S.seq||0)|0,
+  seqT:+(+S.seqT||0).toFixed(3),
+  liveCount:S.e.filter(e=>e&&e.hp>0).length,
+  captureCountStage:Math.max(0,+S.captureCountStage||0)|0,
+  lastCaptureStartT:S.lastCaptureStartT==null?null:+(+S.lastCaptureStartT||0).toFixed(3),
+  lastFighterCapturedT:S.lastFighterCapturedT==null?null:+(+S.lastFighterCapturedT||0).toFixed(3),
+  stage4Lane2PriorityDive:+S.stage4Lane2PriorityDive?1:0,
+  rogue:Math.max(0,+S.rogue||0)|0,
+  att:Math.max(0,+S.att||0)|0,
+  p:playerTwoClonePojo(S.p,{}),
+  e:playerTwoClonePojo(S.e,[]),
+  pb:playerTwoClonePojo(S.pb,[]),
+  eb:playerTwoClonePojo(S.eb,[]),
+  fx:playerTwoClonePojo(S.fx,[]),
+  ch:playerTwoClonePojo(S.ch,null),
+  cap:playerTwoClonePojo(S.cap,null)
+ };
+}
+function restorePlayerTwoBoardSnapshot(board){
+ if(!board||board.version!==1)return false;
+ S.stage=Math.max(1,+board.stage||1)|0;
+ S.forceChallenge=+board.forceChallenge?1:0;
+ S.challenge=!!board.challenge;
+ S.profile=stageBandProfile(S.stage,S.challenge);
+ S.t=stageTune(S.stage,S.challenge);
+ S.stagePresentation=currentGamePackStagePresentation(S.stage,S.challenge);
+ S.stageClock=+(+board.stageClock||0);
+ S.simT=+(+board.simT||0);
+ S.fireCD=+(+board.fireCD||0);
+ S.recoverT=+(+board.recoverT||0);
+ S.attackGapT=+(+board.attackGapT||0);
+ S.nextStageT=+(+board.nextStageT||0);
+ S.postChallengeT=+(+board.postChallengeT||0);
+ S.pendingStage=Math.max(0,+board.pendingStage||0)|0;
+ S.transitionMode=String(board.transitionMode||'');
+ S.lastChallengeClearT=board.lastChallengeClearT==null?null:+board.lastChallengeClearT;
+ S.challengeTransitionStallLogged=+board.challengeTransitionStallLogged?1:0;
+ S.transitionCueT=+(+board.transitionCueT||0);
+ S.transitionCueKind=+board.transitionCueKind?1:0;
+ S.challengeResultCueT=+(+board.challengeResultCueT||0);
+ S.challengeResultPerfect=+board.challengeResultPerfect?1:0;
+ S.sequenceT=+(+board.sequenceT||0);
+ S.sequenceMode=String(board.sequenceMode||'');
+ S.scriptMode=+board.scriptMode?1:0;
+ S.scriptT=+(+board.scriptT||0);
+ S.scriptI=Math.max(0,+board.scriptI||0)|0;
+ S.scriptShotI=Math.max(0,+board.scriptShotI||0)|0;
+ S.scriptShotT=+(+board.scriptShotT||0);
+ S.startCueT=+(+board.startCueT||0);
+ S.formationCueT=+(+board.formationCueT||0);
+ S.audioPulseHoldT=+(+board.audioPulseHoldT||0);
+ S.seq=Math.max(0,+board.seq||0)|0;
+ S.seqT=+(+board.seqT||0);
+ S.captureCountStage=Math.max(0,+board.captureCountStage||0)|0;
+ S.lastCaptureStartT=board.lastCaptureStartT==null?null:+board.lastCaptureStartT;
+ S.lastFighterCapturedT=board.lastFighterCapturedT==null?null:+board.lastFighterCapturedT;
+ S.stage4Lane2PriorityDive=+board.stage4Lane2PriorityDive?1:0;
+ S.rogue=Math.max(0,+board.rogue||0)|0;
+ S.att=Math.max(0,+board.att||0)|0;
+ S.p=Object.assign(S.p,playerTwoClonePojo(board.p,{}));
+ S.e.length=0;S.e.push(...playerTwoClonePojo(board.e,[]));
+ S.pb.length=0;S.pb.push(...playerTwoClonePojo(board.pb,[]));
+ S.eb.length=0;S.eb.push(...playerTwoClonePojo(board.eb,[]));
+ S.fx.length=0;S.fx.push(...playerTwoClonePojo(board.fx,[]));
+ S.ch=playerTwoClonePojo(board.ch,null);
+ S.cap=playerTwoClonePojo(board.cap,null);
+ S.liveCount=S.e.filter(e=>e&&e.hp>0).length;
+ return true;
+}
 function playerTwoLaneDefaults(lane='p1',opts={}){
  return{
   lane,
@@ -398,7 +502,8 @@ function playerTwoLaneDefaults(lane='p1',opts={}){
   forceChallenge:+opts.forceChallenge?1:0,
   stats:playerTwoStatsCopy(opts.stats),
   elapsed:+(+opts.elapsed||0).toFixed(3),
-  finished:+opts.finished?1:0
+  finished:+opts.finished?1:0,
+  board:opts.board||null
  };
 }
 function normalizePlayerTwoLaneState(lane='p1',state={},opts={}){
@@ -413,6 +518,7 @@ function normalizePlayerTwoLaneState(lane='p1',state={},opts={}){
  merged.stats=playerTwoStatsCopy(merged.stats);
  merged.elapsed=+(+merged.elapsed||0).toFixed(3);
  merged.finished=+merged.finished?1:0;
+ merged.board=merged.board&&merged.board.version===1?merged.board:null;
  return merged;
 }
 function ensurePlayerTwoLaneStates(p2,opts={}){
@@ -450,6 +556,7 @@ function syncPlayerTwoActiveLane(opts={}){
  lane.forceChallenge=+S.forceChallenge?1:0;
  lane.stats=playerTwoStatsCopy(S.stats);
  lane.elapsed=+(+lane.elapsed||0).toFixed(3);
+ if(opts.captureBoard)lane.board=playerTwoBoardSnapshot();
  if(opts.finished)lane.finished=1;
  if(laneKey==='p1'){
   p2.humanScore=lane.score;
@@ -475,6 +582,8 @@ function applyPlayerTwoLaneTurn(to='p1',source='auto'){
  const p2=S.playerTwo;
  if(!p2?.enabled)return false;
  ensurePlayerTwoLaneStates(p2);
+ const previous=activePlayerTwoLaneKey(p2);
+ if(previous!==to)syncPlayerTwoActiveLane({captureBoard:true});
  const lane=p2[to];
  if(!lane||lane.finished)return false;
  p2.activeTurn=to;
@@ -486,10 +595,20 @@ function applyPlayerTwoLaneTurn(to='p1',source='auto'){
  S.forceChallenge=lane.forceChallenge?1:0;
  S.stats=playerTwoStatsCopy(lane.stats);
  S.harnessPersona=to==='p2'?(p2.personaKey||''):'';
- S.pb.length=0;S.eb.length=0;S.fx.length=0;S.cap=null;S.att=0;
- S.recoverT=0;S.attackGapT=0;S.nextStageT=0;S.postChallengeT=0;S.pendingStage=0;S.transitionMode='';S.sequenceT=0;S.sequenceMode='';
- resetPlayerForTurn();
- spawnStage();
+ if(lane.board){
+  restorePlayerTwoBoardSnapshot(lane.board);
+  S.score=lane.score|0;
+  S.lives=Math.max(0,lane.lives|0);
+  S.stats=playerTwoStatsCopy(lane.stats);
+  S.harnessPersona=to==='p2'?(p2.personaKey||''):'';
+  S.p.inv=Math.max(+S.p.inv||0,.9);
+  S.p.spawn=Math.max(+S.p.spawn||0,.15);
+ }else{
+  S.pb.length=0;S.eb.length=0;S.fx.length=0;S.cap=null;S.att=0;
+  S.recoverT=0;S.attackGapT=0;S.nextStageT=0;S.postChallengeT=0;S.pendingStage=0;S.transitionMode='';S.sequenceT=0;S.sequenceMode='';
+  resetPlayerForTurn();
+  spawnStage();
+ }
  S.alertTxt=`${playerTwoLaneDisplayName(to,p2)} TURN\n${to==='p2'?(p2.label||watchModePersonaLabel(p2.personaKey)):'HUMAN PILOT'}`;
  S.alertT=Math.max(S.alertT,1.55);
  if(typeof logEvent==='function')logEvent('player_two_life_turn_start',Object.assign({lane:to,source},playerTwoSnapshot(p2)));
@@ -663,6 +782,7 @@ function updatePlayerTwoRival(dt){
  if(!p2?.enabled||S.attract||!started)return;
  ensurePlayerTwoLaneStates(p2);
  if(p2.pendingTurnSwitch){
+  syncPlayerTwoActiveLane({captureBoard:true});
   p2.pendingTurnSwitch.t=Math.max(0,(+p2.pendingTurnSwitch.t||0)-dt);
   if(!p2.pendingTurnSwitch.t)applyPlayerTwoLaneTurn(p2.pendingTurnSwitch.to,p2.pendingTurnSwitch.reason||'auto');
   return;
@@ -716,6 +836,14 @@ function playerTwoSnapshot(state=S.playerTwo){
  if(!p2.enabled)return {enabled:false};
  const p1=p2.p1?normalizePlayerTwoLaneState('p1',p2.p1):null;
  const p2Lane=p2.p2?normalizePlayerTwoLaneState('p2',p2.p2):null;
+ const laneSummary=lane=>lane?{
+  score:lane.score,
+  stage:lane.stage,
+  lives:Math.max(0,lane.lives+1),
+  finished:!!lane.finished,
+  boardStageClock:lane.board?.version===1?+(+lane.board.stageClock||0).toFixed(3):null,
+  boardEnemies:lane.board?.version===1?Math.max(0,+lane.board.liveCount||0):null
+ }:null;
  return{
   enabled:true,
   mode:p2.mode||'persona-rival',
@@ -734,8 +862,8 @@ function playerTwoSnapshot(state=S.playerTwo){
   variance:+(+p2.variance||1).toFixed(4),
   autoStartQueued:!!p2.autoStartQueued,
   pendingTurnSwitch:p2.pendingTurnSwitch?Object.assign({},p2.pendingTurnSwitch):null,
-  p1:p1?{score:p1.score,stage:p1.stage,lives:Math.max(0,p1.lives+1),finished:!!p1.finished}:null,
-  p2:p2Lane?{score:p2Lane.score,stage:p2Lane.stage,lives:Math.max(0,p2Lane.lives+1),finished:!!p2Lane.finished}:null,
+  p1:laneSummary(p1),
+  p2:laneSummary(p2Lane),
   eligibleForLeaderboard:false
  };
 }
@@ -788,7 +916,7 @@ function currentPilotCardState(){
    summary:active?`Persona rival is flying ${gameTitle} now. Turns alternate after each ship loss; this lane is comparison-only and will not post a score.`:ready?`Persona rival is queued for the next ${gameTitle} turn. Press 2 from results to start it.`:`${gameTitle} 2UP alternation is complete. Only the human 1UP score remains eligible.`,
    email:'Controller: Persona rival',
    userId:`Role: ${persona.initials} ${gameTitle} 2UP rival`,
-   hudHtml:`<span class="playerTwoHud${active?' playerTwoHudActive':ready?' playerTwoHudReady':''}"><span class="hudLabel">${active?'2UP PLAY':ready?'2UP READY':final?'2UP DONE':'2UP'}</span> <span class="hudValue">${formatScore(p2.p2?.score||p2.score||0)}</span></span>`,
+   hudHtml:`<span class="playerTwoHud${active?' playerTwoHudActive':ready?' playerTwoHudReady':''}"><span class="hudLabel">${active?'2UP PLAY':ready?'2UP READY':final?'2UP DONE':'2UP'}</span> <span class="hudValue">${formatScore(p2.p2?.score??p2.score??0)}</span></span>`,
    signedIn
   };
  }
@@ -865,7 +993,7 @@ function playerTwoHudHtml(){
  if(!p2?.enabled)return '';
  const state=p2.activeTurn==='p2'?' PLAY':p2.activeTurn==='ready'?' READY':'';
  const cls=p2.activeTurn==='p2'?' playerTwoHudActive':p2.activeTurn==='ready'?' playerTwoHudReady':'';
- return `<span class="playerTwoHud${cls}"><span class="hudLabel">2UP${state}</span> <span class="hudValue">${formatScore(p2.score||0)}</span></span>`;
+ return `<span class="playerTwoHud${cls}"><span class="hudLabel">2UP${state}</span> <span class="hudValue">${formatScore(p2.p2?.score??p2.score??0)}</span></span>`;
 }
 function handlePlayerTwoWaitKey(e){
  if(started||gameOverState?.editing)return false;

@@ -368,7 +368,11 @@ function syncCabinetShellLayout({
 }
 
 function syncHudAndShellMessages({ox,oy,viewW,viewH}){
- left.innerHTML=`<span class="hudLabel">1UP</span> <span class="hudValue">${S.score.toString().padStart(6,'0')}</span>`;
+ const playerTwoRun=S.playerTwo;
+ const oneUpScore=playerTwoRun?.enabled&&playerTwoRun.activeTurn==='p2'
+  ? (playerTwoRun.p1?.score??playerTwoRun.humanScore??0)
+  : S.score;
+ left.innerHTML=`<span class="hudLabel">1UP</span> <span class="hudValue">${formatScore(oneUpScore)}</span>`;
  if(center)center.innerHTML=`<span class="hudLabel">HIGH SCORE</span> <span class="hudValue">${String(S.best).padStart(6,'0')}</span>`;
  const pilotCard=typeof currentPilotCardState==='function'?currentPilotCardState():null;
  const playerTwoHud=typeof playerTwoHudHtml==='function'?playerTwoHudHtml():'';

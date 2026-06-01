@@ -520,6 +520,7 @@ window.__galagaHarness__={
    selection:typeof playerTwoSelectionState==='function'?playerTwoSelectionState():null,
    watchScope:typeof selectedWatchScope==='function'?selectedWatchScope():'game',
    run:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,
+   hudLeft:left?.textContent||'',
    hudRight:right?.textContent||'',
    accountNotice:LEADERBOARD.accountNotice||''
   };

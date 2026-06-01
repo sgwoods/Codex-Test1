@@ -76,11 +76,17 @@ async function main(){
     };
     window.__galagaHarness__.advanceFor(2);
     const live = window.__galagaHarness__.state();
+    const humanAward = window.__galagaHarness__.awardScore({ points: 1000 });
+    window.__galagaHarness__.advanceFor(0.05);
+    const afterHumanAward = window.__galagaHarness__.playerTwoState();
     const humanLifeLoss = window.__galagaHarness__.triggerShipLoss({ reserveLives: 2, cause: 'harness_1up_life_loss' });
     const afterHumanLifeLoss = window.__galagaHarness__.playerTwoState().run;
     window.__galagaHarness__.advanceFor(1.55);
     const p2Turn = window.__galagaHarness__.state();
     const p2TurnHud = window.__galagaHarness__.playerTwoState().hudRight;
+    const p2ScoreAward = window.__galagaHarness__.awardScore({ points: 250 });
+    window.__galagaHarness__.advanceFor(0.05);
+    const p2ScoreIsolation = window.__galagaHarness__.playerTwoState();
     const p2PilotCard = {
       dock: document.getElementById('accountDockBtn')?.textContent || '',
       mode: document.getElementById('accountDockBtn')?.dataset?.pilotMode || '',
@@ -102,11 +108,15 @@ async function main(){
       afterWatchScopePicker,
       hudRight,
       launchPilotCard,
+      humanAward,
+      afterHumanAward,
       humanLifeLoss,
       afterHumanLifeLoss,
       gameOver,
       p2Turn,
       p2TurnHud,
+      p2ScoreAward,
+      p2ScoreIsolation,
       p2PilotCard,
       p2LifeLoss,
       afterP2LifeLoss,
@@ -143,11 +153,23 @@ async function main(){
   if(signed.afterHumanLifeLoss?.activeTurn !== 'p1' || signed.afterHumanLifeLoss?.pendingTurnSwitch?.to !== 'p2'){
     fail('1UP ship loss should queue the selected 2UP persona as the next life-turn', signed);
   }
+  if((signed.afterHumanLifeLoss?.humanScore | 0) !== 1000 || !/1UP\s+001000/.test(signed.afterHumanAward?.hudLeft || '')){
+    fail('1UP score should be visible and preserved before handing off to 2UP', signed);
+  }
   if(!signed.p2Turn.playerTwo?.enabled || signed.p2Turn.playerTwo?.activeTurn !== 'p2' || signed.p2Turn.harnessPersona !== 'professional'){
     fail('per-life alternation should hand active play to the selected persona after 1UP loses a ship', signed);
   }
+  if((signed.p2Turn.playerTwo?.humanScore | 0) !== 1000 || (signed.p2Turn.playerTwo?.score | 0) !== 0){
+    fail('2UP turn should start with a separate persona score while preserving the frozen 1UP score', signed);
+  }
+  if(!Number.isFinite(+signed.p2Turn.playerTwo?.p1?.boardStageClock) || +signed.p2Turn.playerTwo.p1.boardStageClock < 2 || (signed.p2Turn.playerTwo.p1.boardEnemies | 0) <= 0){
+    fail('handing off to 2UP should preserve a non-empty 1UP mid-stage board snapshot for later resume', signed);
+  }
   if(!/2UP PLAY/.test(signed.p2TurnHud || '')){
     fail('active 2UP persona turn should be visible in the HUD as the playing lane', signed);
+  }
+  if((signed.p2ScoreIsolation?.run?.humanScore | 0) !== 1000 || (signed.p2ScoreIsolation?.run?.score | 0) !== 250 || !/1UP\s+001000/.test(signed.p2ScoreIsolation?.hudLeft || '') || !/2UP PLAY\s+000250/.test(signed.p2ScoreIsolation?.hudRight || '')){
+    fail('2UP persona scoring must not increment the visible or stored 1UP score', signed);
   }
   if(signed.p2PilotCard?.mode !== 'player-two-active' || !/2UP PLAY/.test(signed.p2PilotCard?.dock || '') || !/PROFESSIONAL/.test(signed.p2PilotCard?.dock || '') || !/comparison-only/.test(signed.p2PilotCard?.summary || '')){
     fail('pilot card should show the persona rival onboard during the active 2UP turn', signed);
@@ -157,6 +179,9 @@ async function main(){
   }
   if(!signed.p1Return?.playerTwo?.enabled || signed.p1Return?.playerTwo?.activeTurn !== 'p1' || signed.p1Return?.harnessPersona){
     fail('per-life alternation should return from the persona lane to human 1UP after 2UP loses a ship', signed);
+  }
+  if(+signed.p1Return.stageClock < 2 || !Number.isFinite(+signed.p1Return.playerTwo?.p2?.boardStageClock) || +signed.p1Return.playerTwo.p2.boardStageClock < .1 || (signed.p1Return.playerTwo.p2.boardEnemies | 0) <= 0){
+    fail('returning to 1UP should restore the preserved human board and preserve the 2UP board for its next life', signed);
   }
   if(!/playerTwoResultFinal/.test(signed.gameOver?.html || '') || !/ARCADE PER-LIFE ALTERNATION/.test(signed.gameOver?.html || '') || !/1UP SCORE IS THE ONLY SCOREBOARD ENTRY/.test(signed.gameOver?.html || '')){
     fail('final 2UP results should show arcade per-life comparison and explicit human-only score meaning', signed);
