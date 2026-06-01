@@ -578,7 +578,7 @@ function setSeed(seed=0){
 }
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
-const BUILD_INFO={product:{{BUILD_PRODUCT_NAME_JSON}},version:'{{BUILD_VERSION}}',versionLine:'{{BUILD_VERSION_LINE}}',label:'{{BUILD_LABEL}}',commit:'{{BUILD_COMMIT}}',branch:'{{BUILD_BRANCH}}',dirty:{{BUILD_DIRTY}},released:'{{BUILD_RELEASE_ET}}',state:'{{BUILD_STATE}}',releaseChannel:'{{BUILD_CHANNEL}}',platform:{{BUILD_PLATFORM_INFO_JSON}},applications:{{BUILD_APPLICATIONS_INFO_JSON}}};
+const BUILD_INFO={product:{{BUILD_PRODUCT_NAME_JSON}},version:'{{BUILD_VERSION}}',versionLine:'{{BUILD_VERSION_LINE}}',label:'{{BUILD_LABEL}}',commit:'{{BUILD_COMMIT}}',branch:'{{BUILD_BRANCH}}',dirty:{{BUILD_DIRTY}},released:'{{BUILD_RELEASE_ET}}',state:'{{BUILD_STATE}}',releaseChannel:'{{BUILD_CHANNEL}}',publicArtifactBoundaryEnabled:{{BUILD_PUBLIC_ARTIFACT_BOUNDARY_ENABLED}},platform:{{BUILD_PLATFORM_INFO_JSON}},applications:{{BUILD_APPLICATIONS_INFO_JSON}}};
 function buildVersionLine(){
  return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
 }
@@ -1005,11 +1005,11 @@ const sfx={
     window.__platinumAudioDebug.reference.lastError=`${clip}: ${String(err&&err.message||err)}`;
     recordSystemIssue('reference_audio_load_failed',`Reference audio failed to load for ${clip}`,{clip,error:String(err&&err.message||err)},{level:'warn'});
     return null;
-  });
+ });
   return this.referenceBuffers[clip];
  },
  primeReferenceTheme(themeId=''){
-  if(String(themeId||'').trim()!=='galaga-reference-assets')return;
+  if(String(themeId||'').trim()!=='galaga-reference-assets'||BUILD_INFO?.publicArtifactBoundaryEnabled)return;
   [
    'assets/reference-audio/galaga3-start.m4a',
    'assets/reference-audio/galaga3-ambience-convoy.m4a',
@@ -1799,7 +1799,7 @@ const DEFAULT_TEST_CFG=Object.freeze({
  extendFirst:20000,
  extendRecurring:70000,
   challenge:false,
-  audioTheme:'galaga-reference-assets',
+  audioTheme:'aurora-application',
   audioThemePinned:false,
   graphicsTheme:'aurora-borealis',
   spriteRenderMode:'auto',
@@ -1807,6 +1807,9 @@ const DEFAULT_TEST_CFG=Object.freeze({
   starfieldSpeed:1
 });
 let testCfgCache=null;
+function referenceAudioPubliclyAvailable(){
+ return !BUILD_INFO?.publicArtifactBoundaryEnabled;
+}
 function productionRootModeEnabled(){
  return !PRODUCTION_RELEASE_LANE||!!developerRootMode;
 }
@@ -1839,7 +1842,9 @@ function effectiveStartStateCfg(cfg){
 }
 function sanitizeAudioThemeValue(value=''){
  const next=String(value||'').trim()||'auto';
- return ['auto','aurora-application','galaga-original-reference','galaga-reference-assets'].includes(next)?next:DEFAULT_TEST_CFG.audioTheme;
+ const sanitized=['auto','aurora-application','galaga-original-reference','galaga-reference-assets'].includes(next)?next:DEFAULT_TEST_CFG.audioTheme;
+ if(sanitized==='galaga-reference-assets'&&!referenceAudioPubliclyAvailable())return DEFAULT_TEST_CFG.audioTheme;
+ return sanitized;
 }
 function sanitizeGraphicsThemeValue(value=''){
  const next=String(value||'').trim()||'auto';
@@ -1868,6 +1873,17 @@ function applyTestCfgToControls(cfg){
  if(testExtendFirst)testExtendFirst.value=startCfg.extendFirst;
  if(testExtendRecurring)testExtendRecurring.value=startCfg.extendRecurring;
  if(testChallenge)testChallenge.checked=startKind==='challenge'||!!startCfg.challenge;
+ if(audioTheme){
+  const referenceOption=audioTheme.querySelector('option[value="galaga-reference-assets"]');
+  if(referenceOption){
+   const unavailable=!referenceAudioPubliclyAvailable();
+   referenceOption.disabled=unavailable;
+   referenceOption.hidden=unavailable;
+   referenceOption.textContent=unavailable
+    ? 'Galaga Reference Audio (private companion store only)'
+    : 'Galaga Reference Audio';
+  }
+ }
  if(audioTheme)audioTheme.value=effectiveAudioThemeSelection(cfg);
  if(graphicsTheme)graphicsTheme.value=cfg.graphicsTheme;
  if(spriteRenderMode)spriteRenderMode.value=sanitizeSpriteRenderModeValue(cfg.spriteRenderMode);

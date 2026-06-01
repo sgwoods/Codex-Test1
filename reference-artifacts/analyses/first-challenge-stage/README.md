@@ -5,7 +5,7 @@ Primary sources:
 - original gameplay footage:
   - `/Users/sgwoods/Downloads/🎮🕹️👉Galaga (1981) - Gameplay Arcade - Snake Latino (360p, h264).mp4`
 - generated local contact sheet:
-  - `reference-artifacts/analyses/first-challenge-stage/contact-sheet.png`
+  - `private-artifacts/repo-mirror/reference-artifacts/analyses/first-challenge-stage/contact-sheet.png`
 - frame-indexed source window:
   - `reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg`
 - manual-backed structure:
@@ -59,7 +59,7 @@ But it still differs from the original in ways that matter to feel:
 
 Using:
 
-- `reference-artifacts/analyses/first-challenge-stage/contact-sheet.png`
+- `private-artifacts/repo-mirror/reference-artifacts/analyses/first-challenge-stage/contact-sheet.png`
 - `reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg`
 
 Current read:
@@ -95,3 +95,13 @@ should add:
 4. number of targets still alive when the first group starts peeling downward
 
 Those would make future challenge-stage passes much less guessy.
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/first-challenge-stage/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/first-challenge-stage`

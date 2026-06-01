@@ -41,28 +41,28 @@ possible.
 
 This folder includes a few checkpoint stills:
 
-- `reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png`
+- `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-00m12s.png`
   - early scoring / title-state board
   - useful for:
     - starfield visibility against low board clutter
     - title/text color intensity
     - basic contrast ratios
 
-- `reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-05m00s.png`
+- `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-05m00s.png`
   - live gameplay with sparse surviving enemies
   - useful for:
     - starfield visibility during active play
     - bullet brightness
     - ship readability against the moving field
 
-- `reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png`
+- `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-10m00s.png`
   - fuller active board state
   - useful for:
     - mixed enemy motion readability
     - starfield intensity under heavier play pressure
     - on-screen sprite hierarchy
 
-- `reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-20m00s.png`
+- `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-stage-reference-video/frames/galaga-reference-20m00s.png`
   - score/results style state
   - useful for:
     - starfield readability in non-combat presentation
@@ -107,3 +107,13 @@ especially when comparing:
 - sprite intensity
 - motion pacing
 - stage readability
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/galaga-stage-reference-video/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-stage-reference-video`

@@ -22,15 +22,15 @@ opening handoff in Galaga reference mode.
 ## Generated reference views
 
 - Contact sheet:
-  - `reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/opening-contact.png`
+  - `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/opening-contact.png`
 - Tight contact sheet:
-  - `reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/opening-contact-tight.png`
+  - `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/opening-contact-tight.png`
 - Opening waveform:
-  - `reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/opening-waveform.png`
+  - `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/opening-waveform.png`
 - Game-start waveform:
-  - `reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/game-start-waveform.png`
+  - `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/game-start-waveform.png`
 - Level-underscore waveform:
-  - `reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/level-underscore-waveform.png`
+  - `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-stage-opening-timing/2026-04-12-main-a777fba/level-underscore-waveform.png`
 
 ## Measured durations
 
@@ -63,3 +63,13 @@ opening handoff in Galaga reference mode.
 - If Aurora needs a longer opening to stay closer to Galaga, the game window
   should expand first and only fall back to excerpting if the measured
   experience proves that necessary.
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/galaga-stage-opening-timing/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-stage-opening-timing`

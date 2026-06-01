@@ -21,16 +21,16 @@ artifacts or another committed image/video artifact.
 
 ## Windows
 
-- `stage-1-opening-entry`: Stage 1 opening rack entry, 80 frames, `reference-artifacts/analyses/galaga-path-reference-media/stage-1-opening-entry/contact-sheet.jpg`
-- `stage-2-early-entry`: Stage 2 early formation entry, 80 frames, `reference-artifacts/analyses/galaga-path-reference-media/stage-2-early-entry/contact-sheet.jpg`
-- `stage-4-post-challenge-entry`: Stage 4 post-challenge rack entry, 96 frames, `reference-artifacts/analyses/galaga-path-reference-media/stage-4-post-challenge-entry/contact-sheet.jpg`
-- `stage-5-opening-entry`: Stage 5 opening rack entry, 96 frames, `reference-artifacts/analyses/galaga-path-reference-media/stage-5-opening-entry/contact-sheet.jpg`
-- `stage-6-capture-pressure`: Stage 6 capture and boss pressure, 96 frames, `reference-artifacts/analyses/galaga-path-reference-media/stage-6-capture-pressure/contact-sheet.jpg`
-- `stage-10-opening-entry`: Stage 10 opening rack entry, 88 frames, `reference-artifacts/analyses/galaga-path-reference-media/stage-10-opening-entry/contact-sheet.jpg`
-- `challenge-1-arrival`: First challenge arrival and score window, 144 frames, `reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg`
-- `challenge-1-late-wave`: First challenge late wave and results, 136 frames, `reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/contact-sheet.jpg`
-- `challenge-2-arrival`: Second challenge arrival and score window, 144 frames, `reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg`
-- `challenge-3-arrival`: Third challenge arrival and score window, 144 frames, `reference-artifacts/analyses/galaga-path-reference-media/challenge-3-arrival/contact-sheet.jpg`
+- `stage-1-opening-entry`: Stage 1 opening rack entry, 80 frames, `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-path-reference-media/stage-1-opening-entry/contact-sheet.jpg`
+- `stage-2-early-entry`: Stage 2 early formation entry, 80 frames, `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-path-reference-media/stage-2-early-entry/contact-sheet.jpg`
+- `stage-4-post-challenge-entry`: Stage 4 post-challenge rack entry, 96 frames, `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-path-reference-media/stage-4-post-challenge-entry/contact-sheet.jpg`
+- `stage-5-opening-entry`: Stage 5 opening rack entry, 96 frames, `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-path-reference-media/stage-5-opening-entry/contact-sheet.jpg`
+- `stage-6-capture-pressure`: Stage 6 capture and boss pressure, 96 frames, `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-path-reference-media/stage-6-capture-pressure/contact-sheet.jpg`
+- `stage-10-opening-entry`: Stage 10 opening rack entry, 88 frames, `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-path-reference-media/stage-10-opening-entry/contact-sheet.jpg`
+- `challenge-1-arrival`: First challenge arrival and score window, 144 frames, `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg`
+- `challenge-1-late-wave`: First challenge late wave and results, 136 frames, `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/contact-sheet.jpg`
+- `challenge-2-arrival`: Second challenge arrival and score window, 144 frames, `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg`
+- `challenge-3-arrival`: Third challenge arrival and score window, 144 frames, `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-path-reference-media/challenge-3-arrival/contact-sheet.jpg`
 
 ## Compatibility Sheets
 
@@ -39,3 +39,13 @@ artifacts or another committed image/video artifact.
 - `reference-artifacts/analyses/release-reference-pack/transition-window/contact-sheet.png`: Challenge result to post-challenge transition window generated from the local Snake Latino Galaga source.
 - `reference-artifacts/analyses/release-reference-pack/stage4-window/contact-sheet.png`: Post-challenge regular-stage pressure window generated from the local Snake Latino Galaga source.
 - `reference-artifacts/analyses/release-reference-pack/later-pressure-window/contact-sheet.png`: Later pressure and challenge-adjacent window generated from the local Snake Latino Galaga source.
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/galaga-path-reference-media/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-path-reference-media`

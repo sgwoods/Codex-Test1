@@ -30,6 +30,32 @@ two largest Aurora audio-fitting families:
 - `reference-artifacts/analyses/aurora-audio-cue-candidates`
 - `reference-artifacts/analyses/aurora-audio-theme-comparison`
 
+The follow-on private-lane migration waves are now also in place for the
+broader Aurora/Galaga challenge/reference and direct-reference families,
+including:
+
+- challenge/reference motion lanes:
+  - `reference-artifacts/analyses/galaga-path-reference-media`
+  - `reference-artifacts/analyses/galaga-alien-frame-cadence-targets`
+  - `reference-artifacts/analyses/galaga-challenge-video-reference`
+  - `reference-artifacts/analyses/galaga-audio-reference-video-3`
+- older direct-reference residue:
+  - `reference-artifacts/analyses/galaga-audio-reference-video`
+  - `reference-artifacts/analyses/galaga-audio-reference-video-2`
+  - `reference-artifacts/analyses/galaga-reference-sprites`
+  - `reference-artifacts/analyses/galaxian-reference`
+  - `reference-artifacts/analyses/space-invaders-reference`
+- smaller visual-reference crop/timing packs:
+  - `reference-artifacts/analyses/galaga-alien-target-crops`
+  - `reference-artifacts/analyses/stage7-reference-path-before-after`
+  - `reference-artifacts/analyses/galaga-alien-cadence-validation`
+  - `reference-artifacts/analyses/galaga-alien-visual-crop-previews`
+  - `reference-artifacts/analyses/galaga-stage-opening-timing`
+
+The next storage decision is now a mixed-conformance review, not another blind
+bulk move. Repo-owned runtime evidence can stay public, while source-derived
+comparison sheets in mixed lanes should move private as they are identified.
+
 For the repeatable source-to-game-pack process, pair this inventory with:
 
 - `CLASSIC_ARCADE_INGESTION_FRAMEWORK.md`
@@ -83,7 +109,7 @@ persona testing expectations.
 | Galaxian primary operator manual package | `reference-artifacts/preserved-sources/galaxian-midway-operator-manual-2026-06-01/README.md` | preserved Midway parts and operating manual with arcade-era documentary authority | moves the artifact gap from “find an arcade manual” to “extract score/rules/setup pages from the manual now in repo” |
 | Galaxian official gameplay-summary page | `reference-artifacts/preserved-sources/galaxian-galaga-web-history-2026-06-01/README.md` | preserved Bandai Namco Galaga Web history/gameplay summary page for Galaxian | corroborates control language, single-shot constraint, alien-family naming, and convoy/charger score bands with an official modern source |
 | Galaga League official lineage page | `reference-artifacts/preserved-sources/galaga-league-history-2026-06-01/README.md` | preserved Bandai Namco page defining the Galaga League and tying the classic series together | supports official lineage, naming, and themed-universe framing without being mistaken for gameplay-conformance evidence |
-| Reference audio clips | `src/assets/reference-audio/` | clipped reference cues mirrored into app assets | cue alignment, phrase comparison, reference-theme playback |
+| Reference audio clips | `src/assets/reference-audio/private-storage.json` | public pointer for the former app-bundled source-derived cue pack, now stored in the companion private repo under `private-artifacts/repo-mirror/src/assets/reference-audio/` | cue alignment, phrase comparison, and private reference-theme review without shipping copied cue bytes from the public repo |
 
 ## Derived Analysis Packs Already In The Repo
 

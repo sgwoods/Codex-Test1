@@ -18,12 +18,18 @@
       "start_seconds": 0,
       "duration_seconds": 180,
       "sample_every_seconds": 15,
-      "artifact": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/frames/contact-sheet-reference-window.jpg"
+      "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/frames/contact-sheet-reference-window.jpg"
     },
     "waveform": {
       "start_seconds": 0,
       "duration_seconds": 60,
-      "artifact": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/audio/waveform-reference-window.png"
+      "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/audio/waveform-reference-window.png"
     }
+  },
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/analyses/galaxian-reference/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference",
+    "moved_file_count": 11
   }
 }

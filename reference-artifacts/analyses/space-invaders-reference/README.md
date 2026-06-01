@@ -86,3 +86,13 @@ That means the still-image queue is no longer about generic flyer or
 invader-family hunting. The more important remaining visual gaps are bunker
 references and cabinet-facing marquee, bezel, control-panel, title, and
 gameplay surfaces.
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/space-invaders-reference/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/space-invaders-reference`

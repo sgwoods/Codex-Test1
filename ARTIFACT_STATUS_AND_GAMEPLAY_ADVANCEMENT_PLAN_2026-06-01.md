@@ -32,6 +32,16 @@ The first large Aurora audio-fitting tranche is now also complete in the
 working tree for `aurora-audio-cue-candidates` and
 `aurora-audio-theme-comparison`, which means the migration workflow has now
 been exercised successfully on both active game lines, not just Guardians.
+The follow-on Aurora/Galaga reference-media waves are now also complete across
+challenge/reference motion packs, older reference-audio/video residue,
+sprite/contact-sheet residue, and visual crop/timing packs. The next storage
+decision is no longer about obvious external reference bytes. It is now about
+mixed conformance lanes that combine public-safe runtime evidence with
+source-derived comparison sheets.
+The old app-bundled `src/assets/reference-audio` lane is now private too, and
+the public build/runtime has been tightened so the repo no longer republishes
+private-derived media through shipped `catalog-media` assets or bundled
+reference-audio cues.
 
 ## Cross-game summary
 

@@ -15,8 +15,8 @@ Technical profile:
 
 Cataloged review surfaces:
 
-- `reference-artifacts/analyses/galaga-audio-reference-video-2/contact-01.png`
-- `reference-artifacts/analyses/galaga-audio-reference-video-2/contact-02.png`
+- `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-video-2/contact-01.png`
+- `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-video-2/contact-02.png`
 
 ## What this artifact is good for
 
@@ -115,3 +115,13 @@ adds clearer indexed coverage for:
 
 Use both artifact sets together when tuning Aurora's selectable classic
 reference audio family.
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/galaga-audio-reference-video-2/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-video-2`

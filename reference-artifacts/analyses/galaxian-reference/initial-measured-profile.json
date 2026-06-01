@@ -19,8 +19,8 @@
         "hasAudio": true
       },
       "manifest": "reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/source-manifest.json",
-      "contact_sheet": "reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/frames/contact-sheet-reference-window.jpg",
-      "waveform": "reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/audio/waveform-reference-window.png"
+      "contact_sheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/frames/contact-sheet-reference-window.jpg",
+      "waveform": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/audio/waveform-reference-window.png"
     },
     {
       "source_id": "arcades-lounge-level-5",
@@ -34,8 +34,8 @@
         "hasAudio": true
       },
       "manifest": "reference-artifacts/analyses/galaxian-reference/arcades-lounge-level-5/source-manifest.json",
-      "contact_sheet": "reference-artifacts/analyses/galaxian-reference/arcades-lounge-level-5/frames/contact-sheet-reference-window.jpg",
-      "waveform": "reference-artifacts/analyses/galaxian-reference/arcades-lounge-level-5/audio/waveform-reference-window.png"
+      "contact_sheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/arcades-lounge-level-5/frames/contact-sheet-reference-window.jpg",
+      "waveform": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/arcades-lounge-level-5/audio/waveform-reference-window.png"
     },
     {
       "source_id": "nenriki-15-wave-session",
@@ -49,8 +49,8 @@
         "hasAudio": true
       },
       "manifest": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/source-manifest.json",
-      "contact_sheet": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/frames/contact-sheet-reference-window.jpg",
-      "waveform": "reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/audio/waveform-reference-window.png"
+      "contact_sheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/frames/contact-sheet-reference-window.jpg",
+      "waveform": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/nenriki-15-wave-session/audio/waveform-reference-window.png"
     },
     {
       "source_id": "galaxian-15wave-full-start-end",
@@ -83,12 +83,12 @@
         "hasAudio": true
       },
       "manifest": "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/source-manifest.json",
-      "contact_sheet": "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-0-180.jpg",
-      "waveform": "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/audio/waveform-reference-window-0-120.png",
+      "contact_sheet": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-0-180.jpg",
+      "waveform": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/audio/waveform-reference-window-0-120.png",
       "supplemental_contact_sheets": [
-        "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-180-360.jpg",
-        "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-360-540.jpg",
-        "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-540-720.jpg"
+        "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-180-360.jpg",
+        "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-360-540.jpg",
+        "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-540-720.jpg"
       ]
     },
     {
@@ -113,17 +113,17 @@
   ],
   "promoted_event_log": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
   "measured_baseline": {
-      "source_count": 6,
-      "has_intro_source": true,
-      "has_mid_wave_source": true,
-      "has_long_session_source": true,
-      "has_full_start_to_end_long_session_source": true,
-      "has_repeat_intro_cycle_source": true,
-      "has_precise_early_audio_session_source": true,
-      "first_slice": {
-        "player_fire_model": "single-shot",
-        "formation_model": "rack-with-independent-dives",
-        "flagship_model": "flagship-with-escort-pressure",
+    "source_count": 6,
+    "has_intro_source": true,
+    "has_mid_wave_source": true,
+    "has_long_session_source": true,
+    "has_full_start_to_end_long_session_source": true,
+    "has_repeat_intro_cycle_source": true,
+    "has_precise_early_audio_session_source": true,
+    "first_slice": {
+      "player_fire_model": "single-shot",
+      "formation_model": "rack-with-independent-dives",
+      "flagship_model": "flagship-with-escort-pressure",
       "wrap_threat_model": "bottom-exit-or-return-explicit-preview-rule",
       "evidence_state": "promoted-event-log-awaiting-runtime-implementation"
     }

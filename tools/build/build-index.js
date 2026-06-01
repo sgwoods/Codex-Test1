@@ -245,15 +245,40 @@ function rel(file){
   return path.relative(ROOT, file).replace(/\\/g, '/');
 }
 
-function copyAssetTree(srcDir, destDir){
+const PUBLIC_SAFE_ARTIFACT_EXTENSIONS = new Set(['.md', '.json', '.sha256', '.txt', '.csv', '.tsv', '.yml', '.yaml']);
+const PRIVATE_COMPANION_STORE_NOTE = 'Private companion store only; not exposed from the public repo.';
+
+function isPublicSafeArtifactPath(value=''){
+  const normalized = normalizeAssetSourcePath(value);
+  if(!normalized) return false;
+  if(normalized.startsWith('private-artifacts/')) return false;
+  if(!normalized.startsWith('reference-artifacts/')) return true;
+  return PUBLIC_SAFE_ARTIFACT_EXTENSIONS.has(path.extname(normalized).toLowerCase());
+}
+
+function isPublicSafeBundledAssetPath(value=''){
+  const normalized = normalizeAssetSourcePath(value);
+  if(!normalized) return true;
+  return !normalized.startsWith('src/assets/reference-audio/');
+}
+
+function isPublicSafePublishedAssetHref(value=''){
+  const normalized = normalizeAssetSourcePath(value);
+  if(!normalized) return false;
+  return !normalized.startsWith('assets/reference-audio/');
+}
+
+function copyAssetTree(srcDir, destDir, rootDir = srcDir){
   if(!fs.existsSync(srcDir)) return [];
   fs.mkdirSync(destDir, { recursive: true });
   const copied = [];
   for(const entry of fs.readdirSync(srcDir, { withFileTypes: true })){
     const src = path.join(srcDir, entry.name);
     const dest = path.join(destDir, entry.name);
+    const normalized = normalizeAssetSourcePath(path.relative(ROOT, src));
+    if(!isPublicSafeBundledAssetPath(normalized)) continue;
     if(entry.isDirectory()){
-      copied.push(...copyAssetTree(src, dest));
+      copied.push(...copyAssetTree(src, dest, rootDir));
       continue;
     }
     fs.mkdirSync(path.dirname(dest), { recursive: true });
@@ -264,7 +289,16 @@ function copyAssetTree(srcDir, destDir){
 }
 
 function normalizeAssetSourcePath(sourcePath){
-  return String(sourcePath || '')
+  const raw = String(sourcePath || '').trim();
+  if(!raw) return '';
+  if(path.isAbsolute(raw)){
+    const repoRelative = path.relative(ROOT, raw).replace(/\\/g, '/');
+    if(repoRelative && !repoRelative.startsWith('..') && !path.isAbsolute(repoRelative)){
+      return repoRelative.replace(/^\.\//, '');
+    }
+    return '';
+  }
+  return raw
     .replace(/\\/g, '/')
     .replace(/^\.\//, '')
     .replace(/^\/+/, '')
@@ -275,6 +309,7 @@ function catalogMediaHref(sourcePath){
   const normalized = normalizeAssetSourcePath(sourcePath);
   if(!normalized) return '';
   if(/^(?:https?:|data:|assets\/)/.test(normalized)) return normalized;
+  if(!isPublicSafeArtifactPath(normalized)) return '';
   CATALOG_MEDIA_SOURCE_PATHS.add(normalized);
   const ext = path.extname(normalized);
   const rawBase = path.basename(normalized, ext) || 'media';
@@ -292,6 +327,7 @@ function copyCatalogMediaAssets(destAssetsDir){
     const source = path.join(ROOT, sourcePath);
     if(!fs.existsSync(source) || !fs.statSync(source).isFile()) continue;
     const href = catalogMediaHref(sourcePath);
+    if(!href || /^(?:https?:|data:)/.test(href)) continue;
     const dest = path.join(path.dirname(destAssetsDir), href);
     fs.mkdirSync(path.dirname(dest), { recursive: true });
     fs.copyFileSync(source, dest);
@@ -2727,6 +2763,8 @@ function renderInlineMarkdown(text=''){
     const href = String(rawHref || '').trim();
     if(!href) return href;
     if(/^(?:https?:|mailto:|data:|#|\/)/i.test(href)) return href;
+    if(!isPublicSafePublishedAssetHref(href)) return '#private-companion-store';
+    if(!isPublicSafeArtifactPath(href)) return '#private-companion-store';
     if(/\.(?:md|json|sql|toml|txt)$/i.test(href)){
       return `${ACTIVE_SOURCE_BLOB_BASE}${href.replace(/^\.\//, '')}`;
     }
@@ -2741,7 +2779,12 @@ function renderInlineMarkdown(text=''){
   }
 
   let out = esc(text);
-  out = out.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_, alt, src) => `<img alt="${alt}" src="${esc(rewriteInlineImageSrc(src))}">`);
+  out = out.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_, alt, src) => {
+    const resolved = rewriteInlineImageSrc(src);
+    return resolved
+      ? `<img alt="${alt}" src="${esc(resolved)}">`
+      : `<span class="mediaPlaceholder">${esc(PRIVATE_COMPANION_STORE_NOTE)}</span>`;
+  });
   out = out.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label, href) => `<a href="${esc(rewriteInlineHref(href))}">${label}</a>`);
   out = out.replace(/`([^`]+)`/g, '<code>$1</code>');
   out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
@@ -4352,6 +4395,9 @@ function personaPerformanceChartHtml(artifact){
     return '<div class="mediaPlaceholder">Persona performance line chart pending. Run <code>npm run harness:analyze:persona-performance-distribution</code> after a distribution batch.</div>';
   }
   const href = catalogMediaHref(chartPath);
+  if(!href){
+    return `<div class="mediaPlaceholder">${esc(PRIVATE_COMPANION_STORE_NOTE)}</div>`;
+  }
   return `<img class="distributionChart" src="${esc(href)}" alt="Line chart of persona score and stage reached across repeated seeded full-run games" loading="lazy">`;
 }
 
@@ -4470,8 +4516,17 @@ function renderPixelSprite(sprite){
 
 function renderMediaImage(item){
   if(!item || !item.src) return '';
-  const href = catalogMediaHref(item.src);
   const label = item.label || 'Evidence image';
+  const href = catalogMediaHref(item.src);
+  if(!href){
+    return `
+      <div class="catalogMediaItem">
+        <span class="catalogMediaLabel">${esc(label)}</span>
+        <div class="mediaPlaceholder">${esc(PRIVATE_COMPANION_STORE_NOTE)}</div>
+        ${item.note ? `<span class="catalogMediaNote">${esc(item.note)}</span>` : ''}
+      </div>
+    `;
+  }
   const crop = item.crop || {};
   const cropWidth = Number(crop.width || crop.w);
   const cropHeight = Number(crop.height || crop.h);
@@ -4519,9 +4574,18 @@ function renderMediaImage(item){
 
 function renderMediaVideo(item){
   if(!item || !item.src) return '';
-  const href = catalogMediaHref(item.src);
-  const poster = item.poster ? catalogMediaHref(item.poster) : '';
   const label = item.label || 'Evidence video';
+  const href = catalogMediaHref(item.src);
+  if(!href){
+    return `
+      <div class="catalogMediaItem">
+        <span class="catalogMediaLabel">${esc(label)}</span>
+        <div class="mediaPlaceholder">${esc(PRIVATE_COMPANION_STORE_NOTE)}</div>
+        <span class="catalogMediaNote">${esc(item.note || '10-second evidence clip for inline motion review.')}</span>
+      </div>
+    `;
+  }
+  const poster = item.poster ? catalogMediaHref(item.poster) : '';
   const alt = item.alt || label;
   const note = item.note || '10-second evidence clip for inline motion review.';
   const ext = path.extname(String(item.src || '')).toLowerCase();
@@ -4569,10 +4633,12 @@ function renderGameplaySegmentCaptureEvidence(artifact){
   const contactHref = artifact?.latestContactSheet || artifact?.contactSheet
     ? catalogMediaHref(artifact.latestContactSheet || artifact.contactSheet)
     : '';
-  const directLinks = `
+  const directLinks = videoHref
+    ? `
     <p class="docMeta"><strong>Direct artifact links:</strong> <a href="${esc(videoHref)}">open video</a>${posterHref ? `; <a href="${esc(posterHref)}">${contactHref ? 'open contact sheet' : 'open poster'}</a>` : ''}. These are relative build-lane links, so they resolve on localhost, hosted dev, beta, and production when the artifact is included in that lane.</p>
-  `;
-  const posterLink = posterHref
+  `
+    : `<p class="docMeta"><strong>Direct artifact links:</strong> ${esc(PRIVATE_COMPANION_STORE_NOTE)}</p>`;
+  const posterLink = videoHref && posterHref
     ? `
       <div class="catalogMediaItem">
         <span class="catalogMediaLabel">Click evidence image to open review clip</span>
@@ -4583,6 +4649,20 @@ function renderGameplaySegmentCaptureEvidence(artifact){
       </div>
     `
     : '';
+  const reviewClip = videoHref
+    ? renderMediaVideo({
+        src,
+        poster,
+        label: 'Latest gameplay segment review clip',
+        note: 'Durable before/after evidence clip for movement, graphics, persona behavior, stage pacing, and audio review.'
+      })
+    : `
+      <div class="catalogMediaItem">
+        <span class="catalogMediaLabel">Latest gameplay segment review clip</span>
+        <div class="mediaPlaceholder">${esc(PRIVATE_COMPANION_STORE_NOTE)}</div>
+        <span class="catalogMediaNote">Keep the review media in the private companion store and use the public metrics/manifests for summary reporting.</span>
+      </div>
+    `;
   return `
     <div class="docWrap">
       <p><strong>Latest gameplay segment evidence:</strong> ${esc(duration)} ${esc(challengeLabel)} capture for ${esc(capture.watchPersona || capture.persona || 'human')} review; ${esc(audioRead)}; seed ${esc(capture.seed ?? 'n/a')}; generated ${esc(artifact.generatedAt || 'n/a')}.</p>
@@ -4592,12 +4672,7 @@ function renderGameplaySegmentCaptureEvidence(artifact){
     </div>
     <div class="levelVisualVideoGrid" style="margin-top:12px;">
       ${posterLink}
-      ${renderMediaVideo({
-        src,
-        poster,
-        label: 'Latest gameplay segment review clip',
-        note: 'Durable before/after evidence clip for movement, graphics, persona behavior, stage pacing, and audio review.'
-      })}
+      ${reviewClip}
     </div>
   `;
 }
@@ -4645,6 +4720,7 @@ function referenceClipsForEntries(entries, guide){
   const clips = [];
   for(const source of [...(guide.comparisonSets || []), ...(guide.audioEventMatrix || [])]){
     if(!ids.has(source.entryId) || !source.referenceClip) continue;
+    if(!isPublicSafePublishedAssetHref(source.referenceClip)) continue;
     if(clips.some(item => item.referenceClip === source.referenceClip)) continue;
     clips.push({
       label: source.referenceLabel || source.label || source.event || 'Reference',
@@ -7058,6 +7134,7 @@ function build(options = {}){
   ]));
   const testAccountEmail = testAccountEmails[0] || '';
   const testAccountUserId = testAccountUserIds[0] || '';
+  const publicArtifactBoundaryEnabled = true;
   const tokens = {
     BUILD_VERSION: buildVersion,
     BUILD_VERSION_LINE: buildVersionLine,
@@ -7068,6 +7145,7 @@ function build(options = {}){
     BUILD_DIRTY: buildDirty ? 'true' : 'false',
     BUILD_RELEASE_ET: buildReleaseEt,
     BUILD_STATE: buildState,
+    BUILD_PUBLIC_ARTIFACT_BOUNDARY_ENABLED: publicArtifactBoundaryEnabled ? 'true' : 'false',
     BUILD_PRODUCT_NAME_JSON: JSON.stringify(releaseManifest.product),
     BUILD_PLATFORM_INFO_JSON: JSON.stringify(releaseManifest.platform),
     BUILD_APPLICATIONS_INFO_JSON: JSON.stringify(releaseManifest.applications),
@@ -7116,6 +7194,7 @@ function build(options = {}){
     branch: buildBranch,
     state: buildState,
     releaseChannel: buildReleaseChannel,
+    publicArtifactBoundaryEnabled,
     dirty: buildDirty,
     dirtyFiles: buildDirtyFiles,
     builtAtUtc: buildUtc,

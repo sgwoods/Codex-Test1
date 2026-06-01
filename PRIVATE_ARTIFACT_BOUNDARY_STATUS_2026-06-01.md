@@ -45,6 +45,27 @@ Stop the current June 1 ingestion wave from becoming a new public-media layer.
 - migrated the first large Aurora audio-fitting tranche:
   - `reference-artifacts/analyses/aurora-audio-cue-candidates`
   - `reference-artifacts/analyses/aurora-audio-theme-comparison`
+- migrated the follow-on Aurora challenge/reference wave:
+  - `reference-artifacts/analyses/galaga-path-reference-media`
+  - `reference-artifacts/analyses/galaga-alien-frame-cadence-targets`
+  - `reference-artifacts/analyses/galaga-challenge-video-reference`
+  - `reference-artifacts/analyses/galaga-audio-reference-video-3`
+- migrated the smaller direct-reference residue and visual crop/timing waves:
+  - `reference-artifacts/analyses/galaga-audio-reference-video`
+  - `reference-artifacts/analyses/galaga-audio-reference-video-2`
+  - `reference-artifacts/analyses/galaga-reference-sprites`
+  - `reference-artifacts/analyses/galaxian-reference`
+  - `reference-artifacts/analyses/space-invaders-reference`
+  - `reference-artifacts/analyses/challenge-stage-reference`
+  - `reference-artifacts/analyses/first-challenge-stage`
+  - `reference-artifacts/analyses/galaga-stage-reference-video`
+  - `reference-artifacts/analyses/galaga-alien-motion-reference`
+  - `reference-artifacts/analyses/galaga-timing-alignment`
+  - `reference-artifacts/analyses/galaga-alien-target-crops`
+  - `reference-artifacts/analyses/stage7-reference-path-before-after`
+  - `reference-artifacts/analyses/galaga-alien-cadence-validation`
+  - `reference-artifacts/analyses/galaga-alien-visual-crop-previews`
+  - `reference-artifacts/analyses/galaga-stage-opening-timing`
 
 That legacy tranche moved `1421` tracked media files out of the public working
 tree and into the private companion repo while leaving metadata and pointers in
@@ -53,6 +74,23 @@ place.
 The Aurora tranche moved `4917` additional tracked media files out of the
 public working tree and into the private companion repo, again leaving
 metadata and pointers in place.
+
+The follow-on Aurora/direct-reference waves moved `1461` additional tracked
+media files out of the public working tree and into the private companion repo,
+again leaving metadata and pointers in place.
+
+The former app-bundled reference-audio lane at `src/assets/reference-audio`
+has now also been migrated into the private companion repo, moving `50`
+additional tracked audio files out of the public working tree while leaving a
+public pointer file in place.
+
+The public build now also enforces the boundary directly:
+
+- `dist/` no longer republishes private-derived media through
+  `assets/catalog-media/`
+- `dist/` no longer ships the old `assets/reference-audio/` cue-pack files
+- public runtime defaults now avoid the private reference-audio theme and
+  instead stay on repo-owned application mixes
 
 ## What This Pass Does Not Do
 
@@ -70,15 +108,23 @@ The next step is to migrate the remaining older public artifact families by
 priority, starting with the most source-derived gameplay, audio, and frame
 reference lanes that still affect active conformance work.
 
-The current recommended next tranche is:
+The current recommended next review tranche is:
 
-- `reference-artifacts/analyses/galaga-path-reference-media`
-- `reference-artifacts/analyses/galaga-alien-frame-cadence-targets`
-- `reference-artifacts/analyses/galaga-challenge-video-reference`
-- `reference-artifacts/analyses/galaga-audio-reference-video-3`
+- `reference-artifacts/analyses/challenge-stage-conformance`
+- `reference-artifacts/analyses/level-visual-conformance-index`
+- `reference-artifacts/analyses/level-visual-timing-alignment`
+- `reference-artifacts/analyses/aurora-impact-explosion-conformance`
+- `reference-artifacts/analyses/galaxy-guardians-identity`
 
-That tranche is the best next move because it is still:
+That tranche is the best next move because it is now:
 
-- clearly reference-derived under the new policy
-- smaller and more focused than the Aurora audio tranche
-- directly useful to Aurora challenge-stage and motion-fidelity work
+- no longer the obvious external-reference residue
+- more likely to mix public-safe runtime/conformance outputs with
+  source-derived comparison sheets
+- worth splitting deliberately at the file level instead of bulk-moving
+
+The current storage question is no longer whether obvious source-derived bytes
+are still leaking through the app build or the old reference-audio lane. That
+part is now closed. The remaining question is which mixed conformance files
+should stay public as runtime-safe evidence versus move private as
+source-derived comparison media.

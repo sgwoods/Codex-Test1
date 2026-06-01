@@ -18,32 +18,32 @@
       "start_seconds": 0,
       "duration_seconds": 180,
       "sample_every_seconds": 15,
-      "artifact": "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-0-180.jpg"
+      "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-0-180.jpg"
     },
     "additional_contact_sheets": [
       {
         "start_seconds": 180,
         "duration_seconds": 180,
         "sample_every_seconds": 15,
-        "artifact": "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-180-360.jpg"
+        "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-180-360.jpg"
       },
       {
         "start_seconds": 360,
         "duration_seconds": 180,
         "sample_every_seconds": 15,
-        "artifact": "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-360-540.jpg"
+        "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-360-540.jpg"
       },
       {
         "start_seconds": 540,
         "duration_seconds": 180,
         "sample_every_seconds": 15,
-        "artifact": "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-540-720.jpg"
+        "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-540-720.jpg"
       }
     ],
     "waveform": {
       "start_seconds": 0,
       "duration_seconds": 120,
-      "artifact": "reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/audio/waveform-reference-window-0-120.png"
+      "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/audio/waveform-reference-window-0-120.png"
     }
   },
   "analysis_roles": [
@@ -54,5 +54,11 @@
   "notes": [
     "This source repeats attract and early-session states across a longer run, making it useful as corroborating evidence rather than as a single canonical event window.",
     "The first-pass contact sheets emphasize repeated score-strip, rack, and restart views more than deep later-wave pressure."
-  ]
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/analyses/galaxian-reference/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference",
+    "moved_file_count": 11
+  }
 }

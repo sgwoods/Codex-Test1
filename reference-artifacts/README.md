@@ -33,6 +33,9 @@ This directory stores durable reference material used to tune the game toward or
   contact sheets, waveform renders, extracted clips, and similar derivative
   media in the companion private artifact store described in
   [PRIVATE_ARTIFACT_STORAGE_POLICY.md](../PRIVATE_ARTIFACT_STORAGE_POLICY.md).
+- The same rule applies to source-derived app asset packs such as
+  `src/assets/reference-audio/`: public builds should point to metadata or
+  repo-owned runtime assets, not republish copied cue bytes.
 - The current pushed companion private repo is:
   `https://github.com/sgwoods/Codex-Test1-private-artifacts`
 - Large recovered source drops should be inventoried and triaged before any

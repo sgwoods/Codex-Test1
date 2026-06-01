@@ -15,10 +15,10 @@ Technical profile:
 
 Cataloged review surfaces:
 
-- `reference-artifacts/analyses/galaga-audio-reference-video/contact-01.png`
-- `reference-artifacts/analyses/galaga-audio-reference-video/contact-02.png`
-- `reference-artifacts/analyses/galaga-audio-reference-video/contact-03.png`
-- `reference-artifacts/analyses/galaga-audio-reference-video/contact-04.png`
+- `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-video/contact-01.png`
+- `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-video/contact-02.png`
+- `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-video/contact-03.png`
+- `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-video/contact-04.png`
 
 ## What this artifact is good for
 
@@ -149,3 +149,13 @@ especially for:
 - `rescueJoin`
 - `gameOver`
 - high-score/result surfaces
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/galaga-audio-reference-video/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-video`

@@ -2,7 +2,7 @@
   "artifactType": "reference-lineage-manifest",
   "lineage": "space-invaders-reference",
   "plannedGameKey": "windigo-invaders",
-  "status": "artifact-collection-and-analysis",
+  "status": "public-metadata-private-content",
   "sourceIds": [
     "spaceinvaders-23mins",
     "space-invaders-rules-techdocs",
@@ -28,5 +28,11 @@
     "preserve specific marquee-cabinet-bezel-control-panel-title image targets",
     "event-labeled timing windows",
     "bunker still references"
-  ]
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/analyses/space-invaders-reference/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/analyses/space-invaders-reference",
+    "moved_file_count": 2
+  }
 }

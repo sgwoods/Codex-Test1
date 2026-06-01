@@ -14,11 +14,21 @@ Role: `arcade_intro_attract_and_opening`
 ## Generated Artifacts
 
 - source manifest: `reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/source-manifest.json`
-- contact sheet: `reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/frames/contact-sheet-reference-window.jpg`
-- waveform: `reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/audio/waveform-reference-window.png`
+- contact sheet: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/frames/contact-sheet-reference-window.jpg`
+- waveform: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/matt-hawkins-arcade-intro/audio/waveform-reference-window.png`
 
 ## Current Use
 
 This source is part of the first Galaxy Guardians / Galaxian reference profile.
 It is suitable for source presence, media shape, contact-sheet review, and
 initial scaffold decisions. It is not yet a manually promoted event log.
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/galaxian-reference/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference`

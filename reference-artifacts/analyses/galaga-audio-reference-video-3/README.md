@@ -15,7 +15,7 @@ Technical profile:
 
 Cataloged review surfaces:
 
-- `reference-artifacts/analyses/galaga-audio-reference-video-3/contact-01.png`
+- `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-video-3/contact-01.png`
 
 ## Source index used for clipping
 
@@ -107,3 +107,13 @@ Use this package alongside:
 - `reference-artifacts/analyses/galaga-audio-reference-video-2/README.md`
 
 to build the fullest available original-Galaga reference sound set in this repo.
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/galaga-audio-reference-video-3/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-video-3`

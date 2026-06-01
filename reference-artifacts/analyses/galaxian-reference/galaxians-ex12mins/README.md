@@ -14,11 +14,11 @@ Role: `repeat_intro_and_early_session_cycle`
 ## Generated Artifacts
 
 - source manifest: `reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/source-manifest.json`
-- contact sheet: `reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-0-180.jpg`
-- contact sheet: `reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-180-360.jpg`
-- contact sheet: `reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-360-540.jpg`
-- contact sheet: `reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-540-720.jpg`
-- waveform: `reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/audio/waveform-reference-window-0-120.png`
+- contact sheet: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-0-180.jpg`
+- contact sheet: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-180-360.jpg`
+- contact sheet: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-360-540.jpg`
+- contact sheet: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/frames/contact-sheet-reference-window-540-720.jpg`
+- waveform: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-ex12mins/audio/waveform-reference-window-0-120.png`
 
 ## Current Use
 
@@ -32,3 +32,13 @@ with a repeatable early-session lane. It is especially useful for:
 
 It is not yet a manually promoted event log, but it is now part of the
 maintained Galaxian source set used for future conformance review.
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/galaxian-reference/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference`

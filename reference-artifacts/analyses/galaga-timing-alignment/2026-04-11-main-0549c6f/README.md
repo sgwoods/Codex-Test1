@@ -12,7 +12,7 @@ original Galaga references and Aurora runtime behavior.
 ## Source references
 
 - Stage 1 gameplay video: `reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/video/galaga-stage-reference-video-proxy.mp4`
-- Contact sheet: `reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/stage1-first-16s-contact.png`
+- Contact sheet: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/stage1-first-16s-contact.png`
 - Game start clip: `src/assets/reference-audio/galaga2-game-start.m4a`
 - Convoy cadence clip: `src/assets/reference-audio/galaga3-ambience-convoy.m4a`
 - Challenge entry clip: `src/assets/reference-audio/galaga2-challenging-stage.m4a`
@@ -67,3 +67,13 @@ original Galaga references and Aurora runtime behavior.
 - Metrics JSON: `reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/metrics.json`
 - This README: `reference-artifacts/analyses/galaga-timing-alignment/2026-04-11-main-0549c6f/README.md`
 - Raw run roots: `harness-artifacts/timing-alignment`
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/galaga-timing-alignment/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-timing-alignment`

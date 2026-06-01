@@ -25,11 +25,44 @@ question.
    private repo:
    - `reference-artifacts/analyses/aurora-audio-cue-candidates`
    - `reference-artifacts/analyses/aurora-audio-theme-comparison`
+4. The follow-on Aurora challenge/reference wave was migrated into the
+   companion private repo:
+   - `reference-artifacts/analyses/galaga-path-reference-media`
+   - `reference-artifacts/analyses/galaga-alien-frame-cadence-targets`
+   - `reference-artifacts/analyses/galaga-challenge-video-reference`
+   - `reference-artifacts/analyses/galaga-audio-reference-video-3`
+5. The smaller direct-reference residue and visual crop/timing waves were
+   migrated into the companion private repo:
+   - `reference-artifacts/analyses/galaga-audio-reference-video`
+   - `reference-artifacts/analyses/galaga-audio-reference-video-2`
+   - `reference-artifacts/analyses/galaga-reference-sprites`
+   - `reference-artifacts/analyses/galaxian-reference`
+   - `reference-artifacts/analyses/space-invaders-reference`
+   - `reference-artifacts/analyses/challenge-stage-reference`
+   - `reference-artifacts/analyses/first-challenge-stage`
+   - `reference-artifacts/analyses/galaga-stage-reference-video`
+   - `reference-artifacts/analyses/galaga-alien-motion-reference`
+   - `reference-artifacts/analyses/galaga-timing-alignment`
+   - `reference-artifacts/analyses/galaga-alien-target-crops`
+   - `reference-artifacts/analyses/stage7-reference-path-before-after`
+   - `reference-artifacts/analyses/galaga-alien-cadence-validation`
+   - `reference-artifacts/analyses/galaga-alien-visual-crop-previews`
+   - `reference-artifacts/analyses/galaga-stage-opening-timing`
+6. The former app-bundled reference-audio lane was also migrated into the
+   companion private repo:
+   - `src/assets/reference-audio`
+7. The public build was tightened so it no longer republishes private-derived
+   bytes through `dist/`, `assets/catalog-media/`, or the old shipped
+   `assets/reference-audio/` lane.
 
 That first legacy tranche moved `1421` tracked media files into the private
 repo while leaving public-safe metadata and pointer files in the public repo.
 The Aurora tranche moved `4917` additional tracked media files there under the
 same metadata-plus-pointer rule.
+The follow-on Aurora/direct-reference waves moved `1461` additional tracked
+media files there under the same metadata-plus-pointer rule.
+The app-bundled reference-audio move added `50` more tracked audio files to
+the private repo under the same metadata-plus-pointer rule.
 
 ## Decision Rule
 
@@ -54,24 +87,23 @@ Keep a lane public when it contains only:
 
 Review a lane before moving it when it mixes both kinds of content.
 
-## Largest Remaining Legacy Public Media Families
+## Remaining High-attention Public Media Families
 
-Approximate currently tracked public media counts from the public repo scan:
+After the latest migrations, the main remaining public media lanes fall into
+two buckets:
 
-- `3356` `reference-artifacts/analyses/aurora-audio-cue-candidates`
-- `1561` `reference-artifacts/analyses/aurora-audio-theme-comparison`
-- `1389` `reference-artifacts/analyses/galaxian-frame-reference`
-  Status: tranche 1 already migrated in the working tree
-- `1124` `reference-artifacts/analyses/galaga-path-reference-media`
-- `651` `reference-artifacts/analyses/conformance-economics`
-- `472` `reference-artifacts/analyses/challenge-stage-conformance`
-- `296` `reference-artifacts/analyses/aurora-level-expansion-cycle`
-- `162` `reference-artifacts/analyses/level-visual-conformance-index`
-- `144` `reference-artifacts/analyses/galaga-alien-frame-cadence-targets`
-- `128` `reference-artifacts/analyses/formation-boss-path-slot-extraction`
-- `89` `reference-artifacts/analyses/gameplay-segment-captures`
-- `32` `reference-artifacts/analyses/audio-conformance-lab`
-  Status: tranche 1 already migrated in the working tree
+- likely public-safe runtime/conformance evidence:
+  - `reference-artifacts/analyses/aurora-level-expansion-cycle`
+  - `reference-artifacts/analyses/gameplay-segment-captures`
+  - `reference-artifacts/analyses/aurora-runtime-sprite-conformance`
+- mixed lanes that probably combine runtime-safe outputs with source-derived
+  comparison sheets:
+  - `reference-artifacts/analyses/challenge-stage-conformance`
+  - `reference-artifacts/analyses/level-visual-conformance-index`
+  - `reference-artifacts/analyses/level-visual-timing-alignment`
+  - `reference-artifacts/analyses/aurora-impact-explosion-conformance`
+  - `reference-artifacts/analyses/galaxy-guardians-identity`
+  - `reference-artifacts/analyses/formation-boss-path-slot-extraction`
 
 ## Recommended Migration Order
 
@@ -101,7 +133,7 @@ Why next:
 
 ### Tranche 3: Aurora challenge/reference motion lanes
 
-Recommended next:
+Status: `done in working tree`
 
 - `reference-artifacts/analyses/galaga-path-reference-media`
 - `reference-artifacts/analyses/galaga-alien-frame-cadence-targets`
@@ -114,26 +146,81 @@ Why:
 - less urgent than the audio-candidate bulk lanes once the new policy is in
   place
 
-### Tranche 4: Mixed conformance lanes requiring review
+### Tranche 4: Direct-reference residue packs
+
+Status: `done in working tree`
+
+- `reference-artifacts/analyses/galaga-audio-reference-video`
+- `reference-artifacts/analyses/galaga-audio-reference-video-2`
+- `reference-artifacts/analyses/galaga-reference-sprites`
+- `reference-artifacts/analyses/galaxian-reference`
+- `reference-artifacts/analyses/space-invaders-reference`
+- `reference-artifacts/analyses/challenge-stage-reference`
+- `reference-artifacts/analyses/first-challenge-stage`
+- `reference-artifacts/analyses/galaga-stage-reference-video`
+- `reference-artifacts/analyses/galaga-alien-motion-reference`
+- `reference-artifacts/analyses/galaga-timing-alignment`
+
+Why next:
+
+- still clearly source-derived under the new policy
+- smaller residue packs that were easy to finish once the main Aurora tranche
+  landed
+- removes the need to keep a long tail of older direct-reference bytes public
+
+### Tranche 5: Small visual crop/timing packs
+
+Status: `done in working tree`
+
+- `reference-artifacts/analyses/galaga-alien-target-crops`
+- `reference-artifacts/analyses/stage7-reference-path-before-after`
+- `reference-artifacts/analyses/galaga-alien-cadence-validation`
+- `reference-artifacts/analyses/galaga-alien-visual-crop-previews`
+- `reference-artifacts/analyses/galaga-stage-opening-timing`
+
+Why next:
+
+- obvious external-derived crop/timing media
+- small enough to batch safely once the direct-reference residue was cleared
+- moves the public repo closer to a true metadata-and-runtime boundary
+
+### Tranche 6: App-bundled reference-audio lane
+
+Status: `done in working tree`
+
+- `src/assets/reference-audio`
+
+Why:
+
+- even though it lived under `src/`, it was still a shipped source-derived cue
+  pack
+- the public build needed to stop republishing it into `dist/`
+- moving it private closes the last obvious bundled-source-audio exception
+
+### Tranche 7: Mixed conformance lanes requiring review
 
 Review before migration:
 
 - `reference-artifacts/analyses/challenge-stage-conformance`
-- `reference-artifacts/analyses/aurora-level-expansion-cycle`
 - `reference-artifacts/analyses/level-visual-conformance-index`
+- `reference-artifacts/analyses/level-visual-timing-alignment`
+- `reference-artifacts/analyses/aurora-impact-explosion-conformance`
+- `reference-artifacts/analyses/galaxy-guardians-identity`
 - `reference-artifacts/analyses/formation-boss-path-slot-extraction`
-- `reference-artifacts/analyses/gameplay-segment-captures`
 
 Why review:
-- some content may be repo-owned abstract analysis
-- some content may still be derivative media
+- some files are likely public-safe runtime or abstract analysis
+- some files are likely still derivative comparison media
 - these should be split into "stay public" vs "move private" at the file level
-  if needed
+  instead of moved wholesale
 
-### Tranche 5: Explicit public-safe lanes that can likely remain public
+### Tranche 8: Explicit public-safe lanes that can likely remain public
 
 Likely keep public if confirmed media is purely repo-owned and abstract:
 
+- `reference-artifacts/analyses/aurora-level-expansion-cycle`
+- `reference-artifacts/analyses/gameplay-segment-captures`
+- `reference-artifacts/analyses/aurora-runtime-sprite-conformance`
 - `reference-artifacts/analyses/conformance-economics`
 - JSON-only score ledgers and similar summary/report lanes
 
@@ -171,18 +258,20 @@ After each tranche:
 
 ## Decision Now
 
-The current recommended next migration is `Tranche 3`.
+The current recommended next review is `Tranche 7`.
 
 That means:
 
-- migrate `reference-artifacts/analyses/galaga-path-reference-media`
-- migrate `reference-artifacts/analyses/galaga-alien-frame-cadence-targets`
-- migrate `reference-artifacts/analyses/galaga-challenge-video-reference`
-- migrate `reference-artifacts/analyses/galaga-audio-reference-video-3`
+- review `reference-artifacts/analyses/challenge-stage-conformance`
+- review `reference-artifacts/analyses/level-visual-conformance-index`
+- review `reference-artifacts/analyses/level-visual-timing-alignment`
+- review `reference-artifacts/analyses/aurora-impact-explosion-conformance`
+- review `reference-artifacts/analyses/galaxy-guardians-identity`
+- review `reference-artifacts/analyses/formation-boss-path-slot-extraction`
 
-Hold the mixed conformance lanes until after that tranche lands, because the
-Aurora challenge/reference lanes are still clearly source-derived while the
-mixed conformance families need file-level review.
+The clear external-derived residue is now gone. The remaining question is which
+mixed conformance files should stay public as runtime-safe evidence versus move
+private as source-derived comparison media.
 
 ## Guardians-Driven Outcome
 

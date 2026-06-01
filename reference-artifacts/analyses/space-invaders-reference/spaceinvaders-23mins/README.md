@@ -13,9 +13,9 @@ This first-pass analysis package is the current seed evidence set for
 ## Generated First-Pass Artifacts
 
 - frame contact sheet:
-  `reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/frames/contact-sheet-reference-window-0-1440.jpg`
+  `private-artifacts/repo-mirror/reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/frames/contact-sheet-reference-window-0-1440.jpg`
 - audio waveform:
-  `reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/audio/waveform-reference-window-0-1396.png`
+  `private-artifacts/repo-mirror/reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/audio/waveform-reference-window-0-1396.png`
 
 ## First Useful Reads
 
@@ -36,3 +36,13 @@ This source is already useful for:
 - cleaner isolated cabinet audio
 - event-annotated shot, hit, descent, loss, and clear windows
 - still-image references for cannon, bunkers, invader rows, and title framing
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/space-invaders-reference/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/space-invaders-reference`

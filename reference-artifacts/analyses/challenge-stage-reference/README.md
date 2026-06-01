@@ -15,7 +15,7 @@ Primary source:
 Derived artifacts in this clone:
 
 - contact sheet:
-  - `reference-artifacts/analyses/challenge-stage-reference/contact-sheet.png`
+  - `private-artifacts/repo-mirror/reference-artifacts/analyses/challenge-stage-reference/contact-sheet.png`
 - frame-indexed source windows:
   - `reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg`
   - `reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/contact-sheet.jpg`
@@ -105,3 +105,13 @@ as emulator-perfect timing claims.
      - correct challenge-stage cadence from the first challenge onward
      - continued presence of the reserve-ships drawer and moving background in
        visual review
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/challenge-stage-reference/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/challenge-stage-reference`

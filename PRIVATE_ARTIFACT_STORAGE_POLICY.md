@@ -90,6 +90,19 @@ repo:
 
 It should not expose private copied or derived media from the public lane.
 
+## Public Build Rule
+
+The public build must also respect this boundary.
+
+That means:
+
+- do not copy private-source or private-derived artifact bytes into `dist/`
+- do not republish source-derived media through `assets/catalog-media/`
+- do not ship reference-only cue packs from `src/assets/reference-audio/`
+- prefer public-safe placeholders, readmes, manifests, and pointer files
+- default public runtime audio/theme controls to repo-owned application mixes
+  rather than private reference-audio packs
+
 ## Historical Caveat
 
 This policy stops new public exposure and lets us migrate current local intake
@@ -102,11 +115,17 @@ and force-push coordination.
 
 ## Current Migration Posture
 
-As of `2026-06-01`, three things are already true:
+As of `2026-06-01`, four things are already true:
 
 1. the June 1 ingestion wave has been moved into the companion private store
 2. the first legacy Guardians-focused tranche has also been moved there
 3. the first large Aurora audio-fitting tranche has also been moved there
+4. the follow-on Aurora and cross-game direct-reference waves have also been
+   moved there
+5. the old app-bundled reference-audio lane at `src/assets/reference-audio/`
+   has also been moved there
+6. the public build now blocks private artifact bytes from being recopied into
+   `dist/` through `assets/catalog-media/` or shipped reference-audio bundles
 
 That first legacy tranche includes:
 
@@ -117,6 +136,31 @@ That first Aurora tranche includes:
 
 - `reference-artifacts/analyses/aurora-audio-cue-candidates`
 - `reference-artifacts/analyses/aurora-audio-theme-comparison`
+
+The follow-on Aurora challenge/reference wave includes:
+
+- `reference-artifacts/analyses/galaga-path-reference-media`
+- `reference-artifacts/analyses/galaga-alien-frame-cadence-targets`
+- `reference-artifacts/analyses/galaga-challenge-video-reference`
+- `reference-artifacts/analyses/galaga-audio-reference-video-3`
+
+The direct-reference residue and visual crop/timing waves include:
+
+- `reference-artifacts/analyses/galaga-audio-reference-video`
+- `reference-artifacts/analyses/galaga-audio-reference-video-2`
+- `reference-artifacts/analyses/galaga-reference-sprites`
+- `reference-artifacts/analyses/galaxian-reference`
+- `reference-artifacts/analyses/space-invaders-reference`
+- `reference-artifacts/analyses/challenge-stage-reference`
+- `reference-artifacts/analyses/first-challenge-stage`
+- `reference-artifacts/analyses/galaga-stage-reference-video`
+- `reference-artifacts/analyses/galaga-alien-motion-reference`
+- `reference-artifacts/analyses/galaga-timing-alignment`
+- `reference-artifacts/analyses/galaga-alien-target-crops`
+- `reference-artifacts/analyses/stage7-reference-path-before-after`
+- `reference-artifacts/analyses/galaga-alien-cadence-validation`
+- `reference-artifacts/analyses/galaga-alien-visual-crop-previews`
+- `reference-artifacts/analyses/galaga-stage-opening-timing`
 
 The next migration decisions should now be made deliberately by family, using
 the companion repo as the destination rather than letting older public artifact

@@ -140,3 +140,13 @@ continuous across the run, which makes it the first strong repo-owned
 Galaxian-family source-side ambience bed for Guardians audio fitting. It does
 not replace gameplay-context windows, but it largely closes the generic
 ambience-bed hunt.
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/galaxian-reference/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference`
