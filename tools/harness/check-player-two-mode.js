@@ -74,13 +74,11 @@ async function main(){
       mode: document.getElementById('accountDockBtn')?.dataset?.pilotMode || '',
       summary: document.getElementById('accountSummary')?.textContent || ''
     };
-    window.__galagaHarness__.advanceFor(8);
+    window.__galagaHarness__.advanceFor(2);
     const live = window.__galagaHarness__.state();
-    window.__galagaHarness__.triggerRemoteScoreGameOver({ score: 12340, stage: 2 });
-    const gameOver = window.__galagaHarness__.gameOverView();
-    const afterHumanP2 = window.__galagaHarness__.playerTwoState().run;
-    window.__galagaHarness__.startPlayerTwoTurn();
-    window.__galagaHarness__.advanceFor(12);
+    const humanLifeLoss = window.__galagaHarness__.triggerShipLoss({ reserveLives: 2, cause: 'harness_1up_life_loss' });
+    const afterHumanLifeLoss = window.__galagaHarness__.playerTwoState().run;
+    window.__galagaHarness__.advanceFor(1.55);
     const p2Turn = window.__galagaHarness__.state();
     const p2TurnHud = window.__galagaHarness__.playerTwoState().hudRight;
     const p2PilotCard = {
@@ -88,8 +86,12 @@ async function main(){
       mode: document.getElementById('accountDockBtn')?.dataset?.pilotMode || '',
       summary: document.getElementById('accountSummary')?.textContent || ''
     };
-    window.__galagaHarness__.triggerRemoteScoreGameOver({ score: 43210, stage: 3 });
-    const p2GameOver = window.__galagaHarness__.gameOverView();
+    const p2LifeLoss = window.__galagaHarness__.triggerShipLoss({ reserveLives: 2, cause: 'harness_2up_life_loss' });
+    const afterP2LifeLoss = window.__galagaHarness__.playerTwoState().run;
+    window.__galagaHarness__.advanceFor(1.55);
+    const p1Return = window.__galagaHarness__.state();
+    window.__galagaHarness__.triggerRemoteScoreGameOver({ score: 12340, stage: 2 });
+    const gameOver = window.__galagaHarness__.gameOverView();
     const board = JSON.parse(localStorage.getItem('auroraGalacticaTop10') || '[]');
     return {
       live,
@@ -100,12 +102,15 @@ async function main(){
       afterWatchScopePicker,
       hudRight,
       launchPilotCard,
+      humanLifeLoss,
+      afterHumanLifeLoss,
       gameOver,
-      afterHumanP2,
       p2Turn,
       p2TurnHud,
       p2PilotCard,
-      p2GameOver,
+      p2LifeLoss,
+      afterP2LifeLoss,
+      p1Return,
       board,
       boardScores: board.map(row => row.score)
     };
@@ -126,8 +131,8 @@ async function main(){
   if(signed.afterWatchScopePicker?.watchScope !== 'challenges' || !/CHALLENGES ONLY/.test(signed.afterWatchScopePicker?.html || '')){
     fail('Watch scope selector should visibly switch from full game flow to challenges-only from the front door', signed);
   }
-  if((signed.p2.score | 0) !== 0 || signed.p2.activeTurn !== 'queued'){
-    fail('Player Two score must stay queued at 0 during the human 1UP turn', signed);
+  if((signed.p2.score | 0) !== 0 || signed.p2.activeTurn !== 'p1' || signed.p2.turnModel !== 'galaga-per-life-alternation'){
+    fail('Player Two score must stay separate at 0 during the human 1UP turn, with per-life alternation armed', signed);
   }
   if(!/PILOT/.test(signed.hudRight || '') || !/SGW/.test(signed.hudRight || '')){
     fail('human 1UP turn should keep the current onboard pilot visible in the HUD while 2UP is queued', signed);
@@ -135,14 +140,11 @@ async function main(){
   if(signed.launchPilotCard?.mode !== 'human-with-rival' || !/1UP PILOT/.test(signed.launchPilotCard?.dock || '') || !/SGW/.test(signed.launchPilotCard?.dock || '')){
     fail('pilot card should show the human as onboard while a 2UP rival is queued', signed);
   }
-  if(!/playerTwoResultReady/.test(signed.gameOver?.html || '') || !/playerTwoVersus/.test(signed.gameOver?.html || '') || !/2UP PRO/.test(signed.gameOver?.html || '') || !/START 2UP TURN/.test(signed.gameOver?.html || '') || !/HUMAN SCORE ONLY/.test(signed.gameOver?.html || '')){
-    fail('game-over results should offer an arcade-style 2UP turn panel while preserving human-only leaderboard meaning', signed);
-  }
-  if(signed.afterHumanP2?.activeTurn !== 'ready' || (signed.afterHumanP2?.humanScore | 0) !== 12340){
-    fail('human game over should queue the persona 2UP turn without starting it during 1UP', signed);
+  if(signed.afterHumanLifeLoss?.activeTurn !== 'p1' || signed.afterHumanLifeLoss?.pendingTurnSwitch?.to !== 'p2'){
+    fail('1UP ship loss should queue the selected 2UP persona as the next life-turn', signed);
   }
   if(!signed.p2Turn.playerTwo?.enabled || signed.p2Turn.playerTwo?.activeTurn !== 'p2' || signed.p2Turn.harnessPersona !== 'professional'){
-    fail('starting the 2UP turn should hand active play to the selected persona', signed);
+    fail('per-life alternation should hand active play to the selected persona after 1UP loses a ship', signed);
   }
   if(!/2UP PLAY/.test(signed.p2TurnHud || '')){
     fail('active 2UP persona turn should be visible in the HUD as the playing lane', signed);
@@ -150,21 +152,24 @@ async function main(){
   if(signed.p2PilotCard?.mode !== 'player-two-active' || !/2UP PLAY/.test(signed.p2PilotCard?.dock || '') || !/PROFESSIONAL/.test(signed.p2PilotCard?.dock || '') || !/comparison-only/.test(signed.p2PilotCard?.summary || '')){
     fail('pilot card should show the persona rival onboard during the active 2UP turn', signed);
   }
-  if(!signed.p2GameOver?.playerTwoMode || !/playerTwoResultFinal/.test(signed.p2GameOver?.html || '') || !/1UP SCORE IS THE ONLY SCOREBOARD ENTRY/.test(signed.p2GameOver?.html || '')){
-    fail('2UP turn game over should show the final arcade comparison and explicit human-only score meaning', signed);
+  if(signed.afterP2LifeLoss?.activeTurn !== 'p2' || signed.afterP2LifeLoss?.pendingTurnSwitch?.to !== 'p1'){
+    fail('2UP ship loss should queue 1UP as the next life-turn when the human still has ships', signed);
+  }
+  if(!signed.p1Return?.playerTwo?.enabled || signed.p1Return?.playerTwo?.activeTurn !== 'p1' || signed.p1Return?.harnessPersona){
+    fail('per-life alternation should return from the persona lane to human 1UP after 2UP loses a ship', signed);
+  }
+  if(!/playerTwoResultFinal/.test(signed.gameOver?.html || '') || !/ARCADE PER-LIFE ALTERNATION/.test(signed.gameOver?.html || '') || !/1UP SCORE IS THE ONLY SCOREBOARD ENTRY/.test(signed.gameOver?.html || '')){
+    fail('final 2UP results should show arcade per-life comparison and explicit human-only score meaning', signed);
   }
   if(!signed.boardScores.includes(12340)){
     fail('human score should be recorded in the local top-10 board', signed);
-  }
-  if(signed.boardScores.includes(43210)){
-    fail('Player Two persona turn score must not be recorded as a leaderboard score', signed);
   }
   if(signed.board.some(row => row.initials === 'PRO')){
     fail('Player Two persona score must not be recorded as a leaderboard score', signed);
   }
 
   const autoTurn = await withHarnessPage({ skipStart: true, seed: 77106 }, async ({ page }) => {
-    const ready = await page.evaluate(() => {
+    return page.evaluate(() => {
       window.__galagaHarness__.showFrontDoor();
       window.__galagaHarness__.setupPlayerTwoModeTest({
         signedIn: true,
@@ -179,34 +184,29 @@ async function main(){
         playerTwo: true,
         playerTwoPersona: 'novice'
       });
-      window.__galagaHarness__.triggerRemoteScoreGameOver({ score: 1240, stage: 1 });
-      return {
-        gameOver: window.__galagaHarness__.gameOverView(),
-        p2: window.__galagaHarness__.playerTwoState().run
+      window.__galagaHarness__.advanceFor(0);
+      window.__galagaHarness__.triggerShipLoss({ reserveLives: 2, cause: 'harness_auto_life_loss' });
+      const ready = { p2: window.__galagaHarness__.playerTwoState().run };
+      window.__galagaHarness__.advanceFor(1.55);
+      const after = {
+        state: window.__galagaHarness__.state(),
+        p2: window.__galagaHarness__.playerTwoState().run,
+        events: window.__galagaHarness__.sessionEvents(500)
+          .filter(event => /^player_two_/.test(event.type))
+          .map(event => event.type)
       };
+      return { ready, after };
     });
-    await page.waitForFunction(() => {
-      const state = window.__galagaHarness__.state();
-      return !!(state.started && state.playerTwo?.activeTurn === 'p2' && state.harnessPersona === 'novice');
-    }, { timeout: 4500 });
-    const after = await page.evaluate(() => ({
-      state: window.__galagaHarness__.state(),
-      p2: window.__galagaHarness__.playerTwoState().run,
-      events: window.__galagaHarness__.sessionEvents(500)
-        .filter(event => /^player_two_/.test(event.type))
-        .map(event => event.type)
-    }));
-    return { ready, after };
   });
 
-  if(!autoTurn.ready?.p2?.autoStartQueued || !/2UP TURN STARTS NEXT/.test(autoTurn.ready?.gameOver?.html || '')){
-    fail('2UP mode should visibly queue the persona rival for automatic alternating play after 1UP completes', autoTurn);
+  if(autoTurn.ready?.p2?.pendingTurnSwitch?.to !== 'p2'){
+    fail('2UP mode should visibly queue the persona rival for automatic per-life alternation after 1UP loses a ship', autoTurn);
   }
   if(!autoTurn.after?.state?.started || autoTurn.after?.state?.playerTwo?.activeTurn !== 'p2' || autoTurn.after?.state?.harnessPersona !== 'novice'){
-    fail('2UP mode should automatically hand active play to the selected persona after the 1UP result', autoTurn);
+    fail('2UP mode should automatically hand active play to the selected persona after the 1UP life loss', autoTurn);
   }
   if(!autoTurn.after?.events?.includes('player_two_turn_active')){
-    fail('2UP automatic handoff should be logged for production behavior review', autoTurn);
+    fail('2UP per-life automatic handoff should be logged for production behavior review', autoTurn);
   }
 
   const watch = await withHarnessPage({ skipStart: true, seed: 77104 }, async ({ page }) => page.evaluate(() => {
@@ -303,12 +303,14 @@ async function main(){
       persona: signed.p2.personaKey,
       playerTwoScore: signed.p2.score,
       playerTwoStage: signed.p2.stage,
+      turnModel: signed.p2.turnModel,
+      p1Return: signed.p1Return.playerTwo.activeTurn,
       humanScoreRecorded: 12340
     },
     autoTurn: {
       persona: autoTurn.after.state.harnessPersona,
       activeTurn: autoTurn.after.state.playerTwo.activeTurn,
-      autoQueued: autoTurn.ready.p2.autoStartQueued
+      queuedTo: autoTurn.ready.p2.pendingTurnSwitch?.to || ''
     },
     watch: {
       persona: watch.live.harnessPersona,

@@ -41,10 +41,22 @@ function startAuroraGameplay(){
  const watchPersona=pendingPlayerTwoTurn?'':(armedWatchPersona||developerWatchPersona);
  const watchScope=watchPersona?normalizeWatchScope(armedWatchScope||'game'):'game';
  if(watchPersona&&watchScope==='challenges'&&armedWatchPersona)startStage=resolveWatchChallengeStartStage(cfg);
- const playerTwoRun=pendingPlayerTwoTurn||resolvePlayerTwoStartState();
+ const playerTwoRun=pendingPlayerTwoTurn||resolvePlayerTwoStartState({
+  stage:startStage.stage,
+  lives:Math.max(0,cfg.ships-1),
+  forceChallenge:startStage.forceChallenge?1:0
+ });
+ const playerTwoLane=playerTwoRun?.enabled?preparePlayerTwoRunForStart(playerTwoRun,{
+  stage:startStage.stage,
+  lives:Math.max(0,cfg.ships-1),
+  forceChallenge:startStage.forceChallenge?1:0
+ }):null;
+ const runScore=playerTwoLane?Math.max(0,+playerTwoLane.score||0):0;
+ const runLives=playerTwoLane?Math.max(0,+playerTwoLane.lives||0):Math.max(0,cfg.ships-1);
+ const runStage=playerTwoLane?Math.max(1,+playerTwoLane.stage||startStage.stage):startStage.stage;
  aud=1;AC().resume?.();
  gameOverHtml='';gameOverState=null;
-started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:startStage.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,forceChallenge:startStage.forceChallenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:0,simT:0,extendFirst,extendRecurring,nextExtendScore,extendAwards:0,extendFlashT:0,extendFlashShips:0,playerTwo:playerTwoRun,watchMode:watchPersona?1:0,watchPersona:watchPersona||'',watchScope,commentaryT:0,commentaryCooldown:0,commentaryTitle:'',commentaryLines:[]});
+started=1;paused=0;Object.assign(S,{score:runScore,lives:runLives,stage:runStage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,forceChallenge:playerTwoLane?((+playerTwoLane.forceChallenge||0)?1:0):(startStage.forceChallenge?1:0),liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:0,simT:0,extendFirst,extendRecurring,nextExtendScore,extendAwards:0,extendFlashT:0,extendFlashShips:0,playerTwo:playerTwoRun,watchMode:watchPersona?1:0,watchPersona:watchPersona||'',watchScope,commentaryT:0,commentaryCooldown:0,commentaryTitle:'',commentaryLines:[]});
  if(typeof resetHarnessFrameClock==='function')resetHarnessFrameClock();
  if(typeof syncPauseUi==='function')syncPauseUi();
  S.harnessPersona=(watchPersona||(playerTwoRun?.activeTurn==='p2'?playerTwoRun.personaKey:'')||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
@@ -125,6 +137,7 @@ function loseShip(cause={}){
   return;
  }
  S.lives--;p.spawn=1.32;
+ if(typeof handlePlayerTwoShipLoss==='function'&&handlePlayerTwoShipLoss(cause))return;
  if(S.lives<0)gameOver();
 }
 
@@ -316,23 +329,19 @@ function resolvePendingPlayerTwoTurn(){
  if(!pending||!pending.enabled)return null;
  const personaKey=normalizePlayerTwoPersona(pending.personaKey||pending.persona||'advanced');
  const profile=PLAYER_TWO_PERSONA_PROFILES[personaKey]||PLAYER_TWO_PERSONA_PROFILES.advanced;
- return Object.assign({},pending,{
+ const p2=Object.assign({},pending,{
   enabled:true,
   eligibleForLeaderboard:false,
   mode:'persona-rival',
-  turnModel:'galaga-inspired-alternating-turns',
-  activeTurn:'p2',
+  turnModel:'galaga-per-life-alternation',
+  activeTurn:pending.activeTurn==='p1'?'p1':'p2',
   personaKey,
   label:profile.label,
   initials:profile.initials,
-  score:0,
-  scoreFloat:0,
-  stage:1,
-  lives:Math.max(1,+pending.lives||3),
-  elapsed:0,
-  nextLogT:8,
-  lastStage:1
+  nextLogT:+pending.nextLogT||8
  });
+ ensurePlayerTwoLaneStates(p2,{stage:+pending.stage||1,lives:Math.max(0,(+pending.lives||3)-1)});
+ return p2;
 }
 function setPlayerTwoPersona(key,opts={}){
  const personaKey=normalizePlayerTwoPersona(key);
@@ -375,7 +384,173 @@ function playerTwoHashUnit(seed){
  t^=t+Math.imul(t^t>>>7,61|t);
  return ((t^t>>>14)>>>0)/4294967296;
 }
-function resolvePlayerTwoStartState(){
+
+function playerTwoStatsCopy(stats={}){
+ return {shots:Math.max(0,+stats.shots||0)|0,hits:Math.max(0,+stats.hits||0)|0};
+}
+function playerTwoLaneDefaults(lane='p1',opts={}){
+ return{
+  lane,
+  score:Math.max(0,+opts.score||0)|0,
+  scoreFloat:Math.max(0,+opts.scoreFloat||+opts.score||0),
+  lives:Number.isFinite(+opts.lives)?Math.max(-1,+opts.lives|0):2,
+  stage:Math.max(1,+opts.stage||1)|0,
+  forceChallenge:+opts.forceChallenge?1:0,
+  stats:playerTwoStatsCopy(opts.stats),
+  elapsed:+(+opts.elapsed||0).toFixed(3),
+  finished:+opts.finished?1:0
+ };
+}
+function normalizePlayerTwoLaneState(lane='p1',state={},opts={}){
+ const base=playerTwoLaneDefaults(lane,opts);
+ const merged=Object.assign({},base,state||{});
+ merged.lane=lane;
+ merged.score=Math.max(0,+merged.score||0)|0;
+ merged.scoreFloat=Math.max(+merged.scoreFloat||0,merged.score);
+ merged.lives=Number.isFinite(+merged.lives)?(+merged.lives|0):base.lives;
+ merged.stage=Math.max(1,+merged.stage||1)|0;
+ merged.forceChallenge=+merged.forceChallenge?1:0;
+ merged.stats=playerTwoStatsCopy(merged.stats);
+ merged.elapsed=+(+merged.elapsed||0).toFixed(3);
+ merged.finished=+merged.finished?1:0;
+ return merged;
+}
+function ensurePlayerTwoLaneStates(p2,opts={}){
+ if(!p2?.enabled)return p2;
+ p2.turnModel='galaga-per-life-alternation';
+ p2.p1=normalizePlayerTwoLaneState('p1',p2.p1,{stage:opts.stage,lives:opts.lives,forceChallenge:opts.forceChallenge});
+ p2.p2=normalizePlayerTwoLaneState('p2',p2.p2,{stage:opts.stage,lives:opts.lives,forceChallenge:opts.forceChallenge});
+ if(p2.activeTurn!=='p2'&&p2.activeTurn!=='done'&&p2.activeTurn!=='final')p2.activeTurn='p1';
+ p2.humanScore=p2.p1.score;
+ p2.humanStage=displayStageNumber(p2.p1.stage,!!p2.p1.forceChallenge);
+ p2.score=p2.p2.score;
+ p2.scoreFloat=Math.max(+p2.scoreFloat||0,p2.score);
+ p2.stage=p2.p2.stage;
+ p2.lives=Math.max(0,(p2.p2.lives|0)+1);
+ return p2;
+}
+function activePlayerTwoLaneKey(p2=S.playerTwo){
+ return p2?.activeTurn==='p2'?'p2':'p1';
+}
+function preparePlayerTwoRunForStart(p2,opts={}){
+ ensurePlayerTwoLaneStates(p2,opts);
+ const lane=p2[activePlayerTwoLaneKey(p2)];
+ return lane||null;
+}
+function syncPlayerTwoActiveLane(opts={}){
+ const p2=S.playerTwo;
+ if(!p2?.enabled)return null;
+ ensurePlayerTwoLaneStates(p2);
+ const laneKey=activePlayerTwoLaneKey(p2);
+ const lane=p2[laneKey];
+ lane.score=Math.max(0,+S.score||0)|0;
+ lane.scoreFloat=Math.max(+lane.scoreFloat||0,lane.score);
+ lane.lives=Number.isFinite(+S.lives)?(+S.lives|0):lane.lives;
+ lane.stage=Math.max(1,+S.stage||1)|0;
+ lane.forceChallenge=+S.forceChallenge?1:0;
+ lane.stats=playerTwoStatsCopy(S.stats);
+ lane.elapsed=+(+lane.elapsed||0).toFixed(3);
+ if(opts.finished)lane.finished=1;
+ if(laneKey==='p1'){
+  p2.humanScore=lane.score;
+  p2.humanStage=displayStageNumber(lane.stage,!!S.challenge);
+  p2.humanStats=playerTwoStatsCopy(lane.stats);
+ }else{
+  p2.score=lane.score;
+  p2.scoreFloat=Math.max(+p2.scoreFloat||0,lane.score);
+  p2.stage=displayStageNumber(lane.stage,!!S.challenge);
+ }
+ return lane;
+}
+function playerTwoOtherLaneKey(key=activePlayerTwoLaneKey()){
+ return key==='p2'?'p1':'p2';
+}
+function playerTwoLaneDisplayName(key,p2=S.playerTwo){
+ return key==='p2'?`2UP ${(p2?.initials||'---')}`:'1UP';
+}
+function resetPlayerForTurn(){
+ Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:1.2,dual:0,captured:0,returning:0,pending:0,spawn:.75,cd:0,capBoss:null,capT:0,inputResetHoldT:0,vx:0,demoTargetId:null,demoTargetT:0});
+}
+function applyPlayerTwoLaneTurn(to='p1',source='auto'){
+ const p2=S.playerTwo;
+ if(!p2?.enabled)return false;
+ ensurePlayerTwoLaneStates(p2);
+ const lane=p2[to];
+ if(!lane||lane.finished)return false;
+ p2.activeTurn=to;
+ p2.pendingTurnSwitch=null;
+ p2.turnSwitchApplied=1;
+ S.score=lane.score|0;
+ S.lives=Math.max(0,lane.lives|0);
+ S.stage=Math.max(1,lane.stage|0);
+ S.forceChallenge=lane.forceChallenge?1:0;
+ S.stats=playerTwoStatsCopy(lane.stats);
+ S.harnessPersona=to==='p2'?(p2.personaKey||''):'';
+ S.pb.length=0;S.eb.length=0;S.fx.length=0;S.cap=null;S.att=0;
+ S.recoverT=0;S.attackGapT=0;S.nextStageT=0;S.postChallengeT=0;S.pendingStage=0;S.transitionMode='';S.sequenceT=0;S.sequenceMode='';
+ resetPlayerForTurn();
+ spawnStage();
+ S.alertTxt=`${playerTwoLaneDisplayName(to,p2)} TURN\n${to==='p2'?(p2.label||watchModePersonaLabel(p2.personaKey)):'HUMAN PILOT'}`;
+ S.alertT=Math.max(S.alertT,1.55);
+ if(typeof logEvent==='function')logEvent('player_two_life_turn_start',Object.assign({lane:to,source},playerTwoSnapshot(p2)));
+ if(to==='p2'&&typeof logEvent==='function')logEvent('player_two_turn_active',playerTwoSnapshot(p2));
+ if(typeof commentatorEvent==='function')commentatorEvent(to==='p2'?'player_two_turn_start':'player_one_turn_start',playerTwoSnapshot(p2));
+ return true;
+}
+function queuePlayerTwoLifeTurnSwitch(to='p2',reason='ship_lost'){
+ const p2=S.playerTwo;
+ if(!p2?.enabled)return false;
+ ensurePlayerTwoLaneStates(p2);
+ if(!p2[to]||p2[to].finished)return false;
+ p2.pendingTurnSwitch={to,t:1.35,reason};
+ S.alertTxt=`${playerTwoLaneDisplayName(to,p2)} READY\nNEXT SHIP`;
+ S.alertT=Math.max(S.alertT,1.35);
+ if(typeof logEvent==='function')logEvent('player_two_life_turn_queued',Object.assign({to,reason},playerTwoSnapshot(p2)));
+ return true;
+}
+function consumePlayerTwoTurnSwitchApplied(){
+ const p2=S.playerTwo;
+ if(!p2?.turnSwitchApplied)return false;
+ p2.turnSwitchApplied=0;
+ return true;
+}
+function finalizePlayerTwoHumanScore(p2=S.playerTwo){
+ if(!p2?.enabled||p2.humanRecorded)return null;
+ const lane=p2.p1||{};
+ const pilotInitials=((typeof lockedPilotInitials==='function'&&lockedPilotInitials())||(typeof preferredInitialsFromUser==='function'?preferredInitialsFromUser():'')).padEnd(3,'-').slice(0,3);
+ const hasLockedPilotInitials=typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user&&pilotInitials&&pilotInitials!=='---';
+ const shownStage=displayStageNumber(lane.stage||S.stage,!!S.challenge);
+ const res=recordScore(lane.score|0,shownStage,hasLockedPilotInitials?pilotInitials:'YOU');
+ p2.humanRecorded=1;
+ p2.humanRecord={entryId:res.entry.id,rank:res.rank,score:lane.score|0,stage:shownStage};
+ if(typeof logEvent==='function')logEvent('player_two_human_score_recorded',p2.humanRecord);
+ return p2.humanRecord;
+}
+function handlePlayerTwoShipLoss(cause={}){
+ const p2=S.playerTwo;
+ if(!p2?.enabled||S.watchMode)return false;
+ ensurePlayerTwoLaneStates(p2);
+ const current=activePlayerTwoLaneKey(p2);
+ const currentLane=syncPlayerTwoActiveLane({finished:S.lives<0});
+ if(current==='p1'&&currentLane?.finished)finalizePlayerTwoHumanScore(p2);
+ const other=playerTwoOtherLaneKey(current);
+ if(p2.p1?.finished&&p2.p2?.finished){
+  p2.finalGameOverLane=current;
+  p2.activeTurn=current==='p2'?'done':'final';
+  return false;
+ }
+ if(S.lives>=0&&p2[other]&&!p2[other].finished){
+  queuePlayerTwoLifeTurnSwitch(other,cause?.cause||'ship_lost');
+  return true;
+ }
+ if(S.lives<0&&p2[other]&&!p2[other].finished){
+  queuePlayerTwoLifeTurnSwitch(other,cause?.cause||'ship_lost');
+  return true;
+ }
+ return false;
+}
+
+function resolvePlayerTwoStartState(startOpts={}){
  if(!selectedPlayerTwoMode())return {enabled:false};
  if(!currentGameSupportsPlayerTwo()||!playerTwoAuthReady()){
   writePref(PLAYER_TWO_MODE_PREF_KEY,'1');
@@ -389,19 +564,24 @@ function resolvePlayerTwoStartState(){
  const paceUnit=playerTwoHashUnit(`${seed}:pace`);
  const variance=1+((skillUnit*2)-1)*profile.variance;
  const pace=1+((paceUnit*2)-1)*profile.variance*.7;
+ const reserveLives=Number.isFinite(+startOpts.lives)?Math.max(0,+startOpts.lives|0):2;
+ const startStage=Math.max(1,+startOpts.stage||1)|0;
+ const forceChallenge=+startOpts.forceChallenge?1:0;
  return{
   enabled:true,
   eligibleForLeaderboard:false,
   mode:'persona-rival',
-  turnModel:'galaga-inspired-alternating-turns',
-  activeTurn:'queued',
+  turnModel:'galaga-per-life-alternation',
+  activeTurn:'p1',
   personaKey,
   label:profile.label,
   initials:profile.initials,
   score:0,
   scoreFloat:0,
-  stage:1,
-  lives:3,
+  stage:startStage,
+  lives:reserveLives+1,
+  p1:playerTwoLaneDefaults('p1',{stage:startStage,lives:reserveLives,forceChallenge}),
+  p2:playerTwoLaneDefaults('p2',{stage:startStage,lives:reserveLives,forceChallenge}),
   elapsed:0,
   nextLogT:8,
   seed,
@@ -413,14 +593,19 @@ function resolvePlayerTwoStartState(){
 function updatePlayerTwoGameOverState(){
  const p2=S.playerTwo;
  if(!p2?.enabled)return;
+ ensurePlayerTwoLaneStates(p2);
  if(p2.activeTurn==='p2'){
-  p2.score=S.score|0;
-  p2.scoreFloat=Math.max(+p2.scoreFloat||0,p2.score);
-  p2.stage=displayStageNumber(S.stage,!!S.challenge);
-  p2.elapsed=+(+S.stageClock||0).toFixed(3);
+  syncPlayerTwoActiveLane({finished:1});
   p2.finished=1;
   p2.activeTurn='done';
   if(typeof logEvent==='function')logEvent('player_two_turn_complete',playerTwoSnapshot(p2));
+  return;
+ }
+ if(p2.activeTurn==='p1'){
+  syncPlayerTwoActiveLane({finished:1});
+  p2.finished=1;
+  p2.activeTurn='final';
+  if(typeof logEvent==='function')logEvent('player_two_human_turn_complete',playerTwoSnapshot(p2));
   return;
  }
  if(p2.activeTurn==='queued'){
@@ -455,6 +640,7 @@ function startPlayerTwoTurnFromGameOver(source='keyboard'){
  if(gameOverState&&!gameOverState.editing&&!gameOverState.watchMode&&!gameOverState.playerTwoMode&&typeof submitGameOverScore==='function')submitGameOverScore();
  const p2=Object.assign({},S.playerTwo,{
   activeTurn:'p2',
+  turnModel:'galaga-per-life-alternation',
   score:0,
   scoreFloat:0,
   stage:1,
@@ -475,8 +661,21 @@ function startPlayerTwoTurnFromGameOver(source='keyboard'){
 function updatePlayerTwoRival(dt){
  const p2=S.playerTwo;
  if(!p2?.enabled||S.attract||!started)return;
+ ensurePlayerTwoLaneStates(p2);
+ if(p2.pendingTurnSwitch){
+  p2.pendingTurnSwitch.t=Math.max(0,(+p2.pendingTurnSwitch.t||0)-dt);
+  if(!p2.pendingTurnSwitch.t)applyPlayerTwoLaneTurn(p2.pendingTurnSwitch.to,p2.pendingTurnSwitch.reason||'auto');
+  return;
+ }
+ if(p2.activeTurn==='p1'){
+  const lane=syncPlayerTwoActiveLane();
+  if(lane)lane.elapsed=+(+S.stageClock||0).toFixed(3);
+  return;
+ }
  if(p2.activeTurn==='p2'){
   p2.elapsed+=dt;
+  const lane=syncPlayerTwoActiveLane();
+  if(lane)lane.elapsed=+(+S.stageClock||0).toFixed(3);
   p2.score=S.score|0;
   p2.scoreFloat=Math.max(+p2.scoreFloat||0,p2.score);
   const shownStage=displayStageNumber(S.stage,!!S.challenge);
@@ -515,21 +714,28 @@ function updatePlayerTwoRival(dt){
 function playerTwoSnapshot(state=S.playerTwo){
  const p2=state||{};
  if(!p2.enabled)return {enabled:false};
+ const p1=p2.p1?normalizePlayerTwoLaneState('p1',p2.p1):null;
+ const p2Lane=p2.p2?normalizePlayerTwoLaneState('p2',p2.p2):null;
  return{
   enabled:true,
   mode:p2.mode||'persona-rival',
-  turnModel:p2.turnModel||'galaga-inspired-alternating-turns',
-  activeTurn:p2.activeTurn||'queued',
+  turnModel:p2.turnModel||'galaga-per-life-alternation',
+  activeTurn:p2.activeTurn||'p1',
   personaKey:p2.personaKey||'',
   label:p2.label||'',
   initials:p2.initials||'',
-  score:+(p2.score||0)|0,
-  stage:+(p2.stage||1)|0,
-  humanScore:+(p2.humanScore||0)|0,
-  humanStage:+(p2.humanStage||0)|0,
+  score:+((p2Lane?.score??p2.score)||0)|0,
+  stage:+((p2Lane?.stage??p2.stage)||1)|0,
+  lives:+((p2Lane?.lives??0)+1)||0,
+  humanScore:+((p1?.score??p2.humanScore)||0)|0,
+  humanStage:+((p1?.stage??p2.humanStage)||0)|0,
+  humanLives:+((p1?.lives??0)+1)||0,
   elapsed:+(+p2.elapsed||0).toFixed(3),
   variance:+(+p2.variance||1).toFixed(4),
   autoStartQueued:!!p2.autoStartQueued,
+  pendingTurnSwitch:p2.pendingTurnSwitch?Object.assign({},p2.pendingTurnSwitch):null,
+  p1:p1?{score:p1.score,stage:p1.stage,lives:Math.max(0,p1.lives+1),finished:!!p1.finished}:null,
+  p2:p2Lane?{score:p2Lane.score,stage:p2Lane.stage,lives:Math.max(0,p2Lane.lives+1),finished:!!p2Lane.finished}:null,
   eligibleForLeaderboard:false
  };
 }
@@ -564,10 +770,11 @@ function currentPilotCardState(){
    signedIn
   };
  }
- if(p2?.enabled&&(p2.activeTurn==='p2'||p2.activeTurn==='done'||p2.activeTurn==='ready')){
+ if(p2?.enabled&&(p2.activeTurn==='p2'||p2.activeTurn==='done'||p2.activeTurn==='final'||p2.activeTurn==='ready')){
   const persona=playerPersonaCardSummary(p2.personaKey||'advanced');
   const active=p2.activeTurn==='p2';
   const ready=p2.activeTurn==='ready';
+  const final=p2.activeTurn==='final'||p2.activeTurn==='done';
   return{
    mode:active?'player-two-active':ready?'player-two-ready':'player-two-done',
    icon:'🧑‍🚀',
@@ -578,28 +785,28 @@ function currentPilotCardState(){
    panelSub:'PERSONA RIVAL PILOT',
    callsign:`2UP ${persona.label}`,
    status:`${persona.description} Human 1UP ${gameTitle} score is the only scoreboard entry.`,
-   summary:active?`Persona rival is flying ${gameTitle} now. This turn is comparison-only and will not post a score.`:ready?`Persona rival is queued for the next ${gameTitle} turn. Press 2 from results to start it.`:`Persona rival ${gameTitle} turn is complete. Only the human 1UP score remains eligible.`,
+   summary:active?`Persona rival is flying ${gameTitle} now. Turns alternate after each ship loss; this lane is comparison-only and will not post a score.`:ready?`Persona rival is queued for the next ${gameTitle} turn. Press 2 from results to start it.`:`${gameTitle} 2UP alternation is complete. Only the human 1UP score remains eligible.`,
    email:'Controller: Persona rival',
    userId:`Role: ${persona.initials} ${gameTitle} 2UP rival`,
-   hudHtml:`<span class="playerTwoHud${active?' playerTwoHudActive':' playerTwoHudReady'}"><span class="hudLabel">${active?'2UP PLAY':ready?'2UP READY':'2UP DONE'}</span> <span class="hudValue">${formatScore(p2.score||0)}</span></span>`,
+   hudHtml:`<span class="playerTwoHud${active?' playerTwoHudActive':ready?' playerTwoHudReady':''}"><span class="hudLabel">${active?'2UP PLAY':ready?'2UP READY':final?'2UP DONE':'2UP'}</span> <span class="hudValue">${formatScore(p2.p2?.score||p2.score||0)}</span></span>`,
    signedIn
   };
  }
- if(p2?.enabled&&p2.activeTurn==='queued'){
+ if(p2?.enabled&&(p2.activeTurn==='p1'||p2.activeTurn==='queued')){
   const persona=playerPersonaCardSummary(p2.personaKey||'advanced');
   return{
    mode:'human-with-rival',
    icon:'🧑‍🚀',
    dockLabel:signedIn?'1UP PILOT':'1UP',
    dockStatus:signedIn?humanId:'LOCAL',
-   dockTitle:signedIn?`${humanId} onboard for ${gameTitle}; ${persona.label} 2UP queued`:`Local 1UP ${gameTitle} pilot; ${persona.label} 2UP queued`,
+   dockTitle:signedIn?`${humanId} onboard for ${gameTitle}; ${persona.label} 2UP alternates by life`:`Local 1UP ${gameTitle} pilot; ${persona.label} 2UP alternates by life`,
    panelTitle:`${gameHudLabel} 1UP`,
    panelSub:'HUMAN TURN ACTIVE',
    callsign:signedIn?`${humanId} IS ONBOARD`:'LOCAL PILOT',
-   status:`2UP ${persona.label} rival is queued after the human ${gameTitle} turn. Human score only.`,
-   summary:signedIn?`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':''}. ${gameTitle} 2UP rival scores do not post.`:`Local ${gameTitle} score path active. Sign in to post verified human scores.`,
+   status:`2UP ${persona.label} rival alternates after each ship loss. Human score only.`,
+   summary:signedIn?`Signed in as ${LEADERBOARD.user.email}${verified?' · verified':''}. ${gameTitle} now uses arcade-style per-life 1UP/2UP alternation; 2UP rival scores do not post.`:`Local ${gameTitle} score path active. Sign in to post verified human scores.`,
    email:`Email: ${signedIn?(LEADERBOARD.user?.email||'--'):'--'}`,
-   userId:`Queued rival: ${persona.label} for ${gameTitle}`,
+   userId:`2UP rival: ${persona.label} for ${gameTitle}`,
    hudHtml:`<span class="hudLabel">PILOT</span> <span class="hudValue">${signedIn?humanId:'---'}</span>`,
    signedIn
   };
@@ -643,15 +850,15 @@ function buildPlayerTwoStartHtml(){
 function buildPlayerTwoResultsHtml(){
  const p2=S.playerTwo;
  if(!p2?.enabled)return '';
- const human=(p2.humanScore!=null?p2.humanScore:S.score)|0;
- const p2Score=p2.score|0;
+ const human=(p2.p1?.score!=null?p2.p1.score:(p2.humanScore!=null?p2.humanScore:S.score))|0;
+ const p2Score=(p2.p2?.score!=null?p2.p2.score:p2.score)|0;
  const initials=p2.initials||'---';
  if(p2.activeTurn==='ready')return `<span class="playerTwoResult playerTwoResultReady"><span class="playerTwoKicker">1UP COMPLETE</span><span class="playerTwoVersus"><span class="playerTwoLane is1up"><b>1UP</b><strong>${formatScore(human)}</strong></span><span class="playerTwoLane is2up"><b>2UP ${initials}</b><strong>${p2.autoStartQueued?'NEXT':'READY'}</strong></span></span><span class="playerTwoPrompt">2UP TURN STARTS NEXT   <span class="k">2</span> START 2UP TURN NOW</span><span class="playerTwoRule">HUMAN SCORE ONLY</span></span>`;
- if(p2.activeTurn!=='p2'&&p2.activeTurn!=='done')return `<span class="playerTwoResult playerTwoResultQueued"><span class="playerTwoKicker">2UP ${initials} ${formatScore(p2Score)} READY</span><span class="playerTwoRule">2UP HAS NOT PLAYED THIS TURN   1UP SCORE IS THE ONLY SCOREBOARD ENTRY</span></span>`;
+ if(p2.activeTurn!=='p2'&&p2.activeTurn!=='done'&&p2.activeTurn!=='final')return `<span class="playerTwoResult playerTwoResultQueued"><span class="playerTwoKicker">2UP ${initials} ${formatScore(p2Score)} READY</span><span class="playerTwoRule">PER-LIFE ALTERNATION ACTIVE   1UP SCORE IS THE ONLY SCOREBOARD ENTRY</span></span>`;
  const outcome=human>=p2Score?'1UP LEADS':'2UP LEADS';
  const humanClass=human>=p2Score?' isLeader':'';
  const p2Class=p2Score>human?' isLeader':'';
- return `<span class="playerTwoResult playerTwoResultFinal"><span class="playerTwoKicker">${outcome}</span><span class="playerTwoVersus"><span class="playerTwoLane is1up${humanClass}"><b>1UP</b><strong>${formatScore(human)}</strong></span><span class="playerTwoLane is2up${p2Class}"><b>2UP ${initials}</b><strong>${formatScore(p2Score)}</strong><em>STG ${String(p2.stage||1).padStart(2,'0')}</em></span></span><span class="playerTwoRule">1UP SCORE IS THE ONLY SCOREBOARD ENTRY</span></span>`;
+ return `<span class="playerTwoResult playerTwoResultFinal"><span class="playerTwoKicker">${outcome}</span><span class="playerTwoVersus"><span class="playerTwoLane is1up${humanClass}"><b>1UP</b><strong>${formatScore(human)}</strong><em>${Math.max(0,(p2.p1?.lives??-1)+1)} SHIPS</em></span><span class="playerTwoLane is2up${p2Class}"><b>2UP ${initials}</b><strong>${formatScore(p2Score)}</strong><em>STG ${String(p2.p2?.stage||p2.stage||1).padStart(2,'0')}</em></span></span><span class="playerTwoRule">ARCADE PER-LIFE ALTERNATION   1UP SCORE IS THE ONLY SCOREBOARD ENTRY</span></span>`;
 }
 function playerTwoHudHtml(){
  const p2=S.playerTwo;
