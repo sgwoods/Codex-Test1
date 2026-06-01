@@ -68,7 +68,7 @@ persona testing expectations.
 
 | Lineage | Local anchor | Current role |
 | --- | --- | --- |
-| Space Invaders / Windigo Invaders | `reference-artifacts/analyses/space-invaders-reference/README.md` | first preserved intake lane for the next planned Platinum sibling game; currently used to drive artifact collection, source-gap identification, and the first game-owned instantiation plan before runtime work begins |
+| Space Invaders / Windigo Invaders | `reference-artifacts/analyses/space-invaders-reference/README.md` | preserved intake lane for the next planned Platinum sibling game; now includes gameplay plus rules/service source packages and is currently used to drive source-gap identification, score/rules grounding, and the first game-owned instantiation plan before runtime work begins |
 
 ## Supporting Comparative Archives
 

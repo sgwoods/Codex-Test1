@@ -225,11 +225,11 @@ host/platform ownership from game-owned truth.
 
 | Row | Current role | Required evidence before serious runtime work | Current gap / next action |
 | --- | --- | --- | --- |
-| Invader family index | Define row-by-row enemy role, march relationship, descent meaning, and score value. | Gameplay contact sheets, still-image references, score tables, and operator/manual notes. | Build a row inventory for top/middle/lower invader families and score-value mapping. |
+| Invader family index | Define row-by-row enemy role, march relationship, descent meaning, and score value. | Gameplay contact sheets, still-image references, score tables, and operator/manual notes. | We now have written row-score grounding; next add stronger original score-table stills and a visual row inventory. |
 | Cannon / bunker / shot index | Define player ship, bunker, projectile, and hit-result semantics. | Clean stills, gameplay windows, and rules references for bunker erosion, player fire cadence, and enemy fire cadence. | Add labeled stills and gameplay windows for cannon lane, bunker wear, and projectile timing. |
 | March / descent timing index | Define the game's essential tempo and threat identity. | Event-labeled timing clips and preferably cleaner audio windows from preserved longplay sources. | Promote labeled timing windows for march cadence, descent start, hit, loss, and game-over. |
 | Audio cue index | Define recurring march, shot, hit, descent, failure, and game-over sound families. | Cleaner audio windows and future scene/live-mix review artifacts using the new generic audio framework. | Acquire cleaner source windows and do not begin runtime cue fitting until those windows exist. |
-| Stage / wave structure index | Define how entry, pacing, bunkers, score opportunity, and acceleration evolve. | Manual/rules pages plus longplay observation across early, middle, and late stages. | Build the first wave/stage summary only after score-table and progression evidence are added. |
+| Stage / wave structure index | Define how entry, pacing, bunkers, score opportunity, and acceleration evolve. | Manual/rules pages plus longplay observation across early, middle, and late stages. | The first written rules package is now preserved; next build the first wave/stage summary after stronger stills and timing windows are added. |
 
 ### Standing Planning Anchors
 

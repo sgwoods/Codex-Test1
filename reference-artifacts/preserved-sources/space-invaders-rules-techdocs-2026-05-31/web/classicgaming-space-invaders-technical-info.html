@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<title>Technical Information for Space Invaders the Classic Arcade Game</title>
+<meta NAME="abstract" CONTENT="Space Invaders | Technical Information for the Classic Taito Arcade Game Space Invaders">
+<meta NAME="keywords" CONTENT="Space, Invaders, Spaceinvaders, space-invaders, space, invaders, arcade, game, retro, classic, video game,
+computer games, old, aliens, deluxe, attack, ufo">
+<meta NAME="description" CONTENT="Technical Information for the Classic Taito Arcade Game Space Invaders, including wiring schematics, power supply, motherboard layouts, pinouts.">
+
+<!-- HEAD - START -->
+<meta NAME="distribution" CONTENT="Global">
+<meta NAME="content-language" CONTENT="EN">
+<meta NAME="author" CONTENT="ClassicGaming.cc">
+<meta NAME="revisit-after" CONTENT="30 days">
+<meta NAME="copyright" CONTENT="ClassicGaming.cc">
+<meta NAME="robots" CONTENT="FOLLOW,INDEX">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+
+<link rel="stylesheet" href="style.css" type="text/css">
+<script type="text/javascript" src="javascript.js"></script>
+
+<!-- Social: Facebook -->
+<meta property="og:title" content="Space Invaders | Resources, Images and Material from the Classic Arcade Game" />
+<meta property="og:site_name" content="Space Invaders | Resources, Images and Material from the Classic Arcade Game" />
+<meta property="og:description" content="Resources, Images and Material from the Classic Arcade Game Space Invaders. Play the game online!">
+<meta property="og:url" content="https://www.classicgaming.cc/classics/space-invaders/" />
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://www.classicgaming.cc/classics/space-invaders/images/space-invaders-classicgaming-238x284.jpg" />
+
+<!-- Social: Twitter -->
+<!-- Twitter Validator: https://cards-dev.twitter.com/validator -->
+<!-- <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@PageName">
+<meta name="twitter:creator" content="CreatorName"> -->
+<meta name="twitter:title" content="Space Invaders | Resources, Images and Material from the Classic Arcade Game">
+<meta name="twitter:description" content="Resources, Images and Material from the Classic Arcade Game Space Invaders. Play the game online!">
+<!-- Twitter Summary card images must be at least 120x120px -->
+<meta name="twitter:image:src" content="https://www.classicgaming.cc/classics/space-invaders/images/space-invaders-classicgaming-735x735.jpg" />
+
+<!-- Social: Google+ / Schema.org  -->
+<!-- <link rel="author" href="https://plus.google.com/+PageName/">
+<link rel="publisher" href="https://plus.google.com/+PageName/"> -->
+<meta itemprop="name" content="Space Invaders | Resources, Images and Material from the Classic Arcade Game">
+<meta itemprop="description" content="Resources, Images and Material from the Classic Arcade Game Space Invaders. Play the game online!">
+
+<!-- Fav Icons -->
+<link rel="apple-touch-icon-precomposed" href="https://www.classicgaming.cc/classics/space-invaders/fav_icon-152.png">
+<meta name="msapplication-TileColor" content="#FFF">
+<meta name="msapplication-TileImage" content="https://www.classicgaming.cc/classics/space-invaders/fav_icon-144.png">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://www.classicgaming.cc/classics/space-invaders/fav_icon-152.png">
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://www.classicgaming.cc/classics/space-invaders/fav_icon-120.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://www.classicgaming.cc/classics/space-invaders/fav_icon-72.png">
+<link rel="icon" sizes="32x32" href="https://www.classicgaming.cc/classics/space-invaders/fav_icon-32.png">
+<link rel="icon" sizes="16x16" href="https://www.classicgaming.cc/classics/space-invaders/fav_icon.png">
+
+<style>
+@font-face {
+    font-family: 'Joystix';
+    src: url('../../fonts/Joystix.eot');
+    src: url('../../fonts/Joystix.eot?#iefix') format('embedded-opentype'),
+         url('../../fonts/Joystix.woff2') format('woff2'),
+         url('../../fonts/Joystix.woff') format('woff'),
+         url('../../fonts/Joystix.ttf') format('truetype'),
+         url('../../fonts/Joystix.svg#Joystix') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'TwCen';
+	src: url('../../fonts/TwCen.eot');
+	src: url('../../fonts/TwCen.eot?#iefix') format('embedded-opentype'),
+		url('../../fonts/TwCen.woff') format('woff'),
+		url('../../fonts/TwCen.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+</style>
+
+<!-- Fancy Box Gallery Popups -->
+
+    <!-- Add jQuery library -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    
+    <!-- Add fancyBox -->
+    <link rel="stylesheet" href="../../fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+    <script type="text/javascript" src="../../fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+	<script type="text/javascript">
+        $(document).ready(function() {
+            $(".fancybox").fancybox();
+        });
+    </script>
+<!-- HEAD - END --></head>
+
+
+<body id="tech-info">
+
+<header>
+	<img src="http://www.classicgaming.cc/classics/space-invaders/images/space-invaders-classicgaming-735x735.jpg" width="735" height="735" alt="Share Space Invaders" class="hide" />
+	<div id="site-logo"> <a href="http://www.classicgaming.cc/classics/space-invaders/"><img src="images/space-invaders-logo.png" width="1050" height="270" alt="Space Invaders Logo" class="full" /></a>
+   		<div id="topplay"><a href="play-space-invaders/"><img src="images/play-online-button.png" width="182" height="27" alt="Play Space Invaders Now!"/></a></div>
+    </div>
+    
+  	<div id="menu-wrap">
+    	<div id="menu-mobile"><a href="javascript:void(0)" onclick="toggle_menu('menu');"><img src="images/invader1.png" width="47" height="36" alt="Space Invader Left" class="inv-left" /></a><div class="menu-lbl"><a href="javascript:void(0)" onclick="toggle_menu('menu');">MENU</a></div><a href="javascript:void(0)" onclick="toggle_menu('menu');"><img src="images/invader1.png" width="47" height="36" alt="Space Invader Right" class="inv-right" /></a></div>
+    	<div id="menu">
+        	<ul>
+            	<li><a href="http://www.classicgaming.cc/classics/space-invaders/" class="inv1">Home</a></li><!--
+                --><li><a href="history/" class="inv2">History</a></li><!--
+                --><li><a href="play-guide/" class="inv3">Play Guide</a></li><!--
+                --><li><a href="flyers/" class="inv1">Flyers</a></li><!--
+                --><li><a href="fun-stuff/" class="inv2">Fun Stuff</a></li><!--
+                --><li><a href="wallpaper/" class="inv3">Wallpaper</a></li><!--
+                --><li><a href="icons-and-fonts/" class="inv1">Icons &amp; Fonts</a></li><!--
+                --><li><a href="sounds/" class="inv2">Sounds</a></li><!--
+                --><li><a href="graphics/" class="inv3">Graphics</a></li><!--
+                --><li><a href="technical-info/" class="inv1">Tech Info</a></li><!--
+                --><li class="playmenuitem"><a href="play-space-invaders/">Play Space Invaders</a></li>
+            </ul>
+        </div>
+    </div>
+	<div class="share">
+
+<a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fgoo.gl%2Fe1fGYj" target="_blank"><img src="images/social-facebook.png" alt="Share on Facebook" height="30" width="30" /></a>
+
+<a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fgoo.gl%2Fe1fGYj&text=Space%20Invaders%20-%20The%20Arcade%20Game" target="_blank"><img src="images/social-twitter.png" alt="Share on Twitter" height="30" width="30" /></a> 
+
+<a href="https://plus.google.com/share?url=http%3A%2F%2Fgoo.gl%2Fe1fGYj" target="_blank"><img src="images/social-google.png" alt="Share on Google Plus" height="30" width="30" /></a>
+
+<a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fgoo.gl%2Fe1fGYj&media=http%3A%2F%2Fwww.classicgaming.cc%2Fclassics%2Fspace-invaders%2Fimages%2Fspace-invaders-classicgaming-238x284.jpg&description=Space%20Invaders%20-%20The%20Arcade%20Game" target="_blank"><img src="images/social-pinterest.png" alt="Share on Pinterest" height="30" width="30" /></a>
+
+<a href="http://www.tumblr.com/share?v=3&u=http%3A%2F%2Fgoo.gl%2Fe1fGYj&t=Space%20Invaders%20-%20The%20Arcade%20Game" target="_blank"><img src="images/social-tumblr.png" alt="Share on Tumblr" height="30" width="30" /></a>
+
+</div></header>
+<div id="page">
+	
+    <div id="page-wrap">
+    
+    	<div class="page-left">
+
+<h1>Technical Information</h1>
+        
+<p>Technical files and schematics for Space Invaders.</p>
+
+<div id="boards-list" class="cols2 table">
+	<div class="row">
+        <div class="col1"><h3>Midway Deluxe Cocktail Space Invader</h3>
+
+          <a href="files/tech-info/space-invaders-wiring-schematic.gif" class="fancybox" data-fancybox-group="tech">Wiring Schematic</a> (.gif image, 53K)<br>
+          <a href="files/tech-info/space-invaders-power-supply-schematic.gif" class="fancybox" data-fancybox-group="tech">Power Supply Schematic</a> (.gif image, 29K)<br>
+          <a href="files/tech-info/space-invaders-power-supply-comp-layout.gif" class="fancybox" data-fancybox-group="tech">Power Supply Component Layout</a> (.gif image, 33K)<br>
+		  <a href="files/tech-info/space-invaders-motherboard-comp-layout.gif" class="fancybox" data-fancybox-group="tech">Mother Board Component Layout</a> (.gif image, 55K) 
+          <div class="space40"></div>
+          </div>
+        <div class="col2">
+<h3>General Midway Information</h3>
+
+<a href="files/tech-info/space-invaders-midway-monitor-schematic.gif" class="fancybox" data-fancybox-group="tech">Monitor Schematic</a> (.gif image, 113K)<br>
+<a href="files/tech-info/space-invaders-midway-power-supply-schematic.gif" class="fancybox" data-fancybox-group="tech">Power Supply Schematic</a> (.gif image, 60K)<br>
+<a href="files/tech-info/space-invaders-midway-connector-pinouts.txt" target="_blank">Midway Connector Pinouts</a> (.txt, 2K)<br>
+<div class="space40"></div>
+<h3>General Taito Information</h3>
+<a href="files/tech-info/space-invaders-taito-connector-pinouts.txt" target="_blank">Taito Connector Pinouts</a> (.txt, 2K)<br>
+<a href="files/tech-info/space-invaders-dip-switch-settings.txt" target="_blank">Dip Switch Settings</a> (.txt, 1K) </div>
+    </div>
+</div>
+
+<div class="space80"></div>
+
+<h1>Manuals</h1>
+        
+<p>Manuals for Space Invaders.</p>
+
+<p><a href="files/manuals/space-invaders-taito-cocktail-manual.zip">Taito Space Invaders Cocktail Manual</a> (.zip with .html files, 189 KB)<br>
+  <a href="files/manuals/space-invaders-taito-trimline-manual.zip">Taito Space Invaders Trimline Manual</a> (.zip with .pdf, 3,425 KB) <br>
+  <a href="files/manuals/space-invaders-taito-p2-cocktail-instparts.pdf" target="_blank">Taito Space Invaders Part II Cocktail Installation and Parts Manual</a> (.pdf, 1,635 KB) <br>
+  <a href="files/manuals/space-invaders-taito-p1p2-schematics.pdf" target="_blank">Taito Space Invaders Part I and II Schematics</a> [3 Layer Boards ONLY] (.pdf, 3,033 KB) <br>
+  <a href="files/manuals/space-invaders-taito-p1p2-pinouts.pdf" target="_blank">Taito Space Invaders Part I and Part II Pinouts</a> [2/3 Layer Boards] (.pdf, 63 KB) <br>
+  <a href="files/manuals/space-invaders-taito-p1-upright-pinouts.pdf" target="_blank">Taito Space Invaders Part I Upright pinouts</a> [L-shaped boards] (.pdf, 63 KB)<br>
+  <a href="files/manuals/space-invaders-midway-schematics.zip">Midway Space Invaders Schematics</a> (.tif images, 1,423 KB)<br>
+  <a href="files/manuals/space-invaders-delux-schematics.pdf" target="_blank">Midway Space Invaders Deluxe Schematics</a> (.pdf, 1,925 KB) <br>
+  <a href="files/manuals/space-invaders-midway-delux-pinouts.pdf" target="_blank">Midway Space Invaders/Space Invaders Deluxe Pinouts</a> (.pdf, 64 KB) <br>
+  <a href="files/manuals/space-invaders-taito-credit-board-dip-switch.pdf" target="_blank">Taito Space Invaders Credit Board DIP Switch Settings</a> (.pdf, 41 KB) <br>
+  <a href="files/manuals/space-invaders-taito-game-glass-mask-diagram.zip">Taito Tabletop Video Game Glass Mask Layout Diagram</a> (.zip with .doc, 7 KB) </p>
+
+	  	</div><!-- .page-left  -->
+        
+    	<div class="page-side">
+        	<div class="side-box"> <a href="play-space-invaders/"><img src="images/play-space-invaders-online.png" width="300" height="280" alt="Play Space Invaders Online!" class="content-img" /></a> </div><!-- .side-box -->
+            
+        </div><!-- .page-side -->
+        
+        
+    <div class="adspace">
+	<div class="adtxt">Support This Site</div>
+    <div class="adban">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- Classic Gaming Responsive -->
+    <ins class="adsbygoogle adbansizes"
+         style="display:inline-block; min-width:300px;max-width:760px;width:100%;height:120px"
+         data-ad-client="ca-pub-1015338218779852"
+         data-ad-slot="7016061938"
+         data-ad-format="horizontal"></ins>
+    <script>
+	(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+    </div>
+</div>    
+    </div><!-- #page-wrap -->
+
+</div><!-- #page -->
+
+<div id="footer">
+    <div class="footer-bottom">
+    	<div class="footer-menu">
+        	<a href="history/">History</a> | <a href="play-guide/">Play Guide</a> | <a href="flyers/">Flyers</a> | <a href="fun-stuff/">Fun Stuff</a> | <a href="wallpaper/">Wallpaper</a> | <a href="icons-and-fonts/">Icons &amp; Fonts</a> | <a href="sounds/">Sounds</a> | <a href="graphics/">Graphics</a> | <a href="technical-info/">Tech Info</a> | <a href="sitemap/">Sitemap</a> | <a href="play-space-invaders/">Play Space Invaders</a>
+        </div>
+        <div class="footer-site-links"><a href="http://www.classicgaming.cc/classics/">Classic Reunited (Arcade)</a> | <a href="http://www.classicgaming.cc/pc/">Old Skool (PC)</a> | <a href="http://www.classicgaming.cc/contact.php">Contact Us</a></div>
+      <div class="footer-copy">&copy; 2026 <a href="http://www.classicgaming.cc/">Classicgaming.cc</a></div>
+    </div><!-- .footer-bottom -->
+</div><!-- #footer -->
+</body>
+</html>

@@ -498,16 +498,16 @@
       "lineage": "Space Invaders-derived future Platinum game, themed eventually around the Windigo legend",
       "themeRead": "This should enter through evidence first. The goal is not to rush a derivative shell, but to build the strongest artifact package and Platinum instantiation plan before design decisions harden.",
       "phaseStatus": [
-        { "phaseId": "collect", "state": "active", "summary": "First gameplay source accessioned and preserved." },
-        { "phaseId": "analyze", "state": "active", "summary": "First contact sheet and waveform generated." },
-        { "phaseId": "plan", "state": "next", "summary": "Need a Platinum-focused instantiation plan from the source evidence." },
+        { "phaseId": "collect", "state": "active", "summary": "Gameplay plus first rules/service source packages are accessioned and preserved." },
+        { "phaseId": "analyze", "state": "active", "summary": "First contact sheet, waveform, and written rules grounding are now in repo." },
+        { "phaseId": "plan", "state": "active", "summary": "The initial Platinum-focused instantiation plan now has written score/rules anchors." },
         { "phaseId": "implement", "state": "waiting", "summary": "Do not build runtime slices before the initial evidence package is strong enough." },
         { "phaseId": "conformance", "state": "waiting", "summary": "Scorers should come after the first explicit plan and runtime slice." },
         { "phaseId": "release", "state": "waiting", "summary": "No public claim yet; this is still in intake." }
       ],
       "headlineScores": [
         { "label": "Current phase", "value": "Artifact collection and analysis", "detail": "The game is intentionally still pre-runtime." },
-        { "label": "Seed source count", "value": "1", "detail": "One preserved gameplay source is now in-repo." },
+        { "label": "Seed source count", "value": "2", "detail": "Gameplay plus rules/service preserved-source packages are now in-repo." },
         { "label": "First-pass previews", "value": "2", "detail": "Contact sheet plus audio waveform generated." }
       ],
       "decisionRead": "The next best spend is on artifact breadth, not code. We should use this dashboard to decide what missing source families matter most before we commit to game-specific runtime assumptions.",
@@ -546,6 +546,29 @@
               "hrefType": "artifact",
               "href": "reference-artifacts/preserved-sources/space-invaders-23mins-2026-05-31/source-manifest.json",
               "detail": "Machine-readable source manifest for the first intake seed."
+            }
+          ]
+        },
+        {
+          "title": "Rules and technical source package",
+          "items": [
+            {
+              "label": "Rules and techdocs package",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/space-invaders-rules-techdocs-2026-05-31/README.md",
+              "detail": "Preserved rules, scoring, DIP, and manual/service-doc package for Windigo intake."
+            },
+            {
+              "label": "Rules and techdocs manifest",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/space-invaders-rules-techdocs-2026-05-31/source-manifest.json",
+              "detail": "Machine-readable source manifest with confirmed score and setup facts."
+            },
+            {
+              "label": "Preserved play guide HTML",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/space-invaders-rules-techdocs-2026-05-31/web/classicgaming-space-invaders-play-guide.html",
+              "detail": "Readable derivative rules page with row scores, UFO notes, and progression commentary."
             }
           ]
         },
@@ -607,31 +630,20 @@
       ],
       "nextArtifacts": [
         {
-          "title": "Operator manual or rules page",
+          "title": "Original score-table still or manual-page capture",
           "priority": "Highest",
-          "why": "We need a trustworthy written source for lives, bonus behavior, credits, player count, and any rule variations before guessing at Windigo truth.",
+          "why": "We now have good written rules and scoring prose, but we still want stronger original-source score-table evidence before locking visible Windigo scoring claims.",
           "find": [
-            "Original operator manual scans",
-            "Reliable arcade-reference rules page",
-            "Setup or DIP-switch documentation if available"
+            "Manual page with readable invader/UFO values",
+            "Attract or cabinet still showing score values",
+            "Photographic score-table reference"
           ],
-          "goodEnough": "One preserved document or page with enough detail to anchor base rules."
-        },
-        {
-          "title": "Score-table and bonus references",
-          "priority": "Highest",
-          "why": "Scoring is one of the first visible contracts players will notice, and Space Invaders-family values should not be approximated from memory.",
-          "find": [
-            "Manual score-table page",
-            "Cabinet or attract still showing score values",
-            "Reliable written scoring breakdown"
-          ],
-          "goodEnough": "A readable score table with explicit point values for each invader/UFO or equivalent."
+          "goodEnough": "One readable original or near-original source that visually confirms the main score table."
         },
         {
           "title": "Higher-resolution gameplay with cleaner audio",
-          "priority": "High",
-          "why": "The current seed source is useful, but a clearer capture will help study bunker wear, movement pace, march tempo, and shot audio.",
+          "priority": "Highest",
+          "why": "The current seed source is useful, but a clearer capture will help study bunker wear, march tempo, shot tone, and timing with more confidence.",
           "find": [
             "Higher-resolution full gameplay video",
             "Gameplay with less compression or cleaner original sound",
@@ -649,6 +661,17 @@
             "Title/start or score strip stills"
           ],
           "goodEnough": "At least one clear image each for title/HUD and cabinet-facing presentation."
+        },
+        {
+          "title": "Bunker, cannon, and invader-row close references",
+          "priority": "High",
+          "why": "Gameplay video alone is enough to start, but not enough to confidently define row-family identity, bunker damage reading, and cannon silhouette choices.",
+          "find": [
+            "Close stills of bunkers",
+            "Close stills of the player cannon",
+            "Readable invader-row images or manual illustrations"
+          ],
+          "goodEnough": "A small still bundle that covers the player object, bunker, and all three main invader families."
         },
         {
           "title": "Event-labeled timing clips for fire, hit, descent, and game over",

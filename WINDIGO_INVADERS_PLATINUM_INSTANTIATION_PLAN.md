@@ -20,6 +20,10 @@ Current seed source:
 
 - `reference-artifacts/preserved-sources/space-invaders-23mins-2026-05-31/`
 
+Current rules/service source package:
+
+- `reference-artifacts/preserved-sources/space-invaders-rules-techdocs-2026-05-31/`
+
 Current first-pass analysis:
 
 - `reference-artifacts/analyses/space-invaders-reference/README.md`
@@ -58,17 +62,16 @@ that direction.
 
 The next most valuable artifact families are:
 
-1. Manual or operator/reference rule pages.
-2. Score tables and bonus/life rules.
-3. Higher-resolution gameplay with cleaner audio.
-4. Attract/title/cabinet/bezel stills.
-5. Bunker, cannon, and invader-row close references.
-6. Event-labeled timing windows for march, fire, hit, descent, loss, and
+1. Stronger original score-table and bonus/life still references.
+2. Higher-resolution gameplay with cleaner audio.
+3. Attract/title/cabinet/bezel stills.
+4. Bunker, cannon, and invader-row close references.
+5. Event-labeled timing windows for march, fire, hit, descent, loss, and
    game-over.
 
 Exit condition:
 
-- the repo has at least one strong source in each of the first four families
+- the repo has at least one strong source in each of the first three families
 - the first event-labeled timing set exists for core gameplay scenes
 
 ## Phase 1: Build The Initial Game-Owned Catalog
@@ -132,7 +135,7 @@ Exit condition:
 ## Immediate Next Decisions
 
 1. Add one more preserved Space Invaders gameplay source with cleaner audio.
-2. Find manual/operator or score-table references.
+2. Find stronger original score-table or manual-page imagery.
 3. Promote the first labeled timing windows from the current 23-minute source.
 4. Draft the first Windigo enemy/row/cannon/bunker inventory.
 5. Only then choose the first runtime slice to build on Platinum.

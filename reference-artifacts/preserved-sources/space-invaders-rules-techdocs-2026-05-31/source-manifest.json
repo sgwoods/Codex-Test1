@@ -1,0 +1,83 @@
+{
+  "artifactType": "preserved-source-manifest",
+  "sourceId": "space-invaders-rules-techdocs",
+  "title": "Space Invaders rules and technical documents",
+  "gameLineage": "space-invaders-reference",
+  "plannedGameKey": "windigo-invaders",
+  "status": "rules-and-techdocs-accessioned",
+  "sourceUrls": [
+    "https://www.classicgaming.cc/classics/space-invaders/play-guide",
+    "https://www.classicgaming.cc/classics/space-invaders/technical-info",
+    "https://www.classicgaming.cc/classics/space-invaders/files/tech-info/space-invaders-dip-switch-settings.txt",
+    "https://www.classicgaming.cc/classics/space-invaders/files/manuals/space-invaders-taito-cocktail-manual.zip",
+    "https://www.classicgaming.cc/classics/space-invaders/files/manuals/space-invaders-taito-trimline-manual.zip"
+  ],
+  "repoArtifacts": [
+    {
+      "path": "reference-artifacts/preserved-sources/space-invaders-rules-techdocs-2026-05-31/web/classicgaming-space-invaders-play-guide.html",
+      "kind": "rules-page-html",
+      "fileSizeBytes": 25183,
+      "sha256": "edd1effe19ed8e5724491677cd3c4d64fa182b2348dcf07f829d40eb398d7017"
+    },
+    {
+      "path": "reference-artifacts/preserved-sources/space-invaders-rules-techdocs-2026-05-31/web/classicgaming-space-invaders-technical-info.html",
+      "kind": "technical-index-html",
+      "fileSizeBytes": 14596,
+      "sha256": "8d3668d9f9cef0af43f177414c482c29d06b2b5f3abade14be57724c5286d944"
+    },
+    {
+      "path": "reference-artifacts/preserved-sources/space-invaders-rules-techdocs-2026-05-31/docs/space-invaders-dip-switch-settings.txt",
+      "kind": "dip-settings-text",
+      "fileSizeBytes": 471,
+      "sha256": "5c47def473b1f5ddb8ecc185080ebbfd726c87da0e217cbe350fe232c5e90a1a"
+    },
+    {
+      "path": "reference-artifacts/preserved-sources/space-invaders-rules-techdocs-2026-05-31/docs/space-invaders-taito-cocktail-manual.zip",
+      "kind": "manual-bundle-zip",
+      "fileSizeBytes": 192565,
+      "sha256": "9afa559fa9aadc6af8e732ed21258be188d633b5837d13e7628b711e6eb3f983"
+    },
+    {
+      "path": "reference-artifacts/preserved-sources/space-invaders-rules-techdocs-2026-05-31/docs/space-invaders-taito-trimline-manual.zip",
+      "kind": "manual-bundle-zip",
+      "fileSizeBytes": 3506436,
+      "sha256": "5558813e0cccd2a51aecc3831e75c53a238af1a32bd259498e571ca87c19ee8e"
+    }
+  ],
+  "confirmedFacts": {
+    "rowScores": {
+      "bottomRows": 10,
+      "middleRows": 20,
+      "topRow": 30,
+      "fullScreenTotal": 990
+    },
+    "bonusBaseOptions": [
+      1000,
+      1500
+    ],
+    "basesPerGameOptions": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "notes": [
+      "The preserved play guide describes deterministic mystery-ship scoring behavior including a 300-point case.",
+      "The preserved DIP text confirms configurable bonus-base and bases-per-game setup."
+    ]
+  },
+  "ingestionUse": [
+    "score-table and point-value anchoring",
+    "bonus and lives policy",
+    "operator setup assumptions",
+    "manual-page and still extraction follow-up",
+    "Windigo rules ownership planning"
+  ],
+  "remainingGaps": [
+    "stronger primary-source score-table stills or manual-page captures",
+    "cleaner original gameplay audio",
+    "cabinet, bezel, title, and HUD stills",
+    "event-labeled timing clips",
+    "bunker, cannon, and invader-row close references"
+  ]
+}
