@@ -229,7 +229,7 @@
         { "label": "Challenge-stage conformance", "value": "4.2/10", "detail": "Still the clearest weak user-facing area." },
         { "label": "Weakest artifact row", "value": "Impact explosion visual feedback", "detail": "Current broad artifact weakest row." }
       ],
-      "decisionRead": "Aurora should continue using this dashboard as the visible intake and quality cockpit, but the other machine can keep driving the deeper challenge-stage work while this repo retains the authoritative status surface.",
+      "decisionRead": "Aurora should continue using this dashboard as the visible intake and quality cockpit, but the other machine can keep driving the deeper challenge-stage work while this repo retains the authoritative status surface. For Aurora, the highest-value new artifacts are mostly derived windows cut from sources we already have, not necessarily brand-new raw videos.",
       "hostedLinks": [
         {
           "label": "Aurora conformance dashboard",
@@ -299,34 +299,38 @@
       ],
       "nextArtifacts": [
         {
-          "title": "More exact challenge-stage set-piece windows",
+          "title": "Extract one complete labeled subclip for each challenge-stage family under active tuning",
           "priority": "High",
-          "why": "Challenge stages are still Aurora's clearest user-facing weakness and need better source windows before more tuning.",
+          "why": "We already have videos of every Aurora challenging stage. The gap is not basic coverage. The gap is that many comparisons still depend on long source videos instead of short, named subclips that isolate the exact set-piece being tuned.",
           "find": [
-            "Short clips showing full challenge open, enemy traversal, and result hold",
-            "Windows where novelty and spectacle are easy to compare"
+            "For each tuned challenge family, cut one 8-20 second subclip that starts before the first enemy becomes visible and ends after the result hold settles",
+            "Include the full open, the full traversal pattern, and the full result banner/score hold in a single named clip",
+            "Name each clip by challenge family and visible pattern type, not only by stage number"
           ],
-          "goodEnough": "At least one clean labeled clip for each challenge family currently being tuned."
+          "goodEnough": "At least one preserved extracted clip for each challenge family currently being tuned, with explicit start/end timestamps and a note explaining what visible set-piece it is meant to prove."
         },
         {
-          "title": "Stronger motion-reference windows for flap cadence and challenge novelty",
+          "title": "Promote frame-accurate motion windows for flap cadence and challenge-stage novelty",
           "priority": "High",
-          "why": "Aurora still needs better motion truth for bee/butterfly feel and challenge spectacle.",
+          "why": "Aurora still needs better motion truth for bee/butterfly feel and for why one challenge pattern reads as a distinct spectacle instead of a generic enemy sweep.",
           "find": [
-            "Clear sprite-family motion windows",
-            "Reference slices with readable flap timing and spacing"
+            "Extract 2-6 second windows where a single bee or butterfly family is readable for at least 20 consecutive frames",
+            "Extract 4-10 second challenge windows where the novelty move is visually obvious, such as a fan, ladder, sweep, or cross-over pattern",
+            "Prefer windows with stable framing, minimal overlay obstruction, and no scene cut in the middle of the motion"
           ],
-          "goodEnough": "Enough windows to compare cadence frame-to-frame without relying on memory."
+          "goodEnough": "A small reusable set of motion windows where frame-to-frame flap timing, spacing, and direction changes can be reviewed without scrubbing through full longplay footage."
         },
         {
-          "title": "Better boss and explosion lifecycle visual references",
+          "title": "Promote boss-hit and explosion lifecycle still bundles",
           "priority": "Medium",
           "why": "Impact and explosion feedback remains the weakest broad artifact row.",
           "find": [
-            "Boss-hit and destruction stills or clips",
-            "Explosion progression windows with visible onset and decay"
+            "One labeled frame sequence for a boss taking its first damaging hit",
+            "One labeled frame sequence for a full boss-destruction event",
+            "One labeled frame sequence for a normal enemy explosion from onset through decay",
+            "If possible, include stills that show exactly when score text does and does not appear during those events"
           ],
-          "goodEnough": "At least one readable impact sequence and one full boss-destruction sequence."
+          "goodEnough": "At least one readable frame bundle for first-hit boss damage, one for full boss destruction, and one for a normal enemy explosion, each ordered so the onset, peak, and decay are obvious."
         }
       ],
       "previews": []
@@ -352,7 +356,7 @@
         { "label": "Audio reference comparison", "value": "8.3/10", "detail": "Good coverage, still weak direct acoustic proxy fit." },
         { "label": "Audio live mix", "value": "9.9/10", "detail": "Live mix is now strong; source-faithful match is the remaining gap." }
       ],
-      "decisionRead": "Guardians should use this dashboard as the main cross-artifact intake and planning cockpit while deeper runtime quality work continues. The current best return remains midrun fairness plus serious audio conformance work, backed by the new generic audio framework.",
+      "decisionRead": "Guardians should use this dashboard as the main cross-artifact intake and planning cockpit while deeper runtime quality work continues. The current best return remains midrun fairness plus serious audio conformance work, backed by the new generic audio framework. For Guardians, the highest-value new artifacts are a mix of cleaner source-side audio scenes, deeper-play runtime correspondence captures, and a few tightly defined motion and score-policy windows.",
       "hostedLinks": [
         {
           "label": "Guardians conformance dashboard",
@@ -449,44 +453,48 @@
       ],
       "nextArtifacts": [
         {
-          "title": "Cleaner isolated Galaxian cabinet audio windows",
+          "title": "Promote source-side audio scene windows with direct cabinet audio and named gameplay context",
           "priority": "High",
-          "why": "Guardians now has decent cue coverage, but still needs more source-faithful acoustic match.",
+          "why": "Guardians now has decent cue coverage, but still needs more source-faithful acoustic match. `Cleaner` here should mean better acoustic usefulness, not just a nicer-looking video.",
           "find": [
-            "Start, fire, hit, dive, loss, and game-over phrases with minimal commentary",
-            "Live-play scenes where recurring pressure is audible"
+            "6-15 second source windows where cabinet audio is dominant and spoken commentary is absent or quiet enough not to mask cue timing",
+            "Separate named windows for start, player shot, enemy shot, hit, dive warning, player loss, and game over",
+            "At least one 15-30 second live-play scene where the recurring pressure bed is audible between shots and hits"
           ],
-          "goodEnough": "One promoted window per major cue family plus one good live pressure scene."
+          "goodEnough": "One promoted audio-scene window per major cue family plus one promoted live-play pressure scene, each with timestamps and a note explaining what cue family or mix property it is meant to anchor."
         },
         {
-          "title": "More stage-five-and-beyond professional review captures",
+          "title": "Add comparable stage-five-and-beyond runtime correspondence captures",
           "priority": "High",
           "why": "The weakest remaining gameplay gap is deeper-play survivability and fairness.",
           "find": [
-            "Persona-driven stage 5+ captures",
-            "Manual review runs showing lower-field pressure and recovery windows"
+            "At least two persona-driven captures that both reach stage 5 or later under the same general review conditions",
+            "At least one manual review capture where lower-field crowding, escape space, and recovery after a near miss are visible",
+            "Each capture should preserve score, stage reached, survival time, and whether the player died to crowding, shot density, or a readable mistake"
           ],
-          "goodEnough": "At least two comparable deeper-play captures that show whether fairness changes help."
+          "goodEnough": "Two or more directly comparable stage-5+ captures that let us say whether a fairness change reduced cheap-feeling failure or only changed difficulty in the abstract."
         },
         {
-          "title": "Direct alien pulse and flap reference windows",
+          "title": "Extract direct pulse and flap motion windows from source footage",
           "priority": "Medium",
           "why": "Pulse and flap authority are still felt quality issues.",
           "find": [
-            "Formation-rest windows with clear pulse behavior",
-            "Movement windows where flap cadence is easy to observe"
+            "2-5 second formation-rest windows where aliens are mostly stationary horizontally so pulse amplitude is easy to read",
+            "2-5 second motion windows where one alien family remains readable for at least 15-20 consecutive frames",
+            "Prefer windows without score overlays, explosions, or overlapping dives masking the target body shapes"
           ],
-          "goodEnough": "A small bundle of reusable pulse/flap reference clips."
+          "goodEnough": "A small reusable set of short clips where pulse rhythm and flap cadence can be reviewed frame-by-frame without guessing which alien body state belongs to which frame."
         },
         {
-          "title": "Additional score-popup and hit-value reference windows",
+          "title": "Promote labeled score-popup policy windows",
           "priority": "Medium",
           "why": "Score-pop behavior should be driven by visible source cases, not inferred.",
           "find": [
-            "Special hit-value moments",
-            "Windows where score text appears or does not appear after hits"
+            "Short clips where a special-value hit clearly triggers visible score text",
+            "Short clips where a normal hit clearly does not trigger visible score text",
+            "If possible, one labeled case for each distinct hit-value family we plan to model"
           ],
-          "goodEnough": "Enough labeled windows to define a policy for when score popups appear."
+          "goodEnough": "Enough labeled yes-score-pop and no-score-pop cases that we can write a source-backed rule for when score text should appear after a hit."
         }
       ],
       "previews": []

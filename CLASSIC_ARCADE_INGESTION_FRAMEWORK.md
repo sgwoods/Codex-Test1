@@ -58,6 +58,57 @@ The first proof does not need to cover a whole game.
 It should cover one small slice completely enough that the same pattern can be
 reused for other games.
 
+## Artifact Vocabulary
+
+In this repo, `artifact` is an umbrella word. It should not stay vague in
+planning notes or dashboard hunts. Every requested artifact should imply one of
+these concrete classes:
+
+- `preserved source package`
+  - a repo-owned accession bundle for an external source
+  - should include a README, manifest, provenance, checksum, and the preserved
+    downloaded or copied source
+  - examples: a gameplay video, a manual PDF, a cabinet photo bundle
+- `extracted clip window`
+  - a short subclip cut from an already preserved video with start/end
+    timestamps chosen for one specific gameplay question
+  - examples: one full challenge-stage opening, one boss death, one score
+    reveal, one player-loss sequence
+- `motion window`
+  - an extracted clip or frame bundle whose main purpose is frame-to-frame
+    movement review rather than broad gameplay coverage
+  - examples: flap cadence, rack pulse, escort join timing, bottom-exit/top
+    reentry sweep
+- `labeled still bundle`
+  - a small set of frames or images with a clear target purpose
+  - examples: score table, enemy family rows, bunker damage states, explosion
+    progression, cabinet/title/HUD surfaces
+- `audio scene window`
+  - a clip or extracted audio slice with a named gameplay context and minimal
+    contamination from commentary or unrelated sounds
+  - examples: start phrase, hit phrase, dive warning, live pressure bed,
+    game-over tail
+- `runtime correspondence capture`
+  - a Platinum-side manual or persona-driven run captured specifically so it
+    can be compared against preserved source artifacts
+  - examples: professional stage-5 run, manual challenge-stage review,
+    stationary safe-lane regression probe
+
+When writing new hunt items, prefer a phrase like:
+
+- `extract a 6-12 second motion window showing...`
+- `preserve one manual page that clearly shows...`
+- `promote a labeled still bundle for...`
+
+Avoid soft requests like `get cleaner footage` unless the exact improvement is
+named, such as:
+
+- higher bitrate
+- less commentary
+- direct cabinet audio
+- readable score text
+- unobscured enemy motion
+
 ## Required Game Catalog Output
 
 Every game that enters primary ingestion must receive a maintained catalog entry
