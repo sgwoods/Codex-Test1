@@ -2,7 +2,9 @@
   "title": "Platinum Artifact Collection And Analysis Dashboard",
   "strapline": "A dashboard-first intake and decision cockpit for current games and future additions: gather source artifacts, analyze them, turn them into a Platinum-focused instantiation plan, and keep conformance work grounded in durable evidence.",
   "currentGoal": "Make artifact collection and analysis the front door for every game on Platinum, with Aurora and Galaxy Guardians visible today and Windigo Invaders entering through a measured, source-first intake path.",
-  "dashboardRead": "This page should be the primary place where new game materials are added, assessed, and turned into explicit build decisions. It should stay compact at the top level, let us click into detail by game, and keep showing what source families are still missing before design outruns evidence.",
+  "dashboardRead": "This page should be the primary place where new game materials are added, assessed, and turned into explicit build decisions. Read each game top-down as: current posture, current content package, how we will use that content now, and then the remaining missing artifacts that still matter enough to change gameplay quality or implementation confidence. It should stay compact at the top level, let us click into detail by game, and keep showing what source families are still missing before design outruns evidence.",
+  "lastUpdatedAt": "2026-06-01T14:54:25-04:00",
+  "lastUpdatedNote": "Dashboard and repo policy now reflect the pushed companion private artifact repo, the June 1 intake migration, and the first older Guardians-focused legacy tranche moved out of the public media lane.",
   "phaseDefinitions": [
     {
       "id": "collect",
@@ -164,36 +166,102 @@
   ],
   "globalDocs": [
     {
+      "label": "Artifact Reference ID Scheme",
+      "hrefType": "repoDoc",
+      "href": "ARTIFACT_REFERENCE_ID_SCHEME.md",
+      "detail": "Stable ID rules for dashboard artifacts, plan tracks, hunts, and repo reports.",
+      "docId": "PLAT-DOC-001"
+    },
+    {
       "label": "Classic Arcade Ingestion Framework",
       "hrefType": "repoDoc",
       "href": "CLASSIC_ARCADE_INGESTION_FRAMEWORK.md",
-      "detail": "Canonical source-first intake process for future games."
+      "detail": "Canonical source-first intake process for future games.",
+      "docId": "PLAT-DOC-002"
     },
     {
       "label": "Game Conformance Catalog",
       "hrefType": "repoDoc",
       "href": "GAME_CONFORMANCE_CATALOG.md",
-      "detail": "Cross-game maintained index for enemies, audio, stages, and personas."
+      "detail": "Cross-game maintained index for enemies, audio, stages, and personas.",
+      "docId": "PLAT-DOC-003"
     },
     {
       "label": "Reference Media Inventory",
       "hrefType": "repoDoc",
       "href": "REFERENCE_MEDIA_INVENTORY.md",
-      "detail": "Shared media inventory and source-of-truth reference ledger."
+      "detail": "Shared media inventory and source-of-truth reference ledger.",
+      "docId": "PLAT-DOC-004"
     },
     {
       "label": "Platinum Audio Conformance Framework",
       "hrefType": "repoDoc",
       "href": "PLATINUM_AUDIO_CONFORMANCE_FRAMEWORK.md",
-      "detail": "Generic audio intake, scene review, and live-mix framework for any future game."
+      "detail": "Generic audio intake, scene review, and live-mix framework for any future game.",
+      "docId": "PLAT-DOC-005"
+    },
+    {
+      "label": "Artifact Status And Gameplay Advancement Plan",
+      "hrefType": "repoDoc",
+      "href": "ARTIFACT_STATUS_AND_GAMEPLAY_ADVANCEMENT_PLAN_2026-06-01.md",
+      "detail": "Current repo-owned summary of what content exists now, how it should move Guardians, Aurora, and Windigo forward, and which missing artifacts still matter.",
+      "docId": "PLAT-DOC-006"
+    },
+    {
+      "label": "Guardians Ingestion Net Takeaway And Next 10 Steps",
+      "hrefType": "repoDoc",
+      "href": "GUARDIANS_INGESTION_NET_TAKEAWAY_AND_NEXT_10_STEPS_2026-06-01.md",
+      "detail": "Focused repo-owned read on what the newest ingestion wave really changed for Guardians and the best next ten execution steps to turn evidence into visible quality gains.",
+      "docId": "PLAT-DOC-007"
+    },
+    {
+      "label": "Private Artifact Storage Policy",
+      "hrefType": "repoDoc",
+      "href": "PRIVATE_ARTIFACT_STORAGE_POLICY.md",
+      "detail": "Canonical rule for keeping manifests and summaries public while moving copied and derived source bytes into the companion private artifact store.",
+      "docId": "PLAT-DOC-008"
+    },
+    {
+      "label": "Private Artifact Boundary Status",
+      "hrefType": "repoDoc",
+      "href": "PRIVATE_ARTIFACT_BOUNDARY_STATUS_2026-06-01.md",
+      "detail": "Current status note for the June 1 boundary pass: what moves private now, what stays public-safe, and what still needs a later history-remediation decision.",
+      "docId": "PLAT-DOC-009"
+    },
+    {
+      "label": "Private Artifact Legacy Migration Plan",
+      "hrefType": "repoDoc",
+      "href": "PRIVATE_ARTIFACT_LEGACY_MIGRATION_PLAN_2026-06-01.md",
+      "detail": "Recommended tranche order for moving older tracked copied and derived media out of the public repo and into the companion private artifact store.",
+      "docId": "PLAT-DOC-010"
     }
   ],
   "globalHunts": [
-    "Find manual and score-table sources early so scoring, bonus, and staging do not remain implied.",
-    "Prefer at least one longplay plus one cleaner short-window video per game line.",
-    "Promote audio windows that match real gameplay scenes, not only isolated cue existence.",
-    "Keep every game's plan explicit about what Platinum owns versus what the game owns.",
-    "If a missing artifact family repeatedly blocks conformance, add it to the standing intake requirement set."
+    {
+      "title": "Standing hunt",
+      "detail": "Find manual and score-table sources early so scoring, bonus, and staging do not remain implied.",
+      "huntId": "PLAT-HUNT-001"
+    },
+    {
+      "title": "Standing hunt",
+      "detail": "Prefer at least one longplay plus one cleaner short-window video per game line.",
+      "huntId": "PLAT-HUNT-002"
+    },
+    {
+      "title": "Standing hunt",
+      "detail": "Promote audio windows that match real gameplay scenes, not only isolated cue existence.",
+      "huntId": "PLAT-HUNT-003"
+    },
+    {
+      "title": "Standing hunt",
+      "detail": "Keep every game's plan explicit about what Platinum owns versus what the game owns.",
+      "huntId": "PLAT-HUNT-004"
+    },
+    {
+      "title": "Standing hunt",
+      "detail": "If a missing artifact family repeatedly blocks conformance, add it to the standing intake requirement set.",
+      "huntId": "PLAT-HUNT-005"
+    }
   ],
   "platformExtensions": [
     {
@@ -216,20 +284,58 @@
       "status": "Live first application",
       "lineage": "Galaga-inspired first shipped Platinum game",
       "themeRead": "The most mature current game. Intake and conformance should stay visible because future games should inherit the process, not just the runtime.",
+      "lastUpdatedAt": "2026-06-01T14:54:25-04:00",
+      "lastUpdatedNote": "Aurora status now also reflects the private-companion storage boundary: its newer source-derived bytes are private-lane content, and the next recommended legacy migration tranche is the large Aurora audio-fitting families.",
       "phaseStatus": [
-        { "phaseId": "collect", "state": "strong", "summary": "Reference and extracted media families are established." },
-        { "phaseId": "analyze", "state": "strong", "summary": "Challenge, sprite, motion, and artifact scoring are already active." },
-        { "phaseId": "plan", "state": "strong", "summary": "Measured quality gaps are explicit and documented." },
-        { "phaseId": "implement", "state": "strong", "summary": "Playable production-family game on Platinum." },
-        { "phaseId": "conformance", "state": "active", "summary": "Still improving challenge-stage and motion fidelity." },
-        { "phaseId": "release", "state": "active", "summary": "Public family live, `/dev` remains the review lane." }
+        {
+          "phaseId": "collect",
+          "state": "strong",
+          "summary": "Reference and extracted media families are established."
+        },
+        {
+          "phaseId": "analyze",
+          "state": "strong",
+          "summary": "Challenge, sprite, motion, and artifact scoring are already active."
+        },
+        {
+          "phaseId": "plan",
+          "state": "strong",
+          "summary": "Measured quality gaps are explicit and documented."
+        },
+        {
+          "phaseId": "implement",
+          "state": "strong",
+          "summary": "Playable production-family game on Platinum."
+        },
+        {
+          "phaseId": "conformance",
+          "state": "active",
+          "summary": "Still improving challenge-stage and motion fidelity."
+        },
+        {
+          "phaseId": "release",
+          "state": "active",
+          "summary": "Public family live, `/dev` remains the review lane."
+        }
       ],
       "headlineScores": [
-        { "label": "Application artifact conformance", "value": "7.55/10", "detail": "Average current artifact row score." },
-        { "label": "Challenge-stage conformance", "value": "4.2/10", "detail": "Still the clearest weak user-facing area." },
-        { "label": "Weakest artifact row", "value": "Impact explosion visual feedback", "detail": "Current broad artifact weakest row." }
+        {
+          "label": "Application artifact conformance",
+          "value": "7.55/10",
+          "detail": "Average current artifact row score."
+        },
+        {
+          "label": "Challenge-stage conformance",
+          "value": "4.2/10",
+          "detail": "Still the clearest weak user-facing area."
+        },
+        {
+          "label": "Weakest artifact row",
+          "value": "Impact explosion visual feedback",
+          "detail": "Current broad artifact weakest row."
+        }
       ],
-      "decisionRead": "Aurora should continue using this dashboard as the visible intake and quality cockpit, but the other machine can keep driving the deeper challenge-stage work while this repo retains the authoritative status surface. For Aurora, the highest-value new artifacts are mostly derived windows cut from sources we already have, not necessarily brand-new raw videos.",
+      "decisionRead": "Aurora is now in the phase where the highest-value work is evidence conversion, not broad source hunting. We already have strong challenge-stage coverage, named audio-cue packs, supporting strategy/context sources, annotated still bundles, cabinet/spec grounding, and mature runtime-side conformance artifacts. That means the next big quality gains should come from cutting better challenge-family subclips, motion windows, and explosion-lifecycle still bundles from the sources we already own, then using those extracted evidence units to drive the next challenge-stage and impact-feedback passes.",
       "hostedLinks": [
         {
           "label": "Aurora conformance dashboard",
@@ -246,25 +352,190 @@
       ],
       "artifactGroups": [
         {
+          "title": "Current content package",
+          "items": [
+            {
+              "label": "Broad challenge-stage source coverage",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/challenge-stage-reference/README.md",
+              "detail": "Aurora already has broad challenge-stage video coverage in repo, including the raw source pool needed for extracted set-piece subclips.",
+              "artifactId": "AUR-ART-001"
+            },
+            {
+              "label": "Isolated challenge-stage motion source",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/galaga-challenging-stages-isolated/README.md",
+              "detail": "A preserved 640x360 challenge-stage compilation now shows the challenging stages one at a time with full formations and route motion visible, making it the best current raw source for named subclip and motion-window extraction.",
+              "artifactId": "AUR-ART-002"
+            },
+            {
+              "label": "Perfect-play challenge-stage source",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/galaga-higher-quality-perfect-challenging-stages/README.md",
+              "detail": "A preserved higher-quality perfect-play challenge compilation now gives Aurora its preferred repo-owned reference for flawless challenge-to-result cadence and perfect-result presentation.",
+              "artifactId": "AUR-ART-003"
+            },
+            {
+              "label": "Named Galaga audio families",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaga-khinsider-mp3-cues-2026-06-01/README.md",
+              "detail": "Named audio sources now cover stage intro, capture/rescue, challenge-stage, result/perfect, coin, death/start-up, and name-entry families.",
+              "artifactId": "AUR-ART-004"
+            },
+            {
+              "label": "Annotated strategy and still-image support",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaga-wikihow-play-guide-2026-06-01/README.md",
+              "detail": "Supporting guides, screenshot bundles, and sprite-family still packages now cover capture policy, entrance patterns, challenge behavior, anti-fire setup, screen-surface examples, and named enemy-family identity.",
+              "artifactId": "AUR-ART-005"
+            },
+            {
+              "label": "Current Aurora acceptance artifacts",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/application-artifact-conformance/latest.json",
+              "detail": "Application, challenge-stage, sprite-motion, and quality rollups already provide a mature runtime-side acceptance layer.",
+              "artifactId": "AUR-ART-006"
+            }
+          ]
+        },
+        {
+          "title": "How we will use this content now",
+          "items": [
+            {
+              "label": "Use named cue packs to keep ceremony and capture/result audio source-faithful",
+              "hrefType": "repoDoc",
+              "href": "PLATINUM_AUDIO_CONFORMANCE_FRAMEWORK.md",
+              "detail": "Aurora no longer needs generic audio hunting for its main ceremony families; it needs disciplined fitting against the named sources already in repo.",
+              "artifactId": "AUR-ART-007"
+            },
+            {
+              "label": "Use annotated stills and guides to verify capture, challenge-result, and screen-surface policy",
+              "hrefType": "repoDoc",
+              "href": "GAME_CONFORMANCE_CATALOG.md",
+              "detail": "The current guides are strongest when used to validate state flow and presentation policy, not as substitutes for measured timing.",
+              "artifactId": "AUR-ART-008"
+            },
+            {
+              "label": "Cut better evidence units from the challenge videos already in repo",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/challenge-stage-reference/README.md",
+              "detail": "The next Aurora gains should come from turning the owned challenge videos, especially the new isolated stage-by-stage compilation, into named set-piece, motion, and explosion windows.",
+              "artifactId": "AUR-ART-009"
+            }
+          ]
+        },
+        {
+          "title": "Latest supporting intake",
+          "items": [
+            {
+              "label": "Galaga isolated challenging-stages motion source",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaga-challenging-stages-isolated-2026-06-01/README.md",
+              "detail": "Preserved raw challenge-stage compilation with full formations and route motion visible one stage at a time, plus first-pass contact sheets for immediate Aurora motion review.",
+              "artifactId": "AUR-ART-010"
+            },
+            {
+              "label": "Galaga higher-quality perfect challenging-stages source",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaga-higher-quality-perfect-challenging-stages-2026-06-01/README.md",
+              "detail": "Preserved stronger raw perfect-play challenge-stage compilation with first-pass contact sheets for ideal-flow and perfect-result review across the full run.",
+              "artifactId": "AUR-ART-011"
+            },
+            {
+              "label": "Galaga perfect challenging-stages source",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaga-perfect-challenging-stages-2026-06-01/README.md",
+              "detail": "Earlier preserved raw perfect-play challenge-stage compilation that now remains as a supplemental corroborating lane after the higher-quality perfect-play source was added.",
+              "artifactId": "AUR-ART-012"
+            },
+            {
+              "label": "Galaga indexed sound source package",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaga-sounds-indexed-2026-06-01/README.md",
+              "detail": "Compact labeled Galaga sound pack with isolated start, kill, ambience, capture, rescue, extra-life, and death cues.",
+              "artifactId": "AUR-ART-013"
+            },
+            {
+              "label": "Galaga indexed sound first-pass analysis",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/galaga-audio-reference-video-4/README.md",
+              "detail": "Corroborating audio micro-cue lane that strengthens smaller Galaga cue families without changing Aurora's main artifact priorities.",
+              "artifactId": "AUR-ART-014"
+            },
+            {
+              "label": "Galaga KHInsider MP3 cue pack source package",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaga-khinsider-mp3-cues-2026-06-01/README.md",
+              "detail": "Named Galaga cue pack with full files for stage intro, capture-rescue, challenge-stage, result-perfect, coin, death-start-up, and name-entry families.",
+              "artifactId": "AUR-ART-015"
+            },
+            {
+              "label": "Galaga KHInsider MP3 cue pack first-pass analysis",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/galaga-audio-reference-khinsider-cues/README.md",
+              "detail": "First-pass analysis showing why this pack is now the preferred named ceremony-capture-result audio source without changing Aurora's main visual-motion artifact priorities.",
+              "artifactId": "AUR-ART-016"
+            },
+            {
+              "label": "Galaga Steam how-to-play guide",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaga-steam-how-to-play-guide-2026-06-01/README.md",
+              "detail": "Supporting player guide with explicit dual-fighter, dodging, and challenge-stage practice prose plus a small alien preview still.",
+              "artifactId": "AUR-ART-017"
+            },
+            {
+              "label": "Galaga PrimeTime Amusements getting-good guide",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaga-primetimeamusements-getting-good-2026-06-01/README.md",
+              "detail": "Supporting player guide with score/survival/capture strategy prose plus logo, title-screen, tractor-beam, and stage-01 stills.",
+              "artifactId": "AUR-ART-018"
+            },
+            {
+              "label": "Galaga wikiHow play guide and screenshot bundle",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaga-wikihow-play-guide-2026-06-01/README.md",
+              "detail": "Supporting article snapshot plus 24 annotated screenshots covering anti-fire setup, entrance patterns, capture-rescue, opening-stage positioning, morph bonus, and result/bonus policy examples.",
+              "artifactId": "AUR-ART-019"
+            },
+            {
+              "label": "Galaga StrategyWiki gameplay/walkthrough and sprite bundle",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaga-strategywiki-gameplay-walkthrough-2026-06-01/README.md",
+              "detail": "Supporting StrategyWiki gameplay and walkthrough PDFs plus a 12-image gameplay-page sprite bundle for fighter, capture, enemy-family, and transform-family identity review.",
+              "artifactId": "AUR-ART-020"
+            },
+            {
+              "label": "Galaga arcade-museum history/spec page",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaga-arcade-museum-2026-06-01/README.md",
+              "detail": "Supporting museum page with release metadata, control and sound specs, cabinet styles, cheat notes, and cabinet/control-panel/bezel/PCB/title image leads.",
+              "artifactId": "AUR-ART-021"
+            }
+          ]
+        },
+        {
           "title": "Current authority artifacts",
           "items": [
             {
               "label": "Application artifact conformance",
               "hrefType": "artifact",
               "href": "reference-artifacts/analyses/application-artifact-conformance/latest.json",
-              "detail": "Primary Aurora artifact-level scoring rollup."
+              "detail": "Primary Aurora artifact-level scoring rollup.",
+              "artifactId": "AUR-ART-022"
             },
             {
               "label": "Challenge-stage conformance",
               "hrefType": "artifact",
               "href": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
-              "detail": "Current strict challenge-stage scoring and explanation."
+              "detail": "Current strict challenge-stage scoring and explanation.",
+              "artifactId": "AUR-ART-023"
             },
             {
               "label": "Aurora sprite motion correspondence",
               "hrefType": "artifact",
               "href": "reference-artifacts/analyses/aurora-sprite-motion-correspondence/latest.json",
-              "detail": "Current motion correspondence scorer for visible alien cadence."
+              "detail": "Current motion correspondence scorer for visible alien cadence.",
+              "artifactId": "AUR-ART-024"
             }
           ]
         },
@@ -275,13 +546,15 @@
               "label": "Project guide",
               "hrefType": "hosted",
               "href": "project-guide.html",
-              "detail": "Hosted release/process/status guide."
+              "detail": "Hosted release/process/status guide.",
+              "artifactId": "AUR-ART-025"
             },
             {
               "label": "Game conformance catalog",
               "hrefType": "repoDoc",
               "href": "GAME_CONFORMANCE_CATALOG.md",
-              "detail": "Cross-game maintained catalog including Aurora."
+              "detail": "Cross-game maintained catalog including Aurora.",
+              "artifactId": "AUR-ART-026"
             }
           ]
         }
@@ -294,7 +567,18 @@
             "Maintain cross-game catalog rows",
             "Keep hosted docs aligned with current conformance artifacts",
             "Preserve audio and motion harnesses as generic platform contracts where possible"
-          ]
+          ],
+          "planId": "AUR-PLAN-001"
+        },
+        {
+          "title": "Convert owned sources into runtime-ready evidence units",
+          "goal": "Move Aurora's remaining weak areas by extracting more precise evidence from the sources we already have.",
+          "deliverables": [
+            "Named challenge-family subclips",
+            "Frame-accurate flap and novelty motion windows",
+            "Boss-hit and explosion lifecycle still bundles"
+          ],
+          "planId": "AUR-PLAN-002"
         }
       ],
       "nextArtifacts": [
@@ -307,7 +591,8 @@
             "Include the full open, the full traversal pattern, and the full result banner/score hold in a single named clip",
             "Name each clip by challenge family and visible pattern type, not only by stage number"
           ],
-          "goodEnough": "At least one preserved extracted clip for each challenge family currently being tuned, with explicit start/end timestamps and a note explaining what visible set-piece it is meant to prove."
+          "goodEnough": "At least one preserved extracted clip for each challenge family currently being tuned, with explicit start/end timestamps and a note explaining what visible set-piece it is meant to prove.",
+          "gapId": "AUR-GAP-001"
         },
         {
           "title": "Promote frame-accurate motion windows for flap cadence and challenge-stage novelty",
@@ -318,7 +603,8 @@
             "Extract 4-10 second challenge windows where the novelty move is visually obvious, such as a fan, ladder, sweep, or cross-over pattern",
             "Prefer windows with stable framing, minimal overlay obstruction, and no scene cut in the middle of the motion"
           ],
-          "goodEnough": "A small reusable set of motion windows where frame-to-frame flap timing, spacing, and direction changes can be reviewed without scrubbing through full longplay footage."
+          "goodEnough": "A small reusable set of motion windows where frame-to-frame flap timing, spacing, and direction changes can be reviewed without scrubbing through full longplay footage.",
+          "gapId": "AUR-GAP-002"
         },
         {
           "title": "Promote boss-hit and explosion lifecycle still bundles",
@@ -330,7 +616,8 @@
             "One labeled frame sequence for a normal enemy explosion from onset through decay",
             "If possible, include stills that show exactly when score text does and does not appear during those events"
           ],
-          "goodEnough": "At least one readable frame bundle for first-hit boss damage, one for full boss destruction, and one for a normal enemy explosion, each ordered so the onset, peak, and decay are obvious."
+          "goodEnough": "At least one readable frame bundle for first-hit boss damage, one for full boss destruction, and one for a normal enemy explosion, each ordered so the onset, peak, and decay are obvious.",
+          "gapId": "AUR-GAP-003"
         }
       ],
       "previews": []
@@ -341,22 +628,68 @@
       "status": "Playable sibling preview",
       "lineage": "Galaxian-style second-game ingestion proof on Platinum",
       "themeRead": "The current visible second-game proof. It is strong enough to deserve deeper artifact discipline, but still weak enough that the dashboard should keep missing evidence and risk areas visible.",
+      "lastUpdatedAt": "2026-06-01T14:54:25-04:00",
+      "lastUpdatedNote": "Guardians status now reflects the pushed private companion repo and the first legacy migration tranche: Galaxian frame-reference and audio-conformance-lab bytes have moved out of the public lane, proving the workflow before the next Aurora-heavy tranche.",
       "phaseStatus": [
-        { "phaseId": "collect", "state": "strong", "summary": "Multiple Galaxian-family sources and extracted windows already exist." },
-        { "phaseId": "analyze", "state": "active", "summary": "Audio, movement, long-surface, and visual identity artifacts are now substantial." },
-        { "phaseId": "plan", "state": "active", "summary": "Top-ten and audio sprint plans exist, but deeper play quality still needs work." },
-        { "phaseId": "implement", "state": "active", "summary": "Playable preview on Platinum with game-owned identity." },
-        { "phaseId": "conformance", "state": "active", "summary": "Reference and playtest reads are honest and still below public-release confidence." },
-        { "phaseId": "release", "state": "preview", "summary": "Useful as a review artifact, not yet a mature standalone public promise." }
+        {
+          "phaseId": "collect",
+          "state": "strong",
+          "summary": "Multiple Galaxian-family sources and extracted windows already exist, now including a no-voiceover early-session gameplay clip, a full start-to-end 15-wave session, a named FLAC cue pack, an indexed sound reel, a sustained ambience source, and supporting prose/manual/link-harvest packages."
+        },
+        {
+          "phaseId": "analyze",
+          "state": "active",
+          "summary": "Audio, movement, long-surface, and visual identity artifacts are now substantial."
+        },
+        {
+          "phaseId": "plan",
+          "state": "active",
+          "summary": "Top-ten and audio sprint plans exist, but deeper play quality still needs work."
+        },
+        {
+          "phaseId": "implement",
+          "state": "active",
+          "summary": "Playable preview on Platinum with game-owned identity."
+        },
+        {
+          "phaseId": "conformance",
+          "state": "active",
+          "summary": "Reference and playtest reads are honest and still below public-release confidence."
+        },
+        {
+          "phaseId": "release",
+          "state": "preview",
+          "summary": "Useful as a review artifact, not yet a mature standalone public promise."
+        }
       ],
       "headlineScores": [
-        { "label": "Reference conformance", "value": "7.6/10", "detail": "Broad current reference-backed score." },
-        { "label": "Playtest-weighted conformance", "value": "6.9/10", "detail": "Current felt/read score." },
-        { "label": "Public readiness", "value": "4.2/10", "detail": "Still too low for a strong public promise." },
-        { "label": "Audio reference comparison", "value": "8.3/10", "detail": "Good coverage, still weak direct acoustic proxy fit." },
-        { "label": "Audio live mix", "value": "9.9/10", "detail": "Live mix is now strong; source-faithful match is the remaining gap." }
+        {
+          "label": "Reference conformance",
+          "value": "7.6/10",
+          "detail": "Broad current reference-backed score."
+        },
+        {
+          "label": "Playtest-weighted conformance",
+          "value": "6.9/10",
+          "detail": "Current felt/read score."
+        },
+        {
+          "label": "Public readiness",
+          "value": "4.2/10",
+          "detail": "Still too low for a strong public promise."
+        },
+        {
+          "label": "Audio reference comparison",
+          "value": "8.3/10",
+          "detail": "Good coverage, still weak direct acoustic proxy fit."
+        },
+        {
+          "label": "Audio live mix",
+          "value": "9.9/10",
+          "detail": "Live mix is now strong; source-faithful match is the remaining gap."
+        }
       ],
-      "decisionRead": "Guardians should use this dashboard as the main cross-artifact intake and planning cockpit while deeper runtime quality work continues. The current best return remains midrun fairness plus serious audio conformance work, backed by the new generic audio framework. For Guardians, the highest-value new artifacts are a mix of cleaner source-side audio scenes, deeper-play runtime correspondence captures, and a few tightly defined motion and score-policy windows.",
+      "decisionRead": "Guardians now has enough source truth to support a serious fidelity push rather than a generic intake pass. We have multiple measured gameplay sources across intro, early-session, and deeper-play continuity; named isolated core cues; a sustained ambience bed; a real arcade operator manual; official corroborating prose; better player-language about fairness and late-wave pressure; and strong runtime-side acceptance artifacts. That means the next gameplay gains should come from promoting precise audio, motion, and stage-five-and-beyond windows from the material we already own, then using those windows plus comparable Platinum captures to drive audio authenticity, deeper-play fairness, motion cadence, and source-backed score/presentation behavior.",
       "hostedLinks": [
         {
           "label": "Guardians conformance dashboard",
@@ -373,37 +706,239 @@
       ],
       "artifactGroups": [
         {
+          "title": "Current content package",
+          "items": [
+            {
+              "label": "Measured gameplay coverage from intro through deeper play",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/galaxian-reference/README.md",
+              "detail": "Guardians now has multiple measured Galaxian-family gameplay sources covering intro, early play, repeated starts, deeper play, and full-session continuity.",
+              "artifactId": "GGD-ART-001"
+            },
+            {
+              "label": "Strong source-side audio coverage",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaxian-khinsider-flac-cues-2026-06-01/README.md",
+              "detail": "Named isolated FLAC cues, a sustained ambience source, and an older indexed sound reel now give Guardians strong source-side audio families.",
+              "artifactId": "GGD-ART-002"
+            },
+            {
+              "label": "Rules, scoring, cabinet, and interpretation grounding",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaxian-midway-operator-manual-2026-06-01/README.md",
+              "detail": "The operator manual, official prose, museum/spec package, and supporting review prose now ground score, rules, controls, cabinet identity, and fairness interpretation.",
+              "artifactId": "GGD-ART-003"
+            },
+            {
+              "label": "Current Guardians acceptance artifacts",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/galaxy-guardians-identity/reference-conformance-0.1.json",
+              "detail": "Reference, playtest, long-surface, audio scene, and audio live-mix artifacts already provide a real acceptance layer for Guardians tuning.",
+              "artifactId": "GGD-ART-004"
+            }
+          ]
+        },
+        {
+          "title": "How we will use this content now",
+          "items": [
+            {
+              "label": "Refit Guardians audio families against source truth",
+              "hrefType": "repoDoc",
+              "href": "GUARDIANS_AUDIO_CONFORMANCE_SPRINT_PLAN_2026-05-31.md",
+              "detail": "Use isolated FLAC cues for identity, no-voiceover and long-session gameplay for timing and live soundscape, and the ambience source for recurring pressure.",
+              "artifactId": "GGD-ART-005"
+            },
+            {
+              "label": "Tune deeper-play fairness with matched source and runtime windows",
+              "hrefType": "repoDoc",
+              "href": "GUARDIANS_SAFE_LANE_AND_PERSONA_SUBPLAN_2026-05-31.md",
+              "detail": "Use stage-five-and-beyond source windows plus comparable Platinum captures to improve lower-field readability, recovery space, and survivability.",
+              "artifactId": "GGD-ART-006"
+            },
+            {
+              "label": "Lock score, rules, and visual-family behavior to documentary truth",
+              "hrefType": "repoDoc",
+              "href": "GAME_CONFORMANCE_CATALOG.md",
+              "detail": "Use the operator manual, the new StrategyWiki flyer/sprite bundle, the remaining cabinet-image leads, and official prose to stabilize score claims, popup policy, palette/family separation, and cabinet-facing behavior.",
+              "artifactId": "GGD-ART-007"
+            }
+          ]
+        },
+        {
+          "title": "Latest Galaxian intake",
+          "items": [
+            {
+              "label": "No-voiceover gameplay source package",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaxians-arcade-no-voiceover-2026-06-01/README.md",
+              "detail": "4:10 arcade gameplay session from start screen to game over with direct cabinet audio and no voiceover.",
+              "artifactId": "GGD-ART-008"
+            },
+            {
+              "label": "15-wave full-session gameplay source package",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaxian-15wave-full-start-end-2026-06-01/README.md",
+              "detail": "15-wave run that visibly covers start / score-advance-table presentation through later-wave pressure and final game over.",
+              "artifactId": "GGD-ART-009"
+            },
+            {
+              "label": "No-voiceover first-pass analysis",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/galaxian-reference/galaxians-arcade-no-voiceover/README.md",
+              "detail": "Contact sheets and waveform that make the new early-session audio source reusable for Guardians review.",
+              "artifactId": "GGD-ART-010"
+            },
+            {
+              "label": "15-wave full-session first-pass analysis",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/galaxian-reference/galaxian-15wave-full-start-end/README.md",
+              "detail": "Contact sheets and waveform that make the new start-to-end long-session source reusable for deeper-play window promotion.",
+              "artifactId": "GGD-ART-011"
+            },
+            {
+              "label": "Galaxian KHInsider FLAC cue pack source package",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaxian-khinsider-flac-cues-2026-06-01/README.md",
+              "detail": "Named FLAC pack for credit, start, shoot, fighter loss, extra life, flying, hit enemy, and hit boss cues.",
+              "artifactId": "GGD-ART-012"
+            },
+            {
+              "label": "Galaxian KHInsider FLAC cue pack first-pass analysis",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/galaxian-reference/galaxian-khinsider-flac-cues/README.md",
+              "detail": "First-pass analysis showing why this pack is now the preferred isolated core-cue source and how it narrows the role of the older static-card reel.",
+              "artifactId": "GGD-ART-013"
+            },
+            {
+              "label": "Galaxians indexed sound source package",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaxians-sounds-indexed-2026-06-01/README.md",
+              "detail": "Static-card Galaxians sound reel whose waveform suggests isolated cue blocks plus a longer sustained region.",
+              "artifactId": "GGD-ART-014"
+            },
+            {
+              "label": "Galaxians indexed sound first-pass analysis",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/galaxian-reference/galaxians-sounds-indexed/README.md",
+              "detail": "First-pass analysis showing why this reel is acoustically useful but still needs timestamp cue mapping before it becomes first-class conformance evidence.",
+              "artifactId": "GGD-ART-015"
+            },
+            {
+              "label": "Galaxian ambience background source package",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaxian-ambience-background-2026-06-01/README.md",
+              "detail": "Sustained Galaxian-family ambience/background bed that gives Guardians a stronger source-side recurring-pressure anchor.",
+              "artifactId": "GGD-ART-016"
+            },
+            {
+              "label": "Galaxian ambience background first-pass analysis",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/galaxian-reference/galaxian-ambience-background/README.md",
+              "detail": "First-pass analysis showing why this source largely closes the generic ambience-bed hunt and should now guide recurring-pressure fitting.",
+              "artifactId": "GGD-ART-017"
+            },
+            {
+              "label": "Wikipedia gameplay/history package",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaxian-wikipedia-2026-06-01/README.md",
+              "detail": "Supporting prose/history source with outbound leads for flyer and related follow-up artifacts.",
+              "artifactId": "GGD-ART-018"
+            },
+            {
+              "label": "Absolute Knave Galaxian history review",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaxian-absoluteknave-history-review-2026-06-01/README.md",
+              "detail": "Supporting player-review prose source with unusually explicit notes on fairness, predictive breakout firing, and late-wave pressure.",
+              "artifactId": "GGD-ART-019"
+            },
+            {
+              "label": "Galaxian arcade-museum history/spec page",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaxian-arcade-museum-2026-06-01/README.md",
+              "detail": "Supporting museum page with release metadata, controls, mono sound, cabinet styles, RGB-color trivia, and broad cabinet/control-panel/bezel/PCB/flyer/manual image leads.",
+              "artifactId": "GGD-ART-020"
+            },
+            {
+              "label": "Namco Wiki still-image lead package",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaxian-namco-wiki-fandom-2026-06-01/README.md",
+              "detail": "Structured source with concrete flyer, cabinet, flagship, and alien-family image leads.",
+              "artifactId": "GGD-ART-021"
+            },
+            {
+              "label": "Galaxian StrategyWiki guide/walkthrough and sprite bundle",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaxian-strategywiki-guide-walkthrough-sprite-bundle-2026-06-01/README.md",
+              "detail": "Supporting StrategyWiki guide, gameplay, and walkthrough PDFs plus a preserved six-image bundle for the Midway flyer, flagship, blue/purple/red alien families, and Galaxip.",
+              "artifactId": "GGD-ART-022"
+            },
+            {
+              "label": "Galaxian StrategyWiki first-pass analysis",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/galaxian-strategywiki-guide-walkthrough-sprite-bundle/README.md",
+              "detail": "First-pass analysis showing why this bundle largely closes generic flyer and sprite-family hunting and shifts the remaining still-image ask to cabinet-facing surfaces.",
+              "artifactId": "GGD-ART-023"
+            },
+            {
+              "label": "Midway operator manual package",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaxian-midway-operator-manual-2026-06-01/README.md",
+              "detail": "Primary arcade-era manual source for score, rules, setup, and cabinet-facing claims.",
+              "artifactId": "GGD-ART-024"
+            },
+            {
+              "label": "Official Galaga Web gameplay-summary page",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaxian-galaga-web-history-2026-06-01/README.md",
+              "detail": "Official Bandai Namco summary page with explicit control model and score bands.",
+              "artifactId": "GGD-ART-025"
+            },
+            {
+              "label": "Official Galaga League lineage page",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/galaga-league-history-2026-06-01/README.md",
+              "detail": "Official Bandai Namco lineage/lore page linking Galaxian, Galaga, Gaplus, and Galaga '88.",
+              "artifactId": "GGD-ART-026"
+            }
+          ]
+        },
+        {
           "title": "Current authority artifacts",
           "items": [
             {
               "label": "Reference conformance rollup",
               "hrefType": "artifact",
               "href": "reference-artifacts/analyses/galaxy-guardians-identity/reference-conformance-0.1.json",
-              "detail": "Current headline reference and readiness scores."
+              "detail": "Current headline reference and readiness scores.",
+              "artifactId": "GGD-ART-027"
             },
             {
               "label": "Playtest conformance review",
               "hrefType": "artifact",
               "href": "reference-artifacts/analyses/galaxy-guardians-identity/playtest-conformance-review-0.1.json",
-              "detail": "Current player-feel weighted review."
+              "detail": "Current player-feel weighted review.",
+              "artifactId": "GGD-ART-028"
             },
             {
               "label": "Long-surface conformance",
               "hrefType": "artifact",
               "href": "reference-artifacts/analyses/galaxy-guardians-identity/long-surface-conformance-0.1.json",
-              "detail": "Stage-band survivability and deeper-play review."
+              "detail": "Stage-band survivability and deeper-play review.",
+              "artifactId": "GGD-ART-029"
             },
             {
               "label": "Audio scene review",
               "hrefType": "artifact",
               "href": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-0.1.json",
-              "detail": "Scene-by-scene gameplay sound review artifact."
+              "detail": "Scene-by-scene gameplay sound review artifact.",
+              "artifactId": "GGD-ART-030"
             },
             {
               "label": "Audio live mix",
               "hrefType": "artifact",
               "href": "reference-artifacts/analyses/galaxy-guardians-identity/audio-live-mix-0.1.json",
-              "detail": "Gameplay mix density and continuity artifact."
+              "detail": "Gameplay mix density and continuity artifact.",
+              "artifactId": "GGD-ART-031"
             }
           ]
         },
@@ -414,19 +949,22 @@
               "label": "Guardians audio conformance sprint plan",
               "hrefType": "repoDoc",
               "href": "GUARDIANS_AUDIO_CONFORMANCE_SPRINT_PLAN_2026-05-31.md",
-              "detail": "Current serious audio-improvement plan."
+              "detail": "Current serious audio-improvement plan.",
+              "artifactId": "GGD-ART-032"
             },
             {
               "label": "Guardians safe-lane and persona subplan",
               "hrefType": "repoDoc",
               "href": "GUARDIANS_SAFE_LANE_AND_PERSONA_SUBPLAN_2026-05-31.md",
-              "detail": "Recent fairness, harness, and persona capture work."
+              "detail": "Recent fairness, harness, and persona capture work.",
+              "artifactId": "GGD-ART-033"
             },
             {
               "label": "Top 10 Guardians quality plan",
               "hrefType": "repoDoc",
               "href": "TOP_10_GUARDIANS_USER_QUALITY_FORWARD_PLAN_2026-05-31.md",
-              "detail": "Current ordered improvement queue."
+              "detail": "Current ordered improvement queue.",
+              "artifactId": "GGD-ART-034"
             }
           ]
         }
@@ -439,7 +977,8 @@
             "Scene review and live-mix acceptance gates",
             "Recurring pressure family refit",
             "Shot, dive, hit, and loss family rebuilds against reference windows"
-          ]
+          ],
+          "planId": "GGD-PLAN-001"
         },
         {
           "title": "Deeper-play fairness",
@@ -448,20 +987,97 @@
             "Stage-band fairness lab",
             "Lower-field readability review",
             "Persona-driven capture and review"
-          ]
+          ],
+          "planId": "GGD-PLAN-002"
+        },
+        {
+          "title": "Close the highest-value remaining evidence gaps",
+          "goal": "Promote the precise windows and page-level artifacts that still block high-confidence Guardians tuning.",
+          "deliverables": [
+            "Promoted early-session and stage-five-and-beyond audio windows",
+            "Extracted operator-manual page bundle",
+            "Stage-five-and-beyond runtime captures",
+            "Pulse/flap and score-popup policy windows"
+          ],
+          "planId": "GGD-PLAN-003"
         }
       ],
       "nextArtifacts": [
         {
-          "title": "Promote source-side audio scene windows with direct cabinet audio and named gameplay context",
-          "priority": "High",
-          "why": "Guardians now has decent cue coverage, but still needs more source-faithful acoustic match. `Cleaner` here should mean better acoustic usefulness, not just a nicer-looking video.",
+          "title": "Extract the exact score-table, rules, and setup pages from the preserved Midway operator manual",
+          "priority": "Highest",
+          "why": "We no longer need to hunt for a generic arcade manual or generic score-summary prose. We now have both the Midway operator manual and an official Bandai Namco summary page. The next high-value artifact is a small extracted page set that makes the manual directly usable for score claims, controls/rules text, and operator/setup truth.",
           "find": [
-            "6-15 second source windows where cabinet audio is dominant and spoken commentary is absent or quiet enough not to mask cue timing",
-            "Separate named windows for start, player shot, enemy shot, hit, dive warning, player loss, and game over",
-            "At least one 15-30 second live-play scene where the recurring pressure bed is audible between shots and hits"
+            "One readable score-table page capture from the manual",
+            "One readable controls or gameplay-rules page capture",
+            "One readable setup, coin, DIP, or service page capture",
+            "Any page that materially helps cabinet-facing title/control-panel or operating-language review"
           ],
-          "goodEnough": "One promoted audio-scene window per major cue family plus one promoted live-play pressure scene, each with timestamps and a note explaining what cue family or mix property it is meant to anchor."
+          "goodEnough": "A small promoted manual-page bundle with at least score, rules, and setup represented, each saved as its own readable artifact with a short note explaining what claim it anchors.",
+          "gapId": "GGD-GAP-001"
+        },
+        {
+          "title": "Preserve the cabinet-facing, control-panel, bezel, marquee, and related presentation stills that remain after the new StrategyWiki bundle",
+          "priority": "High",
+          "why": "The new StrategyWiki package now covers the Midway flyer, flagship, main alien families, and Galaxip. The remaining still-image gap is narrower and more important for Guardians presentation: cabinet-facing and control-surface truth is still mostly lead-level rather than preserved repo-owned evidence.",
+          "find": [
+            "At least one clear cabinet-facing image from the linked cabinet or museum pages",
+            "At least one readable control-panel or instruction-surface image",
+            "At least one marquee or bezel image that helps cabinet-facing title and framing review",
+            "A small README or manifest that says which preserved image will anchor cabinet, control-panel, bezel, and marquee review"
+          ],
+          "goodEnough": "One small repo-owned still-image package containing at least one cabinet view, one control-panel or instruction surface, and one bezel or marquee anchor, each checksumed and named for later presentation and visual-conformance use.",
+          "gapId": "GGD-GAP-002"
+        },
+        {
+          "title": "Promote named early-session audio scene windows from the new no-voiceover gameplay clip",
+          "priority": "High",
+          "why": "The newly accessioned 4:10 no-voiceover Galaxian session gives us the right source family for early Guardians audio review, but it still needs to be promoted into named reusable windows instead of living only as a whole video.",
+          "find": [
+            "6-12 second extracted windows for start, `BONUS GALAXIP FOR 5000 PTS`, first player shot, enemy shot, hit, player loss, and game over",
+            "Each window should include timestamps or source offsets and a short note explaining exactly which cue family or timing edge it anchors",
+            "At least one extracted scene where two or more cue families coexist without commentary masking the transitions"
+          ],
+          "goodEnough": "A small promoted early-session audio-scene pack derived from the new clip, with one named window per major cue family and enough context to review cue timing without reopening the full 4:10 source.",
+          "gapId": "GGD-GAP-003"
+        },
+        {
+          "title": "Map only the remaining unidentified or non-FLAC regions in the static-card Galaxians sound reel",
+          "priority": "Medium",
+          "why": "The new KHInsider FLAC pack already covers the strongest named isolated core cues. The older static-card reel now matters only where it still contains missing or ambiguous families that the FLAC pack does not cover.",
+          "find": [
+            "Compare the reel against the eight named FLAC cues and mark which regions are now redundant",
+            "Identify any remaining regions that appear to represent non-FLAC families, extended variants, or a longer mixed gameplay segment",
+            "Assign timestamps and provisional names only to those residual regions",
+            "Preserve the result as a small timestamp ledger that explicitly says which gaps remain after the FLAC pack is considered"
+          ],
+          "goodEnough": "A short residual-gap cue map that explains what the static-card reel still contributes after the named FLAC pack is taken as the primary isolated core-cue source.",
+          "gapId": "GGD-GAP-004"
+        },
+        {
+          "title": "Promote a named recurring-pressure comparison window from the new ambience source",
+          "priority": "High",
+          "why": "The generic source-side ambience-bed hunt is now largely closed, so the next high-value step is to turn this sustained source into a concrete comparison artifact for Guardians' ongoing background family.",
+          "find": [
+            "Select one or two representative 10-20 second windows from the preserved ambience source",
+            "Use those windows as the reference anchor for Guardians' recurring pressure family and live listening review",
+            "Note whether any noticeable modulation or phrase change happens inside the bed so the runtime target is not flattened incorrectly"
+          ],
+          "goodEnough": "A small promoted ambience-window artifact set that can be used directly in the audio conformance sprint instead of treating the full 150-second source as one undifferentiated blob.",
+          "gapId": "GGD-GAP-005"
+        },
+        {
+          "title": "Promote named stage-five-and-beyond audio and pacing windows from the preserved long-session sources",
+          "priority": "High",
+          "why": "We now have two meaningful long-session Galaxian-family sources in repo, including one that explicitly covers start presentation through final game over. The gap is no longer generic longplay acquisition; it is turning those long sessions into reusable deeper-play windows.",
+          "find": [
+            "15-30 second windows from stage 5 or later where gameplay audio is usable and the recurring pressure bed is audible between shots and hits",
+            "At least one deeper-play window that includes lower-field crowding or recovery after a near miss",
+            "At least one later-run failure window where the loss cue and gameplay pressure are both clearly present",
+            "If the preserved long-session sources prove unusable for any of those cases, note that explicitly before hunting more raw source video"
+          ],
+          "goodEnough": "One or two promoted stage-5+ windows from the existing long-session sources that let us compare deeper-play sound character, pressure, and failure closure against Guardians without relying only on early-stage material.",
+          "gapId": "GGD-GAP-006"
         },
         {
           "title": "Add comparable stage-five-and-beyond runtime correspondence captures",
@@ -472,7 +1088,8 @@
             "At least one manual review capture where lower-field crowding, escape space, and recovery after a near miss are visible",
             "Each capture should preserve score, stage reached, survival time, and whether the player died to crowding, shot density, or a readable mistake"
           ],
-          "goodEnough": "Two or more directly comparable stage-5+ captures that let us say whether a fairness change reduced cheap-feeling failure or only changed difficulty in the abstract."
+          "goodEnough": "Two or more directly comparable stage-5+ captures that let us say whether a fairness change reduced cheap-feeling failure or only changed difficulty in the abstract.",
+          "gapId": "GGD-GAP-007"
         },
         {
           "title": "Extract direct pulse and flap motion windows from source footage",
@@ -483,7 +1100,8 @@
             "2-5 second motion windows where one alien family remains readable for at least 15-20 consecutive frames",
             "Prefer windows without score overlays, explosions, or overlapping dives masking the target body shapes"
           ],
-          "goodEnough": "A small reusable set of short clips where pulse rhythm and flap cadence can be reviewed frame-by-frame without guessing which alien body state belongs to which frame."
+          "goodEnough": "A small reusable set of short clips where pulse rhythm and flap cadence can be reviewed frame-by-frame without guessing which alien body state belongs to which frame.",
+          "gapId": "GGD-GAP-008"
         },
         {
           "title": "Promote labeled score-popup policy windows",
@@ -494,7 +1112,8 @@
             "Short clips where a normal hit clearly does not trigger visible score text",
             "If possible, one labeled case for each distinct hit-value family we plan to model"
           ],
-          "goodEnough": "Enough labeled yes-score-pop and no-score-pop cases that we can write a source-backed rule for when score text should appear after a hit."
+          "goodEnough": "Enough labeled yes-score-pop and no-score-pop cases that we can write a source-backed rule for when score text should appear after a hit.",
+          "gapId": "GGD-GAP-009"
         }
       ],
       "previews": []
@@ -505,20 +1124,58 @@
       "status": "Next intake target",
       "lineage": "Space Invaders-derived future Platinum game, themed eventually around the Windigo legend",
       "themeRead": "This should enter through evidence first. The goal is not to rush a derivative shell, but to build the strongest artifact package and Platinum instantiation plan before design decisions harden.",
+      "lastUpdatedAt": "2026-06-01T14:54:25-04:00",
+      "lastUpdatedNote": "Windigo status now also inherits the public/private storage boundary: future source intake should land as public-safe metadata plus private companion bytes, while the remaining high-value gaps stay score-table, bunker/cabinet, timing-window, and missing sound-truth targets.",
       "phaseStatus": [
-        { "phaseId": "collect", "state": "active", "summary": "Gameplay plus first rules/service source packages are accessioned and preserved." },
-        { "phaseId": "analyze", "state": "active", "summary": "First contact sheet, waveform, and written rules grounding are now in repo." },
-        { "phaseId": "plan", "state": "active", "summary": "The initial Platinum-focused instantiation plan now has written score/rules anchors." },
-        { "phaseId": "implement", "state": "waiting", "summary": "Do not build runtime slices before the initial evidence package is strong enough." },
-        { "phaseId": "conformance", "state": "waiting", "summary": "Scorers should come after the first explicit plan and runtime slice." },
-        { "phaseId": "release", "state": "waiting", "summary": "No public claim yet; this is still in intake." }
+        {
+          "phaseId": "collect",
+          "state": "active",
+          "summary": "Gameplay, rules/service docs, a named classic sound pack, and a StrategyWiki flyer/sprite bundle are accessioned and preserved."
+        },
+        {
+          "phaseId": "analyze",
+          "state": "active",
+          "summary": "First contact sheet, waveform, written rules grounding, and isolated sound-vocabulary review are now in repo."
+        },
+        {
+          "phaseId": "plan",
+          "state": "active",
+          "summary": "The initial Platinum-focused instantiation plan now has written score/rules anchors."
+        },
+        {
+          "phaseId": "implement",
+          "state": "waiting",
+          "summary": "Do not build runtime slices before the initial evidence package is strong enough."
+        },
+        {
+          "phaseId": "conformance",
+          "state": "waiting",
+          "summary": "Scorers should come after the first explicit plan and runtime slice."
+        },
+        {
+          "phaseId": "release",
+          "state": "waiting",
+          "summary": "No public claim yet; this is still in intake."
+        }
       ],
       "headlineScores": [
-        { "label": "Current phase", "value": "Artifact collection and analysis", "detail": "The game is intentionally still pre-runtime." },
-        { "label": "Seed source count", "value": "2", "detail": "Gameplay plus rules/service preserved-source packages are now in-repo." },
-        { "label": "First-pass previews", "value": "2", "detail": "Contact sheet plus audio waveform generated." }
+        {
+          "label": "Current phase",
+          "value": "Artifact collection and analysis",
+          "detail": "The game is intentionally still pre-runtime."
+        },
+        {
+          "label": "Preserved source count",
+          "value": "6",
+          "detail": "Gameplay, rules/service, named sound, StrategyWiki visual/reference, supporting history-review, and museum/spec preserved-source packages are now in-repo."
+        },
+        {
+          "label": "First-pass previews",
+          "value": "3",
+          "detail": "Gameplay contact sheet, gameplay waveform, and sound-pack waveform review generated."
+        }
       ],
-      "decisionRead": "The next best spend is on artifact breadth, not code. We should use this dashboard to decide what missing source families matter most before we commit to game-specific runtime assumptions.",
+      "decisionRead": "Windigo is still correctly in the pre-runtime phase. We now have enough evidence to harden the first real Platinum instantiation plan: a gameplay seed source, rules and service documents, a named sound pack, a StrategyWiki flyer/sprite bundle, strong supporting history/review prose, and a museum/spec package that locks the original control model, mono sound, and black-and-white-with-color-overlay display identity. The next best spend is still on finishing the evidence package, not coding. The missing artifacts now matter because they are the ones that will prevent false assumptions in score behavior, bunker wear, descent pressure, cabinet-facing presentation, and live gameplay audio timing.",
       "hostedLinks": [
         {
           "label": "Project guide",
@@ -541,19 +1198,94 @@
       ],
       "artifactGroups": [
         {
+          "title": "Current content package",
+          "items": [
+            {
+              "label": "Gameplay seed and first-pass analysis",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/space-invaders-23mins-2026-05-31/README.md",
+              "detail": "Windigo already has a preserved long gameplay seed plus first contact-sheet and waveform analysis.",
+              "artifactId": "WIN-ART-001"
+            },
+            {
+              "label": "Rules, scoring, and service grounding",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/space-invaders-rules-techdocs-2026-05-31/README.md",
+              "detail": "Rules and service documents now ground row values, bonus-base options, bases-per-game options, and first-pass setup truth.",
+              "artifactId": "WIN-ART-002"
+            },
+            {
+              "label": "Named source-side sound vocabulary",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/space-invaders-classicgaming-sounds-2026-06-01/README.md",
+              "detail": "The named sound pack now covers UFO, march, shot, invader kill, and explosion families.",
+              "artifactId": "WIN-ART-003"
+            },
+            {
+              "label": "Control/display/cabinet grounding",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/space-invaders-arcade-museum-2026-06-01/README.md",
+              "detail": "Museum/spec intake now grounds the original control model, mono sound, black-and-white-with-overlay presentation, and concrete still-image targets.",
+              "artifactId": "WIN-ART-004"
+            },
+            {
+              "label": "StrategyWiki flyer and core sprite-family grounding",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/space-invaders-strategywiki-guide-walkthrough-sprite-bundle-2026-06-01/README.md",
+              "detail": "StrategyWiki intake now preserves a flyer still plus cannon, saucer, and large/medium/small invader-family stills.",
+              "artifactId": "WIN-ART-005"
+            }
+          ]
+        },
+        {
+          "title": "How we will use this content now",
+          "items": [
+            {
+              "label": "Lock the first real Windigo instantiation assumptions before code",
+              "hrefType": "repoDoc",
+              "href": "WINDIGO_INVADERS_PLATINUM_INSTANTIATION_PLAN.md",
+              "detail": "Use the current rules, sound, gameplay, and display/control evidence to keep the first design plan explicit and evidence-backed.",
+              "artifactId": "WIN-ART-006"
+            },
+            {
+              "label": "Define the first owned sound vocabulary",
+              "hrefType": "repoDoc",
+              "href": "PLATINUM_AUDIO_CONFORMANCE_FRAMEWORK.md",
+              "detail": "The existing sound pack is already strong enough to define the first UFO, march, shot, hit, and explosion families without guessing.",
+              "artifactId": "WIN-ART-007"
+            },
+            {
+              "label": "Use future promoted windows to prevent false gameplay assumptions",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/space-invaders-reference/README.md",
+              "detail": "The next promoted score-table, bunker, cannon, invader-row, and event-timing artifacts should be used to stop Windigo from drifting into memory-driven implementation.",
+              "artifactId": "WIN-ART-008"
+            },
+            {
+              "label": "Use the StrategyWiki bundle to lock flyer and gameplay silhouettes early",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/space-invaders-strategywiki-guide-walkthrough-sprite-bundle/README.md",
+              "detail": "Use the new bundle to keep flyer, saucer, cannon, and invader-family identity explicit while the remaining bunker and cabinet-surface gaps are being closed.",
+              "artifactId": "WIN-ART-009"
+            }
+          ]
+        },
+        {
           "title": "Seed source package",
           "items": [
             {
               "label": "Preserved source package",
               "hrefType": "artifact",
               "href": "reference-artifacts/preserved-sources/space-invaders-23mins-2026-05-31/README.md",
-              "detail": "Original source accession, checksum, and measured media facts."
+              "detail": "Original source accession, checksum, and measured media facts.",
+              "artifactId": "WIN-ART-010"
             },
             {
               "label": "Preserved source manifest",
               "hrefType": "artifact",
               "href": "reference-artifacts/preserved-sources/space-invaders-23mins-2026-05-31/source-manifest.json",
-              "detail": "Machine-readable source manifest for the first intake seed."
+              "detail": "Machine-readable source manifest for the first intake seed.",
+              "artifactId": "WIN-ART-011"
             }
           ]
         },
@@ -564,19 +1296,91 @@
               "label": "Rules and techdocs package",
               "hrefType": "artifact",
               "href": "reference-artifacts/preserved-sources/space-invaders-rules-techdocs-2026-05-31/README.md",
-              "detail": "Preserved rules, scoring, DIP, and manual/service-doc package for Windigo intake."
+              "detail": "Preserved rules, scoring, DIP, and manual/service-doc package for Windigo intake.",
+              "artifactId": "WIN-ART-012"
             },
             {
               "label": "Rules and techdocs manifest",
               "hrefType": "artifact",
               "href": "reference-artifacts/preserved-sources/space-invaders-rules-techdocs-2026-05-31/source-manifest.json",
-              "detail": "Machine-readable source manifest with confirmed score and setup facts."
+              "detail": "Machine-readable source manifest with confirmed score and setup facts.",
+              "artifactId": "WIN-ART-013"
             },
             {
               "label": "Preserved play guide HTML",
               "hrefType": "artifact",
               "href": "reference-artifacts/preserved-sources/space-invaders-rules-techdocs-2026-05-31/web/classicgaming-space-invaders-play-guide.html",
-              "detail": "Readable derivative rules page with row scores, UFO notes, and progression commentary."
+              "detail": "Readable derivative rules page with row scores, UFO notes, and progression commentary.",
+              "artifactId": "WIN-ART-014"
+            }
+          ]
+        },
+        {
+          "title": "Named sound source package",
+          "items": [
+            {
+              "label": "ClassicGaming sound package",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/space-invaders-classicgaming-sounds-2026-06-01/README.md",
+              "detail": "Named Space Invaders WAV pack for UFO, four march steps, shot, invader kill, and explosion.",
+              "artifactId": "WIN-ART-015"
+            },
+            {
+              "label": "ClassicGaming sound first-pass analysis",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/space-invaders-reference/space-invaders-classicgaming-sounds/README.md",
+              "detail": "First-pass analysis showing which low-level sound families are now covered and which Windigo audio gaps remain.",
+              "artifactId": "WIN-ART-016"
+            }
+          ]
+        },
+        {
+          "title": "StrategyWiki gameplay and sprite package",
+          "items": [
+            {
+              "label": "StrategyWiki guide/walkthrough and sprite bundle",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/space-invaders-strategywiki-guide-walkthrough-sprite-bundle-2026-06-01/README.md",
+              "detail": "Supporting StrategyWiki guide, gameplay, and walkthrough PDFs plus a preserved six-image bundle for the flyer, saucer, cannon, and large/medium/small invader families.",
+              "artifactId": "WIN-ART-017"
+            },
+            {
+              "label": "StrategyWiki first-pass analysis",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/space-invaders-strategywiki-guide-walkthrough-sprite-bundle/README.md",
+              "detail": "First-pass analysis showing why this bundle largely closes generic flyer and gameplay-silhouette hunting and shifts the remaining still-image ask toward bunkers and cabinet-facing surfaces.",
+              "artifactId": "WIN-ART-018"
+            }
+          ]
+        },
+        {
+          "title": "Supporting written/context source",
+          "items": [
+            {
+              "label": "Absolute Knave Space Invaders history review",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/space-invaders-absoluteknave-history-review-2026-06-01/README.md",
+              "detail": "Supporting player-review prose about march tension, one-shot pressure, column strategy, and original button-control feel.",
+              "artifactId": "WIN-ART-019"
+            }
+          ]
+        },
+        {
+          "title": "Museum / cabinet-spec source",
+          "items": [
+            {
+              "label": "Arcade-museum package",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/space-invaders-arcade-museum-2026-06-01/README.md",
+              "detail": "Preserved Museum of the Game PDF and HTML snapshot with release metadata, display/control facts, cabinet styles, and broad image leads.",
+              "artifactId": "WIN-ART-020"
+            },
+            {
+              "label": "Arcade-museum manifest",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/preserved-sources/space-invaders-arcade-museum-2026-06-01/source-manifest.json",
+              "detail": "Machine-readable source manifest for the museum/spec package.",
+              "artifactId": "WIN-ART-021"
             }
           ]
         },
@@ -587,34 +1391,38 @@
               "label": "Reference-lineage overview",
               "hrefType": "artifact",
               "href": "reference-artifacts/analyses/space-invaders-reference/README.md",
-              "detail": "Current lineage overview and next artifact families to add."
+              "detail": "Current lineage overview and next artifact families to add.",
+              "artifactId": "WIN-ART-022"
             },
-                    {
-                      "label": "First-pass source analysis",
-                      "hrefType": "artifact",
-                      "href": "reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/README.md",
-                      "detail": "Current source-specific notes and generated previews."
-                    }
-                  ]
-                },
-                {
-                  "title": "Planning anchors",
-                  "items": [
-                    {
-                      "label": "Windigo instantiation plan",
-                      "hrefType": "repoDoc",
-                      "href": "WINDIGO_INVADERS_PLATINUM_INSTANTIATION_PLAN.md",
-                      "detail": "First explicit Platinum-owned versus game-owned plan for the Space Invaders line."
-                    },
-                    {
-                      "label": "Classic arcade ingestion framework",
-                      "hrefType": "repoDoc",
-                      "href": "CLASSIC_ARCADE_INGESTION_FRAMEWORK.md",
-                      "detail": "The standing intake workflow that Windigo should follow."
-                    }
-                  ]
-                }
-              ],
+            {
+              "label": "First-pass source analysis",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/README.md",
+              "detail": "Current source-specific notes and generated previews.",
+              "artifactId": "WIN-ART-023"
+            }
+          ]
+        },
+        {
+          "title": "Planning anchors",
+          "items": [
+            {
+              "label": "Windigo instantiation plan",
+              "hrefType": "repoDoc",
+              "href": "WINDIGO_INVADERS_PLATINUM_INSTANTIATION_PLAN.md",
+              "detail": "First explicit Platinum-owned versus game-owned plan for the Space Invaders line.",
+              "artifactId": "WIN-ART-024"
+            },
+            {
+              "label": "Classic arcade ingestion framework",
+              "hrefType": "repoDoc",
+              "href": "CLASSIC_ARCADE_INGESTION_FRAMEWORK.md",
+              "detail": "The standing intake workflow that Windigo should follow.",
+              "artifactId": "WIN-ART-025"
+            }
+          ]
+        }
+      ],
       "planTracks": [
         {
           "title": "Build the initial Platinum instantiation plan",
@@ -623,7 +1431,8 @@
             "Game-owned rules and score-table plan",
             "Stage, bunker, cannon, and invader-family inventory",
             "Audio, march, descent, and game-over timing targets"
-          ]
+          ],
+          "planId": "WIN-PLAN-001"
         },
         {
           "title": "Expand the artifact inventory before coding",
@@ -633,7 +1442,19 @@
             "Cleaner audio windows",
             "Higher-resolution gameplay windows",
             "Still-image references for title, bunkers, cannon, and invader rows"
-          ]
+          ],
+          "planId": "WIN-PLAN-002"
+        },
+        {
+          "title": "Finish the pre-runtime evidence package before implementation",
+          "goal": "Make the first Windigo runtime slice a measured translation of the source lineage instead of a prototype driven by remembered Space Invaders tropes.",
+          "deliverables": [
+            "Original score-table truth",
+            "Higher-resolution gameplay-context audio windows",
+            "Bunker, cannon, and invader-row still bundles",
+            "Event-labeled timing clips for start, march, shot, hit, loss, and game over"
+          ],
+          "planId": "WIN-PLAN-003"
         }
       ],
       "nextArtifacts": [
@@ -646,74 +1467,94 @@
             "Attract or cabinet still showing score values",
             "Photographic score-table reference"
           ],
-          "goodEnough": "One readable original or near-original source that visually confirms the main score table."
+          "goodEnough": "One readable original or near-original source that visually confirms the main score table.",
+          "gapId": "WIN-GAP-001"
         },
         {
           "title": "Higher-resolution gameplay with cleaner audio",
           "priority": "Highest",
-          "why": "The current seed source is useful, but a clearer capture will help study bunker wear, march tempo, shot tone, and timing with more confidence.",
+          "why": "The current seed source is useful, and the new sound pack closes several isolated cue gaps, but we still need clearer gameplay-context footage to study bunker wear, descent pressure, and how those cues behave in live play.",
           "find": [
             "Higher-resolution full gameplay video",
-            "Gameplay with less compression or cleaner original sound",
+            "Gameplay with clearer bunker erosion and invader-row reading",
+            "Live gameplay where the march, shot, hit, explosion, and UFO cues are heard in context",
             "Attract/start sequence footage"
           ],
-          "goodEnough": "One second longplay or focused video that is visibly clearer than the first seed."
+          "goodEnough": "One second longplay or focused video that is visibly clearer than the first seed and also useful for live audio-context review.",
+          "gapId": "WIN-GAP-002"
         },
         {
-          "title": "Cabinet, bezel, and title stills",
+          "title": "Preserve the marquee, cabinet, bezel, control-panel, and title/gameplay surfaces that remain after the new StrategyWiki bundle",
           "priority": "High",
-          "why": "We need to separate classic Space Invaders presentation truth from future Windigo theming, and that starts with clear visual reference.",
+          "why": "The new StrategyWiki bundle now covers the flyer and core gameplay silhouettes. The remaining still-image gap is narrower and more important for Windigo presentation: cabinet-facing and title/gameplay surfaces are still mostly lead-level rather than preserved repo-owned evidence.",
           "find": [
-            "Cabinet photos",
-            "Marquee or bezel art",
-            "Title/start or score strip stills"
+            "At least one clear marquee image",
+            "At least one cabinet-facing image and one bezel or control-panel image",
+            "One title/start or score-strip still and one representative gameplay screenshot",
+            "A small manifest that says which image anchors marquee, cabinet, bezel or control panel, and title/gameplay review"
           ],
-          "goodEnough": "At least one clear image each for title/HUD and cabinet-facing presentation."
+          "goodEnough": "One small repo-owned still-image package containing marquee, cabinet, bezel or control panel, and title/gameplay images, each named and preserved for later Windigo presentation review.",
+          "gapId": "WIN-GAP-003"
         },
         {
-          "title": "Bunker, cannon, and invader-row close references",
+          "title": "Bunker still references",
           "priority": "High",
-          "why": "Gameplay video alone is enough to start, but not enough to confidently define row-family identity, bunker damage reading, and cannon silhouette choices.",
+          "why": "The new StrategyWiki bundle now closes the cannon and invader-family side of the silhouette problem. The remaining gameplay-silhouette gap is bunker-specific: we still need direct visual truth for bunker shape and erosion.",
           "find": [
             "Close stills of bunkers",
-            "Close stills of the player cannon",
-            "Readable invader-row images or manual illustrations"
+            "If possible, one or more stills showing partial bunker erosion",
+            "A small manifest that says which still anchors bunker shape and bunker-wear review"
           ],
-          "goodEnough": "A small still bundle that covers the player object, bunker, and all three main invader families."
+          "goodEnough": "A small still bundle containing at least one intact bunker anchor and, ideally, one erosion example, each named and preserved for later Windigo gameplay-surface review.",
+          "gapId": "WIN-GAP-004"
         },
         {
           "title": "Event-labeled timing clips for fire, hit, descent, and game over",
           "priority": "High",
-          "why": "These are the slices we will need for the first serious Platinum timing and audio conformance work.",
+          "why": "These are now the slices we need to connect the preserved named sound pack to real gameplay timing and pressure.",
           "find": [
             "Game start and first control handoff",
             "Projectile fire and hit moments",
-            "Alien descent or acceleration windows",
+            "March-cadence and alien descent or acceleration windows",
             "Player loss and game-over windows"
           ],
-          "goodEnough": "4-6 named windows with timestamps or preserved extracted clips."
+          "goodEnough": "4-6 named windows with timestamps or preserved extracted clips, including at least one start, one march sequence, one hit, and one loss or game-over scene.",
+          "gapId": "WIN-GAP-005"
         }
       ],
       "previews": [
         {
-          "label": "Gameplay contact sheet",
-          "detail": "First contact-sheet read from the preserved 23-minute session.",
+          "label": "Gameplay contact-sheet metadata",
+          "detail": "Public-safe analysis README for the first contact-sheet read from the preserved 23-minute session. The rendered contact-sheet media itself now belongs in the private companion store.",
           "hrefType": "artifact",
-          "href": "reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/frames/contact-sheet-reference-window-0-1440.jpg",
-          "previewHrefType": "rawArtifact",
-          "previewHref": "reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/frames/contact-sheet-reference-window-0-1440.jpg",
-          "mediaKind": "image"
+          "href": "reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/README.md",
+          "artifactId": "WIN-ART-026"
         },
         {
-          "label": "Audio waveform",
-          "detail": "First waveform read from the preserved 23-minute session.",
+          "label": "Audio waveform metadata",
+          "detail": "Public-safe analysis README for the first waveform read from the preserved 23-minute session. The waveform render itself now belongs in the private companion store.",
           "hrefType": "artifact",
-          "href": "reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/audio/waveform-reference-window-0-1396.png",
-          "previewHrefType": "rawArtifact",
-          "previewHref": "reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/audio/waveform-reference-window-0-1396.png",
-          "mediaKind": "image"
+          "href": "reference-artifacts/analyses/space-invaders-reference/spaceinvaders-23mins/README.md",
+          "artifactId": "WIN-ART-027"
         }
       ]
     }
-  ]
+  ],
+  "referenceIdScheme": {
+    "format": "<scope>-<kind>-<nnn>",
+    "description": "Stable IDs for dashboard artifacts, process docs, plan tracks, and hunt recommendations.",
+    "scopes": {
+      "PLAT": "Shared Platinum or dashboard-wide items",
+      "AUR": "Aurora Galactica items",
+      "GGD": "Galaxy Guardians items",
+      "WIN": "Windigo Invaders items"
+    },
+    "kinds": {
+      "DOC": "Shared process or report doc",
+      "ART": "Artifact-backed source, analysis, preview, or anchor item",
+      "PLAN": "Dashboard plan-track item",
+      "GAP": "Game-specific gap or hunt recommendation",
+      "HUNT": "Shared cross-game hunt recommendation"
+    }
+  }
 }

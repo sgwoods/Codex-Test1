@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-06-01",
+  "status": "public-metadata-private-content",
+  "source_root": "/Users/steven/Downloads",
+  "preserved_root": "reference-artifacts/preserved-sources/galaxians-arcade-no-voiceover-2026-06-01",
+  "notes": [
+    "This source was accessioned from a local download and preserved in-repo because the original file size is small enough for durable Git storage.",
+    "It is currently the strongest short Galaxian-family source in the repo for exact early-session cabinet audio because it reaches game over without voiceover."
+  ],
+  "committed_artifacts": [
+    {
+      "id": "galaxians-arcade-no-voiceover",
+      "title": "Galaxians arcade no-voiceover gameplay session",
+      "status": "preserved-private",
+      "repo_path": null,
+      "bytes": 11278080,
+      "sha256": "f32ce1e24914a84d0f57d28b0806e1066e6869494a17f700efb4d7c4829871ba",
+      "source_path": "/Users/steven/Downloads/Galaxians-arcade-no-voiceover.mp4",
+      "measured_media": {
+        "durationSeconds": 250.288,
+        "width": 480,
+        "height": 360,
+        "frameRate": "30/1",
+        "hasAudio": true
+      },
+      "public_repo_path": "reference-artifacts/preserved-sources/galaxians-arcade-no-voiceover-2026-06-01/video/galaxians-arcade-no-voiceover.mp4",
+      "private_store_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxians-arcade-no-voiceover-2026-06-01/video/galaxians-arcade-no-voiceover.mp4"
+    }
+  ],
+  "downstream_analysis": [
+    "reference-artifacts/analyses/galaxian-reference/galaxians-arcade-no-voiceover/source-manifest.json",
+    "reference-artifacts/analyses/galaxian-reference/galaxians-arcade-no-voiceover/README.md"
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/preserved-sources/galaxians-arcade-no-voiceover-2026-06-01/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxians-arcade-no-voiceover-2026-06-01",
+    "moved_file_count": 1
+  }
+}

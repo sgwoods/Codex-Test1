@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "generated_by": "manual-first-pass-source-ingest",
+  "generated_at": "2026-06-01T14:35:00Z",
+  "source_id": "space-invaders-classicgaming-sounds",
+  "title": "Space Invaders ClassicGaming sound pack",
+  "role": "named_low_level_sound_vocabulary_pack",
+  "local_source_path": "reference-artifacts/preserved-sources/space-invaders-classicgaming-sounds-2026-06-01",
+  "measured_media": {
+    "fileCount": 9,
+    "sampleRate": 11025,
+    "channels": 1,
+    "codec": "pcm_u8",
+    "minDurationSeconds": 0.08907,
+    "maxDurationSeconds": 2.34059
+  },
+  "windows": {
+    "waveform_contact_sheet": {
+      "artifact": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/space-invaders-classicgaming-sounds-2026-06-01/preview/waveform-contact-sheet.jpg"
+    },
+    "waveforms": [
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/space-invaders-reference/space-invaders-classicgaming-sounds/waveforms/explosion.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/space-invaders-reference/space-invaders-classicgaming-sounds/waveforms/fastinvader1.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/space-invaders-reference/space-invaders-classicgaming-sounds/waveforms/fastinvader2.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/space-invaders-reference/space-invaders-classicgaming-sounds/waveforms/fastinvader3.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/space-invaders-reference/space-invaders-classicgaming-sounds/waveforms/fastinvader4.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/space-invaders-reference/space-invaders-classicgaming-sounds/waveforms/invaderkilled.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/space-invaders-reference/space-invaders-classicgaming-sounds/waveforms/shoot.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/space-invaders-reference/space-invaders-classicgaming-sounds/waveforms/ufo_highpitch.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/space-invaders-reference/space-invaders-classicgaming-sounds/waveforms/ufo_lowpitch.png"
+    ]
+  },
+  "analysis_roles": [
+    "named_sound_vocabulary_reference",
+    "windigo_audio_family_planning",
+    "residual_audio_gap_narrowing"
+  ],
+  "notes": [
+    "This source is the strongest repo-owned named low-level Space Invaders sound pack for march cadence, UFO movement, shot, hit, and explosion families.",
+    "It narrows the remaining Windigo audio hunt to missing player-loss, start-credit, and in-context gameplay timing windows."
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/analyses/space-invaders-reference/space-invaders-classicgaming-sounds/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/analyses/space-invaders-reference/space-invaders-classicgaming-sounds",
+    "moved_file_count": 9
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "generated_by": "manual-first-pass-source-ingest",
+  "generated_at": "2026-06-01T12:25:26Z",
+  "source_id": "galaxians-sounds-indexed",
+  "title": "Galaxians indexed sound reel",
+  "role": "indexed_isolated_sound_pack_with_static_title_card",
+  "local_source_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxians-sounds-indexed-2026-06-01/video/arcade-sounds-of-galaxians.mp4",
+  "measured_media": {
+    "durationSeconds": 83.522,
+    "width": 614,
+    "height": 360,
+    "frameRate": "10/1",
+    "hasAudio": true
+  },
+  "windows": {
+    "contact_sheet": {
+      "start_seconds": 0,
+      "duration_seconds": 84,
+      "sample_every_seconds": 6,
+      "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-sounds-indexed/frames/contact-sheet-reference-window.jpg"
+    },
+    "sample_time_sheet": {
+      "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-sounds-indexed/frames/sample-times-contact-sheet.jpg"
+    },
+    "waveform": {
+      "start_seconds": 0,
+      "duration_seconds": 84,
+      "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-sounds-indexed/audio/waveform-reference-window.png"
+    }
+  },
+  "analysis_roles": [
+    "isolated_cue_family_comparison",
+    "candidate_manual_timestamp_mapping",
+    "guardians_acoustic_proxy_support"
+  ],
+  "notes": [
+    "The first-pass visual review shows a static title card rather than readable per-cue labels, so this source is less self-describing than the existing Galaga indexed sound packs.",
+    "The waveform indicates multiple isolated cue blocks plus a longer sustained region, which makes this a useful audio source but also means the next high-value step is a timestamped cue map."
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/analyses/galaxian-reference/galaxians-sounds-indexed/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-sounds-indexed",
+    "moved_file_count": 19
+  }
+}

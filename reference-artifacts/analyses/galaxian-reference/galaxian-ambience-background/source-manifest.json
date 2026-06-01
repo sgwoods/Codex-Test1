@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "generated_by": "manual-first-pass-source-ingest",
+  "generated_at": "2026-06-01T12:25:26Z",
+  "source_id": "galaxian-ambience-background",
+  "title": "Galaxian ambience background source",
+  "role": "sustained_ambient_pressure_bed",
+  "local_source_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxian-ambience-background-2026-06-01/video/galaxian-ambience-background.mp4",
+  "measured_media": {
+    "durationSeconds": 150.001,
+    "width": 640,
+    "height": 360,
+    "frameRate": "30/1",
+    "hasAudio": true
+  },
+  "windows": {
+    "sample_time_sheet": {
+      "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxian-ambience-background/frames/sample-times-contact-sheet.jpg"
+    },
+    "waveform": {
+      "start_seconds": 0,
+      "duration_seconds": 150,
+      "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxian-ambience-background/audio/waveform-reference-window.png"
+    }
+  },
+  "analysis_roles": [
+    "recurring_pressure_bed_comparison",
+    "guardians_acoustic_proxy_support",
+    "source_side_ambient_family_anchor"
+  ],
+  "notes": [
+    "The waveform remains essentially continuous across the run, which suggests this source is a dedicated ambience/pressure bed rather than a segmented cue reel.",
+    "Its highest-value follow-up is promoting a named comparison window and fitting Guardians' recurring pressure family against it."
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/analyses/galaxian-reference/galaxian-ambience-background/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxian-ambience-background",
+    "moved_file_count": 12
+  }
+}

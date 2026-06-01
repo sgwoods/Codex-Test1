@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "generated_by": "manual-first-pass-source-ingest",
+  "generated_at": "2026-06-01T14:05:00Z",
+  "source_id": "galaga-khinsider-mp3-cues",
+  "title": "Galaga KHInsider MP3 cue pack",
+  "role": "named_ceremony_capture_result_cue_pack",
+  "local_source_path": "reference-artifacts/preserved-sources/galaga-khinsider-mp3-cues-2026-06-01",
+  "measured_media": {
+    "fileCount": 13,
+    "sampleRate": 44100,
+    "channels": 2,
+    "codec": "mp3",
+    "minDurationSeconds": 2.142041,
+    "maxDurationSeconds": 60.081633
+  },
+  "windows": {
+    "waveform_contact_sheet": {
+      "artifact": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaga-khinsider-mp3-cues-2026-06-01/preview/waveform-contact-sheet.jpg"
+    },
+    "waveforms": [
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-khinsider-cues/waveforms/01-stage-intro.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-khinsider-cues/waveforms/02-fighter-captured.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-khinsider-cues/waveforms/03-fighter-rescued.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-khinsider-cues/waveforms/04-captured-fighter-destroyed.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-khinsider-cues/waveforms/05-challenging-stage.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-khinsider-cues/waveforms/06-challenging-stage-over.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-khinsider-cues/waveforms/07-challenging-stage-perfect.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-khinsider-cues/waveforms/08-1-up.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-khinsider-cues/waveforms/09-die-start-up-sound.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-khinsider-cues/waveforms/10-coin.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-khinsider-cues/waveforms/11-name-entry.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-khinsider-cues/waveforms/12-2nd-5th-name-entry.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-khinsider-cues/waveforms/13-sound-effects.png"
+    ]
+  },
+  "analysis_roles": [
+    "named_ceremony_family_reference",
+    "aurora_audio_phrase_fitting",
+    "challenge_result_full_phrase_reference"
+  ],
+  "notes": [
+    "This source is the strongest repo-owned named Galaga cue pack for challenge-stage ceremony, capture-rescue, name-entry, coin, and related presentation families.",
+    "It is better suited than the compact indexed Galaga video for preserving full canonical phrases, but it still does not replace gameplay-context timing or visual-conformance evidence."
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/analyses/galaga-audio-reference-khinsider-cues/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-audio-reference-khinsider-cues/",
+    "moved_file_count": 0
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "generated_by": "manual-first-pass-source-ingest",
+  "generated_at": "2026-06-01T16:08:00Z",
+  "source_id": "galaga-strategywiki-gameplay-walkthrough",
+  "title": "Galaga StrategyWiki gameplay/walkthrough and sprite bundle",
+  "role": "sprite_identity_and_supporting_walkthrough_reference",
+  "local_source_root": "reference-artifacts/preserved-sources/galaga-strategywiki-gameplay-walkthrough-2026-06-01",
+  "document_media": {
+    "gameplayPdfPageCount": 7,
+    "walkthroughPdfPageCount": 10
+  },
+  "image_bundle": {
+    "count": 12,
+    "named_assets": [
+      "Galaga_Fighter.png",
+      "Galaga_Capture.png",
+      "Galaga_Bee.png",
+      "Galaga_Butterfly.png",
+      "Galaga_Dragonfly.png",
+      "Galaga_Flagship1.png",
+      "Galaga_Flagship2.png",
+      "Galaga_Scorpion.png",
+      "Galaga_Bosconian.png",
+      "Galaga_Enterprise.png",
+      "Galaga_Satellite.png",
+      "GLX_Flagship.png"
+    ]
+  },
+  "analysis_roles": [
+    "sprite_family_identity_review",
+    "transform_family_reference",
+    "capture_state_surface_reference",
+    "supporting_walkthrough_policy_reference"
+  ],
+  "notes": [
+    "This source is especially useful because it pairs walkthrough prose with individually separated gameplay-page stills for major Galaga sprite families.",
+    "Its immediate promotion path is visual identity and policy corroboration rather than timing or motion extraction."
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/analyses/galaga-strategywiki-gameplay-walkthrough/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-strategywiki-gameplay-walkthrough/",
+    "moved_file_count": 0
+  }
+}

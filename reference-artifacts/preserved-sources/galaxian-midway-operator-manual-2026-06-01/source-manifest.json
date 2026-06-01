@@ -1,0 +1,54 @@
+{
+  "artifactType": "preserved-source-manifest",
+  "sourceId": "galaxian-midway-operator-manual",
+  "title": "Galaxian Midway parts and operating manual",
+  "gameLineage": "galaxian-reference",
+  "plannedGameKey": "galaxy-guardians-preview",
+  "status": "public-metadata-private-content",
+  "sourceUrls": [],
+  "repoArtifacts": [
+    {
+      "path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxian-midway-operator-manual-2026-06-01/pdf/galaxian-midway-operator-manual.pdf",
+      "kind": "arcade-operator-manual-pdf",
+      "fileSizeBytes": 2880411,
+      "sha256": "c49ba8f7f3f14dbad6bdc487ebf724121d5d1ac14d28f90fff7029eeb8a84c34"
+    },
+    {
+      "path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxian-midway-operator-manual-2026-06-01/preview/galaxian-midway-operator-manual-cover.png",
+      "kind": "cover-preview",
+      "fileSizeBytes": 257986,
+      "sha256": "fbacfc3f3a5003de357bc4e01ea823aeca848a7e46d5aaa2fe0b40e6ca8fc958"
+    }
+  ],
+  "confirmedFacts": {
+    "coverRead": {
+      "title": "MIDWAY'S Galaxian Parts and Operating Manual",
+      "gameNumber": "866",
+      "date": "February, 1980",
+      "publisher": "Midway Mfg. Co."
+    },
+    "notes": [
+      "The local filename is misleading; the preserved cover makes clear this is an arcade operator manual, not a console booklet.",
+      "This source should now serve as primary documentary truth for Galaxian operator/rules claims until specific internal pages are extracted."
+    ]
+  },
+  "ingestionUse": [
+    "score-table and scoring-claim confirmation",
+    "controls and rules language",
+    "operator/setup and coin-service assumptions",
+    "cabinet-facing presentation truth"
+  ],
+  "remainingGaps": [
+    "readable extracted score-table page",
+    "readable extracted controls/rules page",
+    "readable extracted setup/service page",
+    "measured gameplay audio and timing windows",
+    "deeper-play motion and pressure windows"
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/preserved-sources/galaxian-midway-operator-manual-2026-06-01/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxian-midway-operator-manual-2026-06-01",
+    "moved_file_count": 2
+  }
+}

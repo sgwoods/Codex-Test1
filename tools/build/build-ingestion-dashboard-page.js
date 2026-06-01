@@ -71,16 +71,77 @@ function resolvePreviewHref(preview = {}, context = {}){
   }, context);
 }
 
+function pathExtension(value=''){
+  const cleaned = String(value || '').split('#')[0].split('?')[0];
+  const ext = path.posix.extname(cleaned || '').toLowerCase();
+  return ext;
+}
+
+function isPublicSafeArtifactPath(value=''){
+  const normalized = normalizeRepoPath(value);
+  if(!normalized.startsWith('reference-artifacts/')) return true;
+  const ext = pathExtension(normalized);
+  return new Set(['.md', '.json', '.sha256', '.txt', '.csv', '.tsv', '.yml', '.yaml']).has(ext);
+}
+
+function resolveInlinePreview(link = {}, context = {}){
+  const href = String(link.href || '').trim();
+  const hrefType = String(link.hrefType || 'hosted').trim();
+  const ext = pathExtension(href);
+  const rawHref = `${context.rawArtifactBase}${encodeRepoPath(href)}`;
+  const textExts = new Set(['.md', '.txt', '.json', '.html', '.js', '.css', '.csv', '.tsv', '.xml', '.yml', '.yaml']);
+  const imageExts = new Set(['.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg']);
+  const videoExts = new Set(['.mp4', '.webm', '.mov', '.m4v']);
+
+  if(!href) return { canInline: false, inlineKind: '', resolvedInlineHref: '' };
+  if(hrefType === 'hosted'){
+    return { canInline: true, inlineKind: 'iframe', resolvedInlineHref: href };
+  }
+  if((hrefType === 'repoDoc' || hrefType === 'artifact' || hrefType === 'rawArtifact') && !isPublicSafeArtifactPath(href)){
+    return { canInline: false, inlineKind: '', resolvedInlineHref: '' };
+  }
+  if(hrefType === 'repoDoc' || hrefType === 'artifact' || hrefType === 'rawArtifact'){
+    if(imageExts.has(ext)){
+      return {
+        canInline: true,
+        inlineKind: 'image',
+        resolvedInlineHref: hrefType === 'rawArtifact' ? resolveLink(link, context) : rawHref
+      };
+    }
+    if(videoExts.has(ext)){
+      return {
+        canInline: true,
+        inlineKind: 'video',
+        resolvedInlineHref: hrefType === 'rawArtifact' ? resolveLink(link, context) : rawHref
+      };
+    }
+    if(textExts.has(ext)){
+      return {
+        canInline: true,
+        inlineKind: ext === '.json' ? 'json' : 'text',
+        resolvedInlineHref: rawHref
+      };
+    }
+  }
+  return { canInline: false, inlineKind: '', resolvedInlineHref: '' };
+}
+
 function decorateLink(link, context){
+  const isPrivateContent = !isPublicSafeArtifactPath(link.href || '');
   return {
     ...link,
-    resolvedHref: resolveLink(link, context)
+    resolvedHref: isPrivateContent ? '' : resolveLink(link, context),
+    isPrivateContent,
+    accessNote: isPrivateContent ? 'Private companion store only; not exposed from the public repo.' : '',
+    ...resolveInlinePreview(link, context)
   };
 }
 
 function decorateGame(game, context){
   return {
     ...game,
+    lastUpdatedAt: game.lastUpdatedAt || context.dashboardLastUpdatedAt || context.pageBuiltAt || '',
+    lastUpdatedNote: game.lastUpdatedNote || '',
     hostedLinks: (game.hostedLinks || []).map((link) => decorateLink(link, context)),
     artifactGroups: (game.artifactGroups || []).map((group) => ({
       ...group,
@@ -89,7 +150,11 @@ function decorateGame(game, context){
     previews: (game.previews || []).map((preview) => ({
       ...preview,
       resolvedHref: resolveLink(preview, context),
-      resolvedPreviewHref: resolvePreviewHref(preview, context)
+      resolvedPreviewHref: resolvePreviewHref(preview, context),
+      ...resolveInlinePreview({
+        href: preview.previewHref || preview.href,
+        hrefType: preview.previewHref ? (preview.previewHrefType || 'rawArtifact') : (preview.hrefType || 'artifact')
+      }, context)
     }))
   };
 }
@@ -101,10 +166,13 @@ function decorateData(data, options = {}){
     lane: options.releaseLane || 'development',
     buildLabel: options.buildLabel || '',
     buildCommit: options.buildCommit || '',
-    pageBuiltAt: options.pageBuiltAt || ''
+    pageBuiltAt: options.pageBuiltAt || '',
+    dashboardLastUpdatedAt: data.lastUpdatedAt || ''
   };
   return {
     ...data,
+    lastUpdatedAt: data.lastUpdatedAt || context.pageBuiltAt || '',
+    lastUpdatedNote: data.lastUpdatedNote || '',
     buildMeta: {
       lane: context.lane,
       buildLabel: context.buildLabel,
@@ -222,10 +290,15 @@ function dashboardStyles(){
       color:#fff0c7;
     }
     .heroActions,
-    .sectionActions,
-    .detailLinks{
+    .sectionActions{
       display:flex;
       flex-wrap:wrap;
+      gap:12px;
+      margin-top:18px;
+    }
+    .detailLinks{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
       gap:12px;
       margin-top:18px;
     }
@@ -247,6 +320,22 @@ function dashboardStyles(){
       border-color:rgba(255,207,99,0.42);
       background:linear-gradient(180deg, rgba(92,65,12,0.96), rgba(59,41,6,0.96));
       color:#ffebbb;
+    }
+    .refTag{
+      display:inline-flex;
+      align-items:center;
+      width:max-content;
+      max-width:100%;
+      padding:4px 9px;
+      border-radius:999px;
+      border:1px solid rgba(126,227,255,0.26);
+      background:rgba(9,23,43,0.92);
+      color:var(--accent);
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+      margin-bottom:8px;
     }
     .stats{
       display:grid;
@@ -470,6 +559,9 @@ function dashboardStyles(){
       text-decoration:none;
       background:rgba(13,30,56,0.74);
     }
+    .linkRow strong{
+      display:block;
+    }
     .linkRow span{
       display:block;
       color:var(--muted);
@@ -477,7 +569,42 @@ function dashboardStyles(){
       line-height:1.45;
       font-size:0.92rem;
     }
+    .linkRowActions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+    .button.subtle{
+      background:rgba(8,22,41,0.74);
+      color:var(--muted);
+    }
+    .updateStamp{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(124,182,255,0.22);
+      background:rgba(8,22,41,0.72);
+      color:var(--muted);
+      font-size:0.9rem;
+    }
+    .gameSelectorUpdate{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:0.84rem;
+      line-height:1.45;
+    }
     .previewCard img{
+      width:100%;
+      display:block;
+      border-radius:12px;
+      margin-top:12px;
+      border:1px solid rgba(124,182,255,0.14);
+      background:#07111f;
+    }
+    .previewCard video{
       width:100%;
       display:block;
       border-radius:12px;
@@ -527,11 +654,109 @@ function dashboardStyles(){
       font-size:0.9rem;
       line-height:1.5;
     }
+    .inlineViewer[hidden]{
+      display:none;
+    }
+    body.viewerOpen{
+      overflow:hidden;
+    }
+    .inlineViewer{
+      position:fixed;
+      inset:0;
+      z-index:90;
+      padding:18px;
+      background:rgba(3,9,18,0.82);
+      backdrop-filter:blur(14px);
+    }
+    .inlineViewerPanel{
+      width:min(1280px, calc(100vw - 36px));
+      height:min(88vh, 960px);
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      border:1px solid rgba(124,182,255,0.24);
+      border-radius:24px;
+      background:linear-gradient(180deg, rgba(10,24,46,0.98), rgba(5,14,27,0.98));
+      box-shadow:0 28px 80px rgba(0,0,0,0.55);
+      overflow:hidden;
+    }
+    .inlineViewerHeader{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:flex-start;
+      padding:18px 20px 14px;
+      border-bottom:1px solid rgba(124,182,255,0.16);
+    }
+    .inlineViewerHeader strong{
+      display:block;
+      font-size:1.05rem;
+    }
+    .inlineViewerHeader span{
+      display:block;
+      margin-top:6px;
+      color:var(--muted);
+      line-height:1.45;
+      font-size:0.92rem;
+      max-width:78ch;
+    }
+    .inlineViewerMeta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      margin-top:10px;
+    }
+    .inlineViewerBody{
+      flex:1;
+      min-height:0;
+      overflow:auto;
+      padding:16px 20px 20px;
+    }
+    .viewerSurface{
+      min-height:100%;
+      border:1px solid rgba(124,182,255,0.16);
+      border-radius:18px;
+      background:#061120;
+      overflow:hidden;
+    }
+    .viewerSurface.text{
+      padding:18px;
+    }
+    .viewerText{
+      margin:0;
+      color:var(--text);
+      white-space:pre-wrap;
+      word-break:break-word;
+      font:0.93rem/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    .viewerImage,
+    .viewerVideo,
+    .viewerFrame{
+      width:100%;
+      display:block;
+      border:0;
+      background:#04101d;
+    }
+    .viewerImage{
+      height:auto;
+    }
+    .viewerVideo{
+      max-height:72vh;
+    }
+    .viewerFrame{
+      min-height:72vh;
+    }
+    .viewerError{
+      padding:18px;
+      color:#ffd0c7;
+    }
     @media (max-width: 1120px){
       .dashboardLayout,
       .stats,
       .scoreGrid,
       .phaseGrid,
+      .detailLinks,
       .artifactGroupGrid,
       .planGrid,
       .docGrid,
@@ -554,9 +779,17 @@ function dashboardStyles(){
       .viewSection{
         padding:18px;
       }
+      .inlineViewer{
+        padding:10px;
+      }
+      .inlineViewerPanel{
+        width:min(100vw - 20px, 100%);
+        height:min(92vh, 100%);
+      }
       .stats,
       .scoreGrid,
       .phaseGrid,
+      .detailLinks,
       .artifactGroupGrid,
       .planGrid,
       .docGrid,
@@ -581,7 +814,12 @@ function dashboardScript(){
       const gameLineage = document.getElementById('gameLineage');
       const gameThemeRead = document.getElementById('gameThemeRead');
       const gameStatus = document.getElementById('gameStatus');
+      const gameLastUpdated = document.getElementById('gameLastUpdated');
+      const gameLastUpdatedNote = document.getElementById('gameLastUpdatedNote');
       const gameDecision = document.getElementById('gameDecision');
+      const dashboardLastUpdated = document.getElementById('dashboardLastUpdated');
+      const dashboardLastUpdatedNote = document.getElementById('dashboardLastUpdatedNote');
+      const dashboardBuiltAt = document.getElementById('dashboardBuiltAt');
       const scoreGrid = document.getElementById('scoreGrid');
       const phaseGrid = document.getElementById('phaseGrid');
       const detailLinks = document.getElementById('detailLinks');
@@ -589,12 +827,19 @@ function dashboardScript(){
       const planGrid = document.getElementById('planGrid');
       const gapGrid = document.getElementById('gapGrid');
       const previewGrid = document.getElementById('previewGrid');
+      const inlineViewer = document.getElementById('inlineViewer');
+      const viewerTitle = document.getElementById('viewerTitle');
+      const viewerDetail = document.getElementById('viewerDetail');
+      const viewerStatus = document.getElementById('viewerStatus');
+      const viewerBody = document.getElementById('viewerBody');
+      const viewerExternal = document.getElementById('viewerExternal');
       const detailTabs = Array.from(document.querySelectorAll('[data-detail-tab]'));
       const detailPanels = Array.from(document.querySelectorAll('[data-detail-panel]'));
       const viewTabs = Array.from(document.querySelectorAll('[data-view-tab]'));
       const viewPanels = Array.from(document.querySelectorAll('[data-view-panel]'));
       let activeGameKey = data.games[0] ? data.games[0].gameKey : '';
       let activeDetailTab = 'overview';
+      let viewerLoadToken = 0;
 
       function escapeHtml(value){
         return String(value == null ? '' : value)
@@ -609,8 +854,115 @@ function dashboardScript(){
         return data.games.find((game) => game.gameKey === key) || data.games[0];
       }
 
+      function formatTimestamp(value){
+        if(!value) return 'Unknown';
+        const normalized = String(value).replace(/([+-]\\d{2})(\\d{2})$/, '$1:$2');
+        const parsed = new Date(normalized);
+        if(Number.isNaN(parsed.getTime())) return value;
+        return new Intl.DateTimeFormat(undefined, {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: '2-digit'
+        }).format(parsed);
+      }
+
+      function renderReferenceTag(id){
+        if(!id) return '';
+        return \`<span class="refTag">\${escapeHtml(id)}</span>\`;
+      }
+
+      function renderActionButtons(entry, labels){
+        const primaryLabel = (labels && labels.primary) || 'Open in dashboard';
+        const secondaryLabel = (labels && labels.secondary) || 'Open separate tab';
+        const inlineButton = entry.canInline && entry.resolvedInlineHref
+          ? \`<button class="button subtle" type="button" data-inline-viewer="true" data-inline-kind="\${escapeHtml(entry.inlineKind || '')}" data-inline-href="\${escapeHtml(entry.resolvedInlineHref || '')}" data-inline-external="\${escapeHtml(entry.resolvedHref || '')}" data-inline-title="\${escapeHtml(entry.label || '')}" data-inline-detail="\${escapeHtml(entry.detail || '')}">\${escapeHtml(primaryLabel)}</button>\`
+          : '';
+        const externalButton = entry.resolvedHref
+          ? \`<a class="button" href="\${escapeHtml(entry.resolvedHref || '#')}" target="_blank" rel="noopener noreferrer">\${escapeHtml(secondaryLabel)}</a>\`
+          : '';
+        if(!inlineButton && !externalButton){
+          return entry.isPrivateContent
+            ? \`<div class="microCopy"><strong>Private companion store:</strong> \${escapeHtml(entry.accessNote || 'Not exposed from the public repo.')}</div>\`
+            : '';
+        }
+        return \`<div class="linkRowActions">\${inlineButton}\${externalButton}</div>\`;
+      }
+
       function chipClass(state){
         return 'phaseChip';
+      }
+
+      function closeInlineViewer(){
+        viewerLoadToken += 1;
+        inlineViewer.hidden = true;
+        document.body.classList.remove('viewerOpen');
+        viewerBody.innerHTML = '';
+        viewerTitle.textContent = '';
+        viewerDetail.textContent = '';
+        viewerStatus.textContent = '';
+        viewerExternal.hidden = true;
+        viewerExternal.removeAttribute('href');
+      }
+
+      function renderViewerText(text, kind){
+        if(kind === 'json'){
+          try{
+            return JSON.stringify(JSON.parse(text), null, 2);
+          }catch(error){
+            return text;
+          }
+        }
+        return text;
+      }
+
+      async function openInlineViewer(config){
+        if(!config || !config.inlineHref) return;
+        viewerLoadToken += 1;
+        const token = viewerLoadToken;
+        inlineViewer.hidden = false;
+        document.body.classList.add('viewerOpen');
+        viewerTitle.textContent = config.title || 'Artifact preview';
+        viewerDetail.textContent = config.detail || 'Inline dashboard preview';
+        viewerStatus.textContent = 'Loading preview...';
+        viewerBody.innerHTML = '<div class="viewerSurface text"><pre class="viewerText">Loading preview...</pre></div>';
+        if(config.externalHref){
+          viewerExternal.href = config.externalHref;
+          viewerExternal.hidden = false;
+        } else {
+          viewerExternal.hidden = true;
+          viewerExternal.removeAttribute('href');
+        }
+        try{
+          if(config.kind === 'image'){
+            viewerStatus.textContent = 'Image preview';
+            viewerBody.innerHTML = \`<div class="viewerSurface"><img class="viewerImage" src="\${escapeHtml(config.inlineHref)}" alt="\${escapeHtml(config.title || 'Artifact preview')}"></div>\`;
+            return;
+          }
+          if(config.kind === 'video'){
+            viewerStatus.textContent = 'Video preview';
+            viewerBody.innerHTML = \`<div class="viewerSurface"><video class="viewerVideo" src="\${escapeHtml(config.inlineHref)}" controls preload="metadata"></video></div>\`;
+            return;
+          }
+          if(config.kind === 'iframe'){
+            viewerStatus.textContent = 'Embedded page';
+            viewerBody.innerHTML = \`<div class="viewerSurface"><iframe class="viewerFrame" src="\${escapeHtml(config.inlineHref)}" loading="lazy" referrerpolicy="no-referrer"></iframe></div>\`;
+            return;
+          }
+          const response = await fetch(config.inlineHref);
+          if(!response.ok){
+            throw new Error(\`Request failed with status \${response.status}\`);
+          }
+          const text = await response.text();
+          if(token !== viewerLoadToken) return;
+          viewerStatus.textContent = config.kind === 'json' ? 'Raw JSON preview' : 'Raw document preview';
+          viewerBody.innerHTML = \`<div class="viewerSurface text"><pre class="viewerText">\${escapeHtml(renderViewerText(text, config.kind))}</pre></div>\`;
+        }catch(error){
+          if(token !== viewerLoadToken) return;
+          viewerStatus.textContent = 'Inline preview unavailable';
+          viewerBody.innerHTML = \`<div class="viewerSurface text"><div class="viewerError">This artifact could not be loaded inline. Use the separate-tab action for the durable source.\\n\\n\${escapeHtml(error && error.message ? error.message : 'Unknown loading error')}</div></div>\`;
+        }
       }
 
       function renderSelector(){
@@ -620,6 +972,7 @@ function dashboardScript(){
             <button class="gameSelectorButton\${game.gameKey === activeGameKey ? ' active' : ''}" data-game-key="\${escapeHtml(game.gameKey)}" type="button">
               <strong>\${escapeHtml(game.title)}</strong>
               <p>\${escapeHtml(game.status)}</p>
+              <div class="gameSelectorUpdate">Updated \${escapeHtml(formatTimestamp(game.lastUpdatedAt || data.lastUpdatedAt || data.buildMeta.pageBuiltAt || ''))}</div>
               <div class="gameSelectorMeta">
                 <span>\${escapeHtml(summary.state || '--')}</span>
                 <span>\${escapeHtml(summary.phaseId || '')}</span>
@@ -658,7 +1011,12 @@ function dashboardScript(){
 
       function renderDetailLinks(game){
         detailLinks.innerHTML = (game.hostedLinks || []).map((entry) => \`
-          <a class="button" href="\${escapeHtml(entry.resolvedHref || '#')}">\${escapeHtml(entry.label || '')}</a>
+          <article class="artifactCard">
+            \${renderReferenceTag(entry.linkId || '')}
+            <strong>\${escapeHtml(entry.label || '')}</strong>
+            <span>\${escapeHtml(entry.detail || '')}</span>
+            \${renderActionButtons(entry, { primary: 'Open in dashboard', secondary: 'Open separate tab' })}
+          </article>
         \`).join('');
       }
 
@@ -668,10 +1026,12 @@ function dashboardScript(){
             <strong>\${escapeHtml(group.title || '')}</strong>
             <div class="linkList">
               \${(group.items || []).map((item) => \`
-                <a class="linkRow" href="\${escapeHtml(item.resolvedHref || '#')}">
+                <article class="linkRow">
+                  \${renderReferenceTag(item.artifactId || '')}
                   <strong>\${escapeHtml(item.label || '')}</strong>
                   <span>\${escapeHtml(item.detail || '')}</span>
-                </a>
+                  \${renderActionButtons(item, { primary: 'Open in dashboard', secondary: 'Open separate tab' })}
+                </article>
               \`).join('')}
             </div>
           </article>
@@ -681,6 +1041,7 @@ function dashboardScript(){
       function renderPlanTracks(game){
         planGrid.innerHTML = (game.planTracks || []).map((track) => \`
           <article class="planCard">
+            \${renderReferenceTag(track.planId || '')}
             <strong>\${escapeHtml(track.title || '')}</strong>
             <span>\${escapeHtml(track.goal || '')}</span>
             <ul class="deliverableList">
@@ -702,6 +1063,7 @@ function dashboardScript(){
           }
           return \`
             <article class="huntCard">
+              \${renderReferenceTag(item.gapId || '')}
               <strong>\${escapeHtml(item.title || 'Needed artifact')}</strong>
               \${item.priority ? \`<span class="detailLabel">Priority \${escapeHtml(item.priority)}</span>\` : ''}
               <span>\${escapeHtml(item.why || '')}</span>
@@ -724,12 +1086,16 @@ function dashboardScript(){
         }
         previewGrid.innerHTML = game.previews.map((item) => \`
           <article class="previewCard">
+            \${renderReferenceTag(item.artifactId || '')}
             <strong>\${escapeHtml(item.label || '')}</strong>
             <span>\${escapeHtml(item.detail || '')}</span>
-            \${item.mediaKind === 'image' ? \`<img src="\${escapeHtml(item.resolvedPreviewHref || '')}" alt="\${escapeHtml(item.label || '')}">\` : ''}
+            \${item.mediaKind === 'image' && item.resolvedPreviewHref ? \`<img src="\${escapeHtml(item.resolvedPreviewHref || '')}" alt="\${escapeHtml(item.label || '')}">\` : ''}
+            \${item.mediaKind === 'video' && item.resolvedPreviewHref ? \`<video src="\${escapeHtml(item.resolvedPreviewHref || '')}" controls preload="metadata"></video>\` : ''}
             <div class="sectionActions">
-              <a class="button" href="\${escapeHtml(item.resolvedHref || '#')}">Open artifact</a>
+              \${item.canInline && item.resolvedInlineHref ? \`<button class="button subtle" type="button" data-inline-viewer="true" data-inline-kind="\${escapeHtml(item.inlineKind || '')}" data-inline-href="\${escapeHtml(item.resolvedInlineHref || '')}" data-inline-external="\${escapeHtml(item.resolvedHref || '')}" data-inline-title="\${escapeHtml(item.label || '')}" data-inline-detail="\${escapeHtml(item.detail || '')}">Open in dashboard</button>\` : ''}
+              \${item.resolvedHref ? \`<a class="button" href="\${escapeHtml(item.resolvedHref || '#')}" target="_blank" rel="noopener noreferrer">Open separate tab</a>\` : ''}
             </div>
+            \${!item.resolvedHref && item.isPrivateContent ? \`<div class="microCopy"><strong>Private companion store:</strong> \${escapeHtml(item.accessNote || 'Not exposed from the public repo.')}</div>\` : ''}
           </article>
         \`).join('');
       }
@@ -750,6 +1116,8 @@ function dashboardScript(){
         gameLineage.textContent = game.lineage || '';
         gameThemeRead.textContent = game.themeRead || '';
         gameStatus.textContent = game.status || '';
+        gameLastUpdated.textContent = formatTimestamp(game.lastUpdatedAt || data.lastUpdatedAt || data.buildMeta.pageBuiltAt || '');
+        gameLastUpdatedNote.textContent = game.lastUpdatedNote || '';
         gameDecision.textContent = game.decisionRead || '';
         renderScoreCards(game);
         renderPhaseCards(game);
@@ -764,11 +1132,14 @@ function dashboardScript(){
       function renderProcessDocs(){
         document.getElementById('processDocs').innerHTML = (data.globalDocs || []).map((item) => \`
           <article class="docCard">
+            \${renderReferenceTag(item.docId || '')}
             <strong>\${escapeHtml(item.label || '')}</strong>
             <span>\${escapeHtml(item.detail || '')}</span>
             <div class="sectionActions">
-              <a class="button" href="\${escapeHtml(item.resolvedHref || '#')}">Open source</a>
+              \${item.canInline && item.resolvedInlineHref ? \`<button class="button subtle" type="button" data-inline-viewer="true" data-inline-kind="\${escapeHtml(item.inlineKind || '')}" data-inline-href="\${escapeHtml(item.resolvedInlineHref || '')}" data-inline-external="\${escapeHtml(item.resolvedHref || '')}" data-inline-title="\${escapeHtml(item.label || '')}" data-inline-detail="\${escapeHtml(item.detail || '')}">Open in dashboard</button>\` : ''}
+              \${item.resolvedHref ? \`<a class="button" href="\${escapeHtml(item.resolvedHref || '#')}" target="_blank" rel="noopener noreferrer">Open separate tab</a>\` : ''}
             </div>
+            \${!item.resolvedHref && item.isPrivateContent ? \`<div class="microCopy"><strong>Private companion store:</strong> \${escapeHtml(item.accessNote || 'Not exposed from the public repo.')}</div>\` : ''}
           </article>
         \`).join('');
         document.getElementById('processFamilies').innerHTML = (data.artifactFamilies || []).map((item) => \`
@@ -800,8 +1171,9 @@ function dashboardScript(){
         \`).join('');
         document.getElementById('globalHunts').innerHTML = (data.globalHunts || []).map((item) => \`
           <article class="huntCard">
-            <strong>Standing hunt</strong>
-            <span>\${escapeHtml(item)}</span>
+            \${renderReferenceTag(item.huntId || '')}
+            <strong>\${escapeHtml(item.title || 'Standing hunt')}</strong>
+            <span>\${escapeHtml(item.detail || item.text || item || '')}</span>
           </article>
         \`).join('');
       }
@@ -818,10 +1190,38 @@ function dashboardScript(){
         button.addEventListener('click', () => setDetailTab(button.getAttribute('data-detail-tab')));
       });
 
+      document.addEventListener('click', (event) => {
+        const inlineButton = event.target.closest('[data-inline-viewer]');
+        if(inlineButton){
+          event.preventDefault();
+          openInlineViewer({
+            kind: inlineButton.getAttribute('data-inline-kind') || 'text',
+            inlineHref: inlineButton.getAttribute('data-inline-href') || '',
+            externalHref: inlineButton.getAttribute('data-inline-external') || '',
+            title: inlineButton.getAttribute('data-inline-title') || '',
+            detail: inlineButton.getAttribute('data-inline-detail') || ''
+          });
+          return;
+        }
+        if(event.target.closest('[data-inline-close]') || event.target === inlineViewer){
+          event.preventDefault();
+          closeInlineViewer();
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if(event.key === 'Escape' && !inlineViewer.hidden){
+          closeInlineViewer();
+        }
+      });
+
       renderSelector();
       renderDetail();
       renderProcessDocs();
       setDetailTab('overview');
+      dashboardLastUpdated.textContent = formatTimestamp(data.lastUpdatedAt || data.buildMeta.pageBuiltAt || '');
+      dashboardLastUpdatedNote.textContent = data.lastUpdatedNote || '';
+      dashboardBuiltAt.textContent = formatTimestamp(data.buildMeta.pageBuiltAt || '');
     })();
   `;
 }
@@ -871,6 +1271,11 @@ function buildIngestionDashboardHtml(data, options = {}){
           <a class="button" href="platinum-guide.html">Open Platinum guide</a>
           <a class="button" href="https://github.com/sgwoods/Codex-Test1">Open repository</a>
         </div>
+        <div class="metaBar">
+          <span class="updateStamp"><strong>Content updated:</strong> <span id="dashboardLastUpdated">--</span></span>
+          <span class="updateStamp"><strong>Page built:</strong> <span id="dashboardBuiltAt">--</span></span>
+        </div>
+        <div id="dashboardLastUpdatedNote" class="microCopy"></div>
         <div class="stats">
           ${heroStats.map((entry) => `
             <article class="statCard">
@@ -903,9 +1308,11 @@ function buildIngestionDashboardHtml(data, options = {}){
                 <div class="heroTop">
                   <span id="gameStatus" class="statusChip">--</span>
                   <span id="gameLineage" class="statusChip">--</span>
+                  <span class="updateStamp"><strong>Updated:</strong> <span id="gameLastUpdated">--</span></span>
                 </div>
                 <h2 id="gameTitle">--</h2>
                 <p id="gameThemeRead">--</p>
+                <div id="gameLastUpdatedNote" class="microCopy"></div>
               </div>
             </div>
             <div class="goal"><strong>Decision read:</strong> <span id="gameDecision"></span></div>
@@ -1000,6 +1407,24 @@ function buildIngestionDashboardHtml(data, options = {}){
         This hosted dashboard is generated from <code>ingestion-dashboard.json</code> plus committed artifact manifests and reference outputs. The intended rule going forward is simple: new game materials should land here first, then expand outward into deeper conformance pages and runtime work only after the intake picture is credible.
       </p>
     </main>
+    <div id="inlineViewer" class="inlineViewer" hidden>
+      <div class="inlineViewerPanel" role="dialog" aria-modal="true" aria-labelledby="viewerTitle">
+        <div class="inlineViewerHeader">
+          <div>
+            <strong id="viewerTitle">Artifact preview</strong>
+            <span id="viewerDetail"></span>
+            <div class="inlineViewerMeta">
+              <span id="viewerStatus" class="updateStamp">Loading preview...</span>
+            </div>
+          </div>
+          <div class="sectionActions" style="margin-top:0;">
+            <a id="viewerExternal" class="button" href="#" target="_blank" rel="noopener noreferrer" hidden>Open separate tab</a>
+            <button class="button subtle" type="button" data-inline-close="true">Close</button>
+          </div>
+        </div>
+        <div id="viewerBody" class="inlineViewerBody"></div>
+      </div>
+    </div>
     <script id="ingestionDashboardData" type="application/json">${escJsonForScript(decorated)}</script>
     <script>${dashboardScript()}</script>
   `;

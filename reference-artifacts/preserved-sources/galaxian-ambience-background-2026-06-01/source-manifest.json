@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-06-01",
+  "status": "public-metadata-private-content",
+  "source_root": "/Users/steven/Downloads",
+  "preserved_root": "reference-artifacts/preserved-sources/galaxian-ambience-background-2026-06-01",
+  "notes": [
+    "This source was accessioned from a local download and preserved in-repo because the original file size is small enough for durable Git storage.",
+    "The waveform appears continuous and sustained, which makes this a much stronger ambient-pressure source than the segmented static-card sound reel."
+  ],
+  "committed_artifacts": [
+    {
+      "id": "galaxian-ambience-background",
+      "title": "Galaxian ambience background source",
+      "status": "preserved-private",
+      "repo_path": null,
+      "bytes": 3188962,
+      "sha256": "3e291c5c740ca9fe34b97cea245b27da6a78226593d2d7019377d71d3b29e777",
+      "source_path": "/Users/steven/Downloads/galaxian ambiance sound background.mp4",
+      "measured_media": {
+        "durationSeconds": 150.001,
+        "width": 640,
+        "height": 360,
+        "frameRate": "30/1",
+        "hasAudio": true
+      },
+      "public_repo_path": "reference-artifacts/preserved-sources/galaxian-ambience-background-2026-06-01/video/galaxian-ambience-background.mp4",
+      "private_store_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxian-ambience-background-2026-06-01/video/galaxian-ambience-background.mp4"
+    }
+  ],
+  "downstream_analysis": [
+    "reference-artifacts/analyses/galaxian-reference/galaxian-ambience-background/README.md"
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/preserved-sources/galaxian-ambience-background-2026-06-01/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxian-ambience-background-2026-06-01",
+    "moved_file_count": 2
+  }
+}

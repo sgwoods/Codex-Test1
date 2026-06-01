@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-06-01",
+  "status": "public-metadata-private-content",
+  "source_root": "/Users/steven/Downloads",
+  "preserved_root": "reference-artifacts/preserved-sources/galaga-perfect-challenging-stages-2026-06-01",
+  "notes": [
+    "This source was accessioned from a local download and preserved in-repo because it is a useful perfect-play challenge-stage reference for Aurora.",
+    "Its biggest value is repeated perfect-clear and result-surface review rather than highest-resolution route motion inspection."
+  ],
+  "committed_artifacts": [
+    {
+      "id": "galaga-perfect-challenging-stages",
+      "title": "Galaga perfect challenging stages source",
+      "status": "preserved-private",
+      "repo_path": null,
+      "bytes": 7174236,
+      "sha256": "3b8cca62493e79032f0443dd2b8f75c6e38a30024a7e50f9d065fe8fdbadbc17",
+      "source_path": "/Users/steven/Downloads/Galaga perfect challenging stages.mp4",
+      "measured_media": {
+        "durationSeconds": 240.071111,
+        "width": 320,
+        "height": 240,
+        "frameRate": "30/1",
+        "hasAudio": true
+      },
+      "public_repo_path": "reference-artifacts/preserved-sources/galaga-perfect-challenging-stages-2026-06-01/video/galaga-perfect-challenging-stages.mp4",
+      "private_store_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaga-perfect-challenging-stages-2026-06-01/video/galaga-perfect-challenging-stages.mp4"
+    }
+  ],
+  "downstream_analysis": [
+    "reference-artifacts/analyses/galaga-perfect-challenging-stages/source-manifest.json",
+    "reference-artifacts/analyses/galaga-perfect-challenging-stages/README.md",
+    "GALAGA_CHALLENGE_VIDEO_REFERENCE_ANALYSIS.md"
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/preserved-sources/galaga-perfect-challenging-stages-2026-06-01/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaga-perfect-challenging-stages-2026-06-01",
+    "moved_file_count": 1
+  }
+}

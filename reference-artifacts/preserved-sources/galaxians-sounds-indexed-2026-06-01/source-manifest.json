@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-06-01",
+  "status": "public-metadata-private-content",
+  "source_root": "/Users/steven/Downloads",
+  "preserved_root": "reference-artifacts/preserved-sources/galaxians-sounds-indexed-2026-06-01",
+  "notes": [
+    "This source was accessioned from a local download and preserved in-repo because the original file size is small enough for durable Git storage.",
+    "It appears to be a static-card Galaxians sound reel and is therefore less self-describing than the labeled Galaga indexed packs."
+  ],
+  "committed_artifacts": [
+    {
+      "id": "galaxians-sounds-indexed",
+      "title": "Galaxians indexed sound reel",
+      "status": "preserved-private",
+      "repo_path": null,
+      "bytes": 2504470,
+      "sha256": "e0565723730ab265c0d77472da6771901af263a73bc61cc480388775e84d7123",
+      "source_path": "/Users/steven/Downloads/arcade-sounds of galaxians.mp4",
+      "measured_media": {
+        "durationSeconds": 83.522,
+        "width": 614,
+        "height": 360,
+        "frameRate": "10/1",
+        "hasAudio": true
+      },
+      "public_repo_path": "reference-artifacts/preserved-sources/galaxians-sounds-indexed-2026-06-01/video/arcade-sounds-of-galaxians.mp4",
+      "private_store_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxians-sounds-indexed-2026-06-01/video/arcade-sounds-of-galaxians.mp4"
+    }
+  ],
+  "downstream_analysis": [
+    "reference-artifacts/analyses/galaxian-reference/galaxians-sounds-indexed/source-manifest.json",
+    "reference-artifacts/analyses/galaxian-reference/galaxians-sounds-indexed/README.md"
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/preserved-sources/galaxians-sounds-indexed-2026-06-01/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxians-sounds-indexed-2026-06-01",
+    "moved_file_count": 2
+  }
+}

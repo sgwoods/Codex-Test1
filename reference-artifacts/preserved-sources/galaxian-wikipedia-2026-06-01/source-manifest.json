@@ -1,0 +1,57 @@
+{
+  "artifactType": "preserved-source-manifest",
+  "sourceId": "galaxian-wikipedia",
+  "title": "Galaxian Wikipedia article PDF",
+  "gameLineage": "galaxian-reference",
+  "plannedGameKey": "galaxy-guardians-preview",
+  "status": "public-metadata-private-content",
+  "sourceUrls": [],
+  "repoArtifacts": [
+    {
+      "path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxian-wikipedia-2026-06-01/pdf/galaxian-wikipedia.pdf",
+      "kind": "wikipedia-article-pdf",
+      "fileSizeBytes": 527873,
+      "sha256": "b2631d255f7b2cf0e7be928116a583d2ac57c74e368bfd5a8163ecffb21f09e0"
+    },
+    {
+      "path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxian-wikipedia-2026-06-01/preview/galaxian-wikipedia-first-page.png",
+      "kind": "first-page-preview",
+      "fileSizeBytes": 445380,
+      "sha256": "d332cba1d17a8f962e182d1133828c3c0a16cd223c6f4468d1fccc052044ae30"
+    }
+  ],
+  "confirmedFacts": {
+    "documentShape": {
+      "pages": 8,
+      "titleString": "Galaxian - Wikipedia"
+    },
+    "observedCoverage": [
+      "fixed-shooter gameplay description",
+      "Namco and Space Invaders lineage",
+      "RGB color graphics and animated sprite discussion",
+      "scrolling starfield mention",
+      "outbound links to flyer image and related Galaxian-family pages"
+    ],
+    "notes": [
+      "This preserved PDF is best treated as supporting prose context and a lead-harvest source, not as primary timing or scoring truth.",
+      "The embedded links were confirmed from the PDF payload itself during this ingest step."
+    ]
+  },
+  "ingestionUse": [
+    "gameplay and historical prose grounding",
+    "lead harvesting for flyer, image, and related-page follow-up",
+    "lineage explanation alongside measured gameplay artifacts"
+  ],
+  "remainingGaps": [
+    "primary-source flyer/manual/still captures",
+    "direct score-table stills",
+    "measured gameplay audio windows",
+    "deeper-play motion and pressure windows"
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/preserved-sources/galaxian-wikipedia-2026-06-01/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxian-wikipedia-2026-06-01",
+    "moved_file_count": 2
+  }
+}

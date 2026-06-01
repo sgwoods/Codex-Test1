@@ -48,6 +48,8 @@
     "machine:doctor": "node tools/dev/machine-doctor.js",
     "machine:status": "node tools/dev/machine-status.js",
     "codex:checkpoint": "node tools/dev/write-context-checkpoint.js",
+    "artifacts:init:private": "node tools/dev/init-private-artifact-store.js",
+    "artifacts:migrate:private": "node tools/dev/migrate-public-artifacts-to-private-store.js",
     "machine:ensure-browser": "node tools/dev/ensure-playwright-browser.js",
     "audio:lab": "node tools/dev/arcade-music-lab-server.js",
     "youtube:player-demo": "node tools/dev/youtube-player-demo-server.js",

@@ -1,0 +1,69 @@
+{
+  "artifactType": "preserved-source-manifest",
+  "sourceId": "galaxian-namco-wiki-fandom",
+  "title": "Galaxian Namco Wiki Fandom PDF",
+  "gameLineage": "galaxian-reference",
+  "plannedGameKey": "galaxy-guardians-preview",
+  "status": "public-metadata-private-content",
+  "sourceUrls": [
+    "https://namco.fandom.com/wiki/Galaxian"
+  ],
+  "repoArtifacts": [
+    {
+      "path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxian-namco-wiki-fandom-2026-06-01/pdf/galaxian-namco-wiki-fandom.pdf",
+      "kind": "fandom-article-pdf",
+      "fileSizeBytes": 1474428,
+      "sha256": "09c1fbd93612e66798b97efa372d9155dc89b73282106f2b7a7d71636e763763"
+    },
+    {
+      "path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxian-namco-wiki-fandom-2026-06-01/preview/galaxian-namco-wiki-fandom-first-page.png",
+      "kind": "first-page-preview",
+      "fileSizeBytes": 95045,
+      "sha256": "874e3635fabbb70c985926130105b504ec031fb923427b29c9ca7cfc04d57c4a"
+    }
+  ],
+  "confirmedFacts": {
+    "documentShape": {
+      "pages": 28,
+      "titleString": "Galaxian | Namco Wiki | Fandom"
+    },
+    "observedCoverage": [
+      "Galaxian article prose on a Namco-focused fan wiki",
+      "direct links to flyer and cabinet imagery",
+      "direct links to flagship and alien-family pages/assets"
+    ],
+    "highValueLeads": [
+      "Galaxian_JP_Flyer_(front).jpg",
+      "Galaxian_Arcade.png",
+      "Galaxian_Flagship page",
+      "Galboss_(Galaxian).png",
+      "Red_Alien-1.png",
+      "Purple_Alien.png",
+      "Blue_Alien.png",
+      "Galaxian_Arcade_Cabniet.jpg",
+      "Galaxian_Arcade_Cabinet_2.jpg",
+      "Galaxian_JP_Flyer_(back).jpg"
+    ],
+    "notes": [
+      "This package is best treated as a structured asset-lead source, not a primary timing or audio truth source.",
+      "It is more useful than the Wikipedia PDF for the still-image hunt because it exposes concrete image endpoints and alien-family pages."
+    ]
+  },
+  "ingestionUse": [
+    "still-image lead harvesting",
+    "flagship and alien-family image target identification",
+    "supplemental lineage/context prose"
+  ],
+  "remainingGaps": [
+    "preserving the actual linked image assets",
+    "measured gameplay audio windows",
+    "deeper-play motion and pressure windows",
+    "direct score-popup cases"
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/preserved-sources/galaxian-namco-wiki-fandom-2026-06-01/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxian-namco-wiki-fandom-2026-06-01",
+    "moved_file_count": 2
+  }
+}

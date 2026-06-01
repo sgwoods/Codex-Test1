@@ -3,9 +3,26 @@
 Generated: `2026-05-18T20:10:36.556Z`
 
 This analysis turns the two user-supplied Galaga challenge videos into durable
-derived evidence for Aurora challenging-stage conformance. The raw videos remain
-outside the repository; committed artifacts are contact sheets, timing windows,
-manual reads, and implementation contracts.
+derived evidence for Aurora challenging-stage conformance. The original source
+videos analyzed here still remain outside the repository. A newer stage-
+isolated `Challenging Stages.mp4` compilation is now preserved in-repo at
+`reference-artifacts/preserved-sources/galaga-challenging-stages-isolated-2026-06-01/`
+as an additional raw source that complements this analysis when motion windows
+need to be cut from cleaner stage-by-stage footage. Committed artifacts here
+include contact sheets, timing windows, manual reads, and implementation
+contracts.
+
+An additional repo-owned perfect-play challenge compilation now also exists at
+`reference-artifacts/preserved-sources/galaga-perfect-challenging-stages-2026-06-01/`.
+That source is best used for repeated perfect-result presentation and ideal-flow
+cadence review rather than highest-resolution motion extraction.
+
+A newer and stronger repo-owned perfect-play compilation now also exists at
+`reference-artifacts/preserved-sources/galaga-higher-quality-perfect-challenging-stages-2026-06-01/`.
+That source should now be treated as the preferred repo-owned perfect-play lane
+for repeated perfect-result presentation and ideal-flow cadence review, while
+the earlier 320x240 perfect-play source remains a supplemental corroborating
+reference.
 
 ## Summary
 

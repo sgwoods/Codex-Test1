@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "generated_by": "manual-first-pass-source-ingest",
+  "generated_at": "2026-06-01T13:35:00Z",
+  "source_id": "galaxian-strategywiki-guide-walkthrough-sprite-bundle",
+  "title": "Galaxian StrategyWiki guide, gameplay, walkthrough, and sprite bundle",
+  "role": "flyer_and_sprite_identity_with_supporting_walkthrough_reference",
+  "local_source_root": "reference-artifacts/preserved-sources/galaxian-strategywiki-guide-walkthrough-sprite-bundle-2026-06-01",
+  "document_media": {
+    "guidePdfPageCount": 3,
+    "gameplayPdfPageCount": 4,
+    "walkthroughPdfPageCount": 2
+  },
+  "image_bundle": {
+    "count": 6,
+    "named_assets": [
+      "GLX_Flyer.jpg",
+      "GLX_Flagship.png",
+      "GLX_Galaxian_Blue.png",
+      "GLX_Galaxian_Purple.png",
+      "GLX_Galaxian_Red.png",
+      "GLX_Galaxip.png"
+    ]
+  },
+  "analysis_roles": [
+    "flyer_identity_review",
+    "sprite_family_identity_review",
+    "player_ship_identity_review",
+    "supporting_walkthrough_policy_reference"
+  ],
+  "notes": [
+    "This source is especially useful because it pairs guide and walkthrough prose with a small but high-value preserved still bundle for the flyer, flagship, the three main alien families, and the Galaxip player ship.",
+    "Its immediate promotion path is visual identity and supporting policy corroboration rather than timing, motion, or audio extraction."
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/analyses/galaxian-strategywiki-guide-walkthrough-sprite-bundle/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-strategywiki-guide-walkthrough-sprite-bundle/",
+    "moved_file_count": 0
+  }
+}

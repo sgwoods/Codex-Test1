@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-06-01",
+  "status": "public-metadata-private-content",
+  "source_url": "https://www.arcade-museum.com/Videogame/space-invaders",
+  "preserved_root": "reference-artifacts/preserved-sources/space-invaders-arcade-museum-2026-06-01",
+  "notes": [
+    "This source was preserved as both PDF and HTML because it combines cabinet and hardware metadata, short gameplay summary prose, and a broad set of image leads.",
+    "It is especially useful for Space Invaders release metadata, regional distribution notes, black-and-white-with-overlay monitor truth, 2-way plus 1-fire control grounding, mono sound, and cabinet-image discovery.",
+    "It is a supporting history, cabinet-spec, and visual-lead artifact, not primary timing or audio truth."
+  ],
+  "committed_artifacts": [
+    {
+      "id": "space-invaders-arcade-museum-pdf",
+      "title": "Space Invaders arcade-museum PDF",
+      "repo_path": null,
+      "bytes": 801112,
+      "sha256": "857714de1bdba7fc7e83aa85f9985d1c14cf81e8de8e68f50d1e368683558a3f",
+      "measured_media": {
+        "format": "PDF document, version 1.4, 8 pages"
+      },
+      "status": "preserved-private",
+      "public_repo_path": "reference-artifacts/preserved-sources/space-invaders-arcade-museum-2026-06-01/docs/space-invaders-arcade-museum.pdf",
+      "private_store_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/space-invaders-arcade-museum-2026-06-01/docs/space-invaders-arcade-museum.pdf"
+    },
+    {
+      "id": "space-invaders-arcade-museum-html",
+      "title": "Space Invaders arcade-museum HTML snapshot",
+      "repo_path": null,
+      "bytes": 158939,
+      "sha256": "9f63415c1877611802c3826d7050f631f00b1f352714b1599bff1303d1d3d5e6",
+      "measured_media": {
+        "format": "HTML document text, Unicode text, UTF-8 text, with very long lines (855)"
+      },
+      "status": "preserved-private",
+      "public_repo_path": "reference-artifacts/preserved-sources/space-invaders-arcade-museum-2026-06-01/web/space-invaders-arcade-museum.html",
+      "private_store_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/space-invaders-arcade-museum-2026-06-01/web/space-invaders-arcade-museum.html"
+    }
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/preserved-sources/space-invaders-arcade-museum-2026-06-01/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/space-invaders-arcade-museum-2026-06-01",
+    "moved_file_count": 2
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-06-01",
+  "status": "public-metadata-private-content",
+  "source_root": "/Users/steven/Downloads",
+  "preserved_root": "reference-artifacts/preserved-sources/galaga-sounds-indexed-2026-06-01",
+  "notes": [
+    "This source was accessioned from a local download and preserved in-repo because the original file size is small enough for durable Git storage.",
+    "It overlaps with the earlier Galaga indexed sound videos already in repo, but adds a compact, self-describing corroboration source for several micro-cues."
+  ],
+  "committed_artifacts": [
+    {
+      "id": "galaga-sounds-indexed",
+      "title": "Galaga indexed sound pack",
+      "status": "preserved-private",
+      "repo_path": null,
+      "bytes": 2114278,
+      "sha256": "fefb14b3211ad2f87eca148b2b24e319e1e2d5d604a6fa8ac4d8d34d378163e1",
+      "source_path": "/Users/steven/Downloads/arcade-sounds of galaga.mp4",
+      "measured_media": {
+        "durationSeconds": 107.044,
+        "width": 640,
+        "height": 360,
+        "frameRate": "30/1",
+        "hasAudio": true
+      },
+      "public_repo_path": "reference-artifacts/preserved-sources/galaga-sounds-indexed-2026-06-01/video/arcade-sounds-of-galaga.mp4",
+      "private_store_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaga-sounds-indexed-2026-06-01/video/arcade-sounds-of-galaga.mp4"
+    }
+  ],
+  "downstream_analysis": [
+    "reference-artifacts/analyses/galaga-audio-reference-video-4/README.md"
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/preserved-sources/galaga-sounds-indexed-2026-06-01/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaga-sounds-indexed-2026-06-01",
+    "moved_file_count": 2
+  }
+}

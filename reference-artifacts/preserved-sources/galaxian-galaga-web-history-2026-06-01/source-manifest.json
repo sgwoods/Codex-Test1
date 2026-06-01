@@ -1,0 +1,56 @@
+{
+  "artifactType": "preserved-source-manifest",
+  "sourceId": "galaxian-galaga-web-history",
+  "title": "Galaxian official Galaga Web history page",
+  "gameLineage": "galaxian-reference",
+  "plannedGameKey": "galaxy-guardians-preview",
+  "status": "public-metadata-private-content",
+  "sourceUrls": [
+    "https://galaga.com/en/history/galaxian.php"
+  ],
+  "repoArtifacts": [
+    {
+      "path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxian-galaga-web-history-2026-06-01/web/galaga-com-galaxian-history.html",
+      "kind": "official-history-gameplay-summary-html",
+      "fileSizeBytes": 9451,
+      "sha256": "fe894f802b670d064c1e3e7c8459e3e085d42917143156467b69a9f41ab0b08b"
+    }
+  ],
+  "confirmedFacts": {
+    "officialSummary": {
+      "publisherSurface": "Galaga Web | BANDAI NAMCO Entertainment Inc.",
+      "type": "Arcade Game",
+      "hardware": "Namco Circuit Board",
+      "release": "1979"
+    },
+    "controlAndSystemSummary": [
+      "single in-flight shot constraint is stated explicitly",
+      "stage clear and game over conditions are stated explicitly",
+      "green, violet, red, and boss alien families are named explicitly",
+      "convoy and charger score bands are stated explicitly",
+      "boss and red-alien accompaniment is stated explicitly"
+    ],
+    "notes": [
+      "This is official publisher-hosted summary material and therefore stronger than generic fan-summary prose.",
+      "It is still summary-level documentation and should be paired with the preserved Midway operator manual for original layout and operator-language extraction."
+    ]
+  },
+  "ingestionUse": [
+    "official control-model corroboration",
+    "official score-band corroboration",
+    "official alien-family naming",
+    "official boss-behavior summary"
+  ],
+  "remainingGaps": [
+    "manual-page extraction for score, rules, and setup",
+    "preserved still-image assets",
+    "measured gameplay audio windows",
+    "deeper-play motion and pressure windows"
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/preserved-sources/galaxian-galaga-web-history-2026-06-01/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxian-galaga-web-history-2026-06-01",
+    "moved_file_count": 1
+  }
+}

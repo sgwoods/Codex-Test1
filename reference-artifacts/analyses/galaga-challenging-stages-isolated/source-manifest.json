@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "generated_by": "manual-first-pass-source-ingest",
+  "generated_at": "2026-06-01T15:25:07Z",
+  "source_id": "galaga-challenging-stages-isolated",
+  "title": "Galaga challenging stages isolated motion source",
+  "role": "stage_isolated_challenge_motion_source",
+  "local_source_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaga-challenging-stages-isolated-2026-06-01/video/challenging-stages.mp4",
+  "measured_media": {
+    "durationSeconds": 249.428753,
+    "width": 640,
+    "height": 360,
+    "frameRate": "30000/1001",
+    "hasAudio": true
+  },
+  "windows": {
+    "contact_sheet": {
+      "start_seconds": 0,
+      "duration_seconds": 125,
+      "sample_every_seconds": 5,
+      "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenging-stages-isolated/frames/contact-sheet-reference-window-0-125.jpg"
+    },
+    "additional_contact_sheets": [
+      {
+        "start_seconds": 125,
+        "duration_seconds": 125,
+        "sample_every_seconds": 5,
+        "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenging-stages-isolated/frames/contact-sheet-reference-window-125-250.jpg"
+      }
+    ]
+  },
+  "analysis_roles": [
+    "challenge_family_subclip_backing_source",
+    "challenge_motion_window_extraction_source",
+    "late_challenge_visual_novelty_review"
+  ],
+  "notes": [
+    "This source is especially valuable because it isolates the challenging stages and keeps the formation motion visible without normal-stage combat clutter.",
+    "Its immediate promotion path is cutting named challenge-family subclips and motion windows for Aurora conformance work."
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/analyses/galaga-challenging-stages-isolated/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-challenging-stages-isolated/",
+    "moved_file_count": 0
+  }
+}

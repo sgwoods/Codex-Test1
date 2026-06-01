@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-06-01",
+  "status": "public-metadata-private-content",
+  "source_root": "/Users/steven/Downloads",
+  "preserved_root": "reference-artifacts/preserved-sources/galaga-challenging-stages-isolated-2026-06-01",
+  "notes": [
+    "This source was accessioned from a local download and preserved in-repo because it is a strong stage-isolated challenge-motion source for Aurora.",
+    "Its biggest value is that it shows the challenging stages one at a time with full formations and route motion visible, without normal-stage gameplay clutter."
+  ],
+  "committed_artifacts": [
+    {
+      "id": "galaga-challenging-stages-isolated",
+      "title": "Galaga challenging stages isolated motion source",
+      "status": "preserved-private",
+      "repo_path": null,
+      "bytes": 12838011,
+      "sha256": "2c2b679c93adb0465f0a63704e3d3676d6276e551cbf93ddaec07cb91eaf3c3a",
+      "source_path": "/Users/steven/Downloads/Challenging Stages.mp4",
+      "measured_media": {
+        "durationSeconds": 249.428753,
+        "width": 640,
+        "height": 360,
+        "frameRate": "30000/1001",
+        "hasAudio": true
+      },
+      "public_repo_path": "reference-artifacts/preserved-sources/galaga-challenging-stages-isolated-2026-06-01/video/challenging-stages.mp4",
+      "private_store_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaga-challenging-stages-isolated-2026-06-01/video/challenging-stages.mp4"
+    }
+  ],
+  "downstream_analysis": [
+    "reference-artifacts/analyses/galaga-challenging-stages-isolated/source-manifest.json",
+    "reference-artifacts/analyses/galaga-challenging-stages-isolated/README.md",
+    "GALAGA_CHALLENGE_VIDEO_REFERENCE_ANALYSIS.md"
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/preserved-sources/galaga-challenging-stages-isolated-2026-06-01/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaga-challenging-stages-isolated-2026-06-01",
+    "moved_file_count": 1
+  }
+}

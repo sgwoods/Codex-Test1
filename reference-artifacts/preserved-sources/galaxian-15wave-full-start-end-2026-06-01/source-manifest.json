@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-06-01",
+  "status": "public-metadata-private-content",
+  "source_root": "/Users/steven/Downloads",
+  "preserved_root": "reference-artifacts/preserved-sources/galaxian-15wave-full-start-end-2026-06-01",
+  "notes": [
+    "This source was accessioned from a local download and preserved in-repo because the original file size is small enough for durable Git storage.",
+    "Its main value is not maximum image resolution, but full-session continuity from score-advance-table and start-state through later-wave pressure and game over."
+  ],
+  "committed_artifacts": [
+    {
+      "id": "galaxian-15wave-full-start-end",
+      "title": "Galaxian 15-wave full-session source",
+      "status": "preserved-private",
+      "repo_path": null,
+      "bytes": 35984156,
+      "sha256": "eefed368ae5001a3258bed39df2534f87cacda3b403241d41daca7f7dd30fc94",
+      "source_path": "/Users/steven/Downloads/Galaxian 15wave - including full start and end.mp4",
+      "measured_media": {
+        "durationSeconds": 944.054,
+        "width": 360,
+        "height": 412,
+        "frameRate": "30/1",
+        "hasAudio": true
+      },
+      "public_repo_path": "reference-artifacts/preserved-sources/galaxian-15wave-full-start-end-2026-06-01/video/galaxian-15wave-full-start-end.mp4",
+      "private_store_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxian-15wave-full-start-end-2026-06-01/video/galaxian-15wave-full-start-end.mp4"
+    }
+  ],
+  "downstream_analysis": [
+    "reference-artifacts/analyses/galaxian-reference/galaxian-15wave-full-start-end/source-manifest.json",
+    "reference-artifacts/analyses/galaxian-reference/galaxian-15wave-full-start-end/README.md"
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/preserved-sources/galaxian-15wave-full-start-end-2026-06-01/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxian-15wave-full-start-end-2026-06-01",
+    "moved_file_count": 1
+  }
+}

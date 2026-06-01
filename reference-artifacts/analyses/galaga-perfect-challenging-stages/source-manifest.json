@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "generated_by": "manual-first-pass-source-ingest",
+  "generated_at": "2026-06-01T15:25:07Z",
+  "source_id": "galaga-perfect-challenging-stages",
+  "title": "Galaga perfect challenging stages source",
+  "role": "perfect_play_challenge_stage_flow_source",
+  "local_source_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaga-perfect-challenging-stages-2026-06-01/video/galaga-perfect-challenging-stages.mp4",
+  "measured_media": {
+    "durationSeconds": 240.071111,
+    "width": 320,
+    "height": 240,
+    "frameRate": "30/1",
+    "hasAudio": true
+  },
+  "windows": {
+    "contact_sheet": {
+      "start_seconds": 0,
+      "duration_seconds": 120,
+      "sample_every_seconds": 5,
+      "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-perfect-challenging-stages/frames/contact-sheet-reference-window-0-120.jpg"
+    },
+    "additional_contact_sheets": [
+      {
+        "start_seconds": 120,
+        "duration_seconds": 120,
+        "sample_every_seconds": 5,
+        "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-perfect-challenging-stages/frames/contact-sheet-reference-window-120-240.jpg"
+      }
+    ]
+  },
+  "analysis_roles": [
+    "perfect_result_surface_review",
+    "ideal_flow_challenge_stage_review",
+    "perfect_clear_cadence_corroboration"
+  ],
+  "notes": [
+    "This source is especially useful because every challenge stage is played perfectly, making repeated result and cadence patterns easy to study.",
+    "Its immediate promotion path is perfect-result comparison and ideal-flow corroboration rather than highest-resolution motion extraction."
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/analyses/galaga-perfect-challenging-stages/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-perfect-challenging-stages/",
+    "moved_file_count": 0
+  }
+}

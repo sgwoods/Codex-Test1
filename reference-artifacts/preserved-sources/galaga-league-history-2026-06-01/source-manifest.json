@@ -1,0 +1,52 @@
+{
+  "artifactType": "preserved-source-manifest",
+  "sourceId": "galaga-league-history",
+  "title": "Galaga League official history and lore page",
+  "gameLineage": "galaxian-reference",
+  "plannedGameKey": "galaxy-guardians-preview",
+  "status": "public-metadata-private-content",
+  "sourceUrls": [
+    "https://galaga.com/en/history/galagaLeague.php"
+  ],
+  "repoArtifacts": [
+    {
+      "path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaga-league-history-2026-06-01/web/galaga-com-galaga-league-history.html",
+      "kind": "official-series-lineage-html",
+      "fileSizeBytes": 9275,
+      "sha256": "2258dfca760575113b23e70b8638f4e472b8e51f17e76e641d7b7d505da1b54d"
+    }
+  ],
+  "confirmedFacts": {
+    "officialLineageSummary": {
+      "groupName": "Galaga League",
+      "groupedTitles": [
+        "Galaxian (1979)",
+        "Galaga (1981)",
+        "Gaplus (1984)",
+        "Galaga '88 (1987)"
+      ],
+      "broaderUniverse": "UGSF"
+    },
+    "notes": [
+      "This page is best treated as official lineage and lore framing, not gameplay-conformance evidence.",
+      "Its main value is helping future theme, naming, and family-relationship decisions stay grounded in official modern series language."
+    ]
+  },
+  "ingestionUse": [
+    "official series-lineage framing",
+    "theme and naming support",
+    "cross-game family relationship grounding"
+  ],
+  "remainingGaps": [
+    "manual-page extraction",
+    "preserved still-image assets",
+    "measured gameplay audio windows",
+    "motion and pressure windows"
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/preserved-sources/galaga-league-history-2026-06-01/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaga-league-history-2026-06-01",
+    "moved_file_count": 1
+  }
+}

@@ -24,8 +24,17 @@ This directory stores durable reference material used to tune the game toward or
 
 ## Storage Policy
 
-- Source documents that are reasonably sized and useful long-term can be committed here.
-- Large generated derivatives such as page renders, contact sheets, and temporary analysis output should stay local unless they become broadly useful.
+- Public-safe metadata can stay here:
+  README files, manifests, checksums, inventories, source URLs, and summary
+  JSON.
+- Copied source bytes and derived media bytes should not be committed here now
+  that this repo is explicitly being treated as a public lane.
+- Store copied PDFs, HTML snapshots, videos, audio, still-image bundles,
+  contact sheets, waveform renders, extracted clips, and similar derivative
+  media in the companion private artifact store described in
+  [PRIVATE_ARTIFACT_STORAGE_POLICY.md](../PRIVATE_ARTIFACT_STORAGE_POLICY.md).
+- The current pushed companion private repo is:
+  `https://github.com/sgwoods/Codex-Test1-private-artifacts`
 - Large recovered source drops should be inventoried and triaged before any
   promotion into canonical repo-owned evidence paths.
 - When adding a new artifact, include a short README nearby explaining why it matters.

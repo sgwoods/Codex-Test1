@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-06-01",
+  "status": "public-metadata-private-content",
+  "source_url": "https://www.wikihow.com/Play-Galaga",
+  "preserved_root": "reference-artifacts/preserved-sources/galaga-wikihow-play-guide-2026-06-01",
+  "notes": [
+    "This source was preserved as an HTML snapshot plus a screenshot bundle because the article provides explicit modern player-guide prose and annotated stills for anti-fire setup, capture-rescue, entrance patterns, and opening attack policy.",
+    "The uploaded screenshots were preserved as a numbered PNG bundle because they isolate the exact sections the user highlighted and make the page useful even if the live article changes later.",
+    "It is a supporting strategy and annotated-still interpretation source, not primary timing or audio truth."
+  ],
+  "committed_artifacts": [
+    {
+      "id": "galaga-wikihow-play-guide-html",
+      "title": "wikiHow How to Play Galaga HTML snapshot",
+      "repo_path": null,
+      "bytes": 536399,
+      "sha256": "ab316da068d612cda7a4274035dec179d6c11e1cf57e04bb3961c394f1dfae6f",
+      "measured_media": {
+        "format": "HTML document text, ASCII text, with very long lines (46016)"
+      },
+      "status": "preserved-private",
+      "public_repo_path": "reference-artifacts/preserved-sources/galaga-wikihow-play-guide-2026-06-01/web/wikihow-play-galaga.html",
+      "private_store_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaga-wikihow-play-guide-2026-06-01/web/wikihow-play-galaga.html"
+    },
+    {
+      "id": "galaga-wikihow-play-guide-screenshot-bundle",
+      "title": "wikiHow Galaga screenshot bundle",
+      "repo_path": "reference-artifacts/preserved-sources/galaga-wikihow-play-guide-2026-06-01/images",
+      "bytes": 13961441,
+      "sha256": "d59d30bed4e2db940c147a0b0510fd02b790e43f0f1120f3283d723dedbec4d0",
+      "measured_media": {
+        "screenshotCount": 24,
+        "pixelWidth": 1770,
+        "pixelHeight": 1768,
+        "filenamePattern": "wikihow-galaga-01.png through wikihow-galaga-24.png"
+      }
+    }
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/preserved-sources/galaga-wikihow-play-guide-2026-06-01/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaga-wikihow-play-guide-2026-06-01",
+    "moved_file_count": 25
+  }
+}

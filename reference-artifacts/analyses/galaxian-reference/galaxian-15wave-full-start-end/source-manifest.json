@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "generated_by": "manual-first-pass-source-ingest",
+  "generated_at": "2026-06-01T12:25:26Z",
+  "source_id": "galaxian-15wave-full-start-end",
+  "title": "Galaxian 15-wave full-session source",
+  "role": "full_start_to_end_long_session_wave_progression",
+  "local_source_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxian-15wave-full-start-end-2026-06-01/video/galaxian-15wave-full-start-end.mp4",
+  "measured_media": {
+    "durationSeconds": 944.054,
+    "width": 360,
+    "height": 412,
+    "frameRate": "30/1",
+    "hasAudio": true
+  },
+  "windows": {
+    "contact_sheet": {
+      "start_seconds": 0,
+      "duration_seconds": 180,
+      "sample_every_seconds": 15,
+      "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxian-15wave-full-start-end/frames/contact-sheet-reference-window-0-180.jpg"
+    },
+    "additional_contact_sheets": [
+      {
+        "start_seconds": 360,
+        "duration_seconds": 180,
+        "sample_every_seconds": 15,
+        "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxian-15wave-full-start-end/frames/contact-sheet-reference-window-360-540.jpg"
+      },
+      {
+        "start_seconds": 720,
+        "duration_seconds": 180,
+        "sample_every_seconds": 15,
+        "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxian-15wave-full-start-end/frames/contact-sheet-reference-window-720-900.jpg"
+      }
+    ],
+    "waveform": {
+      "start_seconds": 0,
+      "duration_seconds": 120,
+      "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxian-15wave-full-start-end/audio/waveform-reference-window-0-120.png"
+    }
+  },
+  "analysis_roles": [
+    "full_session_start_to_game_over_anchor",
+    "score_advance_table_and_start_flow_review",
+    "stage_5_plus_pressure_window_promotion",
+    "later_run_failure_and_game_over_review"
+  ],
+  "notes": [
+    "This source is lower resolution than the existing Nenriki long-session clip, but it is still high-value because it preserves the full start-to-end arc in one uninterrupted run.",
+    "Its strongest immediate use is promoting named deeper-play audio and pacing windows from a source that already contains the beginning and ending contexts we care about."
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/analyses/galaxian-reference/galaxian-15wave-full-start-end/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxian-15wave-full-start-end",
+    "moved_file_count": 4
+  }
+}

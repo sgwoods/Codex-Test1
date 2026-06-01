@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "generated_by": "manual-first-pass-source-ingest",
+  "generated_at": "2026-06-01T13:40:00Z",
+  "source_id": "galaxian-khinsider-flac-cues",
+  "title": "Galaxian KHInsider FLAC cue pack",
+  "role": "named_isolated_core_cue_pack",
+  "local_source_path": "reference-artifacts/preserved-sources/galaxian-khinsider-flac-cues-2026-06-01",
+  "measured_media": {
+    "fileCount": 8,
+    "sampleRate": 44100,
+    "channels": 2,
+    "codec": "flac",
+    "minDurationSeconds": 0.650159,
+    "maxDurationSeconds": 6.780227
+  },
+  "windows": {
+    "waveform_contact_sheet": {
+      "artifact": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxian-khinsider-flac-cues-2026-06-01/preview/waveform-contact-sheet.jpg"
+    },
+    "waveforms": [
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxian-khinsider-flac-cues/waveforms/01-credit-sound.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxian-khinsider-flac-cues/waveforms/02-start-game.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxian-khinsider-flac-cues/waveforms/03-shoot.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxian-khinsider-flac-cues/waveforms/04-fighter-loss.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxian-khinsider-flac-cues/waveforms/05-extra-life.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxian-khinsider-flac-cues/waveforms/06-flying-sound.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxian-khinsider-flac-cues/waveforms/07-hit-enemy.png",
+      "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxian-khinsider-flac-cues/waveforms/08-hit-boss.png"
+    ]
+  },
+  "analysis_roles": [
+    "named_core_cue_family_reference",
+    "guardians_audio_family_fitting",
+    "residual_static_reel_gap_reduction"
+  ],
+  "notes": [
+    "This source is the strongest repo-owned explicit isolated cue pack for Galaxian-family core sounds.",
+    "It largely supersedes the older static-card Galaxians sound reel for the eight named cues it contains, while still leaving gameplay timing, ambience, and live-mix analysis to the other preserved gameplay and ambience sources."
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/analyses/galaxian-reference/galaxian-khinsider-flac-cues/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxian-khinsider-flac-cues",
+    "moved_file_count": 8
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "generated_by": "manual-first-pass-source-ingest",
+  "generated_at": "2026-06-01T14:20:00Z",
+  "source_id": "space-invaders-strategywiki-guide-walkthrough-sprite-bundle",
+  "title": "Space Invaders StrategyWiki guide, gameplay, walkthrough, and sprite bundle",
+  "role": "flyer_and_sprite_identity_with_supporting_walkthrough_reference",
+  "local_source_root": "reference-artifacts/preserved-sources/space-invaders-strategywiki-guide-walkthrough-sprite-bundle-2026-06-01",
+  "document_media": {
+    "guidePdfPageCount": 4,
+    "gameplayPdfPageCount": 3,
+    "walkthroughPdfPageCount": 2
+  },
+  "image_bundle": {
+    "count": 6,
+    "named_assets": [
+      "500px-Space_Invaders_flyer.jpg",
+      "Space_Invaders_saucer.png",
+      "Space_Invaders_small.png",
+      "Space_Invaders_medium.png",
+      "Space_Invaders_large.png",
+      "Space_Invaders_cannon.png"
+    ]
+  },
+  "analysis_roles": [
+    "flyer_identity_review",
+    "sprite_family_identity_review",
+    "player_cannon_identity_review",
+    "supporting_walkthrough_policy_reference"
+  ],
+  "notes": [
+    "This source is especially useful because it pairs guide and walkthrough prose with a small but high-value preserved still bundle for the flyer, saucer, three invader families, and player cannon.",
+    "Its immediate promotion path is visual identity and supporting policy corroboration rather than timing, bunker-wear, or live audio extraction."
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/analyses/space-invaders-strategywiki-guide-walkthrough-sprite-bundle/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/analyses/space-invaders-strategywiki-guide-walkthrough-sprite-bundle/",
+    "moved_file_count": 0
+  }
+}

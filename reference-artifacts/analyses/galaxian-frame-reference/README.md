@@ -18,15 +18,15 @@ and spectrograms for the reference windows that should drive the next Guardians
 
 ## Windows
 
-- `matt-hawkins-arcade-intro/attract-mission-text`: Attract mission text, 48 frames, `reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/attract-mission-text/contact-sheet.jpg`
-- `matt-hawkins-arcade-intro/score-advance-table`: Score advance table, 100 frames, `reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/score-advance-table/contact-sheet.jpg`
-- `matt-hawkins-arcade-intro/opening-rack-entry`: Opening rack entry, 108 frames, `reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/contact-sheet.jpg`
-- `arcades-lounge-level-5/player-single-shot-pressure`: Player single-shot pressure, 140 frames, `reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/player-single-shot-pressure/contact-sheet.jpg`
-- `arcades-lounge-level-5/lower-field-dive-curves`: Lower-field dive curves, 242 frames, `reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/contact-sheet.jpg`
-- `arcades-lounge-level-5/level-clear-transition`: Level clear transition, 48 frames, `reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/level-clear-transition/contact-sheet.jpg`
-- `nenriki-15-wave-session/complete-rack-reference`: Complete rack reference, 100 frames, `reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/complete-rack-reference/contact-sheet.jpg`
-- `nenriki-15-wave-session/flagship-escort-pressure`: Flagship escort pressure, 270 frames, `reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/flagship-escort-pressure/contact-sheet.jpg`
-- `nenriki-15-wave-session/wrap-return-pressure`: Wrap or return pressure, 270 frames, `reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/contact-sheet.jpg`
+- `matt-hawkins-arcade-intro/attract-mission-text`: Attract mission text, 48 frames, `private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/attract-mission-text/contact-sheet.jpg`
+- `matt-hawkins-arcade-intro/score-advance-table`: Score advance table, 100 frames, `private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/score-advance-table/contact-sheet.jpg`
+- `matt-hawkins-arcade-intro/opening-rack-entry`: Opening rack entry, 108 frames, `private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-frame-reference/matt-hawkins-arcade-intro/opening-rack-entry/contact-sheet.jpg`
+- `arcades-lounge-level-5/player-single-shot-pressure`: Player single-shot pressure, 140 frames, `private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/player-single-shot-pressure/contact-sheet.jpg`
+- `arcades-lounge-level-5/lower-field-dive-curves`: Lower-field dive curves, 242 frames, `private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/contact-sheet.jpg`
+- `arcades-lounge-level-5/level-clear-transition`: Level clear transition, 48 frames, `private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/level-clear-transition/contact-sheet.jpg`
+- `nenriki-15-wave-session/complete-rack-reference`: Complete rack reference, 100 frames, `private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/complete-rack-reference/contact-sheet.jpg`
+- `nenriki-15-wave-session/flagship-escort-pressure`: Flagship escort pressure, 270 frames, `private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/flagship-escort-pressure/contact-sheet.jpg`
+- `nenriki-15-wave-session/wrap-return-pressure`: Wrap or return pressure, 270 frames, `private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/contact-sheet.jpg`
 
 ## Promotion Use
 
@@ -34,3 +34,13 @@ and spectrograms for the reference windows that should drive the next Guardians
 - dive path curve review from lower-field-dive-curves, flagship-escort-pressure, and wrap-return-pressure motion sheets
 - sprite-reference review from upper-rack, diver, and player crop sets
 - audio waveform/spectrogram comparison for shot, dive, and attract/rack timing cues
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/galaxian-frame-reference/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-frame-reference`

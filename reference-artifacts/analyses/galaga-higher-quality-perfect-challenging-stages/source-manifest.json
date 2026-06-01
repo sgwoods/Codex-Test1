@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "generated_by": "manual-first-pass-source-ingest",
+  "generated_at": "2026-06-01T15:47:37Z",
+  "source_id": "galaga-higher-quality-perfect-challenging-stages",
+  "title": "Galaga higher-quality perfect challenging stages source",
+  "role": "preferred_perfect_play_challenge_stage_flow_source",
+  "local_source_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaga-higher-quality-perfect-challenging-stages-2026-06-01/video/galaga-higher-quality-perfect-challenging-stages.mp4",
+  "measured_media": {
+    "durationSeconds": 258.763175,
+    "width": 280,
+    "height": 360,
+    "frameRate": "25/1",
+    "hasAudio": true
+  },
+  "windows": {
+    "contact_sheet": {
+      "start_seconds": 0,
+      "duration_seconds": 130,
+      "samples_across_window": 20,
+      "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-higher-quality-perfect-challenging-stages/frames/contact-sheet-reference-window-0-130.jpg"
+    },
+    "additional_contact_sheets": [
+      {
+        "start_seconds": 130,
+        "duration_seconds": 129,
+        "samples_across_window": 20,
+        "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-higher-quality-perfect-challenging-stages/frames/contact-sheet-reference-window-130-259.jpg"
+      }
+    ]
+  },
+  "analysis_roles": [
+    "perfect_result_surface_review",
+    "ideal_flow_challenge_stage_review",
+    "preferred_repo_owned_perfect_clear_cadence_corroboration"
+  ],
+  "notes": [
+    "This source is especially useful because every challenge stage is played perfectly, making repeated result and cadence patterns easy to study.",
+    "Its immediate promotion path is perfect-result comparison and ideal-flow corroboration rather than highest-resolution motion extraction."
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/analyses/galaga-higher-quality-perfect-challenging-stages/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-higher-quality-perfect-challenging-stages/",
+    "moved_file_count": 0
+  }
+}

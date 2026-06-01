@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "generated_by": "manual-first-pass-source-ingest",
+  "generated_at": "2026-06-01T11:45:39Z",
+  "source_id": "galaxians-arcade-no-voiceover",
+  "title": "Galaxians arcade no-voiceover gameplay session",
+  "role": "start_to_game_over_precise_arcade_audio_session",
+  "local_source_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaxians-arcade-no-voiceover-2026-06-01/video/galaxians-arcade-no-voiceover.mp4",
+  "measured_media": {
+    "durationSeconds": 250.288,
+    "width": 480,
+    "height": 360,
+    "frameRate": "30/1",
+    "hasAudio": true
+  },
+  "windows": {
+    "contact_sheet": {
+      "start_seconds": 0,
+      "duration_seconds": 120,
+      "sample_every_seconds": 10,
+      "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-arcade-no-voiceover/frames/contact-sheet-reference-window-0-120.jpg"
+    },
+    "additional_contact_sheets": [
+      {
+        "start_seconds": 120,
+        "duration_seconds": 120,
+        "sample_every_seconds": 10,
+        "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-arcade-no-voiceover/frames/contact-sheet-reference-window-120-240.jpg"
+      },
+      {
+        "start_seconds": 228,
+        "duration_seconds": 24,
+        "sample_every_seconds": 2,
+        "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-arcade-no-voiceover/frames/contact-sheet-reference-window-228-252.jpg"
+      }
+    ],
+    "waveform": {
+      "start_seconds": 0,
+      "duration_seconds": 120,
+      "artifact": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-arcade-no-voiceover/audio/waveform-reference-window-0-120.png"
+    }
+  },
+  "analysis_roles": [
+    "early_session_direct_audio_anchor",
+    "start_to_game_over_cue_window_promotion",
+    "stage_1_and_2_pacing_review",
+    "game_over_and_player_loss_scene_review"
+  ],
+  "notes": [
+    "This source is unusually valuable because it provides real gameplay sound without voiceover masking the cue edges.",
+    "Its strongest immediate use is promoting named early-session audio-scene windows for Guardians audio conformance work."
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/analyses/galaxian-reference/galaxians-arcade-no-voiceover/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaxian-reference/galaxians-arcade-no-voiceover",
+    "moved_file_count": 4
+  }
+}

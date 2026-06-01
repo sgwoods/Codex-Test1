@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-06-01",
+  "status": "public-metadata-private-content",
+  "source_url": "https://www.arcade-museum.com/Videogame/galaga",
+  "preserved_root": "reference-artifacts/preserved-sources/galaga-arcade-museum-2026-06-01",
+  "notes": [
+    "This source was preserved as both PDF and HTML because it combines cabinet and hardware metadata, concise gameplay summary prose, and a broad set of image leads.",
+    "It is especially useful for release metadata, controls, sound, cabinet style, and cabinet-image discovery, plus supporting cheat and bug notes.",
+    "It is a supporting history, cabinet-spec, and visual-lead artifact, not primary timing or audio truth."
+  ],
+  "committed_artifacts": [
+    {
+      "id": "galaga-arcade-museum-pdf",
+      "title": "Galaga arcade-museum PDF",
+      "repo_path": null,
+      "bytes": 1866242,
+      "sha256": "8cc0a132bfe279113a744a97e8d4f739f1e6bb3aada07f00a805747974cb0584",
+      "measured_media": {
+        "format": "PDF document, version 1.4"
+      },
+      "status": "preserved-private",
+      "public_repo_path": "reference-artifacts/preserved-sources/galaga-arcade-museum-2026-06-01/docs/galaga-arcade-museum.pdf",
+      "private_store_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaga-arcade-museum-2026-06-01/docs/galaga-arcade-museum.pdf"
+    },
+    {
+      "id": "galaga-arcade-museum-html",
+      "title": "Galaga arcade-museum HTML snapshot",
+      "repo_path": null,
+      "bytes": 169000,
+      "sha256": "07e32750ffa2f363ea6993752f20c5ec5ba0a6bcf5d5a62f3bf8e4cd19756f2d",
+      "measured_media": {
+        "format": "HTML document text, Unicode text, UTF-8 text, with very long lines (834)"
+      },
+      "status": "preserved-private",
+      "public_repo_path": "reference-artifacts/preserved-sources/galaga-arcade-museum-2026-06-01/web/galaga-arcade-museum.html",
+      "private_store_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaga-arcade-museum-2026-06-01/web/galaga-arcade-museum.html"
+    }
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/preserved-sources/galaga-arcade-museum-2026-06-01/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaga-arcade-museum-2026-06-01",
+    "moved_file_count": 2
+  }
+}

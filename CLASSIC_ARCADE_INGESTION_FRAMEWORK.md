@@ -9,6 +9,45 @@ small end-to-end example, but the framework is intentionally broader than that.
 The goal is to make every future sibling game easier to study, model, build,
 test, and explain.
 
+## Public / Private Boundary
+
+This repository is a public lane.
+
+That means classic-arcade ingestion should now separate:
+
+- public-safe metadata
+- private copied or derived media bytes
+
+Public-safe metadata includes:
+
+- readmes
+- manifests
+- checksums
+- source URLs
+- summary JSON
+- repo-owned plans and reports
+
+Private copied or derived media includes:
+
+- copied PDFs
+- copied HTML snapshots
+- copied gameplay videos and audio files
+- copied sprite bundles and still-image sets
+- extracted clips
+- contact sheets
+- waveform renders
+
+The current rule is:
+
+- keep metadata in the public repo
+- keep copied or derived bytes in the companion private artifact store
+
+For the concrete repository policy, see
+[PRIVATE_ARTIFACT_STORAGE_POLICY.md](PRIVATE_ARTIFACT_STORAGE_POLICY.md).
+The current pushed companion private GitHub repo is:
+
+- `https://github.com/sgwoods/Codex-Test1-private-artifacts`
+
 ## Formal Role In The Conformance Project
 
 Ingestion is a first-class subsystem of the conformance project.
@@ -66,8 +105,10 @@ these concrete classes:
 
 - `preserved source package`
   - a repo-owned accession bundle for an external source
-  - should include a README, manifest, provenance, checksum, and the preserved
-    downloaded or copied source
+  - should include a README, manifest, provenance, checksum, and a clear
+    pointer to the preserved downloaded or copied source
+  - in this public repo, the bytes themselves should usually live in the
+    companion private artifact store rather than in the public lane
   - examples: a gameplay video, a manual PDF, a cabinet photo bundle
 - `extracted clip window`
   - a short subclip cut from an already preserved video with start/end
@@ -108,6 +149,31 @@ named, such as:
 - direct cabinet audio
 - readable score text
 - unobscured enemy motion
+
+## Reference ID Discipline
+
+Dashboard artifacts, shared hunts, and dashboard plan tracks should now carry a
+stable reference ID so repo notes and reports can point to them without
+repeating a whole paragraph title.
+
+The canonical scheme is documented in
+[ARTIFACT_REFERENCE_ID_SCHEME.md](ARTIFACT_REFERENCE_ID_SCHEME.md).
+
+Use the ID in repo-owned writing whenever one exact artifact or one exact gap is
+being discussed, for example:
+
+- `GGD-ART-014`
+- `AUR-PLAN-002`
+- `WIN-GAP-004`
+
+Important rule:
+
+- the ID is the shorthand handle
+- the repo path remains the storage authority
+
+Do not rename whole preserved-source packages only to force the ID into the
+filesystem name. The ID should point to the current repo path rather than
+replace it.
 
 ## Required Game Catalog Output
 

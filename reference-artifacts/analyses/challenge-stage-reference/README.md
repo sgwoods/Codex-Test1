@@ -4,8 +4,13 @@ Primary source:
 
 - preserved video:
   - `reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/challenge-stage/challenging-stage-perfect-scores.mp4`
+- complementary preserved video:
+  - `reference-artifacts/preserved-sources/galaga-challenging-stages-isolated-2026-06-01/video/challenging-stages.mp4`
+  - `reference-artifacts/preserved-sources/galaga-higher-quality-perfect-challenging-stages-2026-06-01/video/galaga-higher-quality-perfect-challenging-stages.mp4`
 - source manifest:
   - `reference-artifacts/preserved-sources/galaga-classic-recovery-2026-05-17/source-manifest.json`
+  - `reference-artifacts/preserved-sources/galaga-challenging-stages-isolated-2026-06-01/source-manifest.json`
+  - `reference-artifacts/preserved-sources/galaga-higher-quality-perfect-challenging-stages-2026-06-01/source-manifest.json`
 
 Derived artifacts in this clone:
 
@@ -22,6 +27,10 @@ Why this exists:
 - support issue `#64`
 - provide reusable challenge-stage observations for issue `#9`
 - preserve a simple visual reference for later harness validation
+- keep a repo-owned stage-isolated raw source available when later challenge
+  motion windows need to be cut without live-play clutter
+- keep a stronger repo-owned perfect-play raw source available when later
+  perfect-result cadence and ideal-flow review need a cleaner canonical lane
 
 ## Stable observations across the reference video
 

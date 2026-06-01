@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-06-01",
+  "status": "public-metadata-private-content",
+  "source_root": "/Users/steven/Downloads",
+  "preserved_root": "reference-artifacts/preserved-sources/galaga-strategywiki-gameplay-walkthrough-2026-06-01",
+  "notes": [
+    "This source was accessioned from local PDF exports and attached gameplay-page stills because it is the strongest current repo-owned per-family Galaga sprite identity bundle.",
+    "Its biggest value is sprite-family naming, transform-family stills, capture-state examples, and supporting walkthrough/reference prose rather than timing or audio truth."
+  ],
+  "committed_artifacts": [
+    {
+      "id": "galaga-strategywiki-gameplay-pdf",
+      "title": "Galaga StrategyWiki gameplay PDF",
+      "status": "preserved-private",
+      "repo_path": null,
+      "bytes": 3674663,
+      "sha256": "59be6b215c27dc3924e33112199e51a06ba0110970170f575e70b996ced98466",
+      "source_path": "/Users/steven/Downloads/Galaga_Gameplay — StrategyWiki _ Strategy guide and game reference wiki.pdf",
+      "document_media": {
+        "pageCount": 7
+      },
+      "public_repo_path": "reference-artifacts/preserved-sources/galaga-strategywiki-gameplay-walkthrough-2026-06-01/docs/galaga-strategywiki-gameplay.pdf",
+      "private_store_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaga-strategywiki-gameplay-walkthrough-2026-06-01/docs/galaga-strategywiki-gameplay.pdf"
+    },
+    {
+      "id": "galaga-strategywiki-walkthrough-pdf",
+      "title": "Galaga StrategyWiki walkthrough PDF",
+      "status": "preserved-private",
+      "repo_path": null,
+      "bytes": 541983,
+      "sha256": "4f0cc946697cbb1716eef9293901dd0bed9fb23e266321c0e6b3d2b1eb644b76",
+      "source_path": "/Users/steven/Downloads/Galaga_Walkthrough — StrategyWiki _ Strategy guide and game reference wiki.pdf",
+      "document_media": {
+        "pageCount": 10
+      },
+      "public_repo_path": "reference-artifacts/preserved-sources/galaga-strategywiki-gameplay-walkthrough-2026-06-01/docs/galaga-strategywiki-walkthrough.pdf",
+      "private_store_path": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaga-strategywiki-gameplay-walkthrough-2026-06-01/docs/galaga-strategywiki-walkthrough.pdf"
+    },
+    {
+      "id": "galaga-strategywiki-sprite-bundle",
+      "title": "Galaga StrategyWiki gameplay-page sprite bundle",
+      "status": "preserved-private",
+      "repo_path": "reference-artifacts/preserved-sources/galaga-strategywiki-gameplay-walkthrough-2026-06-01/images/",
+      "source_path": "/Users/steven/Downloads/SW Images/",
+      "image_count": 12,
+      "named_assets": [
+        "Galaga_Fighter.png",
+        "Galaga_Capture.png",
+        "Galaga_Bee.png",
+        "Galaga_Butterfly.png",
+        "Galaga_Dragonfly.png",
+        "Galaga_Flagship1.png",
+        "Galaga_Flagship2.png",
+        "Galaga_Scorpion.png",
+        "Galaga_Bosconian.png",
+        "Galaga_Enterprise.png",
+        "Galaga_Satellite.png",
+        "GLX_Flagship.png"
+      ]
+    }
+  ],
+  "downstream_analysis": [
+    "reference-artifacts/analyses/galaga-strategywiki-gameplay-walkthrough/source-manifest.json",
+    "reference-artifacts/analyses/galaga-strategywiki-gameplay-walkthrough/README.md"
+  ],
+  "storage_policy": "public-metadata-private-content",
+  "private_companion_store": {
+    "pointer_path": "reference-artifacts/preserved-sources/galaga-strategywiki-gameplay-walkthrough-2026-06-01/private-storage.json",
+    "private_root": "private-artifacts/repo-mirror/reference-artifacts/preserved-sources/galaga-strategywiki-gameplay-walkthrough-2026-06-01",
+    "moved_file_count": 14
+  }
+}
