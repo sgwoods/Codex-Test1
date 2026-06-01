@@ -28,6 +28,10 @@ The first legacy Guardians-driven migration tranche is already complete in the
 working tree for `galaxian-frame-reference` and `audio-conformance-lab`, which
 means the private companion workflow is now proven on both new intake and older
 tracked reference-media lanes.
+The first large Aurora audio-fitting tranche is now also complete in the
+working tree for `aurora-audio-cue-candidates` and
+`aurora-audio-theme-comparison`, which means the migration workflow has now
+been exercised successfully on both active game lines, not just Guardians.
 
 ## Cross-game summary
 

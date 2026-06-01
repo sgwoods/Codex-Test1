@@ -24,6 +24,12 @@ working tree for the two most Guardians-critical source-derived lanes:
 - `reference-artifacts/analyses/galaxian-frame-reference`
 - `reference-artifacts/analyses/audio-conformance-lab`
 
+The next completed private-lane migration tranche is now also in place for the
+two largest Aurora audio-fitting families:
+
+- `reference-artifacts/analyses/aurora-audio-cue-candidates`
+- `reference-artifacts/analyses/aurora-audio-theme-comparison`
+
 For the repeatable source-to-game-pack process, pair this inventory with:
 
 - `CLASSIC_ARCADE_INGESTION_FRAMEWORK.md`

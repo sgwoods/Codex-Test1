@@ -44,3 +44,13 @@ Formation Pulse has the highest segment-level onset risk: the current classic pu
 ## Next Step
 
 Promote refclip-s660-d240-v105 for Formation Pulse, then rerun the full audio comparison and event-gap rollup.
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/aurora-audio-cue-candidates/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/aurora-audio-cue-candidates`

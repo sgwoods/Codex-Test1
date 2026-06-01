@@ -42,3 +42,13 @@ Capture bounded low-band, long-decay candidate specs through the live browser au
 ## Next Step
 
 Use the best measured candidates to expand the low-band envelope generator, or consider a reference-subclip strategy for ship loss if synthesized cues keep failing duration and band-shape gates.
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/aurora-audio-cue-candidates/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/aurora-audio-cue-candidates`

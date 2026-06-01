@@ -40,13 +40,13 @@
           "wav": "samples/demo-pulse-galaga.wav",
           "metrics": {
             "duration_s": 3.96,
-            "peak": 1.0,
+            "peak": 1,
             "rms": 0.2572,
             "spectral_centroid_hz": 1288.1,
             "zero_crossings_per_s": 2068.7
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 3.722,
             "duration_s": 3.722,
             "coverage": 0.94,
@@ -54,7 +54,7 @@
           },
           "activeMetrics": {
             "duration_s": 3.722,
-            "peak": 1.0,
+            "peak": 1,
             "rms": 0.264,
             "spectral_centroid_hz": 1288.2,
             "zero_crossings_per_s": 2151.7
@@ -69,7 +69,7 @@
             "duration_s": 8.034,
             "peak": 0.2267,
             "rms": 0.0848,
-            "spectral_centroid_hz": 1175.0,
+            "spectral_centroid_hz": 1175,
             "zero_crossings_per_s": 577.3
           },
           "activeWindow": {
@@ -84,7 +84,7 @@
             "peak": 0.2267,
             "rms": 0.0866,
             "spectral_centroid_hz": 1175.3,
-            "zero_crossings_per_s": 598.0
+            "zero_crossings_per_s": 598
           },
           "waveform": null,
           "spectrogram": null
@@ -170,10 +170,10 @@
             "zero_crossings_per_s": 585.9
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 3.96,
             "duration_s": 3.96,
-            "coverage": 1.0,
+            "coverage": 1,
             "threshold_rms": 0.0806
           },
           "activeMetrics": {
@@ -207,7 +207,7 @@
             "duration_s": 5.827,
             "peak": 0.8508,
             "rms": 0.2798,
-            "spectral_centroid_hz": 1400.0,
+            "spectral_centroid_hz": 1400,
             "zero_crossings_per_s": 2509.3
           },
           "waveform": null,
@@ -237,14 +237,14 @@
       },
       "referenceSegmentCandidates": [
         {
-          "start_s": 0.0,
+          "start_s": 0,
           "end_s": 1.975,
           "score": 0.582,
           "metrics": {
             "duration_s": 1.975,
             "peak": 0.7381,
             "rms": 0.2259,
-            "spectral_centroid_hz": 1281.0,
+            "spectral_centroid_hz": 1281,
             "zero_crossings_per_s": 1726.1
           }
         },
@@ -287,22 +287,22 @@
             "duration_s": 0.84,
             "peak": 0.885,
             "rms": 0.2539,
-            "spectral_centroid_hz": 1128.0,
-            "zero_crossings_per_s": 1881.0
+            "spectral_centroid_hz": 1128,
+            "zero_crossings_per_s": 1881
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 0.84,
             "duration_s": 0.84,
-            "coverage": 1.0,
+            "coverage": 1,
             "threshold_rms": 0.2525
           },
           "activeMetrics": {
             "duration_s": 0.84,
             "peak": 0.885,
             "rms": 0.2539,
-            "spectral_centroid_hz": 1128.0,
-            "zero_crossings_per_s": 1881.0
+            "spectral_centroid_hz": 1128,
+            "zero_crossings_per_s": 1881
           },
           "waveform": null,
           "spectrogram": null
@@ -318,10 +318,10 @@
             "zero_crossings_per_s": 1898.8
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 0.84,
             "duration_s": 0.84,
-            "coverage": 1.0,
+            "coverage": 1,
             "threshold_rms": 0.2519
           },
           "activeMetrics": {
@@ -341,7 +341,7 @@
             "duration_s": 8.034,
             "peak": 0.2267,
             "rms": 0.0848,
-            "spectral_centroid_hz": 1175.0,
+            "spectral_centroid_hz": 1175,
             "zero_crossings_per_s": 577.3
           },
           "activeWindow": {
@@ -356,7 +356,7 @@
             "peak": 0.2267,
             "rms": 0.0866,
             "spectral_centroid_hz": 1175.3,
-            "zero_crossings_per_s": 598.0
+            "zero_crossings_per_s": 598
           },
           "waveform": null,
           "spectrogram": null
@@ -364,7 +364,7 @@
       },
       "comparisons": {
         "auroraVsSyntheticGalaga": {
-          "duration_s": 0.0,
+          "duration_s": 0,
           "spectral_centroid_hz": 96.8,
           "zero_crossings_per_s": 17.8,
           "rms": 0.0001
@@ -372,7 +372,7 @@
         "auroraVsReferenceActive": {
           "duration_s": 5.955,
           "spectral_centroid_hz": 47.3,
-          "zero_crossings_per_s": 1283.0,
+          "zero_crossings_per_s": 1283,
           "rms": 0.1673
         },
         "syntheticGalagaVsReferenceActive": {
@@ -392,7 +392,7 @@
             "duration_s": 0.84,
             "peak": 0.2267,
             "rms": 0.097,
-            "spectral_centroid_hz": 1160.0,
+            "spectral_centroid_hz": 1160,
             "zero_crossings_per_s": 604.8
           }
         },
@@ -404,8 +404,8 @@
             "duration_s": 0.84,
             "peak": 0.2264,
             "rms": 0.0885,
-            "spectral_centroid_hz": 1142.0,
-            "zero_crossings_per_s": 594.0
+            "spectral_centroid_hz": 1142,
+            "zero_crossings_per_s": 594
           }
         },
         {
@@ -416,7 +416,7 @@
             "duration_s": 0.84,
             "peak": 0.2194,
             "rms": 0.0868,
-            "spectral_centroid_hz": 1149.0,
+            "spectral_centroid_hz": 1149,
             "zero_crossings_per_s": 597.6
           }
         }
@@ -433,13 +433,13 @@
           "wav": "samples/capture-beam-aurora.wav",
           "metrics": {
             "duration_s": 3.96,
-            "peak": 1.0,
+            "peak": 1,
             "rms": 0.2561,
             "spectral_centroid_hz": 1296.2,
             "zero_crossings_per_s": 2075.8
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 3.732,
             "duration_s": 3.732,
             "coverage": 0.942,
@@ -447,10 +447,10 @@
           },
           "activeMetrics": {
             "duration_s": 3.732,
-            "peak": 1.0,
+            "peak": 1,
             "rms": 0.2626,
             "spectral_centroid_hz": 1297.3,
-            "zero_crossings_per_s": 2158.0
+            "zero_crossings_per_s": 2158
           },
           "waveform": null,
           "spectrogram": null
@@ -466,7 +466,7 @@
             "zero_crossings_per_s": 2077.3
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 3.762,
             "duration_s": 3.762,
             "coverage": 0.95,
@@ -525,7 +525,7 @@
         },
         "syntheticGalagaVsReferenceActive": {
           "duration_s": 0.439,
-          "spectral_centroid_hz": 550.0,
+          "spectral_centroid_hz": 550,
           "zero_crossings_per_s": 451.3,
           "rms": 0.081
         },
@@ -540,7 +540,7 @@
             "duration_s": 3.732,
             "peak": 0.8581,
             "rms": 0.3237,
-            "spectral_centroid_hz": 1825.0,
+            "spectral_centroid_hz": 1825,
             "zero_crossings_per_s": 2271.2
           }
         }
@@ -557,13 +557,13 @@
           "wav": "samples/fighter-captured-aurora.wav",
           "metrics": {
             "duration_s": 3.96,
-            "peak": 1.0,
+            "peak": 1,
             "rms": 0.2564,
             "spectral_centroid_hz": 1296.5,
             "zero_crossings_per_s": 2091.4
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 3.752,
             "duration_s": 3.752,
             "coverage": 0.947,
@@ -571,10 +571,10 @@
           },
           "activeMetrics": {
             "duration_s": 3.752,
-            "peak": 1.0,
+            "peak": 1,
             "rms": 0.2623,
             "spectral_centroid_hz": 1297.8,
-            "zero_crossings_per_s": 2166.0
+            "zero_crossings_per_s": 2166
           },
           "waveform": null,
           "spectrogram": null
@@ -584,7 +584,7 @@
           "wav": "samples/fighter-captured-galaga.wav",
           "metrics": {
             "duration_s": 3.96,
-            "peak": 1.0,
+            "peak": 1,
             "rms": 0.2569,
             "spectral_centroid_hz": 1286.3,
             "zero_crossings_per_s": 2055.6
@@ -598,7 +598,7 @@
           },
           "activeMetrics": {
             "duration_s": 3.702,
-            "peak": 1.0,
+            "peak": 1,
             "rms": 0.2644,
             "spectral_centroid_hz": 1291.7,
             "zero_crossings_per_s": 2143.8
@@ -687,7 +687,7 @@
             "zero_crossings_per_s": 2082.8
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 3.732,
             "duration_s": 3.732,
             "coverage": 0.942,
@@ -708,13 +708,13 @@
           "wav": "samples/captured-fighter-destroyed-galaga.wav",
           "metrics": {
             "duration_s": 3.96,
-            "peak": 1.0,
+            "peak": 1,
             "rms": 0.2559,
             "spectral_centroid_hz": 1298.1,
             "zero_crossings_per_s": 2086.9
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 3.732,
             "duration_s": 3.732,
             "coverage": 0.942,
@@ -722,7 +722,7 @@
           },
           "activeMetrics": {
             "duration_s": 3.732,
-            "peak": 1.0,
+            "peak": 1,
             "rms": 0.2624,
             "spectral_centroid_hz": 1298.1,
             "zero_crossings_per_s": 2167.4
@@ -741,10 +741,10 @@
             "zero_crossings_per_s": 2037.7
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 3.019,
             "duration_s": 3.019,
-            "coverage": 1.0,
+            "coverage": 1,
             "threshold_rms": 0.1804
           },
           "activeMetrics": {
@@ -760,10 +760,10 @@
       },
       "comparisons": {
         "auroraVsSyntheticGalaga": {
-          "duration_s": 0.0,
+          "duration_s": 0,
           "spectral_centroid_hz": 8.3,
           "zero_crossings_per_s": 0.3,
-          "rms": 0.0
+          "rms": 0
         },
         "auroraVsReferenceActive": {
           "duration_s": 0.713,
@@ -792,7 +792,7 @@
           "wav": "samples/rescue-join-aurora.wav",
           "metrics": {
             "duration_s": 3.96,
-            "peak": 1.0,
+            "peak": 1,
             "rms": 0.2592,
             "spectral_centroid_hz": 1281.8,
             "zero_crossings_per_s": 2072.2
@@ -806,7 +806,7 @@
           },
           "activeMetrics": {
             "duration_s": 3.642,
-            "peak": 1.0,
+            "peak": 1,
             "rms": 0.2655,
             "spectral_centroid_hz": 1292.1,
             "zero_crossings_per_s": 2134.8
@@ -852,7 +852,7 @@
             "zero_crossings_per_s": 1374.4
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 4.011,
             "duration_s": 4.011,
             "coverage": 0.993,
@@ -899,7 +899,7 @@
             "duration_s": 3.642,
             "peak": 0.429,
             "rms": 0.0994,
-            "spectral_centroid_hz": 1533.0,
+            "spectral_centroid_hz": 1533,
             "zero_crossings_per_s": 1401.7
           }
         }
@@ -916,13 +916,13 @@
           "wav": "samples/ship-loss-aurora.wav",
           "metrics": {
             "duration_s": 3.96,
-            "peak": 1.0,
+            "peak": 1,
             "rms": 0.2562,
             "spectral_centroid_hz": 1288.8,
             "zero_crossings_per_s": 2081.3
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 3.722,
             "duration_s": 3.722,
             "coverage": 0.94,
@@ -930,7 +930,7 @@
           },
           "activeMetrics": {
             "duration_s": 3.722,
-            "peak": 1.0,
+            "peak": 1,
             "rms": 0.2631,
             "spectral_centroid_hz": 1290.1,
             "zero_crossings_per_s": 2165.1
@@ -949,7 +949,7 @@
             "zero_crossings_per_s": 2059.6
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 3.732,
             "duration_s": 3.732,
             "coverage": 0.942,
@@ -960,7 +960,7 @@
             "peak": 0.9649,
             "rms": 0.2649,
             "spectral_centroid_hz": 1295.4,
-            "zero_crossings_per_s": 2140.0
+            "zero_crossings_per_s": 2140
           },
           "waveform": null,
           "spectrogram": null
@@ -986,7 +986,7 @@
             "duration_s": 0.968,
             "peak": 0.9449,
             "rms": 0.1995,
-            "spectral_centroid_hz": 964.0,
+            "spectral_centroid_hz": 964,
             "zero_crossings_per_s": 1195.2
           },
           "waveform": null,
@@ -1033,10 +1033,10 @@
             "zero_crossings_per_s": 1910.2
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 1.08,
             "duration_s": 1.08,
-            "coverage": 1.0,
+            "coverage": 1,
             "threshold_rms": 0.254
           },
           "activeMetrics": {
@@ -1060,10 +1060,10 @@
             "zero_crossings_per_s": 1940.7
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 1.08,
             "duration_s": 1.08,
-            "coverage": 1.0,
+            "coverage": 1,
             "threshold_rms": 0.2539
           },
           "activeMetrics": {
@@ -1084,10 +1084,10 @@
             "peak": 0.9491,
             "rms": 0.1601,
             "spectral_centroid_hz": 1474.2,
-            "zero_crossings_per_s": 1296.0
+            "zero_crossings_per_s": 1296
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 2.375,
             "duration_s": 2.375,
             "coverage": 0.787,
@@ -1106,14 +1106,14 @@
       },
       "comparisons": {
         "auroraVsSyntheticGalaga": {
-          "duration_s": 0.0,
+          "duration_s": 0,
           "spectral_centroid_hz": 17.7,
           "zero_crossings_per_s": 30.5,
           "rms": 0.0002
         },
         "auroraVsReferenceActive": {
           "duration_s": 1.295,
-          "spectral_centroid_hz": 257.0,
+          "spectral_centroid_hz": 257,
           "zero_crossings_per_s": 262.9,
           "rms": 0.0738
         },
@@ -1134,7 +1134,7 @@
             "duration_s": 1.08,
             "peak": 0.9491,
             "rms": 0.2195,
-            "spectral_centroid_hz": 1489.0,
+            "spectral_centroid_hz": 1489,
             "zero_crossings_per_s": 1906.5
           }
         }
@@ -1157,10 +1157,10 @@
             "zero_crossings_per_s": 2084.6
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 1.56,
             "duration_s": 1.56,
-            "coverage": 1.0,
+            "coverage": 1,
             "threshold_rms": 0.25
           },
           "activeMetrics": {
@@ -1184,7 +1184,7 @@
             "zero_crossings_per_s": 2123.7
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 1.317,
             "duration_s": 1.317,
             "coverage": 0.844,
@@ -1195,7 +1195,7 @@
             "peak": 0.885,
             "rms": 0.2553,
             "spectral_centroid_hz": 1220.3,
-            "zero_crossings_per_s": 2021.0
+            "zero_crossings_per_s": 2021
           },
           "waveform": null,
           "spectrogram": null
@@ -1211,7 +1211,7 @@
             "zero_crossings_per_s": 2277.3
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 4.021,
             "duration_s": 4.021,
             "coverage": 0.995,
@@ -1221,7 +1221,7 @@
             "duration_s": 4.021,
             "peak": 0.2975,
             "rms": 0.087,
-            "spectral_centroid_hz": 1910.0,
+            "spectral_centroid_hz": 1910,
             "zero_crossings_per_s": 2288.2
           },
           "waveform": null,
@@ -1251,7 +1251,7 @@
       },
       "referenceSegmentCandidates": [
         {
-          "start_s": 0.0,
+          "start_s": 0,
           "end_s": 1.56,
           "score": 0.63,
           "metrics": {
@@ -1259,7 +1259,7 @@
             "peak": 0.2912,
             "rms": 0.0882,
             "spectral_centroid_hz": 1904.7,
-            "zero_crossings_per_s": 2134.0
+            "zero_crossings_per_s": 2134
           }
         },
         {
@@ -1293,10 +1293,10 @@
             "zero_crossings_per_s": 2147.7
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 1.74,
             "duration_s": 1.74,
-            "coverage": 1.0,
+            "coverage": 1,
             "threshold_rms": 0.2545
           },
           "activeMetrics": {
@@ -1320,10 +1320,10 @@
             "zero_crossings_per_s": 2093.7
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 1.74,
             "duration_s": 1.74,
-            "coverage": 1.0,
+            "coverage": 1,
             "threshold_rms": 0.2538
           },
           "activeMetrics": {
@@ -1343,21 +1343,21 @@
             "duration_s": 4.04,
             "peak": 0.438,
             "rms": 0.1263,
-            "spectral_centroid_hz": 2423.0,
+            "spectral_centroid_hz": 2423,
             "zero_crossings_per_s": 2978.8
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 4.04,
             "duration_s": 4.04,
-            "coverage": 1.0,
+            "coverage": 1,
             "threshold_rms": 0.124
           },
           "activeMetrics": {
             "duration_s": 4.04,
             "peak": 0.438,
             "rms": 0.1263,
-            "spectral_centroid_hz": 2423.0,
+            "spectral_centroid_hz": 2423,
             "zero_crossings_per_s": 2978.8
           },
           "waveform": null,
@@ -1366,9 +1366,9 @@
       },
       "comparisons": {
         "auroraVsSyntheticGalaga": {
-          "duration_s": 0.0,
+          "duration_s": 0,
           "spectral_centroid_hz": 15.5,
-          "zero_crossings_per_s": 54.0,
+          "zero_crossings_per_s": 54,
           "rms": 0.0006
         },
         "auroraVsReferenceActive": {
@@ -1387,7 +1387,7 @@
       },
       "referenceSegmentCandidates": [
         {
-          "start_s": 0.0,
+          "start_s": 0,
           "end_s": 1.74,
           "score": 0.496,
           "metrics": {
@@ -1423,13 +1423,13 @@
           "wav": "samples/high-score-1st-aurora.wav",
           "metrics": {
             "duration_s": 3.96,
-            "peak": 1.0,
+            "peak": 1,
             "rms": 0.2562,
             "spectral_centroid_hz": 1293.7,
             "zero_crossings_per_s": 2063.9
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 3.702,
             "duration_s": 3.702,
             "coverage": 0.935,
@@ -1437,10 +1437,10 @@
           },
           "activeMetrics": {
             "duration_s": 3.702,
-            "peak": 1.0,
+            "peak": 1,
             "rms": 0.2636,
             "spectral_centroid_hz": 1297.7,
-            "zero_crossings_per_s": 2156.0
+            "zero_crossings_per_s": 2156
           },
           "waveform": null,
           "spectrogram": null
@@ -1456,7 +1456,7 @@
             "zero_crossings_per_s": 2044.2
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 3.702,
             "duration_s": 3.702,
             "coverage": 0.935,
@@ -1483,7 +1483,7 @@
             "zero_crossings_per_s": 2077.4
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 6.695,
             "duration_s": 6.695,
             "coverage": 0.833,
@@ -1502,7 +1502,7 @@
       },
       "comparisons": {
         "auroraVsSyntheticGalaga": {
-          "duration_s": 0.0,
+          "duration_s": 0,
           "spectral_centroid_hz": 4.4,
           "zero_crossings_per_s": 21.1,
           "rms": 0.0001
@@ -1574,13 +1574,13 @@
           "wav": "samples/high-score-2nd-10th-galaga.wav",
           "metrics": {
             "duration_s": 3.96,
-            "peak": 1.0,
+            "peak": 1,
             "rms": 0.2582,
             "spectral_centroid_hz": 1280.8,
             "zero_crossings_per_s": 2062.6
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 3.732,
             "duration_s": 3.732,
             "coverage": 0.942,
@@ -1588,7 +1588,7 @@
           },
           "activeMetrics": {
             "duration_s": 3.732,
-            "peak": 1.0,
+            "peak": 1,
             "rms": 0.2649,
             "spectral_centroid_hz": 1281.9,
             "zero_crossings_per_s": 2138.4
@@ -1600,8 +1600,8 @@
           "label": "Name Entry (2nd-5th)",
           "wav": "samples/high-score-2nd-10th-reference.wav",
           "metrics": {
-            "duration_s": 15.0,
-            "peak": 1.0,
+            "duration_s": 15,
+            "peak": 1,
             "rms": 0.2555,
             "spectral_centroid_hz": 1707.1,
             "zero_crossings_per_s": 2641.1
@@ -1617,7 +1617,7 @@
             "duration_s": 14.098,
             "peak": 0.9467,
             "rms": 0.2624,
-            "spectral_centroid_hz": 1715.0,
+            "spectral_centroid_hz": 1715,
             "zero_crossings_per_s": 2757.8
           },
           "waveform": null,
@@ -1628,7 +1628,7 @@
         "auroraVsSyntheticGalaga": {
           "duration_s": 0.03,
           "spectral_centroid_hz": 22.7,
-          "zero_crossings_per_s": 4.0,
+          "zero_crossings_per_s": 4,
           "rms": 0.0011
         },
         "auroraVsReferenceActive": {
@@ -1654,7 +1654,7 @@
             "duration_s": 3.702,
             "peak": 0.9425,
             "rms": 0.2391,
-            "spectral_centroid_hz": 1699.0,
+            "spectral_centroid_hz": 1699,
             "zero_crossings_per_s": 2379.5
           }
         },
@@ -1697,7 +1697,7 @@
             "duration_s": 3.96,
             "peak": 0.9366,
             "rms": 0.259,
-            "spectral_centroid_hz": 1284.0,
+            "spectral_centroid_hz": 1284,
             "zero_crossings_per_s": 2062.9
           },
           "activeWindow": {
@@ -1722,13 +1722,13 @@
           "wav": "samples/game-over-galaga.wav",
           "metrics": {
             "duration_s": 3.96,
-            "peak": 1.0,
+            "peak": 1,
             "rms": 0.2563,
             "spectral_centroid_hz": 1294.4,
             "zero_crossings_per_s": 2042.2
           },
           "activeWindow": {
-            "start_s": 0.0,
+            "start_s": 0,
             "end_s": 3.702,
             "duration_s": 3.702,
             "coverage": 0.935,
@@ -1736,7 +1736,7 @@
           },
           "activeMetrics": {
             "duration_s": 3.702,
-            "peak": 1.0,
+            "peak": 1,
             "rms": 0.2638,
             "spectral_centroid_hz": 1297.3,
             "zero_crossings_per_s": 2131.1
@@ -1775,7 +1775,7 @@
       "comparisons": {
         "auroraVsSyntheticGalaga": {
           "duration_s": 0.07,
-          "spectral_centroid_hz": 15.0,
+          "spectral_centroid_hz": 15,
           "zero_crossings_per_s": 7.1,
           "rms": 0.0025
         },

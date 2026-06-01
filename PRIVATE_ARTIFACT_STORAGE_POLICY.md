@@ -102,15 +102,21 @@ and force-push coordination.
 
 ## Current Migration Posture
 
-As of `2026-06-01`, two things are already true:
+As of `2026-06-01`, three things are already true:
 
 1. the June 1 ingestion wave has been moved into the companion private store
 2. the first legacy Guardians-focused tranche has also been moved there
+3. the first large Aurora audio-fitting tranche has also been moved there
 
 That first legacy tranche includes:
 
 - `reference-artifacts/analyses/galaxian-frame-reference`
 - `reference-artifacts/analyses/audio-conformance-lab`
+
+That first Aurora tranche includes:
+
+- `reference-artifacts/analyses/aurora-audio-cue-candidates`
+- `reference-artifacts/analyses/aurora-audio-theme-comparison`
 
 The next migration decisions should now be made deliberately by family, using
 the companion repo as the destination rather than letting older public artifact

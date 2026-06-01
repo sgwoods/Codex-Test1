@@ -42,10 +42,17 @@ Stop the current June 1 ingestion wave from becoming a new public-media layer.
 - migrated the first older Guardians-focused legacy tranche:
   - `reference-artifacts/analyses/galaxian-frame-reference`
   - `reference-artifacts/analyses/audio-conformance-lab`
+- migrated the first large Aurora audio-fitting tranche:
+  - `reference-artifacts/analyses/aurora-audio-cue-candidates`
+  - `reference-artifacts/analyses/aurora-audio-theme-comparison`
 
 That legacy tranche moved `1421` tracked media files out of the public working
 tree and into the private companion repo while leaving metadata and pointers in
 place.
+
+The Aurora tranche moved `4917` additional tracked media files out of the
+public working tree and into the private companion repo, again leaving
+metadata and pointers in place.
 
 ## What This Pass Does Not Do
 
@@ -65,11 +72,13 @@ reference lanes that still affect active conformance work.
 
 The current recommended next tranche is:
 
-- `reference-artifacts/analyses/aurora-audio-cue-candidates`
-- `reference-artifacts/analyses/aurora-audio-theme-comparison`
+- `reference-artifacts/analyses/galaga-path-reference-media`
+- `reference-artifacts/analyses/galaga-alien-frame-cadence-targets`
+- `reference-artifacts/analyses/galaga-challenge-video-reference`
+- `reference-artifacts/analyses/galaga-audio-reference-video-3`
 
-That tranche is the best next move because it is both:
+That tranche is the best next move because it is still:
 
-- clearly source-derived under the new policy
-- large enough to reduce public-media exposure materially without slowing
-  Guardians quality work
+- clearly reference-derived under the new policy
+- smaller and more focused than the Aurora audio tranche
+- directly useful to Aurora challenge-stage and motion-fidelity work

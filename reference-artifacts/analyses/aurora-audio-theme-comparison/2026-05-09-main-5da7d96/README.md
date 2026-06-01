@@ -558,3 +558,13 @@ Metrics are lightweight and meant to help directionally, not declare perceptual 
 - Average active Aurora-vs-reference centroid delta: `388.2Hz`
 - Average active Aurora-vs-reference band-shape distance: `0.264`
 - Average active Aurora-vs-reference envelope decay delta: `1.773`
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/aurora-audio-theme-comparison/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/aurora-audio-theme-comparison`

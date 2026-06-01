@@ -363,3 +363,13 @@ Metrics are lightweight and meant to help directionally, not declare perceptual 
 - Average active Aurora-vs-synthetic-Galaga duration delta: `0.003s`
 - Average active Aurora-vs-reference duration delta: `0.791s`
 - Average active Aurora-vs-reference centroid delta: `375.4Hz`
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/aurora-audio-theme-comparison/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/aurora-audio-theme-comparison`

@@ -35,3 +35,13 @@ A keeper must reduce total risk by at least 0.25, reduce centroid gap, avoid mat
 ## Next Step
 
 Expand the candidate generator around the best measured direction instead of manually changing the game pack.
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/aurora-audio-cue-candidates/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/aurora-audio-cue-candidates`

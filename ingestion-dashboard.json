@@ -3,8 +3,8 @@
   "strapline": "A dashboard-first intake and decision cockpit for current games and future additions: gather source artifacts, analyze them, turn them into a Platinum-focused instantiation plan, and keep conformance work grounded in durable evidence.",
   "currentGoal": "Make artifact collection and analysis the front door for every game on Platinum, with Aurora and Galaxy Guardians visible today and Windigo Invaders entering through a measured, source-first intake path.",
   "dashboardRead": "This page should be the primary place where new game materials are added, assessed, and turned into explicit build decisions. Read each game top-down as: current posture, current content package, how we will use that content now, and then the remaining missing artifacts that still matter enough to change gameplay quality or implementation confidence. It should stay compact at the top level, let us click into detail by game, and keep showing what source families are still missing before design outruns evidence.",
-  "lastUpdatedAt": "2026-06-01T14:54:25-04:00",
-  "lastUpdatedNote": "Dashboard and repo policy now reflect the pushed companion private artifact repo, the June 1 intake migration, and the first older Guardians-focused legacy tranche moved out of the public media lane.",
+  "lastUpdatedAt": "2026-06-01T15:35:36-04:00",
+  "lastUpdatedNote": "Dashboard and repo policy now reflect two completed legacy migration tranches: the older Guardians frame/audio lanes and the large Aurora audio-fitting families have moved into the pushed companion private artifact repo, leaving metadata and pointers public.",
   "phaseDefinitions": [
     {
       "id": "collect",
@@ -284,8 +284,8 @@
       "status": "Live first application",
       "lineage": "Galaga-inspired first shipped Platinum game",
       "themeRead": "The most mature current game. Intake and conformance should stay visible because future games should inherit the process, not just the runtime.",
-      "lastUpdatedAt": "2026-06-01T14:54:25-04:00",
-      "lastUpdatedNote": "Aurora status now also reflects the private-companion storage boundary: its newer source-derived bytes are private-lane content, and the next recommended legacy migration tranche is the large Aurora audio-fitting families.",
+      "lastUpdatedAt": "2026-06-01T15:35:36-04:00",
+      "lastUpdatedNote": "Aurora status now reflects a completed large private-lane migration tranche: aurora-audio-cue-candidates and aurora-audio-theme-comparison are no longer public-media families, and the next recommended tranche is the smaller challenge/reference motion pack families.",
       "phaseStatus": [
         {
           "phaseId": "collect",
@@ -628,8 +628,8 @@
       "status": "Playable sibling preview",
       "lineage": "Galaxian-style second-game ingestion proof on Platinum",
       "themeRead": "The current visible second-game proof. It is strong enough to deserve deeper artifact discipline, but still weak enough that the dashboard should keep missing evidence and risk areas visible.",
-      "lastUpdatedAt": "2026-06-01T14:54:25-04:00",
-      "lastUpdatedNote": "Guardians status now reflects the pushed private companion repo and the first legacy migration tranche: Galaxian frame-reference and audio-conformance-lab bytes have moved out of the public lane, proving the workflow before the next Aurora-heavy tranche.",
+      "lastUpdatedAt": "2026-06-01T15:35:36-04:00",
+      "lastUpdatedNote": "Guardians status now sits inside a broader proven private-companion workflow: both the original Guardians tranche and the next Aurora audio tranche have been migrated, so further quality work can proceed without reopening the public-media boundary question.",
       "phaseStatus": [
         {
           "phaseId": "collect",
@@ -1124,8 +1124,8 @@
       "status": "Next intake target",
       "lineage": "Space Invaders-derived future Platinum game, themed eventually around the Windigo legend",
       "themeRead": "This should enter through evidence first. The goal is not to rush a derivative shell, but to build the strongest artifact package and Platinum instantiation plan before design decisions harden.",
-      "lastUpdatedAt": "2026-06-01T14:54:25-04:00",
-      "lastUpdatedNote": "Windigo status now also inherits the public/private storage boundary: future source intake should land as public-safe metadata plus private companion bytes, while the remaining high-value gaps stay score-table, bunker/cabinet, timing-window, and missing sound-truth targets.",
+      "lastUpdatedAt": "2026-06-01T15:35:36-04:00",
+      "lastUpdatedNote": "Windigo status still inherits the same public/private storage rule, now with two completed legacy migration tranches proving the pattern before Windigo's heavier preserved-source intake grows further.",
       "phaseStatus": [
         {
           "phaseId": "collect",

@@ -46,3 +46,13 @@ Challenge Perfect is the highest current segment-level audio gap: the cue is sem
 ## Next Step
 
 Do not promote Challenge Perfect yet; use the measured best candidate to refine the generator or scoring gates.
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/aurora-audio-cue-candidates/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/aurora-audio-cue-candidates`

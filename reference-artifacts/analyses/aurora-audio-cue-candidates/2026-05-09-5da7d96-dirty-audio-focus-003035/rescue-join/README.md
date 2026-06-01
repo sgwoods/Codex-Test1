@@ -44,3 +44,13 @@ Rescue Join is semantically correct but its tail remains a high segment risk, we
 ## Next Step
 
 Do not promote Rescue Join yet; use the measured best candidate to refine the generator or scoring gates.
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/aurora-audio-cue-candidates/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/aurora-audio-cue-candidates`

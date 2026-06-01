@@ -27,3 +27,13 @@ Capture bounded low-band, long-decay candidate specs through the live browser au
 ## Next Step
 
 Promote the recommended playerHit cue into the measured Aurora audio theme, then rerun the full audio comparison and event-gap rollup.
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/aurora-audio-cue-candidates/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/aurora-audio-cue-candidates`

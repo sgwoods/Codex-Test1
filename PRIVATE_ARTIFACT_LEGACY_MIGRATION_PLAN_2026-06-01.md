@@ -21,9 +21,15 @@ question.
    private repo:
    - `reference-artifacts/analyses/galaxian-frame-reference`
    - `reference-artifacts/analyses/audio-conformance-lab`
+3. The first large Aurora audio-fitting tranche was migrated into the companion
+   private repo:
+   - `reference-artifacts/analyses/aurora-audio-cue-candidates`
+   - `reference-artifacts/analyses/aurora-audio-theme-comparison`
 
 That first legacy tranche moved `1421` tracked media files into the private
 repo while leaving public-safe metadata and pointer files in the public repo.
+The Aurora tranche moved `4917` additional tracked media files there under the
+same metadata-plus-pointer rule.
 
 ## Decision Rule
 
@@ -83,7 +89,7 @@ Why first:
 
 ### Tranche 2: Aurora source-derived audio fitting lanes
 
-Recommended next:
+Status: `done in working tree`
 
 - `reference-artifacts/analyses/aurora-audio-cue-candidates`
 - `reference-artifacts/analyses/aurora-audio-theme-comparison`
@@ -95,7 +101,7 @@ Why next:
 
 ### Tranche 3: Aurora challenge/reference motion lanes
 
-Recommended after tranche 2:
+Recommended next:
 
 - `reference-artifacts/analyses/galaga-path-reference-media`
 - `reference-artifacts/analyses/galaga-alien-frame-cadence-targets`
@@ -165,16 +171,18 @@ After each tranche:
 
 ## Decision Now
 
-The current recommended next migration is `Tranche 2`.
+The current recommended next migration is `Tranche 3`.
 
 That means:
 
-- migrate `reference-artifacts/analyses/aurora-audio-cue-candidates`
-- migrate `reference-artifacts/analyses/aurora-audio-theme-comparison`
+- migrate `reference-artifacts/analyses/galaga-path-reference-media`
+- migrate `reference-artifacts/analyses/galaga-alien-frame-cadence-targets`
+- migrate `reference-artifacts/analyses/galaga-challenge-video-reference`
+- migrate `reference-artifacts/analyses/galaga-audio-reference-video-3`
 
 Hold the mixed conformance lanes until after that tranche lands, because the
-audio-candidate families are large, clearly source-derived, and low-ambiguity
-under the new policy.
+Aurora challenge/reference lanes are still clearly source-derived while the
+mixed conformance families need file-level review.
 
 ## Guardians-Driven Outcome
 

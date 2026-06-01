@@ -44,3 +44,13 @@ Capture Beam is the highest runtime whole-cue audio gap after capture-lifecycle 
 ## Next Step
 
 Promote refclip-s3500-d480-v74 for Capture Beam, then rerun the full audio comparison and event-gap rollup.
+
+## Public/Private Boundary
+
+This public repo now keeps only the metadata for this accession.
+
+Copied or derived source bytes for this artifact family have been moved into the
+companion private artifact store.
+
+- public pointer: `reference-artifacts/analyses/aurora-audio-cue-candidates/private-storage.json`
+- private companion root: `private-artifacts/repo-mirror/reference-artifacts/analyses/aurora-audio-cue-candidates`
