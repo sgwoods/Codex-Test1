@@ -4041,7 +4041,7 @@ function renderChallengeRouteabilityDetails(report = {}){
         <summary>${esc(s.label || 'Challenging Stage pending')} routeability evidence</summary>
         <div class="inlineDocPreviewBody">
           <p><strong>Player route:</strong> ${esc(s.greedyRouteKills ?? 'n/a')}/${esc(target)} greedy-route targets from ${esc(s.firstRouteT ?? 'n/a')}s to ${esc(s.lastRouteT ?? 'n/a')}s. Scoreable exposure: ${esc(s.scoreableRows ?? 'n/a')}/${esc(target)}; readable rows: ${esc(s.readableRows ?? 'n/a')}/${esc(target)}.</p>
-          <p class="docMeta">This is a player-experience guardrail, not a claim of target-video choreography. The stricter conformance score still depends on movement shape, visual novelty, and target-object-track fit.</p>
+          <p class="docMeta">This is a player-experience guardrail, not a claim of target-video choreography. It is intentionally more permissive than human-perfect potential: a stage can be broadly routeable while still losing strict credit for one-shot-only windows, weak repeated aim windows, unreadable altitude, top crowding, difficult lane transitions, movement shape, visual novelty, and target-object-track fit.</p>
           ${challengeList(weak.length ? weak : ['No routeability blocker isolated in this probe.'])}
         </div>
       </details>
@@ -6805,6 +6805,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               <h3>Routeability Guardrail</h3>
               <p><strong>Current routeability read:</strong> ${esc(challengeRouteabilitySummary.averageGreedyRouteScore10 ?? 'n/a')}/10 average greedy route, ${esc(challengeRouteabilitySummary.totalRouteKills ?? 'n/a')}/${esc(challengeRouteabilitySummary.totalTrackedRows ?? 'n/a')} routed targets across ${esc(challengeRouteabilitySummary.stageCount ?? 'n/a')} first-focus challenge stage(s).</p>
               <p>${esc(challengeRouteabilitySummary.read || 'Run the routeability analyzer to verify that the visible challenge targets are actually scoreable before adding spectacle.')}</p>
+              <p class="docMeta"><strong>Interpretation:</strong> routeability is the broad “can a strong player plausibly shoot the targets?” guardrail. Human-perfect potential is the stricter release-facing playability measure because it also scores repeated aim windows, readable altitude, top crowding, and lane-transition cost. Future challenge candidates must preserve both; a prettier target-video trace is not accepted if human-perfect potential drops.</p>
               <p class="docMeta"><strong>Generated artifact:</strong> <code>reference-artifacts/analyses/challenge-stage-routeability/latest.json</code>. <strong>Markdown report:</strong> <code>CHALLENGE_STAGE_ROUTEABILITY_REVIEW.md</code>.</p>
               <div class="tableWrap">
                 <table class="dataTable">

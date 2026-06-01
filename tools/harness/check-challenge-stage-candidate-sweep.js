@@ -3,7 +3,8 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', '..');
-const REPORT = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep', 'latest.json');
+const SWEEP_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep');
+const LATEST_REPORT = path.join(SWEEP_ROOT, 'latest.json');
 
 function argValue(name, fallback = ''){
   const prefix = `--${name}=`;
@@ -33,6 +34,26 @@ function rel(file){
 function isFiniteNumber(value){
   return Number.isFinite(+value);
 }
+
+function resolveReport(){
+  if(!EXPECTED_STAGE) return LATEST_REPORT;
+  const candidates = [];
+  if(fs.existsSync(SWEEP_ROOT)){
+    for(const entry of fs.readdirSync(SWEEP_ROOT, { withFileTypes: true })){
+      if(!entry.isDirectory()) continue;
+      const file = path.join(SWEEP_ROOT, entry.name, 'report.json');
+      if(!fs.existsSync(file)) continue;
+      const candidate = readJson(file);
+      if(+candidate.stage === +EXPECTED_STAGE){
+        candidates.push({ file, generatedAt: candidate.generatedAt || '' });
+      }
+    }
+  }
+  candidates.sort((a, b) => String(b.generatedAt).localeCompare(String(a.generatedAt)));
+  return candidates[0]?.file || LATEST_REPORT;
+}
+
+const REPORT = resolveReport();
 
 if(!fs.existsSync(REPORT)){
   fail('Challenge-stage candidate sweep artifact is missing; run npm run harness:sweep:stage7-challenge-candidates first.', { report: rel(REPORT) });
@@ -91,6 +112,9 @@ for(const row of [baseline, best]){
   if(!row.targetVideoObjectFit || !isFiniteNumber(row.targetVideoObjectFit.score10)){
     fail('Candidate sweep row is missing target-video object-track fit data.', row);
   }
+  if(!row.humanPerfectPotential || !isFiniteNumber(row.humanPerfectPotential.score10) || !row.humanPerfectGuard || typeof row.humanPerfectGuard.pass !== 'boolean'){
+    fail('Candidate sweep row is missing human-perfect guard data.', row);
+  }
   if(!isFiniteNumber(row.selectionScore10)){
     fail('Candidate sweep row is missing a selection score.', row);
   }
@@ -100,7 +124,7 @@ for(const row of [baseline, best]){
 }
 
 const summary = report.summary || {};
-for(const field of ['baselineExpectedScore10', 'bestExpectedScore10', 'expectedLift10']){
+for(const field of ['baselineExpectedScore10', 'bestExpectedScore10', 'expectedLift10', 'baselineHumanPerfectPotentialScore10', 'bestHumanPerfectPotentialScore10', 'humanPerfectPotentialLift10']){
   if(!isFiniteNumber(summary[field])){
     fail(`Candidate sweep summary field ${field} is invalid.`, summary);
   }
@@ -137,6 +161,12 @@ if(promotionLikeDecision){
   if(summary.noTargetVideoRegression !== true || summary.noExpectedRegression !== true || summary.intendedStageSupported !== true){
     fail('Candidate is marked promotion-like but does not satisfy the promotion policy booleans.', summary);
   }
+  if(summary.noHumanPerfectRegression !== true || best.humanPerfectGuard?.pass !== true){
+    fail('Candidate is marked promotion-like but lowers human-perfect potential.', {
+      summary,
+      bestHumanPerfectGuard: best.humanPerfectGuard
+    });
+  }
 }
 
 const retention = report.candidateRetention || {};
@@ -160,6 +190,7 @@ console.log(JSON.stringify({
   bestExpectedScore10: summary.bestExpectedScore10,
   expectedLift10: summary.expectedLift10,
   targetVideoObjectFitLift10: summary.targetVideoObjectFitLift10,
+  humanPerfectPotentialLift10: summary.humanPerfectPotentialLift10,
   keeperDecision: summary.keeperDecision,
   baselineSafetyPass: baseline.noSafetyRegression === true,
   bestSafetyPass: best.noSafetyRegression === true

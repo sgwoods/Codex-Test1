@@ -1,8 +1,16 @@
 # Challenge Stage Routeability Review
 
-Generated: 2026-06-01T13:47:06.388Z
+Generated: 2026-06-01T14:19:38.526Z
 
 This report measures whether Aurora's challenging-stage targets are visible, scoreable, and plausibly routeable by a human player using a simple deterministic firing-route probe. It complements the stricter conformance analyzer: routeability can improve the user experience even when target-video choreography and visual novelty remain low.
+
+## How To Read This Beside Human-Perfect
+
+Routeability is a permissive guardrail: it asks whether each target gets at least one plausible score window and whether a simple strong-player route can theoretically cover the stage. It is intentionally generous because its job is to prevent us from shipping impossible or frustrating challenge stages.
+
+Human-perfect potential is stricter. It also penalizes one-frame-only opportunities, weak repeated aim windows, unreadable altitude, crowded top-band timing, and difficult player-lane transitions. A stage can therefore score 10/10 routeability while still reading lower on human-perfect potential and much lower on target-video movement conformance.
+
+Candidate promotion should preserve both reads: routeability must stay high, and the stricter human-perfect score must not regress while target-video object-track fit, alien novelty, and movement quality improve.
 
 | Challenging Stage | Layout | Tracked | Scoreable | Greedy Route | Route Score | Main Blocker |
 | --- | --- | ---: | ---: | ---: | ---: | --- |

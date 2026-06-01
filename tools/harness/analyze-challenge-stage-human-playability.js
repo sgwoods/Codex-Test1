@@ -152,6 +152,12 @@ Source: \`reference-artifacts/analyses/challenge-stage-conformance/latest.json\`
 ## Summary
 The first five challenging stages remain the priority because they teach the player what Aurora's bonus stages are supposed to be. The current focus-set average is ${report.summary.focusAverageStrictScore10}/10 strict conformance and ${report.summary.focusAverageHumanPerfectPotential10}/10 human-perfect potential. The goal for the next gameplay pass is not only higher scores: it is visible learnability, reliable perfect-score routes, distinct alien identity, and movement that reads like authored Galaga-style set pieces.
 
+## Routeability Versus Human-Perfect
+
+The standalone routeability report is a generous safety net: it asks whether targets become visible, scoreable, and broadly reachable by a deterministic strong-player route. It can pass even when a stage still feels clumsy, too brief, too top-heavy, or too unlike the reference.
+
+This human-playability read is stricter. It keeps the route count, but also considers repeated aim windows, readable altitude, top-crowd pressure, lane transition fit, and target-video object-track fit. The practical rule for future candidate promotion is: do not accept a choreography rewrite that lowers human-perfect potential, even if it looks better on one target-video or path-label metric.
+
 | Stage | Strict | Human Perfect | Route | Object Track | Novelty | Main Problem |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
 ${tableRows}
