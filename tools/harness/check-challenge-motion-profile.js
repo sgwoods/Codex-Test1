@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { withHarnessPage, sleep } = require('./browser-check-util');
+const { withHarnessPage } = require('./browser-check-util');
 
 // The first 350ms sits directly on top of staggered spawn thresholds and is
 // too frame-sensitive to be a trustworthy regression gate. We sample once the
@@ -77,6 +77,35 @@ function validateReferencePathSetup(state, expected){
   }
 }
 
+function validateReferencePlaybackClock(state, elapsedSeconds){
+  const enemies = Array.isArray(state?.enemies) ? state.enemies : [];
+  const spawnBase = enemies.reduce((min, enemy) => Math.min(min, +enemy.spawnPlan || 0), Infinity);
+  const tracked = enemies.filter(enemy => enemy?.referencePath && enemy.spawn <= 0);
+  const drifts = tracked.map(enemy => {
+    const expectedTm = Math.max(0, elapsedSeconds - ((+enemy.spawnPlan || 0) - spawnBase));
+    const drift = +((+enemy.tm || 0) - expectedTm).toFixed(3);
+    return {
+      id: enemy.id,
+      pathFamily: enemy.pathFamily,
+      sourceTrackId: enemy.referencePath.sourceTrackId,
+      spawnPlan: enemy.spawnPlan,
+      tm: enemy.tm,
+      expectedTm: +expectedTm.toFixed(3),
+      drift
+    };
+  });
+  const bad = drifts.filter(entry => Math.abs(entry.drift) > 0.08);
+  if(bad.length){
+    fail('reference-backed challenge paths must advance in real elapsed seconds, not synthetic path-speed multipliers', {
+      stage: state?.stage,
+      elapsedSeconds,
+      bad,
+      drifts
+    });
+  }
+  return drifts;
+}
+
 function validateStage7ReferencePathSetup(state){
   validateReferencePathSetup(state, { stage: 7, layoutId: 'scorpion-cross-sweep' });
 }
@@ -86,7 +115,7 @@ function validateStage11ReferencePathSetup(state){
 }
 
 async function main(){
-  const result = await withHarnessPage({ stage: 3, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
+  const result = await withHarnessPage({ skipStart: true, stage: 3, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
     await page.evaluate(() => window.__galagaHarness__.setupChallengeMotionProfileTest({ stage: 3 }));
     return sampleChallengeMotion(page);
   });
@@ -114,20 +143,20 @@ async function main(){
     }
   }
 
-  const stage7 = await withHarnessPage({ stage: 7, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
+  const stage7 = await withHarnessPage({ skipStart: true, stage: 7, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
     const initial = await page.evaluate(() => window.__galagaHarness__.setupChallengeMotionProfileTest({ stage: 7 }));
-    await sleep(700);
+    await page.evaluate(() => window.__galagaHarness__.advanceFor(1, { step: 1 / 60, stopOnGameOver: false }));
     const underway = await page.evaluate(() => window.__galagaHarness__.challengeFormationState());
-    return { initial, underway };
+    return { initial, underway, clockDrifts: validateReferencePlaybackClock(underway, 1) };
   });
   validateStage7ReferencePathSetup(stage7.initial);
   validateStage7ReferencePathSetup(stage7.underway);
 
-  const stage11 = await withHarnessPage({ stage: 11, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
+  const stage11 = await withHarnessPage({ skipStart: true, stage: 11, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
     const initial = await page.evaluate(() => window.__galagaHarness__.setupChallengeMotionProfileTest({ stage: 11 }));
-    await sleep(700);
+    await page.evaluate(() => window.__galagaHarness__.advanceFor(1, { step: 1 / 60, stopOnGameOver: false }));
     const underway = await page.evaluate(() => window.__galagaHarness__.challengeFormationState());
-    return { initial, underway };
+    return { initial, underway, clockDrifts: validateReferencePlaybackClock(underway, 1) };
   });
   validateStage11ReferencePathSetup(stage11.initial);
   validateStage11ReferencePathSetup(stage11.underway);

@@ -1191,6 +1191,11 @@ window.__galagaHarness__={
  renderState(){
   return window.__platinumRenderDebug||window.__auroraRenderDebug||{carryDraws:[]};
  },
+ stageBadgeLayout(stage=S.stage){
+  return typeof stageBadgeLayout==='function'
+   ? stageBadgeLayout(stage)
+   : [];
+ },
  guardiansState(){
   return typeof summarizeGalaxyGuardiansDevPreview==='function'
    ? summarizeGalaxyGuardiansDevPreview()

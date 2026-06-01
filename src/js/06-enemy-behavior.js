@@ -149,6 +149,7 @@ function applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arc
 
 function updateChallengeEnemy(e,dt){
  if(e.spawn>0){
+  if(e.referencePath)e.tm=Math.max(0,(+e.tm||0)-dt);
   e.spawn-=dt;
   return;
  }
@@ -159,7 +160,16 @@ function updateChallengeEnemy(e,dt){
 		 const fm=familyMotion(e);
 		 const classicStage3=S.stage===3&&e.fam==='classic';
 		 const baseChallengeSpeed=challengePathSpeed(pathFamily,S.stage,classicStage3);
-		 e.tm+=dt*(baseChallengeSpeed+(e.wave||0)*.007+Math.min(.012,S.stage*.0015))*(e.speedScale||1);
+		 const referencePlaybackScale=e.referencePath
+		  ? Math.max(.25,Math.min(1.4,Number.isFinite(+e.referencePath.playbackScale)?+e.referencePath.playbackScale:1))
+		  : null;
+		 // The shared enemy update loop already advances e.tm by real dt before
+		 // challenge motion runs. Reference tracks store point times in seconds,
+		 // so their local increment is only the delta above or below real time.
+		 const pathTimeSpeed=referencePlaybackScale==null
+		  ? (baseChallengeSpeed+(e.wave||0)*.007+Math.min(.012,S.stage*.0015))*(e.speedScale||1)
+		  : referencePlaybackScale-1;
+		 e.tm+=dt*pathTimeSpeed;
 		 const u=e.tm,p=e.ph,wave=e.wave||0,side=e.side||1,slot=e.slot||0,row=e.row||0,sweep=e.sweep||1;
 		 const arcAmp=e.arcAmp||1,dropAmp=e.dropAmp||1;
 	 const laneX=PLAY_W/2+side*(48+slot*16);

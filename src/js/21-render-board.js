@@ -703,41 +703,65 @@ function drawRescuePod(){
  ctx.restore();
 }
 
+function stageBadgeLayout(stage){
+ let remaining=Math.max(0,stage|0);
+ const badges=[];
+ const denominations=[
+  {value:25,size:'huge'},
+  {value:10,size:'major'},
+  {value:5,size:'big'},
+  {value:1,size:'small'}
+ ];
+ for(const denom of denominations){
+  const count=Math.floor(remaining/denom.value);
+  remaining-=count*denom.value;
+  for(let i=0;i<count;i++)badges.push({size:denom.size,value:denom.value});
+ }
+ return badges;
+}
+
 function drawBadges(stage){
  if(stage<=0)return;
- const bigCount=Math.floor(stage/5);
- const smallCount=stage%5;
- const badges=[];
  const rightEdge=PLAY_W-DISPLAY_SHELL.stageBadgeRight;
  const minX=PLAY_W-88;
  let x=rightEdge;
  let y=PLAY_H-DISPLAY_SHELL.reserveBottom;
- const layout=[...Array(bigCount).fill('big'),...Array(smallCount).fill('small')];
- for(const size of layout){
-  const step=size==='big'?13:DISPLAY_SHELL.stageBadgeGap;
-  badges.push({x,y,size});
+ const badges=[];
+ const layout=stageBadgeLayout(stage);
+ for(const badgeDef of layout){
+  const size=badgeDef.size;
+  const step=size==='huge'?17:size==='major'?15:size==='big'?13:DISPLAY_SHELL.stageBadgeGap;
+  badges.push({x,y,size,value:badgeDef.value});
   x-=step;
   if(x<minX){
    x=rightEdge;
-   y-=12;
+   y-=size==='huge'?14:12;
   }
  }
  ctx.save();
  for(const badge of badges){
   ctx.save();
   ctx.translate(badge.x,badge.y);
-  const big=badge.size==='big';
-  ctx.fillStyle=big?'#7ab7ff':'#e95b51';
+  const huge=badge.size==='huge',major=badge.size==='major',big=badge.size==='big';
+  const w=huge?7.5:major?6.5:big?5.5:4;
+  const h=huge?11:major?10:big?9:6;
+  ctx.fillStyle=huge?'#d5f2ff':major?'#ffe174':big?'#7ab7ff':'#e95b51';
   ctx.beginPath();
   ctx.moveTo(0,0);
-  ctx.lineTo(big?-5.5:-4,big?-9:-6);
-  ctx.lineTo(big?5.5:4,big?-9:-6);
+  ctx.lineTo(-w,-h);
+  ctx.lineTo(w,-h);
   ctx.closePath();
   ctx.fill();
-  ctx.fillStyle=big?'rgba(222,240,255,.82)':'rgba(255,245,210,.78)';
-  ctx.fillRect(-.5,big?-9:-6,1,big?8:5);
-  ctx.fillStyle=big?'rgba(24,68,136,.5)':'rgba(120,36,24,.46)';
-  ctx.fillRect(big?-4:-3,big?-6:-4,big?8:6,1);
+  ctx.fillStyle=huge?'rgba(60,140,190,.44)':major?'rgba(126,88,20,.46)':big?'rgba(24,68,136,.5)':'rgba(120,36,24,.46)';
+  ctx.fillRect(-w*.72,-h*.68,w*1.44,1);
+  ctx.fillStyle=huge||big?'rgba(222,240,255,.82)':'rgba(255,245,210,.78)';
+  ctx.fillRect(-.5,-h,1,h-1);
+  if(huge||major){
+   ctx.globalAlpha=.8;
+   ctx.fillRect(-w*.42,-h*.82,1,h*.62);
+   ctx.fillRect(w*.32,-h*.82,1,h*.62);
+   ctx.globalAlpha=1;
+  }
   ctx.restore();
  }
  ctx.restore();
