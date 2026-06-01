@@ -755,6 +755,19 @@ function controlArray(values, fallback, length){
   return out;
 }
 
+function blendedArray(a, b, factor, length, digits = 2){
+  const av = controlArray(a, [], length);
+  const bv = controlArray(b, av, length);
+  return av.map((value, index) => {
+    const next = bv[index] ?? value;
+    return round((+value || 0) + (((+next || 0) - (+value || 0)) * factor), digits);
+  });
+}
+
+function blendedIntArray(a, b, factor, length){
+  return blendedArray(a, b, factor, length).map(value => Math.round(+value || 0));
+}
+
 function targetTimingCandidates(base, pathSets = []){
   const groups = targetGroupsForStage(STAGE);
   if(groups.length < 3) return [];
@@ -956,6 +969,44 @@ function targetControlCandidates(base, pathSets = []){
         })
       });
     }
+    for(const blend of [0.25, 0.5, 0.75]){
+      const blendLabel = String(Math.round(blend * 100)).padStart(2, '0');
+      const balancedOffsets = blendedArray(base.groupSpawnOffsets, offsets, blend, groupCount);
+      const balancedSpeeds = blendedArray(baseSpeeds, softSpeedScales, blend, groupCount);
+      const balancedArcAmps = blendedArray(baseArcAmps, arcAmps, blend, groupCount);
+      const balancedDropAmps = blendedArray(baseDropAmps, dropAmps, blend, groupCount);
+      const balancedLowerFieldBiases = blendedIntArray(base.groupLowerFieldBiases, lowerFieldBiases, blend, groupCount);
+      const balancedYOffsets = blendedIntArray(base.groupYOffsets, yOffsets, blend, groupCount);
+      candidates.push({
+        id: `stage${STAGE}-target-balanced-b${blendLabel}-p${pathIndex}`,
+        description: `Stage ${STAGE} balanced target controls: ${blendLabel}% blend toward target-video schedule/shape while preserving current-route readability, path set ${pathIndex}.`,
+        layoutOverride: Object.assign({}, base, {
+          groupSpawnOffsets: balancedOffsets,
+          groupSpeedScales: balancedSpeeds,
+          groupArcAmps: balancedArcAmps,
+          groupDropAmps: balancedDropAmps,
+          groupLowerFieldBiases: balancedLowerFieldBiases,
+          groupYOffsets: balancedYOffsets,
+          groupPathFamilies
+        })
+      });
+      if(referencePaths.filter(Boolean).length >= 3){
+        candidates.push({
+          id: `stage${STAGE}-target-balanced-reference-b${blendLabel}-p${pathIndex}`,
+          description: `Stage ${STAGE} balanced target reference paths: ${blendLabel}% target-video controls plus sampled target paths, path set ${pathIndex}.`,
+          layoutOverride: Object.assign({}, base, {
+            groupSpawnOffsets: balancedOffsets,
+            groupSpeedScales: balancedSpeeds,
+            groupArcAmps: balancedArcAmps,
+            groupDropAmps: balancedDropAmps,
+            groupLowerFieldBiases: balancedLowerFieldBiases,
+            groupYOffsets: balancedYOffsets,
+            groupPathFamilies,
+            groupReferencePaths: referencePaths
+          })
+        });
+      }
+    }
   }
   return candidates;
 }
@@ -969,13 +1020,13 @@ function candidateBaseLayout(){
       enemiesPerGroup: 8,
       upperBandRatio: 0.5,
       spawnOffsetX: 64,
-      waveSpacingY: 13,
-      rowSpacingY: 8,
-      waveDelay: 1.55,
-      slotDelay: 0.13,
+      waveSpacingY: 15,
+      rowSpacingY: 9,
+      waveDelay: 2.2,
+      slotDelay: 0.18,
       arcAmp: 1.12,
       dropAmp: 1.02,
-      groupSpawnOffsets: [0,4.1,7.4,10.9,14.5],
+      groupSpawnOffsets: [0,3.4,6.25,9.1,12.1],
       groupSpeedScales: [2.65,1.58,1.5,1.44,1.28],
       laneTypes: ['bee','bee','bee','bee','but','but','but','but'],
       groupLaneTypes: [
@@ -986,7 +1037,7 @@ function candidateBaseLayout(){
         ['but','bee','bee','but','but','bee','bee','but']
       ],
       groupVisualFamilies: ['classic','classic','classic','classic','classic'],
-      groupPathFamilies: ['first-challenge-peel','classic-column-drop','classic-column-drop','side-hook-return','first-challenge-peel']
+      groupPathFamilies: ['first-challenge-peel','classic-column-drop','first-challenge-peel','side-hook-return','side-hook-return']
     };
   }
   if(STAGE === 7){
@@ -1183,12 +1234,13 @@ function candidateDefinitions(){
   if(STAGE === 3 || STAGE === 7){
     const arcValues = STAGE === 3 ? [0.92, 1.12, 1.32] : [1.28, 1.58, 1.88];
     const dropValues = STAGE === 3 ? [0.78, 0.96, 1.14] : [0.9, 1.14, 1.38];
-    const spawnValues = STAGE === 3 ? [56, 72] : [62, 78];
-    const waveValues = STAGE === 3 ? [1.42, 1.68] : [1.28, 1.56];
-    const slotValues = STAGE === 3 ? [0.1, 0.15] : [0.09, 0.14];
+    const spawnValues = STAGE === 3 ? [56, 64, 72] : [62, 78];
+    const waveValues = STAGE === 3 ? [1.55, 1.85, 2.2] : [1.28, 1.56];
+    const slotValues = STAGE === 3 ? [0.13, 0.18] : [0.09, 0.14];
     const lowerBiasValues = STAGE === 3 ? [0, 20, 40, 60] : [0, 24, 48, 72];
     const pathSets = STAGE === 3
       ? [
+        ['first-challenge-peel','classic-column-drop','first-challenge-peel','side-hook-return','side-hook-return'],
         ['first-challenge-peel','classic-column-drop','classic-column-drop','side-hook-return','first-challenge-peel'],
         ['first-challenge-peel','first-challenge-peel','classic-column-drop','side-hook-return','first-challenge-peel'],
         ['classic-column-drop','classic-column-drop','first-challenge-peel','side-hook-return','classic-column-drop']

@@ -1,6 +1,6 @@
 # Challenge Stage Routeability Review
 
-Generated: 2026-06-01T14:19:38.526Z
+Generated: 2026-06-01T15:02:04.091Z
 
 This report measures whether Aurora's challenging-stage targets are visible, scoreable, and plausibly routeable by a human player using a simple deterministic firing-route probe. It complements the stricter conformance analyzer: routeability can improve the user experience even when target-video choreography and visual novelty remain low.
 
@@ -25,7 +25,7 @@ Candidate promotion should preserve both reads: routeability must stay high, and
 - Layout: first-challenge-peel
 - Visibility: 40/40 targets enter the readable playfield; 40/40 have readable altitude samples.
 - Scoreability: 40/40 targets expose at least one measured score window.
-- Greedy route: 40/40 targets, 10/10, first shot window 0.2s, last shot window 12.8s.
+- Greedy route: 40/40 targets, 10/10, first shot window 0.2s, last shot window 15.2s.
 - Weakest rows: None in this probe.
 
 

@@ -1,0 +1,1069 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "challenge-candidate-before-after",
+  "generatedAt": "2026-06-01T14:55:30.980Z",
+  "generatedBy": "tools/harness/analyze-challenge-candidate-before-after.js",
+  "commit": "5a3f3ce57",
+  "branch": "codex/macbook-challenge-stage-gameplay-spectacle",
+  "stage": 3,
+  "candidateId": "stage3-target-balanced-b75-p1",
+  "sourceSweep": "reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json",
+  "sweepSummary": {
+    "baselineCandidateId": "baseline-current",
+    "baselineExpectedScore10": 5.8,
+    "baselineTargetVideoObjectFitScore10": 3.9,
+    "baselineHumanPerfectPotentialScore10": 7.5,
+    "baselineBestMatch": {
+      "labelId": "challenge-1-arrival-group-1",
+      "entityFamily": "bee-line",
+      "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg",
+      "distance": 0.324,
+      "trajectoryScore10": 4.6,
+      "semanticScore10": 10,
+      "score10": 5.8
+    },
+    "bestCandidateId": "stage3-target-balanced-b75-p1",
+    "bestExpectedScore10": 6,
+    "bestTargetVideoObjectFitScore10": 4.6,
+    "bestHumanPerfectPotentialScore10": 7.5,
+    "bestSelectionScore10": 6.52,
+    "bestMatch": {
+      "labelId": "challenge-1-arrival-group-1",
+      "entityFamily": "bee-line",
+      "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg",
+      "distance": 0.309,
+      "trajectoryScore10": 4.9,
+      "semanticScore10": 10,
+      "score10": 6
+    },
+    "expectedLift10": 0.2,
+    "targetVideoObjectFitLift10": 0.7,
+    "humanPerfectPotentialLift10": 0,
+    "targetVideoComparable": true,
+    "noTargetVideoRegression": true,
+    "noHumanPerfectRegression": true,
+    "noExpectedRegression": true,
+    "intendedStageSupported": true,
+    "fullAnalyzerRisk": {
+      "pass": true,
+      "reason": "no-recorded-full-analyzer-block",
+      "expectedLift10": 0.2,
+      "targetVideoObjectFitLift10": 0.7,
+      "read": "No recorded full-analyzer rejection blocks this candidate."
+    },
+    "fullAnalyzerRejectionCount": 0,
+    "lateStageIdentityPass": true,
+    "identityTieSupported": false,
+    "materialTargetVideoWin": true,
+    "strongExpectedLift": false,
+    "intendedStageSupportPolicy": "runtime promotion requires no human-perfect potential regression, no expected-label regression unless the expected label remains the best match and target-video fit improves by >=0.55/10 with no more than -0.15/10 expected drift. It also requires the best trajectory match to be one of the expected stage labels, an expected-label tie within 0.05/10 with >=0.3 expected lift and >=0.15 target-video lift, or a strong expected-label score >=7 with >=0.5 expected lift, >=0.8 target-video lift, and an identity margin no worse than -0.35/10. For late challenge stages, candidates whose best match belongs to the wrong Galaga challenge number are explicitly penalized and blocked from promotion.",
+    "keeperDecision": "candidate-ready-for-full-analyzer-review",
+    "playerMeaning": "A measured stage-3 layout candidate is worth a temporary runtime review, but it must be confirmed by the full challenge-stage analyzer and persona guardrails before promotion.",
+    "processMeaning": "Future challenge tuning can now compare many runtime candidates against Galaga labels before editing game constants.",
+    "nextStep": "Apply the best candidate temporarily, rerun full challenge-stage conformance plus guardrails, and accept it only if the full analyzer confirms the expected lift."
+  },
+  "media": {
+    "contactSheet": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/challenge-stage-03-candidate-before-after.svg"
+  },
+  "baseline": {
+    "label": "baseline",
+    "frames": [
+      {
+        "t": 0.5,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/baseline/baseline-01-005ds.png",
+        "summary": {
+          "enemyCount": 40,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 229.76,
+          "minY": 43,
+          "maxY": 272.76
+        }
+      },
+      {
+        "t": 2,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/baseline/baseline-02-020ds.png",
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 54,
+          "minY": 49,
+          "maxY": 103
+        }
+      },
+      {
+        "t": 3.5,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/baseline/baseline-03-035ds.png",
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 54,
+          "minY": 49,
+          "maxY": 103
+        }
+      },
+      {
+        "t": 5,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/baseline/baseline-04-050ds.png",
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 140.88,
+          "minY": 64,
+          "maxY": 204.88
+        }
+      },
+      {
+        "t": 6.5,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/baseline/baseline-05-065ds.png",
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 227.87,
+          "minY": 41.93,
+          "maxY": 269.8
+        }
+      },
+      {
+        "t": 8,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/baseline/baseline-06-080ds.png",
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 204.4,
+          "minY": 79,
+          "maxY": 283.4
+        }
+      },
+      {
+        "t": 9.5,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/baseline/baseline-07-095ds.png",
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 270.81,
+          "minY": 88,
+          "maxY": 358.81
+        }
+      },
+      {
+        "t": 11,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/baseline/baseline-08-110ds.png",
+        "summary": {
+          "enemyCount": 24,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 229.43,
+          "minY": 94,
+          "maxY": 323.43
+        }
+      },
+      {
+        "t": 12.5,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/baseline/baseline-09-125ds.png",
+        "summary": {
+          "enemyCount": 16,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 108.99,
+          "minY": 87.73,
+          "maxY": 196.72
+        }
+      },
+      {
+        "t": 14,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/baseline/baseline-10-140ds.png",
+        "summary": {
+          "enemyCount": 10,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "side-hook-return"
+          ],
+          "xRange": 209.79,
+          "yRange": 118.6,
+          "minY": 273.46,
+          "maxY": 392.06
+        }
+      },
+      {
+        "t": 15.5,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/baseline/baseline-11-155ds.png",
+        "summary": {
+          "enemyCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
+        }
+      }
+    ],
+    "samples": [
+      {
+        "t": 0.5,
+        "summary": {
+          "enemyCount": 40,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 229.76,
+          "minY": 43,
+          "maxY": 272.76
+        }
+      },
+      {
+        "t": 2,
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 54,
+          "minY": 49,
+          "maxY": 103
+        }
+      },
+      {
+        "t": 3.5,
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 54,
+          "minY": 49,
+          "maxY": 103
+        }
+      },
+      {
+        "t": 5,
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 140.88,
+          "minY": 64,
+          "maxY": 204.88
+        }
+      },
+      {
+        "t": 6.5,
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 227.87,
+          "minY": 41.93,
+          "maxY": 269.8
+        }
+      },
+      {
+        "t": 8,
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 204.4,
+          "minY": 79,
+          "maxY": 283.4
+        }
+      },
+      {
+        "t": 9.5,
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 270.81,
+          "minY": 88,
+          "maxY": 358.81
+        }
+      },
+      {
+        "t": 11,
+        "summary": {
+          "enemyCount": 24,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 229.43,
+          "minY": 94,
+          "maxY": 323.43
+        }
+      },
+      {
+        "t": 12.5,
+        "summary": {
+          "enemyCount": 16,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 108.99,
+          "minY": 87.73,
+          "maxY": 196.72
+        }
+      },
+      {
+        "t": 14,
+        "summary": {
+          "enemyCount": 10,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "side-hook-return"
+          ],
+          "xRange": 209.79,
+          "yRange": 118.6,
+          "minY": 273.46,
+          "maxY": 392.06
+        }
+      },
+      {
+        "t": 15.5,
+        "summary": {
+          "enemyCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
+        }
+      }
+    ],
+    "aggregate": {
+      "sampleCount": 11,
+      "averageEnemyCount": 25.64,
+      "averageXRange": 352.89,
+      "averageYRange": 148.98,
+      "pathFamilies": [
+        "classic-column-drop",
+        "first-challenge-peel",
+        "side-hook-return"
+      ],
+      "typeKeys": [
+        "bee",
+        "but"
+      ]
+    }
+  },
+  "candidate": {
+    "label": "candidate",
+    "frames": [
+      {
+        "t": 0.5,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/candidate/candidate-01-005ds.png",
+        "summary": {
+          "enemyCount": 40,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 233.52,
+          "minY": 43,
+          "maxY": 276.52
+        }
+      },
+      {
+        "t": 2,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/candidate/candidate-02-020ds.png",
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 54,
+          "minY": 49,
+          "maxY": 103
+        }
+      },
+      {
+        "t": 3.5,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/candidate/candidate-03-035ds.png",
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 54,
+          "minY": 49,
+          "maxY": 103
+        }
+      },
+      {
+        "t": 5,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/candidate/candidate-04-050ds.png",
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 70.41,
+          "minY": 64,
+          "maxY": 134.41
+        }
+      },
+      {
+        "t": 6.5,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/candidate/candidate-05-065ds.png",
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 184.26,
+          "minY": 64,
+          "maxY": 248.26
+        }
+      },
+      {
+        "t": 8,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/candidate/candidate-06-080ds.png",
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 222.26,
+          "minY": 52.63,
+          "maxY": 274.89
+        }
+      },
+      {
+        "t": 9.5,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/candidate/candidate-07-095ds.png",
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 227.97,
+          "minY": 79,
+          "maxY": 306.97
+        }
+      },
+      {
+        "t": 11,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/candidate/candidate-08-110ds.png",
+        "summary": {
+          "enemyCount": 28,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 298.39,
+          "minY": 88,
+          "maxY": 386.39
+        }
+      },
+      {
+        "t": 12.5,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/candidate/candidate-09-125ds.png",
+        "summary": {
+          "enemyCount": 16,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 229.14,
+          "minY": 94,
+          "maxY": 323.14
+        }
+      },
+      {
+        "t": 14,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/candidate/candidate-10-140ds.png",
+        "summary": {
+          "enemyCount": 16,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 88.6,
+          "minY": 94,
+          "maxY": 182.6
+        }
+      },
+      {
+        "t": 15.5,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T14-55-26-5a3f3ce57/frames/candidate/candidate-11-155ds.png",
+        "summary": {
+          "enemyCount": 16,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 149.81,
+          "yRange": 267.18,
+          "minY": 95.98,
+          "maxY": 363.16
+        }
+      }
+    ],
+    "samples": [
+      {
+        "t": 0.5,
+        "summary": {
+          "enemyCount": 40,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 233.52,
+          "minY": 43,
+          "maxY": 276.52
+        }
+      },
+      {
+        "t": 2,
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 54,
+          "minY": 49,
+          "maxY": 103
+        }
+      },
+      {
+        "t": 3.5,
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 54,
+          "minY": 49,
+          "maxY": 103
+        }
+      },
+      {
+        "t": 5,
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 70.41,
+          "minY": 64,
+          "maxY": 134.41
+        }
+      },
+      {
+        "t": 6.5,
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 184.26,
+          "minY": 64,
+          "maxY": 248.26
+        }
+      },
+      {
+        "t": 8,
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 222.26,
+          "minY": 52.63,
+          "maxY": 274.89
+        }
+      },
+      {
+        "t": 9.5,
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 227.97,
+          "minY": 79,
+          "maxY": 306.97
+        }
+      },
+      {
+        "t": 11,
+        "summary": {
+          "enemyCount": 28,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "classic-column-drop",
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 298.39,
+          "minY": 88,
+          "maxY": 386.39
+        }
+      },
+      {
+        "t": 12.5,
+        "summary": {
+          "enemyCount": 16,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 229.14,
+          "minY": 94,
+          "maxY": 323.14
+        }
+      },
+      {
+        "t": 14,
+        "summary": {
+          "enemyCount": 16,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 408,
+          "yRange": 88.6,
+          "minY": 94,
+          "maxY": 182.6
+        }
+      },
+      {
+        "t": 15.5,
+        "summary": {
+          "enemyCount": 16,
+          "typeKeys": [
+            "bee",
+            "but"
+          ],
+          "families": [
+            "classic"
+          ],
+          "pathFamilies": [
+            "first-challenge-peel",
+            "side-hook-return"
+          ],
+          "xRange": 149.81,
+          "yRange": 267.18,
+          "minY": 95.98,
+          "maxY": 363.16
+        }
+      }
+    ],
+    "aggregate": {
+      "sampleCount": 11,
+      "averageEnemyCount": 28,
+      "averageXRange": 384.53,
+      "averageYRange": 175.43,
+      "pathFamilies": [
+        "classic-column-drop",
+        "first-challenge-peel",
+        "side-hook-return"
+      ],
+      "typeKeys": [
+        "bee",
+        "but"
+      ]
+    }
+  },
+  "read": "Candidate stage3-target-balanced-b75-p1 should be visually compared against baseline, then accepted only if the full analyzers preserve safety and human-perfect playability."
+}

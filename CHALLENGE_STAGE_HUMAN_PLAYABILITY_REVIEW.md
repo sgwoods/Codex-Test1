@@ -1,6 +1,6 @@
 # Challenge Stage Human Playability Review
 
-Generated: 2026-06-01T14:19:31.338Z
+Generated: 2026-06-01T15:02:27.964Z
 
 Source: `reference-artifacts/analyses/challenge-stage-conformance/latest.json`
 
@@ -15,7 +15,7 @@ This human-playability read is stricter. It keeps the route count, but also cons
 
 | Stage | Strict | Human Perfect | Route | Object Track | Novelty | Main Problem |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| Challenging Stage 2-3 | 4.4/10 | 7.5/10 | 38/40 | 2.9/10 | 3.9/10 | perfect route incomplete (38/40); movement track fit too low (2.9/10); alien novelty too weak (3.9/10); visual conformance still early (4.5/10) |
+| Challenging Stage 2-3 | 4.4/10 | 7.5/10 | 38/40 | 3.1/10 | 3.9/10 | perfect route incomplete (38/40); movement track fit too low (3.1/10); alien novelty too weak (3.9/10); visual conformance still early (4.4/10) |
 | Challenging Stage 6-7 | 4.4/10 | 7.5/10 | 40/40 | 3.7/10 | 3.9/10 | movement track fit too low (3.7/10); alien novelty too weak (3.9/10); visual conformance still early (4.2/10) |
 | Challenging Stage 10-11 | 4.4/10 | 7.5/10 | 40/40 | 3.6/10 | 3.9/10 | movement track fit too low (3.6/10); alien novelty too weak (3.9/10); visual conformance still early (4.6/10) |
 | Challenging Stage 14-15 | 4.3/10 | 7.7/10 | 38/40 | 3.7/10 | 3.9/10 | perfect route incomplete (38/40); movement track fit too low (3.7/10); alien novelty too weak (3.9/10); visual conformance still early (4.6/10) |
@@ -24,8 +24,8 @@ This human-playability read is stricter. It keeps the route count, but also cons
 
 ## Challenging Stage 2-3
 - Target: Challenging Stage 2-3 should be a readable Galaga-style bonus set piece: no fire, no ship loss, upper-band mirrored entries, bee/butterfly line waves, visible arrival/peel-off.
-- Current: first-challenge-peel / first-challenge-peel; lanes bee, bee, bee, bee, but, but, but, but; first-wave types bee, bee, bee, bee, but, but, but, but; visual families classic; strict movement 4.2/10, graphics 4.5/10, alien novelty 3.9/10, shot opportunity 6.8/10, target-contract fit 6.2/10.
-- Human-playability problem: perfect route incomplete (38/40); movement track fit too low (2.9/10); alien novelty too weak (3.9/10); visual conformance still early (4.5/10)
+- Current: first-challenge-peel / first-challenge-peel; lanes bee, bee, bee, bee, but, but, but, but; first-wave types bee, bee, bee, bee, but, but, but, but; visual families classic; strict movement 4.3/10, graphics 4.4/10, alien novelty 3.9/10, shot opportunity 6.9/10, target-contract fit 6.2/10.
+- Human-playability problem: perfect route incomplete (38/40); movement track fit too low (3.1/10); alien novelty too weak (3.9/10); visual conformance still early (4.4/10)
 - Recommendation: Keep the safe bee/butterfly lesson, but rebuild timing and vertical descent so all 40 targets are visibly routeable, with less top-band crowding and clearer first/late wave separation.
 - Route read: 38/40 route kills, 95% any exposure, 80% repeated exposure, 1% top-crowd pressure.
 - Priority next action: Protect the Challenging Stage 2-3 bee/butterfly line contract, then tune path length, turn count, and rack-slot precision against the 2-3 arrival and late-wave labels.
