@@ -96,6 +96,7 @@ async function main(){
     const afterP2LifeLoss = window.__galagaHarness__.playerTwoState().run;
     window.__galagaHarness__.advanceFor(1.55);
     const p1Return = window.__galagaHarness__.state();
+    const p1ReturnHud = window.__galagaHarness__.playerTwoState();
     window.__galagaHarness__.triggerRemoteScoreGameOver({ score: 12340, stage: 2 });
     const gameOver = window.__galagaHarness__.gameOverView();
     const board = JSON.parse(localStorage.getItem('auroraGalacticaTop10') || '[]');
@@ -121,6 +122,7 @@ async function main(){
       p2LifeLoss,
       afterP2LifeLoss,
       p1Return,
+      p1ReturnHud,
       board,
       boardScores: board.map(row => row.score)
     };
@@ -144,8 +146,8 @@ async function main(){
   if((signed.p2.score | 0) !== 0 || signed.p2.activeTurn !== 'p1' || signed.p2.turnModel !== 'galaga-per-life-alternation'){
     fail('Player Two score must stay separate at 0 during the human 1UP turn, with per-life alternation armed', signed);
   }
-  if(!/PILOT/.test(signed.hudRight || '') || !/SGW/.test(signed.hudRight || '')){
-    fail('human 1UP turn should keep the current onboard pilot visible in the HUD while 2UP is queued', signed);
+  if(!/2UP\s+000000/.test(signed.hudRight || '')){
+    fail('human 1UP turn should keep the 2UP lane score visible in the arcade HUD', signed);
   }
   if(signed.launchPilotCard?.mode !== 'human-with-rival' || !/1UP PILOT/.test(signed.launchPilotCard?.dock || '') || !/SGW/.test(signed.launchPilotCard?.dock || '')){
     fail('pilot card should show the human as onboard while a 2UP rival is queued', signed);
@@ -182,6 +184,9 @@ async function main(){
   }
   if(+signed.p1Return.stageClock < 2 || !Number.isFinite(+signed.p1Return.playerTwo?.p2?.boardStageClock) || +signed.p1Return.playerTwo.p2.boardStageClock < .1 || (signed.p1Return.playerTwo.p2.boardEnemies | 0) <= 0){
     fail('returning to 1UP should restore the preserved human board and preserve the 2UP board for its next life', signed);
+  }
+  if(!/1UP\s+001000/.test(signed.p1ReturnHud?.hudLeft || '') || !/2UP\s+000250/.test(signed.p1ReturnHud?.hudRight || '')){
+    fail('returning to 1UP should show frozen 1UP and 2UP lane scores side by side in the arcade HUD', signed);
   }
   if(!/playerTwoResultFinal/.test(signed.gameOver?.html || '') || !/ARCADE PER-LIFE ALTERNATION/.test(signed.gameOver?.html || '') || !/1UP SCORE IS THE ONLY SCOREBOARD ENTRY/.test(signed.gameOver?.html || '')){
     fail('final 2UP results should show arcade per-life comparison and explicit human-only score meaning', signed);
