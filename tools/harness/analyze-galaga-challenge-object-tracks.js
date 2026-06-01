@@ -506,6 +506,75 @@ function clusterByStart(tracks, expectedGroups = 5){
     .map((group, index) => groupVector(group, index + 1));
 }
 
+function pathReadForPoints(points){
+  let pathLength = 0;
+  let turnCount = 0;
+  let reversalCount = 0;
+  let previousHeading = null;
+  let previousDxSign = 0;
+  for(let i = 1; i < points.length; i += 1){
+    const a = points[i - 1];
+    const b = points[i];
+    const dx = b.x - a.x;
+    const dy = b.y - a.y;
+    pathLength += Math.hypot(dx, dy);
+    const heading = Math.atan2(dy, dx);
+    if(previousHeading !== null){
+      const delta = Math.abs(Math.atan2(Math.sin(heading - previousHeading), Math.cos(heading - previousHeading)));
+      if(delta > .65) turnCount += 1;
+    }
+    const dxSign = Math.sign(dx);
+    if(dxSign && previousDxSign && dxSign !== previousDxSign) reversalCount += 1;
+    if(dxSign) previousDxSign = dxSign;
+    previousHeading = heading;
+  }
+  return { pathLength, turnCount, reversalCount };
+}
+
+function groupEnvelopeVector(points, tracks){
+  const ordered = points.slice().sort((a, b) => a.t - b.t);
+  const buckets = new Map();
+  for(const point of ordered){
+    const bucket = Math.round(point.t * 4) / 4;
+    if(!buckets.has(bucket)) buckets.set(bucket, []);
+    buckets.get(bucket).push(point);
+  }
+  const centers = Array.from(buckets.entries())
+    .sort((a, b) => a[0] - b[0])
+    .map(([t, bucketPoints]) => ({
+      t,
+      x: average(bucketPoints.map(point => point.x)),
+      y: average(bucketPoints.map(point => point.y)),
+      lowerFieldShare: bucketPoints.filter(point => point.y > .52).length / Math.max(1, bucketPoints.length)
+    }))
+    .filter(point => Number.isFinite(+point.x) && Number.isFinite(+point.y));
+  const xs = ordered.map(point => point.x);
+  const ys = ordered.map(point => point.y);
+  const centerRead = pathReadForPoints(centers);
+  const trackPathMean = average(tracks.map(track => track.pathLength));
+  const trackTurnMean = average(tracks.map(track => track.turnCount));
+  const trackReversalMean = average(tracks.map(track => track.reversalCount));
+  const first = centers[0] || ordered[0] || {};
+  const last = centers[centers.length - 1] || ordered[ordered.length - 1] || {};
+  return {
+    visibleStartS: round(Math.min(...tracks.map(track => track.visibleStartS)), 2),
+    visibleEndS: round(Math.max(...tracks.map(track => track.visibleEndS)), 2),
+    entrySide: sideForX(first.x),
+    exitSide: sideForX(last.x),
+    xRange: round(Math.max(...xs) - Math.min(...xs), 4),
+    yRange: round(Math.max(...ys) - Math.min(...ys), 4),
+    pathLength: round(centerRead.pathLength, 4),
+    turnCount: centerRead.turnCount,
+    reversalCount: centerRead.reversalCount,
+    lowerFieldShare: round(average(centers.map(point => point.lowerFieldShare)), 4),
+    centerSampleCount: centers.length,
+    pathLengthMode: 'group-envelope-centerline',
+    individualTrackPathLengthMean: round(trackPathMean, 4),
+    individualTrackTurnCountMean: round(trackTurnMean, 2),
+    individualTrackReversalCountMean: round(trackReversalMean, 2)
+  };
+}
+
 function groupVector(tracks, groupIndex){
   const points = tracks.flatMap(track => track.sampledPoints.map(point => ({
     trackId: track.id,
@@ -513,29 +582,15 @@ function groupVector(tracks, groupIndex){
     x: point.x,
     y: point.y
   }))).sort((a, b) => a.t - b.t);
-  const xs = points.map(point => point.x);
-  const ys = points.map(point => point.y);
-  const first = points[0] || {};
-  const last = points[points.length - 1] || {};
+  const objectTrackTarget = groupEnvelopeVector(points, tracks);
   return {
     groupIndex,
     trackCount: tracks.length,
     sampleCount: points.length,
-    objectTrackTarget: {
-      visibleStartS: round(Math.min(...tracks.map(track => track.visibleStartS)), 2),
-      visibleEndS: round(Math.max(...tracks.map(track => track.visibleEndS)), 2),
-      entrySide: sideForX(first.x),
-      exitSide: sideForX(last.x),
-      xRange: round(Math.max(...xs) - Math.min(...xs), 4),
-      yRange: round(Math.max(...ys) - Math.min(...ys), 4),
-      pathLength: round(average(tracks.map(track => track.pathLength)), 4),
-      turnCount: round(average(tracks.map(track => track.turnCount)), 2),
-      reversalCount: round(average(tracks.map(track => track.reversalCount)), 2),
-      lowerFieldShare: round(average(tracks.map(track => track.lowerFieldShare)), 4)
-    },
+    objectTrackTarget,
     confidence: round(clamp(.34 + Math.min(.34, tracks.length * .035) + Math.min(.18, average(tracks.map(track => track.durationSeconds)) * .04) + Math.min(.14, average(tracks.map(track => track.pathLength)) * .08)), 3),
     trackIds: tracks.slice(0, 16).map(track => track.id),
-    read: `Target group ${groupIndex} tracks ${tracks.length} object trace(s), visible ${round(Math.min(...tracks.map(track => track.visibleStartS)), 2)}-${round(Math.max(...tracks.map(track => track.visibleEndS)), 2)}s, path ${round(average(tracks.map(track => track.pathLength)), 2)}, x/y range ${round(Math.max(...xs) - Math.min(...xs), 2)}/${round(Math.max(...ys) - Math.min(...ys), 2)}.`
+    read: `Target group ${groupIndex} tracks ${tracks.length} object trace(s), visible ${objectTrackTarget.visibleStartS}-${objectTrackTarget.visibleEndS}s, group-envelope path ${round(objectTrackTarget.pathLength, 2)}, x/y range ${round(objectTrackTarget.xRange, 2)}/${round(objectTrackTarget.yRange, 2)}.`
   };
 }
 

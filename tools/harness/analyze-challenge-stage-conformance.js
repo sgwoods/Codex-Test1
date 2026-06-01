@@ -602,6 +602,9 @@ function compareTrackVectorToTarget(vector, targetGroup, source){
 function objectTrackTargetFit(runtimeGroupVector, targetGroup, runtime, groupIndex){
   const target = targetGroup?.objectTrackTarget || null;
   if(!target) return null;
+  const envelopeFit = runtimeGroupVector
+    ? compareTrackVectorToTarget(runtimeGroupVector, targetGroup, 'runtime-wave-envelope')
+    : null;
   const trackVectors = Array.isArray(runtime?.spriteMotion?.objectTrackedPixelSilhouette?.trackVectors)
     ? runtime.spriteMotion.objectTrackedPixelSilhouette.trackVectors
     : [];
@@ -611,8 +614,11 @@ function objectTrackTargetFit(runtimeGroupVector, targetGroup, runtime, groupInd
     .map(track => compareTrackVectorToTarget(track, targetGroup, 'object-silhouette-track'))
     .filter(Boolean)
     .sort((a, b) => b.coverage - a.coverage || b.score10 - a.score10);
-  if(candidates[0]) return candidates[0];
-  return compareTrackVectorToTarget(runtimeGroupVector, targetGroup, 'group-envelope-fallback');
+  if(envelopeFit){
+    if(candidates[0]) envelopeFit.bestObjectTrackCandidate = candidates[0];
+    return envelopeFit;
+  }
+  return candidates[0] || null;
 }
 
 function missingObjectTrackFit(targetGroup, index){

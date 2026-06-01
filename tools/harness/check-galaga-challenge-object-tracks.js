@@ -47,13 +47,19 @@ for(const challengeNumber of REQUIRED_CHALLENGES){
   }
   for(const group of row.targetGroups){
     const target = group.objectTrackTarget || {};
-    for(const field of ['visibleStartS', 'visibleEndS', 'xRange', 'yRange', 'pathLength', 'turnCount', 'lowerFieldShare']){
+    for(const field of ['visibleStartS', 'visibleEndS', 'xRange', 'yRange', 'pathLength', 'turnCount', 'lowerFieldShare', 'centerSampleCount', 'individualTrackPathLengthMean']){
       if(!Number.isFinite(+target[field])){
         fail(`Challenge ${challengeNumber} group ${group.groupIndex} target field ${field} is invalid.`, group);
       }
     }
+    if(target.pathLengthMode !== 'group-envelope-centerline'){
+      fail(`Challenge ${challengeNumber} group ${group.groupIndex} target path length is not a group-envelope centerline measurement.`, group);
+    }
     if(+target.visibleEndS <= +target.visibleStartS){
       fail(`Challenge ${challengeNumber} group ${group.groupIndex} target timing is invalid.`, group);
+    }
+    if(+target.centerSampleCount < 3){
+      fail(`Challenge ${challengeNumber} group ${group.groupIndex} has too few centerline samples for object-track comparison.`, group);
     }
     if(!Number.isFinite(+group.confidence) || +group.confidence < .3){
       fail(`Challenge ${challengeNumber} group ${group.groupIndex} confidence is too low.`, group);

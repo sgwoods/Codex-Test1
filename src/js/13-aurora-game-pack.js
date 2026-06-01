@@ -687,6 +687,14 @@ const AURORA_STAGE_CADENCE=Object.freeze({
  challengeEvery:4
 });
 
+const AURORA_CHALLENGE_STAGE3_REFERENCE_PATHS=Object.freeze([
+ Object.freeze({sourceTrackId:'target-track-33',sourceSampleCount:3,durationS:.75,laneSpreadX:12.94,rowSpreadY:6.49,pathScaleX:5.6,pathScaleY:4.079,sourceCenterX:.3523,sourceCenterY:.6592,exitVy:216,points:Object.freeze([{t:0,x:.3197,y:.6462},{t:.13,x:.3205,y:.6454},{t:.63,x:.4166,y:.6859}])}),
+ Object.freeze({sourceTrackId:'target-track-84',sourceSampleCount:36,durationS:5.62,laneSpreadX:9.57,rowSpreadY:9.62,pathScaleX:1.146,pathScaleY:1.131,sourceCenterX:.4803,sourceCenterY:.6452,exitVy:199.1,points:Object.freeze([{t:0,x:.5675,y:.2171},{t:.5,x:.5579,y:.3426},{t:1.12,x:.4859,y:.5882},{t:2,x:.4238,y:.7138},{t:2.5,x:.423,y:.7139},{t:2.87,x:.4239,y:.7141},{t:3.37,x:.3866,y:.8051},{t:3.87,x:.4443,y:.7744},{t:4.5,x:.5446,y:.8241},{t:5.62,x:.5452,y:.759}])}),
+ Object.freeze({sourceTrackId:'target-track-109',sourceSampleCount:22,durationS:2.75,laneSpreadX:11.85,rowSpreadY:8.74,pathScaleX:5.6,pathScaleY:2.855,sourceCenterX:.5207,sourceCenterY:.4931,exitVy:192.6,points:Object.freeze([{t:0,x:.5211,y:.3757},{t:.25,x:.5282,y:.3596},{t:.62,x:.5212,y:.4221},{t:1,x:.5263,y:.4969},{t:1.25,x:.5298,y:.5451},{t:1.62,x:.5292,y:.5431},{t:1.87,x:.5302,y:.5431},{t:2.12,x:.5333,y:.5482},{t:2.5,x:.4937,y:.5487},{t:2.75,x:.4937,y:.5487}])}),
+ Object.freeze({sourceTrackId:'target-track-133',sourceSampleCount:25,durationS:3.87,laneSpreadX:11.82,rowSpreadY:8.73,pathScaleX:3.802,pathScaleY:2.203,sourceCenterX:.4852,sourceCenterY:.6251,exitVy:204.8,points:Object.freeze([{t:0,x:.539,y:.776},{t:.37,x:.5624,y:.7869},{t:1,x:.4833,y:.7738},{t:1.87,x:.4617,y:.5737},{t:2.25,x:.4617,y:.5457},{t:2.5,x:.46,y:.5424},{t:2.87,x:.4873,y:.563},{t:3.25,x:.4873,y:.563},{t:3.5,x:.46,y:.5636},{t:3.87,x:.4488,y:.563}])}),
+ Object.freeze({sourceTrackId:'target-track-165',sourceSampleCount:3,durationS:.75,laneSpreadX:8.17,rowSpreadY:7.5,pathScaleX:4.678,pathScaleY:2.876,sourceCenterX:.5634,sourceCenterY:.4246,exitVy:142,points:Object.freeze([{t:0,x:.5683,y:.4778},{t:.13,x:.5678,y:.4344},{t:.63,x:.554,y:.3617}])})
+]);
+
 const AURORA_CHALLENGE_STAGE7_REFERENCE_PATHS=Object.freeze([
  Object.freeze({sourceTrackId:'target-track-10',sourceSampleCount:14,durationS:1.88,laneSpreadX:13.5,rowSpreadY:6.56,pathScaleX:3.227,pathScaleY:5.6,sourceCenterX:.5702,sourceCenterY:.5311,exitVy:214.6,points:Object.freeze([{t:0,x:.4436,y:.5299},{t:.13,x:.4347,y:.5325},{t:.63,x:.5163,y:.5305},{t:.75,x:.5537,y:.5305},{t:1,x:.6251,y:.5317},{t:1.13,x:.6258,y:.5312},{t:1.38,x:.6258,y:.5312},{t:1.5,x:.6258,y:.5312},{t:1.75,x:.6258,y:.5312},{t:1.88,x:.6258,y:.5312}])}),
  Object.freeze({sourceTrackId:'target-track-66',sourceSampleCount:21,durationS:2.63,laneSpreadX:9.36,rowSpreadY:9.56,pathScaleX:2.158,pathScaleY:5.349,sourceCenterX:.4753,sourceCenterY:.5734,exitVy:165.1,points:Object.freeze([{t:0,x:.4315,y:.5016},{t:.38,x:.5176,y:.4881},{t:.63,x:.5173,y:.4881},{t:1,x:.4756,y:.5754},{t:1.25,x:.4715,y:.6146},{t:1.5,x:.4683,y:.6134},{t:1.75,x:.4681,y:.6134},{t:2.13,x:.4681,y:.6131},{t:2.38,x:.4673,y:.6133},{t:2.63,x:.4675,y:.6132}])}),
@@ -727,7 +735,11 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   groupSpawnOffsets:Object.freeze([0,3.4,6.25,9.1,12.1]),
   arcAmp:1.12,
   dropAmp:1.02,
-  groupSpeedScales:Object.freeze([1,1,1,1,1]),
+  groupArcAmps:Object.freeze([1.97,1.49,1.72,1.81,1.02]),
+  groupDropAmps:Object.freeze([1.16,1.67,1.49,1.53,1.12]),
+  groupSpeedScales:Object.freeze([2.12,1.13,1.67,1.49,2.65]),
+  groupLowerFieldBiases:Object.freeze([188,140,111,165,0]),
+  groupYOffsets:Object.freeze([86,50,36,62,0]),
   laneTypes:Object.freeze(['bee','bee','bee','bee','but','but','but','but']),
   groupLaneTypes:Object.freeze([
    Object.freeze(['bee','bee','bee','bee','but','but','but','but']),
@@ -737,7 +749,8 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
    Object.freeze(['but','bee','bee','but','but','bee','bee','but'])
   ]),
   groupVisualFamilies:Object.freeze(['classic','classic','classic','classic','classic']),
-  groupPathFamilies:Object.freeze(['first-challenge-peel','classic-column-drop','classic-column-drop','side-hook-return','first-challenge-peel'])
+  groupPathFamilies:Object.freeze(['first-challenge-peel','classic-column-drop','first-challenge-peel','side-hook-return','side-hook-return']),
+  groupReferencePaths:AURORA_CHALLENGE_STAGE3_REFERENCE_PATHS
  }),
  Object.freeze({
   fromStage:7,
