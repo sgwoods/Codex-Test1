@@ -3864,10 +3864,9 @@ function loadGalagaTargetArtifactCoverage(){
 }
 
 function challengeStageDisplayLabel(row = {}){
-  const number = Number.isFinite(+row.challengeNumber) ? +row.challengeNumber : '';
   const marker = Number.isFinite(+row.stage) ? +row.stage : '';
-  const between = marker ? `Levels ${marker}-${marker + 1}` : 'level bracket pending';
-  return `Challenging Stage ${number || ''} (${between})`.trim();
+  const between = marker ? `${marker}-${marker + 1}` : 'bracket pending';
+  return `Challenging Stage ${between}`.trim();
 }
 
 function challengeStageInternalLabel(row = {}){
@@ -6430,7 +6429,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <p class="docMeta"><strong>Set-piece contracts:</strong> ${esc(challengeSetpieceSummary.contractCount || 0)} challenge contract(s), ${esc(challengeSetpieceSummary.referenceBackedGroupCount || 0)}/${esc(challengeSetpieceSummary.expectedGroupCount || 0)} reference-backed groups, current average ${esc(challengeSetpieceSummary.averageCurrentScore10 ?? 'n/a')}/10, target-contract fit ${esc(challengeSetpieceSummary.averageTargetContractFitScore10 ?? 'n/a')}/10. Source artifact: <code>reference-artifacts/analyses/challenge-setpiece-contracts/latest.json</code>.</p>
             <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/challenge-stage-conformance/latest.json</code>. <strong>Report:</strong> <code>CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md</code>.</p>
             ${gameplaySegmentEvidence}
-            <p class="docMeta"><strong>Naming rule:</strong> normal Levels and Challenging Stages are separate. The challenge rows below use labels like <strong>Challenging Stage 1 (Levels 3-4)</strong> instead of calling that set piece Level 4.</p>
+            <p class="docMeta"><strong>Naming rule:</strong> normal Levels and Challenging Stages are separate. The challenge rows below use labels like <strong>Challenging Stage 3-4</strong> instead of calling that set piece Level 4.</p>
             <p class="docMeta"><strong>Evidence-image rule:</strong> contact sheets are supporting artifacts for visual inspection, not the main human-readable conformance explanation. Use each row's target/current/conformance text for the judgment; open the evidence panel only when you need to inspect the underlying frames at native scale.</p>
             ${stage7ReferencePathEvidence}
             <div class="inlineDocShelf">

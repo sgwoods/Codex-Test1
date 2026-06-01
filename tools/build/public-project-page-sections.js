@@ -269,10 +269,9 @@ function loadGalagaTargetArtifactCoverage(){
 }
 
 function challengeStageDisplayLabel(row = {}){
-  const number = Number.isFinite(+row.challengeNumber) ? +row.challengeNumber : '';
   const marker = Number.isFinite(+row.stage) ? +row.stage : '';
-  const between = marker ? `Levels ${marker}-${marker + 1}` : 'level bracket pending';
-  return `Challenging Stage ${number || ''} (${between})`.trim();
+  const between = marker ? `${marker}-${marker + 1}` : 'bracket pending';
+  return `Challenging Stage ${between}`.trim();
 }
 
 function challengeStagePublicCards(artifact){

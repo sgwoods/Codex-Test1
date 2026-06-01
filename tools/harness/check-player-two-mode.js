@@ -1,10 +1,55 @@
 #!/usr/bin/env node
 const { withHarnessPage } = require('./browser-check-util');
 
+const PLAYER_TWO_PERSONAS = ['novice', 'advanced', 'expert', 'professional'];
+
 function fail(message, payload){
   console.error(message);
   if(payload) console.error(JSON.stringify(payload, null, 2));
   process.exit(1);
+}
+
+async function checkPersonaLaneIsolation(persona, index){
+  const p1Points = 100 + (index * 20);
+  const p2Points = 25 + (index * 10);
+  return withHarnessPage({ skipStart: true, seed: 77220 + index }, async ({ page }) => page.evaluate(({ persona, p1Points, p2Points, seed }) => {
+    window.__galagaHarness__.showFrontDoor();
+    window.__galagaHarness__.setupPlayerTwoModeTest({
+      signedIn: true,
+      initials: 'SGW',
+      email: 'pilot@example.com'
+    });
+    window.__galagaHarness__.setPlayerTwoMode({ enabled: true, persona });
+    window.__galagaHarness__.start({
+      autoVideo: false,
+      controlledClock: true,
+      seed,
+      playerTwo: true,
+      playerTwoPersona: persona
+    });
+    window.__galagaHarness__.advanceFor(0);
+    const launch = window.__galagaHarness__.playerTwoState();
+    window.__galagaHarness__.awardScore({ points: p1Points });
+    window.__galagaHarness__.advanceFor(0.05);
+    const afterP1Award = window.__galagaHarness__.playerTwoState();
+    window.__galagaHarness__.triggerShipLoss({ reserveLives: 2, cause: `harness_${persona}_p1_loss` });
+    window.__galagaHarness__.advanceFor(1.55);
+    const p2Turn = window.__galagaHarness__.state();
+    window.__galagaHarness__.awardScore({ points: p2Points });
+    window.__galagaHarness__.advanceFor(0.05);
+    const afterP2Award = window.__galagaHarness__.playerTwoState();
+    const scoreEvents = window.__galagaHarness__.sessionEvents(800)
+      .filter(event => event.type === 'score_awarded')
+      .map(event => ({
+        owner: event.owner,
+        points: event.points,
+        before: event.before,
+        after: event.after,
+        activeTurn: event.activeTurn,
+        playerTwoMode: !!event.playerTwoMode
+      }));
+    return { persona, p1Points, p2Points, launch, afterP1Award, p2Turn, afterP2Award, scoreEvents };
+  }, { persona, p1Points, p2Points, seed: 77220 + index }));
 }
 
 async function main(){
@@ -140,7 +185,7 @@ async function main(){
   if(!/WATCH/.test(signed.afterWatchPicker?.html || '') || !/EXPERT/.test(signed.afterWatchPicker?.html || '') || !/GAME FLOW/.test(signed.afterWatchPicker?.html || '') || signed.afterWatchPicker?.state?.personaKey !== 'expert' || signed.afterWatchPicker?.watchScope !== 'game'){
     fail('Watch pilot selector should visibly cycle the watched role without launching a run', signed);
   }
-  if(signed.afterWatchScopePicker?.watchScope !== 'challenges' || !/CHALLENGES ONLY/.test(signed.afterWatchScopePicker?.html || '')){
+  if(signed.afterWatchScopePicker?.watchScope !== 'challenges' || !/CHALLENGE TOUR/.test(signed.afterWatchScopePicker?.html || '') || !/CHALLENGING STAGES ONLY/.test(signed.afterWatchScopePicker?.html || '')){
     fail('Watch scope selector should visibly switch from full game flow to challenges-only from the front door', signed);
   }
   if((signed.p2.score | 0) !== 0 || signed.p2.activeTurn !== 'p1' || signed.p2.turnModel !== 'galaga-per-life-alternation'){
@@ -196,6 +241,59 @@ async function main(){
   }
   if(signed.board.some(row => row.initials === 'PRO')){
     fail('Player Two persona score must not be recorded as a leaderboard score', signed);
+  }
+
+  const personaSweep = [];
+  let previousRescueBias = -1;
+  let previousUnsafePenalty = -1;
+  for(let i = 0; i < PLAYER_TWO_PERSONAS.length; i++){
+    const persona = PLAYER_TWO_PERSONAS[i];
+    const result = await checkPersonaLaneIsolation(persona, i);
+    const run = result.afterP2Award?.run || {};
+    const policy = result.launch?.selection?.personaPolicy || {};
+    const p1Event = result.scoreEvents.find(event => event.owner === 'p1' && (event.points | 0) === result.p1Points);
+    const p2Event = result.scoreEvents.find(event => event.owner === 'p2' && (event.points | 0) === result.p2Points);
+    if(result.launch?.run?.personaKey !== persona){
+      fail(`2UP persona sweep started the wrong persona for ${persona}`, result);
+    }
+    if(policy.key !== persona || !policy.captureRescueStyle){
+      fail(`2UP persona sweep is missing capture/rescue policy metadata for ${persona}`, result);
+    }
+    if((policy.captureRescueBias | 0) <= previousRescueBias || (policy.captureRescueUnsafePenalty | 0) <= previousUnsafePenalty){
+      fail(`2UP persona capture/rescue policy should become more rescue-aware and risk-sensitive from beginner to professional`, {
+        persona,
+        policy,
+        previousRescueBias,
+        previousUnsafePenalty,
+        result
+      });
+    }
+    previousRescueBias = policy.captureRescueBias | 0;
+    previousUnsafePenalty = policy.captureRescueUnsafePenalty | 0;
+    if((result.afterP1Award?.run?.humanScore | 0) !== result.p1Points || (result.afterP1Award?.run?.score | 0) !== 0){
+      fail(`2UP persona sweep failed to keep ${persona} persona score at zero during 1UP scoring`, result);
+    }
+    if(result.p2Turn?.harnessPersona !== persona || result.p2Turn?.playerTwo?.activeTurn !== 'p2'){
+      fail(`2UP persona sweep failed to hand active play to ${persona}`, result);
+    }
+    if((run.humanScore | 0) !== result.p1Points || (run.score | 0) !== result.p2Points){
+      fail(`2UP persona sweep failed score isolation for ${persona}`, result);
+    }
+    if(!/1UP\s+\d{6}/.test(result.afterP2Award?.hudLeft || '') || !/2UP PLAY\s+\d{6}/.test(result.afterP2Award?.hudRight || '')){
+      fail(`2UP persona sweep failed to keep both lane scores visible for ${persona}`, result);
+    }
+    if(!p1Event || !p2Event){
+      fail(`2UP persona sweep failed to log score ownership events for ${persona}`, result);
+    }
+    personaSweep.push({
+      persona,
+      humanScore: run.humanScore | 0,
+      playerTwoScore: run.score | 0,
+      captureRescueStyle: policy.captureRescueStyle,
+      captureRescueBias: policy.captureRescueBias,
+      captureRescueUnsafePenalty: policy.captureRescueUnsafePenalty,
+      scoreOwners: result.scoreEvents.map(event => `${event.owner}:${event.points}`)
+    });
   }
 
   const autoTurn = await withHarnessPage({ skipStart: true, seed: 77106 }, async ({ page }) => {
@@ -314,7 +412,7 @@ async function main(){
   if(!challengeWatch.start?.watchMode || challengeWatch.start?.watchScope !== 'challenges' || !challengeWatch.start?.challenge || challengeWatch.start?.stage !== 3){
     fail('front-door Watch Mode challenges-only scope should start at the configured first challenging stage', challengeWatch);
   }
-  if(challengeWatch.pilotCard?.mode !== 'watch' || !/challenges-only/i.test(challengeWatch.pilotCard?.summary || '')){
+  if(challengeWatch.pilotCard?.mode !== 'watch' || !/Challenging Stage tour/i.test(challengeWatch.pilotCard?.summary || '')){
     fail('pilot card should describe challenges-only Watch Mode as a challenge-stage tour', challengeWatch);
   }
   const challengeTourAdvanced = challengeWatch.transition?.pendingStage === 7 && challengeWatch.transition?.watchScope === 'challenges'
@@ -347,6 +445,7 @@ async function main(){
       score: watch.live.score,
       recorded: watch.boardScores.includes(55550)
     },
+    personaSweep,
     challengeWatch: {
       startStage: challengeWatch.start.stage,
       nextStage: challengeWatch.afterClear.stage,

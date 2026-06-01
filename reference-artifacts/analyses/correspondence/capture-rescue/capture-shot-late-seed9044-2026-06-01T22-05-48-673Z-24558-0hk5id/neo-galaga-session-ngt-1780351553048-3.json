@@ -1,0 +1,640 @@
+{
+  "session": {
+    "id": "ngt-1780351553048-3",
+    "build": "1.4.0+build.766.sha.57cee9ef.dirty",
+    "reason": "game_start",
+    "createdAt": "2026-06-01T22:05:53.048Z",
+    "url": "http://localhost:61972/index.html",
+    "viewport": {
+      "w": 1440,
+      "h": 1800,
+      "dpr": 1
+    },
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.0.0 Safari/537.36",
+    "events": [
+      {
+        "t": 0,
+        "type": "game_start",
+        "persona": null,
+        "watchMode": false,
+        "requestedStage": 1,
+        "stage": 1,
+        "startStageMode": "internal",
+        "startKind": "level",
+        "challengeStage": 1,
+        "displayLabel": "",
+        "forceChallenge": false,
+        "playerTwo": null
+      },
+      {
+        "t": 0,
+        "type": "stage_spawn",
+        "stage": 1,
+        "challenge": false,
+        "persona": null
+      },
+      {
+        "t": 0,
+        "type": "stage_profile",
+        "stage": 1,
+        "challenge": false,
+        "band": "classic",
+        "challengeFamily": "classic",
+        "beeFamily": "classic",
+        "butFamily": "classic",
+        "bossFamily": "classic",
+        "themeId": "quiet-skies",
+        "backgroundMode": "classic-stars",
+        "frameAccent": "classic-blue",
+        "bossArchetype": "command-core"
+      },
+      {
+        "t": 0,
+        "type": "audio_cue",
+        "cue": "gameStart",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga2-game-start.m4a",
+        "referenceClipStart": 0.08,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      },
+      {
+        "t": 0,
+        "type": "harness_capture_escape_setup",
+        "boss": 628686008,
+        "playerX": 140,
+        "playerY": 186,
+        "bossX": 140,
+        "bossY": 110,
+        "capT": 0.45,
+        "stage": 4,
+        "keepAlive": 1
+      },
+      {
+        "t": 0,
+        "type": "enemy_attack_start",
+        "stage": 4,
+        "mode": "capture",
+        "x": 140,
+        "y": 110,
+        "originLane": 5,
+        "targetLane": 5,
+        "playerLane": 5,
+        "id": 628686008,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 5,
+        "dive": 2,
+        "carry": false,
+        "targetX": 140,
+        "targetY": 136,
+        "scripted": 0,
+        "harness": 1,
+        "captureEscape": 1
+      },
+      {
+        "t": 0.13,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      },
+      {
+        "t": 0.21,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      },
+      {
+        "t": 0.443,
+        "type": "fighter_captured",
+        "stage": 4,
+        "stageClock": 0.443,
+        "captureCountStage": 1,
+        "livesAfter": 2,
+        "playerLane": 5,
+        "timeSinceCaptureStart": 0.443,
+        "id": 628686008,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 5,
+        "dive": 3,
+        "carry": true
+      },
+      {
+        "t": 0.443,
+        "type": "capture_retreat_phase",
+        "stage": 4,
+        "duration": 1.45,
+        "bossId": 628686008
+      },
+      {
+        "t": 0.443,
+        "type": "audio_cue",
+        "cue": "captureSuccess",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-fighter-captured.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      },
+      {
+        "t": 0.443,
+        "type": "audio_cue",
+        "cue": "captureRetreat",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-capturing.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      },
+      {
+        "t": 2.33,
+        "type": "harness_stop",
+        "label": "capture-shot-late"
+      },
+      {
+        "t": 2.33,
+        "type": "capture_export_reset",
+        "reason": "capture-shot-late_forced_export",
+        "started": false,
+        "attract": false,
+        "stage": 4,
+        "score": 0,
+        "lives": 2
+      }
+    ],
+    "snapshots": [
+      {
+        "t": 0,
+        "tag": "stage_spawn",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 0,
+        "lives": 3,
+        "challenge": false,
+        "scriptMode": true,
+        "watchMode": false,
+        "watchPersona": "",
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 0,
+        "stageClock": 0,
+        "rngState": 3072517297,
+        "playerTwo": {
+          "enabled": false
+        },
+        "player": {
+          "x": 140,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 331184027,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 3.29,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 0,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 1,
+        "score": 0,
+        "lives": 3,
+        "challenge": false,
+        "scriptMode": true,
+        "watchMode": false,
+        "watchPersona": "",
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 0,
+        "stageClock": 0,
+        "rngState": 3072517297,
+        "playerTwo": {
+          "enabled": false
+        },
+        "player": {
+          "x": 140,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 331184027,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 3.29,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 40,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 0.36,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 4,
+        "score": 0,
+        "lives": 3,
+        "challenge": false,
+        "scriptMode": true,
+        "watchMode": false,
+        "watchPersona": "",
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 0.36,
+        "stageClock": 0.36,
+        "rngState": 3072517297,
+        "playerTwo": {
+          "enabled": false
+        },
+        "player": {
+          "x": 140.09,
+          "y": 149.59,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": true,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 331184027,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 2.78,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 2,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 0.877,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 4,
+        "score": 0,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": true,
+        "watchMode": false,
+        "watchPersona": "",
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 0.877,
+        "stageClock": 0.877,
+        "rngState": 3072517297,
+        "playerTwo": {
+          "enabled": false
+        },
+        "player": {
+          "x": 140.08,
+          "y": 146.43,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0.567,
+          "dual": false,
+          "captured": false,
+          "pending": true,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 331184027,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 2.263,
+          "recoverT": 1.167,
+          "attackGapT": 0.917,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 1.017
+        },
+        "counts": {
+          "enemies": 2,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 1.393,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 4,
+        "score": 0,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": true,
+        "watchMode": false,
+        "watchPersona": "",
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 1.393,
+        "stageClock": 1.393,
+        "rngState": 3072517297,
+        "playerTwo": {
+          "enabled": false
+        },
+        "player": {
+          "x": 140.08,
+          "y": 146.43,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0.05,
+          "dual": false,
+          "captured": false,
+          "pending": true,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 331184027,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 1.746,
+          "recoverT": 0.65,
+          "attackGapT": 0.4,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0.5
+        },
+        "counts": {
+          "enemies": 2,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 1
+        }
+      },
+      {
+        "t": 1.91,
+        "tag": "tick",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 4,
+        "score": 0,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": true,
+        "watchMode": false,
+        "watchPersona": "",
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 1.91,
+        "stageClock": 1.91,
+        "rngState": 3072517297,
+        "playerTwo": {
+          "enabled": false
+        },
+        "player": {
+          "x": 140,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 331184027,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 1.23,
+          "recoverT": 0.133,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 2,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 2.33,
+        "tag": "harness_stop",
+        "gameKey": "aurora-galactica",
+        "started": true,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 4,
+        "score": 0,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": true,
+        "watchMode": false,
+        "watchPersona": "",
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 2.33,
+        "stageClock": 2.33,
+        "rngState": 3072517297,
+        "playerTwo": {
+          "enabled": false
+        },
+        "player": {
+          "x": 140,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 331184027,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0.81,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 2,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      },
+      {
+        "t": 2.33,
+        "tag": "export",
+        "gameKey": "aurora-galactica",
+        "started": false,
+        "paused": false,
+        "attract": {
+          "active": false,
+          "phase": ""
+        },
+        "stage": 4,
+        "score": 0,
+        "lives": 2,
+        "challenge": false,
+        "scriptMode": true,
+        "watchMode": false,
+        "watchPersona": "",
+        "profile": "classic",
+        "theme": "quiet-skies",
+        "simT": 2.33,
+        "stageClock": 2.33,
+        "rngState": 3072517297,
+        "playerTwo": {
+          "enabled": false
+        },
+        "player": {
+          "x": 140,
+          "y": 340,
+          "vx": 0,
+          "cd": 0,
+          "inv": 0,
+          "spawn": 0,
+          "dual": false,
+          "captured": false,
+          "pending": false,
+          "hNoShotT": 0,
+          "hDebugT": 0,
+          "demoTargetId": 331184027,
+          "demoTargetT": 0.2
+        },
+        "timers": {
+          "fireCD": 0.81,
+          "recoverT": 0,
+          "attackGapT": 0,
+          "nextStageT": 0,
+          "postChallengeT": 0,
+          "sequenceT": 0
+        },
+        "counts": {
+          "enemies": 2,
+          "playerBullets": 0,
+          "enemyBullets": 0,
+          "effects": 0,
+          "attackers": 0
+        }
+      }
+    ],
+    "t0": 2560,
+    "seed": 9044,
+    "duration": 2.33,
+    "eventCount": 14,
+    "snapshotCount": 8
+  }
+}

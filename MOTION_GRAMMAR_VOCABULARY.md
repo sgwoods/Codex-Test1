@@ -94,6 +94,25 @@ Before runtime promotion, a movement candidate should preserve or improve:
 This is why the Aurora candidate sweep now blocks candidates that reduce
 human-perfect routeability, even when another score looks slightly better.
 
+## Visualization Bridge
+
+For Aurora challenge-stage and main-entry work, a motion grammar row should be
+reviewable by a human before it becomes a tuning candidate. The preferred visual
+bundle is:
+
+- target reference contact sheet or video snippet
+- current runtime contact sheet or video snippet
+- object-track or trajectory overlay
+- phase/cadence summary
+- persona routeability read
+- promotion decision and reason
+
+The Watch Mode `CHALLENGE TOUR` path is now the default runtime source for
+challenge-stage evidence because it keeps the persona, scope, scoring
+eligibility, and challenge-only progression explicit. The same visual bridge
+should be reused for main-stage formation entry and attack behavior so
+challenging-stage movement does not become a special-case system.
+
 ## Current Project Use
 
 Aurora Galactica:
@@ -101,6 +120,8 @@ Aurora Galactica:
 - challenge-stage candidate sweeps
 - before/after contact sheets
 - human-perfect routeability guard
+- challenge-tour watch clips as runtime grammar evidence
+- main-stage entry and attack paths as grammar candidates
 - main-stage and boss choreography planning
 
 Galaxy Guardians:

@@ -74,7 +74,7 @@ Full target-artifact report: `GALAGA_TARGET_ARTIFACT_COVERAGE.md` and `reference
 
 **Group identity read:** 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.54s.
 
-**Target contract read:** Target contract fit is 6.9/10 for Challenging Stage 1 (Levels 3-4): group count 1, path-family order 1, type order 1, family order 1, object-track 0.28 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.
+**Target contract read:** Target contract fit is 6.9/10 for Challenging Stage 3-4: group count 1, path-family order 1, type order 1, family order 1, object-track 0.28 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.
 
 **Shot-opportunity read:** Shot-opportunity probe found scoreable targets in 46 sampled windows; 72% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.31.
 
@@ -107,7 +107,7 @@ Full target-artifact report: `GALAGA_TARGET_ARTIFACT_COVERAGE.md` and `reference
 
 **Group identity read:** 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.42s.
 
-**Target contract read:** Target contract fit is 6.2/10 for Challenging Stage 2 (Levels 7-8): group count 1, path-family order 0.6, type order 1, family order 1, object-track 0.3 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.
+**Target contract read:** Target contract fit is 6.2/10 for Challenging Stage 7-8: group count 1, path-family order 0.6, type order 1, family order 1, object-track 0.3 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.
 
 **Shot-opportunity read:** Shot-opportunity probe found scoreable targets in 4 sampled windows; 100% had a lane with 2+ targets, lane diversity was 0.71, and center-lane bias was 0.11.
 
@@ -143,7 +143,7 @@ Full target-artifact report: `GALAGA_TARGET_ARTIFACT_COVERAGE.md` and `reference
 
 **Group identity read:** 5/5 wave type signatures and 3/5 path signatures; average within-wave spawn span 0.36s.
 
-**Target contract read:** Target contract fit is 7.3/10 for Challenging Stage 3 (Levels 11-12): group count 1, path-family order 1, type order 1, family order 1, object-track 0.54 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.
+**Target contract read:** Target contract fit is 7.3/10 for Challenging Stage 11-12: group count 1, path-family order 1, type order 1, family order 1, object-track 0.54 via direct target-video tracks. This is a group/object-track read, not frame-perfect sprite identity recognition.
 
 **Shot-opportunity read:** Shot-opportunity probe found scoreable targets in 7 sampled windows; 100% had a lane with 2+ targets, lane diversity was 0.86, and center-lane bias was 0.17.
 

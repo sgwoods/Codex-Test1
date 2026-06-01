@@ -1447,7 +1447,7 @@ function challengeStageDisplayLabel(stageOrChallengeNumber,opts={}){
  const fromChallengeNumber=!!opts.challengeNumber;
  const challengeNumber=fromChallengeNumber?input:Math.max(1,challengeStageNumberForInternalStage(input)||1);
  const marker=fromChallengeNumber?internalStageForChallengeStageNumber(challengeNumber):input;
- return `Challenging Stage ${challengeNumber} (Levels ${marker}-${marker+1})`;
+ return `Challenging Stage ${marker}-${marker+1}`;
 }
 function displayStageNumber(stage,challenge=isChallengeStage(stage)){
  const n=Math.max(1, stage|0);

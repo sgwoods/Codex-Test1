@@ -245,7 +245,8 @@ function playerTwoSelectionState(){
   selected:selectedPlayerTwoMode(),
   personaKey,
   personaLabel:profile.label,
-  personaInitials:profile.initials
+  personaInitials:profile.initials,
+  personaPolicy:playerPersonaCardSummary(personaKey)
  };
 }
 function selectedWatchPersona(){
@@ -284,16 +285,21 @@ function cycleWatchScope(dir=1,opts={}){
  return setWatchScope(current==='game'?'challenges':'game',opts);
 }
 function watchModeScopeLabel(scope=selectedWatchScope()){
- return normalizeWatchScope(scope)==='challenges'?'CHALLENGES':'GAME';
+ return normalizeWatchScope(scope)==='challenges'?'CHALLENGE TOUR':'GAME';
 }
 function playerPersonaCardSummary(key='advanced'){
  const personaKey=normalizePlayerTwoPersona(key);
  const profile=PLAYER_TWO_PERSONA_PROFILES[personaKey]||PLAYER_TWO_PERSONA_PROFILES.advanced;
+ const policy=HARNESS_PERSONAS[personaKey]||HARNESS_PERSONAS.advanced;
  return{
   key:personaKey,
   label:profile.label,
   initials:profile.initials,
-  description:PLAYER_TWO_PERSONA_DESCRIPTIONS[personaKey]||PLAYER_TWO_PERSONA_DESCRIPTIONS.advanced
+  description:PLAYER_TWO_PERSONA_DESCRIPTIONS[personaKey]||PLAYER_TWO_PERSONA_DESCRIPTIONS.advanced,
+  captureRescueStyle:policy.captureRescueStyle||'',
+  carryBias:+policy.carryBias||0,
+  captureRescueBias:+policy.captureRescueBias||0,
+  captureRescueUnsafePenalty:+policy.captureRescueUnsafePenalty||0
  };
 }
 function armWatchMode(personaKey=selectedWatchPersona(),opts={}){
@@ -879,16 +885,16 @@ function currentPilotCardState(){
  if(S.watchMode){
   const persona=playerPersonaCardSummary(S.watchPersona||selectedWatchPersona());
   const challengesOnly=S.watchScope==='challenges';
-  const watchRoute=challengesOnly?'Challenging-stage tour':'Full game flow';
-  const watchScopeText=challengesOnly?'challenges-only ':'';
+  const watchRoute=challengesOnly?'Challenging Stage tour':'Full game flow';
+  const watchScopeText=challengesOnly?'Challenging Stage tour ':'';
   return{
    mode:'watch',
    icon:'🛰',
    dockLabel:'WATCH',
-   dockStatus:challengesOnly?'CHALLENGES':persona.label,
+   dockStatus:challengesOnly?'TOUR':persona.label,
    dockTitle:`Watch Mode: ${persona.label} pilot onboard for ${watchRoute} in ${gameTitle}`,
    panelTitle:`${gameHudLabel} WATCH`,
-   panelSub:challengesOnly?'CHALLENGE WATCH PERSONA':'WATCH MODE PERSONA',
+   panelSub:challengesOnly?'CHALLENGING STAGE WATCH PERSONA':'WATCH MODE PERSONA',
    callsign:`${persona.label} IS FLYING`,
    status:`${persona.description} ${watchRoute}. ${gameTitle} score not recorded.`,
    summary:`Watch Mode is a persona-controlled ${watchScopeText}${gameTitle} demonstration run. Scores and videos are not eligible for posting.`,
@@ -963,7 +969,7 @@ function buildPlayerTwoStartHtml(){
  const watchLabel=watchModePersonaLabel(watchPersona);
  const watchScope=selectedWatchScope();
  const watchScopeLabel=watchModeScopeLabel(watchScope);
- const watchScopeMeta=watchScope==='challenges'?'CHALLENGES ONLY':'GAME FLOW';
+ const watchScopeMeta=watchScope==='challenges'?'CHALLENGING STAGES ONLY':'GAME FLOW';
  const p2Locked=!state.signedIn;
  const mode1Class=`playerModeOption playerModeSolo${state.selected?'':' isSelected'}`;
  const mode2Class=`playerModeOption playerModeTwo${state.selected?' isSelected':''}${p2Locked?' isLocked':''}`;
