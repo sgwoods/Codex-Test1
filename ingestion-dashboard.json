@@ -3,8 +3,8 @@
   "strapline": "A dashboard-first intake and decision cockpit for current games and future additions: gather source artifacts, analyze them, turn them into a Platinum-focused instantiation plan, and keep conformance work grounded in durable evidence.",
   "currentGoal": "Make artifact collection and analysis the front door for every game on Platinum, with Aurora and Galaxy Guardians visible today and Windigo Invaders entering through a measured, source-first intake path.",
   "dashboardRead": "This page should be the primary place where new game materials are added, assessed, and turned into explicit build decisions. Read each game top-down as: current posture, current content package, how we will use that content now, and then the remaining missing artifacts that still matter enough to change gameplay quality or implementation confidence. It should stay compact at the top level, let us click into detail by game, and keep showing what source families are still missing before design outruns evidence.",
-  "lastUpdatedAt": "2026-06-01T18:14:02-04:00",
-  "lastUpdatedNote": "Dashboard and repo policy now reflect a closed public/private build boundary: the shipped reference-audio lane has moved into the private companion repo, `dist/` no longer republishes private-derived catalog media, and mixed conformance lanes are now the next deliberate file-by-file review target.",
+  "lastUpdatedAt": "2026-06-01T18:34:09-04:00",
+  "lastUpdatedNote": "Dashboard and repo policy now reflect a closed public/private build boundary and a new cross-machine cleanup checklist: the shipped reference-audio lane is private, `dist/` no longer republishes private-derived catalog media, and the next deliberate work is to integrate the other machine and then review mixed conformance lanes file by file.",
   "phaseDefinitions": [
     {
       "id": "collect",
@@ -234,6 +234,13 @@
       "href": "PRIVATE_ARTIFACT_LEGACY_MIGRATION_PLAN_2026-06-01.md",
       "detail": "Recommended tranche order for moving older tracked copied and derived media out of the public repo and into the companion private artifact store.",
       "docId": "PLAT-DOC-010"
+    },
+    {
+      "label": "Session Cleanup And Cross-Machine Integration Plan",
+      "hrefType": "repoDoc",
+      "href": "SESSION_CLEANUP_AND_CROSS_MACHINE_INTEGRATION_PLAN_2026-06-01.md",
+      "detail": "Short cleanup-first checklist for keeping this machine in a good stop state before integrating work from the other machine and then starting the mixed conformance-lane review.",
+      "docId": "PLAT-DOC-011"
     }
   ],
   "globalHunts": [
