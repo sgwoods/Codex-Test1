@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "artifactType": "platinum-movement-grammar-plan",
   "generatedAt": "2026-05-31T00:00:00.000Z",
-  "status": "active-stage7-pilot",
+  "status": "active-first-five-routeability-guardrail",
   "title": "Platinum Movement Grammar",
   "summary": "Define one reusable movement grammar for inferred target motion, authored runtime choreography, conformance scoring, and creative variation across Aurora, Galaxy Guardians, and future games.",
   "problem": "Movement conformance is currently split across Aurora challenge layouts, regular-stage entry helpers, dive logic, escort/capture code, Galaxy Guardians runtime rules, and ingestion analyzers. This makes single-stage tuning possible but makes source-derived variation and multi-game reuse unnecessarily hard.",
@@ -31,6 +31,11 @@
       "id": "score-meaning-and-motion",
       "label": "Score meaning and motion",
       "meaning": "A pattern is successful only if object tracks, player meaning, safety, score opportunity, sprite phase, and event cues all line up."
+    },
+    {
+      "id": "routeability-before-spectacle",
+      "label": "Routeability before spectacle",
+      "meaning": "A challenge or entry rewrite is not ready for promotion until targets remain visible, scoreable, and plausibly reachable by a player persona. Spectacular motion is allowed only after that playability guardrail is stable."
     }
   ],
   "coordinateSystem": {
@@ -73,6 +78,7 @@
         "five group structure",
         "group spawn offsets",
         "scoreable upper-band window",
+        "routeability guardrail",
         "entry side",
         "exit side",
         "group visual family",
@@ -274,6 +280,8 @@
       "outputs": [
         "human-readable pattern table",
         "target-vs-current trajectory diagram",
+        "routeability guardrail table",
+        "persona-play evidence clips",
         "compute cost per pattern improvement",
         "release readiness gates"
       ],
@@ -437,6 +445,154 @@
         "limitations": [
           "Sample points are illustrative until the compiler maps full target object tracks.",
           "Current runtime still applies per-lane offsets and fallback path-family logic."
+        ]
+      }
+    },
+    {
+      "id": "aurora-first-five-challenge-routeability-guardrail",
+      "appliesTo": "challenge-stage-set-piece",
+      "gameScope": {
+        "gameKey": "aurora-galactica",
+        "stageMarkers": [
+          3,
+          7,
+          11,
+          15,
+          19
+        ],
+        "challengeNumbers": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "lane": "player-experience-guardrail"
+      },
+      "roleBindings": [
+        {
+          "groups": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "roles": [
+            "bee",
+            "butterfly",
+            "boss",
+            "specialty"
+          ],
+          "visualFamily": "mixed-by-stage",
+          "pathIntent": "visible-scoreable-routeable-set-piece"
+        }
+      ],
+      "phaseTimeline": [
+        {
+          "phase": "first-visible",
+          "timeS": 0
+        },
+        {
+          "phase": "scoreable-window-open",
+          "timeS": 0.2
+        },
+        {
+          "phase": "route-complete-window",
+          "timeS": 18.4
+        },
+        {
+          "phase": "result-feedback",
+          "timeS": 24
+        }
+      ],
+      "controlPoints": [
+        {
+          "t": 0,
+          "x": 0.5,
+          "y": -0.08,
+          "meaning": "Challenge groups may enter from overscan without being culled before they are visible."
+        },
+        {
+          "t": 4.5,
+          "x": 0.5,
+          "y": 0.3,
+          "meaning": "Primary scoring window should stay in a readable player-shot band."
+        },
+        {
+          "t": 13.8,
+          "x": 0.5,
+          "y": 0.74,
+          "meaning": "Late routes should remain reachable before exit or result feedback."
+        }
+      ],
+      "scoreWindows": [
+        {
+          "id": "visible-scoreable-greedy-route",
+          "startS": 0.2,
+          "endS": 18.4,
+          "meaning": "All 40 challenge targets should be visible and scoreable in a plausible persona route before path spectacle is promoted."
+        }
+      ],
+      "eventAnchors": [
+        {
+          "timeS": 0,
+          "event": "challenge_stage_start"
+        },
+        {
+          "timeS": 0.2,
+          "event": "routeability_window_open"
+        },
+        {
+          "timeS": 24,
+          "event": "challenge_result_feedback"
+        }
+      ],
+      "variationControls": {
+        "mirror": true,
+        "phaseOffsetS": [
+          -0.2,
+          0.2
+        ],
+        "speedScale": [
+          0.82,
+          1.12
+        ],
+        "pathScale": [
+          0.9,
+          1.1
+        ],
+        "visualFamilyOverride": true,
+        "requiresRouteabilityRecheck": true
+      },
+      "measurement": {
+        "sourceArtifacts": [
+          "reference-artifacts/analyses/challenge-stage-routeability/latest.json",
+          "reference-artifacts/analyses/challenge-stage-human-playability/latest.json",
+          "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+          "reference-artifacts/analyses/gameplay-segment-captures/latest.json"
+        ],
+        "currentRuntimeAnchors": [
+          "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_LAYOUTS",
+          "src/js/06-enemy-behavior.js updateChallengeEnemy()",
+          "tools/harness/analyze-challenge-stage-routeability.js"
+        ],
+        "confidence": "medium-high as a playability guardrail; low-medium as visual conformance",
+        "routeabilityGuardrail": {
+          "stageMarkers": [
+            3,
+            7,
+            11,
+            15,
+            19
+          ],
+          "trackedRows": 200,
+          "greedyRouteKills": 200,
+          "averageGreedyRouteScore10": 10
+        },
+        "limitations": [
+          "Greedy routeability is intentionally simpler than human mastery and stricter than mere visibility.",
+          "This guardrail does not prove Galaga-like choreography, sprite novelty, or target-video object-track fit."
         ]
       }
     },
@@ -681,23 +837,29 @@
     {
       "step": 4,
       "label": "Stage 7 pilot",
-      "status": "current",
-      "target": "Stage 7 now best-matches challenge-2-arrival-group-1 and measures 5/5 target groups after the challenge timer fix; score is 4.3/10 overall, movement 4.6/10, and target-video object-track fit 4.6/10."
+      "status": "complete",
+      "target": "Stage 7 now best-matches the expected Challenging Stage 6-7 reference family; the remaining gap is path precision and active visual novelty, not basic identity."
     },
     {
       "step": 5,
+      "label": "First-five routeability guardrail",
+      "status": "current",
+      "target": "The first five challenging stages now have a durable routeability artifact showing 200/200 tracked targets scoreable and greedily routeable. Use this as a guardrail before promoting more spectacular path rewrites."
+    },
+    {
+      "step": 6,
       "label": "Regular entry pilot",
       "status": "next",
       "target": "Map and then improve one normal-stage entry so the same grammar helps main-level novelty."
     },
     {
-      "step": 6,
+      "step": 7,
       "label": "Ingestion compiler output",
       "status": "planned",
       "target": "Emit grammar candidates directly from object-track ingestion and candidate sweep loops."
     },
     {
-      "step": 7,
+      "step": 8,
       "label": "Variant lane",
       "status": "planned",
       "target": "Support conforming-lane and Aurora-theme variations from the same movement contract."

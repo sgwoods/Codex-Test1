@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "movement-grammar-compiler-bridge",
-  "generatedAt": "2026-05-31T13:53:03.954Z",
-  "commit": "5cc33dd01",
+  "generatedAt": "2026-05-31T22:00:54.780Z",
+  "commit": "6650d54b5",
   "branch": "codex/macbook-challenge-stage-gameplay-spectacle",
   "gameKey": "aurora-galactica",
   "sourceArtifacts": {
@@ -492,10 +492,10 @@
         ],
         "groupSpawnOffsets": [
           0,
-          2,
-          3.5,
-          5.1,
-          6.8
+          2.88,
+          4.25,
+          7.13,
+          13.38
         ],
         "groupSpeedScales": [
           2.65,
@@ -696,17 +696,17 @@
           "required": true,
           "runtimeValue": [
             0,
-            2,
-            3.5,
-            5.1,
-            6.8
+            2.88,
+            4.25,
+            7.13,
+            13.38
           ],
           "compiledValue": [
             0,
-            2,
-            3.5,
-            5.1,
-            6.8
+            2.88,
+            4.25,
+            7.13,
+            13.38
           ]
         },
         {
@@ -1245,9 +1245,9 @@
         "groupPathFamilies": [
           "pink-serpentine",
           "pink-serpentine",
-          "green-ladder-split",
           "pink-serpentine",
-          "pink-green-cascade"
+          "pink-serpentine",
+          "pink-serpentine"
         ],
         "groupVisualFamilies": [
           "galboss",
@@ -1310,33 +1310,45 @@
         ],
         "groupSpawnOffsets": [
           0,
-          0.45,
-          2.85,
-          6.25,
-          12.85
+          0.5,
+          2.88,
+          6.38,
+          13.13
         ],
         "groupSpeedScales": [
-          2.1,
-          1.85,
-          1.5,
-          1.3,
-          1.05
+          2.12,
+          2.51,
+          1.84,
+          1.97,
+          2.51
         ],
-        "groupArcAmps": [],
-        "groupDropAmps": [],
+        "groupArcAmps": [
+          1.54,
+          1.3,
+          1.31,
+          1.31,
+          1.83
+        ],
+        "groupDropAmps": [
+          1.33,
+          1.21,
+          1.59,
+          1.59,
+          0.98
+        ],
         "groupLowerFieldBiases": [
-          176,
-          196,
-          96,
-          82,
-          208
+          158,
+          188,
+          41,
+          14,
+          188
         ],
         "groupYOffsets": [
-          128,
-          136,
-          24,
-          28,
-          168
+          59,
+          80,
+          3,
+          0,
+          86
         ]
       },
       "comparisons": [
@@ -1368,16 +1380,16 @@
           "runtimeValue": [
             "pink-serpentine",
             "pink-serpentine",
-            "green-ladder-split",
             "pink-serpentine",
-            "pink-green-cascade"
+            "pink-serpentine",
+            "pink-serpentine"
           ],
           "compiledValue": [
             "pink-serpentine",
             "pink-serpentine",
-            "green-ladder-split",
             "pink-serpentine",
-            "pink-green-cascade"
+            "pink-serpentine",
+            "pink-serpentine"
           ]
         },
         {
@@ -1514,17 +1526,17 @@
           "required": true,
           "runtimeValue": [
             0,
-            0.45,
-            2.85,
-            6.25,
-            12.85
+            0.5,
+            2.88,
+            6.38,
+            13.13
           ],
           "compiledValue": [
             0,
-            0.45,
-            2.85,
-            6.25,
-            12.85
+            0.5,
+            2.88,
+            6.38,
+            13.13
           ]
         },
         {
@@ -1532,51 +1544,75 @@
           "status": "exact",
           "required": false,
           "runtimeValue": [
-            2.1,
-            1.85,
-            1.5,
-            1.3,
-            1.05
+            2.12,
+            2.51,
+            1.84,
+            1.97,
+            2.51
           ],
           "compiledValue": [
-            2.1,
-            1.85,
-            1.5,
-            1.3,
-            1.05
+            2.12,
+            2.51,
+            1.84,
+            1.97,
+            2.51
           ]
         },
         {
           "field": "groupArcAmps",
-          "status": "not-authored-in-runtime",
+          "status": "exact",
           "required": false,
-          "runtimeValue": [],
-          "compiledValue": []
+          "runtimeValue": [
+            1.54,
+            1.3,
+            1.31,
+            1.31,
+            1.83
+          ],
+          "compiledValue": [
+            1.54,
+            1.3,
+            1.31,
+            1.31,
+            1.83
+          ]
         },
         {
           "field": "groupDropAmps",
-          "status": "not-authored-in-runtime",
+          "status": "exact",
           "required": false,
-          "runtimeValue": [],
-          "compiledValue": []
+          "runtimeValue": [
+            1.33,
+            1.21,
+            1.59,
+            1.59,
+            0.98
+          ],
+          "compiledValue": [
+            1.33,
+            1.21,
+            1.59,
+            1.59,
+            0.98
+          ]
         },
         {
           "field": "groupLowerFieldBiases",
           "status": "exact",
           "required": false,
           "runtimeValue": [
-            176,
-            196,
-            96,
-            82,
-            208
+            158,
+            188,
+            41,
+            14,
+            188
           ],
           "compiledValue": [
-            176,
-            196,
-            96,
-            82,
-            208
+            158,
+            188,
+            41,
+            14,
+            188
           ]
         },
         {
@@ -1584,18 +1620,18 @@
           "status": "exact",
           "required": false,
           "runtimeValue": [
-            128,
-            136,
-            24,
-            28,
-            168
+            59,
+            80,
+            3,
+            0,
+            86
           ],
           "compiledValue": [
-            128,
-            136,
-            24,
-            28,
-            168
+            59,
+            80,
+            3,
+            0,
+            86
           ]
         }
       ],

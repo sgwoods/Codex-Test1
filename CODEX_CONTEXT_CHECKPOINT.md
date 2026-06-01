@@ -1,7 +1,7 @@
 # Codex Context Checkpoint
 
-Generated: 2026-05-31T12:25:48.645Z
-Label: authority-handoff-challenge-timing-evidence
+Generated: 2026-05-31T22:03:15.788Z
+Label: challenge-routeability-grammar-pass
 
 This is the durable recovery point for long Aurora / Platinum Codex sessions.
 Use it before switching machines, before starting a multi-hour run, and whenever
@@ -11,17 +11,17 @@ important working context.
 ## Current Repo State
 
 - Repo path: `/Users/sgwoods/Development/Codex/Codex-test1`
-- Branch: `codex/macbook-fullscreen-timing-alignment-wip`
-- HEAD: `0d74533e6` Improve Aurora challenge timing evidence
-- Dirty files excluding checkpoint self-output: `0`
+- Branch: `codex/macbook-challenge-stage-gameplay-spectacle`
+- HEAD: `6650d54b5` Harden challenge tour transitions
+- Dirty files excluding checkpoint self-output: `53`
 
 ## Active Plan
 
-- MacBook WIP branch is clean and pushed; authority machine should integrate Aurora challenge timing evidence after stacked base e397c2c75/2d144d5c1 path is understood
+- Challenge-stage gameplay spectacle pass with routeability guardrail and movement grammar persistence
 
 ## Recommended Next Steps
 
-- On iMacM1 fetch origin, inspect codex/macbook-fullscreen-timing-alignment-wip at 0d74533e6 plus checkpoint commit if present, merge after current release branch/base, run verification, then decide dev/beta publish from authority machine only
+- Review first-five challenge clips, then prioritize target-video object-track precision and regular-entry grammar pilot
 
 ## Notes
 
@@ -31,26 +31,106 @@ important working context.
 ## Git Status
 
 ```
-(none)
+M CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md
+ M CHALLENGE_STAGE_HUMAN_PLAYABILITY_REVIEW.md
+ M package.json
+ M reference-artifacts/analyses/aurora-challenge-movement-grammar-map/latest.json
+ M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-01-object-track.svg
+ M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-01-trajectory.svg
+ M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-02-object-track.svg
+ M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-02-trajectory.svg
+ M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-04-object-track.svg
+ M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-04-trajectory.svg
+ M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-05-object-track.svg
+ M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-05-trajectory.svg
+ M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-06-object-track.svg
+ M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-06-trajectory.svg
+ M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-07-object-track.svg
+ M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-07-trajectory.svg
+ M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-08-object-track.svg
+ M reference-artifacts/analyses/challenge-stage-conformance/latest-diagrams/challenge-stage-08-trajectory.svg
+ M reference-artifacts/analyses/challenge-stage-conformance/latest.json
+ M reference-artifacts/analyses/challenge-stage-human-playability/latest.json
+ M reference-artifacts/analyses/gameplay-segment-captures/latest.json
+ M reference-artifacts/analyses/movement-grammar-compiler-bridge/latest.json
+ M reference-artifacts/ingestion/movement-grammar/README.md
+ M reference-artifacts/ingestion/movement-grammar/movement-grammar-0.1.json
+ M src/js/06-enemy-behavior.js
+ M src/js/13-aurora-game-pack.js
+ M tools/build/build-index.js
+ M tools/harness/capture-gameplay-segment.js
+?? CHALLENGE_STAGE_ROUTEABILITY_REVIEW.md
+?? reference-artifacts/analyses/aurora-challenge-movement-grammar-map/2026-05-31T22-00-54-6650d54b5/
+?? reference-artifacts/analyses/challenge-stage-conformance/2026-05-31-6650d54b5/
+?? reference-artifacts/analyses/challenge-stage-routeability/
+?? reference-artifacts/analyses/gameplay-segment-captures/challenge-stage-14-15-routeability-after-2026-05-31T21-55-38-927Z-contact-sheet.jpg
+?? reference-artifacts/analyses/gameplay-segment-captures/challenge-stage-14-15-routeability-after-2026-05-31T21-55-38-927Z.json
+?? reference-artifacts/analyses/gameplay-segment-captures/challenge-stage-14-15-routeability-after-2026-05-31T21-55-38-927Z.png
+?? reference-artifacts/analyses/gameplay-segment-captures/challenge-stage-14-15-routeability-after-2026-05-31T21-55-38-927Z.review.webm
+?? reference-artifacts/analyses/gameplay-segment-captures/challenge-stage-14-15-routeability-after-2026-05-31T21-55-38-927Z.webm
+?? reference-artifacts/analyses/gameplay-segment-captures/challenge-stage-18-19-routeability-after-2026-05-31T21-56-23-089Z-contact-sheet.jpg
+?? reference-artifacts/analyses/gameplay-segment-captures/challenge-stage-18-19-routeability-after-2026-05-31T21-56-23-089Z.json
+?? reference-artifacts/analyses/gameplay-segment-captures/challenge-stage-18-19-routeability-after-2026-05-31T21-56-23-089Z.png
+?? reference-artifacts/analyses/gameplay-segment-captures/challenge-stage-18-19-routeability-after-2026-05-31T21-56-23-089Z.review.webm
+?? reference-artifacts/analyses/gameplay-segment-captures/challenge-stage-18-19-routeability-after-2026-05-31T21-56-23-089Z.webm
+?? reference-artifacts/analyses/gameplay-segment-captures/latest-challenge-stage-14-15-routeability-after-contact-sheet.jpg
+?? reference-artifacts/analyses/gameplay-segment-captures/latest-challenge-stage-14-15-routeability-after.json
+?? reference-artifacts/analyses/gameplay-segment-captures/latest-challenge-stage-14-15-routeability-after.png
+?? reference-artifacts/analyses/gameplay-segment-captures/latest-challenge-stage-14-15-routeability-after.webm
+?? reference-artifacts/analyses/gameplay-segment-captures/latest-challenge-stage-18-19-routeability-after-contact-sheet.jpg
+?? reference-artifacts/analyses/gameplay-segment-captures/latest-challenge-stage-18-19-routeability-after.json
+?? reference-artifacts/analyses/gameplay-segment-captures/latest-challenge-stage-18-19-routeability-after.png
+?? reference-artifacts/analyses/gameplay-segment-captures/latest-challenge-stage-18-19-routeability-after.webm
+?? reference-artifacts/analyses/movement-grammar-compiler-bridge/2026-05-31T22-00-54-6650d54b5/
+?? tools/harness/analyze-challenge-stage-routeability.js
+?? tools/harness/check-challenge-stage-routeability.js
 ```
 
 ## Diff Stat
 
 ```
-(none)
+CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md            |   166 +-
+ CHALLENGE_STAGE_HUMAN_PLAYABILITY_REVIEW.md        |    36 +-
+ package.json                                       |     5 +-
+ .../latest.json                                    |   160 +-
+ .../challenge-stage-01-object-track.svg            |    18 +-
+ .../challenge-stage-01-trajectory.svg              |     8 +-
+ .../challenge-stage-02-object-track.svg            |    28 +-
+ .../challenge-stage-02-trajectory.svg              |    12 +-
+ .../challenge-stage-04-object-track.svg            |    24 +-
+ .../challenge-stage-04-trajectory.svg              |    12 +-
+ .../challenge-stage-05-object-track.svg            |    30 +-
+ .../challenge-stage-05-trajectory.svg              |    12 +-
+ .../challenge-stage-06-object-track.svg            |    24 +-
+ .../challenge-stage-06-trajectory.svg              |     6 +-
+ .../challenge-stage-07-object-track.svg            |    26 +-
+ .../challenge-stage-07-trajectory.svg              |     6 +-
+ .../challenge-stage-08-object-track.svg            |    28 +-
+ .../challenge-stage-08-trajectory.svg              |    10 +-
+ .../challenge-stage-conformance/latest.json        | 73703 ++++++++++---------
+ .../challenge-stage-human-playability/latest.json  |   209 +-
+ .../analyses/gameplay-segment-captures/latest.json |   222 +-
+ .../movement-grammar-compiler-bridge/latest.json   |   204 +-
+ .../ingestion/movement-grammar/README.md           |     7 +
+ .../movement-grammar/movement-grammar-0.1.json     |   172 +-
+ src/js/06-enemy-behavior.js                        |     3 +-
+ src/js/13-aurora-game-pack.js                      |     4 +-
+ tools/build/build-index.js                         |    82 +
+ tools/harness/capture-gameplay-segment.js          |    31 +-
+ 28 files changed, 39631 insertions(+), 35617 deletions(-)
 ```
 
 ## Recent Log
 
 ```
-0d74533e6 (HEAD -> codex/macbook-fullscreen-timing-alignment-wip, origin/codex/macbook-fullscreen-timing-alignment-wip) Improve Aurora challenge timing evidence
-2d144d5c1 Calibrate reference sprite proportions
-4650b755f Fix arcade fullscreen playfield visibility
-b14cb07d5 Refine Aurora player fighter visual fidelity
-f22f00d51 Calibrate challenge sweeps against full analyzer rejections
-46f19bc04 Gate Stage 7 challenge candidates with full analyzer review
-56e319f29 Ground challenge timing in target motion tracks
-9a9ede246 Measure challenge visible-motion timing
+6650d54b5 (HEAD -> codex/macbook-challenge-stage-gameplay-spectacle, origin/codex/macbook-challenge-stage-gameplay-spectacle) Harden challenge tour transitions
+a2076fe56 Add challenge tour playability review
+5ed39193c Measure challenge perfect route potential
+38d93e45e Promote challenge motion evidence and interval labels
+bd1233c7c Add motion atlas conformance visualization
+09eba3375 Advance challenge movement grammar conformance
+5cc33dd01 (origin/codex/macbook-fullscreen-timing-alignment-wip, codex/macbook-fullscreen-timing-alignment-wip) Record Aurora authority handoff checkpoint
+0d74533e6 Improve Aurora challenge timing evidence
 ```
 
 ## Machine Status Snapshot
@@ -84,9 +164,9 @@ f22f00d51 Calibrate challenge sweeps against full analyzer rejections
     }
   },
   "repo": {
-    "branch": "codex/macbook-fullscreen-timing-alignment-wip",
-    "dirty": false,
-    "upstream": "origin/codex/macbook-fullscreen-timing-alignment-wip",
+    "branch": "codex/macbook-challenge-stage-gameplay-spectacle",
+    "dirty": true,
+    "upstream": "origin/codex/macbook-challenge-stage-gameplay-spectacle",
     "ahead": 0,
     "behind": 0,
     "remote_ok": true
@@ -132,8 +212,8 @@ f22f00d51 Calibrate challenge sweeps against full analyzer rejections
     "dev": {
       "ok": true,
       "version": "1.4.0",
-      "label": "1.4.0.1+build.932.sha.19db4fa4",
-      "commit": "19db4fa4",
+      "label": "1.4.0.1+build.963.sha.594f41bc",
+      "commit": "594f41bc",
       "releaseChannel": "development"
     },
     "beta": {
@@ -180,11 +260,11 @@ Read first:
 - MULTI_MACHINE_WORKFLOW.md
 
 Current checkpoint:
-- label: authority-handoff-challenge-timing-evidence
-- generated: 2026-05-31T12:25:48.645Z
-- branch: codex/macbook-fullscreen-timing-alignment-wip
-- commit: 0d74533e6 Improve Aurora challenge timing evidence
-- dirty files excluding checkpoint self-output: 0
+- label: challenge-routeability-grammar-pass
+- generated: 2026-05-31T22:03:15.788Z
+- branch: codex/macbook-challenge-stage-gameplay-spectacle
+- commit: 6650d54b5 Harden challenge tour transitions
+- dirty files excluding checkpoint self-output: 53
 
 Continue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.
 ```

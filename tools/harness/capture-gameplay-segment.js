@@ -93,36 +93,38 @@ function dataUrlToBuffer(dataUrl){
 }
 
 function captureConfig(args){
-  const startKind = String(args['start-kind'] || args.startKind || (boolValue(args.challenge, false) ? 'challenge' : 'level')).toLowerCase() === 'challenge'
-    ? 'challenge'
-    : 'level';
+  const rawStartKind = String(args['start-kind'] || args.startKind || (boolValue(args.challenge, false) ? 'challenge' : 'level')).trim().toLowerCase();
+  const startKind = rawStartKind === 'challenge-tour' ? 'challenge-tour' : (rawStartKind === 'challenge' ? 'challenge' : 'level');
+  const wantsChallengeWindow = startKind === 'challenge' || startKind === 'challenge-tour';
   const mode = String(args.mode || '').trim().toLowerCase();
   const persona = String(args.persona || args['watch-persona'] || args.expertPlays || '').trim().toLowerCase();
   const watchPersona = String(args['watch-persona'] || (mode === 'watch' ? persona : '') || '').trim().toLowerCase();
   const expertPlays = String(args['expert-plays'] || args.expertPlays || watchPersona || '').trim().toLowerCase();
-  const stageMode = String(args['stage-mode'] || args.stageMode || (startKind === 'challenge' ? 'display' : 'internal')).toLowerCase() === 'display'
+  const stageMode = String(args['stage-mode'] || args.stageMode || (wantsChallengeWindow ? 'display' : 'internal')).toLowerCase() === 'display'
     ? 'display'
     : 'internal';
-  const challengeStage = Math.max(1, Math.floor(numberValue(args['challenge-stage'] || args.challengeStage, 3, 1, 99)));
-  const stage = Math.max(1, Math.floor(numberValue(args.stage, startKind === 'challenge' ? 3 + (challengeStage - 1) * 4 : 1, 1, 99)));
-  const seconds = numberValue(args.seconds || args.duration, 30, 3, 180);
+  const defaultChallengeStage = startKind === 'challenge-tour' ? 1 : 3;
+  const challengeStage = Math.max(1, Math.floor(numberValue(args['challenge-stage'] || args.challengeStage, defaultChallengeStage, 1, 99)));
+  const stage = Math.max(1, Math.floor(numberValue(args.stage, wantsChallengeWindow ? 3 + (challengeStage - 1) * 4 : 1, 1, 99)));
+  const seconds = numberValue(args.seconds || args.duration, startKind === 'challenge-tour' ? 210 : 30, 3, 300);
   const preRoll = numberValue(args['pre-roll'] || args.preRoll, 0.15, 0, 120);
   const warmup = numberValue(args.warmup, 0.12, 0, 5);
   const waitForActive = boolValue(args['wait-for-active'] || args.waitForActive, true);
-  const activeMinEnemies = Math.max(1, Math.min(40, Math.floor(numberValue(args['active-min-enemies'] || args.activeMinEnemies, startKind === 'challenge' ? 3 : 1, 1, 40))));
+  const activeMinEnemies = Math.max(1, Math.min(40, Math.floor(numberValue(args['active-min-enemies'] || args.activeMinEnemies, wantsChallengeWindow ? 3 : 1, 1, 40))));
   const minStageClock = numberValue(args['min-stage-clock'] || args.minStageClock, 0, 0, 240);
-  const maxWaitActive = numberValue(args['max-wait-active'] || args.maxWaitActive, startKind === 'challenge' ? 35 : 12, 0, 180);
+  const maxWaitActive = numberValue(args['max-wait-active'] || args.maxWaitActive, wantsChallengeWindow ? 35 : 12, 0, 180);
   const activePollMs = Math.max(50, Math.min(1000, Math.floor(numberValue(args['active-poll-ms'] || args.activePollMs, 150, 50, 1000))));
   const seed = (+numberValue(args.seed, 9052, 1, 0xffffffff) >>> 0) || 9052;
   const fps = Math.max(12, Math.min(60, Math.floor(numberValue(args.fps, 60, 12, 60))));
   const width = Math.max(360, Math.min(1920, Math.floor(numberValue(args.width, 960, 360, 1920))));
   const height = Math.max(480, Math.min(2160, Math.floor(numberValue(args.height, 1280, 480, 2160))));
-  const label = slug(args.label || `${startKind === 'challenge' ? `challenge-${challengeStage}` : `stage-${stage}`}${persona ? `-${persona}` : ''}`);
+  const labelBase = startKind === 'challenge-tour' ? 'challenge-tour' : (startKind === 'challenge' ? `challenge-${challengeStage}` : `stage-${stage}`);
+  const label = slug(args.label || `${labelBase}${persona ? `-${persona}` : ''}`);
   return {
     stage,
     stageMode,
     startKind,
-    challenge: startKind === 'challenge' || boolValue(args.challenge, false),
+    challenge: wantsChallengeWindow || boolValue(args.challenge, false),
     challengeStage,
     ships: Math.max(1, Math.min(9, Math.floor(numberValue(args.ships, 3, 1, 9)))),
     persona,
@@ -217,7 +219,7 @@ async function main(){
       const formationState = api.formationState ? api.formationState() : null;
       const challengeVisible = visibleTargetsFromSnapshot(challengeState, 'enemies');
       const formationVisible = visibleTargetsFromSnapshot(formationState, 'targets');
-      const wantsChallenge = options.startKind === 'challenge';
+      const wantsChallenge = options.startKind === 'challenge' || options.startKind === 'challenge-tour';
       const visible = wantsChallenge ? challengeVisible : (state.challenge ? challengeVisible : formationVisible);
       const stageClockReady = Number(state.stageClock || 0) >= Number(options.minStageClock || 0);
       const stillCorrectWindow = wantsChallenge ? !!state.challenge : true;
@@ -368,7 +370,7 @@ async function main(){
       cfg
     });
   }
-  if(cfg.startKind === 'challenge' && pageResult.captureStartActivity && !pageResult.captureStartActivity.challenge){
+  if((cfg.startKind === 'challenge' || cfg.startKind === 'challenge-tour') && pageResult.captureStartActivity && !pageResult.captureStartActivity.challenge){
     fail('challenge gameplay segment capture left the challenge before the active window was reached', {
       captureStartActivity: pageResult.captureStartActivity,
       cfg
@@ -468,11 +470,12 @@ async function main(){
       'Use these clips for human-visible before/after review of movement, graphics, stage pacing, persona behavior, and audio feel.',
       'Pair captures with the same seed/start/persona settings when comparing candidates.',
       'For challenge-stage conformance, prefer startKind=challenge plus challengeStage=N so the public display label stays aligned with the internal stage marker.',
+      'For Challenge Tour review, use startKind=challenge-tour plus a watch persona to capture the ordered challenge sequence without recording a score.',
       'By default, recording waits until player-visible enemies are active; pass --wait-for-active=0 when the transition or blank/setup time is the intended evidence window.'
     ],
     warnings: [
       ...(pageResult.captureStartActivity?.timedOut ? ['Capture waited for active gameplay but timed out; the video may include setup/dead time.'] : []),
-      ...(cfg.startKind === 'challenge' && pageResult.captureStartActivity && !pageResult.captureStartActivity.challenge ? ['Challenge capture did not start inside a challenge window; discard this artifact for challenge-stage review.'] : []),
+      ...((cfg.startKind === 'challenge' || cfg.startKind === 'challenge-tour') && pageResult.captureStartActivity && !pageResult.captureStartActivity.challenge ? ['Challenge capture did not start inside a challenge window; discard this artifact for challenge-stage review.'] : []),
       ...(cfg.includeAudio && !(pageResult.audioTrackCount > 0) ? ['Audio was requested but the capture contains no audio track; use this as visual/motion evidence only.'] : []),
       ...(videoAssessment?.audioStreams && pageResult.audioTrackCount > 0 && videoAssessment.audioStreams.length === 0 ? ['Audio tracks were present during capture but absent after artifact repair; inspect rawVideo.'] : [])
     ]

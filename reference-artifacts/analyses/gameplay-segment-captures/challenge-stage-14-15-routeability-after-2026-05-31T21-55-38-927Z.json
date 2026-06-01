@@ -1,0 +1,355 @@
+{
+  "ok": true,
+  "artifactType": "gameplay-segment-capture",
+  "generatedAt": "2026-05-31T21:56:06.533Z",
+  "label": "challenge-stage-14-15-routeability-after",
+  "comparisonId": null,
+  "variant": null,
+  "notes": "after-culling-and-serpentine-readability-pass",
+  "capture": {
+    "stage": 15,
+    "stageMode": "display",
+    "startKind": "challenge",
+    "challenge": true,
+    "challengeStage": 4,
+    "ships": 3,
+    "persona": "professional",
+    "watchPersona": "professional",
+    "expertPlays": "professional",
+    "playerTwo": false,
+    "playerTwoPersona": null,
+    "seed": 9052,
+    "seconds": 24,
+    "preRoll": 0.15,
+    "warmup": 0.12,
+    "waitForActive": true,
+    "activeMinEnemies": 3,
+    "minStageClock": 0,
+    "maxWaitActive": 35,
+    "activePollMs": 150,
+    "fps": 60,
+    "viewport": {
+      "width": 960,
+      "height": 1280
+    },
+    "includeAudio": true,
+    "audioTrackCount": 1,
+    "audioDiagnostics": {
+      "requested": 1,
+      "contextStateBefore": "running",
+      "contextStateAfter": "running",
+      "tapAvailableBefore": true,
+      "tapAvailableAfter": true,
+      "trackStates": [
+        {
+          "kind": "audio",
+          "enabled": true,
+          "muted": false,
+          "readyState": "live"
+        }
+      ],
+      "warning": ""
+    },
+    "setup": "start"
+  },
+  "video": "reference-artifacts/analyses/gameplay-segment-captures/challenge-stage-14-15-routeability-after-2026-05-31T21-55-38-927Z.review.webm",
+  "rawVideo": "reference-artifacts/analyses/gameplay-segment-captures/challenge-stage-14-15-routeability-after-2026-05-31T21-55-38-927Z.webm",
+  "latestVideo": "reference-artifacts/analyses/gameplay-segment-captures/latest-challenge-stage-14-15-routeability-after.webm",
+  "poster": "reference-artifacts/analyses/gameplay-segment-captures/challenge-stage-14-15-routeability-after-2026-05-31T21-55-38-927Z.png",
+  "latestPoster": "reference-artifacts/analyses/gameplay-segment-captures/latest-challenge-stage-14-15-routeability-after.png",
+  "contactSheet": "reference-artifacts/analyses/gameplay-segment-captures/challenge-stage-14-15-routeability-after-2026-05-31T21-55-38-927Z-contact-sheet.jpg",
+  "latestContactSheet": "reference-artifacts/analyses/gameplay-segment-captures/latest-challenge-stage-14-15-routeability-after-contact-sheet.jpg",
+  "byteLength": 5425998,
+  "mime": "video/webm;codecs=vp9,opus",
+  "videoAssessment": {
+    "file": "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/gameplay-segment-captures/challenge-stage-14-15-routeability-after-2026-05-31T21-55-38-927Z.review.webm",
+    "size": 5425998,
+    "expectedDuration": 24,
+    "formatDuration": 24.035,
+    "drift": 0.03500000000000014,
+    "videoStreams": [
+      {
+        "index": 0,
+        "codec_name": "vp9",
+        "codec_type": "video",
+        "start_time": "0.000000"
+      }
+    ],
+    "audioStreams": [
+      {
+        "index": 1,
+        "codec_name": "opus",
+        "codec_type": "audio",
+        "start_time": "0.035000"
+      }
+    ],
+    "stderr": "",
+    "issues": [],
+    "ok": true,
+    "sourceFile": "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/gameplay-segment-captures/challenge-stage-14-15-routeability-after-2026-05-31T21-55-38-927Z.webm",
+    "repaired": true,
+    "initialIssues": [
+      "missing_duration"
+    ],
+    "initialSize": 5428037,
+    "initialFormatDuration": 0
+  },
+  "contactSheetAssessment": {
+    "ok": true,
+    "file": "/Users/sgwoods/Development/Codex/Codex-test1/reference-artifacts/analyses/gameplay-segment-captures/challenge-stage-14-15-routeability-after-2026-05-31T21-55-38-927Z-contact-sheet.jpg"
+  },
+  "startState": null,
+  "captureStartActivity": {
+    "waitedMs": 1057,
+    "timedOut": false,
+    "state": {
+      "started": 1,
+      "paused": 0,
+      "stage": 15,
+      "score": 0,
+      "lives": 3,
+      "challenge": true,
+      "recording": false,
+      "seed": 9052,
+      "simT": 1.183,
+      "stageClock": 1.183,
+      "persona": "professional",
+      "harnessPersona": "professional",
+      "watchMode": true,
+      "watchPersona": "professional",
+      "challengeTour": null,
+      "playerTwo": {
+        "enabled": false
+      },
+      "atmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "visualAtmosphere": {
+        "id": "aurora-borealis",
+        "group": "aurora",
+        "phase": "challenge",
+        "backgroundMode": "aurora-borealis",
+        "audioTheme": "aurora-surge",
+        "overrideThemeId": "aurora-borealis",
+        "starfield": {
+          "id": "aurora-borealis-stars",
+          "count": 88,
+          "alphaMin": 0.28,
+          "alphaMax": 0.64
+        }
+      },
+      "stagePresentation": {
+        "id": "galboss-veil",
+        "atmosphereTheme": "aurora-borealis",
+        "backgroundMode": "aurora-borealis"
+      },
+      "audioCue": {
+        "cue": "playerShot",
+        "atmosphereId": "aurora-borealis",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "challenge",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0.08,
+        "referenceClipDuration": 0.24,
+        "stage": 15,
+        "challenge": true,
+        "at": 1.784
+      },
+      "renderDebug": {
+        "backgroundMode": "aurora-borealis",
+        "starfieldProfile": "aurora-borealis-stars",
+        "starfieldCount": 88,
+        "starfieldIntensityScale": 1.25,
+        "starfieldSpeedScale": 1,
+        "spriteRenderMode": "auto",
+        "referencePixelSprites": false,
+        "playerBounds": {
+          "left": 186.04000000000016,
+          "right": 201.08000000000018,
+          "top": 328.42,
+          "bottom": 341.58
+        },
+        "reserveShipBounds": [
+          {
+            "left": 5.833600000000001,
+            "right": 18.1664,
+            "top": 346.6044,
+            "bottom": 357.3956
+          },
+          {
+            "left": 23.8336,
+            "right": 36.166399999999996,
+            "top": 346.6044,
+            "bottom": 357.3956
+          }
+        ]
+      },
+      "graphics": {
+        "graphicsTheme": "aurora-borealis",
+        "spriteRenderMode": "auto",
+        "starfieldIntensity": 1.25,
+        "starfieldSpeed": 1
+      },
+      "audio": {
+        "audioTheme": "galaga-reference-assets"
+      },
+      "extend": {
+        "first": 20000,
+        "recurring": 70000,
+        "next": 20000,
+        "awards": 0,
+        "flashT": 0,
+        "flashShips": 0
+      }
+    },
+    "challenge": true,
+    "stage": 15,
+    "stageClock": 1.183,
+    "score": 0,
+    "visibleEnemyCount": 6,
+    "challengeVisibleEnemyCount": 6,
+    "formationVisibleEnemyCount": 0,
+    "stageClockReady": true,
+    "stillCorrectWindow": true,
+    "active": true
+  },
+  "finalState": {
+    "started": 1,
+    "paused": 0,
+    "stage": 15,
+    "score": 15900,
+    "lives": 3,
+    "challenge": true,
+    "recording": false,
+    "seed": 9052,
+    "simT": 25.333,
+    "stageClock": 25.333,
+    "persona": "professional",
+    "harnessPersona": "professional",
+    "watchMode": true,
+    "watchPersona": "professional",
+    "challengeTour": null,
+    "playerTwo": {
+      "enabled": false
+    },
+    "atmosphere": {
+      "id": "aurora-borealis",
+      "group": "aurora",
+      "phase": "challenge",
+      "backgroundMode": "aurora-borealis",
+      "audioTheme": "galaga-reference-assets",
+      "starfield": {
+        "id": "aurora-borealis-stars",
+        "count": 88,
+        "alphaMin": 0.28,
+        "alphaMax": 0.64
+      }
+    },
+    "visualAtmosphere": {
+      "id": "aurora-borealis",
+      "group": "aurora",
+      "phase": "challenge",
+      "backgroundMode": "aurora-borealis",
+      "audioTheme": "aurora-surge",
+      "overrideThemeId": "aurora-borealis",
+      "starfield": {
+        "id": "aurora-borealis-stars",
+        "count": 88,
+        "alphaMin": 0.28,
+        "alphaMax": 0.64
+      }
+    },
+    "stagePresentation": {
+      "id": "galboss-veil",
+      "atmosphereTheme": "aurora-borealis",
+      "backgroundMode": "aurora-borealis"
+    },
+    "audioCue": {
+      "cue": "challengeResults",
+      "atmosphereId": "aurora-borealis",
+      "audioTheme": "galaga-reference-assets",
+      "phase": "challenge",
+      "variant": 0,
+      "referenceClip": "assets/reference-audio/galaga2-challenging-stage-results.m4a",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 4,
+      "stage": 15,
+      "challenge": true,
+      "at": 16.84
+    },
+    "renderDebug": {
+      "backgroundMode": "aurora-borealis",
+      "starfieldProfile": "aurora-borealis-stars",
+      "starfieldCount": 88,
+      "starfieldIntensityScale": 1.25,
+      "starfieldSpeedScale": 1,
+      "spriteRenderMode": "auto",
+      "referencePixelSprites": false,
+      "playerBounds": {
+        "left": 82.78666666666699,
+        "right": 97.82666666666698,
+        "top": 328.42,
+        "bottom": 341.58
+      },
+      "reserveShipBounds": [
+        {
+          "left": 5.833600000000001,
+          "right": 18.1664,
+          "top": 346.6044,
+          "bottom": 357.3956
+        },
+        {
+          "left": 23.8336,
+          "right": 36.166399999999996,
+          "top": 346.6044,
+          "bottom": 357.3956
+        }
+      ]
+    },
+    "graphics": {
+      "graphicsTheme": "aurora-borealis",
+      "spriteRenderMode": "auto",
+      "starfieldIntensity": 1.25,
+      "starfieldSpeed": 1
+    },
+    "audio": {
+      "audioTheme": "galaga-reference-assets"
+    },
+    "extend": {
+      "first": 20000,
+      "recurring": 70000,
+      "next": 20000,
+      "awards": 0,
+      "flashT": 0,
+      "flashShips": 0
+    }
+  },
+  "formationState": {
+    "stage": 15,
+    "challenge": true,
+    "layoutId": "pink-serpentine-late",
+    "enemyCount": 0,
+    "referencePathGroups": 5,
+    "activeReferenceTrackedEnemies": 0,
+    "referenceTrackIds": []
+  },
+  "reviewFocus": [
+    "Use these clips for human-visible before/after review of movement, graphics, stage pacing, persona behavior, and audio feel.",
+    "Pair captures with the same seed/start/persona settings when comparing candidates.",
+    "For challenge-stage conformance, prefer startKind=challenge plus challengeStage=N so the public display label stays aligned with the internal stage marker.",
+    "For Challenge Tour review, use startKind=challenge-tour plus a watch persona to capture the ordered challenge sequence without recording a score.",
+    "By default, recording waits until player-visible enemies are active; pass --wait-for-active=0 when the transition or blank/setup time is the intended evidence window."
+  ],
+  "warnings": []
+}

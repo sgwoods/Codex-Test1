@@ -101,6 +101,7 @@
     "harness:check:video-artifact": "node tools/harness/check-video-artifact.js",
     "harness:capture:gameplay-segment": "node tools/harness/capture-gameplay-segment.js",
     "harness:capture:challenge-stage-snippet": "node tools/harness/capture-gameplay-segment.js --start-kind=challenge --challenge-stage=3 --mode=watch --persona=professional --seconds=30 --label=challenge-stage-3-professional-review",
+    "harness:capture:challenge-tour": "node tools/harness/capture-gameplay-segment.js --start-kind=challenge-tour --mode=watch --persona=professional --seconds=210 --label=challenge-tour-professional-review",
     "harness:check:portable-paths": "node tools/harness/check-summary-portability.js",
     "harness:repair:videos": "node tools/harness/repair-video-artifacts.js",
     "harness:repair:summaries": "node tools/harness/sanitize-summary-paths.js",
@@ -348,7 +349,9 @@
     "harness:check:rescue-join-stage-clear": "node tools/harness/check-rescue-join-on-stage-clear.js",
     "harness": "node tools/harness/run-gameplay.js",
     "log-viewer": "node tools/log-viewer/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "harness:analyze:challenge-stage-routeability": "node tools/harness/analyze-challenge-stage-routeability.js",
+    "harness:check:challenge-stage-routeability": "node tools/harness/check-challenge-stage-routeability.js"
   },
   "repository": {
     "type": "git",

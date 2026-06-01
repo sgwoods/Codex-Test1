@@ -427,7 +427,8 @@ function updateChallengeEnemy(e,dt){
    S.ch.upperBandSamples++;
   }
  }
- if(e.y>PLAY_H+34||e.x<-54||e.x>PLAY_W+54){
+ const earlyEntry=e.tm<.85;
+ if(e.y>PLAY_H+34||(!earlyEntry&&(e.x<-54||e.x>PLAY_W+54))){
   e.hp=0;
   e.miss=1;
  }

@@ -70,6 +70,7 @@ const GALAGA_REFERENCE_SPRITE_MODEL = path.join(ROOT, 'reference-artifacts', 'an
 const APPLICATION_ARTIFACT_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'application-artifact-conformance', 'latest.json');
 const CHALLENGE_STAGE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
 const CHALLENGE_STAGE_HUMAN_PLAYABILITY = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-human-playability', 'latest.json');
+const CHALLENGE_STAGE_ROUTEABILITY = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-routeability', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_SWEEP = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_SWEEP_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep-index', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_FULL_ANALYZER_REVIEW = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-full-analyzer-review', 'latest.json');
@@ -3275,6 +3276,7 @@ let galagaReferenceSpriteModelCache = null;
 let applicationArtifactConformanceCache = null;
 let challengeStageConformanceCache = null;
 let challengeStageHumanPlayabilityCache = null;
+let challengeStageRouteabilityCache = null;
 let challengeStageCandidateSweepCache = null;
 let challengeStageCandidateSweepIndexCache = null;
 let challengeStageCandidateFullAnalyzerReviewCache = null;
@@ -3689,6 +3691,29 @@ function loadChallengeStageHumanPlayability(){
   return challengeStageHumanPlayabilityCache;
 }
 
+function loadChallengeStageRouteability(){
+  if(challengeStageRouteabilityCache) return challengeStageRouteabilityCache;
+  if(!fs.existsSync(CHALLENGE_STAGE_ROUTEABILITY)){
+    challengeStageRouteabilityCache = { summary: {}, stageRows: [] };
+    return challengeStageRouteabilityCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_STAGE_ROUTEABILITY);
+    const stageRows = Array.isArray(artifact.stageRows)
+      ? artifact.stageRows
+      : artifact.summary
+        ? [{ summary: artifact.summary, layout: artifact.layout || {}, rows: Array.isArray(artifact.rows) ? artifact.rows : [] }]
+        : [];
+    challengeStageRouteabilityCache = Object.assign({}, artifact, {
+      summary: artifact.summary || {},
+      stageRows
+    });
+  } catch (err) {
+    challengeStageRouteabilityCache = { summary: {}, stageRows: [] };
+  }
+  return challengeStageRouteabilityCache;
+}
+
 function loadChallengeStageCandidateSweep(){
   if(challengeStageCandidateSweepCache) return challengeStageCandidateSweepCache;
   if(!fs.existsSync(CHALLENGE_STAGE_CANDIDATE_SWEEP)){
@@ -3988,6 +4013,40 @@ function renderChallengeHumanPlayabilityDetail(row = {}){
       </div>
     </details>
   `;
+}
+
+function renderChallengeRouteabilityRow(row = {}){
+  const s = row.summary || {};
+  const target = s.targetCount ?? 40;
+  return `
+    <tr>
+      <td><strong>${esc(s.label || 'Challenging Stage pending')}</strong><br><span class="docMeta">${esc(s.layoutId || '')}</span></td>
+      <td>${esc(s.trackedRows ?? 'n/a')}/${esc(target)}</td>
+      <td>${esc(s.scoreableRows ?? 'n/a')}/${esc(target)}<br><span class="docMeta">${esc(s.readableRows ?? 'n/a')}/${esc(target)} readable</span></td>
+      <td><strong>${esc(s.greedyRouteKills ?? 'n/a')}/${esc(target)}</strong><br><span class="docMeta">${esc(s.greedyRouteScore10 ?? 'n/a')}/10 greedy route</span></td>
+      <td>${esc((s.weakestRows || [])[0] || 'No routeability blocker isolated.')}</td>
+    </tr>
+  `;
+}
+
+function renderChallengeRouteabilityDetails(report = {}){
+  const rows = Array.isArray(report.stageRows) ? report.stageRows : [];
+  if(!rows.length) return '<p class="docMeta">Routeability report pending. Run <code>npm run harness:analyze:challenge-stage-routeability -- --stages=3,7,11,15,19</code>.</p>';
+  return rows.map(row => {
+    const s = row.summary || {};
+    const target = s.targetCount ?? 40;
+    const weak = Array.isArray(s.weakestRows) ? s.weakestRows.slice(0, 4) : [];
+    return `
+      <details class="inlineDocPreview">
+        <summary>${esc(s.label || 'Challenging Stage pending')} routeability evidence</summary>
+        <div class="inlineDocPreviewBody">
+          <p><strong>Player route:</strong> ${esc(s.greedyRouteKills ?? 'n/a')}/${esc(target)} greedy-route targets from ${esc(s.firstRouteT ?? 'n/a')}s to ${esc(s.lastRouteT ?? 'n/a')}s. Scoreable exposure: ${esc(s.scoreableRows ?? 'n/a')}/${esc(target)}; readable rows: ${esc(s.readableRows ?? 'n/a')}/${esc(target)}.</p>
+          <p class="docMeta">This is a player-experience guardrail, not a claim of target-video choreography. The stricter conformance score still depends on movement shape, visual novelty, and target-object-track fit.</p>
+          ${challengeList(weak.length ? weak : ['No routeability blocker isolated in this probe.'])}
+        </div>
+      </details>
+    `;
+  }).join('\n');
 }
 
 function challengeScoreComponents(row = {}){
@@ -5789,6 +5848,12 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const challengeSummary = challengeStageConformance.summary || {};
   const challengeHumanPlayability = loadChallengeStageHumanPlayability();
   const challengeHumanSummary = challengeHumanPlayability.summary || {};
+  const challengeStageRouteability = loadChallengeStageRouteability();
+  const challengeRouteabilitySummary = challengeStageRouteability.summary || {};
+  const challengeRouteabilityRows = (challengeStageRouteability.stageRows || []).map(renderChallengeRouteabilityRow).join('\n') || `
+    <tr><td colspan="5">Routeability report pending. Run <code>npm run harness:analyze:challenge-stage-routeability -- --stages=3,7,11,15,19</code>.</td></tr>
+  `;
+  const challengeRouteabilityDetails = renderChallengeRouteabilityDetails(challengeStageRouteability);
   const challengeHumanRows = (challengeHumanPlayability.focusRows || []).map(renderChallengeHumanPlayabilityRow).join('\n') || `
     <tr><td colspan="6">Human-playability review pending. Run <code>npm run harness:analyze:challenge-stage-human-playability</code>.</td></tr>
   `;
@@ -6734,6 +6799,23 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
               </div>
               <div class="challengeStageList" style="margin-top:16px;">
                 ${challengeHumanDetails}
+              </div>
+            </div>
+            <div id="challenge-stage-routeability" class="inlineDocShelf" style="display:block;">
+              <h3>Routeability Guardrail</h3>
+              <p><strong>Current routeability read:</strong> ${esc(challengeRouteabilitySummary.averageGreedyRouteScore10 ?? 'n/a')}/10 average greedy route, ${esc(challengeRouteabilitySummary.totalRouteKills ?? 'n/a')}/${esc(challengeRouteabilitySummary.totalTrackedRows ?? 'n/a')} routed targets across ${esc(challengeRouteabilitySummary.stageCount ?? 'n/a')} first-focus challenge stage(s).</p>
+              <p>${esc(challengeRouteabilitySummary.read || 'Run the routeability analyzer to verify that the visible challenge targets are actually scoreable before adding spectacle.')}</p>
+              <p class="docMeta"><strong>Generated artifact:</strong> <code>reference-artifacts/analyses/challenge-stage-routeability/latest.json</code>. <strong>Markdown report:</strong> <code>CHALLENGE_STAGE_ROUTEABILITY_REVIEW.md</code>.</p>
+              <div class="tableWrap">
+                <table class="dataTable">
+                  <thead>
+                    <tr><th>Stage</th><th>Tracked</th><th>Scoreable / Readable</th><th>Greedy Route</th><th>Main Blocker</th></tr>
+                  </thead>
+                  <tbody>${challengeRouteabilityRows}</tbody>
+                </table>
+              </div>
+              <div class="inlineDocShelf">
+                ${challengeRouteabilityDetails}
               </div>
             </div>
             ${stage7ReferencePathEvidence}

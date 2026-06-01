@@ -756,7 +756,7 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   dropAmp:1.14,
   groupArcAmps:Object.freeze([1.63,1.26,1.27,1.79,1.21]),
   groupDropAmps:Object.freeze([1.01,1.25,1.08,1.37,1.31]),
-  groupSpeedScales:Object.freeze([2.65,1.97,2.65,2.12,2.65]),
+  groupSpeedScales:Object.freeze([2.38,1.82,2.38,1.96,2.38]),
   laneTypes:Object.freeze(['but','boss','rogue','bee','bee','rogue','boss','but']),
   groupLaneTypes:Object.freeze([
    Object.freeze(['but','boss','rogue','bee','bee','rogue','boss','but']),
@@ -818,7 +818,7 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   groupSpawnOffsets:Object.freeze([0,.5,2.88,6.38,13.13]),
   groupArcAmps:Object.freeze([1.54,1.3,1.31,1.31,1.83]),
   groupDropAmps:Object.freeze([1.33,1.21,1.59,1.59,.98]),
-  groupSpeedScales:Object.freeze([.95,1,.92,.96,1]),
+  groupSpeedScales:Object.freeze([.82,.88,.82,.86,.88]),
   groupLowerFieldBiases:Object.freeze([210,230,130,120,230]),
   groupYOffsets:Object.freeze([59,80,3,0,86]),
   laneTypes:Object.freeze(['boss','rogue','but','bee','bee','but','rogue','boss']),

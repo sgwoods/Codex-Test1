@@ -15,31 +15,31 @@
   <line class="grid" x1="64" y1="96" x2="64" y2="228"/><line class="grid" x1="352" y1="96" x2="352" y2="228"/><line class="grid" x1="120" y1="96" x2="120" y2="228"/><line class="grid" x1="408" y1="96" x2="408" y2="228"/><line class="grid" x1="176" y1="96" x2="176" y2="228"/><line class="grid" x1="464" y1="96" x2="464" y2="228"/><line class="grid" x1="232" y1="96" x2="232" y2="228"/><line class="grid" x1="520" y1="96" x2="520" y2="228"/>
   <line class="grid" x1="64" y1="108" x2="284" y2="108"/><line class="grid" x1="352" y1="108" x2="572" y2="108"/><line class="grid" x1="64" y1="150" x2="284" y2="150"/><line class="grid" x1="352" y1="150" x2="572" y2="150"/><line class="grid" x1="64" y1="192" x2="284" y2="192"/><line class="grid" x1="352" y1="192" x2="572" y2="192"/>
   <polyline class="target" points="203.6,80 179.6,94.5 187,108.9 150,123.3 144.4,137.8"/>
-  <polyline class="current" points="439,80 457.7,111.2 451.9,142.4 480.7,173.5 485,204.7"/>
+  <polyline class="current" points="439.4,80 457.7,110.6 452,141.3 480.4,171.9 484.6,202.6"/>
   <circle class="dotT" cx="203.6" cy="80" r="5"/>
-  <circle class="dotC" cx="439" cy="80" r="5"/>
+  <circle class="dotC" cx="439.4" cy="80" r="5"/>
   <text class="tiny" x="58" y="264">target: y 0.34 path 0.82 turns 2</text>
-  <text class="tiny" x="346" y="264">current: y 0.7337 path 0.9498 turns 2</text>
+  <text class="tiny" x="346" y="264">current: y 0.7211 path 0.9273 turns 1.8</text>
   <g>
   <text x="620" y="82" class="tiny">y range target/current</text>
   <rect x="620" y="88" width="108" height="8" rx="4" class="barBg"/>
   <rect x="620" y="88" width="23" height="8" rx="4" class="targetBar"/>
   <rect x="620" y="99" width="108" height="8" rx="4" class="barBg"/>
-  <rect x="620" y="99" width="49.5" height="8" rx="4" class="currentBar"/>
+  <rect x="620" y="99" width="48.7" height="8" rx="4" class="currentBar"/>
   </g>
   <g>
   <text x="620" y="128" class="tiny">path length target/current</text>
   <rect x="620" y="134" width="108" height="8" rx="4" class="barBg"/>
   <rect x="620" y="134" width="55.3" height="8" rx="4" class="targetBar"/>
   <rect x="620" y="145" width="108" height="8" rx="4" class="barBg"/>
-  <rect x="620" y="145" width="64.1" height="8" rx="4" class="currentBar"/>
+  <rect x="620" y="145" width="62.6" height="8" rx="4" class="currentBar"/>
   </g>
   <g>
   <text x="620" y="174" class="tiny">lower field target/current</text>
   <rect x="620" y="180" width="108" height="8" rx="4" class="barBg"/>
   <rect x="620" y="180" width="4.7" height="8" rx="4" class="targetBar"/>
   <rect x="620" y="191" width="108" height="8" rx="4" class="barBg"/>
-  <rect x="620" y="191" width="44.5" height="8" rx="4" class="currentBar"/>
+  <rect x="620" y="191" width="44.6" height="8" rx="4" class="currentBar"/>
   </g>
   <text class="tiny" x="620" y="242">Reference: challenge-2-arrival-group-1</text>
 </svg>

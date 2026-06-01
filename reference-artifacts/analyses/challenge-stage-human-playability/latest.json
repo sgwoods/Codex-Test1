@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "challenge-stage-human-playability",
-  "generatedAt": "2026-05-31T20:46:37.740Z",
-  "commit": "5ed39193c",
+  "generatedAt": "2026-05-31T21:49:34.465Z",
+  "commit": "6650d54b5",
   "branch": "codex/macbook-challenge-stage-gameplay-spectacle",
   "sourceArtifact": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
   "summary": {
@@ -10,10 +10,10 @@
     "focusCount": 5,
     "laterCount": 3,
     "focusAverageStrictScore10": 4.4,
-    "focusAverageHumanPerfectPotential10": 7,
+    "focusAverageHumanPerfectPotential10": 7.6,
     "focusAverageTargetVideoObjectTrackFit10": 3.9,
     "focusAverageAlienNovelty10": 3.9,
-    "weakestFocusStage": "Challenging Stage 18-19",
+    "weakestFocusStage": "Challenging Stage 2-3",
     "nextBestEffort": "Rebuild the weakest first-five challenge candidate around target-video object tracks, then re-run this report and challenge-stage conformance."
   },
   "focusRows": [
@@ -24,34 +24,32 @@
       "phase": "first-five-focus",
       "layoutId": "first-challenge-peel",
       "targetRead": "Challenging Stage 2-3 should be a readable Galaga-style bonus set piece: no fire, no ship loss, upper-band mirrored entries, bee/butterfly line waves, visible arrival/peel-off.",
-      "currentRead": "first-challenge-peel / first-challenge-peel; lanes bee, bee, bee, bee, but, but, but, but; first-wave types bee, bee, bee, bee, but, but, but, but; visual families classic; strict movement 4.2/10, graphics 4.4/10, alien novelty 3.9/10, shot opportunity 6.4/10, target-contract fit 6.9/10.",
-      "humanProblem": "perfect route incomplete (38/40); too much top-crowd pressure (31%); movement track fit too low (3.1/10); alien novelty too weak (3.9/10); visual conformance still early (4.4/10)",
+      "currentRead": "first-challenge-peel / first-challenge-peel; lanes bee, bee, bee, bee, but, but, but, but; first-wave types bee, bee, bee, bee, but, but, but, but; visual families classic; strict movement 4.1/10, graphics 4.4/10, alien novelty 3.9/10, shot opportunity 6.5/10, target-contract fit 6.9/10.",
+      "humanProblem": "too much top-crowd pressure (30%); movement track fit too low (3.1/10); alien novelty too weak (3.9/10); visual conformance still early (4.4/10)",
       "recommendation": "Keep the safe bee/butterfly lesson, but rebuild timing and vertical descent so all 40 targets are visibly routeable, with less top-band crowding and clearer first/late wave separation.",
       "metrics": {
         "strictScore10": 4.3,
         "interest10": 4.3,
-        "movement10": 4.2,
+        "movement10": 4.1,
         "graphics10": 4.4,
         "alienNovelty10": 3.9,
-        "playerShotOpportunity10": 6.4,
-        "humanPerfectPotential10": 7.1,
+        "playerShotOpportunity10": 6.5,
+        "humanPerfectPotential10": 7.3,
         "targetContractFit10": 6.9,
         "targetVideoObjectTrackFit10": 3.1,
         "spriteMotionCorrespondence10": 6.2,
         "safetyRule10": 10
       },
       "route": {
-        "routeKills": 38,
+        "routeKills": 40,
         "expectedTargetCount": 40,
-        "targetExposureShare": 0.95,
-        "sustainedExposureShare": 0.95,
+        "targetExposureShare": 1,
+        "sustainedExposureShare": 1,
         "readableAltitudeShare": 0.904,
-        "topCrowdShare": 0.31,
+        "topCrowdShare": 0.298,
         "firstRouteT": 8.5,
         "lastRouteT": 18.5,
-        "weakestReasons": [
-          "runtime probe only tracked 38/40 expected challenge targets"
-        ]
+        "weakestReasons": []
       },
       "nextActions": [
         "Protect the Challenging Stage 2-3 bee/butterfly line contract, then tune path length, turn count, and rack-slot precision against the 2-3 arrival and late-wave labels.",
@@ -59,8 +57,7 @@
       ],
       "criticalGaps": [
         "Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.",
-        "Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
-        "Human-perfect route read is 7.1/10: 38/40 expected targets are reachable in the current greedy strong-player route, tracked targets are 38/40, and remaining issues are runtime probe only tracked 38/40 expected challenge targets."
+        "Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns."
       ]
     },
     {
@@ -70,31 +67,31 @@
       "phase": "first-five-focus",
       "layoutId": "scorpion-cross-sweep",
       "targetRead": "Challenging Stage 6-7 should feel denser and more novel than Challenging Stage 2-3 while staying nonlethal and non-shooting.",
-      "currentRead": "scorpion-cross-sweep / cross-sweep; lanes but, boss, rogue, bee, bee, rogue, boss, but; first-wave types but, boss, rogue, bee, bee, rogue, boss, but; visual families classic; strict movement 4.6/10, graphics 4.2/10, alien novelty 3.9/10, shot opportunity 6.6/10, target-contract fit 7.2/10.",
-      "humanProblem": "perfect route incomplete (36/40); movement track fit too low (4.6/10); alien novelty too weak (3.9/10); visual conformance still early (4.2/10)",
+      "currentRead": "scorpion-cross-sweep / cross-sweep; lanes but, boss, rogue, bee, bee, rogue, boss, but; first-wave types but, boss, rogue, bee, bee, rogue, boss, but; visual families classic; strict movement 4.5/10, graphics 4.2/10, alien novelty 3.9/10, shot opportunity 6.9/10, target-contract fit 7.2/10.",
+      "humanProblem": "movement track fit too low (4.6/10); alien novelty too weak (3.9/10); visual conformance still early (4.2/10)",
       "recommendation": "Make the cross-sweep readable as a deliberate second challenge: fewer overlapping upper-band clusters, clearer left/right crossing lanes, and a memorable specialty-family introduction rather than a shuffled first challenge.",
       "metrics": {
         "strictScore10": 4.4,
         "interest10": 4.4,
-        "movement10": 4.6,
+        "movement10": 4.5,
         "graphics10": 4.2,
         "alienNovelty10": 3.9,
-        "playerShotOpportunity10": 6.6,
-        "humanPerfectPotential10": 7.1,
+        "playerShotOpportunity10": 6.9,
+        "humanPerfectPotential10": 7.5,
         "targetContractFit10": 7.2,
         "targetVideoObjectTrackFit10": 4.6,
         "spriteMotionCorrespondence10": 6.2,
         "safetyRule10": 10
       },
       "route": {
-        "routeKills": 36,
+        "routeKills": 40,
         "expectedTargetCount": 40,
-        "targetExposureShare": 0.95,
-        "sustainedExposureShare": 0.875,
-        "readableAltitudeShare": 0.585,
-        "topCrowdShare": 0.11,
+        "targetExposureShare": 1,
+        "sustainedExposureShare": 0.95,
+        "readableAltitudeShare": 0.583,
+        "topCrowdShare": 0.102,
         "firstRouteT": 0.75,
-        "lastRouteT": 14.75,
+        "lastRouteT": 15,
         "weakestReasons": []
       },
       "nextActions": [
@@ -104,7 +101,6 @@
       "criticalGaps": [
         "Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.",
         "Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
-        "Human-perfect route read is 7.1/10: 36/40 expected targets are reachable in the current greedy strong-player route, tracked targets are 40/40, and remaining issues are not yet isolated.",
         "Cross-sweep identity now lands on the expected Challenging Stage 6-7 reference family; next work is trajectory precision and active visual novelty, not basic identity."
       ]
     },
@@ -159,8 +155,8 @@
       "phase": "first-five-focus",
       "layoutId": "pink-serpentine-late",
       "targetRead": "Challenging Stage 14-15 should shift into long specialty serpentine arcs with obvious new color/family identity while staying nonlethal.",
-      "currentRead": "pink-serpentine-late / pink-serpentine; lanes boss, rogue, but, bee, bee, but, rogue, boss; first-wave types boss, rogue, but, bee, bee, but, rogue, boss; visual families galboss; strict movement 4.3/10, graphics 4.6/10, alien novelty 3.9/10, shot opportunity 7/10, target-contract fit 5/10.",
-      "humanProblem": "perfect route incomplete (36/40); movement track fit too low (4.3/10); alien novelty too weak (3.9/10); visual conformance still early (4.6/10)",
+      "currentRead": "pink-serpentine-late / pink-serpentine; lanes boss, rogue, but, bee, bee, but, rogue, boss; first-wave types boss, rogue, but, bee, bee, but, rogue, boss; visual families galboss; strict movement 4.3/10, graphics 4.6/10, alien novelty 3.9/10, shot opportunity 7.1/10, target-contract fit 4.9/10.",
+      "humanProblem": "perfect route incomplete (38/40); movement track fit too low (4.1/10); alien novelty too weak (3.9/10); visual conformance still early (4.6/10)",
       "recommendation": "Recast as a specialty serpentine set piece. The stage should look like a new authored pattern, not a faster remix, with long flowing arcs that still pass through learnable firing lanes.",
       "metrics": {
         "strictScore10": 4.4,
@@ -168,19 +164,19 @@
         "movement10": 4.3,
         "graphics10": 4.6,
         "alienNovelty10": 3.9,
-        "playerShotOpportunity10": 7,
-        "humanPerfectPotential10": 7.4,
-        "targetContractFit10": 5,
-        "targetVideoObjectTrackFit10": 4.3,
+        "playerShotOpportunity10": 7.1,
+        "humanPerfectPotential10": 7.7,
+        "targetContractFit10": 4.9,
+        "targetVideoObjectTrackFit10": 4.1,
         "spriteMotionCorrespondence10": 6.2,
         "safetyRule10": 10
       },
       "route": {
-        "routeKills": 36,
+        "routeKills": 38,
         "expectedTargetCount": 40,
-        "targetExposureShare": 0.9,
-        "sustainedExposureShare": 0.8,
-        "readableAltitudeShare": 0.942,
+        "targetExposureShare": 0.95,
+        "sustainedExposureShare": 0.85,
+        "readableAltitudeShare": 0.951,
         "topCrowdShare": 0,
         "firstRouteT": 0.25,
         "lastRouteT": 14,
@@ -193,7 +189,7 @@
       "criticalGaps": [
         "Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.",
         "Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
-        "Human-perfect route read is 7.4/10: 36/40 expected targets are reachable in the current greedy strong-player route, tracked targets are 40/40, and remaining issues are not yet isolated.",
+        "Target-contract fit is only 4.9/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.",
         "Pink-serpentine identity now lands on its first-pass late reference, but it still needs five-group frame labels, target sprite-motion evidence, and stronger player-visible novelty before it can claim maturity."
       ]
     },
@@ -204,36 +200,32 @@
       "phase": "first-five-focus",
       "layoutId": "pink-green-cascade",
       "targetRead": "Challenging Stage 18-19 should distinguish itself with pink/green cascade motion, alternating group identity, and stronger lower-field pass readability.",
-      "currentRead": "pink-green-cascade / pink-green-cascade; lanes rogue, boss, but, bee, boss, but, bee, rogue; first-wave types rogue, boss, but, bee, boss, but, bee, rogue; visual families galboss; strict movement 4.6/10, graphics 4.7/10, alien novelty 3.9/10, shot opportunity 5.9/10, target-contract fit 3.9/10.",
-      "humanProblem": "perfect route incomplete (26/40); movement track fit too low (2.7/10); alien novelty too weak (3.9/10); visual conformance still early (4.7/10)",
+      "currentRead": "pink-green-cascade / pink-green-cascade; lanes rogue, boss, but, bee, boss, but, bee, rogue; first-wave types rogue, boss, but, bee, boss, but, bee, rogue; visual families galboss; strict movement 4.6/10, graphics 4.7/10, alien novelty 3.9/10, shot opportunity 6.8/10, target-contract fit 4.1/10.",
+      "humanProblem": "movement track fit too low (2.9/10); alien novelty too weak (3.9/10); visual conformance still early (4.7/10)",
       "recommendation": "Treat this as the current emergency stage: rebuild the cascade around all 40 tracked targets, alternating pink/green identity, lower-field score windows, and a perfect-route plan before adding more novelty.",
       "metrics": {
-        "strictScore10": 4.4,
-        "interest10": 4.5,
+        "strictScore10": 4.5,
+        "interest10": 4.6,
         "movement10": 4.6,
         "graphics10": 4.7,
         "alienNovelty10": 3.9,
-        "playerShotOpportunity10": 5.9,
-        "humanPerfectPotential10": 6,
-        "targetContractFit10": 3.9,
-        "targetVideoObjectTrackFit10": 2.7,
+        "playerShotOpportunity10": 6.8,
+        "humanPerfectPotential10": 7.8,
+        "targetContractFit10": 4.1,
+        "targetVideoObjectTrackFit10": 2.9,
         "spriteMotionCorrespondence10": 6.2,
         "safetyRule10": 10
       },
       "route": {
-        "routeKills": 26,
+        "routeKills": 40,
         "expectedTargetCount": 40,
-        "targetExposureShare": 0.65,
-        "sustainedExposureShare": 0.65,
-        "readableAltitudeShare": 0.879,
-        "topCrowdShare": 0.078,
+        "targetExposureShare": 1,
+        "sustainedExposureShare": 1,
+        "readableAltitudeShare": 0.887,
+        "topCrowdShare": 0.066,
         "firstRouteT": 2,
-        "lastRouteT": 8.25,
-        "weakestReasons": [
-          "14/40 expected targets lack a reachable greedy firing route",
-          "0/26 targets lack any ballistic firing window",
-          "runtime probe only tracked 26/40 expected challenge targets"
-        ]
+        "lastRouteT": 8,
+        "weakestReasons": []
       },
       "nextActions": [
         "Promote the Challenging Stage 18-19 pink/green cascade window into five group labels and tune lower-field pass timing against those labels.",
@@ -242,8 +234,7 @@
       "criticalGaps": [
         "Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.",
         "Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
-        "Human-perfect route read is 6/10: 26/40 expected targets are reachable in the current greedy strong-player route, tracked targets are 26/40, and remaining issues are 14/40 expected targets lack a reachable greedy firing route; 0/26 targets lack any ballistic firing window; runtime probe only tracked 26/40 expected challenge targets.",
-        "Target-contract fit is only 3.9/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.",
+        "Target-contract fit is only 4.1/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.",
         "Pink/green cascade identity now lands on its first-pass late reference, but the current window still needs five group labels and stronger lower-field route readability."
       ]
     }
@@ -256,35 +247,32 @@
       "phase": "later-backlog",
       "layoutId": "green-ladder-split",
       "targetRead": "Challenging Stage 22-23 should emphasize green ladder rhythm and split exits.",
-      "currentRead": "green-ladder-split / green-ladder-split; lanes bee, but, rogue, boss, boss, rogue, but, bee; first-wave types bee, but, rogue, boss, boss, rogue, but, bee; visual families dragonfly; strict movement 4.3/10, graphics 4.6/10, alien novelty 3.9/10, shot opportunity 6.3/10, target-contract fit 4.8/10.",
-      "humanProblem": "perfect route incomplete (30/40); movement track fit too low (3.9/10); alien novelty too weak (3.9/10); visual conformance still early (4.6/10)",
+      "currentRead": "green-ladder-split / green-ladder-split; lanes bee, but, rogue, boss, boss, rogue, but, bee; first-wave types bee, but, rogue, boss, boss, rogue, but, bee; visual families dragonfly; strict movement 4.4/10, graphics 4.6/10, alien novelty 3.9/10, shot opportunity 7/10, target-contract fit 4.9/10.",
+      "humanProblem": "movement track fit too low (4/10); alien novelty too weak (3.9/10); visual conformance still early (4.6/10)",
       "recommendation": "Hold for phase two after the first five challenge stages show measurable routeability, novelty, and target-video object-track lift.",
       "metrics": {
-        "strictScore10": 4.3,
-        "interest10": 4.3,
-        "movement10": 4.3,
+        "strictScore10": 4.4,
+        "interest10": 4.4,
+        "movement10": 4.4,
         "graphics10": 4.6,
         "alienNovelty10": 3.9,
-        "playerShotOpportunity10": 6.3,
-        "humanPerfectPotential10": 6.7,
-        "targetContractFit10": 4.8,
-        "targetVideoObjectTrackFit10": 3.9,
+        "playerShotOpportunity10": 7,
+        "humanPerfectPotential10": 8,
+        "targetContractFit10": 4.9,
+        "targetVideoObjectTrackFit10": 4,
         "spriteMotionCorrespondence10": 6.2,
         "safetyRule10": 10
       },
       "route": {
-        "routeKills": 30,
+        "routeKills": 40,
         "expectedTargetCount": 40,
-        "targetExposureShare": 0.75,
-        "sustainedExposureShare": 0.75,
-        "readableAltitudeShare": 0.907,
-        "topCrowdShare": 0.022,
+        "targetExposureShare": 1,
+        "sustainedExposureShare": 1,
+        "readableAltitudeShare": 0.908,
+        "topCrowdShare": 0.02,
         "firstRouteT": 1.25,
         "lastRouteT": 6.75,
-        "weakestReasons": [
-          "0/30 targets lack any ballistic firing window",
-          "runtime probe only tracked 30/40 expected challenge targets"
-        ]
+        "weakestReasons": []
       },
       "nextActions": [
         "Rebuild Challenging Stage 22-23 around green ladder and split-exit timing until its measured vector hits challenge-6-green-ladder-split-group-1.",
@@ -293,8 +281,7 @@
       "criticalGaps": [
         "Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.",
         "Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
-        "Human-perfect route read is 6.7/10: 30/40 expected targets are reachable in the current greedy strong-player route, tracked targets are 30/40, and remaining issues are 0/30 targets lack any ballistic firing window; runtime probe only tracked 30/40 expected challenge targets.",
-        "Target-contract fit is only 4.8/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.",
+        "Target-contract fit is only 4.9/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.",
         "Green-ladder split now lands on a Challenging Stage 22-23 ladder/split reference; remaining work is fuller path length, lower reversal noise, and object-tracked group timing."
       ]
     },
@@ -305,35 +292,32 @@
       "phase": "later-backlog",
       "layoutId": "yellow-diagonal-fan",
       "targetRead": "Challenging Stage 26-27 should introduce a yellow diagonal fan with a memorable scoring lane.",
-      "currentRead": "yellow-diagonal-fan / yellow-diagonal-fan; lanes boss, bee, but, rogue, rogue, but, bee, boss; first-wave types boss, bee, but, rogue, rogue, but, bee, boss; visual families crown; strict movement 4.4/10, graphics 4.7/10, alien novelty 3.9/10, shot opportunity 6.3/10, target-contract fit 4.3/10.",
-      "humanProblem": "perfect route incomplete (30/40); movement track fit too low (3.2/10); alien novelty too weak (3.9/10); visual conformance still early (4.7/10)",
+      "currentRead": "yellow-diagonal-fan / yellow-diagonal-fan; lanes boss, bee, but, rogue, rogue, but, bee, boss; first-wave types boss, bee, but, rogue, rogue, but, bee, boss; visual families crown; strict movement 4.4/10, graphics 4.7/10, alien novelty 3.9/10, shot opportunity 6.9/10, target-contract fit 4.3/10.",
+      "humanProblem": "movement track fit too low (3.3/10); alien novelty too weak (3.9/10); visual conformance still early (4.7/10)",
       "recommendation": "Hold for phase two after the first five challenge stages show measurable routeability, novelty, and target-video object-track lift.",
       "metrics": {
         "strictScore10": 4.4,
-        "interest10": 4.4,
+        "interest10": 4.5,
         "movement10": 4.4,
         "graphics10": 4.7,
         "alienNovelty10": 3.9,
-        "playerShotOpportunity10": 6.3,
-        "humanPerfectPotential10": 6.6,
+        "playerShotOpportunity10": 6.9,
+        "humanPerfectPotential10": 7.9,
         "targetContractFit10": 4.3,
-        "targetVideoObjectTrackFit10": 3.2,
+        "targetVideoObjectTrackFit10": 3.3,
         "spriteMotionCorrespondence10": 6.2,
         "safetyRule10": 10
       },
       "route": {
-        "routeKills": 30,
+        "routeKills": 40,
         "expectedTargetCount": 40,
-        "targetExposureShare": 0.75,
-        "sustainedExposureShare": 0.75,
-        "readableAltitudeShare": 0.902,
-        "topCrowdShare": 0.021,
+        "targetExposureShare": 1,
+        "sustainedExposureShare": 1,
+        "readableAltitudeShare": 0.905,
+        "topCrowdShare": 0.022,
         "firstRouteT": 1,
-        "lastRouteT": 7,
-        "weakestReasons": [
-          "0/30 targets lack any ballistic firing window",
-          "runtime probe only tracked 30/40 expected challenge targets"
-        ]
+        "lastRouteT": 8,
+        "weakestReasons": []
       },
       "nextActions": [
         "Rebuild Challenging Stage 26-27 around the yellow diagonal fan so the best match lands on challenge-7-yellow-diagonal-fan-group-1, not the finale label.",
@@ -342,7 +326,6 @@
       "criticalGaps": [
         "Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.",
         "Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
-        "Human-perfect route read is 6.6/10: 30/40 expected targets are reachable in the current greedy strong-player route, tracked targets are 30/40, and remaining issues are 0/30 targets lack any ballistic firing window; runtime probe only tracked 30/40 expected challenge targets.",
         "Target-contract fit is only 4.3/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.",
         "Yellow diagonal fan now lands on a Challenging Stage 26-27 diagonal-fan reference; remaining work is stronger lower-field travel and object-tracked diagonal lane timing."
       ]
@@ -354,35 +337,32 @@
       "phase": "later-backlog",
       "layoutId": "blue-purple-finale",
       "targetRead": "Challenging Stage 30-31 should act as a compact blue/purple late-loop capstone.",
-      "currentRead": "blue-purple-finale / blue-purple-finale; lanes rogue, boss, bee, but, but, bee, boss, rogue; first-wave types rogue, boss, bee, but, but, bee, boss, rogue; visual families stingray; strict movement 4.3/10, graphics 4.7/10, alien novelty 3.9/10, shot opportunity 6.2/10, target-contract fit 4.2/10.",
-      "humanProblem": "perfect route incomplete (30/40); movement track fit too low (3.1/10); alien novelty too weak (3.9/10); visual conformance still early (4.7/10)",
+      "currentRead": "blue-purple-finale / blue-purple-finale; lanes rogue, boss, bee, but, but, bee, boss, rogue; first-wave types rogue, boss, bee, but, but, bee, boss, rogue; visual families stingray; strict movement 4.3/10, graphics 4.7/10, alien novelty 3.9/10, shot opportunity 6.8/10, target-contract fit 4.2/10.",
+      "humanProblem": "movement track fit too low (3.1/10); alien novelty too weak (3.9/10); visual conformance still early (4.7/10)",
       "recommendation": "Hold for phase two after the first five challenge stages show measurable routeability, novelty, and target-video object-track lift.",
       "metrics": {
         "strictScore10": 4.4,
-        "interest10": 4.4,
+        "interest10": 4.5,
         "movement10": 4.3,
         "graphics10": 4.7,
         "alienNovelty10": 3.9,
-        "playerShotOpportunity10": 6.2,
-        "humanPerfectPotential10": 6.5,
+        "playerShotOpportunity10": 6.8,
+        "humanPerfectPotential10": 7.7,
         "targetContractFit10": 4.2,
         "targetVideoObjectTrackFit10": 3.1,
         "spriteMotionCorrespondence10": 6.2,
         "safetyRule10": 10
       },
       "route": {
-        "routeKills": 30,
+        "routeKills": 40,
         "expectedTargetCount": 40,
-        "targetExposureShare": 0.75,
-        "sustainedExposureShare": 0.75,
-        "readableAltitudeShare": 0.88,
-        "topCrowdShare": 0.08,
+        "targetExposureShare": 1,
+        "sustainedExposureShare": 1,
+        "readableAltitudeShare": 0.876,
+        "topCrowdShare": 0.066,
         "firstRouteT": 1.75,
-        "lastRouteT": 8.5,
-        "weakestReasons": [
-          "0/30 targets lack any ballistic firing window",
-          "runtime probe only tracked 30/40 expected challenge targets"
-        ]
+        "lastRouteT": 7.5,
+        "weakestReasons": []
       },
       "nextActions": [
         "Refine the Challenging Stage 30-31 blue/purple finale with fuller path length and compact late-loop timing.",
@@ -391,7 +371,6 @@
       "criticalGaps": [
         "Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.",
         "Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.",
-        "Human-perfect route read is 6.5/10: 30/40 expected targets are reachable in the current greedy strong-player route, tracked targets are 30/40, and remaining issues are 0/30 targets lack any ballistic firing window; runtime probe only tracked 30/40 expected challenge targets.",
         "Target-contract fit is only 4.2/10: the runtime group order, path families, type/family mix, or group count still misses the first-pass media-backed challenge contract.",
         "Blue/purple finale is now represented as its own runtime contract, but it still needs fuller path length and active sprite-motion evidence before it feels like a late-loop capstone."
       ]

@@ -19,3 +19,10 @@ Run:
 The checker validates that the schema covers the expected movement surfaces,
 defines compiler targets, includes migration steps, and keeps sample patterns in
 normalized coordinate space.
+
+Current focus: the first five Aurora challenging stages now have a separate
+routeability guardrail artifact at
+`reference-artifacts/analyses/challenge-stage-routeability/latest.json`. That
+artifact checks whether targets are visible, scoreable, and plausibly reachable
+before candidate movement rewrites are promoted for spectacle or stricter
+target-video object-track conformance.

@@ -1,36 +1,36 @@
 # Challenge Stage Human Playability Review
 
-Generated: 2026-05-31T20:46:37.740Z
+Generated: 2026-05-31T21:49:34.465Z
 
 Source: `reference-artifacts/analyses/challenge-stage-conformance/latest.json`
 
 ## Summary
-The first five challenging stages remain the priority because they teach the player what Aurora's bonus stages are supposed to be. The current focus-set average is 4.4/10 strict conformance and 7/10 human-perfect potential. The goal for the next gameplay pass is not only higher scores: it is visible learnability, reliable perfect-score routes, distinct alien identity, and movement that reads like authored Galaga-style set pieces.
+The first five challenging stages remain the priority because they teach the player what Aurora's bonus stages are supposed to be. The current focus-set average is 4.4/10 strict conformance and 7.6/10 human-perfect potential. The goal for the next gameplay pass is not only higher scores: it is visible learnability, reliable perfect-score routes, distinct alien identity, and movement that reads like authored Galaga-style set pieces.
 
 | Stage | Strict | Human Perfect | Route | Object Track | Novelty | Main Problem |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| Challenging Stage 2-3 | 4.3/10 | 7.1/10 | 38/40 | 3.1/10 | 3.9/10 | perfect route incomplete (38/40); too much top-crowd pressure (31%); movement track fit too low (3.1/10); alien novelty too weak (3.9/10); visual conformance still early (4.4/10) |
-| Challenging Stage 6-7 | 4.4/10 | 7.1/10 | 36/40 | 4.6/10 | 3.9/10 | perfect route incomplete (36/40); movement track fit too low (4.6/10); alien novelty too weak (3.9/10); visual conformance still early (4.2/10) |
+| Challenging Stage 2-3 | 4.3/10 | 7.3/10 | 40/40 | 3.1/10 | 3.9/10 | too much top-crowd pressure (30%); movement track fit too low (3.1/10); alien novelty too weak (3.9/10); visual conformance still early (4.4/10) |
+| Challenging Stage 6-7 | 4.4/10 | 7.5/10 | 40/40 | 4.6/10 | 3.9/10 | movement track fit too low (4.6/10); alien novelty too weak (3.9/10); visual conformance still early (4.2/10) |
 | Challenging Stage 10-11 | 4.5/10 | 7.5/10 | 40/40 | 4.9/10 | 3.9/10 | movement track fit too low (4.9/10); alien novelty too weak (3.9/10); visual conformance still early (4.6/10) |
-| Challenging Stage 14-15 | 4.4/10 | 7.4/10 | 36/40 | 4.3/10 | 3.9/10 | perfect route incomplete (36/40); movement track fit too low (4.3/10); alien novelty too weak (3.9/10); visual conformance still early (4.6/10) |
-| Challenging Stage 18-19 | 4.4/10 | 6/10 | 26/40 | 2.7/10 | 3.9/10 | perfect route incomplete (26/40); movement track fit too low (2.7/10); alien novelty too weak (3.9/10); visual conformance still early (4.7/10) |
+| Challenging Stage 14-15 | 4.4/10 | 7.7/10 | 38/40 | 4.1/10 | 3.9/10 | perfect route incomplete (38/40); movement track fit too low (4.1/10); alien novelty too weak (3.9/10); visual conformance still early (4.6/10) |
+| Challenging Stage 18-19 | 4.5/10 | 7.8/10 | 40/40 | 2.9/10 | 3.9/10 | movement track fit too low (2.9/10); alien novelty too weak (3.9/10); visual conformance still early (4.7/10) |
 
 
 ## Challenging Stage 2-3
 - Target: Challenging Stage 2-3 should be a readable Galaga-style bonus set piece: no fire, no ship loss, upper-band mirrored entries, bee/butterfly line waves, visible arrival/peel-off.
-- Current: first-challenge-peel / first-challenge-peel; lanes bee, bee, bee, bee, but, but, but, but; first-wave types bee, bee, bee, bee, but, but, but, but; visual families classic; strict movement 4.2/10, graphics 4.4/10, alien novelty 3.9/10, shot opportunity 6.4/10, target-contract fit 6.9/10.
-- Human-playability problem: perfect route incomplete (38/40); too much top-crowd pressure (31%); movement track fit too low (3.1/10); alien novelty too weak (3.9/10); visual conformance still early (4.4/10)
+- Current: first-challenge-peel / first-challenge-peel; lanes bee, bee, bee, bee, but, but, but, but; first-wave types bee, bee, bee, bee, but, but, but, but; visual families classic; strict movement 4.1/10, graphics 4.4/10, alien novelty 3.9/10, shot opportunity 6.5/10, target-contract fit 6.9/10.
+- Human-playability problem: too much top-crowd pressure (30%); movement track fit too low (3.1/10); alien novelty too weak (3.9/10); visual conformance still early (4.4/10)
 - Recommendation: Keep the safe bee/butterfly lesson, but rebuild timing and vertical descent so all 40 targets are visibly routeable, with less top-band crowding and clearer first/late wave separation.
-- Route read: 38/40 route kills, 95% any exposure, 95% repeated exposure, 31% top-crowd pressure.
+- Route read: 40/40 route kills, 100% any exposure, 100% repeated exposure, 30% top-crowd pressure.
 - Priority next action: Protect the Challenging Stage 2-3 bee/butterfly line contract, then tune path length, turn count, and rack-slot precision against the 2-3 arrival and late-wave labels.
 
 
 ## Challenging Stage 6-7
 - Target: Challenging Stage 6-7 should feel denser and more novel than Challenging Stage 2-3 while staying nonlethal and non-shooting.
-- Current: scorpion-cross-sweep / cross-sweep; lanes but, boss, rogue, bee, bee, rogue, boss, but; first-wave types but, boss, rogue, bee, bee, rogue, boss, but; visual families classic; strict movement 4.6/10, graphics 4.2/10, alien novelty 3.9/10, shot opportunity 6.6/10, target-contract fit 7.2/10.
-- Human-playability problem: perfect route incomplete (36/40); movement track fit too low (4.6/10); alien novelty too weak (3.9/10); visual conformance still early (4.2/10)
+- Current: scorpion-cross-sweep / cross-sweep; lanes but, boss, rogue, bee, bee, rogue, boss, but; first-wave types but, boss, rogue, bee, bee, rogue, boss, but; visual families classic; strict movement 4.5/10, graphics 4.2/10, alien novelty 3.9/10, shot opportunity 6.9/10, target-contract fit 7.2/10.
+- Human-playability problem: movement track fit too low (4.6/10); alien novelty too weak (3.9/10); visual conformance still early (4.2/10)
 - Recommendation: Make the cross-sweep readable as a deliberate second challenge: fewer overlapping upper-band clusters, clearer left/right crossing lanes, and a memorable specialty-family introduction rather than a shuffled first challenge.
-- Route read: 36/40 route kills, 95% any exposure, 88% repeated exposure, 11% top-crowd pressure.
+- Route read: 40/40 route kills, 100% any exposure, 95% repeated exposure, 10% top-crowd pressure.
 - Priority next action: Tune Challenging Stage 6-7 toward the denser mixed-novelty-line reference instead of relying on a generic cross-sweep.
 
 
@@ -45,19 +45,19 @@ The first five challenging stages remain the priority because they teach the pla
 
 ## Challenging Stage 14-15
 - Target: Challenging Stage 14-15 should shift into long specialty serpentine arcs with obvious new color/family identity while staying nonlethal.
-- Current: pink-serpentine-late / pink-serpentine; lanes boss, rogue, but, bee, bee, but, rogue, boss; first-wave types boss, rogue, but, bee, bee, but, rogue, boss; visual families galboss; strict movement 4.3/10, graphics 4.6/10, alien novelty 3.9/10, shot opportunity 7/10, target-contract fit 5/10.
-- Human-playability problem: perfect route incomplete (36/40); movement track fit too low (4.3/10); alien novelty too weak (3.9/10); visual conformance still early (4.6/10)
+- Current: pink-serpentine-late / pink-serpentine; lanes boss, rogue, but, bee, bee, but, rogue, boss; first-wave types boss, rogue, but, bee, bee, but, rogue, boss; visual families galboss; strict movement 4.3/10, graphics 4.6/10, alien novelty 3.9/10, shot opportunity 7.1/10, target-contract fit 4.9/10.
+- Human-playability problem: perfect route incomplete (38/40); movement track fit too low (4.1/10); alien novelty too weak (3.9/10); visual conformance still early (4.6/10)
 - Recommendation: Recast as a specialty serpentine set piece. The stage should look like a new authored pattern, not a faster remix, with long flowing arcs that still pass through learnable firing lanes.
-- Route read: 36/40 route kills, 90% any exposure, 80% repeated exposure, 0% top-crowd pressure.
+- Route read: 38/40 route kills, 95% any exposure, 85% repeated exposure, 0% top-crowd pressure.
 - Priority next action: Promote the Challenging Stage 14-15 pink-serpentine window into five group labels and tune the runtime path so all groups keep a readable serpentine score lane.
 
 
 ## Challenging Stage 18-19
 - Target: Challenging Stage 18-19 should distinguish itself with pink/green cascade motion, alternating group identity, and stronger lower-field pass readability.
-- Current: pink-green-cascade / pink-green-cascade; lanes rogue, boss, but, bee, boss, but, bee, rogue; first-wave types rogue, boss, but, bee, boss, but, bee, rogue; visual families galboss; strict movement 4.6/10, graphics 4.7/10, alien novelty 3.9/10, shot opportunity 5.9/10, target-contract fit 3.9/10.
-- Human-playability problem: perfect route incomplete (26/40); movement track fit too low (2.7/10); alien novelty too weak (3.9/10); visual conformance still early (4.7/10)
+- Current: pink-green-cascade / pink-green-cascade; lanes rogue, boss, but, bee, boss, but, bee, rogue; first-wave types rogue, boss, but, bee, boss, but, bee, rogue; visual families galboss; strict movement 4.6/10, graphics 4.7/10, alien novelty 3.9/10, shot opportunity 6.8/10, target-contract fit 4.1/10.
+- Human-playability problem: movement track fit too low (2.9/10); alien novelty too weak (3.9/10); visual conformance still early (4.7/10)
 - Recommendation: Treat this as the current emergency stage: rebuild the cascade around all 40 tracked targets, alternating pink/green identity, lower-field score windows, and a perfect-route plan before adding more novelty.
-- Route read: 26/40 route kills, 65% any exposure, 65% repeated exposure, 8% top-crowd pressure.
+- Route read: 40/40 route kills, 100% any exposure, 100% repeated exposure, 7% top-crowd pressure.
 - Priority next action: Promote the Challenging Stage 18-19 pink/green cascade window into five group labels and tune lower-field pass timing against those labels.
 
 
