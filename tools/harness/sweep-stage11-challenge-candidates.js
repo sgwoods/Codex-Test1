@@ -436,6 +436,176 @@ function targetVideoObjectFit(measured){
   };
 }
 
+const SHOT_ROUTE_PLAYER_X = 140;
+const SHOT_ROUTE_PLAYER_Y = 338;
+const SHOT_ROUTE_BULLET_SPEED = 560;
+const SHOT_ROUTE_PLAYER_SPEED = 440;
+const SHOT_ROUTE_COOLDOWN = 0.095;
+
+function interpolateMeasuredTrack(points, t){
+  if(!Array.isArray(points) || !points.length || !Number.isFinite(+t)) return null;
+  const targetT = +t;
+  let prev = null;
+  let next = null;
+  for(const point of points){
+    const pt = +point.t;
+    if(!Number.isFinite(pt)) continue;
+    if(pt <= targetT) prev = point;
+    if(pt >= targetT){
+      next = point;
+      break;
+    }
+  }
+  if(!prev || !next) return null;
+  const prevT = +prev.t;
+  const nextT = +next.t;
+  if(Math.abs(nextT - prevT) < 0.0001) return next;
+  const ratio = clamp((targetT - prevT) / (nextT - prevT));
+  return Object.assign({}, next, {
+    t: targetT,
+    x: (+prev.x || 0) + (((+next.x || 0) - (+prev.x || 0)) * ratio),
+    y: (+prev.y || 0) + (((+next.y || 0) - (+prev.y || 0)) * ratio)
+  });
+}
+
+function buildPerfectRoute(targets, opportunities){
+  const killed = new Set();
+  const route = [];
+  let playerX = SHOT_ROUTE_PLAYER_X;
+  let availableAt = 0;
+  const ordered = opportunities.slice().sort((a, b) => a.t - b.t || a.x - b.x);
+  let transitionFitSum = 0;
+  let transitionCount = 0;
+  for(const opportunity of ordered){
+    if(killed.has(opportunity.id)) continue;
+    const t = +opportunity.t;
+    const dt = Math.max(0, t - availableAt);
+    const reachableDx = (SHOT_ROUTE_PLAYER_SPEED * dt) + opportunity.tolerance + 8;
+    const dx = Math.abs((+opportunity.x || 0) - playerX);
+    if(dx > reachableDx) continue;
+    const fit = dx <= opportunity.tolerance ? 1 : clamp(1 - ((dx - opportunity.tolerance) / Math.max(1, SHOT_ROUTE_PLAYER_SPEED * Math.max(dt, 0.001))));
+    transitionFitSum += fit;
+    transitionCount += 1;
+    killed.add(opportunity.id);
+    route.push(opportunity);
+    playerX = +opportunity.x || playerX;
+    availableAt = Math.max(availableAt, t + SHOT_ROUTE_COOLDOWN);
+  }
+  return {
+    routeKills: killed.size,
+    routeCoverageShare: targets.length ? killed.size / targets.length : 0,
+    laneTransitionFit: transitionCount ? transitionFitSum / transitionCount : 0,
+    firstRouteT: route.length ? route[0].t : null,
+    lastRouteT: route.length ? route[route.length - 1].t : null,
+    route
+  };
+}
+
+function humanPerfectPotential(measured){
+  const expectedTargetCount = 40;
+  const targets = (measured.tracks || [])
+    .map(track => ({
+      id: track.id,
+      type: track.type,
+      wave: track.wave,
+      lane: track.lane,
+      points: (track.points || [])
+        .filter(point => Number.isFinite(+point.t) && Number.isFinite(+point.x) && Number.isFinite(+point.y))
+        .sort((a, b) => (+a.t || 0) - (+b.t || 0))
+    }))
+    .filter(track => track.points.length);
+  if(!targets.length){
+    return {
+      score10: 1,
+      coverage: 0,
+      targetCount: 0,
+      expectedTargetCount,
+      routeKills: 0,
+      read: 'Human-perfect guard found no stable challenge targets.'
+    };
+  }
+  const opportunities = [];
+  const opportunityById = new Map();
+  let topCrowdPositions = 0;
+  let activePositions = 0;
+  for(const target of targets){
+    const targetOpportunities = [];
+    for(const pos of target.points){
+      const y = +pos.y;
+      const x = +pos.x;
+      if(!Number.isFinite(x) || !Number.isFinite(y)) continue;
+      activePositions += 1;
+      if(y < 58) topCrowdPositions += 1;
+      if(y < 58 || y > 298) continue;
+      const travelT = Math.max(0.02, (SHOT_ROUTE_PLAYER_Y - y) / SHOT_ROUTE_BULLET_SPEED);
+      if(travelT > 0.62) continue;
+      const impact = interpolateMeasuredTrack(target.points, (+pos.t || 0) + travelT);
+      if(!impact || !Number.isFinite(+impact.x) || !Number.isFinite(+impact.y)) continue;
+      if(+impact.y < 42 || +impact.y > 310) continue;
+      const tolerance = target.type === 'boss' ? 18 : 13;
+      const horizontalDrift = Math.abs((+impact.x || 0) - x);
+      if(horizontalDrift > tolerance + 7) continue;
+      const opportunity = {
+        id: target.id,
+        t: round(+pos.t || 0, 3),
+        x: round(x, 2),
+        y: round(y, 2),
+        impactT: round((+pos.t || 0) + travelT, 3),
+        travelT: round(travelT, 3),
+        tolerance,
+        readableAltitude: y >= 76 && y <= 270,
+        horizontalDrift: round(horizontalDrift, 2),
+        type: target.type || '',
+        wave: target.wave ?? null,
+        lane: target.lane ?? null
+      };
+      targetOpportunities.push(opportunity);
+      opportunities.push(opportunity);
+    }
+    opportunityById.set(target.id, targetOpportunities);
+  }
+  const exposedTargets = targets.filter(target => (opportunityById.get(target.id) || []).length > 0);
+  const sustainedTargets = targets.filter(target => (opportunityById.get(target.id) || []).length >= 2);
+  const readableOpportunities = opportunities.filter(item => item.readableAltitude);
+  const route = buildPerfectRoute(targets, opportunities);
+  const denominator = Math.max(expectedTargetCount, targets.length);
+  const targetExposureShare = exposedTargets.length / denominator;
+  const sustainedExposureShare = sustainedTargets.length / denominator;
+  const readableAltitudeShare = opportunities.length ? readableOpportunities.length / opportunities.length : 0;
+  const topCrowdShare = activePositions ? topCrowdPositions / activePositions : 0;
+  const opportunityDensity = clamp(opportunities.length / Math.max(1, denominator * 2.2));
+  const targetCountFit = clamp(targets.length / expectedTargetCount);
+  const crowdPenalty = clamp(1 - (topCrowdShare / 0.62));
+  const routeCoverageShare = route.routeKills / denominator;
+  const coverage = clamp(
+    (0.3 * routeCoverageShare)
+    + (0.22 * targetExposureShare)
+    + (0.16 * sustainedExposureShare)
+    + (0.12 * readableAltitudeShare)
+    + (0.1 * route.laneTransitionFit)
+    + (0.06 * opportunityDensity)
+    + (0.04 * targetCountFit)
+  ) * (0.82 + (0.18 * crowdPenalty));
+  return {
+    score10: round(1 + coverage * 7.2, 1),
+    coverage: round(coverage, 3),
+    targetCount: targets.length,
+    expectedTargetCount,
+    routeKills: route.routeKills,
+    routeCoverageShare: round(routeCoverageShare, 3),
+    targetExposureShare: round(targetExposureShare, 3),
+    sustainedExposureShare: round(sustainedExposureShare, 3),
+    readableAltitudeShare: round(readableAltitudeShare, 3),
+    laneTransitionFit: round(route.laneTransitionFit, 3),
+    opportunityDensity: round(opportunityDensity, 3),
+    topCrowdShare: round(topCrowdShare, 3),
+    candidateWindowCount: opportunities.length,
+    firstRouteT: route.firstRouteT,
+    lastRouteT: route.lastRouteT,
+    read: `Human-perfect guard estimates ${route.routeKills}/${denominator} expected targets reachable by a greedy strong-player route, ${round(targetExposureShare * 100, 0)}% with any ballistic window, ${round(sustainedExposureShare * 100, 0)}% with repeated aim windows, and ${round(topCrowdShare * 100, 0)}% top-crowd pressure.`
+  };
+}
+
 function share(count, total){
   return total ? count / total : 0;
 }
@@ -1429,6 +1599,7 @@ function scoreMeasuredCandidate(measured, labels){
   }).sort((a, b) => b.score10 - a.score10 || a.distance - b.distance || a.labelId.localeCompare(b.labelId));
   const expected = matches.find(match => EXPECTED_LABELS.includes(match.labelId)) || null;
   const targetVideoFit = targetVideoObjectFit(measured);
+  const perfectPotential = humanPerfectPotential(measured);
   const noSafetyRegression = measured.eventCounts.enemyShots === 0
     && measured.eventCounts.enemyAttackStarts === 0
     && measured.eventCounts.shipLosses === 0;
@@ -1462,6 +1633,7 @@ function scoreMeasuredCandidate(measured, labels){
     : round(clamp((identityMargin10 + 1.15) / 1.35) * clamp(expectedScore10 / 6.2), 3);
   const adjustedIdentityConfidence = lateStageIdentityPass ? identityConfidence : round(identityConfidence * 0.35, 3);
   const targetVideoScore10 = targetVideoFit.score10 || 0;
+  const humanPerfectScore10 = perfectPotential.score10 || 0;
   return Object.assign({}, measured, {
     trackCount: classifications.length,
     runtimeVector: vector,
@@ -1491,10 +1663,12 @@ function scoreMeasuredCandidate(measured, labels){
         : `Best measured label is ${bestMatch?.labelId || 'none'}; expected-stage score trails by ${Math.abs(identityMargin10)}/10.`
     },
     targetVideoObjectFit: targetVideoFit,
+    humanPerfectPotential: perfectPotential,
     noSafetyRegression,
     selectionScore10: round(
       (expectedScore10 * 0.62)
       + (targetVideoScore10 * 0.24)
+      + (humanPerfectScore10 * 0.04)
       + (adjustedIdentityConfidence * 1.1)
       + (noSafetyRegression ? 0.3 : -2.75)
       - (wrongReferencePenalty10 * 0.65)
@@ -1510,6 +1684,8 @@ function summarizeCandidate(row){
     candidateId: row.candidateId,
     expectedScore10: row.expectedMatch?.score10 || 0,
     targetVideoObjectFitScore10: row.targetVideoObjectFit?.score10 || null,
+    humanPerfectPotentialScore10: row.humanPerfectPotential?.score10 || null,
+    humanPerfectGuard: row.humanPerfectGuard || null,
     selectionScore10: row.selectionScore10,
     expectedReferenceHit: !!row.expectedReferenceHit,
     stageIdentityMargin10: row.stageIdentity?.identityMargin10 ?? null,
@@ -1587,10 +1763,13 @@ function buildMarkdown(report){
     const hit = row.expectedReferenceHit ? 'yes' : 'no';
     const eventRead = row.noSafetyRegression ? 'pass' : `risk ${JSON.stringify(row.eventCounts)}`;
     const fullAnalyzerRead = row.fullAnalyzerRisk?.pass === false ? `blocked: ${row.fullAnalyzerRisk.reason}` : 'pass';
-    return `| ${index + 1} | ${row.candidateId} | ${row.selectionScore10}/10 | ${row.expectedMatch?.score10 ?? 0}/10 | ${row.targetVideoObjectFit?.score10 ?? 'n/a'}/10 | ${row.stageIdentity?.identityMargin10 ?? 'n/a'} | ${row.bestMatch?.labelId || 'none'} (${row.bestMatch?.score10 ?? 0}/10) | ${hit} | ${eventRead} | ${fullAnalyzerRead} |`;
+    const humanPerfectRead = row.humanPerfectGuard?.pass === false
+      ? `blocked: ${row.humanPerfectGuard.lift10}/10`
+      : `${row.humanPerfectPotential?.score10 ?? 'n/a'}/10`;
+    return `| ${index + 1} | ${row.candidateId} | ${row.selectionScore10}/10 | ${row.expectedMatch?.score10 ?? 0}/10 | ${row.targetVideoObjectFit?.score10 ?? 'n/a'}/10 | ${humanPerfectRead} | ${row.stageIdentity?.identityMargin10 ?? 'n/a'} | ${row.bestMatch?.labelId || 'none'} (${row.bestMatch?.score10 ?? 0}/10) | ${hit} | ${eventRead} | ${fullAnalyzerRead} |`;
   }).join('\n');
-  const diagnosticRow = row => `| ${row.candidateId} | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.stageIdentityMargin10 ?? 'n/a'} | ${row.bestMatchLabelId || 'none'} (${row.bestMatchScore10}/10) | ${row.expectedReferenceHit ? 'yes' : 'no'} | ${row.lateStageIdentityPass === false ? `blocked (${row.bestMatchChallengeNumber || 'n/a'} vs ${row.expectedChallengeNumber || 'n/a'})` : 'pass'} | ${row.noSafetyRegression ? 'pass' : 'risk'} | ${(row.groupPathFamilies || []).join(', ') || 'default'} |`;
-  const emptyDiagnosticRow = '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const diagnosticRow = row => `| ${row.candidateId} | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.humanPerfectPotentialScore10 ?? 'n/a'}/10 | ${row.stageIdentityMargin10 ?? 'n/a'} | ${row.bestMatchLabelId || 'none'} (${row.bestMatchScore10}/10) | ${row.expectedReferenceHit ? 'yes' : 'no'} | ${row.lateStageIdentityPass === false ? `blocked (${row.bestMatchChallengeNumber || 'n/a'} vs ${row.expectedChallengeNumber || 'n/a'})` : 'pass'} | ${row.humanPerfectGuard?.pass === false ? `risk ${row.humanPerfectGuard.lift10}/10` : 'pass'} | ${row.noSafetyRegression ? 'pass' : 'risk'} | ${(row.groupPathFamilies || []).join(', ') || 'default'} |`;
+  const emptyDiagnosticRow = '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
   const targetTimingRows = (report.diagnostics?.targetTimingTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
   const targetControlRows = (report.diagnostics?.targetControlTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
   const targetReferencePathRows = (report.diagnostics?.targetReferencePathTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
@@ -1608,7 +1787,9 @@ Stage ${report.stage} currently has safe challenge behavior but still does not c
 ## Summary
 
 - Baseline expected-reference score: ${report.summary.baselineExpectedScore10}/10.
+- Baseline human-perfect potential: ${report.summary.baselineHumanPerfectPotentialScore10}/10.
 - Best candidate expected-reference score: ${report.summary.bestExpectedScore10}/10.
+- Best candidate human-perfect potential: ${report.summary.bestHumanPerfectPotentialScore10}/10.
 - Best candidate: ${report.summary.bestCandidateId}.
 - Keeper decision: ${report.summary.keeperDecision}.
 - Player-facing meaning: ${report.summary.playerMeaning}
@@ -1617,8 +1798,8 @@ Stage ${report.stage} currently has safe challenge behavior but still does not c
 
 ## Top Candidates
 
-| Rank | Candidate | Selection | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Safety | Full Analyzer Gate |
-| ---: | --- | ---: | ---: | ---: | ---: | --- | --- | --- | --- |
+| Rank | Candidate | Selection | Expected Labels | Target-Video Fit | Human-Perfect | Identity Margin | Best Match | Expected Hit | Safety | Full Analyzer Gate |
+| ---: | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- |
 ${topRows}
 
 ## Diagnostic Candidates
@@ -1627,26 +1808,26 @@ These rows are intentionally retained even when they are not promotion candidate
 
 ### Target-Timing Diagnostics
 
-| Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Late Identity | Safety | Paths |
-| --- | ---: | ---: | ---: | --- | --- | --- | --- | --- |
+| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Safety | Paths |
+| --- | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- |
 ${targetTimingRows}
 
 ### Target-Control Diagnostics
 
-| Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Late Identity | Safety | Paths |
-| --- | ---: | ---: | ---: | --- | --- | --- | --- | --- |
+| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Safety | Paths |
+| --- | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- |
 ${targetControlRows}
 
 ### Target Reference-Path Diagnostics
 
-| Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Late Identity | Safety | Paths |
-| --- | ---: | ---: | ---: | --- | --- | --- | --- | --- |
+| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Safety | Paths |
+| --- | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- |
 ${targetReferencePathRows}
 
 ### Path-Shape Diagnostics
 
-| Candidate | Expected Labels | Target-Video Fit | Identity Margin | Best Match | Expected Hit | Late Identity | Safety | Paths |
-| --- | ---: | ---: | ---: | --- | --- | --- | --- | --- |
+| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Safety | Paths |
+| --- | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- |
 ${pathShapeRows}
 
 ## Next Step
@@ -1667,8 +1848,19 @@ async function main(){
   const baseline = scored.find(row => row.candidateId === 'baseline-current') || scored.at(-1);
   const baselineExpectedScore = baseline.expectedMatch?.score10 || 0;
   const baselineTargetVideoScore = baseline.targetVideoObjectFit?.score10 || 0;
+  const baselineHumanPerfectScore = baseline.humanPerfectPotential?.score10 || 0;
   const rejectedFullAnalyzerReviews = rejectedFullAnalyzerReviewsForStage(STAGE);
   for(const row of scored){
+    const humanPerfectLift = round((row.humanPerfectPotential?.score10 || 0) - baselineHumanPerfectScore, 2);
+    row.humanPerfectGuard = {
+      pass: humanPerfectLift >= -0.05,
+      lift10: humanPerfectLift,
+      baselineScore10: baselineHumanPerfectScore,
+      candidateScore10: row.humanPerfectPotential?.score10 || 0,
+      read: humanPerfectLift >= -0.05
+        ? `Human-perfect potential preserved (${humanPerfectLift >= 0 ? '+' : ''}${humanPerfectLift}/10 versus baseline).`
+        : `Human-perfect potential regressed ${Math.abs(humanPerfectLift)}/10 versus baseline; block runtime promotion until a full player-route review explains the tradeoff.`
+    };
     row.fullAnalyzerRisk = fullAnalyzerRiskForCandidate(row, {
       baselineExpectedScore,
       baselineTargetVideoScore,
@@ -1678,6 +1870,7 @@ async function main(){
   const promotionCandidates = scored.filter(candidate => {
     const candidateExpectedLift = round((candidate.expectedMatch?.score10 || 0) - baselineExpectedScore, 2);
     const candidateTargetVideoLift = round((candidate.targetVideoObjectFit?.score10 || 0) - baselineTargetVideoScore, 2);
+    const candidateNoHumanPerfectRegression = candidate.humanPerfectGuard?.pass !== false;
     const candidateTargetVideoComparable = Number.isFinite(+(baseline.targetVideoObjectFit?.score10)) && Number.isFinite(+(candidate.targetVideoObjectFit?.score10));
     const candidateNoTargetRegression = !candidateTargetVideoComparable || candidateTargetVideoLift >= -0.05;
     const candidateMaterialTargetWin = candidate.expectedReferenceHit && candidateExpectedLift >= -0.15 && candidateTargetVideoLift >= 0.55;
@@ -1695,6 +1888,7 @@ async function main(){
     return candidate.noSafetyRegression
       && candidateNoTargetRegression
       && candidateNoExpectedRegression
+      && candidateNoHumanPerfectRegression
       && intendedStageSupported
       && candidate.fullAnalyzerRisk?.pass !== false
       && (candidateExpectedLift >= 0.35 || candidateTargetVideoLift >= 0.35 || (candidateExpectedLift >= 0.25 && candidateTargetVideoLift >= 0.25));
@@ -1703,9 +1897,13 @@ async function main(){
     const bLift = ((b.expectedMatch?.score10 || 0) - baselineExpectedScore) + ((b.targetVideoObjectFit?.score10 || 0) - baselineTargetVideoScore);
     return bLift - aLift || b.selectionScore10 - a.selectionScore10 || a.candidateId.localeCompare(b.candidateId);
   });
-  const best = promotionCandidates[0] || scored[0];
+  const best = promotionCandidates[0]
+    || scored.find(candidate => candidate.noSafetyRegression && candidate.humanPerfectGuard?.pass !== false)
+    || scored[0];
   const expectedLift = round((best.expectedMatch?.score10 || 0) - (baseline.expectedMatch?.score10 || 0), 2);
   const targetVideoLift = round((best.targetVideoObjectFit?.score10 || 0) - (baseline.targetVideoObjectFit?.score10 || 0), 2);
+  const humanPerfectLift = round((best.humanPerfectPotential?.score10 || 0) - baselineHumanPerfectScore, 2);
+  const noHumanPerfectRegression = best.humanPerfectGuard?.pass !== false;
   const targetVideoComparable = Number.isFinite(+(baseline.targetVideoObjectFit?.score10)) && Number.isFinite(+(best.targetVideoObjectFit?.score10));
   const noTargetVideoRegression = !targetVideoComparable || targetVideoLift >= -0.05;
   const materialTargetVideoWin = best.expectedReferenceHit && expectedLift >= -0.15 && targetVideoLift >= 0.55;
@@ -1725,7 +1923,7 @@ async function main(){
     baselineTargetVideoScore,
     rejectedReviews: rejectedFullAnalyzerReviews
   });
-  const keeper = best.noSafetyRegression && noTargetVideoRegression && noExpectedRegression && intendedStageSupported && fullAnalyzerRisk.pass !== false && (expectedLift >= 0.35 || targetVideoLift >= 0.35 || (expectedLift >= 0.25 && targetVideoLift >= 0.25));
+  const keeper = best.noSafetyRegression && noTargetVideoRegression && noExpectedRegression && noHumanPerfectRegression && intendedStageSupported && fullAnalyzerRisk.pass !== false && (expectedLift >= 0.35 || targetVideoLift >= 0.35 || (expectedLift >= 0.25 && targetVideoLift >= 0.25));
   const retainedCandidateLimit = 120;
   const pathShapeMarkers = [
     'pink-green-low-sweep',
@@ -1779,17 +1977,21 @@ async function main(){
       baselineCandidateId: baseline.candidateId,
       baselineExpectedScore10: baseline.expectedMatch?.score10 || 0,
       baselineTargetVideoObjectFitScore10: baseline.targetVideoObjectFit?.score10 || null,
+      baselineHumanPerfectPotentialScore10: baseline.humanPerfectPotential?.score10 || null,
       baselineBestMatch: baseline.bestMatch,
       bestCandidateId: best.candidateId,
       bestExpectedScore10: best.expectedMatch?.score10 || 0,
       bestTargetVideoObjectFitScore10: best.targetVideoObjectFit?.score10 || null,
+      bestHumanPerfectPotentialScore10: best.humanPerfectPotential?.score10 || null,
       bestSelectionScore10: best.selectionScore10,
       bestMatch: best.bestMatch,
       expectedLift10: expectedLift,
       targetVideoObjectFitLift10: targetVideoLift,
+      humanPerfectPotentialLift10: humanPerfectLift,
       targetVideoComparable,
       noTargetVideoRegression,
       noExpectedRegression,
+      noHumanPerfectRegression,
       intendedStageSupported,
       fullAnalyzerRisk,
       fullAnalyzerRejectionCount: rejectedFullAnalyzerReviews.length,
@@ -1797,7 +1999,7 @@ async function main(){
       identityTieSupported,
       materialTargetVideoWin,
       strongExpectedLift,
-      intendedStageSupportPolicy: 'runtime promotion requires no expected-label regression unless the expected label remains the best match and target-video fit improves by >=0.55/10 with no more than -0.15/10 expected drift. It also requires the best trajectory match to be one of the expected stage labels, an expected-label tie within 0.05/10 with >=0.3 expected lift and >=0.15 target-video lift, or a strong expected-label score >=7 with >=0.5 expected lift, >=0.8 target-video lift, and an identity margin no worse than -0.35/10. For late challenge stages, candidates whose best match belongs to the wrong Galaga challenge number are explicitly penalized and blocked from promotion.',
+      intendedStageSupportPolicy: 'runtime promotion requires no expected-label regression unless the expected label remains the best match and target-video fit improves by >=0.55/10 with no more than -0.15/10 expected drift. It also requires the best trajectory match to be one of the expected stage labels, an expected-label tie within 0.05/10 with >=0.3 expected lift and >=0.15 target-video lift, or a strong expected-label score >=7 with >=0.5 expected lift, >=0.8 target-video lift, and an identity margin no worse than -0.35/10. Human-perfect potential must not regress versus baseline because challenge-stage conformance is not useful if a strong player loses readable scoring windows. For late challenge stages, candidates whose best match belongs to the wrong Galaga challenge number are explicitly penalized and blocked from promotion.',
       keeperDecision: keeper ? 'candidate-ready-for-full-analyzer-review' : 'no-runtime-keeper-yet',
       playerMeaning: keeper
         ? `A measured stage-${STAGE} layout candidate is worth a temporary runtime review, but it must be confirmed by the full challenge-stage analyzer and persona guardrails before promotion.`
@@ -1825,6 +2027,8 @@ async function main(){
       expectedReferenceHit: row.expectedReferenceHit,
       stageIdentity: row.stageIdentity,
       targetVideoObjectFit: row.targetVideoObjectFit,
+      humanPerfectPotential: row.humanPerfectPotential,
+      humanPerfectGuard: row.humanPerfectGuard,
       fullAnalyzerRisk: row.fullAnalyzerRisk,
       selectionScore10: row.selectionScore10
     })),
@@ -1846,8 +2050,8 @@ async function main(){
     measurementPolicy: {
       scope: `harness-only stage-${STAGE} challenge layout candidates`,
       reference: 'media-backed Galaga challenge labels with comparison vectors',
-      promotionRule: 'Require the expected challenge-label identity to be the best match or tied within 0.05/10 with evidence on both expected and target-video axes, no safety regression, no matching full-analyzer rejection, and at least +0.35/10 expected-label or target-video lift over baseline before runtime promotion. A material target-video win may tolerate up to -0.15/10 expected drift only when expected identity remains the best match. Strong non-best candidates must be very close on identity margin and improve both expected and target-video scores. If a prior full-analyzer review rejected a similar or identical candidate, the sweep must clear that calibration by a material margin before it can be marked ready again.',
-      safety: 'Reject candidates with enemy shots, enemy attack starts, or ship losses in the challenge window.'
+      promotionRule: 'Require the expected challenge-label identity to be the best match or tied within 0.05/10 with evidence on both expected and target-video axes, no safety regression, no human-perfect potential regression, no matching full-analyzer rejection, and at least +0.35/10 expected-label or target-video lift over baseline before runtime promotion. A material target-video win may tolerate up to -0.15/10 expected drift only when expected identity remains the best match. Strong non-best candidates must be very close on identity margin and improve both expected and target-video scores. If a prior full-analyzer review rejected a similar or identical candidate, the sweep must clear that calibration by a material margin before it can be marked ready again.',
+      safety: 'Reject candidates with enemy shots, enemy attack starts, ship losses, or lower human-perfect potential in the challenge window.'
     }
   };
   const stamp = `${report.generatedAt.replace(/[:.]/g, '-').slice(0, 19)}-${report.commit}`;
@@ -1862,8 +2066,10 @@ async function main(){
     bestCandidateId: report.summary.bestCandidateId,
     bestExpectedScore10: report.summary.bestExpectedScore10,
     bestTargetVideoObjectFitScore10: report.summary.bestTargetVideoObjectFitScore10,
+    bestHumanPerfectPotentialScore10: report.summary.bestHumanPerfectPotentialScore10,
     expectedLift10: report.summary.expectedLift10,
     targetVideoObjectFitLift10: report.summary.targetVideoObjectFitLift10,
+    humanPerfectPotentialLift10: report.summary.humanPerfectPotentialLift10,
     keeperDecision: report.summary.keeperDecision,
     latest: rel(path.join(OUT_ROOT, 'latest.json'))
   }, null, 2));

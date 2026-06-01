@@ -1,7 +1,7 @@
 # Codex Context Checkpoint
 
-Generated: 2026-05-31T12:25:48.645Z
-Label: authority-handoff-challenge-timing-evidence
+Generated: 2026-06-01T15:30:18.233Z
+Label: ingestion-human-perfect-guard
 
 This is the durable recovery point for long Aurora / Platinum Codex sessions.
 Use it before switching machines, before starting a multi-hour run, and whenever
@@ -11,17 +11,17 @@ important working context.
 ## Current Repo State
 
 - Repo path: `/Users/sgwoods/Development/Codex/Codex-test1`
-- Branch: `codex/macbook-fullscreen-timing-alignment-wip`
-- HEAD: `0d74533e6` Improve Aurora challenge timing evidence
-- Dirty files excluding checkpoint self-output: `0`
+- Branch: `codex/macbook-ingestion-grammar-sync`
+- HEAD: `9bb463aa9` Refresh code review packet for release doc wording update
+- Dirty files excluding checkpoint self-output: `7`
 
 ## Active Plan
 
-- MacBook WIP branch is clean and pushed; authority machine should integrate Aurora challenge timing evidence after stacked base e397c2c75/2d144d5c1 path is understood
+- Sync challenge candidate grammar with main ingestion work by adding a human-perfect routeability promotion guard
 
 ## Recommended Next Steps
 
-- On iMacM1 fetch origin, inspect codex/macbook-fullscreen-timing-alignment-wip at 0d74533e6 plus checkpoint commit if present, merge after current release branch/base, run verification, then decide dev/beta publish from authority machine only
+- Port generic before-after visuals and apply the same routeability concept to Guardians movement ingestion
 
 ## Notes
 
@@ -31,26 +31,37 @@ important working context.
 ## Git Status
 
 ```
-(none)
+M reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json
+ M reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json
+ M tools/harness/analyze-challenge-stage-candidate-sweep-index.js
+ M tools/harness/check-challenge-stage-candidate-sweep.js
+ M tools/harness/sweep-stage11-challenge-candidates.js
+?? reference-artifacts/analyses/challenge-stage-candidate-sweep-index/2026-06-01T15-25-18-9bb463aa9/
+?? reference-artifacts/analyses/challenge-stage-candidate-sweep-index/2026-06-01T15-28-28-9bb463aa9/
 ```
 
 ## Diff Stat
 
 ```
-(none)
+.../latest.json                                    |    105 +-
+ .../challenge-stage-candidate-sweep/latest.json    | 114646 ++++++++----------
+ ...nalyze-challenge-stage-candidate-sweep-index.js |     23 +-
+ .../check-challenge-stage-candidate-sweep.js       |     20 +
+ .../harness/sweep-stage11-challenge-candidates.js  |    242 +-
+ 5 files changed, 48847 insertions(+), 66189 deletions(-)
 ```
 
 ## Recent Log
 
 ```
-0d74533e6 (HEAD -> codex/macbook-fullscreen-timing-alignment-wip, origin/codex/macbook-fullscreen-timing-alignment-wip) Improve Aurora challenge timing evidence
-2d144d5c1 Calibrate reference sprite proportions
-4650b755f Fix arcade fullscreen playfield visibility
-b14cb07d5 Refine Aurora player fighter visual fidelity
-f22f00d51 Calibrate challenge sweeps against full analyzer rejections
-46f19bc04 Gate Stage 7 challenge candidates with full analyzer review
-56e319f29 Ground challenge timing in target motion tracks
-9a9ede246 Measure challenge visible-motion timing
+9bb463aa9 (HEAD -> codex/macbook-ingestion-grammar-sync, origin/main, origin/HEAD) Refresh code review packet for release doc wording update
+9878d3dce Refresh release conformance docs for artifact wording
+d013c62e5 Refresh code review packet for artifact wording
+c33b4689b Clarify Aurora and Guardians artifact requests
+b3d186c81 Refresh code review packet for release doc update
+55c147259 Refresh release conformance docs for Windigo intake
+58866ade0 Refresh code review packet for Windigo intake
+3a727d5a2 Accession Windigo rules and score source package
 ```
 
 ## Machine Status Snapshot
@@ -84,9 +95,9 @@ f22f00d51 Calibrate challenge sweeps against full analyzer rejections
     }
   },
   "repo": {
-    "branch": "codex/macbook-fullscreen-timing-alignment-wip",
-    "dirty": false,
-    "upstream": "origin/codex/macbook-fullscreen-timing-alignment-wip",
+    "branch": "codex/macbook-ingestion-grammar-sync",
+    "dirty": true,
+    "upstream": "origin/main",
     "ahead": 0,
     "behind": 0,
     "remote_ok": true
@@ -104,7 +115,7 @@ f22f00d51 Calibrate challenge sweeps against full analyzer rejections
       "ok": true,
       "reachable": true,
       "root_ok": true,
-      "url": "http://127.0.0.1:8000/",
+      "url": "http://localhost:8000/",
       "listeners": [
         {
           "pid": 25405,
@@ -117,7 +128,7 @@ f22f00d51 Calibrate challenge sweeps against full analyzer rejections
       "ok": true,
       "reachable": true,
       "root_ok": true,
-      "url": "http://127.0.0.1:4311/api/runs",
+      "url": "http://localhost:4311/api/runs",
       "listeners": [
         {
           "pid": 25481,
@@ -132,8 +143,8 @@ f22f00d51 Calibrate challenge sweeps against full analyzer rejections
     "dev": {
       "ok": true,
       "version": "1.4.0",
-      "label": "1.4.0.1+build.932.sha.19db4fa4",
-      "commit": "19db4fa4",
+      "label": "1.4.0.1+build.975.sha.9bb463aa",
+      "commit": "9bb463aa",
       "releaseChannel": "development"
     },
     "beta": {
@@ -180,11 +191,11 @@ Read first:
 - MULTI_MACHINE_WORKFLOW.md
 
 Current checkpoint:
-- label: authority-handoff-challenge-timing-evidence
-- generated: 2026-05-31T12:25:48.645Z
-- branch: codex/macbook-fullscreen-timing-alignment-wip
-- commit: 0d74533e6 Improve Aurora challenge timing evidence
-- dirty files excluding checkpoint self-output: 0
+- label: ingestion-human-perfect-guard
+- generated: 2026-06-01T15:30:18.233Z
+- branch: codex/macbook-ingestion-grammar-sync
+- commit: 9bb463aa9 Refresh code review packet for release doc wording update
+- dirty files excluding checkpoint self-output: 7
 
 Continue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.
 ```

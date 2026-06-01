@@ -1,16 +1,24 @@
 {
   "ok": true,
   "artifactType": "codex-context-checkpoint",
-  "generatedAt": "2026-05-31T12:25:48.645Z",
-  "label": "authority-handoff-challenge-timing-evidence",
+  "generatedAt": "2026-06-01T15:30:18.233Z",
+  "label": "ingestion-human-perfect-guard",
   "root": "/Users/sgwoods/Development/Codex/Codex-test1",
-  "branch": "codex/macbook-fullscreen-timing-alignment-wip",
-  "commit": "0d74533e6",
-  "commitSubject": "Improve Aurora challenge timing evidence",
-  "dirtyFileCountExcludingCheckpoint": 0,
-  "statusLinesExcludingCheckpoint": [],
-  "diffStat": "",
-  "recentLog": "0d74533e6 (HEAD -> codex/macbook-fullscreen-timing-alignment-wip, origin/codex/macbook-fullscreen-timing-alignment-wip) Improve Aurora challenge timing evidence\n2d144d5c1 Calibrate reference sprite proportions\n4650b755f Fix arcade fullscreen playfield visibility\nb14cb07d5 Refine Aurora player fighter visual fidelity\nf22f00d51 Calibrate challenge sweeps against full analyzer rejections\n46f19bc04 Gate Stage 7 challenge candidates with full analyzer review\n56e319f29 Ground challenge timing in target motion tracks\n9a9ede246 Measure challenge visible-motion timing",
+  "branch": "codex/macbook-ingestion-grammar-sync",
+  "commit": "9bb463aa9",
+  "commitSubject": "Refresh code review packet for release doc wording update",
+  "dirtyFileCountExcludingCheckpoint": 7,
+  "statusLinesExcludingCheckpoint": [
+    "M reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json",
+    " M reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json",
+    " M tools/harness/analyze-challenge-stage-candidate-sweep-index.js",
+    " M tools/harness/check-challenge-stage-candidate-sweep.js",
+    " M tools/harness/sweep-stage11-challenge-candidates.js",
+    "?? reference-artifacts/analyses/challenge-stage-candidate-sweep-index/2026-06-01T15-25-18-9bb463aa9/",
+    "?? reference-artifacts/analyses/challenge-stage-candidate-sweep-index/2026-06-01T15-28-28-9bb463aa9/"
+  ],
+  "diffStat": ".../latest.json                                    |    105 +-\n .../challenge-stage-candidate-sweep/latest.json    | 114646 ++++++++----------\n ...nalyze-challenge-stage-candidate-sweep-index.js |     23 +-\n .../check-challenge-stage-candidate-sweep.js       |     20 +\n .../harness/sweep-stage11-challenge-candidates.js  |    242 +-\n 5 files changed, 48847 insertions(+), 66189 deletions(-)",
+  "recentLog": "9bb463aa9 (HEAD -> codex/macbook-ingestion-grammar-sync, origin/main, origin/HEAD) Refresh code review packet for release doc wording update\n9878d3dce Refresh release conformance docs for artifact wording\nd013c62e5 Refresh code review packet for artifact wording\nc33b4689b Clarify Aurora and Guardians artifact requests\nb3d186c81 Refresh code review packet for release doc update\n55c147259 Refresh release conformance docs for Windigo intake\n58866ade0 Refresh code review packet for Windigo intake\n3a727d5a2 Accession Windigo rules and score source package",
   "machineStatus": {
     "ok": true,
     "mode": "status",
@@ -39,9 +47,9 @@
       }
     },
     "repo": {
-      "branch": "codex/macbook-fullscreen-timing-alignment-wip",
-      "dirty": false,
-      "upstream": "origin/codex/macbook-fullscreen-timing-alignment-wip",
+      "branch": "codex/macbook-ingestion-grammar-sync",
+      "dirty": true,
+      "upstream": "origin/main",
       "ahead": 0,
       "behind": 0,
       "remote_ok": true
@@ -59,7 +67,7 @@
         "ok": true,
         "reachable": true,
         "root_ok": true,
-        "url": "http://127.0.0.1:8000/",
+        "url": "http://localhost:8000/",
         "listeners": [
           {
             "pid": 25405,
@@ -72,7 +80,7 @@
         "ok": true,
         "reachable": true,
         "root_ok": true,
-        "url": "http://127.0.0.1:4311/api/runs",
+        "url": "http://localhost:4311/api/runs",
         "listeners": [
           {
             "pid": 25481,
@@ -87,8 +95,8 @@
       "dev": {
         "ok": true,
         "version": "1.4.0",
-        "label": "1.4.0.1+build.932.sha.19db4fa4",
-        "commit": "19db4fa4",
+        "label": "1.4.0.1+build.975.sha.9bb463aa",
+        "commit": "9bb463aa",
         "releaseChannel": "development"
       },
       "beta": {
@@ -114,16 +122,16 @@
     ]
   },
   "plan": [
-    "MacBook WIP branch is clean and pushed; authority machine should integrate Aurora challenge timing evidence after stacked base e397c2c75/2d144d5c1 path is understood"
+    "Sync challenge candidate grammar with main ingestion work by adding a human-perfect routeability promotion guard"
   ],
   "next": [
-    "On iMacM1 fetch origin, inspect codex/macbook-fullscreen-timing-alignment-wip at 0d74533e6 plus checkpoint commit if present, merge after current release branch/base, run verification, then decide dev/beta publish from authority machine only"
+    "Port generic before-after visuals and apply the same routeability concept to Guardians movement ingestion"
   ],
   "notes": [
     "Codex Desktop does not expose a repo command that forces internal chat compaction. The safe replacement is a manual checkpoint plus a deliberate fresh session from this file.",
     "This checkpoint intentionally filters its own generated files out of the dirty-status read so it can be committed as the recovery point."
   ],
-  "restartPrompt": "You are continuing Aurora Galactica / Platinum work from a durable Codex checkpoint.\n\nRepo path:\n/Users/sgwoods/Development/Codex/Codex-test1\n\nStart by running:\ngit branch --show-current\ngit status --short\ngit log -5 --oneline --decorate\nnpm run machine:status\n\nRead first:\n- CODEX_CONTEXT_CHECKPOINT.md\n- RESTART_FROM_HERE.md\n- MULTI_MACHINE_WORKFLOW.md\n\nCurrent checkpoint:\n- label: authority-handoff-challenge-timing-evidence\n- generated: 2026-05-31T12:25:48.645Z\n- branch: codex/macbook-fullscreen-timing-alignment-wip\n- commit: 0d74533e6 Improve Aurora challenge timing evidence\n- dirty files excluding checkpoint self-output: 0\n\nContinue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.",
+  "restartPrompt": "You are continuing Aurora Galactica / Platinum work from a durable Codex checkpoint.\n\nRepo path:\n/Users/sgwoods/Development/Codex/Codex-test1\n\nStart by running:\ngit branch --show-current\ngit status --short\ngit log -5 --oneline --decorate\nnpm run machine:status\n\nRead first:\n- CODEX_CONTEXT_CHECKPOINT.md\n- RESTART_FROM_HERE.md\n- MULTI_MACHINE_WORKFLOW.md\n\nCurrent checkpoint:\n- label: ingestion-human-perfect-guard\n- generated: 2026-06-01T15:30:18.233Z\n- branch: codex/macbook-ingestion-grammar-sync\n- commit: 9bb463aa9 Refresh code review packet for release doc wording update\n- dirty files excluding checkpoint self-output: 7\n\nContinue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.",
   "files": {
     "markdown": "CODEX_CONTEXT_CHECKPOINT.md",
     "json": "reference-artifacts/analyses/codex-context-checkpoint/latest.json"
