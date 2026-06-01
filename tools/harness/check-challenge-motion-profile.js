@@ -114,6 +114,33 @@ function validateStage11ReferencePathSetup(state){
   validateReferencePathSetup(state, { stage: 11, layoutId: 'stingray-crown-hook-hybrid' });
 }
 
+function validateReferenceLeadIn(state, sampleAt){
+  const leadIns = (state?.enemies || []).filter(enemy =>
+    enemy?.referencePath
+    && enemy.spawn > 0
+    && enemy.referenceLeadIn > 0.05
+    && enemy.referenceLeadIn < 1
+  );
+  if(leadIns.length < 4){
+    fail('reference-backed challenge waves should visibly lead in from the side before the recorded track begins', {
+      stage: state?.stage,
+      sampleAt,
+      leadIns,
+      enemies: state?.enemies
+    });
+  }
+  const magic = leadIns.filter(enemy => enemy.x > 20 && enemy.x < 260 && enemy.referenceLeadIn < 0.35);
+  if(magic.length){
+    fail('reference-backed challenge lead-in moved too deep into the playfield too early', {
+      stage: state?.stage,
+      sampleAt,
+      magic,
+      leadIns
+    });
+  }
+  return leadIns;
+}
+
 async function main(){
   const result = await withHarnessPage({ skipStart: true, stage: 3, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
     await page.evaluate(() => window.__galagaHarness__.setupChallengeMotionProfileTest({ stage: 3 }));
@@ -161,10 +188,25 @@ async function main(){
   validateStage11ReferencePathSetup(stage11.initial);
   validateStage11ReferencePathSetup(stage11.underway);
 
+  const stage7LeadIn = await withHarnessPage({ stage: 7, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
+    const initial = await page.evaluate(() => window.__galagaHarness__.challengeFormationState());
+    const referenceEnemies = (initial.enemies || []).filter(enemy => enemy.referencePath);
+    const earliestSpawn = Math.min(...referenceEnemies.map(enemy => +enemy.spawn || 0));
+    const sampleAt = Math.max(0.05, earliestSpawn - 0.34);
+    await page.evaluate(seconds => window.__galagaHarness__.advanceFor(seconds, {
+      step: 1 / 60,
+      stopOnGameOver: false
+    }), sampleAt);
+    const underway = await page.evaluate(() => window.__galagaHarness__.challengeFormationState());
+    return { sampleAt, initial, underway, leadIns: validateReferenceLeadIn(underway, sampleAt) };
+  });
+
   console.log(JSON.stringify({ ok: true, samples: result, stage7ReferencePath: {
     enemyCount: stage7.initial.enemies.length,
     referencePathGroups: stage7.initial.layout.groupReferencePaths.length,
-    sourceTrackIds: [...new Set(stage7.initial.enemies.map(e => e.referencePath?.sourceTrackId).filter(Boolean))]
+    sourceTrackIds: [...new Set(stage7.initial.enemies.map(e => e.referencePath?.sourceTrackId).filter(Boolean))],
+    leadInCount: stage7LeadIn.leadIns.length,
+    leadInSampleAt: +stage7LeadIn.sampleAt.toFixed(3)
   }, stage11ReferencePath: {
     enemyCount: stage11.initial.enemies.length,
     referencePathGroups: stage11.initial.layout.groupReferencePaths.length,

@@ -1151,6 +1151,7 @@ window.__galagaHarness__={
     pointCount:Array.isArray(e.referencePath.points)?e.referencePath.points.length:0,
     durationS:+(+e.referencePath.durationS||0).toFixed(2)
    }:null,
+   referenceLeadIn:+(+e.referenceLeadIn||0).toFixed(3),
    tm:+(+e.tm||0).toFixed(3),
    flapOpen:Math.sin((+e.tm||0)*11+(+e.ph||0))>.12,
    animationPhase:+(((+e.tm||0)*11+(+e.ph||0))%(Math.PI*2)).toFixed(3),

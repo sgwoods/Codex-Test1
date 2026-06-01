@@ -163,6 +163,52 @@ async function main(){
     fail('Player Two persona score must not be recorded as a leaderboard score', signed);
   }
 
+  const autoTurn = await withHarnessPage({ skipStart: true, seed: 77106 }, async ({ page }) => {
+    const ready = await page.evaluate(() => {
+      window.__galagaHarness__.showFrontDoor();
+      window.__galagaHarness__.setupPlayerTwoModeTest({
+        signedIn: true,
+        initials: 'SGW',
+        email: 'pilot@example.com'
+      });
+      window.__galagaHarness__.setPlayerTwoMode({ enabled: true, persona: 'novice' });
+      window.__galagaHarness__.start({
+        autoVideo: false,
+        controlledClock: true,
+        seed: 77106,
+        playerTwo: true,
+        playerTwoPersona: 'novice'
+      });
+      window.__galagaHarness__.triggerRemoteScoreGameOver({ score: 1240, stage: 1 });
+      return {
+        gameOver: window.__galagaHarness__.gameOverView(),
+        p2: window.__galagaHarness__.playerTwoState().run
+      };
+    });
+    await page.waitForFunction(() => {
+      const state = window.__galagaHarness__.state();
+      return !!(state.started && state.playerTwo?.activeTurn === 'p2' && state.harnessPersona === 'novice');
+    }, { timeout: 4500 });
+    const after = await page.evaluate(() => ({
+      state: window.__galagaHarness__.state(),
+      p2: window.__galagaHarness__.playerTwoState().run,
+      events: window.__galagaHarness__.sessionEvents(500)
+        .filter(event => /^player_two_/.test(event.type))
+        .map(event => event.type)
+    }));
+    return { ready, after };
+  });
+
+  if(!autoTurn.ready?.p2?.autoStartQueued || !/2UP TURN STARTS NEXT/.test(autoTurn.ready?.gameOver?.html || '')){
+    fail('2UP mode should visibly queue the persona rival for automatic alternating play after 1UP completes', autoTurn);
+  }
+  if(!autoTurn.after?.state?.started || autoTurn.after?.state?.playerTwo?.activeTurn !== 'p2' || autoTurn.after?.state?.harnessPersona !== 'novice'){
+    fail('2UP mode should automatically hand active play to the selected persona after the 1UP result', autoTurn);
+  }
+  if(!autoTurn.after?.events?.includes('player_two_turn_active')){
+    fail('2UP automatic handoff should be logged for production behavior review', autoTurn);
+  }
+
   const watch = await withHarnessPage({ skipStart: true, seed: 77104 }, async ({ page }) => page.evaluate(() => {
     window.__galagaHarness__.showFrontDoor();
     window.__galagaHarness__.setPlayerTwoMode({ enabled: false, persona: 'professional', silent: true });
@@ -258,6 +304,11 @@ async function main(){
       playerTwoScore: signed.p2.score,
       playerTwoStage: signed.p2.stage,
       humanScoreRecorded: 12340
+    },
+    autoTurn: {
+      persona: autoTurn.after.state.harnessPersona,
+      activeTurn: autoTurn.after.state.playerTwo.activeTurn,
+      autoQueued: autoTurn.ready.p2.autoStartQueued
     },
     watch: {
       persona: watch.live.harnessPersona,

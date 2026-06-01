@@ -15,6 +15,7 @@ function resolveWatchChallengeStartStage(cfg={}){
 
 function startAuroraGameplay(){
  if(typeof clearRuntimeLoopFault==='function')clearRuntimeLoopFault();
+ if(typeof clearPlayerTwoAutoTurnTimer==='function')clearPlayerTwoAutoTurnTimer();
  stopAttractLoop();
  try{document.activeElement?.blur?.()}catch{}
  if(typeof resetActiveInputState==='function')resetActiveInputState('game_start');
@@ -67,6 +68,7 @@ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:
  }else if(playerTwoRun?.enabled&&playerTwoRun.activeTurn==='p2'){
   S.alertTxt=`2UP TURN\n${playerTwoRun.label||watchModePersonaLabel(playerTwoRun.personaKey)} PILOT`;
   S.alertT=Math.max(S.alertT,1.8);
+  if(typeof logEvent==='function')logEvent('player_two_turn_active',playerTwoSnapshot(playerTwoRun));
   if(typeof commentatorEvent==='function')commentatorEvent('player_two_turn_start',playerTwoSnapshot(playerTwoRun));
  }else if(playerTwoRun?.enabled&&typeof commentatorEvent==='function'){
   commentatorEvent('player_two_queued',playerTwoSnapshot(playerTwoRun));
@@ -140,6 +142,7 @@ function gameOver(){
  if(typeof syncPauseUi==='function')syncPauseUi();
  gameOverState=buildGameOverState(S.score,S.stage,!!S.challenge);
  gameOverHtml=buildGameOverHtmlFromState();
+ if(typeof queuePlayerTwoAutoTurn==='function'&&queuePlayerTwoAutoTurn('auto'))gameOverHtml=buildGameOverHtmlFromState();
  if(gameOverState&&!gameOverState.editing&&!gameOverState.watchMode&&!gameOverState.playerTwoMode&&typeof submitGameOverScore==='function')submitGameOverScore();
  if(usesRuntimeGalagaReferenceAudio()&&typeof sfx.stopCueNames==='function'){
   sfx.stopCueNames(['stagePulse','stageTransition','challengeTransition','challengeResults','challengePerfect']);
@@ -192,6 +195,14 @@ const PLAYER_TWO_PERSONA_DESCRIPTIONS=Object.freeze({
  expert:'Aggressive pilot: faster tracking, tighter aim, and stronger capture-rescue priority.',
  professional:'Arcade-grade pilot: high tempo, sharper aim, rescue-first pressure movement.'
 });
+let playerTwoAutoTurnTimer=null;
+
+function clearPlayerTwoAutoTurnTimer(){
+ if(playerTwoAutoTurnTimer){
+  clearTimeout(playerTwoAutoTurnTimer);
+  playerTwoAutoTurnTimer=null;
+ }
+}
 
 function normalizePlayerTwoPersona(value=''){
  const key=String(value||'').trim().toLowerCase();
@@ -414,6 +425,8 @@ function updatePlayerTwoGameOverState(){
  }
  if(p2.activeTurn==='queued'){
   p2.activeTurn='ready';
+  p2.autoStartQueued=0;
+  p2.autoStartDelay=2.2;
   p2.humanScore=S.score|0;
   p2.humanStage=displayStageNumber(S.stage,!!S.challenge);
   p2.humanStats={shots:S.stats.shots|0,hits:S.stats.hits|0};
@@ -423,8 +436,22 @@ function updatePlayerTwoGameOverState(){
 function playerTwoTurnAvailable(){
  return !!(!started&&gameOverState&&!gameOverState.editing&&S.playerTwo?.enabled&&S.playerTwo.activeTurn==='ready');
 }
+function queuePlayerTwoAutoTurn(source='auto'){
+ clearPlayerTwoAutoTurnTimer();
+ if(!playerTwoTurnAvailable())return false;
+ const p2=S.playerTwo;
+ const delay=Math.max(.8,Math.min(4,Number.isFinite(+p2.autoStartDelay)?+p2.autoStartDelay:2.2));
+ p2.autoStartQueued=1;
+ if(typeof logEvent==='function')logEvent('player_two_auto_turn_queued',Object.assign({delay:+delay.toFixed(2),source},playerTwoSnapshot(p2)));
+ playerTwoAutoTurnTimer=setTimeout(()=>{
+  playerTwoAutoTurnTimer=null;
+  if(playerTwoTurnAvailable())startPlayerTwoTurnFromGameOver(source);
+ },delay*1000);
+ return true;
+}
 function startPlayerTwoTurnFromGameOver(source='keyboard'){
  if(!playerTwoTurnAvailable())return false;
+ clearPlayerTwoAutoTurnTimer();
  if(gameOverState&&!gameOverState.editing&&!gameOverState.watchMode&&!gameOverState.playerTwoMode&&typeof submitGameOverScore==='function')submitGameOverScore();
  const p2=Object.assign({},S.playerTwo,{
   activeTurn:'p2',
@@ -435,6 +462,7 @@ function startPlayerTwoTurnFromGameOver(source='keyboard'){
   elapsed:0,
   nextLogT:8,
   lastStage:1,
+  autoStartQueued:0,
   source
  });
  window.__platinumPendingPlayerTwoTurn=p2;
@@ -501,6 +529,7 @@ function playerTwoSnapshot(state=S.playerTwo){
   humanStage:+(p2.humanStage||0)|0,
   elapsed:+(+p2.elapsed||0).toFixed(3),
   variance:+(+p2.variance||1).toFixed(4),
+  autoStartQueued:!!p2.autoStartQueued,
   eligibleForLeaderboard:false
  };
 }
@@ -617,7 +646,7 @@ function buildPlayerTwoResultsHtml(){
  const human=(p2.humanScore!=null?p2.humanScore:S.score)|0;
  const p2Score=p2.score|0;
  const initials=p2.initials||'---';
- if(p2.activeTurn==='ready')return `<span class="playerTwoResult playerTwoResultReady"><span class="playerTwoKicker">1UP COMPLETE</span><span class="playerTwoVersus"><span class="playerTwoLane is1up"><b>1UP</b><strong>${formatScore(human)}</strong></span><span class="playerTwoLane is2up"><b>2UP ${initials}</b><strong>READY</strong></span></span><span class="playerTwoPrompt"><span class="k">2</span> START 2UP TURN</span><span class="playerTwoRule">HUMAN SCORE ONLY</span></span>`;
+ if(p2.activeTurn==='ready')return `<span class="playerTwoResult playerTwoResultReady"><span class="playerTwoKicker">1UP COMPLETE</span><span class="playerTwoVersus"><span class="playerTwoLane is1up"><b>1UP</b><strong>${formatScore(human)}</strong></span><span class="playerTwoLane is2up"><b>2UP ${initials}</b><strong>${p2.autoStartQueued?'NEXT':'READY'}</strong></span></span><span class="playerTwoPrompt">2UP TURN STARTS NEXT   <span class="k">2</span> START 2UP TURN NOW</span><span class="playerTwoRule">HUMAN SCORE ONLY</span></span>`;
  if(p2.activeTurn!=='p2'&&p2.activeTurn!=='done')return `<span class="playerTwoResult playerTwoResultQueued"><span class="playerTwoKicker">2UP ${initials} ${formatScore(p2Score)} READY</span><span class="playerTwoRule">2UP HAS NOT PLAYED THIS TURN   1UP SCORE IS THE ONLY SCOREBOARD ENTRY</span></span>`;
  const outcome=human>=p2Score?'1UP LEADS':'2UP LEADS';
  const humanClass=human>=p2Score?' isLeader':'';
