@@ -1,0 +1,334 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "galaxy-guardians-motion-grammar-candidate-queue",
+  "version": "0.1",
+  "createdOn": "2026-06-01T16:32:14.660Z",
+  "status": "candidate-queue-analysis-only-no-runtime-change",
+  "generatedBy": "tools/harness/analyze-galaxy-guardians-motion-grammar-candidates.js",
+  "sourceEvidence": {
+    "motionGrammarVocabulary": "reference-artifacts/analyses/shared-motion-grammar/vocabulary-0.1.json",
+    "routeabilityReview": "reference-artifacts/analyses/galaxy-guardians-identity/routeability-review-0.1.json",
+    "movementPacing": "reference-artifacts/analyses/galaxy-guardians-identity/movement-pacing-0.1.json",
+    "runtimeReferenceMovement": "reference-artifacts/analyses/galaxy-guardians-identity/runtime-reference-movement-0.1.json",
+    "objectTrackConformance": "reference-artifacts/analyses/galaxy-guardians-identity/object-track-conformance-0.1.json",
+    "frameMotionConformance": "reference-artifacts/analyses/galaxy-guardians-identity/frame-motion-conformance-0.1.json",
+    "longSurfaceConformance": "reference-artifacts/analyses/galaxy-guardians-identity/long-surface-conformance-0.1.json",
+    "playtestConformanceReview": "reference-artifacts/analyses/galaxy-guardians-identity/playtest-conformance-review-0.1.json",
+    "visualReadability": "reference-artifacts/analyses/galaxy-guardians-identity/visual-readability-0.1.json"
+  },
+  "grammarMapping": {
+    "gameKey": "galaxy-guardians-preview",
+    "lineage": "Galaxian-style",
+    "primaryUses": [
+      "scout dive attacks",
+      "flagship escort dives",
+      "bottom wrap and return paths",
+      "midrun stage-five stress routeability"
+    ],
+    "promotionGate": "A movement candidate must not promote from object-track or pressure fit alone; persona routeability and collision-loss share must preserve or improve."
+  },
+  "summary": {
+    "candidateCount": 6,
+    "topCandidateId": "guardians-stage-five-routeability-relief",
+    "topPrimitiveId": "scoring-routeability-window",
+    "routeabilityScore10": 5.4,
+    "weakestRouteabilityGroup": "midrun-stage-five-stress",
+    "weakestRouteabilityGroupScore10": 4.5,
+    "runtimeReferenceMovementScore10": 8.1,
+    "playtestMotionPressureScore10": 6.3,
+    "promotionRule": "A movement candidate must not promote from object-track or pressure fit alone; persona routeability and collision-loss share must preserve or improve.",
+    "releaseRead": "Guardians now has 6 grammar-backed movement candidate rows. The first priority is Stage-five stress routeability relief because routeability is 5.4/10 overall and 4.5/10 in the weakest stage-five stress group."
+  },
+  "candidates": [
+    {
+      "id": "guardians-stage-five-routeability-relief",
+      "primitiveId": "scoring-routeability-window",
+      "title": "Stage-five stress routeability relief",
+      "priority": 1,
+      "candidateType": "runtime-candidate-needed",
+      "axesTouched": [
+        "player-routeability",
+        "collision-safety",
+        "shot-window",
+        "visual-readability"
+      ],
+      "currentScores": {
+        "routeabilityScore10": 5.4,
+        "weakestRouteabilityGroupScore10": 4.5,
+        "longSurfaceMidrunScore10": 5.7
+      },
+      "evidence": [
+        "reference-artifacts/analyses/galaxy-guardians-identity/routeability-review-0.1.json",
+        "reference-artifacts/analyses/galaxy-guardians-identity/long-surface-conformance-0.1.json",
+        "reference-artifacts/analyses/galaxy-guardians-identity/playtest-conformance-review-0.1.json"
+      ],
+      "problem": "The weakest player-facing movement problem is not missing pressure; it is that stage-five stress is collision-dominated and does not convert into clean-clear routeability.",
+      "proposedCandidate": "Create a bounded stage-five movement candidate that slightly widens lower-field escape/read lanes and preserves shot pressure while reducing collision-loss share.",
+      "playerMeaning": "A strong player should feel pressure and still see a route, rather than feeling that lower-field movement simply crowds them out.",
+      "promotionGate": "Accept only if midrun-stage-five-stress routeability improves and object-track/pressure scores do not materially regress.",
+      "status": "planned-no-runtime-change",
+      "score10": 5.5,
+      "risk": "high",
+      "nextMeasurement": "Browser-backed persona before/after run at stage five with score, survival, collision-loss share, and object-track summary.",
+      "grammarPrimitive": {
+        "id": "scoring-routeability-window",
+        "meaning": "A time and position window where a skilled player can deliberately score, rescue, survive, or earn a perfect route.",
+        "requiredAxes": [
+          "player-routeability",
+          "shot-window",
+          "collision-safety",
+          "visual-readability"
+        ]
+      },
+      "routeabilityGate": {
+        "baselineScore10": 5.4,
+        "weakestGroup": "midrun-stage-five-stress",
+        "weakestGroupScore10": 4.5,
+        "required": true
+      }
+    },
+    {
+      "id": "guardians-scout-dive-duration-shape",
+      "primitiveId": "dive-attack",
+      "title": "Scout dive duration and shape fit",
+      "priority": 2,
+      "candidateType": "runtime-candidate-needed",
+      "axesTouched": [
+        "temporal-cadence",
+        "path-topology",
+        "collision-safety",
+        "shot-window"
+      ],
+      "currentScores": {
+        "runtimeReferenceMovementScore10": 8.1,
+        "durationFit10": 5.2,
+        "xSpanFit10": 9,
+        "ySpanFit10": 6.3
+      },
+      "evidence": [
+        "reference-artifacts/analyses/galaxy-guardians-identity/runtime-reference-movement-0.1.json",
+        "reference-artifacts/analyses/galaxy-guardians-identity/object-track-conformance-0.1.json",
+        "reference-artifacts/analyses/galaxian-frame-reference/arcades-lounge-level-5/lower-field-dive-curves/contact-sheet.jpg"
+      ],
+      "problem": "Runtime dives are much shorter than the reference proxy median (2.65s vs 5.5s), even though x/y span and event coverage are strong.",
+      "proposedCandidate": "Try a slower, longer scout-dive profile in a controlled candidate while preserving current first-dive timing and stage-one readability.",
+      "playerMeaning": "Dives should read as graceful arcade pressure with time to aim, not as abrupt short hops.",
+      "promotionGate": "Accept only if duration fit improves and routeability does not fall below the current baseline.",
+      "status": "planned-no-runtime-change",
+      "score10": 6.2,
+      "risk": "medium",
+      "nextMeasurement": "Runtime-vs-reference movement comparison plus routeability review for baseline and candidate profiles.",
+      "grammarPrimitive": {
+        "id": "dive-attack",
+        "meaning": "A single enemy leaves formation, descends, attacks, and exits or returns.",
+        "requiredAxes": [
+          "temporal-cadence",
+          "path-topology",
+          "collision-safety",
+          "shot-window",
+          "audio-cue-hooks"
+        ]
+      },
+      "routeabilityGate": {
+        "baselineScore10": 5.4,
+        "weakestGroup": "midrun-stage-five-stress",
+        "weakestGroupScore10": 4.5,
+        "required": true
+      }
+    },
+    {
+      "id": "guardians-flagship-escort-readable-pressure",
+      "primitiveId": "escort-linked-dive",
+      "title": "Flagship escort readable pressure",
+      "priority": 3,
+      "candidateType": "analysis-first-candidate",
+      "axesTouched": [
+        "object-grouping",
+        "role-family",
+        "path-topology",
+        "player-routeability",
+        "audio-cue-hooks"
+      ],
+      "currentScores": {
+        "objectDivePathEvidence10": 7.4,
+        "frameMovementPressure10": 7.1,
+        "playtestMotionPressure10": 6.3
+      },
+      "evidence": [
+        "reference-artifacts/analyses/galaxy-guardians-identity/object-track-conformance-0.1.json",
+        "reference-artifacts/analyses/galaxy-guardians-identity/frame-motion-conformance-0.1.json",
+        "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/flagship-escort-pressure/contact-sheet.jpg"
+      ],
+      "problem": "Guardians has reference-backed escort pressure evidence, but the candidate loop has not yet isolated whether escort-linked dives are readable scoring opportunities or only extra density.",
+      "proposedCandidate": "Create a named escort-linked-dive candidate with explicit escort spacing/lag variants and before/after routeability deltas.",
+      "playerMeaning": "The flagship should feel like a special coordinated threat, not just another object in the lower-field crowd.",
+      "promotionGate": "Accept only if escort grouping remains visible and persona routeability is preserved or improved.",
+      "status": "planned-analysis-before-runtime",
+      "score10": 6.9,
+      "risk": "medium",
+      "nextMeasurement": "Contact-sheet and runtime tracklet before/after focused on linked flagship/escort path overlap.",
+      "grammarPrimitive": {
+        "id": "escort-linked-dive",
+        "meaning": "A leader or boss moves with escorts or paired enemies in a coordinated attack.",
+        "requiredAxes": [
+          "object-grouping",
+          "role-family",
+          "path-topology",
+          "collision-safety",
+          "player-routeability"
+        ]
+      },
+      "routeabilityGate": {
+        "baselineScore10": 5.4,
+        "weakestGroup": "midrun-stage-five-stress",
+        "weakestGroupScore10": 4.5,
+        "required": true
+      }
+    },
+    {
+      "id": "guardians-bottom-wrap-return-readability",
+      "primitiveId": "bottom-wrap-return",
+      "title": "Bottom wrap and return readability",
+      "priority": 4,
+      "candidateType": "analysis-first-candidate",
+      "axesTouched": [
+        "path-topology",
+        "temporal-cadence",
+        "collision-safety",
+        "visual-readability"
+      ],
+      "currentScores": {
+        "runtimeReferenceMovementScore10": 8.1,
+        "wrapCountByFourteenSeconds": 7,
+        "objectTrackCoverage10": 9
+      },
+      "evidence": [
+        "reference-artifacts/analyses/galaxy-guardians-identity/runtime-reference-movement-0.1.json",
+        "reference-artifacts/analyses/galaxy-guardians-identity/object-track-conformance-0.1.json",
+        "reference-artifacts/analyses/galaxian-frame-reference/nenriki-15-wave-session/wrap-return-pressure/contact-sheet.jpg"
+      ],
+      "problem": "Runtime wrap coverage exists, but the next quality question is whether wrap/return behavior is visually readable and fair when pressure increases.",
+      "proposedCandidate": "Instrument wrap/return path variants with explicit lower-field routeability and visual-overlap checks before changing runtime constants.",
+      "playerMeaning": "The player should understand where a returning enemy will go and why a collision happened.",
+      "promotionGate": "Accept only if wrap count/coverage remains healthy and collision-loss share does not rise.",
+      "status": "planned-analysis-before-runtime",
+      "score10": 7.5,
+      "risk": "medium",
+      "nextMeasurement": "Before/after visual sheet with wrap path overlays and persona collision-loss deltas.",
+      "grammarPrimitive": {
+        "id": "bottom-wrap-return",
+        "meaning": "Enemies pass below the player field or screen boundary and re-enter or resolve their path.",
+        "requiredAxes": [
+          "path-topology",
+          "temporal-cadence",
+          "collision-safety",
+          "visual-readability"
+        ]
+      },
+      "routeabilityGate": {
+        "baselineScore10": 5.4,
+        "weakestGroup": "midrun-stage-five-stress",
+        "weakestGroupScore10": 4.5,
+        "required": true
+      }
+    },
+    {
+      "id": "guardians-rack-drift-and-opening-cadence",
+      "primitiveId": "rack-drift",
+      "title": "Rack drift and opening cadence",
+      "priority": 5,
+      "candidateType": "guardrail-currently-valid",
+      "axesTouched": [
+        "temporal-cadence",
+        "path-topology",
+        "visual-readability",
+        "player-routeability"
+      ],
+      "currentScores": {
+        "formationRackTiming10": 7.5,
+        "rackObjectStability10": 7.8,
+        "stageBandPressureGrammar10": 7.9
+      },
+      "evidence": [
+        "reference-artifacts/analyses/galaxy-guardians-identity/frame-motion-conformance-0.1.json",
+        "reference-artifacts/analyses/galaxy-guardians-identity/object-track-conformance-0.1.json",
+        "reference-artifacts/analyses/galaxy-guardians-identity/movement-pacing-0.1.json"
+      ],
+      "problem": "Opening/rack motion is useful enough to guard, but future theming and variant work could accidentally break the stable rack read.",
+      "proposedCandidate": "Keep rack drift as a guardrail row and require future visual/theme variants to preserve rack stability and opening cadence before promotion.",
+      "playerMeaning": "The first screen should read like a coherent arcade formation before individual threats peel away.",
+      "promotionGate": "Accept only if rack stability, opening cadence, and visual-role separation remain above current floors.",
+      "status": "guardrail-not-change-target",
+      "score10": 7.7,
+      "risk": "watch",
+      "nextMeasurement": "Run frame-motion/object-track checks after any theme or sprite-scale change.",
+      "grammarPrimitive": {
+        "id": "rack-drift",
+        "meaning": "A formed group shifts, pulses, or marches while maintaining a recognizable rack.",
+        "requiredAxes": [
+          "temporal-cadence",
+          "path-topology",
+          "visual-readability",
+          "player-routeability"
+        ]
+      },
+      "routeabilityGate": {
+        "baselineScore10": 5.4,
+        "weakestGroup": "midrun-stage-five-stress",
+        "weakestGroupScore10": 4.5,
+        "required": true
+      }
+    },
+    {
+      "id": "guardians-movement-audio-cue-hooks",
+      "primitiveId": "dive-attack",
+      "title": "Movement-linked audio cue hooks",
+      "priority": 6,
+      "candidateType": "semantic-candidate-needed",
+      "axesTouched": [
+        "audio-cue-hooks",
+        "temporal-cadence",
+        "player-routeability"
+      ],
+      "currentScores": {
+        "playtestAudioScore10": 6.4,
+        "motionPressureScore10": 6.3,
+        "routeabilityScore10": 5.4
+      },
+      "evidence": [
+        "reference-artifacts/analyses/galaxy-guardians-identity/playtest-conformance-review-0.1.json",
+        "reference-artifacts/analyses/galaxy-guardians-identity/routeability-review-0.1.json"
+      ],
+      "problem": "Movement candidates currently track visual/routeability risk better than audio meaning; dive and escort changes should also say when audio needs to warn, reward, or clarify.",
+      "proposedCandidate": "Add audio cue-hook fields to movement candidate reports before tuning dive/escort/wrap behavior further.",
+      "playerMeaning": "Sound should help the player understand threat and reward timing rather than simply decorating the scene.",
+      "promotionGate": "Accept only if movement candidates declare whether audio hooks are unchanged, required, or intentionally deferred.",
+      "status": "planned-process-candidate",
+      "score10": 6,
+      "risk": "medium",
+      "nextMeasurement": "Add cue-hook fields to the next before/after candidate artifact and rerun audio-scene review where hooks change.",
+      "grammarPrimitive": {
+        "id": "dive-attack",
+        "meaning": "A single enemy leaves formation, descends, attacks, and exits or returns.",
+        "requiredAxes": [
+          "temporal-cadence",
+          "path-topology",
+          "collision-safety",
+          "shot-window",
+          "audio-cue-hooks"
+        ]
+      },
+      "routeabilityGate": {
+        "baselineScore10": 5.4,
+        "weakestGroup": "midrun-stage-five-stress",
+        "weakestGroupScore10": 4.5,
+        "required": true
+      }
+    }
+  ],
+  "nextSteps": [
+    "Build a browser-backed before/after routeability capture for the top candidate.",
+    "Keep all movement candidates linked to primitive ids and axes before runtime promotion.",
+    "Only tune runtime constants after routeability, collision-safety, shot-window, and visual-readability gates are present."
+  ]
+}

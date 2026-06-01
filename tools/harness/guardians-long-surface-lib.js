@@ -56,6 +56,42 @@ function loadGuardiansVm(){
  return sandbox;
 }
 
+function installGuardiansRuntimeRulePatch(ctx, patch = {}){
+ if(!ctx) throw new Error('Missing Guardians VM context.');
+ ctx.__guardiansRuntimeRulePatch = patch || {};
+ vm.runInContext(`
+  if(!this.__guardiansBaseRuntimeRules){
+   this.__guardiansBaseRuntimeRules = guardiansRuntimeRules;
+  }
+  guardiansRuntimeRules = function patchedGuardiansRuntimeRules(stateOrStage = 1){
+   const rules = Object.assign({}, this.__guardiansBaseRuntimeRules(stateOrStage));
+   const patch = this.__guardiansRuntimeRulePatch || {};
+   const rank = guardiansStageRank(stateOrStage);
+   const applies = !patch.minRank || rank >= patch.minRank;
+   if(!applies) return rules;
+   const scales = patch.scales || {};
+   for(const key of Object.keys(scales)){
+    if(Number.isFinite(+rules[key]) && Number.isFinite(+scales[key])){
+     rules[key] = +(+rules[key] * +scales[key]).toFixed(3);
+    }
+   }
+   const offsets = patch.offsets || {};
+   for(const key of Object.keys(offsets)){
+    if(Number.isFinite(+rules[key]) && Number.isFinite(+offsets[key])){
+     rules[key] = +(+rules[key] + +offsets[key]).toFixed(3);
+    }
+   }
+   const overrides = patch.overrides || {};
+   for(const key of Object.keys(overrides)){
+    rules[key] = overrides[key];
+   }
+   return rules;
+  };
+  this.guardiansRuntimeRules = guardiansRuntimeRules;
+ `, ctx);
+ return ctx;
+}
+
 function pickStageTheme(pack, stage){
  let theme = pack.stageThemeProgression[0] || {};
  for(const candidate of pack.stageThemeProgression || []){
@@ -485,5 +521,9 @@ function buildGuardiansLongSurfaceArtifact({ createdOn = new Date().toISOString(
 
 module.exports = {
  ROOT,
+ loadGuardiansVm,
+ simulatePersona,
+ stageBandPressureSample,
+ installGuardiansRuntimeRulePatch,
  buildGuardiansLongSurfaceArtifact
 };

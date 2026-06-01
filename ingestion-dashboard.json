@@ -388,6 +388,7 @@
         { "label": "Playtest-weighted conformance", "value": "6.9/10", "detail": "Current felt/read score." },
         { "label": "Public readiness", "value": "4.2/10", "detail": "Still too low for a strong public promise." },
         { "label": "Movement routeability", "value": "5.4/10", "detail": "New Guardians routeability review; weakest route is stage-five stress." },
+        { "label": "Motion grammar candidates", "value": "6 queued", "detail": "Shared-grammar movement candidate queue; top item is stage-five routeability relief." },
         { "label": "Audio reference comparison", "value": "8.3/10", "detail": "Good coverage, still weak direct acoustic proxy fit." },
         { "label": "Audio live mix", "value": "9.9/10", "detail": "Live mix is now strong; source-faithful match is the remaining gap." }
       ],
@@ -433,6 +434,18 @@
               "hrefType": "artifact",
               "href": "reference-artifacts/analyses/galaxy-guardians-identity/routeability-review-0.1.json",
               "detail": "Player-routeability score for movement pressure, persona survival, and stage-five stress."
+            },
+            {
+              "label": "Motion grammar candidate queue",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/galaxy-guardians-identity/motion-grammar-candidates-0.1.json",
+              "detail": "Shared-grammar candidate rows for movement improvements and promotion gates."
+            },
+            {
+              "label": "Routeability before/after",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.json",
+              "detail": "Analysis-only stage-five routeability candidate comparison."
             },
             {
               "label": "Audio scene review",
@@ -489,7 +502,8 @@
             "Stage-band fairness lab",
             "Lower-field readability review",
             "Persona-driven capture and review",
-            "Routeability deltas for movement candidates before runtime promotion"
+            "Routeability deltas for movement candidates before runtime promotion",
+            "Shared motion-grammar candidate rows before runtime tuning"
           ]
         }
       ],
@@ -539,7 +553,17 @@
           "goodEnough": "Enough labeled yes-score-pop and no-score-pop cases that we can write a source-backed rule for when score text should appear after a hit."
         }
       ],
-      "previews": []
+      "previews": [
+        {
+          "label": "Stage-five routeability before/after",
+          "detail": "Analysis-only Guardians candidate chart: baseline routeability 4.5/10, best candidate 5.8/10.",
+          "mediaKind": "image",
+          "hrefType": "artifact",
+          "href": "reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.json",
+          "previewHrefType": "rawArtifact",
+          "previewHref": "reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.svg"
+        }
+      ]
     },
     {
       "gameKey": "windigo-invaders",

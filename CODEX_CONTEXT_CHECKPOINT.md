@@ -1,7 +1,7 @@
 # Codex Context Checkpoint
 
-Generated: 2026-06-01T16:04:36.731Z
-Label: ingestion-grammar-routeability-visuals
+Generated: 2026-06-01T16:42:17.733Z
+Label: guardians-routeability-before-after
 
 This is the durable recovery point for long Aurora / Platinum Codex sessions.
 Use it before switching machines, before starting a multi-hour run, and whenever
@@ -12,16 +12,16 @@ important working context.
 
 - Repo path: `/Users/sgwoods/Development/Codex/Codex-test1`
 - Branch: `codex/macbook-ingestion-grammar-sync`
-- HEAD: `c722fac34` Add human-perfect guard to challenge candidate sweeps
+- HEAD: `71c52ca0a` Expose routeability review in ingestion grammar
 - Dirty files excluding checkpoint self-output: `14`
 
 ## Active Plan
 
-- Port routeability and visual review primitives into shared ingestion grammar
+- Advance Guardians movement quality through shared motion grammar and routeability candidate gates
 
 ## Recommended Next Steps
 
-- Use shared grammar for Guardians candidate loop and future Windigo movement analysis
+- Create browser-visible before-after capture or promote the candidate behind stronger gates
 
 ## Notes
 
@@ -31,43 +31,44 @@ important working context.
 ## Git Status
 
 ```
-M CLASSIC_ARCADE_INGESTION_FRAMEWORK.md
+M MOTION_GRAMMAR_VOCABULARY.md
  M ingestion-dashboard.json
  M package.json
- M tools/build/build-index.js
-?? MOTION_GRAMMAR_VOCABULARY.md
-?? reference-artifacts/analyses/challenge-candidate-before-after/
-?? reference-artifacts/analyses/galaxy-guardians-identity/routeability-review-0.1.json
-?? reference-artifacts/analyses/galaxy-guardians-identity/routeability-review-0.1.md
-?? reference-artifacts/analyses/shared-motion-grammar/
-?? tools/harness/analyze-challenge-candidate-before-after.js
-?? tools/harness/analyze-galaxy-guardians-routeability-review.js
-?? tools/harness/check-challenge-candidate-before-after.js
-?? tools/harness/check-galaxy-guardians-routeability-review.js
-?? tools/harness/check-shared-motion-grammar-vocabulary.js
+ M reference-artifacts/analyses/galaxy-guardians-identity/README.md
+ M tools/harness/guardians-long-surface-lib.js
+?? reference-artifacts/analyses/galaxy-guardians-identity/motion-grammar-candidates-0.1.json
+?? reference-artifacts/analyses/galaxy-guardians-identity/motion-grammar-candidates-0.1.md
+?? reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.json
+?? reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.md
+?? reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.svg
+?? tools/harness/analyze-galaxy-guardians-motion-grammar-candidates.js
+?? tools/harness/analyze-galaxy-guardians-routeability-before-after.js
+?? tools/harness/check-galaxy-guardians-motion-grammar-candidates.js
+?? tools/harness/check-galaxy-guardians-routeability-before-after.js
 ```
 
 ## Diff Stat
 
 ```
-CLASSIC_ARCADE_INGESTION_FRAMEWORK.md | 25 ++++++++++++++++++
- ingestion-dashboard.json              | 50 ++++++++++++++++++++++++++++++++---
- package.json                          |  5 ++++
- tools/build/build-index.js            | 46 +++++++++++++++++++++++++++++---
- 4 files changed, 119 insertions(+), 7 deletions(-)
+MOTION_GRAMMAR_VOCABULARY.md                       | 20 +++++++++++
+ ingestion-dashboard.json                           | 28 +++++++++++++--
+ package.json                                       |  4 +++
+ .../analyses/galaxy-guardians-identity/README.md   | 12 +++++++
+ tools/harness/guardians-long-surface-lib.js        | 40 ++++++++++++++++++++++
+ 5 files changed, 102 insertions(+), 2 deletions(-)
 ```
 
 ## Recent Log
 
 ```
-c722fac34 (HEAD -> codex/macbook-ingestion-grammar-sync, origin/codex/macbook-ingestion-grammar-sync) Add human-perfect guard to challenge candidate sweeps
+71c52ca0a (HEAD -> codex/macbook-ingestion-grammar-sync, origin/codex/macbook-ingestion-grammar-sync) Expose routeability review in ingestion grammar
+c722fac34 Add human-perfect guard to challenge candidate sweeps
 9bb463aa9 (origin/main, origin/HEAD) Refresh code review packet for release doc wording update
 9878d3dce Refresh release conformance docs for artifact wording
 d013c62e5 Refresh code review packet for artifact wording
 c33b4689b Clarify Aurora and Guardians artifact requests
 b3d186c81 Refresh code review packet for release doc update
 55c147259 Refresh release conformance docs for Windigo intake
-58866ade0 Refresh code review packet for Windigo intake
 ```
 
 ## Machine Status Snapshot
@@ -197,10 +198,10 @@ Read first:
 - MULTI_MACHINE_WORKFLOW.md
 
 Current checkpoint:
-- label: ingestion-grammar-routeability-visuals
-- generated: 2026-06-01T16:04:36.731Z
+- label: guardians-routeability-before-after
+- generated: 2026-06-01T16:42:17.733Z
 - branch: codex/macbook-ingestion-grammar-sync
-- commit: c722fac34 Add human-perfect guard to challenge candidate sweeps
+- commit: 71c52ca0a Expose routeability review in ingestion grammar
 - dirty files excluding checkpoint self-output: 14
 
 Continue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.

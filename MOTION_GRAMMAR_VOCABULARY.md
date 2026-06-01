@@ -106,8 +106,28 @@ Aurora Galactica:
 Galaxy Guardians:
 
 - new routeability review artifact
+- motion grammar candidate queue
 - stage-five stress read
 - future movement candidate loop guard
+
+Current candidate queue:
+
+- `reference-artifacts/analyses/galaxy-guardians-identity/motion-grammar-candidates-0.1.json`
+- `reference-artifacts/analyses/galaxy-guardians-identity/motion-grammar-candidates-0.1.md`
+- `reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.json`
+- `reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.md`
+- `reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.svg`
+
+The top row is intentionally player-centered: stage-five stress routeability
+relief. The goal is not to make the game easier in the abstract. The goal is to
+keep later pressure learnable, scoreable, and visibly fair before any dive,
+escort, or wrap constants are promoted.
+
+The first measured planning pass found a balanced stage-five relief candidate
+that lifts routeability from `4.5/10` to `5.8/10` and lowers collision-loss
+share from `80%` to `47%` in the fixed review window. This is not a runtime
+promotion; it is the current best evidence-backed candidate for the next
+Guardians gameplay pass.
 
 Windigo Invaders / future third game:
 
