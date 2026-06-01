@@ -48,6 +48,14 @@ async function main(){
     window.__galagaHarness__.advanceFor(0);
     const afterWatchPicker = {
       state: window.__galagaHarness__.playerTwoState().selection,
+      watchScope: window.__galagaHarness__.playerTwoState().watchScope,
+      html: document.getElementById('msg')?.innerHTML || ''
+    };
+    document.querySelector('[data-watch-scope="next"]')?.dispatchEvent(new Event('pointerdown', { bubbles: true, cancelable: true }));
+    window.__galagaHarness__.advanceFor(0);
+    const afterWatchScopePicker = {
+      state: window.__galagaHarness__.playerTwoState().selection,
+      watchScope: window.__galagaHarness__.playerTwoState().watchScope,
       html: document.getElementById('msg')?.innerHTML || ''
     };
     window.__galagaHarness__.start({
@@ -89,6 +97,7 @@ async function main(){
       frontDoorHtml,
       afterRivalPicker,
       afterWatchPicker,
+      afterWatchScopePicker,
       hudRight,
       launchPilotCard,
       gameOver,
@@ -111,8 +120,11 @@ async function main(){
   if(signed.afterRivalPicker?.state?.personaKey !== 'expert' || !/EXPERT/.test(signed.afterRivalPicker?.html || '')){
     fail('2UP Rival pilot selector should visibly cycle the role before launch', signed);
   }
-  if(!/WATCH/.test(signed.afterWatchPicker?.html || '') || !/EXPERT/.test(signed.afterWatchPicker?.html || '') || signed.afterWatchPicker?.state?.personaKey !== 'expert'){
+  if(!/WATCH/.test(signed.afterWatchPicker?.html || '') || !/EXPERT/.test(signed.afterWatchPicker?.html || '') || !/GAME FLOW/.test(signed.afterWatchPicker?.html || '') || signed.afterWatchPicker?.state?.personaKey !== 'expert' || signed.afterWatchPicker?.watchScope !== 'game'){
     fail('Watch pilot selector should visibly cycle the watched role without launching a run', signed);
+  }
+  if(signed.afterWatchScopePicker?.watchScope !== 'challenges' || !/CHALLENGES ONLY/.test(signed.afterWatchScopePicker?.html || '')){
+    fail('Watch scope selector should visibly switch from full game flow to challenges-only from the front door', signed);
   }
   if((signed.p2.score | 0) !== 0 || signed.p2.activeTurn !== 'queued'){
     fail('Player Two score must stay queued at 0 during the human 1UP turn', signed);
@@ -194,6 +206,50 @@ async function main(){
     fail('Watch Mode score must not be recorded in the local top-10 board', watch);
   }
 
+  const challengeWatch = await withHarnessPage({ skipStart: true, seed: 77105 }, async ({ page }) => page.evaluate(() => {
+    window.__galagaHarness__.showFrontDoor();
+    window.__galagaHarness__.setTest({
+      stage: 1,
+      startKind: 'level',
+      challengeStage: 1,
+      ships: 3,
+      expertPlays: 'human'
+    });
+    window.__galagaHarness__.startWatchMode({
+      persona: 'professional',
+      scope: 'challenges',
+      seed: 77105
+    });
+    window.__galagaHarness__.advanceFor(0);
+    const start = window.__galagaHarness__.state();
+    const pilotCard = {
+      dock: document.getElementById('accountDockBtn')?.textContent || '',
+      mode: document.getElementById('accountDockBtn')?.dataset?.pilotMode || '',
+      summary: document.getElementById('accountSummary')?.textContent || ''
+    };
+    window.__galagaHarness__.forcePerfectChallengeClear();
+    window.__galagaHarness__.advanceFor(16.5);
+    const afterClear = window.__galagaHarness__.state();
+    const events = window.__galagaHarness__.sessionEvents(500);
+    const transition = events.find(event => event.type === 'challenge_transition_queued') || null;
+    return { start, pilotCard, afterClear, transition };
+  }));
+
+  if(!challengeWatch.start?.watchMode || challengeWatch.start?.watchScope !== 'challenges' || !challengeWatch.start?.challenge || challengeWatch.start?.stage !== 3){
+    fail('front-door Watch Mode challenges-only scope should start at the configured first challenging stage', challengeWatch);
+  }
+  if(challengeWatch.pilotCard?.mode !== 'watch' || !/challenges-only/i.test(challengeWatch.pilotCard?.summary || '')){
+    fail('pilot card should describe challenges-only Watch Mode as a challenge-stage tour', challengeWatch);
+  }
+  const challengeTourAdvanced = challengeWatch.transition?.pendingStage === 7 && challengeWatch.transition?.watchScope === 'challenges'
+    || challengeWatch.afterClear?.stage === 7 && challengeWatch.afterClear?.watchScope === 'challenges';
+  if(!challengeTourAdvanced){
+    fail('challenges-only Watch Mode should queue the next challenging stage after a clear instead of returning to regular gameplay', challengeWatch);
+  }
+  if(!challengeWatch.afterClear?.challenge || challengeWatch.afterClear?.stage !== 7){
+    fail('challenges-only Watch Mode should advance into the next challenging stage during the tour', challengeWatch);
+  }
+
   console.log(JSON.stringify({
     ok: true,
     unsigned: unsigned.selection,
@@ -207,6 +263,11 @@ async function main(){
       persona: watch.live.harnessPersona,
       score: watch.live.score,
       recorded: watch.boardScores.includes(55550)
+    },
+    challengeWatch: {
+      startStage: challengeWatch.start.stage,
+      nextStage: challengeWatch.afterClear.stage,
+      scope: challengeWatch.afterClear.watchScope
     }
   }, null, 2));
 }

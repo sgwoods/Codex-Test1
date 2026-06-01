@@ -211,7 +211,10 @@ function finalizeChallengeClear(){
   ? currentGamePackReferenceTimingField('challengeResults','resultHoldWindow',S.stage,1.45)
   : (challengeResultsTiming?.resultHoldWindow??1.45);
  S.banner=resultBannerWindow;
- S.pendingStage=S.stage+1;
+ const nextChallengeStage=S.watchMode&&S.watchScope==='challenges'
+  ? internalStageForChallengeStageNumber(challengeStageNumberForInternalStage(S.stage)+1)
+  : 0;
+ S.pendingStage=nextChallengeStage||S.stage+1;
  S.lastChallengeClearT=S.stageClock;
  S.challengeTransitionStallLogged=0;
  S.postChallengeT=resultHoldWindow;
@@ -225,6 +228,7 @@ function finalizeChallengeClear(){
  logEvent('challenge_transition_queued',{
   stage:S.stage,
   pendingStage:S.pendingStage,
+  watchScope:S.watchScope||'game',
   hits:S.ch.hits,
   total:S.ch.total,
   postChallengeT:+S.postChallengeT.toFixed(3),

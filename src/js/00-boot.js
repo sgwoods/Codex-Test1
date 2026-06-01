@@ -278,6 +278,7 @@ const ARCADE_FULLSCREEN_AUTO_PREF_KEY=`${STORAGE_PREFIX}ArcadeFullscreenAuto`;
 const PLAYER_TWO_MODE_PREF_KEY=`${STORAGE_PREFIX}PlayerTwoMode`;
 const PLAYER_TWO_PERSONA_PREF_KEY=`${STORAGE_PREFIX}PlayerTwoPersona`;
 const WATCH_MODE_PERSONA_PREF_KEY=`${STORAGE_PREFIX}WatchModePersona`;
+const WATCH_MODE_SCOPE_PREF_KEY=`${STORAGE_PREFIX}WatchModeScope`;
 const COMMENTATOR_PREF_KEY=`${STORAGE_PREFIX}Commentator`;
 const BEST_SCORE_KEY=`${STORAGE_PREFIX}Best`;
 const SYSTEM_LOG_KEY=`${STORAGE_PREFIX}SystemLog`;
@@ -297,6 +298,7 @@ const LEGACY_STORAGE_KEYS={
  [PLAYER_TWO_MODE_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}PlayerTwoMode`,
  [PLAYER_TWO_PERSONA_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}PlayerTwoPersona`,
  [WATCH_MODE_PERSONA_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}WatchModePersona`,
+ [WATCH_MODE_SCOPE_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}WatchModeScope`,
  [COMMENTATOR_PREF_KEY]:`${LEGACY_STORAGE_PREFIX}Commentator`,
  [BEST_SCORE_KEY]:`${LEGACY_STORAGE_PREFIX}Best`,
  [SYSTEM_LOG_KEY]:`${LEGACY_STORAGE_PREFIX}SystemLog`
@@ -318,6 +320,7 @@ const PLATFORM_STORAGE_KEYS={
  [PLAYER_TWO_MODE_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}PlayerTwoMode`,
  [PLAYER_TWO_PERSONA_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}PlayerTwoPersona`,
  [WATCH_MODE_PERSONA_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}WatchModePersona`,
+ [WATCH_MODE_SCOPE_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}WatchModeScope`,
  [COMMENTATOR_PREF_KEY]:`${PLATFORM_STORAGE_PREFIX}Commentator`,
  [BEST_SCORE_KEY]:`${PLATFORM_STORAGE_PREFIX}Best`,
  [SYSTEM_LOG_KEY]:`${PLATFORM_STORAGE_PREFIX}SystemLog`
@@ -1278,7 +1281,7 @@ function scoreGameSupportsSharedRemote(gameKey=currentScoreStorageGameKey()){
 
 const S={score:0,best:+readPref(scoreBestKey())||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0,
  p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,inputResetHoldT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,startCueT:0,formationCueT:0,audioPulseHoldT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,profile:{name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic'},stagePresentation:null,
- scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,simT:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0},playerTwo:null,watchMode:0,watchPersona:'',commentaryT:0,commentaryCooldown:0,commentaryTitle:'',commentaryLines:[]};
+ scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,simT:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0},playerTwo:null,watchMode:0,watchPersona:'',watchScope:'game',commentaryT:0,commentaryCooldown:0,commentaryTitle:'',commentaryLines:[]};
 
 const DEFAULT_STARFIELD_PROFILE=Object.freeze({
  id:'classic-arcade-stars',
@@ -1511,7 +1514,7 @@ function isHarnessClockControlled(){
  return !!harnessClockControlled;
 }
 const playLane=x=>cl(Math.round((cl(+x||0,0,PLAY_W)/(PLAY_W||1))*9),0,9);
-const snapshot=()=>({gameKey:typeof currentGamePack==='function'?currentGamePack()?.metadata?.gameKey||'aurora-galactica':'aurora-galactica',started:!!started,paused:!!paused,attract:{active:!!ATTRACT.active,phase:ATTRACT.phase||''},stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,scriptMode:!!S.scriptMode,watchMode:!!S.watchMode,watchPersona:S.watchPersona||'',profile:S.profile?.name||'classic',theme:S.stagePresentation?.id||'classic',simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),rngState:RNG_SEED?(RNG_STATE>>>0):0,playerTwo:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,player:{x:+S.p.x.toFixed(2),y:+S.p.y.toFixed(2),vx:+(+S.p.vx||0).toFixed(2),cd:+(+S.p.cd||0).toFixed(3),inv:+(+S.p.inv||0).toFixed(3),spawn:+(+S.p.spawn||0).toFixed(3),dual:!!S.p.dual,captured:!!S.p.captured,pending:!!S.p.pending,hNoShotT:+(+S.p.hNoShotT||0).toFixed(3),hDebugT:+(+S.p.hDebugT||0).toFixed(3),demoTargetId:S.p.demoTargetId??null,demoTargetT:+(+S.p.demoTargetT||0).toFixed(3)},timers:{fireCD:+(+S.fireCD||0).toFixed(3),recoverT:+(+S.recoverT||0).toFixed(3),attackGapT:+(+S.attackGapT||0).toFixed(3),nextStageT:+(+S.nextStageT||0).toFixed(3),postChallengeT:+(+S.postChallengeT||0).toFixed(3),sequenceT:+(+S.sequenceT||0).toFixed(3)},counts:{enemies:S.e.filter(e=>e.hp>0).length,playerBullets:S.pb.length,enemyBullets:S.eb.length,effects:S.fx.length,attackers:S.att}});
+const snapshot=()=>({gameKey:typeof currentGamePack==='function'?currentGamePack()?.metadata?.gameKey||'aurora-galactica':'aurora-galactica',started:!!started,paused:!!paused,attract:{active:!!ATTRACT.active,phase:ATTRACT.phase||''},stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,scriptMode:!!S.scriptMode,watchMode:!!S.watchMode,watchPersona:S.watchPersona||'',watchScope:S.watchScope||'game',profile:S.profile?.name||'classic',theme:S.stagePresentation?.id||'classic',simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),rngState:RNG_SEED?(RNG_STATE>>>0):0,playerTwo:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,player:{x:+S.p.x.toFixed(2),y:+S.p.y.toFixed(2),vx:+(+S.p.vx||0).toFixed(2),cd:+(+S.p.cd||0).toFixed(3),inv:+(+S.p.inv||0).toFixed(3),spawn:+(+S.p.spawn||0).toFixed(3),dual:!!S.p.dual,captured:!!S.p.captured,pending:!!S.p.pending,hNoShotT:+(+S.p.hNoShotT||0).toFixed(3),hDebugT:+(+S.p.hDebugT||0).toFixed(3),demoTargetId:S.p.demoTargetId??null,demoTargetT:+(+S.p.demoTargetT||0).toFixed(3)},timers:{fireCD:+(+S.fireCD||0).toFixed(3),recoverT:+(+S.recoverT||0).toFixed(3),attackGapT:+(+S.attackGapT||0).toFixed(3),nextStageT:+(+S.nextStageT||0).toFixed(3),postChallengeT:+(+S.postChallengeT||0).toFixed(3),sequenceT:+(+S.sequenceT||0).toFixed(3)},counts:{enemies:S.e.filter(e=>e.hp>0).length,playerBullets:S.pb.length,enemyBullets:S.eb.length,effects:S.fx.length,attackers:S.att}});
 const enemyRef=e=>e?{id:e.id,enemyType:e.t,enemyFamily:e.fam||'classic',column:e.c,row:e.r,lane:playLane(e.x),dive:e.dive,carry:!!e.carry}:null;
 function loadScoreboard(gameKey=currentScoreStorageGameKey()){
  try{
@@ -1561,7 +1564,8 @@ function buildResultsHtml(stats,score,stage,challenge=isChallengeStage(stage),op
  const sub=String(opts.sub||'RESULTS').trim()||'RESULTS';
  const contextLine=String(opts.contextLine||'').trim();
  const playerTwo=typeof buildPlayerTwoResultsHtml==='function'?buildPlayerTwoResultsHtml():'';
- const watch=S.watchMode?`<span class="playerTwoResult"><span>WATCH MODE   ${S.watchPersona?`${watchModePersonaLabel(S.watchPersona)} PILOT`:''}</span><span>SCORE NOT RECORDED</span></span>`:'';
+ const watchScope=S.watchMode&&typeof watchModeScopeLabel==='function'&&S.watchScope==='challenges'?`   ${watchModeScopeLabel(S.watchScope)}`:'';
+ const watch=S.watchMode?`<span class="playerTwoResult"><span>WATCH MODE   ${S.watchPersona?`${watchModePersonaLabel(S.watchPersona)} PILOT`:''}${watchScope}</span><span>SCORE NOT RECORDED</span></span>`:'';
  return `<span class="gameOverTitle">${title}</span><span class="gameOverSub">${sub}</span>${contextLine?`<span class="gameOverMeta">${contextLine}</span>`:''}<span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">STAGE</span><span class="resultsValue">${formatDisplayedStage(stage,challenge)}</span></span>${watch}${playerTwo}<span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
 }
 function recordScore(score,stage,initials='YOU'){

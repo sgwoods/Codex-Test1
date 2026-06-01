@@ -105,11 +105,14 @@ body.arcadeFullscreenActive #msg{bottom:10px}
 #msg .playerModeText{display:grid;gap:.08em;min-width:0}
 #msg .playerModeText strong{color:#f4f7ff;font-size:.9em;letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #msg .playerModeText em{color:rgba(231,240,255,.78);font-style:normal;font-size:.64em;letter-spacing:.08em;line-height:1.16;white-space:normal;overflow:visible;text-overflow:clip}
+#msg .playerModeStack{display:grid;gap:.18em;min-width:0}
 #msg .playerModeStepper{grid-template-columns:1.15em minmax(0,1fr) 1.15em;align-items:center}
 #msg .playerModeStepper strong{font-size:.74em;letter-spacing:.04em;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;line-height:1.05}
 #msg .playerModeStepper em{grid-column:1/4}
+#msg .playerModeScopeStepper{padding-top:.18em;border-top:1px solid rgba(126,242,255,.14)}
+#msg .playerModeScopeStepper strong{color:#7ef2ff}
 #msg .playerModeArrow{display:inline-grid;place-items:center;min-width:1.05em;min-height:1.05em;border:1px solid rgba(126,242,255,.32);color:#ffd86d;background:rgba(255,216,109,.08);font-size:.88em;line-height:1}
-#msg .playerModePersona .playerModeText strong,#msg .playerModeWatch .playerModeText strong{text-align:center}
+#msg .playerModePersona .playerModeText strong,#msg .playerModeWatch .playerModeText strong,#msg .playerModeWatch .playerModeStack strong{text-align:center}
 #msg .playerModeOption.isSelected{border-color:#ffd86d;color:#ffd86d;text-shadow:0 0 8px rgba(255,216,109,.32)}
 #msg .playerModeOption.isSelected .playerModeKey,#msg .playerModeOption.isSelected .playerModeText strong{color:#ffd86d}
 #msg .playerModeOption.isLocked,#msg .playerModePersona.isLocked{color:rgba(231,240,255,.42);border-color:rgba(231,240,255,.16);cursor:not-allowed}

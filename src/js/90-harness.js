@@ -38,6 +38,7 @@ window.__galagaHarness__={
  if(cfg.playerTwoPersona!==undefined&&typeof setPlayerTwoPersona==='function')setPlayerTwoPersona(cfg.playerTwoPersona,{silent:1,source:'harness'});
  if(cfg.playerTwo!==undefined&&typeof setPlayerTwoSelection==='function')setPlayerTwoSelection(!!cfg.playerTwo,{silent:1,source:'harness'});
  if(cfg.watchPersona!==undefined&&typeof setWatchPersona==='function')setWatchPersona(cfg.watchPersona,{silent:1,source:'harness'});
+ if(cfg.watchScope!==undefined&&typeof setWatchScope==='function')setWatchScope(cfg.watchScope,{silent:1,source:'harness'});
  if(typeof setHarnessClockControlled==='function')setHarnessClockControlled(!!cfg.controlledClock);
  if(cfg.controlledClock&&Number.isFinite(+cfg.initialSimT)){
   S.simT=+cfg.initialSimT;
@@ -515,8 +516,9 @@ window.__galagaHarness__={
   return this.playerTwoState();
  },
  playerTwoState(){
-  return{
+ return{
    selection:typeof playerTwoSelectionState==='function'?playerTwoSelectionState():null,
+   watchScope:typeof selectedWatchScope==='function'?selectedWatchScope():'game',
    run:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,
    hudRight:right?.textContent||'',
    accountNotice:LEADERBOARD.accountNotice||''
@@ -525,7 +527,8 @@ window.__galagaHarness__={
  startWatchMode(cfg={}){
   if(typeof setSeed==='function'&&cfg.seed!==undefined)setSeed(cfg.seed);
   if(typeof setWatchPersona==='function')setWatchPersona(cfg.persona||selectedWatchPersona?.()||'advanced',{silent:1,source:'harness'});
-  if(typeof armWatchMode==='function')armWatchMode(cfg.persona||selectedWatchPersona?.()||'advanced',{source:'harness'});
+  if(typeof setWatchScope==='function')setWatchScope(cfg.scope||cfg.watchScope||selectedWatchScope?.()||'game',{silent:1,source:'harness'});
+  if(typeof armWatchMode==='function')armWatchMode(cfg.persona||selectedWatchPersona?.()||'advanced',{source:'harness',scope:cfg.scope||cfg.watchScope||selectedWatchScope?.()||'game'});
   return this.state();
  },
  startPlayerTwoTurn(){
@@ -717,6 +720,7 @@ window.__galagaHarness__={
    started,
    paused,
    stage:S.stage,
+   pendingStage:S.pendingStage||0,
    score:S.score,
    lives:Math.max(0,S.lives+1),
    challenge:!!S.challenge,
@@ -728,6 +732,7 @@ window.__galagaHarness__={
    harnessPersona:S.harnessPersona||null,
    watchMode:!!S.watchMode,
    watchPersona:S.watchPersona||'',
+   watchScope:S.watchScope||'game',
    playerTwo:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,
    atmosphere:atmosphere?{
     id:atmosphere.id||'',

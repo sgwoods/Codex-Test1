@@ -7,6 +7,12 @@ function resolveDeveloperStartWatchPersona(cfg={}){
  return raw&&raw!=='human'?normalizePlayerTwoPersona(raw):'';
 }
 
+function resolveWatchChallengeStartStage(cfg={}){
+ const challengeStage=cl(+cfg.challengeStage||DEFAULT_TEST_CFG.challengeStage||1,1,99)|0;
+ const stage=internalStageForChallengeStageNumber(challengeStage);
+ return {requestedStage:challengeStage,stage,stageMode:'display',forceChallenge:1,startKind:'challenge',challengeStage,displayLabel:challengeStageDisplayLabel(challengeStage,{challengeNumber:1}),watchScope:'challenges'};
+}
+
 function startAuroraGameplay(){
  if(typeof clearRuntimeLoopFault==='function')clearRuntimeLoopFault();
  stopAttractLoop();
@@ -21,7 +27,7 @@ function startAuroraGameplay(){
  resetSession('game_start');
  autoExportedSessionId='';
  const cfg=saveTestCfg();
- const startStage=resolveGameplayStartStage(cfg);
+ let startStage=resolveGameplayStartStage(cfg);
  const extendRules=currentGamePack()?.scoring?.extends||{};
  const extendFirst=Math.max(0,Number.isFinite(+cfg.extendFirst)?(+cfg.extendFirst|0):(+extendRules.first||0));
  const extendRecurring=Math.max(0,Number.isFinite(+cfg.extendRecurring)?(+cfg.extendRecurring|0):(+extendRules.recurring||0));
@@ -29,18 +35,21 @@ function startAuroraGameplay(){
  setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
  const pendingPlayerTwoTurn=resolvePendingPlayerTwoTurn();
  const armedWatchPersona=resolveWatchModeStartPersona();
+ const armedWatchScope=armedWatchPersona?resolveWatchModeStartScope():'';
  const developerWatchPersona=resolveDeveloperStartWatchPersona(cfg);
  const watchPersona=pendingPlayerTwoTurn?'':(armedWatchPersona||developerWatchPersona);
+ const watchScope=watchPersona?normalizeWatchScope(armedWatchScope||'game'):'game';
+ if(watchPersona&&watchScope==='challenges'&&armedWatchPersona)startStage=resolveWatchChallengeStartStage(cfg);
  const playerTwoRun=pendingPlayerTwoTurn||resolvePlayerTwoStartState();
  aud=1;AC().resume?.();
  gameOverHtml='';gameOverState=null;
-started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:startStage.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,forceChallenge:startStage.forceChallenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:0,simT:0,extendFirst,extendRecurring,nextExtendScore,extendAwards:0,extendFlashT:0,extendFlashShips:0,playerTwo:playerTwoRun,watchMode:watchPersona?1:0,watchPersona:watchPersona||'',commentaryT:0,commentaryCooldown:0,commentaryTitle:'',commentaryLines:[]});
+started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:startStage.stage,shake:0,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',seq:0,seqT:.45,startCueT:0,formationCueT:0,audioPulseHoldT:0,rogue:0,alertT:0,forceChallenge:startStage.forceChallenge?1:0,liveCount:40,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,sequenceT:0,sequenceMode:'',attract:0,simT:0,extendFirst,extendRecurring,nextExtendScore,extendAwards:0,extendFlashT:0,extendFlashShips:0,playerTwo:playerTwoRun,watchMode:watchPersona?1:0,watchPersona:watchPersona||'',watchScope,commentaryT:0,commentaryCooldown:0,commentaryTitle:'',commentaryLines:[]});
  if(typeof resetHarnessFrameClock==='function')resetHarnessFrameClock();
  if(typeof syncPauseUi==='function')syncPauseUi();
  S.harnessPersona=(watchPersona||(playerTwoRun?.activeTurn==='p2'?playerTwoRun.personaKey:'')||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  S.stats={shots:0,hits:0};
  Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inputResetHoldT:0,vx:0});
- logEvent('game_start',{persona:S.harnessPersona||null,watchMode:!!S.watchMode,developerExpertPlay:developerWatchPersona||'',requestedStage:startStage.requestedStage,stage:startStage.stage,startStageMode:startStage.stageMode,startKind:startStage.startKind||'level',challengeStage:startStage.challengeStage||null,displayLabel:startStage.displayLabel||'',forceChallenge:startStage.forceChallenge,playerTwo:playerTwoRun?.enabled?playerTwoSnapshot(playerTwoRun):null});
+ logEvent('game_start',{persona:S.harnessPersona||null,watchMode:!!S.watchMode,watchScope:S.watchScope||'game',developerExpertPlay:developerWatchPersona||'',requestedStage:startStage.requestedStage,stage:startStage.stage,startStageMode:startStage.stageMode,startKind:startStage.startKind||'level',challengeStage:startStage.challengeStage||null,displayLabel:startStage.displayLabel||'',forceChallenge:startStage.forceChallenge,playerTwo:playerTwoRun?.enabled?playerTwoSnapshot(playerTwoRun):null});
  startRunRecording();
  spawnStage();msg.textContent='';
  const openingTiming=(!startStage.forceChallenge&&startStage.stage===1&&usesReferenceTimingModel())
@@ -51,9 +60,10 @@ started=1;paused=0;Object.assign(S,{score:0,lives:Math.max(0,cfg.ships-1),stage:
  }
  sfx.start();
  if(S.watchMode){
-  S.alertTxt=`WATCH MODE\n${watchModePersonaLabel(S.watchPersona)} PILOT`;
+  const scopeLine=S.watchScope==='challenges'?`\n${watchModeScopeLabel(S.watchScope)}`:'';
+  S.alertTxt=`WATCH MODE\n${watchModePersonaLabel(S.watchPersona)} PILOT${scopeLine}`;
   S.alertT=Math.max(S.alertT,1.8);
-  if(typeof commentatorEvent==='function')commentatorEvent('watch_mode',{persona:S.watchPersona,label:watchModePersonaLabel(S.watchPersona)});
+  if(typeof commentatorEvent==='function')commentatorEvent('watch_mode',{persona:S.watchPersona,label:watchModePersonaLabel(S.watchPersona),scope:S.watchScope||'game'});
  }else if(playerTwoRun?.enabled&&playerTwoRun.activeTurn==='p2'){
   S.alertTxt=`2UP TURN\n${playerTwoRun.label||watchModePersonaLabel(playerTwoRun.personaKey)} PILOT`;
   S.alertT=Math.max(S.alertT,1.8);
@@ -163,10 +173,10 @@ function attractMoveAxis(p){
 }
 
 const HARNESS_PERSONAS={
- novice:{name:'novice',moveMul:.5,urgentDx:28,urgentLook:132,deadZone:10,aimBoss:11,aimOther:8,fireChance:.46,challengeFireChance:.42,openShotY:94,diveBias:260,carryBias:150,bossBias:80,activeBias:70,heightBias:.8,distanceBias:1.15},
- advanced:{name:'advanced',moveMul:.64,urgentDx:36,urgentLook:170,deadZone:9,aimBoss:15,aimOther:11,fireChance:.84,challengeFireChance:.82,openShotY:72,diveBias:360,carryBias:220,bossBias:135,activeBias:112,heightBias:1.02,distanceBias:.95},
- expert:{name:'expert',moveMul:.84,urgentDx:38,urgentLook:180,deadZone:7,aimBoss:18,aimOther:13,fireChance:.96,challengeFireChance:.97,openShotY:66,diveBias:470,carryBias:290,bossBias:150,activeBias:116,heightBias:1.05,distanceBias:.94,cautiousUntilStage:2,lowerDiveEvadeY:208,lowerDiveEvadeDx:40,lowerDiveEvadeLaneGap:1,diveEmergencyY:236,diveEmergencyDx:26},
- professional:{name:'professional',moveMul:.88,urgentDx:42,urgentLook:198,deadZone:5,aimBoss:22,aimOther:16,fireChance:.99,challengeFireChance:.995,openShotY:58,diveBias:600,carryBias:350,bossBias:175,activeBias:128,heightBias:1.12,distanceBias:.86}
+ novice:{name:'novice',captureRescueStyle:'rare-opportunistic',moveMul:.5,urgentDx:28,urgentLook:132,deadZone:10,aimBoss:11,aimOther:8,fireChance:.46,challengeFireChance:.42,openShotY:94,diveBias:260,carryBias:80,captureRescueBias:150,captureRescueUnsafePenalty:60,bossBias:80,activeBias:70,heightBias:.8,distanceBias:1.15},
+ advanced:{name:'advanced',captureRescueStyle:'practical-rescue',moveMul:.64,urgentDx:36,urgentLook:170,deadZone:9,aimBoss:15,aimOther:11,fireChance:.84,challengeFireChance:.82,openShotY:72,diveBias:360,carryBias:110,captureRescueBias:260,captureRescueUnsafePenalty:110,bossBias:135,activeBias:112,heightBias:1.02,distanceBias:.95},
+ expert:{name:'expert',captureRescueStyle:'rescue-priority',moveMul:.84,urgentDx:38,urgentLook:180,deadZone:7,aimBoss:18,aimOther:13,fireChance:.96,challengeFireChance:.97,openShotY:66,diveBias:470,carryBias:135,captureRescueBias:390,captureRescueUnsafePenalty:170,bossBias:150,activeBias:116,heightBias:1.05,distanceBias:.94,cautiousUntilStage:2,lowerDiveEvadeY:208,lowerDiveEvadeDx:40,lowerDiveEvadeLaneGap:1,diveEmergencyY:236,diveEmergencyDx:26},
+ professional:{name:'professional',captureRescueStyle:'rescue-first-arcade',moveMul:.88,urgentDx:42,urgentLook:198,deadZone:5,aimBoss:22,aimOther:16,fireChance:.99,challengeFireChance:.995,openShotY:58,diveBias:600,carryBias:160,captureRescueBias:500,captureRescueUnsafePenalty:220,bossBias:175,activeBias:128,heightBias:1.12,distanceBias:.86}
 };
 
 const PLAYER_TWO_PERSONA_ORDER=Object.freeze(['novice','advanced','expert','professional']);
@@ -178,9 +188,9 @@ const PLAYER_TWO_PERSONA_PROFILES=Object.freeze({
 });
 const PLAYER_TWO_PERSONA_DESCRIPTIONS=Object.freeze({
  novice:'Careful learner: slower movement, conservative shots, safer reactions.',
- advanced:'Balanced pilot: steady movement, moderate firing, practical survival.',
- expert:'Aggressive pilot: faster tracking, tighter aim, stronger dive response.',
- professional:'Arcade-grade pilot: high tempo, sharper aim, pressure-ready movement.'
+ advanced:'Balanced pilot: steady movement, practical survival, opportunistic rescue shots.',
+ expert:'Aggressive pilot: faster tracking, tighter aim, and stronger capture-rescue priority.',
+ professional:'Arcade-grade pilot: high tempo, sharper aim, rescue-first pressure movement.'
 });
 
 function normalizePlayerTwoPersona(value=''){
@@ -232,6 +242,26 @@ function cycleWatchPersona(dir=1,opts={}){
 function watchModePersonaLabel(key=selectedWatchPersona()){
  return (PLAYER_TWO_PERSONA_PROFILES[normalizePlayerTwoPersona(key)]||PLAYER_TWO_PERSONA_PROFILES.advanced).label;
 }
+function normalizeWatchScope(value=''){
+ const key=String(value||'').trim().toLowerCase().replace(/[_\s-]+/g,'');
+ return key==='challenge'||key==='challenges'||key==='challengesonly'||key==='tour'?'challenges':'game';
+}
+function selectedWatchScope(){
+ return normalizeWatchScope(readPref(WATCH_MODE_SCOPE_PREF_KEY)||'game');
+}
+function setWatchScope(scope,opts={}){
+ const next=normalizeWatchScope(scope);
+ writePref(WATCH_MODE_SCOPE_PREF_KEY,next);
+ if(!opts.silent&&typeof logEvent==='function')logEvent('watch_mode_scope_selected',{scope:next,source:opts.source||'ui'});
+ return next;
+}
+function cycleWatchScope(dir=1,opts={}){
+ const current=selectedWatchScope();
+ return setWatchScope(current==='game'?'challenges':'game',opts);
+}
+function watchModeScopeLabel(scope=selectedWatchScope()){
+ return normalizeWatchScope(scope)==='challenges'?'CHALLENGES':'GAME';
+}
 function playerPersonaCardSummary(key='advanced'){
  const personaKey=normalizePlayerTwoPersona(key);
  const profile=PLAYER_TWO_PERSONA_PROFILES[personaKey]||PLAYER_TWO_PERSONA_PROFILES.advanced;
@@ -244,10 +274,13 @@ function playerPersonaCardSummary(key='advanced'){
 }
 function armWatchMode(personaKey=selectedWatchPersona(),opts={}){
  const key=setWatchPersona(personaKey,{silent:1,source:opts.source||'ui'});
+ const scope=setWatchScope(opts.scope||selectedWatchScope(),{silent:1,source:opts.source||'ui'});
  setPlayerTwoSelection(false,{silent:1,source:opts.source||'ui'});
  window.__platinumWatchModePersona=key;
  window.__auroraWatchModePersona=key;
- if(typeof logEvent==='function')logEvent('watch_mode_armed',{persona:key,source:opts.source||'ui'});
+ window.__platinumWatchModeScope=scope;
+ window.__auroraWatchModeScope=scope;
+ if(typeof logEvent==='function')logEvent('watch_mode_armed',{persona:key,scope,source:opts.source||'ui'});
  if(typeof launchCurrentGameFromWaitMode==='function')launchCurrentGameFromWaitMode();
  return key;
 }
@@ -257,6 +290,13 @@ function resolveWatchModeStartPersona(){
  delete window.__platinumWatchModePersona;
  delete window.__auroraWatchModePersona;
  return key;
+}
+function resolveWatchModeStartScope(){
+ const armed=window.__platinumWatchModeScope||window.__auroraWatchModeScope||'';
+ if(!armed)return '';
+ delete window.__platinumWatchModeScope;
+ delete window.__auroraWatchModeScope;
+ return normalizeWatchScope(armed);
 }
 function resolvePendingPlayerTwoTurn(){
  const pending=window.__platinumPendingPlayerTwoTurn||window.__auroraPendingPlayerTwoTurn||null;
@@ -475,19 +515,22 @@ function currentPilotCardState(){
  const p2=S.playerTwo;
  if(S.watchMode){
   const persona=playerPersonaCardSummary(S.watchPersona||selectedWatchPersona());
+  const challengesOnly=S.watchScope==='challenges';
+  const watchRoute=challengesOnly?'Challenging-stage tour':'Full game flow';
+  const watchScopeText=challengesOnly?'challenges-only ':'';
   return{
    mode:'watch',
    icon:'🛰',
    dockLabel:'WATCH',
-   dockStatus:persona.label,
-   dockTitle:`Watch Mode: ${persona.label} pilot onboard for ${gameTitle}`,
+   dockStatus:challengesOnly?'CHALLENGES':persona.label,
+   dockTitle:`Watch Mode: ${persona.label} pilot onboard for ${watchRoute} in ${gameTitle}`,
    panelTitle:`${gameHudLabel} WATCH`,
-   panelSub:'WATCH MODE PERSONA',
+   panelSub:challengesOnly?'CHALLENGE WATCH PERSONA':'WATCH MODE PERSONA',
    callsign:`${persona.label} IS FLYING`,
-   status:`${persona.description} ${gameTitle} score not recorded.`,
-   summary:`Watch Mode is a persona-controlled ${gameTitle} demonstration run. Scores and videos are not eligible for posting.`,
+   status:`${persona.description} ${watchRoute}. ${gameTitle} score not recorded.`,
+   summary:`Watch Mode is a persona-controlled ${watchScopeText}${gameTitle} demonstration run. Scores and videos are not eligible for posting.`,
    email:'Controller: Persona pilot',
-   userId:`Role: ${persona.initials} ${gameTitle} watch pilot`,
+   userId:`Role: ${persona.initials} ${gameTitle} ${watchRoute} watch pilot`,
    hudHtml:`<span class="hudLabel">WATCH</span> <span class="hudValue">${persona.initials}</span>`,
    signedIn
   };
@@ -554,6 +597,9 @@ function buildPlayerTwoStartHtml(){
  const state=playerTwoSelectionState();
  const watchPersona=selectedWatchPersona();
  const watchLabel=watchModePersonaLabel(watchPersona);
+ const watchScope=selectedWatchScope();
+ const watchScopeLabel=watchModeScopeLabel(watchScope);
+ const watchScopeMeta=watchScope==='challenges'?'CHALLENGES ONLY':'GAME FLOW';
  const p2Locked=!state.signedIn;
  const mode1Class=`playerModeOption playerModeSolo${state.selected?'':' isSelected'}`;
  const mode2Class=`playerModeOption playerModeTwo${state.selected?' isSelected':''}${p2Locked?' isLocked':''}`;
@@ -562,7 +608,7 @@ function buildPlayerTwoStartHtml(){
  const personaMeta=p2Locked?'LOCKED UNTIL SIGN-IN':'HUMAN SCORE ONLY';
  const personaHint='<span class="k">1</span>/<span class="k">2</span> START   <span class="k">W</span> WATCH';
  const rivalPicker=`<span class="${personaClass}" role="button" tabindex="0" data-player-two-persona="next"><span class="playerModeKey"><b>RIVAL</b><small>PILOT</small></span><span class="playerModeText playerModeStepper"><span class="playerModeArrow" data-player-two-persona="prev">&lt;</span><strong>${state.personaLabel}</strong><span class="playerModeArrow" data-player-two-persona="next">&gt;</span><em>${personaMeta}</em></span></span>`;
- const watchPicker=`<span class="playerModeWatch" role="button" tabindex="0" data-watch-mode="1"><span class="playerModeKey"><span class="k">W</span><b>WATCH</b><small>PILOT</small></span><span class="playerModeText playerModeStepper"><span class="playerModeArrow" data-watch-persona="prev">&lt;</span><strong>${watchLabel}</strong><span class="playerModeArrow" data-watch-persona="next">&gt;</span><em>SCORE NOT RECORDED</em></span></span>`;
+ const watchPicker=`<span class="playerModeWatch" role="button" tabindex="0" data-watch-mode="1"><span class="playerModeKey"><span class="k">W</span><b>WATCH</b><small>PILOT</small></span><span class="playerModeStack"><span class="playerModeText playerModeStepper"><span class="playerModeArrow" data-watch-persona="prev">&lt;</span><strong>${watchLabel}</strong><span class="playerModeArrow" data-watch-persona="next">&gt;</span><em>SCORE NOT RECORDED</em></span><span class="playerModeText playerModeStepper playerModeScopeStepper"><span class="playerModeArrow" data-watch-scope="prev">&lt;</span><strong>${watchScopeLabel}</strong><span class="playerModeArrow" data-watch-scope="next">&gt;</span><em>${watchScopeMeta}</em></span></span></span>`;
  return `<span class="playerModeSelect${state.selected?' isTwoSelected':' isOneSelected'}${p2Locked?' isPlayerTwoLocked':''}" aria-label="Player mode selection"><span class="${mode1Class}" role="button" tabindex="0" data-player-mode="1"><span class="playerModeKey"><span class="k">1</span><b>1UP</b></span><span class="playerModeText"><strong>1 PLAYER</strong><em>SOLO SCORE</em></span></span><span class="${mode2Class}" role="button" tabindex="0" data-player-mode="2"><span class="playerModeKey"><span class="k">2</span><b>2UP</b></span><span class="playerModeText"><strong>2 PLAYERS</strong><em>${p2Status}</em></span></span>${rivalPicker}${watchPicker}<span class="playerModeHint">${personaHint}</span></span>`;
 }
 function buildPlayerTwoResultsHtml(){
@@ -597,7 +643,7 @@ function handlePlayerTwoWaitKey(e){
  }
  if(e.code==='KeyW'){
   e.preventDefault();
-  armWatchMode(selectedWatchPersona(),{source:'keyboard'});
+  armWatchMode(selectedWatchPersona(),{source:'keyboard',scope:selectedWatchScope()});
   return true;
  }
  if(e.code==='Digit1'||e.code==='Numpad1'){
@@ -646,8 +692,15 @@ function handlePlayerTwoWaitClick(target){
   if(typeof sfx!=='undefined')sfx.uiTick();
   return true;
  }
+ const watchScopeTarget=target?.closest?.('[data-watch-scope]');
+ if(watchScopeTarget){
+  const dir=watchScopeTarget.getAttribute('data-watch-scope')==='prev'?-1:1;
+  cycleWatchScope(dir,{source:'click'});
+  if(typeof sfx!=='undefined')sfx.uiTick();
+  return true;
+ }
  if(target?.closest?.('[data-watch-mode]')){
-  armWatchMode(selectedWatchPersona(),{source:'click'});
+  armWatchMode(selectedWatchPersona(),{source:'click',scope:selectedWatchScope()});
   return true;
  }
  return false;
@@ -674,7 +727,21 @@ function harnessPersonaCfg(){
 }
 
 function harnessTargetScore(e,p,cfg){
- return (e.dive?cfg.diveBias:0)+(e.carry?cfg.carryBias:0)+(e.t==='boss'?cfg.bossBias:0)+((!e.form||e.dive||S.challenge||e.y>cfg.openShotY)?cfg.activeBias:0)+(e.y*cfg.heightBias)-(Math.abs(e.x-p.x)*cfg.distanceBias);
+ const rescueCandidate=!!(e.carry&&e.dive);
+ const carriedBias=e.carry?(rescueCandidate?(cfg.captureRescueBias??cfg.carryBias??0):(cfg.carryBias??0)):0;
+ const unsafeCarryPenalty=e.carry&&!rescueCandidate?(cfg.captureRescueUnsafePenalty||0):0;
+ return (e.dive?cfg.diveBias:0)+carriedBias-unsafeCarryPenalty+(e.t==='boss'?cfg.bossBias:0)+((!e.form||e.dive||S.challenge||e.y>cfg.openShotY)?cfg.activeBias:0)+(e.y*cfg.heightBias)-(Math.abs(e.x-p.x)*cfg.distanceBias);
+}
+
+function harnessTargetDebug(target,p,cfg){
+ if(!target)return {};
+ return{
+  targetCarry:!!target.carry,
+  targetDive:+(target.dive||0),
+  targetRescueCandidate:!!(target.carry&&target.dive),
+  targetScore:+harnessTargetScore(target,p,cfg).toFixed(2),
+  captureRescueStyle:cfg.captureRescueStyle||''
+ };
 }
 
 function compareHarnessTargets(a,b,p,cfg){
@@ -793,7 +860,7 @@ function runHarnessPlayer(dt,p,cfg){
  p.x=cl(p.x+axis*p.s*dt*cfg.moveMul,hp.w+2,PLAY_W-hp.w-2);
  const attackables=S.e.filter(e=>e.hp>0&&(!e.form||e.dive||S.challenge||e.y>cfg.openShotY));
  const target=attackables.sort((a,b)=>compareHarnessTargets(a,b,p,cfg))[0]||harnessSelectTarget(p,cfg);
- logProfessionalDecision(p,cfg,'tick',{
+ logProfessionalDecision(p,cfg,'tick',Object.assign({
   attackables:attackables.length,
   targetId:target?target.id:null,
   targetX:target?+target.x.toFixed(2):null,
@@ -801,7 +868,7 @@ function runHarnessPlayer(dt,p,cfg){
   axis,
   cooldown:+p.cd.toFixed(3),
   playerBullets:S.pb.length
- });
+ },harnessTargetDebug(target,p,cfg)));
  if(lowerFieldThreat){
   logProfessionalDecision(p,cfg,'lower_field_evade',{
    attackables:attackables.length,
@@ -818,11 +885,11 @@ function runHarnessPlayer(dt,p,cfg){
   return;
  }
  if(p.cd>0){
-  logProfessionalDecision(p,cfg,'cooldown',{attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),cooldown:+p.cd.toFixed(3)});
+  logProfessionalDecision(p,cfg,'cooldown',Object.assign({attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),cooldown:+p.cd.toFixed(3)},harnessTargetDebug(target,p,cfg)));
   return;
  }
  if(S.pb.length>=bulletsMax()){
-  logProfessionalDecision(p,cfg,'bullet_cap',{attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),playerBullets:S.pb.length});
+  logProfessionalDecision(p,cfg,'bullet_cap',Object.assign({attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),playerBullets:S.pb.length},harnessTargetDebug(target,p,cfg)));
   return;
  }
  const tol=target.t==='boss'?cfg.aimBoss:cfg.aimOther;
@@ -832,13 +899,13 @@ function runHarnessPlayer(dt,p,cfg){
   if(randUnit()<=fireChance){
    shoot();
    p.hNoShotT=0;
-   logProfessionalDecision(p,cfg,'shot',{attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),tol});
+   logProfessionalDecision(p,cfg,'shot',Object.assign({attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),tol},harnessTargetDebug(target,p,cfg)));
   }else{
-   logProfessionalDecision(p,cfg,'fire_roll_miss',{attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),tol,fireChance});
+   logProfessionalDecision(p,cfg,'fire_roll_miss',Object.assign({attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),tol,fireChance},harnessTargetDebug(target,p,cfg)));
   }
   return;
  }
- logProfessionalDecision(p,cfg,'not_aligned',{attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),tol,axis});
+ logProfessionalDecision(p,cfg,'not_aligned',Object.assign({attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),tol,axis},harnessTargetDebug(target,p,cfg)));
 }
 
 function runAttractPlayer(dt,p){
