@@ -186,6 +186,12 @@
       "hrefType": "repoDoc",
       "href": "PLATINUM_AUDIO_CONFORMANCE_FRAMEWORK.md",
       "detail": "Generic audio intake, scene review, and live-mix framework for any future game."
+    },
+    {
+      "label": "Motion Grammar Vocabulary",
+      "hrefType": "repoDoc",
+      "href": "MOTION_GRAMMAR_VOCABULARY.md",
+      "detail": "Shared movement vocabulary for source ingestion, routeability checks, and candidate promotion across games."
     }
   ],
   "globalHunts": [
@@ -207,6 +213,10 @@
     {
       "title": "Persona capture and review rail",
       "detail": "Future games should inherit the same persona-driven capture, review, and replay discipline once their rules are mature enough."
+    },
+    {
+      "title": "Shared motion grammar and routeability gates",
+      "detail": "Movement candidates should be described with common primitives, then promoted only when visual fit, safety, shot windows, and player routeability all hold together."
     }
   ],
   "games": [
@@ -227,7 +237,8 @@
       "headlineScores": [
         { "label": "Application artifact conformance", "value": "7.55/10", "detail": "Average current artifact row score." },
         { "label": "Challenge-stage conformance", "value": "4.2/10", "detail": "Still the clearest weak user-facing area." },
-        { "label": "Weakest artifact row", "value": "Impact explosion visual feedback", "detail": "Current broad artifact weakest row." }
+        { "label": "Weakest artifact row", "value": "Impact explosion visual feedback", "detail": "Current broad artifact weakest row." },
+        { "label": "Human-perfect routeability guard", "value": "Active", "detail": "Challenge candidates now fail promotion if they reduce strong-player scoring windows." }
       ],
       "decisionRead": "Aurora should continue using this dashboard as the visible intake and quality cockpit, but the other machine can keep driving the deeper challenge-stage work while this repo retains the authoritative status surface. For Aurora, the highest-value new artifacts are mostly derived windows cut from sources we already have, not necessarily brand-new raw videos.",
       "hostedLinks": [
@@ -259,6 +270,18 @@
               "hrefType": "artifact",
               "href": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
               "detail": "Current strict challenge-stage scoring and explanation."
+            },
+            {
+              "label": "Challenge candidate sweep index",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json",
+              "detail": "Latest per-stage candidate search matrix, now including human-perfect routeability lift."
+            },
+            {
+              "label": "Challenge candidate before/after",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/challenge-candidate-before-after/latest.json",
+              "detail": "Human-readable baseline versus candidate contact sheet for candidate review."
             },
             {
               "label": "Aurora sprite motion correspondence",
@@ -293,7 +316,8 @@
           "deliverables": [
             "Maintain cross-game catalog rows",
             "Keep hosted docs aligned with current conformance artifacts",
-            "Preserve audio and motion harnesses as generic platform contracts where possible"
+            "Preserve audio and motion harnesses as generic platform contracts where possible",
+            "Block visually tempting challenge candidates that reduce human-perfect routeability"
           ]
         }
       ],
@@ -333,7 +357,17 @@
           "goodEnough": "At least one readable frame bundle for first-hit boss damage, one for full boss destruction, and one for a normal enemy explosion, each ordered so the onset, peak, and decay are obvious."
         }
       ],
-      "previews": []
+      "previews": [
+        {
+          "label": "Rejected challenge candidate before/after",
+          "detail": "Stage 3 candidate review sheet for a target-control candidate blocked by human-perfect routeability regression.",
+          "mediaKind": "image",
+          "hrefType": "artifact",
+          "href": "reference-artifacts/analyses/challenge-candidate-before-after/latest.json",
+          "previewHrefType": "rawArtifact",
+          "previewHref": "reference-artifacts/analyses/challenge-candidate-before-after/latest-candidate-before-after.svg"
+        }
+      ]
     },
     {
       "gameKey": "galaxy-guardians-preview",
@@ -353,6 +387,7 @@
         { "label": "Reference conformance", "value": "7.6/10", "detail": "Broad current reference-backed score." },
         { "label": "Playtest-weighted conformance", "value": "6.9/10", "detail": "Current felt/read score." },
         { "label": "Public readiness", "value": "4.2/10", "detail": "Still too low for a strong public promise." },
+        { "label": "Movement routeability", "value": "5.4/10", "detail": "New Guardians routeability review; weakest route is stage-five stress." },
         { "label": "Audio reference comparison", "value": "8.3/10", "detail": "Good coverage, still weak direct acoustic proxy fit." },
         { "label": "Audio live mix", "value": "9.9/10", "detail": "Live mix is now strong; source-faithful match is the remaining gap." }
       ],
@@ -392,6 +427,12 @@
               "hrefType": "artifact",
               "href": "reference-artifacts/analyses/galaxy-guardians-identity/long-surface-conformance-0.1.json",
               "detail": "Stage-band survivability and deeper-play review."
+            },
+            {
+              "label": "Routeability review",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/galaxy-guardians-identity/routeability-review-0.1.json",
+              "detail": "Player-routeability score for movement pressure, persona survival, and stage-five stress."
             },
             {
               "label": "Audio scene review",
@@ -447,7 +488,8 @@
           "deliverables": [
             "Stage-band fairness lab",
             "Lower-field readability review",
-            "Persona-driven capture and review"
+            "Persona-driven capture and review",
+            "Routeability deltas for movement candidates before runtime promotion"
           ]
         }
       ],

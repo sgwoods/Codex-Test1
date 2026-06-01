@@ -1,7 +1,7 @@
 # Codex Context Checkpoint
 
-Generated: 2026-06-01T15:30:18.233Z
-Label: ingestion-human-perfect-guard
+Generated: 2026-06-01T16:04:36.731Z
+Label: ingestion-grammar-routeability-visuals
 
 This is the durable recovery point for long Aurora / Platinum Codex sessions.
 Use it before switching machines, before starting a multi-hour run, and whenever
@@ -12,16 +12,16 @@ important working context.
 
 - Repo path: `/Users/sgwoods/Development/Codex/Codex-test1`
 - Branch: `codex/macbook-ingestion-grammar-sync`
-- HEAD: `9bb463aa9` Refresh code review packet for release doc wording update
-- Dirty files excluding checkpoint self-output: `7`
+- HEAD: `c722fac34` Add human-perfect guard to challenge candidate sweeps
+- Dirty files excluding checkpoint self-output: `14`
 
 ## Active Plan
 
-- Sync challenge candidate grammar with main ingestion work by adding a human-perfect routeability promotion guard
+- Port routeability and visual review primitives into shared ingestion grammar
 
 ## Recommended Next Steps
 
-- Port generic before-after visuals and apply the same routeability concept to Guardians movement ingestion
+- Use shared grammar for Guardians candidate loop and future Windigo movement analysis
 
 ## Notes
 
@@ -31,37 +31,43 @@ important working context.
 ## Git Status
 
 ```
-M reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json
- M reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json
- M tools/harness/analyze-challenge-stage-candidate-sweep-index.js
- M tools/harness/check-challenge-stage-candidate-sweep.js
- M tools/harness/sweep-stage11-challenge-candidates.js
-?? reference-artifacts/analyses/challenge-stage-candidate-sweep-index/2026-06-01T15-25-18-9bb463aa9/
-?? reference-artifacts/analyses/challenge-stage-candidate-sweep-index/2026-06-01T15-28-28-9bb463aa9/
+M CLASSIC_ARCADE_INGESTION_FRAMEWORK.md
+ M ingestion-dashboard.json
+ M package.json
+ M tools/build/build-index.js
+?? MOTION_GRAMMAR_VOCABULARY.md
+?? reference-artifacts/analyses/challenge-candidate-before-after/
+?? reference-artifacts/analyses/galaxy-guardians-identity/routeability-review-0.1.json
+?? reference-artifacts/analyses/galaxy-guardians-identity/routeability-review-0.1.md
+?? reference-artifacts/analyses/shared-motion-grammar/
+?? tools/harness/analyze-challenge-candidate-before-after.js
+?? tools/harness/analyze-galaxy-guardians-routeability-review.js
+?? tools/harness/check-challenge-candidate-before-after.js
+?? tools/harness/check-galaxy-guardians-routeability-review.js
+?? tools/harness/check-shared-motion-grammar-vocabulary.js
 ```
 
 ## Diff Stat
 
 ```
-.../latest.json                                    |    105 +-
- .../challenge-stage-candidate-sweep/latest.json    | 114646 ++++++++----------
- ...nalyze-challenge-stage-candidate-sweep-index.js |     23 +-
- .../check-challenge-stage-candidate-sweep.js       |     20 +
- .../harness/sweep-stage11-challenge-candidates.js  |    242 +-
- 5 files changed, 48847 insertions(+), 66189 deletions(-)
+CLASSIC_ARCADE_INGESTION_FRAMEWORK.md | 25 ++++++++++++++++++
+ ingestion-dashboard.json              | 50 ++++++++++++++++++++++++++++++++---
+ package.json                          |  5 ++++
+ tools/build/build-index.js            | 46 +++++++++++++++++++++++++++++---
+ 4 files changed, 119 insertions(+), 7 deletions(-)
 ```
 
 ## Recent Log
 
 ```
-9bb463aa9 (HEAD -> codex/macbook-ingestion-grammar-sync, origin/main, origin/HEAD) Refresh code review packet for release doc wording update
+c722fac34 (HEAD -> codex/macbook-ingestion-grammar-sync, origin/codex/macbook-ingestion-grammar-sync) Add human-perfect guard to challenge candidate sweeps
+9bb463aa9 (origin/main, origin/HEAD) Refresh code review packet for release doc wording update
 9878d3dce Refresh release conformance docs for artifact wording
 d013c62e5 Refresh code review packet for artifact wording
 c33b4689b Clarify Aurora and Guardians artifact requests
 b3d186c81 Refresh code review packet for release doc update
 55c147259 Refresh release conformance docs for Windigo intake
 58866ade0 Refresh code review packet for Windigo intake
-3a727d5a2 Accession Windigo rules and score source package
 ```
 
 ## Machine Status Snapshot
@@ -97,7 +103,7 @@ b3d186c81 Refresh code review packet for release doc update
   "repo": {
     "branch": "codex/macbook-ingestion-grammar-sync",
     "dirty": true,
-    "upstream": "origin/main",
+    "upstream": "origin/codex/macbook-ingestion-grammar-sync",
     "ahead": 0,
     "behind": 0,
     "remote_ok": true
@@ -191,11 +197,11 @@ Read first:
 - MULTI_MACHINE_WORKFLOW.md
 
 Current checkpoint:
-- label: ingestion-human-perfect-guard
-- generated: 2026-06-01T15:30:18.233Z
+- label: ingestion-grammar-routeability-visuals
+- generated: 2026-06-01T16:04:36.731Z
 - branch: codex/macbook-ingestion-grammar-sync
-- commit: 9bb463aa9 Refresh code review packet for release doc wording update
-- dirty files excluding checkpoint self-output: 7
+- commit: c722fac34 Add human-perfect guard to challenge candidate sweeps
+- dirty files excluding checkpoint self-output: 14
 
 Continue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.
 ```

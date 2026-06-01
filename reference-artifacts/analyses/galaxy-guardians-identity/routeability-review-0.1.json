@@ -1,0 +1,311 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "galaxy-guardians-routeability-review",
+  "version": "0.1",
+  "createdOn": "2026-06-01T16:03:52.316Z",
+  "status": "dev-preview-routeability-gate-planning-not-runtime-promotion",
+  "sourceEvidence": [
+    "reference-artifacts/analyses/galaxy-guardians-identity/long-surface-conformance-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/playtest-conformance-review-0.1.json",
+    "reference-artifacts/analyses/galaxy-guardians-identity/movement-pacing-0.1.json"
+  ],
+  "summary": {
+    "routeabilityScore10": 5.4,
+    "weakestGroup": "midrun-stage-five-stress",
+    "weakestGroupScore10": 4.5,
+    "midrunSurvivabilityScore10": 5.7,
+    "playtestMotionPressureScore10": 6.3,
+    "releaseRead": "Guardians routeability is 5.4/10. The weakest route is midrun-stage-five-stress at 4.5/10, which keeps stage-five-and-beyond movement work behind a player-routeability gate before any pressure or movement candidate should be promoted."
+  },
+  "groups": [
+    {
+      "label": "competitive-three-ship",
+      "score10": 5.4,
+      "runCount": 4,
+      "survivalShare": 0.437,
+      "progressionShare": 0.083,
+      "collisionLossShare": 0.166,
+      "rows": [
+        {
+          "persona": "novice",
+          "stageStart": 1,
+          "finalStage": 1,
+          "score": 530,
+          "durationSeconds": 180,
+          "simT": 23.983,
+          "gameOver": true,
+          "gameOverReason": "alien_scout_collision",
+          "stageAdvances": 0,
+          "waveClears": 0,
+          "playerLosses": 3,
+          "score10": 4.3,
+          "components": {
+            "survivalShare": 0.133,
+            "progressionShare": 0,
+            "lossBudgetShare": 0,
+            "collisionSafetyShare": 0.667,
+            "shotResolutionShare": 0.938,
+            "pressureSurvivability": 1,
+            "divePressurePerMinute": 3.33,
+            "shotPressurePerMinute": 3
+          },
+          "read": "novice opening routeability 4.3/10: survived 24s, reached stage 1, cleared 0 wave(s), and lost 3/3 ships."
+        },
+        {
+          "persona": "advanced",
+          "stageStart": 1,
+          "finalStage": 1,
+          "score": 800,
+          "durationSeconds": 180,
+          "simT": 30.35,
+          "gameOver": true,
+          "gameOverReason": "enemy_shot",
+          "stageAdvances": 0,
+          "waveClears": 0,
+          "playerLosses": 3,
+          "score10": 4.8,
+          "components": {
+            "survivalShare": 0.169,
+            "progressionShare": 0,
+            "lossBudgetShare": 0,
+            "collisionSafetyShare": 1,
+            "shotResolutionShare": 0.947,
+            "pressureSurvivability": 1,
+            "divePressurePerMinute": 4,
+            "shotPressurePerMinute": 4.33
+          },
+          "read": "advanced opening routeability 4.8/10: survived 30.4s, reached stage 1, cleared 0 wave(s), and lost 3/3 ships."
+        },
+        {
+          "persona": "expert",
+          "stageStart": 1,
+          "finalStage": 2,
+          "score": 3420,
+          "durationSeconds": 180,
+          "simT": 179.5,
+          "gameOver": false,
+          "gameOverReason": "",
+          "stageAdvances": 1,
+          "waveClears": 1,
+          "playerLosses": 2,
+          "score10": 7.5,
+          "components": {
+            "survivalShare": 0.997,
+            "progressionShare": 0.333,
+            "lossBudgetShare": 0.333,
+            "collisionSafetyShare": 1,
+            "shotResolutionShare": 0.989,
+            "pressureSurvivability": 1,
+            "divePressurePerMinute": 22.33,
+            "shotPressurePerMinute": 34.67
+          },
+          "read": "expert opening routeability 7.5/10: survived 179.5s, reached stage 2, cleared 1 wave(s), and lost 2/3 ships."
+        },
+        {
+          "persona": "professional",
+          "stageStart": 1,
+          "finalStage": 1,
+          "score": 830,
+          "durationSeconds": 180,
+          "simT": 80.8,
+          "gameOver": true,
+          "gameOverReason": "enemy_shot",
+          "stageAdvances": 0,
+          "waveClears": 0,
+          "playerLosses": 3,
+          "score10": 4.9,
+          "components": {
+            "survivalShare": 0.449,
+            "progressionShare": 0,
+            "lossBudgetShare": 0,
+            "collisionSafetyShare": 0.667,
+            "shotResolutionShare": 0.938,
+            "pressureSurvivability": 1,
+            "divePressurePerMinute": 10.33,
+            "shotPressurePerMinute": 15.33
+          },
+          "read": "professional opening routeability 4.9/10: survived 80.8s, reached stage 1, cleared 0 wave(s), and lost 3/3 ships."
+        }
+      ],
+      "read": "competitive-three-ship averages 5.4/10 routeability, 44% survival share, 8% progression share, and 17% collision-loss share."
+    },
+    {
+      "label": "review-five-ship",
+      "score10": 6.7,
+      "runCount": 3,
+      "survivalShare": 0.87,
+      "progressionShare": 0.222,
+      "collisionLossShare": 0.133,
+      "rows": [
+        {
+          "persona": "advanced",
+          "stageStart": 1,
+          "finalStage": 1,
+          "score": 2000,
+          "durationSeconds": 240,
+          "simT": 146.817,
+          "gameOver": true,
+          "gameOverReason": "enemy_shot",
+          "stageAdvances": 0,
+          "waveClears": 0,
+          "playerLosses": 5,
+          "score10": 5.1,
+          "components": {
+            "survivalShare": 0.612,
+            "progressionShare": 0,
+            "lossBudgetShare": 0,
+            "collisionSafetyShare": 0.6,
+            "shotResolutionShare": 0.951,
+            "pressureSurvivability": 1,
+            "divePressurePerMinute": 14.5,
+            "shotPressurePerMinute": 21.25
+          },
+          "read": "advanced opening routeability 5.1/10: survived 146.8s, reached stage 1, cleared 0 wave(s), and lost 5/5 ships."
+        },
+        {
+          "persona": "expert",
+          "stageStart": 1,
+          "finalStage": 2,
+          "score": 4440,
+          "durationSeconds": 240,
+          "simT": 239.983,
+          "gameOver": false,
+          "gameOverReason": "",
+          "stageAdvances": 1,
+          "waveClears": 1,
+          "playerLosses": 4,
+          "score10": 7.3,
+          "components": {
+            "survivalShare": 1,
+            "progressionShare": 0.333,
+            "lossBudgetShare": 0.2,
+            "collisionSafetyShare": 1,
+            "shotResolutionShare": 1,
+            "pressureSurvivability": 1,
+            "divePressurePerMinute": 22,
+            "shotPressurePerMinute": 34.75
+          },
+          "read": "expert opening routeability 7.3/10: survived 240s, reached stage 2, cleared 1 wave(s), and lost 4/5 ships."
+        },
+        {
+          "persona": "professional",
+          "stageStart": 1,
+          "finalStage": 2,
+          "score": 2190,
+          "durationSeconds": 240,
+          "simT": 239.633,
+          "gameOver": false,
+          "gameOverReason": "",
+          "stageAdvances": 1,
+          "waveClears": 1,
+          "playerLosses": 3,
+          "score10": 7.6,
+          "components": {
+            "survivalShare": 0.998,
+            "progressionShare": 0.333,
+            "lossBudgetShare": 0.4,
+            "collisionSafetyShare": 1,
+            "shotResolutionShare": 0.989,
+            "pressureSurvivability": 1,
+            "divePressurePerMinute": 22,
+            "shotPressurePerMinute": 36.25
+          },
+          "read": "professional opening routeability 7.6/10: survived 239.6s, reached stage 2, cleared 1 wave(s), and lost 3/5 ships."
+        }
+      ],
+      "read": "review-five-ship averages 6.7/10 routeability, 87% survival share, 22% progression share, and 13% collision-loss share."
+    },
+    {
+      "label": "midrun-stage-five-stress",
+      "score10": 4.5,
+      "runCount": 3,
+      "survivalShare": 0.597,
+      "progressionShare": 0,
+      "collisionLossShare": 0.8,
+      "rows": [
+        {
+          "persona": "advanced",
+          "stageStart": 5,
+          "finalStage": 5,
+          "score": 970,
+          "durationSeconds": 120,
+          "simT": 50.55,
+          "gameOver": true,
+          "gameOverReason": "alien_scout_collision",
+          "stageAdvances": 0,
+          "waveClears": 0,
+          "playerLosses": 5,
+          "score10": 3.8,
+          "components": {
+            "survivalShare": 0.421,
+            "progressionShare": 0,
+            "lossBudgetShare": 0,
+            "collisionSafetyShare": 0,
+            "shotResolutionShare": 0.867,
+            "pressureSurvivability": 1,
+            "divePressurePerMinute": 12.5,
+            "shotPressurePerMinute": 15.5
+          },
+          "read": "advanced midrun routeability 3.8/10: survived 50.5s, reached stage 5, cleared 0 wave(s), and lost 5/5 ships."
+        },
+        {
+          "persona": "expert",
+          "stageStart": 5,
+          "finalStage": 5,
+          "score": 1430,
+          "durationSeconds": 120,
+          "simT": 71.15,
+          "gameOver": true,
+          "gameOverReason": "alien_scout_collision",
+          "stageAdvances": 0,
+          "waveClears": 0,
+          "playerLosses": 5,
+          "score10": 4.2,
+          "components": {
+            "survivalShare": 0.593,
+            "progressionShare": 0,
+            "lossBudgetShare": 0,
+            "collisionSafetyShare": 0,
+            "shotResolutionShare": 0.897,
+            "pressureSurvivability": 1,
+            "divePressurePerMinute": 14.5,
+            "shotPressurePerMinute": 23.5
+          },
+          "read": "expert midrun routeability 4.2/10: survived 71.2s, reached stage 5, cleared 0 wave(s), and lost 5/5 ships."
+        },
+        {
+          "persona": "professional",
+          "stageStart": 5,
+          "finalStage": 5,
+          "score": 1190,
+          "durationSeconds": 120,
+          "simT": 93.2,
+          "gameOver": true,
+          "gameOverReason": "enemy_shot",
+          "stageAdvances": 0,
+          "waveClears": 0,
+          "playerLosses": 5,
+          "score10": 5.4,
+          "components": {
+            "survivalShare": 0.777,
+            "progressionShare": 0,
+            "lossBudgetShare": 0,
+            "collisionSafetyShare": 0.6,
+            "shotResolutionShare": 0.917,
+            "pressureSurvivability": 1,
+            "divePressurePerMinute": 23,
+            "shotPressurePerMinute": 33.5
+          },
+          "read": "professional midrun routeability 5.4/10: survived 93.2s, reached stage 5, cleared 0 wave(s), and lost 5/5 ships."
+        }
+      ],
+      "read": "midrun-stage-five-stress averages 4.5/10 routeability, 60% survival share, 0% progression share, and 80% collision-loss share."
+    }
+  ],
+  "promotionPolicy": "Future Guardians movement candidates should not be promoted only because dive cadence, object tracks, or pressure metrics become more reference-like. They should also preserve or improve routeability: stronger personas must retain learnable survival/scoring windows, midrun stage-five stress must not become collision-dominated, and shot/dive pressure must remain readable enough for persona review to convert pressure into clears.",
+  "nextSteps": [
+    "Add a browser-backed before/after routeability capture once Guardians has a concrete movement candidate loop.",
+    "Record candidate-vs-baseline routeability deltas beside audio, object-track, and frame-motion conformance deltas.",
+    "Treat stage-five collision-dominated failures as a high-value Guardians quality target before broader public release positioning."
+  ]
+}

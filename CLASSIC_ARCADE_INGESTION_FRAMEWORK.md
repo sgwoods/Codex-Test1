@@ -109,6 +109,31 @@ named, such as:
 - readable score text
 - unobscured enemy motion
 
+## Shared Motion Grammar
+
+Movement work should use the shared vocabulary in
+[MOTION_GRAMMAR_VOCABULARY.md](MOTION_GRAMMAR_VOCABULARY.md) and
+`reference-artifacts/analyses/shared-motion-grammar/vocabulary-0.1.json`.
+
+This vocabulary applies to normal stages and challenge stages. It should be used
+for main-stage formation entry, enemy dives, escort behavior, rack drift,
+bottom-wrap returns, challenge set pieces, capture/rescue sequences, sprite
+flap/pulse cadence, and scoring-routeability windows.
+
+The important rule is that a movement candidate cannot promote from visual
+object-track fit alone. It also needs to preserve or improve:
+
+- player routeability
+- collision safety
+- shot windows
+- visual readability
+- semantic identity for the target stage or scenario
+- audio cue hooks when movement changes player interpretation
+
+Use ordinary stage names for standard progression (`Stage 1`, `Stage 2`) and
+between-stage names for challenge stages (`Challenging Stage 2-3`). This keeps
+bonus-stage review from being confused with ordinary combat-stage progression.
+
 ## Required Game Catalog Output
 
 Every game that enters primary ingestion must receive a maintained catalog entry

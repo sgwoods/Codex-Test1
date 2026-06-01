@@ -1,24 +1,31 @@
 {
   "ok": true,
   "artifactType": "codex-context-checkpoint",
-  "generatedAt": "2026-06-01T15:30:18.233Z",
-  "label": "ingestion-human-perfect-guard",
+  "generatedAt": "2026-06-01T16:04:36.731Z",
+  "label": "ingestion-grammar-routeability-visuals",
   "root": "/Users/sgwoods/Development/Codex/Codex-test1",
   "branch": "codex/macbook-ingestion-grammar-sync",
-  "commit": "9bb463aa9",
-  "commitSubject": "Refresh code review packet for release doc wording update",
-  "dirtyFileCountExcludingCheckpoint": 7,
+  "commit": "c722fac34",
+  "commitSubject": "Add human-perfect guard to challenge candidate sweeps",
+  "dirtyFileCountExcludingCheckpoint": 14,
   "statusLinesExcludingCheckpoint": [
-    "M reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json",
-    " M reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json",
-    " M tools/harness/analyze-challenge-stage-candidate-sweep-index.js",
-    " M tools/harness/check-challenge-stage-candidate-sweep.js",
-    " M tools/harness/sweep-stage11-challenge-candidates.js",
-    "?? reference-artifacts/analyses/challenge-stage-candidate-sweep-index/2026-06-01T15-25-18-9bb463aa9/",
-    "?? reference-artifacts/analyses/challenge-stage-candidate-sweep-index/2026-06-01T15-28-28-9bb463aa9/"
+    "M CLASSIC_ARCADE_INGESTION_FRAMEWORK.md",
+    " M ingestion-dashboard.json",
+    " M package.json",
+    " M tools/build/build-index.js",
+    "?? MOTION_GRAMMAR_VOCABULARY.md",
+    "?? reference-artifacts/analyses/challenge-candidate-before-after/",
+    "?? reference-artifacts/analyses/galaxy-guardians-identity/routeability-review-0.1.json",
+    "?? reference-artifacts/analyses/galaxy-guardians-identity/routeability-review-0.1.md",
+    "?? reference-artifacts/analyses/shared-motion-grammar/",
+    "?? tools/harness/analyze-challenge-candidate-before-after.js",
+    "?? tools/harness/analyze-galaxy-guardians-routeability-review.js",
+    "?? tools/harness/check-challenge-candidate-before-after.js",
+    "?? tools/harness/check-galaxy-guardians-routeability-review.js",
+    "?? tools/harness/check-shared-motion-grammar-vocabulary.js"
   ],
-  "diffStat": ".../latest.json                                    |    105 +-\n .../challenge-stage-candidate-sweep/latest.json    | 114646 ++++++++----------\n ...nalyze-challenge-stage-candidate-sweep-index.js |     23 +-\n .../check-challenge-stage-candidate-sweep.js       |     20 +\n .../harness/sweep-stage11-challenge-candidates.js  |    242 +-\n 5 files changed, 48847 insertions(+), 66189 deletions(-)",
-  "recentLog": "9bb463aa9 (HEAD -> codex/macbook-ingestion-grammar-sync, origin/main, origin/HEAD) Refresh code review packet for release doc wording update\n9878d3dce Refresh release conformance docs for artifact wording\nd013c62e5 Refresh code review packet for artifact wording\nc33b4689b Clarify Aurora and Guardians artifact requests\nb3d186c81 Refresh code review packet for release doc update\n55c147259 Refresh release conformance docs for Windigo intake\n58866ade0 Refresh code review packet for Windigo intake\n3a727d5a2 Accession Windigo rules and score source package",
+  "diffStat": "CLASSIC_ARCADE_INGESTION_FRAMEWORK.md | 25 ++++++++++++++++++\n ingestion-dashboard.json              | 50 ++++++++++++++++++++++++++++++++---\n package.json                          |  5 ++++\n tools/build/build-index.js            | 46 +++++++++++++++++++++++++++++---\n 4 files changed, 119 insertions(+), 7 deletions(-)",
+  "recentLog": "c722fac34 (HEAD -> codex/macbook-ingestion-grammar-sync, origin/codex/macbook-ingestion-grammar-sync) Add human-perfect guard to challenge candidate sweeps\n9bb463aa9 (origin/main, origin/HEAD) Refresh code review packet for release doc wording update\n9878d3dce Refresh release conformance docs for artifact wording\nd013c62e5 Refresh code review packet for artifact wording\nc33b4689b Clarify Aurora and Guardians artifact requests\nb3d186c81 Refresh code review packet for release doc update\n55c147259 Refresh release conformance docs for Windigo intake\n58866ade0 Refresh code review packet for Windigo intake",
   "machineStatus": {
     "ok": true,
     "mode": "status",
@@ -49,7 +56,7 @@
     "repo": {
       "branch": "codex/macbook-ingestion-grammar-sync",
       "dirty": true,
-      "upstream": "origin/main",
+      "upstream": "origin/codex/macbook-ingestion-grammar-sync",
       "ahead": 0,
       "behind": 0,
       "remote_ok": true
@@ -122,16 +129,16 @@
     ]
   },
   "plan": [
-    "Sync challenge candidate grammar with main ingestion work by adding a human-perfect routeability promotion guard"
+    "Port routeability and visual review primitives into shared ingestion grammar"
   ],
   "next": [
-    "Port generic before-after visuals and apply the same routeability concept to Guardians movement ingestion"
+    "Use shared grammar for Guardians candidate loop and future Windigo movement analysis"
   ],
   "notes": [
     "Codex Desktop does not expose a repo command that forces internal chat compaction. The safe replacement is a manual checkpoint plus a deliberate fresh session from this file.",
     "This checkpoint intentionally filters its own generated files out of the dirty-status read so it can be committed as the recovery point."
   ],
-  "restartPrompt": "You are continuing Aurora Galactica / Platinum work from a durable Codex checkpoint.\n\nRepo path:\n/Users/sgwoods/Development/Codex/Codex-test1\n\nStart by running:\ngit branch --show-current\ngit status --short\ngit log -5 --oneline --decorate\nnpm run machine:status\n\nRead first:\n- CODEX_CONTEXT_CHECKPOINT.md\n- RESTART_FROM_HERE.md\n- MULTI_MACHINE_WORKFLOW.md\n\nCurrent checkpoint:\n- label: ingestion-human-perfect-guard\n- generated: 2026-06-01T15:30:18.233Z\n- branch: codex/macbook-ingestion-grammar-sync\n- commit: 9bb463aa9 Refresh code review packet for release doc wording update\n- dirty files excluding checkpoint self-output: 7\n\nContinue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.",
+  "restartPrompt": "You are continuing Aurora Galactica / Platinum work from a durable Codex checkpoint.\n\nRepo path:\n/Users/sgwoods/Development/Codex/Codex-test1\n\nStart by running:\ngit branch --show-current\ngit status --short\ngit log -5 --oneline --decorate\nnpm run machine:status\n\nRead first:\n- CODEX_CONTEXT_CHECKPOINT.md\n- RESTART_FROM_HERE.md\n- MULTI_MACHINE_WORKFLOW.md\n\nCurrent checkpoint:\n- label: ingestion-grammar-routeability-visuals\n- generated: 2026-06-01T16:04:36.731Z\n- branch: codex/macbook-ingestion-grammar-sync\n- commit: c722fac34 Add human-perfect guard to challenge candidate sweeps\n- dirty files excluding checkpoint self-output: 14\n\nContinue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.",
   "files": {
     "markdown": "CODEX_CONTEXT_CHECKPOINT.md",
     "json": "reference-artifacts/analyses/codex-context-checkpoint/latest.json"

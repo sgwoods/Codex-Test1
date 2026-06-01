@@ -78,6 +78,7 @@ const APPLICATION_ARTIFACT_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 
 const CHALLENGE_STAGE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_SWEEP = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_SWEEP_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep-index', 'latest.json');
+const CHALLENGE_CANDIDATE_BEFORE_AFTER = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-candidate-before-after', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_FULL_ANALYZER_REVIEW = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-full-analyzer-review', 'latest.json');
 const CHALLENGE_TRAJECTORY_CONTROLS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-trajectory-controls', 'latest.json');
 const CHALLENGE_SETPIECE_CONTRACTS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-setpiece-contracts', 'latest.json');
@@ -2919,6 +2920,7 @@ function buildChallengeStageEffortGuideSection(){
   const artifact = loadChallengeStageConformance();
   const sweep = loadChallengeStageCandidateSweep();
   const sweepIndex = loadChallengeStageCandidateSweepIndex();
+  const candidateBeforeAfter = loadChallengeCandidateBeforeAfter();
   const fullAnalyzerReview = loadChallengeStageCandidateFullAnalyzerReview();
   const trajectoryControls = loadChallengeTrajectoryControls();
   const setpieceContracts = loadChallengeSetpieceContracts();
@@ -2926,12 +2928,14 @@ function buildChallengeStageEffortGuideSection(){
   const sweepSummary = sweep.summary || {};
   const sweepRetention = sweep.candidateRetention || {};
   const sweepIndexSummary = sweepIndex.summary || {};
+  const beforeAfterSummary = candidateBeforeAfter.sweepSummary || {};
+  const beforeAfterCandidate = candidateBeforeAfter.selectedCandidate || {};
   const trajectorySummary = trajectoryControls.summary || {};
   const setpieceSummary = setpieceContracts.summary || {};
   const reviewRead = fullAnalyzerReview.read || 'No candidate has been recorded through the full-analyzer review loop yet.';
   const sweepRows = Array.isArray(sweepIndex.rows) ? sweepIndex.rows : [];
   const sweepIndexRead = sweepRows.length
-    ? sweepRows.map(row => `Stage ${row.stage}: ${row.keeperDecision || 'pending'} (${row.bestExpectedScore10 ?? 'n/a'}/10 expected, ${row.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10 target-video, identity margin ${row.stageIdentityMargin10 ?? 'n/a'}).`).join(' ')
+    ? sweepRows.map(row => `Stage ${row.stage}: ${row.keeperDecision || 'pending'} (${row.bestExpectedScore10 ?? 'n/a'}/10 expected, ${row.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10 target-video, ${row.bestHumanPerfectPotentialScore10 ?? 'n/a'}/10 human-perfect, identity margin ${row.stageIdentityMargin10 ?? 'n/a'}).`).join(' ')
     : 'Run the candidate sweep index analyzer to preserve latest per-stage candidate evidence.';
   const rows = (artifact.stageRows || []).map(row => [
     `Stage ${row.stage || ''} / Challenge ${row.challengeNumber || ''}`,
@@ -2955,11 +2959,15 @@ function buildChallengeStageEffortGuideSection(){
       },
       {
         title: 'Latest Candidate Sweep',
-        body: `Stage ${sweep.stage || 'n/a'} sweep measured ${sweep.candidateCount || sweepRetention.totalMeasured || 'n/a'} candidates and retained ${sweepRetention.retained || 'n/a'} review rows. Decision: ${sweepSummary.keeperDecision || 'pending'}. Best candidate ${sweepSummary.bestCandidateId || 'pending'} scored ${sweepSummary.bestExpectedScore10 ?? 'n/a'}/10 expected-reference and ${sweepSummary.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10 target-video fit.`
+        body: `Stage ${sweep.stage || 'n/a'} sweep measured ${sweep.candidateCount || sweepRetention.totalMeasured || 'n/a'} candidates and retained ${sweepRetention.retained || 'n/a'} review rows. Decision: ${sweepSummary.keeperDecision || 'pending'}. Best candidate ${sweepSummary.bestCandidateId || 'pending'} scored ${sweepSummary.bestExpectedScore10 ?? 'n/a'}/10 expected-reference, ${sweepSummary.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10 target-video fit, and ${sweepSummary.bestHumanPerfectPotentialScore10 ?? 'n/a'}/10 human-perfect potential; lift ${sweepSummary.humanPerfectPotentialLift10 ?? 'n/a'}/10.`
+      },
+      {
+        title: 'Human-Perfect Guard',
+        body: `Promotion now requires no human-perfect routeability regression. Latest before/after review: ${candidateBeforeAfter.candidateId || 'pending'} on Stage ${candidateBeforeAfter.stage || 'n/a'} with selected-candidate expected lift ${beforeAfterCandidate.expectedLift10 ?? beforeAfterSummary.expectedLift10 ?? 'n/a'}/10, target-video lift ${beforeAfterCandidate.targetVideoObjectFitLift10 ?? beforeAfterSummary.targetVideoObjectFitLift10 ?? 'n/a'}/10, and human-perfect lift ${beforeAfterCandidate.humanPerfectPotentialLift10 ?? beforeAfterSummary.humanPerfectPotentialLift10 ?? 'n/a'}/10.`
       },
       {
         title: 'Sweep Matrix',
-        body: `${sweepIndexSummary.stagesCovered || 0} stage(s) indexed, ${sweepIndexSummary.totalCandidateCount || 0} candidates represented, ${sweepIndexSummary.runtimeReadyCount || 0} runtime-ready. ${sweepIndexRead}`
+        body: `${sweepIndexSummary.stagesCovered || 0} stage(s) indexed, ${sweepIndexSummary.totalCandidateCount || 0} candidates represented, ${sweepIndexSummary.runtimeReadyCount || 0} runtime-ready, ${sweepIndexSummary.humanPerfectScoredCount || 0} with human-perfect scoring. ${sweepIndexRead}`
       },
       {
         title: 'Full Analyzer Review',
@@ -3003,6 +3011,16 @@ function buildChallengeStageEffortGuideSection(){
         label: 'Open Candidate Sweep Index',
         href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json`,
         detail: 'Latest per-stage sweep matrix so one stage run does not hide prior candidate evidence.'
+      },
+      {
+        label: 'Open Candidate Before/After Review',
+        href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-candidate-before-after/latest.json`,
+        detail: 'Human-visible baseline versus candidate contact sheet with expected, target-video, and human-perfect lift context.'
+      },
+      {
+        label: 'Open Candidate Before/After SVG',
+        href: `${ACTIVE_SOURCE_BLOB_BASE}${candidateBeforeAfter.media?.latestContactSheet || 'reference-artifacts/analyses/challenge-candidate-before-after/latest-candidate-before-after.svg'}`,
+        detail: 'Stable latest contact sheet generated for quick visual review of the current candidate tradeoff.'
       },
       {
         label: 'Open Full Analyzer Review Artifact',
@@ -3324,6 +3342,7 @@ let applicationArtifactConformanceCache = null;
 let challengeStageConformanceCache = null;
 let challengeStageCandidateSweepCache = null;
 let challengeStageCandidateSweepIndexCache = null;
+let challengeCandidateBeforeAfterCache = null;
 let challengeStageCandidateFullAnalyzerReviewCache = null;
 let challengeTrajectoryControlsCache = null;
 let challengeSetpieceContractsCache = null;
@@ -3671,6 +3690,27 @@ function loadChallengeStageCandidateSweepIndex(){
     challengeStageCandidateSweepIndexCache = { summary: {}, rows: [] };
   }
   return challengeStageCandidateSweepIndexCache;
+}
+
+function loadChallengeCandidateBeforeAfter(){
+  if(challengeCandidateBeforeAfterCache) return challengeCandidateBeforeAfterCache;
+  if(!fs.existsSync(CHALLENGE_CANDIDATE_BEFORE_AFTER)){
+    challengeCandidateBeforeAfterCache = { sweepSummary: {}, media: {}, baseline: {}, candidate: {}, selectedCandidate: {} };
+    return challengeCandidateBeforeAfterCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_CANDIDATE_BEFORE_AFTER);
+    challengeCandidateBeforeAfterCache = Object.assign({}, artifact, {
+      sweepSummary: artifact.sweepSummary || {},
+      media: artifact.media || {},
+      baseline: artifact.baseline || {},
+      candidate: artifact.candidate || {},
+      selectedCandidate: artifact.selectedCandidate || {}
+    });
+  } catch (err) {
+    challengeCandidateBeforeAfterCache = { sweepSummary: {}, media: {}, baseline: {}, candidate: {}, selectedCandidate: {} };
+  }
+  return challengeCandidateBeforeAfterCache;
 }
 
 function loadChallengeStageCandidateFullAnalyzerReview(){
