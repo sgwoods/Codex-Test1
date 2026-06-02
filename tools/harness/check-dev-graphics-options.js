@@ -9,6 +9,7 @@ function fail(message, payload){
 
 async function main(){
   const result = await withHarnessPage({ stage: 1, ships: 3, challenge: false, seed: 24138, skipStart: true }, async ({ page }) => {
+    const boundaryEnabled = await page.evaluate(() => !!window.BUILD_INFO?.publicArtifactBoundaryEnabled);
     const defaults = await page.evaluate(() => {
       window.__galagaHarness__.restartCurrentConfig();
       return window.__galagaHarness__.advanceFor(0.1, { step: 1 / 60 });
@@ -34,10 +35,12 @@ async function main(){
       const cue = window.__galagaHarness__.triggerAudioCue('gameStart', { phase: 'stage', atmosphereTheme: 'aurora-borealis' });
       return { state, cue };
     });
-    return { defaults, vividAurora, forcedClassic, galagaReference, galagaReferenceAssets };
+    return { boundaryEnabled, defaults, vividAurora, forcedClassic, galagaReference, galagaReferenceAssets };
   });
 
-  if(result.defaults.audio?.audioTheme !== 'galaga-reference-assets') fail('default audio theme no longer resolves to Galaga reference assets', result);
+  if(result.defaults.audio?.audioTheme !== 'aurora-application'){
+    fail('default audio theme no longer resolves to the public-safe Aurora application mix', result);
+  }
   if(result.defaults.visualAtmosphere?.id !== 'aurora-borealis') fail('default graphics settings no longer resolve the Aurora Borealis visual atmosphere', result);
   if(result.defaults.visualAtmosphere?.backgroundMode !== 'aurora-borealis') fail('default graphics settings no longer preserve the Aurora Borealis background mode', result);
   if(result.defaults.renderDebug?.starfieldIntensityScale !== 1.25) fail('default graphics settings no longer resolve the bright starfield intensity', result);
@@ -55,13 +58,30 @@ async function main(){
   if(result.galagaReference.audio?.audioTheme !== 'galaga-original-reference') fail('audio theme override did not persist into developer settings state', result);
   if(result.galagaReference.atmosphere?.audioTheme !== 'galaga-original-reference') fail('Galaga original reference audio theme did not force the dedicated Galaga gameplay audio resolution', result);
   if(result.galagaReference.visualAtmosphere?.id !== 'aurora-borealis') fail('audio theme override leaked into visual atmosphere selection; it should stay audio-only', result);
-  if(result.galagaReferenceAssets.state?.audio?.audioTheme !== 'galaga-reference-assets') fail('Galaga reference assets override did not persist into developer settings state', result);
-  if(result.galagaReferenceAssets.state?.atmosphere?.audioTheme !== 'galaga-reference-assets') fail('Galaga reference assets audio theme did not force the dedicated reference-audio gameplay resolution', result);
-  if(!result.galagaReferenceAssets.cue?.referenceClip) fail('Galaga reference assets mode did not resolve an actual reference clip through the live audio system', result);
+  const referenceAssetsTheme = result.galagaReferenceAssets.state?.audio?.audioTheme;
+  if(!['aurora-application', 'galaga-reference-assets'].includes(referenceAssetsTheme)){
+    fail('Galaga reference assets override no longer resolves to either the reference-audio lane or the public-safe fallback', result);
+  }
+  if(referenceAssetsTheme === 'galaga-reference-assets'){
+    if(result.galagaReferenceAssets.state?.atmosphere?.audioTheme !== 'galaga-reference-assets'){
+      fail('Galaga reference assets audio theme did not force the dedicated reference-audio gameplay resolution', result);
+    }
+    if(!result.galagaReferenceAssets.cue?.referenceClip){
+      fail('Galaga reference assets mode did not resolve an actual reference clip through the live audio system', result);
+    }
+  }else{
+    if(result.galagaReferenceAssets.state?.atmosphere?.audioTheme !== 'aurora-surge'){
+      fail('reference-audio fallback no longer preserves the stage-pack audio atmosphere', result);
+    }
+    if(result.galagaReferenceAssets.cue?.referenceClip){
+      fail('reference-audio fallback should not expose a reference clip when the asset lane is unavailable', result);
+    }
+  }
   if(result.galagaReferenceAssets.state?.visualAtmosphere?.id !== 'aurora-borealis') fail('Galaga reference assets override leaked into visual atmosphere selection; it should stay audio-only', result);
 
   console.log(JSON.stringify({
     ok: true,
+    boundaryEnabled: result.boundaryEnabled,
     defaults: result.defaults.graphics,
     vividAurora: {
       graphics: result.vividAurora.graphics,

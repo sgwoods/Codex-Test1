@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "shared-motion-grammar-vocabulary",
+  "version": "0.1",
+  "createdOn": "2026-06-01",
+  "status": "planning-contract-active",
+  "purpose": "Define a repeatable vocabulary for ingesting, comparing, varying, and promoting arcade movement patterns across Platinum games without confusing visual fit with playable conformance.",
+  "namingStandards": {
+    "stage": "Use Stage 1, Stage 2, Stage 3 for ordinary game progression.",
+    "challenge": "Use Challenging Stage 2-3 for a bonus or challenge stage between Stage 2 and Stage 3.",
+    "candidate": "Use candidate identifiers for measured runtime alternatives; do not call a candidate conformant until it passes visual, temporal, safety, and routeability gates."
+  },
+  "axes": [
+    {
+      "id": "temporal-cadence",
+      "meaning": "When groups appear, pause, accelerate, resolve, and hand control back to the player.",
+      "exampleMeasurements": ["visible start/end", "spawn offsets", "phase duration", "frame cadence"]
+    },
+    {
+      "id": "path-topology",
+      "meaning": "The shape family of a movement: loop, hook, column drop, escort dive, bottom wrap, rack drift, or authored set piece.",
+      "exampleMeasurements": ["entry side", "exit side", "x/y range", "path length", "turn count", "reversal count"]
+    },
+    {
+      "id": "object-grouping",
+      "meaning": "How many enemies move together, whether they are independent, paired, escorted, or swarm-like.",
+      "exampleMeasurements": ["group count", "members per group", "inter-member spacing", "phase overlap"]
+    },
+    {
+      "id": "role-family",
+      "meaning": "Which gameplay identity appears: bee, butterfly, boss, flagship, escort, bonus alien, player ship, projectile, or future game-specific role.",
+      "exampleMeasurements": ["role mix", "visual family", "novelty count", "stage introduction"]
+    },
+    {
+      "id": "player-routeability",
+      "meaning": "Whether a strong human or persona can read the pattern, route shots, and convert the intended opportunity into score or survival.",
+      "exampleMeasurements": ["human-perfect potential", "route coverage", "shot windows", "persona survival", "progression share"]
+    },
+    {
+      "id": "collision-safety",
+      "meaning": "Whether movement creates fair, readable risk and avoids unintended unavoidable collisions or challenge-stage kills.",
+      "exampleMeasurements": ["ship losses", "collision-loss share", "safe-lane exposure", "challenge no-kill guard"]
+    },
+    {
+      "id": "shot-window",
+      "meaning": "Whether the player can fire at meaningful times and the game resolves those shots consistently.",
+      "exampleMeasurements": ["target exposure", "sustained exposure", "shot resolution share", "route kill count"]
+    },
+    {
+      "id": "visual-readability",
+      "meaning": "Whether the motion can be visually parsed: sprite scale, spacing, overlap, frame persistence, and silhouette clarity.",
+      "exampleMeasurements": ["spacing ratio", "sprite crop score", "contact sheet review", "object-track visibility"]
+    },
+    {
+      "id": "audio-cue-hooks",
+      "meaning": "Where movement needs sound feedback, warning, impact, reward, or transition cues.",
+      "exampleMeasurements": ["cue slot", "onset alignment", "overlap risk", "semantic cue class"]
+    }
+  ],
+  "primitives": [
+    {
+      "id": "formation-entry",
+      "meaning": "Enemies enter the field and settle into or near a rack/formation.",
+      "requiredAxes": ["temporal-cadence", "path-topology", "object-grouping", "role-family", "visual-readability"]
+    },
+    {
+      "id": "rack-drift",
+      "meaning": "A formed group shifts, pulses, or marches while maintaining a recognizable rack.",
+      "requiredAxes": ["temporal-cadence", "path-topology", "visual-readability", "player-routeability"]
+    },
+    {
+      "id": "dive-attack",
+      "meaning": "A single enemy leaves formation, descends, attacks, and exits or returns.",
+      "requiredAxes": ["temporal-cadence", "path-topology", "collision-safety", "shot-window", "audio-cue-hooks"]
+    },
+    {
+      "id": "escort-linked-dive",
+      "meaning": "A leader or boss moves with escorts or paired enemies in a coordinated attack.",
+      "requiredAxes": ["object-grouping", "role-family", "path-topology", "collision-safety", "player-routeability"]
+    },
+    {
+      "id": "bottom-wrap-return",
+      "meaning": "Enemies pass below the player field or screen boundary and re-enter or resolve their path.",
+      "requiredAxes": ["path-topology", "temporal-cadence", "collision-safety", "visual-readability"]
+    },
+    {
+      "id": "challenge-setpiece-group",
+      "meaning": "A bonus-stage group appears as an authored scoring spectacle rather than a normal combat attack.",
+      "requiredAxes": ["temporal-cadence", "path-topology", "object-grouping", "role-family", "player-routeability", "collision-safety", "shot-window"]
+    },
+    {
+      "id": "pulse-flap-cadence",
+      "meaning": "Sprite animation timing that communicates life, species, damage, or motion state.",
+      "requiredAxes": ["temporal-cadence", "visual-readability", "role-family"]
+    },
+    {
+      "id": "capture-tractor",
+      "meaning": "A capture, beam, carried-fighter, rescue, or joined-fighter sequence.",
+      "requiredAxes": ["temporal-cadence", "path-topology", "role-family", "player-routeability", "audio-cue-hooks"]
+    },
+    {
+      "id": "scoring-routeability-window",
+      "meaning": "A time and position window where a skilled player can deliberately score, rescue, survive, or earn a perfect route.",
+      "requiredAxes": ["player-routeability", "shot-window", "collision-safety", "visual-readability"]
+    }
+  ],
+  "gameMappings": [
+    {
+      "gameKey": "aurora-galactica",
+      "lineage": "Galaga-style",
+      "primaryUses": [
+        "Challenging Stage 2-3 and later challenge set-piece groups",
+        "main-stage formation entry",
+        "boss capture and rescue sequences",
+        "sprite pulse/flap cadence"
+      ],
+      "promotionGate": "A challenge candidate must preserve safety, improve or maintain expected reference identity, avoid target-video regression, and avoid human-perfect routeability regression."
+    },
+    {
+      "gameKey": "galaxy-guardians-preview",
+      "lineage": "Galaxian-style",
+      "primaryUses": [
+        "scout dive attacks",
+        "flagship escort dives",
+        "bottom wrap and return paths",
+        "midrun stage-five stress routeability"
+      ],
+      "promotionGate": "A movement candidate must not promote from object-track or pressure fit alone; persona routeability and collision-loss share must preserve or improve."
+    },
+    {
+      "gameKey": "windigo-invaders-candidate",
+      "lineage": "Space Invaders-style future candidate",
+      "primaryUses": [
+        "rack march cadence",
+        "descent pressure",
+        "bunker-damage lanes",
+        "UFO pass timing",
+        "shot-lane occupancy"
+      ],
+      "promotionGate": "A movement candidate should preserve march readability, lane fairness, bunker utility, and player-shot routeability before a theme variation is claimed."
+    }
+  ],
+  "promotionPolicy": "No movement candidate should ship because visual object-track score improves in isolation. Runtime promotion requires the candidate to preserve or improve player routeability, collision safety, shot windows, and visual readability, with audio cue hooks documented when movement changes the player's interpretation of risk or reward.",
+  "nextSteps": [
+    "Use this vocabulary when naming Aurora challenge-stage candidate rows and before/after visual artifacts.",
+    "Attach Guardians movement candidate loops to the same routeability vocabulary before tuning pressure upward.",
+    "Use Windigo/Space-Invaders ingestion as the first fresh test that the grammar is not Galaga-only.",
+    "Add per-primitive before/after contact sheets when a runtime candidate changes player-visible movement."
+  ]
+}

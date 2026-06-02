@@ -31,7 +31,7 @@ The bottleneck is now clear: movement and group contracts have enough reference 
 | 8 | 31 | highest | 4.3/10 | 4.4/10 | 3.4/10 | blue-purple-finale | 5/5 | Refine the Challenge 8 blue/purple finale with fuller path length and compact late-loop timing. |
 
 
-## Challenging Stage 1 (Levels 3-4)
+## Challenging Stage 3-4
 
 **Current:** 4.3/10 strict conformance; movement 4.3/10; graphics 4.4/10; novelty 3.9/10; shot opportunity 5.7/10.
 
@@ -46,7 +46,7 @@ The bottleneck is now clear: movement and group contracts have enough reference 
 **Next implementation step:** Protect the first-challenge bee/butterfly line contract, then tune path length, turn count, and rack-slot precision against challenge-1 arrival and late-wave labels.
 
 
-## Challenging Stage 2 (Levels 7-8)
+## Challenging Stage 7-8
 
 **Current:** 3.6/10 strict conformance; movement 3/10; graphics 4/10; novelty 3.9/10; shot opportunity 5.7/10.
 
@@ -61,7 +61,7 @@ The bottleneck is now clear: movement and group contracts have enough reference 
 **Next implementation step:** Tune challenge 2 toward the denser mixed-novelty-line reference instead of relying on a generic cross-sweep.
 
 
-## Challenging Stage 3 (Levels 11-12)
+## Challenging Stage 11-12
 
 **Current:** 4.3/10 strict conformance; movement 4.2/10; graphics 4.6/10; novelty 3.9/10; shot opportunity 5.6/10.
 
@@ -76,7 +76,7 @@ The bottleneck is now clear: movement and group contracts have enough reference 
 **Next implementation step:** Promote challenge-3 boss-led reference phases and score dragonfly visual novelty as animation, not only family label.
 
 
-## Challenging Stage 4 (Levels 15-16)
+## Challenging Stage 15-16
 
 **Current:** 4.3/10 strict conformance; movement 4.3/10; graphics 4.6/10; novelty 3.9/10; shot opportunity 5.9/10.
 
@@ -91,7 +91,7 @@ The bottleneck is now clear: movement and group contracts have enough reference 
 **Next implementation step:** Promote the Challenge 4 pink-serpentine window into five group labels and tune the runtime path so all groups keep a readable serpentine score lane.
 
 
-## Challenging Stage 5 (Levels 19-20)
+## Challenging Stage 19-20
 
 **Current:** 4.4/10 strict conformance; movement 4.6/10; graphics 4.7/10; novelty 3.9/10; shot opportunity 5.5/10.
 
@@ -106,7 +106,7 @@ The bottleneck is now clear: movement and group contracts have enough reference 
 **Next implementation step:** Promote the Challenge 5 pink/green cascade window into five group labels and tune lower-field pass timing against those labels.
 
 
-## Challenging Stage 6 (Levels 23-24)
+## Challenging Stage 23-24
 
 **Current:** 4.2/10 strict conformance; movement 4.3/10; graphics 4.5/10; novelty 3.9/10; shot opportunity 5.8/10.
 
@@ -121,7 +121,7 @@ The bottleneck is now clear: movement and group contracts have enough reference 
 **Next implementation step:** Rebuild Challenge 6 around green ladder and split-exit timing until its measured vector hits challenge-6-green-ladder-split-group-1.
 
 
-## Challenging Stage 7 (Levels 27-28)
+## Challenging Stage 27-28
 
 **Current:** 4.2/10 strict conformance; movement 4.3/10; graphics 4.6/10; novelty 3.9/10; shot opportunity 5.2/10.
 
@@ -136,7 +136,7 @@ The bottleneck is now clear: movement and group contracts have enough reference 
 **Next implementation step:** Rebuild Challenge 7 around the yellow diagonal fan so the best match lands on challenge-7-yellow-diagonal-fan-group-1, not the finale label.
 
 
-## Challenging Stage 8 (Levels 31-32)
+## Challenging Stage 31-32
 
 **Current:** 4.3/10 strict conformance; movement 4.3/10; graphics 4.7/10; novelty 3.9/10; shot opportunity 5.7/10.
 

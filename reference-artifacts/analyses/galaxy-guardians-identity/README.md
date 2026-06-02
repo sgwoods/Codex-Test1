@@ -59,6 +59,10 @@ Current artifacts:
   and timing contract for the development-only playable preview.
 - `movement-pacing-0.1.json` - first runtime movement and pressure pacing
   contract for solo dives, flagship/escort dives, and wrap/return pressure.
+- `motion-grammar-candidates-0.1.json` - shared motion-grammar candidate queue
+  that maps Guardians movement opportunities to reusable primitives, axes,
+  routeability gates, and next measurements before runtime promotion; the
+  companion Markdown file is the reviewable planning queue.
 - `object-track-conformance-0.1.json` - CPU-only connected-component and
   lower-field tracklet proxy over the Galaxian frame windows, used to set the
   next runtime-vs-reference tuning bands without changing constants by feel.
@@ -82,6 +86,14 @@ Current artifacts:
 - `runtime-reference-movement-0.1.json` - runtime-vs-reference movement
   comparison that tuned the dev-preview dive speed, lateral span, and wrap
   pressure from the object-track proxy.
+- `routeability-before-after-0.1.json` - analysis-only stage-five candidate
+  comparison showing baseline routeability `4.5/10` and the current best
+  measured relief candidate at `5.8/10`; includes an SVG chart and does not
+  change runtime constants. Use the Markdown and SVG companions for human
+  review before any runtime promotion decision.
+- `routeability-review-0.1.json` - player-routeability review that keeps
+  movement pressure, persona survival, collision losses, and stage-five stress
+  visible as a gate before future movement promotion.
 - `score-progression-0.1.json` - first score-advance table, mission-language,
   wave-clear, and one-level mission-complete contract for the playable preview.
 - `stage-rank-pressure-0.1.json` - bounded multi-stage pressure contract that

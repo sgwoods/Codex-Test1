@@ -1,7 +1,7 @@
 # Codex Context Checkpoint
 
-Generated: 2026-05-31T12:25:48.645Z
-Label: authority-handoff-challenge-timing-evidence
+Generated: 2026-06-01T16:42:17.733Z
+Label: guardians-routeability-before-after
 
 This is the durable recovery point for long Aurora / Platinum Codex sessions.
 Use it before switching machines, before starting a multi-hour run, and whenever
@@ -11,17 +11,17 @@ important working context.
 ## Current Repo State
 
 - Repo path: `/Users/sgwoods/Development/Codex/Codex-test1`
-- Branch: `codex/macbook-fullscreen-timing-alignment-wip`
-- HEAD: `0d74533e6` Improve Aurora challenge timing evidence
-- Dirty files excluding checkpoint self-output: `0`
+- Branch: `codex/macbook-ingestion-grammar-sync`
+- HEAD: `71c52ca0a` Expose routeability review in ingestion grammar
+- Dirty files excluding checkpoint self-output: `14`
 
 ## Active Plan
 
-- MacBook WIP branch is clean and pushed; authority machine should integrate Aurora challenge timing evidence after stacked base e397c2c75/2d144d5c1 path is understood
+- Advance Guardians movement quality through shared motion grammar and routeability candidate gates
 
 ## Recommended Next Steps
 
-- On iMacM1 fetch origin, inspect codex/macbook-fullscreen-timing-alignment-wip at 0d74533e6 plus checkpoint commit if present, merge after current release branch/base, run verification, then decide dev/beta publish from authority machine only
+- Create browser-visible before-after capture or promote the candidate behind stronger gates
 
 ## Notes
 
@@ -31,26 +31,44 @@ important working context.
 ## Git Status
 
 ```
-(none)
+M MOTION_GRAMMAR_VOCABULARY.md
+ M ingestion-dashboard.json
+ M package.json
+ M reference-artifacts/analyses/galaxy-guardians-identity/README.md
+ M tools/harness/guardians-long-surface-lib.js
+?? reference-artifacts/analyses/galaxy-guardians-identity/motion-grammar-candidates-0.1.json
+?? reference-artifacts/analyses/galaxy-guardians-identity/motion-grammar-candidates-0.1.md
+?? reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.json
+?? reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.md
+?? reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.svg
+?? tools/harness/analyze-galaxy-guardians-motion-grammar-candidates.js
+?? tools/harness/analyze-galaxy-guardians-routeability-before-after.js
+?? tools/harness/check-galaxy-guardians-motion-grammar-candidates.js
+?? tools/harness/check-galaxy-guardians-routeability-before-after.js
 ```
 
 ## Diff Stat
 
 ```
-(none)
+MOTION_GRAMMAR_VOCABULARY.md                       | 20 +++++++++++
+ ingestion-dashboard.json                           | 28 +++++++++++++--
+ package.json                                       |  4 +++
+ .../analyses/galaxy-guardians-identity/README.md   | 12 +++++++
+ tools/harness/guardians-long-surface-lib.js        | 40 ++++++++++++++++++++++
+ 5 files changed, 102 insertions(+), 2 deletions(-)
 ```
 
 ## Recent Log
 
 ```
-0d74533e6 (HEAD -> codex/macbook-fullscreen-timing-alignment-wip, origin/codex/macbook-fullscreen-timing-alignment-wip) Improve Aurora challenge timing evidence
-2d144d5c1 Calibrate reference sprite proportions
-4650b755f Fix arcade fullscreen playfield visibility
-b14cb07d5 Refine Aurora player fighter visual fidelity
-f22f00d51 Calibrate challenge sweeps against full analyzer rejections
-46f19bc04 Gate Stage 7 challenge candidates with full analyzer review
-56e319f29 Ground challenge timing in target motion tracks
-9a9ede246 Measure challenge visible-motion timing
+71c52ca0a (HEAD -> codex/macbook-ingestion-grammar-sync, origin/codex/macbook-ingestion-grammar-sync) Expose routeability review in ingestion grammar
+c722fac34 Add human-perfect guard to challenge candidate sweeps
+9bb463aa9 (origin/main, origin/HEAD) Refresh code review packet for release doc wording update
+9878d3dce Refresh release conformance docs for artifact wording
+d013c62e5 Refresh code review packet for artifact wording
+c33b4689b Clarify Aurora and Guardians artifact requests
+b3d186c81 Refresh code review packet for release doc update
+55c147259 Refresh release conformance docs for Windigo intake
 ```
 
 ## Machine Status Snapshot
@@ -84,9 +102,9 @@ f22f00d51 Calibrate challenge sweeps against full analyzer rejections
     }
   },
   "repo": {
-    "branch": "codex/macbook-fullscreen-timing-alignment-wip",
-    "dirty": false,
-    "upstream": "origin/codex/macbook-fullscreen-timing-alignment-wip",
+    "branch": "codex/macbook-ingestion-grammar-sync",
+    "dirty": true,
+    "upstream": "origin/codex/macbook-ingestion-grammar-sync",
     "ahead": 0,
     "behind": 0,
     "remote_ok": true
@@ -104,7 +122,7 @@ f22f00d51 Calibrate challenge sweeps against full analyzer rejections
       "ok": true,
       "reachable": true,
       "root_ok": true,
-      "url": "http://127.0.0.1:8000/",
+      "url": "http://localhost:8000/",
       "listeners": [
         {
           "pid": 25405,
@@ -117,7 +135,7 @@ f22f00d51 Calibrate challenge sweeps against full analyzer rejections
       "ok": true,
       "reachable": true,
       "root_ok": true,
-      "url": "http://127.0.0.1:4311/api/runs",
+      "url": "http://localhost:4311/api/runs",
       "listeners": [
         {
           "pid": 25481,
@@ -132,8 +150,8 @@ f22f00d51 Calibrate challenge sweeps against full analyzer rejections
     "dev": {
       "ok": true,
       "version": "1.4.0",
-      "label": "1.4.0.1+build.932.sha.19db4fa4",
-      "commit": "19db4fa4",
+      "label": "1.4.0.1+build.975.sha.9bb463aa",
+      "commit": "9bb463aa",
       "releaseChannel": "development"
     },
     "beta": {
@@ -180,11 +198,11 @@ Read first:
 - MULTI_MACHINE_WORKFLOW.md
 
 Current checkpoint:
-- label: authority-handoff-challenge-timing-evidence
-- generated: 2026-05-31T12:25:48.645Z
-- branch: codex/macbook-fullscreen-timing-alignment-wip
-- commit: 0d74533e6 Improve Aurora challenge timing evidence
-- dirty files excluding checkpoint self-output: 0
+- label: guardians-routeability-before-after
+- generated: 2026-06-01T16:42:17.733Z
+- branch: codex/macbook-ingestion-grammar-sync
+- commit: 71c52ca0a Expose routeability review in ingestion grammar
+- dirty files excluding checkpoint self-output: 14
 
 Continue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.
 ```

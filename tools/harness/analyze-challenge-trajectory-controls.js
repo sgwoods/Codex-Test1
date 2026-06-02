@@ -255,7 +255,7 @@ function challengeControlRow(challenge, sweepRow){
   return {
     challengeNumber,
     stage,
-    label: `Challenging Stage ${challengeNumber} (Levels ${stage}-${stage + 1})`,
+    label: `Challenging Stage ${stage}-${stage + 1}`,
     sourceVideo: challenge.sourceVideo || null,
     sourceWindow: challenge.sourceWindow || null,
     groupCount: groups.length,

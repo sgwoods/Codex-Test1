@@ -1,0 +1,348 @@
+{
+  "generatedAt": "2026-06-02T17:41:30.504Z",
+  "build": {
+    "product": "Aurora Galactica",
+    "version": "1.4.0",
+    "versionLine": "1.4.0",
+    "label": "1.4.0+build.979.sha.f39d876c.dirty",
+    "commit": "f39d876cce1cc1c051cccf2ff5c71ff105956137",
+    "branch": "main",
+    "dirty": true,
+    "released": "Jun 02 2026, 1:39 PM EDT",
+    "state": "main@f39d876c dirty",
+    "releaseChannel": "production",
+    "publicArtifactBoundaryEnabled": true,
+    "platform": {
+      "key": "platinum",
+      "name": "Platinum",
+      "version": "1.4.0",
+      "releaseTrack": "production-family",
+      "compatibility": "platinum-1.4",
+      "notes": "Platform-owned shell, release lanes, docs, replay, services, and host contract.",
+      "media": {
+        "arcadeMusicPlaylistId": "PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"
+      },
+      "auth": {
+        "nonProductionTestPilotEmails": [
+          "sgwoods@gmail.com",
+          "waskesiuhobiecat@gmail.com"
+        ],
+        "nonProductionTestPilotUserIds": []
+      }
+    },
+    "applications": [
+      {
+        "gameKey": "aurora-galactica",
+        "title": "Aurora Galactica",
+        "version": "1.4.0",
+        "versionLine": "1.4.0",
+        "releaseTrack": "production-family",
+        "runtimeStatus": "playable",
+        "platformCompatibility": "platinum-1.4",
+        "launchPolicy": "production-capable"
+      },
+      {
+        "gameKey": "galaxy-guardians-preview",
+        "title": "Galaxy Guardians",
+        "version": "0.1.0-preview",
+        "versionLine": "0.1.0 preview",
+        "releaseTrack": "playable-preview",
+        "runtimeStatus": "production-playable-preview",
+        "platformCompatibility": "platinum-1.4",
+        "launchPolicy": "production-preview-playable"
+      }
+    ]
+  },
+  "location": "http://localhost:51195/index.html",
+  "game": {
+    "stage": 4,
+    "score": 0,
+    "lives": 2,
+    "started": false,
+    "paused": false,
+    "challenge": false,
+    "attract": false
+  },
+  "audioDebug": {
+    "theme": "aurora-application",
+    "lastCue": {
+      "cue": "captureRetreat",
+      "atmosphereId": "classic-arcade",
+      "audioTheme": "classic-arcade",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 4,
+      "challenge": false,
+      "at": 1.607,
+      "recAt": 0.46
+    },
+    "reference": {
+      "lastRequested": "",
+      "lastLoaded": "",
+      "lastStarted": "",
+      "lastError": "",
+      "activeCount": 0
+    },
+    "statusLine": "Theme: aurora-application · last cue captureRetreat (classic-arcade) · active 0"
+  },
+  "systemLog": [],
+  "sessionEvents": [
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "game_start",
+      "message": "game_start",
+      "data": {
+        "t": 0,
+        "type": "game_start",
+        "persona": null,
+        "watchMode": false,
+        "watchScope": "game",
+        "developerExpertPlay": "",
+        "requestedStage": 1,
+        "stage": 1,
+        "startStageMode": "internal",
+        "startKind": "level",
+        "challengeStage": 1,
+        "displayLabel": "",
+        "forceChallenge": false,
+        "playerTwo": null
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "stage_spawn",
+      "message": "stage_spawn",
+      "data": {
+        "t": 0,
+        "type": "stage_spawn",
+        "stage": 1,
+        "challenge": false,
+        "persona": null
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "stage_profile",
+      "message": "stage_profile",
+      "data": {
+        "t": 0,
+        "type": "stage_profile",
+        "stage": 1,
+        "challenge": false,
+        "band": "classic",
+        "challengeFamily": "classic",
+        "beeFamily": "classic",
+        "butFamily": "classic",
+        "bossFamily": "classic",
+        "themeId": "quiet-skies",
+        "backgroundMode": "classic-stars",
+        "frameAccent": "classic-blue",
+        "bossArchetype": "command-core"
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0,
+        "type": "audio_cue",
+        "cue": "gameStart",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 1
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "harness_capture_escape_setup",
+      "message": "harness_capture_escape_setup",
+      "data": {
+        "t": 0,
+        "type": "harness_capture_escape_setup",
+        "boss": 628686008,
+        "playerX": 140,
+        "playerY": 186,
+        "bossX": 140,
+        "bossY": 110,
+        "capT": 0.45,
+        "stage": 4,
+        "keepAlive": 1
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 0,
+        "type": "enemy_attack_start",
+        "stage": 4,
+        "mode": "capture",
+        "x": 140,
+        "y": 110,
+        "originLane": 5,
+        "targetLane": 5,
+        "playerLane": 5,
+        "id": 628686008,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 5,
+        "dive": 2,
+        "carry": false,
+        "targetX": 140,
+        "targetY": 136,
+        "scripted": 0,
+        "harness": 1,
+        "captureEscape": 1
+      }
+    },
+    {
+      "at": "+0.130s",
+      "level": "info",
+      "action": "key_down",
+      "message": "key_down",
+      "data": {
+        "t": 0.13,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      }
+    },
+    {
+      "at": "+0.210s",
+      "level": "info",
+      "action": "key_up",
+      "message": "key_up",
+      "data": {
+        "t": 0.21,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      }
+    },
+    {
+      "at": "+0.460s",
+      "level": "info",
+      "action": "fighter_captured",
+      "message": "fighter_captured",
+      "data": {
+        "t": 0.46,
+        "type": "fighter_captured",
+        "stage": 4,
+        "stageClock": 0.46,
+        "captureCountStage": 1,
+        "livesAfter": 2,
+        "playerLane": 5,
+        "timeSinceCaptureStart": 0.46,
+        "id": 628686008,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 5,
+        "dive": 3,
+        "carry": true
+      }
+    },
+    {
+      "at": "+0.460s",
+      "level": "info",
+      "action": "capture_retreat_phase",
+      "message": "capture_retreat_phase",
+      "data": {
+        "t": 0.46,
+        "type": "capture_retreat_phase",
+        "stage": 4,
+        "duration": 1.45,
+        "bossId": 628686008
+      }
+    },
+    {
+      "at": "+0.460s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.46,
+        "type": "audio_cue",
+        "cue": "captureSuccess",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.460s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.46,
+        "type": "audio_cue",
+        "cue": "captureRetreat",
+        "atmosphereId": "classic-arcade",
+        "audioTheme": "classic-arcade",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+2.330s",
+      "level": "info",
+      "action": "harness_stop",
+      "message": "harness_stop",
+      "data": {
+        "t": 2.33,
+        "type": "harness_stop",
+        "label": "capture-shot-late"
+      }
+    },
+    {
+      "at": "+2.330s",
+      "level": "info",
+      "action": "capture_export_reset",
+      "message": "capture_export_reset",
+      "data": {
+        "t": 2.33,
+        "type": "capture_export_reset",
+        "reason": "capture-shot-late_forced_export",
+        "started": false,
+        "attract": false,
+        "stage": 4,
+        "score": 0,
+        "lives": 2
+      }
+    }
+  ]
+}

@@ -1,16 +1,31 @@
 {
   "ok": true,
   "artifactType": "codex-context-checkpoint",
-  "generatedAt": "2026-05-31T12:25:48.645Z",
-  "label": "authority-handoff-challenge-timing-evidence",
+  "generatedAt": "2026-06-01T16:42:17.733Z",
+  "label": "guardians-routeability-before-after",
   "root": "/Users/sgwoods/Development/Codex/Codex-test1",
-  "branch": "codex/macbook-fullscreen-timing-alignment-wip",
-  "commit": "0d74533e6",
-  "commitSubject": "Improve Aurora challenge timing evidence",
-  "dirtyFileCountExcludingCheckpoint": 0,
-  "statusLinesExcludingCheckpoint": [],
-  "diffStat": "",
-  "recentLog": "0d74533e6 (HEAD -> codex/macbook-fullscreen-timing-alignment-wip, origin/codex/macbook-fullscreen-timing-alignment-wip) Improve Aurora challenge timing evidence\n2d144d5c1 Calibrate reference sprite proportions\n4650b755f Fix arcade fullscreen playfield visibility\nb14cb07d5 Refine Aurora player fighter visual fidelity\nf22f00d51 Calibrate challenge sweeps against full analyzer rejections\n46f19bc04 Gate Stage 7 challenge candidates with full analyzer review\n56e319f29 Ground challenge timing in target motion tracks\n9a9ede246 Measure challenge visible-motion timing",
+  "branch": "codex/macbook-ingestion-grammar-sync",
+  "commit": "71c52ca0a",
+  "commitSubject": "Expose routeability review in ingestion grammar",
+  "dirtyFileCountExcludingCheckpoint": 14,
+  "statusLinesExcludingCheckpoint": [
+    "M MOTION_GRAMMAR_VOCABULARY.md",
+    " M ingestion-dashboard.json",
+    " M package.json",
+    " M reference-artifacts/analyses/galaxy-guardians-identity/README.md",
+    " M tools/harness/guardians-long-surface-lib.js",
+    "?? reference-artifacts/analyses/galaxy-guardians-identity/motion-grammar-candidates-0.1.json",
+    "?? reference-artifacts/analyses/galaxy-guardians-identity/motion-grammar-candidates-0.1.md",
+    "?? reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.json",
+    "?? reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.md",
+    "?? reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.svg",
+    "?? tools/harness/analyze-galaxy-guardians-motion-grammar-candidates.js",
+    "?? tools/harness/analyze-galaxy-guardians-routeability-before-after.js",
+    "?? tools/harness/check-galaxy-guardians-motion-grammar-candidates.js",
+    "?? tools/harness/check-galaxy-guardians-routeability-before-after.js"
+  ],
+  "diffStat": "MOTION_GRAMMAR_VOCABULARY.md                       | 20 +++++++++++\n ingestion-dashboard.json                           | 28 +++++++++++++--\n package.json                                       |  4 +++\n .../analyses/galaxy-guardians-identity/README.md   | 12 +++++++\n tools/harness/guardians-long-surface-lib.js        | 40 ++++++++++++++++++++++\n 5 files changed, 102 insertions(+), 2 deletions(-)",
+  "recentLog": "71c52ca0a (HEAD -> codex/macbook-ingestion-grammar-sync, origin/codex/macbook-ingestion-grammar-sync) Expose routeability review in ingestion grammar\nc722fac34 Add human-perfect guard to challenge candidate sweeps\n9bb463aa9 (origin/main, origin/HEAD) Refresh code review packet for release doc wording update\n9878d3dce Refresh release conformance docs for artifact wording\nd013c62e5 Refresh code review packet for artifact wording\nc33b4689b Clarify Aurora and Guardians artifact requests\nb3d186c81 Refresh code review packet for release doc update\n55c147259 Refresh release conformance docs for Windigo intake",
   "machineStatus": {
     "ok": true,
     "mode": "status",
@@ -39,9 +54,9 @@
       }
     },
     "repo": {
-      "branch": "codex/macbook-fullscreen-timing-alignment-wip",
-      "dirty": false,
-      "upstream": "origin/codex/macbook-fullscreen-timing-alignment-wip",
+      "branch": "codex/macbook-ingestion-grammar-sync",
+      "dirty": true,
+      "upstream": "origin/codex/macbook-ingestion-grammar-sync",
       "ahead": 0,
       "behind": 0,
       "remote_ok": true
@@ -59,7 +74,7 @@
         "ok": true,
         "reachable": true,
         "root_ok": true,
-        "url": "http://127.0.0.1:8000/",
+        "url": "http://localhost:8000/",
         "listeners": [
           {
             "pid": 25405,
@@ -72,7 +87,7 @@
         "ok": true,
         "reachable": true,
         "root_ok": true,
-        "url": "http://127.0.0.1:4311/api/runs",
+        "url": "http://localhost:4311/api/runs",
         "listeners": [
           {
             "pid": 25481,
@@ -87,8 +102,8 @@
       "dev": {
         "ok": true,
         "version": "1.4.0",
-        "label": "1.4.0.1+build.932.sha.19db4fa4",
-        "commit": "19db4fa4",
+        "label": "1.4.0.1+build.975.sha.9bb463aa",
+        "commit": "9bb463aa",
         "releaseChannel": "development"
       },
       "beta": {
@@ -114,16 +129,16 @@
     ]
   },
   "plan": [
-    "MacBook WIP branch is clean and pushed; authority machine should integrate Aurora challenge timing evidence after stacked base e397c2c75/2d144d5c1 path is understood"
+    "Advance Guardians movement quality through shared motion grammar and routeability candidate gates"
   ],
   "next": [
-    "On iMacM1 fetch origin, inspect codex/macbook-fullscreen-timing-alignment-wip at 0d74533e6 plus checkpoint commit if present, merge after current release branch/base, run verification, then decide dev/beta publish from authority machine only"
+    "Create browser-visible before-after capture or promote the candidate behind stronger gates"
   ],
   "notes": [
     "Codex Desktop does not expose a repo command that forces internal chat compaction. The safe replacement is a manual checkpoint plus a deliberate fresh session from this file.",
     "This checkpoint intentionally filters its own generated files out of the dirty-status read so it can be committed as the recovery point."
   ],
-  "restartPrompt": "You are continuing Aurora Galactica / Platinum work from a durable Codex checkpoint.\n\nRepo path:\n/Users/sgwoods/Development/Codex/Codex-test1\n\nStart by running:\ngit branch --show-current\ngit status --short\ngit log -5 --oneline --decorate\nnpm run machine:status\n\nRead first:\n- CODEX_CONTEXT_CHECKPOINT.md\n- RESTART_FROM_HERE.md\n- MULTI_MACHINE_WORKFLOW.md\n\nCurrent checkpoint:\n- label: authority-handoff-challenge-timing-evidence\n- generated: 2026-05-31T12:25:48.645Z\n- branch: codex/macbook-fullscreen-timing-alignment-wip\n- commit: 0d74533e6 Improve Aurora challenge timing evidence\n- dirty files excluding checkpoint self-output: 0\n\nContinue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.",
+  "restartPrompt": "You are continuing Aurora Galactica / Platinum work from a durable Codex checkpoint.\n\nRepo path:\n/Users/sgwoods/Development/Codex/Codex-test1\n\nStart by running:\ngit branch --show-current\ngit status --short\ngit log -5 --oneline --decorate\nnpm run machine:status\n\nRead first:\n- CODEX_CONTEXT_CHECKPOINT.md\n- RESTART_FROM_HERE.md\n- MULTI_MACHINE_WORKFLOW.md\n\nCurrent checkpoint:\n- label: guardians-routeability-before-after\n- generated: 2026-06-01T16:42:17.733Z\n- branch: codex/macbook-ingestion-grammar-sync\n- commit: 71c52ca0a Expose routeability review in ingestion grammar\n- dirty files excluding checkpoint self-output: 14\n\nContinue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.",
   "files": {
     "markdown": "CODEX_CONTEXT_CHECKPOINT.md",
     "json": "reference-artifacts/analyses/codex-context-checkpoint/latest.json"

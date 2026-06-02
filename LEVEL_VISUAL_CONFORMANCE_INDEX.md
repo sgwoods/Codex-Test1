@@ -13,42 +13,42 @@ The generated index now contains 39 ordered rows: 31 regular levels and 8 challe
 | 1 | Level 1 | regular | exact regular-stage target | n/a/10 | exact | Exact frame exists, but the current index still uses a single mid-level snapshot; next precision requires temporal path overlays and per-entry group labels. |
 | 2 | Level 2 | regular | exact regular-stage target | n/a/10 | exact | Exact frame exists, but the current index still uses a single mid-level snapshot; next precision requires temporal path overlays and per-entry group labels. |
 | 3 | Level 3 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 3 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
-| 4 | Challenging Stage 1 (Levels 3-4) | challenge | strict challenge-stage scorer | 4.2/10 | exact | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns. |
+| 4 | Challenging Stage 3-4 | challenge | strict challenge-stage scorer | 4.2/10 | exact | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns. |
 | 5 | Level 4 | regular | exact regular-stage target | n/a/10 | exact | Exact frame exists, but the current index still uses a single mid-level snapshot; next precision requires temporal path overlays and per-entry group labels. |
 | 6 | Level 5 | regular | exact regular-stage target | n/a/10 | exact | Exact frame exists, but the current index still uses a single mid-level snapshot; next precision requires temporal path overlays and per-entry group labels. |
 | 7 | Level 6 | regular | exact regular-stage target | n/a/10 | exact | Exact frame exists, but the current index still uses a single mid-level snapshot; next precision requires temporal path overlays and per-entry group labels. |
 | 8 | Level 7 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 7 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
-| 9 | Challenging Stage 2 (Levels 7-8) | challenge | strict challenge-stage scorer | 4.1/10 | exact | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns. |
+| 9 | Challenging Stage 7-8 | challenge | strict challenge-stage scorer | 4.1/10 | exact | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns. |
 | 10 | Level 8 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 8 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
 | 11 | Level 9 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 9 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
 | 12 | Level 10 | regular | exact regular-stage target | n/a/10 | exact | Exact frame exists, but the current index still uses a single mid-level snapshot; next precision requires temporal path overlays and per-entry group labels. |
 | 13 | Level 11 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 11 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
-| 14 | Challenging Stage 3 (Levels 11-12) | challenge | strict challenge-stage scorer | 4.3/10 | exact | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns. |
+| 14 | Challenging Stage 11-12 | challenge | strict challenge-stage scorer | 4.3/10 | exact | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns. |
 | 15 | Level 12 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 12 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
 | 16 | Level 13 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 13 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
 | 17 | Level 14 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 14 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
 | 18 | Level 15 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 15 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
-| 19 | Challenging Stage 4 (Levels 15-16) | challenge | strict challenge-stage scorer | 4.2/10 | exact | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns. |
+| 19 | Challenging Stage 15-16 | challenge | strict challenge-stage scorer | 4.2/10 | exact | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns. |
 | 20 | Level 16 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 16 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
 | 21 | Level 17 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 17 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
 | 22 | Level 18 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 18 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
 | 23 | Level 19 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 19 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
-| 24 | Challenging Stage 5 (Levels 19-20) | challenge | strict challenge-stage scorer | 4.3/10 | exact | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns. |
+| 24 | Challenging Stage 19-20 | challenge | strict challenge-stage scorer | 4.3/10 | exact | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns. |
 | 25 | Level 20 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 20 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
 | 26 | Level 21 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 21 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
 | 27 | Level 22 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 22 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
 | 28 | Level 23 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 23 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
-| 29 | Challenging Stage 6 (Levels 23-24) | challenge | strict challenge-stage scorer | 4.2/10 | exact | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns. |
+| 29 | Challenging Stage 23-24 | challenge | strict challenge-stage scorer | 4.2/10 | exact | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns. |
 | 30 | Level 24 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 24 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
 | 31 | Level 25 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 25 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
 | 32 | Level 26 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 26 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
 | 33 | Level 27 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 27 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
-| 34 | Challenging Stage 7 (Levels 27-28) | challenge | strict challenge-stage scorer | 4/10 | exact | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns. |
+| 34 | Challenging Stage 27-28 | challenge | strict challenge-stage scorer | 4/10 | exact | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns. |
 | 35 | Level 28 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 28 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
 | 36 | Level 29 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 29 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
 | 37 | Level 30 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 30 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
 | 38 | Level 31 | regular | representative regular-stage target | n/a/10 | representative | Exact target frame for Level 31 is missing from the ingested corpus; this should not be scored as fully grounded visual conformance. |
-| 39 | Challenging Stage 8 (Levels 31-32) | challenge | strict challenge-stage scorer | 4.3/10 | exact | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns. |
+| 39 | Challenging Stage 31-32 | challenge | strict challenge-stage scorer | 4.3/10 | exact | Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns. |
 
 ## Level 1
 
@@ -141,7 +141,7 @@ The generated index now contains 39 ordered rows: 31 regular levels and 8 challe
 - Boss Galaga: current `reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line.png`; target `reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png`
 - Specialty challenge alien: current `reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly.png`; target `reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png`
 
-## Challenging Stage 1 (Levels 3-4)
+## Challenging Stage 3-4
 
 ![Aurora current](reference-artifacts/analyses/level-visual-conformance-index/latest-current-screenshots/challenge-01.png)
 
@@ -151,7 +151,7 @@ The generated index now contains 39 ordered rows: 31 regular levels and 8 challe
 
 **Galaga target 10s video:** `reference-artifacts/analyses/level-visual-conformance-index/latest-target-videos/challenge-01.webm`
 
-**Target source:** Galaga Challenging Stage 1 (Levels 3-4); exact target row.
+**Target source:** Galaga Challenging Stage 3-4; exact target row.
 
 **Current roles:** Bee / Zako: 20, Butterfly / escort: 20
 
@@ -295,7 +295,7 @@ The generated index now contains 39 ordered rows: 31 regular levels and 8 challe
 - Boss Galaga: current `reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line.png`; target `reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png`
 - Specialty challenge alien: current `reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly.png`; target `reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png`
 
-## Challenging Stage 2 (Levels 7-8)
+## Challenging Stage 7-8
 
 ![Aurora current](reference-artifacts/analyses/level-visual-conformance-index/latest-current-screenshots/challenge-02.png)
 
@@ -305,7 +305,7 @@ The generated index now contains 39 ordered rows: 31 regular levels and 8 challe
 
 **Galaga target 10s video:** `reference-artifacts/analyses/level-visual-conformance-index/latest-target-videos/challenge-02.webm`
 
-**Target source:** Galaga Challenging Stage 2 (Levels 7-8); exact target row.
+**Target source:** Galaga Challenging Stage 7-8; exact target row.
 
 **Current roles:** Boss Galaga: 10, Butterfly / escort: 10, Captured / rogue fighter: 10, Specialty challenge alien: 8, Bee / Zako: 2
 
@@ -451,7 +451,7 @@ The generated index now contains 39 ordered rows: 31 regular levels and 8 challe
 - Boss Galaga: current `reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line.png`; target `reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png`
 - Specialty challenge alien: current `reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly.png`; target `reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png`
 
-## Challenging Stage 3 (Levels 11-12)
+## Challenging Stage 11-12
 
 ![Aurora current](reference-artifacts/analyses/level-visual-conformance-index/latest-current-screenshots/challenge-03.png)
 
@@ -461,7 +461,7 @@ The generated index now contains 39 ordered rows: 31 regular levels and 8 challe
 
 **Galaga target 10s video:** `reference-artifacts/analyses/level-visual-conformance-index/latest-target-videos/challenge-03.webm`
 
-**Target source:** Galaga Challenging Stage 3 (Levels 11-12); exact target row.
+**Target source:** Galaga Challenging Stage 11-12; exact target row.
 
 **Current roles:** Boss Galaga: 12, Butterfly / escort: 9, Captured / rogue fighter: 9, Challenge dragonfly family: 4, Specialty challenge alien: 2
 
@@ -607,7 +607,7 @@ The generated index now contains 39 ordered rows: 31 regular levels and 8 challe
 - Boss Galaga: current `reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line.png`; target `reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png`
 - Specialty challenge alien: current `reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly.png`; target `reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png`
 
-## Challenging Stage 4 (Levels 15-16)
+## Challenging Stage 15-16
 
 ![Aurora current](reference-artifacts/analyses/level-visual-conformance-index/latest-current-screenshots/challenge-04.png)
 
@@ -617,7 +617,7 @@ The generated index now contains 39 ordered rows: 31 regular levels and 8 challe
 
 **Galaga target 10s video:** `reference-artifacts/analyses/level-visual-conformance-index/latest-target-videos/challenge-04.webm`
 
-**Target source:** Galaga Challenging Stage 4 (Levels 15-16); exact target row.
+**Target source:** Galaga Challenging Stage 15-16; exact target row.
 
 **Current roles:** Butterfly / escort: 7, Boss Galaga: 6, Captured / rogue fighter: 6, Challenge dragonfly family: 4, Specialty challenge alien: 4
 
@@ -763,7 +763,7 @@ The generated index now contains 39 ordered rows: 31 regular levels and 8 challe
 - Boss Galaga: current `reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line.png`; target `reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png`
 - Specialty challenge alien: current `reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly.png`; target `reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png`
 
-## Challenging Stage 5 (Levels 19-20)
+## Challenging Stage 19-20
 
 ![Aurora current](reference-artifacts/analyses/level-visual-conformance-index/latest-current-screenshots/challenge-05.png)
 
@@ -773,7 +773,7 @@ The generated index now contains 39 ordered rows: 31 regular levels and 8 challe
 
 **Galaga target 10s video:** `reference-artifacts/analyses/level-visual-conformance-index/latest-target-videos/challenge-05.webm`
 
-**Target source:** Galaga Challenging Stage 5 (Levels 19-20); exact target row.
+**Target source:** Galaga Challenging Stage 19-20; exact target row.
 
 **Current roles:** Butterfly / escort: 7, Captured / rogue fighter: 4, Boss Galaga: 3, Specialty challenge alien: 2, Challenge dragonfly family: 1
 
@@ -919,7 +919,7 @@ The generated index now contains 39 ordered rows: 31 regular levels and 8 challe
 - Boss Galaga: current `reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line.png`; target `reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png`
 - Specialty challenge alien: current `reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly.png`; target `reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png`
 
-## Challenging Stage 6 (Levels 23-24)
+## Challenging Stage 23-24
 
 ![Aurora current](reference-artifacts/analyses/level-visual-conformance-index/latest-current-screenshots/challenge-06.png)
 
@@ -929,7 +929,7 @@ The generated index now contains 39 ordered rows: 31 regular levels and 8 challe
 
 **Galaga target 10s video:** `reference-artifacts/analyses/level-visual-conformance-index/latest-target-videos/challenge-06.webm`
 
-**Target source:** Galaga Challenging Stage 6 (Levels 23-24); exact target row.
+**Target source:** Galaga Challenging Stage 23-24; exact target row.
 
 **Current roles:** Captured / rogue fighter: 9, Challenge dragonfly family: 7, Boss Galaga: 6, Butterfly / escort: 5, Challenge mosquito family: 2
 
@@ -1076,7 +1076,7 @@ The generated index now contains 39 ordered rows: 31 regular levels and 8 challe
 - Boss Galaga: current `reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line.png`; target `reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png`
 - Specialty challenge alien: current `reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly.png`; target `reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png`
 
-## Challenging Stage 7 (Levels 27-28)
+## Challenging Stage 27-28
 
 ![Aurora current](reference-artifacts/analyses/level-visual-conformance-index/latest-current-screenshots/challenge-07.png)
 
@@ -1086,7 +1086,7 @@ The generated index now contains 39 ordered rows: 31 regular levels and 8 challe
 
 **Galaga target 10s video:** `reference-artifacts/analyses/level-visual-conformance-index/latest-target-videos/challenge-07.webm`
 
-**Target source:** Galaga Challenging Stage 7 (Levels 27-28); exact target row.
+**Target source:** Galaga Challenging Stage 27-28; exact target row.
 
 **Current roles:** No active enemy roles visible in this sampled current frame.
 
@@ -1228,7 +1228,7 @@ The generated index now contains 39 ordered rows: 31 regular levels and 8 challe
 - Boss Galaga: current `reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line.png`; target `reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png`
 - Specialty challenge alien: current `reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly.png`; target `reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png`
 
-## Challenging Stage 8 (Levels 31-32)
+## Challenging Stage 31-32
 
 ![Aurora current](reference-artifacts/analyses/level-visual-conformance-index/latest-current-screenshots/challenge-08.png)
 
@@ -1238,7 +1238,7 @@ The generated index now contains 39 ordered rows: 31 regular levels and 8 challe
 
 **Galaga target 10s video:** `reference-artifacts/analyses/level-visual-conformance-index/latest-target-videos/challenge-08.webm`
 
-**Target source:** Galaga Challenging Stage 8 (Levels 31-32); exact target row.
+**Target source:** Galaga Challenging Stage 31-32; exact target row.
 
 **Current roles:** Butterfly / escort: 5, Captured / rogue fighter: 4, Specialty challenge alien: 4, Boss Galaga: 3
 

@@ -15,14 +15,14 @@ Selection mode: explicit-challenge-list.
 
 | Challenge | Label | Window Duration | Target Last Visible | Aurora Last Visible | Visible Drift | Target Result Hold | Aurora Result Hold | Result Hold Drift | Aurora Challenge End | End Drift | Paired Clip |
 | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
-| 1 | Challenging Stage 1 (Levels 3-4) | 31s | 15.88s | 14.7s | -1.18s | 15.12s | 15.2s | 0.08s | 29.9s | -1.1s | `reference-artifacts/analyses/level-visual-timing-alignment/latest-paired-videos/challenge-01-target-vs-current-aligned.webm` |
-| 2 | Challenging Stage 2 (Levels 7-8) | 39s | 15.88s | 14.7s | -1.18s | 23.12s | 23.3s | 0.18s | 38s | -1s | `reference-artifacts/analyses/level-visual-timing-alignment/latest-paired-videos/challenge-02-target-vs-current-aligned.webm` |
-| 3 | Challenging Stage 3 (Levels 11-12) | 38s | 15.88s | 13.4s | -2.48s | 22.12s | 22.3s | 0.18s | 35.7s | -2.3s | `reference-artifacts/analyses/level-visual-timing-alignment/latest-paired-videos/challenge-03-target-vs-current-aligned.webm` |
-| 4 | Challenging Stage 4 (Levels 15-16) | 35s | 15.88s | 14s | -1.88s | 19.12s | 19.3s | 0.18s | 33.3s | -1.7s | `reference-artifacts/analyses/level-visual-timing-alignment/latest-paired-videos/challenge-04-target-vs-current-aligned.webm` |
+| 1 | Challenging Stage 3-4 | 31s | 15.88s | 14.7s | -1.18s | 15.12s | 15.2s | 0.08s | 29.9s | -1.1s | `reference-artifacts/analyses/level-visual-timing-alignment/latest-paired-videos/challenge-01-target-vs-current-aligned.webm` |
+| 2 | Challenging Stage 7-8 | 39s | 15.88s | 14.7s | -1.18s | 23.12s | 23.3s | 0.18s | 38s | -1s | `reference-artifacts/analyses/level-visual-timing-alignment/latest-paired-videos/challenge-02-target-vs-current-aligned.webm` |
+| 3 | Challenging Stage 11-12 | 38s | 15.88s | 13.4s | -2.48s | 22.12s | 22.3s | 0.18s | 35.7s | -2.3s | `reference-artifacts/analyses/level-visual-timing-alignment/latest-paired-videos/challenge-03-target-vs-current-aligned.webm` |
+| 4 | Challenging Stage 15-16 | 35s | 15.88s | 14s | -1.88s | 19.12s | 19.3s | 0.18s | 33.3s | -1.7s | `reference-artifacts/analyses/level-visual-timing-alignment/latest-paired-videos/challenge-04-target-vs-current-aligned.webm` |
 
 
 
-## Challenging Stage 1 (Levels 3-4)
+## Challenging Stage 3-4
 
 **Aligned clip:** `reference-artifacts/analyses/level-visual-timing-alignment/latest-paired-videos/challenge-01-target-vs-current-aligned.webm`
 
@@ -34,7 +34,7 @@ Selection mode: explicit-challenge-list.
 
 **Known limit:** This aligns clips from stage start, but target object tracks and current object tracks are not yet time-warped. Human review should look for pace drift, group-count drift, visible arrival-vs-appearance drift, and whether the scoring window arrives at the same relative time.
 
-## Challenging Stage 2 (Levels 7-8)
+## Challenging Stage 7-8
 
 **Aligned clip:** `reference-artifacts/analyses/level-visual-timing-alignment/latest-paired-videos/challenge-02-target-vs-current-aligned.webm`
 
@@ -46,7 +46,7 @@ Selection mode: explicit-challenge-list.
 
 **Known limit:** This aligns clips from stage start, but target object tracks and current object tracks are not yet time-warped. Human review should look for pace drift, group-count drift, visible arrival-vs-appearance drift, and whether the scoring window arrives at the same relative time.
 
-## Challenging Stage 3 (Levels 11-12)
+## Challenging Stage 11-12
 
 **Aligned clip:** `reference-artifacts/analyses/level-visual-timing-alignment/latest-paired-videos/challenge-03-target-vs-current-aligned.webm`
 
@@ -58,7 +58,7 @@ Selection mode: explicit-challenge-list.
 
 **Known limit:** This aligns clips from stage start, but target object tracks and current object tracks are not yet time-warped. Human review should look for pace drift, group-count drift, visible arrival-vs-appearance drift, and whether the scoring window arrives at the same relative time.
 
-## Challenging Stage 4 (Levels 15-16)
+## Challenging Stage 15-16
 
 **Aligned clip:** `reference-artifacts/analyses/level-visual-timing-alignment/latest-paired-videos/challenge-04-target-vs-current-aligned.webm`
 

@@ -38,6 +38,7 @@ window.__galagaHarness__={
  if(cfg.playerTwoPersona!==undefined&&typeof setPlayerTwoPersona==='function')setPlayerTwoPersona(cfg.playerTwoPersona,{silent:1,source:'harness'});
  if(cfg.playerTwo!==undefined&&typeof setPlayerTwoSelection==='function')setPlayerTwoSelection(!!cfg.playerTwo,{silent:1,source:'harness'});
  if(cfg.watchPersona!==undefined&&typeof setWatchPersona==='function')setWatchPersona(cfg.watchPersona,{silent:1,source:'harness'});
+ if(cfg.watchScope!==undefined&&typeof setWatchScope==='function')setWatchScope(cfg.watchScope,{silent:1,source:'harness'});
  if(typeof setHarnessClockControlled==='function')setHarnessClockControlled(!!cfg.controlledClock);
  if(cfg.controlledClock&&Number.isFinite(+cfg.initialSimT)){
   S.simT=+cfg.initialSimT;
@@ -515,9 +516,11 @@ window.__galagaHarness__={
   return this.playerTwoState();
  },
  playerTwoState(){
-  return{
+ return{
    selection:typeof playerTwoSelectionState==='function'?playerTwoSelectionState():null,
+   watchScope:typeof selectedWatchScope==='function'?selectedWatchScope():'game',
    run:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,
+   hudLeft:left?.textContent||'',
    hudRight:right?.textContent||'',
    accountNotice:LEADERBOARD.accountNotice||''
   };
@@ -525,7 +528,8 @@ window.__galagaHarness__={
  startWatchMode(cfg={}){
   if(typeof setSeed==='function'&&cfg.seed!==undefined)setSeed(cfg.seed);
   if(typeof setWatchPersona==='function')setWatchPersona(cfg.persona||selectedWatchPersona?.()||'advanced',{silent:1,source:'harness'});
-  if(typeof armWatchMode==='function')armWatchMode(cfg.persona||selectedWatchPersona?.()||'advanced',{source:'harness'});
+  if(typeof setWatchScope==='function')setWatchScope(cfg.scope||cfg.watchScope||selectedWatchScope?.()||'game',{silent:1,source:'harness'});
+  if(typeof armWatchMode==='function')armWatchMode(cfg.persona||selectedWatchPersona?.()||'advanced',{source:'harness',scope:cfg.scope||cfg.watchScope||selectedWatchScope?.()||'game'});
   return this.state();
  },
  startPlayerTwoTurn(){
@@ -717,6 +721,7 @@ window.__galagaHarness__={
    started,
    paused,
    stage:S.stage,
+   pendingStage:S.pendingStage||0,
    score:S.score,
    lives:Math.max(0,S.lives+1),
    challenge:!!S.challenge,
@@ -728,6 +733,7 @@ window.__galagaHarness__={
    harnessPersona:S.harnessPersona||null,
    watchMode:!!S.watchMode,
    watchPersona:S.watchPersona||'',
+   watchScope:S.watchScope||'game',
    playerTwo:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,
    atmosphere:atmosphere?{
     id:atmosphere.id||'',
@@ -1146,6 +1152,7 @@ window.__galagaHarness__={
     pointCount:Array.isArray(e.referencePath.points)?e.referencePath.points.length:0,
     durationS:+(+e.referencePath.durationS||0).toFixed(2)
    }:null,
+   referenceLeadIn:+(+e.referenceLeadIn||0).toFixed(3),
    tm:+(+e.tm||0).toFixed(3),
    flapOpen:Math.sin((+e.tm||0)*11+(+e.ph||0))>.12,
    animationPhase:+(((+e.tm||0)*11+(+e.ph||0))%(Math.PI*2)).toFixed(3),
@@ -1185,6 +1192,11 @@ window.__galagaHarness__={
  },
  renderState(){
   return window.__platinumRenderDebug||window.__auroraRenderDebug||{carryDraws:[]};
+ },
+ stageBadgeLayout(stage=S.stage){
+  return typeof stageBadgeLayout==='function'
+   ? stageBadgeLayout(stage)
+   : [];
  },
  guardiansState(){
   return typeof summarizeGalaxyGuardiansDevPreview==='function'

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { withHarnessPage, sleep } = require('./browser-check-util');
+const { withHarnessPage } = require('./browser-check-util');
 
 // The first 350ms sits directly on top of staggered spawn thresholds and is
 // too frame-sensitive to be a trustworthy regression gate. We sample once the
@@ -77,6 +77,35 @@ function validateReferencePathSetup(state, expected){
   }
 }
 
+function validateReferencePlaybackClock(state, elapsedSeconds){
+  const enemies = Array.isArray(state?.enemies) ? state.enemies : [];
+  const spawnBase = enemies.reduce((min, enemy) => Math.min(min, +enemy.spawnPlan || 0), Infinity);
+  const tracked = enemies.filter(enemy => enemy?.referencePath && enemy.spawn <= 0);
+  const drifts = tracked.map(enemy => {
+    const expectedTm = Math.max(0, elapsedSeconds - ((+enemy.spawnPlan || 0) - spawnBase));
+    const drift = +((+enemy.tm || 0) - expectedTm).toFixed(3);
+    return {
+      id: enemy.id,
+      pathFamily: enemy.pathFamily,
+      sourceTrackId: enemy.referencePath.sourceTrackId,
+      spawnPlan: enemy.spawnPlan,
+      tm: enemy.tm,
+      expectedTm: +expectedTm.toFixed(3),
+      drift
+    };
+  });
+  const bad = drifts.filter(entry => Math.abs(entry.drift) > 0.08);
+  if(bad.length){
+    fail('reference-backed challenge paths must advance in real elapsed seconds, not synthetic path-speed multipliers', {
+      stage: state?.stage,
+      elapsedSeconds,
+      bad,
+      drifts
+    });
+  }
+  return drifts;
+}
+
 function validateStage7ReferencePathSetup(state){
   validateReferencePathSetup(state, { stage: 7, layoutId: 'scorpion-cross-sweep' });
 }
@@ -85,8 +114,35 @@ function validateStage11ReferencePathSetup(state){
   validateReferencePathSetup(state, { stage: 11, layoutId: 'stingray-crown-hook-hybrid' });
 }
 
+function validateReferenceLeadIn(state, sampleAt){
+  const leadIns = (state?.enemies || []).filter(enemy =>
+    enemy?.referencePath
+    && enemy.spawn > 0
+    && enemy.referenceLeadIn > 0.05
+    && enemy.referenceLeadIn < 1
+  );
+  if(leadIns.length < 4){
+    fail('reference-backed challenge waves should visibly lead in from the side before the recorded track begins', {
+      stage: state?.stage,
+      sampleAt,
+      leadIns,
+      enemies: state?.enemies
+    });
+  }
+  const magic = leadIns.filter(enemy => enemy.x > 20 && enemy.x < 260 && enemy.referenceLeadIn < 0.35);
+  if(magic.length){
+    fail('reference-backed challenge lead-in moved too deep into the playfield too early', {
+      stage: state?.stage,
+      sampleAt,
+      magic,
+      leadIns
+    });
+  }
+  return leadIns;
+}
+
 async function main(){
-  const result = await withHarnessPage({ stage: 3, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
+  const result = await withHarnessPage({ skipStart: true, stage: 3, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
     await page.evaluate(() => window.__galagaHarness__.setupChallengeMotionProfileTest({ stage: 3 }));
     return sampleChallengeMotion(page);
   });
@@ -114,28 +170,43 @@ async function main(){
     }
   }
 
-  const stage7 = await withHarnessPage({ stage: 7, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
+  const stage7 = await withHarnessPage({ skipStart: true, stage: 7, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
     const initial = await page.evaluate(() => window.__galagaHarness__.setupChallengeMotionProfileTest({ stage: 7 }));
-    await sleep(700);
+    await page.evaluate(() => window.__galagaHarness__.advanceFor(1, { step: 1 / 60, stopOnGameOver: false }));
     const underway = await page.evaluate(() => window.__galagaHarness__.challengeFormationState());
-    return { initial, underway };
+    return { initial, underway, clockDrifts: validateReferencePlaybackClock(underway, 1) };
   });
   validateStage7ReferencePathSetup(stage7.initial);
   validateStage7ReferencePathSetup(stage7.underway);
 
-  const stage11 = await withHarnessPage({ stage: 11, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
+  const stage11 = await withHarnessPage({ skipStart: true, stage: 11, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
     const initial = await page.evaluate(() => window.__galagaHarness__.setupChallengeMotionProfileTest({ stage: 11 }));
-    await sleep(700);
+    await page.evaluate(() => window.__galagaHarness__.advanceFor(1, { step: 1 / 60, stopOnGameOver: false }));
     const underway = await page.evaluate(() => window.__galagaHarness__.challengeFormationState());
-    return { initial, underway };
+    return { initial, underway, clockDrifts: validateReferencePlaybackClock(underway, 1) };
   });
   validateStage11ReferencePathSetup(stage11.initial);
   validateStage11ReferencePathSetup(stage11.underway);
 
+  const stage7LeadIn = await withHarnessPage({ stage: 7, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
+    const initial = await page.evaluate(() => window.__galagaHarness__.challengeFormationState());
+    const referenceEnemies = (initial.enemies || []).filter(enemy => enemy.referencePath);
+    const earliestSpawn = Math.min(...referenceEnemies.map(enemy => +enemy.spawn || 0));
+    const sampleAt = Math.max(0.05, earliestSpawn - 0.34);
+    await page.evaluate(seconds => window.__galagaHarness__.advanceFor(seconds, {
+      step: 1 / 60,
+      stopOnGameOver: false
+    }), sampleAt);
+    const underway = await page.evaluate(() => window.__galagaHarness__.challengeFormationState());
+    return { sampleAt, initial, underway, leadIns: validateReferenceLeadIn(underway, sampleAt) };
+  });
+
   console.log(JSON.stringify({ ok: true, samples: result, stage7ReferencePath: {
     enemyCount: stage7.initial.enemies.length,
     referencePathGroups: stage7.initial.layout.groupReferencePaths.length,
-    sourceTrackIds: [...new Set(stage7.initial.enemies.map(e => e.referencePath?.sourceTrackId).filter(Boolean))]
+    sourceTrackIds: [...new Set(stage7.initial.enemies.map(e => e.referencePath?.sourceTrackId).filter(Boolean))],
+    leadInCount: stage7LeadIn.leadIns.length,
+    leadInSampleAt: +stage7LeadIn.sampleAt.toFixed(3)
   }, stage11ReferencePath: {
     enemyCount: stage11.initial.enemies.length,
     referencePathGroups: stage11.initial.layout.groupReferencePaths.length,

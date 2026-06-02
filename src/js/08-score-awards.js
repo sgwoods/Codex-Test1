@@ -47,6 +47,19 @@ function awardScorePoints(points){
  if(!value)return 0;
  const before=S.score|0;
  S.score=before+value;
+ const owner=typeof activePlayerTwoLaneKey==='function'&&S.playerTwo?.enabled
+  ? activePlayerTwoLaneKey(S.playerTwo)
+  : 'p1';
+ if(typeof logEvent==='function')logEvent('score_awarded',{
+  points:value,
+  before,
+  after:S.score|0,
+  owner,
+  activeTurn:S.playerTwo?.activeTurn||'p1',
+  playerTwoMode:!!S.playerTwo?.enabled,
+  humanScore:S.playerTwo?.p1?.score??S.playerTwo?.humanScore??null,
+  playerTwoScore:S.playerTwo?.p2?.score??S.playerTwo?.score??null
+ });
  awardExtendShips(before,S.score|0);
  return value;
 }
@@ -211,7 +224,10 @@ function finalizeChallengeClear(){
   ? currentGamePackReferenceTimingField('challengeResults','resultHoldWindow',S.stage,1.45)
   : (challengeResultsTiming?.resultHoldWindow??1.45);
  S.banner=resultBannerWindow;
- S.pendingStage=S.stage+1;
+ const nextChallengeStage=S.watchMode&&S.watchScope==='challenges'
+  ? internalStageForChallengeStageNumber(challengeStageNumberForInternalStage(S.stage)+1)
+  : 0;
+ S.pendingStage=nextChallengeStage||S.stage+1;
  S.lastChallengeClearT=S.stageClock;
  S.challengeTransitionStallLogged=0;
  S.postChallengeT=resultHoldWindow;
@@ -225,6 +241,7 @@ function finalizeChallengeClear(){
  logEvent('challenge_transition_queued',{
   stage:S.stage,
   pendingStage:S.pendingStage,
+  watchScope:S.watchScope||'game',
   hits:S.ch.hits,
   total:S.ch.total,
   postChallengeT:+S.postChallengeT.toFixed(3),

@@ -70,6 +70,7 @@ function updateAuroraGameplay(dt){
  const simT=advanceGameplayClock(dt);
  const p=S.p;S.t=stageTune(S.stage,S.challenge);const T=S.t;
  if(typeof updatePlayerTwoRival==='function')updatePlayerTwoRival(dt);
+ if(typeof consumePlayerTwoTurnSwitchApplied==='function'&&consumePlayerTwoTurnSwitchApplied())return;
  if(S.attract){
   ATTRACT.timer=Math.max(0,ATTRACT.timer-dt);
   ATTRACT.audioPulseTimer=Math.max(0,(+ATTRACT.audioPulseTimer||0)-dt);

@@ -91,6 +91,12 @@ for(const row of [baseline, best]){
   if(!row.targetVideoObjectFit || !isFiniteNumber(row.targetVideoObjectFit.score10)){
     fail('Candidate sweep row is missing target-video object-track fit data.', row);
   }
+  if(!row.humanPerfectPotential || !isFiniteNumber(row.humanPerfectPotential.score10)){
+    fail('Candidate sweep row is missing human-perfect potential data.', row);
+  }
+  if(!row.humanPerfectGuard || typeof row.humanPerfectGuard.pass !== 'boolean' || !isFiniteNumber(row.humanPerfectGuard.lift10)){
+    fail('Candidate sweep row is missing the human-perfect regression gate.', row);
+  }
   if(!isFiniteNumber(row.selectionScore10)){
     fail('Candidate sweep row is missing a selection score.', row);
   }
@@ -111,6 +117,12 @@ if(summary.targetVideoComparable !== false){
     if(!isFiniteNumber(summary[field])){
       fail(`Candidate sweep summary field ${field} is invalid.`, summary);
     }
+  }
+}
+
+for(const field of ['baselineHumanPerfectPotentialScore10', 'bestHumanPerfectPotentialScore10', 'humanPerfectPotentialLift10']){
+  if(!isFiniteNumber(summary[field])){
+    fail(`Candidate sweep summary field ${field} is invalid.`, summary);
   }
 }
 
@@ -137,6 +149,12 @@ if(promotionLikeDecision){
   if(summary.noTargetVideoRegression !== true || summary.noExpectedRegression !== true || summary.intendedStageSupported !== true){
     fail('Candidate is marked promotion-like but does not satisfy the promotion policy booleans.', summary);
   }
+  if(summary.noHumanPerfectRegression !== true || best.humanPerfectGuard?.pass !== true){
+    fail('Candidate is marked promotion-like but regresses human-perfect potential.', {
+      summary,
+      bestHumanPerfectGuard: best.humanPerfectGuard
+    });
+  }
 }
 
 const retention = report.candidateRetention || {};
@@ -158,8 +176,10 @@ console.log(JSON.stringify({
   baselineExpectedScore10: summary.baselineExpectedScore10,
   bestCandidateId: summary.bestCandidateId,
   bestExpectedScore10: summary.bestExpectedScore10,
+  bestHumanPerfectPotentialScore10: summary.bestHumanPerfectPotentialScore10,
   expectedLift10: summary.expectedLift10,
   targetVideoObjectFitLift10: summary.targetVideoObjectFitLift10,
+  humanPerfectPotentialLift10: summary.humanPerfectPotentialLift10,
   keeperDecision: summary.keeperDecision,
   baselineSafetyPass: baseline.noSafetyRegression === true,
   bestSafetyPass: best.noSafetyRegression === true

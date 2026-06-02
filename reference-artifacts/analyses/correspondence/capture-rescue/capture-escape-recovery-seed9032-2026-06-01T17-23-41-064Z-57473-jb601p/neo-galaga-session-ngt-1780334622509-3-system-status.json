@@ -1,0 +1,445 @@
+{
+  "generatedAt": "2026-06-01T17:23:57.607Z",
+  "build": {
+    "product": "Aurora Galactica",
+    "version": "1.4.0",
+    "versionLine": "1.4.0.1",
+    "label": "1.4.0.1+build.978.sha.eaad184aa.dirty",
+    "commit": "eaad184aa38e52eb31e59826109263236913134f",
+    "branch": "codex/macbook-ingestion-grammar-sync",
+    "dirty": true,
+    "released": "Jun 01 2026, 1:16 PM EDT",
+    "state": "codex/macbook-ingestion-grammar-sync@eaad184aa dirty",
+    "releaseChannel": "development",
+    "platform": {
+      "key": "platinum",
+      "name": "Platinum",
+      "version": "1.4.0",
+      "releaseTrack": "production-family",
+      "compatibility": "platinum-1.4",
+      "notes": "Platform-owned shell, release lanes, docs, replay, services, and host contract.",
+      "media": {
+        "arcadeMusicPlaylistId": "PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH"
+      },
+      "auth": {
+        "nonProductionTestPilotEmails": [
+          "sgwoods@gmail.com",
+          "waskesiuhobiecat@gmail.com"
+        ],
+        "nonProductionTestPilotUserIds": []
+      }
+    },
+    "applications": [
+      {
+        "gameKey": "aurora-galactica",
+        "title": "Aurora Galactica",
+        "version": "1.4.0",
+        "versionLine": "1.4.0",
+        "releaseTrack": "production-family",
+        "runtimeStatus": "playable",
+        "platformCompatibility": "platinum-1.4",
+        "launchPolicy": "production-capable"
+      },
+      {
+        "gameKey": "galaxy-guardians-preview",
+        "title": "Galaxy Guardians",
+        "version": "0.1.0-preview",
+        "versionLine": "0.1.0 preview",
+        "releaseTrack": "playable-preview",
+        "runtimeStatus": "production-playable-preview",
+        "platformCompatibility": "platinum-1.4",
+        "launchPolicy": "production-preview-playable"
+      }
+    ]
+  },
+  "location": "http://localhost:57097/index.html",
+  "game": {
+    "stage": 4,
+    "score": 400,
+    "lives": 5,
+    "started": false,
+    "paused": false,
+    "challenge": false,
+    "attract": false
+  },
+  "audioDebug": {
+    "theme": "galaga-reference-assets",
+    "lastCue": {
+      "cue": "stagePulse",
+      "atmosphereId": "aurora-hint",
+      "audioTheme": "galaga-reference-assets",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+      "referenceClipStart": 0.18,
+      "referenceClipDuration": 0.82,
+      "stage": 4,
+      "challenge": false,
+      "at": 0.782,
+      "recAt": 3.013
+    },
+    "reference": {
+      "lastRequested": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+      "lastLoaded": "assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a",
+      "lastStarted": "assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a",
+      "lastError": "",
+      "activeCount": 0
+    },
+    "statusLine": "Theme: galaga-reference-assets · last cue stagePulse (galaga-reference-assets) · requested galaga3-ambience-convoy.m4a · loaded galaga3-boss-damage-flagship-fighter-shot.m4a · started galaga3-boss-damage-flagship-fighter-shot.m4a · active 4"
+  },
+  "systemLog": [],
+  "sessionEvents": [
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "game_start",
+      "message": "game_start",
+      "data": {
+        "t": 0,
+        "type": "game_start",
+        "persona": null,
+        "watchMode": false,
+        "watchScope": "game",
+        "developerExpertPlay": "",
+        "requestedStage": 4,
+        "stage": 4,
+        "startStageMode": "internal",
+        "startKind": "level",
+        "challengeStage": 1,
+        "displayLabel": "",
+        "forceChallenge": false,
+        "playerTwo": null
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "stage_spawn",
+      "message": "stage_spawn",
+      "data": {
+        "t": 0,
+        "type": "stage_spawn",
+        "stage": 4,
+        "challenge": false,
+        "persona": null
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "stage_profile",
+      "message": "stage_profile",
+      "data": {
+        "t": 0,
+        "type": "stage_profile",
+        "stage": 4,
+        "challenge": false,
+        "band": "scorpion",
+        "challengeFamily": "classic",
+        "beeFamily": "scorpion",
+        "butFamily": "scorpion",
+        "bossFamily": "classic",
+        "themeId": "scorpion-dawn",
+        "backgroundMode": "aurora-hint",
+        "frameAccent": "amber-blue",
+        "bossArchetype": "super-boss-scorpion"
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0,
+        "type": "audio_cue",
+        "cue": "gameStart",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga2-game-start.m4a",
+        "referenceClipStart": 0.08,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "harness_capture_escape_setup",
+      "message": "harness_capture_escape_setup",
+      "data": {
+        "t": 0,
+        "type": "harness_capture_escape_setup",
+        "boss": 916235726,
+        "playerX": 140,
+        "playerY": 186,
+        "bossX": 140,
+        "bossY": 110,
+        "capT": 0.95,
+        "stage": 4,
+        "keepAlive": 1
+      }
+    },
+    {
+      "at": "+0.000s",
+      "level": "info",
+      "action": "enemy_attack_start",
+      "message": "enemy_attack_start",
+      "data": {
+        "t": 0,
+        "type": "enemy_attack_start",
+        "stage": 4,
+        "mode": "capture",
+        "x": 140,
+        "y": 110,
+        "originLane": 5,
+        "targetLane": 5,
+        "playerLane": 5,
+        "id": 916235726,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 5,
+        "dive": 2,
+        "carry": false,
+        "targetX": 140,
+        "targetY": 136,
+        "scripted": 0,
+        "harness": 1,
+        "captureEscape": 1
+      }
+    },
+    {
+      "at": "+0.200s",
+      "level": "info",
+      "action": "harness_spawn_player_bullet",
+      "message": "harness_spawn_player_bullet",
+      "data": {
+        "t": 0.2,
+        "type": "harness_spawn_player_bullet",
+        "x": 140,
+        "y": 156,
+        "v": 560
+      }
+    },
+    {
+      "at": "+0.250s",
+      "level": "info",
+      "action": "enemy_killed",
+      "message": "enemy_killed",
+      "data": {
+        "t": 0.25,
+        "type": "enemy_killed",
+        "points": 400,
+        "dive": 2,
+        "challenge": 0,
+        "rescued": false,
+        "turnedHostile": false,
+        "playerBullets": 0,
+        "enemyBullets": 0,
+        "id": 916235726,
+        "enemyType": "boss",
+        "enemyFamily": "classic",
+        "column": 3,
+        "row": 0,
+        "lane": 5,
+        "carry": false
+      }
+    },
+    {
+      "at": "+0.250s",
+      "level": "info",
+      "action": "commentator_callout",
+      "message": "commentator_callout",
+      "data": {
+        "t": 0.25,
+        "type": "commentator_callout",
+        "key": "boss_destroyed",
+        "title": "BOSS DOWN",
+        "lines": [
+          "400 POINTS"
+        ],
+        "duration": 2,
+        "minGap": 5,
+        "stage": 4,
+        "score": 400,
+        "watchMode": false,
+        "persona": ""
+      }
+    },
+    {
+      "at": "+0.250s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.25,
+        "type": "audio_cue",
+        "cue": "bossBoom",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+        "referenceClipStart": 0,
+        "referenceClipDuration": 0,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+0.267s",
+      "level": "info",
+      "action": "capture_escape",
+      "message": "capture_escape",
+      "data": {
+        "t": 0.267,
+        "type": "capture_escape",
+        "stage": 4,
+        "reason": "boss_destroyed",
+        "playerX": 140.22,
+        "playerY": 153.12,
+        "playerLane": 5,
+        "bossId": 916235726,
+        "timeSinceCaptureStart": 0.267
+      }
+    },
+    {
+      "at": "+0.267s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 0.267,
+        "type": "audio_cue",
+        "cue": "rescueJoin",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga2-fighter-rescued-double-ship.m4a",
+        "referenceClipStart": 2.399,
+        "referenceClipDuration": 0.18,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+2.200s",
+      "level": "info",
+      "action": "key_down",
+      "message": "key_down",
+      "data": {
+        "t": 2.2,
+        "type": "key_down",
+        "code": "Space",
+        "key": " ",
+        "repeat": false,
+        "alreadyDown": false
+      }
+    },
+    {
+      "at": "+2.217s",
+      "level": "info",
+      "action": "player_shot",
+      "message": "player_shot",
+      "data": {
+        "t": 2.217,
+        "type": "player_shot",
+        "dual": false,
+        "shots": 1,
+        "x": 140.22,
+        "y": 317,
+        "shotXs": [
+          140.22
+        ],
+        "spread": 0,
+        "activeBullets": 1,
+        "captureWindow": false
+      }
+    },
+    {
+      "at": "+2.217s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 2.217,
+        "type": "audio_cue",
+        "cue": "playerShot",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+        "referenceClipStart": 0.08,
+        "referenceClipDuration": 0.24,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+2.280s",
+      "level": "info",
+      "action": "key_up",
+      "message": "key_up",
+      "data": {
+        "t": 2.28,
+        "type": "key_up",
+        "code": "Space",
+        "key": " "
+      }
+    },
+    {
+      "at": "+3.013s",
+      "level": "info",
+      "action": "audio_cue",
+      "message": "audio_cue",
+      "data": {
+        "t": 3.013,
+        "type": "audio_cue",
+        "cue": "stagePulse",
+        "atmosphereId": "aurora-hint",
+        "audioTheme": "galaga-reference-assets",
+        "phase": "stage",
+        "variant": 0,
+        "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+        "referenceClipStart": 0.18,
+        "referenceClipDuration": 0.82,
+        "challenge": false,
+        "stage": 4
+      }
+    },
+    {
+      "at": "+3.130s",
+      "level": "info",
+      "action": "harness_stop",
+      "message": "harness_stop",
+      "data": {
+        "t": 3.13,
+        "type": "harness_stop",
+        "label": "capture-escape-recovery"
+      }
+    },
+    {
+      "at": "+3.130s",
+      "level": "info",
+      "action": "capture_export_reset",
+      "message": "capture_export_reset",
+      "data": {
+        "t": 3.13,
+        "type": "capture_export_reset",
+        "reason": "capture-escape-recovery_forced_export",
+        "started": false,
+        "attract": false,
+        "stage": 4,
+        "score": 400,
+        "lives": 5
+      }
+    }
+  ]
+}
