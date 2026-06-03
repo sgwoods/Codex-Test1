@@ -205,6 +205,34 @@ function clearArcadeMusicFallbackTimeout(){
  if(timerId)clearTimeout(timerId);
  ARCADE_MUSIC.fallbackTimeoutId=0;
 }
+function activateArcadeMusicIframeFallback(reason='api_attach_timeout'){
+ const playlistId=ARCADE_MUSIC.activePlaylistId||arcadeMusicPlaylistId();
+ if(!playlistId||playlistId==='PLarcadeMusicHarness01')return false;
+ if(!ARCADE_MUSIC.requested)return false;
+ if(ARCADE_MUSIC.fallbackMode==='iframe')return true;
+ if(window.YT&&typeof window.YT.Player==='function')return false;
+ noteArcadeMusicFrame();
+ if(!ARCADE_MUSIC.iframe)return false;
+ clearArcadeMusicStartupTimeout();
+ clearArcadeMusicFallbackTimeout();
+ ARCADE_MUSIC.fallbackMode='iframe';
+ ARCADE_MUSIC.state='playing';
+ syncArcadeMusicUi();
+ if(typeof console!=='undefined'&&typeof console.warn==='function'){
+  console.warn('[Arcade Music] Falling back to iframe-only playlist playback; YouTube player API did not attach.', {
+   playlistId,
+   playlistSource:ARCADE_MUSIC.activePlaylistSource||arcadeMusicResolvedConfig().playlistSource,
+   reason
+  });
+ }
+ if(typeof logEvent==='function')logEvent('arcade_music_fallback_mode',{
+  mode:'iframe',
+  playlistId,
+  playlistSource:ARCADE_MUSIC.activePlaylistSource||arcadeMusicResolvedConfig().playlistSource,
+  reason
+ });
+ return true;
+}
 function scheduleArcadeMusicFallbackTimeout(){
  clearArcadeMusicFallbackTimeout();
  const mountToken=+ARCADE_MUSIC.mountToken||0;
@@ -212,24 +240,7 @@ function scheduleArcadeMusicFallbackTimeout(){
  if(!playlistId||playlistId==='PLarcadeMusicHarness01')return;
  ARCADE_MUSIC.fallbackTimeoutId=setTimeout(()=>{
   if(!ARCADE_MUSIC.requested||(+ARCADE_MUSIC.mountToken||0)!==mountToken)return;
-  if(ARCADE_MUSIC.state==='playing'||ARCADE_MUSIC.fallbackMode==='iframe')return;
-  if(window.YT&&typeof window.YT.Player==='function')return;
-  noteArcadeMusicFrame();
-  if(!ARCADE_MUSIC.iframe)return;
-  ARCADE_MUSIC.fallbackMode='iframe';
-  ARCADE_MUSIC.state='playing';
-  syncArcadeMusicUi();
-  if(typeof console!=='undefined'&&typeof console.warn==='function'){
-   console.warn('[Arcade Music] Falling back to iframe-only playlist playback; YouTube player API did not attach.', {
-    playlistId,
-    playlistSource:ARCADE_MUSIC.activePlaylistSource||arcadeMusicResolvedConfig().playlistSource
-   });
-  }
-  if(typeof logEvent==='function')logEvent('arcade_music_fallback_mode',{
-   mode:'iframe',
-   playlistId,
-   playlistSource:ARCADE_MUSIC.activePlaylistSource||arcadeMusicResolvedConfig().playlistSource
-  });
+  activateArcadeMusicIframeFallback('api_attach_timeout');
  },2500);
 }
 function scheduleArcadeMusicStartupTimeout(){
@@ -237,6 +248,7 @@ function scheduleArcadeMusicStartupTimeout(){
  const mountToken=+ARCADE_MUSIC.mountToken||0;
  ARCADE_MUSIC.startupTimeoutId=setTimeout(()=>{
   if(!ARCADE_MUSIC.requested||(+ARCADE_MUSIC.mountToken||0)!==mountToken||ARCADE_MUSIC.state==='playing')return;
+  if(activateArcadeMusicIframeFallback('startup_timeout'))return;
   ARCADE_MUSIC.state='unavailable';
   syncArcadeMusicUi();
   if(typeof console!=='undefined'&&typeof console.warn==='function'){
