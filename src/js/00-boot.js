@@ -357,7 +357,21 @@ let arcadeFullscreenAuto=readPref(ARCADE_FULLSCREEN_AUTO_PREF_KEY)!=='0';
 let arcadeFullscreenActive=0;
 const ARCADE_MUSIC_PLAYLIST_ID={{ARCADE_MUSIC_PLAYLIST_ID_JSON}};
 const arcadeMusicRequestedPref=readPref(ARCADE_MUSIC_PREF_KEY);
-const ARCADE_MUSIC={state:'off',requested:arcadeMusicRequestedPref==='1',playlistOverride:'',iframe:null,activePlaylistId:'',activePlaylistSource:'',lastTrackSignature:'',lastTrack:null};
+const ARCADE_MUSIC={
+ state:'off',
+ requested:arcadeMusicRequestedPref==='1',
+ playlistOverride:'',
+ iframe:null,
+ activePlaylistId:'',
+ activePlaylistSource:'',
+ lastTrackSignature:'',
+ lastTrack:null,
+ forceMuted:false,
+ warming:false,
+ warmReady:false,
+ autoWarmAttempted:false,
+ warmProbeTimeoutId:0
+};
 function readPref(key){
  try{
   const current=localStorage.getItem(key);
@@ -1964,6 +1978,8 @@ function syncAudioMixControls(){
   muted:!!audioMuted,
   soundEffectsMuted:!!audioMuted,
   arcadeMusicMuted:!!arcadeMusicMuted,
+  arcadeMusicEffectiveMuted:typeof arcadeMusicEffectiveMuted==='function'?!!arcadeMusicEffectiveMuted():!!arcadeMusicMuted,
+  arcadeMusicWarming:!!ARCADE_MUSIC?.warming,
   arcadeMusicPlaylistId:playlistConfig?.playlistId||'',
   arcadeMusicPlaylistSource:playlistConfig?.playlistSource||''
  };
@@ -1975,6 +1991,8 @@ function audioMixTelemetryBase(){
   muted:!!audioMuted,
   soundEffectsMuted:!!audioMuted,
   arcadeMusicMuted:!!arcadeMusicMuted,
+  arcadeMusicEffectiveMuted:typeof arcadeMusicEffectiveMuted==='function'?!!arcadeMusicEffectiveMuted():!!arcadeMusicMuted,
+  arcadeMusicWarming:!!ARCADE_MUSIC?.warming,
   musicState:ARCADE_MUSIC?.state||'off',
   releaseChannel:BUILD_INFO?.releaseChannel||'development',
   pack:typeof currentGamePackKey==='function'?currentGamePackKey():''
@@ -3050,6 +3068,7 @@ addEventListener('pointerdown',e=>{
 syncTestUi();
 syncArcadeFullscreenControls();
 syncBuildStampUi();
+if(typeof maybeAutoWarmArcadeMusic==='function')setTimeout(()=>maybeAutoWarmArcadeMusic({source:'boot'}),0);
 if(typeof loadArcadeMusicApi==='function')setTimeout(()=>loadArcadeMusicApi().catch(()=>{}),0);
 startHostedBuildUpdateChecks();
 window.currentScoreStorageGameKey=currentScoreStorageGameKey;

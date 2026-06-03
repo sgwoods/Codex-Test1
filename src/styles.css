@@ -426,9 +426,12 @@ body.arcadeFullscreenActive #msg{bottom:10px}
 #dockQuickTools .musicDockIcon{font-size:34px}
 #arcadeMusicToggleBtn[data-music-playing="true"]{color:#ffe39a}
 #arcadeMusicToggleBtn[data-music-state="playing"] .dockIcon{animation:arcadeMusicPulse 1.15s ease-in-out infinite;filter:drop-shadow(0 0 12px rgba(255,227,154,.42))}
-#arcadeMusicToggleBtn[data-music-muted="true"]{color:#ffe39a}
-#arcadeMusicToggleBtn[data-music-muted="true"] .dockIcon{animation:none;filter:grayscale(.8) drop-shadow(0 0 8px rgba(255,227,154,.18));opacity:.72}
+#arcadeMusicToggleBtn[data-music-state="muted"]{color:#ffe39a}
+#arcadeMusicToggleBtn[data-music-state="muted"] .dockIcon{animation:none;filter:drop-shadow(0 0 10px rgba(255,227,154,.22));opacity:.96}
+#arcadeMusicToggleBtn[data-music-state="warming"]{color:#ffe39a;opacity:.78;cursor:progress}
+#arcadeMusicToggleBtn[data-music-state="warming"] .dockIcon{animation:none;filter:grayscale(.88) drop-shadow(0 0 8px rgba(255,227,154,.12));opacity:.62}
 #arcadeMusicToggleBtn[data-music-state="unavailable"]{opacity:.72}
+#arcadeMusicToggleBtn:disabled{cursor:progress}
 @keyframes arcadeMusicPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
 #arcadeMusicFrameHost{
  position:fixed;
