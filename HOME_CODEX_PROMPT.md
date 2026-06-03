@@ -3,6 +3,11 @@
 Use this prompt when you first start a Codex session on the home machine and
 want it to follow the current Aurora Galactica development workflow.
 
+If Aurora release authority has been intentionally transferred away from this
+machine and this iMac is now meant to focus on Galaxy Guardians work, use
+[IMAC_GUARDIANS_ROLE_PROMPT_2026-06-03.md](IMAC_GUARDIANS_ROLE_PROMPT_2026-06-03.md)
+instead of the historical authority-capable prompt below.
+
 ```text
 You are working on Aurora Galactica on this machine.
 

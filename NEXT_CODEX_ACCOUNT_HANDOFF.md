@@ -43,7 +43,7 @@ gh auth setup-git
 
 - `Codex-Test1` is the authoritative engineering source repo.
 - `Aurora-Galactica` is the public release-host mirror only.
-- Release authority remains on:
+- Current committed release authority is still on:
   - `machine_id`: `imacm1`
   - `machine_label`: `iMacM1`
 - Non-authority machines may develop, run harnesses, create branches, commit,
@@ -52,26 +52,47 @@ gh auth setup-git
   beta, or publish production unless release authority is explicitly
   transferred.
 
+### Planned Immediate Role Split
+
+The next intended machine split is:
+
+- MacBook M4:
+  - take over Aurora + Platinum platform work
+  - claim release authority
+  - carry the current review line toward production
+- iMacM1:
+  - stop acting as the Aurora/platform authority machine
+  - pivot to Galaxy Guardians-focused work
+  - remain non-authority unless authority is explicitly transferred back
+
+Use these prompt docs to perform that split:
+
+- [MACBOOK_M4_RELEASE_AUTHORITY_TAKEOVER_PROMPT_2026-06-03.md](MACBOOK_M4_RELEASE_AUTHORITY_TAKEOVER_PROMPT_2026-06-03.md)
+- [IMAC_GUARDIANS_ROLE_PROMPT_2026-06-03.md](IMAC_GUARDIANS_ROLE_PROMPT_2026-06-03.md)
+
 ## Current Published State
 
 As of June 3, 2026:
 
 - hosted `/dev`
-  - `1.4.0.1+build.1006.sha.ed8d7f18`
-  - commit `ed8d7f18`
+  - `1.4.0.1+build.1013.sha.3cb0d08b`
+  - commit `3cb0d08b`
 - hosted `/beta`
-  - `1.4.0-beta.1+build.1006.sha.ed8d7f18.beta`
-  - commit `ed8d7f18`
+  - `1.4.0-beta.1+build.1013.sha.3cb0d08b.beta`
+  - commit `3cb0d08b`
 - hosted `/production`
   - `1.4.0+build.894.sha.1dc23d8a`
   - commit `1dc23d8a`
 
 Meaning:
 
-- `/dev` and `/beta` are aligned on the current authority-machine candidate.
+- `/dev` and `/beta` are aligned on the current published candidate.
 - `/production` is intentionally behind and still represents the last stable
   public release family.
-- There are `112` commits on `main` after the current production commit.
+- `main` is now ahead of the published `/dev` + `/beta` lanes by one repo-only
+  cleanup commit:
+  - `29c59bc0` `Align top-score sign-in harness copy`
+- That latest commit did not justify a hosted republish by itself.
 
 ## Work Already Integrated On Main
 
@@ -111,7 +132,7 @@ Not yet completed as follow-up work:
 
 ## Best Next Work On The Other Machine
 
-If continuing product-quality work:
+If continuing product-quality work on the MacBook after authority transfer:
 
 ```bash
 git switch main
@@ -125,7 +146,7 @@ Focus:
 - measured motion, pacing, and set-piece review
 - use reference evidence before subjective tuning
 
-If continuing platform/release work:
+If continuing platform/release work on the MacBook after authority transfer:
 
 ```bash
 git switch main
@@ -137,11 +158,13 @@ Focus:
 
 - require fresh hosted `/dev` parity before `/beta` publish
 - tighten hosted Arcade Music verification
-- keep release authority on `iMacM1`
+- keep release authority on the MacBook once the transfer is complete
 
 ## Important Docs To Read First
 
 - [OTHER_MACHINE_CONTINUATION_HANDOFF_2026-06-03.md](OTHER_MACHINE_CONTINUATION_HANDOFF_2026-06-03.md)
+- [MACBOOK_M4_RELEASE_AUTHORITY_TAKEOVER_PROMPT_2026-06-03.md](MACBOOK_M4_RELEASE_AUTHORITY_TAKEOVER_PROMPT_2026-06-03.md)
+- [IMAC_GUARDIANS_ROLE_PROMPT_2026-06-03.md](IMAC_GUARDIANS_ROLE_PROMPT_2026-06-03.md)
 - [RELEASE_LANE_MODEL.md](RELEASE_LANE_MODEL.md)
 - [RELEASE_POLICY.md](RELEASE_POLICY.md)
 - [SESSION_CLEANUP_AND_CROSS_MACHINE_INTEGRATION_PLAN_2026-06-01.md](SESSION_CLEANUP_AND_CROSS_MACHINE_INTEGRATION_PLAN_2026-06-01.md)

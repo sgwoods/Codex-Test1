@@ -2,29 +2,36 @@
 
 Updated: June 3, 2026
 
-This note captures the state of the release-authority checkout after the hosted
-Arcade Music bugfix pass and after the MacBook guardrail tranche was integrated
-on `main`.
+This note now captures the state of the iMacM1 authority checkout at the moment
+we intend to hand Aurora/Platinum release authority to the MacBook M4 while the
+iMac pivots to Guardians-focused work.
 
 ## Authority Snapshot
 
 - repo: `/Users/steven/Projects-All/Codex-Test1`
 - branch: `main`
-- head: `ed8d7f18`
+- head: `29c59bc0`
 - working tree: clean
-- release authority:
+- currently committed release authority:
   - `machine_id`: `imacm1`
   - `machine_label`: `iMacM1`
   - `current_machine_matches`: `true`
 
+Interpretation:
+
+- Authority has not yet been transferred in git history.
+- The next intended move is for the MacBook M4 to claim authority from its own
+  clean checkout using the repo-supported claim command.
+- Do not edit `release-authority.json` by hand on the MacBook; claim it there.
+
 ## Live Lane Snapshot
 
 - hosted `/dev`
-  - label `1.4.0.1+build.1006.sha.ed8d7f18`
-  - commit `ed8d7f18`
+  - label `1.4.0.1+build.1013.sha.3cb0d08b`
+  - commit `3cb0d08b`
 - hosted `/beta`
-  - label `1.4.0-beta.1+build.1006.sha.ed8d7f18.beta`
-  - commit `ed8d7f18`
+  - label `1.4.0-beta.1+build.1013.sha.3cb0d08b.beta`
+  - commit `3cb0d08b`
 - hosted `/production`
   - label `1.4.0+build.894.sha.1dc23d8a`
   - commit `1dc23d8a`
@@ -34,7 +41,10 @@ Interpretation:
 - `/dev` and `/beta` are intentionally aligned.
 - `/production` is the last stable public release and is `112` commits behind
   `main`.
-- this session did not promote production.
+- the newest source-only repo cleanup is `29c59bc0`
+- that newest cleanup was not republished because it only aligned a harness
+  expectation with already-correct runtime copy
+- this session did not promote production
 
 ## What Was Integrated Here
 
@@ -73,6 +83,30 @@ Practical result:
 - this is a hosted playback recovery pass, not the final release-process
   hardening pass
 
+## Release-Authority Transfer Sequence For The MacBook M4
+
+On the MacBook, from a clean local `main` checkout:
+
+```bash
+git switch main
+git pull --rebase origin main
+npm run machine:bootstrap
+npm run machine:status
+npm run machine:doctor
+npm run release:show-authority
+npm run release:claim-authority -- --notes "Authority transferred from iMacM1 to MacBook M4 for Aurora/Platinum release continuation and production path."
+git push origin main
+npm run release:show-authority
+```
+
+Important:
+
+- let the claim command use the MacBook's own local machine identity by default
+- do not guess or hardcode the target `machine_id` unless the MacBook tooling
+  shows a clear need
+- once that claim is pushed, the MacBook becomes the only machine allowed to
+  publish `/beta` or `/production`
+
 ## What The Other Machine Should Not Redo
 
 Do not reopen these as if they were still unmerged:
@@ -82,11 +116,30 @@ Do not reopen these as if they were still unmerged:
 - the public/private artifact boundary baseline
 
 The correct starting point is current `origin/main`, not any older local topic
-branch that predates `ed8d7f18`.
+branch that predates `29c59bc0`.
 
 ## Best Next Continuation Options
 
-### Option 1: Guardians Quality
+### Option 1: Aurora / Platform / Production Path
+
+This is now the preferred MacBook role after authority transfer.
+
+Branch:
+
+```bash
+git switch main
+git pull --rebase origin main
+git switch -c codex/macbook-release-authority-continuation
+```
+
+Goal:
+
+- continue Aurora and Platinum platform work
+- carry the current `1.4.0.1` / beta review line toward a real production
+  decision
+- own hosted lane discipline and production readiness
+
+### Option 2: Guardians Quality
 
 Branch:
 
@@ -102,7 +155,7 @@ Goal:
 - use measured reference windows and evidence-first challenge-stage review
 - treat this as gameplay quality work, not release-process work
 
-### Option 2: Release/Platform Guardrails
+### Option 3: Release/Platform Guardrails
 
 Branch:
 
@@ -135,18 +188,19 @@ npm run release:show-authority
 Expected current head after sync:
 
 ```text
-ed8d7f18
+29c59bc0
 ```
 
 ## Release Boundary Reminder
 
-The other machine may continue development, harness, analysis, and branch work.
+After the authority transfer, the MacBook may continue development, harness,
+analysis, branch work, beta approval/publish, and production promotion/publish.
 
-The other machine should not:
+Before the authority transfer, the MacBook should not:
 
 - approve beta
 - promote production
 - publish beta
 - publish production
 
-Unless release authority is explicitly transferred away from `iMacM1`.
+Until release authority is explicitly transferred there.

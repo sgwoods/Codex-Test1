@@ -3,6 +3,11 @@
 Use this prompt when you first start a Codex session on the MacBook Pro and
 want it to follow the current Aurora Galactica multi-machine workflow.
 
+If the current intent is to transfer Aurora release authority to the MacBook and
+make it the production-path machine, use
+[MACBOOK_M4_RELEASE_AUTHORITY_TAKEOVER_PROMPT_2026-06-03.md](MACBOOK_M4_RELEASE_AUTHORITY_TAKEOVER_PROMPT_2026-06-03.md)
+instead of the historical non-authority prompt below.
+
 ```text
 You are working on Aurora Galactica / Platinum in the authoritative source repo:
 
