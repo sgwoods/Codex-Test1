@@ -85,7 +85,7 @@ Important interpretation:
   second-cabinet proof, now with a playable beta-candidate lane and
   production-capable preview metadata aligned to the runtime intent
 - hosted `/beta` now carries the first deliberate `1.4.0-beta.1` candidate
-  while hosted `/production` remains on the refreshed public `1.3.0` family
+  while hosted `/production` carries the deliberate public `1.4.0` family
 - hosted `/dev` remains the forward review lane and still uses the
   fourth-segment `1.4.0.1` display line
 - layered release identity is now explicit across the integrated bundle, the
@@ -124,8 +124,8 @@ The refreshed line also has direct verification evidence:
 ## Code Review And Boundary Read
 
 The current production decision should treat the platform/application boundary
-as strong enough for the refreshed `1.3.0` public line, while still keeping
-`1.4.0` follow-through visible.
+as strong enough for the shipped `1.4.0` public line, while still keeping the
+next `1.4.1` and later follow-through visible.
 
 Current durable read:
 
@@ -139,12 +139,12 @@ Current durable read:
   - a still-preview `Galaxy Guardians` application that needs more of its own
     ingestion-backed conformance package before a stronger public claim
 
-These are no longer ship blockers for the refreshed public line. They are the
-correct `1.4.0` and later follow-through targets.
+These are no longer ship blockers for the current public line. They are the
+correct `1.4.1` and later follow-through targets.
 
 ## Documentation Contract For Production
 
-The refreshed `1.3.0` public line depends on these docs being current and
+The current `1.4.0` public line depends on these docs being current and
 committed:
 
 - [README.md](README.md)
@@ -160,19 +160,19 @@ committed:
 - [BETA_TO_PRODUCTION_PLAN.md](BETA_TO_PRODUCTION_PLAN.md)
 - [CODE_REVIEW_MODEL.md](CODE_REVIEW_MODEL.md)
 - [REVIEW_LEARNING_LEDGER.md](REVIEW_LEARNING_LEDGER.md)
-- [RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md](RELEASE_NOTE_1.3.0_PRODUCTION_CONFORMANCE_REFRESH.md)
+- [RELEASE_NOTE_1.4.0_MULTI_GAME_PUBLIC_RELEASE.md](RELEASE_NOTE_1.4.0_MULTI_GAME_PUBLIC_RELEASE.md)
 - [release-dashboard.json](release-dashboard.json)
 - [release-notes.json](release-notes.json)
 - [release-manifest.json](release-manifest.json)
 
 ## Current Follow-Up Work
 
-The refreshed `1.3.0` production push is complete. The follow-up work now is:
+The `1.4.0` production push is complete. The follow-up work now is:
 
-1. keep the refreshed public `1.3.0` line trustworthy
-2. use hosted `/dev` and hosted `/beta` to review the live `1.4.0` candidate
+1. keep the live `1.4.0` public line trustworthy
+2. use hosted `/dev` and hosted `/beta` to review the next `1.4.1` candidate
    family rather than treating every source change as a lane move
-3. shift the active execution frame to `1.4.0` arcade depth and
+3. shift the active execution frame to `1.4.1` guardrails, arcade depth, and
    platform-contract cleanup
 4. continue `Galaxy Guardians` through measured ingestion and game-owned
    runtime/conformance work without over-claiming polish
@@ -181,14 +181,14 @@ The refreshed `1.3.0` production push is complete. The follow-up work now is:
 
 ## Recommendation
 
-Recommendation: treat the refreshed `1.3.0` public family as the stable current
-line and begin the next `1.4.0` pickup deliberately rather than letting the
+Recommendation: treat the shipped `1.4.0` public family as the stable current
+line and begin the next `1.4.1` pickup deliberately rather than letting the
 release story drift back into unprioritized polish.
 
 The strongest reasons are:
 
 - hosted `/production`, hosted `/beta`, and the source docs now tell one
-  coherent refreshed `1.3.0` story
+  coherent `1.4.0` story
 - the public documentation and conformance surfaces now explain evidence and
   cost more honestly than the earlier shipped line
 - the remaining gaps are next-cycle authenticity and depth opportunities, not

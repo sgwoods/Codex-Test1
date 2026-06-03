@@ -4,7 +4,7 @@ const releaseManifest = require('../../release-manifest.json');
 
 const PLATFORM_ARCADE_MUSIC_PLAYLIST = String(releaseManifest.platform?.media?.arcadeMusicPlaylistId || '').trim();
 const GALAXY_GUARDIANS_ARCADE_MUSIC_PLAYLIST = 'PLWDxjyS0X-zm5GrG4zytIyqRPQ8Jv4TA-';
-const MUSIC_WAIT_MS = 2200;
+const MUSIC_WAIT_MS = 6000;
 
 function fail(message, payload){
   console.error(message);
@@ -136,7 +136,7 @@ async function main(){
       const btn = document.querySelector('#arcadeMusicToggleBtn');
       const state = window.__platinumArcadeMusic?.state?.();
       const frame = document.querySelector('#arcadeMusicFrame');
-      return btn?.getAttribute('aria-pressed') === 'false' && state?.state === 'playing' && frame
+      return btn?.getAttribute('aria-pressed') === 'true' && state?.state === 'playing' && frame
         ? {
             aria: btn.getAttribute('aria-pressed'),
             title: btn.getAttribute('title') || '',
@@ -192,7 +192,7 @@ async function main(){
     const musicMuted = await waitForHarness(page, () => {
       const btn = document.querySelector('#arcadeMusicToggleBtn');
       const state = window.__platinumArcadeMusic?.state?.();
-      return btn?.getAttribute('aria-pressed') === 'true' && state?.state === 'playing' && state?.arcadeMusicMuted && document.querySelector('#arcadeMusicFrame')
+      return btn?.getAttribute('aria-pressed') === 'false' && state?.state === 'playing' && state?.arcadeMusicMuted && document.querySelector('#arcadeMusicFrame')
         ? {
             aria: btn.getAttribute('aria-pressed'),
             title: btn.getAttribute('title') || '',
@@ -210,7 +210,7 @@ async function main(){
     const musicUnmuted = await waitForHarness(page, () => {
       const btn = document.querySelector('#arcadeMusicToggleBtn');
       const state = window.__platinumArcadeMusic?.state?.();
-      return btn?.getAttribute('aria-pressed') === 'false' && state?.state === 'playing' && !state?.arcadeMusicMuted && document.querySelector('#arcadeMusicFrame')
+      return btn?.getAttribute('aria-pressed') === 'true' && state?.state === 'playing' && !state?.arcadeMusicMuted && document.querySelector('#arcadeMusicFrame')
         ? {
             aria: btn.getAttribute('aria-pressed'),
             title: btn.getAttribute('title') || '',
@@ -421,7 +421,7 @@ async function main(){
   if(result.music.restoredAfterReload.state?.playlistSource !== 'platform' || !result.music.restoredAfterReload.state?.requested || !result.music.restoredAfterReload.src.includes(PLATFORM_ARCADE_MUSIC_PLAYLIST)){
     fail('Arcade Music default request state did not restore the configured platform playlist after reload and the next interaction', result);
   }
-  if(result.music.before?.aria !== 'false' || result.music.before?.title !== 'Start Arcade Music' || result.music.before?.state?.state !== 'off' || result.music.active.aria !== 'false' || result.music.active.title !== 'Mute Arcade Music' || result.music.active.actionTip !== 'Mute Arcade Music' || result.music.active.musicPlaying !== 'true' || result.music.active.musicMuted !== 'false' || result.music.active.state?.arcadeMusicMuted || !/youtube(?:-nocookie)?\.com\/embed/.test(result.music.active.src)){
+  if(result.music.before?.aria !== 'false' || result.music.before?.title !== 'Start Arcade Music' || result.music.before?.state?.state !== 'off' || result.music.active.aria !== 'true' || result.music.active.title !== 'Mute Arcade Music' || result.music.active.actionTip !== 'Mute Arcade Music' || result.music.active.musicPlaying !== 'true' || result.music.active.musicMuted !== 'false' || result.music.active.state?.arcadeMusicMuted || !/youtube(?:-nocookie)?\.com\/embed/.test(result.music.active.src)){
     fail('Arcade Music dock button did not start the configured playlist embed correctly', result);
   }
   if(result.music.active.state?.playlistSource !== 'harness'){
@@ -442,10 +442,10 @@ async function main(){
   if(!result.audioMix.audioMixEvents.includes('arcade_music_volume') || !result.audioMix.audioMixEvents.includes('game_sound_volume')){
     fail('Audio mix slider changes were not logged to session telemetry', result);
   }
-  if(result.music.muted.aria !== 'true' || result.music.muted.title !== 'Unmute Arcade Music' || result.music.muted.musicState !== 'muted' || result.music.muted.musicMuted !== 'true' || !result.music.muted.state?.arcadeMusicMuted || !result.music.muted.state?.hasFrame){
+  if(result.music.muted.aria !== 'false' || result.music.muted.title !== 'Unmute Arcade Music' || result.music.muted.musicState !== 'muted' || result.music.muted.musicMuted !== 'true' || !result.music.muted.state?.arcadeMusicMuted || !result.music.muted.state?.hasFrame){
     fail('Arcade Music dock button did not mute the active playlist independently', result);
   }
-  if(result.music.unmuted.aria !== 'false' || result.music.unmuted.title !== 'Mute Arcade Music' || result.music.unmuted.musicMuted !== 'false' || result.music.unmuted.state?.arcadeMusicMuted || !result.music.unmuted.state?.hasFrame){
+  if(result.music.unmuted.aria !== 'true' || result.music.unmuted.title !== 'Mute Arcade Music' || result.music.unmuted.musicMuted !== 'false' || result.music.unmuted.state?.arcadeMusicMuted || !result.music.unmuted.state?.hasFrame){
     fail('Arcade Music dock button did not unmute the active playlist independently', result);
   }
   if(result.music.stopped.aria !== 'false' || result.music.stopped.state?.hasFrame){

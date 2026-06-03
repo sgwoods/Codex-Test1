@@ -169,6 +169,16 @@ function currentGamePackAudioTheme(id=''){
  return themes[nextId]||themes['classic-arcade']||Object.values(themes)[0]||Object.freeze({id:'classic-arcade',cues:Object.freeze({})});
 }
 
+function cueUsesReferenceMedia(cue){
+ if(!cue||typeof cue!=='object')return false;
+ if(String(cue.referenceClip||'').trim())return true;
+ if(Array.isArray(cue.layers)&&cue.layers.some(layer=>cueUsesReferenceMedia(layer)))return true;
+ if(cue.byPhase&&typeof cue.byPhase==='object'){
+  return Object.values(cue.byPhase).some(entry=>cueUsesReferenceMedia(entry));
+ }
+ return false;
+}
+
 function currentGamePackAudioCue(cueName,opts={}){
  const atmosphere=opts.resolvedAtmosphere||currentGamePackResolvedAtmosphere(opts);
  const phase=String(atmosphere?.phase||opts.phase||'stage').trim()||'stage';
@@ -186,9 +196,18 @@ function currentGamePackAudioCue(cueName,opts={}){
   }
   return base;
  };
- return resolveCue(theme)
-  || resolveCue(fallback)
-  || null;
+ const primaryCue=resolveCue(theme);
+ if(primaryCue&&!BUILD_INFO?.publicArtifactBoundaryEnabled)return primaryCue;
+ if(primaryCue&&!cueUsesReferenceMedia(primaryCue))return primaryCue;
+ const publicSafeFallbacks=[
+  currentGamePackAudioTheme('galaga-original-reference'),
+  fallback
+ ];
+ for(const fallbackTheme of publicSafeFallbacks){
+  const candidate=resolveCue(fallbackTheme);
+  if(candidate&&!cueUsesReferenceMedia(candidate))return candidate;
+ }
+ return primaryCue||resolveCue(fallback)||null;
 }
 
 function currentGamePackReferenceTiming(key=''){

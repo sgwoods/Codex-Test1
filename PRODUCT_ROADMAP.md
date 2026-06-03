@@ -9,14 +9,14 @@ Verified May 14, 2026:
 - hosted `/beta`
   - active `1.4.0-beta.1` reviewed candidate lane
 - hosted `/production`
-  - stable `1.3.0` public line
+  - stable `1.4.0` public line
 
-Aurora is in a post-`1.3.0` ship posture:
+Aurora is in a post-`1.4.0` ship posture:
 
-- production now carries the current `1.3.0` public family
+- production now carries the current `1.4.0` public family
 - beta now carries the first deliberate `1.4.0-beta.1` candidate
 - dev carries the aligned `1.4.0.1` forward-review line
-- `main` is the forward line for the deliberate `1.4.0` pickup
+- `main` is the forward line for the deliberate `1.4.1` pickup
 - future production promotions of similar scope should move a real public
   SemVer version rather than repeat the May 12 same-family exception
 
@@ -42,7 +42,7 @@ The maintained top-level explanation of this program is
 
 ## Near-Term Release Direction
 
-### Stabilize `1.3.0`
+### Stabilize `1.4.0`
 
 Goals:
 
@@ -51,7 +51,7 @@ Goals:
 - keep release docs, scorecards, and committed evidence current
 - make new-machine and two-machine development simple and safe
 
-### `1.4.0` Candidate Is Now Under Review
+### `1.4.1` Candidate Is Now Under Review
 
 The current practical artifacts are:
 
@@ -60,8 +60,9 @@ The current practical artifacts are:
 
 This family collects the merged Guardians playable/conformance tranche,
 side-by-side game conformance entry points, documentation/release-note
-backfill, and the next round of platform/application boundary cleanup while
-keeping hosted `/production` stable on `1.3.0`.
+backfill, Arcade Music hosted warmup recovery, and the next round of
+platform/application boundary cleanup while keeping hosted `/production` stable
+on `1.4.0`.
 
 Recommended gate:
 
@@ -69,18 +70,18 @@ Recommended gate:
   candidate
 - require at least one measurable user-facing improvement or a clearly
   documented negative result that changes the next investment decision
-- keep hosted `/production` stable until the `1.4.0` candidate earns
+- keep hosted `/production` stable until the `1.4.1` candidate earns
   production promotion
 
-### Pick Up `1.4.0`
+### Pick Up `1.4.1`
 
 The active source and pickup family is now:
 
-- `1.4.0`
+- `1.4.1`
 
 Reason:
 
-- `1.3.0` already carried the first second-cabinet Platinum story into the
+- `1.4.0` already carried the first multi-game public Platinum story into the
   public product
 - the next release should now deepen arcade play and platform clarity rather
   than simply repeating the same pitch
@@ -134,24 +135,25 @@ Current decision:
 - make shared gameplay-video publishing an early roadmap capability
 - bring a preliminary second-game Platinum sneak peek forward before the full
   `2.0` multi-game release
-- use the first post-`1.3.0` iMac branch to make that second game genuinely
+- use the first post-`1.4.0` iMac branch to make that second game genuinely
   playable enough to validate platform changes against two games
 - treat near-parity for `Galaxy Guardians` as process parity first:
   game-owned evidence, game-owned metrics, game-owned score/replay/result
   identity, and a readable candidate-review path before demanding Aurora-like
   maturity
 
-### Pick Up After `1.3.0`
+### Pick Up After `1.4.0`
 
-Once `1.3.0` is out, the roadmap pickup should be:
+Once `1.4.0` is out, the roadmap pickup should be:
 
-- Short term: keep the refreshed `1.3.0` public family stable while using
-  hosted `/dev` and hosted `/beta` to review the live `1.4.0` candidate
+- Short term: keep the shipped `1.4.0` public family stable while using
+  hosted `/dev` and hosted `/beta` to review the live `1.4.1` candidate
   family.
-- Medium term: `1.4.0` for level-by-level arcade depth plus
+- Medium term: `1.4.1` for guardrails, hosted-lane discipline, and platform
+  cleanup, followed by `1.5.0` for level-by-level arcade depth plus
   platform-contract cleanup.
-- Longer term: `1.5.0` for shared-video evidence and flight-recorder
-  publishing, `1.6.0` for pilot-facing shell/message/cabinet-surface polish,
+- Longer term: `1.6.0` for shared-video evidence and flight-recorder
+  publishing, `1.7.0` for pilot-facing shell/message/cabinet-surface polish,
   and `2.0` for a genuinely multi-game Platinum candidate.
 
 That sequencing should be treated as intentional carry-forward planning, not

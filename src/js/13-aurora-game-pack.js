@@ -259,25 +259,92 @@ challengeResults:referenceAudioCue('assets/reference-audio/galaga2-challenging-s
  }),
  gameOver:referenceAudioCue('assets/reference-audio/galaga-last-ship-destroyed-ambience.m4a',{cooldownMs:3600,clipStart:2.3,clipDuration:4.2}),
  highScoreFirst:referenceAudioCue('assets/reference-audio/galaga3-name-entry-1st.m4a',{cooldownMs:2000}),
- highScoreOther:referenceAudioCue('assets/reference-audio/galaga3-name-entry-2nd-5th.m4a',{cooldownMs:1800})
+  highScoreOther:referenceAudioCue('assets/reference-audio/galaga3-name-entry-2nd-5th.m4a',{cooldownMs:1800})
+});
+
+const AURORA_PUBLIC_SAFE_EFFECT_CUES=Object.freeze({
+ playerHit:Object.freeze({
+  cooldownMs:1800,
+  tones:Object.freeze([
+   {freq:392,duration:.04,wave:'triangle',volume:.0124,slide:-320,lpHz:3600},
+   {freq:247,duration:.09,wave:'triangle',volume:.0096,slide:-190,lpHz:2500,delay:.018},
+   {freq:131,duration:.18,wave:'sawtooth',volume:.0116,slide:-150,lpHz:1840,delay:.074}
+  ]),
+  noise:Object.freeze([{duration:.06,volume:.0064,hp:1460,delay:.012}])
+ }),
+ enemyHit:Object.freeze({
+  cooldownMs:220,
+  tones:Object.freeze([
+   {freq:246,duration:.058,wave:'square',volume:.014,slide:-240,detune:.004,lpHz:3400},
+   {freq:154,duration:.11,wave:'sawtooth',volume:.016,slide:-220,detune:.008,lpHz:2300,delay:.018}
+  ]),
+  noise:Object.freeze([{duration:.05,volume:.0066,hp:1700,delay:.012}])
+ }),
+ bossHit:Object.freeze({
+  cooldownMs:240,
+  tones:Object.freeze([
+   {freq:392,duration:.046,wave:'square',volume:.0144,slide:-210,detune:.002,lpHz:3600},
+   {freq:247,duration:.094,wave:'triangle',volume:.0102,slide:-150,detune:.004,lpHz:2460,delay:.014}
+  ]),
+  noise:Object.freeze([{duration:.038,volume:.005,hp:1880,delay:.008}])
+ }),
+ enemyBoom:Object.freeze({
+  cooldownMs:260,
+  tones:Object.freeze([
+   {freq:294,duration:.054,wave:'square',volume:.0138,slide:-260,detune:.003,lpHz:3300},
+   {freq:185,duration:.125,wave:'sawtooth',volume:.0148,slide:-210,detune:.006,lpHz:2220,delay:.016}
+  ]),
+  noise:Object.freeze([{duration:.056,volume:.0062,hp:1580,delay:.01}])
+ }),
+ bossBoom:Object.freeze({
+  cooldownMs:360,
+  tones:Object.freeze([
+   {freq:330,duration:.07,wave:'square',volume:.0146,slide:-180,detune:.003,lpHz:3400},
+   {freq:220,duration:.16,wave:'triangle',volume:.0106,slide:-120,detune:.003,lpHz:2200,delay:.022},
+   {freq:147,duration:.28,wave:'sawtooth',volume:.0136,slide:-130,detune:.002,lpHz:1760,delay:.102}
+  ]),
+  noise:Object.freeze([{duration:.09,volume:.0068,hp:1320,delay:.02}])
+ }),
+ captureSuccess:Object.freeze({
+  cooldownMs:1400,
+  seq:[415,370,330,277],
+  step:.052,
+  wave:'square',
+  volume:.0132,
+  slide:-18,
+  lpHz:2800,
+  tones:Object.freeze([{freq:220,duration:.16,wave:'triangle',volume:.0062,slide:-44,lpHz:2360,delay:.104}])
+ })
 });
 
 const AURORA_MEASURED_EFFECT_CUES=Object.freeze({
  playerShot:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:160,referenceVolume:.92,clipStart:.08,clipDuration:.24}),
- playerHit:Object.freeze({
-  cooldownMs:1800,
-  scheduledDuration:.968,
-  layers:Object.freeze([
-   referenceAudioCue('assets/reference-audio/galaga3-death.m4a',{referenceVolume:.98,clipStart:.02,clipDuration:.439,delay:0}),
-   referenceAudioCue('assets/reference-audio/galaga3-death.m4a',{referenceVolume:.9,clipStart:.459,clipDuration:.399,delay:.439}),
-   referenceAudioCue('assets/reference-audio/galaga3-death.m4a',{referenceVolume:1.18,clipStart:.858,clipDuration:.13,delay:.832})
-  ])
- }),
- enemyHit:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220,referenceVolume:1,clipStart:.75,clipDuration:.2}),
- bossHit:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:240,referenceVolume:1.08,clipStart:1.149,clipDuration:.24}),
- enemyBoom:referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:260,referenceVolume:1.05,clipStart:.54,clipDuration:.24}),
- bossBoom:referenceAudioCue('assets/reference-audio/galaga3-boss-death-sasori.m4a',{cooldownMs:360,referenceVolume:1.04,clipStart:.798,clipDuration:.64}),
- captureSuccess:referenceAudioCue('assets/reference-audio/galaga3-fighter-captured.m4a',{cooldownMs:1400,referenceVolume:1.16,clipStart:4.248,clipDuration:.36})
+ playerHit:BUILD_INFO?.publicArtifactBoundaryEnabled
+  ? AURORA_PUBLIC_SAFE_EFFECT_CUES.playerHit
+  : Object.freeze({
+   cooldownMs:1800,
+   scheduledDuration:.968,
+   layers:Object.freeze([
+    referenceAudioCue('assets/reference-audio/galaga3-death.m4a',{referenceVolume:.98,clipStart:.02,clipDuration:.439,delay:0}),
+    referenceAudioCue('assets/reference-audio/galaga3-death.m4a',{referenceVolume:.9,clipStart:.459,clipDuration:.399,delay:.439}),
+    referenceAudioCue('assets/reference-audio/galaga3-death.m4a',{referenceVolume:1.18,clipStart:.858,clipDuration:.13,delay:.832})
+   ])
+  }),
+ enemyHit:BUILD_INFO?.publicArtifactBoundaryEnabled
+  ? AURORA_PUBLIC_SAFE_EFFECT_CUES.enemyHit
+  : referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220,referenceVolume:1,clipStart:.75,clipDuration:.2}),
+ bossHit:BUILD_INFO?.publicArtifactBoundaryEnabled
+  ? AURORA_PUBLIC_SAFE_EFFECT_CUES.bossHit
+  : referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:240,referenceVolume:1.08,clipStart:1.149,clipDuration:.24}),
+ enemyBoom:BUILD_INFO?.publicArtifactBoundaryEnabled
+  ? AURORA_PUBLIC_SAFE_EFFECT_CUES.enemyBoom
+  : referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:260,referenceVolume:1.05,clipStart:.54,clipDuration:.24}),
+ bossBoom:BUILD_INFO?.publicArtifactBoundaryEnabled
+  ? AURORA_PUBLIC_SAFE_EFFECT_CUES.bossBoom
+  : referenceAudioCue('assets/reference-audio/galaga3-boss-death-sasori.m4a',{cooldownMs:360,referenceVolume:1.04,clipStart:.798,clipDuration:.64}),
+ captureSuccess:BUILD_INFO?.publicArtifactBoundaryEnabled
+  ? AURORA_PUBLIC_SAFE_EFFECT_CUES.captureSuccess
+  : referenceAudioCue('assets/reference-audio/galaga3-fighter-captured.m4a',{cooldownMs:1400,referenceVolume:1.16,clipStart:4.248,clipDuration:.36})
 });
 
 const AURORA_CHALLENGE_RESULTS_HANDOFF_CUE=referenceAudioCue('assets/reference-audio/galaga2-challenging-stage-results.m4a',{

@@ -287,6 +287,43 @@ function checkBetaCheckoutCurrent(){
   }
 }
 
+function fetchLiveBuildInfo(url){
+  try{
+    const raw = execFileSync('curl', ['-fsSL', url], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe']
+    });
+    return JSON.parse(String(raw || '').trim());
+  }catch(err){
+    const stderr = err?.stderr ? String(err.stderr).trim() : '';
+    const stdout = err?.stdout ? String(err.stdout).trim() : '';
+    throw new Error(`Publish preflight failed: could not read live build info from ${url}.\n${stderr || stdout || err.message}`);
+  }
+}
+
+function checkLiveDevMatchesLocalCandidate(){
+  if(!fs.existsSync(DEV_BUILD_INFO)){
+    throw new Error(`Publish preflight failed: missing local dev build info at ${DEV_BUILD_INFO}. Publish /dev from this authority checkout before publishing beta.`);
+  }
+  const localDevInfo = loadJson(DEV_BUILD_INFO);
+  const liveDevInfo = fetchLiveBuildInfo('https://sgwoods.github.io/Aurora-Galactica/dev/build-info.json');
+  const localLabel = String(localDevInfo.label || localDevInfo.buildLabel || localDevInfo.versionLine || '').trim();
+  const liveLabel = String(liveDevInfo.label || liveDevInfo.buildLabel || liveDevInfo.versionLine || '').trim();
+  const localCommit = String(localDevInfo.sourceCommit || localDevInfo.commit || '').trim();
+  const liveCommit = String(liveDevInfo.sourceCommit || liveDevInfo.commit || '').trim();
+  const localChannel = String(localDevInfo.releaseChannel || '').trim();
+  const liveChannel = String(liveDevInfo.releaseChannel || '').trim();
+  const localDirty = !!localDevInfo.dirty;
+  const liveDirty = !!liveDevInfo.dirty;
+  if(localLabel !== liveLabel || localCommit !== liveCommit || localChannel !== liveChannel || localDirty !== liveDirty){
+    throw new Error(
+      'Publish preflight failed: hosted /dev does not match the local authority candidate. Publish /dev first, verify it live, then retry beta.\n'
+      + `local /dev: ${localLabel || '--'} @ ${localCommit || '--'} [${localChannel || '--'}] dirty=${localDirty}\n`
+      + `live  /dev: ${liveLabel || '--'} @ ${liveCommit || '--'} [${liveChannel || '--'}] dirty=${liveDirty}`
+    );
+  }
+}
+
 function checkPublicProjectTemplate(){
   const templatePath = path.join(ROOT, 'src', 'public', 'aurora-galactica.template.html');
   const template = loadText(templatePath);
@@ -839,6 +876,7 @@ function main(){
       throw new Error(`Publish preflight failed: ${err.message}`);
     }
     checkBetaCheckoutCurrent();
+    checkLiveDevMatchesLocalCandidate();
   }
   if(cfg.lane === 'production'){
     try{
@@ -900,6 +938,7 @@ module.exports = {
   checkProductionReleaseDocs,
   checkProductionCheckoutCurrent,
   checkBetaCheckoutCurrent,
+  checkLiveDevMatchesLocalCandidate,
   checkPublicProjectTemplate,
   checkPublicProjectPageArtifact,
   checkDocumentationVisibility,

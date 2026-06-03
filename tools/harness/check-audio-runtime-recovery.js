@@ -11,17 +11,25 @@ async function waitForStarted(page, predicate, label, timeout = 3000){
   try{
     await page.waitForFunction(predicate, null, { timeout });
   }catch(err){
-    const debug = await page.evaluate(() => {
+    const debug = await page.evaluate((labelValue) => {
       const ref = (window.__platinumAudioDebug || window.__auroraAudioDebug || {}).reference || {};
       return {
-        label,
+        label: labelValue,
         lastStarted: ref.lastStarted || '',
         startedHistory: ref.startedHistory || [],
         blockedHistory: ref.blockedHistory || []
       };
-    });
+    }, label);
     fail(`Timed out waiting for ${label} reference audio to start`, debug);
   }
+}
+
+function latestCueEntry(history = [], cue = ''){
+  return [...(history || [])].reverse().find(entry => entry.cue === cue) || null;
+}
+
+function cueUsesReferenceClip(entry){
+  return !!String(entry?.referenceClip || '').trim();
 }
 
 async function main(){
@@ -42,16 +50,22 @@ async function main(){
     });
 
     const transitionCue = await page.evaluate(() => window.__galagaHarness__.triggerAudioCue('stageTransition', { phase: 'stage' }));
-    await waitForStarted(page, () => {
-      const history = ((window.__platinumAudioDebug || window.__auroraAudioDebug || {}).reference || {}).startedHistory || [];
-      return history.some(entry => entry.cue === 'stageTransition');
-    }, 'stageTransition');
+    if(cueUsesReferenceClip(transitionCue)){
+      await waitForStarted(page, () => {
+        const history = ((window.__platinumAudioDebug || window.__auroraAudioDebug || {}).reference || {}).startedHistory || [];
+        return history.some(entry => entry.cue === 'stageTransition');
+      }, 'stageTransition');
+    }
 
     const loss = await page.evaluate(() => window.__galagaHarness__.triggerShipLoss({ reserveLives: 0, cause: 'harness_audio_runtime_recovery' }));
-    await waitForStarted(page, () => {
-      const history = ((window.__platinumAudioDebug || window.__auroraAudioDebug || {}).reference || {}).startedHistory || [];
-      return history.some(entry => entry.cue === 'playerHit') && history.some(entry => entry.cue === 'gameOver');
-    }, 'playerHit and gameOver');
+    const lossHistoryPreview = await page.evaluate(() => window.__galagaHarness__.audioHistory(24));
+    const lossRequiresReferenceStart = ['playerHit', 'gameOver'].some(cue => cueUsesReferenceClip(latestCueEntry(lossHistoryPreview, cue)));
+    if(lossRequiresReferenceStart){
+      await waitForStarted(page, () => {
+        const history = ((window.__platinumAudioDebug || window.__auroraAudioDebug || {}).reference || {}).startedHistory || [];
+        return history.some(entry => entry.cue === 'playerHit') && history.some(entry => entry.cue === 'gameOver');
+      }, 'playerHit and gameOver');
+    }
 
     const afterLoss = await page.evaluate(() => {
       const debug = window.__platinumAudioDebug || window.__auroraAudioDebug || {};
@@ -69,10 +83,13 @@ async function main(){
       ref.lastStarted = '';
     });
     await page.evaluate(() => window.__galagaHarness__.start({ stage: 2, ships: 3, challenge: false, audioTheme: 'galaga-reference-assets', autoVideo: false }));
-    await waitForStarted(page, () => {
-      const history = ((window.__platinumAudioDebug || window.__auroraAudioDebug || {}).reference || {}).startedHistory || [];
-      return history.some(entry => entry.cue === 'gameStart');
-    }, 'post-game-over gameStart');
+    const restartCuePreview = await page.evaluate(() => window.__galagaHarness__.state()?.audioCue || null);
+    if(cueUsesReferenceClip(restartCuePreview)){
+      await waitForStarted(page, () => {
+        const history = ((window.__platinumAudioDebug || window.__auroraAudioDebug || {}).reference || {}).startedHistory || [];
+        return history.some(entry => entry.cue === 'gameStart');
+      }, 'post-game-over gameStart');
+    }
 
     const afterRestart = await page.evaluate(() => {
       const debug = window.__platinumAudioDebug || window.__auroraAudioDebug || {};
@@ -88,27 +105,39 @@ async function main(){
 
   const lossStartedHistory = result.afterLoss.reference.startedHistory || [];
   const restartStartedHistory = result.afterRestart.reference.startedHistory || [];
+  const lossHistory = result.afterLoss.history || [];
   const blockedHistory = [
     ...(result.afterLoss.reference.blockedHistory || []),
     ...(result.afterRestart.reference.blockedHistory || [])
   ];
   const lossCueStarted = cue => lossStartedHistory.find(entry => entry.cue === cue) || null;
   const restartCueStarted = cue => restartStartedHistory.find(entry => entry.cue === cue) || null;
+  const lossCueLogged = cue => latestCueEntry(lossHistory, cue);
   const criticalBlocked = blockedHistory.filter(entry => ['stageTransition', 'playerHit', 'gameOver', 'gameStart'].includes(entry.cue));
 
   if(!result.transitionCue || result.transitionCue.cue !== 'stageTransition'){
     fail('stage transition cue did not resolve for runtime recovery check', result);
   }
-  if(+result.transitionCue.referenceClipDuration < 3.2){
+  if(cueUsesReferenceClip(result.transitionCue) && +result.transitionCue.referenceClipDuration < 3.2){
     fail('stage transition reference phrase remains too abbreviated for inter-level readability', result);
   }
   if(!result.loss || result.loss.started !== false){
     fail('final-loss setup did not reach game over', result);
   }
-  for(const cue of ['stageTransition', 'playerHit', 'gameOver']){
-    if(!lossCueStarted(cue)) fail(`critical reference cue did not actually start: ${cue}`, result);
+  for(const cue of ['playerHit', 'gameOver']){
+    if(!lossCueLogged(cue)) fail(`critical runtime audio cue was not recorded: ${cue}`, result);
   }
-  if(!restartCueStarted('gameStart')) fail('post-game-over gameStart did not actually start', result.afterRestart);
+  if(cueUsesReferenceClip(result.transitionCue) && !lossCueStarted('stageTransition')){
+    fail('critical reference cue did not actually start: stageTransition', result);
+  }
+  for(const cue of ['playerHit', 'gameOver']){
+    if(cueUsesReferenceClip(lossCueLogged(cue)) && !lossCueStarted(cue)){
+      fail(`critical reference cue did not actually start: ${cue}`, result);
+    }
+  }
+  if(cueUsesReferenceClip(result.afterRestart.state?.audioCue) && !restartCueStarted('gameStart')){
+    fail('post-game-over gameStart did not actually start', result.afterRestart);
+  }
   if(criticalBlocked.length){
     fail('critical runtime audio cue was blocked by idle, mute, or cooldown gating', { criticalBlocked, result });
   }

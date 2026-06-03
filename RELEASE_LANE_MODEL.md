@@ -8,11 +8,11 @@ documentation refresh rules for every Aurora / Platinum release lane.
 As of June 3, 2026:
 
 - hosted `/dev`
-  - `1.4.0.1+build.1006.sha.ed8d7f18`
-  - commit `ed8d7f18`
+  - `1.4.0.1+build.1011.sha.ea43155b`
+  - commit `ea43155b`
 - hosted `/beta`
-  - `1.4.0-beta.1+build.1006.sha.ed8d7f18.beta`
-  - commit `ed8d7f18`
+  - `1.4.0-beta.1+build.1011.sha.ea43155b.beta`
+  - commit `ea43155b`
 - hosted `/production`
   - `1.4.0+build.894.sha.1dc23d8a`
   - commit `1dc23d8a`
@@ -147,7 +147,7 @@ So the next release question is not "how do we get beta caught up to dev?"
 
 It is:
 
-- when the current `ed8d7f18` candidate is strong enough for production
+- when the current `ea43155b` candidate is strong enough for production
 - whether any additional release-process guardrails should land before the next
   production promotion
 
