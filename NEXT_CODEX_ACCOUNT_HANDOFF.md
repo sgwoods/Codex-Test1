@@ -1,19 +1,26 @@
 # Next Codex Account Handoff
 
-Use this file when continuing Aurora Galactica / Platinum work from this same
-local folder in a different Codex account.
+Updated: June 3, 2026
 
-## Local Folder
+Use this file when continuing `Codex-Test1` from another Codex account or from
+the MacBook machine after syncing from `origin/main`.
 
-Open this exact folder as the project workspace:
+## Start In The Right Repo
+
+Work from your local `Codex-Test1` checkout.
+
+Authority-machine checkout:
 
 ```text
-/Users/sgwoods/Library/Mobile Documents/com~apple~CloudDocs/MacBookProDocs/Codex/Codex-Test1
+/Users/steven/Projects-All/Codex-Test1
 ```
+
+Do not assume older CloudDocs or GitPages-era paths are current just because
+they appear in older handoff notes.
 
 ## First Commands
 
-From the repo root, run:
+From your local repo root, run:
 
 ```bash
 git switch main
@@ -21,6 +28,7 @@ git pull --rebase origin main
 npm run machine:bootstrap
 npm run machine:status
 npm run machine:doctor
+npm run release:show-authority
 ```
 
 If GitHub CLI authentication is missing in the new account context, run:
@@ -35,204 +43,114 @@ gh auth setup-git
 
 - `Codex-Test1` is the authoritative engineering source repo.
 - `Aurora-Galactica` is the public release-host mirror only.
-- This MacBook may develop, run harnesses, create branches, commit, push, and
-  merge normal development work.
-- This MacBook must not approve beta, publish beta, promote production, or
-  publish production unless release authority is explicitly transferred here.
-- Release authority currently remains:
+- Release authority remains on:
   - `machine_id`: `imacm1`
   - `machine_label`: `iMacM1`
+- Non-authority machines may develop, run harnesses, create branches, commit,
+  push, and merge normal development work.
+- Non-authority machines must not approve beta, promote production, publish
+  beta, or publish production unless release authority is explicitly
+  transferred.
 
-Before any release work, run:
+## Current Published State
+
+As of June 3, 2026:
+
+- hosted `/dev`
+  - `1.4.0.1+build.1002.sha.21041e8e`
+  - commit `21041e8e`
+- hosted `/beta`
+  - `1.4.0-beta.1+build.1002.sha.21041e8e.beta`
+  - commit `21041e8e`
+- hosted `/production`
+  - `1.4.0+build.894.sha.1dc23d8a`
+  - commit `1dc23d8a`
+
+Meaning:
+
+- `/dev` and `/beta` are aligned on the current authority-machine candidate.
+- `/production` is intentionally behind and still represents the last stable
+  public release family.
+- There are `108` commits on `main` after the current production commit.
+
+## Work Already Integrated On Main
+
+The other machine should treat the following work as already integrated and
+already published to `/dev` and `/beta`:
+
+- `595f59c9` merge of `origin/codex/macbook-ingestion-grammar-sync`
+- carried MacBook commit:
+  - `249117d2` `Strengthen 2UP and challenge tour guardrails`
+- hosted Arcade Music recovery and hosted fallback deployment:
+  - `707c4437`
+  - `45a0f542`
+  - `1bc961e8`
+  - `ddeddcef`
+- public/private artifact boundary enforcement already on `main`:
+  - `f01d3446`
+  - `bfa895ae`
+
+Do not redo those merges or try to republish them from the other machine as if
+they were still pending.
+
+## What Remains Undeployed
+
+Not yet promoted to hosted `/production`:
+
+- the MacBook 2UP and challenge-tour guardrail tranche
+- the private-artifact boundary and public-build cleanup tranche
+- the hosted Arcade Music fallback and recovery tranche
+
+Not yet completed as follow-up work:
+
+- release-process hardening so `/beta` cannot get ahead of stale hosted `/dev`
+- a stronger hosted Arcade Music verifier that asserts real playable fallback
+  behavior instead of only iframe presence
+- the final `challenge-set-piece` quality push, which remains the weakest
+  gameplay category
+
+## Best Next Work On The Other Machine
+
+If continuing product-quality work:
 
 ```bash
-npm run release:show-authority
+git switch main
+git pull --rebase origin main
+git switch -c codex/macbook-challenge-set-piece-quality
 ```
 
-If authority does not match this machine, stop before beta or production publish
-steps.
+Focus:
 
-## Current Project State
+- challenge-stage and challenge-set-piece quality
+- measured motion, pacing, and set-piece review
+- use reference evidence before subjective tuning
 
-As of the April 26, 2026 handoff:
+If continuing platform/release work:
 
-- `main` is the authoritative integration branch.
-- Hosted `/beta` and hosted `/production` are aligned to the `1.2.3` production
-  family.
-- Hosted `/dev` is the older forward integration lane and can move again when a
-  coherent bundle is ready.
-- The next product direction is no longer just minor polish. The roadmap now
-  treats level-by-level Aurora depth, challenge-stage richness, shared gameplay
-  videos, and an earlier second-game Platinum preview as major product pillars.
+```bash
+git switch main
+git pull --rebase origin main
+git switch -c codex/macbook-release-lane-guardrails
+```
 
-Key live lane state:
+Focus:
 
-- `/dev`: `1.2.3+build.470.sha.e4732eb`
-- `/beta`: `1.2.3-beta.1+build.489.sha.f6ba6c2.beta`
-- `/production`: `1.2.3+build.489.sha.f6ba6c2`
+- require fresh hosted `/dev` parity before `/beta` publish
+- tighten hosted Arcade Music verification
+- keep release authority on `iMacM1`
 
-## Important Docs To Read
+## Important Docs To Read First
 
-Start with:
-
-- [MACBOOK_CODEX_PROMPT.md](MACBOOK_CODEX_PROMPT.md)
-- [LEVEL_BY_LEVEL_EXPANSION_PLAN.md](LEVEL_BY_LEVEL_EXPANSION_PLAN.md)
-- [LONG_TERM_RELEASE_ROADMAP.md](LONG_TERM_RELEASE_ROADMAP.md)
-- [PRODUCT_ROADMAP.md](PRODUCT_ROADMAP.md)
-- [PLAN.md](PLAN.md)
-- [GO_FORWARD_EXECUTION_PLAN.md](GO_FORWARD_EXECUTION_PLAN.md)
-- [RESTART_FROM_HERE.md](RESTART_FROM_HERE.md)
-
-Then read as needed:
-
-- [MULTI_MACHINE_WORKFLOW.md](MULTI_MACHINE_WORKFLOW.md)
-- [DEVELOPER_MACHINE_BASELINE.md](DEVELOPER_MACHINE_BASELINE.md)
+- [OTHER_MACHINE_CONTINUATION_HANDOFF_2026-06-03.md](OTHER_MACHINE_CONTINUATION_HANDOFF_2026-06-03.md)
+- [RELEASE_LANE_MODEL.md](RELEASE_LANE_MODEL.md)
 - [RELEASE_POLICY.md](RELEASE_POLICY.md)
-- [QUALITY_RELEASE_SCORECARD.md](QUALITY_RELEASE_SCORECARD.md)
-- [VIDEO_ALIGNMENT_PROGRAM.md](VIDEO_ALIGNMENT_PROGRAM.md)
-- [REFERENCE_MEDIA_INVENTORY.md](REFERENCE_MEDIA_INVENTORY.md)
-- [PLATINUM_INTERFACE_REVIEW.md](PLATINUM_INTERFACE_REVIEW.md)
+- [SESSION_CLEANUP_AND_CROSS_MACHINE_INTEGRATION_PLAN_2026-06-01.md](SESSION_CLEANUP_AND_CROSS_MACHINE_INTEGRATION_PLAN_2026-06-01.md)
+- [PRIVATE_ARTIFACT_BOUNDARY_STATUS_2026-06-01.md](PRIVATE_ARTIFACT_BOUNDARY_STATUS_2026-06-01.md)
+- [PRIVATE_ARTIFACT_LEGACY_MIGRATION_PLAN_2026-06-01.md](PRIVATE_ARTIFACT_LEGACY_MIGRATION_PLAN_2026-06-01.md)
+
+Read as needed after that:
+
+- [ARTIFACT_STATUS_AND_GAMEPLAY_ADVANCEMENT_PLAN_2026-06-01.md](ARTIFACT_STATUS_AND_GAMEPLAY_ADVANCEMENT_PLAN_2026-06-01.md)
+- [GUARDIANS_INGESTION_NET_TAKEAWAY_AND_NEXT_10_STEPS_2026-06-01.md](GUARDIANS_INGESTION_NET_TAKEAWAY_AND_NEXT_10_STEPS_2026-06-01.md)
 - [REPOSITORY_ROLE_MAP.md](REPOSITORY_ROLE_MAP.md)
-
-## Immediate Next Work
-
-The current active branch is:
-
-```bash
-codex/macbook-pro-guardians-identity-0-1-candidate
-```
-
-Current conformance state:
-
-- `harness:check:audio-theme-phases` is green again
-- `harness:score:quality-conformance` is green at `8.8/10`
-- audio identity and cue alignment is still the weakest category at `6.1/10`
-- player movement is the next visible feel gap at `8.0/10`
-- the readable source of truth is
-  [CONFORMANCE_METRIC_OVERVIEW.md](CONFORMANCE_METRIC_OVERVIEW.md)
-
-Recommended next work:
-
-```bash
-git switch main
-git pull --rebase origin main
-npm run machine:bootstrap
-git switch -c codex/macbook-pro-reference-audio-identity
-```
-
-Goal:
-
-- use measured reference clips/waveforms before subjective tuning
-- improve Aurora audio identity and cue alignment beyond the restored phase gate
-- rerun `harness:score:quality-conformance`
-- update scorecard/docs if the numeric model changes
-
-After that, create the level-expansion branch:
-
-```bash
-git switch main
-git pull --rebase origin main
-git switch -c codex/macbook-pro-level-expansion-plan
-```
-
-Goal:
-
-- create the first detailed Aurora stage-family map
-- define the first challenge-stage expansion slice
-- define the first later-level entry/movement variation slice
-- map alien families, movement behaviors, reference evidence, and harness needs
-
-## Exact Prompt For The New Codex Account
-
-Paste this into the new Codex account after adding this folder to the project:
-
-```text
-You are working on Aurora Galactica / Platinum in the authoritative source repo:
-
-- Repo: sgwoods/Codex-Test1
-- Local clone: use the current local workspace open in Codex
-- Integration branch: main
-- Current local folder:
-  /Users/sgwoods/Library/Mobile Documents/com~apple~CloudDocs/MacBookProDocs/Codex/Codex-Test1
-
-Important repo roles:
-- Codex-Test1 = source of truth for code, docs, issues, planning, harnesses, release control
-- Aurora-Galactica = public release-host repo only
-- Do not treat Aurora-Galactica as the engineering source repo
-- Active issues and planning belong in Codex-Test1
-
-Multi-machine workflow:
-- This machine is fully set up for development and testing
-- Release authority is intentionally NOT on this machine right now
-- Release authority remains on:
-  - machine_id: imacm1
-  - machine_label: iMacM1
-- This machine may develop, run harnesses, create branches, commit, push, and merge normal development work
-- This machine must not approve beta, publish beta, promote production, or publish production unless release authority is explicitly transferred here
-
-Startup routine:
-1. Start from the Aurora repo root
-2. Run:
-   npm run machine:bootstrap
-   npm run machine:status
-   npm run machine:doctor
-3. If release work is requested, first run:
-   npm run release:show-authority
-   and stop if authority does not match this machine
-
-Branching rules:
-- Start from main
-- Use short-lived topic branches
-- On this machine, prefer:
-  codex/macbook-pro-<topic>
-
-Current product direction:
-- Keep 1.3 as the measurement-backed quality reset
-- Use 1.3 to produce the first committed level-expansion blueprint
-- Make 1.4 the first major level-by-level arcade-depth release
-- Make 1.5 the shared gameplay-video and flight-recorder release
-- Bring a second-game Platinum sneak peek forward after those foundations, before full 2.0
-
-Immediate next recommended work:
-1. Branch: codex/macbook-pro-reference-audio-identity
-   - start from CONFORMANCE_METRIC_OVERVIEW.md
-   - use measured reference clips/waveforms before subjective tuning
-   - improve the weakest scorecard category: audio identity and cue alignment
-   - rerun harness:score:quality-conformance
-   - update scorecard/docs if the quality model changes
-2. Branch: codex/macbook-pro-level-expansion-plan
-   - create the Aurora stage-family map
-   - define the first challenge-stage expansion slice
-   - define the first later-level entry/movement slice
-   - map alien families, movement behaviors, reference evidence, and harness needs
-
-Important docs to read first:
-- NEXT_CODEX_ACCOUNT_HANDOFF.md
-- MACBOOK_CODEX_PROMPT.md
-- LEVEL_BY_LEVEL_EXPANSION_PLAN.md
-- LONG_TERM_RELEASE_ROADMAP.md
-- PRODUCT_ROADMAP.md
-- PLAN.md
-- GO_FORWARD_EXECUTION_PLAN.md
-- RESTART_FROM_HERE.md
-
-Operational rules:
-- Prefer repo-grounded verification before conclusions
-- Persist important plans and decisions in repo docs, not just chat
-- Keep docs current when workflows or release state changes
-- All meaningful work should end up committed to GitHub
-- Do not use sudo or su for normal Aurora development
-- Use GitHub, not iCloud syncing of the same working tree across machines, as the sync mechanism
-- Non-destructive commands do not need extra user confirmation
-```
-
-## Notes For Continuity
-
-- Local services:
-  - Game: `http://127.0.0.1:8000/`
-  - Viewer: `http://127.0.0.1:4311/`
-- If the viewer root reports not OK, check `http://127.0.0.1:4311/api/runs`
-  because `local:resume` starts that endpoint.
-- If harnesses fail with localhost bind errors, rerun with normal local network
-  permissions.
-- If Git push fails after the account switch, run `gh auth setup-git`.
+- [REFERENCE_MEDIA_INVENTORY.md](REFERENCE_MEDIA_INVENTORY.md)

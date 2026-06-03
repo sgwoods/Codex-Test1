@@ -5,22 +5,24 @@ documentation refresh rules for every Aurora / Platinum release lane.
 
 ## Current Published State
 
-As of April 26, 2026:
+As of June 3, 2026:
 
 - hosted `/dev`
-  - `1.2.3+build.532.sha.b959491`
-  - commit `b959491`
+  - `1.4.0.1+build.1002.sha.21041e8e`
+  - commit `21041e8e`
 - hosted `/beta`
-  - `1.2.3-beta.1+build.532.sha.b959491.beta`
-  - commit `b959491`
+  - `1.4.0-beta.1+build.1002.sha.21041e8e.beta`
+  - commit `21041e8e`
 - hosted `/production`
-  - `1.2.3+build.532.sha.b959491`
-  - commit `b959491`
+  - `1.4.0+build.894.sha.1dc23d8a`
+  - commit `1dc23d8a`
 
 This means:
 
-- dev, beta, and production are aligned on the current shipped family
-- `main` is the forward integration branch for the next cycle
+- `/dev` and `/beta` are aligned on the current authority-machine candidate
+- `/production` still represents the last stable public release family
+- `main` is the forward integration branch, and the current production lane is
+  intentionally behind it
 
 ## Release Authority Model
 
@@ -137,14 +139,17 @@ Documentation expectation:
 
 ## Current Promotion Interpretation
 
-Current live `/dev`, `/beta`, and `/production` already match.
+Current live `/dev` and `/beta` match.
 
-So the next release question is not "how do we promote this beta now?"
+`/production` does not.
+
+So the next release question is not "how do we get beta caught up to dev?"
 
 It is:
 
-- when should the aligned lanes intentionally diverge again
-- what should define the next `1.3.0` beta family
+- when the current `21041e8e` candidate is strong enough for production
+- whether any additional release-process guardrails should land before the next
+  production promotion
 
 ## Artifact Persistence Rule
 
@@ -198,5 +203,9 @@ See also:
 Near-term:
 
 - use `main` as the integration line
-- refresh hosted `/dev` only for a coherent improvement bundle
-- shape the next hosted `/beta` around a `1.3.0` minor-cycle candidate
+- keep hosted `/dev` and `/beta` coherent when intentionally publishing the
+  current candidate family
+- do not move hosted `/production` until the candidate is explicitly judged
+  ready
+- tighten the `/dev` to `/beta` freshness guard so beta cannot quietly move
+  ahead of stale hosted `/dev`
