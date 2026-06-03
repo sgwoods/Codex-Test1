@@ -57,11 +57,11 @@ gh auth setup-git
 As of June 3, 2026:
 
 - hosted `/dev`
-  - `1.4.0.1+build.1002.sha.21041e8e`
-  - commit `21041e8e`
+  - `1.4.0.1+build.1006.sha.ed8d7f18`
+  - commit `ed8d7f18`
 - hosted `/beta`
-  - `1.4.0-beta.1+build.1002.sha.21041e8e.beta`
-  - commit `21041e8e`
+  - `1.4.0-beta.1+build.1006.sha.ed8d7f18.beta`
+  - commit `ed8d7f18`
 - hosted `/production`
   - `1.4.0+build.894.sha.1dc23d8a`
   - commit `1dc23d8a`
@@ -71,7 +71,7 @@ Meaning:
 - `/dev` and `/beta` are aligned on the current authority-machine candidate.
 - `/production` is intentionally behind and still represents the last stable
   public release family.
-- There are `108` commits on `main` after the current production commit.
+- There are `112` commits on `main` after the current production commit.
 
 ## Work Already Integrated On Main
 

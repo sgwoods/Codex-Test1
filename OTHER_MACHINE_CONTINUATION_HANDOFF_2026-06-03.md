@@ -10,7 +10,7 @@ on `main`.
 
 - repo: `/Users/steven/Projects-All/Codex-Test1`
 - branch: `main`
-- head: `21041e8e`
+- head: `ed8d7f18`
 - working tree: clean
 - release authority:
   - `machine_id`: `imacm1`
@@ -20,11 +20,11 @@ on `main`.
 ## Live Lane Snapshot
 
 - hosted `/dev`
-  - label `1.4.0.1+build.1002.sha.21041e8e`
-  - commit `21041e8e`
+  - label `1.4.0.1+build.1006.sha.ed8d7f18`
+  - commit `ed8d7f18`
 - hosted `/beta`
-  - label `1.4.0-beta.1+build.1002.sha.21041e8e.beta`
-  - commit `21041e8e`
+  - label `1.4.0-beta.1+build.1006.sha.ed8d7f18.beta`
+  - commit `ed8d7f18`
 - hosted `/production`
   - label `1.4.0+build.894.sha.1dc23d8a`
   - commit `1dc23d8a`
@@ -32,7 +32,7 @@ on `main`.
 Interpretation:
 
 - `/dev` and `/beta` are intentionally aligned.
-- `/production` is the last stable public release and is `108` commits behind
+- `/production` is the last stable public release and is `112` commits behind
   `main`.
 - this session did not promote production.
 
@@ -63,7 +63,7 @@ Hosted Arcade Music recovery and publish pass:
 - `1bc961e8` `Strengthen hosted Arcade Music iframe recovery`
 - `ddeddcef` `Loosen hosted Arcade Music iframe promotion`
 - release-doc and review-packet refresh commits through:
-  - `21041e8e` `Refresh code review packet for hosted Arcade Music pass`
+  - `ed8d7f18` `Refresh code review packet after handoff conformance docs`
 
 Practical result:
 
@@ -82,7 +82,7 @@ Do not reopen these as if they were still unmerged:
 - the public/private artifact boundary baseline
 
 The correct starting point is current `origin/main`, not any older local topic
-branch that predates `21041e8e`.
+branch that predates `ed8d7f18`.
 
 ## Best Next Continuation Options
 
@@ -135,7 +135,7 @@ npm run release:show-authority
 Expected current head after sync:
 
 ```text
-21041e8e
+ed8d7f18
 ```
 
 ## Release Boundary Reminder
