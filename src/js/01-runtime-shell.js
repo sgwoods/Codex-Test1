@@ -227,12 +227,13 @@ function resolveArcadeMusicIframe(frameRef=null){
 function activateArcadeMusicIframeFallback(reason='api_attach_timeout',frameRef=null){
  const playlistId=ARCADE_MUSIC.activePlaylistId||arcadeMusicPlaylistId();
  if(!playlistId||playlistId==='PLarcadeMusicHarness01')return false;
- if(!ARCADE_MUSIC.requested)return false;
- if(ARCADE_MUSIC.fallbackMode==='iframe')return true;
- if(window.YT&&typeof window.YT.Player==='function')return false;
  if(!resolveArcadeMusicIframe(frameRef))return false;
+ if(ARCADE_MUSIC.fallbackMode==='iframe'&&ARCADE_MUSIC.state==='playing')return true;
  clearArcadeMusicStartupTimeout();
  clearArcadeMusicFallbackTimeout();
+ ARCADE_MUSIC.requested=true;
+ if(!ARCADE_MUSIC.activePlaylistId)ARCADE_MUSIC.activePlaylistId=playlistId;
+ if(!ARCADE_MUSIC.activePlaylistSource)ARCADE_MUSIC.activePlaylistSource=arcadeMusicResolvedConfig().playlistSource;
  ARCADE_MUSIC.fallbackMode='iframe';
  ARCADE_MUSIC.state='playing';
  syncArcadeMusicUi();
