@@ -62,7 +62,7 @@ async function main(){
   if(result.unsignedTopTen.topScoreVideoPosting?.canPostVideo){
     fail('unsigned top-10 score should not be eligible for video posting', result);
   }
-  if(!/Sign in to post your replay/i.test(result.unsignedScoreboardHtml)){
+  if(!/Top-10 .* run saved locally\./i.test(result.unsignedScoreboardHtml) || !/Sign in to post the replay/i.test(result.unsignedScoreboardHtml)){
     fail('unsigned top-10 score did not render the sign-in reminder on the score table', result);
   }
   if(result.gameOver.topScoreSigninPrompt){
