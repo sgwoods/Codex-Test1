@@ -27,8 +27,8 @@ function regularEntryPathFamily(stage){
  return 'classic-center-arc-entry';
 }
 
-function spawnFormation(state=S){
- if(!isAuroraRuntimeState(state))state=S;
+function spawnFormation(state){
+ if(!isAuroraRuntimeState(state))state=currentAuroraRuntimeState();
  const S=state;
  const profile=stageBandProfile(S.stage,0);
  const cols=10,rows=4,{gx,gy,oy}=formationLayout(S.stage),ox=PLAY_W/2-(cols-1)*gx/2;
@@ -90,8 +90,8 @@ function spawnFormation(state=S){
  S.rogue=0;
 }
 
-function spawnChallenge(state=S){
- if(!isAuroraRuntimeState(state))state=S;
+function spawnChallenge(state){
+ if(!isAuroraRuntimeState(state))state=currentAuroraRuntimeState();
  const S=state;
  const profile=stageBandProfile(S.stage,1);
  const layout=currentGamePackChallengeLayout(S.stage);
@@ -152,8 +152,8 @@ function spawnChallenge(state=S){
  S.ch={hits:0,total,done:0,groups:Array.from({length:layout.groups},()=>0),bonus:0,perfect:0,upperBandY,upperBandTime:0,upperBandSamples:0};
 }
 
-function spawnStage(state=S){
- if(!isAuroraRuntimeState(state))state=S;
+function spawnStage(state){
+ if(!isAuroraRuntimeState(state))state=currentAuroraRuntimeState();
  const S=state;
  const transitionMode=S.transitionMode||'';
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=!!S.forceChallenge||isChallengeStage(S.stage);S.forceChallenge=0;S.profile=stageBandProfile(S.stage,S.challenge);S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
@@ -173,8 +173,8 @@ function spawnStage(state=S){
  logSnapshot('stage_spawn',S);
 }
 
-function queueStageTransition(state=S,mode='normal'){
- if(!isAuroraRuntimeState(state)){mode=state||'normal';state=S;}
+function queueStageTransition(state,mode='normal'){
+ if(!isAuroraRuntimeState(state)){mode=state||'normal';state=currentAuroraRuntimeState();}
  const S=state;
  const targetStage=S.pendingStage||S.stage;
  const nextIsChallenge=!!S.forceChallenge||isChallengeStage(targetStage);
@@ -226,7 +226,7 @@ function queueStageTransition(state=S,mode='normal'){
 }
 
 function startSequence(state,mode,duration,title,subtitle=''){
- if(!isAuroraRuntimeState(state)){subtitle=title||'';title=duration;duration=mode;mode=state;state=S;}
+ if(!isAuroraRuntimeState(state)){subtitle=title||'';title=duration;duration=mode;mode=state;state=currentAuroraRuntimeState();}
  const S=state;
  S.sequenceMode=mode;
  S.sequenceT=Math.max(S.sequenceT,duration);

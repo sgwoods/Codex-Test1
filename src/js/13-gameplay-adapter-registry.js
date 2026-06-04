@@ -1,10 +1,47 @@
 // Platinum gameplay adapter registry. Packs become playable only through an
 // owned adapter or an explicitly non-production preview adapter.
 
+let AURORA_GAMEPLAY_ADAPTER_STATE=null;
+
+function auroraGameplayAdapterState(){
+ return AURORA_GAMEPLAY_ADAPTER_STATE||currentAuroraRuntimeState();
+}
+
+function createAuroraGameplayAdapterState(opts={}){
+ const previous=auroraGameplayAdapterState();
+ const state=createAuroraRuntimeState(Object.assign({
+  best:previous?.best
+ },opts));
+ AURORA_GAMEPLAY_ADAPTER_STATE=state;
+ setActiveAuroraRuntimeState(state);
+ return state;
+}
+
+function startAuroraGameplayAdapter(){
+ const state=createAuroraGameplayAdapterState();
+ return startAuroraGameplay(state);
+}
+
+function updateAuroraGameplayAdapter(dt,input={}){
+ let state=AURORA_GAMEPLAY_ADAPTER_STATE;
+ if(!isAuroraRuntimeState(state)){
+  state=isAuroraRuntimeState(currentAuroraRuntimeState())?currentAuroraRuntimeState():createAuroraGameplayAdapterState();
+  AURORA_GAMEPLAY_ADAPTER_STATE=state;
+ }
+ return stepAuroraRuntime(state,dt,input);
+}
+
+function snapshotAuroraGameplayAdapter(){
+ const state=auroraGameplayAdapterState();
+ return isAuroraRuntimeState(state)?snapshot(state):null;
+}
+
 const AURORA_GAMEPLAY_ADAPTER=Object.freeze({
  gameKey:AURORA_GAME_PACK.metadata.gameKey,
  label:'Aurora Galactica gameplay',
- start:startAuroraGameplay
+ start:startAuroraGameplayAdapter,
+ update:updateAuroraGameplayAdapter,
+ snapshot:snapshotAuroraGameplayAdapter
 });
 
 const GAMEPLAY_ADAPTER_REGISTRY=Object.freeze({
@@ -145,3 +182,4 @@ window.currentGamePackCanStart=currentGamePackCanStart;
 window.firstPlayableGamePackWithAdapter=firstPlayableGamePackWithAdapter;
 window.startActiveGamePack=startActiveGamePack;
 window.updateActiveGamePack=updateActiveGamePack;
+window.auroraGameplayAdapterState=auroraGameplayAdapterState;

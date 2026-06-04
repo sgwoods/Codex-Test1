@@ -1,19 +1,19 @@
 // Aurora-specific capture, rescue, and carried-fighter helpers.
 
-function hasCarriedFighter(state=S){
- if(!isAuroraRuntimeState(state))state=S;
+function hasCarriedFighter(state){
+ if(!isAuroraRuntimeState(state))state=currentAuroraRuntimeState();
  const S=state;
  return S.e.some(e=>e.hp>0&&enemyIsCarryingFighter(e));
 }
 
-function canCapture(state=S){
- if(!isAuroraRuntimeState(state))state=S;
+function canCapture(state){
+ if(!isAuroraRuntimeState(state))state=currentAuroraRuntimeState();
  const S=state,p=S.p;
  return !p.dual&&!p.captured&&!p.pending&&!hasCarriedFighter(S)&&p.spawn<=0&&S.lives>=0&&S.captureCountStage===0;
 }
 
 function capturePlayer(state,e){
- if(!isAuroraRuntimeState(state)){e=state;state=S;}
+ if(!isAuroraRuntimeState(state)){e=state;state=currentAuroraRuntimeState();}
  const S=state;
  if(!canCapture(S))return;
  const p=S.p;
@@ -30,8 +30,8 @@ function capturePlayer(state,e){
  sfx.beam();
 }
 
-function finishCapture(state=S){
- if(!isAuroraRuntimeState(state))state=S;
+function finishCapture(state){
+ if(!isAuroraRuntimeState(state))state=currentAuroraRuntimeState();
  const S=state,p=S.p,e=p.capBoss;
  if(!e||e.hp<=0){
   p.captured=0;
@@ -71,8 +71,8 @@ function finishCapture(state=S){
  if(S.lives<0)gameOver(S);
 }
 
-function breakCapture(state=S,reason='boss_destroyed'){
- if(!isAuroraRuntimeState(state)){reason=state;state=S;}
+function breakCapture(state,reason='boss_destroyed'){
+ if(!isAuroraRuntimeState(state)){reason=state;state=currentAuroraRuntimeState();}
  const S=state,p=S.p,e=p.capBoss;
  p.captured=0;
  p.returning=1;
@@ -101,7 +101,7 @@ function breakCapture(state=S,reason='boss_destroyed'){
 }
 
 function activeEscortCount(state,e){
- if(!isAuroraRuntimeState(state)){e=state;state=S;}
+ if(!isAuroraRuntimeState(state)){e=state;state=currentAuroraRuntimeState();}
  const S=state;
  if(!enemyHasEscortState(e)||!e?.squadId)return Math.max(0,e?.esc|0);
  return S.e.filter(q=>q.hp>0&&q.squadId===e.squadId&&q.id!==e.id).length;
@@ -148,7 +148,7 @@ function carriedFighterTarget(e){
 }
 
 function assignEscorts(state,boss){
- if(!isAuroraRuntimeState(state)){boss=state;state=S;}
+ if(!isAuroraRuntimeState(state)){boss=state;state=currentAuroraRuntimeState();}
  const S=state;
  if(boss.t!=='boss'||!enemyHasEscortState(boss))return;
  const lateEscortSurge=S.stage>=14&&!S.challenge;

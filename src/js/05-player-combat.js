@@ -1,9 +1,10 @@
 // Aurora-specific player combat, bullet resolution, and rescue-return helpers.
 
-function bulletsMax(state=S){return state.p.dual?4:2}
-function dualShotOffsets(state=S){return state.p.dual?[-10,10]:[0]}
+function bulletsMax(state){state=isAuroraRuntimeState(state)?state:currentAuroraRuntimeState();return state.p.dual?4:2}
+function dualShotOffsets(state){state=isAuroraRuntimeState(state)?state:currentAuroraRuntimeState();return state.p.dual?[-10,10]:[0]}
 
-function shoot(state=S){
+function shoot(state){
+ if(!isAuroraRuntimeState(state))state=currentAuroraRuntimeState();
  const S=state,p=S.p;
  const captureWindow=!!(p.captured&&p.capBoss&&p.capBoss.hp>0&&p.capT>.55);
  if(p.cd>0||p.spawn>0||p.returning||(!captureWindow&&p.captured))return;

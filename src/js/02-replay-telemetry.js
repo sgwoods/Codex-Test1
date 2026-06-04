@@ -93,19 +93,20 @@ window.setCarryDebug=setCarryDebug;
 window.logCarryDebugState=logCarryDebugState;
 window.getCarryRelationState=carryRelationState;
 window.getRescuePodDebugState=rescuePodDebugState;
-function logSnapshot(tag='tick',state=S){
+function logSnapshot(tag='tick',state){
+ if(!isAuroraRuntimeState(state))state=currentAuroraRuntimeState();
  if(!REC)resetSession();
  REC.snapshots.push(Object.assign({t:recTime(state),tag},snapshot(state)));
 }
 function fireEnemyBullet(state,e,vx,vy,kind){
- if(!isAuroraRuntimeState(state)){kind=vy;vy=vx;vx=e;e=state;state=S;}
+ if(!isAuroraRuntimeState(state)){kind=vy;vy=vx;vx=e;e=state;state=currentAuroraRuntimeState();}
  const S=state;
  S.eb.push({x:e.x,y:e.y+24,vx,vy,kind,sourceId:e.id,sourceType:e.t,sourceDive:e.dive});
  logEvent('enemy_bullet_fired',Object.assign({stage:S.stage,kind,x:+e.x.toFixed(2),y:+(e.y+24).toFixed(2),vx:+vx.toFixed(2),vy:+vy.toFixed(2),bulletLane:playLane(e.x),playerLane:playLane(S.p.x)},enemyRef(e)));
  sfx.enemyShot();
 }
 function logEnemyAttackStart(state,e,mode,extra={}){
- if(!isAuroraRuntimeState(state)){extra=mode||{};mode=e;e=state;state=S;}
+ if(!isAuroraRuntimeState(state)){extra=mode||{};mode=e;e=state;state=currentAuroraRuntimeState();}
  const S=state;
  const targetLane=Number.isFinite(extra?.targetX)?playLane(extra.targetX):null;
  logEvent('enemy_attack_start',Object.assign({stage:S.stage,mode,x:+e.x.toFixed(2),y:+e.y.toFixed(2),originLane:playLane(e.x),targetLane,playerLane:playLane(S.p.x)},enemyRef(e),extra));

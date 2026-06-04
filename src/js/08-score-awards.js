@@ -1,7 +1,7 @@
 // Aurora-specific scoring, rescue-award, and challenge-bonus helpers.
 
 function nextExtendThresholdAfter(state,threshold){
- if(!isAuroraRuntimeState(state)){threshold=state;state=S;}
+ if(!isAuroraRuntimeState(state)){threshold=state;state=currentAuroraRuntimeState();}
  const S=state;
  const recurring=Math.max(0,+S.extendRecurring||0);
  if(recurring<=0)return 0;
@@ -9,7 +9,7 @@ function nextExtendThresholdAfter(state,threshold){
 }
 
 function awardExtendShips(state,beforeScore,afterScore){
- if(!isAuroraRuntimeState(state)){afterScore=beforeScore;beforeScore=state;state=S;}
+ if(!isAuroraRuntimeState(state)){afterScore=beforeScore;beforeScore=state;state=currentAuroraRuntimeState();}
  const S=state;
  let threshold=Math.max(0,+S.nextExtendScore||0);
  if(afterScore<=beforeScore||threshold<=0)return 0;
@@ -47,7 +47,7 @@ function awardExtendShips(state,beforeScore,afterScore){
 }
 
 function awardScorePoints(state,points){
- if(!isAuroraRuntimeState(state)){points=state;state=S;}
+ if(!isAuroraRuntimeState(state)){points=state;state=currentAuroraRuntimeState();}
  const S=state;
  const value=Math.max(0,+points|0);
  if(!value)return 0;
@@ -71,7 +71,7 @@ function awardScorePoints(state,points){
 }
 
 function destroyCarriedFighter(state,e){
- if(!isAuroraRuntimeState(state)){e=state;state=S;}
+ if(!isAuroraRuntimeState(state)){e=state;state=currentAuroraRuntimeState();}
  const S=state;
  if(!enemyIsCarryingFighter(e))return 0;
  // Manual-backed rule from the 1981 Namco manual:
@@ -97,7 +97,7 @@ function destroyCarriedFighter(state,e){
 }
 
 function releaseCapturedFighter(state,e){
- if(!isAuroraRuntimeState(state)){e=state;state=S;}
+ if(!isAuroraRuntimeState(state)){e=state;state=currentAuroraRuntimeState();}
  const S=state;
  const carryPos=carriedFighterTarget(e);
  S.cap={
@@ -121,7 +121,7 @@ function releaseCapturedFighter(state,e){
 }
 
 function spawnHostileCapturedFighter(state,e){
- if(!isAuroraRuntimeState(state)){e=state;state=S;}
+ if(!isAuroraRuntimeState(state)){e=state;state=currentAuroraRuntimeState();}
  const S=state;
  const rogue=makePackEnemyState({
   gamePack:currentGamePack(),
@@ -148,7 +148,7 @@ function spawnHostileCapturedFighter(state,e){
 }
 
 function awardKill(state,e,mode){
- if(!isAuroraRuntimeState(state)){mode=e;e=state;state=S;}
+ if(!isAuroraRuntimeState(state)){mode=e;e=state;state=currentAuroraRuntimeState();}
  const S=state;
  const dive=mode===1||mode===2||mode===4||mode===5;
  let pts=0;
@@ -194,7 +194,7 @@ function awardKill(state,e,mode){
 }
 
 function awardRescueJoin(state,autoDock){
- if(!isAuroraRuntimeState(state)){autoDock=state;state=S;}
+ if(!isAuroraRuntimeState(state)){autoDock=state;state=currentAuroraRuntimeState();}
  const S=state,p=S.p;
  S.cap=null;
  p.dual=1;
@@ -217,7 +217,8 @@ function awardRescueJoin(state,autoDock){
  sfx.join();
 }
 
-function finalizeChallengeClear(state=S){
+function finalizeChallengeClear(state){
+ if(!isAuroraRuntimeState(state))state=currentAuroraRuntimeState();
  const S=state;
  logEvent('challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total,upperBandY:Math.round(enemyChallengeUpperBandY(S.ch)),upperBandTime:+(S.ch.upperBandTime||0).toFixed(3),avgUpperBandTime:S.ch.total?+((S.ch.upperBandTime||0)/S.ch.total).toFixed(3):0});
  S.ch.done=1;

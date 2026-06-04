@@ -13,7 +13,7 @@ function diveAccel(stage){
 }
 
 function pickScriptEnemy(state,type,c){
- if(!isAuroraRuntimeState(state)){c=type;type=state;state=S;}
+ if(!isAuroraRuntimeState(state)){c=type;type=state;state=currentAuroraRuntimeState();}
  const S=state;
  const set=S.e.filter(e=>e.hp>0&&e.form&&!e.dive&&e.t===type);
  if(!set.length)return null;
@@ -21,7 +21,7 @@ function pickScriptEnemy(state,type,c){
 }
 
 function startDive(state,e,p,opts={}){
- if(!isAuroraRuntimeState(state)){opts=p||{};p=e;e=state;state=S;}
+ if(!isAuroraRuntimeState(state)){opts=p||{};p=e;e=state;state=currentAuroraRuntimeState();}
  const S=state;
  if(!e)return;
  const chargeTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
@@ -56,7 +56,7 @@ function startDive(state,e,p,opts={}){
 }
 
 function runStage1Script(state,dt,p,T){
- if(!isAuroraRuntimeState(state)){T=p;p=dt;dt=state;state=S;}
+ if(!isAuroraRuntimeState(state)){T=p;p=dt;dt=state;state=currentAuroraRuntimeState();}
  const S=state;
  if(!S.scriptMode)return;
  S.scriptT+=dt;
@@ -193,7 +193,7 @@ function applyReferenceChallengeSpawnLeadIn(e,dt,laneX,topY,side,slot,row,wave,s
 }
 
 function updateChallengeEnemy(state,e,dt){
- if(!isAuroraRuntimeState(state)){dt=e;e=state;state=S;}
+ if(!isAuroraRuntimeState(state)){dt=e;e=state;state=currentAuroraRuntimeState();}
  const S=state;
  const pathFamily=e.pathFamily||'classic-lane-wave';
  const fm=familyMotion(e);
@@ -493,7 +493,7 @@ function updateChallengeEnemy(state,e,dt){
 }
 
 function updateEnemy(state,e,dt,t,T,p){
- if(!isAuroraRuntimeState(state)){p=T;T=t;t=dt;dt=e;e=state;state=S;}
+ if(!isAuroraRuntimeState(state)){p=T;T=t;t=dt;dt=e;e=state;state=currentAuroraRuntimeState();}
  const S=state;
  if(e.hp<=0)return;
  e.hitT=Math.max(0,(e.hitT||0)-dt);

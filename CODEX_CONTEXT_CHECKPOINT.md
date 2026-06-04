@@ -1,128 +1,113 @@
 # Codex Context Checkpoint
 
-Generated: 2026-06-04 14:54:03 EDT
-Label: aurora-runtime-state-adapter-boundary-wip
+Generated: 2026-06-04 16:42:35 EDT
+Label: aurora-runtime-state-adapter-boundary-verified
 
-This is the durable recovery point for pausing local Aurora / Platinum work on
-this MacBook. Treat this as a WIP checkpoint, not as a merge-ready refactor.
+This is the durable recovery point for Aurora / Platinum runtime-boundary work
+on this MacBook.
 
 ## Current Repo State
 
 - Repo path: `/Users/sgwoods/Development/Codex/Codex-test1`
 - Branch: `codex/aurora-runtime-state-adapter-boundary`
-- Base HEAD before WIP edits: `b7e485eaa Add public overview slides to white-paper release path`
-- Release authority: MacBook M4 has been used for engineering work, but do not publish dev/beta/prod unless current release authority checks permit it.
-- Main/release lanes should be considered unaffected by this WIP branch.
+- Previous checkpoint commit: `1f86d743d Checkpoint Aurora runtime encapsulation WIP`
+- Base on main before this branch: `b7e485eaa Add public overview slides to white-paper release path`
+- Release lanes were not published from this work.
 
-## Active Objective
+## Objective
 
 Refactor Aurora Galactica toward the Galaxy Guardians runtime pattern:
 
 - Create isolated Aurora runtime state through `createAuroraRuntimeState(opts)`.
 - Convert Aurora gameplay ticking toward `stepAuroraRuntime(state, dt, input)`.
 - Expand the Aurora gameplay adapter so Platinum calls the adapter boundary.
-- Remove the engine-core fallback that directly calls Aurora gameplay from the global `update(dt)`.
+- Remove the engine-core fallback that directly calls Aurora gameplay from global `update(dt)`.
 
-The final goal is structural isolation: Aurora should eventually be able to run
-many independent runtime instances without race conditions caused by the global
-`S` object.
+## Completed In This Pass
 
-## Completed In This WIP
-
-- Added `createAuroraRuntimeState(opts)` in `src/js/00-boot.js`.
-- Replaced the direct `const S = { ... }` initializer with:
-  - `let S = createAuroraRuntimeState();`
-  - `let AURORA_ACTIVE_RUNTIME_STATE = S;`
+- Preserved the previously added `createAuroraRuntimeState(opts)` and active-state helpers:
   - `setActiveAuroraRuntimeState(state)`
   - `currentAuroraRuntimeState()`
   - `isAuroraRuntimeState(value)`
-- Exported the new runtime-state helpers on `window`.
-- Updated these helpers to accept/pass explicit state where practical:
-  - `shotCap(state)`
-  - `recTime(state)`
-  - `advanceGameplayClock(dt, state)`
-  - `snapshot(state)`
-- Began state-parameter conversion in:
-  - `src/js/02-replay-telemetry.js`
-  - `src/js/05-player-combat.js`
-  - `src/js/05-player-flow.js`
-  - `src/js/06-enemy-behavior.js`
-  - `src/js/07-capture-rescue.js`
-  - `src/js/08-score-awards.js`
-  - `src/js/09-stage-flow.js`
-- Added compatibility overloads to several helpers so old harness calls can still work during the migration.
+- Added `stepAuroraRuntime(state, dt, input = {})` in `src/js/10-gameplay.js`.
+- Kept `updateAuroraGameplay(dt)` only as a compatibility wrapper over the active Aurora runtime state.
+- Converted the main gameplay tick to pass explicit runtime state into:
+  - stage spawn and transition helpers
+  - capture/rescue helpers
+  - player control and persona-autoplay helpers
+  - enemy/challenge update helpers
+  - bullet/collision/rescue-return helpers
+  - score/challenge clear helpers
+  - telemetry snapshot and enemy bullet helpers
+- Expanded `AURORA_GAMEPLAY_ADAPTER` in `src/js/13-gameplay-adapter-registry.js` with:
+  - adapter-owned active state
+  - `start()`
+  - `update(dt, input)`
+  - `snapshot()`
+- Rewrote global `update(dt)` so Platinum no longer falls through to `return updateAuroraGameplay(dt);`.
+  It now updates only through the current playable adapter or the current dev-preview adapter.
+- Normalized compatibility wrappers to use `currentAuroraRuntimeState()` instead of `state = S`, avoiding JavaScript temporal-dead-zone failures when old harness calls use legacy signatures.
 
-## Known WIP Risks
+## Verification Run
 
-This branch is intentionally incomplete.
+Passed:
 
-- `src/js/10-gameplay.js` has not yet been refactored.
-- `stepAuroraRuntime(state, dt, input)` has not yet been created.
-- The bottom-level global `update(dt)` still needs to remove the hardcoded Aurora fallback.
-- `src/js/13-gameplay-adapter-registry.js` still needs an Aurora adapter with active runtime state, `update(dt)`, and `snapshot()`.
-- Some patched call sites now call `ex(S, ...)` and `bossDamageFx(S, ...)`, but `src/js/10-gameplay.js` still has the old `ex(x, y, ...)` and `bossDamageFx(x, y)` signatures. Build/runtime may fail until those are updated.
-- `src/js/05-player-flow.js` still needs explicit state conversion for:
-  - `runHarnessPlayer`
-  - `runAttractPlayer`
-  - `updatePlayerControl`
-- The branch has not been build-tested after the partial refactor.
-- The global `S` compatibility alias still exists and is still used by render/UI/harness surfaces. That is deliberate for this first pass, but it is not yet the full isolation target.
+- `npm run build`
+- `node tools/harness/check-game-picker-shell.js`
+- `npm run harness:check:platinum-pack-boot`
+- `npm run harness:check:sprite-render-mode-guard`
+- `npm run harness:check:player-two-mode`
+- `npm run harness:check:challenge-tour-watch-mode`
+- `npm run harness:score:quality-conformance`
 
-## Recommended Resume Steps
+Quality scorer result:
 
-1. Confirm branch and worktree:
-   - `git switch codex/aurora-runtime-state-adapter-boundary`
-   - `git status --short --branch`
-2. Inspect the interrupted state:
-   - `git show --stat HEAD`
-   - `git diff -- src/js/00-boot.js src/js/10-gameplay.js src/js/13-gameplay-adapter-registry.js`
-3. Patch `src/js/10-gameplay.js`:
-   - Add compatibility overloads for `ex(state, x, y, ...)` and `bossDamageFx(state, x, y)`.
-   - Introduce `stepAuroraRuntime(state, dt, input = {})`.
-   - Make `updateAuroraGameplay(dt)` a compatibility wrapper only if still needed.
-   - Ensure all tick-loop calls pass the explicit runtime state.
-4. Patch `src/js/05-player-flow.js`:
-   - Convert `runHarnessPlayer(state, dt, p, cfg)`.
-   - Convert `runAttractPlayer(state, dt, p)`.
-   - Convert `updatePlayerControl(state, dt, p)`.
-5. Patch `src/js/13-gameplay-adapter-registry.js`:
-   - Give `AURORA_GAMEPLAY_ADAPTER` an active state.
-   - Add `update(dt, input)` calling `stepAuroraRuntime`.
-   - Add `snapshot()`.
-6. Enforce the Platinum seam:
-   - Remove the hardcoded `return updateAuroraGameplay(dt);` fallback from global `update(dt)`.
-   - Make the engine call only the current adapter/dev-preview adapter when playable.
-7. Search for missed legacy calls:
-   - `rg -n "ex\\(|bossDamageFx\\(|updatePlayerBullets\\(|updateEnemyBullets\\(|updateEnemyBodyCollisions\\(|updateReleasedCapture\\(|finalizeChallengeClear\\(|updatePlayerControl\\(|updateEnemy\\(|updateChallengeEnemy\\(|runStage1Script\\(|fireEnemyBullet\\(|logEnemyAttackStart\\(" src/js`
-8. Run verification after the structural pass:
-   - `npm run build`
-   - `npm run harness:check:game-picker-shell`
-   - `npm run harness:check:platinum-pack-boot`
-   - `npm run harness:check:sprite-render-mode-guard`
-   - `npm run harness:check:player-two-mode`
-   - `npm run harness:check:challenge-tour-watch-mode`
-   - `npm run harness:score:quality-conformance`
-9. If the branch becomes coherent, commit a non-WIP refactor commit.
-10. Do not publish dev/beta/prod from this branch unless explicitly requested and release authority permits it.
+- `overallScore10`: `8.3`
+- `weakestCategory`: `challenge-set-piece`
 
-## Current Dirty Files At Pause
+Note: `npm run harness:check:game-picker-shell` is not currently defined in
+`package.json`; the underlying harness was run directly with
+`node tools/harness/check-game-picker-shell.js`.
 
-```text
-M src/js/00-boot.js
-M src/js/02-replay-telemetry.js
-M src/js/05-player-combat.js
-M src/js/05-player-flow.js
-M src/js/06-enemy-behavior.js
-M src/js/07-capture-rescue.js
-M src/js/08-score-awards.js
-M src/js/09-stage-flow.js
-M CODEX_CONTEXT_CHECKPOINT.md
-```
+## Current State Of The Refactor
+
+The adapter boundary is now coherent and verified through targeted harnesses.
+This is still a staged migration rather than complete global isolation:
+
+- The render/UI/harness surfaces still use the global `S` compatibility alias.
+- `setActiveAuroraRuntimeState(state)` intentionally keeps that alias pointed at
+  the adapter-owned state while the broader platform is migrated.
+- Aurora should now run through the Gameplay Adapter seam in normal Platinum
+  ticking, but deeper multi-instance isolation still requires removing non-render
+  reads of global `S` from surrounding helpers.
+
+## Recommended Next Steps
+
+1. Add a dedicated isolation harness that creates two or more Aurora runtime
+   states, steps them independently, and verifies score/stage/bullet/enemy arrays
+   do not alias each other.
+2. Continue removing non-render global `S` reads from gameplay helpers that are
+   still outside the immediate tick path.
+3. Decide whether rendering should remain bound to the active Aurora state or
+   should accept an explicit render snapshot for replay/headless scenarios.
+4. Add a small package script for `harness:check:game-picker-shell` so the
+   checkpoint command list matches the actual npm surface.
+5. Run a manual localhost smoke test for:
+   - normal Aurora start
+   - watch mode
+   - two-player per-life alternation
+   - challenge-tour watch mode
+   - Galaxy Guardians preview launch and return to Aurora
+6. If manual review is clean, push this branch and consider a PR or direct merge
+   path according to the current release workflow.
+7. Return to the quality roadmap: first five challenging stages, challenge-stage
+   movement grammar, and persona evaluation improvements remain the biggest
+   user-visible conformance gaps.
 
 ## Exact Restart Prompt
 
 ```text
-You are continuing paused Aurora Galactica / Platinum work from a durable Codex checkpoint.
+You are continuing Aurora Galactica / Platinum runtime-boundary work from a durable Codex checkpoint.
 
 Repo path:
 /Users/sgwoods/Development/Codex/Codex-test1
@@ -140,10 +125,9 @@ Read first:
 - PLATFORM_APP_SEPARATION_ARCHITECTURE_REVIEW_2026-06-03.md
 
 Current checkpoint:
-- label: aurora-runtime-state-adapter-boundary-wip
-- generated: 2026-06-04 14:54:03 EDT
+- label: aurora-runtime-state-adapter-boundary-verified
+- generated: 2026-06-04 16:42:35 EDT
 - branch: codex/aurora-runtime-state-adapter-boundary
-- base commit before WIP edits: b7e485eaa Add public overview slides to white-paper release path
 
-Continue the active objective: finish the Aurora runtime-state adapter-boundary refactor. This is a WIP partial refactor and should not be treated as build-clean until the listed resume steps and verification commands pass.
+Continue from the verified adapter-boundary refactor. Do not publish release lanes unless explicitly requested and release authority/publish checks permit it.
 ```
