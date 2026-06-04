@@ -1,16 +1,21 @@
 // Aurora-specific capture, rescue, and carried-fighter helpers.
 
-function hasCarriedFighter(){
+function hasCarriedFighter(state=S){
+ if(!isAuroraRuntimeState(state))state=S;
+ const S=state;
  return S.e.some(e=>e.hp>0&&enemyIsCarryingFighter(e));
 }
 
-function canCapture(){
- const p=S.p;
- return !p.dual&&!p.captured&&!p.pending&&!hasCarriedFighter()&&p.spawn<=0&&S.lives>=0&&S.captureCountStage===0;
+function canCapture(state=S){
+ if(!isAuroraRuntimeState(state))state=S;
+ const S=state,p=S.p;
+ return !p.dual&&!p.captured&&!p.pending&&!hasCarriedFighter(S)&&p.spawn<=0&&S.lives>=0&&S.captureCountStage===0;
 }
 
-function capturePlayer(e){
- if(!canCapture())return;
+function capturePlayer(state,e){
+ if(!isAuroraRuntimeState(state)){e=state;state=S;}
+ const S=state;
+ if(!canCapture(S))return;
  const p=S.p;
  p.captured=1;
  p.capBoss=e;
@@ -25,8 +30,9 @@ function capturePlayer(e){
  sfx.beam();
 }
 
-function finishCapture(){
- const p=S.p,e=p.capBoss;
+function finishCapture(state=S){
+ if(!isAuroraRuntimeState(state))state=S;
+ const S=state,p=S.p,e=p.capBoss;
  if(!e||e.hp<=0){
   p.captured=0;
   p.capBoss=null;
@@ -50,7 +56,7 @@ function finishCapture(){
  S.lastFighterCapturedT=S.stageClock;
  S.recoverT=Math.max(S.recoverT,1.6);
  S.attackGapT=Math.max(S.attackGapT,1.35);
- startSequence('captureBeat',1.45,'FIGHTER CAPTURED','BOSS RETREAT');
+ startSequence(S,'captureBeat',1.45,'FIGHTER CAPTURED','BOSS RETREAT');
  logEvent('fighter_captured',Object.assign({
   stage:S.stage,
   stageClock:+S.stageClock.toFixed(3),
@@ -62,11 +68,12 @@ function finishCapture(){
  logEvent('capture_retreat_phase',{stage:S.stage,duration:1.45,bossId:e.id});
  sfx.captureSuccess();
  sfx.captureRetreat();
- if(S.lives<0)gameOver();
+ if(S.lives<0)gameOver(S);
 }
 
-function breakCapture(reason='boss_destroyed'){
- const p=S.p,e=p.capBoss;
+function breakCapture(state=S,reason='boss_destroyed'){
+ if(!isAuroraRuntimeState(state)){reason=state;state=S;}
+ const S=state,p=S.p,e=p.capBoss;
  p.captured=0;
  p.returning=1;
  p.capBoss=null;
@@ -80,7 +87,7 @@ function breakCapture(reason='boss_destroyed'){
  S.bannerSub='FIGHTER ESCAPED';
  S.bannerMode='captureEscape';
  S.banner=1.05;
- ex(p.x,p.y,12,'#d8f2ff');
+ ex(S,p.x,p.y,12,'#d8f2ff');
  logEvent('capture_escape',{
   stage:S.stage,
   reason,
@@ -93,7 +100,9 @@ function breakCapture(reason='boss_destroyed'){
  sfx.join();
 }
 
-function activeEscortCount(e){
+function activeEscortCount(state,e){
+ if(!isAuroraRuntimeState(state)){e=state;state=S;}
+ const S=state;
  if(!enemyHasEscortState(e)||!e?.squadId)return Math.max(0,e?.esc|0);
  return S.e.filter(q=>q.hp>0&&q.squadId===e.squadId&&q.id!==e.id).length;
 }
@@ -138,7 +147,9 @@ function carriedFighterTarget(e){
  return {x:e.x+off.x,y:e.y+off.y,w:6,h:6};
 }
 
-function assignEscorts(boss){
+function assignEscorts(state,boss){
+ if(!isAuroraRuntimeState(state)){boss=state;state=S;}
+ const S=state;
  if(boss.t!=='boss'||!enemyHasEscortState(boss))return;
  const lateEscortSurge=S.stage>=14&&!S.challenge;
  const maxEscorts=S.stage===1&&S.scriptMode?1:(lateEscortSurge?3:2);
@@ -157,7 +168,7 @@ function assignEscorts(boss){
   e.shot=lateEscortSurge&&i>1?0:1;
   e.squadId=squadId;
   boss.esc++;
-  logEnemyAttackStart(e,'escort',{lead:boss.id,offset:+e.off.toFixed(2),pattern:lateEscortSurge?'late-stage-wide-escort':'standard-escort'});
+  logEnemyAttackStart(S,e,'escort',{lead:boss.id,offset:+e.off.toFixed(2),pattern:lateEscortSurge?'late-stage-wide-escort':'standard-escort'});
  }
  if(S.stage>=12&&boss.esc>=2&&!S.challenge){
   logEvent('late_reward_squadron_window',Object.assign({

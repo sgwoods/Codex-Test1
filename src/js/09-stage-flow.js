@@ -27,7 +27,9 @@ function regularEntryPathFamily(stage){
  return 'classic-center-arc-entry';
 }
 
-function spawnFormation(){
+function spawnFormation(state=S){
+ if(!isAuroraRuntimeState(state))state=S;
+ const S=state;
  const profile=stageBandProfile(S.stage,0);
  const cols=10,rows=4,{gx,gy,oy}=formationLayout(S.stage),ox=PLAY_W/2-(cols-1)*gx/2;
  const entry=[4,5,3,6,2,7,1,8,0,9];
@@ -88,7 +90,9 @@ function spawnFormation(){
  S.rogue=0;
 }
 
-function spawnChallenge(){
+function spawnChallenge(state=S){
+ if(!isAuroraRuntimeState(state))state=S;
+ const S=state;
  const profile=stageBandProfile(S.stage,1);
  const layout=currentGamePackChallengeLayout(S.stage);
  const challengeTiming=usesReferenceTimingModel()&&!S.attract
@@ -148,7 +152,9 @@ function spawnChallenge(){
  S.ch={hits:0,total,done:0,groups:Array.from({length:layout.groups},()=>0),bonus:0,perfect:0,upperBandY,upperBandTime:0,upperBandSamples:0};
 }
 
-function spawnStage(){
+function spawnStage(state=S){
+ if(!isAuroraRuntimeState(state))state=S;
+ const S=state;
  const transitionMode=S.transitionMode||'';
  S.pb.length=0;S.eb.length=0;S.cap=null;S.att=0;S.challenge=!!S.forceChallenge||isChallengeStage(S.stage);S.forceChallenge=0;S.profile=stageBandProfile(S.stage,S.challenge);S.t=stageTune(S.stage,S.challenge);S.fireCD=S.challenge?99:rnd(S.t.globalA,S.t.globalB);
  S.stagePresentation=currentGamePackStagePresentation(S.stage,S.challenge);
@@ -162,12 +168,14 @@ function spawnStage(){
  S.scriptMode=(!S.challenge&&S.stage===1)?1:0;S.scriptT=0;S.scriptI=0;S.scriptShotI=0;S.scriptShotT=3.2;
  logEvent('stage_spawn',{stage:S.stage,challenge:!!S.challenge,persona:S.harnessPersona||null});
  logEvent('stage_profile',{stage:S.stage,challenge:!!S.challenge,band:S.profile.name,challengeFamily:S.profile.challengeFamily,beeFamily:S.profile.beeFamily,butFamily:S.profile.butFamily,bossFamily:S.profile.bossFamily,themeId:S.stagePresentation?.id||'classic',backgroundMode:S.stagePresentation?.backgroundMode||'starfield',frameAccent:S.stagePresentation?.frameAccent||'classic-blue',bossArchetype:S.stagePresentation?.bossArchetype||'command-core'});
- if(S.challenge){spawnChallenge();S.bannerTxt=S.stagePresentation.challengeTitle;S.bannerSub=S.stagePresentation.stageLabel;S.bannerMode='challenge';S.banner=2.6}
- else{spawnFormation();S.bannerTxt=S.stagePresentation.stageLabel;S.bannerSub='';S.bannerMode='stage';S.banner=1.6}
- logSnapshot('stage_spawn');
+ if(S.challenge){spawnChallenge(S);S.bannerTxt=S.stagePresentation.challengeTitle;S.bannerSub=S.stagePresentation.stageLabel;S.bannerMode='challenge';S.banner=2.6}
+ else{spawnFormation(S);S.bannerTxt=S.stagePresentation.stageLabel;S.bannerSub='';S.bannerMode='stage';S.banner=1.6}
+ logSnapshot('stage_spawn',S);
 }
 
-function queueStageTransition(mode='normal'){
+function queueStageTransition(state=S,mode='normal'){
+ if(!isAuroraRuntimeState(state)){mode=state||'normal';state=S;}
+ const S=state;
  const targetStage=S.pendingStage||S.stage;
  const nextIsChallenge=!!S.forceChallenge||isChallengeStage(targetStage);
  const nextStagePresentation=currentGamePackStagePresentation(targetStage,nextIsChallenge);
@@ -217,7 +225,9 @@ function queueStageTransition(mode='normal'){
 }else sfx.transition(nextIsChallenge?1:0);
 }
 
-function startSequence(mode,duration,title,subtitle=''){
+function startSequence(state,mode,duration,title,subtitle=''){
+ if(!isAuroraRuntimeState(state)){subtitle=title||'';title=duration;duration=mode;mode=state;state=S;}
+ const S=state;
  S.sequenceMode=mode;
  S.sequenceT=Math.max(S.sequenceT,duration);
  S.bannerTxt=title;

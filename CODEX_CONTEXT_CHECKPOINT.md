@@ -1,224 +1,149 @@
 # Codex Context Checkpoint
 
-Generated: 2026-06-01T16:42:17.733Z
-Label: guardians-routeability-before-after
+Generated: 2026-06-04 14:54:03 EDT
+Label: aurora-runtime-state-adapter-boundary-wip
 
-This is the durable recovery point for long Aurora / Platinum Codex sessions.
-Use it before switching machines, before starting a multi-hour run, and whenever
-the conversation has become long enough that automatic compaction could drop
-important working context.
+This is the durable recovery point for pausing local Aurora / Platinum work on
+this MacBook. Treat this as a WIP checkpoint, not as a merge-ready refactor.
 
 ## Current Repo State
 
 - Repo path: `/Users/sgwoods/Development/Codex/Codex-test1`
-- Branch: `codex/macbook-ingestion-grammar-sync`
-- HEAD: `71c52ca0a` Expose routeability review in ingestion grammar
-- Dirty files excluding checkpoint self-output: `14`
+- Branch: `codex/aurora-runtime-state-adapter-boundary`
+- Base HEAD before WIP edits: `b7e485eaa Add public overview slides to white-paper release path`
+- Release authority: MacBook M4 has been used for engineering work, but do not publish dev/beta/prod unless current release authority checks permit it.
+- Main/release lanes should be considered unaffected by this WIP branch.
 
-## Active Plan
+## Active Objective
 
-- Advance Guardians movement quality through shared motion grammar and routeability candidate gates
+Refactor Aurora Galactica toward the Galaxy Guardians runtime pattern:
 
-## Recommended Next Steps
+- Create isolated Aurora runtime state through `createAuroraRuntimeState(opts)`.
+- Convert Aurora gameplay ticking toward `stepAuroraRuntime(state, dt, input)`.
+- Expand the Aurora gameplay adapter so Platinum calls the adapter boundary.
+- Remove the engine-core fallback that directly calls Aurora gameplay from the global `update(dt)`.
 
-- Create browser-visible before-after capture or promote the candidate behind stronger gates
+The final goal is structural isolation: Aurora should eventually be able to run
+many independent runtime instances without race conditions caused by the global
+`S` object.
 
-## Notes
+## Completed In This WIP
 
-- Codex Desktop does not expose a repo command that forces internal chat compaction. The safe replacement is a manual checkpoint plus a deliberate fresh session from this file.
-- This checkpoint intentionally filters its own generated files out of the dirty-status read so it can be committed as the recovery point.
+- Added `createAuroraRuntimeState(opts)` in `src/js/00-boot.js`.
+- Replaced the direct `const S = { ... }` initializer with:
+  - `let S = createAuroraRuntimeState();`
+  - `let AURORA_ACTIVE_RUNTIME_STATE = S;`
+  - `setActiveAuroraRuntimeState(state)`
+  - `currentAuroraRuntimeState()`
+  - `isAuroraRuntimeState(value)`
+- Exported the new runtime-state helpers on `window`.
+- Updated these helpers to accept/pass explicit state where practical:
+  - `shotCap(state)`
+  - `recTime(state)`
+  - `advanceGameplayClock(dt, state)`
+  - `snapshot(state)`
+- Began state-parameter conversion in:
+  - `src/js/02-replay-telemetry.js`
+  - `src/js/05-player-combat.js`
+  - `src/js/05-player-flow.js`
+  - `src/js/06-enemy-behavior.js`
+  - `src/js/07-capture-rescue.js`
+  - `src/js/08-score-awards.js`
+  - `src/js/09-stage-flow.js`
+- Added compatibility overloads to several helpers so old harness calls can still work during the migration.
 
-## Git Status
+## Known WIP Risks
 
-```
-M MOTION_GRAMMAR_VOCABULARY.md
- M ingestion-dashboard.json
- M package.json
- M reference-artifacts/analyses/galaxy-guardians-identity/README.md
- M tools/harness/guardians-long-surface-lib.js
-?? reference-artifacts/analyses/galaxy-guardians-identity/motion-grammar-candidates-0.1.json
-?? reference-artifacts/analyses/galaxy-guardians-identity/motion-grammar-candidates-0.1.md
-?? reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.json
-?? reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.md
-?? reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.svg
-?? tools/harness/analyze-galaxy-guardians-motion-grammar-candidates.js
-?? tools/harness/analyze-galaxy-guardians-routeability-before-after.js
-?? tools/harness/check-galaxy-guardians-motion-grammar-candidates.js
-?? tools/harness/check-galaxy-guardians-routeability-before-after.js
-```
+This branch is intentionally incomplete.
 
-## Diff Stat
+- `src/js/10-gameplay.js` has not yet been refactored.
+- `stepAuroraRuntime(state, dt, input)` has not yet been created.
+- The bottom-level global `update(dt)` still needs to remove the hardcoded Aurora fallback.
+- `src/js/13-gameplay-adapter-registry.js` still needs an Aurora adapter with active runtime state, `update(dt)`, and `snapshot()`.
+- Some patched call sites now call `ex(S, ...)` and `bossDamageFx(S, ...)`, but `src/js/10-gameplay.js` still has the old `ex(x, y, ...)` and `bossDamageFx(x, y)` signatures. Build/runtime may fail until those are updated.
+- `src/js/05-player-flow.js` still needs explicit state conversion for:
+  - `runHarnessPlayer`
+  - `runAttractPlayer`
+  - `updatePlayerControl`
+- The branch has not been build-tested after the partial refactor.
+- The global `S` compatibility alias still exists and is still used by render/UI/harness surfaces. That is deliberate for this first pass, but it is not yet the full isolation target.
 
-```
-MOTION_GRAMMAR_VOCABULARY.md                       | 20 +++++++++++
- ingestion-dashboard.json                           | 28 +++++++++++++--
- package.json                                       |  4 +++
- .../analyses/galaxy-guardians-identity/README.md   | 12 +++++++
- tools/harness/guardians-long-surface-lib.js        | 40 ++++++++++++++++++++++
- 5 files changed, 102 insertions(+), 2 deletions(-)
-```
+## Recommended Resume Steps
 
-## Recent Log
+1. Confirm branch and worktree:
+   - `git switch codex/aurora-runtime-state-adapter-boundary`
+   - `git status --short --branch`
+2. Inspect the interrupted state:
+   - `git show --stat HEAD`
+   - `git diff -- src/js/00-boot.js src/js/10-gameplay.js src/js/13-gameplay-adapter-registry.js`
+3. Patch `src/js/10-gameplay.js`:
+   - Add compatibility overloads for `ex(state, x, y, ...)` and `bossDamageFx(state, x, y)`.
+   - Introduce `stepAuroraRuntime(state, dt, input = {})`.
+   - Make `updateAuroraGameplay(dt)` a compatibility wrapper only if still needed.
+   - Ensure all tick-loop calls pass the explicit runtime state.
+4. Patch `src/js/05-player-flow.js`:
+   - Convert `runHarnessPlayer(state, dt, p, cfg)`.
+   - Convert `runAttractPlayer(state, dt, p)`.
+   - Convert `updatePlayerControl(state, dt, p)`.
+5. Patch `src/js/13-gameplay-adapter-registry.js`:
+   - Give `AURORA_GAMEPLAY_ADAPTER` an active state.
+   - Add `update(dt, input)` calling `stepAuroraRuntime`.
+   - Add `snapshot()`.
+6. Enforce the Platinum seam:
+   - Remove the hardcoded `return updateAuroraGameplay(dt);` fallback from global `update(dt)`.
+   - Make the engine call only the current adapter/dev-preview adapter when playable.
+7. Search for missed legacy calls:
+   - `rg -n "ex\\(|bossDamageFx\\(|updatePlayerBullets\\(|updateEnemyBullets\\(|updateEnemyBodyCollisions\\(|updateReleasedCapture\\(|finalizeChallengeClear\\(|updatePlayerControl\\(|updateEnemy\\(|updateChallengeEnemy\\(|runStage1Script\\(|fireEnemyBullet\\(|logEnemyAttackStart\\(" src/js`
+8. Run verification after the structural pass:
+   - `npm run build`
+   - `npm run harness:check:game-picker-shell`
+   - `npm run harness:check:platinum-pack-boot`
+   - `npm run harness:check:sprite-render-mode-guard`
+   - `npm run harness:check:player-two-mode`
+   - `npm run harness:check:challenge-tour-watch-mode`
+   - `npm run harness:score:quality-conformance`
+9. If the branch becomes coherent, commit a non-WIP refactor commit.
+10. Do not publish dev/beta/prod from this branch unless explicitly requested and release authority permits it.
 
-```
-71c52ca0a (HEAD -> codex/macbook-ingestion-grammar-sync, origin/codex/macbook-ingestion-grammar-sync) Expose routeability review in ingestion grammar
-c722fac34 Add human-perfect guard to challenge candidate sweeps
-9bb463aa9 (origin/main, origin/HEAD) Refresh code review packet for release doc wording update
-9878d3dce Refresh release conformance docs for artifact wording
-d013c62e5 Refresh code review packet for artifact wording
-c33b4689b Clarify Aurora and Guardians artifact requests
-b3d186c81 Refresh code review packet for release doc update
-55c147259 Refresh release conformance docs for Windigo intake
-```
+## Current Dirty Files At Pause
 
-## Machine Status Snapshot
-
-```json
-{
-  "ok": true,
-  "mode": "status",
-  "machine": {
-    "machine_id": "macbook-pro",
-    "machine_label": "MacBook-Pro",
-    "hostname": "MacBook-Pro",
-    "repo_path": "/Users/sgwoods/Development/Codex/Codex-test1",
-    "profile_exists": true,
-    "profile_path": "/Users/sgwoods/Development/Codex/Codex-test1/.machine-profile.json",
-    "profile_preview": {
-      "machine_id": "macbook-pro",
-      "machine_label": "MacBook-Pro",
-      "hostname": "MacBook-Pro",
-      "repo_path": "/Users/sgwoods/Development/Codex/Codex-test1",
-      "tool_versions": {
-        "node": "v25.9.0",
-        "npm": "11.12.1",
-        "python3": "Python 3.9.6",
-        "gh": "gh version 2.91.0 (2026-04-22)",
-        "chrome": "Google Chrome 148.0.7778.179",
-        "harness_browser": "playwright-managed-chromium"
-      },
-      "gh_auth": true,
-      "last_successful_bootstrap_at": "2026-05-20T14:59:22.155Z"
-    }
-  },
-  "repo": {
-    "branch": "codex/macbook-ingestion-grammar-sync",
-    "dirty": true,
-    "upstream": "origin/codex/macbook-ingestion-grammar-sync",
-    "ahead": 0,
-    "behind": 0,
-    "remote_ok": true
-  },
-  "release_authority": {
-    "machine_id": "imacm1",
-    "machine_label": "iMacM1",
-    "claimed_by": "Steven Woods",
-    "claimed_at": "2026-04-25T13:16:57Z",
-    "notes": "Primary Aurora release-authority machine after the 1.2.3+build.532.sha.b959491 production refresh.",
-    "current_machine_matches": false
-  },
-  "local_services": {
-    "game": {
-      "ok": true,
-      "reachable": true,
-      "root_ok": true,
-      "url": "http://localhost:8000/",
-      "listeners": [
-        {
-          "pid": 25405,
-          "cwd": "/Users/sgwoods/Development/Codex/Codex-test1",
-          "root_ok": true
-        }
-      ]
-    },
-    "viewer": {
-      "ok": true,
-      "reachable": true,
-      "root_ok": true,
-      "url": "http://localhost:4311/api/runs",
-      "listeners": [
-        {
-          "pid": 25481,
-          "cwd": "/Users/sgwoods/Development/Codex/Codex-test1",
-          "root_ok": true
-        }
-      ]
-    },
-    "state_dir": "/Users/sgwoods/Development/Codex/Codex-test1/.local-services"
-  },
-  "live_lanes": {
-    "dev": {
-      "ok": true,
-      "version": "1.4.0",
-      "label": "1.4.0.1+build.975.sha.9bb463aa",
-      "commit": "9bb463aa",
-      "releaseChannel": "development"
-    },
-    "beta": {
-      "ok": true,
-      "version": "1.4.0-beta.1",
-      "label": "1.4.0-beta.1+build.894.sha.1dc23d8a.beta",
-      "commit": "1dc23d8a",
-      "releaseChannel": "production beta"
-    },
-    "production": {
-      "ok": true,
-      "version": "1.4.0",
-      "label": "1.4.0+build.894.sha.1dc23d8a",
-      "commit": "1dc23d8a",
-      "releaseChannel": "production"
-    }
-  },
-  "publish_permitted": false,
-  "next": [
-    "git switch -c codex/macbook-pro-your-topic",
-    "npm run release:show-authority",
-    "npm run release:claim-authority -- --machine-id macbook-pro --label \"MacBook-Pro\""
-  ]
-}
+```text
+M src/js/00-boot.js
+M src/js/02-replay-telemetry.js
+M src/js/05-player-combat.js
+M src/js/05-player-flow.js
+M src/js/06-enemy-behavior.js
+M src/js/07-capture-rescue.js
+M src/js/08-score-awards.js
+M src/js/09-stage-flow.js
+M CODEX_CONTEXT_CHECKPOINT.md
 ```
 
 ## Exact Restart Prompt
 
 ```text
-You are continuing Aurora Galactica / Platinum work from a durable Codex checkpoint.
+You are continuing paused Aurora Galactica / Platinum work from a durable Codex checkpoint.
 
 Repo path:
 /Users/sgwoods/Development/Codex/Codex-test1
 
 Start by running:
-git branch --show-current
-git status --short
+git switch codex/aurora-runtime-state-adapter-boundary
+git status --short --branch
 git log -5 --oneline --decorate
 npm run machine:status
 
 Read first:
 - CODEX_CONTEXT_CHECKPOINT.md
 - RESTART_FROM_HERE.md
-- MULTI_MACHINE_WORKFLOW.md
+- RELEASE_POLICY.md
+- PLATFORM_APP_SEPARATION_ARCHITECTURE_REVIEW_2026-06-03.md
 
 Current checkpoint:
-- label: guardians-routeability-before-after
-- generated: 2026-06-01T16:42:17.733Z
-- branch: codex/macbook-ingestion-grammar-sync
-- commit: 71c52ca0a Expose routeability review in ingestion grammar
-- dirty files excluding checkpoint self-output: 14
+- label: aurora-runtime-state-adapter-boundary-wip
+- generated: 2026-06-04 14:54:03 EDT
+- branch: codex/aurora-runtime-state-adapter-boundary
+- base commit before WIP edits: b7e485eaa Add public overview slides to white-paper release path
 
-Continue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.
+Continue the active objective: finish the Aurora runtime-state adapter-boundary refactor. This is a WIP partial refactor and should not be treated as build-clean until the listed resume steps and verification commands pass.
 ```
-
-## Compaction Prevention Protocol
-
-1. At every phase boundary, run:
-
-```bash
-npm run codex:checkpoint -- --label <short-topic> --plan "<current goal>" --next "<next concrete step>"
-```
-
-2. Commit the checkpoint if it records meaningful state or handoff context.
-3. Start a fresh Codex session with the restart prompt above when the chat is
-   long, after a multi-hour cycle, or before switching machines.
-4. Treat the fresh session as the practical way to force compaction safely:
-   context is rebuilt from the repo instead of relying on a fragile chat tail.
-
-JSON artifact: `reference-artifacts/analyses/codex-context-checkpoint/latest.json`

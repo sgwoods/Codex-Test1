@@ -13,7 +13,10 @@ function resolveWatchChallengeStartStage(cfg={}){
  return {requestedStage:challengeStage,stage,stageMode:'display',forceChallenge:1,startKind:'challenge',challengeStage,displayLabel:challengeStageDisplayLabel(challengeStage,{challengeNumber:1}),watchScope:'challenges'};
 }
 
-function startAuroraGameplay(){
+function startAuroraGameplay(state=S){
+ if(isAuroraRuntimeState(state))setActiveAuroraRuntimeState(state);
+ else state=S;
+ const S=state;
  if(typeof clearRuntimeLoopFault==='function')clearRuntimeLoopFault();
  if(typeof clearPlayerTwoAutoTurnTimer==='function')clearPlayerTwoAutoTurnTimer();
  stopAttractLoop();
@@ -64,7 +67,7 @@ started=1;paused=0;Object.assign(S,{score:runScore,lives:runLives,stage:runStage
  Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inputResetHoldT:0,vx:0});
  logEvent('game_start',{persona:S.harnessPersona||null,watchMode:!!S.watchMode,watchScope:S.watchScope||'game',developerExpertPlay:developerWatchPersona||'',requestedStage:startStage.requestedStage,stage:startStage.stage,startStageMode:startStage.stageMode,startKind:startStage.startKind||'level',challengeStage:startStage.challengeStage||null,displayLabel:startStage.displayLabel||'',forceChallenge:startStage.forceChallenge,playerTwo:playerTwoRun?.enabled?playerTwoSnapshot(playerTwoRun):null});
  startRunRecording();
- spawnStage();msg.textContent='';
+ spawnStage(S);msg.textContent='';
  const openingTiming=(!startStage.forceChallenge&&startStage.stage===1&&usesReferenceTimingModel())
   ? currentGamePackReferenceTiming('stage1Opening')
   : null;
@@ -97,8 +100,9 @@ started=1;paused=0;Object.assign(S,{score:runScore,lives:runLives,stage:runStage
  c?.focus?.();
 }
 
-function loseShip(cause={}){
- const p=S.p;if(p.inv>0||p.spawn>0||p.captured)return;
+function loseShip(state=S,cause={}){
+ if(!isAuroraRuntimeState(state)){cause=state||{};state=S;}
+ const S=state,p=S.p;if(p.inv>0||p.spawn>0||p.captured)return;
  const dualLoss=!!p.dual;
  const hp=playerHitbox();
  logEvent('ship_lost',Object.assign({
@@ -125,9 +129,9 @@ function loseShip(cause={}){
  S.eb.length=0;
  p.inv=2.7;
  p.cd=Math.max(p.cd,0.42);
- ex(p.x,p.y,42,'#86c7ff');
- ex(p.x,p.y,28,'#f4f8ff');
- ex(p.x,p.y,14,'#ff7f9f');
+ ex(S,p.x,p.y,42,'#86c7ff');
+ ex(S,p.x,p.y,28,'#f4f8ff');
+ ex(S,p.x,p.y,14,'#ff7f9f');
  const shipsRemaining=dualLoss?Math.max(0,S.lives+1):Math.max(0,S.lives);
  S.alertTxt=shipsRemaining>0?`SHIP DESTROYED\n${shipsRemaining===1?'ONE SHIP REMAINING':`${shipsRemaining} SHIPS REMAINING`}`:'SHIP DESTROYED';
  S.alertT=Math.max(S.alertT,1.25);
@@ -138,17 +142,19 @@ function loseShip(cause={}){
  }
  S.lives--;p.spawn=1.32;
  if(typeof handlePlayerTwoShipLoss==='function'&&handlePlayerTwoShipLoss(cause))return;
- if(S.lives<0)gameOver();
+ if(S.lives<0)gameOver(S);
 }
 
-function gameOver(){
+function gameOver(state=S){
+ if(!isAuroraRuntimeState(state))state=S;
+ const S=state;
  if(S.attract){
   logEvent('attract_demo_end',{score:S.score,stage:S.stage,reason:'demo_lost'});
   enterAttractScores();
   return;
  }
  logEvent('game_over',{score:S.score,stage:S.stage});
- logSnapshot('game_over');
+ logSnapshot('game_over',S);
  if(typeof updatePlayerTwoGameOverState==='function')updatePlayerTwoGameOverState();
  started=0;
  paused=0;

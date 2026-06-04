@@ -1,12 +1,16 @@
 // Aurora-specific scoring, rescue-award, and challenge-bonus helpers.
 
-function nextExtendThresholdAfter(threshold){
+function nextExtendThresholdAfter(state,threshold){
+ if(!isAuroraRuntimeState(state)){threshold=state;state=S;}
+ const S=state;
  const recurring=Math.max(0,+S.extendRecurring||0);
  if(recurring<=0)return 0;
  return (Math.floor((threshold||0)/recurring)+1)*recurring;
 }
 
-function awardExtendShips(beforeScore,afterScore){
+function awardExtendShips(state,beforeScore,afterScore){
+ if(!isAuroraRuntimeState(state)){afterScore=beforeScore;beforeScore=state;state=S;}
+ const S=state;
  let threshold=Math.max(0,+S.nextExtendScore||0);
  if(afterScore<=beforeScore||threshold<=0)return 0;
  let awarded=0;
@@ -16,7 +20,7 @@ function awardExtendShips(beforeScore,afterScore){
   S.extendAwards=(S.extendAwards|0)+1;
   awarded++;
   lastThreshold=threshold;
-  threshold=nextExtendThresholdAfter(threshold);
+  threshold=nextExtendThresholdAfter(S,threshold);
  }
  if(!awarded)return 0;
  S.nextExtendScore=threshold;
@@ -42,7 +46,9 @@ function awardExtendShips(beforeScore,afterScore){
  return awarded;
 }
 
-function awardScorePoints(points){
+function awardScorePoints(state,points){
+ if(!isAuroraRuntimeState(state)){points=state;state=S;}
+ const S=state;
  const value=Math.max(0,+points|0);
  if(!value)return 0;
  const before=S.score|0;
@@ -60,11 +66,13 @@ function awardScorePoints(points){
   humanScore:S.playerTwo?.p1?.score??S.playerTwo?.humanScore??null,
   playerTwoScore:S.playerTwo?.p2?.score??S.playerTwo?.score??null
  });
- awardExtendShips(before,S.score|0);
+ awardExtendShips(S,before,S.score|0);
  return value;
 }
 
-function destroyCarriedFighter(e){
+function destroyCarriedFighter(state,e){
+ if(!isAuroraRuntimeState(state)){e=state;state=S;}
+ const S=state;
  if(!enemyIsCarryingFighter(e))return 0;
  // Manual-backed rule from the 1981 Namco manual:
  // - 500 for destroying a carried fighter in standby/formation
@@ -74,7 +82,7 @@ function destroyCarriedFighter(e){
  const points=attacking?currentGamePack().scoring.carriedFighter.attacking:currentGamePack().scoring.carriedFighter.standby;
  const off=carriedFighterOffset(e);
  if(enemyHasCaptureState(e))e.carry=0;
- awardScorePoints(points);
+ awardScorePoints(S,points);
  logEvent('captured_fighter_destroyed',Object.assign({stage:S.stage,points,attacking,playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
  S.alertTxt=`CAPTURED FIGHTER DESTROYED ${points}`;
  S.alertT=Math.max(S.alertT,1.45);
@@ -82,13 +90,15 @@ function destroyCarriedFighter(e){
  S.bannerSub='DESTROYED';
  S.bannerMode='captureLoss';
  S.banner=1.05;
- ex(e.x+off.x,e.y+off.y,10,'#d8f2ff');
+ ex(S,e.x+off.x,e.y+off.y,10,'#d8f2ff');
  sfx.capturedFighterDestroyed();
  sfx.hit();
  return points;
 }
 
-function releaseCapturedFighter(e){
+function releaseCapturedFighter(state,e){
+ if(!isAuroraRuntimeState(state)){e=state;state=S;}
+ const S=state;
  const carryPos=carriedFighterTarget(e);
  S.cap={
   mode:'dock',
@@ -110,7 +120,9 @@ function releaseCapturedFighter(e){
  sfx.rescue();
 }
 
-function spawnHostileCapturedFighter(e){
+function spawnHostileCapturedFighter(state,e){
+ if(!isAuroraRuntimeState(state)){e=state;state=S;}
+ const S=state;
  const rogue=makePackEnemyState({
   gamePack:currentGamePack(),
   type:'rogue',
@@ -135,19 +147,21 @@ function spawnHostileCapturedFighter(e){
  return rogue;
 }
 
-function awardKill(e,mode){
+function awardKill(state,e,mode){
+ if(!isAuroraRuntimeState(state)){mode=e;e=state;state=S;}
+ const S=state;
  const dive=mode===1||mode===2||mode===4||mode===5;
  let pts=0;
  if(S.challenge){
   pts=currentGamePack().scoring.challengeEnemy;
-  awardScorePoints(pts);
+  awardScorePoints(S,pts);
   S.ch.hits++;
   if(enemyHasChallengeState(e)&&Number.isInteger(e.group)&&S.ch.groups){
    S.ch.groups[e.group]=(S.ch.groups[e.group]||0)+1;
    if(S.ch.groups[e.group]===8){
      const bonus=challengeGroupBonus(S.stage);
      S.ch.bonus=(S.ch.bonus||0)+bonus;
-     awardScorePoints(bonus);
+     awardScorePoints(S,bonus);
      logEvent('challenge_group_bonus',{stage:S.stage,group:e.group,bonus,hits:S.ch.hits,total:S.ch.total});
     }
    }
@@ -156,22 +170,22 @@ function awardKill(e,mode){
  }
  pts=currentGamePackEnemyKillPoints(e,dive);
  if(e.t==='boss'&&dive){
-  const escorts=activeEscortCount(e);
+  const escorts=activeEscortCount(S,e);
   if(S.stage>=4&&escorts>0){
    logEvent('special_attack_bonus',{stage:S.stage,bonus:pts,escorts});
    S.alertTxt=`SPECIAL BONUS ${pts}`;
    S.alertT=Math.max(S.alertT,1.1);
   }
  }
- awardScorePoints(pts);
+ awardScorePoints(S,pts);
  const carrying=enemyIsCarryingFighter(e);
  logEvent('enemy_killed',Object.assign({points:pts,dive,challenge:0,rescued:!!(carrying&&dive),turnedHostile:!!(carrying&&!dive),playerBullets:S.pb.length,enemyBullets:S.eb.length},enemyRef(e)));
  if(e.t==='boss'&&typeof commentatorEvent==='function')commentatorEvent('boss_destroyed',{points:pts,dive,carrying});
  if(carrying){
   if(dive){
-   releaseCapturedFighter(e);
+   releaseCapturedFighter(S,e);
   }else{
-   const hostile=spawnHostileCapturedFighter(e);
+   const hostile=spawnHostileCapturedFighter(S,e);
    logEvent('captured_fighter_turned_hostile',Object.assign({stage:S.stage,hostileId:hostile.id},enemyRef(e)));
    S.alertTxt='CAPTURED FIGHTER TURNED HOSTILE';
    S.alertT=2.2;
@@ -179,14 +193,15 @@ function awardKill(e,mode){
  }
 }
 
-function awardRescueJoin(autoDock){
- const p=S.p;
+function awardRescueJoin(state,autoDock){
+ if(!isAuroraRuntimeState(state)){autoDock=state;state=S;}
+ const S=state,p=S.p;
  S.cap=null;
  p.dual=1;
- awardScorePoints(currentGamePack().scoring.rescueJoin);
+ awardScorePoints(S,currentGamePack().scoring.rescueJoin);
  S.recoverT=Math.max(S.recoverT,1.15);
  S.attackGapT=Math.max(S.attackGapT,.9);
- startSequence('rescueBeat',1.1,'DUAL FIGHTER','JOINED');
+ startSequence(S,'rescueBeat',1.1,'DUAL FIGHTER','JOINED');
  logEvent('fighter_rescued',Object.assign({
   stage:S.stage,
   playerX:+p.x.toFixed(2),
@@ -202,12 +217,13 @@ function awardRescueJoin(autoDock){
  sfx.join();
 }
 
-function finalizeChallengeClear(){
+function finalizeChallengeClear(state=S){
+ const S=state;
  logEvent('challenge_clear',{stage:S.stage,hits:S.ch.hits,total:S.ch.total,upperBandY:Math.round(enemyChallengeUpperBandY(S.ch)),upperBandTime:+(S.ch.upperBandTime||0).toFixed(3),avgUpperBandTime:S.ch.total?+((S.ch.upperBandTime||0)/S.ch.total).toFixed(3):0});
  S.ch.done=1;
  const perfect=S.ch.hits===S.ch.total?currentGamePack().scoring.perfectChallengeClear:0;
  S.ch.perfect=perfect;
- awardScorePoints(perfect);
+ awardScorePoints(S,perfect);
  S.bannerTxt=perfect?'PERFECT BONUS':'CHALLENGE COMPLETE';
  S.bannerSub=`HITS ${S.ch.hits}/${S.ch.total}`;
  const bonusTotal=(S.ch.bonus||0)+perfect;
