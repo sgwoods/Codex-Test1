@@ -188,6 +188,7 @@ function buildProjectPage(buildInfo, latestNote, dashboard, pushedAt){
     LANE_CONFORMANCE_DATA_HREF: 'https://sgwoods.github.io/Aurora-Galactica/conformance-dashboard-data.json',
     LANE_RELEASE_NOTES_HREF: releaseNotesLandingHref(),
     LANE_WHITE_PAPER_HREF: 'https://sgwoods.github.io/Aurora-Galactica/white-paper.html',
+    LANE_PROJECT_OVERVIEW_SLIDES_HREF: 'https://sgwoods.github.io/Aurora-Galactica/project-overview-slides.html',
     LANE_PROJECT_GUIDE_HREF: 'https://sgwoods.github.io/Aurora-Galactica/project-guide.html',
     LANE_APPLICATION_GUIDE_HREF: 'https://sgwoods.github.io/Aurora-Galactica/application-guide.html',
     LANE_PLATINUM_GUIDE_HREF: 'https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html',

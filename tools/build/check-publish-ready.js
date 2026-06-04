@@ -51,6 +51,7 @@ const REQUIRED_SOURCE_DOCS = [
   'WHITE_PAPER.md',
   'white-paper.json',
   'white-paper/README.md',
+  'white-paper/project-overview-slides.json',
   'white-paper/CITATION_LEDGER.md',
   'white-paper/ILLUSTRATION_PLAN.md',
   'white-paper/RELATED_WORK.md',
@@ -72,6 +73,8 @@ const USER_VISIBLE_DOC_FILES = [
   'releases.html',
   'white-paper.html',
   'white-paper-pdf.json',
+  'project-overview-slides.html',
+  'project-overview-slides.json',
   'project-guide.html',
   'application-guide.html',
   'platinum-guide.html',
@@ -121,8 +124,31 @@ const USER_VISIBLE_SECTIONS = [
       'Citation Ledger',
       'V1 Release Path',
       'Open current lane PDF',
+      'Open 20-slide overview',
+      'Open slide metadata',
       'Related Work',
       'Reviewer Checklist'
+    ]
+  },
+  {
+    id: 'project-overview-slides-page',
+    file: 'project-overview-slides.html',
+    requiredText: [
+      '20-slide public overview',
+      'Open white paper',
+      'Open slide metadata',
+      'Slide Index',
+      'Source Artifacts'
+    ]
+  },
+  {
+    id: 'project-overview-slides-meta',
+    file: 'project-overview-slides.json',
+    requiredText: [
+      '"artifactType": "project-overview-slides"',
+      '"sourceArtifact": "white-paper/project-overview-slides.json"',
+      '"slideCount": 20',
+      '"whitePaperVersion":'
     ]
   },
   {
@@ -702,6 +728,7 @@ function checkPublicProjectPageArtifact(cfg){
     'Reference ingestion',
     'Documentation provenance',
     'documentation-provenance.json',
+    'project-overview-slides.html',
     'live conformance dashboard game profiles',
     'Strategic beta review',
     buildInfo.label,

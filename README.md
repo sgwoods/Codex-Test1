@@ -71,8 +71,12 @@ Currently verified hosted docs:
   - `https://sgwoods.github.io/Aurora-Galactica/project-guide.html`
 - white paper on hosted `/dev`:
   - `https://sgwoods.github.io/Aurora-Galactica/dev/white-paper.html`
+- 20-slide project overview on hosted `/dev`:
+  - `https://sgwoods.github.io/Aurora-Galactica/dev/project-overview-slides.html`
 - intended white paper on hosted `/production`:
   - `https://sgwoods.github.io/Aurora-Galactica/white-paper.html`
+- intended 20-slide project overview on hosted `/production`:
+  - `https://sgwoods.github.io/Aurora-Galactica/project-overview-slides.html`
   - still pending publication as of May 18, 2026
 - Platinum guide:
   - `https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html`
@@ -94,6 +98,7 @@ Best living white paper and project-area narrative:
 
 - [WHITE_PAPER.md](WHITE_PAPER.md)
 - [white-paper/README.md](white-paper/README.md)
+- [white-paper/project-overview-slides.json](white-paper/project-overview-slides.json)
 - [white-paper/CITATION_LEDGER.md](white-paper/CITATION_LEDGER.md)
 
 Best platform overview:

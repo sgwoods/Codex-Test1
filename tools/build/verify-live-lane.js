@@ -52,6 +52,8 @@ function laneConfig(lane){
         'https://sgwoods.github.io/Aurora-Galactica/dev/white-paper.html',
         'https://sgwoods.github.io/Aurora-Galactica/dev/white-paper.pdf',
         'https://sgwoods.github.io/Aurora-Galactica/dev/white-paper-pdf.json',
+        'https://sgwoods.github.io/Aurora-Galactica/dev/project-overview-slides.html',
+        'https://sgwoods.github.io/Aurora-Galactica/dev/project-overview-slides.json',
         'https://sgwoods.github.io/Aurora-Galactica/dev/public-project-page.html',
         'https://sgwoods.github.io/Aurora-Galactica/dev/assets/platinum-platform-mark.png'
       ]
@@ -78,6 +80,8 @@ function laneConfig(lane){
         'https://sgwoods.github.io/Aurora-Galactica/beta/white-paper.html',
         'https://sgwoods.github.io/Aurora-Galactica/beta/white-paper.pdf',
         'https://sgwoods.github.io/Aurora-Galactica/beta/white-paper-pdf.json',
+        'https://sgwoods.github.io/Aurora-Galactica/beta/project-overview-slides.html',
+        'https://sgwoods.github.io/Aurora-Galactica/beta/project-overview-slides.json',
         'https://sgwoods.github.io/Aurora-Galactica/beta/public-project-page.html',
         'https://sgwoods.github.io/Aurora-Galactica/beta/assets/platinum-platform-mark.png'
       ]
@@ -103,6 +107,8 @@ function laneConfig(lane){
         'https://sgwoods.github.io/Aurora-Galactica/white-paper.html',
         'https://sgwoods.github.io/Aurora-Galactica/white-paper.pdf',
         'https://sgwoods.github.io/Aurora-Galactica/white-paper-pdf.json',
+        'https://sgwoods.github.io/Aurora-Galactica/project-overview-slides.html',
+        'https://sgwoods.github.io/Aurora-Galactica/project-overview-slides.json',
         'https://sgwoods.github.io/Aurora-Galactica/public-project-page.html',
         'https://sgwoods.github.io/Aurora-Galactica/assets/platinum-platform-mark.png'
       ]

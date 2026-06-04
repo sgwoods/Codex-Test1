@@ -1,8 +1,8 @@
 # Platinum, Aurora, and the Conformance Project
 
 Status: living white paper
-Current draft: `v0.4.0-draft`
-Date: `2026-05-17`
+Current draft: `v0.4.1-draft`
+Date: `2026-06-04`
 Audience: broad technical readers, interested builders, collaborators, future
 reviewers, and public-facing project storytelling
 
@@ -59,19 +59,25 @@ The larger point is that we are building a system in which:
 - `3. Five-layer operating model`: platform, games, ingestion, harnesses, and
   release economics as one program.
 - `4. Ingestion strategy`: how external evidence becomes structured game truth.
-- `5. Harnessing and conformance`: how we measure quality instead of asserting
+- `5. Challenge-stage ingestion case study`: how richer reference recovery
+  changed the plan for Aurora's hardest gameplay gap.
+- `6. Harnessing and conformance`: how we measure quality instead of asserting
   it.
-- `6. Release discipline`: how dev, beta, and production remain explicit and
+- `7. Release discipline`: how dev, beta, and production remain explicit and
   professional.
-- `7. Generative AI role`: how model work accelerates the project without
+- `8. Generative AI role`: how model work accelerates the project without
   replacing evidence.
-- `8. Historical evolution`: how the project moved from launch to platform to
+- `9. Working loop`: how the project turns a gap into evidence, implementation,
+  measurement, and release learning.
+- `10. Historical evolution`: how the project moved from launch to platform to
   multi-game conformance.
-- `9. Citation program`: how outside ideas and source recovery work should be
+- `11. Citation program`: how outside ideas and source recovery work should be
   tracked explicitly.
-- `10. Related work and internal references`: how this paper stays short
-  without losing traceability.
-- `11. Living-paper policy`: how this white paper should be maintained and
+- `12. Related work`: how outside agent/evaluator work informs the project.
+- `13. Internal canonical docs`: how this paper stays short without losing
+  traceability.
+- `14. Why this project matters`: why the project is larger than a game repo.
+- `15. Living-paper policy`: how this white paper should be maintained and
   released over time.
 
 ## How To Read This Paper
@@ -130,7 +136,7 @@ Further detail:
 
 ### 2. Program Snapshot
 
-As of `2026-05-17`, the project can be described in one page:
+As of `2026-06-04`, the project can be described in one page:
 
 | Area | Current role | Why it matters |
 | --- | --- | --- |
@@ -145,19 +151,25 @@ Current maintained metric read:
 
 | Scope | Current read | Interpretation |
 | --- | --- | --- |
-| `Aurora Galactica` | `9.2/10` release-quality conformance | Strong shipped baseline with known high-value gaps, especially audio identity and later depth. |
-| `Galaxy Guardians` reference preview | `7.6/10` | Credible second-game proof, but intentionally not presented as production-ready parity. |
-| `Galaxy Guardians` playtest-weighted preview | `6.9/10` | Useful reminder that a game can have process maturity before it has public-readiness maturity. |
-| Local-vs-cloud resource split | about `92.8%` local wall, about `7.4%` declared GPU-equivalent wall | Shows the intended operating doctrine: repeated measurement local, model help strategic. |
+| `Aurora Galactica` release gate | `8.8/10` dashboard roll-up; `8.6/10` economics roll-up | Strong playable baseline, but not yet a `1.4.1` production claim because challenge-stage set pieces remain weak. |
+| `Aurora` audio identity | `7.3/10` | Cue semantics are strong, but acoustic fit and full-phrase runtime stability remain the biggest audio gaps. |
+| `Aurora` challenge-stage set pieces | `4.3/10` strict score | The clearest gameplay-conformance blocker: movement, graphics, alien novelty, and target-video fit are still far from mature Galaga-like bonus exhibitions. |
+| `Galaxy Guardians` reference preview | `>=7.7/10` reference target posture; `6.9/10` playtest-weighted preview | Credible second-game proof, but intentionally not presented as production-ready parity. |
+| Resource/economics ledger | `904` measured runs, `971.3` tracked wall minutes, `1.48GB` artifact growth | Shows the operating doctrine: turn model-assisted insight into local CPU/browser harnesses and track the cost of quality movement. |
 
-The evidence program also became more concrete in this pass:
+The evidence program also became more concrete in the latest pass:
 
-- the recovered March-April Neo-Galaga history now has a canonical
-  representative preserved-source lane
-- the cited Galaga/Galaxian source media now live under repo-owned
-  preserved-source paths instead of stale old-machine download references
-- the white-paper review spine now explicitly checks preserved-source drift as
-  part of release quality
+- release authority moved from `iMacM1` to this MacBook M4 for the current
+  release path
+- release conformance artifacts, the game conformance catalog, and white-paper
+  PDF metadata are refreshed enough for `publish:check:dev`
+- the June 1 preserved-source expansion added richer Galaga, Galaxian, and
+  Space Invaders evidence lanes, including manuals, strategy/walkthrough
+  bundles, sprite/cue packages, challenge-stage videos, and cabinet/spec
+  references
+- the public/private artifact boundary is now explicit: source metadata and
+  summaries stay in this repo, while copied or derived source bytes belong in
+  the companion private artifact store
 
 ![Aurora Pack Card](reference-artifacts/diagrams/platinum/aurora-pack-card.svg)
 
@@ -265,12 +277,28 @@ describing classic arcade behavior; we are collecting windows, studying them,
 and turning them into reusable evidence.
 
 That claim is now easier to defend concretely because the repo carries
-preserved-source lanes as well as derived analyses. The recovered Galaga source
-videos, Freesound pack, Galaxian cabinet wav, and the first representative
-historical Neo-Galaga archive slice now live under
-`reference-artifacts/preserved-sources/` with manifests and checksums. In
-other words, the project is moving source recovery out of memory and into
-committed provenance.
+preserved-source lanes as well as derived analyses. The current reference
+inventory includes Galaga audio cue packs, Galaga challenge-stage videos,
+StrategyWiki sprite/walkthrough bundles, arcade-museum cabinet/spec pages,
+Galaxian no-voiceover and full-session gameplay, Galaxian FLAC cue packs,
+Galaxian operator/manual material, and early Space Invaders intake packages.
+The project is moving source recovery out of memory and into committed
+provenance, with copied media bytes separated into the companion private
+artifact store when public-hosting would be inappropriate.
+
+The important process upgrade is that ingestion now has required outputs, not
+only nice-to-have research notes. A serious game line should maintain:
+
+- an alien/enemy index
+- an audio cue index
+- a stage or wave index
+- a persona index
+- sprite/runtime scale evidence
+- entry choreography evidence
+- target-artifact coverage before major implementation claims
+
+That makes the second and third games less likely to inherit Aurora-specific
+assumptions by accident.
 
 > TODO illustration:
 > Pick the single best “ingestion in action” image for v1. The strongest option
@@ -285,7 +313,92 @@ Further detail:
 - [CLASSIC_ARCADE_INGESTION_FRAMEWORK.md](CLASSIC_ARCADE_INGESTION_FRAMEWORK.md)
 - [reference-artifacts/preserved-sources/README.md](reference-artifacts/preserved-sources/README.md)
 
-### 5. Harnessing And Conformance
+### 5. Challenge-Stage Ingestion Case Study
+
+Aurora's challenge stages are the clearest example of why the project had to
+get more serious about ingestion and annotation.
+
+The user-visible complaint was simple: the challenge stages did not feel like
+classic Galaga-style bonus exhibitions. They were safe, and some broad
+coverage checks passed, but they lacked the thing that players actually learn
+and remember: coherent group arrivals, varied alien families, readable
+scoreable lanes, stage-to-stage novelty, and the sense that each challenge is a
+designed set piece rather than a generic wave.
+
+That exposed a weakness in the earlier measurement model. Old diagnostics could
+say that challenge coverage existed because enemies appeared, did not shoot,
+and followed some path families. That was too generous. The stricter model now
+starts the player-facing challenge-stage read from a harsh baseline and asks a
+more useful question: does this stage create the same kind of spectacle,
+movement memory, and perfect-score opportunity as the target examples?
+
+Recent ingestion and annotation work changed the situation in four ways:
+
+| Upgrade | What changed | Impact so far |
+| --- | --- | --- |
+| Reference recovery | User-supplied and preserved Galaga challenge compilations now provide media-backed windows for the tracked challenge family. | The bottleneck moved from "find examples" to "label and implement against examples." |
+| Stage labeling | The project now treats stages as ordinary play stages and names bonus windows as `Challenging Stage 3-4`, `Challenging Stage 7-8`, and so on. | Human review, docs, harnesses, and developer tools have clearer shared language. |
+| Object-track analysis | CPU object tracking converts challenge clips into per-group target vectors: entry side, timing, path range, lower-field travel, and path-family hints. | Target-track readiness and control readiness are now around `8.6/10`, giving implementation a concrete target shape. |
+| Candidate guards | Runtime candidates are checked against target-video fit and human-perfect potential before promotion. | The process has already prevented bad promotions, including a Stage 3 candidate that slightly improved expected-label fit but reduced human-perfect potential by `1.6/10`. |
+
+The honest current read is mixed.
+
+On the positive side, the challenge-stage work has improved the project
+faster than a purely subjective tuning pass could have. The latest target
+structure covers `8` tracked challenge windows and `40` reference-backed
+groups. The harness can generate paired target-vs-current videos from stage
+start, contact sheets, timing drift summaries, target trajectory controls, and
+candidate before/after reports. That is a large process gain, and it should
+make future Aurora, Galaxy Guardians, and third-game work cheaper and less
+guessy.
+
+On the negative side, the same evidence makes the gameplay gap harder to hide.
+The strict challenge-stage score is still only about `4.3/10`: movement
+`4.2/10`, graphics `4.5/10`, alien novelty `3.9/10`, target-video object-track
+fit `3.6/10`, and zero release-ready challenge contracts. The no-shot and
+no-ship-loss safety rule is strong, but safety is now treated as a guardrail,
+not as proof of conformance. A safe challenge stage can still be boring,
+visually weak, or badly paced.
+
+That distinction matters for the project's AI-assisted method. This work is a
+success as ingestion, annotation, and evaluator-building. It is not yet a
+success as shipped player experience. The next phase must convert the evidence
+into runtime movement grammar that can produce better stages without endless
+manual special cases.
+
+The next-work categories are therefore specific:
+
+1. Promote five-group labels for each challenge window: first visible frame,
+   entry side, exit side, path family, scoreable band, alien family, and
+   perfect-bonus opportunity.
+2. Build a reusable movement-grammar layer that represents group arrivals,
+   arcs, loops, ladders, hooks, crossings, serpentine paths, and exits as
+   editable contracts rather than one-off constants.
+3. Keep a human-perfect guard in the candidate loop so conformance does not
+   improve by making stages less playable or less learnable.
+4. Add active sprite-motion evidence for challenge aliens, because static
+   sprite crops do not capture flapping, pulsing, dive poses, or specialty
+   target identity.
+5. Use paired target/current clips and contact sheets as review artifacts
+   whenever a challenge-stage change is claimed.
+6. Generalize the same grammar to normal-stage entry behavior, not only
+   challenge stages, so the platform can support game-specific variation
+   without hard-coding Aurora's current patterns into Platinum.
+
+The reason this should speed quality improvement is that it changes the shape
+of the work. Instead of asking the model or a human to "make the stage feel more
+Galaga-like," the system can ask a narrower question: which group contract is
+missing, which trajectory differs, which alien family is wrong, and which
+candidate improves target fit without reducing perfect-score readability?
+
+Further detail:
+
+- [application-guide.html#challenge-stage-conformance](application-guide.html#challenge-stage-conformance)
+- [GALAGA_TARGET_ARTIFACT_COVERAGE.md](GALAGA_TARGET_ARTIFACT_COVERAGE.md)
+- [LEVEL_VISUAL_TIMING_ALIGNMENT.md](LEVEL_VISUAL_TIMING_ALIGNMENT.md)
+- [AURORA_SPRITE_MOTION_CORRESPONDENCE.md](AURORA_SPRITE_MOTION_CORRESPONDENCE.md)
+
+### 6. Harnessing And Conformance
 
 This project is serious about the difference between "better" and "better by a
 rerunnable measure."
@@ -327,7 +440,7 @@ This is the deeper quality claim of the project: bugs, polish, and release
 readiness should increasingly move from memory and opinion into explicit checks,
 artifacts, and dashboards.
 
-![Conformance score trends](reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/score-trends.svg)
+![Conformance score trends](reference-artifacts/analyses/conformance-economics/2026-06-03-abf65183b/score-trends.svg)
 
 ![Persona performance distribution](reference-artifacts/analyses/persona-performance-distribution/performance-lines.svg)
 
@@ -335,13 +448,22 @@ The value of these charts is not only that they look rigorous. They show that
 the project tries to externalize quality questions into surfaces that can be
 inspected, debated, and rerun.
 
+The newest dashboard makes the current prioritization uncomfortable in the
+right way. Basic challenge timing, combat response, capture/rescue rules, and
+several shell surfaces pass as guardrails. But the strict challenge-stage
+set-piece scorer is only `4.3/10`, with movement `4.2/10`, graphics `4.5/10`,
+novelty `3.9/10`, target-video object-track fit `3.6/10`, and zero release-ready
+challenge contracts. That score is not a failure of the process. It is the
+process doing its job: replacing a too-generous broad proxy with a more honest
+stage-by-stage conformance read.
+
 Further detail:
 
 - [conformance-dashboard.html](conformance-dashboard.html)
 - [project-guide.html#release-conformance-dashboard-doc](project-guide.html#release-conformance-dashboard-doc)
 - [project-guide.html#conformance-economics-doc](project-guide.html#conformance-economics-doc)
 
-### 6. Release Discipline And Professionalism
+### 7. Release Discipline And Professionalism
 
 The project treats release engineering as part of product quality.
 
@@ -368,7 +490,24 @@ still feels trustworthy.
 
 The "reviewer" mentality should therefore be explicit. The paper is not done
 just because the words are present. The release surface should also be reviewed
-for:
+for lane coherence, build metadata, conformance freshness, and historical path
+drift.
+
+As of this draft, the current production recommendation is deliberately
+conservative:
+
+- hosted `/production` remains the stable public `1.4.0` line
+- hosted `/dev` and `/beta` are review lanes for the next candidate family
+- the MacBook M4 is now release authority
+- the current candidate is suitable for dev-lane review after preflight, but
+  not yet a new `1.4.1` production promise
+- challenge-stage quality and documentation consistency remain the two clearest
+  reasons to defer production
+
+That restraint is part of the method. The project should not treat a passing
+publish script as the same thing as a strong public release story.
+
+The reviewer pass should keep looking for:
 
 - repeated ideas that can be tightened
 - diagrams or images that create awkward whitespace or weak page breaks
@@ -386,7 +525,7 @@ Further detail:
 - [white-paper/REVIEWER_CHECKLIST.md](white-paper/REVIEWER_CHECKLIST.md)
 - [white-paper/REVIEW_CADENCE.md](white-paper/REVIEW_CADENCE.md)
 
-### 7. How Generative AI Fits
+### 8. How Generative AI Fits
 
 The project does use generative AI heavily, but not as a substitute for
 engineering structure.
@@ -418,20 +557,35 @@ to ask a model for code. The point is to build a system in which model help
 leaves behind better evaluators, better artifacts, and cheaper future
 decisions.
 
-![Compute minutes by resource](reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/compute-minutes-by-resource.svg)
+![Compute minutes by resource](reference-artifacts/analyses/conformance-economics/2026-06-03-abf65183b/compute-minutes-by-resource.svg)
 
-![Cost per positive score point](reference-artifacts/analyses/conformance-economics/2026-05-14-1c788342/cost-per-positive-score-point.svg)
+![Cost per positive score point](reference-artifacts/analyses/conformance-economics/2026-06-03-abf65183b/cost-per-positive-score-point.svg)
 
 These charts help keep the AI story grounded. The point is not only that model
 assistance exists; it is that the project is trying to compare that assistance
 with local repeatable measurement and with visible quality movement.
+
+The current economics ledger is intentionally imperfect but already useful:
+
+- `904` measured runs are logged
+- local CPU accounts for `576.5` tracked wall minutes
+- browser-backed local work accounts for `429.6` tracked wall minutes
+- declared GPU-equivalent/Codex/model/API work accounts for `630.8` tracked
+  wall minutes, but remains under-instrumented and partly overlapping by design
+- audio work consumed the largest local-compute block, while gameplay complexity
+  and stage arc account for the largest positive score movement
+
+This is exactly the planning tension the project wants to expose. If audio
+keeps consuming large compute blocks for modest score movement, the next
+investment should either improve the audio evaluator itself or shift energy to
+the higher-value challenge-stage movement grammar.
 
 Further detail:
 
 - [project-guide.html#conformance-economics-doc](project-guide.html#conformance-economics-doc)
 - [CONFORMANCE_ECONOMICS.md](CONFORMANCE_ECONOMICS.md)
 
-### 8. Working Loop
+### 9. Working Loop
 
 The operating loop of this project is more important than any single feature.
 
@@ -458,7 +612,7 @@ release discipline.
 > candidates, but we should choose the one that is most legible to a broad
 > reader.
 
-### 9. Historical Evolution So Far
+### 10. Historical Evolution So Far
 
 The release notes already show a clear arc, and the white paper should make it
 easy to retell.
@@ -482,6 +636,8 @@ The next phase should be to prove that this method scales:
 - stronger Galaxy Guardians first-class completeness
 - cleaner shared Platinum operations
 - more reusable ingestion and assessment infrastructure
+- a third-game intake path, currently represented by Space Invaders / Windigo
+  Invaders preserved-source and planning lanes
 
 > TODO illustration:
 > Build a release-history gallery with one screenshot or architectural surface
@@ -494,7 +650,7 @@ Further detail:
 - [project-guide.html#release-note-140-beta-1-doc](project-guide.html#release-note-140-beta-1-doc)
 - [project-guide.html#release-note-130-production-refresh-doc](project-guide.html#release-note-130-production-refresh-doc)
 
-### 10. Citation Program
+### 11. Citation Program
 
 This white paper should not quietly absorb ideas or source recovery work
 without naming them.
@@ -514,6 +670,7 @@ The living ledger for that work starts here:
 The source-recovery side of that program now has a matching repo-owned surface:
 
 - [reference-artifacts/preserved-sources/README.md](reference-artifacts/preserved-sources/README.md)
+- [REFERENCE_MEDIA_INVENTORY.md](REFERENCE_MEDIA_INVENTORY.md)
 
 That matters because provenance is not only a footnote here. It is a release
 quality concern. If a timing study, audio comparison, or historical claim
@@ -529,7 +686,7 @@ Further detail:
 
 - [white-paper/CITATION_LEDGER.md](white-paper/CITATION_LEDGER.md)
 
-### 11. Related Work
+### 12. Related Work
 
 This project should periodically stop and look outward.
 
@@ -550,7 +707,7 @@ Maintained deeper log:
 
 - [white-paper/RELATED_WORK.md](white-paper/RELATED_WORK.md)
 
-### 12. Internal Canonical Docs
+### 13. Internal Canonical Docs
 
 This paper should stay readable because the repo already has deeper canonical
 surfaces nearby.
@@ -565,12 +722,15 @@ The shortest list of internal references that best supports the claims here is:
 - [CLASSIC_ARCADE_INGESTION_FRAMEWORK.md](CLASSIC_ARCADE_INGESTION_FRAMEWORK.md)
 - [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md)
 - [CONFORMANCE_ECONOMICS.md](CONFORMANCE_ECONOMICS.md)
+- [REFERENCE_MEDIA_INVENTORY.md](REFERENCE_MEDIA_INVENTORY.md)
+- [GAME_CONFORMANCE_CATALOG.md](GAME_CONFORMANCE_CATALOG.md)
+- [RELEASE_CONFORMANCE_DASHBOARD.md](RELEASE_CONFORMANCE_DASHBOARD.md)
 - [reference-artifacts/preserved-sources/README.md](reference-artifacts/preserved-sources/README.md)
 
 If the main paper starts to feel long, that is usually a sign that one of these
 surfaces should carry more of the detail instead.
 
-### 13. Why This Project Matters
+### 14. Why This Project Matters
 
 The project matters because it is trying to demonstrate a concrete alternative
 to two weak extremes.
@@ -598,7 +758,7 @@ This is also why the paper should remain readable. A broad technical reader
 does not need every source artifact inline. They need a coherent narrative,
 selected visual proof, and obvious places to go next if they want more depth.
 
-### 14. Living White Paper Policy
+### 15. Living White Paper Policy
 
 This document should evolve the same way the project evolves: intentionally,
 versioned, and with historical memory preserved.
@@ -638,9 +798,13 @@ Good triggers for a new white paper release:
 - Add one deliberate progression gallery for milestone history and one deliberate
   “evidence in action” case-study image once we decide which examples explain
   the project most clearly.
-- Decide whether the historical Neo-Galaga archive should stop at the current
-  representative `22`-pair preserved slice or grow into a larger non-git or
-  secondary preserved-source lane.
+- Add a compact public diagram that shows the new source-to-metric pipeline:
+  preserved source package -> extracted window -> semantic event/crop/path
+  target -> runtime capture -> conformance score -> release gate.
+- Add a deeper table that compares Aurora, Galaxy Guardians, and Windigo by
+  ingestion maturity, not only by current playability.
+- Decide which evidence families should be summarized publicly and which should
+  remain in the private artifact store behind public-safe metadata.
 - Keep the HTML and PDF release surfaces under reviewer scrutiny so that spacing,
   diagrams, repeated ideas, and print behavior all improve with the narrative.
 - Keep the audience tuned for a broad technical and builder readership: assume

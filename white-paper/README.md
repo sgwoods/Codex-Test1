@@ -16,6 +16,8 @@ The white paper is meant to be both:
 
 - `../WHITE_PAPER.md`
   - current living draft
+- `project-overview-slides.json`
+  - durable source for the generated 20-slide public overview deck
 - `CITATION_LEDGER.md`
   - maintained list of outside ideas, source families, and project learnings
 - `ILLUSTRATION_PLAN.md`
@@ -62,12 +64,17 @@ The white paper is meant to be both:
   - printable/exportable white-paper surface for a release lane
 - `dist/<lane>/white-paper-pdf.json`
   - version, date-updated, lane, and build metadata for the generated PDF
+- `dist/<lane>/project-overview-slides.html`
+  - hosted 20-slide project overview, linked next to the white paper
+- `dist/<lane>/project-overview-slides.json`
+  - slide metadata and source trace for release review and public inspection
 
 ## Suggested Review Commands
 
 - `npm run white-paper:review`
   - refresh the dev-lane PDF, reviewer packet, review gate,
-    preserved-source-integrity check, and presentation checks together
+    preserved-source-integrity check, project overview deck, and presentation
+    checks together
 - `npm run white-paper:review:beta`
   - run the same white-paper review spine for the beta lane
 - `npm run white-paper:review:production`

@@ -25,9 +25,19 @@ same seriousness as other user-visible documentation and release artifacts.
 
 - Does the hosted page read well on desktop and mobile?
 - Does the hero lead the page clearly before the supporting surfaces?
+- Is the 20-slide overview linked next to the white paper from both the
+  white-paper page and the public project page?
 - Are diagrams, tables, and screenshots legible without awkward empty runs?
 - Do callouts render intentionally instead of leaking raw Markdown markers?
 - Are deeper-detail links obvious without overwhelming the page?
+
+## Slide Overview Review
+
+- Does the 20-slide deck tell the project story without requiring repo context?
+- Does it reflect the current white-paper version and updated date?
+- Are current conformance, ingestion, economics, review, and go-forward claims
+  consistent with the white paper and dashboard artifacts?
+- Are the source-artifact links useful for a reader who wants to drill down?
 
 ## PDF Review
 
@@ -48,8 +58,10 @@ same seriousness as other user-visible documentation and release artifacts.
   and timing/audio reference work do not drift back to stale machine paths.
 - Commit the refreshed review packet before the clean-tree publish step.
 - Confirm the generated PDF metadata matches the white-paper version/date.
-- Verify the live lane carries both `white-paper.html` and `white-paper.pdf`
-  after publish.
+- Confirm the generated slide metadata matches the white-paper version/date.
+- Verify the live lane carries `white-paper.html`, `white-paper.pdf`,
+  `project-overview-slides.html`, and `project-overview-slides.json` after
+  publish.
 
 ## Related Work Review
 

@@ -14,12 +14,14 @@ instead of leaving it as a good intention.
 
 - run `npm run white-paper:review:beta` or
   `npm run white-paper:review:production`
-- verify the lane carries both `white-paper.html` and `white-paper.pdf`
+- verify the lane carries `white-paper.html`, `white-paper.pdf`,
+  `project-overview-slides.html`, and `project-overview-slides.json`
 
 ### During active fast-moving project periods
 
 - do at least one focused review pass per week on:
   - white-paper clarity
+  - 20-slide overview consistency
   - HTML/PDF presentation
   - preserved-source integrity
   - stale path drift
@@ -28,6 +30,7 @@ instead of leaving it as a good intention.
 ### On major narrative or methodology shifts
 
 - consider cutting a new white-paper snapshot under `white-paper/releases/`
+- refresh `white-paper/project-overview-slides.json` in the same pass
 - refresh the citation ledger and related-work log in the same pass
 
 ## What The Review Pass Should Catch
@@ -43,6 +46,7 @@ instead of leaving it as a good intention.
 
 - `npm run white-paper:review`
   - refresh the dev-lane PDF
+  - refresh and check the generated 20-slide overview deck
   - refresh the code-review packet
   - pass the code-review gate
   - verify the preserved-source integrity check

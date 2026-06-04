@@ -14,6 +14,8 @@ const {
   DEV_PUBLIC_PROJECT_PAGE,
   DEV_RELEASE_NOTES_PAGE,
   DEV_WHITE_PAPER,
+  DEV_PROJECT_OVERVIEW_SLIDES,
+  DEV_PROJECT_OVERVIEW_SLIDES_DATA,
   DEV_PROJECT_GUIDE,
   DEV_APPLICATION_GUIDE,
   DEV_PLATINUM_GUIDE,
@@ -30,6 +32,8 @@ const {
   PRODUCTION_PUBLIC_PROJECT_PAGE,
   PRODUCTION_RELEASE_NOTES_PAGE,
   PRODUCTION_WHITE_PAPER,
+  PRODUCTION_PROJECT_OVERVIEW_SLIDES,
+  PRODUCTION_PROJECT_OVERVIEW_SLIDES_DATA,
   PRODUCTION_PROJECT_GUIDE,
   PRODUCTION_APPLICATION_GUIDE,
   PRODUCTION_PLATINUM_GUIDE,
@@ -66,6 +70,7 @@ const CONFORMANCE_DASHBOARD_LATEST = path.join(ROOT, 'reference-artifacts', 'ana
 const RELEASE_MANIFEST = path.join(ROOT, 'release-manifest.json');
 const PROJECT_GUIDE = path.join(ROOT, 'project-guide.json');
 const WHITE_PAPER_GUIDE = path.join(ROOT, 'white-paper.json');
+const PROJECT_OVERVIEW_SLIDES = path.join(ROOT, 'white-paper', 'project-overview-slides.json');
 const APPLICATION_GUIDE = path.join(ROOT, 'application-guide.json');
 const PLATINUM_GUIDE = path.join(ROOT, 'platinum-guide.json');
 const PLAYER_GUIDE = path.join(ROOT, 'player-guide.json');
@@ -111,6 +116,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/release-notes.html',
   'dist/dev/releases.html',
   'dist/dev/white-paper.html',
+  'dist/dev/project-overview-slides.html',
+  'dist/dev/project-overview-slides.json',
   'dist/dev/project-guide.html',
   'dist/dev/application-guide.html',
   'dist/dev/platinum-guide.html',
@@ -131,6 +138,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/production/release-notes.html',
   'dist/production/releases.html',
   'dist/production/white-paper.html',
+  'dist/production/project-overview-slides.html',
+  'dist/production/project-overview-slides.json',
   'dist/production/project-guide.html',
   'dist/production/application-guide.html',
   'dist/production/platinum-guide.html',
@@ -150,6 +159,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'dist/beta/release-notes.html',
   'dist/beta/releases.html',
   'dist/beta/white-paper.html',
+  'dist/beta/project-overview-slides.html',
+  'dist/beta/project-overview-slides.json',
   'dist/beta/project-guide.html',
   'dist/beta/application-guide.html',
   'dist/beta/platinum-guide.html',
@@ -171,6 +182,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'release-notes.html',
   'releases.html',
   'white-paper.html',
+  'project-overview-slides.html',
+  'project-overview-slides.json',
   'project-guide.html',
   'application-guide.html',
   'platinum-guide.html',
@@ -186,6 +199,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'dev/release-notes.html',
   'dev/releases.html',
   'dev/white-paper.html',
+  'dev/project-overview-slides.html',
+  'dev/project-overview-slides.json',
   'dev/project-guide.html',
   'dev/application-guide.html',
   'dev/platinum-guide.html',
@@ -202,6 +217,8 @@ const GENERATED_BUILD_PATHS = new Set([
   'beta/release-notes.html',
   'beta/releases.html',
   'beta/white-paper.html',
+  'beta/project-overview-slides.html',
+  'beta/project-overview-slides.json',
   'beta/project-guide.html',
   'beta/application-guide.html',
   'beta/platinum-guide.html',
@@ -577,6 +594,39 @@ function loadWhitePaperGuide(){
     'Aurora / Platinum White Paper',
     'Add white-paper.json to restore the generated hosted white paper.'
   );
+}
+
+function loadProjectOverviewSlides(){
+  try{
+    const raw = JSON.parse(read(PROJECT_OVERVIEW_SLIDES));
+    return {
+      artifactType: raw.artifactType || 'project-overview-slide-source',
+      schemaVersion: raw.schemaVersion || 1,
+      title: raw.title || 'Platinum, Aurora, And The Conformance Project',
+      subtitle: raw.subtitle || '',
+      status: raw.status || 'living overview deck',
+      lastSourceReviewDate: raw.lastSourceReviewDate || '',
+      sourceWhitePaper: raw.sourceWhitePaper || 'WHITE_PAPER.md',
+      canonicalDeckHref: raw.canonicalDeckHref || 'project-overview-slides.html',
+      intent: raw.intent || '',
+      sourceArtifacts: Array.isArray(raw.sourceArtifacts) ? raw.sourceArtifacts : [],
+      slides: Array.isArray(raw.slides) ? raw.slides : []
+    };
+  }catch{
+    return {
+      artifactType: 'project-overview-slide-source',
+      schemaVersion: 1,
+      title: 'Platinum, Aurora, And The Conformance Project',
+      subtitle: 'Add white-paper/project-overview-slides.json to restore the generated public overview deck.',
+      status: 'missing source',
+      lastSourceReviewDate: '',
+      sourceWhitePaper: 'WHITE_PAPER.md',
+      canonicalDeckHref: 'project-overview-slides.html',
+      intent: '',
+      sourceArtifacts: [],
+      slides: []
+    };
+  }
 }
 
 function extractWhitePaperMeta(source=''){
@@ -1966,6 +2016,454 @@ function whitePaperMermaidScript(){
   `.trim();
 }
 
+function projectOverviewSlidesStyles(){
+  return `
+    :root{
+      --bg:#07111f;
+      --bg2:#0f1d31;
+      --panel:#111a2c;
+      --panel2:#162237;
+      --line:rgba(167,197,255,.22);
+      --text:#eff6ff;
+      --muted:#a7b4c8;
+      --cyan:#67e8f9;
+      --gold:#fcd34d;
+      --green:#86efac;
+      --red:#f87171;
+      --purple:#c4b5fd;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(103,232,249,.16), transparent 30%),
+        radial-gradient(circle at top right, rgba(134,239,172,.14), transparent 34%),
+        linear-gradient(160deg,var(--bg),var(--bg2));
+      font-family:"Avenir Next","Segoe UI",sans-serif;
+    }
+    a{color:#d9f7ff}
+    .deckShell{
+      max-width:1180px;
+      margin:0 auto;
+      padding:34px 22px 70px;
+    }
+    .deckHero,.slide{
+      border:1px solid var(--line);
+      background:rgba(7,17,31,.78);
+      box-shadow:0 18px 46px rgba(0,0,0,.28);
+    }
+    .deckHero{
+      border-radius:28px;
+      padding:30px 32px 28px;
+      margin-bottom:22px;
+    }
+    .deckTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+    .eyebrow{
+      display:inline-flex;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#d7ecff;
+    }
+    .deckHero h1{
+      margin:0 0 10px;
+      font-size:clamp(34px,5vw,58px);
+      line-height:.95;
+      letter-spacing:-.04em;
+    }
+    .deckHero p{
+      max-width:840px;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.58;
+    }
+    .buttonRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:20px;
+    }
+    .button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:9px 13px;
+      border-radius:999px;
+      border:1px solid rgba(122,195,255,.28);
+      background:rgba(122,195,255,.1);
+      color:#eff7ff;
+      text-decoration:none;
+      font-size:13px;
+      letter-spacing:.03em;
+    }
+    .metaGrid,.proofGrid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+      gap:12px;
+      margin-top:22px;
+    }
+    .metaCard,.proofCard{
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.05);
+      border-radius:18px;
+      padding:14px 16px;
+    }
+    .metaCard span,.proofCard span{
+      display:block;
+      color:#8fb3cc;
+      font-size:11px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:7px;
+    }
+    .metaCard strong,.proofCard strong{
+      display:block;
+      font-size:18px;
+      line-height:1.25;
+    }
+    .deckLayout{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 250px;
+      gap:22px;
+      align-items:start;
+    }
+    .slideStack{
+      display:grid;
+      gap:22px;
+    }
+    .slide{
+      position:relative;
+      min-height:628px;
+      aspect-ratio:16/9;
+      border-radius:24px;
+      overflow:hidden;
+      padding:34px 38px;
+    }
+    .slide::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(135deg, rgba(103,232,249,.08), transparent 34%),
+        linear-gradient(315deg, rgba(252,211,77,.07), transparent 32%);
+    }
+    .slideInner{
+      position:relative;
+      z-index:1;
+      height:100%;
+      display:grid;
+      grid-template-rows:auto auto 1fr auto;
+      gap:14px;
+    }
+    .slideHeader{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      color:var(--cyan);
+      font-family:"SFMono-Regular",Consolas,monospace;
+      font-size:14px;
+      font-weight:700;
+    }
+    .slideHeader::after{
+      content:"";
+      height:2px;
+      flex:1 1 auto;
+      background:linear-gradient(90deg,rgba(103,232,249,.85),transparent);
+    }
+    .slide h2{
+      margin:0;
+      max-width:930px;
+      font-size:clamp(30px,4vw,48px);
+      line-height:1.02;
+      letter-spacing:-.035em;
+    }
+    .claim{
+      max-width:870px;
+      color:var(--muted);
+      font-size:20px;
+      line-height:1.45;
+      margin:0;
+    }
+    .proofGrid{
+      align-self:end;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    .proofCard{
+      min-height:76px;
+    }
+    .proofCard strong{
+      font-size:17px;
+    }
+    .visualFlow{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+    .flowNode{
+      position:relative;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.05);
+      border-radius:16px;
+      padding:14px;
+      min-height:106px;
+    }
+    .flowNode strong{
+      display:block;
+      margin-bottom:8px;
+      color:var(--gold);
+    }
+    .flowNode span{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.4;
+    }
+    .challengeGrid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:16px;
+      margin-top:12px;
+    }
+    .challengeRead{
+      display:grid;
+      gap:10px;
+    }
+    .bigMetric{
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.05);
+      border-radius:16px;
+      padding:14px 16px;
+    }
+    .bigMetric strong{
+      display:block;
+      color:var(--red);
+      font-size:28px;
+      font-family:"SFMono-Regular",Consolas,monospace;
+    }
+    .bigMetric span{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      margin-top:5px;
+    }
+    .slideFooter{
+      color:#8fb3cc;
+      font-size:12px;
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .toc{
+      position:sticky;
+      top:18px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(7,17,31,.78);
+      border-radius:22px;
+      padding:18px;
+      max-height:calc(100vh - 36px);
+      overflow:auto;
+    }
+    .toc h2{
+      margin:0 0 12px;
+      font-size:16px;
+    }
+    .toc ol{
+      margin:0;
+      padding-left:22px;
+      display:grid;
+      gap:8px;
+    }
+    .toc a{
+      color:#d9f7ff;
+      text-decoration:none;
+      font-size:13px;
+      line-height:1.25;
+    }
+    .sourceList{
+      margin-top:22px;
+      padding:20px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);
+    }
+    .sourceList h2{
+      margin:0 0 12px;
+      font-size:20px;
+    }
+    .sourceList ul{
+      margin:0;
+      padding-left:20px;
+      columns:2;
+      color:var(--muted);
+      line-height:1.55;
+      font-size:13px;
+    }
+    @media (max-width:980px){
+      .deckLayout{grid-template-columns:1fr}
+      .toc{position:static;max-height:none}
+      .slide{min-height:0;aspect-ratio:auto}
+      .visualFlow{grid-template-columns:1fr}
+      .challengeGrid{grid-template-columns:1fr}
+    }
+    @media (max-width:720px){
+      .deckShell{padding:20px 14px 54px}
+      .deckHero,.slide{padding:24px 20px}
+      .proofGrid{grid-template-columns:1fr}
+      .sourceList ul{columns:1}
+    }
+  `.trim();
+}
+
+function projectOverviewSlideFlowVisual(){
+  const nodes = [
+    ['Reference', 'Videos, manuals, audio packs, sprite sheets'],
+    ['Ingestion', 'Manifests, windows, event logs, tracks'],
+    ['Runtime', 'Game-owned implementation and captures'],
+    ['Harness', 'Scorecards, personas, correspondence checks'],
+    ['Release', 'Docs, gates, lanes, public claims']
+  ];
+  return `<div class="visualFlow">${nodes.map(([title, body]) => `
+    <div class="flowNode"><strong>${esc(title)}</strong><span>${esc(body)}</span></div>
+  `).join('')}</div>`;
+}
+
+function projectOverviewChallengeVisual(){
+  return `
+    <div class="challengeGrid">
+      <div class="challengeRead">
+        <div class="bigMetric"><strong>4.3/10</strong><span>Strict challenge-stage set-piece score.</span></div>
+        <div class="bigMetric"><strong style="color:var(--gold)">40/40</strong><span>Reference-backed challenge groups.</span></div>
+        <div class="bigMetric"><strong style="color:var(--green)">8.6/10</strong><span>Target trajectory-control readiness.</span></div>
+      </div>
+      <div class="challengeRead">
+        <div class="bigMetric"><strong>0</strong><span>Release-ready challenge contracts.</span></div>
+        <div class="bigMetric"><strong style="color:var(--purple)">3.6/10</strong><span>Target-video object-track fit.</span></div>
+        <div class="bigMetric"><strong style="color:var(--cyan)">Next</strong><span>Movement grammar plus human-perfect guard.</span></div>
+      </div>
+    </div>
+  `;
+}
+
+function projectOverviewProofItems(slide, index){
+  const proof = Array.isArray(slide.proof) ? slide.proof.slice(0, 6) : [];
+  if(slide.visual === 'flow'){
+    return projectOverviewSlideFlowVisual();
+  }
+  if(slide.visual === 'challenge'){
+    return projectOverviewChallengeVisual();
+  }
+  return `<div class="proofGrid">${proof.map((item, itemIndex) => `
+    <article class="proofCard">
+      <span>${esc(`Proof ${itemIndex + 1}`)}</span>
+      <strong>${esc(item)}</strong>
+    </article>
+  `).join('')}</div>`;
+}
+
+function buildProjectOverviewSlidesData(buildInfo, latestNote, slideSource, whitePaperMeta){
+  return {
+    artifactType: 'project-overview-slides',
+    schemaVersion: 1,
+    generatedAt: new Date().toISOString(),
+    lane: buildInfo.releaseChannel,
+    buildLabel: buildInfo.label,
+    buildCommit: buildInfo.shortCommit || buildInfo.commit,
+    buildVersion: displayBuildVersion(buildInfo),
+    whitePaperVersion: whitePaperMeta.version,
+    updatedDate: whitePaperMeta.updatedDate,
+    whitePaperStatus: whitePaperMeta.status,
+    sourceArtifact: 'white-paper/project-overview-slides.json',
+    sourceWhitePaper: slideSource.sourceWhitePaper || 'WHITE_PAPER.md',
+    sourceReviewDate: slideSource.lastSourceReviewDate || '',
+    slideCount: Array.isArray(slideSource.slides) ? slideSource.slides.length : 0,
+    latestReleaseNote: latestNote?.title || '',
+    sourceArtifacts: Array.isArray(slideSource.sourceArtifacts) ? slideSource.sourceArtifacts : []
+  };
+}
+
+function buildProjectOverviewSlidesPage(buildInfo, latestNote, slideSource, whitePaperMeta, slidesData){
+  const slides = Array.isArray(slideSource.slides) ? slideSource.slides : [];
+  const toc = slides.map((slide, index) => `
+    <li><a href="#slide-${index + 1}">${esc(slide.title || `Slide ${index + 1}`)}</a></li>
+  `).join('');
+  const slideHtml = slides.map((slide, index) => `
+    <section class="slide" id="slide-${index + 1}" aria-label="${esc(slide.title || `Slide ${index + 1}`)}">
+      <div class="slideInner">
+        <div class="slideHeader"><span>${esc(String(index + 1).padStart(2, '0'))}</span><span>${esc(slide.kicker || 'Project overview')}</span></div>
+        <h2>${esc(slide.title || `Slide ${index + 1}`)}</h2>
+        <p class="claim">${esc(slide.claim || '')}</p>
+        ${projectOverviewProofItems(slide, index)}
+        <div class="slideFooter">
+          <span>${esc(slide.kicker || '')}</span>
+          <span>${esc(slidesData.whitePaperVersion)} · ${esc(slidesData.updatedDate)} · ${esc(displayBuildVersion(buildInfo))}</span>
+        </div>
+      </div>
+    </section>
+  `).join('\n');
+  const sourceList = (slideSource.sourceArtifacts || []).map(item => `<li><code>${esc(item)}</code></li>`).join('\n');
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${esc(slideSource.title || 'Project Overview Slides')}</title>
+  <style>${projectOverviewSlidesStyles()}</style>
+</head>
+<body>
+  <main class="deckShell">
+    <section class="deckHero">
+      <div class="deckTop">
+        <span class="eyebrow">20-slide public overview</span>
+        <a class="button" href="white-paper.html">Open white paper</a>
+      </div>
+      <h1>${esc(slideSource.title || 'Project Overview Slides')}</h1>
+      <p>${esc(slideSource.subtitle || slideSource.intent || '')}</p>
+      <div class="metaGrid">
+        <article class="metaCard"><span>White paper</span><strong>${esc(whitePaperMeta.version)}</strong></article>
+        <article class="metaCard"><span>Updated</span><strong>${esc(whitePaperMeta.updatedDate)}</strong></article>
+        <article class="metaCard"><span>Lane</span><strong>${esc(buildInfo.releaseChannel)}</strong></article>
+        <article class="metaCard"><span>Build</span><strong>${esc(displayBuildVersion(buildInfo))}</strong></article>
+        <article class="metaCard"><span>Slides</span><strong>${esc(String(slides.length))}</strong></article>
+      </div>
+      <div class="buttonRow">
+        <a class="button" href="white-paper.html">Open white paper</a>
+        <a class="button" href="white-paper.pdf">Open white-paper PDF</a>
+        <a class="button" href="project-overview-slides.json">Open slide metadata</a>
+        <a class="button" href="project-guide.html">Open project guide</a>
+        <a class="button" href="conformance-dashboard.html">Open conformance dashboard</a>
+      </div>
+    </section>
+    <div class="deckLayout">
+      <div class="slideStack">
+        ${slideHtml}
+        <section class="sourceList">
+          <h2>Source Artifacts</h2>
+          <ul>${sourceList}</ul>
+        </section>
+      </div>
+      <aside class="toc">
+        <h2>Slide Index</h2>
+        <ol>${toc}</ol>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
+`.trimEnd() + '\n';
+}
+
 function releaseNotesStyles(){
   return `
 ${projectGuideStyles()}
@@ -3137,6 +3635,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
             <a class="button" href="index.html">Open current lane build</a>
             <a class="button" href="public-project-page.html">Open lane project page</a>
             <a class="button" href="white-paper.html">Open white paper</a>
+            <a class="button" href="project-overview-slides.html">Open 20-slide overview</a>
             <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="platinum-guide.html">Open Platinum guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
@@ -3224,6 +3723,8 @@ function buildWhitePaperGuide(buildInfo, latestNote, guide){
           </div>
           <div class="heroLinks">
             <a class="button" href="index.html">Open current lane build</a>
+            <a class="button whitePaperDocAction" href="project-overview-slides.html">Open 20-slide overview</a>
+            <a class="button whitePaperDocAction" href="project-overview-slides.json">Open slide metadata</a>
             <a class="button whitePaperDocAction" href="white-paper.pdf">Open current lane PDF</a>
             <a class="button whitePaperDocAction" href="white-paper-pdf.json">Open PDF metadata</a>
             <a class="button" href="public-project-page.html">Open lane project page</a>
@@ -3295,6 +3796,7 @@ function buildPublicProjectPage(buildInfo, latestNote, dashboard){
     LANE_CONFORMANCE_DATA_HREF: 'conformance-dashboard-data.json',
     LANE_RELEASE_NOTES_HREF: releaseNotesLandingHref(buildInfo),
     LANE_WHITE_PAPER_HREF: 'white-paper.html',
+    LANE_PROJECT_OVERVIEW_SLIDES_HREF: 'project-overview-slides.html',
     LANE_PROJECT_GUIDE_HREF: 'project-guide.html',
     LANE_APPLICATION_GUIDE_HREF: 'application-guide.html',
     LANE_PLATINUM_GUIDE_HREF: 'platinum-guide.html',
@@ -7063,6 +7565,8 @@ function lanePaths(lane){
       releaseNotesPage: PRODUCTION_RELEASE_NOTES_PAGE,
       releaseNotesAliasPage: path.join(DIST_PRODUCTION, 'releases.html'),
       whitePaper: PRODUCTION_WHITE_PAPER,
+      projectOverviewSlides: PRODUCTION_PROJECT_OVERVIEW_SLIDES,
+      projectOverviewSlidesData: PRODUCTION_PROJECT_OVERVIEW_SLIDES_DATA,
       projectGuide: PRODUCTION_PROJECT_GUIDE,
       applicationGuide: PRODUCTION_APPLICATION_GUIDE,
       platinumGuide: PRODUCTION_PLATINUM_GUIDE,
@@ -7084,6 +7588,8 @@ function lanePaths(lane){
     releaseNotesPage: DEV_RELEASE_NOTES_PAGE,
     releaseNotesAliasPage: path.join(DIST_DEV, 'releases.html'),
     whitePaper: DEV_WHITE_PAPER,
+    projectOverviewSlides: DEV_PROJECT_OVERVIEW_SLIDES,
+    projectOverviewSlidesData: DEV_PROJECT_OVERVIEW_SLIDES_DATA,
     projectGuide: DEV_PROJECT_GUIDE,
     applicationGuide: DEV_APPLICATION_GUIDE,
     platinumGuide: DEV_PLATINUM_GUIDE,
@@ -7137,6 +7643,8 @@ function build(options = {}){
   const conformanceDashboardData = loadConformanceDashboardData();
   const projectGuide = loadProjectGuide();
   const whitePaperGuide = loadWhitePaperGuide();
+  const projectOverviewSlides = loadProjectOverviewSlides();
+  const whitePaperMeta = extractWhitePaperMeta(read(path.join(ROOT, 'WHITE_PAPER.md')));
   const applicationGuide = loadApplicationGuide();
   const platinumGuide = loadPlatinumGuide();
   const playerGuide = loadPlayerGuide();
@@ -7282,6 +7790,15 @@ function build(options = {}){
   // Keep the historical filename, but drive linked docs through a fresh route.
   fs.writeFileSync(out.releaseNotesAliasPage, releaseNotesPageHtml);
   fs.writeFileSync(out.whitePaper, buildWhitePaperGuide(buildInfo, latestNote, whitePaperGuide));
+  const overviewSlidesData = buildProjectOverviewSlidesData(buildInfo, latestNote, projectOverviewSlides, whitePaperMeta);
+  fs.writeFileSync(out.projectOverviewSlides, buildProjectOverviewSlidesPage(
+    buildInfo,
+    latestNote,
+    projectOverviewSlides,
+    whitePaperMeta,
+    overviewSlidesData
+  ));
+  fs.writeFileSync(out.projectOverviewSlidesData, `${JSON.stringify(overviewSlidesData, null, 2)}\n`);
   if(buildLane === 'dev'){
     fs.mkdirSync(path.dirname(LOCAL_DEV_PUBLIC_PROJECT_PREVIEW), { recursive: true });
     fs.writeFileSync(LOCAL_DEV_PUBLIC_PROJECT_PREVIEW, publicProjectPageHtml);

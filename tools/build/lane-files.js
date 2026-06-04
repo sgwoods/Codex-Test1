@@ -12,6 +12,8 @@ const DEV_BASE_FILES = Object.freeze([
   'white-paper.html',
   'white-paper.pdf',
   'white-paper-pdf.json',
+  'project-overview-slides.html',
+  'project-overview-slides.json',
   'project-guide.html',
   'application-guide.html',
   'platinum-guide.html',
