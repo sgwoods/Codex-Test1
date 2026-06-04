@@ -59,6 +59,107 @@ window.__galagaHarness__={
   }
  }
 },
+ checkAuroraRuntimeStateIsolation(){
+  const digest=state=>({
+   active:typeof currentAuroraRuntimeState==='function'?currentAuroraRuntimeState()===state:false,
+   stage:state.stage,
+   score:state.score,
+   lives:state.lives,
+   stageClock:+(+state.stageClock||0).toFixed(4),
+   simT:+(+state.simT||0).toFixed(4),
+   enemies:state.e.length,
+   liveEnemies:state.e.filter(e=>e.hp>0).length,
+   playerBullets:state.pb.length,
+   enemyBullets:state.eb.length,
+   effects:state.fx.length,
+   playerX:+(+state.p.x||0).toFixed(2),
+   playerY:+(+state.p.y||0).toFixed(2),
+   snapshot:typeof snapshot==='function'?snapshot(state):null
+  });
+  const aliases=(left,right)=>({
+   root:left===right,
+   p:left.p===right.p,
+   e:left.e===right.e,
+   pb:left.pb===right.pb,
+   eb:left.eb===right.eb,
+   fx:left.fx===right.fx,
+   st:left.st===right.st,
+   ch:left.ch===right.ch,
+   stats:left.stats===right.stats,
+   profile:left.profile===right.profile
+  });
+  if(typeof installGamePack==='function')installGamePack('aurora-galactica',{persist:0});
+  if(typeof setHarnessClockControlled==='function')setHarnessClockControlled(1);
+  window.__platinumHarnessDisableRecording=1;
+  window.__auroraHarnessDisableRecording=1;
+  const adapter=typeof getGameplayAdapter==='function'?getGameplayAdapter('aurora-galactica'):null;
+  const adapterShape={
+   hasAdapter:!!adapter,
+   hasStart:typeof adapter?.start==='function',
+   hasUpdate:typeof adapter?.update==='function',
+   hasSnapshot:typeof adapter?.snapshot==='function'
+  };
+  const a=createAuroraRuntimeState({best:111});
+  const b=createAuroraRuntimeState({best:222});
+  const factoryAliases=aliases(a,b);
+  if(typeof setSeed==='function')setSeed(12345);
+  startAuroraGameplay(a);
+  a.stage=2;
+  a.score=1234;
+  a.stageClock=7;
+  a.simT=7;
+  a.pb.push({x:10,y:300,v:560,tag:'a-only'});
+  a.fx.push({x:1,y:2,vx:0,vy:0,t:1,r:1,c:'#fff',tag:'a-only'});
+  const aAfterStart=digest(a);
+  if(typeof setSeed==='function')setSeed(67890);
+  startAuroraGameplay(b);
+  b.stage=5;
+  b.score=4321;
+  b.stageClock=42;
+  b.simT=42;
+  b.pb.push({x:20,y:310,v:560,tag:'b-only'});
+  b.eb.push({x:30,y:40,vx:0,vy:100,tag:'b-only'});
+  const bAfterStart=digest(b);
+  const aAfterStartB=digest(a);
+  const postStartAliases=aliases(a,b);
+  stepAuroraRuntime(a,.125,{});
+  const aAfterStep=digest(a);
+  const bAfterStepA=digest(b);
+  stepAuroraRuntime(b,.25,{});
+  const bAfterStep=digest(b);
+  const aAfterStepB=digest(a);
+  const activeAfterPairStep={
+   isA:currentAuroraRuntimeState()===a,
+   isB:currentAuroraRuntimeState()===b
+  };
+  const adapterStartResult=adapter?.start?.();
+  const adapterState=typeof auroraGameplayAdapterState==='function'?auroraGameplayAdapterState():null;
+  const adapterStateBeforeUpdate=adapterState?digest(adapterState):null;
+  adapter?.update?.(1/60,{});
+  const adapterStateAfterUpdate=adapterState?digest(adapterState):null;
+  const adapterSnapshot=adapter?.snapshot?.();
+  return{
+   adapterShape,
+   factoryAliases,
+   postStartAliases,
+   aAfterStart,
+   bAfterStart,
+   aAfterStartB,
+   aAfterStep,
+   bAfterStepA,
+   bAfterStep,
+   aAfterStepB,
+   activeAfterPairStep,
+   adapter:{
+    startResult:!!adapterStartResult,
+    stateExists:!!adapterState,
+    activeAfterStart:adapterState?currentAuroraRuntimeState()===adapterState:false,
+    before:adapterStateBeforeUpdate,
+    after:adapterStateAfterUpdate,
+    snapshot:adapterSnapshot
+   }
+  };
+ },
  async prepareSegmentCaptureAudio(cfg={}){
   const diagnostics={
    requested:1,
