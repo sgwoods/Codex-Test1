@@ -10,8 +10,6 @@ This is now a strict challenge-stage readout. The prior alien-entry score looked
 
 Current result: **4.3/10 interesting factor** and **4.3/10 challenge-stage conformance**. Movement is **4.4/10**, graphical conformance is **4.5/10**, alien/stage novelty is **3.9/10**, and player shot opportunity is **5.5/10**. The strongest rule finding is that current probes show no enemy shots, no attack starts, and no ship losses during sampled challenge windows. The weakest player-facing finding is that current challenge stages are functionally safe but not yet fully credible Galaga-like bonus exhibitions: strict movement is 4.4/10, strict graphics is 4.5/10, alien/stage novelty is 3.9/10, player shot opportunity is 5.5/10, target-video object-track fit is 3.6/10, and sprite-motion correspondence is 6.18/10 with target timing status frame-labeled-segmented-reference-windows. Diagnostic legacy coverage was 6.8/10, which is why the old read was too generous.
 
-Saved go-forward plan and per-stage baseline gap analysis: `CHALLENGE_STAGE_BASELINE_GAP_AND_WORK_PLAN.md`.
-
 ## Method
 
 - Runtime challenge states were sampled through the browser-backed Aurora harness using `challengeFormationState()`.
