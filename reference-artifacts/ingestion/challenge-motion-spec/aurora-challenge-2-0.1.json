@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "aurora-challenge-motion-spec",
-  "generatedAt": "2026-06-05T12:49:45.507Z",
-  "commit": "738781c90",
+  "generatedAt": "2026-06-05T14:25:21.388Z",
+  "commit": "b55328e21",
   "branch": "codex/aurora-challenge-movement-grammar",
   "gameKey": "aurora-galactica",
   "scope": "challenge-2-internal-stage-7",
@@ -42,7 +42,21 @@
         "lanePolicy": {
           "entityCount": 8,
           "sideSplit": "four-left-four-right",
-          "laneSpreadMode": "reference-lane-offset"
+          "laneSpreadMode": "reference-lane-offset",
+          "laneOrder": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "referenceLaneSpreadScale": 1,
+          "referenceRowSpreadScale": 1
         },
         "controls": {
           "arcAmp": 1.91,
@@ -50,7 +64,24 @@
           "speedScale": 3.4,
           "softSpeedScale": 2.65,
           "lowerFieldBias": 188,
-          "yOffset": 83
+          "yOffset": 83,
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "laneStaggerS": 0,
+          "phaseOffsetS": 0,
+          "slotDelayS": 0.14,
+          "slotXOffset": 0,
+          "slotYOffset": 0,
+          "laneOrder": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
         },
         "comparisonTargets": {
           "xRange": 0.6166,
@@ -92,7 +123,21 @@
         "lanePolicy": {
           "entityCount": 8,
           "sideSplit": "four-left-four-right",
-          "laneSpreadMode": "reference-lane-offset"
+          "laneSpreadMode": "reference-lane-offset",
+          "laneOrder": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "referenceLaneSpreadScale": 1,
+          "referenceRowSpreadScale": 1
         },
         "controls": {
           "arcAmp": 1.24,
@@ -100,7 +145,24 @@
           "speedScale": 2.34,
           "softSpeedScale": 1.97,
           "lowerFieldBias": 0,
-          "yOffset": 0
+          "yOffset": 0,
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "laneStaggerS": 0,
+          "phaseOffsetS": 0,
+          "slotDelayS": 0.14,
+          "slotXOffset": 0,
+          "slotYOffset": 0,
+          "laneOrder": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
         },
         "comparisonTargets": {
           "xRange": 0.1858,
@@ -142,7 +204,21 @@
         "lanePolicy": {
           "entityCount": 8,
           "sideSplit": "four-left-four-right",
-          "laneSpreadMode": "reference-lane-offset"
+          "laneSpreadMode": "reference-lane-offset",
+          "laneOrder": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "referenceLaneSpreadScale": 1,
+          "referenceRowSpreadScale": 1
         },
         "controls": {
           "arcAmp": 1.07,
@@ -150,7 +226,24 @@
           "speedScale": 3.4,
           "softSpeedScale": 2.65,
           "lowerFieldBias": 188,
-          "yOffset": 86
+          "yOffset": 86,
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "laneStaggerS": 0,
+          "phaseOffsetS": 0,
+          "slotDelayS": 0.14,
+          "slotXOffset": 0,
+          "slotYOffset": 0,
+          "laneOrder": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
         },
         "comparisonTargets": {
           "xRange": 0.0535,
@@ -192,7 +285,21 @@
         "lanePolicy": {
           "entityCount": 8,
           "sideSplit": "four-left-four-right",
-          "laneSpreadMode": "reference-lane-offset"
+          "laneSpreadMode": "reference-lane-offset",
+          "laneOrder": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "referenceLaneSpreadScale": 1,
+          "referenceRowSpreadScale": 1
         },
         "controls": {
           "arcAmp": 2.21,
@@ -200,7 +307,24 @@
           "speedScale": 2.52,
           "softSpeedScale": 2.12,
           "lowerFieldBias": 57,
-          "yOffset": 10
+          "yOffset": 10,
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "laneStaggerS": 0,
+          "phaseOffsetS": 0,
+          "slotDelayS": 0.14,
+          "slotXOffset": 0,
+          "slotYOffset": 0,
+          "laneOrder": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
         },
         "comparisonTargets": {
           "xRange": 0.8862,
@@ -242,7 +366,21 @@
         "lanePolicy": {
           "entityCount": 8,
           "sideSplit": "four-left-four-right",
-          "laneSpreadMode": "reference-lane-offset"
+          "laneSpreadMode": "reference-lane-offset",
+          "laneOrder": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "referenceLaneSpreadScale": 1,
+          "referenceRowSpreadScale": 1
         },
         "controls": {
           "arcAmp": 1.25,
@@ -250,7 +388,24 @@
           "speedScale": 3.28,
           "softSpeedScale": 2.65,
           "lowerFieldBias": 31,
-          "yOffset": 0
+          "yOffset": 0,
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "laneStaggerS": 0,
+          "phaseOffsetS": 0,
+          "slotDelayS": 0.14,
+          "slotXOffset": 0,
+          "slotYOffset": 0,
+          "laneOrder": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
         },
         "comparisonTargets": {
           "xRange": 0.1448,

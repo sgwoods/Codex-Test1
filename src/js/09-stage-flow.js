@@ -123,11 +123,20 @@ function spawnChallenge(state){
   const waveMotionSpecs=Array.isArray(layout.motionSpecGroups)?layout.motionSpecGroups:null;
   const motionSpecGroup=waveMotionSpecs?.[wave]||null;
   const motionControls=motionSpecGroup?.controls||null;
+  const laneOrder=Array.isArray(motionControls?.laneOrder)?motionControls.laneOrder:null;
+  const motionLane=Number.isFinite(+laneOrder?.[lane])
+   ? Math.max(0,Math.min(layout.enemiesPerGroup-1,(+laneOrder[lane])|0))
+   : lane;
   const t=waveLaneTypes[lane]||layout.laneTypes[lane]||'bee';
-  const side=lane<layout.enemiesPerGroup/2?-1:1,slot=lane%(layout.enemiesPerGroup/2),row=slot<2?0:1;
+  const side=motionLane<layout.enemiesPerGroup/2?-1:1,slot=motionLane%(layout.enemiesPerGroup/2),row=slot<2?0:1;
   const pathFamily=motionSpecGroup?.pathFamilyHint||wavePathFamilies?.[wave]||layout.pathFamily||'classic-lane-wave';
   const challengeFamily=waveVisualFamilies?.[wave]||layout.visualFamily||profile.challengeFamily;
   const waveProfile=challengeFamily===profile.challengeFamily?profile:Object.assign({},profile,{challengeFamily});
+  const groupSpawnOffset=Number.isFinite(+motionSpecGroup?.spawnOffsetS)
+   ? +motionSpecGroup.spawnOffsetS
+   : (waveSpawnOffsets?.[wave]??wave*layout.waveDelay);
+  const slotDelay=Number.isFinite(+motionControls?.slotDelayS)?+motionControls.slotDelayS:layout.slotDelay;
+  const laneStaggerS=Number.isFinite(+motionControls?.laneStaggerS)?+motionControls.laneStaggerS:0;
   S.e.push(makePackChallengeEnemyState({
    gamePack:currentGamePack(),
    type:t,
@@ -148,9 +157,15 @@ function spawnChallenge(state){
    speedScale:motionControls?.softSpeedScale??waveSpeedScales?.[wave]??layout.speedScale??1,
    lowerFieldBias:motionControls?.lowerFieldBias??waveLowerFieldBiases?.[wave]??layout.lowerFieldBias??0,
    yOffset:motionControls?.yOffset??waveYOffsets?.[wave]??layout.yOffset??0,
+   laneSpreadScale:motionControls?.laneSpreadScale??1,
+   rowSpreadScale:motionControls?.rowSpreadScale??1,
+   laneStaggerS,
+   phaseOffsetS:motionControls?.phaseOffsetS??0,
+   slotXOffset:motionControls?.slotXOffset??0,
+   slotYOffset:motionControls?.slotYOffset??0,
    referencePath:waveReferencePaths?.[wave]||null,
    motionSpecGroup,
-   spawn:baseEntryDelay+(waveSpawnOffsets?.[wave]??wave*layout.waveDelay)+slot*layout.slotDelay
+   spawn:baseEntryDelay+groupSpawnOffset+slot*slotDelay+slot*laneStaggerS
   }));
  }
  S.ch={hits:0,total,done:0,groups:Array.from({length:layout.groups},()=>0),bonus:0,perfect:0,upperBandY,upperBandTime:0,upperBandSamples:0};

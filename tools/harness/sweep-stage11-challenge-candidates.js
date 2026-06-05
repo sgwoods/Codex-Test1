@@ -870,19 +870,43 @@ function specAwareLayoutOverride(layoutOverride){
   const speeds = Array.isArray(layout.groupSpeedScales) ? layout.groupSpeedScales : [];
   const lowerBiases = Array.isArray(layout.groupLowerFieldBiases) ? layout.groupLowerFieldBiases : [];
   const yOffsets = Array.isArray(layout.groupYOffsets) ? layout.groupYOffsets : [];
+  const spawnOffsets = Array.isArray(layout.groupSpawnOffsets) ? layout.groupSpawnOffsets : [];
+  const laneSpreadScales = Array.isArray(layout.groupLaneSpreadScales) ? layout.groupLaneSpreadScales : [];
+  const rowSpreadScales = Array.isArray(layout.groupRowSpreadScales) ? layout.groupRowSpreadScales : [];
+  const laneStaggers = Array.isArray(layout.groupLaneStaggers) ? layout.groupLaneStaggers : [];
+  const phaseOffsets = Array.isArray(layout.groupPhaseOffsets) ? layout.groupPhaseOffsets : [];
+  const slotDelays = Array.isArray(layout.groupSlotDelays) ? layout.groupSlotDelays : [];
+  const slotXOffsets = Array.isArray(layout.groupSlotXOffsets) ? layout.groupSlotXOffsets : [];
+  const slotYOffsets = Array.isArray(layout.groupSlotYOffsets) ? layout.groupSlotYOffsets : [];
+  const laneOrders = Array.isArray(layout.groupLaneOrders) ? layout.groupLaneOrders : [];
   const scalarArc = Number.isFinite(+layout.arcAmp) ? +layout.arcAmp : null;
   const scalarDrop = Number.isFinite(+layout.dropAmp) ? +layout.dropAmp : null;
   const scalarSpeed = Number.isFinite(+layout.speedScale) ? +layout.speedScale : null;
   const scalarLowerBias = Number.isFinite(+layout.lowerFieldBias) ? +layout.lowerFieldBias : null;
   const scalarYOffset = Number.isFinite(+layout.yOffset) ? +layout.yOffset : null;
+  const scalarLaneSpread = Number.isFinite(+layout.laneSpreadScale) ? +layout.laneSpreadScale : null;
+  const scalarRowSpread = Number.isFinite(+layout.rowSpreadScale) ? +layout.rowSpreadScale : null;
+  const scalarLaneStagger = Number.isFinite(+layout.laneStaggerS) ? +layout.laneStaggerS : null;
+  const scalarPhaseOffset = Number.isFinite(+layout.phaseOffsetS) ? +layout.phaseOffsetS : null;
+  const scalarSlotDelay = Number.isFinite(+layout.slotDelay) ? +layout.slotDelay : null;
+  const scalarSlotXOffset = Number.isFinite(+layout.slotXOffset) ? +layout.slotXOffset : null;
+  const scalarSlotYOffset = Number.isFinite(+layout.slotYOffset) ? +layout.slotYOffset : null;
   const paths = Array.isArray(layout.groupPathFamilies) ? layout.groupPathFamilies : [];
   layout.motionSpecGroups = sourceGroups.map((group, index) => {
     const controls = Object.assign({}, group.controls || {});
+    const spawnOffset = Number.isFinite(+spawnOffsets[index]) ? +spawnOffsets[index] : null;
     const arc = Number.isFinite(+arcs[index]) ? +arcs[index] : scalarArc;
     const drop = Number.isFinite(+drops[index]) ? +drops[index] : scalarDrop;
     const speed = Number.isFinite(+speeds[index]) ? +speeds[index] : scalarSpeed;
     const lowerBias = Number.isFinite(+lowerBiases[index]) ? +lowerBiases[index] : scalarLowerBias;
     const yOffset = Number.isFinite(+yOffsets[index]) ? +yOffsets[index] : scalarYOffset;
+    const laneSpread = Number.isFinite(+laneSpreadScales[index]) ? +laneSpreadScales[index] : scalarLaneSpread;
+    const rowSpread = Number.isFinite(+rowSpreadScales[index]) ? +rowSpreadScales[index] : scalarRowSpread;
+    const laneStagger = Number.isFinite(+laneStaggers[index]) ? +laneStaggers[index] : scalarLaneStagger;
+    const phaseOffset = Number.isFinite(+phaseOffsets[index]) ? +phaseOffsets[index] : scalarPhaseOffset;
+    const slotDelay = Number.isFinite(+slotDelays[index]) ? +slotDelays[index] : scalarSlotDelay;
+    const slotXOffset = Number.isFinite(+slotXOffsets[index]) ? +slotXOffsets[index] : scalarSlotXOffset;
+    const slotYOffset = Number.isFinite(+slotYOffsets[index]) ? +slotYOffsets[index] : scalarSlotYOffset;
     if(Number.isFinite(+arc)) controls.arcAmp = round(+arc, 3);
     if(Number.isFinite(+drop)) controls.dropAmp = round(+drop, 3);
     if(Number.isFinite(+speed)){
@@ -891,7 +915,18 @@ function specAwareLayoutOverride(layoutOverride){
     }
     if(Number.isFinite(+lowerBias)) controls.lowerFieldBias = Math.round(+lowerBias);
     if(Number.isFinite(+yOffset)) controls.yOffset = Math.round(+yOffset);
+    if(Number.isFinite(+laneSpread)) controls.laneSpreadScale = round(+laneSpread, 3);
+    if(Number.isFinite(+rowSpread)) controls.rowSpreadScale = round(+rowSpread, 3);
+    if(Number.isFinite(+laneStagger)) controls.laneStaggerS = round(+laneStagger, 3);
+    if(Number.isFinite(+phaseOffset)) controls.phaseOffsetS = round(+phaseOffset, 3);
+    if(Number.isFinite(+slotDelay)) controls.slotDelayS = round(+slotDelay, 3);
+    if(Number.isFinite(+slotXOffset)) controls.slotXOffset = round(+slotXOffset, 3);
+    if(Number.isFinite(+slotYOffset)) controls.slotYOffset = round(+slotYOffset, 3);
+    if(Array.isArray(laneOrders[index]) && laneOrders[index].length){
+      controls.laneOrder = laneOrders[index].map(value => Math.max(0, Math.min(7, Math.round(+value || 0))));
+    }
     return Object.assign({}, group, {
+      spawnOffsetS: Number.isFinite(+spawnOffset) ? round(+spawnOffset, 3) : group.spawnOffsetS,
       pathFamilyHint: paths[index] || group.pathFamilyHint,
       controls,
       phaseDurations: Object.assign({}, group.phaseDurations || {})
@@ -1367,6 +1402,56 @@ function candidateDefinitions(){
                       slotDelay,
                       lowerFieldBias,
                       groupPathFamilies: pathSets[pathIndex]
+                    })
+                  });
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    if(STAGE === 7){
+      const laneSpreadSets = [
+        { id: 'ref', values: [1.5, 1.04, 0.893, 1.5, 0.994] },
+        { id: 'wide', values: [1.62, 1.16, 1.02, 1.62, 1.12] },
+        { id: 'latewide', values: [1.5, 1.12, 1.1, 1.68, 1.22] },
+        { id: 'balanced', values: [1.36, 1.24, 1.16, 1.36, 1.24] }
+      ];
+      const rowSpreadSets = [
+        { id: 'ref', values: [0.937, 1.366, 0.859, 1.369, 1.369] },
+        { id: 'tall', values: [1.08, 1.48, 1.02, 1.5, 1.48] },
+        { id: 'balanced', values: [1.14, 1.22, 1.1, 1.24, 1.22] }
+      ];
+      const laneOrders = [
+        { id: 'id', value: [0, 1, 2, 3, 4, 5, 6, 7] },
+        { id: 'pair', value: [0, 2, 1, 3, 4, 6, 5, 7] },
+        { id: 'outer', value: [0, 3, 1, 2, 4, 7, 5, 6] },
+        { id: 'fan', value: [3, 1, 0, 2, 5, 7, 4, 6] }
+      ];
+      const laneStaggers = [0, 0.025, 0.045];
+      const slotDelays = [0.14, 0.18, 0.22];
+      const phaseOffsetSets = [
+        { id: 'sync', values: [0, 0, 0, 0, 0] },
+        { id: 'ripple', values: [-0.06, 0, 0.05, 0.09, 0.13] },
+        { id: 'latehold', values: [0, 0.04, 0.08, 0.16, 0.2] }
+      ];
+      for(const laneSpread of laneSpreadSets){
+        for(const rowSpread of rowSpreadSets){
+          for(const laneOrder of laneOrders){
+            for(const laneStaggerS of laneStaggers){
+              for(const slotDelay of slotDelays){
+                for(const phaseOffsets of phaseOffsetSets){
+                  candidates.push({
+                    id: `stage7-read-${laneSpread.id}-${rowSpread.id}-${laneOrder.id}-ls${String(laneStaggerS).replace('.','')}-sd${String(slotDelay).replace('.','')}-${phaseOffsets.id}`,
+                    description: `Stage 7 readability sweep: lane spread ${laneSpread.id}, row spread ${rowSpread.id}, lane order ${laneOrder.id}, lane stagger ${laneStaggerS}, slot delay ${slotDelay}, phase ${phaseOffsets.id}.`,
+                    layoutOverride: Object.assign({}, base, {
+                      groupLaneSpreadScales: laneSpread.values,
+                      groupRowSpreadScales: rowSpread.values,
+                      groupLaneStaggers: Array.from({ length: 5 }, () => laneStaggerS),
+                      groupSlotDelays: Array.from({ length: 5 }, () => slotDelay),
+                      groupPhaseOffsets: phaseOffsets.values,
+                      groupLaneOrders: Array.from({ length: 5 }, () => laneOrder.value)
                     })
                   });
                 }
@@ -1878,7 +1963,12 @@ function summarizeCandidate(row){
     groupPathFamilies: row.layout?.groupPathFamilies || [],
     groupSpawnOffsets: row.layout?.groupSpawnOffsets || [],
     groupLowerFieldBiases: row.layout?.groupLowerFieldBiases || [],
-    groupYOffsets: row.layout?.groupYOffsets || []
+    groupYOffsets: row.layout?.groupYOffsets || [],
+    groupLaneSpreadScales: row.layout?.groupLaneSpreadScales || [],
+    groupRowSpreadScales: row.layout?.groupRowSpreadScales || [],
+    groupLaneStaggers: row.layout?.groupLaneStaggers || [],
+    groupSlotDelays: row.layout?.groupSlotDelays || [],
+    groupLaneOrders: row.layout?.groupLaneOrders || []
   };
 }
 
@@ -1953,6 +2043,7 @@ function buildMarkdown(report){
   const targetControlRows = (report.diagnostics?.targetControlTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
   const targetReferencePathRows = (report.diagnostics?.targetReferencePathTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
   const pathShapeRows = (report.diagnostics?.pathShapeTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
+  const readabilityRows = (report.diagnostics?.readabilityTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
   return `# Stage ${report.stage} Challenge Candidate Sweep
 
 Generated: ${report.generatedAt}
@@ -1973,7 +2064,7 @@ Stage ${report.stage} currently has safe challenge behavior but still does not c
 - Keeper decision: ${report.summary.keeperDecision}.
 - Player-facing meaning: ${report.summary.playerMeaning}
 - Process meaning: ${report.summary.processMeaning}
-- Candidate retention: ${report.candidateRetention?.retained ?? report.candidates.length}/${report.candidateRetention?.totalMeasured ?? report.candidateCount} retained; ${report.candidateRetention?.targetTimingDiagnostics ?? 0} target-timing diagnostics, ${report.candidateRetention?.targetControlDiagnostics ?? 0} target-control diagnostics, ${report.candidateRetention?.targetReferencePathDiagnostics ?? 0} target-reference-path diagnostics, and ${report.candidateRetention?.pathShapeDiagnostics ?? 0} path-shape diagnostics preserved.
+- Candidate retention: ${report.candidateRetention?.retained ?? report.candidates.length}/${report.candidateRetention?.totalMeasured ?? report.candidateCount} retained; ${report.candidateRetention?.targetTimingDiagnostics ?? 0} target-timing diagnostics, ${report.candidateRetention?.targetControlDiagnostics ?? 0} target-control diagnostics, ${report.candidateRetention?.targetReferencePathDiagnostics ?? 0} target-reference-path diagnostics, ${report.candidateRetention?.pathShapeDiagnostics ?? 0} path-shape diagnostics, and ${report.candidateRetention?.readabilityDiagnostics ?? 0} readability diagnostics preserved.
 
 ## Top Candidates
 
@@ -2008,6 +2099,12 @@ ${targetReferencePathRows}
 | Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Visible Guard | Safety | Paths |
 | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- | --- |
 ${pathShapeRows}
+
+### Readability Diagnostics
+
+| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Visible Guard | Safety | Paths |
+| --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- | --- |
+${readabilityRows}
 
 ## Next Step
 
@@ -2138,12 +2235,20 @@ async function main(){
     .filter(row => pathShapeMarkers.some(marker => (row.layout?.groupPathFamilies || []).includes(marker)))
     .sort((a, b) => (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0) || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
     .slice(0, 8);
+  const readabilityDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('stage7-read'))
+    .sort((a, b) => (b.humanVisibleGuardrails?.score10 || 0) - (a.humanVisibleGuardrails?.score10 || 0)
+      || (b.humanPerfectPotential?.score10 || 0) - (a.humanPerfectPotential?.score10 || 0)
+      || (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0)
+      || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 12);
   const retainedById = new Map();
   for(const row of scored.slice(0, retainedCandidateLimit)) retainedById.set(row.candidateId, row);
   for(const row of targetTimingDiagnostics) retainedById.set(row.candidateId, row);
   for(const row of targetControlDiagnostics) retainedById.set(row.candidateId, row);
   for(const row of targetReferencePathDiagnostics) retainedById.set(row.candidateId, row);
   for(const row of pathShapeDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of readabilityDiagnostics) retainedById.set(row.candidateId, row);
   const retainedCandidates = Array.from(retainedById.values());
   if(!retainedCandidates.some(row => row.candidateId === baseline.candidateId)){
     retainedCandidates.push(baseline);
@@ -2233,13 +2338,15 @@ async function main(){
       targetControlDiagnostics: targetControlDiagnostics.length,
       targetReferencePathDiagnostics: targetReferencePathDiagnostics.length,
       pathShapeDiagnostics: pathShapeDiagnostics.length,
-      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score, the baseline row, and top target-timing/target-control/target-reference-path/path-shape diagnostic candidates; use candidateCount for the full measured search size.`
+      readabilityDiagnostics: readabilityDiagnostics.length,
+      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score, the baseline row, and top target-timing/target-control/target-reference-path/path-shape/readability diagnostic candidates; use candidateCount for the full measured search size.`
     },
     diagnostics: {
       targetTimingTop: targetTimingDiagnostics.map(summarizeCandidate),
       targetControlTop: targetControlDiagnostics.map(summarizeCandidate),
       targetReferencePathTop: targetReferencePathDiagnostics.map(summarizeCandidate),
-      pathShapeTop: pathShapeDiagnostics.map(summarizeCandidate)
+      pathShapeTop: pathShapeDiagnostics.map(summarizeCandidate),
+      readabilityTop: readabilityDiagnostics.map(summarizeCandidate)
     },
     measurementPolicy: {
       scope: `harness-only stage-${STAGE} challenge layout candidates`,

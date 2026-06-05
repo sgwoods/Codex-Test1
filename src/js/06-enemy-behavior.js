@@ -131,8 +131,8 @@ function applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arc
  const sourceCenterY=Number.isFinite(+ref.sourceCenterY)?+ref.sourceCenterY:.5;
  const pathScaleX=Number.isFinite(+ref.pathScaleX)?+ref.pathScaleX:1;
  const pathScaleY=Number.isFinite(+ref.pathScaleY)?+ref.pathScaleY:1;
- const laneSpread=Number.isFinite(+ref.laneSpreadX)?+ref.laneSpreadX:9;
- const rowSpread=Number.isFinite(+ref.rowSpreadY)?+ref.rowSpreadY:7;
+ const laneSpread=(Number.isFinite(+ref.laneSpreadX)?+ref.laneSpreadX:9)*(Number.isFinite(+e.laneSpreadScale)?+e.laneSpreadScale:1);
+ const rowSpread=(Number.isFinite(+ref.rowSpreadY)?+ref.rowSpreadY:7)*(Number.isFinite(+e.rowSpreadScale)?+e.rowSpreadScale:1);
  const laneOffset=challengeReferenceLaneOffset(side,slot,row,laneSpread,arcAmp);
  const rowOffset=row*rowSpread*dropAmp;
  let point=last,prev=pts[Math.max(0,pts.length-2)];
@@ -159,8 +159,8 @@ function applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arc
  const dx=point&&prev?cl((px-prevX)*PLAY_W,-42,42):0;
  const exitVy=Number.isFinite(+ref.exitVy)?+ref.exitVy:176;
  const exitSide=side||sweep||1;
- e.x=px*PLAY_W+laneOffset+Math.sin((u+slot*.21+wave*.37)*4.4)*2.2*arcAmp+over*(dx*.28+exitSide*18);
- e.y=py*PLAY_H+rowOffset+over*exitVy*dropAmp;
+ e.x=px*PLAY_W+laneOffset+(Number.isFinite(+e.slotXOffset)?+e.slotXOffset:0)+Math.sin((u+slot*.21+wave*.37)*4.4)*2.2*arcAmp+over*(dx*.28+exitSide*18);
+ e.y=py*PLAY_H+rowOffset+(Number.isFinite(+e.slotYOffset)?+e.slotYOffset:0)+over*exitVy*dropAmp;
  if(over>.2)e.x+=sweep*Math.min(82,over*34)*arcAmp;
  return true;
 }
@@ -181,15 +181,15 @@ function referenceChallengeFirstPosition(e,laneX,topY,side,slot,row,wave,sweep,a
  const sourceCenterY=Number.isFinite(+ref.sourceCenterY)?+ref.sourceCenterY:.5;
  const pathScaleX=Number.isFinite(+ref.pathScaleX)?+ref.pathScaleX:1;
  const pathScaleY=Number.isFinite(+ref.pathScaleY)?+ref.pathScaleY:1;
- const laneSpread=Number.isFinite(+ref.laneSpreadX)?+ref.laneSpreadX:9;
- const rowSpread=Number.isFinite(+ref.rowSpreadY)?+ref.rowSpreadY:7;
+ const laneSpread=(Number.isFinite(+ref.laneSpreadX)?+ref.laneSpreadX:9)*(Number.isFinite(+e.laneSpreadScale)?+e.laneSpreadScale:1);
+ const rowSpread=(Number.isFinite(+ref.rowSpreadY)?+ref.rowSpreadY:7)*(Number.isFinite(+e.rowSpreadScale)?+e.rowSpreadScale:1);
  const laneOffset=challengeReferenceLaneOffset(side,slot,row,laneSpread,arcAmp);
  const rowOffset=row*rowSpread*dropAmp;
  const px=cl(sourceCenterX+((+point.x||sourceCenterX)-sourceCenterX)*pathScaleX,0,1);
  const py=cl(sourceCenterY+((+point.y||sourceCenterY)-sourceCenterY)*pathScaleY,0,1);
  return {
-  x:px*PLAY_W+laneOffset+Math.sin((slot*.21+wave*.37)*4.4)*2.2*arcAmp,
-  y:py*PLAY_H+rowOffset
+  x:px*PLAY_W+laneOffset+(Number.isFinite(+e.slotXOffset)?+e.slotXOffset:0)+Math.sin((slot*.21+wave*.37)*4.4)*2.2*arcAmp,
+  y:py*PLAY_H+rowOffset+(Number.isFinite(+e.slotYOffset)?+e.slotYOffset:0)
  };
 }
 
@@ -221,9 +221,14 @@ function updateChallengeEnemy(state,e,dt){
  const baseChallengeSpeed=challengePathSpeed(pathFamily,S.stage,classicStage3);
  const wave=e.wave||0,side=e.side||1,slot=e.slot||0,row=e.row||0,sweep=e.sweep||1;
  const arcAmp=e.arcAmp||1,dropAmp=e.dropAmp||1;
- const laneX=PLAY_W/2+side*(48+slot*16);
+ const laneSpreadScale=Number.isFinite(+e.laneSpreadScale)?+e.laneSpreadScale:1;
+ const rowSpreadScale=Number.isFinite(+e.rowSpreadScale)?+e.rowSpreadScale:1;
+ const slotXOffset=Number.isFinite(+e.slotXOffset)?+e.slotXOffset:0;
+ const slotYOffset=Number.isFinite(+e.slotYOffset)?+e.slotYOffset:0;
+ const phaseOffsetS=Number.isFinite(+e.phaseOffsetS)?+e.phaseOffsetS:0;
+ const laneX=PLAY_W/2+side*(48+slot*16)*laneSpreadScale+slotXOffset;
  const yOffset=Number.isFinite(+e.yOffset)?+e.yOffset:0;
- const topY=38+wave*14+row*8+yOffset;
+ const topY=38+wave*14+row*8*rowSpreadScale+yOffset+slotYOffset;
  if(e.spawn>0){
   if(applyReferenceChallengeSpawnLeadIn(e,dt,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp))return;
   e.tm=Math.max(0,(+e.tm||0)-dt);
@@ -244,7 +249,7 @@ function updateChallengeEnemy(state,e,dt){
 		  : referencePlaybackScale-1;
 		 e.tm+=dt*pathTimeSpeed;
 		 e.referenceLeadIn=0;
-		 const u=e.tm,p=e.ph;
+		 const u=e.tm+phaseOffsetS,p=e.ph;
 	 const entryDuration=pathFamily==='first-challenge-peel'?3.35:3.15;
 	 if(!applyChallengeMotionSpecPath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)&&!applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)){
 	 if(u<entryDuration){

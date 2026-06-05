@@ -84,6 +84,12 @@ function enemyChallengeState({
   speedScale=1,
   lowerFieldBias=0,
   yOffset=0,
+  laneSpreadScale=1,
+  rowSpreadScale=1,
+  laneStaggerS=0,
+  phaseOffsetS=0,
+  slotXOffset=0,
+  slotYOffset=0,
   referencePath=null,
   motionSpecGroup=null
 }={}){
@@ -103,6 +109,12 @@ function enemyChallengeState({
   speedScale,
   lowerFieldBias,
   yOffset,
+  laneSpreadScale,
+  rowSpreadScale,
+  laneStaggerS,
+  phaseOffsetS,
+  slotXOffset,
+  slotYOffset,
   referencePath,
   motionSpecGroup
  };
@@ -187,6 +199,12 @@ function makePackChallengeEnemyState({
  speedScale=1,
  lowerFieldBias=0,
  yOffset=0,
+ laneSpreadScale=1,
+ rowSpreadScale=1,
+ laneStaggerS=0,
+ phaseOffsetS=0,
+ slotXOffset=0,
+ slotYOffset=0,
  referencePath=null,
  motionSpecGroup=null,
  spawn=0
@@ -230,5 +248,5 @@ function makePackChallengeEnemyState({
   miss:0,
   low:0,
   hitT:0
- }, enemyChallengeState({wave,side,slot,row,group,sweep,upperBandY,pathFamily,arcAmp,dropAmp,speedScale,lowerFieldBias,yOffset,referencePath,motionSpecGroup}));
+ }, enemyChallengeState({wave,side,slot,row,group,sweep,upperBandY,pathFamily,arcAmp,dropAmp,speedScale,lowerFieldBias,yOffset,laneSpreadScale,rowSpreadScale,laneStaggerS,phaseOffsetS,slotXOffset,slotYOffset,referencePath,motionSpecGroup}));
 }

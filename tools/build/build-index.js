@@ -3478,6 +3478,11 @@ function buildChallengeStageEffortGuideSection(){
   const summary = artifact.summary || {};
   const sweepSummary = sweep.summary || {};
   const sweepRetention = sweep.candidateRetention || {};
+  const sweepDiagnostics = sweep.diagnostics || {};
+  const readabilityTop = (sweepDiagnostics.readabilityTop || [])[0] || null;
+  const readabilityRead = readabilityTop
+    ? `Best readability diagnostic ${readabilityTop.candidateId || 'pending'} scored ${readabilityTop.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 human-visible, ${readabilityTop.humanPerfectPotentialScore10 ?? 'n/a'}/10 human-perfect, and ${readabilityTop.targetVideoObjectFitScore10 ?? 'n/a'}/10 target-video fit. ${readabilityTop.humanVisibleGuardrails?.read || 'Readability details pending.'}`
+    : 'No readability diagnostics retained yet; rerun the Stage 7 sweep after adding readability candidate controls.';
   const sweepIndexSummary = sweepIndex.summary || {};
   const beforeAfterSummary = candidateBeforeAfter.sweepSummary || {};
   const beforeAfterCandidate = candidateBeforeAfter.selectedCandidate || {};
@@ -3526,6 +3531,10 @@ function buildChallengeStageEffortGuideSection(){
       {
         title: 'Latest Candidate Sweep',
         body: `Stage ${sweep.stage || 'n/a'} sweep measured ${sweep.candidateCount || sweepRetention.totalMeasured || 'n/a'} candidates and retained ${sweepRetention.retained || 'n/a'} review rows. Decision: ${sweepSummary.keeperDecision || 'pending'}. Best candidate ${sweepSummary.bestCandidateId || 'pending'} scored ${sweepSummary.bestExpectedScore10 ?? 'n/a'}/10 expected-reference, ${sweepSummary.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10 target-video fit, and ${sweepSummary.bestHumanPerfectPotentialScore10 ?? 'n/a'}/10 human-perfect potential; lift ${sweepSummary.humanPerfectPotentialLift10 ?? 'n/a'}/10.`
+      },
+      {
+        title: 'Readability Diagnostics',
+        body: `${sweepRetention.readabilityDiagnostics || 0} readability diagnostic row(s) retained from the latest sweep. ${readabilityRead}`
       },
       {
         title: 'Human-Perfect Guard',
@@ -6225,6 +6234,11 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const challengeCandidateFullAnalyzerReview = loadChallengeStageCandidateFullAnalyzerReview();
   const challengeSweepSummary = challengeCandidateSweep.summary || {};
   const challengeSweepRetention = challengeCandidateSweep.candidateRetention || {};
+  const challengeSweepDiagnostics = challengeCandidateSweep.diagnostics || {};
+  const challengeReadabilityTop = (challengeSweepDiagnostics.readabilityTop || [])[0] || null;
+  const challengeReadabilityRead = challengeReadabilityTop
+    ? `Best readability diagnostic ${challengeReadabilityTop.candidateId || 'pending'} scored ${challengeReadabilityTop.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 human-visible and remains blocked by: ${challengeReadabilityTop.humanVisibleGuardrails?.read || 'pending guardrail read.'}`
+    : 'No readability diagnostics retained yet.';
   const challengeSweepIndexSummary = challengeCandidateSweepIndex.summary || {};
   const challengeSweepIndexRows = Array.isArray(challengeCandidateSweepIndex.rows) ? challengeCandidateSweepIndex.rows : [];
   const challengeSweepIndexRead = challengeSweepIndexRows.length
@@ -7123,6 +7137,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <p>${esc(challengeSummary.weakestFinding || 'Run the challenge-stage conformance analyzer to refresh this readout.')}</p>
             <p class="docMeta"><strong>Scoring model:</strong> ${esc(challengeSummary.scoringModel || 'strict-v2')}. Each challenge starts at 1/10 for interest, movement, and graphics; no-shot/no-kill safety is a required guardrail, not a score booster. Legacy broad coverage is diagnostic only.</p>
             <p class="docMeta"><strong>Latest candidate sweep:</strong> Stage ${esc(challengeCandidateSweep.stage || 'n/a')} measured ${esc(challengeCandidateSweep.candidateCount || challengeSweepRetention.totalMeasured || 'n/a')} candidates and retained ${esc(challengeSweepRetention.retained || 'n/a')} review rows. Decision: <strong>${esc(challengeSweepSummary.keeperDecision || 'pending')}</strong>. Best candidate ${esc(challengeSweepSummary.bestCandidateId || 'pending')} scored ${esc(challengeSweepSummary.bestExpectedScore10 ?? 'n/a')}/10 expected-reference and ${esc(challengeSweepSummary.bestTargetVideoObjectFitScore10 ?? 'n/a')}/10 target-video fit. This is process evidence unless the full analyzer and guardrails confirm a runtime promotion.</p>
+            <p class="docMeta"><strong>Readability diagnostics:</strong> ${esc(challengeSweepRetention.readabilityDiagnostics || 0)} row(s) retained. ${esc(challengeReadabilityRead)}</p>
             <p class="docMeta"><strong>Full-analyzer candidate review:</strong> ${esc(challengeCandidateFullAnalyzerRead)} Source artifact: <code>reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json</code>.</p>
             <p class="docMeta"><strong>Candidate sweep matrix:</strong> ${esc(challengeSweepIndexSummary.stagesCovered || 0)} stage(s), ${esc(challengeSweepIndexSummary.totalCandidateCount || 0)} latest per-stage candidates represented, ${esc(challengeSweepIndexSummary.runtimeReadyCount || 0)} runtime-ready. ${esc(challengeSweepIndexRead)}</p>
             <p class="docMeta"><strong>Target trajectory controls:</strong> ${esc(challengeTrajectoryRead)} Source artifact: <code>reference-artifacts/analyses/challenge-trajectory-controls/latest.json</code>.</p>

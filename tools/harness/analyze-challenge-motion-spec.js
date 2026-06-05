@@ -45,6 +45,10 @@ function round(value, places = 3){
   return Math.round(+value * scale) / scale;
 }
 
+function clamp(value, min, max){
+  return Math.max(min, Math.min(max, value));
+}
+
 function phaseDurations(group){
   const runtime = group.runtimeControl || {};
   const refDuration = +group.referencePath?.durationS || +runtime.durationS || 2;
@@ -57,7 +61,10 @@ function phaseDurations(group){
 
 function groupSpec(row, group){
   const runtime = group.runtimeControl || {};
+  const referencePath = group.referencePath || {};
   const durations = phaseDurations(group);
+  const laneSpreadScale = round(clamp((+referencePath.laneSpreadX || 9) / 9, 0.78, 1.55), 3);
+  const rowSpreadScale = round(clamp((+referencePath.rowSpreadY || 7) / 7, 0.75, 1.65), 3);
   return {
     groupIndex: group.groupIndex,
     entityCount: 8,
@@ -70,7 +77,12 @@ function groupSpec(row, group){
     lanePolicy: {
       entityCount: 8,
       sideSplit: 'four-left-four-right',
-      laneSpreadMode: 'reference-lane-offset'
+      laneSpreadMode: 'reference-lane-offset',
+      laneOrder: [0, 1, 2, 3, 4, 5, 6, 7],
+      laneSpreadScale: 1,
+      rowSpreadScale: 1,
+      referenceLaneSpreadScale: laneSpreadScale,
+      referenceRowSpreadScale: rowSpreadScale
     },
     controls: {
       arcAmp: round(runtime.arcAmp ?? 1, 3),
@@ -78,7 +90,15 @@ function groupSpec(row, group){
       speedScale: round(runtime.speedScale ?? 1, 3),
       softSpeedScale: round(runtime.softSpeedScale ?? runtime.speedScale ?? 1, 3),
       lowerFieldBias: round(runtime.lowerFieldBias ?? 0, 3),
-      yOffset: round(runtime.yOffset ?? 0, 3)
+      yOffset: round(runtime.yOffset ?? 0, 3),
+      laneSpreadScale: 1,
+      rowSpreadScale: 1,
+      laneStaggerS: 0,
+      phaseOffsetS: 0,
+      slotDelayS: 0.14,
+      slotXOffset: 0,
+      slotYOffset: 0,
+      laneOrder: [0, 1, 2, 3, 4, 5, 6, 7]
     },
     comparisonTargets: group.comparisonTargets || {},
     referencePath: {
