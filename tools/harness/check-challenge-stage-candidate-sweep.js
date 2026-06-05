@@ -97,6 +97,15 @@ for(const row of [baseline, best]){
   if(!row.humanPerfectGuard || typeof row.humanPerfectGuard.pass !== 'boolean' || !isFiniteNumber(row.humanPerfectGuard.lift10)){
     fail('Candidate sweep row is missing the human-perfect regression gate.', row);
   }
+  if(!row.humanVisibleGuardrails
+    || typeof row.humanVisibleGuardrails.pass !== 'boolean'
+    || !isFiniteNumber(row.humanVisibleGuardrails.score10)
+    || !isFiniteNumber(row.humanVisibleGuardrails.groupVisibility)
+    || !isFiniteNumber(row.humanVisibleGuardrails.arrivalContinuity)
+    || !isFiniteNumber(row.humanVisibleGuardrails.spacingScore)
+    || !isFiniteNumber(row.humanVisibleGuardrails.bunchingRisk)){
+    fail('Candidate sweep row is missing the human-visible challenge guardrails.', row);
+  }
   if(!isFiniteNumber(row.selectionScore10)){
     fail('Candidate sweep row is missing a selection score.', row);
   }
@@ -121,6 +130,12 @@ if(summary.targetVideoComparable !== false){
 }
 
 for(const field of ['baselineHumanPerfectPotentialScore10', 'bestHumanPerfectPotentialScore10', 'humanPerfectPotentialLift10']){
+  if(!isFiniteNumber(summary[field])){
+    fail(`Candidate sweep summary field ${field} is invalid.`, summary);
+  }
+}
+
+for(const field of ['baselineHumanVisibleScore10', 'bestHumanVisibleScore10', 'humanVisibleLift10']){
   if(!isFiniteNumber(summary[field])){
     fail(`Candidate sweep summary field ${field} is invalid.`, summary);
   }
@@ -155,6 +170,12 @@ if(promotionLikeDecision){
       bestHumanPerfectGuard: best.humanPerfectGuard
     });
   }
+  if(summary.noHumanVisibleRegression !== true || best.humanVisibleGuardrails?.pass !== true){
+    fail('Candidate is marked promotion-like but regresses human-visible challenge readability.', {
+      summary,
+      bestHumanVisibleGuardrails: best.humanVisibleGuardrails
+    });
+  }
 }
 
 const retention = report.candidateRetention || {};
@@ -180,6 +201,7 @@ console.log(JSON.stringify({
   expectedLift10: summary.expectedLift10,
   targetVideoObjectFitLift10: summary.targetVideoObjectFitLift10,
   humanPerfectPotentialLift10: summary.humanPerfectPotentialLift10,
+  humanVisibleLift10: summary.humanVisibleLift10,
   keeperDecision: summary.keeperDecision,
   baselineSafetyPass: baseline.noSafetyRegression === true,
   bestSafetyPass: best.noSafetyRegression === true
