@@ -770,6 +770,14 @@ const AURORA_CHALLENGE_STAGE11_REFERENCE_PATHS=Object.freeze([
  Object.freeze({sourceTrackId:'target-track-85',sourceSampleCount:15,durationS:2.12,laneSpreadX:8.91,rowSpreadY:9.78,pathScaleX:3.019,pathScaleY:2.582,sourceCenterX:.5667,sourceCenterY:.3041,exitVy:164.9,points:Object.freeze([{t:0,x:.5601,y:.2402},{t:.62,x:.5745,y:.2236},{t:.75,x:.5745,y:.2231},{t:1,x:.5744,y:.2127},{t:1.12,x:.575,y:.2049},{t:1.37,x:.5742,y:.2602},{t:1.5,x:.5744,y:.3325},{t:1.75,x:.5792,y:.436},{t:1.87,x:.5479,y:.481},{t:2.12,x:.5324,y:.4269}])})
 ]);
 
+const AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS=Object.freeze([
+ Object.freeze({id:'challenge-2-group-1',evaluator:'reference-spline-v1',pathFamilyHint:'cross-sweep',controls:Object.freeze({arcAmp:1.91,dropAmp:1.17,speedScale:3.4,softSpeedScale:2.65,lowerFieldBias:188,yOffset:83}),phaseDurations:Object.freeze({leadInS:.78,trackS:1.88,exitS:2.15}),referenceTrackId:'target-track-10'}),
+ Object.freeze({id:'challenge-2-group-2',evaluator:'reference-spline-v1',pathFamilyHint:'hook-arc',controls:Object.freeze({arcAmp:1.24,dropAmp:1.56,speedScale:2.34,softSpeedScale:1.97,lowerFieldBias:0,yOffset:0}),phaseDurations:Object.freeze({leadInS:.78,trackS:2.63,exitS:2.69}),referenceTrackId:'target-track-66'}),
+ Object.freeze({id:'challenge-2-group-3',evaluator:'reference-spline-v1',pathFamilyHint:'hook-arc',controls:Object.freeze({arcAmp:1.07,dropAmp:1.07,speedScale:3.4,softSpeedScale:2.65,lowerFieldBias:188,yOffset:86}),phaseDurations:Object.freeze({leadInS:.78,trackS:.75,exitS:1.34}),referenceTrackId:'target-track-71'}),
+ Object.freeze({id:'challenge-2-group-4',evaluator:'reference-spline-v1',pathFamilyHint:'cross-sweep',controls:Object.freeze({arcAmp:2.21,dropAmp:1.61,speedScale:2.52,softSpeedScale:2.12,lowerFieldBias:57,yOffset:10}),phaseDurations:Object.freeze({leadInS:.78,trackS:2,exitS:2.24}),referenceTrackId:'target-track-110'}),
+ Object.freeze({id:'challenge-2-group-5',evaluator:'reference-spline-v1',pathFamilyHint:'hook-arc',controls:Object.freeze({arcAmp:1.25,dropAmp:1.59,speedScale:3.28,softSpeedScale:2.65,lowerFieldBias:31,yOffset:0}),phaseDurations:Object.freeze({leadInS:.78,trackS:2.5,exitS:2.6}),referenceTrackId:'target-track-142'})
+]);
+
 const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
  Object.freeze({
   fromStage:3,
@@ -826,6 +834,7 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   ]),
   groupVisualFamilies:Object.freeze(['classic','scorpion','scorpion','stingray','stingray']),
   groupPathFamilies:Object.freeze(['hook-arc','cross-sweep','hook-arc','cross-sweep','boss-led-loop']),
+  motionSpecGroups:AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS,
   groupReferencePaths:AURORA_CHALLENGE_STAGE7_REFERENCE_PATHS
  }),
  Object.freeze({

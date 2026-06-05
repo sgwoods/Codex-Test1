@@ -128,6 +128,20 @@ function validateReferencePlaybackClock(state, elapsedSeconds){
 
 function validateStage7ReferencePathSetup(state){
   validateReferencePathSetup(state, { stage: 7, layoutId: 'scorpion-cross-sweep' });
+  const layout = state?.layout || {};
+  const specs = Array.isArray(layout.motionSpecGroups) ? layout.motionSpecGroups : [];
+  const enemies = Array.isArray(state?.enemies) ? state.enemies : [];
+  const specEnemies = enemies.filter(enemy => enemy.motionSpecId && enemy.motionSpecEvaluator === 'reference-spline-v1');
+  const specIds = [...new Set(specEnemies.map(enemy => enemy.motionSpecId))];
+  if(specs.length !== 5 || specEnemies.length !== enemies.length || specIds.length !== 5){
+    fail('stage 7 must run through the Challenge 2 motion-spec seam, not only legacy challenge path arrays', {
+      layoutId: layout.id,
+      specGroupCount: specs.length,
+      enemyCount: enemies.length,
+      specEnemyCount: specEnemies.length,
+      specIds
+    });
+  }
 }
 
 function validateStage11ReferencePathSetup(state){

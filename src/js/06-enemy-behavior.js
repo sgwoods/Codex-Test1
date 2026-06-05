@@ -124,8 +124,9 @@ function applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arc
  const ref=e.referencePath;
  const pts=Array.isArray(ref?.points)?ref.points:null;
  if(!pts||pts.length<2)return false;
+ const motionSpec=e.motionSpecGroup;
  const first=pts[0],last=pts[pts.length-1];
- const duration=Math.max(.75,+ref.durationS||+last.t||8);
+ const duration=Math.max(.75,+motionSpec?.phaseDurations?.trackS||+ref.durationS||+last.t||8);
  const sourceCenterX=Number.isFinite(+ref.sourceCenterX)?+ref.sourceCenterX:.5;
  const sourceCenterY=Number.isFinite(+ref.sourceCenterY)?+ref.sourceCenterY:.5;
  const pathScaleX=Number.isFinite(+ref.pathScaleX)?+ref.pathScaleX:1;
@@ -164,6 +165,13 @@ function applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arc
  return true;
 }
 
+function applyChallengeMotionSpecPath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp){
+ const spec=e.motionSpecGroup;
+ if(!spec)return false;
+ if(spec.evaluator!=='reference-spline-v1')return false;
+ return applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp);
+}
+
 function referenceChallengeFirstPosition(e,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp){
  const ref=e.referencePath;
  const pts=Array.isArray(ref?.points)?ref.points:null;
@@ -192,7 +200,8 @@ function applyReferenceChallengeSpawnLeadIn(e,dt,laneX,topY,side,slot,row,wave,s
  const target=referenceChallengeFirstPosition(e,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp);
  if(!target)return true;
  const ref=e.referencePath;
- const lead=Math.max(.45,Math.min(1.15,Number.isFinite(+ref.entryLeadS)?+ref.entryLeadS:.78));
+ const specLead=e.motionSpecGroup?.phaseDurations?.leadInS;
+ const lead=Math.max(.45,Math.min(1.15,Number.isFinite(+specLead)?+specLead:(Number.isFinite(+ref.entryLeadS)?+ref.entryLeadS:.78)));
  const q=cl(1-(+e.spawn||0)/lead,0,1);
  const startX=side>0?PLAY_W+46:-46;
  const startY=target.y-8-row*2-wave*.45;
@@ -237,7 +246,7 @@ function updateChallengeEnemy(state,e,dt){
 		 e.referenceLeadIn=0;
 		 const u=e.tm,p=e.ph;
 	 const entryDuration=pathFamily==='first-challenge-peel'?3.35:3.15;
-	 if(!applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)){
+	 if(!applyChallengeMotionSpecPath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)&&!applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)){
 	 if(u<entryDuration){
 	  const q=u/entryDuration,startX=side>0?PLAY_W+44:-44,curve=1-Math.pow(1-q,2);
 	  if(pathFamily==='hook-arc'){

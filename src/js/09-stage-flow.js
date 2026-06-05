@@ -120,9 +120,12 @@ function spawnChallenge(state){
   const waveLowerFieldBiases=Array.isArray(layout.groupLowerFieldBiases)?layout.groupLowerFieldBiases:null;
   const waveYOffsets=Array.isArray(layout.groupYOffsets)?layout.groupYOffsets:null;
   const waveReferencePaths=Array.isArray(layout.groupReferencePaths)?layout.groupReferencePaths:null;
+  const waveMotionSpecs=Array.isArray(layout.motionSpecGroups)?layout.motionSpecGroups:null;
+  const motionSpecGroup=waveMotionSpecs?.[wave]||null;
+  const motionControls=motionSpecGroup?.controls||null;
   const t=waveLaneTypes[lane]||layout.laneTypes[lane]||'bee';
   const side=lane<layout.enemiesPerGroup/2?-1:1,slot=lane%(layout.enemiesPerGroup/2),row=slot<2?0:1;
-  const pathFamily=wavePathFamilies?.[wave]||layout.pathFamily||'classic-lane-wave';
+  const pathFamily=motionSpecGroup?.pathFamilyHint||wavePathFamilies?.[wave]||layout.pathFamily||'classic-lane-wave';
   const challengeFamily=waveVisualFamilies?.[wave]||layout.visualFamily||profile.challengeFamily;
   const waveProfile=challengeFamily===profile.challengeFamily?profile:Object.assign({},profile,{challengeFamily});
   S.e.push(makePackChallengeEnemyState({
@@ -140,12 +143,13 @@ function spawnChallenge(state){
    sweep:wave%2?-1:1,
    upperBandY,
    pathFamily,
-   arcAmp:waveArcAmps?.[wave]||layout.arcAmp||1,
-   dropAmp:waveDropAmps?.[wave]||layout.dropAmp||1,
-   speedScale:waveSpeedScales?.[wave]||layout.speedScale||1,
-   lowerFieldBias:waveLowerFieldBiases?.[wave]??layout.lowerFieldBias??0,
-   yOffset:waveYOffsets?.[wave]??layout.yOffset??0,
+   arcAmp:motionControls?.arcAmp??waveArcAmps?.[wave]??layout.arcAmp??1,
+   dropAmp:motionControls?.dropAmp??waveDropAmps?.[wave]??layout.dropAmp??1,
+   speedScale:motionControls?.softSpeedScale??waveSpeedScales?.[wave]??layout.speedScale??1,
+   lowerFieldBias:motionControls?.lowerFieldBias??waveLowerFieldBiases?.[wave]??layout.lowerFieldBias??0,
+   yOffset:motionControls?.yOffset??waveYOffsets?.[wave]??layout.yOffset??0,
    referencePath:waveReferencePaths?.[wave]||null,
+   motionSpecGroup,
    spawn:baseEntryDelay+(waveSpawnOffsets?.[wave]??wave*layout.waveDelay)+slot*layout.slotDelay
   }));
  }

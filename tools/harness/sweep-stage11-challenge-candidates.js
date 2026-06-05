@@ -9,6 +9,7 @@ const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-s
 const LABELS_PATH = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-path-reference-labels', 'latest.json');
 const TARGET_TRACKS_PATH = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-challenge-object-tracks', 'latest.json');
 const TARGET_CONTROLS_PATH = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-trajectory-controls', 'latest.json');
+const MOTION_SPEC_PATH = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-motion-spec', 'latest.json');
 const FULL_ANALYZER_REVIEW_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-full-analyzer-review');
 function argValue(name, fallback = ''){
   const prefix = `--${name}=`;
@@ -851,6 +852,55 @@ function controlArray(values, fallback, length){
   return out;
 }
 
+function challengeMotionSpecGroupsForStage(stage){
+  const artifact = readJson(MOTION_SPEC_PATH, null);
+  const spec = artifact?.spec || null;
+  if(!spec || +spec.stage !== +stage || !Array.isArray(spec.groups)) return [];
+  return spec.groups;
+}
+
+function specAwareLayoutOverride(layoutOverride){
+  const layout = layoutOverride && typeof layoutOverride === 'object' ? Object.assign({}, layoutOverride) : {};
+  const sourceGroups = Array.isArray(layout.motionSpecGroups) && layout.motionSpecGroups.length
+    ? layout.motionSpecGroups
+    : challengeMotionSpecGroupsForStage(STAGE);
+  if(!sourceGroups.length) return layout;
+  const arcs = Array.isArray(layout.groupArcAmps) ? layout.groupArcAmps : [];
+  const drops = Array.isArray(layout.groupDropAmps) ? layout.groupDropAmps : [];
+  const speeds = Array.isArray(layout.groupSpeedScales) ? layout.groupSpeedScales : [];
+  const lowerBiases = Array.isArray(layout.groupLowerFieldBiases) ? layout.groupLowerFieldBiases : [];
+  const yOffsets = Array.isArray(layout.groupYOffsets) ? layout.groupYOffsets : [];
+  const scalarArc = Number.isFinite(+layout.arcAmp) ? +layout.arcAmp : null;
+  const scalarDrop = Number.isFinite(+layout.dropAmp) ? +layout.dropAmp : null;
+  const scalarSpeed = Number.isFinite(+layout.speedScale) ? +layout.speedScale : null;
+  const scalarLowerBias = Number.isFinite(+layout.lowerFieldBias) ? +layout.lowerFieldBias : null;
+  const scalarYOffset = Number.isFinite(+layout.yOffset) ? +layout.yOffset : null;
+  const paths = Array.isArray(layout.groupPathFamilies) ? layout.groupPathFamilies : [];
+  layout.motionSpecGroups = sourceGroups.map((group, index) => {
+    const controls = Object.assign({}, group.controls || {});
+    const arc = Number.isFinite(+arcs[index]) ? +arcs[index] : scalarArc;
+    const drop = Number.isFinite(+drops[index]) ? +drops[index] : scalarDrop;
+    const speed = Number.isFinite(+speeds[index]) ? +speeds[index] : scalarSpeed;
+    const lowerBias = Number.isFinite(+lowerBiases[index]) ? +lowerBiases[index] : scalarLowerBias;
+    const yOffset = Number.isFinite(+yOffsets[index]) ? +yOffsets[index] : scalarYOffset;
+    if(Number.isFinite(+arc)) controls.arcAmp = round(+arc, 3);
+    if(Number.isFinite(+drop)) controls.dropAmp = round(+drop, 3);
+    if(Number.isFinite(+speed)){
+      controls.speedScale = round(+speed, 3);
+      controls.softSpeedScale = round(+speed, 3);
+    }
+    if(Number.isFinite(+lowerBias)) controls.lowerFieldBias = Math.round(+lowerBias);
+    if(Number.isFinite(+yOffset)) controls.yOffset = Math.round(+yOffset);
+    return Object.assign({}, group, {
+      pathFamilyHint: paths[index] || group.pathFamilyHint,
+      controls,
+      phaseDurations: Object.assign({}, group.phaseDurations || {})
+    });
+  });
+  layout.specAwareCandidate = true;
+  return layout;
+}
+
 function targetTimingCandidates(base, pathSets = []){
   const groups = targetGroupsForStage(STAGE);
   if(groups.length < 3) return [];
@@ -1604,6 +1654,9 @@ async function measureCandidates(candidates){
   return withHarnessPage({ stage: STAGE, ships: 3, challenge: false, seed: 9311 }, async ({ page }) => {
     const rows = [];
     for(const candidate of candidates){
+      const runtimeCandidate = Object.assign({}, candidate, {
+        layoutOverride: specAwareLayoutOverride(candidate.layoutOverride || {})
+      });
       const measured = await page.evaluate(({ stage, sampleTimes, candidate }) => {
         const h = window.__galagaHarness__;
         h.setupChallengeMotionProfileTest({ stage, layoutOverride: candidate.layoutOverride || null });
@@ -1687,7 +1740,7 @@ async function measureCandidates(candidates){
             sampledEvents: recent.length
           }
         };
-      }, { stage: STAGE, sampleTimes: SAMPLE_TIMES, candidate });
+      }, { stage: STAGE, sampleTimes: SAMPLE_TIMES, candidate: runtimeCandidate });
       rows.push(measured);
     }
     return rows;

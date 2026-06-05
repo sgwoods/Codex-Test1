@@ -88,6 +88,7 @@ const CHALLENGE_STAGE_CANDIDATE_FULL_ANALYZER_REVIEW = path.join(ROOT, 'referenc
 const CHALLENGE_TRAJECTORY_CONTROLS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-trajectory-controls', 'latest.json');
 const CHALLENGE_SETPIECE_CONTRACTS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-setpiece-contracts', 'latest.json');
 const CHALLENGE_MOVEMENT_GRAMMAR = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-movement-grammar', 'latest.json');
+const CHALLENGE_MOTION_SPEC = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-motion-spec', 'latest.json');
 const CHALLENGE_MOTION_PRIMITIVES = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-motion-primitives', 'latest.json');
 const GAMEPLAY_SEGMENT_CAPTURE = path.join(ROOT, 'reference-artifacts', 'analyses', 'gameplay-segment-captures', 'latest.json');
 const STAGE7_REFERENCE_PATH_BEFORE_AFTER = path.join(ROOT, 'reference-artifacts', 'analyses', 'stage7-reference-path-before-after', 'latest.json');
@@ -3472,6 +3473,7 @@ function buildChallengeStageEffortGuideSection(){
   const trajectoryControls = loadChallengeTrajectoryControls();
   const setpieceContracts = loadChallengeSetpieceContracts();
   const movementGrammar = loadChallengeMovementGrammar();
+  const motionSpec = loadChallengeMotionSpec();
   const motionPrimitives = loadChallengeMotionPrimitives();
   const summary = artifact.summary || {};
   const sweepSummary = sweep.summary || {};
@@ -3482,6 +3484,12 @@ function buildChallengeStageEffortGuideSection(){
   const trajectorySummary = trajectoryControls.summary || {};
   const setpieceSummary = setpieceContracts.summary || {};
   const movementGrammarSummary = movementGrammar.summary || {};
+  const motionSpecSummary = motionSpec.summary || {};
+  const motionSpecStage = motionSpec.spec?.stage || 'n/a';
+  const motionSpecChallenge = motionSpec.spec?.challengeNumber || 'n/a';
+  const motionSpecGroupRead = (motionSpec.spec?.groups || [])
+    .map(group => `G${group.groupIndex}: ${group.intent || 'motion'} via ${group.pathFamilyHint || 'path'} / ${group.referencePath?.sourceTrackId || 'unbacked'}.`)
+    .join(' ');
   const motionPrimitiveSummary = motionPrimitives.summary || {};
   const reviewRead = fullAnalyzerReview.read || 'No candidate has been recorded through the full-analyzer review loop yet.';
   const sweepRows = Array.isArray(sweepIndex.rows) ? sweepIndex.rows : [];
@@ -3530,6 +3538,10 @@ function buildChallengeStageEffortGuideSection(){
       {
         title: 'First-Five Movement Grammar',
         body: `${movementGrammarSummary.challengeCount || 0} grammar row(s), ${movementGrammarSummary.groupContractCount || 0} group contracts, ${movementGrammarSummary.referenceBackedGroupCount || 0} reference-backed paths, ${movementGrammarSummary.averageControlReadiness10 ?? 'n/a'}/10 control readiness. ${firstFiveRead || movementGrammarSummary.read || 'Run the challenge movement grammar analyzer to promote the first five challenge stages into reusable movement contracts.'}`
+      },
+      {
+        title: 'Runtime Motion Spec Trial',
+        body: `Challenge ${motionSpecChallenge} / internal Stage ${motionSpecStage} now has ${motionSpecSummary.groupCount || 0} runtime-facing spec group(s), ${motionSpecSummary.referenceBackedGroupCount || 0} reference-backed, using evaluator \`${motionSpec.spec?.evaluator || 'pending'}\`. Latest strict challenge conformance remains ${summary.score10 ?? 'n/a'}/10, so this is currently a traceable runtime seam and not yet a proven user-visible lift. ${motionSpecGroupRead || motionSpecSummary.read || 'Run the challenge motion spec analyzer to generate the first runtime-facing spec.'}`
       },
       {
         title: 'Motion Primitive Catalog',
@@ -3611,6 +3623,11 @@ function buildChallengeStageEffortGuideSection(){
         label: 'Open Challenge Movement Grammar',
         href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-movement-grammar/latest.json`,
         detail: 'First-five challenge-stage movement grammar with group schedules, path families, reference paths, and human-visible guardrails.'
+      },
+      {
+        label: 'Open Challenge Motion Spec Trial',
+        href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-motion-spec/latest.json`,
+        detail: 'Runtime-facing Challenge 2 motion spec generated from the movement grammar, with phase durations, controls, reference paths, and promotion gates.'
       },
       {
         label: 'Open Challenge Motion Primitives',
@@ -3931,6 +3948,7 @@ let challengeStageCandidateFullAnalyzerReviewCache = null;
 let challengeTrajectoryControlsCache = null;
 let challengeSetpieceContractsCache = null;
 let challengeMovementGrammarCache = null;
+let challengeMotionSpecCache = null;
 let challengeMotionPrimitivesCache = null;
 let gameplaySegmentCaptureCache = null;
 let stage7ReferencePathBeforeAfterCache = null;
@@ -4371,6 +4389,27 @@ function loadChallengeMovementGrammar(){
     challengeMovementGrammarCache = { summary: {}, grammar: [] };
   }
   return challengeMovementGrammarCache;
+}
+
+function loadChallengeMotionSpec(){
+  if(challengeMotionSpecCache) return challengeMotionSpecCache;
+  if(!fs.existsSync(CHALLENGE_MOTION_SPEC)){
+    challengeMotionSpecCache = { summary: {}, spec: { groups: [] } };
+    return challengeMotionSpecCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_MOTION_SPEC);
+    const spec = artifact.spec || {};
+    challengeMotionSpecCache = Object.assign({}, artifact, {
+      summary: artifact.summary || {},
+      spec: Object.assign({}, spec, {
+        groups: Array.isArray(spec.groups) ? spec.groups : []
+      })
+    });
+  } catch (err) {
+    challengeMotionSpecCache = { summary: {}, spec: { groups: [] } };
+  }
+  return challengeMotionSpecCache;
 }
 
 function loadChallengeMotionPrimitives(){
@@ -6209,6 +6248,11 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const challengeSetpieceContracts = loadChallengeSetpieceContracts();
   const challengeSetpieceSummary = challengeSetpieceContracts.summary || {};
   const challengeSetpieceRows = renderChallengeSetpieceContractRows(challengeSetpieceContracts);
+  const challengeMotionSpec = loadChallengeMotionSpec();
+  const challengeMotionSpecSummary = challengeMotionSpec.summary || {};
+  const challengeMotionSpecRead = challengeMotionSpecSummary.groupCount
+    ? `Challenge ${challengeMotionSpec.spec?.challengeNumber || 'n/a'} / internal Stage ${challengeMotionSpec.spec?.stage || 'n/a'} has ${challengeMotionSpecSummary.groupCount} runtime-facing spec group(s), ${challengeMotionSpecSummary.referenceBackedGroupCount || 0} reference-backed, using ${challengeMotionSpec.spec?.evaluator || 'pending'}. The strict score has not lifted yet; this is a measured seam for the next tuning pass.`
+    : 'Runtime-facing challenge motion spec pending. Run npm run harness:analyze:challenge-motion-spec.';
   const gameplaySegmentCapture = loadGameplaySegmentCapture();
   const gameplaySegmentEvidence = renderGameplaySegmentCaptureEvidence(gameplaySegmentCapture);
   const stage7ReferencePathBeforeAfter = loadStage7ReferencePathBeforeAfter();
@@ -7083,6 +7127,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <p class="docMeta"><strong>Candidate sweep matrix:</strong> ${esc(challengeSweepIndexSummary.stagesCovered || 0)} stage(s), ${esc(challengeSweepIndexSummary.totalCandidateCount || 0)} latest per-stage candidates represented, ${esc(challengeSweepIndexSummary.runtimeReadyCount || 0)} runtime-ready. ${esc(challengeSweepIndexRead)}</p>
             <p class="docMeta"><strong>Target trajectory controls:</strong> ${esc(challengeTrajectoryRead)} Source artifact: <code>reference-artifacts/analyses/challenge-trajectory-controls/latest.json</code>.</p>
             <p class="docMeta"><strong>Set-piece contracts:</strong> ${esc(challengeSetpieceSummary.contractCount || 0)} challenge contract(s), ${esc(challengeSetpieceSummary.referenceBackedGroupCount || 0)}/${esc(challengeSetpieceSummary.expectedGroupCount || 0)} reference-backed groups, current average ${esc(challengeSetpieceSummary.averageCurrentScore10 ?? 'n/a')}/10, target-contract fit ${esc(challengeSetpieceSummary.averageTargetContractFitScore10 ?? 'n/a')}/10. Source artifact: <code>reference-artifacts/analyses/challenge-setpiece-contracts/latest.json</code>.</p>
+            <p class="docMeta"><strong>Runtime motion spec trial:</strong> ${esc(challengeMotionSpecRead)} Source artifact: <code>reference-artifacts/analyses/challenge-motion-spec/latest.json</code>.</p>
             <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/challenge-stage-conformance/latest.json</code>. <strong>Report:</strong> <code>CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md</code>.</p>
             ${gameplaySegmentEvidence}
             <p class="docMeta"><strong>Naming rule:</strong> normal Levels and Challenging Stages are separate. The challenge rows below preserve internal stage markers for traceability; human-facing copy should use between-stage labels like <strong>Challenging Stage A-B</strong> once the runtime mapping is confirmed.</p>
