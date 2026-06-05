@@ -1,6 +1,6 @@
 # Release Conformance Dashboard
 
-Generated: `2026-06-05T11:40:19.178Z`
+Generated: `2026-06-05T11:42:51.037Z`
 
 This is the primary at-a-glance planning artifact for Aurora conformance work. It answers what we are trying to improve, why it matters, how close it is to a significant user-facing release gate, and what the next investment should be.
 
