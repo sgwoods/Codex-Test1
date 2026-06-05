@@ -137,6 +137,10 @@ function spawnChallenge(state){
    : (waveSpawnOffsets?.[wave]??wave*layout.waveDelay);
   const slotDelay=Number.isFinite(+motionControls?.slotDelayS)?+motionControls.slotDelayS:layout.slotDelay;
   const laneStaggerS=Number.isFinite(+motionControls?.laneStaggerS)?+motionControls.laneStaggerS:0;
+  const lanePhaseOffsets=Array.isArray(motionControls?.lanePhaseOffsets)?motionControls.lanePhaseOffsets:null;
+  const lanePhaseOffsetS=Number.isFinite(+lanePhaseOffsets?.[motionLane])
+   ? +lanePhaseOffsets[motionLane]
+   : (Number.isFinite(+lanePhaseOffsets?.[lane])?+lanePhaseOffsets[lane]:0);
   S.e.push(makePackChallengeEnemyState({
    gamePack:currentGamePack(),
    type:t,
@@ -161,8 +165,13 @@ function spawnChallenge(state){
    rowSpreadScale:motionControls?.rowSpreadScale??1,
    laneStaggerS,
    phaseOffsetS:motionControls?.phaseOffsetS??0,
+   lanePhaseOffsetS,
    slotXOffset:motionControls?.slotXOffset??0,
    slotYOffset:motionControls?.slotYOffset??0,
+   deconflictSpread:motionControls?.deconflictSpread??0,
+   deconflictPhase:motionControls?.deconflictPhase??0,
+   deconflictLaneBias:motionControls?.deconflictLaneBias??0,
+   deconflictYOffset:motionControls?.deconflictYOffset??0,
    referencePath:waveReferencePaths?.[wave]||null,
    motionSpecGroup,
    spawn:baseEntryDelay+groupSpawnOffset+slot*slotDelay+slot*laneStaggerS

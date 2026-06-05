@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1444" height="520" viewBox="0 0 1444 520">
+  <rect width="1444" height="520" fill="#06131d"/>
+  <text x="32" y="44" fill="#f8fbff" font-size="28" font-weight="800">Stage 7 Challenge Readability Visual</text>
+  <text x="32" y="76" fill="#a9cee3" font-size="15">Baseline vs best-selection vs readability and least-bunched diagnostic candidates. Lower bunching risk is better; runtime promotion still requires identity, scoreability, and safety gates.</text>
+  <text x="32" y="100" fill="#d8f3ff" font-size="14">Best least-bunched: stage7-read-balanced-balanced-id-ls0-sd014-ripple (0.733 risk, delta -0.27 vs baseline).</text>
+  
+    <g>
+      <rect x="32" y="118" width="252" height="318" rx="14" fill="#0d2232" stroke="#31566e"/>
+      <text x="50" y="152" fill="#f4fbff" font-size="18" font-weight="700">Baseline</text>
+      <text x="50" y="176" fill="#9ed1ec" font-size="12">baseline-current</text>
+      
+    <text x="50" y="204" fill="#c9eaff" font-size="14">Expected 5.7/10</text>
+    <rect x="50" y="210" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="50" y="210" width="123.12000000000002" height="12" rx="6" fill="#6ee7b7"/>
+  
+      
+    <text x="50" y="249" fill="#c9eaff" font-size="14">Target Fit 3.9/10</text>
+    <rect x="50" y="255" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="50" y="255" width="84.24000000000001" height="12" rx="6" fill="#5eead4"/>
+  
+      
+    <text x="50" y="294" fill="#c9eaff" font-size="14">Perfect 7.5/10</text>
+    <rect x="50" y="300" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="50" y="300" width="162" height="12" rx="6" fill="#fde68a"/>
+  
+      
+    <text x="50" y="339" fill="#c9eaff" font-size="14">Visible 5.2/10</text>
+    <rect x="50" y="345" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="50" y="345" width="112.32000000000001" height="12" rx="6" fill="#93c5fd"/>
+  
+      
+    <text x="50" y="384" fill="#c9eaff" font-size="14">Bunching Risk 1</text>
+    <rect x="50" y="390" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="50" y="390" width="216" height="12" rx="6" fill="#ff6961"/>
+  
+      <text x="50" y="424" fill="#a5c5d8" font-size="12">5/5 groups, safety pass</text>
+    </g>
+  
+
+    <g>
+      <rect x="308" y="118" width="252" height="318" rx="14" fill="#0d2232" stroke="#31566e"/>
+      <text x="326" y="152" fill="#f4fbff" font-size="18" font-weight="700">Best Selection</text>
+      <text x="326" y="176" fill="#9ed1ec" font-size="12">stage7-target-starts-current-speed-p0</text>
+      
+    <text x="326" y="204" fill="#c9eaff" font-size="14">Expected 5.7/10</text>
+    <rect x="326" y="210" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="326" y="210" width="123.12000000000002" height="12" rx="6" fill="#6ee7b7"/>
+  
+      
+    <text x="326" y="249" fill="#c9eaff" font-size="14">Target Fit 4.5/10</text>
+    <rect x="326" y="255" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="326" y="255" width="97.2" height="12" rx="6" fill="#5eead4"/>
+  
+      
+    <text x="326" y="294" fill="#c9eaff" font-size="14">Perfect 7.5/10</text>
+    <rect x="326" y="300" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="326" y="300" width="162" height="12" rx="6" fill="#fde68a"/>
+  
+      
+    <text x="326" y="339" fill="#c9eaff" font-size="14">Visible 6.6/10</text>
+    <rect x="326" y="345" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="326" y="345" width="142.55999999999997" height="12" rx="6" fill="#93c5fd"/>
+  
+      
+    <text x="326" y="384" fill="#c9eaff" font-size="14">Bunching Risk 0.81</text>
+    <rect x="326" y="390" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="326" y="390" width="175.17600000000002" height="12" rx="6" fill="#ff6961"/>
+  
+      <text x="326" y="424" fill="#a5c5d8" font-size="12">5/5 groups, safety pass</text>
+    </g>
+  
+
+    <g>
+      <rect x="584" y="118" width="252" height="318" rx="14" fill="#0d2232" stroke="#31566e"/>
+      <text x="602" y="152" fill="#f4fbff" font-size="18" font-weight="700">Best Readability</text>
+      <text x="602" y="176" fill="#9ed1ec" font-size="12">stage7-read-balanced-balanced-outer-ls0-sd022-ripple</text>
+      
+    <text x="602" y="204" fill="#c9eaff" font-size="14">Expected 5.4/10</text>
+    <rect x="602" y="210" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="602" y="210" width="116.64000000000001" height="12" rx="6" fill="#6ee7b7"/>
+  
+      
+    <text x="602" y="249" fill="#c9eaff" font-size="14">Target Fit 4.1/10</text>
+    <rect x="602" y="255" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="602" y="255" width="88.55999999999999" height="12" rx="6" fill="#5eead4"/>
+  
+      
+    <text x="602" y="294" fill="#c9eaff" font-size="14">Perfect 7.5/10</text>
+    <rect x="602" y="300" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="602" y="300" width="162" height="12" rx="6" fill="#fde68a"/>
+  
+      
+    <text x="602" y="339" fill="#c9eaff" font-size="14">Visible 7.6/10</text>
+    <rect x="602" y="345" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="602" y="345" width="164.16" height="12" rx="6" fill="#93c5fd"/>
+  
+      
+    <text x="602" y="384" fill="#c9eaff" font-size="14">Bunching Risk 0.75</text>
+    <rect x="602" y="390" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="602" y="390" width="162" height="12" rx="6" fill="#ff6961"/>
+  
+      <text x="602" y="424" fill="#a5c5d8" font-size="12">5/5 groups, safety pass</text>
+    </g>
+  
+
+    <g>
+      <rect x="860" y="118" width="252" height="318" rx="14" fill="#0d2232" stroke="#31566e"/>
+      <text x="878" y="152" fill="#f4fbff" font-size="18" font-weight="700">Least Bunched</text>
+      <text x="878" y="176" fill="#9ed1ec" font-size="12">stage7-read-balanced-balanced-id-ls0-sd014-ripple</text>
+      
+    <text x="878" y="204" fill="#c9eaff" font-size="14">Expected 5.4/10</text>
+    <rect x="878" y="210" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="878" y="210" width="116.64000000000001" height="12" rx="6" fill="#6ee7b7"/>
+  
+      
+    <text x="878" y="249" fill="#c9eaff" font-size="14">Target Fit 4.3/10</text>
+    <rect x="878" y="255" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="878" y="255" width="92.88" height="12" rx="6" fill="#5eead4"/>
+  
+      
+    <text x="878" y="294" fill="#c9eaff" font-size="14">Perfect 7.4/10</text>
+    <rect x="878" y="300" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="878" y="300" width="159.84" height="12" rx="6" fill="#fde68a"/>
+  
+      
+    <text x="878" y="339" fill="#c9eaff" font-size="14">Visible 7.6/10</text>
+    <rect x="878" y="345" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="878" y="345" width="164.16" height="12" rx="6" fill="#93c5fd"/>
+  
+      
+    <text x="878" y="384" fill="#c9eaff" font-size="14">Bunching Risk 0.73</text>
+    <rect x="878" y="390" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="878" y="390" width="158.328" height="12" rx="6" fill="#ff6961"/>
+  
+      <text x="878" y="424" fill="#a5c5d8" font-size="12">5/5 groups, safety pass</text>
+    </g>
+  
+
+    <g>
+      <rect x="1136" y="118" width="252" height="318" rx="14" fill="#0d2232" stroke="#31566e"/>
+      <text x="1154" y="152" fill="#f4fbff" font-size="18" font-weight="700">Best Deconflict</text>
+      <text x="1154" y="176" fill="#9ed1ec" font-size="12">stage7-deconflict-light-nobias-flat-fanphase</text>
+      
+    <text x="1154" y="204" fill="#c9eaff" font-size="14">Expected 5.6/10</text>
+    <rect x="1154" y="210" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="1154" y="210" width="120.96" height="12" rx="6" fill="#6ee7b7"/>
+  
+      
+    <text x="1154" y="249" fill="#c9eaff" font-size="14">Target Fit 3.8/10</text>
+    <rect x="1154" y="255" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="1154" y="255" width="82.08" height="12" rx="6" fill="#5eead4"/>
+  
+      
+    <text x="1154" y="294" fill="#c9eaff" font-size="14">Perfect 7.2/10</text>
+    <rect x="1154" y="300" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="1154" y="300" width="155.51999999999998" height="12" rx="6" fill="#fde68a"/>
+  
+      
+    <text x="1154" y="339" fill="#c9eaff" font-size="14">Visible 7.3/10</text>
+    <rect x="1154" y="345" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="1154" y="345" width="157.68" height="12" rx="6" fill="#93c5fd"/>
+  
+      
+    <text x="1154" y="384" fill="#c9eaff" font-size="14">Bunching Risk 0.88</text>
+    <rect x="1154" y="390" width="216" height="12" rx="6" fill="#0a1a27" stroke="#25485c"/>
+    <rect x="1154" y="390" width="189" height="12" rx="6" fill="#ff6961"/>
+  
+      <text x="1154" y="424" fill="#a5c5d8" font-size="12">5/5 groups, safety pass</text>
+    </g>
+  
+  <text x="32" y="478" fill="#88aac0" font-size="13">Generated 2026-06-05T14:56:22.303Z on codex/aurora-challenge-movement-grammar @ 8b7a83cb9. Artifact: reference-artifacts/analyses/challenge-stage-readability-visuals/latest.json</text>
+</svg>

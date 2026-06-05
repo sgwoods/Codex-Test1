@@ -83,6 +83,8 @@ const APPLICATION_ARTIFACT_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 
 const CHALLENGE_STAGE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_SWEEP = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_SWEEP_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep-index', 'latest.json');
+const CHALLENGE_STAGE_READABILITY_VISUALS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-readability-visuals', 'latest.json');
+const CHALLENGE_STAGE_READABILITY_VISUALS_SVG = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-readability-visuals', 'latest.svg');
 const CHALLENGE_CANDIDATE_BEFORE_AFTER = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-candidate-before-after', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_FULL_ANALYZER_REVIEW = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-full-analyzer-review', 'latest.json');
 const CHALLENGE_TRAJECTORY_CONTROLS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-trajectory-controls', 'latest.json');
@@ -3468,6 +3470,7 @@ function buildChallengeStageEffortGuideSection(){
   const artifact = loadChallengeStageConformance();
   const sweep = loadChallengeStageCandidateSweep();
   const sweepIndex = loadChallengeStageCandidateSweepIndex();
+  const readabilityVisuals = loadChallengeStageReadabilityVisuals();
   const candidateBeforeAfter = loadChallengeCandidateBeforeAfter();
   const fullAnalyzerReview = loadChallengeStageCandidateFullAnalyzerReview();
   const trajectoryControls = loadChallengeTrajectoryControls();
@@ -3484,6 +3487,10 @@ function buildChallengeStageEffortGuideSection(){
     ? `Best readability diagnostic ${readabilityTop.candidateId || 'pending'} scored ${readabilityTop.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 human-visible, ${readabilityTop.humanPerfectPotentialScore10 ?? 'n/a'}/10 human-perfect, and ${readabilityTop.targetVideoObjectFitScore10 ?? 'n/a'}/10 target-video fit. ${readabilityTop.humanVisibleGuardrails?.read || 'Readability details pending.'}`
     : 'No readability diagnostics retained yet; rerun the Stage 7 sweep after adding readability candidate controls.';
   const sweepIndexSummary = sweepIndex.summary || {};
+  const readabilityVisualsSummary = readabilityVisuals.summary || {};
+  const readabilityVisualRead = readabilityVisualsSummary.leastBunchedCandidateId
+    ? `Swarm readability visual compares ${readabilityVisuals.candidatesToCompare?.length || 0} candidate(s); least-bunched diagnostic ${readabilityVisualsSummary.leastBunchedCandidateId} has bunching risk ${readabilityVisualsSummary.leastBunchedBunchingRisk ?? 'n/a'} (delta ${readabilityVisualsSummary.bunchingRiskDelta ?? 'n/a'} vs baseline).`
+    : 'Run the challenge readability visuals analyzer after the Stage 7 sweep to generate a baseline-vs-candidate SVG.';
   const beforeAfterSummary = candidateBeforeAfter.sweepSummary || {};
   const beforeAfterCandidate = candidateBeforeAfter.selectedCandidate || {};
   const trajectorySummary = trajectoryControls.summary || {};
@@ -3535,6 +3542,10 @@ function buildChallengeStageEffortGuideSection(){
       {
         title: 'Readability Diagnostics',
         body: `${sweepRetention.readabilityDiagnostics || 0} readability diagnostic row(s) retained from the latest sweep. ${readabilityRead}`
+      },
+      {
+        title: 'Swarm Readability Visual',
+        body: `${readabilityVisualRead} SVG artifact: \`reference-artifacts/analyses/challenge-stage-readability-visuals/latest.svg\`.`
       },
       {
         title: 'Human-Perfect Guard',
@@ -3952,6 +3963,7 @@ let applicationArtifactConformanceCache = null;
 let challengeStageConformanceCache = null;
 let challengeStageCandidateSweepCache = null;
 let challengeStageCandidateSweepIndexCache = null;
+let challengeStageReadabilityVisualsCache = null;
 let challengeCandidateBeforeAfterCache = null;
 let challengeStageCandidateFullAnalyzerReviewCache = null;
 let challengeTrajectoryControlsCache = null;
@@ -4303,6 +4315,24 @@ function loadChallengeStageCandidateSweepIndex(){
     challengeStageCandidateSweepIndexCache = { summary: {}, rows: [] };
   }
   return challengeStageCandidateSweepIndexCache;
+}
+
+function loadChallengeStageReadabilityVisuals(){
+  if(challengeStageReadabilityVisualsCache) return challengeStageReadabilityVisualsCache;
+  if(!fs.existsSync(CHALLENGE_STAGE_READABILITY_VISUALS)){
+    challengeStageReadabilityVisualsCache = { summary: {}, candidatesToCompare: [] };
+    return challengeStageReadabilityVisualsCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_STAGE_READABILITY_VISUALS);
+    challengeStageReadabilityVisualsCache = Object.assign({}, artifact, {
+      summary: artifact.summary || {},
+      candidatesToCompare: Array.isArray(artifact.candidatesToCompare) ? artifact.candidatesToCompare : []
+    });
+  } catch (err) {
+    challengeStageReadabilityVisualsCache = { summary: {}, candidatesToCompare: [] };
+  }
+  return challengeStageReadabilityVisualsCache;
 }
 
 function loadChallengeCandidateBeforeAfter(){
@@ -6231,6 +6261,7 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const challengeSummary = challengeStageConformance.summary || {};
   const challengeCandidateSweep = loadChallengeStageCandidateSweep();
   const challengeCandidateSweepIndex = loadChallengeStageCandidateSweepIndex();
+  const challengeReadabilityVisuals = loadChallengeStageReadabilityVisuals();
   const challengeCandidateFullAnalyzerReview = loadChallengeStageCandidateFullAnalyzerReview();
   const challengeSweepSummary = challengeCandidateSweep.summary || {};
   const challengeSweepRetention = challengeCandidateSweep.candidateRetention || {};
@@ -6240,6 +6271,13 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
     ? `Best readability diagnostic ${challengeReadabilityTop.candidateId || 'pending'} scored ${challengeReadabilityTop.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 human-visible and remains blocked by: ${challengeReadabilityTop.humanVisibleGuardrails?.read || 'pending guardrail read.'}`
     : 'No readability diagnostics retained yet.';
   const challengeSweepIndexSummary = challengeCandidateSweepIndex.summary || {};
+  const challengeReadabilityVisualsSummary = challengeReadabilityVisuals.summary || {};
+  const challengeReadabilityVisualsRead = challengeReadabilityVisualsSummary.leastBunchedCandidateId
+    ? `Swarm readability visual: least-bunched diagnostic ${challengeReadabilityVisualsSummary.leastBunchedCandidateId} has bunching risk ${challengeReadabilityVisualsSummary.leastBunchedBunchingRisk ?? 'n/a'} (delta ${challengeReadabilityVisualsSummary.bunchingRiskDelta ?? 'n/a'} vs baseline). SVG: reference-artifacts/analyses/challenge-stage-readability-visuals/latest.svg.`
+    : 'Swarm readability visual pending; run npm run harness:analyze:challenge-readability-visuals after the candidate sweep.';
+  const challengeReadabilityVisualMarkup = fs.existsSync(CHALLENGE_STAGE_READABILITY_VISUALS_SVG)
+    ? `<figure class="evidenceFigure"><img src="reference-artifacts/analyses/challenge-stage-readability-visuals/latest.svg" alt="Stage challenge readability comparison visual"><figcaption>Baseline, best selection, best readability, and least-bunched candidates from the latest challenge-stage sweep.</figcaption></figure>`
+    : '';
   const challengeSweepIndexRows = Array.isArray(challengeCandidateSweepIndex.rows) ? challengeCandidateSweepIndex.rows : [];
   const challengeSweepIndexRead = challengeSweepIndexRows.length
     ? challengeSweepIndexRows.map(row => {
@@ -7138,6 +7176,8 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <p class="docMeta"><strong>Scoring model:</strong> ${esc(challengeSummary.scoringModel || 'strict-v2')}. Each challenge starts at 1/10 for interest, movement, and graphics; no-shot/no-kill safety is a required guardrail, not a score booster. Legacy broad coverage is diagnostic only.</p>
             <p class="docMeta"><strong>Latest candidate sweep:</strong> Stage ${esc(challengeCandidateSweep.stage || 'n/a')} measured ${esc(challengeCandidateSweep.candidateCount || challengeSweepRetention.totalMeasured || 'n/a')} candidates and retained ${esc(challengeSweepRetention.retained || 'n/a')} review rows. Decision: <strong>${esc(challengeSweepSummary.keeperDecision || 'pending')}</strong>. Best candidate ${esc(challengeSweepSummary.bestCandidateId || 'pending')} scored ${esc(challengeSweepSummary.bestExpectedScore10 ?? 'n/a')}/10 expected-reference and ${esc(challengeSweepSummary.bestTargetVideoObjectFitScore10 ?? 'n/a')}/10 target-video fit. This is process evidence unless the full analyzer and guardrails confirm a runtime promotion.</p>
             <p class="docMeta"><strong>Readability diagnostics:</strong> ${esc(challengeSweepRetention.readabilityDiagnostics || 0)} row(s) retained. ${esc(challengeReadabilityRead)}</p>
+            <p class="docMeta"><strong>Swarm readability visual:</strong> ${esc(challengeReadabilityVisualsRead)}</p>
+            ${challengeReadabilityVisualMarkup}
             <p class="docMeta"><strong>Full-analyzer candidate review:</strong> ${esc(challengeCandidateFullAnalyzerRead)} Source artifact: <code>reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json</code>.</p>
             <p class="docMeta"><strong>Candidate sweep matrix:</strong> ${esc(challengeSweepIndexSummary.stagesCovered || 0)} stage(s), ${esc(challengeSweepIndexSummary.totalCandidateCount || 0)} latest per-stage candidates represented, ${esc(challengeSweepIndexSummary.runtimeReadyCount || 0)} runtime-ready. ${esc(challengeSweepIndexRead)}</p>
             <p class="docMeta"><strong>Target trajectory controls:</strong> ${esc(challengeTrajectoryRead)} Source artifact: <code>reference-artifacts/analyses/challenge-trajectory-controls/latest.json</code>.</p>

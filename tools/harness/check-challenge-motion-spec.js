@@ -54,6 +54,13 @@ function check(file){
     if(!group.referencePath?.sourceTrackId || +group.referencePath.pointCount < 3){
       issues.push(`${prefix}: missing reference path evidence`);
     }
+    const controls = group.controls || {};
+    if(!Array.isArray(controls.lanePhaseOffsets) || controls.lanePhaseOffsets.length !== 8){
+      issues.push(`${prefix}: missing 8-lane phase offsets control`);
+    }
+    for(const controlKey of ['deconflictSpread', 'deconflictPhase', 'deconflictLaneBias', 'deconflictYOffset']){
+      if(!Number.isFinite(+controls[controlKey])) issues.push(`${prefix}: missing ${controlKey} control`);
+    }
     const gates = Array.isArray(group.promotionGates) ? group.promotionGates : [];
     for(const gate of ['target-video-object-track-fit-must-not-regress', 'human-visible-readability-must-not-regress', 'human-perfect-routeability-must-not-regress', 'spacing-and-bunching-risk-must-pass']){
       if(!gates.includes(gate)) issues.push(`${prefix}: missing promotion gate ${gate}`);

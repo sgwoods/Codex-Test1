@@ -1,123 +1,235 @@
 # Codex Context Checkpoint
 
-Generated: 2026-06-04 18:40:56 EDT
-Label: aurora-runtime-state-isolation-guard
+Generated: 2026-06-05T15:00:01.701Z
+Label: challenge-readability-grammar-pause
 
-This is the durable recovery point for Aurora / Platinum runtime-boundary work
-on this MacBook.
+This is the durable recovery point for long Aurora / Platinum Codex sessions.
+Use it before switching machines, before starting a multi-hour run, and whenever
+the conversation has become long enough that automatic compaction could drop
+important working context.
 
 ## Current Repo State
 
 - Repo path: `/Users/sgwoods/Development/Codex/Codex-test1`
-- Branch: `codex/aurora-runtime-state-adapter-boundary`
-- Latest completed commit before this checkpoint update: `62fb16099 Route Aurora gameplay through adapter runtime state`
-- Release lanes were not published from this work.
+- Branch: `codex/aurora-challenge-movement-grammar`
+- HEAD: `8b7a83cb9` Add challenge readability grammar controls
+- Dirty files excluding checkpoint self-output: `17`
 
-## Objective
+## Active Plan
 
-Refactor Aurora Galactica toward the Galaxy Guardians runtime pattern and add
-enough harness coverage to trust future parallel/persona/conformance runs:
-
-- Aurora runtime state is created through `createAuroraRuntimeState(opts)`.
-- Aurora gameplay ticks through `stepAuroraRuntime(state, dt, input)`.
-- Platinum calls Aurora through the registered Gameplay Adapter boundary.
-- Multi-instance state separation is guarded by a browser-backed harness.
-
-## Completed In This Pass
-
-- Added `tools/harness/check-aurora-runtime-state-isolation.js`.
-- Added package scripts:
-  - `harness:check:aurora-runtime-state-isolation`
-  - `harness:check:game-picker-shell`
-- Added harness-only `__galagaHarness__.checkAuroraRuntimeStateIsolation()`.
-  This keeps internal runtime calls testable without widening production globals.
-- The new isolation harness:
-  - creates two Aurora runtime states
-  - verifies factory-level nested objects and arrays are not aliased
-  - starts both states
-  - mutates bullets/effects/scores independently
-  - steps state A and state B independently
-  - verifies the adapter owns and updates an active Aurora runtime state
-- The harness found a real state alias:
-  - `S.profile` was assigned the shared `stageBandProfile(...)` object during `spawnStage`.
-- Fixed the leak by cloning the stage-band profile into each runtime state:
-  - `S.profile = Object.assign({}, stageBandProfile(...))`
-
-## Verification Run
-
-Passed:
-
-- `npm run build`
-- `npm run harness:check:aurora-runtime-state-isolation`
-- `npm run harness:check:gameplay-adapter-boundaries`
-- `npm run harness:check:game-picker-shell`
-- `npm run harness:check:platinum-pack-boot`
-- `npm run harness:check:player-two-mode`
-- `npm run harness:check:challenge-tour-watch-mode`
-
-## Current State Of The Refactor
-
-The adapter boundary is now coherent, and the first multi-instance isolation
-guard is in place. The new guard verifies that the most important runtime
-containers are distinct across two active Aurora states:
-
-- player object
-- enemies
-- player bullets
-- enemy bullets
-- effects
-- stars
-- challenge metadata
-- score stats
-- stage-band profile
-
-This is still a staged migration:
-
-- Rendering and UI continue to use the active global `S` compatibility alias.
-- `setActiveAuroraRuntimeState(state)` intentionally points that alias at the
-  adapter-owned state for current rendering and harness compatibility.
-- The next architecture pass should reduce remaining non-render global `S`
-  reads and decide how far rendering should move toward explicit snapshots.
+- Pause after first eight challenge movement grammar/readability steps; no runtime promotion yet
 
 ## Recommended Next Steps
 
-1. Commit and push the isolation harness and profile-clone fix.
-2. Add a second isolation harness for replay/headless-style stepping if we need
-   stronger proof before broad persona simulations.
-3. Continue removing non-render global `S` reads from gameplay helpers outside
-   the immediate tick path.
-4. Return to the user-visible quality roadmap:
-   - first five challenging stages
-   - challenge-stage movement grammar
-   - persona challenge-tour evaluation
-   - before/after video evidence windows
-5. Use the new isolation harness as a required guard whenever we add long-cycle
-   conformance automation that creates multiple Aurora runtime states.
+- Resume on codex/aurora-challenge-movement-grammar; decide whether to commit WIP, then generalize successful readability controls or strengthen scoring/route grammar before promotion
+
+## Notes
+
+- Codex Desktop does not expose a repo command that forces internal chat compaction. The safe replacement is a manual checkpoint plus a deliberate fresh session from this file.
+- This checkpoint intentionally filters its own generated files out of the dirty-status read so it can be committed as the recovery point.
+
+## Git Status
+
+```
+M package.json
+ M reference-artifacts/analyses/challenge-motion-spec/latest.json
+ M reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json
+ M reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json
+ M reference-artifacts/ingestion/challenge-motion-spec/aurora-challenge-2-0.1.json
+ M src/js/06-enemy-behavior.js
+ M src/js/09-stage-flow.js
+ M src/js/14-entity-model.js
+ M src/js/90-harness.js
+ M tools/build/build-index.js
+ M tools/harness/analyze-challenge-motion-spec.js
+ M tools/harness/check-challenge-motion-spec.js
+ M tools/harness/sweep-stage11-challenge-candidates.js
+?? reference-artifacts/analyses/challenge-motion-spec/2026-06-05T14-49-34-8b7a83cb9/
+?? reference-artifacts/analyses/challenge-stage-candidate-sweep-index/2026-06-05T14-57-18-8b7a83cb9/
+?? reference-artifacts/analyses/challenge-stage-readability-visuals/
+?? tools/harness/analyze-challenge-readability-visuals.js
+```
+
+## Diff Stat
+
+```
+package.json                                       |     1 +
+ .../analyses/challenge-motion-spec/latest.json     |    74 +-
+ .../latest.json                                    |    50 +-
+ .../challenge-stage-candidate-sweep/latest.json    | 78925 +++++++++++--------
+ .../aurora-challenge-2-0.1.json                    |    74 +-
+ src/js/06-enemy-behavior.js                        |    38 +-
+ src/js/09-stage-flow.js                            |     9 +
+ src/js/14-entity-model.js                          |    17 +-
+ src/js/90-harness.js                               |     5 +
+ tools/build/build-index.js                         |    40 +
+ tools/harness/analyze-challenge-motion-spec.js     |     5 +
+ tools/harness/check-challenge-motion-spec.js       |     7 +
+ .../harness/sweep-stage11-challenge-candidates.js  |   123 +-
+ 13 files changed, 47692 insertions(+), 31676 deletions(-)
+```
+
+## Recent Log
+
+```
+8b7a83cb9 (HEAD -> codex/aurora-challenge-movement-grammar, origin/codex/aurora-challenge-movement-grammar) Add challenge readability grammar controls
+b55328e21 Advance challenge movement grammar runtime spec
+738781c90 Save challenge stage baseline gap plan
+9cdd2d5ec Add challenge spacing guardrails
+8b937b17e Keep challenge wave clocks at entry
+f43175c87 Refresh challenge dashboard primitive provenance
+83c07f021 Refresh challenge motion primitive artifact
+03e442455 Refresh challenge conformance dashboard primitives
+```
+
+## Machine Status Snapshot
+
+```json
+{
+  "ok": true,
+  "mode": "status",
+  "machine": {
+    "machine_id": "macbook-pro",
+    "machine_label": "MacBook-Pro",
+    "hostname": "MacBook-Pro",
+    "repo_path": "/Users/sgwoods/Development/Codex/Codex-test1",
+    "profile_exists": true,
+    "profile_path": "/Users/sgwoods/Development/Codex/Codex-test1/.machine-profile.json",
+    "profile_preview": {
+      "machine_id": "macbook-pro",
+      "machine_label": "MacBook-Pro",
+      "hostname": "MacBook-Pro",
+      "repo_path": "/Users/sgwoods/Development/Codex/Codex-test1",
+      "tool_versions": {
+        "node": "v25.9.0",
+        "npm": "11.12.1",
+        "python3": "Python 3.9.6",
+        "gh": "gh version 2.91.0 (2026-04-22)",
+        "chrome": "Google Chrome 149.0.7827.53",
+        "harness_browser": "playwright-managed-chromium"
+      },
+      "gh_auth": true,
+      "last_successful_bootstrap_at": "2026-06-03T20:48:12.604Z"
+    }
+  },
+  "repo": {
+    "branch": "codex/aurora-challenge-movement-grammar",
+    "dirty": true,
+    "upstream": "origin/codex/aurora-challenge-movement-grammar",
+    "ahead": 0,
+    "behind": 0,
+    "remote_ok": true
+  },
+  "release_authority": {
+    "machine_id": "macbook-pro",
+    "machine_label": "MacBook-Pro",
+    "claimed_by": "Steven G Woods",
+    "claimed_at": "2026-06-03T20:49:13.244Z",
+    "notes": "Authority transferred from iMacM1 to MacBook M4 for Aurora/Platinum release continuation and production path.",
+    "current_machine_matches": true
+  },
+  "local_services": {
+    "game": {
+      "ok": true,
+      "reachable": true,
+      "root_ok": true,
+      "url": "http://localhost:8000/",
+      "listeners": [
+        {
+          "pid": 25405,
+          "cwd": "/Users/sgwoods/Development/Codex/Codex-test1",
+          "root_ok": true
+        }
+      ]
+    },
+    "viewer": {
+      "ok": true,
+      "reachable": true,
+      "root_ok": true,
+      "url": "http://localhost:4311/api/runs",
+      "listeners": [
+        {
+          "pid": 25481,
+          "cwd": "/Users/sgwoods/Development/Codex/Codex-test1",
+          "root_ok": true
+        }
+      ]
+    },
+    "state_dir": "/Users/sgwoods/Development/Codex/Codex-test1/.local-services"
+  },
+  "live_lanes": {
+    "dev": {
+      "ok": true,
+      "version": "1.4.0",
+      "label": "1.4.0.1+build.1013.sha.3cb0d08b",
+      "commit": "3cb0d08b",
+      "releaseChannel": "development"
+    },
+    "beta": {
+      "ok": true,
+      "version": "1.4.0-beta.1",
+      "label": "1.4.0-beta.1+build.1013.sha.3cb0d08b.beta",
+      "commit": "3cb0d08b",
+      "releaseChannel": "production beta"
+    },
+    "production": {
+      "ok": true,
+      "version": "1.4.0",
+      "label": "1.4.0+build.894.sha.1dc23d8a",
+      "commit": "1dc23d8a",
+      "releaseChannel": "production"
+    }
+  },
+  "publish_permitted": false,
+  "next": [
+    "git switch -c codex/macbook-pro-your-topic",
+    "npm run machine:status",
+    "npm run harness:score:quality-conformance"
+  ]
+}
+```
 
 ## Exact Restart Prompt
 
 ```text
-You are continuing Aurora Galactica / Platinum runtime-boundary work from a durable Codex checkpoint.
+You are continuing Aurora Galactica / Platinum work from a durable Codex checkpoint.
 
 Repo path:
 /Users/sgwoods/Development/Codex/Codex-test1
 
 Start by running:
-git switch codex/aurora-runtime-state-adapter-boundary
-git status --short --branch
+git branch --show-current
+git status --short
 git log -5 --oneline --decorate
 npm run machine:status
 
 Read first:
 - CODEX_CONTEXT_CHECKPOINT.md
 - RESTART_FROM_HERE.md
-- RELEASE_POLICY.md
-- PLATFORM_APP_SEPARATION_ARCHITECTURE_REVIEW_2026-06-03.md
+- MULTI_MACHINE_WORKFLOW.md
 
 Current checkpoint:
-- label: aurora-runtime-state-isolation-guard
-- generated: 2026-06-04 18:40:56 EDT
-- branch: codex/aurora-runtime-state-adapter-boundary
+- label: challenge-readability-grammar-pause
+- generated: 2026-06-05T15:00:01.701Z
+- branch: codex/aurora-challenge-movement-grammar
+- commit: 8b7a83cb9 Add challenge readability grammar controls
+- dirty files excluding checkpoint self-output: 17
 
-Continue from the verified adapter-boundary and runtime-isolation guard work. Do not publish release lanes unless explicitly requested and release authority/publish checks permit it.
+Continue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.
 ```
+
+## Compaction Prevention Protocol
+
+1. At every phase boundary, run:
+
+```bash
+npm run codex:checkpoint -- --label <short-topic> --plan "<current goal>" --next "<next concrete step>"
+```
+
+2. Commit the checkpoint if it records meaningful state or handoff context.
+3. Start a fresh Codex session with the restart prompt above when the chat is
+   long, after a multi-hour cycle, or before switching machines.
+4. Treat the fresh session as the practical way to force compaction safely:
+   context is rebuilt from the repo instead of relying on a fragile chat tail.
+
+JSON artifact: `reference-artifacts/analyses/codex-context-checkpoint/latest.json`

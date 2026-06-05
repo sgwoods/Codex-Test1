@@ -875,9 +875,14 @@ function specAwareLayoutOverride(layoutOverride){
   const rowSpreadScales = Array.isArray(layout.groupRowSpreadScales) ? layout.groupRowSpreadScales : [];
   const laneStaggers = Array.isArray(layout.groupLaneStaggers) ? layout.groupLaneStaggers : [];
   const phaseOffsets = Array.isArray(layout.groupPhaseOffsets) ? layout.groupPhaseOffsets : [];
+  const lanePhaseOffsets = Array.isArray(layout.groupLanePhaseOffsets) ? layout.groupLanePhaseOffsets : [];
   const slotDelays = Array.isArray(layout.groupSlotDelays) ? layout.groupSlotDelays : [];
   const slotXOffsets = Array.isArray(layout.groupSlotXOffsets) ? layout.groupSlotXOffsets : [];
   const slotYOffsets = Array.isArray(layout.groupSlotYOffsets) ? layout.groupSlotYOffsets : [];
+  const deconflictSpreads = Array.isArray(layout.groupDeconflictSpreads) ? layout.groupDeconflictSpreads : [];
+  const deconflictPhases = Array.isArray(layout.groupDeconflictPhases) ? layout.groupDeconflictPhases : [];
+  const deconflictLaneBiases = Array.isArray(layout.groupDeconflictLaneBiases) ? layout.groupDeconflictLaneBiases : [];
+  const deconflictYOffsets = Array.isArray(layout.groupDeconflictYOffsets) ? layout.groupDeconflictYOffsets : [];
   const laneOrders = Array.isArray(layout.groupLaneOrders) ? layout.groupLaneOrders : [];
   const scalarArc = Number.isFinite(+layout.arcAmp) ? +layout.arcAmp : null;
   const scalarDrop = Number.isFinite(+layout.dropAmp) ? +layout.dropAmp : null;
@@ -888,10 +893,18 @@ function specAwareLayoutOverride(layoutOverride){
   const scalarRowSpread = Number.isFinite(+layout.rowSpreadScale) ? +layout.rowSpreadScale : null;
   const scalarLaneStagger = Number.isFinite(+layout.laneStaggerS) ? +layout.laneStaggerS : null;
   const scalarPhaseOffset = Number.isFinite(+layout.phaseOffsetS) ? +layout.phaseOffsetS : null;
+  const scalarLanePhaseOffsets = Array.isArray(layout.lanePhaseOffsets) ? layout.lanePhaseOffsets : null;
   const scalarSlotDelay = Number.isFinite(+layout.slotDelay) ? +layout.slotDelay : null;
   const scalarSlotXOffset = Number.isFinite(+layout.slotXOffset) ? +layout.slotXOffset : null;
   const scalarSlotYOffset = Number.isFinite(+layout.slotYOffset) ? +layout.slotYOffset : null;
+  const scalarDeconflictSpread = Number.isFinite(+layout.deconflictSpread) ? +layout.deconflictSpread : null;
+  const scalarDeconflictPhase = Number.isFinite(+layout.deconflictPhase) ? +layout.deconflictPhase : null;
+  const scalarDeconflictLaneBias = Number.isFinite(+layout.deconflictLaneBias) ? +layout.deconflictLaneBias : null;
+  const scalarDeconflictYOffset = Number.isFinite(+layout.deconflictYOffset) ? +layout.deconflictYOffset : null;
   const paths = Array.isArray(layout.groupPathFamilies) ? layout.groupPathFamilies : [];
+  const normalizeLanePhaseOffsets = values => Array.isArray(values)
+    ? values.slice(0, 8).map(value => round(Number.isFinite(+value) ? +value : 0, 3))
+    : null;
   layout.motionSpecGroups = sourceGroups.map((group, index) => {
     const controls = Object.assign({}, group.controls || {});
     const spawnOffset = Number.isFinite(+spawnOffsets[index]) ? +spawnOffsets[index] : null;
@@ -904,9 +917,14 @@ function specAwareLayoutOverride(layoutOverride){
     const rowSpread = Number.isFinite(+rowSpreadScales[index]) ? +rowSpreadScales[index] : scalarRowSpread;
     const laneStagger = Number.isFinite(+laneStaggers[index]) ? +laneStaggers[index] : scalarLaneStagger;
     const phaseOffset = Number.isFinite(+phaseOffsets[index]) ? +phaseOffsets[index] : scalarPhaseOffset;
+    const lanePhaseOffset = normalizeLanePhaseOffsets(lanePhaseOffsets[index]) || normalizeLanePhaseOffsets(scalarLanePhaseOffsets);
     const slotDelay = Number.isFinite(+slotDelays[index]) ? +slotDelays[index] : scalarSlotDelay;
     const slotXOffset = Number.isFinite(+slotXOffsets[index]) ? +slotXOffsets[index] : scalarSlotXOffset;
     const slotYOffset = Number.isFinite(+slotYOffsets[index]) ? +slotYOffsets[index] : scalarSlotYOffset;
+    const deconflictSpread = Number.isFinite(+deconflictSpreads[index]) ? +deconflictSpreads[index] : scalarDeconflictSpread;
+    const deconflictPhase = Number.isFinite(+deconflictPhases[index]) ? +deconflictPhases[index] : scalarDeconflictPhase;
+    const deconflictLaneBias = Number.isFinite(+deconflictLaneBiases[index]) ? +deconflictLaneBiases[index] : scalarDeconflictLaneBias;
+    const deconflictYOffset = Number.isFinite(+deconflictYOffsets[index]) ? +deconflictYOffsets[index] : scalarDeconflictYOffset;
     if(Number.isFinite(+arc)) controls.arcAmp = round(+arc, 3);
     if(Number.isFinite(+drop)) controls.dropAmp = round(+drop, 3);
     if(Number.isFinite(+speed)){
@@ -919,9 +937,14 @@ function specAwareLayoutOverride(layoutOverride){
     if(Number.isFinite(+rowSpread)) controls.rowSpreadScale = round(+rowSpread, 3);
     if(Number.isFinite(+laneStagger)) controls.laneStaggerS = round(+laneStagger, 3);
     if(Number.isFinite(+phaseOffset)) controls.phaseOffsetS = round(+phaseOffset, 3);
+    if(lanePhaseOffset && lanePhaseOffset.length) controls.lanePhaseOffsets = lanePhaseOffset;
     if(Number.isFinite(+slotDelay)) controls.slotDelayS = round(+slotDelay, 3);
     if(Number.isFinite(+slotXOffset)) controls.slotXOffset = round(+slotXOffset, 3);
     if(Number.isFinite(+slotYOffset)) controls.slotYOffset = round(+slotYOffset, 3);
+    if(Number.isFinite(+deconflictSpread)) controls.deconflictSpread = round(+deconflictSpread, 3);
+    if(Number.isFinite(+deconflictPhase)) controls.deconflictPhase = round(+deconflictPhase, 3);
+    if(Number.isFinite(+deconflictLaneBias)) controls.deconflictLaneBias = round(+deconflictLaneBias, 3);
+    if(Number.isFinite(+deconflictYOffset)) controls.deconflictYOffset = round(+deconflictYOffset, 3);
     if(Array.isArray(laneOrders[index]) && laneOrders[index].length){
       controls.laneOrder = laneOrders[index].map(value => Math.max(0, Math.min(7, Math.round(+value || 0))));
     }
@@ -1460,6 +1483,53 @@ function candidateDefinitions(){
           }
         }
       }
+      const lanePhaseSets = [
+        { id: 'sync', value: [0, 0, 0, 0, 0, 0, 0, 0] },
+        { id: 'zipper', value: [0, 0.055, 0.11, 0.165, 0, 0.055, 0.11, 0.165] },
+        { id: 'fanphase', value: [-0.08, -0.035, 0.035, 0.08, -0.08, -0.035, 0.035, 0.08] }
+      ];
+      const deconflictSpreadSets = [
+        { id: 'light', values: [4, 5, 4, 5, 4] },
+        { id: 'mid', values: [8, 9, 8, 9, 8] },
+        { id: 'strong', values: [12, 12, 10, 12, 10] },
+        { id: 'wide', values: [16, 16, 14, 16, 14] },
+        { id: 'maxsafe', values: [22, 20, 18, 22, 18] }
+      ];
+      const deconflictLaneBiasSets = [
+        { id: 'nobias', values: [0, 0, 0, 0, 0] },
+        { id: 'softbias', values: [2.5, 2.5, 2, 2.5, 2] },
+        { id: 'wavebias', values: [4.5, 4, 3.5, 4.5, 3.5] }
+      ];
+      const deconflictYOffsets = [
+        { id: 'flat', values: [0, 0, 0, 0, 0] },
+        { id: 'lift', values: [2.5, 2.5, 2, 3, 2.5] },
+        { id: 'tiered', values: [4, 3, 4, 5, 3] }
+      ];
+      const deconflictLaneOrder = [3, 1, 0, 2, 5, 7, 4, 6];
+      for(const spread of deconflictSpreadSets){
+        for(const laneBias of deconflictLaneBiasSets){
+          for(const yOffset of deconflictYOffsets){
+            for(const lanePhase of lanePhaseSets){
+              candidates.push({
+                id: `stage7-deconflict-${spread.id}-${laneBias.id}-${yOffset.id}-${lanePhase.id}`,
+                description: `Stage 7 deconfliction sweep: direct separation ${spread.id}, lane bias ${laneBias.id}, y offset ${yOffset.id}, lane phase ${lanePhase.id}.`,
+                layoutOverride: Object.assign({}, base, {
+                  groupLaneSpreadScales: [1.36, 1.24, 1.16, 1.36, 1.24],
+                  groupRowSpreadScales: [1.14, 1.22, 1.1, 1.24, 1.22],
+                  groupSlotDelays: Array.from({ length: 5 }, () => 0.18),
+                  groupLaneStaggers: Array.from({ length: 5 }, () => 0.035),
+                  groupLaneOrders: Array.from({ length: 5 }, () => deconflictLaneOrder),
+                  groupLanePhaseOffsets: Array.from({ length: 5 }, () => lanePhase.value),
+                  groupDeconflictSpreads: spread.values,
+                  groupDeconflictLaneBiases: laneBias.values,
+                  groupDeconflictYOffsets: yOffset.values,
+                  groupDeconflictPhases: [0, 0.04, 0.08, 0.12, 0.16]
+                })
+              });
+            }
+          }
+        }
+      }
     }
     candidates.push(...targetTimingCandidates(base, pathSets));
     candidates.push(...targetControlCandidates(base, pathSets));
@@ -1967,7 +2037,12 @@ function summarizeCandidate(row){
     groupLaneSpreadScales: row.layout?.groupLaneSpreadScales || [],
     groupRowSpreadScales: row.layout?.groupRowSpreadScales || [],
     groupLaneStaggers: row.layout?.groupLaneStaggers || [],
+    groupLanePhaseOffsets: row.layout?.groupLanePhaseOffsets || [],
     groupSlotDelays: row.layout?.groupSlotDelays || [],
+    groupDeconflictSpreads: row.layout?.groupDeconflictSpreads || [],
+    groupDeconflictLaneBiases: row.layout?.groupDeconflictLaneBiases || [],
+    groupDeconflictYOffsets: row.layout?.groupDeconflictYOffsets || [],
+    groupDeconflictPhases: row.layout?.groupDeconflictPhases || [],
     groupLaneOrders: row.layout?.groupLaneOrders || []
   };
 }
@@ -2044,6 +2119,9 @@ function buildMarkdown(report){
   const targetReferencePathRows = (report.diagnostics?.targetReferencePathTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
   const pathShapeRows = (report.diagnostics?.pathShapeTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
   const readabilityRows = (report.diagnostics?.readabilityTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
+  const leastBunchedRow = row => `| ${row.candidateId} | ${row.humanVisibleGuardrails?.bunchingRisk ?? 'n/a'} | ${row.humanVisibleGuardrails?.spacingScore ?? 'n/a'} | ${row.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 | ${row.humanPerfectPotentialScore10 ?? 'n/a'}/10 | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.noSafetyRegression ? 'pass' : 'risk'} | ${(row.groupDeconflictSpreads || []).join(', ') || 'none'} | ${(row.groupLanePhaseOffsets?.[0] || []).join(', ') || 'none'} |`;
+  const leastBunchedRows = (report.diagnostics?.leastBunchedTop || []).map(leastBunchedRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const deconflictRows = (report.diagnostics?.deconflictTop || []).map(leastBunchedRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
   return `# Stage ${report.stage} Challenge Candidate Sweep
 
 Generated: ${report.generatedAt}
@@ -2064,7 +2142,7 @@ Stage ${report.stage} currently has safe challenge behavior but still does not c
 - Keeper decision: ${report.summary.keeperDecision}.
 - Player-facing meaning: ${report.summary.playerMeaning}
 - Process meaning: ${report.summary.processMeaning}
-- Candidate retention: ${report.candidateRetention?.retained ?? report.candidates.length}/${report.candidateRetention?.totalMeasured ?? report.candidateCount} retained; ${report.candidateRetention?.targetTimingDiagnostics ?? 0} target-timing diagnostics, ${report.candidateRetention?.targetControlDiagnostics ?? 0} target-control diagnostics, ${report.candidateRetention?.targetReferencePathDiagnostics ?? 0} target-reference-path diagnostics, ${report.candidateRetention?.pathShapeDiagnostics ?? 0} path-shape diagnostics, and ${report.candidateRetention?.readabilityDiagnostics ?? 0} readability diagnostics preserved.
+- Candidate retention: ${report.candidateRetention?.retained ?? report.candidates.length}/${report.candidateRetention?.totalMeasured ?? report.candidateCount} retained; ${report.candidateRetention?.targetTimingDiagnostics ?? 0} target-timing diagnostics, ${report.candidateRetention?.targetControlDiagnostics ?? 0} target-control diagnostics, ${report.candidateRetention?.targetReferencePathDiagnostics ?? 0} target-reference-path diagnostics, ${report.candidateRetention?.pathShapeDiagnostics ?? 0} path-shape diagnostics, ${report.candidateRetention?.readabilityDiagnostics ?? 0} readability diagnostics, and ${report.candidateRetention?.leastBunchedDiagnostics ?? 0} least-bunched diagnostics preserved.
 
 ## Top Candidates
 
@@ -2105,6 +2183,22 @@ ${pathShapeRows}
 | Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Visible Guard | Safety | Paths |
 | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- | --- |
 ${readabilityRows}
+
+### Least-Bunched Diagnostics
+
+These rows are ranked by lowest measured nearest-neighbor bunching risk first. They are process diagnostics: a low bunching score is useful only if it preserves visible scoring windows, expected stage identity, and safety.
+
+| Candidate | Bunching Risk | Spacing | Human-Visible | Human-Perfect | Expected Labels | Target-Video Fit | Safety | Deconflict Spread | First Lane Phase Set |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
+${leastBunchedRows}
+
+### Deconflict Primitive Diagnostics
+
+These rows isolate the new direct separation primitive. If they do not appear among the least-bunched rows, the primitive ranges or scoring windows still need work before promotion.
+
+| Candidate | Bunching Risk | Spacing | Human-Visible | Human-Perfect | Expected Labels | Target-Video Fit | Safety | Deconflict Spread | First Lane Phase Set |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
+${deconflictRows}
 
 ## Next Step
 
@@ -2242,6 +2336,23 @@ async function main(){
       || (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0)
       || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
     .slice(0, 12);
+  const bunchingRiskOf = row => Number.isFinite(+(row.humanVisibleGuardrails?.bunchingRisk))
+    ? +(row.humanVisibleGuardrails.bunchingRisk)
+    : 1;
+  const leastBunchedDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('stage7-read') || String(row.candidateId || '').includes('stage7-deconflict'))
+    .sort((a, b) => bunchingRiskOf(a) - bunchingRiskOf(b)
+      || (b.humanVisibleGuardrails?.spacingScore || 0) - (a.humanVisibleGuardrails?.spacingScore || 0)
+      || (b.humanVisibleGuardrails?.score10 || 0) - (a.humanVisibleGuardrails?.score10 || 0)
+      || (b.humanPerfectPotential?.score10 || 0) - (a.humanPerfectPotential?.score10 || 0))
+    .slice(0, 12);
+  const deconflictDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('stage7-deconflict'))
+    .sort((a, b) => bunchingRiskOf(a) - bunchingRiskOf(b)
+      || (b.humanVisibleGuardrails?.spacingScore || 0) - (a.humanVisibleGuardrails?.spacingScore || 0)
+      || (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0)
+      || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 12);
   const retainedById = new Map();
   for(const row of scored.slice(0, retainedCandidateLimit)) retainedById.set(row.candidateId, row);
   for(const row of targetTimingDiagnostics) retainedById.set(row.candidateId, row);
@@ -2249,6 +2360,8 @@ async function main(){
   for(const row of targetReferencePathDiagnostics) retainedById.set(row.candidateId, row);
   for(const row of pathShapeDiagnostics) retainedById.set(row.candidateId, row);
   for(const row of readabilityDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of leastBunchedDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of deconflictDiagnostics) retainedById.set(row.candidateId, row);
   const retainedCandidates = Array.from(retainedById.values());
   if(!retainedCandidates.some(row => row.candidateId === baseline.candidateId)){
     retainedCandidates.push(baseline);
@@ -2339,14 +2452,18 @@ async function main(){
       targetReferencePathDiagnostics: targetReferencePathDiagnostics.length,
       pathShapeDiagnostics: pathShapeDiagnostics.length,
       readabilityDiagnostics: readabilityDiagnostics.length,
-      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score, the baseline row, and top target-timing/target-control/target-reference-path/path-shape/readability diagnostic candidates; use candidateCount for the full measured search size.`
+      leastBunchedDiagnostics: leastBunchedDiagnostics.length,
+      deconflictDiagnostics: deconflictDiagnostics.length,
+      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score, the baseline row, and top target-timing/target-control/target-reference-path/path-shape/readability/least-bunched/deconflict diagnostic candidates; use candidateCount for the full measured search size.`
     },
     diagnostics: {
       targetTimingTop: targetTimingDiagnostics.map(summarizeCandidate),
       targetControlTop: targetControlDiagnostics.map(summarizeCandidate),
       targetReferencePathTop: targetReferencePathDiagnostics.map(summarizeCandidate),
       pathShapeTop: pathShapeDiagnostics.map(summarizeCandidate),
-      readabilityTop: readabilityDiagnostics.map(summarizeCandidate)
+      readabilityTop: readabilityDiagnostics.map(summarizeCandidate),
+      leastBunchedTop: leastBunchedDiagnostics.map(summarizeCandidate),
+      deconflictTop: deconflictDiagnostics.map(summarizeCandidate)
     },
     measurementPolicy: {
       scope: `harness-only stage-${STAGE} challenge layout candidates`,

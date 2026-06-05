@@ -120,6 +120,32 @@ function challengeColumnX(side,slot,row){
  return PLAY_W/2+(side||1)*(28+slot*13+(row?4:0));
 }
 
+function challengeDeconflictOffset(e,u,side,slot,row,wave,sweep){
+ const spread=Number.isFinite(+e.deconflictSpread)?+e.deconflictSpread:0;
+ const phase=Number.isFinite(+e.deconflictPhase)?+e.deconflictPhase:0;
+ const laneBias=Number.isFinite(+e.deconflictLaneBias)?+e.deconflictLaneBias:0;
+ const yBias=Number.isFinite(+e.deconflictYOffset)?+e.deconflictYOffset:0;
+ if(!spread&&!phase&&!laneBias&&!yBias)return null;
+ const slotCenter=(Number.isFinite(+slot)?+slot:0)-1.5;
+ const rowSign=row?1:-1;
+ const waveSign=wave%2?-1:1;
+ const sideSign=side||sweep||1;
+ const localPhase=(u+phase+slot*.23+wave*.11)*Math.PI*2;
+ const entryGate=cl((u+.18)/1.2,0,1);
+ const oscillate=Math.sin(localPhase);
+ return {
+  x:entryGate*(sideSign*slotCenter*spread+waveSign*oscillate*laneBias),
+  y:entryGate*(rowSign*spread*.32+oscillate*yBias)
+ };
+}
+
+function applyChallengeDeconflictOffset(e,u,side,slot,row,wave,sweep,gain=1){
+ const offset=challengeDeconflictOffset(e,u,side,slot,row,wave,sweep);
+ if(!offset)return;
+ e.x+=offset.x*gain;
+ e.y+=offset.y*gain;
+}
+
 function applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp){
  const ref=e.referencePath;
  const pts=Array.isArray(ref?.points)?ref.points:null;
@@ -187,10 +213,16 @@ function referenceChallengeFirstPosition(e,laneX,topY,side,slot,row,wave,sweep,a
  const rowOffset=row*rowSpread*dropAmp;
  const px=cl(sourceCenterX+((+point.x||sourceCenterX)-sourceCenterX)*pathScaleX,0,1);
  const py=cl(sourceCenterY+((+point.y||sourceCenterY)-sourceCenterY)*pathScaleY,0,1);
- return {
+ const target={
   x:px*PLAY_W+laneOffset+(Number.isFinite(+e.slotXOffset)?+e.slotXOffset:0)+Math.sin((slot*.21+wave*.37)*4.4)*2.2*arcAmp,
   y:py*PLAY_H+rowOffset+(Number.isFinite(+e.slotYOffset)?+e.slotYOffset:0)
  };
+ const offset=challengeDeconflictOffset(e,0,side,slot,row,wave,sweep);
+ if(offset){
+  target.x+=offset.x;
+  target.y+=offset.y;
+ }
+ return target;
 }
 
 function applyReferenceChallengeSpawnLeadIn(e,dt,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp){
@@ -226,6 +258,7 @@ function updateChallengeEnemy(state,e,dt){
  const slotXOffset=Number.isFinite(+e.slotXOffset)?+e.slotXOffset:0;
  const slotYOffset=Number.isFinite(+e.slotYOffset)?+e.slotYOffset:0;
  const phaseOffsetS=Number.isFinite(+e.phaseOffsetS)?+e.phaseOffsetS:0;
+ const lanePhaseOffsetS=Number.isFinite(+e.lanePhaseOffsetS)?+e.lanePhaseOffsetS:0;
  const laneX=PLAY_W/2+side*(48+slot*16)*laneSpreadScale+slotXOffset;
  const yOffset=Number.isFinite(+e.yOffset)?+e.yOffset:0;
  const topY=38+wave*14+row*8*rowSpreadScale+yOffset+slotYOffset;
@@ -249,7 +282,7 @@ function updateChallengeEnemy(state,e,dt){
 		  : referencePlaybackScale-1;
 		 e.tm+=dt*pathTimeSpeed;
 		 e.referenceLeadIn=0;
-		 const u=e.tm+phaseOffsetS,p=e.ph;
+		 const u=e.tm+phaseOffsetS+lanePhaseOffsetS,p=e.ph;
 	 const entryDuration=pathFamily==='first-challenge-peel'?3.35:3.15;
 	 if(!applyChallengeMotionSpecPath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)&&!applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp)){
 	 if(u<entryDuration){
@@ -500,6 +533,7 @@ function updateChallengeEnemy(state,e,dt){
 	  }
 	 }
 	 }
+ applyChallengeDeconflictOffset(e,u,side,slot,row,wave,sweep);
  const lowerFieldBias=Number.isFinite(+e.lowerFieldBias)?+e.lowerFieldBias:0;
  if(lowerFieldBias&&u>2.4){
   const lowerQ=cl((u-2.4)/8.8,0,1);
