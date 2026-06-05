@@ -109,6 +109,17 @@ function challengePathSpeed(pathFamily,stage,classicStage3){
  }
 }
 
+function challengeReferenceLaneOffset(side,slot,row,laneSpread,arcAmp){
+ const sideGap=(side||1)*(laneSpread*(1.16+slot*.18)+(row?laneSpread*.24:0));
+ const slotGap=(slot-1.5)*laneSpread*.42;
+ const rowGap=(row ? .34 : -.24)*laneSpread;
+ return (sideGap+slotGap+rowGap)*arcAmp;
+}
+
+function challengeColumnX(side,slot,row){
+ return PLAY_W/2+(side||1)*(28+slot*13+(row?4:0));
+}
+
 function applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp){
  const ref=e.referencePath;
  const pts=Array.isArray(ref?.points)?ref.points:null;
@@ -121,7 +132,7 @@ function applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arc
  const pathScaleY=Number.isFinite(+ref.pathScaleY)?+ref.pathScaleY:1;
  const laneSpread=Number.isFinite(+ref.laneSpreadX)?+ref.laneSpreadX:9;
  const rowSpread=Number.isFinite(+ref.rowSpreadY)?+ref.rowSpreadY:7;
- const laneOffset=((slot-1.5)*laneSpread+(row ? .34 : -.24)*laneSpread)*arcAmp;
+ const laneOffset=challengeReferenceLaneOffset(side,slot,row,laneSpread,arcAmp);
  const rowOffset=row*rowSpread*dropAmp;
  let point=last,prev=pts[Math.max(0,pts.length-2)];
  if(u<=first.t){
@@ -164,7 +175,7 @@ function referenceChallengeFirstPosition(e,laneX,topY,side,slot,row,wave,sweep,a
  const pathScaleY=Number.isFinite(+ref.pathScaleY)?+ref.pathScaleY:1;
  const laneSpread=Number.isFinite(+ref.laneSpreadX)?+ref.laneSpreadX:9;
  const rowSpread=Number.isFinite(+ref.rowSpreadY)?+ref.rowSpreadY:7;
- const laneOffset=((slot-1.5)*laneSpread+(row ? .34 : -.24)*laneSpread)*arcAmp;
+ const laneOffset=challengeReferenceLaneOffset(side,slot,row,laneSpread,arcAmp);
  const rowOffset=row*rowSpread*dropAmp;
  const px=cl(sourceCenterX+((+point.x||sourceCenterX)-sourceCenterX)*pathScaleX,0,1);
  const py=cl(sourceCenterY+((+point.y||sourceCenterY)-sourceCenterY)*pathScaleY,0,1);
@@ -236,7 +247,7 @@ function updateChallengeEnemy(state,e,dt){
 	   e.x=startX+(laneX-startX)*Math.sin(q*Math.PI/2);
 	   e.y=topY+q*5.2*dropAmp;
 	  }else if(pathFamily==='classic-column-drop'){
-	   const columnX=PLAY_W/2+(slot-1.5)*24*side;
+	   const columnX=challengeColumnX(side,slot,row);
 	   e.x=columnX+Math.sin(q*Math.PI+p+wave*.35)*5*arcAmp;
 	   e.y=-26+q*(topY+34);
 	  }else if(pathFamily==='side-hook-return'){
@@ -316,7 +327,7 @@ function updateChallengeEnemy(state,e,dt){
 	   e.x=laneX-side*(q*glide);
 	   e.y=topY+q*9.5*dropAmp;
 	  }else if(pathFamily==='classic-column-drop'){
-	   const columnX=PLAY_W/2+(slot-1.5)*24*side;
+	   const columnX=challengeColumnX(side,slot,row);
 	   e.x=columnX+Math.sin(q*Math.PI*2.2+p+wave*.4)*7*arcAmp;
 	   e.y=topY+q*(174+slot*7)*dropAmp;
 	  }else if(pathFamily==='side-hook-return'){
@@ -400,7 +411,7 @@ function updateChallengeEnemy(state,e,dt){
 	   e.x=laneX-side*(glide+q*(56+slot*5));
 	   e.y=topY+8+q*164*fm.challengeDrop*dropAmp;
 	  }else if(pathFamily==='classic-column-drop'){
-	   const columnX=PLAY_W/2+(slot-1.5)*24*side;
+	   const columnX=challengeColumnX(side,slot,row);
 	   e.x=columnX+side*(12+q*(54+slot*8))*arcAmp;
 	   e.y=topY+160+q*188*fm.challengeDrop*dropAmp;
 	  }else if(pathFamily==='side-hook-return'){
