@@ -206,6 +206,7 @@ function updateChallengeEnemy(state,e,dt){
  const topY=38+wave*14+row*8+yOffset;
  if(e.spawn>0){
   if(applyReferenceChallengeSpawnLeadIn(e,dt,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp))return;
+  e.tm=Math.max(0,(+e.tm||0)-dt);
   e.spawn-=dt;
   return;
  }

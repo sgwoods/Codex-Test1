@@ -201,7 +201,12 @@ function stepAuroraRuntime(state,dt,input={}){
  const sequenceLock=S.sequenceT>0&&(S.sequenceMode==='captureBeat'||S.sequenceMode==='rescueBeat');
  if(sequenceLock)return;
  S.att=0;
- for(const e of S.e){e.tm+=dt;if(e.hp<=0)continue;if(S.challenge)updateChallengeEnemy(S,e,dt);else updateEnemy(S,e,dt,t,T,p)}
+ for(const e of S.e){
+  if(!(S.challenge&&e.ch&&e.spawn>0))e.tm+=dt;
+  if(e.hp<=0)continue;
+  if(S.challenge)updateChallengeEnemy(S,e,dt);
+  else updateEnemy(S,e,dt,t,T,p);
+ }
  runStage1Script(S,dt,p,T);
 
  const cleanup=!S.challenge&&S.stage===1&&alive.length<=6;

@@ -6,11 +6,11 @@ const { withHarnessPage } = require('./browser-check-util');
 // reference-backed first-challenge peel lanes are visibly underway.
 const SAMPLE_TIMES = [0.7, 1.05, 1.4, 1.75, 2.1];
 const BASELINE = Object.freeze({
-  0.7: Object.freeze({ avgX: 140, minY: 39.64, maxY: 47.51, lane0X: 25.04, lane7X: 289.56 }),
-  1.05: Object.freeze({ avgX: 140, minY: 40.51, maxY: 48.37, lane0X: 52.53, lane7X: 270.13 }),
-  1.4: Object.freeze({ avgX: 140, minY: 41.37, maxY: 49.24, lane0X: 73.69, lane7X: 254.22 }),
-  1.75: Object.freeze({ avgX: 140, minY: 42.24, maxY: 50.11, lane0X: 87.14, lane7X: 242.89 }),
-  2.1: Object.freeze({ avgX: 140, minY: 43.11, maxY: 50.97, lane0X: 91.99, lane7X: 236.88 })
+  0.7: Object.freeze({ avgX: 140, minY: 39.28, maxY: 46.83, lane0X: 22.81, lane7X: 314.34 }),
+  1.05: Object.freeze({ avgX: 140, minY: 40.15, maxY: 47.69, lane0X: 50.7, lane7X: 292.44 }),
+  1.4: Object.freeze({ avgX: 140, minY: 41.01, maxY: 48.56, lane0X: 72.38, lane7X: 272.62 }),
+  1.75: Object.freeze({ avgX: 140, minY: 41.88, maxY: 49.43, lane0X: 86.44, lane7X: 256.16 }),
+  2.1: Object.freeze({ avgX: 140, minY: 42.75, maxY: 50.29, lane0X: 91.94, lane7X: 244.15 })
 });
 
 function fail(message, payload){
@@ -141,6 +141,62 @@ function validateReferenceLeadIn(state, sampleAt){
   return leadIns;
 }
 
+async function sampleStage3DelayedWaveStarts(page){
+  const initial = await page.evaluate(() => window.__galagaHarness__.setupChallengeMotionProfileTest({ stage: 3 }));
+  const offsets = Array.isArray(initial?.layout?.groupSpawnOffsets) ? initial.layout.groupSpawnOffsets : [];
+  const rows = [];
+  for(let wave = 1; wave < Math.min(5, offsets.length); wave += 1){
+    await page.evaluate(() => window.__galagaHarness__.setupChallengeMotionProfileTest({ stage: 3 }));
+    const sampleAt = Math.max(0, (+offsets[wave] || 0) + 0.16);
+    await page.evaluate(seconds => window.__galagaHarness__.advanceFor(seconds, {
+      step: 1 / 60,
+      stopOnGameOver: false
+    }), sampleAt);
+    const state = await page.evaluate(() => window.__galagaHarness__.challengeFormationState());
+    const waveEnemies = (state.enemies || []).filter(enemy => +enemy.wave === wave);
+    const visible = waveEnemies.filter(enemy => +enemy.spawn <= 0.02);
+    const visibleRead = visible.map(enemy => ({
+      lane: enemy.lane,
+      spawn: enemy.spawn,
+      tm: enemy.tm,
+      x: enemy.x,
+      y: enemy.y,
+      nearEntry: enemy.x < 44 || enemy.x > 236 || enemy.y < 68
+    }));
+    rows.push({
+      wave,
+      sampleAt: +sampleAt.toFixed(3),
+      visibleCount: visible.length,
+      maxTm: visible.length ? +Math.max(...visible.map(enemy => +enemy.tm || 0)).toFixed(3) : null,
+      minEntryRead: visibleRead.length ? Math.min(...visibleRead.map(enemy => enemy.nearEntry ? 1 : 0)) : 0,
+      visible: visibleRead
+    });
+  }
+  return rows;
+}
+
+function validateStage3DelayedWaveLeadIn(rows){
+  const failures = [];
+  for(const row of rows){
+    if(row.visibleCount < 2){
+      failures.push(Object.assign({ reason: 'too-few-visible-new-wave-enemies' }, row));
+      continue;
+    }
+    if(!Number.isFinite(+row.maxTm) || +row.maxTm > 0.48){
+      failures.push(Object.assign({ reason: 'path-clock-advanced-before-wave-entry' }, row));
+    }
+    if(row.minEntryRead < 1){
+      failures.push(Object.assign({ reason: 'new-wave-started-too-deep-in-playfield' }, row));
+    }
+  }
+  if(failures.length){
+    fail('delayed Stage 3 challenge waves must begin at their lead-in/entry, not mid-path after waiting to spawn', {
+      failures,
+      rows
+    });
+  }
+}
+
 async function main(){
   const result = await withHarnessPage({ skipStart: true, stage: 3, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
     await page.evaluate(() => window.__galagaHarness__.setupChallengeMotionProfileTest({ stage: 3 }));
@@ -169,6 +225,11 @@ async function main(){
       });
     }
   }
+
+  const stage3DelayedWaveStarts = await withHarnessPage({ skipStart: true, stage: 3, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
+    return sampleStage3DelayedWaveStarts(page);
+  });
+  validateStage3DelayedWaveLeadIn(stage3DelayedWaveStarts);
 
   const stage7 = await withHarnessPage({ skipStart: true, stage: 7, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
     const initial = await page.evaluate(() => window.__galagaHarness__.setupChallengeMotionProfileTest({ stage: 7 }));
@@ -201,7 +262,7 @@ async function main(){
     return { sampleAt, initial, underway, leadIns: validateReferenceLeadIn(underway, sampleAt) };
   });
 
-  console.log(JSON.stringify({ ok: true, samples: result, stage7ReferencePath: {
+  console.log(JSON.stringify({ ok: true, samples: result, stage3DelayedWaveStarts, stage7ReferencePath: {
     enemyCount: stage7.initial.enemies.length,
     referencePathGroups: stage7.initial.layout.groupReferencePaths.length,
     sourceTrackIds: [...new Set(stage7.initial.enemies.map(e => e.referencePath?.sourceTrackId).filter(Boolean))],
