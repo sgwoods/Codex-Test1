@@ -141,6 +141,17 @@ Galaxian-family source-side ambience bed for Guardians audio fitting. It does
 not replace gameplay-context windows, but it largely closes the generic
 ambience-bed hunt.
 
+The next important shift is that Guardians no longer depends only on whole
+source packages for early-session and deeper-play interpretation. The first
+promoted evidence packet now lives at
+`reference-artifacts/analyses/guardians-reference-window-promotion-2026-06-05/`
+and turns the no-voiceover source, the long-session sources, selected
+operator-manual pages, and selected still-image anchors into a reusable review
+surface. That means the remaining Guardians evidence asks are now narrower:
+expand the score-table/manual-page bundle, expand cabinet/control-surface
+stills, add more stage-five-plus runtime correspondence, and close the
+residual ambience/static-card cue-map gaps.
+
 ## Public/Private Boundary
 
 This public repo now keeps only the metadata for this accession.

@@ -4,14 +4,15 @@
   "version": "0.1-dev-preview",
   "createdOn": "2026-05-13",
   "status": "dev-preview-stage-pressure-contract-not-final-reference-match",
-  "purpose": "Keep the Galaxy Guardians preview from feeling like one static first-wave sketch by defining a longer stage-band pressure model for dives, shots, drift, and event density while preserving the measured stage-one scout-wave contract.",
+  "purpose": "Keep the Galaxy Guardians preview from feeling like one static first-wave sketch by defining a longer stage-band pressure model for dives, shots, drift, and event density while preserving the measured stage-one scout-wave contract. The current pressure contract now includes bounded rank-three/four routeability relief so stage-five and stage-seven pressure stay aggressive without collapsing into collision-dominated lanes.",
   "sourceEvidence": {
     "movementPacing": "reference-artifacts/analyses/galaxy-guardians-identity/movement-pacing-0.1.json",
     "runtimeReferenceMovement": "reference-artifacts/analyses/galaxy-guardians-identity/runtime-reference-movement-0.1.json",
     "playtestConformanceReview": "reference-artifacts/analyses/galaxy-guardians-identity/playtest-conformance-review-0.1.json",
     "initialMeasuredProfile": "reference-artifacts/analyses/galaxian-reference/initial-measured-profile.json",
     "promotedEventLog": "reference-artifacts/analyses/galaxian-reference/promoted-event-log.json",
-    "longSurfaceConformance": "reference-artifacts/analyses/galaxy-guardians-identity/long-surface-conformance-0.1.json"
+    "longSurfaceConformance": "reference-artifacts/analyses/galaxy-guardians-identity/long-surface-conformance-0.1.json",
+    "routeabilityBeforeAfter": "reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.json"
   },
   "rankModel": {
     "stageOneRank": 0,
@@ -71,29 +72,29 @@
       2.27
     ],
     "scoutDiveIntervalBaseBandSeconds": [
-      1.2,
-      1.21
+      1.32,
+      1.33
     ],
     "firstEnemyShotDelayBandSeconds": [
       2.52,
       2.53
     ],
     "enemyShotIntervalBaseBandSeconds": [
-      0.88,
-      0.89
+      0.98,
+      0.99
     ],
-    "enemyShotMaxLive": 5,
+    "enemyShotMaxLive": 4,
     "enemyShotVyBandPxPerSecond": [
-      133,
-      134
+      128.5,
+      128.6
     ],
     "diveBaseVyBandPxPerSecond": [
-      36.6,
-      36.7
+      35.14,
+      35.15
     ],
     "diveAccelBandPxPerSecondSquared": [
-      6.66,
-      6.67
+      6.26,
+      6.27
     ],
     "formationDriftHzBand": [
       0.129,
@@ -106,8 +107,8 @@
     "stageThreeMinimumExtraEnemyShotsOverStageOne": 1,
     "stageFiveMinimumExtraDiveEventsOverStageOne": 1,
     "stageFiveMinimumExtraEnemyShotsOverStageOne": 2,
-    "stageSevenMinimumExtraDiveEventsOverStageOne": 2,
-    "stageSevenMinimumExtraEnemyShotsOverStageOne": 4,
+    "stageSevenMinimumExtraDiveEventsOverStageOne": 1,
+    "stageSevenMinimumExtraEnemyShotsOverStageOne": 3,
     "stageNineMinimumExtraDiveEventsOverStageOne": 2,
     "stageNineMinimumExtraEnemyShotsOverStageOne": 5
   },
@@ -128,29 +129,29 @@
       2.17
     ],
     "scoutDiveIntervalBaseBandSeconds": [
-      1.09,
-      1.1
+      1.2,
+      1.21
     ],
     "firstEnemyShotDelayBandSeconds": [
       2.07,
       2.08
     ],
     "enemyShotIntervalBaseBandSeconds": [
-      0.79,
-      0.8
+      0.88,
+      0.89
     ],
-    "enemyShotMaxLive": 5,
+    "enemyShotMaxLive": 4,
     "enemyShotVyBandPxPerSecond": [
-      142,
-      143
+      136.8,
+      136.9
     ],
     "diveBaseVyBandPxPerSecond": [
-      38.1,
-      38.2
+      36.61,
+      36.62
     ],
     "diveAccelBandPxPerSecondSquared": [
-      7.08,
-      7.09
+      6.66,
+      6.67
     ],
     "formationDriftHzBand": [
       0.134,

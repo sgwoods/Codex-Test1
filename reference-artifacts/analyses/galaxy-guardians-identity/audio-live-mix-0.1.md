@@ -2,16 +2,16 @@
 
 This report is generated from the reusable Platinum audio live-mix layer. It measures actual captured gameplay soundscape, not only synthetic cue correctness.
 
-Overall score: **9.9/10**
+Overall score: **10/10**
 
 | Capture | Score | Longest quiet gap | Cue events / 10s | Pressure share | Active slice share |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| opening-professional | 10/10 | 1.366s | 29.97 | 0.569 | 0.708 |
-| midrun-professional | 9.7/10 | 1.367s | 29.67 | 0.578 | 0.571 |
+| opening-professional | 10/10 | 1.977s | 27.05 | 0.554 | 0.792 |
+| midrun-professional | 10/10 | 2.491s | 27.87 | 0.564 | 0.75 |
 
 ## Opening To Midrun Escalation
 
-Pressure cue ratio: **1.17x**
+Pressure cue ratio: **1.22x**
 
 Midrun capture is denser than opening, which is the intended direction. Use this read alongside headed listening to judge whether the added pressure stays legible.
 

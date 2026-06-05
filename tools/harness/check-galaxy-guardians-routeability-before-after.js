@@ -35,8 +35,19 @@ function main(){
   if(artifact.gameKey !== 'galaxy-guardians-preview' || artifact.artifactType !== 'galaxy-guardians-routeability-before-after'){
     fail('Guardians routeability before/after artifact is linked incorrectly.', artifact);
   }
-  if(artifact.status !== 'analysis-only-no-runtime-change'){
-    fail('Guardians routeability before/after must remain analysis-only until runtime promotion is intentional.', artifact);
+  const allowedStatuses = new Set([
+    'analysis-only-no-runtime-change',
+    'planning-study-with-bounded-preview-adoption'
+  ]);
+  if(!allowedStatuses.has(artifact.status)){
+    fail('Guardians routeability before/after has an unknown status.', artifact);
+  }
+  if(artifact.status === 'planning-study-with-bounded-preview-adoption'){
+    if(artifact.summary?.runtimeAdoptionStatus !== 'bounded-rank-3-4-preview-adopted'){
+      fail('Guardians routeability before/after adopted-status artifact is missing the runtime adoption ledger.', artifact.summary);
+    }
+  } else if(artifact.summary?.runtimeAdoptionStatus){
+    fail('Guardians routeability before/after analysis-only artifact should not claim runtime adoption.', artifact.summary);
   }
   if(!artifact.scenario || artifact.scenario.stage !== 5 || !Array.isArray(artifact.scenario.personas) || artifact.scenario.personas.length < 3){
     fail('Guardians routeability before/after scenario is missing the stage-five persona review shape.', artifact.scenario);
@@ -64,7 +75,11 @@ function main(){
     fail('Guardians routeability before/after artifact is missing the SVG summary chart.', artifact.media);
   }
   const markdown = fs.readFileSync(MARKDOWN, 'utf8');
-  if(!markdown.includes('Routeability Before/After') || !markdown.includes('analysis-only')){
+  const markdownHasStatusContext =
+    markdown.includes('analysis-only') ||
+    markdown.includes('planning-study-with-bounded-preview-adoption') ||
+    markdown.includes('bounded version of the balanced');
+  if(!markdown.includes('Routeability Before/After') || !markdownHasStatusContext){
     fail('Guardians routeability before/after markdown report is missing readable status context.', { markdown: rel(MARKDOWN) });
   }
   console.log(JSON.stringify({

@@ -156,23 +156,34 @@ function guardiansRuntimeRules(stateOrStage=1){
  const intervalScale=Math.max(.58,1-rank*.07);
   const flagshipScale=Math.max(.64,1-rank*.058);
   const firstPressureScale=Math.max(.76,1-rank*.038);
+  // Midrun stage-five stress was measuring as collision-dominated, so ease the
+  // rank-three/four lane just enough to preserve readable scoring routes.
+  const midrunRouteabilityRelief=rank>=3&&rank<=4;
+  const scoutIntervalRelief=midrunRouteabilityRelief?1.1:1;
+  const flagshipIntervalRelief=midrunRouteabilityRelief?1.08:1;
+  const shotIntervalRelief=midrunRouteabilityRelief?1.12:1;
+  const shotVelocityRelief=midrunRouteabilityRelief?.96:1;
+  const diveVelocityRelief=midrunRouteabilityRelief?.96:1;
+  const diveAccelRelief=midrunRouteabilityRelief?.94:1;
+  const diveSideDriftRelief=midrunRouteabilityRelief?.9:1;
+  const shotMaxLive=Math.min(6,base.enemyShotMaxLive+Math.ceil(rank/2));
   return Object.assign({},base,{
   firstScoutDiveDelay:+(base.firstScoutDiveDelay*firstPressureScale).toFixed(3),
   flagshipEscortDelay:+(base.flagshipEscortDelay*Math.max(.78,1-rank*.032)).toFixed(3),
-  scoutDiveIntervalBase:+(base.scoutDiveIntervalBase*intervalScale).toFixed(3),
+  scoutDiveIntervalBase:+(base.scoutDiveIntervalBase*intervalScale*scoutIntervalRelief).toFixed(3),
   scoutDiveIntervalJitter:+(base.scoutDiveIntervalJitter*Math.max(.66,1-rank*.045)).toFixed(3),
-  flagshipDiveIntervalBase:+(base.flagshipDiveIntervalBase*flagshipScale).toFixed(3),
+  flagshipDiveIntervalBase:+(base.flagshipDiveIntervalBase*flagshipScale*flagshipIntervalRelief).toFixed(3),
   flagshipDiveIntervalJitter:+(base.flagshipDiveIntervalJitter*Math.max(.68,1-rank*.045)).toFixed(3),
   formationDriftAmplitude:+(base.formationDriftAmplitude*(1+rank*.028)).toFixed(3),
-  diveBaseVy:+(base.diveBaseVy*diveScale).toFixed(3),
-  diveAccel:+(base.diveAccel*(1+rank*.078)).toFixed(3),
+  diveBaseVy:+(base.diveBaseVy*diveScale*diveVelocityRelief).toFixed(3),
+  diveAccel:+(base.diveAccel*(1+rank*.078)*diveAccelRelief).toFixed(3),
   diveSwayAmplitude:+(base.diveSwayAmplitude*(1+rank*.045)).toFixed(3),
-  diveSideDrift:+(base.diveSideDrift*(1+rank*.055)).toFixed(3),
+  diveSideDrift:+(base.diveSideDrift*(1+rank*.055)*diveSideDriftRelief).toFixed(3),
   firstEnemyShotDelay:+(base.firstEnemyShotDelay*Math.max(.46,1-rank*.115)).toFixed(3),
-  enemyShotIntervalBase:+(base.enemyShotIntervalBase*Math.max(.6,1-rank*.078)).toFixed(3),
+  enemyShotIntervalBase:+(base.enemyShotIntervalBase*Math.max(.6,1-rank*.078)*shotIntervalRelief).toFixed(3),
   enemyShotIntervalJitter:+(base.enemyShotIntervalJitter*Math.max(.66,1-rank*.055)).toFixed(3),
-  enemyShotVy:+(base.enemyShotVy*shotScale).toFixed(3),
-  enemyShotMaxLive:Math.min(6,base.enemyShotMaxLive+Math.ceil(rank/2)),
+  enemyShotVy:+(base.enemyShotVy*shotScale*shotVelocityRelief).toFixed(3),
+  enemyShotMaxLive:midrunRouteabilityRelief?Math.min(4,shotMaxLive):shotMaxLive,
   rackPulseIntervalBase:+(base.rackPulseIntervalBase*Math.max(.64,1-rank*.055)).toFixed(3),
   formationDriftHz:+(base.formationDriftHz*(1+rank*.038)).toFixed(3),
   topReentryVy:+(base.topReentryVy*(1+rank*.042)).toFixed(3),

@@ -1,6 +1,6 @@
 # Galaxy Guardians Routeability Review
 
-Generated: 2026-06-01T16:03:52.316Z
+Generated: 2026-06-05T09:52:58.836Z
 Status: dev-preview-routeability-gate-planning-not-runtime-promotion
 
 ## Summary

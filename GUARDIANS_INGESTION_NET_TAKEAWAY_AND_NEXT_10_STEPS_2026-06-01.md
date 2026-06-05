@@ -119,13 +119,12 @@ The remaining gaps are no longer broad or fuzzy.
 
 The highest-value missing pieces are:
 
-1. promoted early-session audio scene windows
-2. promoted stage-five-and-beyond audio and pacing windows
-3. matched stage-five-and-beyond Platinum captures
-4. extracted operator-manual pages for score, rules, and setup
-5. cabinet-facing still-image anchors
-6. direct pulse/flap motion windows
-7. score-popup policy windows
+1. an expanded operator-manual page set with an explicit score-table anchor
+2. an expanded cabinet-facing still-image bundle for control-panel, bezel, and
+   marquee truth
+3. additional stage-five-and-beyond runtime correspondence captures
+4. a promoted ambience comparison-window set
+5. a residual static-card cue map for the indexed Galaxians sound reel
 
 These matter because they are the exact artifacts that still stand between
 Guardians and a more source-faithful, fairer, more legible deeper-play
@@ -133,62 +132,63 @@ experience.
 
 ## Best Next 10 Steps
 
-1. Promote `GGD-GAP-003` into a named early-session audio bundle.
-Why: Guardians now has a clean no-voiceover source, but the cues still need
-named windows for repeated fitting.
-Indirect framework gain: establishes the standard shape for short clean
-gameplay-audio windows for every future game.
+1. Preserve the first promoted Guardians evidence packet as the default
+decision surface and keep expanding it instead of reopening whole-source review.
+Why: early-session, stage-five-plus, motion, popup, manual-page, and still
+anchors now exist in one packet.
+Indirect framework gain: proves that promoted evidence should replace vague
+whole-source references once the first useful packet exists.
 
-2. Promote `GGD-GAP-006` into a named stage-five-and-beyond pacing bundle.
-Why: the weakest felt part of Guardians is still deeper-play pressure, not the
-opening minute.
-Indirect framework gain: formalizes the idea that every game needs a deeper-play
-stress bundle, not just an opening slice.
+2. Expand `GGD-GAP-001` with an explicit score-table manual page and any
+remaining operator/setup anchors.
+Why: the first manual-page bundle is useful, but the score-table page is still
+the highest-value missing page-level artifact.
+Indirect framework gain: makes page-level rule truth extraction a repeatable
+standard for future games.
 
-3. Capture at least two matched Platinum stage-five-and-beyond review runs for
-Guardians.
-Why: source-side windows are only half the comparison; we need runtime-side
-evidence to judge whether fairness changes help.
-Indirect framework gain: makes matched runtime correspondence a first-class
+3. Expand `GGD-GAP-002` with cabinet/control-surface stills for bezel,
+marquee, and control-panel truth.
+Why: visual-family identity is now mostly anchored, but cabinet-facing surfaces
+are still under-preserved.
+Indirect framework gain: clarifies the minimum presentation still bundle every
+future game should preserve.
+
+4. Capture at least one additional matched stage-five-and-beyond runtime review
+lane for Guardians.
+Why: the current pass now has opening and stage-five professional captures, but
+we still need a second deeper-play runtime lane to judge fairness honestly.
+Indirect framework gain: keeps runtime correspondence as a first-class
 ingestion/conformance requirement.
 
-4. Run one focused Guardians audio pass driven only by the promoted windows and
-the FLAC cue pack.
+5. Run one focused Guardians audio pass driven only by the promoted windows,
+the FLAC cue pack, and the ambience source.
 Why: we now have enough source truth that the next audio pass can be narrower
 and higher confidence.
 Indirect framework gain: proves the reusable audio scene/live-mix framework on
 the hardest current second-game case.
 
-5. Run one focused Guardians deeper-play fairness pass driven only by the new
-stage-five-and-beyond source windows and matched runtime captures.
+6. Run one focused Guardians deeper-play fairness pass driven only by the
+promoted packet and matched runtime captures.
 Why: this is the highest-leverage gameplay improvement lane still open.
 Indirect framework gain: turns the ingestion framework into a real gameplay
 quality tool instead of just an archive discipline.
 
-6. Extract `GGD-GAP-001` from the preserved Midway manual as a page-level
-artifact set.
-Why: score/rules/setup claims should now become page-anchored, not package-level
-assumptions.
-Indirect framework gain: sets the standard for page-level rule truth extraction
-for future games.
+7. Promote `GGD-GAP-005` into a named ambience comparison-window set.
+Why: recurring pressure is now the narrow remaining ambience task, not a broad
+source hunt.
+Indirect framework gain: makes ambience windows a standard evidence type
+instead of treating ambience as an undifferentiated long file.
 
-7. Close `GGD-GAP-002` with a small cabinet-facing still bundle.
-Why: the remaining visual ambiguity is now mostly in presentation surfaces, not
-core sprite identity.
-Indirect framework gain: clarifies the standard still bundle every future game
-should preserve early.
+8. Close `GGD-GAP-004` with a residual cue ledger for the indexed sound reel.
+Why: the FLAC pack covers the main named cues; the old reel now matters only
+for residual or extended regions.
+Indirect framework gain: shows how secondary source packs should be narrowed
+once a first-class cue source exists.
 
-8. Promote `GGD-GAP-007` and `GGD-GAP-008` as explicit motion and popup-policy
-review windows.
-Why: cadence and feedback policy are still visible quality gaps that can now be
-treated concretely.
-Indirect framework gain: proves that motion-policy and feedback-policy windows
-should sit beside audio and rule windows in the platform process.
-
-9. Refresh the Guardians dashboard/status surfaces after those promotions and
-captures land.
-Why: once the windows exist, the dashboard should stop describing them as gaps
-and start treating them as active decision assets.
+9. Refresh the Guardians dashboard/status surfaces whenever the promoted packet
+or runtime correspondence set materially expands.
+Why: the dashboard should now track the promoted packet as a decision asset
+instead of pretending the baseline windows are still missing.
 Indirect framework gain: keeps the dashboard honest as a working decision
 surface rather than a lagging archive summary.
 
@@ -203,8 +203,10 @@ cross-game recipe for Aurora maintenance and Windigo pre-runtime intake.
 
 If only three things should happen next, they should be:
 
-1. promote early-session and stage-five-and-beyond Guardians windows
-2. capture matched Platinum deeper-play runs
-3. use those windows and captures for one tight audio-plus-fairness pass
+1. expand the promoted packet with the score-table page and cabinet/control
+   surfaces
+2. capture one more stage-five-and-beyond runtime lane
+3. use the expanded packet and the runtime captures for one tight
+   audio-plus-fairness pass
 
 That is the shortest path from "better ingestion" to visibly better Guardians.
