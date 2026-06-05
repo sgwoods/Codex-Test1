@@ -119,12 +119,15 @@ The remaining gaps are no longer broad or fuzzy.
 
 The highest-value missing pieces are:
 
-1. an expanded operator-manual page set with an explicit score-table anchor
-2. an expanded cabinet-facing still-image bundle for control-panel, bezel, and
-   marquee truth
-3. additional stage-five-and-beyond runtime correspondence captures
-4. a promoted ambience comparison-window set
-5. a residual static-card cue map for the indexed Galaxians sound reel
+1. additional stage-five-and-beyond runtime correspondence captures beyond the
+   current opening, stage-five professional, and stage-seven advanced lanes
+2. one stronger direct bezel or control-surface still beyond the current
+   flyer/manual composite anchors
+3. a tighter recurring-pressure and player-loss-read audio fit driven by the
+   expanded promoted packet
+4. a tighter deeper-play fairness pass driven by the expanded runtime set
+5. a stable residual cue ledger that stays narrow instead of reopening generic
+   sound-source hunts
 
 These matter because they are the exact artifacts that still stand between
 Guardians and a more source-faithful, fairer, more legible deeper-play
@@ -139,24 +142,26 @@ anchors now exist in one packet.
 Indirect framework gain: proves that promoted evidence should replace vague
 whole-source references once the first useful packet exists.
 
-2. Expand `GGD-GAP-001` with an explicit score-table manual page and any
-remaining operator/setup anchors.
-Why: the first manual-page bundle is useful, but the score-table page is still
-the highest-value missing page-level artifact.
-Indirect framework gain: makes page-level rule truth extraction a repeatable
-standard for future games.
+2. Treat `GGD-GAP-001` as baseline-closed through the combination of operator
+manual pages and the original Midway flyer score-values crop, and only reopen
+it if a stronger original score-table document appears.
+Why: the manual does not contain a standalone score-table page, so the right
+baseline close is documentary scoring truth, not a fictitious missing page.
+Indirect framework gain: keeps future documentary truth work honest about what
+the source actually contains.
 
-3. Expand `GGD-GAP-002` with cabinet/control-surface stills for bezel,
-marquee, and control-panel truth.
-Why: visual-family identity is now mostly anchored, but cabinet-facing surfaces
-are still under-preserved.
-Indirect framework gain: clarifies the minimum presentation still bundle every
-future game should preserve.
+3. Treat `GGD-GAP-002` as narrowed rather than broad: one better direct bezel
+or control-surface still would be nice, but the packet now has enough cabinet,
+marquee, control-panel, and score-value truth to support tuning.
+Why: the presentation still lane is no longer structurally blocked.
+Indirect framework gain: clarifies the difference between baseline coverage and
+nice-to-have visual refinement.
 
 4. Capture at least one additional matched stage-five-and-beyond runtime review
 lane for Guardians.
-Why: the current pass now has opening and stage-five professional captures, but
-we still need a second deeper-play runtime lane to judge fairness honestly.
+Why: the current pass now has opening, stage-five professional, and stage-seven
+advanced captures, but we still need broader persona/manual coverage to judge
+fairness honestly.
 Indirect framework gain: keeps runtime correspondence as a first-class
 ingestion/conformance requirement.
 
@@ -173,15 +178,16 @@ Why: this is the highest-leverage gameplay improvement lane still open.
 Indirect framework gain: turns the ingestion framework into a real gameplay
 quality tool instead of just an archive discipline.
 
-7. Promote `GGD-GAP-005` into a named ambience comparison-window set.
-Why: recurring pressure is now the narrow remaining ambience task, not a broad
-source hunt.
+7. Keep `GGD-GAP-005` baseline-closed and use the new ambience windows as the
+default recurring-pressure listening anchors in every future audio pass.
+Why: the ambience lane is now concrete rather than generic.
 Indirect framework gain: makes ambience windows a standard evidence type
 instead of treating ambience as an undifferentiated long file.
 
-8. Close `GGD-GAP-004` with a residual cue ledger for the indexed sound reel.
+8. Keep `GGD-GAP-004` baseline-closed and maintain only the residual cue
+ledger for the indexed sound reel.
 Why: the FLAC pack covers the main named cues; the old reel now matters only
-for residual or extended regions.
+for residual or extended regions, and that scope should stay narrow.
 Indirect framework gain: shows how secondary source packs should be narrowed
 once a first-class cue source exists.
 
@@ -203,10 +209,10 @@ cross-game recipe for Aurora maintenance and Windigo pre-runtime intake.
 
 If only three things should happen next, they should be:
 
-1. expand the promoted packet with the score-table page and cabinet/control
-   surfaces
-2. capture one more stage-five-and-beyond runtime lane
-3. use the expanded packet and the runtime captures for one tight
+1. use the expanded packet and the runtime captures for one tight
    audio-plus-fairness pass
+2. capture one more stage-five-and-beyond runtime lane
+3. preserve one stronger direct bezel or control-surface still if a clearly
+   better original source appears
 
 That is the shortest path from "better ingestion" to visibly better Guardians.

@@ -147,10 +147,13 @@ promoted evidence packet now lives at
 `reference-artifacts/analyses/guardians-reference-window-promotion-2026-06-05/`
 and turns the no-voiceover source, the long-session sources, selected
 operator-manual pages, and selected still-image anchors into a reusable review
-surface. That means the remaining Guardians evidence asks are now narrower:
-expand the score-table/manual-page bundle, expand cabinet/control-surface
-stills, add more stage-five-plus runtime correspondence, and close the
-residual ambience/static-card cue-map gaps.
+surface. It now also includes original score-values anchoring from the Midway
+flyer, expanded control-surface and cabinet crops, named ambience windows, a
+residual indexed-sound cue ledger, and a stage-seven advanced runtime lane.
+That means the remaining Guardians evidence asks are now narrower: add more
+stage-five-plus runtime correspondence, preserve any stronger direct bezel or
+control-surface still if one appears, and use the expanded packet for the next
+real audio/fairness tuning pass.
 
 ## Public/Private Boundary
 

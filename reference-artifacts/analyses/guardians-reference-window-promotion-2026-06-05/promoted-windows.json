@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-06-05T06:07:03-04:00",
+  "generated_at": "2026-06-05T14:28:00-04:00",
   "artifact_id": "GGD-ART-035",
   "game_key": "galaxy-guardians-preview",
   "status": "promoted-windows-private-source-bytes-public-metadata",
@@ -9,7 +9,10 @@
   "summary": {
     "baselineClosedGaps": [
       "GGD-GAP-003",
+      "GGD-GAP-004",
+      "GGD-GAP-005",
       "GGD-GAP-006",
+      "GGD-GAP-007",
       "GGD-GAP-008",
       "GGD-GAP-009"
     ],
@@ -21,7 +24,8 @@
     "runtimeAdoptionNote": "The current Guardians preview now applies a bounded rank-three/four routeability relief informed by the planning study that selected the balanced stage-five candidate family.",
     "runtimeCorrespondenceArtifacts": [
       "GGD-ART-036",
-      "GGD-ART-037"
+      "GGD-ART-037",
+      "GGD-ART-038"
     ]
   },
   "promoted_windows": [
@@ -72,6 +76,18 @@
       "label": "Score-popup policy window",
       "private_path": "windows/motion-popup/02-score-popup-policy-window.mp4",
       "role": "Visible yes-pop / no-pop review anchor for score-text policy."
+    },
+    {
+      "windowId": "GGD-WIN-009",
+      "label": "Early recurring pressure bed",
+      "private_path": "windows/ambience/01-early-recurring-pressure-bed.mp4",
+      "role": "Ambient recurring-pressure family anchor for early sustained-play listening review."
+    },
+    {
+      "windowId": "GGD-WIN-010",
+      "label": "Late recurring pressure bed",
+      "private_path": "windows/ambience/02-late-recurring-pressure-bed.mp4",
+      "role": "Ambient recurring-pressure family anchor for later sustained-play listening review."
     }
   ],
   "manual_pages": [
@@ -92,6 +108,18 @@
       "label": "Front cabinet picture",
       "private_path": "manual-pages/selected/03-front-cabinet-picture.png",
       "role": "Cabinet-facing presentation anchor."
+    },
+    {
+      "pageId": "GGD-PAGE-004",
+      "label": "Control-surface parts list",
+      "private_path": "manual-pages/selected/04-control-surface-parts-list.png",
+      "role": "Original control-surface terminology anchor covering the TV bezel, control shelf overlay, and decorative control panel."
+    },
+    {
+      "pageId": "GGD-PAGE-005",
+      "label": "Control assembly diagram",
+      "private_path": "manual-pages/selected/05-control-assembly-diagram.png",
+      "role": "Original control-assembly layout anchor for cabinet-facing control review."
     }
   ],
   "presentation_stills": [
@@ -112,6 +140,53 @@
       "label": "Flagship family",
       "private_path": "presentation-stills/selected/03-flagship-family.png",
       "role": "Boss-family identity anchor."
+    },
+    {
+      "stillId": "GGD-STILL-004",
+      "label": "Score values and instruction crop",
+      "private_path": "presentation-stills/selected/04-score-values-and-instructions-crop.jpg",
+      "role": "Original score-values anchor used in place of a nonexistent operator-manual score-table page."
+    },
+    {
+      "stillId": "GGD-STILL-005",
+      "label": "Marquee and cabinet crop",
+      "private_path": "presentation-stills/selected/05-marquee-cabinet-crop.jpg",
+      "role": "Marquee/title framing anchor from the original Midway flyer."
+    },
+    {
+      "stillId": "GGD-STILL-006",
+      "label": "Control-panel crop",
+      "private_path": "presentation-stills/selected/06-control-panel-crop.jpg",
+      "role": "Readable control-panel and player-button presentation anchor."
+    },
+    {
+      "stillId": "GGD-STILL-007",
+      "label": "Right cabinet photo crop",
+      "private_path": "presentation-stills/selected/07-right-cabinet-photo-crop.jpg",
+      "role": "Additional cabinet-facing presentation anchor from the original Midway flyer."
+    }
+  ],
+  "residual_cue_regions": [
+    {
+      "cueRegionId": "GGD-CUE-001",
+      "label": "Short duplicated micro-cue families",
+      "source_range_seconds": "1.925-21.744",
+      "status": "mostly-redundant-after-flac-pack",
+      "role": "Short isolated blocks that appear to duplicate cue families now covered better by the KHInsider FLAC pack."
+    },
+    {
+      "cueRegionId": "GGD-CUE-002",
+      "label": "Residual transition burst",
+      "source_range_seconds": "22.742-25.952",
+      "status": "keep-as-residual-comparison-region",
+      "role": "Short mixed transition region still worth preserving as a residual comparison anchor after the FLAC pack removes the need for the main isolated families."
+    },
+    {
+      "cueRegionId": "GGD-CUE-003",
+      "label": "Long composite gameplay reel",
+      "source_range_seconds": "26.119-79.127",
+      "status": "keep-as-extended-mixed-context-region",
+      "role": "Long mixed gameplay-like region that still contributes extended context once the redundant early isolated cues are discounted."
     }
   ],
   "runtime_correspondence": [
@@ -124,6 +199,11 @@
       "artifactId": "GGD-ART-037",
       "label": "Latest stage-five professional runtime review",
       "public_path": "reference-artifacts/analyses/gameplay-segment-captures/latest-guardians-stage5-professional-review.json"
+    },
+    {
+      "artifactId": "GGD-ART-038",
+      "label": "Latest stage-seven advanced runtime review",
+      "public_path": "reference-artifacts/analyses/gameplay-segment-captures/latest-guardians-stage7-advanced-review.json"
     }
   ]
 }

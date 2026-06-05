@@ -133,7 +133,7 @@ persona testing expectations.
 | Player movement correspondence | `reference-artifacts/analyses/correspondence/player-movement` | whether movement still matches current joystick-translation principles |
 | Quality conformance roll-up | `reference-artifacts/analyses/quality-conformance` | what the current weighted quality picture looks like across all major categories |
 | Galaxian reference profile | `reference-artifacts/analyses/galaxian-reference/README.md` | source manifests, contact sheets, waveforms, promoted event log, no-voiceover early-session audio anchor, first scout-wave profile, and the context for Guardians evidence promotion |
-| Guardians promoted evidence packet | `reference-artifacts/analyses/guardians-reference-window-promotion-2026-06-05/README.md` | public metadata packet for named early-session, stage-five-plus, motion, popup, manual-page, and still-image anchors with linked runtime correspondence captures |
+| Guardians promoted evidence packet | `reference-artifacts/analyses/guardians-reference-window-promotion-2026-06-05/README.md` | public metadata packet for named early-session, stage-five-plus, motion, popup, ambience, manual-page, and still-image anchors plus a residual cue ledger and linked runtime correspondence captures |
 
 ## Emerging Intake Lines
 
