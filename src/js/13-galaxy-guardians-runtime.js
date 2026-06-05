@@ -388,27 +388,45 @@ function guardiansPressureSnapshot(state,rules){
  const playerY=+state.player?.y||0;
  const lowerFieldDives=guardiansLowerFieldDiveThreats(state,rules);
  const closeDives=lowerFieldDives.filter(alien=>Math.abs(alien.x-playerX)<=26);
+ const playerCorridorDives=lowerFieldDives.filter(alien=>Math.abs(alien.x-playerX)<=18);
  const nearbyShots=(state.enemyShots||[]).filter(shot=>
   shot
   && shot.active!==0
   && shot.y>=playerY-88
   && Math.abs(shot.x-playerX)<=28
  );
+ const crowdingPenalty=lowerFieldDives.length+nearbyShots.length;
  return {
   lowerFieldDives,
   closeDives,
+  playerCorridorDives,
   nearbyShots,
-  deferScoutDive:lowerFieldDives.length>=3||closeDives.length>=2,
-  deferFlagshipDive:lowerFieldDives.length>=2||closeDives.length>=1,
-  crowdingPenalty:lowerFieldDives.length+nearbyShots.length
+  crowdingPenalty,
+  deferScoutDive:
+   lowerFieldDives.length>=3
+   || closeDives.length>=2
+   || (closeDives.length>=1&&nearbyShots.length>=2)
+   || crowdingPenalty>=5,
+  deferFlagshipDive:
+   lowerFieldDives.length>=2
+   || closeDives.length>=1
+   || playerCorridorDives.length>=1
+   || nearbyShots.length>=2
+   || crowdingPenalty>=4
  };
 }
 
 function guardiansFairDivePredicate(state,rules,pressure){
  const lowerFieldDives=Array.isArray(pressure?.lowerFieldDives)?pressure.lowerFieldDives:[];
+ const playerX=+state.player?.x||0;
  if(!lowerFieldDives.length)return ()=>true;
- const minThreatSeparation=pressure?.crowdingPenalty>=3 ? 28 : 22;
- return alien=>lowerFieldDives.every(threat=>Math.abs((+alien.rackX||0)-(+threat.x||0))>=minThreatSeparation);
+ const minThreatSeparation=pressure?.crowdingPenalty>=3 ? 34 : 26;
+ const playerCorridorWidth=pressure?.crowdingPenalty>=3 ? 26 : 22;
+ return alien=>{
+  const rackX=+alien.rackX||0;
+  if(Math.abs(rackX-playerX)<=playerCorridorWidth)return false;
+  return lowerFieldDives.every(threat=>Math.abs(rackX-(+threat.x||0))>=minThreatSeparation);
+ };
 }
 
 function guardiansDiveLaneRank(state,pressure){
@@ -703,11 +721,12 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
  p.x=Math.max(12,Math.min(rules.playfieldWidth-12,p.x+move*rules.playerSpeed*dt));
  if(input.fire)fireGuardiansPlayerShot(state);
  const pressure=guardiansPressureSnapshot(state,rules);
- const fairnessGuardActive=state.t>=12;
+ const fairnessGuardActive=state.t>=(guardiansStageRank(state)>=3?9.2:12);
  if(entry.complete&&state.t>=state.nextDiveAt){
   const diveRanker=guardiansDiveLaneRank(state,pressure);
   if(fairnessGuardActive&&pressure.deferScoutDive){
-   state.nextDiveAt=state.t+Math.max(.12,rules.scoutDiveIntervalBase*.16);
+   const deferScale=pressure.crowdingPenalty>=4?.24:.18;
+   state.nextDiveAt=state.t+Math.max(.14,rules.scoutDiveIntervalBase*deferScale);
   }else{
    const alien=pickGuardiansAlien(state,'scout',guardiansFairDivePredicate(state,rules,pressure),diveRanker)
     || pickGuardiansAlien(state,'scout',null,diveRanker)
@@ -722,7 +741,8 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
  if(entry.complete&&state.t>=state.nextFlagshipAt){
   const diveRanker=guardiansDiveLaneRank(state,pressure);
   if(fairnessGuardActive&&pressure.deferFlagshipDive){
-   state.nextFlagshipAt=state.t+Math.max(.2,rules.flagshipDiveIntervalBase*.12);
+   const deferScale=pressure.crowdingPenalty>=4?.18:.12;
+   state.nextFlagshipAt=state.t+Math.max(.22,rules.flagshipDiveIntervalBase*deferScale);
   }else{
    const flagship=pickGuardiansAlien(state,'flagship',guardiansFairDivePredicate(state,rules,pressure),diveRanker)
     || pickGuardiansAlien(state,'flagship',null,diveRanker);
