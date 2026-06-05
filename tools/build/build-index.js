@@ -87,6 +87,8 @@ const CHALLENGE_CANDIDATE_BEFORE_AFTER = path.join(ROOT, 'reference-artifacts', 
 const CHALLENGE_STAGE_CANDIDATE_FULL_ANALYZER_REVIEW = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-full-analyzer-review', 'latest.json');
 const CHALLENGE_TRAJECTORY_CONTROLS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-trajectory-controls', 'latest.json');
 const CHALLENGE_SETPIECE_CONTRACTS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-setpiece-contracts', 'latest.json');
+const CHALLENGE_MOVEMENT_GRAMMAR = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-movement-grammar', 'latest.json');
+const CHALLENGE_MOTION_PRIMITIVES = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-motion-primitives', 'latest.json');
 const GAMEPLAY_SEGMENT_CAPTURE = path.join(ROOT, 'reference-artifacts', 'analyses', 'gameplay-segment-captures', 'latest.json');
 const STAGE7_REFERENCE_PATH_BEFORE_AFTER = path.join(ROOT, 'reference-artifacts', 'analyses', 'stage7-reference-path-before-after', 'latest.json');
 const LEVEL_VISUAL_CONFORMANCE_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'level-visual-conformance-index', 'latest.json');
@@ -3469,6 +3471,8 @@ function buildChallengeStageEffortGuideSection(){
   const fullAnalyzerReview = loadChallengeStageCandidateFullAnalyzerReview();
   const trajectoryControls = loadChallengeTrajectoryControls();
   const setpieceContracts = loadChallengeSetpieceContracts();
+  const movementGrammar = loadChallengeMovementGrammar();
+  const motionPrimitives = loadChallengeMotionPrimitives();
   const summary = artifact.summary || {};
   const sweepSummary = sweep.summary || {};
   const sweepRetention = sweep.candidateRetention || {};
@@ -3477,17 +3481,26 @@ function buildChallengeStageEffortGuideSection(){
   const beforeAfterCandidate = candidateBeforeAfter.selectedCandidate || {};
   const trajectorySummary = trajectoryControls.summary || {};
   const setpieceSummary = setpieceContracts.summary || {};
+  const movementGrammarSummary = movementGrammar.summary || {};
+  const motionPrimitiveSummary = motionPrimitives.summary || {};
   const reviewRead = fullAnalyzerReview.read || 'No candidate has been recorded through the full-analyzer review loop yet.';
   const sweepRows = Array.isArray(sweepIndex.rows) ? sweepIndex.rows : [];
+  const sweepRowByStage = Object.fromEntries(sweepRows.map(row => [String(row.stage), row]));
   const sweepIndexRead = sweepRows.length
-    ? sweepRows.map(row => `Stage ${row.stage}: ${row.keeperDecision || 'pending'} (${row.bestExpectedScore10 ?? 'n/a'}/10 expected, ${row.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10 target-video, ${row.bestHumanPerfectPotentialScore10 ?? 'n/a'}/10 human-perfect, identity margin ${row.stageIdentityMargin10 ?? 'n/a'}).`).join(' ')
+    ? sweepRows.map(row => `Stage ${row.stage}: ${row.keeperDecision || 'pending'} (${row.bestExpectedScore10 ?? 'n/a'}/10 expected, ${row.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10 target-video, ${row.bestHumanPerfectPotentialScore10 ?? 'n/a'}/10 human-perfect, ${row.bestHumanVisibleScore10 ?? 'n/a'}/10 human-visible, identity margin ${row.stageIdentityMargin10 ?? 'n/a'}).`).join(' ')
     : 'Run the candidate sweep index analyzer to preserve latest per-stage candidate evidence.';
+  const firstFiveRead = (movementGrammar.grammar || [])
+    .map(row => `Stage ${row.stage}: ${row.groupContracts?.length || 0} groups, ${(row.runtimeSeed?.groupReferencePaths || []).filter(Boolean).length} reference paths, ${row.sourceControlReadiness10 ?? 'n/a'}/10 readiness.`)
+    .join(' ');
+  const primitiveRead = (motionPrimitives.primitives || []).slice(0, 5)
+    .map(row => `${row.id}: ${row.priority10 ?? 'n/a'}/10 priority (${(row.sourceStages || []).join(', ') || 'planning'}).`)
+    .join(' ');
   const rows = (artifact.stageRows || []).map(row => [
     `Stage ${row.stage || ''} / Challenge ${row.challengeNumber || ''}`,
     `Interest: **${row.interestingFactor10 ?? 'n/a'}/10**\n\nConformance: **${row.conformanceScore10 ?? 'n/a'}/10**\n\nBest ref: \`${row.bestReferenceMatch?.labelId || 'pending'}\` (${row.referenceMatchScore10 ?? 'n/a'}/10)`,
-    row.currentRead || 'Current read pending.',
-    (row.criticalGaps || [])[0] || 'Critical gap pending.',
-    (row.nextActions || [])[0] || 'Next action pending.'
+    `${row.currentRead || 'Current read pending.'}\n\nSweep: ${(sweepRowByStage[String(row.stage)]?.keeperDecision || 'pending')} after ${sweepRowByStage[String(row.stage)]?.candidateCount ?? 'n/a'} candidates; best \`${sweepRowByStage[String(row.stage)]?.bestCandidateId || 'pending'}\`.`,
+    `${(row.criticalGaps || [])[0] || 'Critical gap pending.'}\n\nHuman-visible gate: ${sweepRowByStage[String(row.stage)]?.humanVisiblePass === true ? 'pass' : 'blocked/pending'}; lift ${sweepRowByStage[String(row.stage)]?.humanVisibleLift10 ?? 'n/a'}/10; bunching risk ${sweepRowByStage[String(row.stage)]?.humanVisibleBunchingRisk ?? 'n/a'}.`,
+    sweepRowByStage[String(row.stage)]?.nextStep || (row.nextActions || [])[0] || 'Next action pending.'
   ]);
   return {
     id: 'challenge-stage-conformance-effort',
@@ -3512,7 +3525,19 @@ function buildChallengeStageEffortGuideSection(){
       },
       {
         title: 'Sweep Matrix',
-        body: `${sweepIndexSummary.stagesCovered || 0} stage(s) indexed, ${sweepIndexSummary.totalCandidateCount || 0} candidates represented, ${sweepIndexSummary.runtimeReadyCount || 0} runtime-ready, ${sweepIndexSummary.humanPerfectScoredCount || 0} with human-perfect scoring. ${sweepIndexRead}`
+        body: `${sweepIndexSummary.stagesCovered || 0} stage(s) indexed, ${sweepIndexSummary.totalCandidateCount || 0} candidates represented, ${sweepIndexSummary.runtimeReadyCount || 0} runtime-ready, ${sweepIndexSummary.humanPerfectScoredCount || 0} with human-perfect scoring, ${sweepIndexSummary.humanVisibleScoredCount || 0} with human-visible scoring. ${sweepIndexRead}`
+      },
+      {
+        title: 'First-Five Movement Grammar',
+        body: `${movementGrammarSummary.challengeCount || 0} grammar row(s), ${movementGrammarSummary.groupContractCount || 0} group contracts, ${movementGrammarSummary.referenceBackedGroupCount || 0} reference-backed paths, ${movementGrammarSummary.averageControlReadiness10 ?? 'n/a'}/10 control readiness. ${firstFiveRead || movementGrammarSummary.read || 'Run the challenge movement grammar analyzer to promote the first five challenge stages into reusable movement contracts.'}`
+      },
+      {
+        title: 'Motion Primitive Catalog',
+        body: `${motionPrimitiveSummary.primitiveCount || 0} reusable primitive(s), ${motionPrimitiveSummary.highPriorityPrimitiveCount || 0} high-priority, first build target \`${motionPrimitiveSummary.firstBuildTarget || 'pending'}\`. ${motionPrimitiveSummary.read || 'Run the challenge motion primitive analyzer to convert no-keeper evidence into reusable path, spacing, lead-in, and scoreability primitives.'} ${primitiveRead}`
+      },
+      {
+        title: 'No-Keeper Read',
+        body: `${sweepIndexSummary.read || 'Recent candidate sweeps have not produced a runtime keeper yet.'} Strongest target-video lift: ${sweepIndexSummary.strongestTargetVideoLift10 ?? 'n/a'}/10 on Stage ${sweepIndexSummary.strongestTargetVideoLiftStage || 'n/a'}; strongest human-perfect lift: ${sweepIndexSummary.strongestHumanPerfectLift10 ?? 'n/a'}/10 on Stage ${sweepIndexSummary.strongestHumanPerfectLiftStage || 'n/a'}; strongest human-visible lift: ${sweepIndexSummary.strongestHumanVisibleLift10 ?? 'n/a'}/10 on Stage ${sweepIndexSummary.strongestHumanVisibleLiftStage || 'n/a'}.`
       },
       {
         title: 'Full Analyzer Review',
@@ -3581,6 +3606,16 @@ function buildChallengeStageEffortGuideSection(){
         label: 'Open Challenge Set-Piece Contracts',
         href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-setpiece-contracts/latest.json`,
         detail: 'Contract-backed target shape, runtime gap, target authority, and next implementation step for each challenging stage.'
+      },
+      {
+        label: 'Open Challenge Movement Grammar',
+        href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-movement-grammar/latest.json`,
+        detail: 'First-five challenge-stage movement grammar with group schedules, path families, reference paths, and human-visible guardrails.'
+      },
+      {
+        label: 'Open Challenge Motion Primitives',
+        href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-motion-primitives/latest.json`,
+        detail: 'Reusable movement primitive backlog derived from no-keeper sweep evidence, first-five grammar, and set-piece contracts.'
       }
     ],
     table: {
@@ -3895,6 +3930,8 @@ let challengeCandidateBeforeAfterCache = null;
 let challengeStageCandidateFullAnalyzerReviewCache = null;
 let challengeTrajectoryControlsCache = null;
 let challengeSetpieceContractsCache = null;
+let challengeMovementGrammarCache = null;
+let challengeMotionPrimitivesCache = null;
 let gameplaySegmentCaptureCache = null;
 let stage7ReferencePathBeforeAfterCache = null;
 let levelVisualConformanceIndexCache = null;
@@ -4316,6 +4353,43 @@ function loadChallengeSetpieceContracts(){
     challengeSetpieceContractsCache = { summary: {}, contracts: [] };
   }
   return challengeSetpieceContractsCache;
+}
+
+function loadChallengeMovementGrammar(){
+  if(challengeMovementGrammarCache) return challengeMovementGrammarCache;
+  if(!fs.existsSync(CHALLENGE_MOVEMENT_GRAMMAR)){
+    challengeMovementGrammarCache = { summary: {}, grammar: [] };
+    return challengeMovementGrammarCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_MOVEMENT_GRAMMAR);
+    challengeMovementGrammarCache = Object.assign({}, artifact, {
+      summary: artifact.summary || {},
+      grammar: Array.isArray(artifact.grammar) ? artifact.grammar : []
+    });
+  } catch (err) {
+    challengeMovementGrammarCache = { summary: {}, grammar: [] };
+  }
+  return challengeMovementGrammarCache;
+}
+
+function loadChallengeMotionPrimitives(){
+  if(challengeMotionPrimitivesCache) return challengeMotionPrimitivesCache;
+  if(!fs.existsSync(CHALLENGE_MOTION_PRIMITIVES)){
+    challengeMotionPrimitivesCache = { summary: {}, primitives: [], stageRoadmap: [] };
+    return challengeMotionPrimitivesCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_MOTION_PRIMITIVES);
+    challengeMotionPrimitivesCache = Object.assign({}, artifact, {
+      summary: artifact.summary || {},
+      primitives: Array.isArray(artifact.primitives) ? artifact.primitives : [],
+      stageRoadmap: Array.isArray(artifact.stageRoadmap) ? artifact.stageRoadmap : []
+    });
+  } catch (err) {
+    challengeMotionPrimitivesCache = { summary: {}, primitives: [], stageRoadmap: [] };
+  }
+  return challengeMotionPrimitivesCache;
 }
 
 function loadGameplaySegmentCapture(){

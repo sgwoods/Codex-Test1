@@ -1038,6 +1038,10 @@ function main(){
   const visualLookPath = latestReport('aurora-visual-look-conformance');
   const alienEntryChallengePath = latestReport('alien-entry-challenge-variation');
   const challengeStagePath = latestReport('challenge-stage-conformance');
+  const challengeSweepIndexPath = path.join(ANALYSES, 'challenge-stage-candidate-sweep-index', 'latest.json');
+  const challengeMovementGrammarPath = path.join(ANALYSES, 'challenge-movement-grammar', 'latest.json');
+  const challengeMotionPrimitivesPath = path.join(ANALYSES, 'challenge-motion-primitives', 'latest.json');
+  const challengeSetpieceContractsPath = path.join(ANALYSES, 'challenge-setpiece-contracts', 'latest.json');
   const audioLabV2Path = latestReport('aurora-audio-conformance-lab-v2');
   const audioContractPath = latestReport('aurora-audio-cue-contracts');
   const applicationArtifactPath = path.join(ANALYSES, 'application-artifact-conformance', 'latest.json');
@@ -1049,6 +1053,10 @@ function main(){
   const visualLook = visualLookPath ? readJson(visualLookPath) : null;
   const alienEntryChallenge = alienEntryChallengePath ? readJson(alienEntryChallengePath) : null;
   const challengeStage = challengeStagePath ? readJson(challengeStagePath) : null;
+  const challengeSweepIndex = fs.existsSync(challengeSweepIndexPath) ? readJson(challengeSweepIndexPath) : null;
+  const challengeMovementGrammar = fs.existsSync(challengeMovementGrammarPath) ? readJson(challengeMovementGrammarPath) : null;
+  const challengeMotionPrimitives = fs.existsSync(challengeMotionPrimitivesPath) ? readJson(challengeMotionPrimitivesPath) : null;
+  const challengeSetpieceContracts = fs.existsSync(challengeSetpieceContractsPath) ? readJson(challengeSetpieceContractsPath) : null;
   const audioContract = audioContractPath ? readJson(audioContractPath) : null;
   const applicationArtifact = fs.existsSync(applicationArtifactPath) ? readJson(applicationArtifactPath) : null;
 
@@ -1096,6 +1104,31 @@ function main(){
   const frontDoorScore = 8.0;
   const popupScore = uiShell?.score10 || 0;
   const arcadeFrameScore = uiShell?.score10 || 0;
+  const challengeSweepSummary = challengeSweepIndex?.summary || {};
+  const challengeMovementGrammarSummary = challengeMovementGrammar?.summary || {};
+  const challengeMotionPrimitivesSummary = challengeMotionPrimitives?.summary || {};
+  const challengeSetpieceSummary = challengeSetpieceContracts?.summary || {};
+  const challengeDecisionEvidence = (challengeSweepIndex?.rows || []).map(item => ({
+    stage: item.stage,
+    decision: item.keeperDecision || 'pending',
+    bestCandidateId: item.bestCandidateId || 'pending',
+    expectedLift10: Number.isFinite(+item.expectedLift10) ? `${item.expectedLift10}/10` : 'n/a',
+    targetVideoObjectFitLift10: Number.isFinite(+item.targetVideoObjectFitLift10) ? `${item.targetVideoObjectFitLift10}/10` : 'n/a',
+    humanPerfectPotentialLift10: Number.isFinite(+item.humanPerfectPotentialLift10) ? `${item.humanPerfectPotentialLift10}/10` : 'n/a',
+    humanVisibleLift10: Number.isFinite(+item.humanVisibleLift10) ? `${item.humanVisibleLift10}/10` : 'n/a',
+    read: item.read || item.nextStep || ''
+  }));
+  const challengeEvidencePaths = [
+    challengeStagePath ? rel(challengeStagePath) : null,
+    fs.existsSync(challengeSweepIndexPath) ? rel(challengeSweepIndexPath) : null,
+    fs.existsSync(challengeMovementGrammarPath) ? rel(challengeMovementGrammarPath) : null,
+    fs.existsSync(challengeMotionPrimitivesPath) ? rel(challengeMotionPrimitivesPath) : null,
+    fs.existsSync(challengeSetpieceContractsPath) ? rel(challengeSetpieceContractsPath) : null
+  ].filter(Boolean).join('; ');
+  const challengeSetpieceNext = challengeSweepSummary.read
+    ? `${challengeSweepSummary.read} Next: build richer movement primitives before runtime promotion; first target ${challengeMotionPrimitivesSummary.firstBuildTarget || 'lead-in-continuity'} from ${challengeMotionPrimitivesSummary.primitiveCount || 0} primitives, with first-five grammar at ${challengeMovementGrammarSummary.groupContractCount || 0} group contracts and ${challengeMovementGrammarSummary.referenceBackedGroupCount || 0} reference-backed paths.`
+    : challengeStage?.improvementPlan?.[2]
+      || 'Run strict challenge-stage scorer, then rebuild Challenging Stage 1 against Galaga challenge-1 arrival and late-wave references.';
 
   const baseRows = [
     row({
@@ -1117,9 +1150,8 @@ function main(){
       status: challengeStage ? 'Strict dedicated stage-by-stage scorer; current high-priority gameplay-authenticity gap' : 'Strict scorer missing',
       why: 'The challenging stages should be spectacular safe Galaga-like bonus exhibitions. Current safety is good, but movement variation, alien novelty, and graphical conformance are not yet close.',
       effort: 'High; long-cycle CPU/browser extraction plus gameplay authoring and sprite-motion/reference labeling',
-      next: challengeStage?.improvementPlan?.[2]
-        || 'Run strict challenge-stage scorer, then rebuild Challenging Stage 1 against Galaga challenge-1 arrival and late-wave references.',
-      evidence: challengeStagePath ? rel(challengeStagePath) : `${rel(qualityPath)}; ${levelArcPath ? rel(levelArcPath) : 'level-arc not found'}`
+      next: challengeSetpieceNext,
+      evidence: challengeEvidencePaths || `${rel(qualityPath)}; ${levelArcPath ? rel(levelArcPath) : 'level-arc not found'}`
     }),
     row({
       rank: 3,
@@ -1331,7 +1363,23 @@ function main(){
       evidence: rel(qualityPath)
     })
   ];
-  const rows = baseRows.map(item => addCostContext(item, economics, investmentById))
+  const rows = baseRows.map(item => {
+    const isChallengeSetpiece = String(item.metric || '').toLowerCase().includes('challenge-stage set-piece');
+    if(String(item.metric || '').toLowerCase().includes('challenge-stage set-piece')){
+      item.decisionEvidence = challengeDecisionEvidence;
+      item.explanation = Object.assign({}, item.explanation || {}, {
+        calculation: `${item.explanation?.calculation || metricExplanation(item.metric).calculation} Current supporting artifacts: ${challengeSetpieceSummary.contractCount || 0} set-piece contracts, ${challengeMovementGrammarSummary.groupContractCount || 0} first-five grammar group contracts, ${challengeMotionPrimitivesSummary.primitiveCount || 0} reusable motion primitives, and ${challengeSweepSummary.totalCandidateCount || 0} indexed sweep candidates.`,
+        grounding: `${item.explanation?.grounding || metricExplanation(item.metric).grounding} Runtime promotion is blocked unless the expected-reference, target-video, human-perfect, safety, and human-visible gates all hold at once.`,
+        meaning: `${item.explanation?.meaning || metricExplanation(item.metric).meaning} The current dashboard should be read as evidence that the next value is richer motion representation, not more shallow tuning.`
+      });
+    }
+    const enriched = addCostContext(item, economics, investmentById);
+    if(isChallengeSetpiece){
+      enriched.next = challengeSetpieceNext;
+      return updateRowCells(enriched);
+    }
+    return enriched;
+  })
     .sort((a, b) => (+a.rank || 0) - (+b.rank || 0));
 
   const generatedAt = new Date().toISOString();
@@ -1390,6 +1438,10 @@ function main(){
     conformanceInvestmentRetrospective: retrospectivePath ? rel(retrospectivePath) : null,
     alienEntryChallenge: alienEntryChallengePath ? rel(alienEntryChallengePath) : null,
     challengeStageConformance: challengeStagePath ? rel(challengeStagePath) : null,
+    challengeStageCandidateSweepIndex: fs.existsSync(challengeSweepIndexPath) ? rel(challengeSweepIndexPath) : null,
+    challengeMovementGrammar: fs.existsSync(challengeMovementGrammarPath) ? rel(challengeMovementGrammarPath) : null,
+    challengeMotionPrimitives: fs.existsSync(challengeMotionPrimitivesPath) ? rel(challengeMotionPrimitivesPath) : null,
+    challengeSetpieceContracts: fs.existsSync(challengeSetpieceContractsPath) ? rel(challengeSetpieceContractsPath) : null,
     audioLabV2: audioLabV2Path ? rel(audioLabV2Path) : null,
     audioCueContracts: audioContractPath ? rel(audioContractPath) : null,
     visualLook: visualLookPath ? rel(visualLookPath) : null,
