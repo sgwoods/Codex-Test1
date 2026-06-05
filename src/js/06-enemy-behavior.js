@@ -12,19 +12,23 @@ function diveAccel(stage){
  return stageFlightTune(stage).diveAccel;
 }
 
-function pickScriptEnemy(type,c){
+function pickScriptEnemy(state,type,c){
+ if(!isAuroraRuntimeState(state)){c=type;type=state;state=currentAuroraRuntimeState();}
+ const S=state;
  const set=S.e.filter(e=>e.hp>0&&e.form&&!e.dive&&e.t===type);
  if(!set.length)return null;
  return set.sort((a,b)=>Math.abs(a.c-c)-Math.abs(b.c-c))[0];
 }
 
-function startDive(e,p,opts={}){
+function startDive(state,e,p,opts={}){
+ if(!isAuroraRuntimeState(state)){opts=p||{};p=e;e=state;state=currentAuroraRuntimeState();}
+ const S=state;
  if(!e)return;
  const chargeTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
   ? currentGamePackReferenceTiming('enemyDiveCharge')
   : null;
  e.low=0;
- if(opts.capture&&e.t==='boss'&&canCapture()){
+ if(opts.capture&&e.t==='boss'&&canCapture(S)){
   e.dive=4;
   e.targetX=cl(p.x+rnd(28,-28),24,PLAY_W-24);
   e.targetY=132;
@@ -32,7 +36,7 @@ function startDive(e,p,opts={}){
   e.vy=S.stage<=2?110:120;
   e.shot=0;
   e.esc=0;
-  logEnemyAttackStart(e,'capture',{targetX:+e.targetX.toFixed(2),targetY:e.targetY,scripted:1});
+  logEnemyAttackStart(S,e,'capture',{targetX:+e.targetX.toFixed(2),targetY:e.targetY,scripted:1});
   return;
  }
  const stage1Scripted=S.stage===1&&!S.challenge;
@@ -46,12 +50,14 @@ function startDive(e,p,opts={}){
   e.chargeCuePending=usesRuntimeGalagaReferenceAudio()?1:0;
   e.chargeCueT=chargeTiming?.cueDelay??0;
   e.chargeCueStartY=e.y;
-  logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:1});
+  logEnemyAttackStart(S,e,'dive',{targetX:+p.x.toFixed(2),scripted:1});
   if(!e.chargeCuePending)sfx.attackCharge();
-  if(opts.escort&&e.t==='boss')assignEscorts(e);
+  if(opts.escort&&e.t==='boss')assignEscorts(S,e);
 }
 
-function runStage1Script(dt,p,T){
+function runStage1Script(state,dt,p,T){
+ if(!isAuroraRuntimeState(state)){T=p;p=dt;dt=state;state=currentAuroraRuntimeState();}
+ const S=state;
  if(!S.scriptMode)return;
  S.scriptT+=dt;
  if(S.scriptT>52){
@@ -60,17 +66,17 @@ function runStage1Script(dt,p,T){
  }
  while(S.scriptI<STAGE1_SCRIPT.length&&S.scriptT>=STAGE1_SCRIPT[S.scriptI].t){
   if(S.stage===1&&S.att>=1)break;
-  const s=STAGE1_SCRIPT[S.scriptI++],e=pickScriptEnemy(s.type,s.c);
-  startDive(e,p,{capture:!!s.capture,escort:!!s.escort});
+  const s=STAGE1_SCRIPT[S.scriptI++],e=pickScriptEnemy(S,s.type,s.c);
+  startDive(S,e,p,{capture:!!s.capture,escort:!!s.escort});
  }
  S.scriptShotT-=dt;
- if(S.scriptShotT<=0&&S.eb.length<shotCap()){
+ if(S.scriptShotT<=0&&S.eb.length<shotCap(S)){
   const order=[1,7,3,8,0,9,2,6,4,5];
   const c=order[S.scriptShotI++%order.length];
   const cand=S.e.filter(e=>e.hp>0&&e.form&&!e.dive&&e.c===c).sort((a,b)=>b.y-a.y)[0];
   if(cand){
    const aim=cl((p.x-cand.x)*T.aimMul,-T.aimClamp,T.aimClamp);
-   fireEnemyBullet(cand,aim,T.bulletVy+S.stage*T.bulletVyStage,'script');
+   fireEnemyBullet(S,cand,aim,T.bulletVy+S.stage*T.bulletVyStage,'script');
   }
   S.scriptShotT=1.35;
  }
@@ -186,7 +192,9 @@ function applyReferenceChallengeSpawnLeadIn(e,dt,laneX,topY,side,slot,row,wave,s
  return true;
 }
 
-function updateChallengeEnemy(e,dt){
+function updateChallengeEnemy(state,e,dt){
+ if(!isAuroraRuntimeState(state)){dt=e;e=state;state=currentAuroraRuntimeState();}
+ const S=state;
  const pathFamily=e.pathFamily||'classic-lane-wave';
  const fm=familyMotion(e);
  const classicStage3=S.stage===3&&e.fam==='classic';
@@ -484,7 +492,9 @@ function updateChallengeEnemy(e,dt){
  }
 }
 
-function updateEnemy(e,dt,t,T,p){
+function updateEnemy(state,e,dt,t,T,p){
+ if(!isAuroraRuntimeState(state)){p=T;T=t;t=dt;dt=e;e=state;state=currentAuroraRuntimeState();}
+ const S=state;
  if(e.hp<=0)return;
  e.hitT=Math.max(0,(e.hitT||0)-dt);
  const cleanup=S.stage===1&&!S.challenge&&S.liveCount<=6;
@@ -568,9 +578,9 @@ function updateEnemy(e,dt,t,T,p){
   const { escortTrackX, escortTrackY, escortLift }=specialSquadronTuning(S.stage);
   e.x+=(l.x+e.off-e.x)*Math.min(1,dt*escortTrackX);
   e.y+=(l.y-escortLift-e.y)*Math.min(1,dt*escortTrackY);
-  if(!S.challenge&&e.shot>0&&S.eb.length<shotCap()&&randUnit()<dt*T.diveShotRate*.55){
+  if(!S.challenge&&e.shot>0&&S.eb.length<shotCap(S)&&randUnit()<dt*T.diveShotRate*.55){
    const aim=cl((p.x-e.x)*T.aimMul,-T.aimClamp,T.aimClamp)+rnd(T.aimRnd,-T.aimRnd);
-   fireEnemyBullet(e,aim,T.bulletVy+S.stage*T.bulletVyStage,'escort');
+   fireEnemyBullet(S,e,aim,T.bulletVy+S.stage*T.bulletVyStage,'escort');
    e.shot--;
   }
   return;
@@ -579,7 +589,7 @@ function updateEnemy(e,dt,t,T,p){
   S.att++;
   e.x+=Math.sin(t*6.4+e.ph)*6*dt;
   e.beamT-=dt;
-  if(enemyHasActiveBeam(e)&&canCapture()&&Math.abs(p.x-e.x)<8&&p.y>e.y+12&&p.y<e.y+VIS.beamLen)capturePlayer(e);
+  if(enemyHasActiveBeam(e)&&canCapture(S)&&Math.abs(p.x-e.x)<8&&p.y>e.y+12&&p.y<e.y+VIS.beamLen)capturePlayer(S,e);
   if(e.beamT<=0){
    e.beam=0;
    e.dive=1;
@@ -623,9 +633,9 @@ function updateEnemy(e,dt,t,T,p){
    e.low=1;
    logEvent('enemy_lower_field',Object.assign({stage:S.stage,y:+e.y.toFixed(2),stageClock:+S.stageClock.toFixed(3),playerLane:playLane(p.x)},enemyRef(e)));
   }
-  if(!S.challenge&&e.shot>0&&S.eb.length<shotCap()&&e.y>108&&e.y<p.y-88&&randUnit()<dt*T.diveShotRate){
+  if(!S.challenge&&e.shot>0&&S.eb.length<shotCap(S)&&e.y>108&&e.y<p.y-88&&randUnit()<dt*T.diveShotRate){
    const aim=cl((p.x-e.x)*T.aimMul,-T.aimClamp,T.aimClamp)+rnd(T.aimRnd,-T.aimRnd);
-   fireEnemyBullet(e,aim,T.bulletVy+S.stage*T.bulletVyStage,'dive');
+   fireEnemyBullet(S,e,aim,T.bulletVy+S.stage*T.bulletVyStage,'dive');
    e.shot--;
   }
   if(e.y>PLAY_H+30){
@@ -658,7 +668,7 @@ function updateEnemy(e,dt,t,T,p){
  const stage4Lane2Priority=!S.challenge&&S.stage===4&&!S.stage4Lane2PriorityDive&&S.stageClock>=13.85&&S.stageClock<=14&&e.t==='but'&&e.c===5&&e.r===1;
  if(stage4Lane2Priority){
   S.stage4Lane2PriorityDive=1;
-  startDive(e,p,{});
+  startDive(S,e,p,{});
   return;
  }
  // Harness-only selection probes set this field to measure candidate Stage 4 scheduling strategies.
@@ -668,7 +678,7 @@ function updateEnemy(e,dt,t,T,p){
   const chargeTiming=usesRuntimeGalagaReferenceAudio()&&typeof currentGamePackReferenceTiming==='function'
    ? currentGamePackReferenceTiming('enemyDiveCharge')
    : null;
-  if(e.t==='boss'&&canCapture()&&!(S.stage===2&&S.stageClock<8.2)&&randUnit()<T.capChance){
+  if(e.t==='boss'&&canCapture(S)&&!(S.stage===2&&S.stageClock<8.2)&&randUnit()<T.capChance){
    e.dive=4;
    e.targetX=cl(p.x+rnd(34,-34),26,PLAY_W-26);
    e.targetY=138;
@@ -676,7 +686,7 @@ function updateEnemy(e,dt,t,T,p){
    e.vy=S.stage<=2?116:128;
    e.shot=0;
    e.esc=0;
-   logEnemyAttackStart(e,'capture',{targetX:+e.targetX.toFixed(2),targetY:e.targetY,scripted:0});
+   logEnemyAttackStart(S,e,'capture',{targetX:+e.targetX.toFixed(2),targetY:e.targetY,scripted:0});
   }else{
    const midRunFlank=S.stage>=8&&S.stage<12&&!S.challenge&&e.t==='but'&&(e.c<=1||e.c>=8);
    const steer=(S.stage===2?.42:S.stage===4?.31:S.stage>=5?.48:S.stage===1?.46:.56)*fm.steer;
@@ -694,9 +704,9 @@ function updateEnemy(e,dt,t,T,p){
    e.chargeCuePending=usesRuntimeGalagaReferenceAudio()?1:0;
    e.chargeCueT=chargeTiming?.cueDelay??0;
    e.chargeCueStartY=e.y;
-   logEnemyAttackStart(e,'dive',{targetX:+p.x.toFixed(2),scripted:0,pattern:midRunFlank?'mid-run-flank-dive':'standard-dive'});
+   logEnemyAttackStart(S,e,'dive',{targetX:+p.x.toFixed(2),scripted:0,pattern:midRunFlank?'mid-run-flank-dive':'standard-dive'});
    if(!e.chargeCuePending)sfx.attackCharge();
-   if(e.t==='boss')assignEscorts(e);
+   if(e.t==='boss')assignEscorts(S,e);
   }
   if(stageAttackGap)S.attackGapT=(S.stage>=6?.82:S.stage===5?.88:S.stage===4?1.18:S.stage===2?1.08:1.18)+rnd(.12,.03);
  }

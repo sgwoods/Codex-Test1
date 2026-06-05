@@ -1293,9 +1293,115 @@ function scoreGameSupportsSharedRemote(gameKey=currentScoreStorageGameKey()){
  return normalizeScoreRecordGameKey(gameKey)===DEFAULT_SCORE_GAME_KEY;
 }
 
-const S={score:0,best:+readPref(scoreBestKey())||0,lives:2,stage:1,shake:0,st:[],neb:[],e:[],pb:[],eb:[],fx:[],cap:null,banner:0,bannerTxt:'',bannerMode:'',bannerSub:'',fireCD:0,t:null,rogue:0,attract:0,extendFirst:0,extendRecurring:0,nextExtendScore:0,extendAwards:0,extendFlashT:0,extendFlashShips:0,
- p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,inputResetHoldT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},att:0,challenge:0,ch:{hits:0,total:0,done:0},seq:0,seqT:0,startCueT:0,formationCueT:0,audioPulseHoldT:0,alertT:0,alertTxt:'',ultra:1,recoverT:0,attackGapT:0,nextStageT:0,postChallengeT:0,pendingStage:0,transitionMode:'',lastChallengeClearT:null,challengeTransitionStallLogged:0,transitionCueT:0,transitionCueKind:0,challengeResultCueT:0,challengeResultPerfect:0,profile:{name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic'},stagePresentation:null,
- scriptMode:0,scriptT:0,scriptI:0,scriptShotI:0,scriptShotT:1.4,forceChallenge:0,liveCount:40,stageClock:0,simT:0,squadSeq:0,captureCountStage:0,lastCaptureStartT:null,lastFighterCapturedT:null,sequenceT:0,sequenceMode:'',stats:{shots:0,hits:0},playerTwo:null,watchMode:0,watchPersona:'',watchScope:'game',commentaryT:0,commentaryCooldown:0,commentaryTitle:'',commentaryLines:[]};
+function createAuroraRuntimeState(opts={}){
+ const state={
+  score:0,
+  best:Number.isFinite(+opts.best)?+opts.best:+readPref(scoreBestKey())||0,
+  lives:2,
+  stage:1,
+  shake:0,
+  st:[],
+  neb:[],
+  e:[],
+  pb:[],
+  eb:[],
+  fx:[],
+  cap:null,
+  banner:0,
+  bannerTxt:'',
+  bannerMode:'',
+  bannerSub:'',
+  fireCD:0,
+  t:null,
+  rogue:0,
+  attract:0,
+  extendFirst:0,
+  extendRecurring:0,
+  nextExtendScore:0,
+  extendAwards:0,
+  extendFlashT:0,
+  extendFlashShips:0,
+  p:{x:0,y:0,vx:0,s:440,accel:12,decel:18,manualTapSpeed:248,manualTapWindow:.072,manualReverseWindow:.11,cd:0,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,capBoss:null,capT:0,inputResetHoldT:0,hNoShotT:0,hDebugT:0,demoTargetId:null,demoTargetT:0},
+  att:0,
+  challenge:0,
+  ch:{hits:0,total:0,done:0},
+  seq:0,
+  seqT:0,
+  startCueT:0,
+  formationCueT:0,
+  audioPulseHoldT:0,
+  alertT:0,
+  alertTxt:'',
+  ultra:1,
+  recoverT:0,
+  attackGapT:0,
+  nextStageT:0,
+  postChallengeT:0,
+  pendingStage:0,
+  transitionMode:'',
+  lastChallengeClearT:null,
+  challengeTransitionStallLogged:0,
+  transitionCueT:0,
+  transitionCueKind:0,
+  challengeResultCueT:0,
+  challengeResultPerfect:0,
+  profile:{name:'classic',beeFamily:'classic',butFamily:'classic',bossFamily:'classic',challengeFamily:'classic'},
+  stagePresentation:null,
+  scriptMode:0,
+  scriptT:0,
+  scriptI:0,
+  scriptShotI:0,
+  scriptShotT:1.4,
+  forceChallenge:0,
+  liveCount:40,
+  stageClock:0,
+  simT:0,
+  squadSeq:0,
+  captureCountStage:0,
+  lastCaptureStartT:null,
+  lastFighterCapturedT:null,
+  sequenceT:0,
+  sequenceMode:'',
+  stats:{shots:0,hits:0},
+  playerTwo:null,
+  watchMode:0,
+  watchPersona:'',
+  watchScope:'game',
+  commentaryT:0,
+  commentaryCooldown:0,
+  commentaryTitle:'',
+  commentaryLines:[]
+ };
+ if(opts&&typeof opts==='object'){
+  for(const [key,value] of Object.entries(opts)){
+   if(key==='p'||key==='ch'||key==='stats'||key==='profile')continue;
+   if(key in state)state[key]=value;
+  }
+  if(opts.p)state.p=Object.assign(state.p,opts.p);
+  if(opts.ch)state.ch=Object.assign(state.ch,opts.ch);
+  if(opts.stats)state.stats=Object.assign(state.stats,opts.stats);
+  if(opts.profile)state.profile=Object.assign(state.profile,opts.profile);
+ }
+ return state;
+}
+
+let S=createAuroraRuntimeState();
+let AURORA_ACTIVE_RUNTIME_STATE=S;
+function setActiveAuroraRuntimeState(state){
+ AURORA_ACTIVE_RUNTIME_STATE=state||createAuroraRuntimeState({best:S?.best});
+ S=AURORA_ACTIVE_RUNTIME_STATE;
+ return S;
+}
+function currentAuroraRuntimeState(){
+ return AURORA_ACTIVE_RUNTIME_STATE||S;
+}
+function isAuroraRuntimeState(value){
+ return !!(value&&typeof value==='object'&&value.p&&Array.isArray(value.e)&&Array.isArray(value.pb)&&Array.isArray(value.eb));
+}
+window.createAuroraRuntimeState=createAuroraRuntimeState;
+window.setActiveAuroraRuntimeState=setActiveAuroraRuntimeState;
+window.currentAuroraRuntimeState=currentAuroraRuntimeState;
+window.isAuroraRuntimeState=isAuroraRuntimeState;
 
 const DEFAULT_STARFIELD_PROFILE=Object.freeze({
  id:'classic-arcade-stars',
@@ -1501,20 +1607,20 @@ function resolveGameplayStartStage(cfg={}){
   : requestedStage;
  return {requestedStage,stage,stageMode,forceChallenge,startKind:'level',challengeStage};
 }
-const shotCap=()=>S.t?S.t.shotCap:0;
-const recTime=()=>{
+const shotCap=(state=S)=>state.t?state.t.shotCap:0;
+const recTime=(state=S)=>{
  if(!REC)return 0;
  if(isHarnessClockControlled()||useDeterministicHarnessClock()){
-  return +(+S.simT||0).toFixed(3);
+  return +(+state.simT||0).toFixed(3);
  }
  return +((performance.now()-REC.t0)/1000).toFixed(3);
 };
 function useDeterministicHarnessClock(){
  return !!(window.__platinumHarnessPersona||window.__auroraHarnessPersona);
 }
-function advanceGameplayClock(dt){
- S.simT=(Number.isFinite(S.simT)?S.simT:0)+dt;
- if(useDeterministicHarnessClock())return S.simT;
+function advanceGameplayClock(dt,state=S){
+ state.simT=(Number.isFinite(state.simT)?state.simT:0)+dt;
+ if(useDeterministicHarnessClock())return state.simT;
  return performance.now()/1000;
 }
 function resetHarnessFrameClock(){
@@ -1528,7 +1634,7 @@ function isHarnessClockControlled(){
  return !!harnessClockControlled;
 }
 const playLane=x=>cl(Math.round((cl(+x||0,0,PLAY_W)/(PLAY_W||1))*9),0,9);
-const snapshot=()=>({gameKey:typeof currentGamePack==='function'?currentGamePack()?.metadata?.gameKey||'aurora-galactica':'aurora-galactica',started:!!started,paused:!!paused,attract:{active:!!ATTRACT.active,phase:ATTRACT.phase||''},stage:S.stage,score:S.score,lives:Math.max(0,S.lives+1),challenge:!!S.challenge,scriptMode:!!S.scriptMode,watchMode:!!S.watchMode,watchPersona:S.watchPersona||'',watchScope:S.watchScope||'game',profile:S.profile?.name||'classic',theme:S.stagePresentation?.id||'classic',simT:+(+S.simT||0).toFixed(3),stageClock:+(+S.stageClock||0).toFixed(3),rngState:RNG_SEED?(RNG_STATE>>>0):0,playerTwo:typeof playerTwoSnapshot==='function'?playerTwoSnapshot():null,player:{x:+S.p.x.toFixed(2),y:+S.p.y.toFixed(2),vx:+(+S.p.vx||0).toFixed(2),cd:+(+S.p.cd||0).toFixed(3),inv:+(+S.p.inv||0).toFixed(3),spawn:+(+S.p.spawn||0).toFixed(3),dual:!!S.p.dual,captured:!!S.p.captured,pending:!!S.p.pending,hNoShotT:+(+S.p.hNoShotT||0).toFixed(3),hDebugT:+(+S.p.hDebugT||0).toFixed(3),demoTargetId:S.p.demoTargetId??null,demoTargetT:+(+S.p.demoTargetT||0).toFixed(3)},timers:{fireCD:+(+S.fireCD||0).toFixed(3),recoverT:+(+S.recoverT||0).toFixed(3),attackGapT:+(+S.attackGapT||0).toFixed(3),nextStageT:+(+S.nextStageT||0).toFixed(3),postChallengeT:+(+S.postChallengeT||0).toFixed(3),sequenceT:+(+S.sequenceT||0).toFixed(3)},counts:{enemies:S.e.filter(e=>e.hp>0).length,playerBullets:S.pb.length,enemyBullets:S.eb.length,effects:S.fx.length,attackers:S.att}});
+const snapshot=(state=S)=>({gameKey:typeof currentGamePack==='function'?currentGamePack()?.metadata?.gameKey||'aurora-galactica':'aurora-galactica',started:!!started,paused:!!paused,attract:{active:!!ATTRACT.active,phase:ATTRACT.phase||''},stage:state.stage,score:state.score,lives:Math.max(0,state.lives+1),challenge:!!state.challenge,scriptMode:!!state.scriptMode,watchMode:!!state.watchMode,watchPersona:state.watchPersona||'',watchScope:state.watchScope||'game',profile:state.profile?.name||'classic',theme:state.stagePresentation?.id||'classic',simT:+(+state.simT||0).toFixed(3),stageClock:+(+state.stageClock||0).toFixed(3),rngState:RNG_SEED?(RNG_STATE>>>0):0,playerTwo:typeof playerTwoSnapshot==='function'?playerTwoSnapshot(state.playerTwo):null,player:{x:+state.p.x.toFixed(2),y:+state.p.y.toFixed(2),vx:+(+state.p.vx||0).toFixed(2),cd:+(+state.p.cd||0).toFixed(3),inv:+(+state.p.inv||0).toFixed(3),spawn:+(+state.p.spawn||0).toFixed(3),dual:!!state.p.dual,captured:!!state.p.captured,pending:!!state.p.pending,hNoShotT:+(+state.p.hNoShotT||0).toFixed(3),hDebugT:+(+state.p.hDebugT||0).toFixed(3),demoTargetId:state.p.demoTargetId??null,demoTargetT:+(+state.p.demoTargetT||0).toFixed(3)},timers:{fireCD:+(+state.fireCD||0).toFixed(3),recoverT:+(+state.recoverT||0).toFixed(3),attackGapT:+(+state.attackGapT||0).toFixed(3),nextStageT:+(+state.nextStageT||0).toFixed(3),postChallengeT:+(+state.postChallengeT||0).toFixed(3),sequenceT:+(+state.sequenceT||0).toFixed(3)},counts:{enemies:state.e.filter(e=>e.hp>0).length,playerBullets:state.pb.length,enemyBullets:state.eb.length,effects:state.fx.length,attackers:state.att}});
 const enemyRef=e=>e?{id:e.id,enemyType:e.t,enemyFamily:e.fam||'classic',column:e.c,row:e.r,lane:playLane(e.x),dive:e.dive,carry:!!e.carry}:null;
 function loadScoreboard(gameKey=currentScoreStorageGameKey()){
  try{

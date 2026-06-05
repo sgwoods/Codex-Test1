@@ -2,7 +2,12 @@
 
 function fillPat(px,py,s,pat,col){if(!pat||!col)return;ctx.fillStyle=col;for(const p of pat)ctx.fillRect(px+p[0]*s,py+p[1]*s,s,s)}
 function drawPix(px,py,s,pat,col,col2,pat2=null,col3='',pat3=null){fillPat(px,py,s,pat,col);if(pat2)fillPat(px,py,s,pat2,col2);else if(col2){ctx.fillStyle=col2;ctx.fillRect(px-s,py+s*2,s*2,s);ctx.fillRect(px+s*3,py+s*2,s*2,s)}if(pat3)fillPat(px,py,s,pat3,col3)}
-function ex(x,y,n=10,col='#fff'){
+function ex(state,x,y,n=10,col='#fff'){
+ if(!isAuroraRuntimeState(state)){
+  const oldX=state,oldY=x,oldN=arguments.length>=3?y:10,oldCol=arguments.length>=4?n:'#fff';
+  state=currentAuroraRuntimeState();x=oldX;y=oldY;n=oldN;col=oldCol;
+ }
+ const S=state;
  // Keep cosmetic explosion particles off the primary gameplay RNG so seeded
  // combat and attack ordering stay aligned with the shipped production build.
  const large=n>24,medium=n>14;
@@ -13,7 +18,9 @@ function ex(x,y,n=10,col='#fff'){
  S.fx.push({x,y,vx:0,vy:0,t:n>14?.11:.08,r:n>14?10:7,c:'#fff',flash:1});
 }
 
-function bossDamageFx(x,y){
+function bossDamageFx(state,x,y){
+ if(!isAuroraRuntimeState(state)){y=x;x=state;state=currentAuroraRuntimeState();}
+ const S=state;
  for(let i=0;i<12;i++){
   const side=i%2?-1:1;
   S.fx.push({
@@ -33,11 +40,14 @@ function bossDamageFx(x,y){
 }
 
 
-function updateAuroraGameplay(dt){
+function stepAuroraRuntime(state,dt,input={}){
+ if(!isAuroraRuntimeState(state)){input=dt||{};dt=state;state=currentAuroraRuntimeState();}
+ setActiveAuroraRuntimeState(state);
+ const S=state;
  if((!started&&!S.attract)||paused)return;
  logCarryDebugState();
  recShotT-=dt;
- if(recShotT<=0){logSnapshot('tick');recShotT=.5;}
+ if(recShotT<=0){logSnapshot('tick',S);recShotT=.5;}
  S.shake=Math.max(0,S.shake-dt);S.alertT=Math.max(0,S.alertT-dt);
  S.recoverT=Math.max(0,S.recoverT-dt);S.attackGapT=Math.max(0,S.attackGapT-dt);
  S.sequenceT=Math.max(0,S.sequenceT-dt);
@@ -67,7 +77,7 @@ function updateAuroraGameplay(dt){
    S.challengeResultPerfect=0;
   }
  }
- const simT=advanceGameplayClock(dt);
+ const simT=advanceGameplayClock(dt,S);
  const p=S.p;S.t=stageTune(S.stage,S.challenge);const T=S.t;
  if(typeof updatePlayerTwoRival==='function')updatePlayerTwoRival(dt);
  if(typeof consumePlayerTwoTurnSwitchApplied==='function'&&consumePlayerTwoTurnSwitchApplied())return;
@@ -108,7 +118,7 @@ function updateAuroraGameplay(dt){
   }
   S.nextStageT=0;
   if(S.pendingStage){S.stage=S.pendingStage;S.pendingStage=0;}
-  spawnStage();
+  spawnStage(S);
  }else S.nextStageT=remaining;
   return
  }
@@ -125,7 +135,7 @@ function updateAuroraGameplay(dt){
     enemies:S.e.filter(e=>e.hp>0).length
    });
    S.postChallengeT=0;
-   queueStageTransition('challengeResult');
+   queueStageTransition(S,'challengeResult');
   }else S.postChallengeT-=dt;
   return;
  }
@@ -134,9 +144,9 @@ function updateAuroraGameplay(dt){
   p.capT-=dt;
   p.x+=(p.capBoss.x-p.x)*Math.min(1,dt*4.1);
   p.y+=(capY-p.y)*Math.min(1,dt*3.9);
-  if(p.capT<=0||Math.hypot(p.x-p.capBoss.x,p.y-capY)<8)finishCapture();
+  if(p.capT<=0||Math.hypot(p.x-p.capBoss.x,p.y-capY)<8)finishCapture(S);
 }else if(p.captured){
-  breakCapture('boss_destroyed');
+  breakCapture(S,'boss_destroyed');
  }
  if(p.returning){
   const targetY=PLAY_H-VIS.playerBottom;
@@ -147,13 +157,13 @@ function updateAuroraGameplay(dt){
   }
  }
  if(p.spawn<=0&&p.pending){p.pending=0;p.x=PLAY_W/2;p.y=PLAY_H-VIS.playerBottom;p.vx=0}
- updatePlayerControl(dt,p);
+ updatePlayerControl(S,dt,p);
 
  const alive=S.e.filter(e=>e.hp>0);
  const normalStageCleared=!alive.length&&!S.challenge;
  S.liveCount=alive.length;
  if(S.challenge&&!alive.length&&!S.ch.done){
-  finalizeChallengeClear();
+  finalizeChallengeClear(S);
   return;
  }
  if(S.challenge&&S.ch.done&&!alive.length&&S.pendingStage&&S.postChallengeT<=0&&S.nextStageT<=0&&!S.challengeTransitionStallLogged){
@@ -177,7 +187,7 @@ function updateAuroraGameplay(dt){
   const dtSinceClear=S.lastChallengeClearT==null?Infinity:(S.stageClock-S.lastChallengeClearT);
   if(dtSinceClear>=1.25){
    logEvent('challenge_transition_recovered',{stage:S.stage,pendingStage:S.pendingStage,dtSinceClear:+dtSinceClear.toFixed(3)});
-   queueStageTransition('challengeResult');
+   queueStageTransition(S,'challengeResult');
    return;
   }
  }
@@ -191,11 +201,11 @@ function updateAuroraGameplay(dt){
  const sequenceLock=S.sequenceT>0&&(S.sequenceMode==='captureBeat'||S.sequenceMode==='rescueBeat');
  if(sequenceLock)return;
  S.att=0;
- for(const e of S.e){e.tm+=dt;if(e.hp<=0)continue;if(S.challenge)updateChallengeEnemy(e,dt);else updateEnemy(e,dt,t,T,p)}
- runStage1Script(dt,p,T);
+ for(const e of S.e){e.tm+=dt;if(e.hp<=0)continue;if(S.challenge)updateChallengeEnemy(S,e,dt);else updateEnemy(S,e,dt,t,T,p)}
+ runStage1Script(S,dt,p,T);
 
  const cleanup=!S.challenge&&S.stage===1&&alive.length<=6;
- if(!S.challenge&&!S.scriptMode&&S.fireCD<=0&&S.eb.length<shotCap()&&S.recoverT<=0&&!(S.stage>=4&&S.attackGapT>.18)&&!(S.stage===4&&S.stageClock<4.9)&&!(S.stage===5&&S.stageClock<2.8)){
+ if(!S.challenge&&!S.scriptMode&&S.fireCD<=0&&S.eb.length<shotCap(S)&&S.recoverT<=0&&!(S.stage>=4&&S.attackGapT>.18)&&!(S.stage===4&&S.stageClock<4.9)&&!(S.stage===5&&S.stageClock<2.8)){
   const bottoms={};for(const e of S.e)if(e.hp>0&&e.form&&!e.dive&&!e.ch){if(!bottoms[e.c]||e.y>bottoms[e.c].y)bottoms[e.c]=e}
   const list=Object.values(bottoms);
   if(list.length){
@@ -213,15 +223,15 @@ function updateAuroraGameplay(dt){
     bulletVy-=8;
    }
    const q=pool[(randUnit()*pool.length)|0];
-   fireEnemyBullet(q,bulletVx,bulletVy,'formation');
+   fireEnemyBullet(S,q,bulletVx,bulletVy,'formation');
    S.fireCD=(cleanup?rnd(.9,.45):rnd(T.globalA,T.globalB)-Math.min(.08,S.stage*.003))+(S.stage===4&&S.stageClock<12?.18:0);
   }else S.fireCD=.25;
  }
 
- updatePlayerBullets(dt);
- updateEnemyBullets(dt,p);
- updateEnemyBodyCollisions(p);
- updateReleasedCapture(dt,p);
+ updatePlayerBullets(S,dt);
+ updateEnemyBullets(S,dt,p);
+ updateEnemyBodyCollisions(S,p);
+ updateReleasedCapture(S,dt,p);
  if(normalStageCleared){
   // Let a released captured fighter finish its return/join flow before the
   // stage transition starts. Without this, killing the last carrying boss on
@@ -231,21 +241,26 @@ function updateAuroraGameplay(dt){
   logEvent('stage_clear',{stage:S.stage,score:S.score});
   if(typeof commentatorEvent==='function')commentatorEvent('stage_clear',{stage:S.stage,score:S.score});
   S.stage++;
-  queueStageTransition();
+  queueStageTransition(S);
   return
  }
  for(let i=S.fx.length-1;i>=0;i--){const f=S.fx[i];f.t-=dt;f.x+=f.vx*dt;f.y+=f.vy*dt;f.vx*=.985;f.vy*=.985;if(f.t<=0)S.fx.splice(i,1)}
+ return S;
+}
+
+function updateAuroraGameplay(dt){
+ return stepAuroraRuntime(currentAuroraRuntimeState(),dt,{});
 }
 
 function update(dt){
+ const adapter=typeof currentGameplayAdapter==='function'?currentGameplayAdapter():null;
+ const devPreviewAdapter=typeof currentDevPreviewGameplayAdapter==='function'?currentDevPreviewGameplayAdapter():null;
  if(
   typeof currentGamePackHasPlayableAdapter==='function'
-  && !currentGamePackHasPlayableAdapter()
-  && typeof currentGamePackHasDevPreviewAdapter==='function'
-  && currentGamePackHasDevPreviewAdapter()
-  && typeof updateActiveGamePack==='function'
- ){
-  return updateActiveGamePack(dt);
- }
- return updateAuroraGameplay(dt);
+  && currentGamePackHasPlayableAdapter()
+  && adapter
+  && typeof adapter.update==='function'
+ )return adapter.update(dt);
+ if(devPreviewAdapter&&typeof devPreviewAdapter.update==='function')return devPreviewAdapter.update(dt);
+ return null;
 }

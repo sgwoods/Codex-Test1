@@ -1,15 +1,16 @@
 // Aurora-specific player combat, bullet resolution, and rescue-return helpers.
 
-function bulletsMax(){return S.p.dual?4:2}
-function dualShotOffsets(){return S.p.dual?[-10,10]:[0]}
+function bulletsMax(state){state=isAuroraRuntimeState(state)?state:currentAuroraRuntimeState();return state.p.dual?4:2}
+function dualShotOffsets(state){state=isAuroraRuntimeState(state)?state:currentAuroraRuntimeState();return state.p.dual?[-10,10]:[0]}
 
-function shoot(){
- const p=S.p;
+function shoot(state){
+ if(!isAuroraRuntimeState(state))state=currentAuroraRuntimeState();
+ const S=state,p=S.p;
  const captureWindow=!!(p.captured&&p.capBoss&&p.capBoss.hp>0&&p.capT>.55);
  if(p.cd>0||p.spawn>0||p.returning||(!captureWindow&&p.captured))return;
- if(S.pb.length>=bulletsMax())return;
+ if(S.pb.length>=bulletsMax(S))return;
  p.cd=S.challenge?.095:.24;const y=p.y-18;
- const shotXs=dualShotOffsets().map(off=>p.x+off);
+ const shotXs=dualShotOffsets(S).map(off=>p.x+off);
  S.stats.shots+=p.dual?2:1;
  if(p.dual)S.pb.push({x:shotXs[0],y,v:560},{x:shotXs[1],y,v:560});
  else S.pb.push({x:shotXs[0],y,v:560});
@@ -17,7 +18,7 @@ function shoot(){
  for(let i=S.pb.length-1;i>=0;i--){
   const b=S.pb[i];
   if(!shotXs.includes(b.x)||Math.abs((+b.y||0)-y)>.001)continue;
-  resolvePlayerBulletHit(i,playerBulletSegment(b,b.y));
+  resolvePlayerBulletHit(S,i,playerBulletSegment(b,b.y));
  }
  sfx.shot();
 }
@@ -32,7 +33,8 @@ function segmentHitsTarget(seg,targetX,targetY,targetW,targetH){
  return Math.abs(seg.x-targetX)<targetW && seg.bottom>targetY-targetH && seg.top<targetY+targetH;
 }
 
-function resolvePlayerBulletHit(i,seg){
+function resolvePlayerBulletHit(state,i,seg){
+ const S=state;
  if(i<0||i>=S.pb.length)return false;
  for(const e of S.e){
   if(e.hp<=0)continue;
@@ -42,7 +44,7 @@ function resolvePlayerBulletHit(i,seg){
   if(cf&&segmentHitsTarget(seg,cf.x,cf.y,cf.w,cf.h)){
    S.stats.hits++;
    S.pb.splice(i,1);
-   destroyCarriedFighter(e);
+   destroyCarriedFighter(S,e);
    return true;
   }
   const h=enemyHitbox(e);
@@ -54,14 +56,14 @@ function resolvePlayerBulletHit(i,seg){
    e.hp--;
    e.hitT=.34;
    if(e.hp<=0){
-    awardKill(e,e.dive);
+    awardKill(S,e,e.dive);
     if(e.t==='boss'){
      clearReferenceBossMomentCueWindow();
      S.shake=Math.max(S.shake,.6);
-     ex(e.x,e.y,28,'#fff5a6');
-     ex(e.x,e.y,18,'#ff8cd7');
-     ex(e.x,e.y,12,'#d8f2ff');
-    }else ex(e.x,e.y,16,e.t==='but'?'#ffb55f':e.t==='rogue'?'#ffa4c0':'#ffe563');
+     ex(S,e.x,e.y,28,'#fff5a6');
+     ex(S,e.x,e.y,18,'#ff8cd7');
+     ex(S,e.x,e.y,12,'#d8f2ff');
+    }else ex(S,e.x,e.y,16,e.t==='but'?'#ffb55f':e.t==='rogue'?'#ffa4c0':'#ffe563');
     sfx.boom(e.t);
    }
    else{
@@ -72,7 +74,7 @@ function resolvePlayerBulletHit(i,seg){
      holdReferenceGameplayCadence(bossTiming?.hitCadenceHold??.2);
      e.hitT=Math.max(e.hitT,bossTiming?.hitFlashDuration??.46);
      S.shake=Math.max(S.shake,.22);
-     bossDamageFx(e.x,e.y);
+     bossDamageFx(S,e.x,e.y);
      sfx.bossHit();
      if(typeof commentatorEvent==='function')commentatorEvent('boss_damaged',{enemyId:e.id,hpBefore,hpAfter:e.hp});
     }else sfx.hit();
@@ -83,22 +85,25 @@ function resolvePlayerBulletHit(i,seg){
  return false;
 }
 
-function updatePlayerBullets(dt){
+function updatePlayerBullets(state,dt){
+ const S=state;
  for(let i=S.pb.length-1;i>=0;i--){const b=S.pb[i],previousY=+b.y||0;b.y-=b.v*dt;if(b.y<-30){S.pb.splice(i,1);continue}
   const seg=playerBulletSegment(b,previousY);
-  resolvePlayerBulletHit(i,seg);
+  resolvePlayerBulletHit(S,i,seg);
  }
 }
 
-function updateEnemyBullets(dt,p){
+function updateEnemyBullets(state,dt,p){
+ const S=state;
  for(let i=S.eb.length-1;i>=0;i--){const b=S.eb[i];if(!b){S.eb.splice(i,1);continue}b.x+=b.vx*dt;b.y+=b.vy*dt;if(b.y>PLAY_H+30||b.x<-30||b.x>PLAY_W+30){S.eb.splice(i,1);continue}
   // Reference note for #33: original Galaga challenge stages are treated as
   // non-attacking/non-lethal bonus rounds, so player deaths remain disabled
   // while S.challenge is active.
-  if(!S.challenge&&p.spawn<=0&&!p.captured){const h=playerHitbox();if(Math.abs(b.x-p.x)<h.w&&Math.abs(b.y-p.y)<h.h){S.eb.splice(i,1);loseShip({cause:'enemy_bullet',bulletKind:b.kind||'unknown',sourceId:b.sourceId||null,sourceType:b.sourceType||null,sourceDive:b.sourceDive??null,bulletX:+b.x.toFixed(2),bulletY:+b.y.toFixed(2),bulletLane:playLane(b.x),bulletVx:+b.vx.toFixed(2),bulletVy:+b.vy.toFixed(2)});}}}
+  if(!S.challenge&&p.spawn<=0&&!p.captured){const h=playerHitbox();if(Math.abs(b.x-p.x)<h.w&&Math.abs(b.y-p.y)<h.h){S.eb.splice(i,1);loseShip(S,{cause:'enemy_bullet',bulletKind:b.kind||'unknown',sourceId:b.sourceId||null,sourceType:b.sourceType||null,sourceDive:b.sourceDive??null,bulletX:+b.x.toFixed(2),bulletY:+b.y.toFixed(2),bulletLane:playLane(b.x),bulletVx:+b.vx.toFixed(2),bulletVy:+b.vy.toFixed(2)});}}}
 }
 
-function updateEnemyBodyCollisions(p){
+function updateEnemyBodyCollisions(state,p){
+ const S=state;
  for(const e of S.e){
   if(e.hp<=0||p.spawn>0||p.captured||p.returning)continue;
   const he=enemyCollisionHitbox(e),hp=playerHitbox();
@@ -122,13 +127,14 @@ function updateEnemyBodyCollisions(p){
     continue;
    }
    e.hp=0;
-   ex(e.x,e.y,12,'#fff');
-   loseShip({cause:'enemy_collision',enemyId:e.id,enemyType:e.t,enemyDive:e.dive,enemyX:+e.x.toFixed(2),enemyY:+e.y.toFixed(2),enemyLane:playLane(e.x),enemyForm:!!e.form,challenge:!!S.challenge});
+   ex(S,e.x,e.y,12,'#fff');
+   loseShip(S,{cause:'enemy_collision',enemyId:e.id,enemyType:e.t,enemyDive:e.dive,enemyX:+e.x.toFixed(2),enemyY:+e.y.toFixed(2),enemyLane:playLane(e.x),enemyForm:!!e.form,challenge:!!S.challenge});
   }
  }
 }
 
-function updateReleasedCapture(dt,p){
+function updateReleasedCapture(state,dt,p){
+ const S=state;
  if(!S.cap)return;
  S.cap.t-=dt;
  if(S.cap.mode==='dock'){
@@ -140,10 +146,10 @@ function updateReleasedCapture(dt,p){
   S.cap.y+=(targetY-S.cap.y)*Math.min(1,dt*2.8)+(S.cap.vy||0)*dt;
   S.cap.vy=Math.max(0,(S.cap.vy||0)-92*dt);
   if(S.cap.t<=0||S.cap.y>PLAY_H+32)S.cap=null;
-  else if(!p.captured&&p.spawn<=0&&Math.abs(S.cap.x-targetX)<5&&Math.abs(S.cap.y-targetY)<5)awardRescueJoin(1);
+  else if(!p.captured&&p.spawn<=0&&Math.abs(S.cap.x-targetX)<5&&Math.abs(S.cap.y-targetY)<5)awardRescueJoin(S,1);
  }else{
   S.cap.y+=S.cap.vy*dt;
   if(S.cap.t<=0||S.cap.y>PLAY_H+30)S.cap=null;
-  else if(Math.abs(S.cap.x-p.x)<12&&Math.abs(S.cap.y-p.y)<10&&!p.captured&&p.spawn<=0)awardRescueJoin(0)
+  else if(Math.abs(S.cap.x-p.x)<12&&Math.abs(S.cap.y-p.y)<10&&!p.captured&&p.spawn<=0)awardRescueJoin(S,0)
  }
 }

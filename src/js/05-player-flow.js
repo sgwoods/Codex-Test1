@@ -13,7 +13,10 @@ function resolveWatchChallengeStartStage(cfg={}){
  return {requestedStage:challengeStage,stage,stageMode:'display',forceChallenge:1,startKind:'challenge',challengeStage,displayLabel:challengeStageDisplayLabel(challengeStage,{challengeNumber:1}),watchScope:'challenges'};
 }
 
-function startAuroraGameplay(){
+function startAuroraGameplay(state){
+ if(isAuroraRuntimeState(state))setActiveAuroraRuntimeState(state);
+ else state=currentAuroraRuntimeState();
+ const S=state;
  if(typeof clearRuntimeLoopFault==='function')clearRuntimeLoopFault();
  if(typeof clearPlayerTwoAutoTurnTimer==='function')clearPlayerTwoAutoTurnTimer();
  stopAttractLoop();
@@ -64,7 +67,7 @@ started=1;paused=0;Object.assign(S,{score:runScore,lives:runLives,stage:runStage
  Object.assign(S.p,{x:PLAY_W/2,y:PLAY_H-VIS.playerBottom,inv:0,dual:0,captured:0,returning:0,pending:0,spawn:0,cd:0,capBoss:null,capT:0,inputResetHoldT:0,vx:0});
  logEvent('game_start',{persona:S.harnessPersona||null,watchMode:!!S.watchMode,watchScope:S.watchScope||'game',developerExpertPlay:developerWatchPersona||'',requestedStage:startStage.requestedStage,stage:startStage.stage,startStageMode:startStage.stageMode,startKind:startStage.startKind||'level',challengeStage:startStage.challengeStage||null,displayLabel:startStage.displayLabel||'',forceChallenge:startStage.forceChallenge,playerTwo:playerTwoRun?.enabled?playerTwoSnapshot(playerTwoRun):null});
  startRunRecording();
- spawnStage();msg.textContent='';
+ spawnStage(S);msg.textContent='';
  const openingTiming=(!startStage.forceChallenge&&startStage.stage===1&&usesReferenceTimingModel())
   ? currentGamePackReferenceTiming('stage1Opening')
   : null;
@@ -97,8 +100,9 @@ started=1;paused=0;Object.assign(S,{score:runScore,lives:runLives,stage:runStage
  c?.focus?.();
 }
 
-function loseShip(cause={}){
- const p=S.p;if(p.inv>0||p.spawn>0||p.captured)return;
+function loseShip(state,cause={}){
+ if(!isAuroraRuntimeState(state)){cause=state||{};state=currentAuroraRuntimeState();}
+ const S=state,p=S.p;if(p.inv>0||p.spawn>0||p.captured)return;
  const dualLoss=!!p.dual;
  const hp=playerHitbox();
  logEvent('ship_lost',Object.assign({
@@ -125,9 +129,9 @@ function loseShip(cause={}){
  S.eb.length=0;
  p.inv=2.7;
  p.cd=Math.max(p.cd,0.42);
- ex(p.x,p.y,42,'#86c7ff');
- ex(p.x,p.y,28,'#f4f8ff');
- ex(p.x,p.y,14,'#ff7f9f');
+ ex(S,p.x,p.y,42,'#86c7ff');
+ ex(S,p.x,p.y,28,'#f4f8ff');
+ ex(S,p.x,p.y,14,'#ff7f9f');
  const shipsRemaining=dualLoss?Math.max(0,S.lives+1):Math.max(0,S.lives);
  S.alertTxt=shipsRemaining>0?`SHIP DESTROYED\n${shipsRemaining===1?'ONE SHIP REMAINING':`${shipsRemaining} SHIPS REMAINING`}`:'SHIP DESTROYED';
  S.alertT=Math.max(S.alertT,1.25);
@@ -138,17 +142,19 @@ function loseShip(cause={}){
  }
  S.lives--;p.spawn=1.32;
  if(typeof handlePlayerTwoShipLoss==='function'&&handlePlayerTwoShipLoss(cause))return;
- if(S.lives<0)gameOver();
+ if(S.lives<0)gameOver(S);
 }
 
-function gameOver(){
+function gameOver(state){
+ if(!isAuroraRuntimeState(state))state=currentAuroraRuntimeState();
+ const S=state;
  if(S.attract){
   logEvent('attract_demo_end',{score:S.score,stage:S.stage,reason:'demo_lost'});
   enterAttractScores();
   return;
  }
  logEvent('game_over',{score:S.score,stage:S.stage});
- logSnapshot('game_over');
+ logSnapshot('game_over',S);
  if(typeof updatePlayerTwoGameOverState==='function')updatePlayerTwoGameOverState();
  started=0;
  paused=0;
@@ -166,7 +172,9 @@ function gameOver(){
  else stopRunRecording();
 }
 
-function attractMoveAxis(p){
+function attractMoveAxis(state,p){
+ if(!isAuroraRuntimeState(state)){p=state;state=currentAuroraRuntimeState();}
+ const S=state;
  const hp=playerHitbox();
  const urgent=S.eb.filter(b=>b.vy>0&&b.y<p.y&&Math.abs(b.x-p.x)<34).sort((a,b)=>(p.y-a.y)-(p.y-b.y))[0];
  if(urgent){
@@ -1076,7 +1084,8 @@ function handlePlayerTwoWaitClick(target){
  return false;
 }
 
-function harnessPersonaCfg(){
+function harnessPersonaCfg(state){
+ const S=isAuroraRuntimeState(state)?state:currentAuroraRuntimeState();
  const key=(S.harnessPersona||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  const base=HARNESS_PERSONAS[key]||null;
  const p2=S.playerTwo?.activeTurn==='p2'?S.playerTwo:null;
@@ -1096,26 +1105,30 @@ function harnessPersonaCfg(){
  });
 }
 
-function harnessTargetScore(e,p,cfg){
+function harnessTargetScore(state,e,p,cfg){
+ if(!isAuroraRuntimeState(state)){cfg=p;p=e;e=state;state=currentAuroraRuntimeState();}
+ const S=state;
  const rescueCandidate=!!(e.carry&&e.dive);
  const carriedBias=e.carry?(rescueCandidate?(cfg.captureRescueBias??cfg.carryBias??0):(cfg.carryBias??0)):0;
  const unsafeCarryPenalty=e.carry&&!rescueCandidate?(cfg.captureRescueUnsafePenalty||0):0;
  return (e.dive?cfg.diveBias:0)+carriedBias-unsafeCarryPenalty+(e.t==='boss'?cfg.bossBias:0)+((!e.form||e.dive||S.challenge||e.y>cfg.openShotY)?cfg.activeBias:0)+(e.y*cfg.heightBias)-(Math.abs(e.x-p.x)*cfg.distanceBias);
 }
 
-function harnessTargetDebug(target,p,cfg){
+function harnessTargetDebug(state,target,p,cfg){
+ if(!isAuroraRuntimeState(state)){cfg=p;p=target;target=state;state=currentAuroraRuntimeState();}
  if(!target)return {};
  return{
   targetCarry:!!target.carry,
   targetDive:+(target.dive||0),
   targetRescueCandidate:!!(target.carry&&target.dive),
-  targetScore:+harnessTargetScore(target,p,cfg).toFixed(2),
+  targetScore:+harnessTargetScore(state,target,p,cfg).toFixed(2),
   captureRescueStyle:cfg.captureRescueStyle||''
  };
 }
 
-function compareHarnessTargets(a,b,p,cfg){
- const scoreDiff=harnessTargetScore(b,p,cfg)-harnessTargetScore(a,p,cfg);
+function compareHarnessTargets(state,a,b,p,cfg){
+ if(!isAuroraRuntimeState(state)){cfg=p;p=b;b=a;a=state;state=currentAuroraRuntimeState();}
+ const scoreDiff=harnessTargetScore(state,b,p,cfg)-harnessTargetScore(state,a,p,cfg);
  if(Math.abs(scoreDiff)>1e-9)return scoreDiff;
  if((b.dive|0)!==(a.dive|0))return (b.dive|0)-(a.dive|0);
  if((b.carry|0)!==(a.carry|0))return (b.carry|0)-(a.carry|0);
@@ -1127,7 +1140,9 @@ function compareHarnessTargets(a,b,p,cfg){
  return (a.id??0)-(b.id??0);
 }
 
-function logProfessionalDecision(p,cfg,reason,extra={}){
+function logProfessionalDecision(state,p,cfg,reason,extra={}){
+ if(!isAuroraRuntimeState(state)){extra=reason||{};reason=cfg;cfg=p;p=state;state=currentAuroraRuntimeState();}
+ const S=state;
  if(cfg?.name!=='professional')return;
  const detailedReason=reason&&reason!=='tick';
  if(!detailedReason&&p.hDebugT>0)return;
@@ -1143,7 +1158,9 @@ function logProfessionalDecision(p,cfg,reason,extra={}){
  },extra));
 }
 
-function logProfessionalHandoff(p,harnessPersona,manualAxis,manualFire){
+function logProfessionalHandoff(state,p,harnessPersona,manualAxis,manualFire){
+ if(!isAuroraRuntimeState(state)){manualFire=manualAxis;manualAxis=harnessPersona;harnessPersona=p;p=state;state=currentAuroraRuntimeState();}
+ const S=state;
  if(harnessPersona?.name!=='professional')return;
  if(p.hDebugT>0)return;
  p.hDebugT=.75;
@@ -1174,11 +1191,15 @@ function keyHeldMs(...codes){
  return held;
 }
 
-function harnessSelectTarget(p,cfg){
- return S.e.filter(e=>e.hp>0).sort((a,b)=>compareHarnessTargets(a,b,p,cfg))[0]||null;
+function harnessSelectTarget(state,p,cfg){
+ if(!isAuroraRuntimeState(state)){cfg=p;p=state;state=currentAuroraRuntimeState();}
+ const S=state;
+ return S.e.filter(e=>e.hp>0).sort((a,b)=>compareHarnessTargets(S,a,b,p,cfg))[0]||null;
 }
 
-function harnessLowerFieldThreat(p,cfg){
+function harnessLowerFieldThreat(state,p,cfg){
+ if(!isAuroraRuntimeState(state)){cfg=p;p=state;state=currentAuroraRuntimeState();}
+ const S=state;
  if(!cfg?.lowerDiveEvadeDx||!cfg?.lowerDiveEvadeY)return null;
  if(S.challenge)return null;
  const playerLane=playLane(p.x);
@@ -1201,36 +1222,40 @@ function harnessLowerFieldThreat(p,cfg){
   })[0]||null;
 }
 
-function harnessMoveAxis(p,cfg){
+function harnessMoveAxis(state,p,cfg){
+ if(!isAuroraRuntimeState(state)){cfg=p;p=state;state=currentAuroraRuntimeState();}
+ const S=state;
  const hp=playerHitbox();
  const urgent=S.eb.filter(b=>b.vy>0&&b.y<p.y&&p.y-b.y<cfg.urgentLook&&Math.abs(b.x-p.x)<cfg.urgentDx).sort((a,b)=>(p.y-a.y)-(p.y-b.y))[0];
  if(urgent){
   const away=urgent.x>=p.x?-1:1;
   if((away<0&&p.x>hp.w+16)||(away>0&&p.x<PLAY_W-hp.w-16))return away;
  }
- const lowerFieldThreat=harnessLowerFieldThreat(p,cfg);
+ const lowerFieldThreat=harnessLowerFieldThreat(S,p,cfg);
  if(lowerFieldThreat){
   const away=lowerFieldThreat.x>=p.x?-1:1;
   if((away<0&&p.x>hp.w+16)||(away>0&&p.x<PLAY_W-hp.w-16))return away;
  }
- const target=harnessSelectTarget(p,cfg);
+ const target=harnessSelectTarget(S,p,cfg);
  if(!target)return 0;
  const dx=target.x-p.x;
  if(Math.abs(dx)<cfg.deadZone)return 0;
  return dx>0?1:-1;
 }
 
-function runHarnessPlayer(dt,p,cfg){
+function runHarnessPlayer(state,dt,p,cfg){
+ if(!isAuroraRuntimeState(state)){cfg=p;p=dt;dt=state;state=currentAuroraRuntimeState();}
+ const S=state;
  if(p.spawn>0||p.captured)return;
  p.hNoShotT=(p.hNoShotT||0)+dt;
  p.hDebugT=Math.max(0,(p.hDebugT||0)-dt);
  const hp=playerHitbox();
- const lowerFieldThreat=harnessLowerFieldThreat(p,cfg);
- const axis=harnessMoveAxis(p,cfg);
+ const lowerFieldThreat=harnessLowerFieldThreat(S,p,cfg);
+ const axis=harnessMoveAxis(S,p,cfg);
  p.x=cl(p.x+axis*p.s*dt*cfg.moveMul,hp.w+2,PLAY_W-hp.w-2);
  const attackables=S.e.filter(e=>e.hp>0&&(!e.form||e.dive||S.challenge||e.y>cfg.openShotY));
- const target=attackables.sort((a,b)=>compareHarnessTargets(a,b,p,cfg))[0]||harnessSelectTarget(p,cfg);
- logProfessionalDecision(p,cfg,'tick',Object.assign({
+ const target=attackables.sort((a,b)=>compareHarnessTargets(S,a,b,p,cfg))[0]||harnessSelectTarget(S,p,cfg);
+ logProfessionalDecision(S,p,cfg,'tick',Object.assign({
   attackables:attackables.length,
   targetId:target?target.id:null,
   targetX:target?+target.x.toFixed(2):null,
@@ -1238,9 +1263,9 @@ function runHarnessPlayer(dt,p,cfg){
   axis,
   cooldown:+p.cd.toFixed(3),
   playerBullets:S.pb.length
- },harnessTargetDebug(target,p,cfg)));
+ },harnessTargetDebug(S,target,p,cfg)));
  if(lowerFieldThreat){
-  logProfessionalDecision(p,cfg,'lower_field_evade',{
+  logProfessionalDecision(S,p,cfg,'lower_field_evade',{
    attackables:attackables.length,
    axis,
    threatId:lowerFieldThreat.id,
@@ -1251,15 +1276,15 @@ function runHarnessPlayer(dt,p,cfg){
   });
  }
  if(!target){
-  logProfessionalDecision(p,cfg,'no_target',{attackables:attackables.length});
+  logProfessionalDecision(S,p,cfg,'no_target',{attackables:attackables.length});
   return;
  }
  if(p.cd>0){
-  logProfessionalDecision(p,cfg,'cooldown',Object.assign({attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),cooldown:+p.cd.toFixed(3)},harnessTargetDebug(target,p,cfg)));
+  logProfessionalDecision(S,p,cfg,'cooldown',Object.assign({attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),cooldown:+p.cd.toFixed(3)},harnessTargetDebug(S,target,p,cfg)));
   return;
  }
- if(S.pb.length>=bulletsMax()){
-  logProfessionalDecision(p,cfg,'bullet_cap',Object.assign({attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),playerBullets:S.pb.length},harnessTargetDebug(target,p,cfg)));
+ if(S.pb.length>=bulletsMax(S)){
+  logProfessionalDecision(S,p,cfg,'bullet_cap',Object.assign({attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),playerBullets:S.pb.length},harnessTargetDebug(S,target,p,cfg)));
   return;
  }
  const tol=target.t==='boss'?cfg.aimBoss:cfg.aimOther;
@@ -1267,22 +1292,24 @@ function runHarnessPlayer(dt,p,cfg){
  const dx=Math.abs(target.x-p.x);
  if(dx<=tol){
   if(randUnit()<=fireChance){
-   shoot();
+   shoot(S);
    p.hNoShotT=0;
-   logProfessionalDecision(p,cfg,'shot',Object.assign({attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),tol},harnessTargetDebug(target,p,cfg)));
+   logProfessionalDecision(S,p,cfg,'shot',Object.assign({attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),tol},harnessTargetDebug(S,target,p,cfg)));
   }else{
-   logProfessionalDecision(p,cfg,'fire_roll_miss',Object.assign({attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),tol,fireChance},harnessTargetDebug(target,p,cfg)));
+   logProfessionalDecision(S,p,cfg,'fire_roll_miss',Object.assign({attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),tol,fireChance},harnessTargetDebug(S,target,p,cfg)));
   }
   return;
  }
- logProfessionalDecision(p,cfg,'not_aligned',Object.assign({attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),tol,axis},harnessTargetDebug(target,p,cfg)));
+ logProfessionalDecision(S,p,cfg,'not_aligned',Object.assign({attackables:attackables.length,targetId:target.id,targetX:+target.x.toFixed(2),targetDx:+(target.x-p.x).toFixed(2),tol,axis},harnessTargetDebug(S,target,p,cfg)));
 }
 
-function runAttractPlayer(dt,p){
+function runAttractPlayer(state,dt,p){
+ if(!isAuroraRuntimeState(state)){p=dt;dt=state;state=currentAuroraRuntimeState();}
+ const S=state;
  if(p.spawn>0||p.captured)return;
  p.demoTargetT=Math.max(0,(p.demoTargetT||0)-dt);
  const hw=typeof playerMovementHalfWidth==='function'?playerMovementHalfWidth(p):playerHitbox().w;
- const axis=attractMoveAxis(p);
+ const axis=attractMoveAxis(S,p);
  const targetVx=axis*p.s*.68;
  const blend=Math.min(1,p.accel*dt*.82);
  p.vx+=(targetVx-p.vx)*blend;
@@ -1290,23 +1317,25 @@ function runAttractPlayer(dt,p){
  p.x=cl(p.x+p.vx*dt,hw+2,PLAY_W-hw-2);
  if((p.x<=hw+2&&p.vx<0)||(p.x>=PLAY_W-hw-2&&p.vx>0))p.vx=0;
  const target=S.e.filter(e=>e.hp>0&&(!e.form||e.dive||e.y>72)).sort((a,b)=>Math.abs(a.x-p.x)-Math.abs(b.x-p.x))[0]||S.e.filter(e=>e.hp>0).sort((a,b)=>Math.abs(a.x-p.x)-Math.abs(b.x-p.x))[0];
- if(target&&p.cd<=0&&Math.abs(target.x-p.x)<(target.t==='boss'?16:12)&&S.pb.length<bulletsMax())shoot();
+ if(target&&p.cd<=0&&Math.abs(target.x-p.x)<(target.t==='boss'?16:12)&&S.pb.length<bulletsMax(S))shoot(S);
 }
 
-function updatePlayerControl(dt,p){
- const harnessPersona=harnessPersonaCfg();
+function updatePlayerControl(state,dt,p){
+ if(!isAuroraRuntimeState(state)){p=dt;dt=state;state=currentAuroraRuntimeState();}
+ const S=state;
+ const harnessPersona=harnessPersonaCfg(S);
  const leftCodes=movementLeftCodes(),rightCodes=movementRightCodes();
  const manualAxis=(rightCodes.some(code=>!!keys[code])?1:0)-(leftCodes.some(code=>!!keys[code])?1:0);
  const manualFire=!!keys.Space;
  p.inputResetHoldT=Math.max(0,(+p.inputResetHoldT||0)-dt);
- logProfessionalHandoff(p,harnessPersona,manualAxis,manualFire);
+ logProfessionalHandoff(S,p,harnessPersona,manualAxis,manualFire);
  if(p.inputResetHoldT>0){
   p.vx=0;
   return;
  }
  if(p.spawn<=0&&!p.captured&&!p.returning){
-  if(S.attract)runAttractPlayer(dt,p);
-  else if(harnessPersona&&(S.watchMode||(!manualAxis&&!manualFire)))runHarnessPlayer(dt,p,harnessPersona);
+  if(S.attract)runAttractPlayer(S,dt,p);
+  else if(harnessPersona&&(S.watchMode||(!manualAxis&&!manualFire)))runHarnessPlayer(S,dt,p,harnessPersona);
   else{
    const hw=typeof playerMovementHalfWidth==='function'?playerMovementHalfWidth(p):playerHitbox().w;
    const leftHeld=keyHeldMs(...leftCodes);
@@ -1325,6 +1354,6 @@ function updatePlayerControl(dt,p){
    if((p.x<=hw+2&&p.vx<0)||(p.x>=PLAY_W-hw-2&&p.vx>0))p.vx=0;
   }
  }
- if(!S.attract&&!harnessPersona&&keys.Space)shoot();
- else if(!S.attract&&harnessPersona&&manualFire&&!S.watchMode)shoot();
+ if(!S.attract&&!harnessPersona&&keys.Space)shoot(S);
+ else if(!S.attract&&harnessPersona&&manualFire&&!S.watchMode)shoot(S);
 }
