@@ -124,6 +124,10 @@ function spawnChallenge(state){
   const waveLeadInArcs=Array.isArray(layout.groupLeadInArcs)?layout.groupLeadInArcs:null;
   const waveLeadInStartYOffsets=Array.isArray(layout.groupLeadInStartYOffsets)?layout.groupLeadInStartYOffsets:null;
   const waveLeadInSideOffsets=Array.isArray(layout.groupLeadInSideOffsets)?layout.groupLeadInSideOffsets:null;
+  const waveSpacingFieldSpreadXs=Array.isArray(layout.groupSpacingFieldSpreadXs)?layout.groupSpacingFieldSpreadXs:null;
+  const waveSpacingFieldSpreadYs=Array.isArray(layout.groupSpacingFieldSpreadYs)?layout.groupSpacingFieldSpreadYs:null;
+  const waveSpacingFieldGateS=Array.isArray(layout.groupSpacingFieldGateS)?layout.groupSpacingFieldGateS:null;
+  const waveSpacingFieldPhaseS=Array.isArray(layout.groupSpacingFieldPhaseS)?layout.groupSpacingFieldPhaseS:null;
   const waveMotionSpecs=Array.isArray(layout.motionSpecGroups)?layout.motionSpecGroups:null;
   const motionSpecGroup=waveMotionSpecs?.[wave]||null;
   const motionControls=motionSpecGroup?.controls||null;
@@ -181,6 +185,10 @@ function spawnChallenge(state){
    routeCurveX:motionControls?.routeCurveX??0,
    routeCurveY:motionControls?.routeCurveY??0,
    routePhaseS:motionControls?.routePhaseS??0,
+   spacingFieldSpreadX:motionControls?.spacingFieldSpreadX??waveSpacingFieldSpreadXs?.[wave]??layout.spacingFieldSpreadX??0,
+   spacingFieldSpreadY:motionControls?.spacingFieldSpreadY??waveSpacingFieldSpreadYs?.[wave]??layout.spacingFieldSpreadY??0,
+   spacingFieldGateS:motionControls?.spacingFieldGateS??waveSpacingFieldGateS?.[wave]??layout.spacingFieldGateS??0,
+   spacingFieldPhaseS:motionControls?.spacingFieldPhaseS??waveSpacingFieldPhaseS?.[wave]??layout.spacingFieldPhaseS??0,
    leadInS:motionControls?.leadInS??motionSpecGroup?.phaseDurations?.leadInS??waveLeadInS?.[wave]??layout.leadInS??0,
    leadInArc:motionControls?.leadInArc??waveLeadInArcs?.[wave]??layout.leadInArc??0,
    leadInStartYOffset:motionControls?.leadInStartYOffset??waveLeadInStartYOffsets?.[wave]??layout.leadInStartYOffset??null,

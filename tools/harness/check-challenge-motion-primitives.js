@@ -74,6 +74,7 @@ function checkArtifact(file){
     }
   }
   const leadInEvidence = report.leadInPrototypeEvidence || null;
+  const spacingEvidence = report.spacingFieldPrototypeEvidence || null;
   const leadInPrototypeAllowsSpacing = report.summary?.firstBuildTarget === 'group-spacing-field'
     && leadInEvidence
     && Number.isFinite(+leadInEvidence.magicAppearanceRisk)
@@ -84,10 +85,26 @@ function checkArtifact(file){
     && +leadInEvidence.bunchingRisk > 0.55
     && leadInEvidence.visualPresencePass === true
     && leadInEvidence.promotionReady === false;
-  if(report.summary?.firstBuildTarget !== 'lead-in-continuity' && !leadInPrototypeAllowsSpacing){
-    fail('The first build target should remain lead-in-continuity unless a measured lead-in prototype improves magic appearance and leaves group spacing as the blocker.', {
+  const spacingPrototypeAllowsReferenceFit = report.summary?.firstBuildTarget === 'reference-spline-fit'
+    && leadInEvidence
+    && Number.isFinite(+leadInEvidence.magicAppearanceRisk)
+    && +leadInEvidence.magicAppearanceRisk <= 0.12
+    && spacingEvidence
+    && spacingEvidence.processWin === true
+    && Number.isFinite(+spacingEvidence.humanVisibleScore10)
+    && +spacingEvidence.humanVisibleScore10 >= 7.5
+    && Number.isFinite(+spacingEvidence.spacingScore)
+    && +spacingEvidence.spacingScore >= 0.45
+    && Number.isFinite(+spacingEvidence.bunchingRisk)
+    && +spacingEvidence.bunchingRisk > 0.55
+    && +spacingEvidence.bunchingRisk <= 0.62
+    && spacingEvidence.visualPresencePass === true
+    && spacingEvidence.promotionReady === false;
+  if(report.summary?.firstBuildTarget !== 'lead-in-continuity' && !leadInPrototypeAllowsSpacing && !spacingPrototypeAllowsReferenceFit){
+    fail('The first build target should remain lead-in-continuity unless measured lead-in evidence allows spacing, or measured spacing-field evidence moves the next blocker to reference-spline fit.', {
       summary: report.summary,
-      leadInPrototypeEvidence: leadInEvidence
+      leadInPrototypeEvidence: leadInEvidence,
+      spacingFieldPrototypeEvidence: spacingEvidence
     });
   }
   if(+report.summary?.highPriorityPrimitiveCount < 3){

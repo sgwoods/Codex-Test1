@@ -383,6 +383,41 @@ function leadInPrototypeEvidence(latestSweep){
   };
 }
 
+function spacingFieldPrototypeEvidence(latestSweep){
+  const rows = Array.isArray(latestSweep?.diagnostics?.spacingFieldTop) ? latestSweep.diagnostics.spacingFieldTop : [];
+  if(!rows.length) return null;
+  const best = rows
+    .filter(row => row?.humanVisibleGuardrails)
+    .sort((a, b) => (+a.humanVisibleGuardrails.bunchingRisk || 1) - (+b.humanVisibleGuardrails.bunchingRisk || 1)
+      || (+(b.humanVisibleGuardrails.spacingScore || 0)) - (+(a.humanVisibleGuardrails.spacingScore || 0))
+      || (+(b.humanVisibleGuardrails.score10 || 0)) - (+(a.humanVisibleGuardrails.score10 || 0))
+      || (+(b.targetVideoObjectFitScore10 || 0)) - (+(a.targetVideoObjectFitScore10 || 0)))[0] || null;
+  if(!best) return null;
+  const guard = best.humanVisibleGuardrails || {};
+  const processWin = +guard.magicAppearanceRisk <= 0.12
+    && +guard.spacingScore >= 0.45
+    && +guard.bunchingRisk <= 0.62
+    && best.visualPresenceRegressionGuard?.pass === true;
+  return {
+    stage: latestSweep.stage,
+    candidateId: best.candidateId,
+    expectedScore10: round(best.expectedScore10, 1),
+    targetVideoObjectFitScore10: round(best.targetVideoObjectFitScore10, 1),
+    humanPerfectPotentialScore10: round(best.humanPerfectPotentialScore10, 1),
+    humanVisibleScore10: round(guard.score10, 1),
+    arrivalContinuity: round(guard.arrivalContinuity, 3),
+    magicAppearanceRisk: round(guard.magicAppearanceRisk, 3),
+    spacingScore: round(guard.spacingScore, 3),
+    bunchingRisk: round(guard.bunchingRisk, 3),
+    visualPresencePass: best.visualPresenceRegressionGuard?.pass === true,
+    promotionReady: best.humanVisibleGuardrails?.pass === true && best.humanPerfectGuard?.pass === true,
+    processWin,
+    read: processWin
+      ? `Latest centerline spacing prototype ${best.candidateId} improved human-visible readability to ${round(guard.score10, 1)}/10 with bunching risk ${round(guard.bunchingRisk, 3)}, spacing ${round(guard.spacingScore, 3)}, and magic risk ${round(guard.magicAppearanceRisk, 3)}. It is still not runtime-ready because target-video fit is ${round(best.targetVideoObjectFitScore10, 1)}/10 and expected-label lift is not material.`
+      : `Latest centerline spacing prototype ${best.candidateId} did not yet produce a reliable process win; bunching ${round(guard.bunchingRisk, 3)}, spacing ${round(guard.spacingScore, 3)}, magic ${round(guard.magicAppearanceRisk, 3)}.`
+  };
+}
+
 function priorityForPrimitive(primitive, stages, sweepRows, setpiece){
   const relatedSweeps = stages.map(stage => sweepFailureSignals(stage, sweepRows));
   const blockedVisible = relatedSweeps.filter(row => row.humanVisiblePass === false).length;
@@ -493,6 +528,8 @@ ${report.summary.read}
 
 ${report.leadInPrototypeEvidence ? `Lead-in prototype evidence: ${report.leadInPrototypeEvidence.read}` : 'Lead-in prototype evidence: none recorded in the latest sweep.'}
 
+${report.spacingFieldPrototypeEvidence ? `Spacing-field prototype evidence: ${report.spacingFieldPrototypeEvidence.read}` : 'Spacing-field prototype evidence: none recorded in the latest sweep.'}
+
 ## Primitive Backlog
 
 | Priority | Primitive | Category | Source Stages | Evidence | Implementation Plan |
@@ -522,14 +559,20 @@ function main(){
     .map(row => stageRoadmapRow(row, sweepRows));
   const highPriority = primitives.filter(item => +item.priority10 >= 8);
   const leadInEvidence = leadInPrototypeEvidence(latestSweep);
+  const spacingFieldEvidence = spacingFieldPrototypeEvidence(latestSweep);
   const leadInPrototypeSucceeded = !!(leadInEvidence
     && Number.isFinite(+leadInEvidence.magicAppearanceRisk)
     && +leadInEvidence.magicAppearanceRisk <= 0.12
     && leadInEvidence.visualPresencePass);
-  const firstBuildTarget = leadInPrototypeSucceeded
+  const spacingFieldPrototypeSucceeded = !!(spacingFieldEvidence?.processWin);
+  const firstBuildTarget = spacingFieldPrototypeSucceeded
+    ? 'reference-spline-fit'
+    : leadInPrototypeSucceeded
     ? 'group-spacing-field'
     : (highPriority[0]?.id || primitives[0]?.id || 'pending');
-  const firstBuildTargetRead = leadInPrototypeSucceeded
+  const firstBuildTargetRead = spacingFieldPrototypeSucceeded
+    ? 'Centerline spacing now has a measured process win, but target identity/path fit still blocks promotion. Combine the spacing field with stronger reference-spline fit and phase scheduling next.'
+    : leadInPrototypeSucceeded
     ? 'Lead-in continuity now has a measured prototype that reduces magic appearance, but it still bunches. Build a true centerline-plus-member-offset group-spacing field next.'
     : (highPriority[0]?.implementationPlan || primitives[0]?.implementationPlan || 'Run the primitive analyzer after movement grammar is available.');
   const report = {
@@ -553,7 +596,9 @@ function main(){
       firstBuildTargetRead,
       firstFiveStages: stageRoadmap.map(row => row.stage),
       releaseReadiness: 'planning-only',
-      read: leadInPrototypeSucceeded
+      read: spacingFieldPrototypeSucceeded
+        ? 'The latest sweep shows lead-in continuity and centerline spacing both produce measured readability gains. Runtime promotion is still blocked because target-video object fit and expected-label identity do not improve enough; the next grammar pass should compose spacing with stronger reference-spline/path-fit and phase-order controls.'
+        : leadInPrototypeSucceeded
         ? 'The latest sweep shows lead-in continuity can materially improve magic-appearance readability, but group bunching still blocks runtime promotion. The next runtime improvement should shift from lead-in experiments to a centerline-plus-member-offset spacing primitive, then rerun the sweep and full visual presence guards.'
         : 'The next runtime improvement should target visible lead-in, spacing/readability, reference spline playback, and phase scheduling before another broad sweep. These primitives attack the failures that blocked every current candidate keeper.'
     },
@@ -565,7 +610,10 @@ function main(){
     primitives,
     stageRoadmap,
     leadInPrototypeEvidence: leadInEvidence,
-    nextBestStep: leadInPrototypeSucceeded
+    spacingFieldPrototypeEvidence: spacingFieldEvidence,
+    nextBestStep: spacingFieldPrototypeSucceeded
+      ? 'Compose the centerline spacing field with reference-spline fit and phase-order scheduling on Challenging Stage 7, then accept only if target-video lift clears the recorded full-analyzer calibration without losing human-visible readability.'
+      : leadInPrototypeSucceeded
       ? 'Build a true group-spacing-field primitive that represents each group as a centerline plus stable member offsets, then test it first on Challenging Stage 7 before broadening to the first five challenge stages.'
       : 'Prototype lead-in-continuity and group-spacing-field for Challenging Stage 3-4, then rerun the candidate sweep and human-visible guardrails.'
   };
@@ -580,6 +628,7 @@ function main(){
     highPriorityPrimitiveCount: report.summary.highPriorityPrimitiveCount,
     firstBuildTarget: report.summary.firstBuildTarget,
     leadInPrototypeEvidence: report.leadInPrototypeEvidence,
+    spacingFieldPrototypeEvidence: report.spacingFieldPrototypeEvidence,
     latest: rel(path.join(OUT_ROOT, 'latest.json')),
     ingestion: rel(INGESTION_OUT)
   }, null, 2));

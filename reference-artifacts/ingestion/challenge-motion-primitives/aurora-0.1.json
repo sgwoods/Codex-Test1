@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "challenge-motion-primitives",
-  "generatedAt": "2026-06-06T13:49:21.951Z",
-  "commit": "ca2a74eaf",
+  "generatedAt": "2026-06-06T14:44:56.922Z",
+  "commit": "f16820840",
   "branch": "codex/aurora-challenge-movement-grammar",
   "gameKey": "aurora-galactica",
   "sourceArtifacts": {
@@ -15,8 +15,8 @@
     "primitiveCount": 10,
     "stageRoadmapCount": 5,
     "highPriorityPrimitiveCount": 4,
-    "firstBuildTarget": "group-spacing-field",
-    "firstBuildTargetRead": "Lead-in continuity now has a measured prototype that reduces magic appearance, but it still bunches. Build a true centerline-plus-member-offset group-spacing field next.",
+    "firstBuildTarget": "reference-spline-fit",
+    "firstBuildTargetRead": "Centerline spacing now has a measured process win, but target identity/path fit still blocks promotion. Combine the spacing field with stronger reference-spline fit and phase scheduling next.",
     "firstFiveStages": [
       3,
       7,
@@ -25,7 +25,7 @@
       19
     ],
     "releaseReadiness": "planning-only",
-    "read": "The latest sweep shows lead-in continuity can materially improve magic-appearance readability, but group bunching still blocks runtime promotion. The next runtime improvement should shift from lead-in experiments to a centerline-plus-member-offset spacing primitive, then rerun the sweep and full visual presence guards."
+    "read": "The latest sweep shows lead-in continuity and centerline spacing both produce measured readability gains. Runtime promotion is still blocked because target-video object fit and expected-label identity do not improve enough; the next grammar pass should compose spacing with stronger reference-spline/path-fit and phase-order controls."
   },
   "measurementLimits": [
     "This is a design-and-measurement backlog, not a runtime promotion.",
@@ -77,7 +77,7 @@
           15,
           19
         ],
-        "bestHumanVisibleLift10": 1.4,
+        "bestHumanVisibleLift10": 2.3,
         "worstBunchingRisk": 0.963,
         "read": "Visible Lead-In Continuity is backed by 25 group contract(s) and 25 reference path(s); blocked stages: 3, 7, 11, 15, 19."
       },
@@ -99,16 +99,16 @@
         {
           "stage": 7,
           "decision": "no-runtime-keeper-yet",
-          "bestCandidateId": "stage7-target-starts-current-speed-p0",
+          "bestCandidateId": "stage7-centerline-spacing-spread-left-right-lead078-flat-widefield-centered-id-sd018",
           "expectedLift10": 0,
-          "targetVideoObjectFitLift10": 0.6,
+          "targetVideoObjectFitLift10": 0.3,
           "humanPerfectPotentialLift10": 0,
-          "humanVisibleLift10": 1.4,
+          "humanVisibleLift10": 2.3,
           "humanVisiblePass": false,
-          "spacingScore": 0.185,
-          "bunchingRisk": 0.811,
-          "arrivalContinuity": 0.712,
-          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 1.4/10 or fails visibility/arrival/spacing/bunching gates."
+          "spacingScore": 0.331,
+          "bunchingRisk": 0.8,
+          "arrivalContinuity": 0.928,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 2.3/10 or fails visibility/arrival/spacing/bunching gates."
         },
         {
           "stage": 11,
@@ -204,7 +204,7 @@
           15,
           19
         ],
-        "bestHumanVisibleLift10": 1.4,
+        "bestHumanVisibleLift10": 2.3,
         "worstBunchingRisk": 0.963,
         "read": "Group Spacing Field is backed by 25 group contract(s) and 25 reference path(s); blocked stages: 3, 7, 11, 15, 19."
       },
@@ -226,16 +226,16 @@
         {
           "stage": 7,
           "decision": "no-runtime-keeper-yet",
-          "bestCandidateId": "stage7-target-starts-current-speed-p0",
+          "bestCandidateId": "stage7-centerline-spacing-spread-left-right-lead078-flat-widefield-centered-id-sd018",
           "expectedLift10": 0,
-          "targetVideoObjectFitLift10": 0.6,
+          "targetVideoObjectFitLift10": 0.3,
           "humanPerfectPotentialLift10": 0,
-          "humanVisibleLift10": 1.4,
+          "humanVisibleLift10": 2.3,
           "humanVisiblePass": false,
-          "spacingScore": 0.185,
-          "bunchingRisk": 0.811,
-          "arrivalContinuity": 0.712,
-          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 1.4/10 or fails visibility/arrival/spacing/bunching gates."
+          "spacingScore": 0.331,
+          "bunchingRisk": 0.8,
+          "arrivalContinuity": 0.928,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 2.3/10 or fails visibility/arrival/spacing/bunching gates."
         },
         {
           "stage": 11,
@@ -341,7 +341,7 @@
           15,
           19
         ],
-        "bestHumanVisibleLift10": 1.4,
+        "bestHumanVisibleLift10": 2.3,
         "worstBunchingRisk": 0.963,
         "read": "Reference Spline Fit is backed by 25 group contract(s) and 25 reference path(s); blocked stages: 3, 7, 11, 15, 19."
       },
@@ -363,16 +363,16 @@
         {
           "stage": 7,
           "decision": "no-runtime-keeper-yet",
-          "bestCandidateId": "stage7-target-starts-current-speed-p0",
+          "bestCandidateId": "stage7-centerline-spacing-spread-left-right-lead078-flat-widefield-centered-id-sd018",
           "expectedLift10": 0,
-          "targetVideoObjectFitLift10": 0.6,
+          "targetVideoObjectFitLift10": 0.3,
           "humanPerfectPotentialLift10": 0,
-          "humanVisibleLift10": 1.4,
+          "humanVisibleLift10": 2.3,
           "humanVisiblePass": false,
-          "spacingScore": 0.185,
-          "bunchingRisk": 0.811,
-          "arrivalContinuity": 0.712,
-          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 1.4/10 or fails visibility/arrival/spacing/bunching gates."
+          "spacingScore": 0.331,
+          "bunchingRisk": 0.8,
+          "arrivalContinuity": 0.928,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 2.3/10 or fails visibility/arrival/spacing/bunching gates."
         },
         {
           "stage": 11,
@@ -467,7 +467,7 @@
           15,
           19
         ],
-        "bestHumanVisibleLift10": 1.4,
+        "bestHumanVisibleLift10": 2.3,
         "worstBunchingRisk": 0.963,
         "read": "Phase-Order Scheduler is backed by 25 group contract(s) and 25 reference path(s); blocked stages: 3, 7, 11, 15, 19."
       },
@@ -489,16 +489,16 @@
         {
           "stage": 7,
           "decision": "no-runtime-keeper-yet",
-          "bestCandidateId": "stage7-target-starts-current-speed-p0",
+          "bestCandidateId": "stage7-centerline-spacing-spread-left-right-lead078-flat-widefield-centered-id-sd018",
           "expectedLift10": 0,
-          "targetVideoObjectFitLift10": 0.6,
+          "targetVideoObjectFitLift10": 0.3,
           "humanPerfectPotentialLift10": 0,
-          "humanVisibleLift10": 1.4,
+          "humanVisibleLift10": 2.3,
           "humanVisiblePass": false,
-          "spacingScore": 0.185,
-          "bunchingRisk": 0.811,
-          "arrivalContinuity": 0.712,
-          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 1.4/10 or fails visibility/arrival/spacing/bunching gates."
+          "spacingScore": 0.331,
+          "bunchingRisk": 0.8,
+          "arrivalContinuity": 0.928,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 2.3/10 or fails visibility/arrival/spacing/bunching gates."
         },
         {
           "stage": 11,
@@ -725,7 +725,7 @@
           15,
           19
         ],
-        "bestHumanVisibleLift10": 1.4,
+        "bestHumanVisibleLift10": 2.3,
         "worstBunchingRisk": 0.963,
         "read": "Lower-Field Scoreable Pass is backed by 25 group contract(s) and 25 reference path(s); blocked stages: 3, 7, 11, 15, 19."
       },
@@ -747,16 +747,16 @@
         {
           "stage": 7,
           "decision": "no-runtime-keeper-yet",
-          "bestCandidateId": "stage7-target-starts-current-speed-p0",
+          "bestCandidateId": "stage7-centerline-spacing-spread-left-right-lead078-flat-widefield-centered-id-sd018",
           "expectedLift10": 0,
-          "targetVideoObjectFitLift10": 0.6,
+          "targetVideoObjectFitLift10": 0.3,
           "humanPerfectPotentialLift10": 0,
-          "humanVisibleLift10": 1.4,
+          "humanVisibleLift10": 2.3,
           "humanVisiblePass": false,
-          "spacingScore": 0.185,
-          "bunchingRisk": 0.811,
-          "arrivalContinuity": 0.712,
-          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 1.4/10 or fails visibility/arrival/spacing/bunching gates."
+          "spacingScore": 0.331,
+          "bunchingRisk": 0.8,
+          "arrivalContinuity": 0.928,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 2.3/10 or fails visibility/arrival/spacing/bunching gates."
         },
         {
           "stage": 11,
@@ -851,7 +851,7 @@
           7,
           11
         ],
-        "bestHumanVisibleLift10": 1.4,
+        "bestHumanVisibleLift10": 2.3,
         "worstBunchingRisk": 0.963,
         "read": "Hook Return Arc is backed by 15 group contract(s) and 15 reference path(s); blocked stages: 3, 7, 11."
       },
@@ -873,16 +873,16 @@
         {
           "stage": 7,
           "decision": "no-runtime-keeper-yet",
-          "bestCandidateId": "stage7-target-starts-current-speed-p0",
+          "bestCandidateId": "stage7-centerline-spacing-spread-left-right-lead078-flat-widefield-centered-id-sd018",
           "expectedLift10": 0,
-          "targetVideoObjectFitLift10": 0.6,
+          "targetVideoObjectFitLift10": 0.3,
           "humanPerfectPotentialLift10": 0,
-          "humanVisibleLift10": 1.4,
+          "humanVisibleLift10": 2.3,
           "humanVisiblePass": false,
-          "spacingScore": 0.185,
-          "bunchingRisk": 0.811,
-          "arrivalContinuity": 0.712,
-          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 1.4/10 or fails visibility/arrival/spacing/bunching gates."
+          "spacingScore": 0.331,
+          "bunchingRisk": 0.8,
+          "arrivalContinuity": 0.928,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 2.3/10 or fails visibility/arrival/spacing/bunching gates."
         },
         {
           "stage": 11,
@@ -950,7 +950,7 @@
           15,
           19
         ],
-        "bestHumanVisibleLift10": 1.4,
+        "bestHumanVisibleLift10": 2.3,
         "worstBunchingRisk": 0.963,
         "read": "Exit Continuity is backed by 25 group contract(s) and 25 reference path(s); blocked stages: 3, 7, 11, 15, 19."
       },
@@ -972,16 +972,16 @@
         {
           "stage": 7,
           "decision": "no-runtime-keeper-yet",
-          "bestCandidateId": "stage7-target-starts-current-speed-p0",
+          "bestCandidateId": "stage7-centerline-spacing-spread-left-right-lead078-flat-widefield-centered-id-sd018",
           "expectedLift10": 0,
-          "targetVideoObjectFitLift10": 0.6,
+          "targetVideoObjectFitLift10": 0.3,
           "humanPerfectPotentialLift10": 0,
-          "humanVisibleLift10": 1.4,
+          "humanVisibleLift10": 2.3,
           "humanVisiblePass": false,
-          "spacingScore": 0.185,
-          "bunchingRisk": 0.811,
-          "arrivalContinuity": 0.712,
-          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 1.4/10 or fails visibility/arrival/spacing/bunching gates."
+          "spacingScore": 0.331,
+          "bunchingRisk": 0.8,
+          "arrivalContinuity": 0.928,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 2.3/10 or fails visibility/arrival/spacing/bunching gates."
         },
         {
           "stage": 11,
@@ -1076,7 +1076,7 @@
           15,
           19
         ],
-        "bestHumanVisibleLift10": 1.4,
+        "bestHumanVisibleLift10": 2.3,
         "worstBunchingRisk": 0.963,
         "read": "Persona Perfect-Route Probe is backed by 25 group contract(s) and 25 reference path(s); blocked stages: 3, 7, 11, 15, 19."
       },
@@ -1098,16 +1098,16 @@
         {
           "stage": 7,
           "decision": "no-runtime-keeper-yet",
-          "bestCandidateId": "stage7-target-starts-current-speed-p0",
+          "bestCandidateId": "stage7-centerline-spacing-spread-left-right-lead078-flat-widefield-centered-id-sd018",
           "expectedLift10": 0,
-          "targetVideoObjectFitLift10": 0.6,
+          "targetVideoObjectFitLift10": 0.3,
           "humanPerfectPotentialLift10": 0,
-          "humanVisibleLift10": 1.4,
+          "humanVisibleLift10": 2.3,
           "humanVisiblePass": false,
-          "spacingScore": 0.185,
-          "bunchingRisk": 0.811,
-          "arrivalContinuity": 0.712,
-          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 1.4/10 or fails visibility/arrival/spacing/bunching gates."
+          "spacingScore": 0.331,
+          "bunchingRisk": 0.8,
+          "arrivalContinuity": 0.928,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 2.3/10 or fails visibility/arrival/spacing/bunching gates."
         },
         {
           "stage": 11,
@@ -1191,15 +1191,15 @@
       "stage": 7,
       "label": "Challenging Stage 7-8",
       "playerMeaning": "Show that the second challenge has a new route vocabulary and not just faster copies of the first.",
-      "currentBlocker": "No runtime keeper: candidate regresses human-visible challenge readability by 1.4/10 or fails visibility/arrival/spacing/bunching gates.",
-      "bestCandidateId": "stage7-target-starts-current-speed-p0",
+      "currentBlocker": "No runtime keeper: candidate regresses human-visible challenge readability by 2.3/10 or fails visibility/arrival/spacing/bunching gates.",
+      "bestCandidateId": "stage7-centerline-spacing-spread-left-right-lead078-flat-widefield-centered-id-sd018",
       "scoreSignals": {
         "expectedLift10": 0,
-        "targetVideoObjectFitLift10": 0.6,
+        "targetVideoObjectFitLift10": 0.3,
         "humanPerfectPotentialLift10": 0,
-        "humanVisibleLift10": 1.4,
-        "bunchingRisk": 0.811,
-        "spacingScore": 0.185
+        "humanVisibleLift10": 2.3,
+        "bunchingRisk": 0.8,
+        "spacingScore": 0.331
       },
       "primaryPrimitives": [
         "lead-in-continuity",
@@ -1302,5 +1302,21 @@
     "promotionReady": false,
     "read": "Latest lead-in prototype stage7-route-leadin-stair-step-lead078-flat-fan-sd018 reduced magic appearance risk to 0.072 with arrival continuity 0.928, but bunching remains 0.75 and blocks promotion."
   },
-  "nextBestStep": "Build a true group-spacing-field primitive that represents each group as a centerline plus stable member offsets, then test it first on Challenging Stage 7 before broadening to the first five challenge stages."
+  "spacingFieldPrototypeEvidence": {
+    "stage": 7,
+    "candidateId": "stage7-centerline-spacing-spread-left-right-lead078-flat-readablefield-refwide-fan-sd014",
+    "expectedScore10": 5.7,
+    "targetVideoObjectFitScore10": 4,
+    "humanPerfectPotentialScore10": 7.4,
+    "humanVisibleScore10": 7.9,
+    "arrivalContinuity": 0.928,
+    "magicAppearanceRisk": 0.072,
+    "spacingScore": 0.507,
+    "bunchingRisk": 0.6,
+    "visualPresencePass": true,
+    "promotionReady": false,
+    "processWin": true,
+    "read": "Latest centerline spacing prototype stage7-centerline-spacing-spread-left-right-lead078-flat-readablefield-refwide-fan-sd014 improved human-visible readability to 7.9/10 with bunching risk 0.6, spacing 0.507, and magic risk 0.072. It is still not runtime-ready because target-video fit is 4/10 and expected-label lift is not material."
+  },
+  "nextBestStep": "Compose the centerline spacing field with reference-spline fit and phase-order scheduling on Challenging Stage 7, then accept only if target-video lift clears the recorded full-analyzer calibration without losing human-visible readability."
 }

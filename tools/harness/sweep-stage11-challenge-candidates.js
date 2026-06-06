@@ -955,6 +955,10 @@ function specAwareLayoutOverride(layoutOverride){
   const deconflictPhases = Array.isArray(layout.groupDeconflictPhases) ? layout.groupDeconflictPhases : [];
   const deconflictLaneBiases = Array.isArray(layout.groupDeconflictLaneBiases) ? layout.groupDeconflictLaneBiases : [];
   const deconflictYOffsets = Array.isArray(layout.groupDeconflictYOffsets) ? layout.groupDeconflictYOffsets : [];
+  const spacingFieldSpreadXs = Array.isArray(layout.groupSpacingFieldSpreadXs) ? layout.groupSpacingFieldSpreadXs : [];
+  const spacingFieldSpreadYs = Array.isArray(layout.groupSpacingFieldSpreadYs) ? layout.groupSpacingFieldSpreadYs : [];
+  const spacingFieldGateS = Array.isArray(layout.groupSpacingFieldGateS) ? layout.groupSpacingFieldGateS : [];
+  const spacingFieldPhaseS = Array.isArray(layout.groupSpacingFieldPhaseS) ? layout.groupSpacingFieldPhaseS : [];
   const routeOffsetsX = Array.isArray(layout.groupRouteOffsetsX) ? layout.groupRouteOffsetsX : [];
   const routeOffsetsY = Array.isArray(layout.groupRouteOffsetsY) ? layout.groupRouteOffsetsY : [];
   const routeCurveXs = Array.isArray(layout.groupRouteCurveXs) ? layout.groupRouteCurveXs : [];
@@ -982,6 +986,10 @@ function specAwareLayoutOverride(layoutOverride){
   const scalarDeconflictPhase = Number.isFinite(+layout.deconflictPhase) ? +layout.deconflictPhase : null;
   const scalarDeconflictLaneBias = Number.isFinite(+layout.deconflictLaneBias) ? +layout.deconflictLaneBias : null;
   const scalarDeconflictYOffset = Number.isFinite(+layout.deconflictYOffset) ? +layout.deconflictYOffset : null;
+  const scalarSpacingFieldSpreadX = Number.isFinite(+layout.spacingFieldSpreadX) ? +layout.spacingFieldSpreadX : null;
+  const scalarSpacingFieldSpreadY = Number.isFinite(+layout.spacingFieldSpreadY) ? +layout.spacingFieldSpreadY : null;
+  const scalarSpacingFieldGateS = Number.isFinite(+layout.spacingFieldGateS) ? +layout.spacingFieldGateS : null;
+  const scalarSpacingFieldPhaseS = Number.isFinite(+layout.spacingFieldPhaseS) ? +layout.spacingFieldPhaseS : null;
   const scalarRouteOffsetX = Number.isFinite(+layout.routeOffsetX) ? +layout.routeOffsetX : null;
   const scalarRouteOffsetY = Number.isFinite(+layout.routeOffsetY) ? +layout.routeOffsetY : null;
   const scalarRouteCurveX = Number.isFinite(+layout.routeCurveX) ? +layout.routeCurveX : null;
@@ -1015,6 +1023,10 @@ function specAwareLayoutOverride(layoutOverride){
     const deconflictPhase = Number.isFinite(+deconflictPhases[index]) ? +deconflictPhases[index] : scalarDeconflictPhase;
     const deconflictLaneBias = Number.isFinite(+deconflictLaneBiases[index]) ? +deconflictLaneBiases[index] : scalarDeconflictLaneBias;
     const deconflictYOffset = Number.isFinite(+deconflictYOffsets[index]) ? +deconflictYOffsets[index] : scalarDeconflictYOffset;
+    const spacingFieldSpreadX = Number.isFinite(+spacingFieldSpreadXs[index]) ? +spacingFieldSpreadXs[index] : scalarSpacingFieldSpreadX;
+    const spacingFieldSpreadY = Number.isFinite(+spacingFieldSpreadYs[index]) ? +spacingFieldSpreadYs[index] : scalarSpacingFieldSpreadY;
+    const spacingFieldGate = Number.isFinite(+spacingFieldGateS[index]) ? +spacingFieldGateS[index] : scalarSpacingFieldGateS;
+    const spacingFieldPhase = Number.isFinite(+spacingFieldPhaseS[index]) ? +spacingFieldPhaseS[index] : scalarSpacingFieldPhaseS;
     const routeOffsetX = Number.isFinite(+routeOffsetsX[index]) ? +routeOffsetsX[index] : scalarRouteOffsetX;
     const routeOffsetY = Number.isFinite(+routeOffsetsY[index]) ? +routeOffsetsY[index] : scalarRouteOffsetY;
     const routeCurveX = Number.isFinite(+routeCurveXs[index]) ? +routeCurveXs[index] : scalarRouteCurveX;
@@ -1044,6 +1056,10 @@ function specAwareLayoutOverride(layoutOverride){
     if(Number.isFinite(+deconflictPhase)) controls.deconflictPhase = round(+deconflictPhase, 3);
     if(Number.isFinite(+deconflictLaneBias)) controls.deconflictLaneBias = round(+deconflictLaneBias, 3);
     if(Number.isFinite(+deconflictYOffset)) controls.deconflictYOffset = round(+deconflictYOffset, 3);
+    if(Number.isFinite(+spacingFieldSpreadX)) controls.spacingFieldSpreadX = round(+spacingFieldSpreadX, 3);
+    if(Number.isFinite(+spacingFieldSpreadY)) controls.spacingFieldSpreadY = round(+spacingFieldSpreadY, 3);
+    if(Number.isFinite(+spacingFieldGate)) controls.spacingFieldGateS = round(+spacingFieldGate, 3);
+    if(Number.isFinite(+spacingFieldPhase)) controls.spacingFieldPhaseS = round(+spacingFieldPhase, 3);
     if(Number.isFinite(+routeOffsetX)) controls.routeOffsetX = round(+routeOffsetX, 3);
     if(Number.isFinite(+routeOffsetY)) controls.routeOffsetY = round(+routeOffsetY, 3);
     if(Number.isFinite(+routeCurveX)) controls.routeCurveX = round(+routeCurveX, 3);
@@ -1795,6 +1811,70 @@ function candidateDefinitions(){
           }
         }
       }
+      const centerlineEnvelopes = [
+        { id: 'refwide', lane: [1.36, 1.24, 1.16, 1.36, 1.24], row: [1.14, 1.22, 1.1, 1.24, 1.22] },
+        { id: 'centered', lane: [1.16, 1.1, 1.04, 1.16, 1.1], row: [1.04, 1.08, 1.02, 1.08, 1.06] }
+      ];
+      const centerlineSpacingFields = [
+        {
+          id: 'compactfield',
+          x: [3.5, 4, 3, 4, 3.5],
+          y: [2, 2.5, 2, 2.5, 2],
+          gate: [0, 0, 0, 0, 0],
+          phase: [0, 0, 0, 0, 0]
+        },
+        {
+          id: 'readablefield',
+          x: [5, 5.5, 4.5, 5.5, 5],
+          y: [3, 3.5, 3, 3.5, 3],
+          gate: [0, 0, 0, 0, 0],
+          phase: [0, 0.025, 0.05, 0.075, 0.1]
+        },
+        {
+          id: 'widefield',
+          x: [7, 7.5, 6, 7.5, 6.5],
+          y: [4, 4.5, 3.5, 4.5, 4],
+          gate: [0.45, 0.45, 0.4, 0.5, 0.45],
+          phase: [0, 0.03, 0.06, 0.09, 0.12]
+        }
+      ];
+      for(const contract of routeContracts.slice(0, 2)){
+        for(const leadIn of leadInContracts.slice(0, 2)){
+          for(const spacing of centerlineSpacingFields){
+            for(const envelope of centerlineEnvelopes){
+              for(const laneOrder of routeBaseLaneOrders){
+                for(const slotDelay of [0.14, 0.18]){
+                  candidates.push({
+                    id: `stage7-centerline-spacing-${contract.id}-${leadIn.id}-${spacing.id}-${envelope.id}-${laneOrder.id}-sd${String(slotDelay).replace('.','')}`,
+                    description: `Stage 7 centerline spacing-field candidate: route ${contract.id}, lead-in ${leadIn.id}, stable member field ${spacing.id}, envelope ${envelope.id}, lane order ${laneOrder.id}, slot delay ${slotDelay}.`,
+                    layoutOverride: Object.assign({}, base, {
+                      groupLaneSpreadScales: envelope.lane,
+                      groupRowSpreadScales: envelope.row,
+                      groupSlotDelays: Array.from({ length: 5 }, () => slotDelay),
+                      groupLaneStaggers: Array.from({ length: 5 }, () => 0.035),
+                      groupLaneOrders: Array.from({ length: 5 }, () => laneOrder.value),
+                      groupLanePhaseOffsets: Array.from({ length: 5 }, () => routePhase),
+                      groupRouteOffsetsX: contract.x,
+                      groupRouteOffsetsY: contract.y,
+                      groupRouteCurveXs: contract.curveX,
+                      groupRouteCurveYs: contract.curveY,
+                      groupRoutePhases: contract.phase,
+                      groupLeadInS: leadIn.leadInS,
+                      groupLeadInArcs: leadIn.arc,
+                      groupLeadInStartYOffsets: leadIn.startY,
+                      groupLeadInSideOffsets: leadIn.side,
+                      groupSpacingFieldSpreadXs: spacing.x,
+                      groupSpacingFieldSpreadYs: spacing.y,
+                      groupSpacingFieldGateS: spacing.gate,
+                      groupSpacingFieldPhaseS: spacing.phase
+                    })
+                  });
+                }
+              }
+            }
+          }
+        }
+      }
       const comboDeconflicts = [
         { id: 'wide-soft-flat', spread: [16, 16, 14, 16, 14], bias: [2.5, 2.5, 2, 2.5, 2], y: [0, 0, 0, 0, 0], phaseSet: lanePhaseSets[0].value },
         { id: 'strong-soft-tiered', spread: [12, 12, 10, 12, 10], bias: [2.5, 2.5, 2, 2.5, 2], y: [4, 3, 4, 5, 3], phaseSet: lanePhaseSets[1].value }
@@ -2343,6 +2423,10 @@ function summarizeCandidate(row){
     groupDeconflictLaneBiases: row.layout?.groupDeconflictLaneBiases || [],
     groupDeconflictYOffsets: row.layout?.groupDeconflictYOffsets || [],
     groupDeconflictPhases: row.layout?.groupDeconflictPhases || [],
+    groupSpacingFieldSpreadXs: row.layout?.groupSpacingFieldSpreadXs || [],
+    groupSpacingFieldSpreadYs: row.layout?.groupSpacingFieldSpreadYs || [],
+    groupSpacingFieldGateS: row.layout?.groupSpacingFieldGateS || [],
+    groupSpacingFieldPhaseS: row.layout?.groupSpacingFieldPhaseS || [],
     groupRouteOffsetsX: row.layout?.groupRouteOffsetsX || [],
     groupRouteOffsetsY: row.layout?.groupRouteOffsetsY || [],
     groupRouteCurveXs: row.layout?.groupRouteCurveXs || [],
@@ -2439,6 +2523,8 @@ function buildMarkdown(report){
   const routeRow = row => `| ${row.candidateId} | ${row.humanVisibleGuardrails?.bunchingRisk ?? 'n/a'} | ${row.humanVisibleGuardrails?.magicAppearanceRisk ?? 'n/a'} | ${row.humanVisibleGuardrails?.spacingScore ?? 'n/a'} | ${row.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 | ${row.humanPerfectPotentialScore10 ?? 'n/a'}/10 | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${(row.groupLeadInS || []).join(', ') || 'default'} | ${(row.groupRouteOffsetsX || []).join(', ') || 'none'} | ${(row.groupRouteOffsetsY || []).join(', ') || 'none'} |`;
   const routeRows = (report.diagnostics?.routeAwareTop || []).map(routeRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
   const leadInRows = (report.diagnostics?.leadInTop || []).map(routeRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const spacingFieldRow = row => `| ${row.candidateId} | ${row.humanVisibleGuardrails?.bunchingRisk ?? 'n/a'} | ${row.humanVisibleGuardrails?.magicAppearanceRisk ?? 'n/a'} | ${row.humanVisibleGuardrails?.spacingScore ?? 'n/a'} | ${row.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 | ${row.humanPerfectPotentialScore10 ?? 'n/a'}/10 | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${(row.groupSpacingFieldSpreadXs || []).join(', ') || 'none'} | ${(row.groupSpacingFieldSpreadYs || []).join(', ') || 'none'} | ${(row.groupSpacingFieldGateS || []).join(', ') || 'full'} |`;
+  const spacingFieldRows = (report.diagnostics?.spacingFieldTop || []).map(spacingFieldRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
   return `# Stage ${report.stage} Challenge Candidate Sweep
 
 Generated: ${report.generatedAt}
@@ -2461,7 +2547,7 @@ Stage ${report.stage} currently has safe challenge behavior but still does not c
 - Promotion wins: ${(report.summary.promotionWins || []).length ? report.summary.promotionWins.join(' ') : 'none'}.
 - Player-facing meaning: ${report.summary.playerMeaning}
 - Process meaning: ${report.summary.processMeaning}
-- Candidate retention: ${report.candidateRetention?.retained ?? report.candidates.length}/${report.candidateRetention?.totalMeasured ?? report.candidateCount} retained; ${report.candidateRetention?.targetTimingDiagnostics ?? 0} target-timing diagnostics, ${report.candidateRetention?.targetControlDiagnostics ?? 0} target-control diagnostics, ${report.candidateRetention?.targetReferencePathDiagnostics ?? 0} target-reference-path diagnostics, ${report.candidateRetention?.pathShapeDiagnostics ?? 0} path-shape diagnostics, ${report.candidateRetention?.readabilityDiagnostics ?? 0} readability diagnostics, and ${report.candidateRetention?.leastBunchedDiagnostics ?? 0} least-bunched diagnostics preserved.
+- Candidate retention: ${report.candidateRetention?.retained ?? report.candidates.length}/${report.candidateRetention?.totalMeasured ?? report.candidateCount} retained; ${report.candidateRetention?.targetTimingDiagnostics ?? 0} target-timing diagnostics, ${report.candidateRetention?.targetControlDiagnostics ?? 0} target-control diagnostics, ${report.candidateRetention?.targetReferencePathDiagnostics ?? 0} target-reference-path diagnostics, ${report.candidateRetention?.pathShapeDiagnostics ?? 0} path-shape diagnostics, ${report.candidateRetention?.readabilityDiagnostics ?? 0} readability diagnostics, ${report.candidateRetention?.leastBunchedDiagnostics ?? 0} least-bunched diagnostics, and ${report.candidateRetention?.spacingFieldDiagnostics ?? 0} spacing-field diagnostics preserved.
 
 ## Top Candidates
 
@@ -2534,6 +2620,14 @@ These rows isolate candidates that explicitly manipulate the challenge lead-in p
 | Candidate | Bunching Risk | Magic Risk | Spacing | Human-Visible | Human-Perfect | Expected Labels | Target-Video Fit | Lead-In S | Route X Offsets | Route Y Offsets |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
 ${leadInRows}
+
+### Centerline Spacing Field Diagnostics
+
+These rows test stable per-member offsets from a group centerline. They are intended to keep each wave readable as a coherent formation rather than relying on late deconfliction or letting enemies visually bunch into pairs.
+
+| Candidate | Bunching Risk | Magic Risk | Spacing | Human-Visible | Human-Perfect | Expected Labels | Target-Video Fit | Field X | Field Y | Gate S |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
+${spacingFieldRows}
 
 ## Next Step
 
@@ -2706,7 +2800,7 @@ async function main(){
     ? +(row.humanVisibleGuardrails.magicAppearanceRisk)
     : 1;
   const leastBunchedDiagnostics = scored
-    .filter(row => String(row.candidateId || '').includes('stage7-read') || String(row.candidateId || '').includes('stage7-deconflict') || String(row.candidateId || '').includes('stage7-route'))
+    .filter(row => String(row.candidateId || '').includes('stage7-read') || String(row.candidateId || '').includes('stage7-deconflict') || String(row.candidateId || '').includes('stage7-route') || String(row.candidateId || '').includes('stage7-centerline-spacing'))
     .sort((a, b) => bunchingRiskOf(a) - bunchingRiskOf(b)
       || magicRiskOf(a) - magicRiskOf(b)
       || (b.humanVisibleGuardrails?.spacingScore || 0) - (a.humanVisibleGuardrails?.spacingScore || 0)
@@ -2736,6 +2830,16 @@ async function main(){
       || (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0)
       || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
     .slice(0, 12);
+  const spacingFieldDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('stage7-centerline-spacing') || (row.layout?.groupSpacingFieldSpreadXs || []).length)
+    .sort((a, b) => bunchingRiskOf(a) - bunchingRiskOf(b)
+      || magicRiskOf(a) - magicRiskOf(b)
+      || (b.humanVisibleGuardrails?.spacingScore || 0) - (a.humanVisibleGuardrails?.spacingScore || 0)
+      || (b.humanVisibleGuardrails?.score10 || 0) - (a.humanVisibleGuardrails?.score10 || 0)
+      || (b.humanPerfectPotential?.score10 || 0) - (a.humanPerfectPotential?.score10 || 0)
+      || (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0)
+      || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 12);
   const retainedById = new Map();
   for(const row of scored.slice(0, retainedCandidateLimit)) retainedById.set(row.candidateId, row);
   for(const row of targetTimingDiagnostics) retainedById.set(row.candidateId, row);
@@ -2747,6 +2851,7 @@ async function main(){
   for(const row of deconflictDiagnostics) retainedById.set(row.candidateId, row);
   for(const row of routeAwareDiagnostics) retainedById.set(row.candidateId, row);
   for(const row of leadInDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of spacingFieldDiagnostics) retainedById.set(row.candidateId, row);
   const retainedCandidates = Array.from(retainedById.values());
   if(!retainedCandidates.some(row => row.candidateId === baseline.candidateId)){
     retainedCandidates.push(baseline);
@@ -2848,7 +2953,8 @@ async function main(){
       deconflictDiagnostics: deconflictDiagnostics.length,
       routeAwareDiagnostics: routeAwareDiagnostics.length,
       leadInDiagnostics: leadInDiagnostics.length,
-      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score, the baseline row, and top target-timing/target-control/target-reference-path/path-shape/readability/least-bunched/deconflict/route-aware/lead-in diagnostic candidates; use candidateCount for the full measured search size.`
+      spacingFieldDiagnostics: spacingFieldDiagnostics.length,
+      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score, the baseline row, and top target-timing/target-control/target-reference-path/path-shape/readability/least-bunched/deconflict/route-aware/lead-in/spacing-field diagnostic candidates; use candidateCount for the full measured search size.`
     },
     diagnostics: {
       targetTimingTop: targetTimingDiagnostics.map(summarizeCandidate),
@@ -2859,7 +2965,8 @@ async function main(){
       leastBunchedTop: leastBunchedDiagnostics.map(summarizeCandidate),
       deconflictTop: deconflictDiagnostics.map(summarizeCandidate),
       routeAwareTop: routeAwareDiagnostics.map(summarizeCandidate),
-      leadInTop: leadInDiagnostics.map(summarizeCandidate)
+      leadInTop: leadInDiagnostics.map(summarizeCandidate),
+      spacingFieldTop: spacingFieldDiagnostics.map(summarizeCandidate)
     },
     measurementPolicy: {
       scope: `harness-only stage-${STAGE} challenge layout candidates`,

@@ -139,6 +139,24 @@ function challengeDeconflictOffset(e,u,side,slot,row,wave,sweep){
  };
 }
 
+function challengeSpacingFieldOffset(e,u,side,slot,row,wave,sweep){
+ const spreadX=Number.isFinite(+e.spacingFieldSpreadX)?+e.spacingFieldSpreadX:0;
+ const spreadY=Number.isFinite(+e.spacingFieldSpreadY)?+e.spacingFieldSpreadY:0;
+ if(!spreadX&&!spreadY)return null;
+ const gateS=Number.isFinite(+e.spacingFieldGateS)&&+e.spacingFieldGateS>0?+e.spacingFieldGateS:0;
+ const phase=Number.isFinite(+e.spacingFieldPhaseS)?+e.spacingFieldPhaseS:0;
+ const gate=gateS>0?cl((u+phase+gateS*.28)/gateS,0,1):1;
+ const slotCenter=(Number.isFinite(+slot)?+slot:0)-1.5;
+ const rowSign=row?1:-1;
+ const columnSign=slot%2?1:-1;
+ const waveSign=wave%2?-1:1;
+ const sweepSign=sweep||side||1;
+ return {
+  x:gate*(slotCenter*spreadX+rowSign*spreadX*.18+sweepSign*waveSign*spreadX*.08),
+  y:gate*(rowSign*spreadY+columnSign*spreadY*.22)
+ };
+}
+
 function challengeRouteOffset(e,u){
  const x=Number.isFinite(+e.routeOffsetX)?+e.routeOffsetX:0;
  const y=Number.isFinite(+e.routeOffsetY)?+e.routeOffsetY:0;
@@ -168,6 +186,13 @@ function applyChallengeDeconflictOffset(e,u,side,slot,row,wave,sweep,gain=1){
  if(!offset)return;
  e.x+=offset.x*gain;
  e.y+=offset.y*gain;
+}
+
+function applyChallengeSpacingFieldOffset(e,u,side,slot,row,wave,sweep){
+ const offset=challengeSpacingFieldOffset(e,u,side,slot,row,wave,sweep);
+ if(!offset)return;
+ e.x+=offset.x;
+ e.y+=offset.y;
 }
 
 function applyReferenceChallengePath(e,u,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp){
@@ -241,18 +266,23 @@ function referenceChallengeFirstPosition(e,laneX,topY,side,slot,row,wave,sweep,a
   x:px*PLAY_W+laneOffset+(Number.isFinite(+e.slotXOffset)?+e.slotXOffset:0)+Math.sin((slot*.21+wave*.37)*4.4)*2.2*arcAmp,
   y:py*PLAY_H+rowOffset+(Number.isFinite(+e.slotYOffset)?+e.slotYOffset:0)
  };
- const offset=challengeDeconflictOffset(e,0,side,slot,row,wave,sweep);
- if(offset){
-  target.x+=offset.x;
-  target.y+=offset.y;
- }
- const routeOffset=challengeRouteOffset(e,0);
- if(routeOffset){
-  target.x+=routeOffset.x;
-  target.y+=routeOffset.y;
- }
- return target;
-}
+	 const offset=challengeDeconflictOffset(e,0,side,slot,row,wave,sweep);
+	 const routeOffset=challengeRouteOffset(e,0);
+	 if(routeOffset){
+	  target.x+=routeOffset.x;
+	  target.y+=routeOffset.y;
+	 }
+	 const spacingOffset=challengeSpacingFieldOffset(e,0,side,slot,row,wave,sweep);
+	 if(spacingOffset){
+	  target.x+=spacingOffset.x;
+	  target.y+=spacingOffset.y;
+	 }
+	 if(offset){
+	  target.x+=offset.x;
+	  target.y+=offset.y;
+	 }
+	 return target;
+	}
 
 function applyReferenceChallengeSpawnLeadIn(e,dt,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp){
  if(!e.referencePath)return false;
@@ -277,19 +307,24 @@ function applyReferenceChallengeSpawnLeadIn(e,dt,laneX,topY,side,slot,row,wave,s
 }
 
 function genericChallengeFirstPosition(e,laneX,topY,side,slot,row,wave,sweep){
- const target={x:laneX,y:topY};
- const offset=challengeDeconflictOffset(e,0,side,slot,row,wave,sweep);
- if(offset){
-  target.x+=offset.x;
-  target.y+=offset.y;
- }
- const routeOffset=challengeRouteOffset(e,0);
- if(routeOffset){
-  target.x+=routeOffset.x;
-  target.y+=routeOffset.y;
- }
- return target;
-}
+	 const target={x:laneX,y:topY};
+	 const routeOffset=challengeRouteOffset(e,0);
+	 if(routeOffset){
+	  target.x+=routeOffset.x;
+	  target.y+=routeOffset.y;
+	 }
+	 const spacingOffset=challengeSpacingFieldOffset(e,0,side,slot,row,wave,sweep);
+	 if(spacingOffset){
+	  target.x+=spacingOffset.x;
+	  target.y+=spacingOffset.y;
+	 }
+	 const offset=challengeDeconflictOffset(e,0,side,slot,row,wave,sweep);
+	 if(offset){
+	  target.x+=offset.x;
+	  target.y+=offset.y;
+	 }
+	 return target;
+	}
 
 function applyGenericChallengeSpawnLeadIn(e,dt,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp){
  const lead=Number.isFinite(+e.leadInS)?+e.leadInS:0;
@@ -601,8 +636,9 @@ function updateChallengeEnemy(state,e,dt){
 	  }
 	 }
 	 }
- applyChallengeRouteOffset(e,u);
- applyChallengeDeconflictOffset(e,u,side,slot,row,wave,sweep);
+	 applyChallengeRouteOffset(e,u);
+	 applyChallengeSpacingFieldOffset(e,u,side,slot,row,wave,sweep);
+	 applyChallengeDeconflictOffset(e,u,side,slot,row,wave,sweep);
  const lowerFieldBias=Number.isFinite(+e.lowerFieldBias)?+e.lowerFieldBias:0;
  if(lowerFieldBias&&u>2.4){
   const lowerQ=cl((u-2.4)/8.8,0,1);
