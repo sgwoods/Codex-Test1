@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "challenge-stage-readability-visuals",
-  "generatedAt": "2026-06-05T14:56:22.303Z",
-  "commit": "8b7a83cb9",
+  "generatedAt": "2026-06-06T02:54:08.996Z",
+  "commit": "67c8a70af",
   "branch": "codex/aurora-challenge-movement-grammar",
   "stage": 7,
   "sourceSweep": "reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json",
@@ -20,7 +20,7 @@
       "expectedGroups": 5,
       "noSafetyRegression": true,
       "bestMatchLabelId": "challenge-2-arrival-group-1",
-      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.3, spacing 0, bunching risk 1."
+      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.3, magic-appearance risk 0.7, spacing 0, bunching risk 1."
     },
     {
       "label": "Best Selection",
@@ -35,7 +35,7 @@
       "expectedGroups": 5,
       "noSafetyRegression": true,
       "bestMatchLabelId": "challenge-2-arrival-group-1",
-      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.71, spacing 0.19, bunching risk 0.81."
+      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.71, magic-appearance risk 0.29, spacing 0.19, bunching risk 0.81."
     },
     {
       "label": "Best Readability",
@@ -50,45 +50,60 @@
       "expectedGroups": 5,
       "noSafetyRegression": true,
       "bestMatchLabelId": "challenge-2-arrival-group-1",
-      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.93, spacing 0.37, bunching risk 0.75."
+      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.93, magic-appearance risk 0.07, spacing 0.37, bunching risk 0.75."
     },
     {
       "label": "Least Bunched",
-      "candidateId": "stage7-read-balanced-balanced-id-ls0-sd014-ripple",
-      "expectedScore10": 5.4,
-      "targetVideoObjectFitScore10": 4.3,
+      "candidateId": "stage7-deconflict-strong-softbias-tiered-zipper",
+      "expectedScore10": 5.6,
+      "targetVideoObjectFitScore10": 4,
       "humanPerfectPotentialScore10": 7.4,
-      "humanVisibleScore10": 7.6,
-      "bunchingRisk": 0.733,
-      "spacingScore": 0.379,
+      "humanVisibleScore10": 7.5,
+      "bunchingRisk": 0.688,
+      "spacingScore": 0.347,
       "visibleGroupCount": 5,
       "expectedGroups": 5,
       "noSafetyRegression": true,
       "bestMatchLabelId": "challenge-2-arrival-group-1",
-      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.93, spacing 0.38, bunching risk 0.73."
+      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.93, magic-appearance risk 0.07, spacing 0.35, bunching risk 0.69."
+    },
+    {
+      "label": "Best Route",
+      "candidateId": "stage7-route-deconflict-spread-left-right-wide-soft-flat-fan-sd016",
+      "expectedScore10": 5.7,
+      "targetVideoObjectFitScore10": 4,
+      "humanPerfectPotentialScore10": 7.3,
+      "humanVisibleScore10": 7.5,
+      "bunchingRisk": 0.75,
+      "spacingScore": 0.324,
+      "visibleGroupCount": 5,
+      "expectedGroups": 5,
+      "noSafetyRegression": true,
+      "bestMatchLabelId": "challenge-2-arrival-group-1",
+      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.93, magic-appearance risk 0.07, spacing 0.32, bunching risk 0.75."
     },
     {
       "label": "Best Deconflict",
-      "candidateId": "stage7-deconflict-light-nobias-flat-fanphase",
-      "expectedScore10": 5.6,
-      "targetVideoObjectFitScore10": 3.8,
-      "humanPerfectPotentialScore10": 7.2,
-      "humanVisibleScore10": 7.3,
-      "bunchingRisk": 0.875,
-      "spacingScore": 0.313,
+      "candidateId": "stage7-deconflict-wide-softbias-flat-sync",
+      "expectedScore10": 5.7,
+      "targetVideoObjectFitScore10": 4,
+      "humanPerfectPotentialScore10": 7.3,
+      "humanVisibleScore10": 7.5,
+      "bunchingRisk": 0.688,
+      "spacingScore": 0.347,
       "visibleGroupCount": 5,
       "expectedGroups": 5,
       "noSafetyRegression": true,
       "bestMatchLabelId": "challenge-2-arrival-group-1",
-      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.86, spacing 0.31, bunching risk 0.88."
+      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.93, magic-appearance risk 0.07, spacing 0.35, bunching risk 0.69."
     }
   ],
   "summary": {
     "baselineCandidateId": "baseline-current",
     "baselineBunchingRisk": 1,
-    "leastBunchedCandidateId": "stage7-read-balanced-balanced-id-ls0-sd014-ripple",
-    "leastBunchedBunchingRisk": 0.733,
-    "bunchingRiskDelta": -0.267,
+    "leastBunchedCandidateId": "stage7-deconflict-strong-softbias-tiered-zipper",
+    "leastBunchedBunchingRisk": 0.688,
+    "bunchingRiskDelta": -0.312,
     "playerMeaning": "This artifact makes swarm readability review visual: it shows whether candidate grammar reduced clumping without hiding scoreability, identity, or safety tradeoffs."
   }
 }

@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage7-authoring-contract",
+  "generatedAt": "2026-06-06T02:45:47.485Z",
+  "commit": "67c8a70af",
+  "branch": "codex/aurora-challenge-movement-grammar",
+  "stage": 7,
+  "challengeNumber": 2,
+  "humanName": "Challenging Stage 2",
+  "sourceArtifacts": {
+    "sweep": "reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json",
+    "objectTracks": "reference-artifacts/analyses/galaga-challenge-object-tracks/latest.json",
+    "underperformance": "reference-artifacts/analyses/challenge-deconflict-underperformance/latest.json"
+  },
+  "current": {
+    "best": {
+      "candidateId": "stage7-target-starts-current-speed-p0",
+      "expectedScore10": 5.7,
+      "targetVideoObjectFitScore10": 4.5,
+      "humanPerfectPotentialScore10": 7.5,
+      "humanVisibleScore10": 6.6,
+      "bunchingRisk": 0.811,
+      "magicAppearanceRisk": 0.288,
+      "spacingScore": 0.185,
+      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.71, magic-appearance risk 0.29, spacing 0.19, bunching risk 0.81."
+    },
+    "leastBunched": {
+      "candidateId": "stage7-deconflict-strong-softbias-tiered-zipper",
+      "expectedScore10": 5.6,
+      "targetVideoObjectFitScore10": 4,
+      "humanPerfectPotentialScore10": 7.4,
+      "humanVisibleScore10": 7.5,
+      "bunchingRisk": 0.688,
+      "magicAppearanceRisk": 0.072,
+      "spacingScore": 0.347,
+      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.93, magic-appearance risk 0.07, spacing 0.35, bunching risk 0.69."
+    },
+    "routeAware": {
+      "candidateId": "stage7-route-deconflict-spread-left-right-wide-soft-flat-fan-sd016",
+      "expectedScore10": 5.7,
+      "targetVideoObjectFitScore10": 4,
+      "humanPerfectPotentialScore10": 7.3,
+      "humanVisibleScore10": 7.5,
+      "bunchingRisk": 0.75,
+      "magicAppearanceRisk": 0.072,
+      "spacingScore": 0.324,
+      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.93, magic-appearance risk 0.07, spacing 0.32, bunching risk 0.75."
+    },
+    "keeperDecision": "no-runtime-keeper-yet"
+  },
+  "targetGroups": [
+    {
+      "groupIndex": 1,
+      "trackCount": 16,
+      "visibleStartS": 0,
+      "visibleEndS": 1.88,
+      "entrySide": "center",
+      "exitSide": "left",
+      "xRange": 0.617,
+      "yRange": 0.177,
+      "pathLength": 0.118,
+      "lowerFieldShare": 0.982,
+      "read": "Target group 1 tracks 16 object trace(s), visible 0-1.88s, path 0.12, x/y range 0.62/0.18."
+    },
+    {
+      "groupIndex": 2,
+      "trackCount": 9,
+      "visibleStartS": 2.88,
+      "visibleEndS": 6.38,
+      "entrySide": "center",
+      "exitSide": "center",
+      "xRange": 0.186,
+      "yRange": 0.677,
+      "pathLength": 0.169,
+      "lowerFieldShare": 0.312,
+      "read": "Target group 2 tracks 9 object trace(s), visible 2.88-6.38s, path 0.17, x/y range 0.19/0.68."
+    },
+    {
+      "groupIndex": 3,
+      "trackCount": 2,
+      "visibleStartS": 4.25,
+      "visibleEndS": 5,
+      "entrySide": "center",
+      "exitSide": "center",
+      "xRange": 0.053,
+      "yRange": 0.085,
+      "pathLength": 0.154,
+      "lowerFieldShare": 1,
+      "read": "Target group 3 tracks 2 object trace(s), visible 4.25-5s, path 0.15, x/y range 0.05/0.08."
+    },
+    {
+      "groupIndex": 4,
+      "trackCount": 25,
+      "visibleStartS": 7.13,
+      "visibleEndS": 10.38,
+      "entrySide": "left",
+      "exitSide": "center",
+      "xRange": 0.886,
+      "yRange": 0.68,
+      "pathLength": 0.147,
+      "lowerFieldShare": 0.516,
+      "read": "Target group 4 tracks 25 object trace(s), visible 7.13-10.38s, path 0.15, x/y range 0.89/0.68."
+    },
+    {
+      "groupIndex": 5,
+      "trackCount": 9,
+      "visibleStartS": 13.38,
+      "visibleEndS": 15.88,
+      "entrySide": "center",
+      "exitSide": "center",
+      "xRange": 0.145,
+      "yRange": 0.68,
+      "pathLength": 0.242,
+      "lowerFieldShare": 0.436,
+      "read": "Target group 5 tracks 9 object trace(s), visible 13.38-15.88s, path 0.24, x/y range 0.14/0.68."
+    }
+  ],
+  "promotionGates": [
+    "Safety remains pass: no challenge enemy shots, enemy attacks, or ship loss.",
+    "Human-perfect potential must not regress from baseline and should remain >= 7.4/10.",
+    "Human-visible score should improve materially and remain >= 7.8/10 before promotion.",
+    "Bunching risk should move toward <= 0.36; interim candidates below 0.65 are worth full-analyzer review.",
+    "Magic-appearance risk should stay <= 0.18, preserving visible group lead-ins.",
+    "Expected challenge identity must not regress; target-video fit must clear the latest rejected full-analyzer calibration."
+  ],
+  "nextWork": [
+    "Use route-aware group offsets to separate whole groups before adding object-level offsets.",
+    "Prefer contract-shaped candidates over broad blind sweeps.",
+    "Generate path visuals for baseline, best readability, best route-aware, and best deconflict candidates.",
+    "Promote only after full analyzer confirms the expected-label and target-video lift.",
+    "Generalize only the proven primitive to Challenging Stage 1 and Challenging Stage 3."
+  ],
+  "currentRead": "The stronger direct deconflict family now beats the earlier readability/timing family on bunching, but it remains far from the promotion gate. Route-aware offsets reduce magic-appearance risk and are now a useful grammar seam, but they did not beat deconflict-only on bunching in this pass, so they should remain measured rather than promoted."
+}

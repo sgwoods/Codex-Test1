@@ -61,6 +61,9 @@ function check(file){
     for(const controlKey of ['deconflictSpread', 'deconflictPhase', 'deconflictLaneBias', 'deconflictYOffset']){
       if(!Number.isFinite(+controls[controlKey])) issues.push(`${prefix}: missing ${controlKey} control`);
     }
+    for(const controlKey of ['routeOffsetX', 'routeOffsetY', 'routeCurveX', 'routeCurveY', 'routePhaseS']){
+      if(!Number.isFinite(+controls[controlKey])) issues.push(`${prefix}: missing ${controlKey} control`);
+    }
     const gates = Array.isArray(group.promotionGates) ? group.promotionGates : [];
     for(const gate of ['target-video-object-track-fit-must-not-regress', 'human-visible-readability-must-not-regress', 'human-perfect-routeability-must-not-regress', 'spacing-and-bunching-risk-must-pass']){
       if(!gates.includes(gate)) issues.push(`${prefix}: missing promotion gate ${gate}`);

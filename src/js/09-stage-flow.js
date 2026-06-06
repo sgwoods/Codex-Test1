@@ -172,6 +172,11 @@ function spawnChallenge(state){
    deconflictPhase:motionControls?.deconflictPhase??0,
    deconflictLaneBias:motionControls?.deconflictLaneBias??0,
    deconflictYOffset:motionControls?.deconflictYOffset??0,
+   routeOffsetX:motionControls?.routeOffsetX??0,
+   routeOffsetY:motionControls?.routeOffsetY??0,
+   routeCurveX:motionControls?.routeCurveX??0,
+   routeCurveY:motionControls?.routeCurveY??0,
+   routePhaseS:motionControls?.routePhaseS??0,
    referencePath:waveReferencePaths?.[wave]||null,
    motionSpecGroup,
    spawn:baseEntryDelay+groupSpawnOffset+slot*slotDelay+slot*laneStaggerS

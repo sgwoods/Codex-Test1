@@ -22,7 +22,13 @@ function writeJson(file, value){
 
 function writeText(file, value){
   ensureDir(path.dirname(file));
-  fs.writeFileSync(file, `${String(value).replace(/\r\n/g, '\n').trimEnd()}\n`);
+  const clean = String(value)
+    .replace(/\r\n/g, '\n')
+    .split('\n')
+    .map(line => line.trimEnd())
+    .join('\n')
+    .trimEnd();
+  fs.writeFileSync(file, `${clean}\n`);
 }
 
 function round(value, digits = 2){
@@ -162,6 +168,9 @@ function main(){
   const leastBunched = candidates.find(row => row.candidateId === diagnostics.leastBunchedTop?.[0]?.candidateId)
     || diagnostics.leastBunchedTop?.[0]
     || null;
+  const routeAware = candidates.find(row => row.candidateId === diagnostics.routeAwareTop?.[0]?.candidateId)
+    || diagnostics.routeAwareTop?.[0]
+    || null;
   const deconflict = candidates.find(row => row.candidateId === diagnostics.deconflictTop?.[0]?.candidateId)
     || diagnostics.deconflictTop?.[0]
     || null;
@@ -170,6 +179,7 @@ function main(){
     Object.assign({ label: 'Best Selection' }, compactCandidate(best) || {}),
     Object.assign({ label: 'Best Readability' }, compactCandidate(readability) || {}),
     Object.assign({ label: 'Least Bunched' }, compactCandidate(leastBunched) || {}),
+    Object.assign({ label: 'Best Route' }, compactCandidate(routeAware) || {}),
     Object.assign({ label: 'Best Deconflict' }, compactCandidate(deconflict) || {})
   ].filter(row => row.candidateId));
   const baselineRisk = compact.find(row => row.label === 'Baseline')?.bunchingRisk;

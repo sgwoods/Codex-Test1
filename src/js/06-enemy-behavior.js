@@ -139,6 +139,30 @@ function challengeDeconflictOffset(e,u,side,slot,row,wave,sweep){
  };
 }
 
+function challengeRouteOffset(e,u){
+ const x=Number.isFinite(+e.routeOffsetX)?+e.routeOffsetX:0;
+ const y=Number.isFinite(+e.routeOffsetY)?+e.routeOffsetY:0;
+ const curveX=Number.isFinite(+e.routeCurveX)?+e.routeCurveX:0;
+ const curveY=Number.isFinite(+e.routeCurveY)?+e.routeCurveY:0;
+ const phase=Number.isFinite(+e.routePhaseS)?+e.routePhaseS:0;
+ if(!x&&!y&&!curveX&&!curveY&&!phase)return null;
+ const gate=cl((u+.24)/1.35,0,1);
+ const local=Math.max(0,u+phase);
+ const curve=Math.sin(local*Math.PI*.72);
+ const drift=Math.sin(local*Math.PI*1.38);
+ return {
+  x:gate*(x+curveX*curve),
+  y:gate*(y+curveY*drift)
+ };
+}
+
+function applyChallengeRouteOffset(e,u){
+ const offset=challengeRouteOffset(e,u);
+ if(!offset)return;
+ e.x+=offset.x;
+ e.y+=offset.y;
+}
+
 function applyChallengeDeconflictOffset(e,u,side,slot,row,wave,sweep,gain=1){
  const offset=challengeDeconflictOffset(e,u,side,slot,row,wave,sweep);
  if(!offset)return;
@@ -221,6 +245,11 @@ function referenceChallengeFirstPosition(e,laneX,topY,side,slot,row,wave,sweep,a
  if(offset){
   target.x+=offset.x;
   target.y+=offset.y;
+ }
+ const routeOffset=challengeRouteOffset(e,0);
+ if(routeOffset){
+  target.x+=routeOffset.x;
+  target.y+=routeOffset.y;
  }
  return target;
 }
@@ -533,6 +562,7 @@ function updateChallengeEnemy(state,e,dt){
 	  }
 	 }
 	 }
+ applyChallengeRouteOffset(e,u);
  applyChallengeDeconflictOffset(e,u,side,slot,row,wave,sweep);
  const lowerFieldBias=Number.isFinite(+e.lowerFieldBias)?+e.lowerFieldBias:0;
  if(lowerFieldBias&&u>2.4){

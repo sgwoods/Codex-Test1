@@ -476,6 +476,7 @@ function humanVisibleGuardrails(measured, noSafetyRegression){
     arrivalScores.push(clamp((hasLeadIn ? 0.48 : 0) + (nearEdgeOrTop ? 0.36 : 0) + timingContinuity * 0.16));
   }
   const arrivalContinuity = arrivalScores.length ? average(arrivalScores) : 0;
+  const magicAppearanceRisk = clamp(1 - arrivalContinuity);
   const sampleMap = new Map();
   for(const track of tracks){
     for(const point of track.points || []){
@@ -513,6 +514,7 @@ function humanVisibleGuardrails(measured, noSafetyRegression){
   const score10 = round(1 + coverage * 8.2, 1);
   const pass = groupVisibility >= 0.98
     && arrivalContinuity >= 0.58
+    && magicAppearanceRisk <= 0.42
     && spacingScore >= 0.52
     && bunchingRisk <= 0.36
     && noSafetyRegression;
@@ -523,13 +525,14 @@ function humanVisibleGuardrails(measured, noSafetyRegression){
     visibleGroupCount,
     expectedGroups,
     arrivalContinuity: round(arrivalContinuity, 3),
+    magicAppearanceRisk: round(magicAppearanceRisk, 3),
     spacingScore: round(spacingScore, 3),
     bunchingRisk: round(bunchingRisk, 3),
     leadInWaveCount: leadInWaves.size,
     trackDensity: round(trackDensity, 3),
     read: pass
-      ? `Human-visible guardrails pass: ${visibleGroupCount}/${expectedGroups} groups visible, arrival continuity ${round(arrivalContinuity, 2)}, spacing ${round(spacingScore, 2)}, bunching risk ${round(bunchingRisk, 2)}.`
-      : `Human-visible guardrails block promotion: ${visibleGroupCount}/${expectedGroups} groups visible, arrival continuity ${round(arrivalContinuity, 2)}, spacing ${round(spacingScore, 2)}, bunching risk ${round(bunchingRisk, 2)}.`
+      ? `Human-visible guardrails pass: ${visibleGroupCount}/${expectedGroups} groups visible, arrival continuity ${round(arrivalContinuity, 2)}, magic-appearance risk ${round(magicAppearanceRisk, 2)}, spacing ${round(spacingScore, 2)}, bunching risk ${round(bunchingRisk, 2)}.`
+      : `Human-visible guardrails block promotion: ${visibleGroupCount}/${expectedGroups} groups visible, arrival continuity ${round(arrivalContinuity, 2)}, magic-appearance risk ${round(magicAppearanceRisk, 2)}, spacing ${round(spacingScore, 2)}, bunching risk ${round(bunchingRisk, 2)}.`
   };
 }
 
@@ -883,6 +886,11 @@ function specAwareLayoutOverride(layoutOverride){
   const deconflictPhases = Array.isArray(layout.groupDeconflictPhases) ? layout.groupDeconflictPhases : [];
   const deconflictLaneBiases = Array.isArray(layout.groupDeconflictLaneBiases) ? layout.groupDeconflictLaneBiases : [];
   const deconflictYOffsets = Array.isArray(layout.groupDeconflictYOffsets) ? layout.groupDeconflictYOffsets : [];
+  const routeOffsetsX = Array.isArray(layout.groupRouteOffsetsX) ? layout.groupRouteOffsetsX : [];
+  const routeOffsetsY = Array.isArray(layout.groupRouteOffsetsY) ? layout.groupRouteOffsetsY : [];
+  const routeCurveXs = Array.isArray(layout.groupRouteCurveXs) ? layout.groupRouteCurveXs : [];
+  const routeCurveYs = Array.isArray(layout.groupRouteCurveYs) ? layout.groupRouteCurveYs : [];
+  const routePhases = Array.isArray(layout.groupRoutePhases) ? layout.groupRoutePhases : [];
   const laneOrders = Array.isArray(layout.groupLaneOrders) ? layout.groupLaneOrders : [];
   const scalarArc = Number.isFinite(+layout.arcAmp) ? +layout.arcAmp : null;
   const scalarDrop = Number.isFinite(+layout.dropAmp) ? +layout.dropAmp : null;
@@ -901,6 +909,11 @@ function specAwareLayoutOverride(layoutOverride){
   const scalarDeconflictPhase = Number.isFinite(+layout.deconflictPhase) ? +layout.deconflictPhase : null;
   const scalarDeconflictLaneBias = Number.isFinite(+layout.deconflictLaneBias) ? +layout.deconflictLaneBias : null;
   const scalarDeconflictYOffset = Number.isFinite(+layout.deconflictYOffset) ? +layout.deconflictYOffset : null;
+  const scalarRouteOffsetX = Number.isFinite(+layout.routeOffsetX) ? +layout.routeOffsetX : null;
+  const scalarRouteOffsetY = Number.isFinite(+layout.routeOffsetY) ? +layout.routeOffsetY : null;
+  const scalarRouteCurveX = Number.isFinite(+layout.routeCurveX) ? +layout.routeCurveX : null;
+  const scalarRouteCurveY = Number.isFinite(+layout.routeCurveY) ? +layout.routeCurveY : null;
+  const scalarRoutePhase = Number.isFinite(+layout.routePhaseS) ? +layout.routePhaseS : null;
   const paths = Array.isArray(layout.groupPathFamilies) ? layout.groupPathFamilies : [];
   const normalizeLanePhaseOffsets = values => Array.isArray(values)
     ? values.slice(0, 8).map(value => round(Number.isFinite(+value) ? +value : 0, 3))
@@ -925,6 +938,11 @@ function specAwareLayoutOverride(layoutOverride){
     const deconflictPhase = Number.isFinite(+deconflictPhases[index]) ? +deconflictPhases[index] : scalarDeconflictPhase;
     const deconflictLaneBias = Number.isFinite(+deconflictLaneBiases[index]) ? +deconflictLaneBiases[index] : scalarDeconflictLaneBias;
     const deconflictYOffset = Number.isFinite(+deconflictYOffsets[index]) ? +deconflictYOffsets[index] : scalarDeconflictYOffset;
+    const routeOffsetX = Number.isFinite(+routeOffsetsX[index]) ? +routeOffsetsX[index] : scalarRouteOffsetX;
+    const routeOffsetY = Number.isFinite(+routeOffsetsY[index]) ? +routeOffsetsY[index] : scalarRouteOffsetY;
+    const routeCurveX = Number.isFinite(+routeCurveXs[index]) ? +routeCurveXs[index] : scalarRouteCurveX;
+    const routeCurveY = Number.isFinite(+routeCurveYs[index]) ? +routeCurveYs[index] : scalarRouteCurveY;
+    const routePhase = Number.isFinite(+routePhases[index]) ? +routePhases[index] : scalarRoutePhase;
     if(Number.isFinite(+arc)) controls.arcAmp = round(+arc, 3);
     if(Number.isFinite(+drop)) controls.dropAmp = round(+drop, 3);
     if(Number.isFinite(+speed)){
@@ -945,6 +963,11 @@ function specAwareLayoutOverride(layoutOverride){
     if(Number.isFinite(+deconflictPhase)) controls.deconflictPhase = round(+deconflictPhase, 3);
     if(Number.isFinite(+deconflictLaneBias)) controls.deconflictLaneBias = round(+deconflictLaneBias, 3);
     if(Number.isFinite(+deconflictYOffset)) controls.deconflictYOffset = round(+deconflictYOffset, 3);
+    if(Number.isFinite(+routeOffsetX)) controls.routeOffsetX = round(+routeOffsetX, 3);
+    if(Number.isFinite(+routeOffsetY)) controls.routeOffsetY = round(+routeOffsetY, 3);
+    if(Number.isFinite(+routeCurveX)) controls.routeCurveX = round(+routeCurveX, 3);
+    if(Number.isFinite(+routeCurveY)) controls.routeCurveY = round(+routeCurveY, 3);
+    if(Number.isFinite(+routePhase)) controls.routePhaseS = round(+routePhase, 3);
     if(Array.isArray(laneOrders[index]) && laneOrders[index].length){
       controls.laneOrder = laneOrders[index].map(value => Math.max(0, Math.min(7, Math.round(+value || 0))));
     }
@@ -1530,6 +1553,93 @@ function candidateDefinitions(){
           }
         }
       }
+      const routeContracts = [
+        {
+          id: 'spread-left-right',
+          x: [-26, -13, 0, 14, 28],
+          y: [0, 4, -3, 5, 0],
+          curveX: [8, 10, 6, 10, 8],
+          curveY: [0, 2, 0, 2, 0],
+          phase: [0, 0.05, 0.1, 0.15, 0.2]
+        },
+        {
+          id: 'stair-step',
+          x: [-18, -8, 4, 16, 26],
+          y: [-4, 2, 8, 2, -4],
+          curveX: [10, 7, 5, 7, 10],
+          curveY: [2, 3, 4, 3, 2],
+          phase: [0, 0.08, 0.16, 0.24, 0.32]
+        },
+        {
+          id: 'crossing-lanes',
+          x: [-22, 16, -8, 20, 4],
+          y: [2, -2, 6, -4, 4],
+          curveX: [12, -10, 8, -12, 6],
+          curveY: [3, 3, 2, 4, 2],
+          phase: [0.02, 0.1, 0.18, 0.26, 0.34]
+        }
+      ];
+      const routeBaseLaneOrders = [
+        { id: 'id', value: [0, 1, 2, 3, 4, 5, 6, 7] },
+        { id: 'fan', value: [3, 1, 0, 2, 5, 7, 4, 6] }
+      ];
+      const routePhase = [0, 0.045, 0.09, 0.135, 0, 0.045, 0.09, 0.135];
+      for(const contract of routeContracts){
+        for(const laneOrder of routeBaseLaneOrders){
+          for(const slotDelay of [0.16, 0.2, 0.24]){
+            candidates.push({
+              id: `stage7-route-${contract.id}-${laneOrder.id}-sd${String(slotDelay).replace('.','')}`,
+              description: `Stage 7 route-aware contract candidate: ${contract.id}, lane order ${laneOrder.id}, slot delay ${slotDelay}.`,
+              layoutOverride: Object.assign({}, base, {
+                groupLaneSpreadScales: [1.36, 1.24, 1.16, 1.36, 1.24],
+                groupRowSpreadScales: [1.14, 1.22, 1.1, 1.24, 1.22],
+                groupSlotDelays: Array.from({ length: 5 }, () => slotDelay),
+                groupLaneStaggers: Array.from({ length: 5 }, () => 0.035),
+                groupLaneOrders: Array.from({ length: 5 }, () => laneOrder.value),
+                groupLanePhaseOffsets: Array.from({ length: 5 }, () => routePhase),
+                groupRouteOffsetsX: contract.x,
+                groupRouteOffsetsY: contract.y,
+                groupRouteCurveXs: contract.curveX,
+                groupRouteCurveYs: contract.curveY,
+                groupRoutePhases: contract.phase
+              })
+            });
+          }
+        }
+      }
+      const comboDeconflicts = [
+        { id: 'wide-soft-flat', spread: [16, 16, 14, 16, 14], bias: [2.5, 2.5, 2, 2.5, 2], y: [0, 0, 0, 0, 0], phaseSet: lanePhaseSets[0].value },
+        { id: 'strong-soft-tiered', spread: [12, 12, 10, 12, 10], bias: [2.5, 2.5, 2, 2.5, 2], y: [4, 3, 4, 5, 3], phaseSet: lanePhaseSets[1].value }
+      ];
+      for(const contract of routeContracts.slice(0, 2)){
+        for(const deconflict of comboDeconflicts){
+          for(const laneOrder of routeBaseLaneOrders){
+            for(const slotDelay of [0.14, 0.16]){
+              candidates.push({
+                id: `stage7-route-deconflict-${contract.id}-${deconflict.id}-${laneOrder.id}-sd${String(slotDelay).replace('.','')}`,
+                description: `Stage 7 route-aware plus direct deconfliction candidate: route ${contract.id}, deconflict ${deconflict.id}, lane order ${laneOrder.id}, slot delay ${slotDelay}.`,
+                layoutOverride: Object.assign({}, base, {
+                  groupLaneSpreadScales: [1.36, 1.24, 1.16, 1.36, 1.24],
+                  groupRowSpreadScales: [1.14, 1.22, 1.1, 1.24, 1.22],
+                  groupSlotDelays: Array.from({ length: 5 }, () => slotDelay),
+                  groupLaneStaggers: Array.from({ length: 5 }, () => 0.035),
+                  groupLaneOrders: Array.from({ length: 5 }, () => laneOrder.value),
+                  groupLanePhaseOffsets: Array.from({ length: 5 }, () => deconflict.phaseSet),
+                  groupRouteOffsetsX: contract.x,
+                  groupRouteOffsetsY: contract.y,
+                  groupRouteCurveXs: contract.curveX,
+                  groupRouteCurveYs: contract.curveY,
+                  groupRoutePhases: contract.phase,
+                  groupDeconflictSpreads: deconflict.spread,
+                  groupDeconflictLaneBiases: deconflict.bias,
+                  groupDeconflictYOffsets: deconflict.y,
+                  groupDeconflictPhases: [0, 0.04, 0.08, 0.12, 0.16]
+                })
+              });
+            }
+          }
+        }
+      }
     }
     candidates.push(...targetTimingCandidates(base, pathSets));
     candidates.push(...targetControlCandidates(base, pathSets));
@@ -2043,6 +2153,11 @@ function summarizeCandidate(row){
     groupDeconflictLaneBiases: row.layout?.groupDeconflictLaneBiases || [],
     groupDeconflictYOffsets: row.layout?.groupDeconflictYOffsets || [],
     groupDeconflictPhases: row.layout?.groupDeconflictPhases || [],
+    groupRouteOffsetsX: row.layout?.groupRouteOffsetsX || [],
+    groupRouteOffsetsY: row.layout?.groupRouteOffsetsY || [],
+    groupRouteCurveXs: row.layout?.groupRouteCurveXs || [],
+    groupRouteCurveYs: row.layout?.groupRouteCurveYs || [],
+    groupRoutePhases: row.layout?.groupRoutePhases || [],
     groupLaneOrders: row.layout?.groupLaneOrders || []
   };
 }
@@ -2122,6 +2237,8 @@ function buildMarkdown(report){
   const leastBunchedRow = row => `| ${row.candidateId} | ${row.humanVisibleGuardrails?.bunchingRisk ?? 'n/a'} | ${row.humanVisibleGuardrails?.spacingScore ?? 'n/a'} | ${row.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 | ${row.humanPerfectPotentialScore10 ?? 'n/a'}/10 | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.noSafetyRegression ? 'pass' : 'risk'} | ${(row.groupDeconflictSpreads || []).join(', ') || 'none'} | ${(row.groupLanePhaseOffsets?.[0] || []).join(', ') || 'none'} |`;
   const leastBunchedRows = (report.diagnostics?.leastBunchedTop || []).map(leastBunchedRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
   const deconflictRows = (report.diagnostics?.deconflictTop || []).map(leastBunchedRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const routeRow = row => `| ${row.candidateId} | ${row.humanVisibleGuardrails?.bunchingRisk ?? 'n/a'} | ${row.humanVisibleGuardrails?.magicAppearanceRisk ?? 'n/a'} | ${row.humanVisibleGuardrails?.spacingScore ?? 'n/a'} | ${row.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 | ${row.humanPerfectPotentialScore10 ?? 'n/a'}/10 | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${(row.groupRouteOffsetsX || []).join(', ') || 'none'} | ${(row.groupRouteOffsetsY || []).join(', ') || 'none'} |`;
+  const routeRows = (report.diagnostics?.routeAwareTop || []).map(routeRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
   return `# Stage ${report.stage} Challenge Candidate Sweep
 
 Generated: ${report.generatedAt}
@@ -2199,6 +2316,14 @@ These rows isolate the new direct separation primitive. If they do not appear am
 | Candidate | Bunching Risk | Spacing | Human-Visible | Human-Perfect | Expected Labels | Target-Video Fit | Safety | Deconflict Spread | First Lane Phase Set |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
 ${deconflictRows}
+
+### Route-Aware Group Diagnostics
+
+These rows test coherent whole-group route offsets. They are intended to reduce inter-group overlap and magic appearance without making individual aliens jitter away from their authored wave.
+
+| Candidate | Bunching Risk | Magic Risk | Spacing | Human-Visible | Human-Perfect | Expected Labels | Target-Video Fit | Route X Offsets | Route Y Offsets |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |
+${routeRows}
 
 ## Next Step
 
@@ -2339,9 +2464,13 @@ async function main(){
   const bunchingRiskOf = row => Number.isFinite(+(row.humanVisibleGuardrails?.bunchingRisk))
     ? +(row.humanVisibleGuardrails.bunchingRisk)
     : 1;
+  const magicRiskOf = row => Number.isFinite(+(row.humanVisibleGuardrails?.magicAppearanceRisk))
+    ? +(row.humanVisibleGuardrails.magicAppearanceRisk)
+    : 1;
   const leastBunchedDiagnostics = scored
-    .filter(row => String(row.candidateId || '').includes('stage7-read') || String(row.candidateId || '').includes('stage7-deconflict'))
+    .filter(row => String(row.candidateId || '').includes('stage7-read') || String(row.candidateId || '').includes('stage7-deconflict') || String(row.candidateId || '').includes('stage7-route'))
     .sort((a, b) => bunchingRiskOf(a) - bunchingRiskOf(b)
+      || magicRiskOf(a) - magicRiskOf(b)
       || (b.humanVisibleGuardrails?.spacingScore || 0) - (a.humanVisibleGuardrails?.spacingScore || 0)
       || (b.humanVisibleGuardrails?.score10 || 0) - (a.humanVisibleGuardrails?.score10 || 0)
       || (b.humanPerfectPotential?.score10 || 0) - (a.humanPerfectPotential?.score10 || 0))
@@ -2349,6 +2478,14 @@ async function main(){
   const deconflictDiagnostics = scored
     .filter(row => String(row.candidateId || '').includes('stage7-deconflict'))
     .sort((a, b) => bunchingRiskOf(a) - bunchingRiskOf(b)
+      || (b.humanVisibleGuardrails?.spacingScore || 0) - (a.humanVisibleGuardrails?.spacingScore || 0)
+      || (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0)
+      || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 12);
+  const routeAwareDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('stage7-route'))
+    .sort((a, b) => bunchingRiskOf(a) - bunchingRiskOf(b)
+      || magicRiskOf(a) - magicRiskOf(b)
       || (b.humanVisibleGuardrails?.spacingScore || 0) - (a.humanVisibleGuardrails?.spacingScore || 0)
       || (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0)
       || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
@@ -2362,6 +2499,7 @@ async function main(){
   for(const row of readabilityDiagnostics) retainedById.set(row.candidateId, row);
   for(const row of leastBunchedDiagnostics) retainedById.set(row.candidateId, row);
   for(const row of deconflictDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of routeAwareDiagnostics) retainedById.set(row.candidateId, row);
   const retainedCandidates = Array.from(retainedById.values());
   if(!retainedCandidates.some(row => row.candidateId === baseline.candidateId)){
     retainedCandidates.push(baseline);
@@ -2454,7 +2592,8 @@ async function main(){
       readabilityDiagnostics: readabilityDiagnostics.length,
       leastBunchedDiagnostics: leastBunchedDiagnostics.length,
       deconflictDiagnostics: deconflictDiagnostics.length,
-      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score, the baseline row, and top target-timing/target-control/target-reference-path/path-shape/readability/least-bunched/deconflict diagnostic candidates; use candidateCount for the full measured search size.`
+      routeAwareDiagnostics: routeAwareDiagnostics.length,
+      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score, the baseline row, and top target-timing/target-control/target-reference-path/path-shape/readability/least-bunched/deconflict/route-aware diagnostic candidates; use candidateCount for the full measured search size.`
     },
     diagnostics: {
       targetTimingTop: targetTimingDiagnostics.map(summarizeCandidate),
@@ -2463,7 +2602,8 @@ async function main(){
       pathShapeTop: pathShapeDiagnostics.map(summarizeCandidate),
       readabilityTop: readabilityDiagnostics.map(summarizeCandidate),
       leastBunchedTop: leastBunchedDiagnostics.map(summarizeCandidate),
-      deconflictTop: deconflictDiagnostics.map(summarizeCandidate)
+      deconflictTop: deconflictDiagnostics.map(summarizeCandidate),
+      routeAwareTop: routeAwareDiagnostics.map(summarizeCandidate)
     },
     measurementPolicy: {
       scope: `harness-only stage-${STAGE} challenge layout candidates`,

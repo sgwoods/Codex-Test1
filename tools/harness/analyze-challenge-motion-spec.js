@@ -103,6 +103,11 @@ function groupSpec(row, group){
       deconflictPhase: 0,
       deconflictLaneBias: 0,
       deconflictYOffset: 0,
+      routeOffsetX: 0,
+      routeOffsetY: 0,
+      routeCurveX: 0,
+      routeCurveY: 0,
+      routePhaseS: 0,
       laneOrder: [0, 1, 2, 3, 4, 5, 6, 7]
     },
     comparisonTargets: group.comparisonTargets || {},

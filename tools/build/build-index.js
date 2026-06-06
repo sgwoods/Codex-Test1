@@ -85,6 +85,10 @@ const CHALLENGE_STAGE_CANDIDATE_SWEEP = path.join(ROOT, 'reference-artifacts', '
 const CHALLENGE_STAGE_CANDIDATE_SWEEP_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep-index', 'latest.json');
 const CHALLENGE_STAGE_READABILITY_VISUALS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-readability-visuals', 'latest.json');
 const CHALLENGE_STAGE_READABILITY_VISUALS_SVG = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-readability-visuals', 'latest.svg');
+const CHALLENGE_DECONFLICT_UNDERPERFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-deconflict-underperformance', 'latest.json');
+const CHALLENGE_PATH_VISUALS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-path-visuals', 'latest.json');
+const CHALLENGE_PATH_VISUALS_SVG = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-path-visuals', 'latest.svg');
+const STAGE7_AUTHORING_CONTRACT = path.join(ROOT, 'reference-artifacts', 'analyses', 'stage7-authoring-contract', 'latest.json');
 const CHALLENGE_CANDIDATE_BEFORE_AFTER = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-candidate-before-after', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_FULL_ANALYZER_REVIEW = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-full-analyzer-review', 'latest.json');
 const CHALLENGE_TRAJECTORY_CONTROLS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-trajectory-controls', 'latest.json');
@@ -3471,6 +3475,9 @@ function buildChallengeStageEffortGuideSection(){
   const sweep = loadChallengeStageCandidateSweep();
   const sweepIndex = loadChallengeStageCandidateSweepIndex();
   const readabilityVisuals = loadChallengeStageReadabilityVisuals();
+  const deconflictUnderperformance = loadChallengeDeconflictUnderperformance();
+  const pathVisuals = loadChallengePathVisuals();
+  const stage7AuthoringContract = loadStage7AuthoringContract();
   const candidateBeforeAfter = loadChallengeCandidateBeforeAfter();
   const fullAnalyzerReview = loadChallengeStageCandidateFullAnalyzerReview();
   const trajectoryControls = loadChallengeTrajectoryControls();
@@ -3491,6 +3498,25 @@ function buildChallengeStageEffortGuideSection(){
   const readabilityVisualRead = readabilityVisualsSummary.leastBunchedCandidateId
     ? `Swarm readability visual compares ${readabilityVisuals.candidatesToCompare?.length || 0} candidate(s); least-bunched diagnostic ${readabilityVisualsSummary.leastBunchedCandidateId} has bunching risk ${readabilityVisualsSummary.leastBunchedBunchingRisk ?? 'n/a'} (delta ${readabilityVisualsSummary.bunchingRiskDelta ?? 'n/a'} vs baseline).`
     : 'Run the challenge readability visuals analyzer after the Stage 7 sweep to generate a baseline-vs-candidate SVG.';
+  const deconflictSummary = deconflictUnderperformance.summary || {};
+  const deconflictRows = deconflictUnderperformance.rows || {};
+  const deconflictRead = deconflictSummary.read
+    ? `${deconflictSummary.read} Baseline risk ${deconflictSummary.baselineBunchingRisk ?? 'n/a'}, direct deconflict ${deconflictSummary.bestDeconflictBunchingRisk ?? 'n/a'}, route-aware ${deconflictSummary.bestRouteAwareBunchingRisk ?? 'n/a'}, least-bunched ${deconflictSummary.leastBunchedBunchingRisk ?? 'n/a'}.`
+    : 'Run the deconflict underperformance analyzer to compare direct object-level offsets, route-aware offsets, and readability candidates.';
+  const pathVisualsSummary = pathVisuals.summary || {};
+  const pathVisualRead = pathVisualsSummary.candidateCount
+    ? `Path visual compares ${pathVisualsSummary.candidateCount} candidate route families. ${pathVisualsSummary.playerMeaning || 'Use it to inspect whether aliens arrive as coherent waves or collapse into unreadable clusters.'} SVG artifact: \`reference-artifacts/analyses/challenge-path-visuals/latest.svg\`.`
+    : 'Run the challenge path visuals analyzer after the candidate sweep to generate a trajectory comparison SVG.';
+  const authoringCurrent = stage7AuthoringContract.current || {};
+  const authoringLeast = authoringCurrent.leastBunched || {};
+  const authoringRoute = authoringCurrent.routeAware || {};
+  const authoringGates = Array.isArray(stage7AuthoringContract.promotionGates) ? stage7AuthoringContract.promotionGates : [];
+  const authoringNextWork = Array.isArray(stage7AuthoringContract.nextWork) ? stage7AuthoringContract.nextWork : [];
+  const authoringRead = stage7AuthoringContract.challengeNumber
+    ? `Stage ${stage7AuthoringContract.stage} / Challenging Stage ${stage7AuthoringContract.challengeNumber} has ${stage7AuthoringContract.targetGroups?.length || 0} target group(s). Current best \`${authoringCurrent.best?.candidateId || 'pending'}\` has bunching risk ${authoringCurrent.best?.bunchingRisk ?? 'n/a'} and magic risk ${authoringCurrent.best?.magicAppearanceRisk ?? 'n/a'}; least-bunched \`${authoringLeast.candidateId || 'pending'}\` has risk ${authoringLeast.bunchingRisk ?? 'n/a'}; route-aware \`${authoringRoute.candidateId || 'pending'}\` has risk ${authoringRoute.bunchingRisk ?? 'n/a'}. Decision: ${authoringCurrent.keeperDecision || 'pending'}.`
+    : 'Run the Stage 7 authoring contract analyzer to persist target groups, promotion gates, and next-work guidance.';
+  const authoringGateRead = authoringGates.slice(0, 4).join(' ');
+  const authoringNextRead = authoringNextWork.slice(0, 4).join(' ');
   const beforeAfterSummary = candidateBeforeAfter.sweepSummary || {};
   const beforeAfterCandidate = candidateBeforeAfter.selectedCandidate || {};
   const trajectorySummary = trajectoryControls.summary || {};
@@ -3546,6 +3572,18 @@ function buildChallengeStageEffortGuideSection(){
       {
         title: 'Swarm Readability Visual',
         body: `${readabilityVisualRead} SVG artifact: \`reference-artifacts/analyses/challenge-stage-readability-visuals/latest.svg\`.`
+      },
+      {
+        title: 'Deconflict Underperformance',
+        body: `${deconflictRead} Best deconflict row: \`${deconflictRows.bestDeconflict?.candidateId || 'pending'}\`; best route-aware row: \`${deconflictRows.bestRouteAware?.candidateId || 'pending'}\`.`
+      },
+      {
+        title: 'Route Path Visuals',
+        body: pathVisualRead
+      },
+      {
+        title: 'Stage 7 Authoring Contract',
+        body: `${authoringRead} Promotion gates: ${authoringGateRead || 'pending'}. Next work: ${authoringNextRead || 'pending'}.`
       },
       {
         title: 'Human-Perfect Guard',
@@ -3648,6 +3686,21 @@ function buildChallengeStageEffortGuideSection(){
         label: 'Open Challenge Motion Spec Trial',
         href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-motion-spec/latest.json`,
         detail: 'Runtime-facing Challenge 2 motion spec generated from the movement grammar, with phase durations, controls, reference paths, and promotion gates.'
+      },
+      {
+        label: 'Open Deconflict Underperformance',
+        href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-deconflict-underperformance/latest.json`,
+        detail: 'Compares baseline, readability, direct deconflict, route-aware, and least-bunched candidates so process lift is not mistaken for runtime promotion.'
+      },
+      {
+        label: 'Open Challenge Path Visuals',
+        href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-path-visuals/latest.svg`,
+        detail: 'Trajectory visual comparing baseline, best selection, least-bunched/deconflict, and route-aware candidate families.'
+      },
+      {
+        label: 'Open Stage 7 Authoring Contract',
+        href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/stage7-authoring-contract/latest.json`,
+        detail: 'Stage 7 / Challenging Stage 2 target groups, current best rows, promotion gates, and next-work list.'
       },
       {
         label: 'Open Challenge Motion Primitives',
@@ -3964,6 +4017,9 @@ let challengeStageConformanceCache = null;
 let challengeStageCandidateSweepCache = null;
 let challengeStageCandidateSweepIndexCache = null;
 let challengeStageReadabilityVisualsCache = null;
+let challengeDeconflictUnderperformanceCache = null;
+let challengePathVisualsCache = null;
+let stage7AuthoringContractCache = null;
 let challengeCandidateBeforeAfterCache = null;
 let challengeStageCandidateFullAnalyzerReviewCache = null;
 let challengeTrajectoryControlsCache = null;
@@ -4333,6 +4389,66 @@ function loadChallengeStageReadabilityVisuals(){
     challengeStageReadabilityVisualsCache = { summary: {}, candidatesToCompare: [] };
   }
   return challengeStageReadabilityVisualsCache;
+}
+
+function loadChallengeDeconflictUnderperformance(){
+  if(challengeDeconflictUnderperformanceCache) return challengeDeconflictUnderperformanceCache;
+  if(!fs.existsSync(CHALLENGE_DECONFLICT_UNDERPERFORMANCE)){
+    challengeDeconflictUnderperformanceCache = { summary: {}, rows: {}, nextPrimitive: {} };
+    return challengeDeconflictUnderperformanceCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_DECONFLICT_UNDERPERFORMANCE);
+    challengeDeconflictUnderperformanceCache = Object.assign({}, artifact, {
+      summary: artifact.summary || {},
+      rows: artifact.rows || {},
+      nextPrimitive: artifact.nextPrimitive || {}
+    });
+  } catch (err) {
+    challengeDeconflictUnderperformanceCache = { summary: {}, rows: {}, nextPrimitive: {} };
+  }
+  return challengeDeconflictUnderperformanceCache;
+}
+
+function loadChallengePathVisuals(){
+  if(challengePathVisualsCache) return challengePathVisualsCache;
+  if(!fs.existsSync(CHALLENGE_PATH_VISUALS)){
+    challengePathVisualsCache = { summary: {}, candidatesToCompare: [], candidates: [] };
+    return challengePathVisualsCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_PATH_VISUALS);
+    challengePathVisualsCache = Object.assign({}, artifact, {
+      summary: artifact.summary || {},
+      candidatesToCompare: Array.isArray(artifact.candidatesToCompare) ? artifact.candidatesToCompare : [],
+      candidates: Array.isArray(artifact.candidates) ? artifact.candidates : []
+    });
+  } catch (err) {
+    challengePathVisualsCache = { summary: {}, candidatesToCompare: [], candidates: [] };
+  }
+  return challengePathVisualsCache;
+}
+
+function loadStage7AuthoringContract(){
+  if(stage7AuthoringContractCache) return stage7AuthoringContractCache;
+  if(!fs.existsSync(STAGE7_AUTHORING_CONTRACT)){
+    stage7AuthoringContractCache = { contract: {}, current: {}, targetGroups: [], promotionGates: [], nextWork: [], summary: {} };
+    return stage7AuthoringContractCache;
+  }
+  try {
+    const artifact = readJson(STAGE7_AUTHORING_CONTRACT);
+    stage7AuthoringContractCache = Object.assign({}, artifact, {
+      contract: artifact.contract || {},
+      current: artifact.current || {},
+      targetGroups: Array.isArray(artifact.targetGroups) ? artifact.targetGroups : [],
+      promotionGates: Array.isArray(artifact.promotionGates) ? artifact.promotionGates : [],
+      nextWork: Array.isArray(artifact.nextWork) ? artifact.nextWork : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    stage7AuthoringContractCache = { contract: {}, current: {}, targetGroups: [], promotionGates: [], nextWork: [], summary: {} };
+  }
+  return stage7AuthoringContractCache;
 }
 
 function loadChallengeCandidateBeforeAfter(){
@@ -6262,6 +6378,9 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const challengeCandidateSweep = loadChallengeStageCandidateSweep();
   const challengeCandidateSweepIndex = loadChallengeStageCandidateSweepIndex();
   const challengeReadabilityVisuals = loadChallengeStageReadabilityVisuals();
+  const challengeDeconflictUnderperformance = loadChallengeDeconflictUnderperformance();
+  const challengePathVisuals = loadChallengePathVisuals();
+  const stage7AuthoringContract = loadStage7AuthoringContract();
   const challengeCandidateFullAnalyzerReview = loadChallengeStageCandidateFullAnalyzerReview();
   const challengeSweepSummary = challengeCandidateSweep.summary || {};
   const challengeSweepRetention = challengeCandidateSweep.candidateRetention || {};
@@ -6278,6 +6397,26 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const challengeReadabilityVisualMarkup = fs.existsSync(CHALLENGE_STAGE_READABILITY_VISUALS_SVG)
     ? `<figure class="evidenceFigure"><img src="reference-artifacts/analyses/challenge-stage-readability-visuals/latest.svg" alt="Stage challenge readability comparison visual"><figcaption>Baseline, best selection, best readability, and least-bunched candidates from the latest challenge-stage sweep.</figcaption></figure>`
     : '';
+  const challengeDeconflictSummary = challengeDeconflictUnderperformance.summary || {};
+  const challengeDeconflictRows = challengeDeconflictUnderperformance.rows || {};
+  const challengeDeconflictRead = challengeDeconflictSummary.read
+    ? `${challengeDeconflictSummary.read} Baseline risk ${challengeDeconflictSummary.baselineBunchingRisk ?? 'n/a'}, direct deconflict ${challengeDeconflictSummary.bestDeconflictBunchingRisk ?? 'n/a'}, route-aware ${challengeDeconflictSummary.bestRouteAwareBunchingRisk ?? 'n/a'}, least-bunched ${challengeDeconflictSummary.leastBunchedBunchingRisk ?? 'n/a'}.`
+    : 'Deconflict underperformance report pending. Run npm run harness:analyze:challenge-deconflict-underperformance.';
+  const challengePathVisualsSummary = challengePathVisuals.summary || {};
+  const challengePathVisualsRead = challengePathVisualsSummary.candidateCount
+    ? `Path visual compares ${challengePathVisualsSummary.candidateCount} candidate route families. ${challengePathVisualsSummary.playerMeaning || 'Use it to inspect whether aliens arrive as coherent waves or collapse into unreadable clusters.'}`
+    : 'Path visual pending. Run npm run harness:analyze:challenge-path-visuals.';
+  const challengePathVisualMarkup = fs.existsSync(CHALLENGE_PATH_VISUALS_SVG)
+    ? `<figure class="evidenceFigure"><img src="reference-artifacts/analyses/challenge-path-visuals/latest.svg" alt="Stage challenge path visual comparison"><figcaption>Trajectory comparison across baseline, best selection, least-bunched/deconflict, and route-aware candidate families.</figcaption></figure>`
+    : '';
+  const stage7ContractCurrent = stage7AuthoringContract.current || {};
+  const stage7ContractLeast = stage7ContractCurrent.leastBunched || {};
+  const stage7ContractRoute = stage7ContractCurrent.routeAware || {};
+  const stage7ContractGates = Array.isArray(stage7AuthoringContract.promotionGates) ? stage7AuthoringContract.promotionGates : [];
+  const stage7ContractNext = Array.isArray(stage7AuthoringContract.nextWork) ? stage7AuthoringContract.nextWork : [];
+  const stage7ContractRead = stage7AuthoringContract.challengeNumber
+    ? `Stage ${stage7AuthoringContract.stage} / Challenging Stage ${stage7AuthoringContract.challengeNumber}: ${stage7AuthoringContract.targetGroups?.length || 0} target group(s). Current best ${stage7ContractCurrent.best?.candidateId || 'pending'} has bunching risk ${stage7ContractCurrent.best?.bunchingRisk ?? 'n/a'} and magic risk ${stage7ContractCurrent.best?.magicAppearanceRisk ?? 'n/a'}; least-bunched ${stage7ContractLeast.candidateId || 'pending'} has risk ${stage7ContractLeast.bunchingRisk ?? 'n/a'}; route-aware ${stage7ContractRoute.candidateId || 'pending'} has risk ${stage7ContractRoute.bunchingRisk ?? 'n/a'}. Decision: ${stage7ContractCurrent.keeperDecision || 'pending'}.`
+    : 'Stage 7 authoring contract pending. Run npm run harness:analyze:stage7-authoring-contract.';
   const challengeSweepIndexRows = Array.isArray(challengeCandidateSweepIndex.rows) ? challengeCandidateSweepIndex.rows : [];
   const challengeSweepIndexRead = challengeSweepIndexRows.length
     ? challengeSweepIndexRows.map(row => {
@@ -7178,6 +7317,10 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <p class="docMeta"><strong>Readability diagnostics:</strong> ${esc(challengeSweepRetention.readabilityDiagnostics || 0)} row(s) retained. ${esc(challengeReadabilityRead)}</p>
             <p class="docMeta"><strong>Swarm readability visual:</strong> ${esc(challengeReadabilityVisualsRead)}</p>
             ${challengeReadabilityVisualMarkup}
+            <p class="docMeta"><strong>Deconflict underperformance:</strong> ${esc(challengeDeconflictRead)} Best deconflict row: <code>${esc(challengeDeconflictRows.bestDeconflict?.candidateId || 'pending')}</code>; best route-aware row: <code>${esc(challengeDeconflictRows.bestRouteAware?.candidateId || 'pending')}</code>. Source artifact: <code>reference-artifacts/analyses/challenge-deconflict-underperformance/latest.json</code>.</p>
+            <p class="docMeta"><strong>Route/path visual:</strong> ${esc(challengePathVisualsRead)} Source artifact: <code>reference-artifacts/analyses/challenge-path-visuals/latest.json</code>.</p>
+            ${challengePathVisualMarkup}
+            <p class="docMeta"><strong>Stage 7 authoring contract:</strong> ${esc(stage7ContractRead)} Gates: ${esc(stage7ContractGates.slice(0, 4).join(' ') || 'pending')}. Next: ${esc(stage7ContractNext.slice(0, 4).join(' ') || 'pending')}. Source artifact: <code>reference-artifacts/analyses/stage7-authoring-contract/latest.json</code>.</p>
             <p class="docMeta"><strong>Full-analyzer candidate review:</strong> ${esc(challengeCandidateFullAnalyzerRead)} Source artifact: <code>reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json</code>.</p>
             <p class="docMeta"><strong>Candidate sweep matrix:</strong> ${esc(challengeSweepIndexSummary.stagesCovered || 0)} stage(s), ${esc(challengeSweepIndexSummary.totalCandidateCount || 0)} latest per-stage candidates represented, ${esc(challengeSweepIndexSummary.runtimeReadyCount || 0)} runtime-ready. ${esc(challengeSweepIndexRead)}</p>
             <p class="docMeta"><strong>Target trajectory controls:</strong> ${esc(challengeTrajectoryRead)} Source artifact: <code>reference-artifacts/analyses/challenge-trajectory-controls/latest.json</code>.</p>
