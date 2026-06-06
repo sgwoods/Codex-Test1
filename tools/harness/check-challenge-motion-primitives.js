@@ -73,8 +73,22 @@ function checkArtifact(file){
       fail(`Stage ${stage} must preserve blocker, desired outcome, and next action.`, row);
     }
   }
-  if(report.summary?.firstBuildTarget !== 'lead-in-continuity'){
-    fail('The first build target should remain lead-in-continuity until the magic-appearance regression is solved.', report.summary);
+  const leadInEvidence = report.leadInPrototypeEvidence || null;
+  const leadInPrototypeAllowsSpacing = report.summary?.firstBuildTarget === 'group-spacing-field'
+    && leadInEvidence
+    && Number.isFinite(+leadInEvidence.magicAppearanceRisk)
+    && +leadInEvidence.magicAppearanceRisk <= 0.12
+    && Number.isFinite(+leadInEvidence.arrivalContinuity)
+    && +leadInEvidence.arrivalContinuity >= 0.8
+    && Number.isFinite(+leadInEvidence.bunchingRisk)
+    && +leadInEvidence.bunchingRisk > 0.55
+    && leadInEvidence.visualPresencePass === true
+    && leadInEvidence.promotionReady === false;
+  if(report.summary?.firstBuildTarget !== 'lead-in-continuity' && !leadInPrototypeAllowsSpacing){
+    fail('The first build target should remain lead-in-continuity unless a measured lead-in prototype improves magic appearance and leaves group spacing as the blocker.', {
+      summary: report.summary,
+      leadInPrototypeEvidence: leadInEvidence
+    });
   }
   if(+report.summary?.highPriorityPrimitiveCount < 3){
     fail('Expected at least three high-priority challenge motion primitives.', report.summary);

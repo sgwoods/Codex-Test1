@@ -8,6 +8,7 @@ const ANALYSES = path.join(ROOT, 'reference-artifacts', 'analyses');
 const INGESTION = path.join(ROOT, 'reference-artifacts', 'ingestion');
 const MOVEMENT_GRAMMAR = path.join(ANALYSES, 'challenge-movement-grammar', 'latest.json');
 const SWEEP_INDEX = path.join(ANALYSES, 'challenge-stage-candidate-sweep-index', 'latest.json');
+const LATEST_SWEEP = path.join(ANALYSES, 'challenge-stage-candidate-sweep', 'latest.json');
 const SETPIECE_CONTRACTS = path.join(ANALYSES, 'challenge-setpiece-contracts', 'latest.json');
 const OUT_ROOT = path.join(ANALYSES, 'challenge-motion-primitives');
 const INGESTION_OUT = path.join(INGESTION, 'challenge-motion-primitives', 'aurora-0.1.json');
@@ -356,6 +357,32 @@ function sweepFailureSignals(stage, sweepRows){
   };
 }
 
+function leadInPrototypeEvidence(latestSweep){
+  const rows = Array.isArray(latestSweep?.diagnostics?.leadInTop) ? latestSweep.diagnostics.leadInTop : [];
+  if(!rows.length) return null;
+  const best = rows
+    .filter(row => row?.humanVisibleGuardrails)
+    .sort((a, b) => (+a.humanVisibleGuardrails.magicAppearanceRisk || 1) - (+b.humanVisibleGuardrails.magicAppearanceRisk || 1)
+      || (+a.humanVisibleGuardrails.bunchingRisk || 1) - (+b.humanVisibleGuardrails.bunchingRisk || 1)
+      || (+(b.targetVideoObjectFitScore10 || 0)) - (+(a.targetVideoObjectFitScore10 || 0)))[0] || null;
+  if(!best) return null;
+  const guard = best.humanVisibleGuardrails || {};
+  return {
+    stage: latestSweep.stage,
+    candidateId: best.candidateId,
+    expectedScore10: round(best.expectedScore10, 1),
+    targetVideoObjectFitScore10: round(best.targetVideoObjectFitScore10, 1),
+    humanPerfectPotentialScore10: round(best.humanPerfectPotentialScore10, 1),
+    arrivalContinuity: round(guard.arrivalContinuity, 3),
+    magicAppearanceRisk: round(guard.magicAppearanceRisk, 3),
+    spacingScore: round(guard.spacingScore, 3),
+    bunchingRisk: round(guard.bunchingRisk, 3),
+    visualPresencePass: best.visualPresenceRegressionGuard?.pass === true,
+    promotionReady: best.humanVisibleGuardrails?.pass === true && best.humanPerfectGuard?.pass === true,
+    read: `Latest lead-in prototype ${best.candidateId} reduced magic appearance risk to ${round(guard.magicAppearanceRisk, 3)} with arrival continuity ${round(guard.arrivalContinuity, 3)}, but bunching remains ${round(guard.bunchingRisk, 3)} and blocks promotion.`
+  };
+}
+
 function priorityForPrimitive(primitive, stages, sweepRows, setpiece){
   const relatedSweeps = stages.map(stage => sweepFailureSignals(stage, sweepRows));
   const blockedVisible = relatedSweeps.filter(row => row.humanVisiblePass === false).length;
@@ -464,6 +491,8 @@ This artifact turns the current no-keeper challenge-stage sweep evidence into re
 
 ${report.summary.read}
 
+${report.leadInPrototypeEvidence ? `Lead-in prototype evidence: ${report.leadInPrototypeEvidence.read}` : 'Lead-in prototype evidence: none recorded in the latest sweep.'}
+
 ## Primitive Backlog
 
 | Priority | Primitive | Category | Source Stages | Evidence | Implementation Plan |
@@ -481,6 +510,7 @@ ${stageRows}
 function main(){
   const movementGrammar = readJson(MOVEMENT_GRAMMAR);
   const sweepIndex = readJson(SWEEP_INDEX);
+  const latestSweep = readJson(LATEST_SWEEP);
   const setpieceContracts = readJson(SETPIECE_CONTRACTS);
   const grammarRows = (movementGrammar.grammar || []).filter(row => FIRST_FIVE_STAGES.includes(+row.stage));
   const sweepRows = Array.isArray(sweepIndex.rows) ? sweepIndex.rows : [];
@@ -491,6 +521,17 @@ function main(){
     .sort((a, b) => +a.stage - +b.stage)
     .map(row => stageRoadmapRow(row, sweepRows));
   const highPriority = primitives.filter(item => +item.priority10 >= 8);
+  const leadInEvidence = leadInPrototypeEvidence(latestSweep);
+  const leadInPrototypeSucceeded = !!(leadInEvidence
+    && Number.isFinite(+leadInEvidence.magicAppearanceRisk)
+    && +leadInEvidence.magicAppearanceRisk <= 0.12
+    && leadInEvidence.visualPresencePass);
+  const firstBuildTarget = leadInPrototypeSucceeded
+    ? 'group-spacing-field'
+    : (highPriority[0]?.id || primitives[0]?.id || 'pending');
+  const firstBuildTargetRead = leadInPrototypeSucceeded
+    ? 'Lead-in continuity now has a measured prototype that reduces magic appearance, but it still bunches. Build a true centerline-plus-member-offset group-spacing field next.'
+    : (highPriority[0]?.implementationPlan || primitives[0]?.implementationPlan || 'Run the primitive analyzer after movement grammar is available.');
   const report = {
     schemaVersion: 1,
     artifactType: 'challenge-motion-primitives',
@@ -501,17 +542,20 @@ function main(){
     sourceArtifacts: {
       challengeMovementGrammar: rel(MOVEMENT_GRAMMAR),
       challengeStageCandidateSweepIndex: rel(SWEEP_INDEX),
+      latestChallengeStageCandidateSweep: rel(LATEST_SWEEP),
       challengeSetpieceContracts: rel(SETPIECE_CONTRACTS)
     },
     summary: {
       primitiveCount: primitives.length,
       stageRoadmapCount: stageRoadmap.length,
       highPriorityPrimitiveCount: highPriority.length,
-      firstBuildTarget: highPriority[0]?.id || primitives[0]?.id || 'pending',
-      firstBuildTargetRead: highPriority[0]?.implementationPlan || primitives[0]?.implementationPlan || 'Run the primitive analyzer after movement grammar is available.',
+      firstBuildTarget,
+      firstBuildTargetRead,
       firstFiveStages: stageRoadmap.map(row => row.stage),
       releaseReadiness: 'planning-only',
-      read: 'The next runtime improvement should target visible lead-in, spacing/readability, reference spline playback, and phase scheduling before another broad sweep. These primitives attack the failures that blocked every current candidate keeper.'
+      read: leadInPrototypeSucceeded
+        ? 'The latest sweep shows lead-in continuity can materially improve magic-appearance readability, but group bunching still blocks runtime promotion. The next runtime improvement should shift from lead-in experiments to a centerline-plus-member-offset spacing primitive, then rerun the sweep and full visual presence guards.'
+        : 'The next runtime improvement should target visible lead-in, spacing/readability, reference spline playback, and phase scheduling before another broad sweep. These primitives attack the failures that blocked every current candidate keeper.'
     },
     measurementLimits: [
       'This is a design-and-measurement backlog, not a runtime promotion.',
@@ -520,7 +564,10 @@ function main(){
     ],
     primitives,
     stageRoadmap,
-    nextBestStep: 'Prototype lead-in-continuity and group-spacing-field for Challenging Stage 3-4, then rerun the candidate sweep and human-visible guardrails.'
+    leadInPrototypeEvidence: leadInEvidence,
+    nextBestStep: leadInPrototypeSucceeded
+      ? 'Build a true group-spacing-field primitive that represents each group as a centerline plus stable member offsets, then test it first on Challenging Stage 7 before broadening to the first five challenge stages.'
+      : 'Prototype lead-in-continuity and group-spacing-field for Challenging Stage 3-4, then rerun the candidate sweep and human-visible guardrails.'
   };
   const stamp = `${report.generatedAt.replace(/[:.]/g, '-').slice(0, 19)}-${report.commit}`;
   writeJson(path.join(OUT_ROOT, stamp, 'report.json'), report);
@@ -532,6 +579,7 @@ function main(){
     primitiveCount: report.summary.primitiveCount,
     highPriorityPrimitiveCount: report.summary.highPriorityPrimitiveCount,
     firstBuildTarget: report.summary.firstBuildTarget,
+    leadInPrototypeEvidence: report.leadInPrototypeEvidence,
     latest: rel(path.join(OUT_ROOT, 'latest.json')),
     ingestion: rel(INGESTION_OUT)
   }, null, 2));

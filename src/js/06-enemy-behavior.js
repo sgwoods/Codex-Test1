@@ -264,12 +264,50 @@ function applyReferenceChallengeSpawnLeadIn(e,dt,laneX,topY,side,slot,row,wave,s
  const specLead=e.motionSpecGroup?.phaseDurations?.leadInS;
  const lead=Math.max(.45,Math.min(1.15,Number.isFinite(+specLead)?+specLead:(Number.isFinite(+ref.entryLeadS)?+ref.entryLeadS:.78)));
  const q=cl(1-(+e.spawn||0)/lead,0,1);
- const startX=side>0?PLAY_W+46:-46;
- const startY=target.y-8-row*2-wave*.45;
+ const sideOffset=Math.max(34,Math.min(82,Number.isFinite(+e.leadInSideOffset)&&+e.leadInSideOffset>0?+e.leadInSideOffset:46));
+ const yOffset=e.leadInStartYOffset!=null&&Number.isFinite(+e.leadInStartYOffset)?+e.leadInStartYOffset:-(8+row*2+wave*.45);
+ const startX=side>0?PLAY_W+sideOffset:-sideOffset;
+ const startY=target.y+yOffset;
+ const leadArc=Number.isFinite(+e.leadInArc)?+e.leadInArc:0;
  const ease=q*q;
- e.x=startX+(target.x-startX)*ease;
+ e.x=startX+(target.x-startX)*ease+sweep*Math.sin(q*Math.PI)*leadArc*arcAmp;
  e.y=startY+(target.y-startY)*ease+Math.sin(q*Math.PI+slot*.42+wave*.18)*2.4*dropAmp;
  e.referenceLeadIn=+q.toFixed(3);
+ return true;
+}
+
+function genericChallengeFirstPosition(e,laneX,topY,side,slot,row,wave,sweep){
+ const target={x:laneX,y:topY};
+ const offset=challengeDeconflictOffset(e,0,side,slot,row,wave,sweep);
+ if(offset){
+  target.x+=offset.x;
+  target.y+=offset.y;
+ }
+ const routeOffset=challengeRouteOffset(e,0);
+ if(routeOffset){
+  target.x+=routeOffset.x;
+  target.y+=routeOffset.y;
+ }
+ return target;
+}
+
+function applyGenericChallengeSpawnLeadIn(e,dt,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp){
+ const lead=Number.isFinite(+e.leadInS)?+e.leadInS:0;
+ if(lead<=0)return false;
+ e.tm=Math.max(0,(+e.tm||0)-dt);
+ e.spawn=Math.max(0,(+e.spawn||0)-dt);
+ const target=genericChallengeFirstPosition(e,laneX,topY,side,slot,row,wave,sweep);
+ const sideOffset=Math.max(34,Math.min(82,Number.isFinite(+e.leadInSideOffset)&&+e.leadInSideOffset>0?+e.leadInSideOffset:46));
+ const yOffset=e.leadInStartYOffset!=null&&Number.isFinite(+e.leadInStartYOffset)?+e.leadInStartYOffset:-(10+row*2+wave*.7);
+ const q=cl(1-(+e.spawn||0)/Math.max(.3,lead),0,1);
+ const ease=q*q;
+ const startX=side>0?PLAY_W+sideOffset:-sideOffset;
+ const startY=target.y+yOffset;
+ const leadArc=Number.isFinite(+e.leadInArc)?+e.leadInArc:0;
+ e.x=startX+(target.x-startX)*ease+sweep*Math.sin(q*Math.PI)*leadArc*arcAmp;
+ e.y=startY+(target.y-startY)*ease+Math.sin(q*Math.PI+slot*.38+wave*.16)*2.2*dropAmp;
+ e.genericLeadIn=+q.toFixed(3);
+ e.referenceLeadIn=e.genericLeadIn;
  return true;
 }
 
@@ -293,6 +331,7 @@ function updateChallengeEnemy(state,e,dt){
  const topY=38+wave*14+row*8*rowSpreadScale+yOffset+slotYOffset;
  if(e.spawn>0){
   if(applyReferenceChallengeSpawnLeadIn(e,dt,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp))return;
+  if(applyGenericChallengeSpawnLeadIn(e,dt,laneX,topY,side,slot,row,wave,sweep,arcAmp,dropAmp))return;
   e.tm=Math.max(0,(+e.tm||0)-dt);
   e.spawn-=dt;
   return;

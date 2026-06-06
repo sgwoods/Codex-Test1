@@ -960,6 +960,10 @@ function specAwareLayoutOverride(layoutOverride){
   const routeCurveXs = Array.isArray(layout.groupRouteCurveXs) ? layout.groupRouteCurveXs : [];
   const routeCurveYs = Array.isArray(layout.groupRouteCurveYs) ? layout.groupRouteCurveYs : [];
   const routePhases = Array.isArray(layout.groupRoutePhases) ? layout.groupRoutePhases : [];
+  const leadIns = Array.isArray(layout.groupLeadInS) ? layout.groupLeadInS : [];
+  const leadInArcs = Array.isArray(layout.groupLeadInArcs) ? layout.groupLeadInArcs : [];
+  const leadInStartYOffsets = Array.isArray(layout.groupLeadInStartYOffsets) ? layout.groupLeadInStartYOffsets : [];
+  const leadInSideOffsets = Array.isArray(layout.groupLeadInSideOffsets) ? layout.groupLeadInSideOffsets : [];
   const laneOrders = Array.isArray(layout.groupLaneOrders) ? layout.groupLaneOrders : [];
   const scalarArc = Number.isFinite(+layout.arcAmp) ? +layout.arcAmp : null;
   const scalarDrop = Number.isFinite(+layout.dropAmp) ? +layout.dropAmp : null;
@@ -983,6 +987,10 @@ function specAwareLayoutOverride(layoutOverride){
   const scalarRouteCurveX = Number.isFinite(+layout.routeCurveX) ? +layout.routeCurveX : null;
   const scalarRouteCurveY = Number.isFinite(+layout.routeCurveY) ? +layout.routeCurveY : null;
   const scalarRoutePhase = Number.isFinite(+layout.routePhaseS) ? +layout.routePhaseS : null;
+  const scalarLeadIn = Number.isFinite(+layout.leadInS) ? +layout.leadInS : null;
+  const scalarLeadInArc = Number.isFinite(+layout.leadInArc) ? +layout.leadInArc : null;
+  const scalarLeadInStartYOffset = Number.isFinite(+layout.leadInStartYOffset) ? +layout.leadInStartYOffset : null;
+  const scalarLeadInSideOffset = Number.isFinite(+layout.leadInSideOffset) ? +layout.leadInSideOffset : null;
   const paths = Array.isArray(layout.groupPathFamilies) ? layout.groupPathFamilies : [];
   const normalizeLanePhaseOffsets = values => Array.isArray(values)
     ? values.slice(0, 8).map(value => round(Number.isFinite(+value) ? +value : 0, 3))
@@ -1012,6 +1020,10 @@ function specAwareLayoutOverride(layoutOverride){
     const routeCurveX = Number.isFinite(+routeCurveXs[index]) ? +routeCurveXs[index] : scalarRouteCurveX;
     const routeCurveY = Number.isFinite(+routeCurveYs[index]) ? +routeCurveYs[index] : scalarRouteCurveY;
     const routePhase = Number.isFinite(+routePhases[index]) ? +routePhases[index] : scalarRoutePhase;
+    const leadIn = Number.isFinite(+leadIns[index]) ? +leadIns[index] : scalarLeadIn;
+    const leadInArc = Number.isFinite(+leadInArcs[index]) ? +leadInArcs[index] : scalarLeadInArc;
+    const leadInStartYOffset = Number.isFinite(+leadInStartYOffsets[index]) ? +leadInStartYOffsets[index] : scalarLeadInStartYOffset;
+    const leadInSideOffset = Number.isFinite(+leadInSideOffsets[index]) ? +leadInSideOffsets[index] : scalarLeadInSideOffset;
     if(Number.isFinite(+arc)) controls.arcAmp = round(+arc, 3);
     if(Number.isFinite(+drop)) controls.dropAmp = round(+drop, 3);
     if(Number.isFinite(+speed)){
@@ -1037,14 +1049,20 @@ function specAwareLayoutOverride(layoutOverride){
     if(Number.isFinite(+routeCurveX)) controls.routeCurveX = round(+routeCurveX, 3);
     if(Number.isFinite(+routeCurveY)) controls.routeCurveY = round(+routeCurveY, 3);
     if(Number.isFinite(+routePhase)) controls.routePhaseS = round(+routePhase, 3);
+    if(Number.isFinite(+leadIn)) controls.leadInS = round(+leadIn, 3);
+    if(Number.isFinite(+leadInArc)) controls.leadInArc = round(+leadInArc, 3);
+    if(Number.isFinite(+leadInStartYOffset)) controls.leadInStartYOffset = round(+leadInStartYOffset, 3);
+    if(Number.isFinite(+leadInSideOffset)) controls.leadInSideOffset = round(+leadInSideOffset, 3);
     if(Array.isArray(laneOrders[index]) && laneOrders[index].length){
       controls.laneOrder = laneOrders[index].map(value => Math.max(0, Math.min(7, Math.round(+value || 0))));
     }
+    const phaseDurations = Object.assign({}, group.phaseDurations || {});
+    if(Number.isFinite(+leadIn)) phaseDurations.leadInS = round(+leadIn, 3);
     return Object.assign({}, group, {
       spawnOffsetS: Number.isFinite(+spawnOffset) ? round(+spawnOffset, 3) : group.spawnOffsetS,
       pathFamilyHint: paths[index] || group.pathFamilyHint,
       controls,
-      phaseDurations: Object.assign({}, group.phaseDurations || {})
+      phaseDurations
     });
   });
   layout.specAwareCandidate = true;
@@ -1676,6 +1694,107 @@ function candidateDefinitions(){
           }
         }
       }
+      const leadInContracts = [
+        {
+          id: 'lead078-flat',
+          leadInS: [0.78, 0.78, 0.78, 0.78, 0.78],
+          arc: [0, 0, 0, 0, 0],
+          startY: [-8, -9, -9, -10, -10],
+          side: [46, 46, 46, 46, 46]
+        },
+        {
+          id: 'lead095-softarc',
+          leadInS: [0.9, 0.95, 0.86, 0.98, 0.92],
+          arc: [3.5, 4, 2.5, 4.5, 3.5],
+          startY: [-12, -13, -11, -14, -13],
+          side: [52, 52, 48, 54, 52]
+        },
+        {
+          id: 'lead110-widearc',
+          leadInS: [1.04, 1.1, 0.96, 1.12, 1.06],
+          arc: [5.5, 6, 4.5, 6.5, 5.5],
+          startY: [-15, -16, -13, -17, -15],
+          side: [58, 58, 54, 60, 58]
+        }
+      ];
+      for(const contract of routeContracts.slice(0, 2)){
+        for(const leadIn of leadInContracts){
+          for(const laneOrder of routeBaseLaneOrders){
+            for(const slotDelay of [0.14, 0.18]){
+              candidates.push({
+                id: `stage7-route-leadin-${contract.id}-${leadIn.id}-${laneOrder.id}-sd${String(slotDelay).replace('.','')}`,
+                description: `Stage 7 route-aware lead-in candidate: route ${contract.id}, lead-in ${leadIn.id}, lane order ${laneOrder.id}, slot delay ${slotDelay}.`,
+                layoutOverride: Object.assign({}, base, {
+                  groupLaneSpreadScales: [1.36, 1.24, 1.16, 1.36, 1.24],
+                  groupRowSpreadScales: [1.14, 1.22, 1.1, 1.24, 1.22],
+                  groupSlotDelays: Array.from({ length: 5 }, () => slotDelay),
+                  groupLaneStaggers: Array.from({ length: 5 }, () => 0.035),
+                  groupLaneOrders: Array.from({ length: 5 }, () => laneOrder.value),
+                  groupLanePhaseOffsets: Array.from({ length: 5 }, () => routePhase),
+                  groupRouteOffsetsX: contract.x,
+                  groupRouteOffsetsY: contract.y,
+                  groupRouteCurveXs: contract.curveX,
+                  groupRouteCurveYs: contract.curveY,
+                  groupRoutePhases: contract.phase,
+                  groupLeadInS: leadIn.leadInS,
+                  groupLeadInArcs: leadIn.arc,
+                  groupLeadInStartYOffsets: leadIn.startY,
+                  groupLeadInSideOffsets: leadIn.side
+                })
+              });
+            }
+          }
+        }
+      }
+      const spacingFields = [
+        {
+          id: 'softspace',
+          spread: [5, 6, 5, 6, 5],
+          bias: [1.4, 1.4, 1.2, 1.4, 1.2],
+          y: [1, 1.5, 1, 1.5, 1],
+          phase: [0, 0.025, 0.05, 0.075, 0.1]
+        },
+        {
+          id: 'tieredspace',
+          spread: [7, 8, 6, 8, 6],
+          bias: [1.8, 1.8, 1.5, 1.8, 1.5],
+          y: [2, 2.5, 2, 3, 2.5],
+          phase: [0, 0.035, 0.07, 0.105, 0.14]
+        }
+      ];
+      for(const contract of routeContracts.slice(0, 2)){
+        for(const leadIn of leadInContracts.slice(1)){
+          for(const spacing of spacingFields){
+            for(const laneOrder of routeBaseLaneOrders){
+              candidates.push({
+                id: `stage7-route-leadin-spacing-${contract.id}-${leadIn.id}-${spacing.id}-${laneOrder.id}`,
+                description: `Stage 7 combined primitive candidate: route ${contract.id}, lead-in ${leadIn.id}, spacing field ${spacing.id}, lane order ${laneOrder.id}.`,
+                layoutOverride: Object.assign({}, base, {
+                  groupLaneSpreadScales: [1.36, 1.24, 1.16, 1.36, 1.24],
+                  groupRowSpreadScales: [1.14, 1.22, 1.1, 1.24, 1.22],
+                  groupSlotDelays: Array.from({ length: 5 }, () => 0.16),
+                  groupLaneStaggers: Array.from({ length: 5 }, () => 0.035),
+                  groupLaneOrders: Array.from({ length: 5 }, () => laneOrder.value),
+                  groupLanePhaseOffsets: Array.from({ length: 5 }, () => routePhase),
+                  groupRouteOffsetsX: contract.x,
+                  groupRouteOffsetsY: contract.y,
+                  groupRouteCurveXs: contract.curveX,
+                  groupRouteCurveYs: contract.curveY,
+                  groupRoutePhases: contract.phase,
+                  groupLeadInS: leadIn.leadInS,
+                  groupLeadInArcs: leadIn.arc,
+                  groupLeadInStartYOffsets: leadIn.startY,
+                  groupLeadInSideOffsets: leadIn.side,
+                  groupDeconflictSpreads: spacing.spread,
+                  groupDeconflictLaneBiases: spacing.bias,
+                  groupDeconflictYOffsets: spacing.y,
+                  groupDeconflictPhases: spacing.phase
+                })
+              });
+            }
+          }
+        }
+      }
       const comboDeconflicts = [
         { id: 'wide-soft-flat', spread: [16, 16, 14, 16, 14], bias: [2.5, 2.5, 2, 2.5, 2], y: [0, 0, 0, 0, 0], phaseSet: lanePhaseSets[0].value },
         { id: 'strong-soft-tiered', spread: [12, 12, 10, 12, 10], bias: [2.5, 2.5, 2, 2.5, 2], y: [4, 3, 4, 5, 3], phaseSet: lanePhaseSets[1].value }
@@ -2229,6 +2348,10 @@ function summarizeCandidate(row){
     groupRouteCurveXs: row.layout?.groupRouteCurveXs || [],
     groupRouteCurveYs: row.layout?.groupRouteCurveYs || [],
     groupRoutePhases: row.layout?.groupRoutePhases || [],
+    groupLeadInS: row.layout?.groupLeadInS || [],
+    groupLeadInArcs: row.layout?.groupLeadInArcs || [],
+    groupLeadInStartYOffsets: row.layout?.groupLeadInStartYOffsets || [],
+    groupLeadInSideOffsets: row.layout?.groupLeadInSideOffsets || [],
     groupLaneOrders: row.layout?.groupLaneOrders || [],
     visualPresence: row.visualPresence || null,
     visualPresenceRegressionGuard: row.visualPresenceRegressionGuard || null
@@ -2313,8 +2436,9 @@ function buildMarkdown(report){
   const leastBunchedRow = row => `| ${row.candidateId} | ${row.humanVisibleGuardrails?.bunchingRisk ?? 'n/a'} | ${row.humanVisibleGuardrails?.spacingScore ?? 'n/a'} | ${row.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 | ${row.humanPerfectPotentialScore10 ?? 'n/a'}/10 | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.noSafetyRegression ? 'pass' : 'risk'} | ${(row.groupDeconflictSpreads || []).join(', ') || 'none'} | ${(row.groupLanePhaseOffsets?.[0] || []).join(', ') || 'none'} |`;
   const leastBunchedRows = (report.diagnostics?.leastBunchedTop || []).map(leastBunchedRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
   const deconflictRows = (report.diagnostics?.deconflictTop || []).map(leastBunchedRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
-  const routeRow = row => `| ${row.candidateId} | ${row.humanVisibleGuardrails?.bunchingRisk ?? 'n/a'} | ${row.humanVisibleGuardrails?.magicAppearanceRisk ?? 'n/a'} | ${row.humanVisibleGuardrails?.spacingScore ?? 'n/a'} | ${row.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 | ${row.humanPerfectPotentialScore10 ?? 'n/a'}/10 | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${(row.groupRouteOffsetsX || []).join(', ') || 'none'} | ${(row.groupRouteOffsetsY || []).join(', ') || 'none'} |`;
-  const routeRows = (report.diagnostics?.routeAwareTop || []).map(routeRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const routeRow = row => `| ${row.candidateId} | ${row.humanVisibleGuardrails?.bunchingRisk ?? 'n/a'} | ${row.humanVisibleGuardrails?.magicAppearanceRisk ?? 'n/a'} | ${row.humanVisibleGuardrails?.spacingScore ?? 'n/a'} | ${row.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 | ${row.humanPerfectPotentialScore10 ?? 'n/a'}/10 | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${(row.groupLeadInS || []).join(', ') || 'default'} | ${(row.groupRouteOffsetsX || []).join(', ') || 'none'} | ${(row.groupRouteOffsetsY || []).join(', ') || 'none'} |`;
+  const routeRows = (report.diagnostics?.routeAwareTop || []).map(routeRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const leadInRows = (report.diagnostics?.leadInTop || []).map(routeRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
   return `# Stage ${report.stage} Challenge Candidate Sweep
 
 Generated: ${report.generatedAt}
@@ -2399,9 +2523,17 @@ ${deconflictRows}
 
 These rows test coherent whole-group route offsets. They are intended to reduce inter-group overlap and magic appearance without making individual aliens jitter away from their authored wave.
 
-| Candidate | Bunching Risk | Magic Risk | Spacing | Human-Visible | Human-Perfect | Expected Labels | Target-Video Fit | Route X Offsets | Route Y Offsets |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |
+| Candidate | Bunching Risk | Magic Risk | Spacing | Human-Visible | Human-Perfect | Expected Labels | Target-Video Fit | Lead-In S | Route X Offsets | Route Y Offsets |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
 ${routeRows}
+
+### Lead-In Continuity Diagnostics
+
+These rows isolate candidates that explicitly manipulate the challenge lead-in phase. They are useful when magic appearance improves but bunching, target identity, or scoring-window quality still block promotion.
+
+| Candidate | Bunching Risk | Magic Risk | Spacing | Human-Visible | Human-Perfect | Expected Labels | Target-Video Fit | Lead-In S | Route X Offsets | Route Y Offsets |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
+${leadInRows}
 
 ## Next Step
 
@@ -2596,6 +2728,14 @@ async function main(){
       || (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0)
       || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
     .slice(0, 12);
+  const leadInDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('stage7-route-leadin'))
+    .sort((a, b) => magicRiskOf(a) - magicRiskOf(b)
+      || bunchingRiskOf(a) - bunchingRiskOf(b)
+      || (b.humanVisibleGuardrails?.spacingScore || 0) - (a.humanVisibleGuardrails?.spacingScore || 0)
+      || (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0)
+      || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 12);
   const retainedById = new Map();
   for(const row of scored.slice(0, retainedCandidateLimit)) retainedById.set(row.candidateId, row);
   for(const row of targetTimingDiagnostics) retainedById.set(row.candidateId, row);
@@ -2606,6 +2746,7 @@ async function main(){
   for(const row of leastBunchedDiagnostics) retainedById.set(row.candidateId, row);
   for(const row of deconflictDiagnostics) retainedById.set(row.candidateId, row);
   for(const row of routeAwareDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of leadInDiagnostics) retainedById.set(row.candidateId, row);
   const retainedCandidates = Array.from(retainedById.values());
   if(!retainedCandidates.some(row => row.candidateId === baseline.candidateId)){
     retainedCandidates.push(baseline);
@@ -2706,7 +2847,8 @@ async function main(){
       leastBunchedDiagnostics: leastBunchedDiagnostics.length,
       deconflictDiagnostics: deconflictDiagnostics.length,
       routeAwareDiagnostics: routeAwareDiagnostics.length,
-      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score, the baseline row, and top target-timing/target-control/target-reference-path/path-shape/readability/least-bunched/deconflict/route-aware diagnostic candidates; use candidateCount for the full measured search size.`
+      leadInDiagnostics: leadInDiagnostics.length,
+      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score, the baseline row, and top target-timing/target-control/target-reference-path/path-shape/readability/least-bunched/deconflict/route-aware/lead-in diagnostic candidates; use candidateCount for the full measured search size.`
     },
     diagnostics: {
       targetTimingTop: targetTimingDiagnostics.map(summarizeCandidate),
@@ -2716,7 +2858,8 @@ async function main(){
       readabilityTop: readabilityDiagnostics.map(summarizeCandidate),
       leastBunchedTop: leastBunchedDiagnostics.map(summarizeCandidate),
       deconflictTop: deconflictDiagnostics.map(summarizeCandidate),
-      routeAwareTop: routeAwareDiagnostics.map(summarizeCandidate)
+      routeAwareTop: routeAwareDiagnostics.map(summarizeCandidate),
+      leadInTop: leadInDiagnostics.map(summarizeCandidate)
     },
     measurementPolicy: {
       scope: `harness-only stage-${STAGE} challenge layout candidates`,

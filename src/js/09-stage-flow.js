@@ -120,6 +120,10 @@ function spawnChallenge(state){
   const waveLowerFieldBiases=Array.isArray(layout.groupLowerFieldBiases)?layout.groupLowerFieldBiases:null;
   const waveYOffsets=Array.isArray(layout.groupYOffsets)?layout.groupYOffsets:null;
   const waveReferencePaths=Array.isArray(layout.groupReferencePaths)?layout.groupReferencePaths:null;
+  const waveLeadInS=Array.isArray(layout.groupLeadInS)?layout.groupLeadInS:null;
+  const waveLeadInArcs=Array.isArray(layout.groupLeadInArcs)?layout.groupLeadInArcs:null;
+  const waveLeadInStartYOffsets=Array.isArray(layout.groupLeadInStartYOffsets)?layout.groupLeadInStartYOffsets:null;
+  const waveLeadInSideOffsets=Array.isArray(layout.groupLeadInSideOffsets)?layout.groupLeadInSideOffsets:null;
   const waveMotionSpecs=Array.isArray(layout.motionSpecGroups)?layout.motionSpecGroups:null;
   const motionSpecGroup=waveMotionSpecs?.[wave]||null;
   const motionControls=motionSpecGroup?.controls||null;
@@ -177,6 +181,10 @@ function spawnChallenge(state){
    routeCurveX:motionControls?.routeCurveX??0,
    routeCurveY:motionControls?.routeCurveY??0,
    routePhaseS:motionControls?.routePhaseS??0,
+   leadInS:motionControls?.leadInS??motionSpecGroup?.phaseDurations?.leadInS??waveLeadInS?.[wave]??layout.leadInS??0,
+   leadInArc:motionControls?.leadInArc??waveLeadInArcs?.[wave]??layout.leadInArc??0,
+   leadInStartYOffset:motionControls?.leadInStartYOffset??waveLeadInStartYOffsets?.[wave]??layout.leadInStartYOffset??null,
+   leadInSideOffset:motionControls?.leadInSideOffset??waveLeadInSideOffsets?.[wave]??layout.leadInSideOffset??0,
    referencePath:waveReferencePaths?.[wave]||null,
    motionSpecGroup,
    spawn:baseEntryDelay+groupSpawnOffset+slot*slotDelay+slot*laneStaggerS
