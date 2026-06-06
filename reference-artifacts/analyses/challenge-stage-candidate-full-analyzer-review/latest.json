@@ -1,48 +1,48 @@
 {
   "schemaVersion": 1,
   "artifactType": "challenge-stage-candidate-full-analyzer-review",
-  "generatedAt": "2026-05-30T21:56:13.230Z",
-  "commit": "56e319f29",
-  "branch": "codex/macbook-fullscreen-timing-alignment-wip",
+  "generatedAt": "2026-06-06T12:20:03.324Z",
+  "commit": "e43ff631a",
+  "branch": "codex/aurora-challenge-movement-grammar",
   "stage": 7,
-  "candidateId": "stage7-target-controls-shape-only-p3",
+  "candidateId": "stage7-deconflict-wide-softbias-flat-sync",
   "decision": "rejected-full-analyzer-regression",
   "summary": {
-    "sweepDecision": "candidate-ready-for-full-analyzer-review",
-    "sweepExpectedLift10": 0.4,
-    "sweepTargetVideoObjectFitLift10": 1.5,
-    "sweepBestExpectedScore10": 4.5,
-    "sweepBestTargetVideoObjectFitScore10": 4.7
+    "sweepDecision": "no-runtime-keeper-yet",
+    "sweepExpectedLift10": 0,
+    "sweepTargetVideoObjectFitLift10": 0.6,
+    "sweepBestExpectedScore10": 5.7,
+    "sweepBestTargetVideoObjectFitScore10": 4.5
   },
   "restoredBaseline": {
-    "summaryScore10": 4.2,
-    "summaryMovementScore10": 4.2,
-    "summaryTargetVideoObjectTrackFitScore10": 3.7,
-    "stageMovementScore10": 3,
-    "stageConformanceScore10": 3.6,
-    "stageObjectScore10": 4.7,
+    "summaryScore10": 4.3,
+    "summaryMovementScore10": 4.4,
+    "summaryTargetVideoObjectTrackFitScore10": 3.6,
+    "stageMovementScore10": 4.5,
+    "stageConformanceScore10": 4.3,
+    "stageObjectScore10": 4.8,
     "stageTargetFitScore10": 3.7,
-    "bestReferenceMatch": "challenge-1-arrival-group-1"
+    "bestReferenceMatch": "challenge-2-arrival-group-1"
   },
   "trial": {
-    "summaryScore10": 4.2,
-    "summaryMovementScore10": 4.1,
-    "summaryTargetVideoObjectTrackFitScore10": 3.6,
-    "stageMovementScore10": 3,
-    "stageConformanceScore10": 3.6,
-    "stageObjectScore10": 4.6,
-    "stageTargetFitScore10": 3.5,
-    "notes": "Temporary runtime edit was backed out after full challenge-stage analyzer failed to confirm the narrow candidate-sweep lift."
+    "summaryScore10": 4.3,
+    "summaryMovementScore10": 4.4,
+    "summaryTargetVideoObjectTrackFitScore10": 3.5,
+    "stageMovementScore10": 4.4,
+    "stageConformanceScore10": 4.3,
+    "stageObjectScore10": 4.8,
+    "stageTargetFitScore10": 4,
+    "notes": "Best deconflict candidate reduced local bunching risk but did not improve strict Stage 7 conformance and regressed target-video object-track fit versus baseline."
   },
   "deltas": {
     "summaryScore10": 0,
-    "summaryMovementScore10": -0.1,
+    "summaryMovementScore10": 0,
     "summaryTargetVideoObjectTrackFitScore10": -0.1,
-    "stageMovementScore10": 0,
-    "stageObjectScore10": -0.1,
-    "stageTargetFitScore10": -0.2
+    "stageMovementScore10": -0.1,
+    "stageObjectScore10": 0,
+    "stageTargetFitScore10": 0.3
   },
-  "read": "Rejected stage7-target-controls-shape-only-p3: the focused sweep found a narrow shape win, but the full analyzer did not confirm a player-facing improvement. Summary movement delta -0.1, target-video object-track delta -0.1, and Stage 7 target-fit delta -0.2 are not acceptable for runtime promotion.",
+  "read": "Rejected stage7-deconflict-wide-softbias-flat-sync: the focused sweep found a narrow shape win, but the full analyzer did not confirm a player-facing improvement. Summary movement delta 0, target-video object-track delta -0.1, and Stage 7 target-fit delta 0.3 are not acceptable for runtime promotion.",
   "nextStep": "Do not promote this candidate. Extend the scorer to compare full-stage vectors or author a stronger reference-path contract before the next runtime trial.",
   "sources": {
     "candidateSweep": "reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json",

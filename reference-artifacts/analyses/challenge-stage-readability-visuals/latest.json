@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "challenge-stage-readability-visuals",
-  "generatedAt": "2026-06-06T02:54:08.996Z",
-  "commit": "67c8a70af",
+  "generatedAt": "2026-06-06T12:23:59.558Z",
+  "commit": "e43ff631a",
   "branch": "codex/aurora-challenge-movement-grammar",
   "stage": 7,
   "sourceSweep": "reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json",
@@ -54,33 +54,33 @@
     },
     {
       "label": "Least Bunched",
-      "candidateId": "stage7-deconflict-strong-softbias-tiered-zipper",
-      "expectedScore10": 5.6,
+      "candidateId": "stage7-route-spread-left-right-id-sd016",
+      "expectedScore10": 5.7,
       "targetVideoObjectFitScore10": 4,
       "humanPerfectPotentialScore10": 7.4,
-      "humanVisibleScore10": 7.5,
-      "bunchingRisk": 0.688,
-      "spacingScore": 0.347,
+      "humanVisibleScore10": 7.4,
+      "bunchingRisk": 0.667,
+      "spacingScore": 0.371,
       "visibleGroupCount": 5,
       "expectedGroups": 5,
       "noSafetyRegression": true,
       "bestMatchLabelId": "challenge-2-arrival-group-1",
-      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.93, magic-appearance risk 0.07, spacing 0.35, bunching risk 0.69."
+      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.86, magic-appearance risk 0.14, spacing 0.37, bunching risk 0.67."
     },
     {
       "label": "Best Route",
-      "candidateId": "stage7-route-deconflict-spread-left-right-wide-soft-flat-fan-sd016",
+      "candidateId": "stage7-route-spread-left-right-fan-sd016",
       "expectedScore10": 5.7,
       "targetVideoObjectFitScore10": 4,
       "humanPerfectPotentialScore10": 7.3,
-      "humanVisibleScore10": 7.5,
-      "bunchingRisk": 0.75,
-      "spacingScore": 0.324,
+      "humanVisibleScore10": 7.4,
+      "bunchingRisk": 0.667,
+      "spacingScore": 0.371,
       "visibleGroupCount": 5,
       "expectedGroups": 5,
       "noSafetyRegression": true,
       "bestMatchLabelId": "challenge-2-arrival-group-1",
-      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.93, magic-appearance risk 0.07, spacing 0.32, bunching risk 0.75."
+      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.86, magic-appearance risk 0.14, spacing 0.37, bunching risk 0.67."
     },
     {
       "label": "Best Deconflict",
@@ -101,9 +101,9 @@
   "summary": {
     "baselineCandidateId": "baseline-current",
     "baselineBunchingRisk": 1,
-    "leastBunchedCandidateId": "stage7-deconflict-strong-softbias-tiered-zipper",
-    "leastBunchedBunchingRisk": 0.688,
-    "bunchingRiskDelta": -0.312,
+    "leastBunchedCandidateId": "stage7-route-spread-left-right-id-sd016",
+    "leastBunchedBunchingRisk": 0.667,
+    "bunchingRiskDelta": -0.333,
     "playerMeaning": "This artifact makes swarm readability review visual: it shows whether candidate grammar reduced clumping without hiding scoreability, identity, or safety tradeoffs."
   }
 }

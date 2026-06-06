@@ -1,7 +1,7 @@
 # Stage 7 Challenge Authoring Contract
 
-Generated: 2026-06-06T02:45:47.485Z
-Commit: 67c8a70af
+Generated: 2026-06-06T12:23:59.530Z
+Commit: e43ff631a
 Branch: codex/aurora-challenge-movement-grammar
 
 ## Purpose

@@ -1,115 +1,123 @@
 {
   "schemaVersion": 1,
   "artifactType": "challenge-candidate-before-after",
-  "generatedAt": "2026-06-01T16:03:32.799Z",
+  "generatedAt": "2026-06-06T12:20:57.931Z",
   "generatedBy": "tools/harness/analyze-challenge-candidate-before-after.js",
-  "commit": "c722fac34",
-  "branch": "codex/macbook-ingestion-grammar-sync",
-  "stage": 3,
-  "candidateId": "stage3-target-controls-soft-blend-p0",
+  "commit": "e43ff631a",
+  "branch": "codex/aurora-challenge-movement-grammar",
+  "stage": 7,
+  "candidateId": "stage7-deconflict-wide-softbias-flat-sync",
   "sourceSweep": "reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json",
   "sweepSummary": {
     "baselineCandidateId": "baseline-current",
-    "baselineExpectedScore10": 6,
-    "baselineTargetVideoObjectFitScore10": 3.1,
-    "baselineHumanPerfectPotentialScore10": 7.4,
+    "baselineExpectedScore10": 5.7,
+    "baselineTargetVideoObjectFitScore10": 3.9,
+    "baselineHumanPerfectPotentialScore10": 7.5,
+    "baselineHumanVisibleScore10": 5.2,
     "baselineBestMatch": {
-      "labelId": "challenge-1-arrival-group-1",
-      "entityFamily": "bee-line",
-      "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg",
-      "distance": 0.307,
-      "trajectoryScore10": 4.9,
-      "semanticScore10": 10,
-      "score10": 6
+      "labelId": "challenge-2-arrival-group-1",
+      "entityFamily": "mixed-novelty-line",
+      "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg",
+      "distance": 0.325,
+      "trajectoryScore10": 4.6,
+      "semanticScore10": 9.4,
+      "score10": 5.7
     },
-    "bestCandidateId": "baseline-current",
-    "bestExpectedScore10": 6,
-    "bestTargetVideoObjectFitScore10": 3.1,
-    "bestHumanPerfectPotentialScore10": 7.4,
-    "bestSelectionScore10": 6.16,
+    "bestCandidateId": "stage7-target-starts-current-speed-p0",
+    "bestExpectedScore10": 5.7,
+    "bestTargetVideoObjectFitScore10": 4.5,
+    "bestHumanPerfectPotentialScore10": 7.5,
+    "bestHumanVisibleScore10": 6.6,
+    "bestSelectionScore10": 5.44,
     "bestMatch": {
-      "labelId": "challenge-1-arrival-group-1",
-      "entityFamily": "bee-line",
-      "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg",
-      "distance": 0.307,
-      "trajectoryScore10": 4.9,
-      "semanticScore10": 10,
-      "score10": 6
+      "labelId": "challenge-2-arrival-group-1",
+      "entityFamily": "mixed-novelty-line",
+      "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg",
+      "distance": 0.32,
+      "trajectoryScore10": 4.7,
+      "semanticScore10": 9.4,
+      "score10": 5.7
     },
     "expectedLift10": 0,
-    "targetVideoObjectFitLift10": 0,
+    "targetVideoObjectFitLift10": 0.6,
     "humanPerfectPotentialLift10": 0,
+    "humanVisibleLift10": 1.4,
     "targetVideoComparable": true,
     "noTargetVideoRegression": true,
     "noExpectedRegression": true,
     "noHumanPerfectRegression": true,
+    "noHumanVisibleRegression": false,
     "intendedStageSupported": true,
     "fullAnalyzerRisk": {
-      "pass": true,
-      "reason": "no-recorded-full-analyzer-block",
+      "pass": false,
+      "reason": "below-calibrated-full-analyzer-threshold",
+      "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+      "decision": "rejected-full-analyzer-regression",
       "expectedLift10": 0,
-      "targetVideoObjectFitLift10": 0,
-      "read": "No recorded full-analyzer rejection blocks this candidate."
+      "targetVideoObjectFitLift10": 0.6,
+      "rejectedExpectedLift10": 0.4,
+      "rejectedTargetVideoObjectFitLift10": 1.5,
+      "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0/10 and target-video lift 0.6/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
     },
-    "fullAnalyzerRejectionCount": 0,
+    "fullAnalyzerRejectionCount": 1,
     "lateStageIdentityPass": true,
     "identityTieSupported": false,
-    "materialTargetVideoWin": false,
+    "materialTargetVideoWin": true,
     "strongExpectedLift": false,
-    "intendedStageSupportPolicy": "runtime promotion requires no expected-label regression unless the expected label remains the best match and target-video fit improves by >=0.55/10 with no more than -0.15/10 expected drift. It also requires the best trajectory match to be one of the expected stage labels, an expected-label tie within 0.05/10 with >=0.3 expected lift and >=0.15 target-video lift, or a strong expected-label score >=7 with >=0.5 expected lift, >=0.8 target-video lift, and an identity margin no worse than -0.35/10. Human-perfect potential must not regress versus baseline because challenge-stage conformance is not useful if a strong player loses readable scoring windows. For late challenge stages, candidates whose best match belongs to the wrong Galaga challenge number are explicitly penalized and blocked from promotion.",
+    "intendedStageSupportPolicy": "runtime promotion requires no expected-label regression unless the expected label remains the best match and target-video fit improves by >=0.55/10 with no more than -0.15/10 expected drift. It also requires the best trajectory match to be one of the expected stage labels, an expected-label tie within 0.05/10 with >=0.3 expected lift and >=0.15 target-video lift, or a strong expected-label score >=7 with >=0.5 expected lift, >=0.8 target-video lift, and an identity margin no worse than -0.35/10. Human-perfect potential and human-visible guardrails must not regress versus baseline because challenge-stage conformance is not useful if a strong player loses readable scoring windows or if enemies appear/bunch incoherently. For late challenge stages, candidates whose best match belongs to the wrong Galaga challenge number are explicitly penalized and blocked from promotion.",
     "keeperDecision": "no-runtime-keeper-yet",
     "playerMeaning": "This pass improved the search process more than the shipped game: no candidate earned enough measured lift to promote safely.",
-    "processMeaning": "Future challenge tuning can now compare many runtime candidates against Galaga labels before editing game constants.",
-    "nextStep": "Use target-trajectory controls and richer reference labels before changing runtime stage-3 gameplay."
+    "processMeaning": "Future challenge tuning can now reject candidates that look promising in a focused sweep but fail our recorded full-analyzer calibration: Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0/10 and target-video lift 0.6/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10.",
+    "nextStep": "Do not promote stage7-target-starts-current-speed-p0; strengthen the full-stage scorer or author a richer Stage 7 contract before another runtime trial."
   },
   "selectedCandidate": {
-    "candidateId": "stage3-target-controls-soft-blend-p0",
-    "description": "Stage 3 target-trajectory controls: source-video schedule with softer duration speed and half-strength shape controls, path set 0.",
-    "expectedScore10": 6.3,
-    "targetVideoObjectFitScore10": 3.1,
-    "humanPerfectPotentialScore10": 5.8,
-    "baselineExpectedScore10": 6,
-    "baselineTargetVideoObjectFitScore10": 3.1,
-    "baselineHumanPerfectPotentialScore10": 7.4,
-    "expectedLift10": 0.3,
-    "targetVideoObjectFitLift10": 0,
-    "humanPerfectPotentialLift10": -1.6,
+    "candidateId": "stage7-deconflict-wide-softbias-flat-sync",
+    "description": "Stage 7 deconfliction sweep: direct separation wide, lane bias softbias, y offset flat, lane phase sync.",
+    "expectedScore10": 5.7,
+    "targetVideoObjectFitScore10": 4,
+    "humanPerfectPotentialScore10": 7.3,
+    "baselineExpectedScore10": 5.7,
+    "baselineTargetVideoObjectFitScore10": 3.9,
+    "baselineHumanPerfectPotentialScore10": 7.5,
+    "expectedLift10": 0,
+    "targetVideoObjectFitLift10": 0.1,
+    "humanPerfectPotentialLift10": -0.2,
     "humanPerfectGuard": {
       "pass": false,
-      "lift10": -1.6,
-      "baselineScore10": 7.4,
-      "candidateScore10": 5.8,
-      "read": "Human-perfect potential regressed 1.6/10 versus baseline; block runtime promotion until a full player-route review explains the tradeoff."
+      "lift10": -0.2,
+      "baselineScore10": 7.5,
+      "candidateScore10": 7.3,
+      "read": "Human-perfect potential regressed 0.2/10 versus baseline; block runtime promotion until a full player-route review explains the tradeoff."
     },
     "bestMatch": {
-      "labelId": "challenge-1-arrival-group-1",
-      "entityFamily": "bee-line",
-      "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg",
-      "distance": 0.28,
-      "trajectoryScore10": 5.3,
-      "semanticScore10": 10,
-      "score10": 6.3
+      "labelId": "challenge-2-arrival-group-1",
+      "entityFamily": "mixed-novelty-line",
+      "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg",
+      "distance": 0.327,
+      "trajectoryScore10": 4.6,
+      "semanticScore10": 9.4,
+      "score10": 5.7
     },
     "expectedMatch": {
-      "labelId": "challenge-1-arrival-group-1",
-      "entityFamily": "bee-line",
-      "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg",
-      "distance": 0.28,
-      "trajectoryScore10": 5.3,
-      "semanticScore10": 10,
-      "score10": 6.3
+      "labelId": "challenge-2-arrival-group-1",
+      "entityFamily": "mixed-novelty-line",
+      "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-2-arrival/contact-sheet.jpg",
+      "distance": 0.327,
+      "trajectoryScore10": 4.6,
+      "semanticScore10": 9.4,
+      "score10": 5.7
     },
     "targetVideoObjectFit": {
-      "score10": 3.1,
-      "coverage": 0.285,
-      "groupCount": 4,
+      "score10": 4,
+      "coverage": 0.409,
+      "groupCount": 5,
       "targetGroupCount": 5,
-      "read": "Candidate target-video object-track fit 3.1/10 across 4/5 group(s)."
+      "read": "Candidate target-video object-track fit 4/10 across 5/5 group(s)."
     },
-    "read": "Selected candidate stage3-target-controls-soft-blend-p0 changes expected-label score by 0.3/10, target-video fit by 0/10, and human-perfect routeability by -1.6/10."
+    "read": "Selected candidate stage7-deconflict-wide-softbias-flat-sync changes expected-label score by 0/10, target-video fit by 0.1/10, and human-perfect routeability by -0.2/10."
   },
   "media": {
-    "contactSheet": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/challenge-stage-03-candidate-before-after.svg",
+    "contactSheet": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/challenge-stage-07-candidate-before-after.svg",
     "latestContactSheet": "reference-artifacts/analyses/challenge-candidate-before-after/latest-candidate-before-after.svg"
   },
   "baseline": {
@@ -117,241 +125,268 @@
     "frames": [
       {
         "t": 0.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/baseline/baseline-01-005ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-01-005ds.png",
         "summary": {
           "enemyCount": 40,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "classic",
+            "scorpion",
+            "stingray"
           ],
           "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
+            "cross-sweep",
+            "hook-arc"
           ],
-          "xRange": 408,
-          "yRange": 63.93,
-          "minY": 39.07,
-          "maxY": 103
+          "xRange": 372,
+          "yRange": 140.95,
+          "minY": 60.04,
+          "maxY": 200.99
         }
       },
       {
         "t": 2,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/baseline/baseline-02-020ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-02-020ds.png",
         "summary": {
           "enemyCount": 40,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "classic",
+            "scorpion",
+            "stingray"
           ],
           "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
+            "cross-sweep",
+            "hook-arc"
           ],
-          "xRange": 408,
-          "yRange": 60.21,
-          "minY": 42.79,
-          "maxY": 103
+          "xRange": 372,
+          "yRange": 161.49,
+          "minY": 60.04,
+          "maxY": 221.53
         }
       },
       {
         "t": 3.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/baseline/baseline-03-035ds.png",
-        "summary": {
-          "enemyCount": 40,
-          "typeKeys": [
-            "bee",
-            "but"
-          ],
-          "families": [
-            "classic"
-          ],
-          "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
-          ],
-          "xRange": 408,
-          "yRange": 62.01,
-          "minY": 40.99,
-          "maxY": 103
-        }
-      },
-      {
-        "t": 5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/baseline/baseline-04-050ds.png",
-        "summary": {
-          "enemyCount": 40,
-          "typeKeys": [
-            "bee",
-            "but"
-          ],
-          "families": [
-            "classic"
-          ],
-          "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
-          ],
-          "xRange": 408,
-          "yRange": 91.78,
-          "minY": 44.46,
-          "maxY": 136.24
-        }
-      },
-      {
-        "t": 6.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/baseline/baseline-05-065ds.png",
-        "summary": {
-          "enemyCount": 40,
-          "typeKeys": [
-            "bee",
-            "but"
-          ],
-          "families": [
-            "classic"
-          ],
-          "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
-          ],
-          "xRange": 408,
-          "yRange": 147.15,
-          "minY": 61.93,
-          "maxY": 209.08
-        }
-      },
-      {
-        "t": 8,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/baseline/baseline-06-080ds.png",
-        "summary": {
-          "enemyCount": 40,
-          "typeKeys": [
-            "bee",
-            "but"
-          ],
-          "families": [
-            "classic"
-          ],
-          "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
-          ],
-          "xRange": 408,
-          "yRange": 196.12,
-          "minY": 79,
-          "maxY": 275.12
-        }
-      },
-      {
-        "t": 9.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/baseline/baseline-07-095ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-03-035ds.png",
         "summary": {
           "enemyCount": 32,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "scorpion",
+            "stingray"
           ],
           "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
+            "cross-sweep",
+            "hook-arc"
           ],
-          "xRange": 408,
-          "yRange": 241.02,
-          "minY": 88,
-          "maxY": 329.02
+          "xRange": 372,
+          "yRange": 150.11,
+          "minY": 42.17,
+          "maxY": 192.28
         }
       },
       {
-        "t": 11,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/baseline/baseline-08-110ds.png",
+        "t": 5,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-04-050ds.png",
+        "summary": {
+          "enemyCount": 32,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "scorpion",
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "xRange": 372,
+          "yRange": 238.32,
+          "minY": 60.04,
+          "maxY": 298.36
+        }
+      },
+      {
+        "t": 6.5,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-05-065ds.png",
         "summary": {
           "enemyCount": 16,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "stingray"
           ],
           "pathFamilies": [
-            "first-challenge-peel",
-            "side-hook-return"
+            "cross-sweep",
+            "hook-arc"
           ],
-          "xRange": 408,
-          "yRange": 220.91,
-          "minY": 94,
-          "maxY": 314.91
+          "xRange": 372.72,
+          "yRange": 73.24,
+          "minY": 60.04,
+          "maxY": 133.28
+        }
+      },
+      {
+        "t": 8,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-06-080ds.png",
+        "summary": {
+          "enemyCount": 14,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "xRange": 372,
+          "yRange": 66.4,
+          "minY": 60.04,
+          "maxY": 126.44
+        }
+      },
+      {
+        "t": 9.5,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-07-095ds.png",
+        "summary": {
+          "enemyCount": 14,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "xRange": 372,
+          "yRange": 110.46,
+          "minY": 60.04,
+          "maxY": 170.5
+        }
+      },
+      {
+        "t": 11,
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-08-110ds.png",
+        "summary": {
+          "enemyCount": 8,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "hook-arc"
+          ],
+          "xRange": 372,
+          "yRange": 14.54,
+          "minY": 60.04,
+          "maxY": 74.58
         }
       },
       {
         "t": 12.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/baseline/baseline-09-125ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-09-125ds.png",
         "summary": {
           "enemyCount": 8,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "stingray"
           ],
           "pathFamilies": [
-            "first-challenge-peel"
+            "hook-arc"
           ],
-          "xRange": 408,
-          "yRange": 150.65,
-          "minY": 103,
-          "maxY": 253.65
+          "xRange": 372,
+          "yRange": 14.54,
+          "minY": 60.04,
+          "maxY": 74.58
         }
       },
       {
         "t": 14,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/baseline/baseline-10-140ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-10-140ds.png",
         "summary": {
           "enemyCount": 8,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "stingray"
           ],
           "pathFamilies": [
-            "first-challenge-peel"
+            "hook-arc"
           ],
-          "xRange": 129.4,
-          "yRange": 8.27,
-          "minY": 364.66,
-          "maxY": 372.93
+          "xRange": 45.08,
+          "yRange": 30.26,
+          "minY": 45.08,
+          "maxY": 75.34
         }
       },
       {
         "t": 15.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/baseline/baseline-11-155ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-11-155ds.png",
         "summary": {
-          "enemyCount": 0,
-          "typeKeys": [],
-          "families": [],
-          "pathFamilies": [],
-          "xRange": 0,
-          "yRange": 0,
-          "minY": null,
-          "maxY": null
+          "enemyCount": 8,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "hook-arc"
+          ],
+          "xRange": 73.22,
+          "yRange": 109.76,
+          "minY": 100.06,
+          "maxY": 209.82
         }
       }
     ],
@@ -362,20 +397,23 @@
           "enemyCount": 40,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "classic",
+            "scorpion",
+            "stingray"
           ],
           "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
+            "cross-sweep",
+            "hook-arc"
           ],
-          "xRange": 408,
-          "yRange": 63.93,
-          "minY": 39.07,
-          "maxY": 103
+          "xRange": 372,
+          "yRange": 140.95,
+          "minY": 60.04,
+          "maxY": 200.99
         }
       },
       {
@@ -384,151 +422,162 @@
           "enemyCount": 40,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "classic",
+            "scorpion",
+            "stingray"
           ],
           "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
+            "cross-sweep",
+            "hook-arc"
           ],
-          "xRange": 408,
-          "yRange": 60.21,
-          "minY": 42.79,
-          "maxY": 103
+          "xRange": 372,
+          "yRange": 161.49,
+          "minY": 60.04,
+          "maxY": 221.53
         }
       },
       {
         "t": 3.5,
         "summary": {
-          "enemyCount": 40,
+          "enemyCount": 32,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "scorpion",
+            "stingray"
           ],
           "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
+            "cross-sweep",
+            "hook-arc"
           ],
-          "xRange": 408,
-          "yRange": 62.01,
-          "minY": 40.99,
-          "maxY": 103
+          "xRange": 372,
+          "yRange": 150.11,
+          "minY": 42.17,
+          "maxY": 192.28
         }
       },
       {
         "t": 5,
         "summary": {
-          "enemyCount": 40,
+          "enemyCount": 32,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "scorpion",
+            "stingray"
           ],
           "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
+            "cross-sweep",
+            "hook-arc"
           ],
-          "xRange": 408,
-          "yRange": 91.78,
-          "minY": 44.46,
-          "maxY": 136.24
+          "xRange": 372,
+          "yRange": 238.32,
+          "minY": 60.04,
+          "maxY": 298.36
         }
       },
       {
         "t": 6.5,
         "summary": {
-          "enemyCount": 40,
+          "enemyCount": 16,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "stingray"
           ],
           "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
+            "cross-sweep",
+            "hook-arc"
           ],
-          "xRange": 408,
-          "yRange": 147.15,
-          "minY": 61.93,
-          "maxY": 209.08
+          "xRange": 372.72,
+          "yRange": 73.24,
+          "minY": 60.04,
+          "maxY": 133.28
         }
       },
       {
         "t": 8,
         "summary": {
-          "enemyCount": 40,
+          "enemyCount": 14,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "stingray"
           ],
           "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
+            "cross-sweep",
+            "hook-arc"
           ],
-          "xRange": 408,
-          "yRange": 196.12,
-          "minY": 79,
-          "maxY": 275.12
+          "xRange": 372,
+          "yRange": 66.4,
+          "minY": 60.04,
+          "maxY": 126.44
         }
       },
       {
         "t": 9.5,
         "summary": {
-          "enemyCount": 32,
+          "enemyCount": 14,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "stingray"
           ],
           "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
+            "cross-sweep",
+            "hook-arc"
           ],
-          "xRange": 408,
-          "yRange": 241.02,
-          "minY": 88,
-          "maxY": 329.02
+          "xRange": 372,
+          "yRange": 110.46,
+          "minY": 60.04,
+          "maxY": 170.5
         }
       },
       {
         "t": 11,
         "summary": {
-          "enemyCount": 16,
+          "enemyCount": 8,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "stingray"
           ],
           "pathFamilies": [
-            "first-challenge-peel",
-            "side-hook-return"
+            "hook-arc"
           ],
-          "xRange": 408,
-          "yRange": 220.91,
-          "minY": 94,
-          "maxY": 314.91
+          "xRange": 372,
+          "yRange": 14.54,
+          "minY": 60.04,
+          "maxY": 74.58
         }
       },
       {
@@ -537,18 +586,20 @@
           "enemyCount": 8,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "stingray"
           ],
           "pathFamilies": [
-            "first-challenge-peel"
+            "hook-arc"
           ],
-          "xRange": 408,
-          "yRange": 150.65,
-          "minY": 103,
-          "maxY": 253.65
+          "xRange": 372,
+          "yRange": 14.54,
+          "minY": 60.04,
+          "maxY": 74.58
         }
       },
       {
@@ -557,47 +608,59 @@
           "enemyCount": 8,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "stingray"
           ],
           "pathFamilies": [
-            "first-challenge-peel"
+            "hook-arc"
           ],
-          "xRange": 129.4,
-          "yRange": 8.27,
-          "minY": 364.66,
-          "maxY": 372.93
+          "xRange": 45.08,
+          "yRange": 30.26,
+          "minY": 45.08,
+          "maxY": 75.34
         }
       },
       {
         "t": 15.5,
         "summary": {
-          "enemyCount": 0,
-          "typeKeys": [],
-          "families": [],
-          "pathFamilies": [],
-          "xRange": 0,
-          "yRange": 0,
-          "minY": null,
-          "maxY": null
+          "enemyCount": 8,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "hook-arc"
+          ],
+          "xRange": 73.22,
+          "yRange": 109.76,
+          "minY": 100.06,
+          "maxY": 209.82
         }
       }
     ],
     "aggregate": {
       "sampleCount": 11,
-      "averageEnemyCount": 27.64,
-      "averageXRange": 345.58,
-      "averageYRange": 112.91,
+      "averageEnemyCount": 20,
+      "averageXRange": 315.18,
+      "averageYRange": 100.92,
       "pathFamilies": [
-        "classic-column-drop",
-        "first-challenge-peel",
-        "side-hook-return"
+        "cross-sweep",
+        "hook-arc"
       ],
       "typeKeys": [
         "bee",
-        "but"
+        "boss",
+        "but",
+        "rogue"
       ]
     }
   },
@@ -606,246 +669,195 @@
     "frames": [
       {
         "t": 0.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/candidate/candidate-01-005ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-01-005ds.png",
         "summary": {
           "enemyCount": 40,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "classic",
+            "scorpion",
+            "stingray"
           ],
           "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
+            "boss-led-loop",
+            "cross-sweep",
+            "hook-arc"
           ],
-          "xRange": 408,
-          "yRange": 47,
-          "minY": 47,
-          "maxY": 94
+          "xRange": 269.85,
+          "yRange": 181.27,
+          "minY": 39.27,
+          "maxY": 220.54
         }
       },
       {
         "t": 2,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/candidate/candidate-02-020ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-02-020ds.png",
         "summary": {
-          "enemyCount": 40,
+          "enemyCount": 34,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "classic",
+            "scorpion",
+            "stingray"
           ],
           "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
+            "boss-led-loop",
+            "cross-sweep",
+            "hook-arc"
           ],
-          "xRange": 408,
-          "yRange": 47,
-          "minY": 47,
-          "maxY": 94
+          "xRange": 220.99,
+          "yRange": 301.81,
+          "minY": 50.4,
+          "maxY": 352.21
         }
       },
       {
         "t": 3.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/candidate/candidate-03-035ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-03-035ds.png",
         "summary": {
-          "enemyCount": 40,
+          "enemyCount": 17,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "classic",
+            "scorpion",
+            "stingray"
           ],
           "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
+            "boss-led-loop",
+            "cross-sweep",
+            "hook-arc"
           ],
-          "xRange": 408,
-          "yRange": 78.33,
-          "minY": 47,
-          "maxY": 125.33
+          "xRange": 197.38,
+          "yRange": 127.87,
+          "minY": 254.1,
+          "maxY": 381.97
         }
       },
       {
         "t": 5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/candidate/candidate-04-050ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-04-050ds.png",
         "summary": {
-          "enemyCount": 40,
-          "typeKeys": [
-            "bee",
-            "but"
-          ],
-          "families": [
-            "classic"
-          ],
-          "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
-          ],
-          "xRange": 408,
-          "yRange": 186.94,
-          "minY": 60,
-          "maxY": 246.94
+          "enemyCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
         }
       },
       {
         "t": 6.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/candidate/candidate-05-065ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-05-065ds.png",
         "summary": {
-          "enemyCount": 32,
-          "typeKeys": [
-            "bee",
-            "but"
-          ],
-          "families": [
-            "classic"
-          ],
-          "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
-          ],
-          "xRange": 408,
-          "yRange": 184.77,
-          "minY": 60,
-          "maxY": 244.77
+          "enemyCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
         }
       },
       {
         "t": 8,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/candidate/candidate-06-080ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-06-080ds.png",
         "summary": {
-          "enemyCount": 32,
-          "typeKeys": [
-            "bee",
-            "but"
-          ],
-          "families": [
-            "classic"
-          ],
-          "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
-          ],
-          "xRange": 408,
-          "yRange": 219.84,
-          "minY": 68,
-          "maxY": 287.84
+          "enemyCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
         }
       },
       {
         "t": 9.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/candidate/candidate-07-095ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-07-095ds.png",
         "summary": {
-          "enemyCount": 24,
-          "typeKeys": [
-            "bee",
-            "but"
-          ],
-          "families": [
-            "classic"
-          ],
-          "pathFamilies": [
-            "first-challenge-peel",
-            "side-hook-return"
-          ],
-          "xRange": 408,
-          "yRange": 171.61,
-          "minY": 73,
-          "maxY": 244.61
+          "enemyCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
         }
       },
       {
         "t": 11,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/candidate/candidate-08-110ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-08-110ds.png",
         "summary": {
-          "enemyCount": 16,
-          "typeKeys": [
-            "bee",
-            "but"
-          ],
-          "families": [
-            "classic"
-          ],
-          "pathFamilies": [
-            "side-hook-return"
-          ],
-          "xRange": 408,
-          "yRange": 21,
-          "minY": 73,
-          "maxY": 94
+          "enemyCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
         }
       },
       {
         "t": 12.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/candidate/candidate-09-125ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-09-125ds.png",
         "summary": {
-          "enemyCount": 8,
-          "typeKeys": [
-            "bee",
-            "but"
-          ],
-          "families": [
-            "classic"
-          ],
-          "pathFamilies": [
-            "side-hook-return"
-          ],
-          "xRange": 408,
-          "yRange": 8,
-          "minY": 86,
-          "maxY": 94
+          "enemyCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
         }
       },
       {
         "t": 14,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/candidate/candidate-10-140ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-10-140ds.png",
         "summary": {
-          "enemyCount": 8,
-          "typeKeys": [
-            "bee",
-            "but"
-          ],
-          "families": [
-            "classic"
-          ],
-          "pathFamilies": [
-            "side-hook-return"
-          ],
-          "xRange": 408,
-          "yRange": 8,
-          "minY": 86,
-          "maxY": 94
+          "enemyCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
         }
       },
       {
         "t": 15.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-01T16-03-27-c722fac34/frames/candidate/candidate-11-155ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-11-155ds.png",
         "summary": {
-          "enemyCount": 4,
-          "typeKeys": [
-            "bee",
-            "but"
-          ],
-          "families": [
-            "classic"
-          ],
-          "pathFamilies": [
-            "side-hook-return"
-          ],
-          "xRange": 408,
+          "enemyCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "xRange": 0,
           "yRange": 0,
-          "minY": 94,
-          "maxY": 94
+          "minY": null,
+          "maxY": null
         }
       }
     ],
@@ -856,249 +868,200 @@
           "enemyCount": 40,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "classic",
+            "scorpion",
+            "stingray"
           ],
           "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
+            "boss-led-loop",
+            "cross-sweep",
+            "hook-arc"
           ],
-          "xRange": 408,
-          "yRange": 47,
-          "minY": 47,
-          "maxY": 94
+          "xRange": 269.85,
+          "yRange": 181.27,
+          "minY": 39.27,
+          "maxY": 220.54
         }
       },
       {
         "t": 2,
         "summary": {
-          "enemyCount": 40,
+          "enemyCount": 34,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "classic",
+            "scorpion",
+            "stingray"
           ],
           "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
+            "boss-led-loop",
+            "cross-sweep",
+            "hook-arc"
           ],
-          "xRange": 408,
-          "yRange": 47,
-          "minY": 47,
-          "maxY": 94
+          "xRange": 220.99,
+          "yRange": 301.81,
+          "minY": 50.4,
+          "maxY": 352.21
         }
       },
       {
         "t": 3.5,
         "summary": {
-          "enemyCount": 40,
+          "enemyCount": 17,
           "typeKeys": [
             "bee",
-            "but"
+            "boss",
+            "but",
+            "rogue"
           ],
           "families": [
-            "classic"
+            "classic",
+            "scorpion",
+            "stingray"
           ],
           "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
+            "boss-led-loop",
+            "cross-sweep",
+            "hook-arc"
           ],
-          "xRange": 408,
-          "yRange": 78.33,
-          "minY": 47,
-          "maxY": 125.33
+          "xRange": 197.38,
+          "yRange": 127.87,
+          "minY": 254.1,
+          "maxY": 381.97
         }
       },
       {
         "t": 5,
         "summary": {
-          "enemyCount": 40,
-          "typeKeys": [
-            "bee",
-            "but"
-          ],
-          "families": [
-            "classic"
-          ],
-          "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
-          ],
-          "xRange": 408,
-          "yRange": 186.94,
-          "minY": 60,
-          "maxY": 246.94
+          "enemyCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
         }
       },
       {
         "t": 6.5,
         "summary": {
-          "enemyCount": 32,
-          "typeKeys": [
-            "bee",
-            "but"
-          ],
-          "families": [
-            "classic"
-          ],
-          "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
-          ],
-          "xRange": 408,
-          "yRange": 184.77,
-          "minY": 60,
-          "maxY": 244.77
+          "enemyCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
         }
       },
       {
         "t": 8,
         "summary": {
-          "enemyCount": 32,
-          "typeKeys": [
-            "bee",
-            "but"
-          ],
-          "families": [
-            "classic"
-          ],
-          "pathFamilies": [
-            "classic-column-drop",
-            "first-challenge-peel",
-            "side-hook-return"
-          ],
-          "xRange": 408,
-          "yRange": 219.84,
-          "minY": 68,
-          "maxY": 287.84
+          "enemyCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
         }
       },
       {
         "t": 9.5,
         "summary": {
-          "enemyCount": 24,
-          "typeKeys": [
-            "bee",
-            "but"
-          ],
-          "families": [
-            "classic"
-          ],
-          "pathFamilies": [
-            "first-challenge-peel",
-            "side-hook-return"
-          ],
-          "xRange": 408,
-          "yRange": 171.61,
-          "minY": 73,
-          "maxY": 244.61
+          "enemyCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
         }
       },
       {
         "t": 11,
         "summary": {
-          "enemyCount": 16,
-          "typeKeys": [
-            "bee",
-            "but"
-          ],
-          "families": [
-            "classic"
-          ],
-          "pathFamilies": [
-            "side-hook-return"
-          ],
-          "xRange": 408,
-          "yRange": 21,
-          "minY": 73,
-          "maxY": 94
+          "enemyCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
         }
       },
       {
         "t": 12.5,
         "summary": {
-          "enemyCount": 8,
-          "typeKeys": [
-            "bee",
-            "but"
-          ],
-          "families": [
-            "classic"
-          ],
-          "pathFamilies": [
-            "side-hook-return"
-          ],
-          "xRange": 408,
-          "yRange": 8,
-          "minY": 86,
-          "maxY": 94
+          "enemyCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
         }
       },
       {
         "t": 14,
         "summary": {
-          "enemyCount": 8,
-          "typeKeys": [
-            "bee",
-            "but"
-          ],
-          "families": [
-            "classic"
-          ],
-          "pathFamilies": [
-            "side-hook-return"
-          ],
-          "xRange": 408,
-          "yRange": 8,
-          "minY": 86,
-          "maxY": 94
+          "enemyCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
         }
       },
       {
         "t": 15.5,
         "summary": {
-          "enemyCount": 4,
-          "typeKeys": [
-            "bee",
-            "but"
-          ],
-          "families": [
-            "classic"
-          ],
-          "pathFamilies": [
-            "side-hook-return"
-          ],
-          "xRange": 408,
+          "enemyCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "xRange": 0,
           "yRange": 0,
-          "minY": 94,
-          "maxY": 94
+          "minY": null,
+          "maxY": null
         }
       }
     ],
     "aggregate": {
       "sampleCount": 11,
-      "averageEnemyCount": 25.82,
-      "averageXRange": 408,
-      "averageYRange": 88.41,
+      "averageEnemyCount": 8.27,
+      "averageXRange": 62.57,
+      "averageYRange": 55.54,
       "pathFamilies": [
-        "classic-column-drop",
-        "first-challenge-peel",
-        "side-hook-return"
+        "boss-led-loop",
+        "cross-sweep",
+        "hook-arc"
       ],
       "typeKeys": [
         "bee",
-        "but"
+        "boss",
+        "but",
+        "rogue"
       ]
     }
   },
-  "read": "Candidate stage3-target-controls-soft-blend-p0 should be visually compared against baseline, then accepted only if the full analyzers preserve safety and human-perfect playability. Selected candidate stage3-target-controls-soft-blend-p0 changes expected-label score by 0.3/10, target-video fit by 0/10, and human-perfect routeability by -1.6/10."
+  "read": "Candidate stage7-deconflict-wide-softbias-flat-sync should be visually compared against baseline, then accepted only if the full analyzers preserve safety and human-perfect playability. Selected candidate stage7-deconflict-wide-softbias-flat-sync changes expected-label score by 0/10, target-video fit by 0.1/10, and human-perfect routeability by -0.2/10."
 }

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "challenge-deconflict-underperformance",
-  "generatedAt": "2026-06-06T01:15:21.325Z",
-  "commit": "67c8a70af",
+  "generatedAt": "2026-06-06T12:23:59.520Z",
+  "commit": "e43ff631a",
   "branch": "codex/aurora-challenge-movement-grammar",
   "stage": 7,
   "sourceSweep": "reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json",
@@ -47,17 +47,17 @@
       "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.93, magic-appearance risk 0.07, spacing 0.37, bunching risk 0.75."
     },
     "leastBunched": {
-      "candidateId": "stage7-deconflict-strong-softbias-tiered-zipper",
-      "expectedScore10": 5.6,
+      "candidateId": "stage7-route-spread-left-right-id-sd016",
+      "expectedScore10": 5.7,
       "targetVideoObjectFitScore10": 4,
       "humanPerfectPotentialScore10": 7.4,
-      "humanVisibleScore10": 7.5,
-      "bunchingRisk": 0.688,
-      "magicAppearanceRisk": 0.072,
-      "spacingScore": 0.347,
-      "arrivalContinuity": 0.928,
+      "humanVisibleScore10": 7.4,
+      "bunchingRisk": 0.667,
+      "magicAppearanceRisk": 0.144,
+      "spacingScore": 0.371,
+      "arrivalContinuity": 0.856,
       "pass": false,
-      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.93, magic-appearance risk 0.07, spacing 0.35, bunching risk 0.69."
+      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.86, magic-appearance risk 0.14, spacing 0.37, bunching risk 0.67."
     },
     "bestDeconflict": {
       "candidateId": "stage7-deconflict-wide-softbias-flat-sync",
@@ -73,31 +73,31 @@
       "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.93, magic-appearance risk 0.07, spacing 0.35, bunching risk 0.69."
     },
     "bestRouteAware": {
-      "candidateId": "stage7-route-deconflict-spread-left-right-wide-soft-flat-fan-sd016",
+      "candidateId": "stage7-route-spread-left-right-fan-sd016",
       "expectedScore10": 5.7,
       "targetVideoObjectFitScore10": 4,
       "humanPerfectPotentialScore10": 7.3,
-      "humanVisibleScore10": 7.5,
-      "bunchingRisk": 0.75,
-      "magicAppearanceRisk": 0.072,
-      "spacingScore": 0.324,
-      "arrivalContinuity": 0.928,
+      "humanVisibleScore10": 7.4,
+      "bunchingRisk": 0.667,
+      "magicAppearanceRisk": 0.144,
+      "spacingScore": 0.371,
+      "arrivalContinuity": 0.856,
       "pass": false,
-      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.93, magic-appearance risk 0.07, spacing 0.32, bunching risk 0.75."
+      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.86, magic-appearance risk 0.14, spacing 0.37, bunching risk 0.67."
     }
   },
   "summary": {
     "baselineBunchingRisk": 1,
     "bestReadabilityBunchingRisk": 0.75,
-    "leastBunchedBunchingRisk": 0.688,
+    "leastBunchedBunchingRisk": 0.667,
     "bestDeconflictBunchingRisk": 0.688,
-    "bestRouteAwareBunchingRisk": 0.75,
-    "deconflictRiskGapVsLeastBunched": 0,
-    "routeRiskGapVsLeastBunched": 0.062,
+    "bestRouteAwareBunchingRisk": 0.667,
+    "deconflictRiskGapVsLeastBunched": 0.021,
+    "routeRiskGapVsLeastBunched": 0,
     "deconflictImprovesBaseline": true,
     "deconflictBeatsReadability": true,
-    "routeBeatsDeconflict": false,
-    "read": "The stronger direct deconflict family now beats the earlier readability/timing family on bunching, but it remains far from the promotion gate. Route-aware offsets reduce magic-appearance risk and are now a useful grammar seam, but they did not beat deconflict-only on bunching in this pass, so they should remain measured rather than promoted."
+    "routeBeatsDeconflict": true,
+    "read": "Route-aware group offsets now beat direct deconflict on bunching risk, but they remain far from the promotion gate and need density, target-fit, and human-perfect review before runtime promotion. Direct deconflict still improves baseline readability, but the rejected full-analyzer trial shows local deconfliction can create misleading wins."
   },
   "nextPrimitive": {
     "id": "route-aware-group-separation",

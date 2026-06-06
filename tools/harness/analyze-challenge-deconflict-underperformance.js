@@ -142,9 +142,11 @@ function main(){
   const routeBeatsDeconflict = Number.isFinite(+rows.bestRouteAware?.bunchingRisk) && Number.isFinite(+rows.bestDeconflict?.bunchingRisk)
     ? rows.bestRouteAware.bunchingRisk <= rows.bestDeconflict.bunchingRisk
     : false;
-  const read = deconflictBeatsReadability
-    ? 'The stronger direct deconflict family now beats the earlier readability/timing family on bunching, but it remains far from the promotion gate. Route-aware offsets reduce magic-appearance risk and are now a useful grammar seam, but they did not beat deconflict-only on bunching in this pass, so they should remain measured rather than promoted.'
-    : 'Direct object-level deconfliction improved over the current baseline but did not beat the best readability/timing candidate. The next attempt should move whole route groups coherently, then use object-level offsets only as a secondary fine-tuning layer.';
+  const read = routeBeatsDeconflict
+    ? 'Route-aware group offsets now beat direct deconflict on bunching risk, but they remain far from the promotion gate and need density, target-fit, and human-perfect review before runtime promotion. Direct deconflict still improves baseline readability, but the rejected full-analyzer trial shows local deconfliction can create misleading wins.'
+    : deconflictBeatsReadability
+      ? 'The stronger direct deconflict family now beats the earlier readability/timing family on bunching, but it remains far from the promotion gate. Route-aware offsets reduce magic-appearance risk and are now a useful grammar seam, but they did not beat deconflict-only on bunching in this pass, so they should remain measured rather than promoted.'
+      : 'Direct object-level deconfliction improved over the current baseline but did not beat the best readability/timing candidate. The next attempt should move whole route groups coherently, then use object-level offsets only as a secondary fine-tuning layer.';
   const report = {
     schemaVersion: 1,
     artifactType: 'challenge-deconflict-underperformance',
