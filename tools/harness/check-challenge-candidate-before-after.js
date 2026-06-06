@@ -56,6 +56,16 @@ function main(){
   if(!selected.humanPerfectGuard || !finite(selected.humanPerfectGuard.candidateScore10)){
     fail('Challenge candidate before/after selected candidate is missing the human-perfect guard result.', selected);
   }
+  const visualPresence = artifact.visualPresenceGuardrails || {};
+  if(typeof visualPresence.pass !== 'boolean'
+    || !finite(visualPresence.enemyCountDelta)
+    || !finite(visualPresence.xRangeDelta)
+    || !finite(visualPresence.yRangeDelta)
+    || !visualPresence.baseline
+    || !visualPresence.candidate
+    || !String(visualPresence.policy || '').includes('visible swarm presence')){
+    fail('Challenge candidate before/after artifact is missing visual presence guardrails.', visualPresence);
+  }
   if(!String(artifact.read || '').includes('human-perfect')){
     fail('Challenge candidate before/after read must explain human-perfect review context.', artifact.read);
   }
@@ -69,7 +79,11 @@ function main(){
     expectedLift10: selected.expectedLift10,
     targetVideoObjectFitLift10: selected.targetVideoObjectFitLift10,
     humanPerfectPotentialLift10: selected.humanPerfectPotentialLift10,
-    humanPerfectGuardPass: selected.humanPerfectGuard.pass
+    humanPerfectGuardPass: selected.humanPerfectGuard.pass,
+    visualPresencePass: visualPresence.pass,
+    enemyCountDelta: visualPresence.enemyCountDelta,
+    xRangeDelta: visualPresence.xRangeDelta,
+    yRangeDelta: visualPresence.yRangeDelta
   }, null, 2));
 }
 

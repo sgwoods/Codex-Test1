@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "challenge-candidate-before-after",
-  "generatedAt": "2026-06-06T12:20:57.931Z",
+  "generatedAt": "2026-06-06T12:33:13.374Z",
   "generatedBy": "tools/harness/analyze-challenge-candidate-before-after.js",
-  "commit": "e43ff631a",
+  "commit": "fa1591b1e",
   "branch": "codex/aurora-challenge-movement-grammar",
   "stage": 7,
   "candidateId": "stage7-deconflict-wide-softbias-flat-sync",
@@ -51,7 +51,7 @@
     "fullAnalyzerRisk": {
       "pass": false,
       "reason": "below-calibrated-full-analyzer-threshold",
-      "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json",
+      "source": "reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/2026-05-30T21-56-13-56e319f29/report.json",
       "decision": "rejected-full-analyzer-regression",
       "expectedLift10": 0,
       "targetVideoObjectFitLift10": 0.6,
@@ -59,7 +59,7 @@
       "rejectedTargetVideoObjectFitLift10": 1.5,
       "read": "Candidate lift does not clear the latest rejected full-analyzer calibration for stage 7: expected lift 0/10 and target-video lift 0.6/10 are not materially stronger than rejected lift 0.4/10 and 1.5/10."
     },
-    "fullAnalyzerRejectionCount": 1,
+    "fullAnalyzerRejectionCount": 2,
     "lateStageIdentityPass": true,
     "identityTieSupported": false,
     "materialTargetVideoWin": true,
@@ -117,7 +117,7 @@
     "read": "Selected candidate stage7-deconflict-wide-softbias-flat-sync changes expected-label score by 0/10, target-video fit by 0.1/10, and human-perfect routeability by -0.2/10."
   },
   "media": {
-    "contactSheet": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/challenge-stage-07-candidate-before-after.svg",
+    "contactSheet": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/challenge-stage-07-candidate-before-after.svg",
     "latestContactSheet": "reference-artifacts/analyses/challenge-candidate-before-after/latest-candidate-before-after.svg"
   },
   "baseline": {
@@ -125,7 +125,7 @@
     "frames": [
       {
         "t": 0.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-01-005ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/baseline/baseline-01-005ds.png",
         "summary": {
           "enemyCount": 40,
           "typeKeys": [
@@ -151,7 +151,7 @@
       },
       {
         "t": 2,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-02-020ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/baseline/baseline-02-020ds.png",
         "summary": {
           "enemyCount": 40,
           "typeKeys": [
@@ -177,7 +177,7 @@
       },
       {
         "t": 3.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-03-035ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/baseline/baseline-03-035ds.png",
         "summary": {
           "enemyCount": 32,
           "typeKeys": [
@@ -202,7 +202,7 @@
       },
       {
         "t": 5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-04-050ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/baseline/baseline-04-050ds.png",
         "summary": {
           "enemyCount": 32,
           "typeKeys": [
@@ -227,7 +227,7 @@
       },
       {
         "t": 6.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-05-065ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/baseline/baseline-05-065ds.png",
         "summary": {
           "enemyCount": 16,
           "typeKeys": [
@@ -251,7 +251,7 @@
       },
       {
         "t": 8,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-06-080ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/baseline/baseline-06-080ds.png",
         "summary": {
           "enemyCount": 14,
           "typeKeys": [
@@ -275,7 +275,7 @@
       },
       {
         "t": 9.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-07-095ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/baseline/baseline-07-095ds.png",
         "summary": {
           "enemyCount": 14,
           "typeKeys": [
@@ -299,7 +299,7 @@
       },
       {
         "t": 11,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-08-110ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/baseline/baseline-08-110ds.png",
         "summary": {
           "enemyCount": 8,
           "typeKeys": [
@@ -322,7 +322,7 @@
       },
       {
         "t": 12.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-09-125ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/baseline/baseline-09-125ds.png",
         "summary": {
           "enemyCount": 8,
           "typeKeys": [
@@ -345,7 +345,7 @@
       },
       {
         "t": 14,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-10-140ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/baseline/baseline-10-140ds.png",
         "summary": {
           "enemyCount": 8,
           "typeKeys": [
@@ -368,7 +368,7 @@
       },
       {
         "t": 15.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/baseline/baseline-11-155ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/baseline/baseline-11-155ds.png",
         "summary": {
           "enemyCount": 8,
           "typeKeys": [
@@ -669,7 +669,7 @@
     "frames": [
       {
         "t": 0.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-01-005ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/candidate/candidate-01-005ds.png",
         "summary": {
           "enemyCount": 40,
           "typeKeys": [
@@ -696,7 +696,7 @@
       },
       {
         "t": 2,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-02-020ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/candidate/candidate-02-020ds.png",
         "summary": {
           "enemyCount": 34,
           "typeKeys": [
@@ -723,7 +723,7 @@
       },
       {
         "t": 3.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-03-035ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/candidate/candidate-03-035ds.png",
         "summary": {
           "enemyCount": 17,
           "typeKeys": [
@@ -750,7 +750,7 @@
       },
       {
         "t": 5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-04-050ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/candidate/candidate-04-050ds.png",
         "summary": {
           "enemyCount": 0,
           "typeKeys": [],
@@ -764,7 +764,7 @@
       },
       {
         "t": 6.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-05-065ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/candidate/candidate-05-065ds.png",
         "summary": {
           "enemyCount": 0,
           "typeKeys": [],
@@ -778,7 +778,7 @@
       },
       {
         "t": 8,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-06-080ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/candidate/candidate-06-080ds.png",
         "summary": {
           "enemyCount": 0,
           "typeKeys": [],
@@ -792,7 +792,7 @@
       },
       {
         "t": 9.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-07-095ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/candidate/candidate-07-095ds.png",
         "summary": {
           "enemyCount": 0,
           "typeKeys": [],
@@ -806,7 +806,7 @@
       },
       {
         "t": 11,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-08-110ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/candidate/candidate-08-110ds.png",
         "summary": {
           "enemyCount": 0,
           "typeKeys": [],
@@ -820,7 +820,7 @@
       },
       {
         "t": 12.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-09-125ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/candidate/candidate-09-125ds.png",
         "summary": {
           "enemyCount": 0,
           "typeKeys": [],
@@ -834,7 +834,7 @@
       },
       {
         "t": 14,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-10-140ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/candidate/candidate-10-140ds.png",
         "summary": {
           "enemyCount": 0,
           "typeKeys": [],
@@ -848,7 +848,7 @@
       },
       {
         "t": 15.5,
-        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-20-52-e43ff631a/frames/candidate/candidate-11-155ds.png",
+        "path": "reference-artifacts/analyses/challenge-candidate-before-after/2026-06-06T12-33-07-fa1591b1e/frames/candidate/candidate-11-155ds.png",
         "summary": {
           "enemyCount": 0,
           "typeKeys": [],
@@ -1063,5 +1063,26 @@
       ]
     }
   },
-  "read": "Candidate stage7-deconflict-wide-softbias-flat-sync should be visually compared against baseline, then accepted only if the full analyzers preserve safety and human-perfect playability. Selected candidate stage7-deconflict-wide-softbias-flat-sync changes expected-label score by 0/10, target-video fit by 0.1/10, and human-perfect routeability by -0.2/10."
+  "visualPresenceGuardrails": {
+    "pass": false,
+    "baseline": {
+      "averageEnemyCount": 20,
+      "averageXRange": 315.18,
+      "averageYRange": 100.92
+    },
+    "candidate": {
+      "averageEnemyCount": 8.27,
+      "averageXRange": 62.57,
+      "averageYRange": 55.54
+    },
+    "enemyCountRatio": 0.413,
+    "xRangeRatio": 0.199,
+    "yRangeRatio": 0.55,
+    "enemyCountDelta": -11.73,
+    "xRangeDelta": -252.61,
+    "yRangeDelta": -45.38,
+    "policy": "A challenge candidate may reduce overlap, but it must preserve visible swarm presence: at least 82% of baseline visible enemy density and at least 72% of baseline horizontal and vertical runtime spread in the before/after window.",
+    "read": "Visual presence guard blocks promotion: visible enemy density collapsed to 0.413x baseline; horizontal swarm range collapsed to 0.199x baseline; vertical swarm range collapsed to 0.55x baseline."
+  },
+  "read": "Candidate stage7-deconflict-wide-softbias-flat-sync should be visually compared against baseline, then accepted only if the full analyzers preserve safety, human-perfect playability, and visual swarm presence. Selected candidate stage7-deconflict-wide-softbias-flat-sync changes expected-label score by 0/10, target-video fit by 0.1/10, and human-perfect routeability by -0.2/10. Visual presence guard blocks promotion: visible enemy density collapsed to 0.413x baseline; horizontal swarm range collapsed to 0.199x baseline; vertical swarm range collapsed to 0.55x baseline."
 }

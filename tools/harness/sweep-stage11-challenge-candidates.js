@@ -536,6 +536,75 @@ function humanVisibleGuardrails(measured, noSafetyRegression){
   };
 }
 
+function visualPresenceMetrics(measured){
+  const sampleMap = new Map(SAMPLE_TIMES.map(t => [t.toFixed(2), []]));
+  const tracks = Array.isArray(measured?.tracks) ? measured.tracks : [];
+  for(const track of tracks){
+    for(const point of track.points || []){
+      const key = Number.isFinite(+point.t) ? (+point.t).toFixed(2) : '';
+      if(!key) continue;
+      if(!sampleMap.has(key)) sampleMap.set(key, []);
+      sampleMap.get(key).push(point);
+    }
+  }
+  const samples = [...sampleMap.entries()]
+    .sort((a, b) => +a[0] - +b[0])
+    .map(([t, points]) => {
+      const xs = points.map(point => +point.x).filter(Number.isFinite);
+      const ys = points.map(point => +point.y).filter(Number.isFinite);
+      return {
+        t: +t,
+        enemyCount: points.length,
+        xRange: xs.length ? round(Math.max(...xs) - Math.min(...xs), 2) : 0,
+        yRange: ys.length ? round(Math.max(...ys) - Math.min(...ys), 2) : 0
+      };
+    });
+  return {
+    averageEnemyCount: round(average(samples.map(sample => sample.enemyCount)), 2),
+    averageXRange: round(average(samples.map(sample => sample.xRange)), 2),
+    averageYRange: round(average(samples.map(sample => sample.yRange)), 2),
+    maxEnemyCount: samples.length ? Math.max(...samples.map(sample => sample.enemyCount)) : 0,
+    sampleCount: samples.length
+  };
+}
+
+function ratio(candidate, baseline){
+  const c = +candidate;
+  const b = +baseline;
+  return Number.isFinite(c) && Number.isFinite(b) && b > 0 ? round(c / b, 3) : null;
+}
+
+function visualPresenceRegressionGuard(candidateMetrics = {}, baselineMetrics = {}){
+  const enemyCountRatio = ratio(candidateMetrics.averageEnemyCount, baselineMetrics.averageEnemyCount);
+  const xRangeRatio = ratio(candidateMetrics.averageXRange, baselineMetrics.averageXRange);
+  const yRangeRatio = ratio(candidateMetrics.averageYRange, baselineMetrics.averageYRange);
+  const enemyCountDelta = round((+candidateMetrics.averageEnemyCount || 0) - (+baselineMetrics.averageEnemyCount || 0), 2);
+  const xRangeDelta = round((+candidateMetrics.averageXRange || 0) - (+baselineMetrics.averageXRange || 0), 2);
+  const yRangeDelta = round((+candidateMetrics.averageYRange || 0) - (+baselineMetrics.averageYRange || 0), 2);
+  const enemyCountPass = enemyCountRatio === null || enemyCountRatio >= 0.82;
+  const xRangePass = xRangeRatio === null || xRangeRatio >= 0.72;
+  const yRangePass = yRangeRatio === null || yRangeRatio >= 0.72;
+  const pass = enemyCountPass && xRangePass && yRangePass;
+  const blocked = [];
+  if(!enemyCountPass) blocked.push(`visible density ${enemyCountRatio}x baseline`);
+  if(!xRangePass) blocked.push(`horizontal range ${xRangeRatio}x baseline`);
+  if(!yRangePass) blocked.push(`vertical range ${yRangeRatio}x baseline`);
+  return {
+    pass,
+    baseline: baselineMetrics,
+    candidate: candidateMetrics,
+    enemyCountRatio,
+    xRangeRatio,
+    yRangeRatio,
+    enemyCountDelta,
+    xRangeDelta,
+    yRangeDelta,
+    read: pass
+      ? `Visual presence preserved versus baseline: density ${enemyCountRatio ?? 'n/a'}x, X range ${xRangeRatio ?? 'n/a'}x, Y range ${yRangeRatio ?? 'n/a'}x.`
+      : `Visual presence regression blocks promotion: ${blocked.join('; ')}.`
+  };
+}
+
 const SHOT_ROUTE_PLAYER_X = 140;
 const SHOT_ROUTE_PLAYER_Y = 338;
 const SHOT_ROUTE_BULLET_SPEED = 560;
@@ -2040,6 +2109,7 @@ function scoreMeasuredCandidate(measured, labels){
     && measured.eventCounts.enemyAttackStarts === 0
     && measured.eventCounts.shipLosses === 0;
   const visibleGuardrails = humanVisibleGuardrails(measured, noSafetyRegression);
+  const visualPresence = visualPresenceMetrics(measured);
   const bestMatch = matches[0] || null;
   const expectedScore10 = expected?.score10 || 0;
   const bestScore10 = bestMatch?.score10 || 0;
@@ -2102,6 +2172,7 @@ function scoreMeasuredCandidate(measured, labels){
     targetVideoObjectFit: targetVideoFit,
     humanPerfectPotential: perfectPotential,
     humanVisibleGuardrails: visibleGuardrails,
+    visualPresence,
     noSafetyRegression,
     selectionScore10: round(
       (expectedScore10 * 0.62)
@@ -2158,7 +2229,9 @@ function summarizeCandidate(row){
     groupRouteCurveXs: row.layout?.groupRouteCurveXs || [],
     groupRouteCurveYs: row.layout?.groupRouteCurveYs || [],
     groupRoutePhases: row.layout?.groupRoutePhases || [],
-    groupLaneOrders: row.layout?.groupLaneOrders || []
+    groupLaneOrders: row.layout?.groupLaneOrders || [],
+    visualPresence: row.visualPresence || null,
+    visualPresenceRegressionGuard: row.visualPresenceRegressionGuard || null
   };
 }
 
@@ -2225,10 +2298,13 @@ function buildMarkdown(report){
     const visibleRead = row.humanVisibleGuardrails?.pass === false
       ? `blocked: ${row.humanVisibleGuardrails.score10}/10`
       : `${row.humanVisibleGuardrails?.score10 ?? 'n/a'}/10`;
-    return `| ${index + 1} | ${row.candidateId} | ${row.selectionScore10}/10 | ${row.expectedMatch?.score10 ?? 0}/10 | ${row.targetVideoObjectFit?.score10 ?? 'n/a'}/10 | ${humanPerfectRead} | ${visibleRead} | ${row.stageIdentity?.identityMargin10 ?? 'n/a'} | ${row.bestMatch?.labelId || 'none'} (${row.bestMatch?.score10 ?? 0}/10) | ${hit} | ${eventRead} | ${fullAnalyzerRead} |`;
+    const presenceRead = row.visualPresenceRegressionGuard?.pass === false
+      ? 'blocked'
+      : 'pass';
+    return `| ${index + 1} | ${row.candidateId} | ${row.selectionScore10}/10 | ${row.expectedMatch?.score10 ?? 0}/10 | ${row.targetVideoObjectFit?.score10 ?? 'n/a'}/10 | ${humanPerfectRead} | ${visibleRead} | ${presenceRead} | ${row.stageIdentity?.identityMargin10 ?? 'n/a'} | ${row.bestMatch?.labelId || 'none'} (${row.bestMatch?.score10 ?? 0}/10) | ${hit} | ${eventRead} | ${fullAnalyzerRead} |`;
   }).join('\n');
-  const diagnosticRow = row => `| ${row.candidateId} | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.humanPerfectPotentialScore10 ?? 'n/a'}/10 | ${row.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 | ${row.stageIdentityMargin10 ?? 'n/a'} | ${row.bestMatchLabelId || 'none'} (${row.bestMatchScore10}/10) | ${row.expectedReferenceHit ? 'yes' : 'no'} | ${row.lateStageIdentityPass === false ? `blocked (${row.bestMatchChallengeNumber || 'n/a'} vs ${row.expectedChallengeNumber || 'n/a'})` : 'pass'} | ${row.humanPerfectGuard?.pass === false ? `risk ${row.humanPerfectGuard.lift10}/10` : 'pass'} | ${row.humanVisibleGuardrails?.pass === false ? 'blocked' : 'pass'} | ${row.noSafetyRegression ? 'pass' : 'risk'} | ${(row.groupPathFamilies || []).join(', ') || 'default'} |`;
-  const emptyDiagnosticRow = '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const diagnosticRow = row => `| ${row.candidateId} | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.humanPerfectPotentialScore10 ?? 'n/a'}/10 | ${row.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 | ${row.visualPresenceRegressionGuard?.pass === false ? 'blocked' : 'pass'} | ${row.stageIdentityMargin10 ?? 'n/a'} | ${row.bestMatchLabelId || 'none'} (${row.bestMatchScore10}/10) | ${row.expectedReferenceHit ? 'yes' : 'no'} | ${row.lateStageIdentityPass === false ? `blocked (${row.bestMatchChallengeNumber || 'n/a'} vs ${row.expectedChallengeNumber || 'n/a'})` : 'pass'} | ${row.humanPerfectGuard?.pass === false ? `risk ${row.humanPerfectGuard.lift10}/10` : 'pass'} | ${row.humanVisibleGuardrails?.pass === false ? 'blocked' : 'pass'} | ${row.noSafetyRegression ? 'pass' : 'risk'} | ${(row.groupPathFamilies || []).join(', ') || 'default'} |`;
+  const emptyDiagnosticRow = '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
   const targetTimingRows = (report.diagnostics?.targetTimingTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
   const targetControlRows = (report.diagnostics?.targetControlTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
   const targetReferencePathRows = (report.diagnostics?.targetReferencePathTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
@@ -2257,14 +2333,16 @@ Stage ${report.stage} currently has safe challenge behavior but still does not c
 - Best candidate human-perfect potential: ${report.summary.bestHumanPerfectPotentialScore10}/10.
 - Best candidate: ${report.summary.bestCandidateId}.
 - Keeper decision: ${report.summary.keeperDecision}.
+- Promotion blockers: ${(report.summary.promotionBlockers || []).length ? report.summary.promotionBlockers.join(' ') : 'none'}.
+- Promotion wins: ${(report.summary.promotionWins || []).length ? report.summary.promotionWins.join(' ') : 'none'}.
 - Player-facing meaning: ${report.summary.playerMeaning}
 - Process meaning: ${report.summary.processMeaning}
 - Candidate retention: ${report.candidateRetention?.retained ?? report.candidates.length}/${report.candidateRetention?.totalMeasured ?? report.candidateCount} retained; ${report.candidateRetention?.targetTimingDiagnostics ?? 0} target-timing diagnostics, ${report.candidateRetention?.targetControlDiagnostics ?? 0} target-control diagnostics, ${report.candidateRetention?.targetReferencePathDiagnostics ?? 0} target-reference-path diagnostics, ${report.candidateRetention?.pathShapeDiagnostics ?? 0} path-shape diagnostics, ${report.candidateRetention?.readabilityDiagnostics ?? 0} readability diagnostics, and ${report.candidateRetention?.leastBunchedDiagnostics ?? 0} least-bunched diagnostics preserved.
 
 ## Top Candidates
 
-| Rank | Candidate | Selection | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Identity Margin | Best Match | Expected Hit | Safety | Full Analyzer Gate |
-| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- |
+| Rank | Candidate | Selection | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Presence | Identity Margin | Best Match | Expected Hit | Safety | Full Analyzer Gate |
+| ---: | --- | ---: | ---: | ---: | ---: | ---: | --- | ---: | --- | --- | --- | --- |
 ${topRows}
 
 ## Diagnostic Candidates
@@ -2273,32 +2351,32 @@ These rows are intentionally retained even when they are not promotion candidate
 
 ### Target-Timing Diagnostics
 
-| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Visible Guard | Safety | Paths |
-| --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- | --- |
+| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Presence | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Visible Guard | Safety | Paths |
+| --- | ---: | ---: | ---: | ---: | --- | ---: | --- | --- | --- | --- | --- | --- | --- |
 ${targetTimingRows}
 
 ### Target-Control Diagnostics
 
-| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Visible Guard | Safety | Paths |
-| --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- | --- |
+| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Presence | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Visible Guard | Safety | Paths |
+| --- | ---: | ---: | ---: | ---: | --- | ---: | --- | --- | --- | --- | --- | --- | --- |
 ${targetControlRows}
 
 ### Target Reference-Path Diagnostics
 
-| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Visible Guard | Safety | Paths |
-| --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- | --- |
+| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Presence | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Visible Guard | Safety | Paths |
+| --- | ---: | ---: | ---: | ---: | --- | ---: | --- | --- | --- | --- | --- | --- | --- |
 ${targetReferencePathRows}
 
 ### Path-Shape Diagnostics
 
-| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Visible Guard | Safety | Paths |
-| --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- | --- |
+| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Presence | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Visible Guard | Safety | Paths |
+| --- | ---: | ---: | ---: | ---: | --- | ---: | --- | --- | --- | --- | --- | --- | --- |
 ${pathShapeRows}
 
 ### Readability Diagnostics
 
-| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Visible Guard | Safety | Paths |
-| --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- | --- |
+| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Presence | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Visible Guard | Safety | Paths |
+| --- | ---: | ---: | ---: | ---: | --- | ---: | --- | --- | --- | --- | --- | --- | --- |
 ${readabilityRows}
 
 ### Least-Bunched Diagnostics
@@ -2345,6 +2423,7 @@ async function main(){
   const baselineTargetVideoScore = baseline.targetVideoObjectFit?.score10 || 0;
   const baselineHumanPerfectScore = baseline.humanPerfectPotential?.score10 || 0;
   const baselineHumanVisibleScore = baseline.humanVisibleGuardrails?.score10 || 0;
+  const baselineVisualPresence = baseline.visualPresence || visualPresenceMetrics(baseline);
   const rejectedFullAnalyzerReviews = rejectedFullAnalyzerReviewsForStage(STAGE);
   for(const row of scored){
     const humanPerfectLift = round((row.humanPerfectPotential?.score10 || 0) - baselineHumanPerfectScore, 2);
@@ -2357,6 +2436,7 @@ async function main(){
         ? `Human-perfect potential preserved (${humanPerfectLift >= 0 ? '+' : ''}${humanPerfectLift}/10 versus baseline).`
         : `Human-perfect potential regressed ${Math.abs(humanPerfectLift)}/10 versus baseline; block runtime promotion until a full player-route review explains the tradeoff.`
     };
+    row.visualPresenceRegressionGuard = visualPresenceRegressionGuard(row.visualPresence || visualPresenceMetrics(row), baselineVisualPresence);
     row.fullAnalyzerRisk = fullAnalyzerRiskForCandidate(row, {
       baselineExpectedScore,
       baselineTargetVideoScore,
@@ -2369,6 +2449,7 @@ async function main(){
     const candidateNoHumanPerfectRegression = candidate.humanPerfectGuard?.pass !== false;
     const candidateNoHumanVisibleRegression = candidate.humanVisibleGuardrails?.pass !== false
       && ((candidate.humanVisibleGuardrails?.score10 || 0) >= baselineHumanVisibleScore - 0.25);
+    const candidateNoVisualPresenceRegression = candidate.visualPresenceRegressionGuard?.pass !== false;
     const candidateTargetVideoComparable = Number.isFinite(+(baseline.targetVideoObjectFit?.score10)) && Number.isFinite(+(candidate.targetVideoObjectFit?.score10));
     const candidateNoTargetRegression = !candidateTargetVideoComparable || candidateTargetVideoLift >= -0.05;
     const candidateMaterialTargetWin = candidate.expectedReferenceHit && candidateExpectedLift >= -0.15 && candidateTargetVideoLift >= 0.55;
@@ -2388,6 +2469,7 @@ async function main(){
       && candidateNoExpectedRegression
       && candidateNoHumanPerfectRegression
       && candidateNoHumanVisibleRegression
+      && candidateNoVisualPresenceRegression
       && intendedStageSupported
       && candidate.fullAnalyzerRisk?.pass !== false
       && (candidateExpectedLift >= 0.35 || candidateTargetVideoLift >= 0.35 || (candidateExpectedLift >= 0.25 && candidateTargetVideoLift >= 0.25));
@@ -2397,7 +2479,8 @@ async function main(){
     return bLift - aLift || b.selectionScore10 - a.selectionScore10 || a.candidateId.localeCompare(b.candidateId);
   });
   const best = promotionCandidates[0]
-    || scored.find(candidate => candidate.noSafetyRegression && candidate.humanPerfectGuard?.pass !== false)
+    || scored.find(candidate => candidate.noSafetyRegression && candidate.humanPerfectGuard?.pass !== false && candidate.visualPresenceRegressionGuard?.pass !== false)
+    || scored.find(candidate => candidate.noSafetyRegression && candidate.visualPresenceRegressionGuard?.pass !== false)
     || scored[0];
   const expectedLift = round((best.expectedMatch?.score10 || 0) - (baseline.expectedMatch?.score10 || 0), 2);
   const targetVideoLift = round((best.targetVideoObjectFit?.score10 || 0) - (baseline.targetVideoObjectFit?.score10 || 0), 2);
@@ -2406,6 +2489,7 @@ async function main(){
   const noHumanPerfectRegression = best.humanPerfectGuard?.pass !== false;
   const noHumanVisibleRegression = best.humanVisibleGuardrails?.pass !== false
     && ((best.humanVisibleGuardrails?.score10 || 0) >= baselineHumanVisibleScore - 0.25);
+  const noVisualPresenceRegression = best.visualPresenceRegressionGuard?.pass !== false;
   const targetVideoComparable = Number.isFinite(+(baseline.targetVideoObjectFit?.score10)) && Number.isFinite(+(best.targetVideoObjectFit?.score10));
   const noTargetVideoRegression = !targetVideoComparable || targetVideoLift >= -0.05;
   const materialTargetVideoWin = best.expectedReferenceHit && expectedLift >= -0.15 && targetVideoLift >= 0.55;
@@ -2425,7 +2509,29 @@ async function main(){
     baselineTargetVideoScore,
     rejectedReviews: rejectedFullAnalyzerReviews
   });
-  const keeper = best.noSafetyRegression && noTargetVideoRegression && noExpectedRegression && noHumanPerfectRegression && noHumanVisibleRegression && intendedStageSupported && fullAnalyzerRisk.pass !== false && (expectedLift >= 0.35 || targetVideoLift >= 0.35 || (expectedLift >= 0.25 && targetVideoLift >= 0.25));
+  const materialLift = expectedLift >= 0.35 || targetVideoLift >= 0.35 || (expectedLift >= 0.25 && targetVideoLift >= 0.25);
+  const promotionBlockers = [];
+  const promotionWins = [];
+  if(best.noSafetyRegression) promotionWins.push('No enemy-fire, enemy-attack, or ship-loss safety regression in the sampled challenge window.');
+  else promotionBlockers.push(`Safety regression in sampled challenge window: ${JSON.stringify(best.eventCounts || {})}.`);
+  if(noTargetVideoRegression) promotionWins.push(`Target-video object-track fit preserved (${targetVideoLift >= 0 ? '+' : ''}${targetVideoLift}/10 versus baseline).`);
+  else promotionBlockers.push(`Target-video object-track fit regressed ${Math.abs(targetVideoLift)}/10 versus baseline.`);
+  if(noExpectedRegression) promotionWins.push(`Expected-label score preserved (${expectedLift >= 0 ? '+' : ''}${expectedLift}/10 versus baseline).`);
+  else promotionBlockers.push(`Expected-label score regressed ${Math.abs(expectedLift)}/10 versus baseline.`);
+  if(noHumanPerfectRegression) promotionWins.push(`Human-perfect potential preserved (${humanPerfectLift >= 0 ? '+' : ''}${humanPerfectLift}/10 versus baseline).`);
+  else promotionBlockers.push(`Human-perfect potential regressed ${Math.abs(humanPerfectLift)}/10 versus baseline.`);
+  if(noHumanVisibleRegression) promotionWins.push(`Human-visible readability preserved (${humanVisibleLift >= 0 ? '+' : ''}${humanVisibleLift}/10 versus baseline).`);
+  else if(best.humanVisibleGuardrails?.pass === false) promotionBlockers.push(`Human-visible guardrails still fail despite ${humanVisibleLift >= 0 ? '+' : ''}${humanVisibleLift}/10 score movement: ${best.humanVisibleGuardrails.read || 'subcondition failed'}`);
+  else promotionBlockers.push(`Human-visible readability regressed ${Math.abs(humanVisibleLift)}/10 versus baseline.`);
+  if(noVisualPresenceRegression) promotionWins.push(best.visualPresenceRegressionGuard?.read || 'Visual presence preserved versus baseline.');
+  else promotionBlockers.push(best.visualPresenceRegressionGuard?.read || 'Visual presence regressed versus baseline.');
+  if(intendedStageSupported) promotionWins.push('Expected challenge-stage identity remains supported.');
+  else promotionBlockers.push(`Expected challenge-stage identity is not sufficiently supported; best match is ${best.bestMatch?.labelId || 'none'}.`);
+  if(fullAnalyzerRisk.pass !== false) promotionWins.push(fullAnalyzerRisk.read || 'No full-analyzer calibration block.');
+  else promotionBlockers.push(fullAnalyzerRisk.read || `Full-analyzer calibration blocks ${best.candidateId}.`);
+  if(materialLift) promotionWins.push(`Candidate has material lift: expected ${expectedLift}/10, target-video ${targetVideoLift}/10.`);
+  else promotionBlockers.push(`Candidate lacks material lift: expected ${expectedLift}/10, target-video ${targetVideoLift}/10.`);
+  const keeper = best.noSafetyRegression && noTargetVideoRegression && noExpectedRegression && noHumanPerfectRegression && noHumanVisibleRegression && noVisualPresenceRegression && intendedStageSupported && fullAnalyzerRisk.pass !== false && materialLift;
   const retainedCandidateLimit = 120;
   const pathShapeMarkers = [
     'pink-green-low-sweep',
@@ -2541,9 +2647,12 @@ async function main(){
       noExpectedRegression,
       noHumanPerfectRegression,
       noHumanVisibleRegression,
+      noVisualPresenceRegression,
       intendedStageSupported,
       fullAnalyzerRisk,
       fullAnalyzerRejectionCount: rejectedFullAnalyzerReviews.length,
+      promotionBlockers,
+      promotionWins,
       lateStageIdentityPass,
       identityTieSupported,
       materialTargetVideoWin,
@@ -2558,6 +2667,8 @@ async function main(){
         : 'Future challenge tuning can now compare many runtime candidates against Galaga labels before editing game constants.',
       nextStep: keeper
         ? `Apply the best candidate temporarily, rerun full challenge-stage conformance plus guardrails, and accept it only if the full analyzer confirms the expected lift.`
+        : noVisualPresenceRegression === false
+          ? `Do not promote ${best.candidateId}; it fails the visual-presence guard, so author a coherent group route that preserves visible density and X/Y spread before another runtime trial.`
         : fullAnalyzerRisk.pass === false
           ? `Do not promote ${best.candidateId}; strengthen the full-stage scorer or author a richer Stage ${STAGE} contract before another runtime trial.`
           : `Use target-trajectory controls and richer reference labels before changing runtime stage-${STAGE} gameplay.`
@@ -2579,6 +2690,8 @@ async function main(){
       humanPerfectPotential: row.humanPerfectPotential,
       humanPerfectGuard: row.humanPerfectGuard,
       humanVisibleGuardrails: row.humanVisibleGuardrails,
+      visualPresence: row.visualPresence,
+      visualPresenceRegressionGuard: row.visualPresenceRegressionGuard,
       fullAnalyzerRisk: row.fullAnalyzerRisk,
       selectionScore10: row.selectionScore10
     })),
@@ -2608,7 +2721,7 @@ async function main(){
     measurementPolicy: {
       scope: `harness-only stage-${STAGE} challenge layout candidates`,
       reference: 'media-backed Galaga challenge labels with comparison vectors',
-      promotionRule: 'Require the expected challenge-label identity to be the best match or tied within 0.05/10 with evidence on both expected and target-video axes, no safety regression, no human-perfect potential regression, no human-visible guardrail regression, no matching full-analyzer rejection, and at least +0.35/10 expected-label or target-video lift over baseline before runtime promotion. A material target-video win may tolerate up to -0.15/10 expected drift only when expected identity remains the best match. Strong non-best candidates must be very close on identity margin and improve both expected and target-video scores. If a prior full-analyzer review rejected a similar or identical candidate, the sweep must clear that calibration by a material margin before it can be marked ready again.',
+      promotionRule: 'Require the expected challenge-label identity to be the best match or tied within 0.05/10 with evidence on both expected and target-video axes, no safety regression, no human-perfect potential regression, no human-visible guardrail regression, no visual-presence regression versus baseline, no matching full-analyzer rejection, and at least +0.35/10 expected-label or target-video lift over baseline before runtime promotion. A material target-video win may tolerate up to -0.15/10 expected drift only when expected identity remains the best match. Strong non-best candidates must be very close on identity margin and improve both expected and target-video scores. If a prior full-analyzer review rejected a similar or identical candidate, the sweep must clear that calibration by a material margin before it can be marked ready again. Any promotion-like sweep decision must be followed by a matching challenge-candidate-before-after precheck whose visual-presence guard passes before runtime review.',
       safety: 'Reject candidates with enemy shots, enemy attack starts, ship losses, lower human-perfect potential, in-playfield magic appearance, missing groups, or high bunching risk in the challenge window.'
     }
   };
