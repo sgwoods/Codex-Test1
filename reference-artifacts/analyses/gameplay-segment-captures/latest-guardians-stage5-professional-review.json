@@ -1,7 +1,7 @@
 {
   "ok": true,
   "artifactType": "gameplay-segment-capture",
-  "generatedAt": "2026-06-05T15:10:15.279Z",
+  "generatedAt": "2026-06-06T01:15:16.898Z",
   "label": "guardians-stage5-professional-review",
   "comparisonId": null,
   "variant": null,
@@ -53,21 +53,21 @@
     },
     "setup": "start"
   },
-  "video": "reference-artifacts/analyses/gameplay-segment-captures/guardians-stage5-professional-review-2026-06-05T15-09-25-641Z.review.webm",
-  "rawVideo": "reference-artifacts/analyses/gameplay-segment-captures/guardians-stage5-professional-review-2026-06-05T15-09-25-641Z.webm",
+  "video": "reference-artifacts/analyses/gameplay-segment-captures/guardians-stage5-professional-review-2026-06-06T01-14-26-119Z.review.webm",
+  "rawVideo": "reference-artifacts/analyses/gameplay-segment-captures/guardians-stage5-professional-review-2026-06-06T01-14-26-119Z.webm",
   "latestVideo": "reference-artifacts/analyses/gameplay-segment-captures/latest-guardians-stage5-professional-review.webm",
-  "poster": "reference-artifacts/analyses/gameplay-segment-captures/guardians-stage5-professional-review-2026-06-05T15-09-25-641Z.png",
+  "poster": "reference-artifacts/analyses/gameplay-segment-captures/guardians-stage5-professional-review-2026-06-06T01-14-26-119Z.png",
   "latestPoster": "reference-artifacts/analyses/gameplay-segment-captures/latest-guardians-stage5-professional-review.png",
-  "contactSheet": "reference-artifacts/analyses/gameplay-segment-captures/guardians-stage5-professional-review-2026-06-05T15-09-25-641Z-contact-sheet.jpg",
+  "contactSheet": "reference-artifacts/analyses/gameplay-segment-captures/guardians-stage5-professional-review-2026-06-06T01-14-26-119Z-contact-sheet.jpg",
   "latestContactSheet": "reference-artifacts/analyses/gameplay-segment-captures/latest-guardians-stage5-professional-review-contact-sheet.jpg",
-  "byteLength": 4107049,
+  "byteLength": 4609928,
   "mime": "video/webm;codecs=vp9,opus",
   "videoAssessment": {
-    "file": "/Users/steven/Projects-All/Codex-Test1/reference-artifacts/analyses/gameplay-segment-captures/guardians-stage5-professional-review-2026-06-05T15-09-25-641Z.review.webm",
-    "size": 4107049,
+    "file": "/Users/steven/Projects-All/Codex-Test1/reference-artifacts/analyses/gameplay-segment-captures/guardians-stage5-professional-review-2026-06-06T01-14-26-119Z.review.webm",
+    "size": 4609928,
     "expectedDuration": 28,
-    "formatDuration": 27.988,
-    "drift": 0.012000000000000455,
+    "formatDuration": 27.985,
+    "drift": 0.015000000000000568,
     "videoStreams": [
       {
         "index": 0,
@@ -81,27 +81,57 @@
         "index": 1,
         "codec_name": "opus",
         "codec_type": "audio",
-        "start_time": "0.029000"
+        "start_time": "0.026000"
       }
     ],
     "stderr": "",
     "issues": [],
     "ok": true,
-    "sourceFile": "/Users/steven/Projects-All/Codex-Test1/reference-artifacts/analyses/gameplay-segment-captures/guardians-stage5-professional-review-2026-06-05T15-09-25-641Z.webm",
+    "sourceFile": "/Users/steven/Projects-All/Codex-Test1/reference-artifacts/analyses/gameplay-segment-captures/guardians-stage5-professional-review-2026-06-06T01-14-26-119Z.webm",
     "repaired": true,
     "initialIssues": [
       "missing_duration"
     ],
-    "initialSize": 4108624,
+    "initialSize": 4611609,
     "initialFormatDuration": 0
   },
   "contactSheetAssessment": {
     "ok": true,
-    "file": "/Users/steven/Projects-All/Codex-Test1/reference-artifacts/analyses/gameplay-segment-captures/guardians-stage5-professional-review-2026-06-05T15-09-25-641Z-contact-sheet.jpg"
+    "file": "/Users/steven/Projects-All/Codex-Test1/reference-artifacts/analyses/gameplay-segment-captures/guardians-stage5-professional-review-2026-06-06T01-14-26-119Z-contact-sheet.jpg"
   },
   "startState": null,
+  "arcadeMusicCaptureState": {
+    "stopped": false,
+    "via": "unavailable",
+    "previousState": {
+      "state": "off",
+      "requested": false,
+      "configured": true,
+      "hasFrame": false,
+      "playlistId": "PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH",
+      "playlistSource": "platform",
+      "fallbackMode": "",
+      "warming": false,
+      "warmReady": false,
+      "forceMuted": false,
+      "playlistLabel": "Aurora Galactica arcade music",
+      "platformPlaylistId": "PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH",
+      "gamePlaylistId": "",
+      "selectionPlaylistId": "",
+      "gameKey": "aurora-galactica",
+      "gameTitle": "Aurora Galactica",
+      "activePlaylistId": "",
+      "activePlaylistSource": "",
+      "arcadeMusicVolume": 0.8,
+      "arcadeMusicMuted": false,
+      "effectiveMuted": false,
+      "audible": false,
+      "gameSoundVolume": 0.2,
+      "lastTrack": null
+    }
+  },
   "captureStartActivity": {
-    "waitedMs": 1,
+    "waitedMs": 7,
     "timedOut": false,
     "state": {
       "started": 1,
@@ -113,8 +143,8 @@
       "challenge": false,
       "recording": false,
       "seed": 9052,
-      "simT": 0.117,
-      "stageClock": 0.117,
+      "simT": 0.05,
+      "stageClock": 0.05,
       "persona": "professional",
       "harnessPersona": "professional",
       "watchMode": false,
@@ -166,7 +196,7 @@
         "referenceClipDuration": 0,
         "stage": 5,
         "challenge": false,
-        "at": 4.982,
+        "at": 3.866,
         "recAt": 0
       },
       "renderDebug": {
@@ -218,11 +248,11 @@
     },
     "challenge": false,
     "stage": 5,
-    "stageClock": 0.117,
+    "stageClock": 0.05,
     "score": 0,
-    "visibleEnemyCount": 3,
+    "visibleEnemyCount": 7,
     "challengeVisibleEnemyCount": 0,
-    "formationVisibleEnemyCount": 3,
+    "formationVisibleEnemyCount": 7,
     "stageClockReady": true,
     "stillCorrectWindow": true,
     "active": true
@@ -232,13 +262,13 @@
     "paused": 0,
     "stage": 5,
     "pendingStage": 0,
-    "score": 120,
-    "lives": 3,
+    "score": 520,
+    "lives": 1,
     "challenge": false,
     "recording": false,
     "seed": 9052,
-    "simT": 24.567,
-    "stageClock": 24.567,
+    "simT": 26.717,
+    "stageClock": 26.717,
     "persona": "professional",
     "harnessPersona": "professional",
     "watchMode": false,
@@ -280,7 +310,7 @@
       "backgroundMode": "classic-stars"
     },
     "audioCue": {
-      "cue": "wrapReturn",
+      "cue": "scoutHit",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
       "phase": "stage",
@@ -290,8 +320,8 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 32.98,
-      "recAt": 24.267
+      "at": 32.368,
+      "recAt": 26.6
     },
     "renderDebug": {
       "backgroundMode": "guardians-dev-preview",
@@ -700,9 +730,9 @@
       "stage": 5
     },
     {
-      "t": 9.333,
+      "t": 9.017,
       "type": "audio_cue",
-      "cue": "stagePulse",
+      "cue": "playerLoss",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
       "phase": "stage",
@@ -714,49 +744,7 @@
       "stage": 5
     },
     {
-      "t": 9.35,
-      "type": "audio_cue",
-      "cue": "scoutDive",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 9.617,
-      "type": "audio_cue",
-      "cue": "enemyShot",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 9.9,
-      "type": "audio_cue",
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 10.433,
+      "t": 10.383,
       "type": "audio_cue",
       "cue": "playerShot",
       "atmosphereId": "escort-pursuit",
@@ -770,77 +758,7 @@
       "stage": 5
     },
     {
-      "t": 10.633,
-      "type": "audio_cue",
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 10.65,
-      "type": "audio_cue",
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 10.833,
-      "type": "audio_cue",
-      "cue": "enemyShot",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 10.85,
-      "type": "audio_cue",
-      "cue": "scoutDive",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 10.9,
-      "type": "audio_cue",
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 10.983,
+      "t": 11.317,
       "type": "audio_cue",
       "cue": "stagePulse",
       "atmosphereId": "escort-pursuit",
@@ -854,7 +772,7 @@
       "stage": 5
     },
     {
-      "t": 11.617,
+      "t": 11.35,
       "type": "audio_cue",
       "cue": "scoutHit",
       "atmosphereId": "escort-pursuit",
@@ -868,63 +786,7 @@
       "stage": 5
     },
     {
-      "t": 11.867,
-      "type": "audio_cue",
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 12.167,
-      "type": "audio_cue",
-      "cue": "enemyShot",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 12.3,
-      "type": "audio_cue",
-      "cue": "scoutDive",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 12.633,
-      "type": "audio_cue",
-      "cue": "stagePulse",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 13.183,
+      "t": 11.367,
       "type": "audio_cue",
       "cue": "playerShot",
       "atmosphereId": "escort-pursuit",
@@ -938,7 +800,21 @@
       "stage": 5
     },
     {
-      "t": 13.183,
+      "t": 11.55,
+      "type": "audio_cue",
+      "cue": "scoutDive",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 11.883,
       "type": "audio_cue",
       "cue": "enemyShot",
       "atmosphereId": "escort-pursuit",
@@ -952,9 +828,9 @@
       "stage": 5
     },
     {
-      "t": 13.567,
+      "t": 12.333,
       "type": "audio_cue",
-      "cue": "wrapReturn",
+      "cue": "scoutHit",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
       "phase": "stage",
@@ -966,9 +842,51 @@
       "stage": 5
     },
     {
-      "t": 13.75,
+      "t": 12.417,
+      "type": "audio_cue",
+      "cue": "playerShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 12.967,
+      "type": "audio_cue",
+      "cue": "stagePulse",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 13.05,
       "type": "audio_cue",
       "cue": "scoutDive",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 13.1,
+      "type": "audio_cue",
+      "cue": "enemyShot",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
       "phase": "stage",
@@ -982,20 +900,6 @@
     {
       "t": 14.283,
       "type": "audio_cue",
-      "cue": "stagePulse",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 14.533,
-      "type": "audio_cue",
       "cue": "enemyShot",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
@@ -1008,9 +912,9 @@
       "stage": 5
     },
     {
-      "t": 15.283,
+      "t": 14.333,
       "type": "audio_cue",
-      "cue": "wrapReturn",
+      "cue": "playerShot",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
       "phase": "stage",
@@ -1022,21 +926,7 @@
       "stage": 5
     },
     {
-      "t": 15.3,
-      "type": "audio_cue",
-      "cue": "scoutDive",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 15.933,
+      "t": 14.617,
       "type": "audio_cue",
       "cue": "stagePulse",
       "atmosphereId": "escort-pursuit",
@@ -1050,43 +940,7 @@
       "stage": 5
     },
     {
-      "t": 16.133,
-      "type": "arcade_music_fallback_mode",
-      "mode": "iframe",
-      "playlistId": "PLWDxjyS0X-zm5GrG4zytIyqRPQ8Jv4TA-",
-      "playlistSource": "game",
-      "reason": "startup_timeout"
-    },
-    {
-      "t": 16.183,
-      "type": "audio_cue",
-      "cue": "enemyShot",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 16.517,
-      "type": "audio_cue",
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 17.167,
+      "t": 14.717,
       "type": "audio_cue",
       "cue": "scoutDive",
       "atmosphereId": "escort-pursuit",
@@ -1100,9 +954,9 @@
       "stage": 5
     },
     {
-      "t": 17.25,
+      "t": 15.2,
       "type": "audio_cue",
-      "cue": "enemyShot",
+      "cue": "playerLoss",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
       "phase": "stage",
@@ -1114,7 +968,21 @@
       "stage": 5
     },
     {
-      "t": 17.583,
+      "t": 16.567,
+      "type": "audio_cue",
+      "cue": "playerShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 17.5,
       "type": "audio_cue",
       "cue": "stagePulse",
       "atmosphereId": "escort-pursuit",
@@ -1128,9 +996,9 @@
       "stage": 5
     },
     {
-      "t": 18.183,
+      "t": 17.633,
       "type": "audio_cue",
-      "cue": "wrapReturn",
+      "cue": "scoutHit",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
       "phase": "stage",
@@ -1142,9 +1010,9 @@
       "stage": 5
     },
     {
-      "t": 18.383,
+      "t": 17.65,
       "type": "audio_cue",
-      "cue": "enemyShot",
+      "cue": "playerShot",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
       "phase": "stage",
@@ -1156,7 +1024,7 @@
       "stage": 5
     },
     {
-      "t": 19.05,
+      "t": 17.733,
       "type": "audio_cue",
       "cue": "scoutDive",
       "atmosphereId": "escort-pursuit",
@@ -1170,7 +1038,35 @@
       "stage": 5
     },
     {
-      "t": 19.233,
+      "t": 18.067,
+      "type": "audio_cue",
+      "cue": "enemyShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 18.833,
+      "type": "audio_cue",
+      "cue": "scoutHit",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 19.15,
       "type": "audio_cue",
       "cue": "stagePulse",
       "atmosphereId": "escort-pursuit",
@@ -1186,7 +1082,7 @@
     {
       "t": 19.283,
       "type": "audio_cue",
-      "cue": "wrapReturn",
+      "cue": "enemyShot",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
       "phase": "stage",
@@ -1198,7 +1094,21 @@
       "stage": 5
     },
     {
-      "t": 19.367,
+      "t": 19.35,
+      "type": "audio_cue",
+      "cue": "scoutDive",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 20.167,
       "type": "audio_cue",
       "cue": "flagshipDive",
       "atmosphereId": "escort-pursuit",
@@ -1212,7 +1122,7 @@
       "stage": 5
     },
     {
-      "t": 19.367,
+      "t": 20.167,
       "type": "audio_cue",
       "cue": "escortJoin",
       "atmosphereId": "escort-pursuit",
@@ -1226,9 +1136,23 @@
       "stage": 5
     },
     {
-      "t": 19.717,
+      "t": 20.717,
       "type": "audio_cue",
-      "cue": "enemyShot",
+      "cue": "playerShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 20.8,
+      "type": "audio_cue",
+      "cue": "stagePulse",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
       "phase": "stage",
@@ -1242,7 +1166,7 @@
     {
       "t": 20.833,
       "type": "audio_cue",
-      "cue": "scoutDive",
+      "cue": "scoutHit",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
       "phase": "stage",
@@ -1254,35 +1178,7 @@
       "stage": 5
     },
     {
-      "t": 20.883,
-      "type": "audio_cue",
-      "cue": "stagePulse",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 21.183,
-      "type": "audio_cue",
-      "cue": "playerShot",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 21.233,
+      "t": 20.933,
       "type": "audio_cue",
       "cue": "enemyShot",
       "atmosphereId": "escort-pursuit",
@@ -1296,119 +1192,7 @@
       "stage": 5
     },
     {
-      "t": 21.6,
-      "type": "audio_cue",
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 22.533,
-      "type": "audio_cue",
-      "cue": "stagePulse",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 22.717,
-      "type": "audio_cue",
-      "cue": "enemyShot",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 23.367,
-      "type": "audio_cue",
-      "cue": "playerShot",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 23.483,
-      "type": "audio_cue",
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 24.017,
-      "type": "audio_cue",
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 24.017,
-      "type": "audio_cue",
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 24.033,
-      "type": "audio_cue",
-      "cue": "enemyShot",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "challenge": false,
-      "stage": 5
-    },
-    {
-      "t": 24.083,
+      "t": 21.217,
       "type": "audio_cue",
       "cue": "scoutDive",
       "atmosphereId": "escort-pursuit",
@@ -1422,7 +1206,35 @@
       "stage": 5
     },
     {
-      "t": 24.183,
+      "t": 21.467,
+      "type": "audio_cue",
+      "cue": "playerShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 21.95,
+      "type": "audio_cue",
+      "cue": "scoutHit",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 22.45,
       "type": "audio_cue",
       "cue": "stagePulse",
       "atmosphereId": "escort-pursuit",
@@ -1436,9 +1248,247 @@
       "stage": 5
     },
     {
-      "t": 24.267,
+      "t": 22.483,
+      "type": "audio_cue",
+      "cue": "enemyShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 23.15,
+      "type": "audio_cue",
+      "cue": "playerShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 23.45,
+      "type": "audio_cue",
+      "cue": "escortHit",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 23.9,
+      "type": "audio_cue",
+      "cue": "enemyShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 24.1,
+      "type": "audio_cue",
+      "cue": "stagePulse",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 24.633,
+      "type": "audio_cue",
+      "cue": "playerShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 24.817,
       "type": "audio_cue",
       "cue": "wrapReturn",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 24.85,
+      "type": "audio_cue",
+      "cue": "scoutDive",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 25.067,
+      "type": "audio_cue",
+      "cue": "wrapReturn",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 25.417,
+      "type": "audio_cue",
+      "cue": "enemyShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 25.6,
+      "type": "audio_cue",
+      "cue": "scoutHit",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 25.65,
+      "type": "audio_cue",
+      "cue": "wrapReturn",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 25.75,
+      "type": "audio_cue",
+      "cue": "stagePulse",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 25.833,
+      "type": "audio_cue",
+      "cue": "flagshipDive",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 25.833,
+      "type": "audio_cue",
+      "cue": "escortJoin",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 25.867,
+      "type": "audio_cue",
+      "cue": "playerShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 26.367,
+      "type": "audio_cue",
+      "cue": "scoutDive",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "challenge": false,
+      "stage": 5
+    },
+    {
+      "t": 26.6,
+      "type": "audio_cue",
+      "cue": "scoutHit",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
       "phase": "stage",
@@ -1462,7 +1512,7 @@
       "referenceClipDuration": 0,
       "stage": 1,
       "challenge": false,
-      "at": 0.662,
+      "at": 0.182,
       "recAt": 0.001
     },
     {
@@ -1476,8 +1526,8 @@
       "referenceClipDuration": 0,
       "stage": 1,
       "challenge": false,
-      "at": 2.847,
-      "recAt": 2.186
+      "at": 1.245,
+      "recAt": 1.064
     },
     {
       "cue": "stagePulse",
@@ -1490,8 +1540,8 @@
       "referenceClipDuration": 0.24,
       "stage": 1,
       "challenge": false,
-      "at": 3.062,
-      "recAt": 2.401
+      "at": 1.424,
+      "recAt": 1.243
     },
     {
       "cue": "playerShot",
@@ -1504,8 +1554,8 @@
       "referenceClipDuration": 0,
       "stage": 1,
       "challenge": false,
-      "at": 3.091,
-      "recAt": 2.43
+      "at": 1.474,
+      "recAt": 1.293
     },
     {
       "cue": "attractPulse",
@@ -1518,8 +1568,8 @@
       "referenceClipDuration": 0,
       "stage": 1,
       "challenge": false,
-      "at": 3.506,
-      "recAt": 2.846
+      "at": 1.816,
+      "recAt": 1.635
     },
     {
       "cue": "stagePulse",
@@ -1532,8 +1582,8 @@
       "referenceClipDuration": 0.24,
       "stage": 1,
       "challenge": false,
-      "at": 3.539,
-      "recAt": 2.879
+      "at": 1.852,
+      "recAt": 1.671
     },
     {
       "cue": "playerShot",
@@ -1546,8 +1596,8 @@
       "referenceClipDuration": 0,
       "stage": 1,
       "challenge": false,
-      "at": 3.573,
-      "recAt": 2.912
+      "at": 1.915,
+      "recAt": 1.734
     },
     {
       "cue": "playerShot",
@@ -1560,8 +1610,8 @@
       "referenceClipDuration": 0,
       "stage": 1,
       "challenge": false,
-      "at": 3.823,
-      "recAt": 3.163
+      "at": 2.14,
+      "recAt": 1.959
     },
     {
       "cue": "stagePulse",
@@ -1574,8 +1624,8 @@
       "referenceClipDuration": 0.24,
       "stage": 1,
       "challenge": false,
-      "at": 3.97,
-      "recAt": 3.309
+      "at": 2.249,
+      "recAt": 2.068
     },
     {
       "cue": "playerShot",
@@ -1588,8 +1638,8 @@
       "referenceClipDuration": 0,
       "stage": 1,
       "challenge": false,
-      "at": 4.264,
-      "recAt": 3.604
+      "at": 2.571,
+      "recAt": 2.39
     },
     {
       "cue": "stagePulse",
@@ -1602,8 +1652,8 @@
       "referenceClipDuration": 0.24,
       "stage": 1,
       "challenge": false,
-      "at": 4.318,
-      "recAt": 3.658
+      "at": 2.666,
+      "recAt": 2.485
     },
     {
       "cue": "playerShot",
@@ -1616,8 +1666,8 @@
       "referenceClipDuration": 0,
       "stage": 1,
       "challenge": false,
-      "at": 4.489,
-      "recAt": 3.828
+      "at": 2.811,
+      "recAt": 2.63
     },
     {
       "cue": "stagePulse",
@@ -1630,22 +1680,8 @@
       "referenceClipDuration": 0.24,
       "stage": 1,
       "challenge": false,
-      "at": 4.704,
-      "recAt": 4.043
-    },
-    {
-      "cue": "enemyBoom",
-      "atmosphereId": "classic-arcade",
-      "audioTheme": "classic-arcade",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 1,
-      "challenge": false,
-      "at": 4.738,
-      "recAt": 4.077
+      "at": 3.052,
+      "recAt": 2.871
     },
     {
       "cue": "playerShot",
@@ -1658,8 +1694,36 @@
       "referenceClipDuration": 0,
       "stage": 1,
       "challenge": false,
-      "at": 4.753,
-      "recAt": 4.092
+      "at": 3.175,
+      "recAt": 2.994
+    },
+    {
+      "cue": "playerShot",
+      "atmosphereId": "classic-arcade",
+      "audioTheme": "classic-arcade",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 1,
+      "challenge": false,
+      "at": 3.564,
+      "recAt": 3.384
+    },
+    {
+      "cue": "stagePulse",
+      "atmosphereId": "classic-arcade",
+      "audioTheme": "classic-arcade",
+      "phase": "stage",
+      "variant": 5,
+      "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+      "referenceClipStart": 0.66,
+      "referenceClipDuration": 0.24,
+      "stage": 1,
+      "challenge": false,
+      "at": 3.565,
+      "recAt": 3.384
     },
     {
       "cue": "gameStart",
@@ -1672,7 +1736,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 4.982,
+      "at": 3.866,
       "recAt": 0
     },
     {
@@ -1686,7 +1750,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 5.136,
+      "at": 4.387,
       "recAt": 0.133
     },
     {
@@ -1700,7 +1764,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 6.102,
+      "at": 5.486,
       "recAt": 1.083
     },
     {
@@ -1714,7 +1778,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 6.119,
+      "at": 5.519,
       "recAt": 1.1
     },
     {
@@ -1728,7 +1792,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 6.136,
+      "at": 5.521,
       "recAt": 1.117
     },
     {
@@ -1742,7 +1806,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 7.32,
+      "at": 6.564,
       "recAt": 2.083
     },
     {
@@ -1756,7 +1820,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 7.336,
+      "at": 6.57,
       "recAt": 2.1
     },
     {
@@ -1770,7 +1834,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 7.519,
+      "at": 6.738,
       "recAt": 2.25
     },
     {
@@ -1784,7 +1848,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 7.769,
+      "at": 7.628,
       "recAt": 2.517
     },
     {
@@ -1798,7 +1862,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 7.991,
+      "at": 7.968,
       "recAt": 2.733
     },
     {
@@ -1812,7 +1876,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 8.507,
+      "at": 8.37,
       "recAt": 3.183
     },
     {
@@ -1826,7 +1890,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 9.323,
+      "at": 8.987,
       "recAt": 3.783
     },
     {
@@ -1840,7 +1904,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 9.537,
+      "at": 9.187,
       "recAt": 3.983
     },
     {
@@ -1854,7 +1918,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 9.904,
+      "at": 9.597,
       "recAt": 4.383
     },
     {
@@ -1868,7 +1932,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 10.982,
+      "at": 10.724,
       "recAt": 5.383
     },
     {
@@ -1882,7 +1946,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 11.273,
+      "at": 11.021,
       "recAt": 5.683
     },
     {
@@ -1896,7 +1960,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 11.587,
+      "at": 11.386,
       "recAt": 6
     },
     {
@@ -1910,7 +1974,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 11.588,
+      "at": 11.386,
       "recAt": 6
     },
     {
@@ -1924,7 +1988,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 11.621,
+      "at": 11.42,
       "recAt": 6.033
     },
     {
@@ -1938,7 +2002,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 11.823,
+      "at": 11.617,
       "recAt": 6.233
     },
     {
@@ -1952,7 +2016,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 12.355,
+      "at": 12.161,
       "recAt": 6.75
     },
     {
@@ -1966,7 +2030,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 13.037,
+      "at": 12.888,
       "recAt": 7.433
     },
     {
@@ -1980,7 +2044,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 13.288,
+      "at": 13.14,
       "recAt": 7.683
     },
     {
@@ -1994,7 +2058,7 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 13.741,
+      "at": 13.602,
       "recAt": 8.133
     },
     {
@@ -2008,11 +2072,11 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 13.817,
+      "at": 13.686,
       "recAt": 8.217
     },
     {
-      "cue": "stagePulse",
+      "cue": "playerLoss",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
       "phase": "stage",
@@ -2022,50 +2086,8 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 14.94,
-      "recAt": 9.333
-    },
-    {
-      "cue": "scoutDive",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 14.954,
-      "recAt": 9.35
-    },
-    {
-      "cue": "enemyShot",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 15.223,
-      "recAt": 9.617
-    },
-    {
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 15.503,
-      "recAt": 9.9
+      "at": 14.492,
+      "recAt": 9.017
     },
     {
       "cue": "playerShot",
@@ -2078,78 +2100,8 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 16.06,
-      "recAt": 10.433
-    },
-    {
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 16.253,
-      "recAt": 10.633
-    },
-    {
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 16.271,
-      "recAt": 10.65
-    },
-    {
-      "cue": "enemyShot",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 16.465,
-      "recAt": 10.833
-    },
-    {
-      "cue": "scoutDive",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 16.479,
-      "recAt": 10.85
-    },
-    {
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 16.527,
-      "recAt": 10.9
+      "at": 15.903,
+      "recAt": 10.383
     },
     {
       "cue": "stagePulse",
@@ -2162,8 +2114,8 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 16.604,
-      "recAt": 10.983
+      "at": 16.838,
+      "recAt": 11.317
     },
     {
       "cue": "scoutHit",
@@ -2176,64 +2128,8 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 17.595,
-      "recAt": 11.617
-    },
-    {
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 17.854,
-      "recAt": 11.867
-    },
-    {
-      "cue": "enemyShot",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 18.132,
-      "recAt": 12.167
-    },
-    {
-      "cue": "scoutDive",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 18.287,
-      "recAt": 12.3
-    },
-    {
-      "cue": "stagePulse",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 18.62,
-      "recAt": 12.633
+      "at": 16.871,
+      "recAt": 11.35
     },
     {
       "cue": "playerShot",
@@ -2246,36 +2142,8 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 19.17,
-      "recAt": 13.183
-    },
-    {
-      "cue": "enemyShot",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 19.17,
-      "recAt": 13.183
-    },
-    {
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 19.553,
-      "recAt": 13.567
+      "at": 16.887,
+      "recAt": 11.367
     },
     {
       "cue": "scoutDive",
@@ -2288,8 +2156,50 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 19.737,
-      "recAt": 13.75
+      "at": 17.069,
+      "recAt": 11.55
+    },
+    {
+      "cue": "enemyShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 17.406,
+      "recAt": 11.883
+    },
+    {
+      "cue": "scoutHit",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 17.852,
+      "recAt": 12.333
+    },
+    {
+      "cue": "playerShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 17.962,
+      "recAt": 12.417
     },
     {
       "cue": "stagePulse",
@@ -2302,11 +2212,53 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 20.286,
+      "at": 18.487,
+      "recAt": 12.967
+    },
+    {
+      "cue": "scoutDive",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 18.571,
+      "recAt": 13.05
+    },
+    {
+      "cue": "enemyShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 18.62,
+      "recAt": 13.1
+    },
+    {
+      "cue": "enemyShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 19.804,
       "recAt": 14.283
     },
     {
-      "cue": "enemyShot",
+      "cue": "playerShot",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
       "phase": "stage",
@@ -2316,36 +2268,8 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 20.553,
-      "recAt": 14.533
-    },
-    {
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 21.785,
-      "recAt": 15.283
-    },
-    {
-      "cue": "scoutDive",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 21.786,
-      "recAt": 15.3
+      "at": 19.852,
+      "recAt": 14.333
     },
     {
       "cue": "stagePulse",
@@ -2358,36 +2282,8 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 22.539,
-      "recAt": 15.933
-    },
-    {
-      "cue": "enemyShot",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 23.012,
-      "recAt": 16.183
-    },
-    {
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 23.396,
-      "recAt": 16.517
+      "at": 20.136,
+      "recAt": 14.617
     },
     {
       "cue": "scoutDive",
@@ -2400,11 +2296,11 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 24.722,
-      "recAt": 17.167
+      "at": 20.235,
+      "recAt": 14.717
     },
     {
-      "cue": "enemyShot",
+      "cue": "playerLoss",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
       "phase": "stage",
@@ -2414,8 +2310,22 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 24.785,
-      "recAt": 17.25
+      "at": 20.72,
+      "recAt": 15.2
+    },
+    {
+      "cue": "playerShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 22.087,
+      "recAt": 16.567
     },
     {
       "cue": "stagePulse",
@@ -2428,11 +2338,11 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 25.219,
-      "recAt": 17.583
+      "at": 23.051,
+      "recAt": 17.5
     },
     {
-      "cue": "wrapReturn",
+      "cue": "scoutHit",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
       "phase": "stage",
@@ -2442,11 +2352,11 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 26.188,
-      "recAt": 18.183
+      "at": 23.186,
+      "recAt": 17.633
     },
     {
-      "cue": "enemyShot",
+      "cue": "playerShot",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
       "phase": "stage",
@@ -2456,8 +2366,8 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 26.418,
-      "recAt": 18.383
+      "at": 23.207,
+      "recAt": 17.65
     },
     {
       "cue": "scoutDive",
@@ -2470,8 +2380,36 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 27.21,
-      "recAt": 19.05
+      "at": 23.285,
+      "recAt": 17.733
+    },
+    {
+      "cue": "enemyShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 23.63,
+      "recAt": 18.067
+    },
+    {
+      "cue": "scoutHit",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 24.469,
+      "recAt": 18.833
     },
     {
       "cue": "stagePulse",
@@ -2484,11 +2422,11 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 27.364,
-      "recAt": 19.233
+      "at": 24.794,
+      "recAt": 19.15
     },
     {
-      "cue": "wrapReturn",
+      "cue": "enemyShot",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
       "phase": "stage",
@@ -2498,8 +2436,22 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 27.468,
+      "at": 25.006,
       "recAt": 19.283
+    },
+    {
+      "cue": "scoutDive",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 25.07,
+      "recAt": 19.35
     },
     {
       "cue": "flagshipDive",
@@ -2512,8 +2464,8 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 27.586,
-      "recAt": 19.367
+      "at": 25.886,
+      "recAt": 20.167
     },
     {
       "cue": "escortJoin",
@@ -2526,11 +2478,11 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 27.586,
-      "recAt": 19.367
+      "at": 25.887,
+      "recAt": 20.167
     },
     {
-      "cue": "enemyShot",
+      "cue": "playerShot",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
       "phase": "stage",
@@ -2540,11 +2492,11 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 27.914,
-      "recAt": 19.717
+      "at": 26.433,
+      "recAt": 20.717
     },
     {
-      "cue": "scoutDive",
+      "cue": "stagePulse",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
       "phase": "stage",
@@ -2554,38 +2506,24 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 29.064,
+      "at": 26.519,
+      "recAt": 20.8
+    },
+    {
+      "cue": "scoutHit",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 26.552,
       "recAt": 20.833
     },
     {
-      "cue": "stagePulse",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 29.103,
-      "recAt": 20.883
-    },
-    {
-      "cue": "playerShot",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 29.437,
-      "recAt": 21.183
-    },
-    {
       "cue": "enemyShot",
       "atmosphereId": "escort-pursuit",
       "audioTheme": "guardians-signal",
@@ -2596,120 +2534,8 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 29.473,
-      "recAt": 21.233
-    },
-    {
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 30.009,
-      "recAt": 21.6
-    },
-    {
-      "cue": "stagePulse",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 31.218,
-      "recAt": 22.533
-    },
-    {
-      "cue": "enemyShot",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 31.411,
-      "recAt": 22.717
-    },
-    {
-      "cue": "playerShot",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 32.052,
-      "recAt": 23.367
-    },
-    {
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 32.174,
-      "recAt": 23.483
-    },
-    {
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 32.713,
-      "recAt": 24.017
-    },
-    {
-      "cue": "wrapReturn",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 32.713,
-      "recAt": 24.017
-    },
-    {
-      "cue": "enemyShot",
-      "atmosphereId": "escort-pursuit",
-      "audioTheme": "guardians-signal",
-      "phase": "stage",
-      "variant": 0,
-      "referenceClip": "",
-      "referenceClipStart": 0,
-      "referenceClipDuration": 0,
-      "stage": 5,
-      "challenge": false,
-      "at": 32.724,
-      "recAt": 24.033
+      "at": 26.649,
+      "recAt": 20.933
     },
     {
       "cue": "scoutDive",
@@ -2722,8 +2548,36 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 32.769,
-      "recAt": 24.083
+      "at": 26.936,
+      "recAt": 21.217
+    },
+    {
+      "cue": "playerShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 27.187,
+      "recAt": 21.467
+    },
+    {
+      "cue": "scoutHit",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 27.671,
+      "recAt": 21.95
     },
     {
       "cue": "stagePulse",
@@ -2736,8 +2590,92 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 32.868,
-      "recAt": 24.183
+      "at": 28.172,
+      "recAt": 22.45
+    },
+    {
+      "cue": "enemyShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 28.207,
+      "recAt": 22.483
+    },
+    {
+      "cue": "playerShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 28.869,
+      "recAt": 23.15
+    },
+    {
+      "cue": "escortHit",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 29.187,
+      "recAt": 23.45
+    },
+    {
+      "cue": "enemyShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 29.639,
+      "recAt": 23.9
+    },
+    {
+      "cue": "stagePulse",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 29.862,
+      "recAt": 24.1
+    },
+    {
+      "cue": "playerShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 30.384,
+      "recAt": 24.633
     },
     {
       "cue": "wrapReturn",
@@ -2750,8 +2688,162 @@
       "referenceClipDuration": 0,
       "stage": 5,
       "challenge": false,
-      "at": 32.98,
-      "recAt": 24.267
+      "at": 30.569,
+      "recAt": 24.817
+    },
+    {
+      "cue": "scoutDive",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 30.602,
+      "recAt": 24.85
+    },
+    {
+      "cue": "wrapReturn",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 30.818,
+      "recAt": 25.067
+    },
+    {
+      "cue": "enemyShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 31.169,
+      "recAt": 25.417
+    },
+    {
+      "cue": "scoutHit",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 31.367,
+      "recAt": 25.6
+    },
+    {
+      "cue": "wrapReturn",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 31.42,
+      "recAt": 25.65
+    },
+    {
+      "cue": "stagePulse",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 31.52,
+      "recAt": 25.75
+    },
+    {
+      "cue": "flagshipDive",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 31.607,
+      "recAt": 25.833
+    },
+    {
+      "cue": "escortJoin",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 31.608,
+      "recAt": 25.833
+    },
+    {
+      "cue": "playerShot",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 31.635,
+      "recAt": 25.867
+    },
+    {
+      "cue": "scoutDive",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 32.153,
+      "recAt": 26.367
+    },
+    {
+      "cue": "scoutHit",
+      "atmosphereId": "escort-pursuit",
+      "audioTheme": "guardians-signal",
+      "phase": "stage",
+      "variant": 0,
+      "referenceClip": "",
+      "referenceClipStart": 0,
+      "referenceClipDuration": 0,
+      "stage": 5,
+      "challenge": false,
+      "at": 32.368,
+      "recAt": 26.6
     }
   ],
   "formationState": {

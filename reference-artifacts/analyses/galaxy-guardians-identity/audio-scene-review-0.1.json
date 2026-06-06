@@ -17,7 +17,7 @@
       "guardians-opening-professional-review",
       "guardians-stage5-professional-review"
     ],
-    "weakestByCueDensity": "player-loss-read",
+    "weakestByCueDensity": "first-independent-dive-pressure",
     "strongestByCueDensity": "midrun-stage5-pressure",
     "reusablePlatformRead": "The scene-review layer is game-configured and can be extended for a third Platinum game by registering capture labels and scene anchors."
   },
@@ -39,15 +39,15 @@
         "waveform": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/launch-rack-establish-runtime-waveform.png",
         "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/launch-rack-establish-runtime-spectrogram.png",
         "metrics": {
-          "durationSeconds": 1.608,
-          "rms": 0.00045,
-          "peak": 0.00711,
-          "zeroCrossingsPerSecond": 178.5,
-          "zeroCrossingFrequencyProxyHz": 89.2,
+          "durationSeconds": 1.603,
+          "rms": 0.00056,
+          "peak": 0.06067,
+          "zeroCrossingsPerSecond": 181.5,
+          "zeroCrossingFrequencyProxyHz": 90.8,
           "burstFrameShare": 0.035,
-          "envelopeContrast": 10.663,
-          "decayRatio": 1.528,
-          "attackPeakPosition": 0.587,
+          "envelopeContrast": 15.576,
+          "decayRatio": 1.707,
+          "attackPeakPosition": 0.62,
           "frameRmsP10": 0.00012,
           "frameRmsP50": 0.00025,
           "frameRmsP90": 0.00032
@@ -166,17 +166,17 @@
         "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/first-independent-dive-pressure-runtime-spectrogram.png",
         "metrics": {
           "durationSeconds": 1.22,
-          "rms": 0.00046,
-          "peak": 0.00516,
-          "zeroCrossingsPerSecond": 309.8,
-          "zeroCrossingFrequencyProxyHz": 154.9,
-          "burstFrameShare": 0.105,
-          "envelopeContrast": 6.068,
-          "decayRatio": 0.668,
-          "attackPeakPosition": 0.007,
-          "frameRmsP10": 0.00013,
-          "frameRmsP50": 0.00027,
-          "frameRmsP90": 0.00063
+          "rms": 0.00052,
+          "peak": 0.00452,
+          "zeroCrossingsPerSecond": 401.6,
+          "zeroCrossingFrequencyProxyHz": 200.8,
+          "burstFrameShare": 0.124,
+          "envelopeContrast": 5.365,
+          "decayRatio": 0.85,
+          "attackPeakPosition": 0.125,
+          "frameRmsP10": 0.00014,
+          "frameRmsP50": 0.00028,
+          "frameRmsP90": 0.00085
         },
         "eventSummary": {
           "eventCount": 3,
@@ -254,17 +254,17 @@
         "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/flagship-escort-warning-runtime-spectrogram.png",
         "metrics": {
           "durationSeconds": 0.69,
-          "rms": 0.00064,
-          "peak": 0.00613,
-          "zeroCrossingsPerSecond": 605.8,
-          "zeroCrossingFrequencyProxyHz": 302.9,
-          "burstFrameShare": 0.126,
-          "envelopeContrast": 6.037,
-          "decayRatio": 2.691,
-          "attackPeakPosition": 0.988,
-          "frameRmsP10": 0.00014,
-          "frameRmsP50": 0.00028,
-          "frameRmsP90": 0.00101
+          "rms": 0.00077,
+          "peak": 0.00705,
+          "zeroCrossingsPerSecond": 760.8,
+          "zeroCrossingFrequencyProxyHz": 380.4,
+          "burstFrameShare": 0.172,
+          "envelopeContrast": 5.131,
+          "decayRatio": 3.385,
+          "attackPeakPosition": 0.895,
+          "frameRmsP10": 0.00013,
+          "frameRmsP50": 0.00029,
+          "frameRmsP90": 0.00133
         },
         "eventSummary": {
           "eventCount": 6,
@@ -386,18 +386,18 @@
         "waveform": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/opening-hit-payoff-runtime-waveform.png",
         "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/opening-hit-payoff-runtime-spectrogram.png",
         "metrics": {
-          "durationSeconds": 0.46,
-          "rms": 0.00024,
-          "peak": 0.00043,
-          "zeroCrossingsPerSecond": 67.4,
-          "zeroCrossingFrequencyProxyHz": 33.7,
-          "burstFrameShare": 0.31,
-          "envelopeContrast": 1.413,
-          "decayRatio": 0.972,
-          "attackPeakPosition": 0.684,
+          "durationSeconds": 0.461,
+          "rms": 0.00096,
+          "peak": 0.04846,
+          "zeroCrossingsPerSecond": 477.2,
+          "zeroCrossingFrequencyProxyHz": 238.6,
+          "burstFrameShare": 0.103,
+          "envelopeContrast": 9.446,
+          "decayRatio": 0.299,
+          "attackPeakPosition": 0,
           "frameRmsP10": 0.00012,
-          "frameRmsP50": 0.00025,
-          "frameRmsP90": 0.00032
+          "frameRmsP50": 0.00027,
+          "frameRmsP90": 0.00076
         },
         "eventSummary": {
           "eventCount": 3,
@@ -468,40 +468,41 @@
         "windowLabel": "player loss and failure punctuation"
       },
       "runtime": {
-        "startSeconds": 17.077,
-        "endSeconds": 17.967,
+        "startSeconds": 11.843,
+        "endSeconds": 12.733,
         "durationSeconds": 0.89,
         "waveform": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/player-loss-read-runtime-waveform.png",
         "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/player-loss-read-runtime-spectrogram.png",
         "metrics": {
           "durationSeconds": 0.89,
-          "rms": 0.00075,
-          "peak": 0.04477,
-          "zeroCrossingsPerSecond": 619.1,
-          "zeroCrossingFrequencyProxyHz": 309.5,
-          "burstFrameShare": 0.089,
-          "envelopeContrast": 10.084,
-          "decayRatio": 0.914,
-          "attackPeakPosition": 0.414,
-          "frameRmsP10": 0.00014,
-          "frameRmsP50": 0.00028,
-          "frameRmsP90": 0.00077
+          "rms": 0.00117,
+          "peak": 0.01312,
+          "zeroCrossingsPerSecond": 696.6,
+          "zeroCrossingFrequencyProxyHz": 348.3,
+          "burstFrameShare": 0.143,
+          "envelopeContrast": 7.676,
+          "decayRatio": 2.244,
+          "attackPeakPosition": 0.811,
+          "frameRmsP10": 0.00015,
+          "frameRmsP50": 0.00032,
+          "frameRmsP90": 0.00199
         },
         "eventSummary": {
-          "eventCount": 2,
-          "cueEventCount": 2,
+          "eventCount": 3,
+          "cueEventCount": 3,
           "eventTypes": [
             "audio_cue"
           ],
           "cues": [
-            "escortHit",
-            "playerLoss"
+            "playerLoss",
+            "playerShot",
+            "wrapReturn"
           ],
           "firstEvents": [
             {
-              "t": 17.117,
+              "t": 11.967,
               "type": "audio_cue",
-              "cue": "escortHit",
+              "cue": "wrapReturn",
               "atmosphereId": "signal-rack",
               "audioTheme": "guardians-signal",
               "phase": "stage",
@@ -513,7 +514,21 @@
               "stage": 1
             },
             {
-              "t": 17.217,
+              "t": 11.983,
+              "type": "audio_cue",
+              "cue": "playerShot",
+              "atmosphereId": "signal-rack",
+              "audioTheme": "guardians-signal",
+              "phase": "stage",
+              "variant": 0,
+              "referenceClip": "",
+              "referenceClipStart": 0,
+              "referenceClipDuration": 0,
+              "challenge": false,
+              "stage": 1
+            },
+            {
+              "t": 11.983,
               "type": "audio_cue",
               "cue": "playerLoss",
               "atmosphereId": "signal-rack",
@@ -548,21 +563,21 @@
         "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-scene-review-previews/midrun-stage5-pressure-runtime-spectrogram.png",
         "metrics": {
           "durationSeconds": 4.333,
-          "rms": 0.00058,
-          "peak": 0.06082,
-          "zeroCrossingsPerSecond": 366.5,
-          "zeroCrossingFrequencyProxyHz": 183.2,
-          "burstFrameShare": 0.087,
-          "envelopeContrast": 15.623,
-          "decayRatio": 0.948,
-          "attackPeakPosition": 0.244,
+          "rms": 0.00053,
+          "peak": 0.00702,
+          "zeroCrossingsPerSecond": 317.6,
+          "zeroCrossingFrequencyProxyHz": 158.8,
+          "burstFrameShare": 0.092,
+          "envelopeContrast": 8.72,
+          "decayRatio": 0.98,
+          "attackPeakPosition": 0.002,
           "frameRmsP10": 0.00013,
           "frameRmsP50": 0.00027,
-          "frameRmsP90": 0.00064
+          "frameRmsP90": 0.00059
         },
         "eventSummary": {
-          "eventCount": 14,
-          "cueEventCount": 14,
+          "eventCount": 13,
+          "cueEventCount": 13,
           "eventTypes": [
             "audio_cue"
           ],
@@ -633,7 +648,7 @@
               "stage": 5
             },
             {
-              "t": 3.667,
+              "t": 3.783,
               "type": "audio_cue",
               "cue": "scoutDive",
               "atmosphereId": "escort-pursuit",
@@ -647,7 +662,7 @@
               "stage": 5
             },
             {
-              "t": 3.867,
+              "t": 3.983,
               "type": "audio_cue",
               "cue": "enemyShot",
               "atmosphereId": "escort-pursuit",
@@ -675,7 +690,7 @@
               "stage": 5
             },
             {
-              "t": 5.167,
+              "t": 5.383,
               "type": "audio_cue",
               "cue": "enemyShot",
               "atmosphereId": "escort-pursuit",
@@ -689,7 +704,7 @@
               "stage": 5
             },
             {
-              "t": 5.45,
+              "t": 5.683,
               "type": "audio_cue",
               "cue": "scoutDive",
               "atmosphereId": "escort-pursuit",

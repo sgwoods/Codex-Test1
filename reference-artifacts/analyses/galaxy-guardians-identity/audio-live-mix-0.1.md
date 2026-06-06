@@ -6,12 +6,12 @@ Overall score: **10/10**
 
 | Capture | Score | Longest quiet gap | Cue events / 10s | Pressure share | Active slice share |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| opening-professional | 10/10 | 1.977s | 27.05 | 0.554 | 0.792 |
-| midrun-professional | 10/10 | 2.491s | 27.87 | 0.564 | 0.75 |
+| opening-professional | 10/10 | 1.367s | 26.63 | 0.531 | 0.542 |
+| midrun-professional | 10/10 | 1.385s | 28.59 | 0.575 | 0.679 |
 
 ## Opening To Midrun Escalation
 
-Pressure cue ratio: **1.22x**
+Pressure cue ratio: **1.35x**
 
 Midrun capture is denser than opening, which is the intended direction. Use this read alongside headed listening to judge whether the added pressure stays legible.
 

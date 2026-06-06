@@ -48,18 +48,18 @@
         "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-live-mix-previews/opening-professional-mix-spectrogram.png"
       },
       "metrics": {
-        "cueEventCount": 65,
-        "cueEventsPer10s": 27.05,
-        "pressureCueCount": 36,
-        "rewardCueCount": 9,
-        "criticalCueCount": 47,
-        "pressureCueShare": 0.554,
-        "longestQuietGapSeconds": 1.977,
+        "cueEventCount": 64,
+        "cueEventsPer10s": 26.63,
+        "pressureCueCount": 34,
+        "rewardCueCount": 7,
+        "criticalCueCount": 44,
+        "pressureCueShare": 0.531,
+        "longestQuietGapSeconds": 1.367,
         "pulseCount": 11,
         "pulseMedianSeconds": 1.967,
-        "activeSliceShare": 0.792,
+        "activeSliceShare": 0.542,
         "integratedRms": 0.00062,
-        "envelopeContrast": 13.465,
+        "envelopeContrast": 13.874,
         "sliceSeconds": 5,
         "cueDensitySlices": [
           {
@@ -81,14 +81,15 @@
             "index": 1,
             "startSeconds": 5,
             "endSeconds": 10,
-            "cueEventCount": 13,
-            "cueEventsPer10s": 26,
+            "cueEventCount": 15,
+            "cueEventsPer10s": 30,
             "cues": [
               "enemyShot",
               "escortJoin",
               "flagshipDive",
               "playerShot",
               "scoutDive",
+              "scoutHit",
               "stagePulse",
               "wrapReturn"
             ]
@@ -97,12 +98,11 @@
             "index": 2,
             "startSeconds": 10,
             "endSeconds": 15,
-            "cueEventCount": 19,
-            "cueEventsPer10s": 38,
+            "cueEventCount": 13,
+            "cueEventsPer10s": 26,
             "cues": [
               "enemyShot",
-              "escortJoin",
-              "flagshipDive",
+              "playerLoss",
               "playerShot",
               "scoutDive",
               "scoutHit",
@@ -118,26 +118,27 @@
             "cueEventsPer10s": 28,
             "cues": [
               "enemyShot",
-              "escortHit",
-              "playerLoss",
+              "escortJoin",
+              "flagshipDive",
               "playerShot",
               "scoutDive",
               "scoutHit",
-              "stagePulse"
+              "stagePulse",
+              "wrapReturn"
             ]
           },
           {
             "index": 4,
             "startSeconds": 20,
-            "endSeconds": 24.027,
-            "cueEventCount": 7,
-            "cueEventsPer10s": 17.38,
+            "endSeconds": 24.032,
+            "cueEventCount": 10,
+            "cueEventsPer10s": 24.8,
             "cues": [
               "enemyShot",
               "playerShot",
               "scoutDive",
-              "scoutHit",
-              "stagePulse"
+              "stagePulse",
+              "wrapReturn"
             ]
           }
         ],
@@ -146,145 +147,145 @@
             "startSeconds": 0,
             "endSeconds": 1,
             "rms": 0.00053,
-            "peak": 0.00711
+            "peak": 0.06067
           },
           {
             "startSeconds": 1,
             "endSeconds": 2,
-            "rms": 0.00059,
-            "peak": 0.03903
+            "rms": 0.0005,
+            "peak": 0.00659
           },
           {
             "startSeconds": 2,
             "endSeconds": 3,
-            "rms": 0.00052,
-            "peak": 0.00452
+            "rms": 0.00062,
+            "peak": 0.00711
           },
           {
             "startSeconds": 3,
             "endSeconds": 4,
-            "rms": 0.0006,
-            "peak": 0.05371
+            "rms": 0.0004,
+            "peak": 0.00452
           },
           {
             "startSeconds": 4,
             "endSeconds": 5,
-            "rms": 0.00051,
-            "peak": 0.00452
+            "rms": 0.00057,
+            "peak": 0.00455
           },
           {
             "startSeconds": 5,
             "endSeconds": 6,
-            "rms": 0.00056,
-            "peak": 0.04669
+            "rms": 0.00039,
+            "peak": 0.00452
           },
           {
             "startSeconds": 6,
             "endSeconds": 7,
-            "rms": 0.00024,
-            "peak": 0.00034
+            "rms": 0.00044,
+            "peak": 0.00443
           },
           {
             "startSeconds": 7,
             "endSeconds": 8,
-            "rms": 0.00102,
-            "peak": 0.05374
+            "rms": 0.00092,
+            "peak": 0.00696
           },
           {
             "startSeconds": 8,
             "endSeconds": 9,
-            "rms": 0.00026,
-            "peak": 0.00424
+            "rms": 0.00031,
+            "peak": 0.00464
           },
           {
             "startSeconds": 9,
             "endSeconds": 10,
-            "rms": 0.00068,
-            "peak": 0.00455
+            "rms": 0.00079,
+            "peak": 0.00601
           },
           {
             "startSeconds": 10,
             "endSeconds": 11,
-            "rms": 0.00033,
-            "peak": 0.0058
+            "rms": 0.00024,
+            "peak": 0.00034
           },
           {
             "startSeconds": 11,
             "endSeconds": 12,
-            "rms": 0.00075,
-            "peak": 0.00632
+            "rms": 0.00062,
+            "peak": 0.00455
           },
           {
             "startSeconds": 12,
             "endSeconds": 13,
-            "rms": 0.00079,
-            "peak": 0.0047
+            "rms": 0.00115,
+            "peak": 0.01303
           },
           {
             "startSeconds": 13,
             "endSeconds": 14,
-            "rms": 0.00052,
-            "peak": 0.00455
+            "rms": 0.00044,
+            "peak": 0.00623
           },
           {
             "startSeconds": 14,
             "endSeconds": 15,
-            "rms": 0.00066,
-            "peak": 0.00659
+            "rms": 0.00048,
+            "peak": 0.00601
           },
           {
             "startSeconds": 15,
             "endSeconds": 16,
-            "rms": 0.00084,
-            "peak": 0.05765
+            "rms": 0.00079,
+            "peak": 0.05539
           },
           {
             "startSeconds": 16,
             "endSeconds": 17,
-            "rms": 0.00059,
-            "peak": 0.00687
+            "rms": 0.00064,
+            "peak": 0.06369
           },
           {
             "startSeconds": 17,
             "endSeconds": 18,
             "rms": 0.00078,
-            "peak": 0.05487
+            "peak": 0.0065
           },
           {
             "startSeconds": 18,
             "endSeconds": 19,
-            "rms": 0.0008,
-            "peak": 0.00809
+            "rms": 0.00066,
+            "peak": 0.00467
           },
           {
             "startSeconds": 19,
             "endSeconds": 20,
-            "rms": 0.00024,
-            "peak": 0.00037
+            "rms": 0.00043,
+            "peak": 0.00378
           },
           {
             "startSeconds": 20,
             "endSeconds": 21,
-            "rms": 0.00043,
-            "peak": 0.00549
+            "rms": 0.0004,
+            "peak": 0.00424
           },
           {
             "startSeconds": 21,
             "endSeconds": 22,
-            "rms": 0.00066,
-            "peak": 0.00681
+            "rms": 0.00042,
+            "peak": 0.00345
           },
           {
             "startSeconds": 22,
             "endSeconds": 23,
-            "rms": 0.00058,
-            "peak": 0.00952
+            "rms": 0.00047,
+            "peak": 0.00473
           },
           {
             "startSeconds": 23,
             "endSeconds": 24,
-            "rms": 0.00064,
-            "peak": 0.00809
+            "rms": 0.0009,
+            "peak": 0.00626
           }
         ]
       }
@@ -316,18 +317,18 @@
         "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-live-mix-previews/midrun-professional-mix-spectrogram.png"
       },
       "metrics": {
-        "cueEventCount": 78,
-        "cueEventsPer10s": 27.87,
-        "pressureCueCount": 44,
-        "rewardCueCount": 11,
-        "criticalCueCount": 59,
-        "pressureCueShare": 0.564,
-        "longestQuietGapSeconds": 2.491,
-        "pulseCount": 13,
+        "cueEventCount": 80,
+        "cueEventsPer10s": 28.59,
+        "pressureCueCount": 46,
+        "rewardCueCount": 12,
+        "criticalCueCount": 60,
+        "pressureCueShare": 0.575,
+        "longestQuietGapSeconds": 1.385,
+        "pulseCount": 14,
         "pulseMedianSeconds": 1.65,
-        "activeSliceShare": 0.75,
-        "integratedRms": 0.00063,
-        "envelopeContrast": 17.226,
+        "activeSliceShare": 0.679,
+        "integratedRms": 0.00062,
+        "envelopeContrast": 9.771,
         "sliceSeconds": 5,
         "cueDensitySlices": [
           {
@@ -349,14 +350,13 @@
             "index": 1,
             "startSeconds": 5,
             "endSeconds": 10,
-            "cueEventCount": 18,
-            "cueEventsPer10s": 36,
+            "cueEventCount": 12,
+            "cueEventsPer10s": 24,
             "cues": [
               "enemyShot",
-              "escortHit",
               "escortJoin",
               "flagshipDive",
-              "playerShot",
+              "playerLoss",
               "scoutDive",
               "stagePulse",
               "wrapReturn"
@@ -366,42 +366,42 @@
             "index": 2,
             "startSeconds": 10,
             "endSeconds": 15,
-            "cueEventCount": 16,
-            "cueEventsPer10s": 32,
+            "cueEventCount": 15,
+            "cueEventsPer10s": 30,
             "cues": [
               "enemyShot",
-              "playerLoss",
               "playerShot",
               "scoutDive",
               "scoutHit",
-              "stagePulse",
-              "wrapReturn"
+              "stagePulse"
             ]
           },
           {
             "index": 3,
             "startSeconds": 15,
             "endSeconds": 20,
-            "cueEventCount": 16,
-            "cueEventsPer10s": 32,
+            "cueEventCount": 11,
+            "cueEventsPer10s": 22,
             "cues": [
               "enemyShot",
+              "playerLoss",
               "playerShot",
               "scoutDive",
               "scoutHit",
-              "stagePulse",
-              "wrapReturn"
+              "stagePulse"
             ]
           },
           {
             "index": 4,
             "startSeconds": 20,
             "endSeconds": 25,
-            "cueEventCount": 11,
-            "cueEventsPer10s": 22,
+            "cueEventCount": 18,
+            "cueEventsPer10s": 36,
             "cues": [
               "enemyShot",
-              "playerLoss",
+              "escortHit",
+              "escortJoin",
+              "flagshipDive",
               "playerShot",
               "scoutDive",
               "scoutHit",
@@ -412,13 +412,18 @@
           {
             "index": 5,
             "startSeconds": 25,
-            "endSeconds": 27.991,
-            "cueEventCount": 3,
-            "cueEventsPer10s": 10.03,
+            "endSeconds": 27.985,
+            "cueEventCount": 10,
+            "cueEventsPer10s": 33.5,
             "cues": [
               "enemyShot",
+              "escortJoin",
+              "flagshipDive",
+              "playerShot",
               "scoutDive",
-              "stagePulse"
+              "scoutHit",
+              "stagePulse",
+              "wrapReturn"
             ]
           }
         ],
@@ -427,177 +432,177 @@
             "startSeconds": 0,
             "endSeconds": 1,
             "rms": 0.00024,
-            "peak": 0.00052
+            "peak": 0.00037
           },
           {
             "startSeconds": 1,
             "endSeconds": 2,
-            "rms": 0.00053,
-            "peak": 0.00717
+            "rms": 0.00054,
+            "peak": 0.00757
           },
           {
             "startSeconds": 2,
             "endSeconds": 3,
             "rms": 0.00062,
-            "peak": 0.0061
+            "peak": 0.00699
           },
           {
             "startSeconds": 3,
             "endSeconds": 4,
-            "rms": 0.00067,
-            "peak": 0.06381
+            "rms": 0.00052,
+            "peak": 0.005
           },
           {
             "startSeconds": 4,
             "endSeconds": 5,
-            "rms": 0.0006,
-            "peak": 0.005
+            "rms": 0.00056,
+            "peak": 0.00449
           },
           {
             "startSeconds": 5,
             "endSeconds": 6,
-            "rms": 0.00032,
-            "peak": 0.0029
+            "rms": 0.00036,
+            "peak": 0.00323
           },
           {
             "startSeconds": 6,
             "endSeconds": 7,
-            "rms": 0.00057,
-            "peak": 0.00455
+            "rms": 0.00076,
+            "peak": 0.00699
           },
           {
             "startSeconds": 7,
             "endSeconds": 8,
-            "rms": 0.00076,
-            "peak": 0.00674
+            "rms": 0.0006,
+            "peak": 0.00449
           },
           {
             "startSeconds": 8,
             "endSeconds": 9,
-            "rms": 0.00061,
-            "peak": 0.00638
+            "rms": 0.00054,
+            "peak": 0.00467
           },
           {
             "startSeconds": 9,
             "endSeconds": 10,
-            "rms": 0.00046,
-            "peak": 0.00452
+            "rms": 0.00051,
+            "peak": 0.00433
           },
           {
             "startSeconds": 10,
             "endSeconds": 11,
-            "rms": 0.0008,
-            "peak": 0.00616
+            "rms": 0.00081,
+            "peak": 0.00897
           },
           {
             "startSeconds": 11,
             "endSeconds": 12,
-            "rms": 0.00082,
-            "peak": 0.0556
+            "rms": 0.00044,
+            "peak": 0.00644
           },
           {
             "startSeconds": 12,
             "endSeconds": 13,
-            "rms": 0.00096,
-            "peak": 0.07166
+            "rms": 0.00075,
+            "peak": 0.00598
           },
           {
             "startSeconds": 13,
             "endSeconds": 14,
-            "rms": 0.00043,
-            "peak": 0.00601
+            "rms": 0.00048,
+            "peak": 0.00665
           },
           {
             "startSeconds": 14,
             "endSeconds": 15,
-            "rms": 0.00053,
-            "peak": 0.0065
+            "rms": 0.00063,
+            "peak": 0.00577
           },
           {
             "startSeconds": 15,
             "endSeconds": 16,
-            "rms": 0.00084,
-            "peak": 0.05289
+            "rms": 0.00072,
+            "peak": 0.00632
           },
           {
             "startSeconds": 16,
             "endSeconds": 17,
-            "rms": 0.00064,
-            "peak": 0.00464
+            "rms": 0.00081,
+            "peak": 0.00964
           },
           {
             "startSeconds": 17,
             "endSeconds": 18,
-            "rms": 0.00057,
-            "peak": 0.00452
+            "rms": 0.00043,
+            "peak": 0.00589
           },
           {
             "startSeconds": 18,
             "endSeconds": 19,
-            "rms": 0.00064,
-            "peak": 0.00626
+            "rms": 0.00068,
+            "peak": 0.0062
           },
           {
             "startSeconds": 19,
             "endSeconds": 20,
-            "rms": 0.00077,
-            "peak": 0.05157
+            "rms": 0.0004,
+            "peak": 0.00436
           },
           {
             "startSeconds": 20,
             "endSeconds": 21,
-            "rms": 0.00054,
-            "peak": 0.00507
+            "rms": 0.00066,
+            "peak": 0.0047
           },
           {
             "startSeconds": 21,
             "endSeconds": 22,
-            "rms": 0.00071,
-            "peak": 0.00662
+            "rms": 0.00068,
+            "peak": 0.00665
           },
           {
             "startSeconds": 22,
             "endSeconds": 23,
-            "rms": 0.00051,
-            "peak": 0.00446
+            "rms": 0.00075,
+            "peak": 0.00595
           },
           {
             "startSeconds": 23,
             "endSeconds": 24,
-            "rms": 0.00068,
-            "peak": 0.00739
+            "rms": 0.00052,
+            "peak": 0.00531
           },
           {
             "startSeconds": 24,
             "endSeconds": 25,
-            "rms": 0.00044,
-            "peak": 0.0061
+            "rms": 0.00055,
+            "peak": 0.00632
           },
           {
             "startSeconds": 25,
             "endSeconds": 26,
-            "rms": 0.00074,
-            "peak": 0.00641
+            "rms": 0.0006,
+            "peak": 0.00638
           },
           {
             "startSeconds": 26,
             "endSeconds": 27,
-            "rms": 0.00032,
-            "peak": 0.00522
+            "rms": 0.00078,
+            "peak": 0.0054
           },
           {
             "startSeconds": 27,
             "endSeconds": 27.96,
-            "rms": 0.00062,
-            "peak": 0.00583
+            "rms": 0.0009,
+            "peak": 0.00775
           }
         ]
       }
     }
   ],
   "escalation": {
-    "pressureCueRatio": 1.22,
-    "cueDensityRatio": 1.03,
+    "pressureCueRatio": 1.35,
+    "cueDensityRatio": 1.07,
     "read": "Midrun capture is denser than opening, which is the intended direction. Use this read alongside headed listening to judge whether the added pressure stays legible."
   },
   "nextUse": "Use this artifact with scene review and headed listening. Retune recurring pressure, shot, dive, hit, and loss families only after the lived gameplay mix says where the dead air or crowding really is."

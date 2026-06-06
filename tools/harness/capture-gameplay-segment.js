@@ -206,6 +206,39 @@ async function main(){
       return candidates.find(candidate => window.MediaRecorder.isTypeSupported(candidate)) || '';
     }
 
+    function quietArcadeMusicForCapture(){
+      try{
+        if(window.__platinumArcadeMusic?.stopForHarness){
+          const state = window.__platinumArcadeMusic.stopForHarness();
+          return {
+            stopped: true,
+            via: 'public-harness-helper',
+            previousState: state || null
+          };
+        }
+        if(typeof stopArcadeMusic === 'function'){
+          const previousState = window.__platinumArcadeMusic?.state?.() || null;
+          stopArcadeMusic({ silent: true, persistRequest: false });
+          return {
+            stopped: true,
+            via: 'runtime-global',
+            previousState
+          };
+        }
+      }catch(err){
+        return {
+          stopped: false,
+          via: 'error',
+          error: String(err?.message || err || 'Arcade Music capture stop failed')
+        };
+      }
+      return {
+        stopped: false,
+        via: 'unavailable',
+        previousState: window.__platinumArcadeMusic?.state?.() || null
+      };
+    }
+
     function visibleTargetsFromSnapshot(snapshot, key){
       const rows = Array.isArray(snapshot?.[key]) ? snapshot[key] : [];
       return rows.filter(item => {
@@ -285,6 +318,7 @@ async function main(){
       return api.start(startCfg);
     }
 
+    const arcadeMusicCaptureState = quietArcadeMusicForCapture();
     const startResult = startSegment();
     await delay(Math.round(options.warmup * 1000));
     const captureStartActivity = await waitForActiveCaptureWindow();
@@ -358,6 +392,7 @@ async function main(){
       videoDataUrl,
       posterDataUrl,
       startResult,
+      arcadeMusicCaptureState,
       captureStartActivity,
       finalState,
       sessionEvents,
@@ -475,6 +510,7 @@ async function main(){
     videoAssessment,
     contactSheetAssessment: contactSheet,
     startState: pageResult.startResult || null,
+    arcadeMusicCaptureState: pageResult.arcadeMusicCaptureState || null,
     captureStartActivity: pageResult.captureStartActivity || null,
     finalState: pageResult.finalState || null,
     sessionEvents: pageResult.sessionEvents || [],
