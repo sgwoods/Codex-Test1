@@ -196,6 +196,14 @@ For a compact current-state summary:
 npm run machine:status
 ```
 
+For a machine-aware session startup brief that reviews the current handoff and
+planning docs, summarizes this machine's state, reports the release split, and
+suggests the next `5` focus areas for the current session, use:
+
+```bash
+npm run session:brief
+```
+
 These commands are now the primary machine bring-up path. They replace the
 older manual sequence as the recommended way to restart work.
 
