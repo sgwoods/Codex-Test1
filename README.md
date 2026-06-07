@@ -71,6 +71,8 @@ Currently verified hosted docs:
   - `https://sgwoods.github.io/Aurora-Galactica/dev/project-guide.html`
 - release schedule spine:
   - `https://sgwoods.github.io/Aurora-Galactica/dev/project-guide.html#release-schedule-spine`
+- multi-machine work allocation:
+  - `https://sgwoods.github.io/Aurora-Galactica/dev/project-guide.html#multi-machine-allocation`
 - white paper on hosted `/dev`:
   - `https://sgwoods.github.io/Aurora-Galactica/dev/white-paper.html`
 - 20-slide project overview on hosted `/dev`:
@@ -191,7 +193,10 @@ Current go-forward focus:
 - use [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md) for the
   current readable quality table while shaping the next post-`1.4.0`
   improvement bundle
-- use the multi-machine bootstrap and release-authority workflow
+- use the multi-machine bootstrap, release-authority workflow, and
+  machine-allocation model: MacBook M4 for high-feedback gameplay/integration,
+  iMac M1 for always-on separable ingestion, Guardians evidence, persona/watch,
+  portability, and issue-hygiene work
 - keep folding in the other machine's Galaxians-style second-game work and
   stronger harness/reference analysis
 - prioritize the next measurable conformance lifts in audio/event feedback,

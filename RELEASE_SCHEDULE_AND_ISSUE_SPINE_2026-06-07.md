@@ -25,6 +25,29 @@ Current branch state:
 - hosted `/dev` is expected to track the latest reviewed `main` dev publish.
 - no beta or production publish is implied by this schedule.
 
+## Multi-Machine Allocation Model
+
+The project can use multiple machines, but the release schedule remains the
+coordination layer. A branch should say both which release family it advances
+and which machine is expected to do the work.
+
+| Machine | Default Role | Best Current Work |
+| --- | --- | --- |
+| MacBook M4 / `macbook-pro` | High-throughput interactive development and current release-authority host. | Aurora challenge-stage runtime quality, browser-visible polish, fast conformance sweeps, integration, hosted `/dev` publish from clean `main`. |
+| iMac M1 / `imacm1` | Always-online background worker and separable topic-branch producer. | Guardians ingestion/v1 evidence, long persona/watch runs, gameplay-export ingestion cycles, artifact portability checks, docs consistency sweeps, issue hygiene proposals. |
+| Future worker machines | Narrow scoped artifact or analysis workers. | Video segmentation, labeling, contact sheets, audio/window analysis, game-specific evidence packets, no direct lane publish unless authority is transferred. |
+
+Parallel-work rules:
+
+- do not assign two machines to edit the same runtime surface without a named
+  integration branch and handoff note
+- use iMac M1 for work that can run unattended or produce durable evidence
+- use MacBook M4 for work that needs fast feedback, visual review, or release
+  integration
+- push worker branches before switching machines or archiving sessions
+- keep beta and production gated by `release-authority.json`, not by informal
+  machine habit
+
 ## Release Family Schedule
 
 | Family | Working Title | Primary Goal | Required Proof Before Beta / Production |

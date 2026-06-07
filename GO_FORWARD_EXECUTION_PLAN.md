@@ -286,8 +286,11 @@ Practical standard:
   improvement bundle
 - the next hosted `/beta` should only be requested once hosted `/dev` proves
   that bundle is materially better than `1.4.0-beta.1`
-- beta and production publish still must happen from `imacm1 / iMacM1` unless
-  release authority is explicitly transferred
+- beta and production publish must happen from the machine currently recorded
+  in `release-authority.json`; as of the June 2026 authority transfer that is
+  `macbook-pro`, while `imacm1 / iMacM1` remains the best always-online worker
+  for separable long-cycle branches unless authority is explicitly transferred
+  back
 - the next larger beta family remains `1.4.0` arcade depth
 - after refreshing the audio process with cue contracts, promotion prechecks,
   layered cue support, composite analysis windows, calibrated browser-reference
@@ -347,8 +350,8 @@ The accepted `1.3.0.1` hosted-dev review bundle was promoted using this
 authority-machine path:
 
 1. sync the authoritative source repo from `origin/main`
-2. run machine bootstrap/status/doctor and confirm release authority still
-   points at `imacm1 / iMacM1`
+2. run machine bootstrap/status/doctor and confirm release authority points at
+   the intended publishing machine in `release-authority.json`
 3. run `npm run build`
 4. run `npm run harness:check:documentation-freshness`
 5. run `npm run publish:check:dev`
@@ -359,9 +362,9 @@ authority-machine path:
 10. verify hosted beta, hosted production, public sync, and post-publish
     machine health
 
-The MacBook may continue source, branch, commit, push, merge, and hosted-dev
-work, but it should not approve beta or publish beta while release authority
-remains on `imacm1`.
+The non-authority machine may continue source, branch, commit, push, merge, and
+hosted-dev preparation work, but it must not approve beta, publish beta, promote
+production, or publish production while release authority is held elsewhere.
 
 See also:
 

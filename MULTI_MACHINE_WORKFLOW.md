@@ -15,6 +15,46 @@ The source of truth for release authority is:
 
 - [release-authority.json](release-authority.json)
 
+## Machine Roles And Work Allocation
+
+The project may use more than one active development machine. The default
+division is based on what each machine is good at, not on ownership of a
+particular game.
+
+| Machine Class | Best Use | Avoid |
+| --- | --- | --- |
+| MacBook M4 / current high-throughput machine | Interactive gameplay iteration, browser-backed visual review, heavy local harness sweeps, release-authority work when claimed, source integration, and tasks that need frequent human inspection. | Long unattended branches that may be forgotten while active release work continues elsewhere. |
+| iMac M1 / always-online machine | Background ingestion, long-cycle persona/watch runs, reference-media normalization, hosted-lane monitoring, issue hygiene, documentation sweeps, and independent topic branches that can be cleanly pushed for integration. | Beta or production publish unless release authority is intentionally transferred there. |
+| Future additional machines | Narrowly scoped worker branches such as video segmentation, artifact labeling, screenshot/contact-sheet generation, or game-specific analysis packets. | Editing `main` directly, holding release authority implicitly, or maintaining private local-only work. |
+
+Current practical rule:
+
+- use the MacBook M4 for the highest-feedback gameplay and platform work
+- use the iMac M1 for always-on or separable work that can produce durable
+  artifacts, branch commits, or GitHub issue updates
+- every parallel thread must declare its release family from
+  [RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md)
+- every parallel thread must have a short handoff note before it is merged,
+  archived, or abandoned
+
+Good iMac M1 assignments:
+
+- Guardians ingestion and v1 evidence packets while the MacBook advances Aurora
+  gameplay quality
+- overnight or multi-hour persona/watch runs with summarized artifacts
+- gameplay-export ingestion cycles for hosted `/dev` review
+- reference artifact portability checks and path sanitation
+- GitHub issue deduplication and release-family labeling proposals
+- documentation consistency sweeps after MacBook runtime work lands
+
+Good MacBook M4 assignments:
+
+- Aurora challenge-stage movement and visual-conformance runtime changes
+- browser-visible UI, fullscreen, cabinet, score, and shell reviews
+- heavy local conformance sweeps that benefit from the faster machine
+- release-authority checks and hosted `/dev` publish from clean `main`
+- integration of pushed worker branches from iMac M1 or future machines
+
 ## One-Command Startup
 
 After cloning the repo and installing the required system tools, the preferred

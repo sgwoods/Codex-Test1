@@ -189,6 +189,61 @@
       ]
     },
     {
+      "id": "multi-machine-allocation",
+      "title": "Multi-Machine Work Allocation",
+      "summary": "How the MacBook M4, iMac M1, and any future worker machines should divide work without losing branch or release discipline.",
+      "cards": [
+        {
+          "title": "Default Split",
+          "body": "Use the MacBook M4 for fast interactive gameplay, platform, browser-review, integration, and release-authority work. Use the iMac M1 as the always-online worker for long-cycle ingestion, persona/watch runs, reference artifact normalization, documentation sweeps, and issue hygiene."
+        },
+        {
+          "title": "Coordination Rule",
+          "body": "Every parallel branch should declare the release family it advances and should push a durable handoff before another machine integrates it. Release authority still comes from `release-authority.json`, not from which machine happens to be active."
+        },
+        {
+          "title": "Why This Matters",
+          "body": "The project now benefits from background compute and parallel Codex threads, but only if those threads produce durable artifacts, clean branches, and reviewed integration points instead of invisible local work."
+        }
+      ],
+      "table": {
+        "columns": [
+          "Machine",
+          "Best Assignments",
+          "Avoid"
+        ],
+        "rows": [
+          [
+            "MacBook M4",
+            "Aurora runtime changes, browser-visible UI review, heavy local conformance sweeps, source integration, hosted `/dev` publish from clean `main`.",
+            "Leaving long unattended local-only work while other machines continue."
+          ],
+          [
+            "iMac M1",
+            "Guardians ingestion/v1 evidence, overnight persona/watch runs, gameplay-export ingestion, portability checks, docs consistency, issue labeling proposals.",
+            "Publishing beta/production unless release authority is intentionally transferred."
+          ],
+          [
+            "Future workers",
+            "Video segmentation, sprite/audio/contact-sheet extraction, game-specific analysis packets, narrow harness runs.",
+            "Editing `main` directly or holding informal release authority."
+          ]
+        ]
+      },
+      "links": [
+        {
+          "label": "Read Multi-Machine Workflow",
+          "href": "project-guide.html#multi-machine-workflow-doc",
+          "detail": "Full source workflow including startup, branch naming, authority, switching, and machine-allocation defaults."
+        },
+        {
+          "label": "Read Release Schedule Spine",
+          "href": "project-guide.html#release-schedule-spine-doc",
+          "detail": "Release-family map that each parallel work thread should use before branch creation."
+        }
+      ]
+    },
+    {
       "id": "conformance-entry-points",
       "title": "Conformance Entry Points",
       "summary": "Shareable lane-relative links for Aurora, Galaxy Guardians, and the combined dashboard view.",
@@ -641,6 +696,11 @@
           "detail": "Forward-looking release-family schedule that maps workstreams, GitHub issues, docs, and lane gates into one plan."
         },
         {
+          "label": "Hosted Multi-Machine Work Allocation",
+          "href": "project-guide.html#multi-machine-allocation",
+          "detail": "Practical division of MacBook M4, iMac M1, and future worker-machine responsibilities."
+        },
+        {
           "label": "Hosted White Paper",
           "href": "white-paper.html",
           "detail": "Dedicated hosted narrative surface for the living white paper, citation ledger, and versioned white-paper release history."
@@ -788,6 +848,12 @@
       "title": "Release Schedule And Issue Spine",
       "summary": "Current future-looking release-family schedule that aligns active workstreams, GitHub issue hygiene, hosted lane gates, and source documentation ownership.",
       "file": "RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md"
+    },
+    {
+      "id": "multi-machine-workflow-doc",
+      "title": "Multi-Machine Workflow",
+      "summary": "Current workflow for MacBook M4, iMac M1, and future worker-machine allocation, including startup, branch naming, authority, safe switching, and release guardrails.",
+      "file": "MULTI_MACHINE_WORKFLOW.md"
     },
     {
       "id": "game-conformance-catalog-doc",

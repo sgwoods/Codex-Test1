@@ -162,8 +162,9 @@ Current decision:
 - make shared gameplay-video publishing an early roadmap capability
 - bring a preliminary second-game Platinum sneak peek forward before the full
   `2.0` multi-game release
-- use the first post-`1.4.0` iMac branch to make that second game genuinely
-  playable enough to validate platform changes against two games
+- use the first post-`1.4.0` parallel Guardians branch, often well suited to
+  the always-online iMac M1, to make that second game genuinely playable enough
+  to validate platform changes against two games
 - treat near-parity for `Galaxy Guardians` as process parity first:
   game-owned evidence, game-owned metrics, game-owned score/replay/result
   identity, and a readable candidate-review path before demanding Aurora-like

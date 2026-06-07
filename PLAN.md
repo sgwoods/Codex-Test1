@@ -209,7 +209,10 @@ from the roadmap.
 3. use
    [RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md)
    to assign each active branch and issue family to the right release lane
-4. keep the multi-machine bootstrap and release-authority workflow healthy
+4. keep the multi-machine bootstrap, release-authority workflow, and
+   machine-allocation model healthy: MacBook M4 for high-feedback gameplay,
+   platform, and integration work; iMac M1 for always-on separable ingestion,
+   persona/watch, Guardians evidence, portability, and issue-hygiene branches
 5. keep hosted `/dev` available for the next coherent review bundle instead of
    using it as a casual mirror of `main`
 6. attack Aurora challenge-stage runtime quality first: the grammar and
