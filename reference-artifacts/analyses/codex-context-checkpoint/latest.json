@@ -1,34 +1,16 @@
 {
   "ok": true,
   "artifactType": "codex-context-checkpoint",
-  "generatedAt": "2026-06-05T15:00:01.701Z",
-  "label": "challenge-readability-grammar-pause",
+  "generatedAt": "2026-06-07T12:21:43.318Z",
+  "label": "aurora-urgent-gameplay-planning-handoff",
   "root": "/Users/sgwoods/Development/Codex/Codex-test1",
   "branch": "codex/aurora-challenge-movement-grammar",
-  "commit": "8b7a83cb9",
-  "commitSubject": "Add challenge readability grammar controls",
-  "dirtyFileCountExcludingCheckpoint": 17,
-  "statusLinesExcludingCheckpoint": [
-    "M package.json",
-    " M reference-artifacts/analyses/challenge-motion-spec/latest.json",
-    " M reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json",
-    " M reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json",
-    " M reference-artifacts/ingestion/challenge-motion-spec/aurora-challenge-2-0.1.json",
-    " M src/js/06-enemy-behavior.js",
-    " M src/js/09-stage-flow.js",
-    " M src/js/14-entity-model.js",
-    " M src/js/90-harness.js",
-    " M tools/build/build-index.js",
-    " M tools/harness/analyze-challenge-motion-spec.js",
-    " M tools/harness/check-challenge-motion-spec.js",
-    " M tools/harness/sweep-stage11-challenge-candidates.js",
-    "?? reference-artifacts/analyses/challenge-motion-spec/2026-06-05T14-49-34-8b7a83cb9/",
-    "?? reference-artifacts/analyses/challenge-stage-candidate-sweep-index/2026-06-05T14-57-18-8b7a83cb9/",
-    "?? reference-artifacts/analyses/challenge-stage-readability-visuals/",
-    "?? tools/harness/analyze-challenge-readability-visuals.js"
-  ],
-  "diffStat": "package.json                                       |     1 +\n .../analyses/challenge-motion-spec/latest.json     |    74 +-\n .../latest.json                                    |    50 +-\n .../challenge-stage-candidate-sweep/latest.json    | 78925 +++++++++++--------\n .../aurora-challenge-2-0.1.json                    |    74 +-\n src/js/06-enemy-behavior.js                        |    38 +-\n src/js/09-stage-flow.js                            |     9 +\n src/js/14-entity-model.js                          |    17 +-\n src/js/90-harness.js                               |     5 +\n tools/build/build-index.js                         |    40 +\n tools/harness/analyze-challenge-motion-spec.js     |     5 +\n tools/harness/check-challenge-motion-spec.js       |     7 +\n .../harness/sweep-stage11-challenge-candidates.js  |   123 +-\n 13 files changed, 47692 insertions(+), 31676 deletions(-)",
-  "recentLog": "8b7a83cb9 (HEAD -> codex/aurora-challenge-movement-grammar, origin/codex/aurora-challenge-movement-grammar) Add challenge readability grammar controls\nb55328e21 Advance challenge movement grammar runtime spec\n738781c90 Save challenge stage baseline gap plan\n9cdd2d5ec Add challenge spacing guardrails\n8b937b17e Keep challenge wave clocks at entry\nf43175c87 Refresh challenge dashboard primitive provenance\n83c07f021 Refresh challenge motion primitive artifact\n03e442455 Refresh challenge conformance dashboard primitives",
+  "commit": "807ca433f",
+  "commitSubject": "Add urgent Aurora gameplay planning handoff",
+  "dirtyFileCountExcludingCheckpoint": 0,
+  "statusLinesExcludingCheckpoint": [],
+  "diffStat": "CODEX_CONTEXT_CHECKPOINT.md                        | 78 ++++++++--------------\n .../analyses/codex-context-checkpoint/latest.json  | 49 +++++---------\n 2 files changed, 43 insertions(+), 84 deletions(-)",
+  "recentLog": "807ca433f (HEAD -> codex/aurora-challenge-movement-grammar) Add urgent Aurora gameplay planning handoff\n889fc7e5c (origin/codex/aurora-challenge-movement-grammar) Measure reference-spline spacing tradeoff\n79c68a863 Add measured challenge spacing-field primitive\nf16820840 Add challenge lead-in primitive evidence loop\nca2a74eaf Add challenge candidate visual presence guardrails\nfa1591b1e Calibrate challenge candidate trial rejection\ne43ff631a Add challenge movement grammar diagnostics\n67c8a70af Checkpoint challenge readability grammar diagnostics",
   "machineStatus": {
     "ok": true,
     "mode": "status",
@@ -60,7 +42,7 @@
       "branch": "codex/aurora-challenge-movement-grammar",
       "dirty": true,
       "upstream": "origin/codex/aurora-challenge-movement-grammar",
-      "ahead": 0,
+      "ahead": 1,
       "behind": 0,
       "remote_ok": true
     },
@@ -132,16 +114,19 @@
     ]
   },
   "plan": [
-    "Pause after first eight challenge movement grammar/readability steps; no runtime promotion yet"
+    "Archive this session after preserving the current Aurora challenge movement grammar state, the project assessment, and the urgent gameplay planning handoff.",
+    "Begin the next Codex session with a long planning cycle focused on urgently improving Aurora gameplay characteristics, especially challenge-stage movement grammar, scoreability, visual presence, and reference-conformant swarm motion."
   ],
   "next": [
-    "Resume on codex/aurora-challenge-movement-grammar; decide whether to commit WIP, then generalize successful readability controls or strengthen scoring/route grammar before promotion"
+    "Read CODEX_CONTEXT_CHECKPOINT.md and AURORA_URGENT_GAMEPLAY_PLANNING_HANDOFF_2026-06-07.md, then inspect the current challenge-stage artifacts before editing.",
+    "Do not start with another broad sweep; first define the next movement-grammar design that can preserve target fit, visual presence, expected-label identity, and human-perfect potential together.",
+    "After planning, implement the smallest scoreable phase-order/reference-path normalization pass on codex/aurora-challenge-movement-grammar or a clean successor branch."
   ],
   "notes": [
-    "Codex Desktop does not expose a repo command that forces internal chat compaction. The safe replacement is a manual checkpoint plus a deliberate fresh session from this file.",
-    "This checkpoint intentionally filters its own generated files out of the dirty-status read so it can be committed as the recovery point."
+    "Handoff doc committed at 807ca433f; previous measurement checkpoint is 889fc7e5c.",
+    "Latest challenge sweep found no runtime keeper; the next work should improve strategy, not loosen gates."
   ],
-  "restartPrompt": "You are continuing Aurora Galactica / Platinum work from a durable Codex checkpoint.\n\nRepo path:\n/Users/sgwoods/Development/Codex/Codex-test1\n\nStart by running:\ngit branch --show-current\ngit status --short\ngit log -5 --oneline --decorate\nnpm run machine:status\n\nRead first:\n- CODEX_CONTEXT_CHECKPOINT.md\n- RESTART_FROM_HERE.md\n- MULTI_MACHINE_WORKFLOW.md\n\nCurrent checkpoint:\n- label: challenge-readability-grammar-pause\n- generated: 2026-06-05T15:00:01.701Z\n- branch: codex/aurora-challenge-movement-grammar\n- commit: 8b7a83cb9 Add challenge readability grammar controls\n- dirty files excluding checkpoint self-output: 17\n\nContinue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.",
+  "restartPrompt": "You are continuing Aurora Galactica / Platinum work from a durable Codex checkpoint.\n\nRepo path:\n/Users/sgwoods/Development/Codex/Codex-test1\n\nStart by running:\ngit branch --show-current\ngit status --short\ngit log -5 --oneline --decorate\nnpm run machine:status\n\nRead first:\n- CODEX_CONTEXT_CHECKPOINT.md\n- RESTART_FROM_HERE.md\n- MULTI_MACHINE_WORKFLOW.md\n\nCurrent checkpoint:\n- label: aurora-urgent-gameplay-planning-handoff\n- generated: 2026-06-07T12:21:43.318Z\n- branch: codex/aurora-challenge-movement-grammar\n- commit: 807ca433f Add urgent Aurora gameplay planning handoff\n- dirty files excluding checkpoint self-output: 0\n\nContinue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.",
   "files": {
     "markdown": "CODEX_CONTEXT_CHECKPOINT.md",
     "json": "reference-artifacts/analyses/codex-context-checkpoint/latest.json"

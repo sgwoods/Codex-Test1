@@ -1,7 +1,7 @@
 # Codex Context Checkpoint
 
-Generated: 2026-06-05T15:00:01.701Z
-Label: challenge-readability-grammar-pause
+Generated: 2026-06-07T12:21:43.318Z
+Label: aurora-urgent-gameplay-planning-handoff
 
 This is the durable recovery point for long Aurora / Platinum Codex sessions.
 Use it before switching machines, before starting a multi-hour run, and whenever
@@ -12,74 +12,50 @@ important working context.
 
 - Repo path: `/Users/sgwoods/Development/Codex/Codex-test1`
 - Branch: `codex/aurora-challenge-movement-grammar`
-- HEAD: `8b7a83cb9` Add challenge readability grammar controls
-- Dirty files excluding checkpoint self-output: `17`
+- HEAD: `807ca433f` Add urgent Aurora gameplay planning handoff
+- Dirty files excluding checkpoint self-output: `0`
 
 ## Active Plan
 
-- Pause after first eight challenge movement grammar/readability steps; no runtime promotion yet
+- Archive this session after preserving the current Aurora challenge movement grammar state, the project assessment, and the urgent gameplay planning handoff.
+- Begin the next Codex session with a long planning cycle focused on urgently improving Aurora gameplay characteristics, especially challenge-stage movement grammar, scoreability, visual presence, and reference-conformant swarm motion.
 
 ## Recommended Next Steps
 
-- Resume on codex/aurora-challenge-movement-grammar; decide whether to commit WIP, then generalize successful readability controls or strengthen scoring/route grammar before promotion
+- Read CODEX_CONTEXT_CHECKPOINT.md and AURORA_URGENT_GAMEPLAY_PLANNING_HANDOFF_2026-06-07.md, then inspect the current challenge-stage artifacts before editing.
+- Do not start with another broad sweep; first define the next movement-grammar design that can preserve target fit, visual presence, expected-label identity, and human-perfect potential together.
+- After planning, implement the smallest scoreable phase-order/reference-path normalization pass on codex/aurora-challenge-movement-grammar or a clean successor branch.
 
 ## Notes
 
-- Codex Desktop does not expose a repo command that forces internal chat compaction. The safe replacement is a manual checkpoint plus a deliberate fresh session from this file.
-- This checkpoint intentionally filters its own generated files out of the dirty-status read so it can be committed as the recovery point.
+- Handoff doc committed at 807ca433f; previous measurement checkpoint is 889fc7e5c.
+- Latest challenge sweep found no runtime keeper; the next work should improve strategy, not loosen gates.
 
 ## Git Status
 
 ```
-M package.json
- M reference-artifacts/analyses/challenge-motion-spec/latest.json
- M reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json
- M reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json
- M reference-artifacts/ingestion/challenge-motion-spec/aurora-challenge-2-0.1.json
- M src/js/06-enemy-behavior.js
- M src/js/09-stage-flow.js
- M src/js/14-entity-model.js
- M src/js/90-harness.js
- M tools/build/build-index.js
- M tools/harness/analyze-challenge-motion-spec.js
- M tools/harness/check-challenge-motion-spec.js
- M tools/harness/sweep-stage11-challenge-candidates.js
-?? reference-artifacts/analyses/challenge-motion-spec/2026-06-05T14-49-34-8b7a83cb9/
-?? reference-artifacts/analyses/challenge-stage-candidate-sweep-index/2026-06-05T14-57-18-8b7a83cb9/
-?? reference-artifacts/analyses/challenge-stage-readability-visuals/
-?? tools/harness/analyze-challenge-readability-visuals.js
+(none)
 ```
 
 ## Diff Stat
 
 ```
-package.json                                       |     1 +
- .../analyses/challenge-motion-spec/latest.json     |    74 +-
- .../latest.json                                    |    50 +-
- .../challenge-stage-candidate-sweep/latest.json    | 78925 +++++++++++--------
- .../aurora-challenge-2-0.1.json                    |    74 +-
- src/js/06-enemy-behavior.js                        |    38 +-
- src/js/09-stage-flow.js                            |     9 +
- src/js/14-entity-model.js                          |    17 +-
- src/js/90-harness.js                               |     5 +
- tools/build/build-index.js                         |    40 +
- tools/harness/analyze-challenge-motion-spec.js     |     5 +
- tools/harness/check-challenge-motion-spec.js       |     7 +
- .../harness/sweep-stage11-challenge-candidates.js  |   123 +-
- 13 files changed, 47692 insertions(+), 31676 deletions(-)
+CODEX_CONTEXT_CHECKPOINT.md                        | 78 ++++++++--------------
+ .../analyses/codex-context-checkpoint/latest.json  | 49 +++++---------
+ 2 files changed, 43 insertions(+), 84 deletions(-)
 ```
 
 ## Recent Log
 
 ```
-8b7a83cb9 (HEAD -> codex/aurora-challenge-movement-grammar, origin/codex/aurora-challenge-movement-grammar) Add challenge readability grammar controls
-b55328e21 Advance challenge movement grammar runtime spec
-738781c90 Save challenge stage baseline gap plan
-9cdd2d5ec Add challenge spacing guardrails
-8b937b17e Keep challenge wave clocks at entry
-f43175c87 Refresh challenge dashboard primitive provenance
-83c07f021 Refresh challenge motion primitive artifact
-03e442455 Refresh challenge conformance dashboard primitives
+807ca433f (HEAD -> codex/aurora-challenge-movement-grammar) Add urgent Aurora gameplay planning handoff
+889fc7e5c (origin/codex/aurora-challenge-movement-grammar) Measure reference-spline spacing tradeoff
+79c68a863 Add measured challenge spacing-field primitive
+f16820840 Add challenge lead-in primitive evidence loop
+ca2a74eaf Add challenge candidate visual presence guardrails
+fa1591b1e Calibrate challenge candidate trial rejection
+e43ff631a Add challenge movement grammar diagnostics
+67c8a70af Checkpoint challenge readability grammar diagnostics
 ```
 
 ## Machine Status Snapshot
@@ -116,7 +92,7 @@ f43175c87 Refresh challenge dashboard primitive provenance
     "branch": "codex/aurora-challenge-movement-grammar",
     "dirty": true,
     "upstream": "origin/codex/aurora-challenge-movement-grammar",
-    "ahead": 0,
+    "ahead": 1,
     "behind": 0,
     "remote_ok": true
   },
@@ -209,11 +185,11 @@ Read first:
 - MULTI_MACHINE_WORKFLOW.md
 
 Current checkpoint:
-- label: challenge-readability-grammar-pause
-- generated: 2026-06-05T15:00:01.701Z
+- label: aurora-urgent-gameplay-planning-handoff
+- generated: 2026-06-07T12:21:43.318Z
 - branch: codex/aurora-challenge-movement-grammar
-- commit: 8b7a83cb9 Add challenge readability grammar controls
-- dirty files excluding checkpoint self-output: 17
+- commit: 807ca433f Add urgent Aurora gameplay planning handoff
+- dirty files excluding checkpoint self-output: 0
 
 Continue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.
 ```
