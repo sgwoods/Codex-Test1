@@ -18,6 +18,10 @@ The current canonical generated payload is mirrored in the companion private
 artifact store so future Guardians tuning does not depend on recreating the same
 whole-run review capture.
 
+Older timestamped whole-run review residues now live in the shared iCloud
+artifact library under the `01-transient-in-use` bucket. See
+`transient-storage.json` for the current pointer.
+
 The default full-run reviewer uses the `advanced` harness key, which is the repo's **Intermediate** persona label.
 
 ## Current Intermediate Baseline

@@ -125,8 +125,8 @@ Impact update:
   Guardians choice, unless a run explicitly pins a different audio theme
 - the Guardians persona capture presets now force `--audio-theme auto` so the
   review loop stays on the game-owned cue family
-- verified with a fresh professional capture:
-  `reference-artifacts/analyses/gameplay-segment-captures/guardians-opening-professional-review-2026-05-31T18-08-00-634Z.json`
+- verified with the canonical opening review lane, now surfaced through
+  `reference-artifacts/analyses/gameplay-segment-captures/latest-guardians-opening-professional-review.json`
 - the live capture now reports:
   - runtime atmosphere audio theme: `guardians-signal`
   - visual atmosphere audio theme: `guardians-signal`

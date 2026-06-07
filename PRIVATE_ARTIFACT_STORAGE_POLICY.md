@@ -98,6 +98,26 @@ an approved destination. The intended use is:
 - avoiding unnecessary GitHub weight for transient but still important review
   media
 
+The default shared root for this library should be:
+
+- `~/Library/Mobile Documents/com~apple~CloudDocs/Projects/Codex-Test1 Artifact Library/`
+
+Recommended top-level buckets in that iCloud library:
+
+- `00-temporary-throwaway/`
+- `01-transient-in-use/`
+- `02-documentation/`
+- `03-production/`
+
+The important distinction is behavioral, not just naming:
+
+- `temporary-throwaway`: safe to delete after the immediate task
+- `transient-in-use`: still actively supporting tuning or review and should not
+  be discarded casually
+- `documentation`: evidence retained mainly to explain decisions or preserve
+  history
+- `production`: outputs tied to release, shipping, or public-facing deliverables
+
 Example:
 
 - public metadata:
@@ -221,3 +241,13 @@ When generating new local review artifacts during tuning:
 4. add or update a nearby `private-storage.json` pointer in the public repo
 5. keep the public lane limited to summaries, latest aliases, and decision
    surfaces rather than the private review bytes themselves
+
+When cleaning up local artifact residue:
+
+1. do not treat `temporary` and `throw-away` as synonyms
+2. move large active review residue out of the workspace into the correct
+   iCloud bucket before deleting anything
+3. preserve documentation and production artifacts under their own buckets even
+   when they are no longer active tuning inputs
+4. only delete artifacts once they are clearly redundant, superseded, or truly
+   disposable

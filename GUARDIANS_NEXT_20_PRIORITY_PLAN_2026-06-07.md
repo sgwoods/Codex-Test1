@@ -68,6 +68,9 @@ review plan for `Galaxy Guardians`.
     artifact library once their canonical/latest role is clear.
     Hope: keep expensive captures available across MacBooks without bloating
     GitHub.
+    Note: use the library buckets deliberately:
+    `00-temporary-throwaway`, `01-transient-in-use`, `02-documentation`,
+    `03-production`.
 
 19. Define retention rules for timestamped runs vs `latest-*` aliases and for
     private Git repo vs iCloud library placement.
