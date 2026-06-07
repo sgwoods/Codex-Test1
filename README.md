@@ -155,7 +155,8 @@ Best repo-role clarification:
 Current live release family:
 
 - hosted `/dev`:
-  - active `1.4.0.1+build.1063.sha.bb997d057` forward-review line
+  - active `1.4.0.1` forward-review line; exact current build label is
+    authoritative in hosted `build-info.json`
 - hosted `/beta`:
   - active `1.4.0-beta.1` approved production-source lane
 - hosted `/production`:

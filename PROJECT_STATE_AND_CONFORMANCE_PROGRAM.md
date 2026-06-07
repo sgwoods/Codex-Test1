@@ -53,7 +53,8 @@ Aurora / Platinum is in a post-`1.4.0` production development posture.
 - hosted `/beta` remains the authority-gated review lane for the next deliberate
   candidate cycle
 - hosted `/dev` is the forward-review lane for the next coherent improvement
-  bundle and currently tracks `1.4.0.1+build.1063.sha.bb997d057`
+  bundle and currently tracks the `1.4.0.1` forward-review line; exact current
+  build label is authoritative in hosted `build-info.json`
 - local `localhost` is the active engineering lane
 - `main` is the authoritative integration line and currently includes the
   consolidated Aurora challenge movement grammar, Galaxy Guardians ingestion

@@ -14,7 +14,7 @@ Verified June 7, 2026:
 
 | Lane | Current Build | Role |
 | --- | --- | --- |
-| `/dev` | `1.4.0.1+build.1063.sha.bb997d057` | Forward-review lane for consolidated docs, dashboards, Aurora challenge grammar, Guardians cleanup, and the next coherent improvement bundle. |
+| `/dev` | Current `1.4.0.1` forward-review build; exact label is authoritative in hosted `build-info.json` | Forward-review lane for consolidated docs, dashboards, Aurora challenge grammar, Guardians cleanup, and the next coherent improvement bundle. |
 | `/beta` | `1.4.0-beta.1+build.1013.sha.3cb0d08b.beta` | Authority-gated candidate lane; should not move for documentation-only churn. |
 | `/production` | `1.4.0+build.894.sha.1dc23d8a` | Stable public line. |
 
@@ -22,7 +22,7 @@ Current branch state:
 
 - `main` is the authoritative engineering integration branch.
 - release authority is currently held by `macbook-pro`.
-- hosted `/dev` is current with `main` at `bb997d057`.
+- hosted `/dev` is expected to track the latest reviewed `main` dev publish.
 - no beta or production publish is implied by this schedule.
 
 ## Release Family Schedule

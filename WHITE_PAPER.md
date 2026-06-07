@@ -165,7 +165,8 @@ The evidence program also became more concrete in the latest pass:
   release path
 - release conformance artifacts, the game conformance catalog, and white-paper
   PDF metadata are refreshed enough for `publish:check:dev`
-- hosted `/dev` now carries `1.4.0.1+build.1063.sha.bb997d057`, including the
+- hosted `/dev` now carries the current `1.4.0.1` forward-review line,
+  including the
   consolidated Aurora challenge grammar, Guardians ingestion/conformance
   cleanup, refreshed dashboards, public project guide, white-paper PDF, slides,
   release-schedule spine, and review packet

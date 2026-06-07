@@ -17,7 +17,8 @@ As of June 7, 2026:
 - hosted `/beta` remains the authority-gated review lane for the next deliberate
   candidate cycle
 - hosted `/dev` is the forward-review lane for the next coherent improvement
-  bundle and currently tracks `1.4.0.1+build.1063.sha.bb997d057`
+  bundle and currently tracks the `1.4.0.1` forward-review line; exact current
+  build label is authoritative in hosted `build-info.json`
 - local MacBook development is currently on clean `main`, matching
   `origin/main`
 - `main` includes the integrated Aurora challenge movement grammar work, the
@@ -141,8 +142,9 @@ It is in a "continue deliberately without losing agility" mode.
 
 After the June 7 hosted `/dev` publish, the current work block is:
 
-- base commit: `bb997d057`
-- hosted `/dev` label: `1.4.0.1+build.1063.sha.bb997d057`
+- base line: current `main`
+- hosted `/dev` label: current `1.4.0.1` forward-review build; exact label is
+  authoritative in hosted `build-info.json`
 - source branch: clean `main`
 - alignment note:
   [PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md)

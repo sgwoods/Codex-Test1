@@ -11,8 +11,9 @@ release gates moving as one program instead of as unrelated branches.
 ## Current Lane State
 
 - authoritative engineering source: `main`
-- current source head: `bb997d057`
-- hosted `/dev`: `1.4.0.1+build.1063.sha.bb997d057`
+- current source head: current `main`
+- hosted `/dev`: current `1.4.0.1` forward-review build; exact label is
+  authoritative in hosted `build-info.json`
 - hosted `/beta`: `1.4.0-beta.1+build.1013.sha.3cb0d08b.beta`
 - hosted `/production`: `1.4.0+build.894.sha.1dc23d8a`
 - release authority: MacBook-Pro, release-authority contract current

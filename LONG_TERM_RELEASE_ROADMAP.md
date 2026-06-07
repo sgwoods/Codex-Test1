@@ -37,7 +37,8 @@ As of June 7, 2026:
 
 - shipped production family:
   - `1.4.0`
-- hosted `/dev` carries `1.4.0.1+build.1063.sha.bb997d057`
+- hosted `/dev` carries the current `1.4.0.1` forward-review line; exact
+  current build label is authoritative in hosted `build-info.json`
 - hosted `/beta` carries `1.4.0-beta.1+build.1013.sha.3cb0d08b.beta`
 - hosted `/production` carries `1.4.0+build.894.sha.1dc23d8a`
 - `main` is the authoritative forward integration line

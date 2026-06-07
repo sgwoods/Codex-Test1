@@ -5,7 +5,8 @@
 Verified June 7, 2026:
 
 - hosted `/dev`
-  - active `1.4.0.1+build.1063.sha.bb997d057` forward-review line
+  - active `1.4.0.1` forward-review line; exact current build label is
+    authoritative in hosted `build-info.json`
 - hosted `/beta`
   - active `1.4.0-beta.1` reviewed candidate lane
 - hosted `/production`
@@ -251,8 +252,8 @@ Current conformance read:
 
 - hosted `/dev` now includes the consolidated Aurora challenge grammar,
   Guardians ingestion cleanup, refreshed conformance economics, public project
-  guide, white paper, slides, dashboards, and review packet from
-  `1.4.0.1+build.1063.sha.bb997d057`
+  guide, white paper, slides, dashboards, release-schedule spine, and review
+  packet on the `1.4.0.1` forward-review line
 - the latest conformance economics roll-up reads `8.7/10` overall with
   `904` measured runs, about `58,277s` wall time, and about `58,392s` CPU time
 - application artifact conformance is `7.46/10`; the weakest row is
