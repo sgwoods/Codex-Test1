@@ -117,61 +117,52 @@ Current posture:
   - Audio scene review, live mix, long-surface review, and playtest-weighted
     conformance stay as the acceptance layer so tuning does not drift into
     wishful thinking.
+- Use the first promoted Guardians evidence packet as the default review lane.
+  - The new promoted packet now gives Guardians named early-session,
+    stage-five-plus, motion, popup, manual-page, and still-image anchors in
+    one metadata surface, with public runtime correspondence captures already
+    linked to it.
+  - It now also includes original score-values anchoring from the Midway flyer,
+    expanded control-surface and cabinet crops, named ambience windows, a
+    residual indexed-sound cue ledger, and an additional stage-seven advanced
+    runtime correspondence lane.
 
 ### Highest-impact missing artifacts
 
-- Missing: extracted score-table, rules, and setup manual pages
-  - Why we need them: the operator manual is now in repo, but we still need
-    page-level artifacts that can directly anchor score, rules, and setup
-    claims.
-  - How this pays off: it removes ambiguity from scoring, control model, and
-    operator-facing behavior, which stabilizes HUD, popup, and presentation
-    decisions.
-- Missing: a small preserved cabinet-facing still-image package for cabinet,
-  control-panel, bezel, marquee, and related presentation surfaces
-  - Why we need it: the new StrategyWiki bundle now covers the flyer, flagship,
-    main alien families, and Galaxip, but cabinet-facing surfaces are still
-    mostly leads rather than preserved repo-owned anchors.
-  - How this pays off: it gives us fast visual truth for controls, bezel and
-    control-panel wording, cabinet framing, and later release-surface
-    presentation while leaving sprite-family identity less ambiguous.
-- Missing: promoted early-session audio scene windows from the no-voiceover
-  source
-  - Why we need them: the whole clip is useful, but real tuning needs short,
-    named windows for start, shot, hit, loss, and game over.
-  - How this pays off: it lets us fit Guardians audio families precisely and
-    repeatedly without reopening the full video every time.
-- Missing: promoted stage-five-and-beyond audio and pacing windows from the
-  long-session sources
-  - Why we need them: deeper-play quality is still the weakest felt part of
-    Guardians, and early-stage audio windows are not enough to fix it.
-  - How this pays off: it gives us source-backed pressure, failure, and pacing
-    windows for the actual stage bands that still feel weak.
-- Missing: comparable stage-five-and-beyond runtime captures
-  - Why we need them: without matched Platinum-side captures, fairness changes
-    remain anecdotal.
+- Missing: one stronger direct bezel or control-surface still beyond the
+  current flyer/manual composite anchors
+  - Why we need it: the expanded packet now covers original score values,
+    control terminology, marquee framing, control-panel layout, and multiple
+    cabinet-facing surfaces, so the remaining visual ambiguity is narrow rather
+    than structural.
+  - How this pays off: it sharpens cabinet-facing presentation and later
+    release-surface framing without reopening a broad still hunt.
+- Missing: additional stage-five-and-beyond runtime captures beyond the current
+  opening, stage-five professional, and stage-seven advanced correspondence set
+  - Why we need them: the current pass now has three public runtime lanes, but
+    fairness changes are still under-sampled across personas and manual review
+    conditions.
   - How this pays off: it lets us tell whether a gameplay change reduced cheap
     failure or only changed difficulty in the abstract.
-- Missing: direct pulse/flap motion windows
-  - Why we need them: pulse and cadence are still visible felt gaps and need
-    frame-readable source truth.
-  - How this pays off: it gives us a concrete basis for improving movement
-    rhythm without guessing.
-- Missing: score-popup policy windows
-  - Why we need them: popup behavior should be tied to visible source cases,
-    not inferred from memory.
-  - How this pays off: it lets us write a source-backed popup rule and clean up
-    visual feedback during hits.
+- Missing: the next tight audio-authenticity and deeper-play fairness tuning
+  pass driven by the expanded packet rather than by fresh intake
+  - Why we need it: the baseline documentary, ambience, cue-map, and
+    correspondence asks are now in place well enough that additional generic
+    intake is no longer the bottleneck.
+  - How this pays off: it converts the stronger evidence packet into visible
+    gameplay quality instead of just a better archive.
 
 ### Immediate execution order
 
-1. Promote named early-session audio windows.
-2. Promote named stage-five-and-beyond audio/pacing windows.
-3. Capture comparable stage-five-and-beyond Guardians runs.
-4. Use those windows and captures to tune audio authenticity and deeper-play
-   fairness together.
-5. Use motion/popup/manual-page artifacts to lock the remaining visible
-   presentation behavior.
+1. Use the expanded packet and the current runtime captures to continue audio
+   authenticity and deeper-play fairness tuning together.
+2. Add at least one more stage-five-and-beyond runtime correspondence lane.
+3. Preserve one stronger direct bezel or control-surface still if a better
+   original source appears.
+4. Keep the residual indexed-sound cue ledger narrow and stable unless a
+   clearly stronger source appears.
+5. Treat further broad intake as lower priority than visible Guardians quality
+   gains.
 
 ## Aurora Galactica
 

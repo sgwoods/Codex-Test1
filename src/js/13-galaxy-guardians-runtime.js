@@ -156,23 +156,34 @@ function guardiansRuntimeRules(stateOrStage=1){
  const intervalScale=Math.max(.58,1-rank*.07);
   const flagshipScale=Math.max(.64,1-rank*.058);
   const firstPressureScale=Math.max(.76,1-rank*.038);
+  // Midrun stage-five stress was measuring as collision-dominated, so ease the
+  // rank-three/four lane just enough to preserve readable scoring routes.
+  const midrunRouteabilityRelief=rank>=3&&rank<=4;
+  const scoutIntervalRelief=midrunRouteabilityRelief?1.1:1;
+  const flagshipIntervalRelief=midrunRouteabilityRelief?1.08:1;
+  const shotIntervalRelief=midrunRouteabilityRelief?1.12:1;
+  const shotVelocityRelief=midrunRouteabilityRelief?.96:1;
+  const diveVelocityRelief=midrunRouteabilityRelief?.96:1;
+  const diveAccelRelief=midrunRouteabilityRelief?.94:1;
+  const diveSideDriftRelief=midrunRouteabilityRelief?.9:1;
+  const shotMaxLive=Math.min(6,base.enemyShotMaxLive+Math.ceil(rank/2));
   return Object.assign({},base,{
   firstScoutDiveDelay:+(base.firstScoutDiveDelay*firstPressureScale).toFixed(3),
   flagshipEscortDelay:+(base.flagshipEscortDelay*Math.max(.78,1-rank*.032)).toFixed(3),
-  scoutDiveIntervalBase:+(base.scoutDiveIntervalBase*intervalScale).toFixed(3),
+  scoutDiveIntervalBase:+(base.scoutDiveIntervalBase*intervalScale*scoutIntervalRelief).toFixed(3),
   scoutDiveIntervalJitter:+(base.scoutDiveIntervalJitter*Math.max(.66,1-rank*.045)).toFixed(3),
-  flagshipDiveIntervalBase:+(base.flagshipDiveIntervalBase*flagshipScale).toFixed(3),
+  flagshipDiveIntervalBase:+(base.flagshipDiveIntervalBase*flagshipScale*flagshipIntervalRelief).toFixed(3),
   flagshipDiveIntervalJitter:+(base.flagshipDiveIntervalJitter*Math.max(.68,1-rank*.045)).toFixed(3),
   formationDriftAmplitude:+(base.formationDriftAmplitude*(1+rank*.028)).toFixed(3),
-  diveBaseVy:+(base.diveBaseVy*diveScale).toFixed(3),
-  diveAccel:+(base.diveAccel*(1+rank*.078)).toFixed(3),
+  diveBaseVy:+(base.diveBaseVy*diveScale*diveVelocityRelief).toFixed(3),
+  diveAccel:+(base.diveAccel*(1+rank*.078)*diveAccelRelief).toFixed(3),
   diveSwayAmplitude:+(base.diveSwayAmplitude*(1+rank*.045)).toFixed(3),
-  diveSideDrift:+(base.diveSideDrift*(1+rank*.055)).toFixed(3),
+  diveSideDrift:+(base.diveSideDrift*(1+rank*.055)*diveSideDriftRelief).toFixed(3),
   firstEnemyShotDelay:+(base.firstEnemyShotDelay*Math.max(.46,1-rank*.115)).toFixed(3),
-  enemyShotIntervalBase:+(base.enemyShotIntervalBase*Math.max(.6,1-rank*.078)).toFixed(3),
+  enemyShotIntervalBase:+(base.enemyShotIntervalBase*Math.max(.6,1-rank*.078)*shotIntervalRelief).toFixed(3),
   enemyShotIntervalJitter:+(base.enemyShotIntervalJitter*Math.max(.66,1-rank*.055)).toFixed(3),
-  enemyShotVy:+(base.enemyShotVy*shotScale).toFixed(3),
-  enemyShotMaxLive:Math.min(6,base.enemyShotMaxLive+Math.ceil(rank/2)),
+  enemyShotVy:+(base.enemyShotVy*shotScale*shotVelocityRelief).toFixed(3),
+  enemyShotMaxLive:midrunRouteabilityRelief?Math.min(4,shotMaxLive):shotMaxLive,
   rackPulseIntervalBase:+(base.rackPulseIntervalBase*Math.max(.64,1-rank*.055)).toFixed(3),
   formationDriftHz:+(base.formationDriftHz*(1+rank*.038)).toFixed(3),
   topReentryVy:+(base.topReentryVy*(1+rank*.042)).toFixed(3),
@@ -377,27 +388,45 @@ function guardiansPressureSnapshot(state,rules){
  const playerY=+state.player?.y||0;
  const lowerFieldDives=guardiansLowerFieldDiveThreats(state,rules);
  const closeDives=lowerFieldDives.filter(alien=>Math.abs(alien.x-playerX)<=26);
+ const playerCorridorDives=lowerFieldDives.filter(alien=>Math.abs(alien.x-playerX)<=18);
  const nearbyShots=(state.enemyShots||[]).filter(shot=>
   shot
   && shot.active!==0
   && shot.y>=playerY-88
   && Math.abs(shot.x-playerX)<=28
  );
+ const crowdingPenalty=lowerFieldDives.length+nearbyShots.length;
  return {
   lowerFieldDives,
   closeDives,
+  playerCorridorDives,
   nearbyShots,
-  deferScoutDive:lowerFieldDives.length>=3||closeDives.length>=2,
-  deferFlagshipDive:lowerFieldDives.length>=2||closeDives.length>=1,
-  crowdingPenalty:lowerFieldDives.length+nearbyShots.length
+  crowdingPenalty,
+  deferScoutDive:
+   lowerFieldDives.length>=3
+   || closeDives.length>=2
+   || (closeDives.length>=1&&nearbyShots.length>=2)
+   || crowdingPenalty>=5,
+  deferFlagshipDive:
+   lowerFieldDives.length>=2
+   || closeDives.length>=1
+   || playerCorridorDives.length>=1
+   || nearbyShots.length>=2
+   || crowdingPenalty>=4
  };
 }
 
 function guardiansFairDivePredicate(state,rules,pressure){
  const lowerFieldDives=Array.isArray(pressure?.lowerFieldDives)?pressure.lowerFieldDives:[];
+ const playerX=+state.player?.x||0;
  if(!lowerFieldDives.length)return ()=>true;
- const minThreatSeparation=pressure?.crowdingPenalty>=3 ? 28 : 22;
- return alien=>lowerFieldDives.every(threat=>Math.abs((+alien.rackX||0)-(+threat.x||0))>=minThreatSeparation);
+ const minThreatSeparation=pressure?.crowdingPenalty>=3 ? 34 : 26;
+ const playerCorridorWidth=pressure?.crowdingPenalty>=3 ? 26 : 22;
+ return alien=>{
+  const rackX=+alien.rackX||0;
+  if(Math.abs(rackX-playerX)<=playerCorridorWidth)return false;
+  return lowerFieldDives.every(threat=>Math.abs(rackX-(+threat.x||0))>=minThreatSeparation);
+ };
 }
 
 function guardiansDiveLaneRank(state,pressure){
@@ -692,11 +721,12 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
  p.x=Math.max(12,Math.min(rules.playfieldWidth-12,p.x+move*rules.playerSpeed*dt));
  if(input.fire)fireGuardiansPlayerShot(state);
  const pressure=guardiansPressureSnapshot(state,rules);
- const fairnessGuardActive=state.t>=12;
+ const fairnessGuardActive=state.t>=(guardiansStageRank(state)>=3?9.2:12);
  if(entry.complete&&state.t>=state.nextDiveAt){
   const diveRanker=guardiansDiveLaneRank(state,pressure);
   if(fairnessGuardActive&&pressure.deferScoutDive){
-   state.nextDiveAt=state.t+Math.max(.12,rules.scoutDiveIntervalBase*.16);
+   const deferScale=pressure.crowdingPenalty>=4?.24:.18;
+   state.nextDiveAt=state.t+Math.max(.14,rules.scoutDiveIntervalBase*deferScale);
   }else{
    const alien=pickGuardiansAlien(state,'scout',guardiansFairDivePredicate(state,rules,pressure),diveRanker)
     || pickGuardiansAlien(state,'scout',null,diveRanker)
@@ -711,7 +741,8 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
  if(entry.complete&&state.t>=state.nextFlagshipAt){
   const diveRanker=guardiansDiveLaneRank(state,pressure);
   if(fairnessGuardActive&&pressure.deferFlagshipDive){
-   state.nextFlagshipAt=state.t+Math.max(.2,rules.flagshipDiveIntervalBase*.12);
+   const deferScale=pressure.crowdingPenalty>=4?.18:.12;
+   state.nextFlagshipAt=state.t+Math.max(.22,rules.flagshipDiveIntervalBase*deferScale);
   }else{
    const flagship=pickGuardiansAlien(state,'flagship',guardiansFairDivePredicate(state,rules,pressure),diveRanker)
     || pickGuardiansAlien(state,'flagship',null,diveRanker);

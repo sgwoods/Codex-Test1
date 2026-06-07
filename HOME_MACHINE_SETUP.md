@@ -121,6 +121,8 @@ Manual equivalent if you want to see the lower-level steps:
    ```bash
    npm run machine:bootstrap
    ```
+   That now also prepares the shared gameplay-export import inbox under the
+   iCloud artifact library.
 3. If bootstrap reports blockers, inspect them with:
    ```bash
    npm run machine:doctor
@@ -148,6 +150,7 @@ Do not commit that file.
    cd Codex-Test1
    npm run machine:bootstrap
    ```
+   That setup now includes `npm run artifacts:prepare:import-inbox`.
 2. If you only want a read-only readiness check:
    ```bash
    npm run machine:doctor
@@ -217,10 +220,19 @@ Player-triggered exported logs and videos are different:
 
 - they download through the browser first
 - on macOS that is usually the user’s `Downloads` folder
+- the shared browser-export inbox can also be prepared directly with:
+  ```bash
+  npm run artifacts:prepare:import-inbox
+  ```
+- if they need to survive a machine switch before import, move them into the
+  shared iCloud browser-export inbox:
+  `~/Library/Mobile Documents/com~apple~CloudDocs/Projects/Codex-Test1 Artifact Library/00-temporary-throwaway/browser-export-inbox/`
 - import them into `harness-artifacts/` when you want them in the developer review archive:
   ```bash
   npm run harness:import-latest
   ```
+- that import command now searches both the local Downloads inbox and the
+  shared iCloud browser-export inbox by default
 
 See:
 

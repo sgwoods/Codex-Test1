@@ -34,7 +34,14 @@ function assertSanitizerFixture(){
       }
     },
     importedSource: {
-      source: '/Users/otherperson/Downloads'
+      source: '/Users/otherperson/Library/Mobile Documents/com~apple~CloudDocs/Projects/Codex-Test1 Artifact Library/00-temporary-throwaway/browser-export-inbox'
+    },
+    importSource: {
+      selectedSourceDir: '/Users/otherperson/Downloads',
+      searchedSourceDirs: [
+        '/Users/otherperson/Downloads',
+        '/Users/otherperson/Library/Mobile Documents/com~apple~CloudDocs/Projects/Codex-Test1 Artifact Library/00-temporary-throwaway/browser-export-inbox'
+      ]
     }
   };
   const cleaned = sanitizeSummary(sample, runDir);

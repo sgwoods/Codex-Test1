@@ -1,0 +1,134 @@
+{
+  "name": "guardians-full-run-persona",
+  "personaKey": "advanced",
+  "personaLabel": "Intermediate",
+  "updatedAt": "2026-06-06T16:14:54.520Z",
+  "runId": "guardians-full-run-persona-advanced-seed2285977134-2026-06-06T16-10-51-628Z-54580-zgr686",
+  "source": "tools/harness/scenarios/guardians-full-run-persona.json",
+  "duration": 900,
+  "seed": 2285977134,
+  "artifactStorage": {
+    "generatedRunPayloads": "local-private",
+    "committedSummary": true,
+    "reviewVideoCommitted": false
+  },
+  "artifactQuality": {
+    "size": 59759876,
+    "expectedDuration": 237.217,
+    "formatDuration": 237.232,
+    "drift": 0.014999999999986358,
+    "videoStreams": [
+      {
+        "index": 1,
+        "codec_name": "vp9",
+        "codec_type": "video",
+        "start_time": "0.038000"
+      }
+    ],
+    "audioStreams": [
+      {
+        "index": 0,
+        "codec_name": "opus",
+        "codec_type": "audio",
+        "start_time": "0.000000"
+      }
+    ],
+    "stderr": "",
+    "issues": [],
+    "ok": true,
+    "repaired": true,
+    "initialIssues": [
+      "missing_duration"
+    ],
+    "initialSize": 59793653,
+    "initialFormatDuration": 0
+  },
+  "maxStageReached": 2,
+  "score": 2920,
+  "lives": 1,
+  "simTime": 237.217,
+  "shipLosses": 3,
+  "stageClears": 1,
+  "challengeClears": 0,
+  "stageAdvances": 1,
+  "topLossCause": {
+    "cause": "alien_scout_collision",
+    "count": 2
+  },
+  "gameOver": true,
+  "missionComplete": false,
+  "watchMode": true,
+  "watchPersona": "advanced",
+  "watchScope": "game",
+  "state": {
+    "stage": 2,
+    "score": 2920,
+    "lives": 1,
+    "simT": 237.217,
+    "started": false,
+    "watchMode": true,
+    "watchPersona": "advanced",
+    "watchScope": "game",
+    "gameOver": true,
+    "missionComplete": false
+  },
+  "metrics": {
+    "maxStageReached": 2,
+    "shipLosses": 3,
+    "stageClears": 1,
+    "challengeClears": 0,
+    "stageAdvances": 1,
+    "topLossCause": {
+      "cause": "alien_scout_collision",
+      "count": 2
+    },
+    "bulletPressureOverall": {
+      "attacks": 116,
+      "bullets": 139,
+      "bulletsPerAttack": 1.198,
+      "shipLosses": 3,
+      "bulletDeaths": 0,
+      "collisionDeaths": 0,
+      "lossesWithBulletsOnScreen": 0,
+      "lossesWithoutBulletsOnScreen": 3,
+      "lossesWithRecentEnemyBullets": 3,
+      "lossesWithoutRecentEnemyBullets": 0,
+      "avgRecentEnemyBulletsAtLoss": 1.333,
+      "avgAttackersOnScreenAtLoss": 0
+    },
+    "lossCauseCounts": {
+      "alien_scout_collision": 2,
+      "enemy_shot": 1
+    },
+    "eventCounts": {
+      "formation_entry_start": 2,
+      "stage_spawn": 2,
+      "game_start": 1,
+      "audio_cue": 647,
+      "player_shot_fired": 96,
+      "player_shot": 96,
+      "formation_entry_settle": 2,
+      "arcade_music_track_change": 2,
+      "formation_rack_complete": 2,
+      "rack_pulse": 118,
+      "player_shot_resolved": 95,
+      "enemy_killed": 48,
+      "score_awarded": 48,
+      "alien_dive_start": 101,
+      "enemy_attack_start": 116,
+      "enemy_shot": 139,
+      "enemy_bullet_fired": 139,
+      "flagship_dive_start": 15,
+      "escort_join": 15,
+      "enemy_wrap_or_return": 108,
+      "player_lost": 3,
+      "ship_lost": 3,
+      "wave_reset": 3,
+      "wave_clear": 1,
+      "stage_clear": 1,
+      "stage_advance": 1,
+      "game_over": 2,
+      "harness_stop": 1
+    }
+  }
+}

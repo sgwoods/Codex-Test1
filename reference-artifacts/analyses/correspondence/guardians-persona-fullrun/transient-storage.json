@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-06-07T18:05:00-04:00",
+  "status": "public-metadata-icloud-content",
+  "artifact_class": "transient-in-use",
+  "public_metadata_root": "reference-artifacts/analyses/correspondence/guardians-persona-fullrun",
+  "storage_root": "~/Library/Mobile Documents/com~apple~CloudDocs/Projects/Codex-Test1 Artifact Library/01-transient-in-use/guardians/persona-fullrun",
+  "moved_run_directory_count": 26,
+  "approx_total_size_human": "582M",
+  "retention_reason": "Preserve non-canonical but still useful whole-run Guardians review runs outside the repo so future tuning can revisit them without recreating the captures.",
+  "notes": [
+    "Canonical current whole-run payloads that are small enough and important enough for durable Git-backed retention should still use private-storage.json and the private companion repo.",
+    "This iCloud bucket is for larger in-use review residue that should remain available across MacBooks without staying in the workspace or bloating GitHub."
+  ]
+}

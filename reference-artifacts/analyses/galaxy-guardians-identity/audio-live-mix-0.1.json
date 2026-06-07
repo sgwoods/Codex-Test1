@@ -14,9 +14,9 @@
   },
   "summary": {
     "captureCount": 2,
-    "overallLiveMixScore10": 9.9,
+    "overallLiveMixScore10": 10,
     "minimumOverallScore10": 6,
-    "weakestCapture": "midrun-professional",
+    "weakestCapture": "opening-professional",
     "strongestCapture": "opening-professional",
     "reusablePlatformRead": "The live-mix layer is game-configured and future games can register their own capture sets, cue families, and thresholds without rewriting the analyzer."
   },
@@ -48,18 +48,18 @@
         "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-live-mix-previews/opening-professional-mix-spectrogram.png"
       },
       "metrics": {
-        "cueEventCount": 72,
-        "cueEventsPer10s": 29.97,
-        "pressureCueCount": 41,
-        "rewardCueCount": 10,
-        "criticalCueCount": 52,
-        "pressureCueShare": 0.569,
-        "longestQuietGapSeconds": 1.366,
-        "pulseCount": 12,
+        "cueEventCount": 64,
+        "cueEventsPer10s": 26.63,
+        "pressureCueCount": 34,
+        "rewardCueCount": 7,
+        "criticalCueCount": 44,
+        "pressureCueShare": 0.531,
+        "longestQuietGapSeconds": 1.367,
+        "pulseCount": 11,
         "pulseMedianSeconds": 1.967,
-        "activeSliceShare": 0.708,
-        "integratedRms": 0.00061,
-        "envelopeContrast": 8.53,
+        "activeSliceShare": 0.542,
+        "integratedRms": 0.00062,
+        "envelopeContrast": 13.874,
         "sliceSeconds": 5,
         "cueDensitySlices": [
           {
@@ -81,14 +81,15 @@
             "index": 1,
             "startSeconds": 5,
             "endSeconds": 10,
-            "cueEventCount": 13,
-            "cueEventsPer10s": 26,
+            "cueEventCount": 15,
+            "cueEventsPer10s": 30,
             "cues": [
               "enemyShot",
               "escortJoin",
               "flagshipDive",
               "playerShot",
               "scoutDive",
+              "scoutHit",
               "stagePulse",
               "wrapReturn"
             ]
@@ -97,12 +98,11 @@
             "index": 2,
             "startSeconds": 10,
             "endSeconds": 15,
-            "cueEventCount": 19,
-            "cueEventsPer10s": 38,
+            "cueEventCount": 13,
+            "cueEventsPer10s": 26,
             "cues": [
               "enemyShot",
-              "escortJoin",
-              "flagshipDive",
+              "playerLoss",
               "playerShot",
               "scoutDive",
               "scoutHit",
@@ -118,28 +118,27 @@
             "cueEventsPer10s": 28,
             "cues": [
               "enemyShot",
-              "escortHit",
-              "playerLoss",
-              "playerShot",
-              "scoutDive",
-              "scoutHit",
-              "stagePulse"
-            ]
-          },
-          {
-            "index": 4,
-            "startSeconds": 20,
-            "endSeconds": 24.028,
-            "cueEventCount": 13,
-            "cueEventsPer10s": 32.27,
-            "cues": [
-              "enemyShot",
               "escortJoin",
               "flagshipDive",
               "playerShot",
               "scoutDive",
               "scoutHit",
-              "stagePulse"
+              "stagePulse",
+              "wrapReturn"
+            ]
+          },
+          {
+            "index": 4,
+            "startSeconds": 20,
+            "endSeconds": 24.032,
+            "cueEventCount": 10,
+            "cueEventsPer10s": 24.8,
+            "cues": [
+              "enemyShot",
+              "playerShot",
+              "scoutDive",
+              "stagePulse",
+              "wrapReturn"
             ]
           }
         ],
@@ -148,145 +147,145 @@
             "startSeconds": 0,
             "endSeconds": 1,
             "rms": 0.00053,
-            "peak": 0.00751
+            "peak": 0.06067
           },
           {
             "startSeconds": 1,
             "endSeconds": 2,
-            "rms": 0.00048,
-            "peak": 0.00699
+            "rms": 0.0005,
+            "peak": 0.00659
           },
           {
             "startSeconds": 2,
             "endSeconds": 3,
-            "rms": 0.00057,
-            "peak": 0.02136
+            "rms": 0.00062,
+            "peak": 0.00711
           },
           {
             "startSeconds": 3,
             "endSeconds": 4,
-            "rms": 0.00041,
-            "peak": 0.00446
+            "rms": 0.0004,
+            "peak": 0.00452
           },
           {
             "startSeconds": 4,
             "endSeconds": 5,
-            "rms": 0.00052,
-            "peak": 0.00473
+            "rms": 0.00057,
+            "peak": 0.00455
           },
           {
             "startSeconds": 5,
             "endSeconds": 6,
             "rms": 0.00039,
-            "peak": 0.00385
+            "peak": 0.00452
           },
           {
             "startSeconds": 6,
             "endSeconds": 7,
-            "rms": 0.00094,
-            "peak": 0.00681
+            "rms": 0.00044,
+            "peak": 0.00443
           },
           {
             "startSeconds": 7,
             "endSeconds": 8,
-            "rms": 0.00025,
-            "peak": 0.00058
+            "rms": 0.00092,
+            "peak": 0.00696
           },
           {
             "startSeconds": 8,
             "endSeconds": 9,
-            "rms": 0.00068,
-            "peak": 0.00433
+            "rms": 0.00031,
+            "peak": 0.00464
           },
           {
             "startSeconds": 9,
             "endSeconds": 10,
-            "rms": 0.00025,
-            "peak": 0.00061
+            "rms": 0.00079,
+            "peak": 0.00601
           },
           {
             "startSeconds": 10,
             "endSeconds": 11,
-            "rms": 0.00079,
-            "peak": 0.00613
+            "rms": 0.00024,
+            "peak": 0.00034
           },
           {
             "startSeconds": 11,
             "endSeconds": 12,
-            "rms": 0.00079,
-            "peak": 0.00497
+            "rms": 0.00062,
+            "peak": 0.00455
           },
           {
             "startSeconds": 12,
             "endSeconds": 13,
-            "rms": 0.00051,
-            "peak": 0.00443
+            "rms": 0.00115,
+            "peak": 0.01303
           },
           {
             "startSeconds": 13,
             "endSeconds": 14,
-            "rms": 0.00066,
-            "peak": 0.0061
+            "rms": 0.00044,
+            "peak": 0.00623
           },
           {
             "startSeconds": 14,
             "endSeconds": 15,
-            "rms": 0.0009,
-            "peak": 0.01721
+            "rms": 0.00048,
+            "peak": 0.00601
           },
           {
             "startSeconds": 15,
             "endSeconds": 16,
-            "rms": 0.00053,
-            "peak": 0.02097
+            "rms": 0.00079,
+            "peak": 0.05539
           },
           {
             "startSeconds": 16,
             "endSeconds": 17,
-            "rms": 0.00086,
-            "peak": 0.01343
+            "rms": 0.00064,
+            "peak": 0.06369
           },
           {
             "startSeconds": 17,
             "endSeconds": 18,
-            "rms": 0.00042,
-            "peak": 0.0036
+            "rms": 0.00078,
+            "peak": 0.0065
           },
           {
             "startSeconds": 18,
             "endSeconds": 19,
-            "rms": 0.00043,
-            "peak": 0.0058
+            "rms": 0.00066,
+            "peak": 0.00467
           },
           {
             "startSeconds": 19,
             "endSeconds": 20,
-            "rms": 0.00067,
-            "peak": 0.02075
+            "rms": 0.00043,
+            "peak": 0.00378
           },
           {
             "startSeconds": 20,
             "endSeconds": 21,
-            "rms": 0.00058,
-            "peak": 0.00604
+            "rms": 0.0004,
+            "peak": 0.00424
           },
           {
             "startSeconds": 21,
             "endSeconds": 22,
-            "rms": 0.00064,
-            "peak": 0.00815
+            "rms": 0.00042,
+            "peak": 0.00345
           },
           {
             "startSeconds": 22,
             "endSeconds": 23,
-            "rms": 0.0007,
-            "peak": 0.00644
+            "rms": 0.00047,
+            "peak": 0.00473
           },
           {
             "startSeconds": 23,
             "endSeconds": 24,
-            "rms": 0.00057,
-            "peak": 0.01605
+            "rms": 0.0009,
+            "peak": 0.00626
           }
         ]
       }
@@ -305,31 +304,31 @@
         "minPulseCount": 3,
         "minActiveSliceShare": 0.62
       },
-      "score10": 9.7,
+      "score10": 10,
       "scoreParts": {
         "quietGap": 10,
         "cueDensity": 10,
         "pressureShare": 10,
         "pulseCount": 10,
-        "activeSlices": 8.372
+        "activeSlices": 10
       },
       "audioPreview": {
         "waveform": "reference-artifacts/analyses/galaxy-guardians-identity/audio-live-mix-previews/midrun-professional-mix-waveform.png",
         "spectrogram": "reference-artifacts/analyses/galaxy-guardians-identity/audio-live-mix-previews/midrun-professional-mix-spectrogram.png"
       },
       "metrics": {
-        "cueEventCount": 83,
-        "cueEventsPer10s": 29.67,
-        "pressureCueCount": 48,
-        "rewardCueCount": 11,
-        "criticalCueCount": 63,
-        "pressureCueShare": 0.578,
-        "longestQuietGapSeconds": 1.367,
+        "cueEventCount": 80,
+        "cueEventsPer10s": 28.59,
+        "pressureCueCount": 46,
+        "rewardCueCount": 12,
+        "criticalCueCount": 60,
+        "pressureCueShare": 0.575,
+        "longestQuietGapSeconds": 1.385,
         "pulseCount": 14,
         "pulseMedianSeconds": 1.65,
-        "activeSliceShare": 0.571,
-        "integratedRms": 0.00067,
-        "envelopeContrast": 15.373,
+        "activeSliceShare": 0.679,
+        "integratedRms": 0.00062,
+        "envelopeContrast": 9.771,
         "sliceSeconds": 5,
         "cueDensitySlices": [
           {
@@ -351,14 +350,13 @@
             "index": 1,
             "startSeconds": 5,
             "endSeconds": 10,
-            "cueEventCount": 18,
-            "cueEventsPer10s": 36,
+            "cueEventCount": 12,
+            "cueEventsPer10s": 24,
             "cues": [
               "enemyShot",
-              "escortHit",
               "escortJoin",
               "flagshipDive",
-              "playerShot",
+              "playerLoss",
               "scoutDive",
               "stagePulse",
               "wrapReturn"
@@ -368,42 +366,42 @@
             "index": 2,
             "startSeconds": 10,
             "endSeconds": 15,
-            "cueEventCount": 16,
-            "cueEventsPer10s": 32,
+            "cueEventCount": 15,
+            "cueEventsPer10s": 30,
             "cues": [
               "enemyShot",
-              "playerLoss",
               "playerShot",
               "scoutDive",
               "scoutHit",
-              "stagePulse",
-              "wrapReturn"
+              "stagePulse"
             ]
           },
           {
             "index": 3,
             "startSeconds": 15,
             "endSeconds": 20,
-            "cueEventCount": 16,
-            "cueEventsPer10s": 32,
+            "cueEventCount": 11,
+            "cueEventsPer10s": 22,
             "cues": [
               "enemyShot",
+              "playerLoss",
               "playerShot",
               "scoutDive",
               "scoutHit",
-              "stagePulse",
-              "wrapReturn"
+              "stagePulse"
             ]
           },
           {
             "index": 4,
             "startSeconds": 20,
             "endSeconds": 25,
-            "cueEventCount": 11,
-            "cueEventsPer10s": 22,
+            "cueEventCount": 18,
+            "cueEventsPer10s": 36,
             "cues": [
               "enemyShot",
-              "playerLoss",
+              "escortHit",
+              "escortJoin",
+              "flagshipDive",
               "playerShot",
               "scoutDive",
               "scoutHit",
@@ -414,13 +412,18 @@
           {
             "index": 5,
             "startSeconds": 25,
-            "endSeconds": 27.978,
-            "cueEventCount": 7,
-            "cueEventsPer10s": 23.51,
+            "endSeconds": 27.985,
+            "cueEventCount": 10,
+            "cueEventsPer10s": 33.5,
             "cues": [
               "enemyShot",
+              "escortJoin",
+              "flagshipDive",
+              "playerShot",
               "scoutDive",
-              "stagePulse"
+              "scoutHit",
+              "stagePulse",
+              "wrapReturn"
             ]
           }
         ],
@@ -428,178 +431,178 @@
           {
             "startSeconds": 0,
             "endSeconds": 1,
-            "rms": 0.00053,
-            "peak": 0.00732
+            "rms": 0.00024,
+            "peak": 0.00037
           },
           {
             "startSeconds": 1,
             "endSeconds": 2,
-            "rms": 0.00048,
-            "peak": 0.00626
+            "rms": 0.00054,
+            "peak": 0.00757
           },
           {
             "startSeconds": 2,
             "endSeconds": 3,
-            "rms": 0.0008,
-            "peak": 0.07147
+            "rms": 0.00062,
+            "peak": 0.00699
           },
           {
             "startSeconds": 3,
             "endSeconds": 4,
-            "rms": 0.00056,
-            "peak": 0.00458
+            "rms": 0.00052,
+            "peak": 0.005
           },
           {
             "startSeconds": 4,
             "endSeconds": 5,
-            "rms": 0.00046,
-            "peak": 0.00443
+            "rms": 0.00056,
+            "peak": 0.00449
           },
           {
             "startSeconds": 5,
             "endSeconds": 6,
-            "rms": 0.0008,
-            "peak": 0.00574
+            "rms": 0.00036,
+            "peak": 0.00323
           },
           {
             "startSeconds": 6,
             "endSeconds": 7,
-            "rms": 0.00057,
-            "peak": 0.00464
+            "rms": 0.00076,
+            "peak": 0.00699
           },
           {
             "startSeconds": 7,
             "endSeconds": 8,
-            "rms": 0.00056,
-            "peak": 0.00644
+            "rms": 0.0006,
+            "peak": 0.00449
           },
           {
             "startSeconds": 8,
             "endSeconds": 9,
-            "rms": 0.00068,
-            "peak": 0.00623
+            "rms": 0.00054,
+            "peak": 0.00467
           },
           {
             "startSeconds": 9,
             "endSeconds": 10,
-            "rms": 0.00073,
-            "peak": 0.00674
+            "rms": 0.00051,
+            "peak": 0.00433
           },
           {
             "startSeconds": 10,
             "endSeconds": 11,
-            "rms": 0.00091,
-            "peak": 0.00748
+            "rms": 0.00081,
+            "peak": 0.00897
           },
           {
             "startSeconds": 11,
             "endSeconds": 12,
-            "rms": 0.00042,
-            "peak": 0.00607
+            "rms": 0.00044,
+            "peak": 0.00644
           },
           {
             "startSeconds": 12,
             "endSeconds": 13,
-            "rms": 0.00054,
-            "peak": 0.00623
+            "rms": 0.00075,
+            "peak": 0.00598
           },
           {
             "startSeconds": 13,
             "endSeconds": 14,
-            "rms": 0.00057,
-            "peak": 0.00452
+            "rms": 0.00048,
+            "peak": 0.00665
           },
           {
             "startSeconds": 14,
             "endSeconds": 15,
-            "rms": 0.00073,
-            "peak": 0.0061
+            "rms": 0.00063,
+            "peak": 0.00577
           },
           {
             "startSeconds": 15,
             "endSeconds": 16,
-            "rms": 0.00075,
-            "peak": 0.07126
+            "rms": 0.00072,
+            "peak": 0.00632
           },
           {
             "startSeconds": 16,
             "endSeconds": 17,
-            "rms": 0.00083,
-            "peak": 0.06442
+            "rms": 0.00081,
+            "peak": 0.00964
           },
           {
             "startSeconds": 17,
             "endSeconds": 18,
-            "rms": 0.00081,
-            "peak": 0.07858
+            "rms": 0.00043,
+            "peak": 0.00589
           },
           {
             "startSeconds": 18,
             "endSeconds": 19,
-            "rms": 0.00054,
-            "peak": 0.00461
+            "rms": 0.00068,
+            "peak": 0.0062
           },
           {
             "startSeconds": 19,
             "endSeconds": 20,
-            "rms": 0.00088,
-            "peak": 0.05511
+            "rms": 0.0004,
+            "peak": 0.00436
           },
           {
             "startSeconds": 20,
             "endSeconds": 21,
-            "rms": 0.00076,
-            "peak": 0.07809
+            "rms": 0.00066,
+            "peak": 0.0047
           },
           {
             "startSeconds": 21,
             "endSeconds": 22,
-            "rms": 0.00066,
-            "peak": 0.00699
+            "rms": 0.00068,
+            "peak": 0.00665
           },
           {
             "startSeconds": 22,
             "endSeconds": 23,
-            "rms": 0.00043,
-            "peak": 0.00565
+            "rms": 0.00075,
+            "peak": 0.00595
           },
           {
             "startSeconds": 23,
             "endSeconds": 24,
-            "rms": 0.00089,
-            "peak": 0.07263
+            "rms": 0.00052,
+            "peak": 0.00531
           },
           {
             "startSeconds": 24,
             "endSeconds": 25,
-            "rms": 0.00072,
-            "peak": 0.06589
+            "rms": 0.00055,
+            "peak": 0.00632
           },
           {
             "startSeconds": 25,
             "endSeconds": 26,
-            "rms": 0.00047,
-            "peak": 0.00449
+            "rms": 0.0006,
+            "peak": 0.00638
           },
           {
             "startSeconds": 26,
             "endSeconds": 27,
-            "rms": 0.0006,
-            "peak": 0.00427
+            "rms": 0.00078,
+            "peak": 0.0054
           },
           {
             "startSeconds": 27,
             "endSeconds": 27.96,
-            "rms": 0.00075,
-            "peak": 0.07849
+            "rms": 0.0009,
+            "peak": 0.00775
           }
         ]
       }
     }
   ],
   "escalation": {
-    "pressureCueRatio": 1.17,
-    "cueDensityRatio": 0.99,
+    "pressureCueRatio": 1.35,
+    "cueDensityRatio": 1.07,
     "read": "Midrun capture is denser than opening, which is the intended direction. Use this read alongside headed listening to judge whether the added pressure stays legible."
   },
   "nextUse": "Use this artifact with scene review and headed listening. Retune recurring pressure, shot, dive, hit, and loss families only after the lived gameplay mix says where the dead air or crowding really is."

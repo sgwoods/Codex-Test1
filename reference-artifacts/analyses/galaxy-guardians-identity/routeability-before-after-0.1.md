@@ -1,7 +1,7 @@
 # Galaxy Guardians Routeability Before/After
 
-Generated: 2026-06-01T16:38:24.465Z
-Status: analysis-only-no-runtime-change
+Generated: 2026-06-05T09:43:45.292Z
+Status: planning-study-with-bounded-preview-adoption
 
 ## Summary
 
@@ -18,5 +18,8 @@ Measured 3 stage-five relief candidates. Balanced stage-five routeability relief
 stage5-routeability-relief-balanced-v0 is the current best measured planning candidate.
 Balanced stage-five routeability relief changes stage-five routeability by 1.3/10, collision-loss share by -33 points, and retains 153% of measured pressure.
 
-This artifact is analysis-only. It does not change shipped Guardians runtime
-constants.
+This artifact started as a planning study before any runtime change landed. The
+current Guardians preview now adopts a bounded version of the balanced
+rank-three/four relief strategy that this study identified as the best
+candidate. Use this artifact as the planning ledger for why that bounded change
+was chosen, not as the post-change runtime baseline.

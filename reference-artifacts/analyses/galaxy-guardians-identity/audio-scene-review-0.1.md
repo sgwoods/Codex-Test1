@@ -10,8 +10,8 @@ Scene count: **6**
 | First Independent Dive Pressure | `guardians-opening-professional-review` | 2.43s-3.65s | 3 | The first real attack should sound like pressure arriving, not one isolated chirp over a quiet board. |
 | Flagship / Escort Warning | `guardians-opening-professional-review` | 6.51s-7.2s | 6 | The command dive should feel larger than a scout dive and should clearly telegraph escort pressure. |
 | Opening Hit / Score Payoff | `guardians-opening-professional-review` | 1.02s-1.48s | 3 | Successful shots should feel rewarding and final enough to read as real arcade feedback in live play. |
-| Player Loss Read | `guardians-opening-professional-review` | 17.077s-17.967s | 2 | A ship loss should be unmistakable and feel more emotionally final than normal hit feedback. |
-| Midrun Stage 5 Pressure | `guardians-stage5-professional-review` | 2.15s-6.483s | 14 | Stage-five pressure should sound denser and more insistent than the opening board without collapsing into clutter. |
+| Player Loss Read | `guardians-opening-professional-review` | 11.843s-12.733s | 3 | A ship loss should be unmistakable and feel more emotionally final than normal hit feedback. |
+| Midrun Stage 5 Pressure | `guardians-stage5-professional-review` | 2.15s-6.483s | 13 | Stage-five pressure should sound denser and more insistent than the opening board without collapsing into clutter. |
 
 ## Next Use
 
