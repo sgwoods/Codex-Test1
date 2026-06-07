@@ -5,7 +5,7 @@
 Verified June 7, 2026:
 
 - hosted `/dev`
-  - active `1.4.0.1+build.1060.sha.cd66ab6b2` forward-review line
+  - active `1.4.0.1+build.1063.sha.bb997d057` forward-review line
 - hosted `/beta`
   - active `1.4.0-beta.1` reviewed candidate lane
 - hosted `/production`
@@ -42,6 +42,12 @@ The current cross-thread work ordering is maintained in
 Use that note before choosing new work so Aurora challenge-stage improvement,
 Galaxy Guardians v1, shared personas/Watch/Rival, ingestion grammar, platform
 boundaries, and release documentation stay aligned.
+
+The current release-family and issue-tracking spine is maintained in
+[RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md).
+Use it to decide whether a branch belongs to `1.4.1`, `1.4.2`, `1.5.0`,
+`1.6.0`, `1.7.0`, or `2.0.0`, and to keep GitHub issues from drifting away
+from the roadmap.
 
 ## Active Workstreams
 
@@ -199,24 +205,27 @@ boundaries, and release documentation stay aligned.
 2. use
    [PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md)
    as the first work-selection read after the hosted `/dev` publish
-3. keep the multi-machine bootstrap and release-authority workflow healthy
-4. keep hosted `/dev` available for the next coherent review bundle instead of
+3. use
+   [RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md)
+   to assign each active branch and issue family to the right release lane
+4. keep the multi-machine bootstrap and release-authority workflow healthy
+5. keep hosted `/dev` available for the next coherent review bundle instead of
    using it as a casual mirror of `main`
-5. attack Aurora challenge-stage runtime quality first: the grammar and
+6. attack Aurora challenge-stage runtime quality first: the grammar and
    reference-backed contracts are ready enough, but the runtime challenge
    stages still score around `4.3/10` and need visible movement/readability
    lift
-6. advance Galaxy Guardians toward a real v1 playable slice by tightening the
+7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth
-7. make personas, Watch, and Rival behavior game-generic so Aurora improvements
+8. make personas, Watch, and Rival behavior game-generic so Aurora improvements
    can be reused by Guardians and later games
-8. prioritize audio/event feedback and stage-shape conformance over more broad
+9. prioritize audio/event feedback and stage-shape conformance over more broad
    planning; the planning scaffolding is strong enough, while runtime feel still
    needs a measurable lift
-9. incorporate the other machine's Galaxians-style second-game, harness, and
+10. incorporate the other machine's Galaxians-style second-game, harness, and
    analysis progress into the main roadmap
-10. use the new Guardians playable branch to force score, replay, result, and
+11. use the new Guardians playable branch to force score, replay, result, and
    platform validation across two games rather than one
 11. keep
    [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md)
@@ -243,7 +252,7 @@ Current conformance read:
 - hosted `/dev` now includes the consolidated Aurora challenge grammar,
   Guardians ingestion cleanup, refreshed conformance economics, public project
   guide, white paper, slides, dashboards, and review packet from
-  `1.4.0.1+build.1060.sha.cd66ab6b2`
+  `1.4.0.1+build.1063.sha.bb997d057`
 - the latest conformance economics roll-up reads `8.7/10` overall with
   `904` measured runs, about `58,277s` wall time, and about `58,392s` CPU time
 - application artifact conformance is `7.46/10`; the weakest row is

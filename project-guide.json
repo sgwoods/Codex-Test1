@@ -1,7 +1,7 @@
 {
   "title": "Aurora Galactica And Platinum Project Guide",
   "strapline": "A current, hosted map of the project: what Platinum is, what each game owns, how ingestion and conformance work, how release lanes move, and which maintained docs are the source of truth.",
-  "currentGoal": "Keep production trustworthy on the live 1.4.0 public family while shaping the next deliberate follow-through: improve Aurora's Galaga-like gameplay/audio/visual quality, keep Platinum clean as the reusable host, and keep turning ingestion plus local harnessing into a repeatable path for future games.",
+  "currentGoal": "Keep production trustworthy on the live 1.4.0 public family while shaping the next deliberate follow-through through one release-schedule spine: improve Aurora's Galaga-like gameplay/audio/visual quality, move Galaxy Guardians toward v1, keep Platinum clean as the reusable host, and keep turning ingestion plus local harnessing into a repeatable path for future games.",
   "sections": [
     {
       "id": "snapshot",
@@ -33,7 +33,7 @@
       "cards": [
         {
           "title": "Current Hosted Dev",
-          "body": "Hosted `/dev` now carries `1.4.0.1+build.1060.sha.cd66ab6b2`, including the consolidated Aurora challenge movement grammar, Guardians ingestion/conformance cleanup, refreshed conformance economics, white paper PDF, slides, dashboards, public project guide, and code-review packet."
+          "body": "Hosted `/dev` now carries `1.4.0.1+build.1063.sha.bb997d057`, including the consolidated Aurora challenge movement grammar, Guardians ingestion/conformance cleanup, refreshed conformance economics, white paper PDF, slides, dashboards, public project guide, release-schedule spine, and code-review packet."
         },
         {
           "title": "Main Bottleneck",
@@ -103,6 +103,88 @@
           "label": "Open Ingestion Dashboard",
           "href": "ingestion-dashboard.html",
           "detail": "Current artifact and ingestion-process view for Aurora, Guardians, and future games."
+        }
+      ]
+    },
+    {
+      "id": "release-schedule-spine",
+      "title": "Release Schedule Spine",
+      "summary": "The forward-looking release family map that keeps plans, issues, docs, and hosted lanes aligned.",
+      "cards": [
+        {
+          "title": "Why This Exists",
+          "body": "The project has many strong threads now: Aurora challenge quality, Guardians v1, shared personas, ingestion grammar, video evidence, safety, and cabinet polish. This schedule is the single release-family spine used to decide where each thread belongs."
+        },
+        {
+          "title": "Current Rule",
+          "body": "A branch should declare which family it advances. Hosted `/dev` may move for coherent evidence or runtime bundles; hosted `/beta` should wait for a real player-facing improvement, safety fix, or release-critical hardening; hosted `/production` requires the accepted release path."
+        },
+        {
+          "title": "Issue Discipline",
+          "body": "GitHub issues stay in `sgwoods/Codex-Test1`. Each active issue should map to a release family, project area, and proof type so old bugs, feature ideas, and ingestion tasks do not become invisible parallel plans."
+        }
+      ],
+      "table": {
+        "columns": [
+          "Family",
+          "Working Title",
+          "Primary Purpose",
+          "Examples"
+        ],
+        "rows": [
+          [
+            "1.4.1",
+            "Quality And Integration Follow-Through",
+            "Visible runtime quality after the current 1.4.0 baseline.",
+            "Aurora challenge stages, impact/explosion feedback, Guardians v1 slice, shared Watch/Rival/personas."
+          ],
+          [
+            "1.4.2",
+            "Safety, Auth, Storage, And Issue Hygiene",
+            "Make broader public exposure safer and clean up duplicate issue noise.",
+            "Score integrity, replay/storage rules, dashboard access, Supabase/API checks, duplicate issue consolidation."
+          ],
+          [
+            "1.5.0",
+            "Flight Recorder And Evidence Media",
+            "Turn gameplay export, videos, replay evidence, and source/run ingestion into release assets.",
+            "Gameplay-export ingestion issue #242, video snippets, run artifacts, issue/score/release linkage."
+          ],
+          [
+            "1.6.0",
+            "Cabinet, Pilot, And Presentation Polish",
+            "Improve the visible Platinum shell and player-facing cabinet experience.",
+            "Immersive full-window mode, commentator/message-to-pilot, music/SFX controls, pilot cards, popup/frame polish."
+          ],
+          [
+            "1.7.0",
+            "Ingestion-To-Runtime Grammar",
+            "Make movement, audio-event, sprite, persona, and stage-shape grammars reusable packages.",
+            "Reference media to runtime candidate loops, game-owned data packages, local CPU/browser assessment."
+          ],
+          [
+            "2.0.0",
+            "Multi-game Platinum",
+            "Make Platinum honestly multi-game with mature shared capabilities.",
+            "Improved Aurora, Guardians v1, shared personas/Watch/Rival/replay, disciplined third-game first slice."
+          ]
+        ]
+      },
+      "links": [
+        {
+          "label": "Read Full Release Schedule And Issue Spine",
+          "href": "project-guide.html#release-schedule-spine-doc",
+          "detail": "Full source schedule with lane state, workstream mapping, issue rules, and lane gates."
+        },
+        {
+          "label": "Open GitHub Issues",
+          "href": "https://github.com/sgwoods/Codex-Test1/issues",
+          "detail": "Active engineering issue tracker for Codex-Test1."
+        },
+        {
+          "label": "Open Product Roadmap",
+          "href": "project-guide.html#roadmap-doc",
+          "detail": "Strategic roadmap context; the schedule spine owns current release-family assignment."
         }
       ]
     },
@@ -554,6 +636,11 @@
           "detail": "Current cross-thread ordering for Aurora challenge quality, Guardians v1, personas, ingestion, platform boundaries, and release docs."
         },
         {
+          "label": "Hosted Release Schedule Spine",
+          "href": "project-guide.html#release-schedule-spine",
+          "detail": "Forward-looking release-family schedule that maps workstreams, GitHub issues, docs, and lane gates into one plan."
+        },
+        {
           "label": "Hosted White Paper",
           "href": "white-paper.html",
           "detail": "Dedicated hosted narrative surface for the living white paper, citation ledger, and versioned white-paper release history."
@@ -695,6 +782,12 @@
       "title": "Project-Wide Workstream Alignment",
       "summary": "Current cross-thread alignment after the June 7 hosted dev publish, including lane state, measured bottlenecks, active workstreams, execution order, and shared checks.",
       "file": "PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md"
+    },
+    {
+      "id": "release-schedule-spine-doc",
+      "title": "Release Schedule And Issue Spine",
+      "summary": "Current future-looking release-family schedule that aligns active workstreams, GitHub issue hygiene, hosted lane gates, and source documentation ownership.",
+      "file": "RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md"
     },
     {
       "id": "game-conformance-catalog-doc",

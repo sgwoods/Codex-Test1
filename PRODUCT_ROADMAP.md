@@ -5,7 +5,7 @@
 Verified June 7, 2026:
 
 - hosted `/dev`
-  - active `1.4.0.1+build.1060.sha.cd66ab6b2` forward-review line
+  - active `1.4.0.1+build.1063.sha.bb997d057` forward-review line
 - hosted `/beta`
   - active `1.4.0-beta.1` reviewed candidate lane
 - hosted `/production`
@@ -45,6 +45,10 @@ The maintained top-level explanation of this program is
 [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md).
 The current cross-workstream execution ordering is maintained in
 [PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md).
+The current release-family and issue-tracking schedule is maintained in
+[RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md).
+Use the roadmap for strategy and the schedule spine for current release
+ownership.
 
 ## Near-Term Release Direction
 
@@ -129,8 +133,13 @@ That pickup should focus on:
 
 ### Long-Term Release Families
 
-The first high-level phasing pass for the next major Aurora and Platinum
-milestones is tracked in:
+The maintained release-family spine for the next Aurora, Guardians, Platinum,
+ingestion, and issue-hygiene milestones is tracked in:
+
+- [RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md)
+
+The older high-level phasing pass for larger Aurora and Platinum milestones is
+tracked in:
 
 - [LONG_TERM_RELEASE_ROADMAP.md](LONG_TERM_RELEASE_ROADMAP.md)
 
@@ -174,7 +183,9 @@ Once `1.4.0` is out, the roadmap pickup should be:
   and `2.0` for a genuinely multi-game Platinum candidate.
 
 That sequencing should be treated as intentional carry-forward planning, not
-something to rediscover after the release is already shipped.
+something to rediscover after the release is already shipped. If the work
+bundle changes, update the release schedule spine first and then let the
+roadmap narrative follow.
 
 Specific deferred shell/UI cleanup to hold for that `1.6.0` family:
 

@@ -1,11 +1,16 @@
-# Long-Term Aurora Release Roadmap
+# Long-Term Aurora / Platinum Release Roadmap
 
 This is the working release-family roadmap for Aurora Galactica and Platinum
-after the `1.3.0` production release.
+after the `1.4.0` production release.
 
 It groups the large open themes and issue families into coherent future release
 bundles. The specific issue list will change, but the phasing is meant to keep
 work from becoming a loose bag of good ideas.
+
+The maintained current release-family and issue-tracking spine is now
+[RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md).
+Use that schedule for live release ownership; use this roadmap for the longer
+strategic rationale.
 
 ## How To Read This
 
@@ -28,20 +33,19 @@ work from becoming a loose bag of good ideas.
 
 ## Current Baseline
 
-As of May 12, 2026:
+As of June 7, 2026:
 
 - shipped production family:
-  - `1.3.0`
-- hosted `/dev` carries the `1.3.0.1` forward-review increment while hosted
-  `/beta` and hosted `/production` now carry the refreshed public `1.3.0`
-  family
+  - `1.4.0`
+- hosted `/dev` carries `1.4.0.1+build.1063.sha.bb997d057`
+- hosted `/beta` carries `1.4.0-beta.1+build.1013.sha.3cb0d08b.beta`
+- hosted `/production` carries `1.4.0+build.894.sha.1dc23d8a`
 - `main` is the authoritative forward integration line
-- the other machine is already advancing a Galaxians-style sibling track and
-  stronger harness/reference analysis
-- the accepted `1.3.0.1` bundle refreshed the public `1.3.0` family with
-  current conformance dashboards, public/project docs, resource economics,
-  application artifact conformance, runtime static sprite scoring, and a
-  measured audio/event-feedback lift
+- Aurora challenge movement grammar, Guardians ingestion/conformance cleanup,
+  conformance economics, release dashboards, public/project docs, white paper,
+  and code-review packets are now part of the current `/dev` review line
+- the next immediate planning question is not whether `1.4.0` shipped, but
+  which measured quality/safety bundle earns `1.4.1`
 
 The current shipped line is strong enough that the next cycle should not be a
 recovery release. It should be the first intentional polish-and-platform cycle
@@ -51,26 +55,28 @@ toward the next era.
 
 Short term:
 
-- keep the refreshed public `1.3.0` line trustworthy while assembling the next
+- keep the refreshed public `1.4.0` line trustworthy while assembling the next
   coherent hosted `/dev` review bundle
 - keep release notes, scorecards, dashboards, public project docs, and
   economics aligned with the same current score read
-- after the beta decision, prioritize the next highest-value conformance lift:
-  audio/event feedback, alien/challenge variation, level arc, or visual motion
-  fidelity depending on cost/value evidence
+- prioritize the `1.4.1` quality-and-integration family: Aurora challenge-stage
+  runtime lift, impact/explosion/event feedback, Guardians v1 slice, and shared
+  Watch/Rival/persona foundations
 
 Medium term:
 
-- make `1.4.0` the first serious arcade-depth beta family
-- emphasize alien entry variation, challenge-stage novelty, stage progression,
-  boss/formation grammar, visual reference grounding, and audio/event feedback
-- keep Platinum/application seams explicit as the game work deepens
+- use `1.4.2` for safety, auth, score integrity, replay/storage, dashboard
+  visibility, and issue hygiene
+- use `1.5.0` for flight recorder, gameplay-video evidence, replay catalog,
+  and source/run ingestion
+- keep Platinum/application seams explicit as the game and media work deepens
 
 Longer term:
 
-- use `1.5.0` for shared videos, replay evidence, and flight recorder
 - use `1.6.0` for message-to-pilot, cabinet polish, and optional full-window
   gameplay presentation
+- use `1.7.0` for reusable ingestion-to-runtime grammar across movement,
+  audio, sprites, personas, and stage shape
 - reserve `2.0` for a credible multi-game Platinum milestone backed by
   ingestion-driven game-owned conformance packages
 

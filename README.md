@@ -69,6 +69,8 @@ Currently verified hosted docs:
 
 - project guide:
   - `https://sgwoods.github.io/Aurora-Galactica/dev/project-guide.html`
+- release schedule spine:
+  - `https://sgwoods.github.io/Aurora-Galactica/dev/project-guide.html#release-schedule-spine`
 - white paper on hosted `/dev`:
   - `https://sgwoods.github.io/Aurora-Galactica/dev/white-paper.html`
 - 20-slide project overview on hosted `/dev`:
@@ -92,6 +94,7 @@ Best top-level state and conformance-program overview:
 
 - [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md)
 - [PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md)
+- [RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md)
 - [DEVELOPMENT_STATUS_UPDATE.md](DEVELOPMENT_STATUS_UPDATE.md)
 
 Best living white paper and project-area narrative:
@@ -152,7 +155,7 @@ Best repo-role clarification:
 Current live release family:
 
 - hosted `/dev`:
-  - active `1.4.0.1+build.1060.sha.cd66ab6b2` forward-review line
+  - active `1.4.0.1+build.1063.sha.bb997d057` forward-review line
 - hosted `/beta`:
   - active `1.4.0-beta.1` approved production-source lane
 - hosted `/production`:

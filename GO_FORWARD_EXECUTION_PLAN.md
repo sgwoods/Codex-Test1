@@ -17,7 +17,7 @@ As of June 7, 2026:
 - hosted `/beta` remains the authority-gated review lane for the next deliberate
   candidate cycle
 - hosted `/dev` is the forward-review lane for the next coherent improvement
-  bundle and currently tracks `1.4.0.1+build.1060.sha.cd66ab6b2`
+  bundle and currently tracks `1.4.0.1+build.1063.sha.bb997d057`
 - local MacBook development is currently on clean `main`, matching
   `origin/main`
 - `main` includes the integrated Aurora challenge movement grammar work, the
@@ -35,6 +35,9 @@ This means:
   justify the next `/dev` and then the next beta-candidate request
 - the standing cross-workstream read before choosing a new branch is
   [PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md)
+- the standing release-family and issue-tracking read before choosing a new
+  branch is
+  [RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md)
 
 The forward line and the current shipped family now include:
 
@@ -138,11 +141,13 @@ It is in a "continue deliberately without losing agility" mode.
 
 After the June 7 hosted `/dev` publish, the current work block is:
 
-- base commit: `cd66ab6b2`
-- hosted `/dev` label: `1.4.0.1+build.1060.sha.cd66ab6b2`
+- base commit: `bb997d057`
+- hosted `/dev` label: `1.4.0.1+build.1063.sha.bb997d057`
 - source branch: clean `main`
 - alignment note:
   [PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md)
+- release schedule:
+  [RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md)
 
 The work block should prioritize measured user-experience conformance and
 platform reuse in this order:
@@ -154,6 +159,18 @@ platform reuse in this order:
 4. Event-feedback clarity, especially impact/explosion/damage/loss sequences.
 5. Ingestion-to-runtime automation so future games inherit the evidence,
    grammar, candidate-loop, and conformance economics pipeline.
+
+Map those priorities to release families before implementation:
+
+- `1.4.1`: visible Aurora challenge/runtime lift, event feedback, Guardians v1,
+  shared Watch/Rival/persona foundations
+- `1.4.2`: auth, score, replay/storage, dashboard-access, and issue hygiene
+- `1.5.0`: gameplay export, video evidence, replay catalog, and source/run
+  ingestion
+- `1.6.0`: cabinet, pilot, music/SFX, commentator, full-window, and popup
+  polish
+- `1.7.0` and `2.0.0`: generalized ingestion-to-runtime grammar and mature
+  multi-game Platinum
 
 The branch may be pushed and merged through normal development flow. Hosted
 `/dev` may be republished from this release-authority machine after a coherent

@@ -53,13 +53,18 @@ Aurora / Platinum is in a post-`1.4.0` production development posture.
 - hosted `/beta` remains the authority-gated review lane for the next deliberate
   candidate cycle
 - hosted `/dev` is the forward-review lane for the next coherent improvement
-  bundle and currently tracks `1.4.0.1+build.1060.sha.cd66ab6b2`
+  bundle and currently tracks `1.4.0.1+build.1063.sha.bb997d057`
 - local `localhost` is the active engineering lane
 - `main` is the authoritative integration line and currently includes the
   consolidated Aurora challenge movement grammar, Galaxy Guardians ingestion
   cleanup, refreshed conformance economics, public project guide, white paper,
-  slides, dashboards, and review packet
+  slides, dashboards, release-schedule spine, and review packet
 - release authority is currently on this MacBook profile
+
+Current release-family ownership is maintained in
+[RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md).
+Use that schedule to keep docs, GitHub issues, workstreams, and lane gates
+aligned.
 
 The active direction is no longer "can Platinum host Aurora?" It can. The active
 direction is:

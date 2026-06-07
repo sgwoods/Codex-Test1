@@ -95,6 +95,7 @@ This page is meant to be the readable narrative layer, not the whole archive.
 Useful deeper surfaces:
 
 - [project-guide.html](project-guide.html)
+- [project-guide.html#release-schedule-spine](project-guide.html#release-schedule-spine)
 - [platinum-guide.html](platinum-guide.html)
 - [application-guide.html](application-guide.html)
 - [conformance-dashboard.html](conformance-dashboard.html)
@@ -164,10 +165,10 @@ The evidence program also became more concrete in the latest pass:
   release path
 - release conformance artifacts, the game conformance catalog, and white-paper
   PDF metadata are refreshed enough for `publish:check:dev`
-- hosted `/dev` now carries `1.4.0.1+build.1060.sha.cd66ab6b2`, including the
+- hosted `/dev` now carries `1.4.0.1+build.1063.sha.bb997d057`, including the
   consolidated Aurora challenge grammar, Guardians ingestion/conformance
   cleanup, refreshed dashboards, public project guide, white-paper PDF, slides,
-  and review packet
+  release-schedule spine, and review packet
 - the current cross-thread priority map is preserved in
   [PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md)
 - the June 1 preserved-source expansion added richer Galaga, Galaxian, and

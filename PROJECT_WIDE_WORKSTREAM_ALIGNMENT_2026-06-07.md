@@ -11,16 +11,22 @@ release gates moving as one program instead of as unrelated branches.
 ## Current Lane State
 
 - authoritative engineering source: `main`
-- current source head: `cd66ab6b2`
-- hosted `/dev`: `1.4.0.1+build.1060.sha.cd66ab6b2`
+- current source head: `bb997d057`
+- hosted `/dev`: `1.4.0.1+build.1063.sha.bb997d057`
 - hosted `/beta`: `1.4.0-beta.1+build.1013.sha.3cb0d08b.beta`
 - hosted `/production`: `1.4.0+build.894.sha.1dc23d8a`
 - release authority: MacBook-Pro, release-authority contract current
 - hosted dev now includes the integrated Aurora challenge grammar artifacts,
   Guardians cleanup artifacts, refreshed conformance economics, public project
-  guide, white paper, slides, dashboards, and code-review packet
+  guide, white paper, slides, dashboards, release-schedule spine, and
+  code-review packet
 
 No beta or production publish happened during this consolidation.
+
+The current release-family and GitHub-issue alignment is tracked in
+[RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md).
+Use that schedule to decide whether a work block belongs to `1.4.1`, `1.4.2`,
+`1.5.0`, `1.6.0`, `1.7.0`, or `2.0.0`.
 
 ## Current Measured Reality
 
