@@ -24,19 +24,25 @@ const CAPTURE_SPECS = [
 const TEMPORAL_PHASE_SPECS = [
   { spriteKey: 'bee-line', kind: 'bee-line', subject: 'enemy', playfieldWidth: 54, playfieldHeight: 48 },
   { spriteKey: 'but-line', kind: 'but-line', subject: 'enemy', playfieldWidth: 58, playfieldHeight: 50 },
-  { spriteKey: 'boss-line', kind: 'boss-line', subject: 'enemy', playfieldWidth: 66, playfieldHeight: 54 }
+  { spriteKey: 'boss-line', kind: 'boss-line', subject: 'enemy', playfieldWidth: 66, playfieldHeight: 54 },
+  { spriteKey: 'challenge-dragonfly', kind: 'challenge-dragonfly', subject: 'enemy', playfieldWidth: 54, playfieldHeight: 48 },
+  { spriteKey: 'challenge-mosquito', kind: 'challenge-mosquito', subject: 'enemy', playfieldWidth: 54, playfieldHeight: 48 }
 ];
 
 const CADENCE_WINDOW_SPECS = [
   { spriteKey: 'bee-line', kind: 'bee-line', subject: 'enemy', playfieldWidth: 54, playfieldHeight: 48, frameCount: 8, stepTm: .055 },
   { spriteKey: 'but-line', kind: 'but-line', subject: 'enemy', playfieldWidth: 58, playfieldHeight: 50, frameCount: 8, stepTm: .055 },
-  { spriteKey: 'boss-line', kind: 'boss-line', subject: 'enemy', playfieldWidth: 66, playfieldHeight: 54, frameCount: 8, stepTm: .055 }
+  { spriteKey: 'boss-line', kind: 'boss-line', subject: 'enemy', playfieldWidth: 66, playfieldHeight: 54, frameCount: 8, stepTm: .055 },
+  { spriteKey: 'challenge-dragonfly', kind: 'challenge-dragonfly', subject: 'enemy', playfieldWidth: 54, playfieldHeight: 48, frameCount: 8, stepTm: .055 },
+  { spriteKey: 'challenge-mosquito', kind: 'challenge-mosquito', subject: 'enemy', playfieldWidth: 54, playfieldHeight: 48, frameCount: 8, stepTm: .055 }
 ];
 
 const DIVE_POSE_SPECS = [
   { spriteKey: 'bee-line-dive-left', modelKey: 'bee-line', kind: 'bee-line', subject: 'enemy', playfieldWidth: 58, playfieldHeight: 58, enemyDive: 1, enemyVx: -88, enemyVy: 134 },
   { spriteKey: 'but-line-dive-right', modelKey: 'but-line', kind: 'but-line', subject: 'enemy', playfieldWidth: 62, playfieldHeight: 60, enemyDive: 1, enemyVx: 88, enemyVy: 134 },
-  { spriteKey: 'boss-line-dive-left', modelKey: 'boss-line', kind: 'boss-line', subject: 'enemy', playfieldWidth: 70, playfieldHeight: 66, enemyDive: 1, enemyVx: -70, enemyVy: 118 }
+  { spriteKey: 'boss-line-dive-left', modelKey: 'boss-line', kind: 'boss-line', subject: 'enemy', playfieldWidth: 70, playfieldHeight: 66, enemyDive: 1, enemyVx: -70, enemyVy: 118 },
+  { spriteKey: 'challenge-dragonfly-route-left', modelKey: 'challenge-dragonfly', kind: 'challenge-dragonfly', subject: 'enemy', playfieldWidth: 62, playfieldHeight: 60, enemyDive: 1, enemyVx: -76, enemyVy: 118 },
+  { spriteKey: 'challenge-mosquito-route-right', modelKey: 'challenge-mosquito', kind: 'challenge-mosquito', subject: 'enemy', playfieldWidth: 62, playfieldHeight: 60, enemyDive: 1, enemyVx: 76, enemyVy: 118 }
 ];
 
 const TRANSITION_POSE_SPECS = [
@@ -461,16 +467,16 @@ async function main(){
       measuredKeys: samples.map(item => item.spriteKey),
       staticPoseOnly: false,
       motionCoverageAxesCovered: [
-        temporalSamples.length ? 'two-phase flap/pulse static sprite delta for bee, butterfly, and boss families' : '',
-        cadenceSamples.length ? 'full flap-cycle cadence windows for bee, butterfly, and boss families' : '',
-        divePoseSamples.length ? 'forced dive/rotation pose silhouettes for bee, butterfly, and boss families' : '',
+        temporalSamples.length ? 'two-phase flap/pulse static sprite delta for bee, butterfly, boss, and challenge-specialty families' : '',
+        cadenceSamples.length ? 'full flap-cycle cadence windows for bee, butterfly, boss, and challenge-specialty families' : '',
+        divePoseSamples.length ? 'forced dive/rotation pose silhouettes for bee, butterfly, boss, and challenge-specialty families' : '',
         transitionPoseSamples.length ? 'capture-beam, carried-fighter, and dual-fighter transition seed poses' : ''
       ].filter(Boolean).length,
       motionCoverageAxesPlanned: 4,
       coveredMotionAxes: [
-        temporalSamples.length ? 'two-phase flap/pulse static sprite delta for bee, butterfly, and boss families' : '',
-        cadenceSamples.length ? 'full flap-cycle cadence windows for bee, butterfly, and boss families' : '',
-        divePoseSamples.length ? 'forced dive/rotation pose silhouettes for bee, butterfly, and boss families' : '',
+        temporalSamples.length ? 'two-phase flap/pulse static sprite delta for bee, butterfly, boss, and challenge-specialty families' : '',
+        cadenceSamples.length ? 'full flap-cycle cadence windows for bee, butterfly, boss, and challenge-specialty families' : '',
+        divePoseSamples.length ? 'forced dive/rotation pose silhouettes for bee, butterfly, boss, and challenge-specialty families' : '',
         transitionPoseSamples.length ? 'capture-beam, carried-fighter, and dual-fighter transition seed poses' : ''
       ].filter(Boolean),
       plannedMotionAxes: [

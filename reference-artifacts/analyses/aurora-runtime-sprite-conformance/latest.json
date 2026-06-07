@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "aurora-runtime-sprite-conformance",
-  "generatedAt": "2026-05-30T23:26:19.156Z",
-  "commit": "2d144d5c1",
-  "branch": "codex/macbook-fullscreen-timing-alignment-wip",
+  "generatedAt": "2026-06-07T18:47:01.682Z",
+  "commit": "5e2b75e83",
+  "branch": "codex/macbook-pro-1.4.1-challenge-specialty-runtime",
   "dirty": true,
   "gameKey": "aurora-galactica",
   "sourceEvidence": {
@@ -11,8 +11,8 @@
   },
   "summary": {
     "sampleCount": 8,
-    "temporalSampleCount": 3,
-    "cadenceSampleCount": 3,
+    "temporalSampleCount": 5,
+    "cadenceSampleCount": 5,
     "averageScore10": 6.21,
     "weakestSpriteKey": "boss-line",
     "weakestScore10": 4.95,
@@ -32,9 +32,9 @@
     "motionCoverageAxesCovered": 4,
     "motionCoverageAxesPlanned": 4,
     "coveredMotionAxes": [
-      "two-phase flap/pulse static sprite delta for bee, butterfly, and boss families",
-      "full flap-cycle cadence windows for bee, butterfly, and boss families",
-      "forced dive/rotation pose silhouettes for bee, butterfly, and boss families",
+      "two-phase flap/pulse static sprite delta for bee, butterfly, boss, and challenge-specialty families",
+      "full flap-cycle cadence windows for bee, butterfly, boss, and challenge-specialty families",
+      "forced dive/rotation pose silhouettes for bee, butterfly, boss, and challenge-specialty families",
       "capture-beam, carried-fighter, and dual-fighter transition seed poses"
     ],
     "plannedMotionAxes": [
@@ -68,8 +68,8 @@
       "targetFilledCells": 574,
       "litPixels": 1248,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/player-fighter.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-player-fighter-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-player-fighter.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-player-fighter-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-player-fighter.png",
       "canvasClip": {
         "x": 636,
         "y": 1459,
@@ -105,8 +105,8 @@
       "targetFilledCells": 830,
       "litPixels": 2496,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/dual-fighter.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-dual-fighter-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-dual-fighter.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-dual-fighter-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-dual-fighter.png",
       "canvasClip": {
         "x": 572,
         "y": 1459,
@@ -142,8 +142,8 @@
       "targetFilledCells": 427,
       "litPixels": 1168,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-zako-dive-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-zako-dive.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-zako-dive-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-zako-dive.png",
       "canvasClip": {
         "x": 620,
         "y": 634,
@@ -184,8 +184,8 @@
       "targetFilledCells": 589,
       "litPixels": 1728,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-butterfly-escort-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-butterfly-escort.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-butterfly-escort-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-butterfly-escort.png",
       "canvasClip": {
         "x": 612,
         "y": 630,
@@ -226,8 +226,8 @@
       "targetFilledCells": 325,
       "litPixels": 1184,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-command-boss-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-command-boss-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
       "canvasClip": {
         "x": 596,
         "y": 618,
@@ -268,8 +268,8 @@
       "targetFilledCells": 830,
       "litPixels": 1248,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/rogue-fighter.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-dual-fighter-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-dual-fighter.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-dual-fighter-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-dual-fighter.png",
       "canvasClip": {
         "x": 608,
         "y": 626,
@@ -310,8 +310,8 @@
       "targetFilledCells": 490,
       "litPixels": 464,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-specialty-dive-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-specialty-dive-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png",
       "canvasClip": {
         "x": 620,
         "y": 634,
@@ -352,8 +352,8 @@
       "targetFilledCells": 490,
       "litPixels": 608,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-mosquito.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-specialty-dive-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-specialty-dive-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png",
       "canvasClip": {
         "x": 620,
         "y": 634,
@@ -415,6 +415,30 @@
       "litPixelDelta": 208,
       "filledCellDelta": 37,
       "read": "Captured closed/open flap phases for boss-line; lit-pixel delta 208, filled-cell delta 37."
+    },
+    {
+      "spriteKey": "challenge-dragonfly",
+      "motionAxis": "two-phase-flap-pulse",
+      "phaseClosedCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly-flap-closed.png",
+      "phaseOpenCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly-flap-open.png",
+      "closedScore10": 4.98,
+      "openScore10": 5.09,
+      "scoreDelta": 0.11,
+      "litPixelDelta": 384,
+      "filledCellDelta": 36,
+      "read": "Captured closed/open flap phases for challenge-dragonfly; lit-pixel delta 384, filled-cell delta 36."
+    },
+    {
+      "spriteKey": "challenge-mosquito",
+      "motionAxis": "two-phase-flap-pulse",
+      "phaseClosedCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-mosquito-flap-closed.png",
+      "phaseOpenCrop": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-mosquito-flap-open.png",
+      "closedScore10": 5.44,
+      "openScore10": 5.83,
+      "scoreDelta": 0.39,
+      "litPixelDelta": 256,
+      "filledCellDelta": 7,
+      "read": "Captured closed/open flap phases for challenge-mosquito; lit-pixel delta 256, filled-cell delta 7."
     }
   ],
   "cadenceSamples": [
@@ -669,6 +693,174 @@
         }
       ],
       "read": "Captured 8 cadence frames for boss-line; average adjacent lit-pixel delta 59.4, filled-cell delta 10.6. This measures visible runtime motion, but not yet Galaga target-frame cadence."
+    },
+    {
+      "spriteKey": "challenge-dragonfly",
+      "motionAxis": "full-flap-cadence-window",
+      "frameCount": 8,
+      "windowSecondsApprox": 0.385,
+      "scoreRange10": 0.11,
+      "averageAdjacentLitPixelDelta": 109.71,
+      "averageAdjacentFilledCellDelta": 10.29,
+      "frames": [
+        {
+          "frameIndex": 0,
+          "enemyTm": 0,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly-cadence-00.png",
+          "score10": 4.98,
+          "litPixels": 464,
+          "filledCells": 276,
+          "fillRatio": 0.2388
+        },
+        {
+          "frameIndex": 1,
+          "enemyTm": 0.055,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly-cadence-01.png",
+          "score10": 5.09,
+          "litPixels": 848,
+          "filledCells": 312,
+          "fillRatio": 0.2699
+        },
+        {
+          "frameIndex": 2,
+          "enemyTm": 0.11,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly-cadence-02.png",
+          "score10": 5.09,
+          "litPixels": 848,
+          "filledCells": 312,
+          "fillRatio": 0.2699
+        },
+        {
+          "frameIndex": 3,
+          "enemyTm": 0.165,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly-cadence-03.png",
+          "score10": 5.09,
+          "litPixels": 848,
+          "filledCells": 312,
+          "fillRatio": 0.2699
+        },
+        {
+          "frameIndex": 4,
+          "enemyTm": 0.22,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly-cadence-04.png",
+          "score10": 5.09,
+          "litPixels": 848,
+          "filledCells": 312,
+          "fillRatio": 0.2699
+        },
+        {
+          "frameIndex": 5,
+          "enemyTm": 0.275,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly-cadence-05.png",
+          "score10": 4.98,
+          "litPixels": 464,
+          "filledCells": 276,
+          "fillRatio": 0.2388
+        },
+        {
+          "frameIndex": 6,
+          "enemyTm": 0.33,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly-cadence-06.png",
+          "score10": 4.98,
+          "litPixels": 464,
+          "filledCells": 276,
+          "fillRatio": 0.2388
+        },
+        {
+          "frameIndex": 7,
+          "enemyTm": 0.385,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly-cadence-07.png",
+          "score10": 4.98,
+          "litPixels": 464,
+          "filledCells": 276,
+          "fillRatio": 0.2388
+        }
+      ],
+      "read": "Captured 8 cadence frames for challenge-dragonfly; average adjacent lit-pixel delta 109.7, filled-cell delta 10.3. This measures visible runtime motion, but not yet Galaga target-frame cadence."
+    },
+    {
+      "spriteKey": "challenge-mosquito",
+      "motionAxis": "full-flap-cadence-window",
+      "frameCount": 8,
+      "windowSecondsApprox": 0.385,
+      "scoreRange10": 0.39,
+      "averageAdjacentLitPixelDelta": 73.14,
+      "averageAdjacentFilledCellDelta": 2,
+      "frames": [
+        {
+          "frameIndex": 0,
+          "enemyTm": 0,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-mosquito-cadence-00.png",
+          "score10": 5.44,
+          "litPixels": 608,
+          "filledCells": 342,
+          "fillRatio": 0.2958
+        },
+        {
+          "frameIndex": 1,
+          "enemyTm": 0.055,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-mosquito-cadence-01.png",
+          "score10": 5.83,
+          "litPixels": 864,
+          "filledCells": 335,
+          "fillRatio": 0.2898
+        },
+        {
+          "frameIndex": 2,
+          "enemyTm": 0.11,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-mosquito-cadence-02.png",
+          "score10": 5.83,
+          "litPixels": 864,
+          "filledCells": 335,
+          "fillRatio": 0.2898
+        },
+        {
+          "frameIndex": 3,
+          "enemyTm": 0.165,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-mosquito-cadence-03.png",
+          "score10": 5.83,
+          "litPixels": 864,
+          "filledCells": 335,
+          "fillRatio": 0.2898
+        },
+        {
+          "frameIndex": 4,
+          "enemyTm": 0.22,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-mosquito-cadence-04.png",
+          "score10": 5.83,
+          "litPixels": 864,
+          "filledCells": 335,
+          "fillRatio": 0.2898
+        },
+        {
+          "frameIndex": 5,
+          "enemyTm": 0.275,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-mosquito-cadence-05.png",
+          "score10": 5.44,
+          "litPixels": 608,
+          "filledCells": 342,
+          "fillRatio": 0.2958
+        },
+        {
+          "frameIndex": 6,
+          "enemyTm": 0.33,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-mosquito-cadence-06.png",
+          "score10": 5.44,
+          "litPixels": 608,
+          "filledCells": 342,
+          "fillRatio": 0.2958
+        },
+        {
+          "frameIndex": 7,
+          "enemyTm": 0.385,
+          "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-mosquito-cadence-07.png",
+          "score10": 5.44,
+          "litPixels": 608,
+          "filledCells": 342,
+          "fillRatio": 0.2958
+        }
+      ],
+      "read": "Captured 8 cadence frames for challenge-mosquito; average adjacent lit-pixel delta 73.1, filled-cell delta 2. This measures visible runtime motion, but not yet Galaga target-frame cadence."
     }
   ],
   "divePoseSamples": [
@@ -688,8 +880,8 @@
       "targetFilledCells": 427,
       "litPixels": 1238,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line-dive-left.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-zako-dive-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-zako-dive.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-zako-dive-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-zako-dive.png",
       "canvasClip": {
         "x": 604,
         "y": 606,
@@ -732,8 +924,8 @@
       "targetFilledCells": 589,
       "litPixels": 1790,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line-dive-right.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-butterfly-escort-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-butterfly-escort.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-butterfly-escort-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-butterfly-escort.png",
       "canvasClip": {
         "x": 596,
         "y": 602,
@@ -776,8 +968,8 @@
       "targetFilledCells": 325,
       "litPixels": 1273,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line-dive-left.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-command-boss-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-command-boss-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
       "canvasClip": {
         "x": 580,
         "y": 590,
@@ -803,6 +995,94 @@
       },
       "motionAxis": "dive-rotation-pose",
       "read": "Captured boss-line-dive-left with forced dive vector (-70, 118) so rotation silhouette can be tracked over time."
+    },
+    {
+      "spriteKey": "challenge-dragonfly-route-left",
+      "kind": "challenge-dragonfly",
+      "subject": "enemy",
+      "currentLabel": "Live runtime canvas challenge-dragonfly-route-left",
+      "targetId": "galaga-specialty-dive-model",
+      "targetLabel": "Inferred Galaga specialty dive model",
+      "score10": 6.05,
+      "silhouetteSimilarity": 0.634,
+      "colorSimilarity": 0.551,
+      "fillRatio": 0.25,
+      "targetFillRatio": 0.4239,
+      "filledCells": 289,
+      "targetFilledCells": 490,
+      "litPixels": 534,
+      "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly-route-left.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-specialty-dive-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png",
+      "canvasClip": {
+        "x": 596,
+        "y": 602,
+        "width": 248,
+        "height": 240,
+        "bbox": {
+          "x": 92,
+          "y": 110,
+          "width": 51,
+          "height": 46
+        }
+      },
+      "runtimeSubject": {
+        "id": 33589018,
+        "t": "bee",
+        "fam": "dragonfly",
+        "hp": 1,
+        "max": 1,
+        "x": 140,
+        "y": 132,
+        "dive": 1,
+        "carry": false
+      },
+      "motionAxis": "dive-rotation-pose",
+      "read": "Captured challenge-dragonfly-route-left with forced dive vector (-76, 118) so rotation silhouette can be tracked over time."
+    },
+    {
+      "spriteKey": "challenge-mosquito-route-right",
+      "kind": "challenge-mosquito",
+      "subject": "enemy",
+      "currentLabel": "Live runtime canvas challenge-mosquito-route-right",
+      "targetId": "galaga-specialty-dive-model",
+      "targetLabel": "Inferred Galaga specialty dive model",
+      "score10": 6.36,
+      "silhouetteSimilarity": 0.671,
+      "colorSimilarity": 0.57,
+      "fillRatio": 0.308,
+      "targetFillRatio": 0.4239,
+      "filledCells": 356,
+      "targetFilledCells": 490,
+      "litPixels": 653,
+      "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-mosquito-route-right.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-specialty-dive-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png",
+      "canvasClip": {
+        "x": 596,
+        "y": 602,
+        "width": 248,
+        "height": 240,
+        "bbox": {
+          "x": 96,
+          "y": 95,
+          "width": 56,
+          "height": 41
+        }
+      },
+      "runtimeSubject": {
+        "id": 33589018,
+        "t": "bee",
+        "fam": "mosquito",
+        "hp": 1,
+        "max": 1,
+        "x": 140,
+        "y": 132,
+        "dive": 1,
+        "carry": false
+      },
+      "motionAxis": "dive-rotation-pose",
+      "read": "Captured challenge-mosquito-route-right with forced dive vector (76, 118) so rotation silhouette can be tracked over time."
     }
   ],
   "transitionPoseSamples": [
@@ -822,8 +1102,8 @@
       "targetFilledCells": 325,
       "litPixels": 20482,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-capture-beam.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-command-boss-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-command-boss-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
       "canvasClip": {
         "x": 548,
         "y": 458,
@@ -866,8 +1146,8 @@
       "targetFilledCells": 325,
       "litPixels": 2432,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-carrying-fighter.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-command-boss-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-command-boss-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
       "canvasClip": {
         "x": 556,
         "y": 538,
@@ -910,8 +1190,8 @@
       "targetFilledCells": 830,
       "litPixels": 2496,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/dual-fighter-transition.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-dual-fighter-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-dual-fighter.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-dual-fighter-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-dual-fighter.png",
       "canvasClip": {
         "x": 564,
         "y": 1451,

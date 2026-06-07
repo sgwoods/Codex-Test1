@@ -6,6 +6,7 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const ARTIFACT = 'reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest.json';
 const PIXEL_TARGET_ARTIFACT = 'reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1.json';
 const MODEL_ARTIFACT = 'reference-artifacts/analyses/galaga-reference-sprites/model-0.1.json';
+const PRIVATE_STORAGE_ARTIFACT = 'reference-artifacts/analyses/galaga-reference-sprites/private-storage.json';
 const REQUIRED_KEYS = [
   'player-fighter',
   'dual-fighter',
@@ -33,6 +34,14 @@ const SINGLE_ENEMY_KEYS = [
   'challenge-dragonfly',
   'challenge-mosquito'
 ];
+const REQUIRED_TEMPORAL_KEYS = [
+  'bee-line',
+  'but-line',
+  'boss-line',
+  'challenge-dragonfly',
+  'challenge-mosquito'
+];
+const REQUIRED_CADENCE_KEYS = REQUIRED_TEMPORAL_KEYS;
 const MAX_SINGLE_ENEMY_BBOX = { width: 84, height: 72 };
 const MAX_PROPORTION_OVERSHOOT = { width: .35, height: .40 };
 const MIN_PROPORTION_UNDERSHOOT = { width: .28, height: .34 };
@@ -49,6 +58,27 @@ function readJson(relPath){
 
 function exists(relPath){
   return !!relPath && fs.existsSync(path.join(ROOT, relPath));
+}
+
+function normalizeRepoPath(relPath){
+  return String(relPath || '').replace(/\\/g, '/').replace(/^\.\//, '');
+}
+
+function privateStoragePaths(){
+  if(!exists(PRIVATE_STORAGE_ARTIFACT)) return new Set();
+  const storage = readJson(PRIVATE_STORAGE_ARTIFACT);
+  const movedFiles = Array.isArray(storage?.moved_files) ? storage.moved_files : [];
+  const paths = new Set();
+  for(const file of movedFiles){
+    if(file?.publicRepoPath) paths.add(normalizeRepoPath(file.publicRepoPath));
+    if(file?.privateStorePath) paths.add(normalizeRepoPath(file.privateStorePath));
+  }
+  return paths;
+}
+
+function existsOrPrivatePointer(relPath, privatePaths){
+  const normalized = normalizeRepoPath(relPath);
+  return !!normalized && (exists(normalized) || privatePaths.has(normalized));
 }
 
 function runtimeUnitBox(sample){
@@ -103,6 +133,7 @@ function main(){
   const artifact = readJson(ARTIFACT);
   const pixelTargets = exists(PIXEL_TARGET_ARTIFACT) ? readJson(PIXEL_TARGET_ARTIFACT) : null;
   const modelArtifact = exists(MODEL_ARTIFACT) ? readJson(MODEL_ARTIFACT) : null;
+  const privatePaths = privateStoragePaths();
   const samples = Array.isArray(artifact.samples) ? artifact.samples : [];
   const payload = {
     artifact: ARTIFACT,
@@ -124,8 +155,11 @@ function main(){
     if(!Number.isFinite(+sample.score10) || sample.score10 <= 0 || sample.score10 > 10){
       fail(`Aurora runtime sprite sample ${sample.spriteKey} has an invalid score`, { sample, payload });
     }
-    for(const field of ['cropImage', 'modelImage', 'sourcePixelTarget']){
-      if(!exists(sample[field])){
+    if(!exists(sample.cropImage)){
+      fail(`Aurora runtime sprite sample ${sample.spriteKey} is missing cropImage`, { sample, payload });
+    }
+    for(const field of ['modelImage', 'sourcePixelTarget']){
+      if(!existsOrPrivatePointer(sample[field], privatePaths)){
         fail(`Aurora runtime sprite sample ${sample.spriteKey} is missing ${field}`, { sample, payload });
       }
     }
@@ -205,9 +239,28 @@ function main(){
   if(!Number.isFinite(+artifact.summary?.averageScore10)){
     fail('Aurora runtime sprite conformance artifact is missing an average score', payload);
   }
+  const temporalSamples = Array.isArray(artifact.temporalSamples) ? artifact.temporalSamples : [];
+  for(const key of REQUIRED_TEMPORAL_KEYS){
+    const temporal = temporalSamples.find(sample => sample.spriteKey === key);
+    if(!temporal){
+      fail(`Aurora runtime sprite conformance artifact is missing closed/open temporal sample for ${key}`, payload);
+    }
+    if(['challenge-dragonfly', 'challenge-mosquito'].includes(key) && (temporal.litPixelDelta || 0) < 4 && (temporal.filledCellDelta || 0) < 1){
+      fail(`Aurora runtime sprite temporal sample ${key} did not show visible challenge-specialty flap motion`, {
+        temporal,
+        payload,
+        read: 'Challenge-specialty sprites must expose measurable active motion so challenge-stage visual novelty is based on rendered evidence, not only family labels.'
+      });
+    }
+  }
   const cadenceSamples = Array.isArray(artifact.cadenceSamples) ? artifact.cadenceSamples : [];
-  if(cadenceSamples.length < 3){
-    fail('Aurora runtime sprite conformance artifact is missing full cadence samples for bee, butterfly, and boss families', payload);
+  for(const key of REQUIRED_CADENCE_KEYS){
+    if(!cadenceSamples.some(sample => sample.spriteKey === key)){
+      fail(`Aurora runtime sprite conformance artifact is missing full cadence sample for ${key}`, payload);
+    }
+  }
+  if(cadenceSamples.length < REQUIRED_CADENCE_KEYS.length){
+    fail('Aurora runtime sprite conformance artifact is missing full cadence samples for required classic and challenge-specialty families', payload);
   }
   for(const cadence of cadenceSamples){
     if(!Array.isArray(cadence.frames) || cadence.frames.length < 6){

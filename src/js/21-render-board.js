@@ -349,12 +349,40 @@ function referencePixelSpritesEnabled(){
  return currentSpriteRenderMode()==='reference-pixel-lab';
 }
 
+function drawTargetChallengePulseAccent(family,flap,palette){
+ if(!flap)return;
+ const colorA=palette?.C||palette?.G||palette?.B||palette?.M||palette?.Y||'#f4fbff';
+ const colorB=palette?.Y||palette?.R||palette?.O||palette?.M||colorA;
+ ctx.fillStyle=colorA;
+ if(family==='dragonfly'){
+  ctx.fillRect(-8,-8,3,2);
+  ctx.fillRect(5,-8,3,2);
+  ctx.fillRect(-9,-2,2,3);
+  ctx.fillRect(7,-2,2,3);
+ }else if(family==='mosquito'){
+  ctx.fillRect(-7,-4,2,2);
+  ctx.fillRect(5,-4,2,2);
+  ctx.fillStyle=colorB;
+  ctx.fillRect(-5,5,2,2);
+  ctx.fillRect(3,5,2,2);
+ }else{
+  ctx.fillRect(-7,-7,3,2);
+  ctx.fillRect(4,-7,3,2);
+ }
+}
+
+function drawTargetChallengeSprite(e,rows,palette,flap){
+ const drew=drawTargetSpriteRows(rows,palette,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
+ if(drew)drawTargetChallengePulseAccent(e?.fam,flap,palette);
+ return drew;
+}
+
 function drawTargetEnemySprite(e,flap){
  if(!referencePixelSpritesEnabled())return false;
- if(e?.fam==='dragonfly')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeGreen,TARGET_SPRITE_PALETTES.challengeGreen,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
- if(e?.fam==='mosquito')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeYellow,TARGET_SPRITE_PALETTES.challengeYellow,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
- if(e?.fam==='scorpion')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeMagenta,TARGET_SPRITE_PALETTES.challengeMagenta,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
- if(e?.fam==='stingray'||e?.fam==='crown')return drawTargetSpriteRows(TARGET_SPRITE_ROWS.challengeBlueYellow,TARGET_SPRITE_PALETTES.challengeBlueYellow,TARGET_REFERENCE_CHALLENGE_SCALE,0,0,{xScale:TARGET_REFERENCE_CHALLENGE_X_SCALE});
+ if(e?.fam==='dragonfly')return drawTargetChallengeSprite(e,TARGET_SPRITE_ROWS.challengeGreen,TARGET_SPRITE_PALETTES.challengeGreen,flap);
+ if(e?.fam==='mosquito')return drawTargetChallengeSprite(e,TARGET_SPRITE_ROWS.challengeYellow,TARGET_SPRITE_PALETTES.challengeYellow,flap);
+ if(e?.fam==='scorpion')return drawTargetChallengeSprite(e,TARGET_SPRITE_ROWS.challengeMagenta,TARGET_SPRITE_PALETTES.challengeMagenta,flap);
+ if(e?.fam==='stingray'||e?.fam==='crown')return drawTargetChallengeSprite(e,TARGET_SPRITE_ROWS.challengeBlueYellow,TARGET_SPRITE_PALETTES.challengeBlueYellow,flap);
  if(e?.t==='bee')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.beeOpen:TARGET_SPRITE_ROWS.bee,TARGET_SPRITE_PALETTES.bee,TARGET_REFERENCE_BEE_SCALE,0,0,{xScale:TARGET_REFERENCE_BEE_X_SCALE});
  if(e?.t==='but')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.butOpen:TARGET_SPRITE_ROWS.but,TARGET_SPRITE_PALETTES.but,TARGET_REFERENCE_BUTTERFLY_SCALE,0,0,{xScale:TARGET_REFERENCE_BUTTERFLY_X_SCALE});
  if(e?.t==='boss')return drawTargetSpriteRows(flap?TARGET_SPRITE_ROWS.bossOpen:TARGET_SPRITE_ROWS.boss,TARGET_SPRITE_PALETTES.boss,TARGET_REFERENCE_BOSS_SCALE,0,0,{xScale:TARGET_REFERENCE_BOSS_X_SCALE});
@@ -467,7 +495,13 @@ function endOfRunOverlayActive(){
 function drawEnemyFlapAccent(e,ps,pal,flap){
  if(!flap||!pal?.a)return;
  ctx.fillStyle=pal.a;
- if(e.t==='bee'){
+ if(['dragonfly','mosquito','scorpion','stingray','galboss','crown'].includes(e.fam)){
+  ctx.fillRect(-ps*5.7,-ps*3.8,ps,ps);
+  ctx.fillRect(ps*4.7,-ps*3.8,ps,ps);
+  ctx.fillStyle=pal.c||pal.b||pal.a;
+  ctx.fillRect(-ps*5.2,ps*2.5,ps,ps);
+  ctx.fillRect(ps*4.2,ps*2.5,ps,ps);
+ }else if(e.t==='bee'){
   ctx.fillRect(-ps*5,-ps*2.4,ps,ps);
   ctx.fillRect(ps*4,-ps*2.4,ps,ps);
  }else if(e.t==='but'){
