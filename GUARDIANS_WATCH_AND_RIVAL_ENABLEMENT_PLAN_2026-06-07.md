@@ -126,6 +126,15 @@ Required proof:
 Desired outcome:
 - Guardians Watch becomes stable enough to use as the main review loop
 
+Storage note for this lane:
+
+- as Watch becomes first-class, its large canonical review videos should be
+  retained in the approved private storage tier
+- prefer the iCloud-protected artifact library for large in-use Watch videos
+  that will be reviewed across MacBooks
+- keep repo pointers, summaries, and checksums so the videos stay discoverable
+  without bloating GitHub
+
 ### 6. Keep Guardians Rival explicitly disabled until runtime parity exists
 
 Do not soft-enable Rival early.

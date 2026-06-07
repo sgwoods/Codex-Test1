@@ -64,11 +64,14 @@ review plan for `Galaxy Guardians`.
 17. Keep improving machine-readable summaries before adding more prose notes.
     Hope: make future sessions faster and more objective.
 
-18. Delay cleanup of stray capture residue until retention rules are explicit.
-    Hope: avoid deleting anything before the canonical artifact policy is set.
+18. Move large in-use Guardians review videos into the iCloud-protected
+    artifact library once their canonical/latest role is clear.
+    Hope: keep expensive captures available across MacBooks without bloating
+    GitHub.
 
-19. Define retention rules for timestamped runs vs `latest-*` aliases.
-    Hope: reduce evidence sprawl.
+19. Define retention rules for timestamped runs vs `latest-*` aliases and for
+    private Git repo vs iCloud library placement.
+    Hope: reduce evidence sprawl and make storage decisions predictable.
 
 20. Only after gameplay improvement resumes should audio become a top lane
     again.
