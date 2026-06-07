@@ -778,6 +778,22 @@ const AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS=Object.freeze([
  Object.freeze({id:'challenge-2-group-5',evaluator:'reference-spline-v1',pathFamilyHint:'hook-arc',controls:Object.freeze({arcAmp:1.25,dropAmp:1.59,speedScale:3.28,softSpeedScale:2.65,lowerFieldBias:31,yOffset:0,laneSpreadScale:1,rowSpreadScale:1,laneStaggerS:0,phaseOffsetS:0,slotDelayS:.14,slotXOffset:0,slotYOffset:0,spacingFieldSpreadX:6.5,spacingFieldSpreadY:4,spacingFieldGateS:.45,spacingFieldPhaseS:.12,laneOrder:Object.freeze([0,1,2,3,4,5,6,7])}),phaseDurations:Object.freeze({leadInS:.78,trackS:2.5,exitS:2.6}),referenceTrackId:'target-track-142'})
 ]);
 
+const AURORA_CHALLENGE_STAGE7_CONTRACT_GROUPS=Object.freeze([
+ Object.freeze({groupIndex:1,role:'classic cross-field opener',expectedTypes:Object.freeze(['bee','but','boss','rogue']),expectedFamilies:Object.freeze(['classic']),pathFamily:'cross-sweep',entrySide:'both-sides',exitSide:'opposite-lower-sides',scoreWindow:'wide crossing lanes',targetVisibleS:Object.freeze([.8,6])}),
+ Object.freeze({groupIndex:2,role:'scorpion introduction',expectedTypes:Object.freeze(['bee','but','boss','rogue']),expectedFamilies:Object.freeze(['scorpion']),pathFamily:'cross-sweep',entrySide:'both-sides',exitSide:'opposite-lower-sides',scoreWindow:'new-family crossing lanes',targetVisibleS:Object.freeze([2,7.4])}),
+ Object.freeze({groupIndex:3,role:'scorpion hook return',expectedTypes:Object.freeze(['bee','but','boss','rogue']),expectedFamilies:Object.freeze(['scorpion']),pathFamily:'hook-arc',entrySide:'side',exitSide:'lower-hook',scoreWindow:'turning hook lanes',targetVisibleS:Object.freeze([3.5,9.3])}),
+ Object.freeze({groupIndex:4,role:'stingray hook return',expectedTypes:Object.freeze(['bee','but','boss','rogue']),expectedFamilies:Object.freeze(['stingray']),pathFamily:'hook-arc',entrySide:'side',exitSide:'lower-hook',scoreWindow:'late specialty hook lanes',targetVisibleS:Object.freeze([5.1,11])}),
+ Object.freeze({groupIndex:5,role:'boss-led closing loop',expectedTypes:Object.freeze(['bee','but','boss','rogue']),expectedFamilies:Object.freeze(['stingray']),pathFamily:'boss-led-loop',entrySide:'upper-side',exitSide:'lower-sides',scoreWindow:'boss-led loop cleanup',targetVisibleS:Object.freeze([6.8,13])})
+]);
+
+const AURORA_CHALLENGE_STAGE11_CONTRACT_GROUPS=Object.freeze([
+ Object.freeze({groupIndex:1,role:'dragonfly crown split',expectedTypes:Object.freeze(['bee','but','boss','rogue']),expectedFamilies:Object.freeze(['dragonfly']),pathFamily:'crown-split-cascade',entrySide:'top-and-sides',exitSide:'lower-sides',scoreWindow:'split crown lanes',targetVisibleS:Object.freeze([.8,6.6])}),
+ Object.freeze({groupIndex:2,role:'dragonfly boss-led loop',expectedTypes:Object.freeze(['bee','but','boss','rogue']),expectedFamilies:Object.freeze(['dragonfly']),pathFamily:'boss-led-loop',entrySide:'upper-side',exitSide:'lower-sides',scoreWindow:'early boss-led loop',targetVisibleS:Object.freeze([2.2,8.2])}),
+ Object.freeze({groupIndex:3,role:'stingray hook arc',expectedTypes:Object.freeze(['bee','but','boss','rogue']),expectedFamilies:Object.freeze(['stingray']),pathFamily:'hook-arc',entrySide:'side',exitSide:'lower-hook',scoreWindow:'turning specialty lanes',targetVisibleS:Object.freeze([3.8,9.9])}),
+ Object.freeze({groupIndex:4,role:'galboss boss-led loop',expectedTypes:Object.freeze(['but','boss','rogue']),expectedFamilies:Object.freeze(['galboss']),pathFamily:'boss-led-loop',entrySide:'upper-side',exitSide:'lower-sides',scoreWindow:'dense boss-led bonus lane',targetVisibleS:Object.freeze([5.3,11.6])}),
+ Object.freeze({groupIndex:5,role:'dragonfly hook finale',expectedTypes:Object.freeze(['bee','but','boss','rogue']),expectedFamilies:Object.freeze(['dragonfly']),pathFamily:'hook-arc',entrySide:'side',exitSide:'lower-hook',scoreWindow:'late hook cleanup',targetVisibleS:Object.freeze([7,13.7])})
+]);
+
 const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
  Object.freeze({
   fromStage:3,
@@ -834,6 +850,7 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   ]),
   groupVisualFamilies:Object.freeze(['classic','scorpion','scorpion','stingray','stingray']),
   groupPathFamilies:Object.freeze(['hook-arc','cross-sweep','hook-arc','cross-sweep','boss-led-loop']),
+  contractGroups:AURORA_CHALLENGE_STAGE7_CONTRACT_GROUPS,
   motionSpecGroups:AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS,
   groupReferencePaths:AURORA_CHALLENGE_STAGE7_REFERENCE_PATHS
  }),
@@ -867,6 +884,7 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
   ]),
   groupVisualFamilies:Object.freeze(['dragonfly','dragonfly','stingray','galboss','dragonfly']),
   groupPathFamilies:Object.freeze(['crown-split-cascade','boss-led-loop','hook-arc','boss-led-loop','hook-arc']),
+  contractGroups:AURORA_CHALLENGE_STAGE11_CONTRACT_GROUPS,
   groupReferencePaths:AURORA_CHALLENGE_STAGE11_REFERENCE_PATHS
  }),
  Object.freeze({

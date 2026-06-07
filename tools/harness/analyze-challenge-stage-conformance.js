@@ -1272,6 +1272,7 @@ async function runtimeProbeForStage(stage, options = {}){
           type: e.type,
           family: e.family,
           pathFamily: e.pathFamily,
+          contractGroup: e.contractGroup || null,
           x: +(+e.x || 0).toFixed(2),
           y: +(+e.y || 0).toFixed(2),
           tm: +(+e.tm || 0).toFixed(3),
@@ -1279,19 +1280,25 @@ async function runtimeProbeForStage(stage, options = {}){
         }));
       const initialGroupSignatures = Object.values((initialFormation.enemies || []).reduce((acc, e) => {
         const key = String(e.wave || 0);
-        if(!acc[key]) acc[key] = { group: e.wave || 0, types: [], families: [], pathFamilies: [], spawnPlans: [] };
+        if(!acc[key]) acc[key] = { group: e.wave || 0, types: [], families: [], pathFamilies: [], contractGroups: [], spawnPlans: [] };
         acc[key].types[e.lane || 0] = e.type || '';
         acc[key].families[e.lane || 0] = e.family || '';
         acc[key].pathFamilies[e.lane || 0] = e.pathFamily || '';
+        if(e.contractGroup) acc[key].contractGroups.push(e.contractGroup);
         acc[key].spawnPlans.push(+e.spawnPlan || 0);
         return acc;
       }, {})).sort((a, b) => a.group - b.group).map(group => {
         const spawnPlans = group.spawnPlans.filter(Number.isFinite);
+        const contractGroup = group.contractGroups.find(Boolean) || null;
         return {
           group: group.group,
           types: group.types.filter(Boolean),
           families: Array.from(new Set(group.families.filter(Boolean))).sort(),
           pathFamilies: Array.from(new Set(group.pathFamilies.filter(Boolean))).sort(),
+          contractGroup,
+          declaredPathFamily: contractGroup?.pathFamily || '',
+          declaredFamilies: Array.isArray(contractGroup?.expectedFamilies) ? contractGroup.expectedFamilies.slice() : [],
+          declaredRole: contractGroup?.role || '',
           spawnSpan: spawnPlans.length ? +(Math.max(...spawnPlans) - Math.min(...spawnPlans)).toFixed(3) : 0
         };
       });
@@ -1596,6 +1603,12 @@ function challengeContractFit(runtime, contract){
     const runtimePathFamily = runtimeGroup.pathFamily || (Array.isArray(runtimeGroup.pathFamilies) ? runtimeGroup.pathFamilies[0] : '');
     return String(runtimePathFamily || '') === String(target.pathFamily || '') ? 1 : 0;
   });
+  const declaredPathMatches = targetGroups.map((target, index) => {
+    const runtimeGroup = runtimeGroups[index] || {};
+    const declared = runtimeGroup.declaredPathFamily || runtimeGroup.contractGroup?.pathFamily || '';
+    if(!declared) return null;
+    return String(declared || '') === String(target.pathFamily || '') ? 1 : 0;
+  }).filter(match => match !== null);
   const typeMatches = targetGroups.map((target, index) => {
     const runtimeTypes = new Set(runtimeGroups[index]?.types || []);
     const expected = target.expectedTypes || [];
@@ -1612,6 +1625,7 @@ function challengeContractFit(runtime, contract){
     return clamp(hits / expected.length);
   });
   const pathFamilyFit = average(pathMatches) || 0;
+  const declaredPathFamilyFit = declaredPathMatches.length ? average(declaredPathMatches) : null;
   const typeFit = average(typeMatches) || 0;
   const familyFit = average(familyMatches) || 0;
   const objectTargetGroups = directTargetGroups.length ? directTargetGroups : targetGroups;
@@ -1638,6 +1652,7 @@ function challengeContractFit(runtime, contract){
     contractId: contract.sourceWindowId || null,
     groupCountFit: round(groupCountFit, 3),
     pathFamilyFit: round(pathFamilyFit, 3),
+    declaredPathFamilyFit: declaredPathFamilyFit === null ? null : round(declaredPathFamilyFit, 3),
     typeFit: round(typeFit, 3),
     familyFit: round(familyFit, 3),
     objectTrackCoverage: round(objectTrackCoverage, 3),
@@ -1653,7 +1668,7 @@ function challengeContractFit(runtime, contract){
     objectTrackRead: objectTrackFits.length
       ? `Group object-track target fit is ${round(objectTrackFit, 1)}/10 across ${objectTrackFits.length}/${objectTargetGroups.length} target group(s) using ${directTargetGroups.length || contract.targetVideoOnly ? 'direct Galaga target-video object tracks' : 'first-pass contract object tracks'}.`
       : 'No group object-track targets were available in this contract.',
-    read: `Target contract fit is ${round(1 + coverage * (hasObjectTrackTargets ? 7.0 : 6.2), 1)}/10 for ${contract.displayLabel || `stage ${contract.stage}`}: group count ${round(groupCountFit, 2)}, path-family order ${round(pathFamilyFit, 2)}, type order ${round(typeFit, 2)}, family order ${round(familyFit, 2)}, object-track ${round(objectTrackCoverage, 2)} via ${directTargetGroups.length || contract.targetVideoOnly ? 'direct target-video tracks' : 'first-pass contract vectors'}. This is a group/object-track read, not frame-perfect sprite identity recognition.`
+    read: `Target contract fit is ${round(1 + coverage * (hasObjectTrackTargets ? 7.0 : 6.2), 1)}/10 for ${contract.displayLabel || `stage ${contract.stage}`}: group count ${round(groupCountFit, 2)}, runtime path-family order ${round(pathFamilyFit, 2)}, declared path-family order ${declaredPathFamilyFit === null ? 'n/a' : round(declaredPathFamilyFit, 2)}, type order ${round(typeFit, 2)}, family order ${round(familyFit, 2)}, object-track ${round(objectTrackCoverage, 2)} via ${directTargetGroups.length || contract.targetVideoOnly ? 'direct target-video tracks' : 'first-pass contract vectors'}. This is a group/object-track read, not frame-perfect sprite identity recognition.`
   };
 }
 
@@ -1791,6 +1806,13 @@ function makeStageRow(stage, runtime, match, referenceLabels){
     laneTypes: runtime?.layout?.laneTypes || [],
     runtimeFirstWaveTypes: typeSequence(firstWave),
     runtimeGroupSignatures: runtime?.groupSignatures || [],
+    runtimeContractSignatures: (runtime?.groupSignatures || []).map(group => ({
+      group: group.group,
+      declaredRole: group.declaredRole || group.contractGroup?.role || '',
+      declaredPathFamily: group.declaredPathFamily || group.contractGroup?.pathFamily || '',
+      declaredFamilies: group.declaredFamilies || group.contractGroup?.expectedFamilies || [],
+      targetVisibleS: group.contractGroup?.targetVisibleS || []
+    })),
     runtimeVisualFamilies: familySet(firstWave),
     galagaTarget: intent.target,
     criticalExpectation: intent.criticalExpectation,
@@ -1853,6 +1875,7 @@ function makeStageRow(stage, runtime, match, referenceLabels){
     } : null,
     targetContractFitScore10: score.strictAxisReads.targetContractFit?.score10 ?? null,
     targetContractRead: score.strictAxisReads.targetContractFit?.read || 'Target contract pending.',
+    targetContractDeclaredPathFamilyFit: score.strictAxisReads.targetContractFit?.declaredPathFamilyFit ?? null,
     targetVideoObjectTrackRead: score.strictAxisReads.targetContractFit?.objectTrackRead || 'Target-video object-track comparison pending.',
     targetVideoObjectTrackFitScore10: score.strictAxisReads.targetContractFit?.directTargetVideoObjectFitScore10 ?? null,
     targetVideoObjectTrackCoverage: score.strictAxisReads.targetContractFit?.directTargetVideoTrackCoverage ?? null,

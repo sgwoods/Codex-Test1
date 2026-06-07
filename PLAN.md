@@ -218,7 +218,9 @@ from the roadmap.
 6. attack Aurora challenge-stage runtime quality first: the grammar and
    reference-backed contracts are ready enough, but the runtime challenge
    stages still score around `4.3/10` and need visible movement/readability
-   lift
+   lift; Stage 7 and Stage 11 now expose runtime contract groups, so the next
+   targeted lift should align Stage 7 waves 1, 3, and 4 with their declared
+   path-family contract before broad subjective tuning
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth

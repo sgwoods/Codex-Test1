@@ -109,7 +109,8 @@ function enemyChallengeState({
   leadInStartYOffset=null,
   leadInSideOffset=0,
   referencePath=null,
-  motionSpecGroup=null
+  motionSpecGroup=null,
+  contractGroup=null
 }={}){
  return {
   ch:1,
@@ -152,7 +153,8 @@ function enemyChallengeState({
   leadInStartYOffset,
   leadInSideOffset,
   referencePath,
-  motionSpecGroup
+  motionSpecGroup,
+  contractGroup
  };
 }
 
@@ -261,6 +263,7 @@ function makePackChallengeEnemyState({
  leadInSideOffset=0,
  referencePath=null,
  motionSpecGroup=null,
+ contractGroup=null,
  spawn=0
 }){
  return Object.assign({
@@ -302,5 +305,5 @@ function makePackChallengeEnemyState({
   miss:0,
   low:0,
   hitT:0
- }, enemyChallengeState({wave,side,slot,row,group,sweep,upperBandY,pathFamily,arcAmp,dropAmp,speedScale,lowerFieldBias,yOffset,laneSpreadScale,rowSpreadScale,laneStaggerS,phaseOffsetS,lanePhaseOffsetS,slotXOffset,slotYOffset,deconflictSpread,deconflictPhase,deconflictLaneBias,deconflictYOffset,routeOffsetX,routeOffsetY,routeCurveX,routeCurveY,routePhaseS,spacingFieldSpreadX,spacingFieldSpreadY,spacingFieldGateS,spacingFieldPhaseS,leadInS,leadInArc,leadInStartYOffset,leadInSideOffset,referencePath,motionSpecGroup}));
+ }, enemyChallengeState({wave,side,slot,row,group,sweep,upperBandY,pathFamily,arcAmp,dropAmp,speedScale,lowerFieldBias,yOffset,laneSpreadScale,rowSpreadScale,laneStaggerS,phaseOffsetS,lanePhaseOffsetS,slotXOffset,slotYOffset,deconflictSpread,deconflictPhase,deconflictLaneBias,deconflictYOffset,routeOffsetX,routeOffsetY,routeCurveX,routeCurveY,routePhaseS,spacingFieldSpreadX,spacingFieldSpreadY,spacingFieldGateS,spacingFieldPhaseS,leadInS,leadInArc,leadInStartYOffset,leadInSideOffset,referencePath,motionSpecGroup,contractGroup}));
 }

@@ -129,7 +129,9 @@ function spawnChallenge(state){
   const waveSpacingFieldGateS=Array.isArray(layout.groupSpacingFieldGateS)?layout.groupSpacingFieldGateS:null;
   const waveSpacingFieldPhaseS=Array.isArray(layout.groupSpacingFieldPhaseS)?layout.groupSpacingFieldPhaseS:null;
   const waveMotionSpecs=Array.isArray(layout.motionSpecGroups)?layout.motionSpecGroups:null;
+  const waveContractGroups=Array.isArray(layout.contractGroups)?layout.contractGroups:null;
   const motionSpecGroup=waveMotionSpecs?.[wave]||null;
+  const contractGroup=waveContractGroups?.[wave]||null;
   const motionControls=motionSpecGroup?.controls||null;
   const laneOrder=Array.isArray(motionControls?.laneOrder)?motionControls.laneOrder:null;
   const motionLane=Number.isFinite(+laneOrder?.[lane])
@@ -195,6 +197,7 @@ function spawnChallenge(state){
    leadInSideOffset:motionControls?.leadInSideOffset??waveLeadInSideOffsets?.[wave]??layout.leadInSideOffset??0,
    referencePath:waveReferencePaths?.[wave]||null,
    motionSpecGroup,
+   contractGroup,
    spawn:baseEntryDelay+groupSpawnOffset+slot*slotDelay+slot*laneStaggerS
   }));
  }

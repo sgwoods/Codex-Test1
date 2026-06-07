@@ -1300,6 +1300,17 @@ window.__galagaHarness__={
     pointCount:Array.isArray(e.referencePath.points)?e.referencePath.points.length:0,
     durationS:+(+e.referencePath.durationS||0).toFixed(2)
    }:null,
+   contractGroup:e.contractGroup?{
+    groupIndex:+e.contractGroup.groupIndex||((+e.wave||0)+1),
+    role:e.contractGroup.role||'',
+    pathFamily:e.contractGroup.pathFamily||'',
+    expectedTypes:Array.isArray(e.contractGroup.expectedTypes)?e.contractGroup.expectedTypes.slice():[],
+    expectedFamilies:Array.isArray(e.contractGroup.expectedFamilies)?e.contractGroup.expectedFamilies.slice():[],
+    entrySide:e.contractGroup.entrySide||'',
+    exitSide:e.contractGroup.exitSide||'',
+    scoreWindow:e.contractGroup.scoreWindow||'',
+    targetVisibleS:Array.isArray(e.contractGroup.targetVisibleS)?e.contractGroup.targetVisibleS.slice():[]
+   }:null,
    referenceLeadIn:+(+e.referenceLeadIn||0).toFixed(3),
    tm:+(+e.tm||0).toFixed(3),
    flapOpen:Math.sin((+e.tm||0)*11+(+e.ph||0))>.12,

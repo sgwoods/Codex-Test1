@@ -13,6 +13,18 @@ const MAX_RUNTIME_BUNCHING_RISK = 0.62;
 const STAGE_SPACING_GUARDS = Object.freeze({
   7: Object.freeze({ minRuntimeSpacingScore: 0.72, maxRuntimeBunchingRisk: 0.38 })
 });
+const CONTRACT_GROUP_EXPECTATIONS = Object.freeze({
+  7: Object.freeze({
+    layoutId: 'scorpion-cross-sweep',
+    pathFamilies: Object.freeze(['cross-sweep', 'cross-sweep', 'hook-arc', 'hook-arc', 'boss-led-loop']),
+    families: Object.freeze(['classic', 'scorpion', 'scorpion', 'stingray', 'stingray'])
+  }),
+  11: Object.freeze({
+    layoutId: 'stingray-crown-hook-hybrid',
+    pathFamilies: Object.freeze(['crown-split-cascade', 'boss-led-loop', 'hook-arc', 'boss-led-loop', 'hook-arc']),
+    families: Object.freeze(['dragonfly', 'dragonfly', 'stingray', 'galboss', 'dragonfly'])
+  })
+});
 const BASELINE = Object.freeze({
   0.7: Object.freeze({ avgX: 140, minY: 39.28, maxY: 46.83, lane0X: 22.81, lane7X: 314.34 }),
   1.05: Object.freeze({ avgX: 140, minY: 40.15, maxY: 47.69, lane0X: 50.7, lane7X: 292.44 }),
@@ -100,6 +112,66 @@ function validateReferencePathSetup(state, expected){
   }
 }
 
+function validateChallengeContractGroups(state, expected){
+  const layout = state?.layout || {};
+  const contractGroups = Array.isArray(layout.contractGroups) ? layout.contractGroups : [];
+  if(layout.id !== expected.layoutId || contractGroups.length !== expected.pathFamilies.length){
+    fail(`stage ${state?.stage || expected.stage || '(unknown)'} challenge layout must expose declared target-contract groups`, {
+      layoutId: layout.id,
+      expectedLayoutId: expected.layoutId,
+      contractGroupCount: contractGroups.length,
+      expectedContractGroupCount: expected.pathFamilies.length
+    });
+  }
+  const contractReads = contractGroups.map(group => ({
+    groupIndex: +group.groupIndex || 0,
+    role: group.role || '',
+    pathFamily: group.pathFamily || '',
+    expectedFamilies: Array.isArray(group.expectedFamilies) ? group.expectedFamilies : [],
+    targetVisibleS: Array.isArray(group.targetVisibleS) ? group.targetVisibleS : []
+  }));
+  const pathOrder = contractReads.map(group => group.pathFamily);
+  const familyOrder = contractReads.map(group => group.expectedFamilies[0] || '');
+  const pathMismatches = pathOrder
+    .map((pathFamily, index) => ({ index, pathFamily, expected: expected.pathFamilies[index] }))
+    .filter(read => read.pathFamily !== read.expected);
+  const familyMismatches = familyOrder
+    .map((family, index) => ({ index, family, expected: expected.families[index] }))
+    .filter(read => read.family !== read.expected);
+  if(pathMismatches.length || familyMismatches.length){
+    fail(`stage ${state?.stage || expected.stage || '(unknown)'} challenge contract group order drifted from target artifact intent`, {
+      layoutId: layout.id,
+      pathOrder,
+      expectedPathOrder: expected.pathFamilies,
+      familyOrder,
+      expectedFamilyOrder: expected.families,
+      pathMismatches,
+      familyMismatches,
+      contractReads
+    });
+  }
+  const enemies = Array.isArray(state?.enemies) ? state.enemies : [];
+  const missing = enemies.filter(enemy => !enemy.contractGroup || !enemy.contractGroup.pathFamily);
+  const wrong = enemies.filter(enemy => {
+    const expectedGroup = contractGroups[enemy.wave || 0];
+    return expectedGroup && enemy.contractGroup?.pathFamily !== expectedGroup.pathFamily;
+  });
+  if(missing.length || wrong.length){
+    fail(`stage ${state?.stage || expected.stage || '(unknown)'} challenge enemies must carry their declared target-contract group`, {
+      layoutId: layout.id,
+      missing: missing.map(enemy => ({ id: enemy.id, wave: enemy.wave, lane: enemy.lane, type: enemy.type, family: enemy.family, pathFamily: enemy.pathFamily })),
+      wrong: wrong.map(enemy => ({
+        id: enemy.id,
+        wave: enemy.wave,
+        lane: enemy.lane,
+        contractPathFamily: enemy.contractGroup?.pathFamily || '',
+        expectedPathFamily: contractGroups[enemy.wave || 0]?.pathFamily || ''
+      }))
+    });
+  }
+  return contractReads;
+}
+
 function validateReferencePlaybackClock(state, elapsedSeconds){
   const enemies = Array.isArray(state?.enemies) ? state.enemies : [];
   const spawnBase = enemies.reduce((min, enemy) => Math.min(min, +enemy.spawnPlan || 0), Infinity);
@@ -131,6 +203,7 @@ function validateReferencePlaybackClock(state, elapsedSeconds){
 
 function validateStage7ReferencePathSetup(state){
   validateReferencePathSetup(state, { stage: 7, layoutId: 'scorpion-cross-sweep' });
+  validateChallengeContractGroups(state, CONTRACT_GROUP_EXPECTATIONS[7]);
   const layout = state?.layout || {};
   const specs = Array.isArray(layout.motionSpecGroups) ? layout.motionSpecGroups : [];
   const enemies = Array.isArray(state?.enemies) ? state.enemies : [];
@@ -149,6 +222,7 @@ function validateStage7ReferencePathSetup(state){
 
 function validateStage11ReferencePathSetup(state){
   validateReferencePathSetup(state, { stage: 11, layoutId: 'stingray-crown-hook-hybrid' });
+  validateChallengeContractGroups(state, CONTRACT_GROUP_EXPECTATIONS[11]);
 }
 
 function validateReferenceLeadIn(state, sampleAt){
