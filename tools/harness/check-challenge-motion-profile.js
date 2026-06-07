@@ -10,6 +10,9 @@ const SPACING_CRAMPED_DISTANCE = 7.5;
 const SPACING_IDEAL_DISTANCE = 13;
 const MIN_RUNTIME_SPACING_SCORE = 0.42;
 const MAX_RUNTIME_BUNCHING_RISK = 0.62;
+const STAGE_SPACING_GUARDS = Object.freeze({
+  7: Object.freeze({ minRuntimeSpacingScore: 0.72, maxRuntimeBunchingRisk: 0.38 })
+});
 const BASELINE = Object.freeze({
   0.7: Object.freeze({ avgX: 140, minY: 39.28, maxY: 46.83, lane0X: 22.81, lane7X: 314.34 }),
   1.05: Object.freeze({ avgX: 140, minY: 40.15, maxY: 47.69, lane0X: 50.7, lane7X: 292.44 }),
@@ -280,6 +283,10 @@ async function sampleChallengeSpacing(page, stage){
   const spacingScore = minDistances.length
     ? clamp((average(minDistances.map(value => clamp(value / SPACING_IDEAL_DISTANCE))) * 0.72) + ((1 - bunchingRisk) * 0.28))
     : 0.6;
+  const guard = STAGE_SPACING_GUARDS[stage] || {
+    minRuntimeSpacingScore: MIN_RUNTIME_SPACING_SCORE,
+    maxRuntimeBunchingRisk: MAX_RUNTIME_BUNCHING_RISK
+  };
   const summary = {
     stage,
     sampleCount: samples.length,
@@ -288,7 +295,9 @@ async function sampleChallengeSpacing(page, stage){
     spacingScore: +spacingScore.toFixed(3),
     bunchingRisk: +bunchingRisk.toFixed(3),
     crampedCount,
-    pass: spacingScore >= MIN_RUNTIME_SPACING_SCORE && bunchingRisk <= MAX_RUNTIME_BUNCHING_RISK
+    minRuntimeSpacingScore: guard.minRuntimeSpacingScore,
+    maxRuntimeBunchingRisk: guard.maxRuntimeBunchingRisk,
+    pass: spacingScore >= guard.minRuntimeSpacingScore && bunchingRisk <= guard.maxRuntimeBunchingRisk
   };
   return { stage, layout: initial?.layout || null, summary, samples };
 }
@@ -301,7 +310,8 @@ function validateChallengeSpacing(rows){
         crampedDistance: SPACING_CRAMPED_DISTANCE,
         idealDistance: SPACING_IDEAL_DISTANCE,
         minRuntimeSpacingScore: MIN_RUNTIME_SPACING_SCORE,
-        maxRuntimeBunchingRisk: MAX_RUNTIME_BUNCHING_RISK
+        maxRuntimeBunchingRisk: MAX_RUNTIME_BUNCHING_RISK,
+        stageSpacingGuards: STAGE_SPACING_GUARDS
       },
       failures: failures.map(row => ({
         stage: row.stage,
