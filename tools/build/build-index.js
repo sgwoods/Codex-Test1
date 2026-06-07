@@ -83,10 +83,19 @@ const APPLICATION_ARTIFACT_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 
 const CHALLENGE_STAGE_CONFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-conformance', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_SWEEP = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_SWEEP_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep-index', 'latest.json');
+const CHALLENGE_STAGE_READABILITY_VISUALS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-readability-visuals', 'latest.json');
+const CHALLENGE_STAGE_READABILITY_VISUALS_SVG = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-readability-visuals', 'latest.svg');
+const CHALLENGE_DECONFLICT_UNDERPERFORMANCE = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-deconflict-underperformance', 'latest.json');
+const CHALLENGE_PATH_VISUALS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-path-visuals', 'latest.json');
+const CHALLENGE_PATH_VISUALS_SVG = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-path-visuals', 'latest.svg');
+const STAGE7_AUTHORING_CONTRACT = path.join(ROOT, 'reference-artifacts', 'analyses', 'stage7-authoring-contract', 'latest.json');
 const CHALLENGE_CANDIDATE_BEFORE_AFTER = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-candidate-before-after', 'latest.json');
 const CHALLENGE_STAGE_CANDIDATE_FULL_ANALYZER_REVIEW = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-full-analyzer-review', 'latest.json');
 const CHALLENGE_TRAJECTORY_CONTROLS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-trajectory-controls', 'latest.json');
 const CHALLENGE_SETPIECE_CONTRACTS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-setpiece-contracts', 'latest.json');
+const CHALLENGE_MOVEMENT_GRAMMAR = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-movement-grammar', 'latest.json');
+const CHALLENGE_MOTION_SPEC = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-motion-spec', 'latest.json');
+const CHALLENGE_MOTION_PRIMITIVES = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-motion-primitives', 'latest.json');
 const GAMEPLAY_SEGMENT_CAPTURE = path.join(ROOT, 'reference-artifacts', 'analyses', 'gameplay-segment-captures', 'latest.json');
 const STAGE7_REFERENCE_PATH_BEFORE_AFTER = path.join(ROOT, 'reference-artifacts', 'analyses', 'stage7-reference-path-before-after', 'latest.json');
 const LEVEL_VISUAL_CONFORMANCE_INDEX = path.join(ROOT, 'reference-artifacts', 'analyses', 'level-visual-conformance-index', 'latest.json');
@@ -3465,29 +3474,79 @@ function buildChallengeStageEffortGuideSection(){
   const artifact = loadChallengeStageConformance();
   const sweep = loadChallengeStageCandidateSweep();
   const sweepIndex = loadChallengeStageCandidateSweepIndex();
+  const readabilityVisuals = loadChallengeStageReadabilityVisuals();
+  const deconflictUnderperformance = loadChallengeDeconflictUnderperformance();
+  const pathVisuals = loadChallengePathVisuals();
+  const stage7AuthoringContract = loadStage7AuthoringContract();
   const candidateBeforeAfter = loadChallengeCandidateBeforeAfter();
   const fullAnalyzerReview = loadChallengeStageCandidateFullAnalyzerReview();
   const trajectoryControls = loadChallengeTrajectoryControls();
   const setpieceContracts = loadChallengeSetpieceContracts();
+  const movementGrammar = loadChallengeMovementGrammar();
+  const motionSpec = loadChallengeMotionSpec();
+  const motionPrimitives = loadChallengeMotionPrimitives();
   const summary = artifact.summary || {};
   const sweepSummary = sweep.summary || {};
   const sweepRetention = sweep.candidateRetention || {};
+  const sweepDiagnostics = sweep.diagnostics || {};
+  const readabilityTop = (sweepDiagnostics.readabilityTop || [])[0] || null;
+  const readabilityRead = readabilityTop
+    ? `Best readability diagnostic ${readabilityTop.candidateId || 'pending'} scored ${readabilityTop.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 human-visible, ${readabilityTop.humanPerfectPotentialScore10 ?? 'n/a'}/10 human-perfect, and ${readabilityTop.targetVideoObjectFitScore10 ?? 'n/a'}/10 target-video fit. ${readabilityTop.humanVisibleGuardrails?.read || 'Readability details pending.'}`
+    : 'No readability diagnostics retained yet; rerun the Stage 7 sweep after adding readability candidate controls.';
   const sweepIndexSummary = sweepIndex.summary || {};
+  const readabilityVisualsSummary = readabilityVisuals.summary || {};
+  const readabilityVisualRead = readabilityVisualsSummary.leastBunchedCandidateId
+    ? `Swarm readability visual compares ${readabilityVisuals.candidatesToCompare?.length || 0} candidate(s); least-bunched diagnostic ${readabilityVisualsSummary.leastBunchedCandidateId} has bunching risk ${readabilityVisualsSummary.leastBunchedBunchingRisk ?? 'n/a'} (delta ${readabilityVisualsSummary.bunchingRiskDelta ?? 'n/a'} vs baseline).`
+    : 'Run the challenge readability visuals analyzer after the Stage 7 sweep to generate a baseline-vs-candidate SVG.';
+  const deconflictSummary = deconflictUnderperformance.summary || {};
+  const deconflictRows = deconflictUnderperformance.rows || {};
+  const deconflictRead = deconflictSummary.read
+    ? `${deconflictSummary.read} Baseline risk ${deconflictSummary.baselineBunchingRisk ?? 'n/a'}, direct deconflict ${deconflictSummary.bestDeconflictBunchingRisk ?? 'n/a'}, route-aware ${deconflictSummary.bestRouteAwareBunchingRisk ?? 'n/a'}, least-bunched ${deconflictSummary.leastBunchedBunchingRisk ?? 'n/a'}.`
+    : 'Run the deconflict underperformance analyzer to compare direct object-level offsets, route-aware offsets, and readability candidates.';
+  const pathVisualsSummary = pathVisuals.summary || {};
+  const pathVisualRead = pathVisualsSummary.candidateCount
+    ? `Path visual compares ${pathVisualsSummary.candidateCount} candidate route families. ${pathVisualsSummary.playerMeaning || 'Use it to inspect whether aliens arrive as coherent waves or collapse into unreadable clusters.'} SVG artifact: \`reference-artifacts/analyses/challenge-path-visuals/latest.svg\`.`
+    : 'Run the challenge path visuals analyzer after the candidate sweep to generate a trajectory comparison SVG.';
+  const authoringCurrent = stage7AuthoringContract.current || {};
+  const authoringLeast = authoringCurrent.leastBunched || {};
+  const authoringRoute = authoringCurrent.routeAware || {};
+  const authoringGates = Array.isArray(stage7AuthoringContract.promotionGates) ? stage7AuthoringContract.promotionGates : [];
+  const authoringNextWork = Array.isArray(stage7AuthoringContract.nextWork) ? stage7AuthoringContract.nextWork : [];
+  const authoringRead = stage7AuthoringContract.challengeNumber
+    ? `Stage ${stage7AuthoringContract.stage} / Challenging Stage ${stage7AuthoringContract.challengeNumber} has ${stage7AuthoringContract.targetGroups?.length || 0} target group(s). Current best \`${authoringCurrent.best?.candidateId || 'pending'}\` has bunching risk ${authoringCurrent.best?.bunchingRisk ?? 'n/a'} and magic risk ${authoringCurrent.best?.magicAppearanceRisk ?? 'n/a'}; least-bunched \`${authoringLeast.candidateId || 'pending'}\` has risk ${authoringLeast.bunchingRisk ?? 'n/a'}; route-aware \`${authoringRoute.candidateId || 'pending'}\` has risk ${authoringRoute.bunchingRisk ?? 'n/a'}. Decision: ${authoringCurrent.keeperDecision || 'pending'}.`
+    : 'Run the Stage 7 authoring contract analyzer to persist target groups, promotion gates, and next-work guidance.';
+  const authoringGateRead = authoringGates.slice(0, 4).join(' ');
+  const authoringNextRead = authoringNextWork.slice(0, 4).join(' ');
   const beforeAfterSummary = candidateBeforeAfter.sweepSummary || {};
   const beforeAfterCandidate = candidateBeforeAfter.selectedCandidate || {};
   const trajectorySummary = trajectoryControls.summary || {};
   const setpieceSummary = setpieceContracts.summary || {};
+  const movementGrammarSummary = movementGrammar.summary || {};
+  const motionSpecSummary = motionSpec.summary || {};
+  const motionSpecStage = motionSpec.spec?.stage || 'n/a';
+  const motionSpecChallenge = motionSpec.spec?.challengeNumber || 'n/a';
+  const motionSpecGroupRead = (motionSpec.spec?.groups || [])
+    .map(group => `G${group.groupIndex}: ${group.intent || 'motion'} via ${group.pathFamilyHint || 'path'} / ${group.referencePath?.sourceTrackId || 'unbacked'}.`)
+    .join(' ');
+  const motionPrimitiveSummary = motionPrimitives.summary || {};
   const reviewRead = fullAnalyzerReview.read || 'No candidate has been recorded through the full-analyzer review loop yet.';
   const sweepRows = Array.isArray(sweepIndex.rows) ? sweepIndex.rows : [];
+  const sweepRowByStage = Object.fromEntries(sweepRows.map(row => [String(row.stage), row]));
   const sweepIndexRead = sweepRows.length
-    ? sweepRows.map(row => `Stage ${row.stage}: ${row.keeperDecision || 'pending'} (${row.bestExpectedScore10 ?? 'n/a'}/10 expected, ${row.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10 target-video, ${row.bestHumanPerfectPotentialScore10 ?? 'n/a'}/10 human-perfect, identity margin ${row.stageIdentityMargin10 ?? 'n/a'}).`).join(' ')
+    ? sweepRows.map(row => `Stage ${row.stage}: ${row.keeperDecision || 'pending'} (${row.bestExpectedScore10 ?? 'n/a'}/10 expected, ${row.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10 target-video, ${row.bestHumanPerfectPotentialScore10 ?? 'n/a'}/10 human-perfect, ${row.bestHumanVisibleScore10 ?? 'n/a'}/10 human-visible, identity margin ${row.stageIdentityMargin10 ?? 'n/a'}).`).join(' ')
     : 'Run the candidate sweep index analyzer to preserve latest per-stage candidate evidence.';
+  const firstFiveRead = (movementGrammar.grammar || [])
+    .map(row => `Stage ${row.stage}: ${row.groupContracts?.length || 0} groups, ${(row.runtimeSeed?.groupReferencePaths || []).filter(Boolean).length} reference paths, ${row.sourceControlReadiness10 ?? 'n/a'}/10 readiness.`)
+    .join(' ');
+  const primitiveRead = (motionPrimitives.primitives || []).slice(0, 5)
+    .map(row => `${row.id}: ${row.priority10 ?? 'n/a'}/10 priority (${(row.sourceStages || []).join(', ') || 'planning'}).`)
+    .join(' ');
   const rows = (artifact.stageRows || []).map(row => [
     `Stage ${row.stage || ''} / Challenge ${row.challengeNumber || ''}`,
     `Interest: **${row.interestingFactor10 ?? 'n/a'}/10**\n\nConformance: **${row.conformanceScore10 ?? 'n/a'}/10**\n\nBest ref: \`${row.bestReferenceMatch?.labelId || 'pending'}\` (${row.referenceMatchScore10 ?? 'n/a'}/10)`,
-    row.currentRead || 'Current read pending.',
-    (row.criticalGaps || [])[0] || 'Critical gap pending.',
-    (row.nextActions || [])[0] || 'Next action pending.'
+    `${row.currentRead || 'Current read pending.'}\n\nSweep: ${(sweepRowByStage[String(row.stage)]?.keeperDecision || 'pending')} after ${sweepRowByStage[String(row.stage)]?.candidateCount ?? 'n/a'} candidates; best \`${sweepRowByStage[String(row.stage)]?.bestCandidateId || 'pending'}\`.`,
+    `${(row.criticalGaps || [])[0] || 'Critical gap pending.'}\n\nHuman-visible gate: ${sweepRowByStage[String(row.stage)]?.humanVisiblePass === true ? 'pass' : 'blocked/pending'}; lift ${sweepRowByStage[String(row.stage)]?.humanVisibleLift10 ?? 'n/a'}/10; bunching risk ${sweepRowByStage[String(row.stage)]?.humanVisibleBunchingRisk ?? 'n/a'}.`,
+    sweepRowByStage[String(row.stage)]?.nextStep || (row.nextActions || [])[0] || 'Next action pending.'
   ]);
   return {
     id: 'challenge-stage-conformance-effort',
@@ -3507,12 +3566,48 @@ function buildChallengeStageEffortGuideSection(){
         body: `Stage ${sweep.stage || 'n/a'} sweep measured ${sweep.candidateCount || sweepRetention.totalMeasured || 'n/a'} candidates and retained ${sweepRetention.retained || 'n/a'} review rows. Decision: ${sweepSummary.keeperDecision || 'pending'}. Best candidate ${sweepSummary.bestCandidateId || 'pending'} scored ${sweepSummary.bestExpectedScore10 ?? 'n/a'}/10 expected-reference, ${sweepSummary.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10 target-video fit, and ${sweepSummary.bestHumanPerfectPotentialScore10 ?? 'n/a'}/10 human-perfect potential; lift ${sweepSummary.humanPerfectPotentialLift10 ?? 'n/a'}/10.`
       },
       {
+        title: 'Readability Diagnostics',
+        body: `${sweepRetention.readabilityDiagnostics || 0} readability diagnostic row(s) retained from the latest sweep. ${readabilityRead}`
+      },
+      {
+        title: 'Swarm Readability Visual',
+        body: `${readabilityVisualRead} SVG artifact: \`reference-artifacts/analyses/challenge-stage-readability-visuals/latest.svg\`.`
+      },
+      {
+        title: 'Deconflict Underperformance',
+        body: `${deconflictRead} Best deconflict row: \`${deconflictRows.bestDeconflict?.candidateId || 'pending'}\`; best route-aware row: \`${deconflictRows.bestRouteAware?.candidateId || 'pending'}\`.`
+      },
+      {
+        title: 'Route Path Visuals',
+        body: pathVisualRead
+      },
+      {
+        title: 'Stage 7 Authoring Contract',
+        body: `${authoringRead} Promotion gates: ${authoringGateRead || 'pending'}. Next work: ${authoringNextRead || 'pending'}.`
+      },
+      {
         title: 'Human-Perfect Guard',
         body: `Promotion now requires no human-perfect routeability regression. Latest before/after review: ${candidateBeforeAfter.candidateId || 'pending'} on Stage ${candidateBeforeAfter.stage || 'n/a'} with selected-candidate expected lift ${beforeAfterCandidate.expectedLift10 ?? beforeAfterSummary.expectedLift10 ?? 'n/a'}/10, target-video lift ${beforeAfterCandidate.targetVideoObjectFitLift10 ?? beforeAfterSummary.targetVideoObjectFitLift10 ?? 'n/a'}/10, and human-perfect lift ${beforeAfterCandidate.humanPerfectPotentialLift10 ?? beforeAfterSummary.humanPerfectPotentialLift10 ?? 'n/a'}/10.`
       },
       {
         title: 'Sweep Matrix',
-        body: `${sweepIndexSummary.stagesCovered || 0} stage(s) indexed, ${sweepIndexSummary.totalCandidateCount || 0} candidates represented, ${sweepIndexSummary.runtimeReadyCount || 0} runtime-ready, ${sweepIndexSummary.humanPerfectScoredCount || 0} with human-perfect scoring. ${sweepIndexRead}`
+        body: `${sweepIndexSummary.stagesCovered || 0} stage(s) indexed, ${sweepIndexSummary.totalCandidateCount || 0} candidates represented, ${sweepIndexSummary.runtimeReadyCount || 0} runtime-ready, ${sweepIndexSummary.humanPerfectScoredCount || 0} with human-perfect scoring, ${sweepIndexSummary.humanVisibleScoredCount || 0} with human-visible scoring. ${sweepIndexRead}`
+      },
+      {
+        title: 'First-Five Movement Grammar',
+        body: `${movementGrammarSummary.challengeCount || 0} grammar row(s), ${movementGrammarSummary.groupContractCount || 0} group contracts, ${movementGrammarSummary.referenceBackedGroupCount || 0} reference-backed paths, ${movementGrammarSummary.averageControlReadiness10 ?? 'n/a'}/10 control readiness. ${firstFiveRead || movementGrammarSummary.read || 'Run the challenge movement grammar analyzer to promote the first five challenge stages into reusable movement contracts.'}`
+      },
+      {
+        title: 'Runtime Motion Spec Trial',
+        body: `Challenge ${motionSpecChallenge} / internal Stage ${motionSpecStage} now has ${motionSpecSummary.groupCount || 0} runtime-facing spec group(s), ${motionSpecSummary.referenceBackedGroupCount || 0} reference-backed, using evaluator \`${motionSpec.spec?.evaluator || 'pending'}\`. Latest strict challenge conformance remains ${summary.score10 ?? 'n/a'}/10, so this is currently a traceable runtime seam and not yet a proven user-visible lift. ${motionSpecGroupRead || motionSpecSummary.read || 'Run the challenge motion spec analyzer to generate the first runtime-facing spec.'}`
+      },
+      {
+        title: 'Motion Primitive Catalog',
+        body: `${motionPrimitiveSummary.primitiveCount || 0} reusable primitive(s), ${motionPrimitiveSummary.highPriorityPrimitiveCount || 0} high-priority, first build target \`${motionPrimitiveSummary.firstBuildTarget || 'pending'}\`. ${motionPrimitiveSummary.read || 'Run the challenge motion primitive analyzer to convert no-keeper evidence into reusable path, spacing, lead-in, and scoreability primitives.'} ${primitiveRead}`
+      },
+      {
+        title: 'No-Keeper Read',
+        body: `${sweepIndexSummary.read || 'Recent candidate sweeps have not produced a runtime keeper yet.'} Strongest target-video lift: ${sweepIndexSummary.strongestTargetVideoLift10 ?? 'n/a'}/10 on Stage ${sweepIndexSummary.strongestTargetVideoLiftStage || 'n/a'}; strongest human-perfect lift: ${sweepIndexSummary.strongestHumanPerfectLift10 ?? 'n/a'}/10 on Stage ${sweepIndexSummary.strongestHumanPerfectLiftStage || 'n/a'}; strongest human-visible lift: ${sweepIndexSummary.strongestHumanVisibleLift10 ?? 'n/a'}/10 on Stage ${sweepIndexSummary.strongestHumanVisibleLiftStage || 'n/a'}.`
       },
       {
         title: 'Full Analyzer Review',
@@ -3581,6 +3676,36 @@ function buildChallengeStageEffortGuideSection(){
         label: 'Open Challenge Set-Piece Contracts',
         href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-setpiece-contracts/latest.json`,
         detail: 'Contract-backed target shape, runtime gap, target authority, and next implementation step for each challenging stage.'
+      },
+      {
+        label: 'Open Challenge Movement Grammar',
+        href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-movement-grammar/latest.json`,
+        detail: 'First-five challenge-stage movement grammar with group schedules, path families, reference paths, and human-visible guardrails.'
+      },
+      {
+        label: 'Open Challenge Motion Spec Trial',
+        href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-motion-spec/latest.json`,
+        detail: 'Runtime-facing Challenge 2 motion spec generated from the movement grammar, with phase durations, controls, reference paths, and promotion gates.'
+      },
+      {
+        label: 'Open Deconflict Underperformance',
+        href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-deconflict-underperformance/latest.json`,
+        detail: 'Compares baseline, readability, direct deconflict, route-aware, and least-bunched candidates so process lift is not mistaken for runtime promotion.'
+      },
+      {
+        label: 'Open Challenge Path Visuals',
+        href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-path-visuals/latest.svg`,
+        detail: 'Trajectory visual comparing baseline, best selection, least-bunched/deconflict, and route-aware candidate families.'
+      },
+      {
+        label: 'Open Stage 7 Authoring Contract',
+        href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/stage7-authoring-contract/latest.json`,
+        detail: 'Stage 7 / Challenging Stage 2 target groups, current best rows, promotion gates, and next-work list.'
+      },
+      {
+        label: 'Open Challenge Motion Primitives',
+        href: `${ACTIVE_SOURCE_BLOB_BASE}reference-artifacts/analyses/challenge-motion-primitives/latest.json`,
+        detail: 'Reusable movement primitive backlog derived from no-keeper sweep evidence, first-five grammar, and set-piece contracts.'
       }
     ],
     table: {
@@ -3891,10 +4016,17 @@ let applicationArtifactConformanceCache = null;
 let challengeStageConformanceCache = null;
 let challengeStageCandidateSweepCache = null;
 let challengeStageCandidateSweepIndexCache = null;
+let challengeStageReadabilityVisualsCache = null;
+let challengeDeconflictUnderperformanceCache = null;
+let challengePathVisualsCache = null;
+let stage7AuthoringContractCache = null;
 let challengeCandidateBeforeAfterCache = null;
 let challengeStageCandidateFullAnalyzerReviewCache = null;
 let challengeTrajectoryControlsCache = null;
 let challengeSetpieceContractsCache = null;
+let challengeMovementGrammarCache = null;
+let challengeMotionSpecCache = null;
+let challengeMotionPrimitivesCache = null;
 let gameplaySegmentCaptureCache = null;
 let stage7ReferencePathBeforeAfterCache = null;
 let levelVisualConformanceIndexCache = null;
@@ -4241,6 +4373,84 @@ function loadChallengeStageCandidateSweepIndex(){
   return challengeStageCandidateSweepIndexCache;
 }
 
+function loadChallengeStageReadabilityVisuals(){
+  if(challengeStageReadabilityVisualsCache) return challengeStageReadabilityVisualsCache;
+  if(!fs.existsSync(CHALLENGE_STAGE_READABILITY_VISUALS)){
+    challengeStageReadabilityVisualsCache = { summary: {}, candidatesToCompare: [] };
+    return challengeStageReadabilityVisualsCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_STAGE_READABILITY_VISUALS);
+    challengeStageReadabilityVisualsCache = Object.assign({}, artifact, {
+      summary: artifact.summary || {},
+      candidatesToCompare: Array.isArray(artifact.candidatesToCompare) ? artifact.candidatesToCompare : []
+    });
+  } catch (err) {
+    challengeStageReadabilityVisualsCache = { summary: {}, candidatesToCompare: [] };
+  }
+  return challengeStageReadabilityVisualsCache;
+}
+
+function loadChallengeDeconflictUnderperformance(){
+  if(challengeDeconflictUnderperformanceCache) return challengeDeconflictUnderperformanceCache;
+  if(!fs.existsSync(CHALLENGE_DECONFLICT_UNDERPERFORMANCE)){
+    challengeDeconflictUnderperformanceCache = { summary: {}, rows: {}, nextPrimitive: {} };
+    return challengeDeconflictUnderperformanceCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_DECONFLICT_UNDERPERFORMANCE);
+    challengeDeconflictUnderperformanceCache = Object.assign({}, artifact, {
+      summary: artifact.summary || {},
+      rows: artifact.rows || {},
+      nextPrimitive: artifact.nextPrimitive || {}
+    });
+  } catch (err) {
+    challengeDeconflictUnderperformanceCache = { summary: {}, rows: {}, nextPrimitive: {} };
+  }
+  return challengeDeconflictUnderperformanceCache;
+}
+
+function loadChallengePathVisuals(){
+  if(challengePathVisualsCache) return challengePathVisualsCache;
+  if(!fs.existsSync(CHALLENGE_PATH_VISUALS)){
+    challengePathVisualsCache = { summary: {}, candidatesToCompare: [], candidates: [] };
+    return challengePathVisualsCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_PATH_VISUALS);
+    challengePathVisualsCache = Object.assign({}, artifact, {
+      summary: artifact.summary || {},
+      candidatesToCompare: Array.isArray(artifact.candidatesToCompare) ? artifact.candidatesToCompare : [],
+      candidates: Array.isArray(artifact.candidates) ? artifact.candidates : []
+    });
+  } catch (err) {
+    challengePathVisualsCache = { summary: {}, candidatesToCompare: [], candidates: [] };
+  }
+  return challengePathVisualsCache;
+}
+
+function loadStage7AuthoringContract(){
+  if(stage7AuthoringContractCache) return stage7AuthoringContractCache;
+  if(!fs.existsSync(STAGE7_AUTHORING_CONTRACT)){
+    stage7AuthoringContractCache = { contract: {}, current: {}, targetGroups: [], promotionGates: [], nextWork: [], summary: {} };
+    return stage7AuthoringContractCache;
+  }
+  try {
+    const artifact = readJson(STAGE7_AUTHORING_CONTRACT);
+    stage7AuthoringContractCache = Object.assign({}, artifact, {
+      contract: artifact.contract || {},
+      current: artifact.current || {},
+      targetGroups: Array.isArray(artifact.targetGroups) ? artifact.targetGroups : [],
+      promotionGates: Array.isArray(artifact.promotionGates) ? artifact.promotionGates : [],
+      nextWork: Array.isArray(artifact.nextWork) ? artifact.nextWork : [],
+      summary: artifact.summary || {}
+    });
+  } catch (err) {
+    stage7AuthoringContractCache = { contract: {}, current: {}, targetGroups: [], promotionGates: [], nextWork: [], summary: {} };
+  }
+  return stage7AuthoringContractCache;
+}
+
 function loadChallengeCandidateBeforeAfter(){
   if(challengeCandidateBeforeAfterCache) return challengeCandidateBeforeAfterCache;
   if(!fs.existsSync(CHALLENGE_CANDIDATE_BEFORE_AFTER)){
@@ -4316,6 +4526,64 @@ function loadChallengeSetpieceContracts(){
     challengeSetpieceContractsCache = { summary: {}, contracts: [] };
   }
   return challengeSetpieceContractsCache;
+}
+
+function loadChallengeMovementGrammar(){
+  if(challengeMovementGrammarCache) return challengeMovementGrammarCache;
+  if(!fs.existsSync(CHALLENGE_MOVEMENT_GRAMMAR)){
+    challengeMovementGrammarCache = { summary: {}, grammar: [] };
+    return challengeMovementGrammarCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_MOVEMENT_GRAMMAR);
+    challengeMovementGrammarCache = Object.assign({}, artifact, {
+      summary: artifact.summary || {},
+      grammar: Array.isArray(artifact.grammar) ? artifact.grammar : []
+    });
+  } catch (err) {
+    challengeMovementGrammarCache = { summary: {}, grammar: [] };
+  }
+  return challengeMovementGrammarCache;
+}
+
+function loadChallengeMotionSpec(){
+  if(challengeMotionSpecCache) return challengeMotionSpecCache;
+  if(!fs.existsSync(CHALLENGE_MOTION_SPEC)){
+    challengeMotionSpecCache = { summary: {}, spec: { groups: [] } };
+    return challengeMotionSpecCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_MOTION_SPEC);
+    const spec = artifact.spec || {};
+    challengeMotionSpecCache = Object.assign({}, artifact, {
+      summary: artifact.summary || {},
+      spec: Object.assign({}, spec, {
+        groups: Array.isArray(spec.groups) ? spec.groups : []
+      })
+    });
+  } catch (err) {
+    challengeMotionSpecCache = { summary: {}, spec: { groups: [] } };
+  }
+  return challengeMotionSpecCache;
+}
+
+function loadChallengeMotionPrimitives(){
+  if(challengeMotionPrimitivesCache) return challengeMotionPrimitivesCache;
+  if(!fs.existsSync(CHALLENGE_MOTION_PRIMITIVES)){
+    challengeMotionPrimitivesCache = { summary: {}, primitives: [], stageRoadmap: [] };
+    return challengeMotionPrimitivesCache;
+  }
+  try {
+    const artifact = readJson(CHALLENGE_MOTION_PRIMITIVES);
+    challengeMotionPrimitivesCache = Object.assign({}, artifact, {
+      summary: artifact.summary || {},
+      primitives: Array.isArray(artifact.primitives) ? artifact.primitives : [],
+      stageRoadmap: Array.isArray(artifact.stageRoadmap) ? artifact.stageRoadmap : []
+    });
+  } catch (err) {
+    challengeMotionPrimitivesCache = { summary: {}, primitives: [], stageRoadmap: [] };
+  }
+  return challengeMotionPrimitivesCache;
 }
 
 function loadGameplaySegmentCapture(){
@@ -6109,10 +6377,46 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const challengeSummary = challengeStageConformance.summary || {};
   const challengeCandidateSweep = loadChallengeStageCandidateSweep();
   const challengeCandidateSweepIndex = loadChallengeStageCandidateSweepIndex();
+  const challengeReadabilityVisuals = loadChallengeStageReadabilityVisuals();
+  const challengeDeconflictUnderperformance = loadChallengeDeconflictUnderperformance();
+  const challengePathVisuals = loadChallengePathVisuals();
+  const stage7AuthoringContract = loadStage7AuthoringContract();
   const challengeCandidateFullAnalyzerReview = loadChallengeStageCandidateFullAnalyzerReview();
   const challengeSweepSummary = challengeCandidateSweep.summary || {};
   const challengeSweepRetention = challengeCandidateSweep.candidateRetention || {};
+  const challengeSweepDiagnostics = challengeCandidateSweep.diagnostics || {};
+  const challengeReadabilityTop = (challengeSweepDiagnostics.readabilityTop || [])[0] || null;
+  const challengeReadabilityRead = challengeReadabilityTop
+    ? `Best readability diagnostic ${challengeReadabilityTop.candidateId || 'pending'} scored ${challengeReadabilityTop.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 human-visible and remains blocked by: ${challengeReadabilityTop.humanVisibleGuardrails?.read || 'pending guardrail read.'}`
+    : 'No readability diagnostics retained yet.';
   const challengeSweepIndexSummary = challengeCandidateSweepIndex.summary || {};
+  const challengeReadabilityVisualsSummary = challengeReadabilityVisuals.summary || {};
+  const challengeReadabilityVisualsRead = challengeReadabilityVisualsSummary.leastBunchedCandidateId
+    ? `Swarm readability visual: least-bunched diagnostic ${challengeReadabilityVisualsSummary.leastBunchedCandidateId} has bunching risk ${challengeReadabilityVisualsSummary.leastBunchedBunchingRisk ?? 'n/a'} (delta ${challengeReadabilityVisualsSummary.bunchingRiskDelta ?? 'n/a'} vs baseline). SVG: reference-artifacts/analyses/challenge-stage-readability-visuals/latest.svg.`
+    : 'Swarm readability visual pending; run npm run harness:analyze:challenge-readability-visuals after the candidate sweep.';
+  const challengeReadabilityVisualMarkup = fs.existsSync(CHALLENGE_STAGE_READABILITY_VISUALS_SVG)
+    ? `<figure class="evidenceFigure"><img src="reference-artifacts/analyses/challenge-stage-readability-visuals/latest.svg" alt="Stage challenge readability comparison visual"><figcaption>Baseline, best selection, best readability, and least-bunched candidates from the latest challenge-stage sweep.</figcaption></figure>`
+    : '';
+  const challengeDeconflictSummary = challengeDeconflictUnderperformance.summary || {};
+  const challengeDeconflictRows = challengeDeconflictUnderperformance.rows || {};
+  const challengeDeconflictRead = challengeDeconflictSummary.read
+    ? `${challengeDeconflictSummary.read} Baseline risk ${challengeDeconflictSummary.baselineBunchingRisk ?? 'n/a'}, direct deconflict ${challengeDeconflictSummary.bestDeconflictBunchingRisk ?? 'n/a'}, route-aware ${challengeDeconflictSummary.bestRouteAwareBunchingRisk ?? 'n/a'}, least-bunched ${challengeDeconflictSummary.leastBunchedBunchingRisk ?? 'n/a'}.`
+    : 'Deconflict underperformance report pending. Run npm run harness:analyze:challenge-deconflict-underperformance.';
+  const challengePathVisualsSummary = challengePathVisuals.summary || {};
+  const challengePathVisualsRead = challengePathVisualsSummary.candidateCount
+    ? `Path visual compares ${challengePathVisualsSummary.candidateCount} candidate route families. ${challengePathVisualsSummary.playerMeaning || 'Use it to inspect whether aliens arrive as coherent waves or collapse into unreadable clusters.'}`
+    : 'Path visual pending. Run npm run harness:analyze:challenge-path-visuals.';
+  const challengePathVisualMarkup = fs.existsSync(CHALLENGE_PATH_VISUALS_SVG)
+    ? `<figure class="evidenceFigure"><img src="reference-artifacts/analyses/challenge-path-visuals/latest.svg" alt="Stage challenge path visual comparison"><figcaption>Trajectory comparison across baseline, best selection, least-bunched/deconflict, and route-aware candidate families.</figcaption></figure>`
+    : '';
+  const stage7ContractCurrent = stage7AuthoringContract.current || {};
+  const stage7ContractLeast = stage7ContractCurrent.leastBunched || {};
+  const stage7ContractRoute = stage7ContractCurrent.routeAware || {};
+  const stage7ContractGates = Array.isArray(stage7AuthoringContract.promotionGates) ? stage7AuthoringContract.promotionGates : [];
+  const stage7ContractNext = Array.isArray(stage7AuthoringContract.nextWork) ? stage7AuthoringContract.nextWork : [];
+  const stage7ContractRead = stage7AuthoringContract.challengeNumber
+    ? `Stage ${stage7AuthoringContract.stage} / Challenging Stage ${stage7AuthoringContract.challengeNumber}: ${stage7AuthoringContract.targetGroups?.length || 0} target group(s). Current best ${stage7ContractCurrent.best?.candidateId || 'pending'} has bunching risk ${stage7ContractCurrent.best?.bunchingRisk ?? 'n/a'} and magic risk ${stage7ContractCurrent.best?.magicAppearanceRisk ?? 'n/a'}; least-bunched ${stage7ContractLeast.candidateId || 'pending'} has risk ${stage7ContractLeast.bunchingRisk ?? 'n/a'}; route-aware ${stage7ContractRoute.candidateId || 'pending'} has risk ${stage7ContractRoute.bunchingRisk ?? 'n/a'}. Decision: ${stage7ContractCurrent.keeperDecision || 'pending'}.`
+    : 'Stage 7 authoring contract pending. Run npm run harness:analyze:stage7-authoring-contract.';
   const challengeSweepIndexRows = Array.isArray(challengeCandidateSweepIndex.rows) ? challengeCandidateSweepIndex.rows : [];
   const challengeSweepIndexRead = challengeSweepIndexRows.length
     ? challengeSweepIndexRows.map(row => {
@@ -6135,6 +6439,11 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
   const challengeSetpieceContracts = loadChallengeSetpieceContracts();
   const challengeSetpieceSummary = challengeSetpieceContracts.summary || {};
   const challengeSetpieceRows = renderChallengeSetpieceContractRows(challengeSetpieceContracts);
+  const challengeMotionSpec = loadChallengeMotionSpec();
+  const challengeMotionSpecSummary = challengeMotionSpec.summary || {};
+  const challengeMotionSpecRead = challengeMotionSpecSummary.groupCount
+    ? `Challenge ${challengeMotionSpec.spec?.challengeNumber || 'n/a'} / internal Stage ${challengeMotionSpec.spec?.stage || 'n/a'} has ${challengeMotionSpecSummary.groupCount} runtime-facing spec group(s), ${challengeMotionSpecSummary.referenceBackedGroupCount || 0} reference-backed, using ${challengeMotionSpec.spec?.evaluator || 'pending'}. The strict score has not lifted yet; this is a measured seam for the next tuning pass.`
+    : 'Runtime-facing challenge motion spec pending. Run npm run harness:analyze:challenge-motion-spec.';
   const gameplaySegmentCapture = loadGameplaySegmentCapture();
   const gameplaySegmentEvidence = renderGameplaySegmentCaptureEvidence(gameplaySegmentCapture);
   const stage7ReferencePathBeforeAfter = loadStage7ReferencePathBeforeAfter();
@@ -7005,13 +7314,21 @@ function buildApplicationGuide(buildInfo, latestNote, guide){
             <p>${esc(challengeSummary.weakestFinding || 'Run the challenge-stage conformance analyzer to refresh this readout.')}</p>
             <p class="docMeta"><strong>Scoring model:</strong> ${esc(challengeSummary.scoringModel || 'strict-v2')}. Each challenge starts at 1/10 for interest, movement, and graphics; no-shot/no-kill safety is a required guardrail, not a score booster. Legacy broad coverage is diagnostic only.</p>
             <p class="docMeta"><strong>Latest candidate sweep:</strong> Stage ${esc(challengeCandidateSweep.stage || 'n/a')} measured ${esc(challengeCandidateSweep.candidateCount || challengeSweepRetention.totalMeasured || 'n/a')} candidates and retained ${esc(challengeSweepRetention.retained || 'n/a')} review rows. Decision: <strong>${esc(challengeSweepSummary.keeperDecision || 'pending')}</strong>. Best candidate ${esc(challengeSweepSummary.bestCandidateId || 'pending')} scored ${esc(challengeSweepSummary.bestExpectedScore10 ?? 'n/a')}/10 expected-reference and ${esc(challengeSweepSummary.bestTargetVideoObjectFitScore10 ?? 'n/a')}/10 target-video fit. This is process evidence unless the full analyzer and guardrails confirm a runtime promotion.</p>
+            <p class="docMeta"><strong>Readability diagnostics:</strong> ${esc(challengeSweepRetention.readabilityDiagnostics || 0)} row(s) retained. ${esc(challengeReadabilityRead)}</p>
+            <p class="docMeta"><strong>Swarm readability visual:</strong> ${esc(challengeReadabilityVisualsRead)}</p>
+            ${challengeReadabilityVisualMarkup}
+            <p class="docMeta"><strong>Deconflict underperformance:</strong> ${esc(challengeDeconflictRead)} Best deconflict row: <code>${esc(challengeDeconflictRows.bestDeconflict?.candidateId || 'pending')}</code>; best route-aware row: <code>${esc(challengeDeconflictRows.bestRouteAware?.candidateId || 'pending')}</code>. Source artifact: <code>reference-artifacts/analyses/challenge-deconflict-underperformance/latest.json</code>.</p>
+            <p class="docMeta"><strong>Route/path visual:</strong> ${esc(challengePathVisualsRead)} Source artifact: <code>reference-artifacts/analyses/challenge-path-visuals/latest.json</code>.</p>
+            ${challengePathVisualMarkup}
+            <p class="docMeta"><strong>Stage 7 authoring contract:</strong> ${esc(stage7ContractRead)} Gates: ${esc(stage7ContractGates.slice(0, 4).join(' ') || 'pending')}. Next: ${esc(stage7ContractNext.slice(0, 4).join(' ') || 'pending')}. Source artifact: <code>reference-artifacts/analyses/stage7-authoring-contract/latest.json</code>.</p>
             <p class="docMeta"><strong>Full-analyzer candidate review:</strong> ${esc(challengeCandidateFullAnalyzerRead)} Source artifact: <code>reference-artifacts/analyses/challenge-stage-candidate-full-analyzer-review/latest.json</code>.</p>
             <p class="docMeta"><strong>Candidate sweep matrix:</strong> ${esc(challengeSweepIndexSummary.stagesCovered || 0)} stage(s), ${esc(challengeSweepIndexSummary.totalCandidateCount || 0)} latest per-stage candidates represented, ${esc(challengeSweepIndexSummary.runtimeReadyCount || 0)} runtime-ready. ${esc(challengeSweepIndexRead)}</p>
             <p class="docMeta"><strong>Target trajectory controls:</strong> ${esc(challengeTrajectoryRead)} Source artifact: <code>reference-artifacts/analyses/challenge-trajectory-controls/latest.json</code>.</p>
             <p class="docMeta"><strong>Set-piece contracts:</strong> ${esc(challengeSetpieceSummary.contractCount || 0)} challenge contract(s), ${esc(challengeSetpieceSummary.referenceBackedGroupCount || 0)}/${esc(challengeSetpieceSummary.expectedGroupCount || 0)} reference-backed groups, current average ${esc(challengeSetpieceSummary.averageCurrentScore10 ?? 'n/a')}/10, target-contract fit ${esc(challengeSetpieceSummary.averageTargetContractFitScore10 ?? 'n/a')}/10. Source artifact: <code>reference-artifacts/analyses/challenge-setpiece-contracts/latest.json</code>.</p>
+            <p class="docMeta"><strong>Runtime motion spec trial:</strong> ${esc(challengeMotionSpecRead)} Source artifact: <code>reference-artifacts/analyses/challenge-motion-spec/latest.json</code>.</p>
             <p class="docMeta"><strong>Source artifact:</strong> <code>reference-artifacts/analyses/challenge-stage-conformance/latest.json</code>. <strong>Report:</strong> <code>CHALLENGE_STAGE_CONFORMANCE_ANALYSIS.md</code>.</p>
             ${gameplaySegmentEvidence}
-            <p class="docMeta"><strong>Naming rule:</strong> normal Levels and Challenging Stages are separate. The challenge rows below use labels like <strong>Challenging Stage 3-4</strong> instead of calling that set piece Level 4.</p>
+            <p class="docMeta"><strong>Naming rule:</strong> normal Levels and Challenging Stages are separate. The challenge rows below preserve internal stage markers for traceability; human-facing copy should use between-stage labels like <strong>Challenging Stage A-B</strong> once the runtime mapping is confirmed.</p>
             <p class="docMeta"><strong>Evidence-image rule:</strong> contact sheets are supporting artifacts for visual inspection, not the main human-readable conformance explanation. Use each row's target/current/conformance text for the judgment; open the evidence panel only when you need to inspect the underlying frames at native scale.</p>
             ${stage7ReferencePathEvidence}
             <div class="inlineDocShelf">

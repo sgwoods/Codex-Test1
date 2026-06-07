@@ -9,6 +9,7 @@ const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-s
 const LABELS_PATH = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-path-reference-labels', 'latest.json');
 const TARGET_TRACKS_PATH = path.join(ROOT, 'reference-artifacts', 'analyses', 'galaga-challenge-object-tracks', 'latest.json');
 const TARGET_CONTROLS_PATH = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-trajectory-controls', 'latest.json');
+const MOTION_SPEC_PATH = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-motion-spec', 'latest.json');
 const FULL_ANALYZER_REVIEW_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-full-analyzer-review');
 function argValue(name, fallback = ''){
   const prefix = `--${name}=`;
@@ -436,6 +437,174 @@ function targetVideoObjectFit(measured){
   };
 }
 
+function distance(a, b){
+  if(!a || !b) return null;
+  if(!Number.isFinite(+a.x) || !Number.isFinite(+a.y) || !Number.isFinite(+b.x) || !Number.isFinite(+b.y)) return null;
+  return Math.hypot(+a.x - +b.x, +a.y - +b.y);
+}
+
+function humanVisibleGuardrails(measured, noSafetyRegression){
+  const tracks = Array.isArray(measured?.tracks) ? measured.tracks : [];
+  const layout = measured?.layout || {};
+  const expectedGroups = Math.max(1, +layout.groups || 5);
+  const waves = new Map();
+  for(const track of tracks){
+    if(!Array.isArray(track.points) || !track.points.length) continue;
+    const wave = Number.isFinite(+track.wave) ? +track.wave : -1;
+    if(!waves.has(wave)) waves.set(wave, []);
+    waves.get(wave).push(track);
+  }
+  const leadIns = Array.isArray(measured?.leadIns) ? measured.leadIns : [];
+  const leadInWaves = new Set(leadIns.map(item => +item.wave).filter(Number.isFinite));
+  const visibleGroupCount = [...waves.keys()].filter(wave => wave >= 0).length;
+  const groupVisibility = clamp(visibleGroupCount / expectedGroups);
+  const arrivalScores = [];
+  for(const [wave, groupTracks] of waves.entries()){
+    if(wave < 0) continue;
+    const firstPoints = groupTracks
+      .map(track => (track.points || [])[0])
+      .filter(Boolean)
+      .sort((a, b) => (+a.t || 0) - (+b.t || 0))
+      .slice(0, 4);
+    const nearEdgeOrTop = firstPoints.some(point => (+point.x < 34 || +point.x > 246 || +point.y < 58));
+    const hasLeadIn = leadInWaves.has(wave);
+    const firstT = firstPoints.length ? Math.min(...firstPoints.map(point => +point.t || 0)) : null;
+    const planned = Array.isArray(layout.groupSpawnOffsets) ? +layout.groupSpawnOffsets[wave] : null;
+    const timingContinuity = Number.isFinite(firstT) && Number.isFinite(planned)
+      ? clamp(1 - Math.max(0, firstT - planned - 1.2) / 2.2)
+      : 0.65;
+    arrivalScores.push(clamp((hasLeadIn ? 0.48 : 0) + (nearEdgeOrTop ? 0.36 : 0) + timingContinuity * 0.16));
+  }
+  const arrivalContinuity = arrivalScores.length ? average(arrivalScores) : 0;
+  const magicAppearanceRisk = clamp(1 - arrivalContinuity);
+  const sampleMap = new Map();
+  for(const track of tracks){
+    for(const point of track.points || []){
+      const key = Number.isFinite(+point.t) ? (+point.t).toFixed(2) : '';
+      if(!key) continue;
+      if(!sampleMap.has(key)) sampleMap.set(key, []);
+      sampleMap.get(key).push(point);
+    }
+  }
+  const minDistances = [];
+  for(const points of sampleMap.values()){
+    if(points.length < 2) continue;
+    let min = Infinity;
+    for(let i = 0; i < points.length; i += 1){
+      for(let j = i + 1; j < points.length; j += 1){
+        const d = distance(points[i], points[j]);
+        if(Number.isFinite(d)) min = Math.min(min, d);
+      }
+    }
+    if(Number.isFinite(min)) minDistances.push(min);
+  }
+  const crampedSamples = minDistances.filter(value => value < 7.5).length;
+  const bunchingRisk = minDistances.length ? clamp(crampedSamples / minDistances.length) : 0;
+  const spacingScore = minDistances.length
+    ? clamp((average(minDistances.map(value => clamp(value / 13))) * 0.72) + ((1 - bunchingRisk) * 0.28))
+    : 0.6;
+  const trackDensity = clamp(tracks.length / Math.max(1, expectedGroups * 5));
+  const coverage = clamp(
+    (0.24 * groupVisibility)
+    + (0.3 * arrivalContinuity)
+    + (0.28 * spacingScore)
+    + (0.1 * trackDensity)
+    + (0.08 * (noSafetyRegression ? 1 : 0))
+  );
+  const score10 = round(1 + coverage * 8.2, 1);
+  const pass = groupVisibility >= 0.98
+    && arrivalContinuity >= 0.58
+    && magicAppearanceRisk <= 0.42
+    && spacingScore >= 0.52
+    && bunchingRisk <= 0.36
+    && noSafetyRegression;
+  return {
+    pass,
+    score10,
+    groupVisibility: round(groupVisibility, 3),
+    visibleGroupCount,
+    expectedGroups,
+    arrivalContinuity: round(arrivalContinuity, 3),
+    magicAppearanceRisk: round(magicAppearanceRisk, 3),
+    spacingScore: round(spacingScore, 3),
+    bunchingRisk: round(bunchingRisk, 3),
+    leadInWaveCount: leadInWaves.size,
+    trackDensity: round(trackDensity, 3),
+    read: pass
+      ? `Human-visible guardrails pass: ${visibleGroupCount}/${expectedGroups} groups visible, arrival continuity ${round(arrivalContinuity, 2)}, magic-appearance risk ${round(magicAppearanceRisk, 2)}, spacing ${round(spacingScore, 2)}, bunching risk ${round(bunchingRisk, 2)}.`
+      : `Human-visible guardrails block promotion: ${visibleGroupCount}/${expectedGroups} groups visible, arrival continuity ${round(arrivalContinuity, 2)}, magic-appearance risk ${round(magicAppearanceRisk, 2)}, spacing ${round(spacingScore, 2)}, bunching risk ${round(bunchingRisk, 2)}.`
+  };
+}
+
+function visualPresenceMetrics(measured){
+  const sampleMap = new Map(SAMPLE_TIMES.map(t => [t.toFixed(2), []]));
+  const tracks = Array.isArray(measured?.tracks) ? measured.tracks : [];
+  for(const track of tracks){
+    for(const point of track.points || []){
+      const key = Number.isFinite(+point.t) ? (+point.t).toFixed(2) : '';
+      if(!key) continue;
+      if(!sampleMap.has(key)) sampleMap.set(key, []);
+      sampleMap.get(key).push(point);
+    }
+  }
+  const samples = [...sampleMap.entries()]
+    .sort((a, b) => +a[0] - +b[0])
+    .map(([t, points]) => {
+      const xs = points.map(point => +point.x).filter(Number.isFinite);
+      const ys = points.map(point => +point.y).filter(Number.isFinite);
+      return {
+        t: +t,
+        enemyCount: points.length,
+        xRange: xs.length ? round(Math.max(...xs) - Math.min(...xs), 2) : 0,
+        yRange: ys.length ? round(Math.max(...ys) - Math.min(...ys), 2) : 0
+      };
+    });
+  return {
+    averageEnemyCount: round(average(samples.map(sample => sample.enemyCount)), 2),
+    averageXRange: round(average(samples.map(sample => sample.xRange)), 2),
+    averageYRange: round(average(samples.map(sample => sample.yRange)), 2),
+    maxEnemyCount: samples.length ? Math.max(...samples.map(sample => sample.enemyCount)) : 0,
+    sampleCount: samples.length
+  };
+}
+
+function ratio(candidate, baseline){
+  const c = +candidate;
+  const b = +baseline;
+  return Number.isFinite(c) && Number.isFinite(b) && b > 0 ? round(c / b, 3) : null;
+}
+
+function visualPresenceRegressionGuard(candidateMetrics = {}, baselineMetrics = {}){
+  const enemyCountRatio = ratio(candidateMetrics.averageEnemyCount, baselineMetrics.averageEnemyCount);
+  const xRangeRatio = ratio(candidateMetrics.averageXRange, baselineMetrics.averageXRange);
+  const yRangeRatio = ratio(candidateMetrics.averageYRange, baselineMetrics.averageYRange);
+  const enemyCountDelta = round((+candidateMetrics.averageEnemyCount || 0) - (+baselineMetrics.averageEnemyCount || 0), 2);
+  const xRangeDelta = round((+candidateMetrics.averageXRange || 0) - (+baselineMetrics.averageXRange || 0), 2);
+  const yRangeDelta = round((+candidateMetrics.averageYRange || 0) - (+baselineMetrics.averageYRange || 0), 2);
+  const enemyCountPass = enemyCountRatio === null || enemyCountRatio >= 0.82;
+  const xRangePass = xRangeRatio === null || xRangeRatio >= 0.72;
+  const yRangePass = yRangeRatio === null || yRangeRatio >= 0.72;
+  const pass = enemyCountPass && xRangePass && yRangePass;
+  const blocked = [];
+  if(!enemyCountPass) blocked.push(`visible density ${enemyCountRatio}x baseline`);
+  if(!xRangePass) blocked.push(`horizontal range ${xRangeRatio}x baseline`);
+  if(!yRangePass) blocked.push(`vertical range ${yRangeRatio}x baseline`);
+  return {
+    pass,
+    baseline: baselineMetrics,
+    candidate: candidateMetrics,
+    enemyCountRatio,
+    xRangeRatio,
+    yRangeRatio,
+    enemyCountDelta,
+    xRangeDelta,
+    yRangeDelta,
+    read: pass
+      ? `Visual presence preserved versus baseline: density ${enemyCountRatio ?? 'n/a'}x, X range ${xRangeRatio ?? 'n/a'}x, Y range ${yRangeRatio ?? 'n/a'}x.`
+      : `Visual presence regression blocks promotion: ${blocked.join('; ')}.`
+  };
+}
+
 const SHOT_ROUTE_PLAYER_X = 140;
 const SHOT_ROUTE_PLAYER_Y = 338;
 const SHOT_ROUTE_BULLET_SPEED = 560;
@@ -753,6 +922,167 @@ function controlArray(values, fallback, length){
     out.push(source?.[index] ?? fallback?.[index] ?? fallback?.[0] ?? 1);
   }
   return out;
+}
+
+function challengeMotionSpecGroupsForStage(stage){
+  const artifact = readJson(MOTION_SPEC_PATH, null);
+  const spec = artifact?.spec || null;
+  if(!spec || +spec.stage !== +stage || !Array.isArray(spec.groups)) return [];
+  return spec.groups;
+}
+
+function specAwareLayoutOverride(layoutOverride){
+  const layout = layoutOverride && typeof layoutOverride === 'object' ? Object.assign({}, layoutOverride) : {};
+  const sourceGroups = Array.isArray(layout.motionSpecGroups) && layout.motionSpecGroups.length
+    ? layout.motionSpecGroups
+    : challengeMotionSpecGroupsForStage(STAGE);
+  if(!sourceGroups.length) return layout;
+  const arcs = Array.isArray(layout.groupArcAmps) ? layout.groupArcAmps : [];
+  const drops = Array.isArray(layout.groupDropAmps) ? layout.groupDropAmps : [];
+  const speeds = Array.isArray(layout.groupSpeedScales) ? layout.groupSpeedScales : [];
+  const lowerBiases = Array.isArray(layout.groupLowerFieldBiases) ? layout.groupLowerFieldBiases : [];
+  const yOffsets = Array.isArray(layout.groupYOffsets) ? layout.groupYOffsets : [];
+  const spawnOffsets = Array.isArray(layout.groupSpawnOffsets) ? layout.groupSpawnOffsets : [];
+  const laneSpreadScales = Array.isArray(layout.groupLaneSpreadScales) ? layout.groupLaneSpreadScales : [];
+  const rowSpreadScales = Array.isArray(layout.groupRowSpreadScales) ? layout.groupRowSpreadScales : [];
+  const laneStaggers = Array.isArray(layout.groupLaneStaggers) ? layout.groupLaneStaggers : [];
+  const phaseOffsets = Array.isArray(layout.groupPhaseOffsets) ? layout.groupPhaseOffsets : [];
+  const lanePhaseOffsets = Array.isArray(layout.groupLanePhaseOffsets) ? layout.groupLanePhaseOffsets : [];
+  const slotDelays = Array.isArray(layout.groupSlotDelays) ? layout.groupSlotDelays : [];
+  const slotXOffsets = Array.isArray(layout.groupSlotXOffsets) ? layout.groupSlotXOffsets : [];
+  const slotYOffsets = Array.isArray(layout.groupSlotYOffsets) ? layout.groupSlotYOffsets : [];
+  const deconflictSpreads = Array.isArray(layout.groupDeconflictSpreads) ? layout.groupDeconflictSpreads : [];
+  const deconflictPhases = Array.isArray(layout.groupDeconflictPhases) ? layout.groupDeconflictPhases : [];
+  const deconflictLaneBiases = Array.isArray(layout.groupDeconflictLaneBiases) ? layout.groupDeconflictLaneBiases : [];
+  const deconflictYOffsets = Array.isArray(layout.groupDeconflictYOffsets) ? layout.groupDeconflictYOffsets : [];
+  const spacingFieldSpreadXs = Array.isArray(layout.groupSpacingFieldSpreadXs) ? layout.groupSpacingFieldSpreadXs : [];
+  const spacingFieldSpreadYs = Array.isArray(layout.groupSpacingFieldSpreadYs) ? layout.groupSpacingFieldSpreadYs : [];
+  const spacingFieldGateS = Array.isArray(layout.groupSpacingFieldGateS) ? layout.groupSpacingFieldGateS : [];
+  const spacingFieldPhaseS = Array.isArray(layout.groupSpacingFieldPhaseS) ? layout.groupSpacingFieldPhaseS : [];
+  const routeOffsetsX = Array.isArray(layout.groupRouteOffsetsX) ? layout.groupRouteOffsetsX : [];
+  const routeOffsetsY = Array.isArray(layout.groupRouteOffsetsY) ? layout.groupRouteOffsetsY : [];
+  const routeCurveXs = Array.isArray(layout.groupRouteCurveXs) ? layout.groupRouteCurveXs : [];
+  const routeCurveYs = Array.isArray(layout.groupRouteCurveYs) ? layout.groupRouteCurveYs : [];
+  const routePhases = Array.isArray(layout.groupRoutePhases) ? layout.groupRoutePhases : [];
+  const leadIns = Array.isArray(layout.groupLeadInS) ? layout.groupLeadInS : [];
+  const leadInArcs = Array.isArray(layout.groupLeadInArcs) ? layout.groupLeadInArcs : [];
+  const leadInStartYOffsets = Array.isArray(layout.groupLeadInStartYOffsets) ? layout.groupLeadInStartYOffsets : [];
+  const leadInSideOffsets = Array.isArray(layout.groupLeadInSideOffsets) ? layout.groupLeadInSideOffsets : [];
+  const laneOrders = Array.isArray(layout.groupLaneOrders) ? layout.groupLaneOrders : [];
+  const scalarArc = Number.isFinite(+layout.arcAmp) ? +layout.arcAmp : null;
+  const scalarDrop = Number.isFinite(+layout.dropAmp) ? +layout.dropAmp : null;
+  const scalarSpeed = Number.isFinite(+layout.speedScale) ? +layout.speedScale : null;
+  const scalarLowerBias = Number.isFinite(+layout.lowerFieldBias) ? +layout.lowerFieldBias : null;
+  const scalarYOffset = Number.isFinite(+layout.yOffset) ? +layout.yOffset : null;
+  const scalarLaneSpread = Number.isFinite(+layout.laneSpreadScale) ? +layout.laneSpreadScale : null;
+  const scalarRowSpread = Number.isFinite(+layout.rowSpreadScale) ? +layout.rowSpreadScale : null;
+  const scalarLaneStagger = Number.isFinite(+layout.laneStaggerS) ? +layout.laneStaggerS : null;
+  const scalarPhaseOffset = Number.isFinite(+layout.phaseOffsetS) ? +layout.phaseOffsetS : null;
+  const scalarLanePhaseOffsets = Array.isArray(layout.lanePhaseOffsets) ? layout.lanePhaseOffsets : null;
+  const scalarSlotDelay = Number.isFinite(+layout.slotDelay) ? +layout.slotDelay : null;
+  const scalarSlotXOffset = Number.isFinite(+layout.slotXOffset) ? +layout.slotXOffset : null;
+  const scalarSlotYOffset = Number.isFinite(+layout.slotYOffset) ? +layout.slotYOffset : null;
+  const scalarDeconflictSpread = Number.isFinite(+layout.deconflictSpread) ? +layout.deconflictSpread : null;
+  const scalarDeconflictPhase = Number.isFinite(+layout.deconflictPhase) ? +layout.deconflictPhase : null;
+  const scalarDeconflictLaneBias = Number.isFinite(+layout.deconflictLaneBias) ? +layout.deconflictLaneBias : null;
+  const scalarDeconflictYOffset = Number.isFinite(+layout.deconflictYOffset) ? +layout.deconflictYOffset : null;
+  const scalarSpacingFieldSpreadX = Number.isFinite(+layout.spacingFieldSpreadX) ? +layout.spacingFieldSpreadX : null;
+  const scalarSpacingFieldSpreadY = Number.isFinite(+layout.spacingFieldSpreadY) ? +layout.spacingFieldSpreadY : null;
+  const scalarSpacingFieldGateS = Number.isFinite(+layout.spacingFieldGateS) ? +layout.spacingFieldGateS : null;
+  const scalarSpacingFieldPhaseS = Number.isFinite(+layout.spacingFieldPhaseS) ? +layout.spacingFieldPhaseS : null;
+  const scalarRouteOffsetX = Number.isFinite(+layout.routeOffsetX) ? +layout.routeOffsetX : null;
+  const scalarRouteOffsetY = Number.isFinite(+layout.routeOffsetY) ? +layout.routeOffsetY : null;
+  const scalarRouteCurveX = Number.isFinite(+layout.routeCurveX) ? +layout.routeCurveX : null;
+  const scalarRouteCurveY = Number.isFinite(+layout.routeCurveY) ? +layout.routeCurveY : null;
+  const scalarRoutePhase = Number.isFinite(+layout.routePhaseS) ? +layout.routePhaseS : null;
+  const scalarLeadIn = Number.isFinite(+layout.leadInS) ? +layout.leadInS : null;
+  const scalarLeadInArc = Number.isFinite(+layout.leadInArc) ? +layout.leadInArc : null;
+  const scalarLeadInStartYOffset = Number.isFinite(+layout.leadInStartYOffset) ? +layout.leadInStartYOffset : null;
+  const scalarLeadInSideOffset = Number.isFinite(+layout.leadInSideOffset) ? +layout.leadInSideOffset : null;
+  const paths = Array.isArray(layout.groupPathFamilies) ? layout.groupPathFamilies : [];
+  const normalizeLanePhaseOffsets = values => Array.isArray(values)
+    ? values.slice(0, 8).map(value => round(Number.isFinite(+value) ? +value : 0, 3))
+    : null;
+  layout.motionSpecGroups = sourceGroups.map((group, index) => {
+    const controls = Object.assign({}, group.controls || {});
+    const spawnOffset = Number.isFinite(+spawnOffsets[index]) ? +spawnOffsets[index] : null;
+    const arc = Number.isFinite(+arcs[index]) ? +arcs[index] : scalarArc;
+    const drop = Number.isFinite(+drops[index]) ? +drops[index] : scalarDrop;
+    const speed = Number.isFinite(+speeds[index]) ? +speeds[index] : scalarSpeed;
+    const lowerBias = Number.isFinite(+lowerBiases[index]) ? +lowerBiases[index] : scalarLowerBias;
+    const yOffset = Number.isFinite(+yOffsets[index]) ? +yOffsets[index] : scalarYOffset;
+    const laneSpread = Number.isFinite(+laneSpreadScales[index]) ? +laneSpreadScales[index] : scalarLaneSpread;
+    const rowSpread = Number.isFinite(+rowSpreadScales[index]) ? +rowSpreadScales[index] : scalarRowSpread;
+    const laneStagger = Number.isFinite(+laneStaggers[index]) ? +laneStaggers[index] : scalarLaneStagger;
+    const phaseOffset = Number.isFinite(+phaseOffsets[index]) ? +phaseOffsets[index] : scalarPhaseOffset;
+    const lanePhaseOffset = normalizeLanePhaseOffsets(lanePhaseOffsets[index]) || normalizeLanePhaseOffsets(scalarLanePhaseOffsets);
+    const slotDelay = Number.isFinite(+slotDelays[index]) ? +slotDelays[index] : scalarSlotDelay;
+    const slotXOffset = Number.isFinite(+slotXOffsets[index]) ? +slotXOffsets[index] : scalarSlotXOffset;
+    const slotYOffset = Number.isFinite(+slotYOffsets[index]) ? +slotYOffsets[index] : scalarSlotYOffset;
+    const deconflictSpread = Number.isFinite(+deconflictSpreads[index]) ? +deconflictSpreads[index] : scalarDeconflictSpread;
+    const deconflictPhase = Number.isFinite(+deconflictPhases[index]) ? +deconflictPhases[index] : scalarDeconflictPhase;
+    const deconflictLaneBias = Number.isFinite(+deconflictLaneBiases[index]) ? +deconflictLaneBiases[index] : scalarDeconflictLaneBias;
+    const deconflictYOffset = Number.isFinite(+deconflictYOffsets[index]) ? +deconflictYOffsets[index] : scalarDeconflictYOffset;
+    const spacingFieldSpreadX = Number.isFinite(+spacingFieldSpreadXs[index]) ? +spacingFieldSpreadXs[index] : scalarSpacingFieldSpreadX;
+    const spacingFieldSpreadY = Number.isFinite(+spacingFieldSpreadYs[index]) ? +spacingFieldSpreadYs[index] : scalarSpacingFieldSpreadY;
+    const spacingFieldGate = Number.isFinite(+spacingFieldGateS[index]) ? +spacingFieldGateS[index] : scalarSpacingFieldGateS;
+    const spacingFieldPhase = Number.isFinite(+spacingFieldPhaseS[index]) ? +spacingFieldPhaseS[index] : scalarSpacingFieldPhaseS;
+    const routeOffsetX = Number.isFinite(+routeOffsetsX[index]) ? +routeOffsetsX[index] : scalarRouteOffsetX;
+    const routeOffsetY = Number.isFinite(+routeOffsetsY[index]) ? +routeOffsetsY[index] : scalarRouteOffsetY;
+    const routeCurveX = Number.isFinite(+routeCurveXs[index]) ? +routeCurveXs[index] : scalarRouteCurveX;
+    const routeCurveY = Number.isFinite(+routeCurveYs[index]) ? +routeCurveYs[index] : scalarRouteCurveY;
+    const routePhase = Number.isFinite(+routePhases[index]) ? +routePhases[index] : scalarRoutePhase;
+    const leadIn = Number.isFinite(+leadIns[index]) ? +leadIns[index] : scalarLeadIn;
+    const leadInArc = Number.isFinite(+leadInArcs[index]) ? +leadInArcs[index] : scalarLeadInArc;
+    const leadInStartYOffset = Number.isFinite(+leadInStartYOffsets[index]) ? +leadInStartYOffsets[index] : scalarLeadInStartYOffset;
+    const leadInSideOffset = Number.isFinite(+leadInSideOffsets[index]) ? +leadInSideOffsets[index] : scalarLeadInSideOffset;
+    if(Number.isFinite(+arc)) controls.arcAmp = round(+arc, 3);
+    if(Number.isFinite(+drop)) controls.dropAmp = round(+drop, 3);
+    if(Number.isFinite(+speed)){
+      controls.speedScale = round(+speed, 3);
+      controls.softSpeedScale = round(+speed, 3);
+    }
+    if(Number.isFinite(+lowerBias)) controls.lowerFieldBias = Math.round(+lowerBias);
+    if(Number.isFinite(+yOffset)) controls.yOffset = Math.round(+yOffset);
+    if(Number.isFinite(+laneSpread)) controls.laneSpreadScale = round(+laneSpread, 3);
+    if(Number.isFinite(+rowSpread)) controls.rowSpreadScale = round(+rowSpread, 3);
+    if(Number.isFinite(+laneStagger)) controls.laneStaggerS = round(+laneStagger, 3);
+    if(Number.isFinite(+phaseOffset)) controls.phaseOffsetS = round(+phaseOffset, 3);
+    if(lanePhaseOffset && lanePhaseOffset.length) controls.lanePhaseOffsets = lanePhaseOffset;
+    if(Number.isFinite(+slotDelay)) controls.slotDelayS = round(+slotDelay, 3);
+    if(Number.isFinite(+slotXOffset)) controls.slotXOffset = round(+slotXOffset, 3);
+    if(Number.isFinite(+slotYOffset)) controls.slotYOffset = round(+slotYOffset, 3);
+    if(Number.isFinite(+deconflictSpread)) controls.deconflictSpread = round(+deconflictSpread, 3);
+    if(Number.isFinite(+deconflictPhase)) controls.deconflictPhase = round(+deconflictPhase, 3);
+    if(Number.isFinite(+deconflictLaneBias)) controls.deconflictLaneBias = round(+deconflictLaneBias, 3);
+    if(Number.isFinite(+deconflictYOffset)) controls.deconflictYOffset = round(+deconflictYOffset, 3);
+    if(Number.isFinite(+spacingFieldSpreadX)) controls.spacingFieldSpreadX = round(+spacingFieldSpreadX, 3);
+    if(Number.isFinite(+spacingFieldSpreadY)) controls.spacingFieldSpreadY = round(+spacingFieldSpreadY, 3);
+    if(Number.isFinite(+spacingFieldGate)) controls.spacingFieldGateS = round(+spacingFieldGate, 3);
+    if(Number.isFinite(+spacingFieldPhase)) controls.spacingFieldPhaseS = round(+spacingFieldPhase, 3);
+    if(Number.isFinite(+routeOffsetX)) controls.routeOffsetX = round(+routeOffsetX, 3);
+    if(Number.isFinite(+routeOffsetY)) controls.routeOffsetY = round(+routeOffsetY, 3);
+    if(Number.isFinite(+routeCurveX)) controls.routeCurveX = round(+routeCurveX, 3);
+    if(Number.isFinite(+routeCurveY)) controls.routeCurveY = round(+routeCurveY, 3);
+    if(Number.isFinite(+routePhase)) controls.routePhaseS = round(+routePhase, 3);
+    if(Number.isFinite(+leadIn)) controls.leadInS = round(+leadIn, 3);
+    if(Number.isFinite(+leadInArc)) controls.leadInArc = round(+leadInArc, 3);
+    if(Number.isFinite(+leadInStartYOffset)) controls.leadInStartYOffset = round(+leadInStartYOffset, 3);
+    if(Number.isFinite(+leadInSideOffset)) controls.leadInSideOffset = round(+leadInSideOffset, 3);
+    if(Array.isArray(laneOrders[index]) && laneOrders[index].length){
+      controls.laneOrder = laneOrders[index].map(value => Math.max(0, Math.min(7, Math.round(+value || 0))));
+    }
+    const phaseDurations = Object.assign({}, group.phaseDurations || {});
+    if(Number.isFinite(+leadIn)) phaseDurations.leadInS = round(+leadIn, 3);
+    return Object.assign({}, group, {
+      spawnOffsetS: Number.isFinite(+spawnOffset) ? round(+spawnOffset, 3) : group.spawnOffsetS,
+      pathFamilyHint: paths[index] || group.pathFamilyHint,
+      controls,
+      phaseDurations
+    });
+  });
+  layout.specAwareCandidate = true;
+  return layout;
 }
 
 function targetTimingCandidates(base, pathSets = []){
@@ -1230,6 +1560,434 @@ function candidateDefinitions(){
         }
       }
     }
+    if(STAGE === 7){
+      const laneSpreadSets = [
+        { id: 'ref', values: [1.5, 1.04, 0.893, 1.5, 0.994] },
+        { id: 'wide', values: [1.62, 1.16, 1.02, 1.62, 1.12] },
+        { id: 'latewide', values: [1.5, 1.12, 1.1, 1.68, 1.22] },
+        { id: 'balanced', values: [1.36, 1.24, 1.16, 1.36, 1.24] }
+      ];
+      const rowSpreadSets = [
+        { id: 'ref', values: [0.937, 1.366, 0.859, 1.369, 1.369] },
+        { id: 'tall', values: [1.08, 1.48, 1.02, 1.5, 1.48] },
+        { id: 'balanced', values: [1.14, 1.22, 1.1, 1.24, 1.22] }
+      ];
+      const laneOrders = [
+        { id: 'id', value: [0, 1, 2, 3, 4, 5, 6, 7] },
+        { id: 'pair', value: [0, 2, 1, 3, 4, 6, 5, 7] },
+        { id: 'outer', value: [0, 3, 1, 2, 4, 7, 5, 6] },
+        { id: 'fan', value: [3, 1, 0, 2, 5, 7, 4, 6] }
+      ];
+      const laneStaggers = [0, 0.025, 0.045];
+      const slotDelays = [0.14, 0.18, 0.22];
+      const phaseOffsetSets = [
+        { id: 'sync', values: [0, 0, 0, 0, 0] },
+        { id: 'ripple', values: [-0.06, 0, 0.05, 0.09, 0.13] },
+        { id: 'latehold', values: [0, 0.04, 0.08, 0.16, 0.2] }
+      ];
+      for(const laneSpread of laneSpreadSets){
+        for(const rowSpread of rowSpreadSets){
+          for(const laneOrder of laneOrders){
+            for(const laneStaggerS of laneStaggers){
+              for(const slotDelay of slotDelays){
+                for(const phaseOffsets of phaseOffsetSets){
+                  candidates.push({
+                    id: `stage7-read-${laneSpread.id}-${rowSpread.id}-${laneOrder.id}-ls${String(laneStaggerS).replace('.','')}-sd${String(slotDelay).replace('.','')}-${phaseOffsets.id}`,
+                    description: `Stage 7 readability sweep: lane spread ${laneSpread.id}, row spread ${rowSpread.id}, lane order ${laneOrder.id}, lane stagger ${laneStaggerS}, slot delay ${slotDelay}, phase ${phaseOffsets.id}.`,
+                    layoutOverride: Object.assign({}, base, {
+                      groupLaneSpreadScales: laneSpread.values,
+                      groupRowSpreadScales: rowSpread.values,
+                      groupLaneStaggers: Array.from({ length: 5 }, () => laneStaggerS),
+                      groupSlotDelays: Array.from({ length: 5 }, () => slotDelay),
+                      groupPhaseOffsets: phaseOffsets.values,
+                      groupLaneOrders: Array.from({ length: 5 }, () => laneOrder.value)
+                    })
+                  });
+                }
+              }
+            }
+          }
+        }
+      }
+      const lanePhaseSets = [
+        { id: 'sync', value: [0, 0, 0, 0, 0, 0, 0, 0] },
+        { id: 'zipper', value: [0, 0.055, 0.11, 0.165, 0, 0.055, 0.11, 0.165] },
+        { id: 'fanphase', value: [-0.08, -0.035, 0.035, 0.08, -0.08, -0.035, 0.035, 0.08] }
+      ];
+      const deconflictSpreadSets = [
+        { id: 'light', values: [4, 5, 4, 5, 4] },
+        { id: 'mid', values: [8, 9, 8, 9, 8] },
+        { id: 'strong', values: [12, 12, 10, 12, 10] },
+        { id: 'wide', values: [16, 16, 14, 16, 14] },
+        { id: 'maxsafe', values: [22, 20, 18, 22, 18] }
+      ];
+      const deconflictLaneBiasSets = [
+        { id: 'nobias', values: [0, 0, 0, 0, 0] },
+        { id: 'softbias', values: [2.5, 2.5, 2, 2.5, 2] },
+        { id: 'wavebias', values: [4.5, 4, 3.5, 4.5, 3.5] }
+      ];
+      const deconflictYOffsets = [
+        { id: 'flat', values: [0, 0, 0, 0, 0] },
+        { id: 'lift', values: [2.5, 2.5, 2, 3, 2.5] },
+        { id: 'tiered', values: [4, 3, 4, 5, 3] }
+      ];
+      const deconflictLaneOrder = [3, 1, 0, 2, 5, 7, 4, 6];
+      for(const spread of deconflictSpreadSets){
+        for(const laneBias of deconflictLaneBiasSets){
+          for(const yOffset of deconflictYOffsets){
+            for(const lanePhase of lanePhaseSets){
+              candidates.push({
+                id: `stage7-deconflict-${spread.id}-${laneBias.id}-${yOffset.id}-${lanePhase.id}`,
+                description: `Stage 7 deconfliction sweep: direct separation ${spread.id}, lane bias ${laneBias.id}, y offset ${yOffset.id}, lane phase ${lanePhase.id}.`,
+                layoutOverride: Object.assign({}, base, {
+                  groupLaneSpreadScales: [1.36, 1.24, 1.16, 1.36, 1.24],
+                  groupRowSpreadScales: [1.14, 1.22, 1.1, 1.24, 1.22],
+                  groupSlotDelays: Array.from({ length: 5 }, () => 0.18),
+                  groupLaneStaggers: Array.from({ length: 5 }, () => 0.035),
+                  groupLaneOrders: Array.from({ length: 5 }, () => deconflictLaneOrder),
+                  groupLanePhaseOffsets: Array.from({ length: 5 }, () => lanePhase.value),
+                  groupDeconflictSpreads: spread.values,
+                  groupDeconflictLaneBiases: laneBias.values,
+                  groupDeconflictYOffsets: yOffset.values,
+                  groupDeconflictPhases: [0, 0.04, 0.08, 0.12, 0.16]
+                })
+              });
+            }
+          }
+        }
+      }
+      const routeContracts = [
+        {
+          id: 'spread-left-right',
+          x: [-26, -13, 0, 14, 28],
+          y: [0, 4, -3, 5, 0],
+          curveX: [8, 10, 6, 10, 8],
+          curveY: [0, 2, 0, 2, 0],
+          phase: [0, 0.05, 0.1, 0.15, 0.2]
+        },
+        {
+          id: 'stair-step',
+          x: [-18, -8, 4, 16, 26],
+          y: [-4, 2, 8, 2, -4],
+          curveX: [10, 7, 5, 7, 10],
+          curveY: [2, 3, 4, 3, 2],
+          phase: [0, 0.08, 0.16, 0.24, 0.32]
+        },
+        {
+          id: 'crossing-lanes',
+          x: [-22, 16, -8, 20, 4],
+          y: [2, -2, 6, -4, 4],
+          curveX: [12, -10, 8, -12, 6],
+          curveY: [3, 3, 2, 4, 2],
+          phase: [0.02, 0.1, 0.18, 0.26, 0.34]
+        }
+      ];
+      const routeBaseLaneOrders = [
+        { id: 'id', value: [0, 1, 2, 3, 4, 5, 6, 7] },
+        { id: 'fan', value: [3, 1, 0, 2, 5, 7, 4, 6] }
+      ];
+      const routePhase = [0, 0.045, 0.09, 0.135, 0, 0.045, 0.09, 0.135];
+      for(const contract of routeContracts){
+        for(const laneOrder of routeBaseLaneOrders){
+          for(const slotDelay of [0.16, 0.2, 0.24]){
+            candidates.push({
+              id: `stage7-route-${contract.id}-${laneOrder.id}-sd${String(slotDelay).replace('.','')}`,
+              description: `Stage 7 route-aware contract candidate: ${contract.id}, lane order ${laneOrder.id}, slot delay ${slotDelay}.`,
+              layoutOverride: Object.assign({}, base, {
+                groupLaneSpreadScales: [1.36, 1.24, 1.16, 1.36, 1.24],
+                groupRowSpreadScales: [1.14, 1.22, 1.1, 1.24, 1.22],
+                groupSlotDelays: Array.from({ length: 5 }, () => slotDelay),
+                groupLaneStaggers: Array.from({ length: 5 }, () => 0.035),
+                groupLaneOrders: Array.from({ length: 5 }, () => laneOrder.value),
+                groupLanePhaseOffsets: Array.from({ length: 5 }, () => routePhase),
+                groupRouteOffsetsX: contract.x,
+                groupRouteOffsetsY: contract.y,
+                groupRouteCurveXs: contract.curveX,
+                groupRouteCurveYs: contract.curveY,
+                groupRoutePhases: contract.phase
+              })
+            });
+          }
+        }
+      }
+      const leadInContracts = [
+        {
+          id: 'lead078-flat',
+          leadInS: [0.78, 0.78, 0.78, 0.78, 0.78],
+          arc: [0, 0, 0, 0, 0],
+          startY: [-8, -9, -9, -10, -10],
+          side: [46, 46, 46, 46, 46]
+        },
+        {
+          id: 'lead095-softarc',
+          leadInS: [0.9, 0.95, 0.86, 0.98, 0.92],
+          arc: [3.5, 4, 2.5, 4.5, 3.5],
+          startY: [-12, -13, -11, -14, -13],
+          side: [52, 52, 48, 54, 52]
+        },
+        {
+          id: 'lead110-widearc',
+          leadInS: [1.04, 1.1, 0.96, 1.12, 1.06],
+          arc: [5.5, 6, 4.5, 6.5, 5.5],
+          startY: [-15, -16, -13, -17, -15],
+          side: [58, 58, 54, 60, 58]
+        }
+      ];
+      for(const contract of routeContracts.slice(0, 2)){
+        for(const leadIn of leadInContracts){
+          for(const laneOrder of routeBaseLaneOrders){
+            for(const slotDelay of [0.14, 0.18]){
+              candidates.push({
+                id: `stage7-route-leadin-${contract.id}-${leadIn.id}-${laneOrder.id}-sd${String(slotDelay).replace('.','')}`,
+                description: `Stage 7 route-aware lead-in candidate: route ${contract.id}, lead-in ${leadIn.id}, lane order ${laneOrder.id}, slot delay ${slotDelay}.`,
+                layoutOverride: Object.assign({}, base, {
+                  groupLaneSpreadScales: [1.36, 1.24, 1.16, 1.36, 1.24],
+                  groupRowSpreadScales: [1.14, 1.22, 1.1, 1.24, 1.22],
+                  groupSlotDelays: Array.from({ length: 5 }, () => slotDelay),
+                  groupLaneStaggers: Array.from({ length: 5 }, () => 0.035),
+                  groupLaneOrders: Array.from({ length: 5 }, () => laneOrder.value),
+                  groupLanePhaseOffsets: Array.from({ length: 5 }, () => routePhase),
+                  groupRouteOffsetsX: contract.x,
+                  groupRouteOffsetsY: contract.y,
+                  groupRouteCurveXs: contract.curveX,
+                  groupRouteCurveYs: contract.curveY,
+                  groupRoutePhases: contract.phase,
+                  groupLeadInS: leadIn.leadInS,
+                  groupLeadInArcs: leadIn.arc,
+                  groupLeadInStartYOffsets: leadIn.startY,
+                  groupLeadInSideOffsets: leadIn.side
+                })
+              });
+            }
+          }
+        }
+      }
+      const spacingFields = [
+        {
+          id: 'softspace',
+          spread: [5, 6, 5, 6, 5],
+          bias: [1.4, 1.4, 1.2, 1.4, 1.2],
+          y: [1, 1.5, 1, 1.5, 1],
+          phase: [0, 0.025, 0.05, 0.075, 0.1]
+        },
+        {
+          id: 'tieredspace',
+          spread: [7, 8, 6, 8, 6],
+          bias: [1.8, 1.8, 1.5, 1.8, 1.5],
+          y: [2, 2.5, 2, 3, 2.5],
+          phase: [0, 0.035, 0.07, 0.105, 0.14]
+        }
+      ];
+      for(const contract of routeContracts.slice(0, 2)){
+        for(const leadIn of leadInContracts.slice(1)){
+          for(const spacing of spacingFields){
+            for(const laneOrder of routeBaseLaneOrders){
+              candidates.push({
+                id: `stage7-route-leadin-spacing-${contract.id}-${leadIn.id}-${spacing.id}-${laneOrder.id}`,
+                description: `Stage 7 combined primitive candidate: route ${contract.id}, lead-in ${leadIn.id}, spacing field ${spacing.id}, lane order ${laneOrder.id}.`,
+                layoutOverride: Object.assign({}, base, {
+                  groupLaneSpreadScales: [1.36, 1.24, 1.16, 1.36, 1.24],
+                  groupRowSpreadScales: [1.14, 1.22, 1.1, 1.24, 1.22],
+                  groupSlotDelays: Array.from({ length: 5 }, () => 0.16),
+                  groupLaneStaggers: Array.from({ length: 5 }, () => 0.035),
+                  groupLaneOrders: Array.from({ length: 5 }, () => laneOrder.value),
+                  groupLanePhaseOffsets: Array.from({ length: 5 }, () => routePhase),
+                  groupRouteOffsetsX: contract.x,
+                  groupRouteOffsetsY: contract.y,
+                  groupRouteCurveXs: contract.curveX,
+                  groupRouteCurveYs: contract.curveY,
+                  groupRoutePhases: contract.phase,
+                  groupLeadInS: leadIn.leadInS,
+                  groupLeadInArcs: leadIn.arc,
+                  groupLeadInStartYOffsets: leadIn.startY,
+                  groupLeadInSideOffsets: leadIn.side,
+                  groupDeconflictSpreads: spacing.spread,
+                  groupDeconflictLaneBiases: spacing.bias,
+                  groupDeconflictYOffsets: spacing.y,
+                  groupDeconflictPhases: spacing.phase
+                })
+              });
+            }
+          }
+        }
+      }
+      const centerlineEnvelopes = [
+        { id: 'refwide', lane: [1.36, 1.24, 1.16, 1.36, 1.24], row: [1.14, 1.22, 1.1, 1.24, 1.22] },
+        { id: 'centered', lane: [1.16, 1.1, 1.04, 1.16, 1.1], row: [1.04, 1.08, 1.02, 1.08, 1.06] }
+      ];
+      const centerlineSpacingFields = [
+        {
+          id: 'compactfield',
+          x: [3.5, 4, 3, 4, 3.5],
+          y: [2, 2.5, 2, 2.5, 2],
+          gate: [0, 0, 0, 0, 0],
+          phase: [0, 0, 0, 0, 0]
+        },
+        {
+          id: 'readablefield',
+          x: [5, 5.5, 4.5, 5.5, 5],
+          y: [3, 3.5, 3, 3.5, 3],
+          gate: [0, 0, 0, 0, 0],
+          phase: [0, 0.025, 0.05, 0.075, 0.1]
+        },
+        {
+          id: 'widefield',
+          x: [7, 7.5, 6, 7.5, 6.5],
+          y: [4, 4.5, 3.5, 4.5, 4],
+          gate: [0.45, 0.45, 0.4, 0.5, 0.45],
+          phase: [0, 0.03, 0.06, 0.09, 0.12]
+        }
+      ];
+      for(const contract of routeContracts.slice(0, 2)){
+        for(const leadIn of leadInContracts.slice(0, 2)){
+          for(const spacing of centerlineSpacingFields){
+            for(const envelope of centerlineEnvelopes){
+              for(const laneOrder of routeBaseLaneOrders){
+                for(const slotDelay of [0.14, 0.18]){
+                  candidates.push({
+                    id: `stage7-centerline-spacing-${contract.id}-${leadIn.id}-${spacing.id}-${envelope.id}-${laneOrder.id}-sd${String(slotDelay).replace('.','')}`,
+                    description: `Stage 7 centerline spacing-field candidate: route ${contract.id}, lead-in ${leadIn.id}, stable member field ${spacing.id}, envelope ${envelope.id}, lane order ${laneOrder.id}, slot delay ${slotDelay}.`,
+                    layoutOverride: Object.assign({}, base, {
+                      groupLaneSpreadScales: envelope.lane,
+                      groupRowSpreadScales: envelope.row,
+                      groupSlotDelays: Array.from({ length: 5 }, () => slotDelay),
+                      groupLaneStaggers: Array.from({ length: 5 }, () => 0.035),
+                      groupLaneOrders: Array.from({ length: 5 }, () => laneOrder.value),
+                      groupLanePhaseOffsets: Array.from({ length: 5 }, () => routePhase),
+                      groupRouteOffsetsX: contract.x,
+                      groupRouteOffsetsY: contract.y,
+                      groupRouteCurveXs: contract.curveX,
+                      groupRouteCurveYs: contract.curveY,
+                      groupRoutePhases: contract.phase,
+                      groupLeadInS: leadIn.leadInS,
+                      groupLeadInArcs: leadIn.arc,
+                      groupLeadInStartYOffsets: leadIn.startY,
+                      groupLeadInSideOffsets: leadIn.side,
+                      groupSpacingFieldSpreadXs: spacing.x,
+                      groupSpacingFieldSpreadYs: spacing.y,
+                      groupSpacingFieldGateS: spacing.gate,
+                      groupSpacingFieldPhaseS: spacing.phase
+                    })
+                  });
+                }
+              }
+            }
+          }
+        }
+      }
+      const referenceControls = targetControlsForStage(STAGE);
+      const referenceSeed = referenceControls?.runtimeLayoutSeed || {};
+      const referencePaths = Array.isArray(referenceSeed.groupReferencePaths) ? referenceSeed.groupReferencePaths : [];
+      if(referencePaths.filter(Boolean).length >= 3){
+        const referenceGroupCount = referencePaths.length;
+        const sourceSpawnOffsets = controlArray(referenceSeed.groupSpawnOffsets, [], referenceGroupCount).map(value => round(value, 2));
+        const sourceSpeedScales = controlArray(referenceSeed.groupSpeedScales, base.groupSpeedScales || [], referenceGroupCount).map(value => round(value, 2));
+        const sourceSoftSpeedScales = controlArray(referenceSeed.groupSoftSpeedScales, sourceSpeedScales, referenceGroupCount).map(value => round(value, 2));
+        const sourceArcAmps = controlArray(referenceSeed.groupArcAmps, base.groupArcAmps || [base.arcAmp || 1], referenceGroupCount).map(value => round(value, 2));
+        const sourceDropAmps = controlArray(referenceSeed.groupDropAmps, base.groupDropAmps || [base.dropAmp || 1], referenceGroupCount).map(value => round(value, 2));
+        const sourceLowerFieldBiases = controlArray(referenceSeed.groupLowerFieldBiases, [], referenceGroupCount).map(value => Math.round(+value || 0));
+        const sourceYOffsets = controlArray(referenceSeed.groupYOffsets, [], referenceGroupCount).map(value => Math.round(+value || 0));
+        const blendedLowerFieldBiases = sourceLowerFieldBiases.map(value => Math.round((+value || 0) * 0.5));
+        const blendedYOffsets = sourceYOffsets.map(value => Math.round((+value || 0) * 0.5));
+        const referencePathSets = dedupePathSets([
+          referenceSeed.groupPathFamilies,
+          base.groupPathFamilies,
+          ...pathSets
+        ]).slice(0, 3);
+        const referenceSpacingProfiles = centerlineSpacingFields.filter(profile => profile.id !== 'compactfield');
+        const referenceSpacingEnvelopes = centerlineEnvelopes;
+        const referenceSchedules = [
+          {
+            id: 'source-soft',
+            spawn: sourceSpawnOffsets,
+            speed: sourceSoftSpeedScales,
+            lower: blendedLowerFieldBiases,
+            y: blendedYOffsets
+          },
+          {
+            id: 'source-direct',
+            spawn: sourceSpawnOffsets,
+            speed: sourceSpeedScales,
+            lower: sourceLowerFieldBiases,
+            y: sourceYOffsets
+          },
+          {
+            id: 'current-safe',
+            spawn: null,
+            speed: null,
+            lower: blendedLowerFieldBiases,
+            y: blendedYOffsets
+          }
+        ];
+        for(let pathIndex = 0; pathIndex < referencePathSets.length; pathIndex += 1){
+          for(const schedule of referenceSchedules){
+            for(const spacing of referenceSpacingProfiles){
+              for(const envelope of referenceSpacingEnvelopes){
+                candidates.push({
+                  id: `stage7-target-reference-paths-spacing-${schedule.id}-${spacing.id}-${envelope.id}-p${pathIndex}`,
+                  description: `Stage 7 reference-spline plus spacing candidate: ${schedule.id} schedule, ${spacing.id} member field, ${envelope.id} envelope, path set ${pathIndex}.`,
+                  layoutOverride: Object.assign({}, base, {
+                    groupSpawnOffsets: schedule.spawn || base.groupSpawnOffsets,
+                    groupSpeedScales: schedule.speed || base.groupSpeedScales,
+                    groupArcAmps: sourceArcAmps,
+                    groupDropAmps: sourceDropAmps,
+                    groupLowerFieldBiases: schedule.lower,
+                    groupYOffsets: schedule.y,
+                    groupPathFamilies: referencePathSets[pathIndex],
+                    groupReferencePaths: referencePaths,
+                    groupLaneSpreadScales: envelope.lane,
+                    groupRowSpreadScales: envelope.row,
+                    groupSlotDelays: Array.from({ length: referenceGroupCount }, () => 0.14),
+                    groupLaneStaggers: Array.from({ length: referenceGroupCount }, () => 0.035),
+                    groupLeadInS: leadInContracts[0].leadInS,
+                    groupLeadInArcs: leadInContracts[0].arc,
+                    groupLeadInStartYOffsets: leadInContracts[0].startY,
+                    groupLeadInSideOffsets: leadInContracts[0].side,
+                    groupSpacingFieldSpreadXs: spacing.x,
+                    groupSpacingFieldSpreadYs: spacing.y,
+                    groupSpacingFieldGateS: spacing.gate,
+                    groupSpacingFieldPhaseS: spacing.phase
+                  })
+                });
+              }
+            }
+          }
+        }
+      }
+      const comboDeconflicts = [
+        { id: 'wide-soft-flat', spread: [16, 16, 14, 16, 14], bias: [2.5, 2.5, 2, 2.5, 2], y: [0, 0, 0, 0, 0], phaseSet: lanePhaseSets[0].value },
+        { id: 'strong-soft-tiered', spread: [12, 12, 10, 12, 10], bias: [2.5, 2.5, 2, 2.5, 2], y: [4, 3, 4, 5, 3], phaseSet: lanePhaseSets[1].value }
+      ];
+      for(const contract of routeContracts.slice(0, 2)){
+        for(const deconflict of comboDeconflicts){
+          for(const laneOrder of routeBaseLaneOrders){
+            for(const slotDelay of [0.14, 0.16]){
+              candidates.push({
+                id: `stage7-route-deconflict-${contract.id}-${deconflict.id}-${laneOrder.id}-sd${String(slotDelay).replace('.','')}`,
+                description: `Stage 7 route-aware plus direct deconfliction candidate: route ${contract.id}, deconflict ${deconflict.id}, lane order ${laneOrder.id}, slot delay ${slotDelay}.`,
+                layoutOverride: Object.assign({}, base, {
+                  groupLaneSpreadScales: [1.36, 1.24, 1.16, 1.36, 1.24],
+                  groupRowSpreadScales: [1.14, 1.22, 1.1, 1.24, 1.22],
+                  groupSlotDelays: Array.from({ length: 5 }, () => slotDelay),
+                  groupLaneStaggers: Array.from({ length: 5 }, () => 0.035),
+                  groupLaneOrders: Array.from({ length: 5 }, () => laneOrder.value),
+                  groupLanePhaseOffsets: Array.from({ length: 5 }, () => deconflict.phaseSet),
+                  groupRouteOffsetsX: contract.x,
+                  groupRouteOffsetsY: contract.y,
+                  groupRouteCurveXs: contract.curveX,
+                  groupRouteCurveYs: contract.curveY,
+                  groupRoutePhases: contract.phase,
+                  groupDeconflictSpreads: deconflict.spread,
+                  groupDeconflictLaneBiases: deconflict.bias,
+                  groupDeconflictYOffsets: deconflict.y,
+                  groupDeconflictPhases: [0, 0.04, 0.08, 0.12, 0.16]
+                })
+              });
+            }
+          }
+        }
+      }
+    }
     candidates.push(...targetTimingCandidates(base, pathSets));
     candidates.push(...targetControlCandidates(base, pathSets));
     return candidates;
@@ -1508,6 +2266,9 @@ async function measureCandidates(candidates){
   return withHarnessPage({ stage: STAGE, ships: 3, challenge: false, seed: 9311 }, async ({ page }) => {
     const rows = [];
     for(const candidate of candidates){
+      const runtimeCandidate = Object.assign({}, candidate, {
+        layoutOverride: specAwareLayoutOverride(candidate.layoutOverride || {})
+      });
       const measured = await page.evaluate(({ stage, sampleTimes, candidate }) => {
         const h = window.__galagaHarness__;
         h.setupChallengeMotionProfileTest({ stage, layoutOverride: candidate.layoutOverride || null });
@@ -1515,10 +2276,26 @@ async function measureCandidates(candidates){
         const eventWindowStartT = setupEvents.reduce((max, event) => Math.max(max, Number.isFinite(+event.t) ? +event.t : max), -Infinity);
         const layout = h.challengeFormationState().layout;
         const tracks = {};
+        const leadIns = {};
         const record = t => {
           const formation = h.challengeFormationState();
           for(const e of formation.enemies || []){
-            if(Number.isFinite(+e.spawn) && +e.spawn > 0.03) continue;
+            if(Number.isFinite(+e.spawn) && +e.spawn > 0.03){
+              if(Number.isFinite(+e.referenceLeadIn) && +e.referenceLeadIn > 0){
+                const wave = Number.isFinite(+e.wave) ? +e.wave : -1;
+                if(!leadIns[wave]) leadIns[wave] = [];
+                leadIns[wave].push({
+                  t,
+                  wave,
+                  lane: e.lane,
+                  referenceLeadIn: e.referenceLeadIn,
+                  spawn: e.spawn,
+                  x: e.x,
+                  y: e.y
+                });
+              }
+              continue;
+            }
             if(Number.isFinite(+e.x) && (+e.x < -12 || +e.x > 292)) continue;
             if(Number.isFinite(+e.y) && (+e.y < -24 || +e.y > 384)) continue;
             const id = `${e.wave}:${e.lane}:${e.id}`;
@@ -1564,12 +2341,18 @@ async function measureCandidates(candidates){
             enemyAttackStarts: recent.filter(e => e.type === 'enemy_attack_start').length,
             shipLosses: recent.filter(e => e.type === 'ship_loss' || e.type === 'player_loss').length
           },
+          leadIns: Object.entries(leadIns).map(([wave, points]) => ({
+            wave: +wave,
+            sampleCount: points.length,
+            firstT: points.length ? Math.min(...points.map(point => +point.t || 0)) : null,
+            maxLeadIn: points.length ? Math.max(...points.map(point => +point.referenceLeadIn || 0)) : 0
+          })),
           eventWindow: {
             startT: Number.isFinite(eventWindowStartT) ? +eventWindowStartT.toFixed(3) : null,
             sampledEvents: recent.length
           }
         };
-      }, { stage: STAGE, sampleTimes: SAMPLE_TIMES, candidate });
+      }, { stage: STAGE, sampleTimes: SAMPLE_TIMES, candidate: runtimeCandidate });
       rows.push(measured);
     }
     return rows;
@@ -1603,6 +2386,8 @@ function scoreMeasuredCandidate(measured, labels){
   const noSafetyRegression = measured.eventCounts.enemyShots === 0
     && measured.eventCounts.enemyAttackStarts === 0
     && measured.eventCounts.shipLosses === 0;
+  const visibleGuardrails = humanVisibleGuardrails(measured, noSafetyRegression);
+  const visualPresence = visualPresenceMetrics(measured);
   const bestMatch = matches[0] || null;
   const expectedScore10 = expected?.score10 || 0;
   const bestScore10 = bestMatch?.score10 || 0;
@@ -1664,15 +2449,19 @@ function scoreMeasuredCandidate(measured, labels){
     },
     targetVideoObjectFit: targetVideoFit,
     humanPerfectPotential: perfectPotential,
+    humanVisibleGuardrails: visibleGuardrails,
+    visualPresence,
     noSafetyRegression,
     selectionScore10: round(
       (expectedScore10 * 0.62)
       + (targetVideoScore10 * 0.24)
       + (humanPerfectScore10 * 0.04)
+      + ((visibleGuardrails.score10 || 0) * 0.08)
       + (adjustedIdentityConfidence * 1.1)
       + (noSafetyRegression ? 0.3 : -2.75)
       - (wrongReferencePenalty10 * 0.65)
-      - (lateWrongChallengePenalty10 * 0.85),
+      - (lateWrongChallengePenalty10 * 0.85)
+      - (visibleGuardrails.pass ? 0 : 1.4),
       2
     )
   });
@@ -1686,6 +2475,7 @@ function summarizeCandidate(row){
     targetVideoObjectFitScore10: row.targetVideoObjectFit?.score10 || null,
     humanPerfectPotentialScore10: row.humanPerfectPotential?.score10 || null,
     humanPerfectGuard: row.humanPerfectGuard || null,
+    humanVisibleGuardrails: row.humanVisibleGuardrails || null,
     selectionScore10: row.selectionScore10,
     expectedReferenceHit: !!row.expectedReferenceHit,
     stageIdentityMargin10: row.stageIdentity?.identityMargin10 ?? null,
@@ -1702,7 +2492,32 @@ function summarizeCandidate(row){
     groupPathFamilies: row.layout?.groupPathFamilies || [],
     groupSpawnOffsets: row.layout?.groupSpawnOffsets || [],
     groupLowerFieldBiases: row.layout?.groupLowerFieldBiases || [],
-    groupYOffsets: row.layout?.groupYOffsets || []
+    groupYOffsets: row.layout?.groupYOffsets || [],
+    groupLaneSpreadScales: row.layout?.groupLaneSpreadScales || [],
+    groupRowSpreadScales: row.layout?.groupRowSpreadScales || [],
+    groupLaneStaggers: row.layout?.groupLaneStaggers || [],
+    groupLanePhaseOffsets: row.layout?.groupLanePhaseOffsets || [],
+    groupSlotDelays: row.layout?.groupSlotDelays || [],
+    groupDeconflictSpreads: row.layout?.groupDeconflictSpreads || [],
+    groupDeconflictLaneBiases: row.layout?.groupDeconflictLaneBiases || [],
+    groupDeconflictYOffsets: row.layout?.groupDeconflictYOffsets || [],
+    groupDeconflictPhases: row.layout?.groupDeconflictPhases || [],
+    groupSpacingFieldSpreadXs: row.layout?.groupSpacingFieldSpreadXs || [],
+    groupSpacingFieldSpreadYs: row.layout?.groupSpacingFieldSpreadYs || [],
+    groupSpacingFieldGateS: row.layout?.groupSpacingFieldGateS || [],
+    groupSpacingFieldPhaseS: row.layout?.groupSpacingFieldPhaseS || [],
+    groupRouteOffsetsX: row.layout?.groupRouteOffsetsX || [],
+    groupRouteOffsetsY: row.layout?.groupRouteOffsetsY || [],
+    groupRouteCurveXs: row.layout?.groupRouteCurveXs || [],
+    groupRouteCurveYs: row.layout?.groupRouteCurveYs || [],
+    groupRoutePhases: row.layout?.groupRoutePhases || [],
+    groupLeadInS: row.layout?.groupLeadInS || [],
+    groupLeadInArcs: row.layout?.groupLeadInArcs || [],
+    groupLeadInStartYOffsets: row.layout?.groupLeadInStartYOffsets || [],
+    groupLeadInSideOffsets: row.layout?.groupLeadInSideOffsets || [],
+    groupLaneOrders: row.layout?.groupLaneOrders || [],
+    visualPresence: row.visualPresence || null,
+    visualPresenceRegressionGuard: row.visualPresenceRegressionGuard || null
   };
 }
 
@@ -1766,14 +2581,30 @@ function buildMarkdown(report){
     const humanPerfectRead = row.humanPerfectGuard?.pass === false
       ? `blocked: ${row.humanPerfectGuard.lift10}/10`
       : `${row.humanPerfectPotential?.score10 ?? 'n/a'}/10`;
-    return `| ${index + 1} | ${row.candidateId} | ${row.selectionScore10}/10 | ${row.expectedMatch?.score10 ?? 0}/10 | ${row.targetVideoObjectFit?.score10 ?? 'n/a'}/10 | ${humanPerfectRead} | ${row.stageIdentity?.identityMargin10 ?? 'n/a'} | ${row.bestMatch?.labelId || 'none'} (${row.bestMatch?.score10 ?? 0}/10) | ${hit} | ${eventRead} | ${fullAnalyzerRead} |`;
+    const visibleRead = row.humanVisibleGuardrails?.pass === false
+      ? `blocked: ${row.humanVisibleGuardrails.score10}/10`
+      : `${row.humanVisibleGuardrails?.score10 ?? 'n/a'}/10`;
+    const presenceRead = row.visualPresenceRegressionGuard?.pass === false
+      ? 'blocked'
+      : 'pass';
+    return `| ${index + 1} | ${row.candidateId} | ${row.selectionScore10}/10 | ${row.expectedMatch?.score10 ?? 0}/10 | ${row.targetVideoObjectFit?.score10 ?? 'n/a'}/10 | ${humanPerfectRead} | ${visibleRead} | ${presenceRead} | ${row.stageIdentity?.identityMargin10 ?? 'n/a'} | ${row.bestMatch?.labelId || 'none'} (${row.bestMatch?.score10 ?? 0}/10) | ${hit} | ${eventRead} | ${fullAnalyzerRead} |`;
   }).join('\n');
-  const diagnosticRow = row => `| ${row.candidateId} | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.humanPerfectPotentialScore10 ?? 'n/a'}/10 | ${row.stageIdentityMargin10 ?? 'n/a'} | ${row.bestMatchLabelId || 'none'} (${row.bestMatchScore10}/10) | ${row.expectedReferenceHit ? 'yes' : 'no'} | ${row.lateStageIdentityPass === false ? `blocked (${row.bestMatchChallengeNumber || 'n/a'} vs ${row.expectedChallengeNumber || 'n/a'})` : 'pass'} | ${row.humanPerfectGuard?.pass === false ? `risk ${row.humanPerfectGuard.lift10}/10` : 'pass'} | ${row.noSafetyRegression ? 'pass' : 'risk'} | ${(row.groupPathFamilies || []).join(', ') || 'default'} |`;
-  const emptyDiagnosticRow = '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const diagnosticRow = row => `| ${row.candidateId} | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.humanPerfectPotentialScore10 ?? 'n/a'}/10 | ${row.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 | ${row.visualPresenceRegressionGuard?.pass === false ? 'blocked' : 'pass'} | ${row.stageIdentityMargin10 ?? 'n/a'} | ${row.bestMatchLabelId || 'none'} (${row.bestMatchScore10}/10) | ${row.expectedReferenceHit ? 'yes' : 'no'} | ${row.lateStageIdentityPass === false ? `blocked (${row.bestMatchChallengeNumber || 'n/a'} vs ${row.expectedChallengeNumber || 'n/a'})` : 'pass'} | ${row.humanPerfectGuard?.pass === false ? `risk ${row.humanPerfectGuard.lift10}/10` : 'pass'} | ${row.humanVisibleGuardrails?.pass === false ? 'blocked' : 'pass'} | ${row.noSafetyRegression ? 'pass' : 'risk'} | ${(row.groupPathFamilies || []).join(', ') || 'default'} |`;
+  const emptyDiagnosticRow = '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
   const targetTimingRows = (report.diagnostics?.targetTimingTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
   const targetControlRows = (report.diagnostics?.targetControlTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
   const targetReferencePathRows = (report.diagnostics?.targetReferencePathTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
   const pathShapeRows = (report.diagnostics?.pathShapeTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
+  const readabilityRows = (report.diagnostics?.readabilityTop || []).map(diagnosticRow).join('\n') || emptyDiagnosticRow;
+  const leastBunchedRow = row => `| ${row.candidateId} | ${row.humanVisibleGuardrails?.bunchingRisk ?? 'n/a'} | ${row.humanVisibleGuardrails?.spacingScore ?? 'n/a'} | ${row.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 | ${row.humanPerfectPotentialScore10 ?? 'n/a'}/10 | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.noSafetyRegression ? 'pass' : 'risk'} | ${(row.groupDeconflictSpreads || []).join(', ') || 'none'} | ${(row.groupLanePhaseOffsets?.[0] || []).join(', ') || 'none'} |`;
+  const leastBunchedRows = (report.diagnostics?.leastBunchedTop || []).map(leastBunchedRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const deconflictRows = (report.diagnostics?.deconflictTop || []).map(leastBunchedRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const routeRow = row => `| ${row.candidateId} | ${row.humanVisibleGuardrails?.bunchingRisk ?? 'n/a'} | ${row.humanVisibleGuardrails?.magicAppearanceRisk ?? 'n/a'} | ${row.humanVisibleGuardrails?.spacingScore ?? 'n/a'} | ${row.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 | ${row.humanPerfectPotentialScore10 ?? 'n/a'}/10 | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${(row.groupLeadInS || []).join(', ') || 'default'} | ${(row.groupRouteOffsetsX || []).join(', ') || 'none'} | ${(row.groupRouteOffsetsY || []).join(', ') || 'none'} |`;
+  const routeRows = (report.diagnostics?.routeAwareTop || []).map(routeRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const leadInRows = (report.diagnostics?.leadInTop || []).map(routeRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const spacingFieldRow = row => `| ${row.candidateId} | ${row.humanVisibleGuardrails?.bunchingRisk ?? 'n/a'} | ${row.humanVisibleGuardrails?.magicAppearanceRisk ?? 'n/a'} | ${row.humanVisibleGuardrails?.spacingScore ?? 'n/a'} | ${row.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 | ${row.humanPerfectPotentialScore10 ?? 'n/a'}/10 | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${(row.groupSpacingFieldSpreadXs || []).join(', ') || 'none'} | ${(row.groupSpacingFieldSpreadYs || []).join(', ') || 'none'} | ${(row.groupSpacingFieldGateS || []).join(', ') || 'full'} |`;
+  const centerlineSpacingFieldRows = (report.diagnostics?.centerlineSpacingFieldTop || report.diagnostics?.spacingFieldTop || []).map(spacingFieldRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const referenceSplineSpacingRows = (report.diagnostics?.referenceSplineSpacingTop || []).map(spacingFieldRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
   return `# Stage ${report.stage} Challenge Candidate Sweep
 
 Generated: ${report.generatedAt}
@@ -1792,14 +2623,16 @@ Stage ${report.stage} currently has safe challenge behavior but still does not c
 - Best candidate human-perfect potential: ${report.summary.bestHumanPerfectPotentialScore10}/10.
 - Best candidate: ${report.summary.bestCandidateId}.
 - Keeper decision: ${report.summary.keeperDecision}.
+- Promotion blockers: ${(report.summary.promotionBlockers || []).length ? report.summary.promotionBlockers.join(' ') : 'none'}.
+- Promotion wins: ${(report.summary.promotionWins || []).length ? report.summary.promotionWins.join(' ') : 'none'}.
 - Player-facing meaning: ${report.summary.playerMeaning}
 - Process meaning: ${report.summary.processMeaning}
-- Candidate retention: ${report.candidateRetention?.retained ?? report.candidates.length}/${report.candidateRetention?.totalMeasured ?? report.candidateCount} retained; ${report.candidateRetention?.targetTimingDiagnostics ?? 0} target-timing diagnostics, ${report.candidateRetention?.targetControlDiagnostics ?? 0} target-control diagnostics, ${report.candidateRetention?.targetReferencePathDiagnostics ?? 0} target-reference-path diagnostics, and ${report.candidateRetention?.pathShapeDiagnostics ?? 0} path-shape diagnostics preserved.
+- Candidate retention: ${report.candidateRetention?.retained ?? report.candidates.length}/${report.candidateRetention?.totalMeasured ?? report.candidateCount} retained; ${report.candidateRetention?.targetTimingDiagnostics ?? 0} target-timing diagnostics, ${report.candidateRetention?.targetControlDiagnostics ?? 0} target-control diagnostics, ${report.candidateRetention?.targetReferencePathDiagnostics ?? 0} target-reference-path diagnostics, ${report.candidateRetention?.pathShapeDiagnostics ?? 0} path-shape diagnostics, ${report.candidateRetention?.readabilityDiagnostics ?? 0} readability diagnostics, ${report.candidateRetention?.leastBunchedDiagnostics ?? 0} least-bunched diagnostics, ${report.candidateRetention?.centerlineSpacingFieldDiagnostics ?? report.candidateRetention?.spacingFieldDiagnostics ?? 0} centerline spacing-field diagnostics, and ${report.candidateRetention?.referenceSplineSpacingDiagnostics ?? 0} reference-spline spacing diagnostics preserved.
 
 ## Top Candidates
 
-| Rank | Candidate | Selection | Expected Labels | Target-Video Fit | Human-Perfect | Identity Margin | Best Match | Expected Hit | Safety | Full Analyzer Gate |
-| ---: | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- |
+| Rank | Candidate | Selection | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Presence | Identity Margin | Best Match | Expected Hit | Safety | Full Analyzer Gate |
+| ---: | --- | ---: | ---: | ---: | ---: | ---: | --- | ---: | --- | --- | --- | --- |
 ${topRows}
 
 ## Diagnostic Candidates
@@ -1808,27 +2641,81 @@ These rows are intentionally retained even when they are not promotion candidate
 
 ### Target-Timing Diagnostics
 
-| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Safety | Paths |
-| --- | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- |
+| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Presence | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Visible Guard | Safety | Paths |
+| --- | ---: | ---: | ---: | ---: | --- | ---: | --- | --- | --- | --- | --- | --- | --- |
 ${targetTimingRows}
 
 ### Target-Control Diagnostics
 
-| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Safety | Paths |
-| --- | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- |
+| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Presence | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Visible Guard | Safety | Paths |
+| --- | ---: | ---: | ---: | ---: | --- | ---: | --- | --- | --- | --- | --- | --- | --- |
 ${targetControlRows}
 
 ### Target Reference-Path Diagnostics
 
-| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Safety | Paths |
-| --- | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- |
+| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Presence | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Visible Guard | Safety | Paths |
+| --- | ---: | ---: | ---: | ---: | --- | ---: | --- | --- | --- | --- | --- | --- | --- |
 ${targetReferencePathRows}
 
 ### Path-Shape Diagnostics
 
-| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Safety | Paths |
-| --- | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- |
+| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Presence | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Visible Guard | Safety | Paths |
+| --- | ---: | ---: | ---: | ---: | --- | ---: | --- | --- | --- | --- | --- | --- | --- |
 ${pathShapeRows}
+
+### Readability Diagnostics
+
+| Candidate | Expected Labels | Target-Video Fit | Human-Perfect | Human-Visible | Presence | Identity Margin | Best Match | Expected Hit | Late Identity | Human Guard | Visible Guard | Safety | Paths |
+| --- | ---: | ---: | ---: | ---: | --- | ---: | --- | --- | --- | --- | --- | --- | --- |
+${readabilityRows}
+
+### Least-Bunched Diagnostics
+
+These rows are ranked by lowest measured nearest-neighbor bunching risk first. They are process diagnostics: a low bunching score is useful only if it preserves visible scoring windows, expected stage identity, and safety.
+
+| Candidate | Bunching Risk | Spacing | Human-Visible | Human-Perfect | Expected Labels | Target-Video Fit | Safety | Deconflict Spread | First Lane Phase Set |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
+${leastBunchedRows}
+
+### Deconflict Primitive Diagnostics
+
+These rows isolate the new direct separation primitive. If they do not appear among the least-bunched rows, the primitive ranges or scoring windows still need work before promotion.
+
+| Candidate | Bunching Risk | Spacing | Human-Visible | Human-Perfect | Expected Labels | Target-Video Fit | Safety | Deconflict Spread | First Lane Phase Set |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
+${deconflictRows}
+
+### Route-Aware Group Diagnostics
+
+These rows test coherent whole-group route offsets. They are intended to reduce inter-group overlap and magic appearance without making individual aliens jitter away from their authored wave.
+
+| Candidate | Bunching Risk | Magic Risk | Spacing | Human-Visible | Human-Perfect | Expected Labels | Target-Video Fit | Lead-In S | Route X Offsets | Route Y Offsets |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
+${routeRows}
+
+### Lead-In Continuity Diagnostics
+
+These rows isolate candidates that explicitly manipulate the challenge lead-in phase. They are useful when magic appearance improves but bunching, target identity, or scoring-window quality still block promotion.
+
+| Candidate | Bunching Risk | Magic Risk | Spacing | Human-Visible | Human-Perfect | Expected Labels | Target-Video Fit | Lead-In S | Route X Offsets | Route Y Offsets |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
+${leadInRows}
+
+### Centerline Spacing Field Diagnostics
+
+These rows isolate stable per-member offsets from a group centerline without mixing in reference-spline path playback. They are intended to keep each wave readable as a coherent formation rather than relying on late deconfliction or letting enemies visually bunch into pairs.
+
+| Candidate | Bunching Risk | Magic Risk | Spacing | Human-Visible | Human-Perfect | Expected Labels | Target-Video Fit | Field X | Field Y | Gate S |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
+${centerlineSpacingFieldRows}
+
+### Reference-Spline Plus Spacing Diagnostics
+
+These rows compose ingested reference paths with spacing-field offsets. They are useful when target-video fit improves, but they must still preserve visual presence, expected-label identity, and professional perfect-route potential before promotion.
+
+| Candidate | Bunching Risk | Magic Risk | Spacing | Human-Visible | Human-Perfect | Expected Labels | Target-Video Fit | Field X | Field Y | Gate S |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
+${referenceSplineSpacingRows}
 
 ## Next Step
 
@@ -1849,6 +2736,8 @@ async function main(){
   const baselineExpectedScore = baseline.expectedMatch?.score10 || 0;
   const baselineTargetVideoScore = baseline.targetVideoObjectFit?.score10 || 0;
   const baselineHumanPerfectScore = baseline.humanPerfectPotential?.score10 || 0;
+  const baselineHumanVisibleScore = baseline.humanVisibleGuardrails?.score10 || 0;
+  const baselineVisualPresence = baseline.visualPresence || visualPresenceMetrics(baseline);
   const rejectedFullAnalyzerReviews = rejectedFullAnalyzerReviewsForStage(STAGE);
   for(const row of scored){
     const humanPerfectLift = round((row.humanPerfectPotential?.score10 || 0) - baselineHumanPerfectScore, 2);
@@ -1861,6 +2750,7 @@ async function main(){
         ? `Human-perfect potential preserved (${humanPerfectLift >= 0 ? '+' : ''}${humanPerfectLift}/10 versus baseline).`
         : `Human-perfect potential regressed ${Math.abs(humanPerfectLift)}/10 versus baseline; block runtime promotion until a full player-route review explains the tradeoff.`
     };
+    row.visualPresenceRegressionGuard = visualPresenceRegressionGuard(row.visualPresence || visualPresenceMetrics(row), baselineVisualPresence);
     row.fullAnalyzerRisk = fullAnalyzerRiskForCandidate(row, {
       baselineExpectedScore,
       baselineTargetVideoScore,
@@ -1871,6 +2761,9 @@ async function main(){
     const candidateExpectedLift = round((candidate.expectedMatch?.score10 || 0) - baselineExpectedScore, 2);
     const candidateTargetVideoLift = round((candidate.targetVideoObjectFit?.score10 || 0) - baselineTargetVideoScore, 2);
     const candidateNoHumanPerfectRegression = candidate.humanPerfectGuard?.pass !== false;
+    const candidateNoHumanVisibleRegression = candidate.humanVisibleGuardrails?.pass !== false
+      && ((candidate.humanVisibleGuardrails?.score10 || 0) >= baselineHumanVisibleScore - 0.25);
+    const candidateNoVisualPresenceRegression = candidate.visualPresenceRegressionGuard?.pass !== false;
     const candidateTargetVideoComparable = Number.isFinite(+(baseline.targetVideoObjectFit?.score10)) && Number.isFinite(+(candidate.targetVideoObjectFit?.score10));
     const candidateNoTargetRegression = !candidateTargetVideoComparable || candidateTargetVideoLift >= -0.05;
     const candidateMaterialTargetWin = candidate.expectedReferenceHit && candidateExpectedLift >= -0.15 && candidateTargetVideoLift >= 0.55;
@@ -1889,6 +2782,8 @@ async function main(){
       && candidateNoTargetRegression
       && candidateNoExpectedRegression
       && candidateNoHumanPerfectRegression
+      && candidateNoHumanVisibleRegression
+      && candidateNoVisualPresenceRegression
       && intendedStageSupported
       && candidate.fullAnalyzerRisk?.pass !== false
       && (candidateExpectedLift >= 0.35 || candidateTargetVideoLift >= 0.35 || (candidateExpectedLift >= 0.25 && candidateTargetVideoLift >= 0.25));
@@ -1898,12 +2793,17 @@ async function main(){
     return bLift - aLift || b.selectionScore10 - a.selectionScore10 || a.candidateId.localeCompare(b.candidateId);
   });
   const best = promotionCandidates[0]
-    || scored.find(candidate => candidate.noSafetyRegression && candidate.humanPerfectGuard?.pass !== false)
+    || scored.find(candidate => candidate.noSafetyRegression && candidate.humanPerfectGuard?.pass !== false && candidate.visualPresenceRegressionGuard?.pass !== false)
+    || scored.find(candidate => candidate.noSafetyRegression && candidate.visualPresenceRegressionGuard?.pass !== false)
     || scored[0];
   const expectedLift = round((best.expectedMatch?.score10 || 0) - (baseline.expectedMatch?.score10 || 0), 2);
   const targetVideoLift = round((best.targetVideoObjectFit?.score10 || 0) - (baseline.targetVideoObjectFit?.score10 || 0), 2);
   const humanPerfectLift = round((best.humanPerfectPotential?.score10 || 0) - baselineHumanPerfectScore, 2);
+  const humanVisibleLift = round((best.humanVisibleGuardrails?.score10 || 0) - baselineHumanVisibleScore, 2);
   const noHumanPerfectRegression = best.humanPerfectGuard?.pass !== false;
+  const noHumanVisibleRegression = best.humanVisibleGuardrails?.pass !== false
+    && ((best.humanVisibleGuardrails?.score10 || 0) >= baselineHumanVisibleScore - 0.25);
+  const noVisualPresenceRegression = best.visualPresenceRegressionGuard?.pass !== false;
   const targetVideoComparable = Number.isFinite(+(baseline.targetVideoObjectFit?.score10)) && Number.isFinite(+(best.targetVideoObjectFit?.score10));
   const noTargetVideoRegression = !targetVideoComparable || targetVideoLift >= -0.05;
   const materialTargetVideoWin = best.expectedReferenceHit && expectedLift >= -0.15 && targetVideoLift >= 0.55;
@@ -1923,7 +2823,29 @@ async function main(){
     baselineTargetVideoScore,
     rejectedReviews: rejectedFullAnalyzerReviews
   });
-  const keeper = best.noSafetyRegression && noTargetVideoRegression && noExpectedRegression && noHumanPerfectRegression && intendedStageSupported && fullAnalyzerRisk.pass !== false && (expectedLift >= 0.35 || targetVideoLift >= 0.35 || (expectedLift >= 0.25 && targetVideoLift >= 0.25));
+  const materialLift = expectedLift >= 0.35 || targetVideoLift >= 0.35 || (expectedLift >= 0.25 && targetVideoLift >= 0.25);
+  const promotionBlockers = [];
+  const promotionWins = [];
+  if(best.noSafetyRegression) promotionWins.push('No enemy-fire, enemy-attack, or ship-loss safety regression in the sampled challenge window.');
+  else promotionBlockers.push(`Safety regression in sampled challenge window: ${JSON.stringify(best.eventCounts || {})}.`);
+  if(noTargetVideoRegression) promotionWins.push(`Target-video object-track fit preserved (${targetVideoLift >= 0 ? '+' : ''}${targetVideoLift}/10 versus baseline).`);
+  else promotionBlockers.push(`Target-video object-track fit regressed ${Math.abs(targetVideoLift)}/10 versus baseline.`);
+  if(noExpectedRegression) promotionWins.push(`Expected-label score preserved (${expectedLift >= 0 ? '+' : ''}${expectedLift}/10 versus baseline).`);
+  else promotionBlockers.push(`Expected-label score regressed ${Math.abs(expectedLift)}/10 versus baseline.`);
+  if(noHumanPerfectRegression) promotionWins.push(`Human-perfect potential preserved (${humanPerfectLift >= 0 ? '+' : ''}${humanPerfectLift}/10 versus baseline).`);
+  else promotionBlockers.push(`Human-perfect potential regressed ${Math.abs(humanPerfectLift)}/10 versus baseline.`);
+  if(noHumanVisibleRegression) promotionWins.push(`Human-visible readability preserved (${humanVisibleLift >= 0 ? '+' : ''}${humanVisibleLift}/10 versus baseline).`);
+  else if(best.humanVisibleGuardrails?.pass === false) promotionBlockers.push(`Human-visible guardrails still fail despite ${humanVisibleLift >= 0 ? '+' : ''}${humanVisibleLift}/10 score movement: ${best.humanVisibleGuardrails.read || 'subcondition failed'}`);
+  else promotionBlockers.push(`Human-visible readability regressed ${Math.abs(humanVisibleLift)}/10 versus baseline.`);
+  if(noVisualPresenceRegression) promotionWins.push(best.visualPresenceRegressionGuard?.read || 'Visual presence preserved versus baseline.');
+  else promotionBlockers.push(best.visualPresenceRegressionGuard?.read || 'Visual presence regressed versus baseline.');
+  if(intendedStageSupported) promotionWins.push('Expected challenge-stage identity remains supported.');
+  else promotionBlockers.push(`Expected challenge-stage identity is not sufficiently supported; best match is ${best.bestMatch?.labelId || 'none'}.`);
+  if(fullAnalyzerRisk.pass !== false) promotionWins.push(fullAnalyzerRisk.read || 'No full-analyzer calibration block.');
+  else promotionBlockers.push(fullAnalyzerRisk.read || `Full-analyzer calibration blocks ${best.candidateId}.`);
+  if(materialLift) promotionWins.push(`Candidate has material lift: expected ${expectedLift}/10, target-video ${targetVideoLift}/10.`);
+  else promotionBlockers.push(`Candidate lacks material lift: expected ${expectedLift}/10, target-video ${targetVideoLift}/10.`);
+  const keeper = best.noSafetyRegression && noTargetVideoRegression && noExpectedRegression && noHumanPerfectRegression && noHumanVisibleRegression && noVisualPresenceRegression && intendedStageSupported && fullAnalyzerRisk.pass !== false && materialLift;
   const retainedCandidateLimit = 120;
   const pathShapeMarkers = [
     'pink-green-low-sweep',
@@ -1952,15 +2874,98 @@ async function main(){
     .filter(row => pathShapeMarkers.some(marker => (row.layout?.groupPathFamilies || []).includes(marker)))
     .sort((a, b) => (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0) || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
     .slice(0, 8);
+  const readabilityDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('stage7-read'))
+    .sort((a, b) => (b.humanVisibleGuardrails?.score10 || 0) - (a.humanVisibleGuardrails?.score10 || 0)
+      || (b.humanPerfectPotential?.score10 || 0) - (a.humanPerfectPotential?.score10 || 0)
+      || (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0)
+      || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 12);
+  const bunchingRiskOf = row => Number.isFinite(+(row.humanVisibleGuardrails?.bunchingRisk))
+    ? +(row.humanVisibleGuardrails.bunchingRisk)
+    : 1;
+  const magicRiskOf = row => Number.isFinite(+(row.humanVisibleGuardrails?.magicAppearanceRisk))
+    ? +(row.humanVisibleGuardrails.magicAppearanceRisk)
+    : 1;
+  const leastBunchedDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('stage7-read') || String(row.candidateId || '').includes('stage7-deconflict') || String(row.candidateId || '').includes('stage7-route') || String(row.candidateId || '').includes('stage7-centerline-spacing'))
+    .sort((a, b) => bunchingRiskOf(a) - bunchingRiskOf(b)
+      || magicRiskOf(a) - magicRiskOf(b)
+      || (b.humanVisibleGuardrails?.spacingScore || 0) - (a.humanVisibleGuardrails?.spacingScore || 0)
+      || (b.humanVisibleGuardrails?.score10 || 0) - (a.humanVisibleGuardrails?.score10 || 0)
+      || (b.humanPerfectPotential?.score10 || 0) - (a.humanPerfectPotential?.score10 || 0))
+    .slice(0, 12);
+  const deconflictDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('stage7-deconflict'))
+    .sort((a, b) => bunchingRiskOf(a) - bunchingRiskOf(b)
+      || (b.humanVisibleGuardrails?.spacingScore || 0) - (a.humanVisibleGuardrails?.spacingScore || 0)
+      || (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0)
+      || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 12);
+  const routeAwareDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('stage7-route'))
+    .sort((a, b) => bunchingRiskOf(a) - bunchingRiskOf(b)
+      || magicRiskOf(a) - magicRiskOf(b)
+      || (b.humanVisibleGuardrails?.spacingScore || 0) - (a.humanVisibleGuardrails?.spacingScore || 0)
+      || (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0)
+      || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 12);
+  const leadInDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('stage7-route-leadin'))
+    .sort((a, b) => magicRiskOf(a) - magicRiskOf(b)
+      || bunchingRiskOf(a) - bunchingRiskOf(b)
+      || (b.humanVisibleGuardrails?.spacingScore || 0) - (a.humanVisibleGuardrails?.spacingScore || 0)
+      || (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0)
+      || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 12);
+  const centerlineSpacingFieldDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('stage7-centerline-spacing'))
+    .sort((a, b) => bunchingRiskOf(a) - bunchingRiskOf(b)
+      || magicRiskOf(a) - magicRiskOf(b)
+      || (b.humanVisibleGuardrails?.spacingScore || 0) - (a.humanVisibleGuardrails?.spacingScore || 0)
+      || (b.humanVisibleGuardrails?.score10 || 0) - (a.humanVisibleGuardrails?.score10 || 0)
+      || (b.humanPerfectPotential?.score10 || 0) - (a.humanPerfectPotential?.score10 || 0)
+      || (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0)
+      || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 12);
+  const referenceSplineSpacingDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('target-reference-paths-spacing'))
+    .sort((a, b) => (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0)
+      || (b.humanVisibleGuardrails?.score10 || 0) - (a.humanVisibleGuardrails?.score10 || 0)
+      || bunchingRiskOf(a) - bunchingRiskOf(b)
+      || (b.humanPerfectPotential?.score10 || 0) - (a.humanPerfectPotential?.score10 || 0)
+      || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 12);
+  const spacingFieldDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('stage7-centerline-spacing') || (row.layout?.groupSpacingFieldSpreadXs || []).length)
+    .sort((a, b) => bunchingRiskOf(a) - bunchingRiskOf(b)
+      || magicRiskOf(a) - magicRiskOf(b)
+      || (b.humanVisibleGuardrails?.spacingScore || 0) - (a.humanVisibleGuardrails?.spacingScore || 0)
+      || (b.humanVisibleGuardrails?.score10 || 0) - (a.humanVisibleGuardrails?.score10 || 0)
+      || (b.humanPerfectPotential?.score10 || 0) - (a.humanPerfectPotential?.score10 || 0)
+      || (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0)
+      || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 12);
   const retainedById = new Map();
   for(const row of scored.slice(0, retainedCandidateLimit)) retainedById.set(row.candidateId, row);
   for(const row of targetTimingDiagnostics) retainedById.set(row.candidateId, row);
   for(const row of targetControlDiagnostics) retainedById.set(row.candidateId, row);
   for(const row of targetReferencePathDiagnostics) retainedById.set(row.candidateId, row);
   for(const row of pathShapeDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of readabilityDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of leastBunchedDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of deconflictDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of routeAwareDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of leadInDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of centerlineSpacingFieldDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of referenceSplineSpacingDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of spacingFieldDiagnostics) retainedById.set(row.candidateId, row);
   const retainedCandidates = Array.from(retainedById.values());
   if(!retainedCandidates.some(row => row.candidateId === baseline.candidateId)){
     retainedCandidates.push(baseline);
+  }
+  if(!retainedCandidates.some(row => row.candidateId === best.candidateId)){
+    retainedCandidates.push(best);
   }
   const report = {
     schemaVersion: 1,
@@ -1978,28 +2983,35 @@ async function main(){
       baselineExpectedScore10: baseline.expectedMatch?.score10 || 0,
       baselineTargetVideoObjectFitScore10: baseline.targetVideoObjectFit?.score10 || null,
       baselineHumanPerfectPotentialScore10: baseline.humanPerfectPotential?.score10 || null,
+      baselineHumanVisibleScore10: baseline.humanVisibleGuardrails?.score10 || null,
       baselineBestMatch: baseline.bestMatch,
       bestCandidateId: best.candidateId,
       bestExpectedScore10: best.expectedMatch?.score10 || 0,
       bestTargetVideoObjectFitScore10: best.targetVideoObjectFit?.score10 || null,
       bestHumanPerfectPotentialScore10: best.humanPerfectPotential?.score10 || null,
+      bestHumanVisibleScore10: best.humanVisibleGuardrails?.score10 || null,
       bestSelectionScore10: best.selectionScore10,
       bestMatch: best.bestMatch,
       expectedLift10: expectedLift,
       targetVideoObjectFitLift10: targetVideoLift,
       humanPerfectPotentialLift10: humanPerfectLift,
+      humanVisibleLift10: humanVisibleLift,
       targetVideoComparable,
       noTargetVideoRegression,
       noExpectedRegression,
       noHumanPerfectRegression,
+      noHumanVisibleRegression,
+      noVisualPresenceRegression,
       intendedStageSupported,
       fullAnalyzerRisk,
       fullAnalyzerRejectionCount: rejectedFullAnalyzerReviews.length,
+      promotionBlockers,
+      promotionWins,
       lateStageIdentityPass,
       identityTieSupported,
       materialTargetVideoWin,
       strongExpectedLift,
-      intendedStageSupportPolicy: 'runtime promotion requires no expected-label regression unless the expected label remains the best match and target-video fit improves by >=0.55/10 with no more than -0.15/10 expected drift. It also requires the best trajectory match to be one of the expected stage labels, an expected-label tie within 0.05/10 with >=0.3 expected lift and >=0.15 target-video lift, or a strong expected-label score >=7 with >=0.5 expected lift, >=0.8 target-video lift, and an identity margin no worse than -0.35/10. Human-perfect potential must not regress versus baseline because challenge-stage conformance is not useful if a strong player loses readable scoring windows. For late challenge stages, candidates whose best match belongs to the wrong Galaga challenge number are explicitly penalized and blocked from promotion.',
+      intendedStageSupportPolicy: 'runtime promotion requires no expected-label regression unless the expected label remains the best match and target-video fit improves by >=0.55/10 with no more than -0.15/10 expected drift. It also requires the best trajectory match to be one of the expected stage labels, an expected-label tie within 0.05/10 with >=0.3 expected lift and >=0.15 target-video lift, or a strong expected-label score >=7 with >=0.5 expected lift, >=0.8 target-video lift, and an identity margin no worse than -0.35/10. Human-perfect potential and human-visible guardrails must not regress versus baseline because challenge-stage conformance is not useful if a strong player loses readable scoring windows or if enemies appear/bunch incoherently. For late challenge stages, candidates whose best match belongs to the wrong Galaga challenge number are explicitly penalized and blocked from promotion.',
       keeperDecision: keeper ? 'candidate-ready-for-full-analyzer-review' : 'no-runtime-keeper-yet',
       playerMeaning: keeper
         ? `A measured stage-${STAGE} layout candidate is worth a temporary runtime review, but it must be confirmed by the full challenge-stage analyzer and persona guardrails before promotion.`
@@ -2009,6 +3021,8 @@ async function main(){
         : 'Future challenge tuning can now compare many runtime candidates against Galaga labels before editing game constants.',
       nextStep: keeper
         ? `Apply the best candidate temporarily, rerun full challenge-stage conformance plus guardrails, and accept it only if the full analyzer confirms the expected lift.`
+        : noVisualPresenceRegression === false
+          ? `Do not promote ${best.candidateId}; it fails the visual-presence guard, so author a coherent group route that preserves visible density and X/Y spread before another runtime trial.`
         : fullAnalyzerRisk.pass === false
           ? `Do not promote ${best.candidateId}; strengthen the full-stage scorer or author a richer Stage ${STAGE} contract before another runtime trial.`
           : `Use target-trajectory controls and richer reference labels before changing runtime stage-${STAGE} gameplay.`
@@ -2029,6 +3043,9 @@ async function main(){
       targetVideoObjectFit: row.targetVideoObjectFit,
       humanPerfectPotential: row.humanPerfectPotential,
       humanPerfectGuard: row.humanPerfectGuard,
+      humanVisibleGuardrails: row.humanVisibleGuardrails,
+      visualPresence: row.visualPresence,
+      visualPresenceRegressionGuard: row.visualPresenceRegressionGuard,
       fullAnalyzerRisk: row.fullAnalyzerRisk,
       selectionScore10: row.selectionScore10
     })),
@@ -2039,19 +3056,35 @@ async function main(){
       targetControlDiagnostics: targetControlDiagnostics.length,
       targetReferencePathDiagnostics: targetReferencePathDiagnostics.length,
       pathShapeDiagnostics: pathShapeDiagnostics.length,
-      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score, the baseline row, and top target-timing/target-control/target-reference-path/path-shape diagnostic candidates; use candidateCount for the full measured search size.`
+      readabilityDiagnostics: readabilityDiagnostics.length,
+      leastBunchedDiagnostics: leastBunchedDiagnostics.length,
+      deconflictDiagnostics: deconflictDiagnostics.length,
+      routeAwareDiagnostics: routeAwareDiagnostics.length,
+      leadInDiagnostics: leadInDiagnostics.length,
+      centerlineSpacingFieldDiagnostics: centerlineSpacingFieldDiagnostics.length,
+      referenceSplineSpacingDiagnostics: referenceSplineSpacingDiagnostics.length,
+      spacingFieldDiagnostics: spacingFieldDiagnostics.length,
+      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score, the baseline row, and top target-timing/target-control/target-reference-path/path-shape/readability/least-bunched/deconflict/route-aware/lead-in/centerline-spacing/reference-spline-spacing diagnostic candidates; use candidateCount for the full measured search size.`
     },
     diagnostics: {
       targetTimingTop: targetTimingDiagnostics.map(summarizeCandidate),
       targetControlTop: targetControlDiagnostics.map(summarizeCandidate),
       targetReferencePathTop: targetReferencePathDiagnostics.map(summarizeCandidate),
-      pathShapeTop: pathShapeDiagnostics.map(summarizeCandidate)
+      pathShapeTop: pathShapeDiagnostics.map(summarizeCandidate),
+      readabilityTop: readabilityDiagnostics.map(summarizeCandidate),
+      leastBunchedTop: leastBunchedDiagnostics.map(summarizeCandidate),
+      deconflictTop: deconflictDiagnostics.map(summarizeCandidate),
+      routeAwareTop: routeAwareDiagnostics.map(summarizeCandidate),
+      leadInTop: leadInDiagnostics.map(summarizeCandidate),
+      centerlineSpacingFieldTop: centerlineSpacingFieldDiagnostics.map(summarizeCandidate),
+      referenceSplineSpacingTop: referenceSplineSpacingDiagnostics.map(summarizeCandidate),
+      spacingFieldTop: spacingFieldDiagnostics.map(summarizeCandidate)
     },
     measurementPolicy: {
       scope: `harness-only stage-${STAGE} challenge layout candidates`,
       reference: 'media-backed Galaga challenge labels with comparison vectors',
-      promotionRule: 'Require the expected challenge-label identity to be the best match or tied within 0.05/10 with evidence on both expected and target-video axes, no safety regression, no human-perfect potential regression, no matching full-analyzer rejection, and at least +0.35/10 expected-label or target-video lift over baseline before runtime promotion. A material target-video win may tolerate up to -0.15/10 expected drift only when expected identity remains the best match. Strong non-best candidates must be very close on identity margin and improve both expected and target-video scores. If a prior full-analyzer review rejected a similar or identical candidate, the sweep must clear that calibration by a material margin before it can be marked ready again.',
-      safety: 'Reject candidates with enemy shots, enemy attack starts, ship losses, or lower human-perfect potential in the challenge window.'
+      promotionRule: 'Require the expected challenge-label identity to be the best match or tied within 0.05/10 with evidence on both expected and target-video axes, no safety regression, no human-perfect potential regression, no human-visible guardrail regression, no visual-presence regression versus baseline, no matching full-analyzer rejection, and at least +0.35/10 expected-label or target-video lift over baseline before runtime promotion. A material target-video win may tolerate up to -0.15/10 expected drift only when expected identity remains the best match. Strong non-best candidates must be very close on identity margin and improve both expected and target-video scores. If a prior full-analyzer review rejected a similar or identical candidate, the sweep must clear that calibration by a material margin before it can be marked ready again. Any promotion-like sweep decision must be followed by a matching challenge-candidate-before-after precheck whose visual-presence guard passes before runtime review.',
+      safety: 'Reject candidates with enemy shots, enemy attack starts, ship losses, lower human-perfect potential, in-playfield magic appearance, missing groups, or high bunching risk in the challenge window.'
     }
   };
   const stamp = `${report.generatedAt.replace(/[:.]/g, '-').slice(0, 19)}-${report.commit}`;

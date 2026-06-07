@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "challenge-deconflict-underperformance",
+  "generatedAt": "2026-06-06T12:23:59.520Z",
+  "commit": "e43ff631a",
+  "branch": "codex/aurora-challenge-movement-grammar",
+  "stage": 7,
+  "sourceSweep": "reference-artifacts/analyses/challenge-stage-candidate-sweep/latest.json",
+  "rows": {
+    "baseline": {
+      "candidateId": "baseline-current",
+      "expectedScore10": 5.7,
+      "targetVideoObjectFitScore10": 3.9,
+      "humanPerfectPotentialScore10": 7.5,
+      "humanVisibleScore10": 5.2,
+      "bunchingRisk": 1,
+      "magicAppearanceRisk": 0.696,
+      "spacingScore": 0.005,
+      "arrivalContinuity": 0.304,
+      "pass": false,
+      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.3, magic-appearance risk 0.7, spacing 0, bunching risk 1."
+    },
+    "bestSelection": {
+      "candidateId": "stage7-target-starts-current-speed-p0",
+      "expectedScore10": 5.7,
+      "targetVideoObjectFitScore10": 4.5,
+      "humanPerfectPotentialScore10": 7.5,
+      "humanVisibleScore10": 6.6,
+      "bunchingRisk": 0.811,
+      "magicAppearanceRisk": 0.288,
+      "spacingScore": 0.185,
+      "arrivalContinuity": 0.712,
+      "pass": false,
+      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.71, magic-appearance risk 0.29, spacing 0.19, bunching risk 0.81."
+    },
+    "bestReadability": {
+      "candidateId": "stage7-read-balanced-balanced-outer-ls0-sd022-ripple",
+      "expectedScore10": 5.4,
+      "targetVideoObjectFitScore10": 4.1,
+      "humanPerfectPotentialScore10": 7.5,
+      "humanVisibleScore10": 7.6,
+      "bunchingRisk": 0.75,
+      "magicAppearanceRisk": 0.072,
+      "spacingScore": 0.368,
+      "arrivalContinuity": 0.928,
+      "pass": false,
+      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.93, magic-appearance risk 0.07, spacing 0.37, bunching risk 0.75."
+    },
+    "leastBunched": {
+      "candidateId": "stage7-route-spread-left-right-id-sd016",
+      "expectedScore10": 5.7,
+      "targetVideoObjectFitScore10": 4,
+      "humanPerfectPotentialScore10": 7.4,
+      "humanVisibleScore10": 7.4,
+      "bunchingRisk": 0.667,
+      "magicAppearanceRisk": 0.144,
+      "spacingScore": 0.371,
+      "arrivalContinuity": 0.856,
+      "pass": false,
+      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.86, magic-appearance risk 0.14, spacing 0.37, bunching risk 0.67."
+    },
+    "bestDeconflict": {
+      "candidateId": "stage7-deconflict-wide-softbias-flat-sync",
+      "expectedScore10": 5.7,
+      "targetVideoObjectFitScore10": 4,
+      "humanPerfectPotentialScore10": 7.3,
+      "humanVisibleScore10": 7.5,
+      "bunchingRisk": 0.688,
+      "magicAppearanceRisk": 0.072,
+      "spacingScore": 0.347,
+      "arrivalContinuity": 0.928,
+      "pass": false,
+      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.93, magic-appearance risk 0.07, spacing 0.35, bunching risk 0.69."
+    },
+    "bestRouteAware": {
+      "candidateId": "stage7-route-spread-left-right-fan-sd016",
+      "expectedScore10": 5.7,
+      "targetVideoObjectFitScore10": 4,
+      "humanPerfectPotentialScore10": 7.3,
+      "humanVisibleScore10": 7.4,
+      "bunchingRisk": 0.667,
+      "magicAppearanceRisk": 0.144,
+      "spacingScore": 0.371,
+      "arrivalContinuity": 0.856,
+      "pass": false,
+      "read": "Human-visible guardrails block promotion: 5/5 groups visible, arrival continuity 0.86, magic-appearance risk 0.14, spacing 0.37, bunching risk 0.67."
+    }
+  },
+  "summary": {
+    "baselineBunchingRisk": 1,
+    "bestReadabilityBunchingRisk": 0.75,
+    "leastBunchedBunchingRisk": 0.667,
+    "bestDeconflictBunchingRisk": 0.688,
+    "bestRouteAwareBunchingRisk": 0.667,
+    "deconflictRiskGapVsLeastBunched": 0.021,
+    "routeRiskGapVsLeastBunched": 0,
+    "deconflictImprovesBaseline": true,
+    "deconflictBeatsReadability": true,
+    "routeBeatsDeconflict": true,
+    "read": "Route-aware group offsets now beat direct deconflict on bunching risk, but they remain far from the promotion gate and need density, target-fit, and human-perfect review before runtime promotion. Direct deconflict still improves baseline readability, but the rejected full-analyzer trial shows local deconfliction can create misleading wins."
+  },
+  "nextPrimitive": {
+    "id": "route-aware-group-separation",
+    "controls": [
+      "routeOffsetX",
+      "routeOffsetY",
+      "routeCurveX",
+      "routeCurveY",
+      "routePhaseS"
+    ],
+    "read": "Move entire challenge groups as authored routes before applying per-lane/object separation. This should reduce inter-group overlap while preserving the feeling that aliens arrive in coherent Galaga-like waves."
+  }
+}

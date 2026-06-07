@@ -136,6 +136,52 @@ function aggregate(samples){
   };
 }
 
+function ratio(candidate, baseline){
+  const c = +candidate;
+  const b = +baseline;
+  return Number.isFinite(c) && Number.isFinite(b) && b > 0 ? round(c / b, 3) : null;
+}
+
+function visualPresenceGuardrails(baselineAggregate = {}, candidateAggregate = {}){
+  const enemyCountRatio = ratio(candidateAggregate.averageEnemyCount, baselineAggregate.averageEnemyCount);
+  const xRangeRatio = ratio(candidateAggregate.averageXRange, baselineAggregate.averageXRange);
+  const yRangeRatio = ratio(candidateAggregate.averageYRange, baselineAggregate.averageYRange);
+  const enemyCountDelta = round((+candidateAggregate.averageEnemyCount || 0) - (+baselineAggregate.averageEnemyCount || 0), 2);
+  const xRangeDelta = round((+candidateAggregate.averageXRange || 0) - (+baselineAggregate.averageXRange || 0), 2);
+  const yRangeDelta = round((+candidateAggregate.averageYRange || 0) - (+baselineAggregate.averageYRange || 0), 2);
+  const enemyCountPass = enemyCountRatio === null || enemyCountRatio >= 0.82;
+  const xRangePass = xRangeRatio === null || xRangeRatio >= 0.72;
+  const yRangePass = yRangeRatio === null || yRangeRatio >= 0.72;
+  const pass = enemyCountPass && xRangePass && yRangePass;
+  const blocked = [];
+  if(!enemyCountPass) blocked.push(`visible enemy density collapsed to ${enemyCountRatio}x baseline`);
+  if(!xRangePass) blocked.push(`horizontal swarm range collapsed to ${xRangeRatio}x baseline`);
+  if(!yRangePass) blocked.push(`vertical swarm range collapsed to ${yRangeRatio}x baseline`);
+  return {
+    pass,
+    baseline: {
+      averageEnemyCount: baselineAggregate.averageEnemyCount,
+      averageXRange: baselineAggregate.averageXRange,
+      averageYRange: baselineAggregate.averageYRange
+    },
+    candidate: {
+      averageEnemyCount: candidateAggregate.averageEnemyCount,
+      averageXRange: candidateAggregate.averageXRange,
+      averageYRange: candidateAggregate.averageYRange
+    },
+    enemyCountRatio,
+    xRangeRatio,
+    yRangeRatio,
+    enemyCountDelta,
+    xRangeDelta,
+    yRangeDelta,
+    policy: 'A challenge candidate may reduce overlap, but it must preserve visible swarm presence: at least 82% of baseline visible enemy density and at least 72% of baseline horizontal and vertical runtime spread in the before/after window.',
+    read: pass
+      ? `Visual presence preserved: enemy density ${enemyCountRatio ?? 'n/a'}x, horizontal range ${xRangeRatio ?? 'n/a'}x, vertical range ${yRangeRatio ?? 'n/a'}x versus baseline.`
+      : `Visual presence guard blocks promotion: ${blocked.join('; ')}.`
+  };
+}
+
 function scoreValue(item, pathParts, fallback = null){
   let value = item;
   for(const part of pathParts){
@@ -278,6 +324,7 @@ This artifact is a human-readable review sheet for a focused candidate from the 
 - Selected candidate expected-label lift: ${report.selectedCandidate.expectedLift10}/10
 - Selected candidate target-video object-track lift: ${report.selectedCandidate.targetVideoObjectFitLift10}/10
 - Selected candidate human-perfect lift: ${report.selectedCandidate.humanPerfectPotentialLift10}/10
+- Visual presence guard: ${report.visualPresenceGuardrails.pass ? 'pass' : 'blocked'} (${report.visualPresenceGuardrails.read})
 
 ## Measurement Limits
 
@@ -301,6 +348,7 @@ async function main(){
   ensureDir(outDir);
   const baselineRun = await captureRun({ stage, label: 'baseline', layoutOverride: null, outDir });
   const candidateRun = await captureRun({ stage, label: 'candidate', layoutOverride: candidate.layout, outDir });
+  const visualPresence = visualPresenceGuardrails(baselineRun.aggregate, candidateRun.aggregate);
   const contactSheet = writeContactSheet({ stage, candidateId, baseline: baselineRun, candidate: candidateRun, outDir });
   const latestContactSheet = path.join(OUT_ROOT, 'latest-candidate-before-after.svg');
   fs.copyFileSync(path.join(ROOT, contactSheet), latestContactSheet);
@@ -322,7 +370,8 @@ async function main(){
     },
     baseline: baselineRun,
     candidate: candidateRun,
-    read: `Candidate ${candidateId} should be visually compared against baseline, then accepted only if the full analyzers preserve safety and human-perfect playability. ${selectedCandidate.read}`
+    visualPresenceGuardrails: visualPresence,
+    read: `Candidate ${candidateId} should be visually compared against baseline, then accepted only if the full analyzers preserve safety, human-perfect playability, and visual swarm presence. ${selectedCandidate.read} ${visualPresence.read}`
   };
   writeJson(path.join(outDir, 'report.json'), report);
   writeText(path.join(outDir, 'README.md'), readme(report));

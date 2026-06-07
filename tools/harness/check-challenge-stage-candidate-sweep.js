@@ -4,6 +4,7 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const REPORT = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-stage-candidate-sweep', 'latest.json');
+const BEFORE_AFTER = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-candidate-before-after', 'latest.json');
 
 function argValue(name, fallback = ''){
   const prefix = `--${name}=`;
@@ -97,6 +98,26 @@ for(const row of [baseline, best]){
   if(!row.humanPerfectGuard || typeof row.humanPerfectGuard.pass !== 'boolean' || !isFiniteNumber(row.humanPerfectGuard.lift10)){
     fail('Candidate sweep row is missing the human-perfect regression gate.', row);
   }
+  if(!row.humanVisibleGuardrails
+    || typeof row.humanVisibleGuardrails.pass !== 'boolean'
+    || !isFiniteNumber(row.humanVisibleGuardrails.score10)
+    || !isFiniteNumber(row.humanVisibleGuardrails.groupVisibility)
+    || !isFiniteNumber(row.humanVisibleGuardrails.arrivalContinuity)
+    || !isFiniteNumber(row.humanVisibleGuardrails.spacingScore)
+    || !isFiniteNumber(row.humanVisibleGuardrails.bunchingRisk)){
+    fail('Candidate sweep row is missing the human-visible challenge guardrails.', row);
+  }
+  if(!row.visualPresence
+    || !isFiniteNumber(row.visualPresence.averageEnemyCount)
+    || !isFiniteNumber(row.visualPresence.averageXRange)
+    || !isFiniteNumber(row.visualPresence.averageYRange)
+    || !row.visualPresenceRegressionGuard
+    || typeof row.visualPresenceRegressionGuard.pass !== 'boolean'
+    || !isFiniteNumber(row.visualPresenceRegressionGuard.enemyCountDelta)
+    || !isFiniteNumber(row.visualPresenceRegressionGuard.xRangeDelta)
+    || !isFiniteNumber(row.visualPresenceRegressionGuard.yRangeDelta)){
+    fail('Candidate sweep row is missing baseline-relative visual presence regression guardrails.', row);
+  }
   if(!isFiniteNumber(row.selectionScore10)){
     fail('Candidate sweep row is missing a selection score.', row);
   }
@@ -126,6 +147,20 @@ for(const field of ['baselineHumanPerfectPotentialScore10', 'bestHumanPerfectPot
   }
 }
 
+for(const field of ['baselineHumanVisibleScore10', 'bestHumanVisibleScore10', 'humanVisibleLift10']){
+  if(!isFiniteNumber(summary[field])){
+    fail(`Candidate sweep summary field ${field} is invalid.`, summary);
+  }
+}
+
+if(typeof summary.noVisualPresenceRegression !== 'boolean'){
+  fail('Candidate sweep summary is missing the visual-presence regression decision.', summary);
+}
+
+if(!Array.isArray(summary.promotionBlockers) || !Array.isArray(summary.promotionWins)){
+  fail('Candidate sweep summary is missing readable promotion blockers/wins.', summary);
+}
+
 const validDecisions = new Set([
   'no-runtime-keeper-yet',
   'candidate-ready-for-full-analyzer-review',
@@ -137,6 +172,9 @@ if(!validDecisions.has(summary.keeperDecision)){
 
 const promotionLikeDecision = summary.keeperDecision !== 'no-runtime-keeper-yet';
 if(promotionLikeDecision){
+  if(summary.promotionBlockers.length){
+    fail('Candidate is marked promotion-like but still lists promotion blockers.', summary.promotionBlockers);
+  }
   if(best.noSafetyRegression !== true){
     fail('Candidate is marked promotion-like but has safety regression.', best);
   }
@@ -155,6 +193,38 @@ if(promotionLikeDecision){
       bestHumanPerfectGuard: best.humanPerfectGuard
     });
   }
+  if(summary.noHumanVisibleRegression !== true || best.humanVisibleGuardrails?.pass !== true){
+    fail('Candidate is marked promotion-like but regresses human-visible challenge readability.', {
+      summary,
+      bestHumanVisibleGuardrails: best.humanVisibleGuardrails
+    });
+  }
+  if(summary.noVisualPresenceRegression !== true || best.visualPresenceRegressionGuard?.pass !== true){
+    fail('Candidate is marked promotion-like but regresses visual enemy density or stage spread.', {
+      summary,
+      bestVisualPresenceRegressionGuard: best.visualPresenceRegressionGuard
+    });
+  }
+  if(!fs.existsSync(BEFORE_AFTER)){
+    fail('Candidate is marked promotion-like but has no before/after visual-presence precheck artifact.', {
+      expectedArtifact: rel(BEFORE_AFTER)
+    });
+  }
+  const beforeAfter = readJson(BEFORE_AFTER);
+  if(+beforeAfter.stage !== +report.stage
+    || beforeAfter.candidateId !== summary.bestCandidateId
+    || beforeAfter.visualPresenceGuardrails?.pass !== true){
+    fail('Candidate is marked promotion-like but the latest before/after precheck does not match or pass visual presence.', {
+      expectedStage: report.stage,
+      expectedCandidateId: summary.bestCandidateId,
+      actualStage: beforeAfter.stage,
+      actualCandidateId: beforeAfter.candidateId,
+      actualVisualPresenceGuardrails: beforeAfter.visualPresenceGuardrails || null
+    });
+  }
+}
+else if(!summary.promotionBlockers.length){
+  fail('Candidate sweep has no runtime keeper but did not explain any promotion blocker.', summary);
 }
 
 const retention = report.candidateRetention || {};
@@ -180,6 +250,9 @@ console.log(JSON.stringify({
   expectedLift10: summary.expectedLift10,
   targetVideoObjectFitLift10: summary.targetVideoObjectFitLift10,
   humanPerfectPotentialLift10: summary.humanPerfectPotentialLift10,
+  humanVisibleLift10: summary.humanVisibleLift10,
+  visualPresencePass: summary.noVisualPresenceRegression,
+  promotionBlockerCount: summary.promotionBlockers.length,
   keeperDecision: summary.keeperDecision,
   baselineSafetyPass: baseline.noSafetyRegression === true,
   bestSafetyPass: best.noSafetyRegression === true
