@@ -263,6 +263,25 @@ function guardiansPersonaSelectTarget(state,cfg){
   })[0]||null;
 }
 
+function guardiansPersonaEffectiveCfg(state,cfg){
+ if(!state||!cfg||cfg.name!=='advanced') return cfg;
+ if((state.stage|0)!==1) return cfg;
+ const expert=GALAXY_GUARDIANS_HARNESS_PERSONAS.expert;
+ const professional=GALAXY_GUARDIANS_HARNESS_PERSONAS.professional;
+ return Object.assign({}, expert, {
+  name:cfg.name,
+  shotCadence:professional.shotCadence,
+  stageOpeningHold:professional.stageOpeningHold,
+  openShotY:professional.openShotY,
+  diveBias:professional.diveBias,
+  escortBias:professional.escortBias,
+  flagshipBias:professional.flagshipBias,
+  linkedEscortBias:professional.linkedEscortBias,
+  rackClearBonus:professional.rackClearBonus,
+  holdFireDuringUrgentThreat:professional.holdFireDuringUrgentThreat||0
+ });
+}
+
 function guardiansPersonaMoveAxis(state,cfg,target){
  const player=state.player||{};
  const playfieldWidth=GALAXY_GUARDIANS_RUNTIME_PROFILE?.rules?.playfieldWidth||280;
@@ -276,6 +295,14 @@ function guardiansPersonaMoveAxis(state,cfg,target){
   const away=shotThreat.x>=player.x?-1:1;
   if((away<0&&player.x>18)||(away>0&&player.x<playfieldWidth-18))return away;
  }
+ const stageOneClampActive=Number.isFinite(cfg.stageOneCenterMin)
+  && Number.isFinite(cfg.stageOneCenterMax)
+  && (state.stage|0)===1
+  && (!target||target.mode!=='diving');
+ if(stageOneClampActive){
+  if(player.x<cfg.stageOneCenterMin)return 1;
+  if(player.x>cfg.stageOneCenterMax)return -1;
+ }
  if(!target){
   const mid=playfieldWidth/2;
   if(Math.abs(player.x-mid)<=cfg.deadZone)return 0;
@@ -287,8 +314,9 @@ function guardiansPersonaMoveAxis(state,cfg,target){
 }
 
 function galaxyGuardiansHarnessPersonaInput(state,personaKey=''){
- const cfg=guardiansHarnessPersonaCfgForKey(personaKey||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'');
- if(!cfg||!state||state.gameOver||state.resetT>0||!state.player?.visible)return {left:0,right:0,fire:0};
+ const baseCfg=guardiansHarnessPersonaCfgForKey(personaKey||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'');
+ if(!baseCfg||!state||state.gameOver||state.resetT>0||!state.player?.visible)return {left:0,right:0,fire:0};
+ const cfg=guardiansPersonaEffectiveCfg(state,baseCfg);
  const mem=guardiansPersonaMemory(state,cfg);
  const target=guardiansPersonaSelectTarget(state,cfg);
  const axis=guardiansPersonaMoveAxis(state,cfg,target);
@@ -400,6 +428,154 @@ function syncGalaxyGuardiansShellState(state){
  gameOverHtml='';
 }
 
+function guardiansReplayRecord(type,data={}){
+ if(typeof REC==='undefined')return;
+ if(!REC&&typeof resetSession==='function')resetSession('guardians_dev_preview_start');
+ if(!REC)return;
+ const payload=Object.assign({},data);
+ const t=Number.isFinite(+payload.t)?+payload.t:+(+GALAXY_GUARDIANS_ACTIVE_DEV_STATE?.t||0);
+ delete payload.t;
+ REC.events.push(Object.assign({t:+t.toFixed(3),type},payload));
+}
+
+function guardiansReplayLane(x=0){
+ return typeof playLane==='function'?playLane(+x||0):null;
+}
+
+function guardiansReplayMirrorEvent(state,event){
+ if(!state||!event||!event.type)return;
+ const playerX=+state.player?.x||0;
+ const playerY=+state.player?.y||0;
+ const alien=event.id?state.aliens.find(candidate=>candidate.id===event.id):null;
+ const base={
+  t:event.t,
+  stage:+state.stage||1,
+  challenge:false,
+  score:+state.score||0,
+  gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
+  persona:S.harnessPersona||null,
+  watchMode:!!S.watchMode,
+  watchScope:S.watchScope||'game'
+ };
+ guardiansReplayRecord(event.type,Object.assign({},base,event));
+ switch(event.type){
+ case 'formation_entry_start':
+  guardiansReplayRecord('stage_spawn',{
+   t:event.t,
+   stage:+state.stage||1,
+   challenge:false,
+   persona:S.harnessPersona||null,
+   watchMode:!!S.watchMode,
+   watchScope:S.watchScope||'game',
+   gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey
+  });
+  break;
+ case 'player_shot_fired':
+  guardiansReplayRecord('player_shot',{
+   t:event.t,
+   stage:+state.stage||1,
+   challenge:false,
+   x:+(+event.x||playerX).toFixed(2),
+   y:+(+event.y||playerY).toFixed(2),
+   dual:false,
+   gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey
+  });
+  break;
+ case 'alien_dive_start':
+ case 'flagship_dive_start':
+  guardiansReplayRecord('enemy_attack_start',{
+   t:event.t,
+   stage:+state.stage||1,
+   challenge:false,
+   id:event.id||'',
+   enemyId:event.id||'',
+   enemyType:event.role||alien?.role||'scout',
+   mode:'dive',
+   x:+(+alien?.x||0).toFixed(2),
+   y:+(+alien?.y||0).toFixed(2),
+   originLane:guardiansReplayLane(alien?.x),
+   targetLane:guardiansReplayLane(playerX),
+   playerLane:guardiansReplayLane(playerX),
+   column:Number.isFinite(+alien?.col)?+alien.col:null
+  });
+  break;
+ case 'enemy_shot':
+  guardiansReplayRecord('enemy_bullet_fired',{
+   t:event.t,
+   stage:+state.stage||1,
+   challenge:false,
+   id:event.id||'',
+   sourceId:event.sourceId||'',
+   enemyType:event.role||'scout',
+   kind:'enemy_shot',
+   x:+(+event.x||0).toFixed(2),
+   y:+(+event.y||0).toFixed(2),
+   bulletLane:guardiansReplayLane(event.x),
+   playerLane:guardiansReplayLane(playerX)
+  });
+  break;
+ case 'player_shot_resolved':
+  if(event.result==='hit'){
+   guardiansReplayRecord('enemy_killed',{
+    t:event.t,
+    stage:+state.stage||1,
+    challenge:false,
+    id:event.id||'',
+    enemyId:event.id||'',
+    enemyType:event.role||alien?.role||'scout',
+    points:+event.points||0,
+    score:+event.score||+state.score||0
+   });
+   guardiansReplayRecord('score_awarded',{
+    t:event.t,
+    stage:+state.stage||1,
+    challenge:false,
+    points:+event.points||0,
+    score:+event.score||+state.score||0
+   });
+  }
+  break;
+ case 'wave_clear':
+  guardiansReplayRecord('stage_clear',{
+   t:event.t,
+   stage:+event.stage||+state.stage||1,
+   challenge:false,
+   score:+event.score||+state.score||0
+  });
+  break;
+ case 'player_lost':
+  guardiansReplayRecord('ship_lost',{
+   t:event.t,
+   stage:+state.stage||1,
+   challenge:false,
+   score:+state.score||0,
+   livesBefore:Math.max(1,(+event.lives||0)+1),
+   cause:String(event.cause||'unknown'),
+   sourceType:/alien_([a-z]+)_collision/i.test(String(event.cause||''))?String(event.cause).match(/alien_([a-z]+)_collision/i)?.[1]||null:(String(event.cause||'')==='enemy_shot'?'enemy_shot':null),
+   playerLane:guardiansReplayLane(playerX),
+   stageClock:+(+state.t||0).toFixed(3)
+  });
+  break;
+ case 'game_over':
+  guardiansReplayRecord('game_over',{
+   t:event.t,
+   stage:+event.stage||+state.stage||1,
+   challenge:false,
+   score:+event.score||+state.score||0
+  });
+  break;
+ default:
+  break;
+ }
+}
+
+function mirrorGalaxyGuardiansRuntimeEvents(state){
+ if(!state||!Array.isArray(state.events))return;
+ const start=Math.max(0,+state.telemetryEventIndex||0);
+ for(let i=start;i<state.events.length;i++)guardiansReplayMirrorEvent(state,state.events[i]);
+ state.telemetryEventIndex=state.events.length;
+}
+
 function closeGalaxyGuardiansDevOverlays(){
  if(typeof closeAccountPanel==='function')closeAccountPanel();
  if(typeof closeLeaderboardPanel==='function')closeLeaderboardPanel();
@@ -411,6 +587,11 @@ function closeGalaxyGuardiansDevOverlays(){
 }
 
 function startGalaxyGuardiansDevPreview(cfg={}){
+ const harnessCfg=(window.__platinumHarnessLaunchCfg||window.__auroraHarnessLaunchCfg||null);
+ const mergedCfg=Object.assign({},harnessCfg||{},cfg||{});
+ delete window.__platinumHarnessLaunchCfg;
+ delete window.__auroraHarnessLaunchCfg;
+ cfg=mergedCfg;
  if(!galaxyGuardiansDevPreviewAllowed()){
   showToast('Galaxy Guardians playable preview is unavailable in this build.');
   return false;
@@ -423,6 +604,28 @@ function startGalaxyGuardiansDevPreview(cfg={}){
  resetSession('guardians_dev_preview_start');
  autoExportedSessionId='';
  const testCfg=saveTestCfg();
+ const armedWatchPersona=typeof resolveWatchModeStartPersona==='function'
+  ? resolveWatchModeStartPersona()
+  : '';
+ const armedWatchScope=armedWatchPersona&&typeof resolveWatchModeStartScope==='function'
+  ? resolveWatchModeStartScope()
+  : '';
+ const requestedWatchPersona=String(
+  (typeof selectedWatchPersona==='function'&&selectedWatchPersona())
+  || cfg.watchPersona
+  || cfg.persona
+  || 'advanced'
+ ).trim().toLowerCase();
+ const developerWatchPersona=cfg.watchMode?requestedWatchPersona:'';
+ const watchPersona=armedWatchPersona||developerWatchPersona;
+ const watchScope=watchPersona
+  ? String(
+   armedWatchPersona
+    ? (armedWatchScope||'game')
+    : ((typeof selectedWatchScope==='function'&&selectedWatchScope())||cfg.watchScope||cfg.scope||'game')
+  ).trim()||'game'
+  : 'game';
+ const watchMode=!!watchPersona;
  setSeed(localStorage.getItem(SEED_PREF_KEY)||0);
  aud=1;AC().resume?.();
  gameOverHtml='';gameOverState=null;
@@ -451,7 +654,10 @@ function startGalaxyGuardiansDevPreview(cfg={}){
   sequenceMode:'',
   attract:0,
   simT:0,
-  stageClock:0
+  stageClock:0,
+  watchMode:watchMode?1:0,
+  watchPersona,
+  watchScope
  });
  S.stats={shots:0,hits:0};
  GALAXY_GUARDIANS_ACTIVE_DEV_STATE=createGalaxyGuardiansRuntimeState({
@@ -463,16 +669,20 @@ function startGalaxyGuardiansDevPreview(cfg={}){
    +cfg.maxPlayableStage
    || +(window.__platinumHarnessRuntimeOverrides?.maxPlayableStage||window.__auroraHarnessRuntimeOverrides?.maxPlayableStage||0)
    || 1
-  )
+ )
  });
  GALAXY_GUARDIANS_ACTIVE_DEV_STATE.audioEventIndex=GALAXY_GUARDIANS_ACTIVE_DEV_STATE.events.length;
+ GALAXY_GUARDIANS_ACTIVE_DEV_STATE.telemetryEventIndex=0;
  syncGalaxyGuardiansShellState(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
+ mirrorGalaxyGuardiansRuntimeEvents(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
  if(typeof resetHarnessFrameClock==='function')resetHarnessFrameClock();
  if(typeof syncPauseUi==='function')syncPauseUi();
  logEvent('game_start',{
   gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
   devPreview:1,
   persona:S.harnessPersona||null,
+  watchMode:!!S.watchMode,
+  watchScope:S.watchScope||'game',
   maxPlayableStage:GALAXY_GUARDIANS_ACTIVE_DEV_STATE.maxPlayableStage|0
  });
  startRunRecording();
@@ -502,8 +712,9 @@ function updateGalaxyGuardiansDevPreview(dt){
  }else if(typeof advanceSharedStarfield==='function'){
   advanceSharedStarfield(dt,{ speedStageLift:(+S.stage||0)*.12 });
  }
- playGalaxyGuardiansRuntimeCues(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
  syncGalaxyGuardiansShellState(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
+ mirrorGalaxyGuardiansRuntimeEvents(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
+ playGalaxyGuardiansRuntimeCues(GALAXY_GUARDIANS_ACTIVE_DEV_STATE);
  if(GALAXY_GUARDIANS_ACTIVE_DEV_STATE.gameOver){
   started=0;
   paused=0;

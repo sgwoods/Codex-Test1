@@ -3,7 +3,7 @@ const fs = require('fs');
 const http = require('http');
 const path = require('path');
 const { analyze } = require('./analyze-run');
-const { writePortableSummary } = require('./summary-path-util');
+const { writePortableSummary, portablePath } = require('./summary-path-util');
 const { ensureUsableVideoArtifact } = require('./video-artifact-util');
 const { launchHarnessBrowser } = require('./browser-launch');
 const { DIST_DEV } = require('../build/paths');
@@ -58,6 +58,168 @@ function serve(root){
 
 function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
 
+function rel(file){
+  return file ? portablePath(path.resolve(file)) : null;
+}
+
+function personaDisplayName(key=''){
+  switch(String(key || '').toLowerCase()){
+    case 'advanced': return 'Intermediate';
+    case 'novice': return 'Novice';
+    case 'expert': return 'Expert';
+    case 'professional': return 'Professional';
+    default: return key || null;
+  }
+}
+
+function latestFileStem(summary){
+  const persona = String(summary.persona || '').trim().toLowerCase();
+  return persona ? `${summary.name}-${persona}` : summary.name;
+}
+
+function personaAliasStem(summary){
+  const label = personaDisplayName(summary.persona || '');
+  if(!label) return null;
+  const slug = String(label).trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  if(!slug || slug === String(summary.persona || '').trim().toLowerCase()) return null;
+  return `${summary.name}-${slug}`;
+}
+
+function pickFile(files, predicate){
+  return (files || []).find(predicate) || null;
+}
+
+function maxStageFromAnalysis(analysis){
+  const stageKeys = Object.keys(analysis?.stageMetrics || {})
+    .map(value => +value)
+    .filter(value => Number.isFinite(value) && value > 0);
+  return stageKeys.length ? Math.max(...stageKeys) : (+analysis?.stageClears?.slice(-1)?.[0]?.stage || 0);
+}
+
+function topLossCause(analysis){
+  const entries = Object.entries(analysis?.lossCauseCounts || {});
+  if(!entries.length) return null;
+  entries.sort((a,b) => b[1] - a[1]);
+  return { cause: entries[0][0], count: entries[0][1] };
+}
+
+function buildLatestRunDigest(outDir, summary){
+  const files = summary.files || [];
+  const state = summary.state || {};
+  const analysis = summary.analysis || {};
+  const personaKey = String(summary.persona || '').trim().toLowerCase() || null;
+  const personaLabel = personaDisplayName(personaKey);
+  const topCause = topLossCause(analysis);
+  const endedByGameOver = +((analysis?.eventCounts || {}).game_over || 0) > 0;
+  const missionComplete = +((analysis?.eventCounts || {}).mission_complete || 0) > 0;
+  const maxStageReached = maxStageFromAnalysis(analysis);
+  const shipLosses = Array.isArray(analysis.shipLost) ? analysis.shipLost.length : 0;
+  const stageClears = Array.isArray(analysis.stageClears) ? analysis.stageClears.length : 0;
+  const challengeClears = Array.isArray(analysis.challengeClears) ? analysis.challengeClears.length : 0;
+  const stageAdvances = +((analysis?.eventCounts || {}).stage_advance || 0);
+  const score = +state.score || 0;
+  const lives = +state.lives || 0;
+  const simT = +state.simT || 0;
+  const watchMode = !!state.watchMode;
+  const watchPersona = state.watchPersona || null;
+  const watchScope = state.watchScope || null;
+  const gameOver = endedByGameOver || (!!state.gameOver && !missionComplete);
+  return {
+    name: summary.name,
+    personaKey,
+    personaLabel,
+    updatedAt: new Date().toISOString(),
+    runDir: rel(outDir),
+    summaryFile: rel(path.join(outDir, 'summary.json')),
+    source: summary.source,
+    duration: summary.duration,
+    seed: summary.seed,
+    sessionFile: rel(pickFile(files, file => file.endsWith('.json') && !file.endsWith('-system-status.json'))),
+    systemStatusFile: rel(pickFile(files, file => file.endsWith('-system-status.json'))),
+    videoFile: rel(pickFile(files, file => file.endsWith('.webm') && !file.endsWith('.review.webm'))),
+    reviewVideoFile: rel(pickFile(files, file => file.endsWith('.review.webm'))),
+    artifactQuality: summary.artifactQuality || null,
+    maxStageReached,
+    score,
+    lives,
+    simTime: simT,
+    shipLosses,
+    stageClears,
+    challengeClears,
+    stageAdvances,
+    topLossCause: topCause,
+    gameOver,
+    missionComplete,
+    watchMode,
+    watchPersona,
+    watchScope,
+    state: {
+      stage: +state.stage || 0,
+      score,
+      lives,
+      simT,
+      started: !!state.started,
+      watchMode,
+      watchPersona,
+      watchScope,
+      gameOver,
+      missionComplete
+    },
+    metrics: {
+      maxStageReached,
+      shipLosses,
+      stageClears,
+      challengeClears,
+      stageAdvances,
+      topLossCause: topCause,
+      bulletPressureOverall: analysis.bulletPressure?.overall || null,
+      lossCauseCounts: analysis.lossCauseCounts || {},
+      eventCounts: analysis.eventCounts || {}
+    }
+  };
+}
+
+function latestRunMarkdown(digest){
+  const topCause = digest.metrics?.topLossCause;
+  const lines = [
+    `# Latest Guardians Full-Run Review`,
+    ``,
+    `- Persona: ${digest.personaLabel || 'Unknown'}${digest.personaKey ? ` (\`${digest.personaKey}\`)` : ''}`,
+    `- Stage reached: ${digest.metrics?.maxStageReached || digest.state?.stage || 0}`,
+    `- Final score: ${digest.state?.score || 0}`,
+    `- Final lives field: ${digest.state?.lives || 0}`,
+    `- Sim time: ${digest.state?.simT || 0}s`,
+    `- Ship losses: ${digest.metrics?.shipLosses || 0}`,
+    `- Stage clears: ${digest.metrics?.stageClears || 0}`,
+    `- Challenge clears: ${digest.metrics?.challengeClears || 0}`,
+    `- Top loss cause: ${topCause ? `${topCause.cause} (${topCause.count})` : 'n/a'}`,
+    `- Ended by game over: ${digest.state?.gameOver ? 'yes' : 'no'}`,
+    `- Mission complete: ${digest.state?.missionComplete ? 'yes' : 'no'}`,
+    `- Watch mode: ${digest.state?.watchMode ? 'on' : 'off'}`,
+    `- Watch scope: ${digest.state?.watchScope || 'n/a'}`,
+    `- Run folder: \`${digest.runDir || ''}\``,
+    `- Summary file: \`${digest.summaryFile || ''}\``,
+    `- Session file: \`${digest.sessionFile || ''}\``,
+    `- Review video: \`${digest.reviewVideoFile || digest.videoFile || ''}\``
+  ];
+  return `${lines.join('\n')}\n`;
+}
+
+function writeLatestRunArtifacts(outBase, outDir, summary){
+  const digest = buildLatestRunDigest(outDir, summary);
+  const stem = latestFileStem(summary);
+  const aliasStem = personaAliasStem(summary);
+  writePortableSummary(path.join(outBase, 'latest.json'), digest);
+  writePortableSummary(path.join(outBase, `${stem}-latest.json`), digest);
+  fs.writeFileSync(path.join(outBase, 'latest.md'), latestRunMarkdown(digest));
+  fs.writeFileSync(path.join(outBase, `${stem}-latest.md`), latestRunMarkdown(digest));
+  if(aliasStem){
+    writePortableSummary(path.join(outBase, `${aliasStem}-latest.json`), digest);
+    fs.writeFileSync(path.join(outBase, `${aliasStem}-latest.md`), latestRunMarkdown(digest));
+  }
+  return digest;
+}
+
 function keyName(code){
   if(code === 'Space') return ' ';
   if(code.startsWith('Key')) return code.slice(3).toLowerCase();
@@ -108,23 +270,24 @@ function specFromSession(file){
 function specFromScenario(file){
   const raw = JSON.parse(fs.readFileSync(file, 'utf8'));
   const cfg = raw.config || {};
+  const config = Object.assign({}, cfg, {
+    stage: Math.max(1, cfg.stage || 1),
+    ships: Math.max(1, Math.min(9, cfg.ships || 3)),
+    challenge: !!cfg.challenge,
+    persona: cfg.persona || null,
+    extendFirst: cfg.extendFirst,
+    extendRecurring: cfg.extendRecurring,
+    audioTheme: cfg.audioTheme,
+    graphicsTheme: cfg.graphicsTheme,
+    starfieldIntensity: cfg.starfieldIntensity,
+    starfieldSpeed: cfg.starfieldSpeed
+  });
   return {
     name: raw.name || path.basename(file, path.extname(file)),
     source: file,
     duration: Math.max(5, raw.duration || 20),
     stopOnGameOver: !!raw.stopOnGameOver,
-    config: {
-      stage: Math.max(1, cfg.stage || 1),
-      ships: Math.max(1, Math.min(9, cfg.ships || 3)),
-      challenge: !!cfg.challenge,
-      persona: cfg.persona || null,
-      extendFirst: cfg.extendFirst,
-      extendRecurring: cfg.extendRecurring,
-      audioTheme: cfg.audioTheme,
-      graphicsTheme: cfg.graphicsTheme,
-      starfieldIntensity: cfg.starfieldIntensity,
-      starfieldSpeed: cfg.starfieldSpeed
-    },
+    config,
     seed: (raw.seed >>> 0) || hashString(raw.name || path.basename(file)),
     actions: (raw.actions || []).map(a => ({
       t: a.t || 0,
@@ -255,7 +418,7 @@ async function waitForRun(page, spec, replayTime){
 
 async function finalizeArtifacts(page, downloads, spec, state){
   const wanted = spec.autoVideo === false ? 1 : 2;
-  if(state.started){
+  if(state.started || state.recording){
     await page.evaluate(name => window.__galagaHarness__.stop(name), spec.name);
     if(spec.autoVideo === false){
       await page.evaluate(() => window.__galagaHarness__.export());
@@ -385,6 +548,7 @@ async function main(){
     writePortableSummary(path.join(outDir, 'summary.json'), summary);
     summary.analysis = analyze(outDir);
     writePortableSummary(path.join(outDir, 'summary.json'), summary);
+    summary.latest = writeLatestRunArtifacts(outBase, outDir, summary);
     console.log(JSON.stringify(summary, null, 2));
   } finally {
     await browser.close();

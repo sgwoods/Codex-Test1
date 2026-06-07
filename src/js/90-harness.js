@@ -4,13 +4,27 @@ window.__galagaHarness__={
   if(cfg.seed!==undefined)setSeed(cfg.seed);
   window.__platinumHarnessDisableRecording=cfg.autoVideo===false?1:0;
   window.__auroraHarnessDisableRecording=window.__platinumHarnessDisableRecording;
+  const requestedGameKey=String(cfg.gameKey||'').trim();
+  if(typeof installGamePack==='function'){
+   if(requestedGameKey)installGamePack(requestedGameKey,{persist:false});
+   else if(cfg.forceAurora!==false)installGamePack('aurora-galactica',{persist:false});
+  }
  if(typeof cfg.autoVideo==='boolean'){
    VIDEO_REC.enabled=!!cfg.autoVideo;
    localStorage.setItem(RECORD_PREF_KEY,VIDEO_REC.enabled?'1':'0');
    syncRecordUi();
    if(!cfg.autoVideo&&VIDEO_REC.active&&typeof stopRunRecording==='function')stopRunRecording();
   }
-  if(typeof cfg.debugCarry==='boolean')window.setCarryDebug(!!cfg.debugCarry,'harness-start');
+ if(cfg.maxPlayableStage!==undefined){
+  const maxPlayableStage=cl(Math.max(1,+cfg.maxPlayableStage||1),1,99)|0;
+  window.__platinumHarnessRuntimeOverrides=Object.assign({},window.__platinumHarnessRuntimeOverrides||{},{
+   maxPlayableStage
+  });
+  window.__auroraHarnessRuntimeOverrides=Object.assign({},window.__auroraHarnessRuntimeOverrides||{},{
+   maxPlayableStage
+  });
+ }
+ if(typeof cfg.debugCarry==='boolean')window.setCarryDebug(!!cfg.debugCarry,'harness-start');
  if(cfg.stage||cfg.ships||cfg.challenge!==undefined||cfg.startKind!==undefined||cfg.challengeStage!==undefined||cfg.expertPlays!==undefined||cfg.extendFirst!==undefined||cfg.extendRecurring!==undefined||cfg.audioTheme!==undefined||cfg.graphicsTheme!==undefined||cfg.spriteRenderMode!==undefined||cfg.starfieldIntensity!==undefined||cfg.starfieldSpeed!==undefined){
   const currentCfg=loadTestCfg();
   const nextStartKind=cfg.startKind!==undefined?sanitizeStartKind(cfg.startKind):(cfg.challenge?'challenge':'level');
@@ -37,20 +51,30 @@ window.__galagaHarness__={
  window.__auroraHarnessPersona=window.__platinumHarnessPersona;
  if(cfg.playerTwoPersona!==undefined&&typeof setPlayerTwoPersona==='function')setPlayerTwoPersona(cfg.playerTwoPersona,{silent:1,source:'harness'});
  if(cfg.playerTwo!==undefined&&typeof setPlayerTwoSelection==='function')setPlayerTwoSelection(!!cfg.playerTwo,{silent:1,source:'harness'});
- if(cfg.watchPersona!==undefined&&typeof setWatchPersona==='function')setWatchPersona(cfg.watchPersona,{silent:1,source:'harness'});
- if(cfg.watchScope!==undefined&&typeof setWatchScope==='function')setWatchScope(cfg.watchScope,{silent:1,source:'harness'});
+ const watchPersonaValue=cfg.watchPersona!==undefined?cfg.watchPersona:(cfg.watchMode?cfg.persona:undefined);
+ if(watchPersonaValue!==undefined&&typeof setWatchPersona==='function')setWatchPersona(watchPersonaValue,{silent:1,source:'harness'});
+ const watchScopeValue=cfg.watchScope!==undefined?cfg.watchScope:(cfg.watchMode&&cfg.scope!==undefined?cfg.scope:undefined);
+ if(watchScopeValue!==undefined&&typeof setWatchScope==='function')setWatchScope(watchScopeValue,{silent:1,source:'harness'});
+ if(cfg.watchMode&&typeof armWatchMode==='function'){
+  armWatchMode(cfg.persona||selectedWatchPersona?.()||'advanced',{
+   source:'harness',
+   scope:cfg.scope||cfg.watchScope||selectedWatchScope?.()||'game'
+  });
+ }
  if(typeof setHarnessClockControlled==='function')setHarnessClockControlled(!!cfg.controlledClock);
  if(cfg.controlledClock&&Number.isFinite(+cfg.initialSimT)){
   S.simT=+cfg.initialSimT;
  }
  if(typeof resetHarnessFrameClock==='function')resetHarnessFrameClock();
+ window.__platinumHarnessLaunchCfg=Object.assign({},cfg);
+ window.__auroraHarnessLaunchCfg=window.__platinumHarnessLaunchCfg;
  if(!started){
   const startStageMode=String(cfg.stageMode||'internal').toLowerCase()==='display'?'display':'internal';
   const previousPlatinumStageMode=window.__platinumStartStageMode;
   const previousAuroraStageMode=window.__auroraStartStageMode;
   window.__platinumStartStageMode=startStageMode;
   window.__auroraStartStageMode=startStageMode;
-  try{start()}
+  try{start(cfg)}
   finally{
    if(previousPlatinumStageMode===undefined)delete window.__platinumStartStageMode;
    else window.__platinumStartStageMode=previousPlatinumStageMode;
