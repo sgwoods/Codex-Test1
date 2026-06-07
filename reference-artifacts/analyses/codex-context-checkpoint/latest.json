@@ -1,16 +1,16 @@
 {
   "ok": true,
   "artifactType": "codex-context-checkpoint",
-  "generatedAt": "2026-06-07T12:21:43.318Z",
-  "label": "aurora-urgent-gameplay-planning-handoff",
+  "generatedAt": "2026-06-07T16:12:29.027Z",
+  "label": "archive-session-2026-06-07",
   "root": "/Users/sgwoods/Development/Codex/Codex-test1",
-  "branch": "codex/aurora-challenge-movement-grammar",
-  "commit": "807ca433f",
-  "commitSubject": "Add urgent Aurora gameplay planning handoff",
+  "branch": "main",
+  "commit": "b6c9247cc",
+  "commitSubject": "Document multi-machine work allocation",
   "dirtyFileCountExcludingCheckpoint": 0,
   "statusLinesExcludingCheckpoint": [],
-  "diffStat": "CODEX_CONTEXT_CHECKPOINT.md                        | 78 ++++++++--------------\n .../analyses/codex-context-checkpoint/latest.json  | 49 +++++---------\n 2 files changed, 43 insertions(+), 84 deletions(-)",
-  "recentLog": "807ca433f (HEAD -> codex/aurora-challenge-movement-grammar) Add urgent Aurora gameplay planning handoff\n889fc7e5c (origin/codex/aurora-challenge-movement-grammar) Measure reference-spline spacing tradeoff\n79c68a863 Add measured challenge spacing-field primitive\nf16820840 Add challenge lead-in primitive evidence loop\nca2a74eaf Add challenge candidate visual presence guardrails\nfa1591b1e Calibrate challenge candidate trial rejection\ne43ff631a Add challenge movement grammar diagnostics\n67c8a70af Checkpoint challenge readability grammar diagnostics",
+  "diffStat": "",
+  "recentLog": "b6c9247cc (HEAD -> main, origin/main, origin/HEAD) Document multi-machine work allocation\n2cffa34e4 Refresh conformance evidence for release schedule publish\n41688d988 Record review packet for release schedule spine\n6424396eb Clarify release schedule build labels\n016472a4a Add release schedule and issue spine\nbb997d057 Refresh conformance evidence after roadmap alignment\nc6361e870 Record review packet for roadmap alignment\n235fa98d4 Align project-wide roadmap after dev publish",
   "machineStatus": {
     "ok": true,
     "mode": "status",
@@ -39,10 +39,10 @@
       }
     },
     "repo": {
-      "branch": "codex/aurora-challenge-movement-grammar",
-      "dirty": true,
-      "upstream": "origin/codex/aurora-challenge-movement-grammar",
-      "ahead": 1,
+      "branch": "main",
+      "dirty": false,
+      "upstream": "origin/main",
+      "ahead": 0,
       "behind": 0,
       "remote_ok": true
     },
@@ -87,8 +87,8 @@
       "dev": {
         "ok": true,
         "version": "1.4.0",
-        "label": "1.4.0.1+build.1013.sha.3cb0d08b",
-        "commit": "3cb0d08b",
+        "label": "1.4.0.1+build.1068.sha.b6c9247cc",
+        "commit": "b6c9247cc",
         "releaseChannel": "development"
       },
       "beta": {
@@ -106,7 +106,7 @@
         "releaseChannel": "production"
       }
     },
-    "publish_permitted": false,
+    "publish_permitted": true,
     "next": [
       "git switch -c codex/macbook-pro-your-topic",
       "npm run machine:status",
@@ -114,19 +114,16 @@
     ]
   },
   "plan": [
-    "Archive this session after preserving the current Aurora challenge movement grammar state, the project assessment, and the urgent gameplay planning handoff.",
-    "Begin the next Codex session with a long planning cycle focused on urgently improving Aurora gameplay characteristics, especially challenge-stage movement grammar, scoreability, visual presence, and reference-conformant swarm motion."
+    "Archive this long session cleanly after publishing the multi-machine allocation docs to hosted dev."
   ],
   "next": [
-    "Read CODEX_CONTEXT_CHECKPOINT.md and AURORA_URGENT_GAMEPLAY_PLANNING_HANDOFF_2026-06-07.md, then inspect the current challenge-stage artifacts before editing.",
-    "Do not start with another broad sweep; first define the next movement-grammar design that can preserve target fit, visual presence, expected-label identity, and human-perfect potential together.",
-    "After planning, implement the smallest scoreable phase-order/reference-path normalization pass on codex/aurora-challenge-movement-grammar or a clean successor branch."
+    "Start a fresh Codex session from clean main, read the checkpoint plus release schedule spine, then create a short-lived branch for the next 1.4.1 quality workstream."
   ],
   "notes": [
-    "Handoff doc committed at 807ca433f; previous measurement checkpoint is 889fc7e5c.",
-    "Latest challenge sweep found no runtime keeper; the next work should improve strategy, not loosen gates."
+    "Codex Desktop does not expose a repo command that forces internal chat compaction. The safe replacement is a manual checkpoint plus a deliberate fresh session from this file.",
+    "This checkpoint intentionally filters its own generated files out of the dirty-status read so it can be committed as the recovery point."
   ],
-  "restartPrompt": "You are continuing Aurora Galactica / Platinum work from a durable Codex checkpoint.\n\nRepo path:\n/Users/sgwoods/Development/Codex/Codex-test1\n\nStart by running:\ngit branch --show-current\ngit status --short\ngit log -5 --oneline --decorate\nnpm run machine:status\n\nRead first:\n- CODEX_CONTEXT_CHECKPOINT.md\n- RESTART_FROM_HERE.md\n- MULTI_MACHINE_WORKFLOW.md\n\nCurrent checkpoint:\n- label: aurora-urgent-gameplay-planning-handoff\n- generated: 2026-06-07T12:21:43.318Z\n- branch: codex/aurora-challenge-movement-grammar\n- commit: 807ca433f Add urgent Aurora gameplay planning handoff\n- dirty files excluding checkpoint self-output: 0\n\nContinue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.",
+  "restartPrompt": "You are continuing Aurora Galactica / Platinum work from a durable Codex checkpoint.\n\nRepo path:\n/Users/sgwoods/Development/Codex/Codex-test1\n\nStart by running:\ngit branch --show-current\ngit status --short\ngit log -5 --oneline --decorate\nnpm run machine:status\n\nRead first:\n- CODEX_CONTEXT_CHECKPOINT.md\n- RESTART_FROM_HERE.md\n- MULTI_MACHINE_WORKFLOW.md\n\nCurrent checkpoint:\n- label: archive-session-2026-06-07\n- generated: 2026-06-07T16:12:29.027Z\n- branch: main\n- commit: b6c9247cc Document multi-machine work allocation\n- dirty files excluding checkpoint self-output: 0\n\nContinue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.",
   "files": {
     "markdown": "CODEX_CONTEXT_CHECKPOINT.md",
     "json": "reference-artifacts/analyses/codex-context-checkpoint/latest.json"
