@@ -47,6 +47,7 @@
     "machine:bootstrap": "node tools/dev/machine-bootstrap.js",
     "machine:doctor": "node tools/dev/machine-doctor.js",
     "machine:status": "node tools/dev/machine-status.js",
+    "artifacts:prepare:import-inbox": "node tools/dev/prepare-artifact-inboxes.js",
     "codex:checkpoint": "node tools/dev/write-context-checkpoint.js",
     "artifacts:init:private": "node tools/dev/init-private-artifact-store.js",
     "artifacts:migrate:private": "node tools/dev/migrate-public-artifacts-to-private-store.js",

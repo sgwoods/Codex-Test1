@@ -60,6 +60,10 @@ The harness writes durable artifacts under
 - `latest.json` and `latest-<label>.*` aliases for documentation and release
   review
 
+This capture workflow does not rely on `~/Downloads/` as its archive. The
+browser may emit downloads internally, but the harness normalizes those files
+directly into the repo-owned capture directory.
+
 For before/after comparisons, keep the same seed, start kind, stage or
 challenge-stage marker, persona, viewport, and duration. The report explicitly
 states whether an audio stream was captured; video-only artifacts can still be

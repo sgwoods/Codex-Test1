@@ -47,6 +47,8 @@ async function main(){
 
   runCommandOrThrow('npm', ['install'], 'npm install');
   actions.push('npm install');
+  runCommandOrThrow('npm', ['run', 'artifacts:prepare:import-inbox'], 'npm run artifacts:prepare:import-inbox');
+  actions.push('npm run artifacts:prepare:import-inbox');
   runCommandOrThrow('npm', ['run', 'machine:ensure-browser'], 'npm run machine:ensure-browser');
   actions.push('npm run machine:ensure-browser');
   runCommandOrThrow('npm', ['run', 'build'], 'npm run build');

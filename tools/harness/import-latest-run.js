@@ -5,6 +5,7 @@ const path = require('path');
 const { analyze } = require('./analyze-run');
 const { writePortableSummary } = require('./summary-path-util');
 const { ensureUsableVideoArtifact } = require('./video-artifact-util');
+const { describeImportSourcePolicy, resolveImportSourceDirs } = require('./artifact-source-policy');
 
 function parseArgs(argv){
   const args = {};
@@ -42,6 +43,7 @@ function loadSession(file){
 }
 
 function findPairs(srcDir){
+  if(!fs.existsSync(srcDir)) return [];
   const entries = fs.readdirSync(srcDir);
   const sessions = new Map();
   for(const name of entries){
@@ -68,10 +70,28 @@ function findPairs(srcDir){
   });
 }
 
-function buildSummary(session, outDir, files, sourceDir){
+function collectPairs(sourceDirs){
+  const pairs = [];
+  for(const sourceDir of sourceDirs){
+    for(const pair of findPairs(sourceDir)){
+      pairs.push(Object.assign({}, pair, { sourceDir }));
+    }
+  }
+  return pairs.sort((a,b)=>{
+    const am = Math.max(fileMtime(a.sessionFile), fileMtime(a.videoFile));
+    const bm = Math.max(fileMtime(b.sessionFile), fileMtime(b.videoFile));
+    return bm - am;
+  });
+}
+
+function buildSummary(session, outDir, files, sourceDir, searchedSourceDirs){
   return {
     name: 'imported-self-play',
     source: sourceDir,
+    importSource: {
+      selectedSourceDir: sourceDir,
+      searchedSourceDirs: searchedSourceDirs || [sourceDir]
+    },
     importedAt: new Date().toISOString(),
     duration: +(session.duration || 0),
     config: {
@@ -87,10 +107,12 @@ function buildSummary(session, outDir, files, sourceDir){
 }
 
 function importLatest(opts={}){
-  const sourceDir = path.resolve(opts.source || path.join(os.homedir(), 'Downloads'));
+  const sourceDirs = resolveImportSourceDirs(opts.source);
   const outRoot = path.resolve(opts.out || path.join(process.cwd(), 'harness-artifacts'));
-  const pairs = findPairs(sourceDir);
-  if(!pairs.length) throw new Error(`No matching neo-galaga session/video pairs found in ${sourceDir}`);
+  const pairs = collectPairs(sourceDirs);
+  if(!pairs.length){
+    throw new Error(`No matching neo-galaga session/video pairs found in: ${sourceDirs.join(', ')}`);
+  }
   const pair = opts.sessionId ? pairs.find(p => p.id === opts.sessionId) : pairs[0];
   if(!pair) throw new Error(`No matching pair found for session id ${opts.sessionId}`);
 
@@ -102,22 +124,35 @@ function importLatest(opts={}){
   const files = [sessionDst, videoDst];
   if(artifactQuality.repaired && artifactQuality.file && !files.includes(artifactQuality.file)) files.unshift(artifactQuality.file);
   const summaryPath = path.join(outDir, 'summary.json');
-  const summary = buildSummary(session, outDir, files, sourceDir);
+  const summary = buildSummary(session, outDir, files, pair.sourceDir, sourceDirs);
   summary.artifactQuality = artifactQuality;
   writePortableSummary(summaryPath, summary);
   const analysis = analyze(outDir);
   const finalSummary = JSON.parse(fs.readFileSync(summaryPath, 'utf8'));
-  return { outDir, pairId: pair.id, files: finalSummary.files, analysis: analysis, summary: finalSummary };
+  return {
+    outDir,
+    pairId: pair.id,
+    sourceDir: pair.sourceDir,
+    searchedSourceDirs: sourceDirs,
+    importSourcePolicy: describeImportSourcePolicy(),
+    files: finalSummary.files,
+    analysis: analysis,
+    summary: finalSummary
+  };
 }
 
 if(require.main === module){
   const args = parseArgs(process.argv.slice(2));
   if(args.help){
     console.log('Usage: node tools/harness/import-latest-run.js [--source /absolute/path] [--session-id ngt-...] [--out /absolute/path]');
+    console.log('Default source search order:');
+    for(const dir of describeImportSourcePolicy().defaultImportSourceDirs){
+      console.log(`- ${dir}`);
+    }
     process.exit(0);
   }
   const result = importLatest({ source: args.source, sessionId: args['session-id'], out: args.out });
   console.log(JSON.stringify(result, null, 2));
 }
 
-module.exports = { importLatest, findPairs };
+module.exports = { collectPairs, importLatest, findPairs };

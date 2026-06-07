@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 const fs = require('fs');
-const os = require('os');
 const path = require('path');
-const { importLatest, findPairs } = require('./import-latest-run');
+const { importLatest, collectPairs } = require('./import-latest-run');
+const { describeImportSourcePolicy, resolveImportSourceDirs } = require('./artifact-source-policy');
 
 function parseArgs(argv){
   const args = {};
@@ -57,39 +57,56 @@ function summarize(result){
 }
 
 function checkLatest(opts={}){
-  const sourceDir = path.resolve(opts.source || path.join(os.homedir(), 'Downloads'));
+  const sourceDirs = resolveImportSourceDirs(opts.source);
   const outRoot = path.resolve(opts.out || path.join(process.cwd(), 'harness-artifacts'));
   const stateFile = path.join(ensureDir(outRoot), '.latest-import-state.json');
   const state = readJson(stateFile, {}) || {};
-  const pairs = findPairs(sourceDir);
+  const pairs = collectPairs(sourceDirs);
   if(!pairs.length){
-    return { status: 'none', message: `No matching neo-galaga run pair found in ${sourceDir}` };
+    return {
+      status: 'none',
+      searchedSourceDirs: sourceDirs,
+      importSourcePolicy: describeImportSourcePolicy(),
+      message: `No matching neo-galaga run pair found in: ${sourceDirs.join(', ')}`
+    };
   }
   const latest = opts.sessionId ? pairs.find(p => p.id === opts.sessionId) : pairs[0];
   if(!latest){
     return { status: 'missing', message: `No matching pair found for session id ${opts.sessionId}` };
   }
-  if(!opts.force && state.lastImportedId === latest.id){
+  if(!opts.force && state.lastImportedId === latest.id && state.lastImportedSource === latest.sourceDir){
     return {
       status: 'unchanged',
       pairId: latest.id,
+      sourceDir: latest.sourceDir,
+      searchedSourceDirs: sourceDirs,
       outDir: state.lastOutDir || null,
+      importSourcePolicy: describeImportSourcePolicy(),
       message: `Latest run ${latest.id} is already imported`
     };
   }
-  const result = importLatest({ source: sourceDir, sessionId: latest.id, out: outRoot });
+  const result = importLatest({ source: latest.sourceDir, sessionId: latest.id, out: outRoot });
   writeJson(stateFile, {
     lastImportedId: result.pairId,
+    lastImportedSource: result.sourceDir,
     lastOutDir: result.outDir,
     updatedAt: new Date().toISOString()
   });
-  return summarize(result);
+  return Object.assign(summarize(result), {
+    sourceDir: result.sourceDir,
+    searchedSourceDirs: sourceDirs,
+    importSourcePolicy: describeImportSourcePolicy()
+  });
 }
 
 if(require.main === module){
   const args = parseArgs(process.argv.slice(2));
   if(args.help){
     console.log('Usage: node tools/harness/check-latest-run.js [--source /absolute/path] [--out /absolute/path] [--session-id ngt-...] [--force]');
+    console.log('Default source search order:');
+    for(const dir of describeImportSourcePolicy().defaultImportSourceDirs){
+      console.log(`- ${dir}`);
+    }
     process.exit(0);
   }
   console.log(JSON.stringify(checkLatest({
