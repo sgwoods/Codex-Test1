@@ -1875,6 +1875,85 @@ function candidateDefinitions(){
           }
         }
       }
+      const referenceControls = targetControlsForStage(STAGE);
+      const referenceSeed = referenceControls?.runtimeLayoutSeed || {};
+      const referencePaths = Array.isArray(referenceSeed.groupReferencePaths) ? referenceSeed.groupReferencePaths : [];
+      if(referencePaths.filter(Boolean).length >= 3){
+        const referenceGroupCount = referencePaths.length;
+        const sourceSpawnOffsets = controlArray(referenceSeed.groupSpawnOffsets, [], referenceGroupCount).map(value => round(value, 2));
+        const sourceSpeedScales = controlArray(referenceSeed.groupSpeedScales, base.groupSpeedScales || [], referenceGroupCount).map(value => round(value, 2));
+        const sourceSoftSpeedScales = controlArray(referenceSeed.groupSoftSpeedScales, sourceSpeedScales, referenceGroupCount).map(value => round(value, 2));
+        const sourceArcAmps = controlArray(referenceSeed.groupArcAmps, base.groupArcAmps || [base.arcAmp || 1], referenceGroupCount).map(value => round(value, 2));
+        const sourceDropAmps = controlArray(referenceSeed.groupDropAmps, base.groupDropAmps || [base.dropAmp || 1], referenceGroupCount).map(value => round(value, 2));
+        const sourceLowerFieldBiases = controlArray(referenceSeed.groupLowerFieldBiases, [], referenceGroupCount).map(value => Math.round(+value || 0));
+        const sourceYOffsets = controlArray(referenceSeed.groupYOffsets, [], referenceGroupCount).map(value => Math.round(+value || 0));
+        const blendedLowerFieldBiases = sourceLowerFieldBiases.map(value => Math.round((+value || 0) * 0.5));
+        const blendedYOffsets = sourceYOffsets.map(value => Math.round((+value || 0) * 0.5));
+        const referencePathSets = dedupePathSets([
+          referenceSeed.groupPathFamilies,
+          base.groupPathFamilies,
+          ...pathSets
+        ]).slice(0, 3);
+        const referenceSpacingProfiles = centerlineSpacingFields.filter(profile => profile.id !== 'compactfield');
+        const referenceSpacingEnvelopes = centerlineEnvelopes;
+        const referenceSchedules = [
+          {
+            id: 'source-soft',
+            spawn: sourceSpawnOffsets,
+            speed: sourceSoftSpeedScales,
+            lower: blendedLowerFieldBiases,
+            y: blendedYOffsets
+          },
+          {
+            id: 'source-direct',
+            spawn: sourceSpawnOffsets,
+            speed: sourceSpeedScales,
+            lower: sourceLowerFieldBiases,
+            y: sourceYOffsets
+          },
+          {
+            id: 'current-safe',
+            spawn: null,
+            speed: null,
+            lower: blendedLowerFieldBiases,
+            y: blendedYOffsets
+          }
+        ];
+        for(let pathIndex = 0; pathIndex < referencePathSets.length; pathIndex += 1){
+          for(const schedule of referenceSchedules){
+            for(const spacing of referenceSpacingProfiles){
+              for(const envelope of referenceSpacingEnvelopes){
+                candidates.push({
+                  id: `stage7-target-reference-paths-spacing-${schedule.id}-${spacing.id}-${envelope.id}-p${pathIndex}`,
+                  description: `Stage 7 reference-spline plus spacing candidate: ${schedule.id} schedule, ${spacing.id} member field, ${envelope.id} envelope, path set ${pathIndex}.`,
+                  layoutOverride: Object.assign({}, base, {
+                    groupSpawnOffsets: schedule.spawn || base.groupSpawnOffsets,
+                    groupSpeedScales: schedule.speed || base.groupSpeedScales,
+                    groupArcAmps: sourceArcAmps,
+                    groupDropAmps: sourceDropAmps,
+                    groupLowerFieldBiases: schedule.lower,
+                    groupYOffsets: schedule.y,
+                    groupPathFamilies: referencePathSets[pathIndex],
+                    groupReferencePaths: referencePaths,
+                    groupLaneSpreadScales: envelope.lane,
+                    groupRowSpreadScales: envelope.row,
+                    groupSlotDelays: Array.from({ length: referenceGroupCount }, () => 0.14),
+                    groupLaneStaggers: Array.from({ length: referenceGroupCount }, () => 0.035),
+                    groupLeadInS: leadInContracts[0].leadInS,
+                    groupLeadInArcs: leadInContracts[0].arc,
+                    groupLeadInStartYOffsets: leadInContracts[0].startY,
+                    groupLeadInSideOffsets: leadInContracts[0].side,
+                    groupSpacingFieldSpreadXs: spacing.x,
+                    groupSpacingFieldSpreadYs: spacing.y,
+                    groupSpacingFieldGateS: spacing.gate,
+                    groupSpacingFieldPhaseS: spacing.phase
+                  })
+                });
+              }
+            }
+          }
+        }
+      }
       const comboDeconflicts = [
         { id: 'wide-soft-flat', spread: [16, 16, 14, 16, 14], bias: [2.5, 2.5, 2, 2.5, 2], y: [0, 0, 0, 0, 0], phaseSet: lanePhaseSets[0].value },
         { id: 'strong-soft-tiered', spread: [12, 12, 10, 12, 10], bias: [2.5, 2.5, 2, 2.5, 2], y: [4, 3, 4, 5, 3], phaseSet: lanePhaseSets[1].value }
@@ -2524,7 +2603,8 @@ function buildMarkdown(report){
   const routeRows = (report.diagnostics?.routeAwareTop || []).map(routeRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
   const leadInRows = (report.diagnostics?.leadInTop || []).map(routeRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
   const spacingFieldRow = row => `| ${row.candidateId} | ${row.humanVisibleGuardrails?.bunchingRisk ?? 'n/a'} | ${row.humanVisibleGuardrails?.magicAppearanceRisk ?? 'n/a'} | ${row.humanVisibleGuardrails?.spacingScore ?? 'n/a'} | ${row.humanVisibleGuardrails?.score10 ?? 'n/a'}/10 | ${row.humanPerfectPotentialScore10 ?? 'n/a'}/10 | ${row.expectedScore10}/10 | ${row.targetVideoObjectFitScore10 ?? 'n/a'}/10 | ${(row.groupSpacingFieldSpreadXs || []).join(', ') || 'none'} | ${(row.groupSpacingFieldSpreadYs || []).join(', ') || 'none'} | ${(row.groupSpacingFieldGateS || []).join(', ') || 'full'} |`;
-  const spacingFieldRows = (report.diagnostics?.spacingFieldTop || []).map(spacingFieldRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const centerlineSpacingFieldRows = (report.diagnostics?.centerlineSpacingFieldTop || report.diagnostics?.spacingFieldTop || []).map(spacingFieldRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
+  const referenceSplineSpacingRows = (report.diagnostics?.referenceSplineSpacingTop || []).map(spacingFieldRow).join('\n') || '| none | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |';
   return `# Stage ${report.stage} Challenge Candidate Sweep
 
 Generated: ${report.generatedAt}
@@ -2547,7 +2627,7 @@ Stage ${report.stage} currently has safe challenge behavior but still does not c
 - Promotion wins: ${(report.summary.promotionWins || []).length ? report.summary.promotionWins.join(' ') : 'none'}.
 - Player-facing meaning: ${report.summary.playerMeaning}
 - Process meaning: ${report.summary.processMeaning}
-- Candidate retention: ${report.candidateRetention?.retained ?? report.candidates.length}/${report.candidateRetention?.totalMeasured ?? report.candidateCount} retained; ${report.candidateRetention?.targetTimingDiagnostics ?? 0} target-timing diagnostics, ${report.candidateRetention?.targetControlDiagnostics ?? 0} target-control diagnostics, ${report.candidateRetention?.targetReferencePathDiagnostics ?? 0} target-reference-path diagnostics, ${report.candidateRetention?.pathShapeDiagnostics ?? 0} path-shape diagnostics, ${report.candidateRetention?.readabilityDiagnostics ?? 0} readability diagnostics, ${report.candidateRetention?.leastBunchedDiagnostics ?? 0} least-bunched diagnostics, and ${report.candidateRetention?.spacingFieldDiagnostics ?? 0} spacing-field diagnostics preserved.
+- Candidate retention: ${report.candidateRetention?.retained ?? report.candidates.length}/${report.candidateRetention?.totalMeasured ?? report.candidateCount} retained; ${report.candidateRetention?.targetTimingDiagnostics ?? 0} target-timing diagnostics, ${report.candidateRetention?.targetControlDiagnostics ?? 0} target-control diagnostics, ${report.candidateRetention?.targetReferencePathDiagnostics ?? 0} target-reference-path diagnostics, ${report.candidateRetention?.pathShapeDiagnostics ?? 0} path-shape diagnostics, ${report.candidateRetention?.readabilityDiagnostics ?? 0} readability diagnostics, ${report.candidateRetention?.leastBunchedDiagnostics ?? 0} least-bunched diagnostics, ${report.candidateRetention?.centerlineSpacingFieldDiagnostics ?? report.candidateRetention?.spacingFieldDiagnostics ?? 0} centerline spacing-field diagnostics, and ${report.candidateRetention?.referenceSplineSpacingDiagnostics ?? 0} reference-spline spacing diagnostics preserved.
 
 ## Top Candidates
 
@@ -2623,11 +2703,19 @@ ${leadInRows}
 
 ### Centerline Spacing Field Diagnostics
 
-These rows test stable per-member offsets from a group centerline. They are intended to keep each wave readable as a coherent formation rather than relying on late deconfliction or letting enemies visually bunch into pairs.
+These rows isolate stable per-member offsets from a group centerline without mixing in reference-spline path playback. They are intended to keep each wave readable as a coherent formation rather than relying on late deconfliction or letting enemies visually bunch into pairs.
 
 | Candidate | Bunching Risk | Magic Risk | Spacing | Human-Visible | Human-Perfect | Expected Labels | Target-Video Fit | Field X | Field Y | Gate S |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
-${spacingFieldRows}
+${centerlineSpacingFieldRows}
+
+### Reference-Spline Plus Spacing Diagnostics
+
+These rows compose ingested reference paths with spacing-field offsets. They are useful when target-video fit improves, but they must still preserve visual presence, expected-label identity, and professional perfect-route potential before promotion.
+
+| Candidate | Bunching Risk | Magic Risk | Spacing | Human-Visible | Human-Perfect | Expected Labels | Target-Video Fit | Field X | Field Y | Gate S |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
+${referenceSplineSpacingRows}
 
 ## Next Step
 
@@ -2830,6 +2918,24 @@ async function main(){
       || (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0)
       || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
     .slice(0, 12);
+  const centerlineSpacingFieldDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('stage7-centerline-spacing'))
+    .sort((a, b) => bunchingRiskOf(a) - bunchingRiskOf(b)
+      || magicRiskOf(a) - magicRiskOf(b)
+      || (b.humanVisibleGuardrails?.spacingScore || 0) - (a.humanVisibleGuardrails?.spacingScore || 0)
+      || (b.humanVisibleGuardrails?.score10 || 0) - (a.humanVisibleGuardrails?.score10 || 0)
+      || (b.humanPerfectPotential?.score10 || 0) - (a.humanPerfectPotential?.score10 || 0)
+      || (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0)
+      || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 12);
+  const referenceSplineSpacingDiagnostics = scored
+    .filter(row => String(row.candidateId || '').includes('target-reference-paths-spacing'))
+    .sort((a, b) => (b.targetVideoObjectFit?.score10 || 0) - (a.targetVideoObjectFit?.score10 || 0)
+      || (b.humanVisibleGuardrails?.score10 || 0) - (a.humanVisibleGuardrails?.score10 || 0)
+      || bunchingRiskOf(a) - bunchingRiskOf(b)
+      || (b.humanPerfectPotential?.score10 || 0) - (a.humanPerfectPotential?.score10 || 0)
+      || (b.expectedMatch?.score10 || 0) - (a.expectedMatch?.score10 || 0))
+    .slice(0, 12);
   const spacingFieldDiagnostics = scored
     .filter(row => String(row.candidateId || '').includes('stage7-centerline-spacing') || (row.layout?.groupSpacingFieldSpreadXs || []).length)
     .sort((a, b) => bunchingRiskOf(a) - bunchingRiskOf(b)
@@ -2851,6 +2957,8 @@ async function main(){
   for(const row of deconflictDiagnostics) retainedById.set(row.candidateId, row);
   for(const row of routeAwareDiagnostics) retainedById.set(row.candidateId, row);
   for(const row of leadInDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of centerlineSpacingFieldDiagnostics) retainedById.set(row.candidateId, row);
+  for(const row of referenceSplineSpacingDiagnostics) retainedById.set(row.candidateId, row);
   for(const row of spacingFieldDiagnostics) retainedById.set(row.candidateId, row);
   const retainedCandidates = Array.from(retainedById.values());
   if(!retainedCandidates.some(row => row.candidateId === baseline.candidateId)){
@@ -2953,8 +3061,10 @@ async function main(){
       deconflictDiagnostics: deconflictDiagnostics.length,
       routeAwareDiagnostics: routeAwareDiagnostics.length,
       leadInDiagnostics: leadInDiagnostics.length,
+      centerlineSpacingFieldDiagnostics: centerlineSpacingFieldDiagnostics.length,
+      referenceSplineSpacingDiagnostics: referenceSplineSpacingDiagnostics.length,
       spacingFieldDiagnostics: spacingFieldDiagnostics.length,
-      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score, the baseline row, and top target-timing/target-control/target-reference-path/path-shape/readability/least-bunched/deconflict/route-aware/lead-in/spacing-field diagnostic candidates; use candidateCount for the full measured search size.`
+      policy: `Keep the top ${retainedCandidateLimit} candidates by selection score, the baseline row, and top target-timing/target-control/target-reference-path/path-shape/readability/least-bunched/deconflict/route-aware/lead-in/centerline-spacing/reference-spline-spacing diagnostic candidates; use candidateCount for the full measured search size.`
     },
     diagnostics: {
       targetTimingTop: targetTimingDiagnostics.map(summarizeCandidate),
@@ -2966,6 +3076,8 @@ async function main(){
       deconflictTop: deconflictDiagnostics.map(summarizeCandidate),
       routeAwareTop: routeAwareDiagnostics.map(summarizeCandidate),
       leadInTop: leadInDiagnostics.map(summarizeCandidate),
+      centerlineSpacingFieldTop: centerlineSpacingFieldDiagnostics.map(summarizeCandidate),
+      referenceSplineSpacingTop: referenceSplineSpacingDiagnostics.map(summarizeCandidate),
       spacingFieldTop: spacingFieldDiagnostics.map(summarizeCandidate)
     },
     measurementPolicy: {

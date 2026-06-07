@@ -384,7 +384,9 @@ function leadInPrototypeEvidence(latestSweep){
 }
 
 function spacingFieldPrototypeEvidence(latestSweep){
-  const rows = Array.isArray(latestSweep?.diagnostics?.spacingFieldTop) ? latestSweep.diagnostics.spacingFieldTop : [];
+  const rows = Array.isArray(latestSweep?.diagnostics?.centerlineSpacingFieldTop)
+    ? latestSweep.diagnostics.centerlineSpacingFieldTop
+    : (Array.isArray(latestSweep?.diagnostics?.spacingFieldTop) ? latestSweep.diagnostics.spacingFieldTop : []);
   if(!rows.length) return null;
   const best = rows
     .filter(row => row?.humanVisibleGuardrails)
@@ -415,6 +417,60 @@ function spacingFieldPrototypeEvidence(latestSweep){
     read: processWin
       ? `Latest centerline spacing prototype ${best.candidateId} improved human-visible readability to ${round(guard.score10, 1)}/10 with bunching risk ${round(guard.bunchingRisk, 3)}, spacing ${round(guard.spacingScore, 3)}, and magic risk ${round(guard.magicAppearanceRisk, 3)}. It is still not runtime-ready because target-video fit is ${round(best.targetVideoObjectFitScore10, 1)}/10 and expected-label lift is not material.`
       : `Latest centerline spacing prototype ${best.candidateId} did not yet produce a reliable process win; bunching ${round(guard.bunchingRisk, 3)}, spacing ${round(guard.spacingScore, 3)}, magic ${round(guard.magicAppearanceRisk, 3)}.`
+  };
+}
+
+function referenceSplinePrototypeEvidence(latestSweep){
+  const rows = Array.isArray(latestSweep?.diagnostics?.targetReferencePathTop) ? latestSweep.diagnostics.targetReferencePathTop : [];
+  if(!rows.length) return null;
+  const baselineTarget = Number.isFinite(+latestSweep?.summary?.baselineTargetVideoObjectFitScore10)
+    ? +latestSweep.summary.baselineTargetVideoObjectFitScore10
+    : 0;
+  const baselineExpected = Number.isFinite(+latestSweep?.summary?.baselineExpectedScore10)
+    ? +latestSweep.summary.baselineExpectedScore10
+    : 0;
+  const baselinePerfect = Number.isFinite(+latestSweep?.summary?.baselineHumanPerfectPotentialScore10)
+    ? +latestSweep.summary.baselineHumanPerfectPotentialScore10
+    : 0;
+  const best = rows
+    .filter(row => row?.candidateId && String(row.candidateId).includes('target-reference-paths'))
+    .sort((a, b) => (+(b.targetVideoObjectFitScore10 || 0)) - (+(a.targetVideoObjectFitScore10 || 0))
+      || (+(b.humanVisibleGuardrails?.score10 || 0)) - (+(a.humanVisibleGuardrails?.score10 || 0))
+      || (+(b.humanPerfectPotentialScore10 || 0)) - (+(a.humanPerfectPotentialScore10 || 0)))[0] || null;
+  if(!best) return null;
+  const guard = best.humanVisibleGuardrails || {};
+  const targetLift10 = round((+best.targetVideoObjectFitScore10 || 0) - baselineTarget, 2);
+  const expectedLift10 = round((+best.expectedScore10 || 0) - baselineExpected, 2);
+  const perfectLift10 = round((+best.humanPerfectPotentialScore10 || 0) - baselinePerfect, 2);
+  const processWin = targetLift10 >= 0.55
+    && Number.isFinite(+guard.score10)
+    && +guard.score10 >= 8
+    && best.visualPresenceRegressionGuard?.pass !== false;
+  const targetFitSignal = targetLift10 >= 0.55
+    && Number.isFinite(+guard.score10)
+    && +guard.score10 >= 8;
+  return {
+    stage: latestSweep.stage,
+    candidateId: best.candidateId,
+    expectedScore10: round(best.expectedScore10, 1),
+    targetVideoObjectFitScore10: round(best.targetVideoObjectFitScore10, 1),
+    humanPerfectPotentialScore10: round(best.humanPerfectPotentialScore10, 1),
+    humanVisibleScore10: round(guard.score10, 1),
+    targetVideoObjectFitLift10: targetLift10,
+    expectedLift10,
+    humanPerfectPotentialLift10: perfectLift10,
+    spacingScore: round(guard.spacingScore, 3),
+    bunchingRisk: round(guard.bunchingRisk, 3),
+    magicAppearanceRisk: round(guard.magicAppearanceRisk, 3),
+    visualPresencePass: best.visualPresenceRegressionGuard?.pass !== false,
+    promotionReady: best.humanVisibleGuardrails?.pass === true && best.humanPerfectGuard?.pass === true && expectedLift10 >= -0.15,
+    targetFitSignal,
+    processWin,
+    read: processWin
+      ? `Latest reference-spline plus spacing prototype ${best.candidateId} improved target-video object fit by ${targetLift10}/10 and human-visible readability to ${round(guard.score10, 1)}/10, but it is blocked by expected-label movement ${expectedLift10}/10 and human-perfect movement ${perfectLift10}/10.`
+      : targetFitSignal
+      ? `Latest reference-spline plus spacing prototype ${best.candidateId} improved target-video object fit by ${targetLift10}/10 and readability to ${round(guard.score10, 1)}/10, but visual-presence, expected-label, and perfect-route gates still block promotion.`
+      : `Latest reference-spline prototype ${best.candidateId} did not clear a process-win threshold; target-video lift ${targetLift10}/10, visible ${round(guard.score10, 1)}/10.`
   };
 }
 
@@ -530,6 +586,8 @@ ${report.leadInPrototypeEvidence ? `Lead-in prototype evidence: ${report.leadInP
 
 ${report.spacingFieldPrototypeEvidence ? `Spacing-field prototype evidence: ${report.spacingFieldPrototypeEvidence.read}` : 'Spacing-field prototype evidence: none recorded in the latest sweep.'}
 
+${report.referenceSplinePrototypeEvidence ? `Reference-spline prototype evidence: ${report.referenceSplinePrototypeEvidence.read}` : 'Reference-spline prototype evidence: none recorded in the latest sweep.'}
+
 ## Primitive Backlog
 
 | Priority | Primitive | Category | Source Stages | Evidence | Implementation Plan |
@@ -560,17 +618,24 @@ function main(){
   const highPriority = primitives.filter(item => +item.priority10 >= 8);
   const leadInEvidence = leadInPrototypeEvidence(latestSweep);
   const spacingFieldEvidence = spacingFieldPrototypeEvidence(latestSweep);
+  const referenceSplineEvidence = referenceSplinePrototypeEvidence(latestSweep);
   const leadInPrototypeSucceeded = !!(leadInEvidence
     && Number.isFinite(+leadInEvidence.magicAppearanceRisk)
     && +leadInEvidence.magicAppearanceRisk <= 0.12
     && leadInEvidence.visualPresencePass);
   const spacingFieldPrototypeSucceeded = !!(spacingFieldEvidence?.processWin);
+  const referenceSplinePrototypeSucceeded = !!(referenceSplineEvidence?.processWin);
+  const referenceSplinePrototypeTargetSignal = !!(referenceSplineEvidence?.targetFitSignal);
   const firstBuildTarget = spacingFieldPrototypeSucceeded
     ? 'reference-spline-fit'
     : leadInPrototypeSucceeded
     ? 'group-spacing-field'
     : (highPriority[0]?.id || primitives[0]?.id || 'pending');
-  const firstBuildTargetRead = spacingFieldPrototypeSucceeded
+  const firstBuildTargetRead = referenceSplinePrototypeSucceeded
+    ? 'Reference-spline plus spacing now has a measured process win for target-video fit and readability, but expected-label preservation and human-perfect scoreability still block runtime promotion. Stay on reference-spline-fit and add scoreable phase/order constraints before another promotion attempt.'
+    : referenceSplinePrototypeTargetSignal
+    ? 'Reference-spline plus spacing now has a target-fit signal, but visual-presence, expected-label preservation, and human-perfect scoreability still block runtime promotion. Stay on reference-spline-fit and add visual-presence-safe phase/order constraints before another promotion attempt.'
+    : spacingFieldPrototypeSucceeded
     ? 'Centerline spacing now has a measured process win, but target identity/path fit still blocks promotion. Combine the spacing field with stronger reference-spline fit and phase scheduling next.'
     : leadInPrototypeSucceeded
     ? 'Lead-in continuity now has a measured prototype that reduces magic appearance, but it still bunches. Build a true centerline-plus-member-offset group-spacing field next.'
@@ -596,7 +661,11 @@ function main(){
       firstBuildTargetRead,
       firstFiveStages: stageRoadmap.map(row => row.stage),
       releaseReadiness: 'planning-only',
-      read: spacingFieldPrototypeSucceeded
+      read: referenceSplinePrototypeSucceeded
+        ? 'The latest sweep shows lead-in continuity, centerline spacing, and reference-spline composition can each move a measured axis. Runtime promotion is still blocked because the reference-spline win trades away expected-label score and professional perfect-route potential; the next grammar pass should constrain scoreable phase/order and path normalization around the best reference-spline family.'
+        : referenceSplinePrototypeTargetSignal
+        ? 'The latest sweep shows lead-in continuity and centerline spacing can produce measured readability gains, and reference-spline composition can materially improve target-video fit. Runtime promotion is still blocked because the reference-spline family fails visual-presence and trades away expected-label score and professional perfect-route potential; the next grammar pass should add phase/order, path normalization, and scoreable-window constraints around that family.'
+        : spacingFieldPrototypeSucceeded
         ? 'The latest sweep shows lead-in continuity and centerline spacing both produce measured readability gains. Runtime promotion is still blocked because target-video object fit and expected-label identity do not improve enough; the next grammar pass should compose spacing with stronger reference-spline/path-fit and phase-order controls.'
         : leadInPrototypeSucceeded
         ? 'The latest sweep shows lead-in continuity can materially improve magic-appearance readability, but group bunching still blocks runtime promotion. The next runtime improvement should shift from lead-in experiments to a centerline-plus-member-offset spacing primitive, then rerun the sweep and full visual presence guards.'
@@ -611,7 +680,12 @@ function main(){
     stageRoadmap,
     leadInPrototypeEvidence: leadInEvidence,
     spacingFieldPrototypeEvidence: spacingFieldEvidence,
-    nextBestStep: spacingFieldPrototypeSucceeded
+    referenceSplinePrototypeEvidence: referenceSplineEvidence,
+    nextBestStep: referenceSplinePrototypeSucceeded
+      ? 'Add scoreable phase-order constraints and reference-path normalization around the best reference-spline plus spacing candidate, then accept only if target-video lift remains >=0.55/10 while expected-label regression is within -0.15/10 and human-perfect potential is preserved.'
+      : referenceSplinePrototypeTargetSignal
+      ? 'Add visual-presence-safe phase-order constraints, reference-path normalization, and scoreable-window preservation around the best reference-spline plus spacing candidate, then accept only if target-video lift remains >=0.55/10, visual presence passes, expected-label regression is within -0.15/10, and human-perfect potential is preserved.'
+      : spacingFieldPrototypeSucceeded
       ? 'Compose the centerline spacing field with reference-spline fit and phase-order scheduling on Challenging Stage 7, then accept only if target-video lift clears the recorded full-analyzer calibration without losing human-visible readability.'
       : leadInPrototypeSucceeded
       ? 'Build a true group-spacing-field primitive that represents each group as a centerline plus stable member offsets, then test it first on Challenging Stage 7 before broadening to the first five challenge stages.'
@@ -629,6 +703,7 @@ function main(){
     firstBuildTarget: report.summary.firstBuildTarget,
     leadInPrototypeEvidence: report.leadInPrototypeEvidence,
     spacingFieldPrototypeEvidence: report.spacingFieldPrototypeEvidence,
+    referenceSplinePrototypeEvidence: report.referenceSplinePrototypeEvidence,
     latest: rel(path.join(OUT_ROOT, 'latest.json')),
     ingestion: rel(INGESTION_OUT)
   }, null, 2));

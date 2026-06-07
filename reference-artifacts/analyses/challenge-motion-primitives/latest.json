@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "challenge-motion-primitives",
-  "generatedAt": "2026-06-06T14:44:56.922Z",
-  "commit": "f16820840",
+  "generatedAt": "2026-06-07T01:40:28.715Z",
+  "commit": "79c68a863",
   "branch": "codex/aurora-challenge-movement-grammar",
   "gameKey": "aurora-galactica",
   "sourceArtifacts": {
@@ -16,7 +16,7 @@
     "stageRoadmapCount": 5,
     "highPriorityPrimitiveCount": 4,
     "firstBuildTarget": "reference-spline-fit",
-    "firstBuildTargetRead": "Centerline spacing now has a measured process win, but target identity/path fit still blocks promotion. Combine the spacing field with stronger reference-spline fit and phase scheduling next.",
+    "firstBuildTargetRead": "Reference-spline plus spacing now has a target-fit signal, but visual-presence, expected-label preservation, and human-perfect scoreability still block runtime promotion. Stay on reference-spline-fit and add visual-presence-safe phase/order constraints before another promotion attempt.",
     "firstFiveStages": [
       3,
       7,
@@ -25,7 +25,7 @@
       19
     ],
     "releaseReadiness": "planning-only",
-    "read": "The latest sweep shows lead-in continuity and centerline spacing both produce measured readability gains. Runtime promotion is still blocked because target-video object fit and expected-label identity do not improve enough; the next grammar pass should compose spacing with stronger reference-spline/path-fit and phase-order controls."
+    "read": "The latest sweep shows lead-in continuity and centerline spacing can produce measured readability gains, and reference-spline composition can materially improve target-video fit. Runtime promotion is still blocked because the reference-spline family fails visual-presence and trades away expected-label score and professional perfect-route potential; the next grammar pass should add phase/order, path normalization, and scoreable-window constraints around that family."
   },
   "measurementLimits": [
     "This is a design-and-measurement backlog, not a runtime promotion.",
@@ -1318,5 +1318,24 @@
     "processWin": true,
     "read": "Latest centerline spacing prototype stage7-centerline-spacing-spread-left-right-lead078-flat-readablefield-refwide-fan-sd014 improved human-visible readability to 7.9/10 with bunching risk 0.6, spacing 0.507, and magic risk 0.072. It is still not runtime-ready because target-video fit is 4/10 and expected-label lift is not material."
   },
-  "nextBestStep": "Compose the centerline spacing field with reference-spline fit and phase-order scheduling on Challenging Stage 7, then accept only if target-video lift clears the recorded full-analyzer calibration without losing human-visible readability."
+  "referenceSplinePrototypeEvidence": {
+    "stage": 7,
+    "candidateId": "stage7-target-reference-paths-spacing-source-direct-widefield-refwide-p0",
+    "expectedScore10": 5.3,
+    "targetVideoObjectFitScore10": 4.7,
+    "humanPerfectPotentialScore10": 7,
+    "humanVisibleScore10": 8.6,
+    "targetVideoObjectFitLift10": 0.8,
+    "expectedLift10": -0.4,
+    "humanPerfectPotentialLift10": -0.5,
+    "spacingScore": 0.826,
+    "bunchingRisk": 0.163,
+    "magicAppearanceRisk": 0.072,
+    "visualPresencePass": false,
+    "promotionReady": false,
+    "targetFitSignal": true,
+    "processWin": false,
+    "read": "Latest reference-spline plus spacing prototype stage7-target-reference-paths-spacing-source-direct-widefield-refwide-p0 improved target-video object fit by 0.8/10 and readability to 8.6/10, but visual-presence, expected-label, and perfect-route gates still block promotion."
+  },
+  "nextBestStep": "Add visual-presence-safe phase-order constraints, reference-path normalization, and scoreable-window preservation around the best reference-spline plus spacing candidate, then accept only if target-video lift remains >=0.55/10, visual presence passes, expected-label regression is within -0.15/10, and human-perfect potential is preserved."
 }
