@@ -56,6 +56,10 @@ The next storage decision is now a mixed-conformance review, not another blind
 bulk move. Repo-owned runtime evidence can stay public, while source-derived
 comparison sheets in mixed lanes should move private as they are identified.
 
+For Guardians specifically, the current canonical whole-run persona payload and
+the latest canonical slice-review captures are now treated as persist-worthy
+private artifacts so continued tuning does not depend on recreating them.
+
 For the repeatable source-to-game-pack process, pair this inventory with:
 
 - `CLASSIC_ARCADE_INGESTION_FRAMEWORK.md`
@@ -134,6 +138,8 @@ persona testing expectations.
 | Quality conformance roll-up | `reference-artifacts/analyses/quality-conformance` | what the current weighted quality picture looks like across all major categories |
 | Galaxian reference profile | `reference-artifacts/analyses/galaxian-reference/README.md` | source manifests, contact sheets, waveforms, promoted event log, no-voiceover early-session audio anchor, first scout-wave profile, and the context for Guardians evidence promotion |
 | Guardians promoted evidence packet | `reference-artifacts/analyses/guardians-reference-window-promotion-2026-06-05/README.md` | public metadata packet for named early-session, stage-five-plus, motion, popup, ambience, manual-page, and still-image anchors plus a residual cue ledger and linked runtime correspondence captures |
+| Guardians canonical whole-run persona baseline | `reference-artifacts/analyses/correspondence/guardians-persona-fullrun/README.md` and `reference-artifacts/analyses/correspondence/guardians-persona-fullrun/private-storage.json` | public summaries for the current Intermediate whole-run review lane plus a private-store pointer for the canonical generated session/video payload | repeatable whole-game Guardians review, stage progression diagnosis, and future persona-play comparison without recreating the same canonical run |
+| Guardians latest slice-review captures | `reference-artifacts/analyses/gameplay-segment-captures/private-storage.json` plus the tracked `latest-guardians-*` summaries | canonical opening, stage-5, and stage-7 review stills/videos mirrored privately for continued tuning | preserving the current comparison windows and review renders that ongoing Guardians fairness and conformance work will keep revisiting |
 
 ## Emerging Intake Lines
 

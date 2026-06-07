@@ -14,6 +14,10 @@ The underlying generated session/video artifacts are intentionally kept out of
 the public repo. The committed files in this folder are metadata summaries for
 the current canonical baseline.
 
+The current canonical generated payload is mirrored in the companion private
+artifact store so future Guardians tuning does not depend on recreating the same
+whole-run review capture.
+
 The default full-run reviewer uses the `advanced` harness key, which is the repo's **Intermediate** persona label.
 
 ## Current Intermediate Baseline
