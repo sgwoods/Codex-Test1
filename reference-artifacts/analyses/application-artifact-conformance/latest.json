@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "application-artifact-conformance-status",
-  "generatedAt": "2026-06-03T22:12:36.455Z",
-  "commit": "abf65183b",
+  "generatedAt": "2026-06-07T14:28:48.562Z",
+  "commit": "6614aa1d6",
   "branch": "main",
   "dirty": true,
   "sources": {
@@ -17,12 +17,12 @@
     "audioGap": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
     "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/latest.json",
     "releaseDashboard": "reference-artifacts/analyses/release-conformance-dashboard/latest.json",
-    "qualityReport": "reference-artifacts/analyses/quality-conformance/2026-05-24-ff249bba/report.json"
+    "qualityReport": "reference-artifacts/analyses/quality-conformance/2026-06-05-b55328e21/report.json"
   },
   "summary": {
     "rowCount": 14,
     "numericRowCount": 13,
-    "averageScore10": 7.75,
+    "averageScore10": 7.46,
     "weakestRow": "impact-explosion-visual-feedback",
     "spriteCatalogProxyScore10": 6.22,
     "spriteRuntimeCanvasScore10": 6.21,
@@ -3466,25 +3466,25 @@
     {
       "id": "audio-cue-assets",
       "surface": "Audio cues: runtime cue assets vs Galaga-family references",
-      "current": "7.3/10",
+      "current": "7/10",
       "target": ">=7.5",
-      "score10": 7.3,
+      "score10": 7,
       "confidence": "medium-high",
       "status": "Primary user-experience gap",
       "measurement": "21 cue/event comparisons, 31 segment-role comparisons, semantic score 9.8/10, highest risk challengePerfect 7/10.",
-      "evidence": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json; reference-artifacts/analyses/aurora-audio-event-gap/latest.json; reference-artifacts/analyses/quality-conformance/2026-05-24-ff249bba/report.json",
+      "evidence": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json; reference-artifacts/analyses/aurora-audio-event-gap/latest.json; reference-artifacts/analyses/quality-conformance/2026-06-05-b55328e21/report.json",
       "next": "Tune the highest segment-level gap next: challengePerfect onset. Rerun audio comparison and event-gap analysis after the change."
     },
     {
       "id": "audio-event-alignment",
       "surface": "Audio timing and event alignment",
-      "current": "9/9 checks passed",
+      "current": "6/9 checks passed",
       "target": "All event-alignment checks pass with low drift",
-      "score10": 10,
+      "score10": 6.67,
       "confidence": "medium",
       "status": "Guardrail measured in quality conformance",
       "measurement": "Worst current delta 6.31 ms; worst drift from baseline 0 ms.",
-      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-24-ff249bba/report.json",
+      "evidence": "reference-artifacts/analyses/quality-conformance/2026-06-05-b55328e21/report.json",
       "next": "Keep event alignment coupled to the cue-contract promotion pass so timing does not regress while changing source clips."
     },
     {
@@ -3508,7 +3508,7 @@
       "confidence": "medium",
       "status": "Split from generic UI shell before final gate",
       "measurement": "12 surface guardrails in latest quality report; visual scorer weakest shell surface Developer/settings popup surface 7.1/10.",
-      "evidence": "reference-artifacts/analyses/release-conformance-dashboard/latest.json; reference-artifacts/analyses/quality-conformance/2026-05-24-ff249bba/report.json; reference-artifacts/analyses/aurora-visual-look-conformance/latest.json",
+      "evidence": "reference-artifacts/analyses/release-conformance-dashboard/latest.json; reference-artifacts/analyses/quality-conformance/2026-06-05-b55328e21/report.json; reference-artifacts/analyses/aurora-visual-look-conformance/latest.json",
       "next": "Split iconography, dock-button affordance, and popup typography into separate target rows once we have icon/font-specific captures."
     },
     {
@@ -3526,9 +3526,9 @@
     {
       "id": "level-background-encounter-shape",
       "surface": "Stage backgrounds, level arc, and encounter shape",
-      "current": "8.8/10",
+      "current": "8.6/10",
       "target": ">=8.8",
-      "score10": 8.8,
+      "score10": 8.6,
       "confidence": "medium",
       "status": "Long-play gameplay-quality gate",
       "measurement": "Release gate tracks stage distinctiveness, challenge identity, pressure curve, reward/rescue layering, and learning/mastery windows.",
