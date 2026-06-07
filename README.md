@@ -68,16 +68,15 @@ The hosted documentation set should now move with the release lanes.
 Currently verified hosted docs:
 
 - project guide:
-  - `https://sgwoods.github.io/Aurora-Galactica/project-guide.html`
+  - `https://sgwoods.github.io/Aurora-Galactica/dev/project-guide.html`
 - white paper on hosted `/dev`:
   - `https://sgwoods.github.io/Aurora-Galactica/dev/white-paper.html`
 - 20-slide project overview on hosted `/dev`:
   - `https://sgwoods.github.io/Aurora-Galactica/dev/project-overview-slides.html`
-- intended white paper on hosted `/production`:
+- white paper on hosted `/production`:
   - `https://sgwoods.github.io/Aurora-Galactica/white-paper.html`
-- intended 20-slide project overview on hosted `/production`:
+- 20-slide project overview on hosted `/production`:
   - `https://sgwoods.github.io/Aurora-Galactica/project-overview-slides.html`
-  - still pending publication as of May 18, 2026
 - Platinum guide:
   - `https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html`
 - player guide:
@@ -92,6 +91,7 @@ Equivalent docs should also exist on hosted `/dev` and hosted `/beta`.
 Best top-level state and conformance-program overview:
 
 - [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md)
+- [PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md)
 - [DEVELOPMENT_STATUS_UPDATE.md](DEVELOPMENT_STATUS_UPDATE.md)
 
 Best living white paper and project-area narrative:
@@ -152,7 +152,7 @@ Best repo-role clarification:
 Current live release family:
 
 - hosted `/dev`:
-  - active `1.4.0.1` forward-review line
+  - active `1.4.0.1+build.1060.sha.cd66ab6b2` forward-review line
 - hosted `/beta`:
   - active `1.4.0-beta.1` approved production-source lane
 - hosted `/production`:
@@ -180,6 +180,10 @@ Current go-forward focus:
 - use [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md)
   as the maintained overview of how Platinum, applications, ingestion,
   harnessing, conformance metrics, and resource economics fit together
+- use [PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md)
+  before choosing new work so Aurora challenge-stage runtime quality,
+  Guardians v1, shared personas/Watch/Rival, ingestion grammar, and platform
+  boundaries stay aligned
 - use [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md) for the
   current readable quality table while shaping the next post-`1.4.0`
   improvement bundle

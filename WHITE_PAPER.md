@@ -2,7 +2,7 @@
 
 Status: living white paper
 Current draft: `v0.4.1-draft`
-Date: `2026-06-04`
+Date: `2026-06-07`
 Audience: broad technical readers, interested builders, collaborators, future
 reviewers, and public-facing project storytelling
 
@@ -136,7 +136,7 @@ Further detail:
 
 ### 2. Program Snapshot
 
-As of `2026-06-04`, the project can be described in one page:
+As of `2026-06-07`, the project can be described in one page:
 
 | Area | Current role | Why it matters |
 | --- | --- | --- |
@@ -151,11 +151,12 @@ Current maintained metric read:
 
 | Scope | Current read | Interpretation |
 | --- | --- | --- |
-| `Aurora Galactica` release gate | `8.8/10` dashboard roll-up; `8.6/10` economics roll-up | Strong playable baseline, but not yet a `1.4.1` production claim because challenge-stage set pieces remain weak. |
-| `Aurora` audio identity | `7.3/10` | Cue semantics are strong, but acoustic fit and full-phrase runtime stability remain the biggest audio gaps. |
+| Project conformance economics | `8.7/10` roll-up | Strong broad score, but the next release value depends on closing the worst rows rather than polishing the average. |
+| Application artifact conformance | `7.46/10` | The weakest row is `impact-explosion-visual-feedback`, so damage, hit, loss, and explosion feedback remain a major user-experience target. |
 | `Aurora` challenge-stage set pieces | `4.3/10` strict score | The clearest gameplay-conformance blocker: movement, graphics, alien novelty, and target-video fit are still far from mature Galaga-like bonus exhibitions. |
-| `Galaxy Guardians` reference preview | `>=7.7/10` reference target posture; `6.9/10` playtest-weighted preview | Credible second-game proof, but intentionally not presented as production-ready parity. |
-| Resource/economics ledger | `904` measured runs, `971.3` tracked wall minutes, `1.48GB` artifact growth | Shows the operating doctrine: turn model-assisted insight into local CPU/browser harnesses and track the cost of quality movement. |
+| `Aurora` challenge grammar readiness | `25/25` reference-backed first-five group contracts; `8.6/10` control readiness | Analysis is now ahead of runtime implementation; the next useful work is promotion-safe movement grammar, not more broad planning. |
+| `Galaxy Guardians` long-surface/persona review | `7.0/10` | Credible second-game process proof, but not yet a production-mature public game; v1 needs opening-slice quality, score/result identity, platform parity, and Watch/Rival/persona reuse. |
+| Resource/economics ledger | `904` measured runs, `58,277s` tracked wall time, `58,392s` CPU time, about `1.48GB` artifact accounting | Shows the operating doctrine: turn model-assisted insight into local CPU/browser harnesses and track the cost of quality movement. |
 
 The evidence program also became more concrete in the latest pass:
 
@@ -163,6 +164,12 @@ The evidence program also became more concrete in the latest pass:
   release path
 - release conformance artifacts, the game conformance catalog, and white-paper
   PDF metadata are refreshed enough for `publish:check:dev`
+- hosted `/dev` now carries `1.4.0.1+build.1060.sha.cd66ab6b2`, including the
+  consolidated Aurora challenge grammar, Guardians ingestion/conformance
+  cleanup, refreshed dashboards, public project guide, white-paper PDF, slides,
+  and review packet
+- the current cross-thread priority map is preserved in
+  [PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md)
 - the June 1 preserved-source expansion added richer Galaga, Galaxian, and
   Space Invaders evidence lanes, including manuals, strategy/walkthrough
   bundles, sprite/cue packages, challenge-stage videos, and cabinet/spec

@@ -11,15 +11,18 @@ Use it when deciding:
 
 ## Current Release Posture
 
-As of May 19, 2026:
+As of June 7, 2026:
 
 - hosted `/production` is the refreshed public `1.4.0` family
 - hosted `/beta` remains the authority-gated review lane for the next deliberate
   candidate cycle
 - hosted `/dev` is the forward-review lane for the next coherent improvement
-  bundle and currently tracks the `1.4.0.1` line
-- local MacBook development is currently on
-  `codex/macbook-conformance-investment-review`
+  bundle and currently tracks `1.4.0.1+build.1060.sha.cd66ab6b2`
+- local MacBook development is currently on clean `main`, matching
+  `origin/main`
+- `main` includes the integrated Aurora challenge movement grammar work, the
+  Galaxy Guardians ingestion/conformance cleanup, refreshed conformance
+  economics, and the current code-review packet
 
 This means:
 
@@ -30,6 +33,8 @@ This means:
   improvements
 - the immediate execution question is now which measured conformance gains
   justify the next `/dev` and then the next beta-candidate request
+- the standing cross-workstream read before choosing a new branch is
+  [PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md)
 
 The forward line and the current shipped family now include:
 
@@ -70,11 +75,21 @@ do not outrun conformance or public safety:
    publishing wait behind explicit auth, consent, storage, moderation, token,
    and revoke/failure-mode review.
 
-The immediate next work is to finish the current quality bundle cleanly: protect
-the sprite-scale fix, preserve the wider readable rack, keep later-stage entry
-staggering measured, document stage-1 opening overlap as warning-level
-choreography debt, and then return to Aurora challenge-stage conformance and
-audio event clarity.
+The immediate next work is no longer integration cleanup. It is to turn the
+new evidence into runtime quality:
+
+- Aurora challenge stages: use the reference-backed grammar and movement
+  primitives to build a runtime-safe candidate that improves target fit without
+  losing visual presence or scoreable routes.
+- Galaxy Guardians: move the current preview from strong documentation/evidence
+  toward a real v1 slice by tightening opening presentation, score/result
+  identity, replay/video readiness, Watch/Rival/persona parity, and platform
+  frame integration.
+- Shared platform: make personas, Watch, Rival, replay/video capture, music/SFX
+  controls, and full-window/cabinet presentation reusable through game adapters.
+- Ingestion: keep promoting reusable grammars, target extraction, event
+  feedback analysis, and conformance economics so future games inherit the
+  process.
 
 The current tracked challenge-stage gap remains that the stages are safe but not
 yet spectacular enough: movement grammar, alien novelty, stage-specific target
@@ -119,29 +134,31 @@ The project is therefore not in a "ship fast from wherever we are" mode.
 
 It is in a "continue deliberately without losing agility" mode.
 
-## Active Post-Beta MacBook Work Block
+## Active Post-Dev-Publish Work Block
 
-After the first `1.4.0` beta was published from the iMacM1 release-authority
-machine, this MacBook resumed normal development from the clean review head:
+After the June 7 hosted `/dev` publish, the current work block is:
 
-- base commit: `af3f2b85`
-- beta label: `1.4.0-beta.1+build.747.sha.af3f2b85.beta`
-- current working branch: `codex/macbook-audio-entry-grounding-cycle`
-- latest pushed local conformance commit: `ac18d0e9`
-- plan: [MACBOOK_POST_BETA_10_HOUR_CONFORMANCE_PLAN.md](MACBOOK_POST_BETA_10_HOUR_CONFORMANCE_PLAN.md)
+- base commit: `cd66ab6b2`
+- hosted `/dev` label: `1.4.0.1+build.1060.sha.cd66ab6b2`
+- source branch: clean `main`
+- alignment note:
+  [PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md)
 
-The work block should prioritize measured user-experience conformance:
+The work block should prioritize measured user-experience conformance and
+platform reuse in this order:
 
-- audio UX conformance and runtime recovery first
-- challenge-stage arrival, novelty, trajectory variation, and high-bonus
-  readability second
-- regular alien entry geometry separation and boss/formation choreography third
-- persona distribution evidence, docs, dashboard, and economics updates as the
-  evidence layer
+1. Aurora challenge-stage runtime improvement from the new movement grammar.
+2. Galaxy Guardians v1 slice completeness and platform-frame parity.
+3. Game-generic personas, Watch, and Rival behavior that can run Aurora,
+   Guardians, and later games.
+4. Event-feedback clarity, especially impact/explosion/damage/loss sequences.
+5. Ingestion-to-runtime automation so future games inherit the evidence,
+   grammar, candidate-loop, and conformance economics pipeline.
 
-The branch may be pushed and merged through normal development flow. It must
-not publish beta or production unless release authority is explicitly
-transferred to this machine.
+The branch may be pushed and merged through normal development flow. Hosted
+`/dev` may be republished from this release-authority machine after a coherent
+review bundle. Hosted `/beta` and hosted `/production` still require explicit
+review and approval, not automatic mirroring.
 
 ## Multi-Machine Operating Rule
 

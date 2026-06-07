@@ -2,16 +2,18 @@
 
 ## Current State
 
-Verified May 18, 2026:
+Verified June 7, 2026:
 
 - hosted `/dev`
-  - active `1.4.0.1` forward-review line
+  - active `1.4.0.1+build.1060.sha.cd66ab6b2` forward-review line
 - hosted `/beta`
   - active `1.4.0-beta.1` reviewed candidate lane
 - hosted `/production`
   - stable `1.4.0` public line
 - `main`
-  - authoritative integration branch for the live `1.4.0` follow-through line
+  - authoritative integration branch for the live `1.4.0` follow-through line,
+    including the consolidated Aurora challenge grammar and Guardians
+    ingestion/conformance cleanup work
 
 This means:
 
@@ -34,6 +36,12 @@ resource economics fit together.
 
 For the fastest quick current-state reopen, pair it with
 [DEVELOPMENT_STATUS_UPDATE.md](DEVELOPMENT_STATUS_UPDATE.md).
+
+The current cross-thread work ordering is maintained in
+[PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md).
+Use that note before choosing new work so Aurora challenge-stage improvement,
+Galaxy Guardians v1, shared personas/Watch/Rival, ingestion grammar, platform
+boundaries, and release documentation stay aligned.
 
 ## Active Workstreams
 
@@ -188,35 +196,43 @@ For the fastest quick current-state reopen, pair it with
 ## Immediate Priorities
 
 1. treat `main` as the authoritative post-production integration line
-2. keep the multi-machine bootstrap and release-authority workflow healthy
-3. keep hosted `/dev` available for the next coherent review bundle instead of
+2. use
+   [PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md)
+   as the first work-selection read after the hosted `/dev` publish
+3. keep the multi-machine bootstrap and release-authority workflow healthy
+4. keep hosted `/dev` available for the next coherent review bundle instead of
    using it as a casual mirror of `main`
-4. after the ship-sizing fix lands, resume Guardians by re-baselining the
-   one-level visible slice first, then reusing Aurora-proven graphics/audio
-   conformance machinery for Guardians-owned targets before asking for more
-   public depth claims
-5. prioritize audio/event feedback and stage-shape conformance over more broad
+5. attack Aurora challenge-stage runtime quality first: the grammar and
+   reference-backed contracts are ready enough, but the runtime challenge
+   stages still score around `4.3/10` and need visible movement/readability
+   lift
+6. advance Galaxy Guardians toward a real v1 playable slice by tightening the
+   opening public slice, score/result/replay identity, and full Platinum frame
+   parity before expanding public depth
+7. make personas, Watch, and Rival behavior game-generic so Aurora improvements
+   can be reused by Guardians and later games
+8. prioritize audio/event feedback and stage-shape conformance over more broad
    planning; the planning scaffolding is strong enough, while runtime feel still
    needs a measurable lift
-6. incorporate the other machine's Galaxians-style second-game, harness, and
+9. incorporate the other machine's Galaxians-style second-game, harness, and
    analysis progress into the main roadmap
-7. use the new Guardians playable branch to force score, replay, result, and
+10. use the new Guardians playable branch to force score, replay, result, and
    platform validation across two games rather than one
-7. keep
+11. keep
    [GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md](GALAXY_GUARDIANS_FIRST_CLASS_CONFORMANCE_PLAN.md)
    and `harness:check:galaxy-guardians-first-class-conformance` healthy so
    Galaxy review discipline approaches Aurora's
-8. prioritize level-by-level arcade depth as the next major product pillar,
+12. prioritize level-by-level arcade depth as the next major product pillar,
    using
    [GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md](GALAXY_GUARDIANS_STAGE_ARC_AND_HOMAGE_PLAN.md)
    as the maintained map from opening slice to deeper repeated-rack play and
    future homage variants
-9. make shared gameplay-video publishing an early evidence/product capability
-10. continue narrow trust fixes from the open issue stream
-11. execute the measured Galaga long-cycle quality plan in
+13. make shared gameplay-video publishing an early evidence/product capability
+14. continue narrow trust fixes from the open issue stream
+15. execute the measured Galaga long-cycle quality plan in
    [AURORA_GALAGA_LONG_CYCLE_REVIEW.md](AURORA_GALAGA_LONG_CYCLE_REVIEW.md)
    before broad gameplay, complexity, or graphical tuning
-12. carry
+16. carry
    [IMMERSIVE_FULL_WINDOW_GAMEPLAY_MODE_PLAN.md](IMMERSIVE_FULL_WINDOW_GAMEPLAY_MODE_PLAN.md)
    as a `1.6.0` cabinet-surface feature, allowing an earlier hidden prototype
    only if it preserves input mapping, replay determinism, shell escape paths,
@@ -224,6 +240,27 @@ For the fastest quick current-state reopen, pair it with
 
 Current conformance read:
 
+- hosted `/dev` now includes the consolidated Aurora challenge grammar,
+  Guardians ingestion cleanup, refreshed conformance economics, public project
+  guide, white paper, slides, dashboards, and review packet from
+  `1.4.0.1+build.1060.sha.cd66ab6b2`
+- the latest conformance economics roll-up reads `8.7/10` overall with
+  `904` measured runs, about `58,277s` wall time, and about `58,392s` CPU time
+- application artifact conformance is `7.46/10`; the weakest row is
+  `impact-explosion-visual-feedback`, so hit/damage/explosion clarity remains
+  a top user-experience target
+- dedicated Aurora challenge set-piece conformance remains a high-priority
+  gap at `4.3/10` average current score, `4.4/10` movement,
+  `4.5/10` graphics, `3.9/10` novelty, and no release-ready challenge
+  contracts
+- challenge-stage grammar is now materially ahead of runtime implementation:
+  the first-five challenge work has `25/25` reference-backed group contracts
+  and `8.6/10` control readiness, but runtime promotion is still blocked by
+  visual-presence, phase/order, and scoreable-window constraints
+- Galaxy Guardians longer-surface/persona review reads `7.0/10`, with
+  stage-arc pressure at `7.9/10`, stage presentation at `7.4/10`, persona
+  utility at `6.5/10`, midrun survivability at `6.0/10`, and stage-band
+  authority at `6.7/10`
 - overall Aurora quality is `9.1/10` across the current scored categories
 - audio identity and cue alignment is the weakest category at `6.9/10`; the
   audio process is stronger than the rounded runtime score, with cue-contract

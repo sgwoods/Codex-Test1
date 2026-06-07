@@ -27,6 +27,86 @@
       ]
     },
     {
+      "id": "workstream-alignment",
+      "title": "Project-Wide Workstream Alignment",
+      "summary": "The current cross-thread ordering after the June 7 hosted dev publish.",
+      "cards": [
+        {
+          "title": "Current Hosted Dev",
+          "body": "Hosted `/dev` now carries `1.4.0.1+build.1060.sha.cd66ab6b2`, including the consolidated Aurora challenge movement grammar, Guardians ingestion/conformance cleanup, refreshed conformance economics, white paper PDF, slides, dashboards, public project guide, and code-review packet."
+        },
+        {
+          "title": "Main Bottleneck",
+          "body": "Aurora challenge-stage runtime quality is now the highest-value user-facing gap: the set-piece score is about `4.3/10`, while first-five grammar readiness is `8.6/10`. That means analysis is ahead of runtime implementation."
+        },
+        {
+          "title": "Second-Game Push",
+          "body": "Galaxy Guardians has real ingestion and long-surface review evidence, including a `7.0/10` long-surface/persona read, but it still needs a v1 playable slice with convincing opening presentation, scoring/results, platform parity, and reusable Watch/Rival/persona behavior."
+        },
+        {
+          "title": "Shared Infrastructure Rule",
+          "body": "Every Aurora improvement should either improve the game directly or leave behind reusable ingestion, persona, replay/video, event-feedback, candidate-loop, or platform-boundary capability that Guardians and future games can inherit."
+        }
+      ],
+      "table": {
+        "columns": [
+          "Rank",
+          "Thread",
+          "Next Work",
+          "Success Signal"
+        ],
+        "rows": [
+          [
+            "1",
+            "Aurora challenge stages",
+            "Promote a runtime-safe reference-spline movement candidate with visual-presence, phase/order, spacing, and scoreable-window constraints.",
+            "Early challenging stages stop feeling like sudden appearances and begin reading as authored Galaga-like bonus set pieces."
+          ],
+          [
+            "2",
+            "Galaxy Guardians v1",
+            "Tighten the visible opening slice, score/result identity, platform frame parity, Watch/Rival/persona behavior, and replay/video readiness.",
+            "Guardians becomes a credible one-level Platinum game slice rather than only a preview/documentation artifact."
+          ],
+          [
+            "3",
+            "Shared personas and Watch/Rival",
+            "Define a game-generic persona adapter covering start state, playable scope, score ownership, run summary, event logs, Watch scope, and Rival boundaries.",
+            "Aurora, Guardians, and future games can all be explored and measured in background play with the same platform pattern."
+          ],
+          [
+            "4",
+            "Event feedback and artifact quality",
+            "Treat impact, explosion, damage, player loss, capture, and rescue as time-based audiovisual event sequences.",
+            "Players understand what happened immediately, and future games inherit a reusable event-feedback scorer."
+          ],
+          [
+            "5",
+            "Ingestion-to-runtime grammar",
+            "Promote reference media, path labels, event labels, and candidate sweeps into game-owned data packages.",
+            "New games move from artifacts to measurable runtime candidates faster and with less subjective tuning."
+          ]
+        ]
+      },
+      "links": [
+        {
+          "label": "Read Full Workstream Alignment",
+          "href": "project-guide.html#project-wide-workstream-alignment-doc",
+          "detail": "Full source note with current lane state, measurements, priorities, execution order, and cross-thread checks."
+        },
+        {
+          "label": "Open Conformance Dashboard",
+          "href": "conformance-dashboard.html#conformance",
+          "detail": "Current game-selectable scorecard, priorities, and resource-economics view."
+        },
+        {
+          "label": "Open Ingestion Dashboard",
+          "href": "ingestion-dashboard.html",
+          "detail": "Current artifact and ingestion-process view for Aurora, Guardians, and future games."
+        }
+      ]
+    },
+    {
       "id": "conformance-entry-points",
       "title": "Conformance Entry Points",
       "summary": "Shareable lane-relative links for Aurora, Galaxy Guardians, and the combined dashboard view.",
@@ -469,6 +549,11 @@
           "detail": "Human-oriented navigation map for browsing the hosted documentation set."
         },
         {
+          "label": "Hosted Project-Wide Workstream Alignment",
+          "href": "project-guide.html#workstream-alignment",
+          "detail": "Current cross-thread ordering for Aurora challenge quality, Guardians v1, personas, ingestion, platform boundaries, and release docs."
+        },
+        {
           "label": "Hosted White Paper",
           "href": "white-paper.html",
           "detail": "Dedicated hosted narrative surface for the living white paper, citation ledger, and versioned white-paper release history."
@@ -604,6 +689,12 @@
       "title": "Project State And Conformance Program",
       "summary": "Top-level maintained explanation of the broader project, conformance loop, ingestion role, platform/game separation, and model/local-compute strategy.",
       "file": "PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md"
+    },
+    {
+      "id": "project-wide-workstream-alignment-doc",
+      "title": "Project-Wide Workstream Alignment",
+      "summary": "Current cross-thread alignment after the June 7 hosted dev publish, including lane state, measured bottlenecks, active workstreams, execution order, and shared checks.",
+      "file": "PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md"
     },
     {
       "id": "game-conformance-catalog-doc",

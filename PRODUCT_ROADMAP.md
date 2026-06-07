@@ -2,10 +2,10 @@
 
 ## Current Shipped State
 
-Verified May 14, 2026:
+Verified June 7, 2026:
 
 - hosted `/dev`
-  - active `1.4.0.1` forward-review line
+  - active `1.4.0.1+build.1060.sha.cd66ab6b2` forward-review line
 - hosted `/beta`
   - active `1.4.0-beta.1` reviewed candidate lane
 - hosted `/production`
@@ -15,8 +15,12 @@ Aurora is in a post-`1.4.0` ship posture:
 
 - production now carries the current `1.4.0` public family
 - beta now carries the first deliberate `1.4.0-beta.1` candidate
-- dev carries the aligned `1.4.0.1` forward-review line
-- `main` is the forward line for the deliberate `1.4.1` pickup
+- dev carries the aligned `1.4.0.1` forward-review line with the consolidated
+  Aurora challenge grammar, Guardians ingestion/conformance cleanup, refreshed
+  conformance economics, public project guide, white paper, slides, dashboards,
+  and review packet
+- `main` is the forward line for the deliberate `1.4.1` pickup and now matches
+  the hosted `/dev` source commit
 - future production promotions of similar scope should move a real public
   SemVer version rather than repeat the May 12 same-family exception
 
@@ -39,6 +43,8 @@ It is centered on:
 
 The maintained top-level explanation of this program is
 [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md).
+The current cross-workstream execution ordering is maintained in
+[PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md).
 
 ## Near-Term Release Direction
 
@@ -88,6 +94,17 @@ Reason:
 
 That pickup should focus on:
 
+- Aurora challenge-stage runtime quality first: movement grammar and
+  reference-backed target contracts are now strong enough to drive runtime
+  implementation, while challenge-stage set-piece conformance remains around
+  `4.3/10`
+- Galaxy Guardians v1 slice completeness: opening presentation, score/result
+  identity, platform-frame parity, Watch/Rival/persona reuse, and evidence
+  gates before public-depth expansion
+- shared personas, Watch, and Rival as Platinum/game-adapter capabilities that
+  apply to every game rather than Aurora-only UI behaviors
+- ingestion-to-runtime grammar so future games benefit from the Aurora and
+  Guardians analysis work instead of starting again from subjective tuning
 - audio identity, event feedback, and cue-contract runtime promotion only when
   measured guards pass
 - alien entry, challenge-stage novelty, and level-arc progression
@@ -172,8 +189,24 @@ Specific deferred shell/UI cleanup to hold for that `1.6.0` family:
 
 Current conformance read:
 
+- the latest cross-workstream alignment is in
+  [PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md)
 - see the generated score/target roll-up in
   [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md)
+- conformance economics now show `904` measured runs, roughly `58,277s` wall
+  time, roughly `58,392s` CPU time, and an overall roll-up of `8.7/10`
+- application artifact conformance is `7.46/10`, with
+  `impact-explosion-visual-feedback` as the weakest artifact row
+- Aurora challenge set-piece conformance is the most urgent user-facing
+  gameplay gap: average current score `4.3/10`, movement `4.4/10`, graphics
+  `4.5/10`, novelty `3.9/10`, target-video object fit `3.6/10`, and zero
+  release-ready challenge contracts
+- Aurora challenge grammar is now a process win rather than a runtime win:
+  `25/25` first-five group contracts are reference-backed and control
+  readiness is `8.6/10`, but promotion remains blocked by visual-presence,
+  phase/order, and scoreable-route constraints
+- Guardians long-surface/persona review is `7.0/10`; this is enough to guide a
+  v1 push, not enough to claim full public maturity
 - overall Aurora quality is `9.1/10` across the current scored categories
 - audio identity and cue alignment is the weakest category at `6.9/10`; the
   process is stronger than the rounded runtime score, with cue-contract
@@ -382,13 +415,17 @@ Themes:
 
 Target:
 
-- support richer personas and future player-versus-persona play
+- support richer personas, Watch mode, Rival mode, and future
+  player-versus-persona play across every Platinum game
 
 Themes:
 
 - stronger action/state annotation
 - richer test personas
 - eventual learn-by-playing simulation work
+- a game-generic adapter for start state, playable scope, score ownership,
+  run summaries, event logs, Watch scope, Rival opponent selection, and
+  production score safety
 
 ## Platform Milestones
 
