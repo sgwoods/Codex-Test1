@@ -131,14 +131,14 @@ function firstPlayableGamePackWithAdapter(){
  return Object.values(availableGamePacks()).find(pack=>gamePackHasPlayableAdapter(pack))||null;
 }
 
-function startActiveGamePack(){
+function startActiveGamePack(cfg={}){
  const adapter=currentGameplayAdapter();
  const devPreviewAdapter=currentDevPreviewGameplayAdapter();
  if(currentGamePackHasPlayableAdapter()){
-  return adapter.start();
+  return adapter.start(cfg);
  }
  if(devPreviewAdapter){
-  return devPreviewAdapter.start();
+  return devPreviewAdapter.start(cfg);
  }
  if(!currentGamePackHasPlayableAdapter()){
   const preview=typeof currentGamePackPreview==='function'?currentGamePackPreview():null;
@@ -162,8 +162,8 @@ function updateActiveGamePack(dt){
  return null;
 }
 
-function start(){
- return startActiveGamePack();
+function start(cfg={}){
+ return startActiveGamePack(cfg);
 }
 
 window.availableGameplayAdapters=availableGameplayAdapters;

@@ -1,0 +1,514 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-challenge-motion-spec",
+  "generatedAt": "2026-06-05T14:49:34.005Z",
+  "commit": "8b7a83cb9",
+  "branch": "codex/aurora-challenge-movement-grammar",
+  "gameKey": "aurora-galactica",
+  "scope": "challenge-2-internal-stage-7",
+  "sourceArtifacts": {
+    "movementGrammar": "reference-artifacts/analyses/challenge-movement-grammar/latest.json",
+    "challengeConformance": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+    "candidateSweepIndex": "reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json"
+  },
+  "spec": {
+    "stage": 7,
+    "challengeNumber": 2,
+    "label": "Challenging Stage 7-8",
+    "role": "mixed crossing escalation",
+    "playerMeaning": "Show that the second challenge has a new route vocabulary and not just faster copies of the first.",
+    "targetFeel": "wider crossing sweeps, hook returns, and specialty-family novelty.",
+    "sourceControlReadiness10": 8.5,
+    "evaluator": "reference-spline-v1",
+    "phaseModel": [
+      "lead-in",
+      "reference-track",
+      "exit"
+    ],
+    "groups": [
+      {
+        "groupIndex": 1,
+        "entityCount": 8,
+        "evaluator": "reference-spline-v1",
+        "intent": "mixed-crossing-sweep",
+        "pathFamilyHint": "cross-sweep",
+        "spawnOffsetS": 0,
+        "phaseDurations": {
+          "leadInS": 0.78,
+          "trackS": 1.88,
+          "exitS": 2.154
+        },
+        "visualFamilyPolicy": "use-runtime-layout-family",
+        "lanePolicy": {
+          "entityCount": 8,
+          "sideSplit": "four-left-four-right",
+          "laneSpreadMode": "reference-lane-offset",
+          "laneOrder": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "referenceLaneSpreadScale": 1,
+          "referenceRowSpreadScale": 1
+        },
+        "controls": {
+          "arcAmp": 1.91,
+          "dropAmp": 1.17,
+          "speedScale": 3.4,
+          "softSpeedScale": 2.65,
+          "lowerFieldBias": 188,
+          "yOffset": 83,
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "laneStaggerS": 0,
+          "phaseOffsetS": 0,
+          "lanePhaseOffsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "slotDelayS": 0.14,
+          "slotXOffset": 0,
+          "slotYOffset": 0,
+          "deconflictSpread": 0,
+          "deconflictPhase": 0,
+          "deconflictLaneBias": 0,
+          "deconflictYOffset": 0,
+          "laneOrder": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "comparisonTargets": {
+          "xRange": 0.6166,
+          "yRange": 0.177,
+          "pathLength": 0.1176,
+          "turnCount": 5.31,
+          "reversalCount": 3.44,
+          "lowerFieldShare": 0.9815,
+          "entrySide": "center",
+          "exitSide": "left"
+        },
+        "referencePath": {
+          "sourceTrackId": "target-track-10",
+          "sourceSampleCount": 14,
+          "durationS": 1.88,
+          "pointCount": 10
+        },
+        "promotionGates": [
+          "target-video-object-track-fit-must-not-regress",
+          "human-visible-readability-must-not-regress",
+          "human-perfect-routeability-must-not-regress",
+          "spacing-and-bunching-risk-must-pass",
+          "challenge-identity-must-match-intended-baseline"
+        ]
+      },
+      {
+        "groupIndex": 2,
+        "entityCount": 8,
+        "evaluator": "reference-spline-v1",
+        "intent": "mixed-hook-arrival",
+        "pathFamilyHint": "hook-arc",
+        "spawnOffsetS": 2.88,
+        "phaseDurations": {
+          "leadInS": 0.78,
+          "trackS": 2.63,
+          "exitS": 2.694
+        },
+        "visualFamilyPolicy": "use-runtime-layout-family",
+        "lanePolicy": {
+          "entityCount": 8,
+          "sideSplit": "four-left-four-right",
+          "laneSpreadMode": "reference-lane-offset",
+          "laneOrder": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "referenceLaneSpreadScale": 1,
+          "referenceRowSpreadScale": 1
+        },
+        "controls": {
+          "arcAmp": 1.24,
+          "dropAmp": 1.56,
+          "speedScale": 2.34,
+          "softSpeedScale": 1.97,
+          "lowerFieldBias": 0,
+          "yOffset": 0,
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "laneStaggerS": 0,
+          "phaseOffsetS": 0,
+          "lanePhaseOffsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "slotDelayS": 0.14,
+          "slotXOffset": 0,
+          "slotYOffset": 0,
+          "deconflictSpread": 0,
+          "deconflictPhase": 0,
+          "deconflictLaneBias": 0,
+          "deconflictYOffset": 0,
+          "laneOrder": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "comparisonTargets": {
+          "xRange": 0.1858,
+          "yRange": 0.6766,
+          "pathLength": 0.1686,
+          "turnCount": 3,
+          "reversalCount": 2.22,
+          "lowerFieldShare": 0.3122,
+          "entrySide": "center",
+          "exitSide": "center"
+        },
+        "referencePath": {
+          "sourceTrackId": "target-track-66",
+          "sourceSampleCount": 21,
+          "durationS": 2.63,
+          "pointCount": 10
+        },
+        "promotionGates": [
+          "target-video-object-track-fit-must-not-regress",
+          "human-visible-readability-must-not-regress",
+          "human-perfect-routeability-must-not-regress",
+          "spacing-and-bunching-risk-must-pass",
+          "challenge-identity-must-match-intended-baseline"
+        ]
+      },
+      {
+        "groupIndex": 3,
+        "entityCount": 8,
+        "evaluator": "reference-spline-v1",
+        "intent": "mixed-hook-arrival",
+        "pathFamilyHint": "hook-arc",
+        "spawnOffsetS": 4.25,
+        "phaseDurations": {
+          "leadInS": 0.78,
+          "trackS": 0.75,
+          "exitS": 1.34
+        },
+        "visualFamilyPolicy": "use-runtime-layout-family",
+        "lanePolicy": {
+          "entityCount": 8,
+          "sideSplit": "four-left-four-right",
+          "laneSpreadMode": "reference-lane-offset",
+          "laneOrder": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "referenceLaneSpreadScale": 1,
+          "referenceRowSpreadScale": 1
+        },
+        "controls": {
+          "arcAmp": 1.07,
+          "dropAmp": 1.07,
+          "speedScale": 3.4,
+          "softSpeedScale": 2.65,
+          "lowerFieldBias": 188,
+          "yOffset": 86,
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "laneStaggerS": 0,
+          "phaseOffsetS": 0,
+          "lanePhaseOffsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "slotDelayS": 0.14,
+          "slotXOffset": 0,
+          "slotYOffset": 0,
+          "deconflictSpread": 0,
+          "deconflictPhase": 0,
+          "deconflictLaneBias": 0,
+          "deconflictYOffset": 0,
+          "laneOrder": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "comparisonTargets": {
+          "xRange": 0.0535,
+          "yRange": 0.0848,
+          "pathLength": 0.154,
+          "turnCount": 2.5,
+          "reversalCount": 2.5,
+          "lowerFieldShare": 1,
+          "entrySide": "center",
+          "exitSide": "center"
+        },
+        "referencePath": {
+          "sourceTrackId": "target-track-71",
+          "sourceSampleCount": 7,
+          "durationS": 0.75,
+          "pointCount": 7
+        },
+        "promotionGates": [
+          "target-video-object-track-fit-must-not-regress",
+          "human-visible-readability-must-not-regress",
+          "human-perfect-routeability-must-not-regress",
+          "spacing-and-bunching-risk-must-pass",
+          "challenge-identity-must-match-intended-baseline"
+        ]
+      },
+      {
+        "groupIndex": 4,
+        "entityCount": 8,
+        "evaluator": "reference-spline-v1",
+        "intent": "mixed-crossing-sweep",
+        "pathFamilyHint": "cross-sweep",
+        "spawnOffsetS": 7.13,
+        "phaseDurations": {
+          "leadInS": 0.78,
+          "trackS": 2,
+          "exitS": 2.24
+        },
+        "visualFamilyPolicy": "use-runtime-layout-family",
+        "lanePolicy": {
+          "entityCount": 8,
+          "sideSplit": "four-left-four-right",
+          "laneSpreadMode": "reference-lane-offset",
+          "laneOrder": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "referenceLaneSpreadScale": 1,
+          "referenceRowSpreadScale": 1
+        },
+        "controls": {
+          "arcAmp": 2.21,
+          "dropAmp": 1.61,
+          "speedScale": 2.52,
+          "softSpeedScale": 2.12,
+          "lowerFieldBias": 57,
+          "yOffset": 10,
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "laneStaggerS": 0,
+          "phaseOffsetS": 0,
+          "lanePhaseOffsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "slotDelayS": 0.14,
+          "slotXOffset": 0,
+          "slotYOffset": 0,
+          "deconflictSpread": 0,
+          "deconflictPhase": 0,
+          "deconflictLaneBias": 0,
+          "deconflictYOffset": 0,
+          "laneOrder": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "comparisonTargets": {
+          "xRange": 0.8862,
+          "yRange": 0.6802,
+          "pathLength": 0.1472,
+          "turnCount": 2.12,
+          "reversalCount": 1.6,
+          "lowerFieldShare": 0.5156,
+          "entrySide": "left",
+          "exitSide": "center"
+        },
+        "referencePath": {
+          "sourceTrackId": "target-track-110",
+          "sourceSampleCount": 13,
+          "durationS": 2,
+          "pointCount": 10
+        },
+        "promotionGates": [
+          "target-video-object-track-fit-must-not-regress",
+          "human-visible-readability-must-not-regress",
+          "human-perfect-routeability-must-not-regress",
+          "spacing-and-bunching-risk-must-pass",
+          "challenge-identity-must-match-intended-baseline"
+        ]
+      },
+      {
+        "groupIndex": 5,
+        "entityCount": 8,
+        "evaluator": "reference-spline-v1",
+        "intent": "mixed-hook-arrival",
+        "pathFamilyHint": "hook-arc",
+        "spawnOffsetS": 13.38,
+        "phaseDurations": {
+          "leadInS": 0.78,
+          "trackS": 2.5,
+          "exitS": 2.6
+        },
+        "visualFamilyPolicy": "use-runtime-layout-family",
+        "lanePolicy": {
+          "entityCount": 8,
+          "sideSplit": "four-left-four-right",
+          "laneSpreadMode": "reference-lane-offset",
+          "laneOrder": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "referenceLaneSpreadScale": 1,
+          "referenceRowSpreadScale": 1
+        },
+        "controls": {
+          "arcAmp": 1.25,
+          "dropAmp": 1.59,
+          "speedScale": 3.28,
+          "softSpeedScale": 2.65,
+          "lowerFieldBias": 31,
+          "yOffset": 0,
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "laneStaggerS": 0,
+          "phaseOffsetS": 0,
+          "lanePhaseOffsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "slotDelayS": 0.14,
+          "slotXOffset": 0,
+          "slotYOffset": 0,
+          "deconflictSpread": 0,
+          "deconflictPhase": 0,
+          "deconflictLaneBias": 0,
+          "deconflictYOffset": 0,
+          "laneOrder": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "comparisonTargets": {
+          "xRange": 0.1448,
+          "yRange": 0.6796,
+          "pathLength": 0.2417,
+          "turnCount": 4.89,
+          "reversalCount": 3.67,
+          "lowerFieldShare": 0.4362,
+          "entrySide": "center",
+          "exitSide": "center"
+        },
+        "referencePath": {
+          "sourceTrackId": "target-track-142",
+          "sourceSampleCount": 16,
+          "durationS": 2.5,
+          "pointCount": 10
+        },
+        "promotionGates": [
+          "target-video-object-track-fit-must-not-regress",
+          "human-visible-readability-must-not-regress",
+          "human-perfect-routeability-must-not-regress",
+          "spacing-and-bunching-risk-must-pass",
+          "challenge-identity-must-match-intended-baseline"
+        ]
+      }
+    ]
+  },
+  "summary": {
+    "groupCount": 5,
+    "referenceBackedGroupCount": 5,
+    "averageTrackDurationS": 1.952,
+    "averageLowerFieldBias": 92.8,
+    "read": "Challenge 2 now has a runtime-facing motion spec: five reference-backed groups, phase durations, controls, reference path IDs, and promotion gates."
+  },
+  "nextBestStep": "Wire Challenge 2 to a generic reference-spline evaluator and compare old/current runtime behavior before promoting the spec to additional stages."
+}

@@ -689,6 +689,21 @@ function html(data, options = {}){
       const explanation = row.explanation || {};
       const scoreContext = row.scoreContext || {};
       const costContext = row.costContext || {};
+      const decisionEvidence = Array.isArray(row.decisionEvidence) ? row.decisionEvidence : [];
+      const decisionEvidenceTable = decisionEvidence.length
+        ? '<details class="metricDetails" open><summary><span>Decision evidence</span></summary>'
+          + tableFromRows(decisionEvidence.map(item => ({
+            Stage: item.stage ?? item.label ?? '',
+            Decision: item.decision || '',
+            Best: item.bestCandidateId || '',
+            Expected: item.expectedLift10 ?? '',
+            Target: item.targetVideoObjectFitLift10 ?? '',
+            Human: item.humanPerfectPotentialLift10 ?? '',
+            Visible: item.humanVisibleLift10 ?? '',
+            Read: item.read || item.nextStep || ''
+          })), 'No decision evidence rows available yet.')
+          + '</details>'
+        : '';
       return '<section class="detailPanel" id="metricDetailPanel">'
         + '<div class="detailHeader"><div><span class="label">Metric drill-down</span><h2>' + esc(row.metric) + '</h2><p class="small">' + esc(row.status || '') + '</p></div><button class="backButton" type="button" data-detail-back="1">Close details</button></div>'
         + '<div class="detailGrid">'
@@ -705,6 +720,7 @@ function html(data, options = {}){
         + explanationBlock('Evidence', row.evidence)
         + explanationBlock('Target', row.target)
         + '</div>'
+        + decisionEvidenceTable
         + '<details class="metricDetails" open><summary><span>Full metric row text</span></summary><div class="metricExplanation">'
         + explanationBlock('Why this matters', row.why)
         + explanationBlock('Effort', row.effort)

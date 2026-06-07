@@ -75,6 +75,8 @@ function summarizeReport(file, report){
   const strictIdentityScored = Object.prototype.hasOwnProperty.call(identity, 'identityMargin10');
   const humanPerfectScored = Object.prototype.hasOwnProperty.call(summary, 'humanPerfectPotentialLift10')
     && Object.prototype.hasOwnProperty.call(best, 'humanPerfectGuard');
+  const humanVisibleScored = Object.prototype.hasOwnProperty.call(summary, 'humanVisibleLift10')
+    && Object.prototype.hasOwnProperty.call(best, 'humanVisibleGuardrails');
   return {
     stage: report.stage,
     generatedAt: report.generatedAt,
@@ -83,7 +85,12 @@ function summarizeReport(file, report){
     candidateCount: report.candidateCount || retention.totalMeasured || 0,
     retained: retention.retained || (report.candidates || []).length || 0,
     keeperDecision: summary.keeperDecision || 'pending',
-    runtimeReadyUnderCurrentPolicy: !!(readyDecision && strictIdentityScored && humanPerfectScored && summary.noHumanPerfectRegression !== false),
+    runtimeReadyUnderCurrentPolicy: !!(readyDecision
+      && strictIdentityScored
+      && humanPerfectScored
+      && humanVisibleScored
+      && summary.noHumanPerfectRegression !== false
+      && summary.noHumanVisibleRegression !== false),
     legacyReadyNeedsResweep: !!(readyDecision && !strictIdentityScored),
     strictIdentityScored,
     humanPerfectScored,
@@ -98,6 +105,16 @@ function summarizeReport(file, report){
     bestHumanPerfectPotentialScore10: round(summary.bestHumanPerfectPotentialScore10, 1),
     humanPerfectPotentialLift10: round(summary.humanPerfectPotentialLift10, 2),
     noHumanPerfectRegression: Object.prototype.hasOwnProperty.call(summary, 'noHumanPerfectRegression') ? !!summary.noHumanPerfectRegression : null,
+    baselineHumanVisibleScore10: round(summary.baselineHumanVisibleScore10, 1),
+    bestHumanVisibleScore10: round(summary.bestHumanVisibleScore10, 1),
+    humanVisibleLift10: round(summary.humanVisibleLift10, 2),
+    noHumanVisibleRegression: Object.prototype.hasOwnProperty.call(summary, 'noHumanVisibleRegression') ? !!summary.noHumanVisibleRegression : null,
+    humanVisibleScored,
+    humanVisiblePass: Object.prototype.hasOwnProperty.call(best.humanVisibleGuardrails || {}, 'pass') ? !!best.humanVisibleGuardrails.pass : null,
+    humanVisibleGroupVisibility: round(best.humanVisibleGuardrails?.groupVisibility, 3),
+    humanVisibleArrivalContinuity: round(best.humanVisibleGuardrails?.arrivalContinuity, 3),
+    humanVisibleSpacingScore: round(best.humanVisibleGuardrails?.spacingScore, 3),
+    humanVisibleBunchingRisk: round(best.humanVisibleGuardrails?.bunchingRisk, 3),
     intendedStageSupported: !!summary.intendedStageSupported,
     noTargetVideoRegression: !!summary.noTargetVideoRegression,
     stageIdentityMargin10: round(identity.identityMargin10, 2),
@@ -115,6 +132,8 @@ function summarizeReport(file, report){
       ? `No runtime keeper: late-stage identity blocked because best match ${summary.bestMatch?.labelId || best.bestMatch?.labelId || 'none'} does not represent challenge ${identity.expectedChallengeNumber || 'n/a'}.`
       : humanPerfectScored && summary.noHumanPerfectRegression === false
         ? `No runtime keeper: candidate regresses human-perfect potential by ${Math.abs(round(summary.humanPerfectPotentialLift10, 2) || 0)}/10.`
+      : humanVisibleScored && summary.noHumanVisibleRegression === false
+        ? `No runtime keeper: candidate regresses human-visible challenge readability by ${Math.abs(round(summary.humanVisibleLift10, 2) || 0)}/10 or fails visibility/arrival/spacing/bunching gates.`
       : readyDecision && strictIdentityScored
       ? 'Candidate is ready for temporary full-analyzer review before runtime promotion.'
       : readyDecision
@@ -131,7 +150,10 @@ function buildMarkdown(report){
     if(row.lateStageIdentityPass === true) return 'pass';
     return 'n/a';
   };
-  const rows = report.rows.map(row => `| ${row.stage} | ${row.candidateCount} | ${row.keeperDecision} | ${row.runtimeReadyUnderCurrentPolicy ? 'yes' : 'no'} | ${row.legacyReadyNeedsResweep ? 'yes' : 'no'} | ${row.bestExpectedScore10 ?? 'n/a'}/10 | ${row.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.bestHumanPerfectPotentialScore10 ?? 'n/a'}/10 | ${row.humanPerfectPotentialLift10 ?? 'n/a'} | ${row.stageIdentityMargin10 ?? 'n/a'} | ${row.bestMatchLabelId || 'none'} | ${lateIdentityRead(row)} | ${row.nextStep} |`).join('\n');
+  const visibleRead = row => row.humanVisibleScored
+    ? `${row.bestHumanVisibleScore10 ?? 'n/a'}/10 (${row.humanVisibleLift10 ?? 'n/a'}; ${row.humanVisiblePass ? 'pass' : 'blocked'})`
+    : 'n/a';
+  const rows = report.rows.map(row => `| ${row.stage} | ${row.candidateCount} | ${row.keeperDecision} | ${row.runtimeReadyUnderCurrentPolicy ? 'yes' : 'no'} | ${row.legacyReadyNeedsResweep ? 'yes' : 'no'} | ${row.bestExpectedScore10 ?? 'n/a'}/10 | ${row.bestTargetVideoObjectFitScore10 ?? 'n/a'}/10 | ${row.bestHumanPerfectPotentialScore10 ?? 'n/a'}/10 | ${row.humanPerfectPotentialLift10 ?? 'n/a'} | ${visibleRead(row)} | ${row.stageIdentityMargin10 ?? 'n/a'} | ${row.bestMatchLabelId || 'none'} | ${lateIdentityRead(row)} | ${row.nextStep} |`).join('\n');
   return `# Challenge Stage Candidate Sweep Index
 
 Generated: ${report.generatedAt}
@@ -152,11 +174,12 @@ This index preserves the latest candidate-sweep result for each challenged Auror
 - Strongest target-video lift: ${report.summary.strongestTargetVideoLift10}/10 on stage ${report.summary.strongestTargetVideoLiftStage || 'n/a'}.
 - Strongest expected-label lift: ${report.summary.strongestExpectedLift10}/10 on stage ${report.summary.strongestExpectedLiftStage || 'n/a'}.
 - Strongest human-perfect lift: ${report.summary.strongestHumanPerfectLift10}/10 on stage ${report.summary.strongestHumanPerfectLiftStage || 'n/a'}.
+- Strongest human-visible lift: ${report.summary.strongestHumanVisibleLift10}/10 on stage ${report.summary.strongestHumanVisibleLiftStage || 'n/a'}.
 
 ## Latest Per-Stage Rows
 
-| Stage | Candidates | Decision | Current Ready | Legacy Resweep | Expected | Target Video | Human-Perfect | Human Lift | Identity Margin | Best Match | Late Identity | Next Step |
-| ---: | ---: | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
+| Stage | Candidates | Decision | Current Ready | Legacy Resweep | Expected | Target Video | Human-Perfect | Human Lift | Human-Visible | Identity Margin | Best Match | Late Identity | Next Step |
+| ---: | ---: | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |
 ${rows}
 `;
 }
@@ -176,6 +199,7 @@ function main(){
   const strongestTarget = rows.slice().sort((a, b) => (b.targetVideoObjectFitLift10 ?? -99) - (a.targetVideoObjectFitLift10 ?? -99))[0] || {};
   const strongestExpected = rows.slice().sort((a, b) => (b.expectedLift10 ?? -99) - (a.expectedLift10 ?? -99))[0] || {};
   const strongestHumanPerfect = rows.slice().sort((a, b) => (b.humanPerfectPotentialLift10 ?? -99) - (a.humanPerfectPotentialLift10 ?? -99))[0] || {};
+  const strongestHumanVisible = rows.slice().sort((a, b) => (b.humanVisibleLift10 ?? -99) - (a.humanVisibleLift10 ?? -99))[0] || {};
   const report = {
     schemaVersion: 1,
     artifactType: 'challenge-stage-candidate-sweep-index',
@@ -189,6 +213,7 @@ function main(){
       runtimeReadyCount: rows.filter(row => row.runtimeReadyUnderCurrentPolicy).length,
       legacyReadyNeedsResweepCount: rows.filter(row => row.legacyReadyNeedsResweep).length,
       humanPerfectScoredCount: rows.filter(row => row.humanPerfectScored).length,
+      humanVisibleScoredCount: rows.filter(row => row.humanVisibleScored).length,
       noKeeperCount: rows.filter(row => !row.runtimeReadyUnderCurrentPolicy).length,
       strongestTargetVideoLiftStage: strongestTarget.stage || null,
       strongestTargetVideoLift10: strongestTarget.targetVideoObjectFitLift10 ?? null,
@@ -196,6 +221,8 @@ function main(){
       strongestExpectedLift10: strongestExpected.expectedLift10 ?? null,
       strongestHumanPerfectLiftStage: strongestHumanPerfect.stage || null,
       strongestHumanPerfectLift10: strongestHumanPerfect.humanPerfectPotentialLift10 ?? null,
+      strongestHumanVisibleLiftStage: strongestHumanVisible.stage || null,
+      strongestHumanVisibleLift10: strongestHumanVisible.humanVisibleLift10 ?? null,
       read: rows.some(row => row.runtimeReadyUnderCurrentPolicy)
         ? 'At least one stage has a candidate ready for temporary full-analyzer review.'
         : rows.some(row => row.legacyReadyNeedsResweep)

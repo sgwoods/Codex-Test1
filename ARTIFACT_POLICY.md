@@ -46,7 +46,22 @@ This is the explicit user-facing export path for logs and downloaded recordings.
   - on macOS that is usually:
     - `~/Downloads/`
 
+This folder is an inbox, not the long-term developer archive.
+
+If exported files need to survive a machine switch before import, the approved
+shared inbox is:
+
+- `~/Library/Mobile Documents/com~apple~CloudDocs/Projects/Codex-Test1 Artifact Library/00-temporary-throwaway/browser-export-inbox/`
+
 This is the correct export destination for `dev`, `beta`, and `production` because the browser controls download placement. The game should not promise a repo-local path for player-triggered downloads.
+
+Create that shared inbox explicitly with:
+
+```bash
+npm run artifacts:prepare:import-inbox
+```
+
+`npm run machine:bootstrap` now runs the same setup step automatically.
 
 ### 3. Canonical Developer Review Archive
 
@@ -114,18 +129,26 @@ families, so evidence should not remain only in a local folder.
 
 ### Dev
 
-1. Player-triggered exports download through the browser into the user’s downloads location.
-2. If the run should become a durable review artifact, import it into:
+1. Prepare the shared import inbox if this machine has not done it yet:
+   ```bash
+   npm run artifacts:prepare:import-inbox
+   ```
+   `npm run machine:bootstrap` now performs this automatically.
+2. Player-triggered exports download through the browser into the user’s downloads location.
+3. If the run should become a durable review artifact, import it into:
    - `<workspace>/harness-artifacts/`
-3. Use:
+4. Use:
    ```bash
    npm run harness:import-latest
    ```
-4. Review it in the viewer or analyzer from the imported run folder.
-5. If the run should become release or conformance evidence, promote only the
+   That command now searches the default import inboxes in order:
+   - `~/Downloads/`
+   - `~/Library/Mobile Documents/com~apple~CloudDocs/Projects/Codex-Test1 Artifact Library/00-temporary-throwaway/browser-export-inbox/`
+5. Review it in the viewer or analyzer from the imported run folder.
+6. If the run should become release or conformance evidence, promote only the
    reviewed outputs into `reference-artifacts/analyses/` and link them from an
    inventory, dashboard, scorecard, generated guide section, or issue.
-6. Run `npm run build` before release checks so the generated user-visible docs
+7. Run `npm run build` before release checks so the generated user-visible docs
    include the updated explanation.
 
 ### Evidence Cycles
@@ -158,7 +181,11 @@ reference-artifacts/analyses/evidence-cycle-dashboard/
 
 1. In-game replay uses browser-local replay storage.
 2. Explicit exports still go to the browser download location.
-3. If we want a run to enter developer review, we import that downloaded pair into `<workspace>/harness-artifacts/` on a dev machine.
+3. If we want a run to enter developer review, we import that exported pair
+   into `<workspace>/harness-artifacts/` on a dev machine.
+4. If the pair will not be imported immediately, move it from the browser
+   download location into the shared iCloud browser-export inbox rather than
+   leaving it only in a personal Downloads folder.
 
 There is no separate filesystem export location for `beta` or `production`.
 
@@ -179,7 +206,7 @@ There is no separate filesystem export location for `beta` or `production`.
 Going forward, use this distinction:
 
 - `IndexedDB` = native local replay feature for players
-- browser download directory = exported log/video files
+- browser download directory or shared browser-export inbox = exported log/video files waiting for import
 - `<workspace>/harness-artifacts/` = canonical developer review archive after import/normalization
 - `<workspace>/reference-artifacts/analyses/` = curated evidence packs for
   quality, conformance, player-profile, and future-game research

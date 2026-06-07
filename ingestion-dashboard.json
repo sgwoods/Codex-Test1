@@ -741,11 +741,11 @@
         },
         {
           "label": "Audio live mix",
-          "value": "9.9/10",
+          "value": "10/10",
           "detail": "Live mix is now strong; source-faithful match is the remaining gap."
         }
       ],
-      "decisionRead": "Guardians now has enough source truth to support a serious fidelity push rather than a generic intake pass. We have multiple measured gameplay sources across intro, early-session, and deeper-play continuity; named isolated core cues; a sustained ambience bed; a real arcade operator manual; official corroborating prose; better player-language about fairness and late-wave pressure; and strong runtime-side acceptance artifacts. That means the next gameplay gains should come from promoting precise audio, motion, and stage-five-and-beyond windows from the material we already own, then using those windows plus comparable Platinum captures to drive audio authenticity, deeper-play fairness, motion cadence, and source-backed score/presentation behavior.",
+      "decisionRead": "Guardians now has enough source truth to support a serious fidelity push rather than a generic intake pass. We have multiple measured gameplay sources across intro, early-session, and deeper-play continuity; named isolated core cues; a sustained ambience bed; a real arcade operator manual; official corroborating prose; better player-language about fairness and late-wave pressure; strong runtime-side acceptance artifacts; and now a first promoted evidence packet for early-session, stage-five-plus, motion, popup, manual-page, and still-image anchors. That means the next gameplay gains should come from using and expanding those promoted windows plus comparable runtime captures to drive audio authenticity, deeper-play fairness, motion cadence, and source-backed score/presentation behavior.",
       "hostedLinks": [
         {
           "label": "Guardians conformance dashboard",
@@ -998,7 +998,35 @@
               "label": "Routeability before/after",
               "hrefType": "artifact",
               "href": "reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.json",
-              "detail": "Analysis-only stage-five routeability candidate comparison."
+              "detail": "Planning study that selected the bounded routeability relief now partially adopted in the current preview."
+            },
+            {
+              "label": "Promoted Guardians reference-window packet",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/guardians-reference-window-promotion-2026-06-05/README.md",
+              "detail": "Public metadata packet for named early-session, stage-five-plus, motion, popup, ambience, manual-page, and still-image anchors plus a residual cue ledger with private source bytes.",
+              "artifactId": "GGD-ART-035"
+            },
+            {
+              "label": "Latest opening professional runtime correspondence capture",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/gameplay-segment-captures/latest-guardians-opening-professional-review.json",
+              "detail": "Public runtime-side opening review capture tied to the first promoted Guardians evidence packet.",
+              "artifactId": "GGD-ART-036"
+            },
+            {
+              "label": "Latest stage-five professional runtime correspondence capture",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/gameplay-segment-captures/latest-guardians-stage5-professional-review.json",
+              "detail": "Public runtime-side stage-five review capture used for the current deeper-play fairness and audio pass.",
+              "artifactId": "GGD-ART-037"
+            },
+            {
+              "label": "Latest stage-seven advanced runtime correspondence capture",
+              "hrefType": "artifact",
+              "href": "reference-artifacts/analyses/gameplay-segment-captures/latest-guardians-stage7-advanced-review.json",
+              "detail": "Public runtime-side stage-seven advanced review capture that expands the current deeper-play correspondence set beyond a single midrun lane.",
+              "artifactId": "GGD-ART-038"
             },
             {
               "label": "Audio scene review",
@@ -1067,135 +1095,75 @@
           "planId": "GGD-PLAN-002"
         },
         {
-          "title": "Close the highest-value remaining evidence gaps",
-          "goal": "Promote the precise windows and page-level artifacts that still block high-confidence Guardians tuning.",
+          "title": "Use the expanded evidence packet for tighter tuning",
+          "goal": "Now that the first promoted Guardians packet covers baseline documentary, ambience, cue-map, and deeper-play correspondence needs, use it to drive the next high-confidence audio and fairness pass.",
           "deliverables": [
-            "Promoted early-session and stage-five-and-beyond audio windows",
-            "Extracted operator-manual page bundle",
-            "Stage-five-and-beyond runtime captures",
-            "Pulse/flap and score-popup policy windows"
+            "Recurring-pressure and player-loss-read audio refit",
+            "Stage-five-plus fairness tuning against multiple runtime lanes",
+            "One stronger direct bezel or control-surface still if a better original source appears",
+            "Stable residual cue ledger with no reopened generic sound hunt"
           ],
           "planId": "GGD-PLAN-003"
         }
       ],
       "nextArtifacts": [
         {
-          "title": "Extract the exact score-table, rules, and setup pages from the preserved Midway operator manual",
-          "priority": "Highest",
-          "why": "We no longer need to hunt for a generic arcade manual or generic score-summary prose. We now have both the Midway operator manual and an official Bandai Namco summary page. The next high-value artifact is a small extracted page set that makes the manual directly usable for score claims, controls/rules text, and operator/setup truth.",
+          "title": "Preserve one stronger direct bezel or control-surface still if a better original source appears",
+          "priority": "Medium",
+          "why": "The expanded packet now covers original score values, manual-side controls and setup, marquee framing, control-panel layout, and multiple cabinet-facing surfaces. The remaining visual gap is narrow rather than structural.",
           "find": [
-            "One readable score-table page capture from the manual",
-            "One readable controls or gameplay-rules page capture",
-            "One readable setup, coin, DIP, or service page capture",
-            "Any page that materially helps cabinet-facing title/control-panel or operating-language review"
+            "One stronger direct bezel still",
+            "Or one stronger direct control-surface still",
+            "Or one stronger original cabinet-facing still that materially improves title/control-panel framing",
+            "A short note explaining why the new still is stronger than the current flyer/manual composite anchors"
           ],
-          "goodEnough": "A small promoted manual-page bundle with at least score, rules, and setup represented, each saved as its own readable artifact with a short note explaining what claim it anchors.",
-          "gapId": "GGD-GAP-001"
-        },
-        {
-          "title": "Preserve the cabinet-facing, control-panel, bezel, marquee, and related presentation stills that remain after the new StrategyWiki bundle",
-          "priority": "High",
-          "why": "The new StrategyWiki package now covers the Midway flyer, flagship, main alien families, and Galaxip. The remaining still-image gap is narrower and more important for Guardians presentation: cabinet-facing and control-surface truth is still mostly lead-level rather than preserved repo-owned evidence.",
-          "find": [
-            "At least one clear cabinet-facing image from the linked cabinet or museum pages",
-            "At least one readable control-panel or instruction-surface image",
-            "At least one marquee or bezel image that helps cabinet-facing title and framing review",
-            "A small README or manifest that says which preserved image will anchor cabinet, control-panel, bezel, and marquee review"
-          ],
-          "goodEnough": "One small repo-owned still-image package containing at least one cabinet view, one control-panel or instruction surface, and one bezel or marquee anchor, each checksumed and named for later presentation and visual-conformance use.",
+          "goodEnough": "One better original presentation still that clearly upgrades bezel or control-surface truth without reopening a broad cabinet-image hunt.",
           "gapId": "GGD-GAP-002"
         },
         {
-          "title": "Promote named early-session audio scene windows from the new no-voiceover gameplay clip",
+          "title": "Expand stage-five-and-beyond runtime correspondence to at least one more persona or manual-review lane",
           "priority": "High",
-          "why": "The newly accessioned 4:10 no-voiceover Galaxian session gives us the right source family for early Guardians audio review, but it still needs to be promoted into named reusable windows instead of living only as a whole video.",
+          "why": "The current public runtime correspondence set now includes opening, stage-five professional, and stage-seven advanced captures. The remaining fairness gap is better coverage across personas and manual review conditions.",
           "find": [
-            "6-12 second extracted windows for start, `BONUS GALAXIP FOR 5000 PTS`, first player shot, enemy shot, hit, player loss, and game over",
-            "Each window should include timestamps or source offsets and a short note explaining exactly which cue family or timing edge it anchors",
-            "At least one extracted scene where two or more cue families coexist without commentary masking the transitions"
+            "At least one additional persona-driven capture that reaches stage 5 or later",
+            "Or one manual review capture where crowding, escape space, and recovery after a near miss are visible",
+            "Score, stage reached, survival time, and failure readability preserved in the capture metadata",
+            "A note that explains what this new lane adds beyond the current professional and advanced captures"
           ],
-          "goodEnough": "A small promoted early-session audio-scene pack derived from the new clip, with one named window per major cue family and enough context to review cue timing without reopening the full 4:10 source.",
-          "gapId": "GGD-GAP-003"
-        },
-        {
-          "title": "Map only the remaining unidentified or non-FLAC regions in the static-card Galaxians sound reel",
-          "priority": "Medium",
-          "why": "The new KHInsider FLAC pack already covers the strongest named isolated core cues. The older static-card reel now matters only where it still contains missing or ambiguous families that the FLAC pack does not cover.",
-          "find": [
-            "Compare the reel against the eight named FLAC cues and mark which regions are now redundant",
-            "Identify any remaining regions that appear to represent non-FLAC families, extended variants, or a longer mixed gameplay segment",
-            "Assign timestamps and provisional names only to those residual regions",
-            "Preserve the result as a small timestamp ledger that explicitly says which gaps remain after the FLAC pack is considered"
-          ],
-          "goodEnough": "A short residual-gap cue map that explains what the static-card reel still contributes after the named FLAC pack is taken as the primary isolated core-cue source.",
-          "gapId": "GGD-GAP-004"
-        },
-        {
-          "title": "Promote a named recurring-pressure comparison window from the new ambience source",
-          "priority": "High",
-          "why": "The generic source-side ambience-bed hunt is now largely closed, so the next high-value step is to turn this sustained source into a concrete comparison artifact for Guardians' ongoing background family.",
-          "find": [
-            "Select one or two representative 10-20 second windows from the preserved ambience source",
-            "Use those windows as the reference anchor for Guardians' recurring pressure family and live listening review",
-            "Note whether any noticeable modulation or phrase change happens inside the bed so the runtime target is not flattened incorrectly"
-          ],
-          "goodEnough": "A small promoted ambience-window artifact set that can be used directly in the audio conformance sprint instead of treating the full 150-second source as one undifferentiated blob.",
-          "gapId": "GGD-GAP-005"
-        },
-        {
-          "title": "Promote named stage-five-and-beyond audio and pacing windows from the preserved long-session sources",
-          "priority": "High",
-          "why": "We now have two meaningful long-session Galaxian-family sources in repo, including one that explicitly covers start presentation through final game over. The gap is no longer generic longplay acquisition; it is turning those long sessions into reusable deeper-play windows.",
-          "find": [
-            "15-30 second windows from stage 5 or later where gameplay audio is usable and the recurring pressure bed is audible between shots and hits",
-            "At least one deeper-play window that includes lower-field crowding or recovery after a near miss",
-            "At least one later-run failure window where the loss cue and gameplay pressure are both clearly present",
-            "If the preserved long-session sources prove unusable for any of those cases, note that explicitly before hunting more raw source video"
-          ],
-          "goodEnough": "One or two promoted stage-5+ windows from the existing long-session sources that let us compare deeper-play sound character, pressure, and failure closure against Guardians without relying only on early-stage material.",
-          "gapId": "GGD-GAP-006"
-        },
-        {
-          "title": "Add comparable stage-five-and-beyond runtime correspondence captures",
-          "priority": "High",
-          "why": "The weakest remaining gameplay gap is deeper-play survivability and fairness.",
-          "find": [
-            "At least two persona-driven captures that both reach stage 5 or later under the same general review conditions",
-            "At least one manual review capture where lower-field crowding, escape space, and recovery after a near miss are visible",
-            "Each capture should preserve score, stage reached, survival time, and whether the player died to crowding, shot density, or a readable mistake"
-          ],
-          "goodEnough": "Two or more directly comparable stage-5+ captures that let us say whether a fairness change reduced cheap-feeling failure or only changed difficulty in the abstract.",
+          "goodEnough": "One more stage-5+ correspondence lane that makes the next fairness pass less dependent on a single midrun style of evidence.",
           "gapId": "GGD-GAP-007"
         },
         {
-          "title": "Extract direct pulse and flap motion windows from source footage",
-          "priority": "Medium",
-          "why": "Pulse and flap authority are still felt quality issues.",
+          "title": "Use the expanded packet for one tighter recurring-pressure and player-loss-read audio pass",
+          "priority": "Highest",
+          "why": "The packet now has named ambience windows, a residual cue ledger, and stronger documentary/runtime anchors. The next quality gain should come from using that evidence, not from reopening generic intake.",
           "find": [
-            "2-5 second formation-rest windows where aliens are mostly stationary horizontally so pulse amplitude is easy to read",
-            "2-5 second motion windows where one alien family remains readable for at least 15-20 consecutive frames",
-            "Prefer windows without score overlays, explosions, or overlapping dives masking the target body shapes"
+            "One pass focused on recurring pressure continuity",
+            "One pass focused on player-loss readability and aftermath",
+            "Use only the promoted packet, FLAC cues, ambience windows, and current runtime captures",
+            "Refresh the audio scene/live-mix artifacts after the pass"
           ],
-          "goodEnough": "A small reusable set of short clips where pulse rhythm and flap cadence can be reviewed frame-by-frame without guessing which alien body state belongs to which frame.",
-          "gapId": "GGD-GAP-008"
+          "goodEnough": "One measurable audio-improvement pass whose acceptance artifacts show better recurring-pressure and player-loss-read fit without broad new intake work.",
+          "gapId": "GGD-GAP-005"
         },
         {
-          "title": "Promote labeled score-popup policy windows",
-          "priority": "Medium",
-          "why": "Score-pop behavior should be driven by visible source cases, not inferred.",
+          "title": "Use the expanded packet and multiple runtime lanes for one tighter stage-five-plus fairness pass",
+          "priority": "High",
+          "why": "The routeability relief is already partially adopted. The next visible game-quality gain is turning the expanded packet and runtime captures into a deeper-play fairness pass.",
           "find": [
-            "Short clips where a special-value hit clearly triggers visible score text",
-            "Short clips where a normal hit clearly does not trigger visible score text",
-            "If possible, one labeled case for each distinct hit-value family we plan to model"
+            "One pass focused on lower-field crowding and recovery space",
+            "One pass focused on failure readability instead of only difficulty",
+            "Use the promoted windows and current runtime correspondence set as the acceptance surface",
+            "Refresh the routeability and stage-rank-pressure artifacts after the pass"
           ],
-          "goodEnough": "Enough labeled yes-score-pop and no-score-pop cases that we can write a source-backed rule for when score text should appear after a hit.",
-          "gapId": "GGD-GAP-009"
+          "goodEnough": "One measurable fairness-improvement pass whose acceptance artifacts show better stage-five-plus survivability and failure readability without introducing fake-safe lanes.",
+          "gapId": "GGD-GAP-007"
         }
       ],
       "previews": [
         {
           "label": "Stage-five routeability before/after",
-          "detail": "Analysis-only Guardians candidate chart: baseline routeability 4.5/10, best candidate 5.8/10.",
+          "detail": "Guardians planning chart: baseline routeability 4.5/10, best candidate 5.8/10, now informing the bounded preview relief.",
           "mediaKind": "image",
           "hrefType": "artifact",
           "href": "reference-artifacts/analyses/galaxy-guardians-identity/routeability-before-after-0.1.json",

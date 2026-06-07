@@ -1,123 +1,211 @@
 # Codex Context Checkpoint
 
-Generated: 2026-06-04 18:40:56 EDT
-Label: aurora-runtime-state-isolation-guard
+Generated: 2026-06-07T12:21:43.318Z
+Label: aurora-urgent-gameplay-planning-handoff
 
-This is the durable recovery point for Aurora / Platinum runtime-boundary work
-on this MacBook.
+This is the durable recovery point for long Aurora / Platinum Codex sessions.
+Use it before switching machines, before starting a multi-hour run, and whenever
+the conversation has become long enough that automatic compaction could drop
+important working context.
 
 ## Current Repo State
 
 - Repo path: `/Users/sgwoods/Development/Codex/Codex-test1`
-- Branch: `codex/aurora-runtime-state-adapter-boundary`
-- Latest completed commit before this checkpoint update: `62fb16099 Route Aurora gameplay through adapter runtime state`
-- Release lanes were not published from this work.
+- Branch: `codex/aurora-challenge-movement-grammar`
+- HEAD: `807ca433f` Add urgent Aurora gameplay planning handoff
+- Dirty files excluding checkpoint self-output: `0`
 
-## Objective
+## Active Plan
 
-Refactor Aurora Galactica toward the Galaxy Guardians runtime pattern and add
-enough harness coverage to trust future parallel/persona/conformance runs:
-
-- Aurora runtime state is created through `createAuroraRuntimeState(opts)`.
-- Aurora gameplay ticks through `stepAuroraRuntime(state, dt, input)`.
-- Platinum calls Aurora through the registered Gameplay Adapter boundary.
-- Multi-instance state separation is guarded by a browser-backed harness.
-
-## Completed In This Pass
-
-- Added `tools/harness/check-aurora-runtime-state-isolation.js`.
-- Added package scripts:
-  - `harness:check:aurora-runtime-state-isolation`
-  - `harness:check:game-picker-shell`
-- Added harness-only `__galagaHarness__.checkAuroraRuntimeStateIsolation()`.
-  This keeps internal runtime calls testable without widening production globals.
-- The new isolation harness:
-  - creates two Aurora runtime states
-  - verifies factory-level nested objects and arrays are not aliased
-  - starts both states
-  - mutates bullets/effects/scores independently
-  - steps state A and state B independently
-  - verifies the adapter owns and updates an active Aurora runtime state
-- The harness found a real state alias:
-  - `S.profile` was assigned the shared `stageBandProfile(...)` object during `spawnStage`.
-- Fixed the leak by cloning the stage-band profile into each runtime state:
-  - `S.profile = Object.assign({}, stageBandProfile(...))`
-
-## Verification Run
-
-Passed:
-
-- `npm run build`
-- `npm run harness:check:aurora-runtime-state-isolation`
-- `npm run harness:check:gameplay-adapter-boundaries`
-- `npm run harness:check:game-picker-shell`
-- `npm run harness:check:platinum-pack-boot`
-- `npm run harness:check:player-two-mode`
-- `npm run harness:check:challenge-tour-watch-mode`
-
-## Current State Of The Refactor
-
-The adapter boundary is now coherent, and the first multi-instance isolation
-guard is in place. The new guard verifies that the most important runtime
-containers are distinct across two active Aurora states:
-
-- player object
-- enemies
-- player bullets
-- enemy bullets
-- effects
-- stars
-- challenge metadata
-- score stats
-- stage-band profile
-
-This is still a staged migration:
-
-- Rendering and UI continue to use the active global `S` compatibility alias.
-- `setActiveAuroraRuntimeState(state)` intentionally points that alias at the
-  adapter-owned state for current rendering and harness compatibility.
-- The next architecture pass should reduce remaining non-render global `S`
-  reads and decide how far rendering should move toward explicit snapshots.
+- Archive this session after preserving the current Aurora challenge movement grammar state, the project assessment, and the urgent gameplay planning handoff.
+- Begin the next Codex session with a long planning cycle focused on urgently improving Aurora gameplay characteristics, especially challenge-stage movement grammar, scoreability, visual presence, and reference-conformant swarm motion.
 
 ## Recommended Next Steps
 
-1. Commit and push the isolation harness and profile-clone fix.
-2. Add a second isolation harness for replay/headless-style stepping if we need
-   stronger proof before broad persona simulations.
-3. Continue removing non-render global `S` reads from gameplay helpers outside
-   the immediate tick path.
-4. Return to the user-visible quality roadmap:
-   - first five challenging stages
-   - challenge-stage movement grammar
-   - persona challenge-tour evaluation
-   - before/after video evidence windows
-5. Use the new isolation harness as a required guard whenever we add long-cycle
-   conformance automation that creates multiple Aurora runtime states.
+- Read CODEX_CONTEXT_CHECKPOINT.md and AURORA_URGENT_GAMEPLAY_PLANNING_HANDOFF_2026-06-07.md, then inspect the current challenge-stage artifacts before editing.
+- Do not start with another broad sweep; first define the next movement-grammar design that can preserve target fit, visual presence, expected-label identity, and human-perfect potential together.
+- After planning, implement the smallest scoreable phase-order/reference-path normalization pass on codex/aurora-challenge-movement-grammar or a clean successor branch.
+
+## Notes
+
+- Handoff doc committed at 807ca433f; previous measurement checkpoint is 889fc7e5c.
+- Latest challenge sweep found no runtime keeper; the next work should improve strategy, not loosen gates.
+
+## Git Status
+
+```
+(none)
+```
+
+## Diff Stat
+
+```
+CODEX_CONTEXT_CHECKPOINT.md                        | 78 ++++++++--------------
+ .../analyses/codex-context-checkpoint/latest.json  | 49 +++++---------
+ 2 files changed, 43 insertions(+), 84 deletions(-)
+```
+
+## Recent Log
+
+```
+807ca433f (HEAD -> codex/aurora-challenge-movement-grammar) Add urgent Aurora gameplay planning handoff
+889fc7e5c (origin/codex/aurora-challenge-movement-grammar) Measure reference-spline spacing tradeoff
+79c68a863 Add measured challenge spacing-field primitive
+f16820840 Add challenge lead-in primitive evidence loop
+ca2a74eaf Add challenge candidate visual presence guardrails
+fa1591b1e Calibrate challenge candidate trial rejection
+e43ff631a Add challenge movement grammar diagnostics
+67c8a70af Checkpoint challenge readability grammar diagnostics
+```
+
+## Machine Status Snapshot
+
+```json
+{
+  "ok": true,
+  "mode": "status",
+  "machine": {
+    "machine_id": "macbook-pro",
+    "machine_label": "MacBook-Pro",
+    "hostname": "MacBook-Pro",
+    "repo_path": "/Users/sgwoods/Development/Codex/Codex-test1",
+    "profile_exists": true,
+    "profile_path": "/Users/sgwoods/Development/Codex/Codex-test1/.machine-profile.json",
+    "profile_preview": {
+      "machine_id": "macbook-pro",
+      "machine_label": "MacBook-Pro",
+      "hostname": "MacBook-Pro",
+      "repo_path": "/Users/sgwoods/Development/Codex/Codex-test1",
+      "tool_versions": {
+        "node": "v25.9.0",
+        "npm": "11.12.1",
+        "python3": "Python 3.9.6",
+        "gh": "gh version 2.91.0 (2026-04-22)",
+        "chrome": "Google Chrome 149.0.7827.53",
+        "harness_browser": "playwright-managed-chromium"
+      },
+      "gh_auth": true,
+      "last_successful_bootstrap_at": "2026-06-03T20:48:12.604Z"
+    }
+  },
+  "repo": {
+    "branch": "codex/aurora-challenge-movement-grammar",
+    "dirty": true,
+    "upstream": "origin/codex/aurora-challenge-movement-grammar",
+    "ahead": 1,
+    "behind": 0,
+    "remote_ok": true
+  },
+  "release_authority": {
+    "machine_id": "macbook-pro",
+    "machine_label": "MacBook-Pro",
+    "claimed_by": "Steven G Woods",
+    "claimed_at": "2026-06-03T20:49:13.244Z",
+    "notes": "Authority transferred from iMacM1 to MacBook M4 for Aurora/Platinum release continuation and production path.",
+    "current_machine_matches": true
+  },
+  "local_services": {
+    "game": {
+      "ok": true,
+      "reachable": true,
+      "root_ok": true,
+      "url": "http://localhost:8000/",
+      "listeners": [
+        {
+          "pid": 25405,
+          "cwd": "/Users/sgwoods/Development/Codex/Codex-test1",
+          "root_ok": true
+        }
+      ]
+    },
+    "viewer": {
+      "ok": true,
+      "reachable": true,
+      "root_ok": true,
+      "url": "http://localhost:4311/api/runs",
+      "listeners": [
+        {
+          "pid": 25481,
+          "cwd": "/Users/sgwoods/Development/Codex/Codex-test1",
+          "root_ok": true
+        }
+      ]
+    },
+    "state_dir": "/Users/sgwoods/Development/Codex/Codex-test1/.local-services"
+  },
+  "live_lanes": {
+    "dev": {
+      "ok": true,
+      "version": "1.4.0",
+      "label": "1.4.0.1+build.1013.sha.3cb0d08b",
+      "commit": "3cb0d08b",
+      "releaseChannel": "development"
+    },
+    "beta": {
+      "ok": true,
+      "version": "1.4.0-beta.1",
+      "label": "1.4.0-beta.1+build.1013.sha.3cb0d08b.beta",
+      "commit": "3cb0d08b",
+      "releaseChannel": "production beta"
+    },
+    "production": {
+      "ok": true,
+      "version": "1.4.0",
+      "label": "1.4.0+build.894.sha.1dc23d8a",
+      "commit": "1dc23d8a",
+      "releaseChannel": "production"
+    }
+  },
+  "publish_permitted": false,
+  "next": [
+    "git switch -c codex/macbook-pro-your-topic",
+    "npm run machine:status",
+    "npm run harness:score:quality-conformance"
+  ]
+}
+```
 
 ## Exact Restart Prompt
 
 ```text
-You are continuing Aurora Galactica / Platinum runtime-boundary work from a durable Codex checkpoint.
+You are continuing Aurora Galactica / Platinum work from a durable Codex checkpoint.
 
 Repo path:
 /Users/sgwoods/Development/Codex/Codex-test1
 
 Start by running:
-git switch codex/aurora-runtime-state-adapter-boundary
-git status --short --branch
+git branch --show-current
+git status --short
 git log -5 --oneline --decorate
 npm run machine:status
 
 Read first:
 - CODEX_CONTEXT_CHECKPOINT.md
 - RESTART_FROM_HERE.md
-- RELEASE_POLICY.md
-- PLATFORM_APP_SEPARATION_ARCHITECTURE_REVIEW_2026-06-03.md
+- MULTI_MACHINE_WORKFLOW.md
 
 Current checkpoint:
-- label: aurora-runtime-state-isolation-guard
-- generated: 2026-06-04 18:40:56 EDT
-- branch: codex/aurora-runtime-state-adapter-boundary
+- label: aurora-urgent-gameplay-planning-handoff
+- generated: 2026-06-07T12:21:43.318Z
+- branch: codex/aurora-challenge-movement-grammar
+- commit: 807ca433f Add urgent Aurora gameplay planning handoff
+- dirty files excluding checkpoint self-output: 0
 
-Continue from the verified adapter-boundary and runtime-isolation guard work. Do not publish release lanes unless explicitly requested and release authority/publish checks permit it.
+Continue the active plan from the checkpoint. Preserve user work, do not publish beta/production unless this machine has release authority, and commit coherent progress before switching machines or long-running sessions.
 ```
+
+## Compaction Prevention Protocol
+
+1. At every phase boundary, run:
+
+```bash
+npm run codex:checkpoint -- --label <short-topic> --plan "<current goal>" --next "<next concrete step>"
+```
+
+2. Commit the checkpoint if it records meaningful state or handoff context.
+3. Start a fresh Codex session with the restart prompt above when the chat is
+   long, after a multi-hour cycle, or before switching machines.
+4. Treat the fresh session as the practical way to force compaction safely:
+   context is rebuilt from the repo instead of relying on a fragile chat tail.
+
+JSON artifact: `reference-artifacts/analyses/codex-context-checkpoint/latest.json`

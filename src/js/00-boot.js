@@ -3199,6 +3199,7 @@ window.__platinumArcadeMusic={
  },
  setMuted(value){setArcadeMusicMuted(!!value,{log:1,source:'harness'});return arcadeMusicState();},
  toggleMute(){toggleArcadeMusicMute();return arcadeMusicState();},
+ stopForHarness(){stopArcadeMusic({silent:true,persistRequest:false});return arcadeMusicState();},
  stop:()=>stopArcadeMusic({silent:true})
 };
 window.__platinumAudioMix={

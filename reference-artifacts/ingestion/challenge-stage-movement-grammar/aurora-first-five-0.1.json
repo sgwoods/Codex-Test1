@@ -1,0 +1,2776 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "aurora-challenge-movement-grammar",
+  "generatedAt": "2026-06-05T10:07:43.747Z",
+  "commit": "5ae4f8658",
+  "branch": "codex/aurora-challenge-movement-grammar",
+  "gameKey": "aurora-galactica",
+  "scope": "first-five-challenge-stages",
+  "sourceArtifacts": {
+    "challengeTrajectoryControls": "reference-artifacts/analyses/challenge-trajectory-controls/latest.json",
+    "galagaChallengeObjectTracks": "reference-artifacts/analyses/galaga-challenge-object-tracks/latest.json",
+    "galagaChallengeVideoReference": "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json"
+  },
+  "summary": {
+    "challengeCount": 5,
+    "stages": [
+      3,
+      7,
+      11,
+      15,
+      19
+    ],
+    "groupContractCount": 25,
+    "referenceBackedGroupCount": 25,
+    "averageControlReadiness10": 8.6,
+    "read": "The first five challenge stages now have explicit movement-grammar rows: group schedule, path family, reference path, arc/drop controls, lower-field bias, and human-visible promotion guardrails."
+  },
+  "measurementLimits": [
+    "Reference paths are object-track summaries from ingested video, not frame-perfect authoritative splines.",
+    "This artifact is a candidate-generation contract; runtime changes must still pass browser-backed conformance checks.",
+    "Challenge alien sprite identity remains authority-limited until clean target sprite windows are promoted."
+  ],
+  "grammar": [
+    {
+      "stage": 3,
+      "challengeNumber": 1,
+      "label": "Challenging Stage 3-4",
+      "role": "introductory bonus lesson",
+      "playerMeaning": "Teach that a challenging stage is safe, scoreable, and learnable rather than a combat wave.",
+      "targetFeel": "clean bee/butterfly arrivals, readable upper-band lanes, and visible peel/drop exits.",
+      "sourceControlReadiness10": 8.7,
+      "targetSummary": {
+        "averageConfidence": 0.714,
+        "averageTargetXRange": 0.337,
+        "averageTargetYRange": 0.4528,
+        "averageLowerFieldShare": 0.5833
+      },
+      "runtimeSeed": {
+        "groupSpawnOffsets": [
+          0,
+          4.38,
+          7.75,
+          11.25,
+          15.25
+        ],
+        "groupSoftSpeedScales": [
+          2.12,
+          1.13,
+          1.67,
+          1.49,
+          2.65
+        ],
+        "groupSpeedScales": [
+          2.52,
+          1.34,
+          1.99,
+          1.77,
+          3.4
+        ],
+        "groupArcAmps": [
+          1.72,
+          1.31,
+          1.72,
+          1.68,
+          1.03
+        ],
+        "groupDropAmps": [
+          1.16,
+          1.6,
+          1.5,
+          1.51,
+          1.12
+        ],
+        "groupLowerFieldBiases": [
+          188,
+          38,
+          119,
+          134,
+          0
+        ],
+        "groupYOffsets": [
+          86,
+          1,
+          40,
+          47,
+          0
+        ],
+        "groupPathFamilies": [
+          "first-challenge-peel",
+          "classic-column-drop",
+          "first-challenge-peel",
+          "side-hook-return",
+          "side-hook-return"
+        ],
+        "groupReferencePaths": [
+          {
+            "sourceTrackId": "target-track-33",
+            "sourceSampleCount": 3,
+            "durationS": 0.75,
+            "laneSpreadX": 12.94,
+            "rowSpreadY": 6.49,
+            "pathScaleX": 5.6,
+            "pathScaleY": 4.079,
+            "sourceCenterX": 0.3523,
+            "sourceCenterY": 0.6592,
+            "exitVy": 216,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.3197,
+                "y": 0.6462
+              },
+              {
+                "t": 0.13,
+                "x": 0.3205,
+                "y": 0.6454
+              },
+              {
+                "t": 0.63,
+                "x": 0.4166,
+                "y": 0.6859
+              }
+            ],
+            "read": "Representative target path target-track-33 with 3 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-84",
+            "sourceSampleCount": 36,
+            "durationS": 5.62,
+            "laneSpreadX": 9.57,
+            "rowSpreadY": 9.62,
+            "pathScaleX": 1.146,
+            "pathScaleY": 1.131,
+            "sourceCenterX": 0.4803,
+            "sourceCenterY": 0.6452,
+            "exitVy": 175.7,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.5675,
+                "y": 0.2171
+              },
+              {
+                "t": 0.5,
+                "x": 0.5579,
+                "y": 0.3426
+              },
+              {
+                "t": 1.12,
+                "x": 0.4859,
+                "y": 0.5882
+              },
+              {
+                "t": 2,
+                "x": 0.4238,
+                "y": 0.7138
+              },
+              {
+                "t": 2.5,
+                "x": 0.423,
+                "y": 0.7139
+              },
+              {
+                "t": 2.87,
+                "x": 0.4239,
+                "y": 0.7141
+              },
+              {
+                "t": 3.37,
+                "x": 0.3866,
+                "y": 0.8051
+              },
+              {
+                "t": 3.87,
+                "x": 0.4443,
+                "y": 0.7744
+              },
+              {
+                "t": 4.5,
+                "x": 0.5446,
+                "y": 0.8241
+              },
+              {
+                "t": 5.62,
+                "x": 0.5452,
+                "y": 0.759
+              }
+            ],
+            "read": "Representative target path target-track-84 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-109",
+            "sourceSampleCount": 22,
+            "durationS": 2.75,
+            "laneSpreadX": 11.85,
+            "rowSpreadY": 8.74,
+            "pathScaleX": 5.6,
+            "pathScaleY": 2.855,
+            "sourceCenterX": 0.5207,
+            "sourceCenterY": 0.4931,
+            "exitVy": 194.3,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.5211,
+                "y": 0.3757
+              },
+              {
+                "t": 0.25,
+                "x": 0.5282,
+                "y": 0.3596
+              },
+              {
+                "t": 0.62,
+                "x": 0.5212,
+                "y": 0.4221
+              },
+              {
+                "t": 1,
+                "x": 0.5263,
+                "y": 0.4969
+              },
+              {
+                "t": 1.25,
+                "x": 0.5298,
+                "y": 0.5451
+              },
+              {
+                "t": 1.62,
+                "x": 0.5292,
+                "y": 0.5431
+              },
+              {
+                "t": 1.87,
+                "x": 0.5302,
+                "y": 0.5431
+              },
+              {
+                "t": 2.12,
+                "x": 0.5333,
+                "y": 0.5482
+              },
+              {
+                "t": 2.5,
+                "x": 0.4937,
+                "y": 0.5487
+              },
+              {
+                "t": 2.75,
+                "x": 0.4937,
+                "y": 0.5487
+              }
+            ],
+            "read": "Representative target path target-track-109 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-133",
+            "sourceSampleCount": 25,
+            "durationS": 3.87,
+            "laneSpreadX": 11.82,
+            "rowSpreadY": 8.73,
+            "pathScaleX": 3.802,
+            "pathScaleY": 2.203,
+            "sourceCenterX": 0.4852,
+            "sourceCenterY": 0.6251,
+            "exitVy": 197.8,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.539,
+                "y": 0.776
+              },
+              {
+                "t": 0.37,
+                "x": 0.5624,
+                "y": 0.7869
+              },
+              {
+                "t": 1,
+                "x": 0.4833,
+                "y": 0.7738
+              },
+              {
+                "t": 1.87,
+                "x": 0.4617,
+                "y": 0.5737
+              },
+              {
+                "t": 2.25,
+                "x": 0.4617,
+                "y": 0.5457
+              },
+              {
+                "t": 2.5,
+                "x": 0.46,
+                "y": 0.5424
+              },
+              {
+                "t": 2.87,
+                "x": 0.4873,
+                "y": 0.563
+              },
+              {
+                "t": 3.25,
+                "x": 0.4873,
+                "y": 0.563
+              },
+              {
+                "t": 3.5,
+                "x": 0.46,
+                "y": 0.5636
+              },
+              {
+                "t": 3.87,
+                "x": 0.4488,
+                "y": 0.563
+              }
+            ],
+            "read": "Representative target path target-track-133 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-165",
+            "sourceSampleCount": 3,
+            "durationS": 0.75,
+            "laneSpreadX": 8.17,
+            "rowSpreadY": 7.5,
+            "pathScaleX": 4.678,
+            "pathScaleY": 2.876,
+            "sourceCenterX": 0.5634,
+            "sourceCenterY": 0.4246,
+            "exitVy": 142,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.5683,
+                "y": 0.4778
+              },
+              {
+                "t": 0.13,
+                "x": 0.5678,
+                "y": 0.4344
+              },
+              {
+                "t": 0.63,
+                "x": 0.554,
+                "y": 0.3617
+              }
+            ],
+            "read": "Representative target path target-track-165 with 3 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          }
+        ]
+      },
+      "groupContracts": [
+        {
+          "groupIndex": 1,
+          "controlIntent": "first-challenge-peel-or-hook",
+          "runtimePathFamilyHint": "first-challenge-peel",
+          "confidence": 0.737,
+          "trackCount": 14,
+          "runtimeControl": {
+            "spawnOffsetS": 0,
+            "durationS": 3.25,
+            "speedScale": 2.52,
+            "softSpeedScale": 2.12,
+            "arcAmp": 1.72,
+            "dropAmp": 1.16,
+            "lowerFieldBias": 188,
+            "yOffset": 86
+          },
+          "comparisonTargets": {
+            "xRange": 0.5437,
+            "yRange": 0.1652,
+            "pathLength": 0.0221,
+            "turnCount": 2.64,
+            "reversalCount": 1.57,
+            "lowerFieldShare": 1,
+            "entrySide": "left",
+            "exitSide": "center"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-33",
+            "sourceSampleCount": 3,
+            "durationS": 0.75,
+            "pointCount": 3
+          }
+        },
+        {
+          "groupIndex": 2,
+          "controlIntent": "classic-tall-bonus-column",
+          "runtimePathFamilyHint": "classic-column-drop",
+          "confidence": 0.754,
+          "trackCount": 12,
+          "runtimeControl": {
+            "spawnOffsetS": 4.38,
+            "durationS": 6.12,
+            "speedScale": 1.34,
+            "softSpeedScale": 1.13,
+            "arcAmp": 1.31,
+            "dropAmp": 1.6,
+            "lowerFieldBias": 38,
+            "yOffset": 1
+          },
+          "comparisonTargets": {
+            "xRange": 0.2073,
+            "yRange": 0.6865,
+            "pathLength": 0.254,
+            "turnCount": 4.25,
+            "reversalCount": 2.92,
+            "lowerFieldShare": 0.456,
+            "entrySide": "center",
+            "exitSide": "center"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-84",
+            "sourceSampleCount": 36,
+            "durationS": 5.62,
+            "pointCount": 10
+          }
+        },
+        {
+          "groupIndex": 3,
+          "controlIntent": "first-challenge-peel-or-hook",
+          "runtimePathFamilyHint": "first-challenge-peel",
+          "confidence": 0.762,
+          "trackCount": 10,
+          "runtimeControl": {
+            "spawnOffsetS": 7.75,
+            "durationS": 4.13,
+            "speedScale": 1.99,
+            "softSpeedScale": 1.67,
+            "arcAmp": 1.72,
+            "dropAmp": 1.5,
+            "lowerFieldBias": 119,
+            "yOffset": 40
+          },
+          "comparisonTargets": {
+            "xRange": 0.4352,
+            "yRange": 0.5399,
+            "pathLength": 0.2846,
+            "turnCount": 6,
+            "reversalCount": 5,
+            "lowerFieldShare": 0.7069,
+            "entrySide": "left",
+            "exitSide": "center"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-109",
+            "sourceSampleCount": 22,
+            "durationS": 2.75,
+            "pointCount": 10
+          }
+        },
+        {
+          "groupIndex": 4,
+          "controlIntent": "upper-band-bonus-line",
+          "runtimePathFamilyHint": "side-hook-return",
+          "confidence": 0.773,
+          "trackCount": 14,
+          "runtimeControl": {
+            "spawnOffsetS": 11.25,
+            "durationS": 4.63,
+            "speedScale": 1.77,
+            "softSpeedScale": 1.49,
+            "arcAmp": 1.68,
+            "dropAmp": 1.51,
+            "lowerFieldBias": 134,
+            "yOffset": 47
+          },
+          "comparisonTargets": {
+            "xRange": 0.4319,
+            "yRange": 0.5387,
+            "pathLength": 0.3166,
+            "turnCount": 6.14,
+            "reversalCount": 4.21,
+            "lowerFieldShare": 0.7534,
+            "entrySide": "center",
+            "exitSide": "center"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-133",
+            "sourceSampleCount": 25,
+            "durationS": 3.87,
+            "pointCount": 10
+          }
+        },
+        {
+          "groupIndex": 5,
+          "controlIntent": "upper-band-bonus-line",
+          "runtimePathFamilyHint": "side-hook-return",
+          "confidence": 0.542,
+          "trackCount": 5,
+          "runtimeControl": {
+            "spawnOffsetS": 15.25,
+            "durationS": 0.75,
+            "speedScale": 3.4,
+            "softSpeedScale": 2.65,
+            "arcAmp": 1.03,
+            "dropAmp": 1.12,
+            "lowerFieldBias": 0,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.0669,
+            "yRange": 0.3339,
+            "pathLength": 0.0867,
+            "turnCount": 1.6,
+            "reversalCount": 1.2,
+            "lowerFieldShare": 0,
+            "entrySide": "center",
+            "exitSide": "center"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-165",
+            "sourceSampleCount": 3,
+            "durationS": 0.75,
+            "pointCount": 3
+          }
+        }
+      ],
+      "humanVisibleGuardrails": [
+        "Every group must visibly arrive through a path; do not promote candidates that appear in-place inside the playfield.",
+        "Groups must preserve readable spacing; do not promote candidates that bunch multiple enemies into ambiguous blobs.",
+        "The stage must remain a safe no-shot/no-ship-loss bonus exhibition.",
+        "A professional persona should retain a plausible perfect-clear route.",
+        "The best-matching reference identity must belong to the intended challenge, not only a nearby generic challenge vector."
+      ],
+      "nextImplementationUse": "Use this row as the baseline candidate seed for sweeps; promote runtime constants only after full challenge-stage conformance and human-visible guardrails pass."
+    },
+    {
+      "stage": 7,
+      "challengeNumber": 2,
+      "label": "Challenging Stage 7-8",
+      "role": "mixed crossing escalation",
+      "playerMeaning": "Show that the second challenge has a new route vocabulary and not just faster copies of the first.",
+      "targetFeel": "wider crossing sweeps, hook returns, and specialty-family novelty.",
+      "sourceControlReadiness10": 8.5,
+      "targetSummary": {
+        "averageConfidence": 0.67,
+        "averageTargetXRange": 0.3774,
+        "averageTargetYRange": 0.4596,
+        "averageLowerFieldShare": 0.6491
+      },
+      "runtimeSeed": {
+        "groupSpawnOffsets": [
+          0,
+          2.88,
+          4.25,
+          7.13,
+          13.38
+        ],
+        "groupSoftSpeedScales": [
+          2.65,
+          1.97,
+          2.65,
+          2.12,
+          2.65
+        ],
+        "groupSpeedScales": [
+          3.4,
+          2.34,
+          3.4,
+          2.52,
+          3.28
+        ],
+        "groupArcAmps": [
+          1.91,
+          1.24,
+          1.07,
+          2.21,
+          1.25
+        ],
+        "groupDropAmps": [
+          1.17,
+          1.56,
+          1.07,
+          1.61,
+          1.59
+        ],
+        "groupLowerFieldBiases": [
+          188,
+          0,
+          188,
+          57,
+          31
+        ],
+        "groupYOffsets": [
+          83,
+          0,
+          86,
+          10,
+          0
+        ],
+        "groupPathFamilies": [
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "cross-sweep",
+          "hook-arc"
+        ],
+        "groupReferencePaths": [
+          {
+            "sourceTrackId": "target-track-10",
+            "sourceSampleCount": 14,
+            "durationS": 1.88,
+            "laneSpreadX": 13.5,
+            "rowSpreadY": 6.56,
+            "pathScaleX": 3.227,
+            "pathScaleY": 5.6,
+            "sourceCenterX": 0.5702,
+            "sourceCenterY": 0.5311,
+            "exitVy": 214.6,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.4436,
+                "y": 0.5299
+              },
+              {
+                "t": 0.13,
+                "x": 0.4347,
+                "y": 0.5325
+              },
+              {
+                "t": 0.63,
+                "x": 0.5163,
+                "y": 0.5305
+              },
+              {
+                "t": 0.75,
+                "x": 0.5537,
+                "y": 0.5305
+              },
+              {
+                "t": 1,
+                "x": 0.6251,
+                "y": 0.5317
+              },
+              {
+                "t": 1.13,
+                "x": 0.6258,
+                "y": 0.5312
+              },
+              {
+                "t": 1.38,
+                "x": 0.6258,
+                "y": 0.5312
+              },
+              {
+                "t": 1.5,
+                "x": 0.6258,
+                "y": 0.5312
+              },
+              {
+                "t": 1.75,
+                "x": 0.6258,
+                "y": 0.5312
+              },
+              {
+                "t": 1.88,
+                "x": 0.6258,
+                "y": 0.5312
+              }
+            ],
+            "read": "Representative target path target-track-10 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-66",
+            "sourceSampleCount": 21,
+            "durationS": 2.63,
+            "laneSpreadX": 9.36,
+            "rowSpreadY": 9.56,
+            "pathScaleX": 2.158,
+            "pathScaleY": 5.349,
+            "sourceCenterX": 0.4753,
+            "sourceCenterY": 0.5734,
+            "exitVy": 165.1,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.4315,
+                "y": 0.5016
+              },
+              {
+                "t": 0.38,
+                "x": 0.5176,
+                "y": 0.4881
+              },
+              {
+                "t": 0.63,
+                "x": 0.5173,
+                "y": 0.4881
+              },
+              {
+                "t": 1,
+                "x": 0.4756,
+                "y": 0.5754
+              },
+              {
+                "t": 1.25,
+                "x": 0.4715,
+                "y": 0.6146
+              },
+              {
+                "t": 1.5,
+                "x": 0.4683,
+                "y": 0.6134
+              },
+              {
+                "t": 1.75,
+                "x": 0.4681,
+                "y": 0.6134
+              },
+              {
+                "t": 2.13,
+                "x": 0.4681,
+                "y": 0.6131
+              },
+              {
+                "t": 2.38,
+                "x": 0.4673,
+                "y": 0.6133
+              },
+              {
+                "t": 2.63,
+                "x": 0.4675,
+                "y": 0.6132
+              }
+            ],
+            "read": "Representative target path target-track-66 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-71",
+            "sourceSampleCount": 7,
+            "durationS": 0.75,
+            "laneSpreadX": 8.04,
+            "rowSpreadY": 6.01,
+            "pathScaleX": 1.178,
+            "pathScaleY": 1.268,
+            "sourceCenterX": 0.4866,
+            "sourceCenterY": 0.5839,
+            "exitVy": 216,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.4952,
+                "y": 0.5488
+              },
+              {
+                "t": 0.13,
+                "x": 0.4955,
+                "y": 0.5489
+              },
+              {
+                "t": 0.25,
+                "x": 0.4762,
+                "y": 0.5966
+              },
+              {
+                "t": 0.38,
+                "x": 0.4746,
+                "y": 0.6026
+              },
+              {
+                "t": 0.5,
+                "x": 0.4741,
+                "y": 0.6121
+              },
+              {
+                "t": 0.63,
+                "x": 0.5181,
+                "y": 0.6157
+              },
+              {
+                "t": 0.75,
+                "x": 0.4727,
+                "y": 0.5629
+              }
+            ],
+            "read": "Representative target path target-track-71 with 7 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-110",
+            "sourceSampleCount": 13,
+            "durationS": 2,
+            "laneSpreadX": 13.5,
+            "rowSpreadY": 9.58,
+            "pathScaleX": 5.288,
+            "pathScaleY": 5.6,
+            "sourceCenterX": 0.456,
+            "sourceCenterY": 0.2218,
+            "exitVy": 180.2,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.3424,
+                "y": 0.2444
+              },
+              {
+                "t": 0.12,
+                "x": 0.3286,
+                "y": 0.2484
+              },
+              {
+                "t": 0.75,
+                "x": 0.4161,
+                "y": 0.226
+              },
+              {
+                "t": 1,
+                "x": 0.4962,
+                "y": 0.2142
+              },
+              {
+                "t": 1.12,
+                "x": 0.4962,
+                "y": 0.2142
+              },
+              {
+                "t": 1.37,
+                "x": 0.4962,
+                "y": 0.2142
+              },
+              {
+                "t": 1.5,
+                "x": 0.4961,
+                "y": 0.2141
+              },
+              {
+                "t": 1.62,
+                "x": 0.4962,
+                "y": 0.2143
+              },
+              {
+                "t": 1.87,
+                "x": 0.496,
+                "y": 0.2142
+              },
+              {
+                "t": 2,
+                "x": 0.4957,
+                "y": 0.214
+              }
+            ],
+            "read": "Representative target path target-track-110 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-142",
+            "sourceSampleCount": 16,
+            "durationS": 2.5,
+            "laneSpreadX": 8.95,
+            "rowSpreadY": 9.58,
+            "pathScaleX": 1.856,
+            "pathScaleY": 1.721,
+            "sourceCenterX": 0.5503,
+            "sourceCenterY": 0.2624,
+            "exitVy": 174.3,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.5003,
+                "y": 0.2186
+              },
+              {
+                "t": 0.62,
+                "x": 0.5683,
+                "y": 0.1825
+              },
+              {
+                "t": 0.75,
+                "x": 0.5633,
+                "y": 0.1909
+              },
+              {
+                "t": 1,
+                "x": 0.5681,
+                "y": 0.1826
+              },
+              {
+                "t": 1.25,
+                "x": 0.5681,
+                "y": 0.1648
+              },
+              {
+                "t": 1.37,
+                "x": 0.5681,
+                "y": 0.1648
+              },
+              {
+                "t": 1.62,
+                "x": 0.5728,
+                "y": 0.2007
+              },
+              {
+                "t": 1.87,
+                "x": 0.5585,
+                "y": 0.3449
+              },
+              {
+                "t": 2,
+                "x": 0.5403,
+                "y": 0.4148
+              },
+              {
+                "t": 2.5,
+                "x": 0.4948,
+                "y": 0.5596
+              }
+            ],
+            "read": "Representative target path target-track-142 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          }
+        ]
+      },
+      "groupContracts": [
+        {
+          "groupIndex": 1,
+          "controlIntent": "mixed-crossing-sweep",
+          "runtimePathFamilyHint": "cross-sweep",
+          "confidence": 0.752,
+          "trackCount": 16,
+          "runtimeControl": {
+            "spawnOffsetS": 0,
+            "durationS": 1.88,
+            "speedScale": 3.4,
+            "softSpeedScale": 2.65,
+            "arcAmp": 1.91,
+            "dropAmp": 1.17,
+            "lowerFieldBias": 188,
+            "yOffset": 83
+          },
+          "comparisonTargets": {
+            "xRange": 0.6166,
+            "yRange": 0.177,
+            "pathLength": 0.1176,
+            "turnCount": 5.31,
+            "reversalCount": 3.44,
+            "lowerFieldShare": 0.9815,
+            "entrySide": "center",
+            "exitSide": "left"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-10",
+            "sourceSampleCount": 14,
+            "durationS": 1.88,
+            "pointCount": 10
+          }
+        },
+        {
+          "groupIndex": 2,
+          "controlIntent": "mixed-hook-arrival",
+          "runtimePathFamilyHint": "hook-arc",
+          "confidence": 0.706,
+          "trackCount": 9,
+          "runtimeControl": {
+            "spawnOffsetS": 2.88,
+            "durationS": 3.5,
+            "speedScale": 2.34,
+            "softSpeedScale": 1.97,
+            "arcAmp": 1.24,
+            "dropAmp": 1.56,
+            "lowerFieldBias": 0,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.1858,
+            "yRange": 0.6766,
+            "pathLength": 0.1686,
+            "turnCount": 3,
+            "reversalCount": 2.22,
+            "lowerFieldShare": 0.3122,
+            "entrySide": "center",
+            "exitSide": "center"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-66",
+            "sourceSampleCount": 21,
+            "durationS": 2.63,
+            "pointCount": 10
+          }
+        },
+        {
+          "groupIndex": 3,
+          "controlIntent": "mixed-hook-arrival",
+          "runtimePathFamilyHint": "hook-arc",
+          "confidence": 0.447,
+          "trackCount": 2,
+          "runtimeControl": {
+            "spawnOffsetS": 4.25,
+            "durationS": 0.75,
+            "speedScale": 3.4,
+            "softSpeedScale": 2.65,
+            "arcAmp": 1.07,
+            "dropAmp": 1.07,
+            "lowerFieldBias": 188,
+            "yOffset": 86
+          },
+          "comparisonTargets": {
+            "xRange": 0.0535,
+            "yRange": 0.0848,
+            "pathLength": 0.154,
+            "turnCount": 2.5,
+            "reversalCount": 2.5,
+            "lowerFieldShare": 1,
+            "entrySide": "center",
+            "exitSide": "center"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-71",
+            "sourceSampleCount": 7,
+            "durationS": 0.75,
+            "pointCount": 7
+          }
+        },
+        {
+          "groupIndex": 4,
+          "controlIntent": "mixed-crossing-sweep",
+          "runtimePathFamilyHint": "cross-sweep",
+          "confidence": 0.719,
+          "trackCount": 25,
+          "runtimeControl": {
+            "spawnOffsetS": 7.13,
+            "durationS": 3.25,
+            "speedScale": 2.52,
+            "softSpeedScale": 2.12,
+            "arcAmp": 2.21,
+            "dropAmp": 1.61,
+            "lowerFieldBias": 57,
+            "yOffset": 10
+          },
+          "comparisonTargets": {
+            "xRange": 0.8862,
+            "yRange": 0.6802,
+            "pathLength": 0.1472,
+            "turnCount": 2.12,
+            "reversalCount": 1.6,
+            "lowerFieldShare": 0.5156,
+            "entrySide": "left",
+            "exitSide": "center"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-110",
+            "sourceSampleCount": 13,
+            "durationS": 2,
+            "pointCount": 10
+          }
+        },
+        {
+          "groupIndex": 5,
+          "controlIntent": "mixed-hook-arrival",
+          "runtimePathFamilyHint": "hook-arc",
+          "confidence": 0.728,
+          "trackCount": 9,
+          "runtimeControl": {
+            "spawnOffsetS": 13.38,
+            "durationS": 2.5,
+            "speedScale": 3.28,
+            "softSpeedScale": 2.65,
+            "arcAmp": 1.25,
+            "dropAmp": 1.59,
+            "lowerFieldBias": 31,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.1448,
+            "yRange": 0.6796,
+            "pathLength": 0.2417,
+            "turnCount": 4.89,
+            "reversalCount": 3.67,
+            "lowerFieldShare": 0.4362,
+            "entrySide": "center",
+            "exitSide": "center"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-142",
+            "sourceSampleCount": 16,
+            "durationS": 2.5,
+            "pointCount": 10
+          }
+        }
+      ],
+      "humanVisibleGuardrails": [
+        "Every group must visibly arrive through a path; do not promote candidates that appear in-place inside the playfield.",
+        "Groups must preserve readable spacing; do not promote candidates that bunch multiple enemies into ambiguous blobs.",
+        "The stage must remain a safe no-shot/no-ship-loss bonus exhibition.",
+        "A professional persona should retain a plausible perfect-clear route.",
+        "The best-matching reference identity must belong to the intended challenge, not only a nearby generic challenge vector."
+      ],
+      "nextImplementationUse": "Use this row as the baseline candidate seed for sweeps; promote runtime constants only after full challenge-stage conformance and human-visible guardrails pass."
+    },
+    {
+      "stage": 11,
+      "challengeNumber": 3,
+      "label": "Challenging Stage 11-12",
+      "role": "boss-led and specialty hook lesson",
+      "playerMeaning": "Make the player read larger boss-led and specialty shapes while still preserving a perfect-score route.",
+      "targetFeel": "boss-led loops, hook arcs, and clear dragonfly/specialty visual identity.",
+      "sourceControlReadiness10": 8.6,
+      "targetSummary": {
+        "averageConfidence": 0.686,
+        "averageTargetXRange": 0.3245,
+        "averageTargetYRange": 0.6346,
+        "averageLowerFieldShare": 0.4101
+      },
+      "runtimeSeed": {
+        "groupSpawnOffsets": [
+          0,
+          0.88,
+          4.38,
+          7.88,
+          12.13
+        ],
+        "groupSoftSpeedScales": [
+          2.65,
+          2.3,
+          1.72,
+          1.38,
+          1.84
+        ],
+        "groupSpeedScales": [
+          3.4,
+          2.73,
+          2.05,
+          1.64,
+          2.19
+        ],
+        "groupArcAmps": [
+          1.1,
+          1.46,
+          1.7,
+          1.69,
+          1.22
+        ],
+        "groupDropAmps": [
+          1.54,
+          1.42,
+          1.54,
+          1.58,
+          1.6
+        ],
+        "groupLowerFieldBiases": [
+          135,
+          0,
+          19,
+          29,
+          0
+        ],
+        "groupYOffsets": [
+          48,
+          0,
+          0,
+          0,
+          0
+        ],
+        "groupPathFamilies": [
+          "hook-arc",
+          "hook-arc",
+          "hook-arc",
+          "hook-arc",
+          "hook-arc"
+        ],
+        "groupReferencePaths": [
+          {
+            "sourceTrackId": "target-track-3",
+            "sourceSampleCount": 11,
+            "durationS": 1.25,
+            "laneSpreadX": 8.93,
+            "rowSpreadY": 8.92,
+            "pathScaleX": 1.201,
+            "pathScaleY": 1.303,
+            "sourceCenterX": 0.912,
+            "sourceCenterY": 0.5695,
+            "exitVy": 197.9,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.9443,
+                "y": 0.7338
+              },
+              {
+                "t": 0.13,
+                "x": 0.9383,
+                "y": 0.7226
+              },
+              {
+                "t": 0.25,
+                "x": 0.9304,
+                "y": 0.741
+              },
+              {
+                "t": 0.38,
+                "x": 0.9313,
+                "y": 0.7412
+              },
+              {
+                "t": 0.5,
+                "x": 0.9398,
+                "y": 0.6677
+              },
+              {
+                "t": 0.75,
+                "x": 0.931,
+                "y": 0.5524
+              },
+              {
+                "t": 0.88,
+                "x": 0.9157,
+                "y": 0.4814
+              },
+              {
+                "t": 1,
+                "x": 0.8988,
+                "y": 0.4093
+              },
+              {
+                "t": 1.13,
+                "x": 0.8649,
+                "y": 0.3427
+              },
+              {
+                "t": 1.25,
+                "x": 0.8251,
+                "y": 0.3034
+              }
+            ],
+            "read": "Representative target path target-track-3 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-16",
+            "sourceSampleCount": 16,
+            "durationS": 2.38,
+            "laneSpreadX": 11.14,
+            "rowSpreadY": 9,
+            "pathScaleX": 5.501,
+            "pathScaleY": 3.727,
+            "sourceCenterX": 0.5469,
+            "sourceCenterY": 0.531,
+            "exitVy": 153.6,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.5376,
+                "y": 0.6506
+              },
+              {
+                "t": 0.63,
+                "x": 0.5368,
+                "y": 0.5857
+              },
+              {
+                "t": 0.75,
+                "x": 0.537,
+                "y": 0.6079
+              },
+              {
+                "t": 1.13,
+                "x": 0.6029,
+                "y": 0.5
+              },
+              {
+                "t": 1.38,
+                "x": 0.5428,
+                "y": 0.4944
+              },
+              {
+                "t": 1.5,
+                "x": 0.5423,
+                "y": 0.4943
+              },
+              {
+                "t": 1.75,
+                "x": 0.5423,
+                "y": 0.4944
+              },
+              {
+                "t": 2,
+                "x": 0.5423,
+                "y": 0.4943
+              },
+              {
+                "t": 2.13,
+                "x": 0.5431,
+                "y": 0.4943
+              },
+              {
+                "t": 2.38,
+                "x": 0.5423,
+                "y": 0.4943
+              }
+            ],
+            "read": "Representative target path target-track-16 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-37",
+            "sourceSampleCount": 20,
+            "durationS": 2.5,
+            "laneSpreadX": 12.65,
+            "rowSpreadY": 9.33,
+            "pathScaleX": 5.6,
+            "pathScaleY": 2.505,
+            "sourceCenterX": 0.5464,
+            "sourceCenterY": 0.4543,
+            "exitVy": 171.4,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.5594,
+                "y": 0.2678
+              },
+              {
+                "t": 0.25,
+                "x": 0.5454,
+                "y": 0.3206
+              },
+              {
+                "t": 0.5,
+                "x": 0.5459,
+                "y": 0.373
+              },
+              {
+                "t": 0.75,
+                "x": 0.5466,
+                "y": 0.4463
+              },
+              {
+                "t": 1,
+                "x": 0.5532,
+                "y": 0.5219
+              },
+              {
+                "t": 1.5,
+                "x": 0.5426,
+                "y": 0.5227
+              },
+              {
+                "t": 1.75,
+                "x": 0.5435,
+                "y": 0.5227
+              },
+              {
+                "t": 2,
+                "x": 0.5423,
+                "y": 0.5226
+              },
+              {
+                "t": 2.25,
+                "x": 0.5425,
+                "y": 0.5227
+              },
+              {
+                "t": 2.5,
+                "x": 0.5425,
+                "y": 0.5227
+              }
+            ],
+            "read": "Representative target path target-track-37 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-77",
+            "sourceSampleCount": 17,
+            "durationS": 2.25,
+            "laneSpreadX": 12.1,
+            "rowSpreadY": 9.51,
+            "pathScaleX": 5.6,
+            "pathScaleY": 3.325,
+            "sourceCenterX": 0.4336,
+            "sourceCenterY": 0.3411,
+            "exitVy": 173.9,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.4092,
+                "y": 0.4859
+              },
+              {
+                "t": 0.25,
+                "x": 0.4316,
+                "y": 0.432
+              },
+              {
+                "t": 0.5,
+                "x": 0.438,
+                "y": 0.3912
+              },
+              {
+                "t": 0.62,
+                "x": 0.433,
+                "y": 0.3917
+              },
+              {
+                "t": 1.12,
+                "x": 0.4372,
+                "y": 0.285
+              },
+              {
+                "t": 1.37,
+                "x": 0.4374,
+                "y": 0.285
+              },
+              {
+                "t": 1.62,
+                "x": 0.4374,
+                "y": 0.285
+              },
+              {
+                "t": 1.75,
+                "x": 0.4372,
+                "y": 0.2849
+              },
+              {
+                "t": 2,
+                "x": 0.4375,
+                "y": 0.285
+              },
+              {
+                "t": 2.25,
+                "x": 0.4379,
+                "y": 0.2855
+              }
+            ],
+            "read": "Representative target path target-track-77 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-85",
+            "sourceSampleCount": 15,
+            "durationS": 2.12,
+            "laneSpreadX": 8.91,
+            "rowSpreadY": 9.78,
+            "pathScaleX": 3.019,
+            "pathScaleY": 2.582,
+            "sourceCenterX": 0.5667,
+            "sourceCenterY": 0.3041,
+            "exitVy": 164.9,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.5601,
+                "y": 0.2402
+              },
+              {
+                "t": 0.62,
+                "x": 0.5745,
+                "y": 0.2236
+              },
+              {
+                "t": 0.75,
+                "x": 0.5745,
+                "y": 0.2231
+              },
+              {
+                "t": 1,
+                "x": 0.5744,
+                "y": 0.2127
+              },
+              {
+                "t": 1.12,
+                "x": 0.575,
+                "y": 0.2049
+              },
+              {
+                "t": 1.37,
+                "x": 0.5742,
+                "y": 0.2602
+              },
+              {
+                "t": 1.5,
+                "x": 0.5744,
+                "y": 0.3325
+              },
+              {
+                "t": 1.75,
+                "x": 0.5792,
+                "y": 0.436
+              },
+              {
+                "t": 1.87,
+                "x": 0.5479,
+                "y": 0.481
+              },
+              {
+                "t": 2.12,
+                "x": 0.5324,
+                "y": 0.4269
+              }
+            ],
+            "read": "Representative target path target-track-85 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          }
+        ]
+      },
+      "groupContracts": [
+        {
+          "groupIndex": 1,
+          "controlIntent": "boss-led-tall-hook",
+          "runtimePathFamilyHint": "hook-arc",
+          "confidence": 0.564,
+          "trackCount": 5,
+          "runtimeControl": {
+            "spawnOffsetS": 0,
+            "durationS": 1.5,
+            "speedScale": 3.4,
+            "softSpeedScale": 2.65,
+            "arcAmp": 1.1,
+            "dropAmp": 1.54,
+            "lowerFieldBias": 135,
+            "yOffset": 48
+          },
+          "comparisonTargets": {
+            "xRange": 0.1432,
+            "yRange": 0.5704,
+            "pathLength": 0.2349,
+            "turnCount": 1.4,
+            "reversalCount": 0.4,
+            "lowerFieldShare": 0.7559,
+            "entrySide": "right",
+            "exitSide": "right"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-3",
+            "sourceSampleCount": 11,
+            "durationS": 1.25,
+            "pointCount": 10
+          }
+        },
+        {
+          "groupIndex": 2,
+          "controlIntent": "boss-led-tall-hook",
+          "runtimePathFamilyHint": "hook-arc",
+          "confidence": 0.674,
+          "trackCount": 8,
+          "runtimeControl": {
+            "spawnOffsetS": 0.88,
+            "durationS": 3,
+            "speedScale": 2.73,
+            "softSpeedScale": 2.3,
+            "arcAmp": 1.46,
+            "dropAmp": 1.42,
+            "lowerFieldBias": 0,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.3636,
+            "yRange": 0.5826,
+            "pathLength": 0.183,
+            "turnCount": 2.88,
+            "reversalCount": 1.5,
+            "lowerFieldShare": 0.1563,
+            "entrySide": "right",
+            "exitSide": "center"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-16",
+            "sourceSampleCount": 16,
+            "durationS": 2.38,
+            "pointCount": 10
+          }
+        },
+        {
+          "groupIndex": 3,
+          "controlIntent": "boss-led-tall-hook",
+          "runtimePathFamilyHint": "hook-arc",
+          "confidence": 0.739,
+          "trackCount": 12,
+          "runtimeControl": {
+            "spawnOffsetS": 4.38,
+            "durationS": 4,
+            "speedScale": 2.05,
+            "softSpeedScale": 1.72,
+            "arcAmp": 1.7,
+            "dropAmp": 1.54,
+            "lowerFieldBias": 19,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.5149,
+            "yRange": 0.6385,
+            "pathLength": 0.2499,
+            "turnCount": 3,
+            "reversalCount": 2.08,
+            "lowerFieldShare": 0.3979,
+            "entrySide": "right",
+            "exitSide": "center"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-37",
+            "sourceSampleCount": 20,
+            "durationS": 2.5,
+            "pointCount": 10
+          }
+        },
+        {
+          "groupIndex": 4,
+          "controlIntent": "boss-led-tall-hook",
+          "runtimePathFamilyHint": "hook-arc",
+          "confidence": 0.739,
+          "trackCount": 12,
+          "runtimeControl": {
+            "spawnOffsetS": 7.88,
+            "durationS": 5,
+            "speedScale": 1.64,
+            "softSpeedScale": 1.38,
+            "arcAmp": 1.69,
+            "dropAmp": 1.58,
+            "lowerFieldBias": 29,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.4596,
+            "yRange": 0.6683,
+            "pathLength": 0.2167,
+            "turnCount": 3.42,
+            "reversalCount": 3.42,
+            "lowerFieldShare": 0.4306,
+            "entrySide": "center",
+            "exitSide": "center"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-77",
+            "sourceSampleCount": 17,
+            "durationS": 2.25,
+            "pointCount": 10
+          }
+        },
+        {
+          "groupIndex": 5,
+          "controlIntent": "boss-led-tall-hook",
+          "runtimePathFamilyHint": "hook-arc",
+          "confidence": 0.713,
+          "trackCount": 9,
+          "runtimeControl": {
+            "spawnOffsetS": 12.13,
+            "durationS": 3.75,
+            "speedScale": 2.19,
+            "softSpeedScale": 1.84,
+            "arcAmp": 1.22,
+            "dropAmp": 1.6,
+            "lowerFieldBias": 0,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.1413,
+            "yRange": 0.713,
+            "pathLength": 0.2128,
+            "turnCount": 3,
+            "reversalCount": 3.11,
+            "lowerFieldShare": 0.31,
+            "entrySide": "center",
+            "exitSide": "center"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-85",
+            "sourceSampleCount": 15,
+            "durationS": 2.12,
+            "pointCount": 10
+          }
+        }
+      ],
+      "humanVisibleGuardrails": [
+        "Every group must visibly arrive through a path; do not promote candidates that appear in-place inside the playfield.",
+        "Groups must preserve readable spacing; do not promote candidates that bunch multiple enemies into ambiguous blobs.",
+        "The stage must remain a safe no-shot/no-ship-loss bonus exhibition.",
+        "A professional persona should retain a plausible perfect-clear route.",
+        "The best-matching reference identity must belong to the intended challenge, not only a nearby generic challenge vector."
+      ],
+      "nextImplementationUse": "Use this row as the baseline candidate seed for sweeps; promote runtime constants only after full challenge-stage conformance and human-visible guardrails pass."
+    },
+    {
+      "stage": 15,
+      "challengeNumber": 4,
+      "label": "Challenging Stage 15-16",
+      "role": "late serpentine set piece",
+      "playerMeaning": "Introduce a late-stage spectacle that feels authored and memorable, not a remix of early challenge stages.",
+      "targetFeel": "pink serpentine motion, longer lower-field travel, and readable score lanes.",
+      "sourceControlReadiness10": 8.6,
+      "targetSummary": {
+        "averageConfidence": 0.691,
+        "averageTargetXRange": 0.3374,
+        "averageTargetYRange": 0.3881,
+        "averageLowerFieldShare": 0.729
+      },
+      "runtimeSeed": {
+        "groupSpawnOffsets": [
+          0,
+          0.5,
+          2.88,
+          6.38,
+          13.13
+        ],
+        "groupSoftSpeedScales": [
+          2.12,
+          2.51,
+          1.84,
+          1.97,
+          2.51
+        ],
+        "groupSpeedScales": [
+          2.52,
+          2.98,
+          2.19,
+          2.34,
+          2.98
+        ],
+        "groupArcAmps": [
+          1.54,
+          1.3,
+          1.31,
+          1.31,
+          1.83
+        ],
+        "groupDropAmps": [
+          1.33,
+          1.21,
+          1.59,
+          1.59,
+          0.98
+        ],
+        "groupLowerFieldBiases": [
+          158,
+          188,
+          41,
+          14,
+          188
+        ],
+        "groupYOffsets": [
+          59,
+          80,
+          3,
+          0,
+          86
+        ],
+        "groupPathFamilies": [
+          "pink-serpentine",
+          "pink-serpentine",
+          "pink-serpentine",
+          "pink-serpentine",
+          "pink-serpentine"
+        ],
+        "groupReferencePaths": [
+          {
+            "sourceTrackId": "target-track-1",
+            "sourceSampleCount": 25,
+            "durationS": 3.25,
+            "laneSpreadX": 11.21,
+            "rowSpreadY": 7.63,
+            "pathScaleX": 5.6,
+            "pathScaleY": 2.884,
+            "sourceCenterX": 0.5447,
+            "sourceCenterY": 0.6113,
+            "exitVy": 203.3,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.5855,
+                "y": 0.609
+              },
+              {
+                "t": 0.38,
+                "x": 0.5698,
+                "y": 0.655
+              },
+              {
+                "t": 0.75,
+                "x": 0.5341,
+                "y": 0.5636
+              },
+              {
+                "t": 1.13,
+                "x": 0.576,
+                "y": 0.5319
+              },
+              {
+                "t": 1.5,
+                "x": 0.5453,
+                "y": 0.5879
+              },
+              {
+                "t": 1.75,
+                "x": 0.5259,
+                "y": 0.6119
+              },
+              {
+                "t": 2.25,
+                "x": 0.5276,
+                "y": 0.6383
+              },
+              {
+                "t": 2.63,
+                "x": 0.5276,
+                "y": 0.6383
+              },
+              {
+                "t": 2.88,
+                "x": 0.5276,
+                "y": 0.6383
+              },
+              {
+                "t": 3.25,
+                "x": 0.5275,
+                "y": 0.639
+              }
+            ],
+            "read": "Representative target path target-track-1 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-9",
+            "sourceSampleCount": 21,
+            "durationS": 2.75,
+            "laneSpreadX": 9.54,
+            "rowSpreadY": 6.81,
+            "pathScaleX": 5.6,
+            "pathScaleY": 2.153,
+            "sourceCenterX": 0.564,
+            "sourceCenterY": 0.6152,
+            "exitVy": 213.4,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.563,
+                "y": 0.542
+              },
+              {
+                "t": 0.25,
+                "x": 0.5678,
+                "y": 0.5379
+              },
+              {
+                "t": 0.63,
+                "x": 0.5504,
+                "y": 0.6037
+              },
+              {
+                "t": 1,
+                "x": 0.5602,
+                "y": 0.6377
+              },
+              {
+                "t": 1.25,
+                "x": 0.5605,
+                "y": 0.6394
+              },
+              {
+                "t": 1.63,
+                "x": 0.5678,
+                "y": 0.6383
+              },
+              {
+                "t": 1.88,
+                "x": 0.5678,
+                "y": 0.6383
+              },
+              {
+                "t": 2.25,
+                "x": 0.5678,
+                "y": 0.6383
+              },
+              {
+                "t": 2.5,
+                "x": 0.5678,
+                "y": 0.6383
+              },
+              {
+                "t": 2.75,
+                "x": 0.5672,
+                "y": 0.6382
+              }
+            ],
+            "read": "Representative target path target-track-9 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-34",
+            "sourceSampleCount": 14,
+            "durationS": 2,
+            "laneSpreadX": 10.28,
+            "rowSpreadY": 9.54,
+            "pathScaleX": 2.178,
+            "pathScaleY": 4.885,
+            "sourceCenterX": 0.4661,
+            "sourceCenterY": 0.7308,
+            "exitVy": 176.5,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.5644,
+                "y": 0.6239
+              },
+              {
+                "t": 0.12,
+                "x": 0.5644,
+                "y": 0.6239
+              },
+              {
+                "t": 0.75,
+                "x": 0.4738,
+                "y": 0.7616
+              },
+              {
+                "t": 0.87,
+                "x": 0.4371,
+                "y": 0.7569
+              },
+              {
+                "t": 1.12,
+                "x": 0.4369,
+                "y": 0.7569
+              },
+              {
+                "t": 1.25,
+                "x": 0.4369,
+                "y": 0.7569
+              },
+              {
+                "t": 1.5,
+                "x": 0.4369,
+                "y": 0.7569
+              },
+              {
+                "t": 1.62,
+                "x": 0.4369,
+                "y": 0.7569
+              },
+              {
+                "t": 1.87,
+                "x": 0.4369,
+                "y": 0.7569
+              },
+              {
+                "t": 2,
+                "x": 0.4369,
+                "y": 0.7569
+              }
+            ],
+            "read": "Representative target path target-track-34 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-61",
+            "sourceSampleCount": 6,
+            "durationS": 0.75,
+            "laneSpreadX": 10.19,
+            "rowSpreadY": 9.64,
+            "pathScaleX": 3.074,
+            "pathScaleY": 4.679,
+            "sourceCenterX": 0.6693,
+            "sourceCenterY": 0.6939,
+            "exitVy": 170.5,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.7019,
+                "y": 0.6126
+              },
+              {
+                "t": 0.12,
+                "x": 0.7019,
+                "y": 0.6126
+              },
+              {
+                "t": 0.25,
+                "x": 0.7062,
+                "y": 0.6852
+              },
+              {
+                "t": 0.37,
+                "x": 0.6543,
+                "y": 0.7342
+              },
+              {
+                "t": 0.62,
+                "x": 0.6331,
+                "y": 0.7601
+              },
+              {
+                "t": 0.75,
+                "x": 0.6186,
+                "y": 0.7587
+              }
+            ],
+            "read": "Representative target path target-track-61 with 6 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-83",
+            "sourceSampleCount": 23,
+            "durationS": 2.75,
+            "laneSpreadX": 13.15,
+            "rowSpreadY": 5.52,
+            "pathScaleX": 5.6,
+            "pathScaleY": 4.1,
+            "sourceCenterX": 0.2467,
+            "sourceCenterY": 0.5311,
+            "exitVy": 216,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.2468,
+                "y": 0.5311
+              },
+              {
+                "t": 0.25,
+                "x": 0.2471,
+                "y": 0.5311
+              },
+              {
+                "t": 0.62,
+                "x": 0.2468,
+                "y": 0.5311
+              },
+              {
+                "t": 0.87,
+                "x": 0.2466,
+                "y": 0.5312
+              },
+              {
+                "t": 1.25,
+                "x": 0.2466,
+                "y": 0.5311
+              },
+              {
+                "t": 1.5,
+                "x": 0.2466,
+                "y": 0.5312
+              },
+              {
+                "t": 1.87,
+                "x": 0.2468,
+                "y": 0.5312
+              },
+              {
+                "t": 2.12,
+                "x": 0.2464,
+                "y": 0.5312
+              },
+              {
+                "t": 2.5,
+                "x": 0.2466,
+                "y": 0.5311
+              },
+              {
+                "t": 2.75,
+                "x": 0.2466,
+                "y": 0.5311
+              }
+            ],
+            "read": "Representative target path target-track-83 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          }
+        ]
+      },
+      "groupContracts": [
+        {
+          "groupIndex": 1,
+          "controlIntent": "pink-serpentine-lower-sweep",
+          "runtimePathFamilyHint": "pink-serpentine",
+          "confidence": 0.678,
+          "trackCount": 8,
+          "runtimeControl": {
+            "spawnOffsetS": 0,
+            "durationS": 3.25,
+            "speedScale": 2.52,
+            "softSpeedScale": 2.12,
+            "arcAmp": 1.54,
+            "dropAmp": 1.33,
+            "lowerFieldBias": 158,
+            "yOffset": 59
+          },
+          "comparisonTargets": {
+            "xRange": 0.3711,
+            "yRange": 0.355,
+            "pathLength": 0.1338,
+            "turnCount": 4.63,
+            "reversalCount": 2.88,
+            "lowerFieldShare": 0.8281,
+            "entrySide": "center",
+            "exitSide": "center"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-1",
+            "sourceSampleCount": 25,
+            "durationS": 3.25,
+            "pointCount": 10
+          }
+        },
+        {
+          "groupIndex": 2,
+          "controlIntent": "pink-serpentine-lower-sweep",
+          "runtimePathFamilyHint": "pink-serpentine",
+          "confidence": 0.597,
+          "trackCount": 5,
+          "runtimeControl": {
+            "spawnOffsetS": 0.5,
+            "durationS": 2.75,
+            "speedScale": 2.98,
+            "softSpeedScale": 2.51,
+            "arcAmp": 1.3,
+            "dropAmp": 1.21,
+            "lowerFieldBias": 188,
+            "yOffset": 80
+          },
+          "comparisonTargets": {
+            "xRange": 0.2038,
+            "yRange": 0.2185,
+            "pathLength": 0.2516,
+            "turnCount": 5,
+            "reversalCount": 3,
+            "lowerFieldShare": 0.9655,
+            "entrySide": "center",
+            "exitSide": "center"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-9",
+            "sourceSampleCount": 21,
+            "durationS": 2.75,
+            "pointCount": 10
+          }
+        },
+        {
+          "groupIndex": 3,
+          "controlIntent": "pink-serpentine-compact",
+          "runtimePathFamilyHint": "pink-serpentine",
+          "confidence": 0.717,
+          "trackCount": 10,
+          "runtimeControl": {
+            "spawnOffsetS": 2.88,
+            "durationS": 3.75,
+            "speedScale": 2.19,
+            "softSpeedScale": 1.84,
+            "arcAmp": 1.31,
+            "dropAmp": 1.59,
+            "lowerFieldBias": 41,
+            "yOffset": 3
+          },
+          "comparisonTargets": {
+            "xRange": 0.2777,
+            "yRange": 0.6726,
+            "pathLength": 0.1458,
+            "turnCount": 2,
+            "reversalCount": 0.9,
+            "lowerFieldShare": 0.4667,
+            "entrySide": "center",
+            "exitSide": "center"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-34",
+            "sourceSampleCount": 14,
+            "durationS": 2,
+            "pointCount": 10
+          }
+        },
+        {
+          "groupIndex": 4,
+          "controlIntent": "pink-serpentine-compact",
+          "runtimePathFamilyHint": "pink-serpentine",
+          "confidence": 0.712,
+          "trackCount": 13,
+          "runtimeControl": {
+            "spawnOffsetS": 6.38,
+            "durationS": 3.5,
+            "speedScale": 2.34,
+            "softSpeedScale": 1.97,
+            "arcAmp": 1.31,
+            "dropAmp": 1.59,
+            "lowerFieldBias": 14,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.2693,
+            "yRange": 0.6902,
+            "pathLength": 0.1258,
+            "turnCount": 1.54,
+            "reversalCount": 1.15,
+            "lowerFieldShare": 0.3846,
+            "entrySide": "center",
+            "exitSide": "center"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-61",
+            "sourceSampleCount": 6,
+            "durationS": 0.75,
+            "pointCount": 6
+          }
+        },
+        {
+          "groupIndex": 5,
+          "controlIntent": "pink-serpentine-lower-sweep",
+          "runtimePathFamilyHint": "pink-serpentine",
+          "confidence": 0.752,
+          "trackCount": 9,
+          "runtimeControl": {
+            "spawnOffsetS": 13.13,
+            "durationS": 2.75,
+            "speedScale": 2.98,
+            "softSpeedScale": 2.51,
+            "arcAmp": 1.83,
+            "dropAmp": 0.98,
+            "lowerFieldBias": 188,
+            "yOffset": 86
+          },
+          "comparisonTargets": {
+            "xRange": 0.565,
+            "yRange": 0.0041,
+            "pathLength": 0.0143,
+            "turnCount": 6.89,
+            "reversalCount": 3.22,
+            "lowerFieldShare": 1,
+            "entrySide": "left",
+            "exitSide": "right"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-83",
+            "sourceSampleCount": 23,
+            "durationS": 2.75,
+            "pointCount": 10
+          }
+        }
+      ],
+      "humanVisibleGuardrails": [
+        "Every group must visibly arrive through a path; do not promote candidates that appear in-place inside the playfield.",
+        "Groups must preserve readable spacing; do not promote candidates that bunch multiple enemies into ambiguous blobs.",
+        "The stage must remain a safe no-shot/no-ship-loss bonus exhibition.",
+        "A professional persona should retain a plausible perfect-clear route.",
+        "The best-matching reference identity must belong to the intended challenge, not only a nearby generic challenge vector."
+      ],
+      "nextImplementationUse": "Use this row as the baseline candidate seed for sweeps; promote runtime constants only after full challenge-stage conformance and human-visible guardrails pass."
+    },
+    {
+      "stage": 19,
+      "challengeNumber": 5,
+      "label": "Challenging Stage 19-20",
+      "role": "pink/green cascade variation",
+      "playerMeaning": "Prove later challenge stages have distinct progression and can be learned as separate bonus patterns.",
+      "targetFeel": "alternating pink/green cascade groups, lower-field pass timing, and stronger family alternation.",
+      "sourceControlReadiness10": 8.5,
+      "targetSummary": {
+        "averageConfidence": 0.681,
+        "averageTargetXRange": 0.5082,
+        "averageTargetYRange": 0.4859,
+        "averageLowerFieldShare": 0.6287
+      },
+      "runtimeSeed": {
+        "groupSpawnOffsets": [
+          0,
+          3.13,
+          7.38,
+          10.63,
+          12.88
+        ],
+        "groupSoftSpeedScales": [
+          2.12,
+          1.58,
+          1.97,
+          2.65,
+          2.3
+        ],
+        "groupSpeedScales": [
+          2.52,
+          1.88,
+          2.34,
+          3.4,
+          2.73
+        ],
+        "groupArcAmps": [
+          1.93,
+          1.83,
+          1.41,
+          1.72,
+          1.62
+        ],
+        "groupDropAmps": [
+          1.31,
+          1.34,
+          1.62,
+          1.59,
+          1.26
+        ],
+        "groupLowerFieldBiases": [
+          188,
+          188,
+          33,
+          37,
+          1
+        ],
+        "groupYOffsets": [
+          76,
+          81,
+          0,
+          1,
+          0
+        ],
+        "groupPathFamilies": [
+          "pink-green-low-sweep",
+          "pink-green-low-sweep",
+          "pink-green-cascade",
+          "pink-green-cascade",
+          "pink-green-cascade"
+        ],
+        "groupReferencePaths": [
+          {
+            "sourceTrackId": "target-track-12",
+            "sourceSampleCount": 19,
+            "durationS": 2.75,
+            "laneSpreadX": 13.5,
+            "rowSpreadY": 7.39,
+            "pathScaleX": 5.6,
+            "pathScaleY": 2.012,
+            "sourceCenterX": 0.1483,
+            "sourceCenterY": 0.647,
+            "exitVy": 211.5,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.1495,
+                "y": 0.7563
+              },
+              {
+                "t": 0.63,
+                "x": 0.1549,
+                "y": 0.7525
+              },
+              {
+                "t": 1,
+                "x": 0.1477,
+                "y": 0.651
+              },
+              {
+                "t": 1.25,
+                "x": 0.1733,
+                "y": 0.6746
+              },
+              {
+                "t": 1.5,
+                "x": 0.1455,
+                "y": 0.631
+              },
+              {
+                "t": 1.75,
+                "x": 0.1425,
+                "y": 0.6024
+              },
+              {
+                "t": 2,
+                "x": 0.1427,
+                "y": 0.6001
+              },
+              {
+                "t": 2.25,
+                "x": 0.1421,
+                "y": 0.5999
+              },
+              {
+                "t": 2.5,
+                "x": 0.1425,
+                "y": 0.5999
+              },
+              {
+                "t": 2.75,
+                "x": 0.1425,
+                "y": 0.602
+              }
+            ],
+            "read": "Representative target path target-track-12 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-43",
+            "sourceSampleCount": 16,
+            "durationS": 1.87,
+            "laneSpreadX": 13.5,
+            "rowSpreadY": 7.55,
+            "pathScaleX": 5.6,
+            "pathScaleY": 5.6,
+            "sourceCenterX": 0.8133,
+            "sourceCenterY": 0.5384,
+            "exitVy": 213.6,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.7322,
+                "y": 0.5127
+              },
+              {
+                "t": 0.25,
+                "x": 0.7977,
+                "y": 0.5419
+              },
+              {
+                "t": 0.37,
+                "x": 0.7991,
+                "y": 0.5428
+              },
+              {
+                "t": 0.62,
+                "x": 0.8292,
+                "y": 0.541
+              },
+              {
+                "t": 0.87,
+                "x": 0.8291,
+                "y": 0.5409
+              },
+              {
+                "t": 1,
+                "x": 0.8291,
+                "y": 0.5409
+              },
+              {
+                "t": 1.25,
+                "x": 0.8291,
+                "y": 0.5409
+              },
+              {
+                "t": 1.5,
+                "x": 0.829,
+                "y": 0.541
+              },
+              {
+                "t": 1.62,
+                "x": 0.8291,
+                "y": 0.5409
+              },
+              {
+                "t": 1.87,
+                "x": 0.8291,
+                "y": 0.5409
+              }
+            ],
+            "read": "Representative target path target-track-43 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-56",
+            "sourceSampleCount": 24,
+            "durationS": 2.88,
+            "laneSpreadX": 10.2,
+            "rowSpreadY": 9.71,
+            "pathScaleX": 3.076,
+            "pathScaleY": 4.612,
+            "sourceCenterX": 0.1466,
+            "sourceCenterY": 0.6064,
+            "exitVy": 174.7,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.0888,
+                "y": 0.4981
+              },
+              {
+                "t": 0.38,
+                "x": 0.0975,
+                "y": 0.532
+              },
+              {
+                "t": 0.63,
+                "x": 0.1017,
+                "y": 0.5512
+              },
+              {
+                "t": 1,
+                "x": 0.1274,
+                "y": 0.5894
+              },
+              {
+                "t": 1.25,
+                "x": 0.1698,
+                "y": 0.6503
+              },
+              {
+                "t": 1.63,
+                "x": 0.1765,
+                "y": 0.6485
+              },
+              {
+                "t": 1.88,
+                "x": 0.1757,
+                "y": 0.6486
+              },
+              {
+                "t": 2.25,
+                "x": 0.1762,
+                "y": 0.6485
+              },
+              {
+                "t": 2.5,
+                "x": 0.1764,
+                "y": 0.6486
+              },
+              {
+                "t": 2.88,
+                "x": 0.1764,
+                "y": 0.6486
+              }
+            ],
+            "read": "Representative target path target-track-56 with 10 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-80",
+            "sourceSampleCount": 9,
+            "durationS": 1.38,
+            "laneSpreadX": 12.7,
+            "rowSpreadY": 9.57,
+            "pathScaleX": 2.816,
+            "pathScaleY": 3.39,
+            "sourceCenterX": 0.8899,
+            "sourceCenterY": 0.5964,
+            "exitVy": 175.6,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.9027,
+                "y": 0.6092
+              },
+              {
+                "t": 0.13,
+                "x": 0.9018,
+                "y": 0.6082
+              },
+              {
+                "t": 0.38,
+                "x": 0.9562,
+                "y": 0.5231
+              },
+              {
+                "t": 0.5,
+                "x": 0.9564,
+                "y": 0.517
+              },
+              {
+                "t": 0.63,
+                "x": 0.9012,
+                "y": 0.5433
+              },
+              {
+                "t": 0.75,
+                "x": 0.8776,
+                "y": 0.5858
+              },
+              {
+                "t": 0.88,
+                "x": 0.8766,
+                "y": 0.5872
+              },
+              {
+                "t": 1.13,
+                "x": 0.865,
+                "y": 0.6763
+              },
+              {
+                "t": 1.38,
+                "x": 0.7717,
+                "y": 0.7173
+              }
+            ],
+            "read": "Representative target path target-track-80 with 9 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          },
+          {
+            "sourceTrackId": "target-track-94",
+            "sourceSampleCount": 5,
+            "durationS": 0.75,
+            "laneSpreadX": 12.28,
+            "rowSpreadY": 7.85,
+            "pathScaleX": 5.6,
+            "pathScaleY": 2.189,
+            "sourceCenterX": 0.2276,
+            "sourceCenterY": 0.5698,
+            "exitVy": 167.3,
+            "points": [
+              {
+                "t": 0,
+                "x": 0.2428,
+                "y": 0.6552
+              },
+              {
+                "t": 0.12,
+                "x": 0.2216,
+                "y": 0.6105
+              },
+              {
+                "t": 0.25,
+                "x": 0.2175,
+                "y": 0.5412
+              },
+              {
+                "t": 0.37,
+                "x": 0.2449,
+                "y": 0.476
+              },
+              {
+                "t": 0.62,
+                "x": 0.211,
+                "y": 0.5659
+              }
+            ],
+            "read": "Representative target path target-track-94 with 5 sampled point(s), normalized to track-visible time and scaled toward group x/y envelope."
+          }
+        ]
+      },
+      "groupContracts": [
+        {
+          "groupIndex": 1,
+          "controlIntent": "pink-green-low-cascade",
+          "runtimePathFamilyHint": "pink-green-low-sweep",
+          "confidence": 0.742,
+          "trackCount": 12,
+          "runtimeControl": {
+            "spawnOffsetS": 0,
+            "durationS": 3.25,
+            "speedScale": 2.52,
+            "softSpeedScale": 2.12,
+            "arcAmp": 1.93,
+            "dropAmp": 1.31,
+            "lowerFieldBias": 188,
+            "yOffset": 76
+          },
+          "comparisonTargets": {
+            "xRange": 0.6598,
+            "yRange": 0.3146,
+            "pathLength": 0.1804,
+            "turnCount": 4.58,
+            "reversalCount": 2.58,
+            "lowerFieldShare": 0.9389,
+            "entrySide": "left",
+            "exitSide": "left"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-12",
+            "sourceSampleCount": 19,
+            "durationS": 2.75,
+            "pointCount": 10
+          }
+        },
+        {
+          "groupIndex": 2,
+          "controlIntent": "pink-green-low-cascade",
+          "runtimePathFamilyHint": "pink-green-low-sweep",
+          "confidence": 0.601,
+          "trackCount": 6,
+          "runtimeControl": {
+            "spawnOffsetS": 3.13,
+            "durationS": 4.37,
+            "speedScale": 1.88,
+            "softSpeedScale": 1.58,
+            "arcAmp": 1.83,
+            "dropAmp": 1.34,
+            "lowerFieldBias": 188,
+            "yOffset": 81
+          },
+          "comparisonTargets": {
+            "xRange": 0.6127,
+            "yRange": 0.3418,
+            "pathLength": 0.1272,
+            "turnCount": 3.67,
+            "reversalCount": 1.83,
+            "lowerFieldShare": 0.9673,
+            "entrySide": "right",
+            "exitSide": "right"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-43",
+            "sourceSampleCount": 16,
+            "durationS": 1.87,
+            "pointCount": 10
+          }
+        },
+        {
+          "groupIndex": 3,
+          "controlIntent": "pink-green-tall-cascade",
+          "runtimePathFamilyHint": "pink-green-cascade",
+          "confidence": 0.737,
+          "trackCount": 10,
+          "runtimeControl": {
+            "spawnOffsetS": 7.38,
+            "durationS": 3.5,
+            "speedScale": 2.34,
+            "softSpeedScale": 1.97,
+            "arcAmp": 1.41,
+            "dropAmp": 1.62,
+            "lowerFieldBias": 33,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.2698,
+            "yRange": 0.7019,
+            "pathLength": 0.135,
+            "turnCount": 5.3,
+            "reversalCount": 3.2,
+            "lowerFieldShare": 0.4417,
+            "entrySide": "left",
+            "exitSide": "left"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-56",
+            "sourceSampleCount": 24,
+            "durationS": 2.88,
+            "pointCount": 10
+          }
+        },
+        {
+          "groupIndex": 4,
+          "controlIntent": "pink-green-tall-cascade",
+          "runtimePathFamilyHint": "pink-green-cascade",
+          "confidence": 0.735,
+          "trackCount": 12,
+          "runtimeControl": {
+            "spawnOffsetS": 10.63,
+            "durationS": 2.37,
+            "speedScale": 3.4,
+            "softSpeedScale": 2.65,
+            "arcAmp": 1.72,
+            "dropAmp": 1.59,
+            "lowerFieldBias": 37,
+            "yOffset": 1
+          },
+          "comparisonTargets": {
+            "xRange": 0.5202,
+            "yRange": 0.679,
+            "pathLength": 0.1993,
+            "turnCount": 3.33,
+            "reversalCount": 2.33,
+            "lowerFieldShare": 0.4537,
+            "entrySide": "right",
+            "exitSide": "center"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-80",
+            "sourceSampleCount": 9,
+            "durationS": 1.38,
+            "pointCount": 9
+          }
+        },
+        {
+          "groupIndex": 5,
+          "controlIntent": "pink-green-tall-cascade",
+          "runtimePathFamilyHint": "pink-green-cascade",
+          "confidence": 0.59,
+          "trackCount": 6,
+          "runtimeControl": {
+            "spawnOffsetS": 12.88,
+            "durationS": 3,
+            "speedScale": 2.73,
+            "softSpeedScale": 2.3,
+            "arcAmp": 1.62,
+            "dropAmp": 1.26,
+            "lowerFieldBias": 1,
+            "yOffset": 0
+          },
+          "comparisonTargets": {
+            "xRange": 0.4784,
+            "yRange": 0.3922,
+            "pathLength": 0.1615,
+            "turnCount": 1.33,
+            "reversalCount": 1.33,
+            "lowerFieldShare": 0.3417,
+            "entrySide": "left",
+            "exitSide": "center"
+          },
+          "referencePath": {
+            "sourceTrackId": "target-track-94",
+            "sourceSampleCount": 5,
+            "durationS": 0.75,
+            "pointCount": 5
+          }
+        }
+      ],
+      "humanVisibleGuardrails": [
+        "Every group must visibly arrive through a path; do not promote candidates that appear in-place inside the playfield.",
+        "Groups must preserve readable spacing; do not promote candidates that bunch multiple enemies into ambiguous blobs.",
+        "The stage must remain a safe no-shot/no-ship-loss bonus exhibition.",
+        "A professional persona should retain a plausible perfect-clear route.",
+        "The best-matching reference identity must belong to the intended challenge, not only a nearby generic challenge vector."
+      ],
+      "nextImplementationUse": "Use this row as the baseline candidate seed for sweeps; promote runtime constants only after full challenge-stage conformance and human-visible guardrails pass."
+    }
+  ],
+  "nextBestStep": "Run focused candidate sweeps for stages 3, 7, 11, 15, and 19 using this grammar; promote only candidates that pass full-stage conformance and human-visible guardrails."
+}

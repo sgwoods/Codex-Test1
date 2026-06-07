@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-06-05T14:28:00-04:00",
+  "artifact_id": "GGD-ART-035",
+  "source_family": "galaxians-sounds-indexed",
+  "source_analysis_anchor": "reference-artifacts/analyses/galaxian-reference/galaxians-sounds-indexed/README.md",
+  "summary": "The KHInsider FLAC pack now owns the strongest isolated core-cue families. This ledger tracks only what the older static-card reel still contributes after the redundant early cue blocks are discounted.",
+  "regions": [
+    {
+      "cueRegionId": "GGD-CUE-001",
+      "label": "Short duplicated micro-cue families",
+      "start_seconds": 1.925,
+      "end_seconds": 21.744,
+      "status": "mostly-redundant-after-flac-pack",
+      "note": "These short active regions are useful mainly as corroboration because the named FLAC pack covers the clearer isolated versions of the same families."
+    },
+    {
+      "cueRegionId": "GGD-CUE-002",
+      "label": "Residual transition burst",
+      "start_seconds": 22.742,
+      "end_seconds": 25.952,
+      "status": "retain-for-residual-comparison",
+      "note": "This brief mixed region still helps with transition-shape comparison after the early isolated cue blocks are treated as redundant."
+    },
+    {
+      "cueRegionId": "GGD-CUE-003",
+      "label": "Long composite gameplay reel",
+      "start_seconds": 26.119,
+      "end_seconds": 79.127,
+      "status": "retain-for-extended-context",
+      "note": "This is the main remaining value in the indexed reel: a long mixed-context region that can still inform extended pacing and residual cue-family review."
+    }
+  ]
+}

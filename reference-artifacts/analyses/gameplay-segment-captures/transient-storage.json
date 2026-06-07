@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-06-07T18:05:00-04:00",
+  "status": "public-metadata-icloud-content",
+  "artifact_class": "transient-in-use",
+  "public_metadata_root": "reference-artifacts/analyses/gameplay-segment-captures",
+  "storage_root": "~/Library/Mobile Documents/com~apple~CloudDocs/Projects/Codex-Test1 Artifact Library/01-transient-in-use/guardians/gameplay-segment-captures",
+  "moved_file_count": 105,
+  "approx_total_size_human": "229M",
+  "scope_patterns": [
+    "guardians-*20??-??-??T*",
+    "stage-1-*20??-??-??T*"
+  ],
+  "retention_reason": "Preserve large timestamped Guardians review captures outside the public repo while keeping latest aliases and durable summaries in-place.",
+  "notes": [
+    "Latest canonical Guardians slice-review aliases remain in the repo and in the private companion store.",
+    "This iCloud bucket covers timestamped in-use review captures that are valuable to reuse but not worth keeping in GitHub."
+  ]
+}

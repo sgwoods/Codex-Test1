@@ -1,0 +1,1291 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "challenge-motion-primitives",
+  "generatedAt": "2026-06-05T11:32:19.758Z",
+  "commit": "a17484fe8",
+  "branch": "codex/aurora-challenge-movement-grammar",
+  "gameKey": "aurora-galactica",
+  "sourceArtifacts": {
+    "challengeMovementGrammar": "reference-artifacts/analyses/challenge-movement-grammar/latest.json",
+    "challengeStageCandidateSweepIndex": "reference-artifacts/analyses/challenge-stage-candidate-sweep-index/latest.json",
+    "challengeSetpieceContracts": "reference-artifacts/analyses/challenge-setpiece-contracts/latest.json"
+  },
+  "summary": {
+    "primitiveCount": 10,
+    "stageRoadmapCount": 5,
+    "highPriorityPrimitiveCount": 4,
+    "firstBuildTarget": "lead-in-continuity",
+    "firstBuildTargetRead": "Add a reusable lead-in phase before challenge group path playback; keep it data-driven so main-level entry groups can reuse it.",
+    "firstFiveStages": [
+      3,
+      7,
+      11,
+      15,
+      19
+    ],
+    "releaseReadiness": "planning-only",
+    "read": "The next runtime improvement should target visible lead-in, spacing/readability, reference spline playback, and phase scheduling before another broad sweep. These primitives attack the failures that blocked every current candidate keeper."
+  },
+  "measurementLimits": [
+    "This is a design-and-measurement backlog, not a runtime promotion.",
+    "Priority is derived from existing sweep blockers and target contracts; it should be recalculated after each candidate implementation.",
+    "The primitive vocabulary is intentionally game-generic so it can support Galaxy Guardians and future games as ingestion improves."
+  ],
+  "primitives": [
+    {
+      "id": "lead-in-continuity",
+      "name": "Visible Lead-In Continuity",
+      "category": "arrival",
+      "playerMeaning": "Aliens should enter as readable groups from offscreen or the playfield edge, not appear suddenly in the middle of the board.",
+      "sourceStageHint": "all-first-five",
+      "successCriteria": [
+        "Each group has a visible pre-contact path segment before entering the scoreable band.",
+        "No group starts with more than 20% of members already inside the central playfield without prior lead-in frames.",
+        "Human-visible arrival-continuity guardrail is >= 0.8 for any promoted candidate."
+      ],
+      "candidateGeneratorKnobs": [
+        "leadInS",
+        "spawnEdge",
+        "preEntryControlPoint",
+        "groupSpawnOffsets",
+        "phaseStaggerS"
+      ],
+      "implementationPlan": "Add a reusable lead-in phase before challenge group path playback; keep it data-driven so main-level entry groups can reuse it.",
+      "runtimeTouchpoints": [
+        "src/js/06-enemy-behavior.js",
+        "src/js/09-stage-flow.js",
+        "src/js/13-aurora-game-pack.js"
+      ],
+      "priority10": 10,
+      "sourceStages": [
+        3,
+        7,
+        11,
+        15,
+        19
+      ],
+      "reusableAcrossGames": true,
+      "evidenceSummary": {
+        "referencePathCount": 25,
+        "groupContractCount": 25,
+        "pathFamilies": [],
+        "blockedStages": [
+          3,
+          7,
+          11,
+          15,
+          19
+        ],
+        "bestHumanVisibleLift10": 0.1,
+        "worstBunchingRisk": 0.963,
+        "read": "Visible Lead-In Continuity is backed by 25 group contract(s) and 25 reference path(s); blocked stages: 3, 7, 11, 15, 19."
+      },
+      "failureSignals": [
+        {
+          "stage": 3,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage3-target-reference-paths-shape-lower-p0",
+          "expectedLift10": -0.4,
+          "targetVideoObjectFitLift10": 1.5,
+          "humanPerfectPotentialLift10": 0.3,
+          "humanVisibleLift10": -0.2,
+          "humanVisiblePass": false,
+          "spacingScore": 0.051,
+          "bunchingRisk": 0.963,
+          "arrivalContinuity": 0.712,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.2/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 7,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage7-target-starts-current-speed-p0",
+          "expectedLift10": 0.1,
+          "targetVideoObjectFitLift10": 0,
+          "humanPerfectPotentialLift10": 0,
+          "humanVisibleLift10": 0.1,
+          "humanVisiblePass": false,
+          "spacingScore": 0.169,
+          "bunchingRisk": 0.824,
+          "arrivalContinuity": 0.784,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.1/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 11,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage11-target-controls-shape-blend-p0",
+          "expectedLift10": 0.2,
+          "targetVideoObjectFitLift10": 0,
+          "humanPerfectPotentialLift10": 0,
+          "humanVisibleLift10": 0.1,
+          "humanVisiblePass": false,
+          "spacingScore": 0.184,
+          "bunchingRisk": 0.817,
+          "arrivalContinuity": 0.856,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.1/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 15,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage15-a168-d108-x68-w106-s008-lb0-y3-p0",
+          "expectedLift10": 0.7,
+          "targetVideoObjectFitLift10": -0.2,
+          "humanPerfectPotentialLift10": 0.4,
+          "humanVisibleLift10": -0.4,
+          "humanVisiblePass": false,
+          "spacingScore": 0.649,
+          "bunchingRisk": 0.45,
+          "arrivalContinuity": 0.34,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.4/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 19,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage19-target-reference-paths-direct-p0",
+          "expectedLift10": -0.5,
+          "targetVideoObjectFitLift10": 0.8,
+          "humanPerfectPotentialLift10": 1.7,
+          "humanVisibleLift10": -0.3,
+          "humanVisiblePass": false,
+          "spacingScore": 0.077,
+          "bunchingRisk": 0.918,
+          "arrivalContinuity": 0.76,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.3/10 or fails visibility/arrival/spacing/bunching gates."
+        }
+      ],
+      "measurementPlan": [
+        "Run the browser-backed candidate sweep for the affected stage.",
+        "Require expected-reference, target-video fit, human-perfect potential, and human-visible guardrails to all hold.",
+        "Regenerate challenge-stage conformance, candidate sweep index, release conformance dashboard, and Application Guide sections.",
+        "Promote runtime constants only when the primitive improves the user-visible stage read, not just one isolated score."
+      ],
+      "releaseGate": "Must be addressed before claiming a major challenge-stage quality lift."
+    },
+    {
+      "id": "group-spacing-field",
+      "name": "Group Spacing Field",
+      "category": "readability",
+      "playerMeaning": "A challenge group should read as a flock, not a smeared pile of sprites or overlapping pairs.",
+      "sourceStageHint": "all-first-five",
+      "successCriteria": [
+        "Human-visible spacing score is >= 0.35 and bunching risk is <= 0.55 for promoted candidates.",
+        "Group envelopes preserve enough separation to identify alien families during the pass.",
+        "Formation member offsets are stable across the path and do not collapse at high speed."
+      ],
+      "candidateGeneratorKnobs": [
+        "laneSpacing",
+        "rowSpacing",
+        "formationSpreadScale",
+        "phaseSeparation",
+        "maxMemberOverlap"
+      ],
+      "implementationPlan": "Represent each group path as a centerline plus stable member offsets; clamp speed/path parameters that collapse the offsets.",
+      "runtimeTouchpoints": [
+        "src/js/06-enemy-behavior.js",
+        "src/js/09-stage-flow.js"
+      ],
+      "priority10": 10,
+      "sourceStages": [
+        3,
+        7,
+        11,
+        15,
+        19
+      ],
+      "reusableAcrossGames": true,
+      "evidenceSummary": {
+        "referencePathCount": 25,
+        "groupContractCount": 25,
+        "pathFamilies": [],
+        "blockedStages": [
+          3,
+          7,
+          11,
+          15,
+          19
+        ],
+        "bestHumanVisibleLift10": 0.1,
+        "worstBunchingRisk": 0.963,
+        "read": "Group Spacing Field is backed by 25 group contract(s) and 25 reference path(s); blocked stages: 3, 7, 11, 15, 19."
+      },
+      "failureSignals": [
+        {
+          "stage": 3,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage3-target-reference-paths-shape-lower-p0",
+          "expectedLift10": -0.4,
+          "targetVideoObjectFitLift10": 1.5,
+          "humanPerfectPotentialLift10": 0.3,
+          "humanVisibleLift10": -0.2,
+          "humanVisiblePass": false,
+          "spacingScore": 0.051,
+          "bunchingRisk": 0.963,
+          "arrivalContinuity": 0.712,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.2/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 7,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage7-target-starts-current-speed-p0",
+          "expectedLift10": 0.1,
+          "targetVideoObjectFitLift10": 0,
+          "humanPerfectPotentialLift10": 0,
+          "humanVisibleLift10": 0.1,
+          "humanVisiblePass": false,
+          "spacingScore": 0.169,
+          "bunchingRisk": 0.824,
+          "arrivalContinuity": 0.784,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.1/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 11,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage11-target-controls-shape-blend-p0",
+          "expectedLift10": 0.2,
+          "targetVideoObjectFitLift10": 0,
+          "humanPerfectPotentialLift10": 0,
+          "humanVisibleLift10": 0.1,
+          "humanVisiblePass": false,
+          "spacingScore": 0.184,
+          "bunchingRisk": 0.817,
+          "arrivalContinuity": 0.856,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.1/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 15,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage15-a168-d108-x68-w106-s008-lb0-y3-p0",
+          "expectedLift10": 0.7,
+          "targetVideoObjectFitLift10": -0.2,
+          "humanPerfectPotentialLift10": 0.4,
+          "humanVisibleLift10": -0.4,
+          "humanVisiblePass": false,
+          "spacingScore": 0.649,
+          "bunchingRisk": 0.45,
+          "arrivalContinuity": 0.34,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.4/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 19,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage19-target-reference-paths-direct-p0",
+          "expectedLift10": -0.5,
+          "targetVideoObjectFitLift10": 0.8,
+          "humanPerfectPotentialLift10": 1.7,
+          "humanVisibleLift10": -0.3,
+          "humanVisiblePass": false,
+          "spacingScore": 0.077,
+          "bunchingRisk": 0.918,
+          "arrivalContinuity": 0.76,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.3/10 or fails visibility/arrival/spacing/bunching gates."
+        }
+      ],
+      "measurementPlan": [
+        "Run the browser-backed candidate sweep for the affected stage.",
+        "Require expected-reference, target-video fit, human-perfect potential, and human-visible guardrails to all hold.",
+        "Regenerate challenge-stage conformance, candidate sweep index, release conformance dashboard, and Application Guide sections.",
+        "Promote runtime constants only when the primitive improves the user-visible stage read, not just one isolated score."
+      ],
+      "releaseGate": "Must be addressed before claiming a major challenge-stage quality lift."
+    },
+    {
+      "id": "reference-spline-fit",
+      "name": "Reference Spline Fit",
+      "category": "path-shape",
+      "playerMeaning": "The motion should look authored from the target examples rather than a generic sine-wave remix.",
+      "sourceStageHint": "all-first-five",
+      "successCriteria": [
+        "Target-video object fit improves without expected-label or human-visible regression.",
+        "Each group path can replay normalized reference points with bounded smoothing.",
+        "Best reference identity remains the intended challenge family."
+      ],
+      "candidateGeneratorKnobs": [
+        "referencePathId",
+        "splineTension",
+        "timeWarp",
+        "xScale",
+        "yScale",
+        "lowerFieldBias"
+      ],
+      "implementationPlan": "Introduce a normalized path-player primitive that samples ingested reference points and composes scale/time/offset per group.",
+      "runtimeTouchpoints": [
+        "src/js/06-enemy-behavior.js",
+        "src/js/13-aurora-game-pack.js"
+      ],
+      "priority10": 10,
+      "sourceStages": [
+        3,
+        7,
+        11,
+        15,
+        19
+      ],
+      "reusableAcrossGames": true,
+      "evidenceSummary": {
+        "referencePathCount": 25,
+        "groupContractCount": 25,
+        "pathFamilies": [
+          "first-challenge-peel",
+          "classic-column-drop",
+          "side-hook-return",
+          "cross-sweep",
+          "hook-arc",
+          "pink-serpentine",
+          "pink-green-low-sweep",
+          "pink-green-cascade"
+        ],
+        "blockedStages": [
+          3,
+          7,
+          11,
+          15,
+          19
+        ],
+        "bestHumanVisibleLift10": 0.1,
+        "worstBunchingRisk": 0.963,
+        "read": "Reference Spline Fit is backed by 25 group contract(s) and 25 reference path(s); blocked stages: 3, 7, 11, 15, 19."
+      },
+      "failureSignals": [
+        {
+          "stage": 3,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage3-target-reference-paths-shape-lower-p0",
+          "expectedLift10": -0.4,
+          "targetVideoObjectFitLift10": 1.5,
+          "humanPerfectPotentialLift10": 0.3,
+          "humanVisibleLift10": -0.2,
+          "humanVisiblePass": false,
+          "spacingScore": 0.051,
+          "bunchingRisk": 0.963,
+          "arrivalContinuity": 0.712,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.2/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 7,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage7-target-starts-current-speed-p0",
+          "expectedLift10": 0.1,
+          "targetVideoObjectFitLift10": 0,
+          "humanPerfectPotentialLift10": 0,
+          "humanVisibleLift10": 0.1,
+          "humanVisiblePass": false,
+          "spacingScore": 0.169,
+          "bunchingRisk": 0.824,
+          "arrivalContinuity": 0.784,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.1/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 11,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage11-target-controls-shape-blend-p0",
+          "expectedLift10": 0.2,
+          "targetVideoObjectFitLift10": 0,
+          "humanPerfectPotentialLift10": 0,
+          "humanVisibleLift10": 0.1,
+          "humanVisiblePass": false,
+          "spacingScore": 0.184,
+          "bunchingRisk": 0.817,
+          "arrivalContinuity": 0.856,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.1/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 15,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage15-a168-d108-x68-w106-s008-lb0-y3-p0",
+          "expectedLift10": 0.7,
+          "targetVideoObjectFitLift10": -0.2,
+          "humanPerfectPotentialLift10": 0.4,
+          "humanVisibleLift10": -0.4,
+          "humanVisiblePass": false,
+          "spacingScore": 0.649,
+          "bunchingRisk": 0.45,
+          "arrivalContinuity": 0.34,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.4/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 19,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage19-target-reference-paths-direct-p0",
+          "expectedLift10": -0.5,
+          "targetVideoObjectFitLift10": 0.8,
+          "humanPerfectPotentialLift10": 1.7,
+          "humanVisibleLift10": -0.3,
+          "humanVisiblePass": false,
+          "spacingScore": 0.077,
+          "bunchingRisk": 0.918,
+          "arrivalContinuity": 0.76,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.3/10 or fails visibility/arrival/spacing/bunching gates."
+        }
+      ],
+      "measurementPlan": [
+        "Run the browser-backed candidate sweep for the affected stage.",
+        "Require expected-reference, target-video fit, human-perfect potential, and human-visible guardrails to all hold.",
+        "Regenerate challenge-stage conformance, candidate sweep index, release conformance dashboard, and Application Guide sections.",
+        "Promote runtime constants only when the primitive improves the user-visible stage read, not just one isolated score."
+      ],
+      "releaseGate": "Must be addressed before claiming a major challenge-stage quality lift."
+    },
+    {
+      "id": "phase-order-scheduler",
+      "name": "Phase-Order Scheduler",
+      "category": "timing",
+      "playerMeaning": "Challenge waves should have a coherent order and rhythm so the player can learn a perfect route.",
+      "sourceStageHint": "all-first-five",
+      "successCriteria": [
+        "Stage contact sheets show ordered group arrivals rather than simultaneous clutter.",
+        "Professional persona perfect potential does not regress after timing changes.",
+        "Group overlap windows are explicit and capped by stage contract."
+      ],
+      "candidateGeneratorKnobs": [
+        "groupSpawnOffsets",
+        "groupDurationS",
+        "phaseOverlapLimit",
+        "scoreableWindowS"
+      ],
+      "implementationPlan": "Make challenge timing a first-class schedule independent of path shape so future games can vary rhythm without rewriting movement logic.",
+      "runtimeTouchpoints": [
+        "src/js/09-stage-flow.js",
+        "src/js/13-aurora-game-pack.js"
+      ],
+      "priority10": 10,
+      "sourceStages": [
+        3,
+        7,
+        11,
+        15,
+        19
+      ],
+      "reusableAcrossGames": true,
+      "evidenceSummary": {
+        "referencePathCount": 25,
+        "groupContractCount": 25,
+        "pathFamilies": [],
+        "blockedStages": [
+          3,
+          7,
+          11,
+          15,
+          19
+        ],
+        "bestHumanVisibleLift10": 0.1,
+        "worstBunchingRisk": 0.963,
+        "read": "Phase-Order Scheduler is backed by 25 group contract(s) and 25 reference path(s); blocked stages: 3, 7, 11, 15, 19."
+      },
+      "failureSignals": [
+        {
+          "stage": 3,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage3-target-reference-paths-shape-lower-p0",
+          "expectedLift10": -0.4,
+          "targetVideoObjectFitLift10": 1.5,
+          "humanPerfectPotentialLift10": 0.3,
+          "humanVisibleLift10": -0.2,
+          "humanVisiblePass": false,
+          "spacingScore": 0.051,
+          "bunchingRisk": 0.963,
+          "arrivalContinuity": 0.712,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.2/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 7,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage7-target-starts-current-speed-p0",
+          "expectedLift10": 0.1,
+          "targetVideoObjectFitLift10": 0,
+          "humanPerfectPotentialLift10": 0,
+          "humanVisibleLift10": 0.1,
+          "humanVisiblePass": false,
+          "spacingScore": 0.169,
+          "bunchingRisk": 0.824,
+          "arrivalContinuity": 0.784,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.1/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 11,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage11-target-controls-shape-blend-p0",
+          "expectedLift10": 0.2,
+          "targetVideoObjectFitLift10": 0,
+          "humanPerfectPotentialLift10": 0,
+          "humanVisibleLift10": 0.1,
+          "humanVisiblePass": false,
+          "spacingScore": 0.184,
+          "bunchingRisk": 0.817,
+          "arrivalContinuity": 0.856,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.1/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 15,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage15-a168-d108-x68-w106-s008-lb0-y3-p0",
+          "expectedLift10": 0.7,
+          "targetVideoObjectFitLift10": -0.2,
+          "humanPerfectPotentialLift10": 0.4,
+          "humanVisibleLift10": -0.4,
+          "humanVisiblePass": false,
+          "spacingScore": 0.649,
+          "bunchingRisk": 0.45,
+          "arrivalContinuity": 0.34,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.4/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 19,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage19-target-reference-paths-direct-p0",
+          "expectedLift10": -0.5,
+          "targetVideoObjectFitLift10": 0.8,
+          "humanPerfectPotentialLift10": 1.7,
+          "humanVisibleLift10": -0.3,
+          "humanVisiblePass": false,
+          "spacingScore": 0.077,
+          "bunchingRisk": 0.918,
+          "arrivalContinuity": 0.76,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.3/10 or fails visibility/arrival/spacing/bunching gates."
+        }
+      ],
+      "measurementPlan": [
+        "Run the browser-backed candidate sweep for the affected stage.",
+        "Require expected-reference, target-video fit, human-perfect potential, and human-visible guardrails to all hold.",
+        "Regenerate challenge-stage conformance, candidate sweep index, release conformance dashboard, and Application Guide sections.",
+        "Promote runtime constants only when the primitive improves the user-visible stage read, not just one isolated score."
+      ],
+      "releaseGate": "Must be addressed before claiming a major challenge-stage quality lift."
+    },
+    {
+      "id": "novelty-family-cascade",
+      "name": "Novelty Family Cascade",
+      "category": "alien-novelty",
+      "playerMeaning": "Challenge stages should teach the player that new alien families and bonus targets matter.",
+      "sourceStageHint": "stage-19",
+      "successCriteria": [
+        "Stage 19 presents alternating specialty families clearly enough to identify.",
+        "Challenge-specialty sprite authority improves from the current weak baseline.",
+        "Family changes are scheduled and not merely random recolors."
+      ],
+      "candidateGeneratorKnobs": [
+        "visualFamilySequence",
+        "familyPhaseOffset",
+        "spritePulseMode",
+        "groupRole"
+      ],
+      "implementationPlan": "Tie movement groups to explicit visual-family contracts so Aurora themes can vary aliens while keeping target-era grammar.",
+      "runtimeTouchpoints": [
+        "src/js/13-aurora-game-pack.js",
+        "src/js/04-rendering.js"
+      ],
+      "priority10": 7.8,
+      "sourceStages": [
+        19
+      ],
+      "reusableAcrossGames": true,
+      "evidenceSummary": {
+        "referencePathCount": 5,
+        "groupContractCount": 5,
+        "pathFamilies": [
+          "pink-green-low-sweep",
+          "pink-green-cascade"
+        ],
+        "blockedStages": [
+          19
+        ],
+        "bestHumanVisibleLift10": -0.3,
+        "worstBunchingRisk": 0.918,
+        "read": "Novelty Family Cascade is backed by 5 group contract(s) and 5 reference path(s); blocked stages: 19."
+      },
+      "failureSignals": [
+        {
+          "stage": 19,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage19-target-reference-paths-direct-p0",
+          "expectedLift10": -0.5,
+          "targetVideoObjectFitLift10": 0.8,
+          "humanPerfectPotentialLift10": 1.7,
+          "humanVisibleLift10": -0.3,
+          "humanVisiblePass": false,
+          "spacingScore": 0.077,
+          "bunchingRisk": 0.918,
+          "arrivalContinuity": 0.76,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.3/10 or fails visibility/arrival/spacing/bunching gates."
+        }
+      ],
+      "measurementPlan": [
+        "Run the browser-backed candidate sweep for the affected stage.",
+        "Require expected-reference, target-video fit, human-perfect potential, and human-visible guardrails to all hold.",
+        "Regenerate challenge-stage conformance, candidate sweep index, release conformance dashboard, and Application Guide sections.",
+        "Promote runtime constants only when the primitive improves the user-visible stage read, not just one isolated score."
+      ],
+      "releaseGate": "Can follow after the arrival/readability primitives produce stable keepers."
+    },
+    {
+      "id": "serpentine-cascade",
+      "name": "Serpentine Cascade",
+      "category": "late-stage-identity",
+      "playerMeaning": "A later challenge should introduce a new spectacle, not feel like a faster early challenge.",
+      "sourceStageHint": "stage-15",
+      "successCriteria": [
+        "Stage 15 gains a distinct serpentine multi-group path family.",
+        "Target-video object fit improves without wrong-reference identity drift.",
+        "Alien family novelty and visual readability both improve."
+      ],
+      "candidateGeneratorKnobs": [
+        "waveAmplitude",
+        "waveFrequency",
+        "cascadeOffsetS",
+        "familyAlternation",
+        "pathLengthScale"
+      ],
+      "implementationPlan": "Add a late-stage cascade primitive with group-level phase offsets and visual-family contracts.",
+      "runtimeTouchpoints": [
+        "src/js/06-enemy-behavior.js",
+        "src/js/13-aurora-game-pack.js"
+      ],
+      "priority10": 7.5,
+      "sourceStages": [
+        15
+      ],
+      "reusableAcrossGames": true,
+      "evidenceSummary": {
+        "referencePathCount": 5,
+        "groupContractCount": 5,
+        "pathFamilies": [
+          "pink-serpentine"
+        ],
+        "blockedStages": [
+          15
+        ],
+        "bestHumanVisibleLift10": -0.4,
+        "worstBunchingRisk": 0.45,
+        "read": "Serpentine Cascade is backed by 5 group contract(s) and 5 reference path(s); blocked stages: 15."
+      },
+      "failureSignals": [
+        {
+          "stage": 15,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage15-a168-d108-x68-w106-s008-lb0-y3-p0",
+          "expectedLift10": 0.7,
+          "targetVideoObjectFitLift10": -0.2,
+          "humanPerfectPotentialLift10": 0.4,
+          "humanVisibleLift10": -0.4,
+          "humanVisiblePass": false,
+          "spacingScore": 0.649,
+          "bunchingRisk": 0.45,
+          "arrivalContinuity": 0.34,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.4/10 or fails visibility/arrival/spacing/bunching gates."
+        }
+      ],
+      "measurementPlan": [
+        "Run the browser-backed candidate sweep for the affected stage.",
+        "Require expected-reference, target-video fit, human-perfect potential, and human-visible guardrails to all hold.",
+        "Regenerate challenge-stage conformance, candidate sweep index, release conformance dashboard, and Application Guide sections.",
+        "Promote runtime constants only when the primitive improves the user-visible stage read, not just one isolated score."
+      ],
+      "releaseGate": "Can follow after the arrival/readability primitives produce stable keepers."
+    },
+    {
+      "id": "lower-field-scoreable-pass",
+      "name": "Lower-Field Scoreable Pass",
+      "category": "scoreability",
+      "playerMeaning": "The player should get memorable shot windows that are possible to perfect, not just watch aliens pass out of reach.",
+      "sourceStageHint": "stages-with-lower-field-share",
+      "successCriteria": [
+        "Reference-backed lower-field share is preserved within stage tolerance.",
+        "Human-perfect potential is >= baseline and professional watch mode can route the pass.",
+        "The pass is visible long enough for a human to aim while staying safe."
+      ],
+      "candidateGeneratorKnobs": [
+        "lowerFieldBias",
+        "dropAmp",
+        "scoreableBandY",
+        "minDwellS",
+        "exitVy"
+      ],
+      "implementationPlan": "Add a stage-contract field for scoreable lower-band dwell and teach persona scoring probes to value it.",
+      "runtimeTouchpoints": [
+        "src/js/06-enemy-behavior.js",
+        "src/js/12-persona-player.js",
+        "src/js/13-aurora-game-pack.js"
+      ],
+      "priority10": 7.3,
+      "sourceStages": [
+        3,
+        7,
+        11,
+        15,
+        19
+      ],
+      "reusableAcrossGames": true,
+      "evidenceSummary": {
+        "referencePathCount": 25,
+        "groupContractCount": 25,
+        "pathFamilies": [],
+        "blockedStages": [
+          3,
+          7,
+          11,
+          15,
+          19
+        ],
+        "bestHumanVisibleLift10": 0.1,
+        "worstBunchingRisk": 0.963,
+        "read": "Lower-Field Scoreable Pass is backed by 25 group contract(s) and 25 reference path(s); blocked stages: 3, 7, 11, 15, 19."
+      },
+      "failureSignals": [
+        {
+          "stage": 3,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage3-target-reference-paths-shape-lower-p0",
+          "expectedLift10": -0.4,
+          "targetVideoObjectFitLift10": 1.5,
+          "humanPerfectPotentialLift10": 0.3,
+          "humanVisibleLift10": -0.2,
+          "humanVisiblePass": false,
+          "spacingScore": 0.051,
+          "bunchingRisk": 0.963,
+          "arrivalContinuity": 0.712,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.2/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 7,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage7-target-starts-current-speed-p0",
+          "expectedLift10": 0.1,
+          "targetVideoObjectFitLift10": 0,
+          "humanPerfectPotentialLift10": 0,
+          "humanVisibleLift10": 0.1,
+          "humanVisiblePass": false,
+          "spacingScore": 0.169,
+          "bunchingRisk": 0.824,
+          "arrivalContinuity": 0.784,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.1/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 11,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage11-target-controls-shape-blend-p0",
+          "expectedLift10": 0.2,
+          "targetVideoObjectFitLift10": 0,
+          "humanPerfectPotentialLift10": 0,
+          "humanVisibleLift10": 0.1,
+          "humanVisiblePass": false,
+          "spacingScore": 0.184,
+          "bunchingRisk": 0.817,
+          "arrivalContinuity": 0.856,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.1/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 15,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage15-a168-d108-x68-w106-s008-lb0-y3-p0",
+          "expectedLift10": 0.7,
+          "targetVideoObjectFitLift10": -0.2,
+          "humanPerfectPotentialLift10": 0.4,
+          "humanVisibleLift10": -0.4,
+          "humanVisiblePass": false,
+          "spacingScore": 0.649,
+          "bunchingRisk": 0.45,
+          "arrivalContinuity": 0.34,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.4/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 19,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage19-target-reference-paths-direct-p0",
+          "expectedLift10": -0.5,
+          "targetVideoObjectFitLift10": 0.8,
+          "humanPerfectPotentialLift10": 1.7,
+          "humanVisibleLift10": -0.3,
+          "humanVisiblePass": false,
+          "spacingScore": 0.077,
+          "bunchingRisk": 0.918,
+          "arrivalContinuity": 0.76,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.3/10 or fails visibility/arrival/spacing/bunching gates."
+        }
+      ],
+      "measurementPlan": [
+        "Run the browser-backed candidate sweep for the affected stage.",
+        "Require expected-reference, target-video fit, human-perfect potential, and human-visible guardrails to all hold.",
+        "Regenerate challenge-stage conformance, candidate sweep index, release conformance dashboard, and Application Guide sections.",
+        "Promote runtime constants only when the primitive improves the user-visible stage read, not just one isolated score."
+      ],
+      "releaseGate": "Can follow after the arrival/readability primitives produce stable keepers."
+    },
+    {
+      "id": "hook-return-arc",
+      "name": "Hook Return Arc",
+      "category": "path-shape",
+      "playerMeaning": "Hooking return arcs create the classic learnable flourish that separates later challenges from straight-line entries.",
+      "sourceStageHint": "side-hook-return",
+      "successCriteria": [
+        "Path reversal count and turn count match the target-control band.",
+        "Hook returns do not bunch groups at the apex.",
+        "Exit continuity keeps the group visible through the return."
+      ],
+      "candidateGeneratorKnobs": [
+        "arcAmp",
+        "turnRadius",
+        "returnBiasX",
+        "speedEase",
+        "exitSide"
+      ],
+      "implementationPlan": "Convert current side-hook variants into a parameterized arc primitive with spacing-aware apex handling.",
+      "runtimeTouchpoints": [
+        "src/js/06-enemy-behavior.js",
+        "src/js/13-aurora-game-pack.js"
+      ],
+      "priority10": 7.3,
+      "sourceStages": [
+        3,
+        7,
+        11
+      ],
+      "reusableAcrossGames": true,
+      "evidenceSummary": {
+        "referencePathCount": 15,
+        "groupContractCount": 15,
+        "pathFamilies": [
+          "side-hook-return",
+          "hook-arc"
+        ],
+        "blockedStages": [
+          3,
+          7,
+          11
+        ],
+        "bestHumanVisibleLift10": 0.1,
+        "worstBunchingRisk": 0.963,
+        "read": "Hook Return Arc is backed by 15 group contract(s) and 15 reference path(s); blocked stages: 3, 7, 11."
+      },
+      "failureSignals": [
+        {
+          "stage": 3,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage3-target-reference-paths-shape-lower-p0",
+          "expectedLift10": -0.4,
+          "targetVideoObjectFitLift10": 1.5,
+          "humanPerfectPotentialLift10": 0.3,
+          "humanVisibleLift10": -0.2,
+          "humanVisiblePass": false,
+          "spacingScore": 0.051,
+          "bunchingRisk": 0.963,
+          "arrivalContinuity": 0.712,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.2/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 7,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage7-target-starts-current-speed-p0",
+          "expectedLift10": 0.1,
+          "targetVideoObjectFitLift10": 0,
+          "humanPerfectPotentialLift10": 0,
+          "humanVisibleLift10": 0.1,
+          "humanVisiblePass": false,
+          "spacingScore": 0.169,
+          "bunchingRisk": 0.824,
+          "arrivalContinuity": 0.784,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.1/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 11,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage11-target-controls-shape-blend-p0",
+          "expectedLift10": 0.2,
+          "targetVideoObjectFitLift10": 0,
+          "humanPerfectPotentialLift10": 0,
+          "humanVisibleLift10": 0.1,
+          "humanVisiblePass": false,
+          "spacingScore": 0.184,
+          "bunchingRisk": 0.817,
+          "arrivalContinuity": 0.856,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.1/10 or fails visibility/arrival/spacing/bunching gates."
+        }
+      ],
+      "measurementPlan": [
+        "Run the browser-backed candidate sweep for the affected stage.",
+        "Require expected-reference, target-video fit, human-perfect potential, and human-visible guardrails to all hold.",
+        "Regenerate challenge-stage conformance, candidate sweep index, release conformance dashboard, and Application Guide sections.",
+        "Promote runtime constants only when the primitive improves the user-visible stage read, not just one isolated score."
+      ],
+      "releaseGate": "Can follow after the arrival/readability primitives produce stable keepers."
+    },
+    {
+      "id": "exit-continuity",
+      "name": "Exit Continuity",
+      "category": "departure",
+      "playerMeaning": "Aliens should leave as part of the choreography, not vanish once the scoring opportunity ends.",
+      "sourceStageHint": "all-first-five",
+      "successCriteria": [
+        "Groups remain visible until they exit the playfield or settle into a documented transition.",
+        "No disappearance occurs before the path reaches its exit condition.",
+        "End-of-group timing remains compatible with the next wave."
+      ],
+      "candidateGeneratorKnobs": [
+        "exitSide",
+        "exitVy",
+        "fadeSuppression",
+        "postScoreablePathS",
+        "groupRetirePolicy"
+      ],
+      "implementationPlan": "Replace challenge retire-on-window behavior with data-driven path completion and explicit offscreen exits.",
+      "runtimeTouchpoints": [
+        "src/js/06-enemy-behavior.js",
+        "src/js/09-stage-flow.js"
+      ],
+      "priority10": 7.3,
+      "sourceStages": [
+        3,
+        7,
+        11,
+        15,
+        19
+      ],
+      "reusableAcrossGames": true,
+      "evidenceSummary": {
+        "referencePathCount": 25,
+        "groupContractCount": 25,
+        "pathFamilies": [],
+        "blockedStages": [
+          3,
+          7,
+          11,
+          15,
+          19
+        ],
+        "bestHumanVisibleLift10": 0.1,
+        "worstBunchingRisk": 0.963,
+        "read": "Exit Continuity is backed by 25 group contract(s) and 25 reference path(s); blocked stages: 3, 7, 11, 15, 19."
+      },
+      "failureSignals": [
+        {
+          "stage": 3,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage3-target-reference-paths-shape-lower-p0",
+          "expectedLift10": -0.4,
+          "targetVideoObjectFitLift10": 1.5,
+          "humanPerfectPotentialLift10": 0.3,
+          "humanVisibleLift10": -0.2,
+          "humanVisiblePass": false,
+          "spacingScore": 0.051,
+          "bunchingRisk": 0.963,
+          "arrivalContinuity": 0.712,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.2/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 7,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage7-target-starts-current-speed-p0",
+          "expectedLift10": 0.1,
+          "targetVideoObjectFitLift10": 0,
+          "humanPerfectPotentialLift10": 0,
+          "humanVisibleLift10": 0.1,
+          "humanVisiblePass": false,
+          "spacingScore": 0.169,
+          "bunchingRisk": 0.824,
+          "arrivalContinuity": 0.784,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.1/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 11,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage11-target-controls-shape-blend-p0",
+          "expectedLift10": 0.2,
+          "targetVideoObjectFitLift10": 0,
+          "humanPerfectPotentialLift10": 0,
+          "humanVisibleLift10": 0.1,
+          "humanVisiblePass": false,
+          "spacingScore": 0.184,
+          "bunchingRisk": 0.817,
+          "arrivalContinuity": 0.856,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.1/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 15,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage15-a168-d108-x68-w106-s008-lb0-y3-p0",
+          "expectedLift10": 0.7,
+          "targetVideoObjectFitLift10": -0.2,
+          "humanPerfectPotentialLift10": 0.4,
+          "humanVisibleLift10": -0.4,
+          "humanVisiblePass": false,
+          "spacingScore": 0.649,
+          "bunchingRisk": 0.45,
+          "arrivalContinuity": 0.34,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.4/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 19,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage19-target-reference-paths-direct-p0",
+          "expectedLift10": -0.5,
+          "targetVideoObjectFitLift10": 0.8,
+          "humanPerfectPotentialLift10": 1.7,
+          "humanVisibleLift10": -0.3,
+          "humanVisiblePass": false,
+          "spacingScore": 0.077,
+          "bunchingRisk": 0.918,
+          "arrivalContinuity": 0.76,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.3/10 or fails visibility/arrival/spacing/bunching gates."
+        }
+      ],
+      "measurementPlan": [
+        "Run the browser-backed candidate sweep for the affected stage.",
+        "Require expected-reference, target-video fit, human-perfect potential, and human-visible guardrails to all hold.",
+        "Regenerate challenge-stage conformance, candidate sweep index, release conformance dashboard, and Application Guide sections.",
+        "Promote runtime constants only when the primitive improves the user-visible stage read, not just one isolated score."
+      ],
+      "releaseGate": "Can follow after the arrival/readability primitives produce stable keepers."
+    },
+    {
+      "id": "persona-perfect-route-probe",
+      "name": "Persona Perfect-Route Probe",
+      "category": "assessment",
+      "playerMeaning": "A professional watch run should prove the stage is learnable and scoreable before we ship it.",
+      "sourceStageHint": "all-first-five",
+      "successCriteria": [
+        "Professional persona can attempt every group in the challenge-stage tour.",
+        "Perfect-potential score does not regress when path readability improves.",
+        "Capture/rescue behavior remains irrelevant during safe challenge stages."
+      ],
+      "candidateGeneratorKnobs": [
+        "aimLeadS",
+        "groupPriority",
+        "routeCommitment",
+        "missRecovery"
+      ],
+      "implementationPlan": "Add per-primitive route probes so candidate sweeps score player opportunity, not only visual similarity.",
+      "runtimeTouchpoints": [
+        "src/js/12-persona-player.js",
+        "tools/harness/sweep-stage11-challenge-candidates.js"
+      ],
+      "priority10": 7.3,
+      "sourceStages": [
+        3,
+        7,
+        11,
+        15,
+        19
+      ],
+      "reusableAcrossGames": true,
+      "evidenceSummary": {
+        "referencePathCount": 25,
+        "groupContractCount": 25,
+        "pathFamilies": [],
+        "blockedStages": [
+          3,
+          7,
+          11,
+          15,
+          19
+        ],
+        "bestHumanVisibleLift10": 0.1,
+        "worstBunchingRisk": 0.963,
+        "read": "Persona Perfect-Route Probe is backed by 25 group contract(s) and 25 reference path(s); blocked stages: 3, 7, 11, 15, 19."
+      },
+      "failureSignals": [
+        {
+          "stage": 3,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage3-target-reference-paths-shape-lower-p0",
+          "expectedLift10": -0.4,
+          "targetVideoObjectFitLift10": 1.5,
+          "humanPerfectPotentialLift10": 0.3,
+          "humanVisibleLift10": -0.2,
+          "humanVisiblePass": false,
+          "spacingScore": 0.051,
+          "bunchingRisk": 0.963,
+          "arrivalContinuity": 0.712,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.2/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 7,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage7-target-starts-current-speed-p0",
+          "expectedLift10": 0.1,
+          "targetVideoObjectFitLift10": 0,
+          "humanPerfectPotentialLift10": 0,
+          "humanVisibleLift10": 0.1,
+          "humanVisiblePass": false,
+          "spacingScore": 0.169,
+          "bunchingRisk": 0.824,
+          "arrivalContinuity": 0.784,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.1/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 11,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage11-target-controls-shape-blend-p0",
+          "expectedLift10": 0.2,
+          "targetVideoObjectFitLift10": 0,
+          "humanPerfectPotentialLift10": 0,
+          "humanVisibleLift10": 0.1,
+          "humanVisiblePass": false,
+          "spacingScore": 0.184,
+          "bunchingRisk": 0.817,
+          "arrivalContinuity": 0.856,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.1/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 15,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage15-a168-d108-x68-w106-s008-lb0-y3-p0",
+          "expectedLift10": 0.7,
+          "targetVideoObjectFitLift10": -0.2,
+          "humanPerfectPotentialLift10": 0.4,
+          "humanVisibleLift10": -0.4,
+          "humanVisiblePass": false,
+          "spacingScore": 0.649,
+          "bunchingRisk": 0.45,
+          "arrivalContinuity": 0.34,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.4/10 or fails visibility/arrival/spacing/bunching gates."
+        },
+        {
+          "stage": 19,
+          "decision": "no-runtime-keeper-yet",
+          "bestCandidateId": "stage19-target-reference-paths-direct-p0",
+          "expectedLift10": -0.5,
+          "targetVideoObjectFitLift10": 0.8,
+          "humanPerfectPotentialLift10": 1.7,
+          "humanVisibleLift10": -0.3,
+          "humanVisiblePass": false,
+          "spacingScore": 0.077,
+          "bunchingRisk": 0.918,
+          "arrivalContinuity": 0.76,
+          "read": "No runtime keeper: candidate regresses human-visible challenge readability by 0.3/10 or fails visibility/arrival/spacing/bunching gates."
+        }
+      ],
+      "measurementPlan": [
+        "Run the browser-backed candidate sweep for the affected stage.",
+        "Require expected-reference, target-video fit, human-perfect potential, and human-visible guardrails to all hold.",
+        "Regenerate challenge-stage conformance, candidate sweep index, release conformance dashboard, and Application Guide sections.",
+        "Promote runtime constants only when the primitive improves the user-visible stage read, not just one isolated score."
+      ],
+      "releaseGate": "Can follow after the arrival/readability primitives produce stable keepers."
+    }
+  ],
+  "stageRoadmap": [
+    {
+      "stage": 3,
+      "label": "Challenging Stage 3-4",
+      "playerMeaning": "Teach that a challenging stage is safe, scoreable, and learnable rather than a combat wave.",
+      "currentBlocker": "No runtime keeper: candidate regresses human-visible challenge readability by 0.2/10 or fails visibility/arrival/spacing/bunching gates.",
+      "bestCandidateId": "stage3-target-reference-paths-shape-lower-p0",
+      "scoreSignals": {
+        "expectedLift10": -0.4,
+        "targetVideoObjectFitLift10": 1.5,
+        "humanPerfectPotentialLift10": 0.3,
+        "humanVisibleLift10": -0.2,
+        "bunchingRisk": 0.963,
+        "spacingScore": 0.051
+      },
+      "primaryPrimitives": [
+        "lead-in-continuity",
+        "group-spacing-field",
+        "reference-spline-fit",
+        "phase-order-scheduler",
+        "hook-return-arc",
+        "lower-field-scoreable-pass"
+      ],
+      "desiredOutcome": "Make Challenging Stage 3-4 visibly arrive, spread, score, and exit as a coherent Galaga-like set piece while preserving perfect-score potential.",
+      "nextAction": "Prototype lead-in continuity plus group-spacing field on the first challenge before broadening runtime promotion."
+    },
+    {
+      "stage": 7,
+      "label": "Challenging Stage 7-8",
+      "playerMeaning": "Show that the second challenge has a new route vocabulary and not just faster copies of the first.",
+      "currentBlocker": "No runtime keeper: candidate regresses human-visible challenge readability by 0.1/10 or fails visibility/arrival/spacing/bunching gates.",
+      "bestCandidateId": "stage7-target-starts-current-speed-p0",
+      "scoreSignals": {
+        "expectedLift10": 0.1,
+        "targetVideoObjectFitLift10": 0,
+        "humanPerfectPotentialLift10": 0,
+        "humanVisibleLift10": 0.1,
+        "bunchingRisk": 0.824,
+        "spacingScore": 0.169
+      },
+      "primaryPrimitives": [
+        "lead-in-continuity",
+        "group-spacing-field",
+        "reference-spline-fit",
+        "phase-order-scheduler",
+        "hook-return-arc",
+        "lower-field-scoreable-pass"
+      ],
+      "desiredOutcome": "Make Challenging Stage 7-8 visibly arrive, spread, score, and exit as a coherent Galaga-like set piece while preserving perfect-score potential.",
+      "nextAction": "Wait for the Stage 3 primitive prototype, then retune this stage using the same primitive vocabulary."
+    },
+    {
+      "stage": 11,
+      "label": "Challenging Stage 11-12",
+      "playerMeaning": "Make the player read larger boss-led and specialty shapes while still preserving a perfect-score route.",
+      "currentBlocker": "No runtime keeper: candidate regresses human-visible challenge readability by 0.1/10 or fails visibility/arrival/spacing/bunching gates.",
+      "bestCandidateId": "stage11-target-controls-shape-blend-p0",
+      "scoreSignals": {
+        "expectedLift10": 0.2,
+        "targetVideoObjectFitLift10": 0,
+        "humanPerfectPotentialLift10": 0,
+        "humanVisibleLift10": 0.1,
+        "bunchingRisk": 0.817,
+        "spacingScore": 0.184
+      },
+      "primaryPrimitives": [
+        "lead-in-continuity",
+        "group-spacing-field",
+        "reference-spline-fit",
+        "phase-order-scheduler",
+        "hook-return-arc",
+        "lower-field-scoreable-pass"
+      ],
+      "desiredOutcome": "Make Challenging Stage 11-12 visibly arrive, spread, score, and exit as a coherent Galaga-like set piece while preserving perfect-score potential.",
+      "nextAction": "Wait for the Stage 3 primitive prototype, then retune this stage using the same primitive vocabulary."
+    },
+    {
+      "stage": 15,
+      "label": "Challenging Stage 15-16",
+      "playerMeaning": "Introduce a late-stage spectacle that feels authored and memorable, not a remix of early challenge stages.",
+      "currentBlocker": "No runtime keeper: candidate regresses human-visible challenge readability by 0.4/10 or fails visibility/arrival/spacing/bunching gates.",
+      "bestCandidateId": "stage15-a168-d108-x68-w106-s008-lb0-y3-p0",
+      "scoreSignals": {
+        "expectedLift10": 0.7,
+        "targetVideoObjectFitLift10": -0.2,
+        "humanPerfectPotentialLift10": 0.4,
+        "humanVisibleLift10": -0.4,
+        "bunchingRisk": 0.45,
+        "spacingScore": 0.649
+      },
+      "primaryPrimitives": [
+        "lead-in-continuity",
+        "group-spacing-field",
+        "reference-spline-fit",
+        "phase-order-scheduler",
+        "serpentine-cascade",
+        "lower-field-scoreable-pass"
+      ],
+      "desiredOutcome": "Make Challenging Stage 15-16 visibly arrive, spread, score, and exit as a coherent Galaga-like set piece while preserving perfect-score potential.",
+      "nextAction": "Wait for the Stage 3 primitive prototype, then retune this stage using the same primitive vocabulary."
+    },
+    {
+      "stage": 19,
+      "label": "Challenging Stage 19-20",
+      "playerMeaning": "Prove later challenge stages have distinct progression and can be learned as separate bonus patterns.",
+      "currentBlocker": "No runtime keeper: candidate regresses human-visible challenge readability by 0.3/10 or fails visibility/arrival/spacing/bunching gates.",
+      "bestCandidateId": "stage19-target-reference-paths-direct-p0",
+      "scoreSignals": {
+        "expectedLift10": -0.5,
+        "targetVideoObjectFitLift10": 0.8,
+        "humanPerfectPotentialLift10": 1.7,
+        "humanVisibleLift10": -0.3,
+        "bunchingRisk": 0.918,
+        "spacingScore": 0.077
+      },
+      "primaryPrimitives": [
+        "lead-in-continuity",
+        "group-spacing-field",
+        "reference-spline-fit",
+        "phase-order-scheduler",
+        "novelty-family-cascade",
+        "lower-field-scoreable-pass"
+      ],
+      "desiredOutcome": "Make Challenging Stage 19-20 visibly arrive, spread, score, and exit as a coherent Galaga-like set piece while preserving perfect-score potential.",
+      "nextAction": "Wait for the Stage 3 primitive prototype, then retune this stage using the same primitive vocabulary."
+    }
+  ],
+  "nextBestStep": "Prototype lead-in-continuity and group-spacing-field for Challenging Stage 3-4, then rerun the candidate sweep and human-visible guardrails."
+}

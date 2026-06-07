@@ -108,7 +108,7 @@ function forceLossAndGameOver(ctx){
 }
 
 function forceWaveAdvance(ctx){
-  const state = ctx.createGalaxyGuardiansRuntimeState({ stage: 1, ships: 3, seed: 1979 });
+  const state = ctx.createGalaxyGuardiansRuntimeState({ stage: 1, ships: 3, seed: 1979, maxPlayableStage: 2 });
   state.player.inv = 999;
   state.score = 1230;
   for(const alien of state.aliens) alien.hp = 0;
