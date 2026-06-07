@@ -76,12 +76,14 @@ function shouldNormalizeString(key, value){
     || key === 'sessionFile'
     || key === 'videoFile'
     || key === 'reportFile'
+    || key === 'selectedSourceDir'
     || key === 'path';
 }
 
 function sanitizeValue(value, key, runDir){
   if(Array.isArray(value)){
     if(key === 'files') return value.map(item => portablePath(item, { runDir }));
+    if(key === 'searchedSourceDirs') return value.map(item => portablePath(item, { runDir }));
     return value.map(item => sanitizeValue(item, null, runDir));
   }
   if(value && typeof value === 'object'){
