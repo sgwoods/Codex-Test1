@@ -3,7 +3,13 @@
 This document defines the purpose, stability expectation, testing rigor, and
 documentation refresh rules for every Aurora / Platinum release lane.
 
-## Current Published State
+For current lane labels and release-family ownership, use
+[CURRENT_PROJECT_STATE.md](CURRENT_PROJECT_STATE.md) and
+[RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md).
+The lane definitions below remain current policy; the June 3 published-state
+snapshot is preserved as history.
+
+## Historical Published State
 
 As of June 3, 2026:
 
@@ -137,19 +143,22 @@ Documentation expectation:
 - for meaningful `x.y` releases, the broader docs pass is part of the release
   contract
 
-## Current Promotion Interpretation
+## Historical Promotion Interpretation
 
-Current live `/dev` and `/beta` match.
+At the June 3, 2026 checkpoint, live `/dev` and `/beta` matched.
 
 `/production` does not.
 
-So the next release question is not "how do we get beta caught up to dev?"
+At that checkpoint, the next release question was not "how do we get beta
+caught up to dev?"
 
-It is:
+It was:
 
 - when the current `ea43155b` candidate is strong enough for production
 - whether any additional release-process guardrails should land before the next
   production promotion
+
+For the current promotion interpretation, use the release schedule spine.
 
 ## Artifact Persistence Rule
 
@@ -198,7 +207,7 @@ See also:
 
 - [REPOSITORY_ROLE_MAP.md](REPOSITORY_ROLE_MAP.md)
 
-## Current Working Rule
+## Working Rule
 
 Near-term:
 

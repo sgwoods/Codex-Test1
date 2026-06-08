@@ -92,12 +92,19 @@ Equivalent docs should also exist on hosted `/dev` and hosted `/beta`.
 
 ## Canonical Source Docs
 
+Start here for current work:
+
+- [CURRENT_PROJECT_STATE.md](CURRENT_PROJECT_STATE.md)
+
 Best top-level state and conformance-program overview:
 
 - [PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md)
 - [PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md)
 - [RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md)
-- [DEVELOPMENT_STATUS_UPDATE.md](DEVELOPMENT_STATUS_UPDATE.md)
+
+Process for measured long-cycle work and runtime keeper decisions:
+
+- [LONG_CYCLE_KEEPER_PROCESS.md](LONG_CYCLE_KEEPER_PROCESS.md)
 
 Best living white paper and project-area narrative:
 
@@ -151,6 +158,18 @@ Release planning and readiness docs:
 Best repo-role clarification:
 
 - [REPOSITORY_ROLE_MAP.md](REPOSITORY_ROLE_MAP.md)
+
+Historical current-state snapshots that should not be used as live lane truth:
+
+- [DEVELOPMENT_STATUS_UPDATE.md](DEVELOPMENT_STATUS_UPDATE.md)
+- [RELEASE_STATE_MAP.md](RELEASE_STATE_MAP.md)
+- [BETA_CANDIDATE_PLAN.md](BETA_CANDIDATE_PLAN.md)
+- [BETA_TO_PRODUCTION_PLAN.md](BETA_TO_PRODUCTION_PLAN.md)
+- [PATCH_1_2_4_PLAN.md](PATCH_1_2_4_PLAN.md)
+- [QUALITY_RELEASE_SCORECARD.md](QUALITY_RELEASE_SCORECARD.md)
+- [STRATEGIC_BETA_REVIEW.md](STRATEGIC_BETA_REVIEW.md)
+- [RESTART_FROM_HERE.md](RESTART_FROM_HERE.md)
+- [MACBOOK_CODEX_PROMPT.md](MACBOOK_CODEX_PROMPT.md)
 
 ## Current Release State
 

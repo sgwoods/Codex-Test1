@@ -35,8 +35,10 @@ Use it as the first read for how Platinum, Aurora, Galaxy Guardians, ingestion,
 harnesses, dashboards, release lanes, Codex/model assistance, and local
 resource economics fit together.
 
-For the fastest quick current-state reopen, pair it with
-[DEVELOPMENT_STATUS_UPDATE.md](DEVELOPMENT_STATUS_UPDATE.md).
+For the fastest quick current-state reopen, start with
+[CURRENT_PROJECT_STATE.md](CURRENT_PROJECT_STATE.md). Older reopen notes such
+as [DEVELOPMENT_STATUS_UPDATE.md](DEVELOPMENT_STATUS_UPDATE.md) are historical
+snapshots unless explicitly refreshed.
 
 The current cross-thread work ordering is maintained in
 [PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md).
@@ -247,7 +249,9 @@ from the roadmap.
 14. continue narrow trust fixes from the open issue stream
 15. execute the measured Galaga long-cycle quality plan in
    [AURORA_GALAGA_LONG_CYCLE_REVIEW.md](AURORA_GALAGA_LONG_CYCLE_REVIEW.md)
-   before broad gameplay, complexity, or graphical tuning
+   and the keeper loop in
+   [LONG_CYCLE_KEEPER_PROCESS.md](LONG_CYCLE_KEEPER_PROCESS.md) before broad
+   gameplay, complexity, or graphical tuning
 16. carry
    [IMMERSIVE_FULL_WINDOW_GAMEPLAY_MODE_PLAN.md](IMMERSIVE_FULL_WINDOW_GAMEPLAY_MODE_PLAN.md)
    as a `1.6.0` cabinet-surface feature, allowing an earlier hidden prototype

@@ -1,5 +1,12 @@
 # Restart From Here
 
+Historical snapshot: this restart note contains a May 12, 2026 checkpoint for
+the iMac-authority production-conformance cycle. Do not use it as the current
+restart prompt. Use [CURRENT_PROJECT_STATE.md](CURRENT_PROJECT_STATE.md),
+[CODEX_CONTEXT_CHECKPOINT.md](CODEX_CONTEXT_CHECKPOINT.md), and
+[RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md)
+for current orientation.
+
 ## Long-Session Recovery Rule
 
 Before a multi-hour Codex run, before switching machines, or when the chat has

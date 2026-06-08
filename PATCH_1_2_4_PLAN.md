@@ -1,5 +1,12 @@
 # Aurora `1.2.4` Patch Plan
 
+Historical snapshot: this was the narrow patch plan for the old `1.2.x` release
+family. It is not an active patch plan. Use
+[CURRENT_PROJECT_STATE.md](CURRENT_PROJECT_STATE.md) and
+[RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md)
+to place new bug-fix, safety, or release-hardening work in the current release
+family.
+
 This document defines the narrow patch path if Aurora needs a quick public
 follow-up before the broader `1.3.0` "Fidelity and Trust" family is ready.
 

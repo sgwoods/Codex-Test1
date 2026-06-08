@@ -1,5 +1,13 @@
 # Strategic Beta Review
 
+Historical snapshot: this May 12, 2026 strategic beta review explains the
+accepted `1.3.0.1` / refreshed `1.3.0` cycle. It remains useful as a review
+template, but it is not the current beta assessment. Use
+[CURRENT_PROJECT_STATE.md](CURRENT_PROJECT_STATE.md),
+[PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md),
+and [RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md)
+for current beta posture.
+
 Updated: May 12, 2026
 
 This is the maintained expert assessment for whether the project is on track

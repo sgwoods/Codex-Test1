@@ -1,5 +1,13 @@
 # Aurora Galactica Development Status Update
 
+Historical snapshot: this May 18, 2026 note is no longer the live lane-state
+source. Use [CURRENT_PROJECT_STATE.md](CURRENT_PROJECT_STATE.md),
+[PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md),
+and [RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md)
+for current project state, release-family ownership, and lane posture. This
+file remains useful for preserved-source, white-paper, and review-cadence
+context from that checkpoint.
+
 Updated: May 18, 2026
 
 This is the quick reopen note for the repo's current checked state and the

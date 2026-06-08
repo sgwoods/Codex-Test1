@@ -1,5 +1,12 @@
 # Beta Candidate Plan
 
+Historical snapshot: this May 2026 beta-planning note describes the old
+`1.3.0` / `1.4.0` transition. It is not the current beta candidate plan. Use
+[CURRENT_PROJECT_STATE.md](CURRENT_PROJECT_STATE.md),
+[PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md](PROJECT_WIDE_WORKSTREAM_ALIGNMENT_2026-06-07.md),
+and [RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md)
+for current lane posture, release-family ownership, and beta-blocking rules.
+
 ## Current State
 
 The old `1.2.3` beta candidate has already been promoted and shipped, and the

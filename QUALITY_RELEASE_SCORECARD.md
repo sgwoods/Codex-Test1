@@ -1,5 +1,12 @@
 # Quality Release Scorecard
 
+Historical snapshot: this scorecard is a May 2026 release-quality read for the
+old `1.3.0` public family. It is not the current quality dashboard. Use
+[CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md),
+[RELEASE_CONFORMANCE_DASHBOARD.md](RELEASE_CONFORMANCE_DASHBOARD.md), and
+[CURRENT_PROJECT_STATE.md](CURRENT_PROJECT_STATE.md) for the current conformance
+and release-state read.
+
 This scorecard compares the active Aurora lines against the current quality
 conformance model.
 

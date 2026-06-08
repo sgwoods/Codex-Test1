@@ -1,5 +1,12 @@
 # Aurora Galactica Release State Map
 
+Historical snapshot: this April 25, 2026 map records an old `1.2.3` lane
+picture. It is not the current live release state. Use
+[CURRENT_PROJECT_STATE.md](CURRENT_PROJECT_STATE.md),
+[PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md](PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md),
+and [RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md)
+for the current lane model and release-family ownership.
+
 This note captures the current release picture so Aurora work can resume
 without relying on chat history or stale intermediate plans.
 

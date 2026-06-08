@@ -240,7 +240,13 @@ That means:
   machine recorded in
   [release-authority.json](release-authority.json)
 
-Current versioning read for the next cycle:
+Historical versioning read from the May 2026 transition:
+
+For the current lane state and release-family ownership, use
+[CURRENT_PROJECT_STATE.md](CURRENT_PROJECT_STATE.md) and
+[RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md).
+The bullets below are preserved as the versioning rationale for the old
+`1.3.0` -> `1.4.0` transition, not as live lane state.
 
 - the shipped `1.3.0` family is now the stable public baseline
 - hosted `/dev` now carries the first `1.4.0.1` forward-review line for the
@@ -345,15 +351,15 @@ Rule:
 - full public-package replication is expected for hosted `/beta` and hosted
   `/production`
 
-## Current Promotion Reality
+## Historical Promotion Reality
 
-As of May 14, 2026:
+As of May 14, 2026, the lane picture was:
 
 - hosted `/dev` is on the active `1.4.0.1` hosted-dev review line
 - hosted `/beta` is on the active `1.4.0-beta.1` beta candidate lane
 - hosted `/production` is on the shipped `1.3.0` public line
 
-That means:
+That meant:
 
 - hosted `/dev` and hosted `/beta` are intentionally ahead while hosted
   `/production` preserves the coherent shipped `1.3.0` family
@@ -363,6 +369,9 @@ That means:
   hosted-dev review bundle, not an automatic mirror of `/dev`
 - future beta/production promotions of similar scope should move a real public
   SemVer step rather than repeat the May 12 same-family production exception
+
+For the current promotion reality, use
+[RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md).
 
 ## Major `x.y` Documentation Gate
 

@@ -264,6 +264,12 @@ Harness work should also follow the project reference program:
   human-only evaluation
 - platform/application seam changes should prove that the boundary still holds
 
+For long-cycle fidelity work, use
+[LONG_CYCLE_KEEPER_PROCESS.md](LONG_CYCLE_KEEPER_PROCESS.md) to decide whether
+a measured candidate is only a measurement win or is ready to become a
+player-facing runtime keeper. Documentation/evidence-only improvements can move
+hosted `/dev`, but they should not justify hosted `/beta` by themselves.
+
 ## Galaxy first-class parity
 
 `Galaxy Guardians` now has enough harness surface that we should treat it as a

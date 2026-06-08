@@ -1,5 +1,12 @@
 # Beta To Production Plan
 
+Historical snapshot: this May 2026 production-promotion record describes the
+`1.4.0` public promotion path. It is not the current beta-to-production plan.
+Use [CURRENT_PROJECT_STATE.md](CURRENT_PROJECT_STATE.md),
+[RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md](RELEASE_SCHEDULE_AND_ISSUE_SPINE_2026-06-07.md),
+and [TESTING_AND_RELEASE_GATES.md](TESTING_AND_RELEASE_GATES.md) before any new
+hosted `/beta` or hosted `/production` movement.
+
 ## Current Release State
 
 As of May 14, 2026:

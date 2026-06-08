@@ -1,5 +1,11 @@
 # MacBook Codex Prompt
 
+Historical snapshot: this prompt describes the older MacBook non-authority
+workflow. Current release authority and machine allocation must be read from
+[CURRENT_PROJECT_STATE.md](CURRENT_PROJECT_STATE.md),
+[MULTI_MACHINE_WORKFLOW.md](MULTI_MACHINE_WORKFLOW.md), and
+[release-authority.json](release-authority.json) before use.
+
 Use this prompt when you first start a Codex session on the MacBook Pro and
 want it to follow the current Aurora Galactica multi-machine workflow.
 

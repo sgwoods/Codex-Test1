@@ -12,6 +12,11 @@ effort. It is meant to answer four questions at once:
 - how Codex, OpenAI models, local CPU/browser compute, and persistent artifacts
   are being used to build more conformant software over time
 
+For quick orientation before opening or resuming a branch, start with
+[CURRENT_PROJECT_STATE.md](CURRENT_PROJECT_STATE.md). For measured
+reference-analysis and runtime-keeper cycles, use
+[LONG_CYCLE_KEEPER_PROCESS.md](LONG_CYCLE_KEEPER_PROCESS.md).
+
 ## Top-Level Goal
 
 The goal is to build a repeatable system for creating polished, inspired,
