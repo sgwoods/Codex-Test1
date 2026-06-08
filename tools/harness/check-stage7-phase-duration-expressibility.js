@@ -41,14 +41,54 @@ function main(){
   if(report.summary?.browserVisibleEffectConfirmed !== true){
     fail('Phase-duration proof must confirm browser-visible effect for generated consumed controls.', { summary: report.summary });
   }
+  if(!report.candidate?.candidateId || !report.sourceArtifacts?.candidateInput){
+    fail('Phase-duration proof must identify the semantic candidate and candidate input it compiled.', {
+      candidate: report.candidate,
+      sourceArtifacts: report.sourceArtifacts
+    });
+  }
+  if(!Array.isArray(report.compiledRuntimeControlsEmitted) || !report.compiledRuntimeControlsEmitted.length){
+    fail('Phase-duration proof must preserve the compiled runtime controls emitted by the semantic candidate.', {
+      compiledRuntimeControlsEmitted: report.compiledRuntimeControlsEmitted
+    });
+  }
+  const compiledFields = Array.isArray(report.compiledRuntimeFields) ? report.compiledRuntimeFields : [];
+  if(!compiledFields.length || compiledFields.some(field => field.runtimeCurrentlyConsumes !== true || field.consumedByProof !== true)){
+    fail('Phase-duration proof must show every compiled runtime field was consumed by the browser layout override.', { compiledFields });
+  }
+  if(!report.compiledControlRead?.motionProfileProxy || !report.compiledControlRead?.deltaFromBaseline){
+    fail('Phase-duration proof must include compiled-control before/after and motion/profile reads.', {
+      compiledControlRead: report.compiledControlRead
+    });
+  }
+  if(typeof report.summary?.compiledCandidateMotionProfileGateProxyPass !== 'boolean'){
+    fail('Phase-duration proof must report compiled-candidate motion/profile proxy status.', { summary: report.summary });
+  }
+  if(typeof report.summary?.compiledCandidateGroup45Preserved !== 'boolean'){
+    fail('Phase-duration proof must report compiled-candidate group 4/group 5 preservation status.', { summary: report.summary });
+  }
   if(typeof report.summary?.motionProfileGateProxyPass !== 'boolean'){
     fail('Phase-duration proof must report whether proof variants preserve the motion/profile proxy gate.', { summary: report.summary });
   }
-  if(report.summary?.group45Preserved !== true){
-    fail('Phase-duration proof variants must preserve group 4/group 5 timing windows.', { summary: report.summary });
+  if(typeof report.summary?.group45Preserved !== 'boolean'){
+    fail('Phase-duration proof must report whether proof variants preserve group 4/group 5 timing windows.', { summary: report.summary });
   }
-  if(report.decision?.sourceReadyForCandidates !== false){
-    fail('Proof artifact alone must not allow source-ready semantic candidates.', { decision: report.decision });
+  if(report.decision?.sourceReadyForCandidates === true && report.summary.compiledCandidateGroup45Preserved !== true){
+    fail('A source-ready phase-duration proof cannot regress protected group 4/group 5 timing windows.', {
+      summary: report.summary,
+      decision: report.decision
+    });
+  }
+  if(report.decision?.sourceReadyForCandidates === false){
+    const blockers = Array.isArray(report.decision.sourceReadyBlockers) ? report.decision.sourceReadyBlockers : [];
+    const classifications = Array.isArray(report.failureClassification) ? report.failureClassification : [];
+    if(!blockers.length || (!classifications.length && report.summary.compiledCandidateMotionProfileGateProxyPass !== true)){
+      fail('Blocked phase-duration proofs must include blockers and failure classification when the motion/profile proxy fails.', {
+        decision: report.decision,
+        failureClassification: report.failureClassification,
+        summary: report.summary
+      });
+    }
   }
   console.log(JSON.stringify({
     ok: true,
@@ -56,6 +96,8 @@ function main(){
     browserVisibleEffectConfirmed: report.summary.browserVisibleEffectConfirmed,
     motionProfileGateProxyPass: report.summary.motionProfileGateProxyPass,
     group45Preserved: report.summary.group45Preserved,
+    compiledCandidateMotionProfileGateProxyPass: report.summary.compiledCandidateMotionProfileGateProxyPass,
+    compiledCandidateGroup45Preserved: report.summary.compiledCandidateGroup45Preserved,
     sourceReadyForCandidates: report.decision.sourceReadyForCandidates
   }, null, 2));
 }

@@ -1,7 +1,7 @@
 # Stage 7 Semantic Runtime Calibration
 
-Generated: 2026-06-08T16:55:38.635Z
-Commit: 3b250dc1a
+Generated: 2026-06-08T17:14:49.619Z
+Commit: 870906d0d
 Branch: codex/macbook-pro-1.4.1-stage7-object-track-keeper
 
 Candidate: `stage7-semantic-phase-align-protect-0.1`
@@ -48,7 +48,7 @@ Use the live promotion gates and restored runtime source as candidate gate autho
 
 | Transform | Source-ready | Role | Source fields | Gap |
 | --- | --- | --- | --- | --- |
-| phase-duration-rebalance | true | runtime-transform | src/js/13-aurora-game-pack.js Stage 7 groupSpawnOffsets<br>src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS spawnOffsetS when present<br>src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS phaseDurations<br>src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_REFERENCE_PATHS playbackScale when present | Generated candidates now must emit compiledRuntimeControls and cite the proof artifact. Source readiness remains blocked until the proof passes the motion/profile proxy; visibleStartS/visibleEndS alone remains analysis-only. |
+| phase-duration-rebalance | true | runtime-transform | src/js/13-aurora-game-pack.js Stage 7 groupSpawnOffsets<br>src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS spawnOffsetS when present<br>src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS phaseDurations<br>src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_REFERENCE_PATHS playbackScale when present | Generated candidates now emit compiledRuntimeControls and cite the proof artifact. Source readiness remains blocked until the compiled proof passes the motion/profile proxy and preserves protected group 4/group 5 timing; visibleStartS/visibleEndS alone remains analysis-only. |
 | preserve-scoreable-window | true | guardrail-only | none | Cannot make a candidate source-ready by itself. |
 | protect-group4-group5 | true | guardrail-only | none | A predictedRuntimeVector used only for protection is not proof that a source edit can express a new vector. |
 
@@ -62,4 +62,4 @@ Use the live promotion gates and restored runtime source as candidate gate autho
 
 ## Recommendation
 
-Do not try another Stage 7 runtime candidate. Keep source-ready path-family authority on the live gates/runtime source, then update the semantic generator so phase-duration intent emits compiledRuntimeControls and only passes when the proof artifact confirms browser-visible effect plus motion/profile guard safety.
+Do not try another Stage 7 runtime candidate. Keep source-ready path-family authority on the live gates/runtime source, then tighten phase-duration generation so the motion/profile-compatible compiled proof also preserves protected group 4/group 5 timing.

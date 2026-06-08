@@ -494,7 +494,7 @@ function phaseRebalanceGroups(description, baselineByGroup, truthAlignment){
             }
           ],
           expectedVisibleEffect: 'Moves group visible timing and reference path clock without changing target count or challenge combat behavior.',
-          sourceReadyStatus: 'blocked until phase-duration proof passes motion/profile proxy'
+          sourceReadyStatus: 'blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing'
         }
       },
       generatedLowLevelControls: {
@@ -1239,7 +1239,7 @@ function main(){
     },
     nextBestStep: runtimeSourceCandidate
       ? `Try exactly one runtime source candidate for ${runtimeSourceCandidate.candidateId}, rebuild, then run before/after evidence and strict challenge guardrails.`
-      : 'Refine the semantic compiler before touching runtime source: keep Stage 7 source-ready path families aligned with live gates, make phase-duration proof pass the motion/profile proxy, and add proof harnesses for path-length/lower-field mappings.'
+      : 'Refine the semantic compiler before touching runtime source: keep Stage 7 source-ready path families aligned with live gates, keep phase-duration motion/profile-compatible while preserving group 4/group 5 timing, and add proof harnesses for path-length/lower-field mappings.'
   };
   writeJson(path.join(batchDir, 'report.json'), report);
   writeText(path.join(batchDir, 'README.md'), buildMarkdown(report));

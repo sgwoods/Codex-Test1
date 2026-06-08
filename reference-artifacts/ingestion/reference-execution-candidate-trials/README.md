@@ -58,8 +58,8 @@ vectors are analysis-only. The semantic compiler now emits
 `compiledRuntimeControls` mapped to `groupSpawnOffsets` /
 `motionSpecGroup.spawnOffsetS`, `phaseDurations.trackS`, and
 `referencePath.playbackScale`, but a source-ready candidate still requires the
-phase-duration proof to pass the motion/profile proxy and preserve the live
-path-family gate.
+phase-duration proof to pass the motion/profile proxy, preserve the live
+path-family gate, and keep the protected group 4/group 5 timing windows.
 
 For `group1-path-length-compression` and `lower-field-overstay-reduction`, the
 batch may record `analysisCompilerMappings` that point at consumed runtime

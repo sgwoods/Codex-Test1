@@ -173,7 +173,7 @@
         "npm run harness:analyze:challenge-stage-conformance",
         "npm run harness:check:challenge-motion-profile"
       ],
-      "remainingCompilerGap": "Generated candidates now must emit compiledRuntimeControls and cite the proof artifact. Source readiness remains blocked until the proof passes the motion/profile proxy; visibleStartS/visibleEndS alone remains analysis-only."
+      "remainingCompilerGap": "Generated candidates now emit compiledRuntimeControls and cite the proof artifact. Source readiness remains blocked until the compiled proof passes the motion/profile proxy and preserves protected group 4/group 5 timing; visibleStartS/visibleEndS alone remains analysis-only."
     }
   },
     {

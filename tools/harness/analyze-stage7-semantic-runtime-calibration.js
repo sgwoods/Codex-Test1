@@ -467,8 +467,8 @@ function main(){
     decision: {
       runtimeCandidateAllowed,
       sourceReadyGatePass: false,
-      nextRecommendation: 'Do not try another Stage 7 runtime candidate. Keep source-ready path-family authority on the live gates/runtime source, then update the semantic generator so phase-duration intent emits compiledRuntimeControls and only passes when the proof artifact confirms browser-visible effect plus motion/profile guard safety.',
-      remainingCompilerGap: 'phase-duration-rebalance now emits runtime-consumed compiled controls, but source promotion remains blocked until the proof passes the motion/profile proxy. group1 path-length compression and lower-field overstay reduction remain analysis-only until browser transfer proofs exist.'
+      nextRecommendation: 'Do not try another Stage 7 runtime candidate. Keep source-ready path-family authority on the live gates/runtime source, then tighten phase-duration generation so the motion/profile-compatible compiled proof also preserves protected group 4/group 5 timing.',
+      remainingCompilerGap: 'phase-duration-rebalance now emits runtime-consumed compiled controls and passes the focused motion/profile proxy, but source promotion remains blocked because the compiled candidate regresses protected group 4 timing. group1 path-length compression and lower-field overstay reduction remain analysis-only until browser transfer proofs exist.'
     }
   };
   writeJson(OUT_JSON, report);

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "stage7-phase-duration-runtime-expressibility-proof",
-  "generatedAt": "2026-06-08T16:26:22.438Z",
+  "generatedAt": "2026-06-08T17:13:26.064Z",
   "generatedBy": "tools/harness/analyze-stage7-phase-duration-expressibility.js",
-  "commit": "d4de278ad",
+  "commit": "870906d0d",
   "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
   "releaseFamily": "1.4.1",
   "gameKey": "aurora-galactica",
@@ -13,8 +13,837 @@
     "displayLabel": "Stage 7 / Challenge 2"
   },
   "sourceArtifacts": {
-    "pathFamilyAuthority": "reference-artifacts/analyses/reference-execution-authority/stage7-challenge2/latest-path-family-authority.json"
+    "pathFamilyAuthority": "reference-artifacts/analyses/reference-execution-authority/stage7-challenge2/latest-path-family-authority.json",
+    "semanticBatch": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/latest-batch.json",
+    "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T17-13-15-870906d0d/candidates/stage7-semantic-phase-align-protect-0.1.json"
   },
+  "semanticTransformId": "phase-duration-rebalance",
+  "batch": {
+    "generatedAt": "2026-06-08T17:13:15.996Z",
+    "commit": "870906d0d",
+    "report": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/latest-batch.json",
+    "recommendation": "no-runtime-source-candidate",
+    "bestCandidateId": "stage7-semantic-phase-align-protect-0.1"
+  },
+  "candidate": {
+    "candidateId": "stage7-semantic-phase-align-protect-0.1",
+    "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T17-13-15-870906d0d/candidates/stage7-semantic-phase-align-protect-0.1.json",
+    "semanticTransformationClass": "semantic-composition",
+    "semanticTransformations": [
+      "phase-duration-rebalance",
+      "preserve-scoreable-window",
+      "protect-group4-group5"
+    ],
+    "intendedPlayerFacingMeaning": "Combine the strongest measured phase-window signal with live-authority path families and explicit late-group protection.",
+    "targetGroups": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "invariantsPreserved": [
+      "active score windows do not regress",
+      "center-lane bias remains below the trial floor",
+      "group 4 aggregate score stays at or above baseline",
+      "group 4 and group 5 baseline object-track floors are protected",
+      "group 5 aggregate score stays at or above baseline",
+      "late boss-led cleanup does not become the casualty of group 1 tuning",
+      "multi-target lane share does not regress",
+      "phase order remains group 1 through group 5",
+      "target count and no-combat challenge meaning are preserved"
+    ],
+    "expectedMetricMovement": "Potential total object-track lift through phase-order/window fit while preserving groups 4 and 5.",
+    "guardrails": {
+      "spacingReadability": {
+        "source": "npm run harness:check:challenge-motion-profile after restored baseline",
+        "preserveBaseline": true,
+        "pass": true,
+        "worstMinDistance": 3.08,
+        "averageMinDistance": 19.82,
+        "spacingScore": 0.765,
+        "bunchingRisk": 0.292,
+        "read": "Restored baseline spacing guardrail passed; use a fresh motion-profile run before promoting any non-control runtime candidate."
+      },
+      "scoreableRoutes": {
+        "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+        "preserveBaseline": true,
+        "score10": 5.5,
+        "activeWindows": 47,
+        "multiTargetWindowShare": 0.745,
+        "laneDiversity": 1,
+        "centerBias": 0.359,
+        "read": "Control preserves the restored baseline scoreable-route read."
+      },
+      "safety": {
+        "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+        "preserveBaseline": true,
+        "noEnemyShots": true,
+        "noAttackStarts": true,
+        "noShipLosses": true,
+        "eventCounts": {
+          "enemyShots": 0,
+          "enemyAttackStarts": 0,
+          "shipLosses": 0,
+          "challengeContacts": 4
+        },
+        "read": "Control preserves the restored baseline no-shot/no-attack/no-loss safety read."
+      }
+    }
+  },
+  "compiledRuntimeControlsEmitted": [
+    {
+      "transformationClass": "phase-duration-rebalance",
+      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+      "proofArtifact": "reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-phase-duration-proof.json",
+      "generatedRuntimeFields": [
+        {
+          "runtimeField": "groupSpawnOffsets[0] or motionSpecGroups[0].spawnOffsetS",
+          "value": 0,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "aggregateObjectTrackTarget.visibleStartS"
+        },
+        {
+          "runtimeField": "motionSpecGroups[0].phaseDurations.trackS",
+          "value": 1.88,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "max(0.75, aggregateObjectTrackTarget.visibleEndS - visibleStartS)"
+        },
+        {
+          "runtimeField": "groupReferencePaths[0].playbackScale",
+          "value": 0.931,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "baselineVisibleDurationS / targetVisibleDurationS",
+          "clipped": false
+        }
+      ],
+      "expectedVisibleEffect": "Moves group visible timing and reference path clock without changing target count or challenge combat behavior.",
+      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing"
+    },
+    {
+      "transformationClass": "phase-duration-rebalance",
+      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+      "proofArtifact": "reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-phase-duration-proof.json",
+      "generatedRuntimeFields": [
+        {
+          "runtimeField": "groupSpawnOffsets[1] or motionSpecGroups[1].spawnOffsetS",
+          "value": 2.88,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "aggregateObjectTrackTarget.visibleStartS"
+        },
+        {
+          "runtimeField": "motionSpecGroups[1].phaseDurations.trackS",
+          "value": 3.5,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "max(0.75, aggregateObjectTrackTarget.visibleEndS - visibleStartS)"
+        },
+        {
+          "runtimeField": "groupReferencePaths[1].playbackScale",
+          "value": 0.786,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "baselineVisibleDurationS / targetVisibleDurationS",
+          "clipped": false
+        }
+      ],
+      "expectedVisibleEffect": "Moves group visible timing and reference path clock without changing target count or challenge combat behavior.",
+      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing"
+    },
+    {
+      "transformationClass": "phase-duration-rebalance",
+      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+      "proofArtifact": "reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-phase-duration-proof.json",
+      "generatedRuntimeFields": [
+        {
+          "runtimeField": "groupSpawnOffsets[2] or motionSpecGroups[2].spawnOffsetS",
+          "value": 4.25,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "aggregateObjectTrackTarget.visibleStartS"
+        },
+        {
+          "runtimeField": "motionSpecGroups[2].phaseDurations.trackS",
+          "value": 0.75,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "max(0.75, aggregateObjectTrackTarget.visibleEndS - visibleStartS)"
+        },
+        {
+          "runtimeField": "groupReferencePaths[2].playbackScale",
+          "value": 1.4,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "baselineVisibleDurationS / targetVisibleDurationS",
+          "clipped": true
+        }
+      ],
+      "expectedVisibleEffect": "Moves group visible timing and reference path clock without changing target count or challenge combat behavior.",
+      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing"
+    },
+    {
+      "transformationClass": "phase-duration-rebalance",
+      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+      "proofArtifact": "reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-phase-duration-proof.json",
+      "generatedRuntimeFields": [
+        {
+          "runtimeField": "groupSpawnOffsets[3] or motionSpecGroups[3].spawnOffsetS",
+          "value": 7.13,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "aggregateObjectTrackTarget.visibleStartS"
+        },
+        {
+          "runtimeField": "motionSpecGroups[3].phaseDurations.trackS",
+          "value": 3.25,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "max(0.75, aggregateObjectTrackTarget.visibleEndS - visibleStartS)"
+        },
+        {
+          "runtimeField": "groupReferencePaths[3].playbackScale",
+          "value": 0.846,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "baselineVisibleDurationS / targetVisibleDurationS",
+          "clipped": false
+        }
+      ],
+      "expectedVisibleEffect": "Moves group visible timing and reference path clock without changing target count or challenge combat behavior.",
+      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing"
+    }
+  ],
+  "compiledRuntimeFields": [
+    {
+      "runtimeField": "groupSpawnOffsets[0] or motionSpecGroups[0].spawnOffsetS",
+      "value": 0,
+      "runtimeCurrentlyConsumes": true,
+      "derivedFrom": "aggregateObjectTrackTarget.visibleStartS",
+      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+      "appliedTargets": [
+        {
+          "target": "groupSpawnOffsets[0]",
+          "groupIndex": 1,
+          "before": 0,
+          "after": 0
+        },
+        {
+          "target": "motionSpecGroups[0].spawnOffsetS",
+          "groupIndex": 1,
+          "before": null,
+          "after": 0
+        }
+      ],
+      "appliedInLayoutOverride": true,
+      "consumedByProof": true
+    },
+    {
+      "runtimeField": "motionSpecGroups[0].phaseDurations.trackS",
+      "value": 1.88,
+      "runtimeCurrentlyConsumes": true,
+      "derivedFrom": "max(0.75, aggregateObjectTrackTarget.visibleEndS - visibleStartS)",
+      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+      "appliedTargets": [
+        {
+          "target": "motionSpecGroups[0].phaseDurations.trackS",
+          "groupIndex": 1,
+          "before": 1.88,
+          "after": 1.88
+        }
+      ],
+      "appliedInLayoutOverride": true,
+      "consumedByProof": true
+    },
+    {
+      "runtimeField": "groupReferencePaths[0].playbackScale",
+      "value": 0.931,
+      "runtimeCurrentlyConsumes": true,
+      "derivedFrom": "baselineVisibleDurationS / targetVisibleDurationS",
+      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+      "appliedTargets": [
+        {
+          "target": "groupReferencePaths[0].playbackScale",
+          "groupIndex": 1,
+          "before": null,
+          "after": 0.931
+        }
+      ],
+      "appliedInLayoutOverride": true,
+      "consumedByProof": true
+    },
+    {
+      "runtimeField": "groupSpawnOffsets[1] or motionSpecGroups[1].spawnOffsetS",
+      "value": 2.88,
+      "runtimeCurrentlyConsumes": true,
+      "derivedFrom": "aggregateObjectTrackTarget.visibleStartS",
+      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+      "appliedTargets": [
+        {
+          "target": "groupSpawnOffsets[1]",
+          "groupIndex": 2,
+          "before": 2.88,
+          "after": 2.88
+        },
+        {
+          "target": "motionSpecGroups[1].spawnOffsetS",
+          "groupIndex": 2,
+          "before": null,
+          "after": 2.88
+        }
+      ],
+      "appliedInLayoutOverride": true,
+      "consumedByProof": true
+    },
+    {
+      "runtimeField": "motionSpecGroups[1].phaseDurations.trackS",
+      "value": 3.5,
+      "runtimeCurrentlyConsumes": true,
+      "derivedFrom": "max(0.75, aggregateObjectTrackTarget.visibleEndS - visibleStartS)",
+      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+      "appliedTargets": [
+        {
+          "target": "motionSpecGroups[1].phaseDurations.trackS",
+          "groupIndex": 2,
+          "before": 2.63,
+          "after": 3.5
+        }
+      ],
+      "appliedInLayoutOverride": true,
+      "consumedByProof": true
+    },
+    {
+      "runtimeField": "groupReferencePaths[1].playbackScale",
+      "value": 0.786,
+      "runtimeCurrentlyConsumes": true,
+      "derivedFrom": "baselineVisibleDurationS / targetVisibleDurationS",
+      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+      "appliedTargets": [
+        {
+          "target": "groupReferencePaths[1].playbackScale",
+          "groupIndex": 2,
+          "before": null,
+          "after": 0.786
+        }
+      ],
+      "appliedInLayoutOverride": true,
+      "consumedByProof": true
+    },
+    {
+      "runtimeField": "groupSpawnOffsets[2] or motionSpecGroups[2].spawnOffsetS",
+      "value": 4.25,
+      "runtimeCurrentlyConsumes": true,
+      "derivedFrom": "aggregateObjectTrackTarget.visibleStartS",
+      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+      "appliedTargets": [
+        {
+          "target": "groupSpawnOffsets[2]",
+          "groupIndex": 3,
+          "before": 4.25,
+          "after": 4.25
+        },
+        {
+          "target": "motionSpecGroups[2].spawnOffsetS",
+          "groupIndex": 3,
+          "before": null,
+          "after": 4.25
+        }
+      ],
+      "appliedInLayoutOverride": true,
+      "consumedByProof": true
+    },
+    {
+      "runtimeField": "motionSpecGroups[2].phaseDurations.trackS",
+      "value": 0.75,
+      "runtimeCurrentlyConsumes": true,
+      "derivedFrom": "max(0.75, aggregateObjectTrackTarget.visibleEndS - visibleStartS)",
+      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+      "appliedTargets": [
+        {
+          "target": "motionSpecGroups[2].phaseDurations.trackS",
+          "groupIndex": 3,
+          "before": 0.75,
+          "after": 0.75
+        }
+      ],
+      "appliedInLayoutOverride": true,
+      "consumedByProof": true
+    },
+    {
+      "runtimeField": "groupReferencePaths[2].playbackScale",
+      "value": 1.4,
+      "runtimeCurrentlyConsumes": true,
+      "derivedFrom": "baselineVisibleDurationS / targetVisibleDurationS",
+      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+      "appliedTargets": [
+        {
+          "target": "groupReferencePaths[2].playbackScale",
+          "groupIndex": 3,
+          "before": null,
+          "after": 1.4
+        }
+      ],
+      "appliedInLayoutOverride": true,
+      "consumedByProof": true
+    },
+    {
+      "runtimeField": "groupSpawnOffsets[3] or motionSpecGroups[3].spawnOffsetS",
+      "value": 7.13,
+      "runtimeCurrentlyConsumes": true,
+      "derivedFrom": "aggregateObjectTrackTarget.visibleStartS",
+      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+      "appliedTargets": [
+        {
+          "target": "groupSpawnOffsets[3]",
+          "groupIndex": 4,
+          "before": 7.13,
+          "after": 7.13
+        },
+        {
+          "target": "motionSpecGroups[3].spawnOffsetS",
+          "groupIndex": 4,
+          "before": null,
+          "after": 7.13
+        }
+      ],
+      "appliedInLayoutOverride": true,
+      "consumedByProof": true
+    },
+    {
+      "runtimeField": "motionSpecGroups[3].phaseDurations.trackS",
+      "value": 3.25,
+      "runtimeCurrentlyConsumes": true,
+      "derivedFrom": "max(0.75, aggregateObjectTrackTarget.visibleEndS - visibleStartS)",
+      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+      "appliedTargets": [
+        {
+          "target": "motionSpecGroups[3].phaseDurations.trackS",
+          "groupIndex": 4,
+          "before": 2,
+          "after": 3.25
+        }
+      ],
+      "appliedInLayoutOverride": true,
+      "consumedByProof": true
+    },
+    {
+      "runtimeField": "groupReferencePaths[3].playbackScale",
+      "value": 0.846,
+      "runtimeCurrentlyConsumes": true,
+      "derivedFrom": "baselineVisibleDurationS / targetVisibleDurationS",
+      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+      "appliedTargets": [
+        {
+          "target": "groupReferencePaths[3].playbackScale",
+          "groupIndex": 4,
+          "before": null,
+          "after": 0.846
+        }
+      ],
+      "appliedInLayoutOverride": true,
+      "consumedByProof": true
+    }
+  ],
+  "compiledControlRead": {
+    "variantId": "compiled-stage7-semantic-phase-align-protect-0.1",
+    "baselineVisibleTiming": {
+      "group1": {
+        "visibleStartS": 0.25,
+        "visibleEndS": 3,
+        "visibleDurationS": 2.75
+      },
+      "group2": {
+        "visibleStartS": 3,
+        "visibleEndS": 6.25,
+        "visibleDurationS": 3.25
+      },
+      "group3": {
+        "visibleStartS": 4.25,
+        "visibleEndS": 6.25,
+        "visibleDurationS": 2
+      },
+      "group4": {
+        "visibleStartS": 7.25,
+        "visibleEndS": 10.5,
+        "visibleDurationS": 3.25
+      },
+      "group5": {
+        "visibleStartS": 13.5,
+        "visibleEndS": 16.5,
+        "visibleDurationS": 3
+      }
+    },
+    "compiledVisibleTiming": {
+      "group1": {
+        "visibleStartS": 0.25,
+        "visibleEndS": 3.25,
+        "visibleDurationS": 3
+      },
+      "group2": {
+        "visibleStartS": 3,
+        "visibleEndS": 8.25,
+        "visibleDurationS": 5.25
+      },
+      "group3": {
+        "visibleStartS": 4.25,
+        "visibleEndS": 5.75,
+        "visibleDurationS": 1.5
+      },
+      "group4": {
+        "visibleStartS": 7.25,
+        "visibleEndS": 12.5,
+        "visibleDurationS": 5.25
+      },
+      "group5": {
+        "visibleStartS": 13.5,
+        "visibleEndS": 16.5,
+        "visibleDurationS": 3
+      }
+    },
+    "deltaFromBaseline": [
+      {
+        "groupIndex": 1,
+        "tmAt2SDelta": -0.119,
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": 0.25,
+        "visibleDurationDeltaS": 0.25
+      },
+      {
+        "groupIndex": 2,
+        "tmAt2SDelta": 0,
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": 2,
+        "visibleDurationDeltaS": 2
+      },
+      {
+        "groupIndex": 3,
+        "tmAt2SDelta": 0,
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": -0.5,
+        "visibleDurationDeltaS": -0.5
+      },
+      {
+        "groupIndex": 4,
+        "tmAt2SDelta": 0,
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": 2,
+        "visibleDurationDeltaS": 2
+      },
+      {
+        "groupIndex": 5,
+        "tmAt2SDelta": 0,
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": 0,
+        "visibleDurationDeltaS": 0
+      }
+    ],
+    "group1Effect": {
+      "groupIndex": 1,
+      "tmAt2SDelta": -0.119,
+      "visibleStartDeltaS": 0,
+      "visibleEndDeltaS": 0.25,
+      "visibleDurationDeltaS": 0.25
+    },
+    "group4Preservation": {
+      "groupIndex": 4,
+      "visibleStartDeltaS": 0,
+      "visibleEndDeltaS": 2,
+      "visibleDurationDeltaS": 2
+    },
+    "group5Preservation": {
+      "groupIndex": 5,
+      "visibleStartDeltaS": 0,
+      "visibleEndDeltaS": 0,
+      "visibleDurationDeltaS": 0
+    },
+    "motionProfileProxy": {
+      "referenceSetup": {
+        "pass": true,
+        "enemyCount": 40,
+        "referenceTrackedEnemyCount": 40,
+        "referenceTrackIds": [
+          "target-track-10",
+          "target-track-66",
+          "target-track-71",
+          "target-track-110",
+          "target-track-142"
+        ]
+      },
+      "pathOrder": {
+        "layoutPathFamilyOrder": [
+          "cross-sweep",
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "boss-led-loop"
+        ],
+        "contractPathFamilyOrder": [
+          "cross-sweep",
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "boss-led-loop"
+        ],
+        "runtimePathFamilyMismatches": [],
+        "pass": true
+      },
+      "playbackClock": {
+        "elapsedSeconds": 1,
+        "driftLimitS": 0.08,
+        "pass": true,
+        "bad": [],
+        "drifts": [
+          {
+            "id": 255300326,
+            "wave": 0,
+            "lane": 0,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 0.96,
+            "tm": 0.931,
+            "expectedTm": 1,
+            "drift": -0.069
+          },
+          {
+            "id": 673636365,
+            "wave": 0,
+            "lane": 1,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.14,
+            "tm": 0.76,
+            "expectedTm": 0.82,
+            "drift": -0.06
+          },
+          {
+            "id": 82552775,
+            "wave": 0,
+            "lane": 2,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.31,
+            "tm": 0.59,
+            "expectedTm": 0.65,
+            "drift": -0.06
+          },
+          {
+            "id": 6184524,
+            "wave": 0,
+            "lane": 3,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.48,
+            "tm": 0.434,
+            "expectedTm": 0.48,
+            "drift": -0.046
+          },
+          {
+            "id": 432463488,
+            "wave": 0,
+            "lane": 4,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 0.96,
+            "tm": 0.931,
+            "expectedTm": 1,
+            "drift": -0.069
+          },
+          {
+            "id": 564592798,
+            "wave": 0,
+            "lane": 5,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.14,
+            "tm": 0.76,
+            "expectedTm": 0.82,
+            "drift": -0.06
+          },
+          {
+            "id": 50401486,
+            "wave": 0,
+            "lane": 6,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.31,
+            "tm": 0.59,
+            "expectedTm": 0.65,
+            "drift": -0.06
+          },
+          {
+            "id": 599383678,
+            "wave": 0,
+            "lane": 7,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.48,
+            "tm": 0.434,
+            "expectedTm": 0.48,
+            "drift": -0.046
+          }
+        ]
+      },
+      "spacing": {
+        "pass": true,
+        "sampleCount": 31,
+        "spacingScore": 0.769,
+        "bunchingRisk": 0.258
+      }
+    },
+    "spacingReadability": {
+      "sampleCount": 31,
+      "worstMinDistance": 0,
+      "averageMinDistance": 16.9,
+      "spacingScore": 0.769,
+      "bunchingRisk": 0.258,
+      "crampedCount": 8,
+      "minRuntimeSpacingScore": 0.72,
+      "maxRuntimeBunchingRisk": 0.38,
+      "worstSamples": [
+        {
+          "t": 13,
+          "activeCount": 0,
+          "minDistance": null,
+          "minPair": null
+        },
+        {
+          "t": 1.5,
+          "activeCount": 8,
+          "minDistance": 1.23,
+          "minPair": {
+            "a": {
+              "wave": 0,
+              "lane": 6,
+              "x": 284.81,
+              "y": 203.08
+            },
+            "b": {
+              "wave": 0,
+              "lane": 7,
+              "x": 284.63,
+              "y": 204.3
+            },
+            "distance": 1.23
+          }
+        },
+        {
+          "t": 0.5,
+          "activeCount": 8,
+          "minDistance": 3.36,
+          "minPair": {
+            "a": {
+              "wave": 0,
+              "lane": 4,
+              "x": 87.9,
+              "y": 186.43
+            },
+            "b": {
+              "wave": 0,
+              "lane": 5,
+              "x": 87.56,
+              "y": 189.77
+            },
+            "distance": 3.36
+          }
+        },
+        {
+          "t": 1,
+          "activeCount": 8,
+          "minDistance": 3.57,
+          "minPair": {
+            "a": {
+              "wave": 0,
+              "lane": 6,
+              "x": 175.37,
+              "y": 201.41
+            },
+            "b": {
+              "wave": 0,
+              "lane": 7,
+              "x": 177.28,
+              "y": 204.43
+            },
+            "distance": 3.57
+          }
+        },
+        {
+          "t": 15,
+          "activeCount": 8,
+          "minDistance": 5.67,
+          "minPair": {
+            "a": {
+              "wave": 4,
+              "lane": 2,
+              "x": 156.08,
+              "y": 53.26
+            },
+            "b": {
+              "wave": 4,
+              "lane": 4,
+              "x": 161.31,
+              "y": 51.06
+            },
+            "distance": 5.67
+          }
+        },
+        {
+          "t": 5,
+          "activeCount": 16,
+          "minDistance": 6.59,
+          "minPair": {
+            "a": {
+              "wave": 2,
+              "lane": 2,
+              "x": 132.13,
+              "y": 232.83
+            },
+            "b": {
+              "wave": 2,
+              "lane": 3,
+              "x": 136.56,
+              "y": 227.95
+            },
+            "distance": 6.59
+          }
+        }
+      ],
+      "pass": true
+    },
+    "scoreableRoutePreservation": {
+      "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+      "preserveBaseline": true,
+      "score10": 5.5,
+      "activeWindows": 47,
+      "multiTargetWindowShare": 0.745,
+      "laneDiversity": 1,
+      "centerBias": 0.359,
+      "read": "Control preserves the restored baseline scoreable-route read."
+    },
+    "safetyPreservation": {
+      "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+      "preserveBaseline": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0,
+        "challengeContacts": 4
+      },
+      "read": "Control preserves the restored baseline no-shot/no-attack/no-loss safety read."
+    },
+    "sourceReadyForCandidates": false
+  },
+  "failureClassification": [
+    {
+      "category": "semantic guardrail caught a real regression",
+      "read": "The compiled controls changed group 4 or group 5 timing beyond the protected late-group tolerance."
+    }
+  ],
   "compilerContract": {
     "transformationClass": "phase-duration-rebalance",
     "controls": [
@@ -62,7 +891,10 @@
   "baseline": {
     "variantId": "baseline",
     "groupIndex": null,
+    "touchedGroups": [],
+    "semanticTransformId": null,
     "control": "baseline",
+    "appliedRuntimeFields": [],
     "pathFamilyOrder": [
       "cross-sweep",
       "cross-sweep",
@@ -77,6 +909,7 @@
       "hook-arc",
       "boss-led-loop"
     ],
+    "runtimePathFamilyMismatches": [],
     "enemyCount": 40,
     "referenceTrackedEnemyCount": 40,
     "referenceTrackIds": [
@@ -109,8 +942,8 @@
       },
       "group5": {
         "visibleStartS": 13.5,
-        "visibleEndS": 15,
-        "visibleDurationS": 1.5
+        "visibleEndS": 16.5,
+        "visibleDurationS": 3
       }
     },
     "groupTmAt2S": {
@@ -121,18 +954,431 @@
       "group5": 0
     },
     "spacingSummary": {
+      "sampleCount": 31,
       "worstMinDistance": 0,
-      "averageMinDistance": 13.78,
-      "spacingScore": 1,
-      "bunchingRisk": 1,
+      "averageMinDistance": 15.35,
+      "spacingScore": 0.592,
+      "bunchingRisk": 0.452,
+      "crampedCount": 14,
+      "minRuntimeSpacingScore": 0.72,
+      "maxRuntimeBunchingRisk": 0.38,
+      "worstSamples": [
+        {
+          "t": 6.5,
+          "activeCount": 0,
+          "minDistance": null,
+          "minPair": null
+        },
+        {
+          "t": 7,
+          "activeCount": 0,
+          "minDistance": null,
+          "minPair": null
+        },
+        {
+          "t": 11,
+          "activeCount": 0,
+          "minDistance": null,
+          "minPair": null
+        },
+        {
+          "t": 11.5,
+          "activeCount": 0,
+          "minDistance": null,
+          "minPair": null
+        },
+        {
+          "t": 12,
+          "activeCount": 0,
+          "minDistance": null,
+          "minPair": null
+        },
+        {
+          "t": 12.5,
+          "activeCount": 0,
+          "minDistance": null,
+          "minPair": null
+        }
+      ],
       "pass": false
+    },
+    "motionProfileProxy": {
+      "referenceSetup": {
+        "pass": true,
+        "enemyCount": 40,
+        "referenceTrackedEnemyCount": 40,
+        "referenceTrackIds": [
+          "target-track-10",
+          "target-track-66",
+          "target-track-71",
+          "target-track-110",
+          "target-track-142"
+        ]
+      },
+      "pathOrder": {
+        "layoutPathFamilyOrder": [
+          "cross-sweep",
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "boss-led-loop"
+        ],
+        "contractPathFamilyOrder": [
+          "cross-sweep",
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "boss-led-loop"
+        ],
+        "runtimePathFamilyMismatches": [],
+        "pass": true
+      },
+      "playbackClock": {
+        "elapsedSeconds": 1,
+        "driftLimitS": 0.08,
+        "pass": true,
+        "bad": [],
+        "drifts": [
+          {
+            "id": 65946604,
+            "wave": 0,
+            "lane": 0,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 0.96,
+            "tm": 1,
+            "expectedTm": 1,
+            "drift": 0
+          },
+          {
+            "id": 422725369,
+            "wave": 0,
+            "lane": 1,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.14,
+            "tm": 0.817,
+            "expectedTm": 0.82,
+            "drift": -0.003
+          },
+          {
+            "id": 773103476,
+            "wave": 0,
+            "lane": 2,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.31,
+            "tm": 0.633,
+            "expectedTm": 0.65,
+            "drift": -0.017
+          },
+          {
+            "id": 239301269,
+            "wave": 0,
+            "lane": 3,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.48,
+            "tm": 0.467,
+            "expectedTm": 0.48,
+            "drift": -0.013
+          },
+          {
+            "id": 526652757,
+            "wave": 0,
+            "lane": 4,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 0.96,
+            "tm": 1,
+            "expectedTm": 1,
+            "drift": 0
+          },
+          {
+            "id": 739309946,
+            "wave": 0,
+            "lane": 5,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.14,
+            "tm": 0.817,
+            "expectedTm": 0.82,
+            "drift": -0.003
+          },
+          {
+            "id": 212156409,
+            "wave": 0,
+            "lane": 6,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.31,
+            "tm": 0.633,
+            "expectedTm": 0.65,
+            "drift": -0.017
+          },
+          {
+            "id": 831048749,
+            "wave": 0,
+            "lane": 7,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.48,
+            "tm": 0.467,
+            "expectedTm": 0.48,
+            "drift": -0.013
+          }
+        ]
+      },
+      "spacing": {
+        "pass": false,
+        "sampleCount": 31,
+        "spacingScore": 0.592,
+        "bunchingRisk": 0.452
+      }
     }
   },
   "variants": [
     {
-      "variantId": "spawn-offset-group2-plus-0.45",
-      "groupIndex": 2,
-      "control": "groupSpawnOffsets[1]",
+      "variantId": "compiled-stage7-semantic-phase-align-protect-0.1",
+      "groupIndex": null,
+      "touchedGroups": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "semanticTransformId": "phase-duration-rebalance",
+      "control": "compiledRuntimeControls.phaseDurationRebalance",
+      "appliedRuntimeFields": [
+        {
+          "runtimeField": "groupSpawnOffsets[0] or motionSpecGroups[0].spawnOffsetS",
+          "value": 0,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "aggregateObjectTrackTarget.visibleStartS",
+          "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+          "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+          "appliedTargets": [
+            {
+              "target": "groupSpawnOffsets[0]",
+              "groupIndex": 1,
+              "before": 0,
+              "after": 0
+            },
+            {
+              "target": "motionSpecGroups[0].spawnOffsetS",
+              "groupIndex": 1,
+              "before": null,
+              "after": 0
+            }
+          ],
+          "appliedInLayoutOverride": true
+        },
+        {
+          "runtimeField": "motionSpecGroups[0].phaseDurations.trackS",
+          "value": 1.88,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "max(0.75, aggregateObjectTrackTarget.visibleEndS - visibleStartS)",
+          "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+          "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+          "appliedTargets": [
+            {
+              "target": "motionSpecGroups[0].phaseDurations.trackS",
+              "groupIndex": 1,
+              "before": 1.88,
+              "after": 1.88
+            }
+          ],
+          "appliedInLayoutOverride": true
+        },
+        {
+          "runtimeField": "groupReferencePaths[0].playbackScale",
+          "value": 0.931,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "baselineVisibleDurationS / targetVisibleDurationS",
+          "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+          "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+          "appliedTargets": [
+            {
+              "target": "groupReferencePaths[0].playbackScale",
+              "groupIndex": 1,
+              "before": null,
+              "after": 0.931
+            }
+          ],
+          "appliedInLayoutOverride": true
+        },
+        {
+          "runtimeField": "groupSpawnOffsets[1] or motionSpecGroups[1].spawnOffsetS",
+          "value": 2.88,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "aggregateObjectTrackTarget.visibleStartS",
+          "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+          "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+          "appliedTargets": [
+            {
+              "target": "groupSpawnOffsets[1]",
+              "groupIndex": 2,
+              "before": 2.88,
+              "after": 2.88
+            },
+            {
+              "target": "motionSpecGroups[1].spawnOffsetS",
+              "groupIndex": 2,
+              "before": null,
+              "after": 2.88
+            }
+          ],
+          "appliedInLayoutOverride": true
+        },
+        {
+          "runtimeField": "motionSpecGroups[1].phaseDurations.trackS",
+          "value": 3.5,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "max(0.75, aggregateObjectTrackTarget.visibleEndS - visibleStartS)",
+          "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+          "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+          "appliedTargets": [
+            {
+              "target": "motionSpecGroups[1].phaseDurations.trackS",
+              "groupIndex": 2,
+              "before": 2.63,
+              "after": 3.5
+            }
+          ],
+          "appliedInLayoutOverride": true
+        },
+        {
+          "runtimeField": "groupReferencePaths[1].playbackScale",
+          "value": 0.786,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "baselineVisibleDurationS / targetVisibleDurationS",
+          "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+          "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+          "appliedTargets": [
+            {
+              "target": "groupReferencePaths[1].playbackScale",
+              "groupIndex": 2,
+              "before": null,
+              "after": 0.786
+            }
+          ],
+          "appliedInLayoutOverride": true
+        },
+        {
+          "runtimeField": "groupSpawnOffsets[2] or motionSpecGroups[2].spawnOffsetS",
+          "value": 4.25,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "aggregateObjectTrackTarget.visibleStartS",
+          "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+          "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+          "appliedTargets": [
+            {
+              "target": "groupSpawnOffsets[2]",
+              "groupIndex": 3,
+              "before": 4.25,
+              "after": 4.25
+            },
+            {
+              "target": "motionSpecGroups[2].spawnOffsetS",
+              "groupIndex": 3,
+              "before": null,
+              "after": 4.25
+            }
+          ],
+          "appliedInLayoutOverride": true
+        },
+        {
+          "runtimeField": "motionSpecGroups[2].phaseDurations.trackS",
+          "value": 0.75,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "max(0.75, aggregateObjectTrackTarget.visibleEndS - visibleStartS)",
+          "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+          "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+          "appliedTargets": [
+            {
+              "target": "motionSpecGroups[2].phaseDurations.trackS",
+              "groupIndex": 3,
+              "before": 0.75,
+              "after": 0.75
+            }
+          ],
+          "appliedInLayoutOverride": true
+        },
+        {
+          "runtimeField": "groupReferencePaths[2].playbackScale",
+          "value": 1.4,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "baselineVisibleDurationS / targetVisibleDurationS",
+          "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+          "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+          "appliedTargets": [
+            {
+              "target": "groupReferencePaths[2].playbackScale",
+              "groupIndex": 3,
+              "before": null,
+              "after": 1.4
+            }
+          ],
+          "appliedInLayoutOverride": true
+        },
+        {
+          "runtimeField": "groupSpawnOffsets[3] or motionSpecGroups[3].spawnOffsetS",
+          "value": 7.13,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "aggregateObjectTrackTarget.visibleStartS",
+          "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+          "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+          "appliedTargets": [
+            {
+              "target": "groupSpawnOffsets[3]",
+              "groupIndex": 4,
+              "before": 7.13,
+              "after": 7.13
+            },
+            {
+              "target": "motionSpecGroups[3].spawnOffsetS",
+              "groupIndex": 4,
+              "before": null,
+              "after": 7.13
+            }
+          ],
+          "appliedInLayoutOverride": true
+        },
+        {
+          "runtimeField": "motionSpecGroups[3].phaseDurations.trackS",
+          "value": 3.25,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "max(0.75, aggregateObjectTrackTarget.visibleEndS - visibleStartS)",
+          "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+          "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+          "appliedTargets": [
+            {
+              "target": "motionSpecGroups[3].phaseDurations.trackS",
+              "groupIndex": 4,
+              "before": 2,
+              "after": 3.25
+            }
+          ],
+          "appliedInLayoutOverride": true
+        },
+        {
+          "runtimeField": "groupReferencePaths[3].playbackScale",
+          "value": 0.846,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "baselineVisibleDurationS / targetVisibleDurationS",
+          "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+          "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
+          "appliedTargets": [
+            {
+              "target": "groupReferencePaths[3].playbackScale",
+              "groupIndex": 4,
+              "before": null,
+              "after": 0.846
+            }
+          ],
+          "appliedInLayoutOverride": true
+        }
+      ],
       "pathFamilyOrder": [
         "cross-sweep",
         "cross-sweep",
@@ -147,6 +1393,439 @@
         "hook-arc",
         "boss-led-loop"
       ],
+      "runtimePathFamilyMismatches": [],
+      "enemyCount": 40,
+      "referenceTrackedEnemyCount": 40,
+      "referenceTrackIds": [
+        "target-track-10",
+        "target-track-66",
+        "target-track-71",
+        "target-track-110",
+        "target-track-142"
+      ],
+      "groupWindows": {
+        "group1": {
+          "visibleStartS": 0.25,
+          "visibleEndS": 3.25,
+          "visibleDurationS": 3
+        },
+        "group2": {
+          "visibleStartS": 3,
+          "visibleEndS": 8.25,
+          "visibleDurationS": 5.25
+        },
+        "group3": {
+          "visibleStartS": 4.25,
+          "visibleEndS": 5.75,
+          "visibleDurationS": 1.5
+        },
+        "group4": {
+          "visibleStartS": 7.25,
+          "visibleEndS": 12.5,
+          "visibleDurationS": 5.25
+        },
+        "group5": {
+          "visibleStartS": 13.5,
+          "visibleEndS": 16.5,
+          "visibleDurationS": 3
+        }
+      },
+      "groupTmAt2S": {
+        "group1": 1.61,
+        "group2": 0,
+        "group3": 0,
+        "group4": 0,
+        "group5": 0
+      },
+      "spacingSummary": {
+        "sampleCount": 31,
+        "worstMinDistance": 0,
+        "averageMinDistance": 16.9,
+        "spacingScore": 0.769,
+        "bunchingRisk": 0.258,
+        "crampedCount": 8,
+        "minRuntimeSpacingScore": 0.72,
+        "maxRuntimeBunchingRisk": 0.38,
+        "worstSamples": [
+          {
+            "t": 13,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          },
+          {
+            "t": 1.5,
+            "activeCount": 8,
+            "minDistance": 1.23,
+            "minPair": {
+              "a": {
+                "wave": 0,
+                "lane": 6,
+                "x": 284.81,
+                "y": 203.08
+              },
+              "b": {
+                "wave": 0,
+                "lane": 7,
+                "x": 284.63,
+                "y": 204.3
+              },
+              "distance": 1.23
+            }
+          },
+          {
+            "t": 0.5,
+            "activeCount": 8,
+            "minDistance": 3.36,
+            "minPair": {
+              "a": {
+                "wave": 0,
+                "lane": 4,
+                "x": 87.9,
+                "y": 186.43
+              },
+              "b": {
+                "wave": 0,
+                "lane": 5,
+                "x": 87.56,
+                "y": 189.77
+              },
+              "distance": 3.36
+            }
+          },
+          {
+            "t": 1,
+            "activeCount": 8,
+            "minDistance": 3.57,
+            "minPair": {
+              "a": {
+                "wave": 0,
+                "lane": 6,
+                "x": 175.37,
+                "y": 201.41
+              },
+              "b": {
+                "wave": 0,
+                "lane": 7,
+                "x": 177.28,
+                "y": 204.43
+              },
+              "distance": 3.57
+            }
+          },
+          {
+            "t": 15,
+            "activeCount": 8,
+            "minDistance": 5.67,
+            "minPair": {
+              "a": {
+                "wave": 4,
+                "lane": 2,
+                "x": 156.08,
+                "y": 53.26
+              },
+              "b": {
+                "wave": 4,
+                "lane": 4,
+                "x": 161.31,
+                "y": 51.06
+              },
+              "distance": 5.67
+            }
+          },
+          {
+            "t": 5,
+            "activeCount": 16,
+            "minDistance": 6.59,
+            "minPair": {
+              "a": {
+                "wave": 2,
+                "lane": 2,
+                "x": 132.13,
+                "y": 232.83
+              },
+              "b": {
+                "wave": 2,
+                "lane": 3,
+                "x": 136.56,
+                "y": 227.95
+              },
+              "distance": 6.59
+            }
+          }
+        ],
+        "pass": true
+      },
+      "motionProfileProxy": {
+        "referenceSetup": {
+          "pass": true,
+          "enemyCount": 40,
+          "referenceTrackedEnemyCount": 40,
+          "referenceTrackIds": [
+            "target-track-10",
+            "target-track-66",
+            "target-track-71",
+            "target-track-110",
+            "target-track-142"
+          ]
+        },
+        "pathOrder": {
+          "layoutPathFamilyOrder": [
+            "cross-sweep",
+            "cross-sweep",
+            "hook-arc",
+            "hook-arc",
+            "boss-led-loop"
+          ],
+          "contractPathFamilyOrder": [
+            "cross-sweep",
+            "cross-sweep",
+            "hook-arc",
+            "hook-arc",
+            "boss-led-loop"
+          ],
+          "runtimePathFamilyMismatches": [],
+          "pass": true
+        },
+        "playbackClock": {
+          "elapsedSeconds": 1,
+          "driftLimitS": 0.08,
+          "pass": true,
+          "bad": [],
+          "drifts": [
+            {
+              "id": 255300326,
+              "wave": 0,
+              "lane": 0,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 0.96,
+              "tm": 0.931,
+              "expectedTm": 1,
+              "drift": -0.069
+            },
+            {
+              "id": 673636365,
+              "wave": 0,
+              "lane": 1,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.14,
+              "tm": 0.76,
+              "expectedTm": 0.82,
+              "drift": -0.06
+            },
+            {
+              "id": 82552775,
+              "wave": 0,
+              "lane": 2,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.31,
+              "tm": 0.59,
+              "expectedTm": 0.65,
+              "drift": -0.06
+            },
+            {
+              "id": 6184524,
+              "wave": 0,
+              "lane": 3,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.48,
+              "tm": 0.434,
+              "expectedTm": 0.48,
+              "drift": -0.046
+            },
+            {
+              "id": 432463488,
+              "wave": 0,
+              "lane": 4,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 0.96,
+              "tm": 0.931,
+              "expectedTm": 1,
+              "drift": -0.069
+            },
+            {
+              "id": 564592798,
+              "wave": 0,
+              "lane": 5,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.14,
+              "tm": 0.76,
+              "expectedTm": 0.82,
+              "drift": -0.06
+            },
+            {
+              "id": 50401486,
+              "wave": 0,
+              "lane": 6,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.31,
+              "tm": 0.59,
+              "expectedTm": 0.65,
+              "drift": -0.06
+            },
+            {
+              "id": 599383678,
+              "wave": 0,
+              "lane": 7,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.48,
+              "tm": 0.434,
+              "expectedTm": 0.48,
+              "drift": -0.046
+            }
+          ]
+        },
+        "spacing": {
+          "pass": true,
+          "sampleCount": 31,
+          "spacingScore": 0.769,
+          "bunchingRisk": 0.258
+        }
+      },
+      "evaluation": {
+        "variantId": "compiled-stage7-semantic-phase-align-protect-0.1",
+        "groupIndex": null,
+        "touchedGroups": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "control": "compiledRuntimeControls.phaseDurationRebalance",
+        "groupDeltas": [
+          {
+            "groupIndex": 1,
+            "tmAt2SDelta": -0.119,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0.25,
+            "visibleDurationDeltaS": 0.25
+          },
+          {
+            "groupIndex": 2,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 2,
+            "visibleDurationDeltaS": 2
+          },
+          {
+            "groupIndex": 3,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": -0.5,
+            "visibleDurationDeltaS": -0.5
+          },
+          {
+            "groupIndex": 4,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 2,
+            "visibleDurationDeltaS": 2
+          },
+          {
+            "groupIndex": 5,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          }
+        ],
+        "targetGroupDeltas": [
+          {
+            "groupIndex": 1,
+            "tmAt2SDelta": -0.119,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0.25,
+            "visibleDurationDeltaS": 0.25
+          },
+          {
+            "groupIndex": 2,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 2,
+            "visibleDurationDeltaS": 2
+          },
+          {
+            "groupIndex": 3,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": -0.5,
+            "visibleDurationDeltaS": -0.5
+          },
+          {
+            "groupIndex": 4,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 2,
+            "visibleDurationDeltaS": 2
+          }
+        ],
+        "targetVisibleEffectScoreS": 2,
+        "browserVisibleEffectConfirmed": true,
+        "group45Deltas": [
+          {
+            "groupIndex": 4,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 2,
+            "visibleDurationDeltaS": 2
+          },
+          {
+            "groupIndex": 5,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          }
+        ],
+        "group45RegressionPass": false,
+        "group45Regression": [
+          {
+            "groupIndex": 4,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 2,
+            "visibleDurationDeltaS": 2
+          }
+        ],
+        "pathOrderPass": true,
+        "contractPathOrderPass": true,
+        "runtimePathOrderPass": true,
+        "referenceSetupPass": true,
+        "playbackClockPass": true,
+        "spacingProxyPass": true,
+        "motionProfileGateProxyPass": true,
+        "read": "Non-overwriting browser proof confirmed this control changes visible Stage 7 timing/path behavior."
+      }
+    },
+    {
+      "variantId": "spawn-offset-group2-plus-0.45",
+      "groupIndex": 2,
+      "touchedGroups": [
+        2
+      ],
+      "semanticTransformId": null,
+      "control": "groupSpawnOffsets[1]",
+      "appliedRuntimeFields": [],
+      "pathFamilyOrder": [
+        "cross-sweep",
+        "cross-sweep",
+        "hook-arc",
+        "hook-arc",
+        "boss-led-loop"
+      ],
+      "contractPathFamilyOrder": [
+        "cross-sweep",
+        "cross-sweep",
+        "hook-arc",
+        "hook-arc",
+        "boss-led-loop"
+      ],
+      "runtimePathFamilyMismatches": [],
       "enemyCount": 40,
       "referenceTrackedEnemyCount": 40,
       "referenceTrackIds": [
@@ -179,8 +1858,8 @@
         },
         "group5": {
           "visibleStartS": 13.5,
-          "visibleEndS": 15,
-          "visibleDurationS": 1.5
+          "visibleEndS": 16.5,
+          "visibleDurationS": 3
         }
       },
       "groupTmAt2S": {
@@ -191,21 +1870,241 @@
         "group5": 0
       },
       "spacingSummary": {
+        "sampleCount": 31,
         "worstMinDistance": 0,
-        "averageMinDistance": 13.69,
-        "spacingScore": 1,
-        "bunchingRisk": 1,
+        "averageMinDistance": 14.8,
+        "spacingScore": 0.59,
+        "bunchingRisk": 0.484,
+        "crampedCount": 15,
+        "minRuntimeSpacingScore": 0.72,
+        "maxRuntimeBunchingRisk": 0.38,
+        "worstSamples": [
+          {
+            "t": 3,
+            "activeCount": 1,
+            "minDistance": null,
+            "minPair": null
+          },
+          {
+            "t": 7,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          },
+          {
+            "t": 11,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          },
+          {
+            "t": 11.5,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          },
+          {
+            "t": 12,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          },
+          {
+            "t": 12.5,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          }
+        ],
         "pass": false
+      },
+      "motionProfileProxy": {
+        "referenceSetup": {
+          "pass": true,
+          "enemyCount": 40,
+          "referenceTrackedEnemyCount": 40,
+          "referenceTrackIds": [
+            "target-track-10",
+            "target-track-66",
+            "target-track-71",
+            "target-track-110",
+            "target-track-142"
+          ]
+        },
+        "pathOrder": {
+          "layoutPathFamilyOrder": [
+            "cross-sweep",
+            "cross-sweep",
+            "hook-arc",
+            "hook-arc",
+            "boss-led-loop"
+          ],
+          "contractPathFamilyOrder": [
+            "cross-sweep",
+            "cross-sweep",
+            "hook-arc",
+            "hook-arc",
+            "boss-led-loop"
+          ],
+          "runtimePathFamilyMismatches": [],
+          "pass": true
+        },
+        "playbackClock": {
+          "elapsedSeconds": 1,
+          "driftLimitS": 0.08,
+          "pass": true,
+          "bad": [],
+          "drifts": [
+            {
+              "id": 568101407,
+              "wave": 0,
+              "lane": 0,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 0.96,
+              "tm": 1,
+              "expectedTm": 1,
+              "drift": 0
+            },
+            {
+              "id": 794833832,
+              "wave": 0,
+              "lane": 1,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.14,
+              "tm": 0.817,
+              "expectedTm": 0.82,
+              "drift": -0.003
+            },
+            {
+              "id": 301453751,
+              "wave": 0,
+              "lane": 2,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.31,
+              "tm": 0.633,
+              "expectedTm": 0.65,
+              "drift": -0.017
+            },
+            {
+              "id": 324300733,
+              "wave": 0,
+              "lane": 3,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.48,
+              "tm": 0.467,
+              "expectedTm": 0.48,
+              "drift": -0.013
+            },
+            {
+              "id": 903697553,
+              "wave": 0,
+              "lane": 4,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 0.96,
+              "tm": 1,
+              "expectedTm": 1,
+              "drift": 0
+            },
+            {
+              "id": 512991480,
+              "wave": 0,
+              "lane": 5,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.14,
+              "tm": 0.817,
+              "expectedTm": 0.82,
+              "drift": -0.003
+            },
+            {
+              "id": 673306444,
+              "wave": 0,
+              "lane": 6,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.31,
+              "tm": 0.633,
+              "expectedTm": 0.65,
+              "drift": -0.017
+            },
+            {
+              "id": 617563026,
+              "wave": 0,
+              "lane": 7,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.48,
+              "tm": 0.467,
+              "expectedTm": 0.48,
+              "drift": -0.013
+            }
+          ]
+        },
+        "spacing": {
+          "pass": false,
+          "sampleCount": 31,
+          "spacingScore": 0.59,
+          "bunchingRisk": 0.484
+        }
       },
       "evaluation": {
         "variantId": "spawn-offset-group2-plus-0.45",
         "groupIndex": 2,
+        "touchedGroups": [
+          2
+        ],
         "control": "groupSpawnOffsets[1]",
-        "targetGroupDelta": {
-          "visibleStartDeltaS": 0.5,
-          "visibleEndDeltaS": 0.5,
-          "visibleDurationDeltaS": 0
-        },
+        "groupDeltas": [
+          {
+            "groupIndex": 1,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          },
+          {
+            "groupIndex": 2,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0.5,
+            "visibleEndDeltaS": 0.5,
+            "visibleDurationDeltaS": 0
+          },
+          {
+            "groupIndex": 3,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          },
+          {
+            "groupIndex": 4,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          },
+          {
+            "groupIndex": 5,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          }
+        ],
+        "targetGroupDeltas": [
+          {
+            "groupIndex": 2,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0.5,
+            "visibleEndDeltaS": 0.5,
+            "visibleDurationDeltaS": 0
+          }
+        ],
         "targetVisibleEffectScoreS": 0.5,
         "browserVisibleEffectConfirmed": true,
         "group45Deltas": [
@@ -225,7 +2124,10 @@
         "group45RegressionPass": true,
         "group45Regression": [],
         "pathOrderPass": true,
+        "contractPathOrderPass": true,
+        "runtimePathOrderPass": true,
         "referenceSetupPass": true,
+        "playbackClockPass": true,
         "spacingProxyPass": false,
         "motionProfileGateProxyPass": false,
         "read": "Non-overwriting browser proof confirmed this control changes visible Stage 7 timing/path behavior."
@@ -234,7 +2136,12 @@
     {
       "variantId": "track-duration-group1-shorter-0.62x",
       "groupIndex": 1,
+      "touchedGroups": [
+        1
+      ],
+      "semanticTransformId": null,
       "control": "motionSpecGroups[0].phaseDurations.trackS",
+      "appliedRuntimeFields": [],
       "pathFamilyOrder": [
         "cross-sweep",
         "cross-sweep",
@@ -249,6 +2156,7 @@
         "hook-arc",
         "boss-led-loop"
       ],
+      "runtimePathFamilyMismatches": [],
       "enemyCount": 40,
       "referenceTrackedEnemyCount": 40,
       "referenceTrackIds": [
@@ -281,8 +2189,8 @@
         },
         "group5": {
           "visibleStartS": 13.5,
-          "visibleEndS": 15,
-          "visibleDurationS": 1.5
+          "visibleEndS": 16.5,
+          "visibleDurationS": 3
         }
       },
       "groupTmAt2S": {
@@ -293,21 +2201,241 @@
         "group5": 0
       },
       "spacingSummary": {
+        "sampleCount": 31,
         "worstMinDistance": 0,
-        "averageMinDistance": 13.09,
-        "spacingScore": 1,
-        "bunchingRisk": 1,
+        "averageMinDistance": 14.9,
+        "spacingScore": 0.56,
+        "bunchingRisk": 0.484,
+        "crampedCount": 15,
+        "minRuntimeSpacingScore": 0.72,
+        "maxRuntimeBunchingRisk": 0.38,
+        "worstSamples": [
+          {
+            "t": 2.5,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          },
+          {
+            "t": 6.5,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          },
+          {
+            "t": 7,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          },
+          {
+            "t": 11,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          },
+          {
+            "t": 11.5,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          },
+          {
+            "t": 12,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          }
+        ],
         "pass": false
+      },
+      "motionProfileProxy": {
+        "referenceSetup": {
+          "pass": true,
+          "enemyCount": 40,
+          "referenceTrackedEnemyCount": 40,
+          "referenceTrackIds": [
+            "target-track-10",
+            "target-track-66",
+            "target-track-71",
+            "target-track-110",
+            "target-track-142"
+          ]
+        },
+        "pathOrder": {
+          "layoutPathFamilyOrder": [
+            "cross-sweep",
+            "cross-sweep",
+            "hook-arc",
+            "hook-arc",
+            "boss-led-loop"
+          ],
+          "contractPathFamilyOrder": [
+            "cross-sweep",
+            "cross-sweep",
+            "hook-arc",
+            "hook-arc",
+            "boss-led-loop"
+          ],
+          "runtimePathFamilyMismatches": [],
+          "pass": true
+        },
+        "playbackClock": {
+          "elapsedSeconds": 1,
+          "driftLimitS": 0.08,
+          "pass": true,
+          "bad": [],
+          "drifts": [
+            {
+              "id": 198875916,
+              "wave": 0,
+              "lane": 0,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 0.96,
+              "tm": 1,
+              "expectedTm": 1,
+              "drift": 0
+            },
+            {
+              "id": 131374522,
+              "wave": 0,
+              "lane": 1,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.14,
+              "tm": 0.817,
+              "expectedTm": 0.82,
+              "drift": -0.003
+            },
+            {
+              "id": 744585328,
+              "wave": 0,
+              "lane": 2,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.31,
+              "tm": 0.633,
+              "expectedTm": 0.65,
+              "drift": -0.017
+            },
+            {
+              "id": 80554271,
+              "wave": 0,
+              "lane": 3,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.48,
+              "tm": 0.467,
+              "expectedTm": 0.48,
+              "drift": -0.013
+            },
+            {
+              "id": 200320771,
+              "wave": 0,
+              "lane": 4,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 0.96,
+              "tm": 1,
+              "expectedTm": 1,
+              "drift": 0
+            },
+            {
+              "id": 126118221,
+              "wave": 0,
+              "lane": 5,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.14,
+              "tm": 0.817,
+              "expectedTm": 0.82,
+              "drift": -0.003
+            },
+            {
+              "id": 230336435,
+              "wave": 0,
+              "lane": 6,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.31,
+              "tm": 0.633,
+              "expectedTm": 0.65,
+              "drift": -0.017
+            },
+            {
+              "id": 380575519,
+              "wave": 0,
+              "lane": 7,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.48,
+              "tm": 0.467,
+              "expectedTm": 0.48,
+              "drift": -0.013
+            }
+          ]
+        },
+        "spacing": {
+          "pass": false,
+          "sampleCount": 31,
+          "spacingScore": 0.56,
+          "bunchingRisk": 0.484
+        }
       },
       "evaluation": {
         "variantId": "track-duration-group1-shorter-0.62x",
         "groupIndex": 1,
+        "touchedGroups": [
+          1
+        ],
         "control": "motionSpecGroups[0].phaseDurations.trackS",
-        "targetGroupDelta": {
-          "visibleStartDeltaS": 0,
-          "visibleEndDeltaS": -0.75,
-          "visibleDurationDeltaS": -0.75
-        },
+        "groupDeltas": [
+          {
+            "groupIndex": 1,
+            "tmAt2SDelta": -0.056,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": -0.75,
+            "visibleDurationDeltaS": -0.75
+          },
+          {
+            "groupIndex": 2,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          },
+          {
+            "groupIndex": 3,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          },
+          {
+            "groupIndex": 4,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          },
+          {
+            "groupIndex": 5,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          }
+        ],
+        "targetGroupDeltas": [
+          {
+            "groupIndex": 1,
+            "tmAt2SDelta": -0.056,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": -0.75,
+            "visibleDurationDeltaS": -0.75
+          }
+        ],
         "targetVisibleEffectScoreS": 0.75,
         "browserVisibleEffectConfirmed": true,
         "group45Deltas": [
@@ -327,7 +2455,10 @@
         "group45RegressionPass": true,
         "group45Regression": [],
         "pathOrderPass": true,
+        "contractPathOrderPass": true,
+        "runtimePathOrderPass": true,
         "referenceSetupPass": true,
+        "playbackClockPass": true,
         "spacingProxyPass": false,
         "motionProfileGateProxyPass": false,
         "read": "Non-overwriting browser proof confirmed this control changes visible Stage 7 timing/path behavior."
@@ -336,7 +2467,12 @@
     {
       "variantId": "playback-scale-group1-slower-0.55",
       "groupIndex": 1,
+      "touchedGroups": [
+        1
+      ],
+      "semanticTransformId": null,
       "control": "groupReferencePaths[0].playbackScale",
+      "appliedRuntimeFields": [],
       "pathFamilyOrder": [
         "cross-sweep",
         "cross-sweep",
@@ -351,6 +2487,7 @@
         "hook-arc",
         "boss-led-loop"
       ],
+      "runtimePathFamilyMismatches": [],
       "enemyCount": 40,
       "referenceTrackedEnemyCount": 40,
       "referenceTrackIds": [
@@ -383,8 +2520,8 @@
         },
         "group5": {
           "visibleStartS": 13.5,
-          "visibleEndS": 15,
-          "visibleDurationS": 1.5
+          "visibleEndS": 16.5,
+          "visibleDurationS": 3
         }
       },
       "groupTmAt2S": {
@@ -395,21 +2532,330 @@
         "group5": 0
       },
       "spacingSummary": {
+        "sampleCount": 31,
         "worstMinDistance": 0,
-        "averageMinDistance": 12.05,
-        "spacingScore": 0.827,
-        "bunchingRisk": 1,
+        "averageMinDistance": 13.19,
+        "spacingScore": 0.554,
+        "bunchingRisk": 0.484,
+        "crampedCount": 15,
+        "minRuntimeSpacingScore": 0.72,
+        "maxRuntimeBunchingRisk": 0.38,
+        "worstSamples": [
+          {
+            "t": 6.5,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          },
+          {
+            "t": 7,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          },
+          {
+            "t": 11,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          },
+          {
+            "t": 11.5,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          },
+          {
+            "t": 12,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          },
+          {
+            "t": 12.5,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          }
+        ],
         "pass": false
+      },
+      "motionProfileProxy": {
+        "referenceSetup": {
+          "pass": true,
+          "enemyCount": 40,
+          "referenceTrackedEnemyCount": 40,
+          "referenceTrackIds": [
+            "target-track-10",
+            "target-track-66",
+            "target-track-71",
+            "target-track-110",
+            "target-track-142"
+          ]
+        },
+        "pathOrder": {
+          "layoutPathFamilyOrder": [
+            "cross-sweep",
+            "cross-sweep",
+            "hook-arc",
+            "hook-arc",
+            "boss-led-loop"
+          ],
+          "contractPathFamilyOrder": [
+            "cross-sweep",
+            "cross-sweep",
+            "hook-arc",
+            "hook-arc",
+            "boss-led-loop"
+          ],
+          "runtimePathFamilyMismatches": [],
+          "pass": true
+        },
+        "playbackClock": {
+          "elapsedSeconds": 1,
+          "driftLimitS": 0.08,
+          "pass": false,
+          "bad": [
+            {
+              "id": 716925419,
+              "wave": 0,
+              "lane": 0,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 0.96,
+              "tm": 0.55,
+              "expectedTm": 1,
+              "drift": -0.45
+            },
+            {
+              "id": 209215951,
+              "wave": 0,
+              "lane": 1,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.14,
+              "tm": 0.449,
+              "expectedTm": 0.82,
+              "drift": -0.371
+            },
+            {
+              "id": 305903330,
+              "wave": 0,
+              "lane": 2,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.31,
+              "tm": 0.348,
+              "expectedTm": 0.65,
+              "drift": -0.302
+            },
+            {
+              "id": 51912668,
+              "wave": 0,
+              "lane": 3,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.48,
+              "tm": 0.257,
+              "expectedTm": 0.48,
+              "drift": -0.223
+            },
+            {
+              "id": 144133697,
+              "wave": 0,
+              "lane": 4,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 0.96,
+              "tm": 0.55,
+              "expectedTm": 1,
+              "drift": -0.45
+            },
+            {
+              "id": 730729923,
+              "wave": 0,
+              "lane": 5,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.14,
+              "tm": 0.449,
+              "expectedTm": 0.82,
+              "drift": -0.371
+            },
+            {
+              "id": 646538809,
+              "wave": 0,
+              "lane": 6,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.31,
+              "tm": 0.348,
+              "expectedTm": 0.65,
+              "drift": -0.302
+            },
+            {
+              "id": 480130987,
+              "wave": 0,
+              "lane": 7,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.48,
+              "tm": 0.257,
+              "expectedTm": 0.48,
+              "drift": -0.223
+            }
+          ],
+          "drifts": [
+            {
+              "id": 716925419,
+              "wave": 0,
+              "lane": 0,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 0.96,
+              "tm": 0.55,
+              "expectedTm": 1,
+              "drift": -0.45
+            },
+            {
+              "id": 209215951,
+              "wave": 0,
+              "lane": 1,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.14,
+              "tm": 0.449,
+              "expectedTm": 0.82,
+              "drift": -0.371
+            },
+            {
+              "id": 305903330,
+              "wave": 0,
+              "lane": 2,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.31,
+              "tm": 0.348,
+              "expectedTm": 0.65,
+              "drift": -0.302
+            },
+            {
+              "id": 51912668,
+              "wave": 0,
+              "lane": 3,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.48,
+              "tm": 0.257,
+              "expectedTm": 0.48,
+              "drift": -0.223
+            },
+            {
+              "id": 144133697,
+              "wave": 0,
+              "lane": 4,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 0.96,
+              "tm": 0.55,
+              "expectedTm": 1,
+              "drift": -0.45
+            },
+            {
+              "id": 730729923,
+              "wave": 0,
+              "lane": 5,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.14,
+              "tm": 0.449,
+              "expectedTm": 0.82,
+              "drift": -0.371
+            },
+            {
+              "id": 646538809,
+              "wave": 0,
+              "lane": 6,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.31,
+              "tm": 0.348,
+              "expectedTm": 0.65,
+              "drift": -0.302
+            },
+            {
+              "id": 480130987,
+              "wave": 0,
+              "lane": 7,
+              "pathFamily": "cross-sweep",
+              "sourceTrackId": "target-track-10",
+              "spawnPlan": 1.48,
+              "tm": 0.257,
+              "expectedTm": 0.48,
+              "drift": -0.223
+            }
+          ]
+        },
+        "spacing": {
+          "pass": false,
+          "sampleCount": 31,
+          "spacingScore": 0.554,
+          "bunchingRisk": 0.484
+        }
       },
       "evaluation": {
         "variantId": "playback-scale-group1-slower-0.55",
         "groupIndex": 1,
+        "touchedGroups": [
+          1
+        ],
         "control": "groupReferencePaths[0].playbackScale",
-        "targetGroupDelta": {
-          "visibleStartDeltaS": 0,
-          "visibleEndDeltaS": 2,
-          "visibleDurationDeltaS": 2
-        },
+        "groupDeltas": [
+          {
+            "groupIndex": 1,
+            "tmAt2SDelta": -0.778,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 2,
+            "visibleDurationDeltaS": 2
+          },
+          {
+            "groupIndex": 2,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          },
+          {
+            "groupIndex": 3,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          },
+          {
+            "groupIndex": 4,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          },
+          {
+            "groupIndex": 5,
+            "tmAt2SDelta": 0,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          }
+        ],
+        "targetGroupDeltas": [
+          {
+            "groupIndex": 1,
+            "tmAt2SDelta": -0.778,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 2,
+            "visibleDurationDeltaS": 2
+          }
+        ],
         "targetVisibleEffectScoreS": 2,
         "browserVisibleEffectConfirmed": true,
         "group45Deltas": [
@@ -429,7 +2875,10 @@
         "group45RegressionPass": true,
         "group45Regression": [],
         "pathOrderPass": true,
+        "contractPathOrderPass": true,
+        "runtimePathOrderPass": true,
         "referenceSetupPass": true,
+        "playbackClockPass": false,
         "spacingProxyPass": false,
         "motionProfileGateProxyPass": false,
         "read": "Non-overwriting browser proof confirmed this control changes visible Stage 7 timing/path behavior."
@@ -438,19 +2887,20 @@
   ],
   "summary": {
     "browserVisibleEffectConfirmed": true,
-    "motionProfileGateProxyPass": false,
-    "group45Preserved": true,
+    "compiledCandidateBrowserVisibleEffectConfirmed": true,
+    "compiledCandidateMotionProfileGateProxyPass": true,
+    "motionProfileGateProxyPass": true,
+    "group45Preserved": false,
+    "compiledCandidateGroup45Preserved": false,
     "proofKind": "non-overwriting-browser-layout-override",
-    "read": "The proof confirms concrete consumed controls can move Stage 7 browser-visible timing/path behavior, but the proof variants do not satisfy the motion/profile proxy guard."
+    "read": "The compiled phase-duration semantic candidate moves Stage 7 browser-visible timing/path behavior while satisfying the focused motion/profile proxy."
   },
   "decision": {
     "sourceReadyForCandidates": false,
     "sourceReadyBlockers": [
-      "The semantic candidate generator must emit compiledRuntimeControls instead of visibleStartS/visibleEndS trial vectors.",
-      "A future candidate must carry the proof artifact id and preserve live path-family authority.",
-      "The current proof variants do not pass the motion/profile proxy guard; a source-ready candidate must prove guardrail-safe timing values.",
+      "The compiled candidate regresses protected group 4/group 5 timing windows.",
       "A real source candidate still needs full motion/profile, strict conformance, before/after visual evidence, scoreable-route, and safety checks."
     ],
-    "read": "phase-duration-rebalance now has a concrete runtime-consumed control contract and browser-visible proof, but no current semantic batch candidate is source-ready from this proof alone."
+    "read": "phase-duration-rebalance has a candidate-specific compiler-transfer proof, but the compiled candidate is not source-ready until the listed blockers are resolved."
   }
 }

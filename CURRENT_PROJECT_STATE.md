@@ -99,17 +99,20 @@ Latest Stage 7 calibration:
 - `phase-duration-rebalance` now has a runtime-consumed control contract and
   browser proof for `groupSpawnOffsets` / `motionSpecGroup.spawnOffsetS`,
   `phaseDurations.trackS`, and `referencePath.playbackScale`; `exitS` is
-  explicitly not consumed. The proof confirms visible timing/path effect and
-  preserves group 4/group 5 windows, but its motion/profile proxy guard is not
-  clean, so it is not source-ready evidence by itself:
+  explicitly not consumed. The candidate-specific compiler-transfer proof now
+  confirms visible timing/path effect and passes the focused motion/profile
+  proxy, but the compiled `stage7-semantic-phase-align-protect-0.1` controls
+  extend protected group 4 timing by about two seconds. That semantic guardrail
+  block keeps the transform from being source-ready evidence by itself:
   `reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-phase-duration-proof.json`.
 - The semantic generator now emits `compiledRuntimeControls` for
   `phase-duration-rebalance` under live path-family authority. It also records
   analysis-only compiler mappings for `group1-path-length-compression` and
   `lower-field-overstay-reduction`, but those are blocked from source-ready
-  status until browser transfer proofs exist. Next Stage 7 work should make
-  the phase-duration proof pass the motion/profile proxy or add focused proof
-  harnesses for path-length/lower-field transfer before any source attempt.
+  status until browser transfer proofs exist. Next Stage 7 work should either
+  tighten the phase-duration compiler so it preserves group 4/group 5 before
+  another batch/source attempt, or add exactly one focused transfer proof for
+  the lower-field/path-length mappings.
 
 ## Historical Or Stale Current-State Docs
 

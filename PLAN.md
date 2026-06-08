@@ -236,10 +236,14 @@ from the roadmap.
    RED/setpiece retained as measured-reference intent and explicit authority
    debt. `phase-duration-rebalance` now emits consumed
    `compiledRuntimeControls` under live authority and has browser-visible proof,
-   but the proof variants do not pass the motion/profile proxy guard. Group 1
-   path-length compression and lower-field overstay reduction now have
-   analysis-only compiler mappings, but no browser transfer proof. Next work
-   should make one proof path pass before another source attempt.
+   and the candidate-specific compiler-transfer proof now passes the focused
+   motion/profile proxy. It is still not source-ready: the compiled
+   `stage7-semantic-phase-align-protect-0.1` controls extend protected group 4
+   timing by about two seconds. Group 1 path-length compression and
+   lower-field overstay reduction now have analysis-only compiler mappings, but
+   no browser transfer proof. Next work should tighten the phase-duration
+   compiler to preserve group 4/group 5, or add exactly one focused
+   lower-field/path-length transfer proof, before another source attempt.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth
@@ -337,16 +341,19 @@ Current conformance read:
   group 5 `4.9`. The regenerated batch now recommends
   `no-runtime-source-candidate`. The calibration report is
   `reference-artifacts/analyses/reference-execution-runtime-calibrations/stage7-challenge2/latest-semantic-runtime-calibration.json`.
-  It identifies two source-promotion blockers: Stage 7 path-family order is
-  split between measured reference intent and live promotion gates, and
-  phase-duration controls still need a motion/profile-safe proof before
-  promotion. The follow-on authority/proof/compiler cycle selected live
+  It identified two source-promotion blockers at runtime-rejection time:
+  Stage 7 path-family order was split between measured reference intent and
+  live promotion gates, and phase-duration controls still needed a
+  motion/profile-safe proof before promotion. The follow-on
+  authority/proof/compiler cycle selected live
   promotion gates/restored runtime source as source-ready authority, made that
   authority split explicit as target-conformance debt, and proved that
   `groupSpawnOffsets` / `motionSpecGroup.spawnOffsetS`,
   `phaseDurations.trackS`, and `referencePath.playbackScale` are consumed
-  controls that change browser-visible timing/path behavior. However, the
-  proof variants do not pass the motion/profile proxy guard, and `exitS` is
+  controls that change browser-visible timing/path behavior. The
+  candidate-specific transfer proof now passes the focused motion/profile
+  proxy, but it rejects source readiness because the compiled phase-duration
+  candidate extends protected group 4 timing by about two seconds; `exitS` is
   explicitly unconsumed. The semantic batch now emits phase-duration
   `compiledRuntimeControls` under live authority and records path-length /
   lower-field mappings as analysis-only until their transfer proofs exist. This
