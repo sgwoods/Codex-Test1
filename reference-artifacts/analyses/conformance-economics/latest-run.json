@@ -1,29 +1,30 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-06-08T14-13-01-947Z-70760",
-  "startedAt": "2026-06-08T14:13:01.947Z",
-  "endedAt": "2026-06-08T14:13:02.292Z",
+  "id": "2026-06-08T14-46-58-961Z-80085",
+  "startedAt": "2026-06-08T14:46:58.961Z",
+  "endedAt": "2026-06-08T14:47:21.040Z",
   "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
-  "commit": "1bea9b6cd",
+  "commit": "42bae02e1",
   "command": [
     "npm",
     "run",
-    "harness:analyze:stage7-reference-execution-batch"
+    "harness:analyze:challenge-stage-conformance"
   ],
   "axes": [
     "challenge-stage"
   ],
   "resources": [
-    "cpu"
+    "cpu",
+    "browser"
   ],
-  "notes": "Stage 7 semantic candidate batch after phase-align composition",
+  "notes": "Stage 7 semantic phase-align runtime candidate",
   "measurement": {
-    "wallSeconds": 0.345,
-    "timeRealSeconds": 0.34,
-    "timeUserSeconds": 0.21,
-    "timeSystemSeconds": 0.1,
-    "cpuSeconds": 0.31,
+    "wallSeconds": 22.079,
+    "timeRealSeconds": 22.07,
+    "timeUserSeconds": 35.01,
+    "timeSystemSeconds": 7.19,
+    "cpuSeconds": 42.2,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -45,8 +46,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 2155440942,
-    "artifactBytesAfter": 2155727187,
-    "artifactBytesDelta": 286245
+    "artifactBytesBefore": 2155728275,
+    "artifactBytesAfter": 2158064951,
+    "artifactBytesDelta": 2336676
   }
 }

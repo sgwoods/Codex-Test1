@@ -12,6 +12,20 @@ Runtime source candidate: stage7-semantic-phase-align-protect-0.1
 
 Candidate stage7-semantic-phase-align-protect-0.1 is ready for exactly one runtime source attempt, not a runtime keeper.
 
+## Post-Runtime Calibration
+
+Runtime attempt completed on 2026-06-08 and was rejected. The candidate did not
+transfer to actual browser runtime: object-track stayed at 4.7/10, coverage
+stayed at 0.503, group 1 stayed at 3.5/10, group 4 stayed at 5.0/10, and group
+5 stayed at 4.9/10. The applied source projection also failed
+`npm run harness:check:challenge-motion-profile` because the generated path
+order drifted from the older motion-profile target artifact. Do not retry this
+candidate as-is; use the calibration evidence to improve how
+`phase-duration-rebalance` compiles to runtime-expressible controls.
+
+Evidence:
+`reference-artifacts/analyses/reference-execution-runtime-calibrations/stage7-challenge2/2026-06-08-stage7-semantic-phase-align-protect-runtime-rejection/`
+
 ## Candidates
 
 | Candidate | Transformations | Score | Delta | Coverage | G1 | G4 | G5 | Canonical families | Semantic valid | Source-ready | First blockers |
@@ -38,4 +52,7 @@ Candidate stage7-semantic-phase-align-protect-0.1 is ready for exactly one runti
 
 ## Next Step
 
-Try exactly one runtime source candidate for stage7-semantic-phase-align-protect-0.1, rebuild, then run before/after evidence and strict challenge guardrails.
+Improve the semantic compiler/evaluator before another runtime source attempt.
+In particular, separate label-only canonical family alignment from
+runtime-expressible timing controls, and reconcile reference-execution path
+order against the motion-profile target artifact before promotion.

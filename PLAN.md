@@ -219,14 +219,17 @@ from the roadmap.
    using it as a casual mirror of `main`
 6. attack Aurora challenge-stage runtime quality first: Stage 7 and Stage 11
    now expose runtime contract groups, and Stage 7's live wave path-family
-   order now matches its declared target contract. The remaining `4.3/10`
-   challenge-stage score gap is visible movement/readability, especially
-   Stage 7 object-track fit: lower path-length mismatch, reduce lower-field
-   overstay on the first groups, and sharpen the late boss-led loop while
-   preserving the new contract-order and spacing guards. Use the Stage 7
-   reference execution description pilot before the next runtime candidate so
-   path-family intent, object-track fit, lower-field overstay, score windows,
-   spacing, and safety are compared explicitly instead of tuned by feel.
+   order matches its restored declared target contract. The remaining
+   `4.3/10` challenge-stage score gap is visible movement/readability,
+   especially Stage 7 object-track fit: lower path-length mismatch, reduce
+   lower-field overstay on the first groups, and sharpen the late boss-led loop
+   while preserving the contract-order and spacing guards. The first semantic
+   runtime projection, `stage7-semantic-phase-align-protect-0.1`, was tried and
+   rejected: actual browser runtime stayed at object-track `4.7/10` and
+   coverage `0.503` while `harness:check:challenge-motion-profile` caught a
+   target-order drift during the applied candidate. Next Stage 7 work should
+   improve the semantic compiler/evaluator so phase-duration intent maps to
+   explicit runtime-expressible controls before another source attempt.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth

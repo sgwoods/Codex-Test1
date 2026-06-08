@@ -68,6 +68,19 @@ For `1.4.1`, do not claim beta readiness for documentation or evidence cleanup
 alone. Beta needs a player-visible runtime/platform lift, a safety fix, or
 release-critical platform hardening with explicit review.
 
+Latest Stage 7 calibration:
+
+- The `stage7-semantic-phase-align-protect-0.1` runtime projection was tried on
+  June 8, 2026 and rejected. It produced no actual browser-runtime object-track
+  lift over the `4.7/10`, `0.503` coverage baseline and tripped the
+  challenge-motion-profile target-order guard while applied.
+- Runtime source was restored. The Stage 7 reference execution description,
+  non-overwriting trial gate, and semantic batch mechanism remain useful
+  measurement/process keepers, but no Stage 7 player-facing runtime keeper is
+  accepted from that candidate.
+- Next Stage 7 work should make semantic phase-duration intent compile to
+  explicit runtime-expressible controls before another source attempt.
+
 ## Historical Or Stale Current-State Docs
 
 These docs remain useful as history, but should not be used as the live lane

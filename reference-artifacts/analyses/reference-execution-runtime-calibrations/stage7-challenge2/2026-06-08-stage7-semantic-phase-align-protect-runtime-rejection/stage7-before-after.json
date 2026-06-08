@@ -1,0 +1,1186 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage7-reference-path-before-after",
+  "generatedAt": "2026-06-08T14:48:46.585Z",
+  "generatedBy": "tools/harness/analyze-stage7-reference-path-before-after.js",
+  "commit": "42bae02e1",
+  "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
+  "stage": 7,
+  "challengeNumber": 2,
+  "sampleTimes": [
+    0.6,
+    2.4,
+    4.2,
+    6,
+    7.8,
+    9.6,
+    11.4,
+    13.2,
+    15,
+    16.8
+  ],
+  "media": {
+    "comparisonSheet": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-stage7-before-after.svg",
+    "beforeFramesDir": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/before",
+    "afterFramesDir": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/after"
+  },
+  "summary": {
+    "beforeLabel": "pre-promotion heuristic path-family layout",
+    "afterLabel": "current reference-path promoted runtime",
+    "beforeReferenceCoverage": 0,
+    "afterReferenceCoverage": 0.9,
+    "referenceCoverageLift": 0.9,
+    "beforePathFamilies": [
+      "cross-sweep",
+      "hook-arc"
+    ],
+    "afterPathFamilies": [
+      "cross-sweep",
+      "hook-arc"
+    ],
+    "afterReferenceTrackIds": [
+      "target-track-10",
+      "target-track-110",
+      "target-track-142",
+      "target-track-66",
+      "target-track-71"
+    ],
+    "read": "Stage 7 now preserves reference-path metadata across 5 target tracks and 90% of sampled challenge enemies, compared with 0% in the pre-promotion control. Use the contact sheet to review whether that metadata lift is visible as better authored motion; do not treat it as a solved challenge-stage conformance score.",
+    "playerMeaning": "The visible aim is a safer, more learnable bonus-stage route: enemies should feel like authored groups sweeping in, not appearing or bunching unpredictably.",
+    "processMeaning": "This artifact keeps the before/after proof close to the metric so future challenge promotions must show visible evidence, not only numerical candidate fit."
+  },
+  "before": {
+    "label": "before",
+    "initialSummary": {
+      "enemyCount": 40,
+      "referenceTrackedCount": 0,
+      "typeKeys": [
+        "bee",
+        "boss",
+        "but",
+        "rogue"
+      ],
+      "families": [
+        "classic",
+        "scorpion",
+        "stingray"
+      ],
+      "pathFamilies": [
+        "cross-sweep",
+        "hook-arc"
+      ],
+      "referenceTrackIds": [],
+      "xRange": 436,
+      "yRange": 57,
+      "minY": 34,
+      "maxY": 91
+    },
+    "aggregate": {
+      "sampleCount": 10,
+      "averageEnemyCount": 15.4,
+      "averageReferenceTrackedCount": 0,
+      "referenceCoverage": 0,
+      "maxXRange": 372,
+      "maxYRange": 334.88,
+      "typeKeys": [
+        "bee",
+        "boss",
+        "but",
+        "rogue"
+      ],
+      "families": [
+        "classic",
+        "scorpion",
+        "stingray"
+      ],
+      "pathFamilies": [
+        "cross-sweep",
+        "hook-arc"
+      ],
+      "referenceTrackIds": []
+    },
+    "frames": [
+      {
+        "t": 0.6,
+        "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/before/before-01-006ds.png",
+        "summary": {
+          "enemyCount": 36,
+          "referenceTrackedCount": 0,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "classic",
+            "scorpion",
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [],
+          "xRange": 372,
+          "yRange": 112.26,
+          "minY": 43.08,
+          "maxY": 155.34
+        }
+      },
+      {
+        "t": 2.4,
+        "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/before/before-02-024ds.png",
+        "summary": {
+          "enemyCount": 36,
+          "referenceTrackedCount": 0,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "classic",
+            "scorpion",
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [],
+          "xRange": 372,
+          "yRange": 123.83,
+          "minY": 38.08,
+          "maxY": 161.91
+        }
+      },
+      {
+        "t": 4.2,
+        "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/before/before-03-042ds.png",
+        "summary": {
+          "enemyCount": 33,
+          "referenceTrackedCount": 0,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "classic",
+            "scorpion",
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [],
+          "xRange": 372,
+          "yRange": 334.88,
+          "minY": 54.61,
+          "maxY": 389.49
+        }
+      },
+      {
+        "t": 6,
+        "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/before/before-04-060ds.png",
+        "summary": {
+          "enemyCount": 30,
+          "referenceTrackedCount": 0,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "scorpion",
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [],
+          "xRange": 293.83,
+          "yRange": 203.42,
+          "minY": 81.78,
+          "maxY": 285.2
+        }
+      },
+      {
+        "t": 7.8,
+        "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/before/before-05-078ds.png",
+        "summary": {
+          "enemyCount": 13,
+          "referenceTrackedCount": 0,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [],
+          "xRange": 229.9,
+          "yRange": 31.39,
+          "minY": 109.84,
+          "maxY": 141.23
+        }
+      },
+      {
+        "t": 9.6,
+        "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/before/before-06-096ds.png",
+        "summary": {
+          "enemyCount": 6,
+          "referenceTrackedCount": 0,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "hook-arc"
+          ],
+          "referenceTrackIds": [],
+          "xRange": 222.73,
+          "yRange": 84.82,
+          "minY": 296.9,
+          "maxY": 381.72
+        }
+      },
+      {
+        "t": 11.4,
+        "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/before/before-07-114ds.png",
+        "summary": {
+          "enemyCount": 0,
+          "referenceTrackedCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "referenceTrackIds": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
+        }
+      },
+      {
+        "t": 13.2,
+        "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/before/before-08-132ds.png",
+        "summary": {
+          "enemyCount": 0,
+          "referenceTrackedCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "referenceTrackIds": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
+        }
+      },
+      {
+        "t": 15,
+        "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/before/before-09-150ds.png",
+        "summary": {
+          "enemyCount": 0,
+          "referenceTrackedCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "referenceTrackIds": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
+        }
+      },
+      {
+        "t": 16.8,
+        "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/before/before-10-168ds.png",
+        "summary": {
+          "enemyCount": 0,
+          "referenceTrackedCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "referenceTrackIds": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
+        }
+      }
+    ],
+    "samples": [
+      {
+        "t": 0.6,
+        "summary": {
+          "enemyCount": 36,
+          "referenceTrackedCount": 0,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "classic",
+            "scorpion",
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [],
+          "xRange": 372,
+          "yRange": 112.26,
+          "minY": 43.08,
+          "maxY": 155.34
+        }
+      },
+      {
+        "t": 2.4,
+        "summary": {
+          "enemyCount": 36,
+          "referenceTrackedCount": 0,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "classic",
+            "scorpion",
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [],
+          "xRange": 372,
+          "yRange": 123.83,
+          "minY": 38.08,
+          "maxY": 161.91
+        }
+      },
+      {
+        "t": 4.2,
+        "summary": {
+          "enemyCount": 33,
+          "referenceTrackedCount": 0,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "classic",
+            "scorpion",
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [],
+          "xRange": 372,
+          "yRange": 334.88,
+          "minY": 54.61,
+          "maxY": 389.49
+        }
+      },
+      {
+        "t": 6,
+        "summary": {
+          "enemyCount": 30,
+          "referenceTrackedCount": 0,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "scorpion",
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [],
+          "xRange": 293.83,
+          "yRange": 203.42,
+          "minY": 81.78,
+          "maxY": 285.2
+        }
+      },
+      {
+        "t": 7.8,
+        "summary": {
+          "enemyCount": 13,
+          "referenceTrackedCount": 0,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [],
+          "xRange": 229.9,
+          "yRange": 31.39,
+          "minY": 109.84,
+          "maxY": 141.23
+        }
+      },
+      {
+        "t": 9.6,
+        "summary": {
+          "enemyCount": 6,
+          "referenceTrackedCount": 0,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "hook-arc"
+          ],
+          "referenceTrackIds": [],
+          "xRange": 222.73,
+          "yRange": 84.82,
+          "minY": 296.9,
+          "maxY": 381.72
+        }
+      },
+      {
+        "t": 11.4,
+        "summary": {
+          "enemyCount": 0,
+          "referenceTrackedCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "referenceTrackIds": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
+        }
+      },
+      {
+        "t": 13.2,
+        "summary": {
+          "enemyCount": 0,
+          "referenceTrackedCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "referenceTrackIds": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
+        }
+      },
+      {
+        "t": 15,
+        "summary": {
+          "enemyCount": 0,
+          "referenceTrackedCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "referenceTrackIds": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
+        }
+      },
+      {
+        "t": 16.8,
+        "summary": {
+          "enemyCount": 0,
+          "referenceTrackedCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "referenceTrackIds": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
+        }
+      }
+    ]
+  },
+  "after": {
+    "label": "after",
+    "initialSummary": {
+      "enemyCount": 40,
+      "referenceTrackedCount": 40,
+      "typeKeys": [
+        "bee",
+        "boss",
+        "but",
+        "rogue"
+      ],
+      "families": [
+        "classic",
+        "scorpion",
+        "stingray"
+      ],
+      "pathFamilies": [
+        "cross-sweep",
+        "hook-arc"
+      ],
+      "referenceTrackIds": [
+        "target-track-10",
+        "target-track-110",
+        "target-track-142",
+        "target-track-66",
+        "target-track-71"
+      ],
+      "xRange": 436,
+      "yRange": 57,
+      "minY": 34,
+      "maxY": 91
+    },
+    "aggregate": {
+      "sampleCount": 10,
+      "averageEnemyCount": 19.2,
+      "averageReferenceTrackedCount": 19.2,
+      "referenceCoverage": 0.9,
+      "maxXRange": 372,
+      "maxYRange": 329.46,
+      "typeKeys": [
+        "bee",
+        "boss",
+        "but",
+        "rogue"
+      ],
+      "families": [
+        "classic",
+        "scorpion",
+        "stingray"
+      ],
+      "pathFamilies": [
+        "cross-sweep",
+        "hook-arc"
+      ],
+      "referenceTrackIds": [
+        "target-track-10",
+        "target-track-110",
+        "target-track-142",
+        "target-track-66",
+        "target-track-71"
+      ]
+    },
+    "frames": [
+      {
+        "t": 0.6,
+        "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/after/after-01-006ds.png",
+        "summary": {
+          "enemyCount": 40,
+          "referenceTrackedCount": 40,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "classic",
+            "scorpion",
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [
+            "target-track-10",
+            "target-track-110",
+            "target-track-142",
+            "target-track-66",
+            "target-track-71"
+          ],
+          "xRange": 372,
+          "yRange": 146.48,
+          "minY": 57.18,
+          "maxY": 203.66
+        }
+      },
+      {
+        "t": 2.4,
+        "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/after/after-02-024ds.png",
+        "summary": {
+          "enemyCount": 40,
+          "referenceTrackedCount": 40,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "classic",
+            "scorpion",
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [
+            "target-track-10",
+            "target-track-110",
+            "target-track-142",
+            "target-track-66",
+            "target-track-71"
+          ],
+          "xRange": 372,
+          "yRange": 259.9,
+          "minY": 57.18,
+          "maxY": 317.08
+        }
+      },
+      {
+        "t": 4.2,
+        "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/after/after-03-042ds.png",
+        "summary": {
+          "enemyCount": 32,
+          "referenceTrackedCount": 32,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "scorpion",
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [
+            "target-track-110",
+            "target-track-142",
+            "target-track-66",
+            "target-track-71"
+          ],
+          "xRange": 372,
+          "yRange": 222.47,
+          "minY": 57.18,
+          "maxY": 279.65
+        }
+      },
+      {
+        "t": 6,
+        "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/after/after-04-060ds.png",
+        "summary": {
+          "enemyCount": 28,
+          "referenceTrackedCount": 28,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "scorpion",
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [
+            "target-track-110",
+            "target-track-142",
+            "target-track-66",
+            "target-track-71"
+          ],
+          "xRange": 372,
+          "yRange": 329.46,
+          "minY": 57.18,
+          "maxY": 386.64
+        }
+      },
+      {
+        "t": 7.8,
+        "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/after/after-05-078ds.png",
+        "summary": {
+          "enemyCount": 14,
+          "referenceTrackedCount": 14,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [
+            "target-track-110",
+            "target-track-142"
+          ],
+          "xRange": 372,
+          "yRange": 95.98,
+          "minY": 57.18,
+          "maxY": 153.16
+        }
+      },
+      {
+        "t": 9.6,
+        "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/after/after-06-096ds.png",
+        "summary": {
+          "enemyCount": 14,
+          "referenceTrackedCount": 14,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [
+            "target-track-110",
+            "target-track-142"
+          ],
+          "xRange": 372,
+          "yRange": 136.85,
+          "minY": 57.18,
+          "maxY": 194.03
+        }
+      },
+      {
+        "t": 11.4,
+        "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/after/after-07-114ds.png",
+        "summary": {
+          "enemyCount": 8,
+          "referenceTrackedCount": 8,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "hook-arc"
+          ],
+          "referenceTrackIds": [
+            "target-track-142"
+          ],
+          "xRange": 372,
+          "yRange": 22.46,
+          "minY": 57.18,
+          "maxY": 79.64
+        }
+      },
+      {
+        "t": 13.2,
+        "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/after/after-08-132ds.png",
+        "summary": {
+          "enemyCount": 8,
+          "referenceTrackedCount": 8,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "hook-arc"
+          ],
+          "referenceTrackIds": [
+            "target-track-142"
+          ],
+          "xRange": 369,
+          "yRange": 19.44,
+          "minY": 59.68,
+          "maxY": 79.12
+        }
+      },
+      {
+        "t": 15,
+        "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/after/after-09-150ds.png",
+        "summary": {
+          "enemyCount": 8,
+          "referenceTrackedCount": 8,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "hook-arc"
+          ],
+          "referenceTrackIds": [
+            "target-track-142"
+          ],
+          "xRange": 80.57,
+          "yRange": 25.86,
+          "minY": 36.51,
+          "maxY": 62.37
+        }
+      },
+      {
+        "t": 16.8,
+        "path": "reference-artifacts/analyses/stage7-reference-path-before-after/latest-frames/after/after-10-168ds.png",
+        "summary": {
+          "enemyCount": 0,
+          "referenceTrackedCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "referenceTrackIds": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
+        }
+      }
+    ],
+    "samples": [
+      {
+        "t": 0.6,
+        "summary": {
+          "enemyCount": 40,
+          "referenceTrackedCount": 40,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "classic",
+            "scorpion",
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [
+            "target-track-10",
+            "target-track-110",
+            "target-track-142",
+            "target-track-66",
+            "target-track-71"
+          ],
+          "xRange": 372,
+          "yRange": 146.48,
+          "minY": 57.18,
+          "maxY": 203.66
+        }
+      },
+      {
+        "t": 2.4,
+        "summary": {
+          "enemyCount": 40,
+          "referenceTrackedCount": 40,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "classic",
+            "scorpion",
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [
+            "target-track-10",
+            "target-track-110",
+            "target-track-142",
+            "target-track-66",
+            "target-track-71"
+          ],
+          "xRange": 372,
+          "yRange": 259.9,
+          "minY": 57.18,
+          "maxY": 317.08
+        }
+      },
+      {
+        "t": 4.2,
+        "summary": {
+          "enemyCount": 32,
+          "referenceTrackedCount": 32,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "scorpion",
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [
+            "target-track-110",
+            "target-track-142",
+            "target-track-66",
+            "target-track-71"
+          ],
+          "xRange": 372,
+          "yRange": 222.47,
+          "minY": 57.18,
+          "maxY": 279.65
+        }
+      },
+      {
+        "t": 6,
+        "summary": {
+          "enemyCount": 28,
+          "referenceTrackedCount": 28,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "scorpion",
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [
+            "target-track-110",
+            "target-track-142",
+            "target-track-66",
+            "target-track-71"
+          ],
+          "xRange": 372,
+          "yRange": 329.46,
+          "minY": 57.18,
+          "maxY": 386.64
+        }
+      },
+      {
+        "t": 7.8,
+        "summary": {
+          "enemyCount": 14,
+          "referenceTrackedCount": 14,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [
+            "target-track-110",
+            "target-track-142"
+          ],
+          "xRange": 372,
+          "yRange": 95.98,
+          "minY": 57.18,
+          "maxY": 153.16
+        }
+      },
+      {
+        "t": 9.6,
+        "summary": {
+          "enemyCount": 14,
+          "referenceTrackedCount": 14,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "cross-sweep",
+            "hook-arc"
+          ],
+          "referenceTrackIds": [
+            "target-track-110",
+            "target-track-142"
+          ],
+          "xRange": 372,
+          "yRange": 136.85,
+          "minY": 57.18,
+          "maxY": 194.03
+        }
+      },
+      {
+        "t": 11.4,
+        "summary": {
+          "enemyCount": 8,
+          "referenceTrackedCount": 8,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "hook-arc"
+          ],
+          "referenceTrackIds": [
+            "target-track-142"
+          ],
+          "xRange": 372,
+          "yRange": 22.46,
+          "minY": 57.18,
+          "maxY": 79.64
+        }
+      },
+      {
+        "t": 13.2,
+        "summary": {
+          "enemyCount": 8,
+          "referenceTrackedCount": 8,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "hook-arc"
+          ],
+          "referenceTrackIds": [
+            "target-track-142"
+          ],
+          "xRange": 369,
+          "yRange": 19.44,
+          "minY": 59.68,
+          "maxY": 79.12
+        }
+      },
+      {
+        "t": 15,
+        "summary": {
+          "enemyCount": 8,
+          "referenceTrackedCount": 8,
+          "typeKeys": [
+            "bee",
+            "boss",
+            "but",
+            "rogue"
+          ],
+          "families": [
+            "stingray"
+          ],
+          "pathFamilies": [
+            "hook-arc"
+          ],
+          "referenceTrackIds": [
+            "target-track-142"
+          ],
+          "xRange": 80.57,
+          "yRange": 25.86,
+          "minY": 36.51,
+          "maxY": 62.37
+        }
+      },
+      {
+        "t": 16.8,
+        "summary": {
+          "enemyCount": 0,
+          "referenceTrackedCount": 0,
+          "typeKeys": [],
+          "families": [],
+          "pathFamilies": [],
+          "referenceTrackIds": [],
+          "xRange": 0,
+          "yRange": 0,
+          "minY": null,
+          "maxY": null
+        }
+      }
+    ]
+  },
+  "nextSteps": [
+    "Improve late-challenge reference identity scoring for Stages 19 and 27 so the sweep can distinguish true late-stage novelty from early-stage lookalikes.",
+    "Attack sprite and alien graphical conformance against the cleaned target crop atlas and runtime sprite sizing checks.",
+    "Promote the next challenge only after target-video object fit, expected-label identity, safety, shot opportunity, and visible contact-sheet review all clear.",
+    "Prepare a release-authority handoff prompt with this evidence, the exact verification commands, and beta push constraints."
+  ]
+}
