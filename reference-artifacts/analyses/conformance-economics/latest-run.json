@@ -1,15 +1,17 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-06-08T13-42-07-421Z-53662",
-  "startedAt": "2026-06-08T13:42:07.421Z",
-  "endedAt": "2026-06-08T13:42:07.686Z",
+  "id": "2026-06-08T13-56-36-602Z-62000",
+  "startedAt": "2026-06-08T13:56:36.602Z",
+  "endedAt": "2026-06-08T13:56:36.877Z",
   "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
-  "commit": "089f16b0f",
+  "commit": "273b71984",
   "command": [
     "npm",
     "run",
-    "harness:analyze:reference-execution-description"
+    "harness:analyze:stage7-reference-execution-trial",
+    "--",
+    "--candidate=reference-artifacts/ingestion/reference-execution-candidate-trials/stage7-baseline-control-0.1.json"
   ],
   "axes": [
     "challenge-stage"
@@ -17,13 +19,13 @@
   "resources": [
     "cpu"
   ],
-  "notes": "Stage 7 reference execution after rejected runtime candidate",
+  "notes": "Stage 7 reference execution candidate-trial baseline control",
   "measurement": {
-    "wallSeconds": 0.265,
-    "timeRealSeconds": 0.25,
+    "wallSeconds": 0.275,
+    "timeRealSeconds": 0.26,
     "timeUserSeconds": 0.17,
-    "timeSystemSeconds": 0.06,
-    "cpuSeconds": 0.23,
+    "timeSystemSeconds": 0.05,
+    "cpuSeconds": 0.22,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -45,8 +47,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 2155067700,
-    "artifactBytesAfter": 2155089180,
-    "artifactBytesDelta": 21480
+    "artifactBytesBefore": 2155098073,
+    "artifactBytesAfter": 2155147949,
+    "artifactBytesDelta": 49876
   }
 }

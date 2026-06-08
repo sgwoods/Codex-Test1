@@ -300,12 +300,18 @@ Current conformance read:
   keeper is accepted, but it is not beta justification. The tightened pilot
   now separates reference precision, runtime candidate readiness, and runtime
   promotion readiness; the restored baseline is candidate-ready but not
-  promotion-ready, with nine promotion blockers. The next quality move is a
-  non-overwriting Stage 7 candidate-trial path that evaluates semantic
-  executable-intent variants against the reference execution description
-  before source edits. Only promote a runtime change if a trial predicts
-  focused strict improvement while preserving group 4, group 5,
-  spacing/readability, scoreable routes, and no-shot/no-loss challenge safety.
+  promotion-ready, with nine promotion blockers. The follow-on non-overwriting
+  Stage 7 candidate-trial path is now available:
+  `reference-artifacts/ingestion/reference-execution-candidate-trials/README.md`,
+  `npm run harness:analyze:stage7-reference-execution-trial`, and
+  `npm run harness:check:stage7-reference-execution-trial`. The baseline
+  control trial reproduced Stage 7 object-track fit at `4.7/10` and coverage
+  `0.503`, then correctly rejected itself with five blockers: no score lift,
+  no group 1 lift, and canonical family misses in groups 2, 4, and 5. The next
+  quality move is to feed this path one semantic executable-intent candidate
+  that predicts focused strict improvement while preserving group 4, group 5,
+  spacing/readability, scoreable routes, and no-shot/no-loss challenge safety;
+  only then should a runtime source edit be promoted for before/after evidence.
 - challenge-stage grammar is now materially ahead of runtime implementation:
   the first-five challenge work has `25/25` reference-backed group contracts
   and `8.6/10` control readiness, but runtime promotion is still blocked by
