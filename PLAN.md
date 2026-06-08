@@ -215,12 +215,13 @@ from the roadmap.
    persona/watch, Guardians evidence, portability, and issue-hygiene branches
 5. keep hosted `/dev` available for the next coherent review bundle instead of
    using it as a casual mirror of `main`
-6. attack Aurora challenge-stage runtime quality first: the grammar and
-   reference-backed contracts are ready enough, but the runtime challenge
-   stages still score around `4.3/10` and need visible movement/readability
-   lift; Stage 7 and Stage 11 now expose runtime contract groups, so the next
-   targeted lift should align Stage 7 waves 1, 3, and 4 with their declared
-   path-family contract before broad subjective tuning
+6. attack Aurora challenge-stage runtime quality first: Stage 7 and Stage 11
+   now expose runtime contract groups, and Stage 7's live wave path-family
+   order now matches its declared target contract. The remaining `4.3/10`
+   challenge-stage score gap is visible movement/readability, especially
+   Stage 7 object-track fit: lower path-length mismatch, reduce lower-field
+   overstay on the first groups, and sharpen the late boss-led loop while
+   preserving the new contract-order and spacing guards.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth
@@ -266,12 +267,13 @@ Current conformance read:
   a top user-experience target
 - dedicated Aurora challenge set-piece conformance remains a high-priority
   gap at `4.3/10` average current score, `4.4/10` movement,
-  `4.5/10` graphics, `3.9/10` novelty, and no release-ready challenge
-  contracts
+  `4.5/10` graphics, and `3.9/10` novelty. Stage 7 now has a target-contract
+  fit of `7.2/10`, with runtime and declared path-family order fit both at
+  `1.0`, but its direct Galaga object-track fit is still only `4.7/10`.
 - challenge-stage grammar is now materially ahead of runtime implementation:
   the first-five challenge work has `25/25` reference-backed group contracts
   and `8.6/10` control readiness, but runtime promotion is still blocked by
-  visual-presence, phase/order, and scoreable-window constraints
+  visual-presence, object-track timing/shape, and scoreable-window constraints
 - Galaxy Guardians longer-surface/persona review reads `7.0/10`, with
   stage-arc pressure at `7.9/10`, stage presentation at `7.4/10`, persona
   utility at `6.5/10`, midrun survivability at `6.0/10`, and stage-band

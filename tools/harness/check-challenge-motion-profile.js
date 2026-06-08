@@ -132,20 +132,26 @@ function validateChallengeContractGroups(state, expected){
   }));
   const pathOrder = contractReads.map(group => group.pathFamily);
   const familyOrder = contractReads.map(group => group.expectedFamilies[0] || '');
+  const layoutPathOrder = Array.isArray(layout.groupPathFamilies) ? layout.groupPathFamilies : [];
   const pathMismatches = pathOrder
     .map((pathFamily, index) => ({ index, pathFamily, expected: expected.pathFamilies[index] }))
+    .filter(read => read.pathFamily !== read.expected);
+  const layoutPathMismatches = expected.pathFamilies
+    .map((pathFamily, index) => ({ index, pathFamily: layoutPathOrder[index] || '', expected: pathFamily }))
     .filter(read => read.pathFamily !== read.expected);
   const familyMismatches = familyOrder
     .map((family, index) => ({ index, family, expected: expected.families[index] }))
     .filter(read => read.family !== read.expected);
-  if(pathMismatches.length || familyMismatches.length){
+  if(pathMismatches.length || layoutPathMismatches.length || familyMismatches.length){
     fail(`stage ${state?.stage || expected.stage || '(unknown)'} challenge contract group order drifted from target artifact intent`, {
       layoutId: layout.id,
       pathOrder,
       expectedPathOrder: expected.pathFamilies,
+      layoutPathOrder,
       familyOrder,
       expectedFamilyOrder: expected.families,
       pathMismatches,
+      layoutPathMismatches,
       familyMismatches,
       contractReads
     });
@@ -165,6 +171,22 @@ function validateChallengeContractGroups(state, expected){
         wave: enemy.wave,
         lane: enemy.lane,
         contractPathFamily: enemy.contractGroup?.pathFamily || '',
+        expectedPathFamily: contractGroups[enemy.wave || 0]?.pathFamily || ''
+      }))
+    });
+  }
+  const runtimeWrong = enemies.filter(enemy => {
+    const expectedGroup = contractGroups[enemy.wave || 0];
+    return expectedGroup && enemy.pathFamily !== expectedGroup.pathFamily;
+  });
+  if(runtimeWrong.length){
+    fail(`stage ${state?.stage || expected.stage || '(unknown)'} challenge runtime path families must match declared target-contract groups`, {
+      layoutId: layout.id,
+      wrong: runtimeWrong.map(enemy => ({
+        id: enemy.id,
+        wave: enemy.wave,
+        lane: enemy.lane,
+        pathFamily: enemy.pathFamily || '',
         expectedPathFamily: contractGroups[enemy.wave || 0]?.pathFamily || ''
       }))
     });

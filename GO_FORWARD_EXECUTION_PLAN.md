@@ -82,9 +82,9 @@ do not outrun conformance or public safety:
 The immediate next work is no longer integration cleanup. It is to turn the
 new evidence into runtime quality:
 
-- Aurora challenge stages: use the reference-backed grammar and movement
-  primitives to build a runtime-safe candidate that improves target fit without
-  losing visual presence or scoreable routes.
+- Aurora challenge stages: use the reference-backed grammar, runtime contract
+  groups, and object-track fit reads to build runtime-safe candidates that
+  improve target fit without losing visual presence or scoreable routes.
 - Galaxy Guardians: move the current preview from strong documentation/evidence
   toward a real v1 slice by tightening opening presentation, score/result
   identity, replay/video readiness, Watch/Rival/persona parity, and platform
@@ -95,10 +95,11 @@ new evidence into runtime quality:
   feedback analysis, and conformance economics so future games inherit the
   process.
 
-The current tracked challenge-stage gap remains that the stages are safe but not
-yet spectacular enough: movement grammar, alien novelty, stage-specific target
-contracts, and active sprite-motion comparison still need more direct reference
-windows.
+The current tracked challenge-stage gap remains that the stages are safe and
+now better described by target contracts, but not yet spectacular enough:
+Stage 7's declared and live path-family order now agree, while object-track
+shape, timing, alien novelty, and active sprite-motion comparison still need
+more direct reference-window promotion.
 
 ## Ingestion Automation Carry-Forward
 
@@ -300,10 +301,12 @@ Practical standard:
   highest-risk cue family while preserving `9/9` cue alignment
 - the dedicated challenge-stage conformance score remains around `4.3/10`;
   Stage 7 and Stage 11 now expose runtime contract groups that separate
-  declared target intent from live path execution. The next pass should use
-  those contract reads to align Stage 7 waves 1, 3, and 4 with their declared
-  path-family order, then add high-bonus readability probes and frame-level
-  temporal motion windows before claiming a broad challenge-stage lift
+  declared target intent from live path execution, and Stage 7's live
+  path-family order now matches the declared contract. The next pass should
+  focus on explicit Stage 7 object-track quality: reduce path-length mismatch
+  in groups 1, 4, and 5, reduce lower-field overstay in early groups, sharpen
+  the late boss-led loop, and add high-bonus readability/temporal-window
+  probes before claiming a broad challenge-stage lift
 - level arc and encounter shape is now a first-class quality category at
   `8.8/10`; this should be treated as a high-priority `1.4` workstream because
   it measures whether the run develops Galaga-like stage shape instead of
