@@ -170,6 +170,8 @@ function markdown(report){
   const sourceRows = report.sources.map(source => `| ${source.sourceId} | ${source.role} | ${source.order.join(', ')} | ${source.currentUse} |`).join('\n');
   const riskRows = report.migrationRisks.map(row => `| ${row.direction} | ${row.risk} | ${row.mitigation} |`).join('\n');
   const missingRows = report.missingEvidence.map(row => `| ${row.need} | ${row.reason} |`).join('\n');
+  const debtRows = report.authorityDebt.gapClassification.map(row => `| ${row.gapType} | ${row.status} | ${row.read} |`).join('\n');
+  const migrationRows = report.authorityDebt.evidenceRequiredToMigrate.map(row => `| ${row.need} | ${row.requiredBecause} | ${row.acceptanceRead} |`).join('\n');
   return `# Stage 7 Path-Family Authority Decision
 
 Generated: ${report.generatedAt}
@@ -187,6 +189,26 @@ Measured intent order: ${report.measuredIntentOrder.join(', ')}
 ## Read
 
 ${report.decision.read}
+
+## Authority Debt
+
+Promotion authority: ${report.authorityDebt.currentSourcePromotionAuthority.order.join(', ')}
+
+Target conformance authority: ${report.authorityDebt.targetConformanceAuthority.order.join(', ')}
+
+${report.authorityDebt.separationPrinciple}
+
+Why live authority blocks source promotion today: ${report.authorityDebt.whyLiveAuthorityBlocksSourcePromotionToday}
+
+Current debt classification: ${report.authorityDebt.currentClassification}
+
+| Gap | Status | Read |
+| --- | --- | --- |
+${debtRows}
+
+| Migration evidence required | Required because | Acceptance read |
+| --- | --- | --- |
+${migrationRows}
 
 ## Sources
 
@@ -251,6 +273,62 @@ function main(){
     liveClusterAgrees,
     clustersAgree,
     sources,
+    authorityDebt: {
+      debtId: 'stage7-path-family-authority-debt-0.1',
+      currentSourcePromotionAuthority: {
+        authorityType: 'promotion-authority',
+        selectedAuthority: 'live-promotion-gate-runtime-source',
+        order: liveGateOrder,
+        sourceIds: sources
+          .filter(source => ['live-promotion-gate', 'live-runtime-source'].includes(source.role))
+          .map(source => source.sourceId),
+        read: 'This order is the only order allowed to authorize a runtime source candidate today.'
+      },
+      targetConformanceAuthority: {
+        authorityType: 'target-conformance-authority',
+        selectedAuthority: 'measured-reference-intent',
+        order: measuredIntentOrder,
+        sourceIds: measuredCluster.map(source => source.sourceId),
+        read: 'This order remains the measured reference direction Aurora should investigate, not the current promotion gate.'
+      },
+      separationPrinciple: 'Do not collapse current promotion authority into final target conformance truth: live gates decide whether a source candidate may be attempted today, while RED/setpiece evidence records where the game may need to migrate after stronger proof.',
+      whyLiveAuthorityBlocksSourcePromotionToday: 'The rejected semantic runtime projection matched the RED/setpiece measured-intent order but did not improve actual browser-runtime object-track fit and tripped the live motion/profile guard. Until a migration proof preserves group 4, group 5, spacing/readability, scoreable routes, and no-shot/no-loss safety, source candidates must satisfy the live gate/runtime order.',
+      evidenceRequiredToMigrate: [
+        {
+          need: 'group-level target-track re-review for Stage 7 groups 2, 4, and 5',
+          requiredBecause: 'These groups are exactly where RED/setpiece and live authority disagree.',
+          acceptanceRead: 'A reviewer can explain whether each disagreement is a stale live gate, a semantic label mismatch, or a true runtime implementation gap.'
+        },
+        {
+          need: 'non-overwriting measured-intent migration proof',
+          requiredBecause: 'The project needs evidence that the measured-intent order improves target fit without changing source.',
+          acceptanceRead: 'Browser capture shows improved object-track fit for the measured-intent order while preserving group 4/group 5, spacing/readability, scoreable routes, and challenge safety.'
+        },
+        {
+          need: 'source-candidate proof under migrated authority',
+          requiredBecause: 'Changing gates alone is not a player-facing improvement.',
+          acceptanceRead: 'One runtime source candidate confirms predicted lift with before/after visual evidence and strict challenge-stage checks.'
+        }
+      ],
+      gapClassification: [
+        {
+          gapType: 'runtime-implementation-gap',
+          status: 'active',
+          read: 'The current runtime does not yet prove the RED/setpiece measured-intent order can be expressed with a browser-visible improvement.'
+        },
+        {
+          gapType: 'live-gate-staleness-gap',
+          status: 'possible-unproven',
+          read: 'The live gates may be stale relative to measured reference evidence, but the rejected source attempt did not provide enough evidence to migrate them.'
+        },
+        {
+          gapType: 'target-evidence-gap',
+          status: 'possible-unproven',
+          read: 'RED and setpiece agree, but groups 2, 4, and 5 still need direct target-track re-review before measured intent can become promotion authority.'
+        }
+      ],
+      currentClassification: 'runtime-implementation-gap with possible live-gate staleness and target-evidence debt'
+    },
     decision: {
       selectedAuthority: 'live-promotion-gate-runtime-source',
       authorityResolvedForSourceReady: true,

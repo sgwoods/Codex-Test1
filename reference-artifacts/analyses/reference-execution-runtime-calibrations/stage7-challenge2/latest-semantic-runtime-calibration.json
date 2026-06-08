@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "stage7-semantic-runtime-calibration",
-  "generatedAt": "2026-06-08T16:27:47.605Z",
+  "generatedAt": "2026-06-08T16:55:38.635Z",
   "generatedBy": "tools/harness/analyze-stage7-semantic-runtime-calibration.js",
-  "commit": "d4de278ad",
+  "commit": "3b250dc1a",
   "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
   "releaseFamily": "1.4.1",
   "gameKey": "aurora-galactica",
@@ -16,8 +16,8 @@
   "sourceArtifacts": {
     "calibrationDirectory": "reference-artifacts/analyses/reference-execution-runtime-calibrations/stage7-challenge2/2026-06-08-stage7-semantic-phase-align-protect-runtime-rejection",
     "semanticBatch": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/latest-batch.json",
-    "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T16-27-24-d4de278ad/candidates/stage7-semantic-phase-align-protect-0.1.json",
-    "candidateTrial": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T16-27-24-d4de278ad/trials/stage7-semantic-phase-align-protect-0.1.json",
+    "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T16-55-32-3b250dc1a/candidates/stage7-semantic-phase-align-protect-0.1.json",
+    "candidateTrial": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T16-55-32-3b250dc1a/trials/stage7-semantic-phase-align-protect-0.1.json",
     "actualRuntimeConformance": "reference-artifacts/analyses/challenge-stage-conformance/2026-06-08-42bae02e1/report.json",
     "referenceExecutionDescription": "reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage7-challenge2-0.1.json",
     "semanticVocabulary": "reference-artifacts/ingestion/reference-execution-candidate-trials/stage7-semantic-vocabulary-0.1.json"
@@ -42,9 +42,9 @@
       },
       {
         "metric": "totalObjectTrackCoverage",
-        "predicted": 0.541,
+        "predicted": 0.537,
         "actual": 0.503,
-        "delta": -0.038,
+        "delta": -0.034,
         "read": "coverage did not realize the predicted lift"
       },
       {
@@ -70,8 +70,8 @@
       },
       {
         "metric": "canonicalPathFamilyStatus",
-        "predicted": 1,
-        "actual": 0,
+        "predicted": 0,
+        "actual": 1,
         "delta": null,
         "read": "canonical reference-execution match did not imply live motion/profile gate match"
       }
@@ -94,16 +94,16 @@
     ],
     "candidateProjectedOrder": [
       "cross-sweep",
-      "hook-arc",
-      "hook-arc",
       "cross-sweep",
-      "hook-arc"
+      "hook-arc",
+      "hook-arc",
+      "boss-led-loop"
     ],
     "measuredIntentAgrees": true,
     "liveGatesAgree": true,
     "measuredIntentMatchesLiveGate": false,
-    "candidateMatchesMeasuredIntent": true,
-    "candidateMatchesLiveGate": false,
+    "candidateMatchesMeasuredIntent": false,
+    "candidateMatchesLiveGate": true,
     "canonicalForRuntimeCandidateGates": "Use the live promotion gates and restored runtime source as candidate gate authority until the project explicitly migrates them to the measured reference-execution/setpiece order.",
     "staleOrDiagnostic": [
       {
@@ -147,10 +147,10 @@
         "role": "candidate-projection",
         "order": [
           "cross-sweep",
-          "hook-arc",
-          "hook-arc",
           "cross-sweep",
-          "hook-arc"
+          "hook-arc",
+          "hook-arc",
+          "boss-led-loop"
         ],
         "canonicality": "candidate attempted runtime projection"
       },
@@ -218,27 +218,6 @@
   },
   "runtimeExpressibility": [
     {
-      "classId": "canonical-family-alignment",
-      "sourceReadySupported": true,
-      "sourceReadyRole": "runtime-transform",
-      "sourceFields": [
-        "src/js/13-aurora-game-pack.js Stage 7 groupPathFamilies",
-        "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS pathFamilyHint",
-        "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_CONTRACT_GROUPS pathFamily",
-        "reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json Stage 7 groups pathFamily"
-      ],
-      "generatedRuntimeControls": [],
-      "runtimeConsumer": "spawnChallenge resolves each enemy pathFamily from motionSpecGroup.pathFamilyHint before layout.groupPathFamilies; check-challenge-motion-profile validates runtime, layout, and contract order.",
-      "predictionLimits": "This is label and gate alignment only. It must not claim object-track score lift unless paired with a runtime-expressible movement transform.",
-      "requiresCompiledRuntimeControls": false,
-      "requiresProofArtifact": null,
-      "remainingCompilerGap": null,
-      "proofHarnesses": [
-        "npm run harness:check:challenge-motion-profile",
-        "npm run harness:analyze:challenge-stage-conformance"
-      ]
-    },
-    {
       "classId": "phase-duration-rebalance",
       "sourceReadySupported": true,
       "sourceReadyRole": "runtime-transform",
@@ -278,7 +257,7 @@
       "predictionLimits": "The trial score can improve by assigning visible windows directly. Source readiness requires compiledRuntimeControls plus proof that the emitted controls produce browser-visible timing/path movement.",
       "requiresCompiledRuntimeControls": true,
       "requiresProofArtifact": "reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-phase-duration-proof.json",
-      "remainingCompilerGap": "Current generated candidates must emit compiledRuntimeControls and cite the proof artifact; visibleStartS/visibleEndS alone remains analysis-only.",
+      "remainingCompilerGap": "Generated candidates now must emit compiledRuntimeControls and cite the proof artifact. Source readiness remains blocked until the proof passes the motion/profile proxy; visibleStartS/visibleEndS alone remains analysis-only.",
       "proofHarnesses": [
         "npm run harness:analyze:stage7-phase-duration-expressibility",
         "npm run harness:check:stage7-phase-duration-expressibility",
@@ -320,14 +299,9 @@
   ],
   "overpredictedTransforms": [
     {
-      "classId": "canonical-family-alignment",
-      "overpredicted": true,
-      "read": "Path-family labels transferred while applied, but label alignment alone did not move object-track score and conflicted with live motion/profile order."
-    },
-    {
       "classId": "phase-duration-rebalance",
       "overpredicted": true,
-      "read": "Predicted lift came from visibleStartS/visibleEndS trial vectors; the semantic candidate did not emit compiledRuntimeControls or cite guard-safe browser proof."
+      "read": "The rejected runtime attempt did not transfer predicted phase-window lift into actual object-track movement. Current compiler output must use compiledRuntimeControls and passing proof before another source attempt."
     },
     {
       "classId": "preserve-scoreable-window",
@@ -343,7 +317,7 @@
   "likelyCauses": [
     {
       "cause": "runtime-expressibility",
-      "read": "phase-duration-rebalance emitted visible windows but no compiledRuntimeControls or cited proof artifact."
+      "read": "The rejected source attempt overpredicted phase-window transfer. New phase-duration compiler controls still require a passing motion/profile-safe proof before source promotion."
     },
     {
       "cause": "stale-or-unreconciled-target-artifact",
@@ -362,6 +336,6 @@
     "runtimeCandidateAllowed": false,
     "sourceReadyGatePass": false,
     "nextRecommendation": "Do not try another Stage 7 runtime candidate. Keep source-ready path-family authority on the live gates/runtime source, then update the semantic generator so phase-duration intent emits compiledRuntimeControls and only passes when the proof artifact confirms browser-visible effect plus motion/profile guard safety.",
-    "remainingCompilerGap": "phase-duration-rebalance now has a runtime-consumed control contract, but generated candidates must emit compiledRuntimeControls and cite the phase-duration expressibility proof instead of visibleStartS/visibleEndS trial vectors."
+    "remainingCompilerGap": "phase-duration-rebalance now emits runtime-consumed compiled controls, but source promotion remains blocked until the proof passes the motion/profile proxy. group1 path-length compression and lower-field overstay reduction remain analysis-only until browser transfer proofs exist."
   }
 }

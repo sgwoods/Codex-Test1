@@ -230,9 +230,53 @@ function descriptionByGroup(description){
   return new Map((description.groups || []).map(group => [+group.groupIndex, group]));
 }
 
+function classControlKey(classId){
+  return String(classId || '').replace(/-([a-z])/g, (_match, letter) => letter.toUpperCase());
+}
+
+function mergeControlCollections(groups = []){
+  const compiled = {};
+  const analysisOnly = {};
+  for(const group of groups){
+    for(const [key, value] of Object.entries(group.compiledRuntimeControls || {})){
+      if(!compiled[key]) compiled[key] = [];
+      compiled[key].push(value);
+    }
+    for(const [key, value] of Object.entries(group.analysisCompilerMapping || {})){
+      if(!analysisOnly[key]) analysisOnly[key] = [];
+      analysisOnly[key].push(value);
+    }
+  }
+  return {
+    compiledRuntimeControls: Object.keys(compiled).length ? compiled : null,
+    analysisCompilerMappings: Object.keys(analysisOnly).length ? analysisOnly : null
+  };
+}
+
+function livePathForGroup(truthAlignment, descriptionGroup){
+  const index = (+descriptionGroup.groupIndex || 0) - 1;
+  return truthAlignment?.liveGateCanonicalOrder?.[index]
+    || descriptionGroup.semanticPathFamily
+    || descriptionGroup.canonicalComparisonPathFamily;
+}
+
+function targetDuration(target = {}){
+  if(!Number.isFinite(+target.visibleStartS) || !Number.isFinite(+target.visibleEndS)) return null;
+  return Math.max(0.05, +target.visibleEndS - +target.visibleStartS);
+}
+
+function lowerRuntimeControlsForShare(lowerFieldShare){
+  const lower = clamp(+lowerFieldShare || 0);
+  return {
+    lowerFieldBias: Math.round(clamp((lower - 0.34) / 0.58) * 188),
+    yOffset: Math.round(clamp(lower - 0.45) * 156)
+  };
+}
+
 function templateCandidate({ candidateId, classes, vocabulary, targetGroups, meaning, expectedMetricMovement, generatedLowLevelControls, why, groups }){
   const control = readJson(DEFAULT_CANDIDATE);
   const specs = classes.map(classId => classSpec(vocabulary, classId));
+  const controlCollections = mergeControlCollections(groups);
   return {
     schemaVersion: 1,
     artifactType: 'stage7-reference-execution-candidate-trial-input',
@@ -252,6 +296,8 @@ function templateCandidate({ candidateId, classes, vocabulary, targetGroups, mea
     invariantsPreserved: Array.from(new Set(specs.flatMap(spec => spec.invariants || []))).sort(),
     expectedMetricMovement,
     generatedLowLevelControls,
+    ...(controlCollections.compiledRuntimeControls ? { compiledRuntimeControls: controlCollections.compiledRuntimeControls } : {}),
+    ...(controlCollections.analysisCompilerMappings ? { analysisCompilerMappings: controlCollections.analysisCompilerMappings } : {}),
     whyMoreLikelyThanBlindTuning: why,
     intent: {
       kind: classes.length === 1 ? classes[0] : 'semantic-composition',
@@ -277,31 +323,59 @@ function canonicalFamilyGroups(description){
     }));
 }
 
-function group1CompressionGroup(description, baselineByGroup){
+function group1CompressionGroup(description, baselineByGroup, truthAlignment){
   const group = descriptionByGroup(description).get(1);
   const baseline = baselineVector(baselineByGroup, 1);
   const gate = group.candidateComparisonGate || {};
   const target = group.aggregateObjectTrackTarget || {};
   const maxRatio = Number.isFinite(+gate.maxAggregatePathLengthRatio) ? +gate.maxAggregatePathLengthRatio : 3;
   const generatedPathLength = round(Math.min(+baseline.pathLength || 0, (+target.pathLength || 0) * maxRatio), 4);
+  const rawPlaybackScale = Number.isFinite(+baseline.pathLength) && generatedPathLength > 0
+    ? +baseline.pathLength / generatedPathLength
+    : null;
+  const playbackScale = rawPlaybackScale == null ? null : round(clamp(rawPlaybackScale, 0.25, 1.4), 3);
   return {
     groupIndex: 1,
-    pathFamily: group.canonicalComparisonPathFamily,
+    pathFamily: livePathForGroup(truthAlignment, group),
     controls: {
       pathLength: generatedPathLength
     },
     semanticReason: 'group1-path-length-compression',
+    analysisCompilerMapping: {
+      group1PathLengthCompression: {
+        transformationClass: 'group1-path-length-compression',
+        compilerStatus: 'analysis-only-unproven-runtime-transfer',
+        semanticMeaning: 'Compress group 1 aggregate path length toward the RED target while preserving the live cross-sweep family.',
+        generatedRuntimeFields: [
+          {
+            runtimeField: 'groupReferencePaths[0].playbackScale',
+            value: playbackScale,
+            runtimeCurrentlyConsumes: true,
+            derivedFrom: 'baseline.pathLength / generatedPathLength',
+            clipped: rawPlaybackScale !== null && playbackScale !== round(rawPlaybackScale, 3)
+          }
+        ],
+        expectedVisibleEffect: 'Speeds reference-path playback and may shorten sampled visible-route length, but the path-length transfer function is not proven for Stage 7.',
+        proofHarnessRequired: 'future Stage 7 path-length expressibility proof plus challenge-motion-profile and strict challenge-stage conformance',
+        sourceReadyStatus: 'blocked-analysis-only'
+      }
+    },
     generatedLowLevelControls: {
       pathLengthFormula: 'min(baseline.pathLength, aggregateTarget.pathLength * maxAggregatePathLengthRatio)',
       baselinePathLength: round(baseline.pathLength, 4),
       aggregateTargetPathLength: round(target.pathLength, 4),
       maxAggregatePathLengthRatio: maxRatio,
-      generatedPathLength
+      generatedPathLength,
+      compilerMapping: {
+        runtimeField: 'groupReferencePaths[0].playbackScale',
+        value: playbackScale,
+        sourceReadyStatus: 'analysis-only until browser proof verifies object-track path-length transfer'
+      }
     }
   };
 }
 
-function lowerFieldReductionGroups(description, baselineByGroup){
+function lowerFieldReductionGroups(description, baselineByGroup, truthAlignment){
   const byGroup = descriptionByGroup(description);
   const rows = [];
   for(const [groupIndex, group] of byGroup.entries()){
@@ -316,26 +390,57 @@ function lowerFieldReductionGroups(description, baselineByGroup){
       : 0;
     if(currentDelta <= upper) continue;
     const generatedDelta = round(Math.max(0, upper - 0.04), 3);
+    const generatedLowerFieldShare = round((+target.lowerFieldShare || 0) + generatedDelta, 4);
+    const runtimeControls = lowerRuntimeControlsForShare(generatedLowerFieldShare);
     rows.push({
       groupIndex,
-      pathFamily: group.canonicalComparisonPathFamily,
+      pathFamily: livePathForGroup(truthAlignment, group),
       lowerField: {
         lowerFieldDeltaFromAggregate: generatedDelta
       },
       semanticReason: 'lower-field-overstay-reduction',
+      analysisCompilerMapping: {
+        lowerFieldOverstayReduction: {
+          transformationClass: 'lower-field-overstay-reduction',
+          compilerStatus: 'analysis-only-unproven-runtime-transfer',
+          semanticMeaning: 'Reduce lower-field overstay by translating target lower-field share into runtime lower-field bias controls.',
+          generatedRuntimeFields: [
+            {
+              runtimeField: `motionSpecGroups[${groupIndex - 1}].controls.lowerFieldBias`,
+              value: runtimeControls.lowerFieldBias,
+              runtimeCurrentlyConsumes: true,
+              derivedFrom: 'clamp((generatedLowerFieldShare - 0.34) / 0.58) * 188'
+            },
+            {
+              runtimeField: `motionSpecGroups[${groupIndex - 1}].controls.yOffset`,
+              value: runtimeControls.yOffset,
+              runtimeCurrentlyConsumes: true,
+              derivedFrom: 'clamp(generatedLowerFieldShare - 0.45) * 156'
+            }
+          ],
+          expectedVisibleEffect: 'Moves the affected group vertically and changes late lower-field dwell, but the lowerFieldShare transfer function is not proven for Stage 7.',
+          proofHarnessRequired: 'future Stage 7 lower-field expressibility proof plus challenge-motion-profile and strict challenge-stage conformance',
+          sourceReadyStatus: 'blocked-analysis-only'
+        }
+      },
       generatedLowLevelControls: {
         lowerFieldFormula: 'aggregateTarget.lowerFieldShare + (lowerFieldGateUpper - 0.04)',
         baselineLowerFieldShare: round(baseline.lowerFieldShare, 4),
         aggregateTargetLowerFieldShare: round(target.lowerFieldShare, 4),
         baselineDelta: round(currentDelta, 3),
-        generatedDelta
+        generatedDelta,
+        generatedLowerFieldShare,
+        compilerMapping: {
+          runtimeFields: runtimeControls,
+          sourceReadyStatus: 'analysis-only until browser proof verifies lower-field transfer'
+        }
       }
     });
   }
   return rows;
 }
 
-function phaseRebalanceGroups(description, baselineByGroup){
+function phaseRebalanceGroups(description, baselineByGroup, truthAlignment){
   return (description.groups || []).filter(group => {
     const baseline = baselineVector(baselineByGroup, group.groupIndex);
     const target = group.aggregateObjectTrackTarget || {};
@@ -343,19 +448,66 @@ function phaseRebalanceGroups(description, baselineByGroup){
     const endDelta = Math.abs((+baseline.visibleEndS || 0) - (+target.visibleEndS || 0));
     return startDelta > 0.25 || endDelta > 0.25;
   }).map(group => {
+    const baseline = baselineVector(baselineByGroup, group.groupIndex);
     const target = group.aggregateObjectTrackTarget || {};
+    const duration = targetDuration(target);
+    const baselineDuration = targetDuration(baseline);
+    const rawPlaybackScale = duration && baselineDuration ? baselineDuration / duration : null;
+    const playbackScale = rawPlaybackScale == null ? null : round(clamp(rawPlaybackScale, 0.25, 1.4), 3);
+    const trackS = duration == null ? null : round(Math.max(0.75, duration), 3);
+    const fieldIndex = (+group.groupIndex || 1) - 1;
     return {
       groupIndex: group.groupIndex,
-      pathFamily: group.canonicalComparisonPathFamily,
+      pathFamily: livePathForGroup(truthAlignment, group),
       timing: {
-        visibleStartS: round(target.visibleStartS, 2),
-        visibleEndS: round(target.visibleEndS, 2)
+        spawnOffsetS: round(target.visibleStartS, 2),
+        playbackScale
+      },
+      referencePath: playbackScale == null ? undefined : {
+        playbackScale
       },
       semanticReason: 'phase-duration-rebalance',
+      compiledRuntimeControls: {
+        phaseDurationRebalance: {
+          transformationClass: 'phase-duration-rebalance',
+          compilerStatus: 'compiled-browser-visible-proofed-but-not-source-ready',
+          proofArtifact: rel(PHASE_DURATION_PROOF),
+          generatedRuntimeFields: [
+            {
+              runtimeField: `groupSpawnOffsets[${fieldIndex}] or motionSpecGroups[${fieldIndex}].spawnOffsetS`,
+              value: round(target.visibleStartS, 2),
+              runtimeCurrentlyConsumes: true,
+              derivedFrom: 'aggregateObjectTrackTarget.visibleStartS'
+            },
+            {
+              runtimeField: `motionSpecGroups[${fieldIndex}].phaseDurations.trackS`,
+              value: trackS,
+              runtimeCurrentlyConsumes: true,
+              derivedFrom: 'max(0.75, aggregateObjectTrackTarget.visibleEndS - visibleStartS)'
+            },
+            {
+              runtimeField: `groupReferencePaths[${fieldIndex}].playbackScale`,
+              value: playbackScale,
+              runtimeCurrentlyConsumes: true,
+              derivedFrom: 'baselineVisibleDurationS / targetVisibleDurationS',
+              clipped: rawPlaybackScale !== null && playbackScale !== round(rawPlaybackScale, 3)
+            }
+          ],
+          expectedVisibleEffect: 'Moves group visible timing and reference path clock without changing target count or challenge combat behavior.',
+          sourceReadyStatus: 'blocked until phase-duration proof passes motion/profile proxy'
+        }
+      },
       generatedLowLevelControls: {
-        visibleWindowFormula: 'aggregateObjectTrackTarget.visibleStartS/visibleEndS',
-        visibleStartS: round(target.visibleStartS, 2),
-        visibleEndS: round(target.visibleEndS, 2)
+        visibleWindowFormula: 'aggregateObjectTrackTarget visible window compiled to consumed runtime controls',
+        targetVisibleStartS: round(target.visibleStartS, 2),
+        targetVisibleEndS: round(target.visibleEndS, 2),
+        baselineVisibleStartS: round(baseline.visibleStartS, 2),
+        baselineVisibleEndS: round(baseline.visibleEndS, 2),
+        compiledRuntimeControls: {
+          spawnOffsetS: round(target.visibleStartS, 2),
+          trackS,
+          playbackScale
+        }
       }
     };
   });
@@ -399,12 +551,12 @@ function mergeGroups(...groupLists){
   return Array.from(byGroup.values()).sort((a, b) => +a.groupIndex - +b.groupIndex);
 }
 
-function buildCandidates({ description, vocabulary, baselineReport }){
+function buildCandidates({ description, vocabulary, baselineReport, truthAlignment }){
   const baselineByGroup = mapByGroup(baselineReport.trial.groupResults);
   const canonicalGroups = canonicalFamilyGroups(description);
-  const group1 = group1CompressionGroup(description, baselineByGroup);
-  const lowerGroups = lowerFieldReductionGroups(description, baselineByGroup);
-  const phaseGroups = phaseRebalanceGroups(description, baselineByGroup);
+  const group1 = group1CompressionGroup(description, baselineByGroup, truthAlignment);
+  const lowerGroups = lowerFieldReductionGroups(description, baselineByGroup, truthAlignment);
+  const phaseGroups = phaseRebalanceGroups(description, baselineByGroup, truthAlignment);
   const lateProtection = protectLateGroups(description, baselineByGroup, false);
   const lateCanonicalProtection = protectLateGroups(description, baselineByGroup, true);
   return [
@@ -477,49 +629,45 @@ function buildCandidates({ description, vocabulary, baselineReport }){
     templateCandidate({
       candidateId: 'stage7-semantic-opener-align-protect-0.1',
       classes: [
-        'canonical-family-alignment',
         'group1-path-length-compression',
         'lower-field-overstay-reduction',
         'preserve-scoreable-window',
         'protect-group4-group5'
       ],
       vocabulary,
-      targetGroups: Array.from(new Set([1, ...canonicalGroups.map(group => group.groupIndex), ...lowerGroups.map(group => group.groupIndex), 4, 5])).sort((a, b) => a - b),
-      meaning: 'Try the smallest semantic composition: improve the opener, align canonical families, reduce measured lower-field overstay, and explicitly protect groups 4 and 5.',
+      targetGroups: Array.from(new Set([1, ...lowerGroups.map(group => group.groupIndex), 4, 5])).sort((a, b) => a - b),
+      meaning: 'Try the smallest live-authority semantic composition: improve the opener, reduce measured lower-field overstay, and explicitly protect groups 4 and 5.',
       expectedMetricMovement: 'Potential total object-track lift through group 1 while preserving late group floors and guardrails.',
       generatedLowLevelControls: {
         group1: group1.generatedLowLevelControls,
-        canonicalFamilies: canonicalGroups.map(group => group.generatedLowLevelControls),
         lowerField: lowerGroups.map(group => group.generatedLowLevelControls),
-        lateProtection: lateCanonicalProtection.map(group => group.generatedLowLevelControls)
+        lateProtection: lateProtection.map(group => group.generatedLowLevelControls)
       },
-      why: 'The composition encodes the rejected-candidate lesson: group 1 can move only if groups 4 and 5 stay protected and all family labels are canonical.',
-      groups: mergeGroups(canonicalGroups, [group1], lowerGroups, lateCanonicalProtection)
+      why: 'The composition encodes the rejected-candidate lesson: group 1 can move only if groups 4 and 5 stay protected and all source-ready family labels remain live-authority compatible.',
+      groups: mergeGroups([group1], lowerGroups, lateProtection)
     }),
     templateCandidate({
       candidateId: 'stage7-semantic-phase-align-protect-0.1',
       classes: [
-        'canonical-family-alignment',
         'phase-duration-rebalance',
         'preserve-scoreable-window',
         'protect-group4-group5'
       ],
       vocabulary,
-      targetGroups: Array.from(new Set([...canonicalGroups.map(group => group.groupIndex), ...phaseGroups.map(group => group.groupIndex), 5])).sort((a, b) => a - b),
-      meaning: 'Combine the strongest measured phase-window signal with canonical family alignment and explicit late-group protection.',
+      targetGroups: Array.from(new Set([...phaseGroups.map(group => group.groupIndex), 5])).sort((a, b) => a - b),
+      meaning: 'Combine the strongest measured phase-window signal with live-authority path families and explicit late-group protection.',
       expectedMetricMovement: 'Potential total object-track lift through phase-order/window fit while preserving groups 4 and 5.',
       generatedLowLevelControls: {
         phaseWindows: phaseGroups.map(group => group.generatedLowLevelControls),
-        canonicalFamilies: canonicalGroups.map(group => group.generatedLowLevelControls),
-        group5Protection: lateCanonicalProtection.filter(group => +group.groupIndex === 5).map(group => group.generatedLowLevelControls)
+        group5Protection: lateProtection.filter(group => +group.groupIndex === 5).map(group => group.generatedLowLevelControls)
       },
-      why: 'The first semantic batch signal showed phase-duration rebalance moved group 1 and group 4, while canonical alignment was the remaining blocker. This candidate composes those named classes without adding free numeric deltas.',
-      groups: mergeGroups(canonicalGroups, phaseGroups, lateCanonicalProtection.filter(group => +group.groupIndex === 5))
+      why: 'The first semantic batch signal showed phase-duration rebalance moved group 1 and group 4, while the rejected source attempt taught us not to smuggle RED path families past live authority. This candidate composes named classes without adding free numeric deltas.',
+      groups: mergeGroups(phaseGroups, lateProtection.filter(group => +group.groupIndex === 5))
     })
   ];
 }
 
-function semanticValidity(candidate, trialReport, vocabulary){
+function semanticValidity(candidate, trialReport, vocabulary, truthAlignment){
   const known = knownClassSet(vocabulary);
   const classes = Array.isArray(candidate.semanticTransformations) ? candidate.semanticTransformations : [candidate.semanticTransformationClass].filter(Boolean);
   const blockers = [];
@@ -536,7 +684,12 @@ function semanticValidity(candidate, trialReport, vocabulary){
   const touched = new Set((candidate.groups || []).map(group => +group.groupIndex));
   for(const group of groups){
     if(touched.has(+group.groupIndex) && !group.canonicalPathFamilyMatch){
-      blockers.push(`group ${group.groupIndex} touched but does not match canonical family`);
+      const liveFamily = truthAlignment?.liveGateCanonicalOrder?.[(+group.groupIndex || 1) - 1] || '';
+      if(group.candidatePathFamily && group.candidatePathFamily === liveFamily){
+        warnings.push(`group ${group.groupIndex} uses live promotion family ${liveFamily} while RED target family is ${group.canonicalComparisonPathFamily}`);
+      }else{
+        blockers.push(`group ${group.groupIndex} touched but matches neither live promotion family ${liveFamily || 'unknown'} nor RED canonical family`);
+      }
     }
   }
   const group4 = groups.find(group => +group.groupIndex === 4);
@@ -567,25 +720,87 @@ function semanticValidity(candidate, trialReport, vocabulary){
   };
 }
 
+function controlsForClass(candidate, classId){
+  const keys = [classId, classControlKey(classId)];
+  const rows = [];
+  for(const key of keys){
+    const top = candidate.compiledRuntimeControls?.[key];
+    if(Array.isArray(top)) rows.push(...top);
+    else if(top) rows.push(top);
+  }
+  for(const group of candidate.groups || []){
+    for(const key of keys){
+      const control = group.compiledRuntimeControls?.[key];
+      if(control) rows.push(control);
+    }
+  }
+  return rows;
+}
+
+function analysisMappingsForClass(candidate, classId){
+  const keys = [classId, classControlKey(classId)];
+  const rows = [];
+  for(const key of keys){
+    const top = candidate.analysisCompilerMappings?.[key];
+    if(Array.isArray(top)) rows.push(...top);
+    else if(top) rows.push(top);
+  }
+  for(const group of candidate.groups || []){
+    for(const key of keys){
+      const mapping = group.analysisCompilerMapping?.[key];
+      if(mapping) rows.push(mapping);
+    }
+  }
+  return rows;
+}
+
 function runtimeExpressibility(candidate, trialReport, vocabulary, truthAlignment){
   const classes = Array.isArray(candidate.semanticTransformations) ? candidate.semanticTransformations : [candidate.semanticTransformationClass].filter(Boolean);
   const phaseDurationProof = optionalJson(PHASE_DURATION_PROOF);
   const blockers = [];
   const warnings = [];
+  const classProofs = [];
   const classMappings = classes.map(classId => {
     const spec = classSpec(vocabulary, classId);
     const mapping = spec.runtimeExpressibility || {};
     const sourceReadySupported = mapping.sourceReadySupported === true;
     const sourceReadyRole = mapping.sourceReadyRole || (sourceReadySupported ? 'runtime-transform' : 'analysis-only');
     if(!sourceReadySupported){
-      blockers.push(`${classId}: no explicit runtime-expressibility mapping for source promotion (${mapping.remainingCompilerGap || mapping.predictionLimits || 'mapping missing'})`);
+      blockers.push(`${classId}: not expressible in runtime yet for source promotion (${mapping.remainingCompilerGap || mapping.predictionLimits || 'mapping missing'})`);
     }
+    const compiledControls = controlsForClass(candidate, classId);
+    const analysisMappings = analysisMappingsForClass(candidate, classId);
+    const proofStatus = classId === 'phase-duration-rebalance'
+      ? {
+          proofArtifact: phaseDurationProof ? rel(PHASE_DURATION_PROOF) : null,
+          browserVisibleEffectConfirmed: phaseDurationProof?.summary?.browserVisibleEffectConfirmed === true,
+          motionProfileGateProxyPass: phaseDurationProof?.summary?.motionProfileGateProxyPass === true,
+          group45Preserved: phaseDurationProof?.summary?.group45Preserved === true,
+          proofPass: !!(
+            phaseDurationProof
+            && phaseDurationProof.artifactType === 'stage7-phase-duration-runtime-expressibility-proof'
+            && phaseDurationProof.summary?.browserVisibleEffectConfirmed === true
+            && phaseDurationProof.summary?.motionProfileGateProxyPass === true
+            && phaseDurationProof.summary?.group45Preserved === true
+          )
+        }
+      : {
+          proofArtifact: null,
+          browserVisibleEffectConfirmed: false,
+          motionProfileGateProxyPass: false,
+          group45Preserved: null,
+          proofPass: false
+        };
+    classProofs.push({ classId, ...proofStatus });
     return {
       classId,
       sourceReadySupported,
       sourceReadyRole,
+      compilerMappingStatus: mapping.compilerMappingStatus || (sourceReadySupported ? 'source-ready-mapped' : 'not-expressible-in-runtime-yet'),
       sourceFields: mapping.sourceFields || [],
       generatedRuntimeControls: mapping.generatedRuntimeControls || [],
+      compiledRuntimeControls: compiledControls,
+      analysisCompilerMappings: analysisMappings,
       runtimeConsumer: mapping.runtimeConsumer || '',
       predictionLimits: mapping.predictionLimits || '',
       proofHarnesses: mapping.proofHarnesses || [],
@@ -614,20 +829,9 @@ function runtimeExpressibility(candidate, trialReport, vocabulary, truthAlignmen
   if(!truthAlignment.measuredIntentMatchesLiveGate){
     warnings.push('measured reference intent and live promotion gates disagree; candidate source-readiness must honor live gates until source-of-truth reconciliation is explicit');
   }
-  const compiledControls = candidate.compiledRuntimeControls || {};
   const phaseDurationMapping = classMappings.find(row => row.classId === 'phase-duration-rebalance');
-  const phaseDurationCompiled = !!(
-    compiledControls.phaseDurationRebalance
-    || compiledControls['phase-duration-rebalance']
-    || (candidate.groups || []).some(group => group.compiledRuntimeControls?.phaseDurationRebalance || group.compiledRuntimeControls?.['phase-duration-rebalance'])
-  );
-  const phaseDurationProofPass = !!(
-    phaseDurationProof
-    && phaseDurationProof.artifactType === 'stage7-phase-duration-runtime-expressibility-proof'
-    && phaseDurationProof.summary?.browserVisibleEffectConfirmed === true
-    && phaseDurationProof.summary?.motionProfileGateProxyPass === true
-    && phaseDurationProof.summary?.group45Preserved === true
-  );
+  const phaseDurationCompiled = controlsForClass(candidate, 'phase-duration-rebalance').length > 0;
+  const phaseDurationProofPass = classProofs.find(row => row.classId === 'phase-duration-rebalance')?.proofPass === true;
   if(phaseDurationMapping?.requiresCompiledRuntimeControls && !phaseDurationCompiled){
     blockers.push('phase-duration-rebalance: candidate must emit compiledRuntimeControls instead of visibleStartS/visibleEndS trial vectors');
   }
@@ -642,10 +846,10 @@ function runtimeExpressibility(candidate, trialReport, vocabulary, truthAlignmen
       }
     }
     if(group.controls && Number.isFinite(+group.controls.pathLength)){
-      blockers.push(`group ${group.groupIndex}: pathLength trial control is not an explicit consumed runtime source field`);
+      blockers.push(`group ${group.groupIndex}: pathLength trial control remains analysis-only until playbackScale/path geometry proof exists`);
     }
     if(group.lowerField && Object.keys(group.lowerField).length){
-      blockers.push(`group ${group.groupIndex}: lower-field trial control must compile to consumed lowerFieldBias/yOffset or reference geometry before source promotion`);
+      blockers.push(`group ${group.groupIndex}: lower-field trial control remains analysis-only until lowerFieldBias/yOffset proof exists`);
     }
     if(group.predictedRuntimeVector && group.semanticReason !== 'protect-group4-group5'){
       blockers.push(`group ${group.groupIndex}: predictedRuntimeVector is not a source mapping outside protection semantics`);
@@ -661,7 +865,8 @@ function runtimeExpressibility(candidate, trialReport, vocabulary, truthAlignmen
     proofStatus: {
       phaseDurationProof: phaseDurationProof ? rel(PHASE_DURATION_PROOF) : null,
       phaseDurationProofPass,
-      phaseDurationCompiledControlsPresent: phaseDurationCompiled
+      phaseDurationCompiledControlsPresent: phaseDurationCompiled,
+      classProofs
     },
     candidateProjectedPathOrder: candidateOrder,
     liveGatePathOrder: truthAlignment.liveGateCanonicalOrder,
@@ -673,12 +878,60 @@ function runtimeExpressibility(candidate, trialReport, vocabulary, truthAlignmen
   };
 }
 
+function classifyBlocker(blocker){
+  const text = String(blocker || '');
+  if(text.includes('does not match all live promotion gates')) return 'blocked-by-promotion-authority';
+  if(text.includes('does not match canonical') || text.includes('RED target family')) return 'target-conformance-authority-debt';
+  if(text.includes('not expressible in runtime yet') || text.includes('analysis-only')) return 'not-expressible-in-runtime-yet';
+  if(text.includes('missing passing runtime expressibility proof') || text.includes('proof exists')) return 'missing-or-failing-proof';
+  if(text.includes('must emit compiledRuntimeControls')) return 'missing-compiled-runtime-controls';
+  if(text.includes('candidate has no runtime-transform class')) return 'guardrail-only-no-source-movement';
+  if(text.includes('spacing/readability') || text.includes('scoreable routes') || text.includes('safety')) return 'guardrail-blocker';
+  if(text.includes('object-track') || text.includes('group 1') || text.includes('coverage') || text.includes('regresses')) return 'metric-or-score-blocker';
+  return 'other';
+}
+
+function blockerTaxonomy(blockers){
+  const grouped = {};
+  for(const blocker of blockers || []){
+    const key = classifyBlocker(blocker);
+    if(!grouped[key]) grouped[key] = [];
+    grouped[key].push(blocker);
+  }
+  return Object.fromEntries(Object.entries(grouped).map(([key, rows]) => [key, {
+    count: rows.length,
+    examples: rows.slice(0, 6)
+  }]));
+}
+
+function proofBackedImprovement(candidateRow){
+  const proofRows = candidateRow.runtimeExpressibility?.proofStatus?.classProofs || [];
+  const proofBackedClasses = proofRows
+    .filter(row => row.proofPass)
+    .map(row => row.classId);
+  const browserVisibleOnlyClasses = proofRows
+    .filter(row => row.browserVisibleEffectConfirmed && !row.proofPass)
+    .map(row => row.classId);
+  return {
+    predictedTotalObjectTrackDelta10: candidateRow.totalObjectTrackDelta10,
+    proofBackedTotalObjectTrackDelta10: proofBackedClasses.length ? candidateRow.totalObjectTrackDelta10 : null,
+    proofBackedClasses,
+    browserVisibleOnlyClasses,
+    read: proofBackedClasses.length
+      ? 'Predicted improvement is backed by a passing runtime expressibility proof for at least one movement class.'
+      : browserVisibleOnlyClasses.length
+        ? 'Runtime controls showed browser-visible movement, but no movement class has a passing proof-backed source-readiness claim.'
+        : 'Predicted improvement is analysis-only; no runtime proof-backed movement claim is available.'
+  };
+}
+
 function compactTrial(candidate, trialReport, semanticRead, runtimeRead, trialReportPath, candidatePath){
   const groups = trialReport.trial.groupResults || [];
   const groupScore = groupIndex => groups.find(group => +group.groupIndex === +groupIndex)?.aggregateObjectTrackScore10 ?? null;
   const groupMatch = groupIndex => groups.find(group => +group.groupIndex === +groupIndex)?.canonicalPathFamilyMatch === true;
   const readyForRuntimeSourceCandidate = trialReport.summary.readyForRuntimeSourceCandidate && semanticRead.pass && runtimeRead.pass;
-  return {
+  const blockers = [...runtimeRead.blockers, ...semanticRead.blockers, ...trialReport.summary.blockers];
+  const row = {
     candidateId: candidate.candidateId,
     semanticTransformationClass: candidate.semanticTransformationClass,
     semanticTransformations: candidate.semanticTransformations || [],
@@ -710,7 +963,8 @@ function compactTrial(candidate, trialReport, semanticRead, runtimeRead, trialRe
     runtimeExpressibility: runtimeRead,
     readyForRuntimeSourceCandidate,
     blockerCount: trialReport.summary.blockerCount + semanticRead.blockers.length + runtimeRead.blockers.length,
-    blockers: [...runtimeRead.blockers, ...semanticRead.blockers, ...trialReport.summary.blockers],
+    blockers,
+    blockerTaxonomy: blockerTaxonomy(blockers),
     warnings: [...runtimeRead.warnings, ...semanticRead.warnings, ...trialReport.summary.warnings],
     rankingScore: round(
       (trialReport.trial.deltas.totalObjectTrackScore10 * 10)
@@ -723,6 +977,8 @@ function compactTrial(candidate, trialReport, semanticRead, runtimeRead, trialRe
       3
     )
   };
+  row.proofBackedImprovement = proofBackedImprovement(row);
+  return row;
 }
 
 function classSummary(rows, vocabulary){
@@ -782,9 +1038,61 @@ function classSummary(rows, vocabulary){
   });
 }
 
+function sourceReadyBlockerTaxonomy(rows){
+  const aggregate = {};
+  for(const row of rows){
+    for(const [kind, entry] of Object.entries(row.blockerTaxonomy || {})){
+      if(!aggregate[kind]) aggregate[kind] = { count: 0, candidates: [], examples: [] };
+      aggregate[kind].count += entry.count || 0;
+      aggregate[kind].candidates.push(row.candidateId);
+      aggregate[kind].examples.push(...(entry.examples || []).map(example => `${row.candidateId}: ${example}`));
+    }
+  }
+  return Object.fromEntries(Object.entries(aggregate).map(([kind, entry]) => [kind, {
+    count: entry.count,
+    candidates: Array.from(new Set(entry.candidates)).sort(),
+    examples: entry.examples.slice(0, 10)
+  }]));
+}
+
+function compilerCoverage(rows, vocabulary){
+  return (vocabulary.transformationClasses || []).map(spec => {
+    const candidates = rows.filter(row => row.semanticTransformations.includes(spec.classId));
+    const mappings = candidates.flatMap(row => (row.runtimeExpressibility?.classMappings || []).filter(mapping => mapping.classId === spec.classId));
+    const compiledControls = mappings.flatMap(mapping => mapping.compiledRuntimeControls || []);
+    const analysisMappings = mappings.flatMap(mapping => mapping.analysisCompilerMappings || []);
+    const proofRows = candidates.flatMap(row => row.runtimeExpressibility?.proofStatus?.classProofs || []).filter(row => row.classId === spec.classId);
+    const proofPass = proofRows.some(row => row.proofPass);
+    const browserVisibleOnly = proofRows.some(row => row.browserVisibleEffectConfirmed && !row.proofPass);
+    return {
+      classId: spec.classId,
+      candidateCount: candidates.length,
+      sourceReadySupported: spec.runtimeExpressibility?.sourceReadySupported === true,
+      sourceReadyRole: spec.runtimeExpressibility?.sourceReadyRole || (spec.runtimeExpressibility?.sourceReadySupported === true ? 'runtime-transform' : 'analysis-only'),
+      compilerMappingStatus: spec.runtimeExpressibility?.compilerMappingStatus || (spec.runtimeExpressibility?.sourceReadySupported === true ? 'source-ready-mapped' : 'not-expressible-in-runtime-yet'),
+      compiledRuntimeControlCount: compiledControls.length,
+      analysisCompilerMappingCount: analysisMappings.length,
+      proofPass,
+      browserVisibleOnly,
+      sourceReadyBlockerKinds: Array.from(new Set(candidates.flatMap(row => Object.keys(row.blockerTaxonomy || {})))).sort(),
+      read: proofPass
+        ? `${spec.classId} has compiled controls and passing proof evidence.`
+        : browserVisibleOnly
+          ? `${spec.classId} has browser-visible proof but still fails a source-readiness guard.`
+          : analysisMappings.length
+            ? `${spec.classId} has an analysis compiler mapping but no proof-backed source readiness.`
+            : compiledControls.length
+              ? `${spec.classId} emits compiled controls but is still blocked by proof or gate evidence.`
+              : `${spec.classId} does not currently emit proof-backed runtime controls.`
+    };
+  });
+}
+
 function buildMarkdown(report){
   const rows = report.candidates.map(row => `| ${row.candidateId} | ${row.semanticTransformations.join(', ')} | ${row.totalObjectTrackScore10} | ${row.totalObjectTrackDelta10} | ${row.totalObjectTrackCoverage} | ${row.groupScores.group1} | ${row.groupScores.group4} | ${row.groupScores.group5} | ${row.canonicalFamilyMatch.allGroups} | ${row.semanticValidity.pass} | ${row.runtimeExpressibility.pass} | ${row.readyForRuntimeSourceCandidate} | ${row.blockers.slice(0, 3).join('<br>') || 'none'} |`).join('\n');
   const classRows = report.classSummaries.map(row => `| ${row.classId} | ${row.candidateCount} | ${row.bestCandidateId || 'n/a'} | ${row.bestObjectTrackDelta10 ?? 'n/a'} | ${row.promiseKind} | ${row.groupedRejectionReasons.slice(0, 3).map(item => `${item.candidateId}: ${item.blocker}`).join('<br>') || 'none'} |`).join('\n');
+  const coverageRows = report.compilerCoverage.map(row => `| ${row.classId} | ${row.sourceReadyRole} | ${row.compilerMappingStatus} | ${row.compiledRuntimeControlCount} | ${row.analysisCompilerMappingCount} | ${row.proofPass} | ${row.browserVisibleOnly} | ${row.read} |`).join('\n');
+  const taxonomyRows = Object.entries(report.sourceReadyBlockerTaxonomy).map(([kind, entry]) => `| ${kind} | ${entry.count} | ${entry.candidates.join(', ')} | ${entry.examples.slice(0, 3).join('<br>') || 'none'} |`).join('\n');
   const truthRows = (report.truthAlignment.sources || []).map(source => `| ${source.sourceId} | ${source.role} | ${source.order.join(', ')} | ${sameOrder(source.order, report.truthAlignment.liveGateCanonicalOrder)} |`).join('\n');
   return `# Stage 7 Semantic Candidate Batch
 
@@ -826,6 +1134,18 @@ ${rows}
 | --- | ---: | --- | ---: | --- | --- |
 ${classRows}
 
+## Compiler Coverage
+
+| Class | Role | Mapping status | Compiled controls | Analysis mappings | Proof pass | Browser-visible only | Read |
+| --- | --- | --- | ---: | ---: | --- | --- | --- |
+${coverageRows}
+
+## Source-Ready Blocker Taxonomy
+
+| Blocker kind | Count | Candidates | Examples |
+| --- | ---: | --- | --- |
+${taxonomyRows}
+
 ## Next Step
 
 ${report.nextBestStep}
@@ -846,7 +1166,7 @@ function main(){
   const vocabulary = readJson(VOCABULARY);
   const truthAlignment = buildTruthAlignment(description);
   const baselineReport = buildReport(DEFAULT_CANDIDATE);
-  const candidates = buildCandidates({ description, vocabulary, baselineReport });
+  const candidates = buildCandidates({ description, vocabulary, baselineReport, truthAlignment });
   const compactRows = [];
   for(const candidate of candidates){
     const candidatePath = path.join(candidateDir, `${candidate.candidateId}.json`);
@@ -854,7 +1174,7 @@ function main(){
     const trialReport = buildReport(candidatePath);
     const trialReportPath = path.join(trialDir, `${candidate.candidateId}.json`);
     writeJson(trialReportPath, trialReport);
-    const semanticRead = semanticValidity(candidate, trialReport, vocabulary);
+    const semanticRead = semanticValidity(candidate, trialReport, vocabulary, truthAlignment);
     const runtimeRead = runtimeExpressibility(candidate, trialReport, vocabulary, truthAlignment);
     compactRows.push(compactTrial(candidate, trialReport, semanticRead, runtimeRead, rel(trialReportPath), rel(candidatePath)));
   }
@@ -897,12 +1217,15 @@ function main(){
       requiresRuntimeExpressibilityMapping: true,
       requiresRuntimeExpressibilityProof: true,
       requiresCompiledRuntimeControlsForPhaseDuration: true,
-      read: 'Source-ready now means a candidate can prove both semantic score intent and concrete runtime/source expressibility against live promotion gates, including a proof artifact and compiled controls for phase-duration intent.'
+      requiresAuthorityDebtVisibility: true,
+      read: 'Source-ready now means a candidate can prove both semantic score intent and concrete runtime/source expressibility against live promotion gates, while preserving target-conformance debt when RED/setpiece intent disagrees.'
     },
     candidateCount: compactRows.length,
     transformationClassesTested: (vocabulary.transformationClasses || []).map(row => row.classId),
     candidates: compactRows,
     classSummaries: classSummary(compactRows, vocabulary),
+    compilerCoverage: compilerCoverage(compactRows, vocabulary),
+    sourceReadyBlockerTaxonomy: sourceReadyBlockerTaxonomy(compactRows),
     bestCandidate: compactRows[0] || null,
     summary: {
       measurementKeeperRecommendation: 'accept-semantic-batch-mechanism',
@@ -916,7 +1239,7 @@ function main(){
     },
     nextBestStep: runtimeSourceCandidate
       ? `Try exactly one runtime source candidate for ${runtimeSourceCandidate.candidateId}, rebuild, then run before/after evidence and strict challenge guardrails.`
-      : 'Refine the semantic compiler before touching runtime source: keep Stage 7 source-ready path families aligned with live gates, emit compiledRuntimeControls for phase-duration intent, and add runtime mappings for path-length/lower-field intent.'
+      : 'Refine the semantic compiler before touching runtime source: keep Stage 7 source-ready path families aligned with live gates, make phase-duration proof pass the motion/profile proxy, and add proof harnesses for path-length/lower-field mappings.'
   };
   writeJson(path.join(batchDir, 'report.json'), report);
   writeText(path.join(batchDir, 'README.md'), buildMarkdown(report));

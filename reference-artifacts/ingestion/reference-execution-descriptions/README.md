@@ -71,4 +71,8 @@ decision is generated at:
 
 Until that decision changes, source-ready candidates must match the live
 promotion gate/runtime order, and RED/setpiece measured intent should be used
-as diagnostic guidance rather than permission to change runtime source.
+as target-conformance debt and diagnostic guidance rather than permission to
+change runtime source. The authority report must keep two reads separate:
+promotion authority, which gates source candidates today, and target
+conformance authority, which records the measured reference direction the game
+may migrate toward after direct proof.

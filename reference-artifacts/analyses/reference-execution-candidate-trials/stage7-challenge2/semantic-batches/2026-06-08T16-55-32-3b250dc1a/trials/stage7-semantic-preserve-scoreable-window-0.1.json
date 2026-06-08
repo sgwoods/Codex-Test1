@@ -1,0 +1,627 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage7-reference-execution-candidate-trial",
+  "generatedAt": "2026-06-08T16:55:32.423Z",
+  "generatedBy": "tools/harness/analyze-stage7-reference-execution-trial.js",
+  "commit": "3b250dc1a",
+  "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 7,
+    "challengeNumber": 2,
+    "displayLabel": "Stage 7 / Challenge 2"
+  },
+  "sourceArtifacts": {
+    "candidate": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T16-55-32-3b250dc1a/candidates/stage7-semantic-preserve-scoreable-window-0.1.json",
+    "referenceExecutionDescription": "reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage7-challenge2-0.1.json",
+    "referenceExecutionAnalysis": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+    "challengeStageConformance": "reference-artifacts/analyses/challenge-stage-conformance/latest.json"
+  },
+  "candidate": {
+    "candidateId": "stage7-semantic-preserve-scoreable-window-0.1",
+    "artifactType": "stage7-reference-execution-candidate-trial-input",
+    "intent": {
+      "kind": "preserve-scoreable-window",
+      "read": "Exercise the scoreable-window guardrail as a semantic invariant rather than a geometry candidate."
+    },
+    "externalInputAccepted": true,
+    "touchedGroups": []
+  },
+  "baseline": {
+    "totalObjectTrackScore10": 4.7,
+    "totalObjectTrackCoverage": 0.503,
+    "groupScores": [
+      {
+        "groupIndex": 1,
+        "aggregateObjectTrackScore10": 3.5,
+        "primaryObjectTrackScore10": 3.7
+      },
+      {
+        "groupIndex": 2,
+        "aggregateObjectTrackScore10": 5.2,
+        "primaryObjectTrackScore10": 2.6
+      },
+      {
+        "groupIndex": 3,
+        "aggregateObjectTrackScore10": 5,
+        "primaryObjectTrackScore10": 4.6
+      },
+      {
+        "groupIndex": 4,
+        "aggregateObjectTrackScore10": 5,
+        "primaryObjectTrackScore10": 1.8
+      },
+      {
+        "groupIndex": 5,
+        "aggregateObjectTrackScore10": 4.9,
+        "primaryObjectTrackScore10": 3
+      }
+    ],
+    "safety": {
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0,
+        "challengeContacts": 4
+      }
+    },
+    "scoreableRoutes": {
+      "score10": 5.5,
+      "activeWindows": 47,
+      "multiTargetWindowShare": 0.745,
+      "laneDiversity": 1,
+      "centerBias": 0.359,
+      "read": "Shot-opportunity probe found scoreable targets in 47 sampled windows; 74% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.36."
+    }
+  },
+  "trial": {
+    "totalObjectTrackScore10": 4.7,
+    "totalObjectTrackCoverage": 0.503,
+    "deltas": {
+      "totalObjectTrackScore10": 0,
+      "totalObjectTrackCoverage": 0
+    },
+    "groupResults": [
+      {
+        "groupIndex": 1,
+        "touchedByCandidate": false,
+        "canonicalComparisonPathFamily": "cross-sweep",
+        "candidatePathFamily": "cross-sweep",
+        "canonicalPathFamilyMatch": true,
+        "aggregateObjectTrackScore10": 3.5,
+        "aggregateObjectTrackCoverage": 0.343,
+        "primaryObjectTrackScore10": 3.7,
+        "primaryObjectTrackCoverage": 0.371,
+        "baselineAggregateObjectTrackScore10": 3.5,
+        "baselineAggregateObjectTrackCoverage": 0.343,
+        "baselinePrimaryObjectTrackScore10": 3.7,
+        "deltas": {
+          "aggregateScore10": 0,
+          "aggregateCoverage": 0,
+          "primaryScore10": 0
+        },
+        "deviations": {
+          "aggregatePathLengthRatio": 4.32,
+          "primaryPathLengthRatio": 2.45,
+          "aggregateLowerFieldDelta": 0.018,
+          "primaryLowerFieldDelta": 0,
+          "visibleStartDeltaS": 0.5,
+          "visibleEndDeltaS": 0.37
+        },
+        "candidateVector": {
+          "id": 975368029,
+          "family": "classic",
+          "pathFamily": "cross-sweep",
+          "wave": 0,
+          "lane": 6,
+          "type": "boss",
+          "sampleCount": 8,
+          "visibleStartS": 0.5,
+          "visibleEndS": 2.25,
+          "entrySide": "center",
+          "exitSide": "right",
+          "xRange": 0.6282,
+          "yRange": 0.0074,
+          "pathLength": 0.5081,
+          "turnCount": 1,
+          "reversalCount": 1,
+          "lowerFieldShare": 1
+        },
+        "appliedControls": null,
+        "blockers": [],
+        "warnings": [
+          "aggregate object-track score 3.5/10 is below first promotion floor",
+          "primary object-track score 3.7/10 is below first promotion floor",
+          "aggregate path-length ratio 4.32 exceeds first promotion floor"
+        ]
+      },
+      {
+        "groupIndex": 2,
+        "touchedByCandidate": false,
+        "canonicalComparisonPathFamily": "hook-arc",
+        "candidatePathFamily": "cross-sweep",
+        "canonicalPathFamilyMatch": false,
+        "aggregateObjectTrackScore10": 5.2,
+        "aggregateObjectTrackCoverage": 0.563,
+        "primaryObjectTrackScore10": 2.6,
+        "primaryObjectTrackCoverage": 0.214,
+        "baselineAggregateObjectTrackScore10": 5.2,
+        "baselineAggregateObjectTrackCoverage": 0.563,
+        "baselinePrimaryObjectTrackScore10": 2.6,
+        "deltas": {
+          "aggregateScore10": 0,
+          "aggregateCoverage": 0,
+          "primaryScore10": 0
+        },
+        "deviations": {
+          "aggregatePathLengthRatio": 5.74,
+          "primaryPathLengthRatio": 2.8,
+          "aggregateLowerFieldDelta": 0.358,
+          "primaryLowerFieldDelta": -0.139,
+          "visibleStartDeltaS": 0.37,
+          "visibleEndDeltaS": -0.38
+        },
+        "candidateVector": {
+          "id": 298889151,
+          "family": "scorpion",
+          "pathFamily": "cross-sweep",
+          "wave": 1,
+          "lane": 6,
+          "type": "rogue",
+          "sampleCount": 12,
+          "visibleStartS": 3.25,
+          "visibleEndS": 6,
+          "entrySide": "center",
+          "exitSide": "center",
+          "xRange": 0.1887,
+          "yRange": 0.7669,
+          "pathLength": 0.9676,
+          "turnCount": 4,
+          "reversalCount": 2,
+          "lowerFieldShare": 0.67
+        },
+        "appliedControls": null,
+        "blockers": [
+          "path family cross-sweep does not match canonical hook-arc"
+        ],
+        "warnings": [
+          "primary object-track score 2.6/10 is below first promotion floor",
+          "aggregate path-length ratio 5.74 exceeds first promotion floor",
+          "lower-field overstay +0.358 exceeds aggregate gate"
+        ]
+      },
+      {
+        "groupIndex": 3,
+        "touchedByCandidate": false,
+        "canonicalComparisonPathFamily": "hook-arc",
+        "candidatePathFamily": "hook-arc",
+        "canonicalPathFamilyMatch": true,
+        "aggregateObjectTrackScore10": 5,
+        "aggregateObjectTrackCoverage": 0.534,
+        "primaryObjectTrackScore10": 4.6,
+        "primaryObjectTrackCoverage": 0.486,
+        "baselineAggregateObjectTrackScore10": 5,
+        "baselineAggregateObjectTrackCoverage": 0.534,
+        "baselinePrimaryObjectTrackScore10": 4.6,
+        "deltas": {
+          "aggregateScore10": 0,
+          "aggregateCoverage": 0,
+          "primaryScore10": 0
+        },
+        "deviations": {
+          "aggregatePathLengthRatio": 3.9,
+          "primaryPathLengthRatio": 3.31,
+          "aggregateLowerFieldDelta": 0,
+          "primaryLowerFieldDelta": 0,
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": 0.75
+        },
+        "candidateVector": {
+          "id": 698809353,
+          "family": "scorpion",
+          "pathFamily": "hook-arc",
+          "wave": 2,
+          "lane": 0,
+          "type": "boss",
+          "sampleCount": 7,
+          "visibleStartS": 4.25,
+          "visibleEndS": 5.75,
+          "entrySide": "center",
+          "exitSide": "center",
+          "xRange": 0.05,
+          "yRange": 0.4844,
+          "pathLength": 0.6007,
+          "turnCount": 2,
+          "reversalCount": 1,
+          "lowerFieldShare": 1
+        },
+        "appliedControls": null,
+        "blockers": [],
+        "warnings": [
+          "primary object-track score 4.6/10 is below first promotion floor",
+          "aggregate path-length ratio 3.9 exceeds first promotion floor",
+          "primary path-length ratio 3.31 exceeds first promotion floor"
+        ]
+      },
+      {
+        "groupIndex": 4,
+        "touchedByCandidate": false,
+        "canonicalComparisonPathFamily": "cross-sweep",
+        "candidatePathFamily": "hook-arc",
+        "canonicalPathFamilyMatch": false,
+        "aggregateObjectTrackScore10": 5,
+        "aggregateObjectTrackCoverage": 0.547,
+        "primaryObjectTrackScore10": 1.8,
+        "primaryObjectTrackCoverage": 0.109,
+        "baselineAggregateObjectTrackScore10": 5,
+        "baselineAggregateObjectTrackCoverage": 0.547,
+        "baselinePrimaryObjectTrackScore10": 1.8,
+        "deltas": {
+          "aggregateScore10": 0,
+          "aggregateCoverage": 0,
+          "primaryScore10": 0
+        },
+        "deviations": {
+          "aggregatePathLengthRatio": 9.23,
+          "primaryPathLengthRatio": 7.23,
+          "aggregateLowerFieldDelta": -0.266,
+          "primaryLowerFieldDelta": 0.25,
+          "visibleStartDeltaS": 0.37,
+          "visibleEndDeltaS": -0.13
+        },
+        "candidateVector": {
+          "id": 195163019,
+          "family": "stingray",
+          "pathFamily": "hook-arc",
+          "wave": 3,
+          "lane": 5,
+          "type": "boss",
+          "sampleCount": 12,
+          "visibleStartS": 7.5,
+          "visibleEndS": 10.25,
+          "entrySide": "left",
+          "exitSide": "center",
+          "xRange": 0.6754,
+          "yRange": 0.7522,
+          "pathLength": 1.3593,
+          "turnCount": 2,
+          "reversalCount": 1,
+          "lowerFieldShare": 0.25
+        },
+        "appliedControls": null,
+        "blockers": [
+          "path family hook-arc does not match canonical cross-sweep"
+        ],
+        "warnings": [
+          "primary object-track score 1.8/10 is below first promotion floor",
+          "aggregate path-length ratio 9.23 exceeds first promotion floor",
+          "primary path-length ratio 7.23 exceeds first promotion floor",
+          "lower-field undershoot -0.266 exceeds aggregate gate"
+        ]
+      },
+      {
+        "groupIndex": 5,
+        "touchedByCandidate": false,
+        "canonicalComparisonPathFamily": "hook-arc",
+        "candidatePathFamily": "boss-led-loop",
+        "canonicalPathFamilyMatch": false,
+        "aggregateObjectTrackScore10": 4.9,
+        "aggregateObjectTrackCoverage": 0.529,
+        "primaryObjectTrackScore10": 3,
+        "primaryObjectTrackCoverage": 0.27,
+        "baselineAggregateObjectTrackScore10": 4.9,
+        "baselineAggregateObjectTrackCoverage": 0.53,
+        "baselinePrimaryObjectTrackScore10": 3,
+        "deltas": {
+          "aggregateScore10": 0,
+          "aggregateCoverage": -0.001,
+          "primaryScore10": 0
+        },
+        "deviations": {
+          "aggregatePathLengthRatio": 3.83,
+          "primaryPathLengthRatio": 1.5,
+          "aggregateLowerFieldDelta": -0.166,
+          "primaryLowerFieldDelta": 0.208,
+          "visibleStartDeltaS": 0.12,
+          "visibleEndDeltaS": 0.12
+        },
+        "candidateVector": {
+          "id": 756830963,
+          "family": "stingray",
+          "pathFamily": "boss-led-loop",
+          "wave": 4,
+          "lane": 4,
+          "type": "bee",
+          "sampleCount": 11,
+          "visibleStartS": 13.5,
+          "visibleEndS": 16,
+          "entrySide": "center",
+          "exitSide": "center",
+          "xRange": 0.1557,
+          "yRange": 0.7693,
+          "pathLength": 0.9253,
+          "turnCount": 3,
+          "reversalCount": 3,
+          "lowerFieldShare": 0.27
+        },
+        "appliedControls": null,
+        "blockers": [
+          "path family boss-led-loop does not match canonical hook-arc"
+        ],
+        "warnings": [
+          "aggregate object-track score 4.9/10 is below first promotion floor",
+          "primary object-track score 3/10 is below first promotion floor",
+          "aggregate path-length ratio 3.83 exceeds first promotion floor"
+        ]
+      }
+    ],
+    "focusGroupResults": [
+      {
+        "groupIndex": 1,
+        "touchedByCandidate": false,
+        "canonicalComparisonPathFamily": "cross-sweep",
+        "candidatePathFamily": "cross-sweep",
+        "canonicalPathFamilyMatch": true,
+        "aggregateObjectTrackScore10": 3.5,
+        "aggregateObjectTrackCoverage": 0.343,
+        "primaryObjectTrackScore10": 3.7,
+        "primaryObjectTrackCoverage": 0.371,
+        "baselineAggregateObjectTrackScore10": 3.5,
+        "baselineAggregateObjectTrackCoverage": 0.343,
+        "baselinePrimaryObjectTrackScore10": 3.7,
+        "deltas": {
+          "aggregateScore10": 0,
+          "aggregateCoverage": 0,
+          "primaryScore10": 0
+        },
+        "deviations": {
+          "aggregatePathLengthRatio": 4.32,
+          "primaryPathLengthRatio": 2.45,
+          "aggregateLowerFieldDelta": 0.018,
+          "primaryLowerFieldDelta": 0,
+          "visibleStartDeltaS": 0.5,
+          "visibleEndDeltaS": 0.37
+        },
+        "candidateVector": {
+          "id": 975368029,
+          "family": "classic",
+          "pathFamily": "cross-sweep",
+          "wave": 0,
+          "lane": 6,
+          "type": "boss",
+          "sampleCount": 8,
+          "visibleStartS": 0.5,
+          "visibleEndS": 2.25,
+          "entrySide": "center",
+          "exitSide": "right",
+          "xRange": 0.6282,
+          "yRange": 0.0074,
+          "pathLength": 0.5081,
+          "turnCount": 1,
+          "reversalCount": 1,
+          "lowerFieldShare": 1
+        },
+        "appliedControls": null,
+        "blockers": [],
+        "warnings": [
+          "aggregate object-track score 3.5/10 is below first promotion floor",
+          "primary object-track score 3.7/10 is below first promotion floor",
+          "aggregate path-length ratio 4.32 exceeds first promotion floor"
+        ]
+      },
+      {
+        "groupIndex": 4,
+        "touchedByCandidate": false,
+        "canonicalComparisonPathFamily": "cross-sweep",
+        "candidatePathFamily": "hook-arc",
+        "canonicalPathFamilyMatch": false,
+        "aggregateObjectTrackScore10": 5,
+        "aggregateObjectTrackCoverage": 0.547,
+        "primaryObjectTrackScore10": 1.8,
+        "primaryObjectTrackCoverage": 0.109,
+        "baselineAggregateObjectTrackScore10": 5,
+        "baselineAggregateObjectTrackCoverage": 0.547,
+        "baselinePrimaryObjectTrackScore10": 1.8,
+        "deltas": {
+          "aggregateScore10": 0,
+          "aggregateCoverage": 0,
+          "primaryScore10": 0
+        },
+        "deviations": {
+          "aggregatePathLengthRatio": 9.23,
+          "primaryPathLengthRatio": 7.23,
+          "aggregateLowerFieldDelta": -0.266,
+          "primaryLowerFieldDelta": 0.25,
+          "visibleStartDeltaS": 0.37,
+          "visibleEndDeltaS": -0.13
+        },
+        "candidateVector": {
+          "id": 195163019,
+          "family": "stingray",
+          "pathFamily": "hook-arc",
+          "wave": 3,
+          "lane": 5,
+          "type": "boss",
+          "sampleCount": 12,
+          "visibleStartS": 7.5,
+          "visibleEndS": 10.25,
+          "entrySide": "left",
+          "exitSide": "center",
+          "xRange": 0.6754,
+          "yRange": 0.7522,
+          "pathLength": 1.3593,
+          "turnCount": 2,
+          "reversalCount": 1,
+          "lowerFieldShare": 0.25
+        },
+        "appliedControls": null,
+        "blockers": [
+          "path family hook-arc does not match canonical cross-sweep"
+        ],
+        "warnings": [
+          "primary object-track score 1.8/10 is below first promotion floor",
+          "aggregate path-length ratio 9.23 exceeds first promotion floor",
+          "primary path-length ratio 7.23 exceeds first promotion floor",
+          "lower-field undershoot -0.266 exceeds aggregate gate"
+        ]
+      },
+      {
+        "groupIndex": 5,
+        "touchedByCandidate": false,
+        "canonicalComparisonPathFamily": "hook-arc",
+        "candidatePathFamily": "boss-led-loop",
+        "canonicalPathFamilyMatch": false,
+        "aggregateObjectTrackScore10": 4.9,
+        "aggregateObjectTrackCoverage": 0.529,
+        "primaryObjectTrackScore10": 3,
+        "primaryObjectTrackCoverage": 0.27,
+        "baselineAggregateObjectTrackScore10": 4.9,
+        "baselineAggregateObjectTrackCoverage": 0.53,
+        "baselinePrimaryObjectTrackScore10": 3,
+        "deltas": {
+          "aggregateScore10": 0,
+          "aggregateCoverage": -0.001,
+          "primaryScore10": 0
+        },
+        "deviations": {
+          "aggregatePathLengthRatio": 3.83,
+          "primaryPathLengthRatio": 1.5,
+          "aggregateLowerFieldDelta": -0.166,
+          "primaryLowerFieldDelta": 0.208,
+          "visibleStartDeltaS": 0.12,
+          "visibleEndDeltaS": 0.12
+        },
+        "candidateVector": {
+          "id": 756830963,
+          "family": "stingray",
+          "pathFamily": "boss-led-loop",
+          "wave": 4,
+          "lane": 4,
+          "type": "bee",
+          "sampleCount": 11,
+          "visibleStartS": 13.5,
+          "visibleEndS": 16,
+          "entrySide": "center",
+          "exitSide": "center",
+          "xRange": 0.1557,
+          "yRange": 0.7693,
+          "pathLength": 0.9253,
+          "turnCount": 3,
+          "reversalCount": 3,
+          "lowerFieldShare": 0.27
+        },
+        "appliedControls": null,
+        "blockers": [
+          "path family boss-led-loop does not match canonical hook-arc"
+        ],
+        "warnings": [
+          "aggregate object-track score 4.9/10 is below first promotion floor",
+          "primary object-track score 3/10 is below first promotion floor",
+          "aggregate path-length ratio 3.83 exceeds first promotion floor"
+        ]
+      }
+    ],
+    "lowerFieldOverstay": [
+      {
+        "groupIndex": 1,
+        "aggregateLowerFieldDelta": 0.018,
+        "primaryLowerFieldDelta": 0
+      },
+      {
+        "groupIndex": 2,
+        "aggregateLowerFieldDelta": 0.358,
+        "primaryLowerFieldDelta": -0.139
+      },
+      {
+        "groupIndex": 3,
+        "aggregateLowerFieldDelta": 0,
+        "primaryLowerFieldDelta": 0
+      },
+      {
+        "groupIndex": 4,
+        "aggregateLowerFieldDelta": -0.266,
+        "primaryLowerFieldDelta": 0.25
+      },
+      {
+        "groupIndex": 5,
+        "aggregateLowerFieldDelta": -0.166,
+        "primaryLowerFieldDelta": 0.208
+      }
+    ],
+    "spacingReadability": {
+      "source": "npm run harness:check:challenge-motion-profile after restored baseline",
+      "pass": true,
+      "preserveBaseline": true,
+      "spacingScore": 0.765,
+      "bunchingRisk": 0.292,
+      "worstMinDistance": 3.08,
+      "averageMinDistance": 19.82,
+      "readabilityScore10": null,
+      "blockers": []
+    },
+    "scoreableRoutes": {
+      "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+      "pass": true,
+      "preserveBaseline": true,
+      "score10": 5.5,
+      "activeWindows": 47,
+      "multiTargetWindowShare": 0.745,
+      "laneDiversity": 1,
+      "centerBias": 0.359,
+      "blockers": []
+    },
+    "safety": {
+      "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+      "pass": true,
+      "preserveBaseline": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0,
+        "challengeContacts": 4
+      },
+      "blockers": []
+    }
+  },
+  "summary": {
+    "measurementKeeperRecommendation": "accept-trial-mechanism",
+    "runtimeKeeperRecommendation": "not-a-runtime-keeper",
+    "readyForRuntimeSourceCandidate": false,
+    "blockerCount": 5,
+    "warningCount": 16,
+    "blockers": [
+      "total object-track score lift 0/10 does not exceed 0.05/10",
+      "group 1 does not improve over baseline 3.5/10",
+      "group 2: path family cross-sweep does not match canonical hook-arc",
+      "group 4: path family hook-arc does not match canonical cross-sweep",
+      "group 5: path family boss-led-loop does not match canonical hook-arc"
+    ],
+    "warnings": [
+      "group 1: aggregate object-track score 3.5/10 is below first promotion floor",
+      "group 1: primary object-track score 3.7/10 is below first promotion floor",
+      "group 1: aggregate path-length ratio 4.32 exceeds first promotion floor",
+      "group 2: primary object-track score 2.6/10 is below first promotion floor",
+      "group 2: aggregate path-length ratio 5.74 exceeds first promotion floor",
+      "group 2: lower-field overstay +0.358 exceeds aggregate gate",
+      "group 3: primary object-track score 4.6/10 is below first promotion floor",
+      "group 3: aggregate path-length ratio 3.9 exceeds first promotion floor",
+      "group 3: primary path-length ratio 3.31 exceeds first promotion floor",
+      "group 4: primary object-track score 1.8/10 is below first promotion floor",
+      "group 4: aggregate path-length ratio 9.23 exceeds first promotion floor",
+      "group 4: primary path-length ratio 7.23 exceeds first promotion floor",
+      "group 4: lower-field undershoot -0.266 exceeds aggregate gate",
+      "group 5: aggregate object-track score 4.9/10 is below first promotion floor",
+      "group 5: primary object-track score 3/10 is below first promotion floor",
+      "group 5: aggregate path-length ratio 3.83 exceeds first promotion floor"
+    ],
+    "read": "This external trial is useful measurement, but it is not ready for runtime source promotion."
+  },
+  "nextBestStep": "Revise the external candidate until it improves group 1 while preserving groups 4 and 5, coverage, spacing/readability, scoreable routes, and challenge safety."
+}

@@ -259,7 +259,7 @@ function overpredictedTransforms(candidate, actualMatchesPrediction){
       rows.push({
         classId,
         overpredicted: true,
-        read: 'Predicted lift came from visibleStartS/visibleEndS trial vectors; the semantic candidate did not emit compiledRuntimeControls or cite guard-safe browser proof.'
+        read: 'The rejected runtime attempt did not transfer predicted phase-window lift into actual object-track movement. Current compiler output must use compiledRuntimeControls and passing proof before another source attempt.'
       });
     }else if(classId === 'canonical-family-alignment'){
       rows.push({
@@ -449,7 +449,7 @@ function main(){
     likelyCauses: [
       {
         cause: 'runtime-expressibility',
-        read: 'phase-duration-rebalance emitted visible windows but no compiledRuntimeControls or cited proof artifact.'
+        read: 'The rejected source attempt overpredicted phase-window transfer. New phase-duration compiler controls still require a passing motion/profile-safe proof before source promotion.'
       },
       {
         cause: 'stale-or-unreconciled-target-artifact',
@@ -468,7 +468,7 @@ function main(){
       runtimeCandidateAllowed,
       sourceReadyGatePass: false,
       nextRecommendation: 'Do not try another Stage 7 runtime candidate. Keep source-ready path-family authority on the live gates/runtime source, then update the semantic generator so phase-duration intent emits compiledRuntimeControls and only passes when the proof artifact confirms browser-visible effect plus motion/profile guard safety.',
-      remainingCompilerGap: 'phase-duration-rebalance now has a runtime-consumed control contract, but generated candidates must emit compiledRuntimeControls and cite the phase-duration expressibility proof instead of visibleStartS/visibleEndS trial vectors.'
+      remainingCompilerGap: 'phase-duration-rebalance now emits runtime-consumed compiled controls, but source promotion remains blocked until the proof passes the motion/profile proxy. group1 path-length compression and lower-field overstay reduction remain analysis-only until browser transfer proofs exist.'
     }
   };
   writeJson(OUT_JSON, report);

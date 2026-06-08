@@ -53,6 +53,29 @@ function main(){
   for(const role of ['measured-reference-intent', 'live-promotion-gate', 'live-runtime-source']){
     if(!roles.has(role)) fail('Authority report is missing a required source role.', { role });
   }
+  const debt = report.authorityDebt || {};
+  if(debt.currentSourcePromotionAuthority?.authorityType !== 'promotion-authority'){
+    fail('Authority report must explicitly name current source-promotion authority debt.', { authorityDebt: debt });
+  }
+  if(debt.targetConformanceAuthority?.authorityType !== 'target-conformance-authority'){
+    fail('Authority report must explicitly name target-conformance authority debt.', { authorityDebt: debt });
+  }
+  if(!sameOrder(debt.currentSourcePromotionAuthority?.order || [], report.liveGateOrder)){
+    fail('Authority debt promotion order must match the live gate order.', { authorityDebt: debt, liveGateOrder: report.liveGateOrder });
+  }
+  if(!sameOrder(debt.targetConformanceAuthority?.order || [], report.measuredIntentOrder)){
+    fail('Authority debt target-conformance order must match measured intent.', { authorityDebt: debt, measuredIntentOrder: report.measuredIntentOrder });
+  }
+  if(!String(debt.separationPrinciple || '').includes('Do not collapse')){
+    fail('Authority debt must keep promotion authority separate from target conformance truth.', { authorityDebt: debt });
+  }
+  const gapTypes = new Set((debt.gapClassification || []).map(row => row.gapType));
+  for(const gapType of ['runtime-implementation-gap', 'live-gate-staleness-gap', 'target-evidence-gap']){
+    if(!gapTypes.has(gapType)) fail('Authority debt must classify the open authority gap.', { gapType, authorityDebt: debt });
+  }
+  if(!Array.isArray(debt.evidenceRequiredToMigrate) || debt.evidenceRequiredToMigrate.length < 3){
+    fail('Authority debt must list migration evidence requirements.', { authorityDebt: debt });
+  }
   console.log(JSON.stringify({
     ok: true,
     report: rel(REPORT),

@@ -54,8 +54,19 @@ npm run harness:check:stage7-phase-duration-expressibility
 ```
 
 For `phase-duration-rebalance`, raw `visibleStartS` / `visibleEndS` trial
-vectors are analysis-only. A source-ready candidate must emit compiled runtime
-controls and preserve the live path-family gate.
+vectors are analysis-only. The semantic compiler now emits
+`compiledRuntimeControls` mapped to `groupSpawnOffsets` /
+`motionSpecGroup.spawnOffsetS`, `phaseDurations.trackS`, and
+`referencePath.playbackScale`, but a source-ready candidate still requires the
+phase-duration proof to pass the motion/profile proxy and preserve the live
+path-family gate.
+
+For `group1-path-length-compression` and `lower-field-overstay-reduction`, the
+batch may record `analysisCompilerMappings` that point at consumed runtime
+fields (`referencePath.playbackScale`, `lowerFieldBias`, and `yOffset`). These
+are not source-ready compiled controls until a focused browser proof verifies
+that the mapping transfers to actual Stage 7 object-track movement without
+spacing, scoreable-route, or safety regression.
 
 ## Stage 7 Input Shape
 
@@ -84,7 +95,10 @@ and 5, preserves coverage, and has passing spacing/readability,
 scoreable-route, and safety guardrails. The semantic batch gate adds stricter
 requirements: live path-family authority alignment, runtime-expressibility
 mapping, proof artifacts for phase-duration controls, and compiled controls
-instead of optimistic trial vectors. Even then, it is not a runtime keeper; the
-runtime keeper still requires source edit, rebuild, before/after visual
-evidence, focused strict checks, motion/profile checks, scoreable-route checks,
-and no-shot/no-loss safety evidence.
+instead of optimistic trial vectors. The batch report also records compiler
+coverage, predicted-vs-proof-backed improvement, source-ready blocker taxonomy,
+and the distinction between "blocked by promotion authority" and target
+conformance debt. Even then, it is not a runtime keeper; the runtime keeper
+still requires source edit, rebuild, before/after visual evidence, focused
+strict checks, motion/profile checks, scoreable-route checks, and
+no-shot/no-loss safety evidence.

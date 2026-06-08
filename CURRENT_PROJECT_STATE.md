@@ -93,7 +93,9 @@ Latest Stage 7 calibration:
   source as source-ready authority for now:
   `reference-artifacts/analyses/reference-execution-authority/stage7-challenge2/latest-path-family-authority.json`.
   RED/setpiece remain measured-reference intent, not source-promotion truth by
-  themselves.
+  themselves. The authority report now records this as explicit debt: live
+  gates are today's promotion authority, while RED/setpiece remain target
+  conformance authority to migrate toward only after direct migration proof.
 - `phase-duration-rebalance` now has a runtime-consumed control contract and
   browser proof for `groupSpawnOffsets` / `motionSpecGroup.spawnOffsetS`,
   `phaseDurations.trackS`, and `referencePath.playbackScale`; `exitS` is
@@ -101,9 +103,13 @@ Latest Stage 7 calibration:
   preserves group 4/group 5 windows, but its motion/profile proxy guard is not
   clean, so it is not source-ready evidence by itself:
   `reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-phase-duration-proof.json`.
-- Next Stage 7 work should make the semantic generator emit
-  `compiledRuntimeControls` under live path-family authority and find
-  guard-safe phase-duration values before another source attempt.
+- The semantic generator now emits `compiledRuntimeControls` for
+  `phase-duration-rebalance` under live path-family authority. It also records
+  analysis-only compiler mappings for `group1-path-length-compression` and
+  `lower-field-overstay-reduction`, but those are blocked from source-ready
+  status until browser transfer proofs exist. Next Stage 7 work should make
+  the phase-duration proof pass the motion/profile proxy or add focused proof
+  harnesses for path-length/lower-field transfer before any source attempt.
 
 ## Historical Or Stale Current-State Docs
 

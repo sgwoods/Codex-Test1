@@ -50,6 +50,26 @@ function main(){
   if(!report.sourceReadyGate?.requiresRuntimeExpressibilityProof || !report.sourceReadyGate?.requiresCompiledRuntimeControlsForPhaseDuration){
     fail('Semantic batch source-ready gate must require proof artifacts and compiled controls for phase-duration intent.', { sourceReadyGate: report.sourceReadyGate });
   }
+  if(report.sourceReadyGate?.requiresAuthorityDebtVisibility !== true){
+    fail('Semantic batch source-ready gate must keep promotion authority separate from target-conformance debt.', { sourceReadyGate: report.sourceReadyGate });
+  }
+  if(!Array.isArray(report.compilerCoverage) || report.compilerCoverage.length !== EXPECTED_CLASSES.length){
+    fail('Semantic batch must include compiler coverage for every transformation class.', { compilerCoverage: report.compilerCoverage });
+  }
+  const coverageByClass = new Map(report.compilerCoverage.map(row => [row.classId, row]));
+  const phaseCoverage = coverageByClass.get('phase-duration-rebalance');
+  if(!phaseCoverage || phaseCoverage.compiledRuntimeControlCount <= 0){
+    fail('phase-duration-rebalance must emit compiled runtime controls in the semantic batch.', { phaseCoverage });
+  }
+  for(const classId of ['group1-path-length-compression', 'lower-field-overstay-reduction']){
+    const coverage = coverageByClass.get(classId);
+    if(!coverage || coverage.analysisCompilerMappingCount <= 0 || coverage.sourceReadySupported !== false){
+      fail(`${classId} must be represented as an analysis-only compiler mapping until proof-backed.`, { coverage });
+    }
+  }
+  if(!report.sourceReadyBlockerTaxonomy || !Object.keys(report.sourceReadyBlockerTaxonomy).length){
+    fail('Semantic batch must include a source-ready blocker taxonomy.', { sourceReadyBlockerTaxonomy: report.sourceReadyBlockerTaxonomy });
+  }
   const tested = new Set(report.transformationClassesTested || []);
   const missingClasses = EXPECTED_CLASSES.filter(classId => !tested.has(classId));
   if(missingClasses.length) fail('Semantic batch did not test all expected transformation classes.', { missingClasses });
@@ -69,6 +89,8 @@ function main(){
     if(!candidate.semanticValidity || typeof candidate.semanticValidity.pass !== 'boolean') rowIssues.push(`${prefix}: missing semantic validity read`);
     if(!candidate.runtimeExpressibility || typeof candidate.runtimeExpressibility.pass !== 'boolean') rowIssues.push(`${prefix}: missing runtime expressibility read`);
     if(!candidate.runtimeExpressibility?.proofStatus || typeof candidate.runtimeExpressibility.proofStatus.phaseDurationProofPass !== 'boolean') rowIssues.push(`${prefix}: missing runtime expressibility proof status`);
+    if(!candidate.blockerTaxonomy || typeof candidate.blockerTaxonomy !== 'object') rowIssues.push(`${prefix}: missing source-ready blocker taxonomy`);
+    if(!candidate.proofBackedImprovement || !Object.prototype.hasOwnProperty.call(candidate.proofBackedImprovement, 'predictedTotalObjectTrackDelta10')) rowIssues.push(`${prefix}: missing predicted-vs-proof-backed improvement read`);
     if(candidate.readyForRuntimeSourceCandidate && !candidate.runtimeExpressibility.pass) rowIssues.push(`${prefix}: source-ready candidate failed runtime expressibility`);
     if(typeof candidate.readyForRuntimeSourceCandidate !== 'boolean') rowIssues.push(`${prefix}: missing runtime-source readiness`);
   }

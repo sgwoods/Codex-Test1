@@ -233,11 +233,13 @@ from the roadmap.
    the applied candidate. No further Stage 7 runtime candidate is currently
    source-ready. The current path-family authority decision keeps live
    promotion gates/restored runtime source as source-ready authority, with
-   RED/setpiece retained as measured-reference intent. `phase-duration-rebalance`
-   now has a consumed-control contract and browser-visible proof, but the proof
-   variants do not pass the motion/profile proxy guard; next work should emit
-   guard-safe `compiledRuntimeControls` under live authority before another
-   source attempt.
+   RED/setpiece retained as measured-reference intent and explicit authority
+   debt. `phase-duration-rebalance` now emits consumed
+   `compiledRuntimeControls` under live authority and has browser-visible proof,
+   but the proof variants do not pass the motion/profile proxy guard. Group 1
+   path-length compression and lower-field overstay reduction now have
+   analysis-only compiler mappings, but no browser transfer proof. Next work
+   should make one proof path pass before another source attempt.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth
@@ -337,16 +339,18 @@ Current conformance read:
   `reference-artifacts/analyses/reference-execution-runtime-calibrations/stage7-challenge2/latest-semantic-runtime-calibration.json`.
   It identifies two source-promotion blockers: Stage 7 path-family order is
   split between measured reference intent and live promotion gates, and
-  the old `phase-duration-rebalance` candidates still emit trial-only
-  `visibleStartS`/`visibleEndS` instead of compiled runtime controls. The
-  follow-on authority/proof cycle selected live promotion gates/restored
-  runtime source as source-ready authority and proved that
+  phase-duration controls still need a motion/profile-safe proof before
+  promotion. The follow-on authority/proof/compiler cycle selected live
+  promotion gates/restored runtime source as source-ready authority, made that
+  authority split explicit as target-conformance debt, and proved that
   `groupSpawnOffsets` / `motionSpecGroup.spawnOffsetS`,
   `phaseDurations.trackS`, and `referencePath.playbackScale` are consumed
   controls that change browser-visible timing/path behavior. However, the
   proof variants do not pass the motion/profile proxy guard, and `exitS` is
-  explicitly unconsumed. This is a measurement/process keeper, not a runtime
-  keeper or beta justification.
+  explicitly unconsumed. The semantic batch now emits phase-duration
+  `compiledRuntimeControls` under live authority and records path-length /
+  lower-field mappings as analysis-only until their transfer proofs exist. This
+  is a measurement/process keeper, not a runtime keeper or beta justification.
 - challenge-stage grammar is now materially ahead of runtime implementation:
   the first-five challenge work has `25/25` reference-backed group contracts
   and `8.6/10` control readiness, but runtime promotion is still blocked by
