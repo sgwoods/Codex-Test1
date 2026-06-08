@@ -52,6 +52,27 @@ function main(){
       compiledRuntimeControlsEmitted: report.compiledRuntimeControlsEmitted
     });
   }
+  if(!Array.isArray(report.intendedTouchedGroups) || !Array.isArray(report.protectedGroups)){
+    fail('Phase-duration proof must report intended touched groups and protected groups.', {
+      intendedTouchedGroups: report.intendedTouchedGroups,
+      protectedGroups: report.protectedGroups
+    });
+  }
+  if(!report.protectedGroups.includes(4) || !report.protectedGroups.includes(5)){
+    fail('Phase-duration proof must protect groups 4 and 5.', { protectedGroups: report.protectedGroups });
+  }
+  if(!Array.isArray(report.perGroupTimingDeltaS) || report.perGroupTimingDeltaS.length !== 5){
+    fail('Phase-duration proof must report per-group timing deltas.', { perGroupTimingDeltaS: report.perGroupTimingDeltaS });
+  }
+  if(typeof report.protectedGroupTimingPass !== 'boolean'){
+    fail('Phase-duration proof must report protected group timing status.', { protectedGroupTimingPass: report.protectedGroupTimingPass });
+  }
+  if(typeof report.phaseDurationProofBacked !== 'boolean'){
+    fail('Phase-duration proof must report whether phase-duration is proof-backed.', { phaseDurationProofBacked: report.phaseDurationProofBacked });
+  }
+  if(!Array.isArray(report.sourceReadyBlockerType)){
+    fail('Phase-duration proof must report source-ready blocker types.', { sourceReadyBlockerType: report.sourceReadyBlockerType });
+  }
   const compiledFields = Array.isArray(report.compiledRuntimeFields) ? report.compiledRuntimeFields : [];
   if(!compiledFields.length || compiledFields.some(field => field.runtimeCurrentlyConsumes !== true || field.consumedByProof !== true)){
     fail('Phase-duration proof must show every compiled runtime field was consumed by the browser layout override.', { compiledFields });
@@ -73,7 +94,7 @@ function main(){
   if(typeof report.summary?.group45Preserved !== 'boolean'){
     fail('Phase-duration proof must report whether proof variants preserve group 4/group 5 timing windows.', { summary: report.summary });
   }
-  if(report.decision?.sourceReadyForCandidates === true && report.summary.compiledCandidateGroup45Preserved !== true){
+  if(report.decision?.sourceReadyForCandidates === true && report.protectedGroupTimingPass !== true){
     fail('A source-ready phase-duration proof cannot regress protected group 4/group 5 timing windows.', {
       summary: report.summary,
       decision: report.decision

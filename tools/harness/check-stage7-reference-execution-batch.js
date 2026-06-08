@@ -53,6 +53,12 @@ function main(){
   if(report.sourceReadyGate?.requiresAuthorityDebtVisibility !== true){
     fail('Semantic batch source-ready gate must keep promotion authority separate from target-conformance debt.', { sourceReadyGate: report.sourceReadyGate });
   }
+  if(report.sourceReadyGate?.requiresProtectedGroupTimingInvariant !== true){
+    fail('Semantic batch source-ready gate must require protected group timing invariants.', { sourceReadyGate: report.sourceReadyGate });
+  }
+  if(!Array.isArray(report.sourceReadyGate?.protectedGroups) || !report.sourceReadyGate.protectedGroups.includes(4) || !report.sourceReadyGate.protectedGroups.includes(5)){
+    fail('Semantic batch source-ready gate must protect groups 4 and 5.', { sourceReadyGate: report.sourceReadyGate });
+  }
   if(!Array.isArray(report.compilerCoverage) || report.compilerCoverage.length !== EXPECTED_CLASSES.length){
     fail('Semantic batch must include compiler coverage for every transformation class.', { compilerCoverage: report.compilerCoverage });
   }
@@ -90,7 +96,22 @@ function main(){
     if(!candidate.runtimeExpressibility || typeof candidate.runtimeExpressibility.pass !== 'boolean') rowIssues.push(`${prefix}: missing runtime expressibility read`);
     if(!candidate.runtimeExpressibility?.proofStatus || typeof candidate.runtimeExpressibility.proofStatus.phaseDurationProofPass !== 'boolean') rowIssues.push(`${prefix}: missing runtime expressibility proof status`);
     if(!candidate.blockerTaxonomy || typeof candidate.blockerTaxonomy !== 'object') rowIssues.push(`${prefix}: missing source-ready blocker taxonomy`);
+    if(!Array.isArray(candidate.sourceReadyBlockerType)) rowIssues.push(`${prefix}: missing source-ready blocker type`);
     if(!candidate.proofBackedImprovement || !Object.prototype.hasOwnProperty.call(candidate.proofBackedImprovement, 'predictedTotalObjectTrackDelta10')) rowIssues.push(`${prefix}: missing predicted-vs-proof-backed improvement read`);
+    if(!Array.isArray(candidate.perGroupTimingDeltaS) || candidate.perGroupTimingDeltaS.length !== 5) rowIssues.push(`${prefix}: missing per-group timing deltas`);
+    if(typeof candidate.protectedGroupTimingPass !== 'boolean') rowIssues.push(`${prefix}: missing protected-group timing status`);
+    if(typeof candidate.phaseDurationProofBacked !== 'boolean') rowIssues.push(`${prefix}: missing phase-duration proof-backed status`);
+    if(candidate.semanticTransformations.includes('phase-duration-rebalance')){
+      if(!Array.isArray(candidate.intendedTouchedGroups) || !candidate.intendedTouchedGroups.length) rowIssues.push(`${prefix}: phase-duration candidate missing intended touched groups`);
+      if(!Array.isArray(candidate.protectedGroups) || !candidate.protectedGroups.includes(4) || !candidate.protectedGroups.includes(5)) rowIssues.push(`${prefix}: phase-duration candidate must declare protected groups 4 and 5`);
+      const protectedRows = candidate.perGroupTimingDeltaS.filter(row => candidate.protectedGroups.includes(+row.groupIndex));
+      if(protectedRows.some(row => row.touchedByCandidate && candidate.intendedTouchedGroups.includes(+row.groupIndex))){
+        rowIssues.push(`${prefix}: phase-duration candidate touched a protected group without an explicit opt-in`);
+      }
+      if(candidate.readyForRuntimeSourceCandidate && candidate.protectedGroupTimingPass !== true){
+        rowIssues.push(`${prefix}: source-ready phase-duration candidate failed protected-group timing`);
+      }
+    }
     if(candidate.readyForRuntimeSourceCandidate && !candidate.runtimeExpressibility.pass) rowIssues.push(`${prefix}: source-ready candidate failed runtime expressibility`);
     if(typeof candidate.readyForRuntimeSourceCandidate !== 'boolean') rowIssues.push(`${prefix}: missing runtime-source readiness`);
   }

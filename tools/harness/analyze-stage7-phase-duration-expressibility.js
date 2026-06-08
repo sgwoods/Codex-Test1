@@ -16,6 +16,12 @@ const SAMPLE_END_S = 18;
 const VISIBLE_BOUNDS = Object.freeze({ minX: -24, maxX: 304, minY: -36, maxY: 382 });
 const STAGE7_SPACING_GUARD = Object.freeze({ crampedDistance: 7.5, idealDistance: 13, minSpacingScore: 0.72, maxBunchingRisk: 0.38 });
 const PLAYBACK_CLOCK_DRIFT_LIMIT_S = 0.08;
+const DEFAULT_PROTECTED_GROUPS = [4, 5];
+const PROTECTED_GROUP_TIMING_LIMITS = Object.freeze({
+  visibleStartDeltaS: 0.35,
+  visibleEndDeltaS: 0.45,
+  visibleDurationDeltaS: 0.45
+});
 
 function rel(file){
   return path.relative(ROOT, file).split(path.sep).join('/');
@@ -121,6 +127,9 @@ function phaseDurationCandidatesFromBatch(){
       semanticTransformations: candidate.semanticTransformations || [],
       intendedPlayerFacingMeaning: candidate.intendedPlayerFacingMeaning || '',
       targetGroups: candidate.targetGroups || [],
+      intendedTouchedGroups: candidate.intendedTouchedGroups || [],
+      protectedGroups: candidate.protectedGroups || [],
+      phaseDurationCompiler: candidate.phaseDurationCompiler || null,
       invariantsPreserved: candidate.invariantsPreserved || [],
       expectedMetricMovement: candidate.expectedMetricMovement || '',
       guardrails: candidate.guardrails || {}
@@ -145,6 +154,29 @@ function summarizeGroupDeltas(baseline, variant, groups = [1, 2, 3, 4, 5]){
     const delta = windowDelta(baseWindow, candidateWindow);
     const tmDelta = round((variant.groupTmAt2S?.[`group${groupIndex}`] ?? 0) - (baseline.groupTmAt2S?.[`group${groupIndex}`] ?? 0), 3);
     return Object.assign({ groupIndex, tmAt2SDelta: tmDelta }, delta);
+  });
+}
+
+function timingDeltaPass(delta, limits = PROTECTED_GROUP_TIMING_LIMITS){
+  if(!delta) return false;
+  return Math.abs(delta.visibleStartDeltaS || 0) <= limits.visibleStartDeltaS
+    && Math.abs(delta.visibleEndDeltaS || 0) <= limits.visibleEndDeltaS
+    && Math.abs(delta.visibleDurationDeltaS || 0) <= limits.visibleDurationDeltaS;
+}
+
+function protectedTimingRows(baseline, variant, protectedGroups){
+  const groups = protectedGroups.length ? protectedGroups : DEFAULT_PROTECTED_GROUPS;
+  const deltas = summarizeGroupDeltas(baseline, variant);
+  return deltas.map(delta => {
+    const baselineWindow = baseline.groupWindows[`group${delta.groupIndex}`] || {};
+    const compiledWindow = variant.groupWindows[`group${delta.groupIndex}`] || {};
+    const isProtected = groups.includes(+delta.groupIndex);
+    return Object.assign({}, delta, {
+      protectedGroup: isProtected,
+      baseline: baselineWindow,
+      compiled: compiledWindow,
+      pass: !isProtected || timingDeltaPass(delta)
+    });
   });
 }
 
@@ -213,6 +245,10 @@ function markdown(report){
   const controlRows = report.compilerContract.controls.map(control => `| ${control.semanticField} | ${control.generatedRuntimeField} | ${control.runtimeCurrentlyConsumes} | ${control.expectedVisibleEffect} | ${control.proofStatus} |`).join('\n');
   const variantRows = report.variants.map(variant => `| ${variant.variantId} | ${variant.control} | ${variant.groupIndex} | ${variant.evaluation.browserVisibleEffectConfirmed} | ${variant.evaluation.motionProfileGateProxyPass} | ${variant.evaluation.group45RegressionPass} | ${variant.evaluation.targetVisibleEffectScoreS} |`).join('\n');
   const compiledRows = (report.compiledRuntimeFields || []).map(field => `| ${field.runtimeField} | ${field.value} | ${field.runtimeCurrentlyConsumes} | ${(field.appliedTargets || []).map(target => target.target).join(', ')} |`).join('\n');
+  const protectedRows = (report.perGroupTimingDeltaS || [])
+    .filter(row => row.protectedGroup)
+    .map(row => `| ${row.groupIndex} | ${row.baseline.visibleStartS ?? 'n/a'}-${row.baseline.visibleEndS ?? 'n/a'} | ${row.compiled.visibleStartS ?? 'n/a'}-${row.compiled.visibleEndS ?? 'n/a'} | ${row.visibleStartDeltaS} | ${row.visibleEndDeltaS} | ${row.visibleDurationDeltaS} | ${row.pass} |`)
+    .join('\n');
   const blockerRows = (report.failureClassification || []).map(row => `- ${row.category}: ${row.read}`).join('\n') || '- none';
   return `# Stage 7 Phase-Duration Runtime Expressibility Proof
 
@@ -236,9 +272,21 @@ ${controlRows}
 
 ## Compiled Semantic Candidate
 
+Intended phase groups: ${report.intendedTouchedGroups.join(', ') || 'none'}
+
+Protected groups: ${report.protectedGroups.join(', ') || 'none'}
+
 | Runtime field | Value | Runtime consumes | Applied layout targets |
 | --- | ---: | --- | --- |
 ${compiledRows}
+
+## Protected Timing
+
+Protected group timing pass: ${report.protectedGroupTimingPass}
+
+| Group | Baseline window | Compiled window | Start delta | End delta | Duration delta | Pass |
+| ---: | --- | --- | ---: | ---: | ---: | --- |
+${protectedRows}
 
 ## Browser Proof Variants
 
@@ -261,37 +309,37 @@ function classifyCompiledProof(compiledVariant){
   const failures = [];
   if(!evaluation.browserVisibleEffectConfirmed){
     failures.push({
-      category: 'compiler emitted the wrong controls or runtime did not consume them visibly',
+      category: 'not-runtime-expressible',
       read: 'The compiled phase-duration controls did not produce a measurable browser-visible timing/path delta.'
     });
   }
   if(evaluation.pathOrderPass === false || evaluation.contractPathOrderPass === false || evaluation.runtimePathOrderPass === false){
     failures.push({
-      category: 'source-promotion authority blocks the transform',
+      category: 'promotion-authority-mismatch',
       read: 'The compiled layout no longer satisfies the live path-family/order authority expected by the motion/profile guard.'
     });
   }
   if(evaluation.referenceSetupPass === false){
     failures.push({
-      category: 'runtime consumes controls differently than expected',
+      category: 'not-runtime-expressible',
       read: 'The compiled layout lost reference-backed enemies or motion-spec setup while applying runtime fields.'
     });
   }
   if(evaluation.playbackClockPass === false){
     failures.push({
-      category: 'motion/profile target conflicts with semantic intent',
+      category: 'guardrail-regression',
       read: 'The compiled playback-scale controls change reference-path tm advance enough to fail the real-elapsed playback-clock proxy.'
     });
   }
   if(evaluation.spacingProxyPass === false){
     failures.push({
-      category: 'motion/profile spacing proxy blocks the transform',
+      category: 'guardrail-regression',
       read: 'The compiled timing controls reduce spacing/readability below the Stage 7 challenge-motion-profile floor.'
     });
   }
   if(evaluation.group45RegressionPass === false){
     failures.push({
-      category: 'semantic guardrail caught a real regression',
+      category: 'protected-group-regression',
       read: 'The compiled controls changed group 4 or group 5 timing beyond the protected late-group tolerance.'
     });
   }
@@ -668,9 +716,21 @@ async function main(){
     evaluation: evaluateVariant(variant, proof.baseline, liveGateOrder)
   }));
   const compiledVariant = variants.find(variant => variant.variantId === `compiled-${compiledPlan.candidate.candidateId}`);
+  const intendedTouchedGroups = (compiledPlan.candidate.intendedTouchedGroups?.length
+    ? compiledPlan.candidate.intendedTouchedGroups
+    : compiledVariant?.evaluation?.touchedGroups || []).map(Number).filter(Number.isFinite);
+  const protectedGroups = (compiledPlan.candidate.protectedGroups?.length
+    ? compiledPlan.candidate.protectedGroups
+    : DEFAULT_PROTECTED_GROUPS).map(Number).filter(Number.isFinite);
+  const perGroupTimingDeltaS = compiledVariant
+    ? protectedTimingRows(proof.baseline, compiledVariant, protectedGroups)
+    : [];
+  const protectedGroupTimingPass = perGroupTimingDeltaS
+    .filter(row => row.protectedGroup)
+    .every(row => row.pass);
   const compiledCandidateBrowserVisibleEffectConfirmed = compiledVariant?.evaluation?.browserVisibleEffectConfirmed === true;
   const compiledCandidateMotionProfileGateProxyPass = compiledVariant?.evaluation?.motionProfileGateProxyPass === true;
-  const compiledCandidateGroup45Preserved = compiledVariant?.evaluation?.group45RegressionPass === true;
+  const compiledCandidateGroup45Preserved = protectedGroupTimingPass;
   const failureClassification = classifyCompiledProof(compiledVariant);
   const browserVisibleEffectConfirmed = variants.every(variant => variant.evaluation.browserVisibleEffectConfirmed);
   const motionProfileProxyPass = compiledCandidateMotionProfileGateProxyPass;
@@ -678,7 +738,7 @@ async function main(){
   const compiledRuntimeFields = (compiledVariant?.appliedRuntimeFields || []).map(field => Object.assign({}, field, {
     consumedByProof: field.runtimeCurrentlyConsumes === true && field.appliedInLayoutOverride === true
   }));
-  const sourceReadyForCandidates = compiledCandidateBrowserVisibleEffectConfirmed
+  const phaseDurationProofBacked = compiledCandidateBrowserVisibleEffectConfirmed
     && compiledCandidateMotionProfileGateProxyPass
     && compiledCandidateGroup45Preserved
     && compiledRuntimeFields.length > 0
@@ -688,6 +748,8 @@ async function main(){
     && compiledPlan.candidate.guardrails?.safety?.noEnemyShots === true
     && compiledPlan.candidate.guardrails?.safety?.noAttackStarts === true
     && compiledPlan.candidate.guardrails?.safety?.noShipLosses === true;
+  const sourceReadyForCandidates = phaseDurationProofBacked;
+  const sourceReadyBlockerType = Array.from(new Set(failureClassification.map(row => row.category))).sort();
   const report = {
     schemaVersion: 1,
     artifactType: 'stage7-phase-duration-runtime-expressibility-proof',
@@ -710,16 +772,23 @@ async function main(){
     semanticTransformId: 'phase-duration-rebalance',
     batch: compiledPlan.batch,
     candidate: compiledPlan.candidate,
+    intendedTouchedGroups,
+    protectedGroups,
+    compiledRuntimeControls: compiledPlan.compiledRuntimeControls,
     compiledRuntimeControlsEmitted: compiledPlan.compiledRuntimeControls,
     compiledRuntimeFields,
+    perGroupTimingDeltaS,
+    protectedGroupTimingPass,
+    phaseDurationProofBacked,
+    sourceReadyBlockerType,
     compiledControlRead: compiledVariant ? {
       variantId: compiledVariant.variantId,
       baselineVisibleTiming: proof.baseline.groupWindows,
       compiledVisibleTiming: compiledVariant.groupWindows,
       deltaFromBaseline: compiledVariant.evaluation.groupDeltas,
       group1Effect: compiledVariant.evaluation.groupDeltas.find(row => row.groupIndex === 1) || null,
-      group4Preservation: compiledVariant.evaluation.group45Deltas.find(row => row.groupIndex === 4) || null,
-      group5Preservation: compiledVariant.evaluation.group45Deltas.find(row => row.groupIndex === 5) || null,
+      group4Preservation: perGroupTimingDeltaS.find(row => row.groupIndex === 4) || null,
+      group5Preservation: perGroupTimingDeltaS.find(row => row.groupIndex === 5) || null,
       motionProfileProxy: compiledVariant.motionProfileProxy,
       spacingReadability: compiledVariant.spacingSummary,
       scoreableRoutePreservation: compiledPlan.candidate.guardrails?.scoreableRoutes || null,
@@ -785,7 +854,7 @@ async function main(){
         ...(compiledRuntimeFields.every(field => field.consumedByProof) ? [] : ['The compiled candidate includes at least one runtime field that was not applied in the browser proof.']),
         ...(compiledCandidateBrowserVisibleEffectConfirmed ? [] : ['The compiled candidate did not produce enough browser-visible timing/path movement.']),
         ...(compiledCandidateMotionProfileGateProxyPass ? [] : ['The compiled candidate does not pass the motion/profile proxy guard.']),
-        ...(compiledCandidateGroup45Preserved ? [] : ['The compiled candidate regresses protected group 4/group 5 timing windows.']),
+        ...(protectedGroupTimingPass ? [] : ['The compiled candidate regresses protected group 4/group 5 timing windows.']),
         'A real source candidate still needs full motion/profile, strict conformance, before/after visual evidence, scoreable-route, and safety checks.'
       ],
       read: sourceReadyForCandidates

@@ -22,6 +22,12 @@ const AURORA_PACK = path.join(ROOT, 'src', 'js', '13-aurora-game-pack.js');
 const MOTION_PROFILE_CHECK = path.join(ROOT, 'tools', 'harness', 'check-challenge-motion-profile.js');
 const PHASE_DURATION_PROOF = path.join(ROOT, 'reference-artifacts', 'analyses', 'reference-execution-runtime-expressibility', 'stage7-challenge2', 'latest-phase-duration-proof.json');
 const FOCUS_GROUPS = [1, 4, 5];
+const PHASE_DURATION_PROTECTED_GROUPS = [4, 5];
+const PROTECTED_GROUP_TIMING_LIMITS = Object.freeze({
+  visibleStartDeltaS: 0.35,
+  visibleEndDeltaS: 0.45,
+  visibleDurationDeltaS: 0.45
+});
 
 function ensureDir(dir){
   fs.mkdirSync(dir, { recursive: true });
@@ -265,6 +271,65 @@ function targetDuration(target = {}){
   return Math.max(0.05, +target.visibleEndS - +target.visibleStartS);
 }
 
+function timingWindow(vector = {}){
+  const start = Number.isFinite(+vector.visibleStartS) ? +vector.visibleStartS : null;
+  const end = Number.isFinite(+vector.visibleEndS) ? +vector.visibleEndS : null;
+  return {
+    visibleStartS: start == null ? null : round(start, 3),
+    visibleEndS: end == null ? null : round(end, 3),
+    visibleDurationS: start == null || end == null ? null : round(Math.max(0, end - start), 3)
+  };
+}
+
+function timingDeltaFromBaseline(baselineVector = {}, candidateVector = {}){
+  const baseline = timingWindow(baselineVector);
+  const candidate = timingWindow(candidateVector);
+  return {
+    baseline,
+    candidate,
+    visibleStartDeltaS: baseline.visibleStartS == null || candidate.visibleStartS == null ? null : round(candidate.visibleStartS - baseline.visibleStartS, 3),
+    visibleEndDeltaS: baseline.visibleEndS == null || candidate.visibleEndS == null ? null : round(candidate.visibleEndS - baseline.visibleEndS, 3),
+    visibleDurationDeltaS: baseline.visibleDurationS == null || candidate.visibleDurationS == null ? null : round(candidate.visibleDurationS - baseline.visibleDurationS, 3)
+  };
+}
+
+function timingDeltaPass(delta, limits = PROTECTED_GROUP_TIMING_LIMITS){
+  if(!delta) return false;
+  return Math.abs(delta.visibleStartDeltaS || 0) <= limits.visibleStartDeltaS
+    && Math.abs(delta.visibleEndDeltaS || 0) <= limits.visibleEndDeltaS
+    && Math.abs(delta.visibleDurationDeltaS || 0) <= limits.visibleDurationDeltaS;
+}
+
+function perGroupTimingDeltas(trialReport, baselineReport){
+  const baselineGroups = new Map((baselineReport?.trial?.groupResults || []).map(group => [+group.groupIndex, group]));
+  return (trialReport?.trial?.groupResults || []).map(group => {
+    const baseline = baselineGroups.get(+group.groupIndex) || {};
+    return Object.assign({
+      groupIndex: +group.groupIndex,
+      touchedByCandidate: group.touchedByCandidate === true
+    }, timingDeltaFromBaseline(baseline.candidateVector || {}, group.candidateVector || {}));
+  });
+}
+
+function protectedGroupTimingRead(candidate, trialReport, baselineReport){
+  const protectedGroups = Array.isArray(candidate.protectedGroups)
+    ? candidate.protectedGroups.map(Number).filter(Number.isFinite)
+    : candidate.semanticTransformations?.includes('phase-duration-rebalance')
+      ? PHASE_DURATION_PROTECTED_GROUPS.slice()
+      : [];
+  const perGroup = perGroupTimingDeltas(trialReport, baselineReport);
+  const protectedRows = perGroup.filter(row => protectedGroups.includes(+row.groupIndex)).map(row => Object.assign({}, row, {
+    pass: timingDeltaPass(row, PROTECTED_GROUP_TIMING_LIMITS)
+  }));
+  return {
+    protectedGroups,
+    allowedVisibleTimingDeltaS: PROTECTED_GROUP_TIMING_LIMITS,
+    perGroupTimingDeltaS: perGroup,
+    protectedGroupRows: protectedRows,
+    protectedGroupTimingPass: protectedRows.every(row => row.pass)
+  };
+}
+
 function lowerRuntimeControlsForShare(lowerFieldShare){
   const lower = clamp(+lowerFieldShare || 0);
   return {
@@ -273,10 +338,23 @@ function lowerRuntimeControlsForShare(lowerFieldShare){
   };
 }
 
-function templateCandidate({ candidateId, classes, vocabulary, targetGroups, meaning, expectedMetricMovement, generatedLowLevelControls, why, groups }){
+function templateCandidate({ candidateId, classes, vocabulary, targetGroups, meaning, expectedMetricMovement, generatedLowLevelControls, why, groups, phaseDurationIntent }){
   const control = readJson(DEFAULT_CANDIDATE);
   const specs = classes.map(classId => classSpec(vocabulary, classId));
   const controlCollections = mergeControlCollections(groups);
+  const hasPhaseDuration = classes.includes('phase-duration-rebalance');
+  const intendedTouchedGroups = hasPhaseDuration
+    ? (phaseDurationIntent?.intendedTouchedGroups || groups
+      .filter(group => group.semanticReason === 'phase-duration-rebalance')
+      .map(group => +group.groupIndex)
+      .filter(Number.isFinite))
+    : [];
+  const protectedGroups = hasPhaseDuration
+    ? (phaseDurationIntent?.protectedGroups || PHASE_DURATION_PROTECTED_GROUPS).map(Number).filter(Number.isFinite)
+    : [];
+  const protectedGroupOptInGroups = hasPhaseDuration
+    ? (phaseDurationIntent?.protectedGroupOptInGroups || []).map(Number).filter(Number.isFinite)
+    : [];
   return {
     schemaVersion: 1,
     artifactType: 'stage7-reference-execution-candidate-trial-input',
@@ -296,6 +374,18 @@ function templateCandidate({ candidateId, classes, vocabulary, targetGroups, mea
     invariantsPreserved: Array.from(new Set(specs.flatMap(spec => spec.invariants || []))).sort(),
     expectedMetricMovement,
     generatedLowLevelControls,
+    ...(hasPhaseDuration ? {
+      intendedTouchedGroups,
+      protectedGroups,
+      phaseDurationCompiler: {
+        transformationClass: 'phase-duration-rebalance',
+        intendedTouchedGroups,
+        protectedGroups,
+        protectedGroupOptInGroups,
+        allowedVisibleTimingDeltaS: PROTECTED_GROUP_TIMING_LIMITS,
+        protectedGroupPolicy: 'Groups 4 and 5 are excluded from phase-duration controls unless listed in protectedGroupOptInGroups.'
+      }
+    } : {}),
     ...(controlCollections.compiledRuntimeControls ? { compiledRuntimeControls: controlCollections.compiledRuntimeControls } : {}),
     ...(controlCollections.analysisCompilerMappings ? { analysisCompilerMappings: controlCollections.analysisCompilerMappings } : {}),
     whyMoreLikelyThanBlindTuning: why,
@@ -440,8 +530,12 @@ function lowerFieldReductionGroups(description, baselineByGroup, truthAlignment)
   return rows;
 }
 
-function phaseRebalanceGroups(description, baselineByGroup, truthAlignment){
+function phaseRebalanceGroups(description, baselineByGroup, truthAlignment, options = {}){
+  const protectedGroups = (options.protectedGroups || PHASE_DURATION_PROTECTED_GROUPS).map(Number).filter(Number.isFinite);
+  const protectedGroupOptInGroups = (options.protectedGroupOptInGroups || []).map(Number).filter(Number.isFinite);
   return (description.groups || []).filter(group => {
+    const groupIndex = +group.groupIndex;
+    if(protectedGroups.includes(groupIndex) && !protectedGroupOptInGroups.includes(groupIndex)) return false;
     const baseline = baselineVector(baselineByGroup, group.groupIndex);
     const target = group.aggregateObjectTrackTarget || {};
     const startDelta = Math.abs((+baseline.visibleStartS || 0) - (+target.visibleStartS || 0));
@@ -456,6 +550,16 @@ function phaseRebalanceGroups(description, baselineByGroup, truthAlignment){
     const playbackScale = rawPlaybackScale == null ? null : round(clamp(rawPlaybackScale, 0.25, 1.4), 3);
     const trackS = duration == null ? null : round(Math.max(0.75, duration), 3);
     const fieldIndex = (+group.groupIndex || 1) - 1;
+    const perGroupTimingDeltaS = {
+      groupIndex: +group.groupIndex,
+      protectedGroup: protectedGroups.includes(+group.groupIndex),
+      explicitProtectedGroupOptIn: protectedGroupOptInGroups.includes(+group.groupIndex),
+      baseline: timingWindow(baseline),
+      candidate: timingWindow({ visibleStartS: target.visibleStartS, visibleEndS: target.visibleEndS }),
+      visibleStartDeltaS: round((+target.visibleStartS || 0) - (+baseline.visibleStartS || 0), 3),
+      visibleEndDeltaS: round((+target.visibleEndS || 0) - (+baseline.visibleEndS || 0), 3),
+      visibleDurationDeltaS: round((duration || 0) - (baselineDuration || 0), 3)
+    };
     return {
       groupIndex: group.groupIndex,
       pathFamily: livePathForGroup(truthAlignment, group),
@@ -472,6 +576,12 @@ function phaseRebalanceGroups(description, baselineByGroup, truthAlignment){
           transformationClass: 'phase-duration-rebalance',
           compilerStatus: 'compiled-browser-visible-proofed-but-not-source-ready',
           proofArtifact: rel(PHASE_DURATION_PROOF),
+          groupIndex: +group.groupIndex,
+          intendedTouchedGroups: [+group.groupIndex],
+          protectedGroups,
+          protectedGroupOptInGroups,
+          allowedVisibleTimingDeltaS: PROTECTED_GROUP_TIMING_LIMITS,
+          perGroupTimingDeltaS,
           generatedRuntimeFields: [
             {
               runtimeField: `groupSpawnOffsets[${fieldIndex}] or motionSpecGroups[${fieldIndex}].spawnOffsetS`,
@@ -499,10 +609,12 @@ function phaseRebalanceGroups(description, baselineByGroup, truthAlignment){
       },
       generatedLowLevelControls: {
         visibleWindowFormula: 'aggregateObjectTrackTarget visible window compiled to consumed runtime controls',
+        protectedGroupPolicy: 'Phase-duration controls skip groups 4 and 5 unless the semantic transform explicitly opts into touching them.',
         targetVisibleStartS: round(target.visibleStartS, 2),
         targetVisibleEndS: round(target.visibleEndS, 2),
         baselineVisibleStartS: round(baseline.visibleStartS, 2),
         baselineVisibleEndS: round(baseline.visibleEndS, 2),
+        perGroupTimingDeltaS,
         compiledRuntimeControls: {
           spawnOffsetS: round(target.visibleStartS, 2),
           trackS,
@@ -556,7 +668,13 @@ function buildCandidates({ description, vocabulary, baselineReport, truthAlignme
   const canonicalGroups = canonicalFamilyGroups(description);
   const group1 = group1CompressionGroup(description, baselineByGroup, truthAlignment);
   const lowerGroups = lowerFieldReductionGroups(description, baselineByGroup, truthAlignment);
-  const phaseGroups = phaseRebalanceGroups(description, baselineByGroup, truthAlignment);
+  const phaseDurationIntent = {
+    protectedGroups: PHASE_DURATION_PROTECTED_GROUPS.slice(),
+    protectedGroupOptInGroups: [],
+    allowedVisibleTimingDeltaS: PROTECTED_GROUP_TIMING_LIMITS
+  };
+  const phaseGroups = phaseRebalanceGroups(description, baselineByGroup, truthAlignment, phaseDurationIntent);
+  phaseDurationIntent.intendedTouchedGroups = phaseGroups.map(group => +group.groupIndex);
   const lateProtection = protectLateGroups(description, baselineByGroup, false);
   const lateCanonicalProtection = protectLateGroups(description, baselineByGroup, true);
   return [
@@ -602,6 +720,7 @@ function buildCandidates({ description, vocabulary, baselineReport, truthAlignme
       expectedMetricMovement: 'Improve visible-start/end components while exposing any geometry loss.',
       generatedLowLevelControls: { groups: phaseGroups.map(group => group.generatedLowLevelControls) },
       why: 'The timing windows are copied from aggregate object-track targets in the reference execution description.',
+      phaseDurationIntent,
       groups: phaseGroups
     }),
     templateCandidate({
@@ -654,15 +773,16 @@ function buildCandidates({ description, vocabulary, baselineReport, truthAlignme
         'protect-group4-group5'
       ],
       vocabulary,
-      targetGroups: Array.from(new Set([...phaseGroups.map(group => group.groupIndex), 5])).sort((a, b) => a - b),
+      targetGroups: Array.from(new Set([...phaseGroups.map(group => group.groupIndex), 4, 5])).sort((a, b) => a - b),
       meaning: 'Combine the strongest measured phase-window signal with live-authority path families and explicit late-group protection.',
       expectedMetricMovement: 'Potential total object-track lift through phase-order/window fit while preserving groups 4 and 5.',
       generatedLowLevelControls: {
         phaseWindows: phaseGroups.map(group => group.generatedLowLevelControls),
-        group5Protection: lateProtection.filter(group => +group.groupIndex === 5).map(group => group.generatedLowLevelControls)
+        lateProtection: lateProtection.map(group => group.generatedLowLevelControls)
       },
-      why: 'The first semantic batch signal showed phase-duration rebalance moved group 1 and group 4, while the rejected source attempt taught us not to smuggle RED path families past live authority. This candidate composes named classes without adding free numeric deltas.',
-      groups: mergeGroups(phaseGroups, lateProtection.filter(group => +group.groupIndex === 5))
+      why: 'The first semantic batch signal showed phase-duration rebalance can move timing, while the rejected source attempt taught us to preserve groups 4 and 5 and not smuggle RED path families past live authority. This candidate composes named classes without adding free numeric deltas.',
+      phaseDurationIntent,
+      groups: mergeGroups(phaseGroups, lateProtection)
     })
   ];
 }
@@ -754,9 +874,12 @@ function analysisMappingsForClass(candidate, classId){
   return rows;
 }
 
-function runtimeExpressibility(candidate, trialReport, vocabulary, truthAlignment){
+function runtimeExpressibility(candidate, trialReport, vocabulary, truthAlignment, baselineReport){
   const classes = Array.isArray(candidate.semanticTransformations) ? candidate.semanticTransformations : [candidate.semanticTransformationClass].filter(Boolean);
   const phaseDurationProof = optionalJson(PHASE_DURATION_PROOF);
+  const phaseTimingGuard = classes.includes('phase-duration-rebalance')
+    ? protectedGroupTimingRead(candidate, trialReport, baselineReport)
+    : null;
   const blockers = [];
   const warnings = [];
   const classProofs = [];
@@ -837,6 +960,19 @@ function runtimeExpressibility(candidate, trialReport, vocabulary, truthAlignmen
   }
   if(phaseDurationMapping?.requiresProofArtifact && !phaseDurationProofPass){
     blockers.push(`phase-duration-rebalance: missing passing runtime expressibility proof ${phaseDurationMapping.requiresProofArtifact}`);
+    const proofBlockerTypes = Array.isArray(phaseDurationProof?.sourceReadyBlockerType)
+      ? phaseDurationProof.sourceReadyBlockerType
+      : [];
+    for(const type of proofBlockerTypes){
+      blockers.push(`phase-duration-rebalance: ${type} in ${phaseDurationMapping.requiresProofArtifact}`);
+    }
+  }
+  if(phaseTimingGuard && !phaseTimingGuard.protectedGroupTimingPass){
+    const failed = phaseTimingGuard.protectedGroupRows
+      .filter(row => !row.pass)
+      .map(row => `group ${row.groupIndex} start ${row.visibleStartDeltaS}s end ${row.visibleEndDeltaS}s duration ${row.visibleDurationDeltaS}s`)
+      .join('; ');
+    blockers.push(`phase-duration-rebalance: protected group timing regression (${failed})`);
   }
   for(const group of candidate.groups || []){
     if(group.timing && (Number.isFinite(+group.timing.visibleStartS) || Number.isFinite(+group.timing.visibleEndS))){
@@ -868,6 +1004,7 @@ function runtimeExpressibility(candidate, trialReport, vocabulary, truthAlignmen
       phaseDurationCompiledControlsPresent: phaseDurationCompiled,
       classProofs
     },
+    phaseDurationTimingGuard: phaseTimingGuard,
     candidateProjectedPathOrder: candidateOrder,
     liveGatePathOrder: truthAlignment.liveGateCanonicalOrder,
     liveGateMismatches,
@@ -880,14 +1017,20 @@ function runtimeExpressibility(candidate, trialReport, vocabulary, truthAlignmen
 
 function classifyBlocker(blocker){
   const text = String(blocker || '');
-  if(text.includes('does not match all live promotion gates')) return 'blocked-by-promotion-authority';
-  if(text.includes('does not match canonical') || text.includes('RED target family')) return 'target-conformance-authority-debt';
-  if(text.includes('not expressible in runtime yet') || text.includes('analysis-only')) return 'not-expressible-in-runtime-yet';
-  if(text.includes('missing passing runtime expressibility proof') || text.includes('proof exists')) return 'missing-or-failing-proof';
-  if(text.includes('must emit compiledRuntimeControls')) return 'missing-compiled-runtime-controls';
-  if(text.includes('candidate has no runtime-transform class')) return 'guardrail-only-no-source-movement';
-  if(text.includes('spacing/readability') || text.includes('scoreable routes') || text.includes('safety')) return 'guardrail-blocker';
-  if(text.includes('object-track') || text.includes('group 1') || text.includes('coverage') || text.includes('regresses')) return 'metric-or-score-blocker';
+  if(text.includes('protected-group-regression')) return 'protected-group-regression';
+  if(text.includes('protected group timing')) return 'protected-group-regression';
+  if(text.includes('guardrail-regression')) return 'guardrail-regression';
+  if(text.includes('promotion-authority-mismatch')) return 'promotion-authority-mismatch';
+  if(text.includes('target-authority-debt')) return 'target-authority-debt';
+  if(text.includes('not-runtime-expressible')) return 'not-runtime-expressible';
+  if(text.includes('does not match all live promotion gates')) return 'promotion-authority-mismatch';
+  if(text.includes('does not match canonical') || text.includes('RED target family')) return 'target-authority-debt';
+  if(text.includes('not expressible in runtime yet') || text.includes('analysis-only')) return 'not-runtime-expressible';
+  if(text.includes('missing passing runtime expressibility proof') || text.includes('proof exists')) return 'not-runtime-expressible';
+  if(text.includes('must emit compiledRuntimeControls')) return 'not-runtime-expressible';
+  if(text.includes('candidate has no runtime-transform class')) return 'not-runtime-expressible';
+  if(text.includes('spacing/readability') || text.includes('scoreable routes') || text.includes('safety')) return 'guardrail-regression';
+  if(text.includes('object-track') || text.includes('group 1') || text.includes('coverage') || text.includes('regresses')) return 'metric-no-lift';
   return 'other';
 }
 
@@ -925,12 +1068,14 @@ function proofBackedImprovement(candidateRow){
   };
 }
 
-function compactTrial(candidate, trialReport, semanticRead, runtimeRead, trialReportPath, candidatePath){
+function compactTrial(candidate, trialReport, semanticRead, runtimeRead, trialReportPath, candidatePath, baselineReport){
   const groups = trialReport.trial.groupResults || [];
   const groupScore = groupIndex => groups.find(group => +group.groupIndex === +groupIndex)?.aggregateObjectTrackScore10 ?? null;
   const groupMatch = groupIndex => groups.find(group => +group.groupIndex === +groupIndex)?.canonicalPathFamilyMatch === true;
   const readyForRuntimeSourceCandidate = trialReport.summary.readyForRuntimeSourceCandidate && semanticRead.pass && runtimeRead.pass;
   const blockers = [...runtimeRead.blockers, ...semanticRead.blockers, ...trialReport.summary.blockers];
+  const timingGuard = runtimeRead.phaseDurationTimingGuard || protectedGroupTimingRead(candidate, trialReport, baselineReport);
+  const phaseProof = runtimeRead.proofStatus?.classProofs?.find(row => row.classId === 'phase-duration-rebalance') || null;
   const row = {
     candidateId: candidate.candidateId,
     semanticTransformationClass: candidate.semanticTransformationClass,
@@ -939,6 +1084,12 @@ function compactTrial(candidate, trialReport, semanticRead, runtimeRead, trialRe
     targetGroups: candidate.targetGroups || [],
     candidateInput: candidatePath,
     trialReport: trialReportPath,
+    intendedTouchedGroups: candidate.intendedTouchedGroups || [],
+    protectedGroups: candidate.protectedGroups || [],
+    compiledRuntimeControls: candidate.compiledRuntimeControls || null,
+    perGroupTimingDeltaS: timingGuard.perGroupTimingDeltaS,
+    protectedGroupTimingPass: timingGuard.protectedGroupTimingPass,
+    phaseDurationProofBacked: phaseProof?.proofPass === true,
     totalObjectTrackScore10: trialReport.trial.totalObjectTrackScore10,
     totalObjectTrackCoverage: trialReport.trial.totalObjectTrackCoverage,
     totalObjectTrackDelta10: trialReport.trial.deltas.totalObjectTrackScore10,
@@ -964,6 +1115,7 @@ function compactTrial(candidate, trialReport, semanticRead, runtimeRead, trialRe
     readyForRuntimeSourceCandidate,
     blockerCount: trialReport.summary.blockerCount + semanticRead.blockers.length + runtimeRead.blockers.length,
     blockers,
+    sourceReadyBlockerType: Array.from(new Set(blockers.map(classifyBlocker))).sort(),
     blockerTaxonomy: blockerTaxonomy(blockers),
     warnings: [...runtimeRead.warnings, ...semanticRead.warnings, ...trialReport.summary.warnings],
     rankingScore: round(
@@ -1089,7 +1241,7 @@ function compilerCoverage(rows, vocabulary){
 }
 
 function buildMarkdown(report){
-  const rows = report.candidates.map(row => `| ${row.candidateId} | ${row.semanticTransformations.join(', ')} | ${row.totalObjectTrackScore10} | ${row.totalObjectTrackDelta10} | ${row.totalObjectTrackCoverage} | ${row.groupScores.group1} | ${row.groupScores.group4} | ${row.groupScores.group5} | ${row.canonicalFamilyMatch.allGroups} | ${row.semanticValidity.pass} | ${row.runtimeExpressibility.pass} | ${row.readyForRuntimeSourceCandidate} | ${row.blockers.slice(0, 3).join('<br>') || 'none'} |`).join('\n');
+  const rows = report.candidates.map(row => `| ${row.candidateId} | ${row.semanticTransformations.join(', ')} | ${(row.intendedTouchedGroups || []).join(', ') || 'none'} | ${(row.protectedGroups || []).join(', ') || 'none'} | ${row.protectedGroupTimingPass} | ${row.phaseDurationProofBacked} | ${row.totalObjectTrackScore10} | ${row.totalObjectTrackDelta10} | ${row.totalObjectTrackCoverage} | ${row.groupScores.group1} | ${row.groupScores.group4} | ${row.groupScores.group5} | ${row.canonicalFamilyMatch.allGroups} | ${row.semanticValidity.pass} | ${row.runtimeExpressibility.pass} | ${row.readyForRuntimeSourceCandidate} | ${row.sourceReadyBlockerType.join(', ') || 'none'} | ${row.blockers.slice(0, 3).join('<br>') || 'none'} |`).join('\n');
   const classRows = report.classSummaries.map(row => `| ${row.classId} | ${row.candidateCount} | ${row.bestCandidateId || 'n/a'} | ${row.bestObjectTrackDelta10 ?? 'n/a'} | ${row.promiseKind} | ${row.groupedRejectionReasons.slice(0, 3).map(item => `${item.candidateId}: ${item.blocker}`).join('<br>') || 'none'} |`).join('\n');
   const coverageRows = report.compilerCoverage.map(row => `| ${row.classId} | ${row.sourceReadyRole} | ${row.compilerMappingStatus} | ${row.compiledRuntimeControlCount} | ${row.analysisCompilerMappingCount} | ${row.proofPass} | ${row.browserVisibleOnly} | ${row.read} |`).join('\n');
   const taxonomyRows = Object.entries(report.sourceReadyBlockerTaxonomy).map(([kind, entry]) => `| ${kind} | ${entry.count} | ${entry.candidates.join(', ')} | ${entry.examples.slice(0, 3).join('<br>') || 'none'} |`).join('\n');
@@ -1124,8 +1276,8 @@ ${truthRows}
 
 ## Candidates
 
-| Candidate | Transformations | Score | Delta | Coverage | G1 | G4 | G5 | Canonical families | Semantic valid | Runtime expressible | Source-ready | First blockers |
-| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- |
+| Candidate | Transformations | Intended phase groups | Protected groups | Protected timing | Phase proof | Score | Delta | Coverage | G1 | G4 | G5 | Canonical families | Semantic valid | Runtime expressible | Source-ready | Blocker types | First blockers |
+| --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- |
 ${rows}
 
 ## Class Summary
@@ -1175,8 +1327,8 @@ function main(){
     const trialReportPath = path.join(trialDir, `${candidate.candidateId}.json`);
     writeJson(trialReportPath, trialReport);
     const semanticRead = semanticValidity(candidate, trialReport, vocabulary, truthAlignment);
-    const runtimeRead = runtimeExpressibility(candidate, trialReport, vocabulary, truthAlignment);
-    compactRows.push(compactTrial(candidate, trialReport, semanticRead, runtimeRead, rel(trialReportPath), rel(candidatePath)));
+    const runtimeRead = runtimeExpressibility(candidate, trialReport, vocabulary, truthAlignment, baselineReport);
+    compactRows.push(compactTrial(candidate, trialReport, semanticRead, runtimeRead, rel(trialReportPath), rel(candidatePath), baselineReport));
   }
   compactRows.sort((a, b) => {
     if(a.readyForRuntimeSourceCandidate !== b.readyForRuntimeSourceCandidate) return a.readyForRuntimeSourceCandidate ? -1 : 1;
@@ -1212,13 +1364,16 @@ function main(){
       requiresPredictedObjectTrackLift: true,
       requiresGroup1Improvement: true,
       requiresGroup4Group5Preservation: true,
+      requiresProtectedGroupTimingInvariant: true,
+      protectedGroups: PHASE_DURATION_PROTECTED_GROUPS,
+      allowedVisibleTimingDeltaS: PROTECTED_GROUP_TIMING_LIMITS,
       requiresGuardrailPreservation: true,
       requiresLiveGatePathFamilyAlignment: true,
       requiresRuntimeExpressibilityMapping: true,
       requiresRuntimeExpressibilityProof: true,
       requiresCompiledRuntimeControlsForPhaseDuration: true,
       requiresAuthorityDebtVisibility: true,
-      read: 'Source-ready now means a candidate can prove both semantic score intent and concrete runtime/source expressibility against live promotion gates, while preserving target-conformance debt when RED/setpiece intent disagrees.'
+      read: 'Source-ready now means a candidate can prove both semantic score intent and concrete runtime/source expressibility against live promotion gates, while preserving target-conformance debt when RED/setpiece intent disagrees and keeping protected group timing inside explicit limits.'
     },
     candidateCount: compactRows.length,
     transformationClassesTested: (vocabulary.transformationClasses || []).map(row => row.classId),

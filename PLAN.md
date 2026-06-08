@@ -235,15 +235,17 @@ from the roadmap.
    promotion gates/restored runtime source as source-ready authority, with
    RED/setpiece retained as measured-reference intent and explicit authority
    debt. `phase-duration-rebalance` now emits consumed
-   `compiledRuntimeControls` under live authority and has browser-visible proof,
-   and the candidate-specific compiler-transfer proof now passes the focused
-   motion/profile proxy. It is still not source-ready: the compiled
-   `stage7-semantic-phase-align-protect-0.1` controls extend protected group 4
-   timing by about two seconds. Group 1 path-length compression and
-   lower-field overstay reduction now have analysis-only compiler mappings, but
-   no browser transfer proof. Next work should tighten the phase-duration
-   compiler to preserve group 4/group 5, or add exactly one focused
-   lower-field/path-length transfer proof, before another source attempt.
+   `compiledRuntimeControls` under live authority and has browser-visible
+   proof. The protected compiler declares intended groups, excludes groups 4
+   and 5 unless explicitly opted in, and the candidate-specific proof preserves
+   protected group 4/5 timing. It is still not source-ready: the constrained
+   proof fails the focused motion/profile proxy on spacing/readability
+   (`spacingScore` `0.64` below the `0.72` floor and `bunchingRisk` `0.387`
+   above the `0.38` cap). Group 1 path-length compression and lower-field
+   overstay reduction now have analysis-only compiler mappings, but no browser
+   transfer proof. Do not keep grinding Stage 7 phase-duration candidates; next
+   work should add exactly one focused lower-field-overstay transfer proof, or
+   pause Stage 7 and apply the RED pipeline front-first to Stage 3.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth
@@ -350,14 +352,18 @@ Current conformance read:
   authority split explicit as target-conformance debt, and proved that
   `groupSpawnOffsets` / `motionSpecGroup.spawnOffsetS`,
   `phaseDurations.trackS`, and `referencePath.playbackScale` are consumed
-  controls that change browser-visible timing/path behavior. The
-  candidate-specific transfer proof now passes the focused motion/profile
-  proxy, but it rejects source readiness because the compiled phase-duration
-  candidate extends protected group 4 timing by about two seconds; `exitS` is
-  explicitly unconsumed. The semantic batch now emits phase-duration
-  `compiledRuntimeControls` under live authority and records path-length /
-  lower-field mappings as analysis-only until their transfer proofs exist. This
-  is a measurement/process keeper, not a runtime keeper or beta justification.
+  controls that change browser-visible timing/path behavior. The protected
+  compiler now declares intended groups, excludes groups 4 and 5 unless
+  explicitly opted in, and emits per-group timing deltas. The
+  candidate-specific transfer proof preserves protected group 4/5 timing, but
+  still rejects source readiness because the constrained phase-duration
+  candidate fails the focused motion/profile proxy on spacing/readability:
+  `spacingScore` `0.64` is below the `0.72` floor and `bunchingRisk` `0.387`
+  is above the `0.38` cap; `exitS` is explicitly unconsumed. The semantic batch
+  now emits phase-duration `compiledRuntimeControls` under live authority and
+  records path-length / lower-field mappings as analysis-only until their
+  transfer proofs exist. This is a measurement/process keeper, not a runtime
+  keeper or beta justification.
 - challenge-stage grammar is now materially ahead of runtime implementation:
   the first-five challenge work has `25/25` reference-backed group contracts
   and `8.6/10` control readiness, but runtime promotion is still blocked by

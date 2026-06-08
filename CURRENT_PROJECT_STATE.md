@@ -99,20 +99,22 @@ Latest Stage 7 calibration:
 - `phase-duration-rebalance` now has a runtime-consumed control contract and
   browser proof for `groupSpawnOffsets` / `motionSpecGroup.spawnOffsetS`,
   `phaseDurations.trackS`, and `referencePath.playbackScale`; `exitS` is
-  explicitly not consumed. The candidate-specific compiler-transfer proof now
-  confirms visible timing/path effect and passes the focused motion/profile
-  proxy, but the compiled `stage7-semantic-phase-align-protect-0.1` controls
-  extend protected group 4 timing by about two seconds. That semantic guardrail
-  block keeps the transform from being source-ready evidence by itself:
+  explicitly not consumed. The protected compiler now declares
+  `intendedTouchedGroups`, keeps groups 4 and 5 protected unless explicitly
+  opted in, emits per-group timing deltas, and preserves protected group 4/5
+  timing in the candidate-specific proof. The transform is still not
+  source-ready: the constrained proof fails the focused motion/profile proxy on
+  spacing/readability (`spacingScore` `0.64` below the `0.72` floor and
+  `bunchingRisk` `0.387` above the `0.38` cap):
   `reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-phase-duration-proof.json`.
 - The semantic generator now emits `compiledRuntimeControls` for
   `phase-duration-rebalance` under live path-family authority. It also records
   analysis-only compiler mappings for `group1-path-length-compression` and
   `lower-field-overstay-reduction`, but those are blocked from source-ready
-  status until browser transfer proofs exist. Next Stage 7 work should either
-  tighten the phase-duration compiler so it preserves group 4/group 5 before
-  another batch/source attempt, or add exactly one focused transfer proof for
-  the lower-field/path-length mappings.
+  status until browser transfer proofs exist. Do not keep grinding local Stage
+  7 phase-duration candidates. Next work should either add exactly one focused
+  lower-field-overstay transfer proof, or pause Stage 7 and apply the RED
+  pipeline front-first to Stage 3.
 
 ## Historical Or Stale Current-State Docs
 

@@ -449,7 +449,7 @@ function main(){
     likelyCauses: [
       {
         cause: 'runtime-expressibility',
-        read: 'The rejected source attempt overpredicted phase-window transfer. New phase-duration compiler controls still require a passing motion/profile-safe proof before source promotion.'
+        read: 'The rejected source attempt overpredicted phase-window transfer. The phase-duration compiler now emits consumed controls and preserves protected group 4/group 5 timing, but the constrained proof is still blocked by the motion/profile spacing-readability guard.'
       },
       {
         cause: 'stale-or-unreconciled-target-artifact',
@@ -467,8 +467,8 @@ function main(){
     decision: {
       runtimeCandidateAllowed,
       sourceReadyGatePass: false,
-      nextRecommendation: 'Do not try another Stage 7 runtime candidate. Keep source-ready path-family authority on the live gates/runtime source, then tighten phase-duration generation so the motion/profile-compatible compiled proof also preserves protected group 4/group 5 timing.',
-      remainingCompilerGap: 'phase-duration-rebalance now emits runtime-consumed compiled controls and passes the focused motion/profile proxy, but source promotion remains blocked because the compiled candidate regresses protected group 4 timing. group1 path-length compression and lower-field overstay reduction remain analysis-only until browser transfer proofs exist.'
+      nextRecommendation: 'Do not try another Stage 7 runtime candidate. Keep source-ready path-family authority on the live gates/runtime source, stop local phase-duration candidate work for now, and next build exactly one lower-field-overstay transfer proof or pause Stage 7 and apply the RED pipeline front-first to Stage 3.',
+      remainingCompilerGap: 'phase-duration-rebalance now emits runtime-consumed compiled controls and preserves protected group 4/group 5 timing, but the constrained proof is not source-ready because the motion/profile spacing-readability guard fails. group1 path-length compression and lower-field overstay reduction remain analysis-only until browser transfer proofs exist.'
     }
   };
   writeJson(OUT_JSON, report);

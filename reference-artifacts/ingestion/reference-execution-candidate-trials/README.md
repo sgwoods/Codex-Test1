@@ -60,6 +60,9 @@ vectors are analysis-only. The semantic compiler now emits
 `referencePath.playbackScale`, but a source-ready candidate still requires the
 phase-duration proof to pass the motion/profile proxy, preserve the live
 path-family gate, and keep the protected group 4/group 5 timing windows.
+The current protected Stage 7 proof preserves group 4/group 5 timing, but is
+still source-ready-blocked by the spacing/readability guard, so do not promote
+or keep searching phase-duration candidates from this batch alone.
 
 For `group1-path-length-compression` and `lower-field-overstay-reduction`, the
 batch may record `analysisCompilerMappings` that point at consumed runtime

@@ -119,11 +119,12 @@
   {
     "classId": "phase-duration-rebalance",
     "playerMeaning": "Bring group visible windows closer to the reference phase order without broad stage retiming.",
-    "generationRule": "For groups with visible start/end drift, derive compiled runtime controls from the target window instead of emitting visibleStartS/visibleEndS as trial-only vectors.",
+    "generationRule": "For non-protected groups with visible start/end drift, derive compiled runtime controls from the target window instead of emitting visibleStartS/visibleEndS as trial-only vectors. Groups 4 and 5 are protected unless the semantic transform explicitly opts into touching them.",
     "invariants": [
       "phase order remains group 1 through group 5",
       "target count and no-combat challenge meaning are preserved",
-      "group 4 and group 5 baseline object-track floors are protected"
+      "group 4 and group 5 baseline object-track floors are protected",
+      "group 4 and group 5 visible timing deltas stay within the protected-group timing limits unless explicitly opted in"
     ],
     "expectedMetricMovement": "Improve timing components while exposing whether geometry worsens when phase timing is tightened.",
     "whyNotBlindTuning": "Timing comes from object-track windows in the reference execution description.",
@@ -133,6 +134,15 @@
         "compilerMappingStatus": "compiled-browser-visible-proofed-but-not-source-ready",
         "requiresCompiledRuntimeControls": true,
         "requiresProofArtifact": "reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-phase-duration-proof.json",
+        "protectedGroups": [
+          4,
+          5
+        ],
+        "allowedVisibleTimingDeltaS": {
+          "visibleStartDeltaS": 0.35,
+          "visibleEndDeltaS": 0.45,
+          "visibleDurationDeltaS": 0.45
+        },
       "sourceFields": [
         "src/js/13-aurora-game-pack.js Stage 7 groupSpawnOffsets",
         "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS spawnOffsetS when present",
@@ -173,7 +183,7 @@
         "npm run harness:analyze:challenge-stage-conformance",
         "npm run harness:check:challenge-motion-profile"
       ],
-      "remainingCompilerGap": "Generated candidates now emit compiledRuntimeControls and cite the proof artifact. Source readiness remains blocked until the compiled proof passes the motion/profile proxy and preserves protected group 4/group 5 timing; visibleStartS/visibleEndS alone remains analysis-only."
+      "remainingCompilerGap": "Generated candidates now emit compiledRuntimeControls, cite the proof artifact, declare intendedTouchedGroups/protectedGroups, and must keep protected group 4/group 5 timing inside explicit limits; visibleStartS/visibleEndS alone remains analysis-only."
     }
   },
     {

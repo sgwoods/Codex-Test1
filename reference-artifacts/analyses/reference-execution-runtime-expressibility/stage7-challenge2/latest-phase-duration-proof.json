@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "stage7-phase-duration-runtime-expressibility-proof",
-  "generatedAt": "2026-06-08T17:13:26.064Z",
+  "generatedAt": "2026-06-08T17:25:49.733Z",
   "generatedBy": "tools/harness/analyze-stage7-phase-duration-expressibility.js",
-  "commit": "870906d0d",
+  "commit": "83e96c452",
   "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
   "releaseFamily": "1.4.1",
   "gameKey": "aurora-galactica",
@@ -15,19 +15,19 @@
   "sourceArtifacts": {
     "pathFamilyAuthority": "reference-artifacts/analyses/reference-execution-authority/stage7-challenge2/latest-path-family-authority.json",
     "semanticBatch": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/latest-batch.json",
-    "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T17-13-15-870906d0d/candidates/stage7-semantic-phase-align-protect-0.1.json"
+    "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T17-25-38-83e96c452/candidates/stage7-semantic-phase-align-protect-0.1.json"
   },
   "semanticTransformId": "phase-duration-rebalance",
   "batch": {
-    "generatedAt": "2026-06-08T17:13:15.996Z",
-    "commit": "870906d0d",
+    "generatedAt": "2026-06-08T17:25:38.638Z",
+    "commit": "83e96c452",
     "report": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/latest-batch.json",
     "recommendation": "no-runtime-source-candidate",
     "bestCandidateId": "stage7-semantic-phase-align-protect-0.1"
   },
   "candidate": {
     "candidateId": "stage7-semantic-phase-align-protect-0.1",
-    "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T17-13-15-870906d0d/candidates/stage7-semantic-phase-align-protect-0.1.json",
+    "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T17-25-38-83e96c452/candidates/stage7-semantic-phase-align-protect-0.1.json",
     "semanticTransformationClass": "semantic-composition",
     "semanticTransformations": [
       "phase-duration-rebalance",
@@ -42,11 +42,40 @@
       4,
       5
     ],
+    "intendedTouchedGroups": [
+      1,
+      2,
+      3
+    ],
+    "protectedGroups": [
+      4,
+      5
+    ],
+    "phaseDurationCompiler": {
+      "transformationClass": "phase-duration-rebalance",
+      "intendedTouchedGroups": [
+        1,
+        2,
+        3
+      ],
+      "protectedGroups": [
+        4,
+        5
+      ],
+      "protectedGroupOptInGroups": [],
+      "allowedVisibleTimingDeltaS": {
+        "visibleStartDeltaS": 0.35,
+        "visibleEndDeltaS": 0.45,
+        "visibleDurationDeltaS": 0.45
+      },
+      "protectedGroupPolicy": "Groups 4 and 5 are excluded from phase-duration controls unless listed in protectedGroupOptInGroups."
+    },
     "invariantsPreserved": [
       "active score windows do not regress",
       "center-lane bias remains below the trial floor",
       "group 4 aggregate score stays at or above baseline",
       "group 4 and group 5 baseline object-track floors are protected",
+      "group 4 and group 5 visible timing deltas stay within the protected-group timing limits unless explicitly opted in",
       "group 5 aggregate score stays at or above baseline",
       "late boss-led cleanup does not become the casualty of group 1 tuning",
       "multi-target lane share does not regress",
@@ -91,11 +120,52 @@
       }
     }
   },
-  "compiledRuntimeControlsEmitted": [
+  "intendedTouchedGroups": [
+    1,
+    2,
+    3
+  ],
+  "protectedGroups": [
+    4,
+    5
+  ],
+  "compiledRuntimeControls": [
     {
       "transformationClass": "phase-duration-rebalance",
       "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
       "proofArtifact": "reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-phase-duration-proof.json",
+      "groupIndex": 1,
+      "intendedTouchedGroups": [
+        1
+      ],
+      "protectedGroups": [
+        4,
+        5
+      ],
+      "protectedGroupOptInGroups": [],
+      "allowedVisibleTimingDeltaS": {
+        "visibleStartDeltaS": 0.35,
+        "visibleEndDeltaS": 0.45,
+        "visibleDurationDeltaS": 0.45
+      },
+      "perGroupTimingDeltaS": {
+        "groupIndex": 1,
+        "protectedGroup": false,
+        "explicitProtectedGroupOptIn": false,
+        "baseline": {
+          "visibleStartS": 0.5,
+          "visibleEndS": 2.25,
+          "visibleDurationS": 1.75
+        },
+        "candidate": {
+          "visibleStartS": 0,
+          "visibleEndS": 1.88,
+          "visibleDurationS": 1.88
+        },
+        "visibleStartDeltaS": -0.5,
+        "visibleEndDeltaS": -0.37,
+        "visibleDurationDeltaS": 0.13
+      },
       "generatedRuntimeFields": [
         {
           "runtimeField": "groupSpawnOffsets[0] or motionSpecGroups[0].spawnOffsetS",
@@ -124,6 +194,38 @@
       "transformationClass": "phase-duration-rebalance",
       "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
       "proofArtifact": "reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-phase-duration-proof.json",
+      "groupIndex": 2,
+      "intendedTouchedGroups": [
+        2
+      ],
+      "protectedGroups": [
+        4,
+        5
+      ],
+      "protectedGroupOptInGroups": [],
+      "allowedVisibleTimingDeltaS": {
+        "visibleStartDeltaS": 0.35,
+        "visibleEndDeltaS": 0.45,
+        "visibleDurationDeltaS": 0.45
+      },
+      "perGroupTimingDeltaS": {
+        "groupIndex": 2,
+        "protectedGroup": false,
+        "explicitProtectedGroupOptIn": false,
+        "baseline": {
+          "visibleStartS": 3.25,
+          "visibleEndS": 6,
+          "visibleDurationS": 2.75
+        },
+        "candidate": {
+          "visibleStartS": 2.88,
+          "visibleEndS": 6.38,
+          "visibleDurationS": 3.5
+        },
+        "visibleStartDeltaS": -0.37,
+        "visibleEndDeltaS": 0.38,
+        "visibleDurationDeltaS": 0.75
+      },
       "generatedRuntimeFields": [
         {
           "runtimeField": "groupSpawnOffsets[1] or motionSpecGroups[1].spawnOffsetS",
@@ -152,6 +254,38 @@
       "transformationClass": "phase-duration-rebalance",
       "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
       "proofArtifact": "reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-phase-duration-proof.json",
+      "groupIndex": 3,
+      "intendedTouchedGroups": [
+        3
+      ],
+      "protectedGroups": [
+        4,
+        5
+      ],
+      "protectedGroupOptInGroups": [],
+      "allowedVisibleTimingDeltaS": {
+        "visibleStartDeltaS": 0.35,
+        "visibleEndDeltaS": 0.45,
+        "visibleDurationDeltaS": 0.45
+      },
+      "perGroupTimingDeltaS": {
+        "groupIndex": 3,
+        "protectedGroup": false,
+        "explicitProtectedGroupOptIn": false,
+        "baseline": {
+          "visibleStartS": 4.25,
+          "visibleEndS": 5.75,
+          "visibleDurationS": 1.5
+        },
+        "candidate": {
+          "visibleStartS": 4.25,
+          "visibleEndS": 5,
+          "visibleDurationS": 0.75
+        },
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": -0.75,
+        "visibleDurationDeltaS": -0.75
+      },
       "generatedRuntimeFields": [
         {
           "runtimeField": "groupSpawnOffsets[2] or motionSpecGroups[2].spawnOffsetS",
@@ -175,30 +309,184 @@
       ],
       "expectedVisibleEffect": "Moves group visible timing and reference path clock without changing target count or challenge combat behavior.",
       "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing"
+    }
+  ],
+  "compiledRuntimeControlsEmitted": [
+    {
+      "transformationClass": "phase-duration-rebalance",
+      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+      "proofArtifact": "reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-phase-duration-proof.json",
+      "groupIndex": 1,
+      "intendedTouchedGroups": [
+        1
+      ],
+      "protectedGroups": [
+        4,
+        5
+      ],
+      "protectedGroupOptInGroups": [],
+      "allowedVisibleTimingDeltaS": {
+        "visibleStartDeltaS": 0.35,
+        "visibleEndDeltaS": 0.45,
+        "visibleDurationDeltaS": 0.45
+      },
+      "perGroupTimingDeltaS": {
+        "groupIndex": 1,
+        "protectedGroup": false,
+        "explicitProtectedGroupOptIn": false,
+        "baseline": {
+          "visibleStartS": 0.5,
+          "visibleEndS": 2.25,
+          "visibleDurationS": 1.75
+        },
+        "candidate": {
+          "visibleStartS": 0,
+          "visibleEndS": 1.88,
+          "visibleDurationS": 1.88
+        },
+        "visibleStartDeltaS": -0.5,
+        "visibleEndDeltaS": -0.37,
+        "visibleDurationDeltaS": 0.13
+      },
+      "generatedRuntimeFields": [
+        {
+          "runtimeField": "groupSpawnOffsets[0] or motionSpecGroups[0].spawnOffsetS",
+          "value": 0,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "aggregateObjectTrackTarget.visibleStartS"
+        },
+        {
+          "runtimeField": "motionSpecGroups[0].phaseDurations.trackS",
+          "value": 1.88,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "max(0.75, aggregateObjectTrackTarget.visibleEndS - visibleStartS)"
+        },
+        {
+          "runtimeField": "groupReferencePaths[0].playbackScale",
+          "value": 0.931,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "baselineVisibleDurationS / targetVisibleDurationS",
+          "clipped": false
+        }
+      ],
+      "expectedVisibleEffect": "Moves group visible timing and reference path clock without changing target count or challenge combat behavior.",
+      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing"
     },
     {
       "transformationClass": "phase-duration-rebalance",
       "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
       "proofArtifact": "reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-phase-duration-proof.json",
+      "groupIndex": 2,
+      "intendedTouchedGroups": [
+        2
+      ],
+      "protectedGroups": [
+        4,
+        5
+      ],
+      "protectedGroupOptInGroups": [],
+      "allowedVisibleTimingDeltaS": {
+        "visibleStartDeltaS": 0.35,
+        "visibleEndDeltaS": 0.45,
+        "visibleDurationDeltaS": 0.45
+      },
+      "perGroupTimingDeltaS": {
+        "groupIndex": 2,
+        "protectedGroup": false,
+        "explicitProtectedGroupOptIn": false,
+        "baseline": {
+          "visibleStartS": 3.25,
+          "visibleEndS": 6,
+          "visibleDurationS": 2.75
+        },
+        "candidate": {
+          "visibleStartS": 2.88,
+          "visibleEndS": 6.38,
+          "visibleDurationS": 3.5
+        },
+        "visibleStartDeltaS": -0.37,
+        "visibleEndDeltaS": 0.38,
+        "visibleDurationDeltaS": 0.75
+      },
       "generatedRuntimeFields": [
         {
-          "runtimeField": "groupSpawnOffsets[3] or motionSpecGroups[3].spawnOffsetS",
-          "value": 7.13,
+          "runtimeField": "groupSpawnOffsets[1] or motionSpecGroups[1].spawnOffsetS",
+          "value": 2.88,
           "runtimeCurrentlyConsumes": true,
           "derivedFrom": "aggregateObjectTrackTarget.visibleStartS"
         },
         {
-          "runtimeField": "motionSpecGroups[3].phaseDurations.trackS",
-          "value": 3.25,
+          "runtimeField": "motionSpecGroups[1].phaseDurations.trackS",
+          "value": 3.5,
           "runtimeCurrentlyConsumes": true,
           "derivedFrom": "max(0.75, aggregateObjectTrackTarget.visibleEndS - visibleStartS)"
         },
         {
-          "runtimeField": "groupReferencePaths[3].playbackScale",
-          "value": 0.846,
+          "runtimeField": "groupReferencePaths[1].playbackScale",
+          "value": 0.786,
           "runtimeCurrentlyConsumes": true,
           "derivedFrom": "baselineVisibleDurationS / targetVisibleDurationS",
           "clipped": false
+        }
+      ],
+      "expectedVisibleEffect": "Moves group visible timing and reference path clock without changing target count or challenge combat behavior.",
+      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing"
+    },
+    {
+      "transformationClass": "phase-duration-rebalance",
+      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
+      "proofArtifact": "reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-phase-duration-proof.json",
+      "groupIndex": 3,
+      "intendedTouchedGroups": [
+        3
+      ],
+      "protectedGroups": [
+        4,
+        5
+      ],
+      "protectedGroupOptInGroups": [],
+      "allowedVisibleTimingDeltaS": {
+        "visibleStartDeltaS": 0.35,
+        "visibleEndDeltaS": 0.45,
+        "visibleDurationDeltaS": 0.45
+      },
+      "perGroupTimingDeltaS": {
+        "groupIndex": 3,
+        "protectedGroup": false,
+        "explicitProtectedGroupOptIn": false,
+        "baseline": {
+          "visibleStartS": 4.25,
+          "visibleEndS": 5.75,
+          "visibleDurationS": 1.5
+        },
+        "candidate": {
+          "visibleStartS": 4.25,
+          "visibleEndS": 5,
+          "visibleDurationS": 0.75
+        },
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": -0.75,
+        "visibleDurationDeltaS": -0.75
+      },
+      "generatedRuntimeFields": [
+        {
+          "runtimeField": "groupSpawnOffsets[2] or motionSpecGroups[2].spawnOffsetS",
+          "value": 4.25,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "aggregateObjectTrackTarget.visibleStartS"
+        },
+        {
+          "runtimeField": "motionSpecGroups[2].phaseDurations.trackS",
+          "value": 0.75,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "max(0.75, aggregateObjectTrackTarget.visibleEndS - visibleStartS)"
+        },
+        {
+          "runtimeField": "groupReferencePaths[2].playbackScale",
+          "value": 1.4,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "baselineVisibleDurationS / targetVisibleDurationS",
+          "clipped": true
         }
       ],
       "expectedVisibleEffect": "Moves group visible timing and reference path clock without changing target count or challenge combat behavior.",
@@ -385,67 +673,109 @@
       ],
       "appliedInLayoutOverride": true,
       "consumedByProof": true
-    },
-    {
-      "runtimeField": "groupSpawnOffsets[3] or motionSpecGroups[3].spawnOffsetS",
-      "value": 7.13,
-      "runtimeCurrentlyConsumes": true,
-      "derivedFrom": "aggregateObjectTrackTarget.visibleStartS",
-      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
-      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
-      "appliedTargets": [
-        {
-          "target": "groupSpawnOffsets[3]",
-          "groupIndex": 4,
-          "before": 7.13,
-          "after": 7.13
-        },
-        {
-          "target": "motionSpecGroups[3].spawnOffsetS",
-          "groupIndex": 4,
-          "before": null,
-          "after": 7.13
-        }
-      ],
-      "appliedInLayoutOverride": true,
-      "consumedByProof": true
-    },
-    {
-      "runtimeField": "motionSpecGroups[3].phaseDurations.trackS",
-      "value": 3.25,
-      "runtimeCurrentlyConsumes": true,
-      "derivedFrom": "max(0.75, aggregateObjectTrackTarget.visibleEndS - visibleStartS)",
-      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
-      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
-      "appliedTargets": [
-        {
-          "target": "motionSpecGroups[3].phaseDurations.trackS",
-          "groupIndex": 4,
-          "before": 2,
-          "after": 3.25
-        }
-      ],
-      "appliedInLayoutOverride": true,
-      "consumedByProof": true
-    },
-    {
-      "runtimeField": "groupReferencePaths[3].playbackScale",
-      "value": 0.846,
-      "runtimeCurrentlyConsumes": true,
-      "derivedFrom": "baselineVisibleDurationS / targetVisibleDurationS",
-      "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
-      "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
-      "appliedTargets": [
-        {
-          "target": "groupReferencePaths[3].playbackScale",
-          "groupIndex": 4,
-          "before": null,
-          "after": 0.846
-        }
-      ],
-      "appliedInLayoutOverride": true,
-      "consumedByProof": true
     }
+  ],
+  "perGroupTimingDeltaS": [
+    {
+      "groupIndex": 1,
+      "tmAt2SDelta": -0.119,
+      "visibleStartDeltaS": 0,
+      "visibleEndDeltaS": 0.25,
+      "visibleDurationDeltaS": 0.25,
+      "protectedGroup": false,
+      "baseline": {
+        "visibleStartS": 0.25,
+        "visibleEndS": 3,
+        "visibleDurationS": 2.75
+      },
+      "compiled": {
+        "visibleStartS": 0.25,
+        "visibleEndS": 3.25,
+        "visibleDurationS": 3
+      },
+      "pass": true
+    },
+    {
+      "groupIndex": 2,
+      "tmAt2SDelta": 0,
+      "visibleStartDeltaS": 0,
+      "visibleEndDeltaS": 2,
+      "visibleDurationDeltaS": 2,
+      "protectedGroup": false,
+      "baseline": {
+        "visibleStartS": 3,
+        "visibleEndS": 6.25,
+        "visibleDurationS": 3.25
+      },
+      "compiled": {
+        "visibleStartS": 3,
+        "visibleEndS": 8.25,
+        "visibleDurationS": 5.25
+      },
+      "pass": true
+    },
+    {
+      "groupIndex": 3,
+      "tmAt2SDelta": 0,
+      "visibleStartDeltaS": 0,
+      "visibleEndDeltaS": -0.5,
+      "visibleDurationDeltaS": -0.5,
+      "protectedGroup": false,
+      "baseline": {
+        "visibleStartS": 4.25,
+        "visibleEndS": 6.25,
+        "visibleDurationS": 2
+      },
+      "compiled": {
+        "visibleStartS": 4.25,
+        "visibleEndS": 5.75,
+        "visibleDurationS": 1.5
+      },
+      "pass": true
+    },
+    {
+      "groupIndex": 4,
+      "tmAt2SDelta": 0,
+      "visibleStartDeltaS": 0,
+      "visibleEndDeltaS": 0,
+      "visibleDurationDeltaS": 0,
+      "protectedGroup": true,
+      "baseline": {
+        "visibleStartS": 7.25,
+        "visibleEndS": 10.5,
+        "visibleDurationS": 3.25
+      },
+      "compiled": {
+        "visibleStartS": 7.25,
+        "visibleEndS": 10.5,
+        "visibleDurationS": 3.25
+      },
+      "pass": true
+    },
+    {
+      "groupIndex": 5,
+      "tmAt2SDelta": 0,
+      "visibleStartDeltaS": 0,
+      "visibleEndDeltaS": 0,
+      "visibleDurationDeltaS": 0,
+      "protectedGroup": true,
+      "baseline": {
+        "visibleStartS": 13.5,
+        "visibleEndS": 16.5,
+        "visibleDurationS": 3
+      },
+      "compiled": {
+        "visibleStartS": 13.5,
+        "visibleEndS": 16.5,
+        "visibleDurationS": 3
+      },
+      "pass": true
+    }
+  ],
+  "protectedGroupTimingPass": true,
+  "phaseDurationProofBacked": false,
+  "sourceReadyBlockerType": [
+    "guardrail-regression"
   ],
   "compiledControlRead": {
     "variantId": "compiled-stage7-semantic-phase-align-protect-0.1",
@@ -494,8 +824,8 @@
       },
       "group4": {
         "visibleStartS": 7.25,
-        "visibleEndS": 12.5,
-        "visibleDurationS": 5.25
+        "visibleEndS": 10.5,
+        "visibleDurationS": 3.25
       },
       "group5": {
         "visibleStartS": 13.5,
@@ -529,8 +859,8 @@
         "groupIndex": 4,
         "tmAt2SDelta": 0,
         "visibleStartDeltaS": 0,
-        "visibleEndDeltaS": 2,
-        "visibleDurationDeltaS": 2
+        "visibleEndDeltaS": 0,
+        "visibleDurationDeltaS": 0
       },
       {
         "groupIndex": 5,
@@ -549,15 +879,41 @@
     },
     "group4Preservation": {
       "groupIndex": 4,
+      "tmAt2SDelta": 0,
       "visibleStartDeltaS": 0,
-      "visibleEndDeltaS": 2,
-      "visibleDurationDeltaS": 2
+      "visibleEndDeltaS": 0,
+      "visibleDurationDeltaS": 0,
+      "protectedGroup": true,
+      "baseline": {
+        "visibleStartS": 7.25,
+        "visibleEndS": 10.5,
+        "visibleDurationS": 3.25
+      },
+      "compiled": {
+        "visibleStartS": 7.25,
+        "visibleEndS": 10.5,
+        "visibleDurationS": 3.25
+      },
+      "pass": true
     },
     "group5Preservation": {
       "groupIndex": 5,
+      "tmAt2SDelta": 0,
       "visibleStartDeltaS": 0,
       "visibleEndDeltaS": 0,
-      "visibleDurationDeltaS": 0
+      "visibleDurationDeltaS": 0,
+      "protectedGroup": true,
+      "baseline": {
+        "visibleStartS": 13.5,
+        "visibleEndS": 16.5,
+        "visibleDurationS": 3
+      },
+      "compiled": {
+        "visibleStartS": 13.5,
+        "visibleEndS": 16.5,
+        "visibleDurationS": 3
+      },
+      "pass": true
     },
     "motionProfileProxy": {
       "referenceSetup": {
@@ -687,22 +1043,46 @@
         ]
       },
       "spacing": {
-        "pass": true,
+        "pass": false,
         "sampleCount": 31,
-        "spacingScore": 0.769,
-        "bunchingRisk": 0.258
+        "spacingScore": 0.64,
+        "bunchingRisk": 0.387
       }
     },
     "spacingReadability": {
       "sampleCount": 31,
       "worstMinDistance": 0,
-      "averageMinDistance": 16.9,
-      "spacingScore": 0.769,
-      "bunchingRisk": 0.258,
-      "crampedCount": 8,
+      "averageMinDistance": 14.51,
+      "spacingScore": 0.64,
+      "bunchingRisk": 0.387,
+      "crampedCount": 12,
       "minRuntimeSpacingScore": 0.72,
       "maxRuntimeBunchingRisk": 0.38,
       "worstSamples": [
+        {
+          "t": 11,
+          "activeCount": 0,
+          "minDistance": null,
+          "minPair": null
+        },
+        {
+          "t": 11.5,
+          "activeCount": 0,
+          "minDistance": null,
+          "minPair": null
+        },
+        {
+          "t": 12,
+          "activeCount": 0,
+          "minDistance": null,
+          "minPair": null
+        },
+        {
+          "t": 12.5,
+          "activeCount": 0,
+          "minDistance": null,
+          "minPair": null
+        },
         {
           "t": 13,
           "activeCount": 0,
@@ -728,89 +1108,9 @@
             },
             "distance": 1.23
           }
-        },
-        {
-          "t": 0.5,
-          "activeCount": 8,
-          "minDistance": 3.36,
-          "minPair": {
-            "a": {
-              "wave": 0,
-              "lane": 4,
-              "x": 87.9,
-              "y": 186.43
-            },
-            "b": {
-              "wave": 0,
-              "lane": 5,
-              "x": 87.56,
-              "y": 189.77
-            },
-            "distance": 3.36
-          }
-        },
-        {
-          "t": 1,
-          "activeCount": 8,
-          "minDistance": 3.57,
-          "minPair": {
-            "a": {
-              "wave": 0,
-              "lane": 6,
-              "x": 175.37,
-              "y": 201.41
-            },
-            "b": {
-              "wave": 0,
-              "lane": 7,
-              "x": 177.28,
-              "y": 204.43
-            },
-            "distance": 3.57
-          }
-        },
-        {
-          "t": 15,
-          "activeCount": 8,
-          "minDistance": 5.67,
-          "minPair": {
-            "a": {
-              "wave": 4,
-              "lane": 2,
-              "x": 156.08,
-              "y": 53.26
-            },
-            "b": {
-              "wave": 4,
-              "lane": 4,
-              "x": 161.31,
-              "y": 51.06
-            },
-            "distance": 5.67
-          }
-        },
-        {
-          "t": 5,
-          "activeCount": 16,
-          "minDistance": 6.59,
-          "minPair": {
-            "a": {
-              "wave": 2,
-              "lane": 2,
-              "x": 132.13,
-              "y": 232.83
-            },
-            "b": {
-              "wave": 2,
-              "lane": 3,
-              "x": 136.56,
-              "y": 227.95
-            },
-            "distance": 6.59
-          }
         }
       ],
-      "pass": true
+      "pass": false
     },
     "scoreableRoutePreservation": {
       "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
@@ -840,8 +1140,8 @@
   },
   "failureClassification": [
     {
-      "category": "semantic guardrail caught a real regression",
-      "read": "The compiled controls changed group 4 or group 5 timing beyond the protected late-group tolerance."
+      "category": "guardrail-regression",
+      "read": "The compiled timing controls reduce spacing/readability below the Stage 7 challenge-motion-profile floor."
     }
   ],
   "compilerContract": {
@@ -1144,8 +1444,7 @@
       "touchedGroups": [
         1,
         2,
-        3,
-        4
+        3
       ],
       "semanticTransformId": "phase-duration-rebalance",
       "control": "compiledRuntimeControls.phaseDurationRebalance",
@@ -1320,63 +1619,6 @@
             }
           ],
           "appliedInLayoutOverride": true
-        },
-        {
-          "runtimeField": "groupSpawnOffsets[3] or motionSpecGroups[3].spawnOffsetS",
-          "value": 7.13,
-          "runtimeCurrentlyConsumes": true,
-          "derivedFrom": "aggregateObjectTrackTarget.visibleStartS",
-          "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
-          "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
-          "appliedTargets": [
-            {
-              "target": "groupSpawnOffsets[3]",
-              "groupIndex": 4,
-              "before": 7.13,
-              "after": 7.13
-            },
-            {
-              "target": "motionSpecGroups[3].spawnOffsetS",
-              "groupIndex": 4,
-              "before": null,
-              "after": 7.13
-            }
-          ],
-          "appliedInLayoutOverride": true
-        },
-        {
-          "runtimeField": "motionSpecGroups[3].phaseDurations.trackS",
-          "value": 3.25,
-          "runtimeCurrentlyConsumes": true,
-          "derivedFrom": "max(0.75, aggregateObjectTrackTarget.visibleEndS - visibleStartS)",
-          "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
-          "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
-          "appliedTargets": [
-            {
-              "target": "motionSpecGroups[3].phaseDurations.trackS",
-              "groupIndex": 4,
-              "before": 2,
-              "after": 3.25
-            }
-          ],
-          "appliedInLayoutOverride": true
-        },
-        {
-          "runtimeField": "groupReferencePaths[3].playbackScale",
-          "value": 0.846,
-          "runtimeCurrentlyConsumes": true,
-          "derivedFrom": "baselineVisibleDurationS / targetVisibleDurationS",
-          "compilerStatus": "compiled-browser-visible-proofed-but-not-source-ready",
-          "sourceReadyStatus": "blocked until phase-duration proof passes motion/profile proxy and preserves protected group 4/group 5 timing",
-          "appliedTargets": [
-            {
-              "target": "groupReferencePaths[3].playbackScale",
-              "groupIndex": 4,
-              "before": null,
-              "after": 0.846
-            }
-          ],
-          "appliedInLayoutOverride": true
         }
       ],
       "pathFamilyOrder": [
@@ -1421,8 +1663,8 @@
         },
         "group4": {
           "visibleStartS": 7.25,
-          "visibleEndS": 12.5,
-          "visibleDurationS": 5.25
+          "visibleEndS": 10.5,
+          "visibleDurationS": 3.25
         },
         "group5": {
           "visibleStartS": 13.5,
@@ -1440,13 +1682,37 @@
       "spacingSummary": {
         "sampleCount": 31,
         "worstMinDistance": 0,
-        "averageMinDistance": 16.9,
-        "spacingScore": 0.769,
-        "bunchingRisk": 0.258,
-        "crampedCount": 8,
+        "averageMinDistance": 14.51,
+        "spacingScore": 0.64,
+        "bunchingRisk": 0.387,
+        "crampedCount": 12,
         "minRuntimeSpacingScore": 0.72,
         "maxRuntimeBunchingRisk": 0.38,
         "worstSamples": [
+          {
+            "t": 11,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          },
+          {
+            "t": 11.5,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          },
+          {
+            "t": 12,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          },
+          {
+            "t": 12.5,
+            "activeCount": 0,
+            "minDistance": null,
+            "minPair": null
+          },
           {
             "t": 13,
             "activeCount": 0,
@@ -1472,89 +1738,9 @@
               },
               "distance": 1.23
             }
-          },
-          {
-            "t": 0.5,
-            "activeCount": 8,
-            "minDistance": 3.36,
-            "minPair": {
-              "a": {
-                "wave": 0,
-                "lane": 4,
-                "x": 87.9,
-                "y": 186.43
-              },
-              "b": {
-                "wave": 0,
-                "lane": 5,
-                "x": 87.56,
-                "y": 189.77
-              },
-              "distance": 3.36
-            }
-          },
-          {
-            "t": 1,
-            "activeCount": 8,
-            "minDistance": 3.57,
-            "minPair": {
-              "a": {
-                "wave": 0,
-                "lane": 6,
-                "x": 175.37,
-                "y": 201.41
-              },
-              "b": {
-                "wave": 0,
-                "lane": 7,
-                "x": 177.28,
-                "y": 204.43
-              },
-              "distance": 3.57
-            }
-          },
-          {
-            "t": 15,
-            "activeCount": 8,
-            "minDistance": 5.67,
-            "minPair": {
-              "a": {
-                "wave": 4,
-                "lane": 2,
-                "x": 156.08,
-                "y": 53.26
-              },
-              "b": {
-                "wave": 4,
-                "lane": 4,
-                "x": 161.31,
-                "y": 51.06
-              },
-              "distance": 5.67
-            }
-          },
-          {
-            "t": 5,
-            "activeCount": 16,
-            "minDistance": 6.59,
-            "minPair": {
-              "a": {
-                "wave": 2,
-                "lane": 2,
-                "x": 132.13,
-                "y": 232.83
-              },
-              "b": {
-                "wave": 2,
-                "lane": 3,
-                "x": 136.56,
-                "y": 227.95
-              },
-              "distance": 6.59
-            }
           }
         ],
-        "pass": true
+        "pass": false
       },
       "motionProfileProxy": {
         "referenceSetup": {
@@ -1684,10 +1870,10 @@
           ]
         },
         "spacing": {
-          "pass": true,
+          "pass": false,
           "sampleCount": 31,
-          "spacingScore": 0.769,
-          "bunchingRisk": 0.258
+          "spacingScore": 0.64,
+          "bunchingRisk": 0.387
         }
       },
       "evaluation": {
@@ -1696,8 +1882,7 @@
         "touchedGroups": [
           1,
           2,
-          3,
-          4
+          3
         ],
         "control": "compiledRuntimeControls.phaseDurationRebalance",
         "groupDeltas": [
@@ -1726,8 +1911,8 @@
             "groupIndex": 4,
             "tmAt2SDelta": 0,
             "visibleStartDeltaS": 0,
-            "visibleEndDeltaS": 2,
-            "visibleDurationDeltaS": 2
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
           },
           {
             "groupIndex": 5,
@@ -1758,13 +1943,6 @@
             "visibleStartDeltaS": 0,
             "visibleEndDeltaS": -0.5,
             "visibleDurationDeltaS": -0.5
-          },
-          {
-            "groupIndex": 4,
-            "tmAt2SDelta": 0,
-            "visibleStartDeltaS": 0,
-            "visibleEndDeltaS": 2,
-            "visibleDurationDeltaS": 2
           }
         ],
         "targetVisibleEffectScoreS": 2,
@@ -1773,8 +1951,8 @@
           {
             "groupIndex": 4,
             "visibleStartDeltaS": 0,
-            "visibleEndDeltaS": 2,
-            "visibleDurationDeltaS": 2
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
           },
           {
             "groupIndex": 5,
@@ -1783,22 +1961,15 @@
             "visibleDurationDeltaS": 0
           }
         ],
-        "group45RegressionPass": false,
-        "group45Regression": [
-          {
-            "groupIndex": 4,
-            "visibleStartDeltaS": 0,
-            "visibleEndDeltaS": 2,
-            "visibleDurationDeltaS": 2
-          }
-        ],
+        "group45RegressionPass": true,
+        "group45Regression": [],
         "pathOrderPass": true,
         "contractPathOrderPass": true,
         "runtimePathOrderPass": true,
         "referenceSetupPass": true,
         "playbackClockPass": true,
-        "spacingProxyPass": true,
-        "motionProfileGateProxyPass": true,
+        "spacingProxyPass": false,
+        "motionProfileGateProxyPass": false,
         "read": "Non-overwriting browser proof confirmed this control changes visible Stage 7 timing/path behavior."
       }
     },
@@ -2888,17 +3059,17 @@
   "summary": {
     "browserVisibleEffectConfirmed": true,
     "compiledCandidateBrowserVisibleEffectConfirmed": true,
-    "compiledCandidateMotionProfileGateProxyPass": true,
-    "motionProfileGateProxyPass": true,
-    "group45Preserved": false,
-    "compiledCandidateGroup45Preserved": false,
+    "compiledCandidateMotionProfileGateProxyPass": false,
+    "motionProfileGateProxyPass": false,
+    "group45Preserved": true,
+    "compiledCandidateGroup45Preserved": true,
     "proofKind": "non-overwriting-browser-layout-override",
-    "read": "The compiled phase-duration semantic candidate moves Stage 7 browser-visible timing/path behavior while satisfying the focused motion/profile proxy."
+    "read": "The compiled phase-duration semantic candidate moves Stage 7 browser-visible timing/path behavior, but it does not satisfy the focused motion/profile proxy."
   },
   "decision": {
     "sourceReadyForCandidates": false,
     "sourceReadyBlockers": [
-      "The compiled candidate regresses protected group 4/group 5 timing windows.",
+      "The compiled candidate does not pass the motion/profile proxy guard.",
       "A real source candidate still needs full motion/profile, strict conformance, before/after visual evidence, scoreable-route, and safety checks."
     ],
     "read": "phase-duration-rebalance has a candidate-specific compiler-transfer proof, but the compiled candidate is not source-ready until the listed blockers are resolved."
