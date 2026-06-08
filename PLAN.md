@@ -277,34 +277,35 @@ Current conformance read:
   `4.5/10` graphics, and `3.9/10` novelty. Stage 7 now has a target-contract
   fit of `7.2/10`, with runtime and declared path-family order fit both at
   `1.0`, but its direct Galaga object-track fit is still only `4.7/10`.
-- the June 8 Stage 7 object-track keeper cycle rejected two narrow runtime
-  candidates rather than promote a weak player-visible change. Baseline,
-  candidate, and restored-baseline runs were logged through
-  `npm run harness:measure`; object-track fit stayed `4.7/10`, candidate two
-  improved group 4 from `5.0` to `5.2` but regressed the late boss-led group 5
-  from `4.9` to `4.4`, so the runtime edit was reverted. The next quality move
-  should improve the Stage 7 candidate mechanism first: compare against
-  per-object target tracks for groups 1, 4, and 5, generate a non-overwriting
-  before/after artifact, then test one timing-aware candidate that reduces
-  late exit travel and early lower-field overstay without breaking spacing or
-  no-shot/no-loss challenge safety. See
-  `reference-artifacts/analyses/challenge-stage-conformance/stage7-object-track-keeper-review-2026-06-08.md`.
-- the June 8 Reference Execution Description Pilot created a measurement-only
-  Stage 7 / Challenge 2 schema, description artifact, analyzer, and check:
+- the June 8 Stage 7 object-track keeper cycles rejected all runtime
+  candidates rather than promote weak player-visible changes. Earlier narrow
+  runtime attempts improved isolated rows but regressed the late boss-led group
+  or failed to move the object-track score. The later timing/canonical-label
+  candidate improved group 1 from `3.5/10` to `4.2/10` and shot opportunity
+  from `5.5/10` to `5.7/10`, but reduced total object-track fit from
+  `4.7/10` to `4.6/10`, reduced coverage from `0.503` to `0.482`, dropped
+  group 4 from `5.0/10` to `3.8/10`, and slipped group 5 from `4.9/10` to
+  `4.8/10`. Safety stayed clean, but the runtime edit was rejected and the
+  source was restored. See
+  `reference-artifacts/analyses/challenge-stage-conformance/stage7-object-track-keeper-review-2026-06-08.md`
+  and
+  `reference-artifacts/analyses/challenge-stage-conformance/stage7-timing-canonical-candidate-review-2026-06-08.md`.
+- the June 8 Reference Execution Description Pilot created a measurement and
+  process keeper, not a runtime keeper: a Stage 7 / Challenge 2 schema,
+  description artifact, analyzer, and check:
   `reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage7-challenge2-0.1.json`,
   `reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json`,
   `npm run harness:analyze:reference-execution-description`, and
   `npm run harness:check:reference-execution-description`. The measurement
-  keeper is accepted, but it is not beta justification. The pilot recommends
-  against a runtime candidate until the target precision is tightened: groups
-  2, 4, and 5 currently disagree between semantic path-family intent and
-  object-track execution family, groups 1 and 4 have aggregate-vs-primary
-  object-track tension, Stage 7 object-track fit remains `4.7/10`, and group
-  path-length ratios still exceed the first candidate floor. The next quality
-  move is to reconcile those labels/primary-track gates, then run exactly one
-  timing-aware Stage 7 candidate with before/after evidence and the strict
-  challenge conformance, motion-profile, scoreable-route, spacing/readability,
-  sprite/render, and no-shot/no-loss guards.
+  keeper is accepted, but it is not beta justification. The tightened pilot
+  now separates reference precision, runtime candidate readiness, and runtime
+  promotion readiness; the restored baseline is candidate-ready but not
+  promotion-ready, with nine promotion blockers. The next quality move is a
+  non-overwriting Stage 7 candidate-trial path that evaluates semantic
+  executable-intent variants against the reference execution description
+  before source edits. Only promote a runtime change if a trial predicts
+  focused strict improvement while preserving group 4, group 5,
+  spacing/readability, scoreable routes, and no-shot/no-loss challenge safety.
 - challenge-stage grammar is now materially ahead of runtime implementation:
   the first-five challenge work has `25/25` reference-backed group contracts
   and `8.6/10` control readiness, but runtime promotion is still blocked by

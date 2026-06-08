@@ -113,8 +113,6 @@ Full target-artifact report: `GALAGA_TARGET_ARTIFACT_COVERAGE.md` and `reference
 
 **Safety rule:** enemy shots 0, attack starts 0, ship losses 0.
 
-**Keeper-cycle note:** The June 8 timing/canonical-label runtime candidate was rejected, not promoted. It improved group 1 and shot opportunity, but reduced total object-track fit from 4.7/10 to 4.6/10, lowered coverage from 0.503 to 0.482, dropped group 4 from 5.0/10 to 3.8/10, and slipped group 5 from 4.9/10 to 4.8/10. The reference execution description remains a measurement/process keeper, and the next Stage 7 move should use a non-overwriting candidate-trial path before any source runtime edit.
-
 **Critical gaps:**
 - Sprite-motion correspondence is 6.18/10: runtime flapping/cadence is visible, but target frame timing is still frame-labeled-segmented-reference-windows and weakest motion row is bee-zako-pulse-pair.
 - Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.
