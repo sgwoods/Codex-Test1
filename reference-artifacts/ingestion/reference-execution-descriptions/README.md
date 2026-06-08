@@ -60,6 +60,28 @@ the current runtime can have clear deviations while the artifact is still
 precise enough to guide one candidate. A measurement keeper is useful, but it
 is not beta justification by itself.
 
+## Stage 3 Language Pilot
+
+The Stage 3 / Challenge 1 RED keeps the Stage 7 object-track fields, but adds
+semantic fields needed by the first challenge-stage teaching pattern:
+
+- `semanticExecution.lineRole` for phrases such as `bee-line` and
+  `butterfly-line`
+- `semanticExecution.scoreableFrameWindow` for first-visible, path-commit, and
+  scoreable upper-band frame ranges when accepted labels provide them
+- `semanticExecution.exitGesture` so peel-off/readable-exit intent is not
+  hidden inside an `exitSide` scalar
+- `fieldOccupancyExpectation` so upper-band score-window intent can be compared
+  beside CPU object-track lower-field occupancy instead of collapsed into one
+  tuning number
+- `uncertaintyAndProvenance` for direct-label vs inferred groups and
+  field-level ambiguity
+- `candidateComparisonGate.authorityLayer` to keep RED target-conformance
+  separate from live runtime promotion authority
+
+The Stage 3 RED may recommend a non-overwriting candidate-trial gate when the
+language is adequate, but it never authorizes runtime source changes by itself.
+
 ## Stage 7 Authority Note
 
 For the Stage 7 / Challenge 2 pilot, `canonicalComparisonPathFamily` is

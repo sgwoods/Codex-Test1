@@ -85,8 +85,8 @@ Full target-artifact report: `GALAGA_TARGET_ARTIFACT_COVERAGE.md` and `reference
 - Alien/stage novelty is only 3.9/10: the current type mix does not yet prove Galaga-like new alien introductions, memorable challenge-specific roles, or distinct bonus-stage learning patterns.
 
 **Next actions:**
-- Protect the first-challenge bee/butterfly line contract, then tune path length, turn count, and rack-slot precision against challenge-1 arrival and late-wave labels.
-- Add contact-sheet comparison for first-visible frame, entry side, exit side, lane occupancy, and group timing so the next tuning pass can improve trajectory precision without subjective guessing.
+- The first Stage 3 / Challenge 1 RED artifact is now available at `reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage3-challenge1-0.1.json`, with analysis at `reference-artifacts/analyses/reference-execution-description/stage3-challenge1/latest.json`. It explicitly captures the top-right bee line, late top-left butterfly line, upper-band score windows, peel-off exits, no-combat grammar, path-family order, scoreable-window expectations, safety, and uncertainty/provenance.
+- Build a non-overwriting Stage 3 candidate-trial gate next. It should evaluate semantic line roles, upper-band scoreability, path-family order, object-track fit, field-occupancy tension, spacing/readability, scoreable routes, and no-shot/no-attack/no-loss safety before any source edit. Do not treat the RED as runtime promotion authority by itself.
 
 
 ## Stage 7 / Challenge 2

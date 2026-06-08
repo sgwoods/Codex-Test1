@@ -1,0 +1,1298 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "reference-execution-description",
+  "generatedAt": "2026-06-08T18:07:40.348Z",
+  "commit": "a0807fa11",
+  "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 3,
+    "challengeNumber": 1,
+    "displayLabel": "Stage 3 / Challenge 1",
+    "descriptionId": "aurora-stage3-challenge1-0.1",
+    "windowScope": "opening challenge execution window"
+  },
+  "sourceReferenceWindow": {
+    "sourceVideo": "challenge-all2.mp4",
+    "sourceWindowId": "challenge-01-classic-column-lesson",
+    "sourceId": "challenge-all2-single-ship-all-perfects",
+    "sourceStartSeconds": 5,
+    "durationSeconds": 16,
+    "fullMediaWindowSeconds": [
+      5,
+      36
+    ],
+    "motionRead": "Introductory challenge teaches vertical columns, simple side hooks, upper-band score windows, and the perfect-result loop.",
+    "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-1fps.jpg",
+    "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/contact-sheet-2fps.jpg",
+    "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/motion-review-4fps.jpg",
+    "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-01-classic-column-lesson/frame-index.json",
+    "objectTrackOverlay": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/overlays/challenge-01-target-tracks.svg",
+    "objectTrackContactSheet": "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/contact-sheets/challenge-01-target-samples.svg"
+  },
+  "sourceArtifacts": {
+    "galagaChallengeObjectTracks": "reference-artifacts/analyses/galaga-challenge-object-tracks/latest.json",
+    "challengeStageTargetContracts": "reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json",
+    "challengeSetpieceContracts": "reference-artifacts/analyses/challenge-setpiece-contracts/latest.json",
+    "challengeMovementGrammar": "reference-artifacts/ingestion/challenge-stage-movement-grammar/aurora-first-five-0.1.json",
+    "galagaPathReferenceLabels": "reference-artifacts/analyses/galaga-path-reference-labels/latest.json",
+    "rawGalagaPathReferenceLabels": "reference-artifacts/ingestion/galaga-path-reference-labels/snake-latino-media-backed-labels-0.1.json",
+    "galagaChallengeVideoReference": "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
+    "challengeStageConformance": "reference-artifacts/analyses/challenge-stage-conformance/latest.json"
+  },
+  "executionModel": {
+    "phaseOrder": [
+      "challenge-1-group-1",
+      "challenge-1-group-2",
+      "challenge-1-group-3",
+      "challenge-1-group-4",
+      "challenge-1-group-5"
+    ],
+    "groupCount": 5,
+    "targetCount": 40,
+    "playerMeaning": "Introductory no-combat bonus lesson: clean bee and butterfly groups, top/side entries, learnable upper-band firing lanes, and visible peel/drop exits.",
+    "successRead": "The first challenge should look authored as a safe score exhibition before it looks difficult.",
+    "noCombatGrammar": {
+      "enemyShots": "hard-blocked",
+      "enemyAttackStarts": "hard-blocked",
+      "shipLosses": "hard-blocked",
+      "challengeContacts": "hard-blocked",
+      "read": "Challenge 1 is a score exhibition and teaching pattern; safety is a guardrail, not a score substitute."
+    },
+    "safetyGuardrails": [
+      "no enemy shots",
+      "no enemy attack starts",
+      "no ship losses",
+      "40 targets presented as a bonus set piece",
+      "perfect-bonus feedback remains visible after clear"
+    ],
+    "runtimeComparisonProtocol": {
+      "phaseOrder": "Runtime group visible starts should preserve the five Stage 3 teaching phrases and the opening-to-late-wave order.",
+      "pathFamily": "Use canonicalComparisonPathFamily as target-conformance intent. Keep setpiece/movement-grammar conflicts visible as RED authority debt, not as source-promotion permission.",
+      "semanticLineRoles": "Compare top-right bee-line and late top-left butterfly-line intent directly, including entry cue, line family, scoreable band, and exit gesture.",
+      "objectTrackFit": "Report human-contract target fit, aggregate object-track fit, and primary object-track fit separately.",
+      "fieldOccupancy": "Do not collapse upper-band score-window intent into lowerFieldShare alone. Report human-label lower-field share beside CPU object-track occupancy.",
+      "spacing": "Use challenge-motion-profile spacing/bunching checks before any later candidate can become source-ready.",
+      "scoreableWindows": "Promotion requires multi-target score windows and preservation of upper-band lane readability.",
+      "safety": "No enemy shots, no enemy attack starts, no challenge contacts, and no ship losses remain hard blockers."
+    }
+  },
+  "groups": [
+    {
+      "groupIndex": 1,
+      "phaseId": "challenge-1-group-1",
+      "order": 1,
+      "role": "mixed opener",
+      "semanticPathFamily": "first-challenge-peel",
+      "objectTrackExecutionFamily": "first-challenge-peel",
+      "motionGrammarSeedFamily": "first-challenge-peel",
+      "canonicalComparisonPathFamily": "first-challenge-peel",
+      "pathFamilyDecision": {
+        "canonicalPathFamily": "first-challenge-peel",
+        "canonicalSource": "target-contract-semantic",
+        "reason": "Stage 3 RED target conformance is anchored first to the human-readable teaching contract and accepted path labels.",
+        "legacySemanticPathFamily": "first-challenge-peel",
+        "objectTrackExecutionFamily": "first-challenge-peel",
+        "motionGrammarSeedFamily": "first-challenge-peel",
+        "runtimeCurrentFamily": "first-challenge-peel",
+        "sourceAgreement": {
+          "semanticMatchesCanonical": true,
+          "scheduleMatchesCanonical": true,
+          "grammarMatchesCanonical": true,
+          "runtimeMatchesCanonical": true,
+          "scheduleMatchesGrammar": true
+        },
+        "targetConformanceDebt": []
+      },
+      "expectedTypes": [
+        "bee",
+        "but"
+      ],
+      "expectedFamilies": [
+        "classic"
+      ],
+      "semanticExecution": {
+        "lineRole": "bee-line",
+        "lineFormationIntent": "horizontal line / upper-band teaching phrase",
+        "entryCue": "top-right",
+        "exitGesture": "left peel-off",
+        "scoreableBand": "upper-band",
+        "scoreableWindowRead": "upper-band mirrored group with no enemy fire",
+        "scoreableFrameWindow": {
+          "sourceFps": 4,
+          "firstVisibleFrame": 16,
+          "pathCommitFrame": 22,
+          "scoreableUpperBandStartFrame": 24,
+          "scoreableUpperBandEndFrame": 58
+        },
+        "noCombatGrammar": {
+          "enemyShots": "forbidden",
+          "attackStarts": "forbidden",
+          "shipLosses": "forbidden",
+          "playerMeaning": "safe bonus exhibition, not a combat wave"
+        },
+        "provenance": {
+          "strength": "direct-path-label",
+          "labelId": "challenge-1-arrival-group-1",
+          "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg",
+          "sourceTimestampS": 86,
+          "confidence": 0.76,
+          "note": "Accepted media-backed path label carries entry side, line family, scoreable upper-band frames, exit side, and comparison vector."
+        }
+      },
+      "scoreWindowRead": "upper-band mirrored targets",
+      "humanContractWindowS": [
+        0.9,
+        6.4
+      ],
+      "humanContractTarget": {
+        "visibleStartS": 0.9,
+        "visibleEndS": 6.4,
+        "entrySide": "top-right",
+        "exitSide": "left",
+        "xRange": 0.52,
+        "yRange": 0.28,
+        "pathLength": 0.68,
+        "turnCount": 1,
+        "reversalCount": 0,
+        "lowerFieldShare": 0.02
+      },
+      "objectTrackWindowS": [
+        0,
+        3.25
+      ],
+      "spawnOffsetS": 0,
+      "primaryTargetTrackId": "target-track-33",
+      "targetTrackConfidence": 0.737,
+      "sourceTrackIds": [
+        "target-track-33",
+        "target-track-9",
+        "target-track-68",
+        "target-track-71",
+        "target-track-63",
+        "target-track-61",
+        "target-track-62",
+        "target-track-67",
+        "target-track-65",
+        "target-track-72",
+        "target-track-70",
+        "target-track-69",
+        "target-track-66",
+        "target-track-64"
+      ],
+      "aggregateObjectTrackTarget": {
+        "visibleStartS": 0,
+        "visibleEndS": 3.25,
+        "entrySide": "left",
+        "exitSide": "center",
+        "xRange": 0.5437,
+        "yRange": 0.1652,
+        "pathLength": 0.0221,
+        "turnCount": 2.64,
+        "reversalCount": 1.57,
+        "lowerFieldShare": 1
+      },
+      "primaryObjectTrackTarget": {
+        "visibleStartS": 0,
+        "visibleEndS": 0.63,
+        "entrySide": "left",
+        "exitSide": "center",
+        "xRange": 0.0969,
+        "yRange": 0.0405,
+        "pathLength": 0.1054,
+        "turnCount": 1,
+        "reversalCount": 0,
+        "lowerFieldShare": 1
+      },
+      "primaryTrackRelativePoints": [
+        {
+          "t": 0,
+          "sourceT": 0,
+          "x": 0.3197,
+          "y": 0.6462
+        },
+        {
+          "t": 0.13,
+          "sourceT": 0.13,
+          "x": 0.3205,
+          "y": 0.6454
+        },
+        {
+          "t": 0.63,
+          "sourceT": 0.63,
+          "x": 0.4166,
+          "y": 0.6859
+        }
+      ],
+      "fieldOccupancyExpectation": {
+        "expectedPrimaryBand": "upper-band score window with later peel/drop exit",
+        "humanLabelLowerFieldShare": 0.02,
+        "aggregateObjectTrackLowerFieldShare": 1,
+        "primaryObjectTrackLowerFieldShare": 1,
+        "upperBandEmphasis": 0.98,
+        "conflictBetweenHumanLabelAndCpuTrack": true,
+        "conflictRead": "Human/contact-sheet label reads an upper-band score phrase, while CPU object-track clustering includes substantial lower-field occupancy. Keep both; do not tune from one scalar alone.",
+        "provenance": "direct-path-label-plus-object-track"
+      },
+      "candidateComparisonGate": {
+        "authorityLayer": "target-conformance-red-not-live-promotion",
+        "canonicalPathFamily": "first-challenge-peel",
+        "pathFamilyGate": "candidate trials should preserve canonical target-contract path family unless the RED language is explicitly refined first",
+        "aggregateObjectTrackFitFloorScore10": 5,
+        "primaryObjectTrackFitFloorScore10": 5,
+        "scoreableWindowRequired": true,
+        "noCombatRequired": true,
+        "spacingReadabilityRequired": true,
+        "lowerFieldDeltaRange": [
+          -0.25,
+          0.18
+        ],
+        "maxAggregatePathLengthRatio": 3,
+        "maxPrimaryPathLengthRatio": 3,
+        "semanticGates": [
+          "lineFormationIntent",
+          "scoreableBand",
+          "exitGesture",
+          "noCombatGrammar",
+          "fieldOccupancyExpectation"
+        ],
+        "targetVector": {
+          "humanPathLength": 0.68,
+          "aggregatePathLength": 0.0221,
+          "primaryPathLength": 0.1054,
+          "humanLowerFieldShare": 0.02,
+          "aggregateLowerFieldShare": 1,
+          "primaryLowerFieldShare": 1
+        }
+      },
+      "comparisonAxes": [
+        "phase-order",
+        "semantic-line-role",
+        "semantic-path-family",
+        "canonical-comparison-path-family",
+        "human-contract-target",
+        "aggregate-object-track-fit",
+        "primary-object-track-fit",
+        "upper-lower-field-occupancy",
+        "scoreable-window",
+        "spacing-readability",
+        "challenge-safety",
+        "field-level-provenance"
+      ],
+      "uncertaintyAndProvenance": {
+        "confidence": 0.745,
+        "directPathLabel": true,
+        "uncertainty": [
+          "human upper-band read and CPU lower-field occupancy differ",
+          "primary object track is short and should not be treated as a complete phrase"
+        ],
+        "sourceEvidence": [
+          "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/overlays/challenge-01-target-tracks.svg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/contact-sheets/challenge-01-target-samples.svg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/tracks/challenge-01.json"
+        ]
+      },
+      "precisionNotes": [
+        "human upper-band read and CPU lower-field occupancy differ",
+        "primary object track is short and should not be treated as a complete phrase"
+      ]
+    },
+    {
+      "groupIndex": 2,
+      "phaseId": "challenge-1-group-2",
+      "order": 2,
+      "role": "bee column lesson",
+      "semanticPathFamily": "classic-column-drop",
+      "objectTrackExecutionFamily": "classic-column-drop",
+      "motionGrammarSeedFamily": "classic-column-drop",
+      "canonicalComparisonPathFamily": "classic-column-drop",
+      "pathFamilyDecision": {
+        "canonicalPathFamily": "classic-column-drop",
+        "canonicalSource": "target-contract-semantic",
+        "reason": "Stage 3 RED target conformance is anchored first to the human-readable teaching contract and accepted path labels.",
+        "legacySemanticPathFamily": "classic-column-drop",
+        "objectTrackExecutionFamily": "classic-column-drop",
+        "motionGrammarSeedFamily": "classic-column-drop",
+        "runtimeCurrentFamily": "classic-column-drop",
+        "sourceAgreement": {
+          "semanticMatchesCanonical": true,
+          "scheduleMatchesCanonical": true,
+          "grammarMatchesCanonical": true,
+          "runtimeMatchesCanonical": true,
+          "scheduleMatchesGrammar": true
+        },
+        "targetConformanceDebt": []
+      },
+      "expectedTypes": [
+        "bee"
+      ],
+      "expectedFamilies": [
+        "classic"
+      ],
+      "semanticExecution": {
+        "lineRole": "bee-column",
+        "lineFormationIntent": "vertical column lesson",
+        "entryCue": "top",
+        "exitGesture": "lower exit",
+        "scoreableBand": "upper-band",
+        "scoreableWindowRead": "center columns",
+        "scoreableFrameWindow": null,
+        "noCombatGrammar": {
+          "enemyShots": "forbidden",
+          "attackStarts": "forbidden",
+          "shipLosses": "forbidden",
+          "playerMeaning": "safe bonus exhibition, not a combat wave"
+        },
+        "provenance": {
+          "strength": "target-contract-inferred",
+          "labelId": null,
+          "sourceAnchor": null,
+          "sourceTimestampS": null,
+          "confidence": null,
+          "note": "No accepted per-group path label yet; semantic phrase is inferred from the Stage 3 target contract and object-track group order."
+        }
+      },
+      "scoreWindowRead": "center columns",
+      "humanContractWindowS": [
+        2.2,
+        8.2
+      ],
+      "humanContractTarget": {
+        "visibleStartS": 2.2,
+        "visibleEndS": 8.2,
+        "entrySide": "top",
+        "exitSide": "lower",
+        "xRange": 0.42,
+        "yRange": 0.36,
+        "pathLength": 0.64,
+        "turnCount": 1,
+        "reversalCount": 0,
+        "lowerFieldShare": 0.06
+      },
+      "objectTrackWindowS": [
+        4.38,
+        10.5
+      ],
+      "spawnOffsetS": 4.38,
+      "primaryTargetTrackId": "target-track-84",
+      "targetTrackConfidence": 0.754,
+      "sourceTrackIds": [
+        "target-track-84",
+        "target-track-87",
+        "target-track-82",
+        "target-track-85",
+        "target-track-81",
+        "target-track-88",
+        "target-track-86",
+        "target-track-79",
+        "target-track-89",
+        "target-track-92",
+        "target-track-83",
+        "target-track-93"
+      ],
+      "aggregateObjectTrackTarget": {
+        "visibleStartS": 4.38,
+        "visibleEndS": 10.5,
+        "entrySide": "center",
+        "exitSide": "center",
+        "xRange": 0.2073,
+        "yRange": 0.6865,
+        "pathLength": 0.254,
+        "turnCount": 4.25,
+        "reversalCount": 2.92,
+        "lowerFieldShare": 0.456
+      },
+      "primaryObjectTrackTarget": {
+        "visibleStartS": 4.88,
+        "visibleEndS": 10.5,
+        "entrySide": "center",
+        "exitSide": "center",
+        "xRange": 0.1983,
+        "yRange": 0.6362,
+        "pathLength": 1.0839,
+        "turnCount": 18,
+        "reversalCount": 13,
+        "lowerFieldShare": 0.8056
+      },
+      "primaryTrackRelativePoints": [
+        {
+          "t": 0,
+          "sourceT": 4.88,
+          "x": 0.5675,
+          "y": 0.2171
+        },
+        {
+          "t": 0.5,
+          "sourceT": 5.38,
+          "x": 0.5579,
+          "y": 0.3426
+        },
+        {
+          "t": 1.12,
+          "sourceT": 6,
+          "x": 0.4859,
+          "y": 0.5882
+        },
+        {
+          "t": 2,
+          "sourceT": 6.88,
+          "x": 0.4238,
+          "y": 0.7138
+        },
+        {
+          "t": 2.5,
+          "sourceT": 7.38,
+          "x": 0.423,
+          "y": 0.7139
+        },
+        {
+          "t": 2.87,
+          "sourceT": 7.75,
+          "x": 0.4239,
+          "y": 0.7141
+        },
+        {
+          "t": 3.37,
+          "sourceT": 8.25,
+          "x": 0.3866,
+          "y": 0.8051
+        },
+        {
+          "t": 3.87,
+          "sourceT": 8.75,
+          "x": 0.4443,
+          "y": 0.7744
+        },
+        {
+          "t": 4.5,
+          "sourceT": 9.38,
+          "x": 0.5446,
+          "y": 0.8241
+        },
+        {
+          "t": 5.62,
+          "sourceT": 10.5,
+          "x": 0.5452,
+          "y": 0.759
+        }
+      ],
+      "fieldOccupancyExpectation": {
+        "expectedPrimaryBand": "upper-band score window with later peel/drop exit",
+        "humanLabelLowerFieldShare": 0.06,
+        "aggregateObjectTrackLowerFieldShare": 0.456,
+        "primaryObjectTrackLowerFieldShare": 0.8056,
+        "upperBandEmphasis": 0.94,
+        "conflictBetweenHumanLabelAndCpuTrack": true,
+        "conflictRead": "Human/contact-sheet label reads an upper-band score phrase, while CPU object-track clustering includes substantial lower-field occupancy. Keep both; do not tune from one scalar alone.",
+        "provenance": "target-contract-plus-object-track"
+      },
+      "candidateComparisonGate": {
+        "authorityLayer": "target-conformance-red-not-live-promotion",
+        "canonicalPathFamily": "classic-column-drop",
+        "pathFamilyGate": "candidate trials should preserve canonical target-contract path family unless the RED language is explicitly refined first",
+        "aggregateObjectTrackFitFloorScore10": 5,
+        "primaryObjectTrackFitFloorScore10": 5,
+        "scoreableWindowRequired": true,
+        "noCombatRequired": true,
+        "spacingReadabilityRequired": true,
+        "lowerFieldDeltaRange": [
+          -0.25,
+          0.18
+        ],
+        "maxAggregatePathLengthRatio": 3,
+        "maxPrimaryPathLengthRatio": 3,
+        "semanticGates": [
+          "lineFormationIntent",
+          "scoreableBand",
+          "exitGesture",
+          "noCombatGrammar",
+          "fieldOccupancyExpectation"
+        ],
+        "targetVector": {
+          "humanPathLength": 0.64,
+          "aggregatePathLength": 0.254,
+          "primaryPathLength": 1.0839,
+          "humanLowerFieldShare": 0.06,
+          "aggregateLowerFieldShare": 0.456,
+          "primaryLowerFieldShare": 0.8056
+        }
+      },
+      "comparisonAxes": [
+        "phase-order",
+        "semantic-line-role",
+        "semantic-path-family",
+        "canonical-comparison-path-family",
+        "human-contract-target",
+        "aggregate-object-track-fit",
+        "primary-object-track-fit",
+        "upper-lower-field-occupancy",
+        "scoreable-window",
+        "spacing-readability",
+        "challenge-safety",
+        "field-level-provenance"
+      ],
+      "uncertaintyAndProvenance": {
+        "confidence": 0.754,
+        "directPathLabel": false,
+        "uncertainty": [
+          "no direct accepted path label for this group yet",
+          "human upper-band read and CPU lower-field occupancy differ"
+        ],
+        "sourceEvidence": [
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/overlays/challenge-01-target-tracks.svg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/contact-sheets/challenge-01-target-samples.svg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/tracks/challenge-01.json"
+        ]
+      },
+      "precisionNotes": [
+        "no direct accepted path label for this group yet",
+        "human upper-band read and CPU lower-field occupancy differ"
+      ]
+    },
+    {
+      "groupIndex": 3,
+      "phaseId": "challenge-1-group-3",
+      "order": 3,
+      "role": "butterfly column lesson",
+      "semanticPathFamily": "classic-column-drop",
+      "objectTrackExecutionFamily": "first-challenge-peel",
+      "motionGrammarSeedFamily": "first-challenge-peel",
+      "canonicalComparisonPathFamily": "classic-column-drop",
+      "pathFamilyDecision": {
+        "canonicalPathFamily": "classic-column-drop",
+        "canonicalSource": "target-contract-semantic",
+        "reason": "Stage 3 RED target conformance is anchored first to the human-readable teaching contract and accepted path labels.",
+        "legacySemanticPathFamily": "classic-column-drop",
+        "objectTrackExecutionFamily": "first-challenge-peel",
+        "motionGrammarSeedFamily": "first-challenge-peel",
+        "runtimeCurrentFamily": "classic-column-drop",
+        "sourceAgreement": {
+          "semanticMatchesCanonical": true,
+          "scheduleMatchesCanonical": false,
+          "grammarMatchesCanonical": false,
+          "runtimeMatchesCanonical": true,
+          "scheduleMatchesGrammar": true
+        },
+        "targetConformanceDebt": [
+          "setpiece schedule says first-challenge-peel while target contract says classic-column-drop",
+          "movement grammar says first-challenge-peel while target contract says classic-column-drop"
+        ]
+      },
+      "expectedTypes": [
+        "but"
+      ],
+      "expectedFamilies": [
+        "classic"
+      ],
+      "semanticExecution": {
+        "lineRole": "butterfly-column",
+        "lineFormationIntent": "vertical column lesson",
+        "entryCue": "top",
+        "exitGesture": "lower exit",
+        "scoreableBand": "upper-band",
+        "scoreableWindowRead": "center columns",
+        "scoreableFrameWindow": null,
+        "noCombatGrammar": {
+          "enemyShots": "forbidden",
+          "attackStarts": "forbidden",
+          "shipLosses": "forbidden",
+          "playerMeaning": "safe bonus exhibition, not a combat wave"
+        },
+        "provenance": {
+          "strength": "target-contract-inferred",
+          "labelId": null,
+          "sourceAnchor": null,
+          "sourceTimestampS": null,
+          "confidence": null,
+          "note": "No accepted per-group path label yet; semantic phrase is inferred from the Stage 3 target contract and object-track group order."
+        }
+      },
+      "scoreWindowRead": "center columns",
+      "humanContractWindowS": [
+        3.7,
+        9.6
+      ],
+      "humanContractTarget": {
+        "visibleStartS": 3.7,
+        "visibleEndS": 9.6,
+        "entrySide": "top",
+        "exitSide": "lower",
+        "xRange": 0.46,
+        "yRange": 0.38,
+        "pathLength": 0.68,
+        "turnCount": 1,
+        "reversalCount": 0,
+        "lowerFieldShare": 0.07
+      },
+      "objectTrackWindowS": [
+        7.75,
+        11.88
+      ],
+      "spawnOffsetS": 7.75,
+      "primaryTargetTrackId": "target-track-109",
+      "targetTrackConfidence": 0.762,
+      "sourceTrackIds": [
+        "target-track-103",
+        "target-track-109",
+        "target-track-107",
+        "target-track-106",
+        "target-track-101",
+        "target-track-102",
+        "target-track-110",
+        "target-track-99",
+        "target-track-111",
+        "target-track-100"
+      ],
+      "aggregateObjectTrackTarget": {
+        "visibleStartS": 7.75,
+        "visibleEndS": 11.88,
+        "entrySide": "left",
+        "exitSide": "center",
+        "xRange": 0.4352,
+        "yRange": 0.5399,
+        "pathLength": 0.2846,
+        "turnCount": 6,
+        "reversalCount": 5,
+        "lowerFieldShare": 0.7069
+      },
+      "primaryObjectTrackTarget": {
+        "visibleStartS": 9.13,
+        "visibleEndS": 11.88,
+        "entrySide": "center",
+        "exitSide": "center",
+        "xRange": 0.041,
+        "yRange": 0.1961,
+        "pathLength": 0.5275,
+        "turnCount": 15,
+        "reversalCount": 14,
+        "lowerFieldShare": 0.6364
+      },
+      "primaryTrackRelativePoints": [
+        {
+          "t": 0,
+          "sourceT": 9.13,
+          "x": 0.5211,
+          "y": 0.3757
+        },
+        {
+          "t": 0.25,
+          "sourceT": 9.38,
+          "x": 0.5282,
+          "y": 0.3596
+        },
+        {
+          "t": 0.62,
+          "sourceT": 9.75,
+          "x": 0.5212,
+          "y": 0.4221
+        },
+        {
+          "t": 1,
+          "sourceT": 10.13,
+          "x": 0.5263,
+          "y": 0.4969
+        },
+        {
+          "t": 1.25,
+          "sourceT": 10.38,
+          "x": 0.5298,
+          "y": 0.5451
+        },
+        {
+          "t": 1.62,
+          "sourceT": 10.75,
+          "x": 0.5292,
+          "y": 0.5431
+        },
+        {
+          "t": 1.87,
+          "sourceT": 11,
+          "x": 0.5302,
+          "y": 0.5431
+        },
+        {
+          "t": 2.12,
+          "sourceT": 11.25,
+          "x": 0.5333,
+          "y": 0.5482
+        },
+        {
+          "t": 2.5,
+          "sourceT": 11.63,
+          "x": 0.4937,
+          "y": 0.5487
+        },
+        {
+          "t": 2.75,
+          "sourceT": 11.88,
+          "x": 0.4937,
+          "y": 0.5487
+        }
+      ],
+      "fieldOccupancyExpectation": {
+        "expectedPrimaryBand": "upper-band score window with later peel/drop exit",
+        "humanLabelLowerFieldShare": 0.07,
+        "aggregateObjectTrackLowerFieldShare": 0.7069,
+        "primaryObjectTrackLowerFieldShare": 0.6364,
+        "upperBandEmphasis": 0.93,
+        "conflictBetweenHumanLabelAndCpuTrack": true,
+        "conflictRead": "Human/contact-sheet label reads an upper-band score phrase, while CPU object-track clustering includes substantial lower-field occupancy. Keep both; do not tune from one scalar alone.",
+        "provenance": "target-contract-plus-object-track"
+      },
+      "candidateComparisonGate": {
+        "authorityLayer": "target-conformance-red-not-live-promotion",
+        "canonicalPathFamily": "classic-column-drop",
+        "pathFamilyGate": "candidate trials should preserve canonical target-contract path family unless the RED language is explicitly refined first",
+        "aggregateObjectTrackFitFloorScore10": 5,
+        "primaryObjectTrackFitFloorScore10": 5,
+        "scoreableWindowRequired": true,
+        "noCombatRequired": true,
+        "spacingReadabilityRequired": true,
+        "lowerFieldDeltaRange": [
+          -0.25,
+          0.18
+        ],
+        "maxAggregatePathLengthRatio": 3,
+        "maxPrimaryPathLengthRatio": 3,
+        "semanticGates": [
+          "lineFormationIntent",
+          "scoreableBand",
+          "exitGesture",
+          "noCombatGrammar",
+          "fieldOccupancyExpectation"
+        ],
+        "targetVector": {
+          "humanPathLength": 0.68,
+          "aggregatePathLength": 0.2846,
+          "primaryPathLength": 0.5275,
+          "humanLowerFieldShare": 0.07,
+          "aggregateLowerFieldShare": 0.7069,
+          "primaryLowerFieldShare": 0.6364
+        }
+      },
+      "comparisonAxes": [
+        "phase-order",
+        "semantic-line-role",
+        "semantic-path-family",
+        "canonical-comparison-path-family",
+        "human-contract-target",
+        "aggregate-object-track-fit",
+        "primary-object-track-fit",
+        "upper-lower-field-occupancy",
+        "scoreable-window",
+        "spacing-readability",
+        "challenge-safety",
+        "field-level-provenance"
+      ],
+      "uncertaintyAndProvenance": {
+        "confidence": 0.762,
+        "directPathLabel": false,
+        "uncertainty": [
+          "no direct accepted path label for this group yet",
+          "setpiece schedule says first-challenge-peel while target contract says classic-column-drop",
+          "movement grammar says first-challenge-peel while target contract says classic-column-drop",
+          "human upper-band read and CPU lower-field occupancy differ"
+        ],
+        "sourceEvidence": [
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/overlays/challenge-01-target-tracks.svg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/contact-sheets/challenge-01-target-samples.svg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/tracks/challenge-01.json"
+        ]
+      },
+      "precisionNotes": [
+        "no direct accepted path label for this group yet",
+        "setpiece schedule says first-challenge-peel while target contract says classic-column-drop",
+        "movement grammar says first-challenge-peel while target contract says classic-column-drop",
+        "human upper-band read and CPU lower-field occupancy differ"
+      ]
+    },
+    {
+      "groupIndex": 4,
+      "phaseId": "challenge-1-group-4",
+      "order": 4,
+      "role": "side hook return",
+      "semanticPathFamily": "side-hook-return",
+      "objectTrackExecutionFamily": "side-hook-return",
+      "motionGrammarSeedFamily": "side-hook-return",
+      "canonicalComparisonPathFamily": "side-hook-return",
+      "pathFamilyDecision": {
+        "canonicalPathFamily": "side-hook-return",
+        "canonicalSource": "target-contract-semantic",
+        "reason": "Stage 3 RED target conformance is anchored first to the human-readable teaching contract and accepted path labels.",
+        "legacySemanticPathFamily": "side-hook-return",
+        "objectTrackExecutionFamily": "side-hook-return",
+        "motionGrammarSeedFamily": "side-hook-return",
+        "runtimeCurrentFamily": "side-hook-return",
+        "sourceAgreement": {
+          "semanticMatchesCanonical": true,
+          "scheduleMatchesCanonical": true,
+          "grammarMatchesCanonical": true,
+          "runtimeMatchesCanonical": true,
+          "scheduleMatchesGrammar": true
+        },
+        "targetConformanceDebt": []
+      },
+      "expectedTypes": [
+        "bee",
+        "but"
+      ],
+      "expectedFamilies": [
+        "classic"
+      ],
+      "semanticExecution": {
+        "lineRole": "butterfly-line",
+        "lineFormationIntent": "horizontal line / upper-band teaching phrase",
+        "entryCue": "top-left",
+        "exitGesture": "right peel-off",
+        "scoreableBand": "upper-band",
+        "scoreableWindowRead": "late challenge group crosses through upper lanes before peel-off",
+        "scoreableFrameWindow": {
+          "sourceFps": 4,
+          "firstVisibleFrame": 18,
+          "pathCommitFrame": 24,
+          "scoreableUpperBandStartFrame": 26,
+          "scoreableUpperBandEndFrame": 62
+        },
+        "noCombatGrammar": {
+          "enemyShots": "forbidden",
+          "attackStarts": "forbidden",
+          "shipLosses": "forbidden",
+          "playerMeaning": "safe bonus exhibition, not a combat wave"
+        },
+        "provenance": {
+          "strength": "direct-path-label",
+          "labelId": "challenge-1-late-wave-group-4",
+          "sourceAnchor": "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/contact-sheet.jpg",
+          "sourceTimestampS": 94.5,
+          "confidence": 0.74,
+          "note": "Accepted media-backed path label carries entry side, line family, scoreable upper-band frames, exit side, and comparison vector."
+        }
+      },
+      "scoreWindowRead": "hook crossing lanes",
+      "humanContractWindowS": [
+        5.1,
+        11.1
+      ],
+      "humanContractTarget": {
+        "visibleStartS": 5.1,
+        "visibleEndS": 11.1,
+        "entrySide": "top-left",
+        "exitSide": "right",
+        "xRange": 0.58,
+        "yRange": 0.32,
+        "pathLength": 0.72,
+        "turnCount": 1,
+        "reversalCount": 0,
+        "lowerFieldShare": 0.06
+      },
+      "objectTrackWindowS": [
+        11.25,
+        15.88
+      ],
+      "spawnOffsetS": 11.25,
+      "primaryTargetTrackId": "target-track-133",
+      "targetTrackConfidence": 0.773,
+      "sourceTrackIds": [
+        "target-track-138",
+        "target-track-143",
+        "target-track-133",
+        "target-track-141",
+        "target-track-137",
+        "target-track-144",
+        "target-track-132",
+        "target-track-149",
+        "target-track-140",
+        "target-track-131",
+        "target-track-135",
+        "target-track-154",
+        "target-track-130",
+        "target-track-129"
+      ],
+      "aggregateObjectTrackTarget": {
+        "visibleStartS": 11.25,
+        "visibleEndS": 15.88,
+        "entrySide": "center",
+        "exitSide": "center",
+        "xRange": 0.4319,
+        "yRange": 0.5387,
+        "pathLength": 0.3166,
+        "turnCount": 6.14,
+        "reversalCount": 4.21,
+        "lowerFieldShare": 0.7534
+      },
+      "primaryObjectTrackTarget": {
+        "visibleStartS": 11.88,
+        "visibleEndS": 15.75,
+        "entrySide": "center",
+        "exitSide": "center",
+        "xRange": 0.1182,
+        "yRange": 0.2447,
+        "pathLength": 0.5478,
+        "turnCount": 13,
+        "reversalCount": 8,
+        "lowerFieldShare": 1
+      },
+      "primaryTrackRelativePoints": [
+        {
+          "t": 0,
+          "sourceT": 11.88,
+          "x": 0.539,
+          "y": 0.776
+        },
+        {
+          "t": 0.37,
+          "sourceT": 12.25,
+          "x": 0.5624,
+          "y": 0.7869
+        },
+        {
+          "t": 1,
+          "sourceT": 12.88,
+          "x": 0.4833,
+          "y": 0.7738
+        },
+        {
+          "t": 1.87,
+          "sourceT": 13.75,
+          "x": 0.4617,
+          "y": 0.5737
+        },
+        {
+          "t": 2.25,
+          "sourceT": 14.13,
+          "x": 0.4617,
+          "y": 0.5457
+        },
+        {
+          "t": 2.5,
+          "sourceT": 14.38,
+          "x": 0.46,
+          "y": 0.5424
+        },
+        {
+          "t": 2.87,
+          "sourceT": 14.75,
+          "x": 0.4873,
+          "y": 0.563
+        },
+        {
+          "t": 3.25,
+          "sourceT": 15.13,
+          "x": 0.4873,
+          "y": 0.563
+        },
+        {
+          "t": 3.5,
+          "sourceT": 15.38,
+          "x": 0.46,
+          "y": 0.5636
+        },
+        {
+          "t": 3.87,
+          "sourceT": 15.75,
+          "x": 0.4488,
+          "y": 0.563
+        }
+      ],
+      "fieldOccupancyExpectation": {
+        "expectedPrimaryBand": "upper-band score window with later peel/drop exit",
+        "humanLabelLowerFieldShare": 0.06,
+        "aggregateObjectTrackLowerFieldShare": 0.7534,
+        "primaryObjectTrackLowerFieldShare": 1,
+        "upperBandEmphasis": 0.94,
+        "conflictBetweenHumanLabelAndCpuTrack": true,
+        "conflictRead": "Human/contact-sheet label reads an upper-band score phrase, while CPU object-track clustering includes substantial lower-field occupancy. Keep both; do not tune from one scalar alone.",
+        "provenance": "direct-path-label-plus-object-track"
+      },
+      "candidateComparisonGate": {
+        "authorityLayer": "target-conformance-red-not-live-promotion",
+        "canonicalPathFamily": "side-hook-return",
+        "pathFamilyGate": "candidate trials should preserve canonical target-contract path family unless the RED language is explicitly refined first",
+        "aggregateObjectTrackFitFloorScore10": 5,
+        "primaryObjectTrackFitFloorScore10": 5,
+        "scoreableWindowRequired": true,
+        "noCombatRequired": true,
+        "spacingReadabilityRequired": true,
+        "lowerFieldDeltaRange": [
+          -0.25,
+          0.18
+        ],
+        "maxAggregatePathLengthRatio": 3,
+        "maxPrimaryPathLengthRatio": 3,
+        "semanticGates": [
+          "lineFormationIntent",
+          "scoreableBand",
+          "exitGesture",
+          "noCombatGrammar",
+          "fieldOccupancyExpectation"
+        ],
+        "targetVector": {
+          "humanPathLength": 0.72,
+          "aggregatePathLength": 0.3166,
+          "primaryPathLength": 0.5478,
+          "humanLowerFieldShare": 0.06,
+          "aggregateLowerFieldShare": 0.7534,
+          "primaryLowerFieldShare": 1
+        }
+      },
+      "comparisonAxes": [
+        "phase-order",
+        "semantic-line-role",
+        "semantic-path-family",
+        "canonical-comparison-path-family",
+        "human-contract-target",
+        "aggregate-object-track-fit",
+        "primary-object-track-fit",
+        "upper-lower-field-occupancy",
+        "scoreable-window",
+        "spacing-readability",
+        "challenge-safety",
+        "field-level-provenance"
+      ],
+      "uncertaintyAndProvenance": {
+        "confidence": 0.762,
+        "directPathLabel": true,
+        "uncertainty": [
+          "human upper-band read and CPU lower-field occupancy differ"
+        ],
+        "sourceEvidence": [
+          "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/contact-sheet.jpg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/overlays/challenge-01-target-tracks.svg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/contact-sheets/challenge-01-target-samples.svg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/tracks/challenge-01.json"
+        ]
+      },
+      "precisionNotes": [
+        "human upper-band read and CPU lower-field occupancy differ"
+      ]
+    },
+    {
+      "groupIndex": 5,
+      "phaseId": "challenge-1-group-5",
+      "order": 5,
+      "role": "closing peel",
+      "semanticPathFamily": "first-challenge-peel",
+      "objectTrackExecutionFamily": "side-hook-return",
+      "motionGrammarSeedFamily": "side-hook-return",
+      "canonicalComparisonPathFamily": "first-challenge-peel",
+      "pathFamilyDecision": {
+        "canonicalPathFamily": "first-challenge-peel",
+        "canonicalSource": "target-contract-semantic",
+        "reason": "Stage 3 RED target conformance is anchored first to the human-readable teaching contract and accepted path labels.",
+        "legacySemanticPathFamily": "first-challenge-peel",
+        "objectTrackExecutionFamily": "side-hook-return",
+        "motionGrammarSeedFamily": "side-hook-return",
+        "runtimeCurrentFamily": "first-challenge-peel",
+        "sourceAgreement": {
+          "semanticMatchesCanonical": true,
+          "scheduleMatchesCanonical": false,
+          "grammarMatchesCanonical": false,
+          "runtimeMatchesCanonical": true,
+          "scheduleMatchesGrammar": true
+        },
+        "targetConformanceDebt": [
+          "setpiece schedule says side-hook-return while target contract says first-challenge-peel",
+          "movement grammar says side-hook-return while target contract says first-challenge-peel"
+        ]
+      },
+      "expectedTypes": [
+        "bee",
+        "but"
+      ],
+      "expectedFamilies": [
+        "classic"
+      ],
+      "semanticExecution": {
+        "lineRole": "mixed-closing-peel",
+        "lineFormationIntent": "horizontal line / upper-band teaching phrase",
+        "entryCue": "top-left",
+        "exitGesture": "lower-sides peel-off",
+        "scoreableBand": "upper-band",
+        "scoreableWindowRead": "late upper-band cleanup",
+        "scoreableFrameWindow": null,
+        "noCombatGrammar": {
+          "enemyShots": "forbidden",
+          "attackStarts": "forbidden",
+          "shipLosses": "forbidden",
+          "playerMeaning": "safe bonus exhibition, not a combat wave"
+        },
+        "provenance": {
+          "strength": "target-contract-inferred",
+          "labelId": null,
+          "sourceAnchor": null,
+          "sourceTimestampS": null,
+          "confidence": null,
+          "note": "No accepted per-group path label yet; semantic phrase is inferred from the Stage 3 target contract and object-track group order."
+        }
+      },
+      "scoreWindowRead": "late upper-band cleanup",
+      "humanContractWindowS": [
+        6.8,
+        13.2
+      ],
+      "humanContractTarget": {
+        "visibleStartS": 6.8,
+        "visibleEndS": 13.2,
+        "entrySide": "top-left",
+        "exitSide": "right",
+        "xRange": 0.58,
+        "yRange": 0.34,
+        "pathLength": 0.76,
+        "turnCount": 1,
+        "reversalCount": 0,
+        "lowerFieldShare": 0.08
+      },
+      "objectTrackWindowS": [
+        15.25,
+        15.88
+      ],
+      "spawnOffsetS": 15.25,
+      "primaryTargetTrackId": "target-track-165",
+      "targetTrackConfidence": 0.542,
+      "sourceTrackIds": [
+        "target-track-165",
+        "target-track-167",
+        "target-track-166",
+        "target-track-168",
+        "target-track-164"
+      ],
+      "aggregateObjectTrackTarget": {
+        "visibleStartS": 15.25,
+        "visibleEndS": 15.88,
+        "entrySide": "center",
+        "exitSide": "center",
+        "xRange": 0.0669,
+        "yRange": 0.3339,
+        "pathLength": 0.0867,
+        "turnCount": 1.6,
+        "reversalCount": 1.2,
+        "lowerFieldShare": 0
+      },
+      "primaryObjectTrackTarget": {
+        "visibleStartS": 15.25,
+        "visibleEndS": 15.88,
+        "entrySide": "center",
+        "exitSide": "center",
+        "xRange": 0.0143,
+        "yRange": 0.1161,
+        "pathLength": 0.1174,
+        "turnCount": 0,
+        "reversalCount": 0,
+        "lowerFieldShare": 0
+      },
+      "primaryTrackRelativePoints": [
+        {
+          "t": 0,
+          "sourceT": 15.25,
+          "x": 0.5683,
+          "y": 0.4778
+        },
+        {
+          "t": 0.13,
+          "sourceT": 15.38,
+          "x": 0.5678,
+          "y": 0.4344
+        },
+        {
+          "t": 0.63,
+          "sourceT": 15.88,
+          "x": 0.554,
+          "y": 0.3617
+        }
+      ],
+      "fieldOccupancyExpectation": {
+        "expectedPrimaryBand": "upper-band score window with later peel/drop exit",
+        "humanLabelLowerFieldShare": 0.08,
+        "aggregateObjectTrackLowerFieldShare": 0,
+        "primaryObjectTrackLowerFieldShare": 0,
+        "upperBandEmphasis": 0.92,
+        "conflictBetweenHumanLabelAndCpuTrack": false,
+        "conflictRead": "Human/contact-sheet label and object-track occupancy are close enough for first-pass RED comparison.",
+        "provenance": "target-contract-plus-object-track"
+      },
+      "candidateComparisonGate": {
+        "authorityLayer": "target-conformance-red-not-live-promotion",
+        "canonicalPathFamily": "first-challenge-peel",
+        "pathFamilyGate": "candidate trials should preserve canonical target-contract path family unless the RED language is explicitly refined first",
+        "aggregateObjectTrackFitFloorScore10": 5,
+        "primaryObjectTrackFitFloorScore10": 5,
+        "scoreableWindowRequired": true,
+        "noCombatRequired": true,
+        "spacingReadabilityRequired": true,
+        "lowerFieldDeltaRange": [
+          -0.25,
+          0.18
+        ],
+        "maxAggregatePathLengthRatio": 3,
+        "maxPrimaryPathLengthRatio": 3,
+        "semanticGates": [
+          "lineFormationIntent",
+          "scoreableBand",
+          "exitGesture",
+          "noCombatGrammar",
+          "fieldOccupancyExpectation"
+        ],
+        "targetVector": {
+          "humanPathLength": 0.76,
+          "aggregatePathLength": 0.0867,
+          "primaryPathLength": 0.1174,
+          "humanLowerFieldShare": 0.08,
+          "aggregateLowerFieldShare": 0,
+          "primaryLowerFieldShare": 0
+        }
+      },
+      "comparisonAxes": [
+        "phase-order",
+        "semantic-line-role",
+        "semantic-path-family",
+        "canonical-comparison-path-family",
+        "human-contract-target",
+        "aggregate-object-track-fit",
+        "primary-object-track-fit",
+        "upper-lower-field-occupancy",
+        "scoreable-window",
+        "spacing-readability",
+        "challenge-safety",
+        "field-level-provenance"
+      ],
+      "uncertaintyAndProvenance": {
+        "confidence": 0.542,
+        "directPathLabel": false,
+        "uncertainty": [
+          "no direct accepted path label for this group yet",
+          "setpiece schedule says side-hook-return while target contract says first-challenge-peel",
+          "movement grammar says side-hook-return while target contract says first-challenge-peel",
+          "primary object track is short and should not be treated as a complete phrase"
+        ],
+        "sourceEvidence": [
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/overlays/challenge-01-target-tracks.svg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/contact-sheets/challenge-01-target-samples.svg",
+          "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/tracks/challenge-01.json"
+        ]
+      },
+      "precisionNotes": [
+        "no direct accepted path label for this group yet",
+        "setpiece schedule says side-hook-return while target contract says first-challenge-peel",
+        "movement grammar says side-hook-return while target contract says first-challenge-peel",
+        "primary object track is short and should not be treated as a complete phrase"
+      ]
+    }
+  ],
+  "summary": {
+    "referenceBackedGroupCount": 5,
+    "directSemanticLabelCount": 2,
+    "inferredSemanticGroupCount": 3,
+    "averageTargetConfidence": 0.714,
+    "pathFamilyAuthorityConflictCount": 2,
+    "fieldOccupancyConflictCount": 4,
+    "shortPrimaryTrackCount": 2,
+    "read": "Stage 3 / Challenge 1 now has a RED that preserves the Stage 7 object-track schema while adding explicit semantic line roles, upper-band score windows, peel-off exits, no-combat grammar, field occupancy expectations, and field-level provenance."
+  },
+  "keeperRules": {
+    "measurementKeeper": "Useful if the artifact makes one non-overwriting Stage 3 candidate-trial gate simpler and more inspectable.",
+    "runtimeKeeper": "No runtime keeper can be claimed from this artifact. A future runtime keeper must improve strict evidence, preserve scoreable windows, spacing/readability, and no-shot/no-loss safety, and include before/after visual evidence.",
+    "betaPolicy": "This artifact is measurement-only and is not beta justification by itself."
+  }
+}

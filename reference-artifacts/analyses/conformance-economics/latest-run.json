@@ -1,30 +1,29 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-06-08T17-45-40-529Z-92166",
-  "startedAt": "2026-06-08T17:45:40.529Z",
-  "endedAt": "2026-06-08T17:45:44.686Z",
+  "id": "2026-06-08T18-07-40-098Z-23243",
+  "startedAt": "2026-06-08T18:07:40.098Z",
+  "endedAt": "2026-06-08T18:07:40.415Z",
   "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
-  "commit": "bf4ea169c",
+  "commit": "a0807fa11",
   "command": [
     "npm",
     "run",
-    "harness:analyze:stage7-lower-field-expressibility"
+    "harness:analyze:stage3-reference-execution-description"
   ],
   "axes": [
     "challenge-stage"
   ],
   "resources": [
-    "browser",
     "cpu"
   ],
-  "notes": "Stage 7 lower-field transfer proof",
+  "notes": "Stage 3 RED language pilot provenance correction",
   "measurement": {
-    "wallSeconds": 4.157,
-    "timeRealSeconds": 4.15,
-    "timeUserSeconds": 6.09,
-    "timeSystemSeconds": 1.63,
-    "cpuSeconds": 7.72,
+    "wallSeconds": 0.317,
+    "timeRealSeconds": 0.31,
+    "timeUserSeconds": 0.18,
+    "timeSystemSeconds": 0.06,
+    "cpuSeconds": 0.24,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -46,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 2166249176,
-    "artifactBytesAfter": 2166298942,
-    "artifactBytesDelta": 49766
+    "artifactBytesBefore": 2166405926,
+    "artifactBytesAfter": 2166424115,
+    "artifactBytesDelta": 18189
   }
 }

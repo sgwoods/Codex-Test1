@@ -124,6 +124,23 @@ Latest Stage 7 calibration:
 - No Stage 7 source-ready candidate exists after the phase-duration and
   lower-field proofs. Pause Stage 7 candidate work and apply the RED pipeline
   front-first to Stage 3 / Challenge 1.
+- Stage 3 / Challenge 1 now has its first Reference Execution Description:
+  `reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage3-challenge1-0.1.json`.
+  The analyzer/check pair
+  `npm run harness:analyze:stage3-reference-execution-description` and
+  `npm run harness:check:stage3-reference-execution-description` writes the
+  latest language adequacy report at
+  `reference-artifacts/analyses/reference-execution-description/stage3-challenge1/latest.json`.
+  The RED preserves Stage 7 object-track fields but adds explicit
+  `semanticExecution`, `fieldOccupancyExpectation`,
+  `uncertaintyAndProvenance`, and authority-layer fields for Stage 3's
+  top-right bee-line, late top-left butterfly-line, upper-band score windows,
+  peel-off exits, and no-combat grammar. Current language adequacy is `0.704`;
+  the report recommends a Stage 3 non-overwriting candidate-trial gate next,
+  not a runtime source candidate. It also keeps the caveats visible: only
+  `2/5` groups have direct accepted semantic labels, `4/5` groups have
+  human-vs-CPU field-occupancy tension, and path-family authority debt remains
+  for groups 3 and 5.
 
 ## Historical Or Stale Current-State Docs
 

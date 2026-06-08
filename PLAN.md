@@ -248,7 +248,14 @@ from the roadmap.
    plus spacing/readability guards. Group 1 path-length compression remains
    analysis-only with no browser transfer proof. Do not keep grinding Stage 7
    candidates; pause Stage 7 candidate work and apply the RED pipeline
-   front-first to Stage 3 / Challenge 1.
+   front-first to Stage 3 / Challenge 1. Stage 3 now has a RED language pilot:
+   `aurora-stage3-challenge1-0.1.json` plus
+   `harness:check:stage3-reference-execution-description`. It captures the
+   top-right bee line, late top-left butterfly line, upper-band score windows,
+   peel-off exits, no-combat grammar, path-family ordering, object-track
+   targets, field-occupancy tension, and field-level provenance. The adequacy
+   report scores `0.704` and recommends the next step as a non-overwriting
+   Stage 3 candidate-trial gate, not a runtime source candidate.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth
@@ -373,7 +380,12 @@ Current conformance read:
 - challenge-stage grammar is now materially ahead of runtime implementation:
   the first-five challenge work has `25/25` reference-backed group contracts
   and `8.6/10` control readiness, but runtime promotion is still blocked by
-  visual-presence, object-track timing/shape, and scoreable-window constraints
+  visual-presence, object-track timing/shape, and scoreable-window constraints.
+  The Stage 3 RED pilot is a measurement/process keeper that makes the next
+  quality step more targeted: build a non-overwriting Stage 3 candidate-trial
+  gate that evaluates semantic line roles, upper-band scoreability, path-family
+  order, object-track fit, spacing/readability, scoreable routes, and
+  no-combat safety before any source edit.
 - Galaxy Guardians longer-surface/persona review reads `7.0/10`, with
   stage-arc pressure at `7.9/10`, stage presentation at `7.4/10`, persona
   utility at `6.5/10`, midrun survivability at `6.0/10`, and stage-band

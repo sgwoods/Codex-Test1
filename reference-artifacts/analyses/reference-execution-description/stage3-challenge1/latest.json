@@ -1,0 +1,303 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage3-reference-execution-description-analysis",
+  "generatedAt": "2026-06-08T18:07:40.404Z",
+  "commit": "a0807fa11",
+  "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 3,
+    "challengeNumber": 1,
+    "displayLabel": "Stage 3 / Challenge 1",
+    "descriptionId": "aurora-stage3-challenge1-0.1",
+    "windowScope": "opening challenge execution window"
+  },
+  "sourceDescription": "reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage3-challenge1-0.1.json",
+  "sourceArtifacts": {
+    "galagaChallengeObjectTracks": "reference-artifacts/analyses/galaga-challenge-object-tracks/latest.json",
+    "challengeStageTargetContracts": "reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json",
+    "challengeSetpieceContracts": "reference-artifacts/analyses/challenge-setpiece-contracts/latest.json",
+    "challengeMovementGrammar": "reference-artifacts/ingestion/challenge-stage-movement-grammar/aurora-first-five-0.1.json",
+    "galagaPathReferenceLabels": "reference-artifacts/analyses/galaga-path-reference-labels/latest.json",
+    "rawGalagaPathReferenceLabels": "reference-artifacts/ingestion/galaga-path-reference-labels/snake-latino-media-backed-labels-0.1.json",
+    "galagaChallengeVideoReference": "reference-artifacts/analyses/galaga-challenge-video-reference/latest.json",
+    "challengeStageConformance": "reference-artifacts/analyses/challenge-stage-conformance/latest.json"
+  },
+  "currentRuntimeRead": {
+    "interestingFactorScore10": null,
+    "challengeConformanceScore10": 4.2,
+    "movementScore10": 4.3,
+    "graphicsScore10": 4.4,
+    "alienNoveltyScore10": 3.9,
+    "shotOpportunityScore10": 5.6,
+    "targetContractFitScore10": 6.9,
+    "targetVideoObjectTrackFitScore10": 3.2,
+    "targetVideoObjectTrackCoverage": 0.297,
+    "safety": {
+      "pass": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0,
+        "challengeContacts": 0
+      }
+    },
+    "scoreableRoutes": {
+      "pass": true,
+      "activeWindows": 61,
+      "multiTargetWindowShare": 0.82,
+      "laneDiversity": 1,
+      "centerBias": 0.112,
+      "read": "Shot-opportunity probe found scoreable targets in 61 sampled windows; 82% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.11."
+    }
+  },
+  "groupReads": [
+    {
+      "groupIndex": 1,
+      "semanticLineRole": "bee-line",
+      "canonicalComparisonPathFamily": "first-challenge-peel",
+      "runtimePathFamily": "first-challenge-peel",
+      "canonicalComparisonPathFamilyMatch": true,
+      "directPathLabel": true,
+      "aggregateObjectTrackScore10": 2.4,
+      "aggregateObjectTrackCoverage": 0.186,
+      "runtimeVector": {
+        "visibleStartS": 0.5,
+        "visibleEndS": 10.25,
+        "entrySide": "left",
+        "exitSide": "right",
+        "xRange": 0.7683928571428571,
+        "yRange": 0.9003888888888889,
+        "pathLength": 1.2410966722468841,
+        "turnCount": 2,
+        "reversalCount": 0,
+        "lowerFieldShare": 0.25
+      },
+      "deviations": {
+        "humanLowerFieldDelta": 0.23,
+        "aggregateLowerFieldDelta": -0.75,
+        "aggregatePathLengthRatio": 56.16,
+        "visibleStartDeltaS": 0.5,
+        "visibleEndDeltaS": 7
+      },
+      "candidateFocus": [
+        "raise direct object-track fit to first RED trial floor",
+        "reduce aggregate path-length ratio or refine the target vector before candidate generation"
+      ],
+      "issues": [
+        "runtime entry side does not match human contract entry side",
+        "runtime exit side does not match human contract exit side"
+      ]
+    },
+    {
+      "groupIndex": 2,
+      "semanticLineRole": "bee-column",
+      "canonicalComparisonPathFamily": "classic-column-drop",
+      "runtimePathFamily": "classic-column-drop",
+      "canonicalComparisonPathFamilyMatch": true,
+      "directPathLabel": false,
+      "aggregateObjectTrackScore10": 4,
+      "aggregateObjectTrackCoverage": 0.401,
+      "runtimeVector": {
+        "visibleStartS": 4,
+        "visibleEndS": 11.25,
+        "entrySide": "center",
+        "exitSide": "left",
+        "xRange": 0.2644642857142857,
+        "yRange": 1.0546666666666664,
+        "pathLength": 1.176881740375762,
+        "turnCount": 4,
+        "reversalCount": 4,
+        "lowerFieldShare": 0.4
+      },
+      "deviations": {
+        "humanLowerFieldDelta": 0.34,
+        "aggregateLowerFieldDelta": -0.056,
+        "aggregatePathLengthRatio": 4.63,
+        "visibleStartDeltaS": -0.38,
+        "visibleEndDeltaS": 0.75
+      },
+      "candidateFocus": [
+        "raise direct object-track fit to first RED trial floor",
+        "separate upper-band semantic target from runtime lower-field occupancy before tuning",
+        "reduce aggregate path-length ratio or refine the target vector before candidate generation",
+        "candidate trial must preserve inferred semantic role provenance"
+      ],
+      "issues": [
+        "runtime exit side does not match human contract exit side"
+      ]
+    },
+    {
+      "groupIndex": 3,
+      "semanticLineRole": "butterfly-column",
+      "canonicalComparisonPathFamily": "classic-column-drop",
+      "runtimePathFamily": "classic-column-drop",
+      "canonicalComparisonPathFamilyMatch": true,
+      "directPathLabel": false,
+      "aggregateObjectTrackScore10": 2,
+      "aggregateObjectTrackCoverage": 0.135,
+      "runtimeVector": {
+        "visibleStartS": 6.75,
+        "visibleEndS": 14,
+        "entrySide": "left",
+        "exitSide": "left",
+        "xRange": 0.26389285714285715,
+        "yRange": 1.059416666666667,
+        "pathLength": 1.2247720497398018,
+        "turnCount": 4,
+        "reversalCount": 5,
+        "lowerFieldShare": 0.43333333333333335
+      },
+      "deviations": {
+        "humanLowerFieldDelta": 0.3633,
+        "aggregateLowerFieldDelta": -0.2736,
+        "aggregatePathLengthRatio": 4.3,
+        "visibleStartDeltaS": -1,
+        "visibleEndDeltaS": 2.12
+      },
+      "candidateFocus": [
+        "raise direct object-track fit to first RED trial floor",
+        "separate upper-band semantic target from runtime lower-field occupancy before tuning",
+        "reduce aggregate path-length ratio or refine the target vector before candidate generation",
+        "candidate trial must preserve inferred semantic role provenance"
+      ],
+      "issues": [
+        "runtime exit side does not match human contract exit side"
+      ]
+    },
+    {
+      "groupIndex": 4,
+      "semanticLineRole": "butterfly-line",
+      "canonicalComparisonPathFamily": "side-hook-return",
+      "runtimePathFamily": "side-hook-return",
+      "canonicalComparisonPathFamilyMatch": true,
+      "directPathLabel": true,
+      "aggregateObjectTrackScore10": 4,
+      "aggregateObjectTrackCoverage": 0.401,
+      "runtimeVector": {
+        "visibleStartS": 10.25,
+        "visibleEndS": 16,
+        "entrySide": "left",
+        "exitSide": "center",
+        "xRange": 0.42232142857142857,
+        "yRange": 0.3533888888888889,
+        "pathLength": 0.9244060993760462,
+        "turnCount": 5,
+        "reversalCount": 4,
+        "lowerFieldShare": 0.125
+      },
+      "deviations": {
+        "humanLowerFieldDelta": 0.065,
+        "aggregateLowerFieldDelta": -0.6284,
+        "aggregatePathLengthRatio": 2.92,
+        "visibleStartDeltaS": -1,
+        "visibleEndDeltaS": 0.12
+      },
+      "candidateFocus": [
+        "raise direct object-track fit to first RED trial floor"
+      ],
+      "issues": [
+        "runtime exit side does not match human contract exit side"
+      ]
+    },
+    {
+      "groupIndex": 5,
+      "semanticLineRole": "mixed-closing-peel",
+      "canonicalComparisonPathFamily": "first-challenge-peel",
+      "runtimePathFamily": "first-challenge-peel",
+      "canonicalComparisonPathFamilyMatch": true,
+      "directPathLabel": false,
+      "aggregateObjectTrackScore10": 3.7,
+      "aggregateObjectTrackCoverage": 0.363,
+      "runtimeVector": {
+        "visibleStartS": 13.25,
+        "visibleEndS": 16,
+        "entrySide": "left",
+        "exitSide": "left",
+        "xRange": 0.21817857142857144,
+        "yRange": 0.013083333333333355,
+        "pathLength": 0.1795088846364244,
+        "turnCount": 2,
+        "reversalCount": 0,
+        "lowerFieldShare": 0
+      },
+      "deviations": {
+        "humanLowerFieldDelta": -0.08,
+        "aggregateLowerFieldDelta": 0,
+        "aggregatePathLengthRatio": 2.07,
+        "visibleStartDeltaS": -2,
+        "visibleEndDeltaS": 0.12
+      },
+      "candidateFocus": [
+        "raise direct object-track fit to first RED trial floor",
+        "candidate trial must preserve inferred semantic role provenance"
+      ],
+      "issues": [
+        "runtime exit side does not match human contract exit side"
+      ]
+    }
+  ],
+  "languageAdequacy": {
+    "adequacyScore": 0.704,
+    "lowFuzzForNonOverwritingTrialGate": true,
+    "representedCleanly": [
+      "five ordered challenge phases",
+      "top-right bee-line direct reference label",
+      "late top-left butterfly-line direct reference label",
+      "no-combat grammar as a hard semantic guardrail",
+      "scoreable upper-band windows for direct labels",
+      "path-family order with target-conformance authority separated from live promotion authority",
+      "object-track aggregate and primary target vectors with provenance"
+    ],
+    "approximations": [
+      "groups 2, 3, and 5 still use target-contract inference rather than direct accepted path labels",
+      "CPU object-track lower-field occupancy conflicts with the human upper-band score-window read in several groups",
+      "setpiece/movement-grammar path families conflict with the target-contract path family for groups 3 and 5",
+      "primary tracks for groups 1 and 5 are short and should guide only first-pass candidate trials",
+      "private contact sheets are referenced as provenance but not stored in this checkout"
+    ],
+    "stage7LanguageWeaknessesFound": [
+      "Stage 7 RED fields were too numeric to express bee-line vs butterfly-line teaching roles without extension fields.",
+      "Stage 7 lowerFieldShare was too blunt for Stage 3 because upper-band scoreability and lower-field occupancy can conflict.",
+      "Stage 7 path-family authority fields needed a clearer target-conformance vs source-promotion split.",
+      "Stage 7 provenance was group-level; Stage 3 needs field-level provenance for entry side, score window, exit gesture, and inferred roles."
+    ],
+    "newPrimitivesNeeded": [
+      "semanticExecution.lineRole",
+      "semanticExecution.scoreableFrameWindow",
+      "semanticExecution.exitGesture",
+      "fieldOccupancyExpectation",
+      "uncertaintyAndProvenance",
+      "candidateComparisonGate.authorityLayer"
+    ],
+    "recommendation": "ready-for-stage3-non-overwriting-candidate-trial-gate",
+    "recommendationRead": "The RED can guide a non-overwriting Stage 3 candidate-trial gate if the gate keeps semantic provenance and does not treat numeric lower-field/object-track values as sole truth."
+  },
+  "summary": {
+    "measurementKeeperRecommendation": "accept-measurement-keeper",
+    "candidateTrialRecommendation": "ready-for-stage3-non-overwriting-candidate-trial-gate",
+    "readyForNonOverwritingCandidateTrialGate": true,
+    "runtimeSourceCandidateAllowed": false,
+    "runtimePromotionReady": false,
+    "runtimePromotionBlockerCount": 11,
+    "runtimePromotionBlockers": [
+      "Stage 3 direct target-video object-track fit remains below the first runtime promotion floor.",
+      "Group 1: runtime entry side does not match human contract entry side; runtime exit side does not match human contract exit side.",
+      "Group 1: raise direct object-track fit to first RED trial floor; reduce aggregate path-length ratio or refine the target vector before candidate generation.",
+      "Group 2: runtime exit side does not match human contract exit side.",
+      "Group 2: raise direct object-track fit to first RED trial floor; separate upper-band semantic target from runtime lower-field occupancy before tuning; reduce aggregate path-length ratio or refine the target vector before candidate generation; candidate trial must preserve inferred semantic role provenance.",
+      "Group 3: runtime exit side does not match human contract exit side.",
+      "Group 3: raise direct object-track fit to first RED trial floor; separate upper-band semantic target from runtime lower-field occupancy before tuning; reduce aggregate path-length ratio or refine the target vector before candidate generation; candidate trial must preserve inferred semantic role provenance.",
+      "Group 4: runtime exit side does not match human contract exit side.",
+      "Group 4: raise direct object-track fit to first RED trial floor.",
+      "Group 5: runtime exit side does not match human contract exit side.",
+      "Group 5: raise direct object-track fit to first RED trial floor; candidate trial must preserve inferred semantic role provenance."
+    ],
+    "read": "The RED can guide a non-overwriting Stage 3 candidate-trial gate if the gate keeps semantic provenance and does not treat numeric lower-field/object-track values as sole truth."
+  },
+  "nextBestStep": "Build a Stage 3 non-overwriting candidate-trial gate that evaluates semantic line-role, upper-band score-window, path-family, object-track, spacing/readability, scoreable-route, and no-combat guardrails before any runtime source edit."
+}
