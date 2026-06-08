@@ -241,8 +241,11 @@ function buildRuntimeExpressibility(candidate, vocabulary){
       sourceReadySupported: mapping.sourceReadySupported === true,
       sourceReadyRole: mapping.sourceReadyRole || (mapping.sourceReadySupported === true ? 'runtime-transform' : 'analysis-only'),
       sourceFields: mapping.sourceFields || [],
+      generatedRuntimeControls: mapping.generatedRuntimeControls || [],
       runtimeConsumer: mapping.runtimeConsumer || '',
       predictionLimits: mapping.predictionLimits || '',
+      requiresCompiledRuntimeControls: mapping.requiresCompiledRuntimeControls === true,
+      requiresProofArtifact: mapping.requiresProofArtifact || null,
       remainingCompilerGap: mapping.remainingCompilerGap || null,
       proofHarnesses: mapping.proofHarnesses || []
     };
@@ -256,7 +259,7 @@ function overpredictedTransforms(candidate, actualMatchesPrediction){
       rows.push({
         classId,
         overpredicted: true,
-        read: 'Predicted lift came from visibleStartS/visibleEndS trial vectors, but the runtime projection did not compile those windows into consumed timing fields.'
+        read: 'Predicted lift came from visibleStartS/visibleEndS trial vectors; the semantic candidate did not emit compiledRuntimeControls or cite guard-safe browser proof.'
       });
     }else if(classId === 'canonical-family-alignment'){
       rows.push({
@@ -446,7 +449,7 @@ function main(){
     likelyCauses: [
       {
         cause: 'runtime-expressibility',
-        read: 'phase-duration-rebalance emitted visible windows but no consumed runtime timing fields.'
+        read: 'phase-duration-rebalance emitted visible windows but no compiledRuntimeControls or cited proof artifact.'
       },
       {
         cause: 'stale-or-unreconciled-target-artifact',
@@ -464,8 +467,8 @@ function main(){
     decision: {
       runtimeCandidateAllowed,
       sourceReadyGatePass: false,
-      nextRecommendation: 'Do not try another Stage 7 runtime candidate. First reconcile the Stage 7 path-family source of truth or make the batch gate deliberately read a single canonical artifact, then compile phase-duration intent into explicit consumed runtime controls and prove the mapping with browser conformance and motion/profile checks.',
-      remainingCompilerGap: 'phase-duration-rebalance has no runtime-expressible mapping from visibleStartS/visibleEndS to consumed spawnOffsetS, phaseDurations, reference duration, or playbackScale fields.'
+      nextRecommendation: 'Do not try another Stage 7 runtime candidate. Keep source-ready path-family authority on the live gates/runtime source, then update the semantic generator so phase-duration intent emits compiledRuntimeControls and only passes when the proof artifact confirms browser-visible effect plus motion/profile guard safety.',
+      remainingCompilerGap: 'phase-duration-rebalance now has a runtime-consumed control contract, but generated candidates must emit compiledRuntimeControls and cite the phase-duration expressibility proof instead of visibleStartS/visibleEndS trial vectors.'
     }
   };
   writeJson(OUT_JSON, report);

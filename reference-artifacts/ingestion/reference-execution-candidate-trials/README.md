@@ -43,6 +43,20 @@ Generated candidates remain measurement artifacts. A passing batch candidate
 can only be recommended as exactly one runtime source attempt, not as a runtime
 keeper.
 
+The Stage 7 semantic batch source-ready gate is subordinate to the current
+path-family authority decision and runtime-expressibility proof artifacts:
+
+```sh
+npm run harness:analyze:stage7-path-family-authority
+npm run harness:check:stage7-path-family-authority
+npm run harness:analyze:stage7-phase-duration-expressibility
+npm run harness:check:stage7-phase-duration-expressibility
+```
+
+For `phase-duration-rebalance`, raw `visibleStartS` / `visibleEndS` trial
+vectors are analysis-only. A source-ready candidate must emit compiled runtime
+controls and preserve the live path-family gate.
+
 ## Stage 7 Input Shape
 
 - `candidateId`: stable candidate id.
@@ -67,7 +81,10 @@ keeper.
 A trial can recommend one runtime source candidate only when it predicts a
 focused strict object-track improvement, improves group 1, preserves groups 4
 and 5, preserves coverage, and has passing spacing/readability,
-scoreable-route, and safety guardrails. Even then, it is not a runtime keeper;
-the runtime keeper still requires source edit, rebuild, before/after visual
+scoreable-route, and safety guardrails. The semantic batch gate adds stricter
+requirements: live path-family authority alignment, runtime-expressibility
+mapping, proof artifacts for phase-duration controls, and compiled controls
+instead of optimistic trial vectors. Even then, it is not a runtime keeper; the
+runtime keeper still requires source edit, rebuild, before/after visual
 evidence, focused strict checks, motion/profile checks, scoreable-route checks,
 and no-shot/no-loss safety evidence.

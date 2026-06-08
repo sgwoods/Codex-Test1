@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "stage7-semantic-runtime-calibration",
-  "generatedAt": "2026-06-08T15:21:52.246Z",
+  "generatedAt": "2026-06-08T16:27:47.605Z",
   "generatedBy": "tools/harness/analyze-stage7-semantic-runtime-calibration.js",
-  "commit": "c75a9a660",
+  "commit": "d4de278ad",
   "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
   "releaseFamily": "1.4.1",
   "gameKey": "aurora-galactica",
@@ -16,8 +16,8 @@
   "sourceArtifacts": {
     "calibrationDirectory": "reference-artifacts/analyses/reference-execution-runtime-calibrations/stage7-challenge2/2026-06-08-stage7-semantic-phase-align-protect-runtime-rejection",
     "semanticBatch": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/latest-batch.json",
-    "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T15-21-45-c75a9a660/candidates/stage7-semantic-phase-align-protect-0.1.json",
-    "candidateTrial": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T15-21-45-c75a9a660/trials/stage7-semantic-phase-align-protect-0.1.json",
+    "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T16-27-24-d4de278ad/candidates/stage7-semantic-phase-align-protect-0.1.json",
+    "candidateTrial": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T16-27-24-d4de278ad/trials/stage7-semantic-phase-align-protect-0.1.json",
     "actualRuntimeConformance": "reference-artifacts/analyses/challenge-stage-conformance/2026-06-08-42bae02e1/report.json",
     "referenceExecutionDescription": "reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage7-challenge2-0.1.json",
     "semanticVocabulary": "reference-artifacts/ingestion/reference-execution-candidate-trials/stage7-semantic-vocabulary-0.1.json"
@@ -227,8 +227,11 @@
         "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_CONTRACT_GROUPS pathFamily",
         "reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json Stage 7 groups pathFamily"
       ],
+      "generatedRuntimeControls": [],
       "runtimeConsumer": "spawnChallenge resolves each enemy pathFamily from motionSpecGroup.pathFamilyHint before layout.groupPathFamilies; check-challenge-motion-profile validates runtime, layout, and contract order.",
       "predictionLimits": "This is label and gate alignment only. It must not claim object-track score lift unless paired with a runtime-expressible movement transform.",
+      "requiresCompiledRuntimeControls": false,
+      "requiresProofArtifact": null,
       "remainingCompilerGap": null,
       "proofHarnesses": [
         "npm run harness:check:challenge-motion-profile",
@@ -237,17 +240,48 @@
     },
     {
       "classId": "phase-duration-rebalance",
-      "sourceReadySupported": false,
-      "sourceReadyRole": "analysis-only",
+      "sourceReadySupported": true,
+      "sourceReadyRole": "runtime-transform",
       "sourceFields": [
         "src/js/13-aurora-game-pack.js Stage 7 groupSpawnOffsets",
+        "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS spawnOffsetS when present",
         "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS phaseDurations",
-        "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_REFERENCE_PATHS durationS/playbackScale when present"
+        "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_REFERENCE_PATHS playbackScale when present"
       ],
-      "runtimeConsumer": "spawn offsets, phase durations, and reference path timing are consumed by browser runtime, but the current semantic candidate only emits visibleStartS/visibleEndS trial vectors.",
-      "predictionLimits": "The trial score can improve by assigning visible windows directly. That is optimistic unless the compiler proves which consumed runtime fields produce those windows.",
-      "remainingCompilerGap": "Compile visibleStartS/visibleEndS intent into explicit spawnOffsetS, phaseDurations, reference duration, or playbackScale changes and verify actual browser-visible windows.",
+      "generatedRuntimeControls": [
+        {
+          "semanticField": "visibleStartS",
+          "runtimeField": "groupSpawnOffsets[groupIndex-1] or motionSpecGroups[groupIndex-1].spawnOffsetS",
+          "runtimeCurrentlyConsumes": true,
+          "expectedVisibleEffect": "moves the group visible window earlier or later relative to other groups"
+        },
+        {
+          "semanticField": "phaseDurationS / visibleEndS",
+          "runtimeField": "motionSpecGroups[groupIndex-1].phaseDurations.trackS",
+          "runtimeCurrentlyConsumes": true,
+          "expectedVisibleEffect": "changes when the reference path enters its exit/overrun behavior"
+        },
+        {
+          "semanticField": "phaseDurationS / visibleEndS",
+          "runtimeField": "groupReferencePaths[groupIndex-1].playbackScale",
+          "runtimeCurrentlyConsumes": true,
+          "expectedVisibleEffect": "stretches or compresses reference path playback in real browser-visible time"
+        },
+        {
+          "semanticField": "exitDurationS",
+          "runtimeField": "motionSpecGroups[groupIndex-1].phaseDurations.exitS",
+          "runtimeCurrentlyConsumes": false,
+          "expectedVisibleEffect": "none until the runtime consumes exitS"
+        }
+      ],
+      "runtimeConsumer": "spawnChallenge() consumes groupSpawnOffsets or motionSpecGroup.spawnOffsetS; applyReferenceChallengePath() consumes phaseDurations.trackS; the challenge update loop consumes referencePath.playbackScale. phaseDurations.exitS is declared but not currently consumed.",
+      "predictionLimits": "The trial score can improve by assigning visible windows directly. Source readiness requires compiledRuntimeControls plus proof that the emitted controls produce browser-visible timing/path movement.",
+      "requiresCompiledRuntimeControls": true,
+      "requiresProofArtifact": "reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-phase-duration-proof.json",
+      "remainingCompilerGap": "Current generated candidates must emit compiledRuntimeControls and cite the proof artifact; visibleStartS/visibleEndS alone remains analysis-only.",
       "proofHarnesses": [
+        "npm run harness:analyze:stage7-phase-duration-expressibility",
+        "npm run harness:check:stage7-phase-duration-expressibility",
         "npm run harness:analyze:challenge-stage-conformance",
         "npm run harness:check:challenge-motion-profile"
       ]
@@ -257,8 +291,11 @@
       "sourceReadySupported": true,
       "sourceReadyRole": "guardrail-only",
       "sourceFields": [],
+      "generatedRuntimeControls": [],
       "runtimeConsumer": "No runtime source field changes; this class carries shot-opportunity evidence as an invariant.",
       "predictionLimits": "Cannot make a candidate source-ready by itself.",
+      "requiresCompiledRuntimeControls": false,
+      "requiresProofArtifact": null,
       "remainingCompilerGap": null,
       "proofHarnesses": [
         "npm run harness:analyze:challenge-stage-conformance"
@@ -269,8 +306,11 @@
       "sourceReadySupported": true,
       "sourceReadyRole": "guardrail-only",
       "sourceFields": [],
+      "generatedRuntimeControls": [],
       "runtimeConsumer": "No runtime source field changes unless another transform touches groups 4 or 5; this class preserves measured group floors.",
       "predictionLimits": "A predictedRuntimeVector used only for protection is not proof that a source edit can express a new vector.",
+      "requiresCompiledRuntimeControls": false,
+      "requiresProofArtifact": null,
       "remainingCompilerGap": null,
       "proofHarnesses": [
         "npm run harness:analyze:challenge-stage-conformance",
@@ -287,7 +327,7 @@
     {
       "classId": "phase-duration-rebalance",
       "overpredicted": true,
-      "read": "Predicted lift came from visibleStartS/visibleEndS trial vectors, but the runtime projection did not compile those windows into consumed timing fields."
+      "read": "Predicted lift came from visibleStartS/visibleEndS trial vectors; the semantic candidate did not emit compiledRuntimeControls or cite guard-safe browser proof."
     },
     {
       "classId": "preserve-scoreable-window",
@@ -303,7 +343,7 @@
   "likelyCauses": [
     {
       "cause": "runtime-expressibility",
-      "read": "phase-duration-rebalance emitted visible windows but no consumed runtime timing fields."
+      "read": "phase-duration-rebalance emitted visible windows but no compiledRuntimeControls or cited proof artifact."
     },
     {
       "cause": "stale-or-unreconciled-target-artifact",
@@ -321,7 +361,7 @@
   "decision": {
     "runtimeCandidateAllowed": false,
     "sourceReadyGatePass": false,
-    "nextRecommendation": "Do not try another Stage 7 runtime candidate. First reconcile the Stage 7 path-family source of truth or make the batch gate deliberately read a single canonical artifact, then compile phase-duration intent into explicit consumed runtime controls and prove the mapping with browser conformance and motion/profile checks.",
-    "remainingCompilerGap": "phase-duration-rebalance has no runtime-expressible mapping from visibleStartS/visibleEndS to consumed spawnOffsetS, phaseDurations, reference duration, or playbackScale fields."
+    "nextRecommendation": "Do not try another Stage 7 runtime candidate. Keep source-ready path-family authority on the live gates/runtime source, then update the semantic generator so phase-duration intent emits compiledRuntimeControls and only passes when the proof artifact confirms browser-visible effect plus motion/profile guard safety.",
+    "remainingCompilerGap": "phase-duration-rebalance now has a runtime-consumed control contract, but generated candidates must emit compiledRuntimeControls and cite the phase-duration expressibility proof instead of visibleStartS/visibleEndS trial vectors."
   }
 }

@@ -89,10 +89,21 @@ Latest Stage 7 calibration:
   gate order (`cross-sweep`, `cross-sweep`, `hook-arc`, `hook-arc`,
   `boss-led-loop`). Use the live promotion gates and restored runtime source as
   candidate gate authority until the project explicitly migrates them.
-- Next Stage 7 work should reconcile that source-of-truth split and make
-  semantic phase-duration intent compile to explicit runtime-expressible
-  controls (`spawnOffsetS`, `phaseDurations`, reference `durationS`, or
-  `playbackScale`) before another source attempt.
+- The June 8 authority decision keeps live promotion gates/restored runtime
+  source as source-ready authority for now:
+  `reference-artifacts/analyses/reference-execution-authority/stage7-challenge2/latest-path-family-authority.json`.
+  RED/setpiece remain measured-reference intent, not source-promotion truth by
+  themselves.
+- `phase-duration-rebalance` now has a runtime-consumed control contract and
+  browser proof for `groupSpawnOffsets` / `motionSpecGroup.spawnOffsetS`,
+  `phaseDurations.trackS`, and `referencePath.playbackScale`; `exitS` is
+  explicitly not consumed. The proof confirms visible timing/path effect and
+  preserves group 4/group 5 windows, but its motion/profile proxy guard is not
+  clean, so it is not source-ready evidence by itself:
+  `reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-phase-duration-proof.json`.
+- Next Stage 7 work should make the semantic generator emit
+  `compiledRuntimeControls` under live path-family authority and find
+  guard-safe phase-duration values before another source attempt.
 
 ## Historical Or Stale Current-State Docs
 

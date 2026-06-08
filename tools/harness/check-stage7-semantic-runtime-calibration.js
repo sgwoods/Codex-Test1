@@ -47,8 +47,11 @@ function main(){
   const mappings = report.runtimeExpressibility || [];
   if(!mappings.length) fail('Calibration report must include runtime expressibility mappings.');
   const phase = mappings.find(row => row.classId === 'phase-duration-rebalance');
-  if(!phase || phase.sourceReadySupported !== false){
-    fail('phase-duration-rebalance must remain blocked until it has a runtime-expressible mapping.', { phase });
+  if(!phase || phase.sourceReadySupported !== true){
+    fail('phase-duration-rebalance must declare its runtime-consumed control contract.', { phase });
+  }
+  if(!phase.requiresCompiledRuntimeControls || !phase.requiresProofArtifact){
+    fail('phase-duration-rebalance must remain candidate-blocked unless compiled controls and proof are present.', { phase });
   }
   if(report.decision?.runtimeCandidateAllowed !== false || report.decision?.sourceReadyGatePass !== false){
     fail('Rejected calibration must not allow another runtime candidate.', { decision: report.decision });

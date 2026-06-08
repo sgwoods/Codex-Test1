@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage7-reference-execution-candidate-trial-input",
+  "generatedBy": "tools/harness/analyze-stage7-reference-execution-batch.js",
+  "candidateId": "stage7-semantic-phase-align-protect-0.1",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 7,
+    "challengeNumber": 2,
+    "displayLabel": "Stage 7 / Challenge 2"
+  },
+  "semanticTransformationClass": "semantic-composition",
+  "semanticTransformations": [
+    "canonical-family-alignment",
+    "phase-duration-rebalance",
+    "preserve-scoreable-window",
+    "protect-group4-group5"
+  ],
+  "intendedPlayerFacingMeaning": "Combine the strongest measured phase-window signal with canonical family alignment and explicit late-group protection.",
+  "targetGroups": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "invariantsPreserved": [
+    "active score windows do not regress",
+    "center-lane bias remains below the trial floor",
+    "challenge safety baseline is preserved",
+    "group 4 aggregate score stays at or above baseline",
+    "group 4 and group 5 baseline object-track floors are protected",
+    "group 5 aggregate score stays at or above baseline",
+    "late boss-led cleanup does not become the casualty of group 1 tuning",
+    "multi-target lane share does not regress",
+    "no object-track geometry change",
+    "phase order remains group 1 through group 5",
+    "scoreable route baseline is preserved",
+    "target count and no-combat challenge meaning are preserved"
+  ],
+  "expectedMetricMovement": "Potential total object-track lift through phase-order/window fit while preserving groups 4 and 5.",
+  "generatedLowLevelControls": {
+    "phaseWindows": [
+      {
+        "visibleWindowFormula": "aggregateObjectTrackTarget.visibleStartS/visibleEndS",
+        "visibleStartS": 0,
+        "visibleEndS": 1.88
+      },
+      {
+        "visibleWindowFormula": "aggregateObjectTrackTarget.visibleStartS/visibleEndS",
+        "visibleStartS": 2.88,
+        "visibleEndS": 6.38
+      },
+      {
+        "visibleWindowFormula": "aggregateObjectTrackTarget.visibleStartS/visibleEndS",
+        "visibleStartS": 4.25,
+        "visibleEndS": 5
+      },
+      {
+        "visibleWindowFormula": "aggregateObjectTrackTarget.visibleStartS/visibleEndS",
+        "visibleStartS": 7.13,
+        "visibleEndS": 10.38
+      }
+    ],
+    "canonicalFamilies": [
+      {
+        "source": "canonicalComparisonPathFamily",
+        "value": "hook-arc"
+      },
+      {
+        "source": "canonicalComparisonPathFamily",
+        "value": "cross-sweep"
+      },
+      {
+        "source": "canonicalComparisonPathFamily",
+        "value": "hook-arc"
+      }
+    ],
+    "group5Protection": [
+      {
+        "protectionFormula": "baseline vector with canonicalComparisonPathFamily only",
+        "baselineAggregateScoreFloor": 4.9,
+        "baselinePathFamily": "boss-led-loop",
+        "canonicalPathFamily": "hook-arc"
+      }
+    ]
+  },
+  "whyMoreLikelyThanBlindTuning": "The first semantic batch signal showed phase-duration rebalance moved group 1 and group 4, while canonical alignment was the remaining blocker. This candidate composes those named classes without adding free numeric deltas.",
+  "intent": {
+    "kind": "semantic-composition",
+    "read": "Combine the strongest measured phase-window signal with canonical family alignment and explicit late-group protection."
+  },
+  "groups": [
+    {
+      "groupIndex": 1,
+      "pathFamily": "cross-sweep",
+      "timing": {
+        "visibleStartS": 0,
+        "visibleEndS": 1.88
+      },
+      "semanticReason": "phase-duration-rebalance",
+      "generatedLowLevelControls": {
+        "visibleWindowFormula": "aggregateObjectTrackTarget.visibleStartS/visibleEndS",
+        "visibleStartS": 0,
+        "visibleEndS": 1.88
+      },
+      "controls": {},
+      "lowerField": {}
+    },
+    {
+      "groupIndex": 2,
+      "pathFamily": "hook-arc",
+      "semanticReason": "phase-duration-rebalance",
+      "generatedLowLevelControls": {
+        "source": "canonicalComparisonPathFamily",
+        "value": "hook-arc",
+        "visibleWindowFormula": "aggregateObjectTrackTarget.visibleStartS/visibleEndS",
+        "visibleStartS": 2.88,
+        "visibleEndS": 6.38
+      },
+      "controls": {},
+      "timing": {
+        "visibleStartS": 2.88,
+        "visibleEndS": 6.38
+      },
+      "lowerField": {}
+    },
+    {
+      "groupIndex": 3,
+      "pathFamily": "hook-arc",
+      "timing": {
+        "visibleStartS": 4.25,
+        "visibleEndS": 5
+      },
+      "semanticReason": "phase-duration-rebalance",
+      "generatedLowLevelControls": {
+        "visibleWindowFormula": "aggregateObjectTrackTarget.visibleStartS/visibleEndS",
+        "visibleStartS": 4.25,
+        "visibleEndS": 5
+      },
+      "controls": {},
+      "lowerField": {}
+    },
+    {
+      "groupIndex": 4,
+      "pathFamily": "cross-sweep",
+      "semanticReason": "phase-duration-rebalance",
+      "generatedLowLevelControls": {
+        "source": "canonicalComparisonPathFamily",
+        "value": "cross-sweep",
+        "visibleWindowFormula": "aggregateObjectTrackTarget.visibleStartS/visibleEndS",
+        "visibleStartS": 7.13,
+        "visibleEndS": 10.38
+      },
+      "controls": {},
+      "timing": {
+        "visibleStartS": 7.13,
+        "visibleEndS": 10.38
+      },
+      "lowerField": {}
+    },
+    {
+      "groupIndex": 5,
+      "pathFamily": "hook-arc",
+      "semanticReason": "protect-group4-group5",
+      "generatedLowLevelControls": {
+        "source": "canonicalComparisonPathFamily",
+        "value": "hook-arc",
+        "protectionFormula": "baseline vector with canonicalComparisonPathFamily only",
+        "baselineAggregateScoreFloor": 4.9,
+        "baselinePathFamily": "boss-led-loop",
+        "canonicalPathFamily": "hook-arc"
+      },
+      "controls": {},
+      "timing": {},
+      "lowerField": {},
+      "predictedRuntimeVector": {
+        "id": 756830963,
+        "family": "stingray",
+        "pathFamily": "hook-arc",
+        "wave": 4,
+        "lane": 4,
+        "type": "bee",
+        "sampleCount": 11,
+        "visibleStartS": 13.5,
+        "visibleEndS": 16,
+        "entrySide": "center",
+        "exitSide": "center",
+        "xRange": 0.1557,
+        "yRange": 0.7693,
+        "pathLength": 0.9253,
+        "turnCount": 3,
+        "reversalCount": 3,
+        "lowerFieldShare": 0.27
+      }
+    }
+  ],
+  "guardrails": {
+    "spacingReadability": {
+      "source": "npm run harness:check:challenge-motion-profile after restored baseline",
+      "preserveBaseline": true,
+      "pass": true,
+      "worstMinDistance": 3.08,
+      "averageMinDistance": 19.82,
+      "spacingScore": 0.765,
+      "bunchingRisk": 0.292,
+      "read": "Restored baseline spacing guardrail passed; use a fresh motion-profile run before promoting any non-control runtime candidate."
+    },
+    "scoreableRoutes": {
+      "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+      "preserveBaseline": true,
+      "score10": 5.5,
+      "activeWindows": 47,
+      "multiTargetWindowShare": 0.745,
+      "laneDiversity": 1,
+      "centerBias": 0.359,
+      "read": "Control preserves the restored baseline scoreable-route read."
+    },
+    "safety": {
+      "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+      "preserveBaseline": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0,
+        "challengeContacts": 4
+      },
+      "read": "Control preserves the restored baseline no-shot/no-attack/no-loss safety read."
+    }
+  },
+  "gates": {
+    "minTotalObjectTrackLift10": 0.05,
+    "mustImproveGroup1": true,
+    "mustPreserveGroup4": true,
+    "mustPreserveGroup5": true,
+    "mustPreserveCoverage": true
+  }
+}

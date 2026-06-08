@@ -86,33 +86,65 @@
         "remainingCompilerGap": "Derive concrete lowerFieldBias/yOffset or reference-path geometry changes and verify their actual lower-field share in browser runtime."
       }
     },
-    {
-      "classId": "phase-duration-rebalance",
-      "playerMeaning": "Bring group visible windows closer to the reference phase order without broad stage retiming.",
-      "generationRule": "For groups with visible start/end drift, derive visibleStartS and visibleEndS from the aggregate target window and preserve path family.",
-      "invariants": [
-        "phase order remains group 1 through group 5",
-        "target count and no-combat challenge meaning are preserved",
-        "group 4 and group 5 baseline object-track floors are protected"
+  {
+    "classId": "phase-duration-rebalance",
+    "playerMeaning": "Bring group visible windows closer to the reference phase order without broad stage retiming.",
+    "generationRule": "For groups with visible start/end drift, derive compiled runtime controls from the target window instead of emitting visibleStartS/visibleEndS as trial-only vectors.",
+    "invariants": [
+      "phase order remains group 1 through group 5",
+      "target count and no-combat challenge meaning are preserved",
+      "group 4 and group 5 baseline object-track floors are protected"
+    ],
+    "expectedMetricMovement": "Improve timing components while exposing whether geometry worsens when phase timing is tightened.",
+    "whyNotBlindTuning": "Timing comes from object-track windows in the reference execution description.",
+    "runtimeExpressibility": {
+      "sourceReadySupported": true,
+      "sourceReadyRole": "runtime-transform",
+      "requiresCompiledRuntimeControls": true,
+      "requiresProofArtifact": "reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-phase-duration-proof.json",
+      "sourceFields": [
+        "src/js/13-aurora-game-pack.js Stage 7 groupSpawnOffsets",
+        "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS spawnOffsetS when present",
+        "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS phaseDurations",
+        "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_REFERENCE_PATHS playbackScale when present"
       ],
-      "expectedMetricMovement": "Improve timing components while exposing whether geometry worsens when phase timing is tightened.",
-      "whyNotBlindTuning": "Timing comes from object-track windows in the reference execution description.",
-      "runtimeExpressibility": {
-        "sourceReadySupported": false,
-        "sourceFields": [
-          "src/js/13-aurora-game-pack.js Stage 7 groupSpawnOffsets",
-          "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS phaseDurations",
-          "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_REFERENCE_PATHS durationS/playbackScale when present"
-        ],
-        "runtimeConsumer": "spawn offsets, phase durations, and reference path timing are consumed by browser runtime, but the current semantic candidate only emits visibleStartS/visibleEndS trial vectors.",
-        "predictionLimits": "The trial score can improve by assigning visible windows directly. That is optimistic unless the compiler proves which consumed runtime fields produce those windows.",
-        "proofHarnesses": [
-          "npm run harness:analyze:challenge-stage-conformance",
-          "npm run harness:check:challenge-motion-profile"
-        ],
-        "remainingCompilerGap": "Compile visibleStartS/visibleEndS intent into explicit spawnOffsetS, phaseDurations, reference duration, or playbackScale changes and verify actual browser-visible windows."
-      }
-    },
+      "generatedRuntimeControls": [
+        {
+          "semanticField": "visibleStartS",
+          "runtimeField": "groupSpawnOffsets[groupIndex-1] or motionSpecGroups[groupIndex-1].spawnOffsetS",
+          "runtimeCurrentlyConsumes": true,
+          "expectedVisibleEffect": "moves the group visible window earlier or later relative to other groups"
+        },
+        {
+          "semanticField": "phaseDurationS / visibleEndS",
+          "runtimeField": "motionSpecGroups[groupIndex-1].phaseDurations.trackS",
+          "runtimeCurrentlyConsumes": true,
+          "expectedVisibleEffect": "changes when the reference path enters its exit/overrun behavior"
+        },
+        {
+          "semanticField": "phaseDurationS / visibleEndS",
+          "runtimeField": "groupReferencePaths[groupIndex-1].playbackScale",
+          "runtimeCurrentlyConsumes": true,
+          "expectedVisibleEffect": "stretches or compresses reference path playback in real browser-visible time"
+        },
+        {
+          "semanticField": "exitDurationS",
+          "runtimeField": "motionSpecGroups[groupIndex-1].phaseDurations.exitS",
+          "runtimeCurrentlyConsumes": false,
+          "expectedVisibleEffect": "none until the runtime consumes exitS"
+        }
+      ],
+      "runtimeConsumer": "spawnChallenge() consumes groupSpawnOffsets or motionSpecGroup.spawnOffsetS; applyReferenceChallengePath() consumes phaseDurations.trackS; the challenge update loop consumes referencePath.playbackScale. phaseDurations.exitS is declared but not currently consumed.",
+      "predictionLimits": "The trial score can improve by assigning visible windows directly. Source readiness requires compiledRuntimeControls plus proof that the emitted controls produce browser-visible timing/path movement.",
+      "proofHarnesses": [
+        "npm run harness:analyze:stage7-phase-duration-expressibility",
+        "npm run harness:check:stage7-phase-duration-expressibility",
+        "npm run harness:analyze:challenge-stage-conformance",
+        "npm run harness:check:challenge-motion-profile"
+      ],
+      "remainingCompilerGap": "Current generated candidates must emit compiledRuntimeControls and cite the proof artifact; visibleStartS/visibleEndS alone remains analysis-only."
+    }
+  },
     {
       "classId": "preserve-scoreable-window",
       "playerMeaning": "Reject motion ideas that improve object-track math by collapsing playable bonus lanes.",

@@ -47,6 +47,9 @@ function main(){
   if(!report.sourceReadyGate?.requiresRuntimeExpressibilityMapping || !report.sourceReadyGate?.requiresLiveGatePathFamilyAlignment){
     fail('Semantic batch source-ready gate must require runtime expressibility and live-gate path alignment.', { sourceReadyGate: report.sourceReadyGate });
   }
+  if(!report.sourceReadyGate?.requiresRuntimeExpressibilityProof || !report.sourceReadyGate?.requiresCompiledRuntimeControlsForPhaseDuration){
+    fail('Semantic batch source-ready gate must require proof artifacts and compiled controls for phase-duration intent.', { sourceReadyGate: report.sourceReadyGate });
+  }
   const tested = new Set(report.transformationClassesTested || []);
   const missingClasses = EXPECTED_CLASSES.filter(classId => !tested.has(classId));
   if(missingClasses.length) fail('Semantic batch did not test all expected transformation classes.', { missingClasses });
@@ -65,6 +68,7 @@ function main(){
     if(!candidate.guardrails || typeof candidate.guardrails.spacingReadability !== 'boolean' || typeof candidate.guardrails.scoreableRoutes !== 'boolean' || typeof candidate.guardrails.safety !== 'boolean') rowIssues.push(`${prefix}: missing guardrail statuses`);
     if(!candidate.semanticValidity || typeof candidate.semanticValidity.pass !== 'boolean') rowIssues.push(`${prefix}: missing semantic validity read`);
     if(!candidate.runtimeExpressibility || typeof candidate.runtimeExpressibility.pass !== 'boolean') rowIssues.push(`${prefix}: missing runtime expressibility read`);
+    if(!candidate.runtimeExpressibility?.proofStatus || typeof candidate.runtimeExpressibility.proofStatus.phaseDurationProofPass !== 'boolean') rowIssues.push(`${prefix}: missing runtime expressibility proof status`);
     if(candidate.readyForRuntimeSourceCandidate && !candidate.runtimeExpressibility.pass) rowIssues.push(`${prefix}: source-ready candidate failed runtime expressibility`);
     if(typeof candidate.readyForRuntimeSourceCandidate !== 'boolean') rowIssues.push(`${prefix}: missing runtime-source readiness`);
   }

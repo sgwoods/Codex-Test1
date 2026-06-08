@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage7-reference-execution-candidate-trial-input",
+  "generatedBy": "tools/harness/analyze-stage7-reference-execution-batch.js",
+  "candidateId": "stage7-semantic-lower-field-overstay-reduction-0.1",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 7,
+    "challengeNumber": 2,
+    "displayLabel": "Stage 7 / Challenge 2"
+  },
+  "semanticTransformationClass": "lower-field-overstay-reduction",
+  "semanticTransformations": [
+    "lower-field-overstay-reduction"
+  ],
+  "intendedPlayerFacingMeaning": "Pull overstaying groups back toward their reference lower-field share without changing late groups.",
+  "targetGroups": [
+    2
+  ],
+  "invariantsPreserved": [
+    "group 4 and group 5 cannot be allowed to regress",
+    "path family remains canonical for touched groups",
+    "scoreable route baseline is preserved unless a later measured route probe says otherwise"
+  ],
+  "expectedMetricMovement": "Reduce lower-field overstay warnings for selected groups.",
+  "generatedLowLevelControls": {
+    "groups": [
+      {
+        "lowerFieldFormula": "aggregateTarget.lowerFieldShare + (lowerFieldGateUpper - 0.04)",
+        "baselineLowerFieldShare": 0.67,
+        "aggregateTargetLowerFieldShare": 0.3122,
+        "baselineDelta": 0.358,
+        "generatedDelta": 0.14
+      }
+    ]
+  },
+  "whyMoreLikelyThanBlindTuning": "Groups are selected from measured lower-field deltas and the new share is generated from the lower-field gate.",
+  "intent": {
+    "kind": "lower-field-overstay-reduction",
+    "read": "Pull overstaying groups back toward their reference lower-field share without changing late groups."
+  },
+  "groups": [
+    {
+      "groupIndex": 2,
+      "pathFamily": "hook-arc",
+      "lowerField": {
+        "lowerFieldDeltaFromAggregate": 0.14
+      },
+      "semanticReason": "lower-field-overstay-reduction",
+      "generatedLowLevelControls": {
+        "lowerFieldFormula": "aggregateTarget.lowerFieldShare + (lowerFieldGateUpper - 0.04)",
+        "baselineLowerFieldShare": 0.67,
+        "aggregateTargetLowerFieldShare": 0.3122,
+        "baselineDelta": 0.358,
+        "generatedDelta": 0.14
+      }
+    }
+  ],
+  "guardrails": {
+    "spacingReadability": {
+      "source": "npm run harness:check:challenge-motion-profile after restored baseline",
+      "preserveBaseline": true,
+      "pass": true,
+      "worstMinDistance": 3.08,
+      "averageMinDistance": 19.82,
+      "spacingScore": 0.765,
+      "bunchingRisk": 0.292,
+      "read": "Restored baseline spacing guardrail passed; use a fresh motion-profile run before promoting any non-control runtime candidate."
+    },
+    "scoreableRoutes": {
+      "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+      "preserveBaseline": true,
+      "score10": 5.5,
+      "activeWindows": 47,
+      "multiTargetWindowShare": 0.745,
+      "laneDiversity": 1,
+      "centerBias": 0.359,
+      "read": "Control preserves the restored baseline scoreable-route read."
+    },
+    "safety": {
+      "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+      "preserveBaseline": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0,
+        "challengeContacts": 4
+      },
+      "read": "Control preserves the restored baseline no-shot/no-attack/no-loss safety read."
+    }
+  },
+  "gates": {
+    "minTotalObjectTrackLift10": 0.05,
+    "mustImproveGroup1": true,
+    "mustPreserveGroup4": true,
+    "mustPreserveGroup5": true,
+    "mustPreserveCoverage": true
+  }
+}

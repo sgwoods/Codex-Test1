@@ -1,7 +1,7 @@
 # Stage 7 Semantic Runtime Calibration
 
-Generated: 2026-06-08T15:21:52.246Z
-Commit: c75a9a660
+Generated: 2026-06-08T16:27:47.605Z
+Commit: d4de278ad
 Branch: codex/macbook-pro-1.4.1-stage7-object-track-keeper
 
 Candidate: `stage7-semantic-phase-align-protect-0.1`
@@ -49,7 +49,7 @@ Use the live promotion gates and restored runtime source as candidate gate autho
 | Transform | Source-ready | Role | Source fields | Gap |
 | --- | --- | --- | --- | --- |
 | canonical-family-alignment | true | runtime-transform | src/js/13-aurora-game-pack.js Stage 7 groupPathFamilies<br>src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS pathFamilyHint<br>src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_CONTRACT_GROUPS pathFamily<br>reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json Stage 7 groups pathFamily | This is label and gate alignment only. It must not claim object-track score lift unless paired with a runtime-expressible movement transform. |
-| phase-duration-rebalance | false | analysis-only | src/js/13-aurora-game-pack.js Stage 7 groupSpawnOffsets<br>src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS phaseDurations<br>src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_REFERENCE_PATHS durationS/playbackScale when present | Compile visibleStartS/visibleEndS intent into explicit spawnOffsetS, phaseDurations, reference duration, or playbackScale changes and verify actual browser-visible windows. |
+| phase-duration-rebalance | true | runtime-transform | src/js/13-aurora-game-pack.js Stage 7 groupSpawnOffsets<br>src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS spawnOffsetS when present<br>src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS phaseDurations<br>src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_REFERENCE_PATHS playbackScale when present | Current generated candidates must emit compiledRuntimeControls and cite the proof artifact; visibleStartS/visibleEndS alone remains analysis-only. |
 | preserve-scoreable-window | true | guardrail-only | none | Cannot make a candidate source-ready by itself. |
 | protect-group4-group5 | true | guardrail-only | none | A predictedRuntimeVector used only for protection is not proof that a source edit can express a new vector. |
 
@@ -58,10 +58,10 @@ Use the live promotion gates and restored runtime source as candidate gate autho
 | Transform | Overpredicted | Read |
 | --- | --- | --- |
 | canonical-family-alignment | true | Path-family labels transferred while applied, but label alignment alone did not move object-track score and conflicted with live motion/profile order. |
-| phase-duration-rebalance | true | Predicted lift came from visibleStartS/visibleEndS trial vectors, but the runtime projection did not compile those windows into consumed timing fields. |
+| phase-duration-rebalance | true | Predicted lift came from visibleStartS/visibleEndS trial vectors; the semantic candidate did not emit compiledRuntimeControls or cite guard-safe browser proof. |
 | preserve-scoreable-window | false | Guardrail held; this class does not claim movement lift. |
 | protect-group4-group5 | false | Group 5 was preserved and group 4 did not regress in actual runtime, but this protection is not a movement compiler. |
 
 ## Recommendation
 
-Do not try another Stage 7 runtime candidate. First reconcile the Stage 7 path-family source of truth or make the batch gate deliberately read a single canonical artifact, then compile phase-duration intent into explicit consumed runtime controls and prove the mapping with browser conformance and motion/profile checks.
+Do not try another Stage 7 runtime candidate. Keep source-ready path-family authority on the live gates/runtime source, then update the semantic generator so phase-duration intent emits compiledRuntimeControls and only passes when the proof artifact confirms browser-visible effect plus motion/profile guard safety.

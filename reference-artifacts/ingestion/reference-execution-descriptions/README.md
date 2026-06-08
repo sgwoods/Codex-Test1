@@ -59,3 +59,16 @@ candidate. Candidate readiness and runtime promotion readiness are separate:
 the current runtime can have clear deviations while the artifact is still
 precise enough to guide one candidate. A measurement keeper is useful, but it
 is not beta justification by itself.
+
+## Stage 7 Authority Note
+
+For the Stage 7 / Challenge 2 pilot, `canonicalComparisonPathFamily` is
+measured-reference comparison intent. It is not source-promotion authority by
+itself while it conflicts with live promotion gates. The current authority
+decision is generated at:
+
+`reference-artifacts/analyses/reference-execution-authority/stage7-challenge2/latest-path-family-authority.json`
+
+Until that decision changes, source-ready candidates must match the live
+promotion gate/runtime order, and RED/setpiece measured intent should be used
+as diagnostic guidance rather than permission to change runtime source.

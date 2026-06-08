@@ -231,9 +231,13 @@ from the roadmap.
    `4.7/10` and coverage `0.503` while
    `harness:check:challenge-motion-profile` caught target-order drift during
    the applied candidate. No further Stage 7 runtime candidate is currently
-   source-ready; next work should reconcile path-family truth and compile
-   phase-duration intent to consumed runtime controls before another source
-   attempt.
+   source-ready. The current path-family authority decision keeps live
+   promotion gates/restored runtime source as source-ready authority, with
+   RED/setpiece retained as measured-reference intent. `phase-duration-rebalance`
+   now has a consumed-control contract and browser-visible proof, but the proof
+   variants do not pass the motion/profile proxy guard; next work should emit
+   guard-safe `compiledRuntimeControls` under live authority before another
+   source attempt.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth
@@ -333,10 +337,16 @@ Current conformance read:
   `reference-artifacts/analyses/reference-execution-runtime-calibrations/stage7-challenge2/latest-semantic-runtime-calibration.json`.
   It identifies two source-promotion blockers: Stage 7 path-family order is
   split between measured reference intent and live promotion gates, and
-  `phase-duration-rebalance` still has no runtime-expressible mapping from
-  `visibleStartS`/`visibleEndS` into consumed `spawnOffsetS`,
-  `phaseDurations`, reference `durationS`, or `playbackScale` controls. This is
-  a measurement/process keeper, not a runtime keeper or beta justification.
+  the old `phase-duration-rebalance` candidates still emit trial-only
+  `visibleStartS`/`visibleEndS` instead of compiled runtime controls. The
+  follow-on authority/proof cycle selected live promotion gates/restored
+  runtime source as source-ready authority and proved that
+  `groupSpawnOffsets` / `motionSpecGroup.spawnOffsetS`,
+  `phaseDurations.trackS`, and `referencePath.playbackScale` are consumed
+  controls that change browser-visible timing/path behavior. However, the
+  proof variants do not pass the motion/profile proxy guard, and `exitS` is
+  explicitly unconsumed. This is a measurement/process keeper, not a runtime
+  keeper or beta justification.
 - challenge-stage grammar is now materially ahead of runtime implementation:
   the first-five challenge work has `25/25` reference-backed group contracts
   and `8.6/10` control readiness, but runtime promotion is still blocked by

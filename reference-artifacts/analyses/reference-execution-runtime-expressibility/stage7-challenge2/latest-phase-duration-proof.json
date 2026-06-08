@@ -1,0 +1,456 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage7-phase-duration-runtime-expressibility-proof",
+  "generatedAt": "2026-06-08T16:26:22.438Z",
+  "generatedBy": "tools/harness/analyze-stage7-phase-duration-expressibility.js",
+  "commit": "d4de278ad",
+  "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 7,
+    "challengeNumber": 2,
+    "displayLabel": "Stage 7 / Challenge 2"
+  },
+  "sourceArtifacts": {
+    "pathFamilyAuthority": "reference-artifacts/analyses/reference-execution-authority/stage7-challenge2/latest-path-family-authority.json"
+  },
+  "compilerContract": {
+    "transformationClass": "phase-duration-rebalance",
+    "controls": [
+      {
+        "semanticField": "visibleStartS",
+        "generatedRuntimeField": "groupSpawnOffsets[groupIndex-1] or motionSpecGroups[groupIndex-1].spawnOffsetS",
+        "runtimeCurrentlyConsumes": true,
+        "consumedBy": "spawnChallenge() when calculating enemy spawn/spawnPlan",
+        "expectedVisibleEffect": "moves a group visible window earlier/later relative to other groups",
+        "proofStatus": "browser-proof-pass"
+      },
+      {
+        "semanticField": "phaseDurationS / visibleEndS",
+        "generatedRuntimeField": "motionSpecGroups[groupIndex-1].phaseDurations.trackS",
+        "runtimeCurrentlyConsumes": true,
+        "consumedBy": "applyReferenceChallengePath() as reference track duration before exit overrun",
+        "expectedVisibleEffect": "changes when the reference path enters its exit/overrun phase",
+        "proofStatus": "browser-proof-pass"
+      },
+      {
+        "semanticField": "phaseDurationS / visibleEndS",
+        "generatedRuntimeField": "groupReferencePaths[groupIndex-1].playbackScale",
+        "runtimeCurrentlyConsumes": true,
+        "consumedBy": "challenge enemy update path clock; reference playback scale changes e.tm advance rate",
+        "expectedVisibleEffect": "stretches or compresses reference path playback in browser-visible time",
+        "proofStatus": "browser-proof-pass"
+      },
+      {
+        "semanticField": "exitDurationS",
+        "generatedRuntimeField": "motionSpecGroups[groupIndex-1].phaseDurations.exitS",
+        "runtimeCurrentlyConsumes": false,
+        "consumedBy": "not consumed by current runtime path generator",
+        "expectedVisibleEffect": "none until runtime implements this field",
+        "proofStatus": "blocked-unconsumed-field"
+      }
+    ]
+  },
+  "liveGateOrder": [
+    "cross-sweep",
+    "cross-sweep",
+    "hook-arc",
+    "hook-arc",
+    "boss-led-loop"
+  ],
+  "baseline": {
+    "variantId": "baseline",
+    "groupIndex": null,
+    "control": "baseline",
+    "pathFamilyOrder": [
+      "cross-sweep",
+      "cross-sweep",
+      "hook-arc",
+      "hook-arc",
+      "boss-led-loop"
+    ],
+    "contractPathFamilyOrder": [
+      "cross-sweep",
+      "cross-sweep",
+      "hook-arc",
+      "hook-arc",
+      "boss-led-loop"
+    ],
+    "enemyCount": 40,
+    "referenceTrackedEnemyCount": 40,
+    "referenceTrackIds": [
+      "target-track-10",
+      "target-track-66",
+      "target-track-71",
+      "target-track-110",
+      "target-track-142"
+    ],
+    "groupWindows": {
+      "group1": {
+        "visibleStartS": 0.25,
+        "visibleEndS": 3,
+        "visibleDurationS": 2.75
+      },
+      "group2": {
+        "visibleStartS": 3,
+        "visibleEndS": 6.25,
+        "visibleDurationS": 3.25
+      },
+      "group3": {
+        "visibleStartS": 4.25,
+        "visibleEndS": 6.25,
+        "visibleDurationS": 2
+      },
+      "group4": {
+        "visibleStartS": 7.25,
+        "visibleEndS": 10.5,
+        "visibleDurationS": 3.25
+      },
+      "group5": {
+        "visibleStartS": 13.5,
+        "visibleEndS": 15,
+        "visibleDurationS": 1.5
+      }
+    },
+    "groupTmAt2S": {
+      "group1": 1.729,
+      "group2": 0,
+      "group3": 0,
+      "group4": 0,
+      "group5": 0
+    },
+    "spacingSummary": {
+      "worstMinDistance": 0,
+      "averageMinDistance": 13.78,
+      "spacingScore": 1,
+      "bunchingRisk": 1,
+      "pass": false
+    }
+  },
+  "variants": [
+    {
+      "variantId": "spawn-offset-group2-plus-0.45",
+      "groupIndex": 2,
+      "control": "groupSpawnOffsets[1]",
+      "pathFamilyOrder": [
+        "cross-sweep",
+        "cross-sweep",
+        "hook-arc",
+        "hook-arc",
+        "boss-led-loop"
+      ],
+      "contractPathFamilyOrder": [
+        "cross-sweep",
+        "cross-sweep",
+        "hook-arc",
+        "hook-arc",
+        "boss-led-loop"
+      ],
+      "enemyCount": 40,
+      "referenceTrackedEnemyCount": 40,
+      "referenceTrackIds": [
+        "target-track-10",
+        "target-track-66",
+        "target-track-71",
+        "target-track-110",
+        "target-track-142"
+      ],
+      "groupWindows": {
+        "group1": {
+          "visibleStartS": 0.25,
+          "visibleEndS": 3,
+          "visibleDurationS": 2.75
+        },
+        "group2": {
+          "visibleStartS": 3.5,
+          "visibleEndS": 6.75,
+          "visibleDurationS": 3.25
+        },
+        "group3": {
+          "visibleStartS": 4.25,
+          "visibleEndS": 6.25,
+          "visibleDurationS": 2
+        },
+        "group4": {
+          "visibleStartS": 7.25,
+          "visibleEndS": 10.5,
+          "visibleDurationS": 3.25
+        },
+        "group5": {
+          "visibleStartS": 13.5,
+          "visibleEndS": 15,
+          "visibleDurationS": 1.5
+        }
+      },
+      "groupTmAt2S": {
+        "group1": 1.729,
+        "group2": 0,
+        "group3": 0,
+        "group4": 0,
+        "group5": 0
+      },
+      "spacingSummary": {
+        "worstMinDistance": 0,
+        "averageMinDistance": 13.69,
+        "spacingScore": 1,
+        "bunchingRisk": 1,
+        "pass": false
+      },
+      "evaluation": {
+        "variantId": "spawn-offset-group2-plus-0.45",
+        "groupIndex": 2,
+        "control": "groupSpawnOffsets[1]",
+        "targetGroupDelta": {
+          "visibleStartDeltaS": 0.5,
+          "visibleEndDeltaS": 0.5,
+          "visibleDurationDeltaS": 0
+        },
+        "targetVisibleEffectScoreS": 0.5,
+        "browserVisibleEffectConfirmed": true,
+        "group45Deltas": [
+          {
+            "groupIndex": 4,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          },
+          {
+            "groupIndex": 5,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          }
+        ],
+        "group45RegressionPass": true,
+        "group45Regression": [],
+        "pathOrderPass": true,
+        "referenceSetupPass": true,
+        "spacingProxyPass": false,
+        "motionProfileGateProxyPass": false,
+        "read": "Non-overwriting browser proof confirmed this control changes visible Stage 7 timing/path behavior."
+      }
+    },
+    {
+      "variantId": "track-duration-group1-shorter-0.62x",
+      "groupIndex": 1,
+      "control": "motionSpecGroups[0].phaseDurations.trackS",
+      "pathFamilyOrder": [
+        "cross-sweep",
+        "cross-sweep",
+        "hook-arc",
+        "hook-arc",
+        "boss-led-loop"
+      ],
+      "contractPathFamilyOrder": [
+        "cross-sweep",
+        "cross-sweep",
+        "hook-arc",
+        "hook-arc",
+        "boss-led-loop"
+      ],
+      "enemyCount": 40,
+      "referenceTrackedEnemyCount": 40,
+      "referenceTrackIds": [
+        "target-track-10",
+        "target-track-66",
+        "target-track-71",
+        "target-track-110",
+        "target-track-142"
+      ],
+      "groupWindows": {
+        "group1": {
+          "visibleStartS": 0.25,
+          "visibleEndS": 2.25,
+          "visibleDurationS": 2
+        },
+        "group2": {
+          "visibleStartS": 3,
+          "visibleEndS": 6.25,
+          "visibleDurationS": 3.25
+        },
+        "group3": {
+          "visibleStartS": 4.25,
+          "visibleEndS": 6.25,
+          "visibleDurationS": 2
+        },
+        "group4": {
+          "visibleStartS": 7.25,
+          "visibleEndS": 10.5,
+          "visibleDurationS": 3.25
+        },
+        "group5": {
+          "visibleStartS": 13.5,
+          "visibleEndS": 15,
+          "visibleDurationS": 1.5
+        }
+      },
+      "groupTmAt2S": {
+        "group1": 1.673,
+        "group2": 0,
+        "group3": 0,
+        "group4": 0,
+        "group5": 0
+      },
+      "spacingSummary": {
+        "worstMinDistance": 0,
+        "averageMinDistance": 13.09,
+        "spacingScore": 1,
+        "bunchingRisk": 1,
+        "pass": false
+      },
+      "evaluation": {
+        "variantId": "track-duration-group1-shorter-0.62x",
+        "groupIndex": 1,
+        "control": "motionSpecGroups[0].phaseDurations.trackS",
+        "targetGroupDelta": {
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": -0.75,
+          "visibleDurationDeltaS": -0.75
+        },
+        "targetVisibleEffectScoreS": 0.75,
+        "browserVisibleEffectConfirmed": true,
+        "group45Deltas": [
+          {
+            "groupIndex": 4,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          },
+          {
+            "groupIndex": 5,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          }
+        ],
+        "group45RegressionPass": true,
+        "group45Regression": [],
+        "pathOrderPass": true,
+        "referenceSetupPass": true,
+        "spacingProxyPass": false,
+        "motionProfileGateProxyPass": false,
+        "read": "Non-overwriting browser proof confirmed this control changes visible Stage 7 timing/path behavior."
+      }
+    },
+    {
+      "variantId": "playback-scale-group1-slower-0.55",
+      "groupIndex": 1,
+      "control": "groupReferencePaths[0].playbackScale",
+      "pathFamilyOrder": [
+        "cross-sweep",
+        "cross-sweep",
+        "hook-arc",
+        "hook-arc",
+        "boss-led-loop"
+      ],
+      "contractPathFamilyOrder": [
+        "cross-sweep",
+        "cross-sweep",
+        "hook-arc",
+        "hook-arc",
+        "boss-led-loop"
+      ],
+      "enemyCount": 40,
+      "referenceTrackedEnemyCount": 40,
+      "referenceTrackIds": [
+        "target-track-10",
+        "target-track-66",
+        "target-track-71",
+        "target-track-110",
+        "target-track-142"
+      ],
+      "groupWindows": {
+        "group1": {
+          "visibleStartS": 0.25,
+          "visibleEndS": 5,
+          "visibleDurationS": 4.75
+        },
+        "group2": {
+          "visibleStartS": 3,
+          "visibleEndS": 6.25,
+          "visibleDurationS": 3.25
+        },
+        "group3": {
+          "visibleStartS": 4.25,
+          "visibleEndS": 6.25,
+          "visibleDurationS": 2
+        },
+        "group4": {
+          "visibleStartS": 7.25,
+          "visibleEndS": 10.5,
+          "visibleDurationS": 3.25
+        },
+        "group5": {
+          "visibleStartS": 13.5,
+          "visibleEndS": 15,
+          "visibleDurationS": 1.5
+        }
+      },
+      "groupTmAt2S": {
+        "group1": 0.951,
+        "group2": 0,
+        "group3": 0,
+        "group4": 0,
+        "group5": 0
+      },
+      "spacingSummary": {
+        "worstMinDistance": 0,
+        "averageMinDistance": 12.05,
+        "spacingScore": 0.827,
+        "bunchingRisk": 1,
+        "pass": false
+      },
+      "evaluation": {
+        "variantId": "playback-scale-group1-slower-0.55",
+        "groupIndex": 1,
+        "control": "groupReferencePaths[0].playbackScale",
+        "targetGroupDelta": {
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": 2,
+          "visibleDurationDeltaS": 2
+        },
+        "targetVisibleEffectScoreS": 2,
+        "browserVisibleEffectConfirmed": true,
+        "group45Deltas": [
+          {
+            "groupIndex": 4,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          },
+          {
+            "groupIndex": 5,
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          }
+        ],
+        "group45RegressionPass": true,
+        "group45Regression": [],
+        "pathOrderPass": true,
+        "referenceSetupPass": true,
+        "spacingProxyPass": false,
+        "motionProfileGateProxyPass": false,
+        "read": "Non-overwriting browser proof confirmed this control changes visible Stage 7 timing/path behavior."
+      }
+    }
+  ],
+  "summary": {
+    "browserVisibleEffectConfirmed": true,
+    "motionProfileGateProxyPass": false,
+    "group45Preserved": true,
+    "proofKind": "non-overwriting-browser-layout-override",
+    "read": "The proof confirms concrete consumed controls can move Stage 7 browser-visible timing/path behavior, but the proof variants do not satisfy the motion/profile proxy guard."
+  },
+  "decision": {
+    "sourceReadyForCandidates": false,
+    "sourceReadyBlockers": [
+      "The semantic candidate generator must emit compiledRuntimeControls instead of visibleStartS/visibleEndS trial vectors.",
+      "A future candidate must carry the proof artifact id and preserve live path-family authority.",
+      "The current proof variants do not pass the motion/profile proxy guard; a source-ready candidate must prove guardrail-safe timing values.",
+      "A real source candidate still needs full motion/profile, strict conformance, before/after visual evidence, scoreable-route, and safety checks."
+    ],
+    "read": "phase-duration-rebalance now has a concrete runtime-consumed control contract and browser-visible proof, but no current semantic batch candidate is source-ready from this proof alone."
+  }
+}

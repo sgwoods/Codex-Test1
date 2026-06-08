@@ -20,6 +20,7 @@ const TARGET_CONTRACTS = path.join(ROOT, 'reference-artifacts', 'ingestion', 'ch
 const SETPIECE_CONTRACTS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-setpiece-contracts', 'latest.json');
 const AURORA_PACK = path.join(ROOT, 'src', 'js', '13-aurora-game-pack.js');
 const MOTION_PROFILE_CHECK = path.join(ROOT, 'tools', 'harness', 'check-challenge-motion-profile.js');
+const PHASE_DURATION_PROOF = path.join(ROOT, 'reference-artifacts', 'analyses', 'reference-execution-runtime-expressibility', 'stage7-challenge2', 'latest-phase-duration-proof.json');
 const FOCUS_GROUPS = [1, 4, 5];
 
 function ensureDir(dir){
@@ -59,6 +60,11 @@ function knownClassSet(vocabulary){
 
 function classSpec(vocabulary, classId){
   return (vocabulary.transformationClasses || []).find(row => row.classId === classId) || {};
+}
+
+function optionalJson(file){
+  if(!fs.existsSync(file)) return null;
+  return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
 function sameOrder(a = [], b = []){
@@ -563,6 +569,7 @@ function semanticValidity(candidate, trialReport, vocabulary){
 
 function runtimeExpressibility(candidate, trialReport, vocabulary, truthAlignment){
   const classes = Array.isArray(candidate.semanticTransformations) ? candidate.semanticTransformations : [candidate.semanticTransformationClass].filter(Boolean);
+  const phaseDurationProof = optionalJson(PHASE_DURATION_PROOF);
   const blockers = [];
   const warnings = [];
   const classMappings = classes.map(classId => {
@@ -578,9 +585,12 @@ function runtimeExpressibility(candidate, trialReport, vocabulary, truthAlignmen
       sourceReadySupported,
       sourceReadyRole,
       sourceFields: mapping.sourceFields || [],
+      generatedRuntimeControls: mapping.generatedRuntimeControls || [],
       runtimeConsumer: mapping.runtimeConsumer || '',
       predictionLimits: mapping.predictionLimits || '',
       proofHarnesses: mapping.proofHarnesses || [],
+      requiresCompiledRuntimeControls: mapping.requiresCompiledRuntimeControls === true,
+      requiresProofArtifact: mapping.requiresProofArtifact || null,
       remainingCompilerGap: mapping.remainingCompilerGap || null
     };
   });
@@ -604,11 +614,31 @@ function runtimeExpressibility(candidate, trialReport, vocabulary, truthAlignmen
   if(!truthAlignment.measuredIntentMatchesLiveGate){
     warnings.push('measured reference intent and live promotion gates disagree; candidate source-readiness must honor live gates until source-of-truth reconciliation is explicit');
   }
+  const compiledControls = candidate.compiledRuntimeControls || {};
+  const phaseDurationMapping = classMappings.find(row => row.classId === 'phase-duration-rebalance');
+  const phaseDurationCompiled = !!(
+    compiledControls.phaseDurationRebalance
+    || compiledControls['phase-duration-rebalance']
+    || (candidate.groups || []).some(group => group.compiledRuntimeControls?.phaseDurationRebalance || group.compiledRuntimeControls?.['phase-duration-rebalance'])
+  );
+  const phaseDurationProofPass = !!(
+    phaseDurationProof
+    && phaseDurationProof.artifactType === 'stage7-phase-duration-runtime-expressibility-proof'
+    && phaseDurationProof.summary?.browserVisibleEffectConfirmed === true
+    && phaseDurationProof.summary?.motionProfileGateProxyPass === true
+    && phaseDurationProof.summary?.group45Preserved === true
+  );
+  if(phaseDurationMapping?.requiresCompiledRuntimeControls && !phaseDurationCompiled){
+    blockers.push('phase-duration-rebalance: candidate must emit compiledRuntimeControls instead of visibleStartS/visibleEndS trial vectors');
+  }
+  if(phaseDurationMapping?.requiresProofArtifact && !phaseDurationProofPass){
+    blockers.push(`phase-duration-rebalance: missing passing runtime expressibility proof ${phaseDurationMapping.requiresProofArtifact}`);
+  }
   for(const group of candidate.groups || []){
     if(group.timing && (Number.isFinite(+group.timing.visibleStartS) || Number.isFinite(+group.timing.visibleEndS))){
       const classesForGroup = classes.filter(classId => classId === group.semanticReason || classId === 'phase-duration-rebalance');
       if(classesForGroup.includes('phase-duration-rebalance')){
-        blockers.push(`group ${group.groupIndex}: visibleStartS/visibleEndS trial timing is not an explicit consumed runtime control`);
+        blockers.push(`group ${group.groupIndex}: visibleStartS/visibleEndS trial timing must compile to consumed runtime controls before source promotion`);
       }
     }
     if(group.controls && Number.isFinite(+group.controls.pathLength)){
@@ -628,6 +658,11 @@ function runtimeExpressibility(candidate, trialReport, vocabulary, truthAlignmen
     blockers: uniqueBlockers,
     warnings: uniqueWarnings,
     classMappings,
+    proofStatus: {
+      phaseDurationProof: phaseDurationProof ? rel(PHASE_DURATION_PROOF) : null,
+      phaseDurationProofPass,
+      phaseDurationCompiledControlsPresent: phaseDurationCompiled
+    },
     candidateProjectedPathOrder: candidateOrder,
     liveGatePathOrder: truthAlignment.liveGateCanonicalOrder,
     liveGateMismatches,
@@ -846,7 +881,8 @@ function main(){
     sourceArtifacts: {
       semanticVocabulary: rel(VOCABULARY),
       referenceExecutionDescription: rel(DESCRIPTION),
-      baselineTrialInput: rel(DEFAULT_CANDIDATE)
+      baselineTrialInput: rel(DEFAULT_CANDIDATE),
+      phaseDurationExpressibilityProof: fs.existsSync(PHASE_DURATION_PROOF) ? rel(PHASE_DURATION_PROOF) : null
     },
     generatedCandidateDir: rel(candidateDir),
     generatedTrialReportDir: rel(trialDir),
@@ -859,7 +895,9 @@ function main(){
       requiresGuardrailPreservation: true,
       requiresLiveGatePathFamilyAlignment: true,
       requiresRuntimeExpressibilityMapping: true,
-      read: 'Source-ready now means a candidate can prove both semantic score intent and concrete runtime/source expressibility against live promotion gates.'
+      requiresRuntimeExpressibilityProof: true,
+      requiresCompiledRuntimeControlsForPhaseDuration: true,
+      read: 'Source-ready now means a candidate can prove both semantic score intent and concrete runtime/source expressibility against live promotion gates, including a proof artifact and compiled controls for phase-duration intent.'
     },
     candidateCount: compactRows.length,
     transformationClassesTested: (vocabulary.transformationClasses || []).map(row => row.classId),
@@ -878,7 +916,7 @@ function main(){
     },
     nextBestStep: runtimeSourceCandidate
       ? `Try exactly one runtime source candidate for ${runtimeSourceCandidate.candidateId}, rebuild, then run before/after evidence and strict challenge guardrails.`
-      : 'Refine the semantic compiler before touching runtime source: reconcile Stage 7 path-family truth across live gates, then map phase-duration/path-length/lower-field intent to explicit consumed runtime controls.'
+      : 'Refine the semantic compiler before touching runtime source: keep Stage 7 source-ready path families aligned with live gates, emit compiledRuntimeControls for phase-duration intent, and add runtime mappings for path-length/lower-field intent.'
   };
   writeJson(path.join(batchDir, 'report.json'), report);
   writeText(path.join(batchDir, 'README.md'), buildMarkdown(report));
