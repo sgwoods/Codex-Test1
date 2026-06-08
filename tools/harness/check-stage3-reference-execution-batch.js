@@ -4,6 +4,8 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const REPORT = path.join(ROOT, 'reference-artifacts', 'analyses', 'reference-execution-candidate-trials', 'stage3-challenge1', 'latest-batch.json');
+const REGRESSION = path.join(ROOT, 'reference-artifacts', 'analyses', 'reference-execution-candidate-trials', 'stage3-challenge1', 'latest-regression-baseline.json');
+const COMPARISON = path.join(ROOT, 'reference-artifacts', 'analyses', 'reference-execution-candidate-trials', 'stage3-challenge1', 'latest-batch-comparison.json');
 const EXPECTED_CLASSES = [
   'group1-object-track-path-fit',
   'group4-object-track-path-fit',
@@ -60,10 +62,15 @@ function main(){
     if(!Array.isArray(candidate.touchedGroups)) rowIssues.push(`${prefix}: missing touched groups`);
     if(!Array.isArray(candidate.protectedGroups)) rowIssues.push(`${prefix}: missing protected groups`);
     if(!Array.isArray(candidate.protectedRoles) || !candidate.protectedRoles.length) rowIssues.push(`${prefix}: missing protected roles`);
+    if(!candidate.expectedPlayerVisibleImprovement) rowIssues.push(`${prefix}: missing expected player-visible improvement`);
+    if(!candidate.expectedStrictMetricMovement || typeof candidate.expectedStrictMetricMovement !== 'object') rowIssues.push(`${prefix}: missing expected strict metric movement`);
     if(!candidate.authorityAssumptions || typeof candidate.authorityAssumptions !== 'object') rowIssues.push(`${prefix}: missing authority assumptions`);
     if(!candidate.expectedMetricDeltas || typeof candidate.expectedMetricDeltas !== 'object') rowIssues.push(`${prefix}: missing expected metric deltas`);
     if(!Array.isArray(candidate.hardGuardrails) || candidate.hardGuardrails.length < 5) rowIssues.push(`${prefix}: missing hard guardrails`);
     if(!Array.isArray(candidate.softOptimizationTargets) || !candidate.softOptimizationTargets.length) rowIssues.push(`${prefix}: missing soft optimization targets`);
+    if(!candidate.transferProofHypothesis || candidate.transferProofHypothesis.browserTransferProofRequired !== true) rowIssues.push(`${prefix}: missing browser transfer-proof hypothesis`);
+    if(candidate.transferProofHypothesis?.runtimeSourceCandidateAuthorized !== false) rowIssues.push(`${prefix}: transfer-proof hypothesis must not authorize runtime source`);
+    if(!Array.isArray(candidate.transferProofHypothesis?.hypothesizedRuntimeControls) || !candidate.transferProofHypothesis.hypothesizedRuntimeControls.length) rowIssues.push(`${prefix}: missing hypothesized runtime controls`);
     if(!Array.isArray(candidate.redProvenanceFieldsUsed) || !candidate.redProvenanceFieldsUsed.length) rowIssues.push(`${prefix}: missing RED provenance fields`);
     if(!candidate.candidateInput || !fs.existsSync(path.join(ROOT, candidate.candidateInput))) rowIssues.push(`${prefix}: missing generated candidate input file`);
     const scores = candidate.scores || {};
@@ -161,6 +168,18 @@ function main(){
     requireTruthy(candidates[0]?.candidateId === report.summary.trialPromisingCandidateId, 'Trial-promising candidate must be ranked first.', { bestCandidate: candidates[0], summary: report.summary });
     requireTruthy(candidates[0]?.yield?.candidateClassification === 'player-visible-semantic-lift', 'Ranked-first candidate must be a player-visible semantic lift.', { bestCandidate: candidates[0] });
     requireTruthy(report.scoringCalibrationNote?.predictiveEnoughForNextTrialBatch === true, 'Calibrated batch must explicitly allow one more small trial batch only.', { scoringCalibrationNote: report.scoringCalibrationNote });
+  }else if(recommendation === 'transfer-proof-ready'){
+    requireTruthy(!!report.summary.transferProofReadyCandidateId, 'Transfer-proof-ready recommendation must name a candidate.', { summary: report.summary });
+    requireTruthy(candidates[0]?.candidateId === report.summary.transferProofReadyCandidateId, 'Transfer-proof-ready candidate must be ranked first.', { bestCandidate: candidates[0], summary: report.summary });
+    requireTruthy(candidates[0]?.yield?.candidateClassification === 'player-visible-semantic-lift', 'Transfer-proof-ready candidate must be a player-visible semantic lift.', { bestCandidate: candidates[0] });
+    requireTruthy(report.summary.readyForRuntimeSourceCandidate === false && report.sourceReadyGate.runtimeSourceCandidateAuthorized === false, 'Transfer-proof-ready must not authorize runtime source.', { summary: report.summary, sourceReadyGate: report.sourceReadyGate });
+  }else if(recommendation === 'transfer-proof-tie-select-smallest'){
+    requireTruthy(!!report.summary.transferProofReadyCandidateId, 'Tie recommendation must select a future proof candidate.', { summary: report.summary });
+    const selected = candidates.find(candidate => candidate.candidateId === report.summary.transferProofReadyCandidateId);
+    requireTruthy(selected?.yield?.candidateClassification === 'player-visible-semantic-lift', 'Tie-selected candidate must be a player-visible semantic lift.', { selected });
+    requireTruthy(report.summary.readyForRuntimeSourceCandidate === false, 'Tie-selected transfer proof target must not authorize runtime source.', { summary: report.summary });
+  }else if(recommendation === 'metric-language-improvements-before-transfer-proof'){
+    requireTruthy(!report.summary.transferProofReadyCandidateId, 'Metric/language recommendation must not name a transfer-proof candidate.', { summary: report.summary });
   }else if(recommendation === 'metric-language-improvements-before-more-generation'){
     requireTruthy(!report.summary.trialPromisingCandidateId, 'Metric/language recommendation must not name a trial-promising candidate.', { summary: report.summary });
   }else{
@@ -173,14 +192,38 @@ function main(){
   });
   requireTruthy(candidates.every(candidate => candidate.runtimePromotion?.readyForRuntimeSourceCandidate === false), 'No generated candidate may be runtime-source-ready.', { candidates: candidates.map(candidate => candidate.candidateId) });
 
+  let comparisonRead = null;
+  if(fs.existsSync(COMPARISON)){
+    const comparison = readJson(COMPARISON);
+    requireTruthy(comparison.artifactType === 'stage3-reference-execution-batch-yield-comparison', 'Unexpected Stage 3 batch comparison artifact.', { artifactType: comparison.artifactType });
+    requireTruthy(comparison.calibrationVerdict?.geometryOnlyCandidatesRemainMetricOnly === true, 'Geometry-only candidates must remain metric-only in the old-vs-new comparison.', { calibrationVerdict: comparison.calibrationVerdict });
+    requireTruthy(comparison.calibrationVerdict?.runtimeSourceCandidateAuthorized === false, 'Comparison must not authorize runtime source.', { calibrationVerdict: comparison.calibrationVerdict });
+    requireTruthy(comparison.freshBatch?.generated >= 8 && comparison.freshBatch?.generated <= 12, 'Fresh comparison batch must contain roughly 8-12 candidates.', { freshBatch: comparison.freshBatch });
+    requireTruthy(comparison.regressionBaseline?.generated >= 8 && comparison.regressionBaseline?.generated <= 12, 'Regression baseline must contain roughly 8-12 candidates.', { regressionBaseline: comparison.regressionBaseline });
+    if(comparison.calibrationVerdict?.candidateLanguageStableEnoughForTransferProof === true){
+      requireTruthy(!!comparison.calibrationVerdict.selectedFutureTransferProofCandidateId, 'Stable comparison must select a future transfer-proof candidate.', { calibrationVerdict: comparison.calibrationVerdict });
+    }
+    comparisonRead = {
+      stableEnoughForTransferProof: comparison.calibrationVerdict?.candidateLanguageStableEnoughForTransferProof,
+      selectedFutureTransferProofCandidateId: comparison.calibrationVerdict?.selectedFutureTransferProofCandidateId || null
+    };
+  }
+  if(fs.existsSync(REGRESSION)){
+    const regression = readJson(REGRESSION);
+    requireTruthy(regression.artifactType === 'stage3-reference-execution-semantic-candidate-batch', 'Unexpected Stage 3 regression baseline artifact.', { artifactType: regression.artifactType });
+    requireTruthy(regression.candidateGenerationMode === 'regression-baseline-existing-candidates', 'Regression baseline must be marked as existing-candidate regression.', { candidateGenerationMode: regression.candidateGenerationMode });
+  }
+
   console.log(JSON.stringify({
     ok: true,
     report: rel(REPORT),
     candidateCount: candidates.length,
     recommendation,
     trialPromisingCandidateId: report.summary.trialPromisingCandidateId || null,
+    transferProofReadyCandidateId: report.summary.transferProofReadyCandidateId || null,
     bestCandidateId: candidates[0]?.candidateId || null,
     bestRankingScore: candidates[0]?.scores?.rankingScore ?? null,
+    comparison: comparisonRead,
     classYield: classYield.map(row => ({ classId: row.classId, generated: row.generated, trialPromising: row.trialPromising }))
   }, null, 2));
 }

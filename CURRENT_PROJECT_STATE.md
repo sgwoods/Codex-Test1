@@ -160,8 +160,21 @@ Latest Stage 7 calibration:
   `stage3-semantic-direct-lines-shape-peel-0.1` to rank `1` as a
   `player-visible-semantic-lift` (`3.5/10` object-track, `0.665` path shape,
   `0.375` path sanity, `1.0` focus peel), while keeping runtime source
-  promotion disabled. Recommendation: one more small Stage 3 semantic batch
-  using the calibrated ranker, not a runtime transfer or source edit.
+  promotion disabled.
+- The fresh out-of-sample Stage 3 semantic batch now supersedes the first batch
+  as `latest-batch` and keeps the prior `10` candidates as a regression
+  baseline:
+  `reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest-regression-baseline.json`.
+  Old-vs-new yield comparison is in
+  `reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest-batch-comparison.json`.
+  The fresh batch generated `10` new named candidates; all `10` were
+  semantically valid and guardrail-safe, geometry-only probes stayed
+  `metric-only-probe` / not trial-promising, and player-visible semantic lifts
+  rose from `3` to `7`. Because multiple candidates were close rather than one
+  clearly strongest, the gate selected the smallest future proof target:
+  `stage3-semantic-fresh-g4-score-window-shape-peel-0.1`. Recommendation:
+  later non-overwriting browser transfer proof for that candidate only; no
+  runtime source edit or source candidate is authorized.
 
 ## Historical Or Stale Current-State Docs
 

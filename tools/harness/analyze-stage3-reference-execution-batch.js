@@ -19,6 +19,10 @@ const BATCH_LATEST = path.join(OUT_ROOT, 'latest-batch.json');
 const BATCH_MARKDOWN = path.join(OUT_ROOT, 'latest-batch.md');
 const CALIBRATION_LATEST = path.join(OUT_ROOT, 'latest-ranking-calibration.json');
 const CALIBRATION_MARKDOWN = path.join(OUT_ROOT, 'latest-ranking-calibration.md');
+const REGRESSION_LATEST = path.join(OUT_ROOT, 'latest-regression-baseline.json');
+const REGRESSION_MARKDOWN = path.join(OUT_ROOT, 'latest-regression-baseline.md');
+const COMPARISON_LATEST = path.join(OUT_ROOT, 'latest-batch-comparison.json');
+const COMPARISON_MARKDOWN = path.join(OUT_ROOT, 'latest-batch-comparison.md');
 const FOCUS_GROUPS = [1, 4];
 const HARD_GUARDRAILS = [
   'preserve semantic line roles',
@@ -202,7 +206,33 @@ function makeGroupControl({ groupIndex, descriptionByIndex, baselineByIndex, tra
   };
 }
 
-function buildCandidate({ candidateId, semanticTransformId, semanticTransformations, meaning, touchedGroups, protectedGroups, protectedRoles, groupControls, description, baselineCandidate, expectedMetricDeltas, softOptimizationTargets }){
+function defaultTransferProofHypothesis(semanticTransformations){
+  const controls = [];
+  if(semanticTransformations.some(classId => classId.includes('object-track') || classId.includes('path-fit'))){
+    controls.push('referencePath.playbackScale');
+    controls.push('referencePath.pathLengthScale');
+    controls.push('motionSpecGroup.spawnOffsetS');
+    controls.push('routeCurveX');
+    controls.push('routeCurveY');
+  }
+  if(semanticTransformations.some(classId => classId.includes('peel-off'))){
+    controls.push('routeOffsetX');
+    controls.push('routeCurveX');
+    controls.push('routeCurveY');
+    controls.push('path endpoint / exit-side control');
+  }
+  if(semanticTransformations.includes('preserve-upper-band-scoreability')){
+    controls.push('scoreable-window timing read');
+  }
+  return {
+    browserTransferProofRequired: true,
+    runtimeSourceCandidateAuthorized: false,
+    hypothesizedRuntimeControls: Array.from(new Set(controls)),
+    read: 'Hypothesized controls must be proven in a later non-overwriting browser transfer proof before any runtime source edit.'
+  };
+}
+
+function buildCandidate({ candidateId, semanticTransformId, semanticTransformations, meaning, touchedGroups, protectedGroups, protectedRoles, groupControls, description, baselineCandidate, expectedMetricDeltas, expectedPlayerVisibleImprovement, expectedStrictMetricMovement, softOptimizationTargets, transferProofHypothesis }){
   const template = baseCandidateTemplate(description, baselineCandidate);
   const groups = [];
   for(const control of groupControls){
@@ -222,6 +252,8 @@ function buildCandidate({ candidateId, semanticTransformId, semanticTransformati
     touchedGroups,
     protectedGroups,
     protectedRoles,
+    expectedPlayerVisibleImprovement: expectedPlayerVisibleImprovement || meaning,
+    expectedStrictMetricMovement: expectedStrictMetricMovement || expectedMetricDeltas,
     authorityAssumptions: {
       pathFamilyAuthority: 'preserve current RED canonical path-family order for non-overwriting comparison',
       runtimePromotionAuthority: 'not-authorized',
@@ -231,6 +263,7 @@ function buildCandidate({ candidateId, semanticTransformId, semanticTransformati
     expectedMetricDeltas,
     hardGuardrails: HARD_GUARDRAILS,
     softOptimizationTargets,
+    transferProofHypothesis: transferProofHypothesis || defaultTransferProofHypothesis(semanticTransformations),
     redProvenanceFieldsUsed: Array.from(new Set(semanticTransformations.flatMap(classId => [
       ...(classId.includes('path-fit') ? ['aggregateObjectTrackTarget', 'candidateComparisonGate.targetVector'] : []),
       ...(classId.includes('peel-off') ? ['semanticExecution.exitGesture', 'uncertaintyAndProvenance'] : []),
@@ -372,6 +405,194 @@ function buildCandidates({ description, vocabulary, baselineReport, baselineCand
       groupControls: [controls.g1Path(0.92), controls.g4Path(0.92)],
       expectedMetricDeltas: { group1ObjectTrack: 'strong positive', group4ObjectTrack: 'strong positive', peelOffReadability: 'preserve baseline' },
       softOptimizationTargets: ['calibrate object-track/path-length sensitivity', 'detect whether the metric can be gamed by geometry without peel-off improvement']
+    }
+  ];
+  const knownClasses = new Set((vocabulary.transformationClasses || []).map(row => row.classId));
+  return rows.map(row => {
+    const unknown = row.semanticTransformations.filter(classId => !knownClasses.has(classId));
+    return buildCandidate(Object.assign({}, row, {
+      description,
+      baselineCandidate,
+      semanticTransformations: row.semanticTransformations,
+      vocabularyWarnings: unknown.map(classId => `class ${classId} is not declared in the Stage 3 vocabulary`)
+    }));
+  });
+}
+
+function buildFreshCandidates({ description, vocabulary, baselineReport, baselineCandidate }){
+  const descriptionByIndex = byGroup(description.groups || []);
+  const baselineByIndex = byGroup(baselineReport.trial.groupResults || []);
+  const controls = {
+    g1Path: strength => makeGroupControl({ groupIndex: 1, descriptionByIndex, baselineByIndex, transformations: ['group1-object-track-path-fit'], pathStrength: strength }),
+    g4Path: strength => makeGroupControl({ groupIndex: 4, descriptionByIndex, baselineByIndex, transformations: ['group4-object-track-path-fit'], pathStrength: strength }),
+    g1Peel: () => makeGroupControl({ groupIndex: 1, descriptionByIndex, baselineByIndex, transformations: ['group1-peel-off-readability'], peel: true }),
+    g4Peel: () => makeGroupControl({ groupIndex: 4, descriptionByIndex, baselineByIndex, transformations: ['group4-peel-off-readability'], peel: true })
+  };
+  const commonProtect = ['preserve-upper-band-scoreability', 'protect-semantic-line-roles', 'protect-no-combat-scoreable-routes'];
+  const proofHypothesis = (groups, controlsRead) => ({
+    browserTransferProofRequired: true,
+    runtimeSourceCandidateAuthorized: false,
+    intendedProofGroups: groups,
+    hypothesizedRuntimeControls: controlsRead,
+    requiredEvidence: [
+      'browser-visible path/peel movement',
+      'motion-profile compatibility',
+      'spacing/readability preservation',
+      'scoreable-route preservation',
+      'no-shot/no-attack/no-loss safety'
+    ],
+    read: 'This is transfer-proof-ready only if the later browser proof shows these controls are consumed and visible without guardrail regression.'
+  });
+  const rows = [
+    {
+      candidateId: 'stage3-semantic-fresh-direct-lines-balanced-shape-peel-0.1',
+      semanticTransformId: 'fresh-direct-lines-balanced-shape-peel',
+      semanticTransformations: ['group1-object-track-path-fit', 'group4-object-track-path-fit', 'group1-peel-off-readability', 'group4-peel-off-readability', ...commonProtect],
+      meaning: 'Balance direct-line object-track/path-shape improvement with explicit left/right peel readability for the two reference-labeled teaching lines.',
+      touchedGroups: [1, 4],
+      protectedGroups: [2, 3, 5],
+      protectedRoles: ['inferred columns', 'mixed closing peel', 'upper-band score windows', 'no-combat grammar'],
+      groupControls: [mergeGroupControl(controls.g1Path(0.78), controls.g1Peel()), mergeGroupControl(controls.g4Path(0.78), controls.g4Peel())],
+      expectedPlayerVisibleImprovement: 'Both direct lines should read as shorter, cleaner upper-band phrases with the RED left/right peel-off exits intact.',
+      expectedStrictMetricMovement: { group1ObjectTrack: 'positive', group4ObjectTrack: 'positive', pathShape: 'positive', pathLengthSanity: 'positive', peelReadability: 'positive' },
+      expectedMetricDeltas: { directLineObjectTrack: 'positive', directLinePathShape: 'positive', directLinePeelOffReadability: 'positive' },
+      softOptimizationTargets: ['raise both direct-line object-track fits', 'preserve upper-band score windows', 'avoid geometry-only ranking'],
+      transferProofHypothesis: proofHypothesis([1, 4], ['referencePath.playbackScale', 'referencePath.pathLengthScale', 'motionSpecGroup.spawnOffsetS', 'routeCurveX', 'routeCurveY', 'path endpoint / exit-side control'])
+    },
+    {
+      candidateId: 'stage3-semantic-fresh-direct-lines-conservative-shape-peel-0.1',
+      semanticTransformId: 'fresh-direct-lines-conservative-shape-peel',
+      semanticTransformations: ['group1-object-track-path-fit', 'group4-object-track-path-fit', 'group1-peel-off-readability', 'group4-peel-off-readability', ...commonProtect],
+      meaning: 'Use a conservative direct-line path blend with full peel semantics to test whether readability can lead without overfitting object-track geometry.',
+      touchedGroups: [1, 4],
+      protectedGroups: [2, 3, 5],
+      protectedRoles: ['inferred columns', 'mixed closing peel', 'scoreable routes', 'no-combat grammar'],
+      groupControls: [mergeGroupControl(controls.g1Path(0.58), controls.g1Peel()), mergeGroupControl(controls.g4Path(0.58), controls.g4Peel())],
+      expectedPlayerVisibleImprovement: 'Direct-line exit gestures should become readable while shape/timing moves only moderately toward RED.',
+      expectedStrictMetricMovement: { objectTrack: 'moderate positive', pathShape: 'moderate positive', peelReadability: 'positive' },
+      expectedMetricDeltas: { directLineObjectTrack: 'moderate positive', directLinePeelOffReadability: 'positive' },
+      softOptimizationTargets: ['prefer readable peel over aggressive geometry', 'keep field-occupancy tension visible'],
+      transferProofHypothesis: proofHypothesis([1, 4], ['referencePath.playbackScale', 'routeCurveX', 'routeCurveY', 'path endpoint / exit-side control'])
+    },
+    {
+      candidateId: 'stage3-semantic-fresh-g1-recovery-g4-peel-protect-0.1',
+      semanticTransformId: 'fresh-g1-recovery-g4-peel-protect',
+      semanticTransformations: ['group1-object-track-path-fit', 'group1-peel-off-readability', 'group4-peel-off-readability', ...commonProtect],
+      meaning: 'Prioritize the weak group 1 bee-line path recovery while preserving group 4 as a readable right peel rather than re-shaping both lines.',
+      touchedGroups: [1, 4],
+      protectedGroups: [2, 3, 5],
+      protectedRoles: ['late butterfly line role', 'inferred columns', 'mixed closing peel', 'no-combat grammar'],
+      groupControls: [mergeGroupControl(controls.g1Path(0.88), controls.g1Peel()), controls.g4Peel()],
+      expectedPlayerVisibleImprovement: 'The top-right bee line should become shorter and left-peeling while group 4 keeps its right-peel read.',
+      expectedStrictMetricMovement: { group1ObjectTrack: 'strong positive', group4ObjectTrack: 'preserve', peelReadability: 'positive' },
+      expectedMetricDeltas: { group1ObjectTrack: 'strong positive', group1PathLengthRatio: 'toward RED target', group4PeelOffReadability: 'positive' },
+      softOptimizationTargets: ['recover the weakest direct-line path', 'avoid changing both direct-line geometries at once'],
+      transferProofHypothesis: proofHypothesis([1], ['referencePath.playbackScale', 'referencePath.pathLengthScale', 'motionSpecGroup.spawnOffsetS', 'routeCurveX', 'path endpoint / exit-side control'])
+    },
+    {
+      candidateId: 'stage3-semantic-fresh-g4-anchor-g1-peel-protect-0.1',
+      semanticTransformId: 'fresh-g4-anchor-g1-peel-protect',
+      semanticTransformations: ['group4-object-track-path-fit', 'group4-peel-off-readability', 'group1-peel-off-readability', ...commonProtect],
+      meaning: 'Anchor the late top-left butterfly line to the RED shape while only correcting the group 1 peel read.',
+      touchedGroups: [1, 4],
+      protectedGroups: [2, 3, 5],
+      protectedRoles: ['top-right bee line role', 'inferred columns', 'mixed closing peel', 'no-combat grammar'],
+      groupControls: [controls.g1Peel(), mergeGroupControl(controls.g4Path(0.88), controls.g4Peel())],
+      expectedPlayerVisibleImprovement: 'The late butterfly line should become the cleaner direct-line anchor while group 1 gains the correct left peel.',
+      expectedStrictMetricMovement: { group4ObjectTrack: 'strong positive', group1ObjectTrack: 'preserve', peelReadability: 'positive' },
+      expectedMetricDeltas: { group4ObjectTrack: 'strong positive', group4PathLengthRatio: 'toward RED target', group1PeelOffReadability: 'positive' },
+      softOptimizationTargets: ['test whether group 4 can be the least-authority-conflicted proof target', 'preserve group 1 geometry'],
+      transferProofHypothesis: proofHypothesis([4], ['referencePath.playbackScale', 'referencePath.pathLengthScale', 'motionSpecGroup.spawnOffsetS', 'routeCurveY', 'path endpoint / exit-side control'])
+    },
+    {
+      candidateId: 'stage3-semantic-fresh-g4-score-window-shape-peel-0.1',
+      semanticTransformId: 'fresh-g4-score-window-shape-peel',
+      semanticTransformations: ['group4-object-track-path-fit', 'group4-peel-off-readability', ...commonProtect],
+      meaning: 'Make group 4 the smallest direct-line shape+peel proof target while protecting all other Stage 3 teaching roles.',
+      touchedGroups: [4],
+      protectedGroups: [1, 2, 3, 5],
+      protectedRoles: ['top-right bee line', 'inferred columns', 'mixed closing peel', 'upper-band score windows', 'no-combat grammar'],
+      groupControls: [mergeGroupControl(controls.g4Path(0.76), controls.g4Peel())],
+      expectedPlayerVisibleImprovement: 'The late butterfly line should gain a clearer right peel and tighter path shape without changing the opener.',
+      expectedStrictMetricMovement: { group4ObjectTrack: 'positive', group4PathShape: 'positive', group1: 'preserve' },
+      expectedMetricDeltas: { group4ObjectTrack: 'positive', group4PeelOffReadability: 'positive', directLineAuthorityConflict: 'preserve' },
+      softOptimizationTargets: ['smallest single-line player-visible candidate', 'avoid touching group 1 geometry'],
+      transferProofHypothesis: proofHypothesis([4], ['referencePath.playbackScale', 'routeCurveY', 'path endpoint / exit-side control'])
+    },
+    {
+      candidateId: 'stage3-semantic-fresh-g1-score-window-shape-peel-0.1',
+      semanticTransformId: 'fresh-g1-score-window-shape-peel',
+      semanticTransformations: ['group1-object-track-path-fit', 'group1-peel-off-readability', ...commonProtect],
+      meaning: 'Make group 1 the smallest direct-line shape+peel proof target while protecting the late butterfly line.',
+      touchedGroups: [1],
+      protectedGroups: [2, 3, 4, 5],
+      protectedRoles: ['late top-left butterfly line', 'inferred columns', 'mixed closing peel', 'upper-band score windows', 'no-combat grammar'],
+      groupControls: [mergeGroupControl(controls.g1Path(0.76), controls.g1Peel())],
+      expectedPlayerVisibleImprovement: 'The opener should become a clearer left peel with a shorter, more target-like direct-line path.',
+      expectedStrictMetricMovement: { group1ObjectTrack: 'positive', group1PathShape: 'positive', group4: 'preserve' },
+      expectedMetricDeltas: { group1ObjectTrack: 'positive', group1PeelOffReadability: 'positive', directLineAuthorityConflict: 'preserve' },
+      softOptimizationTargets: ['smallest opener-focused player-visible candidate', 'avoid touching group 4 geometry'],
+      transferProofHypothesis: proofHypothesis([1], ['referencePath.playbackScale', 'routeCurveX', 'path endpoint / exit-side control'])
+    },
+    {
+      candidateId: 'stage3-semantic-fresh-direct-lines-path-only-sensitivity-0.1',
+      semanticTransformId: 'fresh-direct-lines-path-only-sensitivity',
+      semanticTransformations: ['group1-object-track-path-fit', 'group4-object-track-path-fit', ...commonProtect],
+      meaning: 'Deliberately move direct-line object-track/path metrics without peel correction to confirm the calibrated ranker treats it as metric-only.',
+      touchedGroups: [1, 4],
+      protectedGroups: [2, 3, 5],
+      protectedRoles: ['peel-off semantics', 'inferred columns', 'mixed closing peel', 'no-combat grammar'],
+      groupControls: [controls.g1Path(0.84), controls.g4Path(0.84)],
+      expectedPlayerVisibleImprovement: 'No player-visible peel improvement is expected; this is a calibration control.',
+      expectedStrictMetricMovement: { objectTrack: 'positive', pathShape: 'positive', peelReadability: 'preserve baseline' },
+      expectedMetricDeltas: { directLineObjectTrack: 'positive', directLinePathShape: 'positive', peelOffReadability: 'baseline' },
+      softOptimizationTargets: ['verify geometry-only lift remains metric-only', 'keep calibrated hard rule active'],
+      transferProofHypothesis: proofHypothesis([1, 4], ['referencePath.playbackScale', 'referencePath.pathLengthScale'])
+    },
+    {
+      candidateId: 'stage3-semantic-fresh-direct-lines-peel-only-sensitivity-0.1',
+      semanticTransformId: 'fresh-direct-lines-peel-only-sensitivity',
+      semanticTransformations: ['group1-peel-off-readability', 'group4-peel-off-readability', ...commonProtect],
+      meaning: 'Deliberately improve direct-line peel semantics without path movement to confirm semantic-only lift is not enough.',
+      touchedGroups: [1, 4],
+      protectedGroups: [2, 3, 5],
+      protectedRoles: ['object-track/path-shape fit', 'inferred columns', 'mixed closing peel', 'no-combat grammar'],
+      groupControls: [controls.g1Peel(), controls.g4Peel()],
+      expectedPlayerVisibleImprovement: 'Peel direction should read correctly, but path/object-track weakness should remain visible.',
+      expectedStrictMetricMovement: { objectTrack: 'neutral', pathShape: 'neutral', peelReadability: 'positive' },
+      expectedMetricDeltas: { directLinePeelOffReadability: 'positive', strictObjectTrack: 'neutral' },
+      softOptimizationTargets: ['verify semantic-only lift is blocked from proof-ready status', 'keep object-track weakness visible'],
+      transferProofHypothesis: proofHypothesis([1, 4], ['path endpoint / exit-side control'])
+    },
+    {
+      candidateId: 'stage3-semantic-fresh-g1-path-only-sensitivity-0.1',
+      semanticTransformId: 'fresh-g1-path-only-sensitivity',
+      semanticTransformations: ['group1-object-track-path-fit', ...commonProtect],
+      meaning: 'Move only group 1 path/object metrics without correcting its peel read to test metric-only classification on the weakest line.',
+      touchedGroups: [1],
+      protectedGroups: [2, 3, 4, 5],
+      protectedRoles: ['late butterfly line', 'peel-off semantics', 'mixed closing peel', 'no-combat grammar'],
+      groupControls: [controls.g1Path(0.9)],
+      expectedPlayerVisibleImprovement: 'No complete player-visible lift is expected because the opener still lacks peel correction.',
+      expectedStrictMetricMovement: { group1ObjectTrack: 'strong positive', group1PathShape: 'positive', peelReadability: 'preserve baseline' },
+      expectedMetricDeltas: { group1ObjectTrack: 'strong positive', group1PathLengthRatio: 'toward RED target' },
+      softOptimizationTargets: ['verify single-line geometry-only lift remains blocked', 'protect group 4'],
+      transferProofHypothesis: proofHypothesis([1], ['referencePath.playbackScale', 'referencePath.pathLengthScale'])
+    },
+    {
+      candidateId: 'stage3-semantic-fresh-staggered-direct-lines-shape-peel-0.1',
+      semanticTransformId: 'fresh-staggered-direct-lines-shape-peel',
+      semanticTransformations: ['group1-object-track-path-fit', 'group4-object-track-path-fit', 'group1-peel-off-readability', 'group4-peel-off-readability', ...commonProtect],
+      meaning: 'Use asymmetric direct-line shaping: lighter group 1 compression and stronger group 4 anchoring, both with peel reads corrected.',
+      touchedGroups: [1, 4],
+      protectedGroups: [2, 3, 5],
+      protectedRoles: ['inferred columns', 'mixed closing peel', 'scoreable routes', 'no-combat grammar'],
+      groupControls: [mergeGroupControl(controls.g1Path(0.68), controls.g1Peel()), mergeGroupControl(controls.g4Path(0.82), controls.g4Peel())],
+      expectedPlayerVisibleImprovement: 'The candidate should keep the opener readable while leaning on group 4 as the stronger proof anchor.',
+      expectedStrictMetricMovement: { group1ObjectTrack: 'positive', group4ObjectTrack: 'positive', peelReadability: 'positive', authorityConflict: 'preserve' },
+      expectedMetricDeltas: { directLineObjectTrack: 'positive', directLinePeelOffReadability: 'positive', group4PathShape: 'positive' },
+      softOptimizationTargets: ['test least-authority-conflicted asymmetric proof path', 'avoid pure geometry win'],
+      transferProofHypothesis: proofHypothesis([1, 4], ['referencePath.playbackScale', 'motionSpecGroup.spawnOffsetS', 'routeCurveX', 'routeCurveY', 'path endpoint / exit-side control'])
     }
   ];
   const knownClasses = new Set((vocabulary.transformationClasses || []).map(row => row.classId));
@@ -542,10 +763,13 @@ function compactCandidate({ candidate, trialReport, baselineReport, candidatePat
     touchedGroups: candidate.touchedGroups,
     protectedGroups: candidate.protectedGroups,
     protectedRoles: candidate.protectedRoles,
+    expectedPlayerVisibleImprovement: candidate.expectedPlayerVisibleImprovement || candidate.intent?.playerFacingMeaning || candidate.intent?.read || null,
+    expectedStrictMetricMovement: candidate.expectedStrictMetricMovement || candidate.expectedMetricDeltas || {},
     authorityAssumptions: candidate.authorityAssumptions,
     expectedMetricDeltas: candidate.expectedMetricDeltas,
     hardGuardrails: candidate.hardGuardrails,
     softOptimizationTargets: candidate.softOptimizationTargets,
+    transferProofHypothesis: candidate.transferProofHypothesis || defaultTransferProofHypothesis(candidate.semanticTransformations || []),
     redProvenanceFieldsUsed: candidate.redProvenanceFieldsUsed,
     candidateInput: rel(candidatePath),
     scores: {
@@ -765,6 +989,115 @@ function calibrationNote(candidateRows, baselineReport){
   };
 }
 
+function chooseLeastAuthorityProofCandidate(promisingRows){
+  return promisingRows.slice().sort((a, b) => {
+    const touchedDelta = (a.touchedGroups?.length || 99) - (b.touchedGroups?.length || 99);
+    if(touchedDelta) return touchedDelta;
+    const authorityDelta = (a.scores.authorityConflictCount || 0) - (b.scores.authorityConflictCount || 0);
+    if(authorityDelta) return authorityDelta;
+    const tensionDelta = (a.scores.humanVisibleVsCpuFieldOccupancyTensionCount || 0) - (b.scores.humanVisibleVsCpuFieldOccupancyTensionCount || 0);
+    if(tensionDelta) return tensionDelta;
+    return b.scores.rankingScore - a.scores.rankingScore || a.candidateId.localeCompare(b.candidateId);
+  })[0] || null;
+}
+
+function yieldSummary(report){
+  const candidates = report.candidates || [];
+  return {
+    generated: candidates.length,
+    semanticallyValid: candidates.filter(row => row.yield.valid).length,
+    guardrailSafe: candidates.filter(row => row.yield.guardrailSafe).length,
+    geometryOnlyProbes: candidates.filter(row => row.yield.candidateClassification === 'metric-only-probe').length,
+    playerVisibleSemanticLifts: candidates.filter(row => row.yield.candidateClassification === 'player-visible-semantic-lift').length,
+    proofReadyCandidates: candidates.filter(row => row.yield.trialPromising).length,
+    blockedCandidates: candidates.filter(row => !row.yield.trialPromising).length,
+    metricOnlyTrialPromising: candidates.filter(row => row.yield.candidateClassification === 'metric-only-probe' && row.yield.trialPromising).length,
+    bestCandidateId: candidates[0]?.candidateId || null,
+    bestCandidateClass: candidates[0]?.yield?.candidateClassification || null,
+    selectedTransferProofCandidateId: report.summary?.transferProofReadyCandidateId || report.summary?.trialPromisingCandidateId || null,
+    recommendation: report.summary?.recommendation || null
+  };
+}
+
+function compareYields({ generatedAt, commit, branch, regressionReport, freshReport }){
+  const regression = yieldSummary(regressionReport);
+  const fresh = yieldSummary(freshReport);
+  const geometryRulePass = fresh.metricOnlyTrialPromising === 0
+    && (freshReport.candidates || []).filter(row => row.yield.geometryOnlyLift).every(row => row.yield.candidateClassification === 'metric-only-probe' && !row.yield.trialPromising);
+  const stableForTransferProof = geometryRulePass
+    && fresh.proofReadyCandidates > 0
+    && ['transfer-proof-ready', 'transfer-proof-tie-select-smallest'].includes(fresh.recommendation);
+  return {
+    schemaVersion: 1,
+    artifactType: 'stage3-reference-execution-batch-yield-comparison',
+    generatedAt,
+    generatedBy: 'tools/harness/analyze-stage3-reference-execution-batch.js',
+    commit,
+    branch,
+    releaseFamily: '1.4.1',
+    scope: {
+      stage: 3,
+      challengeNumber: 1,
+      displayLabel: 'Stage 3 / Challenge 1'
+    },
+    sourceReports: {
+      regressionBaseline: rel(REGRESSION_LATEST),
+      freshBatch: rel(BATCH_LATEST)
+    },
+    regressionBaseline: regression,
+    freshBatch: fresh,
+    deltas: {
+      generated: fresh.generated - regression.generated,
+      semanticallyValid: fresh.semanticallyValid - regression.semanticallyValid,
+      guardrailSafe: fresh.guardrailSafe - regression.guardrailSafe,
+      geometryOnlyProbes: fresh.geometryOnlyProbes - regression.geometryOnlyProbes,
+      playerVisibleSemanticLifts: fresh.playerVisibleSemanticLifts - regression.playerVisibleSemanticLifts,
+      proofReadyCandidates: fresh.proofReadyCandidates - regression.proofReadyCandidates,
+      blockedCandidates: fresh.blockedCandidates - regression.blockedCandidates
+    },
+    calibrationVerdict: {
+      geometryOnlyCandidatesRemainMetricOnly: geometryRulePass,
+      candidateLanguageStableEnoughForTransferProof: stableForTransferProof,
+      selectedFutureTransferProofCandidateId: fresh.selectedTransferProofCandidateId,
+      runtimeSourceCandidateAuthorized: false,
+      read: stableForTransferProof
+        ? `Fresh out-of-sample candidates preserved the calibrated ranking rule. ${fresh.selectedTransferProofCandidateId} is recommended for a later non-overwriting browser transfer proof only.`
+        : 'Fresh out-of-sample candidates did not provide a stable transfer-proof target; refine language/ranking before proof work.'
+    }
+  };
+}
+
+function buildComparisonMarkdown(report){
+  const lines = [];
+  lines.push('# Stage 3 Old-vs-New Semantic Batch Yield Comparison');
+  lines.push('');
+  lines.push(`Generated: ${report.generatedAt}`);
+  lines.push(`Commit: ${report.commit}`);
+  lines.push('');
+  lines.push('## Verdict');
+  lines.push('');
+  lines.push(report.calibrationVerdict.read);
+  lines.push('');
+  lines.push(`Selected future transfer-proof candidate: ${report.calibrationVerdict.selectedFutureTransferProofCandidateId || 'none'}`);
+  lines.push('');
+  lines.push(`Runtime source authorized: ${report.calibrationVerdict.runtimeSourceCandidateAuthorized}`);
+  lines.push('');
+  lines.push('## Yield');
+  lines.push('');
+  lines.push('| Metric | Prior calibrated 10 | Fresh batch | Delta |');
+  lines.push('| --- | ---: | ---: | ---: |');
+  for(const key of ['generated', 'semanticallyValid', 'guardrailSafe', 'geometryOnlyProbes', 'playerVisibleSemanticLifts', 'proofReadyCandidates', 'blockedCandidates']){
+    lines.push(`| ${key} | ${report.regressionBaseline[key]} | ${report.freshBatch[key]} | ${report.deltas[key]} |`);
+  }
+  lines.push('');
+  lines.push('## Calibration Rule');
+  lines.push('');
+  lines.push(`Geometry-only candidates remain metric-only: ${report.calibrationVerdict.geometryOnlyCandidatesRemainMetricOnly}`);
+  lines.push('');
+  lines.push(`Candidate language stable enough for transfer proof: ${report.calibrationVerdict.candidateLanguageStableEnoughForTransferProof}`);
+  return lines.join('\n');
+}
+
 function buildMarkdown(report){
   const lines = [];
   lines.push('# Stage 3 Semantic Candidate Batch');
@@ -778,6 +1111,10 @@ function buildMarkdown(report){
   lines.push(`Recommendation: ${report.summary.recommendation}`);
   lines.push('');
   lines.push(`Trial-promising candidate: ${report.summary.trialPromisingCandidateId || 'none'}`);
+  if(report.summary.transferProofReadyCandidateId){
+    lines.push('');
+    lines.push(`Transfer-proof-ready candidate: ${report.summary.transferProofReadyCandidateId}`);
+  }
   lines.push('');
   lines.push(`Runtime keeper: ${report.summary.runtimeKeeperRecommendation}`);
   lines.push('');
@@ -845,10 +1182,26 @@ function buildBatchReport({ generatedAt, calibratedAt = null, commit, branch, ca
     && rows[0].yield.multiAxisImproved
     && rows[0].yield.candidateClassification === 'player-visible-semantic-lift'
     && (!nextPromising || rows[0].scores.rankingScore - nextPromising.scores.rankingScore >= 0.03);
+  const freshMode = mode === 'fresh-calibrated-candidates';
   const calibration = calibrationNote(rows, baselineReport);
-  const recommendation = clearBest
-    ? 'ready-for-one-more-small-stage3-semantic-batch'
-    : 'metric-language-improvements-before-more-generation';
+  const tieProofCandidate = !clearBest && freshMode && promising.length > 0 ? chooseLeastAuthorityProofCandidate(promising) : null;
+  const transferProofReadyCandidate = freshMode
+    ? (clearBest ? rows[0] : tieProofCandidate)
+    : null;
+  if(freshMode){
+    calibration.predictiveEnoughForNextTrialBatch = false;
+    calibration.predictiveEnoughForTransferProofSelection = !!transferProofReadyCandidate;
+    calibration.read = transferProofReadyCandidate
+      ? 'The fresh out-of-sample batch preserved the calibrated ranking rule: geometry-only probes stayed metric-only, player-visible multi-axis candidates ranked above them, and the language is stable enough to choose one later browser transfer-proof target.'
+      : 'The fresh out-of-sample batch did not yield a stable later browser transfer-proof target; refine candidate language before proof work.';
+  }
+  const recommendation = freshMode
+    ? (clearBest
+      ? 'transfer-proof-ready'
+      : (tieProofCandidate ? 'transfer-proof-tie-select-smallest' : 'metric-language-improvements-before-transfer-proof'))
+    : (clearBest
+      ? 'ready-for-one-more-small-stage3-semantic-batch'
+      : 'metric-language-improvements-before-more-generation');
   return {
     schemaVersion: 1,
     artifactType: 'stage3-reference-execution-semantic-candidate-batch',
@@ -909,17 +1262,27 @@ function buildBatchReport({ generatedAt, calibratedAt = null, commit, branch, ca
       runtimeKeeperRecommendation: 'not-a-runtime-keeper',
       recommendation,
       trialPromisingCandidateId: clearBest ? rows[0].candidateId : null,
+      transferProofReadyCandidateId: transferProofReadyCandidate?.candidateId || null,
       readyForRuntimeSourceCandidate: false,
       sourceCandidateGenerationAllowed: false,
       trialPromisingCandidateCount: promising.length,
-      readyForNextSmallBatch: clearBest,
-      read: clearBest
-        ? `${rows[0].candidateId} is trial-promising only as a calibration exemplar. Generate one more small Stage 3 semantic batch with this calibrated ranker before any transfer-proof or runtime-source work.`
-        : 'The batch did not produce one clearly superior trial-promising candidate; refine metrics or semantic language before generating more variants.'
+      readyForNextSmallBatch: !freshMode && clearBest,
+      readyForFutureTransferProof: freshMode && !!transferProofReadyCandidate,
+      read: freshMode
+        ? (transferProofReadyCandidate
+          ? `${transferProofReadyCandidate.candidateId} is recommended for a later non-overwriting browser transfer proof only. Runtime source remains unauthorized.`
+          : 'The fresh batch did not produce a stable transfer-proof target; refine metrics or semantic language before proof work.')
+        : (clearBest
+          ? `${rows[0].candidateId} is trial-promising only as a calibration exemplar. Generate one more small Stage 3 semantic batch with this calibrated ranker before any transfer-proof or runtime-source work.`
+          : 'The batch did not produce one clearly superior trial-promising candidate; refine metrics or semantic language before generating more variants.')
     },
-    nextBestStep: clearBest
-      ? 'Generate one more small Stage 3 semantic batch using the calibrated player-visible multi-axis ranking model; do not edit runtime source.'
-      : 'Refine Stage 3 RED/trial metrics so object-track, path-length shape, and peel-off readability cannot be gamed independently before generating another batch.'
+    nextBestStep: freshMode
+      ? (transferProofReadyCandidate
+        ? `Run a later non-overwriting browser transfer proof for ${transferProofReadyCandidate.candidateId}; do not edit runtime source until browser-visible control consumption is proven.`
+        : 'Refine Stage 3 candidate language/ranker before any transfer proof.')
+      : (clearBest
+        ? 'Generate one more small Stage 3 semantic batch using the calibrated player-visible multi-axis ranking model; do not edit runtime source.'
+        : 'Refine Stage 3 RED/trial metrics so object-track, path-length shape, and peel-off readability cannot be gamed independently before generating another batch.')
   };
 }
 
@@ -971,6 +1334,83 @@ function main(){
       bestCandidateId: report.candidates[0]?.candidateId || null,
       bestRankingScore: report.candidates[0]?.scores.rankingScore ?? null,
       candidateGenerationMode: report.candidateGenerationMode
+    }, null, 2));
+    return;
+  }
+
+  if(argFlag('fresh-calibrated-candidates')){
+    const regressionSource = committedLatestBatchReport() || readJson(BATCH_LATEST);
+    const regressionDir = path.join(OUT_ROOT, 'regression-baselines', `${generatedAt.replace(/[:.]/g, '-').slice(0, 19)}-${commit}`);
+    const freshBatchDir = path.join(OUT_ROOT, 'semantic-batches', `${generatedAt.replace(/[:.]/g, '-').slice(0, 19)}-${commit}-fresh`);
+    const freshCandidateDir = path.join(freshBatchDir, 'candidates');
+    ensureDir(freshCandidateDir);
+
+    const regressionRows = [];
+    for(const previous of regressionSource.candidates || []){
+      const candidatePath = path.join(ROOT, previous.candidateInput || '');
+      const candidate = readJson(candidatePath);
+      const trialReport = buildReport(candidatePath);
+      regressionRows.push(compactCandidate({ candidate, trialReport, baselineReport, candidatePath, description }));
+    }
+    const regressionReport = buildBatchReport({
+      generatedAt: regressionSource.generatedAt || generatedAt,
+      calibratedAt: generatedAt,
+      commit,
+      branch,
+      candidateDir: path.join(ROOT, regressionSource.generatedCandidateDir || ''),
+      rows: regressionRows,
+      vocabulary,
+      baselineReport,
+      previousReport: regressionSource,
+      mode: 'regression-baseline-existing-candidates'
+    });
+    writeJson(path.join(regressionDir, 'report.json'), regressionReport);
+    writeText(path.join(regressionDir, 'README.md'), buildMarkdown(regressionReport));
+    writeJson(REGRESSION_LATEST, regressionReport);
+    writeText(REGRESSION_MARKDOWN, buildMarkdown(regressionReport));
+
+    const freshCandidates = buildFreshCandidates({ description, vocabulary, baselineReport, baselineCandidate });
+    const freshRows = [];
+    for(const candidate of freshCandidates){
+      const candidatePath = path.join(freshCandidateDir, `${candidate.candidateId}.json`);
+      writeJson(candidatePath, candidate);
+      const trialReport = buildReport(candidatePath);
+      freshRows.push(compactCandidate({ candidate, trialReport, baselineReport, candidatePath, description }));
+    }
+    const freshReport = buildBatchReport({
+      generatedAt,
+      commit,
+      branch,
+      candidateDir: freshCandidateDir,
+      rows: freshRows,
+      vocabulary,
+      baselineReport,
+      mode: 'fresh-calibrated-candidates'
+    });
+    freshReport.sourceArtifacts.regressionBaselineReport = rel(REGRESSION_LATEST);
+    writeJson(path.join(freshBatchDir, 'report.json'), freshReport);
+    writeText(path.join(freshBatchDir, 'README.md'), buildMarkdown(freshReport));
+    writeJson(BATCH_LATEST, freshReport);
+    writeText(BATCH_MARKDOWN, buildMarkdown(freshReport));
+
+    const comparisonReport = compareYields({ generatedAt, commit, branch, regressionReport, freshReport });
+    writeJson(path.join(freshBatchDir, 'yield-comparison.json'), comparisonReport);
+    writeText(path.join(freshBatchDir, 'yield-comparison.md'), buildComparisonMarkdown(comparisonReport));
+    writeJson(COMPARISON_LATEST, comparisonReport);
+    writeText(COMPARISON_MARKDOWN, buildComparisonMarkdown(comparisonReport));
+
+    console.log(JSON.stringify({
+      ok: true,
+      report: rel(BATCH_LATEST),
+      regressionReport: rel(REGRESSION_LATEST),
+      comparisonReport: rel(COMPARISON_LATEST),
+      candidateCount: freshReport.candidateCount,
+      recommendation: freshReport.summary.recommendation,
+      transferProofReadyCandidateId: freshReport.summary.transferProofReadyCandidateId,
+      bestCandidateId: freshReport.candidates[0]?.candidateId || null,
+      bestRankingScore: freshReport.candidates[0]?.scores.rankingScore ?? null,
+      geometryOnlyCandidatesRemainMetricOnly: comparisonReport.calibrationVerdict.geometryOnlyCandidatesRemainMetricOnly,
+      candidateGenerationMode: freshReport.candidateGenerationMode
     }, null, 2));
     return;
   }

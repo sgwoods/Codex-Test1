@@ -271,8 +271,14 @@ from the roadmap.
    `stage3-semantic-direct-lines-red-target-probe-0.1` is now a
    `metric-only-probe`, while
    `stage3-semantic-direct-lines-shape-peel-0.1` is the top
-   `player-visible-semantic-lift`. The next Stage 3 step is one more small
-   semantic batch using this calibrated ranker, not runtime transfer work.
+   `player-visible-semantic-lift`. The fresh out-of-sample batch then
+   generated `10` new named candidates, preserved the geometry-only
+   `metric-only-probe` classification, increased player-visible semantic lifts
+   from `3` to `7`, and selected
+   `stage3-semantic-fresh-g4-score-window-shape-peel-0.1` as the smallest
+   later browser transfer-proof target. The next Stage 3 step is a
+   non-overwriting browser transfer proof for that one candidate only, not a
+   runtime source edit.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth
@@ -402,9 +408,11 @@ Current conformance read:
   semantic candidate batch are measurement/process keepers. The batch proves
   object-track/path-length and peel-off metrics are responsive, and the
   calibrated ranking now prevents geometry-only lift from outranking
-  player-visible path+peel preservation. The top calibration exemplar is
-  `stage3-semantic-direct-lines-shape-peel-0.1`; generate one more small Stage
-  3 semantic batch before any transfer proof or source edit.
+  player-visible path+peel preservation. The fresh out-of-sample batch
+  preserved that rule and selected
+  `stage3-semantic-fresh-g4-score-window-shape-peel-0.1` as a later
+  non-overwriting browser transfer-proof target. Runtime source remains
+  unauthorized.
 - Galaxy Guardians longer-surface/persona review reads `7.0/10`, with
   stage-arc pressure at `7.9/10`, stage presentation at `7.4/10`, persona
   utility at `6.5/10`, midrun survivability at `6.0/10`, and stage-band

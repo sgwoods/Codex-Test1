@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage3-reference-execution-batch-yield-comparison",
+  "generatedAt": "2026-06-08T20:25:49.715Z",
+  "generatedBy": "tools/harness/analyze-stage3-reference-execution-batch.js",
+  "commit": "16ba4062",
+  "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
+  "releaseFamily": "1.4.1",
+  "scope": {
+    "stage": 3,
+    "challengeNumber": 1,
+    "displayLabel": "Stage 3 / Challenge 1"
+  },
+  "sourceReports": {
+    "regressionBaseline": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest-regression-baseline.json",
+    "freshBatch": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest-batch.json"
+  },
+  "regressionBaseline": {
+    "generated": 10,
+    "semanticallyValid": 10,
+    "guardrailSafe": 10,
+    "geometryOnlyProbes": 4,
+    "playerVisibleSemanticLifts": 3,
+    "proofReadyCandidates": 3,
+    "blockedCandidates": 7,
+    "metricOnlyTrialPromising": 0,
+    "bestCandidateId": "stage3-semantic-direct-lines-shape-peel-0.1",
+    "bestCandidateClass": "player-visible-semantic-lift",
+    "selectedTransferProofCandidateId": "stage3-semantic-direct-lines-shape-peel-0.1",
+    "recommendation": "ready-for-one-more-small-stage3-semantic-batch"
+  },
+  "freshBatch": {
+    "generated": 10,
+    "semanticallyValid": 10,
+    "guardrailSafe": 10,
+    "geometryOnlyProbes": 2,
+    "playerVisibleSemanticLifts": 7,
+    "proofReadyCandidates": 7,
+    "blockedCandidates": 3,
+    "metricOnlyTrialPromising": 0,
+    "bestCandidateId": "stage3-semantic-fresh-direct-lines-balanced-shape-peel-0.1",
+    "bestCandidateClass": "player-visible-semantic-lift",
+    "selectedTransferProofCandidateId": "stage3-semantic-fresh-g4-score-window-shape-peel-0.1",
+    "recommendation": "transfer-proof-tie-select-smallest"
+  },
+  "deltas": {
+    "generated": 0,
+    "semanticallyValid": 0,
+    "guardrailSafe": 0,
+    "geometryOnlyProbes": -2,
+    "playerVisibleSemanticLifts": 4,
+    "proofReadyCandidates": 4,
+    "blockedCandidates": -4
+  },
+  "calibrationVerdict": {
+    "geometryOnlyCandidatesRemainMetricOnly": true,
+    "candidateLanguageStableEnoughForTransferProof": true,
+    "selectedFutureTransferProofCandidateId": "stage3-semantic-fresh-g4-score-window-shape-peel-0.1",
+    "runtimeSourceCandidateAuthorized": false,
+    "read": "Fresh out-of-sample candidates preserved the calibrated ranking rule. stage3-semantic-fresh-g4-score-window-shape-peel-0.1 is recommended for a later non-overwriting browser transfer proof only."
+  }
+}

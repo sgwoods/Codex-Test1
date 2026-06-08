@@ -134,6 +134,7 @@ inputs against the Stage 3 trial gate. Run:
 ```sh
 npm run harness:analyze:stage3-reference-execution-batch
 npm run harness:analyze:stage3-reference-execution-batch:calibrate
+npm run harness:analyze:stage3-reference-execution-batch:fresh
 npm run harness:check:stage3-reference-execution-batch
 ```
 
@@ -149,14 +150,22 @@ The ranking calibration report is:
 
 `reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest-ranking-calibration.json`
 
+The fresh-batch comparison reports are:
+
+`reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest-regression-baseline.json`
+
+`reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest-batch-comparison.json`
+
 Current calibration read: the gate is responsive to group 1/group 4
 object-track/path-length and peel-off readability transforms, and the calibrated
 ranker now requires player-visible multi-axis lift before a candidate can be
 trial-promising. The old geometry-heavy RED-target probe is classified as a
 `metric-only-probe`; the direct-line shape+peel candidate is the current
-`player-visible-semantic-lift` exemplar. The next allowed Stage 3 step is one
-more small semantic batch using this calibrated ranker. Runtime source remains
-unauthorized.
+`player-visible-semantic-lift` calibration exemplar. The fresh out-of-sample
+batch preserved that rule: geometry-only probes stayed `metric-only-probe`,
+player-visible semantic lifts rose from `3` to `7`, and
+`stage3-semantic-fresh-g4-score-window-shape-peel-0.1` is selected for a later
+non-overwriting browser transfer proof. Runtime source remains unauthorized.
 
 ## Stage 7 Input Shape
 

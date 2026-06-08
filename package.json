@@ -185,6 +185,7 @@
     "harness:check:stage3-reference-execution-trial": "node tools/harness/check-stage3-reference-execution-trial.js",
     "harness:analyze:stage3-reference-execution-batch": "node tools/harness/analyze-stage3-reference-execution-batch.js",
     "harness:analyze:stage3-reference-execution-batch:calibrate": "node tools/harness/analyze-stage3-reference-execution-batch.js --reuse-existing-candidates",
+    "harness:analyze:stage3-reference-execution-batch:fresh": "node tools/harness/analyze-stage3-reference-execution-batch.js --fresh-calibrated-candidates",
     "harness:check:stage3-reference-execution-batch": "node tools/harness/check-stage3-reference-execution-batch.js",
     "harness:analyze:stage7-reference-execution-trial": "node tools/harness/analyze-stage7-reference-execution-trial.js",
     "harness:check:stage7-reference-execution-trial": "node tools/harness/check-stage7-reference-execution-trial.js",

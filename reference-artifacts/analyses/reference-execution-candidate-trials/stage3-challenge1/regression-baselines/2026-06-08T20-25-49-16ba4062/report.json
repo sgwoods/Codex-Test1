@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "artifactType": "stage3-reference-execution-semantic-candidate-batch",
-  "generatedAt": "2026-06-08T20:25:49.715Z",
-  "calibratedAt": null,
+  "generatedAt": "2026-06-08T19:32:37.534Z",
+  "calibratedAt": "2026-06-08T20:25:49.715Z",
   "generatedBy": "tools/harness/analyze-stage3-reference-execution-batch.js",
-  "candidateGenerationMode": "fresh-calibrated-candidates",
+  "candidateGenerationMode": "regression-baseline-existing-candidates",
   "commit": "16ba4062",
   "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
   "releaseFamily": "1.4.1",
@@ -18,10 +18,9 @@
     "semanticVocabulary": "reference-artifacts/ingestion/reference-execution-candidate-trials/stage3-semantic-vocabulary-0.1.json",
     "referenceExecutionDescription": "reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage3-challenge1-0.1.json",
     "baselineTrialInput": "reference-artifacts/ingestion/reference-execution-candidate-trials/stage3-baseline-control-0.1.json",
-    "baselineTrialReport": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest.json",
-    "regressionBaselineReport": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest-regression-baseline.json"
+    "baselineTrialReport": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest.json"
   },
-  "generatedCandidateDir": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T20-25-49-16ba4062-fresh/candidates",
+  "generatedCandidateDir": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T19-32-37-54f53496/candidates",
   "candidateCount": 10,
   "transformationClassesTested": [
     "group1-object-track-path-fit",
@@ -34,8 +33,8 @@
   ],
   "candidates": [
     {
-      "candidateId": "stage3-semantic-fresh-direct-lines-balanced-shape-peel-0.1",
-      "semanticTransformId": "fresh-direct-lines-balanced-shape-peel",
+      "candidateId": "stage3-semantic-direct-lines-shape-peel-0.1",
+      "semanticTransformId": "direct-line-shape-plus-peel",
       "semanticTransformations": [
         "group1-object-track-path-fit",
         "group4-object-track-path-fit",
@@ -57,16 +56,13 @@
       "protectedRoles": [
         "inferred columns",
         "mixed closing peel",
-        "upper-band score windows",
         "no-combat grammar"
       ],
-      "expectedPlayerVisibleImprovement": "Both direct lines should read as shorter, cleaner upper-band phrases with the RED left/right peel-off exits intact.",
+      "expectedPlayerVisibleImprovement": "Combine direct-labeled line path compression with the RED peel-off exit reads for groups 1 and 4.",
       "expectedStrictMetricMovement": {
         "group1ObjectTrack": "positive",
         "group4ObjectTrack": "positive",
-        "pathShape": "positive",
-        "pathLengthSanity": "positive",
-        "peelReadability": "positive"
+        "directLinePeelOffReadability": "positive"
       },
       "authorityAssumptions": {
         "pathFamilyAuthority": "preserve current RED canonical path-family order for non-overwriting comparison",
@@ -75,8 +71,8 @@
         "fieldOccupancyPolicy": "human-visible upper-band scoreability and CPU lower-field geometry remain separate reads"
       },
       "expectedMetricDeltas": {
-        "directLineObjectTrack": "positive",
-        "directLinePathShape": "positive",
+        "group1ObjectTrack": "positive",
+        "group4ObjectTrack": "positive",
         "directLinePeelOffReadability": "positive"
       },
       "hardGuardrails": [
@@ -89,33 +85,23 @@
         "do not treat RED target-conformance as runtime promotion authority"
       ],
       "softOptimizationTargets": [
-        "raise both direct-line object-track fits",
-        "preserve upper-band score windows",
-        "avoid geometry-only ranking"
+        "best combined direct-line object-track and peel-off read",
+        "keep inferred group debt visible"
       ],
       "transferProofHypothesis": {
         "browserTransferProofRequired": true,
         "runtimeSourceCandidateAuthorized": false,
-        "intendedProofGroups": [
-          1,
-          4
-        ],
         "hypothesizedRuntimeControls": [
           "referencePath.playbackScale",
           "referencePath.pathLengthScale",
           "motionSpecGroup.spawnOffsetS",
           "routeCurveX",
           "routeCurveY",
-          "path endpoint / exit-side control"
+          "routeOffsetX",
+          "path endpoint / exit-side control",
+          "scoreable-window timing read"
         ],
-        "requiredEvidence": [
-          "browser-visible path/peel movement",
-          "motion-profile compatibility",
-          "spacing/readability preservation",
-          "scoreable-route preservation",
-          "no-shot/no-attack/no-loss safety"
-        ],
-        "read": "This is transfer-proof-ready only if the later browser proof shows these controls are consumed and visible without guardrail regression."
+        "read": "Hypothesized controls must be proven in a later non-overwriting browser transfer proof before any runtime source edit."
       },
       "redProvenanceFieldsUsed": [
         "aggregateObjectTrackTarget",
@@ -130,197 +116,19 @@
         "executionModel.noCombatGrammar",
         "keeperRules"
       ],
-      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T20-25-49-16ba4062-fresh/candidates/stage3-semantic-fresh-direct-lines-balanced-shape-peel-0.1.json",
+      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T19-32-37-54f53496/candidates/stage3-semantic-direct-lines-shape-peel-0.1.json",
       "scores": {
         "semanticRolePreservation": 0.868,
         "strictObjectTrackFit": 3.5,
         "strictObjectTrackDelta10": 0.3,
-        "focusObjectTrackFit": 4.05,
-        "focusObjectTrackDelta": 0.85,
-        "pathShapeFit": 0.678,
+        "focusObjectTrackFit": 3.85,
+        "focusObjectTrackDelta": 0.65,
+        "pathShapeFit": 0.665,
         "pathShapeFitByGroup": {
-          "group1": 0.498,
+          "group1": 0.485,
           "group2": 0.507,
           "group3": 0.319,
-          "group4": 0.857,
-          "group5": 0.342
-        },
-        "pathLengthSanity": 0.395,
-        "pathLengthSanityByGroup": {
-          "group1": 0.04,
-          "group2": 0.461,
-          "group3": 0.117,
-          "group4": 0.75,
-          "group5": 0.475
-        },
-        "pathLengthShapeFit": 0.537,
-        "pathLengthShapeFitByGroup": {
-          "group1": 0.269,
-          "group2": 0.484,
-          "group3": 0.218,
-          "group4": 0.804,
-          "group5": 0.409
-        },
-        "peelOffReadability": 0.896,
-        "focusPeelOffReadability": 1,
-        "upperBandScoreability": 0.968,
-        "routeLearnability": 1,
-        "noCombatGrammarPreservation": 1,
-        "spacingReadability": 0.676,
-        "authorityConflictCount": 4,
-        "humanVisibleVsCpuFieldOccupancyTensionCount": 4,
-        "groupObjectDeltas": {
-          "group1": 0.8,
-          "group2": 0,
-          "group3": 0,
-          "group4": 0.9,
-          "group5": 0
-        },
-        "rankingScore": 0.7271
-      },
-      "guardrails": {
-        "spacingReadability": true,
-        "scoreableRoutes": true,
-        "safety": true,
-        "noCombatGrammar": true
-      },
-      "yield": {
-        "valid": true,
-        "improved": true,
-        "objectImproved": true,
-        "pathShapeImproved": true,
-        "pathLengthSanityImproved": true,
-        "pathImproved": true,
-        "peelImproved": true,
-        "multiAxisImproved": true,
-        "geometryOnlyLift": false,
-        "candidateClassification": "player-visible-semantic-lift",
-        "guardrailSafe": true,
-        "trialPromising": true,
-        "sourceBlocked": true,
-        "blockerTypes": [
-          "player-visible-semantic-lift",
-          "strict-object-track-floor",
-          "runtime-expression-proof-missing"
-        ],
-        "blockedReasons": [
-          "strict object-track fit remains below first trial floor (3.5/10)",
-          "runtime source expression proof does not exist for these Stage 3 semantic transforms"
-        ]
-      },
-      "runtimePromotion": {
-        "readyForRuntimeSourceCandidate": false,
-        "sourceCandidateGenerationAllowed": false,
-        "read": "This is a non-overwriting trial prediction only. Runtime source promotion is intentionally disabled for this cycle."
-      }
-    },
-    {
-      "candidateId": "stage3-semantic-fresh-staggered-direct-lines-shape-peel-0.1",
-      "semanticTransformId": "fresh-staggered-direct-lines-shape-peel",
-      "semanticTransformations": [
-        "group1-object-track-path-fit",
-        "group4-object-track-path-fit",
-        "group1-peel-off-readability",
-        "group4-peel-off-readability",
-        "preserve-upper-band-scoreability",
-        "protect-semantic-line-roles",
-        "protect-no-combat-scoreable-routes"
-      ],
-      "touchedGroups": [
-        1,
-        4
-      ],
-      "protectedGroups": [
-        2,
-        3,
-        5
-      ],
-      "protectedRoles": [
-        "inferred columns",
-        "mixed closing peel",
-        "scoreable routes",
-        "no-combat grammar"
-      ],
-      "expectedPlayerVisibleImprovement": "The candidate should keep the opener readable while leaning on group 4 as the stronger proof anchor.",
-      "expectedStrictMetricMovement": {
-        "group1ObjectTrack": "positive",
-        "group4ObjectTrack": "positive",
-        "peelReadability": "positive",
-        "authorityConflict": "preserve"
-      },
-      "authorityAssumptions": {
-        "pathFamilyAuthority": "preserve current RED canonical path-family order for non-overwriting comparison",
-        "runtimePromotionAuthority": "not-authorized",
-        "targetConformanceDebtCarriedForward": true,
-        "fieldOccupancyPolicy": "human-visible upper-band scoreability and CPU lower-field geometry remain separate reads"
-      },
-      "expectedMetricDeltas": {
-        "directLineObjectTrack": "positive",
-        "directLinePeelOffReadability": "positive",
-        "group4PathShape": "positive"
-      },
-      "hardGuardrails": [
-        "preserve semantic line roles",
-        "preserve upper-band scoreability",
-        "preserve scoreable routes",
-        "preserve spacing/readability",
-        "preserve no-shot/no-attack/no-loss/no-contact safety",
-        "do not increase authority conflict count",
-        "do not treat RED target-conformance as runtime promotion authority"
-      ],
-      "softOptimizationTargets": [
-        "test least-authority-conflicted asymmetric proof path",
-        "avoid pure geometry win"
-      ],
-      "transferProofHypothesis": {
-        "browserTransferProofRequired": true,
-        "runtimeSourceCandidateAuthorized": false,
-        "intendedProofGroups": [
-          1,
-          4
-        ],
-        "hypothesizedRuntimeControls": [
-          "referencePath.playbackScale",
-          "motionSpecGroup.spawnOffsetS",
-          "routeCurveX",
-          "routeCurveY",
-          "path endpoint / exit-side control"
-        ],
-        "requiredEvidence": [
-          "browser-visible path/peel movement",
-          "motion-profile compatibility",
-          "spacing/readability preservation",
-          "scoreable-route preservation",
-          "no-shot/no-attack/no-loss safety"
-        ],
-        "read": "This is transfer-proof-ready only if the later browser proof shows these controls are consumed and visible without guardrail regression."
-      },
-      "redProvenanceFieldsUsed": [
-        "aggregateObjectTrackTarget",
-        "candidateComparisonGate.targetVector",
-        "semanticExecution.exitGesture",
-        "uncertaintyAndProvenance",
-        "semanticExecution.scoreableBand",
-        "semanticExecution.scoreableFrameWindow",
-        "fieldOccupancyExpectation",
-        "semanticExecution.lineRole",
-        "semanticExecution.entryCue",
-        "executionModel.noCombatGrammar",
-        "keeperRules"
-      ],
-      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T20-25-49-16ba4062-fresh/candidates/stage3-semantic-fresh-staggered-direct-lines-shape-peel-0.1.json",
-      "scores": {
-        "semanticRolePreservation": 0.868,
-        "strictObjectTrackFit": 3.6,
-        "strictObjectTrackDelta10": 0.4,
-        "focusObjectTrackFit": 4.1,
-        "focusObjectTrackDelta": 0.9,
-        "pathShapeFit": 0.672,
-        "pathShapeFitByGroup": {
-          "group1": 0.477,
-          "group2": 0.507,
-          "group3": 0.319,
-          "group4": 0.866,
+          "group4": 0.844,
           "group5": 0.342
         },
         "pathLengthSanity": 0.375,
@@ -331,12 +139,12 @@
           "group4": 0.75,
           "group5": 0.475
         },
-        "pathLengthShapeFit": 0.524,
+        "pathLengthShapeFit": 0.52,
         "pathLengthShapeFitByGroup": {
-          "group1": 0.239,
+          "group1": 0.243,
           "group2": 0.484,
           "group3": 0.218,
-          "group4": 0.808,
+          "group4": 0.797,
           "group5": 0.409
         },
         "peelOffReadability": 0.896,
@@ -351,185 +159,10 @@
           "group1": 0.7,
           "group2": 0,
           "group3": 0,
-          "group4": 1.1,
+          "group4": 0.6,
           "group5": 0
         },
-        "rankingScore": 0.724
-      },
-      "guardrails": {
-        "spacingReadability": true,
-        "scoreableRoutes": true,
-        "safety": true,
-        "noCombatGrammar": true
-      },
-      "yield": {
-        "valid": true,
-        "improved": true,
-        "objectImproved": true,
-        "pathShapeImproved": true,
-        "pathLengthSanityImproved": true,
-        "pathImproved": true,
-        "peelImproved": true,
-        "multiAxisImproved": true,
-        "geometryOnlyLift": false,
-        "candidateClassification": "player-visible-semantic-lift",
-        "guardrailSafe": true,
-        "trialPromising": true,
-        "sourceBlocked": true,
-        "blockerTypes": [
-          "player-visible-semantic-lift",
-          "strict-object-track-floor",
-          "runtime-expression-proof-missing"
-        ],
-        "blockedReasons": [
-          "strict object-track fit remains below first trial floor (3.6/10)",
-          "runtime source expression proof does not exist for these Stage 3 semantic transforms"
-        ]
-      },
-      "runtimePromotion": {
-        "readyForRuntimeSourceCandidate": false,
-        "sourceCandidateGenerationAllowed": false,
-        "read": "This is a non-overwriting trial prediction only. Runtime source promotion is intentionally disabled for this cycle."
-      }
-    },
-    {
-      "candidateId": "stage3-semantic-fresh-g4-anchor-g1-peel-protect-0.1",
-      "semanticTransformId": "fresh-g4-anchor-g1-peel-protect",
-      "semanticTransformations": [
-        "group4-object-track-path-fit",
-        "group4-peel-off-readability",
-        "group1-peel-off-readability",
-        "preserve-upper-band-scoreability",
-        "protect-semantic-line-roles",
-        "protect-no-combat-scoreable-routes"
-      ],
-      "touchedGroups": [
-        1,
-        4
-      ],
-      "protectedGroups": [
-        2,
-        3,
-        5
-      ],
-      "protectedRoles": [
-        "top-right bee line role",
-        "inferred columns",
-        "mixed closing peel",
-        "no-combat grammar"
-      ],
-      "expectedPlayerVisibleImprovement": "The late butterfly line should become the cleaner direct-line anchor while group 1 gains the correct left peel.",
-      "expectedStrictMetricMovement": {
-        "group4ObjectTrack": "strong positive",
-        "group1ObjectTrack": "preserve",
-        "peelReadability": "positive"
-      },
-      "authorityAssumptions": {
-        "pathFamilyAuthority": "preserve current RED canonical path-family order for non-overwriting comparison",
-        "runtimePromotionAuthority": "not-authorized",
-        "targetConformanceDebtCarriedForward": true,
-        "fieldOccupancyPolicy": "human-visible upper-band scoreability and CPU lower-field geometry remain separate reads"
-      },
-      "expectedMetricDeltas": {
-        "group4ObjectTrack": "strong positive",
-        "group4PathLengthRatio": "toward RED target",
-        "group1PeelOffReadability": "positive"
-      },
-      "hardGuardrails": [
-        "preserve semantic line roles",
-        "preserve upper-band scoreability",
-        "preserve scoreable routes",
-        "preserve spacing/readability",
-        "preserve no-shot/no-attack/no-loss/no-contact safety",
-        "do not increase authority conflict count",
-        "do not treat RED target-conformance as runtime promotion authority"
-      ],
-      "softOptimizationTargets": [
-        "test whether group 4 can be the least-authority-conflicted proof target",
-        "preserve group 1 geometry"
-      ],
-      "transferProofHypothesis": {
-        "browserTransferProofRequired": true,
-        "runtimeSourceCandidateAuthorized": false,
-        "intendedProofGroups": [
-          4
-        ],
-        "hypothesizedRuntimeControls": [
-          "referencePath.playbackScale",
-          "referencePath.pathLengthScale",
-          "motionSpecGroup.spawnOffsetS",
-          "routeCurveY",
-          "path endpoint / exit-side control"
-        ],
-        "requiredEvidence": [
-          "browser-visible path/peel movement",
-          "motion-profile compatibility",
-          "spacing/readability preservation",
-          "scoreable-route preservation",
-          "no-shot/no-attack/no-loss safety"
-        ],
-        "read": "This is transfer-proof-ready only if the later browser proof shows these controls are consumed and visible without guardrail regression."
-      },
-      "redProvenanceFieldsUsed": [
-        "aggregateObjectTrackTarget",
-        "candidateComparisonGate.targetVector",
-        "semanticExecution.exitGesture",
-        "uncertaintyAndProvenance",
-        "semanticExecution.scoreableBand",
-        "semanticExecution.scoreableFrameWindow",
-        "fieldOccupancyExpectation",
-        "semanticExecution.lineRole",
-        "semanticExecution.entryCue",
-        "executionModel.noCombatGrammar",
-        "keeperRules"
-      ],
-      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T20-25-49-16ba4062-fresh/candidates/stage3-semantic-fresh-g4-anchor-g1-peel-protect-0.1.json",
-      "scores": {
-        "semanticRolePreservation": 0.868,
-        "strictObjectTrackFit": 3.5,
-        "strictObjectTrackDelta10": 0.3,
-        "focusObjectTrackFit": 3.95,
-        "focusObjectTrackDelta": 0.75,
-        "pathShapeFit": 0.605,
-        "pathShapeFitByGroup": {
-          "group1": 0.331,
-          "group2": 0.507,
-          "group3": 0.319,
-          "group4": 0.879,
-          "group5": 0.342
-        },
-        "pathLengthSanity": 0.375,
-        "pathLengthSanityByGroup": {
-          "group1": 0,
-          "group2": 0.461,
-          "group3": 0.117,
-          "group4": 0.75,
-          "group5": 0.475
-        },
-        "pathLengthShapeFit": 0.49,
-        "pathLengthShapeFitByGroup": {
-          "group1": 0.166,
-          "group2": 0.484,
-          "group3": 0.218,
-          "group4": 0.815,
-          "group5": 0.409
-        },
-        "peelOffReadability": 0.896,
-        "focusPeelOffReadability": 1,
-        "upperBandScoreability": 0.968,
-        "routeLearnability": 1,
-        "noCombatGrammarPreservation": 1,
-        "spacingReadability": 0.676,
-        "authorityConflictCount": 4,
-        "humanVisibleVsCpuFieldOccupancyTensionCount": 4,
-        "groupObjectDeltas": {
-          "group1": 0,
-          "group2": 0,
-          "group3": 0,
-          "group4": 1.5,
-          "group5": 0
-        },
-        "rankingScore": 0.7106
+        "rankingScore": 0.7184
       },
       "guardrails": {
         "spacingReadability": true,
@@ -565,361 +198,17 @@
         "readyForRuntimeSourceCandidate": false,
         "sourceCandidateGenerationAllowed": false,
         "read": "This is a non-overwriting trial prediction only. Runtime source promotion is intentionally disabled for this cycle."
-      }
-    },
-    {
-      "candidateId": "stage3-semantic-fresh-direct-lines-conservative-shape-peel-0.1",
-      "semanticTransformId": "fresh-direct-lines-conservative-shape-peel",
-      "semanticTransformations": [
-        "group1-object-track-path-fit",
-        "group4-object-track-path-fit",
-        "group1-peel-off-readability",
-        "group4-peel-off-readability",
-        "preserve-upper-band-scoreability",
-        "protect-semantic-line-roles",
-        "protect-no-combat-scoreable-routes"
-      ],
-      "touchedGroups": [
-        1,
-        4
-      ],
-      "protectedGroups": [
-        2,
-        3,
-        5
-      ],
-      "protectedRoles": [
-        "inferred columns",
-        "mixed closing peel",
-        "scoreable routes",
-        "no-combat grammar"
-      ],
-      "expectedPlayerVisibleImprovement": "Direct-line exit gestures should become readable while shape/timing moves only moderately toward RED.",
-      "expectedStrictMetricMovement": {
-        "objectTrack": "moderate positive",
-        "pathShape": "moderate positive",
-        "peelReadability": "positive"
       },
-      "authorityAssumptions": {
-        "pathFamilyAuthority": "preserve current RED canonical path-family order for non-overwriting comparison",
-        "runtimePromotionAuthority": "not-authorized",
-        "targetConformanceDebtCarriedForward": true,
-        "fieldOccupancyPolicy": "human-visible upper-band scoreability and CPU lower-field geometry remain separate reads"
-      },
-      "expectedMetricDeltas": {
-        "directLineObjectTrack": "moderate positive",
-        "directLinePeelOffReadability": "positive"
-      },
-      "hardGuardrails": [
-        "preserve semantic line roles",
-        "preserve upper-band scoreability",
-        "preserve scoreable routes",
-        "preserve spacing/readability",
-        "preserve no-shot/no-attack/no-loss/no-contact safety",
-        "do not increase authority conflict count",
-        "do not treat RED target-conformance as runtime promotion authority"
-      ],
-      "softOptimizationTargets": [
-        "prefer readable peel over aggressive geometry",
-        "keep field-occupancy tension visible"
-      ],
-      "transferProofHypothesis": {
-        "browserTransferProofRequired": true,
-        "runtimeSourceCandidateAuthorized": false,
-        "intendedProofGroups": [
-          1,
-          4
-        ],
-        "hypothesizedRuntimeControls": [
-          "referencePath.playbackScale",
-          "routeCurveX",
-          "routeCurveY",
-          "path endpoint / exit-side control"
-        ],
-        "requiredEvidence": [
-          "browser-visible path/peel movement",
-          "motion-profile compatibility",
-          "spacing/readability preservation",
-          "scoreable-route preservation",
-          "no-shot/no-attack/no-loss safety"
-        ],
-        "read": "This is transfer-proof-ready only if the later browser proof shows these controls are consumed and visible without guardrail regression."
-      },
-      "redProvenanceFieldsUsed": [
-        "aggregateObjectTrackTarget",
-        "candidateComparisonGate.targetVector",
-        "semanticExecution.exitGesture",
-        "uncertaintyAndProvenance",
-        "semanticExecution.scoreableBand",
-        "semanticExecution.scoreableFrameWindow",
-        "fieldOccupancyExpectation",
-        "semanticExecution.lineRole",
-        "semanticExecution.entryCue",
-        "executionModel.noCombatGrammar",
-        "keeperRules"
-      ],
-      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T20-25-49-16ba4062-fresh/candidates/stage3-semantic-fresh-direct-lines-conservative-shape-peel-0.1.json",
-      "scores": {
-        "semanticRolePreservation": 0.868,
-        "strictObjectTrackFit": 3.4,
-        "strictObjectTrackDelta10": 0.2,
-        "focusObjectTrackFit": 3.7,
-        "focusObjectTrackDelta": 0.5,
-        "pathShapeFit": 0.634,
-        "pathShapeFitByGroup": {
-          "group1": 0.456,
-          "group2": 0.507,
-          "group3": 0.319,
-          "group4": 0.812,
-          "group5": 0.342
-        },
-        "pathLengthSanity": 0.356,
-        "pathLengthSanityByGroup": {
-          "group1": 0,
-          "group2": 0.461,
-          "group3": 0.117,
-          "group4": 0.712,
-          "group5": 0.475
-        },
-        "pathLengthShapeFit": 0.495,
-        "pathLengthShapeFitByGroup": {
-          "group1": 0.228,
-          "group2": 0.484,
-          "group3": 0.218,
-          "group4": 0.762,
-          "group5": 0.409
-        },
-        "peelOffReadability": 0.896,
-        "focusPeelOffReadability": 1,
-        "upperBandScoreability": 0.968,
-        "routeLearnability": 1,
-        "noCombatGrammarPreservation": 1,
-        "spacingReadability": 0.676,
-        "authorityConflictCount": 4,
-        "humanVisibleVsCpuFieldOccupancyTensionCount": 4,
-        "groupObjectDeltas": {
-          "group1": 0.6,
-          "group2": 0,
-          "group3": 0,
-          "group4": 0.4,
-          "group5": 0
-        },
-        "rankingScore": 0.7079
-      },
-      "guardrails": {
-        "spacingReadability": true,
-        "scoreableRoutes": true,
-        "safety": true,
-        "noCombatGrammar": true
-      },
-      "yield": {
-        "valid": true,
-        "improved": true,
-        "objectImproved": true,
-        "pathShapeImproved": true,
-        "pathLengthSanityImproved": true,
-        "pathImproved": true,
-        "peelImproved": true,
-        "multiAxisImproved": true,
-        "geometryOnlyLift": false,
-        "candidateClassification": "player-visible-semantic-lift",
-        "guardrailSafe": true,
+      "previousRanking": {
+        "rank": 2,
+        "rankingScore": 0.6845,
         "trialPromising": true,
-        "sourceBlocked": true,
-        "blockerTypes": [
-          "player-visible-semantic-lift",
-          "strict-object-track-floor",
-          "runtime-expression-proof-missing"
-        ],
-        "blockedReasons": [
-          "strict object-track fit remains below first trial floor (3.4/10)",
-          "runtime source expression proof does not exist for these Stage 3 semantic transforms"
-        ]
-      },
-      "runtimePromotion": {
-        "readyForRuntimeSourceCandidate": false,
-        "sourceCandidateGenerationAllowed": false,
-        "read": "This is a non-overwriting trial prediction only. Runtime source promotion is intentionally disabled for this cycle."
+        "classification": null
       }
     },
     {
-      "candidateId": "stage3-semantic-fresh-g1-recovery-g4-peel-protect-0.1",
-      "semanticTransformId": "fresh-g1-recovery-g4-peel-protect",
-      "semanticTransformations": [
-        "group1-object-track-path-fit",
-        "group1-peel-off-readability",
-        "group4-peel-off-readability",
-        "preserve-upper-band-scoreability",
-        "protect-semantic-line-roles",
-        "protect-no-combat-scoreable-routes"
-      ],
-      "touchedGroups": [
-        1,
-        4
-      ],
-      "protectedGroups": [
-        2,
-        3,
-        5
-      ],
-      "protectedRoles": [
-        "late butterfly line role",
-        "inferred columns",
-        "mixed closing peel",
-        "no-combat grammar"
-      ],
-      "expectedPlayerVisibleImprovement": "The top-right bee line should become shorter and left-peeling while group 4 keeps its right-peel read.",
-      "expectedStrictMetricMovement": {
-        "group1ObjectTrack": "strong positive",
-        "group4ObjectTrack": "preserve",
-        "peelReadability": "positive"
-      },
-      "authorityAssumptions": {
-        "pathFamilyAuthority": "preserve current RED canonical path-family order for non-overwriting comparison",
-        "runtimePromotionAuthority": "not-authorized",
-        "targetConformanceDebtCarriedForward": true,
-        "fieldOccupancyPolicy": "human-visible upper-band scoreability and CPU lower-field geometry remain separate reads"
-      },
-      "expectedMetricDeltas": {
-        "group1ObjectTrack": "strong positive",
-        "group1PathLengthRatio": "toward RED target",
-        "group4PeelOffReadability": "positive"
-      },
-      "hardGuardrails": [
-        "preserve semantic line roles",
-        "preserve upper-band scoreability",
-        "preserve scoreable routes",
-        "preserve spacing/readability",
-        "preserve no-shot/no-attack/no-loss/no-contact safety",
-        "do not increase authority conflict count",
-        "do not treat RED target-conformance as runtime promotion authority"
-      ],
-      "softOptimizationTargets": [
-        "recover the weakest direct-line path",
-        "avoid changing both direct-line geometries at once"
-      ],
-      "transferProofHypothesis": {
-        "browserTransferProofRequired": true,
-        "runtimeSourceCandidateAuthorized": false,
-        "intendedProofGroups": [
-          1
-        ],
-        "hypothesizedRuntimeControls": [
-          "referencePath.playbackScale",
-          "referencePath.pathLengthScale",
-          "motionSpecGroup.spawnOffsetS",
-          "routeCurveX",
-          "path endpoint / exit-side control"
-        ],
-        "requiredEvidence": [
-          "browser-visible path/peel movement",
-          "motion-profile compatibility",
-          "spacing/readability preservation",
-          "scoreable-route preservation",
-          "no-shot/no-attack/no-loss safety"
-        ],
-        "read": "This is transfer-proof-ready only if the later browser proof shows these controls are consumed and visible without guardrail regression."
-      },
-      "redProvenanceFieldsUsed": [
-        "aggregateObjectTrackTarget",
-        "candidateComparisonGate.targetVector",
-        "semanticExecution.exitGesture",
-        "uncertaintyAndProvenance",
-        "semanticExecution.scoreableBand",
-        "semanticExecution.scoreableFrameWindow",
-        "fieldOccupancyExpectation",
-        "semanticExecution.lineRole",
-        "semanticExecution.entryCue",
-        "executionModel.noCombatGrammar",
-        "keeperRules"
-      ],
-      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T20-25-49-16ba4062-fresh/candidates/stage3-semantic-fresh-g1-recovery-g4-peel-protect-0.1.json",
-      "scores": {
-        "semanticRolePreservation": 0.868,
-        "strictObjectTrackFit": 3.4,
-        "strictObjectTrackDelta10": 0.2,
-        "focusObjectTrackFit": 3.55,
-        "focusObjectTrackDelta": 0.35,
-        "pathShapeFit": 0.601,
-        "pathShapeFitByGroup": {
-          "group1": 0.52,
-          "group2": 0.507,
-          "group3": 0.319,
-          "group4": 0.682,
-          "group5": 0.342
-        },
-        "pathLengthSanity": 0.279,
-        "pathLengthSanityByGroup": {
-          "group1": 0.286,
-          "group2": 0.461,
-          "group3": 0.117,
-          "group4": 0.273,
-          "group5": 0.475
-        },
-        "pathLengthShapeFit": 0.44,
-        "pathLengthShapeFitByGroup": {
-          "group1": 0.403,
-          "group2": 0.484,
-          "group3": 0.218,
-          "group4": 0.478,
-          "group5": 0.409
-        },
-        "peelOffReadability": 0.896,
-        "focusPeelOffReadability": 1,
-        "upperBandScoreability": 0.968,
-        "routeLearnability": 1,
-        "noCombatGrammarPreservation": 1,
-        "spacingReadability": 0.676,
-        "authorityConflictCount": 4,
-        "humanVisibleVsCpuFieldOccupancyTensionCount": 4,
-        "groupObjectDeltas": {
-          "group1": 1,
-          "group2": 0,
-          "group3": 0,
-          "group4": -0.3,
-          "group5": 0
-        },
-        "rankingScore": 0.6884
-      },
-      "guardrails": {
-        "spacingReadability": true,
-        "scoreableRoutes": true,
-        "safety": true,
-        "noCombatGrammar": true
-      },
-      "yield": {
-        "valid": true,
-        "improved": true,
-        "objectImproved": true,
-        "pathShapeImproved": true,
-        "pathLengthSanityImproved": true,
-        "pathImproved": true,
-        "peelImproved": true,
-        "multiAxisImproved": true,
-        "geometryOnlyLift": false,
-        "candidateClassification": "player-visible-semantic-lift",
-        "guardrailSafe": true,
-        "trialPromising": true,
-        "sourceBlocked": true,
-        "blockerTypes": [
-          "player-visible-semantic-lift",
-          "strict-object-track-floor",
-          "runtime-expression-proof-missing"
-        ],
-        "blockedReasons": [
-          "strict object-track fit remains below first trial floor (3.4/10)",
-          "runtime source expression proof does not exist for these Stage 3 semantic transforms"
-        ]
-      },
-      "runtimePromotion": {
-        "readyForRuntimeSourceCandidate": false,
-        "sourceCandidateGenerationAllowed": false,
-        "read": "This is a non-overwriting trial prediction only. Runtime source promotion is intentionally disabled for this cycle."
-      }
-    },
-    {
-      "candidateId": "stage3-semantic-fresh-g4-score-window-shape-peel-0.1",
-      "semanticTransformId": "fresh-g4-score-window-shape-peel",
+      "candidateId": "stage3-semantic-g4-path-peel-0.1",
+      "semanticTransformId": "group4-path-fit-plus-peel",
       "semanticTransformations": [
         "group4-object-track-path-fit",
         "group4-peel-off-readability",
@@ -938,16 +227,14 @@
       ],
       "protectedRoles": [
         "top-right bee line",
-        "inferred columns",
         "mixed closing peel",
-        "upper-band score windows",
         "no-combat grammar"
       ],
-      "expectedPlayerVisibleImprovement": "The late butterfly line should gain a clearer right peel and tighter path shape without changing the opener.",
+      "expectedPlayerVisibleImprovement": "Combine group 4 object-track/path-length compression with the RED right peel-off read.",
       "expectedStrictMetricMovement": {
         "group4ObjectTrack": "positive",
-        "group4PathShape": "positive",
-        "group1": "preserve"
+        "group4PeelOffReadability": "positive",
+        "scoreableRoutes": "preserve"
       },
       "authorityAssumptions": {
         "pathFamilyAuthority": "preserve current RED canonical path-family order for non-overwriting comparison",
@@ -958,7 +245,7 @@
       "expectedMetricDeltas": {
         "group4ObjectTrack": "positive",
         "group4PeelOffReadability": "positive",
-        "directLineAuthorityConflict": "preserve"
+        "scoreableRoutes": "preserve"
       },
       "hardGuardrails": [
         "preserve semantic line roles",
@@ -970,28 +257,23 @@
         "do not treat RED target-conformance as runtime promotion authority"
       ],
       "softOptimizationTargets": [
-        "smallest single-line player-visible candidate",
-        "avoid touching group 1 geometry"
+        "raise group 4 object-track fit",
+        "make group 4 exit read match RED"
       ],
       "transferProofHypothesis": {
         "browserTransferProofRequired": true,
         "runtimeSourceCandidateAuthorized": false,
-        "intendedProofGroups": [
-          4
-        ],
         "hypothesizedRuntimeControls": [
           "referencePath.playbackScale",
+          "referencePath.pathLengthScale",
+          "motionSpecGroup.spawnOffsetS",
+          "routeCurveX",
           "routeCurveY",
-          "path endpoint / exit-side control"
+          "routeOffsetX",
+          "path endpoint / exit-side control",
+          "scoreable-window timing read"
         ],
-        "requiredEvidence": [
-          "browser-visible path/peel movement",
-          "motion-profile compatibility",
-          "spacing/readability preservation",
-          "scoreable-route preservation",
-          "no-shot/no-attack/no-loss safety"
-        ],
-        "read": "This is transfer-proof-ready only if the later browser proof shows these controls are consumed and visible without guardrail regression."
+        "read": "Hypothesized controls must be proven in a later non-overwriting browser transfer proof before any runtime source edit."
       },
       "redProvenanceFieldsUsed": [
         "aggregateObjectTrackTarget",
@@ -1006,35 +288,35 @@
         "executionModel.noCombatGrammar",
         "keeperRules"
       ],
-      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T20-25-49-16ba4062-fresh/candidates/stage3-semantic-fresh-g4-score-window-shape-peel-0.1.json",
+      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T19-32-37-54f53496/candidates/stage3-semantic-g4-path-peel-0.1.json",
       "scores": {
         "semanticRolePreservation": 0.868,
-        "strictObjectTrackFit": 3.4,
-        "strictObjectTrackDelta10": 0.2,
-        "focusObjectTrackFit": 3.6,
-        "focusObjectTrackDelta": 0.4,
-        "pathShapeFit": 0.592,
+        "strictObjectTrackFit": 3.3,
+        "strictObjectTrackDelta10": 0.1,
+        "focusObjectTrackFit": 3.5,
+        "focusObjectTrackDelta": 0.3,
+        "pathShapeFit": 0.588,
         "pathShapeFitByGroup": {
           "group1": 0.331,
           "group2": 0.507,
           "group3": 0.319,
-          "group4": 0.852,
+          "group4": 0.844,
           "group5": 0.342
         },
-        "pathLengthSanity": 0.374,
+        "pathLengthSanity": 0.375,
         "pathLengthSanityByGroup": {
           "group1": 0,
           "group2": 0.461,
           "group3": 0.117,
-          "group4": 0.748,
+          "group4": 0.75,
           "group5": 0.475
         },
-        "pathLengthShapeFit": 0.483,
+        "pathLengthShapeFit": 0.482,
         "pathLengthShapeFitByGroup": {
           "group1": 0.166,
           "group2": 0.484,
           "group3": 0.218,
-          "group4": 0.8,
+          "group4": 0.797,
           "group5": 0.409
         },
         "peelOffReadability": 0.824,
@@ -1049,10 +331,10 @@
           "group1": 0,
           "group2": 0,
           "group3": 0,
-          "group4": 0.8,
+          "group4": 0.6,
           "group5": 0
         },
-        "rankingScore": 0.6607
+        "rankingScore": 0.6584
       },
       "guardrails": {
         "spacingReadability": true,
@@ -1080,7 +362,7 @@
           "runtime-expression-proof-missing"
         ],
         "blockedReasons": [
-          "strict object-track fit remains below first trial floor (3.4/10)",
+          "strict object-track fit remains below first trial floor (3.3/10)",
           "runtime source expression proof does not exist for these Stage 3 semantic transforms"
         ]
       },
@@ -1088,11 +370,17 @@
         "readyForRuntimeSourceCandidate": false,
         "sourceCandidateGenerationAllowed": false,
         "read": "This is a non-overwriting trial prediction only. Runtime source promotion is intentionally disabled for this cycle."
+      },
+      "previousRanking": {
+        "rank": 3,
+        "rankingScore": 0.6433,
+        "trialPromising": true,
+        "classification": null
       }
     },
     {
-      "candidateId": "stage3-semantic-fresh-g1-score-window-shape-peel-0.1",
-      "semanticTransformId": "fresh-g1-score-window-shape-peel",
+      "candidateId": "stage3-semantic-g1-path-peel-0.1",
+      "semanticTransformId": "group1-path-fit-plus-peel",
       "semanticTransformations": [
         "group1-object-track-path-fit",
         "group1-peel-off-readability",
@@ -1111,16 +399,14 @@
       ],
       "protectedRoles": [
         "late top-left butterfly line",
-        "inferred columns",
         "mixed closing peel",
-        "upper-band score windows",
         "no-combat grammar"
       ],
-      "expectedPlayerVisibleImprovement": "The opener should become a clearer left peel with a shorter, more target-like direct-line path.",
+      "expectedPlayerVisibleImprovement": "Combine group 1 object-track/path-length compression with the RED left peel-off read.",
       "expectedStrictMetricMovement": {
         "group1ObjectTrack": "positive",
-        "group1PathShape": "positive",
-        "group4": "preserve"
+        "group1PeelOffReadability": "positive",
+        "scoreableRoutes": "preserve"
       },
       "authorityAssumptions": {
         "pathFamilyAuthority": "preserve current RED canonical path-family order for non-overwriting comparison",
@@ -1131,7 +417,7 @@
       "expectedMetricDeltas": {
         "group1ObjectTrack": "positive",
         "group1PeelOffReadability": "positive",
-        "directLineAuthorityConflict": "preserve"
+        "scoreableRoutes": "preserve"
       },
       "hardGuardrails": [
         "preserve semantic line roles",
@@ -1143,28 +429,23 @@
         "do not treat RED target-conformance as runtime promotion authority"
       ],
       "softOptimizationTargets": [
-        "smallest opener-focused player-visible candidate",
-        "avoid touching group 4 geometry"
+        "raise group 1 object-track fit",
+        "make group 1 exit read match RED"
       ],
       "transferProofHypothesis": {
         "browserTransferProofRequired": true,
         "runtimeSourceCandidateAuthorized": false,
-        "intendedProofGroups": [
-          1
-        ],
         "hypothesizedRuntimeControls": [
           "referencePath.playbackScale",
+          "referencePath.pathLengthScale",
+          "motionSpecGroup.spawnOffsetS",
           "routeCurveX",
-          "path endpoint / exit-side control"
+          "routeCurveY",
+          "routeOffsetX",
+          "path endpoint / exit-side control",
+          "scoreable-window timing read"
         ],
-        "requiredEvidence": [
-          "browser-visible path/peel movement",
-          "motion-profile compatibility",
-          "spacing/readability preservation",
-          "scoreable-route preservation",
-          "no-shot/no-attack/no-loss safety"
-        ],
-        "read": "This is transfer-proof-ready only if the later browser proof shows these controls are consumed and visible without guardrail regression."
+        "read": "Hypothesized controls must be proven in a later non-overwriting browser transfer proof before any runtime source edit."
       },
       "redProvenanceFieldsUsed": [
         "aggregateObjectTrackTarget",
@@ -1179,32 +460,32 @@
         "executionModel.noCombatGrammar",
         "keeperRules"
       ],
-      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T20-25-49-16ba4062-fresh/candidates/stage3-semantic-fresh-g1-score-window-shape-peel-0.1.json",
+      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T19-32-37-54f53496/candidates/stage3-semantic-g1-path-peel-0.1.json",
       "scores": {
         "semanticRolePreservation": 0.868,
         "strictObjectTrackFit": 3.4,
         "strictObjectTrackDelta10": 0.2,
-        "focusObjectTrackFit": 3.6,
-        "focusObjectTrackDelta": 0.4,
-        "pathShapeFit": 0.588,
+        "focusObjectTrackFit": 3.55,
+        "focusObjectTrackDelta": 0.35,
+        "pathShapeFit": 0.584,
         "pathShapeFitByGroup": {
-          "group1": 0.494,
+          "group1": 0.485,
           "group2": 0.507,
           "group3": 0.319,
           "group4": 0.682,
           "group5": 0.342
         },
-        "pathLengthSanity": 0.138,
+        "pathLengthSanity": 0.137,
         "pathLengthSanityByGroup": {
-          "group1": 0.002,
+          "group1": 0,
           "group2": 0.461,
           "group3": 0.117,
           "group4": 0.273,
           "group5": 0.475
         },
-        "pathLengthShapeFit": 0.363,
+        "pathLengthShapeFit": 0.361,
         "pathLengthShapeFitByGroup": {
-          "group1": 0.248,
+          "group1": 0.243,
           "group2": 0.484,
           "group3": 0.218,
           "group4": 0.478,
@@ -1219,13 +500,13 @@
         "authorityConflictCount": 4,
         "humanVisibleVsCpuFieldOccupancyTensionCount": 4,
         "groupObjectDeltas": {
-          "group1": 0.8,
+          "group1": 0.7,
           "group2": 0,
           "group3": 0,
           "group4": 0,
           "group5": 0
         },
-        "rankingScore": 0.6246
+        "rankingScore": 0.623
       },
       "guardrails": {
         "spacingReadability": true,
@@ -1261,11 +542,17 @@
         "readyForRuntimeSourceCandidate": false,
         "sourceCandidateGenerationAllowed": false,
         "read": "This is a non-overwriting trial prediction only. Runtime source promotion is intentionally disabled for this cycle."
+      },
+      "previousRanking": {
+        "rank": 6,
+        "rankingScore": 0.5875,
+        "trialPromising": false,
+        "classification": null
       }
     },
     {
-      "candidateId": "stage3-semantic-fresh-direct-lines-path-only-sensitivity-0.1",
-      "semanticTransformId": "fresh-direct-lines-path-only-sensitivity",
+      "candidateId": "stage3-semantic-direct-lines-red-target-probe-0.1",
+      "semanticTransformId": "direct-line-red-target-probe",
       "semanticTransformations": [
         "group1-object-track-path-fit",
         "group4-object-track-path-fit",
@@ -1288,11 +575,11 @@
         "mixed closing peel",
         "no-combat grammar"
       ],
-      "expectedPlayerVisibleImprovement": "No player-visible peel improvement is expected; this is a calibration control.",
+      "expectedPlayerVisibleImprovement": "Probe a stronger RED-target blend for direct-labeled path length only, to test whether object-track scoring responds predictably before any runtime expression proof.",
       "expectedStrictMetricMovement": {
-        "objectTrack": "positive",
-        "pathShape": "positive",
-        "peelReadability": "preserve baseline"
+        "group1ObjectTrack": "strong positive",
+        "group4ObjectTrack": "strong positive",
+        "peelOffReadability": "preserve baseline"
       },
       "authorityAssumptions": {
         "pathFamilyAuthority": "preserve current RED canonical path-family order for non-overwriting comparison",
@@ -1301,9 +588,9 @@
         "fieldOccupancyPolicy": "human-visible upper-band scoreability and CPU lower-field geometry remain separate reads"
       },
       "expectedMetricDeltas": {
-        "directLineObjectTrack": "positive",
-        "directLinePathShape": "positive",
-        "peelOffReadability": "baseline"
+        "group1ObjectTrack": "strong positive",
+        "group4ObjectTrack": "strong positive",
+        "peelOffReadability": "preserve baseline"
       },
       "hardGuardrails": [
         "preserve semantic line roles",
@@ -1315,28 +602,21 @@
         "do not treat RED target-conformance as runtime promotion authority"
       ],
       "softOptimizationTargets": [
-        "verify geometry-only lift remains metric-only",
-        "keep calibrated hard rule active"
+        "calibrate object-track/path-length sensitivity",
+        "detect whether the metric can be gamed by geometry without peel-off improvement"
       ],
       "transferProofHypothesis": {
         "browserTransferProofRequired": true,
         "runtimeSourceCandidateAuthorized": false,
-        "intendedProofGroups": [
-          1,
-          4
-        ],
         "hypothesizedRuntimeControls": [
           "referencePath.playbackScale",
-          "referencePath.pathLengthScale"
+          "referencePath.pathLengthScale",
+          "motionSpecGroup.spawnOffsetS",
+          "routeCurveX",
+          "routeCurveY",
+          "scoreable-window timing read"
         ],
-        "requiredEvidence": [
-          "browser-visible path/peel movement",
-          "motion-profile compatibility",
-          "spacing/readability preservation",
-          "scoreable-route preservation",
-          "no-shot/no-attack/no-loss safety"
-        ],
-        "read": "This is transfer-proof-ready only if the later browser proof shows these controls are consumed and visible without guardrail regression."
+        "read": "Hypothesized controls must be proven in a later non-overwriting browser transfer proof before any runtime source edit."
       },
       "redProvenanceFieldsUsed": [
         "aggregateObjectTrackTarget",
@@ -1349,35 +629,35 @@
         "executionModel.noCombatGrammar",
         "keeperRules"
       ],
-      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T20-25-49-16ba4062-fresh/candidates/stage3-semantic-fresh-direct-lines-path-only-sensitivity-0.1.json",
+      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T19-32-37-54f53496/candidates/stage3-semantic-direct-lines-red-target-probe-0.1.json",
       "scores": {
         "semanticRolePreservation": 0.868,
-        "strictObjectTrackFit": 3.7,
-        "strictObjectTrackDelta10": 0.5,
-        "focusObjectTrackFit": 4.45,
-        "focusObjectTrackDelta": 1.25,
-        "pathShapeFit": 0.691,
+        "strictObjectTrackFit": 3.9,
+        "strictObjectTrackDelta10": 0.7,
+        "focusObjectTrackFit": 5,
+        "focusObjectTrackDelta": 1.8,
+        "pathShapeFit": 0.708,
         "pathShapeFitByGroup": {
-          "group1": 0.511,
+          "group1": 0.528,
           "group2": 0.507,
           "group3": 0.319,
-          "group4": 0.87,
+          "group4": 0.888,
           "group5": 0.342
         },
-        "pathLengthSanity": 0.462,
+        "pathLengthSanity": 0.599,
         "pathLengthSanityByGroup": {
-          "group1": 0.171,
+          "group1": 0.444,
           "group2": 0.461,
           "group3": 0.117,
-          "group4": 0.752,
+          "group4": 0.754,
           "group5": 0.475
         },
-        "pathLengthShapeFit": 0.577,
+        "pathLengthShapeFit": 0.654,
         "pathLengthShapeFitByGroup": {
-          "group1": 0.341,
+          "group1": 0.486,
           "group2": 0.484,
           "group3": 0.218,
-          "group4": 0.811,
+          "group4": 0.821,
           "group5": 0.409
         },
         "peelOffReadability": 0.752,
@@ -1389,13 +669,13 @@
         "authorityConflictCount": 4,
         "humanVisibleVsCpuFieldOccupancyTensionCount": 4,
         "groupObjectDeltas": {
-          "group1": 0.9,
+          "group1": 1.5,
           "group2": 0,
           "group3": 0,
-          "group4": 1.6,
+          "group4": 2.1,
           "group5": 0
         },
-        "rankingScore": 0.5686
+        "rankingScore": 0.6018
       },
       "guardrails": {
         "spacingReadability": true,
@@ -1425,7 +705,7 @@
         "blockedReasons": [
           "no peel-off readability lift",
           "geometry-only lift: object/path improved without player-visible peel/readability lift",
-          "strict object-track fit remains below first trial floor (3.7/10)",
+          "strict object-track fit remains below first trial floor (3.9/10)",
           "runtime source expression proof does not exist for these Stage 3 semantic transforms"
         ]
       },
@@ -1433,37 +713,43 @@
         "readyForRuntimeSourceCandidate": false,
         "sourceCandidateGenerationAllowed": false,
         "read": "This is a non-overwriting trial prediction only. Runtime source promotion is intentionally disabled for this cycle."
+      },
+      "previousRanking": {
+        "rank": 1,
+        "rankingScore": 0.7022,
+        "trialPromising": true,
+        "classification": null
       }
     },
     {
-      "candidateId": "stage3-semantic-fresh-g1-path-only-sensitivity-0.1",
-      "semanticTransformId": "fresh-g1-path-only-sensitivity",
+      "candidateId": "stage3-semantic-direct-lines-path-fit-0.1",
+      "semanticTransformId": "direct-line-object-track-path-fit",
       "semanticTransformations": [
         "group1-object-track-path-fit",
+        "group4-object-track-path-fit",
         "preserve-upper-band-scoreability",
         "protect-semantic-line-roles",
         "protect-no-combat-scoreable-routes"
       ],
       "touchedGroups": [
-        1
+        1,
+        4
       ],
       "protectedGroups": [
         2,
         3,
-        4,
         5
       ],
       "protectedRoles": [
-        "late butterfly line",
-        "peel-off semantics",
+        "inferred columns",
         "mixed closing peel",
         "no-combat grammar"
       ],
-      "expectedPlayerVisibleImprovement": "No complete player-visible lift is expected because the opener still lacks peel correction.",
+      "expectedPlayerVisibleImprovement": "Improve both direct-labeled teaching lines against their RED object-track/path-length targets while leaving inferred groups untouched.",
       "expectedStrictMetricMovement": {
-        "group1ObjectTrack": "strong positive",
-        "group1PathShape": "positive",
-        "peelReadability": "preserve baseline"
+        "group1ObjectTrack": "positive",
+        "group4ObjectTrack": "positive",
+        "strictWeakRows": "may remain but should reduce direct-line weakness"
       },
       "authorityAssumptions": {
         "pathFamilyAuthority": "preserve current RED canonical path-family order for non-overwriting comparison",
@@ -1472,8 +758,9 @@
         "fieldOccupancyPolicy": "human-visible upper-band scoreability and CPU lower-field geometry remain separate reads"
       },
       "expectedMetricDeltas": {
-        "group1ObjectTrack": "strong positive",
-        "group1PathLengthRatio": "toward RED target"
+        "group1ObjectTrack": "positive",
+        "group4ObjectTrack": "positive",
+        "strictWeakRows": "may remain but should reduce direct-line weakness"
       },
       "hardGuardrails": [
         "preserve semantic line roles",
@@ -1485,27 +772,21 @@
         "do not treat RED target-conformance as runtime promotion authority"
       ],
       "softOptimizationTargets": [
-        "verify single-line geometry-only lift remains blocked",
-        "protect group 4"
+        "raise direct-labeled group object-track fit",
+        "reduce direct-line path-length ratios"
       ],
       "transferProofHypothesis": {
         "browserTransferProofRequired": true,
         "runtimeSourceCandidateAuthorized": false,
-        "intendedProofGroups": [
-          1
-        ],
         "hypothesizedRuntimeControls": [
           "referencePath.playbackScale",
-          "referencePath.pathLengthScale"
+          "referencePath.pathLengthScale",
+          "motionSpecGroup.spawnOffsetS",
+          "routeCurveX",
+          "routeCurveY",
+          "scoreable-window timing read"
         ],
-        "requiredEvidence": [
-          "browser-visible path/peel movement",
-          "motion-profile compatibility",
-          "spacing/readability preservation",
-          "scoreable-route preservation",
-          "no-shot/no-attack/no-loss safety"
-        ],
-        "read": "This is transfer-proof-ready only if the later browser proof shows these controls are consumed and visible without guardrail regression."
+        "read": "Hypothesized controls must be proven in a later non-overwriting browser transfer proof before any runtime source edit."
       },
       "redProvenanceFieldsUsed": [
         "aggregateObjectTrackTarget",
@@ -1518,35 +799,35 @@
         "executionModel.noCombatGrammar",
         "keeperRules"
       ],
-      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T20-25-49-16ba4062-fresh/candidates/stage3-semantic-fresh-g1-path-only-sensitivity-0.1.json",
+      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T19-32-37-54f53496/candidates/stage3-semantic-direct-lines-path-fit-0.1.json",
       "scores": {
         "semanticRolePreservation": 0.868,
         "strictObjectTrackFit": 3.5,
         "strictObjectTrackDelta10": 0.3,
-        "focusObjectTrackFit": 3.8,
-        "focusObjectTrackDelta": 0.6,
-        "pathShapeFit": 0.603,
+        "focusObjectTrackFit": 4,
+        "focusObjectTrackDelta": 0.8,
+        "pathShapeFit": 0.665,
         "pathShapeFitByGroup": {
-          "group1": 0.524,
+          "group1": 0.485,
           "group2": 0.507,
           "group3": 0.319,
-          "group4": 0.682,
+          "group4": 0.844,
           "group5": 0.342
         },
-        "pathLengthSanity": 0.315,
+        "pathLengthSanity": 0.375,
         "pathLengthSanityByGroup": {
-          "group1": 0.357,
+          "group1": 0,
           "group2": 0.461,
           "group3": 0.117,
-          "group4": 0.273,
+          "group4": 0.75,
           "group5": 0.475
         },
-        "pathLengthShapeFit": 0.459,
+        "pathLengthShapeFit": 0.52,
         "pathLengthShapeFitByGroup": {
-          "group1": 0.441,
+          "group1": 0.243,
           "group2": 0.484,
           "group3": 0.218,
-          "group4": 0.478,
+          "group4": 0.797,
           "group5": 0.409
         },
         "peelOffReadability": 0.752,
@@ -1558,13 +839,13 @@
         "authorityConflictCount": 4,
         "humanVisibleVsCpuFieldOccupancyTensionCount": 4,
         "groupObjectDeltas": {
-          "group1": 1.2,
+          "group1": 0.7,
           "group2": 0,
           "group3": 0,
-          "group4": 0,
+          "group4": 0.9,
           "group5": 0
         },
-        "rankingScore": 0.5208
+        "rankingScore": 0.5433
       },
       "guardrails": {
         "spacingReadability": true,
@@ -1602,11 +883,355 @@
         "readyForRuntimeSourceCandidate": false,
         "sourceCandidateGenerationAllowed": false,
         "read": "This is a non-overwriting trial prediction only. Runtime source promotion is intentionally disabled for this cycle."
+      },
+      "previousRanking": {
+        "rank": 4,
+        "rankingScore": 0.6234,
+        "trialPromising": true,
+        "classification": null
       }
     },
     {
-      "candidateId": "stage3-semantic-fresh-direct-lines-peel-only-sensitivity-0.1",
-      "semanticTransformId": "fresh-direct-lines-peel-only-sensitivity",
+      "candidateId": "stage3-semantic-g4-path-fit-0.1",
+      "semanticTransformId": "group4-object-track-path-fit",
+      "semanticTransformations": [
+        "group4-object-track-path-fit",
+        "preserve-upper-band-scoreability",
+        "protect-semantic-line-roles",
+        "protect-no-combat-scoreable-routes"
+      ],
+      "touchedGroups": [
+        4
+      ],
+      "protectedGroups": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "protectedRoles": [
+        "top-right bee line",
+        "mixed closing peel",
+        "no-combat grammar"
+      ],
+      "expectedPlayerVisibleImprovement": "Pull the late top-left butterfly line toward the RED object-track path length and timing while preserving the opener.",
+      "expectedStrictMetricMovement": {
+        "group4ObjectTrack": "positive",
+        "group4PathLengthRatio": "toward RED aggregate target",
+        "peelOffReadability": "preserve baseline"
+      },
+      "authorityAssumptions": {
+        "pathFamilyAuthority": "preserve current RED canonical path-family order for non-overwriting comparison",
+        "runtimePromotionAuthority": "not-authorized",
+        "targetConformanceDebtCarriedForward": true,
+        "fieldOccupancyPolicy": "human-visible upper-band scoreability and CPU lower-field geometry remain separate reads"
+      },
+      "expectedMetricDeltas": {
+        "group4ObjectTrack": "positive",
+        "group4PathLengthRatio": "toward RED aggregate target",
+        "peelOffReadability": "preserve baseline"
+      },
+      "hardGuardrails": [
+        "preserve semantic line roles",
+        "preserve upper-band scoreability",
+        "preserve scoreable routes",
+        "preserve spacing/readability",
+        "preserve no-shot/no-attack/no-loss/no-contact safety",
+        "do not increase authority conflict count",
+        "do not treat RED target-conformance as runtime promotion authority"
+      ],
+      "softOptimizationTargets": [
+        "reduce group 4 path-length ratio",
+        "improve group 4 object-track fit without reducing group 1"
+      ],
+      "transferProofHypothesis": {
+        "browserTransferProofRequired": true,
+        "runtimeSourceCandidateAuthorized": false,
+        "hypothesizedRuntimeControls": [
+          "referencePath.playbackScale",
+          "referencePath.pathLengthScale",
+          "motionSpecGroup.spawnOffsetS",
+          "routeCurveX",
+          "routeCurveY",
+          "scoreable-window timing read"
+        ],
+        "read": "Hypothesized controls must be proven in a later non-overwriting browser transfer proof before any runtime source edit."
+      },
+      "redProvenanceFieldsUsed": [
+        "aggregateObjectTrackTarget",
+        "candidateComparisonGate.targetVector",
+        "semanticExecution.scoreableBand",
+        "semanticExecution.scoreableFrameWindow",
+        "fieldOccupancyExpectation",
+        "semanticExecution.lineRole",
+        "semanticExecution.entryCue",
+        "executionModel.noCombatGrammar",
+        "keeperRules"
+      ],
+      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T19-32-37-54f53496/candidates/stage3-semantic-g4-path-fit-0.1.json",
+      "scores": {
+        "semanticRolePreservation": 0.868,
+        "strictObjectTrackFit": 3.4,
+        "strictObjectTrackDelta10": 0.2,
+        "focusObjectTrackFit": 3.65,
+        "focusObjectTrackDelta": 0.45,
+        "pathShapeFit": 0.588,
+        "pathShapeFitByGroup": {
+          "group1": 0.331,
+          "group2": 0.507,
+          "group3": 0.319,
+          "group4": 0.844,
+          "group5": 0.342
+        },
+        "pathLengthSanity": 0.375,
+        "pathLengthSanityByGroup": {
+          "group1": 0,
+          "group2": 0.461,
+          "group3": 0.117,
+          "group4": 0.75,
+          "group5": 0.475
+        },
+        "pathLengthShapeFit": 0.482,
+        "pathLengthShapeFitByGroup": {
+          "group1": 0.166,
+          "group2": 0.484,
+          "group3": 0.218,
+          "group4": 0.797,
+          "group5": 0.409
+        },
+        "peelOffReadability": 0.752,
+        "focusPeelOffReadability": 0.64,
+        "upperBandScoreability": 0.968,
+        "routeLearnability": 1,
+        "noCombatGrammarPreservation": 1,
+        "spacingReadability": 0.676,
+        "authorityConflictCount": 4,
+        "humanVisibleVsCpuFieldOccupancyTensionCount": 4,
+        "groupObjectDeltas": {
+          "group1": 0,
+          "group2": 0,
+          "group3": 0,
+          "group4": 0.9,
+          "group5": 0
+        },
+        "rankingScore": 0.5247
+      },
+      "guardrails": {
+        "spacingReadability": true,
+        "scoreableRoutes": true,
+        "safety": true,
+        "noCombatGrammar": true
+      },
+      "yield": {
+        "valid": true,
+        "improved": true,
+        "objectImproved": true,
+        "pathShapeImproved": true,
+        "pathLengthSanityImproved": true,
+        "pathImproved": true,
+        "peelImproved": false,
+        "multiAxisImproved": false,
+        "geometryOnlyLift": true,
+        "candidateClassification": "metric-only-probe",
+        "guardrailSafe": true,
+        "trialPromising": false,
+        "sourceBlocked": true,
+        "blockerTypes": [
+          "geometry-only-lift",
+          "strict-object-track-floor",
+          "runtime-expression-proof-missing"
+        ],
+        "blockedReasons": [
+          "no peel-off readability lift",
+          "geometry-only lift: object/path improved without player-visible peel/readability lift",
+          "strict object-track fit remains below first trial floor (3.4/10)",
+          "runtime source expression proof does not exist for these Stage 3 semantic transforms"
+        ]
+      },
+      "runtimePromotion": {
+        "readyForRuntimeSourceCandidate": false,
+        "sourceCandidateGenerationAllowed": false,
+        "read": "This is a non-overwriting trial prediction only. Runtime source promotion is intentionally disabled for this cycle."
+      },
+      "previousRanking": {
+        "rank": 5,
+        "rankingScore": 0.6147,
+        "trialPromising": true,
+        "classification": null
+      }
+    },
+    {
+      "candidateId": "stage3-semantic-g1-path-fit-0.1",
+      "semanticTransformId": "group1-object-track-path-fit",
+      "semanticTransformations": [
+        "group1-object-track-path-fit",
+        "preserve-upper-band-scoreability",
+        "protect-semantic-line-roles",
+        "protect-no-combat-scoreable-routes"
+      ],
+      "touchedGroups": [
+        1
+      ],
+      "protectedGroups": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "protectedRoles": [
+        "late top-left butterfly line",
+        "mixed closing peel",
+        "no-combat grammar"
+      ],
+      "expectedPlayerVisibleImprovement": "Pull the top-right bee line toward the RED object-track length and visible duration while preserving scoreable upper-band semantics.",
+      "expectedStrictMetricMovement": {
+        "group1ObjectTrack": "positive",
+        "group1PathLengthRatio": "toward RED aggregate target",
+        "peelOffReadability": "preserve baseline"
+      },
+      "authorityAssumptions": {
+        "pathFamilyAuthority": "preserve current RED canonical path-family order for non-overwriting comparison",
+        "runtimePromotionAuthority": "not-authorized",
+        "targetConformanceDebtCarriedForward": true,
+        "fieldOccupancyPolicy": "human-visible upper-band scoreability and CPU lower-field geometry remain separate reads"
+      },
+      "expectedMetricDeltas": {
+        "group1ObjectTrack": "positive",
+        "group1PathLengthRatio": "toward RED aggregate target",
+        "peelOffReadability": "preserve baseline"
+      },
+      "hardGuardrails": [
+        "preserve semantic line roles",
+        "preserve upper-band scoreability",
+        "preserve scoreable routes",
+        "preserve spacing/readability",
+        "preserve no-shot/no-attack/no-loss/no-contact safety",
+        "do not increase authority conflict count",
+        "do not treat RED target-conformance as runtime promotion authority"
+      ],
+      "softOptimizationTargets": [
+        "reduce group 1 path-length ratio",
+        "improve group 1 object-track fit without changing lower-field policy"
+      ],
+      "transferProofHypothesis": {
+        "browserTransferProofRequired": true,
+        "runtimeSourceCandidateAuthorized": false,
+        "hypothesizedRuntimeControls": [
+          "referencePath.playbackScale",
+          "referencePath.pathLengthScale",
+          "motionSpecGroup.spawnOffsetS",
+          "routeCurveX",
+          "routeCurveY",
+          "scoreable-window timing read"
+        ],
+        "read": "Hypothesized controls must be proven in a later non-overwriting browser transfer proof before any runtime source edit."
+      },
+      "redProvenanceFieldsUsed": [
+        "aggregateObjectTrackTarget",
+        "candidateComparisonGate.targetVector",
+        "semanticExecution.scoreableBand",
+        "semanticExecution.scoreableFrameWindow",
+        "fieldOccupancyExpectation",
+        "semanticExecution.lineRole",
+        "semanticExecution.entryCue",
+        "executionModel.noCombatGrammar",
+        "keeperRules"
+      ],
+      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T19-32-37-54f53496/candidates/stage3-semantic-g1-path-fit-0.1.json",
+      "scores": {
+        "semanticRolePreservation": 0.868,
+        "strictObjectTrackFit": 3.4,
+        "strictObjectTrackDelta10": 0.2,
+        "focusObjectTrackFit": 3.55,
+        "focusObjectTrackDelta": 0.35,
+        "pathShapeFit": 0.584,
+        "pathShapeFitByGroup": {
+          "group1": 0.485,
+          "group2": 0.507,
+          "group3": 0.319,
+          "group4": 0.682,
+          "group5": 0.342
+        },
+        "pathLengthSanity": 0.137,
+        "pathLengthSanityByGroup": {
+          "group1": 0,
+          "group2": 0.461,
+          "group3": 0.117,
+          "group4": 0.273,
+          "group5": 0.475
+        },
+        "pathLengthShapeFit": 0.361,
+        "pathLengthShapeFitByGroup": {
+          "group1": 0.243,
+          "group2": 0.484,
+          "group3": 0.218,
+          "group4": 0.478,
+          "group5": 0.409
+        },
+        "peelOffReadability": 0.752,
+        "focusPeelOffReadability": 0.64,
+        "upperBandScoreability": 0.968,
+        "routeLearnability": 1,
+        "noCombatGrammarPreservation": 1,
+        "spacingReadability": 0.676,
+        "authorityConflictCount": 4,
+        "humanVisibleVsCpuFieldOccupancyTensionCount": 4,
+        "groupObjectDeltas": {
+          "group1": 0.7,
+          "group2": 0,
+          "group3": 0,
+          "group4": 0,
+          "group5": 0
+        },
+        "rankingScore": 0.4866
+      },
+      "guardrails": {
+        "spacingReadability": true,
+        "scoreableRoutes": true,
+        "safety": true,
+        "noCombatGrammar": true
+      },
+      "yield": {
+        "valid": true,
+        "improved": true,
+        "objectImproved": true,
+        "pathShapeImproved": true,
+        "pathLengthSanityImproved": false,
+        "pathImproved": true,
+        "peelImproved": false,
+        "multiAxisImproved": false,
+        "geometryOnlyLift": true,
+        "candidateClassification": "metric-only-probe",
+        "guardrailSafe": true,
+        "trialPromising": false,
+        "sourceBlocked": true,
+        "blockerTypes": [
+          "geometry-only-lift",
+          "strict-object-track-floor",
+          "runtime-expression-proof-missing"
+        ],
+        "blockedReasons": [
+          "no peel-off readability lift",
+          "geometry-only lift: object/path improved without player-visible peel/readability lift",
+          "strict object-track fit remains below first trial floor (3.4/10)",
+          "runtime source expression proof does not exist for these Stage 3 semantic transforms"
+        ]
+      },
+      "runtimePromotion": {
+        "readyForRuntimeSourceCandidate": false,
+        "sourceCandidateGenerationAllowed": false,
+        "read": "This is a non-overwriting trial prediction only. Runtime source promotion is intentionally disabled for this cycle."
+      },
+      "previousRanking": {
+        "rank": 8,
+        "rankingScore": 0.5551,
+        "trialPromising": false,
+        "classification": null
+      }
+    },
+    {
+      "candidateId": "stage3-semantic-direct-lines-peel-read-0.1",
+      "semanticTransformId": "direct-line-peel-off-readability",
       "semanticTransformations": [
         "group1-peel-off-readability",
         "group4-peel-off-readability",
@@ -1624,16 +1249,15 @@
         5
       ],
       "protectedRoles": [
-        "object-track/path-shape fit",
         "inferred columns",
         "mixed closing peel",
         "no-combat grammar"
       ],
-      "expectedPlayerVisibleImprovement": "Peel direction should read correctly, but path/object-track weakness should remain visible.",
+      "expectedPlayerVisibleImprovement": "Improve both direct-labeled peel-off exit reads without projecting object-track geometry movement.",
       "expectedStrictMetricMovement": {
-        "objectTrack": "neutral",
-        "pathShape": "neutral",
-        "peelReadability": "positive"
+        "peelOffReadability": "positive",
+        "objectTrackFit": "neutral",
+        "strictWeakRows": "unchanged"
       },
       "authorityAssumptions": {
         "pathFamilyAuthority": "preserve current RED canonical path-family order for non-overwriting comparison",
@@ -1642,8 +1266,9 @@
         "fieldOccupancyPolicy": "human-visible upper-band scoreability and CPU lower-field geometry remain separate reads"
       },
       "expectedMetricDeltas": {
-        "directLinePeelOffReadability": "positive",
-        "strictObjectTrack": "neutral"
+        "peelOffReadability": "positive",
+        "objectTrackFit": "neutral",
+        "strictWeakRows": "unchanged"
       },
       "hardGuardrails": [
         "preserve semantic line roles",
@@ -1655,27 +1280,20 @@
         "do not treat RED target-conformance as runtime promotion authority"
       ],
       "softOptimizationTargets": [
-        "verify semantic-only lift is blocked from proof-ready status",
-        "keep object-track weakness visible"
+        "raise direct-line peel-off readability",
+        "preserve geometry baseline"
       ],
       "transferProofHypothesis": {
         "browserTransferProofRequired": true,
         "runtimeSourceCandidateAuthorized": false,
-        "intendedProofGroups": [
-          1,
-          4
-        ],
         "hypothesizedRuntimeControls": [
-          "path endpoint / exit-side control"
+          "routeOffsetX",
+          "routeCurveX",
+          "routeCurveY",
+          "path endpoint / exit-side control",
+          "scoreable-window timing read"
         ],
-        "requiredEvidence": [
-          "browser-visible path/peel movement",
-          "motion-profile compatibility",
-          "spacing/readability preservation",
-          "scoreable-route preservation",
-          "no-shot/no-attack/no-loss safety"
-        ],
-        "read": "This is transfer-proof-ready only if the later browser proof shows these controls are consumed and visible without guardrail regression."
+        "read": "Hypothesized controls must be proven in a later non-overwriting browser transfer proof before any runtime source edit."
       },
       "redProvenanceFieldsUsed": [
         "semanticExecution.exitGesture",
@@ -1688,7 +1306,7 @@
         "executionModel.noCombatGrammar",
         "keeperRules"
       ],
-      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T20-25-49-16ba4062-fresh/candidates/stage3-semantic-fresh-direct-lines-peel-only-sensitivity-0.1.json",
+      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T19-32-37-54f53496/candidates/stage3-semantic-direct-lines-peel-read-0.1.json",
       "scores": {
         "semanticRolePreservation": 0.868,
         "strictObjectTrackFit": 3.1,
@@ -1771,57 +1389,397 @@
         "readyForRuntimeSourceCandidate": false,
         "sourceCandidateGenerationAllowed": false,
         "read": "This is a non-overwriting trial prediction only. Runtime source promotion is intentionally disabled for this cycle."
+      },
+      "previousRanking": {
+        "rank": 7,
+        "rankingScore": 0.5774,
+        "trialPromising": false,
+        "classification": null
+      }
+    },
+    {
+      "candidateId": "stage3-semantic-g1-peel-read-0.1",
+      "semanticTransformId": "group1-peel-off-readability",
+      "semanticTransformations": [
+        "group1-peel-off-readability",
+        "preserve-upper-band-scoreability",
+        "protect-semantic-line-roles",
+        "protect-no-combat-scoreable-routes"
+      ],
+      "touchedGroups": [
+        1
+      ],
+      "protectedGroups": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "protectedRoles": [
+        "late top-left butterfly line",
+        "scoreable routes",
+        "no-combat grammar"
+      ],
+      "expectedPlayerVisibleImprovement": "Project the opener as a left peel-off phrase so the exit read matches the RED semantic contract.",
+      "expectedStrictMetricMovement": {
+        "group1PeelOffReadability": "positive",
+        "objectTrackFit": "neutral",
+        "scoreableRoutes": "preserve"
+      },
+      "authorityAssumptions": {
+        "pathFamilyAuthority": "preserve current RED canonical path-family order for non-overwriting comparison",
+        "runtimePromotionAuthority": "not-authorized",
+        "targetConformanceDebtCarriedForward": true,
+        "fieldOccupancyPolicy": "human-visible upper-band scoreability and CPU lower-field geometry remain separate reads"
+      },
+      "expectedMetricDeltas": {
+        "group1PeelOffReadability": "positive",
+        "objectTrackFit": "neutral",
+        "scoreableRoutes": "preserve"
+      },
+      "hardGuardrails": [
+        "preserve semantic line roles",
+        "preserve upper-band scoreability",
+        "preserve scoreable routes",
+        "preserve spacing/readability",
+        "preserve no-shot/no-attack/no-loss/no-contact safety",
+        "do not increase authority conflict count",
+        "do not treat RED target-conformance as runtime promotion authority"
+      ],
+      "softOptimizationTargets": [
+        "make group 1 exit side match RED exitGesture",
+        "preserve path-family order"
+      ],
+      "transferProofHypothesis": {
+        "browserTransferProofRequired": true,
+        "runtimeSourceCandidateAuthorized": false,
+        "hypothesizedRuntimeControls": [
+          "routeOffsetX",
+          "routeCurveX",
+          "routeCurveY",
+          "path endpoint / exit-side control",
+          "scoreable-window timing read"
+        ],
+        "read": "Hypothesized controls must be proven in a later non-overwriting browser transfer proof before any runtime source edit."
+      },
+      "redProvenanceFieldsUsed": [
+        "semanticExecution.exitGesture",
+        "uncertaintyAndProvenance",
+        "semanticExecution.scoreableBand",
+        "semanticExecution.scoreableFrameWindow",
+        "fieldOccupancyExpectation",
+        "semanticExecution.lineRole",
+        "semanticExecution.entryCue",
+        "executionModel.noCombatGrammar",
+        "keeperRules"
+      ],
+      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T19-32-37-54f53496/candidates/stage3-semantic-g1-peel-read-0.1.json",
+      "scores": {
+        "semanticRolePreservation": 0.868,
+        "strictObjectTrackFit": 3.2,
+        "strictObjectTrackDelta10": 0,
+        "focusObjectTrackFit": 3.2,
+        "focusObjectTrackDelta": 0,
+        "pathShapeFit": 0.507,
+        "pathShapeFitByGroup": {
+          "group1": 0.331,
+          "group2": 0.507,
+          "group3": 0.319,
+          "group4": 0.682,
+          "group5": 0.342
+        },
+        "pathLengthSanity": 0.137,
+        "pathLengthSanityByGroup": {
+          "group1": 0,
+          "group2": 0.461,
+          "group3": 0.117,
+          "group4": 0.273,
+          "group5": 0.475
+        },
+        "pathLengthShapeFit": 0.322,
+        "pathLengthShapeFitByGroup": {
+          "group1": 0.166,
+          "group2": 0.484,
+          "group3": 0.218,
+          "group4": 0.478,
+          "group5": 0.409
+        },
+        "peelOffReadability": 0.824,
+        "focusPeelOffReadability": 0.82,
+        "upperBandScoreability": 0.968,
+        "routeLearnability": 1,
+        "noCombatGrammarPreservation": 1,
+        "spacingReadability": 0.676,
+        "authorityConflictCount": 4,
+        "humanVisibleVsCpuFieldOccupancyTensionCount": 4,
+        "groupObjectDeltas": {
+          "group1": 0,
+          "group2": 0,
+          "group3": 0,
+          "group4": 0,
+          "group5": 0
+        },
+        "rankingScore": 0.5243
+      },
+      "guardrails": {
+        "spacingReadability": true,
+        "scoreableRoutes": true,
+        "safety": true,
+        "noCombatGrammar": true
+      },
+      "yield": {
+        "valid": true,
+        "improved": true,
+        "objectImproved": false,
+        "pathShapeImproved": false,
+        "pathLengthSanityImproved": false,
+        "pathImproved": false,
+        "peelImproved": true,
+        "multiAxisImproved": false,
+        "geometryOnlyLift": false,
+        "candidateClassification": "semantic-only-probe",
+        "guardrailSafe": true,
+        "trialPromising": false,
+        "sourceBlocked": true,
+        "blockerTypes": [
+          "strict-object-track-floor",
+          "runtime-expression-proof-missing"
+        ],
+        "blockedReasons": [
+          "no strict object-track lift",
+          "no path-shape or path-length sanity lift",
+          "strict object-track fit remains below first trial floor (3.2/10)",
+          "runtime source expression proof does not exist for these Stage 3 semantic transforms"
+        ]
+      },
+      "runtimePromotion": {
+        "readyForRuntimeSourceCandidate": false,
+        "sourceCandidateGenerationAllowed": false,
+        "read": "This is a non-overwriting trial prediction only. Runtime source promotion is intentionally disabled for this cycle."
+      },
+      "previousRanking": {
+        "rank": 9,
+        "rankingScore": 0.5487,
+        "trialPromising": false,
+        "classification": null
+      }
+    },
+    {
+      "candidateId": "stage3-semantic-g4-peel-read-0.1",
+      "semanticTransformId": "group4-peel-off-readability",
+      "semanticTransformations": [
+        "group4-peel-off-readability",
+        "preserve-upper-band-scoreability",
+        "protect-semantic-line-roles",
+        "protect-no-combat-scoreable-routes"
+      ],
+      "touchedGroups": [
+        4
+      ],
+      "protectedGroups": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "protectedRoles": [
+        "top-right bee line",
+        "scoreable routes",
+        "no-combat grammar"
+      ],
+      "expectedPlayerVisibleImprovement": "Project the late butterfly line as a right peel-off phrase so the exit read matches the RED semantic contract.",
+      "expectedStrictMetricMovement": {
+        "group4PeelOffReadability": "positive",
+        "objectTrackFit": "neutral",
+        "scoreableRoutes": "preserve"
+      },
+      "authorityAssumptions": {
+        "pathFamilyAuthority": "preserve current RED canonical path-family order for non-overwriting comparison",
+        "runtimePromotionAuthority": "not-authorized",
+        "targetConformanceDebtCarriedForward": true,
+        "fieldOccupancyPolicy": "human-visible upper-band scoreability and CPU lower-field geometry remain separate reads"
+      },
+      "expectedMetricDeltas": {
+        "group4PeelOffReadability": "positive",
+        "objectTrackFit": "neutral",
+        "scoreableRoutes": "preserve"
+      },
+      "hardGuardrails": [
+        "preserve semantic line roles",
+        "preserve upper-band scoreability",
+        "preserve scoreable routes",
+        "preserve spacing/readability",
+        "preserve no-shot/no-attack/no-loss/no-contact safety",
+        "do not increase authority conflict count",
+        "do not treat RED target-conformance as runtime promotion authority"
+      ],
+      "softOptimizationTargets": [
+        "make group 4 exit side match RED exitGesture",
+        "preserve path-family order"
+      ],
+      "transferProofHypothesis": {
+        "browserTransferProofRequired": true,
+        "runtimeSourceCandidateAuthorized": false,
+        "hypothesizedRuntimeControls": [
+          "routeOffsetX",
+          "routeCurveX",
+          "routeCurveY",
+          "path endpoint / exit-side control",
+          "scoreable-window timing read"
+        ],
+        "read": "Hypothesized controls must be proven in a later non-overwriting browser transfer proof before any runtime source edit."
+      },
+      "redProvenanceFieldsUsed": [
+        "semanticExecution.exitGesture",
+        "uncertaintyAndProvenance",
+        "semanticExecution.scoreableBand",
+        "semanticExecution.scoreableFrameWindow",
+        "fieldOccupancyExpectation",
+        "semanticExecution.lineRole",
+        "semanticExecution.entryCue",
+        "executionModel.noCombatGrammar",
+        "keeperRules"
+      ],
+      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T19-32-37-54f53496/candidates/stage3-semantic-g4-peel-read-0.1.json",
+      "scores": {
+        "semanticRolePreservation": 0.868,
+        "strictObjectTrackFit": 3.1,
+        "strictObjectTrackDelta10": -0.1,
+        "focusObjectTrackFit": 3.05,
+        "focusObjectTrackDelta": -0.15,
+        "pathShapeFit": 0.507,
+        "pathShapeFitByGroup": {
+          "group1": 0.331,
+          "group2": 0.507,
+          "group3": 0.319,
+          "group4": 0.682,
+          "group5": 0.342
+        },
+        "pathLengthSanity": 0.137,
+        "pathLengthSanityByGroup": {
+          "group1": 0,
+          "group2": 0.461,
+          "group3": 0.117,
+          "group4": 0.273,
+          "group5": 0.475
+        },
+        "pathLengthShapeFit": 0.322,
+        "pathLengthShapeFitByGroup": {
+          "group1": 0.166,
+          "group2": 0.484,
+          "group3": 0.218,
+          "group4": 0.478,
+          "group5": 0.409
+        },
+        "peelOffReadability": 0.824,
+        "focusPeelOffReadability": 0.82,
+        "upperBandScoreability": 0.968,
+        "routeLearnability": 1,
+        "noCombatGrammarPreservation": 1,
+        "spacingReadability": 0.676,
+        "authorityConflictCount": 4,
+        "humanVisibleVsCpuFieldOccupancyTensionCount": 4,
+        "groupObjectDeltas": {
+          "group1": 0,
+          "group2": 0,
+          "group3": 0,
+          "group4": -0.3,
+          "group5": 0
+        },
+        "rankingScore": 0.5216
+      },
+      "guardrails": {
+        "spacingReadability": true,
+        "scoreableRoutes": true,
+        "safety": true,
+        "noCombatGrammar": true
+      },
+      "yield": {
+        "valid": true,
+        "improved": true,
+        "objectImproved": false,
+        "pathShapeImproved": false,
+        "pathLengthSanityImproved": false,
+        "pathImproved": false,
+        "peelImproved": true,
+        "multiAxisImproved": false,
+        "geometryOnlyLift": false,
+        "candidateClassification": "semantic-only-probe",
+        "guardrailSafe": true,
+        "trialPromising": false,
+        "sourceBlocked": true,
+        "blockerTypes": [
+          "strict-object-track-floor",
+          "runtime-expression-proof-missing"
+        ],
+        "blockedReasons": [
+          "no strict object-track lift",
+          "no path-shape or path-length sanity lift",
+          "strict object-track fit remains below first trial floor (3.1/10)",
+          "runtime source expression proof does not exist for these Stage 3 semantic transforms"
+        ]
+      },
+      "runtimePromotion": {
+        "readyForRuntimeSourceCandidate": false,
+        "sourceCandidateGenerationAllowed": false,
+        "read": "This is a non-overwriting trial prediction only. Runtime source promotion is intentionally disabled for this cycle."
+      },
+      "previousRanking": {
+        "rank": 10,
+        "rankingScore": 0.545,
+        "trialPromising": false,
+        "classification": null
       }
     }
   ],
   "candidateClassYield": [
     {
       "classId": "group1-object-track-path-fit",
-      "generated": 7,
-      "valid": 7,
-      "improved": 7,
-      "guardrailSafe": 7,
-      "trialPromising": 5,
-      "sourceBlocked": 7,
-      "blocked": 2,
-      "bestCandidateId": "stage3-semantic-fresh-direct-lines-balanced-shape-peel-0.1",
-      "read": "5/7 candidate(s) using group1-object-track-path-fit were trial-promising."
+      "generated": 5,
+      "valid": 5,
+      "improved": 5,
+      "guardrailSafe": 5,
+      "trialPromising": 2,
+      "sourceBlocked": 5,
+      "blocked": 3,
+      "bestCandidateId": "stage3-semantic-direct-lines-shape-peel-0.1",
+      "read": "2/5 candidate(s) using group1-object-track-path-fit were trial-promising."
     },
     {
       "classId": "group4-object-track-path-fit",
-      "generated": 6,
-      "valid": 6,
-      "improved": 6,
-      "guardrailSafe": 6,
-      "trialPromising": 5,
-      "sourceBlocked": 6,
-      "blocked": 1,
-      "bestCandidateId": "stage3-semantic-fresh-direct-lines-balanced-shape-peel-0.1",
-      "read": "5/6 candidate(s) using group4-object-track-path-fit were trial-promising."
+      "generated": 5,
+      "valid": 5,
+      "improved": 5,
+      "guardrailSafe": 5,
+      "trialPromising": 2,
+      "sourceBlocked": 5,
+      "blocked": 3,
+      "bestCandidateId": "stage3-semantic-direct-lines-shape-peel-0.1",
+      "read": "2/5 candidate(s) using group4-object-track-path-fit were trial-promising."
     },
     {
       "classId": "group1-peel-off-readability",
-      "generated": 7,
-      "valid": 7,
-      "improved": 7,
-      "guardrailSafe": 7,
-      "trialPromising": 6,
-      "sourceBlocked": 7,
-      "blocked": 1,
-      "bestCandidateId": "stage3-semantic-fresh-direct-lines-balanced-shape-peel-0.1",
-      "read": "6/7 candidate(s) using group1-peel-off-readability were trial-promising."
+      "generated": 4,
+      "valid": 4,
+      "improved": 4,
+      "guardrailSafe": 4,
+      "trialPromising": 2,
+      "sourceBlocked": 4,
+      "blocked": 2,
+      "bestCandidateId": "stage3-semantic-direct-lines-shape-peel-0.1",
+      "read": "2/4 candidate(s) using group1-peel-off-readability were trial-promising."
     },
     {
       "classId": "group4-peel-off-readability",
-      "generated": 7,
-      "valid": 7,
-      "improved": 7,
-      "guardrailSafe": 7,
-      "trialPromising": 6,
-      "sourceBlocked": 7,
-      "blocked": 1,
-      "bestCandidateId": "stage3-semantic-fresh-direct-lines-balanced-shape-peel-0.1",
-      "read": "6/7 candidate(s) using group4-peel-off-readability were trial-promising."
+      "generated": 4,
+      "valid": 4,
+      "improved": 4,
+      "guardrailSafe": 4,
+      "trialPromising": 2,
+      "sourceBlocked": 4,
+      "blocked": 2,
+      "bestCandidateId": "stage3-semantic-direct-lines-shape-peel-0.1",
+      "read": "2/4 candidate(s) using group4-peel-off-readability were trial-promising."
     },
     {
       "classId": "preserve-upper-band-scoreability",
@@ -1829,11 +1787,11 @@
       "valid": 10,
       "improved": 10,
       "guardrailSafe": 10,
-      "trialPromising": 7,
+      "trialPromising": 3,
       "sourceBlocked": 10,
-      "blocked": 3,
-      "bestCandidateId": "stage3-semantic-fresh-direct-lines-balanced-shape-peel-0.1",
-      "read": "7/10 candidate(s) using preserve-upper-band-scoreability were trial-promising."
+      "blocked": 7,
+      "bestCandidateId": "stage3-semantic-direct-lines-shape-peel-0.1",
+      "read": "3/10 candidate(s) using preserve-upper-band-scoreability were trial-promising."
     },
     {
       "classId": "protect-semantic-line-roles",
@@ -1841,11 +1799,11 @@
       "valid": 10,
       "improved": 10,
       "guardrailSafe": 10,
-      "trialPromising": 7,
+      "trialPromising": 3,
       "sourceBlocked": 10,
-      "blocked": 3,
-      "bestCandidateId": "stage3-semantic-fresh-direct-lines-balanced-shape-peel-0.1",
-      "read": "7/10 candidate(s) using protect-semantic-line-roles were trial-promising."
+      "blocked": 7,
+      "bestCandidateId": "stage3-semantic-direct-lines-shape-peel-0.1",
+      "read": "3/10 candidate(s) using protect-semantic-line-roles were trial-promising."
     },
     {
       "classId": "protect-no-combat-scoreable-routes",
@@ -1853,11 +1811,11 @@
       "valid": 10,
       "improved": 10,
       "guardrailSafe": 10,
-      "trialPromising": 7,
+      "trialPromising": 3,
       "sourceBlocked": 10,
-      "blocked": 3,
-      "bestCandidateId": "stage3-semantic-fresh-direct-lines-balanced-shape-peel-0.1",
-      "read": "7/10 candidate(s) using protect-no-combat-scoreable-routes were trial-promising."
+      "blocked": 7,
+      "bestCandidateId": "stage3-semantic-direct-lines-shape-peel-0.1",
+      "read": "3/10 candidate(s) using protect-no-combat-scoreable-routes were trial-promising."
     }
   ],
   "blockerSummary": [
@@ -1866,39 +1824,43 @@
       "count": 10
     },
     {
-      "reason": "strict object-track fit remains below first trial floor (3.4/10)",
+      "reason": "geometry-only lift: object/path improved without player-visible peel/readability lift",
       "count": 4
     },
     {
-      "reason": "strict object-track fit remains below first trial floor (3.5/10)",
-      "count": 3
-    },
-    {
-      "reason": "geometry-only lift: object/path improved without player-visible peel/readability lift",
-      "count": 2
-    },
-    {
       "reason": "no peel-off readability lift",
-      "count": 2
+      "count": 4
     },
     {
       "reason": "no path-shape or path-length sanity lift",
-      "count": 1
+      "count": 3
     },
     {
       "reason": "no strict object-track lift",
-      "count": 1
+      "count": 3
+    },
+    {
+      "reason": "strict object-track fit remains below first trial floor (3.4/10)",
+      "count": 3
     },
     {
       "reason": "strict object-track fit remains below first trial floor (3.1/10)",
+      "count": 2
+    },
+    {
+      "reason": "strict object-track fit remains below first trial floor (3.5/10)",
+      "count": 2
+    },
+    {
+      "reason": "strict object-track fit remains below first trial floor (3.2/10)",
       "count": 1
     },
     {
-      "reason": "strict object-track fit remains below first trial floor (3.6/10)",
+      "reason": "strict object-track fit remains below first trial floor (3.3/10)",
       "count": 1
     },
     {
-      "reason": "strict object-track fit remains below first trial floor (3.7/10)",
+      "reason": "strict object-track fit remains below first trial floor (3.9/10)",
       "count": 1
     }
   ],
@@ -1912,29 +1874,28 @@
       "count": 10
     },
     {
-      "type": "player-visible-semantic-lift",
-      "count": 7
+      "type": "geometry-only-lift",
+      "count": 4
     },
     {
-      "type": "geometry-only-lift",
-      "count": 2
+      "type": "player-visible-semantic-lift",
+      "count": 3
     }
   ],
   "scoringCalibrationNote": {
     "baselineSemanticScore": 0.918,
     "baselineObjectTrackScore10": 3.2,
-    "bestCandidateId": "stage3-semantic-fresh-direct-lines-balanced-shape-peel-0.1",
-    "bestRankingScore": 0.7271,
-    "bestMultiAxisCandidateId": "stage3-semantic-fresh-direct-lines-balanced-shape-peel-0.1",
+    "bestCandidateId": "stage3-semantic-direct-lines-shape-peel-0.1",
+    "bestRankingScore": 0.7184,
+    "bestMultiAxisCandidateId": "stage3-semantic-direct-lines-shape-peel-0.1",
     "geometryOnlyTopCandidate": false,
     "semanticHighObjectWeakCount": 10,
     "objectTrackMetricResponsive": true,
     "pathLengthShapeMetricResponsive": true,
     "peelOffMetricResponsive": true,
-    "predictiveEnoughForNextTrialBatch": false,
+    "predictiveEnoughForNextTrialBatch": true,
     "predictiveEnoughForRuntimeSource": false,
-    "read": "The fresh out-of-sample batch preserved the calibrated ranking rule: geometry-only probes stayed metric-only, player-visible multi-axis candidates ranked above them, and the language is stable enough to choose one later browser transfer-proof target.",
-    "predictiveEnoughForTransferProofSelection": true
+    "read": "The calibrated gate now ranks a player-visible multi-axis path+peel candidate above the geometry-only probe. It is ready for one more small Stage 3 semantic batch, still without runtime source authorization."
   },
   "rankingCalibration": {
     "rankingModelVersion": "stage3-player-visible-multiaxis-0.2",
@@ -1944,128 +1905,173 @@
     "peelOffReadabilityRequiredForTrialPromising": true,
     "geometryOnlyWinnersClassifiedAs": "metric-only-probe",
     "semanticScoreAloneCanAuthorizeReadiness": false,
-    "beforeRanking": [],
+    "beforeRanking": [
+      {
+        "rank": 1,
+        "candidateId": "stage3-semantic-direct-lines-red-target-probe-0.1",
+        "rankingScore": 0.7022,
+        "trialPromising": true,
+        "classification": null
+      },
+      {
+        "rank": 2,
+        "candidateId": "stage3-semantic-direct-lines-shape-peel-0.1",
+        "rankingScore": 0.6845,
+        "trialPromising": true,
+        "classification": null
+      },
+      {
+        "rank": 3,
+        "candidateId": "stage3-semantic-g4-path-peel-0.1",
+        "rankingScore": 0.6433,
+        "trialPromising": true,
+        "classification": null
+      },
+      {
+        "rank": 4,
+        "candidateId": "stage3-semantic-direct-lines-path-fit-0.1",
+        "rankingScore": 0.6234,
+        "trialPromising": true,
+        "classification": null
+      },
+      {
+        "rank": 5,
+        "candidateId": "stage3-semantic-g4-path-fit-0.1",
+        "rankingScore": 0.6147,
+        "trialPromising": true,
+        "classification": null
+      },
+      {
+        "rank": 6,
+        "candidateId": "stage3-semantic-g1-path-peel-0.1",
+        "rankingScore": 0.5875,
+        "trialPromising": false,
+        "classification": null
+      },
+      {
+        "rank": 7,
+        "candidateId": "stage3-semantic-direct-lines-peel-read-0.1",
+        "rankingScore": 0.5774,
+        "trialPromising": false,
+        "classification": null
+      },
+      {
+        "rank": 8,
+        "candidateId": "stage3-semantic-g1-path-fit-0.1",
+        "rankingScore": 0.5551,
+        "trialPromising": false,
+        "classification": null
+      },
+      {
+        "rank": 9,
+        "candidateId": "stage3-semantic-g1-peel-read-0.1",
+        "rankingScore": 0.5487,
+        "trialPromising": false,
+        "classification": null
+      },
+      {
+        "rank": 10,
+        "candidateId": "stage3-semantic-g4-peel-read-0.1",
+        "rankingScore": 0.545,
+        "trialPromising": false,
+        "classification": null
+      }
+    ],
     "afterRanking": [
       {
         "rank": 1,
-        "candidateId": "stage3-semantic-fresh-direct-lines-balanced-shape-peel-0.1",
-        "rankingScore": 0.7271,
+        "candidateId": "stage3-semantic-direct-lines-shape-peel-0.1",
+        "rankingScore": 0.7184,
         "trialPromising": true,
         "classification": "player-visible-semantic-lift",
         "objectTrackFit": 3.5,
-        "pathShapeFit": 0.678,
-        "pathLengthSanity": 0.395,
+        "pathShapeFit": 0.665,
+        "pathLengthSanity": 0.375,
         "peelOffReadability": 1,
         "authorityConflictCount": 4,
         "fieldOccupancyTensionCount": 4
       },
       {
         "rank": 2,
-        "candidateId": "stage3-semantic-fresh-staggered-direct-lines-shape-peel-0.1",
-        "rankingScore": 0.724,
+        "candidateId": "stage3-semantic-g4-path-peel-0.1",
+        "rankingScore": 0.6584,
         "trialPromising": true,
         "classification": "player-visible-semantic-lift",
-        "objectTrackFit": 3.6,
-        "pathShapeFit": 0.672,
+        "objectTrackFit": 3.3,
+        "pathShapeFit": 0.588,
         "pathLengthSanity": 0.375,
-        "peelOffReadability": 1,
+        "peelOffReadability": 0.82,
         "authorityConflictCount": 4,
         "fieldOccupancyTensionCount": 4
       },
       {
         "rank": 3,
-        "candidateId": "stage3-semantic-fresh-g4-anchor-g1-peel-protect-0.1",
-        "rankingScore": 0.7106,
+        "candidateId": "stage3-semantic-g1-path-peel-0.1",
+        "rankingScore": 0.623,
         "trialPromising": true,
         "classification": "player-visible-semantic-lift",
-        "objectTrackFit": 3.5,
-        "pathShapeFit": 0.605,
-        "pathLengthSanity": 0.375,
-        "peelOffReadability": 1,
+        "objectTrackFit": 3.4,
+        "pathShapeFit": 0.584,
+        "pathLengthSanity": 0.137,
+        "peelOffReadability": 0.82,
         "authorityConflictCount": 4,
         "fieldOccupancyTensionCount": 4
       },
       {
         "rank": 4,
-        "candidateId": "stage3-semantic-fresh-direct-lines-conservative-shape-peel-0.1",
-        "rankingScore": 0.7079,
-        "trialPromising": true,
-        "classification": "player-visible-semantic-lift",
-        "objectTrackFit": 3.4,
-        "pathShapeFit": 0.634,
-        "pathLengthSanity": 0.356,
-        "peelOffReadability": 1,
+        "candidateId": "stage3-semantic-direct-lines-red-target-probe-0.1",
+        "rankingScore": 0.6018,
+        "trialPromising": false,
+        "classification": "metric-only-probe",
+        "objectTrackFit": 3.9,
+        "pathShapeFit": 0.708,
+        "pathLengthSanity": 0.599,
+        "peelOffReadability": 0.64,
         "authorityConflictCount": 4,
         "fieldOccupancyTensionCount": 4
       },
       {
         "rank": 5,
-        "candidateId": "stage3-semantic-fresh-g1-recovery-g4-peel-protect-0.1",
-        "rankingScore": 0.6884,
-        "trialPromising": true,
-        "classification": "player-visible-semantic-lift",
-        "objectTrackFit": 3.4,
-        "pathShapeFit": 0.601,
-        "pathLengthSanity": 0.279,
-        "peelOffReadability": 1,
+        "candidateId": "stage3-semantic-direct-lines-path-fit-0.1",
+        "rankingScore": 0.5433,
+        "trialPromising": false,
+        "classification": "metric-only-probe",
+        "objectTrackFit": 3.5,
+        "pathShapeFit": 0.665,
+        "pathLengthSanity": 0.375,
+        "peelOffReadability": 0.64,
         "authorityConflictCount": 4,
         "fieldOccupancyTensionCount": 4
       },
       {
         "rank": 6,
-        "candidateId": "stage3-semantic-fresh-g4-score-window-shape-peel-0.1",
-        "rankingScore": 0.6607,
-        "trialPromising": true,
-        "classification": "player-visible-semantic-lift",
+        "candidateId": "stage3-semantic-g4-path-fit-0.1",
+        "rankingScore": 0.5247,
+        "trialPromising": false,
+        "classification": "metric-only-probe",
         "objectTrackFit": 3.4,
-        "pathShapeFit": 0.592,
-        "pathLengthSanity": 0.374,
-        "peelOffReadability": 0.82,
+        "pathShapeFit": 0.588,
+        "pathLengthSanity": 0.375,
+        "peelOffReadability": 0.64,
         "authorityConflictCount": 4,
         "fieldOccupancyTensionCount": 4
       },
       {
         "rank": 7,
-        "candidateId": "stage3-semantic-fresh-g1-score-window-shape-peel-0.1",
-        "rankingScore": 0.6246,
-        "trialPromising": true,
-        "classification": "player-visible-semantic-lift",
+        "candidateId": "stage3-semantic-g1-path-fit-0.1",
+        "rankingScore": 0.4866,
+        "trialPromising": false,
+        "classification": "metric-only-probe",
         "objectTrackFit": 3.4,
-        "pathShapeFit": 0.588,
-        "pathLengthSanity": 0.138,
-        "peelOffReadability": 0.82,
+        "pathShapeFit": 0.584,
+        "pathLengthSanity": 0.137,
+        "peelOffReadability": 0.64,
         "authorityConflictCount": 4,
         "fieldOccupancyTensionCount": 4
       },
       {
         "rank": 8,
-        "candidateId": "stage3-semantic-fresh-direct-lines-path-only-sensitivity-0.1",
-        "rankingScore": 0.5686,
-        "trialPromising": false,
-        "classification": "metric-only-probe",
-        "objectTrackFit": 3.7,
-        "pathShapeFit": 0.691,
-        "pathLengthSanity": 0.462,
-        "peelOffReadability": 0.64,
-        "authorityConflictCount": 4,
-        "fieldOccupancyTensionCount": 4
-      },
-      {
-        "rank": 9,
-        "candidateId": "stage3-semantic-fresh-g1-path-only-sensitivity-0.1",
-        "rankingScore": 0.5208,
-        "trialPromising": false,
-        "classification": "metric-only-probe",
-        "objectTrackFit": 3.5,
-        "pathShapeFit": 0.603,
-        "pathLengthSanity": 0.315,
-        "peelOffReadability": 0.64,
-        "authorityConflictCount": 4,
-        "fieldOccupancyTensionCount": 4
-      },
-      {
-        "rank": 10,
-        "candidateId": "stage3-semantic-fresh-direct-lines-peel-only-sensitivity-0.1",
+        "candidateId": "stage3-semantic-direct-lines-peel-read-0.1",
         "rankingScore": 0.563,
         "trialPromising": false,
         "classification": "semantic-only-probe",
@@ -2075,9 +2081,58 @@
         "peelOffReadability": 1,
         "authorityConflictCount": 4,
         "fieldOccupancyTensionCount": 4
+      },
+      {
+        "rank": 9,
+        "candidateId": "stage3-semantic-g1-peel-read-0.1",
+        "rankingScore": 0.5243,
+        "trialPromising": false,
+        "classification": "semantic-only-probe",
+        "objectTrackFit": 3.2,
+        "pathShapeFit": 0.507,
+        "pathLengthSanity": 0.137,
+        "peelOffReadability": 0.82,
+        "authorityConflictCount": 4,
+        "fieldOccupancyTensionCount": 4
+      },
+      {
+        "rank": 10,
+        "candidateId": "stage3-semantic-g4-peel-read-0.1",
+        "rankingScore": 0.5216,
+        "trialPromising": false,
+        "classification": "semantic-only-probe",
+        "objectTrackFit": 3.1,
+        "pathShapeFit": 0.507,
+        "pathLengthSanity": 0.137,
+        "peelOffReadability": 0.82,
+        "authorityConflictCount": 4,
+        "fieldOccupancyTensionCount": 4
       }
     ],
-    "focusedComparison": null
+    "focusedComparison": {
+      "geometryHeavyCandidateId": "stage3-semantic-direct-lines-red-target-probe-0.1",
+      "multiAxisCandidateId": "stage3-semantic-direct-lines-shape-peel-0.1",
+      "before": {
+        "geometryHeavyRank": 1,
+        "geometryHeavyScore": 0.7022,
+        "geometryHeavyTrialPromising": true,
+        "multiAxisRank": 2,
+        "multiAxisScore": 0.6845,
+        "multiAxisTrialPromising": true
+      },
+      "after": {
+        "geometryHeavyRank": 4,
+        "geometryHeavyScore": 0.6018,
+        "geometryHeavyTrialPromising": false,
+        "geometryHeavyClassification": "metric-only-probe",
+        "multiAxisRank": 1,
+        "multiAxisScore": 0.7184,
+        "multiAxisTrialPromising": true,
+        "multiAxisClassification": "player-visible-semantic-lift"
+      },
+      "whyOldWinnerRankedFirst": "The previous model weighted focus object-track and path-length geometry enough that the RED target probe could rank first even though direct-line peel readability stayed at baseline.",
+      "calibratedRead": "The calibrated model places the multi-axis path+peel candidate ahead of the geometry-only probe because trial-promising status now requires object/path movement plus player-visible peel/readability lift."
+    }
   },
   "sourceReadyGate": {
     "runtimeSourceCandidateAuthorized": false,
@@ -2095,15 +2150,15 @@
   "summary": {
     "measurementKeeperRecommendation": "accept-semantic-batch-mechanism",
     "runtimeKeeperRecommendation": "not-a-runtime-keeper",
-    "recommendation": "transfer-proof-tie-select-smallest",
-    "trialPromisingCandidateId": null,
-    "transferProofReadyCandidateId": "stage3-semantic-fresh-g4-score-window-shape-peel-0.1",
+    "recommendation": "ready-for-one-more-small-stage3-semantic-batch",
+    "trialPromisingCandidateId": "stage3-semantic-direct-lines-shape-peel-0.1",
+    "transferProofReadyCandidateId": null,
     "readyForRuntimeSourceCandidate": false,
     "sourceCandidateGenerationAllowed": false,
-    "trialPromisingCandidateCount": 7,
-    "readyForNextSmallBatch": false,
-    "readyForFutureTransferProof": true,
-    "read": "stage3-semantic-fresh-g4-score-window-shape-peel-0.1 is recommended for a later non-overwriting browser transfer proof only. Runtime source remains unauthorized."
+    "trialPromisingCandidateCount": 3,
+    "readyForNextSmallBatch": true,
+    "readyForFutureTransferProof": false,
+    "read": "stage3-semantic-direct-lines-shape-peel-0.1 is trial-promising only as a calibration exemplar. Generate one more small Stage 3 semantic batch with this calibrated ranker before any transfer-proof or runtime-source work."
   },
-  "nextBestStep": "Run a later non-overwriting browser transfer proof for stage3-semantic-fresh-g4-score-window-shape-peel-0.1; do not edit runtime source until browser-visible control consumption is proven."
+  "nextBestStep": "Generate one more small Stage 3 semantic batch using the calibrated player-visible multi-axis ranking model; do not edit runtime source."
 }

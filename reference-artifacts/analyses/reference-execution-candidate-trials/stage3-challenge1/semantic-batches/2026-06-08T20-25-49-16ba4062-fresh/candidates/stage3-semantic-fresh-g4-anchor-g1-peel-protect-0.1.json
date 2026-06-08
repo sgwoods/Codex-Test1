@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage3-reference-execution-candidate-trial-input",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 3,
+    "challengeNumber": 1,
+    "displayLabel": "Stage 3 / Challenge 1"
+  },
+  "authorityLayerInputs": {
+    "targetConformanceAuthority": "reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage3-challenge1-0.1.json",
+    "livePromotionAuthority": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+    "runtimeSourcePromotion": "disabled for this semantic batch",
+    "authoritySeparation": "Candidate trials may use RED target-conformance to rank non-overwriting intent, but they do not authorize runtime source edits.",
+    "knownPrivateArtifactCaveat": "Some contact-sheet provenance paths point to the private companion artifact store and are non-blocking for this baseline trial unless newly worsened."
+  },
+  "guardrails": {
+    "spacingReadability": {
+      "source": "reference-artifacts/analyses/challenge-motion-profile/latest.json",
+      "preserveBaseline": true,
+      "pass": true,
+      "spacingScore": 0.676,
+      "bunchingRisk": 0.321,
+      "worstMinDistance": 1.96,
+      "averageMinDistance": 10.15,
+      "read": "Baseline Stage 3 spacing is preserved for this no-change candidate; the read remains strict enough to expose future regressions."
+    },
+    "scoreableRoutes": {
+      "source": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+      "preserveBaseline": true,
+      "pass": true,
+      "score10": 5.6,
+      "activeWindows": 61,
+      "multiTargetWindowShare": 0.82,
+      "laneDiversity": 1,
+      "centerBias": 0.112,
+      "read": "Baseline Stage 3 still has many scoreable windows; candidate variants must preserve the routeability and upper-band learning read."
+    },
+    "safety": {
+      "source": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+      "preserveBaseline": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "noChallengeContacts": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0,
+        "challengeContacts": 0
+      }
+    }
+  },
+  "semanticMetrics": {
+    "preserveLineRoles": true,
+    "preserveUpperBandScoreability": true,
+    "preservePeelOffReadability": true,
+    "preserveRouteLearnability": true,
+    "preserveNoCombatGrammar": true
+  },
+  "gates": {
+    "requireNoRuntimeSourceEdits": true,
+    "requireAuthorityLayerSeparation": true,
+    "requireNoCombatGrammar": true,
+    "requireScoreableRoutesPreserved": true,
+    "requireSpacingReadabilityPreserved": true,
+    "minSemanticScore": 0.7,
+    "minRouteLearnabilityScore": 0.7,
+    "objectTrackFitFloorScore10": 5,
+    "allowRuntimeSourceCandidate": false
+  },
+  "hardGuardrails": [
+    "preserve semantic line roles",
+    "preserve upper-band scoreability",
+    "preserve scoreable routes",
+    "preserve spacing/readability",
+    "preserve no-shot/no-attack/no-loss/no-contact safety",
+    "do not increase authority conflict count",
+    "do not treat RED target-conformance as runtime promotion authority"
+  ],
+  "redArtifactDigest": {
+    "directSemanticLabelCount": 2,
+    "fieldOccupancyConflictCount": 4,
+    "pathFamilyAuthorityConflictCount": 2
+  },
+  "candidateId": "stage3-semantic-fresh-g4-anchor-g1-peel-protect-0.1",
+  "semanticTransformId": "fresh-g4-anchor-g1-peel-protect",
+  "semanticTransformations": [
+    "group4-object-track-path-fit",
+    "group4-peel-off-readability",
+    "group1-peel-off-readability",
+    "preserve-upper-band-scoreability",
+    "protect-semantic-line-roles",
+    "protect-no-combat-scoreable-routes"
+  ],
+  "intent": {
+    "kind": "semantic-candidate-trial",
+    "read": "Anchor the late top-left butterfly line to the RED shape while only correcting the group 1 peel read.",
+    "playerFacingMeaning": "Anchor the late top-left butterfly line to the RED shape while only correcting the group 1 peel read."
+  },
+  "touchedGroups": [
+    1,
+    4
+  ],
+  "protectedGroups": [
+    2,
+    3,
+    5
+  ],
+  "protectedRoles": [
+    "top-right bee line role",
+    "inferred columns",
+    "mixed closing peel",
+    "no-combat grammar"
+  ],
+  "expectedPlayerVisibleImprovement": "The late butterfly line should become the cleaner direct-line anchor while group 1 gains the correct left peel.",
+  "expectedStrictMetricMovement": {
+    "group4ObjectTrack": "strong positive",
+    "group1ObjectTrack": "preserve",
+    "peelReadability": "positive"
+  },
+  "authorityAssumptions": {
+    "pathFamilyAuthority": "preserve current RED canonical path-family order for non-overwriting comparison",
+    "runtimePromotionAuthority": "not-authorized",
+    "targetConformanceDebtCarriedForward": true,
+    "fieldOccupancyPolicy": "human-visible upper-band scoreability and CPU lower-field geometry remain separate reads"
+  },
+  "expectedMetricDeltas": {
+    "group4ObjectTrack": "strong positive",
+    "group4PathLengthRatio": "toward RED target",
+    "group1PeelOffReadability": "positive"
+  },
+  "softOptimizationTargets": [
+    "test whether group 4 can be the least-authority-conflicted proof target",
+    "preserve group 1 geometry"
+  ],
+  "transferProofHypothesis": {
+    "browserTransferProofRequired": true,
+    "runtimeSourceCandidateAuthorized": false,
+    "intendedProofGroups": [
+      4
+    ],
+    "hypothesizedRuntimeControls": [
+      "referencePath.playbackScale",
+      "referencePath.pathLengthScale",
+      "motionSpecGroup.spawnOffsetS",
+      "routeCurveY",
+      "path endpoint / exit-side control"
+    ],
+    "requiredEvidence": [
+      "browser-visible path/peel movement",
+      "motion-profile compatibility",
+      "spacing/readability preservation",
+      "scoreable-route preservation",
+      "no-shot/no-attack/no-loss safety"
+    ],
+    "read": "This is transfer-proof-ready only if the later browser proof shows these controls are consumed and visible without guardrail regression."
+  },
+  "redProvenanceFieldsUsed": [
+    "aggregateObjectTrackTarget",
+    "candidateComparisonGate.targetVector",
+    "semanticExecution.exitGesture",
+    "uncertaintyAndProvenance",
+    "semanticExecution.scoreableBand",
+    "semanticExecution.scoreableFrameWindow",
+    "fieldOccupancyExpectation",
+    "semanticExecution.lineRole",
+    "semanticExecution.entryCue",
+    "executionModel.noCombatGrammar",
+    "keeperRules"
+  ],
+  "groups": [
+    {
+      "groupIndex": 1,
+      "semanticTransformations": [
+        "group1-peel-off-readability"
+      ],
+      "pathFamily": "first-challenge-peel",
+      "semanticExecution": {
+        "lineRole": "bee-line",
+        "entryCue": "top-right",
+        "exitGesture": "left peel-off",
+        "scoreableBand": "upper-band"
+      },
+      "predictedRuntimeVector": {
+        "exitSide": "left",
+        "pathFamily": "first-challenge-peel"
+      },
+      "controlsRead": "peel-off side read projected from RED exitGesture"
+    },
+    {
+      "groupIndex": 4,
+      "semanticTransformations": [
+        "group4-object-track-path-fit",
+        "group4-peel-off-readability"
+      ],
+      "pathFamily": "side-hook-return",
+      "semanticExecution": {
+        "lineRole": "butterfly-line",
+        "entryCue": "top-left",
+        "exitGesture": "right peel-off",
+        "scoreableBand": "upper-band"
+      },
+      "predictedRuntimeVector": {
+        "id": 131378797,
+        "family": "classic",
+        "pathFamily": "side-hook-return",
+        "wave": 3,
+        "lane": 3,
+        "type": "but",
+        "sampleCount": 24,
+        "visibleStartS": 10.58,
+        "visibleEndS": 15.93,
+        "entrySide": "left",
+        "exitSide": "right",
+        "xRange": 0.4272,
+        "yRange": 0.4871,
+        "pathLength": 0.3895,
+        "turnCount": 5.502,
+        "reversalCount": 4.092,
+        "lowerFieldShare": 0.13
+      },
+      "controlsRead": "peel-off side read projected from RED exitGesture"
+    }
+  ]
+}
