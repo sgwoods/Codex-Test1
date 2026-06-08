@@ -51,6 +51,8 @@ npm run harness:analyze:stage7-path-family-authority
 npm run harness:check:stage7-path-family-authority
 npm run harness:analyze:stage7-phase-duration-expressibility
 npm run harness:check:stage7-phase-duration-expressibility
+npm run harness:analyze:stage7-lower-field-expressibility
+npm run harness:check:stage7-lower-field-expressibility
 ```
 
 For `phase-duration-rebalance`, raw `visibleStartS` / `visibleEndS` trial
@@ -64,12 +66,19 @@ The current protected Stage 7 proof preserves group 4/group 5 timing, but is
 still source-ready-blocked by the spacing/readability guard, so do not promote
 or keep searching phase-duration candidates from this batch alone.
 
-For `group1-path-length-compression` and `lower-field-overstay-reduction`, the
-batch may record `analysisCompilerMappings` that point at consumed runtime
-fields (`referencePath.playbackScale`, `lowerFieldBias`, and `yOffset`). These
-are not source-ready compiled controls until a focused browser proof verifies
-that the mapping transfers to actual Stage 7 object-track movement without
-spacing, scoreable-route, or safety regression.
+For `group1-path-length-compression`, the batch may record
+`analysisCompilerMappings` that point at consumed runtime fields such as
+`referencePath.playbackScale`. These are not source-ready compiled controls
+until a focused browser proof verifies that the mapping transfers to actual
+Stage 7 object-track movement without spacing, scoreable-route, or safety
+regression.
+
+For `lower-field-overstay-reduction`, the focused browser proof confirms that
+`lowerFieldBias` and `yOffset` are consumed, but the current generated controls
+do not produce enough browser-visible lower-field movement or reduce group 2
+lower-field overstay in the intended direction. Keep this transform
+analysis-only under current controls and do not promote Stage 7 source edits
+from it.
 
 ## Stage 7 Input Shape
 

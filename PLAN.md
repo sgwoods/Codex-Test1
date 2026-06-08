@@ -241,11 +241,14 @@ from the roadmap.
    protected group 4/5 timing. It is still not source-ready: the constrained
    proof fails the focused motion/profile proxy on spacing/readability
    (`spacingScore` `0.64` below the `0.72` floor and `bunchingRisk` `0.387`
-   above the `0.38` cap). Group 1 path-length compression and lower-field
-   overstay reduction now have analysis-only compiler mappings, but no browser
-   transfer proof. Do not keep grinding Stage 7 phase-duration candidates; next
-   work should add exactly one focused lower-field-overstay transfer proof, or
-   pause Stage 7 and apply the RED pipeline front-first to Stage 3.
+   above the `0.38` cap). Lower-field overstay reduction now has its single
+   allowed browser transfer proof; the generated `lowerFieldBias` / `yOffset`
+   controls are consumed, but group 2 lower-field share held at `0.6667`
+   instead of moving toward `0.4522`, and the proof failed the motion/profile
+   plus spacing/readability guards. Group 1 path-length compression remains
+   analysis-only with no browser transfer proof. Do not keep grinding Stage 7
+   candidates; pause Stage 7 candidate work and apply the RED pipeline
+   front-first to Stage 3 / Challenge 1.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth
@@ -359,11 +362,14 @@ Current conformance read:
   still rejects source readiness because the constrained phase-duration
   candidate fails the focused motion/profile proxy on spacing/readability:
   `spacingScore` `0.64` is below the `0.72` floor and `bunchingRisk` `0.387`
-  is above the `0.38` cap; `exitS` is explicitly unconsumed. The semantic batch
-  now emits phase-duration `compiledRuntimeControls` under live authority and
-  records path-length / lower-field mappings as analysis-only until their
-  transfer proofs exist. This is a measurement/process keeper, not a runtime
-  keeper or beta justification.
+  is above the `0.38` cap; `exitS` is explicitly unconsumed. The lower-field
+  proof confirms `lowerFieldBias` / `yOffset` controls are consumed, but they
+  do not move group 2 lower-field share in the intended direction and remain
+  source-ready-blocked by motion/profile and spacing/readability guardrails.
+  The semantic batch now emits phase-duration `compiledRuntimeControls` under
+  live authority, keeps lower-field analysis-only under current controls, and
+  records path-length as analysis-only until its transfer proof exists. This is
+  a measurement/process keeper, not a runtime keeper or beta justification.
 - challenge-stage grammar is now materially ahead of runtime implementation:
   the first-five challenge work has `25/25` reference-backed group contracts
   and `8.6/10` control readiness, but runtime promotion is still blocked by

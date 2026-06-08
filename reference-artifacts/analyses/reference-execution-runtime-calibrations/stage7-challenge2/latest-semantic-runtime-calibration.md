@@ -1,7 +1,7 @@
 # Stage 7 Semantic Runtime Calibration
 
-Generated: 2026-06-08T17:31:56.075Z
-Commit: 83e96c452
+Generated: 2026-06-08T17:50:34.453Z
+Commit: bf4ea169c
 Branch: codex/macbook-pro-1.4.1-stage7-object-track-keeper
 
 Candidate: `stage7-semantic-phase-align-protect-0.1`
@@ -62,4 +62,4 @@ Use the live promotion gates and restored runtime source as candidate gate autho
 
 ## Recommendation
 
-Do not try another Stage 7 runtime candidate. Keep source-ready path-family authority on the live gates/runtime source, stop local phase-duration candidate work for now, and next build exactly one lower-field-overstay transfer proof or pause Stage 7 and apply the RED pipeline front-first to Stage 3.
+Do not try another Stage 7 runtime candidate. Keep source-ready path-family authority on the live gates/runtime source, pause Stage 7 candidate work, and apply the RED pipeline front-first to Stage 3 / Challenge 1.

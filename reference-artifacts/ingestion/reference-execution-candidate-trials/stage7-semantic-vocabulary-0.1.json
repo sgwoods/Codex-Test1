@@ -51,7 +51,7 @@
       "runtimeExpressibility": {
         "sourceReadySupported": false,
         "sourceReadyRole": "runtime-transform-analysis-only",
-        "compilerMappingStatus": "analysis-only-unproven-runtime-transfer",
+        "compilerMappingStatus": "runtime-consumed-proof-failed-analysis-only",
         "sourceFields": [
           "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_REFERENCE_PATHS playbackScale when present"
         ],
@@ -107,13 +107,15 @@
           }
         ],
         "runtimeConsumer": "Stage 7 motion-spec controls are consumed by the challenge path generator, but lowerFieldShare is not itself a runtime field.",
-        "predictionLimits": "The compiler can derive lowerFieldBias/yOffset from target lower-field share using the project trajectory-control formula, but no Stage 7 proof shows the emitted values produce the intended lower-field-share change without readability regression.",
+        "predictionLimits": "The Stage 7 proof shows the generated lowerFieldBias/yOffset controls are consumed, but the candidate did not move group 2 lower-field share from 0.6667 toward 0.4522 and did not pass the motion/profile plus spacing/readability guards.",
+        "requiresProofArtifact": "reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-lower-field-proof.json",
         "proofHarnesses": [
-          "future Stage 7 lower-field expressibility proof",
+          "npm run harness:analyze:stage7-lower-field-expressibility",
+          "npm run harness:check:stage7-lower-field-expressibility",
           "npm run harness:analyze:challenge-stage-conformance",
           "npm run harness:check:challenge-motion-profile"
         ],
-        "remainingCompilerGap": "Verify concrete lowerFieldBias/yOffset controls against actual browser lower-field share, spacing/readability, and scoreable-route guardrails."
+        "remainingCompilerGap": "The controls are runtime-consumed but not source-ready: current generated lowerFieldBias/yOffset values fail to produce visible lower-field-share movement in the intended direction without guardrail regression."
       }
     },
   {

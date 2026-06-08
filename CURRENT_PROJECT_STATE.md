@@ -109,12 +109,21 @@ Latest Stage 7 calibration:
   `reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-phase-duration-proof.json`.
 - The semantic generator now emits `compiledRuntimeControls` for
   `phase-duration-rebalance` under live path-family authority. It also records
-  analysis-only compiler mappings for `group1-path-length-compression` and
-  `lower-field-overstay-reduction`, but those are blocked from source-ready
-  status until browser transfer proofs exist. Do not keep grinding local Stage
-  7 phase-duration candidates. Next work should either add exactly one focused
-  lower-field-overstay transfer proof, or pause Stage 7 and apply the RED
-  pipeline front-first to Stage 3.
+  an analysis-only compiler mapping for `group1-path-length-compression`,
+  which remains blocked until a browser transfer proof exists.
+- `lower-field-overstay-reduction` now has its single allowed Stage 7 transfer
+  proof:
+  `reference-artifacts/analyses/reference-execution-runtime-expressibility/stage7-challenge2/latest-lower-field-proof.json`.
+  The proof confirms the generated `lowerFieldBias` / `yOffset` controls are
+  consumed by runtime, but the group 2 lower-field share stayed at `0.6667`
+  instead of moving toward the generated `0.4522` target, the visible movement
+  read was false, and the proof failed motion/profile plus spacing/readability
+  guardrails. Scoreable routes, no-shot/no-attack/no-loss safety, and group
+  4/5 preservation stayed intact. This makes lower-field-overstay
+  analysis-only / not runtime-expressible under the current controls.
+- No Stage 7 source-ready candidate exists after the phase-duration and
+  lower-field proofs. Pause Stage 7 candidate work and apply the RED pipeline
+  front-first to Stage 3 / Challenge 1.
 
 ## Historical Or Stale Current-State Docs
 

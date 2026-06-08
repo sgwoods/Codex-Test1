@@ -1,0 +1,1661 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage7-lower-field-runtime-expressibility-proof",
+  "generatedAt": "2026-06-08T17:46:42.833Z",
+  "generatedBy": "tools/harness/analyze-stage7-lower-field-expressibility.js",
+  "commit": "bf4ea169c",
+  "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 7,
+    "challengeNumber": 2,
+    "displayLabel": "Stage 7 / Challenge 2"
+  },
+  "sourceArtifacts": {
+    "pathFamilyAuthority": "reference-artifacts/analyses/reference-execution-authority/stage7-challenge2/latest-path-family-authority.json",
+    "semanticBatch": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/latest-batch.json",
+    "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T17-31-42-83e96c452/candidates/stage7-semantic-lower-field-overstay-reduction-0.1.json"
+  },
+  "semanticTransformId": "lower-field-overstay-reduction",
+  "batch": {
+    "generatedAt": "2026-06-08T17:31:42.217Z",
+    "commit": "83e96c452",
+    "report": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/latest-batch.json",
+    "recommendation": "no-runtime-source-candidate",
+    "candidateRow": {
+      "totalObjectTrackScore10": 4.8,
+      "totalObjectTrackCoverage": 0.507,
+      "totalObjectTrackDelta10": 0.1,
+      "sourceReadyBlockerType": [
+        "metric-no-lift",
+        "not-runtime-expressible",
+        "target-authority-debt"
+      ]
+    }
+  },
+  "candidate": {
+    "candidateId": "stage7-semantic-lower-field-overstay-reduction-0.1",
+    "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T17-31-42-83e96c452/candidates/stage7-semantic-lower-field-overstay-reduction-0.1.json",
+    "semanticTransformationClass": "lower-field-overstay-reduction",
+    "semanticTransformations": [
+      "lower-field-overstay-reduction"
+    ],
+    "intendedPlayerFacingMeaning": "Pull overstaying groups back toward their reference lower-field share without changing late groups.",
+    "targetGroups": [
+      2
+    ],
+    "invariantsPreserved": [
+      "group 4 and group 5 cannot be allowed to regress",
+      "path family remains canonical for touched groups",
+      "scoreable route baseline is preserved unless a later measured route probe says otherwise"
+    ],
+    "expectedMetricMovement": "Reduce lower-field overstay warnings for selected groups.",
+    "generatedLowLevelControls": {
+      "groups": [
+        {
+          "lowerFieldFormula": "aggregateTarget.lowerFieldShare + (lowerFieldGateUpper - 0.04)",
+          "baselineLowerFieldShare": 0.67,
+          "aggregateTargetLowerFieldShare": 0.3122,
+          "baselineDelta": 0.358,
+          "generatedDelta": 0.14,
+          "generatedLowerFieldShare": 0.4522,
+          "compilerMapping": {
+            "runtimeFields": {
+              "lowerFieldBias": 36,
+              "yOffset": 0
+            },
+            "sourceReadyStatus": "analysis-only until browser proof verifies lower-field transfer"
+          }
+        }
+      ]
+    },
+    "intendedLowerFieldRead": {
+      "baselineLowerFieldShare": 0.67,
+      "aggregateTargetLowerFieldShare": 0.3122,
+      "generatedLowerFieldShare": 0.4522,
+      "generatedDelta": 0.14,
+      "baselineDelta": 0.358
+    },
+    "guardrails": {
+      "spacingReadability": {
+        "source": "npm run harness:check:challenge-motion-profile after restored baseline",
+        "preserveBaseline": true,
+        "pass": true,
+        "worstMinDistance": 3.08,
+        "averageMinDistance": 19.82,
+        "spacingScore": 0.765,
+        "bunchingRisk": 0.292,
+        "read": "Restored baseline spacing guardrail passed; use a fresh motion-profile run before promoting any non-control runtime candidate."
+      },
+      "scoreableRoutes": {
+        "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+        "preserveBaseline": true,
+        "score10": 5.5,
+        "activeWindows": 47,
+        "multiTargetWindowShare": 0.745,
+        "laneDiversity": 1,
+        "centerBias": 0.359,
+        "read": "Control preserves the restored baseline scoreable-route read."
+      },
+      "safety": {
+        "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+        "preserveBaseline": true,
+        "noEnemyShots": true,
+        "noAttackStarts": true,
+        "noShipLosses": true,
+        "eventCounts": {
+          "enemyShots": 0,
+          "enemyAttackStarts": 0,
+          "shipLosses": 0,
+          "challengeContacts": 4
+        },
+        "read": "Control preserves the restored baseline no-shot/no-attack/no-loss safety read."
+      }
+    }
+  },
+  "intendedTargetGroups": [
+    2
+  ],
+  "analysisCompilerMappings": [
+    {
+      "transformationClass": "lower-field-overstay-reduction",
+      "compilerStatus": "analysis-only-unproven-runtime-transfer",
+      "semanticMeaning": "Reduce lower-field overstay by translating target lower-field share into runtime lower-field bias controls.",
+      "generatedRuntimeFields": [
+        {
+          "runtimeField": "motionSpecGroups[1].controls.lowerFieldBias",
+          "value": 36,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "clamp((generatedLowerFieldShare - 0.34) / 0.58) * 188"
+        },
+        {
+          "runtimeField": "motionSpecGroups[1].controls.yOffset",
+          "value": 0,
+          "runtimeCurrentlyConsumes": true,
+          "derivedFrom": "clamp(generatedLowerFieldShare - 0.45) * 156"
+        }
+      ],
+      "expectedVisibleEffect": "Moves the affected group vertically and changes late lower-field dwell, but the lowerFieldShare transfer function is not proven for Stage 7.",
+      "proofHarnessRequired": "future Stage 7 lower-field expressibility proof plus challenge-motion-profile and strict challenge-stage conformance",
+      "sourceReadyStatus": "blocked-analysis-only"
+    }
+  ],
+  "compiledRuntimeControls": {
+    "lowerFieldOverstayReduction": [
+      {
+        "runtimeField": "motionSpecGroups[1].controls.lowerFieldBias",
+        "value": 36,
+        "runtimeCurrentlyConsumes": true,
+        "derivedFrom": "clamp((generatedLowerFieldShare - 0.34) / 0.58) * 188"
+      },
+      {
+        "runtimeField": "motionSpecGroups[1].controls.yOffset",
+        "value": 0,
+        "runtimeCurrentlyConsumes": true,
+        "derivedFrom": "clamp(generatedLowerFieldShare - 0.45) * 156"
+      }
+    ]
+  },
+  "compiledRuntimeFields": [
+    {
+      "runtimeField": "motionSpecGroups[1].controls.lowerFieldBias",
+      "value": 36,
+      "runtimeCurrentlyConsumes": true,
+      "derivedFrom": "clamp((generatedLowerFieldShare - 0.34) / 0.58) * 188",
+      "compilerStatus": "analysis-only-unproven-runtime-transfer",
+      "sourceReadyStatus": "blocked-analysis-only",
+      "appliedTargets": [
+        {
+          "target": "motionSpecGroups[1].controls.lowerFieldBias",
+          "groupIndex": 2,
+          "before": 0,
+          "after": 36
+        }
+      ],
+      "appliedInLayoutOverride": true,
+      "consumedByProof": true
+    },
+    {
+      "runtimeField": "motionSpecGroups[1].controls.yOffset",
+      "value": 0,
+      "runtimeCurrentlyConsumes": true,
+      "derivedFrom": "clamp(generatedLowerFieldShare - 0.45) * 156",
+      "compilerStatus": "analysis-only-unproven-runtime-transfer",
+      "sourceReadyStatus": "blocked-analysis-only",
+      "appliedTargets": [
+        {
+          "target": "motionSpecGroups[1].controls.yOffset",
+          "groupIndex": 2,
+          "before": 0,
+          "after": 0
+        }
+      ],
+      "appliedInLayoutOverride": true,
+      "consumedByProof": true
+    }
+  ],
+  "lowerFieldProofBacked": false,
+  "sourceReadyBlockerType": [
+    "guardrail-regression",
+    "not-runtime-expressible"
+  ],
+  "baseline": {
+    "variantId": "baseline",
+    "semanticTransformId": null,
+    "control": "baseline",
+    "targetGroups": [],
+    "appliedRuntimeFields": [],
+    "pathFamilyOrder": [
+      "cross-sweep",
+      "cross-sweep",
+      "hook-arc",
+      "hook-arc",
+      "boss-led-loop"
+    ],
+    "contractPathFamilyOrder": [
+      "cross-sweep",
+      "cross-sweep",
+      "hook-arc",
+      "hook-arc",
+      "boss-led-loop"
+    ],
+    "runtimePathFamilyMismatches": [],
+    "enemyCount": 40,
+    "referenceTrackedEnemyCount": 40,
+    "referenceTrackIds": [
+      "target-track-10",
+      "target-track-66",
+      "target-track-71",
+      "target-track-110",
+      "target-track-142"
+    ],
+    "groupMetrics": {
+      "group1": {
+        "groupIndex": 1,
+        "sampleCount": 12,
+        "pointCount": 77,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.8701,
+        "xRange": 1.1224,
+        "yRange": 0.4879,
+        "pathLength": 1.1469,
+        "meanY": 216.9,
+        "minY": 185.11,
+        "maxY": 360.75,
+        "visibleWindow": {
+          "visibleStartS": 0.25,
+          "visibleEndS": 3,
+          "visibleDurationS": 2.75
+        }
+      },
+      "group2": {
+        "groupIndex": 2,
+        "sampleCount": 14,
+        "pointCount": 96,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.6667,
+        "xRange": 0.4701,
+        "yRange": 0.8917,
+        "pathLength": 1.008,
+        "meanY": 223.12,
+        "minY": 36.68,
+        "maxY": 357.68,
+        "visibleWindow": {
+          "visibleStartS": 3,
+          "visibleEndS": 6.25,
+          "visibleDurationS": 3.25
+        }
+      },
+      "group3": {
+        "groupIndex": 3,
+        "sampleCount": 9,
+        "pointCount": 52,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 1,
+        "xRange": 0.3625,
+        "yRange": 0.5157,
+        "pathLength": 0.5761,
+        "meanY": 252.82,
+        "minY": 191.44,
+        "maxY": 377.08,
+        "visibleWindow": {
+          "visibleStartS": 4.25,
+          "visibleEndS": 6.25,
+          "visibleDurationS": 2
+        }
+      },
+      "group4": {
+        "groupIndex": 4,
+        "sampleCount": 14,
+        "pointCount": 70,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.2,
+        "xRange": 1.1475,
+        "yRange": 0.8902,
+        "pathLength": 1.6549,
+        "meanY": 143.57,
+        "minY": 59.04,
+        "maxY": 379.53,
+        "visibleWindow": {
+          "visibleStartS": 7.25,
+          "visibleEndS": 10.5,
+          "visibleDurationS": 3.25
+        }
+      },
+      "group5": {
+        "groupIndex": 5,
+        "sampleCount": 13,
+        "pointCount": 92,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.3043,
+        "xRange": 0.4584,
+        "yRange": 0.962,
+        "pathLength": 1.0528,
+        "meanY": 132.72,
+        "minY": 29.11,
+        "maxY": 375.42,
+        "visibleWindow": {
+          "visibleStartS": 13.5,
+          "visibleEndS": 16.5,
+          "visibleDurationS": 3
+        }
+      }
+    },
+    "spacingSummary": {
+      "sampleCount": 31,
+      "worstMinDistance": 0,
+      "averageMinDistance": 15.35,
+      "spacingScore": 0.592,
+      "bunchingRisk": 0.452,
+      "crampedCount": 14,
+      "minRuntimeSpacingScore": 0.72,
+      "maxRuntimeBunchingRisk": 0.38,
+      "pass": false
+    },
+    "scoreableRouteStatus": {
+      "pass": true,
+      "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+      "read": "Control preserves the restored baseline scoreable-route read."
+    },
+    "safetyStatus": {
+      "pass": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0
+      }
+    },
+    "motionProfileProxy": {
+      "referenceSetup": {
+        "pass": true,
+        "enemyCount": 40,
+        "referenceTrackedEnemyCount": 40,
+        "referenceTrackIds": [
+          "target-track-10",
+          "target-track-66",
+          "target-track-71",
+          "target-track-110",
+          "target-track-142"
+        ]
+      },
+      "pathOrder": {
+        "layoutPathFamilyOrder": [
+          "cross-sweep",
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "boss-led-loop"
+        ],
+        "contractPathFamilyOrder": [
+          "cross-sweep",
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "boss-led-loop"
+        ],
+        "runtimePathFamilyMismatches": [],
+        "pass": true
+      },
+      "playbackClock": {
+        "elapsedSeconds": 1,
+        "driftLimitS": 0.08,
+        "pass": true,
+        "bad": [],
+        "drifts": [
+          {
+            "id": 65946604,
+            "wave": 0,
+            "lane": 0,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 0.96,
+            "tm": 1,
+            "expectedTm": 1,
+            "drift": 0
+          },
+          {
+            "id": 422725369,
+            "wave": 0,
+            "lane": 1,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.14,
+            "tm": 0.817,
+            "expectedTm": 0.82,
+            "drift": -0.003
+          },
+          {
+            "id": 773103476,
+            "wave": 0,
+            "lane": 2,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.31,
+            "tm": 0.633,
+            "expectedTm": 0.65,
+            "drift": -0.017
+          },
+          {
+            "id": 239301269,
+            "wave": 0,
+            "lane": 3,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.48,
+            "tm": 0.467,
+            "expectedTm": 0.48,
+            "drift": -0.013
+          },
+          {
+            "id": 526652757,
+            "wave": 0,
+            "lane": 4,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 0.96,
+            "tm": 1,
+            "expectedTm": 1,
+            "drift": 0
+          },
+          {
+            "id": 739309946,
+            "wave": 0,
+            "lane": 5,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.14,
+            "tm": 0.817,
+            "expectedTm": 0.82,
+            "drift": -0.003
+          },
+          {
+            "id": 212156409,
+            "wave": 0,
+            "lane": 6,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.31,
+            "tm": 0.633,
+            "expectedTm": 0.65,
+            "drift": -0.017
+          },
+          {
+            "id": 831048749,
+            "wave": 0,
+            "lane": 7,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.48,
+            "tm": 0.467,
+            "expectedTm": 0.48,
+            "drift": -0.013
+          }
+        ]
+      },
+      "spacing": {
+        "pass": false,
+        "sampleCount": 31,
+        "spacingScore": 0.592,
+        "bunchingRisk": 0.452
+      }
+    }
+  },
+  "compiled": {
+    "variantId": "compiled-stage7-semantic-lower-field-overstay-reduction-0.1",
+    "semanticTransformId": "lower-field-overstay-reduction",
+    "control": "analysisCompilerMappings.lowerFieldOverstayReduction",
+    "targetGroups": [
+      2
+    ],
+    "appliedRuntimeFields": [
+      {
+        "runtimeField": "motionSpecGroups[1].controls.lowerFieldBias",
+        "value": 36,
+        "runtimeCurrentlyConsumes": true,
+        "derivedFrom": "clamp((generatedLowerFieldShare - 0.34) / 0.58) * 188",
+        "compilerStatus": "analysis-only-unproven-runtime-transfer",
+        "sourceReadyStatus": "blocked-analysis-only",
+        "appliedTargets": [
+          {
+            "target": "motionSpecGroups[1].controls.lowerFieldBias",
+            "groupIndex": 2,
+            "before": 0,
+            "after": 36
+          }
+        ],
+        "appliedInLayoutOverride": true
+      },
+      {
+        "runtimeField": "motionSpecGroups[1].controls.yOffset",
+        "value": 0,
+        "runtimeCurrentlyConsumes": true,
+        "derivedFrom": "clamp(generatedLowerFieldShare - 0.45) * 156",
+        "compilerStatus": "analysis-only-unproven-runtime-transfer",
+        "sourceReadyStatus": "blocked-analysis-only",
+        "appliedTargets": [
+          {
+            "target": "motionSpecGroups[1].controls.yOffset",
+            "groupIndex": 2,
+            "before": 0,
+            "after": 0
+          }
+        ],
+        "appliedInLayoutOverride": true
+      }
+    ],
+    "pathFamilyOrder": [
+      "cross-sweep",
+      "cross-sweep",
+      "hook-arc",
+      "hook-arc",
+      "boss-led-loop"
+    ],
+    "contractPathFamilyOrder": [
+      "cross-sweep",
+      "cross-sweep",
+      "hook-arc",
+      "hook-arc",
+      "boss-led-loop"
+    ],
+    "runtimePathFamilyMismatches": [],
+    "enemyCount": 40,
+    "referenceTrackedEnemyCount": 40,
+    "referenceTrackIds": [
+      "target-track-10",
+      "target-track-66",
+      "target-track-71",
+      "target-track-110",
+      "target-track-142"
+    ],
+    "groupMetrics": {
+      "group1": {
+        "groupIndex": 1,
+        "sampleCount": 12,
+        "pointCount": 77,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.8701,
+        "xRange": 1.1224,
+        "yRange": 0.4879,
+        "pathLength": 1.1469,
+        "meanY": 216.9,
+        "minY": 185.11,
+        "maxY": 360.75,
+        "visibleWindow": {
+          "visibleStartS": 0.25,
+          "visibleEndS": 3,
+          "visibleDurationS": 2.75
+        }
+      },
+      "group2": {
+        "groupIndex": 2,
+        "sampleCount": 14,
+        "pointCount": 96,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.6667,
+        "xRange": 0.4701,
+        "yRange": 0.892,
+        "pathLength": 1.0082,
+        "meanY": 223.13,
+        "minY": 36.68,
+        "maxY": 357.81,
+        "visibleWindow": {
+          "visibleStartS": 3,
+          "visibleEndS": 6.25,
+          "visibleDurationS": 3.25
+        }
+      },
+      "group3": {
+        "groupIndex": 3,
+        "sampleCount": 9,
+        "pointCount": 52,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 1,
+        "xRange": 0.3625,
+        "yRange": 0.5157,
+        "pathLength": 0.5761,
+        "meanY": 252.82,
+        "minY": 191.44,
+        "maxY": 377.08,
+        "visibleWindow": {
+          "visibleStartS": 4.25,
+          "visibleEndS": 6.25,
+          "visibleDurationS": 2
+        }
+      },
+      "group4": {
+        "groupIndex": 4,
+        "sampleCount": 14,
+        "pointCount": 70,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.2,
+        "xRange": 1.1475,
+        "yRange": 0.8902,
+        "pathLength": 1.6549,
+        "meanY": 143.57,
+        "minY": 59.04,
+        "maxY": 379.53,
+        "visibleWindow": {
+          "visibleStartS": 7.25,
+          "visibleEndS": 10.5,
+          "visibleDurationS": 3.25
+        }
+      },
+      "group5": {
+        "groupIndex": 5,
+        "sampleCount": 13,
+        "pointCount": 92,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.3043,
+        "xRange": 0.4584,
+        "yRange": 0.962,
+        "pathLength": 1.0528,
+        "meanY": 132.72,
+        "minY": 29.11,
+        "maxY": 375.42,
+        "visibleWindow": {
+          "visibleStartS": 13.5,
+          "visibleEndS": 16.5,
+          "visibleDurationS": 3
+        }
+      }
+    },
+    "spacingSummary": {
+      "sampleCount": 31,
+      "worstMinDistance": 0,
+      "averageMinDistance": 15.35,
+      "spacingScore": 0.592,
+      "bunchingRisk": 0.452,
+      "crampedCount": 14,
+      "minRuntimeSpacingScore": 0.72,
+      "maxRuntimeBunchingRisk": 0.38,
+      "pass": false
+    },
+    "scoreableRouteStatus": {
+      "pass": true,
+      "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+      "read": "Control preserves the restored baseline scoreable-route read."
+    },
+    "safetyStatus": {
+      "pass": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0
+      }
+    },
+    "motionProfileProxy": {
+      "referenceSetup": {
+        "pass": true,
+        "enemyCount": 40,
+        "referenceTrackedEnemyCount": 40,
+        "referenceTrackIds": [
+          "target-track-10",
+          "target-track-66",
+          "target-track-71",
+          "target-track-110",
+          "target-track-142"
+        ]
+      },
+      "pathOrder": {
+        "layoutPathFamilyOrder": [
+          "cross-sweep",
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "boss-led-loop"
+        ],
+        "contractPathFamilyOrder": [
+          "cross-sweep",
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "boss-led-loop"
+        ],
+        "runtimePathFamilyMismatches": [],
+        "pass": true
+      },
+      "playbackClock": {
+        "elapsedSeconds": 1,
+        "driftLimitS": 0.08,
+        "pass": true,
+        "bad": [],
+        "drifts": [
+          {
+            "id": 255300326,
+            "wave": 0,
+            "lane": 0,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 0.96,
+            "tm": 1,
+            "expectedTm": 1,
+            "drift": 0
+          },
+          {
+            "id": 673636365,
+            "wave": 0,
+            "lane": 1,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.14,
+            "tm": 0.817,
+            "expectedTm": 0.82,
+            "drift": -0.003
+          },
+          {
+            "id": 82552775,
+            "wave": 0,
+            "lane": 2,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.31,
+            "tm": 0.633,
+            "expectedTm": 0.65,
+            "drift": -0.017
+          },
+          {
+            "id": 6184524,
+            "wave": 0,
+            "lane": 3,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.48,
+            "tm": 0.467,
+            "expectedTm": 0.48,
+            "drift": -0.013
+          },
+          {
+            "id": 432463488,
+            "wave": 0,
+            "lane": 4,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 0.96,
+            "tm": 1,
+            "expectedTm": 1,
+            "drift": 0
+          },
+          {
+            "id": 564592798,
+            "wave": 0,
+            "lane": 5,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.14,
+            "tm": 0.817,
+            "expectedTm": 0.82,
+            "drift": -0.003
+          },
+          {
+            "id": 50401486,
+            "wave": 0,
+            "lane": 6,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.31,
+            "tm": 0.633,
+            "expectedTm": 0.65,
+            "drift": -0.017
+          },
+          {
+            "id": 599383678,
+            "wave": 0,
+            "lane": 7,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.48,
+            "tm": 0.467,
+            "expectedTm": 0.48,
+            "drift": -0.013
+          }
+        ]
+      },
+      "spacing": {
+        "pass": false,
+        "sampleCount": 31,
+        "spacingScore": 0.592,
+        "bunchingRisk": 0.452
+      }
+    }
+  },
+  "compiledControlRead": {
+    "variantId": "compiled-stage7-semantic-lower-field-overstay-reduction-0.1",
+    "baselineGroupMetrics": {
+      "group1": {
+        "groupIndex": 1,
+        "sampleCount": 12,
+        "pointCount": 77,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.8701,
+        "xRange": 1.1224,
+        "yRange": 0.4879,
+        "pathLength": 1.1469,
+        "meanY": 216.9,
+        "minY": 185.11,
+        "maxY": 360.75,
+        "visibleWindow": {
+          "visibleStartS": 0.25,
+          "visibleEndS": 3,
+          "visibleDurationS": 2.75
+        }
+      },
+      "group2": {
+        "groupIndex": 2,
+        "sampleCount": 14,
+        "pointCount": 96,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.6667,
+        "xRange": 0.4701,
+        "yRange": 0.8917,
+        "pathLength": 1.008,
+        "meanY": 223.12,
+        "minY": 36.68,
+        "maxY": 357.68,
+        "visibleWindow": {
+          "visibleStartS": 3,
+          "visibleEndS": 6.25,
+          "visibleDurationS": 3.25
+        }
+      },
+      "group3": {
+        "groupIndex": 3,
+        "sampleCount": 9,
+        "pointCount": 52,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 1,
+        "xRange": 0.3625,
+        "yRange": 0.5157,
+        "pathLength": 0.5761,
+        "meanY": 252.82,
+        "minY": 191.44,
+        "maxY": 377.08,
+        "visibleWindow": {
+          "visibleStartS": 4.25,
+          "visibleEndS": 6.25,
+          "visibleDurationS": 2
+        }
+      },
+      "group4": {
+        "groupIndex": 4,
+        "sampleCount": 14,
+        "pointCount": 70,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.2,
+        "xRange": 1.1475,
+        "yRange": 0.8902,
+        "pathLength": 1.6549,
+        "meanY": 143.57,
+        "minY": 59.04,
+        "maxY": 379.53,
+        "visibleWindow": {
+          "visibleStartS": 7.25,
+          "visibleEndS": 10.5,
+          "visibleDurationS": 3.25
+        }
+      },
+      "group5": {
+        "groupIndex": 5,
+        "sampleCount": 13,
+        "pointCount": 92,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.3043,
+        "xRange": 0.4584,
+        "yRange": 0.962,
+        "pathLength": 1.0528,
+        "meanY": 132.72,
+        "minY": 29.11,
+        "maxY": 375.42,
+        "visibleWindow": {
+          "visibleStartS": 13.5,
+          "visibleEndS": 16.5,
+          "visibleDurationS": 3
+        }
+      }
+    },
+    "compiledGroupMetrics": {
+      "group1": {
+        "groupIndex": 1,
+        "sampleCount": 12,
+        "pointCount": 77,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.8701,
+        "xRange": 1.1224,
+        "yRange": 0.4879,
+        "pathLength": 1.1469,
+        "meanY": 216.9,
+        "minY": 185.11,
+        "maxY": 360.75,
+        "visibleWindow": {
+          "visibleStartS": 0.25,
+          "visibleEndS": 3,
+          "visibleDurationS": 2.75
+        }
+      },
+      "group2": {
+        "groupIndex": 2,
+        "sampleCount": 14,
+        "pointCount": 96,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.6667,
+        "xRange": 0.4701,
+        "yRange": 0.892,
+        "pathLength": 1.0082,
+        "meanY": 223.13,
+        "minY": 36.68,
+        "maxY": 357.81,
+        "visibleWindow": {
+          "visibleStartS": 3,
+          "visibleEndS": 6.25,
+          "visibleDurationS": 3.25
+        }
+      },
+      "group3": {
+        "groupIndex": 3,
+        "sampleCount": 9,
+        "pointCount": 52,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 1,
+        "xRange": 0.3625,
+        "yRange": 0.5157,
+        "pathLength": 0.5761,
+        "meanY": 252.82,
+        "minY": 191.44,
+        "maxY": 377.08,
+        "visibleWindow": {
+          "visibleStartS": 4.25,
+          "visibleEndS": 6.25,
+          "visibleDurationS": 2
+        }
+      },
+      "group4": {
+        "groupIndex": 4,
+        "sampleCount": 14,
+        "pointCount": 70,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.2,
+        "xRange": 1.1475,
+        "yRange": 0.8902,
+        "pathLength": 1.6549,
+        "meanY": 143.57,
+        "minY": 59.04,
+        "maxY": 379.53,
+        "visibleWindow": {
+          "visibleStartS": 7.25,
+          "visibleEndS": 10.5,
+          "visibleDurationS": 3.25
+        }
+      },
+      "group5": {
+        "groupIndex": 5,
+        "sampleCount": 13,
+        "pointCount": 92,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.3043,
+        "xRange": 0.4584,
+        "yRange": 0.962,
+        "pathLength": 1.0528,
+        "meanY": 132.72,
+        "minY": 29.11,
+        "maxY": 375.42,
+        "visibleWindow": {
+          "visibleStartS": 13.5,
+          "visibleEndS": 16.5,
+          "visibleDurationS": 3
+        }
+      }
+    },
+    "deltaFromBaseline": [
+      {
+        "groupIndex": 1,
+        "baseline": {
+          "groupIndex": 1,
+          "sampleCount": 12,
+          "pointCount": 77,
+          "lowerFieldThresholdY": 187.2,
+          "lowerFieldShare": 0.8701,
+          "xRange": 1.1224,
+          "yRange": 0.4879,
+          "pathLength": 1.1469,
+          "meanY": 216.9,
+          "minY": 185.11,
+          "maxY": 360.75,
+          "visibleWindow": {
+            "visibleStartS": 0.25,
+            "visibleEndS": 3,
+            "visibleDurationS": 2.75
+          }
+        },
+        "compiled": {
+          "groupIndex": 1,
+          "sampleCount": 12,
+          "pointCount": 77,
+          "lowerFieldThresholdY": 187.2,
+          "lowerFieldShare": 0.8701,
+          "xRange": 1.1224,
+          "yRange": 0.4879,
+          "pathLength": 1.1469,
+          "meanY": 216.9,
+          "minY": 185.11,
+          "maxY": 360.75,
+          "visibleWindow": {
+            "visibleStartS": 0.25,
+            "visibleEndS": 3,
+            "visibleDurationS": 2.75
+          }
+        },
+        "lowerFieldShareDelta": 0,
+        "yRangeDelta": 0,
+        "pathLengthDelta": 0,
+        "meanYDeltaPx": 0,
+        "maxYDeltaPx": 0,
+        "visibleWindowDeltaS": {
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": 0,
+          "visibleDurationDeltaS": 0
+        }
+      },
+      {
+        "groupIndex": 2,
+        "baseline": {
+          "groupIndex": 2,
+          "sampleCount": 14,
+          "pointCount": 96,
+          "lowerFieldThresholdY": 187.2,
+          "lowerFieldShare": 0.6667,
+          "xRange": 0.4701,
+          "yRange": 0.8917,
+          "pathLength": 1.008,
+          "meanY": 223.12,
+          "minY": 36.68,
+          "maxY": 357.68,
+          "visibleWindow": {
+            "visibleStartS": 3,
+            "visibleEndS": 6.25,
+            "visibleDurationS": 3.25
+          }
+        },
+        "compiled": {
+          "groupIndex": 2,
+          "sampleCount": 14,
+          "pointCount": 96,
+          "lowerFieldThresholdY": 187.2,
+          "lowerFieldShare": 0.6667,
+          "xRange": 0.4701,
+          "yRange": 0.892,
+          "pathLength": 1.0082,
+          "meanY": 223.13,
+          "minY": 36.68,
+          "maxY": 357.81,
+          "visibleWindow": {
+            "visibleStartS": 3,
+            "visibleEndS": 6.25,
+            "visibleDurationS": 3.25
+          }
+        },
+        "lowerFieldShareDelta": 0,
+        "yRangeDelta": 0.0003,
+        "pathLengthDelta": 0.0002,
+        "meanYDeltaPx": 0.01,
+        "maxYDeltaPx": 0.13,
+        "visibleWindowDeltaS": {
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": 0,
+          "visibleDurationDeltaS": 0
+        }
+      },
+      {
+        "groupIndex": 3,
+        "baseline": {
+          "groupIndex": 3,
+          "sampleCount": 9,
+          "pointCount": 52,
+          "lowerFieldThresholdY": 187.2,
+          "lowerFieldShare": 1,
+          "xRange": 0.3625,
+          "yRange": 0.5157,
+          "pathLength": 0.5761,
+          "meanY": 252.82,
+          "minY": 191.44,
+          "maxY": 377.08,
+          "visibleWindow": {
+            "visibleStartS": 4.25,
+            "visibleEndS": 6.25,
+            "visibleDurationS": 2
+          }
+        },
+        "compiled": {
+          "groupIndex": 3,
+          "sampleCount": 9,
+          "pointCount": 52,
+          "lowerFieldThresholdY": 187.2,
+          "lowerFieldShare": 1,
+          "xRange": 0.3625,
+          "yRange": 0.5157,
+          "pathLength": 0.5761,
+          "meanY": 252.82,
+          "minY": 191.44,
+          "maxY": 377.08,
+          "visibleWindow": {
+            "visibleStartS": 4.25,
+            "visibleEndS": 6.25,
+            "visibleDurationS": 2
+          }
+        },
+        "lowerFieldShareDelta": 0,
+        "yRangeDelta": 0,
+        "pathLengthDelta": 0,
+        "meanYDeltaPx": 0,
+        "maxYDeltaPx": 0,
+        "visibleWindowDeltaS": {
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": 0,
+          "visibleDurationDeltaS": 0
+        }
+      },
+      {
+        "groupIndex": 4,
+        "baseline": {
+          "groupIndex": 4,
+          "sampleCount": 14,
+          "pointCount": 70,
+          "lowerFieldThresholdY": 187.2,
+          "lowerFieldShare": 0.2,
+          "xRange": 1.1475,
+          "yRange": 0.8902,
+          "pathLength": 1.6549,
+          "meanY": 143.57,
+          "minY": 59.04,
+          "maxY": 379.53,
+          "visibleWindow": {
+            "visibleStartS": 7.25,
+            "visibleEndS": 10.5,
+            "visibleDurationS": 3.25
+          }
+        },
+        "compiled": {
+          "groupIndex": 4,
+          "sampleCount": 14,
+          "pointCount": 70,
+          "lowerFieldThresholdY": 187.2,
+          "lowerFieldShare": 0.2,
+          "xRange": 1.1475,
+          "yRange": 0.8902,
+          "pathLength": 1.6549,
+          "meanY": 143.57,
+          "minY": 59.04,
+          "maxY": 379.53,
+          "visibleWindow": {
+            "visibleStartS": 7.25,
+            "visibleEndS": 10.5,
+            "visibleDurationS": 3.25
+          }
+        },
+        "lowerFieldShareDelta": 0,
+        "yRangeDelta": 0,
+        "pathLengthDelta": 0,
+        "meanYDeltaPx": 0,
+        "maxYDeltaPx": 0,
+        "visibleWindowDeltaS": {
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": 0,
+          "visibleDurationDeltaS": 0
+        }
+      },
+      {
+        "groupIndex": 5,
+        "baseline": {
+          "groupIndex": 5,
+          "sampleCount": 13,
+          "pointCount": 92,
+          "lowerFieldThresholdY": 187.2,
+          "lowerFieldShare": 0.3043,
+          "xRange": 0.4584,
+          "yRange": 0.962,
+          "pathLength": 1.0528,
+          "meanY": 132.72,
+          "minY": 29.11,
+          "maxY": 375.42,
+          "visibleWindow": {
+            "visibleStartS": 13.5,
+            "visibleEndS": 16.5,
+            "visibleDurationS": 3
+          }
+        },
+        "compiled": {
+          "groupIndex": 5,
+          "sampleCount": 13,
+          "pointCount": 92,
+          "lowerFieldThresholdY": 187.2,
+          "lowerFieldShare": 0.3043,
+          "xRange": 0.4584,
+          "yRange": 0.962,
+          "pathLength": 1.0528,
+          "meanY": 132.72,
+          "minY": 29.11,
+          "maxY": 375.42,
+          "visibleWindow": {
+            "visibleStartS": 13.5,
+            "visibleEndS": 16.5,
+            "visibleDurationS": 3
+          }
+        },
+        "lowerFieldShareDelta": 0,
+        "yRangeDelta": 0,
+        "pathLengthDelta": 0,
+        "meanYDeltaPx": 0,
+        "maxYDeltaPx": 0,
+        "visibleWindowDeltaS": {
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": 0,
+          "visibleDurationDeltaS": 0
+        }
+      }
+    ],
+    "targetGroupRows": [
+      {
+        "groupIndex": 2,
+        "baseline": {
+          "groupIndex": 2,
+          "sampleCount": 14,
+          "pointCount": 96,
+          "lowerFieldThresholdY": 187.2,
+          "lowerFieldShare": 0.6667,
+          "xRange": 0.4701,
+          "yRange": 0.8917,
+          "pathLength": 1.008,
+          "meanY": 223.12,
+          "minY": 36.68,
+          "maxY": 357.68,
+          "visibleWindow": {
+            "visibleStartS": 3,
+            "visibleEndS": 6.25,
+            "visibleDurationS": 3.25
+          }
+        },
+        "compiled": {
+          "groupIndex": 2,
+          "sampleCount": 14,
+          "pointCount": 96,
+          "lowerFieldThresholdY": 187.2,
+          "lowerFieldShare": 0.6667,
+          "xRange": 0.4701,
+          "yRange": 0.892,
+          "pathLength": 1.0082,
+          "meanY": 223.13,
+          "minY": 36.68,
+          "maxY": 357.81,
+          "visibleWindow": {
+            "visibleStartS": 3,
+            "visibleEndS": 6.25,
+            "visibleDurationS": 3.25
+          }
+        },
+        "lowerFieldShareDelta": 0,
+        "yRangeDelta": 0.0003,
+        "pathLengthDelta": 0.0002,
+        "meanYDeltaPx": 0.01,
+        "maxYDeltaPx": 0.13,
+        "visibleWindowDeltaS": {
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": 0,
+          "visibleDurationDeltaS": 0
+        },
+        "expectedLowerFieldShare": 0.4522,
+        "expectedLowerFieldShareDelta": -0.2145,
+        "browserVisibleLowerFieldMovement": false,
+        "lowerFieldMovementMagnitude": 0.0003,
+        "intendedDirection": "reduce-lower-field-share",
+        "actualDirection": "held",
+        "intendedDirectionPass": false
+      }
+    ],
+    "browserVisibleLowerFieldMovement": false,
+    "intendedDirectionPass": false,
+    "group1Effect": {
+      "groupIndex": 1,
+      "baseline": {
+        "groupIndex": 1,
+        "sampleCount": 12,
+        "pointCount": 77,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.8701,
+        "xRange": 1.1224,
+        "yRange": 0.4879,
+        "pathLength": 1.1469,
+        "meanY": 216.9,
+        "minY": 185.11,
+        "maxY": 360.75,
+        "visibleWindow": {
+          "visibleStartS": 0.25,
+          "visibleEndS": 3,
+          "visibleDurationS": 2.75
+        }
+      },
+      "compiled": {
+        "groupIndex": 1,
+        "sampleCount": 12,
+        "pointCount": 77,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.8701,
+        "xRange": 1.1224,
+        "yRange": 0.4879,
+        "pathLength": 1.1469,
+        "meanY": 216.9,
+        "minY": 185.11,
+        "maxY": 360.75,
+        "visibleWindow": {
+          "visibleStartS": 0.25,
+          "visibleEndS": 3,
+          "visibleDurationS": 2.75
+        }
+      },
+      "lowerFieldShareDelta": 0,
+      "yRangeDelta": 0,
+      "pathLengthDelta": 0,
+      "meanYDeltaPx": 0,
+      "maxYDeltaPx": 0,
+      "visibleWindowDeltaS": {
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": 0,
+        "visibleDurationDeltaS": 0
+      }
+    },
+    "group45Preservation": [
+      {
+        "groupIndex": 4,
+        "baseline": {
+          "groupIndex": 4,
+          "sampleCount": 14,
+          "pointCount": 70,
+          "lowerFieldThresholdY": 187.2,
+          "lowerFieldShare": 0.2,
+          "xRange": 1.1475,
+          "yRange": 0.8902,
+          "pathLength": 1.6549,
+          "meanY": 143.57,
+          "minY": 59.04,
+          "maxY": 379.53,
+          "visibleWindow": {
+            "visibleStartS": 7.25,
+            "visibleEndS": 10.5,
+            "visibleDurationS": 3.25
+          }
+        },
+        "compiled": {
+          "groupIndex": 4,
+          "sampleCount": 14,
+          "pointCount": 70,
+          "lowerFieldThresholdY": 187.2,
+          "lowerFieldShare": 0.2,
+          "xRange": 1.1475,
+          "yRange": 0.8902,
+          "pathLength": 1.6549,
+          "meanY": 143.57,
+          "minY": 59.04,
+          "maxY": 379.53,
+          "visibleWindow": {
+            "visibleStartS": 7.25,
+            "visibleEndS": 10.5,
+            "visibleDurationS": 3.25
+          }
+        },
+        "lowerFieldShareDelta": 0,
+        "yRangeDelta": 0,
+        "pathLengthDelta": 0,
+        "meanYDeltaPx": 0,
+        "maxYDeltaPx": 0,
+        "visibleWindowDeltaS": {
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": 0,
+          "visibleDurationDeltaS": 0
+        },
+        "preservationPass": true
+      },
+      {
+        "groupIndex": 5,
+        "baseline": {
+          "groupIndex": 5,
+          "sampleCount": 13,
+          "pointCount": 92,
+          "lowerFieldThresholdY": 187.2,
+          "lowerFieldShare": 0.3043,
+          "xRange": 0.4584,
+          "yRange": 0.962,
+          "pathLength": 1.0528,
+          "meanY": 132.72,
+          "minY": 29.11,
+          "maxY": 375.42,
+          "visibleWindow": {
+            "visibleStartS": 13.5,
+            "visibleEndS": 16.5,
+            "visibleDurationS": 3
+          }
+        },
+        "compiled": {
+          "groupIndex": 5,
+          "sampleCount": 13,
+          "pointCount": 92,
+          "lowerFieldThresholdY": 187.2,
+          "lowerFieldShare": 0.3043,
+          "xRange": 0.4584,
+          "yRange": 0.962,
+          "pathLength": 1.0528,
+          "meanY": 132.72,
+          "minY": 29.11,
+          "maxY": 375.42,
+          "visibleWindow": {
+            "visibleStartS": 13.5,
+            "visibleEndS": 16.5,
+            "visibleDurationS": 3
+          }
+        },
+        "lowerFieldShareDelta": 0,
+        "yRangeDelta": 0,
+        "pathLengthDelta": 0,
+        "meanYDeltaPx": 0,
+        "maxYDeltaPx": 0,
+        "visibleWindowDeltaS": {
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": 0,
+          "visibleDurationDeltaS": 0
+        },
+        "preservationPass": true
+      }
+    ],
+    "group45Preserved": true,
+    "motionProfileProxy": {
+      "referenceSetup": {
+        "pass": true,
+        "enemyCount": 40,
+        "referenceTrackedEnemyCount": 40,
+        "referenceTrackIds": [
+          "target-track-10",
+          "target-track-66",
+          "target-track-71",
+          "target-track-110",
+          "target-track-142"
+        ]
+      },
+      "pathOrder": {
+        "layoutPathFamilyOrder": [
+          "cross-sweep",
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "boss-led-loop"
+        ],
+        "contractPathFamilyOrder": [
+          "cross-sweep",
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "boss-led-loop"
+        ],
+        "runtimePathFamilyMismatches": [],
+        "pass": true
+      },
+      "playbackClock": {
+        "elapsedSeconds": 1,
+        "driftLimitS": 0.08,
+        "pass": true,
+        "bad": [],
+        "drifts": [
+          {
+            "id": 255300326,
+            "wave": 0,
+            "lane": 0,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 0.96,
+            "tm": 1,
+            "expectedTm": 1,
+            "drift": 0
+          },
+          {
+            "id": 673636365,
+            "wave": 0,
+            "lane": 1,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.14,
+            "tm": 0.817,
+            "expectedTm": 0.82,
+            "drift": -0.003
+          },
+          {
+            "id": 82552775,
+            "wave": 0,
+            "lane": 2,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.31,
+            "tm": 0.633,
+            "expectedTm": 0.65,
+            "drift": -0.017
+          },
+          {
+            "id": 6184524,
+            "wave": 0,
+            "lane": 3,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.48,
+            "tm": 0.467,
+            "expectedTm": 0.48,
+            "drift": -0.013
+          },
+          {
+            "id": 432463488,
+            "wave": 0,
+            "lane": 4,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 0.96,
+            "tm": 1,
+            "expectedTm": 1,
+            "drift": 0
+          },
+          {
+            "id": 564592798,
+            "wave": 0,
+            "lane": 5,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.14,
+            "tm": 0.817,
+            "expectedTm": 0.82,
+            "drift": -0.003
+          },
+          {
+            "id": 50401486,
+            "wave": 0,
+            "lane": 6,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.31,
+            "tm": 0.633,
+            "expectedTm": 0.65,
+            "drift": -0.017
+          },
+          {
+            "id": 599383678,
+            "wave": 0,
+            "lane": 7,
+            "pathFamily": "cross-sweep",
+            "sourceTrackId": "target-track-10",
+            "spawnPlan": 1.48,
+            "tm": 0.467,
+            "expectedTm": 0.48,
+            "drift": -0.013
+          }
+        ]
+      },
+      "spacing": {
+        "pass": false,
+        "sampleCount": 31,
+        "spacingScore": 0.592,
+        "bunchingRisk": 0.452
+      }
+    },
+    "motionProfileGateProxyPass": false,
+    "spacingReadability": {
+      "sampleCount": 31,
+      "worstMinDistance": 0,
+      "averageMinDistance": 15.35,
+      "spacingScore": 0.592,
+      "bunchingRisk": 0.452,
+      "crampedCount": 14,
+      "minRuntimeSpacingScore": 0.72,
+      "maxRuntimeBunchingRisk": 0.38,
+      "pass": false
+    },
+    "scoreableRouteStatus": {
+      "pass": true,
+      "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+      "read": "Control preserves the restored baseline scoreable-route read."
+    },
+    "safetyStatus": {
+      "pass": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0
+      }
+    },
+    "liveGateOrder": [
+      "cross-sweep",
+      "cross-sweep",
+      "hook-arc",
+      "hook-arc",
+      "boss-led-loop"
+    ]
+  },
+  "failureClassification": [
+    {
+      "category": "guardrail-regression",
+      "read": "The compiled lower-field controls do not pass the focused motion/profile proxy."
+    },
+    {
+      "category": "guardrail-regression",
+      "read": "The compiled lower-field controls reduce spacing/readability below the Stage 7 floor."
+    },
+    {
+      "category": "not-runtime-expressible",
+      "read": "Group 2 did not show enough browser-visible lower-field movement."
+    },
+    {
+      "category": "not-runtime-expressible",
+      "read": "Group 2 movement did not reduce lower-field overstay in the intended direction."
+    }
+  ],
+  "summary": {
+    "browserVisibleEffectConfirmed": false,
+    "intendedDirectionPass": false,
+    "motionProfileGateProxyPass": false,
+    "spacingReadabilityPass": false,
+    "scoreableRoutesPass": true,
+    "safetyPass": true,
+    "group45Preserved": true,
+    "proofKind": "non-overwriting-browser-layout-override",
+    "read": "The generated lowerFieldBias/yOffset controls are consumed and measured, but they do not produce a source-ready lower-field-overstay reduction proof."
+  },
+  "decision": {
+    "sourceReadyForCandidates": false,
+    "sourceReadyBlockers": [
+      "The compiled lower-field controls did not produce enough browser-visible lower-field movement.",
+      "The compiled lower-field controls did not reduce lower-field overstay in the intended direction.",
+      "The compiled lower-field controls do not pass the motion/profile proxy guard."
+    ],
+    "read": "lower-field-overstay-reduction remains analysis-only under the current lowerFieldBias/yOffset projection. Pause Stage 7 candidate work and apply the RED pipeline front-first to Stage 3."
+  }
+}

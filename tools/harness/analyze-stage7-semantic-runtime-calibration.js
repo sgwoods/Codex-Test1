@@ -449,7 +449,7 @@ function main(){
     likelyCauses: [
       {
         cause: 'runtime-expressibility',
-        read: 'The rejected source attempt overpredicted phase-window transfer. The phase-duration compiler now emits consumed controls and preserves protected group 4/group 5 timing, but the constrained proof is still blocked by the motion/profile spacing-readability guard.'
+        read: 'The rejected source attempt overpredicted phase-window transfer. The phase-duration compiler now emits consumed controls and preserves protected group 4/group 5 timing, but the constrained proof is still blocked by the motion/profile spacing-readability guard. The lower-field proof confirms lowerFieldBias/yOffset are consumed, but current generated values do not move group 2 lower-field share in the intended direction.'
       },
       {
         cause: 'stale-or-unreconciled-target-artifact',
@@ -467,8 +467,8 @@ function main(){
     decision: {
       runtimeCandidateAllowed,
       sourceReadyGatePass: false,
-      nextRecommendation: 'Do not try another Stage 7 runtime candidate. Keep source-ready path-family authority on the live gates/runtime source, stop local phase-duration candidate work for now, and next build exactly one lower-field-overstay transfer proof or pause Stage 7 and apply the RED pipeline front-first to Stage 3.',
-      remainingCompilerGap: 'phase-duration-rebalance now emits runtime-consumed compiled controls and preserves protected group 4/group 5 timing, but the constrained proof is not source-ready because the motion/profile spacing-readability guard fails. group1 path-length compression and lower-field overstay reduction remain analysis-only until browser transfer proofs exist.'
+      nextRecommendation: 'Do not try another Stage 7 runtime candidate. Keep source-ready path-family authority on the live gates/runtime source, pause Stage 7 candidate work, and apply the RED pipeline front-first to Stage 3 / Challenge 1.',
+      remainingCompilerGap: 'phase-duration-rebalance now emits runtime-consumed compiled controls and preserves protected group 4/group 5 timing, but the constrained proof is not source-ready because the motion/profile spacing-readability guard fails. lower-field-overstay-reduction now has a consumed-control proof, but group 2 lower-field share held at 0.6667 instead of moving toward 0.4522 and the proof failed motion/profile plus spacing/readability guards. group1 path-length compression remains analysis-only until a browser transfer proof exists.'
     }
   };
   writeJson(OUT_JSON, report);
