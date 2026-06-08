@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage7-reference-execution-candidate-trial-input",
+  "generatedBy": "tools/harness/analyze-stage7-reference-execution-batch.js",
+  "candidateId": "stage7-semantic-group1-path-compression-0.1",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 7,
+    "challengeNumber": 2,
+    "displayLabel": "Stage 7 / Challenge 2"
+  },
+  "semanticTransformationClass": "group1-path-length-compression",
+  "semanticTransformations": [
+    "group1-path-length-compression"
+  ],
+  "intendedPlayerFacingMeaning": "Shorten the opening cross-sweep path so the opener is a tighter, more readable bonus-stage route.",
+  "targetGroups": [
+    1
+  ],
+  "invariantsPreserved": [
+    "challenge safety baseline is preserved",
+    "group 1 remains cross-sweep",
+    "group 4 and group 5 baseline geometry is preserved"
+  ],
+  "expectedMetricMovement": "Improve group 1 aggregate object-track score without touching groups 4 and 5.",
+  "generatedLowLevelControls": {
+    "pathLengthFormula": "min(baseline.pathLength, aggregateTarget.pathLength * maxAggregatePathLengthRatio)",
+    "baselinePathLength": 0.5081,
+    "aggregateTargetPathLength": 0.1176,
+    "maxAggregatePathLengthRatio": 3,
+    "generatedPathLength": 0.3528
+  },
+  "whyMoreLikelyThanBlindTuning": "The path length is derived from the aggregate target and promotion-gate ratio, not hand-selected.",
+  "intent": {
+    "kind": "group1-path-length-compression",
+    "read": "Shorten the opening cross-sweep path so the opener is a tighter, more readable bonus-stage route."
+  },
+  "groups": [
+    {
+      "groupIndex": 1,
+      "pathFamily": "cross-sweep",
+      "controls": {
+        "pathLength": 0.3528
+      },
+      "semanticReason": "group1-path-length-compression",
+      "generatedLowLevelControls": {
+        "pathLengthFormula": "min(baseline.pathLength, aggregateTarget.pathLength * maxAggregatePathLengthRatio)",
+        "baselinePathLength": 0.5081,
+        "aggregateTargetPathLength": 0.1176,
+        "maxAggregatePathLengthRatio": 3,
+        "generatedPathLength": 0.3528
+      }
+    }
+  ],
+  "guardrails": {
+    "spacingReadability": {
+      "source": "npm run harness:check:challenge-motion-profile after restored baseline",
+      "preserveBaseline": true,
+      "pass": true,
+      "worstMinDistance": 3.08,
+      "averageMinDistance": 19.82,
+      "spacingScore": 0.765,
+      "bunchingRisk": 0.292,
+      "read": "Restored baseline spacing guardrail passed; use a fresh motion-profile run before promoting any non-control runtime candidate."
+    },
+    "scoreableRoutes": {
+      "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+      "preserveBaseline": true,
+      "score10": 5.5,
+      "activeWindows": 47,
+      "multiTargetWindowShare": 0.745,
+      "laneDiversity": 1,
+      "centerBias": 0.359,
+      "read": "Control preserves the restored baseline scoreable-route read."
+    },
+    "safety": {
+      "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+      "preserveBaseline": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0,
+        "challengeContacts": 4
+      },
+      "read": "Control preserves the restored baseline no-shot/no-attack/no-loss safety read."
+    }
+  },
+  "gates": {
+    "minTotalObjectTrackLift10": 0.05,
+    "mustImproveGroup1": true,
+    "mustPreserveGroup4": true,
+    "mustPreserveGroup5": true,
+    "mustPreserveCoverage": true
+  }
+}

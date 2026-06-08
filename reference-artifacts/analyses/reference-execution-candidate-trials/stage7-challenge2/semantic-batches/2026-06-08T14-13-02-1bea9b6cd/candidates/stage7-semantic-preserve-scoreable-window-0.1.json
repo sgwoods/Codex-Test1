@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage7-reference-execution-candidate-trial-input",
+  "generatedBy": "tools/harness/analyze-stage7-reference-execution-batch.js",
+  "candidateId": "stage7-semantic-preserve-scoreable-window-0.1",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 7,
+    "challengeNumber": 2,
+    "displayLabel": "Stage 7 / Challenge 2"
+  },
+  "semanticTransformationClass": "preserve-scoreable-window",
+  "semanticTransformations": [
+    "preserve-scoreable-window"
+  ],
+  "intendedPlayerFacingMeaning": "Exercise the scoreable-window guardrail as a semantic invariant rather than a geometry candidate.",
+  "targetGroups": [],
+  "invariantsPreserved": [
+    "active score windows do not regress",
+    "center-lane bias remains below the trial floor",
+    "multi-target lane share does not regress"
+  ],
+  "expectedMetricMovement": "No object-track movement; should reject as measurement-only while preserving route evidence.",
+  "generatedLowLevelControls": {
+    "geometry": "none",
+    "guardrail": "baseline scoreable-route evidence"
+  },
+  "whyMoreLikelyThanBlindTuning": "This is a guardrail class; it proves route preservation remains explicit in batch candidates.",
+  "intent": {
+    "kind": "preserve-scoreable-window",
+    "read": "Exercise the scoreable-window guardrail as a semantic invariant rather than a geometry candidate."
+  },
+  "groups": [],
+  "guardrails": {
+    "spacingReadability": {
+      "source": "npm run harness:check:challenge-motion-profile after restored baseline",
+      "preserveBaseline": true,
+      "pass": true,
+      "worstMinDistance": 3.08,
+      "averageMinDistance": 19.82,
+      "spacingScore": 0.765,
+      "bunchingRisk": 0.292,
+      "read": "Restored baseline spacing guardrail passed; use a fresh motion-profile run before promoting any non-control runtime candidate."
+    },
+    "scoreableRoutes": {
+      "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+      "preserveBaseline": true,
+      "score10": 5.5,
+      "activeWindows": 47,
+      "multiTargetWindowShare": 0.745,
+      "laneDiversity": 1,
+      "centerBias": 0.359,
+      "read": "Control preserves the restored baseline scoreable-route read."
+    },
+    "safety": {
+      "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+      "preserveBaseline": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0,
+        "challengeContacts": 4
+      },
+      "read": "Control preserves the restored baseline no-shot/no-attack/no-loss safety read."
+    }
+  },
+  "gates": {
+    "minTotalObjectTrackLift10": 0.05,
+    "mustImproveGroup1": true,
+    "mustPreserveGroup4": true,
+    "mustPreserveGroup5": true,
+    "mustPreserveCoverage": true
+  }
+}

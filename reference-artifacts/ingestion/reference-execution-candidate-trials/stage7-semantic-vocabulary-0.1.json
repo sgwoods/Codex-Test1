@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage7-reference-execution-semantic-vocabulary",
+  "vocabularyId": "stage7-semantic-vocabulary-0.1",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 7,
+    "challengeNumber": 2,
+    "displayLabel": "Stage 7 / Challenge 2"
+  },
+  "transformationClasses": [
+    {
+      "classId": "canonical-family-alignment",
+      "playerMeaning": "Make the declared runtime family follow the reference-execution comparison family before geometry tuning.",
+      "generationRule": "For groups whose runtime family differs from canonicalComparisonPathFamily, emit pathFamily equal to canonicalComparisonPathFamily while preserving measured geometry.",
+      "invariants": [
+        "no object-track geometry change",
+        "scoreable route baseline is preserved",
+        "challenge safety baseline is preserved"
+      ],
+      "expectedMetricMovement": "Removes path-family blockers but should not claim object-track lift by itself.",
+      "whyNotBlindTuning": "The class is derived from canonical path-family decisions in the reference execution description, not numeric search."
+    },
+    {
+      "classId": "group1-path-length-compression",
+      "playerMeaning": "Shorten the opening cross-field line so the first visible group reads like a compact bonus-stage sweep instead of an overlong drift.",
+      "generationRule": "For group 1, derive pathLength from the aggregate target path-length gate and preserve the canonical cross-sweep family and lower-field score window.",
+      "invariants": [
+        "group 1 remains cross-sweep",
+        "group 4 and group 5 baseline geometry is preserved",
+        "challenge safety baseline is preserved"
+      ],
+      "expectedMetricMovement": "Raise group 1 aggregate object-track fit without touching late groups.",
+      "whyNotBlindTuning": "The compression amount is computed from the group's reference target and promotion gate, not chosen as a free numeric delta."
+    },
+    {
+      "classId": "lower-field-overstay-reduction",
+      "playerMeaning": "Keep groups from lingering too long in the lower field when the reference expects an upper or transitional pass.",
+      "generationRule": "For groups with positive lower-field overstay, blend lowerFieldShare toward the aggregate target within the reference-execution lower-field gate.",
+      "invariants": [
+        "path family remains canonical for touched groups",
+        "scoreable route baseline is preserved unless a later measured route probe says otherwise",
+        "group 4 and group 5 cannot be allowed to regress"
+      ],
+      "expectedMetricMovement": "Reduce lower-field overstay warnings, especially group 2, without treating low-field geometry as a standalone win.",
+      "whyNotBlindTuning": "Groups are selected from measured lower-field deltas, and the target value comes from the reference execution description."
+    },
+    {
+      "classId": "phase-duration-rebalance",
+      "playerMeaning": "Bring group visible windows closer to the reference phase order without broad stage retiming.",
+      "generationRule": "For groups with visible start/end drift, derive visibleStartS and visibleEndS from the aggregate target window and preserve path family.",
+      "invariants": [
+        "phase order remains group 1 through group 5",
+        "target count and no-combat challenge meaning are preserved",
+        "group 4 and group 5 baseline object-track floors are protected"
+      ],
+      "expectedMetricMovement": "Improve timing components while exposing whether geometry worsens when phase timing is tightened.",
+      "whyNotBlindTuning": "Timing comes from object-track windows in the reference execution description."
+    },
+    {
+      "classId": "preserve-scoreable-window",
+      "playerMeaning": "Reject motion ideas that improve object-track math by collapsing playable bonus lanes.",
+      "generationRule": "Attach baseline scoreable-route evidence as an invariant guardrail unless a candidate supplies stronger measured route evidence.",
+      "invariants": [
+        "active score windows do not regress",
+        "multi-target lane share does not regress",
+        "center-lane bias remains below the trial floor"
+      ],
+      "expectedMetricMovement": "No direct object-track lift; protects player-facing route quality.",
+      "whyNotBlindTuning": "The class preserves measured route evidence as a semantic guardrail, not a tunable geometry parameter."
+    },
+    {
+      "classId": "protect-group4-group5",
+      "playerMeaning": "Treat late Challenge 2 groups as hard readability/identity guardrails while improving the opener.",
+      "generationRule": "Carry group 4 and group 5 baseline vectors into the candidate and mark them as protected invariants unless a measured candidate explicitly improves them.",
+      "invariants": [
+        "group 4 aggregate score stays at or above baseline",
+        "group 5 aggregate score stays at or above baseline",
+        "late boss-led cleanup does not become the casualty of group 1 tuning"
+      ],
+      "expectedMetricMovement": "Prevents false positive total-score movement that hides late-group regression.",
+      "whyNotBlindTuning": "The class encodes the prior rejected-candidate lesson as an explicit semantic guardrail."
+    }
+  ],
+  "promotionPolicy": {
+    "runtimeSourceCandidateOnly": "A semantic batch winner may authorize exactly one runtime source candidate, not a runtime keeper.",
+    "runtimeKeeperRequires": [
+      "runtime source edit",
+      "rebuild",
+      "before/after evidence",
+      "focused strict challenge-stage conformance",
+      "motion/profile guard",
+      "scoreable-route guard",
+      "spacing/readability guard",
+      "no-shot/no-attack/no-loss safety evidence"
+    ]
+  }
+}

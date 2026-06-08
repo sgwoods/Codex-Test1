@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage7-reference-execution-candidate-trial-input",
+  "generatedBy": "tools/harness/analyze-stage7-reference-execution-batch.js",
+  "candidateId": "stage7-semantic-protect-group4-group5-0.1",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 7,
+    "challengeNumber": 2,
+    "displayLabel": "Stage 7 / Challenge 2"
+  },
+  "semanticTransformationClass": "protect-group4-group5",
+  "semanticTransformations": [
+    "protect-group4-group5"
+  ],
+  "intendedPlayerFacingMeaning": "Lock late groups to their restored baseline vectors so opener improvements cannot hide late regression.",
+  "targetGroups": [
+    4,
+    5
+  ],
+  "invariantsPreserved": [
+    "group 4 aggregate score stays at or above baseline",
+    "group 5 aggregate score stays at or above baseline",
+    "late boss-led cleanup does not become the casualty of group 1 tuning"
+  ],
+  "expectedMetricMovement": "No object-track lift; preserves group 4 and group 5 as explicit guardrails.",
+  "generatedLowLevelControls": {
+    "groups": [
+      {
+        "protectionFormula": "baseline vector preserved exactly",
+        "baselineAggregateScoreFloor": 5,
+        "baselinePathFamily": "hook-arc",
+        "canonicalPathFamily": "cross-sweep"
+      },
+      {
+        "protectionFormula": "baseline vector preserved exactly",
+        "baselineAggregateScoreFloor": 4.9,
+        "baselinePathFamily": "boss-led-loop",
+        "canonicalPathFamily": "hook-arc"
+      }
+    ]
+  },
+  "whyMoreLikelyThanBlindTuning": "The protection values come from the restored baseline trial report and prior rejection lesson.",
+  "intent": {
+    "kind": "protect-group4-group5",
+    "read": "Lock late groups to their restored baseline vectors so opener improvements cannot hide late regression."
+  },
+  "groups": [
+    {
+      "groupIndex": 4,
+      "pathFamily": "hook-arc",
+      "predictedRuntimeVector": {
+        "id": 195163019,
+        "family": "stingray",
+        "pathFamily": "hook-arc",
+        "wave": 3,
+        "lane": 5,
+        "type": "boss",
+        "sampleCount": 12,
+        "visibleStartS": 7.5,
+        "visibleEndS": 10.25,
+        "entrySide": "left",
+        "exitSide": "center",
+        "xRange": 0.6754,
+        "yRange": 0.7522,
+        "pathLength": 1.3593,
+        "turnCount": 2,
+        "reversalCount": 1,
+        "lowerFieldShare": 0.25
+      },
+      "semanticReason": "protect-group4-group5",
+      "generatedLowLevelControls": {
+        "protectionFormula": "baseline vector preserved exactly",
+        "baselineAggregateScoreFloor": 5,
+        "baselinePathFamily": "hook-arc",
+        "canonicalPathFamily": "cross-sweep"
+      }
+    },
+    {
+      "groupIndex": 5,
+      "pathFamily": "boss-led-loop",
+      "predictedRuntimeVector": {
+        "id": 756830963,
+        "family": "stingray",
+        "pathFamily": "boss-led-loop",
+        "wave": 4,
+        "lane": 4,
+        "type": "bee",
+        "sampleCount": 11,
+        "visibleStartS": 13.5,
+        "visibleEndS": 16,
+        "entrySide": "center",
+        "exitSide": "center",
+        "xRange": 0.1557,
+        "yRange": 0.7693,
+        "pathLength": 0.9253,
+        "turnCount": 3,
+        "reversalCount": 3,
+        "lowerFieldShare": 0.27
+      },
+      "semanticReason": "protect-group4-group5",
+      "generatedLowLevelControls": {
+        "protectionFormula": "baseline vector preserved exactly",
+        "baselineAggregateScoreFloor": 4.9,
+        "baselinePathFamily": "boss-led-loop",
+        "canonicalPathFamily": "hook-arc"
+      }
+    }
+  ],
+  "guardrails": {
+    "spacingReadability": {
+      "source": "npm run harness:check:challenge-motion-profile after restored baseline",
+      "preserveBaseline": true,
+      "pass": true,
+      "worstMinDistance": 3.08,
+      "averageMinDistance": 19.82,
+      "spacingScore": 0.765,
+      "bunchingRisk": 0.292,
+      "read": "Restored baseline spacing guardrail passed; use a fresh motion-profile run before promoting any non-control runtime candidate."
+    },
+    "scoreableRoutes": {
+      "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+      "preserveBaseline": true,
+      "score10": 5.5,
+      "activeWindows": 47,
+      "multiTargetWindowShare": 0.745,
+      "laneDiversity": 1,
+      "centerBias": 0.359,
+      "read": "Control preserves the restored baseline scoreable-route read."
+    },
+    "safety": {
+      "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+      "preserveBaseline": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0,
+        "challengeContacts": 4
+      },
+      "read": "Control preserves the restored baseline no-shot/no-attack/no-loss safety read."
+    }
+  },
+  "gates": {
+    "minTotalObjectTrackLift10": 0.05,
+    "mustImproveGroup1": true,
+    "mustPreserveGroup4": true,
+    "mustPreserveGroup5": true,
+    "mustPreserveCoverage": true
+  }
+}

@@ -19,6 +19,30 @@ The analyzer writes only to:
 It does not overwrite challenge-stage conformance, the reference execution
 description, or runtime source.
 
+## Semantic Batch Pilot
+
+The semantic batch layer treats the Stage 7 trial gate as the first
+compiler/evaluator for a tiny executable-intent language. Run:
+
+```sh
+npm run harness:analyze:stage7-reference-execution-batch
+npm run harness:check:stage7-reference-execution-batch
+```
+
+The vocabulary is declared in:
+
+`reference-artifacts/ingestion/reference-execution-candidate-trials/stage7-semantic-vocabulary-0.1.json`
+
+The batch analyzer generates candidate JSON inputs from named transformation
+classes, evaluates each through the single-candidate trial gate, and writes a
+ranked report to:
+
+`reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/latest-batch.json`
+
+Generated candidates remain measurement artifacts. A passing batch candidate
+can only be recommended as exactly one runtime source attempt, not as a runtime
+keeper.
+
 ## Stage 7 Input Shape
 
 - `candidateId`: stable candidate id.

@@ -312,6 +312,21 @@ Current conformance read:
   that predicts focused strict improvement while preserving group 4, group 5,
   spacing/readability, scoreable routes, and no-shot/no-loss challenge safety;
   only then should a runtime source edit be promoted for before/after evidence.
+- the Stage 7 trial gate now has a semantic candidate-batch compiler/evaluator:
+  `reference-artifacts/ingestion/reference-execution-candidate-trials/stage7-semantic-vocabulary-0.1.json`,
+  `npm run harness:analyze:stage7-reference-execution-batch`, and
+  `npm run harness:check:stage7-reference-execution-batch`. The June 8 batch
+  generated and tested `8` candidates across `6` transformation classes. It
+  recommended exactly one runtime source candidate to try,
+  `stage7-semantic-phase-align-protect-0.1`, with predicted Stage 7
+  object-track `5.0/10` (`+0.3`), coverage `0.541` (`+0.038`), group 1
+  `4.0`, group 4 `5.3`, group 5 `4.9`, all canonical path families matched,
+  and preserved spacing/readability, scoreable-route, and no-shot/no-loss
+  guardrails. This remains a measurement/process keeper, not a runtime keeper:
+  the next worker should try exactly that runtime source candidate, rebuild,
+  then produce before/after visual evidence plus strict challenge-stage,
+  motion/profile, scoreable-route, spacing/readability, sprite/render, and
+  safety checks before accepting or rejecting runtime promotion.
 - challenge-stage grammar is now materially ahead of runtime implementation:
   the first-five challenge work has `25/25` reference-backed group contracts
   and `8.6/10` control readiness, but runtime promotion is still blocked by

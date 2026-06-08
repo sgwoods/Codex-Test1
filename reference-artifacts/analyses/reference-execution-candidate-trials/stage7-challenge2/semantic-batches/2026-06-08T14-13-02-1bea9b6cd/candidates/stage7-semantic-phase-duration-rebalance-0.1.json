@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage7-reference-execution-candidate-trial-input",
+  "generatedBy": "tools/harness/analyze-stage7-reference-execution-batch.js",
+  "candidateId": "stage7-semantic-phase-duration-rebalance-0.1",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 7,
+    "challengeNumber": 2,
+    "displayLabel": "Stage 7 / Challenge 2"
+  },
+  "semanticTransformationClass": "phase-duration-rebalance",
+  "semanticTransformations": [
+    "phase-duration-rebalance"
+  ],
+  "intendedPlayerFacingMeaning": "Align visible group windows to the reference phase order without changing target count or challenge safety.",
+  "targetGroups": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "invariantsPreserved": [
+    "group 4 and group 5 baseline object-track floors are protected",
+    "phase order remains group 1 through group 5",
+    "target count and no-combat challenge meaning are preserved"
+  ],
+  "expectedMetricMovement": "Improve visible-start/end components while exposing any geometry loss.",
+  "generatedLowLevelControls": {
+    "groups": [
+      {
+        "visibleWindowFormula": "aggregateObjectTrackTarget.visibleStartS/visibleEndS",
+        "visibleStartS": 0,
+        "visibleEndS": 1.88
+      },
+      {
+        "visibleWindowFormula": "aggregateObjectTrackTarget.visibleStartS/visibleEndS",
+        "visibleStartS": 2.88,
+        "visibleEndS": 6.38
+      },
+      {
+        "visibleWindowFormula": "aggregateObjectTrackTarget.visibleStartS/visibleEndS",
+        "visibleStartS": 4.25,
+        "visibleEndS": 5
+      },
+      {
+        "visibleWindowFormula": "aggregateObjectTrackTarget.visibleStartS/visibleEndS",
+        "visibleStartS": 7.13,
+        "visibleEndS": 10.38
+      }
+    ]
+  },
+  "whyMoreLikelyThanBlindTuning": "The timing windows are copied from aggregate object-track targets in the reference execution description.",
+  "intent": {
+    "kind": "phase-duration-rebalance",
+    "read": "Align visible group windows to the reference phase order without changing target count or challenge safety."
+  },
+  "groups": [
+    {
+      "groupIndex": 1,
+      "pathFamily": "cross-sweep",
+      "timing": {
+        "visibleStartS": 0,
+        "visibleEndS": 1.88
+      },
+      "semanticReason": "phase-duration-rebalance",
+      "generatedLowLevelControls": {
+        "visibleWindowFormula": "aggregateObjectTrackTarget.visibleStartS/visibleEndS",
+        "visibleStartS": 0,
+        "visibleEndS": 1.88
+      }
+    },
+    {
+      "groupIndex": 2,
+      "pathFamily": "hook-arc",
+      "timing": {
+        "visibleStartS": 2.88,
+        "visibleEndS": 6.38
+      },
+      "semanticReason": "phase-duration-rebalance",
+      "generatedLowLevelControls": {
+        "visibleWindowFormula": "aggregateObjectTrackTarget.visibleStartS/visibleEndS",
+        "visibleStartS": 2.88,
+        "visibleEndS": 6.38
+      }
+    },
+    {
+      "groupIndex": 3,
+      "pathFamily": "hook-arc",
+      "timing": {
+        "visibleStartS": 4.25,
+        "visibleEndS": 5
+      },
+      "semanticReason": "phase-duration-rebalance",
+      "generatedLowLevelControls": {
+        "visibleWindowFormula": "aggregateObjectTrackTarget.visibleStartS/visibleEndS",
+        "visibleStartS": 4.25,
+        "visibleEndS": 5
+      }
+    },
+    {
+      "groupIndex": 4,
+      "pathFamily": "cross-sweep",
+      "timing": {
+        "visibleStartS": 7.13,
+        "visibleEndS": 10.38
+      },
+      "semanticReason": "phase-duration-rebalance",
+      "generatedLowLevelControls": {
+        "visibleWindowFormula": "aggregateObjectTrackTarget.visibleStartS/visibleEndS",
+        "visibleStartS": 7.13,
+        "visibleEndS": 10.38
+      }
+    }
+  ],
+  "guardrails": {
+    "spacingReadability": {
+      "source": "npm run harness:check:challenge-motion-profile after restored baseline",
+      "preserveBaseline": true,
+      "pass": true,
+      "worstMinDistance": 3.08,
+      "averageMinDistance": 19.82,
+      "spacingScore": 0.765,
+      "bunchingRisk": 0.292,
+      "read": "Restored baseline spacing guardrail passed; use a fresh motion-profile run before promoting any non-control runtime candidate."
+    },
+    "scoreableRoutes": {
+      "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+      "preserveBaseline": true,
+      "score10": 5.5,
+      "activeWindows": 47,
+      "multiTargetWindowShare": 0.745,
+      "laneDiversity": 1,
+      "centerBias": 0.359,
+      "read": "Control preserves the restored baseline scoreable-route read."
+    },
+    "safety": {
+      "source": "reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json",
+      "preserveBaseline": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0,
+        "challengeContacts": 4
+      },
+      "read": "Control preserves the restored baseline no-shot/no-attack/no-loss safety read."
+    }
+  },
+  "gates": {
+    "minTotalObjectTrackLift10": 0.05,
+    "mustImproveGroup1": true,
+    "mustPreserveGroup4": true,
+    "mustPreserveGroup5": true,
+    "mustPreserveCoverage": true
+  }
+}

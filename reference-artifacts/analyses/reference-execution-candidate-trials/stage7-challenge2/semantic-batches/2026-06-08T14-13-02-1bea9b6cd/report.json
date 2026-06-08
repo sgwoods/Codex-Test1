@@ -1,0 +1,838 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage7-reference-execution-semantic-candidate-batch",
+  "generatedAt": "2026-06-08T14:13:02.070Z",
+  "generatedBy": "tools/harness/analyze-stage7-reference-execution-batch.js",
+  "commit": "1bea9b6cd",
+  "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 7,
+    "challengeNumber": 2,
+    "displayLabel": "Stage 7 / Challenge 2"
+  },
+  "sourceArtifacts": {
+    "semanticVocabulary": "reference-artifacts/ingestion/reference-execution-candidate-trials/stage7-semantic-vocabulary-0.1.json",
+    "referenceExecutionDescription": "reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage7-challenge2-0.1.json",
+    "baselineTrialInput": "reference-artifacts/ingestion/reference-execution-candidate-trials/stage7-baseline-control-0.1.json"
+  },
+  "generatedCandidateDir": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T14-13-02-1bea9b6cd/candidates",
+  "generatedTrialReportDir": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T14-13-02-1bea9b6cd/trials",
+  "candidateCount": 8,
+  "transformationClassesTested": [
+    "canonical-family-alignment",
+    "group1-path-length-compression",
+    "lower-field-overstay-reduction",
+    "phase-duration-rebalance",
+    "preserve-scoreable-window",
+    "protect-group4-group5"
+  ],
+  "candidates": [
+    {
+      "candidateId": "stage7-semantic-phase-align-protect-0.1",
+      "semanticTransformationClass": "semantic-composition",
+      "semanticTransformations": [
+        "canonical-family-alignment",
+        "phase-duration-rebalance",
+        "preserve-scoreable-window",
+        "protect-group4-group5"
+      ],
+      "intendedPlayerFacingMeaning": "Combine the strongest measured phase-window signal with canonical family alignment and explicit late-group protection.",
+      "targetGroups": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T14-13-02-1bea9b6cd/candidates/stage7-semantic-phase-align-protect-0.1.json",
+      "trialReport": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T14-13-02-1bea9b6cd/trials/stage7-semantic-phase-align-protect-0.1.json",
+      "totalObjectTrackScore10": 5,
+      "totalObjectTrackCoverage": 0.541,
+      "totalObjectTrackDelta10": 0.3,
+      "coverageDelta": 0.038,
+      "groupScores": {
+        "group1": 4,
+        "group4": 5.3,
+        "group5": 4.9
+      },
+      "canonicalFamilyMatch": {
+        "allGroups": true,
+        "group1": true,
+        "group4": true,
+        "group5": true
+      },
+      "guardrails": {
+        "spacingReadability": true,
+        "scoreableRoutes": true,
+        "safety": true
+      },
+      "semanticValidity": {
+        "pass": true,
+        "blockers": [],
+        "warnings": [
+          "phase-duration rebalance needs browser capture before promotion because timing changes can affect spacing."
+        ],
+        "read": "Semantic validity passed; numeric movement remains subject to the trial promotion gate."
+      },
+      "readyForRuntimeSourceCandidate": true,
+      "blockerCount": 0,
+      "blockers": [],
+      "warnings": [
+        "phase-duration rebalance needs browser capture before promotion because timing changes can affect spacing.",
+        "group 1: aggregate object-track score 4/10 is below first promotion floor",
+        "group 1: primary object-track score 4.2/10 is below first promotion floor",
+        "group 1: aggregate path-length ratio 4.32 exceeds first promotion floor",
+        "group 2: primary object-track score 2.5/10 is below first promotion floor",
+        "group 2: aggregate path-length ratio 5.74 exceeds first promotion floor",
+        "group 2: lower-field overstay +0.358 exceeds aggregate gate",
+        "group 3: primary object-track score 4.9/10 is below first promotion floor",
+        "group 3: aggregate path-length ratio 3.9 exceeds first promotion floor",
+        "group 3: primary path-length ratio 3.31 exceeds first promotion floor",
+        "group 4: primary object-track score 1.8/10 is below first promotion floor",
+        "group 4: aggregate path-length ratio 9.23 exceeds first promotion floor",
+        "group 4: primary path-length ratio 7.23 exceeds first promotion floor",
+        "group 4: lower-field undershoot -0.266 exceeds aggregate gate",
+        "group 5: aggregate object-track score 4.9/10 is below first promotion floor",
+        "group 5: primary object-track score 3/10 is below first promotion floor",
+        "group 5: aggregate path-length ratio 3.83 exceeds first promotion floor"
+      ],
+      "rankingScore": 4
+    },
+    {
+      "candidateId": "stage7-semantic-phase-duration-rebalance-0.1",
+      "semanticTransformationClass": "phase-duration-rebalance",
+      "semanticTransformations": [
+        "phase-duration-rebalance"
+      ],
+      "intendedPlayerFacingMeaning": "Align visible group windows to the reference phase order without changing target count or challenge safety.",
+      "targetGroups": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T14-13-02-1bea9b6cd/candidates/stage7-semantic-phase-duration-rebalance-0.1.json",
+      "trialReport": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T14-13-02-1bea9b6cd/trials/stage7-semantic-phase-duration-rebalance-0.1.json",
+      "totalObjectTrackScore10": 5,
+      "totalObjectTrackCoverage": 0.541,
+      "totalObjectTrackDelta10": 0.3,
+      "coverageDelta": 0.038,
+      "groupScores": {
+        "group1": 4,
+        "group4": 5.3,
+        "group5": 4.9
+      },
+      "canonicalFamilyMatch": {
+        "allGroups": false,
+        "group1": true,
+        "group4": true,
+        "group5": false
+      },
+      "guardrails": {
+        "spacingReadability": true,
+        "scoreableRoutes": true,
+        "safety": true
+      },
+      "semanticValidity": {
+        "pass": true,
+        "blockers": [],
+        "warnings": [
+          "phase-duration rebalance needs browser capture before promotion because timing changes can affect spacing."
+        ],
+        "read": "Semantic validity passed; numeric movement remains subject to the trial promotion gate."
+      },
+      "readyForRuntimeSourceCandidate": false,
+      "blockerCount": 1,
+      "blockers": [
+        "group 5: path family boss-led-loop does not match canonical hook-arc"
+      ],
+      "warnings": [
+        "phase-duration rebalance needs browser capture before promotion because timing changes can affect spacing.",
+        "group 1: aggregate object-track score 4/10 is below first promotion floor",
+        "group 1: primary object-track score 4.2/10 is below first promotion floor",
+        "group 1: aggregate path-length ratio 4.32 exceeds first promotion floor",
+        "group 2: primary object-track score 2.5/10 is below first promotion floor",
+        "group 2: aggregate path-length ratio 5.74 exceeds first promotion floor",
+        "group 2: lower-field overstay +0.358 exceeds aggregate gate",
+        "group 3: primary object-track score 4.9/10 is below first promotion floor",
+        "group 3: aggregate path-length ratio 3.9 exceeds first promotion floor",
+        "group 3: primary path-length ratio 3.31 exceeds first promotion floor",
+        "group 4: primary object-track score 1.8/10 is below first promotion floor",
+        "group 4: aggregate path-length ratio 9.23 exceeds first promotion floor",
+        "group 4: primary path-length ratio 7.23 exceeds first promotion floor",
+        "group 4: lower-field undershoot -0.266 exceeds aggregate gate",
+        "group 5: aggregate object-track score 4.9/10 is below first promotion floor",
+        "group 5: primary object-track score 3/10 is below first promotion floor",
+        "group 5: aggregate path-length ratio 3.83 exceeds first promotion floor"
+      ],
+      "rankingScore": 3.6
+    },
+    {
+      "candidateId": "stage7-semantic-opener-align-protect-0.1",
+      "semanticTransformationClass": "semantic-composition",
+      "semanticTransformations": [
+        "canonical-family-alignment",
+        "group1-path-length-compression",
+        "lower-field-overstay-reduction",
+        "preserve-scoreable-window",
+        "protect-group4-group5"
+      ],
+      "intendedPlayerFacingMeaning": "Try the smallest semantic composition: improve the opener, align canonical families, reduce measured lower-field overstay, and explicitly protect groups 4 and 5.",
+      "targetGroups": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T14-13-02-1bea9b6cd/candidates/stage7-semantic-opener-align-protect-0.1.json",
+      "trialReport": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T14-13-02-1bea9b6cd/trials/stage7-semantic-opener-align-protect-0.1.json",
+      "totalObjectTrackScore10": 4.8,
+      "totalObjectTrackCoverage": 0.507,
+      "totalObjectTrackDelta10": 0.1,
+      "coverageDelta": 0.004,
+      "groupScores": {
+        "group1": 3.5,
+        "group4": 5,
+        "group5": 4.9
+      },
+      "canonicalFamilyMatch": {
+        "allGroups": true,
+        "group1": true,
+        "group4": true,
+        "group5": true
+      },
+      "guardrails": {
+        "spacingReadability": true,
+        "scoreableRoutes": true,
+        "safety": true
+      },
+      "semanticValidity": {
+        "pass": true,
+        "blockers": [],
+        "warnings": [],
+        "read": "Semantic validity passed; numeric movement remains subject to the trial promotion gate."
+      },
+      "readyForRuntimeSourceCandidate": false,
+      "blockerCount": 1,
+      "blockers": [
+        "group 1 does not improve over baseline 3.5/10"
+      ],
+      "warnings": [
+        "group 1: aggregate object-track score 3.5/10 is below first promotion floor",
+        "group 1: primary object-track score 3.9/10 is below first promotion floor",
+        "group 2: primary object-track score 2.4/10 is below first promotion floor",
+        "group 2: aggregate path-length ratio 5.74 exceeds first promotion floor",
+        "group 3: primary object-track score 4.6/10 is below first promotion floor",
+        "group 3: aggregate path-length ratio 3.9 exceeds first promotion floor",
+        "group 3: primary path-length ratio 3.31 exceeds first promotion floor",
+        "group 4: primary object-track score 1.8/10 is below first promotion floor",
+        "group 4: aggregate path-length ratio 9.23 exceeds first promotion floor",
+        "group 4: primary path-length ratio 7.23 exceeds first promotion floor",
+        "group 4: lower-field undershoot -0.266 exceeds aggregate gate",
+        "group 5: aggregate object-track score 4.9/10 is below first promotion floor",
+        "group 5: primary object-track score 3/10 is below first promotion floor",
+        "group 5: aggregate path-length ratio 3.83 exceeds first promotion floor"
+      ],
+      "rankingScore": 0.6
+    },
+    {
+      "candidateId": "stage7-semantic-lower-field-overstay-reduction-0.1",
+      "semanticTransformationClass": "lower-field-overstay-reduction",
+      "semanticTransformations": [
+        "lower-field-overstay-reduction"
+      ],
+      "intendedPlayerFacingMeaning": "Pull overstaying groups back toward their reference lower-field share without changing late groups.",
+      "targetGroups": [
+        2
+      ],
+      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T14-13-02-1bea9b6cd/candidates/stage7-semantic-lower-field-overstay-reduction-0.1.json",
+      "trialReport": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T14-13-02-1bea9b6cd/trials/stage7-semantic-lower-field-overstay-reduction-0.1.json",
+      "totalObjectTrackScore10": 4.8,
+      "totalObjectTrackCoverage": 0.507,
+      "totalObjectTrackDelta10": 0.1,
+      "coverageDelta": 0.004,
+      "groupScores": {
+        "group1": 3.5,
+        "group4": 5,
+        "group5": 4.9
+      },
+      "canonicalFamilyMatch": {
+        "allGroups": false,
+        "group1": true,
+        "group4": false,
+        "group5": false
+      },
+      "guardrails": {
+        "spacingReadability": true,
+        "scoreableRoutes": true,
+        "safety": true
+      },
+      "semanticValidity": {
+        "pass": true,
+        "blockers": [],
+        "warnings": [],
+        "read": "Semantic validity passed; numeric movement remains subject to the trial promotion gate."
+      },
+      "readyForRuntimeSourceCandidate": false,
+      "blockerCount": 3,
+      "blockers": [
+        "group 1 does not improve over baseline 3.5/10",
+        "group 4: path family hook-arc does not match canonical cross-sweep",
+        "group 5: path family boss-led-loop does not match canonical hook-arc"
+      ],
+      "warnings": [
+        "group 1: aggregate object-track score 3.5/10 is below first promotion floor",
+        "group 1: primary object-track score 3.7/10 is below first promotion floor",
+        "group 1: aggregate path-length ratio 4.32 exceeds first promotion floor",
+        "group 2: primary object-track score 2.4/10 is below first promotion floor",
+        "group 2: aggregate path-length ratio 5.74 exceeds first promotion floor",
+        "group 3: primary object-track score 4.6/10 is below first promotion floor",
+        "group 3: aggregate path-length ratio 3.9 exceeds first promotion floor",
+        "group 3: primary path-length ratio 3.31 exceeds first promotion floor",
+        "group 4: primary object-track score 1.8/10 is below first promotion floor",
+        "group 4: aggregate path-length ratio 9.23 exceeds first promotion floor",
+        "group 4: primary path-length ratio 7.23 exceeds first promotion floor",
+        "group 4: lower-field undershoot -0.266 exceeds aggregate gate",
+        "group 5: aggregate object-track score 4.9/10 is below first promotion floor",
+        "group 5: primary object-track score 3/10 is below first promotion floor",
+        "group 5: aggregate path-length ratio 3.83 exceeds first promotion floor"
+      ],
+      "rankingScore": -0.2
+    },
+    {
+      "candidateId": "stage7-semantic-canonical-family-alignment-0.1",
+      "semanticTransformationClass": "canonical-family-alignment",
+      "semanticTransformations": [
+        "canonical-family-alignment"
+      ],
+      "intendedPlayerFacingMeaning": "Make groups 2, 4, and 5 use the reference-execution canonical families before any geometry claim.",
+      "targetGroups": [
+        2,
+        4,
+        5
+      ],
+      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T14-13-02-1bea9b6cd/candidates/stage7-semantic-canonical-family-alignment-0.1.json",
+      "trialReport": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T14-13-02-1bea9b6cd/trials/stage7-semantic-canonical-family-alignment-0.1.json",
+      "totalObjectTrackScore10": 4.7,
+      "totalObjectTrackCoverage": 0.503,
+      "totalObjectTrackDelta10": 0,
+      "coverageDelta": 0,
+      "groupScores": {
+        "group1": 3.5,
+        "group4": 5,
+        "group5": 4.9
+      },
+      "canonicalFamilyMatch": {
+        "allGroups": true,
+        "group1": true,
+        "group4": true,
+        "group5": true
+      },
+      "guardrails": {
+        "spacingReadability": true,
+        "scoreableRoutes": true,
+        "safety": true
+      },
+      "semanticValidity": {
+        "pass": true,
+        "blockers": [],
+        "warnings": [],
+        "read": "Semantic validity passed; numeric movement remains subject to the trial promotion gate."
+      },
+      "readyForRuntimeSourceCandidate": false,
+      "blockerCount": 2,
+      "blockers": [
+        "total object-track score lift 0/10 does not exceed 0.05/10",
+        "group 1 does not improve over baseline 3.5/10"
+      ],
+      "warnings": [
+        "group 1: aggregate object-track score 3.5/10 is below first promotion floor",
+        "group 1: primary object-track score 3.7/10 is below first promotion floor",
+        "group 1: aggregate path-length ratio 4.32 exceeds first promotion floor",
+        "group 2: primary object-track score 2.6/10 is below first promotion floor",
+        "group 2: aggregate path-length ratio 5.74 exceeds first promotion floor",
+        "group 2: lower-field overstay +0.358 exceeds aggregate gate",
+        "group 3: primary object-track score 4.6/10 is below first promotion floor",
+        "group 3: aggregate path-length ratio 3.9 exceeds first promotion floor",
+        "group 3: primary path-length ratio 3.31 exceeds first promotion floor",
+        "group 4: primary object-track score 1.8/10 is below first promotion floor",
+        "group 4: aggregate path-length ratio 9.23 exceeds first promotion floor",
+        "group 4: primary path-length ratio 7.23 exceeds first promotion floor",
+        "group 4: lower-field undershoot -0.266 exceeds aggregate gate",
+        "group 5: aggregate object-track score 4.9/10 is below first promotion floor",
+        "group 5: primary object-track score 3/10 is below first promotion floor",
+        "group 5: aggregate path-length ratio 3.83 exceeds first promotion floor"
+      ],
+      "rankingScore": -0.8
+    },
+    {
+      "candidateId": "stage7-semantic-group1-path-compression-0.1",
+      "semanticTransformationClass": "group1-path-length-compression",
+      "semanticTransformations": [
+        "group1-path-length-compression"
+      ],
+      "intendedPlayerFacingMeaning": "Shorten the opening cross-sweep path so the opener is a tighter, more readable bonus-stage route.",
+      "targetGroups": [
+        1
+      ],
+      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T14-13-02-1bea9b6cd/candidates/stage7-semantic-group1-path-compression-0.1.json",
+      "trialReport": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T14-13-02-1bea9b6cd/trials/stage7-semantic-group1-path-compression-0.1.json",
+      "totalObjectTrackScore10": 4.7,
+      "totalObjectTrackCoverage": 0.503,
+      "totalObjectTrackDelta10": 0,
+      "coverageDelta": 0,
+      "groupScores": {
+        "group1": 3.5,
+        "group4": 5,
+        "group5": 4.9
+      },
+      "canonicalFamilyMatch": {
+        "allGroups": false,
+        "group1": true,
+        "group4": false,
+        "group5": false
+      },
+      "guardrails": {
+        "spacingReadability": true,
+        "scoreableRoutes": true,
+        "safety": true
+      },
+      "semanticValidity": {
+        "pass": true,
+        "blockers": [],
+        "warnings": [
+          "group 1 compression is isolated; runtime promotion should combine it with late-group protection"
+        ],
+        "read": "Semantic validity passed; numeric movement remains subject to the trial promotion gate."
+      },
+      "readyForRuntimeSourceCandidate": false,
+      "blockerCount": 5,
+      "blockers": [
+        "total object-track score lift 0/10 does not exceed 0.05/10",
+        "group 1 does not improve over baseline 3.5/10",
+        "group 2: path family cross-sweep does not match canonical hook-arc",
+        "group 4: path family hook-arc does not match canonical cross-sweep",
+        "group 5: path family boss-led-loop does not match canonical hook-arc"
+      ],
+      "warnings": [
+        "group 1 compression is isolated; runtime promotion should combine it with late-group protection",
+        "group 1: aggregate object-track score 3.5/10 is below first promotion floor",
+        "group 1: primary object-track score 3.9/10 is below first promotion floor",
+        "group 2: primary object-track score 2.6/10 is below first promotion floor",
+        "group 2: aggregate path-length ratio 5.74 exceeds first promotion floor",
+        "group 2: lower-field overstay +0.358 exceeds aggregate gate",
+        "group 3: primary object-track score 4.6/10 is below first promotion floor",
+        "group 3: aggregate path-length ratio 3.9 exceeds first promotion floor",
+        "group 3: primary path-length ratio 3.31 exceeds first promotion floor",
+        "group 4: primary object-track score 1.8/10 is below first promotion floor",
+        "group 4: aggregate path-length ratio 9.23 exceeds first promotion floor",
+        "group 4: primary path-length ratio 7.23 exceeds first promotion floor",
+        "group 4: lower-field undershoot -0.266 exceeds aggregate gate",
+        "group 5: aggregate object-track score 4.9/10 is below first promotion floor",
+        "group 5: primary object-track score 3/10 is below first promotion floor",
+        "group 5: aggregate path-length ratio 3.83 exceeds first promotion floor"
+      ],
+      "rankingScore": -2
+    },
+    {
+      "candidateId": "stage7-semantic-preserve-scoreable-window-0.1",
+      "semanticTransformationClass": "preserve-scoreable-window",
+      "semanticTransformations": [
+        "preserve-scoreable-window"
+      ],
+      "intendedPlayerFacingMeaning": "Exercise the scoreable-window guardrail as a semantic invariant rather than a geometry candidate.",
+      "targetGroups": [],
+      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T14-13-02-1bea9b6cd/candidates/stage7-semantic-preserve-scoreable-window-0.1.json",
+      "trialReport": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T14-13-02-1bea9b6cd/trials/stage7-semantic-preserve-scoreable-window-0.1.json",
+      "totalObjectTrackScore10": 4.7,
+      "totalObjectTrackCoverage": 0.503,
+      "totalObjectTrackDelta10": 0,
+      "coverageDelta": 0,
+      "groupScores": {
+        "group1": 3.5,
+        "group4": 5,
+        "group5": 4.9
+      },
+      "canonicalFamilyMatch": {
+        "allGroups": false,
+        "group1": true,
+        "group4": false,
+        "group5": false
+      },
+      "guardrails": {
+        "spacingReadability": true,
+        "scoreableRoutes": true,
+        "safety": true
+      },
+      "semanticValidity": {
+        "pass": true,
+        "blockers": [],
+        "warnings": [],
+        "read": "Semantic validity passed; numeric movement remains subject to the trial promotion gate."
+      },
+      "readyForRuntimeSourceCandidate": false,
+      "blockerCount": 5,
+      "blockers": [
+        "total object-track score lift 0/10 does not exceed 0.05/10",
+        "group 1 does not improve over baseline 3.5/10",
+        "group 2: path family cross-sweep does not match canonical hook-arc",
+        "group 4: path family hook-arc does not match canonical cross-sweep",
+        "group 5: path family boss-led-loop does not match canonical hook-arc"
+      ],
+      "warnings": [
+        "group 1: aggregate object-track score 3.5/10 is below first promotion floor",
+        "group 1: primary object-track score 3.7/10 is below first promotion floor",
+        "group 1: aggregate path-length ratio 4.32 exceeds first promotion floor",
+        "group 2: primary object-track score 2.6/10 is below first promotion floor",
+        "group 2: aggregate path-length ratio 5.74 exceeds first promotion floor",
+        "group 2: lower-field overstay +0.358 exceeds aggregate gate",
+        "group 3: primary object-track score 4.6/10 is below first promotion floor",
+        "group 3: aggregate path-length ratio 3.9 exceeds first promotion floor",
+        "group 3: primary path-length ratio 3.31 exceeds first promotion floor",
+        "group 4: primary object-track score 1.8/10 is below first promotion floor",
+        "group 4: aggregate path-length ratio 9.23 exceeds first promotion floor",
+        "group 4: primary path-length ratio 7.23 exceeds first promotion floor",
+        "group 4: lower-field undershoot -0.266 exceeds aggregate gate",
+        "group 5: aggregate object-track score 4.9/10 is below first promotion floor",
+        "group 5: primary object-track score 3/10 is below first promotion floor",
+        "group 5: aggregate path-length ratio 3.83 exceeds first promotion floor"
+      ],
+      "rankingScore": -2
+    },
+    {
+      "candidateId": "stage7-semantic-protect-group4-group5-0.1",
+      "semanticTransformationClass": "protect-group4-group5",
+      "semanticTransformations": [
+        "protect-group4-group5"
+      ],
+      "intendedPlayerFacingMeaning": "Lock late groups to their restored baseline vectors so opener improvements cannot hide late regression.",
+      "targetGroups": [
+        4,
+        5
+      ],
+      "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T14-13-02-1bea9b6cd/candidates/stage7-semantic-protect-group4-group5-0.1.json",
+      "trialReport": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T14-13-02-1bea9b6cd/trials/stage7-semantic-protect-group4-group5-0.1.json",
+      "totalObjectTrackScore10": 4.7,
+      "totalObjectTrackCoverage": 0.503,
+      "totalObjectTrackDelta10": 0,
+      "coverageDelta": 0,
+      "groupScores": {
+        "group1": 3.5,
+        "group4": 5,
+        "group5": 4.9
+      },
+      "canonicalFamilyMatch": {
+        "allGroups": false,
+        "group1": true,
+        "group4": false,
+        "group5": false
+      },
+      "guardrails": {
+        "spacingReadability": true,
+        "scoreableRoutes": true,
+        "safety": true
+      },
+      "semanticValidity": {
+        "pass": false,
+        "blockers": [
+          "group 4 touched but does not match canonical family",
+          "group 5 touched but does not match canonical family"
+        ],
+        "warnings": [],
+        "read": "Semantic validity failed; the candidate should not be promoted even if numeric scores look promising."
+      },
+      "readyForRuntimeSourceCandidate": false,
+      "blockerCount": 7,
+      "blockers": [
+        "group 4 touched but does not match canonical family",
+        "group 5 touched but does not match canonical family",
+        "total object-track score lift 0/10 does not exceed 0.05/10",
+        "group 1 does not improve over baseline 3.5/10",
+        "group 2: path family cross-sweep does not match canonical hook-arc",
+        "group 4: path family hook-arc does not match canonical cross-sweep",
+        "group 5: path family boss-led-loop does not match canonical hook-arc"
+      ],
+      "warnings": [
+        "group 1: aggregate object-track score 3.5/10 is below first promotion floor",
+        "group 1: primary object-track score 3.7/10 is below first promotion floor",
+        "group 1: aggregate path-length ratio 4.32 exceeds first promotion floor",
+        "group 2: primary object-track score 2.6/10 is below first promotion floor",
+        "group 2: aggregate path-length ratio 5.74 exceeds first promotion floor",
+        "group 2: lower-field overstay +0.358 exceeds aggregate gate",
+        "group 3: primary object-track score 4.6/10 is below first promotion floor",
+        "group 3: aggregate path-length ratio 3.9 exceeds first promotion floor",
+        "group 3: primary path-length ratio 3.31 exceeds first promotion floor",
+        "group 4: primary object-track score 1.8/10 is below first promotion floor",
+        "group 4: aggregate path-length ratio 9.23 exceeds first promotion floor",
+        "group 4: primary path-length ratio 7.23 exceeds first promotion floor",
+        "group 4: lower-field undershoot -0.266 exceeds aggregate gate",
+        "group 5: aggregate object-track score 4.9/10 is below first promotion floor",
+        "group 5: primary object-track score 3/10 is below first promotion floor",
+        "group 5: aggregate path-length ratio 3.83 exceeds first promotion floor"
+      ],
+      "rankingScore": -6
+    }
+  ],
+  "classSummaries": [
+    {
+      "classId": "canonical-family-alignment",
+      "candidateCount": 3,
+      "bestCandidateId": "stage7-semantic-phase-align-protect-0.1",
+      "bestObjectTrackDelta10": 0.3,
+      "promise": true,
+      "promiseKind": "runtime-source-candidate-component",
+      "groupedRejectionReasons": [
+        {
+          "candidateId": "stage7-semantic-opener-align-protect-0.1",
+          "blocker": "group 1 does not improve over baseline 3.5/10"
+        },
+        {
+          "candidateId": "stage7-semantic-canonical-family-alignment-0.1",
+          "blocker": "total object-track score lift 0/10 does not exceed 0.05/10"
+        },
+        {
+          "candidateId": "stage7-semantic-canonical-family-alignment-0.1",
+          "blocker": "group 1 does not improve over baseline 3.5/10"
+        }
+      ],
+      "read": "canonical-family-alignment participates in the single runtime-source candidate recommendation."
+    },
+    {
+      "classId": "group1-path-length-compression",
+      "candidateCount": 2,
+      "bestCandidateId": "stage7-semantic-opener-align-protect-0.1",
+      "bestObjectTrackDelta10": 0.1,
+      "promise": false,
+      "promiseKind": "no-current-promise",
+      "groupedRejectionReasons": [
+        {
+          "candidateId": "stage7-semantic-opener-align-protect-0.1",
+          "blocker": "group 1 does not improve over baseline 3.5/10"
+        },
+        {
+          "candidateId": "stage7-semantic-group1-path-compression-0.1",
+          "blocker": "total object-track score lift 0/10 does not exceed 0.05/10"
+        },
+        {
+          "candidateId": "stage7-semantic-group1-path-compression-0.1",
+          "blocker": "group 1 does not improve over baseline 3.5/10"
+        },
+        {
+          "candidateId": "stage7-semantic-group1-path-compression-0.1",
+          "blocker": "group 2: path family cross-sweep does not match canonical hook-arc"
+        },
+        {
+          "candidateId": "stage7-semantic-group1-path-compression-0.1",
+          "blocker": "group 4: path family hook-arc does not match canonical cross-sweep"
+        },
+        {
+          "candidateId": "stage7-semantic-group1-path-compression-0.1",
+          "blocker": "group 5: path family boss-led-loop does not match canonical hook-arc"
+        }
+      ],
+      "read": "group1-path-length-compression did not produce a promotion-ready candidate in this batch."
+    },
+    {
+      "classId": "lower-field-overstay-reduction",
+      "candidateCount": 2,
+      "bestCandidateId": "stage7-semantic-opener-align-protect-0.1",
+      "bestObjectTrackDelta10": 0.1,
+      "promise": true,
+      "promiseKind": "standalone-object-track-signal",
+      "groupedRejectionReasons": [
+        {
+          "candidateId": "stage7-semantic-opener-align-protect-0.1",
+          "blocker": "group 1 does not improve over baseline 3.5/10"
+        },
+        {
+          "candidateId": "stage7-semantic-lower-field-overstay-reduction-0.1",
+          "blocker": "group 1 does not improve over baseline 3.5/10"
+        },
+        {
+          "candidateId": "stage7-semantic-lower-field-overstay-reduction-0.1",
+          "blocker": "group 4: path family hook-arc does not match canonical cross-sweep"
+        },
+        {
+          "candidateId": "stage7-semantic-lower-field-overstay-reduction-0.1",
+          "blocker": "group 5: path family boss-led-loop does not match canonical hook-arc"
+        }
+      ],
+      "read": "lower-field-overstay-reduction showed measurement promise but still needs composition or runtime capture."
+    },
+    {
+      "classId": "phase-duration-rebalance",
+      "candidateCount": 2,
+      "bestCandidateId": "stage7-semantic-phase-align-protect-0.1",
+      "bestObjectTrackDelta10": 0.3,
+      "promise": true,
+      "promiseKind": "runtime-source-candidate-component",
+      "groupedRejectionReasons": [
+        {
+          "candidateId": "stage7-semantic-phase-duration-rebalance-0.1",
+          "blocker": "group 5: path family boss-led-loop does not match canonical hook-arc"
+        }
+      ],
+      "read": "phase-duration-rebalance participates in the single runtime-source candidate recommendation."
+    },
+    {
+      "classId": "preserve-scoreable-window",
+      "candidateCount": 3,
+      "bestCandidateId": "stage7-semantic-phase-align-protect-0.1",
+      "bestObjectTrackDelta10": 0.3,
+      "promise": true,
+      "promiseKind": "runtime-source-candidate-component",
+      "groupedRejectionReasons": [
+        {
+          "candidateId": "stage7-semantic-opener-align-protect-0.1",
+          "blocker": "group 1 does not improve over baseline 3.5/10"
+        },
+        {
+          "candidateId": "stage7-semantic-preserve-scoreable-window-0.1",
+          "blocker": "total object-track score lift 0/10 does not exceed 0.05/10"
+        },
+        {
+          "candidateId": "stage7-semantic-preserve-scoreable-window-0.1",
+          "blocker": "group 1 does not improve over baseline 3.5/10"
+        },
+        {
+          "candidateId": "stage7-semantic-preserve-scoreable-window-0.1",
+          "blocker": "group 2: path family cross-sweep does not match canonical hook-arc"
+        },
+        {
+          "candidateId": "stage7-semantic-preserve-scoreable-window-0.1",
+          "blocker": "group 4: path family hook-arc does not match canonical cross-sweep"
+        },
+        {
+          "candidateId": "stage7-semantic-preserve-scoreable-window-0.1",
+          "blocker": "group 5: path family boss-led-loop does not match canonical hook-arc"
+        }
+      ],
+      "read": "preserve-scoreable-window participates in the single runtime-source candidate recommendation."
+    },
+    {
+      "classId": "protect-group4-group5",
+      "candidateCount": 3,
+      "bestCandidateId": "stage7-semantic-phase-align-protect-0.1",
+      "bestObjectTrackDelta10": 0.3,
+      "promise": true,
+      "promiseKind": "runtime-source-candidate-component",
+      "groupedRejectionReasons": [
+        {
+          "candidateId": "stage7-semantic-opener-align-protect-0.1",
+          "blocker": "group 1 does not improve over baseline 3.5/10"
+        },
+        {
+          "candidateId": "stage7-semantic-protect-group4-group5-0.1",
+          "blocker": "group 4 touched but does not match canonical family"
+        },
+        {
+          "candidateId": "stage7-semantic-protect-group4-group5-0.1",
+          "blocker": "group 5 touched but does not match canonical family"
+        },
+        {
+          "candidateId": "stage7-semantic-protect-group4-group5-0.1",
+          "blocker": "total object-track score lift 0/10 does not exceed 0.05/10"
+        },
+        {
+          "candidateId": "stage7-semantic-protect-group4-group5-0.1",
+          "blocker": "group 1 does not improve over baseline 3.5/10"
+        },
+        {
+          "candidateId": "stage7-semantic-protect-group4-group5-0.1",
+          "blocker": "group 2: path family cross-sweep does not match canonical hook-arc"
+        },
+        {
+          "candidateId": "stage7-semantic-protect-group4-group5-0.1",
+          "blocker": "group 4: path family hook-arc does not match canonical cross-sweep"
+        },
+        {
+          "candidateId": "stage7-semantic-protect-group4-group5-0.1",
+          "blocker": "group 5: path family boss-led-loop does not match canonical hook-arc"
+        }
+      ],
+      "read": "protect-group4-group5 participates in the single runtime-source candidate recommendation."
+    }
+  ],
+  "bestCandidate": {
+    "candidateId": "stage7-semantic-phase-align-protect-0.1",
+    "semanticTransformationClass": "semantic-composition",
+    "semanticTransformations": [
+      "canonical-family-alignment",
+      "phase-duration-rebalance",
+      "preserve-scoreable-window",
+      "protect-group4-group5"
+    ],
+    "intendedPlayerFacingMeaning": "Combine the strongest measured phase-window signal with canonical family alignment and explicit late-group protection.",
+    "targetGroups": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T14-13-02-1bea9b6cd/candidates/stage7-semantic-phase-align-protect-0.1.json",
+    "trialReport": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T14-13-02-1bea9b6cd/trials/stage7-semantic-phase-align-protect-0.1.json",
+    "totalObjectTrackScore10": 5,
+    "totalObjectTrackCoverage": 0.541,
+    "totalObjectTrackDelta10": 0.3,
+    "coverageDelta": 0.038,
+    "groupScores": {
+      "group1": 4,
+      "group4": 5.3,
+      "group5": 4.9
+    },
+    "canonicalFamilyMatch": {
+      "allGroups": true,
+      "group1": true,
+      "group4": true,
+      "group5": true
+    },
+    "guardrails": {
+      "spacingReadability": true,
+      "scoreableRoutes": true,
+      "safety": true
+    },
+    "semanticValidity": {
+      "pass": true,
+      "blockers": [],
+      "warnings": [
+        "phase-duration rebalance needs browser capture before promotion because timing changes can affect spacing."
+      ],
+      "read": "Semantic validity passed; numeric movement remains subject to the trial promotion gate."
+    },
+    "readyForRuntimeSourceCandidate": true,
+    "blockerCount": 0,
+    "blockers": [],
+    "warnings": [
+      "phase-duration rebalance needs browser capture before promotion because timing changes can affect spacing.",
+      "group 1: aggregate object-track score 4/10 is below first promotion floor",
+      "group 1: primary object-track score 4.2/10 is below first promotion floor",
+      "group 1: aggregate path-length ratio 4.32 exceeds first promotion floor",
+      "group 2: primary object-track score 2.5/10 is below first promotion floor",
+      "group 2: aggregate path-length ratio 5.74 exceeds first promotion floor",
+      "group 2: lower-field overstay +0.358 exceeds aggregate gate",
+      "group 3: primary object-track score 4.9/10 is below first promotion floor",
+      "group 3: aggregate path-length ratio 3.9 exceeds first promotion floor",
+      "group 3: primary path-length ratio 3.31 exceeds first promotion floor",
+      "group 4: primary object-track score 1.8/10 is below first promotion floor",
+      "group 4: aggregate path-length ratio 9.23 exceeds first promotion floor",
+      "group 4: primary path-length ratio 7.23 exceeds first promotion floor",
+      "group 4: lower-field undershoot -0.266 exceeds aggregate gate",
+      "group 5: aggregate object-track score 4.9/10 is below first promotion floor",
+      "group 5: primary object-track score 3/10 is below first promotion floor",
+      "group 5: aggregate path-length ratio 3.83 exceeds first promotion floor"
+    ],
+    "rankingScore": 4
+  },
+  "summary": {
+    "measurementKeeperRecommendation": "accept-semantic-batch-mechanism",
+    "runtimeKeeperRecommendation": "not-a-runtime-keeper",
+    "recommendation": "exactly-one-runtime-source-candidate-to-try",
+    "runtimeSourceCandidateId": "stage7-semantic-phase-align-protect-0.1",
+    "readyCandidateCount": 1,
+    "read": "Candidate stage7-semantic-phase-align-protect-0.1 is ready for exactly one runtime source attempt, not a runtime keeper."
+  },
+  "nextBestStep": "Try exactly one runtime source candidate for stage7-semantic-phase-align-protect-0.1, rebuild, then run before/after evidence and strict challenge guardrails."
+}
