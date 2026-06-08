@@ -126,6 +126,30 @@ RED cleanly, preserves semantic and safety guardrails, exposes strict weak
 rows, and keeps runtime source promotion disabled. It is not a runtime keeper
 and does not justify beta.
 
+## Stage 3 Semantic Batch
+
+The first Stage 3 semantic batch generates named, non-overwriting candidate
+inputs against the Stage 3 trial gate. Run:
+
+```sh
+npm run harness:analyze:stage3-reference-execution-batch
+npm run harness:check:stage3-reference-execution-batch
+```
+
+The vocabulary is declared in:
+
+`reference-artifacts/ingestion/reference-execution-candidate-trials/stage3-semantic-vocabulary-0.1.json`
+
+The batch writes generated candidates and a ranked report to:
+
+`reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest-batch.json`
+
+Current calibration read: the gate is responsive to group 1/group 4
+object-track/path-length and peel-off readability transforms, but the top rank
+is geometry-heavy while the close multi-axis shape+peel candidate trails it.
+Do not generate more Stage 3 variants or touch runtime source until the ranking
+policy better balances object-track lift with peel-off readability.
+
 ## Stage 7 Input Shape
 
 - `candidateId`: stable candidate id.

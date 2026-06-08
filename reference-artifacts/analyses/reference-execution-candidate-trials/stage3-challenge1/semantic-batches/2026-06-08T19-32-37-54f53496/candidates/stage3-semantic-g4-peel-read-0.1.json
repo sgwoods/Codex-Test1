@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage3-reference-execution-candidate-trial-input",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 3,
+    "challengeNumber": 1,
+    "displayLabel": "Stage 3 / Challenge 1"
+  },
+  "authorityLayerInputs": {
+    "targetConformanceAuthority": "reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage3-challenge1-0.1.json",
+    "livePromotionAuthority": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+    "runtimeSourcePromotion": "disabled for this semantic batch",
+    "authoritySeparation": "Candidate trials may use RED target-conformance to rank non-overwriting intent, but they do not authorize runtime source edits.",
+    "knownPrivateArtifactCaveat": "Some contact-sheet provenance paths point to the private companion artifact store and are non-blocking for this baseline trial unless newly worsened."
+  },
+  "guardrails": {
+    "spacingReadability": {
+      "source": "reference-artifacts/analyses/challenge-motion-profile/latest.json",
+      "preserveBaseline": true,
+      "pass": true,
+      "spacingScore": 0.676,
+      "bunchingRisk": 0.321,
+      "worstMinDistance": 1.96,
+      "averageMinDistance": 10.15,
+      "read": "Baseline Stage 3 spacing is preserved for this no-change candidate; the read remains strict enough to expose future regressions."
+    },
+    "scoreableRoutes": {
+      "source": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+      "preserveBaseline": true,
+      "pass": true,
+      "score10": 5.6,
+      "activeWindows": 61,
+      "multiTargetWindowShare": 0.82,
+      "laneDiversity": 1,
+      "centerBias": 0.112,
+      "read": "Baseline Stage 3 still has many scoreable windows; candidate variants must preserve the routeability and upper-band learning read."
+    },
+    "safety": {
+      "source": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+      "preserveBaseline": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "noChallengeContacts": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0,
+        "challengeContacts": 0
+      }
+    }
+  },
+  "semanticMetrics": {
+    "preserveLineRoles": true,
+    "preserveUpperBandScoreability": true,
+    "preservePeelOffReadability": true,
+    "preserveRouteLearnability": true,
+    "preserveNoCombatGrammar": true
+  },
+  "gates": {
+    "requireNoRuntimeSourceEdits": true,
+    "requireAuthorityLayerSeparation": true,
+    "requireNoCombatGrammar": true,
+    "requireScoreableRoutesPreserved": true,
+    "requireSpacingReadabilityPreserved": true,
+    "minSemanticScore": 0.7,
+    "minRouteLearnabilityScore": 0.7,
+    "objectTrackFitFloorScore10": 5,
+    "allowRuntimeSourceCandidate": false
+  },
+  "hardGuardrails": [
+    "preserve semantic line roles",
+    "preserve upper-band scoreability",
+    "preserve scoreable routes",
+    "preserve spacing/readability",
+    "preserve no-shot/no-attack/no-loss/no-contact safety",
+    "do not increase authority conflict count",
+    "do not treat RED target-conformance as runtime promotion authority"
+  ],
+  "redArtifactDigest": {
+    "directSemanticLabelCount": 2,
+    "fieldOccupancyConflictCount": 4,
+    "pathFamilyAuthorityConflictCount": 2
+  },
+  "candidateId": "stage3-semantic-g4-peel-read-0.1",
+  "semanticTransformId": "group4-peel-off-readability",
+  "semanticTransformations": [
+    "group4-peel-off-readability",
+    "preserve-upper-band-scoreability",
+    "protect-semantic-line-roles",
+    "protect-no-combat-scoreable-routes"
+  ],
+  "intent": {
+    "kind": "semantic-candidate-trial",
+    "read": "Project the late butterfly line as a right peel-off phrase so the exit read matches the RED semantic contract.",
+    "playerFacingMeaning": "Project the late butterfly line as a right peel-off phrase so the exit read matches the RED semantic contract."
+  },
+  "touchedGroups": [
+    4
+  ],
+  "protectedGroups": [
+    1,
+    2,
+    3,
+    5
+  ],
+  "protectedRoles": [
+    "top-right bee line",
+    "scoreable routes",
+    "no-combat grammar"
+  ],
+  "authorityAssumptions": {
+    "pathFamilyAuthority": "preserve current RED canonical path-family order for non-overwriting comparison",
+    "runtimePromotionAuthority": "not-authorized",
+    "targetConformanceDebtCarriedForward": true,
+    "fieldOccupancyPolicy": "human-visible upper-band scoreability and CPU lower-field geometry remain separate reads"
+  },
+  "expectedMetricDeltas": {
+    "group4PeelOffReadability": "positive",
+    "objectTrackFit": "neutral",
+    "scoreableRoutes": "preserve"
+  },
+  "softOptimizationTargets": [
+    "make group 4 exit side match RED exitGesture",
+    "preserve path-family order"
+  ],
+  "redProvenanceFieldsUsed": [
+    "semanticExecution.exitGesture",
+    "uncertaintyAndProvenance",
+    "semanticExecution.scoreableBand",
+    "semanticExecution.scoreableFrameWindow",
+    "fieldOccupancyExpectation",
+    "semanticExecution.lineRole",
+    "semanticExecution.entryCue",
+    "executionModel.noCombatGrammar",
+    "keeperRules"
+  ],
+  "groups": [
+    {
+      "groupIndex": 4,
+      "semanticTransformations": [
+        "group4-peel-off-readability"
+      ],
+      "pathFamily": "side-hook-return",
+      "semanticExecution": {
+        "lineRole": "butterfly-line",
+        "entryCue": "top-left",
+        "exitGesture": "right peel-off",
+        "scoreableBand": "upper-band"
+      },
+      "predictedRuntimeVector": {
+        "exitSide": "right",
+        "pathFamily": "side-hook-return"
+      },
+      "controlsRead": "peel-off side read projected from RED exitGesture"
+    }
+  ]
+}

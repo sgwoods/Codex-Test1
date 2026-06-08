@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage3-reference-execution-semantic-vocabulary",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 3,
+    "challengeNumber": 1,
+    "displayLabel": "Stage 3 / Challenge 1"
+  },
+  "authorityPolicy": {
+    "targetConformanceAuthority": "reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage3-challenge1-0.1.json",
+    "livePromotionAuthority": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+    "runtimeSourcePromotion": "disabled for this vocabulary cycle",
+    "read": "This vocabulary generates non-overwriting trial predictions only. It does not authorize runtime source edits."
+  },
+  "transformationClasses": [
+    {
+      "classId": "group1-object-track-path-fit",
+      "playerFacingMeaning": "Shorten and tighten the top-right bee line so its object-track length and visible duration better match the RED target.",
+      "targetGroups": [1],
+      "protectedRoles": ["late top-left butterfly line", "mixed closing peel", "no-combat grammar"],
+      "generatedControls": ["predictedRuntimeVector.pathLength", "predictedRuntimeVector.yRange", "predictedRuntimeVector.visibleEndS"],
+      "redProvenanceFieldsUsed": ["aggregateObjectTrackTarget", "semanticExecution.lineRole", "fieldOccupancyExpectation", "candidateComparisonGate"],
+      "predictionLimit": "Improves trial geometry only; runtime expressibility is unproven until a browser transfer proof maps the compressed path into consumed runtime fields."
+    },
+    {
+      "classId": "group4-object-track-path-fit",
+      "playerFacingMeaning": "Tighten the late top-left butterfly line so its visible path length and sweep shape better match the RED target.",
+      "targetGroups": [4],
+      "protectedRoles": ["top-right bee line", "mixed closing peel", "no-combat grammar"],
+      "generatedControls": ["predictedRuntimeVector.pathLength", "predictedRuntimeVector.yRange", "predictedRuntimeVector.visibleStartS", "predictedRuntimeVector.visibleEndS"],
+      "redProvenanceFieldsUsed": ["aggregateObjectTrackTarget", "semanticExecution.lineRole", "fieldOccupancyExpectation", "candidateComparisonGate"],
+      "predictionLimit": "Improves trial geometry only; runtime expressibility is unproven until a browser transfer proof maps the compressed path into consumed runtime fields."
+    },
+    {
+      "classId": "group1-peel-off-readability",
+      "playerFacingMeaning": "Make the top-right bee line read as the RED left peel-off exit instead of an opposite-side exit.",
+      "targetGroups": [1],
+      "protectedRoles": ["late top-left butterfly line", "scoreable routes", "no-combat grammar"],
+      "generatedControls": ["semanticExecution.exitGesture", "predictedRuntimeVector.exitSide"],
+      "redProvenanceFieldsUsed": ["semanticExecution.exitGesture", "uncertaintyAndProvenance", "candidateComparisonGate"],
+      "predictionLimit": "A side-label prediction can improve semantic readability in the trial gate but is not a runtime path proof."
+    },
+    {
+      "classId": "group4-peel-off-readability",
+      "playerFacingMeaning": "Make the late butterfly line read as the RED right peel-off exit instead of a center exit.",
+      "targetGroups": [4],
+      "protectedRoles": ["top-right bee line", "scoreable routes", "no-combat grammar"],
+      "generatedControls": ["semanticExecution.exitGesture", "predictedRuntimeVector.exitSide"],
+      "redProvenanceFieldsUsed": ["semanticExecution.exitGesture", "uncertaintyAndProvenance", "candidateComparisonGate"],
+      "predictionLimit": "A side-label prediction can improve semantic readability in the trial gate but is not a runtime path proof."
+    },
+    {
+      "classId": "preserve-upper-band-scoreability",
+      "playerFacingMeaning": "Keep upper-band scoreable windows as the primary human-visible read while object-track geometry is adjusted.",
+      "targetGroups": [1, 4],
+      "protectedRoles": ["scoreable routes", "upper-band scoreability"],
+      "generatedControls": ["semanticExecution.scoreableBand", "guardrails.scoreableRoutes"],
+      "redProvenanceFieldsUsed": ["semanticExecution.scoreableBand", "semanticExecution.scoreableFrameWindow", "fieldOccupancyExpectation"],
+      "predictionLimit": "This is a guardrail-only transform; it cannot make a candidate promising without object-track or readability movement."
+    },
+    {
+      "classId": "protect-semantic-line-roles",
+      "playerFacingMeaning": "Preserve the top-right bee line and late top-left butterfly line roles while testing geometry changes.",
+      "targetGroups": [1, 4],
+      "protectedRoles": ["bee-line", "butterfly-line", "mixed-closing-peel"],
+      "generatedControls": ["semanticExecution.lineRole", "semanticExecution.entryCue"],
+      "redProvenanceFieldsUsed": ["semanticExecution.lineRole", "semanticExecution.entryCue", "uncertaintyAndProvenance"],
+      "predictionLimit": "This is a semantic invariant; it cannot compensate for weak object-track fit."
+    },
+    {
+      "classId": "protect-no-combat-scoreable-routes",
+      "playerFacingMeaning": "Preserve no-shot/no-attack/no-loss safety and scoreable routes for every generated Stage 3 trial.",
+      "targetGroups": [1, 2, 3, 4, 5],
+      "protectedRoles": ["no-combat grammar", "scoreable routes", "spacing/readability"],
+      "generatedControls": ["guardrails.safety", "guardrails.scoreableRoutes", "guardrails.spacingReadability"],
+      "redProvenanceFieldsUsed": ["executionModel.noCombatGrammar", "keeperRules", "candidateComparisonGate"],
+      "predictionLimit": "This is a hard guardrail class; it blocks unsafe candidates but does not improve geometry by itself."
+    }
+  ]
+}

@@ -148,6 +148,18 @@ Latest Stage 7 calibration:
   and 5 carry target-vs-runtime authority conflicts. The next Stage 3 work is
   a small non-overwriting semantic candidate batch against this gate, not a
   runtime source candidate.
+- The first Stage 3 semantic batch now exists:
+  `reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest-batch.json`.
+  It generated `10` named candidates from the Stage 3 vocabulary, kept all
+  guardrails safe, and confirmed the gate is responsive to direct-line
+  object-track/path-length and peel-off readability transforms. It did not
+  produce one clearly superior multi-axis candidate: the top-ranked
+  `stage3-semantic-direct-lines-red-target-probe-0.1` is geometry-heavy
+  (`3.9/10` object-track, `0.599` path/shape, `0.64` focus peel), while the
+  close multi-axis `stage3-semantic-direct-lines-shape-peel-0.1` has stronger
+  peel readability (`1.0`) but lower object-track (`3.5/10`). Recommendation:
+  refine ranking/calibration before more Stage 3 generation or runtime
+  transfer work.
 
 ## Historical Or Stale Current-State Docs
 

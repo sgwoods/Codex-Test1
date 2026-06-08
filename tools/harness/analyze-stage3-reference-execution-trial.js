@@ -905,9 +905,23 @@ function main(){
   }, null, 2));
 }
 
-try{
-  main();
-}catch(error){
-  console.error(JSON.stringify({ ok: false, message: error.message, stack: error.stack }, null, 2));
-  process.exit(1);
+module.exports = {
+  ROOT,
+  OUT_ROOT,
+  DEFAULT_CANDIDATE,
+  buildMarkdown,
+  buildReport,
+  readJson,
+  rel,
+  writeJson,
+  writeText
+};
+
+if(require.main === module){
+  try{
+    main();
+  }catch(error){
+    console.error(JSON.stringify({ ok: false, message: error.message, stack: error.stack }, null, 2));
+    process.exit(1);
+  }
 }

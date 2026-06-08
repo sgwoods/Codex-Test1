@@ -262,7 +262,14 @@ from the roadmap.
    `0.918`, object-track `3.2/10`, `5/5` strict weak rows, `4` human-vs-CPU
    field-occupancy conflicts, and `4` target-vs-runtime authority conflicts.
    The next Stage 3 step is a non-overwriting semantic candidate batch against
-   this gate, not a runtime source candidate.
+   this gate, not a runtime source candidate. That first semantic batch now
+   exists and generated `10` named candidates. The calibrated recommendation is
+   `metric-language-improvements-before-more-generation`: the top-ranked
+   direct-line RED-target probe improves geometry/path metrics but leaves
+   direct-line peel readability at baseline, while the closest multi-axis
+   shape+peel candidate improves peel readability but trails on object-track.
+   Tighten Stage 3 ranking/calibration before more generation or runtime
+   transfer work.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth
@@ -388,12 +395,12 @@ Current conformance read:
   the first-five challenge work has `25/25` reference-backed group contracts
   and `8.6/10` control readiness, but runtime promotion is still blocked by
   visual-presence, object-track timing/shape, and scoreable-window constraints.
-  The Stage 3 RED pilot and non-overwriting candidate-trial gate are
-  measurement/process keepers that make the next quality step more targeted:
-  generate a small Stage 3 semantic candidate batch against the gate, preserving
-  semantic line roles, upper-band scoreability, path-family order,
-  object-track fit, spacing/readability, scoreable routes, and no-combat safety
-  before any source edit.
+  The Stage 3 RED pilot, non-overwriting candidate-trial gate, and first
+  semantic candidate batch are measurement/process keepers. The batch proves
+  object-track/path-length and peel-off metrics are responsive, but the current
+  ranking still favors a geometry-heavy probe over a close multi-axis
+  shape+peel candidate. Refine the Stage 3 ranking/calibration layer before
+  more candidate generation or any source edit.
 - Galaxy Guardians longer-surface/persona review reads `7.0/10`, with
   stage-arc pressure at `7.9/10`, stage presentation at `7.4/10`, persona
   utility at `6.5/10`, midrun survivability at `6.0/10`, and stage-band

@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage3-reference-execution-candidate-trial-input",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 3,
+    "challengeNumber": 1,
+    "displayLabel": "Stage 3 / Challenge 1"
+  },
+  "authorityLayerInputs": {
+    "targetConformanceAuthority": "reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage3-challenge1-0.1.json",
+    "livePromotionAuthority": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+    "runtimeSourcePromotion": "disabled for this semantic batch",
+    "authoritySeparation": "Candidate trials may use RED target-conformance to rank non-overwriting intent, but they do not authorize runtime source edits.",
+    "knownPrivateArtifactCaveat": "Some contact-sheet provenance paths point to the private companion artifact store and are non-blocking for this baseline trial unless newly worsened."
+  },
+  "guardrails": {
+    "spacingReadability": {
+      "source": "reference-artifacts/analyses/challenge-motion-profile/latest.json",
+      "preserveBaseline": true,
+      "pass": true,
+      "spacingScore": 0.676,
+      "bunchingRisk": 0.321,
+      "worstMinDistance": 1.96,
+      "averageMinDistance": 10.15,
+      "read": "Baseline Stage 3 spacing is preserved for this no-change candidate; the read remains strict enough to expose future regressions."
+    },
+    "scoreableRoutes": {
+      "source": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+      "preserveBaseline": true,
+      "pass": true,
+      "score10": 5.6,
+      "activeWindows": 61,
+      "multiTargetWindowShare": 0.82,
+      "laneDiversity": 1,
+      "centerBias": 0.112,
+      "read": "Baseline Stage 3 still has many scoreable windows; candidate variants must preserve the routeability and upper-band learning read."
+    },
+    "safety": {
+      "source": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+      "preserveBaseline": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "noChallengeContacts": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0,
+        "challengeContacts": 0
+      }
+    }
+  },
+  "semanticMetrics": {
+    "preserveLineRoles": true,
+    "preserveUpperBandScoreability": true,
+    "preservePeelOffReadability": true,
+    "preserveRouteLearnability": true,
+    "preserveNoCombatGrammar": true
+  },
+  "gates": {
+    "requireNoRuntimeSourceEdits": true,
+    "requireAuthorityLayerSeparation": true,
+    "requireNoCombatGrammar": true,
+    "requireScoreableRoutesPreserved": true,
+    "requireSpacingReadabilityPreserved": true,
+    "minSemanticScore": 0.7,
+    "minRouteLearnabilityScore": 0.7,
+    "objectTrackFitFloorScore10": 5,
+    "allowRuntimeSourceCandidate": false
+  },
+  "hardGuardrails": [
+    "preserve semantic line roles",
+    "preserve upper-band scoreability",
+    "preserve scoreable routes",
+    "preserve spacing/readability",
+    "preserve no-shot/no-attack/no-loss/no-contact safety",
+    "do not increase authority conflict count",
+    "do not treat RED target-conformance as runtime promotion authority"
+  ],
+  "redArtifactDigest": {
+    "directSemanticLabelCount": 2,
+    "fieldOccupancyConflictCount": 4,
+    "pathFamilyAuthorityConflictCount": 2
+  },
+  "candidateId": "stage3-semantic-g1-path-peel-0.1",
+  "semanticTransformId": "group1-path-fit-plus-peel",
+  "semanticTransformations": [
+    "group1-object-track-path-fit",
+    "group1-peel-off-readability",
+    "preserve-upper-band-scoreability",
+    "protect-semantic-line-roles",
+    "protect-no-combat-scoreable-routes"
+  ],
+  "intent": {
+    "kind": "semantic-candidate-trial",
+    "read": "Combine group 1 object-track/path-length compression with the RED left peel-off read.",
+    "playerFacingMeaning": "Combine group 1 object-track/path-length compression with the RED left peel-off read."
+  },
+  "touchedGroups": [
+    1
+  ],
+  "protectedGroups": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "protectedRoles": [
+    "late top-left butterfly line",
+    "mixed closing peel",
+    "no-combat grammar"
+  ],
+  "authorityAssumptions": {
+    "pathFamilyAuthority": "preserve current RED canonical path-family order for non-overwriting comparison",
+    "runtimePromotionAuthority": "not-authorized",
+    "targetConformanceDebtCarriedForward": true,
+    "fieldOccupancyPolicy": "human-visible upper-band scoreability and CPU lower-field geometry remain separate reads"
+  },
+  "expectedMetricDeltas": {
+    "group1ObjectTrack": "positive",
+    "group1PeelOffReadability": "positive",
+    "scoreableRoutes": "preserve"
+  },
+  "softOptimizationTargets": [
+    "raise group 1 object-track fit",
+    "make group 1 exit read match RED"
+  ],
+  "redProvenanceFieldsUsed": [
+    "aggregateObjectTrackTarget",
+    "candidateComparisonGate.targetVector",
+    "semanticExecution.exitGesture",
+    "uncertaintyAndProvenance",
+    "semanticExecution.scoreableBand",
+    "semanticExecution.scoreableFrameWindow",
+    "fieldOccupancyExpectation",
+    "semanticExecution.lineRole",
+    "semanticExecution.entryCue",
+    "executionModel.noCombatGrammar",
+    "keeperRules"
+  ],
+  "groups": [
+    {
+      "groupIndex": 1,
+      "semanticTransformations": [
+        "group1-object-track-path-fit",
+        "group1-peel-off-readability"
+      ],
+      "pathFamily": "first-challenge-peel",
+      "semanticExecution": {
+        "lineRole": "bee-line",
+        "entryCue": "top-right",
+        "exitGesture": "left peel-off",
+        "scoreableBand": "upper-band"
+      },
+      "predictedRuntimeVector": {
+        "id": 940669169,
+        "family": "classic",
+        "pathFamily": "first-challenge-peel",
+        "wave": 0,
+        "lane": 0,
+        "type": "bee",
+        "sampleCount": 40,
+        "visibleStartS": 0.36,
+        "visibleEndS": 6.82,
+        "entrySide": "left",
+        "exitSide": "left",
+        "xRange": 0.6746,
+        "yRange": 0.4663,
+        "pathLength": 0.3634,
+        "turnCount": 2.23,
+        "reversalCount": 0.565,
+        "lowerFieldShare": 0.25
+      },
+      "controlsRead": "peel-off side read projected from RED exitGesture"
+    }
+  ]
+}

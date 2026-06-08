@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-06-08T18-22-21-948Z-33112",
-  "startedAt": "2026-06-08T18:22:21.948Z",
-  "endedAt": "2026-06-08T18:22:22.106Z",
+  "id": "2026-06-08T19-32-37-411Z-47725",
+  "startedAt": "2026-06-08T19:32:37.411Z",
+  "endedAt": "2026-06-08T19:32:37.789Z",
   "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
-  "commit": "5900c21c5",
+  "commit": "54f53496",
   "command": [
     "npm",
     "run",
-    "harness:analyze:stage3-reference-execution-trial"
+    "harness:analyze:stage3-reference-execution-batch"
   ],
   "axes": [
     "challenge-stage"
@@ -17,13 +17,13 @@
   "resources": [
     "cpu"
   ],
-  "notes": "Stage 3 RED trial gate baseline",
+  "notes": "Stage 3 semantic candidate batch calibrated",
   "measurement": {
-    "wallSeconds": 0.158,
-    "timeRealSeconds": 0.15,
-    "timeUserSeconds": 0.12,
-    "timeSystemSeconds": 0.03,
-    "cpuSeconds": 0.15,
+    "wallSeconds": 0.378,
+    "timeRealSeconds": 0.37,
+    "timeUserSeconds": 0.24,
+    "timeSystemSeconds": 0.11,
+    "cpuSeconds": 0.35,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -45,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 2166394272,
-    "artifactBytesAfter": 2166615052,
-    "artifactBytesDelta": 220780
+    "artifactBytesBefore": 2167039122,
+    "artifactBytesAfter": 2167158621,
+    "artifactBytesDelta": 119499
   }
 }
