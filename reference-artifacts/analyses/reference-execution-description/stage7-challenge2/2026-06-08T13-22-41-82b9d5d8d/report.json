@@ -1,0 +1,275 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "reference-execution-description-analysis",
+  "generatedAt": "2026-06-08T13:22:41.210Z",
+  "commit": "82b9d5d8d",
+  "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 7,
+    "challengeNumber": 2,
+    "displayLabel": "Stage 7 / Challenge 2",
+    "descriptionId": "aurora-stage7-challenge2-0.1"
+  },
+  "sourceDescription": "reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage7-challenge2-0.1.json",
+  "sourceArtifacts": {
+    "galagaChallengeObjectTracks": "reference-artifacts/analyses/galaga-challenge-object-tracks/latest.json",
+    "challengeStageTargetContracts": "reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json",
+    "challengeSetpieceContracts": "reference-artifacts/analyses/challenge-setpiece-contracts/latest.json",
+    "challengeMotionSpec": "reference-artifacts/ingestion/challenge-motion-spec/aurora-challenge-2-0.1.json",
+    "challengeStageConformance": "reference-artifacts/analyses/challenge-stage-conformance/latest.json"
+  },
+  "currentRuntimeRead": {
+    "challengeConformanceScore10": 4.3,
+    "movementScore10": 4.5,
+    "graphicsScore10": 4.1,
+    "alienNoveltyScore10": 3.9,
+    "shotOpportunityScore10": 5.8,
+    "targetContractFitScore10": 6.2,
+    "targetVideoObjectTrackFitScore10": 4.7,
+    "targetVideoObjectTrackCoverage": 0.504,
+    "safety": {
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0,
+        "challengeContacts": 4
+      }
+    },
+    "shotOpportunity": {
+      "score10": 5.8,
+      "activeWindows": 46,
+      "multiTargetWindowShare": 0.783,
+      "laneDiversity": 1,
+      "centerBias": 0.371,
+      "read": "Shot-opportunity probe found scoreable targets in 46 sampled windows; 78% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.37."
+    }
+  },
+  "groupReads": [
+    {
+      "groupIndex": 1,
+      "runtimePathFamily": "cross-sweep",
+      "semanticPathFamily": "cross-sweep",
+      "objectTrackExecutionFamily": "cross-sweep",
+      "semanticPathFamilyMatch": true,
+      "objectTrackExecutionFamilyMatch": true,
+      "aggregateObjectTrackScore10": 4.3,
+      "aggregateObjectTrackCoverage": 0.452,
+      "primaryObjectTrackScore10": 2.5,
+      "primaryObjectTrackCoverage": 0.206,
+      "runtimeVector": {
+        "visibleStartS": 0.5,
+        "visibleEndS": 2.5,
+        "xRange": 0.6143214285714286,
+        "yRange": 0.13269444444444448,
+        "pathLength": 0.6308896547360222,
+        "turnCount": 3,
+        "reversalCount": 2,
+        "lowerFieldShare": 1
+      },
+      "deviations": {
+        "visibleStartDeltaS": 0.5,
+        "visibleEndDeltaS": 0.62,
+        "aggregatePathLengthRatio": 5.36,
+        "primaryPathLengthRatio": 3.04,
+        "aggregateLowerFieldDelta": 0.018,
+        "primaryLowerFieldDelta": 0,
+        "aggregateYRangeDelta": -0.044
+      },
+      "issues": [
+        "aggregate object-track score below 5.0",
+        "primary object-track score below 5.0",
+        "aggregate path-length ratio above 3x target"
+      ]
+    },
+    {
+      "groupIndex": 2,
+      "runtimePathFamily": "hook-arc",
+      "semanticPathFamily": "cross-sweep",
+      "objectTrackExecutionFamily": "hook-arc",
+      "semanticPathFamilyMatch": false,
+      "objectTrackExecutionFamilyMatch": true,
+      "aggregateObjectTrackScore10": 4.2,
+      "aggregateObjectTrackCoverage": 0.43,
+      "primaryObjectTrackScore10": 3,
+      "primaryObjectTrackCoverage": 0.27,
+      "runtimeVector": {
+        "visibleStartS": 3,
+        "visibleEndS": 6,
+        "xRange": 0.13296428571428567,
+        "yRange": 0.9099999999999999,
+        "pathLength": 1.0670502015207917,
+        "turnCount": 4,
+        "reversalCount": 3,
+        "lowerFieldShare": 0.6923076923076923
+      },
+      "deviations": {
+        "visibleStartDeltaS": 0.12,
+        "visibleEndDeltaS": -0.38,
+        "aggregatePathLengthRatio": 6.33,
+        "primaryPathLengthRatio": 3.09,
+        "aggregateLowerFieldDelta": 0.38,
+        "primaryLowerFieldDelta": -0.117,
+        "aggregateYRangeDelta": 0.233
+      },
+      "issues": [
+        "reference semantics and object-track execution family disagree",
+        "runtime matches object-track execution family but misses semantic path-family intent",
+        "aggregate object-track score below 5.0",
+        "primary object-track score below 5.0",
+        "lower-field overstay against aggregate target",
+        "aggregate path-length ratio above 3x target"
+      ]
+    },
+    {
+      "groupIndex": 3,
+      "runtimePathFamily": "hook-arc",
+      "semanticPathFamily": "hook-arc",
+      "objectTrackExecutionFamily": "hook-arc",
+      "semanticPathFamilyMatch": true,
+      "objectTrackExecutionFamilyMatch": true,
+      "aggregateObjectTrackScore10": 5,
+      "aggregateObjectTrackCoverage": 0.546,
+      "primaryObjectTrackScore10": 5.4,
+      "primaryObjectTrackCoverage": 0.597,
+      "runtimeVector": {
+        "visibleStartS": 4.5,
+        "visibleEndS": 5.75,
+        "xRange": 0.04760714285714285,
+        "yRange": 0.4029722222222223,
+        "pathLength": 0.4662167112055087,
+        "turnCount": 3,
+        "reversalCount": 3,
+        "lowerFieldShare": 1
+      },
+      "deviations": {
+        "visibleStartDeltaS": 0.25,
+        "visibleEndDeltaS": 0.75,
+        "aggregatePathLengthRatio": 3.03,
+        "primaryPathLengthRatio": 2.57,
+        "aggregateLowerFieldDelta": 0,
+        "primaryLowerFieldDelta": 0,
+        "aggregateYRangeDelta": 0.318
+      },
+      "issues": [
+        "aggregate path-length ratio above 3x target"
+      ]
+    },
+    {
+      "groupIndex": 4,
+      "runtimePathFamily": "cross-sweep",
+      "semanticPathFamily": "hook-arc",
+      "objectTrackExecutionFamily": "cross-sweep",
+      "semanticPathFamilyMatch": false,
+      "objectTrackExecutionFamilyMatch": true,
+      "aggregateObjectTrackScore10": 5.1,
+      "aggregateObjectTrackCoverage": 0.56,
+      "primaryObjectTrackScore10": 1.8,
+      "primaryObjectTrackCoverage": 0.103,
+      "runtimeVector": {
+        "visibleStartS": 7.25,
+        "visibleEndS": 10.25,
+        "xRange": 0.6748214285714287,
+        "yRange": 0.7793888888888888,
+        "pathLength": 1.3980863200216989,
+        "turnCount": 2,
+        "reversalCount": 2,
+        "lowerFieldShare": 0.23076923076923078
+      },
+      "deviations": {
+        "visibleStartDeltaS": 0.12,
+        "visibleEndDeltaS": -0.13,
+        "aggregatePathLengthRatio": 9.5,
+        "primaryPathLengthRatio": 7.44,
+        "aggregateLowerFieldDelta": -0.285,
+        "primaryLowerFieldDelta": 0.231,
+        "aggregateYRangeDelta": 0.099
+      },
+      "issues": [
+        "reference semantics and object-track execution family disagree",
+        "runtime matches object-track execution family but misses semantic path-family intent",
+        "primary object-track score below 5.0",
+        "lower-field undershoot against aggregate target",
+        "aggregate path-length ratio above 3x target"
+      ]
+    },
+    {
+      "groupIndex": 5,
+      "runtimePathFamily": "hook-arc",
+      "semanticPathFamily": "boss-led-loop",
+      "objectTrackExecutionFamily": "hook-arc",
+      "semanticPathFamilyMatch": false,
+      "objectTrackExecutionFamilyMatch": true,
+      "aggregateObjectTrackScore10": 4.9,
+      "aggregateObjectTrackCoverage": 0.53,
+      "primaryObjectTrackScore10": 3,
+      "primaryObjectTrackCoverage": 0.27,
+      "runtimeVector": {
+        "visibleStartS": 13.5,
+        "visibleEndS": 16,
+        "xRange": 0.1556785714285714,
+        "yRange": 0.7693333333333333,
+        "pathLength": 0.9284758073136585,
+        "turnCount": 3,
+        "reversalCount": 3,
+        "lowerFieldShare": 0.2727272727272727
+      },
+      "deviations": {
+        "visibleStartDeltaS": 0.12,
+        "visibleEndDeltaS": 0.12,
+        "aggregatePathLengthRatio": 3.84,
+        "primaryPathLengthRatio": 1.5,
+        "aggregateLowerFieldDelta": -0.163,
+        "primaryLowerFieldDelta": 0.21,
+        "aggregateYRangeDelta": 0.09
+      },
+      "issues": [
+        "reference semantics and object-track execution family disagree",
+        "runtime matches object-track execution family but misses semantic path-family intent",
+        "aggregate object-track score below 5.0",
+        "primary object-track score below 5.0",
+        "aggregate path-length ratio above 3x target"
+      ]
+    }
+  ],
+  "comparisonProtocol": {
+    "phaseOrder": "Runtime group visible starts should follow the reference group order and stay within roughly 0.5s of each object-track window unless a candidate explicitly widens a score window.",
+    "pathFamily": "Report semantic path-family match separately from object-track execution-family match. Do not hide disagreement between human challenge intent and target-video object tracks.",
+    "objectTrackFit": "Compare each runtime group against both aggregate group object-track targets and the selected primary object track.",
+    "lowerFieldOverstay": "Flag positive lower-field deltas above 0.18, and separately flag under-field deltas below -0.25 when the target expects a lower pass.",
+    "spacing": "Use npm run harness:check:challenge-motion-profile for spacing and bunching risk after any runtime candidate.",
+    "scoreableWindows": "Use shot-opportunity probes and group scoreWindowRead values; promotion requires clear multi-target lanes and no center-lane-only collapse.",
+    "safety": "No enemy shots, no enemy attack starts, and no ship losses remain hard blockers."
+  },
+  "guardrailCommands": [
+    "npm run harness:check:challenge-stage-conformance",
+    "npm run harness:check:challenge-motion-profile",
+    "npm run harness:check:sprite-render-mode-guard",
+    "npm run harness:check:aurora-runtime-sprite-conformance"
+  ],
+  "summary": {
+    "measurementKeeperRecommendation": "accept-measurement-keeper",
+    "runtimeCandidateRecommendation": "reference-description-needs-precision-before-runtime-candidate",
+    "runtimeCandidateReady": false,
+    "precisionBlockerCount": 2,
+    "runtimeBlockerCount": 6,
+    "precisionBlockers": [
+      "3 group(s) disagree between semantic path-family intent and object-track execution family.",
+      "2 group(s) have aggregate-vs-primary object-track tension; use primary tracks for candidate tuning and aggregate tracks as guardrails."
+    ],
+    "runtimeBlockers": [
+      "Stage 7 target-video object-track fit is 4.7/10, below the first candidate floor of 5.0/10.",
+      "Group 1: aggregate object-track score below 5.0; primary object-track score below 5.0; aggregate path-length ratio above 3x target.",
+      "Group 2: reference semantics and object-track execution family disagree; runtime matches object-track execution family but misses semantic path-family intent; aggregate object-track score below 5.0; primary object-track score below 5.0; lower-field overstay against aggregate target; aggregate path-length ratio above 3x target.",
+      "Group 3: aggregate path-length ratio above 3x target.",
+      "Group 4: reference semantics and object-track execution family disagree; runtime matches object-track execution family but misses semantic path-family intent; primary object-track score below 5.0; lower-field undershoot against aggregate target; aggregate path-length ratio above 3x target.",
+      "Group 5: reference semantics and object-track execution family disagree; runtime matches object-track execution family but misses semantic path-family intent; aggregate object-track score below 5.0; primary object-track score below 5.0; aggregate path-length ratio above 3x target."
+    ],
+    "read": "The Stage 7 execution description is useful and repeatable, but it exposes target precision issues that should be resolved before the next runtime candidate."
+  },
+  "nextBestStep": "Reconcile semantic-vs-object-track path-family labels and tune against primary tracks for groups 1, 4, and 5 before attempting another runtime keeper."
+}

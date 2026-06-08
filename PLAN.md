@@ -223,7 +223,10 @@ from the roadmap.
    challenge-stage score gap is visible movement/readability, especially
    Stage 7 object-track fit: lower path-length mismatch, reduce lower-field
    overstay on the first groups, and sharpen the late boss-led loop while
-   preserving the new contract-order and spacing guards.
+   preserving the new contract-order and spacing guards. Use the Stage 7
+   reference execution description pilot before the next runtime candidate so
+   path-family intent, object-track fit, lower-field overstay, score windows,
+   spacing, and safety are compared explicitly instead of tuned by feel.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth
@@ -286,6 +289,22 @@ Current conformance read:
   late exit travel and early lower-field overstay without breaking spacing or
   no-shot/no-loss challenge safety. See
   `reference-artifacts/analyses/challenge-stage-conformance/stage7-object-track-keeper-review-2026-06-08.md`.
+- the June 8 Reference Execution Description Pilot created a measurement-only
+  Stage 7 / Challenge 2 schema, description artifact, analyzer, and check:
+  `reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage7-challenge2-0.1.json`,
+  `reference-artifacts/analyses/reference-execution-description/stage7-challenge2/latest.json`,
+  `npm run harness:analyze:reference-execution-description`, and
+  `npm run harness:check:reference-execution-description`. The measurement
+  keeper is accepted, but it is not beta justification. The pilot recommends
+  against a runtime candidate until the target precision is tightened: groups
+  2, 4, and 5 currently disagree between semantic path-family intent and
+  object-track execution family, groups 1 and 4 have aggregate-vs-primary
+  object-track tension, Stage 7 object-track fit remains `4.7/10`, and group
+  path-length ratios still exceed the first candidate floor. The next quality
+  move is to reconcile those labels/primary-track gates, then run exactly one
+  timing-aware Stage 7 candidate with before/after evidence and the strict
+  challenge conformance, motion-profile, scoreable-route, spacing/readability,
+  sprite/render, and no-shot/no-loss guards.
 - challenge-stage grammar is now materially ahead of runtime implementation:
   the first-five challenge work has `25/25` reference-backed group contracts
   and `8.6/10` control readiness, but runtime promotion is still blocked by

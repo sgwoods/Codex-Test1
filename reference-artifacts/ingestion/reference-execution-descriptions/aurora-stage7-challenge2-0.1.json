@@ -1,0 +1,770 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "reference-execution-description",
+  "generatedAt": "2026-06-08T13:22:41.159Z",
+  "commit": "82b9d5d8d",
+  "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 7,
+    "challengeNumber": 2,
+    "displayLabel": "Stage 7 / Challenge 2",
+    "descriptionId": "aurora-stage7-challenge2-0.1"
+  },
+  "sourceReferenceWindow": {
+    "sourceVideo": "challenge-all2.mp4",
+    "sourceWindowId": "challenge-02-cross-and-column",
+    "sourceId": "challenge-all2-single-ship-all-perfects",
+    "sourceStartSeconds": 36,
+    "durationSeconds": 16,
+    "motionRead": "Adds side-crossing and vertical red-column trains; groups arrive through visible route commitments rather than appearing in place.",
+    "contactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/contact-sheet-1fps.jpg",
+    "denseContactSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/contact-sheet-2fps.jpg",
+    "focusedSheet": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/motion-review-4fps.jpg",
+    "frameIndex": "reference-artifacts/analyses/galaga-challenge-video-reference/challenge-all2-single-ship-all-perfects/challenge-02-cross-and-column/frame-index.json"
+  },
+  "sourceArtifacts": {
+    "galagaChallengeObjectTracks": "reference-artifacts/analyses/galaga-challenge-object-tracks/latest.json",
+    "challengeStageTargetContracts": "reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json",
+    "challengeSetpieceContracts": "reference-artifacts/analyses/challenge-setpiece-contracts/latest.json",
+    "challengeMotionSpec": "reference-artifacts/ingestion/challenge-motion-spec/aurora-challenge-2-0.1.json",
+    "challengeStageConformance": "reference-artifacts/analyses/challenge-stage-conformance/latest.json"
+  },
+  "executionModel": {
+    "phaseOrder": [
+      "challenge-2-group-1",
+      "challenge-2-group-2",
+      "challenge-2-group-3",
+      "challenge-2-group-4",
+      "challenge-2-group-5"
+    ],
+    "groupCount": 5,
+    "targetCount": 40,
+    "playerMeaning": "Second no-combat bonus lesson: keep the safe score exhibition, but introduce more memorable cross-field sweeps, specialty alien color families, and hook/return motion that feels visually new rather than a faster repeat of Challenge 1.",
+    "successRead": "The second challenge should feel like the first real escalation: still safe, but much more authored, colorful, and learnable as a new pattern.",
+    "safetyGuardrails": [
+      "no enemy shots",
+      "no enemy attack starts",
+      "no ship losses",
+      "40 targets presented as a bonus set piece",
+      "perfect-bonus feedback remains visible after clear"
+    ],
+    "runtimeComparisonProtocol": {
+      "phaseOrder": "Runtime group visible starts should follow the reference group order and stay within roughly 0.5s of each object-track window unless a candidate explicitly widens a score window.",
+      "pathFamily": "Report semantic path-family match separately from object-track execution-family match. Do not hide disagreement between human challenge intent and target-video object tracks.",
+      "objectTrackFit": "Compare each runtime group against both aggregate group object-track targets and the selected primary object track.",
+      "lowerFieldOverstay": "Flag positive lower-field deltas above 0.18, and separately flag under-field deltas below -0.25 when the target expects a lower pass.",
+      "spacing": "Use npm run harness:check:challenge-motion-profile for spacing and bunching risk after any runtime candidate.",
+      "scoreableWindows": "Use shot-opportunity probes and group scoreWindowRead values; promotion requires clear multi-target lanes and no center-lane-only collapse.",
+      "safety": "No enemy shots, no enemy attack starts, and no ship losses remain hard blockers."
+    }
+  },
+  "groups": [
+    {
+      "groupIndex": 1,
+      "phaseId": "challenge-2-group-1",
+      "order": 1,
+      "role": "classic cross-field opener",
+      "semanticPathFamily": "cross-sweep",
+      "objectTrackExecutionFamily": "cross-sweep",
+      "motionSpecSeedFamily": "cross-sweep",
+      "expectedTypes": [
+        "bee",
+        "but",
+        "boss",
+        "rogue"
+      ],
+      "expectedFamilies": [
+        "classic"
+      ],
+      "scoreWindowRead": "wide crossing lanes",
+      "humanContractWindowS": [
+        0.8,
+        6
+      ],
+      "objectTrackWindowS": [
+        0,
+        1.88
+      ],
+      "spawnOffsetS": 0,
+      "primaryTargetTrackId": "target-track-10",
+      "targetTrackConfidence": 0.752,
+      "sourceTrackIds": [
+        "target-track-21",
+        "target-track-10",
+        "target-track-7",
+        "target-track-9",
+        "target-track-3",
+        "target-track-11",
+        "target-track-4",
+        "target-track-19",
+        "target-track-14",
+        "target-track-22",
+        "target-track-12",
+        "target-track-2",
+        "target-track-27",
+        "target-track-1",
+        "target-track-6",
+        "target-track-5"
+      ],
+      "aggregateObjectTrackTarget": {
+        "visibleStartS": 0,
+        "visibleEndS": 1.88,
+        "entrySide": "center",
+        "exitSide": "left",
+        "xRange": 0.6166,
+        "yRange": 0.177,
+        "pathLength": 0.1176,
+        "turnCount": 5.31,
+        "reversalCount": 3.44,
+        "lowerFieldShare": 0.9815
+      },
+      "primaryObjectTrackTarget": {
+        "visibleStartS": 0,
+        "visibleEndS": 1.88,
+        "entrySide": "center",
+        "exitSide": "center",
+        "xRange": 0.1917,
+        "yRange": 0.0026,
+        "pathLength": 0.2078,
+        "turnCount": 9,
+        "reversalCount": 9,
+        "lowerFieldShare": 1
+      },
+      "primaryTrackRelativePoints": [
+        {
+          "t": 0,
+          "sourceT": 0,
+          "x": 0.4436,
+          "y": 0.5299
+        },
+        {
+          "t": 0.13,
+          "sourceT": 0.13,
+          "x": 0.4347,
+          "y": 0.5325
+        },
+        {
+          "t": 0.63,
+          "sourceT": 0.63,
+          "x": 0.5163,
+          "y": 0.5305
+        },
+        {
+          "t": 0.75,
+          "sourceT": 0.75,
+          "x": 0.5537,
+          "y": 0.5305
+        },
+        {
+          "t": 1,
+          "sourceT": 1,
+          "x": 0.6251,
+          "y": 0.5317
+        },
+        {
+          "t": 1.13,
+          "sourceT": 1.13,
+          "x": 0.6258,
+          "y": 0.5312
+        },
+        {
+          "t": 1.38,
+          "sourceT": 1.38,
+          "x": 0.6258,
+          "y": 0.5312
+        },
+        {
+          "t": 1.5,
+          "sourceT": 1.5,
+          "x": 0.6258,
+          "y": 0.5312
+        },
+        {
+          "t": 1.75,
+          "sourceT": 1.75,
+          "x": 0.6258,
+          "y": 0.5312
+        },
+        {
+          "t": 1.88,
+          "sourceT": 1.88,
+          "x": 0.6258,
+          "y": 0.5312
+        }
+      ],
+      "comparisonAxes": [
+        "phase-order",
+        "semantic-path-family",
+        "object-track-execution-family",
+        "aggregate-object-track-fit",
+        "primary-object-track-fit",
+        "lower-field-overstay",
+        "scoreable-window",
+        "spacing-readability",
+        "challenge-safety"
+      ],
+      "precisionNotes": [
+        "aggregate x-range is much wider than the primary object track; candidate tuning should not treat the aggregate as one object path"
+      ]
+    },
+    {
+      "groupIndex": 2,
+      "phaseId": "challenge-2-group-2",
+      "order": 2,
+      "role": "scorpion introduction",
+      "semanticPathFamily": "cross-sweep",
+      "objectTrackExecutionFamily": "hook-arc",
+      "motionSpecSeedFamily": "hook-arc",
+      "expectedTypes": [
+        "bee",
+        "but",
+        "boss",
+        "rogue"
+      ],
+      "expectedFamilies": [
+        "scorpion"
+      ],
+      "scoreWindowRead": "new-family crossing lanes",
+      "humanContractWindowS": [
+        2,
+        7.4
+      ],
+      "objectTrackWindowS": [
+        2.88,
+        6.38
+      ],
+      "spawnOffsetS": 2.88,
+      "primaryTargetTrackId": "target-track-66",
+      "targetTrackConfidence": 0.706,
+      "sourceTrackIds": [
+        "target-track-66",
+        "target-track-63",
+        "target-track-64",
+        "target-track-61",
+        "target-track-65",
+        "target-track-57",
+        "target-track-67",
+        "target-track-62",
+        "target-track-68"
+      ],
+      "aggregateObjectTrackTarget": {
+        "visibleStartS": 2.88,
+        "visibleEndS": 6.38,
+        "entrySide": "center",
+        "exitSide": "center",
+        "xRange": 0.1858,
+        "yRange": 0.6766,
+        "pathLength": 0.1686,
+        "turnCount": 3,
+        "reversalCount": 2.22,
+        "lowerFieldShare": 0.3122
+      },
+      "primaryObjectTrackTarget": {
+        "visibleStartS": 3.75,
+        "visibleEndS": 6.38,
+        "entrySide": "center",
+        "exitSide": "center",
+        "xRange": 0.091,
+        "yRange": 0.14,
+        "pathLength": 0.3454,
+        "turnCount": 13,
+        "reversalCount": 9,
+        "lowerFieldShare": 0.8095
+      },
+      "primaryTrackRelativePoints": [
+        {
+          "t": 0,
+          "sourceT": 3.75,
+          "x": 0.4315,
+          "y": 0.5016
+        },
+        {
+          "t": 0.38,
+          "sourceT": 4.13,
+          "x": 0.5176,
+          "y": 0.4881
+        },
+        {
+          "t": 0.63,
+          "sourceT": 4.38,
+          "x": 0.5173,
+          "y": 0.4881
+        },
+        {
+          "t": 1,
+          "sourceT": 4.75,
+          "x": 0.4756,
+          "y": 0.5754
+        },
+        {
+          "t": 1.25,
+          "sourceT": 5,
+          "x": 0.4715,
+          "y": 0.6146
+        },
+        {
+          "t": 1.5,
+          "sourceT": 5.25,
+          "x": 0.4683,
+          "y": 0.6134
+        },
+        {
+          "t": 1.75,
+          "sourceT": 5.5,
+          "x": 0.4681,
+          "y": 0.6134
+        },
+        {
+          "t": 2.13,
+          "sourceT": 5.88,
+          "x": 0.4681,
+          "y": 0.6131
+        },
+        {
+          "t": 2.38,
+          "sourceT": 6.13,
+          "x": 0.4673,
+          "y": 0.6133
+        },
+        {
+          "t": 2.63,
+          "sourceT": 6.38,
+          "x": 0.4675,
+          "y": 0.6132
+        }
+      ],
+      "comparisonAxes": [
+        "phase-order",
+        "semantic-path-family",
+        "object-track-execution-family",
+        "aggregate-object-track-fit",
+        "primary-object-track-fit",
+        "lower-field-overstay",
+        "scoreable-window",
+        "spacing-readability",
+        "challenge-safety"
+      ],
+      "precisionNotes": [
+        "semantic path family cross-sweep differs from object-track execution family hook-arc"
+      ]
+    },
+    {
+      "groupIndex": 3,
+      "phaseId": "challenge-2-group-3",
+      "order": 3,
+      "role": "scorpion hook return",
+      "semanticPathFamily": "hook-arc",
+      "objectTrackExecutionFamily": "hook-arc",
+      "motionSpecSeedFamily": "hook-arc",
+      "expectedTypes": [
+        "bee",
+        "but",
+        "boss",
+        "rogue"
+      ],
+      "expectedFamilies": [
+        "scorpion"
+      ],
+      "scoreWindowRead": "turning hook lanes",
+      "humanContractWindowS": [
+        3.5,
+        9.3
+      ],
+      "objectTrackWindowS": [
+        4.25,
+        5
+      ],
+      "spawnOffsetS": 4.25,
+      "primaryTargetTrackId": "target-track-71",
+      "targetTrackConfidence": 0.447,
+      "sourceTrackIds": [
+        "target-track-71",
+        "target-track-72"
+      ],
+      "aggregateObjectTrackTarget": {
+        "visibleStartS": 4.25,
+        "visibleEndS": 5,
+        "entrySide": "center",
+        "exitSide": "center",
+        "xRange": 0.0535,
+        "yRange": 0.0848,
+        "pathLength": 0.154,
+        "turnCount": 2.5,
+        "reversalCount": 2.5,
+        "lowerFieldShare": 1
+      },
+      "primaryObjectTrackTarget": {
+        "visibleStartS": 4.25,
+        "visibleEndS": 5,
+        "entrySide": "center",
+        "exitSide": "center",
+        "xRange": 0.0454,
+        "yRange": 0.0669,
+        "pathLength": 0.1813,
+        "turnCount": 3,
+        "reversalCount": 3,
+        "lowerFieldShare": 1
+      },
+      "primaryTrackRelativePoints": [
+        {
+          "t": 0,
+          "sourceT": 4.25,
+          "x": 0.4952,
+          "y": 0.5488
+        },
+        {
+          "t": 0.13,
+          "sourceT": 4.38,
+          "x": 0.4955,
+          "y": 0.5489
+        },
+        {
+          "t": 0.25,
+          "sourceT": 4.5,
+          "x": 0.4762,
+          "y": 0.5966
+        },
+        {
+          "t": 0.38,
+          "sourceT": 4.63,
+          "x": 0.4746,
+          "y": 0.6026
+        },
+        {
+          "t": 0.5,
+          "sourceT": 4.75,
+          "x": 0.4741,
+          "y": 0.6121
+        },
+        {
+          "t": 0.63,
+          "sourceT": 4.88,
+          "x": 0.5181,
+          "y": 0.6157
+        },
+        {
+          "t": 0.75,
+          "sourceT": 5,
+          "x": 0.4727,
+          "y": 0.5629
+        }
+      ],
+      "comparisonAxes": [
+        "phase-order",
+        "semantic-path-family",
+        "object-track-execution-family",
+        "aggregate-object-track-fit",
+        "primary-object-track-fit",
+        "lower-field-overstay",
+        "scoreable-window",
+        "spacing-readability",
+        "challenge-safety"
+      ],
+      "precisionNotes": []
+    },
+    {
+      "groupIndex": 4,
+      "phaseId": "challenge-2-group-4",
+      "order": 4,
+      "role": "stingray hook return",
+      "semanticPathFamily": "hook-arc",
+      "objectTrackExecutionFamily": "cross-sweep",
+      "motionSpecSeedFamily": "cross-sweep",
+      "expectedTypes": [
+        "bee",
+        "but",
+        "boss",
+        "rogue"
+      ],
+      "expectedFamilies": [
+        "stingray"
+      ],
+      "scoreWindowRead": "late specialty hook lanes",
+      "humanContractWindowS": [
+        5.1,
+        11
+      ],
+      "objectTrackWindowS": [
+        7.13,
+        10.38
+      ],
+      "spawnOffsetS": 7.13,
+      "primaryTargetTrackId": "target-track-110",
+      "targetTrackConfidence": 0.719,
+      "sourceTrackIds": [
+        "target-track-95",
+        "target-track-96",
+        "target-track-103",
+        "target-track-104",
+        "target-track-93",
+        "target-track-92",
+        "target-track-110",
+        "target-track-90",
+        "target-track-107",
+        "target-track-125",
+        "target-track-98",
+        "target-track-106",
+        "target-track-123",
+        "target-track-99",
+        "target-track-124",
+        "target-track-121"
+      ],
+      "aggregateObjectTrackTarget": {
+        "visibleStartS": 7.13,
+        "visibleEndS": 10.38,
+        "entrySide": "left",
+        "exitSide": "center",
+        "xRange": 0.8862,
+        "yRange": 0.6802,
+        "pathLength": 0.1472,
+        "turnCount": 2.12,
+        "reversalCount": 1.6,
+        "lowerFieldShare": 0.5156
+      },
+      "primaryObjectTrackTarget": {
+        "visibleStartS": 8.38,
+        "visibleEndS": 10.38,
+        "entrySide": "center",
+        "exitSide": "center",
+        "xRange": 0.1678,
+        "yRange": 0.0344,
+        "pathLength": 0.1879,
+        "turnCount": 7,
+        "reversalCount": 6,
+        "lowerFieldShare": 0
+      },
+      "primaryTrackRelativePoints": [
+        {
+          "t": 0,
+          "sourceT": 8.38,
+          "x": 0.3424,
+          "y": 0.2444
+        },
+        {
+          "t": 0.12,
+          "sourceT": 8.5,
+          "x": 0.3286,
+          "y": 0.2484
+        },
+        {
+          "t": 0.75,
+          "sourceT": 9.13,
+          "x": 0.4161,
+          "y": 0.226
+        },
+        {
+          "t": 1,
+          "sourceT": 9.38,
+          "x": 0.4962,
+          "y": 0.2142
+        },
+        {
+          "t": 1.12,
+          "sourceT": 9.5,
+          "x": 0.4962,
+          "y": 0.2142
+        },
+        {
+          "t": 1.37,
+          "sourceT": 9.75,
+          "x": 0.4962,
+          "y": 0.2142
+        },
+        {
+          "t": 1.5,
+          "sourceT": 9.88,
+          "x": 0.4961,
+          "y": 0.2141
+        },
+        {
+          "t": 1.62,
+          "sourceT": 10,
+          "x": 0.4962,
+          "y": 0.2143
+        },
+        {
+          "t": 1.87,
+          "sourceT": 10.25,
+          "x": 0.496,
+          "y": 0.2142
+        },
+        {
+          "t": 2,
+          "sourceT": 10.38,
+          "x": 0.4957,
+          "y": 0.214
+        }
+      ],
+      "comparisonAxes": [
+        "phase-order",
+        "semantic-path-family",
+        "object-track-execution-family",
+        "aggregate-object-track-fit",
+        "primary-object-track-fit",
+        "lower-field-overstay",
+        "scoreable-window",
+        "spacing-readability",
+        "challenge-safety"
+      ],
+      "precisionNotes": [
+        "semantic path family hook-arc differs from object-track execution family cross-sweep",
+        "aggregate x-range is much wider than the primary object track; candidate tuning should not treat the aggregate as one object path"
+      ]
+    },
+    {
+      "groupIndex": 5,
+      "phaseId": "challenge-2-group-5",
+      "order": 5,
+      "role": "boss-led closing loop",
+      "semanticPathFamily": "boss-led-loop",
+      "objectTrackExecutionFamily": "hook-arc",
+      "motionSpecSeedFamily": "hook-arc",
+      "expectedTypes": [
+        "bee",
+        "but",
+        "boss",
+        "rogue"
+      ],
+      "expectedFamilies": [
+        "stingray"
+      ],
+      "scoreWindowRead": "boss-led loop cleanup",
+      "humanContractWindowS": [
+        6.8,
+        13
+      ],
+      "objectTrackWindowS": [
+        13.38,
+        15.88
+      ],
+      "spawnOffsetS": 13.38,
+      "primaryTargetTrackId": "target-track-142",
+      "targetTrackConfidence": 0.728,
+      "sourceTrackIds": [
+        "target-track-142",
+        "target-track-150",
+        "target-track-153",
+        "target-track-151",
+        "target-track-145",
+        "target-track-152",
+        "target-track-149",
+        "target-track-147",
+        "target-track-148"
+      ],
+      "aggregateObjectTrackTarget": {
+        "visibleStartS": 13.38,
+        "visibleEndS": 15.88,
+        "entrySide": "center",
+        "exitSide": "center",
+        "xRange": 0.1448,
+        "yRange": 0.6796,
+        "pathLength": 0.2417,
+        "turnCount": 4.89,
+        "reversalCount": 3.67,
+        "lowerFieldShare": 0.4362
+      },
+      "primaryObjectTrackTarget": {
+        "visibleStartS": 13.38,
+        "visibleEndS": 15.88,
+        "entrySide": "center",
+        "exitSide": "center",
+        "xRange": 0.078,
+        "yRange": 0.4206,
+        "pathLength": 0.6187,
+        "turnCount": 7,
+        "reversalCount": 5,
+        "lowerFieldShare": 0.0625
+      },
+      "primaryTrackRelativePoints": [
+        {
+          "t": 0,
+          "sourceT": 13.38,
+          "x": 0.5003,
+          "y": 0.2186
+        },
+        {
+          "t": 0.62,
+          "sourceT": 14,
+          "x": 0.5683,
+          "y": 0.1825
+        },
+        {
+          "t": 0.75,
+          "sourceT": 14.13,
+          "x": 0.5633,
+          "y": 0.1909
+        },
+        {
+          "t": 1,
+          "sourceT": 14.38,
+          "x": 0.5681,
+          "y": 0.1826
+        },
+        {
+          "t": 1.25,
+          "sourceT": 14.63,
+          "x": 0.5681,
+          "y": 0.1648
+        },
+        {
+          "t": 1.37,
+          "sourceT": 14.75,
+          "x": 0.5681,
+          "y": 0.1648
+        },
+        {
+          "t": 1.62,
+          "sourceT": 15,
+          "x": 0.5728,
+          "y": 0.2007
+        },
+        {
+          "t": 1.87,
+          "sourceT": 15.25,
+          "x": 0.5585,
+          "y": 0.3449
+        },
+        {
+          "t": 2,
+          "sourceT": 15.38,
+          "x": 0.5403,
+          "y": 0.4148
+        },
+        {
+          "t": 2.5,
+          "sourceT": 15.88,
+          "x": 0.4948,
+          "y": 0.5596
+        }
+      ],
+      "comparisonAxes": [
+        "phase-order",
+        "semantic-path-family",
+        "object-track-execution-family",
+        "aggregate-object-track-fit",
+        "primary-object-track-fit",
+        "lower-field-overstay",
+        "scoreable-window",
+        "spacing-readability",
+        "challenge-safety"
+      ],
+      "precisionNotes": [
+        "semantic path family boss-led-loop differs from object-track execution family hook-arc"
+      ]
+    }
+  ],
+  "summary": {
+    "referenceBackedGroupCount": 5,
+    "averageTargetConfidence": 0.67,
+    "semanticVsExecutionPathFamilyConflictCount": 3,
+    "aggregateVsPrimaryTrackTensionCount": 2,
+    "read": "Stage 7 / Challenge 2 now has a structured reference execution description with source window evidence, five ordered groups, semantic path-family intent, object-track execution targets, primary track points, comparison axes, and guardrails."
+  },
+  "keeperRules": {
+    "measurementKeeper": "Useful if the artifact is stable, inspectable, and exposes deviations that make the next runtime candidate simpler.",
+    "runtimeKeeper": "A runtime keeper must improve focused strict evidence, preserve no-shot/no-ship-loss safety, preserve scoreable routes, avoid spacing/readability regression, and include before/after visual evidence.",
+    "betaPolicy": "This artifact is measurement-only and is not beta justification by itself."
+  }
+}
