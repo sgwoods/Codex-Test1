@@ -38,6 +38,15 @@ function main(){
   if(report.summary?.runtimeKeeperRecommendation !== 'not-a-runtime-keeper'){
     fail('Semantic batch must not claim a runtime keeper.', { summary: report.summary });
   }
+  if(!report.truthAlignment || !Array.isArray(report.truthAlignment.sources)){
+    fail('Semantic batch must include the Stage 7 truth-alignment audit.', { truthAlignment: report.truthAlignment });
+  }
+  if(!Array.isArray(report.truthAlignment.liveGateCanonicalOrder) || report.truthAlignment.liveGateCanonicalOrder.length !== 5){
+    fail('Truth-alignment audit must expose the five-group live gate order.', { truthAlignment: report.truthAlignment });
+  }
+  if(!report.sourceReadyGate?.requiresRuntimeExpressibilityMapping || !report.sourceReadyGate?.requiresLiveGatePathFamilyAlignment){
+    fail('Semantic batch source-ready gate must require runtime expressibility and live-gate path alignment.', { sourceReadyGate: report.sourceReadyGate });
+  }
   const tested = new Set(report.transformationClassesTested || []);
   const missingClasses = EXPECTED_CLASSES.filter(classId => !tested.has(classId));
   if(missingClasses.length) fail('Semantic batch did not test all expected transformation classes.', { missingClasses });
@@ -55,6 +64,8 @@ function main(){
     if(!candidate.canonicalFamilyMatch || typeof candidate.canonicalFamilyMatch.allGroups !== 'boolean') rowIssues.push(`${prefix}: missing canonical family status`);
     if(!candidate.guardrails || typeof candidate.guardrails.spacingReadability !== 'boolean' || typeof candidate.guardrails.scoreableRoutes !== 'boolean' || typeof candidate.guardrails.safety !== 'boolean') rowIssues.push(`${prefix}: missing guardrail statuses`);
     if(!candidate.semanticValidity || typeof candidate.semanticValidity.pass !== 'boolean') rowIssues.push(`${prefix}: missing semantic validity read`);
+    if(!candidate.runtimeExpressibility || typeof candidate.runtimeExpressibility.pass !== 'boolean') rowIssues.push(`${prefix}: missing runtime expressibility read`);
+    if(candidate.readyForRuntimeSourceCandidate && !candidate.runtimeExpressibility.pass) rowIssues.push(`${prefix}: source-ready candidate failed runtime expressibility`);
     if(typeof candidate.readyForRuntimeSourceCandidate !== 'boolean') rowIssues.push(`${prefix}: missing runtime-source readiness`);
   }
   if(rowIssues.length) fail('Semantic batch candidate rows are incomplete.', { rowIssues });

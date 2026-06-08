@@ -217,19 +217,23 @@ from the roadmap.
    persona/watch, Guardians evidence, portability, and issue-hygiene branches
 5. keep hosted `/dev` available for the next coherent review bundle instead of
    using it as a casual mirror of `main`
-6. attack Aurora challenge-stage runtime quality first: Stage 7 and Stage 11
-   now expose runtime contract groups, and Stage 7's live wave path-family
-   order matches its restored declared target contract. The remaining
-   `4.3/10` challenge-stage score gap is visible movement/readability,
-   especially Stage 7 object-track fit: lower path-length mismatch, reduce
-   lower-field overstay on the first groups, and sharpen the late boss-led loop
-   while preserving the contract-order and spacing guards. The first semantic
-   runtime projection, `stage7-semantic-phase-align-protect-0.1`, was tried and
-   rejected: actual browser runtime stayed at object-track `4.7/10` and
-   coverage `0.503` while `harness:check:challenge-motion-profile` caught a
-   target-order drift during the applied candidate. Next Stage 7 work should
-   improve the semantic compiler/evaluator so phase-duration intent maps to
-   explicit runtime-expressible controls before another source attempt.
+6. attack Aurora challenge-stage runtime quality first, but keep Stage 7 source
+   edits behind the stricter semantic gate. Stage 7 and Stage 11 now expose
+   runtime contract groups, and Stage 7's live wave path-family order matches
+   its restored declared target contract, but the reference execution
+   description/setpiece measured-intent order does not yet match the live
+   promotion gates. The remaining `4.3/10` challenge-stage score gap is visible
+   movement/readability, especially Stage 7 object-track fit: lower path-length
+   mismatch, reduce lower-field overstay on the first groups, and sharpen the
+   late boss-led loop while preserving contract-order and spacing guards. The
+   first semantic runtime projection, `stage7-semantic-phase-align-protect-0.1`,
+   was tried and rejected: actual browser runtime stayed at object-track
+   `4.7/10` and coverage `0.503` while
+   `harness:check:challenge-motion-profile` caught target-order drift during
+   the applied candidate. No further Stage 7 runtime candidate is currently
+   source-ready; next work should reconcile path-family truth and compile
+   phase-duration intent to consumed runtime controls before another source
+   attempt.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth
@@ -310,26 +314,29 @@ Current conformance read:
   `npm run harness:check:stage7-reference-execution-trial`. The baseline
   control trial reproduced Stage 7 object-track fit at `4.7/10` and coverage
   `0.503`, then correctly rejected itself with five blockers: no score lift,
-  no group 1 lift, and canonical family misses in groups 2, 4, and 5. The next
-  quality move is to feed this path one semantic executable-intent candidate
-  that predicts focused strict improvement while preserving group 4, group 5,
-  spacing/readability, scoreable routes, and no-shot/no-loss challenge safety;
-  only then should a runtime source edit be promoted for before/after evidence.
+  no group 1 lift, and canonical family misses in groups 2, 4, and 5. The
+  older description-level "candidate-ready" read is not source-promotion
+  authority by itself; use the semantic batch and runtime-calibration gates
+  below before any source edit.
 - the Stage 7 trial gate now has a semantic candidate-batch compiler/evaluator:
   `reference-artifacts/ingestion/reference-execution-candidate-trials/stage7-semantic-vocabulary-0.1.json`,
   `npm run harness:analyze:stage7-reference-execution-batch`, and
-  `npm run harness:check:stage7-reference-execution-batch`. The June 8 batch
-  generated and tested `8` candidates across `6` transformation classes. It
-  recommended exactly one runtime source candidate to try,
-  `stage7-semantic-phase-align-protect-0.1`, with predicted Stage 7
-  object-track `5.0/10` (`+0.3`), coverage `0.541` (`+0.038`), group 1
-  `4.0`, group 4 `5.3`, group 5 `4.9`, all canonical path families matched,
-  and preserved spacing/readability, scoreable-route, and no-shot/no-loss
-  guardrails. This remains a measurement/process keeper, not a runtime keeper:
-  the next worker should try exactly that runtime source candidate, rebuild,
-  then produce before/after visual evidence plus strict challenge-stage,
-  motion/profile, scoreable-route, spacing/readability, sprite/render, and
-  safety checks before accepting or rejecting runtime promotion.
+  `npm run harness:check:stage7-reference-execution-batch`. The stricter
+  compiler/evaluator now includes truth alignment and runtime-expressibility
+  requirements. The earlier June 8 batch recommended
+  `stage7-semantic-phase-align-protect-0.1`, but the actual runtime attempt
+  rejected it: prediction was object-track `5.0/10`, coverage `0.541`, group 1
+  `4.0`, group 4 `5.3`, and group 5 `4.9`; actual browser runtime stayed at
+  object-track `4.7/10`, coverage `0.503`, group 1 `3.5`, group 4 `5.0`, and
+  group 5 `4.9`. The regenerated batch now recommends
+  `no-runtime-source-candidate`. The calibration report is
+  `reference-artifacts/analyses/reference-execution-runtime-calibrations/stage7-challenge2/latest-semantic-runtime-calibration.json`.
+  It identifies two source-promotion blockers: Stage 7 path-family order is
+  split between measured reference intent and live promotion gates, and
+  `phase-duration-rebalance` still has no runtime-expressible mapping from
+  `visibleStartS`/`visibleEndS` into consumed `spawnOffsetS`,
+  `phaseDurations`, reference `durationS`, or `playbackScale` controls. This is
+  a measurement/process keeper, not a runtime keeper or beta justification.
 - challenge-stage grammar is now materially ahead of runtime implementation:
   the first-five challenge work has `25/25` reference-backed group contracts
   and `8.6/10` control readiness, but runtime promotion is still blocked by

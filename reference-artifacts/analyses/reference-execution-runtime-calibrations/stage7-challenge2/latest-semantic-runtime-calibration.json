@@ -1,0 +1,327 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage7-semantic-runtime-calibration",
+  "generatedAt": "2026-06-08T15:21:52.246Z",
+  "generatedBy": "tools/harness/analyze-stage7-semantic-runtime-calibration.js",
+  "commit": "c75a9a660",
+  "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 7,
+    "challengeNumber": 2,
+    "displayLabel": "Stage 7 / Challenge 2"
+  },
+  "candidateId": "stage7-semantic-phase-align-protect-0.1",
+  "sourceArtifacts": {
+    "calibrationDirectory": "reference-artifacts/analyses/reference-execution-runtime-calibrations/stage7-challenge2/2026-06-08-stage7-semantic-phase-align-protect-runtime-rejection",
+    "semanticBatch": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/latest-batch.json",
+    "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T15-21-45-c75a9a660/candidates/stage7-semantic-phase-align-protect-0.1.json",
+    "candidateTrial": "reference-artifacts/analyses/reference-execution-candidate-trials/stage7-challenge2/semantic-batches/2026-06-08T15-21-45-c75a9a660/trials/stage7-semantic-phase-align-protect-0.1.json",
+    "actualRuntimeConformance": "reference-artifacts/analyses/challenge-stage-conformance/2026-06-08-42bae02e1/report.json",
+    "referenceExecutionDescription": "reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage7-challenge2-0.1.json",
+    "semanticVocabulary": "reference-artifacts/ingestion/reference-execution-candidate-trials/stage7-semantic-vocabulary-0.1.json"
+  },
+  "predictedVsActual": {
+    "baseline": {
+      "totalObjectTrackScore10": 4.7,
+      "totalObjectTrackCoverage": 0.503,
+      "groupScores": {
+        "group1": 3.5,
+        "group4": 5,
+        "group5": 4.9
+      }
+    },
+    "metrics": [
+      {
+        "metric": "totalObjectTrackScore10",
+        "predicted": 5,
+        "actual": 4.7,
+        "delta": -0.3,
+        "read": "actual runtime stayed at baseline"
+      },
+      {
+        "metric": "totalObjectTrackCoverage",
+        "predicted": 0.541,
+        "actual": 0.503,
+        "delta": -0.038,
+        "read": "coverage did not realize the predicted lift"
+      },
+      {
+        "metric": "group1",
+        "predicted": 4,
+        "actual": 3.5,
+        "delta": -0.5,
+        "read": "predicted group 1 lift did not transfer"
+      },
+      {
+        "metric": "group4",
+        "predicted": 5.3,
+        "actual": 5,
+        "delta": -0.3,
+        "read": "protected group held baseline but not predicted lift"
+      },
+      {
+        "metric": "group5",
+        "predicted": 4.9,
+        "actual": 4.9,
+        "delta": 0,
+        "read": "protected group matched prediction"
+      },
+      {
+        "metric": "canonicalPathFamilyStatus",
+        "predicted": 1,
+        "actual": 0,
+        "delta": null,
+        "read": "canonical reference-execution match did not imply live motion/profile gate match"
+      }
+    ]
+  },
+  "truthAlignment": {
+    "liveGateOrder": [
+      "cross-sweep",
+      "cross-sweep",
+      "hook-arc",
+      "hook-arc",
+      "boss-led-loop"
+    ],
+    "measuredIntentOrder": [
+      "cross-sweep",
+      "hook-arc",
+      "hook-arc",
+      "cross-sweep",
+      "hook-arc"
+    ],
+    "candidateProjectedOrder": [
+      "cross-sweep",
+      "hook-arc",
+      "hook-arc",
+      "cross-sweep",
+      "hook-arc"
+    ],
+    "measuredIntentAgrees": true,
+    "liveGatesAgree": true,
+    "measuredIntentMatchesLiveGate": false,
+    "candidateMatchesMeasuredIntent": true,
+    "candidateMatchesLiveGate": false,
+    "canonicalForRuntimeCandidateGates": "Use the live promotion gates and restored runtime source as candidate gate authority until the project explicitly migrates them to the measured reference-execution/setpiece order.",
+    "staleOrDiagnostic": [
+      {
+        "artifact": "reference-execution-description and challenge-setpiece-contracts",
+        "status": "newer measured intent",
+        "read": "They agree with each other and should guide the next truth-migration discussion."
+      },
+      {
+        "artifact": "challenge-motion-profile-check, target contracts, and runtime source",
+        "status": "live gate authority",
+        "read": "They currently preserve the restored baseline order and block candidate source promotion when a projection differs."
+      }
+    ],
+    "sources": [
+      {
+        "sourceId": "reference-execution-description",
+        "role": "measured-reference-intent",
+        "order": [
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "cross-sweep",
+          "hook-arc"
+        ],
+        "canonicality": "canonical for semantic/object-track candidate analysis"
+      },
+      {
+        "sourceId": "challenge-setpiece-contracts",
+        "role": "measured-reference-intent",
+        "order": [
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "cross-sweep",
+          "hook-arc"
+        ],
+        "canonicality": "measured setpiece contract; agrees with reference execution description"
+      },
+      {
+        "sourceId": "semantic-candidate",
+        "role": "candidate-projection",
+        "order": [
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "cross-sweep",
+          "hook-arc"
+        ],
+        "canonicality": "candidate attempted runtime projection"
+      },
+      {
+        "sourceId": "challenge-motion-profile-check",
+        "role": "live-promotion-gate",
+        "order": [
+          "cross-sweep",
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "boss-led-loop"
+        ],
+        "canonicality": "live gate for runtime promotion until explicitly migrated"
+      },
+      {
+        "sourceId": "challenge-stage-target-contracts",
+        "role": "live-promotion-gate",
+        "order": [
+          "cross-sweep",
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "boss-led-loop"
+        ],
+        "canonicality": "current strict-conformance target-contract source"
+      },
+      {
+        "sourceId": "runtime-layout",
+        "role": "live-runtime-source",
+        "order": [
+          "cross-sweep",
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "boss-led-loop"
+        ],
+        "canonicality": "restored baseline runtime layout"
+      },
+      {
+        "sourceId": "runtime-motion-spec",
+        "role": "live-runtime-source",
+        "order": [
+          "cross-sweep",
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "boss-led-loop"
+        ],
+        "canonicality": "runtime path generator input"
+      },
+      {
+        "sourceId": "runtime-contract-groups",
+        "role": "live-runtime-source",
+        "order": [
+          "cross-sweep",
+          "cross-sweep",
+          "hook-arc",
+          "hook-arc",
+          "boss-led-loop"
+        ],
+        "canonicality": "runtime contract group exposure"
+      }
+    ]
+  },
+  "runtimeExpressibility": [
+    {
+      "classId": "canonical-family-alignment",
+      "sourceReadySupported": true,
+      "sourceReadyRole": "runtime-transform",
+      "sourceFields": [
+        "src/js/13-aurora-game-pack.js Stage 7 groupPathFamilies",
+        "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS pathFamilyHint",
+        "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_CONTRACT_GROUPS pathFamily",
+        "reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json Stage 7 groups pathFamily"
+      ],
+      "runtimeConsumer": "spawnChallenge resolves each enemy pathFamily from motionSpecGroup.pathFamilyHint before layout.groupPathFamilies; check-challenge-motion-profile validates runtime, layout, and contract order.",
+      "predictionLimits": "This is label and gate alignment only. It must not claim object-track score lift unless paired with a runtime-expressible movement transform.",
+      "remainingCompilerGap": null,
+      "proofHarnesses": [
+        "npm run harness:check:challenge-motion-profile",
+        "npm run harness:analyze:challenge-stage-conformance"
+      ]
+    },
+    {
+      "classId": "phase-duration-rebalance",
+      "sourceReadySupported": false,
+      "sourceReadyRole": "analysis-only",
+      "sourceFields": [
+        "src/js/13-aurora-game-pack.js Stage 7 groupSpawnOffsets",
+        "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS phaseDurations",
+        "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_REFERENCE_PATHS durationS/playbackScale when present"
+      ],
+      "runtimeConsumer": "spawn offsets, phase durations, and reference path timing are consumed by browser runtime, but the current semantic candidate only emits visibleStartS/visibleEndS trial vectors.",
+      "predictionLimits": "The trial score can improve by assigning visible windows directly. That is optimistic unless the compiler proves which consumed runtime fields produce those windows.",
+      "remainingCompilerGap": "Compile visibleStartS/visibleEndS intent into explicit spawnOffsetS, phaseDurations, reference duration, or playbackScale changes and verify actual browser-visible windows.",
+      "proofHarnesses": [
+        "npm run harness:analyze:challenge-stage-conformance",
+        "npm run harness:check:challenge-motion-profile"
+      ]
+    },
+    {
+      "classId": "preserve-scoreable-window",
+      "sourceReadySupported": true,
+      "sourceReadyRole": "guardrail-only",
+      "sourceFields": [],
+      "runtimeConsumer": "No runtime source field changes; this class carries shot-opportunity evidence as an invariant.",
+      "predictionLimits": "Cannot make a candidate source-ready by itself.",
+      "remainingCompilerGap": null,
+      "proofHarnesses": [
+        "npm run harness:analyze:challenge-stage-conformance"
+      ]
+    },
+    {
+      "classId": "protect-group4-group5",
+      "sourceReadySupported": true,
+      "sourceReadyRole": "guardrail-only",
+      "sourceFields": [],
+      "runtimeConsumer": "No runtime source field changes unless another transform touches groups 4 or 5; this class preserves measured group floors.",
+      "predictionLimits": "A predictedRuntimeVector used only for protection is not proof that a source edit can express a new vector.",
+      "remainingCompilerGap": null,
+      "proofHarnesses": [
+        "npm run harness:analyze:challenge-stage-conformance",
+        "npm run harness:check:challenge-motion-profile"
+      ]
+    }
+  ],
+  "overpredictedTransforms": [
+    {
+      "classId": "canonical-family-alignment",
+      "overpredicted": true,
+      "read": "Path-family labels transferred while applied, but label alignment alone did not move object-track score and conflicted with live motion/profile order."
+    },
+    {
+      "classId": "phase-duration-rebalance",
+      "overpredicted": true,
+      "read": "Predicted lift came from visibleStartS/visibleEndS trial vectors, but the runtime projection did not compile those windows into consumed timing fields."
+    },
+    {
+      "classId": "preserve-scoreable-window",
+      "overpredicted": false,
+      "read": "Guardrail held; this class does not claim movement lift."
+    },
+    {
+      "classId": "protect-group4-group5",
+      "overpredicted": false,
+      "read": "Group 5 was preserved and group 4 did not regress in actual runtime, but this protection is not a movement compiler."
+    }
+  ],
+  "likelyCauses": [
+    {
+      "cause": "runtime-expressibility",
+      "read": "phase-duration-rebalance emitted visible windows but no consumed runtime timing fields."
+    },
+    {
+      "cause": "stale-or-unreconciled-target-artifact",
+      "read": "reference execution and setpiece orders disagree with the restored live motion-profile/target-contract/runtime order."
+    },
+    {
+      "cause": "metric-overprediction",
+      "read": "the trial evaluator scored optimistic vectors without browser runtime proof."
+    },
+    {
+      "cause": "candidate-to-runtime-projection-mismatch",
+      "read": "the runtime edit projected path-family labels but not the phase-window movement that produced the predicted score lift."
+    }
+  ],
+  "decision": {
+    "runtimeCandidateAllowed": false,
+    "sourceReadyGatePass": false,
+    "nextRecommendation": "Do not try another Stage 7 runtime candidate. First reconcile the Stage 7 path-family source of truth or make the batch gate deliberately read a single canonical artifact, then compile phase-duration intent into explicit consumed runtime controls and prove the mapping with browser conformance and motion/profile checks.",
+    "remainingCompilerGap": "phase-duration-rebalance has no runtime-expressible mapping from visibleStartS/visibleEndS to consumed spawnOffsetS, phaseDurations, reference duration, or playbackScale fields."
+  }
+}

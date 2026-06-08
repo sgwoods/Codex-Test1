@@ -20,7 +20,22 @@
         "challenge safety baseline is preserved"
       ],
       "expectedMetricMovement": "Removes path-family blockers but should not claim object-track lift by itself.",
-      "whyNotBlindTuning": "The class is derived from canonical path-family decisions in the reference execution description, not numeric search."
+      "whyNotBlindTuning": "The class is derived from canonical path-family decisions in the reference execution description, not numeric search.",
+      "runtimeExpressibility": {
+        "sourceReadySupported": true,
+        "sourceFields": [
+          "src/js/13-aurora-game-pack.js Stage 7 groupPathFamilies",
+          "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS pathFamilyHint",
+          "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_CONTRACT_GROUPS pathFamily",
+          "reference-artifacts/ingestion/challenge-stage-target-contracts/aurora-challenge-contracts-0.1.json Stage 7 groups pathFamily"
+        ],
+        "runtimeConsumer": "spawnChallenge resolves each enemy pathFamily from motionSpecGroup.pathFamilyHint before layout.groupPathFamilies; check-challenge-motion-profile validates runtime, layout, and contract order.",
+        "predictionLimits": "This is label and gate alignment only. It must not claim object-track score lift unless paired with a runtime-expressible movement transform.",
+        "proofHarnesses": [
+          "npm run harness:check:challenge-motion-profile",
+          "npm run harness:analyze:challenge-stage-conformance"
+        ]
+      }
     },
     {
       "classId": "group1-path-length-compression",
@@ -32,7 +47,18 @@
         "challenge safety baseline is preserved"
       ],
       "expectedMetricMovement": "Raise group 1 aggregate object-track fit without touching late groups.",
-      "whyNotBlindTuning": "The compression amount is computed from the group's reference target and promotion gate, not chosen as a free numeric delta."
+      "whyNotBlindTuning": "The compression amount is computed from the group's reference target and promotion gate, not chosen as a free numeric delta.",
+      "runtimeExpressibility": {
+        "sourceReadySupported": false,
+        "sourceFields": [],
+        "runtimeConsumer": "No current runtime source field consumes abstract pathLength directly.",
+        "predictionLimits": "The trial vector can shorten pathLength mathematically, but the compiler has not emitted reference path point edits, pathScale edits, playback timing, or a consumed motion-spec control that proves the same pathLength change in browser runtime.",
+        "proofHarnesses": [
+          "npm run harness:analyze:challenge-stage-conformance",
+          "npm run harness:check:challenge-motion-profile"
+        ],
+        "remainingCompilerGap": "Map path-length compression to explicit consumed fields such as reference path geometry, pathScaleX/pathScaleY, playbackScale, or a proven motion-spec control."
+      }
     },
     {
       "classId": "lower-field-overstay-reduction",
@@ -44,7 +70,21 @@
         "group 4 and group 5 cannot be allowed to regress"
       ],
       "expectedMetricMovement": "Reduce lower-field overstay warnings, especially group 2, without treating low-field geometry as a standalone win.",
-      "whyNotBlindTuning": "Groups are selected from measured lower-field deltas, and the target value comes from the reference execution description."
+      "whyNotBlindTuning": "Groups are selected from measured lower-field deltas, and the target value comes from the reference execution description.",
+      "runtimeExpressibility": {
+        "sourceReadySupported": false,
+        "sourceFields": [
+          "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS controls.lowerFieldBias",
+          "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS controls.yOffset"
+        ],
+        "runtimeConsumer": "Stage 7 motion-spec controls are consumed by the challenge path generator, but lowerFieldShare is not itself a runtime field.",
+        "predictionLimits": "The current semantic candidate emits lowerFieldShare deltas, not lowerFieldBias/yOffset values with a browser-proven transfer function.",
+        "proofHarnesses": [
+          "npm run harness:analyze:challenge-stage-conformance",
+          "npm run harness:check:challenge-motion-profile"
+        ],
+        "remainingCompilerGap": "Derive concrete lowerFieldBias/yOffset or reference-path geometry changes and verify their actual lower-field share in browser runtime."
+      }
     },
     {
       "classId": "phase-duration-rebalance",
@@ -56,7 +96,22 @@
         "group 4 and group 5 baseline object-track floors are protected"
       ],
       "expectedMetricMovement": "Improve timing components while exposing whether geometry worsens when phase timing is tightened.",
-      "whyNotBlindTuning": "Timing comes from object-track windows in the reference execution description."
+      "whyNotBlindTuning": "Timing comes from object-track windows in the reference execution description.",
+      "runtimeExpressibility": {
+        "sourceReadySupported": false,
+        "sourceFields": [
+          "src/js/13-aurora-game-pack.js Stage 7 groupSpawnOffsets",
+          "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS phaseDurations",
+          "src/js/13-aurora-game-pack.js AURORA_CHALLENGE_STAGE7_REFERENCE_PATHS durationS/playbackScale when present"
+        ],
+        "runtimeConsumer": "spawn offsets, phase durations, and reference path timing are consumed by browser runtime, but the current semantic candidate only emits visibleStartS/visibleEndS trial vectors.",
+        "predictionLimits": "The trial score can improve by assigning visible windows directly. That is optimistic unless the compiler proves which consumed runtime fields produce those windows.",
+        "proofHarnesses": [
+          "npm run harness:analyze:challenge-stage-conformance",
+          "npm run harness:check:challenge-motion-profile"
+        ],
+        "remainingCompilerGap": "Compile visibleStartS/visibleEndS intent into explicit spawnOffsetS, phaseDurations, reference duration, or playbackScale changes and verify actual browser-visible windows."
+      }
     },
     {
       "classId": "preserve-scoreable-window",
@@ -68,7 +123,17 @@
         "center-lane bias remains below the trial floor"
       ],
       "expectedMetricMovement": "No direct object-track lift; protects player-facing route quality.",
-      "whyNotBlindTuning": "The class preserves measured route evidence as a semantic guardrail, not a tunable geometry parameter."
+      "whyNotBlindTuning": "The class preserves measured route evidence as a semantic guardrail, not a tunable geometry parameter.",
+      "runtimeExpressibility": {
+        "sourceReadySupported": true,
+        "sourceReadyRole": "guardrail-only",
+        "sourceFields": [],
+        "runtimeConsumer": "No runtime source field changes; this class carries shot-opportunity evidence as an invariant.",
+        "predictionLimits": "Cannot make a candidate source-ready by itself.",
+        "proofHarnesses": [
+          "npm run harness:analyze:challenge-stage-conformance"
+        ]
+      }
     },
     {
       "classId": "protect-group4-group5",
@@ -80,7 +145,18 @@
         "late boss-led cleanup does not become the casualty of group 1 tuning"
       ],
       "expectedMetricMovement": "Prevents false positive total-score movement that hides late-group regression.",
-      "whyNotBlindTuning": "The class encodes the prior rejected-candidate lesson as an explicit semantic guardrail."
+      "whyNotBlindTuning": "The class encodes the prior rejected-candidate lesson as an explicit semantic guardrail.",
+      "runtimeExpressibility": {
+        "sourceReadySupported": true,
+        "sourceReadyRole": "guardrail-only",
+        "sourceFields": [],
+        "runtimeConsumer": "No runtime source field changes unless another transform touches groups 4 or 5; this class preserves measured group floors.",
+        "predictionLimits": "A predictedRuntimeVector used only for protection is not proof that a source edit can express a new vector.",
+        "proofHarnesses": [
+          "npm run harness:analyze:challenge-stage-conformance",
+          "npm run harness:check:challenge-motion-profile"
+        ]
+      }
     }
   ],
   "promotionPolicy": {

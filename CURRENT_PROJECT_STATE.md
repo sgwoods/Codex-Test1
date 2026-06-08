@@ -78,8 +78,21 @@ Latest Stage 7 calibration:
   non-overwriting trial gate, and semantic batch mechanism remain useful
   measurement/process keepers, but no Stage 7 player-facing runtime keeper is
   accepted from that candidate.
-- Next Stage 7 work should make semantic phase-duration intent compile to
-  explicit runtime-expressible controls before another source attempt.
+- The semantic batch gate is now stricter than the older description-level
+  readiness read. Current `latest-batch` recommendation is
+  `no-runtime-source-candidate`; do not try another Stage 7 runtime source
+  candidate until the batch/calibration gate passes.
+- Stage 7 path-family truth is not fully aligned across artifacts. The
+  reference execution description and setpiece contract agree on measured
+  intent (`cross-sweep`, `hook-arc`, `hook-arc`, `cross-sweep`, `hook-arc`),
+  while live promotion gates and restored runtime source agree on the current
+  gate order (`cross-sweep`, `cross-sweep`, `hook-arc`, `hook-arc`,
+  `boss-led-loop`). Use the live promotion gates and restored runtime source as
+  candidate gate authority until the project explicitly migrates them.
+- Next Stage 7 work should reconcile that source-of-truth split and make
+  semantic phase-duration intent compile to explicit runtime-expressible
+  controls (`spawnOffsetS`, `phaseDurations`, reference `durationS`, or
+  `playbackScale`) before another source attempt.
 
 ## Historical Or Stale Current-State Docs
 

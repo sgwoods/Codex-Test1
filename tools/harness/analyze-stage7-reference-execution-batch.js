@@ -16,6 +16,10 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const DESCRIPTION = path.join(ROOT, 'reference-artifacts', 'ingestion', 'reference-execution-descriptions', 'aurora-stage7-challenge2-0.1.json');
 const VOCABULARY = path.join(ROOT, 'reference-artifacts', 'ingestion', 'reference-execution-candidate-trials', 'stage7-semantic-vocabulary-0.1.json');
 const BATCH_LATEST = path.join(OUT_ROOT, 'latest-batch.json');
+const TARGET_CONTRACTS = path.join(ROOT, 'reference-artifacts', 'ingestion', 'challenge-stage-target-contracts', 'aurora-challenge-contracts-0.1.json');
+const SETPIECE_CONTRACTS = path.join(ROOT, 'reference-artifacts', 'analyses', 'challenge-setpiece-contracts', 'latest.json');
+const AURORA_PACK = path.join(ROOT, 'src', 'js', '13-aurora-game-pack.js');
+const MOTION_PROFILE_CHECK = path.join(ROOT, 'tools', 'harness', 'check-challenge-motion-profile.js');
 const FOCUS_GROUPS = [1, 4, 5];
 
 function ensureDir(dir){
@@ -55,6 +59,161 @@ function knownClassSet(vocabulary){
 
 function classSpec(vocabulary, classId){
   return (vocabulary.transformationClasses || []).find(row => row.classId === classId) || {};
+}
+
+function sameOrder(a = [], b = []){
+  return a.length === b.length && a.every((value, index) => value === b[index]);
+}
+
+function quoteListOrder(text){
+  return Array.from(String(text || '').matchAll(/'([^']+)'/g)).map(match => match[1]);
+}
+
+function sourceSlice(text, startPattern, endPattern){
+  const start = text.indexOf(startPattern);
+  if(start < 0) return '';
+  const end = endPattern ? text.indexOf(endPattern, start + startPattern.length) : -1;
+  return text.slice(start, end > start ? end : undefined);
+}
+
+function extractFreezeList(text, pattern){
+  const match = String(text || '').match(pattern);
+  return match ? quoteListOrder(match[1]) : [];
+}
+
+function stage7RuntimeOrders(){
+  const text = fs.existsSync(AURORA_PACK) ? fs.readFileSync(AURORA_PACK, 'utf8') : '';
+  const layoutSlice = sourceSlice(text, 'fromStage:7,', 'fromStage:11,');
+  const motionSlice = sourceSlice(text, 'const AURORA_CHALLENGE_STAGE7_MOTION_SPEC_GROUPS', 'const AURORA_CHALLENGE_STAGE7_CONTRACT_GROUPS');
+  const contractSlice = sourceSlice(text, 'const AURORA_CHALLENGE_STAGE7_CONTRACT_GROUPS', 'const AURORA_CHALLENGE_STAGE11_CONTRACT_GROUPS');
+  return {
+    runtimeLayout: extractFreezeList(layoutSlice, /groupPathFamilies:Object\.freeze\(\[([^\]]+)\]\)/),
+    runtimeMotionSpec: Array.from(motionSlice.matchAll(/pathFamilyHint:'([^']+)'/g)).map(match => match[1]),
+    runtimeContract: Array.from(contractSlice.matchAll(/pathFamily:'([^']+)'/g)).map(match => match[1])
+  };
+}
+
+function motionProfileOrder(){
+  const text = fs.existsSync(MOTION_PROFILE_CHECK) ? fs.readFileSync(MOTION_PROFILE_CHECK, 'utf8') : '';
+  const match = text.match(/7:\s*Object\.freeze\(\{[\s\S]*?pathFamilies:\s*Object\.freeze\(\[([^\]]+)\]\)/);
+  return match ? quoteListOrder(match[1]) : [];
+}
+
+function targetContractOrder(){
+  const contracts = readJson(TARGET_CONTRACTS);
+  const row = (contracts.contracts || []).find(item => +item.stage === 7 || +item.challengeNumber === 2) || {};
+  return (row.groups || []).map(group => group.pathFamily || '');
+}
+
+function setpieceOrder(){
+  const report = readJson(SETPIECE_CONTRACTS);
+  const row = (report.contracts || []).find(item => +item.stage === 7 || +item.challengeNumber === 2) || {};
+  return (row.targetContract?.groupSchedule || []).map(group => group.pathFamily || '');
+}
+
+function descriptionCanonicalOrder(description){
+  return (description.groups || []).map(group => group.canonicalComparisonPathFamily || '');
+}
+
+function candidateProjectedOrder(candidate, liveBaselineOrder){
+  const order = liveBaselineOrder.slice();
+  for(const group of candidate.groups || []){
+    const index = (+group.groupIndex || 0) - 1;
+    if(index >= 0 && group.pathFamily) order[index] = group.pathFamily;
+  }
+  return order;
+}
+
+function buildTruthAlignment(description){
+  const runtimeOrders = stage7RuntimeOrders();
+  const motionOrder = motionProfileOrder();
+  const targetOrder = targetContractOrder();
+  const setpiece = setpieceOrder();
+  const red = descriptionCanonicalOrder(description);
+  const sources = [
+    {
+      sourceId: 'reference-execution-description',
+      role: 'measured-reference-intent',
+      order: red,
+      path: rel(DESCRIPTION),
+      read: 'Reference Execution Description canonicalComparisonPathFamily order used by semantic trials.'
+    },
+    {
+      sourceId: 'challenge-setpiece-contracts',
+      role: 'measured-reference-intent',
+      order: setpiece,
+      path: rel(SETPIECE_CONTRACTS),
+      read: 'Measured setpiece contract order generated from challenge motion/spec evidence.'
+    },
+    {
+      sourceId: 'challenge-stage-target-contracts',
+      role: 'live-promotion-gate',
+      order: targetOrder,
+      path: rel(TARGET_CONTRACTS),
+      read: 'Current target-contract artifact consumed by strict challenge-stage conformance.'
+    },
+    {
+      sourceId: 'challenge-motion-profile-check',
+      role: 'live-promotion-gate',
+      order: motionOrder,
+      path: rel(MOTION_PROFILE_CHECK),
+      read: 'Current hard gate for challenge motion/profile path-order drift.'
+    },
+    {
+      sourceId: 'runtime-layout',
+      role: 'live-runtime-source',
+      order: runtimeOrders.runtimeLayout,
+      path: rel(AURORA_PACK),
+      read: 'Stage 7 layout groupPathFamilies in the Aurora runtime source.'
+    },
+    {
+      sourceId: 'runtime-motion-spec',
+      role: 'live-runtime-source',
+      order: runtimeOrders.runtimeMotionSpec,
+      path: rel(AURORA_PACK),
+      read: 'Stage 7 motionSpecGroups pathFamilyHint values consumed first by spawnChallenge.'
+    },
+    {
+      sourceId: 'runtime-contract-groups',
+      role: 'live-runtime-source',
+      order: runtimeOrders.runtimeContract,
+      path: rel(AURORA_PACK),
+      read: 'Stage 7 runtime contract group pathFamily declarations exposed to harnesses.'
+    }
+  ];
+  const liveGateOrder = motionOrder.length ? motionOrder : targetOrder;
+  const liveGateSources = sources.filter(source => ['live-promotion-gate', 'live-runtime-source'].includes(source.role));
+  const liveGateAlignmentPass = liveGateSources.every(source => sameOrder(source.order, liveGateOrder));
+  const measuredIntentPass = sameOrder(red, setpiece);
+  const measuredIntentMatchesLiveGate = sameOrder(red, liveGateOrder);
+  const mismatches = [];
+  for(const source of sources){
+    if(!sameOrder(source.order, liveGateOrder)){
+      mismatches.push({
+        sourceId: source.sourceId,
+        role: source.role,
+        order: source.order,
+        liveGateOrder,
+        read: `${source.sourceId} path-family order differs from the current live promotion gate order.`
+      });
+    }
+  }
+  return {
+    stage: 7,
+    challengeNumber: 2,
+    liveGateCanonicalOrder: liveGateOrder,
+    measuredIntentOrder: red,
+    sources,
+    liveGateAlignmentPass,
+    measuredIntentPass,
+    measuredIntentMatchesLiveGate,
+    candidateGatePolicy: 'A semantic candidate is source-ready only when its projected full path-family order matches all live promotion gates and its movement transforms map to consumed runtime fields.',
+    canonicalForRuntimeCandidateGates: 'Current live runtime-candidate gates are the restored runtime source, challenge-stage target-contract artifact, and check-challenge-motion-profile expected order. The Reference Execution Description and challenge-setpiece contract are measured reference intent, but they are not sufficient to pass live promotion until the gate authority is explicitly reconciled.',
+    mismatches,
+    staleOrDiagnosticRead: measuredIntentMatchesLiveGate
+      ? 'Measured reference intent and live promotion gates agree for Stage 7 path-family order.'
+      : 'Measured reference intent disagrees with the restored live gate order. Treat this as an unresolved source-of-truth conflict; do not update old gates merely to pass the rejected candidate.'
+  };
 }
 
 function baselineVector(baselineByGroup, groupIndex){
@@ -402,11 +561,88 @@ function semanticValidity(candidate, trialReport, vocabulary){
   };
 }
 
-function compactTrial(candidate, trialReport, semanticRead, trialReportPath, candidatePath){
+function runtimeExpressibility(candidate, trialReport, vocabulary, truthAlignment){
+  const classes = Array.isArray(candidate.semanticTransformations) ? candidate.semanticTransformations : [candidate.semanticTransformationClass].filter(Boolean);
+  const blockers = [];
+  const warnings = [];
+  const classMappings = classes.map(classId => {
+    const spec = classSpec(vocabulary, classId);
+    const mapping = spec.runtimeExpressibility || {};
+    const sourceReadySupported = mapping.sourceReadySupported === true;
+    const sourceReadyRole = mapping.sourceReadyRole || (sourceReadySupported ? 'runtime-transform' : 'analysis-only');
+    if(!sourceReadySupported){
+      blockers.push(`${classId}: no explicit runtime-expressibility mapping for source promotion (${mapping.remainingCompilerGap || mapping.predictionLimits || 'mapping missing'})`);
+    }
+    return {
+      classId,
+      sourceReadySupported,
+      sourceReadyRole,
+      sourceFields: mapping.sourceFields || [],
+      runtimeConsumer: mapping.runtimeConsumer || '',
+      predictionLimits: mapping.predictionLimits || '',
+      proofHarnesses: mapping.proofHarnesses || [],
+      remainingCompilerGap: mapping.remainingCompilerGap || null
+    };
+  });
+  const hasRuntimeTransform = classMappings.some(row => row.sourceReadySupported && row.sourceReadyRole !== 'guardrail-only');
+  if(!hasRuntimeTransform){
+    blockers.push('candidate has no runtime-transform class; guardrail-only candidates cannot be source-ready');
+  }
+  const candidateOrder = candidateProjectedOrder(candidate, truthAlignment.liveGateCanonicalOrder || []);
+  const liveGateMismatches = (truthAlignment.sources || [])
+    .filter(source => ['live-promotion-gate', 'live-runtime-source'].includes(source.role))
+    .filter(source => !sameOrder(candidateOrder, source.order))
+    .map(source => ({
+      sourceId: source.sourceId,
+      role: source.role,
+      expectedOrder: source.order,
+      candidateOrder
+    }));
+  if(liveGateMismatches.length){
+    blockers.push(`candidate projected path-family order ${candidateOrder.join(', ')} does not match all live promotion gates`);
+  }
+  if(!truthAlignment.measuredIntentMatchesLiveGate){
+    warnings.push('measured reference intent and live promotion gates disagree; candidate source-readiness must honor live gates until source-of-truth reconciliation is explicit');
+  }
+  for(const group of candidate.groups || []){
+    if(group.timing && (Number.isFinite(+group.timing.visibleStartS) || Number.isFinite(+group.timing.visibleEndS))){
+      const classesForGroup = classes.filter(classId => classId === group.semanticReason || classId === 'phase-duration-rebalance');
+      if(classesForGroup.includes('phase-duration-rebalance')){
+        blockers.push(`group ${group.groupIndex}: visibleStartS/visibleEndS trial timing is not an explicit consumed runtime control`);
+      }
+    }
+    if(group.controls && Number.isFinite(+group.controls.pathLength)){
+      blockers.push(`group ${group.groupIndex}: pathLength trial control is not an explicit consumed runtime source field`);
+    }
+    if(group.lowerField && Object.keys(group.lowerField).length){
+      blockers.push(`group ${group.groupIndex}: lower-field trial control must compile to consumed lowerFieldBias/yOffset or reference geometry before source promotion`);
+    }
+    if(group.predictedRuntimeVector && group.semanticReason !== 'protect-group4-group5'){
+      blockers.push(`group ${group.groupIndex}: predictedRuntimeVector is not a source mapping outside protection semantics`);
+    }
+  }
+  const uniqueBlockers = Array.from(new Set(blockers));
+  const uniqueWarnings = Array.from(new Set(warnings));
+  return {
+    pass: uniqueBlockers.length === 0,
+    blockers: uniqueBlockers,
+    warnings: uniqueWarnings,
+    classMappings,
+    candidateProjectedPathOrder: candidateOrder,
+    liveGatePathOrder: truthAlignment.liveGateCanonicalOrder,
+    liveGateMismatches,
+    explicitRuntimeControlMapping: uniqueBlockers.length === 0,
+    read: uniqueBlockers.length
+      ? 'Runtime expressibility failed; the candidate may remain useful analysis but is not ready for source promotion.'
+      : 'Runtime expressibility passed; every source-moving transform maps to consumed runtime controls and live gate path order.'
+  };
+}
+
+function compactTrial(candidate, trialReport, semanticRead, runtimeRead, trialReportPath, candidatePath){
   const groups = trialReport.trial.groupResults || [];
   const groupScore = groupIndex => groups.find(group => +group.groupIndex === +groupIndex)?.aggregateObjectTrackScore10 ?? null;
   const groupMatch = groupIndex => groups.find(group => +group.groupIndex === +groupIndex)?.canonicalPathFamilyMatch === true;
-  const readyForRuntimeSourceCandidate = trialReport.summary.readyForRuntimeSourceCandidate && semanticRead.pass;
+  const readyForRuntimeSourceCandidate = trialReport.summary.readyForRuntimeSourceCandidate && semanticRead.pass && runtimeRead.pass;
   return {
     candidateId: candidate.candidateId,
     semanticTransformationClass: candidate.semanticTransformationClass,
@@ -436,16 +672,18 @@ function compactTrial(candidate, trialReport, semanticRead, trialReportPath, can
       safety: trialReport.trial.safety.pass
     },
     semanticValidity: semanticRead,
+    runtimeExpressibility: runtimeRead,
     readyForRuntimeSourceCandidate,
-    blockerCount: trialReport.summary.blockerCount + semanticRead.blockers.length,
-    blockers: [...semanticRead.blockers, ...trialReport.summary.blockers],
-    warnings: [...semanticRead.warnings, ...trialReport.summary.warnings],
+    blockerCount: trialReport.summary.blockerCount + semanticRead.blockers.length + runtimeRead.blockers.length,
+    blockers: [...runtimeRead.blockers, ...semanticRead.blockers, ...trialReport.summary.blockers],
+    warnings: [...runtimeRead.warnings, ...semanticRead.warnings, ...trialReport.summary.warnings],
     rankingScore: round(
       (trialReport.trial.deltas.totalObjectTrackScore10 * 10)
       + ((groupScore(1) || 0) - (groups.find(group => +group.groupIndex === 1)?.baselineAggregateObjectTrackScore10 || 0)) * 2
       - Math.max(0, (groups.find(group => +group.groupIndex === 4)?.baselineAggregateObjectTrackScore10 || 0) - (groupScore(4) || 0)) * 3
       - Math.max(0, (groups.find(group => +group.groupIndex === 5)?.baselineAggregateObjectTrackScore10 || 0) - (groupScore(5) || 0)) * 3
       - (semanticRead.blockers.length * 2)
+      - (runtimeRead.blockers.length * 2)
       - (trialReport.summary.blockerCount * 0.4),
       3
     )
@@ -461,6 +699,7 @@ function classSummary(rows, vocabulary){
     const readyCandidate = candidates.find(row => row.readyForRuntimeSourceCandidate) || null;
     const standaloneObjectTrackPromise = standalone
       && standalone.semanticValidity.pass
+      && standalone.runtimeExpressibility.pass
       && standalone.totalObjectTrackDelta10 > 0
       && standalone.groupScores.group4 >= 5
       && standalone.groupScores.group5 >= 4.9
@@ -469,6 +708,7 @@ function classSummary(rows, vocabulary){
       && standalone.guardrails.safety;
     const composedObjectTrackPromise = candidates.some(row =>
       row.semanticValidity.pass
+      && row.runtimeExpressibility.pass
       && row.totalObjectTrackDelta10 > 0
       && row.groupScores.group4 >= 5
       && row.groupScores.group5 >= 4.9
@@ -481,8 +721,10 @@ function classSummary(rows, vocabulary){
       ? 'runtime-source-candidate-component'
       : standaloneObjectTrackPromise
         ? 'standalone-object-track-signal'
-        : spec.classId === 'canonical-family-alignment' && composedObjectTrackPromise
-          ? 'required-composition-prerequisite'
+      : spec.classId === 'canonical-family-alignment' && composedObjectTrackPromise
+        ? 'required-composition-prerequisite'
+        : spec.runtimeExpressibility?.sourceReadySupported === false
+          ? 'analysis-only-until-runtime-mapped'
           : spec.classId === 'preserve-scoreable-window'
             ? 'guardrail-only'
             : spec.classId === 'protect-group4-group5'
@@ -506,8 +748,9 @@ function classSummary(rows, vocabulary){
 }
 
 function buildMarkdown(report){
-  const rows = report.candidates.map(row => `| ${row.candidateId} | ${row.semanticTransformations.join(', ')} | ${row.totalObjectTrackScore10} | ${row.totalObjectTrackDelta10} | ${row.totalObjectTrackCoverage} | ${row.groupScores.group1} | ${row.groupScores.group4} | ${row.groupScores.group5} | ${row.canonicalFamilyMatch.allGroups} | ${row.semanticValidity.pass} | ${row.readyForRuntimeSourceCandidate} | ${row.blockers.slice(0, 3).join('<br>') || 'none'} |`).join('\n');
+  const rows = report.candidates.map(row => `| ${row.candidateId} | ${row.semanticTransformations.join(', ')} | ${row.totalObjectTrackScore10} | ${row.totalObjectTrackDelta10} | ${row.totalObjectTrackCoverage} | ${row.groupScores.group1} | ${row.groupScores.group4} | ${row.groupScores.group5} | ${row.canonicalFamilyMatch.allGroups} | ${row.semanticValidity.pass} | ${row.runtimeExpressibility.pass} | ${row.readyForRuntimeSourceCandidate} | ${row.blockers.slice(0, 3).join('<br>') || 'none'} |`).join('\n');
   const classRows = report.classSummaries.map(row => `| ${row.classId} | ${row.candidateCount} | ${row.bestCandidateId || 'n/a'} | ${row.bestObjectTrackDelta10 ?? 'n/a'} | ${row.promiseKind} | ${row.groupedRejectionReasons.slice(0, 3).map(item => `${item.candidateId}: ${item.blocker}`).join('<br>') || 'none'} |`).join('\n');
+  const truthRows = (report.truthAlignment.sources || []).map(source => `| ${source.sourceId} | ${source.role} | ${source.order.join(', ')} | ${sameOrder(source.order, report.truthAlignment.liveGateCanonicalOrder)} |`).join('\n');
   return `# Stage 7 Semantic Candidate Batch
 
 Generated: ${report.generatedAt}
@@ -522,10 +765,24 @@ Runtime source candidate: ${report.summary.runtimeSourceCandidateId || 'none'}
 
 ${report.summary.read}
 
+## Truth Alignment
+
+Live gate order: ${report.truthAlignment.liveGateCanonicalOrder.join(', ')}
+
+Measured intent order: ${report.truthAlignment.measuredIntentOrder.join(', ')}
+
+Measured intent matches live gate: ${report.truthAlignment.measuredIntentMatchesLiveGate}
+
+${report.truthAlignment.staleOrDiagnosticRead}
+
+| Source | Role | Path-family order | Matches live gate |
+| --- | --- | --- | --- |
+${truthRows}
+
 ## Candidates
 
-| Candidate | Transformations | Score | Delta | Coverage | G1 | G4 | G5 | Canonical families | Semantic valid | Source-ready | First blockers |
-| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- |
+| Candidate | Transformations | Score | Delta | Coverage | G1 | G4 | G5 | Canonical families | Semantic valid | Runtime expressible | Source-ready | First blockers |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- |
 ${rows}
 
 ## Class Summary
@@ -552,6 +809,7 @@ function main(){
 
   const description = readJson(DESCRIPTION);
   const vocabulary = readJson(VOCABULARY);
+  const truthAlignment = buildTruthAlignment(description);
   const baselineReport = buildReport(DEFAULT_CANDIDATE);
   const candidates = buildCandidates({ description, vocabulary, baselineReport });
   const compactRows = [];
@@ -562,7 +820,8 @@ function main(){
     const trialReportPath = path.join(trialDir, `${candidate.candidateId}.json`);
     writeJson(trialReportPath, trialReport);
     const semanticRead = semanticValidity(candidate, trialReport, vocabulary);
-    compactRows.push(compactTrial(candidate, trialReport, semanticRead, rel(trialReportPath), rel(candidatePath)));
+    const runtimeRead = runtimeExpressibility(candidate, trialReport, vocabulary, truthAlignment);
+    compactRows.push(compactTrial(candidate, trialReport, semanticRead, runtimeRead, rel(trialReportPath), rel(candidatePath)));
   }
   compactRows.sort((a, b) => {
     if(a.readyForRuntimeSourceCandidate !== b.readyForRuntimeSourceCandidate) return a.readyForRuntimeSourceCandidate ? -1 : 1;
@@ -591,6 +850,17 @@ function main(){
     },
     generatedCandidateDir: rel(candidateDir),
     generatedTrialReportDir: rel(trialDir),
+    truthAlignment,
+    sourceReadyGate: {
+      requiresSemanticValidity: true,
+      requiresPredictedObjectTrackLift: true,
+      requiresGroup1Improvement: true,
+      requiresGroup4Group5Preservation: true,
+      requiresGuardrailPreservation: true,
+      requiresLiveGatePathFamilyAlignment: true,
+      requiresRuntimeExpressibilityMapping: true,
+      read: 'Source-ready now means a candidate can prove both semantic score intent and concrete runtime/source expressibility against live promotion gates.'
+    },
     candidateCount: compactRows.length,
     transformationClassesTested: (vocabulary.transformationClasses || []).map(row => row.classId),
     candidates: compactRows,
@@ -608,7 +878,7 @@ function main(){
     },
     nextBestStep: runtimeSourceCandidate
       ? `Try exactly one runtime source candidate for ${runtimeSourceCandidate.candidateId}, rebuild, then run before/after evidence and strict challenge guardrails.`
-      : 'Refine the semantic compiler around the strongest non-ready class, especially group 1 path compression plus canonical family alignment, before touching runtime source.'
+      : 'Refine the semantic compiler before touching runtime source: reconcile Stage 7 path-family truth across live gates, then map phase-duration/path-length/lower-field intent to explicit consumed runtime controls.'
   };
   writeJson(path.join(batchDir, 'report.json'), report);
   writeText(path.join(batchDir, 'README.md'), buildMarkdown(report));
