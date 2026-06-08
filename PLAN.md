@@ -274,6 +274,18 @@ Current conformance read:
   `4.5/10` graphics, and `3.9/10` novelty. Stage 7 now has a target-contract
   fit of `7.2/10`, with runtime and declared path-family order fit both at
   `1.0`, but its direct Galaga object-track fit is still only `4.7/10`.
+- the June 8 Stage 7 object-track keeper cycle rejected two narrow runtime
+  candidates rather than promote a weak player-visible change. Baseline,
+  candidate, and restored-baseline runs were logged through
+  `npm run harness:measure`; object-track fit stayed `4.7/10`, candidate two
+  improved group 4 from `5.0` to `5.2` but regressed the late boss-led group 5
+  from `4.9` to `4.4`, so the runtime edit was reverted. The next quality move
+  should improve the Stage 7 candidate mechanism first: compare against
+  per-object target tracks for groups 1, 4, and 5, generate a non-overwriting
+  before/after artifact, then test one timing-aware candidate that reduces
+  late exit travel and early lower-field overstay without breaking spacing or
+  no-shot/no-loss challenge safety. See
+  `reference-artifacts/analyses/challenge-stage-conformance/stage7-object-track-keeper-review-2026-06-08.md`.
 - challenge-stage grammar is now materially ahead of runtime implementation:
   the first-five challenge work has `25/25` reference-backed group contracts
   and `8.6/10` control readiness, but runtime promotion is still blocked by
