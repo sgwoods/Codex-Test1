@@ -73,11 +73,15 @@ function main(){
       'strictObjectTrackDelta10',
       'focusObjectTrackFit',
       'focusObjectTrackDelta',
+      'pathShapeFit',
       'pathLengthShapeFit',
+      'pathLengthSanity',
       'peelOffReadability',
       'focusPeelOffReadability',
       'upperBandScoreability',
       'routeLearnability',
+      'noCombatGrammarPreservation',
+      'spacingReadability',
       'authorityConflictCount',
       'humanVisibleVsCpuFieldOccupancyTensionCount',
       'rankingScore'
@@ -90,15 +94,28 @@ function main(){
     if(!scores.pathLengthShapeFitByGroup || !Object.prototype.hasOwnProperty.call(scores.pathLengthShapeFitByGroup, 'group1') || !Object.prototype.hasOwnProperty.call(scores.pathLengthShapeFitByGroup, 'group4')){
       rowIssues.push(`${prefix}: missing group 1/group 4 path-length shape scores`);
     }
+    if(!scores.pathShapeFitByGroup || !Object.prototype.hasOwnProperty.call(scores.pathShapeFitByGroup, 'group1') || !Object.prototype.hasOwnProperty.call(scores.pathShapeFitByGroup, 'group4')){
+      rowIssues.push(`${prefix}: missing group 1/group 4 path-shape scores`);
+    }
+    if(!scores.pathLengthSanityByGroup || !Object.prototype.hasOwnProperty.call(scores.pathLengthSanityByGroup, 'group1') || !Object.prototype.hasOwnProperty.call(scores.pathLengthSanityByGroup, 'group4')){
+      rowIssues.push(`${prefix}: missing group 1/group 4 path-length sanity scores`);
+    }
     const guardrails = candidate.guardrails || {};
     for(const key of ['spacingReadability', 'scoreableRoutes', 'safety', 'noCombatGrammar']){
       if(typeof guardrails[key] !== 'boolean') rowIssues.push(`${prefix}: missing guardrail ${key}`);
     }
     const yieldRead = candidate.yield || {};
-    for(const key of ['valid', 'improved', 'objectImproved', 'pathImproved', 'peelImproved', 'guardrailSafe', 'trialPromising', 'sourceBlocked']){
+    for(const key of ['valid', 'improved', 'objectImproved', 'pathShapeImproved', 'pathLengthSanityImproved', 'pathImproved', 'peelImproved', 'multiAxisImproved', 'geometryOnlyLift', 'guardrailSafe', 'trialPromising', 'sourceBlocked']){
       if(typeof yieldRead[key] !== 'boolean') rowIssues.push(`${prefix}: missing yield ${key}`);
     }
+    if(!['player-visible-semantic-lift', 'metric-only-probe', 'semantic-only-probe', 'low-yield', 'guardrail-regression'].includes(yieldRead.candidateClassification)){
+      rowIssues.push(`${prefix}: missing calibrated candidate classification`);
+    }
     if(!Array.isArray(yieldRead.blockedReasons)) rowIssues.push(`${prefix}: missing blocked reasons`);
+    if(!Array.isArray(yieldRead.blockerTypes)) rowIssues.push(`${prefix}: missing blocker types`);
+    if(yieldRead.geometryOnlyLift && yieldRead.trialPromising) rowIssues.push(`${prefix}: geometry-only lift must not be trial-promising`);
+    if(yieldRead.candidateClassification === 'metric-only-probe' && yieldRead.trialPromising) rowIssues.push(`${prefix}: metric-only probe must not be trial-promising`);
+    if(yieldRead.trialPromising && yieldRead.candidateClassification !== 'player-visible-semantic-lift') rowIssues.push(`${prefix}: trial-promising candidates must be player-visible semantic lifts`);
     if(candidate.runtimePromotion?.readyForRuntimeSourceCandidate !== false || candidate.runtimePromotion?.sourceCandidateGenerationAllowed !== false){
       rowIssues.push(`${prefix}: runtime promotion fields must remain false`);
     }
@@ -116,6 +133,19 @@ function main(){
   }
 
   requireTruthy(Array.isArray(report.blockerSummary), 'Stage 3 semantic batch must include a blocker summary.', { blockerSummary: report.blockerSummary });
+  requireTruthy(Array.isArray(report.blockerTaxonomy), 'Stage 3 semantic batch must include a blocker taxonomy.', { blockerTaxonomy: report.blockerTaxonomy });
+  const rankingCalibration = report.rankingCalibration || {};
+  requireTruthy(rankingCalibration.rankingModelVersion === 'stage3-player-visible-multiaxis-0.2', 'Stage 3 semantic batch must use the calibrated multi-axis ranking model.', { rankingCalibration });
+  requireTruthy(rankingCalibration.peelOffReadabilityRequiredForTrialPromising === true, 'Trial-promising status must require peel-off readability.', { rankingCalibration });
+  requireTruthy(rankingCalibration.geometryOnlyWinnersClassifiedAs === 'metric-only-probe', 'Geometry-only winners must be classified as metric-only probes.', { rankingCalibration });
+  requireTruthy(rankingCalibration.semanticScoreAloneCanAuthorizeReadiness === false, 'Semantic score alone must not authorize readiness.', { rankingCalibration });
+  if(rankingCalibration.focusedComparison){
+    const focused = rankingCalibration.focusedComparison;
+    requireTruthy(focused.after?.multiAxisRank < focused.after?.geometryHeavyRank, 'Calibrated ranking must promote the multi-axis candidate over the geometry-heavy probe.', { focusedComparison: focused });
+    requireTruthy(focused.after?.geometryHeavyClassification === 'metric-only-probe', 'Geometry-heavy comparison candidate must be classified as a metric-only probe.', { focusedComparison: focused });
+    requireTruthy(focused.after?.geometryHeavyTrialPromising === false, 'Geometry-heavy comparison candidate must not be trial-promising.', { focusedComparison: focused });
+    requireTruthy(focused.after?.multiAxisClassification === 'player-visible-semantic-lift', 'Multi-axis comparison candidate must be classified as player-visible semantic lift.', { focusedComparison: focused });
+  }
   const calibration = report.scoringCalibrationNote || {};
   requireTruthy(Number.isFinite(+calibration.baselineSemanticScore), 'Calibration note must include baseline semantic score.', { scoringCalibrationNote: calibration });
   requireTruthy(Number.isFinite(+calibration.baselineObjectTrackScore10), 'Calibration note must include baseline object-track score.', { scoringCalibrationNote: calibration });
@@ -126,9 +156,11 @@ function main(){
 
   const promising = candidates.filter(candidate => candidate.yield.trialPromising);
   const recommendation = report.summary?.recommendation || '';
-  if(recommendation === 'one-trial-promising-candidate'){
+  if(recommendation === 'ready-for-one-more-small-stage3-semantic-batch'){
     requireTruthy(!!report.summary.trialPromisingCandidateId, 'One-candidate recommendation must name the trial-promising candidate.', { summary: report.summary });
     requireTruthy(candidates[0]?.candidateId === report.summary.trialPromisingCandidateId, 'Trial-promising candidate must be ranked first.', { bestCandidate: candidates[0], summary: report.summary });
+    requireTruthy(candidates[0]?.yield?.candidateClassification === 'player-visible-semantic-lift', 'Ranked-first candidate must be a player-visible semantic lift.', { bestCandidate: candidates[0] });
+    requireTruthy(report.scoringCalibrationNote?.predictiveEnoughForNextTrialBatch === true, 'Calibrated batch must explicitly allow one more small trial batch only.', { scoringCalibrationNote: report.scoringCalibrationNote });
   }else if(recommendation === 'metric-language-improvements-before-more-generation'){
     requireTruthy(!report.summary.trialPromisingCandidateId, 'Metric/language recommendation must not name a trial-promising candidate.', { summary: report.summary });
   }else{

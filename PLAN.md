@@ -263,13 +263,16 @@ from the roadmap.
    field-occupancy conflicts, and `4` target-vs-runtime authority conflicts.
    The next Stage 3 step is a non-overwriting semantic candidate batch against
    this gate, not a runtime source candidate. That first semantic batch now
-   exists and generated `10` named candidates. The calibrated recommendation is
-   `metric-language-improvements-before-more-generation`: the top-ranked
-   direct-line RED-target probe improves geometry/path metrics but leaves
-   direct-line peel readability at baseline, while the closest multi-axis
-   shape+peel candidate improves peel readability but trails on object-track.
-   Tighten Stage 3 ranking/calibration before more generation or runtime
-   transfer work.
+   exists and generated `10` named candidates. The ranking calibration now
+   separates strict object-track, path shape, path-length sanity, peel
+   readability, semantic roles, scoreability, route learnability, no-combat
+   grammar, spacing/readability, authority conflicts, and human-vs-CPU field
+   tension. The old geometry-heavy
+   `stage3-semantic-direct-lines-red-target-probe-0.1` is now a
+   `metric-only-probe`, while
+   `stage3-semantic-direct-lines-shape-peel-0.1` is the top
+   `player-visible-semantic-lift`. The next Stage 3 step is one more small
+   semantic batch using this calibrated ranker, not runtime transfer work.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth
@@ -397,10 +400,11 @@ Current conformance read:
   visual-presence, object-track timing/shape, and scoreable-window constraints.
   The Stage 3 RED pilot, non-overwriting candidate-trial gate, and first
   semantic candidate batch are measurement/process keepers. The batch proves
-  object-track/path-length and peel-off metrics are responsive, but the current
-  ranking still favors a geometry-heavy probe over a close multi-axis
-  shape+peel candidate. Refine the Stage 3 ranking/calibration layer before
-  more candidate generation or any source edit.
+  object-track/path-length and peel-off metrics are responsive, and the
+  calibrated ranking now prevents geometry-only lift from outranking
+  player-visible path+peel preservation. The top calibration exemplar is
+  `stage3-semantic-direct-lines-shape-peel-0.1`; generate one more small Stage
+  3 semantic batch before any transfer proof or source edit.
 - Galaxy Guardians longer-surface/persona review reads `7.0/10`, with
   stage-arc pressure at `7.9/10`, stage presentation at `7.4/10`, persona
   utility at `6.5/10`, midrun survivability at `6.0/10`, and stage-band

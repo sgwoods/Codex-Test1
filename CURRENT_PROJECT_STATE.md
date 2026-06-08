@@ -150,16 +150,18 @@ Latest Stage 7 calibration:
   runtime source candidate.
 - The first Stage 3 semantic batch now exists:
   `reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest-batch.json`.
-  It generated `10` named candidates from the Stage 3 vocabulary, kept all
-  guardrails safe, and confirmed the gate is responsive to direct-line
-  object-track/path-length and peel-off readability transforms. It did not
-  produce one clearly superior multi-axis candidate: the top-ranked
-  `stage3-semantic-direct-lines-red-target-probe-0.1` is geometry-heavy
-  (`3.9/10` object-track, `0.599` path/shape, `0.64` focus peel), while the
-  close multi-axis `stage3-semantic-direct-lines-shape-peel-0.1` has stronger
-  peel readability (`1.0`) but lower object-track (`3.5/10`). Recommendation:
-  refine ranking/calibration before more Stage 3 generation or runtime
-  transfer work.
+  It generated `10` named candidates from the Stage 3 vocabulary and now has a
+  calibrated player-visible multi-axis ranking model:
+  `reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest-ranking-calibration.json`.
+  The calibration demotes the old geometry-heavy
+  `stage3-semantic-direct-lines-red-target-probe-0.1` from rank `1` to rank
+  `4` as a `metric-only-probe` because direct-line peel readability stays at
+  `0.64`. It promotes
+  `stage3-semantic-direct-lines-shape-peel-0.1` to rank `1` as a
+  `player-visible-semantic-lift` (`3.5/10` object-track, `0.665` path shape,
+  `0.375` path sanity, `1.0` focus peel), while keeping runtime source
+  promotion disabled. Recommendation: one more small Stage 3 semantic batch
+  using the calibrated ranker, not a runtime transfer or source edit.
 
 ## Historical Or Stale Current-State Docs
 

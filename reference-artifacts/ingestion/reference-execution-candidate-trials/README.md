@@ -133,6 +133,7 @@ inputs against the Stage 3 trial gate. Run:
 
 ```sh
 npm run harness:analyze:stage3-reference-execution-batch
+npm run harness:analyze:stage3-reference-execution-batch:calibrate
 npm run harness:check:stage3-reference-execution-batch
 ```
 
@@ -144,11 +145,18 @@ The batch writes generated candidates and a ranked report to:
 
 `reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest-batch.json`
 
+The ranking calibration report is:
+
+`reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest-ranking-calibration.json`
+
 Current calibration read: the gate is responsive to group 1/group 4
-object-track/path-length and peel-off readability transforms, but the top rank
-is geometry-heavy while the close multi-axis shape+peel candidate trails it.
-Do not generate more Stage 3 variants or touch runtime source until the ranking
-policy better balances object-track lift with peel-off readability.
+object-track/path-length and peel-off readability transforms, and the calibrated
+ranker now requires player-visible multi-axis lift before a candidate can be
+trial-promising. The old geometry-heavy RED-target probe is classified as a
+`metric-only-probe`; the direct-line shape+peel candidate is the current
+`player-visible-semantic-lift` exemplar. The next allowed Stage 3 step is one
+more small semantic batch using this calibrated ranker. Runtime source remains
+unauthorized.
 
 ## Stage 7 Input Shape
 
