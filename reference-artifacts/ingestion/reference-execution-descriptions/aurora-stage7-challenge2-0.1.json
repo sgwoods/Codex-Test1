@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "artifactType": "reference-execution-description",
-  "generatedAt": "2026-06-08T13:22:41.159Z",
-  "commit": "82b9d5d8d",
+  "generatedAt": "2026-06-08T13:32:25.020Z",
+  "commit": "4191d0730",
   "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
   "releaseFamily": "1.4.1",
   "gameKey": "aurora-galactica",
@@ -52,7 +52,7 @@
     ],
     "runtimeComparisonProtocol": {
       "phaseOrder": "Runtime group visible starts should follow the reference group order and stay within roughly 0.5s of each object-track window unless a candidate explicitly widens a score window.",
-      "pathFamily": "Report semantic path-family match separately from object-track execution-family match. Do not hide disagreement between human challenge intent and target-video object tracks.",
+      "pathFamily": "Use canonicalComparisonPathFamily for candidate gates. Preserve semanticPathFamily and objectTrackExecutionFamily as inspectable source context so legacy label drift remains visible.",
       "objectTrackFit": "Compare each runtime group against both aggregate group object-track targets and the selected primary object track.",
       "lowerFieldOverstay": "Flag positive lower-field deltas above 0.18, and separately flag under-field deltas below -0.25 when the target expects a lower pass.",
       "spacing": "Use npm run harness:check:challenge-motion-profile for spacing and bunching risk after any runtime candidate.",
@@ -69,6 +69,22 @@
       "semanticPathFamily": "cross-sweep",
       "objectTrackExecutionFamily": "cross-sweep",
       "motionSpecSeedFamily": "cross-sweep",
+      "canonicalComparisonPathFamily": "cross-sweep",
+      "pathFamilyDecision": {
+        "canonicalPathFamily": "cross-sweep",
+        "canonicalSource": "object-track-and-motion-spec",
+        "reason": "Measured object-track schedule agrees with the motion-spec seed; treat the older semantic label as legacy context when it differs.",
+        "targetTrackConfidence": 0.752,
+        "legacySemanticPathFamily": "cross-sweep",
+        "objectTrackExecutionFamily": "cross-sweep",
+        "motionSpecSeedFamily": "cross-sweep",
+        "sourceAgreement": {
+          "semanticMatchesCanonical": true,
+          "objectTrackMatchesCanonical": true,
+          "motionSpecMatchesCanonical": true,
+          "objectTrackMatchesMotionSpec": true
+        }
+      },
       "expectedTypes": [
         "bee",
         "but",
@@ -194,10 +210,32 @@
           "y": 0.5312
         }
       ],
+      "candidateComparisonGate": {
+        "canonicalPathFamily": "cross-sweep",
+        "pathFamilyGate": "runtime path family must match canonicalComparisonPathFamily before promotion",
+        "primaryObjectTrackFitFloorScore10": 5,
+        "aggregateObjectTrackFitFloorScore10": 5,
+        "maxAggregatePathLengthRatio": 3,
+        "maxPrimaryPathLengthRatio": 3,
+        "lowerFieldDeltaRange": [
+          -0.25,
+          0.18
+        ],
+        "primaryTrackIsTuningGate": true,
+        "aggregateTrackIsGuardrail": true,
+        "tuningRead": "Tune against the primary object track first; use the aggregate group vector as a spacing/readability guardrail.",
+        "targetVector": {
+          "aggregatePathLength": 0.1176,
+          "primaryPathLength": 0.2078,
+          "aggregateLowerFieldShare": 0.9815,
+          "primaryLowerFieldShare": 1
+        }
+      },
       "comparisonAxes": [
         "phase-order",
         "semantic-path-family",
         "object-track-execution-family",
+        "canonical-comparison-path-family",
         "aggregate-object-track-fit",
         "primary-object-track-fit",
         "lower-field-overstay",
@@ -217,6 +255,22 @@
       "semanticPathFamily": "cross-sweep",
       "objectTrackExecutionFamily": "hook-arc",
       "motionSpecSeedFamily": "hook-arc",
+      "canonicalComparisonPathFamily": "hook-arc",
+      "pathFamilyDecision": {
+        "canonicalPathFamily": "hook-arc",
+        "canonicalSource": "object-track-and-motion-spec",
+        "reason": "Measured object-track schedule agrees with the motion-spec seed; treat the older semantic label as legacy context when it differs.",
+        "targetTrackConfidence": 0.706,
+        "legacySemanticPathFamily": "cross-sweep",
+        "objectTrackExecutionFamily": "hook-arc",
+        "motionSpecSeedFamily": "hook-arc",
+        "sourceAgreement": {
+          "semanticMatchesCanonical": false,
+          "objectTrackMatchesCanonical": true,
+          "motionSpecMatchesCanonical": true,
+          "objectTrackMatchesMotionSpec": true
+        }
+      },
       "expectedTypes": [
         "bee",
         "but",
@@ -335,10 +389,32 @@
           "y": 0.6132
         }
       ],
+      "candidateComparisonGate": {
+        "canonicalPathFamily": "hook-arc",
+        "pathFamilyGate": "runtime path family must match canonicalComparisonPathFamily before promotion",
+        "primaryObjectTrackFitFloorScore10": 5,
+        "aggregateObjectTrackFitFloorScore10": 5,
+        "maxAggregatePathLengthRatio": 3,
+        "maxPrimaryPathLengthRatio": 3,
+        "lowerFieldDeltaRange": [
+          -0.25,
+          0.18
+        ],
+        "primaryTrackIsTuningGate": false,
+        "aggregateTrackIsGuardrail": true,
+        "tuningRead": "Use aggregate and primary object-track fit together; neither should regress during promotion.",
+        "targetVector": {
+          "aggregatePathLength": 0.1686,
+          "primaryPathLength": 0.3454,
+          "aggregateLowerFieldShare": 0.3122,
+          "primaryLowerFieldShare": 0.8095
+        }
+      },
       "comparisonAxes": [
         "phase-order",
         "semantic-path-family",
         "object-track-execution-family",
+        "canonical-comparison-path-family",
         "aggregate-object-track-fit",
         "primary-object-track-fit",
         "lower-field-overstay",
@@ -347,7 +423,7 @@
         "challenge-safety"
       ],
       "precisionNotes": [
-        "semantic path family cross-sweep differs from object-track execution family hook-arc"
+        "legacy semantic path family cross-sweep differs from canonical comparison family hook-arc"
       ]
     },
     {
@@ -358,6 +434,22 @@
       "semanticPathFamily": "hook-arc",
       "objectTrackExecutionFamily": "hook-arc",
       "motionSpecSeedFamily": "hook-arc",
+      "canonicalComparisonPathFamily": "hook-arc",
+      "pathFamilyDecision": {
+        "canonicalPathFamily": "hook-arc",
+        "canonicalSource": "object-track-and-motion-spec",
+        "reason": "Measured object-track schedule agrees with the motion-spec seed; treat the older semantic label as legacy context when it differs.",
+        "targetTrackConfidence": 0.447,
+        "legacySemanticPathFamily": "hook-arc",
+        "objectTrackExecutionFamily": "hook-arc",
+        "motionSpecSeedFamily": "hook-arc",
+        "sourceAgreement": {
+          "semanticMatchesCanonical": true,
+          "objectTrackMatchesCanonical": true,
+          "motionSpecMatchesCanonical": true,
+          "objectTrackMatchesMotionSpec": true
+        }
+      },
       "expectedTypes": [
         "bee",
         "but",
@@ -451,10 +543,32 @@
           "y": 0.5629
         }
       ],
+      "candidateComparisonGate": {
+        "canonicalPathFamily": "hook-arc",
+        "pathFamilyGate": "runtime path family must match canonicalComparisonPathFamily before promotion",
+        "primaryObjectTrackFitFloorScore10": 5,
+        "aggregateObjectTrackFitFloorScore10": 5,
+        "maxAggregatePathLengthRatio": 3,
+        "maxPrimaryPathLengthRatio": 3,
+        "lowerFieldDeltaRange": [
+          -0.25,
+          0.18
+        ],
+        "primaryTrackIsTuningGate": false,
+        "aggregateTrackIsGuardrail": true,
+        "tuningRead": "Use aggregate and primary object-track fit together; neither should regress during promotion.",
+        "targetVector": {
+          "aggregatePathLength": 0.154,
+          "primaryPathLength": 0.1813,
+          "aggregateLowerFieldShare": 1,
+          "primaryLowerFieldShare": 1
+        }
+      },
       "comparisonAxes": [
         "phase-order",
         "semantic-path-family",
         "object-track-execution-family",
+        "canonical-comparison-path-family",
         "aggregate-object-track-fit",
         "primary-object-track-fit",
         "lower-field-overstay",
@@ -472,6 +586,22 @@
       "semanticPathFamily": "hook-arc",
       "objectTrackExecutionFamily": "cross-sweep",
       "motionSpecSeedFamily": "cross-sweep",
+      "canonicalComparisonPathFamily": "cross-sweep",
+      "pathFamilyDecision": {
+        "canonicalPathFamily": "cross-sweep",
+        "canonicalSource": "object-track-and-motion-spec",
+        "reason": "Measured object-track schedule agrees with the motion-spec seed; treat the older semantic label as legacy context when it differs.",
+        "targetTrackConfidence": 0.719,
+        "legacySemanticPathFamily": "hook-arc",
+        "objectTrackExecutionFamily": "cross-sweep",
+        "motionSpecSeedFamily": "cross-sweep",
+        "sourceAgreement": {
+          "semanticMatchesCanonical": false,
+          "objectTrackMatchesCanonical": true,
+          "motionSpecMatchesCanonical": true,
+          "objectTrackMatchesMotionSpec": true
+        }
+      },
       "expectedTypes": [
         "bee",
         "but",
@@ -597,10 +727,32 @@
           "y": 0.214
         }
       ],
+      "candidateComparisonGate": {
+        "canonicalPathFamily": "cross-sweep",
+        "pathFamilyGate": "runtime path family must match canonicalComparisonPathFamily before promotion",
+        "primaryObjectTrackFitFloorScore10": 5,
+        "aggregateObjectTrackFitFloorScore10": 5,
+        "maxAggregatePathLengthRatio": 3,
+        "maxPrimaryPathLengthRatio": 3,
+        "lowerFieldDeltaRange": [
+          -0.25,
+          0.18
+        ],
+        "primaryTrackIsTuningGate": true,
+        "aggregateTrackIsGuardrail": true,
+        "tuningRead": "Tune against the primary object track first; use the aggregate group vector as a spacing/readability guardrail.",
+        "targetVector": {
+          "aggregatePathLength": 0.1472,
+          "primaryPathLength": 0.1879,
+          "aggregateLowerFieldShare": 0.5156,
+          "primaryLowerFieldShare": 0
+        }
+      },
       "comparisonAxes": [
         "phase-order",
         "semantic-path-family",
         "object-track-execution-family",
+        "canonical-comparison-path-family",
         "aggregate-object-track-fit",
         "primary-object-track-fit",
         "lower-field-overstay",
@@ -609,7 +761,7 @@
         "challenge-safety"
       ],
       "precisionNotes": [
-        "semantic path family hook-arc differs from object-track execution family cross-sweep",
+        "legacy semantic path family hook-arc differs from canonical comparison family cross-sweep",
         "aggregate x-range is much wider than the primary object track; candidate tuning should not treat the aggregate as one object path"
       ]
     },
@@ -621,6 +773,22 @@
       "semanticPathFamily": "boss-led-loop",
       "objectTrackExecutionFamily": "hook-arc",
       "motionSpecSeedFamily": "hook-arc",
+      "canonicalComparisonPathFamily": "hook-arc",
+      "pathFamilyDecision": {
+        "canonicalPathFamily": "hook-arc",
+        "canonicalSource": "object-track-and-motion-spec",
+        "reason": "Measured object-track schedule agrees with the motion-spec seed; treat the older semantic label as legacy context when it differs.",
+        "targetTrackConfidence": 0.728,
+        "legacySemanticPathFamily": "boss-led-loop",
+        "objectTrackExecutionFamily": "hook-arc",
+        "motionSpecSeedFamily": "hook-arc",
+        "sourceAgreement": {
+          "semanticMatchesCanonical": false,
+          "objectTrackMatchesCanonical": true,
+          "motionSpecMatchesCanonical": true,
+          "objectTrackMatchesMotionSpec": true
+        }
+      },
       "expectedTypes": [
         "bee",
         "but",
@@ -739,10 +907,32 @@
           "y": 0.5596
         }
       ],
+      "candidateComparisonGate": {
+        "canonicalPathFamily": "hook-arc",
+        "pathFamilyGate": "runtime path family must match canonicalComparisonPathFamily before promotion",
+        "primaryObjectTrackFitFloorScore10": 5,
+        "aggregateObjectTrackFitFloorScore10": 5,
+        "maxAggregatePathLengthRatio": 3,
+        "maxPrimaryPathLengthRatio": 3,
+        "lowerFieldDeltaRange": [
+          -0.25,
+          0.18
+        ],
+        "primaryTrackIsTuningGate": true,
+        "aggregateTrackIsGuardrail": true,
+        "tuningRead": "Tune against the primary object track first; use the aggregate group vector as a spacing/readability guardrail.",
+        "targetVector": {
+          "aggregatePathLength": 0.2417,
+          "primaryPathLength": 0.6187,
+          "aggregateLowerFieldShare": 0.4362,
+          "primaryLowerFieldShare": 0.0625
+        }
+      },
       "comparisonAxes": [
         "phase-order",
         "semantic-path-family",
         "object-track-execution-family",
+        "canonical-comparison-path-family",
         "aggregate-object-track-fit",
         "primary-object-track-fit",
         "lower-field-overstay",
@@ -751,7 +941,7 @@
         "challenge-safety"
       ],
       "precisionNotes": [
-        "semantic path family boss-led-loop differs from object-track execution family hook-arc"
+        "legacy semantic path family boss-led-loop differs from canonical comparison family hook-arc"
       ]
     }
   ],
@@ -759,8 +949,9 @@
     "referenceBackedGroupCount": 5,
     "averageTargetConfidence": 0.67,
     "semanticVsExecutionPathFamilyConflictCount": 3,
+    "unresolvedCanonicalPathFamilyCount": 0,
     "aggregateVsPrimaryTrackTensionCount": 2,
-    "read": "Stage 7 / Challenge 2 now has a structured reference execution description with source window evidence, five ordered groups, semantic path-family intent, object-track execution targets, primary track points, comparison axes, and guardrails."
+    "read": "Stage 7 / Challenge 2 now has a structured reference execution description with source window evidence, five ordered groups, legacy semantic path-family intent, canonical comparison path families, object-track execution targets, primary track points, comparison axes, and guardrails."
   },
   "keeperRules": {
     "measurementKeeper": "Useful if the artifact is stable, inspectable, and exposes deviations that make the next runtime candidate simpler.",

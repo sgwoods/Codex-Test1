@@ -39,9 +39,13 @@ function main(){
     const prefix = `group ${group.groupIndex}`;
     if(!group.semanticPathFamily) issues.push(`${prefix}: missing semantic path family`);
     if(!group.objectTrackExecutionFamily) issues.push(`${prefix}: missing object-track execution family`);
+    if(!group.canonicalComparisonPathFamily) issues.push(`${prefix}: missing canonical comparison path family`);
+    if(!group.pathFamilyDecision?.canonicalSource) issues.push(`${prefix}: missing path-family decision`);
     if(!group.primaryTargetTrackId) issues.push(`${prefix}: missing primary target track`);
     if(!Array.isArray(group.primaryTrackRelativePoints) || group.primaryTrackRelativePoints.length < 3) issues.push(`${prefix}: missing primary track points`);
     if(!group.aggregateObjectTrackTarget?.pathLength) issues.push(`${prefix}: missing aggregate object-track target`);
+    if(!group.candidateComparisonGate?.primaryObjectTrackFitFloorScore10) issues.push(`${prefix}: missing candidate comparison gate`);
+    if(!Array.isArray(group.comparisonAxes) || !group.comparisonAxes.includes('canonical-comparison-path-family')) issues.push(`${prefix}: missing canonical path-family comparison axis`);
     if(!Array.isArray(group.comparisonAxes) || !group.comparisonAxes.includes('primary-object-track-fit')) issues.push(`${prefix}: missing primary object-track comparison axis`);
   }
   if(issues.length) fail('Reference execution description failed validation.', { issues });
@@ -51,9 +55,22 @@ function main(){
   if(typeof report.summary?.runtimeCandidateReady !== 'boolean'){
     fail('Reference execution analysis must state runtime candidate readiness.', { summary: report.summary });
   }
+  if(typeof report.summary?.runtimePromotionReady !== 'boolean'){
+    fail('Reference execution analysis must distinguish candidate readiness from runtime promotion readiness.', { summary: report.summary });
+  }
+  if(!Array.isArray(report.summary?.pathFamilyResolutions)){
+    fail('Reference execution analysis must report path-family resolutions.', { summary: report.summary });
+  }
+  if(!Array.isArray(report.summary?.primaryTrackGateResolutions)){
+    fail('Reference execution analysis must report primary-track gate resolutions.', { summary: report.summary });
+  }
   if(!Array.isArray(report.groupReads) || report.groupReads.length !== 5){
     fail('Reference execution analysis must report all five group deviations.', { groupReadCount: report.groupReads?.length });
   }
+  const readIssues = report.groupReads
+    .filter(read => !read.canonicalComparisonPathFamily || !Array.isArray(read.candidateFocus))
+    .map(read => `group ${read.groupIndex}: missing canonical comparison read or candidate focus`);
+  if(readIssues.length) fail('Reference execution group reads failed validation.', { issues: readIssues });
   console.log(JSON.stringify({
     ok: true,
     description: rel(DESCRIPTION),
@@ -61,8 +78,10 @@ function main(){
     measurementKeeperRecommendation: report.summary.measurementKeeperRecommendation,
     runtimeCandidateRecommendation: report.summary.runtimeCandidateRecommendation,
     runtimeCandidateReady: report.summary.runtimeCandidateReady,
+    runtimePromotionReady: report.summary.runtimePromotionReady,
     precisionBlockerCount: report.summary.precisionBlockerCount,
-    runtimeBlockerCount: report.summary.runtimeBlockerCount
+    candidateReadinessBlockerCount: report.summary.candidateReadinessBlockerCount,
+    runtimePromotionBlockerCount: report.summary.runtimePromotionBlockerCount
   }, null, 2));
 }
 

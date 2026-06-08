@@ -142,6 +142,65 @@ function relativePoints(track){
   }));
 }
 
+function resolvePathFamily(semantic, scheduled, motion, targetGroup){
+  const semanticFamily = semantic.pathFamily || null;
+  const objectTrackFamily = scheduled.pathFamily || null;
+  const motionSpecFamily = motion.pathFamilyHint || null;
+  const canonicalPathFamily = objectTrackFamily || motionSpecFamily || semanticFamily || null;
+  const sourceAgreement = {
+    semanticMatchesCanonical: semanticFamily && canonicalPathFamily ? semanticFamily === canonicalPathFamily : null,
+    objectTrackMatchesCanonical: objectTrackFamily && canonicalPathFamily ? objectTrackFamily === canonicalPathFamily : null,
+    motionSpecMatchesCanonical: motionSpecFamily && canonicalPathFamily ? motionSpecFamily === canonicalPathFamily : null,
+    objectTrackMatchesMotionSpec: objectTrackFamily && motionSpecFamily ? objectTrackFamily === motionSpecFamily : null
+  };
+  let canonicalSource = 'semantic-contract';
+  let reason = 'Only the first-pass semantic contract names a path family.';
+  if(objectTrackFamily && motionSpecFamily && objectTrackFamily === motionSpecFamily){
+    canonicalSource = 'object-track-and-motion-spec';
+    reason = 'Measured object-track schedule agrees with the motion-spec seed; treat the older semantic label as legacy context when it differs.';
+  }else if(objectTrackFamily){
+    canonicalSource = 'object-track-schedule';
+    reason = 'Measured object-track schedule is the newest source with per-group reference tracks.';
+  }else if(motionSpecFamily){
+    canonicalSource = 'motion-spec';
+    reason = 'Motion spec is the newest executable source naming a path family.';
+  }
+  return {
+    canonicalPathFamily,
+    canonicalSource,
+    reason,
+    targetTrackConfidence: round(targetGroup.confidence ?? scheduled.targetTrackConfidence, 3),
+    legacySemanticPathFamily: semanticFamily,
+    objectTrackExecutionFamily: objectTrackFamily,
+    motionSpecSeedFamily: motionSpecFamily,
+    sourceAgreement
+  };
+}
+
+function buildCandidateGate(groupIndex, canonicalPathFamily, aggregate, primaryVector, hasAggregatePrimaryTension){
+  const primaryTrackIsTuningGate = hasAggregatePrimaryTension || groupIndex === 5;
+  return {
+    canonicalPathFamily,
+    pathFamilyGate: 'runtime path family must match canonicalComparisonPathFamily before promotion',
+    primaryObjectTrackFitFloorScore10: 5,
+    aggregateObjectTrackFitFloorScore10: 5,
+    maxAggregatePathLengthRatio: 3,
+    maxPrimaryPathLengthRatio: 3,
+    lowerFieldDeltaRange: [-0.25, 0.18],
+    primaryTrackIsTuningGate,
+    aggregateTrackIsGuardrail: true,
+    tuningRead: primaryTrackIsTuningGate
+      ? 'Tune against the primary object track first; use the aggregate group vector as a spacing/readability guardrail.'
+      : 'Use aggregate and primary object-track fit together; neither should regress during promotion.',
+    targetVector: {
+      aggregatePathLength: round(aggregate.pathLength, 4),
+      primaryPathLength: round(primaryVector?.pathLength, 4),
+      aggregateLowerFieldShare: round(aggregate.lowerFieldShare, 4),
+      primaryLowerFieldShare: round(primaryVector?.lowerFieldShare, 4)
+    }
+  };
+}
+
 function findChallenge2ObjectTracks(report){
   const challenges = report.challenges || report.challengeStages || [];
   const challenge = challenges.find(item => +item.challengeNumber === 2 || +item.stage === 7);
@@ -189,14 +248,16 @@ function buildDescription(){
     const primaryTrack = candidateTracks.get(primaryId) || null;
     const aggregate = targetGroup.objectTrackTarget || {};
     const primaryVector = trackVector(primaryTrack);
+    const pathFamilyDecision = resolvePathFamily(semantic, scheduled, motion, targetGroup);
+    const hasAggregatePrimaryTension = primaryVector && Math.abs((+primaryVector.xRange || 0) - (+aggregate.xRange || 0)) > 0.25;
     const notes = [];
     if(semantic.pathFamily && scheduled.pathFamily && semantic.pathFamily !== scheduled.pathFamily){
-      notes.push(`semantic path family ${semantic.pathFamily} differs from object-track execution family ${scheduled.pathFamily}`);
+      notes.push(`legacy semantic path family ${semantic.pathFamily} differs from canonical comparison family ${pathFamilyDecision.canonicalPathFamily}`);
     }
     if(motion.pathFamilyHint && scheduled.pathFamily && motion.pathFamilyHint !== scheduled.pathFamily){
       notes.push(`motion-spec seed ${motion.pathFamilyHint} differs from object-track execution family ${scheduled.pathFamily}`);
     }
-    if(primaryVector && Math.abs((+primaryVector.xRange || 0) - (+aggregate.xRange || 0)) > 0.25){
+    if(hasAggregatePrimaryTension){
       notes.push('aggregate x-range is much wider than the primary object track; candidate tuning should not treat the aggregate as one object path');
     }
     return {
@@ -207,6 +268,8 @@ function buildDescription(){
       semanticPathFamily: semantic.pathFamily || null,
       objectTrackExecutionFamily: scheduled.pathFamily || motion.pathFamilyHint || null,
       motionSpecSeedFamily: motion.pathFamilyHint || null,
+      canonicalComparisonPathFamily: pathFamilyDecision.canonicalPathFamily,
+      pathFamilyDecision,
       expectedTypes: semantic.expectedTypes || [],
       expectedFamilies: semantic.expectedFamilies || [],
       scoreWindowRead: semantic.scoreWindow || '',
@@ -230,10 +293,12 @@ function buildDescription(){
       },
       primaryObjectTrackTarget: primaryVector,
       primaryTrackRelativePoints: primaryTrack ? relativePoints(primaryTrack) : [],
+      candidateComparisonGate: buildCandidateGate(index, pathFamilyDecision.canonicalPathFamily, aggregate, primaryVector, hasAggregatePrimaryTension),
       comparisonAxes: [
         'phase-order',
         'semantic-path-family',
         'object-track-execution-family',
+        'canonical-comparison-path-family',
         'aggregate-object-track-fit',
         'primary-object-track-fit',
         'lower-field-overstay',
@@ -246,6 +311,7 @@ function buildDescription(){
   });
   const pathFamilyConflicts = groups.filter(group => group.semanticPathFamily && group.objectTrackExecutionFamily && group.semanticPathFamily !== group.objectTrackExecutionFamily);
   const aggregatePrimaryTensions = groups.filter(group => group.precisionNotes.some(note => note.includes('aggregate x-range')));
+  const unresolvedPathFamilies = groups.filter(group => !group.canonicalComparisonPathFamily);
   return {
     schemaVersion: 1,
     artifactType: 'reference-execution-description',
@@ -293,7 +359,7 @@ function buildDescription(){
       ],
       runtimeComparisonProtocol: {
         phaseOrder: 'Runtime group visible starts should follow the reference group order and stay within roughly 0.5s of each object-track window unless a candidate explicitly widens a score window.',
-        pathFamily: 'Report semantic path-family match separately from object-track execution-family match. Do not hide disagreement between human challenge intent and target-video object tracks.',
+        pathFamily: 'Use canonicalComparisonPathFamily for candidate gates. Preserve semanticPathFamily and objectTrackExecutionFamily as inspectable source context so legacy label drift remains visible.',
         objectTrackFit: 'Compare each runtime group against both aggregate group object-track targets and the selected primary object track.',
         lowerFieldOverstay: 'Flag positive lower-field deltas above 0.18, and separately flag under-field deltas below -0.25 when the target expects a lower pass.',
         spacing: 'Use npm run harness:check:challenge-motion-profile for spacing and bunching risk after any runtime candidate.',
@@ -306,8 +372,9 @@ function buildDescription(){
       referenceBackedGroupCount: groups.filter(group => group.primaryTargetTrackId && group.primaryTrackRelativePoints.length >= 3).length,
       averageTargetConfidence: round(average(groups.map(group => group.targetTrackConfidence)), 3),
       semanticVsExecutionPathFamilyConflictCount: pathFamilyConflicts.length,
+      unresolvedCanonicalPathFamilyCount: unresolvedPathFamilies.length,
       aggregateVsPrimaryTrackTensionCount: aggregatePrimaryTensions.length,
-      read: 'Stage 7 / Challenge 2 now has a structured reference execution description with source window evidence, five ordered groups, semantic path-family intent, object-track execution targets, primary track points, comparison axes, and guardrails.'
+      read: 'Stage 7 / Challenge 2 now has a structured reference execution description with source window evidence, five ordered groups, legacy semantic path-family intent, canonical comparison path families, object-track execution targets, primary track points, comparison axes, and guardrails.'
     },
     keeperRules: {
       measurementKeeper: 'Useful if the artifact is stable, inspectable, and exposes deviations that make the next runtime candidate simpler.',
@@ -331,6 +398,7 @@ function groupRuntimeRead(description, conformanceRow){
     const primaryTarget = group.primaryObjectTrackTarget || {};
     const semanticMatch = runtimePathFamily && group.semanticPathFamily ? runtimePathFamily === group.semanticPathFamily : null;
     const executionMatch = runtimePathFamily && group.objectTrackExecutionFamily ? runtimePathFamily === group.objectTrackExecutionFamily : null;
+    const canonicalMatch = runtimePathFamily && group.canonicalComparisonPathFamily ? runtimePathFamily === group.canonicalComparisonPathFamily : null;
     const lowerFieldDelta = Number.isFinite(+runtime.lowerFieldShare) && Number.isFinite(+aggregateTarget.lowerFieldShare)
       ? round((+runtime.lowerFieldShare) - (+aggregateTarget.lowerFieldShare), 3)
       : null;
@@ -344,28 +412,32 @@ function groupRuntimeRead(description, conformanceRow){
       ? round((+runtime.pathLength) / (+primaryTarget.pathLength), 2)
       : null;
     const issues = [];
+    const candidateFocus = [];
+    const gate = group.candidateComparisonGate || {};
+    if(canonicalMatch === false){
+      issues.push('runtime misses canonical comparison path family');
+    }
     if(group.semanticPathFamily !== group.objectTrackExecutionFamily){
-      issues.push('reference semantics and object-track execution family disagree');
+      candidateFocus.push('legacy semantic label differs from canonical object-track execution family');
     }
-    if(semanticMatch === false && executionMatch === false){
-      issues.push('runtime path family matches neither semantic nor object-track execution family');
-    }else if(semanticMatch === false && executionMatch === true){
-      issues.push('runtime matches object-track execution family but misses semantic path-family intent');
-    }else if(semanticMatch === true && executionMatch === false){
-      issues.push('runtime matches semantic path-family intent but misses object-track execution family');
+    if(semanticMatch === false && executionMatch === true){
+      candidateFocus.push('runtime follows canonical object-track family rather than legacy semantic label');
     }
-    if((+fit.score10 || 0) < 5) issues.push('aggregate object-track score below 5.0');
-    if(primaryFit && primaryFit.score10 < 5) issues.push('primary object-track score below 5.0');
-    if(lowerFieldDelta !== null && lowerFieldDelta > 0.18) issues.push('lower-field overstay against aggregate target');
-    if(lowerFieldDelta !== null && lowerFieldDelta < -0.25) issues.push('lower-field undershoot against aggregate target');
-    if(pathLengthRatio !== null && pathLengthRatio > 3) issues.push('aggregate path-length ratio above 3x target');
+    if((+fit.score10 || 0) < (gate.aggregateObjectTrackFitFloorScore10 || 5)) candidateFocus.push('raise aggregate object-track fit to first promotion floor');
+    if(primaryFit && primaryFit.score10 < (gate.primaryObjectTrackFitFloorScore10 || 5)) candidateFocus.push('raise primary object-track fit to first promotion floor');
+    if(lowerFieldDelta !== null && lowerFieldDelta > 0.18) candidateFocus.push('reduce lower-field overstay against aggregate target');
+    if(lowerFieldDelta !== null && lowerFieldDelta < -0.25) candidateFocus.push('avoid lower-field undershoot against aggregate target');
+    if(pathLengthRatio !== null && pathLengthRatio > (gate.maxAggregatePathLengthRatio || 3)) candidateFocus.push('reduce aggregate path-length ratio below first promotion floor');
+    if(primaryPathLengthRatio !== null && primaryPathLengthRatio > (gate.maxPrimaryPathLengthRatio || 3)) candidateFocus.push('reduce primary path-length ratio below first promotion floor');
     return {
       groupIndex: group.groupIndex,
       runtimePathFamily,
       semanticPathFamily: group.semanticPathFamily,
       objectTrackExecutionFamily: group.objectTrackExecutionFamily,
+      canonicalComparisonPathFamily: group.canonicalComparisonPathFamily,
       semanticPathFamilyMatch: semanticMatch,
       objectTrackExecutionFamilyMatch: executionMatch,
+      canonicalComparisonPathFamilyMatch: canonicalMatch,
       aggregateObjectTrackScore10: fit.score10 ?? null,
       aggregateObjectTrackCoverage: fit.coverage ?? null,
       primaryObjectTrackScore10: primaryFit?.score10 ?? null,
@@ -389,6 +461,8 @@ function groupRuntimeRead(description, conformanceRow){
         primaryLowerFieldDelta,
         aggregateYRangeDelta: Number.isFinite(+runtime.yRange) && Number.isFinite(+aggregateTarget.yRange) ? round((+runtime.yRange) - (+aggregateTarget.yRange), 3) : null
       },
+      candidateGate: gate,
+      candidateFocus,
       issues
     };
   });
@@ -399,18 +473,37 @@ function buildReport(description){
   const row = findConformanceStage7(conformance);
   const groupReads = groupRuntimeRead(description, row);
   const precisionBlockers = [];
-  if(description.summary.semanticVsExecutionPathFamilyConflictCount > 0){
-    precisionBlockers.push(`${description.summary.semanticVsExecutionPathFamilyConflictCount} group(s) disagree between semantic path-family intent and object-track execution family.`);
+  const unresolvedCanonical = description.groups.filter(group => !group.canonicalComparisonPathFamily);
+  if(unresolvedCanonical.length > 0){
+    precisionBlockers.push(`${unresolvedCanonical.length} group(s) do not have a canonical comparison path family.`);
   }
-  if(description.summary.aggregateVsPrimaryTrackTensionCount > 0){
-    precisionBlockers.push(`${description.summary.aggregateVsPrimaryTrackTensionCount} group(s) have aggregate-vs-primary object-track tension; use primary tracks for candidate tuning and aggregate tracks as guardrails.`);
+  const missingPrimaryTracks = description.groups.filter(group => !group.primaryTargetTrackId || !Array.isArray(group.primaryTrackRelativePoints) || group.primaryTrackRelativePoints.length < 3);
+  if(missingPrimaryTracks.length > 0){
+    precisionBlockers.push(`${missingPrimaryTracks.length} group(s) do not have enough primary-track points for direct candidate comparison.`);
   }
-  const runtimeBlockers = [];
-  if((+row.targetVideoObjectTrackFitScore10 || 0) < 5) runtimeBlockers.push(`Stage 7 target-video object-track fit is ${row.targetVideoObjectTrackFitScore10}/10, below the first candidate floor of 5.0/10.`);
+  const legacyResolutions = description.groups
+    .filter(group => group.semanticPathFamily && group.objectTrackExecutionFamily && group.semanticPathFamily !== group.objectTrackExecutionFamily)
+    .map(group => `Group ${group.groupIndex}: canonical ${group.canonicalComparisonPathFamily} from ${group.pathFamilyDecision?.canonicalSource}; legacy semantic label remains ${group.semanticPathFamily}.`);
+  const primaryGateResolutions = description.groups
+    .filter(group => group.candidateComparisonGate?.primaryTrackIsTuningGate)
+    .map(group => `Group ${group.groupIndex}: primary track ${group.primaryTargetTrackId} is the candidate tuning gate; aggregate track remains a guardrail.`);
+  const runtimePromotionBlockers = [];
+  if((+row.targetVideoObjectTrackFitScore10 || 0) < 5) runtimePromotionBlockers.push(`Stage 7 target-video object-track fit is ${row.targetVideoObjectTrackFitScore10}/10, below the first promotion floor of 5.0/10.`);
   for(const read of groupReads){
-    if(read.issues.length) runtimeBlockers.push(`Group ${read.groupIndex}: ${read.issues.join('; ')}.`);
+    if(read.issues.length) runtimePromotionBlockers.push(`Group ${read.groupIndex}: ${read.issues.join('; ')}.`);
+    if(read.candidateFocus.length) runtimePromotionBlockers.push(`Group ${read.groupIndex}: ${read.candidateFocus.join('; ')}.`);
   }
-  const runtimeCandidateReady = precisionBlockers.length === 0 && runtimeBlockers.length === 0;
+  const safety = row.safetyProbe || {};
+  const shotOpportunity = row.shotOpportunityProbe || {};
+  const candidateReadinessBlockers = [...precisionBlockers];
+  if(!safety.noEnemyShots || !safety.noAttackStarts || !safety.noShipLosses){
+    candidateReadinessBlockers.push('Current Stage 7 safety probe is not clean enough to begin a runtime candidate.');
+  }
+  if((+shotOpportunity.activeWindows || 0) < 1 || (+shotOpportunity.multiTargetWindowShare || 0) < 0.5){
+    candidateReadinessBlockers.push('Current Stage 7 scoreable-window probe is too weak for a focused runtime candidate.');
+  }
+  const runtimeCandidateReady = candidateReadinessBlockers.length === 0;
+  const runtimePromotionReady = runtimePromotionBlockers.length === 0 && runtimeCandidateReady;
   const recommendation = runtimeCandidateReady
     ? 'ready-for-one-measured-runtime-candidate'
     : 'reference-description-needs-precision-before-runtime-candidate';
@@ -449,6 +542,7 @@ function buildReport(description){
     guardrailCommands: [
       'npm run harness:check:challenge-stage-conformance',
       'npm run harness:check:challenge-motion-profile',
+      'npm run harness:check:challenge-outcomes',
       'npm run harness:check:sprite-render-mode-guard',
       'npm run harness:check:aurora-runtime-sprite-conformance'
     ],
@@ -456,22 +550,27 @@ function buildReport(description){
       measurementKeeperRecommendation: 'accept-measurement-keeper',
       runtimeCandidateRecommendation: recommendation,
       runtimeCandidateReady,
+      runtimePromotionReady,
       precisionBlockerCount: precisionBlockers.length,
-      runtimeBlockerCount: runtimeBlockers.length,
+      candidateReadinessBlockerCount: candidateReadinessBlockers.length,
+      runtimePromotionBlockerCount: runtimePromotionBlockers.length,
       precisionBlockers,
-      runtimeBlockers,
+      candidateReadinessBlockers,
+      runtimePromotionBlockers,
+      pathFamilyResolutions: legacyResolutions,
+      primaryTrackGateResolutions: primaryGateResolutions,
       read: runtimeCandidateReady
-        ? 'The Stage 7 execution description is precise enough for one measured runtime candidate.'
+        ? 'The Stage 7 execution description is precise enough for one measured runtime candidate; the current runtime is still not promotable without a player-visible improvement.'
         : 'The Stage 7 execution description is useful and repeatable, but it exposes target precision issues that should be resolved before the next runtime candidate.'
     },
     nextBestStep: runtimeCandidateReady
-      ? 'Run one timing-aware Stage 7 candidate against this description, then produce before/after evidence and guardrail results.'
-      : 'Reconcile semantic-vs-object-track path-family labels and tune against primary tracks for groups 1, 4, and 5 before attempting another runtime keeper.'
+      ? 'Run one timing-aware Stage 7 candidate against this description, focused on groups 1, 4, and 5 path length/lower-field/late-loop shape, then produce before/after evidence and guardrail results.'
+      : 'Resolve the remaining reference precision blockers before attempting another runtime keeper.'
   };
 }
 
 function buildMarkdown(report, description){
-  const rows = report.groupReads.map(read => `| ${read.groupIndex} | ${read.semanticPathFamily || 'n/a'} | ${read.objectTrackExecutionFamily || 'n/a'} | ${read.runtimePathFamily || 'n/a'} | ${read.aggregateObjectTrackScore10 ?? 'n/a'} | ${read.primaryObjectTrackScore10 ?? 'n/a'} | ${read.deviations.aggregatePathLengthRatio ?? 'n/a'} | ${read.deviations.aggregateLowerFieldDelta ?? 'n/a'} | ${read.issues.join('<br>') || 'none'} |`).join('\n');
+  const rows = report.groupReads.map(read => `| ${read.groupIndex} | ${read.semanticPathFamily || 'n/a'} | ${read.canonicalComparisonPathFamily || 'n/a'} | ${read.runtimePathFamily || 'n/a'} | ${read.aggregateObjectTrackScore10 ?? 'n/a'} | ${read.primaryObjectTrackScore10 ?? 'n/a'} | ${read.deviations.aggregatePathLengthRatio ?? 'n/a'} | ${read.deviations.aggregateLowerFieldDelta ?? 'n/a'} | ${read.candidateFocus.join('<br>') || read.issues.join('<br>') || 'none'} |`).join('\n');
   return `# Stage 7 Reference Execution Description Analysis
 
 Generated: ${report.generatedAt}
@@ -484,13 +583,23 @@ Measurement keeper: ${report.summary.measurementKeeperRecommendation}
 
 Runtime candidate recommendation: ${report.summary.runtimeCandidateRecommendation}
 
+Runtime promotion ready: ${report.summary.runtimePromotionReady}
+
 ${report.summary.read}
 
 ## Runtime Deviation Rows
 
-| Group | Semantic family | Object-track family | Runtime family | Aggregate score | Primary score | Path ratio | Lower-field delta | Issues |
+| Group | Legacy semantic family | Canonical family | Runtime family | Aggregate score | Primary score | Path ratio | Lower-field delta | Candidate focus |
 | ---: | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
 ${rows}
+
+## Path-Family Resolutions
+
+${report.summary.pathFamilyResolutions.map(item => `- ${item}`).join('\n') || '- none'}
+
+## Primary-Track Gates
+
+${report.summary.primaryTrackGateResolutions.map(item => `- ${item}`).join('\n') || '- none'}
 
 ## Evidence
 
@@ -518,7 +627,9 @@ function main(){
     runtimeCandidateRecommendation: report.summary.runtimeCandidateRecommendation,
     runtimeCandidateReady: report.summary.runtimeCandidateReady,
     precisionBlockerCount: report.summary.precisionBlockerCount,
-    runtimeBlockerCount: report.summary.runtimeBlockerCount
+    candidateReadinessBlockerCount: report.summary.candidateReadinessBlockerCount,
+    runtimePromotionReady: report.summary.runtimePromotionReady,
+    runtimePromotionBlockerCount: report.summary.runtimePromotionBlockerCount
   }, null, 2));
 }
 

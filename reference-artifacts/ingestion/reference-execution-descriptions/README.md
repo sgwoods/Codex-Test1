@@ -11,6 +11,8 @@ The goal is to reduce fuzzy tuning by naming:
 - semantic intent, such as `boss-led-loop`
 - object-track execution evidence, such as primary target tracks and aggregate
   group vectors
+- a canonical comparison path family that resolves older semantic labels
+  against newer measured object-track and motion-spec evidence
 - comparison axes that a runtime capture should report
 - guardrails that block runtime promotion
 
@@ -41,14 +43,19 @@ Required group fields:
 | `role` | Human-readable gameplay role. |
 | `semanticPathFamily` | Intended path family from game-owned challenge semantics. |
 | `objectTrackExecutionFamily` | Path family implied by target-video object-track execution evidence. |
+| `canonicalComparisonPathFamily` | Path family used by candidate/promotion gates. |
+| `pathFamilyDecision` | Source, agreement, and reason for the canonical path-family choice. |
 | `primaryTargetTrackId` | The selected target track used for direct runtime comparison. |
 | `aggregateObjectTrackTarget` | Group-level object-track summary. |
 | `primaryObjectTrackTarget` | Per-object primary track summary. |
 | `primaryTrackRelativePoints` | Inspectable normalized point sequence for the primary track. |
+| `candidateComparisonGate` | First promotion floors and guardrails for a runtime candidate. |
 | `comparisonAxes` | Runtime axes that must be reported before promotion. |
 | `precisionNotes` | Known ambiguity or conflict to keep visible. |
 
 Runtime candidates may use the artifact only after an analyzer reports the
 deviations and explicitly states whether the artifact is precise enough for a
-candidate. A measurement keeper is useful, but it is not beta justification by
-itself.
+candidate. Candidate readiness and runtime promotion readiness are separate:
+the current runtime can have clear deviations while the artifact is still
+precise enough to guide one candidate. A measurement keeper is useful, but it
+is not beta justification by itself.
