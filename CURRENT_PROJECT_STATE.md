@@ -135,12 +135,19 @@ Latest Stage 7 calibration:
   `semanticExecution`, `fieldOccupancyExpectation`,
   `uncertaintyAndProvenance`, and authority-layer fields for Stage 3's
   top-right bee-line, late top-left butterfly-line, upper-band score windows,
-  peel-off exits, and no-combat grammar. Current language adequacy is `0.704`;
-  the report recommends a Stage 3 non-overwriting candidate-trial gate next,
-  not a runtime source candidate. It also keeps the caveats visible: only
-  `2/5` groups have direct accepted semantic labels, `4/5` groups have
-  human-vs-CPU field-occupancy tension, and path-family authority debt remains
-  for groups 3 and 5.
+  peel-off exits, and no-combat grammar. Current language adequacy is `0.704`.
+- Stage 3 / Challenge 1 now also has a non-overwriting RED candidate-trial
+  gate:
+  `reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest.json`.
+  Use
+  `npm run harness:analyze:stage3-reference-execution-trial` and
+  `npm run harness:check:stage3-reference-execution-trial`. The baseline-control
+  trial is accepted as a process keeper, not a runtime keeper: semantic score
+  is `0.918`, object-track remains `3.2/10`, all `5/5` groups are strict weak
+  rows, `4/5` groups have human-vs-CPU field-occupancy tension, and groups 3
+  and 5 carry target-vs-runtime authority conflicts. The next Stage 3 work is
+  a small non-overwriting semantic candidate batch against this gate, not a
+  runtime source candidate.
 
 ## Historical Or Stale Current-State Docs
 

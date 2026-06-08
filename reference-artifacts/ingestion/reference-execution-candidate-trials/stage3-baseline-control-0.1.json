@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage3-reference-execution-candidate-trial-input",
+  "candidateId": "stage3-baseline-control-0.1",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 3,
+    "challengeNumber": 1,
+    "displayLabel": "Stage 3 / Challenge 1"
+  },
+  "intent": {
+    "kind": "baseline-control",
+    "read": "Evaluate current Stage 3 runtime behavior against the Stage 3 RED without applying runtime source edits or semantic trial overrides.",
+    "playerFacingMeaning": "Confirm that the non-overwriting gate can preserve the opening challenge's semantic teaching phrase before generating variants."
+  },
+  "authorityLayerInputs": {
+    "targetConformanceAuthority": "reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage3-challenge1-0.1.json",
+    "livePromotionAuthority": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+    "authoritySeparation": "RED target-conformance is descriptive authority for candidate trials only; live runtime promotion remains blocked without browser/runtime keeper evidence.",
+    "knownPrivateArtifactCaveat": "Some contact-sheet provenance paths point to the private companion artifact store and are non-blocking for this baseline trial unless newly worsened."
+  },
+  "semanticExpectationOverrides": [],
+  "groups": [],
+  "guardrails": {
+    "spacingReadability": {
+      "source": "reference-artifacts/analyses/challenge-motion-profile/latest.json",
+      "preserveBaseline": true,
+      "pass": true,
+      "spacingScore": 0.676,
+      "bunchingRisk": 0.321,
+      "worstMinDistance": 1.96,
+      "averageMinDistance": 10.15,
+      "read": "Baseline Stage 3 spacing is preserved for this no-change candidate; the read remains strict enough to expose future regressions."
+    },
+    "scoreableRoutes": {
+      "source": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+      "preserveBaseline": true,
+      "pass": true,
+      "score10": 5.6,
+      "activeWindows": 61,
+      "multiTargetWindowShare": 0.82,
+      "laneDiversity": 1,
+      "centerBias": 0.112,
+      "read": "Baseline Stage 3 still has many scoreable windows; candidate variants must preserve the routeability and upper-band learning read."
+    },
+    "safety": {
+      "source": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+      "preserveBaseline": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "noChallengeContacts": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0,
+        "challengeContacts": 0
+      }
+    }
+  },
+  "semanticMetrics": {
+    "preserveLineRoles": true,
+    "preserveUpperBandScoreability": true,
+    "preservePeelOffReadability": true,
+    "preserveRouteLearnability": true,
+    "preserveNoCombatGrammar": true
+  },
+  "gates": {
+    "requireNoRuntimeSourceEdits": true,
+    "requireAuthorityLayerSeparation": true,
+    "requireNoCombatGrammar": true,
+    "requireScoreableRoutesPreserved": true,
+    "requireSpacingReadabilityPreserved": true,
+    "minSemanticScore": 0.7,
+    "minRouteLearnabilityScore": 0.7,
+    "objectTrackFitFloorScore10": 5,
+    "allowRuntimeSourceCandidate": false
+  }
+}

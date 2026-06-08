@@ -86,7 +86,8 @@ Full target-artifact report: `GALAGA_TARGET_ARTIFACT_COVERAGE.md` and `reference
 
 **Next actions:**
 - The first Stage 3 / Challenge 1 RED artifact is now available at `reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage3-challenge1-0.1.json`, with analysis at `reference-artifacts/analyses/reference-execution-description/stage3-challenge1/latest.json`. It explicitly captures the top-right bee line, late top-left butterfly line, upper-band score windows, peel-off exits, no-combat grammar, path-family order, scoreable-window expectations, safety, and uncertainty/provenance.
-- Build a non-overwriting Stage 3 candidate-trial gate next. It should evaluate semantic line roles, upper-band scoreability, path-family order, object-track fit, field-occupancy tension, spacing/readability, scoreable routes, and no-shot/no-attack/no-loss safety before any source edit. Do not treat the RED as runtime promotion authority by itself.
+- The non-overwriting Stage 3 candidate-trial gate is now available at `reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest.json`, with input format documented in `reference-artifacts/ingestion/reference-execution-candidate-trials/README.md`. The baseline-control trial is a process keeper, not a runtime keeper: it reports semantic score `0.918`, object-track `3.2/10`, `5/5` strict weak rows, `4/5` human-vs-CPU field-occupancy conflicts, and target-vs-runtime authority conflicts for groups 3 and 5.
+- Build a small non-overwriting Stage 3 semantic candidate batch next. It should preserve semantic line roles, upper-band scoreability, path-family order, field-occupancy provenance, spacing/readability, scoreable routes, and no-shot/no-attack/no-loss safety before any source edit. Do not treat the RED or trial gate as runtime promotion authority by itself.
 
 
 ## Stage 7 / Challenge 2

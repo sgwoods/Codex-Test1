@@ -1,0 +1,3682 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage3-reference-execution-candidate-trial",
+  "generatedAt": "2026-06-08T18:22:22.075Z",
+  "generatedBy": "tools/harness/analyze-stage3-reference-execution-trial.js",
+  "commit": "5900c21c5",
+  "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 3,
+    "challengeNumber": 1,
+    "displayLabel": "Stage 3 / Challenge 1"
+  },
+  "sourceArtifacts": {
+    "candidate": "reference-artifacts/ingestion/reference-execution-candidate-trials/stage3-baseline-control-0.1.json",
+    "referenceExecutionDescription": "reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage3-challenge1-0.1.json",
+    "referenceExecutionAnalysis": "reference-artifacts/analyses/reference-execution-description/stage3-challenge1/latest.json",
+    "challengeStageConformance": "reference-artifacts/analyses/challenge-stage-conformance/latest.json"
+  },
+  "candidate": {
+    "candidateId": "stage3-baseline-control-0.1",
+    "artifactType": "stage3-reference-execution-candidate-trial-input",
+    "intent": {
+      "kind": "baseline-control",
+      "read": "Evaluate current Stage 3 runtime behavior against the Stage 3 RED without applying runtime source edits or semantic trial overrides.",
+      "playerFacingMeaning": "Confirm that the non-overwriting gate can preserve the opening challenge's semantic teaching phrase before generating variants."
+    },
+    "externalInputAccepted": true,
+    "nonOverwriting": true,
+    "touchedGroups": [],
+    "inputFormat": {
+      "artifactType": "stage3-reference-execution-candidate-trial-input",
+      "requiredTopLevelFields": [
+        "candidateId",
+        "scope",
+        "intent",
+        "authorityLayerInputs",
+        "guardrails",
+        "groups"
+      ],
+      "optionalGroupControls": [
+        "semanticExecution.lineRole",
+        "semanticExecution.entryCue",
+        "semanticExecution.exitGesture",
+        "semanticExecution.scoreableBand",
+        "pathFamily",
+        "predictedRuntimeVector",
+        "timing.phaseOffsetS",
+        "fieldOccupancy.lowerFieldShare",
+        "fieldOccupancy.lowerFieldDelta"
+      ],
+      "invariantFields": [
+        "semanticMetrics.preserveLineRoles",
+        "semanticMetrics.preserveUpperBandScoreability",
+        "semanticMetrics.preservePeelOffReadability",
+        "semanticMetrics.preserveRouteLearnability",
+        "semanticMetrics.preserveNoCombatGrammar"
+      ],
+      "note": "Candidate inputs are predictions for the trial gate only; they do not overwrite runtime source or canonical RED artifacts."
+    }
+  },
+  "baseline": {
+    "totalObjectTrackScore10": 3.2,
+    "totalObjectTrackCoverage": 0.297,
+    "groupScores": [
+      {
+        "groupIndex": 1,
+        "aggregateObjectTrackScore10": 2.4,
+        "aggregateObjectTrackCoverage": 0.186
+      },
+      {
+        "groupIndex": 2,
+        "aggregateObjectTrackScore10": 4,
+        "aggregateObjectTrackCoverage": 0.401
+      },
+      {
+        "groupIndex": 3,
+        "aggregateObjectTrackScore10": 2,
+        "aggregateObjectTrackCoverage": 0.135
+      },
+      {
+        "groupIndex": 4,
+        "aggregateObjectTrackScore10": 4,
+        "aggregateObjectTrackCoverage": 0.401
+      },
+      {
+        "groupIndex": 5,
+        "aggregateObjectTrackScore10": 3.7,
+        "aggregateObjectTrackCoverage": 0.363
+      }
+    ],
+    "scoreableRoutes": {
+      "score10": 5.6,
+      "coverage": 0.857,
+      "activeWindows": 61,
+      "multiTargetWindowShare": 0.82,
+      "laneDiversity": 1,
+      "maxCluster": 1,
+      "lowerFieldRead": 0.364,
+      "centerBias": 0.112,
+      "laneSpreadCredit": 1,
+      "laneRows": [
+        {
+          "x": 32,
+          "hits": 32,
+          "windows": 20,
+          "maxTargets": 4,
+          "lowerTargets": 8,
+          "laneShare": 0.048
+        },
+        {
+          "x": 68,
+          "hits": 127,
+          "windows": 56,
+          "maxTargets": 6,
+          "lowerTargets": 46,
+          "laneShare": 0.192
+        },
+        {
+          "x": 104,
+          "hits": 142,
+          "windows": 42,
+          "maxTargets": 9,
+          "lowerTargets": 57,
+          "laneShare": 0.215
+        },
+        {
+          "x": 140,
+          "hits": 74,
+          "windows": 27,
+          "maxTargets": 6,
+          "lowerTargets": 21,
+          "laneShare": 0.112
+        },
+        {
+          "x": 176,
+          "hits": 131,
+          "windows": 40,
+          "maxTargets": 7,
+          "lowerTargets": 56,
+          "laneShare": 0.198
+        },
+        {
+          "x": 212,
+          "hits": 124,
+          "windows": 56,
+          "maxTargets": 6,
+          "lowerTargets": 44,
+          "laneShare": 0.187
+        },
+        {
+          "x": 248,
+          "hits": 32,
+          "windows": 23,
+          "maxTargets": 3,
+          "lowerTargets": 9,
+          "laneShare": 0.048
+        }
+      ],
+      "windowReads": [
+        {
+          "t": 1,
+          "activeCount": 2,
+          "bestLaneX": 32,
+          "bestLaneTargets": 0,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 0
+            },
+            {
+              "x": 104,
+              "targets": 0
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 0
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 1.25,
+          "activeCount": 4,
+          "bestLaneX": 32,
+          "bestLaneTargets": 0,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 0
+            },
+            {
+              "x": 104,
+              "targets": 0
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 0
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 1.5,
+          "activeCount": 4,
+          "bestLaneX": 32,
+          "bestLaneTargets": 1,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 1
+            },
+            {
+              "x": 68,
+              "targets": 0
+            },
+            {
+              "x": 104,
+              "targets": 0
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 0
+            },
+            {
+              "x": 248,
+              "targets": 1
+            }
+          ]
+        },
+        {
+          "t": 1.75,
+          "activeCount": 4,
+          "bestLaneX": 32,
+          "bestLaneTargets": 2,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 2
+            },
+            {
+              "x": 68,
+              "targets": 0
+            },
+            {
+              "x": 104,
+              "targets": 0
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 0
+            },
+            {
+              "x": 248,
+              "targets": 2
+            }
+          ]
+        },
+        {
+          "t": 2,
+          "activeCount": 4,
+          "bestLaneX": 32,
+          "bestLaneTargets": 1,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 1
+            },
+            {
+              "x": 68,
+              "targets": 0
+            },
+            {
+              "x": 104,
+              "targets": 0
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 0
+            },
+            {
+              "x": 248,
+              "targets": 1
+            }
+          ]
+        },
+        {
+          "t": 2.25,
+          "activeCount": 4,
+          "bestLaneX": 32,
+          "bestLaneTargets": 1,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 1
+            },
+            {
+              "x": 68,
+              "targets": 1
+            },
+            {
+              "x": 104,
+              "targets": 0
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 1
+            },
+            {
+              "x": 248,
+              "targets": 1
+            }
+          ]
+        },
+        {
+          "t": 2.5,
+          "activeCount": 4,
+          "bestLaneX": 32,
+          "bestLaneTargets": 1,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 1
+            },
+            {
+              "x": 68,
+              "targets": 1
+            },
+            {
+              "x": 104,
+              "targets": 0
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 1
+            },
+            {
+              "x": 248,
+              "targets": 1
+            }
+          ]
+        },
+        {
+          "t": 2.75,
+          "activeCount": 4,
+          "bestLaneX": 32,
+          "bestLaneTargets": 1,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 1
+            },
+            {
+              "x": 68,
+              "targets": 1
+            },
+            {
+              "x": 104,
+              "targets": 0
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 1
+            },
+            {
+              "x": 248,
+              "targets": 1
+            }
+          ]
+        },
+        {
+          "t": 3,
+          "activeCount": 4,
+          "bestLaneX": 68,
+          "bestLaneTargets": 1,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 1
+            },
+            {
+              "x": 104,
+              "targets": 0
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 1
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 3.25,
+          "activeCount": 4,
+          "bestLaneX": 68,
+          "bestLaneTargets": 1,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 1
+            },
+            {
+              "x": 104,
+              "targets": 0
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 1
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 3.5,
+          "activeCount": 4,
+          "bestLaneX": 68,
+          "bestLaneTargets": 1,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 1
+            },
+            {
+              "x": 104,
+              "targets": 0
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 1
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 3.75,
+          "activeCount": 4,
+          "bestLaneX": 68,
+          "bestLaneTargets": 1,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 1
+            },
+            {
+              "x": 104,
+              "targets": 0
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 1
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 4,
+          "activeCount": 4,
+          "bestLaneX": 68,
+          "bestLaneTargets": 2,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 0
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 2
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 4.25,
+          "activeCount": 4,
+          "bestLaneX": 68,
+          "bestLaneTargets": 2,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 0
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 2
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 4.5,
+          "activeCount": 4,
+          "bestLaneX": 68,
+          "bestLaneTargets": 2,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 0
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 2
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 4.75,
+          "activeCount": 4,
+          "bestLaneX": 68,
+          "bestLaneTargets": 2,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 0
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 2
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 5,
+          "activeCount": 4,
+          "bestLaneX": 68,
+          "bestLaneTargets": 2,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 0
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 2
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 5.25,
+          "activeCount": 8,
+          "bestLaneX": 68,
+          "bestLaneTargets": 2,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 2
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 2
+            },
+            {
+              "x": 212,
+              "targets": 2
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 5.5,
+          "activeCount": 12,
+          "bestLaneX": 68,
+          "bestLaneTargets": 3,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 3
+            },
+            {
+              "x": 104,
+              "targets": 1
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 2
+            },
+            {
+              "x": 212,
+              "targets": 2
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 5.75,
+          "activeCount": 14,
+          "bestLaneX": 104,
+          "bestLaneTargets": 3,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 3
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 3
+            },
+            {
+              "x": 212,
+              "targets": 3
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 6,
+          "activeCount": 16,
+          "bestLaneX": 104,
+          "bestLaneTargets": 4,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 4
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 4
+            },
+            {
+              "x": 212,
+              "targets": 3
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 6.25,
+          "activeCount": 16,
+          "bestLaneX": 104,
+          "bestLaneTargets": 4,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 3
+            },
+            {
+              "x": 104,
+              "targets": 4
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 4
+            },
+            {
+              "x": 212,
+              "targets": 3
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 6.5,
+          "activeCount": 16,
+          "bestLaneX": 68,
+          "bestLaneTargets": 3,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 3
+            },
+            {
+              "x": 104,
+              "targets": 3
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 3
+            },
+            {
+              "x": 212,
+              "targets": 3
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 6.75,
+          "activeCount": 16,
+          "bestLaneX": 104,
+          "bestLaneTargets": 4,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 3
+            },
+            {
+              "x": 104,
+              "targets": 4
+            },
+            {
+              "x": 140,
+              "targets": 2
+            },
+            {
+              "x": 176,
+              "targets": 4
+            },
+            {
+              "x": 212,
+              "targets": 2
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 7,
+          "activeCount": 16,
+          "bestLaneX": 104,
+          "bestLaneTargets": 3,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 3
+            },
+            {
+              "x": 140,
+              "targets": 2
+            },
+            {
+              "x": 176,
+              "targets": 3
+            },
+            {
+              "x": 212,
+              "targets": 1
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 7.25,
+          "activeCount": 16,
+          "bestLaneX": 104,
+          "bestLaneTargets": 4,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 4
+            },
+            {
+              "x": 140,
+              "targets": 4
+            },
+            {
+              "x": 176,
+              "targets": 4
+            },
+            {
+              "x": 212,
+              "targets": 1
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 7.5,
+          "activeCount": 16,
+          "bestLaneX": 140,
+          "bestLaneTargets": 4,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 3
+            },
+            {
+              "x": 140,
+              "targets": 4
+            },
+            {
+              "x": 176,
+              "targets": 4
+            },
+            {
+              "x": 212,
+              "targets": 1
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 7.75,
+          "activeCount": 18,
+          "bestLaneX": 140,
+          "bestLaneTargets": 6,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 4
+            },
+            {
+              "x": 140,
+              "targets": 6
+            },
+            {
+              "x": 176,
+              "targets": 3
+            },
+            {
+              "x": 212,
+              "targets": 1
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 8,
+          "activeCount": 22,
+          "bestLaneX": 104,
+          "bestLaneTargets": 5,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 1
+            },
+            {
+              "x": 104,
+              "targets": 5
+            },
+            {
+              "x": 140,
+              "targets": 4
+            },
+            {
+              "x": 176,
+              "targets": 4
+            },
+            {
+              "x": 212,
+              "targets": 2
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 8.25,
+          "activeCount": 24,
+          "bestLaneX": 140,
+          "bestLaneTargets": 6,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 4
+            },
+            {
+              "x": 140,
+              "targets": 6
+            },
+            {
+              "x": 176,
+              "targets": 5
+            },
+            {
+              "x": 212,
+              "targets": 3
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 8.5,
+          "activeCount": 24,
+          "bestLaneX": 104,
+          "bestLaneTargets": 7,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 3
+            },
+            {
+              "x": 104,
+              "targets": 7
+            },
+            {
+              "x": 140,
+              "targets": 4
+            },
+            {
+              "x": 176,
+              "targets": 6
+            },
+            {
+              "x": 212,
+              "targets": 4
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 8.75,
+          "activeCount": 24,
+          "bestLaneX": 104,
+          "bestLaneTargets": 8,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 8
+            },
+            {
+              "x": 140,
+              "targets": 2
+            },
+            {
+              "x": 176,
+              "targets": 7
+            },
+            {
+              "x": 212,
+              "targets": 3
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 9,
+          "activeCount": 24,
+          "bestLaneX": 104,
+          "bestLaneTargets": 8,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 8
+            },
+            {
+              "x": 140,
+              "targets": 2
+            },
+            {
+              "x": 176,
+              "targets": 7
+            },
+            {
+              "x": 212,
+              "targets": 3
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 9.25,
+          "activeCount": 24,
+          "bestLaneX": 104,
+          "bestLaneTargets": 9,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 3
+            },
+            {
+              "x": 104,
+              "targets": 9
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 7
+            },
+            {
+              "x": 212,
+              "targets": 4
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 9.5,
+          "activeCount": 22,
+          "bestLaneX": 104,
+          "bestLaneTargets": 7,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 3
+            },
+            {
+              "x": 104,
+              "targets": 7
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 6
+            },
+            {
+              "x": 212,
+              "targets": 4
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 9.75,
+          "activeCount": 21,
+          "bestLaneX": 212,
+          "bestLaneTargets": 5,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 4
+            },
+            {
+              "x": 104,
+              "targets": 4
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 3
+            },
+            {
+              "x": 212,
+              "targets": 5
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 10,
+          "activeCount": 21,
+          "bestLaneX": 212,
+          "bestLaneTargets": 6,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 1
+            },
+            {
+              "x": 68,
+              "targets": 5
+            },
+            {
+              "x": 104,
+              "targets": 2
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 2
+            },
+            {
+              "x": 212,
+              "targets": 6
+            },
+            {
+              "x": 248,
+              "targets": 1
+            }
+          ]
+        },
+        {
+          "t": 10.25,
+          "activeCount": 22,
+          "bestLaneX": 68,
+          "bestLaneTargets": 6,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 3
+            },
+            {
+              "x": 68,
+              "targets": 6
+            },
+            {
+              "x": 104,
+              "targets": 2
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 2
+            },
+            {
+              "x": 212,
+              "targets": 5
+            },
+            {
+              "x": 248,
+              "targets": 1
+            }
+          ]
+        },
+        {
+          "t": 10.5,
+          "activeCount": 20,
+          "bestLaneX": 32,
+          "bestLaneTargets": 4,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 4
+            },
+            {
+              "x": 68,
+              "targets": 4
+            },
+            {
+              "x": 104,
+              "targets": 2
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 2
+            },
+            {
+              "x": 212,
+              "targets": 4
+            },
+            {
+              "x": 248,
+              "targets": 3
+            }
+          ]
+        },
+        {
+          "t": 10.75,
+          "activeCount": 16,
+          "bestLaneX": 68,
+          "bestLaneTargets": 3,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 2
+            },
+            {
+              "x": 68,
+              "targets": 3
+            },
+            {
+              "x": 104,
+              "targets": 3
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 2
+            },
+            {
+              "x": 212,
+              "targets": 3
+            },
+            {
+              "x": 248,
+              "targets": 2
+            }
+          ]
+        },
+        {
+          "t": 11,
+          "activeCount": 14,
+          "bestLaneX": 104,
+          "bestLaneTargets": 3,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 3
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 2
+            },
+            {
+              "x": 212,
+              "targets": 3
+            },
+            {
+              "x": 248,
+              "targets": 1
+            }
+          ]
+        },
+        {
+          "t": 11.25,
+          "activeCount": 14,
+          "bestLaneX": 104,
+          "bestLaneTargets": 3,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 3
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 2
+            },
+            {
+              "x": 212,
+              "targets": 2
+            },
+            {
+              "x": 248,
+              "targets": 1
+            }
+          ]
+        },
+        {
+          "t": 11.5,
+          "activeCount": 14,
+          "bestLaneX": 68,
+          "bestLaneTargets": 3,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 1
+            },
+            {
+              "x": 68,
+              "targets": 3
+            },
+            {
+              "x": 104,
+              "targets": 3
+            },
+            {
+              "x": 140,
+              "targets": 1
+            },
+            {
+              "x": 176,
+              "targets": 3
+            },
+            {
+              "x": 212,
+              "targets": 2
+            },
+            {
+              "x": 248,
+              "targets": 1
+            }
+          ]
+        },
+        {
+          "t": 11.75,
+          "activeCount": 14,
+          "bestLaneX": 68,
+          "bestLaneTargets": 4,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 4
+            },
+            {
+              "x": 104,
+              "targets": 2
+            },
+            {
+              "x": 140,
+              "targets": 1
+            },
+            {
+              "x": 176,
+              "targets": 4
+            },
+            {
+              "x": 212,
+              "targets": 1
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 12,
+          "activeCount": 14,
+          "bestLaneX": 176,
+          "bestLaneTargets": 4,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 3
+            },
+            {
+              "x": 104,
+              "targets": 2
+            },
+            {
+              "x": 140,
+              "targets": 1
+            },
+            {
+              "x": 176,
+              "targets": 4
+            },
+            {
+              "x": 212,
+              "targets": 2
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 12.25,
+          "activeCount": 14,
+          "bestLaneX": 104,
+          "bestLaneTargets": 3,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 3
+            },
+            {
+              "x": 140,
+              "targets": 1
+            },
+            {
+              "x": 176,
+              "targets": 3
+            },
+            {
+              "x": 212,
+              "targets": 2
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 12.5,
+          "activeCount": 16,
+          "bestLaneX": 104,
+          "bestLaneTargets": 4,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 4
+            },
+            {
+              "x": 140,
+              "targets": 2
+            },
+            {
+              "x": 176,
+              "targets": 3
+            },
+            {
+              "x": 212,
+              "targets": 2
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 12.75,
+          "activeCount": 18,
+          "bestLaneX": 68,
+          "bestLaneTargets": 4,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 1
+            },
+            {
+              "x": 68,
+              "targets": 4
+            },
+            {
+              "x": 104,
+              "targets": 1
+            },
+            {
+              "x": 140,
+              "targets": 2
+            },
+            {
+              "x": 176,
+              "targets": 2
+            },
+            {
+              "x": 212,
+              "targets": 4
+            },
+            {
+              "x": 248,
+              "targets": 1
+            }
+          ]
+        },
+        {
+          "t": 13,
+          "activeCount": 20,
+          "bestLaneX": 68,
+          "bestLaneTargets": 3,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 2
+            },
+            {
+              "x": 68,
+              "targets": 3
+            },
+            {
+              "x": 104,
+              "targets": 1
+            },
+            {
+              "x": 140,
+              "targets": 3
+            },
+            {
+              "x": 176,
+              "targets": 2
+            },
+            {
+              "x": 212,
+              "targets": 3
+            },
+            {
+              "x": 248,
+              "targets": 2
+            }
+          ]
+        },
+        {
+          "t": 13.25,
+          "activeCount": 18,
+          "bestLaneX": 32,
+          "bestLaneTargets": 3,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 3
+            },
+            {
+              "x": 68,
+              "targets": 1
+            },
+            {
+              "x": 104,
+              "targets": 1
+            },
+            {
+              "x": 140,
+              "targets": 3
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 1
+            },
+            {
+              "x": 248,
+              "targets": 3
+            }
+          ]
+        },
+        {
+          "t": 13.5,
+          "activeCount": 16,
+          "bestLaneX": 32,
+          "bestLaneTargets": 2,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 2
+            },
+            {
+              "x": 68,
+              "targets": 1
+            },
+            {
+              "x": 104,
+              "targets": 1
+            },
+            {
+              "x": 140,
+              "targets": 2
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 1
+            },
+            {
+              "x": 248,
+              "targets": 2
+            }
+          ]
+        },
+        {
+          "t": 13.75,
+          "activeCount": 14,
+          "bestLaneX": 140,
+          "bestLaneTargets": 4,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 2
+            },
+            {
+              "x": 68,
+              "targets": 1
+            },
+            {
+              "x": 104,
+              "targets": 0
+            },
+            {
+              "x": 140,
+              "targets": 4
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 1
+            },
+            {
+              "x": 248,
+              "targets": 2
+            }
+          ]
+        },
+        {
+          "t": 14,
+          "activeCount": 14,
+          "bestLaneX": 140,
+          "bestLaneTargets": 5,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 1
+            },
+            {
+              "x": 68,
+              "targets": 1
+            },
+            {
+              "x": 104,
+              "targets": 0
+            },
+            {
+              "x": 140,
+              "targets": 5
+            },
+            {
+              "x": 176,
+              "targets": 0
+            },
+            {
+              "x": 212,
+              "targets": 1
+            },
+            {
+              "x": 248,
+              "targets": 1
+            }
+          ]
+        },
+        {
+          "t": 14.25,
+          "activeCount": 14,
+          "bestLaneX": 140,
+          "bestLaneTargets": 4,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 1
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 1
+            },
+            {
+              "x": 140,
+              "targets": 4
+            },
+            {
+              "x": 176,
+              "targets": 1
+            },
+            {
+              "x": 212,
+              "targets": 2
+            },
+            {
+              "x": 248,
+              "targets": 1
+            }
+          ]
+        },
+        {
+          "t": 14.5,
+          "activeCount": 14,
+          "bestLaneX": 104,
+          "bestLaneTargets": 3,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 1
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 3
+            },
+            {
+              "x": 140,
+              "targets": 2
+            },
+            {
+              "x": 176,
+              "targets": 2
+            },
+            {
+              "x": 212,
+              "targets": 2
+            },
+            {
+              "x": 248,
+              "targets": 1
+            }
+          ]
+        },
+        {
+          "t": 14.75,
+          "activeCount": 14,
+          "bestLaneX": 104,
+          "bestLaneTargets": 5,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 1
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 5
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 3
+            },
+            {
+              "x": 212,
+              "targets": 2
+            },
+            {
+              "x": 248,
+              "targets": 1
+            }
+          ]
+        },
+        {
+          "t": 15,
+          "activeCount": 14,
+          "bestLaneX": 104,
+          "bestLaneTargets": 4,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 3
+            },
+            {
+              "x": 104,
+              "targets": 4
+            },
+            {
+              "x": 140,
+              "targets": 0
+            },
+            {
+              "x": 176,
+              "targets": 2
+            },
+            {
+              "x": 212,
+              "targets": 2
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 15.25,
+          "activeCount": 14,
+          "bestLaneX": 68,
+          "bestLaneTargets": 3,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 3
+            },
+            {
+              "x": 104,
+              "targets": 1
+            },
+            {
+              "x": 140,
+              "targets": 2
+            },
+            {
+              "x": 176,
+              "targets": 1
+            },
+            {
+              "x": 212,
+              "targets": 2
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 15.5,
+          "activeCount": 14,
+          "bestLaneX": 68,
+          "bestLaneTargets": 2,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 2
+            },
+            {
+              "x": 140,
+              "targets": 2
+            },
+            {
+              "x": 176,
+              "targets": 2
+            },
+            {
+              "x": 212,
+              "targets": 1
+            },
+            {
+              "x": 248,
+              "targets": 1
+            }
+          ]
+        },
+        {
+          "t": 15.75,
+          "activeCount": 14,
+          "bestLaneX": 104,
+          "bestLaneTargets": 3,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 1
+            },
+            {
+              "x": 104,
+              "targets": 3
+            },
+            {
+              "x": 140,
+              "targets": 1
+            },
+            {
+              "x": 176,
+              "targets": 3
+            },
+            {
+              "x": 212,
+              "targets": 1
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        },
+        {
+          "t": 16,
+          "activeCount": 14,
+          "bestLaneX": 104,
+          "bestLaneTargets": 3,
+          "laneCounts": [
+            {
+              "x": 32,
+              "targets": 0
+            },
+            {
+              "x": 68,
+              "targets": 2
+            },
+            {
+              "x": 104,
+              "targets": 3
+            },
+            {
+              "x": 140,
+              "targets": 2
+            },
+            {
+              "x": 176,
+              "targets": 3
+            },
+            {
+              "x": 212,
+              "targets": 2
+            },
+            {
+              "x": 248,
+              "targets": 0
+            }
+          ]
+        }
+      ],
+      "read": "Shot-opportunity probe found scoreable targets in 61 sampled windows; 82% had a lane with 2+ targets, lane diversity was 1, and center-lane bias was 0.11."
+    },
+    "safety": {
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0,
+        "challengeContacts": 0
+      }
+    }
+  },
+  "trial": {
+    "totalObjectTrackScore10": 3.2,
+    "totalObjectTrackCoverage": 0.297,
+    "deltas": {
+      "totalObjectTrackScore10": 0,
+      "totalObjectTrackCoverage": 0
+    },
+    "groupResults": [
+      {
+        "groupIndex": 1,
+        "phaseId": "challenge-1-group-1",
+        "touchedByCandidate": false,
+        "lineRole": "bee-line",
+        "directReferenceLabel": true,
+        "canonicalComparisonPathFamily": "first-challenge-peel",
+        "candidatePathFamily": "first-challenge-peel",
+        "canonicalPathFamilyMatch": true,
+        "pathFamilyAuthorityConflicts": [],
+        "aggregateObjectTrackScore10": 2.4,
+        "aggregateObjectTrackCoverage": 0.186,
+        "primaryObjectTrackScore10": 2.4,
+        "primaryObjectTrackCoverage": 0.184,
+        "baselineAggregateObjectTrackScore10": 2.4,
+        "baselineAggregateObjectTrackCoverage": 0.186,
+        "semantic": {
+          "lineRolePreservation": {
+            "expectedRole": "bee-line",
+            "candidateRole": "bee-line",
+            "directReferenceLabel": true,
+            "pass": true,
+            "score": 1
+          },
+          "upperBandScoreability": {
+            "expectedScoreBand": "upper-band",
+            "candidateScoreBand": "upper-band",
+            "scoreableRoutesPass": true,
+            "hasScoreableFrameWindow": true,
+            "fieldOccupancyConflict": true,
+            "pass": true,
+            "score": 0.96
+          },
+          "peelOffReadability": {
+            "expectedExitGesture": "left peel-off",
+            "candidateExitGesture": "left peel-off",
+            "runtimeExitSide": "right",
+            "expectedExitSide": "left",
+            "exitSideScore": 0,
+            "pass": false,
+            "score": 0.64
+          },
+          "routeLearnability": {
+            "entryCue": "top-right",
+            "candidateEntryCue": "top-right",
+            "scoreableRoutesPass": true,
+            "noCombatPass": true,
+            "pass": true,
+            "score": 1
+          },
+          "noCombatGrammar": {
+            "declared": true,
+            "safetyPass": true,
+            "pass": true,
+            "score": 1
+          },
+          "semanticScore": 0.92,
+          "warnings": [
+            "runtime exit side right does not clearly read as left peel-off",
+            "human upper-band scoreability conflicts with CPU lower-field occupancy; keep both metrics visible"
+          ]
+        },
+        "fieldOccupancyTension": {
+          "humanVisibleRead": {
+            "scoreableBand": "upper-band",
+            "humanLabelLowerFieldShare": 0.02,
+            "upperBandEmphasis": 0.98,
+            "expectedPrimaryBand": "upper-band score window with later peel/drop exit"
+          },
+          "cpuGeometryRead": {
+            "runtimeLowerFieldShare": 0.25,
+            "aggregateObjectTrackLowerFieldShare": 1,
+            "primaryObjectTrackLowerFieldShare": 1,
+            "runtimeMinusHumanLowerFieldShare": 0.23,
+            "runtimeMinusAggregateLowerFieldShare": -0.75
+          },
+          "conflictBetweenHumanLabelAndCpuTrack": true,
+          "conflictRead": "Human/contact-sheet label reads an upper-band score phrase, while CPU object-track clustering includes substantial lower-field occupancy. Keep both; do not tune from one scalar alone."
+        },
+        "deviations": {
+          "aggregatePathLengthRatio": 56.16,
+          "primaryPathLengthRatio": 11.78,
+          "aggregateLowerFieldDelta": -0.75,
+          "humanLowerFieldDelta": 0.23,
+          "visibleStartDeltaS": 0.5,
+          "visibleEndDeltaS": 7
+        },
+        "candidateVector": {
+          "id": 940669169,
+          "family": "classic",
+          "pathFamily": "first-challenge-peel",
+          "wave": 0,
+          "lane": 0,
+          "type": "bee",
+          "sampleCount": 40,
+          "visibleStartS": 0.5,
+          "visibleEndS": 10.25,
+          "entrySide": "left",
+          "exitSide": "right",
+          "xRange": 0.7684,
+          "yRange": 0.9004,
+          "pathLength": 1.2411,
+          "turnCount": 2,
+          "reversalCount": 0,
+          "lowerFieldShare": 0.25
+        },
+        "appliedControls": null,
+        "uncertaintyAndProvenance": {
+          "confidence": 0.745,
+          "directPathLabel": true,
+          "uncertainty": [
+            "human upper-band read and CPU lower-field occupancy differ",
+            "primary object track is short and should not be treated as a complete phrase"
+          ],
+          "sourceEvidence": [
+            "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-arrival/contact-sheet.jpg",
+            "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/overlays/challenge-01-target-tracks.svg",
+            "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/contact-sheets/challenge-01-target-samples.svg",
+            "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/tracks/challenge-01.json"
+          ]
+        },
+        "candidateFocus": [
+          "raise direct object-track fit to first RED trial floor",
+          "reduce aggregate path-length ratio or refine the target vector before candidate generation"
+        ],
+        "blockers": [],
+        "warnings": [
+          "aggregate object-track score 2.4/10 is below the first RED trial floor",
+          "primary object-track score 2.4/10 is below the first RED trial floor",
+          "aggregate path-length ratio 56.16 exceeds the first RED trial floor",
+          "primary path-length ratio 11.78 exceeds the first RED trial floor",
+          "runtime exit side right does not clearly read as left peel-off",
+          "human upper-band scoreability conflicts with CPU lower-field occupancy; keep both metrics visible"
+        ]
+      },
+      {
+        "groupIndex": 2,
+        "phaseId": "challenge-1-group-2",
+        "touchedByCandidate": false,
+        "lineRole": "bee-column",
+        "directReferenceLabel": false,
+        "canonicalComparisonPathFamily": "classic-column-drop",
+        "candidatePathFamily": "classic-column-drop",
+        "canonicalPathFamilyMatch": true,
+        "pathFamilyAuthorityConflicts": [],
+        "aggregateObjectTrackScore10": 4,
+        "aggregateObjectTrackCoverage": 0.401,
+        "primaryObjectTrackScore10": 3.1,
+        "primaryObjectTrackCoverage": 0.283,
+        "baselineAggregateObjectTrackScore10": 4,
+        "baselineAggregateObjectTrackCoverage": 0.401,
+        "semantic": {
+          "lineRolePreservation": {
+            "expectedRole": "bee-column",
+            "candidateRole": "bee-column",
+            "directReferenceLabel": false,
+            "pass": true,
+            "score": 0.78
+          },
+          "upperBandScoreability": {
+            "expectedScoreBand": "upper-band",
+            "candidateScoreBand": "upper-band",
+            "scoreableRoutesPass": true,
+            "hasScoreableFrameWindow": true,
+            "fieldOccupancyConflict": true,
+            "pass": true,
+            "score": 0.96
+          },
+          "peelOffReadability": {
+            "expectedExitGesture": "lower exit",
+            "candidateExitGesture": "lower exit",
+            "runtimeExitSide": "left",
+            "expectedExitSide": "",
+            "exitSideScore": 0.5,
+            "pass": false,
+            "score": 0.82
+          },
+          "routeLearnability": {
+            "entryCue": "top",
+            "candidateEntryCue": "top",
+            "scoreableRoutesPass": true,
+            "noCombatPass": true,
+            "pass": true,
+            "score": 1
+          },
+          "noCombatGrammar": {
+            "declared": true,
+            "safetyPass": true,
+            "pass": true,
+            "score": 1
+          },
+          "semanticScore": 0.912,
+          "warnings": [
+            "semantic role is inferred rather than directly accepted from a path label",
+            "runtime exit side left does not clearly read as lower exit",
+            "human upper-band scoreability conflicts with CPU lower-field occupancy; keep both metrics visible"
+          ]
+        },
+        "fieldOccupancyTension": {
+          "humanVisibleRead": {
+            "scoreableBand": "upper-band",
+            "humanLabelLowerFieldShare": 0.06,
+            "upperBandEmphasis": 0.94,
+            "expectedPrimaryBand": "upper-band score window with later peel/drop exit"
+          },
+          "cpuGeometryRead": {
+            "runtimeLowerFieldShare": 0.4,
+            "aggregateObjectTrackLowerFieldShare": 0.456,
+            "primaryObjectTrackLowerFieldShare": 0.8056,
+            "runtimeMinusHumanLowerFieldShare": 0.34,
+            "runtimeMinusAggregateLowerFieldShare": -0.056
+          },
+          "conflictBetweenHumanLabelAndCpuTrack": true,
+          "conflictRead": "Human/contact-sheet label reads an upper-band score phrase, while CPU object-track clustering includes substantial lower-field occupancy. Keep both; do not tune from one scalar alone."
+        },
+        "deviations": {
+          "aggregatePathLengthRatio": 4.63,
+          "primaryPathLengthRatio": 1.09,
+          "aggregateLowerFieldDelta": -0.056,
+          "humanLowerFieldDelta": 0.34,
+          "visibleStartDeltaS": -0.38,
+          "visibleEndDeltaS": 0.75
+        },
+        "candidateVector": {
+          "id": 534285119,
+          "family": "classic",
+          "pathFamily": "classic-column-drop",
+          "wave": 1,
+          "lane": 0,
+          "type": "bee",
+          "sampleCount": 30,
+          "visibleStartS": 4,
+          "visibleEndS": 11.25,
+          "entrySide": "center",
+          "exitSide": "left",
+          "xRange": 0.2645,
+          "yRange": 1.0547,
+          "pathLength": 1.1769,
+          "turnCount": 4,
+          "reversalCount": 4,
+          "lowerFieldShare": 0.4
+        },
+        "appliedControls": null,
+        "uncertaintyAndProvenance": {
+          "confidence": 0.754,
+          "directPathLabel": false,
+          "uncertainty": [
+            "no direct accepted path label for this group yet",
+            "human upper-band read and CPU lower-field occupancy differ"
+          ],
+          "sourceEvidence": [
+            "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/overlays/challenge-01-target-tracks.svg",
+            "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/contact-sheets/challenge-01-target-samples.svg",
+            "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/tracks/challenge-01.json"
+          ]
+        },
+        "candidateFocus": [
+          "raise direct object-track fit to first RED trial floor",
+          "separate upper-band semantic target from runtime lower-field occupancy before tuning",
+          "reduce aggregate path-length ratio or refine the target vector before candidate generation",
+          "candidate trial must preserve inferred semantic role provenance"
+        ],
+        "blockers": [],
+        "warnings": [
+          "aggregate object-track score 4/10 is below the first RED trial floor",
+          "primary object-track score 3.1/10 is below the first RED trial floor",
+          "aggregate path-length ratio 4.63 exceeds the first RED trial floor",
+          "semantic role is inferred rather than directly accepted from a path label",
+          "runtime exit side left does not clearly read as lower exit",
+          "human upper-band scoreability conflicts with CPU lower-field occupancy; keep both metrics visible"
+        ]
+      },
+      {
+        "groupIndex": 3,
+        "phaseId": "challenge-1-group-3",
+        "touchedByCandidate": false,
+        "lineRole": "butterfly-column",
+        "directReferenceLabel": false,
+        "canonicalComparisonPathFamily": "classic-column-drop",
+        "candidatePathFamily": "classic-column-drop",
+        "canonicalPathFamilyMatch": true,
+        "pathFamilyAuthorityConflicts": [
+          "setpiece schedule says first-challenge-peel while target contract says classic-column-drop",
+          "movement grammar says first-challenge-peel while target contract says classic-column-drop"
+        ],
+        "aggregateObjectTrackScore10": 2,
+        "aggregateObjectTrackCoverage": 0.135,
+        "primaryObjectTrackScore10": 1,
+        "primaryObjectTrackCoverage": 0,
+        "baselineAggregateObjectTrackScore10": 2,
+        "baselineAggregateObjectTrackCoverage": 0.135,
+        "semantic": {
+          "lineRolePreservation": {
+            "expectedRole": "butterfly-column",
+            "candidateRole": "butterfly-column",
+            "directReferenceLabel": false,
+            "pass": true,
+            "score": 0.78
+          },
+          "upperBandScoreability": {
+            "expectedScoreBand": "upper-band",
+            "candidateScoreBand": "upper-band",
+            "scoreableRoutesPass": true,
+            "hasScoreableFrameWindow": true,
+            "fieldOccupancyConflict": true,
+            "pass": true,
+            "score": 0.96
+          },
+          "peelOffReadability": {
+            "expectedExitGesture": "lower exit",
+            "candidateExitGesture": "lower exit",
+            "runtimeExitSide": "left",
+            "expectedExitSide": "",
+            "exitSideScore": 0.5,
+            "pass": false,
+            "score": 0.82
+          },
+          "routeLearnability": {
+            "entryCue": "top",
+            "candidateEntryCue": "top",
+            "scoreableRoutesPass": true,
+            "noCombatPass": true,
+            "pass": true,
+            "score": 1
+          },
+          "noCombatGrammar": {
+            "declared": true,
+            "safetyPass": true,
+            "pass": true,
+            "score": 1
+          },
+          "semanticScore": 0.912,
+          "warnings": [
+            "semantic role is inferred rather than directly accepted from a path label",
+            "runtime exit side left does not clearly read as lower exit",
+            "human upper-band scoreability conflicts with CPU lower-field occupancy; keep both metrics visible"
+          ]
+        },
+        "fieldOccupancyTension": {
+          "humanVisibleRead": {
+            "scoreableBand": "upper-band",
+            "humanLabelLowerFieldShare": 0.07,
+            "upperBandEmphasis": 0.93,
+            "expectedPrimaryBand": "upper-band score window with later peel/drop exit"
+          },
+          "cpuGeometryRead": {
+            "runtimeLowerFieldShare": 0.43,
+            "aggregateObjectTrackLowerFieldShare": 0.7069,
+            "primaryObjectTrackLowerFieldShare": 0.6364,
+            "runtimeMinusHumanLowerFieldShare": 0.36,
+            "runtimeMinusAggregateLowerFieldShare": -0.277
+          },
+          "conflictBetweenHumanLabelAndCpuTrack": true,
+          "conflictRead": "Human/contact-sheet label reads an upper-band score phrase, while CPU object-track clustering includes substantial lower-field occupancy. Keep both; do not tune from one scalar alone."
+        },
+        "deviations": {
+          "aggregatePathLengthRatio": 4.3,
+          "primaryPathLengthRatio": 2.32,
+          "aggregateLowerFieldDelta": -0.277,
+          "humanLowerFieldDelta": 0.36,
+          "visibleStartDeltaS": -1,
+          "visibleEndDeltaS": 2.12
+        },
+        "candidateVector": {
+          "id": 59275427,
+          "family": "classic",
+          "pathFamily": "classic-column-drop",
+          "wave": 2,
+          "lane": 2,
+          "type": "but",
+          "sampleCount": 30,
+          "visibleStartS": 6.75,
+          "visibleEndS": 14,
+          "entrySide": "left",
+          "exitSide": "left",
+          "xRange": 0.2639,
+          "yRange": 1.0594,
+          "pathLength": 1.2248,
+          "turnCount": 4,
+          "reversalCount": 5,
+          "lowerFieldShare": 0.43
+        },
+        "appliedControls": null,
+        "uncertaintyAndProvenance": {
+          "confidence": 0.762,
+          "directPathLabel": false,
+          "uncertainty": [
+            "no direct accepted path label for this group yet",
+            "setpiece schedule says first-challenge-peel while target contract says classic-column-drop",
+            "movement grammar says first-challenge-peel while target contract says classic-column-drop",
+            "human upper-band read and CPU lower-field occupancy differ"
+          ],
+          "sourceEvidence": [
+            "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/overlays/challenge-01-target-tracks.svg",
+            "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/contact-sheets/challenge-01-target-samples.svg",
+            "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/tracks/challenge-01.json"
+          ]
+        },
+        "candidateFocus": [
+          "raise direct object-track fit to first RED trial floor",
+          "separate upper-band semantic target from runtime lower-field occupancy before tuning",
+          "reduce aggregate path-length ratio or refine the target vector before candidate generation",
+          "candidate trial must preserve inferred semantic role provenance"
+        ],
+        "blockers": [],
+        "warnings": [
+          "aggregate object-track score 2/10 is below the first RED trial floor",
+          "primary object-track score 1/10 is below the first RED trial floor",
+          "aggregate path-length ratio 4.3 exceeds the first RED trial floor",
+          "authority conflict: setpiece schedule says first-challenge-peel while target contract says classic-column-drop; movement grammar says first-challenge-peel while target contract says classic-column-drop",
+          "semantic role is inferred rather than directly accepted from a path label",
+          "runtime exit side left does not clearly read as lower exit",
+          "human upper-band scoreability conflicts with CPU lower-field occupancy; keep both metrics visible"
+        ]
+      },
+      {
+        "groupIndex": 4,
+        "phaseId": "challenge-1-group-4",
+        "touchedByCandidate": false,
+        "lineRole": "butterfly-line",
+        "directReferenceLabel": true,
+        "canonicalComparisonPathFamily": "side-hook-return",
+        "candidatePathFamily": "side-hook-return",
+        "canonicalPathFamilyMatch": true,
+        "pathFamilyAuthorityConflicts": [],
+        "aggregateObjectTrackScore10": 4,
+        "aggregateObjectTrackCoverage": 0.401,
+        "primaryObjectTrackScore10": 1.7,
+        "primaryObjectTrackCoverage": 0.099,
+        "baselineAggregateObjectTrackScore10": 4,
+        "baselineAggregateObjectTrackCoverage": 0.401,
+        "semantic": {
+          "lineRolePreservation": {
+            "expectedRole": "butterfly-line",
+            "candidateRole": "butterfly-line",
+            "directReferenceLabel": true,
+            "pass": true,
+            "score": 1
+          },
+          "upperBandScoreability": {
+            "expectedScoreBand": "upper-band",
+            "candidateScoreBand": "upper-band",
+            "scoreableRoutesPass": true,
+            "hasScoreableFrameWindow": true,
+            "fieldOccupancyConflict": true,
+            "pass": true,
+            "score": 0.96
+          },
+          "peelOffReadability": {
+            "expectedExitGesture": "right peel-off",
+            "candidateExitGesture": "right peel-off",
+            "runtimeExitSide": "center",
+            "expectedExitSide": "right",
+            "exitSideScore": 0,
+            "pass": false,
+            "score": 0.64
+          },
+          "routeLearnability": {
+            "entryCue": "top-left",
+            "candidateEntryCue": "top-left",
+            "scoreableRoutesPass": true,
+            "noCombatPass": true,
+            "pass": true,
+            "score": 1
+          },
+          "noCombatGrammar": {
+            "declared": true,
+            "safetyPass": true,
+            "pass": true,
+            "score": 1
+          },
+          "semanticScore": 0.92,
+          "warnings": [
+            "runtime exit side center does not clearly read as right peel-off",
+            "human upper-band scoreability conflicts with CPU lower-field occupancy; keep both metrics visible"
+          ]
+        },
+        "fieldOccupancyTension": {
+          "humanVisibleRead": {
+            "scoreableBand": "upper-band",
+            "humanLabelLowerFieldShare": 0.06,
+            "upperBandEmphasis": 0.94,
+            "expectedPrimaryBand": "upper-band score window with later peel/drop exit"
+          },
+          "cpuGeometryRead": {
+            "runtimeLowerFieldShare": 0.13,
+            "aggregateObjectTrackLowerFieldShare": 0.7534,
+            "primaryObjectTrackLowerFieldShare": 1,
+            "runtimeMinusHumanLowerFieldShare": 0.07,
+            "runtimeMinusAggregateLowerFieldShare": -0.623
+          },
+          "conflictBetweenHumanLabelAndCpuTrack": true,
+          "conflictRead": "Human/contact-sheet label reads an upper-band score phrase, while CPU object-track clustering includes substantial lower-field occupancy. Keep both; do not tune from one scalar alone."
+        },
+        "deviations": {
+          "aggregatePathLengthRatio": 2.92,
+          "primaryPathLengthRatio": 1.69,
+          "aggregateLowerFieldDelta": -0.623,
+          "humanLowerFieldDelta": 0.07,
+          "visibleStartDeltaS": -1,
+          "visibleEndDeltaS": 0.12
+        },
+        "candidateVector": {
+          "id": 131378797,
+          "family": "classic",
+          "pathFamily": "side-hook-return",
+          "wave": 3,
+          "lane": 3,
+          "type": "but",
+          "sampleCount": 24,
+          "visibleStartS": 10.25,
+          "visibleEndS": 16,
+          "entrySide": "left",
+          "exitSide": "center",
+          "xRange": 0.4223,
+          "yRange": 0.3534,
+          "pathLength": 0.9244,
+          "turnCount": 5,
+          "reversalCount": 4,
+          "lowerFieldShare": 0.13
+        },
+        "appliedControls": null,
+        "uncertaintyAndProvenance": {
+          "confidence": 0.762,
+          "directPathLabel": true,
+          "uncertainty": [
+            "human upper-band read and CPU lower-field occupancy differ"
+          ],
+          "sourceEvidence": [
+            "reference-artifacts/analyses/galaga-path-reference-media/challenge-1-late-wave/contact-sheet.jpg",
+            "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/overlays/challenge-01-target-tracks.svg",
+            "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/contact-sheets/challenge-01-target-samples.svg",
+            "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/tracks/challenge-01.json"
+          ]
+        },
+        "candidateFocus": [
+          "raise direct object-track fit to first RED trial floor"
+        ],
+        "blockers": [],
+        "warnings": [
+          "aggregate object-track score 4/10 is below the first RED trial floor",
+          "primary object-track score 1.7/10 is below the first RED trial floor",
+          "runtime exit side center does not clearly read as right peel-off",
+          "human upper-band scoreability conflicts with CPU lower-field occupancy; keep both metrics visible"
+        ]
+      },
+      {
+        "groupIndex": 5,
+        "phaseId": "challenge-1-group-5",
+        "touchedByCandidate": false,
+        "lineRole": "mixed-closing-peel",
+        "directReferenceLabel": false,
+        "canonicalComparisonPathFamily": "first-challenge-peel",
+        "candidatePathFamily": "first-challenge-peel",
+        "canonicalPathFamilyMatch": true,
+        "pathFamilyAuthorityConflicts": [
+          "setpiece schedule says side-hook-return while target contract says first-challenge-peel",
+          "movement grammar says side-hook-return while target contract says first-challenge-peel"
+        ],
+        "aggregateObjectTrackScore10": 3.7,
+        "aggregateObjectTrackCoverage": 0.363,
+        "primaryObjectTrackScore10": 3.7,
+        "primaryObjectTrackCoverage": 0.37,
+        "baselineAggregateObjectTrackScore10": 3.7,
+        "baselineAggregateObjectTrackCoverage": 0.363,
+        "semantic": {
+          "lineRolePreservation": {
+            "expectedRole": "mixed-closing-peel",
+            "candidateRole": "mixed-closing-peel",
+            "directReferenceLabel": false,
+            "pass": true,
+            "score": 0.78
+          },
+          "upperBandScoreability": {
+            "expectedScoreBand": "upper-band",
+            "candidateScoreBand": "upper-band",
+            "scoreableRoutesPass": true,
+            "hasScoreableFrameWindow": true,
+            "fieldOccupancyConflict": false,
+            "pass": true,
+            "score": 1
+          },
+          "peelOffReadability": {
+            "expectedExitGesture": "lower-sides peel-off",
+            "candidateExitGesture": "lower-sides peel-off",
+            "runtimeExitSide": "left",
+            "expectedExitSide": "lower-sides",
+            "exitSideScore": 0.55,
+            "pass": true,
+            "score": 0.838
+          },
+          "routeLearnability": {
+            "entryCue": "top-left",
+            "candidateEntryCue": "top-left",
+            "scoreableRoutesPass": true,
+            "noCombatPass": true,
+            "pass": true,
+            "score": 1
+          },
+          "noCombatGrammar": {
+            "declared": true,
+            "safetyPass": true,
+            "pass": true,
+            "score": 1
+          },
+          "semanticScore": 0.924,
+          "warnings": [
+            "semantic role is inferred rather than directly accepted from a path label",
+            "runtime exit side left does not clearly read as lower-sides peel-off"
+          ]
+        },
+        "fieldOccupancyTension": {
+          "humanVisibleRead": {
+            "scoreableBand": "upper-band",
+            "humanLabelLowerFieldShare": 0.08,
+            "upperBandEmphasis": 0.92,
+            "expectedPrimaryBand": "upper-band score window with later peel/drop exit"
+          },
+          "cpuGeometryRead": {
+            "runtimeLowerFieldShare": 0,
+            "aggregateObjectTrackLowerFieldShare": 0,
+            "primaryObjectTrackLowerFieldShare": 0,
+            "runtimeMinusHumanLowerFieldShare": -0.08,
+            "runtimeMinusAggregateLowerFieldShare": 0
+          },
+          "conflictBetweenHumanLabelAndCpuTrack": false,
+          "conflictRead": "Human/contact-sheet label and object-track occupancy are close enough for first-pass RED comparison."
+        },
+        "deviations": {
+          "aggregatePathLengthRatio": 2.07,
+          "primaryPathLengthRatio": 1.53,
+          "aggregateLowerFieldDelta": 0,
+          "humanLowerFieldDelta": -0.08,
+          "visibleStartDeltaS": -2,
+          "visibleEndDeltaS": 0.12
+        },
+        "candidateVector": {
+          "id": 188937456,
+          "family": "classic",
+          "pathFamily": "first-challenge-peel",
+          "wave": 4,
+          "lane": 3,
+          "type": "but",
+          "sampleCount": 12,
+          "visibleStartS": 13.25,
+          "visibleEndS": 16,
+          "entrySide": "left",
+          "exitSide": "left",
+          "xRange": 0.2182,
+          "yRange": 0.0131,
+          "pathLength": 0.1795,
+          "turnCount": 2,
+          "reversalCount": 0,
+          "lowerFieldShare": 0
+        },
+        "appliedControls": null,
+        "uncertaintyAndProvenance": {
+          "confidence": 0.542,
+          "directPathLabel": false,
+          "uncertainty": [
+            "no direct accepted path label for this group yet",
+            "setpiece schedule says side-hook-return while target contract says first-challenge-peel",
+            "movement grammar says side-hook-return while target contract says first-challenge-peel",
+            "primary object track is short and should not be treated as a complete phrase"
+          ],
+          "sourceEvidence": [
+            "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/overlays/challenge-01-target-tracks.svg",
+            "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/contact-sheets/challenge-01-target-samples.svg",
+            "reference-artifacts/analyses/galaga-challenge-object-tracks/2026-05-19_03-29-40-fba7f625/tracks/challenge-01.json"
+          ]
+        },
+        "candidateFocus": [
+          "raise direct object-track fit to first RED trial floor",
+          "candidate trial must preserve inferred semantic role provenance"
+        ],
+        "blockers": [],
+        "warnings": [
+          "aggregate object-track score 3.7/10 is below the first RED trial floor",
+          "primary object-track score 3.7/10 is below the first RED trial floor",
+          "authority conflict: setpiece schedule says side-hook-return while target contract says first-challenge-peel; movement grammar says side-hook-return while target contract says first-challenge-peel",
+          "semantic role is inferred rather than directly accepted from a path label",
+          "runtime exit side left does not clearly read as lower-sides peel-off"
+        ]
+      }
+    ],
+    "semanticScores": {
+      "overallSemanticScore": 0.918,
+      "lineRolePreservation": 0.868,
+      "upperBandScoreability": 0.968,
+      "peelOffReadability": 0.752,
+      "routeLearnability": 1,
+      "noCombatGrammarPreservation": 1,
+      "primitiveRows": [
+        {
+          "lineRolePreservation": {
+            "expectedRole": "bee-line",
+            "candidateRole": "bee-line",
+            "directReferenceLabel": true,
+            "pass": true,
+            "score": 1
+          },
+          "upperBandScoreability": {
+            "expectedScoreBand": "upper-band",
+            "candidateScoreBand": "upper-band",
+            "scoreableRoutesPass": true,
+            "hasScoreableFrameWindow": true,
+            "fieldOccupancyConflict": true,
+            "pass": true,
+            "score": 0.96
+          },
+          "peelOffReadability": {
+            "expectedExitGesture": "left peel-off",
+            "candidateExitGesture": "left peel-off",
+            "runtimeExitSide": "right",
+            "expectedExitSide": "left",
+            "exitSideScore": 0,
+            "pass": false,
+            "score": 0.64
+          },
+          "routeLearnability": {
+            "entryCue": "top-right",
+            "candidateEntryCue": "top-right",
+            "scoreableRoutesPass": true,
+            "noCombatPass": true,
+            "pass": true,
+            "score": 1
+          },
+          "noCombatGrammar": {
+            "declared": true,
+            "safetyPass": true,
+            "pass": true,
+            "score": 1
+          },
+          "semanticScore": 0.92,
+          "warnings": [
+            "runtime exit side right does not clearly read as left peel-off",
+            "human upper-band scoreability conflicts with CPU lower-field occupancy; keep both metrics visible"
+          ]
+        },
+        {
+          "lineRolePreservation": {
+            "expectedRole": "bee-column",
+            "candidateRole": "bee-column",
+            "directReferenceLabel": false,
+            "pass": true,
+            "score": 0.78
+          },
+          "upperBandScoreability": {
+            "expectedScoreBand": "upper-band",
+            "candidateScoreBand": "upper-band",
+            "scoreableRoutesPass": true,
+            "hasScoreableFrameWindow": true,
+            "fieldOccupancyConflict": true,
+            "pass": true,
+            "score": 0.96
+          },
+          "peelOffReadability": {
+            "expectedExitGesture": "lower exit",
+            "candidateExitGesture": "lower exit",
+            "runtimeExitSide": "left",
+            "expectedExitSide": "",
+            "exitSideScore": 0.5,
+            "pass": false,
+            "score": 0.82
+          },
+          "routeLearnability": {
+            "entryCue": "top",
+            "candidateEntryCue": "top",
+            "scoreableRoutesPass": true,
+            "noCombatPass": true,
+            "pass": true,
+            "score": 1
+          },
+          "noCombatGrammar": {
+            "declared": true,
+            "safetyPass": true,
+            "pass": true,
+            "score": 1
+          },
+          "semanticScore": 0.912,
+          "warnings": [
+            "semantic role is inferred rather than directly accepted from a path label",
+            "runtime exit side left does not clearly read as lower exit",
+            "human upper-band scoreability conflicts with CPU lower-field occupancy; keep both metrics visible"
+          ]
+        },
+        {
+          "lineRolePreservation": {
+            "expectedRole": "butterfly-column",
+            "candidateRole": "butterfly-column",
+            "directReferenceLabel": false,
+            "pass": true,
+            "score": 0.78
+          },
+          "upperBandScoreability": {
+            "expectedScoreBand": "upper-band",
+            "candidateScoreBand": "upper-band",
+            "scoreableRoutesPass": true,
+            "hasScoreableFrameWindow": true,
+            "fieldOccupancyConflict": true,
+            "pass": true,
+            "score": 0.96
+          },
+          "peelOffReadability": {
+            "expectedExitGesture": "lower exit",
+            "candidateExitGesture": "lower exit",
+            "runtimeExitSide": "left",
+            "expectedExitSide": "",
+            "exitSideScore": 0.5,
+            "pass": false,
+            "score": 0.82
+          },
+          "routeLearnability": {
+            "entryCue": "top",
+            "candidateEntryCue": "top",
+            "scoreableRoutesPass": true,
+            "noCombatPass": true,
+            "pass": true,
+            "score": 1
+          },
+          "noCombatGrammar": {
+            "declared": true,
+            "safetyPass": true,
+            "pass": true,
+            "score": 1
+          },
+          "semanticScore": 0.912,
+          "warnings": [
+            "semantic role is inferred rather than directly accepted from a path label",
+            "runtime exit side left does not clearly read as lower exit",
+            "human upper-band scoreability conflicts with CPU lower-field occupancy; keep both metrics visible"
+          ]
+        },
+        {
+          "lineRolePreservation": {
+            "expectedRole": "butterfly-line",
+            "candidateRole": "butterfly-line",
+            "directReferenceLabel": true,
+            "pass": true,
+            "score": 1
+          },
+          "upperBandScoreability": {
+            "expectedScoreBand": "upper-band",
+            "candidateScoreBand": "upper-band",
+            "scoreableRoutesPass": true,
+            "hasScoreableFrameWindow": true,
+            "fieldOccupancyConflict": true,
+            "pass": true,
+            "score": 0.96
+          },
+          "peelOffReadability": {
+            "expectedExitGesture": "right peel-off",
+            "candidateExitGesture": "right peel-off",
+            "runtimeExitSide": "center",
+            "expectedExitSide": "right",
+            "exitSideScore": 0,
+            "pass": false,
+            "score": 0.64
+          },
+          "routeLearnability": {
+            "entryCue": "top-left",
+            "candidateEntryCue": "top-left",
+            "scoreableRoutesPass": true,
+            "noCombatPass": true,
+            "pass": true,
+            "score": 1
+          },
+          "noCombatGrammar": {
+            "declared": true,
+            "safetyPass": true,
+            "pass": true,
+            "score": 1
+          },
+          "semanticScore": 0.92,
+          "warnings": [
+            "runtime exit side center does not clearly read as right peel-off",
+            "human upper-band scoreability conflicts with CPU lower-field occupancy; keep both metrics visible"
+          ]
+        },
+        {
+          "lineRolePreservation": {
+            "expectedRole": "mixed-closing-peel",
+            "candidateRole": "mixed-closing-peel",
+            "directReferenceLabel": false,
+            "pass": true,
+            "score": 0.78
+          },
+          "upperBandScoreability": {
+            "expectedScoreBand": "upper-band",
+            "candidateScoreBand": "upper-band",
+            "scoreableRoutesPass": true,
+            "hasScoreableFrameWindow": true,
+            "fieldOccupancyConflict": false,
+            "pass": true,
+            "score": 1
+          },
+          "peelOffReadability": {
+            "expectedExitGesture": "lower-sides peel-off",
+            "candidateExitGesture": "lower-sides peel-off",
+            "runtimeExitSide": "left",
+            "expectedExitSide": "lower-sides",
+            "exitSideScore": 0.55,
+            "pass": true,
+            "score": 0.838
+          },
+          "routeLearnability": {
+            "entryCue": "top-left",
+            "candidateEntryCue": "top-left",
+            "scoreableRoutesPass": true,
+            "noCombatPass": true,
+            "pass": true,
+            "score": 1
+          },
+          "noCombatGrammar": {
+            "declared": true,
+            "safetyPass": true,
+            "pass": true,
+            "score": 1
+          },
+          "semanticScore": 0.924,
+          "warnings": [
+            "semantic role is inferred rather than directly accepted from a path label",
+            "runtime exit side left does not clearly read as lower-sides peel-off"
+          ]
+        }
+      ]
+    },
+    "pathFamilyOrder": {
+      "redCanonicalOrder": [
+        "first-challenge-peel",
+        "classic-column-drop",
+        "classic-column-drop",
+        "side-hook-return",
+        "first-challenge-peel"
+      ],
+      "runtimeCurrentOrder": [
+        "first-challenge-peel",
+        "classic-column-drop",
+        "classic-column-drop",
+        "side-hook-return",
+        "first-challenge-peel"
+      ],
+      "candidateOrder": [
+        "first-challenge-peel",
+        "classic-column-drop",
+        "classic-column-drop",
+        "side-hook-return",
+        "first-challenge-peel"
+      ],
+      "candidateMatchesRedOrder": true,
+      "runtimeMatchesRedOrder": true,
+      "authorityConflicts": [
+        {
+          "groupIndex": 3,
+          "conflict": "setpiece schedule says first-challenge-peel while target contract says classic-column-drop"
+        },
+        {
+          "groupIndex": 3,
+          "conflict": "movement grammar says first-challenge-peel while target contract says classic-column-drop"
+        },
+        {
+          "groupIndex": 5,
+          "conflict": "setpiece schedule says side-hook-return while target contract says first-challenge-peel"
+        },
+        {
+          "groupIndex": 5,
+          "conflict": "movement grammar says side-hook-return while target contract says first-challenge-peel"
+        }
+      ],
+      "conflictCount": 4
+    },
+    "fieldOccupancyTension": {
+      "rows": [
+        {
+          "groupIndex": 1,
+          "lineRole": "bee-line",
+          "humanVisibleRead": {
+            "scoreableBand": "upper-band",
+            "humanLabelLowerFieldShare": 0.02,
+            "upperBandEmphasis": 0.98,
+            "expectedPrimaryBand": "upper-band score window with later peel/drop exit"
+          },
+          "cpuGeometryRead": {
+            "runtimeLowerFieldShare": 0.25,
+            "aggregateObjectTrackLowerFieldShare": 1,
+            "primaryObjectTrackLowerFieldShare": 1,
+            "runtimeMinusHumanLowerFieldShare": 0.23,
+            "runtimeMinusAggregateLowerFieldShare": -0.75
+          },
+          "conflictBetweenHumanLabelAndCpuTrack": true,
+          "conflictRead": "Human/contact-sheet label reads an upper-band score phrase, while CPU object-track clustering includes substantial lower-field occupancy. Keep both; do not tune from one scalar alone."
+        },
+        {
+          "groupIndex": 2,
+          "lineRole": "bee-column",
+          "humanVisibleRead": {
+            "scoreableBand": "upper-band",
+            "humanLabelLowerFieldShare": 0.06,
+            "upperBandEmphasis": 0.94,
+            "expectedPrimaryBand": "upper-band score window with later peel/drop exit"
+          },
+          "cpuGeometryRead": {
+            "runtimeLowerFieldShare": 0.4,
+            "aggregateObjectTrackLowerFieldShare": 0.456,
+            "primaryObjectTrackLowerFieldShare": 0.8056,
+            "runtimeMinusHumanLowerFieldShare": 0.34,
+            "runtimeMinusAggregateLowerFieldShare": -0.056
+          },
+          "conflictBetweenHumanLabelAndCpuTrack": true,
+          "conflictRead": "Human/contact-sheet label reads an upper-band score phrase, while CPU object-track clustering includes substantial lower-field occupancy. Keep both; do not tune from one scalar alone."
+        },
+        {
+          "groupIndex": 3,
+          "lineRole": "butterfly-column",
+          "humanVisibleRead": {
+            "scoreableBand": "upper-band",
+            "humanLabelLowerFieldShare": 0.07,
+            "upperBandEmphasis": 0.93,
+            "expectedPrimaryBand": "upper-band score window with later peel/drop exit"
+          },
+          "cpuGeometryRead": {
+            "runtimeLowerFieldShare": 0.43,
+            "aggregateObjectTrackLowerFieldShare": 0.7069,
+            "primaryObjectTrackLowerFieldShare": 0.6364,
+            "runtimeMinusHumanLowerFieldShare": 0.36,
+            "runtimeMinusAggregateLowerFieldShare": -0.277
+          },
+          "conflictBetweenHumanLabelAndCpuTrack": true,
+          "conflictRead": "Human/contact-sheet label reads an upper-band score phrase, while CPU object-track clustering includes substantial lower-field occupancy. Keep both; do not tune from one scalar alone."
+        },
+        {
+          "groupIndex": 4,
+          "lineRole": "butterfly-line",
+          "humanVisibleRead": {
+            "scoreableBand": "upper-band",
+            "humanLabelLowerFieldShare": 0.06,
+            "upperBandEmphasis": 0.94,
+            "expectedPrimaryBand": "upper-band score window with later peel/drop exit"
+          },
+          "cpuGeometryRead": {
+            "runtimeLowerFieldShare": 0.13,
+            "aggregateObjectTrackLowerFieldShare": 0.7534,
+            "primaryObjectTrackLowerFieldShare": 1,
+            "runtimeMinusHumanLowerFieldShare": 0.07,
+            "runtimeMinusAggregateLowerFieldShare": -0.623
+          },
+          "conflictBetweenHumanLabelAndCpuTrack": true,
+          "conflictRead": "Human/contact-sheet label reads an upper-band score phrase, while CPU object-track clustering includes substantial lower-field occupancy. Keep both; do not tune from one scalar alone."
+        },
+        {
+          "groupIndex": 5,
+          "lineRole": "mixed-closing-peel",
+          "humanVisibleRead": {
+            "scoreableBand": "upper-band",
+            "humanLabelLowerFieldShare": 0.08,
+            "upperBandEmphasis": 0.92,
+            "expectedPrimaryBand": "upper-band score window with later peel/drop exit"
+          },
+          "cpuGeometryRead": {
+            "runtimeLowerFieldShare": 0,
+            "aggregateObjectTrackLowerFieldShare": 0,
+            "primaryObjectTrackLowerFieldShare": 0,
+            "runtimeMinusHumanLowerFieldShare": -0.08,
+            "runtimeMinusAggregateLowerFieldShare": 0
+          },
+          "conflictBetweenHumanLabelAndCpuTrack": false,
+          "conflictRead": "Human/contact-sheet label and object-track occupancy are close enough for first-pass RED comparison."
+        }
+      ],
+      "conflictCount": 4,
+      "policy": "Report lower-field geometry beside human-visible upper-band scoreability; do not make lowerFieldShare the dominant scoring primitive when the RED says the player-visible phrase is upper-band scoreable."
+    },
+    "spacingReadability": {
+      "source": "reference-artifacts/analyses/challenge-motion-profile/latest.json",
+      "pass": true,
+      "preserveBaseline": true,
+      "spacingScore": 0.676,
+      "bunchingRisk": 0.321,
+      "worstMinDistance": 1.96,
+      "averageMinDistance": 10.15,
+      "blockers": [],
+      "read": "Baseline Stage 3 spacing is preserved for this no-change candidate; the read remains strict enough to expose future regressions."
+    },
+    "scoreableRoutes": {
+      "source": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+      "pass": true,
+      "preserveBaseline": true,
+      "score10": 5.6,
+      "activeWindows": 61,
+      "multiTargetWindowShare": 0.82,
+      "laneDiversity": 1,
+      "centerBias": 0.112,
+      "blockers": [],
+      "read": "Baseline Stage 3 still has many scoreable windows; candidate variants must preserve the routeability and upper-band learning read."
+    },
+    "safety": {
+      "source": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+      "pass": true,
+      "preserveBaseline": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "noChallengeContacts": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0,
+        "challengeContacts": 0
+      },
+      "blockers": []
+    },
+    "noCombatGrammar": {
+      "pass": true,
+      "score": 1
+    },
+    "strictWeakRows": [
+      {
+        "groupIndex": 1,
+        "lineRole": "bee-line",
+        "reasons": [
+          "aggregate object-track 2.4/10 below floor",
+          "primary object-track 2.4/10 below floor",
+          "human-vs-CPU field occupancy conflict exists"
+        ],
+        "candidateFocus": [
+          "raise direct object-track fit to first RED trial floor",
+          "reduce aggregate path-length ratio or refine the target vector before candidate generation"
+        ]
+      },
+      {
+        "groupIndex": 2,
+        "lineRole": "bee-column",
+        "reasons": [
+          "aggregate object-track 4/10 below floor",
+          "primary object-track 3.1/10 below floor",
+          "human-vs-CPU field occupancy conflict exists"
+        ],
+        "candidateFocus": [
+          "raise direct object-track fit to first RED trial floor",
+          "separate upper-band semantic target from runtime lower-field occupancy before tuning",
+          "reduce aggregate path-length ratio or refine the target vector before candidate generation",
+          "candidate trial must preserve inferred semantic role provenance"
+        ]
+      },
+      {
+        "groupIndex": 3,
+        "lineRole": "butterfly-column",
+        "reasons": [
+          "aggregate object-track 2/10 below floor",
+          "primary object-track 1/10 below floor",
+          "target-vs-runtime authority conflict exists",
+          "human-vs-CPU field occupancy conflict exists"
+        ],
+        "candidateFocus": [
+          "raise direct object-track fit to first RED trial floor",
+          "separate upper-band semantic target from runtime lower-field occupancy before tuning",
+          "reduce aggregate path-length ratio or refine the target vector before candidate generation",
+          "candidate trial must preserve inferred semantic role provenance"
+        ]
+      },
+      {
+        "groupIndex": 4,
+        "lineRole": "butterfly-line",
+        "reasons": [
+          "aggregate object-track 4/10 below floor",
+          "primary object-track 1.7/10 below floor",
+          "human-vs-CPU field occupancy conflict exists"
+        ],
+        "candidateFocus": [
+          "raise direct object-track fit to first RED trial floor"
+        ]
+      },
+      {
+        "groupIndex": 5,
+        "lineRole": "mixed-closing-peel",
+        "reasons": [
+          "aggregate object-track 3.7/10 below floor",
+          "primary object-track 3.7/10 below floor",
+          "target-vs-runtime authority conflict exists"
+        ],
+        "candidateFocus": [
+          "raise direct object-track fit to first RED trial floor",
+          "candidate trial must preserve inferred semantic role provenance"
+        ]
+      }
+    ]
+  },
+  "reuseReport": {
+    "reusableRedTrialMechanics": [
+      "external candidate input with non-overwriting predicted runtime vectors",
+      "RED artifact loading and group-by-group comparison",
+      "object-track fit against aggregate and primary target vectors",
+      "guardrail normalization for spacing/readability, scoreable routes, and challenge safety",
+      "path-family order and authority-conflict reporting",
+      "field-occupancy tension rows that keep human-visible and CPU/geometry reads separate",
+      "process-keeper vs runtime-keeper separation"
+    ],
+    "stage3SpecificSemanticExpectations": [
+      {
+        "groupIndex": 1,
+        "requiredRole": "bee-line",
+        "requiredEntryCue": "top-right",
+        "requiredExitGesture": "left peel-off",
+        "read": "top-right bee line"
+      },
+      {
+        "groupIndex": 4,
+        "requiredRole": "butterfly-line",
+        "requiredEntryCue": "top-left",
+        "requiredExitGesture": "right peel-off",
+        "read": "late top-left butterfly line"
+      },
+      {
+        "groupIndex": 5,
+        "requiredRole": "mixed-closing-peel",
+        "requiredEntryCue": "top-left",
+        "requiredExitGesture": "lower-sides peel-off",
+        "read": "closing peel-off exit"
+      }
+    ],
+    "explicitAuthorityLayerInputs": [
+      "Stage 3 RED target-conformance authority",
+      "current challenge-stage conformance live runtime read",
+      "candidate-provided guardrail provenance",
+      "private-artifact provenance caveat"
+    ],
+    "temporaryStage3Code": [
+      "the top-right bee-line and late top-left butterfly-line expectations are currently declared in this analyzer until the RED schema owns reusable role contracts",
+      "upper-band scoreability scoring is Stage 3-specific because Stage 7 used lower-field timing pressure as the dominant semantic issue",
+      "peel-off readability uses simple entry/exit-side compatibility until a reusable gesture vocabulary exists"
+    ],
+    "abstractionNeededToRemoveBespokeLogic": [
+      "stage-parameterized RED trial core that takes scope and RED path as inputs",
+      "schema-owned semantic role contracts with role-specific scoring plugins",
+      "common authority-layer report builder for RED target authority vs live promotion authority",
+      "shared human-visible vs CPU-geometry metric policy"
+    ]
+  },
+  "metricsAuthorityReport": {
+    "humanVsCpuConflictCount": 4,
+    "targetVsRuntimeAuthorityConflictCount": 4,
+    "aggregateScorePolicy": "Aggregate object-track score is reported for continuity, but source readiness is blocked by strict weak rows and semantic guardrails.",
+    "humanVisibleSemantics": [
+      "line-role preservation",
+      "upper-band scoreability",
+      "peel-off readability",
+      "route learnability",
+      "no-combat grammar preservation"
+    ],
+    "cpuGeometryMetrics": [
+      "aggregate and primary object-track fit",
+      "path-family order",
+      "lower-field share and field occupancy",
+      "spacing/readability guardrail"
+    ],
+    "knownPrivateArtifactCaveat": "Some contact-sheet provenance paths point to the private companion artifact store and are non-blocking for this baseline trial unless newly worsened.",
+    "authoritySeparation": "RED target-conformance is descriptive authority for candidate trials only; live runtime promotion remains blocked without browser/runtime keeper evidence."
+  },
+  "summary": {
+    "measurementKeeperRecommendation": "accept-process-keeper",
+    "runtimeKeeperRecommendation": "not-a-runtime-keeper",
+    "readyForRuntimeSourceCandidate": false,
+    "sourceCandidateGenerationAllowed": false,
+    "baselineControlEvaluated": true,
+    "blockerCount": 0,
+    "warningCount": 28,
+    "blockers": [],
+    "warnings": [
+      "group 1: aggregate object-track score 2.4/10 is below the first RED trial floor",
+      "group 1: primary object-track score 2.4/10 is below the first RED trial floor",
+      "group 1: aggregate path-length ratio 56.16 exceeds the first RED trial floor",
+      "group 1: primary path-length ratio 11.78 exceeds the first RED trial floor",
+      "group 1: runtime exit side right does not clearly read as left peel-off",
+      "group 1: human upper-band scoreability conflicts with CPU lower-field occupancy; keep both metrics visible",
+      "group 2: aggregate object-track score 4/10 is below the first RED trial floor",
+      "group 2: primary object-track score 3.1/10 is below the first RED trial floor",
+      "group 2: aggregate path-length ratio 4.63 exceeds the first RED trial floor",
+      "group 2: semantic role is inferred rather than directly accepted from a path label",
+      "group 2: runtime exit side left does not clearly read as lower exit",
+      "group 2: human upper-band scoreability conflicts with CPU lower-field occupancy; keep both metrics visible",
+      "group 3: aggregate object-track score 2/10 is below the first RED trial floor",
+      "group 3: primary object-track score 1/10 is below the first RED trial floor",
+      "group 3: aggregate path-length ratio 4.3 exceeds the first RED trial floor",
+      "group 3: authority conflict: setpiece schedule says first-challenge-peel while target contract says classic-column-drop; movement grammar says first-challenge-peel while target contract says classic-column-drop",
+      "group 3: semantic role is inferred rather than directly accepted from a path label",
+      "group 3: runtime exit side left does not clearly read as lower exit",
+      "group 3: human upper-band scoreability conflicts with CPU lower-field occupancy; keep both metrics visible",
+      "group 4: aggregate object-track score 4/10 is below the first RED trial floor",
+      "group 4: primary object-track score 1.7/10 is below the first RED trial floor",
+      "group 4: runtime exit side center does not clearly read as right peel-off",
+      "group 4: human upper-band scoreability conflicts with CPU lower-field occupancy; keep both metrics visible",
+      "group 5: aggregate object-track score 3.7/10 is below the first RED trial floor",
+      "group 5: primary object-track score 3.7/10 is below the first RED trial floor",
+      "group 5: authority conflict: setpiece schedule says side-hook-return while target contract says first-challenge-peel; movement grammar says side-hook-return while target contract says first-challenge-peel",
+      "group 5: semantic role is inferred rather than directly accepted from a path label",
+      "group 5: runtime exit side left does not clearly read as lower-sides peel-off"
+    ],
+    "strictWeakRowCount": 5,
+    "read": "The Stage 3 non-overwriting trial gate cleanly evaluates the baseline-control candidate and exposes semantic, authority, and metric debt without runtime source edits."
+  },
+  "nextBestStep": "Build the next Stage 3 semantic candidate-batch layer against this trial gate, keeping candidate generation non-overwriting and preserving no-combat, scoreability, spacing/readability, and authority separation."
+}

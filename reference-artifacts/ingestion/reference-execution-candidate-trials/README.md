@@ -80,6 +80,52 @@ lower-field overstay in the intended direction. Keep this transform
 analysis-only under current controls and do not promote Stage 7 source edits
 from it.
 
+## Stage 3 RED Trial Generalization
+
+Stage 3 / Challenge 1 uses the same non-overwriting pattern, but the gate is
+RED-driven and semantic-first. Run:
+
+```sh
+npm run harness:analyze:stage3-reference-execution-trial -- --candidate=reference-artifacts/ingestion/reference-execution-candidate-trials/stage3-baseline-control-0.1.json
+npm run harness:check:stage3-reference-execution-trial
+```
+
+The analyzer writes only to:
+
+`reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/`
+
+It reports reusable RED/trial mechanics separately from temporary Stage
+3-specific expectations: the top-right bee line, late top-left butterfly line,
+upper-band scoreability, peel-off exits, route learnability, no-combat grammar,
+and human-visible-vs-CPU field-occupancy tension. Lower-field geometry is
+reported beside player-visible scoreability; it is not allowed to dominate the
+decision when those reads conflict.
+
+## Stage 3 Input Shape
+
+- `candidateId`: stable candidate id.
+- `scope`: must remain Stage 3 / Challenge 1 for this pilot.
+- `authorityLayerInputs`: declares RED target-conformance authority, current
+  live runtime evidence, and any artifact caveats.
+- `groups`: optional per-group semantic or predicted-vector controls.
+  - `groupIndex`: 1-5.
+  - `semanticExecution`: optional `lineRole`, `entryCue`, `exitGesture`, and
+    `scoreableBand` overrides.
+  - `pathFamily`: candidate path-family intent.
+  - `predictedRuntimeVector`: optional full vector for a non-overwriting
+    trial prediction.
+  - `timing`: optional `phaseOffsetS`, `visibleStartS`, or `visibleEndS`.
+  - `fieldOccupancy`: optional `lowerFieldShare` or `lowerFieldDelta`.
+- `guardrails.spacingReadability`: pass/fail, spacing score, bunching risk,
+  and min-distance read.
+- `guardrails.scoreableRoutes`: scoreable-window and routeability preservation.
+- `guardrails.safety`: no-shot/no-attack/no-loss/no-contact read.
+
+The Stage 3 baseline-control trial is a process keeper only if it evaluates the
+RED cleanly, preserves semantic and safety guardrails, exposes strict weak
+rows, and keeps runtime source promotion disabled. It is not a runtime keeper
+and does not justify beta.
+
 ## Stage 7 Input Shape
 
 - `candidateId`: stable candidate id.

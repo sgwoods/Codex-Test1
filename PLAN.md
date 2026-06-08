@@ -254,8 +254,15 @@ from the roadmap.
    top-right bee line, late top-left butterfly line, upper-band score windows,
    peel-off exits, no-combat grammar, path-family ordering, object-track
    targets, field-occupancy tension, and field-level provenance. The adequacy
-   report scores `0.704` and recommends the next step as a non-overwriting
-   Stage 3 candidate-trial gate, not a runtime source candidate.
+   report scores `0.704`. The next non-overwriting Stage 3 candidate-trial
+   gate now exists at
+   `reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest.json`:
+   it accepts the baseline-control candidate as a process keeper, preserves
+   no-combat/scoreable-route/spacing guardrails, reports semantic score
+   `0.918`, object-track `3.2/10`, `5/5` strict weak rows, `4` human-vs-CPU
+   field-occupancy conflicts, and `4` target-vs-runtime authority conflicts.
+   The next Stage 3 step is a non-overwriting semantic candidate batch against
+   this gate, not a runtime source candidate.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth
@@ -381,11 +388,12 @@ Current conformance read:
   the first-five challenge work has `25/25` reference-backed group contracts
   and `8.6/10` control readiness, but runtime promotion is still blocked by
   visual-presence, object-track timing/shape, and scoreable-window constraints.
-  The Stage 3 RED pilot is a measurement/process keeper that makes the next
-  quality step more targeted: build a non-overwriting Stage 3 candidate-trial
-  gate that evaluates semantic line roles, upper-band scoreability, path-family
-  order, object-track fit, spacing/readability, scoreable routes, and
-  no-combat safety before any source edit.
+  The Stage 3 RED pilot and non-overwriting candidate-trial gate are
+  measurement/process keepers that make the next quality step more targeted:
+  generate a small Stage 3 semantic candidate batch against the gate, preserving
+  semantic line roles, upper-band scoreability, path-family order,
+  object-track fit, spacing/readability, scoreable routes, and no-combat safety
+  before any source edit.
 - Galaxy Guardians longer-surface/persona review reads `7.0/10`, with
   stage-arc pressure at `7.9/10`, stage presentation at `7.4/10`, persona
   utility at `6.5/10`, midrun survivability at `6.0/10`, and stage-band
