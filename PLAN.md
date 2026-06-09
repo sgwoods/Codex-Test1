@@ -333,6 +333,25 @@ from the roadmap.
    architecture debt; next Stage 3 quality work should target a focused
    player-visible gap with before/after source evidence only when protected
    keepers can remain green.
+   A focused Stage 3 group 3 fast-lane cycle is now also accepted as the fourth
+   Stage 3 `/dev` gameplay keeper, with evidence at
+   `reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group3-fast-lane/latest-group3-fast-lane.json`.
+   The quick viability read chose group 3 because it was the remaining
+   `classic-column-drop` butterfly-column phrase without source controls and
+   was plausible under already consumed group-level motionSpec controls. The
+   kept group 3 controls are `arcAmp: 0.76`, `dropAmp: 0.88`,
+   `pathPlaybackScale: 1.02`, `phaseOffsetS: 0.12`, and `routeCurveY: -4`.
+   Source evidence shows x-range `1.0424` -> `0.8971`, path length `1.0826`
+   -> `1.0748`, upper-band share `0.5702` -> `0.5935`, and lower-field share
+   `0.4132` -> `0.3821`; groups 1, 2, 4, and 5 show zero timing/path drift in
+   the isolation table. Motion/profile, spacing, scoreable-route, no-combat,
+   zero-shot, zero-attack, zero-ship-loss, and focused zero-challenge-contact
+   guardrails passed. The broad challenge-collision check still reports the
+   known single contact, which is distinct from this keeper's clean targeted
+   safety evidence. This keeper is not beta justification. With groups 2, 3, 4,
+   and 5 now kept and group 1 still blocked, the next Stage 3 step should be
+   a small architecture pass for lane/type-specific challenge phrase controls
+   or reference-path backing, not another whole-group fast-lane pass.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth

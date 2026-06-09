@@ -832,7 +832,15 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
      routeCurveY:-4
     })
    }),
-   null,
+   Object.freeze({
+    controls:Object.freeze({
+     arcAmp:.76,
+     dropAmp:.88,
+     pathPlaybackScale:1.02,
+     phaseOffsetS:.12,
+     routeCurveY:-4
+    })
+   }),
    Object.freeze({
     controls:Object.freeze({
      pathPlaybackScale:.5,

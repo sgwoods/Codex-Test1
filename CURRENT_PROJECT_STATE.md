@@ -249,6 +249,29 @@ Latest Stage 7 calibration:
   a `/dev` gameplay keeper only, not beta justification. Group 1 remains
   blocked under current group-level controls; the next fast-lane target should
   not disturb the three accepted Stage 3 keepers.
+- A focused Stage 3 group 3 fast-lane cycle has now produced and accepted a
+  fourth `/dev` `dev-visible-gameplay-keeper`, with evidence at
+  `reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group3-fast-lane/latest-group3-fast-lane.json`
+  and contact-sheet evidence at
+  `reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group3-fast-lane/latest-group3-fast-lane-contact-sheet.svg`.
+  The quick viability read found group 3 plausible because it is the remaining
+  `classic-column-drop` butterfly-column phrase with no source controls yet.
+  The kept source controls are limited to Stage 3 group 3:
+  `motionSpecGroups[2].controls.arcAmp: 0.76`, `dropAmp: 0.88`,
+  `pathPlaybackScale: 1.02`, `phaseOffsetS: 0.12`, and `routeCurveY: -4`.
+  Source evidence reproduced the proof read: group 3 x-range `1.0424` ->
+  `0.8971`, path length `1.0826` -> `1.0748`, upper-band share `0.5702` ->
+  `0.5935`, and lower-field share `0.4132` -> `0.3821`. The isolation table
+  shows groups 1, 2, 4, and 5 at zero timing/path drift, preserving the
+  accepted group 2, group 4, and group 5 keepers. Motion/profile, spacing,
+  scoreable-route, no-combat, zero-shot, zero-attack, zero-ship-loss, and
+  focused zero-challenge-contact guardrails passed. Broad
+  `harness:check:challenge-collision` still reports the known single contact,
+  but targeted source-attempt safety remains clean. This is a `/dev` gameplay
+  keeper only, not beta justification. With groups 2, 3, 4, and 5 kept and
+  group 1 blocked, the next Stage 3 quality step should be lane/type-specific
+  phrase controls or reference-path backing rather than more group-level
+  fast-lane tuning.
 
 ## Historical Or Stale Current-State Docs
 
