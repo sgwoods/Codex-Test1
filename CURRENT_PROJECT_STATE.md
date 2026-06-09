@@ -226,6 +226,18 @@ Latest Stage 7 calibration:
   another `/dev` gameplay keeper only, not beta justification. The next fast
   Stage 3 target should avoid group 1 group-level controls unless lane/type-
   specific phrase authoring is added.
+- The follow-up Stage 3 group 2 fast-lane proof was blocked, with evidence at
+  `reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group2-fast-lane/latest-group2-fast-lane.json`
+  and contact-sheet evidence at
+  `reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group2-fast-lane/latest-group2-fast-lane-contact-sheet.svg`.
+  The best non-overwriting proof, `stage3-g2-column-tighten-0.1`, improved the
+  group 2 bee-column read on visible metrics, including x-range `1.0626` ->
+  `1.009`, upper-band share `0.6` -> `0.6418`, and lower-field share `0.384`
+  -> `0.3507`, while preserving no-combat and focused safety. It was rejected
+  before source edit because group 2 timing drifted by `+0.75s` and the
+  protected group 4 keeper failed preservation. Blocker classification:
+  `guardrail-regression`. Do not source-apply group 2 whole-group controls from
+  this proof.
 
 ## Historical Or Stale Current-State Docs
 

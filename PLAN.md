@@ -310,10 +310,18 @@ from the roadmap.
    and motion/profile, spacing, scoreable-route proxy, no-combat, zero-shot,
    zero-attack, zero-ship-loss, and focused zero-challenge-contact guardrails
    passed. These keepers are not beta justification by themselves.
-   Reference-path backing and lane/type-specific phrase authoring remain
-   architecture debt; next Stage 3 quality work should target the next focused
-   player-visible conformance gap with before/after source evidence, avoiding
-   more group 1 group-level iteration until better phrase controls exist.
+   A follow-up Stage 3 group 2 fast-lane proof was also attempted and blocked
+   before source edit, with evidence at
+   `reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group2-fast-lane/latest-group2-fast-lane.json`.
+   The best proof, `stage3-g2-column-tighten-0.1`, produced visible group 2
+   improvements: x-range `1.0626` -> `1.009`, upper-band share `0.6` ->
+   `0.6418`, and lower-field share `0.384` -> `0.3507`. It was rejected as a
+   source candidate because group 2 timing drifted by `+0.75s` and protected
+   group 4 keeper preservation failed. Blocker classification:
+   `guardrail-regression`. Reference-path backing, lane/type-specific phrase
+   authoring, and better per-group isolation remain architecture debt; next
+   Stage 3 quality work should target a focused player-visible gap with
+   before/after source evidence only when protected keepers can remain green.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth
