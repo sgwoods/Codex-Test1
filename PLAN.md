@@ -288,11 +288,18 @@ from the roadmap.
    and motion/profile, spacing, scoreable-route, no-combat, and
    no-shot/no-attack/no-loss guardrails pass. The proof is now
    `runtime-source-attempt-ready` only, not a runtime keeper or beta
-   justification. The next Stage 3 step is exactly one minimal runtime source
-   attempt for that same candidate, applying `pathPlaybackScale: 0.5`,
-   `routeCurveY: 17.464`, and `routeOffsetX: 60`, then strict before/after
-   evidence and a keeper/rejection decision. Reference-path backing remains
-   architecture debt; do not run another semantic batch first.
+   justification. That exact minimal runtime source attempt is now complete and
+   accepted as a `dev-visible-gameplay-keeper`, with evidence at
+   `reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/latest-source-attempt.json`.
+   The kept source controls are `pathPlaybackScale: 0.5`, `routeCurveY: 17.464`,
+   and `routeOffsetX: 60` on Stage 3 group 4 only. Source evidence reproduced
+   the proof read: group 4 exit `center` -> `right`, path length `1.5589` ->
+   `1.1897`, upper-band share `0.775` -> `0.9474`, protected groups preserved,
+   and motion/profile, spacing, scoreable-route, no-combat, zero-shot,
+   zero-attack, zero-ship-loss, and zero-challenge-contact guardrails passed.
+   This is not beta justification by itself. Reference-path backing remains
+   architecture debt; next Stage 3 quality work should target the next focused
+   player-visible conformance gap with before/after source evidence.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth

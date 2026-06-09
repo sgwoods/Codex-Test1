@@ -820,7 +820,20 @@ const AURORA_CHALLENGE_LAYOUTS=Object.freeze([
    Object.freeze(['but','bee','bee','but','but','bee','bee','but'])
   ]),
   groupVisualFamilies:Object.freeze(['classic','classic','classic','classic','classic']),
-  groupPathFamilies:Object.freeze(['first-challenge-peel','classic-column-drop','classic-column-drop','side-hook-return','first-challenge-peel'])
+  groupPathFamilies:Object.freeze(['first-challenge-peel','classic-column-drop','classic-column-drop','side-hook-return','first-challenge-peel']),
+  motionSpecGroups:Object.freeze([
+   null,
+   null,
+   null,
+   Object.freeze({
+    controls:Object.freeze({
+     pathPlaybackScale:.5,
+     routeCurveY:17.464,
+     routeOffsetX:60
+    })
+   }),
+   null
+  ])
  }),
  Object.freeze({
   fromStage:7,

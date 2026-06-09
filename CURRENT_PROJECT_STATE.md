@@ -194,6 +194,21 @@ Latest Stage 7 calibration:
   edit for those three consumed controls, then run strict before/after evidence
   and accept or reject the runtime keeper. Reference-path backing remains future
   architecture debt; do not generate another Stage 3 candidate batch yet.
+- That one Stage 3 source attempt has now been applied and accepted as a
+  `dev-visible-gameplay-keeper`, with source-attempt evidence at
+  `reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/latest-source-attempt.json`
+  and contact-sheet evidence at
+  `reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/latest-source-attempt-contact-sheet.svg`.
+  The runtime source change is limited to Stage 3 group 4:
+  `motionSpecGroups[3].controls.pathPlaybackScale: 0.5`,
+  `routeCurveY: 17.464`, and `routeOffsetX: 60`. Source evidence reproduced the
+  proof read: group 4 exit `center` -> `right`, path length `1.5589` ->
+  `1.1897`, and upper-band share `0.775` -> `0.9474`; protected groups 1, 2,
+  3, and 5 preserved. Motion/profile, spacing, scoreable-route, no-combat,
+  zero-shot, zero-attack, zero-ship-loss, and zero-challenge-contact guardrails
+  passed. This is a `/dev` gameplay keeper only, not beta justification by
+  itself. Next quality work should pick the next focused player-visible Stage 3
+  gap from the refreshed conformance read rather than generating another batch.
 
 ## Historical Or Stale Current-State Docs
 
