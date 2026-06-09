@@ -209,6 +209,23 @@ Latest Stage 7 calibration:
   passed. This is a `/dev` gameplay keeper only, not beta justification by
   itself. Next quality work should pick the next focused player-visible Stage 3
   gap from the refreshed conformance read rather than generating another batch.
+- A second fast-lane Stage 3 source attempt is now accepted as a
+  `dev-visible-gameplay-keeper` for group 5 late line / peel readability, with
+  focused evidence at
+  `reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group5-fast-lane/latest-group5-fast-lane.json`
+  and contact-sheet evidence at
+  `reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group5-fast-lane/latest-group5-fast-lane-contact-sheet.svg`.
+  The runtime source change is limited to Stage 3 group 5:
+  `motionSpecGroups[4].controls.pathPlaybackScale: 1.18`,
+  `routeCurveY: 12`, and `routeOffsetX: 48`. Source evidence reproduced the
+  proof read: group 5 exit `center` -> `right`, path length `0.0407` ->
+  `0.7949`, and upper-band share stayed `1.0`; protected groups 1, 2, 3, and 4
+  preserved, including the accepted group 4 keeper. Motion/profile, spacing,
+  scoreable-route proxy, no-combat grammar, zero-shot, zero-attack,
+  zero-ship-loss, and focused zero-challenge-contact guardrails passed. This is
+  another `/dev` gameplay keeper only, not beta justification. The next fast
+  Stage 3 target should avoid group 1 group-level controls unless lane/type-
+  specific phrase authoring is added.
 
 ## Historical Or Stale Current-State Docs
 

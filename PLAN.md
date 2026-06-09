@@ -297,9 +297,23 @@ from the roadmap.
    `1.1897`, upper-band share `0.775` -> `0.9474`, protected groups preserved,
    and motion/profile, spacing, scoreable-route, no-combat, zero-shot,
    zero-attack, zero-ship-loss, and zero-challenge-contact guardrails passed.
-   This is not beta justification by itself. Reference-path backing remains
+   The next group 1 fast-lane probe was blocked rather than kept: group-level
+   controls could improve a top-right read or preserve the group 4 keeper, but
+   not both with clean semantic/spacing evidence. The next successful fast-lane
+   source attempt targeted Stage 3 group 5 late line / peel readability and is
+   accepted as another `dev-visible-gameplay-keeper`, with evidence at
+   `reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group5-fast-lane/latest-group5-fast-lane.json`.
+   The kept group 5 controls are `pathPlaybackScale: 1.18`, `routeCurveY: 12`,
+   and `routeOffsetX: 48` on Stage 3 group 5 only. Source evidence reproduced
+   the proof read: group 5 exit `center` -> `right`, path length `0.0407` ->
+   `0.7949`, upper-band share stayed `1.0`, protected groups 1-4 preserved,
+   and motion/profile, spacing, scoreable-route proxy, no-combat, zero-shot,
+   zero-attack, zero-ship-loss, and focused zero-challenge-contact guardrails
+   passed. These keepers are not beta justification by themselves.
+   Reference-path backing and lane/type-specific phrase authoring remain
    architecture debt; next Stage 3 quality work should target the next focused
-   player-visible conformance gap with before/after source evidence.
+   player-visible conformance gap with before/after source evidence, avoiding
+   more group 1 group-level iteration until better phrase controls exist.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth
