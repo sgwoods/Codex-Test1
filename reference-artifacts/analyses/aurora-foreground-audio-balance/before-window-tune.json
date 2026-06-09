@@ -1,0 +1,925 @@
+{
+  "artifactType": "aurora-foreground-audio-balance",
+  "version": "0.1-dev-review",
+  "generatedBy": "tools/harness/analyze-aurora-foreground-audio-balance.js",
+  "generatedAt": "2026-06-09T18:34:09.396Z",
+  "commit": "ecff2f1fdc9bad54702145a947bf59cae2f5c172",
+  "scope": {
+    "gameKey": "aurora-galactica",
+    "cues": [
+      "stagePulse",
+      "attackCharge",
+      "enemyShot",
+      "enemyHit",
+      "enemyBoom",
+      "bossHit",
+      "bossBoom",
+      "playerShot"
+    ],
+    "lane": "localhost-dev-reference-audio-vs-public-safe-simulation"
+  },
+  "summary": {
+    "devReferenceAudioAvailable": true,
+    "publicSafePrivateClipLeakPass": true,
+    "weakForegroundRows": [
+      "attackCharge",
+      "enemyHit",
+      "enemyBoom",
+      "bossBoom"
+    ],
+    "minForegroundRmsOverPulseDb": -83.21,
+    "recommendationClass": "small-mix-balance-candidate"
+  },
+  "scenarios": [
+    {
+      "id": "devReference",
+      "label": "localhost dev reference lane",
+      "host": "localhost",
+      "url": "http://localhost:53183/index.html",
+      "runtime": {
+        "hostname": "localhost",
+        "branch": "codex/macbook-pro-1.4.1-guardians-integration",
+        "commit": "ecff2f1fdc9bad54702145a947bf59cae2f5c172",
+        "releaseChannel": "development",
+        "boundaryEnabled": true,
+        "referenceAudioAvailable": true,
+        "defaultAudioTheme": ""
+      },
+      "stagePulse": {
+        "event": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "galaga-reference-assets",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceClipStart": 0.18,
+          "referenceClipDuration": 0.82,
+          "stage": 1,
+          "challenge": false,
+          "at": 2.218,
+          "recAt": 2.164
+        },
+        "spec": {
+          "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
+          "referenceVolume": 0.95,
+          "cooldownMs": 1250,
+          "clipStart": 0.18,
+          "clipDuration": 0.82,
+          "stopCueNames": []
+        },
+        "usesReferenceMedia": true,
+        "referenceClips": [
+          "assets/reference-audio/galaga3-ambience-convoy.m4a"
+        ]
+      },
+      "cues": {
+        "attackCharge": {
+          "event": {
+            "cue": "attackCharge",
+            "atmosphereId": "classic-arcade",
+            "audioTheme": "galaga-reference-assets",
+            "phase": "stage",
+            "variant": 0,
+            "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
+            "referenceClipStart": 0,
+            "referenceClipDuration": 0,
+            "stage": 1,
+            "challenge": false,
+            "at": 2.218,
+            "recAt": 2.164
+          },
+          "spec": {
+            "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
+            "referenceVolume": 0.94,
+            "cooldownMs": 520,
+            "clipStart": 0,
+            "clipDuration": 0,
+            "stopCueNames": []
+          },
+          "usesReferenceMedia": true,
+          "referenceClips": [
+            "assets/reference-audio/galaga3-attack-charger.m4a"
+          ]
+        },
+        "enemyShot": {
+          "event": {
+            "cue": "enemyShot",
+            "atmosphereId": "classic-arcade",
+            "audioTheme": "galaga-reference-assets",
+            "phase": "stage",
+            "variant": 0,
+            "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+            "referenceClipStart": 0,
+            "referenceClipDuration": 0,
+            "stage": 1,
+            "challenge": false,
+            "at": 2.219,
+            "recAt": 2.164
+          },
+          "spec": {
+            "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+            "referenceVolume": 0.88,
+            "cooldownMs": 220,
+            "clipStart": 0,
+            "clipDuration": 0,
+            "stopCueNames": []
+          },
+          "usesReferenceMedia": true,
+          "referenceClips": [
+            "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"
+          ]
+        },
+        "enemyHit": {
+          "event": {
+            "cue": "enemyHit",
+            "atmosphereId": "classic-arcade",
+            "audioTheme": "galaga-reference-assets",
+            "phase": "stage",
+            "variant": 0,
+            "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+            "referenceClipStart": 0,
+            "referenceClipDuration": 0,
+            "stage": 1,
+            "challenge": false,
+            "at": 2.219,
+            "recAt": 2.164
+          },
+          "spec": {
+            "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+            "referenceVolume": 1,
+            "cooldownMs": 220,
+            "clipStart": 0,
+            "clipDuration": 0,
+            "stopCueNames": []
+          },
+          "usesReferenceMedia": true,
+          "referenceClips": [
+            "assets/reference-audio/galaga3-zako.m4a"
+          ]
+        },
+        "enemyBoom": {
+          "event": {
+            "cue": "enemyBoom",
+            "atmosphereId": "classic-arcade",
+            "audioTheme": "galaga-reference-assets",
+            "phase": "stage",
+            "variant": 0,
+            "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+            "referenceClipStart": 0,
+            "referenceClipDuration": 0,
+            "stage": 1,
+            "challenge": false,
+            "at": 2.219,
+            "recAt": 2.164
+          },
+          "spec": {
+            "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
+            "referenceVolume": 1,
+            "cooldownMs": 220,
+            "clipStart": 0,
+            "clipDuration": 0,
+            "stopCueNames": []
+          },
+          "usesReferenceMedia": true,
+          "referenceClips": [
+            "assets/reference-audio/galaga3-zako.m4a"
+          ]
+        },
+        "bossHit": {
+          "event": {
+            "cue": "bossHit",
+            "atmosphereId": "classic-arcade",
+            "audioTheme": "galaga-reference-assets",
+            "phase": "stage",
+            "variant": 0,
+            "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+            "referenceClipStart": 1.149,
+            "referenceClipDuration": 0.29,
+            "stage": 1,
+            "challenge": false,
+            "at": 2.219,
+            "recAt": 2.164
+          },
+          "spec": {
+            "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+            "referenceVolume": 1.04,
+            "cooldownMs": 240,
+            "clipStart": 1.149,
+            "clipDuration": 0.29,
+            "stopCueNames": []
+          },
+          "usesReferenceMedia": true,
+          "referenceClips": [
+            "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"
+          ]
+        },
+        "bossBoom": {
+          "event": {
+            "cue": "bossBoom",
+            "atmosphereId": "classic-arcade",
+            "audioTheme": "galaga-reference-assets",
+            "phase": "stage",
+            "variant": 0,
+            "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+            "referenceClipStart": 0,
+            "referenceClipDuration": 0,
+            "stage": 1,
+            "challenge": false,
+            "at": 2.219,
+            "recAt": 2.164
+          },
+          "spec": {
+            "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
+            "referenceVolume": 1.18,
+            "cooldownMs": 360,
+            "clipStart": 0,
+            "clipDuration": 0,
+            "stopCueNames": []
+          },
+          "usesReferenceMedia": true,
+          "referenceClips": [
+            "assets/reference-audio/galaga3-boss-death-sasori.m4a"
+          ]
+        },
+        "playerShot": {
+          "event": {
+            "cue": "playerShot",
+            "atmosphereId": "classic-arcade",
+            "audioTheme": "galaga-reference-assets",
+            "phase": "stage",
+            "variant": 0,
+            "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+            "referenceClipStart": 0.08,
+            "referenceClipDuration": 0.24,
+            "stage": 1,
+            "challenge": false,
+            "at": 2.219,
+            "recAt": 2.164
+          },
+          "spec": {
+            "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
+            "referenceVolume": 0.92,
+            "cooldownMs": 160,
+            "clipStart": 0.08,
+            "clipDuration": 0.24,
+            "stopCueNames": []
+          },
+          "usesReferenceMedia": true,
+          "referenceClips": [
+            "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a"
+          ]
+        }
+      }
+    },
+    {
+      "id": "publicSafe",
+      "label": "public-safe production-host simulation",
+      "host": "aurora-public.localhost",
+      "url": "http://aurora-public.localhost:53183/index.html",
+      "runtime": {
+        "hostname": "aurora-public.localhost",
+        "branch": "codex/macbook-pro-1.4.1-guardians-integration",
+        "commit": "ecff2f1fdc9bad54702145a947bf59cae2f5c172",
+        "releaseChannel": "development",
+        "boundaryEnabled": true,
+        "referenceAudioAvailable": false,
+        "defaultAudioTheme": ""
+      },
+      "stagePulse": {
+        "event": {
+          "cue": "stagePulse",
+          "atmosphereId": "classic-arcade",
+          "audioTheme": "classic-arcade",
+          "phase": "stage",
+          "variant": 0,
+          "referenceClip": "",
+          "referenceClipStart": 0,
+          "referenceClipDuration": 0,
+          "stage": 1,
+          "challenge": false,
+          "at": 2.309,
+          "recAt": 2.253
+        },
+        "spec": {
+          "tones": [
+            {
+              "freq": 196,
+              "duration": 0.09,
+              "wave": "square",
+              "volume": 0.0032,
+              "slide": 8,
+              "lpHz": 1600
+            },
+            {
+              "freq": 392,
+              "duration": 0.074,
+              "wave": "square",
+              "volume": 0.0118,
+              "slide": -14,
+              "lpHz": 2800
+            },
+            {
+              "freq": 523,
+              "duration": 0.054,
+              "wave": "square",
+              "volume": 0.0062,
+              "slide": -12,
+              "lpHz": 3900,
+              "delay": 0.016
+            },
+            {
+              "freq": 659,
+              "duration": 0.042,
+              "wave": "triangle",
+              "volume": 0.0038,
+              "slide": -10,
+              "lpHz": 4700,
+              "delay": 0.034
+            }
+          ]
+        },
+        "usesReferenceMedia": false,
+        "referenceClips": []
+      },
+      "cues": {
+        "attackCharge": {
+          "event": {
+            "cue": "attackCharge",
+            "atmosphereId": "classic-arcade",
+            "audioTheme": "classic-arcade",
+            "phase": "stage",
+            "variant": 0,
+            "referenceClip": "",
+            "referenceClipStart": 0,
+            "referenceClipDuration": 0,
+            "stage": 1,
+            "challenge": false,
+            "at": 2.309,
+            "recAt": 2.253
+          },
+          "spec": null,
+          "usesReferenceMedia": false,
+          "referenceClips": []
+        },
+        "enemyShot": {
+          "event": {
+            "cue": "enemyShot",
+            "atmosphereId": "classic-arcade",
+            "audioTheme": "classic-arcade",
+            "phase": "stage",
+            "variant": 0,
+            "referenceClip": "",
+            "referenceClipStart": 0,
+            "referenceClipDuration": 0,
+            "stage": 1,
+            "challenge": false,
+            "at": 2.309,
+            "recAt": 2.253
+          },
+          "spec": {
+            "tones": [
+              {
+                "freq": 306,
+                "duration": 0.09,
+                "wave": "square",
+                "volume": 0.0112,
+                "slide": -170,
+                "detune": 0.002,
+                "lpHz": 2800
+              },
+              {
+                "freq": 228,
+                "duration": 0.06,
+                "wave": "triangle",
+                "volume": 0.0054,
+                "slide": -120,
+                "detune": 0.001,
+                "lpHz": 2300,
+                "delay": 0.014
+              }
+            ]
+          },
+          "usesReferenceMedia": false,
+          "referenceClips": []
+        },
+        "enemyHit": {
+          "event": {
+            "cue": "enemyHit",
+            "atmosphereId": "classic-arcade",
+            "audioTheme": "classic-arcade",
+            "phase": "stage",
+            "variant": 0,
+            "referenceClip": "",
+            "referenceClipStart": 0,
+            "referenceClipDuration": 0,
+            "stage": 1,
+            "challenge": false,
+            "at": 2.309,
+            "recAt": 2.253
+          },
+          "spec": {
+            "cooldownMs": 220,
+            "tones": [
+              {
+                "freq": 246,
+                "duration": 0.058,
+                "wave": "square",
+                "volume": 0.014,
+                "slide": -240,
+                "detune": 0.004,
+                "lpHz": 3400
+              },
+              {
+                "freq": 154,
+                "duration": 0.11,
+                "wave": "sawtooth",
+                "volume": 0.016,
+                "slide": -220,
+                "detune": 0.008,
+                "lpHz": 2300,
+                "delay": 0.018
+              }
+            ],
+            "noise": [
+              {
+                "duration": 0.05,
+                "volume": 0.0066,
+                "hp": 1700,
+                "delay": 0.012
+              }
+            ]
+          },
+          "usesReferenceMedia": false,
+          "referenceClips": []
+        },
+        "enemyBoom": {
+          "event": {
+            "cue": "enemyBoom",
+            "atmosphereId": "classic-arcade",
+            "audioTheme": "classic-arcade",
+            "phase": "stage",
+            "variant": 0,
+            "referenceClip": "",
+            "referenceClipStart": 0,
+            "referenceClipDuration": 0,
+            "stage": 1,
+            "challenge": false,
+            "at": 2.309,
+            "recAt": 2.253
+          },
+          "spec": {
+            "cooldownMs": 260,
+            "tones": [
+              {
+                "freq": 294,
+                "duration": 0.054,
+                "wave": "square",
+                "volume": 0.0138,
+                "slide": -260,
+                "detune": 0.003,
+                "lpHz": 3300
+              },
+              {
+                "freq": 185,
+                "duration": 0.125,
+                "wave": "sawtooth",
+                "volume": 0.0148,
+                "slide": -210,
+                "detune": 0.006,
+                "lpHz": 2220,
+                "delay": 0.016
+              }
+            ],
+            "noise": [
+              {
+                "duration": 0.056,
+                "volume": 0.0062,
+                "hp": 1580,
+                "delay": 0.01
+              }
+            ]
+          },
+          "usesReferenceMedia": false,
+          "referenceClips": []
+        },
+        "bossHit": {
+          "event": {
+            "cue": "bossHit",
+            "atmosphereId": "classic-arcade",
+            "audioTheme": "classic-arcade",
+            "phase": "stage",
+            "variant": 0,
+            "referenceClip": "",
+            "referenceClipStart": 0,
+            "referenceClipDuration": 0,
+            "stage": 1,
+            "challenge": false,
+            "at": 2.309,
+            "recAt": 2.253
+          },
+          "spec": {
+            "cooldownMs": 240,
+            "tones": [
+              {
+                "freq": 392,
+                "duration": 0.046,
+                "wave": "square",
+                "volume": 0.0144,
+                "slide": -210,
+                "detune": 0.002,
+                "lpHz": 3600
+              },
+              {
+                "freq": 247,
+                "duration": 0.094,
+                "wave": "triangle",
+                "volume": 0.0102,
+                "slide": -150,
+                "detune": 0.004,
+                "lpHz": 2460,
+                "delay": 0.014
+              }
+            ],
+            "noise": [
+              {
+                "duration": 0.038,
+                "volume": 0.005,
+                "hp": 1880,
+                "delay": 0.008
+              }
+            ]
+          },
+          "usesReferenceMedia": false,
+          "referenceClips": []
+        },
+        "bossBoom": {
+          "event": {
+            "cue": "bossBoom",
+            "atmosphereId": "classic-arcade",
+            "audioTheme": "classic-arcade",
+            "phase": "stage",
+            "variant": 0,
+            "referenceClip": "",
+            "referenceClipStart": 0,
+            "referenceClipDuration": 0,
+            "stage": 1,
+            "challenge": false,
+            "at": 2.309,
+            "recAt": 2.253
+          },
+          "spec": {
+            "cooldownMs": 360,
+            "tones": [
+              {
+                "freq": 330,
+                "duration": 0.07,
+                "wave": "square",
+                "volume": 0.0146,
+                "slide": -180,
+                "detune": 0.003,
+                "lpHz": 3400
+              },
+              {
+                "freq": 220,
+                "duration": 0.16,
+                "wave": "triangle",
+                "volume": 0.0106,
+                "slide": -120,
+                "detune": 0.003,
+                "lpHz": 2200,
+                "delay": 0.022
+              },
+              {
+                "freq": 147,
+                "duration": 0.28,
+                "wave": "sawtooth",
+                "volume": 0.0136,
+                "slide": -130,
+                "detune": 0.002,
+                "lpHz": 1760,
+                "delay": 0.102
+              }
+            ],
+            "noise": [
+              {
+                "duration": 0.09,
+                "volume": 0.0068,
+                "hp": 1320,
+                "delay": 0.02
+              }
+            ]
+          },
+          "usesReferenceMedia": false,
+          "referenceClips": []
+        },
+        "playerShot": {
+          "event": {
+            "cue": "playerShot",
+            "atmosphereId": "classic-arcade",
+            "audioTheme": "classic-arcade",
+            "phase": "stage",
+            "variant": 0,
+            "referenceClip": "",
+            "referenceClipStart": 0,
+            "referenceClipDuration": 0,
+            "stage": 1,
+            "challenge": false,
+            "at": 2.309,
+            "recAt": 2.253
+          },
+          "spec": {
+            "tones": [
+              {
+                "freq": 1240,
+                "duration": 0.038,
+                "wave": "square",
+                "volume": 0.0092,
+                "slide": -760,
+                "detune": 0.002,
+                "lpHz": 6600
+              },
+              {
+                "freq": 1660,
+                "duration": 0.022,
+                "wave": "square",
+                "volume": 0.0046,
+                "slide": -560,
+                "detune": -0.003,
+                "lpHz": 7200,
+                "delay": 0.006
+              }
+            ]
+          },
+          "usesReferenceMedia": false,
+          "referenceClips": []
+        }
+      }
+    }
+  ],
+  "balance": {
+    "devReference": {
+      "scenarioId": "devReference",
+      "rows": [
+        {
+          "cue": "attackCharge",
+          "foregroundOffsetSeconds": 0.18,
+          "foregroundDurationSeconds": 4,
+          "pulseDurationSeconds": 0.82,
+          "foregroundRmsOverPulseDb": -83.21,
+          "foregroundPeakOverPulseDb": -68.24,
+          "compositeLiftOverPulseDb": 0,
+          "foregroundRms": 0.00001,
+          "pulseRms": 0.0758,
+          "compositeRms": 0.0758,
+          "foregroundPeak": 0.00006,
+          "pulsePeak": 0.15756,
+          "compositePeak": 0.15756,
+          "activeShare": 0.942,
+          "audibleSeparationPass": false,
+          "read": "Foreground cue risks being masked by the stagePulse bed in the cue-probe window."
+        },
+        {
+          "cue": "enemyShot",
+          "foregroundOffsetSeconds": 0.18,
+          "foregroundDurationSeconds": 4,
+          "pulseDurationSeconds": 0.82,
+          "foregroundRmsOverPulseDb": 7.56,
+          "foregroundPeakOverPulseDb": 13.9,
+          "compositeLiftOverPulseDb": 8.2,
+          "foregroundRms": 0.18091,
+          "pulseRms": 0.0758,
+          "compositeRms": 0.19494,
+          "foregroundPeak": 0.78027,
+          "pulsePeak": 0.15756,
+          "compositePeak": 0.85724,
+          "activeShare": 0.957,
+          "audibleSeparationPass": true,
+          "read": "Foreground cue has measurable level separation over the stagePulse bed."
+        },
+        {
+          "cue": "enemyHit",
+          "foregroundOffsetSeconds": 0.18,
+          "foregroundDurationSeconds": 4,
+          "pulseDurationSeconds": 0.82,
+          "foregroundRmsOverPulseDb": null,
+          "foregroundPeakOverPulseDb": null,
+          "compositeLiftOverPulseDb": 0,
+          "foregroundRms": 0,
+          "pulseRms": 0.0758,
+          "compositeRms": 0.0758,
+          "foregroundPeak": 0,
+          "pulsePeak": 0.15756,
+          "compositePeak": 0.15756,
+          "activeShare": 0.942,
+          "audibleSeparationPass": false,
+          "read": "No measurable foreground/pulse RMS ratio."
+        },
+        {
+          "cue": "enemyBoom",
+          "foregroundOffsetSeconds": 0.18,
+          "foregroundDurationSeconds": 4,
+          "pulseDurationSeconds": 0.82,
+          "foregroundRmsOverPulseDb": null,
+          "foregroundPeakOverPulseDb": null,
+          "compositeLiftOverPulseDb": 0,
+          "foregroundRms": 0,
+          "pulseRms": 0.0758,
+          "compositeRms": 0.0758,
+          "foregroundPeak": 0,
+          "pulsePeak": 0.15756,
+          "compositePeak": 0.15756,
+          "activeShare": 0.942,
+          "audibleSeparationPass": false,
+          "read": "No measurable foreground/pulse RMS ratio."
+        },
+        {
+          "cue": "bossHit",
+          "foregroundOffsetSeconds": 0.18,
+          "foregroundDurationSeconds": 0.29,
+          "pulseDurationSeconds": 0.82,
+          "foregroundRmsOverPulseDb": 8.24,
+          "foregroundPeakOverPulseDb": 12.56,
+          "compositeLiftOverPulseDb": 8.84,
+          "foregroundRms": 0.19397,
+          "pulseRms": 0.07509,
+          "compositeRms": 0.20781,
+          "foregroundPeak": 0.63199,
+          "pulsePeak": 0.1488,
+          "compositePeak": 0.68845,
+          "activeShare": 0.96,
+          "audibleSeparationPass": true,
+          "read": "Foreground cue has measurable level separation over the stagePulse bed."
+        },
+        {
+          "cue": "bossBoom",
+          "foregroundOffsetSeconds": 0.18,
+          "foregroundDurationSeconds": 4,
+          "pulseDurationSeconds": 0.82,
+          "foregroundRmsOverPulseDb": -36.5,
+          "foregroundPeakOverPulseDb": -11.7,
+          "compositeLiftOverPulseDb": 0,
+          "foregroundRms": 0.00113,
+          "pulseRms": 0.0758,
+          "compositeRms": 0.07582,
+          "foregroundPeak": 0.04099,
+          "pulsePeak": 0.15756,
+          "compositePeak": 0.15756,
+          "activeShare": 0.943,
+          "audibleSeparationPass": false,
+          "read": "Foreground cue risks being masked by the stagePulse bed in the cue-probe window."
+        },
+        {
+          "cue": "playerShot",
+          "foregroundOffsetSeconds": 0.18,
+          "foregroundDurationSeconds": 0.24,
+          "pulseDurationSeconds": 0.82,
+          "foregroundRmsOverPulseDb": 9.33,
+          "foregroundPeakOverPulseDb": 14.84,
+          "compositeLiftOverPulseDb": 9.83,
+          "foregroundRms": 0.21965,
+          "pulseRms": 0.07507,
+          "compositeRms": 0.23274,
+          "foregroundPeak": 0.81573,
+          "pulsePeak": 0.14771,
+          "compositePeak": 0.93121,
+          "activeShare": 0.959,
+          "audibleSeparationPass": true,
+          "read": "Foreground cue has measurable level separation over the stagePulse bed."
+        }
+      ]
+    },
+    "publicSafe": {
+      "scenarioId": "publicSafe",
+      "rows": [
+        {
+          "cue": "attackCharge",
+          "foregroundOffsetSeconds": 0.18,
+          "foregroundDurationSeconds": 0.9,
+          "pulseDurationSeconds": 0.15,
+          "foregroundRmsOverPulseDb": null,
+          "foregroundPeakOverPulseDb": null,
+          "compositeLiftOverPulseDb": null,
+          "foregroundRms": 0,
+          "pulseRms": 0,
+          "compositeRms": 0,
+          "foregroundPeak": 0,
+          "pulsePeak": 0,
+          "compositePeak": 0,
+          "activeShare": 0,
+          "audibleSeparationPass": false,
+          "read": "No measurable foreground/pulse RMS ratio."
+        },
+        {
+          "cue": "enemyShot",
+          "foregroundOffsetSeconds": 0.18,
+          "foregroundDurationSeconds": 0.15,
+          "pulseDurationSeconds": 0.15,
+          "foregroundRmsOverPulseDb": null,
+          "foregroundPeakOverPulseDb": null,
+          "compositeLiftOverPulseDb": null,
+          "foregroundRms": 0.00765,
+          "pulseRms": 0,
+          "compositeRms": 0.00765,
+          "foregroundPeak": 0.0166,
+          "pulsePeak": 0,
+          "compositePeak": 0.0166,
+          "activeShare": 0.273,
+          "audibleSeparationPass": false,
+          "read": "No measurable foreground/pulse RMS ratio."
+        },
+        {
+          "cue": "enemyHit",
+          "foregroundOffsetSeconds": 0.18,
+          "foregroundDurationSeconds": 0.188,
+          "pulseDurationSeconds": 0.15,
+          "foregroundRmsOverPulseDb": null,
+          "foregroundPeakOverPulseDb": null,
+          "compositeLiftOverPulseDb": null,
+          "foregroundRms": 0.00951,
+          "pulseRms": 0,
+          "compositeRms": 0.00951,
+          "foregroundPeak": 0.03284,
+          "pulsePeak": 0,
+          "compositePeak": 0.03284,
+          "activeShare": 0.305,
+          "audibleSeparationPass": false,
+          "read": "No measurable foreground/pulse RMS ratio."
+        },
+        {
+          "cue": "enemyBoom",
+          "foregroundOffsetSeconds": 0.18,
+          "foregroundDurationSeconds": 0.201,
+          "pulseDurationSeconds": 0.15,
+          "foregroundRmsOverPulseDb": null,
+          "foregroundPeakOverPulseDb": null,
+          "compositeLiftOverPulseDb": null,
+          "foregroundRms": 0.00829,
+          "pulseRms": 0,
+          "compositeRms": 0.00829,
+          "foregroundPeak": 0.03198,
+          "pulsePeak": 0,
+          "compositePeak": 0.03198,
+          "activeShare": 0.254,
+          "audibleSeparationPass": false,
+          "read": "No measurable foreground/pulse RMS ratio."
+        },
+        {
+          "cue": "bossHit",
+          "foregroundOffsetSeconds": 0.18,
+          "foregroundDurationSeconds": 0.168,
+          "pulseDurationSeconds": 0.15,
+          "foregroundRmsOverPulseDb": null,
+          "foregroundPeakOverPulseDb": null,
+          "compositeLiftOverPulseDb": null,
+          "foregroundRms": 0.00779,
+          "pulseRms": 0,
+          "compositeRms": 0.00779,
+          "foregroundPeak": 0.02643,
+          "pulsePeak": 0,
+          "compositePeak": 0.02643,
+          "activeShare": 0.19,
+          "audibleSeparationPass": false,
+          "read": "No measurable foreground/pulse RMS ratio."
+        },
+        {
+          "cue": "bossBoom",
+          "foregroundOffsetSeconds": 0.18,
+          "foregroundDurationSeconds": 0.442,
+          "pulseDurationSeconds": 0.15,
+          "foregroundRmsOverPulseDb": null,
+          "foregroundPeakOverPulseDb": null,
+          "compositeLiftOverPulseDb": null,
+          "foregroundRms": 0.00875,
+          "pulseRms": 0,
+          "compositeRms": 0.00875,
+          "foregroundPeak": 0.0304,
+          "pulsePeak": 0,
+          "compositePeak": 0.0304,
+          "activeShare": 0.291,
+          "audibleSeparationPass": false,
+          "read": "No measurable foreground/pulse RMS ratio."
+        },
+        {
+          "cue": "playerShot",
+          "foregroundOffsetSeconds": 0.18,
+          "foregroundDurationSeconds": 0.12,
+          "pulseDurationSeconds": 0.15,
+          "foregroundRmsOverPulseDb": null,
+          "foregroundPeakOverPulseDb": null,
+          "compositeLiftOverPulseDb": null,
+          "foregroundRms": 0.00449,
+          "pulseRms": 0,
+          "compositeRms": 0.00449,
+          "foregroundPeak": 0.01379,
+          "pulsePeak": 0,
+          "compositePeak": 0.01379,
+          "activeShare": 0.081,
+          "audibleSeparationPass": false,
+          "read": "No measurable foreground/pulse RMS ratio."
+        }
+      ]
+    }
+  },
+  "recommendation": "Target the weakest foreground/pulse row(s) only: attackCharge, enemyHit, enemyBoom, bossBoom. Keep public-safe cue resolution synthetic/no-reference."
+}

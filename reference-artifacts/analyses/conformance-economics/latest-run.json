@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-06-09T13-56-24-753Z-37836",
-  "startedAt": "2026-06-09T13:56:24.753Z",
-  "endedAt": "2026-06-09T13:56:29.829Z",
-  "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
-  "commit": "e14f47cf",
+  "id": "2026-06-09T18-40-45-246Z-98476",
+  "startedAt": "2026-06-09T18:40:45.246Z",
+  "endedAt": "2026-06-09T18:40:51.346Z",
+  "branch": "codex/macbook-pro-1.4.1-guardians-integration",
+  "commit": "ecff2f1f",
   "command": [
     "npm",
     "run",
-    "harness:check:dev-graphics-options"
+    "harness:analyze:aurora-foreground-audio-balance"
   ],
   "axes": [
     "audio"
@@ -17,13 +17,13 @@
   "resources": [
     "browser"
   ],
-  "notes": "Localhost private reference audio regression fix",
+  "notes": "Aurora foreground audio balance keeper",
   "measurement": {
-    "wallSeconds": 5.076,
-    "timeRealSeconds": 5.07,
-    "timeUserSeconds": 10.13,
-    "timeSystemSeconds": 1.99,
-    "cpuSeconds": 12.12,
+    "wallSeconds": 6.1,
+    "timeRealSeconds": 6.09,
+    "timeUserSeconds": 4.45,
+    "timeSystemSeconds": 1.29,
+    "cpuSeconds": 5.74,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -45,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 2178912352,
-    "artifactBytesAfter": 2178912352,
-    "artifactBytesDelta": 0
+    "artifactBytesBefore": 1268018215,
+    "artifactBytesAfter": 1268018207,
+    "artifactBytesDelta": -8
   }
 }

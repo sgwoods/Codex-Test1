@@ -964,6 +964,29 @@ window.__galagaHarness__={
   const events=(typeof REC!=='undefined'&&Array.isArray(REC?.events))?REC.events:[];
   return events.slice(Math.max(0,events.length-Math.max(1,+limit||256)));
  },
+ audioRuntimeInfo(){
+  const buildInfo=typeof BUILD_INFO!=='undefined'?BUILD_INFO:null;
+  const audioOverrides=typeof currentAudioOverrides==='function'?currentAudioOverrides():null;
+  return {
+   hostname:String(location?.hostname||'').toLowerCase(),
+   branch:String(buildInfo?.branch||''),
+   commit:String(buildInfo?.commit||buildInfo?.gitSha||''),
+   releaseChannel:String(buildInfo?.releaseChannel||''),
+   boundaryEnabled:!!buildInfo?.publicArtifactBoundaryEnabled,
+   referenceAudioAvailable:typeof referenceAudioPubliclyAvailable==='function'?referenceAudioPubliclyAvailable():!buildInfo?.publicArtifactBoundaryEnabled,
+   defaultAudioTheme:String(audioOverrides?.audioTheme||'auto')
+  };
+ },
+ audioCueSpec(name,opts={}){
+  if(!name||typeof sfx==='undefined'||typeof sfx.cueDef!=='function')return null;
+  const cue=sfx.cueDef(String(name),opts||{});
+  let spec=null;
+  try{spec=JSON.parse(JSON.stringify(cue));}catch{}
+  return {
+   spec,
+   event:(window.__platinumAudioDebug||window.__auroraAudioDebug)?.lastCue||null
+  };
+ },
  triggerAudioCue(name,opts={}){
   if(!name)return null;
   if(typeof sfx!=='undefined'&&typeof sfx.playCue==='function')sfx.playCue(String(name),opts||{});

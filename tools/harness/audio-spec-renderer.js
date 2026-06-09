@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
-const { ROOT } = require('../build/paths');
+const { ROOT, DIST_DEV } = require('../build/paths');
 
 const OFFLINE_SAMPLE_RATE = 22050;
 
@@ -75,8 +75,12 @@ function mixNoise(buffer, burst = {}, offsetSeconds = 0, sampleRate = OFFLINE_SA
 }
 
 function referencePcm(clip, clipStart = 0, clipDuration = 0){
-  const source = path.join(ROOT, 'src', String(clip || '').replace(/^assets\//, 'assets/'));
-  if(!fs.existsSync(source)) return new Float32Array();
+  const normalized = String(clip || '').replace(/^assets\//, 'assets/');
+  const source = [
+    path.join(ROOT, 'src', normalized),
+    path.join(DIST_DEV, normalized)
+  ].find(candidate => fs.existsSync(candidate));
+  if(!source) return new Float32Array();
   const args = ['-v', 'error', '-ss', String(Math.max(0, +clipStart || 0))];
   if(Number.isFinite(+clipDuration) && +clipDuration > 0) args.push('-t', String(+clipDuration));
   args.push('-i', source, '-ac', '1', '-ar', String(OFFLINE_SAMPLE_RATE), '-f', 'f32le', 'pipe:1');
