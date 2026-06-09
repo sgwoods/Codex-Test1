@@ -264,27 +264,122 @@ function guardiansPersonaSelectTarget(state,cfg){
 }
 
 function guardiansPersonaEffectiveCfg(state,cfg){
- if(!state||!cfg||cfg.name!=='advanced') return cfg;
- if((state.stage|0)!==1) return cfg;
- const expert=GALAXY_GUARDIANS_HARNESS_PERSONAS.expert;
- const professional=GALAXY_GUARDIANS_HARNESS_PERSONAS.professional;
- return Object.assign({}, expert, {
-  name:cfg.name,
-  shotCadence:professional.shotCadence,
-  stageOpeningHold:professional.stageOpeningHold,
-  openShotY:professional.openShotY,
-  diveBias:professional.diveBias,
-  escortBias:professional.escortBias,
-  flagshipBias:professional.flagshipBias,
-  linkedEscortBias:professional.linkedEscortBias,
-  rackClearBonus:professional.rackClearBonus,
-  holdFireDuringUrgentThreat:professional.holdFireDuringUrgentThreat||0
- });
+ if(!state||!cfg)return cfg;
+ const rank=typeof guardiansStageRank==='function'?guardiansStageRank(state):0;
+ let effective=cfg;
+ if(cfg.name==='advanced'&&(state.stage|0)===1){
+  const expert=GALAXY_GUARDIANS_HARNESS_PERSONAS.expert;
+  const professional=GALAXY_GUARDIANS_HARNESS_PERSONAS.professional;
+  effective=Object.assign({}, expert, {
+   name:cfg.name,
+   shotCadence:professional.shotCadence,
+   stageOpeningHold:professional.stageOpeningHold,
+   openShotY:professional.openShotY,
+   diveBias:professional.diveBias,
+   escortBias:professional.escortBias,
+   flagshipBias:professional.flagshipBias,
+   linkedEscortBias:professional.linkedEscortBias,
+   rackClearBonus:professional.rackClearBonus,
+   holdFireDuringUrgentThreat:professional.holdFireDuringUrgentThreat||0
+  });
+ }
+ if(rank===0&&(state.stage|0)<=2){
+  const isAdvanced=effective.name==='advanced';
+  const isExpert=effective.name==='expert';
+  const earlyThreatY=effective.name==='novice'?166:142;
+  const earlyThreatDx=effective.name==='novice'?34:44;
+  const earlyShotLook=effective.name==='novice'
+   ?116
+   :isAdvanced?Math.max(effective.urgentShotLook,136):isExpert?Math.max(effective.urgentShotLook,180):Math.max(effective.urgentShotLook,168);
+  const earlyShotDx=effective.name==='novice'
+   ?22
+   :isAdvanced?Math.max(effective.urgentShotDx,24):isExpert?Math.max(effective.urgentShotDx,36):Math.max(effective.urgentShotDx,32);
+  const edgeEscapeInset=effective.name==='novice'||effective.name==='professional'?24:undefined;
+  const expertSafeLane=isExpert?{
+   safeLane:1,
+   safeLaneStep:34,
+   safeLaneShotLook:230,
+   safeLaneShotDx:34,
+   safeLaneDiveY:140,
+   safeLaneDiveDx:22,
+   safeLaneShotWeight:1.35
+  }:null;
+  effective=Object.assign({}, effective, {
+   diveThreatY:Math.min(effective.diveThreatY,earlyThreatY),
+   diveThreatDx:Math.max(effective.diveThreatDx,earlyThreatDx),
+   urgentShotLook:earlyShotLook,
+   urgentShotDx:earlyShotDx,
+   edgeEscapeInset
+  },expertSafeLane||{});
+ }
+ if(rank>=3&&(effective.name==='expert'||effective.name==='professional')){
+  return Object.assign({}, effective, {
+   diveThreatY:Math.min(effective.diveThreatY,rank>=5?126:136),
+   diveThreatDx:Math.max(effective.diveThreatDx,rank>=5?56:48)
+  });
+ }
+ return effective;
+}
+
+function guardiansPersonaSafeLaneAxis(state,cfg,target){
+ const player=state.player||{};
+ const playfieldWidth=GALAXY_GUARDIANS_RUNTIME_PROFILE?.rules?.playfieldWidth||280;
+ const playerX=+player.x||0;
+ const playerY=+player.y||0;
+ const step=Math.max(18,+cfg.safeLaneStep||30);
+ const shotLook=Math.max(+cfg.urgentShotLook||0,+cfg.safeLaneShotLook||180);
+ const shotDx=Math.max(+cfg.urgentShotDx||0,+cfg.safeLaneShotDx||24);
+ const diveY=Number.isFinite(+cfg.safeLaneDiveY)?+cfg.safeLaneDiveY:(+cfg.diveThreatY||140);
+ const diveDx=Math.max(+cfg.diveThreatDx||0,+cfg.safeLaneDiveDx||28);
+ const shotWeight=Math.max(.2,+cfg.safeLaneShotWeight||1);
+ const diveWeight=Math.max(.2,+cfg.safeLaneDiveWeight||1);
+ const shots=(state.enemyShots||[]).filter(shot=>
+  shot&&shot.active!==0&&shot.y<playerY&&playerY-shot.y<shotLook
+ );
+ const dives=(state.aliens||[]).filter(alien=>
+  alien&&alien.hp>0&&(alien.mode==='diving'||alien.mode==='wrapping')&&alien.y<playerY&&alien.y>=diveY
+ );
+ if(!shots.length&&!dives.length)return null;
+ const targetX=target?+target.x||playerX:playfieldWidth/2;
+ const scored=[-1,0,1].map(axis=>{
+  const x=Math.max(18,Math.min(playfieldWidth-18,playerX+axis*step));
+  let risk=0;
+  for(const shot of shots){
+   const dx=Math.abs((+shot.x||0)-x);
+   const dy=Math.max(0,playerY-(+shot.y||0));
+   if(dx<=shotDx)risk+=shotWeight*(4+(shotDx-dx)/Math.max(1,shotDx)*4+Math.max(0,1-dy/Math.max(1,shotLook))*2);
+  }
+  for(const alien of dives){
+   const dx=Math.abs((+alien.x||0)-x);
+   const dy=Math.max(0,playerY-(+alien.y||0));
+   if(dx<=diveDx)risk+=diveWeight*(5+(diveDx-dx)/Math.max(1,diveDx)*5+Math.max(0,1-dy/Math.max(1,playerY-diveY))*2);
+  }
+  if(x<=22||x>=playfieldWidth-22)risk+=3;
+  risk+=Math.abs(targetX-x)*.006;
+  if(axis===0)risk+=.15;
+  return {axis,risk};
+ }).sort((a,b)=>a.risk-b.risk||Math.abs(a.axis)-Math.abs(b.axis));
+ const best=scored[0];
+ const current=scored.find(row=>row.axis===0);
+ if(!best||!Number.isFinite(best.risk))return null;
+ if(current&&current.risk<=best.risk+.45)return 0;
+ return best.axis;
 }
 
 function guardiansPersonaMoveAxis(state,cfg,target){
  const player=state.player||{};
  const playfieldWidth=GALAXY_GUARDIANS_RUNTIME_PROFILE?.rules?.playfieldWidth||280;
+ if(Number.isFinite(cfg.edgeEscapeInset)){
+  const inset=Math.max(16,+cfg.edgeEscapeInset||0);
+  if(player.x<inset)return 1;
+  if(player.x>playfieldWidth-inset)return -1;
+ }
+ if(cfg.safeLane){
+  const axis=guardiansPersonaSafeLaneAxis(state,cfg,target);
+  if(axis!==null){
+   if((axis<0&&player.x>18)||(axis>0&&player.x<playfieldWidth-18)||axis===0)return axis;
+  }
+ }
  const diveThreat=guardiansPersonaNearestDiveThreat(state,cfg);
  if(diveThreat){
   const away=diveThreat.x>=player.x?-1:1;
@@ -395,7 +490,7 @@ function syncGalaxyGuardiansShellState(state){
  S.score=state.score|0;
  S.stage=state.stage|0;
  S.lives=Math.max(0,(state.lives|0)-1);
- S.harnessPersona=String(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
+ S.harnessPersona=String(S.watchPersona||window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  if(typeof currentGamePackStagePresentation==='function')S.stagePresentation=currentGamePackStagePresentation(S.stage,0);
  if(typeof stageBandProfile==='function')S.profile=stageBandProfile(S.stage,0);
  S.stageClock=+state.t||0;
@@ -410,11 +505,16 @@ function syncGalaxyGuardiansShellState(state){
   if(!gameOverState&&typeof buildGameOverState==='function'){
    const completed=!!state.completed||String(state.gameOverReason||'')==='mission_complete';
    gameOverState=buildGameOverState(state.score|0,state.stage|0,false,completed?{
+    gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
+    gameTitle:GALAXY_GUARDIANS_PACK.metadata.title,
     outcome:'mission_complete',
     resultTitle:'MISSION COMPLETE',
     resultSub:'SIGNAL RACK BROKEN'
-   }:undefined);
-   if(gameOverState&&!gameOverState.editing&&typeof submitGameOverScore==='function')submitGameOverScore();
+   }:{
+    gameKey:GALAXY_GUARDIANS_PACK.metadata.gameKey,
+    gameTitle:GALAXY_GUARDIANS_PACK.metadata.title
+   });
+   if(gameOverState&&!gameOverState.editing&&!gameOverState.watchMode&&typeof submitGameOverScore==='function')submitGameOverScore();
   }
   gameOverHtml=typeof buildGameOverHtmlFromState==='function'
    ? buildGameOverHtmlFromState()
@@ -659,6 +759,7 @@ function startGalaxyGuardiansDevPreview(cfg={}){
   watchPersona,
   watchScope
  });
+ S.harnessPersona=watchPersona||String(window.__platinumHarnessPersona||window.__auroraHarnessPersona||'').toLowerCase();
  S.stats={shots:0,hits:0};
  GALAXY_GUARDIANS_ACTIVE_DEV_STATE=createGalaxyGuardiansRuntimeState({
   stage:S.stage,
@@ -704,7 +805,7 @@ function updateGalaxyGuardiansDevPreview(dt){
  if(!GALAXY_GUARDIANS_ACTIVE_DEV_STATE)return;
  const manualInput=galaxyGuardiansInputFromKeys();
  const personaInput=!guardiansHasManualInput(manualInput)
-  ? galaxyGuardiansHarnessPersonaInput(GALAXY_GUARDIANS_ACTIVE_DEV_STATE)
+  ? galaxyGuardiansHarnessPersonaInput(GALAXY_GUARDIANS_ACTIVE_DEV_STATE,S.harnessPersona||S.watchPersona||'')
   : null;
  stepGalaxyGuardiansRuntime(GALAXY_GUARDIANS_ACTIVE_DEV_STATE,dt,personaInput||manualInput);
  if(typeof advanceGalaxyGuardiansPreviewStarfield==='function'){

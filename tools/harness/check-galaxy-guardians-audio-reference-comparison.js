@@ -19,6 +19,11 @@ function exists(relPath){
   return fs.existsSync(path.join(ROOT, relPath));
 }
 
+function evidenceExists(relPath){
+  if(exists(relPath)) return true;
+  return fs.existsSync(path.join(ROOT, 'private-artifacts', 'repo-mirror', relPath));
+}
+
 function main(){
   if(!exists(ARTIFACT)) fail(`Missing Guardians audio comparison artifact: ${ARTIFACT}`);
   const artifact = readJson(ARTIFACT);
@@ -38,7 +43,7 @@ function main(){
   }
   let nonSilentWindows = 0;
   for(const window of artifact.referenceAudioSummary?.windows || []){
-    if(!window.waveform || !exists(window.waveform) || !window.spectrogram || !exists(window.spectrogram)){
+    if(!window.waveform || !evidenceExists(window.waveform) || !window.spectrogram || !evidenceExists(window.spectrogram)){
       fail('Audio reference window is missing waveform or spectrogram evidence', { window, payload });
     }
     if(!window.metrics || (window.metrics.durationSeconds || 0) <= 0){

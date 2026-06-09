@@ -1,0 +1,56 @@
+{
+  "gameKey": "galaxy-guardians-preview",
+  "artifactType": "galaxy-guardians-expert-opening-failure",
+  "version": "0.1",
+  "createdOn": "2026-06-08T03:26:14.712Z",
+  "status": "expert-opening-routeability-diagnostic-not-runtime-promotion",
+  "sourceEvidence": [
+    "tools/harness/guardians-long-surface-lib.js",
+    "src/js/13-galaxy-guardians-gameplay-adapter.js",
+    "src/js/13-galaxy-guardians-runtime.js",
+    "reference-artifacts/analyses/galaxy-guardians-identity/routeability-review-0.1.json"
+  ],
+  "summary": {
+    "persona": "expert",
+    "seed": 5175,
+    "simT": 179.85,
+    "score": 1910,
+    "finalStage": 1,
+    "lossCount": 0,
+    "enemyShotLosses": 0,
+    "collisionLosses": 0,
+    "allLossesHavePressure": true,
+    "read": "Expert opening seed 5175 ends at 179.85s with score 1910; losses are 0 enemy-shot and 0 collision. The next safe tuning target is whichever loss windows show avoidable pressure without reducing Advanced routeability."
+  },
+  "trace": {
+    "persona": "expert",
+    "seed": 5175,
+    "stageStart": 1,
+    "ships": 3,
+    "maxPlayableStage": 6,
+    "durationSeconds": 180,
+    "simT": 179.85,
+    "finalStage": 1,
+    "score": 1910,
+    "lives": 3,
+    "gameOver": false,
+    "gameOverReason": "",
+    "eventCounts": {
+      "formation_entry_start": 1,
+      "player_shot_fired": 30,
+      "formation_entry_settle": 1,
+      "formation_rack_complete": 1,
+      "rack_pulse": 91,
+      "player_shot_resolved": 30,
+      "alien_dive_start": 68,
+      "enemy_shot": 113,
+      "flagship_dive_start": 24,
+      "escort_join": 24,
+      "enemy_wrap_or_return": 125
+    },
+    "lossCount": 0,
+    "lossCauses": {},
+    "losses": []
+  },
+  "promotionPolicy": "Do not promote Expert opening changes from score alone. A candidate should preserve Advanced three-ship routeability, improve Expert survival or stage progress on seed 5175, and reduce repeated loss windows without hiding core Galaxian-family shot/dive pressure."
+}

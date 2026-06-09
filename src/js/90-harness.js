@@ -603,9 +603,9 @@ window.__galagaHarness__={
  currentPackKey(){
   return typeof currentGamePackKey==='function'?currentGamePackKey():'';
  },
- localScoreRows(){
+ localScoreRows(gameKey=''){
   return typeof localLeaderboardRows==='function'
-   ? localLeaderboardRows().map(row=>({
+   ? localLeaderboardRows(gameKey||currentScoreStorageGameKey()).map(row=>({
       id:String(row?.id||''),
       score:+row?.score|0,
       stage:+row?.stage|0,
@@ -614,9 +614,9 @@ window.__galagaHarness__={
      }))
    : [];
  },
- localScoreHistory(){
+ localScoreHistory(gameKey=''){
   return typeof loadScoreHistory==='function'
-   ? loadScoreHistory().map(row=>({
+   ? loadScoreHistory(gameKey||currentScoreStorageGameKey()).map(row=>({
       id:String(row?.id||''),
       score:+row?.score|0,
       stage:+row?.stage|0,
@@ -708,6 +708,8 @@ window.__galagaHarness__={
   return{
    html:gameOverHtml||'',
    phase:gameOverState?.phase||'',
+   gameKey:String(gameOverState?.gameKey||''),
+   gameTitle:String(gameOverState?.gameTitle||''),
    stage:+(gameOverState?.stage||0),
    shownStage:+(gameOverState?.shownStage||0),
    challenge:!!gameOverState?.challenge,
@@ -1237,6 +1239,25 @@ window.__galagaHarness__={
   return typeof summarizeGalaxyGuardiansDevPreview==='function'
    ? summarizeGalaxyGuardiansDevPreview()
    : null;
+ },
+ forceGuardiansGameOver(cfg={}){
+  const state=typeof currentGalaxyGuardiansDevPreviewState==='function'
+   ? currentGalaxyGuardiansDevPreviewState()
+   : null;
+  if(!state||typeof syncGalaxyGuardiansShellState!=='function')return null;
+  state.score=+cfg.score||state.score||0;
+  state.stage=Math.max(1,+cfg.stage||state.stage||1);
+  state.lives=Math.max(0,+cfg.lives||0);
+  state.gameOver=true;
+  state.completed=!!cfg.completed;
+  state.gameOverReason=String(cfg.reason||(state.completed?'mission_complete':'harness_guardians_game_over'));
+  state.stats={
+   shots:+cfg.shots||+(state.stats?.shots||0),
+   hits:+cfg.hits||+(state.stats?.hits||0)
+  };
+  if(cfg.activePackDrift&&typeof installGamePack==='function')installGamePack(String(cfg.activePackDrift),{persist:false});
+  syncGalaxyGuardiansShellState(state);
+  return this.gameOverView();
  },
  redraw(){
   if(typeof draw==='function')draw();

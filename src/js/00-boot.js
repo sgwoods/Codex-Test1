@@ -1582,9 +1582,9 @@ function buildResultsHtml(stats,score,stage,challenge=isChallengeStage(stage),op
  const watch=S.watchMode?`<span class="playerTwoResult"><span>WATCH MODE   ${S.watchPersona?`${watchModePersonaLabel(S.watchPersona)} PILOT`:''}${watchScope}</span><span>SCORE NOT RECORDED</span></span>`:'';
  return `<span class="gameOverTitle">${title}</span><span class="gameOverSub">${sub}</span>${contextLine?`<span class="gameOverMeta">${contextLine}</span>`:''}<span class="resultsTable"><span class="resultsLabel">SHOTS FIRED</span><span class="resultsValue">${shots}</span><span class="resultsLabel">NUMBER OF HITS</span><span class="resultsValue">${hits}</span><span class="resultsLabel">HIT-MISS RATIO</span><span class="resultsValue">${ratio}%</span><span class="resultsLabel">SCORE</span><span class="resultsValue">${formatScore(score)}</span><span class="resultsLabel">STAGE</span><span class="resultsValue">${formatDisplayedStage(stage,challenge)}</span></span>${watch}${playerTwo}<span class="gameOverFoot blinkPrompt"><span class="k">Enter</span> to continue</span>`;
 }
-function recordScore(score,stage,initials='YOU'){
- const gameKey=currentScoreStorageGameKey();
- const gameTitle=currentScoreStorageGameTitle();
+function recordScore(score,stage,initials='YOU',opts={}){
+ const gameKey=normalizeScoreRecordGameKey(opts.gameKey||currentScoreStorageGameKey());
+ const gameTitle=scoreGameTitleForKey(gameKey,opts.gameTitle||currentScoreStorageGameTitle());
  const entry={
   id:`${Date.now()}-${Math.random().toString(36).slice(2,7)}`,
   initials:sanitizeInitials(initials||'YOU').padEnd(3,'-').slice(0,3),
@@ -1595,14 +1595,14 @@ function recordScore(score,stage,initials='YOU'){
   gameKey,
   gameTitle
  };
- const board=loadScoreboard();
- const history=loadScoreHistory();
+ const board=loadScoreboard(gameKey);
+ const history=loadScoreHistory(gameKey);
  board.push(entry);
  board.sort((a,b)=>b.score-a.score||b.stage-a.stage||a.at.localeCompare(b.at));
  history.unshift(entry);
- saveScoreHistory(history);
+ saveScoreHistory(history,gameKey);
  const top=board.slice(0,10);
- saveScoreboard(top);
+ saveScoreboard(top,gameKey);
  S.best=top[0]?.score||0;
  writePref(scoreBestKey(gameKey),String(S.best));
  if(typeof syncAccountUi==='function')syncAccountUi();
@@ -1637,11 +1637,12 @@ function buildGameOverHtmlFromState(){
    })
   });
  }
- const board=leaderboardRowsForView();
+ const targetGameKey=normalizeScoreRecordGameKey(gameOverState.gameKey||currentScoreStorageGameKey());
+ const board=leaderboardRowsForView(LEADERBOARD.view,{gameKey:targetGameKey});
  const filled=(board.length?board:Array.from({length:10},(_,i)=>({initials:'---',score:0,stage:0,idx:i+1})));
  const rows=filled.map((row,i)=>`<span class="scoreRank${row.id===gameOverState.entryId?' scoreHot':''}">${String((row.idx||i+1)).padStart(2,'0')}</span><span class="scoreName${row.id===gameOverState.entryId?' scoreHot':''}">${row.initials}</span><span class="scoreValue${row.id===gameOverState.entryId?' scoreHot':''}">${formatScore(row.score)}</span><span class="scoreStage${row.id===gameOverState.entryId?' scoreHot':''}">${String(row.stage).padStart(2,' ')}</span>`).join('');
  const rankTxt=gameOverState.rank?`YOUR RANK ${String(gameOverState.rank).padStart(2,'0')}`:'SCORE NOT IN TOP 10';
- const boardTitle=currentLeaderboardTitle();
+ const boardTitle=currentLeaderboardTitle(LEADERBOARD.view,targetGameKey);
  let entryHtml='';
  const authPromptText=typeof topScoreSavedLocallyPromptText==='function'
   ? topScoreSavedLocallyPromptText(gameOverState.gameTitle||'')
@@ -1666,6 +1667,8 @@ function buildGameOverState(score,stage,challenge=0,opts={}){
  if(S.watchMode||S.playerTwo?.activeTurn==='done'){
   const shownStage=displayStageNumber(stage,challenge);
   const playerTwoMode=!!(!S.watchMode&&S.playerTwo?.activeTurn==='done');
+  const gameKey=normalizeScoreRecordGameKey(opts.gameKey||currentScoreStorageGameKey());
+  const gameTitle=scoreGameTitleForKey(gameKey,opts.gameTitle||currentScoreStorageGameTitle());
   const outcome=String(opts.outcome||'game_over').trim()||'game_over';
   const resultTitle=String(opts.resultTitle||(outcome==='mission_complete'?'MISSION COMPLETE':'GAME OVER')).trim()||(outcome==='mission_complete'?'MISSION COMPLETE':'GAME OVER');
   const resultSub=String(opts.resultSub||(outcome==='mission_complete'?'SIGNAL RACK BROKEN':'RESULTS')).trim()||(outcome==='mission_complete'?'SIGNAL RACK BROKEN':'RESULTS');
@@ -1677,8 +1680,8 @@ function buildGameOverState(score,stage,challenge=0,opts={}){
    stage:stage|0,
    challenge:!!challenge,
    shownStage,
-   gameKey:currentScoreStorageGameKey(),
-   gameTitle:currentScoreStorageGameTitle(),
+   gameKey,
+   gameTitle,
    stats:{shots:S.stats.shots|0,hits:S.stats.hits|0},
    initials:['-','-','-'],
    cursor:0,
@@ -1696,12 +1699,12 @@ function buildGameOverState(score,stage,challenge=0,opts={}){
  const pilotInitials=((typeof lockedPilotInitials==='function'&&lockedPilotInitials())||(typeof preferredInitialsFromUser==='function'?preferredInitialsFromUser():'')).padEnd(3,'-').slice(0,3);
  const hasLockedPilotInitials=typeof LEADERBOARD!=='undefined'&&LEADERBOARD?.user&&pilotInitials&&pilotInitials!=='---';
  const shownStage=displayStageNumber(stage,challenge);
- const gameKey=currentScoreStorageGameKey();
- const gameTitle=currentScoreStorageGameTitle();
+ const gameKey=normalizeScoreRecordGameKey(opts.gameKey||currentScoreStorageGameKey());
+ const gameTitle=scoreGameTitleForKey(gameKey,opts.gameTitle||currentScoreStorageGameTitle());
  const outcome=String(opts.outcome||'game_over').trim()||'game_over';
  const resultTitle=String(opts.resultTitle||(outcome==='mission_complete'?'MISSION COMPLETE':'GAME OVER')).trim()||(outcome==='mission_complete'?'MISSION COMPLETE':'GAME OVER');
  const resultSub=String(opts.resultSub||(outcome==='mission_complete'?'SIGNAL RACK BROKEN':'RESULTS')).trim()||(outcome==='mission_complete'?'SIGNAL RACK BROKEN':'RESULTS');
- const res=recordScore(score,shownStage,hasLockedPilotInitials?pilotInitials:'YOU');
+ const res=recordScore(score,shownStage,hasLockedPilotInitials?pilotInitials:'YOU',{gameKey,gameTitle});
  const editing=!!res.rank&&!hasLockedPilotInitials;
  const videoPosting=typeof topScoreVideoPostingEligibility==='function'
   ? topScoreVideoPostingEligibility(res.rank)

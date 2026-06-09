@@ -42,7 +42,9 @@ async function main(){
       challengeGroups: currentGamePack().challengeLayout?.groups,
       atmosphereTheme: currentGamePackResolvedAtmosphere({ frontDoor: true })?.id,
       audioTheme: currentGamePackAudioTheme('guardians-signal')?.id,
-      referenceTiming: currentGamePackReferenceTiming('previewEntry')
+      referenceTiming: currentGamePackReferenceTiming('previewEntry'),
+      watchModeSupported: gamePackSupportsWatchMode('galaxy-guardians-preview'),
+      personaRivalSupported: gamePackSupportsPersonaRival('galaxy-guardians-preview')
     };
 
     installGamePack('aurora-galactica');
@@ -53,7 +55,9 @@ async function main(){
       key: currentGamePackKey(),
       playable: currentGamePackPlayable(),
       stage3Challenge: auroraIsChallenge(3),
-      referenceTiming: currentGamePackReferenceTiming('stage1Opening')
+      referenceTiming: currentGamePackReferenceTiming('stage1Opening'),
+      watchModeSupported: gamePackSupportsWatchMode('aurora-galactica'),
+      personaRivalSupported: gamePackSupportsPersonaRival('aurora-galactica')
     };
 
     return {
@@ -74,7 +78,7 @@ async function main(){
     fail('Galaxy Guardians could not be installed as the active preview pack', result);
   }
   if(result.guardianState.playable !== false){
-    fail('Galaxy Guardians preview became playable before a gameplay adapter exists', result);
+    fail('Galaxy Guardians preview public-playable flag changed; hosted preview playability should remain adapter-gated', result);
   }
   if(result.guardianState.stage3Challenge || result.guardianState.stage7Challenge){
     fail('Galaxy Guardians preview inherited Aurora challenge cadence', result);
@@ -91,6 +95,9 @@ async function main(){
   if(!result.guardianState.referenceTiming || result.guardianState.referenceTiming.firstScoutDiveDelay !== 2.55){
     fail('Galaxy Guardians preview did not resolve pack-owned reference timing data', result);
   }
+  if(result.guardianState.watchModeSupported !== true || result.guardianState.personaRivalSupported !== false){
+    fail('Galaxy Guardians modality contract should expose Watch while keeping persona Rival unsupported', result);
+  }
   if(result.auroraState.key !== 'aurora-galactica' || result.auroraState.playable !== true){
     fail('Aurora did not restore as the playable default pack', result);
   }
@@ -99,6 +106,9 @@ async function main(){
   }
   if(!result.auroraState.referenceTiming || result.auroraState.referenceTiming.startPhraseDuration !== 4){
     fail('Aurora reference timing data was damaged by the pack split', result);
+  }
+  if(result.auroraState.watchModeSupported !== true || result.auroraState.personaRivalSupported !== true){
+    fail('Aurora modality contract should keep both Watch and persona Rival enabled', result);
   }
 
   console.log(JSON.stringify({

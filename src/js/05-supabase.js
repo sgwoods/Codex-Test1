@@ -215,8 +215,8 @@ function resolveRowTimestamp(row){
  return replayMatch?.createdAt||'';
 }
 
-function localLeaderboardRows(){
- return loadScoreboard().map(row=>Object.assign({verified:0},row));
+function localLeaderboardRows(gameKey=currentScoreStorageGameKey()){
+ return loadScoreboard(gameKey).map(row=>Object.assign({verified:0},row));
 }
 function leaderboardCacheKey(view,userId=LEADERBOARD.user?.id||'anon'){
  return `${LEADERBOARD_CACHE_PREFIX}${view}${view==='mine'?`.${userId}`:''}`;

@@ -1076,7 +1076,21 @@ const AURORA_GAME_PACK=Object.freeze({
   usesDualFighterMode:1,
   usesStaticShields:0,
   usesStageThemeProgression:1,
-  usesBossArchetypeVariants:1
+  usesBossArchetypeVariants:1,
+  supportsWatchMode:1,
+  supportsPersonaRival:1
+ }),
+ modalities:Object.freeze({
+  watch:Object.freeze({
+   enabled:1,
+   defaultPersona:'advanced',
+   scoreRecording:'disabled'
+  }),
+  personaRival:Object.freeze({
+   enabled:1,
+   requiresSignIn:1,
+   scoreRecording:'human-only'
+  })
  }),
  atmosphereThemes:AURORA_ATMOSPHERE_THEMES,
  audioThemes:AURORA_AUDIO_THEMES,
