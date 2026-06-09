@@ -166,18 +166,20 @@ function compileCandidateControls({ candidate, baselineTrial }){
     ? round((+targetVector.yRange - +baselineVector.yRange) * PLAY_H * 0.42, 3)
     : 16;
   const desiredExit = targetVector.exitSide || targetGroup?.semanticExecution?.exitGesture || '';
+  const peelCompensationX = round((1 - pathLengthScale) * 56, 3);
   const routeOffsetX = String(desiredExit).includes('right')
-    ? 32
-    : (String(desiredExit).includes('left') ? -32 : 0);
+    ? round(32 + peelCompensationX, 3)
+    : (String(desiredExit).includes('left') ? round(-32 - peelCompensationX, 3) : 0);
   return [
     {
-      semanticControl: 'referencePath.playbackScale',
-      runtimeField: 'groupReferencePaths[3].playbackScale',
+      semanticControl: 'motionSpec.pathPlaybackScale',
+      runtimeField: 'motionSpecGroups[3].controls.pathPlaybackScale',
       value: pathLengthScale,
-      intendedEffect: 'compress group 4 path clock/path length toward the RED predicted vector',
-      runtimeCurrentlyConsumes: false,
-      appliedByProof: false,
-      nonConsumptionReason: 'Stage 3 current runtime has no reference-backed groupReferencePaths for Challenge 1, so playbackScale has no path points to consume.'
+      intendedEffect: 'scale group 4 non-reference challenge path playback toward the RED predicted path length',
+      runtimeCurrentlyConsumes: true,
+      appliedByProof: true,
+      derivedFrom: 'candidate.groups[4].predictedRuntimeVector.pathLength / baseline group 4 pathLength',
+      previousBlockerResolved: 'Replaces unconsumed groupReferencePaths[3].playbackScale for Stage 3 motionSpec-backed groups.'
     },
     {
       semanticControl: 'routeCurveY',
@@ -195,7 +197,7 @@ function compileCandidateControls({ candidate, baselineTrial }){
       intendedEffect: 'move group 4 exit read toward the RED right peel-off',
       runtimeCurrentlyConsumes: true,
       appliedByProof: true,
-      derivedFrom: 'candidate.groups[4].semanticExecution.exitGesture'
+      derivedFrom: 'candidate.groups[4].semanticExecution.exitGesture plus pathPlaybackScale peel compensation'
     }
   ];
 }
@@ -227,12 +229,6 @@ function classifyProof({
     failures.push({
       category: 'not-runtime-expressible',
       read: 'A generated browser override field was not consumed by the runtime proof.'
-    });
-  }
-  if(compiledRuntimeFields.some(field => !field.appliedByProof && field.runtimeCurrentlyConsumes === false)){
-    failures.push({
-      category: 'not-runtime-expressible',
-      read: 'The semantic candidate still depends on referencePath.playbackScale, but Stage 3 has no reference-backed path for that control.'
     });
   }
   if(!targetRead.browserVisiblePathMovement && !targetRead.browserVisiblePeelMovement){
@@ -488,6 +484,7 @@ async function captureProof({ compiledRuntimeControls, candidate }){
           maxSpawn: group.length ? round(Math.max(...group.map(enemy => +enemy.spawn || 0)), 3) : null,
           routeControls: group.slice(0, 2).map(enemy => ({
             lane: enemy.lane,
+            pathPlaybackScale: enemy.pathPlaybackScale,
             routeOffsetX: enemy.routeOffsetX,
             routeCurveY: enemy.routeCurveY,
             referencePath: enemy.referencePath
@@ -872,6 +869,10 @@ Source-readiness classification: ${report.decision.sourceReadinessClassification
 
 ## Runtime Control Consumption
 
+Previous blocker: ${report.runtimeControlConsumptionMap.previousBlocker.runtimeField} was ${report.runtimeControlConsumptionMap.previousBlocker.status}.
+
+New motionSpec control: ${report.runtimeControlConsumptionMap.proposedMotionSpecControl.name} (${report.runtimeControlConsumptionMap.proposedMotionSpecControl.semantics})
+
 | Semantic control | Runtime field | Value | Runtime consumes | Consumed by proof | Applied targets / reason |
 | --- | --- | ---: | --- | --- | --- |
 ${controlRows}
@@ -972,6 +973,18 @@ async function main(){
     hypothesizedRuntimeControls: candidate.transferProofHypothesis?.hypothesizedRuntimeControls || [],
     compiledRuntimeControls,
     runtimeControlConsumptionMap: {
+      previousBlocker: {
+        runtimeField: 'groupReferencePaths[3].playbackScale',
+        status: 'replaced-for-motionSpec-backed-stage3-proof',
+        read: 'Stage 3 / Challenge 1 remains non-reference-path backed, so the proof now maps semantic path-length intent to motionSpecGroups[3].controls.pathPlaybackScale.'
+      },
+      proposedMotionSpecControl: {
+        name: 'pathPlaybackScale',
+        runtimeField: 'motionSpecGroups[groupIndex-1].controls.pathPlaybackScale',
+        semantics: 'Scale local non-reference challenge path playback for a motionSpec-backed group without requiring groupReferencePaths.',
+        reusableForFutureStage3Candidates: true,
+        referencePathBackingDebtRemains: true
+      },
       exactBrowserOverrideFieldsApplied: evaluation.compiledRuntimeFields
         .filter(field => field.appliedInLayoutOverride)
         .flatMap(field => field.appliedTargets.map(target => target.target)),
@@ -1015,9 +1028,10 @@ async function main(){
       ],
       candidateSpecificParts: [
         'the current compiler projects group 4 right peel to routeOffsetX and group 4 y-range delta to routeCurveY',
-        'referencePath.playbackScale is reported as unconsumed for Stage 3 because the runtime layout is not reference-path backed'
+        'the current compiler projects group 4 path-length intent to pathPlaybackScale because Stage 3 is motionSpec-backed rather than referencePath-backed'
       ],
       abstractionNeeded: 'Promote semantic-control mapping into a stage-neutral compiler table with per-stage authority and consumed-field declarations.',
+      motionSpecBackendVsReferencePathBacking: 'pathPlaybackScale is the smallest backend for motionSpec-backed stages and keeps Stage 3 source attempts narrow. Reference-path backing remains future architecture debt because it would let the runtime consume measured path points directly instead of approximating them through procedural path playback.',
       read: 'Future Stage 3 candidates can reuse this proof path by changing the selected candidate id and adding compiler mappings instead of writing bespoke browser scripts.'
     },
     decision: {

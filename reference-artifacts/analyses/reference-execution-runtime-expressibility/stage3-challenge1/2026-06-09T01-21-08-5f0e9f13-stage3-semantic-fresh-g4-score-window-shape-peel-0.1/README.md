@@ -49,7 +49,7 @@ New motionSpec control: pathPlaybackScale (Scale local non-reference challenge p
 - No-combat grammar pass: true
 - Safety pass: true; no shots true, no attacks true, no losses true
 
-Contact sheet: reference-artifacts/analyses/reference-execution-runtime-expressibility/stage3-challenge1/latest-transfer-proof-contact-sheet.svg
+Contact sheet: reference-artifacts/analyses/reference-execution-runtime-expressibility/stage3-challenge1/2026-06-09T01-21-08-5f0e9f13-stage3-semantic-fresh-g4-score-window-shape-peel-0.1/contact-sheet.svg
 
 ## Blockers
 

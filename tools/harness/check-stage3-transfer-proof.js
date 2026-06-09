@@ -45,7 +45,16 @@ function main(){
   if(!Array.isArray(controls) || controls.length < 3){
     fail('Stage 3 transfer proof must report all hypothesized/compiled runtime controls.', { controls });
   }
-  for(const field of ['groupReferencePaths[3].playbackScale', 'motionSpecGroups[3].controls.routeCurveY', 'motionSpecGroups[3].controls.routeOffsetX']){
+  const controlMap = report.runtimeControlConsumptionMap || {};
+  if(controlMap.previousBlocker?.runtimeField !== 'groupReferencePaths[3].playbackScale'){
+    fail('Stage 3 transfer proof must report the previous reference-path playback blocker.', { previousBlocker: controlMap.previousBlocker });
+  }
+  if(controlMap.proposedMotionSpecControl?.name !== 'pathPlaybackScale'){
+    fail('Stage 3 transfer proof must report the proposed motionSpec path-length backend.', {
+      proposedMotionSpecControl: controlMap.proposedMotionSpecControl
+    });
+  }
+  for(const field of ['motionSpecGroups[3].controls.pathPlaybackScale', 'motionSpecGroups[3].controls.routeCurveY', 'motionSpecGroups[3].controls.routeOffsetX']){
     const row = controls.find(control => control.runtimeField === field);
     if(!row){
       fail('Missing required runtime-control consumption row.', { field, controls });
@@ -54,7 +63,7 @@ function main(){
     expectBoolean(row.consumedByProof, `${field} consumedByProof`);
   }
   const applied = report.runtimeControlConsumptionMap?.exactBrowserOverrideFieldsApplied || [];
-  for(const field of ['motionSpecGroups[3].controls.routeCurveY', 'motionSpecGroups[3].controls.routeOffsetX']){
+  for(const field of ['motionSpecGroups[3].controls.pathPlaybackScale', 'motionSpecGroups[3].controls.routeCurveY', 'motionSpecGroups[3].controls.routeOffsetX']){
     if(!applied.includes(field)){
       fail('Stage 3 transfer proof must apply the consumed browser override fields.', { field, applied });
     }

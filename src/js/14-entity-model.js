@@ -89,6 +89,7 @@ function enemyChallengeState({
   laneStaggerS=0,
   phaseOffsetS=0,
   lanePhaseOffsetS=0,
+  pathPlaybackScale=1,
   slotXOffset=0,
   slotYOffset=0,
   deconflictSpread=0,
@@ -133,6 +134,7 @@ function enemyChallengeState({
   laneStaggerS,
   phaseOffsetS,
   lanePhaseOffsetS,
+  pathPlaybackScale,
   slotXOffset,
   slotYOffset,
   deconflictSpread,
@@ -242,6 +244,7 @@ function makePackChallengeEnemyState({
  laneStaggerS=0,
  phaseOffsetS=0,
  lanePhaseOffsetS=0,
+ pathPlaybackScale=1,
  slotXOffset=0,
  slotYOffset=0,
  deconflictSpread=0,
@@ -305,5 +308,5 @@ function makePackChallengeEnemyState({
   miss:0,
   low:0,
   hitT:0
- }, enemyChallengeState({wave,side,slot,row,group,sweep,upperBandY,pathFamily,arcAmp,dropAmp,speedScale,lowerFieldBias,yOffset,laneSpreadScale,rowSpreadScale,laneStaggerS,phaseOffsetS,lanePhaseOffsetS,slotXOffset,slotYOffset,deconflictSpread,deconflictPhase,deconflictLaneBias,deconflictYOffset,routeOffsetX,routeOffsetY,routeCurveX,routeCurveY,routePhaseS,spacingFieldSpreadX,spacingFieldSpreadY,spacingFieldGateS,spacingFieldPhaseS,leadInS,leadInArc,leadInStartYOffset,leadInSideOffset,referencePath,motionSpecGroup,contractGroup}));
+ }, enemyChallengeState({wave,side,slot,row,group,sweep,upperBandY,pathFamily,arcAmp,dropAmp,speedScale,lowerFieldBias,yOffset,laneSpreadScale,rowSpreadScale,laneStaggerS,phaseOffsetS,lanePhaseOffsetS,pathPlaybackScale,slotXOffset,slotYOffset,deconflictSpread,deconflictPhase,deconflictLaneBias,deconflictYOffset,routeOffsetX,routeOffsetY,routeCurveX,routeCurveY,routePhaseS,spacingFieldSpreadX,spacingFieldSpreadY,spacingFieldGateS,spacingFieldPhaseS,leadInS,leadInArc,leadInStartYOffset,leadInSideOffset,referencePath,motionSpecGroup,contractGroup}));
 }

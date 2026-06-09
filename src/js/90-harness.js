@@ -1273,6 +1273,7 @@ window.__galagaHarness__={
    laneStaggerS:+(+e.laneStaggerS||0).toFixed(3),
    phaseOffsetS:+(+e.phaseOffsetS||0).toFixed(3),
    lanePhaseOffsetS:+(+e.lanePhaseOffsetS||0).toFixed(3),
+   pathPlaybackScale:+(+e.pathPlaybackScale||1).toFixed(3),
    deconflictSpread:+(+e.deconflictSpread||0).toFixed(3),
    deconflictPhase:+(+e.deconflictPhase||0).toFixed(3),
    deconflictLaneBias:+(+e.deconflictLaneBias||0).toFixed(3),

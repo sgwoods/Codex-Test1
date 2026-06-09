@@ -361,6 +361,7 @@ function updateChallengeEnemy(state,e,dt){
  const slotYOffset=Number.isFinite(+e.slotYOffset)?+e.slotYOffset:0;
  const phaseOffsetS=Number.isFinite(+e.phaseOffsetS)?+e.phaseOffsetS:0;
  const lanePhaseOffsetS=Number.isFinite(+e.lanePhaseOffsetS)?+e.lanePhaseOffsetS:0;
+ const pathPlaybackScale=Number.isFinite(+e.pathPlaybackScale)?Math.max(.35,Math.min(1.45,+e.pathPlaybackScale)):1;
  const laneX=PLAY_W/2+side*(48+slot*16)*laneSpreadScale+slotXOffset;
  const yOffset=Number.isFinite(+e.yOffset)?+e.yOffset:0;
  const topY=38+wave*14+row*8*rowSpreadScale+yOffset+slotYOffset;
@@ -381,7 +382,7 @@ function updateChallengeEnemy(state,e,dt){
 		 // challenge motion runs. Reference tracks store point times in seconds,
 		 // so their local increment is only the delta above or below real time.
 		 const pathTimeSpeed=referencePlaybackScale==null
-		  ? (baseChallengeSpeed+(e.wave||0)*.007+Math.min(.012,S.stage*.0015))*(e.speedScale||1)
+		  ? (baseChallengeSpeed+(e.wave||0)*.007+Math.min(.012,S.stage*.0015))*(e.speedScale||1)*pathPlaybackScale
 		  : referencePlaybackScale-1;
 		 e.tm+=dt*pathTimeSpeed;
 		 e.referenceLeadIn=0;

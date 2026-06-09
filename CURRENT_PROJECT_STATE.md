@@ -179,18 +179,21 @@ Latest Stage 7 calibration:
   `reference-artifacts/analyses/reference-execution-runtime-expressibility/stage3-challenge1/latest-transfer-proof.json`,
   with contact-sheet evidence at
   `reference-artifacts/analyses/reference-execution-runtime-expressibility/stage3-challenge1/latest-transfer-proof-contact-sheet.svg`.
-  The proof confirms that the Stage 3 browser override consumes
-  `motionSpecGroups[3].controls.routeCurveY` and
-  `motionSpecGroups[3].controls.routeOffsetX`: group 4 moves from a `center`
-  exit read to `right`, path length drops from `1.5589` to `1.3814`, upper-band
-  share stays effectively flat (`0.775` to `0.7709`), protected groups 1, 2, 3,
-  and 5 pass preservation, and spacing, scoreable-route, no-combat, and
-  no-shot/no-attack/no-loss guardrails pass. It is still not
-  runtime-source-attempt-ready because `groupReferencePaths[3].playbackScale`
-  cannot be consumed: current Stage 3 / Challenge 1 is not reference-path
-  backed. Next work should refine the Stage 3 compiler/control mapping or add a
-  reference-backed/source-control expression path before any runtime source
-  attempt. Do not generate another Stage 3 candidate batch yet.
+  The proof now adds and validates a reusable motionSpec-backed path-length
+  backend, `motionSpecGroups[3].controls.pathPlaybackScale`, so the old
+  `groupReferencePaths[3].playbackScale` blocker is replaced rather than hidden.
+  For `stage3-semantic-fresh-g4-score-window-shape-peel-0.1`, the consumed
+  controls are `pathPlaybackScale: 0.5`, `routeCurveY: 17.464`, and
+  `routeOffsetX: 60`. Group 4 moves from a `center` exit read to `right`, path
+  length drops from `1.5589` to `1.1897`, upper-band share improves from
+  `0.775` to `0.9474`, protected groups 1, 2, 3, and 5 pass preservation, and
+  motion/profile, spacing, scoreable-route, no-combat, and
+  no-shot/no-attack/no-loss guardrails pass. The classification is now
+  `runtime-source-attempt-ready` only: it is not a runtime keeper and not beta
+  justification. Next work should attempt exactly one minimal Stage 3 source
+  edit for those three consumed controls, then run strict before/after evidence
+  and accept or reject the runtime keeper. Reference-path backing remains future
+  architecture debt; do not generate another Stage 3 candidate batch yet.
 
 ## Historical Or Stale Current-State Docs
 

@@ -176,6 +176,7 @@ function spawnChallenge(state){
    laneStaggerS,
    phaseOffsetS:motionControls?.phaseOffsetS??0,
    lanePhaseOffsetS,
+   pathPlaybackScale:motionControls?.pathPlaybackScale??1,
    slotXOffset:motionControls?.slotXOffset??0,
    slotYOffset:motionControls?.slotYOffset??0,
    deconflictSpread:motionControls?.deconflictSpread??0,

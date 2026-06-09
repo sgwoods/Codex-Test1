@@ -280,16 +280,19 @@ from the roadmap.
    exists at
    `reference-artifacts/analyses/reference-execution-runtime-expressibility/stage3-challenge1/latest-transfer-proof.json`.
    It confirms consumed, visible group 4 movement through
-   `motionSpecGroups[3].controls.routeCurveY` and
+   `motionSpecGroups[3].controls.pathPlaybackScale`,
+   `motionSpecGroups[3].controls.routeCurveY`, and
    `motionSpecGroups[3].controls.routeOffsetX`: the group 4 exit read moves
-   from `center` to `right`, path length drops from `1.5589` to `1.3814`,
-   upper-band share is preserved, protected groups pass, and spacing,
-   scoreable-route, no-combat, and no-shot/no-attack/no-loss guardrails pass.
-   The proof is still `visible-transfer-but-source-blocked`, not
-   runtime-source-attempt-ready, because Stage 3 cannot consume
-   `groupReferencePaths[3].playbackScale` without a reference-backed path. The
-   next Stage 3 step is compiler/control mapping refinement for path-length
-   expression, not another semantic batch or runtime source edit.
+   from `center` to `right`, path length drops from `1.5589` to `1.1897`,
+   upper-band share improves from `0.775` to `0.9474`, protected groups pass,
+   and motion/profile, spacing, scoreable-route, no-combat, and
+   no-shot/no-attack/no-loss guardrails pass. The proof is now
+   `runtime-source-attempt-ready` only, not a runtime keeper or beta
+   justification. The next Stage 3 step is exactly one minimal runtime source
+   attempt for that same candidate, applying `pathPlaybackScale: 0.5`,
+   `routeCurveY: 17.464`, and `routeOffsetX: 60`, then strict before/after
+   evidence and a keeper/rejection decision. Reference-path backing remains
+   architecture debt; do not run another semantic batch first.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth
