@@ -1,0 +1,2989 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage3-browser-transfer-proof",
+  "generatedAt": "2026-06-08T21:57:26.264Z",
+  "generatedBy": "tools/harness/analyze-stage3-transfer-proof.js",
+  "commit": "75b621dc",
+  "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "scope": {
+    "stage": 3,
+    "challengeNumber": 1,
+    "displayLabel": "Stage 3 / Challenge 1"
+  },
+  "sourceArtifacts": {
+    "referenceExecutionDescription": "reference-artifacts/ingestion/reference-execution-descriptions/aurora-stage3-challenge1-0.1.json",
+    "baselineTrialReport": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest.json",
+    "semanticBatch": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/latest-batch.json",
+    "candidateInput": "reference-artifacts/analyses/reference-execution-candidate-trials/stage3-challenge1/semantic-batches/2026-06-08T20-25-49-16ba4062-fresh/candidates/stage3-semantic-fresh-g4-score-window-shape-peel-0.1.json"
+  },
+  "candidate": {
+    "candidateId": "stage3-semantic-fresh-g4-score-window-shape-peel-0.1",
+    "semanticTransformId": "fresh-g4-score-window-shape-peel",
+    "semanticTransformations": [
+      "group4-object-track-path-fit",
+      "group4-peel-off-readability",
+      "preserve-upper-band-scoreability",
+      "protect-semantic-line-roles",
+      "protect-no-combat-scoreable-routes"
+    ],
+    "intendedTouchedGroups": [
+      4
+    ],
+    "protectedGroups": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "protectedRoles": [
+      "top-right bee line",
+      "inferred columns",
+      "mixed closing peel",
+      "upper-band score windows",
+      "no-combat grammar"
+    ],
+    "expectedPlayerVisibleImprovement": "The late butterfly line should gain a clearer right peel and tighter path shape without changing the opener.",
+    "expectedStrictMetricMovement": {
+      "group4ObjectTrack": "positive",
+      "group4PathShape": "positive",
+      "group1": "preserve"
+    },
+    "redProvenanceFieldsUsed": [
+      "aggregateObjectTrackTarget",
+      "candidateComparisonGate.targetVector",
+      "semanticExecution.exitGesture",
+      "uncertaintyAndProvenance",
+      "semanticExecution.scoreableBand",
+      "semanticExecution.scoreableFrameWindow",
+      "fieldOccupancyExpectation",
+      "semanticExecution.lineRole",
+      "semanticExecution.entryCue",
+      "executionModel.noCombatGrammar",
+      "keeperRules"
+    ]
+  },
+  "redFieldsUsedAsAuthority": [
+    "aggregateObjectTrackTarget",
+    "candidateComparisonGate.targetVector",
+    "semanticExecution.exitGesture",
+    "uncertaintyAndProvenance",
+    "semanticExecution.scoreableBand",
+    "semanticExecution.scoreableFrameWindow",
+    "fieldOccupancyExpectation",
+    "semanticExecution.lineRole",
+    "semanticExecution.entryCue",
+    "executionModel.noCombatGrammar",
+    "keeperRules"
+  ],
+  "hypothesizedRuntimeControls": [
+    "referencePath.playbackScale",
+    "routeCurveY",
+    "path endpoint / exit-side control"
+  ],
+  "compiledRuntimeControls": [
+    {
+      "semanticControl": "referencePath.playbackScale",
+      "runtimeField": "groupReferencePaths[3].playbackScale",
+      "value": 0.5,
+      "intendedEffect": "compress group 4 path clock/path length toward the RED predicted vector",
+      "runtimeCurrentlyConsumes": false,
+      "appliedByProof": false,
+      "nonConsumptionReason": "Stage 3 current runtime has no reference-backed groupReferencePaths for Challenge 1, so playbackScale has no path points to consume."
+    },
+    {
+      "semanticControl": "routeCurveY",
+      "runtimeField": "motionSpecGroups[3].controls.routeCurveY",
+      "value": 17.464,
+      "intendedEffect": "move group 4 vertical curve toward the candidate path-shape read",
+      "runtimeCurrentlyConsumes": true,
+      "appliedByProof": true,
+      "derivedFrom": "candidate.groups[4].predictedRuntimeVector.yRange - baseline group 4 yRange"
+    },
+    {
+      "semanticControl": "path endpoint / exit-side control",
+      "runtimeField": "motionSpecGroups[3].controls.routeOffsetX",
+      "value": 32,
+      "intendedEffect": "move group 4 exit read toward the RED right peel-off",
+      "runtimeCurrentlyConsumes": true,
+      "appliedByProof": true,
+      "derivedFrom": "candidate.groups[4].semanticExecution.exitGesture"
+    }
+  ],
+  "runtimeControlConsumptionMap": {
+    "exactBrowserOverrideFieldsApplied": [
+      "motionSpecGroups[3].controls.routeCurveY",
+      "motionSpecGroups[3].controls.routeOffsetX"
+    ],
+    "compiledRuntimeFields": [
+      {
+        "semanticControl": "referencePath.playbackScale",
+        "runtimeField": "groupReferencePaths[3].playbackScale",
+        "value": 0.5,
+        "intendedEffect": "compress group 4 path clock/path length toward the RED predicted vector",
+        "runtimeCurrentlyConsumes": false,
+        "appliedByProof": false,
+        "nonConsumptionReason": "Stage 3 current runtime has no reference-backed groupReferencePaths for Challenge 1, so playbackScale has no path points to consume.",
+        "appliedTargets": [],
+        "appliedInLayoutOverride": false,
+        "consumedByProof": false,
+        "derivedFrom": ""
+      },
+      {
+        "semanticControl": "routeCurveY",
+        "runtimeField": "motionSpecGroups[3].controls.routeCurveY",
+        "value": 17.464,
+        "intendedEffect": "move group 4 vertical curve toward the candidate path-shape read",
+        "runtimeCurrentlyConsumes": true,
+        "appliedByProof": true,
+        "derivedFrom": "candidate.groups[4].predictedRuntimeVector.yRange - baseline group 4 yRange",
+        "appliedTargets": [
+          {
+            "target": "motionSpecGroups[3].controls.routeCurveY",
+            "groupIndex": 4,
+            "before": null,
+            "after": 17.464
+          }
+        ],
+        "appliedInLayoutOverride": true,
+        "consumedByProof": true,
+        "nonConsumptionReason": ""
+      },
+      {
+        "semanticControl": "path endpoint / exit-side control",
+        "runtimeField": "motionSpecGroups[3].controls.routeOffsetX",
+        "value": 32,
+        "intendedEffect": "move group 4 exit read toward the RED right peel-off",
+        "runtimeCurrentlyConsumes": true,
+        "appliedByProof": true,
+        "derivedFrom": "candidate.groups[4].semanticExecution.exitGesture",
+        "appliedTargets": [
+          {
+            "target": "motionSpecGroups[3].controls.routeOffsetX",
+            "groupIndex": 4,
+            "before": null,
+            "after": 32
+          }
+        ],
+        "appliedInLayoutOverride": true,
+        "consumedByProof": true,
+        "nonConsumptionReason": ""
+      }
+    ]
+  },
+  "baseline": {
+    "variantId": "baseline",
+    "appliedRuntimeFields": [],
+    "layoutSummary": {
+      "id": "first-challenge-peel",
+      "groupPathFamilies": [
+        "first-challenge-peel",
+        "classic-column-drop",
+        "classic-column-drop",
+        "side-hook-return",
+        "first-challenge-peel"
+      ],
+      "groupSpawnOffsets": [
+        0,
+        3.4,
+        6.25,
+        9.1,
+        12.1
+      ],
+      "motionSpecGroups": [],
+      "referencePathGroupCount": 0
+    },
+    "groupMetrics": {
+      "group1": {
+        "groupIndex": 1,
+        "sampleCount": 43,
+        "pointCount": 328,
+        "visibleWindow": {
+          "visibleStartS": 0.25,
+          "visibleEndS": 10.75,
+          "visibleDurationS": 10.5
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 140,
+        "exitCentroidX": 140,
+        "xRange": 1.1371,
+        "yRange": 0.9546,
+        "pathLength": 0.9501,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.2439,
+        "upperBandY": 180,
+        "upperBandShare": 0.7439,
+        "meanX": 140,
+        "meanY": 117.37,
+        "minY": 38.25,
+        "maxY": 381.92
+      },
+      "group2": {
+        "groupIndex": 2,
+        "sampleCount": 33,
+        "pointCount": 250,
+        "visibleWindow": {
+          "visibleStartS": 3.5,
+          "visibleEndS": 11.5,
+          "visibleDurationS": 8
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 140,
+        "exitCentroidX": 140,
+        "xRange": 1.0626,
+        "yRange": 1.1193,
+        "pathLength": 1.0973,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.384,
+        "upperBandY": 180,
+        "upperBandShare": 0.6,
+        "meanX": 139.93,
+        "meanY": 151.79,
+        "minY": -23.6,
+        "maxY": 379.34
+      },
+      "group3": {
+        "groupIndex": 3,
+        "sampleCount": 32,
+        "pointCount": 242,
+        "visibleWindow": {
+          "visibleStartS": 6.5,
+          "visibleEndS": 14.25,
+          "visibleDurationS": 7.75
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 138.7,
+        "exitCentroidX": 140,
+        "xRange": 1.0424,
+        "yRange": 1.0954,
+        "pathLength": 1.0795,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.4132,
+        "upperBandY": 180,
+        "upperBandShare": 0.5702,
+        "meanX": 140.04,
+        "meanY": 159.16,
+        "minY": -22.57,
+        "maxY": 371.77
+      },
+      "group4": {
+        "groupIndex": 4,
+        "sampleCount": 32,
+        "pointCount": 240,
+        "visibleWindow": {
+          "visibleStartS": 9.25,
+          "visibleEndS": 17,
+          "visibleDurationS": 7.75
+        },
+        "entrySide": "left",
+        "exitSide": "center",
+        "entryCentroidX": -17.43,
+        "exitCentroidX": 141.36,
+        "xRange": 1.133,
+        "yRange": 0.8106,
+        "pathLength": 1.5589,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.2083,
+        "upperBandY": 180,
+        "upperBandShare": 0.775,
+        "meanX": 139.81,
+        "meanY": 148.59,
+        "minY": 69.98,
+        "maxY": 361.8
+      },
+      "group5": {
+        "groupIndex": 5,
+        "sampleCount": 19,
+        "pointCount": 144,
+        "visibleWindow": {
+          "visibleStartS": 12.5,
+          "visibleEndS": 17,
+          "visibleDurationS": 4.5
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 140,
+        "exitCentroidX": 140,
+        "xRange": 1.1583,
+        "yRange": 0.0378,
+        "pathLength": 0.0407,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0,
+        "upperBandY": 180,
+        "upperBandShare": 1,
+        "meanX": 140,
+        "meanY": 100.98,
+        "minY": 94.11,
+        "maxY": 107.72
+      }
+    },
+    "centroidTraces": {
+      "group1": [
+        {
+          "t": 0.25,
+          "x": 140,
+          "y": 38.62
+        },
+        {
+          "t": 0.5,
+          "x": 140,
+          "y": 39.01
+        },
+        {
+          "t": 0.75,
+          "x": 140,
+          "y": 42.07
+        },
+        {
+          "t": 1,
+          "x": 140,
+          "y": 43.8
+        },
+        {
+          "t": 1.25,
+          "x": 140,
+          "y": 44.42
+        },
+        {
+          "t": 1.5,
+          "x": 140,
+          "y": 45.04
+        },
+        {
+          "t": 1.75,
+          "x": 140,
+          "y": 45.65
+        },
+        {
+          "t": 2,
+          "x": 140,
+          "y": 46.27
+        },
+        {
+          "t": 2.25,
+          "x": 140,
+          "y": 45.56
+        },
+        {
+          "t": 2.5,
+          "x": 140,
+          "y": 44.84
+        },
+        {
+          "t": 2.75,
+          "x": 140,
+          "y": 42.77
+        },
+        {
+          "t": 3,
+          "x": 140,
+          "y": 43.35
+        },
+        {
+          "t": 3.25,
+          "x": 140,
+          "y": 43.93
+        },
+        {
+          "t": 3.5,
+          "x": 140,
+          "y": 44.51
+        },
+        {
+          "t": 3.75,
+          "x": 140,
+          "y": 45.08
+        },
+        {
+          "t": 4,
+          "x": 140,
+          "y": 45.66
+        },
+        {
+          "t": 4.25,
+          "x": 140,
+          "y": 46.25
+        },
+        {
+          "t": 4.5,
+          "x": 140,
+          "y": 46.82
+        },
+        {
+          "t": 4.75,
+          "x": 140,
+          "y": 47.4
+        },
+        {
+          "t": 5,
+          "x": 140,
+          "y": 47.98
+        },
+        {
+          "t": 5.25,
+          "x": 140,
+          "y": 48.56
+        },
+        {
+          "t": 5.5,
+          "x": 140,
+          "y": 49.14
+        },
+        {
+          "t": 5.75,
+          "x": 140,
+          "y": 49.72
+        },
+        {
+          "t": 6,
+          "x": 140,
+          "y": 50.3
+        },
+        {
+          "t": 6.25,
+          "x": 140,
+          "y": 51.47
+        },
+        {
+          "t": 6.5,
+          "x": 140,
+          "y": 58.65
+        },
+        {
+          "t": 6.75,
+          "x": 140,
+          "y": 71.83
+        },
+        {
+          "t": 7,
+          "x": 140,
+          "y": 91.01
+        },
+        {
+          "t": 7.25,
+          "x": 140,
+          "y": 110.54
+        },
+        {
+          "t": 7.5,
+          "x": 140,
+          "y": 130.07
+        },
+        {
+          "t": 7.75,
+          "x": 140,
+          "y": 149.6
+        },
+        {
+          "t": 8,
+          "x": 140,
+          "y": 169.13
+        },
+        {
+          "t": 8.25,
+          "x": 140,
+          "y": 188.66
+        },
+        {
+          "t": 8.5,
+          "x": 140,
+          "y": 208.19
+        },
+        {
+          "t": 8.75,
+          "x": 140,
+          "y": 227.72
+        },
+        {
+          "t": 9,
+          "x": 140,
+          "y": 247.25
+        },
+        {
+          "t": 9.25,
+          "x": 140,
+          "y": 266.79
+        },
+        {
+          "t": 9.5,
+          "x": 140,
+          "y": 286.32
+        },
+        {
+          "t": 9.75,
+          "x": 140,
+          "y": 305.85
+        },
+        {
+          "t": 10,
+          "x": 140,
+          "y": 325.38
+        },
+        {
+          "t": 10.25,
+          "x": 140,
+          "y": 344.91
+        },
+        {
+          "t": 10.5,
+          "x": 140,
+          "y": 364.44
+        },
+        {
+          "t": 10.75,
+          "x": 140,
+          "y": 373.65
+        }
+      ],
+      "group2": [
+        {
+          "t": 3.5,
+          "x": 140,
+          "y": -22.33
+        },
+        {
+          "t": 3.75,
+          "x": 141.43,
+          "y": -15
+        },
+        {
+          "t": 4,
+          "x": 140.04,
+          "y": -11.6
+        },
+        {
+          "t": 4.25,
+          "x": 139.83,
+          "y": -0.08
+        },
+        {
+          "t": 4.5,
+          "x": 139.66,
+          "y": 11.43
+        },
+        {
+          "t": 4.75,
+          "x": 139.54,
+          "y": 22.94
+        },
+        {
+          "t": 5,
+          "x": 139.49,
+          "y": 34.45
+        },
+        {
+          "t": 5.25,
+          "x": 139.52,
+          "y": 45.96
+        },
+        {
+          "t": 5.5,
+          "x": 139.98,
+          "y": 55.46
+        },
+        {
+          "t": 5.75,
+          "x": 142.09,
+          "y": 63.02
+        },
+        {
+          "t": 6,
+          "x": 140,
+          "y": 72.56
+        },
+        {
+          "t": 6.25,
+          "x": 139.67,
+          "y": 84.14
+        },
+        {
+          "t": 6.5,
+          "x": 139.4,
+          "y": 95.71
+        },
+        {
+          "t": 6.75,
+          "x": 139.24,
+          "y": 107.29
+        },
+        {
+          "t": 7,
+          "x": 139.21,
+          "y": 118.86
+        },
+        {
+          "t": 7.25,
+          "x": 139.33,
+          "y": 130.44
+        },
+        {
+          "t": 7.5,
+          "x": 139.56,
+          "y": 142.01
+        },
+        {
+          "t": 7.75,
+          "x": 139.87,
+          "y": 153.59
+        },
+        {
+          "t": 8,
+          "x": 140.21,
+          "y": 165.16
+        },
+        {
+          "t": 8.25,
+          "x": 140.51,
+          "y": 176.74
+        },
+        {
+          "t": 8.5,
+          "x": 140.71,
+          "y": 188.31
+        },
+        {
+          "t": 8.75,
+          "x": 140.79,
+          "y": 199.89
+        },
+        {
+          "t": 9,
+          "x": 140.73,
+          "y": 211.46
+        },
+        {
+          "t": 9.25,
+          "x": 140.54,
+          "y": 223.04
+        },
+        {
+          "t": 9.5,
+          "x": 139.1,
+          "y": 231.02
+        },
+        {
+          "t": 9.75,
+          "x": 137.93,
+          "y": 241.2
+        },
+        {
+          "t": 10,
+          "x": 140,
+          "y": 243.82
+        },
+        {
+          "t": 10.25,
+          "x": 140,
+          "y": 266.88
+        },
+        {
+          "t": 10.5,
+          "x": 140,
+          "y": 289.94
+        },
+        {
+          "t": 10.75,
+          "x": 140,
+          "y": 313
+        },
+        {
+          "t": 11,
+          "x": 140,
+          "y": 336.07
+        },
+        {
+          "t": 11.25,
+          "x": 140,
+          "y": 359.13
+        },
+        {
+          "t": 11.5,
+          "x": 140,
+          "y": 369.67
+        }
+      ],
+      "group3": [
+        {
+          "t": 6.5,
+          "x": 138.7,
+          "y": -18.29
+        },
+        {
+          "t": 6.75,
+          "x": 140.99,
+          "y": -9.83
+        },
+        {
+          "t": 7,
+          "x": 139.94,
+          "y": -1.21
+        },
+        {
+          "t": 7.25,
+          "x": 140.34,
+          "y": 12.15
+        },
+        {
+          "t": 7.5,
+          "x": 140.68,
+          "y": 25.51
+        },
+        {
+          "t": 7.75,
+          "x": 140.91,
+          "y": 38.87
+        },
+        {
+          "t": 8,
+          "x": 141,
+          "y": 52.23
+        },
+        {
+          "t": 8.25,
+          "x": 139.39,
+          "y": 63.52
+        },
+        {
+          "t": 8.5,
+          "x": 139.16,
+          "y": 74.23
+        },
+        {
+          "t": 8.75,
+          "x": 139.63,
+          "y": 82.37
+        },
+        {
+          "t": 9,
+          "x": 140.23,
+          "y": 94
+        },
+        {
+          "t": 9.25,
+          "x": 140.78,
+          "y": 105.63
+        },
+        {
+          "t": 9.5,
+          "x": 141.19,
+          "y": 117.25
+        },
+        {
+          "t": 9.75,
+          "x": 141.39,
+          "y": 128.88
+        },
+        {
+          "t": 10,
+          "x": 141.34,
+          "y": 140.5
+        },
+        {
+          "t": 10.25,
+          "x": 141.05,
+          "y": 152.13
+        },
+        {
+          "t": 10.5,
+          "x": 140.57,
+          "y": 163.75
+        },
+        {
+          "t": 10.75,
+          "x": 139.99,
+          "y": 175.38
+        },
+        {
+          "t": 11,
+          "x": 139.41,
+          "y": 187.01
+        },
+        {
+          "t": 11.25,
+          "x": 138.93,
+          "y": 198.63
+        },
+        {
+          "t": 11.5,
+          "x": 138.65,
+          "y": 210.26
+        },
+        {
+          "t": 11.75,
+          "x": 138.61,
+          "y": 221.88
+        },
+        {
+          "t": 12,
+          "x": 138.82,
+          "y": 233.51
+        },
+        {
+          "t": 12.25,
+          "x": 139.25,
+          "y": 245.13
+        },
+        {
+          "t": 12.5,
+          "x": 140.47,
+          "y": 250.02
+        },
+        {
+          "t": 12.75,
+          "x": 139.39,
+          "y": 261.28
+        },
+        {
+          "t": 13,
+          "x": 140,
+          "y": 274.25
+        },
+        {
+          "t": 13.25,
+          "x": 140,
+          "y": 297.41
+        },
+        {
+          "t": 13.5,
+          "x": 140,
+          "y": 320.57
+        },
+        {
+          "t": 13.75,
+          "x": 140,
+          "y": 343.73
+        },
+        {
+          "t": 14,
+          "x": 140,
+          "y": 360.12
+        },
+        {
+          "t": 14.25,
+          "x": 140,
+          "y": 368.97
+        }
+      ],
+      "group4": [
+        {
+          "t": 9.25,
+          "x": -17.43,
+          "y": 69.98
+        },
+        {
+          "t": 9.5,
+          "x": 89.77,
+          "y": 76.18
+        },
+        {
+          "t": 9.75,
+          "x": 172.68,
+          "y": 81.72
+        },
+        {
+          "t": 10,
+          "x": 159.66,
+          "y": 87.42
+        },
+        {
+          "t": 10.25,
+          "x": 134.45,
+          "y": 89.86
+        },
+        {
+          "t": 10.5,
+          "x": 135.04,
+          "y": 89.98
+        },
+        {
+          "t": 10.75,
+          "x": 137.2,
+          "y": 89.31
+        },
+        {
+          "t": 11,
+          "x": 140.25,
+          "y": 87.93
+        },
+        {
+          "t": 11.25,
+          "x": 142.74,
+          "y": 85.8
+        },
+        {
+          "t": 11.5,
+          "x": 142.05,
+          "y": 88.63
+        },
+        {
+          "t": 11.75,
+          "x": 141.27,
+          "y": 95.29
+        },
+        {
+          "t": 12,
+          "x": 142.7,
+          "y": 100.36
+        },
+        {
+          "t": 12.25,
+          "x": 143.64,
+          "y": 105.31
+        },
+        {
+          "t": 12.5,
+          "x": 143.91,
+          "y": 110.17
+        },
+        {
+          "t": 12.75,
+          "x": 143.46,
+          "y": 114.98
+        },
+        {
+          "t": 13,
+          "x": 142.38,
+          "y": 119.8
+        },
+        {
+          "t": 13.25,
+          "x": 140.86,
+          "y": 124.67
+        },
+        {
+          "t": 13.5,
+          "x": 139.19,
+          "y": 129.63
+        },
+        {
+          "t": 13.75,
+          "x": 137.66,
+          "y": 134.72
+        },
+        {
+          "t": 14,
+          "x": 136.57,
+          "y": 139.97
+        },
+        {
+          "t": 14.25,
+          "x": 136.09,
+          "y": 145.39
+        },
+        {
+          "t": 14.5,
+          "x": 136.35,
+          "y": 150.98
+        },
+        {
+          "t": 14.75,
+          "x": 137.26,
+          "y": 156.73
+        },
+        {
+          "t": 15,
+          "x": 138.68,
+          "y": 162.62
+        },
+        {
+          "t": 15.25,
+          "x": 142.13,
+          "y": 171.79
+        },
+        {
+          "t": 15.5,
+          "x": 142.37,
+          "y": 185.06
+        },
+        {
+          "t": 15.75,
+          "x": 142.25,
+          "y": 201.77
+        },
+        {
+          "t": 16,
+          "x": 140.43,
+          "y": 228.66
+        },
+        {
+          "t": 16.25,
+          "x": 138.24,
+          "y": 255.55
+        },
+        {
+          "t": 16.5,
+          "x": 137.6,
+          "y": 282.44
+        },
+        {
+          "t": 16.75,
+          "x": 139.07,
+          "y": 309.33
+        },
+        {
+          "t": 17,
+          "x": 141.36,
+          "y": 336.22
+        }
+      ],
+      "group5": [
+        {
+          "t": 12.5,
+          "x": 140,
+          "y": 95.01
+        },
+        {
+          "t": 12.75,
+          "x": 140,
+          "y": 97.84
+        },
+        {
+          "t": 13,
+          "x": 140,
+          "y": 99.57
+        },
+        {
+          "t": 13.25,
+          "x": 140,
+          "y": 100.21
+        },
+        {
+          "t": 13.5,
+          "x": 140,
+          "y": 100.84
+        },
+        {
+          "t": 13.75,
+          "x": 140,
+          "y": 101.47
+        },
+        {
+          "t": 14,
+          "x": 140,
+          "y": 102.1
+        },
+        {
+          "t": 14.25,
+          "x": 140,
+          "y": 101.4
+        },
+        {
+          "t": 14.5,
+          "x": 140,
+          "y": 100.69
+        },
+        {
+          "t": 14.75,
+          "x": 140,
+          "y": 99.96
+        },
+        {
+          "t": 15,
+          "x": 140,
+          "y": 99.23
+        },
+        {
+          "t": 15.25,
+          "x": 140,
+          "y": 99.82
+        },
+        {
+          "t": 15.5,
+          "x": 140,
+          "y": 100.41
+        },
+        {
+          "t": 15.75,
+          "x": 140,
+          "y": 101
+        },
+        {
+          "t": 16,
+          "x": 140,
+          "y": 101.59
+        },
+        {
+          "t": 16.25,
+          "x": 140,
+          "y": 102.18
+        },
+        {
+          "t": 16.5,
+          "x": 140,
+          "y": 102.76
+        },
+        {
+          "t": 16.75,
+          "x": 140,
+          "y": 103.35
+        },
+        {
+          "t": 17,
+          "x": 140,
+          "y": 103.94
+        }
+      ]
+    },
+    "routeControlRead": {
+      "group4": [
+        {
+          "lane": 0,
+          "routeOffsetX": 0,
+          "routeCurveY": 0,
+          "referencePath": null
+        },
+        {
+          "lane": 1,
+          "routeOffsetX": 0,
+          "routeCurveY": 0,
+          "referencePath": null
+        }
+      ]
+    },
+    "spacingReadability": {
+      "sampleCount": 28,
+      "worstMinDistance": 1,
+      "averageMinDistance": 8.98,
+      "spacingScore": 0.557,
+      "bunchingRisk": 0.536,
+      "crampedCount": 15,
+      "minRuntimeSpacingScore": 0.42,
+      "maxRuntimeBunchingRisk": 0.62,
+      "pass": true
+    },
+    "scoreableRouteStatus": {
+      "pass": true,
+      "source": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+      "read": "Baseline Stage 3 still has many scoreable windows; candidate variants must preserve the routeability and upper-band learning read."
+    },
+    "noCombatGrammarStatus": {
+      "pass": false,
+      "source": "stage3-red-and-candidate-trial",
+      "read": "No-combat grammar is preserved if browser safety events stay at zero."
+    },
+    "safetyStatus": {
+      "pass": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0
+      }
+    },
+    "motionProfileProxy": {
+      "pathFamilyOrder": {
+        "pass": true,
+        "pathFamilyOrder": [
+          "first-challenge-peel",
+          "classic-column-drop",
+          "classic-column-drop",
+          "side-hook-return",
+          "first-challenge-peel"
+        ]
+      },
+      "firstWaveProfilePreserved": {
+        "pass": true,
+        "samples": [
+          {
+            "t": 1.75,
+            "avgX": 140,
+            "avgY": 45.65,
+            "visibleCount": 8
+          }
+        ]
+      },
+      "delayedWaveStarts": {
+        "pass": true,
+        "rows": [
+          {
+            "wave": 1,
+            "sampleAt": 3.56,
+            "visibleCount": 4,
+            "maxTm": 0.231,
+            "nearEntryCount": 4
+          },
+          {
+            "wave": 2,
+            "sampleAt": 6.41,
+            "visibleCount": 4,
+            "maxTm": 0.232,
+            "nearEntryCount": 4
+          },
+          {
+            "wave": 3,
+            "sampleAt": 9.26,
+            "visibleCount": 4,
+            "maxTm": 0.262,
+            "nearEntryCount": 4
+          },
+          {
+            "wave": 4,
+            "sampleAt": 12.26,
+            "visibleCount": 4,
+            "maxTm": 0.255,
+            "nearEntryCount": 4
+          }
+        ]
+      },
+      "spacing": {
+        "pass": true,
+        "spacingScore": 0.557,
+        "bunchingRisk": 0.536
+      }
+    }
+  },
+  "compiled": {
+    "variantId": "compiled-stage3-semantic-fresh-g4-score-window-shape-peel-0.1",
+    "appliedRuntimeFields": [
+      {
+        "runtimeField": "groupReferencePaths[3].playbackScale",
+        "semanticControl": "referencePath.playbackScale",
+        "value": 0.5,
+        "runtimeCurrentlyConsumes": false,
+        "appliedByProof": false,
+        "appliedTargets": [],
+        "appliedInLayoutOverride": false,
+        "consumedByProof": false,
+        "intendedEffect": "compress group 4 path clock/path length toward the RED predicted vector",
+        "derivedFrom": "",
+        "nonConsumptionReason": "Stage 3 current runtime has no reference-backed groupReferencePaths for Challenge 1, so playbackScale has no path points to consume."
+      },
+      {
+        "runtimeField": "motionSpecGroups[3].controls.routeCurveY",
+        "semanticControl": "routeCurveY",
+        "value": 17.464,
+        "runtimeCurrentlyConsumes": true,
+        "appliedByProof": true,
+        "appliedTargets": [
+          {
+            "target": "motionSpecGroups[3].controls.routeCurveY",
+            "groupIndex": 4,
+            "before": null,
+            "after": 17.464
+          }
+        ],
+        "appliedInLayoutOverride": true,
+        "consumedByProof": true,
+        "intendedEffect": "move group 4 vertical curve toward the candidate path-shape read",
+        "derivedFrom": "candidate.groups[4].predictedRuntimeVector.yRange - baseline group 4 yRange",
+        "nonConsumptionReason": ""
+      },
+      {
+        "runtimeField": "motionSpecGroups[3].controls.routeOffsetX",
+        "semanticControl": "path endpoint / exit-side control",
+        "value": 32,
+        "runtimeCurrentlyConsumes": true,
+        "appliedByProof": true,
+        "appliedTargets": [
+          {
+            "target": "motionSpecGroups[3].controls.routeOffsetX",
+            "groupIndex": 4,
+            "before": null,
+            "after": 32
+          }
+        ],
+        "appliedInLayoutOverride": true,
+        "consumedByProof": true,
+        "intendedEffect": "move group 4 exit read toward the RED right peel-off",
+        "derivedFrom": "candidate.groups[4].semanticExecution.exitGesture",
+        "nonConsumptionReason": ""
+      }
+    ],
+    "layoutSummary": {
+      "id": "first-challenge-peel",
+      "groupPathFamilies": [
+        "first-challenge-peel",
+        "classic-column-drop",
+        "classic-column-drop",
+        "side-hook-return",
+        "first-challenge-peel"
+      ],
+      "groupSpawnOffsets": [
+        0,
+        3.4,
+        6.25,
+        9.1,
+        12.1
+      ],
+      "motionSpecGroups": [
+        null,
+        null,
+        null,
+        {
+          "controls": {
+            "routeCurveY": 17.464,
+            "routeOffsetX": 32
+          }
+        }
+      ],
+      "referencePathGroupCount": 0
+    },
+    "groupMetrics": {
+      "group1": {
+        "groupIndex": 1,
+        "sampleCount": 43,
+        "pointCount": 328,
+        "visibleWindow": {
+          "visibleStartS": 0.25,
+          "visibleEndS": 10.75,
+          "visibleDurationS": 10.5
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 140,
+        "exitCentroidX": 140,
+        "xRange": 1.1371,
+        "yRange": 0.9546,
+        "pathLength": 0.9501,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.2439,
+        "upperBandY": 180,
+        "upperBandShare": 0.7439,
+        "meanX": 140,
+        "meanY": 117.37,
+        "minY": 38.25,
+        "maxY": 381.92
+      },
+      "group2": {
+        "groupIndex": 2,
+        "sampleCount": 33,
+        "pointCount": 250,
+        "visibleWindow": {
+          "visibleStartS": 3.5,
+          "visibleEndS": 11.5,
+          "visibleDurationS": 8
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 142.32,
+        "exitCentroidX": 140,
+        "xRange": 1.0626,
+        "yRange": 1.1193,
+        "pathLength": 1.1063,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.384,
+        "upperBandY": 180,
+        "upperBandShare": 0.6,
+        "meanX": 140.37,
+        "meanY": 151.79,
+        "minY": -23.6,
+        "maxY": 379.34
+      },
+      "group3": {
+        "groupIndex": 3,
+        "sampleCount": 32,
+        "pointCount": 242,
+        "visibleWindow": {
+          "visibleStartS": 6.5,
+          "visibleEndS": 14.25,
+          "visibleDurationS": 7.75
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 139.2,
+        "exitCentroidX": 140,
+        "xRange": 1.0424,
+        "yRange": 1.0954,
+        "pathLength": 1.0878,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.4132,
+        "upperBandY": 180,
+        "upperBandShare": 0.5702,
+        "meanX": 139.85,
+        "meanY": 159.16,
+        "minY": -22.57,
+        "maxY": 371.77
+      },
+      "group4": {
+        "groupIndex": 4,
+        "sampleCount": 31,
+        "pointCount": 179,
+        "visibleWindow": {
+          "visibleStartS": 9.5,
+          "visibleEndS": 17,
+          "visibleDurationS": 7.5
+        },
+        "entrySide": "left",
+        "exitSide": "right",
+        "entryCentroidX": -2.99,
+        "exitCentroidX": 198.87,
+        "xRange": 1.1177,
+        "yRange": 0.8306,
+        "pathLength": 1.3814,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.2123,
+        "upperBandY": 180,
+        "upperBandShare": 0.7709,
+        "meanX": 160.64,
+        "meanY": 148.8,
+        "minY": 53.89,
+        "maxY": 352.92
+      },
+      "group5": {
+        "groupIndex": 5,
+        "sampleCount": 19,
+        "pointCount": 144,
+        "visibleWindow": {
+          "visibleStartS": 12.5,
+          "visibleEndS": 17,
+          "visibleDurationS": 4.5
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 140,
+        "exitCentroidX": 140,
+        "xRange": 1.1583,
+        "yRange": 0.0378,
+        "pathLength": 0.0407,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0,
+        "upperBandY": 180,
+        "upperBandShare": 1,
+        "meanX": 140,
+        "meanY": 100.98,
+        "minY": 94.11,
+        "maxY": 107.72
+      }
+    },
+    "centroidTraces": {
+      "group1": [
+        {
+          "t": 0.25,
+          "x": 140,
+          "y": 38.62
+        },
+        {
+          "t": 0.5,
+          "x": 140,
+          "y": 39.01
+        },
+        {
+          "t": 0.75,
+          "x": 140,
+          "y": 42.07
+        },
+        {
+          "t": 1,
+          "x": 140,
+          "y": 43.8
+        },
+        {
+          "t": 1.25,
+          "x": 140,
+          "y": 44.42
+        },
+        {
+          "t": 1.5,
+          "x": 140,
+          "y": 45.04
+        },
+        {
+          "t": 1.75,
+          "x": 140,
+          "y": 45.65
+        },
+        {
+          "t": 2,
+          "x": 140,
+          "y": 46.27
+        },
+        {
+          "t": 2.25,
+          "x": 140,
+          "y": 45.56
+        },
+        {
+          "t": 2.5,
+          "x": 140,
+          "y": 44.84
+        },
+        {
+          "t": 2.75,
+          "x": 140,
+          "y": 42.77
+        },
+        {
+          "t": 3,
+          "x": 140,
+          "y": 43.35
+        },
+        {
+          "t": 3.25,
+          "x": 140,
+          "y": 43.93
+        },
+        {
+          "t": 3.5,
+          "x": 140,
+          "y": 44.51
+        },
+        {
+          "t": 3.75,
+          "x": 140,
+          "y": 45.08
+        },
+        {
+          "t": 4,
+          "x": 140,
+          "y": 45.66
+        },
+        {
+          "t": 4.25,
+          "x": 140,
+          "y": 46.25
+        },
+        {
+          "t": 4.5,
+          "x": 140,
+          "y": 46.82
+        },
+        {
+          "t": 4.75,
+          "x": 140,
+          "y": 47.4
+        },
+        {
+          "t": 5,
+          "x": 140,
+          "y": 47.98
+        },
+        {
+          "t": 5.25,
+          "x": 140,
+          "y": 48.56
+        },
+        {
+          "t": 5.5,
+          "x": 140,
+          "y": 49.14
+        },
+        {
+          "t": 5.75,
+          "x": 140,
+          "y": 49.72
+        },
+        {
+          "t": 6,
+          "x": 140,
+          "y": 50.3
+        },
+        {
+          "t": 6.25,
+          "x": 140,
+          "y": 51.47
+        },
+        {
+          "t": 6.5,
+          "x": 140,
+          "y": 58.65
+        },
+        {
+          "t": 6.75,
+          "x": 140,
+          "y": 71.83
+        },
+        {
+          "t": 7,
+          "x": 140,
+          "y": 91.01
+        },
+        {
+          "t": 7.25,
+          "x": 140,
+          "y": 110.54
+        },
+        {
+          "t": 7.5,
+          "x": 140,
+          "y": 130.07
+        },
+        {
+          "t": 7.75,
+          "x": 140,
+          "y": 149.6
+        },
+        {
+          "t": 8,
+          "x": 140,
+          "y": 169.13
+        },
+        {
+          "t": 8.25,
+          "x": 140,
+          "y": 188.66
+        },
+        {
+          "t": 8.5,
+          "x": 140,
+          "y": 208.19
+        },
+        {
+          "t": 8.75,
+          "x": 140,
+          "y": 227.72
+        },
+        {
+          "t": 9,
+          "x": 140,
+          "y": 247.25
+        },
+        {
+          "t": 9.25,
+          "x": 140,
+          "y": 266.79
+        },
+        {
+          "t": 9.5,
+          "x": 140,
+          "y": 286.32
+        },
+        {
+          "t": 9.75,
+          "x": 140,
+          "y": 305.85
+        },
+        {
+          "t": 10,
+          "x": 140,
+          "y": 325.38
+        },
+        {
+          "t": 10.25,
+          "x": 140,
+          "y": 344.91
+        },
+        {
+          "t": 10.5,
+          "x": 140,
+          "y": 364.44
+        },
+        {
+          "t": 10.75,
+          "x": 140,
+          "y": 373.65
+        }
+      ],
+      "group2": [
+        {
+          "t": 3.5,
+          "x": 142.32,
+          "y": -22.33
+        },
+        {
+          "t": 3.75,
+          "x": 138.81,
+          "y": -15
+        },
+        {
+          "t": 4,
+          "x": 141.1,
+          "y": -11.6
+        },
+        {
+          "t": 4.25,
+          "x": 141.54,
+          "y": -0.08
+        },
+        {
+          "t": 4.5,
+          "x": 141.73,
+          "y": 11.43
+        },
+        {
+          "t": 4.75,
+          "x": 141.65,
+          "y": 22.94
+        },
+        {
+          "t": 5,
+          "x": 141.3,
+          "y": 34.45
+        },
+        {
+          "t": 5.25,
+          "x": 140.74,
+          "y": 45.96
+        },
+        {
+          "t": 5.5,
+          "x": 141.53,
+          "y": 55.46
+        },
+        {
+          "t": 5.75,
+          "x": 139.56,
+          "y": 63.02
+        },
+        {
+          "t": 6,
+          "x": 141.79,
+          "y": 72.56
+        },
+        {
+          "t": 6.25,
+          "x": 142.31,
+          "y": 84.14
+        },
+        {
+          "t": 6.5,
+          "x": 142.42,
+          "y": 95.71
+        },
+        {
+          "t": 6.75,
+          "x": 142.1,
+          "y": 107.29
+        },
+        {
+          "t": 7,
+          "x": 141.41,
+          "y": 118.86
+        },
+        {
+          "t": 7.25,
+          "x": 140.46,
+          "y": 130.44
+        },
+        {
+          "t": 7.5,
+          "x": 139.44,
+          "y": 142.01
+        },
+        {
+          "t": 7.75,
+          "x": 138.51,
+          "y": 153.59
+        },
+        {
+          "t": 8,
+          "x": 137.85,
+          "y": 165.16
+        },
+        {
+          "t": 8.25,
+          "x": 137.57,
+          "y": 176.74
+        },
+        {
+          "t": 8.5,
+          "x": 137.72,
+          "y": 188.31
+        },
+        {
+          "t": 8.75,
+          "x": 138.29,
+          "y": 199.89
+        },
+        {
+          "t": 9,
+          "x": 139.15,
+          "y": 211.46
+        },
+        {
+          "t": 9.25,
+          "x": 140.17,
+          "y": 223.04
+        },
+        {
+          "t": 9.5,
+          "x": 140.26,
+          "y": 231.02
+        },
+        {
+          "t": 9.75,
+          "x": 142.92,
+          "y": 241.2
+        },
+        {
+          "t": 10,
+          "x": 140,
+          "y": 243.82
+        },
+        {
+          "t": 10.25,
+          "x": 140,
+          "y": 266.88
+        },
+        {
+          "t": 10.5,
+          "x": 140,
+          "y": 289.94
+        },
+        {
+          "t": 10.75,
+          "x": 140,
+          "y": 313
+        },
+        {
+          "t": 11,
+          "x": 140,
+          "y": 336.07
+        },
+        {
+          "t": 11.25,
+          "x": 140,
+          "y": 359.13
+        },
+        {
+          "t": 11.5,
+          "x": 140,
+          "y": 369.67
+        }
+      ],
+      "group3": [
+        {
+          "t": 6.5,
+          "x": 139.2,
+          "y": -18.29
+        },
+        {
+          "t": 6.75,
+          "x": 140.69,
+          "y": -9.83
+        },
+        {
+          "t": 7,
+          "x": 140.97,
+          "y": -1.21
+        },
+        {
+          "t": 7.25,
+          "x": 140.1,
+          "y": 12.15
+        },
+        {
+          "t": 7.5,
+          "x": 139.21,
+          "y": 25.51
+        },
+        {
+          "t": 7.75,
+          "x": 138.45,
+          "y": 38.87
+        },
+        {
+          "t": 8,
+          "x": 137.93,
+          "y": 52.23
+        },
+        {
+          "t": 8.25,
+          "x": 137.84,
+          "y": 63.52
+        },
+        {
+          "t": 8.5,
+          "x": 136.58,
+          "y": 74.23
+        },
+        {
+          "t": 8.75,
+          "x": 141.9,
+          "y": 82.37
+        },
+        {
+          "t": 9,
+          "x": 140.71,
+          "y": 94
+        },
+        {
+          "t": 9.25,
+          "x": 139.39,
+          "y": 105.63
+        },
+        {
+          "t": 9.5,
+          "x": 138.19,
+          "y": 117.25
+        },
+        {
+          "t": 9.75,
+          "x": 137.31,
+          "y": 128.88
+        },
+        {
+          "t": 10,
+          "x": 136.91,
+          "y": 140.5
+        },
+        {
+          "t": 10.25,
+          "x": 137.07,
+          "y": 152.13
+        },
+        {
+          "t": 10.5,
+          "x": 137.75,
+          "y": 163.75
+        },
+        {
+          "t": 10.75,
+          "x": 138.84,
+          "y": 175.38
+        },
+        {
+          "t": 11,
+          "x": 140.14,
+          "y": 187.01
+        },
+        {
+          "t": 11.25,
+          "x": 141.41,
+          "y": 198.63
+        },
+        {
+          "t": 11.5,
+          "x": 142.43,
+          "y": 210.26
+        },
+        {
+          "t": 11.75,
+          "x": 143.01,
+          "y": 221.88
+        },
+        {
+          "t": 12,
+          "x": 143.05,
+          "y": 233.51
+        },
+        {
+          "t": 12.25,
+          "x": 142.55,
+          "y": 245.13
+        },
+        {
+          "t": 12.5,
+          "x": 143.01,
+          "y": 250.02
+        },
+        {
+          "t": 12.75,
+          "x": 140.52,
+          "y": 261.28
+        },
+        {
+          "t": 13,
+          "x": 140,
+          "y": 274.25
+        },
+        {
+          "t": 13.25,
+          "x": 140,
+          "y": 297.41
+        },
+        {
+          "t": 13.5,
+          "x": 140,
+          "y": 320.57
+        },
+        {
+          "t": 13.75,
+          "x": 140,
+          "y": 343.73
+        },
+        {
+          "t": 14,
+          "x": 140,
+          "y": 360.12
+        },
+        {
+          "t": 14.25,
+          "x": 140,
+          "y": 368.97
+        }
+      ],
+      "group4": [
+        {
+          "t": 9.5,
+          "x": -2.99,
+          "y": 95.03
+        },
+        {
+          "t": 9.75,
+          "x": 89.88,
+          "y": 82.39
+        },
+        {
+          "t": 10,
+          "x": 84.59,
+          "y": 86.85
+        },
+        {
+          "t": 10.25,
+          "x": 132.37,
+          "y": 88.11
+        },
+        {
+          "t": 10.5,
+          "x": 139.39,
+          "y": 86.82
+        },
+        {
+          "t": 10.75,
+          "x": 144.46,
+          "y": 84.91
+        },
+        {
+          "t": 11,
+          "x": 148.09,
+          "y": 83.12
+        },
+        {
+          "t": 11.25,
+          "x": 155.21,
+          "y": 87.32
+        },
+        {
+          "t": 11.5,
+          "x": 158.08,
+          "y": 89.87
+        },
+        {
+          "t": 11.75,
+          "x": 159.35,
+          "y": 93.3
+        },
+        {
+          "t": 12,
+          "x": 164.21,
+          "y": 98.46
+        },
+        {
+          "t": 12.25,
+          "x": 168.12,
+          "y": 103.8
+        },
+        {
+          "t": 12.5,
+          "x": 170.98,
+          "y": 108.4
+        },
+        {
+          "t": 12.75,
+          "x": 172.76,
+          "y": 113.21
+        },
+        {
+          "t": 13,
+          "x": 173.53,
+          "y": 118.85
+        },
+        {
+          "t": 13.25,
+          "x": 173.4,
+          "y": 124.19
+        },
+        {
+          "t": 13.5,
+          "x": 172.5,
+          "y": 129.11
+        },
+        {
+          "t": 13.75,
+          "x": 170.94,
+          "y": 134.81
+        },
+        {
+          "t": 14,
+          "x": 168.84,
+          "y": 140.94
+        },
+        {
+          "t": 14.25,
+          "x": 166.22,
+          "y": 146.42
+        },
+        {
+          "t": 14.5,
+          "x": 163.14,
+          "y": 151.99
+        },
+        {
+          "t": 14.75,
+          "x": 159.58,
+          "y": 158.37
+        },
+        {
+          "t": 15,
+          "x": 155.53,
+          "y": 164.46
+        },
+        {
+          "t": 15.25,
+          "x": 161.14,
+          "y": 172.48
+        },
+        {
+          "t": 15.5,
+          "x": 171.59,
+          "y": 187.08
+        },
+        {
+          "t": 15.75,
+          "x": 173.52,
+          "y": 202.07
+        },
+        {
+          "t": 16,
+          "x": 177.36,
+          "y": 228.7
+        },
+        {
+          "t": 16.25,
+          "x": 182.16,
+          "y": 255.23
+        },
+        {
+          "t": 16.5,
+          "x": 187.92,
+          "y": 282.52
+        },
+        {
+          "t": 16.75,
+          "x": 193.81,
+          "y": 309.62
+        },
+        {
+          "t": 17,
+          "x": 198.87,
+          "y": 336.02
+        }
+      ],
+      "group5": [
+        {
+          "t": 12.5,
+          "x": 140,
+          "y": 95.01
+        },
+        {
+          "t": 12.75,
+          "x": 140,
+          "y": 97.84
+        },
+        {
+          "t": 13,
+          "x": 140,
+          "y": 99.57
+        },
+        {
+          "t": 13.25,
+          "x": 140,
+          "y": 100.21
+        },
+        {
+          "t": 13.5,
+          "x": 140,
+          "y": 100.84
+        },
+        {
+          "t": 13.75,
+          "x": 140,
+          "y": 101.47
+        },
+        {
+          "t": 14,
+          "x": 140,
+          "y": 102.1
+        },
+        {
+          "t": 14.25,
+          "x": 140,
+          "y": 101.4
+        },
+        {
+          "t": 14.5,
+          "x": 140,
+          "y": 100.69
+        },
+        {
+          "t": 14.75,
+          "x": 140,
+          "y": 99.96
+        },
+        {
+          "t": 15,
+          "x": 140,
+          "y": 99.23
+        },
+        {
+          "t": 15.25,
+          "x": 140,
+          "y": 99.82
+        },
+        {
+          "t": 15.5,
+          "x": 140,
+          "y": 100.41
+        },
+        {
+          "t": 15.75,
+          "x": 140,
+          "y": 101
+        },
+        {
+          "t": 16,
+          "x": 140,
+          "y": 101.59
+        },
+        {
+          "t": 16.25,
+          "x": 140,
+          "y": 102.18
+        },
+        {
+          "t": 16.5,
+          "x": 140,
+          "y": 102.76
+        },
+        {
+          "t": 16.75,
+          "x": 140,
+          "y": 103.35
+        },
+        {
+          "t": 17,
+          "x": 140,
+          "y": 103.94
+        }
+      ]
+    },
+    "routeControlRead": {
+      "group4": [
+        {
+          "lane": 0,
+          "routeOffsetX": 32,
+          "routeCurveY": 17.464,
+          "referencePath": null
+        },
+        {
+          "lane": 1,
+          "routeOffsetX": 32,
+          "routeCurveY": 17.464,
+          "referencePath": null
+        }
+      ]
+    },
+    "spacingReadability": {
+      "sampleCount": 28,
+      "worstMinDistance": 1.13,
+      "averageMinDistance": 9.35,
+      "spacingScore": 0.597,
+      "bunchingRisk": 0.464,
+      "crampedCount": 13,
+      "minRuntimeSpacingScore": 0.42,
+      "maxRuntimeBunchingRisk": 0.62,
+      "pass": true
+    },
+    "scoreableRouteStatus": {
+      "pass": true,
+      "source": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+      "read": "Baseline Stage 3 still has many scoreable windows; candidate variants must preserve the routeability and upper-band learning read."
+    },
+    "noCombatGrammarStatus": {
+      "pass": false,
+      "source": "stage3-red-and-candidate-trial",
+      "read": "No-combat grammar is preserved if browser safety events stay at zero."
+    },
+    "safetyStatus": {
+      "pass": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0
+      }
+    },
+    "motionProfileProxy": {
+      "pathFamilyOrder": {
+        "pass": true,
+        "pathFamilyOrder": [
+          "first-challenge-peel",
+          "classic-column-drop",
+          "classic-column-drop",
+          "side-hook-return",
+          "first-challenge-peel"
+        ]
+      },
+      "firstWaveProfilePreserved": {
+        "pass": true,
+        "samples": [
+          {
+            "t": 1.75,
+            "avgX": 140,
+            "avgY": 45.65,
+            "visibleCount": 8
+          }
+        ]
+      },
+      "delayedWaveStarts": {
+        "pass": true,
+        "rows": [
+          {
+            "wave": 1,
+            "sampleAt": 3.56,
+            "visibleCount": 4,
+            "maxTm": 0.231,
+            "nearEntryCount": 4
+          },
+          {
+            "wave": 2,
+            "sampleAt": 6.41,
+            "visibleCount": 4,
+            "maxTm": 0.232,
+            "nearEntryCount": 4
+          },
+          {
+            "wave": 3,
+            "sampleAt": 9.26,
+            "visibleCount": 3,
+            "maxTm": 0.262,
+            "nearEntryCount": 3
+          },
+          {
+            "wave": 4,
+            "sampleAt": 12.26,
+            "visibleCount": 4,
+            "maxTm": 0.255,
+            "nearEntryCount": 4
+          }
+        ]
+      },
+      "spacing": {
+        "pass": true,
+        "spacingScore": 0.597,
+        "bunchingRisk": 0.464
+      }
+    }
+  },
+  "group4TransferRead": {
+    "groupIndex": 4,
+    "baseline": {
+      "groupIndex": 4,
+      "sampleCount": 32,
+      "pointCount": 240,
+      "visibleWindow": {
+        "visibleStartS": 9.25,
+        "visibleEndS": 17,
+        "visibleDurationS": 7.75
+      },
+      "entrySide": "left",
+      "exitSide": "center",
+      "entryCentroidX": -17.43,
+      "exitCentroidX": 141.36,
+      "xRange": 1.133,
+      "yRange": 0.8106,
+      "pathLength": 1.5589,
+      "lowerFieldThresholdY": 187.2,
+      "lowerFieldShare": 0.2083,
+      "upperBandY": 180,
+      "upperBandShare": 0.775,
+      "meanX": 139.81,
+      "meanY": 148.59,
+      "minY": 69.98,
+      "maxY": 361.8
+    },
+    "compiled": {
+      "groupIndex": 4,
+      "sampleCount": 31,
+      "pointCount": 179,
+      "visibleWindow": {
+        "visibleStartS": 9.5,
+        "visibleEndS": 17,
+        "visibleDurationS": 7.5
+      },
+      "entrySide": "left",
+      "exitSide": "right",
+      "entryCentroidX": -2.99,
+      "exitCentroidX": 198.87,
+      "xRange": 1.1177,
+      "yRange": 0.8306,
+      "pathLength": 1.3814,
+      "lowerFieldThresholdY": 187.2,
+      "lowerFieldShare": 0.2123,
+      "upperBandY": 180,
+      "upperBandShare": 0.7709,
+      "meanX": 160.64,
+      "meanY": 148.8,
+      "minY": 53.89,
+      "maxY": 352.92
+    },
+    "predictedRuntimeVector": {
+      "id": 131378797,
+      "family": "classic",
+      "pathFamily": "side-hook-return",
+      "wave": 3,
+      "lane": 3,
+      "type": "but",
+      "sampleCount": 24,
+      "visibleStartS": 10.54,
+      "visibleEndS": 15.94,
+      "entrySide": "left",
+      "exitSide": "right",
+      "xRange": 0.4265,
+      "yRange": 0.4689,
+      "pathLength": 0.4625,
+      "turnCount": 5.433,
+      "reversalCount": 4.08,
+      "lowerFieldShare": 0.13
+    },
+    "deltaFromBaseline": {
+      "xRangeDelta": -0.0153,
+      "yRangeDelta": 0.02,
+      "pathLengthDelta": -0.1775,
+      "lowerFieldShareDelta": 0.004,
+      "upperBandShareDelta": -0.0041,
+      "meanXDeltaPx": 20.83,
+      "meanYDeltaPx": 0.21,
+      "exitCentroidDeltaPx": 57.51,
+      "visibleWindowDeltaS": {
+        "visibleStartDeltaS": 0.25,
+        "visibleEndDeltaS": 0,
+        "visibleDurationDeltaS": -0.25
+      }
+    },
+    "baselineDistanceToCandidateVector": {
+      "components": {
+        "xRange": 0.7065,
+        "yRange": 0.3417,
+        "pathLength": 1.0964,
+        "lowerFieldShare": 0.07830000000000001
+      },
+      "averageDistance": 0.5557
+    },
+    "compiledDistanceToCandidateVector": {
+      "components": {
+        "xRange": 0.6911999999999999,
+        "yRange": 0.3617,
+        "pathLength": 0.9188999999999999,
+        "lowerFieldShare": 0.08229999999999998
+      },
+      "averageDistance": 0.5135
+    },
+    "targetDistanceImproved": true,
+    "expectedPathLengthDelta": -1.0964,
+    "actualPathLengthDelta": -0.1775,
+    "pathLengthDirectionPass": true,
+    "browserVisiblePathMovement": true,
+    "expectedExitSide": "right",
+    "baselinePeelScore": 0,
+    "compiledPeelScore": 1,
+    "peelReadabilityImproved": true,
+    "browserVisiblePeelMovement": true,
+    "upperBandScoreWindowPreserved": true,
+    "read": "Group 4 browser-visible path/peel transfer read against the selected Stage 3 semantic candidate."
+  },
+  "objectTrackPathLengthMovement": {
+    "baselineTrialScore10": 4,
+    "predictedTrialScore10": 3.6,
+    "actualPathShapeDistanceDelta": -0.0422,
+    "pathLengthDelta": -0.1775,
+    "read": "Browser proof measures vector movement, not full target-video object-track score. Full score requires the Stage 3 trial/batch gate after any source attempt."
+  },
+  "protectedGroupPreservation": [
+    {
+      "groupIndex": 1,
+      "baseline": {
+        "groupIndex": 1,
+        "sampleCount": 43,
+        "pointCount": 328,
+        "visibleWindow": {
+          "visibleStartS": 0.25,
+          "visibleEndS": 10.75,
+          "visibleDurationS": 10.5
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 140,
+        "exitCentroidX": 140,
+        "xRange": 1.1371,
+        "yRange": 0.9546,
+        "pathLength": 0.9501,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.2439,
+        "upperBandY": 180,
+        "upperBandShare": 0.7439,
+        "meanX": 140,
+        "meanY": 117.37,
+        "minY": 38.25,
+        "maxY": 381.92
+      },
+      "compiled": {
+        "groupIndex": 1,
+        "sampleCount": 43,
+        "pointCount": 328,
+        "visibleWindow": {
+          "visibleStartS": 0.25,
+          "visibleEndS": 10.75,
+          "visibleDurationS": 10.5
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 140,
+        "exitCentroidX": 140,
+        "xRange": 1.1371,
+        "yRange": 0.9546,
+        "pathLength": 0.9501,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.2439,
+        "upperBandY": 180,
+        "upperBandShare": 0.7439,
+        "meanX": 140,
+        "meanY": 117.37,
+        "minY": 38.25,
+        "maxY": 381.92
+      },
+      "deltaFromBaseline": {
+        "xRangeDelta": 0,
+        "yRangeDelta": 0,
+        "pathLengthDelta": 0,
+        "lowerFieldShareDelta": 0,
+        "upperBandShareDelta": 0,
+        "meanXDeltaPx": 0,
+        "meanYDeltaPx": 0,
+        "exitCentroidDeltaPx": 0,
+        "visibleWindowDeltaS": {
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": 0,
+          "visibleDurationDeltaS": 0
+        }
+      },
+      "xRangeDelta": 0,
+      "yRangeDelta": 0,
+      "pathLengthDelta": 0,
+      "lowerFieldShareDelta": 0,
+      "upperBandShareDelta": 0,
+      "meanXDeltaPx": 0,
+      "meanYDeltaPx": 0,
+      "exitCentroidDeltaPx": 0,
+      "visibleWindowDeltaS": {
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": 0,
+        "visibleDurationDeltaS": 0
+      },
+      "preservationPass": true
+    },
+    {
+      "groupIndex": 2,
+      "baseline": {
+        "groupIndex": 2,
+        "sampleCount": 33,
+        "pointCount": 250,
+        "visibleWindow": {
+          "visibleStartS": 3.5,
+          "visibleEndS": 11.5,
+          "visibleDurationS": 8
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 140,
+        "exitCentroidX": 140,
+        "xRange": 1.0626,
+        "yRange": 1.1193,
+        "pathLength": 1.0973,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.384,
+        "upperBandY": 180,
+        "upperBandShare": 0.6,
+        "meanX": 139.93,
+        "meanY": 151.79,
+        "minY": -23.6,
+        "maxY": 379.34
+      },
+      "compiled": {
+        "groupIndex": 2,
+        "sampleCount": 33,
+        "pointCount": 250,
+        "visibleWindow": {
+          "visibleStartS": 3.5,
+          "visibleEndS": 11.5,
+          "visibleDurationS": 8
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 142.32,
+        "exitCentroidX": 140,
+        "xRange": 1.0626,
+        "yRange": 1.1193,
+        "pathLength": 1.1063,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.384,
+        "upperBandY": 180,
+        "upperBandShare": 0.6,
+        "meanX": 140.37,
+        "meanY": 151.79,
+        "minY": -23.6,
+        "maxY": 379.34
+      },
+      "deltaFromBaseline": {
+        "xRangeDelta": 0,
+        "yRangeDelta": 0,
+        "pathLengthDelta": 0.009,
+        "lowerFieldShareDelta": 0,
+        "upperBandShareDelta": 0,
+        "meanXDeltaPx": 0.44,
+        "meanYDeltaPx": 0,
+        "exitCentroidDeltaPx": 0,
+        "visibleWindowDeltaS": {
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": 0,
+          "visibleDurationDeltaS": 0
+        }
+      },
+      "xRangeDelta": 0,
+      "yRangeDelta": 0,
+      "pathLengthDelta": 0.009,
+      "lowerFieldShareDelta": 0,
+      "upperBandShareDelta": 0,
+      "meanXDeltaPx": 0.44,
+      "meanYDeltaPx": 0,
+      "exitCentroidDeltaPx": 0,
+      "visibleWindowDeltaS": {
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": 0,
+        "visibleDurationDeltaS": 0
+      },
+      "preservationPass": true
+    },
+    {
+      "groupIndex": 3,
+      "baseline": {
+        "groupIndex": 3,
+        "sampleCount": 32,
+        "pointCount": 242,
+        "visibleWindow": {
+          "visibleStartS": 6.5,
+          "visibleEndS": 14.25,
+          "visibleDurationS": 7.75
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 138.7,
+        "exitCentroidX": 140,
+        "xRange": 1.0424,
+        "yRange": 1.0954,
+        "pathLength": 1.0795,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.4132,
+        "upperBandY": 180,
+        "upperBandShare": 0.5702,
+        "meanX": 140.04,
+        "meanY": 159.16,
+        "minY": -22.57,
+        "maxY": 371.77
+      },
+      "compiled": {
+        "groupIndex": 3,
+        "sampleCount": 32,
+        "pointCount": 242,
+        "visibleWindow": {
+          "visibleStartS": 6.5,
+          "visibleEndS": 14.25,
+          "visibleDurationS": 7.75
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 139.2,
+        "exitCentroidX": 140,
+        "xRange": 1.0424,
+        "yRange": 1.0954,
+        "pathLength": 1.0878,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0.4132,
+        "upperBandY": 180,
+        "upperBandShare": 0.5702,
+        "meanX": 139.85,
+        "meanY": 159.16,
+        "minY": -22.57,
+        "maxY": 371.77
+      },
+      "deltaFromBaseline": {
+        "xRangeDelta": 0,
+        "yRangeDelta": 0,
+        "pathLengthDelta": 0.0083,
+        "lowerFieldShareDelta": 0,
+        "upperBandShareDelta": 0,
+        "meanXDeltaPx": -0.19,
+        "meanYDeltaPx": 0,
+        "exitCentroidDeltaPx": 0,
+        "visibleWindowDeltaS": {
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": 0,
+          "visibleDurationDeltaS": 0
+        }
+      },
+      "xRangeDelta": 0,
+      "yRangeDelta": 0,
+      "pathLengthDelta": 0.0083,
+      "lowerFieldShareDelta": 0,
+      "upperBandShareDelta": 0,
+      "meanXDeltaPx": -0.19,
+      "meanYDeltaPx": 0,
+      "exitCentroidDeltaPx": 0,
+      "visibleWindowDeltaS": {
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": 0,
+        "visibleDurationDeltaS": 0
+      },
+      "preservationPass": true
+    },
+    {
+      "groupIndex": 5,
+      "baseline": {
+        "groupIndex": 5,
+        "sampleCount": 19,
+        "pointCount": 144,
+        "visibleWindow": {
+          "visibleStartS": 12.5,
+          "visibleEndS": 17,
+          "visibleDurationS": 4.5
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 140,
+        "exitCentroidX": 140,
+        "xRange": 1.1583,
+        "yRange": 0.0378,
+        "pathLength": 0.0407,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0,
+        "upperBandY": 180,
+        "upperBandShare": 1,
+        "meanX": 140,
+        "meanY": 100.98,
+        "minY": 94.11,
+        "maxY": 107.72
+      },
+      "compiled": {
+        "groupIndex": 5,
+        "sampleCount": 19,
+        "pointCount": 144,
+        "visibleWindow": {
+          "visibleStartS": 12.5,
+          "visibleEndS": 17,
+          "visibleDurationS": 4.5
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 140,
+        "exitCentroidX": 140,
+        "xRange": 1.1583,
+        "yRange": 0.0378,
+        "pathLength": 0.0407,
+        "lowerFieldThresholdY": 187.2,
+        "lowerFieldShare": 0,
+        "upperBandY": 180,
+        "upperBandShare": 1,
+        "meanX": 140,
+        "meanY": 100.98,
+        "minY": 94.11,
+        "maxY": 107.72
+      },
+      "deltaFromBaseline": {
+        "xRangeDelta": 0,
+        "yRangeDelta": 0,
+        "pathLengthDelta": 0,
+        "lowerFieldShareDelta": 0,
+        "upperBandShareDelta": 0,
+        "meanXDeltaPx": 0,
+        "meanYDeltaPx": 0,
+        "exitCentroidDeltaPx": 0,
+        "visibleWindowDeltaS": {
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": 0,
+          "visibleDurationDeltaS": 0
+        }
+      },
+      "xRangeDelta": 0,
+      "yRangeDelta": 0,
+      "pathLengthDelta": 0,
+      "lowerFieldShareDelta": 0,
+      "upperBandShareDelta": 0,
+      "meanXDeltaPx": 0,
+      "meanYDeltaPx": 0,
+      "exitCentroidDeltaPx": 0,
+      "visibleWindowDeltaS": {
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": 0,
+        "visibleDurationDeltaS": 0
+      },
+      "preservationPass": true
+    }
+  ],
+  "motionProfileCompatibility": {
+    "pass": true,
+    "proxy": {
+      "pathFamilyOrder": {
+        "pass": true,
+        "pathFamilyOrder": [
+          "first-challenge-peel",
+          "classic-column-drop",
+          "classic-column-drop",
+          "side-hook-return",
+          "first-challenge-peel"
+        ]
+      },
+      "firstWaveProfilePreserved": {
+        "pass": true,
+        "samples": [
+          {
+            "t": 1.75,
+            "avgX": 140,
+            "avgY": 45.65,
+            "visibleCount": 8
+          }
+        ]
+      },
+      "delayedWaveStarts": {
+        "pass": true,
+        "rows": [
+          {
+            "wave": 1,
+            "sampleAt": 3.56,
+            "visibleCount": 4,
+            "maxTm": 0.231,
+            "nearEntryCount": 4
+          },
+          {
+            "wave": 2,
+            "sampleAt": 6.41,
+            "visibleCount": 4,
+            "maxTm": 0.232,
+            "nearEntryCount": 4
+          },
+          {
+            "wave": 3,
+            "sampleAt": 9.26,
+            "visibleCount": 3,
+            "maxTm": 0.262,
+            "nearEntryCount": 3
+          },
+          {
+            "wave": 4,
+            "sampleAt": 12.26,
+            "visibleCount": 4,
+            "maxTm": 0.255,
+            "nearEntryCount": 4
+          }
+        ]
+      },
+      "spacing": {
+        "pass": true,
+        "spacingScore": 0.597,
+        "bunchingRisk": 0.464
+      }
+    }
+  },
+  "guardrails": {
+    "spacingReadability": {
+      "sampleCount": 28,
+      "worstMinDistance": 1.13,
+      "averageMinDistance": 9.35,
+      "spacingScore": 0.597,
+      "bunchingRisk": 0.464,
+      "crampedCount": 13,
+      "minRuntimeSpacingScore": 0.42,
+      "maxRuntimeBunchingRisk": 0.62,
+      "pass": true
+    },
+    "scoreableRoutes": {
+      "pass": true,
+      "source": "reference-artifacts/analyses/challenge-stage-conformance/latest.json",
+      "read": "Baseline Stage 3 still has many scoreable windows; candidate variants must preserve the routeability and upper-band learning read."
+    },
+    "noCombatGrammar": {
+      "pass": true,
+      "source": "stage3-red-and-candidate-trial",
+      "read": "No-combat grammar is preserved if browser safety events stay at zero."
+    },
+    "safety": {
+      "pass": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0
+      }
+    }
+  },
+  "authorityConflictsThatRemain": [
+    {
+      "groupIndex": 3,
+      "touchedByCandidate": false,
+      "debt": [
+        "setpiece schedule says first-challenge-peel while target contract says classic-column-drop",
+        "movement grammar says first-challenge-peel while target contract says classic-column-drop"
+      ]
+    },
+    {
+      "groupIndex": 5,
+      "touchedByCandidate": false,
+      "debt": [
+        "setpiece schedule says side-hook-return while target contract says first-challenge-peel",
+        "movement grammar says side-hook-return while target contract says first-challenge-peel"
+      ]
+    }
+  ],
+  "failureClassification": [
+    {
+      "category": "not-runtime-expressible",
+      "read": "The semantic candidate still depends on referencePath.playbackScale, but Stage 3 has no reference-backed path for that control."
+    }
+  ],
+  "sourceReadyBlockerType": [
+    "not-runtime-expressible"
+  ],
+  "visualEvidence": {
+    "contactSheet": "reference-artifacts/analyses/reference-execution-runtime-expressibility/stage3-challenge1/latest-transfer-proof-contact-sheet.svg",
+    "kind": "svg-centroid-path-contact-sheet",
+    "read": "Baseline and compiled browser traces are plotted with group 4 highlighted."
+  },
+  "sourceAttemptMapping": {
+    "recommendation": "do-not-attempt-runtime-source-yet",
+    "note": "Refine compiler/control mapping before any Stage 3 source edit. The current proof is measurement/process evidence only."
+  },
+  "reuseNote": {
+    "reusableParts": [
+      "candidate loading from latest Stage 3 semantic batch",
+      "semantic-control to browser layoutOverride consumption map",
+      "baseline-vs-compiled group vector metrics",
+      "protected-group preservation rows",
+      "spacing, scoreable-route, no-combat, and safety guardrail reporting",
+      "SVG contact-sheet generation"
+    ],
+    "candidateSpecificParts": [
+      "the current compiler projects group 4 right peel to routeOffsetX and group 4 y-range delta to routeCurveY",
+      "referencePath.playbackScale is reported as unconsumed for Stage 3 because the runtime layout is not reference-path backed"
+    ],
+    "abstractionNeeded": "Promote semantic-control mapping into a stage-neutral compiler table with per-stage authority and consumed-field declarations.",
+    "read": "Future Stage 3 candidates can reuse this proof path by changing the selected candidate id and adding compiler mappings instead of writing bespoke browser scripts."
+  },
+  "decision": {
+    "sourceReadyForCandidates": false,
+    "sourceReadinessClassification": "visible-transfer-but-source-blocked",
+    "sourceReadyBlockers": [
+      "The semantic candidate still depends on referencePath.playbackScale, but Stage 3 has no reference-backed path for that control."
+    ],
+    "runtimeKeeperRecommendation": "not-a-runtime-keeper",
+    "betaJustification": false,
+    "read": "stage3-semantic-fresh-g4-score-window-shape-peel-0.1 is not runtime-source-attempt-ready. The proof should feed compiler/control mapping refinement, not more candidate generation."
+  },
+  "summary": {
+    "browserVisiblePathMovement": true,
+    "browserVisiblePeelMovement": true,
+    "sourceReadyForCandidates": false,
+    "blockerTypes": [
+      "not-runtime-expressible"
+    ],
+    "proofKind": "non-overwriting-browser-layout-override"
+  }
+}

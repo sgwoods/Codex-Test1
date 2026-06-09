@@ -175,6 +175,22 @@ Latest Stage 7 calibration:
   `stage3-semantic-fresh-g4-score-window-shape-peel-0.1`. Recommendation:
   later non-overwriting browser transfer proof for that candidate only; no
   runtime source edit or source candidate is authorized.
+- That single non-overwriting browser transfer proof now exists:
+  `reference-artifacts/analyses/reference-execution-runtime-expressibility/stage3-challenge1/latest-transfer-proof.json`,
+  with contact-sheet evidence at
+  `reference-artifacts/analyses/reference-execution-runtime-expressibility/stage3-challenge1/latest-transfer-proof-contact-sheet.svg`.
+  The proof confirms that the Stage 3 browser override consumes
+  `motionSpecGroups[3].controls.routeCurveY` and
+  `motionSpecGroups[3].controls.routeOffsetX`: group 4 moves from a `center`
+  exit read to `right`, path length drops from `1.5589` to `1.3814`, upper-band
+  share stays effectively flat (`0.775` to `0.7709`), protected groups 1, 2, 3,
+  and 5 pass preservation, and spacing, scoreable-route, no-combat, and
+  no-shot/no-attack/no-loss guardrails pass. It is still not
+  runtime-source-attempt-ready because `groupReferencePaths[3].playbackScale`
+  cannot be consumed: current Stage 3 / Challenge 1 is not reference-path
+  backed. Next work should refine the Stage 3 compiler/control mapping or add a
+  reference-backed/source-control expression path before any runtime source
+  attempt. Do not generate another Stage 3 candidate batch yet.
 
 ## Historical Or Stale Current-State Docs
 

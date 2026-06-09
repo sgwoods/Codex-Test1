@@ -276,9 +276,20 @@ from the roadmap.
    `metric-only-probe` classification, increased player-visible semantic lifts
    from `3` to `7`, and selected
    `stage3-semantic-fresh-g4-score-window-shape-peel-0.1` as the smallest
-   later browser transfer-proof target. The next Stage 3 step is a
-   non-overwriting browser transfer proof for that one candidate only, not a
-   runtime source edit.
+   later browser transfer-proof target. That one browser transfer proof now
+   exists at
+   `reference-artifacts/analyses/reference-execution-runtime-expressibility/stage3-challenge1/latest-transfer-proof.json`.
+   It confirms consumed, visible group 4 movement through
+   `motionSpecGroups[3].controls.routeCurveY` and
+   `motionSpecGroups[3].controls.routeOffsetX`: the group 4 exit read moves
+   from `center` to `right`, path length drops from `1.5589` to `1.3814`,
+   upper-band share is preserved, protected groups pass, and spacing,
+   scoreable-route, no-combat, and no-shot/no-attack/no-loss guardrails pass.
+   The proof is still `visible-transfer-but-source-blocked`, not
+   runtime-source-attempt-ready, because Stage 3 cannot consume
+   `groupReferencePaths[3].playbackScale` without a reference-backed path. The
+   next Stage 3 step is compiler/control mapping refinement for path-length
+   expression, not another semantic batch or runtime source edit.
 7. advance Galaxy Guardians toward a real v1 playable slice by tightening the
    opening public slice, score/result/replay identity, and full Platinum frame
    parity before expanding public depth
