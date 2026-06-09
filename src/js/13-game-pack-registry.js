@@ -173,6 +173,7 @@ function cueUsesReferenceMedia(cue){
  if(!cue||typeof cue!=='object')return false;
  if(String(cue.referenceClip||'').trim())return true;
  if(Array.isArray(cue.layers)&&cue.layers.some(layer=>cueUsesReferenceMedia(layer)))return true;
+ if(Array.isArray(cue.variants)&&cue.variants.some(variant=>cueUsesReferenceMedia(variant)))return true;
  if(cue.byPhase&&typeof cue.byPhase==='object'){
   return Object.values(cue.byPhase).some(entry=>cueUsesReferenceMedia(entry));
  }
@@ -197,7 +198,10 @@ function currentGamePackAudioCue(cueName,opts={}){
   return base;
  };
  const primaryCue=resolveCue(theme);
- if(primaryCue&&!BUILD_INFO?.publicArtifactBoundaryEnabled)return primaryCue;
+ const referenceMediaAllowed=typeof referenceAudioPubliclyAvailable==='function'
+  ? referenceAudioPubliclyAvailable()
+  : !BUILD_INFO?.publicArtifactBoundaryEnabled;
+ if(primaryCue&&referenceMediaAllowed)return primaryCue;
  if(primaryCue&&!cueUsesReferenceMedia(primaryCue))return primaryCue;
  const publicSafeFallbacks=[
   currentGamePackAudioTheme('galaga-original-reference'),

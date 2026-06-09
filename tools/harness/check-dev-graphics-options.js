@@ -9,7 +9,22 @@ function fail(message, payload){
 
 async function main(){
   const result = await withHarnessPage({ stage: 1, ships: 3, challenge: false, seed: 24138, skipStart: true }, async ({ page }) => {
-    const boundaryEnabled = await page.evaluate(() => !!window.BUILD_INFO?.publicArtifactBoundaryEnabled);
+    const runtimeInfo = await page.evaluate(async () => {
+      let buildInfo = null;
+      try{
+        const response = await fetch('build-info.json', { cache: 'no-store' });
+        if(response.ok) buildInfo = await response.json();
+      }catch{}
+      const host = String(location.hostname || '').toLowerCase();
+      const boundaryEnabled = !!buildInfo?.publicArtifactBoundaryEnabled;
+      return {
+        boundaryEnabled,
+        referenceAudioAvailable: !boundaryEnabled || (
+          buildInfo?.releaseChannel === 'development'
+          && (host === 'localhost' || host === '127.0.0.1' || host === '[::1]' || host === '::1')
+        )
+      };
+    });
     const defaults = await page.evaluate(() => {
       window.__galagaHarness__.restartCurrentConfig();
       return window.__galagaHarness__.advanceFor(0.1, { step: 1 / 60 });
@@ -35,11 +50,12 @@ async function main(){
       const cue = window.__galagaHarness__.triggerAudioCue('gameStart', { phase: 'stage', atmosphereTheme: 'aurora-borealis' });
       return { state, cue };
     });
-    return { boundaryEnabled, defaults, vividAurora, forcedClassic, galagaReference, galagaReferenceAssets };
+    return { ...runtimeInfo, defaults, vividAurora, forcedClassic, galagaReference, galagaReferenceAssets };
   });
 
-  if(result.defaults.audio?.audioTheme !== 'aurora-application'){
-    fail('default audio theme no longer resolves to the public-safe Aurora application mix', result);
+  const expectedDefaultAudioTheme = result.referenceAudioAvailable ? 'galaga-reference-assets' : 'aurora-application';
+  if(result.defaults.audio?.audioTheme !== expectedDefaultAudioTheme){
+    fail('default audio theme no longer resolves to the expected runtime review mix', result);
   }
   if(result.defaults.visualAtmosphere?.id !== 'aurora-borealis') fail('default graphics settings no longer resolve the Aurora Borealis visual atmosphere', result);
   if(result.defaults.visualAtmosphere?.backgroundMode !== 'aurora-borealis') fail('default graphics settings no longer preserve the Aurora Borealis background mode', result);
@@ -82,6 +98,7 @@ async function main(){
   console.log(JSON.stringify({
     ok: true,
     boundaryEnabled: result.boundaryEnabled,
+    referenceAudioAvailable: result.referenceAudioAvailable,
     defaults: result.defaults.graphics,
     vividAurora: {
       graphics: result.vividAurora.graphics,

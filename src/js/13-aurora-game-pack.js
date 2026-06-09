@@ -317,9 +317,13 @@ const AURORA_PUBLIC_SAFE_EFFECT_CUES=Object.freeze({
  })
 });
 
+const AURORA_REFERENCE_AUDIO_AVAILABLE=typeof referenceAudioPubliclyAvailable==='function'
+ ? referenceAudioPubliclyAvailable()
+ : !BUILD_INFO?.publicArtifactBoundaryEnabled;
+
 const AURORA_MEASURED_EFFECT_CUES=Object.freeze({
  playerShot:referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:160,referenceVolume:.92,clipStart:.08,clipDuration:.24}),
- playerHit:BUILD_INFO?.publicArtifactBoundaryEnabled
+ playerHit:!AURORA_REFERENCE_AUDIO_AVAILABLE
   ? AURORA_PUBLIC_SAFE_EFFECT_CUES.playerHit
   : Object.freeze({
    cooldownMs:1800,
@@ -330,19 +334,19 @@ const AURORA_MEASURED_EFFECT_CUES=Object.freeze({
     referenceAudioCue('assets/reference-audio/galaga3-death.m4a',{referenceVolume:1.18,clipStart:.858,clipDuration:.13,delay:.832})
    ])
   }),
- enemyHit:BUILD_INFO?.publicArtifactBoundaryEnabled
+ enemyHit:!AURORA_REFERENCE_AUDIO_AVAILABLE
   ? AURORA_PUBLIC_SAFE_EFFECT_CUES.enemyHit
   : referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:220,referenceVolume:1,clipStart:.75,clipDuration:.2}),
- bossHit:BUILD_INFO?.publicArtifactBoundaryEnabled
+ bossHit:!AURORA_REFERENCE_AUDIO_AVAILABLE
   ? AURORA_PUBLIC_SAFE_EFFECT_CUES.bossHit
   : referenceAudioCue('assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a',{cooldownMs:240,referenceVolume:1.08,clipStart:1.149,clipDuration:.24}),
- enemyBoom:BUILD_INFO?.publicArtifactBoundaryEnabled
+ enemyBoom:!AURORA_REFERENCE_AUDIO_AVAILABLE
   ? AURORA_PUBLIC_SAFE_EFFECT_CUES.enemyBoom
   : referenceAudioCue('assets/reference-audio/galaga3-zako.m4a',{cooldownMs:260,referenceVolume:1.05,clipStart:.54,clipDuration:.24}),
- bossBoom:BUILD_INFO?.publicArtifactBoundaryEnabled
+ bossBoom:!AURORA_REFERENCE_AUDIO_AVAILABLE
   ? AURORA_PUBLIC_SAFE_EFFECT_CUES.bossBoom
   : referenceAudioCue('assets/reference-audio/galaga3-boss-death-sasori.m4a',{cooldownMs:360,referenceVolume:1.04,clipStart:.798,clipDuration:.64}),
- captureSuccess:BUILD_INFO?.publicArtifactBoundaryEnabled
+ captureSuccess:!AURORA_REFERENCE_AUDIO_AVAILABLE
   ? AURORA_PUBLIC_SAFE_EFFECT_CUES.captureSuccess
   : referenceAudioCue('assets/reference-audio/galaga3-fighter-captured.m4a',{cooldownMs:1400,referenceVolume:1.16,clipStart:4.248,clipDuration:.36})
 });

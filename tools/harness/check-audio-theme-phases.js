@@ -9,6 +9,22 @@ function fail(message, payload){
 
 async function main(){
   const result = await withHarnessPage({ stage: 8, ships: 3, challenge: false, seed: 24141, skipStart: true }, async ({ page }) => {
+    const runtimeInfo = await page.evaluate(async () => {
+      let buildInfo = null;
+      try{
+        const response = await fetch('build-info.json', { cache: 'no-store' });
+        if(response.ok) buildInfo = await response.json();
+      }catch{}
+      const host = String(location.hostname || '').toLowerCase();
+      const boundaryEnabled = !!buildInfo?.publicArtifactBoundaryEnabled;
+      return {
+        boundaryEnabled,
+        referenceAudioAvailable: !boundaryEnabled || (
+          buildInfo?.releaseChannel === 'development'
+          && (host === 'localhost' || host === '127.0.0.1' || host === '[::1]' || host === '::1')
+        )
+      };
+    });
     const frontDoor = await page.evaluate(() => {
       window.__galagaHarness__.showFrontDoor();
       return window.__galagaHarness__.triggerAudioCue('uiTick', { phase: 'frontDoor' });
@@ -38,8 +54,11 @@ async function main(){
       window.__galagaHarness__.triggerAudioCue('challengeTransition', { phase: 'challenge', challenge: true });
       return window.__galagaHarness__.state();
     });
-    return { frontDoor, waitEnter, waitPulse, demoEnter, demoPulse, gameplayStart, challengeTransition };
+    return { runtimeInfo, frontDoor, waitEnter, waitPulse, demoEnter, demoPulse, gameplayStart, challengeTransition };
   });
+  const expectedReviewGameplayTheme = result.runtimeInfo.referenceAudioAvailable ? 'galaga-reference-assets' : 'aurora-surge';
+  const expectedDemoEnterTheme = result.runtimeInfo.referenceAudioAvailable ? 'galaga-reference-assets' : 'aurora-crown';
+  const expectedDemoPulseTheme = result.runtimeInfo.referenceAudioAvailable ? 'galaga-reference-assets' : 'classic-arcade';
 
   if(result.frontDoor?.cue !== 'uiTick' || result.frontDoor?.phase !== 'frontDoor' || result.frontDoor?.audioTheme !== 'aurora-crown'){
     fail('front-door ui tick did not resolve through the Aurora Crown front-door audio theme', result);
@@ -56,25 +75,26 @@ async function main(){
   }
 
   const demoEnterCue = result.demoEnter.find(entry => entry.cue === 'attractEnter' && entry.phase === 'demo');
-  if(!demoEnterCue || demoEnterCue.audioTheme !== 'aurora-crown'){
-    fail('demo entry did not stay on the Aurora Crown attract audio theme', result);
+  if(!demoEnterCue || demoEnterCue.audioTheme !== expectedDemoEnterTheme){
+    fail('demo entry did not resolve through the expected review audio theme', result);
   }
 
   const demoPulseCue = result.demoPulse.find(entry => entry.cue === 'attractPulse' && entry.phase === 'demo');
-  if(!demoPulseCue || demoPulseCue.audioTheme !== 'classic-arcade'){
-    fail('demo pulse did not resolve through the classic arcade stage pulse family during attract playback', result);
+  if(!demoPulseCue || demoPulseCue.audioTheme !== expectedDemoPulseTheme){
+    fail('demo pulse did not resolve through the expected attract playback audio theme', result);
   }
 
-  if(result.gameplayStart.audioCue?.cue !== 'gameStart' || result.gameplayStart.audioCue?.audioTheme !== 'aurora-surge'){
+  if(result.gameplayStart.audioCue?.cue !== 'gameStart' || result.gameplayStart.audioCue?.audioTheme !== expectedReviewGameplayTheme){
     fail('gameplay start did not resolve through the current stage-atmosphere cue family', result);
   }
 
-  if(result.challengeTransition.audioCue?.cue !== 'challengeTransition' || result.challengeTransition.audioCue?.phase !== 'challenge' || result.challengeTransition.audioCue?.audioTheme !== 'aurora-surge'){
+  if(result.challengeTransition.audioCue?.cue !== 'challengeTransition' || result.challengeTransition.audioCue?.phase !== 'challenge' || result.challengeTransition.audioCue?.audioTheme !== expectedReviewGameplayTheme){
     fail('challenge transition did not resolve through the current stage-atmosphere cue family', result);
   }
 
   console.log(JSON.stringify({
     ok: true,
+    runtimeInfo: result.runtimeInfo,
     frontDoor: result.frontDoor,
     waitEnter: waitEnterCue,
     waitPulse: waitPulseCue,

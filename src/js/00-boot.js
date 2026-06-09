@@ -1026,7 +1026,7 @@ const sfx={
   return this.referenceBuffers[clip];
  },
  primeReferenceTheme(themeId=''){
-  if(String(themeId||'').trim()!=='galaga-reference-assets'||BUILD_INFO?.publicArtifactBoundaryEnabled)return;
+  if(String(themeId||'').trim()!=='galaga-reference-assets'||!referenceAudioPubliclyAvailable())return;
   [
    'assets/reference-audio/galaga3-start.m4a',
    'assets/reference-audio/galaga3-ambience-convoy.m4a',
@@ -1923,7 +1923,7 @@ const DEFAULT_TEST_CFG=Object.freeze({
  extendFirst:20000,
  extendRecurring:70000,
   challenge:false,
-  audioTheme:'aurora-application',
+  audioTheme:referenceAudioPubliclyAvailable()?'galaga-reference-assets':'aurora-application',
   audioThemePinned:false,
   graphicsTheme:'aurora-borealis',
   spriteRenderMode:'auto',
@@ -1932,7 +1932,9 @@ const DEFAULT_TEST_CFG=Object.freeze({
 });
 let testCfgCache=null;
 function referenceAudioPubliclyAvailable(){
- return !BUILD_INFO?.publicArtifactBoundaryEnabled;
+ if(!BUILD_INFO?.publicArtifactBoundaryEnabled)return true;
+ const host=String(location?.hostname||'').toLowerCase();
+ return BUILD_INFO?.releaseChannel==='development'&&(host==='localhost'||host==='127.0.0.1'||host==='[::1]'||host==='::1');
 }
 function productionRootModeEnabled(){
  return !PRODUCTION_RELEASE_LANE||!!developerRootMode;
