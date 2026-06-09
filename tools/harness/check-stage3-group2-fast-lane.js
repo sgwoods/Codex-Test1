@@ -32,7 +32,7 @@ if(!Array.isArray(report.scope?.protectedGroups) || !report.scope.protectedGroup
 if(!['non-overwriting-proof', 'source-attempt'].includes(report.mode)){
   fail('Unexpected Stage 3 group 2 fast-lane mode.', { mode: report.mode });
 }
-if(!['transfer-proof-ready', 'dev-visible-gameplay-keeper', 'rejected', 'blocked'].includes(report.verdict)){
+if(!['transfer-proof-ready', 'dev-visible-gameplay-keeper', 'rejected', 'blocked', 'blocked-runtime-control-isolation'].includes(report.verdict)){
   fail('Unexpected Stage 3 group 2 fast-lane verdict.', { verdict: report.verdict });
 }
 if(report.verdict === 'dev-visible-gameplay-keeper'){
@@ -49,6 +49,18 @@ if(report.verdict === 'transfer-proof-ready'){
 }
 if(report.verdict === 'blocked' && report.mode === 'non-overwriting-proof' && report.summary?.passingProofCount === 1){
   fail('A non-overwriting proof with exactly one passing candidate should be transfer-proof-ready.', { summary: report.summary });
+}
+if(report.verdict === 'blocked-runtime-control-isolation'){
+  if(report.mode !== 'non-overwriting-proof') fail('Runtime-control isolation blocks should be non-overwriting proof mode.', { mode: report.mode });
+  if(report.summary?.blockerClassification !== 'runtime-control-isolation'){
+    fail('Blocked isolation report must classify runtime-control isolation.', { summary: report.summary });
+  }
+  if(!report.isolation || !Array.isArray(report.isolation.perGroupTimingDrift)){
+    fail('Blocked isolation report must include per-group timing drift.', { isolation: report.isolation });
+  }
+  if(!report.summary?.missingRuntimeControl){
+    fail('Blocked isolation report must name the missing runtime control capability.', { summary: report.summary });
+  }
 }
 
 console.log(JSON.stringify({

@@ -37,7 +37,7 @@ Selected candidate: stage3-g2-soft-score-window-isolated-0.1
 - No-combat grammar pass: true
 - Safety pass: true
 
-Contact sheet: reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group2-fast-lane/latest-group2-fast-lane-contact-sheet.svg
+Contact sheet: reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group2-fast-lane/2026-06-09T02-44-39-18c4bcab-stage3-g2-soft-score-window-isolated-0.1/contact-sheet.svg
 
 ## Blockers
 

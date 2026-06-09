@@ -1,11 +1,11 @@
 # Stage 3 Group 2 Fast-Lane Report
 
-Generated: 2026-06-09T02:44:39.636Z
+Generated: 2026-06-09T02:41:48.449Z
 Commit: 18c4bcab
 Branch: codex/macbook-pro-1.4.1-stage7-object-track-keeper
 
-Mode: source-attempt
-Verdict: dev-visible-gameplay-keeper
+Mode: non-overwriting-proof
+Verdict: transfer-proof-ready
 Selected candidate: stage3-g2-soft-score-window-isolated-0.1
 
 ## Group 2 Read
@@ -37,7 +37,7 @@ Selected candidate: stage3-g2-soft-score-window-isolated-0.1
 - No-combat grammar pass: true
 - Safety pass: true
 
-Contact sheet: reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group2-fast-lane/latest-group2-fast-lane-contact-sheet.svg
+Contact sheet: reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group2-fast-lane/2026-06-09T02-41-48-18c4bcab-stage3-g2-soft-score-window-isolated-0.1/contact-sheet.svg
 
 ## Blockers
 

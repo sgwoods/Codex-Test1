@@ -1,0 +1,3810 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "stage3-group2-fast-lane-report",
+  "proofType": "stage3-group2-motionSpec-control-isolation",
+  "generatedAt": "2026-06-09T02:41:48.449Z",
+  "generatedBy": "tools/harness/analyze-stage3-group2-fast-lane.js",
+  "commit": "18c4bcab",
+  "branch": "codex/macbook-pro-1.4.1-stage7-object-track-keeper",
+  "releaseFamily": "1.4.1",
+  "gameKey": "aurora-galactica",
+  "mode": "non-overwriting-proof",
+  "scope": {
+    "stage": 3,
+    "challengeNumber": 1,
+    "touchedGroup": 2,
+    "protectedGroups": [
+      1,
+      3,
+      4,
+      5
+    ],
+    "acceptedKeepersToPreserve": [
+      "stage3-semantic-fresh-g4-score-window-shape-peel-0.1",
+      "stage3-g5-late-score-window-stretch-0.1"
+    ]
+  },
+  "variantsTested": [
+    {
+      "candidateId": "stage3-g2-column-tighten-phase-isolated-0.1",
+      "transformId": "group2-column-tighten-phase-isolated",
+      "motionSpec": {
+        "controls": {
+          "arcAmp": 0.72,
+          "dropAmp": 0.82,
+          "pathPlaybackScale": 1,
+          "phaseOffsetS": 0.32,
+          "routeCurveY": -8
+        }
+      },
+      "score": 1.1,
+      "proofPass": false,
+      "blockerTypes": [
+        "phase-timing-regression"
+      ],
+      "group2XRange": "1.0626->0.9991",
+      "group2YRange": "1.1193->1.1005",
+      "group2PathLength": "1.1054->1.1051",
+      "exitSide": "center->center",
+      "upperBandShare": "0.6->0.626"
+    },
+    {
+      "candidateId": "stage3-g2-column-tighten-spawn-isolated-0.1",
+      "transformId": "group2-column-tighten-spawn-isolated",
+      "motionSpec": {
+        "spawnOffsetS": 3.2,
+        "controls": {
+          "arcAmp": 0.72,
+          "dropAmp": 0.82,
+          "pathPlaybackScale": 1,
+          "phaseOffsetS": 0.2,
+          "routeCurveY": -6
+        }
+      },
+      "score": 1.1,
+      "proofPass": false,
+      "blockerTypes": [
+        "motion-profile-regression"
+      ],
+      "group2XRange": "1.0626->0.975",
+      "group2YRange": "1.1193->1.101",
+      "group2PathLength": "1.1054->1.1081",
+      "exitSide": "center->center",
+      "upperBandShare": "0.6->0.6412"
+    },
+    {
+      "candidateId": "stage3-g2-soft-score-window-isolated-0.1",
+      "transformId": "group2-soft-score-window-isolated",
+      "motionSpec": {
+        "controls": {
+          "arcAmp": 0.76,
+          "dropAmp": 0.88,
+          "pathPlaybackScale": 1.02,
+          "phaseOffsetS": 0.12,
+          "routeCurveY": -4
+        }
+      },
+      "score": 1.1,
+      "proofPass": true,
+      "blockerTypes": [],
+      "group2XRange": "1.0626->0.9622",
+      "group2YRange": "1.1193->1.1027",
+      "group2PathLength": "1.1054->1.1094",
+      "exitSide": "center->center",
+      "upperBandShare": "0.6->0.622"
+    }
+  ],
+  "selectedCandidateId": "stage3-g2-soft-score-window-isolated-0.1",
+  "selectedTransformId": "group2-soft-score-window-isolated",
+  "selectedVariant": {
+    "candidateId": "stage3-g2-soft-score-window-isolated-0.1",
+    "transformId": "group2-soft-score-window-isolated",
+    "read": "Apply a softer column/upper-band adjustment intended to prove group-level controls can move group 2 while staying below protected-keeper tolerances.",
+    "motionSpec": {
+      "controls": {
+        "arcAmp": 0.76,
+        "dropAmp": 0.88,
+        "pathPlaybackScale": 1.02,
+        "phaseOffsetS": 0.12,
+        "routeCurveY": -4
+      }
+    },
+    "scenario": {
+      "variant": "stage3-g2-soft-score-window-isolated-0.1",
+      "layoutSummary": {
+        "id": "first-challenge-peel",
+        "groupPathFamilies": [
+          "first-challenge-peel",
+          "classic-column-drop",
+          "classic-column-drop",
+          "side-hook-return",
+          "first-challenge-peel"
+        ],
+        "groupSpawnOffsets": [
+          0,
+          3.4,
+          6.25,
+          9.1,
+          12.1
+        ],
+        "motionSpecGroups": [
+          null,
+          {
+            "controls": {
+              "arcAmp": 0.76,
+              "dropAmp": 0.88,
+              "pathPlaybackScale": 1.02,
+              "phaseOffsetS": 0.12,
+              "routeCurveY": -4
+            }
+          },
+          null,
+          {
+            "controls": {
+              "pathPlaybackScale": 0.5,
+              "routeCurveY": 17.464,
+              "routeOffsetX": 60
+            }
+          },
+          {
+            "controls": {
+              "pathPlaybackScale": 1.18,
+              "routeCurveY": 12,
+              "routeOffsetX": 48
+            }
+          }
+        ]
+      },
+      "groupMetrics": {
+        "group1": {
+          "groupIndex": 1,
+          "sampleCount": 43,
+          "pointCount": 328,
+          "visibleWindow": {
+            "visibleStartS": 0.25,
+            "visibleEndS": 10.75,
+            "visibleDurationS": 10.5
+          },
+          "entrySide": "center",
+          "exitSide": "center",
+          "entryCentroidX": 140,
+          "exitCentroidX": 140,
+          "xRange": 1.1371,
+          "yRange": 0.9546,
+          "pathLength": 0.9501,
+          "lowerFieldShare": 0.2439,
+          "upperBandShare": 0.7439,
+          "meanX": 140,
+          "meanY": 117.37,
+          "minY": 38.25,
+          "maxY": 381.92
+        },
+        "group2": {
+          "groupIndex": 2,
+          "sampleCount": 34,
+          "pointCount": 254,
+          "visibleWindow": {
+            "visibleStartS": 3.5,
+            "visibleEndS": 11.75,
+            "visibleDurationS": 8.25
+          },
+          "entrySide": "center",
+          "exitSide": "center",
+          "entryCentroidX": 143.1,
+          "exitCentroidX": 140,
+          "xRange": 0.9622,
+          "yRange": 1.1027,
+          "pathLength": 1.1094,
+          "lowerFieldShare": 0.3543,
+          "upperBandShare": 0.622,
+          "meanX": 139.81,
+          "meanY": 151.48,
+          "minY": -21,
+          "maxY": 375.96
+        },
+        "group3": {
+          "groupIndex": 3,
+          "sampleCount": 32,
+          "pointCount": 242,
+          "visibleWindow": {
+            "visibleStartS": 6.5,
+            "visibleEndS": 14.25,
+            "visibleDurationS": 7.75
+          },
+          "entrySide": "center",
+          "exitSide": "center",
+          "entryCentroidX": 141.09,
+          "exitCentroidX": 140,
+          "xRange": 1.0424,
+          "yRange": 1.0954,
+          "pathLength": 1.0826,
+          "lowerFieldShare": 0.4132,
+          "upperBandShare": 0.5702,
+          "meanX": 140.28,
+          "meanY": 159.16,
+          "minY": -22.57,
+          "maxY": 371.77
+        },
+        "group4": {
+          "groupIndex": 4,
+          "sampleCount": 32,
+          "pointCount": 167,
+          "visibleWindow": {
+            "visibleStartS": 9.25,
+            "visibleEndS": 17,
+            "visibleDurationS": 7.75
+          },
+          "entrySide": "left",
+          "exitSide": "right",
+          "entryCentroidX": -1.42,
+          "exitCentroidX": 204.89,
+          "xRange": 1.1249,
+          "yRange": 0.4278,
+          "pathLength": 1.2586,
+          "lowerFieldShare": 0.0299,
+          "upperBandShare": 0.9401,
+          "meanX": 173.84,
+          "meanY": 122.42,
+          "minY": 58.65,
+          "maxY": 212.65
+        },
+        "group5": {
+          "groupIndex": 5,
+          "sampleCount": 20,
+          "pointCount": 136,
+          "visibleWindow": {
+            "visibleStartS": 12.25,
+            "visibleEndS": 17,
+            "visibleDurationS": 4.75
+          },
+          "entrySide": "left",
+          "exitSide": "right",
+          "entryCentroidX": -10.19,
+          "exitCentroidX": 188,
+          "xRange": 1.1363,
+          "yRange": 0.0989,
+          "pathLength": 0.7949,
+          "lowerFieldShare": 0,
+          "upperBandShare": 1,
+          "meanX": 172.06,
+          "meanY": 101.35,
+          "minY": 83.83,
+          "maxY": 119.45
+        }
+      },
+      "centroidTraces": {
+        "group1": [
+          {
+            "t": 0.25,
+            "x": 140,
+            "y": 38.62
+          },
+          {
+            "t": 0.5,
+            "x": 140,
+            "y": 39.01
+          },
+          {
+            "t": 0.75,
+            "x": 140,
+            "y": 42.07
+          },
+          {
+            "t": 1,
+            "x": 140,
+            "y": 43.8
+          },
+          {
+            "t": 1.25,
+            "x": 140,
+            "y": 44.42
+          },
+          {
+            "t": 1.5,
+            "x": 140,
+            "y": 45.04
+          },
+          {
+            "t": 1.75,
+            "x": 140,
+            "y": 45.65
+          },
+          {
+            "t": 2,
+            "x": 140,
+            "y": 46.27
+          },
+          {
+            "t": 2.25,
+            "x": 140,
+            "y": 45.56
+          },
+          {
+            "t": 2.5,
+            "x": 140,
+            "y": 44.84
+          },
+          {
+            "t": 2.75,
+            "x": 140,
+            "y": 42.77
+          },
+          {
+            "t": 3,
+            "x": 140,
+            "y": 43.35
+          },
+          {
+            "t": 3.25,
+            "x": 140,
+            "y": 43.93
+          },
+          {
+            "t": 3.5,
+            "x": 140,
+            "y": 44.51
+          },
+          {
+            "t": 3.75,
+            "x": 140,
+            "y": 45.08
+          },
+          {
+            "t": 4,
+            "x": 140,
+            "y": 45.66
+          },
+          {
+            "t": 4.25,
+            "x": 140,
+            "y": 46.25
+          },
+          {
+            "t": 4.5,
+            "x": 140,
+            "y": 46.82
+          },
+          {
+            "t": 4.75,
+            "x": 140,
+            "y": 47.4
+          },
+          {
+            "t": 5,
+            "x": 140,
+            "y": 47.98
+          },
+          {
+            "t": 5.25,
+            "x": 140,
+            "y": 48.56
+          },
+          {
+            "t": 5.5,
+            "x": 140,
+            "y": 49.14
+          },
+          {
+            "t": 5.75,
+            "x": 140,
+            "y": 49.72
+          },
+          {
+            "t": 6,
+            "x": 140,
+            "y": 50.3
+          },
+          {
+            "t": 6.25,
+            "x": 140,
+            "y": 51.47
+          },
+          {
+            "t": 6.5,
+            "x": 140,
+            "y": 58.65
+          },
+          {
+            "t": 6.75,
+            "x": 140,
+            "y": 71.83
+          },
+          {
+            "t": 7,
+            "x": 140,
+            "y": 91.01
+          },
+          {
+            "t": 7.25,
+            "x": 140,
+            "y": 110.54
+          },
+          {
+            "t": 7.5,
+            "x": 140,
+            "y": 130.07
+          },
+          {
+            "t": 7.75,
+            "x": 140,
+            "y": 149.6
+          },
+          {
+            "t": 8,
+            "x": 140,
+            "y": 169.13
+          },
+          {
+            "t": 8.25,
+            "x": 140,
+            "y": 188.66
+          },
+          {
+            "t": 8.5,
+            "x": 140,
+            "y": 208.19
+          },
+          {
+            "t": 8.75,
+            "x": 140,
+            "y": 227.72
+          },
+          {
+            "t": 9,
+            "x": 140,
+            "y": 247.25
+          },
+          {
+            "t": 9.25,
+            "x": 140,
+            "y": 266.79
+          },
+          {
+            "t": 9.5,
+            "x": 140,
+            "y": 286.32
+          },
+          {
+            "t": 9.75,
+            "x": 140,
+            "y": 305.85
+          },
+          {
+            "t": 10,
+            "x": 140,
+            "y": 325.38
+          },
+          {
+            "t": 10.25,
+            "x": 140,
+            "y": 344.91
+          },
+          {
+            "t": 10.5,
+            "x": 140,
+            "y": 364.44
+          },
+          {
+            "t": 10.75,
+            "x": 140,
+            "y": 373.65
+          }
+        ],
+        "group2": [
+          {
+            "t": 3.5,
+            "x": 143.1,
+            "y": -20.34
+          },
+          {
+            "t": 3.75,
+            "x": 141.29,
+            "y": -12.93
+          },
+          {
+            "t": 4,
+            "x": 139.92,
+            "y": -7.56
+          },
+          {
+            "t": 4.25,
+            "x": 139.07,
+            "y": 4.61
+          },
+          {
+            "t": 4.5,
+            "x": 138.36,
+            "y": 14.99
+          },
+          {
+            "t": 4.75,
+            "x": 137.92,
+            "y": 25.78
+          },
+          {
+            "t": 5,
+            "x": 137.82,
+            "y": 38.78
+          },
+          {
+            "t": 5.25,
+            "x": 138.07,
+            "y": 50.73
+          },
+          {
+            "t": 5.5,
+            "x": 141,
+            "y": 56.39
+          },
+          {
+            "t": 5.75,
+            "x": 141.02,
+            "y": 65.29
+          },
+          {
+            "t": 6,
+            "x": 139.28,
+            "y": 74.9
+          },
+          {
+            "t": 6.25,
+            "x": 138.1,
+            "y": 84.19
+          },
+          {
+            "t": 6.5,
+            "x": 137.27,
+            "y": 93.09
+          },
+          {
+            "t": 6.75,
+            "x": 136.93,
+            "y": 104.36
+          },
+          {
+            "t": 7,
+            "x": 137.14,
+            "y": 115.13
+          },
+          {
+            "t": 7.25,
+            "x": 137.87,
+            "y": 123.72
+          },
+          {
+            "t": 7.5,
+            "x": 138.99,
+            "y": 133.63
+          },
+          {
+            "t": 7.75,
+            "x": 140.29,
+            "y": 145.22
+          },
+          {
+            "t": 8,
+            "x": 141.53,
+            "y": 154.86
+          },
+          {
+            "t": 8.25,
+            "x": 142.5,
+            "y": 163.55
+          },
+          {
+            "t": 8.5,
+            "x": 143.02,
+            "y": 174.55
+          },
+          {
+            "t": 8.75,
+            "x": 142.99,
+            "y": 185.63
+          },
+          {
+            "t": 9,
+            "x": 142.42,
+            "y": 194.38
+          },
+          {
+            "t": 9.25,
+            "x": 141.42,
+            "y": 203.92
+          },
+          {
+            "t": 9.5,
+            "x": 139.92,
+            "y": 219.49
+          },
+          {
+            "t": 9.75,
+            "x": 139.77,
+            "y": 234.15
+          },
+          {
+            "t": 10,
+            "x": 140,
+            "y": 248.86
+          },
+          {
+            "t": 10.25,
+            "x": 140,
+            "y": 269.52
+          },
+          {
+            "t": 10.5,
+            "x": 140,
+            "y": 290.83
+          },
+          {
+            "t": 10.75,
+            "x": 140,
+            "y": 309.79
+          },
+          {
+            "t": 11,
+            "x": 140,
+            "y": 328.98
+          },
+          {
+            "t": 11.25,
+            "x": 140,
+            "y": 350.43
+          },
+          {
+            "t": 11.5,
+            "x": 140,
+            "y": 366.41
+          },
+          {
+            "t": 11.75,
+            "x": 140,
+            "y": 375.96
+          }
+        ],
+        "group3": [
+          {
+            "t": 6.5,
+            "x": 141.09,
+            "y": -18.29
+          },
+          {
+            "t": 6.75,
+            "x": 142.24,
+            "y": -9.83
+          },
+          {
+            "t": 7,
+            "x": 141.51,
+            "y": -1.21
+          },
+          {
+            "t": 7.25,
+            "x": 141.8,
+            "y": 12.15
+          },
+          {
+            "t": 7.5,
+            "x": 141.8,
+            "y": 25.51
+          },
+          {
+            "t": 7.75,
+            "x": 141.5,
+            "y": 38.87
+          },
+          {
+            "t": 8,
+            "x": 140.97,
+            "y": 52.23
+          },
+          {
+            "t": 8.25,
+            "x": 139,
+            "y": 63.52
+          },
+          {
+            "t": 8.5,
+            "x": 141.7,
+            "y": 74.23
+          },
+          {
+            "t": 8.75,
+            "x": 141.87,
+            "y": 82.37
+          },
+          {
+            "t": 9,
+            "x": 142.43,
+            "y": 94
+          },
+          {
+            "t": 9.25,
+            "x": 142.56,
+            "y": 105.63
+          },
+          {
+            "t": 9.5,
+            "x": 142.23,
+            "y": 117.25
+          },
+          {
+            "t": 9.75,
+            "x": 141.5,
+            "y": 128.88
+          },
+          {
+            "t": 10,
+            "x": 140.5,
+            "y": 140.5
+          },
+          {
+            "t": 10.25,
+            "x": 139.41,
+            "y": 152.13
+          },
+          {
+            "t": 10.5,
+            "x": 138.42,
+            "y": 163.75
+          },
+          {
+            "t": 10.75,
+            "x": 137.72,
+            "y": 175.38
+          },
+          {
+            "t": 11,
+            "x": 137.43,
+            "y": 187.01
+          },
+          {
+            "t": 11.25,
+            "x": 137.6,
+            "y": 198.63
+          },
+          {
+            "t": 11.5,
+            "x": 138.2,
+            "y": 210.26
+          },
+          {
+            "t": 11.75,
+            "x": 139.13,
+            "y": 221.88
+          },
+          {
+            "t": 12,
+            "x": 140.2,
+            "y": 233.51
+          },
+          {
+            "t": 12.25,
+            "x": 141.25,
+            "y": 245.13
+          },
+          {
+            "t": 12.5,
+            "x": 139.28,
+            "y": 250.02
+          },
+          {
+            "t": 12.75,
+            "x": 138.39,
+            "y": 261.28
+          },
+          {
+            "t": 13,
+            "x": 140,
+            "y": 274.25
+          },
+          {
+            "t": 13.25,
+            "x": 140,
+            "y": 297.41
+          },
+          {
+            "t": 13.5,
+            "x": 140,
+            "y": 320.57
+          },
+          {
+            "t": 13.75,
+            "x": 140,
+            "y": 343.73
+          },
+          {
+            "t": 14,
+            "x": 140,
+            "y": 360.12
+          },
+          {
+            "t": 14.25,
+            "x": 140,
+            "y": 368.97
+          }
+        ],
+        "group4": [
+          {
+            "t": 9.25,
+            "x": -1.42,
+            "y": 74.62
+          },
+          {
+            "t": 9.5,
+            "x": 8.37,
+            "y": 87.21
+          },
+          {
+            "t": 9.75,
+            "x": 15.53,
+            "y": 86.16
+          },
+          {
+            "t": 10,
+            "x": 44.36,
+            "y": 81.05
+          },
+          {
+            "t": 10.25,
+            "x": 68.26,
+            "y": 80.53
+          },
+          {
+            "t": 10.5,
+            "x": 86.91,
+            "y": 89.51
+          },
+          {
+            "t": 10.75,
+            "x": 100.26,
+            "y": 96.77
+          },
+          {
+            "t": 11,
+            "x": 112.14,
+            "y": 90.61
+          },
+          {
+            "t": 11.25,
+            "x": 157.67,
+            "y": 81.14
+          },
+          {
+            "t": 11.5,
+            "x": 159.95,
+            "y": 82.32
+          },
+          {
+            "t": 11.75,
+            "x": 162.97,
+            "y": 96.91
+          },
+          {
+            "t": 12,
+            "x": 167.36,
+            "y": 98.84
+          },
+          {
+            "t": 12.25,
+            "x": 195.48,
+            "y": 91.63
+          },
+          {
+            "t": 12.5,
+            "x": 200.46,
+            "y": 89.34
+          },
+          {
+            "t": 12.75,
+            "x": 204.55,
+            "y": 101.99
+          },
+          {
+            "t": 13,
+            "x": 207.56,
+            "y": 115.95
+          },
+          {
+            "t": 13.25,
+            "x": 209.43,
+            "y": 115.28
+          },
+          {
+            "t": 13.5,
+            "x": 210.14,
+            "y": 109.04
+          },
+          {
+            "t": 13.75,
+            "x": 209.79,
+            "y": 115.74
+          },
+          {
+            "t": 14,
+            "x": 208.53,
+            "y": 131.58
+          },
+          {
+            "t": 14.25,
+            "x": 206.55,
+            "y": 136.99
+          },
+          {
+            "t": 14.5,
+            "x": 204.08,
+            "y": 130.19
+          },
+          {
+            "t": 14.75,
+            "x": 201.33,
+            "y": 130.29
+          },
+          {
+            "t": 15,
+            "x": 198.5,
+            "y": 144.49
+          },
+          {
+            "t": 15.25,
+            "x": 195.73,
+            "y": 155.76
+          },
+          {
+            "t": 15.5,
+            "x": 193.11,
+            "y": 152.09
+          },
+          {
+            "t": 15.75,
+            "x": 190.64,
+            "y": 147.09
+          },
+          {
+            "t": 16,
+            "x": 188.29,
+            "y": 156.7
+          },
+          {
+            "t": 16.25,
+            "x": 185.99,
+            "y": 171.83
+          },
+          {
+            "t": 16.5,
+            "x": 192.9,
+            "y": 174.7
+          },
+          {
+            "t": 16.75,
+            "x": 203.15,
+            "y": 169.66
+          },
+          {
+            "t": 17,
+            "x": 204.89,
+            "y": 176.3
+          }
+        ],
+        "group5": [
+          {
+            "t": 12.25,
+            "x": -10.19,
+            "y": 98.33
+          },
+          {
+            "t": 12.5,
+            "x": 14.77,
+            "y": 98.32
+          },
+          {
+            "t": 12.75,
+            "x": 22.49,
+            "y": 97.37
+          },
+          {
+            "t": 13,
+            "x": 98.88,
+            "y": 97.99
+          },
+          {
+            "t": 13.25,
+            "x": 143.01,
+            "y": 102.65
+          },
+          {
+            "t": 13.5,
+            "x": 169.59,
+            "y": 102.72
+          },
+          {
+            "t": 13.75,
+            "x": 171.37,
+            "y": 98.06
+          },
+          {
+            "t": 14,
+            "x": 188,
+            "y": 101.22
+          },
+          {
+            "t": 14.25,
+            "x": 188,
+            "y": 103.65
+          },
+          {
+            "t": 14.5,
+            "x": 188,
+            "y": 99.82
+          },
+          {
+            "t": 14.75,
+            "x": 188,
+            "y": 97.01
+          },
+          {
+            "t": 15,
+            "x": 188,
+            "y": 100.6
+          },
+          {
+            "t": 15.25,
+            "x": 188,
+            "y": 101.76
+          },
+          {
+            "t": 15.5,
+            "x": 188,
+            "y": 99.15
+          },
+          {
+            "t": 15.75,
+            "x": 188,
+            "y": 100.98
+          },
+          {
+            "t": 16,
+            "x": 188,
+            "y": 104.2
+          },
+          {
+            "t": 16.25,
+            "x": 188,
+            "y": 102.24
+          },
+          {
+            "t": 16.5,
+            "x": 188,
+            "y": 101.66
+          },
+          {
+            "t": 16.75,
+            "x": 188,
+            "y": 105.53
+          },
+          {
+            "t": 17,
+            "x": 188,
+            "y": 105.63
+          }
+        ]
+      },
+      "routeControlRead": {
+        "group2": [
+          {
+            "lane": 0,
+            "type": "bee",
+            "laneSpreadScale": 1,
+            "rowSpreadScale": 1,
+            "pathPlaybackScale": 1.02,
+            "routeOffsetX": 0,
+            "routeCurveX": 0,
+            "routeCurveY": -4
+          },
+          {
+            "lane": 1,
+            "type": "bee",
+            "laneSpreadScale": 1,
+            "rowSpreadScale": 1,
+            "pathPlaybackScale": 1.02,
+            "routeOffsetX": 0,
+            "routeCurveX": 0,
+            "routeCurveY": -4
+          },
+          {
+            "lane": 2,
+            "type": "bee",
+            "laneSpreadScale": 1,
+            "rowSpreadScale": 1,
+            "pathPlaybackScale": 1.02,
+            "routeOffsetX": 0,
+            "routeCurveX": 0,
+            "routeCurveY": -4
+          },
+          {
+            "lane": 3,
+            "type": "bee",
+            "laneSpreadScale": 1,
+            "rowSpreadScale": 1,
+            "pathPlaybackScale": 1.02,
+            "routeOffsetX": 0,
+            "routeCurveX": 0,
+            "routeCurveY": -4
+          }
+        ],
+        "group4": [
+          {
+            "lane": 0,
+            "type": "bee",
+            "laneSpreadScale": 1,
+            "rowSpreadScale": 1,
+            "pathPlaybackScale": 0.5,
+            "routeOffsetX": 60,
+            "routeCurveX": 0,
+            "routeCurveY": 17.464
+          },
+          {
+            "lane": 1,
+            "type": "but",
+            "laneSpreadScale": 1,
+            "rowSpreadScale": 1,
+            "pathPlaybackScale": 0.5,
+            "routeOffsetX": 60,
+            "routeCurveX": 0,
+            "routeCurveY": 17.464
+          },
+          {
+            "lane": 2,
+            "type": "bee",
+            "laneSpreadScale": 1,
+            "rowSpreadScale": 1,
+            "pathPlaybackScale": 0.5,
+            "routeOffsetX": 60,
+            "routeCurveX": 0,
+            "routeCurveY": 17.464
+          },
+          {
+            "lane": 3,
+            "type": "but",
+            "laneSpreadScale": 1,
+            "rowSpreadScale": 1,
+            "pathPlaybackScale": 0.5,
+            "routeOffsetX": 60,
+            "routeCurveX": 0,
+            "routeCurveY": 17.464
+          }
+        ],
+        "group5": [
+          {
+            "lane": 0,
+            "type": "but",
+            "laneSpreadScale": 1,
+            "rowSpreadScale": 1,
+            "pathPlaybackScale": 1.18,
+            "routeOffsetX": 48,
+            "routeCurveX": 0,
+            "routeCurveY": 12
+          },
+          {
+            "lane": 1,
+            "type": "bee",
+            "laneSpreadScale": 1,
+            "rowSpreadScale": 1,
+            "pathPlaybackScale": 1.18,
+            "routeOffsetX": 48,
+            "routeCurveX": 0,
+            "routeCurveY": 12
+          },
+          {
+            "lane": 2,
+            "type": "bee",
+            "laneSpreadScale": 1,
+            "rowSpreadScale": 1,
+            "pathPlaybackScale": 1.18,
+            "routeOffsetX": 48,
+            "routeCurveX": 0,
+            "routeCurveY": 12
+          },
+          {
+            "lane": 3,
+            "type": "but",
+            "laneSpreadScale": 1,
+            "rowSpreadScale": 1,
+            "pathPlaybackScale": 1.18,
+            "routeOffsetX": 48,
+            "routeCurveX": 0,
+            "routeCurveY": 12
+          }
+        ]
+      },
+      "spacingReadability": {
+        "sampleCount": 28,
+        "worstMinDistance": 1.96,
+        "averageMinDistance": 9.62,
+        "spacingScore": 0.607,
+        "bunchingRisk": 0.464,
+        "crampedCount": 13,
+        "minRuntimeSpacingScore": 0.42,
+        "maxRuntimeBunchingRisk": 0.62,
+        "pass": true
+      },
+      "safetyStatus": {
+        "pass": true,
+        "noEnemyShots": true,
+        "noAttackStarts": true,
+        "noShipLosses": true,
+        "noChallengeContacts": true,
+        "eventCounts": {
+          "enemyShots": 0,
+          "enemyAttackStarts": 0,
+          "shipLosses": 0,
+          "challengeContacts": 0
+        }
+      },
+      "motionProfileProxy": {
+        "pathFamilyOrder": {
+          "pass": true,
+          "pathFamilyOrder": [
+            "first-challenge-peel",
+            "classic-column-drop",
+            "classic-column-drop",
+            "side-hook-return",
+            "first-challenge-peel"
+          ]
+        },
+        "delayedWaveStarts": {
+          "pass": true,
+          "rows": [
+            {
+              "wave": 1,
+              "sampleAt": 3.56,
+              "visibleCount": 4,
+              "maxTm": 0.233,
+              "nearEntryCount": 4
+            },
+            {
+              "wave": 2,
+              "sampleAt": 6.41,
+              "visibleCount": 4,
+              "maxTm": 0.232,
+              "nearEntryCount": 4
+            },
+            {
+              "wave": 3,
+              "sampleAt": 9.26,
+              "visibleCount": 3,
+              "maxTm": 0.211,
+              "nearEntryCount": 3
+            },
+            {
+              "wave": 4,
+              "sampleAt": 12.26,
+              "visibleCount": 4,
+              "maxTm": 0.272,
+              "nearEntryCount": 4
+            }
+          ]
+        },
+        "spacing": {
+          "pass": true,
+          "spacingScore": 0.607,
+          "bunchingRisk": 0.464
+        }
+      }
+    },
+    "evaluation": {
+      "candidateId": "stage3-g2-soft-score-window-isolated-0.1",
+      "transformId": "group2-soft-score-window-isolated",
+      "motionSpec": {
+        "controls": {
+          "arcAmp": 0.76,
+          "dropAmp": 0.88,
+          "pathPlaybackScale": 1.02,
+          "phaseOffsetS": 0.12,
+          "routeCurveY": -4
+        }
+      },
+      "sourceConsumption": [
+        {
+          "runtimeField": "motionSpecGroups[1].controls.arcAmp",
+          "expectedValue": 0.76,
+          "sourceValue": 0.76,
+          "runtimeEnemyValues": [],
+          "consumedByRuntime": true,
+          "matchesExpected": false
+        },
+        {
+          "runtimeField": "motionSpecGroups[1].controls.dropAmp",
+          "expectedValue": 0.88,
+          "sourceValue": 0.88,
+          "runtimeEnemyValues": [],
+          "consumedByRuntime": true,
+          "matchesExpected": false
+        },
+        {
+          "runtimeField": "motionSpecGroups[1].controls.pathPlaybackScale",
+          "expectedValue": 1.02,
+          "sourceValue": 1.02,
+          "runtimeEnemyValues": [
+            1.02,
+            1.02,
+            1.02,
+            1.02
+          ],
+          "consumedByRuntime": true,
+          "matchesExpected": true
+        },
+        {
+          "runtimeField": "motionSpecGroups[1].controls.phaseOffsetS",
+          "expectedValue": 0.12,
+          "sourceValue": 0.12,
+          "runtimeEnemyValues": [],
+          "consumedByRuntime": true,
+          "matchesExpected": false
+        },
+        {
+          "runtimeField": "motionSpecGroups[1].controls.routeCurveY",
+          "expectedValue": -4,
+          "sourceValue": -4,
+          "runtimeEnemyValues": [
+            -4,
+            -4,
+            -4,
+            -4
+          ],
+          "consumedByRuntime": true,
+          "matchesExpected": true
+        }
+      ],
+      "targetRead": {
+        "group2": {
+          "before": {
+            "groupIndex": 2,
+            "sampleCount": 33,
+            "pointCount": 250,
+            "visibleWindow": {
+              "visibleStartS": 3.5,
+              "visibleEndS": 11.5,
+              "visibleDurationS": 8
+            },
+            "entrySide": "center",
+            "exitSide": "center",
+            "entryCentroidX": 144.92,
+            "exitCentroidX": 140,
+            "xRange": 1.0626,
+            "yRange": 1.1193,
+            "pathLength": 1.1054,
+            "lowerFieldShare": 0.384,
+            "upperBandShare": 0.6,
+            "meanX": 139.74,
+            "meanY": 151.79,
+            "minY": -23.6,
+            "maxY": 379.34
+          },
+          "after": {
+            "groupIndex": 2,
+            "sampleCount": 34,
+            "pointCount": 254,
+            "visibleWindow": {
+              "visibleStartS": 3.5,
+              "visibleEndS": 11.75,
+              "visibleDurationS": 8.25
+            },
+            "entrySide": "center",
+            "exitSide": "center",
+            "entryCentroidX": 143.1,
+            "exitCentroidX": 140,
+            "xRange": 0.9622,
+            "yRange": 1.1027,
+            "pathLength": 1.1094,
+            "lowerFieldShare": 0.3543,
+            "upperBandShare": 0.622,
+            "meanX": 139.81,
+            "meanY": 151.48,
+            "minY": -21,
+            "maxY": 375.96
+          },
+          "deltaFromBefore": {
+            "xRangeDelta": -0.1004,
+            "yRangeDelta": -0.0166,
+            "pathLengthDelta": 0.004,
+            "lowerFieldShareDelta": -0.0297,
+            "upperBandShareDelta": 0.022,
+            "meanXDeltaPx": 0.07,
+            "meanYDeltaPx": -0.31,
+            "entryCentroidDeltaPx": -1.82,
+            "exitCentroidDeltaPx": 0,
+            "visibleWindowDeltaS": {
+              "visibleStartDeltaS": 0,
+              "visibleEndDeltaS": 0.25,
+              "visibleDurationDeltaS": 0.25
+            }
+          },
+          "entrySideBefore": "center",
+          "entrySideAfter": "center",
+          "exitSideBefore": "center",
+          "exitSideAfter": "center",
+          "centerEntryScoreBefore": 1,
+          "centerEntryScoreAfter": 1,
+          "centerExitScoreBefore": 1,
+          "centerExitScoreAfter": 1,
+          "columnCompactnessImproved": true,
+          "verticalShapeControlled": true,
+          "pathLengthSane": true,
+          "browserVisiblePathMovement": true,
+          "semanticColumnRolePreserved": true,
+          "upperBandScoreWindowPreserved": true,
+          "lowerFieldOverstaySafe": true,
+          "timingPreserved": true
+        }
+      },
+      "protectedGroups": [
+        {
+          "groupIndex": 1,
+          "before": {
+            "groupIndex": 1,
+            "sampleCount": 43,
+            "pointCount": 328,
+            "visibleWindow": {
+              "visibleStartS": 0.25,
+              "visibleEndS": 10.75,
+              "visibleDurationS": 10.5
+            },
+            "entrySide": "center",
+            "exitSide": "center",
+            "entryCentroidX": 140,
+            "exitCentroidX": 140,
+            "xRange": 1.1371,
+            "yRange": 0.9546,
+            "pathLength": 0.9501,
+            "lowerFieldShare": 0.2439,
+            "upperBandShare": 0.7439,
+            "meanX": 140,
+            "meanY": 117.37,
+            "minY": 38.25,
+            "maxY": 381.92
+          },
+          "after": {
+            "groupIndex": 1,
+            "sampleCount": 43,
+            "pointCount": 328,
+            "visibleWindow": {
+              "visibleStartS": 0.25,
+              "visibleEndS": 10.75,
+              "visibleDurationS": 10.5
+            },
+            "entrySide": "center",
+            "exitSide": "center",
+            "entryCentroidX": 140,
+            "exitCentroidX": 140,
+            "xRange": 1.1371,
+            "yRange": 0.9546,
+            "pathLength": 0.9501,
+            "lowerFieldShare": 0.2439,
+            "upperBandShare": 0.7439,
+            "meanX": 140,
+            "meanY": 117.37,
+            "minY": 38.25,
+            "maxY": 381.92
+          },
+          "deltaFromBefore": {
+            "xRangeDelta": 0,
+            "yRangeDelta": 0,
+            "pathLengthDelta": 0,
+            "lowerFieldShareDelta": 0,
+            "upperBandShareDelta": 0,
+            "meanXDeltaPx": 0,
+            "meanYDeltaPx": 0,
+            "entryCentroidDeltaPx": 0,
+            "exitCentroidDeltaPx": 0,
+            "visibleWindowDeltaS": {
+              "visibleStartDeltaS": 0,
+              "visibleEndDeltaS": 0,
+              "visibleDurationDeltaS": 0
+            }
+          },
+          "xRangeDelta": 0,
+          "yRangeDelta": 0,
+          "pathLengthDelta": 0,
+          "lowerFieldShareDelta": 0,
+          "upperBandShareDelta": 0,
+          "meanXDeltaPx": 0,
+          "meanYDeltaPx": 0,
+          "entryCentroidDeltaPx": 0,
+          "exitCentroidDeltaPx": 0,
+          "visibleWindowDeltaS": {
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          },
+          "preservationPass": true
+        },
+        {
+          "groupIndex": 3,
+          "before": {
+            "groupIndex": 3,
+            "sampleCount": 32,
+            "pointCount": 242,
+            "visibleWindow": {
+              "visibleStartS": 6.5,
+              "visibleEndS": 14.25,
+              "visibleDurationS": 7.75
+            },
+            "entrySide": "center",
+            "exitSide": "center",
+            "entryCentroidX": 141.09,
+            "exitCentroidX": 140,
+            "xRange": 1.0424,
+            "yRange": 1.0954,
+            "pathLength": 1.0826,
+            "lowerFieldShare": 0.4132,
+            "upperBandShare": 0.5702,
+            "meanX": 140.28,
+            "meanY": 159.16,
+            "minY": -22.57,
+            "maxY": 371.77
+          },
+          "after": {
+            "groupIndex": 3,
+            "sampleCount": 32,
+            "pointCount": 242,
+            "visibleWindow": {
+              "visibleStartS": 6.5,
+              "visibleEndS": 14.25,
+              "visibleDurationS": 7.75
+            },
+            "entrySide": "center",
+            "exitSide": "center",
+            "entryCentroidX": 141.09,
+            "exitCentroidX": 140,
+            "xRange": 1.0424,
+            "yRange": 1.0954,
+            "pathLength": 1.0826,
+            "lowerFieldShare": 0.4132,
+            "upperBandShare": 0.5702,
+            "meanX": 140.28,
+            "meanY": 159.16,
+            "minY": -22.57,
+            "maxY": 371.77
+          },
+          "deltaFromBefore": {
+            "xRangeDelta": 0,
+            "yRangeDelta": 0,
+            "pathLengthDelta": 0,
+            "lowerFieldShareDelta": 0,
+            "upperBandShareDelta": 0,
+            "meanXDeltaPx": 0,
+            "meanYDeltaPx": 0,
+            "entryCentroidDeltaPx": 0,
+            "exitCentroidDeltaPx": 0,
+            "visibleWindowDeltaS": {
+              "visibleStartDeltaS": 0,
+              "visibleEndDeltaS": 0,
+              "visibleDurationDeltaS": 0
+            }
+          },
+          "xRangeDelta": 0,
+          "yRangeDelta": 0,
+          "pathLengthDelta": 0,
+          "lowerFieldShareDelta": 0,
+          "upperBandShareDelta": 0,
+          "meanXDeltaPx": 0,
+          "meanYDeltaPx": 0,
+          "entryCentroidDeltaPx": 0,
+          "exitCentroidDeltaPx": 0,
+          "visibleWindowDeltaS": {
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          },
+          "preservationPass": true
+        },
+        {
+          "groupIndex": 4,
+          "before": {
+            "groupIndex": 4,
+            "sampleCount": 32,
+            "pointCount": 167,
+            "visibleWindow": {
+              "visibleStartS": 9.25,
+              "visibleEndS": 17,
+              "visibleDurationS": 7.75
+            },
+            "entrySide": "left",
+            "exitSide": "right",
+            "entryCentroidX": -1.42,
+            "exitCentroidX": 204.89,
+            "xRange": 1.1249,
+            "yRange": 0.4278,
+            "pathLength": 1.2586,
+            "lowerFieldShare": 0.0299,
+            "upperBandShare": 0.9401,
+            "meanX": 173.84,
+            "meanY": 122.42,
+            "minY": 58.65,
+            "maxY": 212.65
+          },
+          "after": {
+            "groupIndex": 4,
+            "sampleCount": 32,
+            "pointCount": 167,
+            "visibleWindow": {
+              "visibleStartS": 9.25,
+              "visibleEndS": 17,
+              "visibleDurationS": 7.75
+            },
+            "entrySide": "left",
+            "exitSide": "right",
+            "entryCentroidX": -1.42,
+            "exitCentroidX": 204.89,
+            "xRange": 1.1249,
+            "yRange": 0.4278,
+            "pathLength": 1.2586,
+            "lowerFieldShare": 0.0299,
+            "upperBandShare": 0.9401,
+            "meanX": 173.84,
+            "meanY": 122.42,
+            "minY": 58.65,
+            "maxY": 212.65
+          },
+          "deltaFromBefore": {
+            "xRangeDelta": 0,
+            "yRangeDelta": 0,
+            "pathLengthDelta": 0,
+            "lowerFieldShareDelta": 0,
+            "upperBandShareDelta": 0,
+            "meanXDeltaPx": 0,
+            "meanYDeltaPx": 0,
+            "entryCentroidDeltaPx": 0,
+            "exitCentroidDeltaPx": 0,
+            "visibleWindowDeltaS": {
+              "visibleStartDeltaS": 0,
+              "visibleEndDeltaS": 0,
+              "visibleDurationDeltaS": 0
+            }
+          },
+          "xRangeDelta": 0,
+          "yRangeDelta": 0,
+          "pathLengthDelta": 0,
+          "lowerFieldShareDelta": 0,
+          "upperBandShareDelta": 0,
+          "meanXDeltaPx": 0,
+          "meanYDeltaPx": 0,
+          "entryCentroidDeltaPx": 0,
+          "exitCentroidDeltaPx": 0,
+          "visibleWindowDeltaS": {
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          },
+          "preservationPass": true
+        },
+        {
+          "groupIndex": 5,
+          "before": {
+            "groupIndex": 5,
+            "sampleCount": 20,
+            "pointCount": 136,
+            "visibleWindow": {
+              "visibleStartS": 12.25,
+              "visibleEndS": 17,
+              "visibleDurationS": 4.75
+            },
+            "entrySide": "left",
+            "exitSide": "right",
+            "entryCentroidX": -10.19,
+            "exitCentroidX": 188,
+            "xRange": 1.1363,
+            "yRange": 0.0989,
+            "pathLength": 0.7949,
+            "lowerFieldShare": 0,
+            "upperBandShare": 1,
+            "meanX": 172.06,
+            "meanY": 101.35,
+            "minY": 83.83,
+            "maxY": 119.45
+          },
+          "after": {
+            "groupIndex": 5,
+            "sampleCount": 20,
+            "pointCount": 136,
+            "visibleWindow": {
+              "visibleStartS": 12.25,
+              "visibleEndS": 17,
+              "visibleDurationS": 4.75
+            },
+            "entrySide": "left",
+            "exitSide": "right",
+            "entryCentroidX": -10.19,
+            "exitCentroidX": 188,
+            "xRange": 1.1363,
+            "yRange": 0.0989,
+            "pathLength": 0.7949,
+            "lowerFieldShare": 0,
+            "upperBandShare": 1,
+            "meanX": 172.06,
+            "meanY": 101.35,
+            "minY": 83.83,
+            "maxY": 119.45
+          },
+          "deltaFromBefore": {
+            "xRangeDelta": 0,
+            "yRangeDelta": 0,
+            "pathLengthDelta": 0,
+            "lowerFieldShareDelta": 0,
+            "upperBandShareDelta": 0,
+            "meanXDeltaPx": 0,
+            "meanYDeltaPx": 0,
+            "entryCentroidDeltaPx": 0,
+            "exitCentroidDeltaPx": 0,
+            "visibleWindowDeltaS": {
+              "visibleStartDeltaS": 0,
+              "visibleEndDeltaS": 0,
+              "visibleDurationDeltaS": 0
+            }
+          },
+          "xRangeDelta": 0,
+          "yRangeDelta": 0,
+          "pathLengthDelta": 0,
+          "lowerFieldShareDelta": 0,
+          "upperBandShareDelta": 0,
+          "meanXDeltaPx": 0,
+          "meanYDeltaPx": 0,
+          "entryCentroidDeltaPx": 0,
+          "exitCentroidDeltaPx": 0,
+          "visibleWindowDeltaS": {
+            "visibleStartDeltaS": 0,
+            "visibleEndDeltaS": 0,
+            "visibleDurationDeltaS": 0
+          },
+          "preservationPass": true
+        }
+      ],
+      "guardrails": {
+        "spacingReadability": {
+          "sampleCount": 28,
+          "worstMinDistance": 1.96,
+          "averageMinDistance": 9.62,
+          "spacingScore": 0.607,
+          "bunchingRisk": 0.464,
+          "crampedCount": 13,
+          "minRuntimeSpacingScore": 0.42,
+          "maxRuntimeBunchingRisk": 0.62,
+          "pass": true
+        },
+        "scoreableRoutes": {
+          "pass": true,
+          "source": "challenge-stage-conformance-validation-required",
+          "read": "Fast-lane proof preserves runtime routeability proxy; final source keeper still requires challenge-stage conformance validation."
+        },
+        "noCombatGrammar": {
+          "pass": true,
+          "read": "No-combat grammar requires no enemy shots, no attack starts, no ship losses, and no challenge contacts during capture."
+        },
+        "safety": {
+          "pass": true,
+          "noEnemyShots": true,
+          "noAttackStarts": true,
+          "noShipLosses": true,
+          "noChallengeContacts": true,
+          "eventCounts": {
+            "enemyShots": 0,
+            "enemyAttackStarts": 0,
+            "shipLosses": 0,
+            "challengeContacts": 0
+          }
+        }
+      },
+      "motionProfileCompatibility": {
+        "pass": true,
+        "proxy": {
+          "pathFamilyOrder": {
+            "pass": true,
+            "pathFamilyOrder": [
+              "first-challenge-peel",
+              "classic-column-drop",
+              "classic-column-drop",
+              "side-hook-return",
+              "first-challenge-peel"
+            ]
+          },
+          "delayedWaveStarts": {
+            "pass": true,
+            "rows": [
+              {
+                "wave": 1,
+                "sampleAt": 3.56,
+                "visibleCount": 4,
+                "maxTm": 0.233,
+                "nearEntryCount": 4
+              },
+              {
+                "wave": 2,
+                "sampleAt": 6.41,
+                "visibleCount": 4,
+                "maxTm": 0.232,
+                "nearEntryCount": 4
+              },
+              {
+                "wave": 3,
+                "sampleAt": 9.26,
+                "visibleCount": 3,
+                "maxTm": 0.211,
+                "nearEntryCount": 3
+              },
+              {
+                "wave": 4,
+                "sampleAt": 12.26,
+                "visibleCount": 4,
+                "maxTm": 0.272,
+                "nearEntryCount": 4
+              }
+            ]
+          },
+          "spacing": {
+            "pass": true,
+            "spacingScore": 0.607,
+            "bunchingRisk": 0.464
+          }
+        }
+      },
+      "failureClassification": [],
+      "score": 1.1,
+      "proofPass": true,
+      "sourceAttemptPass": false
+    }
+  },
+  "sourceControlsApplied": [
+    {
+      "runtimeField": "motionSpecGroups[1].controls.arcAmp",
+      "expectedValue": 0.76,
+      "sourceValue": 0.76,
+      "runtimeEnemyValues": [],
+      "consumedByRuntime": true,
+      "matchesExpected": false
+    },
+    {
+      "runtimeField": "motionSpecGroups[1].controls.dropAmp",
+      "expectedValue": 0.88,
+      "sourceValue": 0.88,
+      "runtimeEnemyValues": [],
+      "consumedByRuntime": true,
+      "matchesExpected": false
+    },
+    {
+      "runtimeField": "motionSpecGroups[1].controls.pathPlaybackScale",
+      "expectedValue": 1.02,
+      "sourceValue": 1.02,
+      "runtimeEnemyValues": [
+        1.02,
+        1.02,
+        1.02,
+        1.02
+      ],
+      "consumedByRuntime": true,
+      "matchesExpected": true
+    },
+    {
+      "runtimeField": "motionSpecGroups[1].controls.phaseOffsetS",
+      "expectedValue": 0.12,
+      "sourceValue": 0.12,
+      "runtimeEnemyValues": [],
+      "consumedByRuntime": true,
+      "matchesExpected": false
+    },
+    {
+      "runtimeField": "motionSpecGroups[1].controls.routeCurveY",
+      "expectedValue": -4,
+      "sourceValue": -4,
+      "runtimeEnemyValues": [
+        -4,
+        -4,
+        -4,
+        -4
+      ],
+      "consumedByRuntime": true,
+      "matchesExpected": true
+    }
+  ],
+  "isolation": {
+    "proofSeed": 9052,
+    "targetGroup": 2,
+    "protectedGroups": [
+      1,
+      3,
+      4,
+      5
+    ],
+    "explicitTolerances": {
+      "xRangeDelta": 0.08,
+      "yRangeDelta": 0.08,
+      "pathLengthDelta": 0.12,
+      "visibleWindowDeltaS": 0.45
+    },
+    "perGroupTimingDrift": [
+      {
+        "groupIndex": 1,
+        "role": "protected",
+        "preservationPass": true,
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": 0,
+        "visibleDurationDeltaS": 0
+      },
+      {
+        "groupIndex": 2,
+        "role": "target",
+        "preservationPass": null,
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": 0.25,
+        "visibleDurationDeltaS": 0.25
+      },
+      {
+        "groupIndex": 3,
+        "role": "protected",
+        "preservationPass": true,
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": 0,
+        "visibleDurationDeltaS": 0
+      },
+      {
+        "groupIndex": 4,
+        "role": "protected",
+        "preservationPass": true,
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": 0,
+        "visibleDurationDeltaS": 0
+      },
+      {
+        "groupIndex": 5,
+        "role": "protected",
+        "preservationPass": true,
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": 0,
+        "visibleDurationDeltaS": 0
+      }
+    ],
+    "perGroupPathReadabilityMovement": [
+      {
+        "groupIndex": 1,
+        "role": "protected",
+        "preservationPass": true,
+        "xRangeDelta": 0,
+        "yRangeDelta": 0,
+        "pathLengthDelta": 0,
+        "lowerFieldShareDelta": 0,
+        "upperBandShareDelta": 0,
+        "meanXDeltaPx": 0,
+        "meanYDeltaPx": 0,
+        "entryCentroidDeltaPx": 0,
+        "exitCentroidDeltaPx": 0
+      },
+      {
+        "groupIndex": 2,
+        "role": "target",
+        "preservationPass": null,
+        "xRangeDelta": -0.1004,
+        "yRangeDelta": -0.0166,
+        "pathLengthDelta": 0.004,
+        "lowerFieldShareDelta": -0.0297,
+        "upperBandShareDelta": 0.022,
+        "meanXDeltaPx": 0.07,
+        "meanYDeltaPx": -0.31,
+        "entryCentroidDeltaPx": -1.82,
+        "exitCentroidDeltaPx": 0
+      },
+      {
+        "groupIndex": 3,
+        "role": "protected",
+        "preservationPass": true,
+        "xRangeDelta": 0,
+        "yRangeDelta": 0,
+        "pathLengthDelta": 0,
+        "lowerFieldShareDelta": 0,
+        "upperBandShareDelta": 0,
+        "meanXDeltaPx": 0,
+        "meanYDeltaPx": 0,
+        "entryCentroidDeltaPx": 0,
+        "exitCentroidDeltaPx": 0
+      },
+      {
+        "groupIndex": 4,
+        "role": "protected",
+        "preservationPass": true,
+        "xRangeDelta": 0,
+        "yRangeDelta": 0,
+        "pathLengthDelta": 0,
+        "lowerFieldShareDelta": 0,
+        "upperBandShareDelta": 0,
+        "meanXDeltaPx": 0,
+        "meanYDeltaPx": 0,
+        "entryCentroidDeltaPx": 0,
+        "exitCentroidDeltaPx": 0
+      },
+      {
+        "groupIndex": 5,
+        "role": "protected",
+        "preservationPass": true,
+        "xRangeDelta": 0,
+        "yRangeDelta": 0,
+        "pathLengthDelta": 0,
+        "lowerFieldShareDelta": 0,
+        "upperBandShareDelta": 0,
+        "meanXDeltaPx": 0,
+        "meanYDeltaPx": 0,
+        "entryCentroidDeltaPx": 0,
+        "exitCentroidDeltaPx": 0
+      }
+    ],
+    "group4KeeperPreserved": true,
+    "group5KeeperPreserved": true,
+    "protectedGroupsChangedBeyondTolerance": [],
+    "targetGroupMovement": {
+      "before": {
+        "groupIndex": 2,
+        "sampleCount": 33,
+        "pointCount": 250,
+        "visibleWindow": {
+          "visibleStartS": 3.5,
+          "visibleEndS": 11.5,
+          "visibleDurationS": 8
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 144.92,
+        "exitCentroidX": 140,
+        "xRange": 1.0626,
+        "yRange": 1.1193,
+        "pathLength": 1.1054,
+        "lowerFieldShare": 0.384,
+        "upperBandShare": 0.6,
+        "meanX": 139.74,
+        "meanY": 151.79,
+        "minY": -23.6,
+        "maxY": 379.34
+      },
+      "after": {
+        "groupIndex": 2,
+        "sampleCount": 34,
+        "pointCount": 254,
+        "visibleWindow": {
+          "visibleStartS": 3.5,
+          "visibleEndS": 11.75,
+          "visibleDurationS": 8.25
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 143.1,
+        "exitCentroidX": 140,
+        "xRange": 0.9622,
+        "yRange": 1.1027,
+        "pathLength": 1.1094,
+        "lowerFieldShare": 0.3543,
+        "upperBandShare": 0.622,
+        "meanX": 139.81,
+        "meanY": 151.48,
+        "minY": -21,
+        "maxY": 375.96
+      },
+      "deltaFromBefore": {
+        "xRangeDelta": -0.1004,
+        "yRangeDelta": -0.0166,
+        "pathLengthDelta": 0.004,
+        "lowerFieldShareDelta": -0.0297,
+        "upperBandShareDelta": 0.022,
+        "meanXDeltaPx": 0.07,
+        "meanYDeltaPx": -0.31,
+        "entryCentroidDeltaPx": -1.82,
+        "exitCentroidDeltaPx": 0,
+        "visibleWindowDeltaS": {
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": 0.25,
+          "visibleDurationDeltaS": 0.25
+        }
+      },
+      "entrySideBefore": "center",
+      "entrySideAfter": "center",
+      "exitSideBefore": "center",
+      "exitSideAfter": "center",
+      "centerEntryScoreBefore": 1,
+      "centerEntryScoreAfter": 1,
+      "centerExitScoreBefore": 1,
+      "centerExitScoreAfter": 1,
+      "columnCompactnessImproved": true,
+      "verticalShapeControlled": true,
+      "pathLengthSane": true,
+      "browserVisiblePathMovement": true,
+      "semanticColumnRolePreserved": true,
+      "upperBandScoreWindowPreserved": true,
+      "lowerFieldOverstaySafe": true,
+      "timingPreserved": true
+    }
+  },
+  "baseline": {
+    "variant": "baseline-source",
+    "layoutSummary": {
+      "id": "first-challenge-peel",
+      "groupPathFamilies": [
+        "first-challenge-peel",
+        "classic-column-drop",
+        "classic-column-drop",
+        "side-hook-return",
+        "first-challenge-peel"
+      ],
+      "groupSpawnOffsets": [
+        0,
+        3.4,
+        6.25,
+        9.1,
+        12.1
+      ],
+      "motionSpecGroups": [
+        null,
+        null,
+        null,
+        {
+          "controls": {
+            "pathPlaybackScale": 0.5,
+            "routeCurveY": 17.464,
+            "routeOffsetX": 60
+          }
+        },
+        {
+          "controls": {
+            "pathPlaybackScale": 1.18,
+            "routeCurveY": 12,
+            "routeOffsetX": 48
+          }
+        }
+      ]
+    },
+    "groupMetrics": {
+      "group1": {
+        "groupIndex": 1,
+        "sampleCount": 43,
+        "pointCount": 328,
+        "visibleWindow": {
+          "visibleStartS": 0.25,
+          "visibleEndS": 10.75,
+          "visibleDurationS": 10.5
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 140,
+        "exitCentroidX": 140,
+        "xRange": 1.1371,
+        "yRange": 0.9546,
+        "pathLength": 0.9501,
+        "lowerFieldShare": 0.2439,
+        "upperBandShare": 0.7439,
+        "meanX": 140,
+        "meanY": 117.37,
+        "minY": 38.25,
+        "maxY": 381.92
+      },
+      "group2": {
+        "groupIndex": 2,
+        "sampleCount": 33,
+        "pointCount": 250,
+        "visibleWindow": {
+          "visibleStartS": 3.5,
+          "visibleEndS": 11.5,
+          "visibleDurationS": 8
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 144.92,
+        "exitCentroidX": 140,
+        "xRange": 1.0626,
+        "yRange": 1.1193,
+        "pathLength": 1.1054,
+        "lowerFieldShare": 0.384,
+        "upperBandShare": 0.6,
+        "meanX": 139.74,
+        "meanY": 151.79,
+        "minY": -23.6,
+        "maxY": 379.34
+      },
+      "group3": {
+        "groupIndex": 3,
+        "sampleCount": 32,
+        "pointCount": 242,
+        "visibleWindow": {
+          "visibleStartS": 6.5,
+          "visibleEndS": 14.25,
+          "visibleDurationS": 7.75
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 141.09,
+        "exitCentroidX": 140,
+        "xRange": 1.0424,
+        "yRange": 1.0954,
+        "pathLength": 1.0826,
+        "lowerFieldShare": 0.4132,
+        "upperBandShare": 0.5702,
+        "meanX": 140.28,
+        "meanY": 159.16,
+        "minY": -22.57,
+        "maxY": 371.77
+      },
+      "group4": {
+        "groupIndex": 4,
+        "sampleCount": 32,
+        "pointCount": 167,
+        "visibleWindow": {
+          "visibleStartS": 9.25,
+          "visibleEndS": 17,
+          "visibleDurationS": 7.75
+        },
+        "entrySide": "left",
+        "exitSide": "right",
+        "entryCentroidX": -1.42,
+        "exitCentroidX": 204.89,
+        "xRange": 1.1249,
+        "yRange": 0.4278,
+        "pathLength": 1.2586,
+        "lowerFieldShare": 0.0299,
+        "upperBandShare": 0.9401,
+        "meanX": 173.84,
+        "meanY": 122.42,
+        "minY": 58.65,
+        "maxY": 212.65
+      },
+      "group5": {
+        "groupIndex": 5,
+        "sampleCount": 20,
+        "pointCount": 136,
+        "visibleWindow": {
+          "visibleStartS": 12.25,
+          "visibleEndS": 17,
+          "visibleDurationS": 4.75
+        },
+        "entrySide": "left",
+        "exitSide": "right",
+        "entryCentroidX": -10.19,
+        "exitCentroidX": 188,
+        "xRange": 1.1363,
+        "yRange": 0.0989,
+        "pathLength": 0.7949,
+        "lowerFieldShare": 0,
+        "upperBandShare": 1,
+        "meanX": 172.06,
+        "meanY": 101.35,
+        "minY": 83.83,
+        "maxY": 119.45
+      }
+    },
+    "centroidTraces": {
+      "group1": [
+        {
+          "t": 0.25,
+          "x": 140,
+          "y": 38.62
+        },
+        {
+          "t": 0.5,
+          "x": 140,
+          "y": 39.01
+        },
+        {
+          "t": 0.75,
+          "x": 140,
+          "y": 42.07
+        },
+        {
+          "t": 1,
+          "x": 140,
+          "y": 43.8
+        },
+        {
+          "t": 1.25,
+          "x": 140,
+          "y": 44.42
+        },
+        {
+          "t": 1.5,
+          "x": 140,
+          "y": 45.04
+        },
+        {
+          "t": 1.75,
+          "x": 140,
+          "y": 45.65
+        },
+        {
+          "t": 2,
+          "x": 140,
+          "y": 46.27
+        },
+        {
+          "t": 2.25,
+          "x": 140,
+          "y": 45.56
+        },
+        {
+          "t": 2.5,
+          "x": 140,
+          "y": 44.84
+        },
+        {
+          "t": 2.75,
+          "x": 140,
+          "y": 42.77
+        },
+        {
+          "t": 3,
+          "x": 140,
+          "y": 43.35
+        },
+        {
+          "t": 3.25,
+          "x": 140,
+          "y": 43.93
+        },
+        {
+          "t": 3.5,
+          "x": 140,
+          "y": 44.51
+        },
+        {
+          "t": 3.75,
+          "x": 140,
+          "y": 45.08
+        },
+        {
+          "t": 4,
+          "x": 140,
+          "y": 45.66
+        },
+        {
+          "t": 4.25,
+          "x": 140,
+          "y": 46.25
+        },
+        {
+          "t": 4.5,
+          "x": 140,
+          "y": 46.82
+        },
+        {
+          "t": 4.75,
+          "x": 140,
+          "y": 47.4
+        },
+        {
+          "t": 5,
+          "x": 140,
+          "y": 47.98
+        },
+        {
+          "t": 5.25,
+          "x": 140,
+          "y": 48.56
+        },
+        {
+          "t": 5.5,
+          "x": 140,
+          "y": 49.14
+        },
+        {
+          "t": 5.75,
+          "x": 140,
+          "y": 49.72
+        },
+        {
+          "t": 6,
+          "x": 140,
+          "y": 50.3
+        },
+        {
+          "t": 6.25,
+          "x": 140,
+          "y": 51.47
+        },
+        {
+          "t": 6.5,
+          "x": 140,
+          "y": 58.65
+        },
+        {
+          "t": 6.75,
+          "x": 140,
+          "y": 71.83
+        },
+        {
+          "t": 7,
+          "x": 140,
+          "y": 91.01
+        },
+        {
+          "t": 7.25,
+          "x": 140,
+          "y": 110.54
+        },
+        {
+          "t": 7.5,
+          "x": 140,
+          "y": 130.07
+        },
+        {
+          "t": 7.75,
+          "x": 140,
+          "y": 149.6
+        },
+        {
+          "t": 8,
+          "x": 140,
+          "y": 169.13
+        },
+        {
+          "t": 8.25,
+          "x": 140,
+          "y": 188.66
+        },
+        {
+          "t": 8.5,
+          "x": 140,
+          "y": 208.19
+        },
+        {
+          "t": 8.75,
+          "x": 140,
+          "y": 227.72
+        },
+        {
+          "t": 9,
+          "x": 140,
+          "y": 247.25
+        },
+        {
+          "t": 9.25,
+          "x": 140,
+          "y": 266.79
+        },
+        {
+          "t": 9.5,
+          "x": 140,
+          "y": 286.32
+        },
+        {
+          "t": 9.75,
+          "x": 140,
+          "y": 305.85
+        },
+        {
+          "t": 10,
+          "x": 140,
+          "y": 325.38
+        },
+        {
+          "t": 10.25,
+          "x": 140,
+          "y": 344.91
+        },
+        {
+          "t": 10.5,
+          "x": 140,
+          "y": 364.44
+        },
+        {
+          "t": 10.75,
+          "x": 140,
+          "y": 373.65
+        }
+      ],
+      "group2": [
+        {
+          "t": 3.5,
+          "x": 144.92,
+          "y": -22.33
+        },
+        {
+          "t": 3.75,
+          "x": 142.38,
+          "y": -15
+        },
+        {
+          "t": 4,
+          "x": 140.29,
+          "y": -11.6
+        },
+        {
+          "t": 4.25,
+          "x": 139.01,
+          "y": -0.08
+        },
+        {
+          "t": 4.5,
+          "x": 137.89,
+          "y": 11.43
+        },
+        {
+          "t": 4.75,
+          "x": 137.1,
+          "y": 22.94
+        },
+        {
+          "t": 5,
+          "x": 136.78,
+          "y": 34.45
+        },
+        {
+          "t": 5.25,
+          "x": 136.97,
+          "y": 45.96
+        },
+        {
+          "t": 5.5,
+          "x": 140.41,
+          "y": 55.46
+        },
+        {
+          "t": 5.75,
+          "x": 142.14,
+          "y": 63.02
+        },
+        {
+          "t": 6,
+          "x": 139.65,
+          "y": 72.56
+        },
+        {
+          "t": 6.25,
+          "x": 137.82,
+          "y": 84.14
+        },
+        {
+          "t": 6.5,
+          "x": 136.37,
+          "y": 95.71
+        },
+        {
+          "t": 6.75,
+          "x": 135.57,
+          "y": 107.29
+        },
+        {
+          "t": 7,
+          "x": 135.57,
+          "y": 118.86
+        },
+        {
+          "t": 7.25,
+          "x": 136.35,
+          "y": 130.44
+        },
+        {
+          "t": 7.5,
+          "x": 137.78,
+          "y": 142.01
+        },
+        {
+          "t": 7.75,
+          "x": 139.6,
+          "y": 153.59
+        },
+        {
+          "t": 8,
+          "x": 141.5,
+          "y": 165.16
+        },
+        {
+          "t": 8.25,
+          "x": 143.13,
+          "y": 176.74
+        },
+        {
+          "t": 8.5,
+          "x": 144.2,
+          "y": 188.31
+        },
+        {
+          "t": 8.75,
+          "x": 144.53,
+          "y": 199.89
+        },
+        {
+          "t": 9,
+          "x": 144.05,
+          "y": 211.46
+        },
+        {
+          "t": 9.25,
+          "x": 142.84,
+          "y": 223.04
+        },
+        {
+          "t": 9.5,
+          "x": 140.31,
+          "y": 231.02
+        },
+        {
+          "t": 9.75,
+          "x": 139.57,
+          "y": 241.2
+        },
+        {
+          "t": 10,
+          "x": 140,
+          "y": 243.82
+        },
+        {
+          "t": 10.25,
+          "x": 140,
+          "y": 266.88
+        },
+        {
+          "t": 10.5,
+          "x": 140,
+          "y": 289.94
+        },
+        {
+          "t": 10.75,
+          "x": 140,
+          "y": 313
+        },
+        {
+          "t": 11,
+          "x": 140,
+          "y": 336.07
+        },
+        {
+          "t": 11.25,
+          "x": 140,
+          "y": 359.13
+        },
+        {
+          "t": 11.5,
+          "x": 140,
+          "y": 369.67
+        }
+      ],
+      "group3": [
+        {
+          "t": 6.5,
+          "x": 141.09,
+          "y": -18.29
+        },
+        {
+          "t": 6.75,
+          "x": 142.24,
+          "y": -9.83
+        },
+        {
+          "t": 7,
+          "x": 141.51,
+          "y": -1.21
+        },
+        {
+          "t": 7.25,
+          "x": 141.8,
+          "y": 12.15
+        },
+        {
+          "t": 7.5,
+          "x": 141.8,
+          "y": 25.51
+        },
+        {
+          "t": 7.75,
+          "x": 141.5,
+          "y": 38.87
+        },
+        {
+          "t": 8,
+          "x": 140.97,
+          "y": 52.23
+        },
+        {
+          "t": 8.25,
+          "x": 139,
+          "y": 63.52
+        },
+        {
+          "t": 8.5,
+          "x": 141.7,
+          "y": 74.23
+        },
+        {
+          "t": 8.75,
+          "x": 141.87,
+          "y": 82.37
+        },
+        {
+          "t": 9,
+          "x": 142.43,
+          "y": 94
+        },
+        {
+          "t": 9.25,
+          "x": 142.56,
+          "y": 105.63
+        },
+        {
+          "t": 9.5,
+          "x": 142.23,
+          "y": 117.25
+        },
+        {
+          "t": 9.75,
+          "x": 141.5,
+          "y": 128.88
+        },
+        {
+          "t": 10,
+          "x": 140.5,
+          "y": 140.5
+        },
+        {
+          "t": 10.25,
+          "x": 139.41,
+          "y": 152.13
+        },
+        {
+          "t": 10.5,
+          "x": 138.42,
+          "y": 163.75
+        },
+        {
+          "t": 10.75,
+          "x": 137.72,
+          "y": 175.38
+        },
+        {
+          "t": 11,
+          "x": 137.43,
+          "y": 187.01
+        },
+        {
+          "t": 11.25,
+          "x": 137.6,
+          "y": 198.63
+        },
+        {
+          "t": 11.5,
+          "x": 138.2,
+          "y": 210.26
+        },
+        {
+          "t": 11.75,
+          "x": 139.13,
+          "y": 221.88
+        },
+        {
+          "t": 12,
+          "x": 140.2,
+          "y": 233.51
+        },
+        {
+          "t": 12.25,
+          "x": 141.25,
+          "y": 245.13
+        },
+        {
+          "t": 12.5,
+          "x": 139.28,
+          "y": 250.02
+        },
+        {
+          "t": 12.75,
+          "x": 138.39,
+          "y": 261.28
+        },
+        {
+          "t": 13,
+          "x": 140,
+          "y": 274.25
+        },
+        {
+          "t": 13.25,
+          "x": 140,
+          "y": 297.41
+        },
+        {
+          "t": 13.5,
+          "x": 140,
+          "y": 320.57
+        },
+        {
+          "t": 13.75,
+          "x": 140,
+          "y": 343.73
+        },
+        {
+          "t": 14,
+          "x": 140,
+          "y": 360.12
+        },
+        {
+          "t": 14.25,
+          "x": 140,
+          "y": 368.97
+        }
+      ],
+      "group4": [
+        {
+          "t": 9.25,
+          "x": -1.42,
+          "y": 74.62
+        },
+        {
+          "t": 9.5,
+          "x": 8.37,
+          "y": 87.21
+        },
+        {
+          "t": 9.75,
+          "x": 15.53,
+          "y": 86.16
+        },
+        {
+          "t": 10,
+          "x": 44.36,
+          "y": 81.05
+        },
+        {
+          "t": 10.25,
+          "x": 68.26,
+          "y": 80.53
+        },
+        {
+          "t": 10.5,
+          "x": 86.91,
+          "y": 89.51
+        },
+        {
+          "t": 10.75,
+          "x": 100.26,
+          "y": 96.77
+        },
+        {
+          "t": 11,
+          "x": 112.14,
+          "y": 90.61
+        },
+        {
+          "t": 11.25,
+          "x": 157.67,
+          "y": 81.14
+        },
+        {
+          "t": 11.5,
+          "x": 159.95,
+          "y": 82.32
+        },
+        {
+          "t": 11.75,
+          "x": 162.97,
+          "y": 96.91
+        },
+        {
+          "t": 12,
+          "x": 167.36,
+          "y": 98.84
+        },
+        {
+          "t": 12.25,
+          "x": 195.48,
+          "y": 91.63
+        },
+        {
+          "t": 12.5,
+          "x": 200.46,
+          "y": 89.34
+        },
+        {
+          "t": 12.75,
+          "x": 204.55,
+          "y": 101.99
+        },
+        {
+          "t": 13,
+          "x": 207.56,
+          "y": 115.95
+        },
+        {
+          "t": 13.25,
+          "x": 209.43,
+          "y": 115.28
+        },
+        {
+          "t": 13.5,
+          "x": 210.14,
+          "y": 109.04
+        },
+        {
+          "t": 13.75,
+          "x": 209.79,
+          "y": 115.74
+        },
+        {
+          "t": 14,
+          "x": 208.53,
+          "y": 131.58
+        },
+        {
+          "t": 14.25,
+          "x": 206.55,
+          "y": 136.99
+        },
+        {
+          "t": 14.5,
+          "x": 204.08,
+          "y": 130.19
+        },
+        {
+          "t": 14.75,
+          "x": 201.33,
+          "y": 130.29
+        },
+        {
+          "t": 15,
+          "x": 198.5,
+          "y": 144.49
+        },
+        {
+          "t": 15.25,
+          "x": 195.73,
+          "y": 155.76
+        },
+        {
+          "t": 15.5,
+          "x": 193.11,
+          "y": 152.09
+        },
+        {
+          "t": 15.75,
+          "x": 190.64,
+          "y": 147.09
+        },
+        {
+          "t": 16,
+          "x": 188.29,
+          "y": 156.7
+        },
+        {
+          "t": 16.25,
+          "x": 185.99,
+          "y": 171.83
+        },
+        {
+          "t": 16.5,
+          "x": 192.9,
+          "y": 174.7
+        },
+        {
+          "t": 16.75,
+          "x": 203.15,
+          "y": 169.66
+        },
+        {
+          "t": 17,
+          "x": 204.89,
+          "y": 176.3
+        }
+      ],
+      "group5": [
+        {
+          "t": 12.25,
+          "x": -10.19,
+          "y": 98.33
+        },
+        {
+          "t": 12.5,
+          "x": 14.77,
+          "y": 98.32
+        },
+        {
+          "t": 12.75,
+          "x": 22.49,
+          "y": 97.37
+        },
+        {
+          "t": 13,
+          "x": 98.88,
+          "y": 97.99
+        },
+        {
+          "t": 13.25,
+          "x": 143.01,
+          "y": 102.65
+        },
+        {
+          "t": 13.5,
+          "x": 169.59,
+          "y": 102.72
+        },
+        {
+          "t": 13.75,
+          "x": 171.37,
+          "y": 98.06
+        },
+        {
+          "t": 14,
+          "x": 188,
+          "y": 101.22
+        },
+        {
+          "t": 14.25,
+          "x": 188,
+          "y": 103.65
+        },
+        {
+          "t": 14.5,
+          "x": 188,
+          "y": 99.82
+        },
+        {
+          "t": 14.75,
+          "x": 188,
+          "y": 97.01
+        },
+        {
+          "t": 15,
+          "x": 188,
+          "y": 100.6
+        },
+        {
+          "t": 15.25,
+          "x": 188,
+          "y": 101.76
+        },
+        {
+          "t": 15.5,
+          "x": 188,
+          "y": 99.15
+        },
+        {
+          "t": 15.75,
+          "x": 188,
+          "y": 100.98
+        },
+        {
+          "t": 16,
+          "x": 188,
+          "y": 104.2
+        },
+        {
+          "t": 16.25,
+          "x": 188,
+          "y": 102.24
+        },
+        {
+          "t": 16.5,
+          "x": 188,
+          "y": 101.66
+        },
+        {
+          "t": 16.75,
+          "x": 188,
+          "y": 105.53
+        },
+        {
+          "t": 17,
+          "x": 188,
+          "y": 105.63
+        }
+      ]
+    },
+    "routeControlRead": {
+      "group2": [
+        {
+          "lane": 0,
+          "type": "bee",
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "pathPlaybackScale": 1,
+          "routeOffsetX": 0,
+          "routeCurveX": 0,
+          "routeCurveY": 0
+        },
+        {
+          "lane": 1,
+          "type": "bee",
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "pathPlaybackScale": 1,
+          "routeOffsetX": 0,
+          "routeCurveX": 0,
+          "routeCurveY": 0
+        },
+        {
+          "lane": 2,
+          "type": "bee",
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "pathPlaybackScale": 1,
+          "routeOffsetX": 0,
+          "routeCurveX": 0,
+          "routeCurveY": 0
+        },
+        {
+          "lane": 3,
+          "type": "bee",
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "pathPlaybackScale": 1,
+          "routeOffsetX": 0,
+          "routeCurveX": 0,
+          "routeCurveY": 0
+        }
+      ],
+      "group4": [
+        {
+          "lane": 0,
+          "type": "bee",
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "pathPlaybackScale": 0.5,
+          "routeOffsetX": 60,
+          "routeCurveX": 0,
+          "routeCurveY": 17.464
+        },
+        {
+          "lane": 1,
+          "type": "but",
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "pathPlaybackScale": 0.5,
+          "routeOffsetX": 60,
+          "routeCurveX": 0,
+          "routeCurveY": 17.464
+        },
+        {
+          "lane": 2,
+          "type": "bee",
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "pathPlaybackScale": 0.5,
+          "routeOffsetX": 60,
+          "routeCurveX": 0,
+          "routeCurveY": 17.464
+        },
+        {
+          "lane": 3,
+          "type": "but",
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "pathPlaybackScale": 0.5,
+          "routeOffsetX": 60,
+          "routeCurveX": 0,
+          "routeCurveY": 17.464
+        }
+      ],
+      "group5": [
+        {
+          "lane": 0,
+          "type": "but",
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "pathPlaybackScale": 1.18,
+          "routeOffsetX": 48,
+          "routeCurveX": 0,
+          "routeCurveY": 12
+        },
+        {
+          "lane": 1,
+          "type": "bee",
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "pathPlaybackScale": 1.18,
+          "routeOffsetX": 48,
+          "routeCurveX": 0,
+          "routeCurveY": 12
+        },
+        {
+          "lane": 2,
+          "type": "bee",
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "pathPlaybackScale": 1.18,
+          "routeOffsetX": 48,
+          "routeCurveX": 0,
+          "routeCurveY": 12
+        },
+        {
+          "lane": 3,
+          "type": "but",
+          "laneSpreadScale": 1,
+          "rowSpreadScale": 1,
+          "pathPlaybackScale": 1.18,
+          "routeOffsetX": 48,
+          "routeCurveX": 0,
+          "routeCurveY": 12
+        }
+      ]
+    },
+    "spacingReadability": {
+      "sampleCount": 28,
+      "worstMinDistance": 1.13,
+      "averageMinDistance": 9.59,
+      "spacingScore": 0.606,
+      "bunchingRisk": 0.464,
+      "crampedCount": 13,
+      "minRuntimeSpacingScore": 0.42,
+      "maxRuntimeBunchingRisk": 0.62,
+      "pass": true
+    },
+    "safetyStatus": {
+      "pass": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "noChallengeContacts": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0,
+        "challengeContacts": 0
+      }
+    },
+    "motionProfileProxy": {
+      "pathFamilyOrder": {
+        "pass": true,
+        "pathFamilyOrder": [
+          "first-challenge-peel",
+          "classic-column-drop",
+          "classic-column-drop",
+          "side-hook-return",
+          "first-challenge-peel"
+        ]
+      },
+      "delayedWaveStarts": {
+        "pass": true,
+        "rows": [
+          {
+            "wave": 1,
+            "sampleAt": 3.56,
+            "visibleCount": 4,
+            "maxTm": 0.231,
+            "nearEntryCount": 4
+          },
+          {
+            "wave": 2,
+            "sampleAt": 6.41,
+            "visibleCount": 4,
+            "maxTm": 0.232,
+            "nearEntryCount": 4
+          },
+          {
+            "wave": 3,
+            "sampleAt": 9.26,
+            "visibleCount": 3,
+            "maxTm": 0.211,
+            "nearEntryCount": 3
+          },
+          {
+            "wave": 4,
+            "sampleAt": 12.26,
+            "visibleCount": 4,
+            "maxTm": 0.272,
+            "nearEntryCount": 4
+          }
+        ]
+      },
+      "spacing": {
+        "pass": true,
+        "spacingScore": 0.606,
+        "bunchingRisk": 0.464
+      }
+    }
+  },
+  "beforeSourceEdit": null,
+  "afterSourceEdit": null,
+  "group2Read": {
+    "group2": {
+      "before": {
+        "groupIndex": 2,
+        "sampleCount": 33,
+        "pointCount": 250,
+        "visibleWindow": {
+          "visibleStartS": 3.5,
+          "visibleEndS": 11.5,
+          "visibleDurationS": 8
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 144.92,
+        "exitCentroidX": 140,
+        "xRange": 1.0626,
+        "yRange": 1.1193,
+        "pathLength": 1.1054,
+        "lowerFieldShare": 0.384,
+        "upperBandShare": 0.6,
+        "meanX": 139.74,
+        "meanY": 151.79,
+        "minY": -23.6,
+        "maxY": 379.34
+      },
+      "after": {
+        "groupIndex": 2,
+        "sampleCount": 34,
+        "pointCount": 254,
+        "visibleWindow": {
+          "visibleStartS": 3.5,
+          "visibleEndS": 11.75,
+          "visibleDurationS": 8.25
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 143.1,
+        "exitCentroidX": 140,
+        "xRange": 0.9622,
+        "yRange": 1.1027,
+        "pathLength": 1.1094,
+        "lowerFieldShare": 0.3543,
+        "upperBandShare": 0.622,
+        "meanX": 139.81,
+        "meanY": 151.48,
+        "minY": -21,
+        "maxY": 375.96
+      },
+      "deltaFromBefore": {
+        "xRangeDelta": -0.1004,
+        "yRangeDelta": -0.0166,
+        "pathLengthDelta": 0.004,
+        "lowerFieldShareDelta": -0.0297,
+        "upperBandShareDelta": 0.022,
+        "meanXDeltaPx": 0.07,
+        "meanYDeltaPx": -0.31,
+        "entryCentroidDeltaPx": -1.82,
+        "exitCentroidDeltaPx": 0,
+        "visibleWindowDeltaS": {
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": 0.25,
+          "visibleDurationDeltaS": 0.25
+        }
+      },
+      "entrySideBefore": "center",
+      "entrySideAfter": "center",
+      "exitSideBefore": "center",
+      "exitSideAfter": "center",
+      "centerEntryScoreBefore": 1,
+      "centerEntryScoreAfter": 1,
+      "centerExitScoreBefore": 1,
+      "centerExitScoreAfter": 1,
+      "columnCompactnessImproved": true,
+      "verticalShapeControlled": true,
+      "pathLengthSane": true,
+      "browserVisiblePathMovement": true,
+      "semanticColumnRolePreserved": true,
+      "upperBandScoreWindowPreserved": true,
+      "lowerFieldOverstaySafe": true,
+      "timingPreserved": true
+    }
+  },
+  "protectedGroupPreservation": [
+    {
+      "groupIndex": 1,
+      "before": {
+        "groupIndex": 1,
+        "sampleCount": 43,
+        "pointCount": 328,
+        "visibleWindow": {
+          "visibleStartS": 0.25,
+          "visibleEndS": 10.75,
+          "visibleDurationS": 10.5
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 140,
+        "exitCentroidX": 140,
+        "xRange": 1.1371,
+        "yRange": 0.9546,
+        "pathLength": 0.9501,
+        "lowerFieldShare": 0.2439,
+        "upperBandShare": 0.7439,
+        "meanX": 140,
+        "meanY": 117.37,
+        "minY": 38.25,
+        "maxY": 381.92
+      },
+      "after": {
+        "groupIndex": 1,
+        "sampleCount": 43,
+        "pointCount": 328,
+        "visibleWindow": {
+          "visibleStartS": 0.25,
+          "visibleEndS": 10.75,
+          "visibleDurationS": 10.5
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 140,
+        "exitCentroidX": 140,
+        "xRange": 1.1371,
+        "yRange": 0.9546,
+        "pathLength": 0.9501,
+        "lowerFieldShare": 0.2439,
+        "upperBandShare": 0.7439,
+        "meanX": 140,
+        "meanY": 117.37,
+        "minY": 38.25,
+        "maxY": 381.92
+      },
+      "deltaFromBefore": {
+        "xRangeDelta": 0,
+        "yRangeDelta": 0,
+        "pathLengthDelta": 0,
+        "lowerFieldShareDelta": 0,
+        "upperBandShareDelta": 0,
+        "meanXDeltaPx": 0,
+        "meanYDeltaPx": 0,
+        "entryCentroidDeltaPx": 0,
+        "exitCentroidDeltaPx": 0,
+        "visibleWindowDeltaS": {
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": 0,
+          "visibleDurationDeltaS": 0
+        }
+      },
+      "xRangeDelta": 0,
+      "yRangeDelta": 0,
+      "pathLengthDelta": 0,
+      "lowerFieldShareDelta": 0,
+      "upperBandShareDelta": 0,
+      "meanXDeltaPx": 0,
+      "meanYDeltaPx": 0,
+      "entryCentroidDeltaPx": 0,
+      "exitCentroidDeltaPx": 0,
+      "visibleWindowDeltaS": {
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": 0,
+        "visibleDurationDeltaS": 0
+      },
+      "preservationPass": true
+    },
+    {
+      "groupIndex": 3,
+      "before": {
+        "groupIndex": 3,
+        "sampleCount": 32,
+        "pointCount": 242,
+        "visibleWindow": {
+          "visibleStartS": 6.5,
+          "visibleEndS": 14.25,
+          "visibleDurationS": 7.75
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 141.09,
+        "exitCentroidX": 140,
+        "xRange": 1.0424,
+        "yRange": 1.0954,
+        "pathLength": 1.0826,
+        "lowerFieldShare": 0.4132,
+        "upperBandShare": 0.5702,
+        "meanX": 140.28,
+        "meanY": 159.16,
+        "minY": -22.57,
+        "maxY": 371.77
+      },
+      "after": {
+        "groupIndex": 3,
+        "sampleCount": 32,
+        "pointCount": 242,
+        "visibleWindow": {
+          "visibleStartS": 6.5,
+          "visibleEndS": 14.25,
+          "visibleDurationS": 7.75
+        },
+        "entrySide": "center",
+        "exitSide": "center",
+        "entryCentroidX": 141.09,
+        "exitCentroidX": 140,
+        "xRange": 1.0424,
+        "yRange": 1.0954,
+        "pathLength": 1.0826,
+        "lowerFieldShare": 0.4132,
+        "upperBandShare": 0.5702,
+        "meanX": 140.28,
+        "meanY": 159.16,
+        "minY": -22.57,
+        "maxY": 371.77
+      },
+      "deltaFromBefore": {
+        "xRangeDelta": 0,
+        "yRangeDelta": 0,
+        "pathLengthDelta": 0,
+        "lowerFieldShareDelta": 0,
+        "upperBandShareDelta": 0,
+        "meanXDeltaPx": 0,
+        "meanYDeltaPx": 0,
+        "entryCentroidDeltaPx": 0,
+        "exitCentroidDeltaPx": 0,
+        "visibleWindowDeltaS": {
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": 0,
+          "visibleDurationDeltaS": 0
+        }
+      },
+      "xRangeDelta": 0,
+      "yRangeDelta": 0,
+      "pathLengthDelta": 0,
+      "lowerFieldShareDelta": 0,
+      "upperBandShareDelta": 0,
+      "meanXDeltaPx": 0,
+      "meanYDeltaPx": 0,
+      "entryCentroidDeltaPx": 0,
+      "exitCentroidDeltaPx": 0,
+      "visibleWindowDeltaS": {
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": 0,
+        "visibleDurationDeltaS": 0
+      },
+      "preservationPass": true
+    },
+    {
+      "groupIndex": 4,
+      "before": {
+        "groupIndex": 4,
+        "sampleCount": 32,
+        "pointCount": 167,
+        "visibleWindow": {
+          "visibleStartS": 9.25,
+          "visibleEndS": 17,
+          "visibleDurationS": 7.75
+        },
+        "entrySide": "left",
+        "exitSide": "right",
+        "entryCentroidX": -1.42,
+        "exitCentroidX": 204.89,
+        "xRange": 1.1249,
+        "yRange": 0.4278,
+        "pathLength": 1.2586,
+        "lowerFieldShare": 0.0299,
+        "upperBandShare": 0.9401,
+        "meanX": 173.84,
+        "meanY": 122.42,
+        "minY": 58.65,
+        "maxY": 212.65
+      },
+      "after": {
+        "groupIndex": 4,
+        "sampleCount": 32,
+        "pointCount": 167,
+        "visibleWindow": {
+          "visibleStartS": 9.25,
+          "visibleEndS": 17,
+          "visibleDurationS": 7.75
+        },
+        "entrySide": "left",
+        "exitSide": "right",
+        "entryCentroidX": -1.42,
+        "exitCentroidX": 204.89,
+        "xRange": 1.1249,
+        "yRange": 0.4278,
+        "pathLength": 1.2586,
+        "lowerFieldShare": 0.0299,
+        "upperBandShare": 0.9401,
+        "meanX": 173.84,
+        "meanY": 122.42,
+        "minY": 58.65,
+        "maxY": 212.65
+      },
+      "deltaFromBefore": {
+        "xRangeDelta": 0,
+        "yRangeDelta": 0,
+        "pathLengthDelta": 0,
+        "lowerFieldShareDelta": 0,
+        "upperBandShareDelta": 0,
+        "meanXDeltaPx": 0,
+        "meanYDeltaPx": 0,
+        "entryCentroidDeltaPx": 0,
+        "exitCentroidDeltaPx": 0,
+        "visibleWindowDeltaS": {
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": 0,
+          "visibleDurationDeltaS": 0
+        }
+      },
+      "xRangeDelta": 0,
+      "yRangeDelta": 0,
+      "pathLengthDelta": 0,
+      "lowerFieldShareDelta": 0,
+      "upperBandShareDelta": 0,
+      "meanXDeltaPx": 0,
+      "meanYDeltaPx": 0,
+      "entryCentroidDeltaPx": 0,
+      "exitCentroidDeltaPx": 0,
+      "visibleWindowDeltaS": {
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": 0,
+        "visibleDurationDeltaS": 0
+      },
+      "preservationPass": true
+    },
+    {
+      "groupIndex": 5,
+      "before": {
+        "groupIndex": 5,
+        "sampleCount": 20,
+        "pointCount": 136,
+        "visibleWindow": {
+          "visibleStartS": 12.25,
+          "visibleEndS": 17,
+          "visibleDurationS": 4.75
+        },
+        "entrySide": "left",
+        "exitSide": "right",
+        "entryCentroidX": -10.19,
+        "exitCentroidX": 188,
+        "xRange": 1.1363,
+        "yRange": 0.0989,
+        "pathLength": 0.7949,
+        "lowerFieldShare": 0,
+        "upperBandShare": 1,
+        "meanX": 172.06,
+        "meanY": 101.35,
+        "minY": 83.83,
+        "maxY": 119.45
+      },
+      "after": {
+        "groupIndex": 5,
+        "sampleCount": 20,
+        "pointCount": 136,
+        "visibleWindow": {
+          "visibleStartS": 12.25,
+          "visibleEndS": 17,
+          "visibleDurationS": 4.75
+        },
+        "entrySide": "left",
+        "exitSide": "right",
+        "entryCentroidX": -10.19,
+        "exitCentroidX": 188,
+        "xRange": 1.1363,
+        "yRange": 0.0989,
+        "pathLength": 0.7949,
+        "lowerFieldShare": 0,
+        "upperBandShare": 1,
+        "meanX": 172.06,
+        "meanY": 101.35,
+        "minY": 83.83,
+        "maxY": 119.45
+      },
+      "deltaFromBefore": {
+        "xRangeDelta": 0,
+        "yRangeDelta": 0,
+        "pathLengthDelta": 0,
+        "lowerFieldShareDelta": 0,
+        "upperBandShareDelta": 0,
+        "meanXDeltaPx": 0,
+        "meanYDeltaPx": 0,
+        "entryCentroidDeltaPx": 0,
+        "exitCentroidDeltaPx": 0,
+        "visibleWindowDeltaS": {
+          "visibleStartDeltaS": 0,
+          "visibleEndDeltaS": 0,
+          "visibleDurationDeltaS": 0
+        }
+      },
+      "xRangeDelta": 0,
+      "yRangeDelta": 0,
+      "pathLengthDelta": 0,
+      "lowerFieldShareDelta": 0,
+      "upperBandShareDelta": 0,
+      "meanXDeltaPx": 0,
+      "meanYDeltaPx": 0,
+      "entryCentroidDeltaPx": 0,
+      "exitCentroidDeltaPx": 0,
+      "visibleWindowDeltaS": {
+        "visibleStartDeltaS": 0,
+        "visibleEndDeltaS": 0,
+        "visibleDurationDeltaS": 0
+      },
+      "preservationPass": true
+    }
+  ],
+  "motionProfileCompatibility": {
+    "pass": true,
+    "proxy": {
+      "pathFamilyOrder": {
+        "pass": true,
+        "pathFamilyOrder": [
+          "first-challenge-peel",
+          "classic-column-drop",
+          "classic-column-drop",
+          "side-hook-return",
+          "first-challenge-peel"
+        ]
+      },
+      "delayedWaveStarts": {
+        "pass": true,
+        "rows": [
+          {
+            "wave": 1,
+            "sampleAt": 3.56,
+            "visibleCount": 4,
+            "maxTm": 0.233,
+            "nearEntryCount": 4
+          },
+          {
+            "wave": 2,
+            "sampleAt": 6.41,
+            "visibleCount": 4,
+            "maxTm": 0.232,
+            "nearEntryCount": 4
+          },
+          {
+            "wave": 3,
+            "sampleAt": 9.26,
+            "visibleCount": 3,
+            "maxTm": 0.211,
+            "nearEntryCount": 3
+          },
+          {
+            "wave": 4,
+            "sampleAt": 12.26,
+            "visibleCount": 4,
+            "maxTm": 0.272,
+            "nearEntryCount": 4
+          }
+        ]
+      },
+      "spacing": {
+        "pass": true,
+        "spacingScore": 0.607,
+        "bunchingRisk": 0.464
+      }
+    }
+  },
+  "guardrails": {
+    "spacingReadability": {
+      "sampleCount": 28,
+      "worstMinDistance": 1.96,
+      "averageMinDistance": 9.62,
+      "spacingScore": 0.607,
+      "bunchingRisk": 0.464,
+      "crampedCount": 13,
+      "minRuntimeSpacingScore": 0.42,
+      "maxRuntimeBunchingRisk": 0.62,
+      "pass": true
+    },
+    "scoreableRoutes": {
+      "pass": true,
+      "source": "challenge-stage-conformance-validation-required",
+      "read": "Fast-lane proof preserves runtime routeability proxy; final source keeper still requires challenge-stage conformance validation."
+    },
+    "noCombatGrammar": {
+      "pass": true,
+      "read": "No-combat grammar requires no enemy shots, no attack starts, no ship losses, and no challenge contacts during capture."
+    },
+    "safety": {
+      "pass": true,
+      "noEnemyShots": true,
+      "noAttackStarts": true,
+      "noShipLosses": true,
+      "noChallengeContacts": true,
+      "eventCounts": {
+        "enemyShots": 0,
+        "enemyAttackStarts": 0,
+        "shipLosses": 0,
+        "challengeContacts": 0
+      }
+    }
+  },
+  "failureClassification": [],
+  "verdict": "transfer-proof-ready",
+  "runtimeKeeperClassification": "transfer-proof-ready",
+  "betaJustification": false,
+  "visualEvidence": {
+    "contactSheet": "reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group2-fast-lane/latest-group2-fast-lane-contact-sheet.svg",
+    "kind": "svg-centroid-path-contact-sheet",
+    "read": "Baseline and selected non-overwriting proof traces are plotted with group 2 highlighted and group 4/group 5 keepers visible."
+  },
+  "decision": {
+    "sourceEditKept": false,
+    "read": "Exactly one group 2 non-overwriting proof candidate is ready for exactly one minimal source edit."
+  },
+  "summary": {
+    "selectedCandidateId": "stage3-g2-soft-score-window-isolated-0.1",
+    "verdict": "transfer-proof-ready",
+    "passingProofCount": 1,
+    "group4KeeperPreserved": true,
+    "group5KeeperPreserved": true,
+    "guardrailsPass": true,
+    "blockerClassification": null,
+    "missingRuntimeControl": null,
+    "blockerTypes": []
+  }
+}

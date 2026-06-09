@@ -226,18 +226,29 @@ Latest Stage 7 calibration:
   another `/dev` gameplay keeper only, not beta justification. The next fast
   Stage 3 target should avoid group 1 group-level controls unless lane/type-
   specific phrase authoring is added.
-- The follow-up Stage 3 group 2 fast-lane proof was blocked, with evidence at
+- The earlier Stage 3 group 2 fast-lane proof remains preserved as blocked
+  calibration evidence: `stage3-g2-column-tighten-0.1` improved the group 2
+  bee-column read but was not source-applied because group 2 timing drifted by
+  `+0.75s` and the protected group 4 keeper failed preservation. That blocker
+  was `guardrail-regression`, not a license to keep broad-tuning group 2.
+- A focused Stage 3 group 2 control-isolation pass has now produced and
+  accepted a third `/dev` `dev-visible-gameplay-keeper`, with evidence at
   `reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group2-fast-lane/latest-group2-fast-lane.json`
   and contact-sheet evidence at
   `reference-artifacts/analyses/reference-execution-source-attempts/stage3-challenge1/group2-fast-lane/latest-group2-fast-lane-contact-sheet.svg`.
-  The best non-overwriting proof, `stage3-g2-column-tighten-0.1`, improved the
-  group 2 bee-column read on visible metrics, including x-range `1.0626` ->
-  `1.009`, upper-band share `0.6` -> `0.6418`, and lower-field share `0.384`
-  -> `0.3507`, while preserving no-combat and focused safety. It was rejected
-  before source edit because group 2 timing drifted by `+0.75s` and the
-  protected group 4 keeper failed preservation. Blocker classification:
-  `guardrail-regression`. Do not source-apply group 2 whole-group controls from
-  this proof.
+  The kept source controls are limited to Stage 3 group 2:
+  `motionSpecGroups[1].controls.arcAmp: 0.76`, `dropAmp: 0.88`,
+  `pathPlaybackScale: 1.02`, `phaseOffsetS: 0.12`, and `routeCurveY: -4`.
+  Source evidence reproduced the isolation proof read: group 2 x-range
+  `1.0626` -> `0.9622`, y-range `1.1193` -> `1.1027`, path length `1.1054`
+  -> `1.1094`, upper-band share `0.6` -> `0.622`, and lower-field share
+  `0.384` -> `0.3543`. The isolation table shows groups 1, 3, 4, and 5 at
+  zero timing/path drift, preserving the accepted group 4 and group 5 keepers.
+  Motion/profile, spacing, scoreable-route, no-combat, zero-shot, zero-attack,
+  zero-ship-loss, and focused zero-challenge-contact guardrails passed. This is
+  a `/dev` gameplay keeper only, not beta justification. Group 1 remains
+  blocked under current group-level controls; the next fast-lane target should
+  not disturb the three accepted Stage 3 keepers.
 
 ## Historical Or Stale Current-State Docs
 

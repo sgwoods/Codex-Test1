@@ -14,6 +14,7 @@ const PLAY_W = 280;
 const PLAY_H = 360;
 const SAMPLE_STEP_S = 0.25;
 const SAMPLE_END_S = 17;
+const PROOF_SEED = 9052;
 const LOWER_FIELD_Y = PLAY_H * 0.52;
 const UPPER_BAND_Y = PLAY_H * 0.5;
 const VISIBLE_BOUNDS = Object.freeze({ minX: -24, maxX: 304, minY: -36, maxY: 382 });
@@ -32,41 +33,45 @@ const PROTECTED_GROUP_LIMITS = Object.freeze({
 
 const VARIANTS = Object.freeze([
   Object.freeze({
-    candidateId: 'stage3-g2-column-tighten-0.1',
-    transformId: 'group2-column-tighten',
-    read: 'Tighten the bee-column phrase so it reads more like a centered vertical bonus column while preserving the upper-band score window.',
+    candidateId: 'stage3-g2-column-tighten-phase-isolated-0.1',
+    transformId: 'group2-column-tighten-phase-isolated',
+    read: 'Tighten the bee-column phrase and advance local phase to prevent the longer visible tail from disturbing later keepers.',
     motionSpec: Object.freeze({
       controls: Object.freeze({
         arcAmp: 0.72,
         dropAmp: 0.82,
         pathPlaybackScale: 1,
+        phaseOffsetS: 0.32,
         routeCurveY: -8
       })
     })
   }),
   Object.freeze({
-    candidateId: 'stage3-g2-upper-band-trim-0.1',
-    transformId: 'group2-upper-band-trim',
-    read: 'Reduce lower-field overdrop and keep the bee column scoreable in the upper band without changing phrase identity.',
+    candidateId: 'stage3-g2-column-tighten-spawn-isolated-0.1',
+    transformId: 'group2-column-tighten-spawn-isolated',
+    read: 'Use a small spawn advance plus phase advance to keep the tightened bee-column phrase inside the original visible timing envelope.',
     motionSpec: Object.freeze({
+      spawnOffsetS: 3.2,
       controls: Object.freeze({
-        arcAmp: 0.8,
-        dropAmp: 0.72,
-        pathPlaybackScale: 0.92,
-        routeCurveY: -12
+        arcAmp: 0.72,
+        dropAmp: 0.82,
+        pathPlaybackScale: 1,
+        phaseOffsetS: 0.2,
+        routeCurveY: -6
       })
     })
   }),
   Object.freeze({
-    candidateId: 'stage3-g2-centered-score-window-0.1',
-    transformId: 'group2-centered-score-window',
-    read: 'Keep group 2 centered and slightly compact the score-window arc without disturbing later keepers.',
+    candidateId: 'stage3-g2-soft-score-window-isolated-0.1',
+    transformId: 'group2-soft-score-window-isolated',
+    read: 'Apply a softer column/upper-band adjustment intended to prove group-level controls can move group 2 while staying below protected-keeper tolerances.',
     motionSpec: Object.freeze({
       controls: Object.freeze({
-        arcAmp: 0.68,
-        dropAmp: 0.9,
-        pathPlaybackScale: 1.08,
-        routeCurveY: -6
+        arcAmp: 0.76,
+        dropAmp: 0.88,
+        pathPlaybackScale: 1.02,
+        phaseOffsetS: 0.12,
+        routeCurveY: -4
       })
     })
   })
@@ -170,7 +175,12 @@ function controlsEqual(a = {}, b = {}){
 function sourceVariantFromLayout(layout){
   const group = Array.isArray(layout?.motionSpecGroups) ? layout.motionSpecGroups[1] : null;
   if(!group) return null;
-  return VARIANTS.find(variant => controlsEqual(group.controls || {}, variant.motionSpec.controls || {})) || null;
+  return VARIANTS.find(variant => {
+    const spawnMatches = variant.motionSpec.spawnOffsetS == null
+      ? group.spawnOffsetS == null
+      : Math.abs((+group.spawnOffsetS || 0) - +variant.motionSpec.spawnOffsetS) <= 0.001;
+    return spawnMatches && controlsEqual(group.controls || {}, variant.motionSpec.controls || {});
+  }) || null;
 }
 
 function buildContactSheet(report, file){
@@ -241,7 +251,7 @@ function buildContactSheet(report, file){
 
 async function capture(){
   return withHarnessPage({ skipStart: true, stage: 3, ships: 3, challenge: false, seed: 9052 }, async ({ page }) => {
-    return page.evaluate(({ variants, sampleStepS, sampleEndS, bounds, lowerFieldY, spacingGuard }) => {
+    return page.evaluate(({ variants, sampleStepS, sampleEndS, proofSeed, bounds, lowerFieldY, spacingGuard }) => {
       const h = window.__galagaHarness__;
       const clone = value => JSON.parse(JSON.stringify(value));
       const round = (value, places = 3) => {
@@ -271,6 +281,7 @@ async function capture(){
         if(!Array.isArray(next.motionSpecGroups)) next.motionSpecGroups = [];
         const group = Object.assign({}, next.motionSpecGroups[1] || {});
         group.controls = Object.assign({}, group.controls || {}, motionSpec.controls || {});
+        if(Number.isFinite(+motionSpec.spawnOffsetS)) group.spawnOffsetS = +motionSpec.spawnOffsetS;
         next.motionSpecGroups[1] = group;
         return next;
       }
@@ -308,6 +319,7 @@ async function capture(){
             dropAmp: enemy.dropAmp,
             laneSpreadScale: enemy.laneSpreadScale,
             rowSpreadScale: enemy.rowSpreadScale,
+            phaseOffsetS: enemy.phaseOffsetS,
             pathPlaybackScale: enemy.pathPlaybackScale,
             routeOffsetX: enemy.routeOffsetX,
             routeCurveX: enemy.routeCurveX,
@@ -383,6 +395,7 @@ async function capture(){
       }
       const delayedWavePass = rows => rows.every(row => row.visibleCount >= 2 && Number.isFinite(+row.maxTm) && +row.maxTm <= 0.48 && row.nearEntryCount === row.visibleCount);
       function summarizeScenario({ layoutOverride = null, variant = 'source' } = {}){
+        if(typeof h.start === 'function') h.start({ seed: proofSeed, autoVideo: false, forceAurora: true });
         const initial = h.setupChallengeMotionProfileTest(layoutOverride ? { stage: 3, layoutOverride } : { stage: 3 });
         const upperBandY = 360 * (+initial.layout?.upperBandRatio || 0.5);
         const samples = [];
@@ -515,6 +528,7 @@ async function capture(){
       variants: VARIANTS,
       sampleStepS: SAMPLE_STEP_S,
       sampleEndS: SAMPLE_END_S,
+      proofSeed: PROOF_SEED,
       bounds: VISIBLE_BOUNDS,
       lowerFieldY: LOWER_FIELD_Y,
       spacingGuard: SPACING_GUARD
@@ -523,19 +537,29 @@ async function capture(){
 }
 
 function sourceControlRows({ scenario, variant, sourceAttempt }){
-  const expected = Object.entries(variant.motionSpec.controls || {}).map(([key, value]) => ({
+  const expected = [];
+  if(Number.isFinite(+variant.motionSpec.spawnOffsetS)){
+    expected.push({
+      runtimeField: 'motionSpecGroups[1].spawnOffsetS',
+      expectedValue: +variant.motionSpec.spawnOffsetS,
+      enemyField: null
+    });
+  }
+  expected.push(...Object.entries(variant.motionSpec.controls || {}).map(([key, value]) => ({
     runtimeField: `motionSpecGroups[1].controls.${key}`,
     expectedValue: value,
     enemyField: key
-  }));
+  })));
   const group = scenario.layoutSummary.motionSpecGroups?.[1] || {};
   const controls = group.controls || {};
   const routeReads = scenario.routeControlRead.group2 || [];
   return expected.map(row => {
-    const sourceValue = controls[row.enemyField];
-    const runtimeValues = routeReads.map(enemy => enemy[row.enemyField]).filter(value => value != null);
+    const sourceValue = row.enemyField ? controls[row.enemyField] : group.spawnOffsetS;
+    const runtimeValues = row.enemyField ? routeReads.map(enemy => enemy[row.enemyField]).filter(value => value != null) : [];
     const sourceMatches = Math.abs((+sourceValue || 0) - (+row.expectedValue || 0)) <= 0.001;
-    const runtimeMatches = runtimeValues.length > 0 && runtimeValues.every(value => Math.abs((+value || 0) - (+row.expectedValue || 0)) <= 0.001);
+    const runtimeMatches = row.enemyField
+      ? runtimeValues.length > 0 && runtimeValues.every(value => Math.abs((+value || 0) - (+row.expectedValue || 0)) <= 0.001)
+      : true;
     return {
       runtimeField: row.runtimeField,
       expectedValue: row.expectedValue,
@@ -740,6 +764,60 @@ ${failures}
 `;
 }
 
+function buildIsolationRead({ baseline, scenario, evaluation }){
+  if(!baseline || !scenario || !evaluation) return null;
+  const protectedByGroup = new Map((evaluation.protectedGroups || []).map(row => [row.groupIndex, row]));
+  const rows = [1, 2, 3, 4, 5].map(groupIndex => {
+    const before = baseline.groupMetrics?.[`group${groupIndex}`] || {};
+    const after = scenario.groupMetrics?.[`group${groupIndex}`] || {};
+    const delta = vectorDelta(before, after);
+    const protectedRow = protectedByGroup.get(groupIndex) || null;
+    return {
+      groupIndex,
+      role: groupIndex === 2 ? 'target' : 'protected',
+      timingDriftS: delta.visibleWindowDeltaS,
+      pathReadabilityMovement: {
+        xRangeDelta: delta.xRangeDelta,
+        yRangeDelta: delta.yRangeDelta,
+        pathLengthDelta: delta.pathLengthDelta,
+        lowerFieldShareDelta: delta.lowerFieldShareDelta,
+        upperBandShareDelta: delta.upperBandShareDelta,
+        meanXDeltaPx: delta.meanXDeltaPx,
+        meanYDeltaPx: delta.meanYDeltaPx,
+        entryCentroidDeltaPx: delta.entryCentroidDeltaPx,
+        exitCentroidDeltaPx: delta.exitCentroidDeltaPx
+      },
+      before,
+      after,
+      preservationPass: groupIndex === 2 ? null : protectedRow?.preservationPass === true
+    };
+  });
+  return {
+    proofSeed: PROOF_SEED,
+    targetGroup: 2,
+    protectedGroups: [1, 3, 4, 5],
+    explicitTolerances: PROTECTED_GROUP_LIMITS,
+    perGroupTimingDrift: rows.map(row => ({
+      groupIndex: row.groupIndex,
+      role: row.role,
+      preservationPass: row.preservationPass,
+      ...row.timingDriftS
+    })),
+    perGroupPathReadabilityMovement: rows.map(row => ({
+      groupIndex: row.groupIndex,
+      role: row.role,
+      preservationPass: row.preservationPass,
+      ...row.pathReadabilityMovement
+    })),
+    group4KeeperPreserved: rows.find(row => row.groupIndex === 4)?.preservationPass === true,
+    group5KeeperPreserved: rows.find(row => row.groupIndex === 5)?.preservationPass === true,
+    protectedGroupsChangedBeyondTolerance: rows
+      .filter(row => row.role === 'protected' && row.preservationPass !== true)
+      .map(row => row.groupIndex),
+    targetGroupMovement: evaluation.targetRead?.group2 || null
+  };
+}
+
 async function main(){
   const captureData = await capture();
   const sourceVariant = sourceVariantFromLayout(captureData.sourceLayout);
@@ -753,12 +831,15 @@ async function main(){
   const evaluation = selected
     ? evaluateScenario({ baseline, scenario, variant: selected, sourceAttempt })
     : null;
-  const verdict = sourceAttempt
+  const rawVerdict = sourceAttempt
     ? (evaluation.sourceAttemptPass ? 'dev-visible-gameplay-keeper' : 'rejected')
     : (selectedRows.passing.length === 1 ? 'transfer-proof-ready' : 'blocked');
+  const isolationRead = buildIsolationRead({ baseline, scenario, evaluation });
+  const verdict = rawVerdict === 'blocked' ? 'blocked-runtime-control-isolation' : rawVerdict;
   const report = {
     schemaVersion: 1,
     artifactType: 'stage3-group2-fast-lane-report',
+    proofType: 'stage3-group2-motionSpec-control-isolation',
     generatedAt: new Date().toISOString(),
     generatedBy: 'tools/harness/analyze-stage3-group2-fast-lane.js',
     commit: git(['rev-parse', '--short', 'HEAD']),
@@ -790,6 +871,7 @@ async function main(){
     selectedTransformId: selected?.transformId || null,
     selectedVariant: sourceAttempt ? null : selected,
     sourceControlsApplied: evaluation?.sourceConsumption || [],
+    isolation: isolationRead,
     baseline: captureData.baseline,
     beforeSourceEdit: sourceAttempt ? captureData.beforeSourceEdit : null,
     afterSourceEdit: sourceAttempt ? captureData.afterSourceEdit : null,
@@ -814,7 +896,7 @@ async function main(){
         ? 'Group 2 source controls reproduced the fast-lane proof and are accepted as another dev-visible gameplay keeper only.'
         : (verdict === 'transfer-proof-ready'
           ? 'Exactly one group 2 non-overwriting proof candidate is ready for exactly one minimal source edit.'
-          : 'No group 2 fast-lane candidate passed the protected-keeper and timing gates; stop without broadening the search.')
+          : 'No group 2 isolation candidate passed the protected-keeper and timing gates; stop without broadening the search.')
     },
     summary: {
       selectedCandidateId: selected?.candidateId || null,
@@ -823,7 +905,10 @@ async function main(){
       group4KeeperPreserved: (evaluation?.protectedGroups || []).find(row => row.groupIndex === 4)?.preservationPass === true,
       group5KeeperPreserved: (evaluation?.protectedGroups || []).find(row => row.groupIndex === 5)?.preservationPass === true,
       guardrailsPass: evaluation?.guardrails ? Object.values(evaluation.guardrails).every(row => row.pass === true) : false,
-      blockerClassification: verdict === 'blocked' ? 'guardrail-regression' : null,
+      blockerClassification: verdict === 'blocked-runtime-control-isolation' ? 'runtime-control-isolation' : null,
+      missingRuntimeControl: verdict === 'blocked-runtime-control-isolation'
+        ? 'A target-group control that can compact/shape Stage 3 group 2 while preserving later accepted keeper timing and path metrics, likely a group-local exit/lifetime clamp or reference-path-backed phrase isolation.'
+        : null,
       blockerTypes: (evaluation?.failureClassification || []).map(row => row.category)
     }
   };

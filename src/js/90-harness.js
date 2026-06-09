@@ -1266,6 +1266,8 @@ window.__galagaHarness__={
    pathFamily:e.pathFamily||'classic-lane-wave',
    motionSpecId:e.motionSpecGroup?.id||'',
    motionSpecEvaluator:e.motionSpecGroup?.evaluator||'',
+   arcAmp:+(+e.arcAmp||1).toFixed(3),
+   dropAmp:+(+e.dropAmp||1).toFixed(3),
    speedScale:+(+e.speedScale||1).toFixed(3),
    lowerFieldBias:+(+e.lowerFieldBias||0).toFixed(2),
    laneSpreadScale:+(+e.laneSpreadScale||1).toFixed(3),
