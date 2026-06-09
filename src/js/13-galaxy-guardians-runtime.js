@@ -103,6 +103,7 @@ const GALAXY_GUARDIANS_RUNTIME_PROFILE=Object.freeze({
   enemyShotMaxLive:3,
   enemyShotStartYOffset:8,
   enemyShotPlayerHitbox:7,
+  alienCollisionHitbox:10,
   enemyShotBottomPadding:10,
   rackPulseIntervalBase:1.96,
   topReentryVy:70,
@@ -822,7 +823,7 @@ function stepGalaxyGuardiansRuntime(state,dt=.016,input={}){
   if(alien.y>rules.playfieldHeight+rules.bottomExitPadding){
    guardiansBeginTopReentry(state,alien);
   }
-  if((alien.mode==='diving'||alien.mode==='wrapping')&&p.visible&&p.inv<=0&&Math.abs(alien.x-p.x)<=10&&Math.abs(alien.y-p.y)<=10){
+  if((alien.mode==='diving'||alien.mode==='wrapping')&&p.visible&&p.inv<=0&&Math.abs(alien.x-p.x)<=rules.alienCollisionHitbox&&Math.abs(alien.y-p.y)<=rules.alienCollisionHitbox){
    loseGalaxyGuardiansPlayer(state,`alien_${alien.role}_collision`);
   }
  }

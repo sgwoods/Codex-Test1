@@ -535,7 +535,20 @@ const GALAXY_GUARDIANS_PACK=Object.freeze({
  usesDualFighterMode:0,
  usesStaticShields:0,
   usesStageThemeProgression:1,
-  usesBossArchetypeVariants:0
+  usesBossArchetypeVariants:0,
+  supportsWatchMode:1,
+  supportsPersonaRival:0
+ }),
+ modalities:Object.freeze({
+  watch:Object.freeze({
+   enabled:1,
+   defaultPersona:'advanced',
+   scoreRecording:'disabled'
+  }),
+  personaRival:Object.freeze({
+   enabled:0,
+   reason:'watch-first-guardians-preview'
+  })
  }),
  atmosphereThemes:GUARDIANS_ATMOSPHERE_THEMES,
  audioThemes:GUARDIANS_AUDIO_THEMES,

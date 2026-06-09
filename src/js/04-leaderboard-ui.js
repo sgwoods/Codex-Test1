@@ -95,8 +95,15 @@ function renderPilotRecords(rows){
  accountRecordsTop5.querySelectorAll('.accountRecordReplayBtn').forEach(node=>bindReplayAction(node));
  accountRecordsTop5.querySelectorAll('.accountRecordRow.hasReplay').forEach(node=>bindReplayAction(node,{row:true}));
 }
-function currentLeaderboardTitle(view=LEADERBOARD.view){
- const gameTitle=String(currentScoreStorageGameTitle()||'Current Cabinet').toUpperCase();
+function currentLeaderboardTitle(view=LEADERBOARD.view,gameKey=currentScoreStorageGameKey()){
+ const normalized=typeof normalizeScoreRecordGameKey==='function'
+  ? normalizeScoreRecordGameKey(gameKey)
+  : String(gameKey||'').trim();
+ const gameTitle=String(
+  typeof scoreGameTitleForKey==='function'
+   ? scoreGameTitleForKey(normalized)
+   : currentScoreStorageGameTitle()||'Current Cabinet'
+ ).toUpperCase();
  switch(view){
   case 'validated': return `${gameTitle} VALIDATED PILOTS`;
   case 'mine': return LEADERBOARD.user?`${gameTitle} MY SCORES`:`${gameTitle} MY SCORES · LOCAL`;
@@ -108,15 +115,20 @@ function latestCompletedLocalScoreRow(){
  const history=typeof loadScoreHistory==='function'?loadScoreHistory():[];
  return history[0]||null;
 }
-function leaderboardRowsForView(view=LEADERBOARD.view){
- if(view==='local')return localLeaderboardRows();
- if(view==='mine'&&!remoteAuthEnabled())return localLeaderboardRows();
- if(view==='mine'&&!LEADERBOARD.user)return localLeaderboardRows();
- const rows=(LEADERBOARD.remote[view]||[]).filter(row=>typeof scoreRowMatchesGame==='function'?scoreRowMatchesGame(row):true);
+function leaderboardRowsForView(view=LEADERBOARD.view,opts={}){
+ const targetGameKey=typeof normalizeScoreRecordGameKey==='function'
+  ? normalizeScoreRecordGameKey(opts.gameKey||currentScoreStorageGameKey())
+  : String(opts.gameKey||'').trim();
+ const localRows=()=>localLeaderboardRows(targetGameKey);
+ const matchesGame=row=>typeof scoreRowMatchesGame==='function'?scoreRowMatchesGame(row,targetGameKey):true;
+ if(view==='local')return localRows();
+ if(view==='mine'&&!remoteAuthEnabled())return localRows();
+ if(view==='mine'&&!LEADERBOARD.user)return localRows();
+ const rows=(LEADERBOARD.remote[view]||[]).filter(matchesGame);
  if(rows.length)return rows;
- if((LEADERBOARD.remote[view]||[]).length)return localLeaderboardRows();
+ if((LEADERBOARD.remote[view]||[]).length)return localRows();
  if((view==='validated'||view==='mine')&&(LEADERBOARD.lastRemoteOk||LEADERBOARD.cacheStamp[view]))return [];
- return localLeaderboardRows();
+ return localRows();
 }
 function leaderboardStatusLabel(view,mode='ready'){
  if(mode==='loading')return view==='validated'?'Loading validated scores...':view==='mine'?'Loading your scores...':'Loading shared scores...';

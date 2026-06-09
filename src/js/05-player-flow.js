@@ -231,8 +231,19 @@ function normalizePlayerTwoPersona(value=''){
 }
 function currentGameSupportsPlayerTwo(){
  const pack=typeof currentGamePack==='function'?currentGamePack():null;
- const gameKey=pack?.metadata?.gameKey||'aurora-galactica';
- return gameKey==='aurora-galactica';
+ return typeof gamePackSupportsPersonaRival==='function'
+  ? gamePackSupportsPersonaRival(pack)
+  : (pack?.metadata?.gameKey||'aurora-galactica')==='aurora-galactica';
+}
+function currentGameSupportsWatchMode(){
+ const pack=typeof currentGamePack==='function'?currentGamePack():null;
+ const supports=typeof gamePackSupportsWatchMode==='function'
+  ? gamePackSupportsWatchMode(pack)
+  : true;
+ const canStart=typeof currentGamePackCanStart==='function'
+  ? currentGamePackCanStart()
+  : (typeof currentGamePackPlayable==='function'?currentGamePackPlayable():true);
+ return !!(supports&&canStart);
 }
 function playerTwoAuthReady(){
  if(window.__platinumHarnessPlayerTwoAuth||window.__auroraHarnessPlayerTwoAuth)return true;
@@ -258,7 +269,9 @@ function playerTwoSelectionState(){
  };
 }
 function selectedWatchPersona(){
- return normalizePlayerTwoPersona(readPref(WATCH_MODE_PERSONA_PREF_KEY)||'advanced');
+ const pack=typeof currentGamePack==='function'?currentGamePack():null;
+ const config=typeof gamePackModalityConfig==='function'?gamePackModalityConfig(pack,'watch'):null;
+ return normalizePlayerTwoPersona(readPref(WATCH_MODE_PERSONA_PREF_KEY)||config?.defaultPersona||'advanced');
 }
 function setWatchPersona(key,opts={}){
  const personaKey=normalizePlayerTwoPersona(key);
@@ -311,6 +324,11 @@ function playerPersonaCardSummary(key='advanced'){
  };
 }
 function armWatchMode(personaKey=selectedWatchPersona(),opts={}){
+ if(!currentGameSupportsWatchMode()){
+  if(typeof showToast==='function')showToast('Watch Mode is unavailable for this cabinet.');
+  if(typeof logEvent==='function')logEvent('watch_mode_blocked',{source:opts.source||'ui',reason:'unsupported_game'});
+  return '';
+ }
  const key=setWatchPersona(personaKey,{silent:1,source:opts.source||'ui'});
  const scope=setWatchScope(opts.scope||selectedWatchScope(),{silent:1,source:opts.source||'ui'});
  setPlayerTwoSelection(false,{silent:1,source:opts.source||'ui'});
@@ -370,9 +388,10 @@ function cyclePlayerTwoPersona(dir=1,opts={}){
  return setPlayerTwoPersona(next,opts);
 }
 function blockPlayerTwoSelection(source='ui'){
- setAccountNotice('Sign in to choose 2 PLAYERS with a persona rival.');
- if(typeof openAccountPanel==='function')openAccountPanel();
- if(typeof showToast==='function')showToast('Sign in to choose 2 PLAYERS.');
+ const supported=currentGameSupportsPlayerTwo();
+ setAccountNotice(supported?'Sign in to choose 2 PLAYERS with a persona rival.':'2UP persona Rival is not available for this cabinet.');
+ if(supported&&typeof openAccountPanel==='function')openAccountPanel();
+ if(typeof showToast==='function')showToast(supported?'Sign in to choose 2 PLAYERS.':'2UP persona Rival is not available for this cabinet.');
  if(typeof logEvent==='function')logEvent('player_two_mode_blocked',{source,reason:currentGameSupportsPlayerTwo()?'sign_in_required':'unsupported_game'});
 }
 function setPlayerTwoSelection(enabled,opts={}){
@@ -971,7 +990,9 @@ function currentPilotCardState(){
  };
 }
 function buildPlayerTwoStartHtml(){
- if(!currentGameSupportsPlayerTwo())return '';
+ const supportsPlayerTwo=currentGameSupportsPlayerTwo();
+ const supportsWatch=currentGameSupportsWatchMode();
+ if(!supportsPlayerTwo&&!supportsWatch)return '';
  const state=playerTwoSelectionState();
  const watchPersona=selectedWatchPersona();
  const watchLabel=watchModePersonaLabel(watchPersona);
@@ -979,15 +1000,17 @@ function buildPlayerTwoStartHtml(){
  const watchScopeLabel=watchModeScopeLabel(watchScope);
  const watchScopeMeta=watchScope==='challenges'?'CHALLENGING STAGES ONLY':'GAME FLOW';
  const p2Locked=!state.signedIn;
+ const p2Unsupported=!supportsPlayerTwo;
  const mode1Class=`playerModeOption playerModeSolo${state.selected?'':' isSelected'}`;
- const mode2Class=`playerModeOption playerModeTwo${state.selected?' isSelected':''}${p2Locked?' isLocked':''}`;
- const personaClass=`playerModePersona${state.selected?' isActive':''}${p2Locked?' isLocked':''}`;
- const p2Status=p2Locked?'SIGN IN REQUIRED':`${state.personaInitials} RIVAL`;
- const personaMeta=p2Locked?'LOCKED UNTIL SIGN-IN':'HUMAN SCORE ONLY';
- const personaHint='<span class="k">1</span>/<span class="k">2</span> START   <span class="k">W</span> WATCH';
+ const mode2Class=`playerModeOption playerModeTwo${state.selected?' isSelected':''}${p2Locked||p2Unsupported?' isLocked':''}`;
+ const personaClass=`playerModePersona${state.selected?' isActive':''}${p2Locked||p2Unsupported?' isLocked':''}`;
+ const p2Status=p2Unsupported?'AURORA ONLY':p2Locked?'SIGN IN REQUIRED':`${state.personaInitials} RIVAL`;
+ const personaMeta=p2Unsupported?'RIVAL UNSUPPORTED':p2Locked?'LOCKED UNTIL SIGN-IN':'HUMAN SCORE ONLY';
+ const personaHint=`<span class="k">1</span>${supportsPlayerTwo?'/<span class="k">2</span>':''} START${supportsWatch?'   <span class="k">W</span> WATCH':''}`;
  const rivalPicker=`<span class="${personaClass}" role="button" tabindex="0" data-player-two-persona="next"><span class="playerModeKey"><b>RIVAL</b><small>PILOT</small></span><span class="playerModeText playerModeStepper"><span class="playerModeArrow" data-player-two-persona="prev">&lt;</span><strong>${state.personaLabel}</strong><span class="playerModeArrow" data-player-two-persona="next">&gt;</span><em>${personaMeta}</em></span></span>`;
- const watchPicker=`<span class="playerModeWatch" role="button" tabindex="0" data-watch-mode="1"><span class="playerModeKey"><span class="k">W</span><b>WATCH</b><small>PILOT</small></span><span class="playerModeStack"><span class="playerModeText playerModeStepper"><span class="playerModeArrow" data-watch-persona="prev">&lt;</span><strong>${watchLabel}</strong><span class="playerModeArrow" data-watch-persona="next">&gt;</span><em>SCORE NOT RECORDED</em></span><span class="playerModeText playerModeStepper playerModeScopeStepper"><span class="playerModeArrow" data-watch-scope="prev">&lt;</span><strong>${watchScopeLabel}</strong><span class="playerModeArrow" data-watch-scope="next">&gt;</span><em>${watchScopeMeta}</em></span></span></span>`;
- return `<span class="playerModeSelect${state.selected?' isTwoSelected':' isOneSelected'}${p2Locked?' isPlayerTwoLocked':''}" aria-label="Player mode selection"><span class="${mode1Class}" role="button" tabindex="0" data-player-mode="1"><span class="playerModeKey"><span class="k">1</span><b>1UP</b></span><span class="playerModeText"><strong>1 PLAYER</strong><em>SOLO SCORE</em></span></span><span class="${mode2Class}" role="button" tabindex="0" data-player-mode="2"><span class="playerModeKey"><span class="k">2</span><b>2UP</b></span><span class="playerModeText"><strong>2 PLAYERS</strong><em>${p2Status}</em></span></span>${rivalPicker}${watchPicker}<span class="playerModeHint">${personaHint}</span></span>`;
+ const watchPicker=supportsWatch?`<span class="playerModeWatch" role="button" tabindex="0" data-watch-mode="1"><span class="playerModeKey"><span class="k">W</span><b>WATCH</b><small>PILOT</small></span><span class="playerModeStack"><span class="playerModeText playerModeStepper"><span class="playerModeArrow" data-watch-persona="prev">&lt;</span><strong>${watchLabel}</strong><span class="playerModeArrow" data-watch-persona="next">&gt;</span><em>SCORE NOT RECORDED</em></span><span class="playerModeText playerModeStepper playerModeScopeStepper"><span class="playerModeArrow" data-watch-scope="prev">&lt;</span><strong>${watchScopeLabel}</strong><span class="playerModeArrow" data-watch-scope="next">&gt;</span><em>${watchScopeMeta}</em></span></span></span>`:'';
+ const playerTwoHtml=`<span class="${mode2Class}" role="button" tabindex="0" data-player-mode="2"><span class="playerModeKey"><span class="k">2</span><b>2UP</b></span><span class="playerModeText"><strong>2 PLAYERS</strong><em>${p2Status}</em></span></span>${rivalPicker}`;
+ return `<span class="playerModeSelect${state.selected?' isTwoSelected':' isOneSelected'}${p2Locked||p2Unsupported?' isPlayerTwoLocked':''}" aria-label="Player mode selection"><span class="${mode1Class}" role="button" tabindex="0" data-player-mode="1"><span class="playerModeKey"><span class="k">1</span><b>1UP</b></span><span class="playerModeText"><strong>1 PLAYER</strong><em>SOLO SCORE</em></span></span>${playerTwoHtml}${watchPicker}<span class="playerModeHint">${personaHint}</span></span>`;
 }
 function buildPlayerTwoResultsHtml(){
  const p2=S.playerTwo;

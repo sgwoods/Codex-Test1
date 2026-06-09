@@ -14,11 +14,12 @@ function platformGameTitle(gameKey='',fallback=''){
   const resolved=String(scoreGameTitleForKey(normalizedKey,normalizedFallback)||'').trim();
   if(resolved)return resolved;
  }
+ if(normalizedFallback)return normalizedFallback;
  if(typeof currentScoreStorageGameTitle==='function'){
   const active=String(currentScoreStorageGameTitle()||'').trim();
   if(active)return active;
  }
- return normalizedFallback||'this game';
+ return 'this game';
 }
 function topScoreSavedLocallyPromptText(gameTitle=''){
  const label=platformGameTitle('',gameTitle);

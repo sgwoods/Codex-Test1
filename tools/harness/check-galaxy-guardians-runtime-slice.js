@@ -39,12 +39,27 @@ async function main(){
     const firstDiveEvent = timingState.events.find(event => event.type === 'alien_dive_start');
     const flagshipDiveEvent = timingState.events.find(event => event.type === 'flagship_dive_start');
     const escortJoinEvent = timingState.events.find(event => event.type === 'escort_join');
+    const wrapState = window.createGalaxyGuardiansRuntimeState({ stage: 1, ships: 3, seed: 1979 });
+    wrapState.player.inv = 999;
+    const wrapScout = wrapState.aliens.find(candidate => candidate.role === 'scout');
+    wrapScout.mode = 'diving';
+    wrapScout.diveT = 0;
+    wrapScout.diveStartX = wrapScout.x;
+    wrapScout.diveStartY = profile.rules.playfieldHeight + profile.rules.bottomExitPadding + 1;
+    wrapScout.diveSide = wrapScout.x < profile.rules.playfieldWidth / 2 ? -1 : 1;
+    wrapScout.escorts = 0;
+    wrapScout.linkedTo = '';
+    wrapScout.escortSlot = 0;
+    wrapScout.y = profile.rules.playfieldHeight + profile.rules.bottomExitPadding + 1;
+    window.stepGalaxyGuardiansRuntime(wrapState, 1/60, {});
+    const forcedWrap = window.summarizeGalaxyGuardiansRuntime(wrapState);
     return {
       profile,
       initial,
       firstShot: !!firstShot,
       secondShotBlocked,
       summary,
+      forcedWrap,
       visualCatalogKeys: Object.keys(visualCatalog),
       audioCueCatalogKeys: Object.keys(audioCueCatalog),
       runtimeAlienCatalog: profile?.alienCatalog || {},
@@ -140,8 +155,12 @@ async function main(){
   if(JSON.stringify(result.summary.playablePreviewReleaseChannels || []) !== JSON.stringify(['development','production beta','production'])){
     fail('Galaxy Guardians runtime summary lost the expected hosted preview channels', result);
   }
+  const runtimeAudioCueIds = new Set([
+    ...(result.summary.audioCueIds || []),
+    ...(result.forcedWrap?.audioCueIds || [])
+  ]);
   for(const cueId of ['guardians-formation-pulse','guardians-player-single-shot','guardians-scout-dive','guardians-flagship-dive','guardians-escort-join','guardians-wrap-return']){
-    if(!result.summary.audioCueIds.includes(cueId)){
+    if(!runtimeAudioCueIds.has(cueId)){
       fail(`Galaxy Guardians runtime did not emit owned audio cue id ${cueId}`, result);
     }
   }
@@ -151,7 +170,8 @@ async function main(){
     alienCount: result.summary.alienCount,
     liveRoles: result.summary.liveRoles,
     visualIds: result.summary.visualIds,
-    audioCueIds: result.summary.audioCueIds,
+    audioCueIds: Array.from(runtimeAudioCueIds),
+    forcedWrapEventTypes: result.forcedWrap?.eventTypes || [],
     eventTypes: result.summary.eventTypes,
     timing: result.timing,
     score: result.summary.score

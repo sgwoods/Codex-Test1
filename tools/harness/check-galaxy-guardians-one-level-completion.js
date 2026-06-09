@@ -24,7 +24,14 @@ async function main(){
         }
       ]);
       if(!window.__galagaHarness__?.start) throw new Error('missing harness start entrypoint');
-      window.__galagaHarness__.start({ autoVideo: false, stage: 1, ships: 3, seed: 49062 });
+      window.__galagaHarness__.start({
+        autoVideo: false,
+        gameKey: 'galaxy-guardians-preview',
+        forceAurora: false,
+        stage: 1,
+        ships: 3,
+        seed: 49062
+      });
     });
 
     await page.waitForTimeout(180);

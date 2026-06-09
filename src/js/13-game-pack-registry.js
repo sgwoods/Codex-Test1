@@ -35,6 +35,34 @@ function packIsPlayable(pack=null){
  return !!(pack&&pack.metadata?.playable!==0&&pack.metadata?.playable!==false);
 }
 
+function gamePackModalityConfig(packOrKey=currentGamePack(),modality=''){
+ const pack=typeof packOrKey==='string'?getGamePack(packOrKey):packOrKey;
+ const key=String(modality||'').trim();
+ if(!pack||!key)return Object.freeze({enabled:0});
+ const modalities=pack.modalities||{};
+ const config=modalities[key]||{};
+ const caps=pack.capabilities||{};
+ const fallbackEnabled=key==='watch'
+  ? caps.supportsWatchMode
+  : key==='personaRival'
+  ? caps.supportsPersonaRival
+  : undefined;
+ const enabled=config.enabled!==undefined?config.enabled:fallbackEnabled;
+ return Object.freeze(Object.assign({enabled:!!enabled},config));
+}
+
+function gamePackSupportsModality(packOrKey=currentGamePack(),modality=''){
+ return !!gamePackModalityConfig(packOrKey,modality).enabled;
+}
+
+function gamePackSupportsWatchMode(packOrKey=currentGamePack()){
+ return gamePackSupportsModality(packOrKey,'watch');
+}
+
+function gamePackSupportsPersonaRival(packOrKey=currentGamePack()){
+ return gamePackSupportsModality(packOrKey,'personaRival');
+}
+
 function gamePackVersionLine(pack=currentGamePack()){
  const meta=pack?.metadata||{};
  return String(meta.versionLine||meta.version||'--');
@@ -554,6 +582,10 @@ window.currentGamePack=currentGamePack;
 window.currentGamePackKey=currentGamePackKey;
 window.currentGamePackPlayable=currentGamePackPlayable;
 window.packIsPlayable=packIsPlayable;
+window.gamePackModalityConfig=gamePackModalityConfig;
+window.gamePackSupportsModality=gamePackSupportsModality;
+window.gamePackSupportsWatchMode=gamePackSupportsWatchMode;
+window.gamePackSupportsPersonaRival=gamePackSupportsPersonaRival;
 window.gamePackVersionLine=gamePackVersionLine;
 window.gamePackReleaseTrackLine=gamePackReleaseTrackLine;
 window.gamePackRuntimeStatusLine=gamePackRuntimeStatusLine;

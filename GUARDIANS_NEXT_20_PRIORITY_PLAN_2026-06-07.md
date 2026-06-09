@@ -88,3 +88,10 @@ execution order should be:
 1. make Watch first-class for Guardians
 2. keep Rival explicitly disabled but correctly capability-modeled
 3. once Watch is stable, return to the stage-2 and stage-5 gameplay queue above
+
+## New Release-Blocking Platform Note
+
+- High-score surfaces while playing `Galaxy Guardians` must be owned and labeled
+  as `Galaxy Guardians`, not `Aurora Galactica`. There is a current bug where
+  the high-score path can still read as Aurora-shaped during Guardians play.
+  Fix this before any stronger Guardians release positioning.
