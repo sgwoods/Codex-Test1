@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactType": "application-artifact-conformance-status",
-  "generatedAt": "2026-06-07T15:07:05.612Z",
-  "commit": "41688d988",
-  "branch": "main",
+  "generatedAt": "2026-06-10T10:42:38.041Z",
+  "commit": "d9005537",
+  "branch": "codex/macbook-pro-1.4.1-guardians-integration",
   "dirty": true,
   "sources": {
     "spriteModel": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1.json",
@@ -17,12 +17,12 @@
     "audioGap": "reference-artifacts/analyses/aurora-audio-event-gap/latest.json",
     "visualLook": "reference-artifacts/analyses/aurora-visual-look-conformance/latest.json",
     "releaseDashboard": "reference-artifacts/analyses/release-conformance-dashboard/latest.json",
-    "qualityReport": "reference-artifacts/analyses/quality-conformance/2026-06-05-b55328e21/report.json"
+    "qualityReport": "reference-artifacts/analyses/quality-conformance/2026-05-24-ff249bba/report.json"
   },
   "summary": {
     "rowCount": 14,
     "numericRowCount": 13,
-    "averageScore10": 7.46,
+    "averageScore10": 7.75,
     "weakestRow": "impact-explosion-visual-feedback",
     "spriteCatalogProxyScore10": 6.22,
     "spriteRuntimeCanvasScore10": 6.21,
@@ -165,8 +165,8 @@
       "targetFilledCells": 574,
       "litPixels": 1248,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/player-fighter.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-player-fighter-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-player-fighter.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-player-fighter-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-player-fighter.png",
       "canvasClip": {
         "x": 636,
         "y": 1459,
@@ -202,8 +202,8 @@
       "targetFilledCells": 830,
       "litPixels": 2496,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/dual-fighter.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-dual-fighter-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-dual-fighter.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-dual-fighter-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-dual-fighter.png",
       "canvasClip": {
         "x": 572,
         "y": 1459,
@@ -239,8 +239,8 @@
       "targetFilledCells": 427,
       "litPixels": 1168,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/bee-line.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-zako-dive-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-zako-dive.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-zako-dive-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-zako-dive.png",
       "canvasClip": {
         "x": 620,
         "y": 634,
@@ -281,8 +281,8 @@
       "targetFilledCells": 589,
       "litPixels": 1728,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/but-line.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-butterfly-escort-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-butterfly-escort.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-butterfly-escort-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-butterfly-escort.png",
       "canvasClip": {
         "x": 612,
         "y": 630,
@@ -323,8 +323,8 @@
       "targetFilledCells": 325,
       "litPixels": 1184,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/boss-line.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-command-boss-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-command-boss-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-command-boss.png",
       "canvasClip": {
         "x": 596,
         "y": 618,
@@ -365,8 +365,8 @@
       "targetFilledCells": 830,
       "litPixels": 1248,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/rogue-fighter.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-dual-fighter-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-dual-fighter.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-dual-fighter-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-dual-fighter.png",
       "canvasClip": {
         "x": 608,
         "y": 626,
@@ -407,8 +407,8 @@
       "targetFilledCells": 490,
       "litPixels": 464,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-dragonfly.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-specialty-dive-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-specialty-dive-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png",
       "canvasClip": {
         "x": 620,
         "y": 634,
@@ -449,8 +449,8 @@
       "targetFilledCells": 490,
       "litPixels": 608,
       "cropImage": "reference-artifacts/analyses/aurora-runtime-sprite-conformance/latest-crops/challenge-mosquito.png",
-      "modelImage": "reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-specialty-dive-model.png",
-      "sourcePixelTarget": "reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png",
+      "modelImage": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/model-0.1/galaga-specialty-dive-model.png",
+      "sourcePixelTarget": "private-artifacts/repo-mirror/reference-artifacts/analyses/galaga-reference-sprites/pixel-targets-0.1/galaga-specialty-dive.png",
       "canvasClip": {
         "x": 620,
         "y": 634,
@@ -3466,25 +3466,25 @@
     {
       "id": "audio-cue-assets",
       "surface": "Audio cues: runtime cue assets vs Galaga-family references",
-      "current": "7/10",
+      "current": "7.3/10",
       "target": ">=7.5",
-      "score10": 7,
+      "score10": 7.3,
       "confidence": "medium-high",
       "status": "Primary user-experience gap",
       "measurement": "21 cue/event comparisons, 31 segment-role comparisons, semantic score 9.8/10, highest risk challengePerfect 7/10.",
-      "evidence": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json; reference-artifacts/analyses/aurora-audio-event-gap/latest.json; reference-artifacts/analyses/quality-conformance/2026-06-05-b55328e21/report.json",
+      "evidence": "reference-artifacts/analyses/aurora-audio-conformance-lab-v2/latest.json; reference-artifacts/analyses/aurora-audio-event-gap/latest.json; reference-artifacts/analyses/quality-conformance/2026-05-24-ff249bba/report.json",
       "next": "Tune the highest segment-level gap next: challengePerfect onset. Rerun audio comparison and event-gap analysis after the change."
     },
     {
       "id": "audio-event-alignment",
       "surface": "Audio timing and event alignment",
-      "current": "6/9 checks passed",
+      "current": "9/9 checks passed",
       "target": "All event-alignment checks pass with low drift",
-      "score10": 6.67,
+      "score10": 10,
       "confidence": "medium",
       "status": "Guardrail measured in quality conformance",
       "measurement": "Worst current delta 6.31 ms; worst drift from baseline 0 ms.",
-      "evidence": "reference-artifacts/analyses/quality-conformance/2026-06-05-b55328e21/report.json",
+      "evidence": "reference-artifacts/analyses/quality-conformance/2026-05-24-ff249bba/report.json",
       "next": "Keep event alignment coupled to the cue-contract promotion pass so timing does not regress while changing source clips."
     },
     {
@@ -3508,7 +3508,7 @@
       "confidence": "medium",
       "status": "Split from generic UI shell before final gate",
       "measurement": "12 surface guardrails in latest quality report; visual scorer weakest shell surface Developer/settings popup surface 7.1/10.",
-      "evidence": "reference-artifacts/analyses/release-conformance-dashboard/latest.json; reference-artifacts/analyses/quality-conformance/2026-06-05-b55328e21/report.json; reference-artifacts/analyses/aurora-visual-look-conformance/latest.json",
+      "evidence": "reference-artifacts/analyses/release-conformance-dashboard/latest.json; reference-artifacts/analyses/quality-conformance/2026-05-24-ff249bba/report.json; reference-artifacts/analyses/aurora-visual-look-conformance/latest.json",
       "next": "Split iconography, dock-button affordance, and popup typography into separate target rows once we have icon/font-specific captures."
     },
     {
@@ -3526,9 +3526,9 @@
     {
       "id": "level-background-encounter-shape",
       "surface": "Stage backgrounds, level arc, and encounter shape",
-      "current": "8.6/10",
+      "current": "8.8/10",
       "target": ">=8.8",
-      "score10": 8.6,
+      "score10": 8.8,
       "confidence": "medium",
       "status": "Long-play gameplay-quality gate",
       "measurement": "Release gate tracks stage distinctiveness, challenge identity, pressure curve, reward/rescue layering, and learning/mastery windows.",
