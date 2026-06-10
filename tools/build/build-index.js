@@ -116,6 +116,10 @@ const SPRITE_CONFORMANCE_VARIATION_PLAN = path.join(ROOT, 'reference-artifacts',
 const PERSONA_PERFORMANCE_DISTRIBUTION = path.join(ROOT, 'reference-artifacts', 'analyses', 'persona-performance-distribution', 'latest.json');
 const CATALOG_MEDIA_SOURCE_PATHS = new Set();
 let ACTIVE_SOURCE_BLOB_BASE = 'https://github.com/sgwoods/Codex-Test1/blob/main/';
+const PUBLIC_SECURITY_META = [
+  '<meta http-equiv="Content-Security-Policy" content="default-src \'self\'; base-uri \'self\'; object-src \'none\'; script-src \'self\' \'unsafe-inline\' https://www.youtube.com https://s.ytimg.com; style-src \'self\' \'unsafe-inline\'; img-src \'self\' data: blob: https:; media-src \'self\' blob: https:; connect-src \'self\' https://*.supabase.co wss://*.supabase.co https://api.web3forms.com; frame-src \'self\' https://www.youtube.com https://www.youtube-nocookie.com; worker-src \'self\' blob:; form-action \'self\' https://api.web3forms.com; upgrade-insecure-requests">',
+  '<meta name="referrer" content="strict-origin-when-cross-origin" />'
+].join('\n');
 const GENERATED_BUILD_PATHS = new Set([
   'dist/dev/index.html',
   'dist/dev/release-dashboard.html',
@@ -293,6 +297,69 @@ function isPublicSafePublishedAssetHref(value=''){
   const normalized = normalizeAssetSourcePath(value);
   if(!normalized) return false;
   return !normalized.startsWith('assets/reference-audio/');
+}
+
+function stripPublicPrivateReferenceAudioPaths(text){
+  const source = String(text || '');
+  return source.replace(
+    /assets\/reference-audio\/[^\s"'&<>)\\]+\.(?:m4a|mp3|wav|ogg)/g,
+    (match, offset) => source.slice(Math.max(0, offset - 4), offset) === 'src/' ? match : ''
+  );
+}
+
+function stripPublicHarnessDebugSurface(text){
+  let source = String(text || '');
+  const startNeedle = 'window.__galagaHarness__={';
+  const endNeedle = 'window.__platinumHarness__=window.__galagaHarness__;';
+  const start = source.indexOf(startNeedle);
+  const end = start >= 0 ? source.indexOf(endNeedle, start) : -1;
+  if(start >= 0 && end >= 0){
+    const endIndex = end + endNeedle.length;
+    source = `${source.slice(0, start)}// Browser harness exports omitted from public lanes.\n${source.slice(endIndex).replace(/^\s*\n/, '')}`;
+  }
+  return source
+    .replace(/\n?window\.clearRuntimeLoopFault=clearRuntimeLoopFault;\n/g, '\n')
+    .replace(/\n?window\.armRuntimeLoopCrash=armRuntimeLoopCrash;\n/g, '\n');
+}
+
+function stripPublicClientScoreWriteSurface(text){
+  const source = String(text || '');
+  const startNeedle = 'async function submitScoreRemote(entry){';
+  const endNeedle = 'function submitGameOverScore(){';
+  const start = source.indexOf(startNeedle);
+  const end = start >= 0 ? source.indexOf(endNeedle, start) : -1;
+  if(start < 0 || end < 0) return source;
+  const replacement = `async function submitScoreRemote(entry){
+ if(entry&&typeof recordSystemIssue==='function'){
+  recordSystemIssue('score_submit_blocked','Remote score submit disabled in public lanes pending server-side validation',{
+   score:+entry.score|0,
+   stage:+entry.stage|0,
+   initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3),
+   releaseChannel:RELEASE_CHANNEL
+  },{level:'info'});
+ }
+ setLeaderboardStatus('Saved locally · online submit disabled pending server validation');
+ syncLeaderboardUi();
+ return 0;
+}
+`;
+  return `${source.slice(0, start)}${replacement}${source.slice(end)}`;
+}
+
+function stripPublicAccountReviewSurface(text){
+  return String(text || '')
+    .replace(/"auth"\s*:\s*\{\s*"nonProductionTestPilotEmails"\s*:\s*\[[\s\S]*?\]\s*,\s*"nonProductionTestPilotUserIds"\s*:\s*\[[\s\S]*?\]\s*\}/g, '"auth":{"nonProductionTestPilotEmails":[],"nonProductionTestPilotUserIds":[]}')
+    .replace(/const TEST_ACCOUNT_EMAIL='[^']*';/g, "const TEST_ACCOUNT_EMAIL='';")
+    .replace(/const TEST_ACCOUNT_USER_ID='[^']*';/g, "const TEST_ACCOUNT_USER_ID='';")
+    .replace(/const TEST_ACCOUNT_EMAILS=\[[^\]]*\];/g, 'const TEST_ACCOUNT_EMAILS=[];')
+    .replace(/const TEST_ACCOUNT_USER_IDS=\[[^\]]*\];/g, 'const TEST_ACCOUNT_USER_IDS=[];')
+    .replace(/const NON_PRODUCTION_LANE=RELEASE_CHANNEL!=='production';/g, 'const NON_PRODUCTION_LANE=false;');
+}
+
+function addPublicSecurityMeta(html){
+  const source = String(html || '');
+  if(source.includes('http-equiv="Content-Security-Policy"')) return source;
+  return source.replace(/<head>/i, `<head>\n${PUBLIC_SECURITY_META}`);
 }
 
 function copyAssetTree(srcDir, destDir, rootDir = srcDir){
@@ -548,6 +615,20 @@ function loadReleaseManifest(buildVersion = pkg.version){
     platform,
     applications: normalizedApplications,
     development: normalizeDevelopmentVersion(raw.development, buildVersion)
+  };
+}
+
+function publicSafeReleaseManifest(manifest){
+  const platform = manifest.platform && typeof manifest.platform === 'object'
+    ? { ...manifest.platform }
+    : {};
+  platform.auth = {
+    nonProductionTestPilotEmails: [],
+    nonProductionTestPilotUserIds: []
+  };
+  return {
+    ...manifest,
+    platform
   };
 }
 
@@ -3427,7 +3508,7 @@ function renderMarkdown(md='', options = {}){
 
 function renderSourceDocSection(section){
   const file = path.join(ROOT, section.file);
-  const source = read(file);
+  const source = stripPublicPrivateReferenceAudioPaths(read(file));
   const body = renderMarkdown(source, {
     mermaid: section.renderMode === 'mermaid-markdown'
   });
@@ -6148,7 +6229,30 @@ function renderChallengeTargetCoverageRows(report){
   `).join('\n');
 }
 
+function publicSafeReferenceClipEntry(entry){
+  if(!entry || typeof entry !== 'object') return entry;
+  if(!entry.referenceClip || isPublicSafePublishedAssetHref(entry.referenceClip)) return entry;
+  const { referenceClip, ...rest } = entry;
+  return {
+    ...rest,
+    privateReferenceClip: true,
+    referenceClipPolicy: 'private-companion-store',
+    referenceClipNote: PRIVATE_COMPANION_STORE_NOTE
+  };
+}
+
+function publicSafeApplicationGuide(guide){
+  const source = guide && typeof guide === 'object' ? guide : {};
+  return {
+    ...source,
+    audioContexts: (source.audioContexts || []).map(publicSafeReferenceClipEntry),
+    audioEventMatrix: (source.audioEventMatrix || []).map(publicSafeReferenceClipEntry),
+    comparisonSets: (source.comparisonSets || []).map(publicSafeReferenceClipEntry)
+  };
+}
+
 function buildApplicationGuide(buildInfo, latestNote, guide){
+  guide = publicSafeApplicationGuide(guide);
   const template = read(APPLICATION_GUIDE_TEMPLATE);
   const tocItems = [
     { id: 'audio-event-matrix', title: 'Audio Event Matrix' },
@@ -7933,6 +8037,7 @@ function build(options = {}){
   const buildReleaseChannel = buildLane === 'production' ? 'production' : 'development';
   const buildVersion = normalizeVersionForChannel(pkg.version, buildReleaseChannel);
   const releaseManifest = loadReleaseManifest(buildVersion);
+  const buildReleaseManifest = buildLane === 'dev' ? releaseManifest : publicSafeReleaseManifest(releaseManifest);
   const buildVersionLine = versionLineForChannel(buildVersion, buildReleaseChannel, releaseManifest);
   const buildDirtyFiles = git('status --porcelain', '')
     .split('\n')
@@ -7977,7 +8082,7 @@ function build(options = {}){
   const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://iddyodcknmxupavnuuwg.supabase.co';
   const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY || 'sb_publishable_306xKY5fuS0jVwkm2bxaog_OU5uFoy7';
   const web3FormsAccessKey = process.env.WEB3FORMS_ACCESS_KEY || '';
-  const arcadeMusicPlaylistId = releaseManifest.platform?.media?.arcadeMusicPlaylistId || '';
+  const arcadeMusicPlaylistId = buildReleaseManifest.platform?.media?.arcadeMusicPlaylistId || '';
   const parseListEnv = (value) => String(value || '')
     .split(',')
     .map((item) => item.trim())
@@ -7985,15 +8090,15 @@ function build(options = {}){
   const testAccountEmails = Array.from(new Set([
     ...parseListEnv(process.env.TEST_ACCOUNT_EMAILS).map((email) => email.toLowerCase()),
     ...parseListEnv(process.env.TEST_ACCOUNT_EMAIL).map((email) => email.toLowerCase()),
-    ...(Array.isArray(releaseManifest.platform?.auth?.nonProductionTestPilotEmails)
-      ? releaseManifest.platform.auth.nonProductionTestPilotEmails.map((email) => String(email || '').trim().toLowerCase()).filter(Boolean)
+    ...(Array.isArray(buildReleaseManifest.platform?.auth?.nonProductionTestPilotEmails)
+      ? buildReleaseManifest.platform.auth.nonProductionTestPilotEmails.map((email) => String(email || '').trim().toLowerCase()).filter(Boolean)
       : [])
   ]));
   const testAccountUserIds = Array.from(new Set([
     ...parseListEnv(process.env.TEST_ACCOUNT_USER_IDS),
     ...parseListEnv(process.env.TEST_ACCOUNT_USER_ID),
-    ...(Array.isArray(releaseManifest.platform?.auth?.nonProductionTestPilotUserIds)
-      ? releaseManifest.platform.auth.nonProductionTestPilotUserIds.map((id) => String(id || '').trim()).filter(Boolean)
+    ...(Array.isArray(buildReleaseManifest.platform?.auth?.nonProductionTestPilotUserIds)
+      ? buildReleaseManifest.platform.auth.nonProductionTestPilotUserIds.map((id) => String(id || '').trim()).filter(Boolean)
       : [])
   ]));
   const testAccountEmail = testAccountEmails[0] || '';
@@ -8010,15 +8115,15 @@ function build(options = {}){
     BUILD_RELEASE_ET: buildReleaseEt,
     BUILD_STATE: buildState,
     BUILD_PUBLIC_ARTIFACT_BOUNDARY_ENABLED: publicArtifactBoundaryEnabled ? 'true' : 'false',
-    BUILD_PRODUCT_NAME_JSON: JSON.stringify(releaseManifest.product),
-    BUILD_PLATFORM_INFO_JSON: JSON.stringify(releaseManifest.platform),
-    BUILD_APPLICATIONS_INFO_JSON: JSON.stringify(releaseManifest.applications),
+    BUILD_PRODUCT_NAME_JSON: JSON.stringify(buildReleaseManifest.product),
+    BUILD_PLATFORM_INFO_JSON: JSON.stringify(buildReleaseManifest.platform),
+    BUILD_APPLICATIONS_INFO_JSON: JSON.stringify(buildReleaseManifest.applications),
     CONFORMANCE_DASHBOARD_SUMMARY_ENCODED: encodeURIComponent(JSON.stringify(conformanceDashboardSummary)),
     SUPABASE_URL: supabaseUrl,
     SUPABASE_ANON_KEY: supabaseAnonKey,
     WEB3FORMS_ACCESS_KEY: web3FormsAccessKey,
     ARCADE_MUSIC_PLAYLIST_ID_JSON: JSON.stringify(arcadeMusicPlaylistId),
-    ARCADE_MUSIC_PLAYLIST_LABEL: String(releaseManifest.platform?.media?.arcadeMusicPlaylistLabel || 'Platform default'),
+    ARCADE_MUSIC_PLAYLIST_LABEL: String(buildReleaseManifest.platform?.media?.arcadeMusicPlaylistLabel || 'Platform default'),
     TEST_ACCOUNT_EMAIL: testAccountEmail,
     TEST_ACCOUNT_USER_ID: testAccountUserId,
     TEST_ACCOUNT_EMAILS_JSON: JSON.stringify(testAccountEmails),
@@ -8038,8 +8143,11 @@ function build(options = {}){
     .map(file => `// Source: src/js/${file}\n${read(path.join(SCRIPT_DIR, file)).trimEnd()}`)
     .join('\n\n')
     .replace(/\r\n/g, '\n');
-  const builtScript = fillBuildTokens(`${sharedReplayStore}\n\n${script}`, tokens)
+  const rawBuiltScript = fillBuildTokens(`${sharedReplayStore}\n\n${script}`, tokens)
     .trimEnd();
+  const builtScript = buildLane === 'dev'
+    ? rawBuiltScript
+    : stripPublicAccountReviewSurface(stripPublicClientScoreWriteSurface(stripPublicHarnessDebugSurface(stripPublicPrivateReferenceAudioPaths(rawBuiltScript))));
 
   const html = fillBuildTokens(template, tokens)
     .replace('{{INLINE_STYLES}}', `/* Generated from src/styles.css */\n${styles}`)
@@ -8047,7 +8155,7 @@ function build(options = {}){
     .replace('{{INLINE_SCRIPT}}', `// Generated from src/js/*.js\n${builtScript}`);
 
   const buildInfo = {
-    product: releaseManifest.product,
+    product: buildReleaseManifest.product,
     version: buildVersion,
     versionLine: buildVersionLine,
     versionScheme: buildVersionLine !== buildVersion ? 'hosted-dev-increment' : 'semver',
@@ -8063,11 +8171,15 @@ function build(options = {}){
     dirtyFiles: buildDirtyFiles,
     builtAtUtc: buildUtc,
     builtAtEt: buildReleaseEt,
-    platform: releaseManifest.platform,
-    applications: releaseManifest.applications,
+    platform: buildReleaseManifest.platform,
+    applications: buildReleaseManifest.applications,
     development: releaseManifest.development,
     supabaseConfigured: !!(supabaseUrl && supabaseAnonKey),
     latestReleaseNote: latestNote
+  };
+  const writeLaneHtml = (file, pageHtml) => {
+    const output = buildLane === 'dev' ? pageHtml : addPublicSecurityMeta(pageHtml);
+    fs.writeFileSync(file, output.endsWith('\n') ? output : `${output}\n`);
   };
   const ingestionDashboardData = decorateIngestionDashboardData(ingestionDashboard, {
     releaseLane: buildReleaseChannel,
@@ -8078,9 +8190,9 @@ function build(options = {}){
     rawArtifactBase: `https://raw.githubusercontent.com/sgwoods/Codex-Test1/${buildCommit}/`
   });
 
-  fs.writeFileSync(out.index, html.endsWith('\n') ? html : `${html}\n`);
-  fs.writeFileSync(out.dashboard, buildReleaseDashboard(buildInfo, latestNote, releaseDashboard, releaseNotes));
-  fs.writeFileSync(out.conformanceDashboard, buildConformanceDashboardHtml(conformanceDashboardData, {
+  writeLaneHtml(out.index, html);
+  writeLaneHtml(out.dashboard, buildReleaseDashboard(buildInfo, latestNote, releaseDashboard, releaseNotes));
+  writeLaneHtml(out.conformanceDashboard, buildConformanceDashboardHtml(conformanceDashboardData, {
     title: 'Aurora Conformance Dashboard',
     subtitle: 'Read-only release view of the current conformance plan, release gates, ingestion evidence, measurement debt, and highest-value next investments.',
     gameHref: 'index.html',
@@ -8101,14 +8213,14 @@ function build(options = {}){
   }));
   fs.writeFileSync(out.conformanceDashboardData, JSON.stringify(conformanceDashboardData, null, 2) + '\n');
   const publicProjectPageHtml = buildPublicProjectPage(buildInfo, latestNote, releaseDashboard);
-  fs.writeFileSync(out.publicProjectPage, publicProjectPageHtml);
+  writeLaneHtml(out.publicProjectPage, publicProjectPageHtml);
   const releaseNotesPageHtml = buildReleaseNotesPage(buildInfo, latestNote, releaseNotes);
-  fs.writeFileSync(out.releaseNotesPage, releaseNotesPageHtml);
+  writeLaneHtml(out.releaseNotesPage, releaseNotesPageHtml);
   // Keep the historical filename, but drive linked docs through a fresh route.
-  fs.writeFileSync(out.releaseNotesAliasPage, releaseNotesPageHtml);
-  fs.writeFileSync(out.whitePaper, buildWhitePaperGuide(buildInfo, latestNote, whitePaperGuide));
+  writeLaneHtml(out.releaseNotesAliasPage, releaseNotesPageHtml);
+  writeLaneHtml(out.whitePaper, buildWhitePaperGuide(buildInfo, latestNote, whitePaperGuide));
   const overviewSlidesData = buildProjectOverviewSlidesData(buildInfo, latestNote, projectOverviewSlides, whitePaperMeta);
-  fs.writeFileSync(out.projectOverviewSlides, buildProjectOverviewSlidesPage(
+  writeLaneHtml(out.projectOverviewSlides, buildProjectOverviewSlidesPage(
     buildInfo,
     latestNote,
     projectOverviewSlides,
@@ -8120,11 +8232,11 @@ function build(options = {}){
     fs.mkdirSync(path.dirname(LOCAL_DEV_PUBLIC_PROJECT_PREVIEW), { recursive: true });
     fs.writeFileSync(LOCAL_DEV_PUBLIC_PROJECT_PREVIEW, publicProjectPageHtml);
   }
-  fs.writeFileSync(out.projectGuide, buildProjectGuide(buildInfo, latestNote, projectGuide));
-  fs.writeFileSync(out.applicationGuide, buildApplicationGuide(buildInfo, latestNote, applicationGuide));
-  fs.writeFileSync(out.platinumGuide, buildPlatinumGuide(buildInfo, latestNote, platinumGuide));
-  fs.writeFileSync(out.playerGuide, buildPlayerGuide(buildInfo, latestNote, playerGuide));
-  fs.writeFileSync(out.ingestionDashboard, buildIngestionDashboardHtml(ingestionDashboard, {
+  writeLaneHtml(out.projectGuide, buildProjectGuide(buildInfo, latestNote, projectGuide));
+  writeLaneHtml(out.applicationGuide, buildApplicationGuide(buildInfo, latestNote, applicationGuide));
+  writeLaneHtml(out.platinumGuide, buildPlatinumGuide(buildInfo, latestNote, platinumGuide));
+  writeLaneHtml(out.playerGuide, buildPlayerGuide(buildInfo, latestNote, playerGuide));
+  writeLaneHtml(out.ingestionDashboard, buildIngestionDashboardHtml(ingestionDashboard, {
     releaseLane: buildReleaseChannel,
     buildLabel,
     buildCommit,
@@ -8135,9 +8247,9 @@ function build(options = {}){
   fs.writeFileSync(out.ingestionDashboardData, JSON.stringify(ingestionDashboardData, null, 2) + '\n');
   fs.writeFileSync(out.buildInfo, JSON.stringify(buildInfo, null, 2) + '\n');
   fs.writeFileSync(out.releaseNotes, JSON.stringify({
-    product: releaseManifest.product,
-    platform: releaseManifest.platform,
-    applications: releaseManifest.applications,
+    product: buildReleaseManifest.product,
+    platform: buildReleaseManifest.platform,
+    applications: buildReleaseManifest.applications,
     notes: releaseNotes
   }, null, 2) + '\n');
   if(fs.existsSync(path.join(ROOT, 'export.mov.png'))){
@@ -8148,7 +8260,7 @@ function build(options = {}){
   const copiedCatalogMedia = copyCatalogMediaAssets(assetsOut);
   const assetConformanceDashboard = path.join(assetsOut, 'conformance-dashboard.html');
   const assetConformanceDashboardData = path.join(assetsOut, 'conformance-dashboard-data.json');
-  fs.writeFileSync(assetConformanceDashboard, buildConformanceDashboardHtml(conformanceDashboardData, {
+  writeLaneHtml(assetConformanceDashboard, buildConformanceDashboardHtml(conformanceDashboardData, {
     title: 'Aurora Conformance Dashboard',
     subtitle: 'Read-only release view of the current conformance plan, release gates, ingestion evidence, measurement debt, and highest-value next investments.',
     gameHref: '../index.html',

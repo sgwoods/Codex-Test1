@@ -12,6 +12,10 @@ const { betaFiles } = require('./lane-files');
 
 const BETA_DIR = DIST_BETA;
 const FILES = betaFiles(DIST_DEV).filter(file => file !== 'README.txt');
+const PUBLIC_SECURITY_META = [
+  '<meta http-equiv="Content-Security-Policy" content="default-src \'self\'; base-uri \'self\'; object-src \'none\'; script-src \'self\' \'unsafe-inline\' https://www.youtube.com https://s.ytimg.com; style-src \'self\' \'unsafe-inline\'; img-src \'self\' data: blob: https:; media-src \'self\' blob: https:; connect-src \'self\' https://*.supabase.co wss://*.supabase.co https://api.web3forms.com; frame-src \'self\' https://www.youtube.com https://www.youtube-nocookie.com; worker-src \'self\' blob:; form-action \'self\' https://api.web3forms.com; upgrade-insecure-requests">',
+  '<meta name="referrer" content="strict-origin-when-cross-origin" />'
+].join('\n');
 
 function toBetaVersion(version){
   if(/-beta(?:\.\d+)?$/.test(version)) return version;
@@ -25,7 +29,85 @@ function escapeRegex(value){
   return String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+function stripPublicPrivateReferenceAudioPaths(text){
+  const source = String(text || '');
+  return source.replace(
+    /assets\/reference-audio\/[^\s"'&<>)\\]+\.(?:m4a|mp3|wav|ogg)/g,
+    (match, offset) => source.slice(Math.max(0, offset - 4), offset) === 'src/' ? match : ''
+  );
+}
+
+function stripPublicHarnessDebugSurface(text){
+  let source = String(text || '');
+  const startNeedle = 'window.__galagaHarness__={';
+  const endNeedle = 'window.__platinumHarness__=window.__galagaHarness__;';
+  const start = source.indexOf(startNeedle);
+  const end = start >= 0 ? source.indexOf(endNeedle, start) : -1;
+  if(start >= 0 && end >= 0){
+    const endIndex = end + endNeedle.length;
+    source = `${source.slice(0, start)}// Browser harness exports omitted from public lanes.\n${source.slice(endIndex).replace(/^\s*\n/, '')}`;
+  }
+  return source
+    .replace(/\n?window\.clearRuntimeLoopFault=clearRuntimeLoopFault;\n/g, '\n')
+    .replace(/\n?window\.armRuntimeLoopCrash=armRuntimeLoopCrash;\n/g, '\n');
+}
+
+function stripPublicClientScoreWriteSurface(text){
+  const source = String(text || '');
+  const startNeedle = 'async function submitScoreRemote(entry){';
+  const endNeedle = 'function submitGameOverScore(){';
+  const start = source.indexOf(startNeedle);
+  const end = start >= 0 ? source.indexOf(endNeedle, start) : -1;
+  if(start < 0 || end < 0) return source;
+  const replacement = `async function submitScoreRemote(entry){
+ if(entry&&typeof recordSystemIssue==='function'){
+  recordSystemIssue('score_submit_blocked','Remote score submit disabled in public lanes pending server-side validation',{
+   score:+entry.score|0,
+   stage:+entry.stage|0,
+   initials:sanitizeInitials(entry.initials||'YOU').padEnd(3,'-').slice(0,3),
+   releaseChannel:RELEASE_CHANNEL
+  },{level:'info'});
+ }
+ setLeaderboardStatus('Saved locally · online submit disabled pending server validation');
+ syncLeaderboardUi();
+ return 0;
+}
+`;
+  return `${source.slice(0, start)}${replacement}${source.slice(end)}`;
+}
+
+function stripPublicAccountReviewSurface(text){
+  return String(text || '')
+    .replace(/"auth"\s*:\s*\{\s*"nonProductionTestPilotEmails"\s*:\s*\[[\s\S]*?\]\s*,\s*"nonProductionTestPilotUserIds"\s*:\s*\[[\s\S]*?\]\s*\}/g, '"auth":{"nonProductionTestPilotEmails":[],"nonProductionTestPilotUserIds":[]}')
+    .replace(/const TEST_ACCOUNT_EMAIL='[^']*';/g, "const TEST_ACCOUNT_EMAIL='';")
+    .replace(/const TEST_ACCOUNT_USER_ID='[^']*';/g, "const TEST_ACCOUNT_USER_ID='';")
+    .replace(/const TEST_ACCOUNT_EMAILS=\[[^\]]*\];/g, 'const TEST_ACCOUNT_EMAILS=[];')
+    .replace(/const TEST_ACCOUNT_USER_IDS=\[[^\]]*\];/g, 'const TEST_ACCOUNT_USER_IDS=[];')
+    .replace(/const NON_PRODUCTION_LANE=RELEASE_CHANNEL!=='production';/g, 'const NON_PRODUCTION_LANE=false;');
+}
+
+function publicSafeBetaInfo(info){
+  const platform = info.platform && typeof info.platform === 'object'
+    ? { ...info.platform }
+    : {};
+  platform.auth = {
+    nonProductionTestPilotEmails: [],
+    nonProductionTestPilotUserIds: []
+  };
+  return {
+    ...info,
+    platform
+  };
+}
+
+function addPublicSecurityMeta(html){
+  const source = String(html || '');
+  if(source.includes('http-equiv="Content-Security-Policy"')) return source;
+  return source.replace(/<head>/i, `<head>\n${PUBLIC_SECURITY_META}`);
+}
+
 function buildBetaInfo(sourceInfo){
+  sourceInfo = publicSafeBetaInfo(sourceInfo);
   const betaVersion = toBetaVersion(sourceInfo.version);
   const betaLabel = `${betaVersion}+build.${sourceInfo.buildNumber}.sha.${sourceInfo.shortCommit}.beta`;
   const sourceState = sourceInfo.state || `${sourceInfo.branch || 'main'}@${sourceInfo.shortCommit}${sourceInfo.dirty ? ' dirty' : ' clean'}`;
@@ -68,6 +150,8 @@ function rewriteBetaText(filePath, sourceInfo, betaInfo){
   for(const [pattern, replacement] of replacements){
     text = text.replace(pattern, replacement);
   }
+  text = stripPublicAccountReviewSurface(stripPublicClientScoreWriteSurface(stripPublicHarnessDebugSurface(stripPublicPrivateReferenceAudioPaths(text))));
+  if(/\.html$/i.test(filePath)) text = addPublicSecurityMeta(text);
   fs.writeFileSync(filePath, text);
 }
 
@@ -97,6 +181,7 @@ if(fs.existsSync(DEV_BUILD_INFO)){
   rewriteBetaText(path.join(BETA_DIR, 'player-guide.html'), sourceInfo, betaInfo);
   rewriteBetaText(path.join(BETA_DIR, 'ingestion-dashboard.html'), sourceInfo, betaInfo);
   rewriteBetaText(path.join(BETA_DIR, 'ingestion-dashboard-data.json'), sourceInfo, betaInfo);
+  rewriteBetaText(path.join(BETA_DIR, 'release-notes.json'), sourceInfo, betaInfo);
   rewriteBetaText(path.join(BETA_DIR, 'release-dashboard.html'), sourceInfo, betaInfo);
   rewriteBetaText(path.join(BETA_DIR, 'conformance-dashboard.html'), sourceInfo, betaInfo);
   rewriteBetaText(path.join(BETA_DIR, 'conformance-dashboard-data.json'), sourceInfo, betaInfo);

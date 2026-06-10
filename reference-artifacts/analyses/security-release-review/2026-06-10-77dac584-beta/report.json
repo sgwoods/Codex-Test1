@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "security-release-review-0.2",
+  "artifactType": "security-release-review",
+  "generatedAt": "2026-06-10T11:44:32.335Z",
+  "lane": "beta",
+  "artifactDir": "dist/beta",
+  "artifactMissing": false,
+  "headCommit": "77dac584dfeb61c5f6baff7783917082e2e65a1e",
+  "branch": "codex/macbook-pro-1.4.1-guardians-integration",
+  "issueSource": "security-issues.json",
+  "humanPlan": "SECURITY_ISSUES_RESOLUTION_PLAN.md",
+  "reviewSource": "Passive public-site review of https://sgwoods.github.io/Aurora-Galactica/ on 2026-06-10.",
+  "priorityScale": {
+    "P0": "Serious: plausible production compromise, public mutation surface, or integrity break; resolve before beta/production unless explicitly accepted.",
+    "P1": "Concerning: material exposure or abuse path; reduce before beta when feasible and block production unless acknowledged.",
+    "P2": "Risky: hardening, minimization, or defense-in-depth gap; track with a concrete owner and release decision.",
+    "P3": "Warning: hygiene or monitoring issue; keep visible so future code review does not reintroduce it."
+  },
+  "productionGatePolicy": {
+    "summary": "Production publish is blocked when a tracked security issue is open and not explicitly acknowledged, or when a tracked issue is marked resolved but is still observed in the production artifact.",
+    "betaBehavior": "Beta publish shows tracked issues as reminders only.",
+    "productionAcknowledgementField": "productionAcknowledgement.acknowledged"
+  },
+  "summary": {
+    "issueCount": 6,
+    "openCount": 0,
+    "observedCount": 0,
+    "productionBlockerCount": 0,
+    "byPriority": {
+      "P0": 2,
+      "P1": 1,
+      "P2": 3,
+      "P3": 0
+    },
+    "openByPriority": {
+      "P0": 0,
+      "P1": 0,
+      "P2": 0,
+      "P3": 0
+    }
+  },
+  "findings": [
+    {
+      "id": "SEC-002",
+      "priority": "P0",
+      "severity": "high",
+      "category": "production-debug-surface",
+      "status": "resolved",
+      "title": "Production bundle exposes harness and debug mutation APIs",
+      "summary": "Local beta and production artifacts no longer expose browser harness globals, force-write harness symbols, or debug crash globals. Dev still carries the harness for local automation.",
+      "nextAction": "Keep the public-lane scan active and run a dev harness smoke check after any future harness/build-lane change.",
+      "doneDefinition": "Production and beta artifact scans no longer find harness globals or force-write symbols, while local/dev harness checks still pass.",
+      "open": false,
+      "acknowledged": false,
+      "observed": false,
+      "evidence": "",
+      "observationDetails": {
+        "file": "",
+        "needle": ""
+      },
+      "productionBlocker": false,
+      "reason": "not-blocking",
+      "proposedPlan": [
+        "Keep browser harness exports only in dev/test lanes.",
+        "Strip public-lane harness export blocks and debug crash globals during production build and beta promotion.",
+        "Keep production artifact checks for window.__galagaHarness__, window.__platinumHarness__, and force-write harness flag names.",
+        "Keep remote write force flags hard-disabled in production even if a public user defines similarly named globals."
+      ]
+    },
+    {
+      "id": "SEC-003",
+      "priority": "P0",
+      "severity": "high",
+      "category": "leaderboard-integrity",
+      "status": "resolved",
+      "title": "Leaderboard write integrity depends on client-trusted score submission",
+      "summary": "Public beta and production artifacts no longer ship the client-side score insert path. Remote score writes are disabled in public lanes pending server-side validation or a documented RLS policy audit; dev/local harness score-write testing remains available.",
+      "nextAction": "Before restoring online score writes in beta/production, capture the Supabase RLS/policy state and implement a server-validated score acceptance path.",
+      "doneDefinition": "Production and beta artifacts do not ship direct client score inserts, or a release artifact records server-side/RLS validation that prevents client-controlled trusted fields.",
+      "open": false,
+      "acknowledged": false,
+      "observed": false,
+      "evidence": "",
+      "observationDetails": {
+        "supabaseConfigFile": "index.html",
+        "scoreInsertFile": ""
+      },
+      "productionBlocker": false,
+      "reason": "not-blocking",
+      "proposedPlan": [
+        "Keep public beta/production score writes disabled until score acceptance is server-validated.",
+        "Audit Supabase RLS for scores and profiles before re-enabling public writes.",
+        "Require authenticated users to write only their own user_id and prevent client-controlled verified fields.",
+        "Move score acceptance to a server-side RPC or edge function that validates a signed run summary or replay evidence where practical."
+      ]
+    },
+    {
+      "id": "SEC-001",
+      "priority": "P1",
+      "severity": "high",
+      "category": "public-artifact-boundary",
+      "status": "resolved",
+      "title": "Production public artifact exposes reference audio assets",
+      "summary": "Local beta and production artifacts no longer expose public hrefs to private reference-audio clips or bundle private clip bytes. Historical live checks found public clip URLs, so the next hosted beta/dev publish should verify that the deployed pages stay clean.",
+      "nextAction": "After the next hosted beta/dev publish, verify live pages and known historical clip URLs no longer expose private reference-audio links.",
+      "doneDefinition": "Production and beta artifacts contain no reference-audio clip bytes and no public href/text path that invites fetching private reference clips; dev/local review keeps private provisioning explicit and ignored.",
+      "open": false,
+      "acknowledged": false,
+      "observed": false,
+      "evidence": "",
+      "observationDetails": {
+        "publicReferenceAudioFileCount": 0,
+        "firstReferenceAudioFile": "",
+        "referencePathTextFile": ""
+      },
+      "productionBlocker": false,
+      "reason": "not-blocking",
+      "proposedPlan": [
+        "Keep local/dev reference-audio provisioning through ignored local assets or private artifact bootstrap only.",
+        "Keep public-lane runtime and generated docs stripped of private reference-audio hrefs.",
+        "Keep artifact-boundary checks active so production fails if dist/production references or contains private reference-audio paths.",
+        "After the next hosted publish, verify the live pages and clip paths no longer expose private reference-audio URLs."
+      ]
+    },
+    {
+      "id": "SEC-004",
+      "priority": "P2",
+      "severity": "medium",
+      "category": "browser-hardening",
+      "status": "resolved",
+      "title": "Hosted production lacks explicit browser security headers",
+      "summary": "Local beta and production HTML artifacts now include a generated meta Content-Security-Policy and strict-origin-when-cross-origin referrer policy. GitHub Pages HTTP-header hardening remains a future hosting improvement.",
+      "nextAction": "After the next hosted beta/dev publish, verify the meta CSP is present in live HTML and capture the remaining host-header limitations.",
+      "doneDefinition": "The active host emits documented hardening headers or the app ships the strictest feasible meta policy with explicit residual GitHub Pages limitations.",
+      "open": false,
+      "acknowledged": false,
+      "observed": false,
+      "evidence": "",
+      "observationDetails": {
+        "manualReviewRequired": true,
+        "metaPolicyPresent": true,
+        "cspFile": "application-guide.html",
+        "referrerFile": "application-guide.html"
+      },
+      "productionBlocker": false,
+      "reason": "not-blocking",
+      "proposedPlan": [
+        "Keep the generated meta CSP and referrer policy on beta/production HTML artifacts.",
+        "Track the residual GitHub Pages limitation that frame-ancestors, HSTS, X-Content-Type-Options, and Permissions-Policy need real host headers.",
+        "When feasible, front the site with a host that can set app-owned security headers.",
+        "Reduce unsafe-inline CSP allowances as build packaging moves away from inline bundle/style delivery."
+      ]
+    },
+    {
+      "id": "SEC-005",
+      "priority": "P2",
+      "severity": "medium",
+      "category": "metadata-minimization",
+      "status": "resolved",
+      "title": "Production build metadata exposes test pilot emails and internal release context",
+      "summary": "Local beta and production artifacts no longer expose non-production test pilot emails or user ids in build-info, release-notes, or inline build metadata. Dev/local review keeps the test-pilot configuration.",
+      "nextAction": "Keep the public-lane email scan active and verify hosted beta/production after the next publish.",
+      "doneDefinition": "Beta and production build-info, release-notes, and inline build metadata contain no non-production test pilot emails/user ids, while dev/local auth review still has the needed test-pilot configuration.",
+      "open": false,
+      "acknowledged": false,
+      "observed": false,
+      "evidence": "",
+      "observationDetails": {
+        "buildInfoEmailCount": 0,
+        "textFile": "",
+        "email": ""
+      },
+      "productionBlocker": false,
+      "reason": "not-blocking",
+      "proposedPlan": [
+        "Keep non-production test pilot emails out of beta/production build-info, release-notes, and inline build metadata.",
+        "Keep dev/local test-pilot configuration available through the canonical release manifest.",
+        "Keep metadata minimization checks in the production publish preflight.",
+        "Review remaining commit/branch/build timing metadata separately if release authority wants stricter public minimization."
+      ]
+    },
+    {
+      "id": "SEC-006",
+      "priority": "P2",
+      "severity": "medium",
+      "category": "release-lane-separation",
+      "status": "resolved",
+      "title": "Production bundle mixes dev, beta, and production account/test logic",
+      "summary": "Local beta and production artifacts now strip public harness/debug exports, strip client score writes, clear test-pilot constants, and hard-disable the account-review lane with NON_PRODUCTION_LANE=false.",
+      "nextAction": "Keep the hard-disable scan active and add a focused public-lane account smoke before re-enabling any beta test-pilot behavior.",
+      "doneDefinition": "Production bundle scans no longer find dev/test-only lane symbols unless they are documented as inert public support text; dev/beta behavior remains covered by harnesses.",
+      "open": false,
+      "acknowledged": false,
+      "observed": false,
+      "evidence": "",
+      "observationDetails": {
+        "file": "index.html",
+        "needle": "NON_PRODUCTION_LANE",
+        "accountLaneHardDisabled": true
+      },
+      "productionBlocker": false,
+      "reason": "not-blocking",
+      "proposedPlan": [
+        "Keep lane-specific dev/test controls stripped or hard-disabled in beta/production at build/promotion time.",
+        "Keep production account and leaderboard logic minimal and explicit.",
+        "Keep the production bundle scan for active dev/test-only symbols.",
+        "Document any intentionally retained diagnostics as read-only support surfaces."
+      ]
+    }
+  ]
+}

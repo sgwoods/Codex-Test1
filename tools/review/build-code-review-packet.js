@@ -5,6 +5,8 @@ const { execFileSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const OUT_ROOT = path.join(ROOT, 'reference-artifacts', 'analyses', 'code-review');
+const SECURITY_ISSUES = path.join(ROOT, 'security-issues.json');
+const SECURITY_REVIEW_LATEST = path.join(ROOT, 'reference-artifacts', 'analyses', 'security-release-review', 'latest.json');
 const EXCLUDED_PREFIXES = Object.freeze([
   'reference-artifacts/analyses/code-review/',
   'reference-artifacts/analyses/review-learning/'
@@ -92,6 +94,10 @@ function classify(file){
     area = 'release-tooling';
     tags.push('release-lane');
   }
+  if(file === 'security-issues.json' || file === 'SECURITY_ISSUES_RESOLUTION_PLAN.md' || file.startsWith('tools/build/check-security-release-gate') || file.startsWith('reference-artifacts/analyses/security-release-review/')){
+    area = 'release-tooling';
+    tags.push('security-release');
+  }
   if(file.startsWith('tools/harness/') || file.startsWith('tools/review/')){
     area = area === 'docs-artifact' ? 'harness-tooling' : area;
     tags.push('harness');
@@ -157,6 +163,19 @@ function isReviewLedgerNarrative(file, text){
     && /(code-review-secret-like-token|Secret-looking token or service-role reference added to source)/.test(text);
 }
 
+function isSecurityReviewNarrative(file){
+  return file === 'security-issues.json'
+    || file === 'SECURITY_ISSUES_RESOLUTION_PLAN.md'
+    || file === 'tools/build/check-security-release-gate.js'
+    || file.startsWith('reference-artifacts/analyses/security-release-review/');
+}
+
+function isHarnessOrReviewTool(file){
+  return file.startsWith('tools/harness/')
+    || file.startsWith('tools/review/')
+    || file === 'tools/build/check-security-release-gate.js';
+}
+
 function automaticFindings(files, diffLines){
   const findings = [];
   const fileSet = new Set(files.map(row => row.file));
@@ -183,6 +202,21 @@ function automaticFindings(files, diffLines){
     }
     if(/\bfetch\s*\(\s*['"]https?:\/\//.test(trimmed)){
       findings.push(finding('P2', 'external-fetch-surface', 'Direct external fetch added; verify privacy, failure behavior, and CORS assumptions.', file, trimmed));
+    }
+    if(/assets\/reference-audio\/[^'")\s]+\.(m4a|mp3|wav|ogg)/i.test(trimmed)
+      && !isSecurityReviewNarrative(file)
+      && !isHarnessOrReviewTool(file)){
+      findings.push(finding('P2', 'public-reference-audio-path', 'Public source added a direct reference-audio clip path; verify private artifact boundaries and public-safe fallbacks.', file, trimmed));
+    }
+    if(/window\.__(galaga|platinum)Harness__|__(platinum|aurora)HarnessForceRemoteWrite/.test(trimmed)
+      && !isSecurityReviewNarrative(file)
+      && !isHarnessOrReviewTool(file)){
+      findings.push(finding('P2', 'production-debug-surface', 'Harness/debug surface changed outside harness tooling; verify production/beta stripping or hard-disable behavior.', file, trimmed));
+    }
+    if(/\b(nonProductionTestPilotEmails|TEST_ACCOUNT_EMAILS|NON_PRODUCTION_LANE)\b/.test(trimmed)
+      && file.startsWith('src/js/')
+      && !isSecurityReviewNarrative(file)){
+      findings.push(finding('P2', 'lane-test-metadata-surface', 'Non-production account/lane metadata touched in browser runtime; verify production metadata minimization.', file, trimmed));
     }
   }
   if([...fileSet].some(file => file.startsWith('src/js/13-game-pack-registry') || file.startsWith('src/js/13-gameplay-adapter-registry'))){
@@ -215,11 +249,75 @@ function recommendedChecks(files){
   if(/tools\/build|package\.json|release|publish/i.test(names)){
     checks.add('npm run publish:check:dev');
   }
+  if(/security-issues\.json|SECURITY_ISSUES_RESOLUTION_PLAN\.md|check-security-release-gate|auth|session|supabase|leaderboard|score|tools\/build|package\.json|release-manifest\.json/i.test(names)){
+    checks.add('npm run security:review:dev');
+  }
   if(/WHITE_PAPER\.md|white-paper\/|white-paper\.json|tools\/build\/(render-white-paper-pdf|check-white-paper-presentation)\.js/i.test(names)){
     checks.add('npm run white-paper:review');
   }
   checks.add('npm run review:code:check');
   return [...checks];
+}
+
+function loadSecurityBestPractices(){
+  if(!fs.existsSync(SECURITY_ISSUES)){
+    return {
+      available: false,
+      issueSource: '',
+      latestReview: '',
+      openByPriority: {},
+      productionBlockerCount: 0,
+      topOpenIssues: []
+    };
+  }
+  let issueList = null;
+  try{
+    issueList = JSON.parse(fs.readFileSync(SECURITY_ISSUES, 'utf8'));
+  }catch(err){
+    return {
+      available: false,
+      issueSource: rel(SECURITY_ISSUES),
+      latestReview: '',
+      error: err.message,
+      openByPriority: {},
+      productionBlockerCount: 0,
+      topOpenIssues: []
+    };
+  }
+  const openIssues = (issueList.issues || [])
+    .filter(issue => !['resolved', 'closed', 'accepted-risk'].includes(String(issue.status || '').toLowerCase()))
+    .sort((a, b) => {
+      const order = ['P0', 'P1', 'P2', 'P3'];
+      const p = order.indexOf(a.priority) - order.indexOf(b.priority);
+      return p || String(a.id || '').localeCompare(String(b.id || ''));
+    });
+  const openByPriority = {};
+  for(const priority of ['P0', 'P1', 'P2', 'P3']){
+    openByPriority[priority] = openIssues.filter(issue => issue.priority === priority).length;
+  }
+  let latestReview = null;
+  if(fs.existsSync(SECURITY_REVIEW_LATEST)){
+    try{
+      latestReview = JSON.parse(fs.readFileSync(SECURITY_REVIEW_LATEST, 'utf8'));
+    }catch{}
+  }
+  return {
+    available: true,
+    issueSource: rel(SECURITY_ISSUES),
+    humanPlan: 'SECURITY_ISSUES_RESOLUTION_PLAN.md',
+    latestReview: fs.existsSync(SECURITY_REVIEW_LATEST) ? rel(SECURITY_REVIEW_LATEST) : '',
+    latestReviewGeneratedAt: latestReview?.generatedAt || '',
+    latestReviewLane: latestReview?.lane || '',
+    openByPriority,
+    productionBlockerCount: latestReview?.summary?.productionBlockerCount ?? openIssues.length,
+    topOpenIssues: openIssues.slice(0, 6).map(issue => ({
+      id: issue.id,
+      priority: issue.priority,
+      status: issue.status,
+      title: issue.title,
+      nextAction: issue.nextAction || ''
+    }))
+  };
 }
 
 function markdown(report){
@@ -248,9 +346,32 @@ function markdown(report){
     '',
     ...report.recommendedChecks.map(item => `- \`${item}\``),
     '',
-    '## Automatic Findings',
+    '## Security Best-Practices Read',
+    '',
+    report.securityBestPractices.available
+      ? `- source: \`${report.securityBestPractices.issueSource}\``
+      : '- security issue source not present',
+    report.securityBestPractices.latestReview
+      ? `- latest review: \`${report.securityBestPractices.latestReview}\` (${report.securityBestPractices.latestReviewLane || 'unknown lane'}, ${report.securityBestPractices.latestReviewGeneratedAt || 'unknown time'})`
+      : '- latest review: not captured yet',
+    `- open issues by priority: P0 \`${report.securityBestPractices.openByPriority.P0 || 0}\`, P1 \`${report.securityBestPractices.openByPriority.P1 || 0}\`, P2 \`${report.securityBestPractices.openByPriority.P2 || 0}\`, P3 \`${report.securityBestPractices.openByPriority.P3 || 0}\``,
+    `- production blockers in latest/structured read: \`${report.securityBestPractices.productionBlockerCount || 0}\``,
+    '',
+    '### Top Open Security Issues',
     ''
   ];
+  if(report.securityBestPractices.topOpenIssues?.length){
+    for(const issue of report.securityBestPractices.topOpenIssues){
+      lines.push(`- **${issue.priority} ${issue.id}** ${issue.title}; next: ${issue.nextAction || 'not specified'}`);
+    }
+  }else{
+    lines.push('- No tracked open security issues.');
+  }
+  lines.push(
+    '',
+    '## Automatic Findings',
+    ''
+  );
   if(report.automaticFindings.length){
     for(const item of report.automaticFindings){
       lines.push(`- **${item.severity} ${item.id}** ${item.file}: ${item.message}`);
@@ -279,6 +400,7 @@ function main(){
   }));
   const diffLines = addedDiffLines(baseCommit);
   const findings = automaticFindings(changedFiles, diffLines);
+  const securityBestPractices = loadSecurityBestPractices();
   const count = severity => findings.filter(item => item.severity === severity).length;
   const outDir = path.join(OUT_ROOT, `${date}-${headCommit}`);
   ensureDir(outDir);
@@ -317,10 +439,15 @@ function main(){
       p1: count('P1'),
       p2: count('P2'),
       p3: count('P3'),
-      riskTaggedFileCount: changedFiles.filter(file => file.riskTags.length).length
+      riskTaggedFileCount: changedFiles.filter(file => file.riskTags.length).length,
+      securityOpenP0: securityBestPractices.openByPriority.P0 || 0,
+      securityOpenP1: securityBestPractices.openByPriority.P1 || 0,
+      securityOpenP2: securityBestPractices.openByPriority.P2 || 0,
+      securityOpenP3: securityBestPractices.openByPriority.P3 || 0
     },
     changedFiles,
     automaticFindings: findings,
+    securityBestPractices,
     recommendedChecks: recommendedChecks(changedFiles)
   };
   const reportPath = path.join(outDir, 'report.json');

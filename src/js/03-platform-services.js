@@ -85,10 +85,13 @@ function isSignedInAsTestAccount(){
 function remoteAuthEnabled(){
  return RELEASE_CHANNEL==='production'||testAccountEnabled();
 }
+function harnessForceRemoteWriteEnabled(){
+ if(!NON_PRODUCTION_LANE)return false;
+ return !!(window['__platinum'+'HarnessForceRemoteWrite']||window['__aurora'+'HarnessForceRemoteWrite']);
+}
 function remoteWriteEnabled(){
- if(window.__platinumHarnessForceRemoteWrite||window.__auroraHarnessForceRemoteWrite)return true;
- if(RELEASE_CHANNEL==='production')return !isSignedInAsTestAccount();
- return isSignedInAsTestAccount();
+ if(harnessForceRemoteWriteEnabled())return true;
+ return RELEASE_CHANNEL==='development'&&isSignedInAsTestAccount();
 }
 function topScoreVideoPostingEligibility(rank=0,user=(typeof LEADERBOARD!=='undefined'?LEADERBOARD?.user:null)){
  const normalizedRank=+rank||0;
