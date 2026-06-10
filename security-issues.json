@@ -21,20 +21,21 @@
       "severity": "high",
       "category": "public-artifact-boundary",
       "status": "resolved",
-      "summary": "Local beta and production artifacts no longer expose public hrefs to private reference-audio clips or bundle private clip bytes. Historical live checks found public clip URLs, so the next hosted beta/dev publish should verify that the deployed pages stay clean.",
+      "summary": "Local beta and production artifacts no longer expose public hrefs to private reference-audio clips or bundle private clip bytes. Hosted public Pages cleanup on 2026-06-10 removed stale root, beta, and dev reference-audio files; known historical clip URLs now return 404 instead of audio bytes.",
       "evidence": [
         "Live production page referenced assets/reference-audio/*.m4a.",
         "All 24 referenced public reference-audio paths checked during the passive review returned HTTP 200.",
         "GitHub Pages responses included access-control-allow-origin: *.",
-        "Current local beta and production security reviews report SEC-001 not observed after public-lane runtime, application-guide, project-guide, and source-preview stripping."
+        "Current local beta and production security reviews report SEC-001 not observed after public-lane runtime, application-guide, project-guide, and source-preview stripping.",
+        "After public Pages commit 6f50151, known historical root, /beta, and /dev reference-audio clip URLs return HTTP 404 text/html instead of audio/mp4."
       ],
       "proposedPlan": [
         "Keep local/dev reference-audio provisioning through ignored local assets or private artifact bootstrap only.",
         "Keep public-lane runtime and generated docs stripped of private reference-audio hrefs.",
         "Keep artifact-boundary checks active so production fails if dist/production references or contains private reference-audio paths.",
-        "After the next hosted publish, verify the live pages and clip paths no longer expose private reference-audio URLs."
+        "Keep the publish-lane prune guard active for root, /beta, and /dev assets/reference-audio directories."
       ],
-      "nextAction": "After the next hosted beta/dev publish, verify live pages and known historical clip URLs no longer expose private reference-audio links.",
+      "nextAction": "Keep the publish-lane prune guard active and recheck known historical clip URLs after future hosted lane publishes.",
       "doneDefinition": "Production and beta artifacts contain no reference-audio clip bytes and no public href/text path that invites fetching private reference clips; dev/local review keeps private provisioning explicit and ignored.",
       "productionAcknowledgement": {
         "acknowledged": false,
