@@ -47,6 +47,8 @@
     "machine:bootstrap": "node tools/dev/machine-bootstrap.js",
     "machine:doctor": "node tools/dev/machine-doctor.js",
     "machine:status": "node tools/dev/machine-status.js",
+    "machine:audio:status": "node tools/dev/check-private-reference-audio.js",
+    "machine:audio:bootstrap": "node tools/dev/check-private-reference-audio.js --repair",
     "session:brief": "node tools/dev/session-start-brief.js",
     "artifacts:prepare:import-inbox": "node tools/dev/prepare-artifact-inboxes.js",
     "codex:checkpoint": "node tools/dev/write-context-checkpoint.js",

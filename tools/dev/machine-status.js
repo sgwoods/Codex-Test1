@@ -9,6 +9,7 @@ async function main(){
     machine: snapshot.machine,
     repo: snapshot.repo,
     release_authority: snapshot.release_authority,
+    private_reference_audio: snapshot.private_reference_audio,
     local_services: snapshot.local_services,
     live_lanes: snapshot.live_lanes,
     publish_permitted: snapshot.readiness.release === 'ready',

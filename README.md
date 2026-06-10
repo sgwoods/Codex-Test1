@@ -231,6 +231,17 @@ Current go-forward focus:
 cd <repo-root>
 npm run machine:ensure-browser
 npm run build
+npm run machine:audio:status
+```
+
+`machine:audio:status` verifies that local `localhost` review can actually read
+the private Galaga reference clips used by the Aurora audio review lane, while
+public-safe hosts still block those clips. If it reports a missing local private
+store, point `AURORA_PRIVATE_REFERENCE_AUDIO_ROOT` at the machine-local
+`reference-audio` directory and run:
+
+```bash
+npm run machine:audio:bootstrap
 ```
 
 2. Start the local game and log viewer together:

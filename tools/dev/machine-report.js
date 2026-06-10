@@ -16,6 +16,29 @@ const {
   publicStatusChecks,
   nextCommands
 } = require('./machine-common');
+const { privateReferenceAudioStatus } = require('./private-reference-audio');
+
+function privateReferenceAudioSummary(status){
+  return {
+    ok: status.ok,
+    publicSafePrivateClipLeakPass: status.publicBoundary?.publicSafePrivateClipLeakPass,
+    localhostReferenceAudioAvailable: status.publicBoundary?.localhostReferenceAudioAvailable,
+    distReferenceAudio: {
+      root: status.distReferenceAudio?.root,
+      exists: status.distReferenceAudio?.exists,
+      isSymlink: status.distReferenceAudio?.isSymlink,
+      gitIgnored: status.distReferenceAudio?.gitIgnored,
+      allRequiredReadable: status.distReferenceAudio?.allRequiredReadable,
+      allRequiredHashMatch: status.distReferenceAudio?.allRequiredHashMatch,
+      missing: status.distReferenceAudio?.missing || [],
+      mismatched: status.distReferenceAudio?.mismatched || []
+    },
+    requiredCueCount: Object.keys(status.requiredCues || {}).length,
+    requiredFileCount: (status.requiredFiles || []).length,
+    issues: status.issues || [],
+    next: status.next || []
+  };
+}
 
 async function gatherMachineSnapshot({ includePublic = false } = {}){
   const identity = currentIdentity();
@@ -26,6 +49,7 @@ async function gatherMachineSnapshot({ includePublic = false } = {}){
   const remotes = checkRepoRemote();
   const services = await localServiceStatus();
   const lanes = await liveLaneStatus();
+  const privateReferenceAudio = privateReferenceAudioStatus();
   const authorityMatch = machineIsAuthority(identity, authority);
   const productionFocus = require(path.join(ROOT, 'release-dashboard.json')).currentFocus || '';
   const productionVersion = lanes.production && lanes.production.ok ? lanes.production.version : '1.2.3';
@@ -40,6 +64,7 @@ async function gatherMachineSnapshot({ includePublic = false } = {}){
   if(!remotes.ok) developmentBlocked.push('origin remote');
   if(!services.game.ok) developmentBlocked.push('local game service');
   if(!services.viewer.ok) developmentBlocked.push('local viewer service');
+  if(!privateReferenceAudio.ok) developmentBlocked.push('local private reference audio');
 
   const releaseBlocked = [];
   if(!tools.gh.ok) releaseBlocked.push('gh');
@@ -69,6 +94,7 @@ async function gatherMachineSnapshot({ includePublic = false } = {}){
       ...authority,
       current_machine_matches: authorityMatch
     } : null,
+    private_reference_audio: privateReferenceAudioSummary(privateReferenceAudio),
     local_services: services,
     live_lanes: lanes,
     public_sync: publicChecks,

@@ -11,6 +11,7 @@ async function main(){
     repo: snapshot.repo,
     tools: snapshot.tools,
     release_authority: snapshot.release_authority,
+    private_reference_audio: snapshot.private_reference_audio,
     local_services: snapshot.local_services,
     live_lanes: snapshot.live_lanes,
     public_sync: snapshot.public_sync,
