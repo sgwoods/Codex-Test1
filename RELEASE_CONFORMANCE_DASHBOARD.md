@@ -1,6 +1,6 @@
 # Release Conformance Dashboard
 
-Generated: `2026-06-10T10:57:21.724Z`
+Generated: `2026-06-10T13:26:58.408Z`
 
 This is the primary at-a-glance planning artifact for Aurora conformance work. It answers what we are trying to improve, why it matters, how close it is to a significant user-facing release gate, and what the next investment should be.
 
@@ -77,7 +77,7 @@ Every release candidate should include both a conformance read and a resource/ti
 | Latest level-arc conformance | 8.8/10 | Long-play gameplay-shape gate |
 | Metric points scanned | 1276 | History depth behind score trends |
 | Score deltas found | 138 | Past-goal movement available for review |
-| Measured runs | 977 | Tracked harness/model/local compute work |
+| Measured runs | 978 | Tracked harness/model/local compute work |
 | Tracked wall time | 980.5 min | Human clock-time planning input |
 | Tracked CPU time | 990.9 min | Local compute-cost planning input |
 | Tracked artifact growth | 1512.2 MB | Evidence volume and storage/review-cost proxy |
@@ -112,7 +112,7 @@ The economics view now separates _how_ resources were applied from _what_ improv
 
 | Local CPU/browser purpose | Runs | Wall time | Share | Meaning |
 | --- | --- | --- | --- | --- |
-| Audio conformance and cue feedback | 517 | 504.7 min | 82% | Moves the moment-to-moment arcade feel: impact clarity, ambience identity, reward/loss feedback, and player understanding. |
+| Audio conformance and cue feedback | 518 | 504.7 min | 82% | Moves the moment-to-moment arcade feel: impact clarity, ambience identity, reward/loss feedback, and player understanding. |
 | Gameplay behavior and level complexity | 420 | 100.2 min | 16.3% | Moves player-facing pressure, stage shape, alien entry novelty, challenge-stage learning value, and long-play texture. |
 | Harness, ingestion, and assessment logic | 9 | 10.2 min | 1.7% | Moves reusable automation: scorers, artifact extraction, candidate loops, measurement confidence, and future game ingestion. |
 | Visual and video reference analysis | 18 | 0.5 min | 0.1% | Moves graphical identity, reference inspection, contact-sheet review, sprite/surface comparison, and readability. |
@@ -130,7 +130,7 @@ The economics view now separates _how_ resources were applied from _what_ improv
 | Resource | Measured runs | Wall time | CPU time |
 | --- | --- | --- | --- |
 | gpu-equivalent | 18 | 630.8 min | 1.2 min |
-| cpu | 931 | 585.2 min | 937.6 min |
+| cpu | 932 | 585.2 min | 937.6 min |
 | browser | 365 | 434.2 min | 668.8 min |
 | codex | 13 | 365.7 min | 1.2 min |
 | openai-gpu-equivalent | 1 | 75 min | 0 min |
@@ -197,19 +197,19 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 
 ### Charts
 
-![score-trends](reference-artifacts/analyses/conformance-economics/2026-06-10-ff87753a/score-trends.svg)
+![score-trends](reference-artifacts/analyses/conformance-economics/2026-06-10-c88da8ef/score-trends.svg)
 
-![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-06-10-ff87753a/largest-score-deltas.svg)
+![largest-score-deltas](reference-artifacts/analyses/conformance-economics/2026-06-10-c88da8ef/largest-score-deltas.svg)
 
-![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-06-10-ff87753a/compute-minutes-by-resource.svg)
+![compute-minutes-by-resource](reference-artifacts/analyses/conformance-economics/2026-06-10-c88da8ef/compute-minutes-by-resource.svg)
 
-![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-06-10-ff87753a/cost-per-positive-score-point.svg)
+![cost-per-positive-score-point](reference-artifacts/analyses/conformance-economics/2026-06-10-c88da8ef/cost-per-positive-score-point.svg)
 
-![gpu-equivalent-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-06-10-ff87753a/gpu-equivalent-use-by-purpose.svg)
+![gpu-equivalent-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-06-10-c88da8ef/gpu-equivalent-use-by-purpose.svg)
 
-![cpu-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-06-10-ff87753a/cpu-use-by-purpose.svg)
+![cpu-use-by-purpose](reference-artifacts/analyses/conformance-economics/2026-06-10-c88da8ef/cpu-use-by-purpose.svg)
 
-![gameplay-improvement-by-project-part](reference-artifacts/analyses/conformance-economics/2026-06-10-ff87753a/gameplay-improvement-by-project-part.svg)
+![gameplay-improvement-by-project-part](reference-artifacts/analyses/conformance-economics/2026-06-10-c88da8ef/gameplay-improvement-by-project-part.svg)
 
 ## New First-Class Axes Added
 
@@ -235,5 +235,5 @@ This view tracks the evidence pipeline behind the conformance scores: source med
 - Quality report: `reference-artifacts/analyses/quality-conformance/2026-05-24-ff249bba/report.json`
 - Investment priority report: `reference-artifacts/analyses/conformance-investment-priorities/2026-05-19-fba7f625/report.json`
 - Level-arc report: `reference-artifacts/analyses/level-arc-conformance/2026-05-24-ff249bba/report.json`
-- Economics report: `reference-artifacts/analyses/conformance-economics/2026-06-10-ff87753a/report.json`
+- Economics report: `reference-artifacts/analyses/conformance-economics/2026-06-10-c88da8ef/report.json`
 - Equal current quality-category weight: `0.077`
