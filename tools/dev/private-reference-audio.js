@@ -177,8 +177,7 @@ function referenceAudioAvailableForHost(buildInfo, host, pathname = ''){
   if(!buildInfo) return null;
   if(!buildInfo.publicArtifactBoundaryEnabled) return true;
   const normalized = String(host || '').toLowerCase();
-  const hostedDev = normalized === 'sgwoods.github.io' && String(pathname || '').startsWith('/Aurora-Galactica/dev/');
-  return buildInfo.releaseChannel === 'development' && (LOCAL_AUDIO_HOSTS.has(normalized) || hostedDev);
+  return buildInfo.releaseChannel === 'development' && LOCAL_AUDIO_HOSTS.has(normalized);
 }
 
 function publicBoundaryStatus(){

@@ -41,7 +41,7 @@ const feedbackModal=document.getElementById('feedbackModal'),feedbackForm=docume
 const fbType=document.getElementById('fbType'),fbSummary=document.getElementById('fbSummary'),fbDescription=document.getElementById('fbDescription'),fbCancel=document.getElementById('fbCancel');
 const feedbackSubtitle=document.getElementById('feedbackSubtitle');
 const feedbackStatus=document.getElementById('feedbackStatus'),feedbackToast=document.getElementById('feedbackToast'),platformTrackToast=document.getElementById('platformTrackToast'),platformTrackTitle=document.getElementById('platformTrackTitle'),platformTrackArtist=document.getElementById('platformTrackArtist'),exportBtn=document.getElementById('exportBtn'),recordBtn=document.getElementById('recordBtn'),playAudioTestBtn=document.getElementById('playAudioTestBtn'),resetTestPilotScoresControl=document.getElementById('resetTestPilotScoresBtn');
-const testPanel=document.getElementById('testPanel'),testStartKind=document.getElementById('testStartKind'),testExpertPlays=document.getElementById('testExpertPlays'),testExpertPlaysHint=document.getElementById('testExpertPlaysHint'),testStage=document.getElementById('testStage'),testChallengeStage=document.getElementById('testChallengeStage'),testChallengeStageField=document.getElementById('testChallengeStageField'),testChallengeStageHint=document.getElementById('testChallengeStageHint'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),arcadeMusicPlaylistSelect=document.getElementById('arcadeMusicPlaylistSelect'),commentatorToggle=document.getElementById('commentatorToggle'),arcadeFullscreenAutoToggle=document.getElementById('arcadeFullscreenAutoToggle'),graphicsTheme=document.getElementById('graphicsTheme'),spriteRenderMode=document.getElementById('spriteRenderMode'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
+const testPanel=document.getElementById('testPanel'),testStartKind=document.getElementById('testStartKind'),testExpertPlays=document.getElementById('testExpertPlays'),testExpertPlaysHint=document.getElementById('testExpertPlaysHint'),testStage=document.getElementById('testStage'),testChallengeStage=document.getElementById('testChallengeStage'),testChallengeStageField=document.getElementById('testChallengeStageField'),testChallengeStageHint=document.getElementById('testChallengeStageHint'),testShips=document.getElementById('testShips'),testExtendFirst=document.getElementById('testExtendFirst'),testExtendRecurring=document.getElementById('testExtendRecurring'),testChallenge=document.getElementById('testChallenge'),themeSetSelect=document.getElementById('themeSetSelect'),themeSetSummary=document.getElementById('themeSetSummary'),audioTheme=document.getElementById('audioTheme'),musicVolume=document.getElementById('musicVolume'),musicVolumeValue=document.getElementById('musicVolumeValue'),gameSoundVolumeControl=document.getElementById('gameSoundVolume'),gameSoundVolumeValue=document.getElementById('gameSoundVolumeValue'),arcadeMusicPlaylistSelect=document.getElementById('arcadeMusicPlaylistSelect'),commentatorToggle=document.getElementById('commentatorToggle'),arcadeFullscreenAutoToggle=document.getElementById('arcadeFullscreenAutoToggle'),graphicsTheme=document.getElementById('graphicsTheme'),spriteRenderMode=document.getElementById('spriteRenderMode'),graphicsStarfieldIntensity=document.getElementById('graphicsStarfieldIntensity'),graphicsStarfieldSpeed=document.getElementById('graphicsStarfieldSpeed'),rootModeRow=document.getElementById('rootModeRow'),rootMode=document.getElementById('rootMode'),rootModeStatus=document.getElementById('rootModeStatus');
 const arcadeMusicToggleBtn=document.getElementById('arcadeMusicToggleBtn');
 const arcadeMusicFrameHost=document.getElementById('arcadeMusicFrameHost');
 const muteToggleBtn=document.getElementById('muteToggleBtn');
@@ -332,6 +332,72 @@ const ARCADE_MUSIC_BACKUP_PLAYLIST_ID='PLeDzKA-Cr6s-8b_YaTTleSX-h3X2QdQCo';
 const ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID='PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH';
 const ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID='PLWDxjyS0X-zm5GrG4zytIyqRPQ8Jv4TA-';
 const ARCADE_MUSIC_SELECTOR_DEFAULT='__DEFAULT__';
+const DEFAULT_THEME_SET_BY_GAME=Object.freeze({
+ 'aurora-galactica':'aurora-public',
+ 'galaxy-guardians-preview':'guardians-signal'
+});
+const GAME_THEME_SETS=Object.freeze({
+ 'aurora-galactica':Object.freeze([
+  Object.freeze({
+   id:'aurora-public',
+   label:'Aurora Public Mix',
+   summary:'Aurora visuals with the public-safe Aurora application audio and Aurora arcade music.',
+   audioTheme:'aurora-application',
+   graphicsTheme:'aurora-borealis',
+   spriteRenderMode:'auto',
+   starfieldIntensity:1.25,
+   starfieldSpeed:1,
+   arcadeMusicPlaylistId:ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID
+  }),
+  Object.freeze({
+   id:'aurora-classic-synth',
+   label:'Aurora Classic Synth',
+   summary:'Classic arcade visuals with public-safe Galaga-style synthesized cues and Aurora arcade music.',
+   audioTheme:'galaga-original-reference',
+   graphicsTheme:'classic-arcade',
+   spriteRenderMode:'reference-pixel-lab',
+   starfieldIntensity:1,
+   starfieldSpeed:1,
+   arcadeMusicPlaylistId:ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID
+  }),
+  Object.freeze({
+   id:'aurora-local-reference',
+   label:'Aurora Local Reference',
+   summary:'Local review preset for private Galaga reference clips, classic sprites, and Aurora arcade music.',
+   audioTheme:'galaga-reference-assets',
+   graphicsTheme:'classic-arcade',
+   spriteRenderMode:'reference-pixel-lab',
+   starfieldIntensity:1,
+   starfieldSpeed:1,
+   arcadeMusicPlaylistId:ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID,
+   localReferenceOnly:1
+  })
+ ]),
+ 'galaxy-guardians-preview':Object.freeze([
+  Object.freeze({
+   id:'guardians-signal',
+   label:'Guardians Signal',
+   summary:'Guardians signal-rack visuals, pack-owned audio, and the Guardians arcade music playlist.',
+   audioTheme:'auto',
+   graphicsTheme:'auto',
+   spriteRenderMode:'aurora-themed',
+   starfieldIntensity:1.25,
+   starfieldSpeed:1,
+   arcadeMusicPlaylistId:ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID
+  }),
+  Object.freeze({
+   id:'guardians-aurora-music',
+   label:'Guardians With Aurora Music',
+   summary:'Guardians visuals and pack-owned audio with the Aurora arcade music playlist.',
+   audioTheme:'auto',
+   graphicsTheme:'auto',
+   spriteRenderMode:'aurora-themed',
+   starfieldIntensity:1.25,
+   starfieldSpeed:1,
+   arcadeMusicPlaylistId:ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID
+  })
+ ])
+});
 function clampVolumeValue(value,fallback=1){
  const n=+value;
  return Number.isFinite(n)?Math.max(0,Math.min(1,n)):fallback;
@@ -418,18 +484,23 @@ function arcadeMusicPlaylistOptions(){
  const defaultLabel=String(BUILD_INFO?.platform?.media?.arcadeMusicPlaylistLabel||'Platform default').trim()||'Platform default';
  const defaultPlaylistId=sanitizeArcadeMusicPlaylistId(ARCADE_MUSIC_PLAYLIST_ID);
  const options=[
-  { value:ARCADE_MUSIC_SELECTOR_DEFAULT, playlistId:defaultPlaylistId, label:`${defaultLabel} (Default)` }
+  { value:ARCADE_MUSIC_SELECTOR_DEFAULT, playlistId:defaultPlaylistId, label:`${defaultLabel} (Default)` },
+  { value:ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID, playlistId:ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID, label:'Aurora Original Playlist' },
+  { value:ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID, playlistId:ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID, label:'Galaxy Guardians Original Playlist' }
  ];
  if(ARCADE_MUSIC_BACKUP_PLAYLIST_ID&&ARCADE_MUSIC_BACKUP_PLAYLIST_ID!==defaultPlaylistId){
   options.push({ value:ARCADE_MUSIC_BACKUP_PLAYLIST_ID, playlistId:ARCADE_MUSIC_BACKUP_PLAYLIST_ID, label:'Embeddable Arcade Jukebox' });
  }
- if(ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID&&ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID!==defaultPlaylistId&&ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID!==ARCADE_MUSIC_BACKUP_PLAYLIST_ID){
-  options.push({ value:ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID, playlistId:ARCADE_MUSIC_AURORA_ORIGINAL_PLAYLIST_ID, label:'Aurora Original Playlist' });
- }
- if(ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID&&ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID!==defaultPlaylistId&&ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID!==ARCADE_MUSIC_BACKUP_PLAYLIST_ID){
-  options.push({ value:ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID, playlistId:ARCADE_MUSIC_GUARDIANS_ORIGINAL_PLAYLIST_ID, label:'Galaxy Guardians Original Playlist' });
- }
- return options.map(option=>Object.freeze(option));
+ const seen=new Set();
+ return options
+  .filter(option=>{
+   if(!option.value||option.value!==ARCADE_MUSIC_SELECTOR_DEFAULT&&!option.playlistId)return false;
+   const key=option.value===ARCADE_MUSIC_SELECTOR_DEFAULT?option.value:option.playlistId;
+   if(seen.has(`${option.value}:${key}`))return false;
+   seen.add(`${option.value}:${key}`);
+   return true;
+  })
+  .map(option=>Object.freeze(option));
 }
 function arcadeMusicPlaylistOverrideForGame(gameKey=''){
  const key=String(gameKey||'').trim();
@@ -453,6 +524,122 @@ function setArcadeMusicPlaylistOverrideForGame(gameKey='',value=''){
  else removePref(ARCADE_MUSIC_PLAYLIST_OVERRIDES_PREF_KEY);
  if(typeof syncAudioMixControls==='function')syncAudioMixControls();
  if(typeof syncArcadeMusicForGamePackChange==='function')syncArcadeMusicForGamePackChange();
+}
+function currentThemeSetGameKey(){
+ try{
+  if(typeof currentGamePackKey==='function'){
+   const key=String(currentGamePackKey()||'').trim();
+   if(key)return key;
+  }
+ }catch{}
+ return 'aurora-galactica';
+}
+function themeSetsForGame(gameKey=currentThemeSetGameKey()){
+ return GAME_THEME_SETS[String(gameKey||'').trim()]||GAME_THEME_SETS['aurora-galactica']||Object.freeze([]);
+}
+function defaultThemeSetIdForGame(gameKey=currentThemeSetGameKey()){
+ const key=String(gameKey||'').trim()||'aurora-galactica';
+ return DEFAULT_THEME_SET_BY_GAME[key]||themeSetsForGame(key)[0]?.id||'custom';
+}
+function themeSetById(gameKey=currentThemeSetGameKey(),themeSetId=''){
+ const id=String(themeSetId||'').trim();
+ return themeSetsForGame(gameKey).find(set=>set.id===id)||null;
+}
+function sanitizeThemeSetIdForGame(themeSetId='',gameKey=currentThemeSetGameKey()){
+ const id=String(themeSetId||'').trim();
+ if(id==='custom')return 'custom';
+ if(themeSetById(gameKey,id))return id;
+ return defaultThemeSetIdForGame(gameKey);
+}
+function themeSetConfigForGame(gameKey=currentThemeSetGameKey(),themeSetId=''){
+ const id=sanitizeThemeSetIdForGame(themeSetId,gameKey);
+ return id==='custom'?null:themeSetById(gameKey,id);
+}
+function themeSetControlValues(themeSet){
+ if(!themeSet)return null;
+ return {
+  audioTheme:String(themeSet.audioTheme||'auto'),
+  graphicsTheme:String(themeSet.graphicsTheme||'auto'),
+  spriteRenderMode:String(themeSet.spriteRenderMode||'auto'),
+  starfieldIntensity:sanitizeStarfieldMultiplier(themeSet.starfieldIntensity,1),
+  starfieldSpeed:sanitizeStarfieldMultiplier(themeSet.starfieldSpeed,1),
+  arcadeMusicPlaylistId:sanitizeArcadeMusicPlaylistId(themeSet.arcadeMusicPlaylistId||'')
+ };
+}
+function currentThemeSetSummary(themeSetId='',gameKey=currentThemeSetGameKey()){
+ if(themeSetId==='custom')return 'Custom theme controls are active.';
+ const themeSet=themeSetConfigForGame(gameKey,themeSetId);
+ if(!themeSet)return 'Custom theme controls are active.';
+ if(themeSet.localReferenceOnly&&!referenceAudioPubliclyAvailable()){
+  return `${themeSet.summary} Private reference clips are available only on localhost with local provisioning; public lanes use safe fallbacks.`;
+ }
+ return themeSet.summary||themeSet.label||themeSet.id;
+}
+function populateThemeSetOptions(gameKey=currentThemeSetGameKey(),selected=''){
+ if(!themeSetSelect)return;
+ const sets=themeSetsForGame(gameKey);
+ const options=[
+  ...sets.map(set=>({value:set.id,label:set.label||set.id})),
+  {value:'custom',label:'Custom'}
+ ];
+ const markup=options.map(option=>`<option value="${option.value}">${option.label}</option>`).join('');
+ if(themeSetSelect.innerHTML!==markup)themeSetSelect.innerHTML=markup;
+ themeSetSelect.value=sanitizeThemeSetIdForGame(selected,gameKey);
+}
+function populateGraphicsThemeOptions(selected=''){
+ if(!graphicsTheme)return;
+ let pack=null;
+ try{
+  pack=typeof currentGamePack==='function'?currentGamePack():null;
+ }catch{}
+ const themes=pack?.atmosphereThemes||{};
+ const options=[
+  {value:'auto',label:'Auto'},
+  ...Object.values(themes).map(theme=>({value:theme.id,label:theme.label||theme.id}))
+ ];
+ const seen=new Set();
+ const markup=options.filter(option=>{
+  if(!option.value||seen.has(option.value))return false;
+  seen.add(option.value);
+  return true;
+ }).map(option=>`<option value="${option.value}">${option.label}</option>`).join('');
+ if(graphicsTheme.innerHTML!==markup)graphicsTheme.innerHTML=markup;
+ graphicsTheme.value=sanitizeGraphicsThemeValue(selected||DEFAULT_TEST_CFG.graphicsTheme);
+}
+function themeSetMatchesControls(themeSet){
+ const values=themeSetControlValues(themeSet);
+ if(!values)return false;
+ let currentPlaylistId='';
+ try{
+  currentPlaylistId=typeof arcadeMusicResolvedConfig==='function'
+   ? sanitizeArcadeMusicPlaylistId(arcadeMusicResolvedConfig()?.playlistId||'')
+   : sanitizeArcadeMusicPlaylistId(arcadeMusicPlaylistOverrideForGame(currentThemeSetGameKey())||'');
+ }catch{}
+ return sanitizeAudioThemeValue(audioTheme?.value||'')===sanitizeAudioThemeValue(values.audioTheme)
+  && sanitizeGraphicsThemeValue(graphicsTheme?.value||'')===sanitizeGraphicsThemeValue(values.graphicsTheme)
+  && sanitizeSpriteRenderModeValue(spriteRenderMode?.value||'')===sanitizeSpriteRenderModeValue(values.spriteRenderMode)
+  && sanitizeStarfieldMultiplier(graphicsStarfieldIntensity?.value,1)===values.starfieldIntensity
+  && sanitizeStarfieldMultiplier(graphicsStarfieldSpeed?.value,1)===values.starfieldSpeed
+  && (!values.arcadeMusicPlaylistId||currentPlaylistId===values.arcadeMusicPlaylistId);
+}
+function applyThemeSetSelection(themeSetId='',opts={}){
+ const gameKey=currentThemeSetGameKey();
+ const id=sanitizeThemeSetIdForGame(themeSetId,gameKey);
+ const themeSet=id==='custom'?null:themeSetById(gameKey,id);
+ if(themeSet){
+  const values=themeSetControlValues(themeSet);
+  if(audioTheme)audioTheme.value=values.audioTheme;
+  if(graphicsTheme)graphicsTheme.value=values.graphicsTheme;
+  if(spriteRenderMode)spriteRenderMode.value=values.spriteRenderMode;
+  if(graphicsStarfieldIntensity)graphicsStarfieldIntensity.value=String(values.starfieldIntensity);
+  if(graphicsStarfieldSpeed)graphicsStarfieldSpeed.value=String(values.starfieldSpeed);
+  if(themeSet.arcadeMusicPlaylistId){
+   setArcadeMusicPlaylistOverrideForGame(gameKey,themeSet.arcadeMusicPlaylistId);
+  }
+ }
+ if(themeSetSelect)themeSetSelect.value=id;
+ if(themeSetSummary)themeSetSummary.textContent=currentThemeSetSummary(id,gameKey);
+ if(opts.save!==false)saveTestCfg({themeSetId:id});
 }
 function loadSystemLog(){
  try{
@@ -1917,6 +2104,7 @@ if((initialBoard[0]?.score||0)>S.best){
  S.best=initialBoard[0].score;
  writePref(scoreBestKey(),String(S.best));
 }
+const DEFAULT_AURORA_THEME_SET=themeSetConfigForGame('aurora-galactica',defaultThemeSetIdForGame('aurora-galactica'));
 const DEFAULT_TEST_CFG=Object.freeze({
  startKind:'level',
  expertPlays:'human',
@@ -1926,21 +2114,20 @@ const DEFAULT_TEST_CFG=Object.freeze({
  extendFirst:20000,
  extendRecurring:70000,
   challenge:false,
-  audioTheme:referenceAudioPubliclyAvailable()?'galaga-reference-assets':'aurora-application',
+  themeSet:DEFAULT_AURORA_THEME_SET?.id||'aurora-public',
+  audioTheme:DEFAULT_AURORA_THEME_SET?.audioTheme||'aurora-application',
   audioThemePinned:false,
-  graphicsTheme:'aurora-borealis',
-  spriteRenderMode:'auto',
-  starfieldIntensity:1.25,
-  starfieldSpeed:1
+  graphicsTheme:DEFAULT_AURORA_THEME_SET?.graphicsTheme||'aurora-borealis',
+  spriteRenderMode:DEFAULT_AURORA_THEME_SET?.spriteRenderMode||'auto',
+  starfieldIntensity:DEFAULT_AURORA_THEME_SET?.starfieldIntensity||1.25,
+  starfieldSpeed:DEFAULT_AURORA_THEME_SET?.starfieldSpeed||1
 });
 let testCfgCache=null;
 function referenceAudioPubliclyAvailable(){
  if(!BUILD_INFO?.publicArtifactBoundaryEnabled)return true;
  const host=String(location?.hostname||'').toLowerCase();
- const pathName=String(location?.pathname||'');
  const localhost=host==='localhost'||host==='127.0.0.1'||host==='[::1]'||host==='::1';
- const hostedDev=host==='sgwoods.github.io'&&pathName.startsWith('/Aurora-Galactica/dev/');
- return BUILD_INFO?.releaseChannel==='development'&&(localhost||hostedDev);
+ return BUILD_INFO?.releaseChannel==='development'&&localhost;
 }
 function productionRootModeEnabled(){
  return !PRODUCTION_RELEASE_LANE||!!developerRootMode;
@@ -1982,8 +2169,14 @@ function sanitizeGraphicsThemeValue(value=''){
  const next=String(value||'').trim()||'auto';
  if(next==='auto')return 'auto';
  if(typeof currentGamePackAtmosphereTheme!=='function')return 'auto';
+ try{
   const resolved=currentGamePackAtmosphereTheme(next);
   return resolved?.id===next?next:DEFAULT_TEST_CFG.graphicsTheme;
+ }catch{
+  return next==='aurora-borealis'||next==='classic-arcade'||next==='aurora-hint'||next==='aurora-crown'
+   ? next
+   : DEFAULT_TEST_CFG.graphicsTheme;
+ }
 }
 function sanitizeSpriteRenderModeValue(value=''){
  const next=String(value||'').trim()||'auto';
@@ -1995,6 +2188,9 @@ function sanitizeStarfieldMultiplier(value,fallback=1){
  return Math.round(cl(next,.5,1.8)*100)/100;
 }
 function applyTestCfgToControls(cfg){
+ const gameKey=currentThemeSetGameKey();
+ populateThemeSetOptions(gameKey,cfg.themeSet||defaultThemeSetIdForGame(gameKey));
+ populateGraphicsThemeOptions(cfg.graphicsTheme);
  const startCfg=effectiveStartStateCfg(cfg);
  const startKind=sanitizeStartKind(startCfg.startKind||(startCfg.challenge?'challenge':'level'));
  if(testStartKind)testStartKind.value=startKind;
@@ -2010,12 +2206,13 @@ function applyTestCfgToControls(cfg){
   if(referenceOption){
    const unavailable=!referenceAudioPubliclyAvailable();
    referenceOption.disabled=unavailable;
-   referenceOption.hidden=unavailable;
    referenceOption.textContent=unavailable
-    ? 'Galaga Reference Audio (private companion store only)'
+    ? 'Galaga Reference Audio (localhost private only)'
     : 'Galaga Reference Audio';
   }
  }
+ if(themeSetSelect)themeSetSelect.value=sanitizeThemeSetIdForGame(cfg.themeSet||defaultThemeSetIdForGame(gameKey),gameKey);
+ if(themeSetSummary)themeSetSummary.textContent=currentThemeSetSummary(themeSetSelect?.value||cfg.themeSet,gameKey);
  if(audioTheme)audioTheme.value=effectiveAudioThemeSelection(cfg);
  if(graphicsTheme)graphicsTheme.value=cfg.graphicsTheme;
  if(spriteRenderMode)spriteRenderMode.value=sanitizeSpriteRenderModeValue(cfg.spriteRenderMode);
@@ -2333,6 +2530,10 @@ function loadTestCfg(){
   const extendFirst=Number.isFinite(+raw.extendFirst)?cl(Math.max(0,+raw.extendFirst),0,999999)|0:DEFAULT_TEST_CFG.extendFirst;
   const extendRecurring=Number.isFinite(+raw.extendRecurring)?cl(Math.max(0,+raw.extendRecurring),0,999999)|0:DEFAULT_TEST_CFG.extendRecurring;
   const startKind=sanitizeStartKind(raw.startKind||(raw.challenge?'challenge':'level'));
+  const gameKey=currentThemeSetGameKey();
+  const themeSet=sanitizeThemeSetIdForGame(raw.themeSet||DEFAULT_TEST_CFG.themeSet,gameKey);
+  const preset=themeSetConfigForGame(gameKey,themeSet);
+  const presetValues=themeSetControlValues(preset);
   testCfgCache={
    startKind,
    expertPlays:sanitizeExpertPlayPersona(raw.expertPlays||DEFAULT_TEST_CFG.expertPlays),
@@ -2342,23 +2543,37 @@ function loadTestCfg(){
    extendFirst,
    extendRecurring,
    challenge:startKind==='challenge'||!!raw.challenge,
-   audioTheme:sanitizeAudioThemeValue(raw.audioTheme||DEFAULT_TEST_CFG.audioTheme),
-   audioThemePinned:!!raw.audioThemePinned,
-   graphicsTheme:sanitizeGraphicsThemeValue(raw.graphicsTheme||DEFAULT_TEST_CFG.graphicsTheme),
-   spriteRenderMode:sanitizeSpriteRenderModeValue(raw.spriteRenderMode||DEFAULT_TEST_CFG.spriteRenderMode),
-   starfieldIntensity:sanitizeStarfieldMultiplier(raw.starfieldIntensity,DEFAULT_TEST_CFG.starfieldIntensity),
-   starfieldSpeed:sanitizeStarfieldMultiplier(raw.starfieldSpeed,DEFAULT_TEST_CFG.starfieldSpeed)
-  };
+   themeSet,
+   audioTheme:sanitizeAudioThemeValue(presetValues?.audioTheme||raw.audioTheme||DEFAULT_TEST_CFG.audioTheme),
+   audioThemePinned:themeSet!=='custom'?presetValues?.audioTheme!=='auto':!!raw.audioThemePinned,
+   graphicsTheme:sanitizeGraphicsThemeValue(presetValues?.graphicsTheme||raw.graphicsTheme||DEFAULT_TEST_CFG.graphicsTheme),
+   spriteRenderMode:sanitizeSpriteRenderModeValue(presetValues?.spriteRenderMode||raw.spriteRenderMode||DEFAULT_TEST_CFG.spriteRenderMode),
+   starfieldIntensity:sanitizeStarfieldMultiplier(presetValues?.starfieldIntensity??raw.starfieldIntensity,DEFAULT_TEST_CFG.starfieldIntensity),
+   starfieldSpeed:sanitizeStarfieldMultiplier(presetValues?.starfieldSpeed??raw.starfieldSpeed,DEFAULT_TEST_CFG.starfieldSpeed)
+ };
  }catch{
-  testCfgCache=Object.assign({},DEFAULT_TEST_CFG);
+  const gameKey=currentThemeSetGameKey();
+  const themeSet=defaultThemeSetIdForGame(gameKey);
+  const preset=themeSetConfigForGame(gameKey,themeSet);
+  const values=themeSetControlValues(preset);
+  testCfgCache=Object.assign({},DEFAULT_TEST_CFG,{
+   themeSet,
+   audioTheme:sanitizeAudioThemeValue(values?.audioTheme||DEFAULT_TEST_CFG.audioTheme),
+   audioThemePinned:!!(values&&values.audioTheme!=='auto'),
+   graphicsTheme:sanitizeGraphicsThemeValue(values?.graphicsTheme||DEFAULT_TEST_CFG.graphicsTheme),
+   spriteRenderMode:sanitizeSpriteRenderModeValue(values?.spriteRenderMode||DEFAULT_TEST_CFG.spriteRenderMode),
+   starfieldIntensity:sanitizeStarfieldMultiplier(values?.starfieldIntensity,DEFAULT_TEST_CFG.starfieldIntensity),
+   starfieldSpeed:sanitizeStarfieldMultiplier(values?.starfieldSpeed,DEFAULT_TEST_CFG.starfieldSpeed)
+  });
  }
  return Object.assign({},testCfgCache);
 }
-function saveTestCfg(){
+function saveTestCfg(opts={}){
  const currentCfg=testCfgCache||loadTestCfg();
  const forceAudioThemePinned=!!window.__platinumForceAudioThemePinned||!!window.__auroraForceAudioThemePinned;
  delete window.__platinumForceAudioThemePinned;
  delete window.__auroraForceAudioThemePinned;
+ const gameKey=currentThemeSetGameKey();
  const startCfg=productionStartStateLocked()
   ? {
     startKind:sanitizeStartKind(currentCfg.startKind||(currentCfg.challenge?'challenge':'level')),
@@ -2380,7 +2595,11 @@ function saveTestCfg(){
     extendRecurring:cl(Math.max(0,+testExtendRecurring.value||0),0,999999)|0,
     challenge:sanitizeStartKind(testStartKind?.value||(testChallenge?.checked?'challenge':'level'))==='challenge'
    };
- const nextAudioTheme=sanitizeAudioThemeValue(audioTheme?.value||DEFAULT_TEST_CFG.audioTheme);
+ let themeSet=sanitizeThemeSetIdForGame(opts.themeSetId||themeSetSelect?.value||currentCfg.themeSet||DEFAULT_TEST_CFG.themeSet,gameKey);
+ const selectedPreset=themeSetConfigForGame(gameKey,themeSet);
+ if(selectedPreset&&!themeSetMatchesControls(selectedPreset))themeSet='custom';
+ const presetValues=themeSetControlValues(themeSetConfigForGame(gameKey,themeSet));
+ const nextAudioTheme=sanitizeAudioThemeValue(presetValues?.audioTheme||audioTheme?.value||DEFAULT_TEST_CFG.audioTheme);
  const cfg={
   startKind:startCfg.startKind,
   expertPlays:startCfg.expertPlays,
@@ -2390,12 +2609,13 @@ function saveTestCfg(){
   extendFirst:startCfg.extendFirst,
   extendRecurring:startCfg.extendRecurring,
   challenge:startCfg.challenge,
+  themeSet,
   audioTheme:nextAudioTheme,
-  audioThemePinned:forceAudioThemePinned||!!currentCfg.audioThemePinned||nextAudioTheme!==effectiveAudioThemeSelection(currentCfg),
-  graphicsTheme:sanitizeGraphicsThemeValue(graphicsTheme?.value||DEFAULT_TEST_CFG.graphicsTheme),
-  spriteRenderMode:sanitizeSpriteRenderModeValue(spriteRenderMode?.value||DEFAULT_TEST_CFG.spriteRenderMode),
-  starfieldIntensity:sanitizeStarfieldMultiplier(graphicsStarfieldIntensity?.value,DEFAULT_TEST_CFG.starfieldIntensity),
-  starfieldSpeed:sanitizeStarfieldMultiplier(graphicsStarfieldSpeed?.value,DEFAULT_TEST_CFG.starfieldSpeed)
+  audioThemePinned:themeSet!=='custom'?presetValues?.audioTheme!=='auto':forceAudioThemePinned||!!currentCfg.audioThemePinned||nextAudioTheme!==effectiveAudioThemeSelection(currentCfg),
+  graphicsTheme:sanitizeGraphicsThemeValue(presetValues?.graphicsTheme||graphicsTheme?.value||DEFAULT_TEST_CFG.graphicsTheme),
+  spriteRenderMode:sanitizeSpriteRenderModeValue(presetValues?.spriteRenderMode||spriteRenderMode?.value||DEFAULT_TEST_CFG.spriteRenderMode),
+  starfieldIntensity:sanitizeStarfieldMultiplier(presetValues?.starfieldIntensity??graphicsStarfieldIntensity?.value,DEFAULT_TEST_CFG.starfieldIntensity),
+  starfieldSpeed:sanitizeStarfieldMultiplier(presetValues?.starfieldSpeed??graphicsStarfieldSpeed?.value,DEFAULT_TEST_CFG.starfieldSpeed)
  };
  const spriteModeChanged=sanitizeSpriteRenderModeValue(currentCfg.spriteRenderMode)!==cfg.spriteRenderMode;
  testCfgCache=cfg;
@@ -2985,6 +3205,7 @@ if(arcadeMusicPlaylistSelect){
   const gameKey=String(pack?.metadata?.gameKey||'').trim();
   if(!gameKey)return;
   setArcadeMusicPlaylistOverrideForGame(gameKey,arcadeMusicPlaylistSelect.value||ARCADE_MUSIC_SELECTOR_DEFAULT);
+  saveTestCfg({themeSetId:'custom'});
  });
 }
 if(gameSoundVolumeControl){
@@ -2992,12 +3213,14 @@ if(gameSoundVolumeControl){
  gameSoundVolumeControl.addEventListener('change',()=>setGameSoundVolume((+gameSoundVolumeControl.value||0)/100,{log:1,source:'developer_panel'}));
 }
 if(arcadeFullscreenAutoToggle)arcadeFullscreenAutoToggle.addEventListener('change',()=>setArcadeFullscreenAuto(arcadeFullscreenAutoToggle.checked,{log:1,source:'developer_panel'}));
+if(themeSetSelect)themeSetSelect.addEventListener('change',()=>applyThemeSetSelection(themeSetSelect.value,{save:true}));
 if(audioTheme)audioTheme.addEventListener('change',()=>{
  window.__platinumForceAudioThemePinned=1;
  window.__auroraForceAudioThemePinned=1;
- saveTestCfg();
+ saveTestCfg({themeSetId:'custom'});
 });
-for(const el of [testStartKind,testExpertPlays,testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring,testChallenge,graphicsTheme,spriteRenderMode,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',saveTestCfg);
+for(const el of [testStartKind,testExpertPlays,testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring,testChallenge])if(el)el.addEventListener('change',saveTestCfg);
+for(const el of [graphicsTheme,spriteRenderMode,graphicsStarfieldIntensity,graphicsStarfieldSpeed])if(el)el.addEventListener('change',()=>saveTestCfg({themeSetId:'custom'}));
 for(const el of [testStage,testChallengeStage,testShips,testExtendFirst,testExtendRecurring])if(el)el.addEventListener('input',saveTestCfg);
 if(rootMode)rootMode.addEventListener('input',()=>{
  developerRootMode=String(rootMode.value||'').trim()===ROOT_UNLOCK_CODE;
@@ -3224,4 +3447,25 @@ window.__platinumAudioMix={
  },
  setGameSoundVolume(value){setGameSoundVolume(value,{log:1,source:'harness'});return this.state();},
  setArcadeMusicVolume(value){setArcadeMusicVolume(value,{log:1,source:'harness'});return this.state();}
+};
+window.__platinumThemeSets={
+ list(gameKey=currentThemeSetGameKey()){
+  return themeSetsForGame(gameKey).map(set=>Object.assign({},set));
+ },
+ current(){
+  const cfg=loadTestCfg();
+  return {
+   gameKey:currentThemeSetGameKey(),
+   themeSet:cfg.themeSet,
+   summary:currentThemeSetSummary(cfg.themeSet,currentThemeSetGameKey()),
+   audioTheme:currentAudioOverrides().audioTheme,
+   graphics:currentGraphicsOverrides(),
+   playlist:typeof arcadeMusicResolvedConfig==='function'?arcadeMusicResolvedConfig():null,
+   referenceAudioAvailable:referenceAudioPubliclyAvailable()
+  };
+ },
+ apply(id){
+  applyThemeSetSelection(id,{save:true});
+  return this.current();
+ }
 };

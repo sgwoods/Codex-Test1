@@ -150,55 +150,63 @@
       </label>
     </div>
     <div id="graphicsPanel" class="settingsSection">
-      <h4>Graphics Options</h4>
-      <div class="settingsFieldGrid">
-        <div class="settingsField">
-          <label for="audioTheme">Audio Theme</label>
-          <select id="audioTheme">
-            <option value="auto">Auto</option>
-            <option value="aurora-application" selected>Aurora Application Mix</option>
-            <option value="galaga-original-reference">Galaga Synth Approximation</option>
-            <option value="galaga-reference-assets">Galaga Reference Audio (private companion store only)</option>
-          </select>
-        </div>
-        <div class="settingsField">
-          <label for="graphicsTheme">Graphics Theme</label>
-          <select id="graphicsTheme">
-            <option value="auto">Auto</option>
-            <option value="classic-arcade">Classic Arcade</option>
-            <option value="aurora-hint">Aurora Hint</option>
-            <option value="aurora-borealis" selected>Aurora Borealis</option>
-            <option value="aurora-crown">Aurora Crown</option>
-          </select>
-        </div>
-        <div class="settingsField">
-          <label for="spriteRenderMode">Sprite Rendering</label>
-          <select id="spriteRenderMode">
-            <option value="auto" selected>Auto (Aurora Theme)</option>
-            <option value="reference-pixel-lab">Reference Pixel Lab</option>
-            <option value="aurora-themed">Aurora Theme</option>
-          </select>
-        </div>
-        <div class="settingsField">
-          <label for="graphicsStarfieldIntensity">Starfield Intensity</label>
-          <select id="graphicsStarfieldIntensity">
-            <option value="0.75">Soft</option>
-            <option value="1">Reference</option>
-            <option value="1.25" selected>Bright</option>
-            <option value="1.5">Vivid</option>
-          </select>
-        </div>
-        <div class="settingsField">
-          <label for="graphicsStarfieldSpeed">Starfield Speed</label>
-          <select id="graphicsStarfieldSpeed">
-            <option value="0.8">Calm</option>
-            <option value="1" selected>Reference</option>
-            <option value="1.15">Arcade</option>
-            <option value="1.3">Fast</option>
-          </select>
-        </div>
+      <h4>Theme</h4>
+      <div class="settingsField settingsFieldFull">
+        <label for="themeSetSelect">Theme Set</label>
+        <select id="themeSetSelect"></select>
+        <div id="themeSetSummary" class="settingsThemeSummary">--</div>
       </div>
-      <div class="settingsHint">Graphics options apply live so we can tune look and feel without restarting the run.</div>
+      <details id="advancedThemeControls" class="settingsDetails">
+        <summary>Advanced Theme Controls</summary>
+        <div class="settingsFieldGrid">
+          <div class="settingsField">
+            <label for="audioTheme">Audio Theme</label>
+            <select id="audioTheme">
+              <option value="auto">Auto</option>
+              <option value="aurora-application" selected>Aurora Application Mix</option>
+              <option value="galaga-original-reference">Galaga Synth Approximation</option>
+              <option value="galaga-reference-assets">Galaga Reference Audio (private companion store only)</option>
+            </select>
+          </div>
+          <div class="settingsField">
+            <label for="graphicsTheme">Graphics Theme</label>
+            <select id="graphicsTheme">
+              <option value="auto">Auto</option>
+              <option value="classic-arcade">Classic Arcade</option>
+              <option value="aurora-hint">Aurora Hint</option>
+              <option value="aurora-borealis" selected>Aurora Borealis</option>
+              <option value="aurora-crown">Aurora Crown</option>
+            </select>
+          </div>
+          <div class="settingsField">
+            <label for="spriteRenderMode">Sprite Rendering</label>
+            <select id="spriteRenderMode">
+              <option value="auto" selected>Auto (Aurora Theme)</option>
+              <option value="reference-pixel-lab">Reference Pixel Lab</option>
+              <option value="aurora-themed">Aurora Theme</option>
+            </select>
+          </div>
+          <div class="settingsField">
+            <label for="graphicsStarfieldIntensity">Starfield Intensity</label>
+            <select id="graphicsStarfieldIntensity">
+              <option value="0.75">Soft</option>
+              <option value="1">Reference</option>
+              <option value="1.25" selected>Bright</option>
+              <option value="1.5">Vivid</option>
+            </select>
+          </div>
+          <div class="settingsField">
+            <label for="graphicsStarfieldSpeed">Starfield Speed</label>
+            <select id="graphicsStarfieldSpeed">
+              <option value="0.8">Calm</option>
+              <option value="1" selected>Reference</option>
+              <option value="1.15">Arcade</option>
+              <option value="1.3">Fast</option>
+            </select>
+          </div>
+        </div>
+      </details>
+      <div class="settingsHint">Theme sets update audio, graphics, sprite rendering, starfield, and Arcade Music together.</div>
     </div>
     <div id="testPanel" class="settingsSection">
       <h4>Developer Start State</h4>

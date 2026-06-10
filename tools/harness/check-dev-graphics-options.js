@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 const { withHarnessPage } = require('./browser-check-util');
 
+const AURORA_PLAYLIST = 'PLWDxjyS0X-zlKJsel_7Kg3ALGlSD89zSH';
+const GUARDIANS_PLAYLIST = 'PLWDxjyS0X-zm5GrG4zytIyqRPQ8Jv4TA-';
+
 function fail(message, payload){
   console.error(message);
   if(payload) console.error(JSON.stringify(payload, null, 2));
@@ -50,10 +53,20 @@ async function main(){
       const cue = window.__galagaHarness__.triggerAudioCue('gameStart', { phase: 'stage', atmosphereTheme: 'aurora-borealis' });
       return { state, cue };
     });
-    return { ...runtimeInfo, defaults, vividAurora, forcedClassic, galagaReference, galagaReferenceAssets };
+    const themeSets = await page.evaluate(() => {
+      window.installGamePack('aurora-galactica', { persist: false });
+      const auroraList = window.__platinumThemeSets.list('aurora-galactica').map(set => set.id);
+      const auroraPublic = window.__platinumThemeSets.apply('aurora-public');
+      const auroraClassic = window.__platinumThemeSets.apply('aurora-classic-synth');
+      window.installGamePack('galaxy-guardians-preview', { persist: false });
+      const guardiansList = window.__platinumThemeSets.list('galaxy-guardians-preview').map(set => set.id);
+      const guardiansSignal = window.__platinumThemeSets.apply('guardians-signal');
+      return { auroraList, auroraPublic, auroraClassic, guardiansList, guardiansSignal };
+    });
+    return { ...runtimeInfo, defaults, vividAurora, forcedClassic, galagaReference, galagaReferenceAssets, themeSets };
   });
 
-  const expectedDefaultAudioTheme = result.referenceAudioAvailable ? 'galaga-reference-assets' : 'aurora-application';
+  const expectedDefaultAudioTheme = 'aurora-application';
   if(result.defaults.audio?.audioTheme !== expectedDefaultAudioTheme){
     fail('default audio theme no longer resolves to the expected runtime review mix', result);
   }
@@ -95,6 +108,28 @@ async function main(){
   }
   if(result.galagaReferenceAssets.state?.visualAtmosphere?.id !== 'aurora-borealis') fail('Galaga reference assets override leaked into visual atmosphere selection; it should stay audio-only', result);
 
+  if(!result.themeSets.auroraList.includes('aurora-public') || !result.themeSets.auroraList.includes('aurora-classic-synth') || !result.themeSets.auroraList.includes('aurora-local-reference')){
+    fail('Aurora theme set catalog is missing expected presets', result);
+  }
+  if(!result.themeSets.guardiansList.includes('guardians-signal') || !result.themeSets.guardiansList.includes('guardians-aurora-music')){
+    fail('Guardians theme set catalog is missing expected presets', result);
+  }
+  if(result.themeSets.auroraPublic.themeSet !== 'aurora-public' || result.themeSets.auroraPublic.audioTheme !== 'aurora-application'){
+    fail('Aurora public theme set did not apply the public-safe audio default', result);
+  }
+  if(result.themeSets.auroraPublic.playlist?.playlistId !== AURORA_PLAYLIST){
+    fail('Aurora public theme set did not apply the Aurora arcade music playlist', result);
+  }
+  if(result.themeSets.auroraClassic.audioTheme !== 'galaga-original-reference' || result.themeSets.auroraClassic.graphics?.graphicsTheme !== 'classic-arcade'){
+    fail('Aurora classic synth theme set did not apply the expected audio/graphics bundle', result);
+  }
+  if(result.themeSets.guardiansSignal.gameKey !== 'galaxy-guardians-preview' || result.themeSets.guardiansSignal.themeSet !== 'guardians-signal'){
+    fail('Guardians signal theme set did not apply for the Guardians game pack', result);
+  }
+  if(result.themeSets.guardiansSignal.playlist?.playlistId !== GUARDIANS_PLAYLIST){
+    fail('Guardians signal theme set did not apply the Guardians arcade music playlist', result);
+  }
+
   console.log(JSON.stringify({
     ok: true,
     boundaryEnabled: result.boundaryEnabled,
@@ -120,7 +155,8 @@ async function main(){
       stageAtmosphere: result.galagaReferenceAssets.state.atmosphere,
       visualAtmosphere: result.galagaReferenceAssets.state.visualAtmosphere,
       cue: result.galagaReferenceAssets.cue
-    }
+    },
+    themeSets: result.themeSets
   }, null, 2));
 }
 

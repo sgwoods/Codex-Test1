@@ -56,9 +56,9 @@ async function main(){
     });
     return { runtimeInfo, frontDoor, waitEnter, waitPulse, demoEnter, demoPulse, gameplayStart, challengeTransition };
   });
-  const expectedReviewGameplayTheme = result.runtimeInfo.referenceAudioAvailable ? 'galaga-reference-assets' : 'aurora-surge';
-  const expectedDemoEnterTheme = result.runtimeInfo.referenceAudioAvailable ? 'galaga-reference-assets' : 'aurora-crown';
-  const expectedDemoPulseTheme = result.runtimeInfo.referenceAudioAvailable ? 'galaga-reference-assets' : 'classic-arcade';
+  const expectedReviewGameplayTheme = 'aurora-surge';
+  const expectedDemoEnterTheme = 'aurora-crown';
+  const expectedDemoPulseTheme = 'classic-arcade';
 
   if(result.frontDoor?.cue !== 'uiTick' || result.frontDoor?.phase !== 'frontDoor' || result.frontDoor?.audioTheme !== 'aurora-crown'){
     fail('front-door ui tick did not resolve through the Aurora Crown front-door audio theme', result);
