@@ -115,6 +115,11 @@ function laneConfig(lane){
     'src',
     'reference-artifacts'
   ];
+  const publicReferenceAudioPrune = [
+    'assets/reference-audio',
+    'dev/assets/reference-audio',
+    'beta/assets/reference-audio'
+  ];
   if(lane === 'dev'){
     return {
       lane,
@@ -123,7 +128,7 @@ function laneConfig(lane){
       targetDir: 'dev',
       files: devFiles(DIST_DEV),
       rootFiles: [],
-      prunePaths: legacyRootPrune,
+      prunePaths: [...legacyRootPrune, ...publicReferenceAudioPrune],
       commitPrefix: 'Update dev lane from local build'
     };
   }
@@ -135,7 +140,7 @@ function laneConfig(lane){
       targetDir: 'beta',
       files: betaFiles(DIST_BETA),
       rootFiles: [],
-      prunePaths: legacyRootPrune,
+      prunePaths: [...legacyRootPrune, ...publicReferenceAudioPrune],
       commitPrefix: 'Update beta lane from dev build'
     };
   }
@@ -147,7 +152,7 @@ function laneConfig(lane){
       targetDir: '.',
       files: productionFiles(DIST_PRODUCTION),
       rootFiles: ['.github/workflows/pages.yml'],
-      prunePaths: legacyRootPrune,
+      prunePaths: [...legacyRootPrune, ...publicReferenceAudioPrune],
       commitPrefix: 'Update production lane from dev build'
     };
   }
