@@ -21,7 +21,7 @@ instead of leaving it as a good intention.
 
 - do at least one focused review pass per week on:
   - white-paper clarity
-  - 20-slide overview consistency
+  - overview deck consistency
   - HTML/PDF presentation
   - preserved-source integrity
   - stale path drift
@@ -46,7 +46,7 @@ instead of leaving it as a good intention.
 
 - `npm run white-paper:review`
   - refresh the dev-lane PDF
-  - refresh and check the generated 20-slide overview deck
+  - refresh and check the generated overview deck
   - refresh the code-review packet
   - pass the code-review gate
   - verify the preserved-source integrity check

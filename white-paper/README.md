@@ -17,7 +17,10 @@ The white paper is meant to be both:
 - `../WHITE_PAPER.md`
   - current living draft
 - `project-overview-slides.json`
-  - durable source for the generated 20-slide public overview deck
+  - durable source for the generated public overview deck
+- `PROJECT_ROLES.md`
+  - durable source for recurring project roles, invocation timing, and role
+    automation/build status
 - `CITATION_LEDGER.md`
   - maintained list of outside ideas, source families, and project learnings
 - `ILLUSTRATION_PLAN.md`
@@ -53,6 +56,8 @@ The white paper is meant to be both:
   or hosted-detail surface becomes important to the white-paper story.
 - Keep the related-work log current when a focused web refresh produces a
   source worth preserving for future readers.
+- Keep the recurring project roles current when a human, agent, machine, or
+  build-process role changes authority, invocation timing, or automation status.
 - Treat HTML and PDF presentation review as part of release quality, not only as
   a late formatting pass.
 
@@ -65,7 +70,7 @@ The white paper is meant to be both:
 - `dist/<lane>/white-paper-pdf.json`
   - version, date-updated, lane, and build metadata for the generated PDF
 - `dist/<lane>/project-overview-slides.html`
-  - hosted 20-slide project overview, linked next to the white paper
+  - hosted project overview deck, linked next to the white paper
 - `dist/<lane>/project-overview-slides.json`
   - slide metadata and source trace for release review and public inspection
 

@@ -75,11 +75,11 @@ Currently verified hosted docs:
   - `https://sgwoods.github.io/Aurora-Galactica/dev/project-guide.html#multi-machine-allocation`
 - white paper on hosted `/dev`:
   - `https://sgwoods.github.io/Aurora-Galactica/dev/white-paper.html`
-- 20-slide project overview on hosted `/dev`:
+- project overview deck on hosted `/dev`:
   - `https://sgwoods.github.io/Aurora-Galactica/dev/project-overview-slides.html`
 - white paper on hosted `/production`:
   - `https://sgwoods.github.io/Aurora-Galactica/white-paper.html`
-- 20-slide project overview on hosted `/production`:
+- project overview deck on hosted `/production`:
   - `https://sgwoods.github.io/Aurora-Galactica/project-overview-slides.html`
 - Platinum guide:
   - `https://sgwoods.github.io/Aurora-Galactica/platinum-guide.html`

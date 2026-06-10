@@ -2515,7 +2515,7 @@ function buildProjectOverviewSlidesPage(buildInfo, latestNote, slideSource, whit
   <main class="deckShell">
     <section class="deckHero">
       <div class="deckTop">
-        <span class="eyebrow">20-slide public overview</span>
+        <span class="eyebrow">${esc(String(slides.length))}-slide public overview</span>
         <a class="button" href="white-paper.html">Open white paper</a>
       </div>
       <h1>${esc(slideSource.title || 'Project Overview Slides')}</h1>
@@ -3841,7 +3841,7 @@ function buildProjectGuide(buildInfo, latestNote, guide){
             <a class="button" href="index.html">Open current lane build</a>
             <a class="button" href="public-project-page.html">Open lane project page</a>
             <a class="button" href="white-paper.html">Open white paper</a>
-            <a class="button" href="project-overview-slides.html">Open 20-slide overview</a>
+            <a class="button" href="project-overview-slides.html">Open overview deck</a>
             <a class="button" href="application-guide.html">Open Aurora application guide</a>
             <a class="button" href="platinum-guide.html">Open Platinum guide</a>
             <a class="button" href="player-guide.html">Open player guide</a>
@@ -3929,7 +3929,7 @@ function buildWhitePaperGuide(buildInfo, latestNote, guide){
           </div>
           <div class="heroLinks">
             <a class="button" href="index.html">Open current lane build</a>
-            <a class="button whitePaperDocAction" href="project-overview-slides.html">Open 20-slide overview</a>
+            <a class="button whitePaperDocAction" href="project-overview-slides.html">Open overview deck</a>
             <a class="button whitePaperDocAction" href="project-overview-slides.json">Open slide metadata</a>
             <a class="button whitePaperDocAction" href="white-paper.pdf">Open current lane PDF</a>
             <a class="button whitePaperDocAction" href="white-paper-pdf.json">Open PDF metadata</a>

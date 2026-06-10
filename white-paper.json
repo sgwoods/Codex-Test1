@@ -66,9 +66,14 @@
           "detail": "Open the current lane PDF version of the white paper with explicit version/date metadata."
         },
         {
-          "label": "20-Slide Project Overview",
+          "label": "Project Overview Deck",
           "href": "project-overview-slides.html",
           "detail": "Open the generated talk-through slide overview that travels beside the white paper in each release lane."
+        },
+        {
+          "label": "Recurring Project Roles",
+          "href": "#white-paper-project-roles-doc",
+          "detail": "Read the updateable role definitions for manager, developer, architect, release authority, review, conformance, security, audio, and documentation automation."
         },
         {
           "label": "Overview Slide Metadata",
@@ -141,6 +146,42 @@
       ]
     },
     {
+      "id": "recurring-project-roles",
+      "title": "Recurring Project Roles",
+      "summary": "The human, agent, machine, and build-process roles that make the operating model assignable and reviewable.",
+      "cards": [
+        {
+          "title": "Roles Are Explicit",
+          "body": "Manager, developer, architect, release authority, parallel worker, security, code review, conformance, audio, player-visible review, and documentation generation roles are now named instead of implied."
+        },
+        {
+          "title": "Definitions Are Maintainable",
+          "body": "`white-paper/PROJECT_ROLES.md` is the updateable role source. It records definition, invocation timing, automation status, and links to detailed repo sources."
+        },
+        {
+          "title": "Automation Has Boundaries",
+          "body": "Build and harness automation can refresh evidence and block weak releases, but beta/production authority and player-visible quality judgment remain explicit human decisions."
+        }
+      ],
+      "links": [
+        {
+          "label": "Role Definitions",
+          "href": "#white-paper-project-roles-doc",
+          "detail": "Open the rendered role table and maintenance notes."
+        },
+        {
+          "label": "Current Project State",
+          "href": "project-guide.html#current-project-state-doc",
+          "detail": "See the active project state used to orient new sessions."
+        },
+        {
+          "label": "Multi-Machine Allocation",
+          "href": "project-guide.html#multi-machine-allocation",
+          "detail": "See how MacBook release authority and iMac parallel work are separated."
+        }
+      ]
+    },
+    {
       "id": "white-paper-release-history",
       "title": "White Paper Release History",
       "summary": "The first durable release pattern for preserving the narrative over time.",
@@ -189,6 +230,12 @@
       "title": "Citation Ledger",
       "summary": "Maintained list of outside ideas, source families, how they were used, and what still needs to be recovered or tightened.",
       "file": "white-paper/CITATION_LEDGER.md"
+    },
+    {
+      "id": "white-paper-project-roles-doc",
+      "title": "Recurring Project Roles",
+      "summary": "Updateable definitions for the recurring human, agent, machine, and build-process roles used by the project.",
+      "file": "white-paper/PROJECT_ROLES.md"
     },
     {
       "id": "white-paper-illustration-plan-doc",

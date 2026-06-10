@@ -88,6 +88,13 @@ function parseWhitePaperMetadata(){
   };
 }
 
+function parseProjectOverviewSlideSource(){
+  const source = JSON.parse(fs.readFileSync(path.join(ROOT, 'white-paper', 'project-overview-slides.json'), 'utf8'));
+  return {
+    slideCount: Array.isArray(source.slides) ? source.slides.length : 0
+  };
+}
+
 function main(){
   const args = parseArgs(process.argv.slice(2));
   const lane = String(args.lane || 'dev').toLowerCase();
@@ -103,14 +110,15 @@ function main(){
   const meta = JSON.parse(fs.readFileSync(cfg.meta, 'utf8'));
   const slidesMeta = JSON.parse(fs.readFileSync(cfg.slidesMeta, 'utf8'));
   const source = parseWhitePaperMetadata();
+  const slideSource = parseProjectOverviewSlideSource();
   if(!html.includes('Open current lane PDF')){
     fail('White-paper presentation check failed: hosted white-paper page is missing the PDF entry point.', { lane });
   }
   if(!html.includes('project-overview-slides.html')){
-    fail('White-paper presentation check failed: hosted white-paper page is missing the 20-slide overview entry point.', { lane });
+    fail('White-paper presentation check failed: hosted white-paper page is missing the overview deck entry point.', { lane });
   }
   if(!publicProjectHtml.includes('project-overview-slides.html')){
-    fail('White-paper presentation check failed: public project page is missing the 20-slide overview entry point.', { lane });
+    fail('White-paper presentation check failed: public project page is missing the overview deck entry point.', { lane });
   }
   if(!html.includes('Related Work')){
     fail('White-paper presentation check failed: hosted white-paper page is missing the Related Work section.', { lane });
@@ -151,10 +159,13 @@ function main(){
       }
     });
   }
-  if(slidesMeta.slideCount !== 20){
-    fail('White-paper presentation check failed: expected 20 project overview slides.', slidesMeta);
+  if(slidesMeta.slideCount !== slideSource.slideCount){
+    fail('White-paper presentation check failed: project overview slide count does not match source.', {
+      expected: slideSource.slideCount,
+      actual: slidesMeta.slideCount
+    });
   }
-  if(!slidesHtml.includes('20-slide public overview') || !slidesHtml.includes('Slide Index')){
+  if(!slidesHtml.includes(`${slideSource.slideCount}-slide public overview`) || !slidesHtml.includes('Slide Index')){
     fail('White-paper presentation check failed: project overview slide page is missing expected public deck structure.', { lane });
   }
   const pdfSize = fs.statSync(cfg.pdf).size;

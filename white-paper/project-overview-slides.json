@@ -12,6 +12,7 @@
     "WHITE_PAPER.md",
     "REFERENCE_MEDIA_INVENTORY.md",
     "GAME_CONFORMANCE_CATALOG.md",
+    "white-paper/PROJECT_ROLES.md",
     "RELEASE_CONFORMANCE_DASHBOARD.md",
     "CONFORMANCE_ECONOMICS.md",
     "PROJECT_STATE_AND_CONFORMANCE_PROGRAM.md",
@@ -50,6 +51,12 @@
       "claim": "Quality improves when reference evidence, ingestion, games, harnesses, and release claims have separate ownership.",
       "proof": ["Reference artifacts", "Ingestion framework", "Game-owned truth", "Harnesses and scorecards", "Release lanes and docs"],
       "visual": "flow"
+    },
+    {
+      "title": "Recurring Roles Keep The Work Assignable",
+      "kicker": "Operating roles",
+      "claim": "The project uses named human, agent, machine, and build-process roles so quality work can be assigned, checked, and handed off without becoming ad hoc.",
+      "proof": ["Manager sets direction and stop/go constraints", "Developer executes scoped changes and evidence", "Architect turns repeated pain into reusable mechanisms", "Release authority controls hosted lane claims", "Automated gates refresh review, security, conformance, and documentation evidence", "Player-visible review decides whether measured changes actually improve the game"]
     },
     {
       "title": "Platinum Hosts; Game Packs Carry Game-Specific Authority",

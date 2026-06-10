@@ -56,6 +56,7 @@ const REQUIRED_SOURCE_DOCS = [
   'white-paper/README.md',
   'white-paper/project-overview-slides.json',
   'white-paper/CITATION_LEDGER.md',
+  'white-paper/PROJECT_ROLES.md',
   'white-paper/ILLUSTRATION_PLAN.md',
   'white-paper/RELATED_WORK.md',
   'white-paper/REVIEWER_CHECKLIST.md',
@@ -127,8 +128,9 @@ const USER_VISIBLE_SECTIONS = [
       'Citation Ledger',
       'V1 Release Path',
       'Open current lane PDF',
-      'Open 20-slide overview',
+      'Open overview deck',
       'Open slide metadata',
+      'Recurring Project Roles',
       'Related Work',
       'Reviewer Checklist'
     ]
@@ -137,7 +139,8 @@ const USER_VISIBLE_SECTIONS = [
     id: 'project-overview-slides-page',
     file: 'project-overview-slides.html',
     requiredText: [
-      '20-slide public overview',
+      'public overview',
+      'Recurring Roles Keep The Work Assignable',
       'Open white paper',
       'Open slide metadata',
       'Slide Index',
@@ -150,7 +153,7 @@ const USER_VISIBLE_SECTIONS = [
     requiredText: [
       '"artifactType": "project-overview-slides"',
       '"sourceArtifact": "white-paper/project-overview-slides.json"',
-      '"slideCount": 20',
+      '"slideCount":',
       '"whitePaperVersion":'
     ]
   },
