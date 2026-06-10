@@ -50,6 +50,25 @@ function loadSession(summary){
   return readJson(sessionPath).session;
 }
 
+function rootHasBrowserHarness(rootDir){
+  const htmlFile = path.join(rootDir, 'index.html');
+  if(!fs.existsSync(htmlFile)) return false;
+  return fs.readFileSync(htmlFile, 'utf8').includes('window.__galagaHarness__');
+}
+
+function skippedScenario(reason){
+  return {
+    summary: null,
+    session: null,
+    error: {
+      status: null,
+      stdout: '',
+      stderr: reason,
+      skipped: true
+    }
+  };
+}
+
 function firstEvent(events, predicate){
   return events.find(predicate) || null;
 }
@@ -261,14 +280,33 @@ function buildReadme(report){
     '',
     '## Scenario Support',
     '',
+    `- Baseline browser harness: ${report.rootHarness.baseline ? 'available' : 'not exposed'}`,
+    `- Current browser harness: ${report.rootHarness.current ? 'available' : 'not exposed'}`,
+    `- Baseline stage 1: ${report.runs.baseline.stage1Error ? 'unsupported' : 'ok'}`,
     `- Baseline challenge entry: ${report.runs.baseline.challengeEntryError ? 'unsupported' : 'ok'}`,
+    `- Baseline challenge perfect: ${report.runs.baseline.challengePerfectError ? 'unsupported' : 'ok'}`,
+    `- Current stage 1: ${report.runs.current.stage1Error ? 'unsupported' : 'ok'}`,
     `- Current challenge entry: ${report.runs.current.challengeEntryError ? 'unsupported' : 'ok'}`,
+    `- Current challenge perfect: ${report.runs.current.challengePerfectError ? 'unsupported' : 'ok'}`,
     '',
     '## Metrics',
     ''
   ];
+  if(!report.rootHarness.baseline){
+    lines.push('- Baseline drift is omitted because the baseline root is a public-hardened artifact without browser harness exports.');
+    lines.push('- Current cue timing is still checked against reference-derived target windows.');
+    lines.push('');
+  }
+  if(report.runs.baseline.stage1Error){
+    lines.push(`- Baseline stage-1 probe error: \`${String(report.runs.baseline.stage1Error).trim()}\``);
+    lines.push('');
+  }
   if(report.runs.baseline.challengeEntryError){
     lines.push(`- Baseline challenge-entry probe error: \`${String(report.runs.baseline.challengeEntryError).trim()}\``);
+    lines.push('');
+  }
+  if(report.runs.baseline.challengePerfectError){
+    lines.push(`- Baseline challenge-perfect probe error: \`${String(report.runs.baseline.challengePerfectError).trim()}\``);
     lines.push('');
   }
   for(const metric of report.metrics){
@@ -299,6 +337,11 @@ function main(){
   const currentRoot = path.resolve(ROOT, args['current-root'] || profile.candidateRoots.current);
   if(!fs.existsSync(path.join(baselineRoot, 'index.html'))) fail(`baseline root is missing a built app: ${baselineRoot}`);
   if(!fs.existsSync(path.join(currentRoot, 'index.html'))) fail(`current root is missing a built app: ${currentRoot}`);
+  const baselineHarnessAvailable = rootHasBrowserHarness(baselineRoot);
+  const currentHarnessAvailable = rootHasBrowserHarness(currentRoot);
+  if(!currentHarnessAvailable){
+    fail(`current root does not expose browser harness exports required for audio cue alignment: ${currentRoot}`);
+  }
 
   ensureDir(OUT_ROOT);
   const stamp = new Date().toISOString().slice(0, 10);
@@ -309,9 +352,10 @@ function main(){
   const challengeEntryScenario = path.resolve(ROOT, profile.scenarios.challengeEntry);
   const challengePerfectScenario = path.resolve(ROOT, profile.scenarios.challengePerfect);
 
-  const baselineStage1 = runScenario(baselineRoot, stage1Scenario);
-  const baselineChallengeEntry = runScenario(baselineRoot, challengeEntryScenario, true);
-  const baselineChallengePerfect = runScenario(baselineRoot, challengePerfectScenario);
+  const baselineSkipReason = `Public-hardened baseline root does not expose browser harness exports: ${path.relative(ROOT, baselineRoot)}`;
+  const baselineStage1 = baselineHarnessAvailable ? runScenario(baselineRoot, stage1Scenario) : skippedScenario(baselineSkipReason);
+  const baselineChallengeEntry = baselineHarnessAvailable ? runScenario(baselineRoot, challengeEntryScenario, true) : skippedScenario(baselineSkipReason);
+  const baselineChallengePerfect = baselineHarnessAvailable ? runScenario(baselineRoot, challengePerfectScenario) : skippedScenario(baselineSkipReason);
   const currentStage1 = runScenario(currentRoot, stage1Scenario);
   const currentChallengeEntry = runScenario(currentRoot, challengeEntryScenario);
   const currentChallengePerfect = runScenario(currentRoot, challengePerfectScenario);
@@ -337,19 +381,27 @@ function main(){
     profile,
     baselineRoot: path.relative(ROOT, baselineRoot),
     currentRoot: path.relative(ROOT, currentRoot),
+    rootHarness: {
+      baseline: baselineHarnessAvailable,
+      current: currentHarnessAvailable
+    },
     historicalFamilies: Object.fromEntries(Object.entries(historicalFamilies).map(([key, value]) => [key, value?.id || null])),
     runs: {
       baseline: {
         stage1: baselineStage1.summary?.outDir || null,
         challengeEntry: baselineChallengeEntry.summary?.outDir || null,
         challengePerfect: baselineChallengePerfect.summary?.outDir || null,
-        challengeEntryError: baselineChallengeEntry.error?.stderr || null
+        stage1Error: baselineStage1.error?.stderr || null,
+        challengeEntryError: baselineChallengeEntry.error?.stderr || null,
+        challengePerfectError: baselineChallengePerfect.error?.stderr || null
       },
       current: {
         stage1: currentStage1.summary?.outDir || null,
         challengeEntry: currentChallengeEntry.summary?.outDir || null,
         challengePerfect: currentChallengePerfect.summary?.outDir || null,
-        challengeEntryError: currentChallengeEntry.error?.stderr || null
+        stage1Error: currentStage1.error?.stderr || null,
+        challengeEntryError: currentChallengeEntry.error?.stderr || null,
+        challengePerfectError: currentChallengePerfect.error?.stderr || null
       }
     },
     baselineMetrics,

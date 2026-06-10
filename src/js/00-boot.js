@@ -1937,7 +1937,10 @@ let testCfgCache=null;
 function referenceAudioPubliclyAvailable(){
  if(!BUILD_INFO?.publicArtifactBoundaryEnabled)return true;
  const host=String(location?.hostname||'').toLowerCase();
- return BUILD_INFO?.releaseChannel==='development'&&(host==='localhost'||host==='127.0.0.1'||host==='[::1]'||host==='::1');
+ const pathName=String(location?.pathname||'');
+ const localhost=host==='localhost'||host==='127.0.0.1'||host==='[::1]'||host==='::1';
+ const hostedDev=host==='sgwoods.github.io'&&pathName.startsWith('/Aurora-Galactica/dev/');
+ return BUILD_INFO?.releaseChannel==='development'&&(localhost||hostedDev);
 }
 function productionRootModeEnabled(){
  return !PRODUCTION_RELEASE_LANE||!!developerRootMode;
@@ -2217,6 +2220,9 @@ function effectiveAudioThemeSelection(cfg=testCfgCache||loadTestCfg()){
  }
  if(gameKey==='galaxy-guardians-preview'&&!pinned&&selected===DEFAULT_TEST_CFG.audioTheme){
   return 'auto';
+ }
+ if(gameKey==='aurora-galactica'&&!pinned&&selected==='aurora-application'&&DEFAULT_TEST_CFG.audioTheme==='galaga-reference-assets'&&referenceAudioPubliclyAvailable()){
+  return DEFAULT_TEST_CFG.audioTheme;
  }
  return selected;
 }

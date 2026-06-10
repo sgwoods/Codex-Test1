@@ -173,16 +173,18 @@ function rootRead(label, root, manifest){
   };
 }
 
-function referenceAudioAvailableForHost(buildInfo, host){
+function referenceAudioAvailableForHost(buildInfo, host, pathname = ''){
   if(!buildInfo) return null;
   if(!buildInfo.publicArtifactBoundaryEnabled) return true;
   const normalized = String(host || '').toLowerCase();
-  return buildInfo.releaseChannel === 'development' && LOCAL_AUDIO_HOSTS.has(normalized);
+  const hostedDev = normalized === 'sgwoods.github.io' && String(pathname || '').startsWith('/Aurora-Galactica/dev/');
+  return buildInfo.releaseChannel === 'development' && (LOCAL_AUDIO_HOSTS.has(normalized) || hostedDev);
 }
 
 function publicBoundaryStatus(){
   const buildInfo = readJsonIfExists(DEV_BUILD_INFO);
   const localhostReferenceAudioAvailable = referenceAudioAvailableForHost(buildInfo, 'localhost');
+  const hostedDevReferenceAudioAvailable = referenceAudioAvailableForHost(buildInfo, 'sgwoods.github.io', '/Aurora-Galactica/dev/');
   const publicSafeReferenceAudioAvailable = referenceAudioAvailableForHost(buildInfo, 'aurora-public.localhost');
   return {
     buildInfoPath: rel(DEV_BUILD_INFO),
@@ -190,6 +192,7 @@ function publicBoundaryStatus(){
     releaseChannel: buildInfo?.releaseChannel || '',
     publicArtifactBoundaryEnabled: buildInfo?.publicArtifactBoundaryEnabled ?? null,
     localhostReferenceAudioAvailable,
+    hostedDevReferenceAudioAvailable,
     publicSafeHost: 'aurora-public.localhost',
     publicSafeReferenceAudioAvailable,
     publicSafePrivateClipLeakPass: publicSafeReferenceAudioAvailable === false
