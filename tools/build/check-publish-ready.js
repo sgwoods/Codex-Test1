@@ -15,6 +15,7 @@ const {
 const { devFiles, betaFiles, productionFiles } = require('./lane-files');
 const { assertReleaseAuthority, assertReleaseMainCurrent } = require('./release-authority');
 const { selectReleaseNoteForBuild } = require('./release-note-selection');
+const { checkSecurityReleaseGate } = require('./check-security-release-gate');
 
 const REQUIRED_SOURCE_DOCS = [
   'README.md',
@@ -48,6 +49,8 @@ const REQUIRED_SOURCE_DOCS = [
   'PLATINUM_LUECK_REVIEW.md',
   'SUPABASE_DATA_API_ACCESS.md',
   'SECURITY_AUTH_REPLAY_STORAGE_LOCKDOWN.md',
+  'SECURITY_ISSUES_RESOLUTION_PLAN.md',
+  'security-issues.json',
   'WHITE_PAPER.md',
   'white-paper.json',
   'white-paper/README.md',
@@ -927,6 +930,9 @@ function main(){
   checkWhitePaperPresentation(cfg);
   checkPublicProjectPageArtifact(cfg);
   const info = checkBuildInfo(cfg);
+  if(cfg.lane === 'beta' || cfg.lane === 'production'){
+    checkSecurityReleaseGate({ lane: cfg.lane });
+  }
   checkBetaTestPilotConfig(cfg);
   if(cfg.lane === 'production'){
     checkPublicProjectTemplate();
@@ -972,5 +978,6 @@ module.exports = {
   checkStrategicBetaReviewDoc,
   checkDocumentationFreshness,
   checkCurrentConformanceDocArtifacts,
-  checkProductionReleaseNoteLinkage
+  checkProductionReleaseNoteLinkage,
+  checkSecurityReleaseGate
 };
