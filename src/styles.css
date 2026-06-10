@@ -501,7 +501,7 @@ body.arcadeFullscreenActive #msg{bottom:10px}
 #accountRecoveryFields{display:flex;flex-direction:column;gap:8px}
 #accountRecoveryFields[hidden]{display:none}
 #accountPanel .accountPasswordRow{display:flex;align-items:stretch;gap:8px}
-#accountPanel .accountPasswordRow input{flex:1}
+#accountPanel .accountPasswordRow input{flex:1;min-width:0}
 .accountPasswordToggle{flex:0 0 auto;min-width:42px;border:1px solid rgba(136,245,255,.24);background:rgba(8,18,35,.78);color:#dff7ff;padding:0 10px;font:700 18px/1 "Courier New",Consolas,monospace;cursor:pointer}
 .accountPasswordToggle:hover,.accountPasswordToggle:focus-visible{outline:none;border-color:rgba(255,216,109,.72);color:#ffe39a;background:rgba(19,43,84,.9)}
 .accountPasswordToggle[disabled]{opacity:.45;cursor:default}

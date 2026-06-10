@@ -55,7 +55,8 @@ const TEST_ACCOUNT_EMAIL='{{TEST_ACCOUNT_EMAIL}}';
 const TEST_ACCOUNT_USER_ID='{{TEST_ACCOUNT_USER_ID}}';
 const TEST_ACCOUNT_EMAILS={{TEST_ACCOUNT_EMAILS_JSON}};
 const TEST_ACCOUNT_USER_IDS={{TEST_ACCOUNT_USER_IDS_JSON}};
-const HARNESS_SUPABASE_BYPASS=(location.hostname==='127.0.0.1'||location.hostname==='localhost')&&!!readPref(SEED_PREF_KEY);
+// Seed prefs can linger in the persistent localhost browser; only bypass Supabase on ephemeral harness ports.
+const HARNESS_SUPABASE_BYPASS=(location.hostname==='127.0.0.1'||location.hostname==='localhost')&&location.port!=='8000'&&!!readPref(SEED_PREF_KEY);
 const RELEASE_CHANNEL=String(BUILD_INFO?.releaseChannel||'development').toLowerCase();
 const NON_PRODUCTION_LANE=RELEASE_CHANNEL!=='production';
 const LEADERBOARD_CACHE_PREFIX='auroraGalacticaLeaderboardCache.v1.';

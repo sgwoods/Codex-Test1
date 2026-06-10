@@ -433,8 +433,8 @@ async function main(){
   if(!result.music.trackToast.visible || result.music.trackToast.title !== 'Harness Song' || result.music.trackToast.artist !== 'Harness Band'){
     fail('Arcade Music track changes did not surface in the platform message box', result);
   }
-  if(result.audioMix.before?.gameSoundPercent !== 20 || result.audioMix.before?.arcadeMusicPercent !== 80){
-    fail('Audio mix defaults no longer match the intended 20 percent game / 80 percent music balance', result);
+  if(result.audioMix.before?.gameSoundPercent !== 40 || result.audioMix.before?.arcadeMusicPercent !== 60){
+    fail('Audio mix defaults no longer match the intended 40 percent game / 60 percent music balance', result);
   }
   if(result.audioMix.after?.gameSoundPercent !== 61 || result.audioMix.after?.arcadeMusicPercent !== 77 || result.audioMix.musicLabel !== '77%' || result.audioMix.gameLabel !== '61%'){
     fail('Audio mix sliders did not apply live values correctly', result);
