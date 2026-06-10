@@ -2,8 +2,8 @@
   "artifactType": "aurora-foreground-audio-balance",
   "version": "0.1-dev-review",
   "generatedBy": "tools/harness/analyze-aurora-foreground-audio-balance.js",
-  "generatedAt": "2026-06-10T03:30:46.589Z",
-  "commit": "69ebd6e75f7079345eb095d00506d9afbd84b07a",
+  "generatedAt": "2026-06-10T15:24:38.962Z",
+  "commit": "389e5fa9dc4d4df0083833f9b75914f5eb41dab9",
   "scope": {
     "gameKey": "aurora-galactica",
     "cues": [
@@ -31,11 +31,11 @@
       "id": "devReference",
       "label": "localhost dev reference lane",
       "host": "localhost",
-      "url": "http://localhost:55880/index.html",
+      "url": "http://localhost:50010/index.html",
       "runtime": {
         "hostname": "localhost",
         "branch": "codex/macbook-pro-1.4.1-guardians-integration",
-        "commit": "02ee825f94cfc21d595ab9bf284156b52ef7afd6",
+        "commit": "389e5fa9dc4d4df0083833f9b75914f5eb41dab9",
         "releaseChannel": "development",
         "boundaryEnabled": true,
         "referenceAudioAvailable": true,
@@ -53,8 +53,8 @@
           "referenceClipDuration": 0.82,
           "stage": 1,
           "challenge": false,
-          "at": 2.045,
-          "recAt": 2
+          "at": 1.888,
+          "recAt": 1.834
         },
         "spec": {
           "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
@@ -82,8 +82,8 @@
             "referenceClipDuration": 1.55,
             "stage": 1,
             "challenge": false,
-            "at": 2.045,
-            "recAt": 2
+            "at": 1.888,
+            "recAt": 1.834
           },
           "spec": {
             "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
@@ -110,8 +110,8 @@
             "referenceClipDuration": 0,
             "stage": 1,
             "challenge": false,
-            "at": 2.045,
-            "recAt": 2
+            "at": 1.888,
+            "recAt": 1.834
           },
           "spec": {
             "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
@@ -138,8 +138,8 @@
             "referenceClipDuration": 0.2,
             "stage": 1,
             "challenge": false,
-            "at": 2.045,
-            "recAt": 2
+            "at": 1.888,
+            "recAt": 1.834
           },
           "spec": {
             "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
@@ -166,8 +166,8 @@
             "referenceClipDuration": 0.24,
             "stage": 1,
             "challenge": false,
-            "at": 2.045,
-            "recAt": 2
+            "at": 1.888,
+            "recAt": 1.834
           },
           "spec": {
             "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
@@ -194,8 +194,8 @@
             "referenceClipDuration": 0.29,
             "stage": 1,
             "challenge": false,
-            "at": 2.045,
-            "recAt": 2
+            "at": 1.888,
+            "recAt": 1.834
           },
           "spec": {
             "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
@@ -222,8 +222,8 @@
             "referenceClipDuration": 0.64,
             "stage": 1,
             "challenge": false,
-            "at": 2.045,
-            "recAt": 2
+            "at": 1.888,
+            "recAt": 1.834
           },
           "spec": {
             "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
@@ -250,8 +250,8 @@
             "referenceClipDuration": 0.24,
             "stage": 1,
             "challenge": false,
-            "at": 2.045,
-            "recAt": 2
+            "at": 1.888,
+            "recAt": 1.834
           },
           "spec": {
             "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
@@ -272,11 +272,11 @@
       "id": "publicSafe",
       "label": "public-safe production-host simulation",
       "host": "aurora-public.localhost",
-      "url": "http://aurora-public.localhost:55880/index.html",
+      "url": "http://aurora-public.localhost:50010/index.html",
       "runtime": {
         "hostname": "aurora-public.localhost",
         "branch": "codex/macbook-pro-1.4.1-guardians-integration",
-        "commit": "02ee825f94cfc21d595ab9bf284156b52ef7afd6",
+        "commit": "389e5fa9dc4d4df0083833f9b75914f5eb41dab9",
         "releaseChannel": "development",
         "boundaryEnabled": true,
         "referenceAudioAvailable": false,
@@ -294,8 +294,8 @@
           "referenceClipDuration": 0,
           "stage": 1,
           "challenge": false,
-          "at": 1.976,
-          "recAt": 1.933
+          "at": 1.651,
+          "recAt": 1.594
         },
         "spec": {
           "tones": [
@@ -351,8 +351,8 @@
             "referenceClipDuration": 0,
             "stage": 1,
             "challenge": false,
-            "at": 1.976,
-            "recAt": 1.933
+            "at": 1.651,
+            "recAt": 1.594
           },
           "spec": null,
           "usesReferenceMedia": false,
@@ -370,8 +370,8 @@
             "referenceClipDuration": 0,
             "stage": 1,
             "challenge": false,
-            "at": 1.976,
-            "recAt": 1.933
+            "at": 1.651,
+            "recAt": 1.594
           },
           "spec": {
             "tones": [
@@ -411,8 +411,8 @@
             "referenceClipDuration": 0,
             "stage": 1,
             "challenge": false,
-            "at": 1.976,
-            "recAt": 1.933
+            "at": 1.651,
+            "recAt": 1.594
           },
           "spec": {
             "cooldownMs": 220,
@@ -461,8 +461,8 @@
             "referenceClipDuration": 0,
             "stage": 1,
             "challenge": false,
-            "at": 1.976,
-            "recAt": 1.933
+            "at": 1.651,
+            "recAt": 1.594
           },
           "spec": {
             "cooldownMs": 260,
@@ -511,8 +511,8 @@
             "referenceClipDuration": 0,
             "stage": 1,
             "challenge": false,
-            "at": 1.976,
-            "recAt": 1.933
+            "at": 1.651,
+            "recAt": 1.594
           },
           "spec": {
             "cooldownMs": 240,
@@ -561,8 +561,8 @@
             "referenceClipDuration": 0,
             "stage": 1,
             "challenge": false,
-            "at": 1.976,
-            "recAt": 1.933
+            "at": 1.651,
+            "recAt": 1.594
           },
           "spec": {
             "cooldownMs": 360,
@@ -621,8 +621,8 @@
             "referenceClipDuration": 0,
             "stage": 1,
             "challenge": false,
-            "at": 1.976,
-            "recAt": 1.933
+            "at": 1.651,
+            "recAt": 1.594
           },
           "spec": {
             "tones": [

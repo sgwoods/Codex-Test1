@@ -2,8 +2,8 @@
 
 This report compares local/private reference-audio cue behavior against a public-safe host simulation, then measures whether foreground combat cues separate from the stagePulse bed in a short offline cue-probe window.
 
-Generated: 2026-06-10T03:30:46.589Z
-Commit: `69ebd6e75f7079345eb095d00506d9afbd84b07a`
+Generated: 2026-06-10T15:24:38.962Z
+Commit: `389e5fa9dc4d4df0083833f9b75914f5eb41dab9`
 
 ## Summary
 
