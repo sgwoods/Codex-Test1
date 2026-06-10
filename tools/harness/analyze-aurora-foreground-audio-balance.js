@@ -20,6 +20,12 @@ const CUES = Object.freeze([
   'bossBoom',
   'playerShot'
 ]);
+const CUE_ROLE_EXPECTATIONS = Object.freeze({
+  attackCharge: Object.freeze({
+    minimumDurationSeconds: 1.2,
+    read: 'Alien dive/attack charge cue should preserve a sustained reference phrase, not only the loud onset.'
+  })
+});
 
 function fail(message, payload){
   console.error(message);
@@ -169,6 +175,9 @@ function balanceRows(scenario, tempDir){
   return CUES.map(cue => {
     const foreground = renderSpecSamples(scenario.cues[cue].spec, tempDir, scenario.id, cue);
     const foregroundDuration = specScheduledDurationSeconds(scenario.cues[cue].spec) || foreground.durationSeconds || 0.24;
+    const roleExpectation = CUE_ROLE_EXPECTATIONS[cue] || null;
+    const minimumDurationSeconds = roleExpectation?.minimumDurationSeconds || null;
+    const phraseDurationPass = minimumDurationSeconds === null || foregroundDuration >= minimumDurationSeconds;
     const duration = Math.max(pulse.samples.length / OFFLINE_SAMPLE_RATE, foregroundOffsetSeconds + (foreground.samples.length / OFFLINE_SAMPLE_RATE) + 0.05);
     const sampleCount = Math.ceil(duration * OFFLINE_SAMPLE_RATE);
     const pulseOnly = new Float32Array(sampleCount);
@@ -185,10 +194,25 @@ function balanceRows(scenario, tempDir){
     const foregroundRmsOverPulseDb = dbRatio(foregroundWindow.rms, pulseWindow.rms);
     const foregroundPeakOverPulseDb = dbRatio(foregroundWindow.peak, pulseWindow.peak);
     const compositeLiftOverPulseDb = dbRatio(compositeWindow.rms, pulseWindow.rms);
+    const audibleSeparationPass = foregroundRmsOverPulseDb !== null && compositeLiftOverPulseDb !== null
+      && foregroundRmsOverPulseDb >= 2.5
+      && compositeLiftOverPulseDb >= 1.5;
+    const cueRolePass = audibleSeparationPass && phraseDurationPass;
+    const read = foregroundRmsOverPulseDb === null
+      ? 'No measurable foreground/pulse RMS ratio.'
+      : foregroundRmsOverPulseDb < 2.5
+        ? 'Foreground cue risks being masked by the stagePulse bed in the cue-probe window.'
+        : !phraseDurationPass
+          ? roleExpectation.read
+          : 'Foreground cue has measurable level separation over the stagePulse bed.';
     return {
       cue,
       foregroundOffsetSeconds,
       foregroundDurationSeconds: round(foregroundDuration, 3),
+      roleExpectation: roleExpectation ? {
+        minimumDurationSeconds,
+        read: roleExpectation.read
+      } : null,
       pulseDurationSeconds: round(pulseDuration, 3),
       foregroundRmsOverPulseDb,
       foregroundPeakOverPulseDb,
@@ -200,14 +224,10 @@ function balanceRows(scenario, tempDir){
       pulsePeak: round(pulseWindow.peak, 5),
       compositePeak: round(compositeWindow.peak, 5),
       activeShare: round(compositeWindow.activeShare, 3),
-      audibleSeparationPass: foregroundRmsOverPulseDb !== null && compositeLiftOverPulseDb !== null
-        && foregroundRmsOverPulseDb >= 2.5
-        && compositeLiftOverPulseDb >= 1.5,
-      read: foregroundRmsOverPulseDb === null
-        ? 'No measurable foreground/pulse RMS ratio.'
-        : foregroundRmsOverPulseDb < 2.5
-          ? 'Foreground cue risks being masked by the stagePulse bed in the cue-probe window.'
-          : 'Foreground cue has measurable level separation over the stagePulse bed.'
+      audibleSeparationPass,
+      phraseDurationPass,
+      cueRolePass,
+      read
     };
   });
 }
@@ -294,11 +314,11 @@ function markdown(report){
   for(const scenario of report.scenarios){
     lines.push(`| ${scenario.label} | ${scenario.runtime.hostname} | ${scenario.runtime.defaultAudioTheme} | ${scenario.runtime.referenceAudioAvailable} | ${scenario.stagePulse.referenceClips.join(', ') || 'synthetic'} |`);
   }
-  lines.push('', '## Foreground Over Pulse', '', '| Cue | Dev RMS dB over pulse | Dev composite lift | Public-safe RMS dB over pulse | Pass | Read |', '| --- | ---: | ---: | ---: | --- | --- |');
+  lines.push('', '## Foreground Over Pulse', '', '| Cue | Dev duration | Dev RMS dB over pulse | Dev composite lift | Public-safe RMS dB over pulse | Pass | Read |', '| --- | ---: | ---: | ---: | ---: | --- | --- |');
   for(const cue of CUES){
     const dev = report.balance.devReference.rows.find(row => row.cue === cue);
     const safe = report.balance.publicSafe.rows.find(row => row.cue === cue);
-    lines.push(`| ${cue} | ${dev.foregroundRmsOverPulseDb} | ${dev.compositeLiftOverPulseDb} | ${safe.foregroundRmsOverPulseDb} | ${dev.audibleSeparationPass} | ${dev.read} |`);
+    lines.push(`| ${cue} | ${dev.foregroundDurationSeconds}s | ${dev.foregroundRmsOverPulseDb} | ${dev.compositeLiftOverPulseDb} | ${safe.foregroundRmsOverPulseDb} | ${dev.cueRolePass} | ${dev.read} |`);
   }
   lines.push('', '## Decision', '', report.recommendation);
   return `${lines.join('\n')}\n`;
@@ -330,6 +350,9 @@ async function main(){
     const weakForegroundRows = devRows
       .filter(row => !row.audibleSeparationPass)
       .map(row => row.cue);
+    const weakCueRoleRows = devRows
+      .filter(row => row.cueRolePass === false)
+      .map(row => row.cue);
     const minForeground = Math.min(...devRows.map(row => Number.isFinite(+row.foregroundRmsOverPulseDb) ? +row.foregroundRmsOverPulseDb : -99));
     const report = {
       artifactType: 'aurora-foreground-audio-balance',
@@ -346,8 +369,9 @@ async function main(){
         devReferenceAudioAvailable: scenarios[0].runtime.referenceAudioAvailable === true,
         publicSafePrivateClipLeakPass: publicSafePass(scenarios[1]),
         weakForegroundRows,
+        weakCueRoleRows,
         minForegroundRmsOverPulseDb: round(minForeground, 2),
-        recommendationClass: weakForegroundRows.length ? 'small-mix-balance-candidate' : 'audio-lane-clean'
+        recommendationClass: weakCueRoleRows.length ? 'cue-role-window-candidate' : 'audio-lane-clean'
       },
       scenarios,
       balance: {
@@ -360,9 +384,9 @@ async function main(){
           rows: publicRows
         }
       },
-      recommendation: weakForegroundRows.length
-        ? `Target the weakest foreground/pulse row(s) only: ${weakForegroundRows.join(', ')}. Keep public-safe cue resolution synthetic/no-reference.`
-        : 'Foreground/pulse balance passes for the measured local reference lane; preserve the current cue windows while keeping public-safe cue resolution synthetic/no-reference.'
+      recommendation: weakCueRoleRows.length
+        ? `Target the weak foreground cue-role row(s) only: ${weakCueRoleRows.join(', ')}. Keep public-safe cue resolution synthetic/no-reference.`
+        : 'Foreground/pulse balance and cue-role duration pass for the measured local reference lane; preserve the current cue windows while keeping public-safe cue resolution synthetic/no-reference.'
     };
     writeReport(report);
     console.log(JSON.stringify({

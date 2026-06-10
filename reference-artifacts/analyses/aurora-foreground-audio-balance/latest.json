@@ -2,8 +2,8 @@
   "artifactType": "aurora-foreground-audio-balance",
   "version": "0.1-dev-review",
   "generatedBy": "tools/harness/analyze-aurora-foreground-audio-balance.js",
-  "generatedAt": "2026-06-09T18:44:53.966Z",
-  "commit": "ecff2f1fdc9bad54702145a947bf59cae2f5c172",
+  "generatedAt": "2026-06-10T03:30:46.589Z",
+  "commit": "69ebd6e75f7079345eb095d00506d9afbd84b07a",
   "scope": {
     "gameKey": "aurora-galactica",
     "cues": [
@@ -22,6 +22,7 @@
     "devReferenceAudioAvailable": true,
     "publicSafePrivateClipLeakPass": true,
     "weakForegroundRows": [],
+    "weakCueRoleRows": [],
     "minForegroundRmsOverPulseDb": 5.38,
     "recommendationClass": "audio-lane-clean"
   },
@@ -30,11 +31,11 @@
       "id": "devReference",
       "label": "localhost dev reference lane",
       "host": "localhost",
-      "url": "http://localhost:53866/index.html",
+      "url": "http://localhost:55880/index.html",
       "runtime": {
         "hostname": "localhost",
         "branch": "codex/macbook-pro-1.4.1-guardians-integration",
-        "commit": "ecff2f1fdc9bad54702145a947bf59cae2f5c172",
+        "commit": "02ee825f94cfc21d595ab9bf284156b52ef7afd6",
         "releaseChannel": "development",
         "boundaryEnabled": true,
         "referenceAudioAvailable": true,
@@ -52,8 +53,8 @@
           "referenceClipDuration": 0.82,
           "stage": 1,
           "challenge": false,
-          "at": 2.139,
-          "recAt": 2.083
+          "at": 2.045,
+          "recAt": 2
         },
         "spec": {
           "referenceClip": "assets/reference-audio/galaga3-ambience-convoy.m4a",
@@ -78,18 +79,18 @@
             "variant": 0,
             "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
             "referenceClipStart": 0.5,
-            "referenceClipDuration": 0.48,
+            "referenceClipDuration": 1.55,
             "stage": 1,
             "challenge": false,
-            "at": 2.139,
-            "recAt": 2.083
+            "at": 2.045,
+            "recAt": 2
           },
           "spec": {
             "referenceClip": "assets/reference-audio/galaga3-attack-charger.m4a",
             "referenceVolume": 0.94,
             "cooldownMs": 520,
             "clipStart": 0.5,
-            "clipDuration": 0.48,
+            "clipDuration": 1.55,
             "stopCueNames": []
           },
           "usesReferenceMedia": true,
@@ -109,8 +110,8 @@
             "referenceClipDuration": 0,
             "stage": 1,
             "challenge": false,
-            "at": 2.139,
-            "recAt": 2.083
+            "at": 2.045,
+            "recAt": 2
           },
           "spec": {
             "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
@@ -137,8 +138,8 @@
             "referenceClipDuration": 0.2,
             "stage": 1,
             "challenge": false,
-            "at": 2.139,
-            "recAt": 2.083
+            "at": 2.045,
+            "recAt": 2
           },
           "spec": {
             "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
@@ -165,8 +166,8 @@
             "referenceClipDuration": 0.24,
             "stage": 1,
             "challenge": false,
-            "at": 2.139,
-            "recAt": 2.083
+            "at": 2.045,
+            "recAt": 2
           },
           "spec": {
             "referenceClip": "assets/reference-audio/galaga3-zako.m4a",
@@ -193,8 +194,8 @@
             "referenceClipDuration": 0.29,
             "stage": 1,
             "challenge": false,
-            "at": 2.139,
-            "recAt": 2.083
+            "at": 2.045,
+            "recAt": 2
           },
           "spec": {
             "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
@@ -221,8 +222,8 @@
             "referenceClipDuration": 0.64,
             "stage": 1,
             "challenge": false,
-            "at": 2.139,
-            "recAt": 2.083
+            "at": 2.045,
+            "recAt": 2
           },
           "spec": {
             "referenceClip": "assets/reference-audio/galaga3-boss-death-sasori.m4a",
@@ -249,8 +250,8 @@
             "referenceClipDuration": 0.24,
             "stage": 1,
             "challenge": false,
-            "at": 2.14,
-            "recAt": 2.083
+            "at": 2.045,
+            "recAt": 2
           },
           "spec": {
             "referenceClip": "assets/reference-audio/galaga3-boss-damage-flagship-fighter-shot.m4a",
@@ -271,11 +272,11 @@
       "id": "publicSafe",
       "label": "public-safe production-host simulation",
       "host": "aurora-public.localhost",
-      "url": "http://aurora-public.localhost:53866/index.html",
+      "url": "http://aurora-public.localhost:55880/index.html",
       "runtime": {
         "hostname": "aurora-public.localhost",
         "branch": "codex/macbook-pro-1.4.1-guardians-integration",
-        "commit": "ecff2f1fdc9bad54702145a947bf59cae2f5c172",
+        "commit": "02ee825f94cfc21d595ab9bf284156b52ef7afd6",
         "releaseChannel": "development",
         "boundaryEnabled": true,
         "referenceAudioAvailable": false,
@@ -293,8 +294,8 @@
           "referenceClipDuration": 0,
           "stage": 1,
           "challenge": false,
-          "at": 2.212,
-          "recAt": 2.156
+          "at": 1.976,
+          "recAt": 1.933
         },
         "spec": {
           "tones": [
@@ -350,8 +351,8 @@
             "referenceClipDuration": 0,
             "stage": 1,
             "challenge": false,
-            "at": 2.212,
-            "recAt": 2.156
+            "at": 1.976,
+            "recAt": 1.933
           },
           "spec": null,
           "usesReferenceMedia": false,
@@ -369,8 +370,8 @@
             "referenceClipDuration": 0,
             "stage": 1,
             "challenge": false,
-            "at": 2.212,
-            "recAt": 2.156
+            "at": 1.976,
+            "recAt": 1.933
           },
           "spec": {
             "tones": [
@@ -410,8 +411,8 @@
             "referenceClipDuration": 0,
             "stage": 1,
             "challenge": false,
-            "at": 2.212,
-            "recAt": 2.156
+            "at": 1.976,
+            "recAt": 1.933
           },
           "spec": {
             "cooldownMs": 220,
@@ -460,8 +461,8 @@
             "referenceClipDuration": 0,
             "stage": 1,
             "challenge": false,
-            "at": 2.212,
-            "recAt": 2.156
+            "at": 1.976,
+            "recAt": 1.933
           },
           "spec": {
             "cooldownMs": 260,
@@ -510,8 +511,8 @@
             "referenceClipDuration": 0,
             "stage": 1,
             "challenge": false,
-            "at": 2.212,
-            "recAt": 2.156
+            "at": 1.976,
+            "recAt": 1.933
           },
           "spec": {
             "cooldownMs": 240,
@@ -560,8 +561,8 @@
             "referenceClipDuration": 0,
             "stage": 1,
             "challenge": false,
-            "at": 2.212,
-            "recAt": 2.156
+            "at": 1.976,
+            "recAt": 1.933
           },
           "spec": {
             "cooldownMs": 360,
@@ -620,8 +621,8 @@
             "referenceClipDuration": 0,
             "stage": 1,
             "challenge": false,
-            "at": 2.212,
-            "recAt": 2.156
+            "at": 1.976,
+            "recAt": 1.933
           },
           "spec": {
             "tones": [
@@ -659,7 +660,11 @@
         {
           "cue": "attackCharge",
           "foregroundOffsetSeconds": 0.18,
-          "foregroundDurationSeconds": 0.48,
+          "foregroundDurationSeconds": 1.55,
+          "roleExpectation": {
+            "minimumDurationSeconds": 1.2,
+            "read": "Alien dive/attack charge cue should preserve a sustained reference phrase, not only the loud onset."
+          },
           "pulseDurationSeconds": 0.82,
           "foregroundRmsOverPulseDb": 5.38,
           "foregroundPeakOverPulseDb": 8.93,
@@ -672,12 +677,15 @@
           "compositePeak": 0.54507,
           "activeShare": 0.96,
           "audibleSeparationPass": true,
+          "phraseDurationPass": true,
+          "cueRolePass": true,
           "read": "Foreground cue has measurable level separation over the stagePulse bed."
         },
         {
           "cue": "enemyShot",
           "foregroundOffsetSeconds": 0.18,
           "foregroundDurationSeconds": 4,
+          "roleExpectation": null,
           "pulseDurationSeconds": 0.82,
           "foregroundRmsOverPulseDb": 7.56,
           "foregroundPeakOverPulseDb": 13.9,
@@ -690,12 +698,15 @@
           "compositePeak": 0.85724,
           "activeShare": 0.957,
           "audibleSeparationPass": true,
+          "phraseDurationPass": true,
+          "cueRolePass": true,
           "read": "Foreground cue has measurable level separation over the stagePulse bed."
         },
         {
           "cue": "enemyHit",
           "foregroundOffsetSeconds": 0.18,
           "foregroundDurationSeconds": 0.2,
+          "roleExpectation": null,
           "pulseDurationSeconds": 0.82,
           "foregroundRmsOverPulseDb": 10.03,
           "foregroundPeakOverPulseDb": 11,
@@ -708,12 +719,15 @@
           "compositePeak": 0.61142,
           "activeShare": 0.978,
           "audibleSeparationPass": true,
+          "phraseDurationPass": true,
+          "cueRolePass": true,
           "read": "Foreground cue has measurable level separation over the stagePulse bed."
         },
         {
           "cue": "enemyBoom",
           "foregroundOffsetSeconds": 0.18,
           "foregroundDurationSeconds": 0.24,
+          "roleExpectation": null,
           "pulseDurationSeconds": 0.82,
           "foregroundRmsOverPulseDb": 10.96,
           "foregroundPeakOverPulseDb": 14.02,
@@ -726,12 +740,15 @@
           "compositePeak": 0.79578,
           "activeShare": 0.977,
           "audibleSeparationPass": true,
+          "phraseDurationPass": true,
+          "cueRolePass": true,
           "read": "Foreground cue has measurable level separation over the stagePulse bed."
         },
         {
           "cue": "bossHit",
           "foregroundOffsetSeconds": 0.18,
           "foregroundDurationSeconds": 0.29,
+          "roleExpectation": null,
           "pulseDurationSeconds": 0.82,
           "foregroundRmsOverPulseDb": 8.24,
           "foregroundPeakOverPulseDb": 12.56,
@@ -744,12 +761,15 @@
           "compositePeak": 0.68845,
           "activeShare": 0.96,
           "audibleSeparationPass": true,
+          "phraseDurationPass": true,
+          "cueRolePass": true,
           "read": "Foreground cue has measurable level separation over the stagePulse bed."
         },
         {
           "cue": "bossBoom",
           "foregroundOffsetSeconds": 0.18,
           "foregroundDurationSeconds": 0.64,
+          "roleExpectation": null,
           "pulseDurationSeconds": 0.82,
           "foregroundRmsOverPulseDb": 10.66,
           "foregroundPeakOverPulseDb": 13.17,
@@ -762,12 +782,15 @@
           "compositePeak": 0.79532,
           "activeShare": 0.962,
           "audibleSeparationPass": true,
+          "phraseDurationPass": true,
+          "cueRolePass": true,
           "read": "Foreground cue has measurable level separation over the stagePulse bed."
         },
         {
           "cue": "playerShot",
           "foregroundOffsetSeconds": 0.18,
           "foregroundDurationSeconds": 0.24,
+          "roleExpectation": null,
           "pulseDurationSeconds": 0.82,
           "foregroundRmsOverPulseDb": 9.33,
           "foregroundPeakOverPulseDb": 14.84,
@@ -780,6 +803,8 @@
           "compositePeak": 0.93121,
           "activeShare": 0.959,
           "audibleSeparationPass": true,
+          "phraseDurationPass": true,
+          "cueRolePass": true,
           "read": "Foreground cue has measurable level separation over the stagePulse bed."
         }
       ]
@@ -791,6 +816,10 @@
           "cue": "attackCharge",
           "foregroundOffsetSeconds": 0.18,
           "foregroundDurationSeconds": 0.9,
+          "roleExpectation": {
+            "minimumDurationSeconds": 1.2,
+            "read": "Alien dive/attack charge cue should preserve a sustained reference phrase, not only the loud onset."
+          },
           "pulseDurationSeconds": 0.15,
           "foregroundRmsOverPulseDb": null,
           "foregroundPeakOverPulseDb": null,
@@ -803,12 +832,15 @@
           "compositePeak": 0,
           "activeShare": 0,
           "audibleSeparationPass": false,
+          "phraseDurationPass": false,
+          "cueRolePass": false,
           "read": "No measurable foreground/pulse RMS ratio."
         },
         {
           "cue": "enemyShot",
           "foregroundOffsetSeconds": 0.18,
           "foregroundDurationSeconds": 0.15,
+          "roleExpectation": null,
           "pulseDurationSeconds": 0.15,
           "foregroundRmsOverPulseDb": null,
           "foregroundPeakOverPulseDb": null,
@@ -821,12 +853,15 @@
           "compositePeak": 0.0166,
           "activeShare": 0.273,
           "audibleSeparationPass": false,
+          "phraseDurationPass": true,
+          "cueRolePass": false,
           "read": "No measurable foreground/pulse RMS ratio."
         },
         {
           "cue": "enemyHit",
           "foregroundOffsetSeconds": 0.18,
           "foregroundDurationSeconds": 0.188,
+          "roleExpectation": null,
           "pulseDurationSeconds": 0.15,
           "foregroundRmsOverPulseDb": null,
           "foregroundPeakOverPulseDb": null,
@@ -839,12 +874,15 @@
           "compositePeak": 0.03284,
           "activeShare": 0.305,
           "audibleSeparationPass": false,
+          "phraseDurationPass": true,
+          "cueRolePass": false,
           "read": "No measurable foreground/pulse RMS ratio."
         },
         {
           "cue": "enemyBoom",
           "foregroundOffsetSeconds": 0.18,
           "foregroundDurationSeconds": 0.201,
+          "roleExpectation": null,
           "pulseDurationSeconds": 0.15,
           "foregroundRmsOverPulseDb": null,
           "foregroundPeakOverPulseDb": null,
@@ -857,12 +895,15 @@
           "compositePeak": 0.03198,
           "activeShare": 0.254,
           "audibleSeparationPass": false,
+          "phraseDurationPass": true,
+          "cueRolePass": false,
           "read": "No measurable foreground/pulse RMS ratio."
         },
         {
           "cue": "bossHit",
           "foregroundOffsetSeconds": 0.18,
           "foregroundDurationSeconds": 0.168,
+          "roleExpectation": null,
           "pulseDurationSeconds": 0.15,
           "foregroundRmsOverPulseDb": null,
           "foregroundPeakOverPulseDb": null,
@@ -875,12 +916,15 @@
           "compositePeak": 0.02643,
           "activeShare": 0.19,
           "audibleSeparationPass": false,
+          "phraseDurationPass": true,
+          "cueRolePass": false,
           "read": "No measurable foreground/pulse RMS ratio."
         },
         {
           "cue": "bossBoom",
           "foregroundOffsetSeconds": 0.18,
           "foregroundDurationSeconds": 0.442,
+          "roleExpectation": null,
           "pulseDurationSeconds": 0.15,
           "foregroundRmsOverPulseDb": null,
           "foregroundPeakOverPulseDb": null,
@@ -893,12 +937,15 @@
           "compositePeak": 0.0304,
           "activeShare": 0.291,
           "audibleSeparationPass": false,
+          "phraseDurationPass": true,
+          "cueRolePass": false,
           "read": "No measurable foreground/pulse RMS ratio."
         },
         {
           "cue": "playerShot",
           "foregroundOffsetSeconds": 0.18,
           "foregroundDurationSeconds": 0.12,
+          "roleExpectation": null,
           "pulseDurationSeconds": 0.15,
           "foregroundRmsOverPulseDb": null,
           "foregroundPeakOverPulseDb": null,
@@ -911,10 +958,12 @@
           "compositePeak": 0.01379,
           "activeShare": 0.081,
           "audibleSeparationPass": false,
+          "phraseDurationPass": true,
+          "cueRolePass": false,
           "read": "No measurable foreground/pulse RMS ratio."
         }
       ]
     }
   },
-  "recommendation": "Foreground/pulse balance passes for the measured local reference lane; preserve the current cue windows while keeping public-safe cue resolution synthetic/no-reference."
+  "recommendation": "Foreground/pulse balance and cue-role duration pass for the measured local reference lane; preserve the current cue windows while keeping public-safe cue resolution synthetic/no-reference."
 }

@@ -57,11 +57,18 @@ for(const cue of REQUIRED_CUES){
   if(row.audibleSeparationPass !== true){
     issues.push(`${cue} does not pass foreground-vs-pulse audibility separation`);
   }
+  if(row.cueRolePass !== true){
+    issues.push(`${cue} does not pass cue-role duration/readability expectations`);
+  }
 }
 
 const weakRows = report.summary?.weakForegroundRows || [];
 if(weakRows.length){
   issues.push(`weak foreground rows remain: ${weakRows.join(', ')}`);
+}
+const weakCueRoleRows = report.summary?.weakCueRoleRows || [];
+if(weakCueRoleRows.length){
+  issues.push(`weak cue-role rows remain: ${weakCueRoleRows.join(', ')}`);
 }
 
 if(issues.length){

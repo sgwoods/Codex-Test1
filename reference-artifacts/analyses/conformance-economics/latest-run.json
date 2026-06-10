@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "artifact_type": "conformance-economics-run",
-  "id": "2026-06-09T18-40-45-246Z-98476",
-  "startedAt": "2026-06-09T18:40:45.246Z",
-  "endedAt": "2026-06-09T18:40:51.346Z",
+  "id": "2026-06-10T03-30-40-988Z-23755",
+  "startedAt": "2026-06-10T03:30:40.988Z",
+  "endedAt": "2026-06-10T03:30:46.624Z",
   "branch": "codex/macbook-pro-1.4.1-guardians-integration",
-  "commit": "ecff2f1f",
+  "commit": "69ebd6e7",
   "command": [
     "npm",
     "run",
@@ -17,13 +17,13 @@
   "resources": [
     "browser"
   ],
-  "notes": "Aurora foreground audio balance keeper",
+  "notes": "Aurora attackCharge dive cue duration investigation",
   "measurement": {
-    "wallSeconds": 6.1,
-    "timeRealSeconds": 6.09,
-    "timeUserSeconds": 4.45,
-    "timeSystemSeconds": 1.29,
-    "cpuSeconds": 5.74,
+    "wallSeconds": 5.636,
+    "timeRealSeconds": 5.63,
+    "timeUserSeconds": 5.59,
+    "timeSystemSeconds": 1.25,
+    "cpuSeconds": 6.84,
     "maxResidentSetBytes": null,
     "exitCode": 0,
     "signal": null
@@ -45,8 +45,8 @@
     "weeklyReset": null
   },
   "outputs": {
-    "artifactBytesBefore": 1268018215,
-    "artifactBytesAfter": 1268018207,
-    "artifactBytesDelta": -8
+    "artifactBytesBefore": 1269068476,
+    "artifactBytesAfter": 1269068444,
+    "artifactBytesDelta": -32
   }
 }
