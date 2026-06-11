@@ -34,6 +34,29 @@ browser-backed commands with escalated sandbox permissions; the harness launcher
 will refuse sandboxed browser starts to avoid macOS Chromium/Chrome SIGABRT
 crash dialogs.
 
+### Repo Browser Runtime Rule
+
+Project browser checks must use the repo harness launcher:
+
+- `npm run machine:ensure-browser`
+- `tools/harness/browser-launch.js`
+- npm harness scripts that depend on local `playwright-core`
+
+Do not use Codex's bundled Node/Playwright runtime directly for project release
+checks. That runtime can have a different expected browser cache and fail with
+missing `chromium_headless_shell-*` paths even when the repo-managed Chromium is
+correctly installed.
+
+Hosted public lanes also intentionally do not expose private gameplay harness
+APIs. Use the hosted DOM account smoke for sign-in field reachability:
+
+- `npm run harness:check:live-account-input:dev`
+- `npm run harness:check:live-account-input:beta`
+- `npm run harness:check:live-account-input:production`
+
+Keep the older `harness:check:live-input:*` checks for lanes/artifacts where the
+gameplay harness is intentionally present.
+
 ## Bug-Fix Discipline
 
 We should not address a bug without also deciding how the fix is protected in
@@ -195,6 +218,35 @@ site.
 This should reduce manual release-authority rescue work when a publish push
 lands in `sgwoods/Aurora-Galactica` but GitHub Pages does not start the deploy
 workflow on its own.
+
+## Release Pipeline Friction Log
+
+The `1.4.1` beta path exposed several process issues that should be smoothed
+before the next production move:
+
+- public hosted lanes intentionally strip gameplay harness APIs, so hosted
+  account/sign-in checks need DOM-only probes rather than private harness probes
+- release evidence generation can make the next publish preflight look stale;
+  refresh release conformance docs before the final publish check, then commit
+  that evidence once
+- beta security review should run after `promote:beta`, and production security
+  review should run last when preparing production-facing documentation
+- GitHub Pages deploy latency is recoverable, but it still lengthens lane
+  movement; keep verifier self-heal, and prefer a single release-preflight
+  command once the current process stabilizes
+- evidence-only commits should be treated deliberately: publish them to hosted
+  lanes when docs/dashboards need to be visible, but do not confuse them with
+  gameplay/runtime keepers
+
+Recommended simplification backlog:
+
+- add one patch-release preflight bundle that sequences machine readiness,
+  browser readiness, conformance refresh, security review, code review, build,
+  and lane publish checks in the current best order
+- keep live DOM smoke, local gameplay harness smoke, and public artifact-boundary
+  checks as separate named gates
+- make the final dev -> beta -> production handoff print the exact artifact SHA,
+  version label, evidence commit, and remaining manual gates before each publish
 
 ## Front-Door Copy Gate
 

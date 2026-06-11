@@ -21,22 +21,22 @@ This is the tracked security issue list for Aurora / Platinum release gates. The
 
 ## Latest Captured Review
 
-- lane: `beta`
-- generated: `2026-06-11T14:28:08.560Z`
-- artifact: `reference-artifacts/analyses/security-release-review/2026-06-11-6ade9d82-beta`
-- observed issues: `0`
-- production blockers: `0`
+- lane: `dev`
+- generated: `2026-06-11T14:26:37.132Z`
+- artifact: `reference-artifacts/analyses/security-release-review/2026-06-11-6ade9d82-dev`
+- observed issues: `6`
+- production blockers: `6`
 
 ## Current Issues
 
 | Priority | ID | Severity | Status | Observed in latest review | Issue | Next action |
 | --- | --- | --- | --- | --- | --- | --- |
-| P0 | SEC-002 | high | resolved | no | Production bundle exposes harness and debug mutation APIs | Keep the public-lane scan active and run a dev harness smoke check after any future harness/build-lane change. |
-| P0 | SEC-003 | high | resolved | no | Leaderboard write integrity depends on client-trusted score submission | Before restoring online score writes in beta/production, capture the Supabase RLS/policy state and implement a server-validated score acceptance path. |
-| P1 | SEC-001 | high | resolved | no | Production public artifact exposes reference audio assets | Keep the publish-lane prune guard active and recheck known historical clip URLs after future hosted lane publishes. |
-| P2 | SEC-004 | medium | resolved | no | Hosted production lacks explicit browser security headers | After the next hosted beta/dev publish, verify the meta CSP is present in live HTML and capture the remaining host-header limitations. |
-| P2 | SEC-005 | medium | resolved | no | Production build metadata exposes test pilot emails and internal release context | Keep the public-lane email scan active and verify hosted beta/production after the next publish. |
-| P2 | SEC-006 | medium | resolved | no | Production bundle mixes dev, beta, and production account/test logic | Keep the hard-disable scan active and add a focused public-lane account smoke before re-enabling any beta test-pilot behavior. |
+| P0 | SEC-002 | high | resolved | yes: index.html contains window.__galagaHarness__ | Production bundle exposes harness and debug mutation APIs | Keep the public-lane scan active and run a dev harness smoke check after any future harness/build-lane change. |
+| P0 | SEC-003 | high | resolved | yes: index.html contains public Supabase config and index.html contains client score insert | Leaderboard write integrity depends on client-trusted score submission | Before restoring online score writes in beta/production, capture the Supabase RLS/policy state and implement a server-validated score acceptance path. |
+| P1 | SEC-001 | high | resolved | yes: 50 public reference-audio file(s) under assets/reference-audio | Production public artifact exposes reference audio assets | Keep the publish-lane prune guard active and recheck known historical clip URLs after future hosted lane publishes. |
+| P2 | SEC-004 | medium | resolved | yes: Public artifact is missing the generated meta CSP/referrer policy; manual host-header review also remains required for GitHub Pages. | Hosted production lacks explicit browser security headers | After the next hosted beta/dev publish, verify the meta CSP is present in live HTML and capture the remaining host-header limitations. |
+| P2 | SEC-005 | medium | resolved | yes: build-info.json includes platform.auth.nonProductionTestPilotEmails | Production build metadata exposes test pilot emails and internal release context | Keep the public-lane email scan active and verify hosted beta/production after the next publish. |
+| P2 | SEC-006 | medium | resolved | yes: index.html contains NON_PRODUCTION_LANE | Production bundle mixes dev, beta, and production account/test logic | Keep the hard-disable scan active and add a focused public-lane account smoke before re-enabling any beta test-pilot behavior. |
 
 ## Resolution Walkthrough
 
@@ -47,7 +47,7 @@ This is the tracked security issue list for Aurora / Platinum release gates. The
 - Status: `resolved`
 - Category: `production-debug-surface`
 - Summary: Local beta and production artifacts no longer expose browser harness globals, force-write harness symbols, or debug crash globals. Dev still carries the harness for local automation.
-- Latest artifact read: not observed
+- Latest artifact read: observed (index.html contains window.__galagaHarness__)
 - Next action: Keep the public-lane scan active and run a dev harness smoke check after any future harness/build-lane change.
 - Done definition: Production and beta artifact scans no longer find harness globals or force-write symbols, while local/dev harness checks still pass.
 - Evidence:
@@ -66,7 +66,7 @@ This is the tracked security issue list for Aurora / Platinum release gates. The
 - Status: `resolved`
 - Category: `leaderboard-integrity`
 - Summary: Public beta and production artifacts no longer ship the client-side score insert path. Remote score writes are disabled in public lanes pending server-side validation or a documented RLS policy audit; dev/local harness score-write testing remains available.
-- Latest artifact read: not observed
+- Latest artifact read: observed (index.html contains public Supabase config and index.html contains client score insert)
 - Next action: Before restoring online score writes in beta/production, capture the Supabase RLS/policy state and implement a server-validated score acceptance path.
 - Done definition: Production and beta artifacts do not ship direct client score inserts, or a release artifact records server-side/RLS validation that prevents client-controlled trusted fields.
 - Evidence:
@@ -88,7 +88,7 @@ This is the tracked security issue list for Aurora / Platinum release gates. The
 - Status: `resolved`
 - Category: `public-artifact-boundary`
 - Summary: Local beta and production artifacts no longer expose public hrefs to private reference-audio clips or bundle private clip bytes. Hosted public Pages cleanup on 2026-06-10 removed stale root, beta, and dev reference-audio files; known historical clip URLs now return 404 instead of audio bytes.
-- Latest artifact read: not observed
+- Latest artifact read: observed (50 public reference-audio file(s) under assets/reference-audio)
 - Next action: Keep the publish-lane prune guard active and recheck known historical clip URLs after future hosted lane publishes.
 - Done definition: Production and beta artifacts contain no reference-audio clip bytes and no public href/text path that invites fetching private reference clips; dev/local review keeps private provisioning explicit and ignored.
 - Evidence:
@@ -110,7 +110,7 @@ This is the tracked security issue list for Aurora / Platinum release gates. The
 - Status: `resolved`
 - Category: `browser-hardening`
 - Summary: Local beta and production HTML artifacts now include a generated meta Content-Security-Policy and strict-origin-when-cross-origin referrer policy. GitHub Pages HTTP-header hardening remains a future hosting improvement.
-- Latest artifact read: not observed
+- Latest artifact read: observed (Public artifact is missing the generated meta CSP/referrer policy; manual host-header review also remains required for GitHub Pages.)
 - Next action: After the next hosted beta/dev publish, verify the meta CSP is present in live HTML and capture the remaining host-header limitations.
 - Done definition: The active host emits documented hardening headers or the app ships the strictest feasible meta policy with explicit residual GitHub Pages limitations.
 - Evidence:
@@ -128,7 +128,7 @@ This is the tracked security issue list for Aurora / Platinum release gates. The
 - Status: `resolved`
 - Category: `metadata-minimization`
 - Summary: Local beta and production artifacts no longer expose non-production test pilot emails or user ids in build-info, release-notes, or inline build metadata. Dev/local review keeps the test-pilot configuration.
-- Latest artifact read: not observed
+- Latest artifact read: observed (build-info.json includes platform.auth.nonProductionTestPilotEmails)
 - Next action: Keep the public-lane email scan active and verify hosted beta/production after the next publish.
 - Done definition: Beta and production build-info, release-notes, and inline build metadata contain no non-production test pilot emails/user ids, while dev/local auth review still has the needed test-pilot configuration.
 - Evidence:
@@ -147,7 +147,7 @@ This is the tracked security issue list for Aurora / Platinum release gates. The
 - Status: `resolved`
 - Category: `release-lane-separation`
 - Summary: Local beta and production artifacts now strip public harness/debug exports, strip client score writes, clear test-pilot constants, and hard-disable the account-review lane with NON_PRODUCTION_LANE=false.
-- Latest artifact read: not observed
+- Latest artifact read: observed (index.html contains NON_PRODUCTION_LANE)
 - Next action: Keep the hard-disable scan active and add a focused public-lane account smoke before re-enabling any beta test-pilot behavior.
 - Done definition: Production bundle scans no longer find dev/test-only lane symbols unless they are documented as inert public support text; dev/beta behavior remains covered by harnesses.
 - Evidence:
