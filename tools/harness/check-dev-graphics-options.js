@@ -55,13 +55,15 @@ async function main(){
     });
     const themeSets = await page.evaluate(() => {
       window.installGamePack('aurora-galactica', { persist: false });
-      const auroraList = window.__platinumThemeSets.list('aurora-galactica').map(set => set.id);
+      const auroraCatalog = window.__platinumThemeSets.list('aurora-galactica');
+      const auroraList = auroraCatalog.map(set => set.id);
+      const auroraLabels = Object.fromEntries(auroraCatalog.map(set => [set.id, set.label]));
       const auroraPublic = window.__platinumThemeSets.apply('aurora-public');
       const auroraClassic = window.__platinumThemeSets.apply('aurora-classic-synth');
       window.installGamePack('galaxy-guardians-preview', { persist: false });
       const guardiansList = window.__platinumThemeSets.list('galaxy-guardians-preview').map(set => set.id);
       const guardiansSignal = window.__platinumThemeSets.apply('guardians-signal');
-      return { auroraList, auroraPublic, auroraClassic, guardiansList, guardiansSignal };
+      return { auroraList, auroraLabels, auroraPublic, auroraClassic, guardiansList, guardiansSignal };
     });
     return { ...runtimeInfo, defaults, vividAurora, forcedClassic, galagaReference, galagaReferenceAssets, themeSets };
   });
@@ -110,6 +112,12 @@ async function main(){
 
   if(!result.themeSets.auroraList.includes('aurora-public') || !result.themeSets.auroraList.includes('aurora-classic-synth') || !result.themeSets.auroraList.includes('aurora-local-reference')){
     fail('Aurora theme set catalog is missing expected presets', result);
+  }
+  if(result.themeSets.auroraLabels['aurora-classic-synth'] !== 'Galaga-Style Synth'){
+    fail('Aurora public-safe Galaga-style preset label is ambiguous', result);
+  }
+  if(!String(result.themeSets.auroraLabels['aurora-local-reference'] || '').includes('localhost only')){
+    fail('Aurora local reference preset label should make the localhost-only boundary explicit', result);
   }
   if(!result.themeSets.guardiansList.includes('guardians-signal') || !result.themeSets.guardiansList.includes('guardians-aurora-music')){
     fail('Guardians theme set catalog is missing expected presets', result);

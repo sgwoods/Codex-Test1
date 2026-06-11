@@ -351,8 +351,8 @@ const GAME_THEME_SETS=Object.freeze({
   }),
   Object.freeze({
    id:'aurora-classic-synth',
-   label:'Aurora Classic Synth',
-   summary:'Classic arcade visuals with public-safe Galaga-style synthesized cues and Aurora arcade music.',
+   label:'Galaga-Style Synth',
+   summary:'Classic arcade visuals with public-safe Galaga-style synthesized cues and Aurora arcade music. Actual reference clips remain localhost-only.',
    audioTheme:'galaga-original-reference',
    graphicsTheme:'classic-arcade',
    spriteRenderMode:'reference-pixel-lab',
@@ -362,8 +362,8 @@ const GAME_THEME_SETS=Object.freeze({
   }),
   Object.freeze({
    id:'aurora-local-reference',
-   label:'Aurora Local Reference',
-   summary:'Local review preset for private Galaga reference clips, classic sprites, and Aurora arcade music.',
+   label:'Local Galaga Reference (localhost only)',
+   summary:'Localhost review preset for private Galaga reference clips, classic sprites, and Aurora arcade music.',
    audioTheme:'galaga-reference-assets',
    graphicsTheme:'classic-arcade',
    spriteRenderMode:'reference-pixel-lab',
@@ -545,10 +545,14 @@ function themeSetById(gameKey=currentThemeSetGameKey(),themeSetId=''){
  const id=String(themeSetId||'').trim();
  return themeSetsForGame(gameKey).find(set=>set.id===id)||null;
 }
+function themeSetAvailableForLane(themeSet){
+ return !!themeSet&&(!themeSet.localReferenceOnly||referenceAudioPubliclyAvailable());
+}
 function sanitizeThemeSetIdForGame(themeSetId='',gameKey=currentThemeSetGameKey()){
  const id=String(themeSetId||'').trim();
  if(id==='custom')return 'custom';
- if(themeSetById(gameKey,id))return id;
+ const themeSet=themeSetById(gameKey,id);
+ if(themeSet&&themeSetAvailableForLane(themeSet))return id;
  return defaultThemeSetIdForGame(gameKey);
 }
 function themeSetConfigForGame(gameKey=currentThemeSetGameKey(),themeSetId=''){
@@ -579,10 +583,18 @@ function populateThemeSetOptions(gameKey=currentThemeSetGameKey(),selected=''){
  if(!themeSetSelect)return;
  const sets=themeSetsForGame(gameKey);
  const options=[
-  ...sets.map(set=>({value:set.id,label:set.label||set.id})),
+  ...sets.map(set=>{
+   const available=themeSetAvailableForLane(set);
+   const label=set.label||set.id;
+   return {
+    value:set.id,
+    label:available?label:`${label} - unavailable on this lane`,
+    disabled:!available
+   };
+  }),
   {value:'custom',label:'Custom'}
  ];
- const markup=options.map(option=>`<option value="${option.value}">${option.label}</option>`).join('');
+ const markup=options.map(option=>`<option value="${option.value}"${option.disabled?' disabled':''}>${option.label}</option>`).join('');
  if(themeSetSelect.innerHTML!==markup)themeSetSelect.innerHTML=markup;
  themeSetSelect.value=sanitizeThemeSetIdForGame(selected,gameKey);
 }
