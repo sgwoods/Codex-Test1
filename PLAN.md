@@ -5,20 +5,20 @@
 Verified June 11, 2026:
 
 - hosted `/dev`
-  - active `1.4.1.1` patch follow-through line; exact current build label is
+  - active `1.4.1.1` quality follow-through line; exact current build label is
     authoritative in hosted `build-info.json`
 - hosted `/beta`
-  - accepted `1.4.1-beta.1` reviewed patch lane
+  - accepted `1.4.1-beta.1` reviewed quality lane
 - hosted `/production`
-  - live `1.4.1` public patch line
+  - live `1.4.1` public quality-release line
 - `main`
-  - authoritative integration branch for the `1.4.1` patch-candidate line,
+  - authoritative integration branch for the `1.4.1` production quality line,
     including the consolidated Aurora challenge grammar and Guardians
     ingestion/conformance cleanup work
 
 This means:
 
-- the `1.4.1` patch packet promotes accepted Stage 3 challenge keepers,
+- the `1.4.1` production quality release promotes accepted Stage 3 challenge keepers,
   sign-in repair, audio/theme clarity, public-safe audio balance, and release
   gate hardening
 - hosted `/dev` and hosted `/beta` remain review lanes rather than shadow
@@ -54,9 +54,9 @@ from the roadmap.
 
 ## Active Workstreams
 
-### 1. `1.4.1` Production Stabilization
+### 1. `1.4.1` Production Quality Stabilization
 
-- keep the shipped `1.4.1` production patch trustworthy
+- keep the shipped `1.4.1` production quality release trustworthy
 - keep release docs, scorecards, and committed evidence current
 - keep the public project surfaces in sync with the real shipped state
 - use [CONFORMANCE_METRICS_OVERVIEW.md](CONFORMANCE_METRICS_OVERVIEW.md) as the
@@ -71,7 +71,7 @@ from the roadmap.
 - keep public project-page and rendered-homepage verification inside the
   release workflow
 
-### 3. `1.4.1` Patch Candidate
+### 3. `1.4.1` Quality Follow-Through
 
 - improve ship movement feel against real Galaga footage
 - continue audio identity polish beyond cue timing
@@ -391,7 +391,7 @@ Current conformance read:
 - hosted `/dev` now includes the consolidated Aurora challenge grammar,
   Guardians ingestion cleanup, refreshed conformance economics, public project
   guide, white paper, slides, dashboards, release-schedule spine, and review
-  packet on the `1.4.1.1` patch-candidate forward-review line
+  packet on the `1.4.1.1` quality-review follow-through line
 - the latest conformance economics roll-up reads `8.7/10` overall with
   `904` measured runs, about `58,277s` wall time, and about `58,392s` CPU time
 - application artifact conformance is `7.46/10`; the weakest row is
@@ -538,9 +538,9 @@ Current conformance read:
 
 - hosted `/dev`, hosted `/beta`, and hosted `/production` now reflect the same
   release discipline, with hosted `/dev` and hosted `/beta` reserved for the
-  next review lane after the `1.4.1` production patch
+  next review lane after the `1.4.1` production quality release
 - the active source line now presents itself as the deliberate `1.4.1`
-  production patch packet, not as an unnamed post-`1.4.0` follow-through bundle
+  production quality release, not as an unnamed post-`1.4.0` follow-through bundle
 - the accepted beta artifact is the `1.4.1-beta.1` review packet, and the
   production packet is plain `1.4.1`
 - `1.4.0` is the intentional shipped bundle for multi-game public identity,
@@ -559,7 +559,7 @@ Current conformance read:
 
 After `1.4.0` shipped, the next patch plan should pick up in this order:
 
-1. Short term: keep the live `1.4.1` public patch trustworthy and use hosted
+1. Short term: keep the live `1.4.1` public quality release trustworthy and use hosted
    `/dev` plus hosted `/beta` for the next coherent review lane.
 2. Medium term: deepen `1.4.1` arcade depth and platform-contract
    follow-through,

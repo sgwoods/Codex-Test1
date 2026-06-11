@@ -1,17 +1,17 @@
-# Release Note: 1.4.1 Production
+# Release Note: 1.4.1 Production Quality Release
 
 Date: June 11, 2026
 
-Release track: focused `1.4.1` production patch
+Release track: `1.4.1` production quality release
 
 Source promotion path: accepted hosted `/beta` `1.4.1-beta.1` review packet ->
 hosted `/production` `1.4.1`
 
 ## Summary
 
-`1.4.1` promotes the accepted patch-candidate work into the production family.
-It is deliberately scoped as a patch: player-visible Aurora challenge-stage
-quality, sign-in usability, audio/theme clarity, public-safe audio balance, and
+`1.4.1` promotes the accepted beta-review work into the production family. It
+is a production quality release: player-visible Aurora challenge-stage quality,
+sign-in usability, audio/theme clarity, public-safe audio balance, and
 release/security hardening, without claiming a new minor product family.
 
 ## What Changed
@@ -29,8 +29,9 @@ release/security hardening, without claiming a new minor product family.
   the text-entry interaction that had blocked beta sign-in.
 - The production settings surface no longer presents ordinary settings as
   developer tooling.
-- Security review evidence and release gates were refreshed for the patch line,
-  with zero tracked production issues in the structured security review.
+- Security review evidence and release gates were refreshed for the production
+  quality line, with zero tracked production issues in the structured security
+  review.
 
 ## Production Boundaries
 

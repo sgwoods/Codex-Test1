@@ -7,7 +7,7 @@ Aurora `1.4.1` is now the release currently live on hosted `/production`.
 Verified June 11, 2026:
 
 - hosted `/production`
-  - production patch family: `1.4.1`
+  - production quality family: `1.4.1`
 - hosted `/beta`
   - accepted review family: `1.4.1-beta.1`
 - hosted `/dev`
@@ -19,9 +19,9 @@ packet.
 
 ## What This Production Release Means
 
-`1.4.1` is a focused patch release for the Platinum-hosted Aurora family. It
-does not claim a new minor product family. It promotes the accepted beta review
-line into production with:
+`1.4.1` is a production quality release for the Platinum-hosted Aurora family.
+It does not claim a new minor product family. It promotes the accepted beta
+review line into production with:
 
 - Stage 3 / Challenge 1 gameplay keepers for groups 2, 3, 4, and 5
 - Stage 3 group 1 preserved as blocked under current group-level controls
@@ -34,7 +34,7 @@ line into production with:
 
 ## Current Public Quality Position
 
-The public `1.4.1` patch should be read as a targeted trust and quality
+The public `1.4.1` release should be read as a targeted trust and quality
 follow-through release. It is not a complete Galaga-conformance claim.
 
 Current high-value interpretation:
@@ -82,7 +82,7 @@ Durable source documents:
 
 ## Code Review And Boundary Read
 
-The platform/application boundary is acceptable for this patch. The release
+The platform/application boundary is acceptable for this release. The release
 does not change the major Platinum product promise; it hardens the current
 multi-game shell, Aurora gameplay review lane, account surface, theme/audio
 settings, public artifact boundaries, and production preflight gates.
@@ -100,7 +100,7 @@ Remaining future work:
 
 ## Recommendation
 
-Recommendation: keep `1.4.1` as the current production patch line once the
+Recommendation: keep `1.4.1` as the current production quality line once the
 hosted production publish is verified. After publication, verify the hosted
 production build stamp, account surface, public-safe audio/theme behavior, and
 score-submission guard.

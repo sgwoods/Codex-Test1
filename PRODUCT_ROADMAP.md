@@ -5,17 +5,17 @@
 Verified June 11, 2026:
 
 - hosted `/dev`
-  - active `1.4.1.1` patch follow-through line; exact current build label is
+  - active `1.4.1.1` quality follow-through line; exact current build label is
     authoritative in hosted `build-info.json`
 - hosted `/beta`
-  - accepted `1.4.1-beta.1` reviewed patch lane
+  - accepted `1.4.1-beta.1` reviewed quality lane
 - hosted `/production`
-  - live `1.4.1` public patch line
+  - live `1.4.1` public quality-release line
 
-Aurora is in a `1.4.1` patch-release posture:
+Aurora is in a `1.4.1` production quality-release posture:
 
-- production carries the current `1.4.1` public patch
-- beta carried the accepted deliberate `1.4.1-beta.1` patch candidate
+- production carries the current `1.4.1` public quality release
+- beta carried the accepted deliberate `1.4.1-beta.1` quality candidate
 - dev carries the aligned `1.4.1.1` forward-review line with the consolidated
   Aurora challenge grammar, Guardians ingestion/conformance cleanup, refreshed
   conformance economics, public project guide, white paper, slides, dashboards,
@@ -58,11 +58,11 @@ ownership.
 Goals:
 
 - keep hosted `/production`, hosted `/beta`, and hosted `/dev` aligned and
-  trustworthy after the focused production patch
+  trustworthy after the production quality release
 - keep release docs, scorecards, and committed evidence current
 - make new-machine and two-machine development simple and safe
 
-### `1.4.1` Patch Is The Production Packet
+### `1.4.1` Is The Production Quality Release
 
 The current practical artifacts are:
 
@@ -71,7 +71,8 @@ The current practical artifacts are:
 
 This family collects the accepted Stage 3 challenge-stage keepers, beta sign-in
 repair, audio/theme lane clarity, security review refreshes, release-preflight
-hardening, and current documentation refresh for the production patch packet.
+hardening, and current documentation refresh for the production quality
+release.
 
 Recommended gate:
 
@@ -79,7 +80,7 @@ Recommended gate:
   candidate after the patch publishes
 - require at least one measurable user-facing improvement or a clearly
   documented negative result that changes the next investment decision
-- keep hosted `/production` stable on the patch once published
+- keep hosted `/production` stable on the quality release once published
 
 ### Pick Up `1.4.1`
 
@@ -171,7 +172,7 @@ Current decision:
 
 Once `1.4.0` is out, the roadmap pickup should be:
 
-- Short term: keep the shipped `1.4.1` public patch stable while using hosted
+- Short term: keep the shipped `1.4.1` public quality release stable while using hosted
   `/dev` and hosted `/beta` to review the next candidate family.
 - Medium term: `1.4.1` for guardrails, hosted-lane discipline, and platform
   cleanup, followed by `1.5.0` for level-by-level arcade depth plus

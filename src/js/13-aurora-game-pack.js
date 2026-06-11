@@ -1094,7 +1094,7 @@ const AURORA_APPLICATION_RELEASE=Object.freeze(applicationReleaseRecord('aurora-
  title:'Aurora Galactica',
  version:'1.4.1',
  versionLine:'1.4.1',
- releaseTrack:'patch-candidate',
+ releaseTrack:'production-family',
  runtimeStatus:'playable',
  platformCompatibility:buildPlatformInfo().compatibility||'',
  launchPolicy:'production-capable'
@@ -1106,7 +1106,7 @@ const AURORA_GAME_PACK=Object.freeze({
   title:'Aurora Galactica',
   version:AURORA_APPLICATION_RELEASE.version||'1.4.1',
   versionLine:AURORA_APPLICATION_RELEASE.versionLine||AURORA_APPLICATION_RELEASE.version||'1.4.1',
-  releaseTrack:AURORA_APPLICATION_RELEASE.releaseTrack||'patch-candidate',
+  releaseTrack:AURORA_APPLICATION_RELEASE.releaseTrack||'production-family',
   runtimeStatus:AURORA_APPLICATION_RELEASE.runtimeStatus||'playable',
   platformCompatibility:AURORA_APPLICATION_RELEASE.platformCompatibility||buildPlatformInfo().compatibility||'',
   launchPolicy:AURORA_APPLICATION_RELEASE.launchPolicy||'production-capable',

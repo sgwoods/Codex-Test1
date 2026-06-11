@@ -2,7 +2,7 @@
 
 Date: June 11, 2026
 
-Release track: first deliberate `1.4.1` patch candidate
+Release track: first deliberate `1.4.1` quality-release candidate
 
 Source promotion path: merged `main` -> hosted `/dev` `1.4.1.1` ->
 hosted `/beta` `1.4.1-beta.1`
@@ -10,11 +10,11 @@ hosted `/beta` `1.4.1-beta.1`
 ## Summary
 
 `1.4.1-beta.1` names the accumulated post-`1.4.0` follow-through as a real
-patch candidate instead of a build-only refresh of the shipped public family.
+quality-release candidate instead of a build-only refresh of the shipped public family.
 Hosted `/production` remains stable on `1.4.0` until this candidate is reviewed
 and explicitly promoted.
 
-This patch line is intentionally focused: it carries player-visible Aurora
+This quality line is intentionally focused: it carries player-visible Aurora
 quality improvements, beta sign-in repair, audio/theme clarity, security-review
 refreshes, and stronger release gates without claiming a new minor product
 family.
@@ -47,7 +47,7 @@ Review this beta candidate for:
   boundaries are clear in the hosted build
 - whether the release/security gates are strict enough to protect a later
   production promotion
-- whether this should become the next production patch as `1.4.1`
+- whether this should become the next production quality release as `1.4.1`
 
 ## Known Boundaries
 
@@ -61,5 +61,5 @@ Review this beta candidate for:
 ## Next Decision
 
 If `1.4.1-beta.1` is accepted, the next production conversation should be about
-promoting a real `1.4.1` patch release, not republishing `1.4.0` with a newer
+promoting a real `1.4.1` quality release, not republishing `1.4.0` with a newer
 build number.
