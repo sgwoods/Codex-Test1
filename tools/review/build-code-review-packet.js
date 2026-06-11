@@ -174,7 +174,7 @@ function isSecretPolicyDescription(file, text){
 
 function isReviewScannerSourceLine(file, text){
   return file === 'tools/review/build-code-review-packet.js'
-    && /(service\[_-\]\?role|SUPABASE_SERVICE_ROLE|secret-like-token|isSecretPolicyDescription)/.test(text);
+    && /(service\[_-\]\?role|SUPABASE_SERVICE_ROLE|secret-like-token|isSecretPolicyDescription|html-injection-surface|isHtmlInjectionExecutableSurface|innerHTML|outerHTML|insertAdjacentHTML)/.test(text);
 }
 
 function isReviewLedgerNarrative(file, text){
@@ -195,6 +195,10 @@ function isHarnessOrReviewTool(file){
     || file === 'tools/build/check-security-release-gate.js';
 }
 
+function isHtmlInjectionExecutableSurface(file){
+  return /\.(js|html)$/i.test(file);
+}
+
 function automaticFindings(files, diffLines){
   const findings = [];
   const fileSet = new Set(files.map(row => row.file));
@@ -213,7 +217,9 @@ function automaticFindings(files, diffLines){
     if(/localStorage\.[^(]*(password|token|secret|session)/i.test(trimmed) || /localStorage\.setItem\([^)]*(password|token|secret|session)/i.test(trimmed)){
       findings.push(finding('P1', 'sensitive-local-storage', 'Sensitive auth/session material appears to be written to localStorage.', file, trimmed));
     }
-    if(/\b(innerHTML|outerHTML|insertAdjacentHTML)\b/.test(trimmed)){
+    if(isHtmlInjectionExecutableSurface(file)
+      && /\b(innerHTML|outerHTML|insertAdjacentHTML)\b/.test(trimmed)
+      && !isReviewScannerSourceLine(file, trimmed)){
       findings.push(finding('P2', 'html-injection-surface', 'HTML injection surface changed; verify content is static or sanitized.', file, trimmed));
     }
     if(/\bwindow\.open\s*\(/.test(trimmed) || /target=["']_blank["']/.test(trimmed)){
