@@ -518,6 +518,31 @@ function checkSecurityAuthReplayStorageRules(){
   }
 }
 
+function runPreflightNodeCheck(label, relativeScript, args = []){
+  const script = path.join(ROOT, relativeScript);
+  try{
+    execFileSync(process.execPath, [script, ...args], {
+      cwd: ROOT,
+      stdio: 'pipe'
+    });
+  }catch(err){
+    const stderr = err.stderr ? String(err.stderr).trim() : '';
+    const stdout = err.stdout ? String(err.stdout).trim() : '';
+    throw new Error(`Publish preflight failed: ${label} failed.\n${stderr || stdout || err.message}`);
+  }
+}
+
+function checkAudioThemeAndMixReleaseGates(){
+  runPreflightNodeCheck('audio mix defaults check', 'tools/harness/check-audio-mix-defaults.js');
+  runPreflightNodeCheck('audio theme phase check', 'tools/harness/check-audio-theme-phases.js');
+  runPreflightNodeCheck('theme-set and graphics option check', 'tools/harness/check-dev-graphics-options.js');
+}
+
+function checkBetaAccountBoundary(cfg){
+  if(cfg.lane !== 'beta') return;
+  runPreflightNodeCheck('beta account boundary check', 'tools/harness/check-beta-account-boundary.js');
+}
+
 function checkReleaseConformanceDocs(){
   const dashboardPath = path.join(ROOT, 'RELEASE_CONFORMANCE_DASHBOARD.md');
   const economicsPath = path.join(ROOT, 'CONFORMANCE_ECONOMICS.md');
@@ -928,10 +953,12 @@ function main(){
   checkWhitePaperPresentation(cfg);
   checkPublicProjectPageArtifact(cfg);
   const info = checkBuildInfo(cfg);
+  checkAudioThemeAndMixReleaseGates();
   if(cfg.lane === 'beta' || cfg.lane === 'production'){
     checkSecurityReleaseGate({ lane: cfg.lane });
   }
   checkBetaPublicAccountConfig(cfg);
+  checkBetaAccountBoundary(cfg);
   if(cfg.lane === 'production'){
     checkPublicProjectTemplate();
     checkApprovedBetaForProduction(info);
@@ -964,6 +991,8 @@ module.exports = {
   checkReleaseConformanceDocs,
   checkSupabaseDataApiContract,
   checkSecurityAuthReplayStorageRules,
+  checkAudioThemeAndMixReleaseGates,
+  checkBetaAccountBoundary,
   checkArtifacts,
   checkBuildInfo,
   checkProductionReleaseDocs,

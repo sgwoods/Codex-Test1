@@ -21,9 +21,9 @@ This is the tracked security issue list for Aurora / Platinum release gates. The
 
 ## Latest Captured Review
 
-- lane: `production`
-- generated: `2026-06-11T11:18:07.664Z`
-- artifact: `reference-artifacts/analyses/security-release-review/2026-06-11-1c8fb714-production`
+- lane: `beta`
+- generated: `2026-06-11T11:17:53.762Z`
+- artifact: `reference-artifacts/analyses/security-release-review/2026-06-11-1c8fb714-beta`
 - observed issues: `0`
 - production blockers: `0`
 
