@@ -68,7 +68,7 @@ let t0=0,started=0,paused=0,aud=0,keys={},keyState={};
 let RNG_SEED=0,RNG_STATE=0;
 const DOCS_PREVIEW_MODE=typeof location!=='undefined'&&/\bdocsPreview=1\b/.test(String(location.search||''));
 const INITIAL_BUILD_CHANNEL='{{BUILD_CHANNEL}}';
-const PRODUCTION_RELEASE_LANE=String(INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
+let PRODUCTION_RELEASE_LANE=String(INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
 const CONFORMANCE_DASHBOARD_SUMMARY=JSON.parse(decodeURIComponent('{{CONFORMANCE_DASHBOARD_SUMMARY_ENCODED}}'));
 const ROOT_UNLOCK_CODE='n00b';
 let developerRootMode=0;
@@ -795,6 +795,7 @@ function setSeed(seed=0){
 const rnd=(a=1,b=0)=>randUnit()*(a-b)+b,auxRnd=(a=1,b=0)=>auxRandUnit()*(a-b)+b,cl=(v,a,b)=>v<a?a:v>b?b:v;
 let DPR=1;
 const BUILD_INFO={product:{{BUILD_PRODUCT_NAME_JSON}},version:'{{BUILD_VERSION}}',versionLine:'{{BUILD_VERSION_LINE}}',label:'{{BUILD_LABEL}}',commit:'{{BUILD_COMMIT}}',branch:'{{BUILD_BRANCH}}',dirty:{{BUILD_DIRTY}},released:'{{BUILD_RELEASE_ET}}',state:'{{BUILD_STATE}}',releaseChannel:'{{BUILD_CHANNEL}}',publicArtifactBoundaryEnabled:{{BUILD_PUBLIC_ARTIFACT_BOUNDARY_ENABLED}},platform:{{BUILD_PLATFORM_INFO_JSON}},applications:{{BUILD_APPLICATIONS_INFO_JSON}}};
+PRODUCTION_RELEASE_LANE=String(BUILD_INFO?.releaseChannel||INITIAL_BUILD_CHANNEL||'').toLowerCase()==='production';
 function buildVersionLine(){
  return String(BUILD_INFO.versionLine||BUILD_INFO.version||'--');
 }

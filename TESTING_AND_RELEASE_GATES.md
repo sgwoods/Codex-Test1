@@ -54,6 +54,25 @@ APIs. Use the hosted DOM account smoke for sign-in field reachability:
 - `npm run harness:check:live-account-input:beta`
 - `npm run harness:check:live-account-input:production`
 
+After each hosted lane publish, run the matching hosted smoke against the live
+URL:
+
+- `npm run harness:check:hosted-smoke:dev`
+- `npm run harness:check:hosted-smoke:beta`
+- `npm run harness:check:hosted-smoke:production`
+
+The publish scripts invoke these automatically after hosted build verification:
+
+- `npm run publish:dev`
+- `npm run publish:beta`
+- `npm run publish:production`
+
+This check opens the live hosted URL in the repo-managed browser, verifies
+lane/build identity, confirms pilot sign-in fields are visible and fillable,
+checks Settings/theme/audio defaults and public-safe private-audio blocking,
+starts a short player-like session, and records a small JSON report plus
+screenshot under `harness-artifacts/hosted-lane-smoke/`.
+
 Keep the older `harness:check:live-input:*` checks for lanes/artifacts where the
 gameplay harness is intentionally present.
 
