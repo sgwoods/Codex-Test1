@@ -1,4 +1,4 @@
-# Guardians Next 20 Priority Plan
+# Guardians Next 23 Priority Plan
 
 Date: 2026-06-07
 
@@ -6,7 +6,7 @@ This preserves the current step-by-step improvement queue that existed before
 the Watch/Rival enablement pivot. It remains the carried-forward gameplay and
 review plan for `Galaxy Guardians`.
 
-## Next 20
+## Next 23
 
 1. Add the actual compact target-selection trace artifact for the last
    `15s` before a whole-run death.
@@ -61,10 +61,25 @@ review plan for `Galaxy Guardians`.
     reject.
     Hope: repeat the same disciplined process deeper in the game.
 
-17. Keep improving machine-readable summaries before adding more prose notes.
+17. Treat alien ship pace and missile pace as first-class conformance signals
+    for every stage-five movement candidate.
+    Hope: keep future changes close to Galaxian timing instead of only
+    improving survival or visual activity.
+
+18. For alien ships, report dive duration, x/y span, lower-field threat share,
+    and routeability in the same candidate artifact.
+    Hope: make it impossible to promote a faster or denser dive pattern that
+    stops reading like a fair Galaxian attack.
+
+19. For missiles, report enemy missile velocity, enemy missile cadence, player
+    missile velocity, and single-shot cooldown whenever pressure changes.
+    Hope: preserve the classic single-shot / readable bullet-speed feel while
+    stage-five pressure improves.
+
+20. Keep improving machine-readable summaries before adding more prose notes.
     Hope: make future sessions faster and more objective.
 
-18. Move large in-use Guardians review videos into the iCloud-protected
+21. Move large in-use Guardians review videos into the iCloud-protected
     artifact library once their canonical/latest role is clear.
     Hope: keep expensive captures available across MacBooks without bloating
     GitHub.
@@ -72,11 +87,11 @@ review plan for `Galaxy Guardians`.
     `00-temporary-throwaway`, `01-transient-in-use`, `02-documentation`,
     `03-production`.
 
-19. Define retention rules for timestamped runs vs `latest-*` aliases and for
+22. Define retention rules for timestamped runs vs `latest-*` aliases and for
     private Git repo vs iCloud library placement.
     Hope: reduce evidence sprawl and make storage decisions predictable.
 
-20. Only after gameplay improvement resumes should audio become a top lane
+23. Only after gameplay improvement resumes should audio become a top lane
     again.
     Hope: keep effort aligned with the real current bottleneck.
 
@@ -88,6 +103,8 @@ execution order should be:
 1. make Watch first-class for Guardians
 2. keep Rival explicitly disabled but correctly capability-modeled
 3. once Watch is stable, return to the stage-2 and stage-5 gameplay queue above
+4. keep `stage-five-galaxian-closeness` current when touching alien movement,
+   enemy missiles, player missiles, or single-shot cadence
 
 ## New Release-Blocking Platform Note
 

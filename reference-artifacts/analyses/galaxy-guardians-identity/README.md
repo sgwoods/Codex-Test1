@@ -100,6 +100,10 @@ Current artifacts:
   preserves the measured stage-one timing while making stages three, five,
   seven, nine, and eleven measurably faster and denser for dives, shots, drift,
   and wrap pressure.
+- `stage-five-galaxian-closeness-0.1.json` - stage-five planning gate that
+  keeps routeability, alien ship movement pace, enemy missile pace, player
+  missile pace, and single-shot cadence in one promotion signal before deeper
+  gameplay candidates are promoted.
 - `sprite-grid-targets-0.1.json` - broad downsampled crop-grid target scaffold
   for flagship, escort, scout, and player silhouettes. These grids are not final
   exact sprites; they guide the next tighter component-crop pass.
