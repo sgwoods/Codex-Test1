@@ -5,26 +5,27 @@
 Verified June 7, 2026:
 
 - hosted `/dev`
-  - active `1.4.0.1` forward-review line; exact current build label is
+  - active `1.4.1.1` patch-candidate forward-review line; exact current build label is
     authoritative in hosted `build-info.json`
 - hosted `/beta`
-  - active `1.4.0-beta.1` reviewed candidate lane
+  - active `1.4.1-beta.1` reviewed patch-candidate lane
 - hosted `/production`
   - stable `1.4.0` public line
 - `main`
-  - authoritative integration branch for the live `1.4.0` follow-through line,
+  - authoritative integration branch for the `1.4.1` patch-candidate line,
     including the consolidated Aurora challenge grammar and Guardians
     ingestion/conformance cleanup work
 
 This means:
 
 - the `1.4.0` multi-game release is now the public production family
-- hosted `/dev` and hosted `/beta` remain the next deliberate review lanes
+- hosted `/dev` and hosted `/beta` now carry the deliberate `1.4.1` review lanes
   rather than shadow production mirrors
-- the active source-planning question is now "what is the cleanest next
-  follow-through bundle after `1.4.0`?" rather than "is `1.4.0` ready to ship?"
-- the post-`1.4.0` work should be treated as intentional carry-forward and
-  release-quality tightening, not as rediscovery of the shipped baseline
+- the active source-planning question is now "is the `1.4.1` patch candidate
+  strong enough for production?" rather than "should this be a build-only
+  refresh of `1.4.0`?"
+- the post-`1.4.0` work should be treated as the intentional `1.4.1` patch
+  candidate, not as rediscovery of the shipped baseline
 - the white paper and preserved-source recovery work are now part of the
   maintained release/documentation posture, but they are not yet fully
   published on every hosted lane
@@ -71,7 +72,7 @@ from the roadmap.
 - keep public project-page and rendered-homepage verification inside the
   release workflow
 
-### 3. Post-`1.4.0` Follow-Through Improvement
+### 3. `1.4.1` Patch Candidate
 
 - improve ship movement feel against real Galaga footage
 - continue audio identity polish beyond cue timing
@@ -391,7 +392,7 @@ Current conformance read:
 - hosted `/dev` now includes the consolidated Aurora challenge grammar,
   Guardians ingestion cleanup, refreshed conformance economics, public project
   guide, white paper, slides, dashboards, release-schedule spine, and review
-  packet on the `1.4.0.1` forward-review line
+  packet on the `1.4.1.1` patch-candidate forward-review line
 - the latest conformance economics roll-up reads `8.7/10` overall with
   `904` measured runs, about `58,277s` wall time, and about `58,392s` CPU time
 - application artifact conformance is `7.46/10`; the weakest row is
@@ -537,15 +538,15 @@ Current conformance read:
 ## Release Direction
 
 - hosted `/dev`, hosted `/beta`, and hosted `/production` now reflect the same
-  release discipline, but hosted `/dev` is intentionally ahead as the
-  `1.4.0.1` review increment
-- the active source line now presents itself as the deliberate post-`1.4.0`
-  follow-through family, not a pre-production candidate
-- the latest accepted beta artifact remains `1.4.0-beta.1`, while the accepted
-  production artifact is the public `1.4.0+build.748.sha.09a4c633` family
-- the next hosted `/beta` decision is now about when the `1.4.0.1`-style
-  follow-through work is coherent enough to become the next reviewed beta
-  candidate
+  release discipline, with hosted `/dev` and hosted `/beta` intentionally ahead
+  as the `1.4.1` patch-candidate review lanes
+- the active source line now presents itself as the deliberate `1.4.1`
+  patch-candidate family, not as an unnamed post-`1.4.0` follow-through bundle
+- the latest accepted beta artifact is the `1.4.1-beta.1` patch candidate,
+  while the accepted production artifact remains the public `1.4.0` family
+- the next hosted `/production` decision is now about whether the
+  `1.4.1-beta.1` review line has enough player-visible, security, audio, auth,
+  and release-gate evidence to promote as plain `1.4.1`
 - `1.4.0` is the intentional shipped bundle for multi-game public identity,
   Platinum release discipline, and the first public Galaxy Guardians slice
 - the shipped `1.4.0` family is now the stable public baseline while `main`
@@ -558,13 +559,14 @@ Current conformance read:
   [STRATEGIC_BETA_REVIEW.md](STRATEGIC_BETA_REVIEW.md) and should be refreshed
   after each major hosted `/beta` push
 
-## Post-1.4.0 Pickup
+## 1.4.1 Pickup
 
-After `1.4.0` ships, the plan should pick up in this order:
+After `1.4.0` shipped, the next patch plan should pick up in this order:
 
 1. Short term: keep the live `1.4.0` public line trustworthy while publishing
-   and reviewing the next `1.4.0.1` dev follow-through work cleanly.
-2. Medium term: deepen post-`1.4.0` arcade depth and platform-contract
+   and reviewing the `1.4.1.1` dev line and `1.4.1-beta.1` beta candidate
+   cleanly.
+2. Medium term: deepen `1.4.1` arcade depth and platform-contract
    follow-through,
    including alien entry/challenge novelty, stage shape, audio/event feedback,
    and visual reference grounding.

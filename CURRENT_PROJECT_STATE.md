@@ -39,9 +39,10 @@ The current lane posture is maintained in the June 7 release schedule and
 workstream alignment docs:
 
 - `main` is the authoritative engineering integration branch.
-- hosted `/dev` is the `1.4.0.1` forward-review line; the exact deployed build
+- hosted `/dev` is the `1.4.1.1` patch-candidate forward-review line; the exact deployed build
   label is authoritative in hosted `build-info.json`.
-- hosted `/beta` is `1.4.0-beta.1+build.1013.sha.3cb0d08b.beta`.
+- hosted `/beta` is the `1.4.1-beta.1` patch-candidate review lane; the exact
+  deployed build label is authoritative in hosted `build-info.json`.
 - hosted `/production` is `1.4.0+build.894.sha.1dc23d8a`.
 - release authority is currently on `macbook-pro`.
 - iMac M1 is an always-online parallel worker for separable evidence,
@@ -54,8 +55,9 @@ and user intent are explicit.
 
 Current release-family priority:
 
-- `1.4.1`: visible Aurora challenge/runtime lift, audio/event feedback,
-  Guardians v1 slice, and shared Watch/Rival/persona foundations.
+- `1.4.1`: current patch-candidate lane for accepted Stage 3 challenge
+  keepers, audio/event feedback, beta sign-in repair, theme clarity, and
+  release/security gate hardening.
 - `1.4.2`: auth, score, replay/storage, dashboard-access, and issue hygiene.
 - `1.5.0`: gameplay export, video evidence, replay catalog, and source/run
   ingestion.

@@ -1,17 +1,17 @@
 {
   "product": "Aurora Galactica",
   "development": {
-    "baseVersion": "1.4.0",
+    "baseVersion": "1.4.1",
     "iteration": 1,
-    "versionLine": "1.4.0.1",
+    "versionLine": "1.4.1.1",
     "releaseTrack": "hosted-dev-increment",
-    "notes": "Hosted /dev uses a fourth visible segment to count accumulated post-production integration increments while package.json remains SemVer."
+    "notes": "Hosted /dev uses a fourth visible segment to count accumulated patch-candidate integration increments while package.json remains SemVer."
   },
   "platform": {
     "key": "platinum",
     "name": "Platinum",
-    "version": "1.4.0",
-    "releaseTrack": "production-family",
+    "version": "1.4.1",
+    "releaseTrack": "patch-candidate",
     "compatibility": "platinum-1.4",
     "notes": "Platform-owned shell, release lanes, docs, replay, services, and host contract.",
     "media": {
@@ -30,9 +30,9 @@
     {
       "gameKey": "aurora-galactica",
       "title": "Aurora Galactica",
-      "version": "1.4.0",
-      "versionLine": "1.4.0",
-      "releaseTrack": "production-family",
+      "version": "1.4.1",
+      "versionLine": "1.4.1",
+      "releaseTrack": "patch-candidate",
       "runtimeStatus": "playable",
       "platformCompatibility": "platinum-1.4",
       "launchPolicy": "production-capable"

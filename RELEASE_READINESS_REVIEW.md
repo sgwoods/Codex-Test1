@@ -4,30 +4,28 @@
 
 Aurora `1.4.0` is now the release currently live on hosted `/production`.
 
-Verified May 14, 2026:
+Verified June 11, 2026:
 
 - hosted `/production`
   - current live family: `1.4.0`
 - hosted `/beta`
-  - current reviewed family: `1.4.0 beta`
+  - current reviewed family: `1.4.1 beta`
 - hosted `/dev`
-  - current forward review line: `1.4.0.1`
+  - current forward review line: `1.4.1.1`
 
 For exact active labels, use each lane's `build-info.json`. The important
-release truth is that hosted `/production` now carries the deliberate public
-`1.4.0` family, while hosted `/dev` remains on the visible `1.4.0.1`
-forward-review line and hosted `/beta` remains the approved `1.4.0-beta.1`
-production-source lane.
+release truth is that hosted `/production` still carries the deliberate public
+`1.4.0` family, while hosted `/dev` and hosted `/beta` now name the active
+patch candidate as `1.4.1.1` and `1.4.1-beta.1`.
 
 ## What This Production Release Means
 
 This is a real public SemVer family move. `1.4.0` is now the shipped public
 line on Platinum.
 
-The fourth-segment `1.4.0.1` line remains the hosted-dev review signal. It
-helped review the current family on the authority machine, while hosted `/beta`
-carried the approved `1.4.0-beta.1` source candidate that was promoted into
-hosted `/production`.
+The fourth-segment `1.4.1.1` line is now the hosted-dev review signal for the
+next patch. It should promote through `1.4.1-beta.1` and, if accepted, into
+hosted `/production` as plain `1.4.1`.
 
 Retrospective versioning note:
 
@@ -84,10 +82,10 @@ Important interpretation:
 - `Galaxy Guardians` remains a preview application and ingestion-backed
   second-cabinet proof, now with a playable beta-candidate lane and
   production-capable preview metadata aligned to the runtime intent
-- hosted `/beta` now carries the first deliberate `1.4.0-beta.1` candidate
+- hosted `/beta` now carries the first deliberate `1.4.1-beta.1` patch candidate
   while hosted `/production` carries the deliberate public `1.4.0` family
 - hosted `/dev` remains the forward review lane and still uses the
-  fourth-segment `1.4.0.1` display line
+  fourth-segment `1.4.1.1` display line
 - layered release identity is now explicit across the integrated bundle, the
   Platinum platform, and each application
 - the shipped public line is backed by committed docs, harnesses, dashboards,

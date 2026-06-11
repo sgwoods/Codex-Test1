@@ -5,22 +5,22 @@
 Verified June 7, 2026:
 
 - hosted `/dev`
-  - active `1.4.0.1` forward-review line; exact current build label is
+  - active `1.4.1.1` patch-candidate forward-review line; exact current build label is
     authoritative in hosted `build-info.json`
 - hosted `/beta`
-  - active `1.4.0-beta.1` reviewed candidate lane
+  - active `1.4.1-beta.1` reviewed patch-candidate lane
 - hosted `/production`
   - stable `1.4.0` public line
 
 Aurora is in a post-`1.4.0` ship posture:
 
 - production now carries the current `1.4.0` public family
-- beta now carries the first deliberate `1.4.0-beta.1` candidate
-- dev carries the aligned `1.4.0.1` forward-review line with the consolidated
+- beta now carries the first deliberate `1.4.1-beta.1` patch candidate
+- dev carries the aligned `1.4.1.1` forward-review line with the consolidated
   Aurora challenge grammar, Guardians ingestion/conformance cleanup, refreshed
   conformance economics, public project guide, white paper, slides, dashboards,
   and review packet
-- `main` is the forward line for the deliberate `1.4.1` pickup and now matches
+- `main` is the forward line for the deliberate `1.4.1` patch and now matches
   the hosted `/dev` source commit
 - future production promotions of similar scope should move a real public
   SemVer version rather than repeat the May 12 same-family exception
@@ -66,14 +66,13 @@ Goals:
 
 The current practical artifacts are:
 
-- hosted `/dev`: `1.4.0.1`
-- hosted `/beta`: `1.4.0-beta.1`
+- hosted `/dev`: `1.4.1.1`
+- hosted `/beta`: `1.4.1-beta.1`
 
-This family collects the merged Guardians playable/conformance tranche,
-side-by-side game conformance entry points, documentation/release-note
-backfill, Arcade Music hosted warmup recovery, and the next round of
-platform/application boundary cleanup while keeping hosted `/production` stable
-on `1.4.0`.
+This family collects the accepted Stage 3 challenge-stage keepers, beta sign-in
+repair, audio/theme lane clarity, security review refreshes, release-preflight
+hardening, and current documentation refresh while keeping hosted
+`/production` stable on `1.4.0`.
 
 Recommended gate:
 
