@@ -456,7 +456,7 @@ async function main(){
   if(result.feedback.expanded !== 'true') fail('feedback dock button did not open via a real click', result);
   if(result.settings.expanded !== 'true') fail('settings dock button did not open via a real click', result);
   if(!result.settings.playlistGame.includes('Aurora Galactica') || result.settings.playlistSource !== 'Platform default' || result.settings.playlistId !== PLATFORM_ARCADE_MUSIC_PLAYLIST || result.settings.playlistPlatformId !== PLATFORM_ARCADE_MUSIC_PLAYLIST || result.settings.playlistOverride !== 'Inherits platform default'){
-    fail('Developer Tools did not expose the active game Arcade Music playlist configuration', result);
+    fail('Settings did not expose the active game Arcade Music playlist configuration', result);
   }
   if(result.mute.before === result.mute.after || result.mute.before !== result.mute.restored){
     fail('mute button did not toggle and restore aria-pressed state', result);
